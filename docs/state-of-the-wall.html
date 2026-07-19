@@ -1,0 +1,425 @@
+<title>1/3–2/3 Program — State of the Wall</title>
+<style>
+  :root {
+    --ground:#f6f8fc; --surface:#ffffff; --surface-2:#eef1f8;
+    --ink:#191c28; --ink-soft:#565d72; --ink-faint:#8b91a4;
+    --line:#e0e4ef; --line-strong:#c9cee0;
+    --accent:#2f4b9c; --accent-soft:#e9edfa; --accent-ink:#2a4290;
+    --proven:#1f7a54; --proven-bg:#e3f3ec;
+    --empirical:#a56a12; --empirical-bg:#f6ecd8;
+    --open:#b8324b; --open-bg:#f8e4e8;
+    --false:#7d5c86; --false-bg:#efe6f1;
+    --shadow:0 1px 2px rgba(20,25,50,.06),0 8px 24px rgba(20,25,50,.05);
+    --serif:"Iowan Old Style",Georgia,"Palatino Linotype",Palatino,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,"Cascadia Code",Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#12141c; --surface:#1a1d27; --surface-2:#222634;
+      --ink:#e9ebf3; --ink-soft:#a1a7bb; --ink-faint:#727891;
+      --line:#2a2e3c; --line-strong:#3a4053;
+      --accent:#93a7ec; --accent-soft:#232a41; --accent-ink:#aebcef;
+      --proven:#4cc08c; --proven-bg:#173026;
+      --empirical:#dca949; --empirical-bg:#302713;
+      --open:#e97a91; --open-bg:#331a22;
+      --false:#c09ac8; --false-bg:#291f2e;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#f6f8fc; --surface:#ffffff; --surface-2:#eef1f8;
+    --ink:#191c28; --ink-soft:#565d72; --ink-faint:#8b91a4;
+    --line:#e0e4ef; --line-strong:#c9cee0;
+    --accent:#2f4b9c; --accent-soft:#e9edfa; --accent-ink:#2a4290;
+    --proven:#1f7a54; --proven-bg:#e3f3ec; --empirical:#a56a12; --empirical-bg:#f6ecd8;
+    --open:#b8324b; --open-bg:#f8e4e8; --false:#7d5c86; --false-bg:#efe6f1;
+    --shadow:0 1px 2px rgba(20,25,50,.06),0 8px 24px rgba(20,25,50,.05);
+  }
+  :root[data-theme="dark"]{
+    --ground:#12141c; --surface:#1a1d27; --surface-2:#222634;
+    --ink:#e9ebf3; --ink-soft:#a1a7bb; --ink-faint:#727891;
+    --line:#2a2e3c; --line-strong:#3a4053;
+    --accent:#93a7ec; --accent-soft:#232a41; --accent-ink:#aebcef;
+    --proven:#4cc08c; --proven-bg:#173026; --empirical:#dca949; --empirical-bg:#302713;
+    --open:#e97a91; --open-bg:#331a22; --false:#c09ac8; --false-bg:#291f2e;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);
+    line-height:1.6;-webkit-font-smoothing:antialiased;margin:0}
+  .wrap{max-width:920px;margin:0 auto;padding:clamp(20px,5vw,64px) clamp(16px,4vw,40px)}
+  .mono{font-family:var(--mono)}
+  code,.q{font-family:var(--mono);font-size:.9em;background:var(--surface-2);
+    padding:.08em .38em;border-radius:5px;color:var(--accent-ink);white-space:nowrap}
+  :root[data-theme="dark"] code, :root[data-theme="dark"] .q{color:var(--accent)}
+  @media (prefers-color-scheme:dark){code,.q{color:var(--accent)}}
+
+  header.hero{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:8px}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 14px;font-weight:600}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5.5vw,46px);line-height:1.08;
+    letter-spacing:-.01em;margin:0 0 14px;text-wrap:balance}
+  .lede{font-size:clamp(16px,2.3vw,18.5px);color:var(--ink-soft);max-width:64ch;margin:0}
+  .meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:22px;font-family:var(--mono);
+    font-size:12.5px;color:var(--ink-faint)}
+  .meta b{color:var(--ink-soft);font-weight:600}
+
+  section{margin:52px 0 0}
+  h2{font-family:var(--serif);font-weight:600;font-size:clamp(21px,3.4vw,27px);letter-spacing:-.01em;
+    margin:0 0 6px;display:flex;align-items:baseline;gap:12px;text-wrap:balance}
+  h2 .num{font-family:var(--mono);font-size:14px;color:var(--accent);font-weight:600;
+    letter-spacing:.04em;flex:none}
+  .sublede{color:var(--ink-soft);margin:0 0 22px;max-width:68ch}
+  h3{font-family:var(--serif);font-weight:600;font-size:18px;margin:26px 0 8px}
+  p{max-width:70ch}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:22px 24px;box-shadow:var(--shadow)}
+
+  /* status pills */
+  .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;
+    font-weight:600;letter-spacing:.03em;padding:3px 9px;border-radius:100px;white-space:nowrap;
+    text-transform:uppercase}
+  .pill::before{content:"";width:7px;height:7px;border-radius:50%}
+  .pill.proven{color:var(--proven);background:var(--proven-bg)} .pill.proven::before{background:var(--proven)}
+  .pill.empirical{color:var(--empirical);background:var(--empirical-bg)} .pill.empirical::before{background:var(--empirical)}
+  .pill.open{color:var(--open);background:var(--open-bg)} .pill.open::before{background:var(--open)}
+  .pill.false{color:var(--false);background:var(--false-bg)} .pill.false::before{background:var(--false)}
+  .tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.03em;
+    padding:2px 8px;border-radius:6px;border:1px solid var(--line-strong);color:var(--ink-soft)}
+  .tag.a1{border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent)}
+  .tag.a2{border-color:color-mix(in srgb,var(--open) 45%,transparent);color:var(--open)}
+
+  /* two-axis banner */
+  .axes{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;margin:6px 0 8px}
+  @media(max-width:640px){.axes{grid-template-columns:1fr}}
+  .axis{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .axis h4{margin:0 0 4px;font-family:var(--serif);font-size:17px;font-weight:600}
+  .axis .role{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+  .axis.a1 h4{color:var(--accent)} .axis.a2 h4{color:var(--open)}
+  .axis ul{margin:0;padding-left:18px;font-size:14.5px;color:var(--ink-soft)}
+  .axis li{margin:3px 0}
+  .bridge{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    padding:14px 8px;min-width:120px}
+  .bridge .arrow{font-size:22px;color:var(--ink-faint);line-height:1}
+  .bridge .label{font-family:var(--mono);font-size:12px;color:var(--open);font-weight:600;margin-top:8px;letter-spacing:.02em}
+  .bridge .sub{font-size:12px;color:var(--ink-faint);margin-top:3px;max-width:15ch}
+  @media(max-width:640px){.bridge .arrow{transform:rotate(90deg)}}
+
+  /* glossary */
+  .gloss{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+    border-radius:14px;overflow:hidden}
+  .grow{display:grid;grid-template-columns:130px 1fr auto;gap:16px;padding:14px 20px;background:var(--surface);align-items:baseline}
+  @media(max-width:640px){.grow{grid-template-columns:1fr;gap:5px}}
+  .grow .sym{font-family:var(--mono);font-weight:600;color:var(--ink);font-size:14.5px}
+  .grow .def{color:var(--ink-soft);font-size:14.5px;max-width:60ch}
+  .grow .ax{align-self:center}
+  @media(max-width:640px){.grow .ax{justify-self:start}}
+
+  /* ledger table */
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;min-width:640px;background:var(--surface);font-size:14px}
+  thead th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-faint);text-align:left;padding:13px 16px;border-bottom:1px solid var(--line-strong);font-weight:600;background:var(--surface-2)}
+  tbody td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  tbody .what{color:var(--ink);font-weight:500;max-width:40ch}
+  tbody .what .fx{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);display:block;margin-top:3px;white-space:normal}
+  td.ctr{text-align:center;white-space:nowrap}
+  .rowlabel{font-family:var(--mono);color:var(--ink-faint);font-size:12.5px}
+
+  /* the lemma box */
+  .lemma{border:1.5px solid color-mix(in srgb,var(--open) 40%,var(--line));border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+  .lemma .head{background:var(--open-bg);padding:12px 22px;display:flex;align-items:center;gap:12px;
+    border-bottom:1px solid color-mix(in srgb,var(--open) 25%,var(--line))}
+  .lemma .head .t{font-family:var(--serif);font-weight:600;font-size:17px;color:var(--ink)}
+  .lemma .body{padding:20px 24px;background:var(--surface)}
+  .lemma .form{font-family:var(--mono);font-size:15px;color:var(--ink);background:var(--surface-2);
+    border-radius:10px;padding:14px 18px;margin:12px 0;overflow-x:auto;white-space:nowrap}
+  .lemma .form b{color:var(--accent-ink)} :root[data-theme="dark"] .lemma .form b{color:var(--accent)}
+  @media(prefers-color-scheme:dark){.lemma .form b{color:var(--accent)}}
+  .forced{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .forced .f{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:8px;
+    background:var(--proven-bg);color:var(--proven);border:1px solid color-mix(in srgb,var(--proven) 25%,transparent)}
+
+  /* attempt log */
+  .log{display:flex;flex-direction:column;gap:12px}
+  .att{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:16px 20px;background:var(--surface);
+    border:1px solid var(--line);border-radius:12px;align-items:start}
+  @media(max-width:560px){.att{grid-template-columns:1fr;gap:8px}}
+  .att .verdict{align-self:start}
+  .att h4{margin:0 0 4px;font-size:15.5px;font-weight:600;font-family:var(--sans)}
+  .att p{margin:0;font-size:14px;color:var(--ink-soft);max-width:64ch}
+
+  .callout{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 12px 12px 0;
+    padding:16px 20px;margin:18px 0}
+  .callout.warn{border-left-color:var(--open);background:var(--open-bg)}
+  .callout h4{margin:0 0 6px;font-size:14px;font-family:var(--mono);letter-spacing:.03em;text-transform:uppercase;color:var(--accent)}
+  .callout.warn h4{color:var(--open)}
+  .callout p{margin:0;font-size:14.5px;color:var(--ink-soft);max-width:70ch}
+  .callout p+p{margin-top:8px}
+
+  .keyline{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 0}
+  .keyline .k{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);
+    font-family:var(--mono);padding:5px 11px;border:1px solid var(--line);border-radius:100px;background:var(--surface)}
+
+  footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:var(--ink-faint);
+    font-size:13px;font-family:var(--mono);line-height:1.7}
+  footer b{color:var(--ink-soft)}
+  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+  .diagram-cap{font-size:13px;color:var(--ink-faint);margin:12px 2px 0;font-style:italic;max-width:70ch}
+  svg{display:block;width:100%;height:auto}
+  .rmap text{font-family:var(--sans)}
+  .rmap .rm-mono{font-family:var(--mono)}
+  .rmap .b{font-weight:700}
+  .rm-frame{fill:var(--surface-2);stroke:var(--line-strong)}
+  .rm-danger{fill:none;stroke:var(--open);stroke-dasharray:4 3;stroke-width:1.2}
+  .rm-osum{fill:var(--false);opacity:.3}
+  .rm-threshold{stroke:var(--open)}
+  .rm-cloud{fill:var(--accent);fill-opacity:.14;stroke:var(--accent);stroke-opacity:.4;stroke-dasharray:3 3}
+  .rm-tight3{fill:var(--accent)}
+  .rm-prim{fill:var(--ink-soft)}
+  .rm-t-open{fill:var(--open)} .rm-t-soft{fill:var(--ink-soft)} .rm-t-faint{fill:var(--ink-faint)}
+  .rm-t-false{fill:var(--false)} .rm-t-accent{fill:var(--accent-ink)}
+  .hatch-bg{fill:var(--open-bg)} .hatch-ln{stroke:var(--open);opacity:.5}
+  .nd-bg{fill:var(--surface-2)} .nd-ln{stroke:var(--ink-faint);opacity:.35}
+  .chain{display:flex;flex-direction:column;gap:8px;margin:8px 0 6px}
+  .cnode{background:var(--surface);border:1px solid var(--line-strong);border-radius:12px;padding:13px 18px;
+    font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);box-shadow:var(--shadow);text-align:center}
+  .cnode .n-sub{display:block;font-family:var(--sans);font-weight:400;font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+  .cnode.assume{border-style:dashed;background:var(--surface-2)}
+  .cnode.concl{border-color:color-mix(in srgb,var(--proven) 50%,var(--line));background:var(--proven-bg)}
+  .clink{display:flex;align-items:flex-start;gap:11px;padding:4px 16px;margin-left:22px;
+    border-left:2.5px solid var(--line-strong);font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+  .clink.proven{border-left-color:var(--proven)}
+  .clink.empirical{border-left-color:var(--empirical)}
+  .clink.open{border-left-color:var(--open)}
+  .clink .pill{flex:none;margin-top:1px}
+  .clink .why{max-width:74ch} .clink .why b{color:var(--ink);font-weight:600}
+  .machinery{font-size:13.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;
+    padding:12px 16px;margin:14px 0 4px} .machinery b{color:var(--ink)}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">1/3–2/3 Conjecture · Program State · any-width</p>
+    <h1>State of the Wall</h1>
+    <p class="lede">One canonical picture of the spectral / near-ordinal-sum program: the two axes it lives on, the single implication it is missing, and everything already proven that reduces to it. Read this before any attempt — it is the map that keeps us from going in circles.</p>
+    <div class="meta">
+      <span><b>Maintained by</b> pm-onethird</span>
+      <span><b>Generated</b> 2026-07-19</span>
+      <span><b>Scope</b> any width (no width-3 baggage)</span>
+      <span><b>Source of truth</b> — attempts &amp; probes are subordinate to this</span>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="num">01</span> The one-paragraph state</h2>
+    <p class="sublede">If you remember nothing else, remember this.</p>
+    <div class="card">
+      <p style="margin:0 0 12px">The program has proven <b>both endpoints</b> of a single spectral axis and all the machinery that reduces the whole conjecture to <b>one implication</b>. Nearly every quantity we track — <span class="q">λ_std</span>, inversion count, squared displacement, interface thinness, entropy — is the <b>same axis (“near-ordinal-sumness”) in different units.</b> The balance constant <span class="q">δ</span> is a <b>separate axis</b> (the counterexample condition). The entire remaining gap is the one <b>bridge</b> between them:</p>
+      <div class="lemma" style="box-shadow:none">
+        <div class="head"><span class="pill open">the wall</span><span class="t">L1b — frozen forces near-ordinal-sum</span></div>
+        <div class="body" style="padding:16px 22px">
+          <div class="form"><b>δ(P) &lt; 1/3</b> &nbsp;⟹&nbsp; <b>λ_std → 1</b> &nbsp;&nbsp;(equivalently &nbsp;E[inv_e] = O(n/γ) &nbsp;or&nbsp; E[Σ&nbsp;disp²] = O(E[inv_e]))</div>
+          <p style="margin:6px 0 0;font-size:14.5px;color:var(--ink-soft)">Everything else is either proven, or reduces to this. It is hard because it must use that <span class="q">σ</span> ranges over a <em>real poset's</em> linear extensions — it is false for abstract frozen distributions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span> Two axes, one bridge</h2>
+    <p class="sublede">The structural reason the project is easy to get lost in: many metrics collapse onto one axis, and the one that doesn't (<span class="q">δ</span>) is the whole point.</p>
+    <div class="axes">
+      <div class="axis a1">
+        <h4>Axis 1 — near-ordinal-sumness</h4>
+        <div class="role">how close to an ordinal sum</div>
+        <ul>
+          <li><span class="mono">λ_std</span> → 1 (spectral)</li>
+          <li><span class="mono">inv_e</span> = O(n) — LIB</li>
+          <li><span class="mono">Σ disp²</span> = O(inv) — (B)</li>
+          <li><span class="mono">Δ₁</span> → 0 (thin interface)</li>
+          <li>cross-cut entropy → 0</li>
+        </ul>
+      </div>
+      <div class="bridge">
+        <div class="arrow">⇄</div>
+        <div class="label">L1b</div>
+        <div class="sub">the only unproven cross-axis link</div>
+      </div>
+      <div class="axis a2">
+        <h4>Axis 2 — balance / frozenness</h4>
+        <div class="role">the counterexample condition</div>
+        <ul>
+          <li><span class="mono">δ(P)</span> &lt; 1/3 = frozen</li>
+          <li>= no balanced pair exists</li>
+          <li>= every incomparable pair<br>is &gt; 2/3-decided toward <span class="mono">e</span></li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:16px"><b>The equivalence dictionary</b> — within Axis 1, the translations are exact or near-exact, so “fifteen things tried” is really <em>one gap wearing many faces</em>:</p>
+    <div class="keyline">
+      <span class="k">Σ disp² = 2ΣK_m + 2ΣM · exact (GID)</span>
+      <span class="k">ΣK_m ≤ inv ≤ 2ΣK_m · exact (DG)</span>
+      <span class="k">Σ prefix-violations = footrule ≍ inv</span>
+      <span class="k">λ_std = 1 ⟺ ordinal sum</span>
+      <span class="k">S_P = ρ_std(η_P) · gap in standard sector</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span> The regime map</h2>
+    <p class="sublede">Where a minimal counterexample must live, and why the data cannot see it. A <em>conceptual</em> map — not a scatter plot; <span class="q">δ</span> is not even measured for most posets.</p>
+    <div class="card" style="padding:24px">
+      <svg class="rmap" viewBox="0 0 720 440" role="img" aria-label="Regime map: balance constant delta on the horizontal axis, spectral eigenvalue lambda-std on the vertical axis.">
+        <defs>
+          <pattern id="hatch" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <rect class="hatch-bg" width="8" height="8"/>
+            <line class="hatch-ln" x1="0" y1="0" x2="0" y2="8" stroke-width="1.1"/>
+          </pattern>
+          <pattern id="nodata" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <rect class="nd-bg" width="7" height="7"/>
+            <line class="nd-ln" x1="0" y1="0" x2="0" y2="7" stroke-width="0.9"/>
+          </pattern>
+        </defs>
+        <rect class="rm-frame" x="120" y="30" width="540" height="330"/>
+        <rect x="120" y="30" width="150" height="330" fill="url(#nodata)"/>
+        <rect x="120" y="30" width="150" height="95" fill="url(#hatch)"/>
+        <rect class="rm-danger" x="120" y="30" width="150" height="95"/>
+        <rect class="rm-osum" x="270" y="30" width="390" height="16"/>
+        <line class="rm-threshold" x1="270" y1="24" x2="270" y2="368" stroke-width="1.6" stroke-dasharray="6 4"/>
+        <ellipse class="rm-cloud" cx="470" cy="235" rx="150" ry="95"/>
+        <circle class="rm-tight3" cx="270" cy="235" r="5.5"/>
+        <circle class="rm-prim" cx="540" cy="72" r="4.5"/>
+        <circle class="rm-prim" cx="560" cy="80" r="4.5"/>
+        <circle class="rm-prim" cx="522" cy="86" r="4.5"/>
+        <text class="rm-t-open b" x="195" y="88" text-anchor="middle" font-size="12">DANGER</text>
+        <text class="rm-t-open b" x="195" y="104" text-anchor="middle" font-size="12">CORNER</text>
+        <text class="rm-t-faint" x="195" y="250" text-anchor="middle" font-size="11.5">no reachable</text>
+        <text class="rm-t-faint" x="195" y="266" text-anchor="middle" font-size="11.5">posets</text>
+        <text class="rm-t-faint" x="195" y="282" text-anchor="middle" font-size="11.5">(δ &lt; 1/3)</text>
+        <text class="rm-t-false b" x="465" y="42" text-anchor="middle" font-size="11.5">ordinal-sum locus · λ=1 · non-primitive</text>
+        <text class="rm-t-accent b" x="470" y="232" text-anchor="middle" font-size="12">reachable</text>
+        <text class="rm-t-accent b" x="470" y="249" text-anchor="middle" font-size="12">primitives</text>
+        <text class="rm-t-soft" x="285" y="252" font-size="11">tight3 (δ=⅓, λ=0.5)</text>
+        <text class="rm-t-soft" x="588" y="78" font-size="10.5">λ≈0.94 primitives</text>
+        <text class="rm-t-faint" x="588" y="92" font-size="10.5">(δ unmeasured)</text>
+        <text class="rm-t-soft rm-mono" x="390" y="398" text-anchor="middle" font-size="12.5">δ  (balance constant)  →</text>
+        <text class="rm-t-open rm-mono" x="255" y="386" text-anchor="end" font-size="11">frozen δ&lt;⅓</text>
+        <text class="rm-t-faint rm-mono" x="285" y="386" text-anchor="start" font-size="11">δ ≥ ⅓ (balanced pair exists)</text>
+        <text class="rm-t-soft rm-mono" x="-200" y="70" transform="rotate(-90)" text-anchor="middle" font-size="12.5">λ_std  (→1 = near-ordinal-sum)  ↑</text>
+      </svg>
+      <p class="diagram-cap">The vertical <span class="q">δ = 1/3</span> line is the counterexample threshold. A minimal counterexample must sit in the hatched top-left <b>danger corner</b> (frozen <em>and</em> near-ordinal-sum) — which is <b>empirically empty</b>: no frozen poset is reachable at all (<span class="q">δ</span> bottoms out near 0.40). The ordinal-sum top edge is non-primitive, so excluded. The one anchored boundary point, <span class="q">tight3</span>, is the conjecture-<em>tight</em> case (<span class="q">δ = 1/3</span> exactly, a just-balanced pair) — not a counterexample.</p>
+    </div>
+    <div class="callout warn">
+      <h4>Correctness note — do not conflate δ and Δ</h4>
+      <p>Three empirical facts must stay <b>separate</b>; merging them manufactures a false “imbalance ⟹ good mixing” law that contradicts a proven theorem:</p>
+      <p><b>(i)</b> <span class="q">λ_std → 1 ⟺ thin interface</span> — empirical, <span class="q">corr(1−λ_std, Δ₁)=+0.776</span>. This is interface fatness <span class="q">Δ</span>, a <em>cut-geometry</em> quantity — <b>not</b> the balance constant <span class="q">δ</span>. &nbsp; <b>(ii)</b> No frozen poset reachable; <span class="q">δ ≥ 0.40</span> at width ≥ 4, monotone in the (B)-ratio <span class="q">R = E[Σdisp²]/E[inv]</span> — a <span class="q">δ</span>-vs-<span class="q">R</span> fact, <b>silent</b> on <span class="q">δ &lt; 1/3</span>. &nbsp; <b>(iii)</b> <span class="q">frozen ⟹ λ_std → 1</span> — this is <b>conjectural (L1b)</b>, untested in reach. There is <b>no measured</b> <span class="q">δ</span>-vs-<span class="q">λ_std</span> correlation; <span class="q">δ</span> is not even a field in the dataset.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span> Glossary — the distinct quantities</h2>
+    <p class="sublede">Every quantity, its definition, and which axis it belongs to. If two things have separate entries here, they are not interchangeable — this section exists to make the <span class="q">δ</span>/<span class="q">Δ</span>-class conflation impossible.</p>
+    <div class="gloss">
+      <div class="grow"><span class="sym">δ(P)</span><span class="def">Balance constant: <span class="mono">max</span> over incomparable pairs of <span class="mono">min(p, 1−p)</span> — the balance of the <em>most-balanced</em> pair. <span class="mono">δ &lt; 1/3</span> = frozen.</span><span class="ax"><span class="tag a2">Axis 2</span></span></div>
+      <div class="grow"><span class="sym">Δ₁(A)</span><span class="def">Interface fatness of a cut: <span class="mono">E|A∖σ(A)| / min(|A|,|Aᶜ|)</span>. A <em>cut-geometry</em> property. Small = thin interface. <b>Not</b> <span class="mono">δ</span>.</span><span class="ax"><span class="tag a1">Axis 1</span></span></div>
+      <div class="grow"><span class="sym">λ_std</span><span class="def">Top eigenvalue of the symmetrized element↔position transport operator on <span class="mono">1⊥</span>. <span class="mono">→1</span> = near-ordinal-sum.</span><span class="ax"><span class="tag a1">Axis 1</span></span></div>
+      <div class="grow"><span class="sym">inv_e(σ)</span><span class="def">Kendall distance: number of incomparable pairs flipped vs the distinguished order <span class="mono">e</span>.</span><span class="ax"><span class="tag a1">Axis 1</span></span></div>
+      <div class="grow"><span class="sym">disp(x)</span><span class="def"><span class="mono">pos_σ(x) − rank_e(x)</span> — how far element <span class="mono">x</span> slid from its reference position. <span class="mono">Σ disp²</span> is the squared-displacement / (B) quantity.</span><span class="ax"><span class="tag a1">Axis 1</span></span></div>
+      <div class="grow"><span class="sym">e</span><span class="def">The distinguished linear extension: the &gt;2/3-majority order that all pair biases align with. The reference, not a choice.</span><span class="ax"><span class="tag">frame</span></span></div>
+      <div class="grow"><span class="sym">frozen</span><span class="def"><span class="mono">δ(P) &lt; 1/3</span>: every incomparable pair is &gt;2/3-decided. The minimal-counterexample condition.</span><span class="ax"><span class="tag a2">Axis 2</span></span></div>
+      <div class="grow"><span class="sym">primitive</span><span class="def">Incomparability graph connected ⟺ not a nontrivial ordinal sum ⟺ <span class="mono">λ_std &lt; 1</span> (strictly). Minimal counterexamples are primitive.</span><span class="ax"><span class="tag">structure</span></span></div>
+      <div class="grow"><span class="sym">R</span><span class="def">The (B)-locality ratio <span class="mono">E[Σ disp²]/E[inv]</span>. Large <span class="mono">R</span> = heavy displacement tail = (B) violated.</span><span class="ax"><span class="tag a1">Axis 1</span></span></div>
+      <div class="grow"><span class="sym">log e(P)</span><span class="def">Poset entropy = <span class="mono">log</span> of the number of linear extensions = <span class="mono">log</span> vol(order polytope). A <em>joint</em>-law quantity.</span><span class="ax"><span class="tag">geometry</span></span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span> The proof, and what's proven</h2>
+    <p class="sublede">The reduction from "a counterexample exists" to a contradiction, as a chain. Two links are open (L1b primary, L4 secondary); the rest are proven or empirical — the colored rail and pill on each link say which, and the theorem says why.</p>
+    <div class="chain">
+      <div class="cnode assume">Assume a minimal counterexample P<span class="n-sub">primitive (connected incomparability graph) · frozen (δ &lt; 1/3, no balanced pair)</span></div>
+      <div class="clink proven"><span class="pill proven">proven</span><span class="why"><b>Theorem E</b> — a frozen pair forces a low-conductance BK cut (boundary = adjacency; conductance ≤ 2/(γn)). Any width.</span></div>
+      <div class="cnode">The BK walk on linear extensions mixes badly<span class="n-sub">a low-conductance bottleneck cut exists</span></div>
+      <div class="clink open"><span class="pill open">open · the wall</span><span class="why"><b>L1b</b> — bad mixing ⟹ λ_std → 1. This is the anti-concentration LIB / (B), and the one genuinely missing implication.</span></div>
+      <div class="cnode">λ_std → 1<span class="n-sub">near-ordinal-sum</span></div>
+      <div class="clink proven"><span class="pill proven">proven + emp.</span><span class="why"><b>easy / Buser</b> — every label cut bounds the gap: 1−λ_std ≤ n·leak(A)/(|A||Aᶜ|), summed over e-thresholds ties it to the interface. <b>+ L3</b> best-cut-is-a-prefix (empirical, 125/126).</span></div>
+      <div class="cnode">A thin, low-conductance prefix interface</div>
+      <div class="clink open"><span class="pill open">open · secondary</span><span class="why"><b>L4</b> — a thin interface must leave a balanced pair behind (near-ordinal-sum stability). AMBER: must beat the N-poset.</span></div>
+      <div class="cnode">A balanced pair exists in P</div>
+      <div class="clink proven"><span class="pill proven">proven</span><span class="why"><b>by minimality</b> — a balanced pair (bias in [1/3, 2/3]) directly contradicts frozen (δ &lt; 1/3).</span></div>
+      <div class="cnode concl">Contradiction — no counterexample exists ⟹ 1/3–2/3 holds</div>
+    </div>
+    <p class="machinery"><b>The machinery L1b's reduction stands on</b> (all proven, any-width): <b>standard dominance</b> — the spectral gap lives in the standard sector, so a combinatorial bound genuinely controls λ_std; <b>(A) SPREAD</b> ‖r‖² = Ω(n³); and the exact identities <b>GID</b> + <b>DG</b>. These are why L1b is a bound on <em>displacement/inversions</em> at all.</p>
+    <h3>Full ledger</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>#</th><th>Result</th><th class="ctr">Status</th><th class="ctr">Width</th></tr></thead>
+        <tbody>
+          <tr><td class="rowlabel">1</td><td class="what">λ_std = 1 ⟺ P is an ordinal sum</td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">2</td><td class="what">ordinal sum ⟺ incomparability graph disconnected<span class="fx">(primitive = the negation)</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">3a</td><td class="what">Standard sector: S_P = ρ_std(η_P)<span class="fx">gap sits in the [n−1,1] block</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">3b</td><td class="what">Standard dominance: that block carries the 2nd eigenvalue</td><td class="ctr"><span class="pill empirical">empirical</span><span class="fx">0/132</span></td><td class="ctr"><span class="tag">n ≤ 7 data</span></td></tr>
+          <tr><td class="rowlabel">4</td><td class="what">(A) SPREAD<span class="fx">‖r‖² = Ω(n³)</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">5</td><td class="what">Easy / Buser reverse-Cheeger<span class="fx">1 − λ_std ≤ n·leak(A)/(|A||Aᶜ|), every cut</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">6</td><td class="what">Theorem E: minimal counterexample ⟹ low-conductance BK cut</td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">7</td><td class="what">Identities (GID) &amp; (DG)<span class="fx">Σdisp² = 2ΣK_m + 2ΣM · &nbsp; ΣK_m ≤ inv ≤ 2ΣK_m</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">8</td><td class="what">L1b — the wall<span class="fx">frozen ⟹ λ_std→1 ⟺ LIB ⟺ (B)</span></td><td class="ctr"><span class="pill open">open</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">9</td><td class="what">L2 standard-eigenvector monotonicity</td><td class="ctr"><span class="pill false">false as stated</span><span class="fx">2/126, at the two highest-λ</span></td><td class="ctr"><span class="tag">n=6 data</span></td></tr>
+          <tr><td class="rowlabel">10</td><td class="what">L3 best-cut-is-a-prefix</td><td class="ctr"><span class="pill empirical">empirical</span><span class="fx">125/126</span></td><td class="ctr"><span class="tag">n ≤ 6 data</span></td></tr>
+          <tr><td class="rowlabel">11</td><td class="what">L4 near-ordinal-sum stability ⟹ balanced pair survives</td><td class="ctr"><span class="pill open">open</span><span class="fx">must beat the N-poset</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <h4>Width-3 baggage to keep out</h4>
+      <p>Three width-3 things are <b>not</b> part of this program: (i) the deleted pre-<span class="q">a7c5</span> certificate crutch (a ≤2-chain Dilworth + constant-2 Cauchy–Schwarz that carried a fatal factor-<span class="q">n</span>); (ii) the side “cuts-by-pairs C2” route (the BK-transport option — genuinely width-3, its general version is false); (iii) the separate, <em>finished</em> width-3 Lean paper. The spectral skeleton above has zero width dependence.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">06</span> The single lemma to prove</h2>
+    <p class="sublede">Invariant form — no cut, no ledger, no width. Two faces; either one closes the wall via already-proven machinery.</p>
+    <div class="lemma">
+      <div class="head"><span class="pill open">open · the wall</span><span class="t">Poset-LE displacement anti-concentration</span></div>
+      <div class="body">
+        <p style="margin:0 0 4px;font-size:14.5px;color:var(--ink-soft)">For every finite poset <span class="q">P</span> with distinguished order <span class="q">e</span> and <span class="q">δ(P) &lt; 1/3</span>, with <span class="q">σ</span> uniform on the linear extensions <span class="q">L(P)</span>:</p>
+        <div class="form"><b>displacement face (B):</b> &nbsp; E[ Σₓ (pos_σ(x) − rank_e(x))² ] &nbsp;=&nbsp; O( E[ Σₓ |pos_σ(x) − rank_e(x)| ] )</div>
+        <div class="form"><b>inversion face (LIB):</b> &nbsp; E_σ[ inv_e(σ) ] &nbsp;=&nbsp; O( n / γ )</div>
+        <p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-soft)">“A random linear extension of a real, 2/3-frozen poset stays close to its reference order — no heavy displacement tail / only linearly many inversions.” The two faces are <em>logically independent</em> (a single deep-crossing element separates them); either alone suffices.</p>
+        <div class="forced">
+          <span class="f">forced: real-poset LE measure</span>
+          <span class="f">forced: δ &lt; 1/3</span>
+          <span class="f">forced: distinguished order e</span>
+        </div>
+      </div>
+    </div>
+    <div class="callout warn">
+      <h4>Why it is hard — obstruction 4</h4>
+      <p>Both faces are <b>false for abstract frozen distributions</b> (a two-atom law has every pair frozen yet <span class="q">Θ(n²)</span> inversions). So the proof <em>must</em> use that <span class="q">σ</span> ranges over a genuine poset's linear extensions — not just that pair marginals are frozen. This kills the marginal-only tools: slot-law log-concavity is numerically false, and FKG / XYZ are wrong-signed. The needed input is a real-poset (order-polytope / joint-law) anti-concentration — the same crux the Čech program also imports. The untried handle: <b>weak-Bruhat convexity / Stanley absolute-position AF log-concavity</b> forcing the slot probabilities to decay.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">07</span> Attempt index</h2>
+    <p class="sublede">What has been tried and its verdict — so nothing is re-walked. Each of these would have been a one-line lookup during the sessions that produced them.</p>
+    <div class="log">
+      <div class="att"><span class="verdict"><span class="pill false">dead end</span></span><div><h4>Bruhat-convexity: “prefix violations ⟹ O(n) inversions”</h4><p>Collapses entirely to Diaconis–Graham. Prefix-violations = footrule ≍ inversions — one equivalence class up to a factor of 2. No easier target; convexity does no work at this level.</p></div></div>
+      <div class="att"><span class="verdict"><span class="pill false">avoid this aim</span></span><div><h4>balance → log e(P), aimed at δ directly</h4><p>This is the Kahn–Saks / Kahn–Linial line, stuck at <span class="q">δ ≥ 0.276</span> for 30 years. A frozen counterexample sits in the open gap it can't exclude; the whole program was built to <em>escape</em> this route. Do not point entropy at <span class="q">δ</span>.</p></div></div>
+      <div class="att"><span class="verdict"><span class="pill open">untried · open</span></span><div><h4>Entropy / order-polytope, aimed at the conditional inversion sum</h4><p>Genuinely untried, doc-endorsed in category, <em>not</em> blocked by the dead slot-law. Deliverable: the joint→marginal bridge <span class="q">log e(P) → E[inv_e]</span>, using order-polytope geometry (AF / Stanley absolute-position log-concavity) to beat the two-atom counterexample. Young-lattice / “harmonic-area” proposals decode to this same route.</p></div></div>
+      <div class="att"><span class="verdict"><span class="pill open">untried · convergent target</span></span><div><h4>Convexity / order-polytope forbids the flat slot law</h4><p>Convexity <em>does</em> dispense with the two-atom witness (Reverse-Cheeger §4.2: the support is order-polytope lattice points, not two atoms), and positivity <span class="q">e(P_m)&gt;0</span> kills the <em>exact</em> zero-interior block-cross — but both are <b>silent on the approximate flat tail</b>, the real LIB-violator. Using weak-Bruhat convexity / connectedness or <b>Stanley's absolute-position AF log-concavity</b> (the true theorem, ≠ the dead relative-to-chain one) to force <span class="q">ρ_s&lt;1</span> is unexplored — zero corpus hits. This is where the threads converge.</p></div></div>
+      <div class="att"><span class="verdict"><span class="pill false">dead ≠ AF</span></span><div><h4>slot-law log-concavity of e(Pₘ)</h4><p>Numerically false (Neggers–Stanley object, 7,537 violations). But this is the <em>relative-to-chain</em> sequence — it does <b>not</b> touch Stanley's absolute single-element position log-concavity (a genuine AF theorem), which remains available.</p></div></div>
+      <div class="att"><span class="verdict"><span class="pill open">untried · new object</span></span><div><h4>Incomparability-graph conductance → δ / inversion sum</h4><p>The “primitive ⟹ good mixer” form in <span class="q">λ_std</span> is <b>refuted</b> (primitives reach <span class="q">λ≈0.96</span>). But the incomparability graph's own expansion — a graph on <span class="q">n</span> elements, distinct from the transport Laplacian — is never examined. Precise question: can freezing keep a <em>dense</em> incomparability cut low-leakage in a real poset? Same wall, small new object.</p></div></div>
+    </div>
+    <div class="callout"><h4>Where the threads converge</h4><p>Convexity dispensing the two-atom case, an entropy-gradient discontinuity at δ = 1/3, and <b>Brightwell's open question</b> (can a poset sequence reach δ → 1/3?) are not three problems — they are three windows on one unproven statement: <b>a real poset's uniform / connected / order-polytope structure forces the slot probabilities to decay (ρ_s &lt; 1).</b> Prove that, and the wall falls. Empirically no poset reaches δ ∈ (1/3, ≈0.354); the best known constructions plateau at ≈0.349 — the forbidden-band signature, still open at n → ∞.</p></div>
+  </section>
+
+  <footer>
+    <p><b>pm-onethird · canonical program-state document.</b> This is the source of truth for where the 1/3–2/3 spectral / near-ordinal-sum program stands. Probes, attempt docs, and .tex drafts are subordinate and do not redefine the state.</p>
+    <p><b>Discipline:</b> updated on every verdict · terminology checked against the glossary before any quantity is relayed · a murky high-level picture is the PM's miss to fix. Labels verified any-width against origin/main docs, 2026-07-19.</p>
+  </footer>
+</div>
