@@ -184,6 +184,25 @@ Convexity dispensing the two-atom case, an **entropy-gradient discontinuity at `
 
 **Canonical path of this process doc (state it absolutely when relaying).** `/Users/daniel/research/onethird_program/STATE.md`, § *Appendix A*. On 2026-07-21 mayor reported this path "does not exist" and reconstructed an audit brief from memory instead; it did exist and was current. Root cause: mayor has **no repo workspace** (`~/.pogo/agents/mayor/repo` is absent) and `onethird_program` is cloned only under `/Users/daniel/research/`, so a non-absolute lookup resolves to nothing. Anyone pointing at this appendix must give the absolute path — a bare `onethird_program/STATE.md` is not resolvable from every agent's cwd.
 
+**Does a REPAIR need a fresh audit? The narrowing test (added 2026-07-21, from mg-8ff1).** A repair
+ticket that follows an audit does **not** re-trigger the stage when it only **narrows to match an
+already-audited proof** — strengthening a hypothesis, weakening a conclusion, or relabelling a row
+to what the underlying work already established. A narrowing cannot make a true claim false, and
+when the correction originates in the audit's own finding, a "fresh" audit would largely be
+auditing the auditor's output, which is not independent. Worked example: mg-8ff1's F1 repair
+changed Lemma 3.2b's boxed hypothesis from "some automorphism *maps* x to y" to "*swaps* x and y",
+matching the proof; no fresh audit was dispatched and that was correct.
+
+**Do** re-trigger the stage when a repair **widens** (weakens a hypothesis, strengthens a
+conclusion) or introduces **new mathematical content** — those can be wrong in ways the prior audit
+never examined.
+
+**Either way, the PM verifies any NEW executable artifact the repair commits**, at that granularity
+rather than by re-running the stage. mg-8ff1 committed a 108-line counterexample script nobody had
+independently run; pm-onethird ran it and it reproduced the audited numbers exactly (|Aut(P)| = 3,
+`e = 1431`, `δ = 79/159`, and the crux: 1 automorphism *maps* 0→1 while 0 *swap* them). A witness
+embodying an audited finding is not the same artifact as the finding.
+
 **Audit dispatch MUST carry a work item (added 2026-07-21, from the mg-0eac audit).** When mayor dispatches an audit polecat, first file an audit work item and pass `--id` to the spawn. The mg-0eac audit (`aud0eac`) was spawned **without** an id, so it had nothing to claim and no `mg done` to call — it flagged this itself. The audit still landed (branch merged, report filed, verdict mailed), but only because the polecat remembered to mail. Without a work item an audit's completion is **invisible to the work-item system**, so a *silently failed* audit and a *completed* one look identical from `mg` — and the failure mode of a research-gate that silently doesn't run is that unaudited claims read as audited. The id is what makes the gate observable.
 
 **Mixing ⊥ balance, now with a theorem (reference, 2026-07-19).** Leake–Lindberg–Oveis Gharan 2025 (arXiv:2503.01005, 𝒞-Lorentzian trickle-down) proves the flag complex of `J(P)` (whose maximal chains = linear extensions, by Birkhoff) is a **local spectral expander for every poset** ⟹ poly-time mixing of the down-up walk, arbitrary fields. Caveats: it is the *down-up* walk (not adjacent-transposition), exponent ~`n^{4–5}` (worse than Bubley–Dyer `n³ log n`, which stays best), and *poly* not entropy-rate — so the "ideal operator" is still open. Significance for us: if its expansion is uniform over all posets (apparent, unverified against the theorem statement), fast mixing holds even for near-counterexamples, so the `δ` obstruction is **provably not a mixing obstruction** — it lives in the *marginal*, exactly where mg-210d/dcae put it. Corrects an earlier pm-onethird claim that "spectral independence for `L(P)` is open." The one new object it hands us: the 𝒞-Lorentzian spectral-independence constant of `J(P)`, whose correlation (if any) with `δ` is an open, checkable question (expected: none, by the orthogonality above).
