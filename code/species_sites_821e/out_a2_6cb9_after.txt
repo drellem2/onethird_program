@@ -43,15 +43,15 @@ A2c  THE COMMITTED RUN'S EXTENT LINE, AGAINST THE TREE IT SHIPPED IN
 ==============================================================================
 
   the committed out_e2_crosssection.txt says      123 markdown file(s)
-  `git ls-tree HEAD` -- the tree it shipped in -- 119
+  `git ls-tree HEAD` -- the tree it shipped in -- 123
   a clean re-run in this worktree says            123
-  of which 4 are THIS instrument's own files, which is why the
+  of which 0 are THIS instrument's own files, which is why the
   comparison below is against the SHIPPED tree and not against my
   worktree: measuring a commit with your own additions in the count
   is the defect this section is about.
 
   the LIVE run's extent line is true                             ok
-  the COMMITTED run's extent line is true at HEAD                *** FALSE, off by -4 ***
+  the COMMITTED run's extent line is true at HEAD                ok
   the census, three ways:
       committed evidence says       14 file(s) carry a strike, 33 strike(s)
       the SHIPPED tree at HEAD has  14 and 33
@@ -66,6 +66,7 @@ A2c  THE COMMITTED RUN'S EXTENT LINE, AGAINST THE TREE IT SHIPPED IN
   COUNT in its extent line, and the line numbers that go with it.
 
   Which tree does 123 describe?  Counting *.md at each commit:
+      07d80ee   123  docs+repair: ALL THREE OPEN ITEMS CLOSED AT   <-- the committed number describes THIS tree
       b6bc2ef   119  docs+repair: THE DELETION TEST IS PER RETURN
       9b4a551   118  pm-onethird: refresh Now/Next (2 of 8 stale,
       e6935dc   118  docs+audit: independent audit of the mg-8916
@@ -73,7 +74,6 @@ A2c  THE COMMITTED RUN'S EXTENT LINE, AGAINST THE TREE IT SHIPPED IN
       7bc9603   111  pm-onethird: rebuild Now/Next (2 of 6 stale)
       d1dd84d   111  evidence+control: THE INSTRUMENT THAT RAISED
       f5360bf   111  evidence: regenerate the mg-8916 repair inst
-      b055ae5   111  docs+repair: THE GATE READS THE PROSE BESIDE
 
 
   The 0 markdown file(s) in the SHIPPED tree and not in the tree the
@@ -86,7 +86,7 @@ A2c  THE COMMITTED RUN'S EXTENT LINE, AGAINST THE TREE IT SHIPPED IN
   What is false is the EXTENT LINE, and this audit is about extent
   lines: the run shipped as evidence for a cross-section check did
   not read the document the repair itself added, and says 100 where
-  the tree it is committed into holds 119.  A second, independent
+  the tree it is committed into holds 123.  A second, independent
   witness: the committed rows for the Bratteli document cite strike
   line 112 and the shipped tree has it at 120 -- the output was
   produced before this commit's own parent.  Same shape as mg-8e30
