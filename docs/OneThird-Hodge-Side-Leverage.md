@@ -13,13 +13,27 @@ it is used, not rechecked.
 **Re-derivable:** every number below comes from `code/hodge_leverage/run_all.sh`
 (pure Python 3, no third-party packages; exact integer/rational arithmetic except where an
 eigenvalue is reported, ~13 min). Committed outputs: `sweep_output.txt`, `theorems_output.txt`,
-`lrb_output.txt`, `controls_output.txt`.
+`lrb_output.txt`, `controls_output.txt`. **§6.1 (Theorem J, added by mg-a2bd) is checked separately by
+`code/hodge_leverage_join/run_all.sh` (~21 s) → `out_verify_join.txt`; that directory contains no
+mutation and scores no control — it is a replication of a proof.**
 
 **Post-audit status (independent audit mg-86a3, `2cc8d57`; repairs landed by mg-a806).** Verdict
 **OVERSTATED**, with **0 BROKEN mathematics** — every headline number reproduced by a disjoint route
 (405, 404, 44 055, 6197, 97, 2.6204, 373/29, `2^{3−n}`, and every row of §5.3's two width-2
 families). Audit instrument: `code/hodge_leverage_audit_86a3/`, sharing **no code** with
 `code/hodge_leverage/`.
+
+**⚠️ Second-generation status (independent audit mg-d39d of the mg-a806 landing, `522048f`; finding A1
+landed by mg-a2bd).** That landing added a ledger row **its ticket never asked for**, and the added row
+is the **first BROKEN mathematics in this arc**: **G″ is FALSE** — 55 (poset, level) counterexamples at
+`n ≤ 6` — and it is **struck** (§6, ledger). The reason is now recorded as ledger row **J**: *Theorem L
+makes links **joins**, and joins **suppress** `λ₂`*. Two things must be read with it. **THEOREM G
+STANDS** — its face's other blocks are singletons, so its link is not a join, and mg-86a3's rebuild to
+`A_12` is untouched; the `2^{Θ(n)}` headline, M2, the `A(P)` routing and every summary are unaffected,
+because nothing ever consumed G″. And **the rest of mg-d39d is NOT landed here** — its findings A2–A8
+(the replacement scope clause's quantifier, the `V_k` and antichain upgrades, §10's control/replication
+conflation, §14's *"same clauses"*, and the `n = 6` completion it contributes) remain open at the time
+of writing and belong to other tickets. Do not read this document as fully repaired against mg-d39d.
 
 **Read this part first, because it is the largest thing the audit did and it is a confirmation, not a
 correction. THEOREM G IS CONFIRMED, AND THE `2^{Θ(n)}` LOSS IS A THEOREM.** §13 named the §6
@@ -459,11 +473,127 @@ theorem**, and the `A_3…A_8` computation above is a check on a proof rather th
 claimed. The audit also **endorses the restraint** in not upgrading the *equality* `γ_i = 1/2`:
 nothing downstream needs it (M2 uses only `≥`, and a smaller `γ` only strengthens the negative), and
 the auditor likewise found no easy proof of `≤ 1/2` — trickling-down at the fixed point returns `1`
-and gives nothing. **Step 4b, from the same audit and adopted here:** Theorem G is *weaker than its
-own proof*, because the proof uses only that some block induces an antichain of size `≥ 3`. The
-immediate strengthening, free from G plus Theorem L, is **`γ_i ≥ 1/2` for every finite poset having a
-dimension-`i` face one of whose blocks induces an antichain of size `≥ 3`** — a strengthening in the
-direction of §6's own conclusion, recorded as ledger row **G″** and not needed by anything here.
+and gives nothing.
+
+**⚠️ Step 4b, from the same audit, adopted here by mg-a806 — and STRUCK by mg-a2bd, because the
+strengthening it proposed is FALSE.** The adopted sentence read: *Theorem G is weaker than its own
+proof, because the proof uses only that some block induces an antichain of size `≥ 3`; the immediate
+strengthening, free from G plus Theorem L, is `γ_i ≥ 1/2` for every finite poset having a dimension-`i`
+face one of whose blocks induces an antichain of size `≥ 3`* — recorded as ledger row **G″**. **It is
+false.** It fails on **55 (poset, level) pairs at `n ≤ 6`**, the smallest at `n = 5`; the per-face
+reading its own sentence argues fails on **3901 of 7989** faces (mg-d39d §2, `out_gpp.txt`;
+independently reproduced by `code/hodge_leverage_join/out_verify_join.txt` J2). Row **G″** is struck.
+
+**And the reason is worth more than the row was: THE STRENGTHENING WAS NOT FREE — the dropped
+hypothesis was the one doing the work.** Theorem G's face has one block of size `m` and `i+1`
+**singletons**. A singleton block contributes no factor to Theorem L's join (`F(A_1)` is the empty
+complex), so `link(σ) ≅ F(A_m)` *on the nose* — **in Theorem G's case the link is not a join at all**,
+and the eigenfunction applies to `F(A_m)` directly. Drop the singleton requirement — which is exactly
+what G″ did — and Theorem L gives a **genuine join** `F(A_m) * Y`. Joins **suppress** `λ₂`: an
+eigenfunction of a factor survives into the join scaled by `p/(p+q+1) < 1`, so **an exact `1/2` in a
+factor becomes STRICTLY LESS than `1/2` in the join**. That is Theorem J, §6.1 below. It is not a
+boundary case: nearly half the faces G″ quantified over are counterexamples, and the four at `n = 5`
+are `A_3 ⊕ A_2`, `A_3 ⊕ C_2`, `A_2 ⊕ A_3`, `C_2 ⊕ A_3` — all ordinal sums, i.e. **exactly the posets
+where the face's other block is not a singleton and the link is therefore a genuine join.**
+
+**Sized in the other direction, and this is not optional. THEOREM G STANDS, UNTOUCHED.** Its face has
+singleton blocks by construction, `m ≥ 3` comes from `i ≤ n−4`, and mg-86a3 rebuilt it to `A_12` with
+no shared link code. The `2^{Θ(n)}` loss remains a theorem, the headline remains carried, and
+**nothing in §0, §5, §6's conclusion, M2, the routing or `STATE.md` ever depended on G″** — the struck
+row's own last clause, *"Nothing here consumes it"*, was accurate, which is what keeps this a strike
+rather than a retraction. Joins moreover only **suppress** `γ`, which makes the local-to-global bound
+**weaker** on the affected posets, never stronger: nothing about the `A(P)` decision is reopened by
+this. The one thing G″ was reached for it never covered anyway — §5.3's `C_a ⊔ C_a` has no
+3-antichain at all.
+
+**Everything G″ was cited by, enumerated rather than assumed (mg-a2bd).** A false universal that sat in
+a ledger may have been leaned on, so the repository was swept for the row label in every form, for the
+phrase *"free from G + Theorem L"*, and for the claim's **content** (*"antichain of size ≥ 3"*,
+*"weaker than its own proof"*, *"strongest true form"*). **Three sites, all now carrying the strike, and
+no consumer anywhere:**
+
+| site | what it was | disposition |
+|---|---|---|
+| this §6, the step-4b paragraph | the sentence, adopted by mg-a806 | **STRUCK** above |
+| the ledger, row **G″** | the `PROVEN` row | **STRUCK**, with row **J** recording why and row **G‴** the true form |
+| `docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md:413` | mg-86a3's step-4b strength-check cell — the **origin** of the sentence | **ANNOTATED** in place; the auditor's text is left verbatim as the record, with the refutation beside it |
+
+**And the clean negative, stated because it is a real result and not an assumption: NOTHING CITED IT.**
+No proof, bound, ledger row, §0 point, §12 routing consequence, §14 row, `STATE.md` row, code path or
+committed artifact consumes G″ or the phrase *"free from G + Theorem L"*. `STATE.md` never contained
+the row at all — its mg-a3d4 attempt-index row was searched in full for the label and for the claim's
+content and carries neither. So the blast radius really is the two sites in this document plus
+the one annotation, and the struck row's own *"Nothing here consumes it"* was **true when written**.
+
+### §6.1 — Theorem J: joins suppress `λ₂`, and that is why G″ was not available
+
+> **Theorem J (join suppression).** Let `X_1, …, X_r` be weighted pure complexes, `dim X_j = p_j ≥ 0`,
+> and let `X = X_1 * ⋯ * X_r` carry the product weights, so `D := dim X = Σ_j (p_j + 1) − 1`. Then the
+> spectrum of the 1-skeleton walk of `X`, on the complement of the constants, is exactly
+> ```
+>     ⋃_j { (p_j / D) · μ  :  μ ∈ spec(X_j on 1⊥) }   ∪   { −1/D, with multiplicity r − 1 }.
+> ```
+> In particular `λ₂(X) ≤ max_j (p_j/D)·λ₂(X_j)⁺ ∨ (−1/D)`, and since `p_j/D < 1` whenever a second
+> factor is present, **a factor's `λ₂` is strictly suppressed by the join.**
+
+*Proof.* A facet of `X` is a union of one facet from each factor, so it has `Σ_j(p_j+1) = D+1`
+vertices. From a vertex `u ∈ X_j` the 1-skeleton walk picks a facet through `u` (weighted) and then a
+uniform one of the `D` remaining vertices; exactly `p_j` of those lie in `X_j`, and conditioned on
+landing there the step is `X_j`'s own 1-skeleton walk. So for `f` supported on `X_j` with
+`⟨f, π_{X_j}⟩ = 0`, extended by `0`,
+```
+    (P_X f)|_{X_j} = (p_j/D) · (P_{X_j} f) ,        (P_X f)|_{X_k} = ⟨f, π_{X_j}⟩ = 0  (k ≠ j),
+```
+the second equality because from a vertex outside `X_j` the walk enters `X_j` at its stationary
+measure, against which `f` integrates to zero. That accounts for `Σ_j(V_j − 1)` eigenvalues. The
+remaining `r − 1` dimensions are spanned by the functions constant on each factor and summing to zero
+across factors, on which the same computation returns `−1/D`. Counting: `Σ_j(V_j−1) + (r−1) = V − 1`. ∎
+
+**Instantiated at the smallest counterexample.** `F(A_3) * F(A_2)` has `p = 1`, `q = 0`, `D = 2`, so
+the hexagon's `1/2` lands at `(1/2)·(1/2) = 1/4`. That is `γ_0(A_2 ⊕ A_3)`, and the deliverable's own
+`local_to_global.gammas` returns `{−1: 1/6, 0: 1/4, 1: 1/2}` on that poset — **the instrument that
+carries §5 already said G″ was false.**
+
+*Verified independently:* `code/hodge_leverage_join/verify_join.py` → `out_verify_join.txt`. The link
+side is measured by `links.link_skeleton`, which builds the weighted 1-skeleton by brute force from
+the facet list and **never uses Theorem L**; the factor side is assembled from the factor complexes
+`F(P|_B)` alone. On **all 48 846 genuine-join links of all 405 posets `n ≤ 6`** (a genuine join = at
+least two non-singleton blocks) the two **full spectra** agree, `0` mismatches, worst deviation
+`1.2 × 10⁻¹⁵`. This is a check on a proof, not its support — and it is a **replication**, not a
+control: no mutation is scored anywhere in that file, and §10's control table is unchanged by it.
+
+#### The second consequence: `γ_i` for `A_n` is attained at the one-big-block face, and that is what row G′ needed
+
+`γ_i` is a **max over every dimension-`i` face**, while `out_theoremG.txt`'s `G3` computes the spectrum
+of the link of **one** face — Theorem G's. mg-a806 widened row **G′** from `A_7` to `A_9` on that
+per-link computation, i.e. **on evidence one notch narrower than the statement** (mg-d39d A8(3)). The
+repair is not to narrow the row; it is to write the missing step down, and Theorem J *is* the missing
+step. **Do not weaken G′: it is true as stated, and the one-big-block case is exactly where it lives.**
+
+A dimension-`i` face of `F(A_n)` is an ordered partition into `i+2` blocks of sizes `b_1,…,b_{i+2}`;
+its non-singleton blocks satisfy `Σ_{b_j ≥ 2} (b_j − 1) = n − i − 2 = D + 1`, where `D = n−i−3` is the
+link's dimension and depends only on the **level**. By L and J,
+```
+    λ₂(link σ)  =  max_j (b_j − 2)/D · λ₂(F(A_{b_j}))   ∨   (−1/D),
+```
+and `b_j − 2 ≤ D` with **equality iff that block is the only non-singleton one** — i.e. iff `b_j = n−i−1`
+and the other `i+1` blocks are singletons, which is precisely Theorem G's face. Hence:
+
+- **Unconditionally, every `n`:** `γ_i ≥ λ₂(F(A_{n−i−1})) ≥ 1/2`, the second inequality being Theorem G.
+  This is the half M2 consumes and it is a theorem.
+- **Given `λ₂(F(A_b)) ≤ 1/2` for `3 ≤ b ≤ n`** — the computational half, verified for `b ≤ 9` — every
+  *other* dimension-`i` face has `λ₂(link) ≤ max_j (b_j−2)/(2D) < 1/2`, so **`γ_i = λ₂(F(A_{n−i−1})) = 1/2`
+  exactly, attained at the one-big-block faces and at no others.**
+
+So the per-link computation **does** bound every face at its level, and row G′'s population is exactly
+as wide as its statement — once J is on the page. Checked both ways in `out_verify_join.txt` `J4`:
+exhaustively over **all faces** of `F(A_n)` for `n = 3…6` (the argmax set is exactly the one-big-block
+faces at every level, and the best non-conforming face is strictly below — `1/3` at `A_6`, `i = 0`),
+and over **block-size multisets** for `n = 7, 8, 9` via L + J, with the `n ≤ 6` face-level agreement as
+the control on that shortcut. The runner-up is always the two-non-singleton-block face and it climbs
+toward `1/2` without reaching it: at `A_9`, `i = 0` it is `(2,7) ↦ 5/12`. What remains computational is
+only the base case `λ₂(F(A_m)) ≤ 1/2` for `m ≤ 9`, recomputed here from the closed-form weights —
+so G′ keeps its `PROVEN-by-computation` label and loses its unstated assumption.
 
 **Why this is structural rather than a numerical accident.** Oppenheim's trickling-down theorem
 propagates a link bound down one level as `γ ↦ γ/(1−γ)`. The map has fixed point exactly
@@ -877,8 +1007,10 @@ Labels: **PROVEN** = proof given here (or here plus mg-276d's audited lemmas), a
 | **H'** | `λ₂ ≤ 1/2` at the codimension-2 level | **PROVEN** (§4) | all finite posets |
 | **NV** | every link of dimension `≥ 1` is connected, so `γ_i < 1` and (LG) is strictly positive | **PROVEN** (§5.1) | all finite posets |
 | **G** | for `A_n`, `γ_i ≥ 1/2` at every level `−1 ≤ i ≤ n−4` | **PROVEN** (§6, explicit eigenfunction) | all `n ≥ 3`; the identity `(Pf) = f/2` verified in exact arithmetic for `A_3…A_8`. **✅ CONFIRMED by independent rebuild (mg-86a3): re-derived by hand, Coxeter complex rebuilt with no shared link code, `Pf = f/2` exact to `A_12` under three `a`-vectors. Complete, `n`-free, no gap — so M2's `2^{Θ(n)}` loss is a THEOREM. The audit's three attempts to break it all failed.** |
-| **G'** | `γ_i = 1/2` exactly (not merely `≥`) | **PROVEN-by-computation** | `A_3…A_7`, **extended to `A_3…A_9` by mg-86a3**; and `γ_i ≤ 1/2` on **all 404 posets with `2 ≤ n ≤ 6`**, attained by 373. **The restraint in not upgrading this to a theorem is audit-endorsed** (nothing downstream needs it; no easy proof of `≤ 1/2` exists — trickling-down at the fixed point returns 1). See **F5** for the two places the equality nonetheless leaked into prose |
-| **G″** | `γ_i ≥ 1/2` for **every finite poset** having a dimension-`i` face one of whose blocks induces an antichain of size `≥ 3` | **PROVEN** (§6; free from **G** + Theorem **L**) | all finite posets. Added in repair of mg-86a3's step-4b finding that **G is weaker than its own proof** — the proof uses only that some block is an antichain of size `≥ 3`, never that the whole poset is one. Nothing here consumes it; it is recorded because it is the strongest true form |
+| **G'** | `γ_i = 1/2` exactly (not merely `≥`) | **PROVEN-by-computation**, and the **max-over-the-level step is now a THEOREM** (row **J**, §6.1; added by mg-a2bd) | `A_3…A_7`, **extended to `A_3…A_9` by mg-86a3**; and `γ_i ≤ 1/2` on **all 404 posets with `2 ≤ n ≤ 6`**, attained by 373. **The `A_9` extension was made on a PER-LINK computation while `γ_i` is a PER-LEVEL MAX** (mg-d39d A8(3)) — evidence one notch narrower than the statement. **Repaired by writing the missing step down rather than by narrowing the row, because the row is TRUE:** by L + J, `λ₂(link σ) = max_j (b_j−2)/D · λ₂(F(A_{b_j}))` with `b_j − 2 ≤ D` and equality **iff** the other blocks are singletons, so `γ_i = λ₂(F(A_{n−i−1}))`, attained at Theorem G's face and no other. Checked exhaustively over **all faces** for `n ≤ 6` and over block-size multisets to `A_9` (`out_verify_join.txt` `J4`). What stays computational is only the base case `λ₂(F(A_m)) ≤ 1/2`, `m ≤ 9` — hence the label is unchanged. **The restraint in not upgrading this to a theorem is audit-endorsed** (nothing downstream needs it; no easy proof of `≤ 1/2` exists — trickling-down at the fixed point returns 1). See **F5** for the two places the equality nonetheless leaked into prose |
+| ~~**G″**~~ | ~~`γ_i ≥ 1/2` for **every finite poset** having a dimension-`i` face one of whose blocks induces an antichain of size `≥ 3`~~ | ⚠️ **STRUCK — FALSE AS A UNIVERSAL (mg-d39d A1; struck by mg-a2bd).** It was labelled `PROVEN (§6; free from G + Theorem L)` and it is **not free and not true**: **55 (poset, level) counterexamples at `n ≤ 6`**, smallest at `n = 5`, and **3901 of 7989** faces under the per-face reading its own proof sentence argues | the counterexamples: `A_3 ⊕ A_2`, `A_3 ⊕ C_2`, `A_2 ⊕ A_3`, `C_2 ⊕ A_3` at `n = 5` (all `γ_0 = 1/4`), 51 more at `n = 6` (values include `1/3` and `0.408367`) — reproduced twice, by `hodge_leverage_audit_d39d/out_gpp.txt` and by `hodge_leverage_join/out_verify_join.txt` `J2`, and confirmed by this document's own `local_to_global.gammas`. **WHY IT FAILED, which is the part worth keeping — see row J: Theorem L makes the link a JOIN and joins SUPPRESS `λ₂`. Theorem G's face is one size-`m` block plus `i+1` SINGLETONS, and singletons contribute no join factor, so there the link is not a join at all. G″ dropped the singleton requirement, and THAT WAS THE HYPOTHESIS DOING THE WORK — the four `n = 5` counterexamples are exactly the ordinal sums, i.e. exactly where the other block stops being a singleton.** Nothing consumed it (§6, and it appears in no summary and never in `STATE.md`), so this is a strike, not a retraction: **G, G′, M2, the `2^{Θ(n)}` headline and the routing are untouched** |
+| **G‴** | `γ_i ≥ 1/2` for every finite poset having a dimension-`i` face whose blocks are one antichain of size `≥ 3` **and singletons otherwise** | **PROVEN** (§6, by **G** + **L**) | all finite posets. This *is* the strengthening that is free from G + L, and it is what G″ should have said: with the other blocks singletons the link is `F(A_m)` on the nose, so G's eigenfunction applies verbatim. Nothing here consumes it either; it is recorded because a struck row should leave behind the true statement in its neighbourhood |
+| **J** | **joins suppress `λ₂`.** For `X = X_1 * ⋯ * X_r` with product weights, `D = dim X`, the 1-skeleton walk's spectrum on `1⊥` is exactly `⋃_j {(p_j/D)·μ : μ ∈ spec(X_j on 1⊥)} ∪ {−1/D}^{r−1}`. A factor eigenfunction survives **scaled by `p_j/D < 1`**, so an exact `1/2` in a factor is strictly below `1/2` in the join | **PROVEN** (§6.1) | all weighted joins. Checked as a **full-spectrum** identity on **all 48 846 genuine-join links of all 405 posets `n ≤ 6`** — link side measured by brute force from the facet list with no use of L, factor side assembled from the factor complexes alone — `0` mismatches, worst deviation `1.2×10⁻¹⁵` (`hodge_leverage_join/out_verify_join.txt` `J1`). **Two consumers:** it is why G″ is false, and it is the missing step in row G′ (the max over a level is attained at the one-big-block face). **Direction, stated because it would otherwise have to be guessed: joins only make `γ` SMALLER, hence the (LG) bound WEAKER on the affected posets — nothing here reopens `A(P)`** |
 | **N1a** | `Δ_AT = NᵀN`, `N` the signed vertex–edge incidence matrix of the AT graph | **PROVEN — unconditional** (§7) | all finite posets; 405/405 here and 405/405 by mg-86a3's disjoint route. Pure graph theory: nothing simplicial enters |
 | **N1b** | `Δ_AT = E · L^rel_top · E` | **PROVEN given L1** ⟹ **CONDITIONAL** (§7, §7.1) | all finite posets given L1; 405/405 both routes. **F2: this half inherits mg-276d's CONDITIONAL reading of "relative", which §13(iv) declares and the old flat-PROVEN row N1 did not carry** |
 | **N1c** | `∂_rel E = N` up to a sign per row | **PROVEN given L1** (§7) | all finite posets given L1; 405/405 by mg-86a3, which also verified the twisted signs at the two facets of every interior ridge are always opposite |
@@ -997,6 +1129,18 @@ not over the object it was verified on — including thresholds, including hedge
 population"*), and including scope clauses attached to negatives, which read as modest and are exactly
 where a resting place hides. Landed into `STATE.md` Appendix A step 4d.
 
+**⚠️ AND THE NEXT GENERATION LANDED IN THE REPAIR ITSELF — a row the ticket never asked for (mg-d39d
+A1, recorded here by mg-a2bd).** mg-a806 was scoped to land B6, the stronger scope sentence, N1's label
+and the §10 table. Row **G″** was none of those: it was an extra generalisation the landing
+**volunteered**, promoting an auditor's step-4b aside to a `PROVEN` ledger row without rebuilding it.
+So it was **simultaneously the most general claim in the commit and the one no brief anchored an audit
+to** — and it is the one that was false. The generalisable shape, landed into `STATE.md` Appendix A:
+**a landing that adds a row beyond its brief has widened its own scope, and the added row is where step
+4d should look first**, because the usual defence — *audit the deliverable's most general statement* —
+has no ticket text pointing at an unrequested row. Note also what this instance says about *"the audit
+wins where we disagree"*: the false sentence was **mg-86a3's own**, inside its strength-check table,
+and neither party had checked it. **An audit's own product is not pre-audited.**
+
 **Other scope axes.** *Regime*: the sweep is the complete isomorphism-class enumeration at each
 `n ≤ 6`, not a sample. *Citation*: two published theorems are load-bearing — (LG) and Brown — and
 both are labelled CITED, with (LG) additionally checked on the whole population and the consequence
@@ -1051,7 +1195,10 @@ not examine (B6's threshold) is where the MAJOR finding landed.
 
 ## §14 — `STATE.md` row, as landed
 
-**Status: LANDED by mg-a806**, with every mg-86a3 repair applied here first. This section is a
+**Status: LANDED by mg-a806**, with every mg-86a3 repair applied here first. **The row below is
+UNCHANGED by mg-a2bd's strike of G″, and that is a fact rather than an omission: G″ never appeared in
+this section, in `STATE.md`, or in any other summary — verified by an exhaustive sweep (see §6). The
+strike therefore touches §6 and the ledger and nothing else.** This section is a
 **primary** audit target (Appendix A step 4c) and it was audited clause by clause; the row below is the
 repaired text, and the corresponding `STATE.md` row carries the same clauses. Carries its own
 conditions rather than pointing at them — including the one it previously pointed at (**F2**).

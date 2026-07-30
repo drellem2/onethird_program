@@ -1,0 +1,120 @@
+==============================================================================
+VERIFY_JOIN -- the join-suppression theorem (ledger row J), mg-a2bd
+==============================================================================
+
+population: posets up to isomorphism, n = 2..6: 2 5 16 63 318
+
+J1  THE JOIN SPECTRUM IDENTITY, on every genuine-join link, n <= 6
+    measured: links.link_skeleton (brute force from the facet list)
+    predicted: assembled from the factor complexes F(P|_B) alone
+
+      n=2  genuine-join links tested=    0   mismatches=0
+      n=3  genuine-join links tested=    0   mismatches=0
+      n=4  genuine-join links tested=   39   mismatches=0
+      n=5  genuine-join links tested= 1426   mismatches=0
+      n=6  genuine-join links tested=47381   mismatches=0
+
+    total genuine-join links tested : 48846
+    spectrum mismatches             : 0
+    worst deviation over all of them: 1.221e-15
+    -> Theorem J holds on the whole population
+
+J2  THE STRIKE -- ledger row G'' as written (a PER-LEVEL claim)
+    'gamma_i >= 1/2 for every finite poset having a dimension-i face
+     one of whose blocks induces an antichain of size >= 3'
+
+      n=2  (poset, level) pairs with such a face=  0   gamma_i < 1/2 on  0
+      n=3  (poset, level) pairs with such a face=  1   gamma_i < 1/2 on  0
+      n=4  (poset, level) pairs with such a face=  7   gamma_i < 1/2 on  0
+      n=5  (poset, level) pairs with such a face= 70   gamma_i < 1/2 on  4
+      n=6  (poset, level) pairs with such a face=676   gamma_i < 1/2 on 51
+
+    population  : 754 (poset, level) pairs, n <= 6
+    COUNTEREXAMPLES: 55   <-- G'' is FALSE
+    smallest n with a counterexample: 5
+
+    the n = 5 counterexamples, named:
+      C_2 (+) A_3       i=0  gamma_i=0.250000   (link is a genuine join)
+      A_2 (+) A_3       i=0  gamma_i=0.250000   (link is a genuine join)
+      A_3 (+) C_2       i=0  gamma_i=0.250000   (link is a genuine join)
+      A_3 (+) A_2       i=0  gamma_i=0.250000   (link is a genuine join)
+    all 4 of them are ordinal sums -- i.e. exactly the case where
+    the face's OTHER block is not a singleton, so the link IS a join
+
+J3  THE SMALLEST COUNTEREXAMPLE, predicted by J and measured by the
+    deliverable's own local_to_global.gammas
+
+    P = A_2 (+) A_3  (n = 5, {0,1} < {2,3,4}),  d = n-2 = 3
+    measured gammas: {-1: 0.166667, 0: 0.25, 1: 0.5}
+    sigma = ({0,1}) at i = 0: blocks A_2 (p=0) and A_3 (p=1), D = 2
+    G'' asserts gamma_0 >= 1/2 because {2,3,4} is a 3-antichain.
+    J predicts the hexagon's 1/2 lands at (p/D) * 1/2 = 1/4
+    predicted link spectrum on 1-perp: [-0.5, -0.5, -0.25, -0.25, 0.0, 0.25, 0.25]
+    measured  link spectrum on 1-perp: [-0.5, -0.5, -0.25, -0.25, 0.0, 0.25, 0.25]
+    measured gamma_0 = 0.250000   (G'' asserts >= 0.5)  -> FALSE
+
+J4  ROW G' -- gamma_i(A_n) is a PER-LEVEL MAX, and J says where it
+    is attained:  gamma_i(A_n) = lambda_2(F(A_{n-i-1})), attained
+    EXACTLY at the faces with one block of size n-i-1 and i+1
+    singletons -- Theorem G's face, and no other.
+
+    (a) lambda_2(F(A_m)), computed here from the closed-form weights
+        m= 3  |V|=   6  lambda_2 = 0.500000000000   == 1/2: True
+        m= 4  |V|=  14  lambda_2 = 0.500000000000   == 1/2: True
+        m= 5  |V|=  30  lambda_2 = 0.500000000000   == 1/2: True
+        m= 6  |V|=  62  lambda_2 = 0.500000000000   == 1/2: True
+        m= 7  |V|= 126  lambda_2 = 0.500000000000   == 1/2: True
+        m= 8  |V|= 254  lambda_2 = 0.500000000000   == 1/2: True
+        m= 9  |V|= 510  lambda_2 = 0.500000000000   == 1/2: True
+
+    (b) exhaustive over FACES of F(A_n), n = 3..6: is the argmax
+        exactly the one-big-block faces, and is every other face
+        STRICTLY below 1/2?
+        A_3  i=-1  m=3  one-big-block faces=  1 (lambda_2 = 0.500000)   other faces=   0 (max nan)
+        A_4  i=-1  m=4  one-big-block faces=  1 (lambda_2 = 0.500000)   other faces=   0 (max nan)
+        A_4  i= 0  m=3  one-big-block faces=  8 (lambda_2 = 0.500000)   other faces=   6 (max 0.000000)
+        A_5  i=-1  m=5  one-big-block faces=  1 (lambda_2 = 0.500000)   other faces=   0 (max nan)
+        A_5  i= 0  m=4  one-big-block faces= 10 (lambda_2 = 0.500000)   other faces=  20 (max 0.250000)
+        A_5  i= 1  m=3  one-big-block faces= 60 (lambda_2 = 0.500000)   other faces=  90 (max 0.000000)
+        A_6  i=-1  m=6  one-big-block faces=  1 (lambda_2 = 0.500000)   other faces=   0 (max nan)
+        A_6  i= 0  m=5  one-big-block faces= 12 (lambda_2 = 0.500000)   other faces=  50 (max 0.333333)
+        A_6  i= 1  m=4  one-big-block faces= 90 (lambda_2 = 0.500000)   other faces= 450 (max 0.250000)
+        A_6  i= 2  m=3  one-big-block faces=480 (lambda_2 = 0.500000)   other faces=1080 (max 0.000000)
+        -> argmax is exactly the one-big-block face set: True
+
+    (c) the same statement for n = 7, 8, 9, over block-size
+        multisets via Theorems L + J (the shortcut whose
+        face-level agreement (b) has just confirmed at n <= 6):
+        A_7  i=-1  m=7  one-big-block lambda_2=0.500000   best other=-1.000000 at sizes None
+        A_7  i= 0  m=6  one-big-block lambda_2=0.500000   best other=0.375000 at sizes (2, 5)
+        A_7  i= 1  m=5  one-big-block lambda_2=0.500000   best other=0.333333 at sizes (1, 2, 4)
+        A_7  i= 2  m=4  one-big-block lambda_2=0.500000   best other=0.250000 at sizes (1, 1, 2, 3)
+        A_7  i= 3  m=3  one-big-block lambda_2=0.500000   best other=0.000000 at sizes (1, 1, 1, 2, 2)
+        A_8  i=-1  m=8  one-big-block lambda_2=0.500000   best other=-1.000000 at sizes None
+        A_8  i= 0  m=7  one-big-block lambda_2=0.500000   best other=0.400000 at sizes (2, 6)
+        A_8  i= 1  m=6  one-big-block lambda_2=0.500000   best other=0.375000 at sizes (1, 2, 5)
+        A_8  i= 2  m=5  one-big-block lambda_2=0.500000   best other=0.333333 at sizes (1, 1, 2, 4)
+        A_8  i= 3  m=4  one-big-block lambda_2=0.500000   best other=0.250000 at sizes (1, 1, 1, 2, 3)
+        A_8  i= 4  m=3  one-big-block lambda_2=0.500000   best other=0.000000 at sizes (1, 1, 1, 1, 2, 2)
+        A_9  i=-1  m=9  one-big-block lambda_2=0.500000   best other=-1.000000 at sizes None
+        A_9  i= 0  m=8  one-big-block lambda_2=0.500000   best other=0.416667 at sizes (2, 7)
+        A_9  i= 1  m=7  one-big-block lambda_2=0.500000   best other=0.400000 at sizes (1, 2, 6)
+        A_9  i= 2  m=6  one-big-block lambda_2=0.500000   best other=0.375000 at sizes (1, 1, 2, 5)
+        A_9  i= 3  m=5  one-big-block lambda_2=0.500000   best other=0.333333 at sizes (1, 1, 1, 2, 4)
+        A_9  i= 4  m=4  one-big-block lambda_2=0.500000   best other=0.250000 at sizes (1, 1, 1, 1, 2, 3)
+        A_9  i= 5  m=3  one-big-block lambda_2=0.500000   best other=0.000000 at sizes (1, 1, 1, 1, 1, 2, 2)
+        -> gamma_i = lambda_2(F(A_{n-i-1})) = 1/2 at every level,
+           and no other face reaches it: True
+
+==============================================================================
+SUMMARY
+  J1  join spectrum identity holds on every genuine-join link n<=6 : True
+  J2  ledger row G'' counterexamples at n <= 6                     : 55
+      smallest n carrying one                                      : 5
+  J3  gamma_0(A_2 (+) A_3) = 0.250000, predicted 1/4 by J             : True
+  J4  gamma_i(A_n) = lambda_2(F(A_{n-i-1})), argmax = one-big-block : True
+
+  So: G'' is FALSE and struck; Theorem G, row G' and M2 are
+  UNAFFECTED -- G's face has singleton blocks, so its link is not a
+  join, and J is precisely what says the wider form was not free.
+==============================================================================
