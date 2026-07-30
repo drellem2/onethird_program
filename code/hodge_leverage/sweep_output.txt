@@ -16,14 +16,14 @@ n=4  posets= 16   (LG) violations=0   max gamma over all levels and all posets=0
       [0.0s]
 n=5  posets= 63   (LG) violations=0   max gamma over all levels and all posets=0.500000
       truth/bound over the 62 posets with |L(P)|>=2:  min=1.0000  median=1.6000  max=1.8127
-      [1.2s]
+      [3.3s]
 n=6  posets=318   (LG) violations=0   max gamma over all levels and all posets=0.500000
       truth/bound over the 317 posets with |L(P)|>=2:  min=1.0000  median=2.3290  max=2.6204
-      [80.9s]
+      [238.0s]
 
 gamma_i is bounded by 1/2 on the whole population: True
 posets attaining gamma_i = 1/2 at some level: 373 of 404
-posets with every gamma_i < 1/2: 29  (tags: 0<1 0<2; 0<1 1<2; 0<2 1<2; 0<1 1<2 1<3; 0<1 1<2 2<3; 0<1 0<2 1<3 2<3; 0<2 1<2 2<3; 0<2 0<3 1<2 1<3; 0<1 1<2 2<3 2<4; 0<1 1<2 2<3 3<4; 0<1 1<2 1<3 2<4 3<4; 0<1 0<2 1<3 2<3 3<4)
+posets with every gamma_i < 1/2: 29  (all 29 tags: 0<1 0<2; 0<1 1<2; 0<2 1<2; 0<1 1<2 1<3; 0<1 1<2 2<3; 0<1 0<2 1<3 2<3; 0<2 1<2 2<3; 0<2 0<3 1<2 1<3; 0<1 1<2 2<3 2<4; 0<1 1<2 2<3 3<4; 0<1 1<2 1<3 2<4 3<4; 0<1 0<2 1<3 2<3 3<4; 0<1 0<2 1<3 1<4 2<3 2<4; 0<2 1<2 2<3 3<4; 0<2 1<2 2<3 2<4; 0<2 0<3 1<2 1<3 2<4 3<4; 0<1 1<2 2<3 3<4 3<5; 0<1 1<2 2<3 3<4 4<5; 0<1 1<2 2<3 2<4 3<5 4<5; 0<1 1<2 1<3 2<4 3<4 4<5; 0<1 1<2 1<3 2<4 2<5 3<4 3<5; 0<1 0<2 1<3 2<3 3<4 4<5; 0<1 0<2 1<3 2<3 3<4 3<5; 0<1 0<2 1<3 1<4 2<3 2<4 3<5 4<5; 0<2 1<2 2<3 3<4 4<5; 0<2 1<2 2<3 3<4 3<5; 0<2 1<2 2<3 2<4 3<5 4<5; 0<2 0<3 1<2 1<3 2<4 3<4 4<5; 0<2 0<3 1<2 1<3 2<4 2<5 3<4 3<5)
 
 ==============================================================================
 B. THE ANTICHAIN FAMILY -- the bound decays geometrically, the truth
@@ -36,8 +36,10 @@ B. THE ANTICHAIN FAMILY -- the bound decays geometrically, the truth
    4  0.500,0.500                        0.500000   0.585786     1.17
    5  0.500,0.500,0.500                  0.250000   0.381966     1.53
    6  0.500,0.500,0.500,0.500            0.125000   0.267949     2.14
-  ... extrapolating gamma_i = 1/2 at every level (observed n<=6,
-      and proved for the top level: the braid hexagon):
+  ... gamma_i >= 1/2 at every level is PROVEN for A_n, every n>=3
+      (Theorem G, n-free; identity exact to A_12).  The equality
+      gamma_i = 1/2 is by computation (A_3..A_9).  So each bound
+      below is a PROVEN UPPER bound, printed at its equality value:
    8  (1/2 at all  6 levels)               3.125e-02   0.152241        4.9
   12  (1/2 at all 10 levels)               1.953e-03   0.068148       34.9
   20  (1/2 at all 18 levels)               7.629e-06   0.024623     3227.4

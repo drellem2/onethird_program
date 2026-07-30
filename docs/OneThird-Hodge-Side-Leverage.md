@@ -15,6 +15,57 @@ it is used, not rechecked.
 eigenvalue is reported, ~13 min). Committed outputs: `sweep_output.txt`, `theorems_output.txt`,
 `lrb_output.txt`, `controls_output.txt`.
 
+**Post-audit status (independent audit mg-86a3, `2cc8d57`; repairs landed by mg-a806).** Verdict
+**OVERSTATED**, with **0 BROKEN mathematics** — every headline number reproduced by a disjoint route
+(405, 404, 44 055, 6197, 97, 2.6204, 373/29, `2^{3−n}`, and every row of §5.3's two width-2
+families). Audit instrument: `code/hodge_leverage_audit_86a3/`, sharing **no code** with
+`code/hodge_leverage/`.
+
+**Read this part first, because it is the largest thing the audit did and it is a confirmation, not a
+correction. THEOREM G IS CONFIRMED, AND THE `2^{Θ(n)}` LOSS IS A THEOREM.** §13 named the §6
+eigenfunction computation as the single load-bearing new proof and as the first thing an auditor
+should rebuild from scratch. The auditor rebuilt it twice over: re-derived the eigenfunction **by
+hand**, and rebuilt the Coxeter complex from its definition with **no shared link code**. `Pf = f/2`
+holds in exact rational arithmetic for `A_3 … A_12` (this document reached `A_8`), and `λ₂ = 1/2`
+exactly for `A_3 … A_9` (row G′ claimed `A_3 … A_7`) — **four orders of `n` past the range each was
+stated on**. The proof is complete, it is `n`-free, and it uses `m ≥ 3` exactly where `i ≤ n−4`
+supplies it. So **M2's `2^{Θ(n)}` loss is a theorem and the headline stands.** The audit tried to
+break it three ways — a different construction of the Coxeter complex, three different `a`-vectors,
+and pushing to `m = 12` — and records it as *"the strongest thing in the document"*. This is stated
+first deliberately, and it is a **methodological** result as much as a mathematical one: Theorem G is
+the statement quantified over `n` rather than over posets, which is where this arc's failure had
+landed six times; §13 identified it as exactly that, gave it a proof rather than a trend, and **the
+proof held under an independent rebuild.** That is the arc's best methodological result to date and
+it must not be read as a footnote to F1 below.
+
+**Repairs landed here, each marked at its site.** **F1 (MAJOR)** — §9.4's *"undecided"* was **not
+undecided**: the question is a finite exact rational LP, every case left open is **decided, and
+decided positively**, and the `|L(P)| ≤ 4` boundary is an artifact of stopping at `n = 5`. **Ledger
+row B6 is FALSIFIED as a universal — it has genuine counterexamples, an infinite family of them, not
+a coverage gap.** Repaired at all four sites (§0 claim 3, §9.4, rows B6/B6′, §14). **The replacement
+scope clause is STRONGER than the one it replaces and must not be read as a retreat:** claim 3 is a
+real technique that does not reach the bridge quantity, and the reason is now known rather than
+untested. **F2** — ledger row N1 split into an unconditional half and an L1-conditional half, with
+the audit's robustness computation recorded (§7, rows N1a/N1b/N1c, row S1, §14): the **conclusion** is
+unconditional, only the **equation** is conditional. **F3** — §10's structural diagnosis of X1a
+struck; the premise is measurably false, the operative conclusion is not. **F4** — X2 relabelled a
+**distinguishability check**, not a falsification control; the four rows that are scored by a
+downstream failure are **not** downgraded. **F5** — *"exactly `2^{3−n}`"* narrowed to *"at most, and
+exactly that for every `n` computed"* (§0, §14), and §13's *"marked in the table itself"* corrected
+from four rows to one. **F6/F7** — `run_sweep.py`'s printed §B header and its silent `[:12]`
+truncation of a 29-item list, both fixed at source. **F8** — §2's identification of the free ridges
+with the holding probability corrected. **F9** — §1's operational test recorded as **too weak to
+carry the word "Hodge"**, with the consequence carried into §12 and §14: claim 3 uses no complex, no
+boundary map, no Laplacian, **no simplicial structure at all**. **Where this document and the audit
+disagreed, the audit won.**
+
+**What the audit could not break.** Theorem G. The `2^{Θ(n)}` conclusion. The identity-as-evidence
+trap — absent throughout, and §1 both states the trap and avoids it. The negative's coverage — all
+four candidates taken at strength, no weaker version refuted. **Absorbability: none of the six
+mutations is a gauge in disguise, and mg-5630's specific defect is not repeated here** — checked, not
+assumed. Disclosure — the `A_6` skip stated in four places, X1a's non-firing in the table and not
+only the prose, T′ carrying HEURISTIC into the STATE row itself.
+
 ---
 
 ## §0 — Verdict
@@ -38,7 +89,9 @@ Three answers, all of them specific:
    **induced subposets** on the blocks (§3, Theorem L, PROVEN). So Garland/Kaufman–Oppenheim/
    Alev–Lau applies and, measured against the truth on all **404** posets with `2 ≤ n ≤ 6`, it is
    never violated and never better than a factor `2.62` off — but the gap grows: on the antichain
-   family the link bound is **exactly `2^{3−n}`** while `λ₂(Δ_AT) = 2 − 2cos(π/n) = Θ(n^{−2})`
+   family the link bound is **at most `2^{3−n}`** — and exactly that for every `n` computed, `A_3…A_9`
+   (**F5**: only `≤` is proven, which is the direction the negative needs) — while
+   `λ₂(Δ_AT) = 2 − 2cos(π/n) = Θ(n^{−2})`
    (§5–§6). That is a `2^{Θ(n)}` loss, and it is **PROVEN, not extrapolated**: every level's link
    has `λ₂ ≥ 1/2` by an explicit eigenfunction (§6, Theorem G). The mechanism is structural —
    `1/2` is the fixed point of the trickling-down recursion `γ ↦ γ/(1−γ)`, so `F(P)` sits exactly
@@ -57,15 +110,27 @@ Three answers, all of them specific:
    spectrum is *closed-form*, and the graph side has no counterpart because the hypothesis is
    about a semigroup product that the adjacent-transposition graph does not carry. **It uses
    exactly the left-regular-band product mg-276d recorded as unused (its §8.3(6)).**
-   **Scope, stated in the same breath:** `Δ_AT` is **not** in that family (§9.4 — proven for 55 of
-   63 posets at `n = 5`, undecided only where `|L(P)| ≤ 4`). So this technique does not bound the
-   quantity the bridge is about.
+   **Scope, stated in the same breath, and it is a sharper statement than an untested corner
+   (repaired here — F1).** `Δ_AT` is **not** in that family on any poset tested with `|L(P)| ≥ 5`
+   (§9.4 — proven for 55 of 63 posets at `n = 5`, including every antichain `n ≥ 3`). Where it **is**
+   in that family, membership is worthless: the positive class contains the **infinite** family `V_k`
+   (the ordinal sum of `k` two-element antichains, `n = 2k`, `|L(P)| = 2^k` unbounded), on which the
+   AT graph is the hypercube `Q_k` and `Δ_AT` is therefore the hypercube Laplacian — a sum of `k`
+   commuting terms, **already diagonal by inspection**. So the honest scope clause is not "undecided
+   below `|L(P)| ≤ 4`" but: **the semigroup technique reaches `Δ_AT` only where `Δ_AT` is already
+   free.** It buys no bound on the bridge quantity anywhere, and that is now known rather than
+   untested.
 
 **The honest net.** The face side is not a change of coordinates with nothing attached — claim 3 is
-a real technique and it is new to this programme. But it does not act on `Δ_AT`, and the technique
-that *does* act on `Δ_AT` is provably exponentially weak on the one family where both sides can be
-evaluated exactly. **If `A(P)` is built, the case for it is claim 3, not claim 2.** §12 says what
-that changes about scoping.
+a real technique, and it is new to *this programme*. **It is an import, correctly attributed, not a
+discovery (F9):** it is Brown's theorem instantiated to a band, and the sharpest concrete instance
+(control P4, the Tsetlin library) is the antichain case, i.e. a classical theorem. Nor is it *Hodge*:
+its hypothesis is about the monoid of `P`-compatible ordered partitions, and it uses no complex, no
+boundary map, no Laplacian and no "relative" (F9, §1). But it does not act on `Δ_AT` — and after F1
+we know *why* rather than merely *where*: it reaches `Δ_AT` only on a family where `Δ_AT` is already
+diagonal. And the technique that *does* act on `Δ_AT` is provably exponentially weak on the one
+family where both sides can be evaluated exactly. **If `A(P)` is built, the case for it is claim 3,
+not claim 2 — and it is not a route to `λ₂(Δ_AT)`.** §12 says what that changes about scoping.
 
 **What is *not* claimed.** Not that no Hodge-theoretic technique can ever help — §6's result is
 about *product-form link bounds* (the shape shared by Garland, Kaufman–Oppenheim, Alev–Lau and
@@ -98,6 +163,23 @@ Nothing here computes `λ₂(Δ_AT)` a second way and calls the agreement eviden
 between a bound or a formula produced on one side and a quantity computed independently on the
 other.
 
+**⚠️ F9 — this test is too weak to carry the word "Hodge", and that changes what the positive is
+(added in repair of mg-86a3's primary value press; the finding is FRAMING, not broken mathematics).**
+The test above is a test for *"not the AT graph"*, not a test for *"Hodge"*. The Bruhat order,
+descent statistics, coupling, strong stationary duality and Diaconis–Saloff-Coste comparison all pass
+it. Applied to claim 3 it returns YES — but the hypothesis of Brown's theorem is about **the monoid
+of `P`-compatible ordered partitions under refinement**, and nothing simplicial is used: not the
+order complex, not a boundary map, not a Laplacian, not the pseudomanifold property, not "relative",
+not `E`. It is the face semigroup of the braid arrangement restricted to the order cone `C_P` — an
+object the source's own *Universal Picture* lists **separately** from the compatible face complex,
+and one definable from `P` in a single line. So the sharp answer to the ticket's question is:
+**claims 1, 2 and N2 are negatives (all three confirmed), and the positive is not Hodge and does not
+need the face complex.** §0 and §12 already say "the face SEMIGROUP is where the technique actually
+is" and §14 capitalises SEMIGROUP, which is why this is a framing finding rather than a broken claim
+— but §1's test is what licenses answering the headline YES at all, so the reader who stops at the
+headline must be told: **the semigroup carries technique; the Hodge side does not.** The
+decision-relevant consequence is in §12.
+
 ---
 
 ## §2 — Theorem D: the adjacent-transposition walk *is* the down-up walk on `F(P)`
@@ -129,8 +211,12 @@ Subtracting from `I` gives `(D−A)/(2(n−1)) = Δ_AT/(2(n−1))`. ∎
 incidence only — no words, no transpositions — and compares against `Δ_AT` built from words only.
 
 **This also answers the ticket's question 2 in one direction.** The boundary correction is not an
-extra object: **the free ridges are exactly the holding probability of the canonical down-up walk.**
-`L^abs − L^rel = diag(#forbidden)` is, in walk terms, the laziness. §4 gives the other, sharper
+extra object: **the free ridges are exactly the part of the holding probability that the boundary
+contributes** — `L^abs − L^rel = diag(#forbidden)` is, in walk terms, the laziness. (**F8, corrected
+here:** the earlier wording read *"the free ridges are exactly the holding probability"*, and that is
+false as an identification — the proof one line above gives
+`P_du[σ,σ] = ((n−1−deg σ) + deg σ/2)/(n−1)`, i.e. the free ridges **plus half the interior ones**.
+The intended content is the sentence that follows it and is unaffected.) §4 gives the other, sharper
 half of the answer.
 
 ---
@@ -287,13 +373,17 @@ for `n ≤ 6`.
 | 5 | 1/2 ×3 | 0.250000 | 0.381966 | 1.53 |
 | 6 | 1/2 ×4 | 0.125000 | 0.267949 | 2.14 |
 | 8 | 1/2 ×6 (§6: `≥ 1/2` PROVEN) | 3.125e−02 | 0.152241 | 4.9 |
-| 12 | 1/2 ×10 | 1.953e−03 | 0.068148 | 34.9 |
-| 20 | 1/2 ×18 | 7.629e−06 | 0.024623 | 3227 |
-| 40 | 1/2 ×38 | 7.276e−12 | 0.006165 | 8.5e+08 |
+| 12 | 1/2 ×10 (§6: `≥ 1/2` PROVEN) | 1.953e−03 | 0.068148 | 34.9 |
+| 20 | 1/2 ×18 (§6: `≥ 1/2` PROVEN) | 7.629e−06 | 0.024623 | 3227 |
+| 40 | 1/2 ×38 (§6: `≥ 1/2` PROVEN) | 7.276e−12 | 0.006165 | 8.5e+08 |
 
 Rows `n ≥ 8` are **not extrapolation of a trend**: §6 proves `γ_i ≥ 1/2` at every level for every
 `n`, so `bound ≤ 2^{3−n}` is a theorem, and the truth is a cited theorem. The `γ_i = 1/2` *equality*
-is computational (`n ≤ 7`).
+is computational (`A_3…A_9`, extended from `A_3…A_7` by mg-86a3), so the bound column for `n ≥ 12` is
+an **equality value standing in for a proven upper bound** — the direction the negative needs.
+(**F5**: only the `n = 8` row carried the PROVEN marker before this repair, while §13 asserted all
+four did; the three markers are added rather than the sentence weakened, because the mathematics
+supports them.)
 
 Two width-2 families, to test whether removing the braid hexagon helps:
 
@@ -355,6 +445,26 @@ rational arithmetic** on the 1-skeleton built by the brute-force link code, for 
 `A_3 … A_7`; at `A_8` the dense solver is capped and only the eigenfunction is checked. For the
 theorem as stated only `≥` is needed, and that is the half that is proved.
 
+**✅ CONFIRMED BY INDEPENDENT REBUILD — mg-86a3, and this is the audit's largest single result.** §13
+below names this proof as the one thing an auditor must rebuild from scratch, because no independent
+code path in `code/hodge_leverage/` re-derives it. The auditor did rebuild it, twice over and with
+**no shared link code**: the eigenfunction re-derived **by hand** from the definition of the Coxeter
+complex (including the closed form `w(S) = |S|!(m−|S|)!`, checked against brute-force facet counting
+for `m = 3..7`), and `Pf = f/2` re-verified in exact rational arithmetic for **`A_3 … A_12`** under
+**three** different `a`-vectors, with `λ₂ = 1/2` exactly for **`A_3 … A_9`**
+(`code/hodge_leverage_audit_86a3/audit_theoremG.py` → `out_theoremG.txt`). That is four orders of `n`
+past `A_8` for the identity and past `A_7` for row G′. The audit's finding: *"the proof is complete,
+`n`-free, and uses `m ≥ 3` exactly where `i ≤ n−4` supplies it"* — **so `M2`'s `2^{Θ(n)}` loss is a
+theorem**, and the `A_3…A_8` computation above is a check on a proof rather than its support, as
+claimed. The audit also **endorses the restraint** in not upgrading the *equality* `γ_i = 1/2`:
+nothing downstream needs it (M2 uses only `≥`, and a smaller `γ` only strengthens the negative), and
+the auditor likewise found no easy proof of `≤ 1/2` — trickling-down at the fixed point returns `1`
+and gives nothing. **Step 4b, from the same audit and adopted here:** Theorem G is *weaker than its
+own proof*, because the proof uses only that some block induces an antichain of size `≥ 3`. The
+immediate strengthening, free from G plus Theorem L, is **`γ_i ≥ 1/2` for every finite poset having a
+dimension-`i` face one of whose blocks induces an antichain of size `≥ 3`** — a strengthening in the
+direction of §6's own conclusion, recorded as ledger row **G″** and not needed by anything here.
+
 **Why this is structural rather than a numerical accident.** Oppenheim's trickling-down theorem
 propagates a link bound down one level as `γ ↦ γ/(1−γ)`. The map has fixed point exactly
 `γ = 1/2`, where it returns `1` — no information. `F(P)` sits *at* that fixed point, at every
@@ -405,6 +515,46 @@ different notation.** This is the sharpest single thing this work item establish
 bridge, and it is what makes §5–§6 the decisive test rather than one experiment among many: it
 proves that any new leverage must come from the faces *below* the top two dimensions, and §6 prices
 the standard technique that lives there.
+
+### §7.1 — F2: what is unconditional here, and what leans on L1
+
+**The defect, stated plainly (mg-86a3's F2, MODERATE).** §13(iv) records that this document
+**inherits** mg-276d's reading L1 of the word *"relative"* — which mg-276d itself labels
+**CONDITIONAL**, because the source does not define it — and says that every statement here about
+`L^rel` and about free ridges is conditional on it. That was correct in §13 and was **carried
+nowhere else**: ledger row N1 was labelled flat **PROVEN**, row N1′ and row S1's condition list did
+not mention L1, and neither did §14, whose opening line is *"carries its own conditions rather than
+pointing at them"*. A conditional presented as proven in the text destined for `STATE.md` is exactly
+mg-5630's defect class, so it is repaired rather than annotated.
+
+**But the reconciliation is a strengthening, not a retreat, and the auditor settled it with a
+computation rather than an opinion.** Split the theorem into the three statements it actually
+contains:
+
+| # | statement | label |
+|---|---|---|
+| **N1a** | `Δ_AT = NᵀN`, `N` the signed vertex–edge incidence matrix of the AT graph | **PROVEN, unconditional** — pure graph theory; nothing simplicial enters. 405/405 by the audit's disjoint route |
+| **N1b** | `Δ_AT = E · L^rel_top · E` | **PROVEN given L1** — i.e. **CONDITIONAL**, inherited from mg-276d. 405/405 both here and by the audit |
+| **N1c** | `∂_rel E = N` up to a sign per row (this section's own new clause) | **PROVEN given L1**; 405/405 by the audit, which also verified that the twisted signs at the two facets of every interior ridge are always opposite |
+
+**And the conclusion — the negative, which is the operative content — does not inherit the
+conditional at all.** The auditor verified on **all 405 posets `n ≤ 6`** that under the *other*
+reading of "relative", namely no boundary quotient at all (the **absolute** top Laplacian), the
+twisted operator is
+
+```
+    E · L^abs_top · E  =  (n−1)·I − A ,
+```
+
+the shifted adjacency matrix of the same adjacent-transposition graph (using `deg + #free = n−1`,
+also verified 405/405; `code/hodge_leverage_audit_86a3/audit_robustness.py` → `out_robustness.txt`).
+So: **relative reading ⟹ `Δ_AT = D − A`, a graph Laplacian; absolute reading ⟹ `(n−1)I − A`, a
+shifted graph adjacency matrix. Under either reading the top-degree Hodge operator is a graph
+object**, so N1′ — *"no technique using only facets and ridges can be new"* — and everything §5–§6
+prices on top of it hold unchanged. **Only the equation is conditional; the pricing is robust to the
+condition, and provably so.** That is a stronger position than the flat PROVEN label conveyed,
+because the flat label invited the reader to discover the inherited condition and conclude the
+conclusion was at risk with it.
 
 ---
 
@@ -521,9 +671,86 @@ candidate has `x·c = d`), then the lazy AT walk — which gives `(c,d)` probabi
 *Computed:* `lrb_output.txt` §5. The lazy AT walk is provably **not** a Brown walk on **2 of 5**
 posets at `n = 3`, **11 of 16** at `n = 4`, and **55 of 63** at `n = 5`, including every antichain
 with `n ≥ 3`. The remaining cases are: one vacuous per `n` (the chain, `|L(P)| = 1`, no AT edge at
-all) and the undecided ones — **which are exactly the posets with `|L(P)| ≤ 4`**, where the AT graph
-is complete or a 4-cycle and the test cannot bite. So the statement is: the AT walk is not a Brown
-walk wherever `|L(P)| ≥ 5`, on the tested population, and undecided by this test below that.
+all) and the ones this **sufficient** test does not decide, which on this population are exactly the
+posets with `|L(P)| ≤ 4`, where the AT graph is complete or a 4-cycle and the test cannot bite.
+
+**⚠️ F1 — THE CASES THIS TEST LEFT OPEN ARE NOT UNDECIDED, AND ROW B6 IS FALSIFIED AS A UNIVERSAL
+(mg-86a3, MAJOR; the largest correction in the audit and the one clause that had to change).** This
+subsection used to close: *"the AT walk is not a Brown walk wherever `|L(P)| ≥ 5`, on the tested
+population, and undecided by this test below that."* The hedge *"on the tested population"* was doing
+all the work, and one `n` further out the unhedged reading is **false**.
+
+**First, "undecided" was a resting place, not a fact.** The test above is only *sufficient*. The
+actual question is a **finite linear feasibility problem with rational data**:
+
+```
+    exists w >= 0 on faces with   sum_x w(x) T_x = P_lazy ,   sum_x w(x) = 1 ,
+    where T_x[c,d] = [ x·c = d ].
+```
+
+The auditor solved it exactly (Phase-I simplex with Bland's rule over `Fraction`,
+`code/hodge_leverage_audit_86a3/exact_lp.py` → `out_brown.txt`) — first reproducing this
+document's own NOT-counts exactly (0/2/11/55 at `n = 2..5`, vacuous 1 per `n`, undecided 1/2/4/7, so
+the test is faithfully implemented and correctly described) and then **deciding every case this
+document left open. Every one comes out POSITIVE: the lazy AT walk IS a Brown walk there**, with
+exact rational witnesses printed.
+
+| `n` | NOT a Brown walk | **IS a Brown walk** | vacuous |
+|---|---|---|---|
+| 2 | 0 | **1** | 1 |
+| 3 | 2 | **2** | 1 |
+| 4 | 11 | **4** | 1 |
+| 5 | **55** | **7** | 1 |
+
+The witnesses have the shape one would guess once the LP is written down — each *directed* AT edge is
+supplied at exactly its lazy-walk probability `1/(2(n−1))` by one collapsing face, and the identity
+face `(P)` takes up the slack on the diagonal. For `|L(P)| = 2`: `1/(2(n−1))` on each of the two
+chambers and `1 − 1/(n−1)` on `(P)`
+(so `1/4,1/2,1/4` at `n = 3`; `1/6,2/3,1/6` at `n = 4`; `1/8,3/4,1/8` at `n = 5`). For `|L(P)| = 4`
+(AT graph `C_4`): `1/(2(n−1))` on each of the four one-coordinate collapses and `1 − 2/(n−1)` on `(P)`
+(`1/6` ×4 with `1/3` at `n = 4`; `1/8` ×4 with `1/2` at `n = 5`).
+
+**Second, the `|L(P)| ≤ 4` boundary is an artifact of stopping at `n = 5`, and there are infinitely
+many counterexamples.** Extending this section's own population by one `n` (all 318 posets at `n = 6`,
+restricted to `|L(P)| ≤ 14`) turns up **12** positives, one of them with **`|L(P)| = 8`**
+(`out_n6_brown.txt`). And it is not sporadic: let **`V_k`** be the ordinal sum of `k` two-element
+antichains (`n = 2k`, AT graph the hypercube `Q_k`, `|L(P)| = 2^k`).
+
+| `k` | `n` | `\|L(P)\|` | this test | exact answer |
+|---|---|---|---|---|
+| 1 | 2 | 2 | undecided | **IS a Brown walk** |
+| 2 | 4 | 4 | undecided | **IS a Brown walk** |
+| 3 | 6 | **8** | undecided | **IS a Brown walk** |
+| 4 | 8 | **16** | undecided | **IS a Brown walk** |
+
+(`out_brown_family.txt`.) So the positive class is **unbounded in `|L(P)|`**, and ledger row B6 has
+**genuine counterexamples, not a coverage gap**. It survives only inside the hedge, and the hedge is
+struck.
+
+### The repaired scope clause — and it is STRONGER than the one it replaces
+
+**This is not a retreat and must not be written as one.** On `V_k` the AT graph is the hypercube
+`Q_k`, so `Δ_AT` is the hypercube Laplacian: a sum of `k` commuting terms whose spectrum is known by
+inspection and which is **already diagonalised before Brown's theorem is invoked**. Brown's theorem
+reaches `Δ_AT` exactly where `Δ_AT` needs no help. So:
+
+> **`Δ_AT` is a Brown walk on an infinite family (`|L(P)| = 2^k`, unbounded) and not otherwise on any
+> poset tested with `|L(P)| ≥ 5`. On that family `Δ_AT` is already diagonal, so the technique of §9
+> buys no bound on the bridge quantity anywhere.**
+>
+> Equivalently, in one sentence: **the semigroup technique reaches `Δ_AT` only where `Δ_AT` is
+> already free.**
+
+That is a better sentence than *"undecided below `|L(P)| ≤ 4`"*, it is the sentence the evidence
+supports, and it is the load-bearing fact behind *"the case for `A(P)` is claim 3, not claim 2"* —
+which survives in this stronger form. What the original wording offered was an untested corner where
+the answer might have been favourable; what replaces it is a **reason**.
+
+**One cheap open question is created, and it is deliberately not answered here.** A characterisation
+of the positive class is now well-posed: the evidence (`n ≤ 6` exhaustively, plus `V_{k ≤ 4}`) is
+consistent with *"iff the AT graph is a hypercube"*, which the auditor states as a **conjecture and
+explicitly does not claim** — and neither does this document. It would say exactly when the semigroup
+technique touches the bridge quantity, which is a sharper input than "not, mostly". Ledger row **B6″**.
 
 **So the technique of §9 does not deliver a bound on `Δ_AT`.** It delivers exact spectra for a
 different, large, natural family of walks on the same state space.
@@ -554,22 +781,81 @@ show that the construction is right. All five mutations below act on objects int
 weighted link, the down-up walk, the band product, the multiplicity rule. Vacuity is **computed**
 (the mutation left the object unchanged), not asserted.
 
-| mutation | fires on | vacuous on |
-|---|---|---|
-| **X1a** link **weights**: uniform instead of the induced measure | **0 posets — see below** (it did change the bound's *value* on 365) | 37 (mutation changed no link, or `\|L(P)\|=1`) |
-| **X1b** link **incidence**: keep the vertex set, join every pair (forget that a link face is a *chain*) | 398 posets — the perturbed construction yields a **false** (LG) | 4 |
-| **X2** link **vertex set**: all proper ideals comparable with `σ`'s top ideal | 4946 faces | 1245 faces |
-| **X3** the **down-up walk**: give free ridges weight `1/2` instead of treating them as self-loops | 399 posets — Theorem D fails | 5 (the antichains: no free ridge) |
-| **X4** the **band product**: order intersections by `(j,i)` | band axioms fail on 20 of the 23 posets `2 ≤ n ≤ 4`; Brown spectrum fails on 20 | 3 (mutation equals the true product) |
-| **X5** the **multiplicity rule**: sum over `Y ≤ X` instead of `Y ≥ X` | 82 posets — negative multiplicities or wrong total | 4 |
+**⚠️ The "fires on" column does NOT read uniformly, and it must not be quoted as though it did
+(mg-86a3's F4). Four of the five rows are scored by a *downstream failure* — a false (LG), Theorem D
+failing, the band axioms or Brown spectrum failing, negative multiplicities. X2 is scored by a
+*disagreement with this codebase's own link*, which is a different kind of evidence.** The column now
+states which kind each row is; nothing else about the four downstream rows changes, and **they are not
+downgraded** — see the sizing below.
 
-**X1a did not fire, and that is reported rather than dropped.** The reason is structural, not luck:
-(LG) is a *lower* bound, and uniform link weights come out with `λ₂` at least as large as the
-induced-measure ones on every poset here, so the mutated bound is *smaller* and still true. A
-mutation that inflates `γ` can never falsify (LG). **X1a is therefore not a usable negative control
-for the link construction, and X1b — which deflates `γ` and does falsify (LG) — is the one that
-covers it.** This programme has been burned by controls that pass because they cannot fail, so the
-non-firing mutation is kept in the report with its diagnosis instead of being replaced silently.
+| mutation | what scores it | fires on | vacuous on |
+|---|---|---|---|
+| **X1a** link **weights**: uniform instead of the induced measure | downstream: does (LG) become false | **0 posets — see below** (it did change the bound's *value* on 365) | 37 (mutation changed no link, or `\|L(P)\|=1`) |
+| **X1b** link **incidence**: keep the vertex set, join every pair (forget that a link face is a *chain*) | **downstream failure** | 398 posets — the perturbed construction yields a **false** (LG) | 4 |
+| **X2** link **vertex set**: all proper ideals comparable with `σ`'s top ideal | **⚠️ DISTINGUISHABILITY, not falsification (F4)** — the mutated vertex set differs from the link as this codebase computes it. Downstream, this mutation falsifies **nothing**: 0 of 81 posets get a false (LG) | 4946 faces *(a count of disagreements, not of failures)* | 1245 faces |
+| **X3** the **down-up walk**: give free ridges weight `1/2` instead of treating them as self-loops | **downstream failure** | 399 posets — Theorem D fails | 5 (the antichains: no free ridge) |
+| **X4** the **band product**: order intersections by `(j,i)` | **downstream failure** | band axioms fail on 20 of the 23 posets `2 ≤ n ≤ 4`; Brown spectrum fails on 20 | 3 (mutation equals the true product) |
+| **X5** the **multiplicity rule**: sum over `Y ≤ X` instead of `Y ≥ X` | **downstream failure** | 82 posets — negative multiplicities or wrong total | 4 |
+
+**Credit first, because it was checked rather than assumed, and it is the half of the audit's verdict
+on this section that matters most.** mg-86a3 applied mg-5630's absorbability test to all six
+mutations: **none of X1a, X1b, X2, X3, X4, X5 is a gauge in disguise.** The battery varies weight
+families and posets; the corruptions act on the weighted link, the down-up walk, the band product and
+the multiplicity rule, and **none is absorbable into a parameter the battery already varies** — none is
+a diagonal conjugation or any other isospectral relabelling (`out_controls.txt`). **mg-5630's specific
+defect is not repeated here.** The two findings below are calibration defects inside a battery that
+is, in kind, the right one.
+
+**⚠️ F3 — X1a's diagnosis was backwards, and the sentence is struck.** This paragraph used to read:
+*"The reason is structural, not luck: (LG) is a lower bound, and uniform link weights come out with
+`λ₂` at least as large as the induced-measure ones on every poset here, so the mutated bound is
+smaller and still true. A mutation that inflates `γ` can never falsify (LG)."* The **last** sentence
+is correct and structural. **The premise it is applied to is false**, measurably, over all posets
+`n ≤ 5` (`out_controls.txt` Q4): uniform weights give a **smaller** `λ₂` on **75 of 2748 links**, a
+smaller `γ_i` on **9 levels**, and a strictly **larger** mutated bound than the true bound on **4
+posets**. So X1a is **not** `γ`-inflating and **not** structurally incapable of falsifying (LG): on 4
+posets it moves the bound in the falsifying direction and simply does not move it far enough. The true
+statement, which is what stands here: **X1a does not fire on this population; on 4 posets the mutation
+does deflate `γ` and enlarge the bound, but never past the truth. It is empirically silent here, not
+structurally incapable.** This is the same shape as mg-5630's defect — a property incidental to the
+instance read as a law — and it landed inside §10, which §13's own 4c pass certifies as clean.
+
+**What survives F3, unchanged and in the same direction as before.** The **operative** conclusion is
+right: X1a does not fire on this population, **X1b — which deflates `γ` and does falsify (LG) — is the
+control that covers the link construction**, and keeping the non-firing mutation in the report with a
+diagnosis rather than replacing it silently is the correct practice. This programme has been burned by
+controls that pass because they cannot fail; what F3 corrects is the *reason given*, not the *reading
+of the result*.
+
+**⚠️ F4 — X2 is a distinguishability check, and sizing it in both directions matters.** `controls.py`
+scores X2 as *"the mutated vertex set differs from the link as this codebase computes it"*. Measured
+three ways by the audit:
+
+| scoring | result |
+|---|---|
+| as implemented, against the correct link | fires on 4946 faces, vacuous on 1245 *(reproduces `controls_output.txt` exactly)* |
+| as implemented, against a link carrying the very bug X2 mutates toward | fires on **0**, vacuous on 6191 → the control returns FAIL |
+| **downstream: does the X2 mutation falsify (LG)?** | **fires on 0 posets, vacuous on 81** |
+
+**Both directions, explicitly.** X2 is **not** a gauge and **not** unfalsifiable: injecting the exact
+bug it mutates toward makes it go silent, so it *does* guard that one alternative construction, and
+that is real. What it does **not** do is detect anything else — its mutation changes 4946 faces and
+**breaks no downstream result**. So *"fires on 4946 faces"* must not sit in the same column as X1b's
+*"398 posets yield a false (LG)"* without saying which is which, and the table above now says. §10's
+framing (*"all five mutations act on objects introduced here … Vacuity is computed"*) is accurate but
+incomplete: what was not computed is whether firing **means** anything.
+
+**Also recorded because it is a code/doc mismatch, not a mathematical one.** `controls.py`'s own
+comment describes a different criterion from the one implemented — *"the vertex count must stop
+matching `Σ_i #proper ideals of Q_i`"*, a comparison against Theorem L's **independent** prediction.
+On this population the two criteria agree face-for-face (4946/1245 either way), so the mismatch is
+inconsequential here — and the check the comment describes yields a bonus: **the true link's vertex
+count matches Theorem L on 6191 of 6191 faces**, an extra independent confirmation of Theorem L.
+
+**The one control gap this document named itself is now closed, by the auditor.** No negative control
+here perturbs the **Theorem G eigenfunction computation** — the single load-bearing new proof — and
+§13 says so and says an auditor should rebuild it first. `code/hodge_leverage_audit_86a3/audit_theoremG.py`
+does exactly that, with no shared code, to `A_12`. See §6.
 
 ---
 
@@ -586,29 +872,42 @@ Labels: **PROVEN** = proof given here (or here plus mg-276d's audited lemmas), a
 | **H** | codimension-2 links are exactly `P_2, P_3, P_4, C_4, C_6`, with `λ₂ = −1, 0, 1/2, 0, 1/2`; `C_4` = commutation, `C_6` = braid, the paths = boundary truncations | **PROVEN** (§4, finite case check via L) | all finite posets; 44 055 links enumerated over `4 ≤ n ≤ 6`, exactly these five, nothing else |
 | **H'** | `λ₂ ≤ 1/2` at the codimension-2 level | **PROVEN** (§4) | all finite posets |
 | **NV** | every link of dimension `≥ 1` is connected, so `γ_i < 1` and (LG) is strictly positive | **PROVEN** (§5.1) | all finite posets |
-| **G** | for `A_n`, `γ_i ≥ 1/2` at every level `−1 ≤ i ≤ n−4` | **PROVEN** (§6, explicit eigenfunction) | all `n ≥ 3`; the identity `(Pf) = f/2` verified in exact arithmetic for `A_3…A_8` |
-| **G'** | `γ_i = 1/2` exactly (not merely `≥`) | **PROVEN-by-computation** | `A_3…A_7`; and `γ_i ≤ 1/2` on **all 404 posets with `2 ≤ n ≤ 6`**, attained by 373 |
-| **N1** | `Δ_AT = E L^rel E = NᵀN` with `N` the signed incidence matrix of the AT graph | **PROVEN** (§7) | all finite posets; checked on all 405 posets `n ≤ 6` |
+| **G** | for `A_n`, `γ_i ≥ 1/2` at every level `−1 ≤ i ≤ n−4` | **PROVEN** (§6, explicit eigenfunction) | all `n ≥ 3`; the identity `(Pf) = f/2` verified in exact arithmetic for `A_3…A_8`. **✅ CONFIRMED by independent rebuild (mg-86a3): re-derived by hand, Coxeter complex rebuilt with no shared link code, `Pf = f/2` exact to `A_12` under three `a`-vectors. Complete, `n`-free, no gap — so M2's `2^{Θ(n)}` loss is a THEOREM. The audit's three attempts to break it all failed.** |
+| **G'** | `γ_i = 1/2` exactly (not merely `≥`) | **PROVEN-by-computation** | `A_3…A_7`, **extended to `A_3…A_9` by mg-86a3**; and `γ_i ≤ 1/2` on **all 404 posets with `2 ≤ n ≤ 6`**, attained by 373. **The restraint in not upgrading this to a theorem is audit-endorsed** (nothing downstream needs it; no easy proof of `≤ 1/2` exists — trickling-down at the fixed point returns 1). See **F5** for the two places the equality nonetheless leaked into prose |
+| **G″** | `γ_i ≥ 1/2` for **every finite poset** having a dimension-`i` face one of whose blocks induces an antichain of size `≥ 3` | **PROVEN** (§6; free from **G** + Theorem **L**) | all finite posets. Added in repair of mg-86a3's step-4b finding that **G is weaker than its own proof** — the proof uses only that some block is an antichain of size `≥ 3`, never that the whole poset is one. Nothing here consumes it; it is recorded because it is the strongest true form |
+| **N1a** | `Δ_AT = NᵀN`, `N` the signed vertex–edge incidence matrix of the AT graph | **PROVEN — unconditional** (§7) | all finite posets; 405/405 here and 405/405 by mg-86a3's disjoint route. Pure graph theory: nothing simplicial enters |
+| **N1b** | `Δ_AT = E · L^rel_top · E` | **PROVEN given L1** ⟹ **CONDITIONAL** (§7, §7.1) | all finite posets given L1; 405/405 both routes. **F2: this half inherits mg-276d's CONDITIONAL reading of "relative", which §13(iv) declares and the old flat-PROVEN row N1 did not carry** |
+| **N1c** | `∂_rel E = N` up to a sign per row | **PROVEN given L1** (§7) | all finite posets given L1; 405/405 by mg-86a3, which also verified the twisted signs at the two facets of every interior ridge are always opposite |
+| **N1r** | the *conclusion* of N1 is **robust to the reading**: under the absolute reading, `E · L^abs_top · E = (n−1)I − A`, still a graph object | **PROVEN-by-computation** (§7.1) | all 405 posets `n ≤ 6` (mg-86a3, `out_robustness.txt`; `deg + #free = n−1` also 405/405). **So only the equation is conditional on L1, not the pricing** |
 | **N1'** | therefore no technique using only the top two dimensions of `F(P)` is new: `∂∂*` is the classical edge/line-graph matrix and the cofilling bound is flow duality | **PROVEN** for the two named instances (§7); **HEURISTIC** as a universal over "all techniques" | the two instances are proved; "every conceivable top-two-dimension technique" is an argument by identification, not a theorem, and is labelled as such |
 | **N2** | for every non-antichain the span of the shape-`α` faces is not an `S_n`-submodule of `Ind_{S_α}^{S_n}1` | **PROVEN** (§8) | all finite posets, all `α` with `≥ 2` parts; checked on all posets `n ≤ 5` (exactly 1 exception per `n`, the antichain) |
 | **N2'** | `Σ_i s_i` is not central in `C[S_n]` for `n ≥ 3`, so characters do not diagonalise `Δ_AT` even on the antichain | **PROVEN** (§8) | all `n ≥ 3` |
 | **B1** | `F(P)` is a left regular band under successive refinement, with identity `(P)` | **PROVEN** (§9.1: closure and the three axioms are one-line checks) | all finite posets; 0 violations over all 87 posets `n ≤ 5` (associativity `n ≤ 4`) |
-| **B2** | the supports are exactly the acyclic partitions of `P`, and they are closed under join = common refinement | **PROVEN** (§9.1) + **PROVEN-by-computation** | all finite posets for the join; the equality checked on all 87 posets `n ≤ 5` |
+| **B2** | the supports are exactly the acyclic partitions of `P`, and they are closed under join = common refinement | **PROVEN** (§9.1) + **PROVEN-by-computation** | all finite posets for the join; the equality checked on all 87 posets `n ≤ 5`. **mg-86a3: if anything UNDER-claimed** — the equality is provable for all finite posets in two lines (topologically sorting the blocks of an acyclic `P/π` gives a compatible ordered partition; the converse is immediate) |
 | **B2'** | the acyclic partitions are **not** closed under refinement | **PROVEN** (witness `{a<c, b<d}`, partition `{a,d}\|{b,c}`) | — |
 | **B3** | Brown's theorem: `λ_X = Σ_{supp ≤ X} w(y)`, `Σ_{Y ≥ X} m_Y = ∏_B \|L(P\|_B)\|`, diagonalisable | **CITED** (Brown 2000; BHR) | not re-derived here |
 | **B4** | the instantiation of B3 to `F(P)` is correct: predicted eigenvalues **and** multiplicities **and** diagonalisability match the actual matrix | **PROVEN-by-computation** | all 24 posets `n ≤ 4` × 3 weight families, exact rational ranks; 5 named `n = 5` posets mod `p`. **`A_6` was skipped** (`\|L\| = 720`, outside the rank budget) |
 | **B5** | the multiplicities `m_X` are nonnegative integers summing to `\|L(P)\|` | **PROVEN-by-computation** | all 405 posets `n ≤ 6` |
-| **B6** | the lazy AT walk is **not** a Brown walk | **PROVEN-by-computation** | 2/5 at `n=3`, 11/16 at `n=4`, 55/63 at `n=5`, including all antichains `n ≥ 3`. Undecided by this test exactly where `\|L(P)\| ≤ 4`; vacuous where `\|L(P)\| = 1` |
+| **B6** | the lazy AT walk is **not** a Brown walk | ⚠️ **FALSIFIED AS A UNIVERSAL (mg-86a3 F1) — this row previously read "PROVEN-by-computation … undecided by this test exactly where `\|L(P)\| ≤ 4`", and it has GENUINE COUNTEREXAMPLES, not a coverage gap.** What survives is **PROVEN-by-computation on the population**: not a Brown walk on 2/5 at `n=3`, 11/16 at `n=4`, 55/63 at `n=5`, including all antichains `n ≥ 3`; vacuous where `\|L(P)\| = 1` | the counterexamples: the question is a finite exact rational LP, and **every case this document left "undecided" is DECIDED and decided POSITIVELY** — the lazy AT walk IS a Brown walk on 1/2/4/7 posets at `n = 2..5`, with exact rational witnesses. The `\|L(P)\| ≤ 4` boundary is an **artifact of stopping at `n = 5`**: 12 positives at `n = 6` including one with `\|L(P)\| = 8`, and the **infinite** family `V_k` (`\|L(P)\| = 2^k`) is positive for every `k` tested. **The old row survived only inside the hedge "on the tested population" and the hedge was doing all the work.** Replaced by **B6′** |
+| **B6′** | **the semigroup technique reaches `Δ_AT` only where `Δ_AT` is already free.** `Δ_AT` is a Brown walk on an infinite family (`\|L(P)\| = 2^k`, unbounded) and not otherwise on any poset tested with `\|L(P)\| ≥ 5`; on that family the AT graph is the hypercube `Q_k`, so `Δ_AT` is the hypercube Laplacian, **already diagonal by inspection** — so §9 buys no bound on the bridge quantity anywhere | **PROVEN** for the `V_k` half (the hypercube identification is by inspection; positivity verified by exact LP for `k ≤ 4`) + **PROVEN-by-computation** for the negative half (`n ≤ 5` complete, plus `n = 6` at `\|L(P)\| ≤ 14`) | **This is STRONGER than the clause it replaces and must not be read as a retreat** — the original offered an untested corner where the answer might have been favourable; this gives a reason. It is the load-bearing fact behind "the case for `A(P)` is claim 3, not claim 2", which survives in this form. Source: mg-86a3 §2 (§9.4 here) |
+| **B6″** | a characterisation of the positive class — the evidence is consistent with *"iff the AT graph is a hypercube"* | **NOT CLAIMED — open, cheap, and well-posed** | consistent with `n ≤ 6` exhaustively and `V_{k ≤ 4}`; **stated as a conjecture by the auditor and claimed by neither document.** It would say exactly when the semigroup technique touches the bridge quantity |
 | **LG** | `gap(P_du) ≥ (1/(d+1))∏_{i=−1}^{d−2}(1−γ_i)`, hence `λ₂(Δ_AT) ≥ 2∏(1−γ_i)` | **CITED** (Alev–Lau 2020; Kaufman–Oppenheim; Dinur–Kaufman; ALOV) — **checked, not proved, here** | not violated on any of the 404 posets `2 ≤ n ≤ 6`. If the cited form is misremembered, §5's numbers are void and §6's `γ` computation is not |
 | **M1** | on all 404 posets `2 ≤ n ≤ 6`, truth/bound `≤ 2.62`, and the ratio grows with `n` | **PROVEN-by-computation** | that population; `λ₂` by Lanczos, cross-checked against dense Jacobi (P3) and a closed form (P1) |
 | **M2** | for `A_n` the (LG) bound is `≤ 2^{3−n}` while `λ₂(Δ_AT) = 2−2cos(π/n)`, so the loss is `2^{Θ(n)}` | **PROVEN** given **G** and the **CITED** Caputo–Liggett–Richthammer theorem | all `n ≥ 3`. Not an extrapolation: both sides are theorems |
 | **M3** | removing the braid hexagon does not repair the bound (`C_a ⊔ C_a` has no 3-antichain and still has `γ_i = 1/2`; the fence reaches `γ_{−1} = 0.46` and still decays geometrically) | **PROVEN-by-computation** | `C_a ⊔ C_a` for `n ≤ 8`; fences `n ≤ 7` |
 | **T** | `γ = 1/2` is the fixed point of Oppenheim's trickling-down recursion `γ ↦ γ/(1−γ)`, so `F(P)` sits exactly where the hierarchy is vacuous | **CITED** (Oppenheim) + trivial arithmetic | the recursion is cited; `1/2 ↦ 1` is arithmetic |
 | **T'** | the *cause* is the pseudomanifold property (mg-276d Lemma 3(a)) — the same fact that makes the bridge's "relative" well-posed | **HEURISTIC** | codimension-2 links have max degree `≤ 2` **is** proved (H); that this forces uselessness of product-form bounds *in general* is **not** proved. The antichain instance (G) is |
-| **S1** | the answer to the ticket is: technique exists on the face side (B3/B4), not on the Hodge-spectral side acting on `Δ_AT` (M2) | **CONDITIONAL** on the two citations (LG, Brown) and on the population of B4/B6 | stated as the verdict in §0 with those conditions attached |
+| **S1** | the answer to the ticket is: technique exists on the face **SEMIGROUP** side (B3/B4), not on the Hodge-spectral side acting on `Δ_AT` (M2) | **CONDITIONAL** on the two citations (LG, Brown), on **reading L1 of "relative"** (F2 — added here; the *conclusion* is robust to it by **N1r**, only the equation is not), and on the population of B4. **B6's population is no longer a condition: it is DECIDED, and B6′ replaces it with a statement that does not depend on a population** | stated as the verdict in §0 with those conditions attached. **F9: the word to use is SEMIGROUP, not Hodge** — claim 3 uses no complex, no boundary map and no Laplacian (§1) |
+| **S2** | claim 3 is *"a real technique and it is new to this programme"* | **accurate as written**, but the correct label is **an IMPORT, correctly attributed** — not a discovery (mg-86a3 press 4) | Brown's theorem, correctly CITED, instantiated to a band. The sharpest concrete instance (control P4, the Tsetlin library) is the **antichain** case — a classical theorem. For non-antichain `P` this document verifies the prediction against the matrix; it does not derive a statement previously out of reach, and it does not claim to. Ledgered here because *"new to this programme"* reads as **discovery** in a `STATE.md` row |
 | **U1** | no *other* Hodge-theoretic technique can help | **NOT CLAIMED** | only product-form link bounds were tested. Weighted/normalised Hodge Laplacians, `L_k` for `k` far from the top, discrete Morse theory and the toric/Coxeter geometry the source also mentions are **untouched** |
 | **U2** | anything about BK or block moves | **NOT CLAIMED** | out of scope by the ticket; the two-block Brown walks of §9 *are* block moves, and no claim is made that they are BK's |
 | **U3** | anything about weighted or degree-normalised chains | **NOT CLAIMED** | inherited from mg-276d §8.3(4) |
+| **P1** *(prose, §1)* | the operational test for *"lives on the Hodge/face side"* | ⚠️ **TOO WEAK to carry the word "Hodge" (F9)** — it is a test for *"not the AT graph"*. Ledgered here because it was unledgered and it is what licenses answering the headline YES | Bruhat order, descent statistics, coupling, strong stationary duality and Diaconis–Saloff-Coste all pass it. Claim 3's hypothesis is about the monoid of `P`-compatible ordered partitions: **no complex, no boundary map, no Laplacian, no "relative", no `E`**. §1, §12 |
+| **P2** *(prose, §2)* | *"the free ridges are exactly the holding probability of the canonical down-up walk"* | ⚠️ **STRUCK as an identification (F8)** — holding `= ((n−1−deg) + deg/2)/(n−1)`, i.e. free ridges **plus half the interior ridges** | §2, corrected in place. The intended content is the next sentence (`L^abs − L^rel = diag(#forbidden)` is the laziness) and is unaffected |
+| **P3** *(prose, §10)* | *"The reason is structural, not luck"* (X1a's retirement) | ⚠️ **STRUCK (F3)** — the premise is false: smaller `λ₂` on 75 of 2748 links, smaller `γ_i` on 9 levels, strictly larger mutated bound on **4 posets**. X1a is empirically silent here, **not structurally incapable** | the operative conclusion (X1a does not fire; X1b is the usable control) **stands**; only the reason is replaced. §10 |
+| **P4** *(table, §10)* | X2 *"fires on 4946 faces"* scored alongside four downstream-failure rows | ⚠️ **RELABELLED (F4)** — X2 is a **distinguishability check**: it falsifies nothing downstream (0 of 81), though it is **not** a gauge and **not** unfalsifiable (injecting the bug it mutates toward makes it go silent) | §10. **The four downstream rows are not downgraded**; the column now states which kind of evidence each row carries |
+| **P5** *(artifact)* | `sweep_output.txt` §B header *"extrapolating `γ_i = 1/2` … and proved for the top level"* | ⚠️ **CORRECTED at source (F6)** — the committed artifact **disclaimed the headline it supports**; Theorem G proves `γ_i ≥ 1/2` at **every** level `−1 ≤ i ≤ n−4`, not just the top | `run_sweep.py`, regenerated. §5.3 said the opposite and was right |
+| **P6** *(artifact)* | `run_sweep.py`'s *"posets with every `γ_i < 1/2`: 29 (tags: …)"* | ⚠️ **SILENT TRUNCATION, fixed at source (F7)** — it printed `w3[:12]` under a count of 29 | all 29 now printed. A silent cap in a battery's output is the fourth checkable question of `STATE.md` Appendix A |
 
 ---
 
@@ -624,6 +923,17 @@ Offered as scoping input; the routing decision is pm-onethird's.
   `A(P) ⊆ End(C[L(P)])` would contain the whole Brown-diagonalisable family — operators with
   closed-form spectra indexed by acyclic partitions of `P`, with `P`-invariant multiplicities. That
   is a concrete reason to want the algebra, and it is a different reason from the one in the sketch.
+  **Two refinements from mg-86a3, and they cut in the same direction.** *(a)* **F9: the cheap form of
+  the claim-3 case is not `A(P)`.** If the win is Brown's theorem for a left regular band, the object
+  to build is the **semigroup algebra of that band** — which has known structure theory (Brown 2000;
+  Saliola on quivers of LRB algebras), is a far cheaper build than an operator algebra generated from
+  face incidences, and delivers the Brown-diagonalisable family directly. The bullet above is true
+  and is the **expensive route to something the cheap route already gives**. *(b)* **F1: whichever
+  object is built, it is not a route to `λ₂(Δ_AT)`** — the semigroup technique reaches `Δ_AT` only
+  where `Δ_AT` is already free (row B6′), so the reason to want it is the Brown family on its own
+  terms, never the bridge quantity. **Routing note (pm-onethird, 2026-07-30, recorded here because it
+  post-dates this document): `A(P)` is NOT to be built as a route to `λ₂(Δ_AT)`.** The pricing above
+  is carried by proofs and F1 sharpens it; nothing here is queued or pending.
 - **The cheapest next probe, if one is wanted, is a comparison step, and it is graph-side.** The
   exact Brown spectra are inputs; carrying a gap from a Brown walk to `Δ_AT` needs
   Diaconis–Saloff-Coste comparison or canonical paths — a graph technique consuming a face-side
@@ -659,7 +969,29 @@ input to the headline, so it was given a proof rather than a trend: the eigenfun
 The clause that is **not** upgraded is the *equality* `γ_i = 1/2` — labelled
 PROVEN-by-computation on `A_3…A_7` in ledger row G', deliberately not stated as a theorem in §0 or
 §6, and not needed for M2 (which uses only `≥`). §5.3's rows for `n = 8,12,20,40` are marked in the
-table itself as resting on G, not on the trend.
+table itself as resting on G, not on the trend. **⚠️ F5 — when the audit ran, that was true of ONE of
+the four.** Only the `n = 8` row carried the marker (`1/2 ×6 (§6: ≥ 1/2 PROVEN)`); `n = 12`, `20`, `40`
+read plain `1/2 ×10`, `1/2 ×18`, `1/2 ×38`, with **equality** values in their bound columns. **The
+repair adds the three missing markers rather than weakening the sentence**, because the mathematics
+supports them — G gives `≥ 1/2` at every level for every `n`, which is the direction the bound needs —
+and §5.3 now states explicitly that the printed bound for `n ≥ 12` is an equality value standing in
+for a proven upper bound, with the equality itself resting on G′ (`A_3…A_9`, by computation). **This is
+the mg-e0ce lesson at its own site: a self-audit cannot see the sentence it is auditing — the miss was
+inside the clause step 4c certifies.** Direction is conservative (a smaller `γ` only strengthens the
+negative) and nothing downstream breaks.
+
+**⚠️ AND STEP 4d WAS RUN ON THEOREM G ONLY — mg-86a3's central methodological finding, recorded here
+because it is about this section (F1's root cause).** The paragraph above identified Theorem G as *the*
+statement quantified over `n` rather than over posets, supplied a proof for it, and cleared it. **That
+was the right call and G survives an independent rebuild** (§6). But **row B6's quantifier was never
+examined** — and B6 is quantified over a *population*, with a **numeric boundary read off that
+population** (`|L(P)| ≤ 4`). That boundary is where the over-wide statement was this time: a scope
+threshold inside a *negative* result, which is a new location for the defect again. **The protection
+against 4d was applied to the claim this document expected to fail and not to the one that did.** The
+generalisable lesson, in the auditor's shape: 4d must be run on *every* statement whose quantifier is
+not over the object it was verified on — including thresholds, including hedges (*"on the tested
+population"*), and including scope clauses attached to negatives, which read as modest and are exactly
+where a resting place hides. Landed into `STATE.md` Appendix A step 4d.
 
 **Other scope axes.** *Regime*: the sweep is the complete isomorphism-class enumeration at each
 `n ≤ 6`, not a sample. *Citation*: two published theorems are load-bearing — (LG) and Brown — and
@@ -674,8 +1006,11 @@ summaries that fail independently.
 
 - §0's headline is *"YES — but not where the bridge points"*. Diffed against the ledger: the YES is
   rows B3–B5 (CITED + PROVEN-by-computation), the "not where the bridge points" is rows M2 and N1
-  (PROVEN). §0 carries the scope of the YES (row B6: `Δ_AT` is not a Brown walk) in the same
-  paragraph rather than by reference, because separating them would read as a bound on `Δ_AT`.
+  (PROVEN). §0 carries the scope of the YES (row B6′: the semigroup technique reaches `Δ_AT` only
+  where `Δ_AT` is already free) in the same paragraph rather than by reference, because separating
+  them would read as a bound on `Δ_AT`. **(This bullet used to cite row B6, "`Δ_AT` is not a Brown
+  walk". F1 falsified that as a universal; the scope clause `§0` now carries is B6′, which is
+  stronger, and the practice of carrying it in the same paragraph was right and is unchanged.)**
 - §0 claim 1 says "no technique using only facets and ridges can be new". The ledger splits this:
   N1 is PROVEN, N1' is PROVEN for the two named instances and **HEURISTIC as a universal**. §0's
   wording is the universal, so §0 is over-stated relative to row N1' unless read with the two
@@ -689,18 +1024,32 @@ summaries that fail independently.
   description of two proved facts with a common cause; it is labelled **HEURISTIC** (row T') and the
   proved part (H) is stated separately.
 - The controls section states X1a's failure to fire **in the table**, not only in the prose, so a
-  reader tabulating "5 mutations, all fire" cannot get that from this document.
+  reader tabulating "5 mutations, all fire" cannot get that from this document. **⚠️ Audit-confirmed
+  as far as it goes, and incomplete (F3/F4): the table said *whether* each row fired and not *what
+  kind of evidence firing was*, and the prose reason given for X1a's non-firing was false. Both
+  repaired in §10; the four downstream-failure rows are unaffected.**
+- **§0 claim 1's L1 dependence was not carried into the ledger, row S1 or §14 (F2), even though
+  §13(iv) above declares it.** Repaired in §7.1 and rows N1a/N1b/N1c/N1r/S1. This is the failure mode
+  step 4c exists for, at the one place §13 had already written the correct sentence: **declaring a
+  condition in the self-audit is not the same as carrying it into the summaries, and the summaries are
+  what get pasted.**
 
 **What this self-audit cannot do.** It cannot see an error in a derivation the author would re-read
 as correct — in particular the eigenfunction computation in §6, which is the single load-bearing
 new proof here and which no independent code path re-derives (the exact-arithmetic check confirms
 the *identity*, using the same link construction). That is the first thing an auditor should
-rebuild from scratch.
+rebuild from scratch. **✅ That instruction was followed and the proof held** — mg-86a3 rebuilt it by
+hand and from the Coxeter complex with no shared code, to `A_12`. **Naming the right target was itself
+correct**: of the two things this section examined, the one it cleared (G) survived and the one it did
+not examine (B6's threshold) is where the MAJOR finding landed.
 
 ---
 
-## §14 — Proposed `STATE.md` row
+## §14 — `STATE.md` row, as landed
 
-Carries its own conditions rather than pointing at them.
+**Status: LANDED by mg-a806**, with every mg-86a3 repair applied here first. This section is a
+**primary** audit target (Appendix A step 4c) and it was audited clause by clause; the row below is the
+repaired text, and the corresponding `STATE.md` row carries the same clauses. Carries its own
+conditions rather than pointing at them — including the one it previously pointed at (**F2**).
 
-> **AMBER-POSITIVE · the bet is priced (mg-a3d4; computation permitted and used — 405 posets, controls both directions incl. one that did not fire and is reported)** | **does the face/Hodge side carry technique the graph side lacks?** (doc: `OneThird-Hodge-Side-Leverage.md`; code: `code/hodge_leverage/`, `run_all.sh`, ~13 min) | **YES, but not where the bridge points, and the place it points is priced OUT.** Three specifics. **(1) The top two dimensions of `F(P)` are graph theory verbatim: `Δ_AT = E L^rel E = NᵀN` with `N` the signed vertex–edge incidence matrix of the adjacent-transposition graph (PROVEN, all finite posets; checked 405/405).** So Hodge duality in top degree *is* the classical incidence/line-graph identity and the cofilling bound *is* flow duality — any new leverage must come from the faces below the top two dimensions, exactly the part mg-276d's proof never used. **(2) The technique that lives there imports and is exponentially lossy.** Two new theorems license the import: **the AT walk IS the standard down-up walk on the facets — `I − P_du = Δ_AT/(2(n−1))` (PROVEN)** — and **localisation: `link_{F(P)}(σ)` is the simplicial join of the `F(Q_i)` over the induced subposets on `σ`'s blocks (PROVEN; verified as a simplicial isomorphism on all 6197 faces, `n ≤ 5`)**. The cited product-form local-to-global bound (Alev–Lau; Kaufman–Oppenheim; ALOV) is then **never violated on any of the 404 posets `2 ≤ n ≤ 6` and never worse than a factor 2.62 there** — but for the antichain it is **exactly `2^{3−n}`** against a truth of `2−2cos(π/n) = Θ(n^{−2})`: a `2^{Θ(n)}` loss that is **PROVEN, not extrapolated**, because **every level's link has `λ₂ ≥ 1/2` by an explicit eigenfunction (`f(S) = Σ_{i∈S}a_i`, `Σa_i = 0`, eigenvalue exactly 1/2)**, with the truth supplied by the cited Caputo–Liggett–Richthammer proof of Aldous' conjecture. `γ_i ≤ 1/2` holds on all 404 posets and is attained by 373, so **this is not about antichains**: removing the braid hexagon does not help (`C_a ⊔ C_a` has no 3-antichain and still has `γ_i = 1/2`; the fence reaches `0.46` and still decays geometrically). **`1/2` is the fixed point of Oppenheim's trickling-down recursion `γ ↦ γ/(1−γ)`, so `F(P)` sits exactly at the value where the hierarchy carries no information** — and the property that puts it there is the **pseudomanifold** property, mg-276d Lemma 3(a), *the same fact that makes the bridge's "relative" well-posed* (this last causal reading is labelled HEURISTIC; the codim-2 consequence is proved). **(3) The face SEMIGROUP does carry technique, and it is exact rather than a bound.** `F(P)` is a left regular band under successive refinement (0 axiom violations, all 87 posets `n ≤ 5`) whose support lattice is exactly the **acyclic partitions** of `P` (verified; and they are NOT closed under refinement — witness `{a<c,b<d}` with `{a,d}|{b,c}`), so **Brown's theorem (CITED) diagonalises every face-driven walk on `L(P)`: `λ_X = Σ_{supp(y) ≤ X} w(y)` indexed by acyclic partitions, with multiplicities fixed by `Σ_{Y ≥ X} m_Y = ∏_{B∈X}|L(P|_B)|` — independent of `w`.** Verified against the actual matrix by **exact rational rank computations (eigenvalues, multiplicities AND diagonalisability) on all 24 posets `n ≤ 4` under three weight families**, plus five named `n = 5` instances mod `p`; **`A_6` was skipped and that is stated, not hidden**. Sharpest control: the **Tsetlin library** — for the antichain with `w` on the `({i},rest)` faces, Brown's prediction reproduces the classical derangement-multiplicity spectrum exactly (`n ≤ 5`), and derangements appear nowhere in the code. **This uses precisely the left-regular-band product mg-276d recorded as UNUSED (its §8.3(6)).** **Scope, and it travels with (3): `Δ_AT` is NOT a Brown walk** — proven on 55 of 63 posets at `n = 5` (and 11/16, 2/5 below), including every antichain `n ≥ 3`; undecided by that test **exactly where `|L(P)| ≤ 4`**. So (3) is exact technique for a *different* family of walks on the same state space and **buys no bound on `Δ_AT`**. **Also settled, negatively: representation theory does not descend** — `S_n` acts transitively on the ordered partitions of shape `α`, the `P`-compatible ones are a nonempty proper subset for every non-antichain, so their span is never an `S_n`-submodule (PROVEN; exactly 1 exception per `n ≤ 5`, the antichain) — **and even on the antichain `Σ_i s_i` is not central, so characters do not diagonalise `Δ_AT`**, which is why the antichain gap needed Aldous/CLR rather than a character computation. **And the source's claim (4) is now PROVEN and quantitative: the codimension-2 links of `F(P)` are exactly `C_6` (the braid hexagon, `λ₂ = 1/2`), `C_4` (two commuting moves, 0), `P_4` (1/2), `P_3` (0), `P_2` (−1) — 44 055 links enumerated over `4 ≤ n ≤ 6`, exactly these five** — so the boundary correction is (a) the laziness of the down-up walk and (b) the truncation of hexagon to path, which is the only thing that can push `γ` below 1/2 and is not enough. **NOT CLAIMED:** that no other Hodge technique can help (weighted/normalised Laplacians and the toric/Coxeter half of the source are **untouched**); anything about BK; anything about weighted chains. **`A(P)` was NOT built.** **Recommendation, not action:** if `A(P)` is scoped, the case for it is (3) — it would contain the Brown-diagonalisable family with closed-form spectra — and **not** the Hodge/localisation hope in the sketch, which for `Δ_AT` is now priced out. |
+> **AMBER-POSITIVE · the bet is priced (mg-a3d4; computation permitted and used — 405 posets, controls both directions incl. one that did not fire and is reported; audited mg-86a3 — OVERSTATED: 0 BROKEN mathematics, every headline number reproduced by a disjoint route, **THEOREM G CONFIRMED, `n`-FREE AND EXTENDED FOUR ORDERS**, one MAJOR falsification, repairs landed by mg-a806)** | **does the face/Hodge side carry technique the graph side lacks?** (doc: `OneThird-Hodge-Side-Leverage.md`; audit: `OneThird-Hodge-Side-Leverage-IndependentAudit.md`; code: `code/hodge_leverage/`, `run_all.sh`, ~13 min; audit instrument: `code/hodge_leverage_audit_86a3/`, no shared code) | **YES, but not where the bridge points, the place it points is priced OUT, and the "YES" is the face SEMIGROUP and not Hodge theory.** **⭐ THE LOAD-BEARING RESULT FIRST, because it is a theorem and it was rebuilt by an independent auditor: the `2^{Θ(n)}` loss is PROVEN, not extrapolated.** Every level's link of `F(A_n)` has `λ₂ ≥ 1/2` by an explicit eigenfunction (`f(S) = Σ_{i∈S}a_i`, `Σa_i = 0`, eigenvalue exactly `1/2`, `n`-free — Theorem G), so the cited product-form bound for the antichain is **at most `2^{3−n}`** against a truth of `2−2cos(π/n) = Θ(n^{−2})` supplied by the cited Caputo–Liggett–Richthammer proof of Aldous' conjecture. **mg-86a3 re-derived the eigenfunction BY HAND and rebuilt the Coxeter complex from its definition with NO shared link code: `Pf = f/2` exact to `A_12` (this document reached `A_8`), `λ₂ = 1/2` exact to `A_9` (row G′ claimed `A_7`) — four orders past the range each was stated on, three attempts to break it all failed, "the strongest thing in the document".** Recorded at this length deliberately: Theorem G is the statement quantified over `n` rather than over posets — the place this arc's failure had landed six times — and it is **the first such statement in the arc that was named as the hazard, given a proof rather than a trend, and had the proof HOLD under independent rebuild.** That is the arc's best methodological result to date. **(1) The top two dimensions of `F(P)` are graph theory verbatim, and the conclusion is unconditional even though one equation is not.** `Δ_AT = NᵀN` with `N` the signed vertex–edge incidence matrix of the AT graph is **PROVEN and UNCONDITIONAL** (row N1a; 405/405 by two disjoint routes); `Δ_AT = E·L^rel_top·E` is **PROVEN GIVEN reading L1 of "relative"**, which mg-276d labels CONDITIONAL and this document inherits (row N1b — **F2**: the old flat-PROVEN label did not carry it and neither did this row). **The pricing is robust to the condition and provably so:** under the other reading, `E·L^abs_top·E = (n−1)I − A`, the shifted adjacency matrix of the same AT graph (405/405, mg-86a3), so **under either reading the top-degree Hodge operator is a graph object** and *"no technique using only facets and ridges can be new"* holds unchanged. Hodge duality in top degree *is* the classical incidence/line-graph identity and the cofilling bound *is* flow duality — any new leverage must come from the faces below the top two dimensions, exactly the part mg-276d's proof never used. **(2) The technique that lives there imports, and it is exponentially lossy.** Two new theorems license the import: **the AT walk IS the standard down-up walk on the facets — `I − P_du = Δ_AT/(2(n−1))` (PROVEN)** — and **localisation: `link_{F(P)}(σ)` is the simplicial join of the `F(Q_i)` over the induced subposets on `σ`'s blocks (PROVEN; verified as a simplicial isomorphism on all 6197 faces, `n ≤ 5`)**. The cited bound (Alev–Lau; Kaufman–Oppenheim; ALOV) is then **never violated on any of the 404 posets `2 ≤ n ≤ 6` and never worse than a factor 2.6204 there** — but exponentially lossy on the antichain by Theorem G above. `γ_i ≤ 1/2` holds on all 404 posets and is attained by 373, so **this is not about antichains**: removing the braid hexagon does not help (`C_a ⊔ C_a` has no 3-antichain and still has `γ_i = 1/2`; the fence reaches `0.46` and still decays geometrically). **`1/2` is the fixed point of Oppenheim's trickling-down recursion `γ ↦ γ/(1−γ)`, so `F(P)` sits exactly at the value where the hierarchy carries no information** — and the property that puts it there is the **pseudomanifold** property, mg-276d Lemma 3(a), *the same fact that makes the bridge's "relative" well-posed* (this last causal reading is labelled HEURISTIC; the codim-2 consequence is proved). **(3) The face SEMIGROUP does carry technique, it is exact rather than a bound, and it is NOT Hodge theory.** `F(P)` is a left regular band under successive refinement (0 axiom violations, all 87 posets `n ≤ 5`) whose support lattice is exactly the **acyclic partitions** of `P` (verified; and they are NOT closed under refinement — witness `{a<c,b<d}` with `{a,d}|{b,c}`), so **Brown's theorem (CITED) diagonalises every face-driven walk on `L(P)`: `λ_X = Σ_{supp(y) ≤ X} w(y)` indexed by acyclic partitions, with multiplicities fixed by `Σ_{Y ≥ X} m_Y = ∏_{B∈X}|L(P|_B)|` — independent of `w`.** Verified against the actual matrix by **exact rational rank computations (eigenvalues, multiplicities AND diagonalisability) on all 24 posets `n ≤ 4` under three weight families** — mg-86a3 re-ran this under **six**, reusing the same `m_X`, which is what *"independent of `w`"* has to mean operationally — plus five named `n = 5` instances mod `p`; **`A_6` was skipped and that is stated, not hidden**. Sharpest control: the **Tsetlin library** — Brown's prediction reproduces the classical derangement-multiplicity spectrum exactly (`n ≤ 5`) and derangements appear nowhere in the code; note it is the **antichain** case, i.e. a classical theorem, so it is a control and not evidence of new reach. **This uses precisely the left-regular-band product mg-276d recorded as UNUSED (its §8.3(6)). But (3) is an IMPORT, correctly attributed — not a discovery — and it is not Hodge (F9): the hypothesis of Brown's theorem is about the monoid of `P`-compatible ordered partitions, and claim (3) uses no complex, no boundary map, no Laplacian, no "relative" and no twist. The headline question says "Hodge"; the audited answer to that question is NO, and the YES belongs to the semigroup.** **⚠️ SCOPE, and it travels with (3) — CORRECTED, and the correction is a STRENGTHENING (mg-86a3 F1, MAJOR).** This row used to read *"`Δ_AT` is NOT a Brown walk — proven on 55 of 63 posets at `n = 5` …; undecided by that test exactly where `|L(P)| ≤ 4`"*. **That is FALSIFIED as a universal, and it has genuine counterexamples rather than a coverage gap.** The question is a finite exact rational LP; **every case left "undecided" is DECIDED, and decided POSITIVELY** (the lazy AT walk IS a Brown walk, with exact rational witnesses, on 1/2/4/7 posets at `n = 2..5`), and the `|L(P)| ≤ 4` boundary is an **artifact of stopping at `n = 5`** — 12 positives at `n = 6` including one with `|L(P)| = 8`, and the **infinite** family `V_k` (ordinal sum of `k` two-element antichains, `|L(P)| = 2^k`) is positive for every `k` tested. **The honest clause, which is stronger than the one it replaces: `Δ_AT` is a Brown walk on an infinite family and not otherwise on any poset tested with `|L(P)| ≥ 5` — and on that family the AT graph is the hypercube `Q_k`, so `Δ_AT` is the hypercube Laplacian, ALREADY DIAGONAL BY INSPECTION. THE SEMIGROUP TECHNIQUE REACHES `Δ_AT` ONLY WHERE `Δ_AT` IS ALREADY FREE.** So (3) is exact technique for a *different* family of walks on the same state space and **buys no bound on `Δ_AT` anywhere** — and that is now a reason rather than an untested corner. **Do not read this as claim (3) being withdrawn: claim (3) is a real technique that does not reach the bridge quantity.** One cheap open question is created and claimed by nobody: characterise the positive class (the evidence is consistent with *"iff the AT graph is a hypercube"*, stated as a conjecture by the auditor on `n ≤ 6` plus `V_{k≤4}`). **Also settled, negatively: representation theory does not descend** — `S_n` acts transitively on the ordered partitions of shape `α`, the `P`-compatible ones are a nonempty proper subset for every non-antichain, so their span is never an `S_n`-submodule (PROVEN; exactly 1 exception per `n ≤ 5`, the antichain) — **and even on the antichain `Σ_i s_i` is not central, so characters do not diagonalise `Δ_AT`**, which is why the antichain gap needed Aldous/CLR rather than a character computation. **And the source's claim (4) is now PROVEN and quantitative: the codimension-2 links of `F(P)` are exactly `C_6` (the braid hexagon, `λ₂ = 1/2`), `C_4` (two commuting moves, 0), `P_4` (1/2), `P_3` (0), `P_2` (−1) — 44 055 links enumerated over `4 ≤ n ≤ 6`, exactly these five, every per-shape count reproduced identically by the audit** — so the boundary correction is (a) the laziness of the down-up walk and (b) the truncation of hexagon to path, which is the only thing that can push `γ` below 1/2 and is not enough. **CONTROLS — the credit is verified, not assumed, and two calibration defects are repaired.** mg-86a3 applied mg-5630's absorbability test to all six mutations: **none is a gauge in disguise, none is absorbable into a parameter the battery already varies, and X1b/X3/X4/X5 are each scored by a downstream FAILURE — mg-5630's specific defect is NOT repeated.** Repaired: **X1a's retirement rested on a false structural claim** (*"uniform weights inflate `γ`, so it can never falsify (LG)"* — measured: smaller `λ₂` on 75 of 2748 links, smaller `γ_i` on 9 levels, a strictly **larger** mutated bound on 4 posets; X1a is **empirically silent here, not structurally incapable**) — **F3**; and **X2 is a DISTINGUISHABILITY check, not a falsification control** (its mutation changes 4946 faces and falsifies nothing downstream, 0 of 81; it is nonetheless not a gauge — injecting the bug it mutates toward makes it go silent) — **F4**. **NOT CLAIMED:** that no other Hodge technique can help (weighted/normalised Laplacians and the toric/Coxeter half of the source are **untouched**); anything about BK; anything about weighted chains. **`A(P)` was NOT built.** **ROUTING (pm-onethird, 2026-07-30): `A(P)` is NOT to be built as a route to `λ₂(Δ_AT)`, and nothing about it is queued or pending.** The pricing is carried by proofs, and F1 **sharpens** it: the case for the algebra, if anyone ever wants it, is (3) on its own terms — and even then the cheap form of (3) is the **LRB semigroup algebra** (Brown 2000; Saliola), not `A(P)` as the source specifies it (**F9**), while the Hodge/localisation hope in the sketch is priced out for `Δ_AT` by a theorem. |

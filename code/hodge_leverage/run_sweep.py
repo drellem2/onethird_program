@@ -80,8 +80,10 @@ def main():
           % (len(eq), len(allrows)))
     w3 = [r for r in allrows if r["maxgamma"] is not None
           and r["maxgamma"] < 0.5 - 1e-9]
-    print("posets with every gamma_i < 1/2: %d  (tags: %s)"
-          % (len(w3), "; ".join(r["tag"] for r in w3[:12])))
+    # mg-a806 (audit mg-86a3, F7): this printed w3[:12] under a count of 29 --
+    # a silent truncation.  All of them are printed now.
+    print("posets with every gamma_i < 1/2: %d  (all %d tags: %s)"
+          % (len(w3), len(w3), "; ".join(r["tag"] for r in w3)))
     print()
 
     print("=" * 78)
@@ -99,8 +101,16 @@ def main():
         print("  %2d  %-34s %.6f   %.6f   %6.2f"
               % (n, ",".join("%.3f" % g[i][0] for i in sorted(g)) or "-",
                  b, exact, exact / b))
-    print("  ... extrapolating gamma_i = 1/2 at every level (observed n<=6,")
-    print("      and proved for the top level: the braid hexagon):")
+    # mg-a806 (audit mg-86a3, F6): the old header read "extrapolating gamma_i
+    # = 1/2 at every level (observed n<=6, and proved for the top level: the
+    # braid hexagon)" -- i.e. the artifact disclaimed the headline it supports.
+    # Theorem G proves gamma_i >= 1/2 at EVERY level -1 <= i <= n-4, n-free
+    # (rebuilt independently by the audit, exact to A_12), and >= is the only
+    # direction the bound needs.  Only the EQUALITY is computational.
+    print("  ... gamma_i >= 1/2 at every level is PROVEN for A_n, every n>=3")
+    print("      (Theorem G, n-free; identity exact to A_12).  The equality")
+    print("      gamma_i = 1/2 is by computation (A_3..A_9).  So each bound")
+    print("      below is a PROVEN UPPER bound, printed at its equality value:")
     for n in (8, 12, 20, 40):
         b = 2.0 * 0.5 ** (n - 2)
         exact = 2 - 2 * math.cos(math.pi / n)
