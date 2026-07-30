@@ -1,0 +1,93 @@
+==============================================================================
+SELFTEST  mg-6ad0 audit kernel
+==============================================================================
+
+ A. poset enumeration -- A000112 (posets on n unlabelled elements)
+  A000112(0) = number of iso classes on 0 elements               PASS  (got 1, want 1)
+  A000112(1) = number of iso classes on 1 elements               PASS  (got 1, want 1)
+  A000112(2) = number of iso classes on 2 elements               PASS  (got 2, want 2)
+  A000112(3) = number of iso classes on 3 elements               PASS  (got 5, want 5)
+  A000112(4) = number of iso classes on 4 elements               PASS  (got 16, want 16)
+  A000112(5) = number of iso classes on 5 elements               PASS  (got 63, want 63)
+  A000112(6) = number of iso classes on 6 elements               PASS  (got 318, want 318)
+
+ B. order ideals
+  |J(antichain_0)| = 2^0                                         PASS  (got 1, want 1)
+  |J(chain_0)| = 1                                               PASS  (got 1, want 1)
+  |J(antichain_1)| = 2^1                                         PASS  (got 2, want 2)
+  |J(chain_1)| = 2                                               PASS  (got 2, want 2)
+  |J(antichain_2)| = 2^2                                         PASS  (got 4, want 4)
+  |J(chain_2)| = 3                                               PASS  (got 3, want 3)
+  |J(antichain_3)| = 2^3                                         PASS  (got 8, want 8)
+  |J(chain_3)| = 4                                               PASS  (got 4, want 4)
+  |J(antichain_4)| = 2^4                                         PASS  (got 16, want 16)
+  |J(chain_4)| = 5                                               PASS  (got 5, want 5)
+  |J(antichain_5)| = 2^5                                         PASS  (got 32, want 32)
+  |J(chain_5)| = 6                                               PASS  (got 6, want 6)
+
+ C. linear extensions
+  e(antichain_1) = 1!                                            PASS  (got 1, want 1)
+  e(chain_1) = 1                                                 PASS  (got 1, want 1)
+  e(antichain_2) = 2!                                            PASS  (got 2, want 2)
+  e(chain_2) = 1                                                 PASS  (got 1, want 1)
+  e(antichain_3) = 3!                                            PASS  (got 6, want 6)
+  e(chain_3) = 1                                                 PASS  (got 1, want 1)
+  e(antichain_4) = 4!                                            PASS  (got 24, want 24)
+  e(chain_4) = 1                                                 PASS  (got 1, want 1)
+  e(antichain_5) = 5!                                            PASS  (got 120, want 120)
+  e(chain_5) = 1                                                 PASS  (got 1, want 1)
+  counting route agrees with enumeration route on every poset n<=6 PASS  (got True, want True)
+
+ D. moves -- ordered set partitions and Bell numbers
+  |F(antichain_1)| = A000670(1)                                  PASS  (got 1, want 1)
+  |F(antichain_2)| = A000670(2)                                  PASS  (got 3, want 3)
+  |F(antichain_3)| = A000670(3)                                  PASS  (got 13, want 13)
+  |F(antichain_4)| = A000670(4)                                  PASS  (got 75, want 75)
+  |F(antichain_5)| = A000670(5)                                  PASS  (got 541, want 541)
+  |F(chain_1)| = 2^(1-1) compositions                            PASS  (got 1, want 1)
+  |F(chain_2)| = 2^(2-1) compositions                            PASS  (got 2, want 2)
+  |F(chain_3)| = 2^(3-1) compositions                            PASS  (got 4, want 4)
+  |F(chain_4)| = 2^(4-1) compositions                            PASS  (got 8, want 8)
+  |F(chain_5)| = 2^(5-1) compositions                            PASS  (got 16, want 16)
+  |AC(antichain_1)| = Bell(1)                                    PASS  (got 1, want 1)
+  |AC(antichain_2)| = Bell(2)                                    PASS  (got 2, want 2)
+  |AC(antichain_3)| = Bell(3)                                    PASS  (got 5, want 5)
+  |AC(antichain_4)| = Bell(4)                                    PASS  (got 15, want 15)
+  |AC(antichain_5)| = Bell(5)                                    PASS  (got 52, want 52)
+
+ E. F(P) is a band with identity, and the action is idempotent
+  x.x = x and 1_P is a two-sided identity, all P with n<=4       PASS  (got 0, want 0)
+
+ F. Young side -- f^lambda by branching recursion
+  sum_lam (f^lam)^2 = 1!                                         PASS  (got 1, want 1)
+  sum_lam (f^lam)^2 = 2!                                         PASS  (got 2, want 2)
+  sum_lam (f^lam)^2 = 3!                                         PASS  (got 6, want 6)
+  sum_lam (f^lam)^2 = 4!                                         PASS  (got 24, want 24)
+  sum_lam (f^lam)^2 = 5!                                         PASS  (got 120, want 120)
+  sum_lam (f^lam)^2 = 6!                                         PASS  (got 720, want 720)
+  sum_lam (f^lam)^2 = 7!                                         PASS  (got 5040, want 5040)
+  f^(2,1) = 2                                                    PASS  (got 2, want 2)
+  f^(3,2,1) = 16                                                 PASS  (got 16, want 16)
+  f^(4,2) = 9                                                    PASS  (got 9, want 9)
+
+ G. straight/skew cell posets
+  D_(2,1) has 3 cells                                            PASS  (got 3, want 3)
+  D_(2,1): e = f^(2,1) = 2                                       PASS  (got 2, want 2)
+  (2,1)/(1) has 2 cells                                          PASS  (got 2, want 2)
+  (2,1)/(1) is an antichain (2 linear extensions)                PASS  (got 2, want 2)
+  (2,1)/(1) is NOT isomorphic to any 2-cell straight shape       PASS  (got False, want False)
+
+ H. lattice machinery
+  M3 is a lattice                                                PASS  (got True, want True)
+  M3 is not distributive                                         PASS  (got False, want False)
+  J(antichain_3) = boolean cube is a distributive lattice        PASS  (got (True, True), want (True, True))
+  N5 (pentagon) is a lattice and is not distributive             PASS  (got (True, False), want (True, False))
+
+ I. exact rank
+  rank of 3x3 identity                                           PASS  (got 3, want 3)
+  rank of all-ones 3x3                                           PASS  (got 1, want 1)
+  rank of [[1,2],[2,4]]                                          PASS  (got 1, want 1)
+
+==============================================================================
+SELFTEST: 68 assertions, 0 FAILED
+==============================================================================

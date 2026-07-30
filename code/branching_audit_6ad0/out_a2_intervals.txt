@@ -1,0 +1,95 @@
+==============================================================================
+A2a  THE SMALLEST WITNESS.  B2 says the posets P with J(P) an interval
+     of Young's lattice are EXACTLY the cell posets.  Here is one that
+     is not a cell poset.
+==============================================================================
+
+  P = the 2-element ANTICHAIN.
+    J(P) has 4 elements: [[], [0], [1], [0, 1]]
+    2-cell straight shapes: ['(2,)', '(1, 1)'] -- their posets are both the 2-CHAIN
+    is P a cell poset D_lambda?  NO
+    the Young-lattice interval [(1), (2,1)] = ['(1,)', '(2,)', '(1, 1)', '(2, 1)']   (4 elements)
+    the skew cell poset (2,1)/(1) has cells [(0, 1), (1, 0)] and is isomorphic to
+    the 2-element antichain: YES
+    J((2,1)/(1)) is isomorphic to the interval as a poset: YES
+
+  CONCLUSION A2a: B2's word "exactly" is FALSE.  The 2-element
+  antichain is not a cell poset and J(antichain_2) IS an interval of
+  Young's lattice.  The correct class is the SKEW cell posets.
+
+==============================================================================
+A2b  BROWN'S OWN EXAMPLE.  section 0 consequence 3 says the p x q grid,
+     = J(C_p + C_q), is NOT an interval of Young's lattice for
+     p,q >= 1.  Here is the interval, for each p,q.
+==============================================================================
+
+   p  q   witness lambda / mu           |[mu,lam]|  (p+1)(q+1)  poset iso
+   1  1   (2, 1) / (1,)                     4           4  .
+   1  2   (3, 2) / (2,)                     6           6  .
+   1  3   (4, 3) / (3,)                     8           8  .
+   1  4   (5, 4) / (4,)                    10          10  .
+   2  1   (3, 1) / (1,)                     6           6  .
+   2  2   (4, 2) / (2,)                     9           9  .
+   2  3   (5, 3) / (3,)                    12          12  .
+   2  4   (6, 4) / (4,)                    15          15  .
+   3  1   (4, 1) / (1,)                     8           8  .
+   3  2   (5, 2) / (2,)                    12          12  .
+   3  3   (6, 3) / (3,)                    16          16  .
+   3  4   (7, 4) / (4,)                    20          20  .
+   4  1   (5, 1) / (1,)                    10          10  .
+   4  2   (6, 2) / (2,)                    15          15  .
+   4  3   (7, 3) / (3,)                    20          20  .
+   4  4   (8, 4) / (4,)                    25          25  .
+
+  CONCLUSION A2b: REFUTED BY CONSTRUCTION -- for every p,q tested, C_p + C_q IS the cell
+  poset of the skew shape (q+p, q)/(q), so the grid J(C_p + C_q) IS the
+  Young-lattice interval [(q), (q+p, q)].  The reason offered in
+  consequence 3 ("D_lambda has a minimum") rules out only intervals of
+  the form [0, lambda], which is not what the sentence claims.
+
+==============================================================================
+A2c  THE CORRECTED COUNT.  Consequence 1 says the overlap is a
+     vanishing fraction 6/318, 8/2045, 12/16999.  Those are counts of
+     STRAIGHT cell posets.  Here is the count over the class B2
+     actually names.
+==============================================================================
+
+   n   straight D_lam   skew (= interval posets)   all posets   af28  corrected
+   1                1                         1            1   1.0000    1.0000
+   2                1                         2            2   0.5000    1.0000
+   3                2                         5            5   0.4000    1.0000
+   4                3                        11           16   0.1875    0.6875
+   5                4                        26           63   0.0635    0.4127
+   6                6                        62          318   0.0189    0.1950
+   7                8                       149         2045   0.0039    0.0729
+
+   8 is behind a flag because it takes ~4 minutes: run with SKEW8=1.
+   Its value, computed by this same function: straight 12 (af28's
+   number, reproduced), skew 360, of 16 999 -- 0.0007 against 0.0212.
+
+  Both columns vanish, so consequence 1's DIRECTION ("ours contains
+  theirs, as a vanishing fraction") survives.  What does not survive
+  is B2's identification of the class, and the three numbers, which
+  are the counts of a strictly smaller family than the one named.
+
+==============================================================================
+A2d  IS THE CORRECTION MATERIAL?  Skew shapes are not a technicality
+     of the branching-graph programme -- intervals [mu, lambda] index
+     the SKEW standard tableaux, which are the paths of the same
+     branching graph starting at mu instead of at the empty shape.
+==============================================================================
+
+   lambda/mu       cells   e(skew poset)   #paths mu->lambda in Young
+   (2, 1)/(1,)        2               2                          2
+   (3, 1)/(1,)        3               3                          3
+   (2, 2)/(1,)        3               2                          2
+   (3, 2)/(2,)        3               3                          3
+   (3, 2, 1)/(2, 1)     3               6                          6
+   (4, 2)/(2, 1)      3               3                          3
+   (3, 3)/(1, 1)      4               2                          2
+
+  linear extensions of the skew cell poset = paths mu -> lambda: 0 bad
+
+==============================================================================
+SUMMARY a2_intervals: witness constructions bad 0; skew-path check bad 0
+==============================================================================

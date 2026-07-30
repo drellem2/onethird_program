@@ -1,0 +1,55 @@
+==============================================================================
+A6  The two verbatim quotations, re-read from the PDFs.
+==============================================================================
+
+  Brown      arXiv:math/0006145   532339 bytes, 121561 flat chars
+  Bergeron-Li arXiv:math/0612170  241602 bytes, 46632 flat chars
+
+  A6a  BERGERON-LI AXIOM (2), as af28 quotes it.
+
+    af28: "The (external) multiplication rho_{m,n} : A_m (x) A_n ->
+           A_{m+n} is an injective homomorphism of algebras, for all
+           m and n (sending 1_m (x) 1_n to 1_{m+n})"
+
+    the whole clause, punctuation and all          FOUND (1 occurrence)
+    'The (external) multiplication'                FOUND (1 occurrence)
+    'to 1_{m+n})'                                  FOUND (1 occurrence)
+
+    VERDICT: quotation VERIFIED.
+
+  A6b  BROWN'S '(they are all 1-dimensional)'.
+
+    '(they are all 1-dimensional)'                 FOUND (1 occurrence)
+    'can be worked out explicitly' as af28 quotes it NOT FOUND (0 occurrences)
+    the same, as the EXTRACTOR renders it ('explcitly') FOUND (1 occurrence)
+
+    The load-bearing parenthetical verifies verbatim.  The extractor
+    renders the preceding word 'explicitly' as 'explcitly' -- it drops
+    more than ligatures.  af28's section 5 item 6 says both quoted
+    strings 'are ligature-free and were checked by eye'; the by-eye
+    check evidently repaired this, and the repair is right, but the
+    extractor is less trustworthy than that sentence implies.  This
+    strengthens A5 rather than contradicting anything.
+
+    CORROBORATION that needs no quotation at all -- Brown's Corollary:
+    'Every irreducible representation of kS is 1-dimensional' FOUND (1 occurrence)
+    'There is one such for each X in L, given by the character' FOUND (1 occurrence)
+    the character formula chi_X(y) = 1 iff supp y <= X FOUND (1 occurrence)
+
+    So B5's citation is exact, and the character A4a builds
+    independently from the product structure is Brown's own chi_X.
+
+  A6c  WHAT THE RE-READ TURNED UP.  Bergeron-Li's section headings:
+
+      3.1.TowerofAlgebras(Preservingunities)
+      3.6.TowerofAlgebras(notPreservingunities)
+
+    'not Preserving unities'                       FOUND (1 occurrence)
+    'an algebra injection not necessarily preserving unities' FOUND (1 occurrence)
+    'we consider a semi-tower of algebras with rho not' FOUND (1 occurrence)
+
+    af28 quotes section 3.1, which is titled 'Tower of Algebras
+    (Preserving unities)', and reports that concatenation satisfies
+    every clause of axiom (2) EXCEPT unitality.  Section 3.6 of the
+    same paper weakens exactly that clause.  af28 does not mention it.
+
