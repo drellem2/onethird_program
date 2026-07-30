@@ -45,6 +45,18 @@ baseline side   : b68db5d^  — used ONLY as the BEFORE of a measured delta
 STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
                              62 table rows, 210 cells (the population every whole-file tally below is over)
 
+0. THE NORMALISATION N, CHECKED AGAINST THE RULE THIS FILE PUBLISHES
+   Every digest below is taken under N.  mg-218d widened N from .strip(EDGE) to
+   .strip() and this control exited 0, because on this material the two agree —
+   so the rule was published in three documents and read by nothing.  These are
+   the published sentences as behavioural probes.  They do NOT certify this
+   instrument; nothing inside a file can.  They stop the code from drifting
+   away from its own stated rule for free.
+  [pass] N: space/tab/CR/LF are stripped from the two ends
+  [pass] N: U+00A0 at an end is NOT whitespace to this rule (str.strip() eats it)
+  [pass] N: U+2028 at an end is NOT whitespace to this rule (str.strip() eats it)
+  [pass] N: nothing INTERIOR is touched
+
 1. THE ROW b68db5d EDITED, located by attempt id (not by line number)
   [pass] exactly one ledger row keys to mg-276d in the working tree
          found 1
@@ -56,7 +68,7 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
          found 1
 2. CERTIFIED REGION DIGESTS — sha256 of N(region), N = strip ASCII space/tab/
    CR/LF from the two ends and nothing else.  This is what certifies the delta;
-   10 regions, all located by content, all printed in full.
+   11 regions, all located by content, all printed in full.
   [pass] cell.tree — row :135's content cell, WORKING TREE
          STATE.md:135; 7876 characters, 8010 bytes after N
          certified sha256 b53ad402349d531fb8d18893ca55c380517ed3b809bfc0d4aeb0c41b795ccf87
@@ -70,7 +82,7 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
          certified sha256 ad9143cc402c797a600166968d7fbc4d1dc9423f03f00d373dfc026004020b06
          measured  sha256 ad9143cc402c797a600166968d7fbc4d1dc9423f03f00d373dfc026004020b06
   [pass] readme.F1 — the F1 correction block
-         docs/state-history/README.md:341-360; 1643 characters, 1671 bytes after N
+         docs/state-history/README.md:406-425; 1643 characters, 1671 bytes after N
          certified sha256 f81e2cdc63bd0fbcc2790f2878959ac4aab35c54ce9690fdec84ab7e0dc51908
          measured  sha256 f81e2cdc63bd0fbcc2790f2878959ac4aab35c54ce9690fdec84ab7e0dc51908
   [pass] readme.B1 — the B1 attribution correction
@@ -97,6 +109,10 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
          docs/state-history/README.md:266-313; 3695 characters, 3711 bytes after N
          certified sha256 779702c03697be89bfd9c40ffc483e78aec834a6d3eb58989ac60399aef45c11
          measured  sha256 779702c03697be89bfd9c40ffc483e78aec834a6d3eb58989ac60399aef45c11
+  [pass] readme.A1.bee1 — the mg-218d / mg-bee1 correction to the A1 block
+         docs/state-history/README.md:315-378; 5040 characters, 5072 bytes after N
+         certified sha256 30f205b22f3a4cbf0121a98e20c9817d5f3bcad51d1ca6f8f0c3dc2739a72be4
+         measured  sha256 30f205b22f3a4cbf0121a98e20c9817d5f3bcad51d1ca6f8f0c3dc2739a72be4
 
 2b. CERTIFIED PRESENTATION RECORDS — the content digest above says these are the
     certified BYTES; these say a reader is still SHOWN them, in the same place.
@@ -156,24 +172,68 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
   [pass] readme.A1 — the A1 correction block (b68db5d's headline sentence): presentation
          state      rendered
          heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
-         position   block 2 of 6 in its section
+         position   block 2 of 7 in its section
          presented  11ce5d7edaeab027da84ea31161f235637a686dd4c1ca46ca4b3ab30796596c0
-         certified record sha256 f642d170bc7bdc7c869ea8f23e1f452c2994a27fb16a446e554c5bcb975a2780
-         measured  record sha256 f642d170bc7bdc7c869ea8f23e1f452c2994a27fb16a446e554c5bcb975a2780
+         certified record sha256 4a39b45770b65b16e454c815a1122fbe5f256f3ee1bb891ed3aeeda0841575b1
+         measured  record sha256 4a39b45770b65b16e454c815a1122fbe5f256f3ee1bb891ed3aeeda0841575b1
   [pass] readme.A1.7870 — the mg-2216 / mg-7870 correction to the A1 block: presentation
          state      rendered
          heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
-         position   block 3 of 6 in its section
+         position   block 3 of 7 in its section
          presented  37d7cc33fe4e75edcac714fd7f89b6e251008ee450f308303911c193a22b6750
-         certified record sha256 25892df23732ba028e28ba99d83b5cc4aa16d552f2d877dfd44fdff1c81e3326
-         measured  record sha256 25892df23732ba028e28ba99d83b5cc4aa16d552f2d877dfd44fdff1c81e3326
+         certified record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+         measured  record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
   [pass] readme.A1.4acd — the mg-babf / mg-4acd correction to the A1 block: presentation
          state      rendered
          heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
-         position   block 4 of 6 in its section
+         position   block 4 of 7 in its section
          presented  101d333d0dc1fc8d7c2c7e6d6405049e0e07f5bb6b78bcf70e201480b7c755cd
-         certified record sha256 5c28bc769bf19d59ed094432ee6629bf048e48cbcd32eababdf32e1be315fade
-         measured  record sha256 5c28bc769bf19d59ed094432ee6629bf048e48cbcd32eababdf32e1be315fade
+         certified record sha256 5cab7f6bc3c786be33d8745744fd0c3361b5a2af2ca3a3666b0e67c844002350
+         measured  record sha256 5cab7f6bc3c786be33d8745744fd0c3361b5a2af2ca3a3666b0e67c844002350
+  [pass] readme.A1.bee1 — the mg-218d / mg-bee1 correction to the A1 block: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
+         position   block 5 of 7 in its section
+         presented  731c0cf0b908f6ddc53ce069031dd73fa58c8f38f30aa89fcfe15603ab1d97a0
+         certified record sha256 df248b6b754bde6f76529d7b925006a3d3494cb63bf2394351bd95f5502275be
+         measured  record sha256 df248b6b754bde6f76529d7b925006a3d3494cb63bf2394351bd95f5502275be
+
+2c. DELEGATED CONTENT — the sections a certified region CITES BY NAME in a file
+    outside the two this instrument reads.  The certified ledger cell is not
+    self-contained: it links into the attempt file and cites its sections by
+    name, so a reader who follows the certified text reads them.  WHAT IS
+    DELEGATED IS WHAT IS CITED — the rule and its bound are in this file's
+    header.  A cited section that is gone is a FAIL; one whose bytes moved is a
+    MOVED; a target cited and not declared, or declared and not cited, is a
+    MOVED, so the delegation surface cannot grow or rot silently.
+         10 certified regions followed (every kind but the b68db5d^ baseline cell, which is a historical pointer)
+  [pass] the delegation surface is exactly what is DECLARED
+         cited by certified regions: ['docs/state-history/attempt-mg-276d.md']
+         declared in DELEGATED: ['docs/state-history/attempt-mg-276d.md']
+  docs/state-history/attempt-mg-276d.md
+         cited by cell.tree; 5 section(s) cited by name: H1, H2, H3, H4, H5
+  [pass] docs/state-history/attempt-mg-276d.md: the section names cited are the section names declared
+         cited ['H1', 'H2', 'H3', 'H4', 'H5']; declared ['H1', 'H2', 'H3', 'H4', 'H5']
+  [pass] docs/state-history/attempt-mg-276d.md H1
+         lines 18-37; 3473 characters, 3530 bytes after N
+         certified sha256 3c8e966f7412ed8a7d9dd522fce40071283abb555477b3b5071225b8ecffda64
+         measured  sha256 3c8e966f7412ed8a7d9dd522fce40071283abb555477b3b5071225b8ecffda64
+  [pass] docs/state-history/attempt-mg-276d.md H2
+         lines 38-41; 383 characters, 390 bytes after N
+         certified sha256 4413b9e81ea4f590762a36ba0253032a365ee180bd9f98a42ebd73b3bc53b670
+         measured  sha256 4413b9e81ea4f590762a36ba0253032a365ee180bd9f98a42ebd73b3bc53b670
+  [pass] docs/state-history/attempt-mg-276d.md H3
+         lines 42-45; 544 characters, 555 bytes after N
+         certified sha256 cea7a8207b7dedb11eae2d3b7ea9bc75a22e4cd07e9536eb90e35de1d432fc60
+         measured  sha256 cea7a8207b7dedb11eae2d3b7ea9bc75a22e4cd07e9536eb90e35de1d432fc60
+  [pass] docs/state-history/attempt-mg-276d.md H4
+         lines 46-53; 779 characters, 799 bytes after N
+         certified sha256 14ffec4dd742c4f2867a3079b51166c8f1d40804e64f7ad38f2368310489cd8f
+         measured  sha256 14ffec4dd742c4f2867a3079b51166c8f1d40804e64f7ad38f2368310489cd8f
+  [pass] docs/state-history/attempt-mg-276d.md H5
+         lines 54-59; 864 characters, 884 bytes after N
+         certified sha256 4e192bc8bde4fca17021e507e7308fd86a844ae7d54109eb5811e1aeebb4aa6e
+         measured  sha256 4e192bc8bde4fca17021e507e7308fd86a844ae7d54109eb5811e1aeebb4aa6e
 
 3. THE F1 REPAIR — present in the tree, absent at the baseline
    (these separate 'damaged' from 'changed'; section 2 is what certifies)
@@ -219,17 +279,18 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
          7876 < 8440
 
 7. docs/state-history/README.md — the correction blocks b68db5d and this repair added
-         26472 bytes, 26265 characters, 370 lines
+         31546 bytes, 31307 characters, 435 lines
          (their CONTENT is certified in section 2; these lines report where
           each one was found and how much of it the digest spans)
   readme.F2      docs/state-history/README.md:15-44     header 87 chars, body 2218 chars
-  readme.F1      docs/state-history/README.md:341-360   header 87 chars, body 1555 chars
+  readme.F1      docs/state-history/README.md:406-425   header 87 chars, body 1555 chars
   readme.B1      docs/state-history/README.md:96-102    header 84 chars, body 478 chars
   readme.B1.A3   docs/state-history/README.md:104-111   header 88 chars, body 628 chars
   readme.index   docs/state-history/README.md:138-141   header 90 chars, body 219 chars
   readme.A1      docs/state-history/README.md:187-227   header 84 chars, body 2975 chars
   readme.A1.7870 docs/state-history/README.md:229-264   header 89 chars, body 2646 chars
   readme.A1.4acd docs/state-history/README.md:266-313   header 89 chars, body 3605 chars
+  readme.A1.bee1 docs/state-history/README.md:315-378   header 87 chars, body 4952 chars
 
 8. PRESENTATION GUARDS, over BOTH certified files in full
    presentation.py models a declared subset of CommonMark + GFM block structure.
@@ -242,14 +303,14 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
          over all 383 lines, code fences and inline code spans masked; 0 found
          114 rendered blocks in 11 sections (the population section 2b's positions are ordinals within)
   [pass] docs/state-history/README.md: 0 block constructs outside the modelled subset
-         over all 370 lines; 0 found
+         over all 435 lines; 0 found
   [pass] docs/state-history/README.md: 0 raw-HTML tokens in text presented as prose
-         over all 370 lines, code fences and inline code spans masked; 0 found
-         29 rendered blocks in 9 sections (the population section 2b's positions are ordinals within)
+         over all 435 lines, code fences and inline code spans masked; 0 found
+         30 rendered blocks in 9 sections (the population section 2b's positions are ordinals within)
 
 ==============================================================================
 RESULT: PASS — every check above read the working tree and every one held,
-        including 10 content digests and the same number of
+        including 11 content digests and the same number of
         PRESENTATION RECORDS: the certified bytes are the certified bytes,
         AND a reader is still shown them, in the same place, as prose.
         Coverage is stated in this file's header and in COVERAGE.md: what
@@ -259,7 +320,7 @@ RESULT: PASS — every check above read the working tree and every one held,
 
 ### 2. negative_control.py — can it fail?  (and can the pinned battery?)
 STATE.md  at rest: 177464 bytes, sha 54a41150fd75f97e
-README.md at rest: 26472 bytes, sha 07878fcf5ed7d49a
+README.md at rest: 31546 bytes, sha 8e851e6be8954407
 
 ==============================================================================
 POSITIVE CONTROL — clean tree
@@ -297,7 +358,7 @@ NC2 — ROW :135 REVERTED TO b68db5d^ (only the certified edit is undone)
 
 ==============================================================================
 NC3 — THE F1 CORRECTION BLOCK CUT OUT OF THE README (STATE.md intact)
-      370 -> 350 lines (blockquote lines 341-360 removed)
+      435 -> 415 lines (blockquote lines 406-425 removed)
 ==============================================================================
   delta_control.py    : exit 1   CONTROL FIRES
       RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,
@@ -340,6 +401,8 @@ NC6 — 500 CHARACTERS OF THE CERTIFIED CELL SORTED IN PLACE
       RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
       [MOVED] cell.tree — row :135's content cell, WORKING TREE
       [MOVED] cell.tree — row :135's content cell, WORKING TREE: presentation
+      [MOVED] the delegation surface is exactly what is DECLARED
+      [MOVED] docs/state-history/attempt-mg-276d.md: the section names cited are the section names declared
 
 ==============================================================================
 NC7 — ONE CLOSING CODE FENCE DELETED, three lines above the first certified
@@ -355,6 +418,7 @@ NC7 — ONE CLOSING CODE FENCE DELETED, three lines above the first certified
       [FAIL] readme.A1 — the A1 correction block (b68db5d's headline sentence): PRESENTED
       [FAIL] readme.A1.7870 — the mg-2216 / mg-7870 correction to the A1 block: PRESENTED
       [FAIL] readme.A1.4acd — the mg-babf / mg-4acd correction to the A1 block: PRESENTED
+      [FAIL] readme.A1.bee1 — the mg-218d / mg-bee1 correction to the A1 block: PRESENTED
 
 ==============================================================================
 NC8 — THE F1 BLOCK WRAPPED IN <details>, which SUPPRESSES NOTHING.
@@ -392,7 +456,7 @@ NC10 — THE LEDGER TABLE'S DELIMITER ROW DELETED (STATE.md line 113).
       [FAIL] cell.tree — row :135's content cell, WORKING TREE: PRESENTED
 
 ==============================================================================
-RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 07878fcf5ed7d49a == 07878fcf5ed7d49a
+RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 8e851e6be8954407 == 8e851e6be8954407
 ==============================================================================
   clean  exit 0   must be 0          ok
   NC1    exit 1   must be 1 (FAIL)   ok

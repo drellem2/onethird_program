@@ -1,0 +1,61 @@
+mg-bee1 — SEVEN NEW MUTATIONS AT THE LAYERS THIS REPAIR TOUCHES.
+
+WHY THESE SEVEN AND NOT MORE.  mg-218d's sixteen are re-run UNMODIFIED (out_layers_bee1.txt)
+and they are the evidence; a battery written by the author of a repair cannot establish that
+the repair works, for the reason mg-2216 gave and this lineage has repeated four times since.
+These seven exist to do the one thing the auditor's battery cannot: test the BOUNDARY OF THE
+NEW MECHANISM, which did not exist when that battery was written.  Three of them are
+expected to be SILENT, and those are the informative rows — a repair that reports its own
+bound is worth more than one that reports its own successes.
+
+THE PREDICT-FIRST DISCIPLINE IS mg-218d'S AND IS KEPT.  Every row below carries the exit
+code THIS REPAIR PREDICTED BEFORE THE RUN, written into this file before it was executed.
+A battery whose expectations are written after the run is a battery that cannot be wrong.
+
+THE HARNESS IS NOT MINE, AND THAT IS DELIBERATE.  These rows run under mg-218d's
+`harness218d.py` — the auditor's snapshot/restore/exit-code reader, not one written by the
+author of the code under test.  Writing a fifth harness here would put the author's
+assumptions on both sides of the measurement, which is the shape of defect this cluster
+exists to catch.
+
+    python3 code/state_delegation_repair_bee1/battery_bee1.py
+
+SAFETY.  Mutates tracked files in the WORKING TREE (`STATE.md` is not among them; the attempt
+file, the state-history README and `delta_control.py` are) and restores them under a `finally`
+plus a sha256 check, via mg-218d's harness.  It refuses to run on a dirty tree.
+
+BASELINE: the control on the unmutated tree -> exit 0 (PASS)
+
+==========================================================================================
+mg-bee1 — 7 NEW MUTATIONS AT THE BOUNDARY OF THE NEW MECHANISM
+'expected' is what THIS REPAIR PREDICTED BEFORE RUNNING.  Three rows are predicted SILENT on purpose: they are the stated bound, tested.
+==========================================================================================
+  OK  D1    L1 delegated content   the cited file emptied to ZERO bytes                      expected exit 1    got exit 1 (FAIL)
+  OK  D2    L1 delegated content   a cited section RETITLED, its body untouched              expected exit 2    got exit 2 (MOVED)
+  OK  D3    L1 delegated content   a contradicting sentence appended INSIDE cited H5         expected exit 2    got exit 2 (MOVED)
+  OK  D4    L1 stated boundary     the target's UNCITED section edited (expected silent)     expected exit 0    got exit 0 (PASS)
+  OK  D5    L1 stated boundary     a retraction at the TOP of the target (expected silent)   expected exit 0    got exit 0 (PASS)
+  OK  I3    L0 instrument          the EDGE constant widened, norm() untouched               expected exit 1    got exit 1 (FAIL)
+  OK  P7    L4 presentation        a paragraph elsewhere REPLACED in place (no block added)  expected exit 0    got exit 0 (PASS)
+
+  7 of 7 mutations behaved as this audit predicted; 0 did not.
+
+==========================================================================================
+WHAT THE SILENT ROWS MEAN — read them as the coverage statement, not as misses
+==========================================================================================
+  D4  L1 stated boundary     the target's UNCITED section edited (expected silent)
+  D5  L1 stated boundary     a retraction at the TOP of the target (expected silent)
+  P7  L4 presentation        a paragraph elsewhere REPLACED in place (no block added)
+
+  D4 and D5 are the DELEGATION's bound: what is delegated is what a certified
+  region CITES BY NAME, so the target's uncited sections and its own framing
+  are outside coverage.  Both are named in COVERAGE.md and in delta_control.py's
+  header, and this battery is where they stop being assertions.
+
+  P7 is mg-218d's B1 residual, and it is the row that decides the mechanism
+  question: it changes what a reader sees, adds no block, and is silent under a
+  DOCUMENT-GLOBAL ordinal too — see globalpos_bee1.py, which implements that
+  alternative and measures what it would cost.  The property is restated to its
+  bound rather than the mechanism widened, and this is why.
+
+No mutation surprised this repair: every predicted exit code was the observed one.
