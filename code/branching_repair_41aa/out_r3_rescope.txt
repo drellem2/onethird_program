@@ -1,0 +1,84 @@
+==============================================================================
+R3a  X3.  The definition space row 3's "no" was tested against.
+     Bergeron-Li, arXiv:math/0612170, re-read on a third extractor.
+==============================================================================
+
+  bytes downloaded: 241602   flattened chars: 47034
+
+   string                                as spelt   ligature-dropped
+   section 3.1's title                         1                  1
+   section 3.6's title                         1                  1
+   section 3.6's input                         1                  1
+   axiom (2), the clause af28 quotes           1                  1
+
+  strings not found in either spelling: 0.
+
+  WHAT THIS DOES AND DOES NOT SETTLE.  It settles that the cited
+  paper contains TWO tower definitions and that mg-af28 tested one.
+  It settles nothing about whether kF(P) forms a tower under the
+  weaker one: Bergeron-Li's conditions (3), (4) and (5) --
+  projectivity of A_{m+n} over A_m (x) A_n, the idempotent condition,
+  and the Mackey-type identity -- are untested by mg-af28, by
+  mg-6ad0 and by this repair.  Testing them is new mathematics,
+  which every ticket in this lineage forbids.  The honest output is
+  a HEDGE plus a NAMED OPEN QUESTION, not a proof and not a "no".
+
+==============================================================================
+R3b  X4.  "Brown 4.3 reaches the Young graph and no other
+     differential poset" -- at which level does it have content?
+==============================================================================
+
+  Brown section 4.3's hypothesis is a FINITE distributive lattice.
+  A differential poset is locally finite with infinitely many ranks
+  -- mg-af28's own section 2 item 1, and the reason its T3 finds
+  0 of 405.  So no differential poset is finite, Brown consumes no
+  differential poset at all, and at THAT level the claim is true of
+  nothing: Young's lattice is not consumed either.  The level at
+  which mg-af28's own contact lives is the finite INTERVALS.
+
+  CONTROL 1  Young-Fibonacci rank sizes to rank 6: [1, 1, 2, 3, 5, 8, 13]
+             Fibonacci as published: [1, 1, 2, 3, 5, 8, 13]   PASS
+  CONTROL 2  DU - UD = I as an operator identity below the top rank:
+             PASS (0 violations)
+  CONTROL 3  every interval [0-hat, w] is a lattice: PASS (0 failures)
+
+  intervals [0-hat, w] with rank(w) <= 6:            33   (af28's T8: 33)
+  of them NON-distributive:                          5   (af28's T8: 5)
+  of them DISTRIBUTIVE, so consumed by Brown 4.3:    28
+  smallest non-distributive witness: (2, 2, 1)   (af28's T8: (2, 2, 1))
+
+  For each distributive interval, build P from the join-irreducibles
+  and verify J(P) = the interval, pair by pair:
+
+   w                    |[0,w]|   |P|   J(P) = [0,w]
+   ()                         1     0   .
+   (1,)                       2     1   .
+   (1, 1)                     3     2   .
+   (2,)                       3     2   .
+   (1, 1, 1)                  4     3   .
+   (1, 2)                     4     3   .
+   ... all 28 distributive intervals reconstructed.
+
+  reconstructions bad: 0.
+
+  READING.  28 of the 33 finite intervals of the Young-Fibonacci
+  lattice ARE finite distributive lattices, so Brown section 4.3
+  consumes them, and each is J(P) for a P built here.  So the Okada
+  monoid's branching graph (row 10) has the same index-set contact
+  with this construction that mg-af28 headlines for Young's -- for
+  28 of its 33 finite intervals.  Row 10's stated reason for booking
+  it merely ADJACENT does not hold.  Reproduces mg-6ad0's A6 on a
+  third instrument.
+
+  WHAT SURVIVES.  Young's lattice is still the only DISTRIBUTIVE
+  1-differential lattice (Stanley 1988, cited by af28 from a
+  secondary source and read by nobody here), and every interval
+  [empty, lambda] of it is distributive -- af28's 30 of 30, which
+  mg-6ad0 reproduced.  That is a statement about WHOLE lattices and
+  it is the one B4 may keep.
+
+==============================================================================
+SUMMARY r3_rescope: Bergeron-Li strings missing 0; Young-Fibonacci
+  intervals 33, non-distributive 5, distributive 28, J(P) rebuilds
+  bad 0; controls: rank sizes PASS, DU-UD violations 0, non-lattice 0
+==============================================================================

@@ -1,0 +1,17 @@
+==============================================================================
+R1b8  The corrected n = 8 count.
+==============================================================================
+
+   n   straight D_lam   skew = interval posets   all posets    af28   corrected
+   8               12                      360        16999  0.0007      0.0212
+
+  af28's straight count reproduced: YES (it said 12).
+  mg-6ad0's skew count reproduced:  YES (it said 360).
+  wall clock: 173 s.  All 16 999 posets on 8 elements are NOT
+  enumerated here -- the denominator is A000112, cited, exactly as
+  af28 cited it; only the numerators are computed.
+
+==============================================================================
+SUMMARY r1b_skew8: straight 12, skew 360, of 16999
+==============================================================================
+SKEW8 360

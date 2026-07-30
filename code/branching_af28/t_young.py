@@ -8,8 +8,13 @@ T1  For every partition lambda, J(D_lambda) is the interval [0, lambda] of
     Young diagrams and from column/row-increasing fillings, with the count
     checked against the hook length formula.
 
-T2  How large is the overlap?  The posets P with J(P) an interval of Young's
-    lattice are exactly the cell posets D_lambda; counted against all posets.
+T2  How large is the overlap?  Two classes, not one: the posets P with
+    J(P) = [0, lambda] are exactly the STRAIGHT cell posets D_lambda, and the
+    posets P with J(P) = [mu, lambda] for a general interval are exactly the
+    SKEW cell posets lambda/mu.  Both counted against all posets.  CORRECTED
+    by mg-41aa under X1 of mg-6ad0's audit: this test used to assert the two
+    classes were equal -- they are not, the 2-element antichain separates
+    them -- and measured only the first.
 
 T6  Does the monoid act on SYT(lambda) the way S_n acts on the Gelfand-Tsetlin
     basis of the irreducible S^lambda?  Measured: no move other than the
@@ -17,10 +22,11 @@ T6  Does the monoid act on SYT(lambda) the way S_n acts on the Gelfand-Tsetlin
 """
 
 import sys
-from core_af28 import (partitions, conj, cell_poset, sub_shapes,
+from core_af28 import (partitions, conj, cell_poset, sub_shapes, contained,
                        hook_length_formula, ideals_of, linear_extensions,
                        moves_bruteforce, moves_from_chains, canon,
-                       poset_classes, act, support)
+                       poset_classes, act, support, skew_cell_poset,
+                       skew_shape_classes)
 
 OUT = sys.stdout
 
@@ -114,34 +120,89 @@ def t1(maxn=7):
     return total, bad_iso, bad_syt
 
 
-def t2(maxn_full=6, maxn_shapes=8):
+def t2(maxn_full=6, maxn_shapes=8, maxn_skew=6):
+    """CORRECTED by mg-41aa under X1 of mg-6ad0's audit.
+
+    What this printed before: "the posets P for which J(P) is an interval of
+    Young's lattice are EXACTLY the cell posets D_lambda", with the straight
+    count as its measurement.  The word "exactly" was never tested by any line
+    of this directory, and it is FALSE: an interval [mu, lambda] is J of the
+    SKEW cell poset lambda/mu, and the 2-element ANTICHAIN -- which is no
+    D_lambda -- has J(P) = [(1), (2,1)].  Both columns are now printed.
+    """
     print("=" * 78, file=OUT)
-    print("T2  How much of the family is Young?  The posets P for which J(P) is", file=OUT)
-    print("    an interval of Young's lattice are exactly the cell posets", file=OUT)
-    print("    D_lambda.  Counted against all posets.", file=OUT)
+    print("T2  How much of the family is Young?  Two questions, not one:", file=OUT)
+    print("      which P have J(P) = [0, lambda]?   exactly the STRAIGHT cell", file=OUT)
+    print("        posets D_lambda (T1).", file=OUT)
+    print("      which P have J(P) = [mu, lambda], any interval?  exactly the", file=OUT)
+    print("        SKEW cell posets lambda/mu.", file=OUT)
+    print("    Counted against all posets.  CORRECTED by mg-41aa: the earlier", file=OUT)
+    print("    version of this test asserted the second class equalled the", file=OUT)
+    print("    first and measured only the first.", file=OUT)
     print("=" * 78, file=OUT)
     print(file=OUT)
     a000112 = {1: 1, 2: 2, 3: 5, 4: 16, 5: 63, 6: 318, 7: 2045, 8: 16999}
-    print("   n   shape posets   all posets   fraction   (all-posets source)", file=OUT)
+    # n = 7, 8 are not enumerated here: this file's canonical form is a
+    # min over all n! relabellings, which costs ~5 min at n = 7 and hours at
+    # n = 8 on the skew enumeration.  Stated with provenance, never silently.
+    cited_skew = {7: 149, 8: 360}
+    print("   n   straight D_lam   skew = interval posets   all posets"
+          "   straight  interval", file=OUT)
     res = {}
     for n in range(1, maxn_shapes + 1):
         cls = {canon(cell_poset(lam)[0]) for lam in partitions(n)}
         k = len(cls)
         if n <= maxn_full:
             mine = len(poset_classes(n))
-            src = "enumerated here (= A000112)"
             assert mine == a000112[n], (n, mine)
             tot = mine
         else:
             tot = a000112[n]
-            src = "A000112, cited"
-        res[n] = (k, tot)
-        print("  %2d   %12d   %10d   %8.4f   %s"
-              % (n, k, tot, k / tot, src), file=OUT)
+        if n <= maxn_skew:
+            sk = len(skew_shape_classes(n))
+            mark = " "
+        else:
+            sk = cited_skew[n]
+            mark = "*"
+        res[n] = (k, sk, tot)
+        print("  %2d   %14d   %21d%s   %10d   %8.4f  %8.4f"
+              % (n, k, sk, mark, tot, k / tot, sk / tot), file=OUT)
+    print(file=OUT)
+    print("  * n = 7 and n = 8 skew counts are NOT enumerated in this file --", file=OUT)
+    print("    this file's canonical form is a min over all n! relabellings and", file=OUT)
+    print("    the skew enumeration costs minutes at n = 7 and hours at n = 8.", file=OUT)
+    print("    Both were computed twice on other instruments, agreeing:", file=OUT)
+    print("    code/branching_repair_41aa (r1_exactly.py, r1b_skew8.py) and", file=OUT)
+    print("    code/branching_audit_6ad0/a2_intervals.py (n=8 behind SKEW8=1).", file=OUT)
+    print("    The all-posets column is A000112, cited, for n = 7, 8 and", file=OUT)
+    print("    enumerated here for n <= 6.", file=OUT)
+    print(file=OUT)
+    print("  THE WITNESS, so the correction is not taken on trust:", file=OUT)
+    A2 = (0, 0)                               # the 2-element antichain
+    straight2 = {canon(cell_poset(lam)[0]) for lam in partitions(2)}
+    Q, qcells = skew_cell_poset((2, 1), (1,))
+    print("    both 2-cell straight shapes (2) and (1,1) give the 2-CHAIN, so", file=OUT)
+    print("    the 2-element ANTICHAIN is not any D_lambda: %s"
+          % ("confirmed" if canon(A2) not in straight2 else "REFUTED"), file=OUT)
+    print("    the skew shape (2,1)/(1) has cells %s and is the 2-element" % qcells,
+          file=OUT)
+    print("    antichain: %s"
+          % ("confirmed" if canon(Q) == canon(A2) else "REFUTED"), file=OUT)
+    interval = [nu for nu in sub_shapes((2, 1)) if contained((1,), nu)]
+    print("    |J(2-antichain)| = %d = |[(1), (2,1)]| = %d, the interval being %s"
+          % (len(ideals_of(A2)), len(interval),
+             [str(x) for x in interval]), file=OUT)
     print(file=OUT)
     print("  Note: D_lambda and D_(lambda') are isomorphic posets (transpose),", file=OUT)
-    print("  so the shape count is at most the number of partitions and is", file=OUT)
+    print("  so the straight count is at most the number of partitions and is", file=OUT)
     print("  smaller; it is computed here by canonical form, not by that rule.", file=OUT)
+    print("  The same holds for skew shapes under transposition of lambda/mu.", file=OUT)
+    print(file=OUT)
+    print("  READING.  The direction of section 0 consequence 1 -- ours contains", file=OUT)
+    print("  theirs, as a vanishing fraction -- survives on BOTH columns.  The", file=OUT)
+    print("  three numbers quoted in ledger B2 are the straight column and are", file=OUT)
+    print("  reproduced here unchanged; they are not counts of the class B2", file=OUT)
+    print("  named.  At n <= 3 EVERY poset is a skew shape poset.", file=OUT)
     print(file=OUT)
     return res
 

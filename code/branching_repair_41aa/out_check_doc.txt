@@ -1,0 +1,43 @@
+==============================================================================
+CHECK_DOC  docs/OneThird-Branching-Graphs-Where-This-Lives.md
+           41344 bytes, 455 lines, 73 blocks
+==============================================================================
+
+  -- PRESENT: the repair landed ----------------------------------
+  1   X1: the corrected class is named                               PASS
+  2   X1: corrected n=6 fraction                                     PASS
+  3   X1: corrected n=7 fraction                                     PASS
+  4   X1: corrected n=8 fraction                                     PASS
+  5   X1: af28's straight numbers are kept, not deleted              PASS
+  6   X1: the "exactly" is now tested                                PASS
+  7   X1: the corrected fraction table is in section 0               PASS
+  8   X2: the interval is exhibited                                  PASS
+  9   X3: section 3.6 is named by title                              PASS
+  10  X3: the open question is named rather than answered            PASS
+  11  X3: row 3 is a hedge, not a no                                 PASS
+  12  X4: the vacuity is stated                                      PASS
+  13  X4: 28 of 33 is stated                                         PASS
+  14  X5/X6/X7 are recorded as deliberately not repaired             PASS
+  15  the repair banner is present                                   PASS
+  16  the repair instrument is cited                                 PASS
+  17  the repair document is cited                                   PASS
+
+  -- QUOTED ONLY: struck text survives, once, and marked as struck
+  18  X1: the false "exactly"                                        PASS
+  19  X2: the false grid sentence                                    PASS
+  20  X4: the over-wide reading                                      PASS
+  21  X3: the withdrawn bare negative                                PASS
+  22  X4: row 10's withdrawn reason                                  PASS
+  23  X1: the old bare-fraction sentence                             PASS
+
+  -- THE INSTRUMENT'S OWN OUTPUT ---------------------------------
+  24  out_young.txt no longer asserts the untested "exactly"         PASS
+  25  out_young.txt names the corrected class                        PASS
+  26  out_young.txt prints the witness                               PASS
+  27  T2 row n=6 prints straight 6 and skew 62                       PASS
+  28  T2 row n=7 prints straight 8 and skew 149                      PASS
+  29  T2 row n=8 prints straight 12 and skew 360                     PASS
+
+==============================================================================
+CHECK_DOC: 29 checks, 0 failed
+==============================================================================
