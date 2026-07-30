@@ -1,0 +1,25 @@
+==============================================================================
+ADVERSARIAL BATTERY AGAINST THE A4 SCORING REPAIR
+==============================================================================
+  held   A1 baseline: cannot_fail=True row present
+            bottom='CONTROLS: 0 failures, but 1 row(s) CANNOT FAIL and are NOT scored as passes:' exit=0
+*** LIED *** A2 tautological row registered WITHOUT cannot_fail=True
+            bottom='ALL CONTROLS PASS' exit=0
+  held   A3 cannot_fail=1 (truthy int)
+            bottom='CONTROLS: 0 failures, but 1 row(s) CANNOT FAIL and are NOT scored as passes:'
+  held   A3b cannot_fail='no' (truthy string, author means NO)
+            bottom='CONTROLS: 0 failures, but 1 row(s) CANNOT FAIL and are NOT scored as passes:'
+  held   A4 positional slip
+            raised TypeError('can only concatenate str (not "bool") to str')
+  held   A5 cannot-fail row reporting a FALSE fact
+            bottom='CONTROLS FAILED: 1' exit=1 (want FAIL/1)
+  held   A6 score() ever returns PASS with cannot_fail set
+            []
+  held   A7 summarise() emits banner with a non-empty cannot-fail tally
+            []
+  held   A8 cannot-fail row with empty name
+            CANNOT_FAIL=[''] bottom='CONTROLS: 0 failures, but 1 row(s) CANNOT FAIL and are NOT scored as passes:'
+  held   A9 cannot_fail is a hand-set literal, never derived from the run
+            occurrences of literal `cannot_fail=True` in controls.py: 2
+==============================================================================
+BANNER EMITTED WITH A NON-FAILABLE ROW PRESENT: YES
