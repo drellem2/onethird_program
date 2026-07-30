@@ -1,0 +1,155 @@
+mg-6653 -- INDEPENDENT AUDIT OF mg-f2e1 (ba3ec79)
+==============================================================================
+
+TARGET 1 -- THE WIDENED A5 TRIGGER, tested the way mg-f7bc tested the last version
+(the new clause: 'ANY COMMIT THAT ADDS OR MODIFIES PROGRAM STATE -- STATE.md,
+meaning its ledger rows and Appendix A -- ON THE SAME FOOTING')
+  c0cf104   mg-78c0  (a)                                            11 file(s)  STATE.md=True   instrument=True   -> FIRES (new clause)
+  c50ce32   mg-60d3  (b) STATE.md-only, 2 of the 3 mg-1319 defects  1 file(s)  STATE.md=True   instrument=False  -> FIRES (new clause)
+  db08b4c   mg-1319  (c)                                            4 file(s)  STATE.md=True   instrument=True   -> FIRES (new clause)
+  16bee79   mg-a806  (d) the STATE half                             1 file(s)  STATE.md=True   instrument=False  -> FIRES (new clause)
+  5b63037   mg-a806  (d)                                            3 file(s)  STATE.md=True   instrument=True   -> FIRES (new clause)
+  f6756c0   mg-a806  (d) THE COMMIT THAT CARRIED ROW G-double-prime 4 file(s)  STATE.md=False  instrument=True   -> fires (instrument clause only)
+  0160cbf   mg-a806  (d)                                            1 file(s)  STATE.md=False  instrument=False  -> NOTHING FIRES
+
+  [REPRODUCED] the new clause fires on c0cf104, c50ce32, db08b4c
+        -- all three modify STATE.md, so the widened clause reaches them
+  [REPRODUCED] c50ce32 is 1 file changed, STATE.md, nothing else (the existence proof)
+        -- files: ['STATE.md']
+  [REPRODUCED] mg-a806's four commits: the new clause reaches the STATE ones
+  [REPRODUCED] the new clause does NOT reach f6756c0 -- and f6756c0 is the commit that added row G-double-prime
+        -- f6756c0 files: ['code/hodge_leverage/run_all.sh', 'code/hodge_leverage/run_sweep.py', 'code/hodge_leverage/sweep_output.txt', 'docs/OneThird-Hodge-Side-Leverage.md']
+  [REPRODUCED] the widened trigger does NOT fire on everything
+        -- 29 of 53 commits in history touch STATE.md (55%); 7 of the last 25 (28%). The 'WHAT THIS DOES NOT WIDEN INTO' exclusion list is concrete and applicable, and 'fires on every commit' is NOT the failure mode here.
+
+TARGET 1b -- WHERE ROW G-double-prime ACTUALLY LANDED
+mg-f2e1's Appendix A and commit message: 'row G-double-prime ... added to STATE.md by
+the mg-a806 landing ... introduced by a STATE landing, into the file that no trigger watched.'
+  [MEASURED  ] commits that change the count of 'G″' in STATE.md
+        -- ['ba3ec79', '1e61031']  (1e61031 = mg-a2bd's STRIKE record; ba3ec79 = mg-f2e1 itself)
+  [MEASURED  ] commits that change the count of 'G″' anywhere
+        -- ['4b5891d', '5a4a745', 'ba3ec79', '1e61031', '522048f', 'f6756c0', '5e84e2f']
+  [REFUTED] 'added to STATE.md by the mg-a806 landing' is TRUE
+        -- REFUTED. STATE.md's history contains no commit that introduced the row. The ledger row was added by f6756c0 to docs/OneThird-Hodge-Side-Leverage.md, line 877 as that commit left it (labelled PROVEN, 'free from G + Theorem L'), 1 matching added line(s). mg-a806's STATE.md commits (16bee79, 5b63037) do not contain it.
+  [REFUTED] 'into the file that no trigger watched' is TRUE
+        -- REFUTED twice. (i) f6756c0 does not touch STATE.md at all. (ii) f6756c0 touches ['code/hodge_leverage/run_all.sh', 'code/hodge_leverage/run_sweep.py', 'code/hodge_leverage/sweep_output.txt'] -- a harness and the text an instrument prints -- so the PRE-EXISTING A5 instrument clause already fired on it. The row landed inside a commit the trigger already watched.
+  [REFUTED] mg-d39d, the audit cited as the evidence, agrees with the claim
+        -- REFUTED. mg-d39d's own commit message: 'Blast radius is two lines and STATE.md is clean.' The cited audit says the opposite of the sentence citing it.
+  [REFUTED] 'a trigger ... was pointed at the component with the clean record' is TRUE
+        -- REFUTED on its own terms: the commit carrying the arc's only BROKEN item was inside the instrument clause's scope (see above), so the instrument component's record is not the clean one with respect to that item either.
+
+TARGET 2 -- EVERY OCCURRENCE OF 38/38 IN THE TREE, ENUMERATED HERE AND NOT COUNTED
+mg-f2e1's replacement for the false universal: 'five live sites, all flagged ... One
+instrument comment ... Two sites deliberately NOT flagged and named here so the
+absence is not mistaken for coverage.'
+  [MEASURED  ] occurrences of the literal '38/38' in the tree, excluding this audit's own instrument
+        -- 36 occurrences in 7 files (plus 5 in code/face_geometry_audit_6653/, this audit's own scanner, excluded and named)
+        STATE.md                                                        6 occurrence(s) on line(s) [135, 276]
+        code/face_geometry_audit_5630/audit_x3_equivalence.py           1 occurrence(s) on line(s) [84]
+        docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md  2 occurrence(s) on line(s) [45, 311]
+        docs/OneThird-Intrinsic-Face-Geometry-Probe.md                  9 occurrence(s) on line(s) [41, 42, 408, 411, 815, 817, 822]
+        docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md  5 occurrence(s) on line(s) [22, 64, 88, 259, 267]
+        docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md  8 occurrence(s) on line(s) [23, 405, 414, 422, 423, 429, 440, 559]
+        docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md  5 occurrence(s) on line(s) [196, 227, 247, 343, 387]
+
+  flag state, SITE by SITE (a site = the enclosing paragraph, which is what a reader
+  arriving by search or quotation reads):
+        FLAGGED   STATE.md                                                   para@112  occ [135]                  live 1/5 -- ledger row 135
+        FLAGGED   STATE.md                                                   para@276  occ [276]                  live 2/5 -- Appendix A paragraph
+        FLAGGED   code/face_geometry_audit_5630/audit_x3_equivalence.py      para@84   occ [84]                   the one instrument comment
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md para@29   occ [45]                   named NOT-flagged 1/2 (Probe-IndependentAudit.md:45)
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md para@300  occ [311]                  named NOT-flagged 2/2 (Probe-IndependentAudit.md:311)
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@24   occ [41, 42]               live 3/5 -- Probe section-head changelog
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@408  occ [408, 411]             live 4/5 -- Probe section 5
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@813  occ [815, 817]             live 5/5 -- Probe section 12 (reversal preamble)
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@822  occ [822]                  live 5/5 -- Probe section 12 (the proposed-row block)
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md para@18   occ [22]                   *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md para@57   occ [64]                   *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md para@85   occ [88]                   *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md para@259  occ [259]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md para@263  occ [267]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md para@21   occ [23]                   *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md para@399  occ [405, 414]             *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md para@422  occ [422, 423]             *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md para@428  occ [429]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md para@439  occ [440]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md para@558  occ [559]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md para@196  occ [196]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md para@221  occ [227]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md para@246  occ [247]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md para@338  occ [343]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md para@377  occ [387]                  *** NOT IN mg-f2e1's ENUMERATION ***
+
+  [REPRODUCED] the five named LIVE sites are all in fact flagged
+        -- the live half of the enumeration is CORRECT and I could not break it: row 135, Appendix A, and the Probe's section-head changelog, section 5 and section 12 each name the [:20] truncation inside the paragraph that quotes the number. Section 12 is two paragraphs (the reversal preamble and the block itself); both are flagged, which is why six paragraphs carry mg-f2e1's five named sites.
+  [REPRODUCED] the instrument comment reads as mg-f2e1 describes it
+        -- audit_x3_equivalence.py:84 names the truncated population in the act of reproducing it -- correct as written, as claimed.
+  [REFUTED] 'TWO sites deliberately NOT flagged and named here so the absence is not mistaken for coverage' accounts for every unflagged site
+        -- REFUTED. 16 site(s) carrying 18 occurrence(s), in 3 file(s), are outside the enumeration entirely -- 8 of those sites UNFLAGGED: ['docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md', 'docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md', 'docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md']. The whole of OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md is missing -- mg-f7bc's OWN audit document, the one this commit lands -- and it is never named anywhere in the enumeration. The enumeration is offered as the replacement for a universal that was FALSE, on the stated ground that a coverage claim wrong once is not evidence the second time; it names 4 of the 6 files and 18 of the 36 occurrences. Every omitted site is in a frozen audit document and every one of them discusses the truncation, so no reader is misled about the NUMBER -- the defect is in the COVERAGE CLAIM, which is the same defect, one generation on, at the same site.
+
+TARGET 3 -- E3: IS THE CHANGELOG NOW TRUE? checked against the diff, not against itself
+  [REPRODUCED] out_n6.txt:44 is the Lemma-1 cross-check at 87/87, n<=5
+        -- line 44 verbatim: 'their Lemma 1 verified on      : 87/87 (n<=5, all k)'
+  [REPRODUCED] out_extra.txt:2 is PURITY 404/404 at 2<=n<=6, a different check
+        -- line 2 verbatim: '404/404 posets (2<=n<=6) PURE; violations: none'
+  [REPRODUCED] the section-2 sentence now reads n<=5 for the Lemma-1 cross-check
+        -- and it is the sentence the document itself labels '(F3, repaired ...)' at line 140: '**(F3, repaired — say what is and is not independent.)** The sen'
+  [REPRODUCED] mg-1319 did correct the same overstatement at section 11
+        -- verified in db08b4c's own diff of the Probe -- so 'at section 11 by mg-1319, and at section 2 ... only now by mg-f2e1' is right about both halves.
+  [MEASURED  ] hunks this commit makes in the Probe
+        -- ['-37,2 +37,9', '-138,3 +145,11', '-798 +813,10']
+  [REFUTED] the NEW changelog line's 'the per-site enumeration in section 5' exists in section 5
+        -- REFUTED. The changelog now says the false universal is replaced by 'the per-site enumeration in section 5 and in STATE.md Appendix A'. Appendix A carries an enumeration; section 5 does not -- it carries only the truncation flag mg-1319 landed. Section 5 is not touched by this commit at all: the Probe diff has exactly 3 hunks (['-37,2 +37,9', '-138,3 +145,11', '-798 +813,10']), none of them in section 5. This is a changelog entry asserting a fix that is not in the diff -- which is the defect E3 exists to name, in the very line E3 rewrote.
+
+TARGET 4 -- E4: DOES ROW 135 CARRY THE CONNECTIVE? read in reading order, as a quoted
+fragment would be
+  [REPRODUCED] the 318-character measurement reproduces exactly
+        -- clause-start ('did the *generalisation* correctly') to clause-start ('Step 4d DID fire here') in db08b4c:STATE.md line 135 = 318 characters (325 bytes), and there is no connective between them (BOTH FACTS ... present in the gap: False). mg-f7bc's F7 table reports it as bytes; the figure is exact in CHARACTERS, which is how mg-f2e1 states it.
+  [REPRODUCED] the clause now carries the connective in reading order
+        -- the connective starts 61 characters after the clause. Read alone: 'the sixth deliverable did the *generalisation* correctly — **and, in the same document, still asserted one universal in §0 off `n ≤ 5` antichain witnesses with no proof present, which is why it appears in the second 4d tally rather than in neither. BOTH FACTS '
+  [REPRODUCED] a reader encountering the clause alone is no longer misled
+        -- the reconciliation is inline, not 6 KB away in Appendix A.
+  [REPRODUCED] E4b: the stale counts survive only inside their own correction note
+        -- the row now points at Appendix A's two tallies rather than hard-coding a number Appendix A recounts.
+
+TARGET 6 -- DID IT RESTRUCTURE ANYTHING? mg-f2e1 was FORBIDDEN from restructuring
+STATE.md, splitting rows, or moving content between files
+  db08b4c (mg-1319)       L131=5351  L132=9228  L133=13487  L134=10824  L135=11727
+  de54c3a (parent)        L131=5351  L132=9228  L133=13487  L134=10824  L135=12455
+  ba3ec79 (mg-f2e1)       L131=5351  L132=9228  L133=13487  L134=10824  L135=14582
+  [REPRODUCED] rows 131-134 are byte-identical -- no rows split, none re-flowed
+        -- 5351 / 9228 / 13487 / 10824 bytes, unchanged.
+  [REPRODUCED] the ledger's table-row count is unchanged
+        -- 58 rows before, 58 after.
+  [REPRODUCED] only lines 135, 276, 282 are edited in place, plus an insertion
+        -- STATE.md goes 350 -> 362 lines; the +12 is the A5 block inserted after line 335. No content is moved between files: the Probe's three hunks are additions, and nothing deleted from STATE.md reappears in the Probe.
+  [REFUTED] mg-f2e1's own report of row 135's growth -- 'a further 949 bytes (+7.6%)' -- reproduces
+        -- REFUTED. Measured on the metric mg-f7bc's F7 used (line bytes; F7's 7,832 -> 11,727 reproduces exactly at c0cf104 -> db08b4c): 12455 -> 14582 = +2127 bytes (+17.1%), and +2088 characters (+17.0%). A character-level diff of the line gives four insertions totalling 2,134 chars against 46 deleted. The reported figure understates the growth of the row an audit had just flagged FOR growth by a factor of 2.24, in the sentence that reports it for the ticket that owns it -- and it appears in mg-f2e1's list of claims 're-verified against source rather than inherited'.
+
+WHAT mg-f2e1 CLAIMS IT RE-VERIFIED -- re-verified again here
+  [REPRODUCED] all six cited audits returned 0 BROKEN mathematics
+        -- mg-e0ce=0 BROKEN, mg-5630=0 BROKEN, mg-f7bc=0 BROKEN, mg-86a3=0 BROKEN, mg-fcf1=0 BROKEN, mg-f1b2=0 BROKEN
+  [REPRODUCED] c0cf104's STATE.md hunk is EIGHT lines and carries both defects
+        -- 8 added lines; both the 'closed the Lemma-1 cross-check to n<=6' overstatement and the 'SIX for six' 4d contradiction are in them; c0cf104 also touches controls.py, which is why they were audited.
+  [REPRODUCED] mg-f2e1 corrected its OWN ticket rather than inheriting it
+        -- mg-f2e1's ticket asserts c50ce32 'carried TWO OF THE THREE DEFECTS THIS COMMIT IS REPAIRING'. It did not -- both rode in via c0cf104's hunk above. mg-f2e1's landing states c0cf104, correctly, and keeps c50ce32 only as the STATE.md-only existence proof. Credit: the one place it was handed a wrong number, it did not adopt it.
+  [REPRODUCED] E6's 78-vs-82 line-F split is exactly right
+        -- 'NC3 line3 parity-rejected  : 78 of 78 biting  FIRES (bite-count or rejection changed)' and 'NC3 line3 parity-rejected  : 82 of 82 biting  SILENT (still rejects)' -- so only ONE of db08b4c's two 'genuine non-sign construction corruptions' leaves NC3's negative lines silent, as mg-f2e1 records.
+  c0cf104   pre-A4-repair  banner at line(s) [34]       of which [PASS]-prefixed: none
+  db08b4c   mg-1319        banner at line(s) [4, 5]     of which [PASS]-prefixed: [4, 5]
+  ba3ec79   mg-f2e1        banner at line(s) none       of which [PASS]-prefixed: none
+  [REPRODUCED] the artifact now contains 'ALL CONTROLS PASS' zero times
+        -- and the bottom line reads "...this battery's bottom line is NOT 'all controls pass'." -- so a grep for the exact banner returns nothing, and a case-insensitive grep returns exactly the negation.
+
+==============================================================================
+REFUTED CLAIMS: 7
+   - 'added to STATE.md by the mg-a806 landing' is TRUE
+   - 'into the file that no trigger watched' is TRUE
+   - mg-d39d, the audit cited as the evidence, agrees with the claim
+   - 'a trigger ... was pointed at the component with the clean record' is TRUE
+   - 'TWO sites deliberately NOT flagged and named here so the absence is not mistaken for coverage' accounts for every unflagged site
+   - the NEW changelog line's 'the per-site enumeration in section 5' exists in section 5
+   - mg-f2e1's own report of row 135's growth -- 'a further 949 bytes (+7.6%)' -- reproduces
+
+This file scores CLAIMS, not mathematics. It makes no statement about the mathematics
+of the probe, which mg-e0ce/mg-5630/mg-f7bc rebuilt and which is not re-opened here.
