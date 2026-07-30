@@ -60,6 +60,38 @@ genuinely untouched. Deliberately **not** filed: filing them would be continuing
 **Priority 2 — is this a publishable generalisation? ANSWERED (audited).** See the headline. The framework is
 Brown 2000; the support lattice is Sturm 1971. Not a new framework.
 
+**And the sharper question Daniel asked at 16:55 — do we have a categorical explanation of `S_n` representation
+theory that equally applies to quotient posets? NO.** What exists is an *indexing* coincidence: at `P = D_λ` our
+state space is `SYT(λ)`, the Gelfand–Tsetlin basis of `S^λ`. Okounkov–Vershik supplies that indexing **and
+nothing else**. Three reasons, two of them audited-and-strengthened (mg-af28, audited mg-6ad0):
+
+1. **The action is not a group action.** Every move is idempotent, so the walk is not transport of the
+   `S_n`-action along the GT basis. **We have the basis, not the module — a bijection of bases is not a
+   representation.**
+2. **Semisimplicity fails, badly.** OV runs on inductive families of *semisimple* algebras; `dim kF(P)/rad =
+   |AC(P)|`, 0 bad on all 87 classes to n≤5 and 308 of 318 at n=6. The radical is **90.4%** of the algebra at the
+   n=5 antichain and **95.7%** at n=6. Re-derived by the auditor with **no trace form and no cited theorem** —
+   `Φ` surjective, `ker Φ` nilpotent in exact arithmetic — after which Brown's own corollary was located verbatim
+   and the independently-built character was his.
+3. **The overlap does not "equally apply"** — but the published fractions were wrong and are **corrected here**.
+
+**CORRECTION (mg-6ad0, X1).** The claim *"the posets `P` for which `J(P)` is an interval of Young's lattice are
+**exactly** the cell posets"* is **FALSE** — an interval `[μ,λ]` is `J(skew cell poset)`. Witness: the 2-element
+**antichain** is not a cell poset and `J` of it is `[(1),(2,1)]`. The source only counted cell posets and never
+tested its own "exactly". The fractions understate by **10×–30×**:
+
+    n=6:   6/318    ->   62/318     (~19%)
+    n=7:   8/2,045  ->  149/2,045   (~7%)
+    n=8:  12/16,999 ->  360/16,999  (~2%)
+
+**and at n ≤ 3 every poset is a skew shape poset** — so "vanishing" is right asymptotically and wrong at the
+small end, which is where most of this programme's hand work has been done. A second negative fell the same way
+(X2: the grid *is* the interval `[(q),(q+p,q)]`, all 16 pairs `p,q ≤ 4`, 0 bad).
+
+**The contact itself came back STRONGER than first reported:** `J(D_λ) → [0,λ]` is a **lattice** isomorphism, not
+merely an order isomorphism — meet and join preserved, every pair over 44 partitions to n≤7, 0 bad, on an
+instrument building Young's lattice from the add-a-corner cover rule rather than by containment.
+
 **Priority 1 — how would a counterexample behave? DELIVERED AND AUDITED (mg-a7b4).** The audit found the
 **mathematics sound and both headline answers standing exactly as stated**: all seven nominated results
 (Theorem 1; Propositions 2, 5, 6; Theorems 3, 4, 7) were reproduced from an instrument sharing **no code**
@@ -122,6 +154,7 @@ mg-a053 (proof repaired, theorem untouched) → mg-ae62 → mg-34bf → mg-6a2f 
 independently) → mg-7735 → mg-bd41 (**3 BROKEN**) → mg-24a3 → mg-ebd8 → mg-d673 (**2 BROKEN**).
 
 ## Trajectory
+- **OUR NEGATIVES ARE OUR WEAKEST CLAIMS, and this is now the arc's clearest regularity.** Three fell in one day and **all three were refuted BY CONSTRUCTION** — an auditor built the object the negative said could not exist — never by argument about whether the evidence sufficed. A negative reads as intellectual honesty and is therefore the least-audited thing we produce. Standing instruction added to audit briefs: *try to build the thing the negative forbids.*
 - **The audit stage is the instrument that works, and today it paid four times**: mg-bd41 found a
   certification blind to the change it certifies; mg-d673 refuted a bound word in its target's own headline;
   mg-6a2f established the strongest completeness claim in the arc and mg-bd41 then confirmed it a **third**
