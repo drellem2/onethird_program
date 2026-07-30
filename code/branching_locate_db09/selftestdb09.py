@@ -13,7 +13,9 @@ from kerndb09 import (rref, rank, nullspace, MonAlg, tl_diagrams, tl_product,
                       algebra_generated, centralizer, is_commutative_subspace,
                       mk_poset, all_posets, poset_classes, faces_of, tits,
                       supp, AC_by_support, AC_by_acyclicity, band_algebra,
-                      set_partitions, mobius, unit_vector)
+                      set_partitions, mobius, unit_vector,
+                      tl_diagram_action, tl_simples, tl_embed_diagram,
+                      solve_exact, mat_mul, mat_inv)
 
 N = 0
 
@@ -101,6 +103,81 @@ st1, m1 = tl_cell_matrices(2, 0, 2)
 st2, r2 = restrict_cell(3, 0, 2)
 ck(hom_dim(m1, r2, len(st1), len(st2)) == 1,
    "V_{3,0} restricted contains V_{2,0} once")
+
+# ---- the diagram action, the simples and the embedding  (mg-e8b8) --------
+#
+# The action of a whole diagram on a cell module must AGREE with the action
+# of the generators the rest of T1 uses, so the new code and the old code are
+# tied together on every (n, p, beta) they share.
+for n in range(2, 6):
+    for p in range(0, n // 2 + 1):
+        for b in (3, 2, 1, 0):
+            S, dmats = tl_diagram_action(n, p, b)
+            S2, gmats = tl_cell_matrices(n, p, b)
+            ck(S == S2, "diagram action and generator action share a basis")
+            for i in range(n - 1):
+                m = [None] * (2 * n)
+                for k in range(n):
+                    if k in (i, i + 1):
+                        continue
+                    m[k] = n + k
+                    m[n + k] = k
+                m[i], m[i + 1] = i + 1, i
+                m[n + i], m[n + i + 1] = n + i + 1, n + i
+                ck(dmats[tuple(m)] == gmats[i],
+                   "u_%d acts the same as its diagram on V_{%d,%d} at beta=%s"
+                   % (i, n, p, b))
+# the identity diagram acts as the identity matrix
+for n in range(1, 6):
+    ident = tuple([n + k for k in range(n)] + [k for k in range(n)])
+    for p in range(0, n // 2 + 1):
+        S, dmats = tl_diagram_action(n, p, 3)
+        d = len(S)
+        ck(dmats[ident] == [[F(1) if i == j else F(0) for j in range(d)]
+                            for i in range(d)],
+           "the identity diagram acts as the identity on V_{%d,%d}" % (n, p))
+# the character of L(n,p) at the identity is its dimension, and the
+# dimensions square-sum to the semisimple quotient
+for n in range(1, 7):
+    ident = tuple([n + k for k in range(n)] + [k for k in range(n)])
+    for b in (3, 2, 1, 0):
+        sim = tl_simples(n, b)
+        for (p, dim, chi) in sim:
+            ck(dim == len(link_states(n, p))
+               - len(nullspace(tl_gram(n, p, b)[1], len(link_states(n, p)))),
+               "dim L(%d,%d) is the rank of the Gram form at beta=%s"
+               % (n, p, b))
+            if dim:
+                ck(chi[ident] == dim,
+                   "chi_{L(%d,%d)}(1) = dim at beta=%s" % (n, p, b))
+        ck(sum(d * d for (p, d, c) in sim)
+           == tl_algebra(n, b).semisimple_quotient_dim(),
+           "sum (dim L)^2 = dim A/rad for TL_%d(%s)" % (n, b))
+# the embedding is a well-defined injection into the diagrams of TL_n and is
+# multiplicative on the whole table of TL_{n-1}
+for n in range(2, 6):
+    emb = tl_embed_diagram(n)
+    big = set(tl_diagrams(n))
+    small = tl_diagrams(n - 1)
+    ck(len(set(emb.values())) == len(small), "the embedding is injective")
+    for d in small:
+        ck(emb[d] in big, "the image of a TL_%d diagram is a TL_%d diagram"
+           % (n - 1, n))
+    for a in small:
+        for b2 in small:
+            la, da = tl_product(n - 1, a, b2)
+            lb, db = tl_product(n, emb[a], emb[b2])
+            ck((la, emb[da]) == (lb, db),
+               "the embedding is multiplicative on TL_%d" % (n - 1))
+ck(solve_exact([[F(1), F(0)], [F(0), F(1)]], [F(2), F(3)]) == ([F(2), F(3)], True),
+   "solve_exact on the identity")
+ck(solve_exact([[F(1), F(1)]], [F(1), F(0)])[0] is None,
+   "solve_exact reports an inconsistent system")
+ck(solve_exact([[F(1)], [F(1)]], [F(2)])[1] is False,
+   "solve_exact reports a non-unique solution")
+ck(mat_mul([[F(1), F(2)]], [[F(3)], [F(4)]]) == [[F(11)]], "mat_mul")
+ck(mat_mul(mat_inv([[F(1), F(2)], [F(3), F(4)]]), [[F(1), F(2)], [F(3), F(4)]])
+   == [[F(1), F(0)], [F(0), F(1)]], "mat_inv")
 
 # ---- symmetric groups -----------------------------------------------------
 ck(len(sym_group(4)) == 24, "|S_4| = 24")

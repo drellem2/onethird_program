@@ -73,6 +73,46 @@ def nullspace(rows, ncols):
     return basis
 
 
+def mat_mul(A, B):
+    """Product of two matrices of Fractions."""
+    n, m = len(A), len(B)
+    q = len(B[0]) if m else 0
+    Bt = list(zip(*B)) if m else []
+    return [[sum(A[i][k] * Bt[j][k] for k in range(m)) for j in range(q)]
+            for i in range(n)]
+
+
+def mat_inv(A):
+    """Inverse of a square matrix of Fractions.  Raises on a singular input."""
+    n = len(A)
+    M = [list(A[i]) + [Fraction(1) if i == j else Fraction(0)
+                       for j in range(n)] for i in range(n)]
+    R, piv = rref(M, n)
+    if piv != list(range(n)):
+        raise ValueError("singular matrix")
+    return [row[n:] for row in R]
+
+
+def solve_exact(cols, target):
+    """Solve sum_j x_j * cols[j] = target over Q.
+
+    Returns (solution, unique).  `solution` is None when the system is
+    inconsistent; `unique` says whether the solution is the only one.  Both
+    are returned because a multiplicity read off a non-unique solve is not a
+    measurement, and the caller has to be able to say so.
+    """
+    m = len(target)
+    k = len(cols)
+    aug = [[cols[j][i] for j in range(k)] + [target[i]] for i in range(m)]
+    R, piv = rref(aug, k + 1)
+    if k in piv:
+        return None, False                      # inconsistent
+    x = [Fraction(0)] * k
+    for i, c in enumerate(piv):
+        x[c] = R[i][k]
+    return x, len(piv) == k
+
+
 def span_closure(vectors, ncols, products):
     """Smallest subspace containing `vectors` and closed under `products`.
 
@@ -499,6 +539,144 @@ def restrict_cell(n, p, beta):
     """V_{n,p} restricted to TL_{n-1}: the same space, generators u_0..u_{n-3}."""
     states, mats = tl_cell_matrices(n, p, beta)
     return states, mats[:n - 2]
+
+
+# ---- the IRREDUCIBLE modules, and the branching graph they span -----------
+#
+# Vershik-Okounkov's branching graph has the IRREDUCIBLES as its vertices and
+# the restriction multiplicities as its edges.  The cell modules V_{n,p} are
+# parameter-independent; L(n,p) = V_{n,p}/rad<,> is not.  Everything below is
+# about L, because that is what the definition is about.
+
+
+def tl_diagram_action(n, p, beta):
+    """The action of EVERY diagram of TL_n on the cell module V_{n,p}.
+
+    A diagram acts on a link state by gluing the state onto the diagram's
+    bottom row and reading the result off the top row; the result is 0 when
+    two defects of the state get joined to each other (the number of
+    through-lines drops), and carries a factor of beta for every closed loop.
+
+    Returns (states, {diagram: matrix}) with matrices acting on column
+    vectors, matching `tl_cell_matrices`.
+    """
+    beta = Fraction(beta)
+    states = link_states(n, p)
+    idx = {s: i for i, s in enumerate(states)}
+    m = len(states)
+    ndef = n - 2 * p
+    mats = {}
+    for d in tl_diagrams(n):
+        M = [[Fraction(0)] * m for _ in range(m)]
+        for j, s in enumerate(states):
+            adj = {}
+
+            def link(x, y):
+                adj.setdefault(x, []).append(y)
+                adj.setdefault(y, []).append(x)
+
+            for i in range(2 * n):
+                if i < d[i]:
+                    link(i, d[i])
+            for a in range(n):
+                if s[a] != -1 and a < s[a]:
+                    link(n + a, n + s[a])       # state point a == bottom col a
+            defects = set(n + a for a in range(n) if s[a] == -1)
+            loops = 0
+            arcs = []
+            tops = []
+            dead = False
+            for comp in _components(adj, list(range(2 * n))):
+                ends = sorted(x for x in comp if x < n or x in defects)
+                if not ends:
+                    loops += 1
+                    continue
+                if len(ends) != 2:
+                    raise AssertionError("a component is not a path: %r" % comp)
+                a, b = ends
+                if a < n and b < n:
+                    arcs.append((a, b))
+                elif a < n:
+                    tops.append(a)
+                else:
+                    dead = True                 # two defects joined: 0
+                    break
+            if dead:
+                continue
+            if len(tops) != ndef:
+                raise AssertionError("defect bookkeeping: %d != %d"
+                                     % (len(tops), ndef))
+            t = [-1] * n
+            for a, b in arcs:
+                t[a] = b
+                t[b] = a
+            c = beta ** loops
+            if c != 0:
+                M[idx[tuple(t)]][j] += c
+        mats[d] = M
+    return states, mats
+
+
+def tl_simples(n, beta):
+    """The irreducibles of TL_n(beta), as (p, dim, character).
+
+    Graham-Lehrer: the non-zero L(n,p) = V_{n,p}/rad<,> are pairwise
+    non-isomorphic and exhaust the simple modules.  The character is a dict
+    on the diagram basis; `dim` is 0 exactly when the form vanishes
+    identically and L(n,p) does not exist, and the character is then None.
+    """
+    out = []
+    for p in range(0, n // 2 + 1):
+        S = link_states(n, p)
+        if not S:
+            continue
+        _, G = tl_gram(n, p, beta)
+        m = len(S)
+        R = nullspace(G, m)                     # radical of the cell form
+        r = len(R)
+        if m - r == 0:
+            out.append((p, 0, None))
+            continue
+        _, mats = tl_diagram_action(n, p, beta)
+        # A basis adapted to the invariant subspace rad<,>: its vectors
+        # first, then standard vectors completing them.  In that basis every
+        # action matrix is block upper triangular and the trailing diagonal
+        # block is the action on the quotient.
+        RR, piv = rref(R, m) if R else ([], [])
+        cols = [list(v) for v in RR]
+        for c in range(m):
+            if c not in piv:
+                e = [Fraction(0)] * m
+                e[c] = Fraction(1)
+                cols.append(e)
+        B = [[cols[j][i] for j in range(m)] for i in range(m)]
+        Binv = mat_inv(B)
+        chi = {}
+        for d, M in mats.items():
+            Mq = mat_mul(Binv, mat_mul(M, B))
+            chi[d] = sum(Mq[i][i] for i in range(r, m))
+        out.append((p, m - r, chi))
+    return out
+
+
+def tl_embed_diagram(n):
+    """TL_{n-1} -> TL_n as a subalgebra: add a through strand on the right.
+
+    Returns a dict from each diagram of TL_{n-1} to its image in TL_n, in the
+    partner-array encoding of `tl_diagrams` (top points 0..n-1, bottom point
+    n+k in column k).
+    """
+    emb = {}
+    for d in tl_diagrams(n - 1):
+        def up(i):
+            return i if i < n - 1 else i + 1    # bottom cols shift by one
+        m = [None] * (2 * n)
+        for i in range(2 * (n - 1)):
+            m[up(i)] = up(d[i])
+        m[n - 1] = 2 * n - 1                    # the new through strand
+        m[2 * n - 1] = n - 1
+        emb[d] = tuple(m)
+    return emb
 
 
 # --------------------------------------------------------------------------
