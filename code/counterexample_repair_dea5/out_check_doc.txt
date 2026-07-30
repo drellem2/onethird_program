@@ -1,0 +1,69 @@
+==============================================================================
+CHECK: the repair's prose against the repair's outputs
+==============================================================================
+  [ok  ] n=8 exact p                doc:yes out:yes
+  [ok  ] n=7 exact p                doc:yes out:yes
+  [ok  ] n=6 exact p                doc:yes out:yes
+  [ok  ] n=8 group                  doc:yes out:yes
+  [ok  ] n=7 group                  doc:yes out:yes
+  [ok  ] n=6 group                  doc:yes out:yes
+  [ok  ] n=8 population             doc:yes out:yes
+  [ok  ] n=8 extremal count         doc:yes out:yes
+  [ok  ] bonferroni 3               doc:yes out:yes
+  [ok  ] bonferroni 7               doc:yes out:yes
+  [ok  ] joint                      doc:yes out:yes
+  [ok  ] vacuity row                doc:yes out:yes
+  [ok  ] e=3 at n=8                 doc:yes out:yes
+  [ok  ] qmass rho|e n=8            doc:yes out:yes
+  [ok  ] qmass rho|e n=7            doc:yes out:yes
+  [ok  ] qmass rho|e n=6            doc:yes out:yes
+  [ok  ] qmass tau n=8              doc:yes out:yes
+  [ok  ] qmass z n=8                doc:yes out:yes
+  [ok  ] qfrac rho|e n=8            doc:yes out:yes
+  [ok  ] qfrac rho|e n=7            doc:yes out:yes
+  [ok  ] qfrac rho|e n=6            doc:yes out:yes
+  [ok  ] perm p n=6                 doc:yes out:yes
+  [ok  ] raw qmass z n=8            doc:yes out:yes
+  [ok  ] raw qfrac z n=8            doc:yes out:yes
+  [ok  ] saturation n=8             doc:yes out:yes
+  [ok  ] argmax n=7                 doc:yes out:yes
+  [ok  ] argmax n=6                 doc:yes out:yes
+  [ok  ] theorem4 cases             doc:yes out:yes
+  [ok  ] theorem4 nonuniform        doc:yes out:yes
+  [ok  ] theorem4 matrix cases      doc:yes out:yes
+  [ok  ] n<=8 exhaustive            doc:yes out:yes
+  [ok  ] n=8 classes                doc:yes out:yes
+  [ok  ] n=9 witness e              doc:yes out:yes
+  [ok  ] n=9 margins                doc:yes out:yes
+  [ok  ] n=10 e                     doc:yes out:yes
+  [ok  ] n=11 e                     doc:yes out:yes
+  [ok  ] lemma control              doc:yes out:yes
+  [ok  ] N2 fires                   doc:yes out:yes
+  [ok  ] N1 fires                   doc:yes out:yes
+  [ok  ] N3 fires                   doc:yes out:yes
+  [ok  ] A001035                    doc:yes out:yes
+  [ok  ] A000112                    doc:yes out:yes
+
+==============================================================================
+CHECK: struck sentences are quoted ONLY inside their epitaphs
+==============================================================================
+  2 '> **STRUCK' block(s) found in the target document
+  [ok  ] tied with every other member of its group      quoted, and only inside an epitaph
+  [ok  ] not weakly, but by an                          quoted, and only inside an epitaph
+  [ok  ] no cycle in 4200 random posets at each of `n = quoted, and only inside an epitaph
+  [ok  ] rank 1 of 5 tied with 4 at `n = 7`             quoted, and only inside an epitaph
+
+==============================================================================
+CHECK: the replacement sentences are live
+==============================================================================
+  [ok  ] The smallest `n` carrying a majority cycle is  live
+  [ok  ] For **any** probability weight on the `P`-comp live
+  [ok  ] Corrected verdict on the quotient side         live
+
+==============================================================================
+GUARDS
+==============================================================================
+  all guards clean
+
+ALL 42 QUOTED FIGURES VERIFIED, 4 STRUCK SENTENCES CONFINED TO THEIR
+EPITAPHS, 3 REPLACEMENTS LIVE, GUARDS CLEAN.

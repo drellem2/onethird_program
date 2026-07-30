@@ -1,0 +1,62 @@
+==============================================================================
+THEOREM 4 HOLDS FOR EVERY WEIGHT -- the generality its own proof has
+==============================================================================
+The target's Theorem 4, in the generality its proof has: EVERY weight.
+
+  Theorem 4 as committed:  "For the weight uniform on all P-compatible moves and
+  any non-chain P, lambda_2 = max over incomparable pairs {x,y} of s(x,y)."
+
+  The proof in section 5.2 uses two facts and neither mentions the weight:
+  lambda_X is non-increasing as X coarsens (true for any distribution on moves,
+  since coarsening X can only shrink the set of moves whose level is coarser than
+  or equal to X), and m_X is a combinatorial invariant of P.  So the theorem
+  holds for every weight, and the general form is the one section 5.5 needs --
+  the w_t family of Theorem 7 is exactly a family of non-uniform weights.
+
+Two things are tested, both against the ACTUAL transition matrix where the matrix
+is affordable:
+
+  A.  the SPECTRUM claim -- eigenvalues of M are exactly the lambda_X with
+      multiplicities m_X -- via power sums, exactly, for every weight used.
+      This is what makes lambda_2 meaningful without an eigensolver.
+  B.  the IDENTITY lambda_2 = max_{x||y} s(x,y), for every weight, on a wider
+      population where the matrix is not built.
+
+Weights used: the uniform-move weight; three random rational weights per poset
+(fixed seed, so this re-runs identically); the w_t family of Theorem 7 at
+t = 0, 1/4, 1/3, 1/2, 3/4, 1; and two deliberately degenerate weights (all mass
+on one move; mass on the finest moves only) since a universal claim has to
+survive the corners.
+
+------------------------------------------------------------------------------
+A. the SPECTRUM against the actual transition matrix, exactly
+------------------------------------------------------------------------------
+For each (poset, weight): build M on L(P) from the action, then check
+trace(M^k) = sum_X m_X lambda_X^k for k = 1..|L(P)|.  Equality for all k
+forces the eigenvalue multiset to be exactly {lambda_X with multiplicity
+m_X} (Newton's identities).  Exact rationals; no eigensolver.
+
+   (poset, weight) cases: 228   [n=3: 48, n=4: 180]   FAILURES: 0
+
+------------------------------------------------------------------------------
+B. the IDENTITY lambda_2 = max over incomparable pairs of s(x,y)
+------------------------------------------------------------------------------
+lambda_2 := max { lambda_X : m_X > 0, X not the finest partition }, i.e.
+the largest eigenvalue other than the stationary 1 = lambda_finest.
+
+   (poset, weight) cases: 972  [n=3: 48, n=4: 180, n=5: 744]
+   of which the weight is NOT the uniform-move weight: 891
+   FAILURES: 0
+
+------------------------------------------------------------------------------
+C. what this buys, and it is not pedantry
+------------------------------------------------------------------------------
+Under w_t the identity reads lambda_2 = t = max_{x||y} s_{w_t}(x,y), which
+is exactly the computation Theorem 7's proof does by hand -- so Theorem 7's
+lambda_2 value is a special case of Theorem 4 once Theorem 4 is stated in
+the generality it has.  Section 5.5's whole argument is about weights OTHER
+than the uniform-move one, and the committed statement of Theorem 4 does not
+reach them.
+
+VERDICT: the weight hypothesis in Theorem 4 is removable.  972 cases, 0
+failures, and the proof already established it.

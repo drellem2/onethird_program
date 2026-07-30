@@ -1,0 +1,89 @@
+==============================================================================
+CONTROLS -- code/counterexample_repair_dea5/
+==============================================================================
+Controls for the repair instrument, including ones that FIRE.
+
+Everything the repair asserts is produced by this directory, so the directory has
+to be certified from outside itself.  Two kinds of check appear below:
+
+  POSITIVE controls -- an independently computable quantity, checked.  Where a
+  route exists outside the repository the external sequence is used (A000112,
+  A001035, A000670); where the alternative is a slower route, the slow route is
+  run and compared (brute-force linear extensions, brute-force block orderings,
+  the level-lattice inversion the target's instrument uses, the actual transition
+  matrix).
+
+  NEGATIVE controls -- deliberate mutations, run to confirm the positive controls
+  can fail.  A control that has never failed is not known to be a control.  Each
+  mutation is applied to a copy, the affected check is re-run, and the run aborts
+  unless the check FAILS.
+
+C1  enumeration up to isomorphism against A000112 (external)
+  PASS   C1   [1, 1, 2, 5, 16, 63, 318, 2045, 16999]
+
+C2  the LABELLED count as an orbit sum, against A001035 (external).
+    sum over classes of n!/|Aut(P)| detects over- AND under-merging of
+    isomorphism classes, which a class count alone cannot.
+  PASS   C2   [1, 1, 3, 19, 219, 4231, 130023, 6129859]
+
+C3  the canonical form against brute force over all n! relabellings
+  PASS   C3   n <= 5, and 24 relabellings of every class at n = 4, 5
+
+C4  e(P|_S) for EVERY subset, against direct enumeration of L(P|_S)
+  PASS   C4   2312 (poset, subset) pairs, 0 bad
+
+C5  p(x,y) against direct counting over the enumerated L(P)
+  PASS   C5   337 pairs, 0 bad
+
+C6  'level' = 'acyclic quotient' against brute force over block ORDERS:
+    a partition is a level iff SOME ordering of its blocks is a move.
+  PASS   C6   3541 (poset, partition) pairs, 0 bad
+
+C7  THE FACTORISATION LEMMA of levels.py, against the level-lattice
+    inversion the target's instrument uses: m_X = prod_B M(P|_B) for
+    every level of every poset.
+  PASS   C7   2583 levels, 0 bad
+
+C8  sum over levels of m_X = e(P), and every m_X >= 0
+  PASS   C8   2447 posets, 0 with wrong total, 0 negative multiplicities
+
+C9  the M != 0 PRUNE drops no positive-multiplicity level: the pruned
+    enumeration and the full one give the same multiplicity total.
+  PASS   C9   402 posets, 0 disagreements
+
+C9b the CONVEXITY prune drops no level: count_levels with and without it
+  PASS   C9b   402 posets, 0 disagreements
+
+C10 the SPECTRUM against the actual transition matrix, exactly
+  PASS   C10   19 non-chain posets at n <= 4, 0 bad
+
+C11 move counts: the antichain against A000670 (external), the chain
+    against 2^(n-1)
+  PASS   C11   n <= 5
+
+C12 qmass and qfrac against a slow independent route: m from the
+    level-lattice inversion, summed over the interval partitions of L*
+    found by filtering ALL levels rather than by the composition DP.
+  PASS   C12   107 posets, 0 disagreements
+
+==============================================================================
+NEGATIVE CONTROLS -- each mutation must make a check above FAIL
+==============================================================================
+
+N1  drop the acyclicity requirement from 'level' (call every partition a
+    level).  C6 must fail.
+  PASS   N1   34 disagreements under the mutation
+
+N2  replace M(R) by e(R) in the factorisation lemma.  C7 must fail.
+  PASS   N2   190 mismatches under the mutation
+
+N3  compute qmass on the intervals of a FIXED labelling instead of L*.
+    The two must differ on some poset -- otherwise L* is not load-bearing
+    in the statistic and section 4 measures nothing about L*.
+  PASS   N3   25 posets where the two differ, 79 where they agree
+
+N4  a poset with a majority TIE must be refused a unique L*.
+  PASS   N4   46 tied posets, 46 refused an L*
+
+==============================================================================
+ALL CONTROLS PASS, AND ALL FOUR NEGATIVE CONTROLS FIRE.
