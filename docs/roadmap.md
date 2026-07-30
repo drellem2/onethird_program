@@ -54,10 +54,13 @@ genuinely untouched. Deliberately **not** filed: filing them would be continuing
 **Priority 2 — is this a publishable generalisation? ANSWERED (audited).** See the headline. The framework is
 Brown 2000; the support lattice is Sturm 1971. Not a new framework.
 
-**Priority 1 — how would a counterexample behave? DELIVERED, AUDIT STILL RUNNING (mg-a7b4).** Treat the
-following as **unaudited** until it reports. mg-24a3 (`f5d3485`) reports that Daniel's bridge object is a
-**theorem** — the majority relation on a counterexample is transitive, hence a linear order, so the
-distinguished linear extension `L*` exists unconditionally:
+**Priority 1 — how would a counterexample behave? DELIVERED AND AUDITED (mg-a7b4).** The audit found the
+**mathematics sound and both headline answers standing exactly as stated**: all seven nominated results
+(Theorem 1; Propositions 2, 5, 6; Theorems 3, 4, 7) were reproduced from an instrument sharing **no code**
+with the target's, taking a deliberately different route at every step, and the conditionality discipline
+holds throughout — no sentence asserts a property of a counterexample as a fact. mg-24a3 (`f5d3485`)
+establishes that Daniel's bridge object is a **theorem** — the majority relation on a counterexample is
+transitive, hence a linear order, so the distinguished linear extension `L*` exists unconditionally:
 
     p(x,y) > 2/3 and p(y,z) > 2/3  ⟹  Pr[x<y ∧ y<z] ≥ 2/3 + 2/3 − 1 = 1/3  ⟹  p(x,z) > 1/3,
     and the counterexample hypothesis forbids [1/3, 2/3], so p(x,z) > 2/3.
@@ -67,9 +70,25 @@ filter**: **60.3% of posets at n=7 already satisfy it and none is a counterexamp
 null — the outcome the pre-filed audit was written to insist on, and a cleaner negative than pm-onethird
 forecast. The bound is a *consequence* of the hypothesis and useless as a *test* of it.
 
-*(Provenance note: Condorcet-cycle branch struck. pm-onethird's caveat that `L*` might not exist was wrong —
-imported as a general obstruction without checking it against the strength of this hypothesis. Daniel
-refuted it in one line.)*
+**AND THE AUDIT FOUND THE ONE POSITIVE SIGNAL OF THE DAY, UNDER A CLAIMED NULL.** A *different* statistic
+in §4 was reported as distinguishing extremal posets "not weakly, but by an exact tie" — i.e. not at all.
+That universal is **false**, and the correction runs against the document's own verdict. The nine committed
+rows are all `e(P)=3` groups, and **the `e=3` group is vacuous by construction**: a non-chain poset with
+`e(P)=3` has `delta = 1/3` exactly, so *every* member is extremal and the reported tie is a tautology with
+nothing to compare against. In the one non-vacuous group examined — `e=9` at n=7, of size 13 — `qmass=1`
+holds for **exactly three posets, and those three are exactly the extremal ones**: p = 1/C(13,3) = **1/286**
+under a random-label null. At n=6 the `e=9` extremal poset is **strictly above** all six others in its group.
+
+**This is a hypothesis, not a result** — one group, found after the fact, among those that happened to be
+non-vacuous. It is being re-measured over non-vacuous groups only (mg-dea5, audit mg-0a11 gated). **If it
+replicates it is the most consequential finding of this arc, which is exactly why it gets the harshest
+reading.**
+
+*(Provenance notes. The Condorcet-cycle branch is struck for counterexamples: pm-onethird's caveat that `L*`
+might not exist was wrong — a general obstruction imported without checking it against the strength of this
+hypothesis, refuted by Daniel in one line. For **general** posets cycles do exist, and the audit exhibited an
+explicit n=9 witness, dropping the smallest known from 11 to 9; n=8 is **open**, not absent. No tension:
+transitivity is forced by the forbidden band `[1/3, 2/3]`, which a general poset does not satisfy.)*
 
 ## Now (in flight)
 - **mg-2da3** — repair the blind certification in `b68db5d`. mg-bd41 gutted `STATE.md` **175,552 → 37,958
