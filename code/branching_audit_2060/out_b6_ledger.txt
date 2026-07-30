@@ -1,0 +1,146 @@
+==========================================================================
+B6a  DERIVATION CENSUS
+==========================================================================
+Legend
+  CITED     located in a source, and this audit found the source text
+  ASKED     an object CONSTRUCTED because the brief asked for it by name
+  MINE      a derivation performed in mg-db09 and not taken from a source
+  flag      did mg-db09 flag it as its own?
+
+  [CITE] sec 0 bullets 1-4      Daniel's sentence = VO section 1, hypotheses separated
+           mg-db09 flags it: n/a
+           this audit      : 4 passages verbatim (B3b); 1 of 22 doc quotations deviates by an inserted comma
+
+  [CITE] sec 0 bullet 3         C[G(n)] = sum End(V^lambda) is Wedderburn, needs semisimplicity alone
+           mg-db09 flags it: n/a
+           this audit      : quoted; and the CONVERSE is elementary -- see below
+
+  [ASKE] sec 0 / T1             TL_n(beta) at beta = 3,2,1,0 built and measured
+           mg-db09 flags it: yes (sec 4 item 6)
+           this audit      : reproduces; but see the branching-graph finding in B1
+
+  [ASKE] sec 0 / T2             C S_4 on skipped chains and C inside M_2(C) built
+           mg-db09 flags it: yes (sec 4 item 6)
+           this audit      : reproduces
+
+  [MINE] sec 0 / T1d            'a path-pair BASIS survives without semisimplicity', from dim A = sum (dim V)^2
+           mg-db09 flags it: NO
+           this audit      : REFUTED in the 'if' direction -- B2
+
+  [MINE] sec 0 / T1b            'the branching graph is the same multiplicity-free graph at each beta'
+           mg-db09 flags it: partly (sec 4 item 3, as a 'dimension shadow')
+           this audit      : FALSE under VO's definition: different vertex sets AND multiplicities >= 2 -- B1
+
+  [MINE] sec 1 table row 3      'multiplicities in {0,1}, equivalently (VO Prop 1.4) Z(M,N) commutative' -- stated with no semisimplicity qualifier
+           mg-db09 flags it: NO
+           this audit      : the equivalence FAILS off semisimplicity, measured on mg-db09's own example: Z commutative at beta = 1 and 0 while multiplicities are 2 -- B1c
+
+  [MINE] sec 0 2x2 table / D4   the synthesis: semisimplicity load-bearing, multiplicity-freeness not
+           mg-db09 flags it: yes (D4, sec 4 item 6)
+           this audit      : the VERDICT stands but is FORCED, not measured -- see B6a note
+
+  [MINE] sec 7 item (a) / D9    symmetric AND unitriangular implies the identity
+           mg-db09 flags it: yes
+           this audit      : executed and holds, 9 of 9 -- B4c
+
+  [MINE] sec 7 item (b) / D10   a band is a von Neumann regular monoid
+           mg-db09 flags it: yes
+           this audit      : not checked by this audit
+
+  [MINE] sec 7 item (c) / D6    all kF(P) irreducibles 1-dim, so all branching is multiplicity-free
+           mg-db09 flags it: yes, and NOT booked as evidence
+           this audit      : consistent
+
+  [MINE] sec 7 item (d) / D8    kF(P) semisimple iff |F(P)| = |AC(P)|
+           mg-db09 flags it: yes
+           this audit      : verified on all 87 classes to n <= 5 -- B4a, B6b
+
+  [MINE] T3c / sec 2 row 1      'an algebra with identity Cartan matrix and one-dimensional simples is semisimple', and hence LRB-cellular = semisimple IN GENERAL
+           mg-db09 flags it: NO -- section 7's list of four does not contain it
+           this audit      : TRUE (dim A = sum C = #simples = dim A/rad), but it is a fifth one-liner and a claim about two whole classes of algebra, not about kF(P)
+
+  [CITE] sec 0 / D9             a cellular algebra has a symmetric Cartan matrix
+           mg-db09 flags it: yes -- flagged as the weakest citation
+           this audit      : UPGRADED: stated and attributed in a refereed source -- B3c
+
+  [CITE] sec 0 / D10            regular monoid algebras are quasi-hereditary (Putcha, via Margolis-Steinberg)
+           mg-db09 flags it: yes -- primary not read
+           this audit      : quotation verbatim (B3b); the APPLICATION to kF(P) is NOT verified by this audit either
+
+  [CITE] sec 0 / T3c            the Cartan matrix of kF(P) is unipotent lower triangular
+           mg-db09 flags it: yes (sec 4 item 4)
+           this audit      : rebuilt from formula (4.9), agrees on all 9 rows -- B4b
+
+  [CITE] sec 3                  TL semisimplicity controls (Ridout-Saint-Aubin)
+           mg-db09 flags it: n/a
+           this audit      : all six reproduced independently -- selftest2060
+
+  DERIVATIONS PERFORMED IN mg-db09 RATHER THAN LOCATED : 9
+  OF THOSE, NOT FLAGGED BY mg-db09                     : 3
+
+  mg-db09's section 7 says 'Four elementary one-line derivations were
+  needed and each is flagged in place'.  The count of derivations that
+  are mg-db09's own is larger than four, and 3 of them are not in that
+  list.  Two of the three unflagged ones are WRONG or OVERSTATED (the
+  path-pair basis, the parameter-independent branching graph); the third
+  is true.
+
+  A NOTE ON WHAT T1 AND T2 CAN ESTABLISH, which no list names.
+  The conclusion under test is 'A is a direct sum of endomorphism
+  algebras'.  A finite direct sum of full matrix algebras over a field IS
+  semisimple.  So
+
+      A = sum_lambda End(V_lambda)   =>   A semisimple
+
+  for EVERY finite-dimensional algebra, with no hypothesis at all.  The
+  half of the verdict that says 'failure of semisimplicity BREAKS the
+  conclusion' is therefore not something an example could have refuted:
+  it is the contrapositive of Wedderburn's easy direction, which mg-db09
+  quotes.  Likewise 'semisimple => the conclusion survives' is Wedderburn
+  itself and needs no branching hypothesis, which mg-db09 also says.
+
+  What T1 and T2 DO establish is the EXISTENCE of towers in the two
+  off-diagonal cells --- that both hypothesis-combinations are inhabited.
+  That is real and it is worth having.  But mg-db09's section 0 says
+  'Both halves are settled here by BUILDING the object each would
+  forbid', which credits the builds with settling the verdict.  The
+  verdict was settled by the quoted theorem; the builds settled that the
+  cells are non-empty.
+
+  This is the SAME critique mg-db09 applies to itself at D6 ('forced for
+  every P of every size, so a measurement of it could not do any work')
+  and does NOT apply to the conclusion columns of D2 and D3, where it
+  also applies.
+
+==========================================================================
+B6b  THE LEDGER, re-scored on the numbers this audit can check
+==========================================================================
+  row   claim                                          verdict
+  D5    dim kF/rad = |AC| on all classes to n <= 5     CONFIRMED+
+        measured: 87 of 87, 0 bad, NO CAP (mg-db09: 67 of 87)
+  D5    radical 90.4%% at the n = 5 antichain          CONFIRMED, and derived from the radical for the first time
+        measured: 541 - 52 = 489, 90.4%, from the TRACE FORM
+  D5    radical 95.7% at n = 6                         ARITHMETIC CONFIRMED; the identity at n = 6 NOT re-derived by this audit either
+        measured: 4683 vs 203 -> 95.7%, arithmetic on counts only
+  D8    kF(P) semisimple for exactly 1 class at each n CONFIRMED
+        measured: n=1: 1 of 1; n=2: 1 of 2; n=3: 1 of 5; n=4: 1 of 16; n=5: 1 of 63
+  D11   dim C S_5 = 120, semisimple                    CONFIRMED
+        measured: dim 120, dim rad 0
+  D11   dim k Sigma_5 = 541, 90.4% radical             CONFIRMED
+        measured: dim 541, dim rad 489
+  D7    Cartan unipotent lower triangular; symmetric i CONFIRMED
+        measured: 9 of 9 rows by MSS formula (4.9), the route mg-db09 did not take
+  D2    TL branching graph parameter-independent and m REFUTED as stated
+        measured: vertex sets differ at beta = 0; multiplicities reach 2 at beta = 1 and 0
+  D2    TL path-pair count 132 at n = 6 at every beta; CONFIRMED
+        measured: reproduced exactly, all four parameters
+  D3    C S_4 semisimple on every chain; GZ not maxima CONFIRMED
+        measured: every T2a/T2b/T2c/T2d number reproduced on a disjoint instrument (B7)
+  D9    cellular => symmetric Cartan                   UPGRADED from 'secondary source' to 'refereed, attributed'
+        measured: Ehrig-Tubbenhauer Remark 2.19, attributing Koenig-Xi 1999
+  D10   kF(P) is quasi-hereditary                      NOT ESTABLISHED BY THIS AUDIT
+        measured: not tested here
+  D12   the candidate space is the eight rows of secti row 3 is no longer 'not evaluated'
+        measured: row 3 (towers of recollement) partially evaluated here: (A1) holds, (A2)(i) fails for every face idempotent at n = 3, 4
+
+TOTAL BAD: 0
