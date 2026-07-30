@@ -123,10 +123,22 @@ The n = 7 e = 9 group is where mg-a7b4 found this, and the n = 6 e = 9 group
 was in the same table.  Those two are the GENERATING observations and their
 p-values are not evidence -- they are the reason the hypothesis exists.
 
-The n = 8 e = 9 group is a genuinely new population.  The target document
-never reached n = 8 and neither did the audit.  At n = 8 there is exactly ONE
-non-vacuous group containing an extremal poset, so the pre-specified family
-of tests has SIZE 1 and there is no multiplicity to correct for.
+What is true about the n = 8 e = 9 group is the PRE-SPECIFICATION, and
+only that.  The target document never reached n = 8 and neither did the
+audit, and the hypothesis was written down before n = 8 was computed.  At
+n = 8 there is exactly ONE non-vacuous group containing an extremal poset,
+so the pre-specified family of tests has SIZE 1 and there is no
+multiplicity to correct for.
+
+BUT MULTIPLICITY WAS NEVER THE PROBLEM AND DEPENDENCE IS (mg-a893, landing
+mg-0a11).  The n = 8 group is EXACTLY the cut extensions of the n = 7
+group; delta and qmass are inherited along that operation; so conditional
+on n = 7, which is a GENERATING observation above, the n = 8 outcome had
+probability 1.  The phrase NEW POPULATION, which stood here, is WITHDRAWN.
+The three groups carry FIVE distinct cores, one of them extremal, and the
+honest exact p is 1/5 at all three sizes.  See cores.py -> out_cores.txt.
+The three figures below are correct arithmetic about the wrong null model:
+each corrects for MULTIPLICITY, and none of them corrects for DEPENDENCE.
 
   PRE-SPECIFIED REPLICATION, n = 8, e = 9: 6 of 20, perfect = YES,
   exact p = 1/38760 = 2.58e-05,  AUC = 1 = 1.000
@@ -138,8 +150,10 @@ Multiple-comparison position, stated three ways and all of them survive:
     ones included as if they had been testable:        p <= 0.000181
   * joint probability of all 3 groups separating perfectly, under the
     independent random-label null:                     1.29e-08
-    (this one CONTAINS the generating observations and is reported for
-     completeness, not as the test.)
+    (this one CONTAINS the generating observations, AND ASSUMES AN
+     INDEPENDENCE THAT DOES NOT HOLD -- the three events are
+     deterministically nested -- so it is not a probability of anything
+     and is retained only because it was published.)
 
 ==============================================================================
 5.  THE POWERED TEST: qmass AGAINST delta WITHIN EVERY e-GROUP

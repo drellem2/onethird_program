@@ -1,69 +1,132 @@
 ==============================================================================
-CHECK: the repair's prose against the repair's outputs
+CHECK 1: every figure, IN ITS DOCUMENT, IN ITS SECTION, AGAINST ONE OUTPUT
 ==============================================================================
-  [ok  ] n=8 exact p                doc:yes out:yes
-  [ok  ] n=7 exact p                doc:yes out:yes
-  [ok  ] n=6 exact p                doc:yes out:yes
-  [ok  ] n=8 group                  doc:yes out:yes
-  [ok  ] n=7 group                  doc:yes out:yes
-  [ok  ] n=6 group                  doc:yes out:yes
-  [ok  ] n=8 population             doc:yes out:yes
-  [ok  ] n=8 extremal count         doc:yes out:yes
-  [ok  ] bonferroni 3               doc:yes out:yes
-  [ok  ] bonferroni 7               doc:yes out:yes
-  [ok  ] joint                      doc:yes out:yes
-  [ok  ] vacuity row                doc:yes out:yes
-  [ok  ] e=3 at n=8                 doc:yes out:yes
-  [ok  ] qmass rho|e n=8            doc:yes out:yes
-  [ok  ] qmass rho|e n=7            doc:yes out:yes
-  [ok  ] qmass rho|e n=6            doc:yes out:yes
-  [ok  ] qmass tau n=8              doc:yes out:yes
-  [ok  ] qmass z n=8                doc:yes out:yes
-  [ok  ] qfrac rho|e n=8            doc:yes out:yes
-  [ok  ] qfrac rho|e n=7            doc:yes out:yes
-  [ok  ] qfrac rho|e n=6            doc:yes out:yes
-  [ok  ] perm p n=6                 doc:yes out:yes
-  [ok  ] raw qmass z n=8            doc:yes out:yes
-  [ok  ] raw qfrac z n=8            doc:yes out:yes
-  [ok  ] saturation n=8             doc:yes out:yes
-  [ok  ] argmax n=7                 doc:yes out:yes
-  [ok  ] argmax n=6                 doc:yes out:yes
-  [ok  ] theorem4 cases             doc:yes out:yes
-  [ok  ] theorem4 nonuniform        doc:yes out:yes
-  [ok  ] theorem4 matrix cases      doc:yes out:yes
-  [ok  ] n<=8 exhaustive            doc:yes out:yes
-  [ok  ] n=8 classes                doc:yes out:yes
-  [ok  ] n=9 witness e              doc:yes out:yes
-  [ok  ] n=9 margins                doc:yes out:yes
-  [ok  ] n=10 e                     doc:yes out:yes
-  [ok  ] n=11 e                     doc:yes out:yes
-  [ok  ] lemma control              doc:yes out:yes
-  [ok  ] N2 fires                   doc:yes out:yes
-  [ok  ] N1 fires                   doc:yes out:yes
-  [ok  ] N3 fires                   doc:yes out:yes
-  [ok  ] A001035                    doc:yes out:yes
-  [ok  ] A000112                    doc:yes out:yes
+  [ok  ] n=8 exact p / repair                   repair  n=9/9 sec:yes out:yes
+  [ok  ] n=8 exact p / target                   target  n=4/4 sec:yes out:yes
+  [ok  ] n=8 p spelled out / repair             repair  n=1/1 sec:yes out:yes
+  [ok  ] n=8 p spelled out / target             target  n=1/1 sec:yes out:yes
+  [ok  ] n=7 exact p / repair                   repair  n=4/4 sec:yes out:yes
+  [ok  ] n=7 exact p / target                   target  n=1/1 sec:yes out:yes
+  [ok  ] n=6 exact p / repair                   repair  n=3/3 sec:yes out:yes
+  [ok  ] n=6 exact p / target                   target  n=1/1 sec:yes out:yes
+  [ok  ] n=8 group / repair                     repair  n=3/3 sec:yes out:yes
+  [ok  ] n=8 group / target                     target  n=2/2 sec:yes out:yes
+  [ok  ] n=7 group / repair                     repair  n=3/3 sec:yes out:yes
+  [ok  ] n=6 group / repair                     repair  n=2/2 sec:yes out:yes
+  [ok  ] n=8 extremal count                     repair  n=1/1 sec:yes out:yes
+  [ok  ] bonferroni 3                           repair  n=1/1 sec:yes out:yes
+  [ok  ] bonferroni 7                           repair  n=1/1 sec:yes out:yes
+  [ok  ] joint                                  repair  n=4/4 sec:yes out:yes
+  [ok  ] honest p over the cores                repair  n=1/1 sec:yes out:yes
+  [ok  ] cut extensions measured                repair  n=2/2 sec:yes out:yes
+  [ok  ] inheritance control fires              repair  n=1/1 sec:yes out:yes
+  [ok  ] five cores pooled                      repair  n=1/1 sec:yes out:yes
+  [ok  ] core reduction is inert elsewhere      repair  n=1/1 sec:yes out:yes
+  [ok  ] cut-free at n=7,8                      repair  n=1/1 sec:yes out:yes
+  [ok  ] extremal core covers                   repair  n=1/1 sec:yes out:yes
+  [ok  ] nothing enters after n=6               repair  n=1/1 sec:yes out:yes
+  [ok  ] vacuity row                            repair  n=1/1 sec:yes out:yes
+  [ok  ] raw qmass z n=8                        repair  n=1/1 sec:yes out:yes
+  [ok  ] raw qfrac z n=8                        repair  n=2/2 sec:yes out:yes
+  [ok  ] saturation n=8                         repair  n=1/1 sec:yes out:yes
+  [ok  ] theorem4 cases                         repair  n=2/2 sec:yes out:yes
+  [ok  ] theorem4 nonuniform                    repair  n=2/2 sec:yes out:yes
+  [ok  ] theorem4 matrix cases                  repair  n=2/2 sec:yes out:yes
+  [ok  ] n<=8 exhaustive                        repair  n=2/2 sec:yes out:yes
+  [ok  ] n=8 classes                            repair  n=1/1 sec:yes out:yes
+  [ok  ] n=9 witness e                          repair  n=1/1 sec:yes out:yes
+  [ok  ] n=9 margins                            repair  n=1/1 sec:yes out:yes
+  [ok  ] n=10 e                                 repair  n=2/2 sec:yes out:yes
+  [ok  ] n=11 e                                 repair  n=2/2 sec:yes out:yes
+  [ok  ] lemma control                          repair  n=2/2 sec:yes out:yes
+  [ok  ] N2 fires                               repair  n=1/1 sec:yes out:yes
+  [ok  ] N1 fires                               repair  n=1/1 sec:yes out:yes
+  [ok  ] N3 fires                               repair  n=1/1 sec:yes out:yes
+  [ok  ] A001035                                repair  n=1/1 sec:yes out:yes
+  [ok  ] A000112                                repair  n=1/1 sec:yes out:yes
 
 ==============================================================================
-CHECK: struck sentences are quoted ONLY inside their epitaphs
+CHECK 2: table cells, AGAINST THEIR ROW KEY and the printed row
 ==============================================================================
-  2 '> **STRUCK' block(s) found in the target document
-  [ok  ] tied with every other member of its group      quoted, and only inside an epitaph
-  [ok  ] not weakly, but by an                          quoted, and only inside an epitaph
-  [ok  ] no cycle in 4200 random posets at each of `n = quoted, and only inside an epitaph
-  [ok  ] rank 1 of 5 tied with 4 at `n = 7`             quoted, and only inside an epitaph
+  [ok  ] group table n=8 status                 repair  row:yes cell:yes out:yes
+  [ok  ] group table n=7 status                 repair  row:yes cell:yes out:yes
+  [ok  ] group table n=6 status                 repair  row:yes cell:yes out:yes
+  [ok  ] group table n=8 e=3 vacuous            repair  row:yes cell:yes out:yes
+  [ok  ] proposition V n=8                      repair  row:yes cell:yes out:yes
+  [ok  ] proposition V n=3                      repair  row:yes cell:yes out:yes
+  [ok  ] population n=8                         repair  row:yes cell:yes out:yes
+  [ok  ] population n=8 extremal                repair  row:yes cell:yes out:yes
+  [ok  ] test table n=8 core p                  repair  row:yes cell:yes out:yes
+  [ok  ] test table n=7 core p                  repair  row:yes cell:yes out:yes
+  [ok  ] test table n=6 core p                  repair  row:yes cell:yes out:yes
+  [ok  ] dependence n=7->8 identity             repair  row:yes cell:yes out:yes
+  [ok  ] dependence n=6->7 identity             repair  row:yes cell:yes out:yes
+  [ok  ] dependence n=5->6 not identity         repair  row:yes cell:yes out:yes
+  [ok  ] cut-free table n=8                     repair  row:yes cell:yes out:yes
+  [ok  ] cut-free table n=6                     repair  row:yes cell:yes out:yes
+  [ok  ] cores table n=8                        repair  row:yes cell:yes out:yes
+  [ok  ] cores table n=6                        repair  row:yes cell:yes out:yes
+  [ok  ] extremal core row                      repair  row:yes cell:yes out:yes
+  [ok  ] powered n=8 rho|e                      repair  row:yes cell:yes out:yes
+  [ok  ] powered n=7 rho|e                      repair  row:yes cell:yes out:yes
+  [ok  ] powered n=6 rho|e                      repair  row:yes cell:yes out:yes
+  [ok  ] powered n=8 tau_b                      repair  row:yes cell:yes out:yes
+  [ok  ] powered n=8 z                          repair  row:yes cell:yes out:yes
+  [ok  ] powered n=6 perm p                     repair  row:yes cell:yes out:yes
+  [ok  ] powered n=8 qfrac rho|e                repair  row:yes cell:yes out:yes
+  [ok  ] powered n=7 qfrac rho|e                repair  row:yes cell:yes out:yes
+  [ok  ] powered n=6 qfrac rho|e                repair  row:yes cell:yes out:yes
+  [ok  ] deflation n=7 argmax                   repair  row:yes cell:yes out:yes
+  [ok  ] deflation n=6 argmax                   repair  row:yes cell:yes out:yes
 
 ==============================================================================
-CHECK: the replacement sentences are live
+CHECK 3: framing, caveats and status language are LIVE where they belong
 ==============================================================================
-  [ok  ] The smallest `n` carrying a majority cycle is  live
-  [ok  ] For **any** probability weight on the `P`-comp live
-  [ok  ] Corrected verdict on the quotient side         live
+  [ok  ] target: n=9 is exact                           target  live
+  [ok  ] target: theorem 4 general                      target  live
+  [ok  ] target: corrected verdict                      target  live
+  [ok  ] repair: generating observations                repair  live
+  [ok  ] repair: post-hoc is a hypothesis               repair  live
+  [ok  ] repair: pre-specification, and only that       repair  live
+  [ok  ] repair: dependence is the problem              repair  live
+  [ok  ] repair: honest p is 1/5                        repair  live
+  [ok  ] repair: not a retraction                       repair  live
+  [ok  ] repair: n=9 is exact                           repair  live
+  [ok  ] repair: not a filter                           repair  live
+  [ok  ] repair: not a filter, the figure               repair  live
+  [ok  ] repair: not explained                          repair  live
+  [ok  ] repair: not a counterexample statement         repair  live
+  [ok  ] repair: dependence caveat                      repair  live
 
 ==============================================================================
-GUARDS
+CHECK 4: struck sentences are quoted ONLY inside their epitaphs
+==============================================================================
+  2 '> **STRUCK' block(s) in the target document
+    [ok  ] tied with every other member of its group            quoted, and only inside an epitaph
+    [ok  ] not weakly, but by an                                quoted, and only inside an epitaph
+    [ok  ] no cycle in 4200 random posets at each of `n = 8, 9, quoted, and only inside an epitaph
+    [ok  ] rank 1 of 5 tied with 4 at `n = 7`                   quoted, and only inside an epitaph
+  1 '> **STRUCK' block(s) in the repair document
+    [ok  ] **The `n = 8` group is a pre-specified test in a new quoted, and only inside an epitaph
+    [ok  ] PRE-SPECIFIED REPLICATION, `n = 8`, `e = 9`: 6 of 20 quoted, and only inside an epitaph
+
+==============================================================================
+CHECK 5: a struck claim may be QUOTED but never ASSERTED, in EITHER document
+==============================================================================
+    [ok  ] tied with every other member of its grou target  1 occurrence(s), 0 asserted
+    [ok  ] not weakly, but by an                    target  1 occurrence(s), 0 asserted
+    [ok  ] no cycle in 4200 random posets at each o target  1 occurrence(s), 0 asserted
+    [ok  ] no cycle in 4200 random posets at each o repair  2 occurrence(s), 0 asserted
+    [ok  ] rank 1 of 5 tied with 4 at `n = 7`       target  1 occurrence(s), 0 asserted
+    [ok  ] **The `n = 8` group is a pre-specified t repair  1 occurrence(s), 0 asserted
+    [ok  ] PRE-SPECIFIED REPLICATION, `n = 8`, `e = repair  1 occurrence(s), 0 asserted
+
+==============================================================================
+GUARDS -- a list, and therefore NOT what closes mg-0a11's battery
 ==============================================================================
   all guards clean
 
-ALL 42 QUOTED FIGURES VERIFIED, 4 STRUCK SENTENCES CONFINED TO THEIR
-EPITAPHS, 3 REPLACEMENTS LIVE, GUARDS CLEAN.
+ALL 43 FIGURES VERIFIED PER DOCUMENT / PER SECTION / PER OUTPUT,
+30 TABLE CELLS VERIFIED AGAINST THEIR ROW KEY, 15 SENTENCES LIVE,
+6 STRUCK SENTENCES CONFINED TO THEIR EPITAPHS, 6 NEVER ASSERTED,
+GUARDS CLEAN.

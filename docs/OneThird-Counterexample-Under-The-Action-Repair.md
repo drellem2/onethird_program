@@ -4,9 +4,18 @@
 `docs/OneThird-Counterexample-Under-The-Action.md` (mg-24a3, `f5d3485`). Everything numerical here is produced
 by `code/counterexample_repair_dea5/`, which **imports nothing** from `code/counterexample_probe_24a3/` (the
 target) or `code/counterexample_audit_a7b4/` (the audit) and shares no code with either. Regenerate with
-`code/counterexample_repair_dea5/run_all.sh` — pure Python 3, no dependencies, about 7 minutes; the committed
-outputs are `out_controls.txt`, `out_theorem4.txt`, `out_section4.txt`, `out_cycles.txt`, `out_check_doc.txt`.
-Exact integer and rational arithmetic throughout.*
+`code/counterexample_repair_dea5/run_all.sh` — pure Python 3, no dependencies, about 9 minutes; the committed
+outputs are `out_controls.txt`, `out_theorem4.txt`, `out_section4.txt`, `out_cycles.txt`, `out_cores.txt`,
+`out_check_doc.txt`. Exact integer and rational arithmetic throughout.*
+
+> **AMENDED by mg-a893, landing mg-0a11's audit of this document.** Two of mg-0a11's findings are actioned
+> here and neither of them touches a measurement. **§3.4 is new**: the three `e = 9` groups are not three
+> independent samples, the exact `p` over what is actually independent is **`1/5`**, and the phrase *"new
+> population"* is withdrawn — see the epitaph in §3.3. **§8.2 is new**: `check_doc_repair.py` compared the
+> two documents *concatenated*, so a figure could be wrong throughout one of them and still be found in the
+> other; it now checks per document, per output file and per section, and mg-0a11's own 14-mutation battery
+> is re-run **unmodified** as the acceptance gate. Everything measured in this document reproduced from
+> mg-0a11's disjoint instrument and nothing measured is changed.
 
 ---
 
@@ -14,7 +23,8 @@ Exact integer and rational arithmetic throughout.*
 
 | | |
 |---|---|
-| **PRIMARY — the null is false, and the effect is real** | In all three `e`-groups where the comparison was *capable* of failing, `qmass = 1` picks out **exactly** the `δ`-extremal posets: 1 of 7 at `n = 6`, 3 of 13 at `n = 7`, **6 of 20 at `n = 8`**. The `n = 8` group is a pre-specified replication in a population neither the target nor the audit reached, its test family has size **1**, and its exact `p` is **`1/38760 = 2.6 × 10⁻⁵`**. On the powered test — pooled within-`e` association over the whole population, which is the recipe of the target's own §6 — `qmass` sits at **`ρ|e ≈ −0.27`** against `|ρ|e| ≤ 0.10` for **every one** of the nine invariants in that table. |
+| **PRIMARY — the null is false, and the effect is real** | In all three `e`-groups where the comparison was *capable* of failing, `qmass = 1` picks out **exactly** the `δ`-extremal posets: 1 of 7 at `n = 6`, 3 of 13 at `n = 7`, **6 of 20 at `n = 8`**. On the powered test — pooled within-`e` association over the whole population, which is the recipe of the target's own §6 — `qmass` sits at **`ρ|e ≈ −0.27`** against `|ρ|e| ≤ 0.10` for **every one** of the nine invariants in that table. |
+| **AND THE STRENGTH OF IT, corrected — `1/5`, not `1/38760`** | The group-level exact `p` at `n = 8` is `1/38760 = 2.6 × 10⁻⁵`, **and that is not the strength of the evidence.** Every one of the 20 members of the `n = 8` group is a member of the `n = 7` group with one **cut element** — an element comparable to everything — adjoined, and `δ` and `qmass` are *inherited* along that operation, by a one-line theorem and by measurement respectively. So the three groups carry **five distinct cores between them, of which exactly one is extremal, at `n = 6`, `7` and `8` alike**. The honest exact `p` over the cores is **`1/5`**, it is the same `1/5` three times, and the joint `1.29 × 10⁻⁸` is a product of **deterministically nested** events rather than of independent ones. **§3.4, `out_cores.txt`.** |
 | **AND A CLEAN SPLIT, which is the part that makes it credible** | `qfrac`, whose *raw* effect is the **larger** of the two (`z = +4.49` at `n = 7`, `+6.91` at `n = 8`), **is** null after the control: `ρ|e` between `−0.01` and `+0.02`. So the target's §4 verdict is correct for one statistic and false for the other, and the instrument that found the effect also finds the null next to it. |
 | **DEFLATION, stated because it is true** | Inside those groups the separation does **not** need `L*`: no non-extremal member reaches `qmass = 1` on **any** linear extension, so `max_{L ∈ L(P)} qmass(L) = 1` gives the same split and `L*` merely attains the maximum. And `L*` is **not** the argmax in general (583 of 669 at `n = 7`), so that is not a theorem either. |
 | **ALSO — Theorem 4 generalised** | The weight hypothesis is removable: `λ₂ = max_{x∥y} s(x,y)` for **every** weight. 972 (poset, weight) cases, 891 non-uniform, **0 failures**, of which 228 are checked against the actual transition matrix in exact rationals — pinning the whole spectrum, not just `λ₂`. |
@@ -165,11 +175,16 @@ do not favour the marked set).
 size-matched comparison set and is taken **entire**, not sampled.
 **`p` is exact** — every one of the `C(N,k)` labellings is enumerated, not simulated.
 
-| `n` | `e` | `N` | `k` | `#qmass = 1` | separation | AUC | exact `p` | `1/p` |
-|---|---|---|---|---|---|---|---|---|
-| 6 | 9 | 7 | 1 | 1 | **perfect** | `1` | `1/7` | 7 |
-| 7 | 9 | 13 | 3 | 3 | **perfect** | `1` | `1/286` | 286 |
-| 8 | 9 | 20 | 6 | 6 | **perfect** | `1` | **`1/38760`** | 38760 |
+| `n` | `e` | `N` | `k` | `#qmass = 1` | separation | AUC | group-level `p` | `1/p` | distinct cores `C` | core-level `p` |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 6 | 9 | 7 | 1 | 1 | **perfect** | `1` | `1/7` | 7 | 5 | **`1/5`** |
+| 7 | 9 | 13 | 3 | 3 | **perfect** | `1` | `1/286` | 286 | 5 | **`1/5`** |
+| 8 | 9 | 20 | 6 | 6 | **perfect** | `1` | **`1/38760`** | 38760 | 5 | **`1/5`** |
+
+**The last two columns are the ones to read, and §3.4 is why.** The group-level `p` counts each member of a
+group as an independent chance for the hypothesis to fail. Most of them are not: `δ` and `qmass` are
+inherited when an element comparable to everything is adjoined, so members sharing a core share their verdict.
+Five cores, one of them extremal, at every one of the three sizes — **the same five**.
 
 *Perfect* is both inclusions: the `qmass = 1` members are exactly the extremal ones, so **no** non-extremal
 member of the group reaches `1`. The non-extremal values are `8/9` and `2/3` in all three groups. AUC — the
@@ -184,15 +199,28 @@ This is stated first because it is the part most easily overclaimed.
 the generating observations, and their `p`-values are not evidence** — they are the reason the hypothesis
 exists. `1/286` found after the fact among the groups that happened to be non-vacuous is a hypothesis.
 
-**The `n = 8` group is a pre-specified test in a new population.** The target document stops at `n = 7`; so
-does the audit; the hypothesis was written down (in the mg-dea5 brief, and in the 15:15 roadmap) before
-`n = 8` was computed. And at `n = 8` there is exactly **one** non-vacuous group containing an extremal poset,
-so the family of tests has **size 1** and there is no multiplicity to correct for.
+**What is true about `n = 8` is the PRE-SPECIFICATION, and only that.** The target document stops at
+`n = 7`; so does the audit; the hypothesis was written down (in the mg-dea5 brief, and in the roadmap
+`b196b2c`) before `n = 8` was computed. At `n = 8` there is exactly **one** non-vacuous group containing an
+extremal poset, so the family of tests has **size 1** and there is no multiplicity to correct for.
+Multiplicity, however, was never the problem. **Dependence is**, and §3.4 is that.
 
-> **PRE-SPECIFIED REPLICATION, `n = 8`, `e = 9`: 6 of 20, perfect, exact `p = 1/38760 = 2.58 × 10⁻⁵`,
-> AUC `= 1`.**
+> **STRUCK (mg-a893, landing mg-0a11 BROKEN 1).** This subsection previously continued:
+>
+> **The `n = 8` group is a pre-specified test in a new population.**
+>
+> — and drew from it a headline **PRE-SPECIFIED REPLICATION, `n = 8`, `e = 9`: 6 of 20, perfect, exact
+> `p = 1/38760 = 2.58 × 10⁻⁵`, AUC `= 1`**, together with a joint figure of `1.29 × 10⁻⁸` across the three
+> groups. The pre-specification is genuine and is *not* withdrawn. **The phrase that fails is "new
+> population."** The `n = 8` group is exactly the cut extensions of the `n = 7` group, `δ` and `qmass` are
+> inherited along that operation, and so *conditional on `n = 7`, which this document itself names a
+> generating observation, the `n = 8` outcome had probability `1`, not `1/38760`.* A pre-specified test of a
+> deterministic consequence of the data that generated the hypothesis is still not evidence. The three
+> `p`-values were never three measurements, so their product is not a joint probability of anything.
 
-Stated three further ways, all of which survive:
+The three multiple-comparison statements below are arithmetically correct and are kept, **struck through in
+their interpretation rather than in their arithmetic**: each is a correction for *multiplicity*, and
+multiplicity is not what is wrong here.
 
 * Bonferroni over all **3** non-vacuous groups ever run: `p ≤ 7.7 × 10⁻⁵`.
 * Bonferroni over all **7** groups containing an extremal poset — counting the four vacuous ones as if they
@@ -200,7 +228,95 @@ Stated three further ways, all of which survive:
   10⁻⁴`.
 * Joint probability of all three groups separating perfectly under the independent random-label null:
   `1.29 × 10⁻⁸`. **This one contains the generating observations** and is reported for completeness, not as
-  the test.
+  the test. **It also assumes independence that does not hold** — see §3.4 — so it is not a probability of
+  anything and is retained only because it was published.
+
+---
+
+### 3.4 THE DEPENDENCE: five cores, not forty, and the honest `p` is `1/5`
+
+*`code/counterexample_repair_dea5/cores.py` → `out_cores.txt`. Every figure in this subsection is produced by
+that file, which shares `poset.py` and `levels.py` with the rest of this instrument and nothing else. It was
+written to check mg-0a11's finding rather than to accept it, and it reproduces every number of it that lies
+within this instrument's reach.*
+
+> **Definition.** `x` is a **cut element** of `P` if it is comparable to **every** other element. `Q` is a
+> **cut extension** of `P` if `Q` is `P` with one cut element adjoined. The **core** of `P` is what remains
+> when cut elements are deleted repeatedly; it is well defined (the deletion terminates, and it is locally
+> confluent because a cut element of `Q` is still one of `Q − x`, so Newman's lemma applies).
+
+> **Theorem (inheritance).** Let `x` be a cut element of `Q` and `P = Q − x`, with `D` the elements below `x`
+> and `U` those above. Transitivity puts every element of `D` below every element of `U` in `P` too, so every
+> linear extension of `P` already lists `D` before `U` and inserting `x` at that boundary is a **bijection**
+> `L(P) → L(Q)`. Hence `e(Q) = e(P)`; `Inc(Q) = Inc(P)`, `x` being comparable to everything; every `p(x,y)`
+> is unchanged; and therefore `δ(Q) = δ(P)`, tie-freeness and acyclicity are inherited, and `L*(Q)` is `L*(P)`
+> with `x` inserted at the same boundary. ∎
+
+`qmass` is **not** covered by that argument and is not proved here. It is **measured**, on every cut extension
+of every poset in the §2 population at `n = 5` and `n = 6`:
+
+| | |
+|---|---|
+| cut extensions inside the population | **257** |
+| `(e, δ, qmass)` all inherited | **257** |
+| inheritance failures | **0** |
+
+**And the control fires.** Run the same measurement over the *generic* one-element extension — a new maximal
+element above an arbitrary order ideal, where the new element is **not** a cut element — and the inheritance
+breaks on **1378 of 1378**. So "inherited" is a property of cut extension and not of adjoining an element.
+
+**The `n = 8` group is exactly the cut extensions of the `n = 7` group.** Up to isomorphism, and both
+directions:
+
+| `n → n+1` | cut extensions of group(`n`) | `=` group(`n+1`)? | members of group(`n+1`) that are new | reduction onto group(`n`) |
+|---|---|---|---|---|
+| 5 → 6 | 4 | no | **3** | 2 of 2 |
+| 6 → 7 | 13 | **YES** | 0 | 7 of 7 |
+| 7 → 8 | 20 | **YES** | 0 | 13 of 13 |
+
+| `n` | `N` | members with a cut element | **cut-free** |
+|---|---|---|---|
+| 5 | 2 | 0 | 2 |
+| 6 | 7 | 4 | **3** |
+| 7 | 13 | **13** | **0** |
+| 8 | 20 | **20** | **0** |
+
+The two tables say the same thing twice: `group(n+1)` sits inside the cut extensions of `group(n)` exactly
+when `group(n+1)` has no cut-free member, and after `n = 6` it has none. **Nothing enters the family after
+`n = 6`.**
+
+So the count that matters is the number of **distinct cores**, because two members with the same core have
+the same `(δ, qmass)`:
+
+| `n` | `N` | `k` extremal | distinct cores `C` | extremal cores | group-level `p` | **core-level `p`** |
+|---|---|---|---|---|---|---|
+| 6 | 7 | 1 | 5 | 1 | `1/7` | **`1/5`** |
+| 7 | 13 | 3 | 5 | 1 | `1/286` | **`1/5`** |
+| 8 | 20 | 6 | 5 | 1 | `1/38760` | **`1/5`** |
+
+**And the reduction is capable of saying nothing, which is why it says something here.** Over *every*
+`e`-group in the population — 691 of them at `n = 8`, not just the three under test — `C = N` in **553** and
+`C < N` in **138**. The reduction is inert on four groups in five. It is not inert on these.
+
+The five cores, pooled over `n = 5 … 8`, are the whole of the family:
+
+| size | `δ` | `qmass` | in groups | covers |
+|---|---|---|---|---|
+| 5 | `4/9` | `8/9` | 5,6,7,8 | `0<2 1<3 1<4 2<4` |
+| 5 | `4/9` | `8/9` | 5,6,7,8 | `0<2 0<3 1<3 2<4` |
+| **6** | **`1/3`** | **`1`** | 6,7,8 | `0<2 1<3 1<4 2<3 2<4 3<5` |
+| 6 | `4/9` | `2/3` | 6,7,8 | `0<2 0<3 1<3 3<4 4<5` |
+| 6 | `4/9` | `2/3` | 6,7,8 | `0<2 1<5 2<3 3<4 3<5` |
+
+> **THE HONEST EXACT `p` OVER THE DISTINCT CORES IS `1/5`**, and it is `1/5` at `n = 6`, at `n = 7` and at
+> `n = 8` alike — the same number three times because it is the same five cores three times.
+
+**Read this as a correction to the strength claimed, not as a retraction of the finding.** Everything §3.1
+and §3.2 measure is unchanged and reproduced: the separation is perfect in both inclusions in every group
+where it was capable of failing, `qmass = 1` marks the one extremal core and no other, and mg-0a11 carried
+the same measurement to `n = 11` — three sizes beyond this instrument's reach — and found the separation
+still perfect, over **six** distinct cores with still exactly one extremal. `1/7 → 1/286 → 1/38760` is not
+evidence accumulating with `n`. It is one observation re-counted with more chain elements glued on.
 
 ---
 
@@ -356,8 +472,11 @@ control (mg-2da3's lesson, applied here to a deliverable whose whole content is 
 | **N3** | compute `qmass` on the intervals of a fixed labelling instead of `L*` | the two must differ | 25 posets differ, 79 agree |
 | **N4** | a poset with a majority tie must be refused a unique `L*` | 46 of 46 refused | fires |
 
-**Reproducibility, checked rather than asserted.** `run_all.sh` was run twice from the same tree and all four
-measurement outputs are **byte-identical**. The only randomness is seeded (`20260730` for the permutation
+**Reproducibility, checked rather than asserted.** `run_all.sh` was run twice from the same tree and all five
+measurement outputs are **byte-identical** — and mg-0a11 re-ran it a third time from a clean tree, from
+outside this instrument, with the same result. `out_cores.txt` (mg-a893) is byte-identical across independent
+runs too, and `out_controls.txt`, `out_cycles.txt` and `out_theorem4.txt` did not move a byte when §3.4 and
+the `n = 8` prose were added. The only randomness is seeded (`20260730` for the permutation
 tests, `4242` — the target's own seed — for the cycle search), and unlike the negative this repair replaces,
 the searches themselves are in the committed instrument, so re-running reproduces the *search* and not merely
 the printing of its result.
@@ -383,6 +502,63 @@ The guard earned its keep on the first run: it **failed**, because the replaceme
 used the phrase "4200 random posets" in live prose while re-running the search. The live sentence was
 reworded. That is the whole value of a checker that can tell prose from an epitaph.
 
+### 8.2 And the hole in THIS repair's checker is closed (mg-a893)
+
+mg-0a11 put 14 meaning-changing mutations against `check_doc_repair.py` as it stood after §8.1 and **10 of
+them exited 0**. The four that were caught were the four the file was built for. The mechanism was a list of
+`(string in the prose, string in the output)` pairs matched against **`target + repair` concatenated** and
+against **all four outputs concatenated**, so a figure was certified if it appeared *anywhere in either
+document* and its value appeared *anywhere in any output*. The sharpest consequence, mg-0a11's M1a: the
+headline `1/38760` could be made **wrong in every occurrence throughout this document** and the file still
+passed, because the target document carries its own copy of the string.
+
+**Six properties replace the concatenation, and none of them is a longer list.**
+
+| | property | mutations it closes |
+|---|---|---|
+| **P1** | **Per document.** Every figure names the document it must appear in, and **how many times**. | M1a, M11 |
+| **P2** | **Per output.** Every figure names the **one** output file that must have printed it. | — |
+| **P3** | **Per section.** Every figure names the ATX heading path its occurrences must sit under. | M7a |
+| **P4** | **Per table row.** A table cell is located by its **row key** and checked against the row the instrument printed, so two cells cannot be swapped between rows and both still be "present". | M5, M6 |
+| **P5** | **Live prose.** Framing, caveats and status language are named and required, in a named section, outside every epitaph. | M7b, M8, M9, M10 |
+| **P6** | **Quoted, not asserted.** A struck sentence may appear in **either** document only inside an epitaph or inside double quotation marks. Epitaphs are now located in the repair document too, not only in the target. | M12 |
+
+`code/counterexample_probe_24a3/check_doc.py` gains the repaired §0 headline as a **LIVE** entry, which is
+mg-0a11's M13: the sentence the whole repair exists to install could be quietly reverted from *"picks out
+**exactly** the `δ`-extremal posets"* to *"**some of**"* and that file, whose subject is precisely that
+document, exited 0.
+
+> **THE ACCEPTANCE GATE IS mg-0a11'S OWN BATTERY, RE-RUN UNMODIFIED.**
+> `code/counterexample_audit_0a11/check_locator.py` is not edited, not re-parameterised and not re-ordered;
+> its output against this repair is committed as `out_battery_0a11_rerun.txt`. **SILENT MISSES: 10 → 0.**
+> The four self-mutations at the bottom of that battery, which test the audit's *own* checker, still fire.
+
+**The cross-check against mg-4acd's presentation-record digest (`e4426c9`), which the brief asked to answer
+rather than assume.** That mechanism certifies chosen *regions* of `STATE.md` and `docs/state-history/README.md`
+with two SHA-256 digests — one of the region's bytes, one of a four-field **presentation record** (`state`,
+`heading`, `position`, `presented`) that answers *"is a reader shown these bytes, in the same place?"*. Three
+findings, and the third is the one that matters:
+
+* **It would cover most of this, and by brute force.** Nine of mg-0a11's ten silent misses are edits *inside*
+  document text. If both documents were certified regions, a content digest would fire on all nine — and on
+  every legitimate edit as well, including the ones this ticket is making. A digest cannot tell a repair from
+  a defacement; it can only tell you that somebody moved. That is the right trade for a **frozen ledger cell**
+  and the wrong one for a document still under repair.
+* **One of the ten is outside its reach in either configuration.** mg-0a11's M3 alters `out_section4.txt` —
+  an *instrument output*, not a document. No digest over the documents sees it. This file catches it, because
+  its subject is the correspondence between the two.
+* **The idea that transfers is the LOCATOR, and it is the one taken.** mg-4acd's insight was that the blind
+  spot had moved from "are these the certified bytes?" up into "**which** bytes are the certified ones?".
+  That is exactly this file's defect, one layer over: it certified a string with **no location at all**. P1,
+  P3 and P4 above are `heading` and `position` in the vocabulary of a quote-checker rather than of a digest.
+  `presented` has no analogue here and is not claimed: **a figure of this document wrapped in an HTML comment
+  would still pass this file**, and that is stated as the coverage boundary rather than left to be found.
+
+So the two mechanisms are **complementary, not redundant**: a digest answers *"did anything change?"* and
+cannot answer *"does the prose agree with the instrument?"*; this file answers the second and not the first.
+The honest summary is that mg-4acd's approach covers 9 of the 10 misses, at a cost this document should not
+pay yet, and misses the tenth; and that its *locating* idea is what actually fixes this file.
+
 ---
 
 ## 9. What this does NOT show
@@ -399,6 +575,11 @@ reworded. That is the whole value of a checker that can tell prose from an epita
   that should coincide with `δ = 1/3` inside an `e`-group is **open**, and the coincidence of `e = 9` across
   three sizes is unexplained. A mechanism would be worth more than another `n`.
 * **Not about `L*`, inside those groups** — §5 of this document.
+* **Not three independent sizes.** The three groups share five cores; `n = 7` and `n = 8` add no core that
+  `n = 6` did not already have, and every member of both is a cut extension of a smaller member. The exact
+  `p` is `1/5`, not `1/38760`, and the three sizes are one observation seen three times (§3.4). What the
+  extra sizes *do* establish is that the separation does not break as `n` grows — mg-0a11 carried it to
+  `n = 11` and it does not break there either — and that is worth having, but it is not `1.29 × 10⁻⁸`.
 * **Three groups is three groups.** All three non-vacuous groups that exist at `n ≤ 8` have `e(P) = 9`, and
   the `τ_b` magnitude of the powered test **decays** with `n` (`−0.2978`, `−0.2626`, `−0.2052`), which is the
   direction every other trend in the target document also points. What does not decay is the target's own
@@ -420,8 +601,9 @@ code/counterexample_repair_dea5/theorem4.py    Theorem 4 for every weight     ->
 code/counterexample_repair_dea5/cycles.py      majority cycles, exhaustive    -> out_cycles.txt
 code/counterexample_repair_dea5/controls.py    12 controls + 4 that fire      -> out_controls.txt
 code/counterexample_repair_dea5/check_doc_repair.py  the prose, and the STRUCK guard -> out_check_doc.txt
-code/counterexample_repair_dea5/run_all.sh     regenerates all five, ~7 min
+code/counterexample_repair_dea5/run_all.sh     regenerates all six, ~9 min
 ```
 
 *Repair by mg-dea5. `STATE.md` is untouched; integration remains a separate landing. The audit of this repair
-is pre-filed as mg-0a11.*
+was pre-filed as mg-0a11 and is at `docs/OneThird-Counterexample-Under-The-Action-IndependentAudit-mg0a11.md`;
+its two BROKEN items are actioned by mg-a893 in §3.4 and §8.2 above.*

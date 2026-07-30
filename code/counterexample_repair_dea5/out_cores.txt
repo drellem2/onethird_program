@@ -1,0 +1,212 @@
+THE DEPENDENCE BETWEEN THE THREE GROUPS, measured rather than assumed.
+
+mg-0a11's audit of this repair found that the three exact p-values reported in
+section 3 -- 1/7, 1/286, 1/38760 -- are not three independent measurements.  This
+file re-derives that finding from THIS instrument, so the restatement in the
+repair document rests on the repair's own code rather than on the audit's.
+
+    x is a CUT ELEMENT of P if it is comparable to every other element of P.
+    Q is a CUT EXTENSION of P if Q is P with one cut element adjoined.
+    The CORE of P is what is left when cut elements are deleted repeatedly.
+
+THE ONE-LINE THEOREM.  Let x be a cut element of Q and P = Q - x.  Write D for the
+elements below x and U for those above; D u U = P, and by transitivity every
+element of D is below every element of U in P as well.  So every linear extension
+of P already lists D before U, and inserting x at that boundary is a bijection
+L(P) -> L(Q).  Hence e(Q) = e(P); Inc(Q) = Inc(P), since x is comparable to
+everything; p(x,y) is unchanged for every incomparable pair, the bijection being
+order-preserving on P; and therefore delta(Q) = delta(P), tie-freeness and
+acyclicity of the majority relation are inherited, and L*(Q) is L*(P) with x
+inserted at the same boundary.
+
+qmass is NOT covered by that argument and is not proved here.  It is MEASURED, on
+every cut extension of every poset in the section 4 population at n = 5 and n = 6.
+
+WHAT FOLLOWS IF IT HOLDS.  Two members of an e-group with the same core have the
+same (delta, qmass).  A group of N members with C distinct cores therefore offers
+C, not N, independent opportunities for the hypothesis 'qmass = 1 marks exactly
+the extremal members' to fail.  The exact p of a perfect separation is 1/C(C, c)
+over the cores, not 1/C(N, k) over the members.
+
+CONTROLS, and what each of them is:
+
+  NC1  A NEGATIVE CONTROL, and it fires.  The inheritance measurement of section
+       1 must be capable of failing, so the same measurement is run over the
+       generic one-element extension -- a new maximal element above an arbitrary
+       order ideal -- where the new element is NOT a cut element.
+  C2   NOT a control.  That the core is well defined is a THEOREM (Newman: the
+       deletion terminates, and it is locally confluent because a cut element of
+       Q is still a cut element of Q - x for any other cut element x).  Section 2
+       exhausts every deletion order and compares endpoints, which verifies the
+       IMPLEMENTATION and is evidence about nothing else.  It is labelled that
+       way rather than billed as 'the control that must fire' -- mg-3b51's
+       finding against mg-1953, applied here before an auditor has to.  Three
+       candidate negative controls were tried (deleting maximal elements,
+       near-cut elements, e-preserving elements) and NONE of them is
+       non-confluent on this population, which is the reason for the label.
+  C3   A DISCRIMINATION CHECK, and it discriminates.  If the core reduction
+       collapsed every group it would be measuring nothing.  Section 4 reports
+       C against N for EVERY e-group in the population, not only the three under
+       test: most groups have C = N and the reduction says nothing about them.
+
+Cost: about 30 seconds.  Exact integer and rational arithmetic throughout.
+Imports nothing outside this directory.
+
+==============================================================================
+0.  THE POPULATION, AND THE THREE NON-VACUOUS GROUPS
+==============================================================================
+Every poset up to isomorphism at n = 5..8, filtered to the section 4
+population (non-chain, tie-free, acyclic majority) and then to e(P) = 9,
+which is the e-value of every non-vacuous group this repair found.
+
+n      population    e = 9 group extremal in it
+5              16              2            2
+6              88              7            1
+7             671             13            3
+8            6420             20            6
+
+The n = 5 e = 9 group is BELOW the repair's section 3 table, which starts
+at n = 6, and is carried here because the cores live in it.
+
+==============================================================================
+1.  delta AND qmass ARE INHERITED ALONG CUT EXTENSION
+==============================================================================
+delta is inherited by the one-line theorem above.  qmass is not proved,
+so it is measured on EVERY cut extension of EVERY poset in the section 4
+population at n = 5 and n = 6.
+
+  cut extensions inside the population : 257
+  (e, delta, qmass) all inherited      : 257
+  inheritance failures                 : 0
+
+NC1 (this measurement must be capable of failing).  The same measurement
+over the generic one-element extension -- a new MAXIMAL element above an
+arbitrary order ideal -- where the new element is NOT a cut element:
+
+  non-cut adjunctions tested           : 1378
+  (e, delta, qmass) unchanged anyway   : 0
+  CHANGED, i.e. the control FIRES      : 1378
+
+==============================================================================
+2.  C2 -- THE CORE IS WELL DEFINED.  THIS IS A THEOREM, NOT A CONTROL
+==============================================================================
+If x and y are both cut elements of Q then y is still a cut element of
+Q - x and x of Q - y, and (Q - x) - y = (Q - y) - x, so the deletion is
+locally confluent; it terminates because n decreases; so by Newman's
+lemma the core is unique.  Exhausting every deletion order below is a
+check on THIS IMPLEMENTATION and is evidence about nothing else.  It is
+labelled that way rather than presented as a control that must fire.
+
+  population members checked, n = 5..8 : 7195
+  every deletion order agrees          : 7195
+  disagreements                        : 0
+
+AND THE NEGATIVE CONTROL THAT COULD NOT BE BUILT, recorded because a
+missing control is a fact about this instrument.  Three weakenings of
+the deletion rule, over the population at n = 5..7:
+
+  deletion rule                          posets    non-confluent
+  delete a MAXIMAL element                  775                0
+  delete a NEAR-CUT element                 775                0
+  delete an e-PRESERVING element            775                0
+
+Every one of them is confluent too, so no negative control is offered
+for C2 and none is claimed.
+
+==============================================================================
+3.  THE REDUCTION group(n+1) -> group(n)
+==============================================================================
+Up to isomorphism, the cut extensions of the e = 9 group at n, against
+the e = 9 group at n + 1.  'onto' counts the members of group(n) that are
+hit by deleting a cut element from some member of group(n+1).
+
+n -> n+1     cut ext of  = group(n+1)?   group(n+1) new  onto group(n)
+5 -> 6                4             no                3          2 of 2
+6 -> 7               13            YES                0          7 of 7
+7 -> 8               20            YES                0         13 of 13
+
+n         N   with a cut element     CUT-FREE
+5         2                    0            2
+6         7                    4            3
+7        13                   13            0
+8        20                   20            0
+
+==============================================================================
+4.  THE COUNT THAT MATTERS: DISTINCT CORES PER GROUP
+==============================================================================
+Two members with the same core have the same (delta, qmass) by section 1,
+so a group of N members with C distinct cores offers C -- not N --
+independent chances for the hypothesis to fail.
+
+n        N k extremal distinct cores extremal cores    group-level p   core-level p
+5        2          2              2              2              1/1            1/1
+6        7          1              5              1              1/7            1/5
+7       13          3              5              1            1/286            1/5
+8       20          6              5              1          1/38760            1/5
+
+C3 (the reduction must be capable of saying nothing).  If every group
+collapsed to one core the count would not be a measurement.  C against N
+for EVERY e-group in the population, not only the three under test:
+
+n      e-groups          C = N          C < N the e = 9 group
+5             9              7              2 C = 2 of N = 2
+6            30             21              9 C = 5 of N = 7
+7           138            108             30 C = 5 of N = 13
+8           691            553            138 C = 5 of N = 20
+
+So most groups are untouched by the reduction and the e = 9 groups are
+not.  The e = 3 groups are the opposite extreme -- every member is a
+chain-extension of the same 3-element core, C = 1 at every n:
+
+n        N distinct cores
+5        3              1
+6        4              1
+7        5              1
+8        6              1
+
+==============================================================================
+5.  THE CORES THEMSELVES, POOLED OVER n = 5..8
+==============================================================================
+size      delta    qmass    in groups  covers
+5           4/9      8/9      5,6,7,8  0<2 1<3 1<4 2<4
+5           4/9      8/9      5,6,7,8  0<2 0<3 1<3 2<4
+6           1/3        1        6,7,8  0<2 1<3 1<4 2<3 2<4 3<5
+6           4/9      2/3        6,7,8  0<2 0<3 1<3 3<4 4<5
+6           4/9      2/3        6,7,8  0<2 1<5 2<3 3<4 3<5
+
+  distinct cores in the whole e = 9 family, n = 5..8 : 5
+  of which extremal (delta = 1/3)                     : 1
+  qmass = 1 exactly on the extremal cores            : YES
+  exact p over the distinct cores                    : 1/5
+
+==============================================================================
+6.  THE HONEST NUMBER, AND WHAT IS AND IS NOT EVIDENCE
+==============================================================================
+READ THIS AS A CORRECTION TO SECTION 3 OF THE REPAIR DOCUMENT, NOT AS A
+RETRACTION OF IT.  The separation is real, it is perfect in both
+inclusions in every group where it could fail, and nothing measured here
+weakens it.  What is corrected is the STRENGTH claimed for it.
+
+  * The three group-level p-values 1/7, 1/286, 1/38760 are not three
+    independent tests.  The n = 8 group IS the cut extensions of the
+    n = 7 group, and delta and qmass are inherited along that operation,
+    so conditional on n = 7 -- which this repair itself names a
+    GENERATING OBSERVATION -- the n = 8 outcome had probability 1.
+  * The joint figure 1.29e-08 is therefore not merely 'containing the
+    generating observations'.  The three events are DETERMINISTICALLY
+    NESTED, and their product is not a probability of anything.
+  * The population at n = 8 is not new.  The phrase NEW POPULATION is
+    withdrawn.  The PRE-SPECIFICATION is not withdrawn: the hypothesis
+    was written down before n = 8 was computed, and that is still true.
+    A pre-specified test of a deterministic consequence is still not
+    evidence.
+  * The honest exact p is the one over DISTINCT CORES: 1/5 at n = 6,
+    1/5 at n = 7 and 1/5 at n = 8 -- the SAME number three times, because
+    it is the same cores three times -- and 1/5 over the pooled family.
+
+  THE HONEST EXACT p OVER THE DISTINCT CORES IS 1/5.
+
+mg-0a11 carried the same measurement to n = 11 by a targeted enumeration
+of the posets with e(P) <= 9 and found SIX distinct cores over n = 5..11,
+still exactly one of them extremal.  This instrument reaches n = 8 and
+agrees with it everywhere the two overlap.

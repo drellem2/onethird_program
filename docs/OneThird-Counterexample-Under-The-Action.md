@@ -45,7 +45,9 @@ measurement over a stated population, and is labelled as one.
    `qfrac` is fully accounted for by the linear-extension count (`ρ|e` between `−0.01` and `+0.02`). `qmass`
    is **not**: at `ρ|e ≈ −0.27` it survives the control on 6420 posets at `n = 8`, and in all three
    `e`-groups where the comparison is capable of failing, `qmass = 1` picks out **exactly** the `δ`-extremal
-   posets — 1 of 7, 3 of 13, 6 of 20, exact `p = 1/38760` on the one pre-specified test (§4). *This
+   posets — 1 of 7, 3 of 13, 6 of 20 (§4). The three groups share **five cores**, so the honest exact `p` is
+   **`1/5`**, not the group-level `1/38760`, and the three sizes are one observation and not three
+   (mg-a893). *This
    corrects the original headline, which reported an exact tie; the tie was measured only on `e = 3` groups,
    where every member is extremal by construction (mg-dea5).*
 4. **One genuine `e(P)`-independent signal exists** — the action's own balance constant `δ_walk`, computed
@@ -312,15 +314,15 @@ group contains an extremal **and** a non-extremal member.
 carrying extremal posets are `3` and `9` at every `n` reached; `e = 3` is always vacuous, so the whole
 testable evidence is the `e = 9` groups:
 
-| `n` | `e(P)` | group size `N` | extremal `k` | `qmass = 1` in it | separation | exact `p` | AUC |
-|---|---|---|---|---|---|---|---|
-| 5 | 3 | 3 | 3 | 3 | *vacuous* | — | — |
-| 6 | 3 | 4 | 4 | 4 | *vacuous* | — | — |
-| 7 | 3 | 5 | 5 | 5 | *vacuous* | — | — |
-| 8 | 3 | 6 | 6 | 6 | *vacuous* | — | — |
-| 6 | **9** | 7 | 1 | 1 | **perfect** | `1/7` | `1` |
-| 7 | **9** | 13 | 3 | 3 | **perfect** | `1/286` | `1` |
-| 8 | **9** | 20 | 6 | 6 | **perfect** | `1/38760` | `1` |
+| `n` | `e(P)` | group size `N` | extremal `k` | `qmass = 1` in it | separation | group-level `p` | AUC | distinct cores | core-level `p` |
+|---|---|---|---|---|---|---|---|---|---|
+| 5 | 3 | 3 | 3 | 3 | *vacuous* | — | — | 1 | — |
+| 6 | 3 | 4 | 4 | 4 | *vacuous* | — | — | 1 | — |
+| 7 | 3 | 5 | 5 | 5 | *vacuous* | — | — | 1 | — |
+| 8 | 3 | 6 | 6 | 6 | *vacuous* | — | — | 1 | — |
+| 6 | **9** | 7 | 1 | 1 | **perfect** | `1/7` | `1` | 5 | **`1/5`** |
+| 7 | **9** | 13 | 3 | 3 | **perfect** | `1/286` | `1` | 5 | **`1/5`** |
+| 8 | **9** | 20 | 6 | 6 | **perfect** | `1/38760` | `1` | 5 | **`1/5`** |
 
 *Perfect* means both inclusions: the `qmass = 1` members are **exactly** the extremal ones, so no
 non-extremal member of the group reaches `1` (the others sit at `8/9` or `2/3`). `p` is exact — every one of
@@ -329,6 +331,18 @@ the same table, so the test is `n = 8`**, where the pre-specified family has siz
 exactly one non-vacuous group: `p = 1/38760 = 2.6 × 10⁻⁵`. Bonferroni over all three non-vacuous groups
 gives `≤ 7.7 × 10⁻⁵`; over all seven groups containing an extremal poset, counting the vacuous ones as if
 they had been testable, `≤ 1.8 × 10⁻⁴`.
+
+> **CORRECTED (mg-a893, landing mg-0a11's audit of the mg-dea5 repair).** **The group-level `p` is not the
+> strength of this result and the last two columns are what to read.** Every member of the `n = 7` and
+> `n = 8` groups is a smaller member with a **cut element** — an element comparable to everything —
+> adjoined, and `δ` and `qmass` are inherited along that operation (a one-line theorem for `δ`; measured,
+> 257 of 257, for `qmass`). The `n = 8` group is *exactly* the cut extensions of the `n = 7` group. So the
+> three groups carry **five distinct cores between them, of which exactly one is extremal**, at all three
+> sizes, and **the honest exact `p` is `1/5`** — the same `1/5` three times. The three group-level figures
+> are one observation re-counted with more chain elements glued on, they are not independent, and no joint
+> probability may be formed from them. What is *not* corrected: the separation is real, it is perfect in
+> both inclusions wherever it could fail, and mg-0a11 carried it to `n = 11` and it holds there too.
+> `code/counterexample_repair_dea5/cores.py` → `out_cores.txt`, and §3.4 of the repair document.
 
 **And the powered test, on the whole population rather than the extremal dichotomy.** Pooled within-`e`
 association between `qmass` and `δ`, i.e. exactly the `ρ|e` column of §6 computed for the two statistics §6
@@ -639,7 +653,8 @@ down as a question with its gap named, and it is not offered as a route.**
    effect (`z = +4.49` at `n = 7`) and `ρ|e` within `±0.02` — entirely the linear-extension count. `qmass`
    has `ρ|e ≈ −0.27`, stable in `n`, against `|ρ|e| ≤ 0.10` for every invariant in §6's table; and in each of
    the three `e`-groups where an exact tie was capable of failing, `qmass = 1` marks exactly the extremal
-   posets (1 of 7, 3 of 13, 6 of 20; pre-specified `p = 1/38760` at `n = 8`). The nine rows this document
+   posets (1 of 7, 3 of 13, 6 of 20; group-level `p = 1/38760` at `n = 8`, but the three groups share five
+   cores and the honest exact `p` is `1/5` — mg-a893, §4). The nine rows this document
    originally reported as exact ties were all `e = 3` groups, where every member is extremal by construction
    and the tie could not fail (§4, mg-dea5). Not a filter and not explained — see §4's corrected verdict.
 4. **Genuine necessary conditions, labelled.** Theorems: every level block is convex, and the level data can
