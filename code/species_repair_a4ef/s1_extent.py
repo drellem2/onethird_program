@@ -87,27 +87,63 @@ DISARMERS = [
 # is worse than printing none: a bare total invites the question `of what?`,
 # and an extent line answers it.
 #
-# So the scan now reads EVERY REGULAR FILE in each tree.  The only remaining
+# So the scan reads EVERY REGULAR FILE in each tree.  The only remaining
 # exclusions are the five named in EXCLUDE and any file that is not decodable
 # as UTF-8 text -- and the second kind is NAMED IN THE OUTPUT, one by one, as
 # it is found, so it cannot grow unseen either.  There is no extension rule
 # left to leave out of a sentence.
+#
+# mg-821e (mg-6cb9's F1, MAJOR): AND IT NOW RECURSES.  Until this ticket the
+# walk was a single `os.listdir` and a `continue` past anything that is not
+# `os.path.isfile`, so a SUBDIRECTORY was dropped by a rule no sentence
+# carried -- word for word the defect the paragraph above describes, one level
+# down.  The sentence was true, and true only because no tree under
+# `code/species_*` happened to contain a directory: a claim contingent on a
+# condition nobody had stated, which would have gone false silently on the day
+# somebody added one.  mg-6cb9 measured it: X4 and X3 planted in
+# `code/species_7d75/sub/leak.md` left this checker and `w3_scope.py` SILENT
+# and `e1_extents.py` certifying the extent as TRUE.
+#
+# The choice was between stating the condition and removing it.  Removing it is
+# strictly better -- a stated condition is a promise about the tree, and this
+# repository has no way to keep one -- so the walk recurses and the claim is
+# true BY CONSTRUCTION.  ONE directory rule survives and it is carried by a
+# sentence, printed in the extent below: `__pycache__` is not descended into.
+# It holds compiled bytecode written by these runs themselves; its contents are
+# not decodable text, they are not authored, and they vary with the interpreter
+# that last ran.  That rule is stated, so it can be argued with.
+PYCACHE = "__pycache__"
+
+
 def tree_files(root):
-    """(files scanned, files skipped because they are not UTF-8 text)."""
+    """(files scanned, files skipped because they are not UTF-8 text).
+
+    Paths are relative to `root` and may contain a separator: the walk is
+    RECURSIVE (mg-821e).  `__pycache__` is the one directory not descended
+    into, and the extent line says so.
+    """
     if not os.path.isdir(root):
         return [], []
     scanned, undecodable = [], []
-    for f in sorted(os.listdir(root)):
-        p = os.path.join(root, f)
-        if not os.path.isfile(p) or f in EXCLUDE:
-            continue
-        try:
-            open(p, encoding="utf-8").read()
-        except (UnicodeDecodeError, OSError):
-            undecodable.append(f)
-            continue
-        scanned.append(f)
-    return scanned, undecodable
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = sorted(d for d in dirnames if d != PYCACHE)
+        for f in sorted(filenames):
+            p = os.path.join(dirpath, f)
+            rel = os.path.relpath(p, root)
+            # EXCLUDE is matched on the path relative to the tree root and NOT
+            # on the basename.  The five names are printed root-relative, so a
+            # basename rule would make the printed list mean more than it says:
+            # `sub/PREDICTIONS.md` would be dropped by a name the reader can
+            # only see attached to the root.  It is read.
+            if not os.path.isfile(p) or rel in EXCLUDE:
+                continue
+            try:
+                open(p, encoding="utf-8").read()
+            except (UnicodeDecodeError, OSError):
+                undecodable.append(rel)
+                continue
+            scanned.append(rel)
+    return sorted(scanned), sorted(undecodable)
 
 
 def tree_scanned(root):
@@ -139,13 +175,18 @@ print("  w3_scope.py's 2 FORBIDDEN rows, plus Y2, which is new here.")
 print()
 print("  THE TARGETS: the document, and %d code trees.  EVERY REGULAR FILE in"
       % len(TREES))
-print("  each tree is read -- there is no extension rule (mg-d633) --")
+print("  each tree is read, AT ANY DEPTH -- there is no extension rule")
+print("  (mg-d633) and no depth rule (mg-821e) --")
 undecodable = []
+subdirs = []
 for t in TREES:
     root = os.path.join(REPO, "code", t)
     scanned, undec = tree_files(root)
     undecodable += [(t, f) for f in undec]
-    print("      code/%-24s %3d file(s) read" % (t, len(scanned)))
+    nested = [f for f in scanned if os.sep in f]
+    subdirs += [(t, f) for f in nested]
+    print("      code/%-24s %3d file(s) read, %d of them below the tree root"
+          % (t, len(scanned), len(nested)))
 print()
 print("  SKIPPED, NAMED, so the exclusion cannot grow unseen -- %d file(s):"
       % len(EXCLUDE))
@@ -158,12 +199,31 @@ for t, f in undecodable:
     print("      code/%s/%s" % (t, f))
 if not undecodable:
     print("      (none)")
-print("  Those two lists are the WHOLE exclusion.  Until mg-d633 a third one")
+print("  and ONE directory rule, which is the whole of the depth question:")
+print("      %s/ is not descended into -- compiled bytecode these runs"
+      % PYCACHE)
+print("      write themselves, not authored text.  Nothing else is a")
+print("      directory rule: the walk is os.walk and it recurses.")
+print("  Those three lists are the WHOLE exclusion.  Until mg-d633 a fourth")
 print("  existed and was printed nowhere: an extension filter that dropped the")
 print("  four run_all.sh inside the four trees named above, so the extent line")
-print("  claimed more than the code read (mg-7dd3 A1, BROKEN).  Note also what")
-print("  is NOT skipped: committed out_*.txt.  A forbidden sentence in a")
-print("  committed output is precisely the defect this repair closes.")
+print("  claimed more than the code read (mg-7dd3 A1, BROKEN).  Until mg-821e")
+print("  a FIFTH existed and was printed nowhere: this walk was a single")
+print("  os.listdir, so every SUBDIRECTORY of every tree above was dropped by")
+print("  a rule no sentence carried, and the sentence 'EVERY REGULAR FILE'")
+print("  was true only because no tree happened to have one (mg-6cb9 F1,")
+print("  MAJOR).  It is now true BY CONSTRUCTION rather than by accident of")
+print("  the tree, and the count below says how many files are below a root:")
+if subdirs:
+    for t, f in subdirs:
+        print("      code/%s/%s" % (t, f))
+else:
+    print("      (no tree has a file below its root today -- and if one gains")
+    print("       a file tomorrow the line above will name it, which is the")
+    print("       difference this ticket bought)")
+print("  Note also what is NOT skipped: committed out_*.txt.  A forbidden")
+print("  sentence in a committed output is precisely the defect this repair")
+print("  closes.")
 print()
 print("  WHAT THE OTHER TWO CHECKERS COVER, STATED SO IT CANNOT BE READ AS")
 print("  MORE:")
@@ -348,9 +408,13 @@ print()
 print("EXTENT OF THIS NUMBER, stated because mg-73df's MAJOR is what happens")
 print("when it is not: %d corrections over the document and %d code trees,"
       % (len(CORRECTIONS), len(TREES)))
-print("EVERY REGULAR FILE of each, less the %d named above and the %d named as"
+print("EVERY REGULAR FILE of each AT ANY DEPTH, less the %d named above, the %d"
       % (len(EXCLUDE), len(undecodable)))
-print("undecodable.  It says NOTHING about docs/ other than the one document")
+print("named as undecodable, and anything under %s/ -- and those three"
+      % PYCACHE)
+print("lists are the whole of it, which is a claim about the CODE and not")
+print("about the shape the trees happen to have today (mg-821e).")
+print("It says NOTHING about docs/ other than the one document")
 print("named above, about the audit trees code/species_audit_a61f,")
 print("code/species_audit_73df, code/species_audit_7dd3 or the instrument")
 print("code/species_extent_d633, or about any statement not in the list.")

@@ -110,10 +110,34 @@ EXCLUDE = {"stricken_a4ef.py", "PREDICTIONS.md", "OUTCOMES.md",
            "out_c4_scope_73df_after.txt", "out_c5_doc_73df_after.txt"}
 
 
+# mg-821e, on mg-6cb9's F1.  This helper WAS a non-recursive `os.listdir`,
+# exactly like the two scans it exists to measure.  So the file whose whole job
+# is deciding whether a printed extent is true shared the blind spot it was
+# measuring: with X3 planted in `code/species_7d75/sub/leak.md`, `s1_extent.py`
+# did not read it, `want` did not contain it, `want <= got` held, and E1
+# certified the extent as TRUE over a file neither of them could see (mg-6cb9
+# Q17e).  An instrument that computes its expectation the same way the subject
+# computes its answer cannot disagree with the subject.
+#
+# It now walks.  The one directory rule is `__pycache__`, which is the rule the
+# two scans print in their own extent lines -- copied here deliberately rather
+# than imported, so that if either of them widens or narrows it, E1's
+# expectation does NOT move with it and the disagreement shows up as a
+# finding.
+PYCACHE = "__pycache__"
+
+
 def regular(tree):
+    """Every regular file of a tree, repo-tree-relative, AT ANY DEPTH."""
     root = os.path.join(REPO, "code", tree)
-    return sorted(f for f in os.listdir(root)
-                  if os.path.isfile(os.path.join(root, f)))
+    out = []
+    for dp, dns, fns in os.walk(root):
+        dns[:] = sorted(d for d in dns if d != PYCACHE)
+        for fn in fns:
+            p = os.path.join(dp, fn)
+            if os.path.isfile(p):
+                out.append(os.path.relpath(p, root))
+    return sorted(out)
 
 
 def check(label, ok, detail=""):
@@ -151,6 +175,10 @@ check("run_all.sh is among them -- the file the old filter dropped",
       "code/species_7d75/run_all.sh" in got)
 check("the printed extent says 'every regular file'",
       "every regular file" in OUT["w3_scope.py"])
+check("and says AT WHAT DEPTH -- the condition F1 left unstated",
+      "at any depth" in OUT["w3_scope.py"].lower())
+check("and names the ONE directory rule it keeps",
+      PYCACHE in OUT["w3_scope.py"])
 check("the printed file count agrees with what was read",
       ("files read: %d" % len(got & want)) in OUT["w3_scope.py"],
       "printed: %s" % re.search(r"files read: \d+", OUT["w3_scope.py"]))
@@ -174,10 +202,30 @@ printed_skips = set(re.findall(r"^ {6}(\S+)$", OUT["s1_extent.py"], re.M))
 check("every skipped file is NAMED in the run",
       EXCLUDE <= printed_skips,
       "not named: %s" % sorted(EXCLUDE - printed_skips))
+check("the printed extent says AT WHAT DEPTH (mg-6cb9 F1)",
+      "at any depth" in OUT["s1_extent.py"].lower())
+check("and names the ONE directory rule it keeps",
+      PYCACHE in OUT["s1_extent.py"])
+nested = sorted("code/%s/%s" % (t, f) for t in TREES for f in regular(t)
+                if os.sep in f and f not in EXCLUDE)
+check("every file BELOW a tree root is read (%d today)" % len(nested),
+      all(n in got for n in nested),
+      "not read: %s" % sorted(n for n in nested if n not in got))
 for t in TREES:
     n = len([f for f in got if f.startswith("code/%s/" % t)])
+    nsub = len([f for f in got if f.startswith("code/%s/" % t)
+                and f.count("/") > 2])
     check("the printed count for code/%s is %d, and %d were read" % (t, n, n),
-          ("code/%-24s %3d file(s) read" % (t, n)) in OUT["s1_extent.py"])
+          ("code/%-24s %3d file(s) read, %d of them below the tree root"
+           % (t, n, nsub)) in OUT["s1_extent.py"])
+print()
+print("  %d file(s) sit below a tree root today.  That number is printed"
+      % len(nested))
+print("  rather than assumed: when it was 0 and both walks were")
+print("  non-recursive, 'EVERY REGULAR FILE' was a TRUE sentence resting on a")
+print("  condition no sentence stated, and E1 -- listing the same way -- could")
+print("  not disagree.  E1 walks now, so the two computations are independent")
+print("  and a scan that stops at the root is a FINDING here, not a match.")
 print()
 
 # --- e2_crosssection.py -----------------------------------------------------

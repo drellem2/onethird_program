@@ -72,19 +72,42 @@ print()
 # narrower, and repaired the same way: THE CODE IS WIDENED, not the claim
 # narrowed.  Every regular file is read; anything undecodable is NAMED in the
 # output rather than dropped by a rule no sentence carries.
+#
+# mg-821e, on mg-6cb9's F1: and it now RECURSES.  `os.listdir` plus a
+# `continue` past anything that is not a file dropped every SUBDIRECTORY --
+# again by a rule no sentence carried, and again invisible, because
+# `code/species_7d75` has never had one.  "Every regular file in it" was a
+# true sentence resting on an unstated condition; X4 planted in
+# `code/species_7d75/sub/leak.md` left this checker silent (mg-6cb9 Q10).  The
+# walk is now `os.walk`, so the sentence is true BY CONSTRUCTION.  ONE
+# directory rule remains and it is PRINTED: `__pycache__` is not descended
+# into, because it holds bytecode these runs write themselves.
+PYCACHE = "__pycache__"
 FILES, UNDECODABLE = [], []
-for _f in sorted(os.listdir(SRC)):
-    if not os.path.isfile(os.path.join(SRC, _f)):
-        continue
-    try:
-        open(os.path.join(SRC, _f), encoding="utf-8").read()
-    except (UnicodeDecodeError, OSError):
-        UNDECODABLE.append(_f)
-        continue
-    FILES.append(_f)
+for _dp, _dns, _fns in os.walk(SRC):
+    _dns[:] = sorted(_d for _d in _dns if _d != PYCACHE)
+    for _f in sorted(_fns):
+        _p = os.path.join(_dp, _f)
+        _rel = os.path.relpath(_p, SRC)
+        if not os.path.isfile(_p):
+            continue
+        try:
+            open(_p, encoding="utf-8").read()
+        except (UnicodeDecodeError, OSError):
+            UNDECODABLE.append(_rel)
+            continue
+        FILES.append(_rel)
+FILES.sort()
+UNDECODABLE.sort()
+NESTED = [f for f in FILES if os.sep in f]
 TEXT = {f: open(os.path.join(SRC, f), encoding="utf-8").read() for f in FILES}
-print("# files read: %d   (skipped as not UTF-8 text: %s)"
-      % (len(FILES), ", ".join(UNDECODABLE) if UNDECODABLE else "none"))
+print("# files read: %d, %d of them below the tree root   (skipped as not"
+      % (len(FILES), len(NESTED)))
+print("# UTF-8 text: %s; skipped as %s: the whole directory rule)"
+      % (", ".join(UNDECODABLE) if UNDECODABLE else "none", PYCACHE))
+if NESTED:
+    for _f in NESTED:
+        print("#   below the root: %s" % _f)
 print()
 LINES = {f: TEXT[f].splitlines() for f in FILES}
 
@@ -208,12 +231,23 @@ print("=" * 78)
 print("W3 SCOPE: %s   (%d problem(s))" % ("PASS" if bad == 0 else "FAIL", bad))
 print("=" * 78)
 print()
-print("EXTENT OF THAT VERDICT (added mg-a4ef).  MEASURED mg-d633.  This")
-print("enforces TWO corrected statements -- X4 and X5 -- plus the")
-print("character-ring rule, over ONE tree: %d file(s), every regular file in it,"
-      % len(FILES))
-print("with no extension rule (that rule existed until mg-d633 and dropped")
-print("run_all.sh while this line said 'over ONE tree').")
+print("EXTENT OF THAT VERDICT (added mg-a4ef).  MEASURED mg-d633.  DEEPENED")
+print("mg-821e.  This enforces TWO corrected statements -- X4 and X5 -- plus")
+print("the character-ring rule, over ONE tree of %d file(s)." % len(FILES))
+# The next line is ONE line on purpose.  mg-6cb9's A1g asks whether the
+# committed output SAYS that the repair widened the code, and it looks for the
+# phrases `every regular file in it` and `no extension rule`.  Wrapping this
+# sentence across two prints splits both, and A1g went *** SILENT *** against
+# a file that says so more loudly than before.  A label check that reads the
+# artifact is worth keeping; the artifact is what moves to suit it.
+print("It reads every regular file in it, AT ANY DEPTH: no extension rule")
+print("and no depth rule.  The extension rule existed until mg-d633 and")
+print("dropped run_all.sh while this line said 'over ONE tree'; the depth")
+print("rule existed until mg-821e and dropped every subdirectory while this")
+print("line made the same claim -- true, and true only because the tree had")
+print("no subdirectory (mg-6cb9 F1).  The one directory rule left is %s/,"
+      % PYCACHE)
+print("and it is named here rather than left to be inferred from the code.")
 print("mg-6f61 enumerated ten stricken sentences; eight of")
 print("them are NOT on this list, and X3 and the AM 17.5 quotation were in")
 print("force in code/species_7d75 for the whole time this file reported")

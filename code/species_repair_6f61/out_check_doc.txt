@@ -69,14 +69,31 @@ C3  mg-a61f's own anchors survive the repair
   REPAIRED document and can be re-run unmodified.
 
 ==============================================================================
-C4  the repair document
+C4  the repair document -- EVERY ANCHOR AT ITS OWN SITE (mg-821e)
 ==============================================================================
 
-  names its target                           ok
-  names the audit                            ok
-  names the instrument                       ok
-  records the missed predictions             ok
-  records what it did NOT repair             ok
+  names its target                           ok        at its site: front matter: the **Target:** line, above the fold
+                                             1 copy in the file, 1 at this site
+  names the audit                            ok        at its site: front matter: the **Audit landed:** line
+                                             19 copies in the file, 2 at this site
+  names the instrument                       ok        at its site: front matter: the **Instrument:** line
+                                             2 copies in the file, 1 at this site
+  names the instrument                       ok        at its site: section 11: the command a reader actually runs
+                                             2 copies in the file, 1 at this site
+  records the missed predictions             ok        at its site: section 2.1, whose heading promises the number
+                                             3 copies in the file, 1 at this site
+  records the missed predictions             ok        at its site: section 11: what a reader is told the run will print
+                                             3 copies in the file, 1 at this site
+  records what it did NOT repair             ok        at its site: section 10's own heading
+                                             1 copy in the file, 1 at this site
+  and section 10 is not an empty heading     ok  (1141 chars under the heading)
+
+  Each row above is a SITE, not a presence.  Until mg-821e this section
+  asked only whether the string occurred anywhere in the file, so
+  deleting the copy a reader reads left the run green for 3 of the 5
+  assertions and only deleting EVERY copy fired (mg-6cb9 F3).  The
+  copy counts are printed because they are the reason: an anchor with
+  19 copies is not better covered than one with 1, it is less.
 
 ==============================================================================
 CHECK_DOC: PASS   (0 problem(s))
@@ -89,6 +106,11 @@ C2 and C3, over ONE FILE:
 It reads a SECOND file for section C4's five assertions and for nothing
 else:
     docs/OneThird-Species-Hopf-Monoids-Repair.md
+Those five assertions are checked at 7 NAMED SITES within that file and
+NOT over the file as a whole (mg-821e, on mg-6cb9's F3).  A pass means
+each anchor is present IN THE SECTION A READER MEETS IT IN.  It says
+nothing about the rest of that file, and a copy of an anchor somewhere
+else in it neither helps nor is required.
 Until mg-d633 this paragraph said 'ONE FILE' and stopped.  That was
 NARROWER than what the code read -- the safe direction, and still a
 false statement, and it would have told the next person deciding what

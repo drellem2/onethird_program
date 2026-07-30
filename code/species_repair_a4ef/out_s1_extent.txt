@@ -7,11 +7,12 @@ S1a  EXTENT DECLARATION -- what is enforced, and over what
   w3_scope.py's 2 FORBIDDEN rows, plus Y2, which is new here.
 
   THE TARGETS: the document, and 4 code trees.  EVERY REGULAR FILE in
-  each tree is read -- there is no extension rule (mg-d633) --
-      code/species_7d75              18 file(s) read
-      code/species_repair_6f61       13 file(s) read
-      code/species_remainder_f8fa    12 file(s) read
-      code/species_repair_a4ef        9 file(s) read
+  each tree is read, AT ANY DEPTH -- there is no extension rule
+  (mg-d633) and no depth rule (mg-821e) --
+      code/species_7d75              18 file(s) read, 0 of them below the tree root
+      code/species_repair_6f61       13 file(s) read, 0 of them below the tree root
+      code/species_remainder_f8fa    12 file(s) read, 0 of them below the tree root
+      code/species_repair_a4ef        9 file(s) read, 0 of them below the tree root
 
   SKIPPED, NAMED, so the exclusion cannot grow unseen -- 5 file(s):
       OUTCOMES.md
@@ -22,12 +23,26 @@ S1a  EXTENT DECLARATION -- what is enforced, and over what
   and 0 file(s) skipped as not decodable UTF-8 text, NAMED THE SAME
   WAY rather than filtered by a rule no sentence carries:
       (none)
-  Those two lists are the WHOLE exclusion.  Until mg-d633 a third one
+  and ONE directory rule, which is the whole of the depth question:
+      __pycache__/ is not descended into -- compiled bytecode these runs
+      write themselves, not authored text.  Nothing else is a
+      directory rule: the walk is os.walk and it recurses.
+  Those three lists are the WHOLE exclusion.  Until mg-d633 a fourth
   existed and was printed nowhere: an extension filter that dropped the
   four run_all.sh inside the four trees named above, so the extent line
-  claimed more than the code read (mg-7dd3 A1, BROKEN).  Note also what
-  is NOT skipped: committed out_*.txt.  A forbidden sentence in a
-  committed output is precisely the defect this repair closes.
+  claimed more than the code read (mg-7dd3 A1, BROKEN).  Until mg-821e
+  a FIFTH existed and was printed nowhere: this walk was a single
+  os.listdir, so every SUBDIRECTORY of every tree above was dropped by
+  a rule no sentence carried, and the sentence 'EVERY REGULAR FILE'
+  was true only because no tree happened to have one (mg-6cb9 F1,
+  MAJOR).  It is now true BY CONSTRUCTION rather than by accident of
+  the tree, and the count below says how many files are below a root:
+      (no tree has a file below its root today -- and if one gains
+       a file tomorrow the line above will name it, which is the
+       difference this ticket bought)
+  Note also what is NOT skipped: committed out_*.txt.  A forbidden
+  sentence in a committed output is precisely the defect this repair
+  closes.
 
   WHAT THE OTHER TWO CHECKERS COVER, STATED SO IT CANNOT BE READ AS
   MORE:
@@ -108,8 +123,11 @@ S1 TOTAL BAD: 0
 
 EXTENT OF THIS NUMBER, stated because mg-73df's MAJOR is what happens
 when it is not: 11 corrections over the document and 4 code trees,
-EVERY REGULAR FILE of each, less the 5 named above and the 0 named as
-undecodable.  It says NOTHING about docs/ other than the one document
+EVERY REGULAR FILE of each AT ANY DEPTH, less the 5 named above, the 0
+named as undecodable, and anything under __pycache__/ -- and those three
+lists are the whole of it, which is a claim about the CODE and not
+about the shape the trees happen to have today (mg-821e).
+It says NOTHING about docs/ other than the one document
 named above, about the audit trees code/species_audit_a61f,
 code/species_audit_73df, code/species_audit_7dd3 or the instrument
 code/species_extent_d633, or about any statement not in the list.
