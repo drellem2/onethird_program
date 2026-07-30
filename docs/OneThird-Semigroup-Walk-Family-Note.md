@@ -2,7 +2,7 @@
 
 *For Daniel. Written 2026-07-30 (mg-6016). Everything numerical here is produced by
 `code/semigroup_note/note_check.py`; its committed output is `code/semigroup_note/note_check_output.txt`.
-Regenerate with `code/semigroup_note/run_all.sh` — pure Python 3, no dependencies, about 13 seconds, and
+Regenerate with `code/semigroup_note/run_all.sh` — pure Python 3, no dependencies, about 45 seconds, and
 the output file reproduces byte-identically. That script shares no code with `code/hodge_leverage/` or
 `code/face_geometry/`: it rebuilds the objects from their definitions in exact rational arithmetic, so the
 numbers below are independent of the pipeline they are about.*
@@ -192,7 +192,7 @@ arrow `{a,d} → {b,c}`. Since `c < d`, there is an arrow `{b,c} → {a,d}`. Tha
 
 *Verified:* on this poset the two descriptions (supports of moves; acyclic quotients) give the same 14
 partitions. Exhaustively, they agree on **every labelled poset up to 5 elements**: 1 of 1, 3 of 3, 19 of
-19, 219 of 219, 4 231 of 4 231. Not proven in general — see §7.
+19, 219 of 219, 4 231 of 4 231. Not proven in general — see §8.
 
 This is the sense in which the example is not degenerate: for a poset like an antichain, *every* partition
 is a level and the acyclic condition does nothing. Here it removes one, and you can see it removing it.
@@ -214,7 +214,7 @@ abc|d     <- (abc|d)                         a|b|c|d  <- the six orderings, read
 
 ## 5. The worked example, part three: the spectrum
 
-The theorem (stated in §7; it is not ours) says that for **any** weight `w` the transition matrix is
+The theorem (stated in §8; it is not ours) says that for **any** weight `w` the transition matrix is
 diagonalisable, and:
 
 > **Eigenvalue at a level `X`:** `λ_X` = the total probability of the moves whose commitment level is
@@ -326,7 +326,123 @@ of `P`"*, not *"the list of eigenvalue multiplicities never changes"*.
 
 ---
 
-## 6. The antichain: this is the classical shuffle setting, and the family is exactly the classical family
+## 6. Your sum of the linear extensions — and the sign (R6)
+
+You asked, unprompted, how this relates to the element you have been working with: **the sum of the
+linear-extension permutations of `P`, inside the group algebra of the symmetric group.** The answer turns
+entirely on a sign, so here is the calculation rather than a sentence.
+
+**The setting**, taken from the audited documents and not re-derived here. The span of `L(P)` — one basis
+vector per linear extension — is the space both pictures live on. On it sit two operators:
+
+- `Δ_AT = D − A`, the graph Laplacian of the adjacent-transposition graph on `L(P)`;
+- `L^rel`, the top relative Laplacian from the homological side,
+
+and they are conjugate by the **orientation twist** `E = diag(sgn w)` — the diagonal operator whose entry
+at a linear extension `w` is the sign of `w` as a permutation. The identity is `Δ_AT = E · L^rel · E`, and
+`E · E = I` because the entries are `±1`. (`E` is `twist()` in `code/face_geometry/face_complex.py`; the
+identity is `claim1_pair` in `controls.py`.)
+
+Two elements of the group algebra are in play:
+
+```
+    ONE  =  sum over w in L(P) of  w                 <- your element, the plain sum
+    SGN  =  sum over w in L(P) of  sgn(w) . w        <- the sign-weighted sum
+```
+
+### (a) Which one the identity distinguishes: both, one on each side of the twist
+
+`E` is diagonal with entries `sgn(w)`, so applying it to the all-ones vector multiplies each coordinate by
+that coordinate's sign. That is the whole calculation:
+
+```
+    E . ONE  =  SGN            and            E . SGN  =  ONE.
+```
+
+Now feed it through. The adjacent-transposition graph on `L(P)` is connected — that is the classical
+connectivity statement, and it is the one-dimensionality the programme proves homologically — so
+`ker Δ_AT` is spanned by the all-ones vector, i.e. by **`ONE`**. Conjugating,
+
+```
+    L^rel = E . Delta_AT . E   =>   ker L^rel  =  E . ker Delta_AT  =  span( E . ONE )  =  span( SGN ).
+```
+
+On the worked example `P = {a<b, c<d}`, with the six linear extensions in the order used throughout:
+
+| `w` | `abcd` | `acbd` | `acdb` | `cabd` | `cadb` | `cdab` |
+|---|---|---|---|---|---|---|
+| inversions | 0 | 1 | 2 | 2 | 3 | 4 |
+| `sgn(w)` | +1 | −1 | +1 | +1 | −1 | +1 |
+
+and the four products come out as:
+
+```
+    Delta_AT . ONE  =  (0,0,0,0,0,0)          <- zero
+    Delta_AT . SGN  =  (2,-6,4,4,-6,2)        <- NOT zero
+    L^rel    . SGN  =  (0,0,0,0,0,0)          <- zero
+    L^rel    . ONE  =  (2, 6,4,4, 6,2)        <- NOT zero
+```
+
+with `dim ker Δ_AT = dim ker L^rel = 1` in exact arithmetic. So:
+
+> **The plain sum `ONE` is the distinguished direction on the GRAPH side. The sign-weighted sum `SGN` is
+> the distinguished direction on the HOMOLOGICAL side. The twist is exactly what exchanges them.**
+
+**This refutes the derivation as it was stated to you**, and the refutation is the sign. The claim was that
+the kernel direction, read back inside the group algebra, is your plain sum. Read back *through the twist*
+— which is where the homological operator lives — it is the **sign-weighted** sum. Your element is not that
+one. But it is not absent either: it is the kernel on the other side of the same identity, and it is there
+for the reason you would want, namely connectivity of the adjacent-transposition graph.
+
+### (b) So where does the plain sum sit relative to the homological kernel?
+
+Take the inner product of the two, in the linear-extension basis:
+
+```
+    < ONE , SGN >  =  sum over w in L(P) of  sgn(w)
+```
+
+which is the **sign-imbalance** of `P` — a classical invariant of the poset, and the quantity that decides
+everything here. `ONE` is orthogonal to `ker L^rel` **exactly when the sign-imbalance vanishes** (`P` is
+*sign-balanced*), and otherwise it is not.
+
+The worked example settles that this is a real dichotomy rather than a technicality: its signs are
+`+1 −1 +1 +1 −1 +1`, so its imbalance is `+2`, **not** zero. So for `P = {a<b, c<d}` the plain sum is *not*
+orthogonal to the homological kernel — it has a component along it, namely `(2/6)·SGN = (1/3)·SGN`.
+
+So the answer to your question is the first of your three options, with a caveat: your element **is**
+distinguished — on the graph side, where it spans the kernel — and its relation to the homological kernel is
+orthogonality precisely for the sign-balanced posets.
+
+### (c) Does this depend on `P`? Yes, and both cases are common
+
+Census over one representative of each isomorphism class:
+
+| `n` | classes | sign-balanced (imbalance 0) | not balanced |
+|---|---|---|---|
+| 2 | 2 | 1 | 1 |
+| 3 | 5 | 3 | 2 |
+| 4 | 16 | 11 | 5 |
+| 5 | 63 | **44** | **19** |
+
+(Verified alongside: the adjacent-transposition graph is connected and `Δ_AT · ONE = 0` on every one of
+these posets, so the graph-side half of (a) is uniform even though (b) is not.) Whether the imbalance
+*vanishes* does not depend on how `P` is labelled — relabelling multiplies the whole sum by the sign of the
+relabelling — checked over all relabellings of every class at `n ≤ 4`.
+
+**Two ends of the range worth naming.** A **chain** has one linear extension, so its imbalance is `1` and
+`ONE = SGN`; the two pictures coincide and nothing is being distinguished. An **antichain** has
+`L(P) = S_n`, so `ONE` is the symmetriser and `SGN` is the **antisymmetriser** of the group algebra, and the
+imbalance is `0` for every `n ≥ 2` (verified to `n = 6`). So in the classical shuffle setting of §7 your
+plain sum *is* orthogonal to the homological kernel — but that is the sign-balanced case, and it does not
+generalise: 19 of the 63 posets at `n = 5` behave the other way.
+
+*Scope note: this is the whole of R6. I have not developed sign-balance any further — it is a studied
+subject and a different ticket.*
+
+---
+
+## 7. The antichain: this is the classical shuffle setting, and the family is exactly the classical family
 
 Let `P` have **no relations at all**. Then:
 
@@ -395,7 +511,7 @@ family does not make its time-reversal a member.
 
 ---
 
-## 7. The honest boundary, and the real status
+## 8. The honest boundary, and the real status
 
 **The tool points to the side of the original target.** The adjacent-transposition walk — the one the
 1/3–2/3 work is actually about — is **not** in this family. There is a short argument: weights are
@@ -432,7 +548,7 @@ attractive part of §5 is the part we did not do.
   multiplicities determined by the counting identity — is **standard**. It is Brown's theorem for random
   walks on left regular bands (Brown, *Semigroups, rings, and Markov chains*, 2000), with the braid-
   arrangement case due to Bidigare–Hanlon–Rockmore and Brown–Diaconis. We cite it; we did not prove it and
-  do not claim to. The classical shuffle results in §6 (the Tsetlin spectrum, the `a`-shuffle spectrum) are
+  do not claim to. The classical shuffle results in §7 (the Tsetlin spectrum, the `a`-shuffle spectrum) are
   likewise classical — here they are **controls**, showing the machinery reproduces known answers.
 - **Ours.** Two things, both modest. First, the **identification**: that this construction — `P`-compatible
   ordered partitions of a poset, acting on its linear extensions — satisfies the hypothesis, so the theorem
@@ -444,7 +560,7 @@ attractive part of §5 is the part we did not do.
 
 ---
 
-## 8. Summary in five lines
+## 9. Summary in six lines
 
 1. A move lists **its own elements first, in its own order**, then everything else **in the order it is
    already in**. It overwrites the front and keeps the tail. It is move-to-the-top, not refinement, and
@@ -455,9 +571,16 @@ attractive part of §5 is the part we did not do.
 3. Every eigenvalue is a **partial sum of the move probabilities**; every multiplicity is a **count of
    linear extensions of induced subposets**, with no probability in it. §5 does both arithmetically on a
    6-state example and confirms them against the matrix in exact arithmetic under three different weights.
-4. On an antichain the states are `S_n` and the family **is** the classical braid-arrangement shuffle
+4. **On your sum of the linear extensions (R6):** the twist is `diag(sgn w)`, so it exchanges the plain sum
+   with the sign-weighted sum. Your plain sum spans the kernel on the **graph** side; the **sign-weighted**
+   sum spans it on the homological side. The derivation you were sent — that the kernel read back into the
+   group algebra is the plain sum — is **wrong by exactly that sign**, and your element is nonetheless
+   genuinely distinguished, just on the other side of the identity. Whether it is orthogonal to the
+   homological kernel is the **sign-imbalance** `Σ_w sgn(w)`, which depends on `P`: 44 of the 63 posets at
+   `n = 5` are balanced and 19 are not, and the worked example is one of the unbalanced ones (imbalance 2).
+5. On an antichain the states are `S_n` and the family **is** the classical braid-arrangement shuffle
    family — move-to-front / Tsetlin and the inverse riffle shuffles included, both verified against their
    classical spectra.
-5. The adjacent-transposition walk is not in the family except where its spectrum was already obvious. The
+6. The adjacent-transposition walk is not in the family except where its spectrum was already obvious. The
    theorem is standard; ours is the identification plus the acyclic-cut description of the levels, verified
    to five elements and not proven in general.

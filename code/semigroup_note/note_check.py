@@ -898,6 +898,129 @@ for n in range(2, 6):
           % (n, len(cand), len(needed), len(needed & reachable),
              "yes" if not (needed - reachable) else "NO"))
 
+# ==========================================================================
+# H. R6 -- the sign question
+# ==========================================================================
+
+head("H.  R6: the plain sum vs the sign-weighted sum of the linear extensions")
+
+print("Setting, taken from the audited documents and not re-derived here:")
+print("  * V = the span of L(P), one basis vector per linear extension;")
+print("  * E = diag(sgn w), the orientation twist (sgn = inversion parity of the")
+print("    word), so E is diagonal with entries +-1 and E.E = I;")
+print("  * Delta_AT = D - A, the graph Laplacian of the adjacent-transposition")
+print("    graph on L(P);   and the identity  Delta_AT = E . L^rel_top . E.")
+print("Write  ONE = sum_w e_w  (Daniel's plain sum) and  SGN = sum_w sgn(w) e_w.")
+
+
+def perm_sign(w):
+    inv = 0
+    for i in range(len(w)):
+        for j in range(i + 1, len(w)):
+            if w[i] > w[j]:
+                inv += 1
+    return -1 if inv % 2 else 1
+
+
+def at_laplacian(P, ords):
+    idx = {c: t for t, c in enumerate(ords)}
+    N = len(ords)
+    L = [[0] * N for _ in range(N)]
+    oset = set(ords)
+    for c in ords:
+        for d in at_neighbours(c, oset):
+            L[idx[c]][idx[d]] -= 1
+            L[idx[c]][idx[c]] += 1
+    return L
+
+
+def apply(M, v):
+    return [sum(M[i][j] * v[j] for j in range(len(v))) for i in range(len(M))]
+
+
+sub("the worked example P = {a<b, c<d}, every sign written out")
+ex_sign = [perm_sign(c) for c in ex_ords]
+for c, s in zip(ex_ords, ex_sign):
+    inv = sum(1 for i in range(4) for j in range(i + 1, 4) if c[i] > c[j])
+    print("   %s   inversions %d   sgn = %+d" % (EX.show(c), inv, s))
+imbalance = sum(ex_sign)
+print("   sign-imbalance  sum_w sgn(w)  =  %s  =  %+d"
+      % (" ".join("%+d" % s for s in ex_sign), imbalance))
+
+sub("the one-line calculation")
+ONE = [1] * len(ex_ords)
+SGN = ex_sign[:]
+E_ONE = [ex_sign[i] * ONE[i] for i in range(len(ex_ords))]
+print("   E . ONE = %s = SGN : %s" % (E_ONE, E_ONE == SGN))
+print("   E . SGN = %s = ONE : %s"
+      % ([ex_sign[i] * SGN[i] for i in range(len(ex_ords))],
+         [ex_sign[i] * SGN[i] for i in range(len(ex_ords))] == ONE))
+
+sub("so which operator kills which vector")
+LAT = at_laplacian(EX, ex_ords)
+LREL = [[ex_sign[i] * LAT[i][j] * ex_sign[j] for j in range(len(ex_ords))]
+        for i in range(len(ex_ords))]
+print("   Delta_AT . ONE = %s   (zero: %s)"
+      % (apply(LAT, ONE), all(v == 0 for v in apply(LAT, ONE))))
+print("   Delta_AT . SGN = %s   (zero: %s)"
+      % (apply(LAT, SGN), all(v == 0 for v in apply(LAT, SGN))))
+print("   L^rel   . SGN = %s   (zero: %s)"
+      % (apply(LREL, SGN), all(v == 0 for v in apply(LREL, SGN))))
+print("   L^rel   . ONE = %s   (zero: %s)"
+      % (apply(LREL, ONE), all(v == 0 for v in apply(LREL, ONE))))
+kd_at = len(ex_ords) - rank([[F(v) for v in row] for row in LAT])
+kd_rel = len(ex_ords) - rank([[F(v) for v in row] for row in LREL])
+print("   dim ker Delta_AT = %d   dim ker L^rel = %d" % (kd_at, kd_rel))
+
+sub("(b) where the plain sum sits relative to the homological kernel")
+ip = sum(ONE[i] * SGN[i] for i in range(len(ex_ords)))
+print("   <ONE, SGN> = sum_w sgn(w) = %d   -- the SAME sign-imbalance" % ip)
+print("   so ONE is orthogonal to ker L^rel  <=>  the imbalance vanishes.")
+print("   Here it is %d, NOT zero, so ONE has a component along ker L^rel:" % ip)
+print("      proj = (<ONE,SGN>/<SGN,SGN>) SGN = (%d/%d) SGN = %s SGN"
+      % (ip, len(ex_ords), F(ip, len(ex_ords))))
+
+sub("(c) does it depend on P?  Census over the isomorphism classes")
+for n in range(1, 6):
+    reps = iso_classes(n)
+    bal = notbal = 0
+    kerbad = 0
+    for P in reps:
+        ords = linear_extensions(P)
+        sg = [perm_sign(c) for c in ords]
+        if sum(sg) == 0:
+            bal += 1
+        else:
+            notbal += 1
+        L = at_laplacian(P, ords)
+        if len(ords) - rank([[F(v) for v in row] for row in L]) != 1:
+            kerbad += 1
+        one = [1] * len(ords)
+        if any(v != 0 for v in apply(L, one)):
+            kerbad += 1
+    print("n=%d  classes %4d :  sign-BALANCED (imbalance 0) %4d   NOT balanced %4d"
+          "   |  AT graph connected & Delta_AT.ONE = 0 on all: %s"
+          % (n, len(reps), bal, notbal, kerbad == 0))
+
+sub("the antichain is sign-balanced for every n >= 2 (equally many even and odd)")
+for n in range(1, 7):
+    AN = Poset(n, [])
+    print("   n=%d  |L(P)| = %3d   sum_w sgn(w) = %d"
+          % (n, math.factorial(n), sum(perm_sign(c) for c in linear_extensions(AN))))
+
+sub("whether the imbalance VANISHES does not depend on how P is labelled")
+worst = None
+for n in range(2, 5):
+    for P in iso_classes(n):
+        vals = set()
+        for perm in itertools.permutations(range(n)):
+            Q = Poset(n, [(perm[i], perm[j]) for (i, j) in P.less])
+            vals.add(sum(perm_sign(c) for c in linear_extensions(Q)))
+        assert len({abs(v) for v in vals}) == 1, (n, vals)
+        assert len({v == 0 for v in vals}) == 1, (n, vals)
+    print("   n=%d  over all %d relabellings of every class: |imbalance| constant,"
+          " and zero-or-not constant" % (n, math.factorial(n)))
+
 print()
 print("=" * 78)
 print("done"); print("[t = %.1f s]" % (time.time() - T0), file=sys.stderr)

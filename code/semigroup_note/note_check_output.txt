@@ -303,5 +303,62 @@ n=4  usable moves 1   AT edges needed  72   of these supplied   0   -> AT walk i
 n=5  usable moves 1   AT edges needed 480   of these supplied   0   -> AT walk in the family? NO
 
 ==============================================================================
+H.  R6: the plain sum vs the sign-weighted sum of the linear extensions
+==============================================================================
+Setting, taken from the audited documents and not re-derived here:
+  * V = the span of L(P), one basis vector per linear extension;
+  * E = diag(sgn w), the orientation twist (sgn = inversion parity of the
+    word), so E is diagonal with entries +-1 and E.E = I;
+  * Delta_AT = D - A, the graph Laplacian of the adjacent-transposition
+    graph on L(P);   and the identity  Delta_AT = E . L^rel_top . E.
+Write  ONE = sum_w e_w  (Daniel's plain sum) and  SGN = sum_w sgn(w) e_w.
+
+-- the worked example P = {a<b, c<d}, every sign written out
+   abcd   inversions 0   sgn = +1
+   acbd   inversions 1   sgn = -1
+   acdb   inversions 2   sgn = +1
+   cabd   inversions 2   sgn = +1
+   cadb   inversions 3   sgn = -1
+   cdab   inversions 4   sgn = +1
+   sign-imbalance  sum_w sgn(w)  =  +1 -1 +1 +1 -1 +1  =  +2
+
+-- the one-line calculation
+   E . ONE = [1, -1, 1, 1, -1, 1] = SGN : True
+   E . SGN = [1, 1, 1, 1, 1, 1] = ONE : True
+
+-- so which operator kills which vector
+   Delta_AT . ONE = [0, 0, 0, 0, 0, 0]   (zero: True)
+   Delta_AT . SGN = [2, -6, 4, 4, -6, 2]   (zero: False)
+   L^rel   . SGN = [0, 0, 0, 0, 0, 0]   (zero: True)
+   L^rel   . ONE = [2, 6, 4, 4, 6, 2]   (zero: False)
+   dim ker Delta_AT = 1   dim ker L^rel = 1
+
+-- (b) where the plain sum sits relative to the homological kernel
+   <ONE, SGN> = sum_w sgn(w) = 2   -- the SAME sign-imbalance
+   so ONE is orthogonal to ker L^rel  <=>  the imbalance vanishes.
+   Here it is 2, NOT zero, so ONE has a component along ker L^rel:
+      proj = (<ONE,SGN>/<SGN,SGN>) SGN = (2/6) SGN = 1/3 SGN
+
+-- (c) does it depend on P?  Census over the isomorphism classes
+n=1  classes    1 :  sign-BALANCED (imbalance 0)    0   NOT balanced    1   |  AT graph connected & Delta_AT.ONE = 0 on all: True
+n=2  classes    2 :  sign-BALANCED (imbalance 0)    1   NOT balanced    1   |  AT graph connected & Delta_AT.ONE = 0 on all: True
+n=3  classes    5 :  sign-BALANCED (imbalance 0)    3   NOT balanced    2   |  AT graph connected & Delta_AT.ONE = 0 on all: True
+n=4  classes   16 :  sign-BALANCED (imbalance 0)   11   NOT balanced    5   |  AT graph connected & Delta_AT.ONE = 0 on all: True
+n=5  classes   63 :  sign-BALANCED (imbalance 0)   44   NOT balanced   19   |  AT graph connected & Delta_AT.ONE = 0 on all: True
+
+-- the antichain is sign-balanced for every n >= 2 (equally many even and odd)
+   n=1  |L(P)| =   1   sum_w sgn(w) = 1
+   n=2  |L(P)| =   2   sum_w sgn(w) = 0
+   n=3  |L(P)| =   6   sum_w sgn(w) = 0
+   n=4  |L(P)| =  24   sum_w sgn(w) = 0
+   n=5  |L(P)| = 120   sum_w sgn(w) = 0
+   n=6  |L(P)| = 720   sum_w sgn(w) = 0
+
+-- whether the imbalance VANISHES does not depend on how P is labelled
+   n=2  over all 2 relabellings of every class: |imbalance| constant, and zero-or-not constant
+   n=3  over all 6 relabellings of every class: |imbalance| constant, and zero-or-not constant
+   n=4  over all 24 relabellings of every class: |imbalance| constant, and zero-or-not constant
+
+==============================================================================
 done
 ==============================================================================
