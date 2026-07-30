@@ -1,0 +1,215 @@
+mg-66a6 AUDIT, target 2: the ONE claim pm-onethird flagged as UNVERIFIED --
+that on an antichain the family COINCIDES WITH THE CLASSICAL SHUFFLE WALKS
+studied by this method -- settled here independently of the note's answer.
+
+Strategy.  Do NOT accept the "moves = faces of the braid arrangement"
+dictionary; rebuild the braid arrangement from its own definition and check it.
+
+  * faces of the braid arrangement A_{n-1} = the realisable sign vectors
+    sigma_{ij} = sign(x_i - x_j) over points x in R^n.  Enumerated here from
+    integer points, with NO reference to ordered set partitions.
+  * the classical face product is the TITS product on sign vectors:
+    (xy)_H = x_H if x_H != 0, else y_H.  That is the definition
+    Bidigare-Hanlon-Rockmore / Brown-Diaconis use; it mentions no partitions.
+  * the classical walk is: draw a face x with probability w(x), move to the
+    chamber x.c (Tits product).
+
+If the note's moves/product/action agree with those under a bijection, the
+families of walks are literally the same set of Markov chains.  Then the two
+NAMED classical walks are checked against their independently-known spectra.
+
+==============================================================================
+SECTION A -- the antichain's moves ARE the faces of the braid
+             arrangement, with the SAME product and the SAME action
+==============================================================================
+  [OK ] n=1: P-compatibility vacuous, moves = all 1 ordered set partitions
+  [OK ] n=1: the braid arrangement has 1 faces (rebuilt from sign vectors)
+  [OK ] n=1: 'B_1 largest' is a bijection moves -> faces
+  [OK ] n=1: 'B_1 smallest' is also a bijection moves -> faces
+  [OK ] n=1: the states are all n! orderings
+  [OK ] n=1: the chambers (no zero sign) number n!
+  [OK ] n=1: note's product == Tits product on sign vectors, 0 bad of 1
+  [OK ] n=1: note's action x.c == Tits product x*c on chambers, 0 bad of 1
+  [OK ] n=2: P-compatibility vacuous, moves = all 3 ordered set partitions
+  [OK ] n=2: the braid arrangement has 3 faces (rebuilt from sign vectors)
+  [OK ] n=2: 'B_1 largest' is a bijection moves -> faces
+  [OK ] n=2: 'B_1 smallest' is also a bijection moves -> faces
+  [OK ] n=2: the states are all n! orderings
+  [OK ] n=2: the chambers (no zero sign) number n!
+  [OK ] n=2: note's product == Tits product on sign vectors, 0 bad of 9
+  [OK ] n=2: note's action x.c == Tits product x*c on chambers, 0 bad of 6
+  [OK ] n=2: every partition is a level (2 = Bell)
+  [OK ] n=3: P-compatibility vacuous, moves = all 13 ordered set partitions
+  [OK ] n=3: the braid arrangement has 13 faces (rebuilt from sign vectors)
+  [OK ] n=3: 'B_1 largest' is a bijection moves -> faces
+  [OK ] n=3: 'B_1 smallest' is also a bijection moves -> faces
+  [OK ] n=3: the states are all n! orderings
+  [OK ] n=3: the chambers (no zero sign) number n!
+  [OK ] n=3: note's product == Tits product on sign vectors, 0 bad of 169
+  [OK ] n=3: CONTROL -- the test detects the order: agreement FAILS against tits(y,x)
+  [OK ] n=3: CONTROL -- a bijection perturbed by one transposition FAILS the product test
+  [OK ] n=3: note's action x.c == Tits product x*c on chambers, 0 bad of 78
+  [OK ] n=3: every partition is a level (5 = Bell)
+  [OK ] n=4: P-compatibility vacuous, moves = all 75 ordered set partitions
+  [OK ] n=4: the braid arrangement has 75 faces (rebuilt from sign vectors)
+  [OK ] n=4: 'B_1 largest' is a bijection moves -> faces
+  [OK ] n=4: 'B_1 smallest' is also a bijection moves -> faces
+  [OK ] n=4: the states are all n! orderings
+  [OK ] n=4: the chambers (no zero sign) number n!
+  [OK ] n=4: note's product == Tits product on sign vectors, 0 bad of 5625
+  [OK ] n=4: CONTROL -- the test detects the order: agreement FAILS against tits(y,x)
+  [OK ] n=4: CONTROL -- a bijection perturbed by one transposition FAILS the product test
+  [OK ] n=4: note's action x.c == Tits product x*c on chambers, 0 bad of 1800
+  [OK ] n=4: every partition is a level (15 = Bell)
+  [OK ] n=5: P-compatibility vacuous, moves = all 541 ordered set partitions
+  [OK ] n=5: the braid arrangement has 541 faces (rebuilt from sign vectors)
+  [OK ] n=5: 'B_1 largest' is a bijection moves -> faces
+  [OK ] n=5: 'B_1 smallest' is also a bijection moves -> faces
+  [OK ] n=5: the states are all n! orderings
+  [OK ] n=5: the chambers (no zero sign) number n!
+  [OK ] n=5: note's product == Tits product on sign vectors, 0 bad of 292681
+  [OK ] n=5: CONTROL -- the test detects the order: agreement FAILS against tits(y,x)
+  [OK ] n=5: CONTROL -- a bijection perturbed by one transposition FAILS the product test
+  [OK ] n=5: note's action x.c == Tits product x*c on chambers, 0 bad of 64920
+  [OK ] n=5: every partition is a level (52 = Bell)
+
+  CONCLUSION OF SECTION A.  For each n <= 5 the note's move set, its
+  product and its action on orderings are carried by a bijection onto
+  the faces, the Tits product and the face action of the braid
+  arrangement.  So {transition matrix of weight w} is the SAME SET of
+  Markov chains as the BHR / Brown-Diaconis braid hyperplane walks.
+  The claim is CONFIRMED, and it is an identity of families, not an
+  inclusion.
+
+==============================================================================
+SECTION B -- the closed-form multiplicities on an antichain
+==============================================================================
+  [OK ] n=2: m_X = prod_B (|B|-1)! on all 2 levels
+  [OK ] n=2: multiplicities sum to n! = 2
+  [OK ] n=3: m_X = prod_B (|B|-1)! on all 5 levels
+  [OK ] n=3: multiplicities sum to n! = 6
+  [OK ] n=3: the one-block level already has multiplicity 2! = 2
+  [OK ] n=4: m_X = prod_B (|B|-1)! on all 15 levels
+  [OK ] n=4: multiplicities sum to n! = 24
+  [OK ] n=5: m_X = prod_B (|B|-1)! on all 52 levels
+  [OK ] n=5: multiplicities sum to n! = 120
+
+==============================================================================
+SECTION C -- named walk 1: move-to-front / Tsetlin library
+==============================================================================
+  [OK ] D(0) = 1 by brute force
+  [OK ] D(1) = 0 by brute force
+  [OK ] D(2) = 1 by brute force
+  [OK ] D(3) = 2 by brute force
+  [OK ] D(4) = 9 by brute force
+  [OK ] D(5) = 44 by brute force
+  [OK ] n=2: Tsetlin weights sum to 1
+  [OK ] n=2: level machinery reproduces the classical Tsetlin spectrum (value -> multiplicity)
+  [OK ] n=2: total multiplicity n! = 2
+       n=2: 2 distinct eigenvalues with w_i proportional to i
+       n=2: 2 distinct eigenvalues for GENERIC w_i (= subsets S with D(n-|S|) > 0)
+  [OK ] n=2: dim ker(M - lambda I) matches predicted multiplicity for every lambda
+  [OK ] n=2: dimensions sum to n! (diagonalisable)
+  [OK ] n=3: Tsetlin weights sum to 1
+  [OK ] n=3: level machinery reproduces the classical Tsetlin spectrum (value -> multiplicity)
+  [OK ] n=3: total multiplicity n! = 6
+       n=3: 5 distinct eigenvalues with w_i proportional to i
+       n=3: 5 distinct eigenvalues for GENERIC w_i (= subsets S with D(n-|S|) > 0)
+  [OK ] n=3: dim ker(M - lambda I) matches predicted multiplicity for every lambda
+  [OK ] n=3: dimensions sum to n! (diagonalisable)
+  [OK ] n=4: Tsetlin weights sum to 1
+  [OK ] n=4: level machinery reproduces the classical Tsetlin spectrum (value -> multiplicity)
+  [OK ] n=4: total multiplicity n! = 24
+       n=4: 9 distinct eigenvalues with w_i proportional to i
+       n=4: 12 distinct eigenvalues for GENERIC w_i (= subsets S with D(n-|S|) > 0)
+  [OK ] n=4: dim ker(M - lambda I) matches predicted multiplicity for every lambda
+  [OK ] n=4: dimensions sum to n! (diagonalisable)
+  [OK ] n=5: Tsetlin weights sum to 1
+  [OK ] n=5: level machinery reproduces the classical Tsetlin spectrum (value -> multiplicity)
+  [OK ] n=5: total multiplicity n! = 120
+       n=5: 14 distinct eigenvalues with w_i proportional to i
+       n=5: 27 distinct eigenvalues for GENERIC w_i (= subsets S with D(n-|S|) > 0)
+
+==============================================================================
+SECTION D -- named walk 2: inverse GSR a-riffle shuffle
+==============================================================================
+  [OK ] n=2: Stirling c(n,m) recurrence == brute-force cycle counts
+  [OK ] n=3: Stirling c(n,m) recurrence == brute-force cycle counts
+  [OK ] n=4: Stirling c(n,m) recurrence == brute-force cycle counts
+  [OK ] n=5: Stirling c(n,m) recurrence == brute-force cycle counts
+  [OK ] n=2 a=2: labelling law is a probability on moves
+  [OK ] n=2 a=2: w(x) = C(a, #blocks)/a^n exactly
+  [OK ] n=2 a=2: lambda_X = a^{|X|-n} on all 2 levels
+  [OK ] n=2 a=2: total multiplicity at |X| = m is c(n,m) (permutations of n with m cycles)
+  [OK ] n=2 a=2: GSR matrix from the labelling == matrix from the semigroup weight
+  [OK ] n=2 a=2: dim ker matches predicted multiplicities
+  [OK ] n=2 a=2: dimensions sum to n! (diagonalisable)
+  [OK ] n=2 a=3: labelling law is a probability on moves
+  [OK ] n=2 a=3: w(x) = C(a, #blocks)/a^n exactly
+  [OK ] n=2 a=3: lambda_X = a^{|X|-n} on all 2 levels
+  [OK ] n=2 a=3: total multiplicity at |X| = m is c(n,m) (permutations of n with m cycles)
+  [OK ] n=2 a=3: GSR matrix from the labelling == matrix from the semigroup weight
+  [OK ] n=2 a=3: dim ker matches predicted multiplicities
+  [OK ] n=2 a=3: dimensions sum to n! (diagonalisable)
+  [OK ] n=3 a=2: labelling law is a probability on moves
+  [OK ] n=3 a=2: w(x) = C(a, #blocks)/a^n exactly
+  [OK ] n=3 a=2: lambda_X = a^{|X|-n} on all 5 levels
+  [OK ] n=3 a=2: total multiplicity at |X| = m is c(n,m) (permutations of n with m cycles)
+  [OK ] n=3 a=2: GSR matrix from the labelling == matrix from the semigroup weight
+  [OK ] n=3 a=2: dim ker matches predicted multiplicities
+  [OK ] n=3 a=2: dimensions sum to n! (diagonalisable)
+  [OK ] n=3 a=3: labelling law is a probability on moves
+  [OK ] n=3 a=3: w(x) = C(a, #blocks)/a^n exactly
+  [OK ] n=3 a=3: lambda_X = a^{|X|-n} on all 5 levels
+  [OK ] n=3 a=3: total multiplicity at |X| = m is c(n,m) (permutations of n with m cycles)
+  [OK ] n=3 a=3: GSR matrix from the labelling == matrix from the semigroup weight
+  [OK ] n=3 a=3: dim ker matches predicted multiplicities
+  [OK ] n=3 a=3: dimensions sum to n! (diagonalisable)
+  [OK ] n=4 a=2: labelling law is a probability on moves
+  [OK ] n=4 a=2: w(x) = C(a, #blocks)/a^n exactly
+  [OK ] n=4 a=2: lambda_X = a^{|X|-n} on all 15 levels
+  [OK ] n=4 a=2: total multiplicity at |X| = m is c(n,m) (permutations of n with m cycles)
+  [OK ] n=4 a=2: GSR matrix from the labelling == matrix from the semigroup weight
+  [OK ] n=4 a=2: dim ker matches predicted multiplicities
+  [OK ] n=4 a=2: dimensions sum to n! (diagonalisable)
+  [OK ] n=4 a=3: labelling law is a probability on moves
+  [OK ] n=4 a=3: w(x) = C(a, #blocks)/a^n exactly
+  [OK ] n=4 a=3: lambda_X = a^{|X|-n} on all 15 levels
+  [OK ] n=4 a=3: total multiplicity at |X| = m is c(n,m) (permutations of n with m cycles)
+  [OK ] n=4 a=3: GSR matrix from the labelling == matrix from the semigroup weight
+  [OK ] n=4 a=3: dim ker matches predicted multiplicities
+  [OK ] n=4 a=3: dimensions sum to n! (diagonalisable)
+  [OK ] n=5 a=2: labelling law is a probability on moves
+  [OK ] n=5 a=2: w(x) = C(a, #blocks)/a^n exactly
+  [OK ] n=5 a=2: lambda_X = a^{|X|-n} on all 52 levels
+  [OK ] n=5 a=2: total multiplicity at |X| = m is c(n,m) (permutations of n with m cycles)
+  [OK ] n=5 a=3: labelling law is a probability on moves
+  [OK ] n=5 a=3: w(x) = C(a, #blocks)/a^n exactly
+  [OK ] n=5 a=3: lambda_X = a^{|X|-n} on all 52 levels
+  [OK ] n=5 a=3: total multiplicity at |X| = m is c(n,m) (permutations of n with m cycles)
+
+==============================================================================
+SECTION E -- which classical shuffles are NOT in the family
+==============================================================================
+  n=3  (rank of the move span = 13 of 36)
+     random-to-top (control)        in span? True  (rank 13 -> 13)
+  [OK ] n=3: random-to-top (control) in the linear span of the moves = True
+     top-to-random                  in span? False (rank 13 -> 14)
+  [OK ] n=3: top-to-random in the linear span of the moves = False
+     random transpositions          in span? False (rank 13 -> 14)
+  [OK ] n=3: random transpositions in the linear span of the moves = False
+     lazy adjacent transpositions   in span? False (rank 13 -> 14)
+  [OK ] n=3: lazy adjacent transpositions in the linear span of the moves = False
+  n=4  (rank of the move span = 75 of 576)
+     random-to-top (control)        in span? True  (rank 75 -> 75)
+  [OK ] n=4: random-to-top (control) in the linear span of the moves = True
+     top-to-random                  in span? False (rank 75 -> 76)
+  [OK ] n=4: top-to-random in the linear span of the moves = False
+     random transpositions          in span? False (rank 75 -> 76)
+  [OK ] n=4: random transpositions in the linear span of the moves = False
+     lazy adjacent transpositions   in span? False (rank 75 -> 76)
+  [OK ] n=4: lazy adjacent transpositions in the linear span of the moves = False
+
+==============================================================================
+145 checks, 0 FAILURES
+==============================================================================

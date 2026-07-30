@@ -1,0 +1,219 @@
+mg-66a6 AUDIT, target 1: every number in the worked example of
+docs/OneThird-Semigroup-Walk-Family-Note.md, recomputed from the definitions.
+
+P = {a<b, c<d} on {a,b,c,d}.  Nothing here reads note_check.py; the note's
+claimed values are hard-coded below as EXPECTATIONS and compared at the end.
+
+==============================================================================
+SECTION A -- the orderings and the moves (note section 3)
+==============================================================================
+  orderings: abcd acbd acdb cabd cadb cdab
+  [OK ] 6 orderings
+  [OK ] the orderings are the note's list
+  [OK ] 75 ordered set partitions of a 4-set
+  [OK ] 26 of them are P-compatible
+  block-count profile: {1: 1, 2: 7, 3: 12, 4: 6}
+  [OK ] block-count profile 1/7/12/6
+  [OK ] the 1-block moves are exactly the note's list
+  [OK ] the 2-block moves are exactly the note's list
+  [OK ] the 3-block moves are exactly the note's list
+  [OK ] the 4-block moves are exactly the note's list
+  [OK ] (b|acd) is not a move
+  [OK ] (ad|b|c) is not a move
+
+  one step under x = (ac|bd):
+    abcd -> acbd
+    acbd -> acbd
+    acdb -> acdb
+    cabd -> cabd
+    cadb -> cadb
+    cdab -> cadb
+  [OK ] the whole (ac|bd) step table
+
+  the four-line commitment-destroyed trace:
+    abcd -> acbd -> cdab -> acdb
+  [OK ] trace abcd -(a|c|bd)-> acbd -(cd|ab)-> cdab -(a|c|bd)-> acdb
+  [OK ] (a|c|bd) sends every ordering to one with a before c
+  [OK ] (cd|ab) sends every ordering to one with c before a
+  [OK ] every ordering reachable from every ordering
+  [OK ] exactly one move fixes all six orderings
+  [OK ] and it is the do-nothing move (abcd)
+  [OK ] zero absorbing orderings
+  [OK ] action lands in L(P): 0 failures of 156
+  [OK ] x.c agrees with the product x*(c as a move): 0 mismatches of 156
+
+==============================================================================
+SECTION B -- the band identities on this poset (note section 2)
+==============================================================================
+  [OK ] x.x = x on 26 of 26
+  [OK ] x.y.x = x.y on 676 of 676
+  [OK ] closure on 676 of 676
+  [OK ] associativity on 17576 of 17576
+
+==============================================================================
+SECTION C -- the commitment levels (note section 4)
+==============================================================================
+  [OK ] 15 partitions of a 4-set
+  [OK ] 14 distinct commitment levels
+  [OK ] exactly one partition is not a level
+  [OK ] and it is {a,d}|{b,c}
+  [OK ] levels == acyclic quotients on this poset (14 = 14)
+  [OK ] {a,d}|{b,c} has a cyclic quotient
+  the 14 levels and the moves at each:
+    abcd      <- (abcd)
+    a|bcd     <- (a|bcd)
+    ab|cd     <- (ab|cd) (cd|ab)
+    abc|d     <- (abc|d)
+    abd|c     <- (c|abd)
+    ac|bd     <- (ac|bd)
+    acd|b     <- (acd|b)
+    a|b|cd    <- (a|b|cd) (a|cd|b) (cd|a|b)
+    a|bc|d    <- (a|bc|d)
+    a|bd|c    <- (a|c|bd) (c|a|bd)
+    ab|c|d    <- (ab|c|d) (c|ab|d) (c|d|ab)
+    ac|b|d    <- (ac|b|d) (ac|d|b)
+    ad|b|c    <- (c|ad|b)
+    a|b|c|d   <- (a|b|c|d) (a|c|b|d) (a|c|d|b) (c|a|b|d) (c|a|d|b) (c|d|a|b)
+  [OK ] the level -> moves table is exactly the note's
+  [OK ] the finest level's moves are the six orderings read as moves
+
+==============================================================================
+SECTION D -- the multiplicities from P alone (note section 5a)
+==============================================================================
+  |L| of the induced subposets used in the note:
+  [OK ] |L(P|{a,b})| = 1
+  [OK ] |L(P|{a,c})| = 2
+  [OK ] |L(P|{a,b,c})| = 3
+  [OK ] |L(P|{a,b,c,d})| = 6
+  level       prod  m_X   levels refining it
+  abcd           6  0     abcd, abc|d, abd|c, ab|cd, ab|c|d, acd|b, ac|bd, ac|b|d, ad|b|c, a|bcd, a|bc|d, a|bd|c, a|b|cd, a|b|c|d
+  a|bcd          3  0     a|bcd, a|bc|d, a|bd|c, a|b|cd, a|b|c|d
+  ab|cd          1  0     ab|cd, ab|c|d, a|b|cd, a|b|c|d
+  abc|d          3  0     abc|d, ab|c|d, ac|b|d, a|bc|d, a|b|c|d
+  abd|c          3  0     abd|c, ab|c|d, ad|b|c, a|bd|c, a|b|c|d
+  ac|bd          4  1     ac|bd, ac|b|d, a|bd|c, a|b|c|d
+  acd|b          3  0     acd|b, ac|b|d, ad|b|c, a|b|cd, a|b|c|d
+  a|b|cd         1  0     a|b|cd, a|b|c|d
+  a|bc|d         2  1     a|bc|d, a|b|c|d
+  a|bd|c         2  1     a|bd|c, a|b|c|d
+  ab|c|d         1  0     ab|c|d, a|b|c|d
+  ac|b|d         2  1     ac|b|d, a|b|c|d
+  ad|b|c         2  1     ad|b|c, a|b|c|d
+  a|b|c|d        1  1     a|b|c|d
+  [OK ] the (product, multiplicity) column of the section-5a table
+  [OK ] the 'levels refining it' column of the section-5a table
+  [OK ] multiplicities sum to |L(P)| = 6
+  [OK ] all 14 levels refine the coarsest level
+  [OK ] six levels carry nonzero multiplicity
+  [OK ] and they are the note's six
+  [OK ] hand-worked row ac|bd: 2*2 = 4, three proper refiners, so m = 1
+
+==============================================================================
+SECTION E -- the spectrum under three weightings (note section 5b/5c)
+==============================================================================
+  [OK ] w1 sums to 1 (32/32)
+  [OK ] w2 sums to 1 (32/32)
+  [OK ] w3 sums to 1 (32/32)
+  level (mult)   w1        w2        w3
+  a|b|c|d   (1)  1         1         1        
+  a|bc|d    (1)  15/32     9/16      11/32    
+  a|bd|c    (1)  13/32     17/32     7/16     
+  ac|b|d    (1)  9/32      13/32     1/4      
+  ad|b|c    (1)  11/32     11/32     9/32     
+  ac|bd     (1)  3/16      11/32     7/32     
+  [OK ] the six-row eigenvalue table under w1/w2/w3
+  [OK ] under w1, exactly four weighted moves contribute to level a|bd|c
+  [OK ] lambda(a|bd|c) under w1 = 13/32
+
+  exact rank check against the 6x6 transition matrix:
+     w1: predicted lambdas ['3/16', '9/32', '11/32', '13/32', '15/32', '1'] -> dim ker [1, 1, 1, 1, 1, 1], total 6 of 6
+  [OK ] w1: dim ker multiset is the note's [1, 1, 1, 1, 1, 1] summing to 6
+  [OK ] w1: predicted multiplicities sum to 6 = |L(P)| (diagonalisable)
+  [OK ] w1: multiplicity of 3/16 predicted 1, dim ker 1
+  [OK ] w1: multiplicity of 9/32 predicted 1, dim ker 1
+  [OK ] w1: multiplicity of 11/32 predicted 1, dim ker 1
+  [OK ] w1: multiplicity of 13/32 predicted 1, dim ker 1
+  [OK ] w1: multiplicity of 15/32 predicted 1, dim ker 1
+  [OK ] w1: multiplicity of 1 predicted 1, dim ker 1
+     w2: predicted lambdas ['11/32', '13/32', '17/32', '9/16', '1'] -> dim ker [2, 1, 1, 1, 1], total 6 of 6
+     *** FINDING F1.  The note's section 5b says of w2:
+     ***   "Under `w2`: `1,1,1,2` summing to 6 of 6."
+     *** There are FIVE distinct eigenvalues under w2, not
+     *** four, and the four numbers printed sum to 5, not 6.
+     *** The instrument itself prints five dim-ker lines
+     *** (1,1,1,1,2 -> 6); the PROSE dropped one.  The
+     *** mathematics is right; the sentence is not, and it is
+     *** the sentence that certifies section 5 against the
+     *** matrix.  The FAIL below is that finding, recorded.
+  [FAIL] w2: dim ker multiset is the note's [1, 1, 1, 2] summing to 6
+        note says : [1, 1, 1, 2]
+        recomputed: [1, 1, 1, 1, 2]
+  [OK ] w2: predicted multiplicities sum to 6 = |L(P)| (diagonalisable)
+  [OK ] w2: multiplicity of 11/32 predicted 2, dim ker 2
+  [OK ] w2: multiplicity of 13/32 predicted 1, dim ker 1
+  [OK ] w2: multiplicity of 17/32 predicted 1, dim ker 1
+  [OK ] w2: multiplicity of 9/16 predicted 1, dim ker 1
+  [OK ] w2: multiplicity of 1 predicted 1, dim ker 1
+     w3: predicted lambdas ['7/32', '1/4', '9/32', '11/32', '7/16', '1'] -> dim ker [1, 1, 1, 1, 1, 1], total 6 of 6
+  [OK ] w3: dim ker multiset is the note's [1, 1, 1, 1, 1, 1] summing to 6
+  [OK ] w3: predicted multiplicities sum to 6 = |L(P)| (diagonalisable)
+  [OK ] w3: multiplicity of 7/32 predicted 1, dim ker 1
+  [OK ] w3: multiplicity of 1/4 predicted 1, dim ker 1
+  [OK ] w3: multiplicity of 9/32 predicted 1, dim ker 1
+  [OK ] w3: multiplicity of 11/32 predicted 1, dim ker 1
+  [OK ] w3: multiplicity of 7/16 predicted 1, dim ker 1
+  [OK ] w3: multiplicity of 1 predicted 1, dim ker 1
+
+  [OK ] w1: w(abcd) = 1/8 is NOT a predicted eigenvalue
+  [OK ] w1: and dim ker(M - w(abcd) I) = 0 in the actual matrix
+  [OK ] w1: the six levels landing on w(abcd) all have m_X = 0
+  [OK ] w1: w(abcd) = 1/8
+  [OK ] w2: w(abcd) = 1/4 is NOT a predicted eigenvalue
+  [OK ] w2: and dim ker(M - w(abcd) I) = 0 in the actual matrix
+  [OK ] w2: the six levels landing on w(abcd) all have m_X = 0
+  [OK ] w2: w(abcd) = 1/4
+  [OK ] w3: w(abcd) = 1/16 is NOT a predicted eigenvalue
+  [OK ] w3: and dim ker(M - w(abcd) I) = 0 in the actual matrix
+  [OK ] under w2 exactly one eigenvalue is hit by two levels, 11/32 by ac|bd and ad|b|c
+  [OK ] under w1 all six level-eigenvalues are distinct
+  [OK ] under w3 all six level-eigenvalues are distinct
+
+==============================================================================
+SECTION F -- the level->multiplicity table is w-independent (5c)
+==============================================================================
+  [OK ] the section-5c level:multiplicity line
+  [OK ] a fourth weighting (support = ALL 26 moves) sums to 1
+  w4 (all 26 moves weighted): lambdas ['5/54', '17/108', '11/54', '13/54', '31/108', '1']
+  w4 dim ker [1, 1, 1, 1, 1, 1], total 6 of 6
+  [OK ] w4: the level->multiplicity table is unchanged
+  [OK ] w4: predicted spectrum accounts for all 6 dimensions
+  [OK ] w4: multiplicity of 5/54 predicted 1 = dim ker 1
+  [OK ] w4: multiplicity of 17/108 predicted 1 = dim ker 1
+  [OK ] w4: multiplicity of 11/54 predicted 1 = dim ker 1
+  [OK ] w4: multiplicity of 13/54 predicted 1 = dim ker 1
+  [OK ] w4: multiplicity of 31/108 predicted 1 = dim ker 1
+  [OK ] w4: multiplicity of 1 predicted 1 = dim ker 1
+
+==============================================================================
+SECTION G -- section 6 (R6): the twist, ONE and SGN
+==============================================================================
+  [OK ] the inversion counts of the six orderings
+  [OK ] the signs +1 -1 +1 +1 -1 +1
+  [OK ] sign imbalance of P = +2
+  [OK ] E . ONE = SGN
+  [OK ] E . SGN = ONE
+  [OK ] Delta_AT . ONE = 0
+  [OK ] Delta_AT . SGN = (2,-6,4,4,-6,2)
+  [OK ] L^rel . SGN = 0
+  [OK ] L^rel . ONE = (2,6,4,4,6,2)
+  [OK ] dim ker Delta_AT = 1
+  [OK ] dim ker L^rel = 1
+  [OK ] the AT graph on L(P) is connected
+  [OK ] <ONE,SGN> = sum of signs = 2
+  [OK ] projection of ONE onto span(SGN) is (1/3) SGN
+  AT degrees: [1, 3, 2, 2, 3, 1]
+
+==============================================================================
+110 checks, 1 FAILURES
+  FAILED: w2: dim ker multiset is the note's [1, 1, 1, 2] summing to 6
+==============================================================================

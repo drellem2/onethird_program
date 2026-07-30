@@ -1,0 +1,123 @@
+mg-66a6 AUDIT, target 4: the STATUS of the note's own two contributions.
+
+The note (section 8) says both of the things it claims as OURS rest on a
+computation:
+
+    "It is VERIFIED EXHAUSTIVELY ONLY TO FIVE ELEMENTS ... It is NOT PROVEN IN
+     GENERAL.  Nothing in this note should be read as saying otherwise."
+
+This file tests the opposite hypothesis: that both are elementary theorems for
+every n.  Each proof is written out, then verified CONSTRUCTIVELY -- by
+building the witness the proof produces -- exhaustively to n=5 and then on
+random posets at n=6,7,8, which the note does not cover at all.
+
+PROOF 1 (closure -- 'the identification', the first thing section 8 claims).
+  Let x = (B_1..B_k) and y = (C_1..C_l) both be P-compatible.  A block of x.y
+  is a non-empty B_p & C_q, and its index in x.y is the rank of (p,q) in
+  lexicographic order.  Take i < j in P, with i in B_p & C_q and
+  j in B_p' & C_q'.  x compatible gives p <= p'; y compatible gives q <= q'.
+  Hence (p,q) <= (p',q') lexicographically, so index(block of i) <=
+  index(block of j).  So x.y is P-compatible.  No hypothesis on n.  QED
+
+PROOF 2 (the acyclic-cut description -- 'the commitment levels', the second
+thing, and the one section 8 explicitly says is unproven).
+  Let X be a partition of the elements, and let Q(X) be the quotient digraph:
+  one node per block, an arrow B -> B' (B != B') whenever some i in B has
+  i < j in P for some j in B'.
+  (=>) Suppose X = supp(x) for a P-compatible x = (B_1..B_k).  Distinct blocks
+       have distinct indices.  An arrow B_p -> B_q forces p <= q by
+       compatibility, hence p < q.  So every arrow strictly increases the
+       index, and a directed cycle would give p < p.  Q(X) is acyclic.
+  (<=) Suppose Q(X) is acyclic.  Take any topological order of its nodes,
+       B_{s(1)},...,B_{s(k)}, and let x be that ordered set partition.  If
+       i < j in P then either they share a block (equal indices) or there is an
+       arrow block(i) -> block(j), which the topological order sends to
+       index(block(i)) < index(block(j)).  So x is P-compatible, and
+       supp(x) = X by construction.
+  Both directions hold for every n and every P.  QED
+
+PROOF 3 (the counting identity's right-hand side).  Brown's theorem gives the
+  multiplicity relation with a CHAMBER COUNT on the right.  The note writes it
+  as prod_B |L(P|_B)| and attributes the whole statement to Brown.  That
+  substitution is an identification of ours, not Brown's: for any move x with
+  supp(x) = X, the set x.C of orderings reachable by x has exactly
+  prod_B |L(P|_B)| elements.  Verified below.
+
+==============================================================================
+SECTION A -- proof 1 (closure) verified constructively
+==============================================================================
+  [OK ] n=1: x.y is P-compatible, 0 bad of 1 (every labelled poset)
+  [OK ] n=2: x.y is P-compatible, 0 bad of 17 (every labelled poset)
+  [OK ] n=3: x.y is P-compatible, 0 bad of 865 (every labelled poset)
+  [OK ] n=4: x.y is P-compatible, 0 bad of 109121 (every labelled poset)
+  [OK ] n=6: 40 random posets x 4000 random move pairs -- closure AND both band identities, 0 bad of 160000 (BEYOND the note's coverage)
+  [OK ] n=7: 12 random posets x 4000 random move pairs -- closure AND both band identities, 0 bad of 48000 (BEYOND the note's coverage)
+  [OK ] n=8: 6 random posets x 4000 random move pairs -- closure AND both band identities, 0 bad of 24000 (BEYOND the note's coverage)
+
+==============================================================================
+SECTION B -- proof 2 (the acyclic-cut description) verified
+             constructively, and BEYOND FIVE ELEMENTS
+==============================================================================
+  For each poset: (=>) every move's support has an acyclic quotient;
+  (<=) every acyclic partition is realised by the explicit topological
+  witness, which is checked to be P-compatible with that support.
+
+  [OK ] n=1: (=>) 0 supports with a cyclic quotient, over 1 labelled posets
+  [OK ] n=1: (<=) the topological witness works for every acyclic partition (1 of them)
+  [OK ] n=1: #levels == #acyclic partitions summed over all posets
+  [OK ] n=2: (=>) 0 supports with a cyclic quotient, over 3 labelled posets
+  [OK ] n=2: (<=) the topological witness works for every acyclic partition (6 of them)
+  [OK ] n=2: #levels == #acyclic partitions summed over all posets
+  [OK ] n=3: (=>) 0 supports with a cyclic quotient, over 19 labelled posets
+  [OK ] n=3: (<=) the topological witness works for every acyclic partition (89 of them)
+  [OK ] n=3: #levels == #acyclic partitions summed over all posets
+  [OK ] n=4: (=>) 0 supports with a cyclic quotient, over 219 labelled posets
+  [OK ] n=4: (<=) the topological witness works for every acyclic partition (2685 of them)
+  [OK ] n=4: #levels == #acyclic partitions summed over all posets
+  [OK ] n=5: (=>) 0 supports with a cyclic quotient, over 4231 labelled posets
+  [OK ] n=5: (<=) the topological witness works for every acyclic partition (148742 of them)
+  [OK ] n=5: #levels == #acyclic partitions summed over all posets
+  Beyond n=5, enumerating every move is infeasible, so the set equality
+  is tested in the equivalent form it reduces to: a partition X is a
+  level exactly when SOME ordering of its blocks is P-compatible.  That
+  is brute-forced over all orderings of X's blocks -- no reference to
+  the acyclicity criterion -- and compared with the criterion.
+
+  [OK ] n=6: 60 random posets -- 'is a level' (brute force over block orderings) == 'acyclic quotient' exactly (7735 levels, 7735 acyclic), and the topological witness always works (BEYOND the note's coverage)
+  [OK ] n=7: 25 random posets -- 'is a level' (brute force over block orderings) == 'acyclic quotient' exactly (10536 levels, 10536 acyclic), and the topological witness always works (BEYOND the note's coverage)
+  [OK ] n=8: 10 random posets -- 'is a level' (brute force over block orderings) == 'acyclic quotient' exactly (14135 levels, 14135 acyclic), and the topological witness always works (BEYOND the note's coverage)
+
+  CONTROL: the witness construction must FAIL on a cyclic partition.
+  [OK ] the worked example's {a,d}|{b,c} yields no topological witness
+  [OK ] and no ordered set partition with that support is P-compatible
+
+==============================================================================
+SECTION C -- proof 3: the counting identity's RHS is an
+             identification of ours, not part of Brown's statement
+==============================================================================
+  [OK ] n=1: |x.C| = prod_B |L(P|_B)| for every move of every labelled poset (1 moves)
+  [OK ] n=2: |x.C| = prod_B |L(P|_B)| for every move of every labelled poset (7 moves)
+  [OK ] n=3: |x.C| = prod_B |L(P|_B)| for every move of every labelled poset (121 moves)
+  [OK ] n=4: |x.C| = prod_B |L(P|_B)| for every move of every labelled poset (4399 moves)
+
+  and the support map is the lattice map Brown's theorem needs:
+  [OK ] n=1: supp(x.y) = common refinement of supp(x), supp(y), and the levels are closed under it, 0 bad of 1
+  [OK ] n=2: supp(x.y) = common refinement of supp(x), supp(y), and the levels are closed under it, 0 bad of 17
+  [OK ] n=3: supp(x.y) = common refinement of supp(x), supp(y), and the levels are closed under it, 0 bad of 865
+  [OK ] n=4: supp(x.y) = common refinement of supp(x), supp(y), and the levels are closed under it, 0 bad of 109121
+
+==============================================================================
+VERDICT OF THIS FILE
+==============================================================================
+  Both statements section 8 files under "verified exhaustively only to five
+  elements ... not proven in general" are THEOREMS with elementary proofs,
+  written out at the top of this file and verified constructively here --
+  including at n = 6, 7 and 8, where the note has no evidence at all.
+
+  The note therefore UNDERSTATES the status of its own two contributions.
+  That is a status error in the direction opposite to the one the audit
+  brief anticipated, and it is decision-relevant: Daniel is being told the
+  programme's contribution here is an unproven pattern in small cases.
+
+35 checks, 0 FAILURES
+==============================================================================

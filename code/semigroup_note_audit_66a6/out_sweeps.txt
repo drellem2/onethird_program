@@ -1,0 +1,129 @@
+mg-66a6 AUDIT, targets 1 and 4: the exhaustive sweeps the note leans on, and
+in particular the EXACT SCOPE of what "verified to five elements" covers.
+
+Reproduced independently here:
+  * the poset counts 1/3/19/219/4231 (labelled) and 1/2/5/16/63 (classes)
+  * the band identities x.x=x, x.y.x=x.y, closure, on every labelled poset
+  * levels == acyclic quotients, on every labelled poset up to 5 elements
+  * the sign-imbalance census, Delta_AT . ONE = 0, AT connectivity
+  * the section-8 lazy-adjacent-transposition boundary counts
+
+==============================================================================
+SECTION A -- how many posets there are
+==============================================================================
+  n=1: 1 labelled, 1 isomorphism classes
+  n=2: 3 labelled, 2 isomorphism classes
+  n=3: 19 labelled, 5 isomorphism classes
+  n=4: 219 labelled, 16 isomorphism classes
+  n=5: 4231 labelled, 63 isomorphism classes
+  [OK ] labelled poset counts 1/3/19/219/4231
+  [OK ] isomorphism class counts 1/2/5/16/63
+
+==============================================================================
+SECTION B -- the band identities, exhaustively (note section 2 table)
+==============================================================================
+  n=2 over 3 labelled posets: 7 moves, 17 pairs, 43 triples
+  [OK ] n=2: the note's move total 7
+  [OK ] n=2: the note's pair total 17
+  [OK ] n=2: 0 failures of x.x = x
+  [OK ] n=2: 0 failures of x.y.x = x.y
+  [OK ] n=2: 0 failures of closure
+  [OK ] n=2: the note's triple total 43
+  [OK ] n=2: 0 failures of associativity
+  n=3 over 19 labelled posets: 121 moves, 865 pairs, 6949 triples
+  [OK ] n=3: the note's move total 121
+  [OK ] n=3: the note's pair total 865
+  [OK ] n=3: 0 failures of x.x = x
+  [OK ] n=3: 0 failures of x.y.x = x.y
+  [OK ] n=3: 0 failures of closure
+  [OK ] n=3: the note's triple total 6949
+  [OK ] n=3: 0 failures of associativity
+  n=4 over 219 labelled posets: 4399 moves, 109121 pairs
+  [OK ] n=4: the note's move total 4399
+  [OK ] n=4: the note's pair total 109121
+  [OK ] n=4: 0 failures of x.x = x
+  [OK ] n=4: 0 failures of x.y.x = x.y
+  [OK ] n=4: 0 failures of closure
+  n=5 over 63 classes: 5757 moves, 922073 pairs
+  [OK ] n=5: the note's move total 5757
+  [OK ] n=5: the note's pair total 922073
+  [OK ] n=5: 0 failures of x.x = x
+  [OK ] n=5: 0 failures of x.y.x = x.y
+  [OK ] n=5: 0 failures of closure
+
+==============================================================================
+SECTION C -- levels == acyclic quotients, on EVERY labelled poset
+==============================================================================
+  n=1: 1 of 1 labelled posets agree
+  [OK ] n=1: 1 of 1, 0 disagreements
+  n=2: 3 of 3 labelled posets agree
+  [OK ] n=2: 3 of 3, 0 disagreements
+  n=3: 19 of 19 labelled posets agree
+  [OK ] n=3: 19 of 19, 0 disagreements
+  n=4: 219 of 219 labelled posets agree
+  [OK ] n=4: 219 of 219, 0 disagreements
+  n=5: 4231 of 4231 labelled posets agree
+  [OK ] n=5: 4231 of 4231, 0 disagreements
+
+  SCOPE NOTE.  This is the whole of the evidence for the acyclic-cut
+  description.  n=6 is NOT covered here and is not covered by the
+  note either.
+
+==============================================================================
+SECTION D -- the sign census (note section 6c)
+==============================================================================
+  n=2: 2 classes, 1 balanced, 1 not
+  [OK ] n=2: the note's balanced/not split (1, 1)
+  [OK ] n=2: AT graph connected on every class
+  [OK ] n=2: Delta_AT . ONE = 0 on every class
+  n=3: 5 classes, 3 balanced, 2 not
+  [OK ] n=3: the note's balanced/not split (3, 2)
+  [OK ] n=3: AT graph connected on every class
+  [OK ] n=3: Delta_AT . ONE = 0 on every class
+  n=4: 16 classes, 11 balanced, 5 not
+  [OK ] n=4: the note's balanced/not split (11, 5)
+  [OK ] n=4: AT graph connected on every class
+  [OK ] n=4: Delta_AT . ONE = 0 on every class
+  n=5: 63 classes, 44 balanced, 19 not
+  [OK ] n=5: the note's balanced/not split (44, 19)
+  [OK ] n=5: AT graph connected on every class
+  [OK ] n=5: Delta_AT . ONE = 0 on every class
+
+  labelling-independence of 'imbalance vanishes':
+  [OK ] n=2: imbalance multiplies by sgn(relabelling), over all relabellings of every class
+  [OK ] n=3: imbalance multiplies by sgn(relabelling), over all relabellings of every class
+  [OK ] n=4: imbalance multiplies by sgn(relabelling), over all relabellings of every class
+  [OK ] a chain has one linear extension
+  [OK ] and (with this increasing labelling) imbalance +1
+  NOTE: the same chain labelled decreasingly has imbalance -1
+  [OK ] antichain on 2: imbalance 0
+  [OK ] antichain on 3: imbalance 0
+  [OK ] antichain on 4: imbalance 0
+  [OK ] antichain on 5: imbalance 0
+
+==============================================================================
+SECTION E -- the section-8 boundary counts (lazy AT walk)
+==============================================================================
+  n=2: 0 provably not / 1 vacuous / 1 undecided
+  [OK ] n=2: the note's boundary row (0, 1, 1)
+  n=3: 2 provably not / 1 vacuous / 2 undecided
+  [OK ] n=3: the note's boundary row (2, 1, 2)
+  n=4: 11 provably not / 1 vacuous / 4 undecided
+  [OK ] n=4: the note's boundary row (11, 1, 4)
+  n=5: 55 provably not / 1 vacuous / 7 undecided
+  [OK ] n=5: the note's boundary row (55, 1, 7)
+
+  the antichain specifically:
+     n=3: 12 needed edges, 1 usable move(s) ['(abc)'], 0 supplied
+  [OK ] n=3 antichain: exactly one usable move and it is the do-nothing move
+  [OK ] n=3 antichain: supplies 0 of the 12 needed edges
+     n=4: 72 needed edges, 1 usable move(s) ['(abcd)'], 0 supplied
+  [OK ] n=4 antichain: exactly one usable move and it is the do-nothing move
+  [OK ] n=4 antichain: supplies 0 of the 72 needed edges
+     n=5: 480 needed edges, 1 usable move(s) ['(abcde)'], 0 supplied
+  [OK ] n=5 antichain: exactly one usable move and it is the do-nothing move
+  [OK ] n=5 antichain: supplies 0 of the 480 needed edges
+
+==============================================================================
+62 checks, 0 FAILURES
+==============================================================================
