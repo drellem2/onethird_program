@@ -54,6 +54,19 @@ itself, about another document, or about a ticket -- and each was wrong.
       detected -- the chain's tail points at the live figure instead of
       restating it.
 
+      ⚠️ WIDENED 2026-07-30 (mg-835f finding G-1, landed by mg-8916).  Reading
+      each figure out of the statement that asserts it was necessary and was
+      still not the whole site: a WRONG figure written into the same section in
+      ORDINARY PROSE, beside a designated statement left correct, was invisible
+      at 3 of the 3 sites at exit 0.  So "the gate reads the figure at the site"
+      was itself an extent claim WIDER THAN THE CODE.  THE CODE IS WIDENED, not
+      the claim narrowed, and this file says which: the gate now takes a CENSUS
+      of every figure-shaped token the section asserts and compares the whole
+      MULTISET to the live measurements plus a DECLARED roster of the site's
+      historical figures.  See the block above `FIGURE_TOKEN` for what the
+      census does and does not cover, and N10-N14 of the negative control for
+      it firing on the probes that were silent.
+
   T2  TWO SITE COUNTS IN ONE COMMIT (F2).  §6's disposition table is counted
       row by row from the tree; §14's count word is read out of §14.  Neither
       is quoted from the audit.
@@ -219,6 +232,172 @@ FIGURES = {
 }
 
 
+# --------------------------------------------------------------------------
+# ⚠️ WIDENED 2026-07-30 (mg-835f finding G-1, landed by mg-8916).  THE CENSUS.
+#
+# The two checks above read the DESIGNATED STATEMENT at each site.  A reader
+# reads the SECTION.  mg-835f wrote the sentence "the gap is now +9 999
+# characters." into the STATE.md row, into §14 and into H8 -- in ordinary
+# prose, length-preservingly, leaving every designated statement correct -- and
+# the run stayed at exit 0 at 3 of the 3 sites.  So the sentence "the gate
+# reads the figure at the site" was WIDER THAN THE CODE: the code read one
+# statement, not the site.
+#
+# TWO REPAIRS WERE AVAILABLE AND THIS ONE WIDENS THE CODE.  The ticket's
+# preferred repair -- remove the prose duplicate so the value lives in one
+# place -- was measured first and there is nothing to remove: every live figure
+# already occurs exactly once per site (that is the mg-a318 repair, and the
+# WRITTEN ONCE check keeps it that way).  G-1 is not a duplicate that exists;
+# it is a duplicate the gate would not see if one were written.  The other
+# repair on offer was to narrow the printed claim to "structured occurrences
+# only".  NEITHER WAS TAKEN: the code is widened so that the sentence a reader
+# already meets becomes true.  Said plainly, because silently widening a gate
+# and silently narrowing a claim are different repairs with different costs.
+#
+# HOW.  Every figure-shaped token at the site is enumerated and the whole
+# MULTISET is compared to a declared expectation: the live figures at their
+# measured values, plus a roster of the site's HISTORICAL figures, each with
+# what it is.  An extra token fires; a missing one fires; a token whose count
+# moved fires -- including a wrong prose figure that reuses a value already on
+# the roster, which a set-membership test would pass.
+#
+# WHAT IT DOES NOT COVER, stated so this extent is not the next wide one:
+#   * marked quotations are exempt, because `assertions()` strips them -- a
+#     quotation of a withdrawn figure is not an assertion of it, which is the
+#     convention the sites already run on and which `assertions` documents;
+#   * a token outside the site is not read, because a site is a section;
+#   * "figure-shaped" means this arc's own notation for a character count:
+#     optionally signed, thousands separated by a space (`+23 771`, `48 846`),
+#     or signed with three or more digits (`−875`, `+755`).  A bare `405` or a
+#     ticket id is not a figure of this class and is not read.
+#
+# AND IT IS FAIL-CLOSED: a NEW historical figure, legitimately added to a site,
+# fires until it is entered on the roster with what it is.  That is a cost and
+# it is the same cost as U5's -- an editor meets a red run for an honest edit.
+# It is the right direction for this arc: the roster IS the declaration the
+# repair's own Appendix A rule asks for, kept where a checker reads it.
+# --------------------------------------------------------------------------
+FIGURE_TOKEN = re.compile(
+    r"(?<![\w−+])(?:[−+]?\d{1,3}(?: \d{3})+|[−+]\d{3,})(?!\d)")
+
+# site -> {figure key: how many times the LIVE value is written at this site}.
+# The VALUES come from the measurement, never from a constant here.
+LIVE_CENSUS = {
+    "the STATE.md row": {"gap": 1, "both": 1, "cell": 1, "hist": 1, "copy": 1},
+    "§14":              {"gap": 1, "both": 1, "copy": 1},
+    "H8":               {"gap": 1, "both": 1, "cell": 1, "hist": 1, "copy": 5},
+}
+
+# site -> {token: (count, what it is)}.  Every historical figure a reader meets
+# at the site, declared.  These are frozen by construction: each is a figure at
+# a named past commit, and git does not move.
+HISTORICAL = {
+    "the STATE.md row": {
+        "2 928":   (2, "the clause mismatch A5 reports, before mg-a2bd"),
+        "6 069":   (2, "the same mismatch after mg-a2bd more than doubled it"),
+        "−875":    (4, "the cell-only gap at bbe83b5^, published by bbe83b5 as "
+                       "current and WITHDRAWN"),
+        "+1 630":  (1, "the characters bbe83b5 added to this cell in the commit "
+                       "that measured it"),
+        "+755":    (2, "the cell-only gap at bbe83b5, superseded"),
+        "48 846":  (1, "genuine-join links checked for ledger row J -- a count "
+                       "of links, not a length"),
+    },
+    "§14": {
+        "13 551":  (1, "the STATE.md row before mg-a2bd"),
+        "16 692":  (1, "the STATE.md row after mg-a2bd"),
+        "2 928":   (2, "the clause mismatch A5 reports, before mg-a2bd"),
+        "6 069":   (2, "the same mismatch after mg-a2bd"),
+        "−875":    (2, "the cell-only gap at bbe83b5^, WITHDRAWN"),
+        "+1 630":  (1, "the characters bbe83b5 added to the STATE.md cell"),
+        "+755":    (2, "the cell-only gap at bbe83b5, superseded"),
+        "+17 023": (1, "cell + relocated history at bbe83b5, superseded"),
+        "44 055":  (1, "links enumerated over 4 <= n <= 6 -- a count of links, "
+                       "not a length"),
+    },
+    "H8": {
+        "13 551":  (1, "the STATE.md row before mg-a2bd"),
+        "16 692":  (1, "the STATE.md row after mg-a2bd"),
+        "+3 141":  (1, "what mg-a2bd added to the STATE.md row"),
+        "2 928":   (2, "the clause mismatch A5 reports, before mg-a2bd"),
+        "6 069":   (2, "the same mismatch after mg-a2bd"),
+        "9 748":   (2, "the STATE.md row cell at bbe83b5^"),
+        "11 378":  (1, "the STATE.md row cell at bbe83b5"),
+        "10 483":  (3, "this file (the relocated history) at bbe83b5^"),
+        "16 268":  (1, "this file at bbe83b5"),
+        "−875":    (4, "the cell-only gap at bbe83b5^, WITHDRAWN"),
+        "+755":    (2, "the cell-only gap at bbe83b5, superseded"),
+        "+9 608":  (3, "cell + relocated history at bbe83b5^, understated"),
+        "+17 023": (1, "cell + relocated history at bbe83b5, superseded"),
+        "+1 630":  (1, "the characters bbe83b5 added to the STATE.md cell"),
+        "+5 785":  (1, "the characters bbe83b5 added to this file"),
+        "48 846":  (1, "genuine-join links checked for ledger row J"),
+    },
+}
+
+
+def figure_tokens(raw):
+    """Every figure-shaped token the site ASSERTS, as a sorted list.  Marked
+    quotations are removed first, by `assertions`, on the convention already in
+    force at these sites: a quotation of a withdrawn figure is not an assertion
+    of it."""
+    return sorted(FIGURE_TOKEN.findall(assertions(raw)))
+
+
+def expected_census(site, measured):
+    """The multiset of figure tokens this site is licensed to carry: the live
+    figures AT THE VALUES MEASURED THIS RUN, plus the declared historical
+    roster.  Returns (counter, collisions)."""
+    want = {}
+    for key, n in LIVE_CENSUS[site].items():
+        want[measured[key]] = want.get(measured[key], 0) + n
+    collisions = sorted(t for t in HISTORICAL[site] if t in want)
+    for token, (n, _) in HISTORICAL[site].items():
+        want[token] = want.get(token, 0) + n
+    return want, collisions
+
+
+def census_gate(name, raw, measured):
+    """THE CENSUS, for one site.  Returns [(ok, detail), ...]."""
+    want, collisions = expected_census(name, measured)
+    got = {}
+    for t in figure_tokens(raw):
+        got[t] = got.get(t, 0) + 1
+    out = []
+    if collisions:
+        out.append((False,
+                    f"GATE @ {name}: CENSUS ROSTER -- {collisions} is declared "
+                    "as a historical figure AND equals a live measurement this "
+                    "run.  The two cannot be told apart by counting, so the "
+                    "roster must name the historical one differently or drop it"))
+    extra = sorted((t, got[t] - want.get(t, 0)) for t in got
+                   if got[t] != want.get(t, 0))
+    gone = sorted((t, want[t] - got.get(t, 0)) for t in want
+                  if t not in got)
+    if extra or gone:
+        parts = [f"{t} appears {got.get(t, 0)}x, licensed {want.get(t, 0)}x"
+                 for t, _ in extra]
+        parts += [f"{t} is licensed {want[t]}x and appears 0x" for t, _ in gone]
+        out.append((False,
+                    f"GATE @ {name}: FIGURE CENSUS -- {len(parts)} unlicensed "
+                    f"figure(s) at this site: " + "; ".join(parts)
+                    + ".  Every figure a reader meets in this section must be "
+                    "the live measurement or a DECLARED historical one; an "
+                    "undeclared figure in ordinary prose is the wrong figure a "
+                    "reader meets while the labelled statement stays right "
+                    "(mg-835f G-1)"))
+    else:
+        out.append((True,
+                    f"GATE @ {name}: FIGURE CENSUS -- all "
+                    f"{sum(got.values())} figure token(s) a reader meets in "
+                    f"this SECTION are licensed ({sum(LIVE_CENSUS[name].values())} "
+                    f"live occurrence(s) at the values measured this run, "
+                    f"{sum(n for n, _ in HISTORICAL[name].values())} declared "
+                    "historical), and no other figure is asserted here.  Prose "
+                    "is read, not only the designated statements"))
+    return out
+
+
 def assertions(raw):
     """The site's text with its MARKED QUOTATIONS removed.
 
@@ -304,13 +483,19 @@ def figure_gate(texts, measured):
     implementation to drift out of step with it, which is how the battery
     `e16e41c` shipped came to test a gate slightly unlike the live one.
 
-    Two checks per (site, figure):
+    Three checks, and the third is the mg-8916 widening:
       (a) AT THE SITE -- the value the document writes in the statement that
           asserts it, compared to what this run measured;
       (b) WRITTEN ONCE -- a live figure occurs exactly once in the site, so
           nothing can go stale in one copy while another satisfies a check.
+      (c) THE CENSUS -- every figure-shaped token the SECTION asserts is either
+          the live measurement or a declared historical figure, at the declared
+          multiplicity.  (a) and (b) read the designated statements; a reader
+          reads the prose beside them, and (c) is that prose (mg-835f G-1).
     """
     out = []
+    for name, _reader, _keys in SITES:
+        out.extend(census_gate(name, texts[name], measured))
     for name, reader, keys in SITES:
         got = reader(texts[name])
         for key in keys:
@@ -512,6 +697,25 @@ whether the enlargement was disclosed anywhere.
           f"not {len(flat(tree(DELIV))):,} for the whole deliverable)")
     print(f"    H8                {len(flat_h8_now):>7,} chars (the section, "
           f"not {len(flat(tree(HIST))):,} for the whole file)")
+    print()
+    # THE EXTENT, PRINTED (mg-a4ef's convention; widened by mg-8916).  A gate
+    # that does not print what it covers invites the reader to assume it covers
+    # the section when it covers one sentence -- which is mg-835f G-1 exactly.
+    print("  EXTENT of the figure gate below, printed rather than assumed:")
+    print("    (a) the DESIGNATED STATEMENT at each site, read and compared;")
+    print("    (b) each LIVE figure written exactly once per site;")
+    print("    (c) a CENSUS of every figure-shaped token the SECTION asserts --")
+    print("        prose included -- against the live values plus a declared")
+    print("        historical roster.  Marked quotations are exempt by the")
+    print("        convention `assertions()` states; text outside the section is")
+    print("        not read, because a site is a section (mg-835f G-1/mg-8916).")
+    for name, _r, _k in SITES:
+        want, _c = expected_census(name, {"gap":  doc_num(aH - bH, signed=True),
+                                          "both": doc_num(aH + histlen - bH, signed=True),
+                                          "cell": doc_num(aH), "hist": doc_num(histlen),
+                                          "copy": doc_num(bH)})
+        print(f"        {name:<20} {sum(want.values()):>3} licensed figure tokens "
+              f"({len(HISTORICAL[name])} historical values declared)")
     print()
 
     false_now = "the corresponding `STATE.md` row carries the same clauses"
@@ -800,10 +1004,14 @@ def negative_control():
     re-implementation.  Verdicts are written before the run.  Nothing on disk
     is touched."""
     head("NEGATIVE CONTROL -- THE FIGURE GATE, MUTATED ONE COPY AT A TIME")
-    print("""Nine mutations, verdicts written before the run, applied in memory to the
+    print("""Fourteen mutations, verdicts written before the run, applied in memory to the
 three site texts and evaluated by `figure_gate` itself.  Nothing is written to
 disk.  N1/N3/N4 are mg-8a5c's N1/N4/N5 -- the three single-copy corruptions
-that the previous gate observed at exit 0 while predicting exit 1.
+that the previous gate observed at exit 0 while predicting exit 1.  N9 is the
+unmutated control.  N10-N12 are mg-835f's own U1 probes, the three the run
+stayed GREEN on until mg-8916 widened the gate; N13 is the one a
+set-membership census would still pass; N14 is the fail-closed cost, stated as
+a cost.
 """)
     a = len(state_row(tree(STATE)))
     b = len(deliv_row(tree(DELIV)))
@@ -838,6 +1046,14 @@ that the previous gate observed at exit 0 while predicting exit 1.
         t[site] = t[site] + f"\n\n(and the gap is {live[key]}, restated)\n"
         return t
 
+    def prose(site, value):
+        """mg-835f's G-1 probe: a figure written into the site in ORDINARY
+        PROSE, beside a designated statement that stays correct and untouched.
+        Every one of these left the run at exit 0 before mg-8916."""
+        t = dict(base)
+        t[site] = t[site] + f"\n\nThe gap is now {value} characters.\n"
+        return t
+
     def relocate_14():
         """Move the whole disclosure out of §14 into an appendix (mg-8a5c N7).
         To the §14 SITE that is simply the paragraph no longer being in it."""
@@ -867,15 +1083,31 @@ that the previous gate observed at exit 0 while predicting exit 1.
          "GATE FIRES", lambda: figure_gate(base, measure(hist=h + 1))),
         ("N9  unmutated -- the tree as it stands",
          "gate passes", lambda: figure_gate(base, live)),
+        # ⚠️ N10-N13 ADDED 2026-07-30 (mg-835f G-1, landed by mg-8916).  N10-N12
+        # are mg-835f's own U1 probes, verbatim: the sentence it wrote into each
+        # of the three sites while the run stayed green.  N13 is the case a
+        # set-membership test would still pass -- a wrong prose figure that
+        # reuses a value already on the roster -- which is why the census
+        # compares MULTISETS.  N14 is the declared cost.
+        ("N10 STATE.md row: a WRONG figure in ORDINARY PROSE at the site",
+         "GATE FIRES", lambda: figure_gate(prose("the STATE.md row", "+9 999"), live)),
+        ("N11 §14: a WRONG figure in ORDINARY PROSE at the site",
+         "GATE FIRES", lambda: figure_gate(prose("§14", "+9 999"), live)),
+        ("N12 H8: a WRONG figure in ORDINARY PROSE at the site",
+         "GATE FIRES", lambda: figure_gate(prose("H8", "+9 999"), live)),
+        ("N13 STATE.md row: wrong prose REUSING a figure already on the roster",
+         "GATE FIRES", lambda: figure_gate(prose("the STATE.md row", "+755"), live)),
+        ("N14 §14: a NEW historical figure, undeclared (the fail-closed cost)",
+         "GATE FIRES", lambda: figure_gate(prose("§14", "12 345"), live)),
     ]
-    print(f"    {'mutation':<62}{'predicted':<14}{'observed'}")
+    print(f"    {'mutation':<70}{'predicted':<14}{'observed'}")
     ok = True
     for name, predicted, fn in cases:
         fired = not all(o for o, _ in fn())
         observed = "GATE FIRES" if fired else "gate passes"
         agree = observed == predicted
         ok = ok and agree
-        print(f"    {name:<62}{predicted:<14}{observed}"
+        print(f"    {name:<70}{predicted:<14}{observed}"
               f"{'' if agree else '   <-- DISAGREES'}")
     print()
     record(ok, f"{len(cases)} of {len(cases)} mutations moved the gate as "
@@ -883,7 +1115,10 @@ that the previous gate observed at exit 0 while predicting exit 1.
                "the figure a reader meets, at each of the three sites, which "
                "the presence-test gate observed at exit 0 (mg-8a5c N1/N4/N5). "
                "N5 fires on the duplicate itself, so the structural repair "
-               "cannot be silently undone")
+               "cannot be silently undone.  N10-N12 are mg-835f's G-1 -- a "
+               "wrong figure in ORDINARY PROSE beside the statement -- which "
+               "this gate passed at 3 of 3 sites and now fires on at 3 of 3 "
+               "(mg-8916)")
 
 
 def main():

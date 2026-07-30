@@ -1,0 +1,123 @@
+mg-8916 -- THE mg-835f REPAIR, MEASURED IN BOTH DIRECTIONS
+==============================================================================
+Predicted exit code, written before the first run: 0.
+
+G-1 is closed by WIDENING THE CODE and G-2 by DERIVING THE SUMMARY FROM ITS
+ROWS.  Nothing below re-opens the mg-a318 primary target, which held: 12 of 12
+reader-facing figures corrupted on disk make the run red and 12 of 12
+restorations make it green again.  0 mathematical statements are touched.
+
+R1 -- G-1: A WRONG FIGURE IN ORDINARY PROSE, ON DISK, BOTH DIRECTIONS
+---------------------------------------------------------------------
+mg-835f wrote 'The gap is now +9 999 characters.' into each of the three
+sites, in ordinary prose, length-preservingly, leaving the labelled statement
+the gate reads correct and untouched -- and THE RUN STAYED AT EXIT 0 EVERY TIME
+(its A6 U1 x3).  The same probe is run here against the REAL runner, one site
+at a time, every other occurrence of every figure left correct.
+
+Then the file is restored, the restoration is CHECKED by sha256, and the runner
+is run AGAIN.  Both directions per probe, because a gate that fires on
+everything is worth no more than one that fires on nothing.
+
+  population: the 3 sites x 2 wrong-prose shapes.  +9 999 is a value the roster
+  does not carry; +755 IS on the roster (the cell-only gap at bbe83b5), which
+  is the probe a SET-membership census would still pass and a MULTISET census
+  catches.  Verdicts written before the run.
+
+    THE PREFERRED REPAIR, MEASURED FIRST: is there a prose duplicate
+    to REMOVE?  Live figures and how many times each is written per
+    site, read from the tree:
+      the STATE.md row     gap=1  both=1  cell=1  hist=1  copy=1
+      §14                  gap=1  both=1  copy=1
+      H8                   gap=1  both=1  cell=1  hist=1  copy=5
+
+  [CONFIRMED] 0 live figure is written more times than its site licenses, over 3 sites -- so the ticket's PREFERRED repair (remove the prose duplicate) has nothing to remove: each live figure already lives in exactly one place per site.  G-1 is the duplicate the gate would not SEE if the next correction wrote one.  THE CODE IS WIDENED AND THE STATED EXTENT IS NOT NARROWED, and this line is the saying-which
+  [CONFIRMED] the unmutated tree: the real runner exits 0 -- the baseline every probe below is measured against
+
+    probe                                                                 predicted    observed     restored
+    N1 the STATE.md row: wrong prose figure +9 999 (mg-835f's own U1)     GATE FIRES   GATE FIRES   silent
+        [REFUTED  ] GATE @ the STATE.md row: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +9 999 appears 1x, licensed 0x.  Every figure a reader meet
+    N1 §14: wrong prose figure +9 999 (mg-835f's own U1)                  GATE FIRES   GATE FIRES   silent
+        [REFUTED  ] GATE @ §14: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +9 999 appears 1x, licensed 0x.  Every figure a reader meets in this sec
+    N1 H8: wrong prose figure +9 999 (mg-835f's own U1)                   GATE FIRES   GATE FIRES   silent
+        [REFUTED  ] GATE @ H8: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +9 999 appears 1x, licensed 0x.  Every figure a reader meets in this sect
+    N2 the STATE.md row: wrong prose figure +755 -- ALREADY ON THE ROSTER GATE FIRES   GATE FIRES   silent
+        [REFUTED  ] GATE @ the STATE.md row: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +755 appears 3x, licensed 2x.  Every figure a reader meets 
+    N2 §14: wrong prose figure +755 -- ALREADY ON THE ROSTER              GATE FIRES   GATE FIRES   silent
+        [REFUTED  ] GATE @ §14: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +755 appears 3x, licensed 2x.  Every figure a reader meets in this secti
+    N2 H8: wrong prose figure +755 -- ALREADY ON THE ROSTER               GATE FIRES   GATE FIRES   silent
+        [REFUTED  ] GATE @ H8: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +755 appears 3x, licensed 2x.  Every figure a reader meets in this sectio
+
+  [CONFIRMED] 6 of 6 wrong-prose probes make the REAL runner red, at 3 of 3 sites and in both shapes.  mg-835f observed 3 of 3 of these at exit 0 -- G-1 is CLOSED by widening the code
+  [CONFIRMED] 6 of 6 restorations return the runner to exit 0, each verified byte-identical by sha256 -- the gate does not fire on everything, so the fires above are attributable to the prose
+
+R2 -- G-2: THE BOTTOM LINE, DERIVED FROM ITS ROWS AND CHECKED
+-------------------------------------------------------------
+mg-835f: the mg-8a5c instrument, re-run at HEAD, printed two [REFUTED] lines
+in T1 -- its own declared PRIMARY TARGET -- and then printed, unconditionally,
+'THE PRIMARY TARGET IS CONFIRMED'.  A document contradicting itself between its
+summary and its data, with the summary being the part that travels.
+
+THE RULE APPLIED, and it is worth carrying beyond this ticket: every time a
+summary and its supporting rows have disagreed in this arc, the summary was
+wrong and the rows were right.  The summary is written once, early, by whoever
+is most invested in the conclusion; the rows are regenerated.  SO THE BOTTOM
+LINE IS FIXED TO MATCH T1, NOT T1 TO MATCH THE BOTTOM LINE -- T1's expectations
+are the figures `e16e41c` published and this instrument audits `e16e41c`.
+
+Two runs.  Verdicts written before both.
+
+    RUN 1 -- as it stands.  exit 2
+      T1 row   [REFUTED  ] the three published parts reproduce from the tree: cell 13,367, relocated history 21,027, §14 copy 10,623
+      T1 row   [REFUTED  ] and so do the two published gaps: cell-only +2,744, cell + history +23,771 -- THE REPAIR'S FIGURES DID NOT GO STALE, whi
+
+  [CONFIRMED] 2 of 2 PRIMARY rows read [REFUTED] at this tree -- a later commit moved the figures mg-8e30 published, which is a true statement about a tree this audit was never taken against
+  [CONFIRMED] and the bottom line NO LONGER prints 'THE PRIMARY TARGET IS CONFIRMED' while those rows are refuted.  The summary follows the rows; mg-835f G-2 is CLOSED
+  [REFUTED  ] and the SUMMARY vs ROWS check is present and green -- the sentence printed and the rows it summarises agree
+
+    RUN 2 -- THE SAME RUN WITH THE SUMMARY FORCED to the sentence it
+    used to print unconditionally.  exit 2
+
+  [REFUTED  ] FORCED TO DISAGREE, THE CHECK FIRES.  This is the demonstration the ticket requires: a summary-versus-rows check never shown to fire is the vacuous-check defect this arc has produced three times
+  [REFUTED  ] and the forced run reproduces the EXACT shape mg-835f found -- 'THE PRIMARY TARGET IS CONFIRMED' printed in the same transcript as its own refuted PRIMARY rows.  It is now reachable only by forcing it, and forcing it is caught
+  [REFUTED  ] and the forced run refutes exactly one MORE check than the normal run (2 -> 2) -- the check moves the count, so it is not decorative
+
+R3 -- THE RESIDUE, AND WHICH ARTIFACT IS FROZEN
+-----------------------------------------------
+What the census does NOT read, printed rather than left for the next audit
+to find.  An extent that is not printed becomes the next claim wider than its
+code, which is exactly what G-1 was.
+
+    the STATE.md row      17 tokens read,  17 licensed,  0 inside marked quotations and EXEMPT, 0 roster/live collision(s)
+    §14                   16 tokens read,  16 licensed,  3 inside marked quotations and EXEMPT, 0 roster/live collision(s)
+    H8                    36 tokens read,  36 licensed,  0 inside marked quotations and EXEMPT, 0 roster/live collision(s)
+
+  [CONFIRMED] 69 figure tokens are read across the 3 sites, where the gate previously read 12 designated statements and nothing else
+  [MEASURED ] NOT COVERED, and declared: figures inside MARKED QUOTATIONS (a quotation of a withdrawn figure is not an assertion of it -- the convention `assertions()` already ran on); figures OUTSIDE the section, because a site is a section; and numbers that are not of this arc's character-count shape (a bare `405`, a ticket id)
+  [MEASURED ] THE COST, stated rather than discovered: the census is FAIL-CLOSED. A legitimately new historical figure at a site makes the run red until it is entered on the roster with what it is.  That is the same cost mg-835f reported for U5 (an innocent rewording is a red run), and it is the direction a locator should fail in
+
+    WRITTEN ONCE AND FROZEN, versus REGENERATED TO FOLLOW:
+      code/hodge_leverage_audit_8a5c/out_audit_8e30.txt
+        FROZEN -- the mg-8a5c run as TAKEN, at f58f7fd.  Not
+        regenerated by this repair; its verdict is unchanged.
+      code/hodge_leverage_landing_e1d0/out_verify.txt
+        REGENERATED to follow the widened gate -- it gains the
+        census lines and the extent block, and nothing else.
+      code/hodge_leverage_repair_8916/out_repair_8916.txt
+        REGENERATED -- this run.
+
+  [CONFIRMED] and `out_audit_8e30.txt` is byte-identical to `main`: the frozen artifact is frozen, measured rather than asserted.  A document left wrong with its evidence bent to agree presents identically in a diff to a document corrected with its evidence regenerated to follow -- so which is which is written down
+
+BOTTOM LINE
+-----------
+  checks recorded : 14
+  confirmed       : 8
+  measurements    : 2
+  refuted         : 4
+
+  REFUTED -- a claim this repair makes did not hold, and the
+  prose must not be written:
+    - and the SUMMARY vs ROWS check is present and green -- the sentence printed and the rows it summarises agree
+    - FORCED TO DISAGREE, THE CHECK FIRES.  This is the demonstration the ticket requires: a summary-versus-rows check never shown to fire is the vacuous-ch
+    - and the forced run reproduces the EXACT shape mg-835f found -- 'THE PRIMARY TARGET IS CONFIRMED' printed in the same transcript as its own refuted PRI
+    - and the forced run refutes exactly one MORE check than the normal run (2 -> 2) -- the check moves the count, so it is not decorative
