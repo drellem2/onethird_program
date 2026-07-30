@@ -110,6 +110,14 @@ the next auditor.
 | `coverage218d.py` | **40 of 40** claims in `COVERAGE.md` still hold against the code, the tree and a mutation |
 | the eleven certified regions | **no content digest and no presentation digest moved.** `STATE.md` and the state-history README are not edited by this repair at all |
 
+**One consequence of leaving mg-5644 unedited, stated so nobody has to work it out.**
+`render5644.py`'s verdict paragraph still reads *"which this control now exits 0 on when it
+happens one file out"*, and `delegated5644.py`'s closing note still explains why `Q1` and
+`Q2` exit 0. Those sentences are **superseded prose in an unedited file**, and that is the
+correct trade: the rows themselves now print `expected exit 0 … got exit 1`, which is the
+measurement, and a party under test that edits the auditor's summary has destroyed the
+evidence it is citing.
+
 ## Which layer is uncontrolled after this fix
 
 **Seven for seven it has moved rather than closed, and this generation was the sharpest form:

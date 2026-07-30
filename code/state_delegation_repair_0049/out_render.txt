@@ -1,0 +1,47 @@
+============================================================================================
+mg-0049 — WHAT A READER IS SHOWN UNDER THIS REPAIR'S FIVE NEW ROWS
+============================================================================================
+  target      docs/state-history/attempt-mg-276d.md
+  population  the 5 sections the certified ledger cell cites BY NAME: H1 H2 H3 H4 H5
+  tests       ANY     — the section's heading text appears anywhere a reader looks
+              HEADING — it appears as <h1>..<h6>, i.e. as the document's own prose
+  engines     marked, markdown-it, independent implementations
+
+  R0  unmutated — the positive control    (delta_control.py: exit 0)
+        marked       ANY 5/5   HEADING 5/5   expected ANY 5 HEADING 5   ok
+        markdown-it  ANY 5/5   HEADING 5/5   expected ANY 5 HEADING 5   ok
+
+  R8  the whole file inside a CLOSED HTML comment    (delta_control.py: exit 1 (FAIL))
+        marked       ANY 0/5   HEADING 0/5   expected ANY 0 HEADING 0   ok
+        markdown-it  ANY 0/5   HEADING 0/5   expected ANY 0 HEADING 0   ok
+
+  R5  a <details> wrapper at the top    (delta_control.py: exit 2 (MOVED))
+        marked       ANY 5/5   HEADING 5/5   expected ANY 5 HEADING 5   ok
+        markdown-it  ANY 5/5   HEADING 5/5   expected ANY 5 HEADING 5   ok
+
+  R6  an 'Appendix Z — nothing below is in force' heading above H1    (delta_control.py: exit 2 (MOVED))
+        marked       ANY 5/5   HEADING 5/5   expected ANY 5 HEADING 5   ok
+        markdown-it  ANY 5/5   HEADING 5/5   expected ANY 5 HEADING 5   ok
+
+  R9  one tab in the target's uncited opening paragraph    (delta_control.py: exit 2 (MOVED))
+        marked       ANY 5/5   HEADING 5/5   expected ANY 5 HEADING 5   ok
+        markdown-it  ANY 5/5   HEADING 5/5   expected ANY 5 HEADING 5   ok
+
+============================================================================================
+VERDICT
+============================================================================================
+  100 comparisons over 2 independent renderers; they agreed on every one.
+  0 rows did not match what this repair predicted.
+
+  R8 CONFIRMS that the blank page is not about the comment being unclosed: a
+  well-formed comment around the whole document shows a reader nothing either,
+  and this repair exits 1 on it.
+
+  R5, R6 AND R9 ARE THE HONEST HALF.  In all three, every cited section is still
+  on the page, as the document's own prose, on both renderers — and the control
+  exits 2.  It is right to: R5 puts raw HTML the model does not resolve around
+  the certified surface, and R6 puts every cited section under a heading that
+  says nothing below it is in force, which is what a reader reads.  R9 is a pure
+  cost — a tab a reader cannot see, re-baselined at exit 2 — and it is printed
+  here rather than left for the next auditor to find.
+============================================================================================

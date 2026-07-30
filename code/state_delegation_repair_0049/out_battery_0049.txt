@@ -1,0 +1,40 @@
+==========================================================================================
+mg-0049 — NINE MUTATIONS ON THE SURFACE mg-bee1 CREATED AND THIS REPAIR CLOSES
+'expected' is what THIS AUDIT PREDICTED BEFORE THE RUN, written into this file before it was executed.
+Run on mg-5644's harness, imported unmodified.  Every mutation edits ONLY
+docs/state-history/attempt-mg-276d.md — the file the certified cell POINTS AT.
+==========================================================================================
+  OK  R1    L4 on L1's surface     the cited file HTML-commented whole (reader sees nothing)  expected exit 1    got exit 1 (FAIL)
+  OK  R2    L4 on L1's surface     the cited file fenced whole (renders as a code sample)     expected exit 1    got exit 1 (FAIL)
+  OK  R3    L1 stated boundary     a retraction at the TOP of the target                      expected exit 0    got exit 0 (PASS)
+  OK  R4    L1 stated boundary     a new UNCITED section appended to the target               expected exit 0    got exit 0 (PASS)
+  OK  R5    L4 guard only          a <details> wrapper: suppresses nothing, is raw HTML       expected exit 2    got exit 2 (MOVED)
+  OK  R6    L4 heading path        the cited sections moved under an 'Appendix Z' heading     expected exit 2    got exit 2 (MOVED)
+  OK  R7    L1 delegated content   a cited section DELETED (positive control)                 expected exit 1    got exit 1 (FAIL)
+  OK  R8    L4 on L1's surface     the whole file inside a CLOSED HTML comment                expected exit 1    got exit 1 (FAIL)
+  OK  R9    L4 guard, cost row     one TAB in the target's uncited opening paragraph          expected exit 2    got exit 2 (MOVED)
+
+  9 of 9 rows run; 9 behaved as this audit predicted; 0 did not.
+
+==========================================================================================
+WHAT THESE NINE SAY
+==========================================================================================
+  R1 and R2 are mg-5644's Q1 and Q2, the two rows that exited 0 against mg-bee1.
+  Both are now exit 1: a reader who follows the certified cell's six links and is
+  shown NOTHING of the section a link names is damage, on the same footing as a
+  certified region nobody is shown.  R8 is the same blank page by a well-formed
+  comment, so the catch does not depend on the mutation being malformed.
+
+  R3 and R4 are STILL exit 0 and are meant to be.  They are text a reader IS
+  shown — the target's own framing, and a section nothing cites — and the bound
+  is stated in those terms in delta_control.py's header and in COVERAGE.md.
+  A repair that made these fire would have widened the claim past what it
+  measured, which is the defect this lineage keeps repeating in the other
+  direction.
+
+  R9 is a COST, not a win: one tab in an uncited paragraph of the target now
+  exits 2.  That is the price of default-deny, already paid by the two certified
+  files, now paid by every declared target as well.  It is printed rather than
+  buried because a re-baseline nobody expected is how a control stops being run.
+
+==========================================================================================

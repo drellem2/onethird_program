@@ -56,6 +56,21 @@
 # SECTION 2c is that repair — what is delegated is what is cited.  Section 0 of
 # delta_control.py checks norm() behaviourally against its own published rule.
 #
+# mg-0049 CLOSED THE SURFACE mg-bee1's OWN REPAIR CREATED.  mg-5644 audited the delegation
+# and found it had a content digest and NOTHING ELSE — no presentation record, none of
+# section 8's default-deny guards — while every certified region in the two files this
+# instrument READS has carried all three since mg-4acd.  So mg-babf's B05/B06 worked verbatim
+# one file out: one `<!--` line at the top of docs/state-history/attempt-mg-276d.md, never
+# closed, leaves every cited section byte-identical and every delegated digest matching while
+# marked and markdown-it agree that ZERO of the five cited sections are visible — a reader
+# following the certified cell's six links is shown a BLANK PAGE, at exit 0.  NO NEW
+# MECHANISM: section 2c now takes a PRESENTATION RECORD per cited section from the same
+# presentation.py, and section 8's guards now read every declared target file.  Both halves
+# were needed and code/state_delegation_repair_0049/split_0049.py measures why: the guards
+# alone catch the comment and NOT the fence, which is inside the modelled subset by design.
+# The bound is now stated in terms of WHAT A READER IS SHOWN, and what a reader is shown on
+# that page OUTSIDE the cited sections is the layer left uncontrolled.
+#
 # SECTION 0 is presentation.py's own self-test.  It checks the MODEL against its own stated
 # subset — every claim the header makes about which constructs are modelled and which are
 # default-denied has a case — and it emphatically does NOT check the model against a real

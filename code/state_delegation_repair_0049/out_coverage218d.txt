@@ -1,0 +1,131 @@
+mg-218d — THE COVERAGE STATEMENT, CHECKED AGAINST THE CODE.
+
+WHY THIS IS THE LOAD-BEARING ARTIFACT NOW.  After five iterations the control's value is
+increasingly in KNOWING ITS BOUNDARY rather than in its reach: the next auditor tests the
+stated boundary and not the real one.  A coverage claim that has drifted from the code is
+therefore worse than no coverage claim at all.  Every checkable sentence in COVERAGE.md is
+checked below against the instrument, against the two certified files, and against this
+box — never against COVERAGE.md's own summary of itself.
+
+Checks that CANNOT be mechanised are stated as such and left to the report, rather than
+counted as passes.
+
+    python3 code/state_layer_audit_218d/coverage218d.py
+
+==========================================================================================
+1. THE CERTIFIED SET — the table COVERAGE.md prints against the list the code
+   actually iterates.
+==========================================================================================
+  [holds] COVERAGE.md states a region count at all
+  [holds] that count (11) is len(CERTIFIED) in the code (11)
+  [holds] PRESENTATION has one digest per certified region (11 vs 11)
+  [holds] every certified id has a presentation digest
+            missing: none
+  [holds] COVERAGE.md's table lists the same ids as the code, in the same order
+            COVERAGE.md: ['cell.tree', 'cell.base', 'readme.F2', 'readme.F1', 'readme.B1', 'readme.B1.A3', 'readme.index', 'readme.A1', 'readme.A1.7870', 'readme.A1.4acd', 'readme.A1.bee1']
+            code:        ['cell.tree', 'cell.base', 'readme.F2', 'readme.F1', 'readme.B1', 'readme.B1.A3', 'readme.index', 'readme.A1', 'readme.A1.7870', 'readme.A1.4acd', 'readme.A1.bee1']
+  [holds] every 'chars after N' figure in the table equals the code's constant
+            disagreeing: none, over 11 regions
+  [holds] and equals the length MEASURED in the working tree right now
+            disagreeing: none, over 11 regions
+
+==========================================================================================
+2. THE NORMALISATION — the rule as published against the rule as coded.
+==========================================================================================
+  [holds] COVERAGE.md publishes `.strip(" \t\r\n")` rather than `.strip()`
+  [holds] norm() in the code strips exactly that set
+            EDGE = ' \t\r\n'
+  [holds] U+00A0 survives N (COVERAGE.md's stated reason for the explicit set)
+            N('a' + U+00A0) = b'a\xc2\xa0'
+  [holds] COVERAGE.md's '7,876 stripped / 7,878 raw' figures are still the tree's
+            stated 7,876 / 7,878; measured stripped 7876
+
+==========================================================================================
+3. THE PRESENTATION RECORD — the four fields COVERAGE.md tabulates against the
+   fields the code actually hashes.
+==========================================================================================
+  [holds] region_record emits exactly state | heading | position | presented
+            ['state', 'heading', 'position', 'presented']
+  [holds] COVERAGE.md's formula line names the same four in the same order
+  [holds] the TABLE record emits a fifth field, `columns`, which the formula does not name
+            ['state', 'heading', 'position', 'columns', 'presented']  — COVERAGE.md's `state` row does mention the column count in prose
+  [holds] is_presented() accepts exactly the two states COVERAGE.md names as not-FAIL
+
+==========================================================================================
+4. THE GUARDS — COVERAGE.md's 'at rest 0 / on trip exit 2' table, measured.
+==========================================================================================
+  [holds] STATE.md: block constructs outside the modelled subset = 0
+            over 383 lines; found 0
+  [holds] STATE.md: raw-HTML tokens in prose = 0
+            over 383 lines; found 0
+  [holds] docs/state-history/README.md: block constructs outside the modelled subset = 0
+            over 435 lines; found 0
+  [holds] docs/state-history/README.md: raw-HTML tokens in prose = 0
+            over 435 lines; found 0
+
+==========================================================================================
+5. THE RENDERER-ABSENCE CLAIM, audited as a claim and not accepted as stated.
+==========================================================================================
+  [holds] no python module from COVERAGE.md's list is importable on this box
+            checked ['markdown', 'markdown_it', 'mistune', 'commonmark', 'cmarkgfm']; present: none
+  [holds] no binary from COVERAGE.md's list is on PATH
+            checked ['pandoc', 'cmark', 'cmark-gfm']; present: none
+  [note ] the list is exhaustive of what it enumerates and no wider: `node` is PRESENT on this box, so a GFM
+            renderer is one `npm install` away.  That is not a contradiction of
+            the sentence as written; it is the reason render218d.py exists.
+
+==========================================================================================
+6. THE EVIDENCE TABLE — the figures COVERAGE.md quotes against the committed
+   files it quotes them from.
+==========================================================================================
+  [holds] code/state_landing_control_2da3/out_battery_babf_rerun.txt exists (9235 bytes)
+  [holds]     and contains '0 SILENT MISSES'
+  [holds]     and contains '11'
+  [holds] code/state_landing_control_2da3/out_battery_2216_rerun_4acd.txt exists (8744 bytes)
+  [holds]     and contains 'MISSED'
+  [holds]     and contains 'M12'
+  [holds]     and contains 'M13'
+  [holds] code/state_landing_control_2da3/out_control.txt exists (37474 bytes)
+  [holds]     and contains 'NC1'
+  [holds]     and contains 'NC10'
+  [holds] code/state_control_audit_babf/out_mutations.txt exists (7076 bytes)
+  [holds]     and contains 'SILENT MISS'
+  [holds] code/state_audit_6a2f/out_audit.txt exists (96291 bytes)
+  [holds] the pinned battery's out_audit.txt is still 96,291 bytes, as COVERAGE.md says
+            measured 96291 bytes
+  [holds] and the three frozen directories have an empty diff against main
+            git diff main --stat said: (empty)
+
+==========================================================================================
+7. WHAT THE COVERAGE STATEMENT DOES **NOT** NAME.  Searched for mechanically;
+   each row is a layer this audit's battery found silent (layers218d.py).
+==========================================================================================
+  [named    ] that `position` and `heading` are SECTION-LOCAL, so a retraction one line earlier — across a heading — is invisible
+            searched for ['section-local', "outside the region's own section", 'across a heading', 'in a different section', 'another section']; found: ['section-local', 'another section']
+  [named    ] that the files the certified regions POINT AT are uncertified (the cell carries 7 links into attempt-mg-276d.md)
+            searched for ['points at', 'point at', 'link target', 'the target of', 'outgoing']; found: ['points at', 'link target']
+  [named    ] that the INSTRUMENT itself — CERTIFIED, PRESENTATION, norm() — is certified by nothing
+            searched for ['delta_control.py is not certified', 'certifies itself', 'nothing certifies the instrument', 'self-certif']; found: ['nothing certifies the instrument']
+  [note     ] `attempt-*.md` IS named in the 'Not covered' list as a FILE not
+            covered.  What is not named is that a certified region DELEGATES to
+            it — see the report; this row is about the delegation, not the file.
+
+==========================================================================================
+8. THE STATED BOUNDARY, TESTED BY MUTATION.  COVERAGE.md's value is that the
+   next auditor tests the stated boundary instead of guessing — which is worth
+   nothing if the stated boundary is not the real one.  Each row below is a
+   sentence from 'Not covered, on purpose', turned into a mutation.
+==========================================================================================
+  [holds] COVERAGE.md says 'deleting an unrelated ledger row exits 0': exit 0
+            measured exit 0
+  [holds] COVERAGE.md says 'padding at the outer edge of a digested region' is tolerated: exit 0
+            measured exit 0
+  [holds] COVERAGE.md says 'the row's index within the table' is not certified: exit 0
+            measured exit 0
+  [holds] COVERAGE.md says 'inline markup is certified as BYTES' — so an inline edit must fire: exit 2
+            measured exit 2
+
+==========================================================================================
+40 of 40 mechanically checkable claims in COVERAGE.md hold against the code, the tree and a mutation.
+3 of 3 layers this audit found uncontrolled are NAMED anywhere in COVERAGE.md, presentation.py or delta_control.py.
+==========================================================================================

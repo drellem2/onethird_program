@@ -1,0 +1,204 @@
+presentation.py — SELF-TEST of the DECLARED SUBSET
+======================================================================================
+Each case asserts what the module header CLAIMS about one construct.  This checks
+the model against its own statement; it does NOT check the model against a
+renderer, and no case below should ever be read as if it did.
+
+  #  state         heading        anom html  claim
+  1  rendered      H                 0    0  ok   a plain paragraph is rendered
+  2  rendered      H                 0    0  ok   a blockquote is rendered
+  3  fenced-code   H                 0    0  ok   a fenced block is not prose
+  4  fenced-code   H                 0    0  ok   a fence SWALLOWS what follows until it closes
+  5  fenced-code   H                 0    0  ok   an UNCLOSED fence swallows the rest of the document
+  6  fenced-code   H                 0    0  ok   a tilde fence is a fence too
+  7  fenced-code   H                 0    0  ok   a fence is closed only by its OWN character at its OWN length
+  8  html-comment  H                 0    1  ok   an HTML comment hides what it wraps
+  9  html-block    H                 0    1  ok   a raw HTML block is not prose
+ 10  rendered      H                 0    2  ok   a <details> wrapper suppresses NOTHING and is caught by the html guard alone
+ 11  html-comment  H                 0    1  ok   an HTML comment is caught by the html guard as well as by `state`
+ 12  rendered      A>B>C             0    0  ok   the heading path is the ATX chain in force
+ 13  rendered      A>D               0    0  ok   a deeper heading pops back on a shallower one
+ 14  rendered      H                 0    0  ok   a thematic break is NOT a setext underline
+ 15  rendered      H                 1    0  ok   a setext underline IS default-denied
+ 16  rendered      H                 1    0  ok   an indented code block is default-denied
+ 17  rendered      H                 1    0  ok   a tab is default-denied
+ 18  rendered      H                 0    0  ok   a code span is not raw HTML
+ 19  fenced-code   H                 0    0  ok   HTML inside a fence is not raw HTML
+
+POSITION — what moves a region's presentation record, and what does not
+     ok   record MOVES — a paragraph inserted ABOVE moves the ordinal
+     ok   record MOVES — a paragraph inserted BELOW moves the sibling count
+     ok   record MOVES — moving the block under a new heading moves the path
+     ok   record holds — editing a NEIGHBOURING block moves neither
+
+DELEGATED SHAPE — a span that is a whole ATX section (mg-0049)
+     ok   state rendered      record holds — a cited section, untouched, is presented as prose
+     ok   state html-comment  record MOVES — an unclosed HTML comment ABOVE it hides the whole section
+     ok   state fenced-code   record MOVES — an unclosed fence ABOVE it turns the whole section into a code sample
+     ok   state rendered      record MOVES — a new heading ABOVE it moves the heading path, changing no byte of it
+
+======================================================================================
+27 cases, 0 wrong
+
+STATE.md  at rest: 177464 bytes, sha 54a41150fd75f97e
+README.md at rest: 31546 bytes, sha 8e851e6be8954407
+
+==============================================================================
+POSITIVE CONTROL — clean tree
+==============================================================================
+  delta_control.py    : exit 0   as expected
+      RESULT: PASS — every check above read the working tree and every one held,
+  mg-6a2f battery     : reproduces out_audit.txt byte-identically: True (96291 bytes vs 96291 committed)
+
+==============================================================================
+NC1 — STATE.md GUTTED (mg-bd41's mutation, reproduced exactly)
+      177464 -> 39870 bytes, 383 -> 183 lines (200 deleted, line 1 replaced)
+==============================================================================
+  delta_control.py    : exit 1   CONTROL FIRES
+      RESULT: FAIL (exit 1) — the row b68db5d edited is not identifiable in the
+      [FAIL] exactly one ledger row keys to mg-276d in the working tree
+  mg-6a2f battery     : reproduces out_audit.txt byte-identically: True (96291 bytes vs 96291 committed)
+      ^ THE CONTRAST.  Same destroyed tree.  The revision-pinned battery
+        is unmoved because it reads 97cb533 / 60f4dac / 57f962f and never
+        the tree — correct for reproducing mg-6a2f's historical audit,
+        and worthless as evidence about any later commit's edits.
+
+==============================================================================
+NC2 — ROW :135 REVERTED TO b68db5d^ (only the certified edit is undone)
+      line 135: 9028 -> 8855 characters; every other line untouched
+==============================================================================
+  delta_control.py    : exit 1   CONTROL FIRES
+      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,
+      [MOVED] cell.tree — row :135's content cell, WORKING TREE
+      [MOVED] cell.tree — row :135's content cell, WORKING TREE: presentation
+      [FAIL] tree row states the NARROW claim
+      [FAIL] tree row QUOTES the false absolute it replaced
+      [FAIL] tree row ATTRIBUTES the correction
+      [FAIL] it precedes the F1 sentence
+      ... and 4 more failing checks (10 in total)
+
+==============================================================================
+NC3 — THE F1 CORRECTION BLOCK CUT OUT OF THE README (STATE.md intact)
+      435 -> 415 lines (blockquote lines 406-425 removed)
+==============================================================================
+  delta_control.py    : exit 1   CONTROL FIRES
+      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,
+      [FAIL] readme.F1 — the F1 correction block: LOCATABLE
+      [FAIL] readme.F1 — the F1 correction block: LOCATABLE for presentation
+      [FAIL] readme.F1 — the F1 correction block: marker matched 0 lines, need exactly 1
+
+==============================================================================
+NC4 — ROW :135 LEGITIMATELY EDITED (the F1 repair left intact, the cell
+      grown by a sentence).  This is the AGED-OUT path, not a damaged one:
+      the instrument must report MOVED and still exit NON-ZERO, so it can
+      never go on reporting green about a delta that has changed under it.
+      line 135: 9028 -> 9047 characters
+==============================================================================
+  delta_control.py    : exit 2   CONTROL FIRES
+      RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
+      [MOVED] cell.tree — row :135's content cell, WORKING TREE
+      [MOVED] cell.tree — row :135's content cell, WORKING TREE: presentation
+      [MOVED] tree cell is 7876 characters (stripped)
+      [MOVED] the delta is +173 characters
+
+==============================================================================
+NC5 — ONE CHARACTER FALSIFIED INSIDE A CERTIFIED README REGION
+      "took row `:135`'s to **7,878**" -> "took row `:135`'s to **7,879**": length-preserving, no
+      header touched, no block deleted.  This is the class the pre-repair
+      header-substring check could not see.
+==============================================================================
+  delta_control.py    : exit 2   CONTROL FIRES
+      RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
+      [MOVED] readme.index — the index note carrying the moved cell figure
+      [MOVED] readme.index — the index note carrying the moved cell figure: presentation
+
+==============================================================================
+NC6 — 500 CHARACTERS OF THE CERTIFIED CELL SORTED IN PLACE
+      cell 7876 -> 7876 characters (stripped): identical count,
+      identical character multiset, prose destroyed.  Length-and-substring
+      checking is transparent to this; a digest is not.
+==============================================================================
+  delta_control.py    : exit 2   CONTROL FIRES
+      RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
+      [MOVED] cell.tree — row :135's content cell, WORKING TREE
+      [MOVED] cell.tree — row :135's content cell, WORKING TREE: presentation
+      [MOVED] the delegation surface is exactly what is DECLARED
+      [MOVED] docs/state-history/attempt-mg-276d.md: the section names cited are the section names declared
+
+==============================================================================
+NC7 — ONE CLOSING CODE FENCE DELETED, three lines above the first certified
+      block below it (README line 185).  Not one line of any
+      certified region is touched and not one certified byte changes; every
+      correction block after it is now INSIDE a code sample.  This is the
+      shape of mg-babf's B05 without being B05: the suppressing edit is a
+      DELETION somewhere else, which no list of block wrappers would name.
+==============================================================================
+  delta_control.py    : exit 1   CONTROL FIRES
+      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,
+      [FAIL] readme.F1 — the F1 correction block: PRESENTED
+      [FAIL] readme.A1 — the A1 correction block (b68db5d's headline sentence): PRESENTED
+      [FAIL] readme.A1.7870 — the mg-2216 / mg-7870 correction to the A1 block: PRESENTED
+      [FAIL] readme.A1.4acd — the mg-babf / mg-4acd correction to the A1 block: PRESENTED
+      [FAIL] readme.A1.bee1 — the mg-218d / mg-bee1 correction to the A1 block: PRESENTED
+
+==============================================================================
+NC8 — THE F1 BLOCK WRAPPED IN <details>, which SUPPRESSES NOTHING.
+      The block still parses as markdown and still renders — collapsed, behind
+      a click.  No enumeration of 'ways to hide a block' catches this, because
+      it does not hide it; the RAW-HTML GUARD catches it, and that guard is one
+      rule over the whole file rather than a list of tags.
+==============================================================================
+  delta_control.py    : exit 2   CONTROL FIRES
+      RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
+      [MOVED] readme.F1 — the F1 correction block: presentation
+      [MOVED] docs/state-history/README.md: 0 raw-HTML tokens in text presented as prose
+
+==============================================================================
+NC9 — THE F2 BLOCK MOVED WITHIN ITS OWN SECTION, byte-identical.
+      From line 15 to line 3, still above the first '## '
+      (line 46), so the heading path it sits under is unchanged and
+      only `position` fires.  This isolates the ordinal from
+      the heading path — mg-babf's B04 moves both at once.
+==============================================================================
+  delta_control.py    : exit 2   CONTROL FIRES
+      RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
+      [MOVED] readme.F2 — the F2 correction block: presentation
+
+==============================================================================
+NC10 — THE LEDGER TABLE'S DELIMITER ROW DELETED (STATE.md line 113).
+      The certified row is byte-identical and still the only row keyed to
+      mg-276d.  Without a delimiter row there is no GFM table: the whole
+      ledger renders as a paragraph of pipes, and the certified cell is not
+      a cell any reader sees.  Expected FAIL, not MOVED — a certified region
+      nobody is shown is damage.
+==============================================================================
+  delta_control.py    : exit 1   CONTROL FIRES
+      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,
+      [FAIL] cell.tree — row :135's content cell, WORKING TREE: PRESENTED
+
+==============================================================================
+RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 8e851e6be8954407 == 8e851e6be8954407
+==============================================================================
+  clean  exit 0   must be 0          ok
+  NC1    exit 1   must be 1 (FAIL)   ok
+  NC2    exit 1   must be 1 (FAIL)   ok
+  NC3    exit 1   must be 1 (FAIL)   ok
+  NC4    exit 2   must be 2 (MOVED)  ok
+  NC5    exit 2   must be 2 (MOVED)  ok
+  NC6    exit 2   must be 2 (MOVED)  ok
+  NC7    exit 1   must be 1 (FAIL)   ok
+  NC8    exit 2   must be 2 (MOVED)  ok
+  NC9    exit 2   must be 2 (MOVED)  ok
+  NC10   exit 1   must be 1 (FAIL)   ok
+
+VERDICT: delta_control.py exits 0 on the clean tree and NON-ZERO under all
+         six mutations.  It is a control that can fail, and it fails on the
+         very change b68db5d's cited battery is blind to.
+
+         THIS IS A DEMONSTRATION, NOT THE EVIDENCE.  The author of an instrument
+         picks the mutations his own negative control runs, so this file cannot
+         establish sensitivity — that is exactly how the pre-repair version
+         passed while missing 8 of mg-2216's 14.  The establishing evidence is
+         out_battery_2216_rerun.txt and out_battery_babf_rerun.txt: two
+         independent batteries, each written before the repair it now tests,
+         each re-run unmodified.
