@@ -742,9 +742,23 @@ mg-e1d0's mathematics: 0 mathematical statements are touched.""")
         print(f"    FINDING  {tag}: {d[:140]}")
     print()
     print("  THE PRIMARY TARGET IS CONFIRMED: the repair's three figures are the")
-    print("  POST-commit ones and reproduce exactly from the tree.  What is open is")
-    print("  the GATE that is supposed to keep them that way, and one stale")
-    print("  self-referential line number of the same defect class.")
+    print("  POST-commit ones and reproduce exactly from the tree.")
+    # ⚠️ AMENDED 2026-07-30 by mg-a318.  This closing sentence used to assert
+    # unconditionally that the GATE was open.  That was true when the audit was
+    # taken and it is a claim about the tree the run is looking at, so a re-run
+    # after the gate is repaired would print it while its own T3 reported no
+    # hole -- the arc's most-repeated defect, in this instrument's own summary.
+    # It now reports what THIS run measured.  The verdict at `f58f7fd` is
+    # unchanged and `out_audit_8e30.txt` is that run, kept as committed.
+    if holes:
+        print("  What is open is the GATE that is supposed to keep them that way,")
+        print("  and one stale self-referential line number of the same class.")
+    else:
+        print("  AND THE GATE HOLDS IN THIS TREE: every single-copy corruption of")
+        print("  the figure a reader meets fires it, at all three sites, and the")
+        print("  duplicate the presence test could not see is gone (mg-a318).")
+        print("  What remains open is one stale self-referential line number and")
+        print("  a commit-message total -- F-3 and F-4, neither landed.")
     return 1 if (FINDINGS or ref) else 0
 
 
