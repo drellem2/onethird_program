@@ -1,0 +1,24 @@
+==============================================================================
+mg-1c80 part 3 -- the gate split over the FULL n = 6 population (318 posets)
+==============================================================================
+
+   row    corruption                bites |  diag   mag   par |  diag   mag   par | sign-any   absorb
+                                          |  deciding_gate()  |  predicate's own  |                  
+   I1     ridge_facets                312 |   312     0     0 |    84   228     0 |        0        0
+   I2     split_free_as_interior      317 |   317     0     0 |   317     0     0 |        0        0
+   I3     ridge_drop                  317 |   317     0     0 |   317     0     0 |        0        0
+   I4     facet_offbyone              255 |   254     1     0 |   254     1     0 |        0        0
+   NC3    facet-parity gauge          317 |     0     0   317 |     -     -     - |        -      317   (NOT scored)
+
+   SECTION TOTALS at n = 6, over the four SCORED rows:
+     biting (poset, mutation) pairs ............ 1201
+     reaching the PARITY system ................ 0
+     entries differing in SIGN ALONE, all pairs. 0
+     reported absorbable ....................... 0
+     gate attributions the two readings differ . 228
+
+   EVERY pair at n = 6 whose diagonal SURVIVED, with the poset named:
+     I4  n=6  antichain=True  covers=(none)  gate=magnitude
+
+   Took 6.3 s.
+

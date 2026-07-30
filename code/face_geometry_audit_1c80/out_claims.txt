@@ -1,0 +1,139 @@
+==============================================================================
+mg-1c80 part 5 -- the repair's new prose, claim by claim
+==============================================================================
+
+A. THE HEADLINE -- what row I4 now prints about itself
+
+  [HOLDS ] row I4 bites on 61 posets
+            measured 61
+  [HOLDS ] 'the diagonal is preserved on 3 of the 61'
+            measured 3
+  [HOLDS ] 'of those, 3 are settled by |s_i s_j| = 1'
+            measured 3, and the predicate's OWN execution order agrees (3)
+  [HOLDS ] '300 off-diagonal magnitudes differ on them'
+            measured 300, all of them off-diagonal (the diagonal is preserved there)
+  [HOLDS ] 'while 0 reach the parity system where a sign is consulted at all'
+            measured 0
+  [HOLDS ] 'Absorbable into a diagonal +-1 twist on 0 of those 61'
+            measured 0, by 2-colouring and (where |L(P)| <= 8) brute force
+  [HOLDS ] '0 of the 297 biting (poset, mutation) pairs reach the parity system'
+            measured 0 of 297
+
+B. THE SCOPE OF 'ENTRIES DIFFERING IN SIGN ALONE'
+
+  [SCOPE ] 'measured over all four rows, ... 0 entries ANYWHERE differ in sign alone'
+            TRUE: over all 297 biting pairs the count really is 0.
+            BUT `controls.py:1001-1005` accumulates `sign_entries` inside the
+            `diag_preserved` branch, so the printed total is a sum over 3 pairs,
+            not 297.  The 294 pairs whose diagonal moved are never examined for a
+            sign-only mismatch at all.  The number is right; the measurement
+            behind it is 1.0% of the population the sentence names.
+  [SCOPE ] the landing's own verifier scores the same sentence at the same scope
+            verify_landing.py:127-135 `continue`s out of the loop on a diagonal-gate
+            pair BEFORE counting sign-only entries, then checks 'not one entry
+            ANYWHERE in those rows differs in SIGN ALONE'.  So the 25-claim,
+            0-BROKEN verification does not cover this sentence either: the
+            independence is in the NUMBERS and not in the DEFINITION.
+
+   A WITNESS THAT THE SCOPE MATTERS.  Take any diagonal-gate pair and
+   flip the sign of one off-diagonal entry that currently agrees:
+     n=3 |L(P)|=6, entry (1,4) negated:
+       sign-only mismatches, truth ................ 2
+       sign-only mismatches, as controls.py counts . 0
+     The routing row would still print '0 entries anywhere differ in
+     sign alone', and it would be FALSE.
+
+C. 'WHICH GATE of absorbable_by_diagonal_twist SETTLES EACH ANSWER'
+
+  [BROKEN] the printed gate table is the split the PREDICATE makes
+            `absorbable_by_diagonal_twist` (face_complex.py:770-775) tests row i's
+            DIAGONAL, then row i's MAGNITUDES, then row i+1's -- the two gates are
+            INTERLEAVED BY ROW.  `deciding_gate` (controls.py:661-668) tests ALL
+            diagonals, then ALL magnitudes.  On 57 of the 297 biting pairs the two
+            name different gates.  Per row, deciding_gate vs the predicate
+            (diagonal/magnitude/parity):
+              I1  72/ 0/ 0  vs  15/57/ 0   (differ on 57)
+              I2  82/ 0/ 0  vs  82/ 0/ 0   (differ on 0)
+              I3  82/ 0/ 0  vs  82/ 0/ 0   (differ on 0)
+              I4  58/ 3/ 0  vs  58/ 3/ 0   (differ on 0)
+  [BROKEN] `deciding_gate`'s docstring: 'The predicate answers ... in three
+            stages' (controls.py:641-642)
+            The predicate has no three stages.  It has one loop over rows carrying
+            two of the three tests, and a second loop carrying the third.
+  [HOLDS ] the two forced gates are not alternatives on this population
+            EVERY one of the 294 'diagonal' attributions is ALSO an absolute-value
+            violation (294 of 294), and provably so: L^rel = d^T.d has a non-negative
+            diagonal and D-A has a non-negative diagonal, so two unequal diagonal
+            entries have unequal absolute values.  The absolute-value gate subsumes
+            the diagonal gate here.  'Three at the diagonal gate and I4 at the
+            absolute-value gate' is therefore a statement about which test
+            `deciding_gate` runs first, not about the predicate.
+  [SCOPE ] 'three at the diagonal gate and I4 at the absolute-value gate'
+            The gate table three lines above it gives I4 as 58 diagonal + 3
+            magnitude: on 58 of its 61 biting pairs I4 is settled at the DIAGONAL
+            gate.  The summary line assigns one gate per row where its own table
+            gives I4 two.
+
+D. THE 'FORCED AT EVERY n' ARGUMENT
+
+  [HOLDS ] 'the off-diagonal support of L^rel is the adjacent-transposition graph (claim (1), proven)'
+            checked directly: 86/86 posets have E.L^rel.E == D-A exactly
+  [HOLDS ] the rotation argument -- see part 2, checked to n = 8
+            prefixes_true(rot(w)) identity on 46232 words; n-2 of n-1 generators
+            stay adjacent at every n = 3..8; 2|L(P)| mismatches, exactly 2 per row,
+            0 sign-only, at n = 3,4,5,6,7,8 (10080 and 80640 are new here).
+  [SCOPE ] 'It is forced at every n and not merely measured to n = 5'
+            The argument given is about ANTICHAINS: `rot` maps L(P) onto L(P) only
+            when L(P) is all of S_n.  The statement also needs the other half --
+            that no OTHER poset has row I4's diagonal preserved at larger n, since
+            such a poset is exactly what would reach the parity system.  That half
+            is neither argued in the file nor measured anywhere in the chain.
+            Part 3 measures it at n = 6 over all 318 posets: 1201 biting pairs,
+            0 reaching the parity system, and the ONLY diagonal-preserved pair is
+            the antichain.  So the claim survives one size past where it was
+            checked -- and the file still does not argue that half.
+
+E. THE WITNESS, AND WHAT WAS DELIBERATELY NOT CHANGED
+
+  [HOLDS ] the repair WITHDRAWS the I4 witness rather than replacing it
+            no replacement witness is named, so the 'new witness that also cannot
+            bite' failure mode is not available to it.  Verified by search: the
+            artifact contains no sentence claiming row I4 is falsifiable.
+  [HOLDS ] 'NC3's corruption is D.L.D by construction ... absorbable 82/82'
+            82/82, and the sign vector s = ((-1)^j) is EXHIBITED in part 4 on 86/86
+            posets, so this is by construction and not by measurement.
+  [HOLDS ] the condition is untouched -- `cond = cond and absorb == 0` still scored
+  [HOLDS ] the routing still routes on `diag_preserved`
+  [HOLDS ] 'no new scored row was added'
+            `check(` call sites: 26 before, 26 after
+
+F. THE ARTIFACT AND THE CARRIED-FORWARD LIST
+
+  [HOLDS ] controls_output.txt regenerates byte-identically, exit 0
+            17964 bytes, exit 0
+  [HOLDS ] 'nmax=2 behaves exactly as it did before this commit (3 failures)'
+            HEAD~1 exit 1, HEAD exit 1; both report CONTROLS FAILED: 3
+
+   WHERE THE FALSE PREMISE STILL LIVES -- swept over the whole
+   repository, not over a named list.  This audit's OWN directory is
+   excluded and the exclusion is stated rather than silent: a6_mutations
+   .py:165 carries the sentence as a mutation PAYLOAD (M5 reinstalls it
+   to check that a text sweep catches it), which is not an assertion of
+   it -- but a sweep that quietly skipped itself would be the same shape
+   as the defect under audit.
+     occurrences quoted inside a denial or an audit finding : 20
+     occurrences still ASSERTING the premise                : 2
+       code/face_geometry_audit_fcf1/audit_nc4.py:98  'the off-diagonal signs decide'
+       code/face_geometry_audit_fcf1/out_nc4.txt:27  'the off-diagonal signs decide'
+     controls.py names the origin (out_nc4.txt:27)          : True
+
+==============================================================================
+LEDGER: 23 claims scored -- 17 HOLDS, 4 SCOPE, 2 BROKEN
+   SCOPE  'measured over all four rows, ... 0 entries ANYWHERE differ in sign alone'
+   SCOPE  the landing's own verifier scores the same sentence at the same scope
+   BROKEN the printed gate table is the split the PREDICATE makes
+   BROKEN `deciding_gate`'s docstring: 'The predicate answers ... in three
+            stages' (controls.py:641-642)
+   SCOPE  'three at the diagonal gate and I4 at the absolute-value gate'
+   SCOPE  'It is forced at every n and not merely measured to n = 5'
+==============================================================================

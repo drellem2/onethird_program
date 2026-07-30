@@ -1,0 +1,34 @@
+==============================================================================
+mg-1c80 part 2 -- the antichain family, from a sparse rebuild, to n = 8
+==============================================================================
+
+(i) le_to_facet_offbyone(w) == le_to_facet(rot(w)) ?
+    46232 words checked (n = 2..8): 46232 hold, 0 FAIL
+
+(ii) conjugating the generators by rot: how many stay adjacent?
+     s_t swaps POSITIONS t, t+1.  rot(w) = w[1:] + w[:1].  The claim is
+     n-2 of the n-1 generators map to generators and exactly one leaves.
+     n=3: 1 of 2 generators stay adjacent, 1 leave  [as claimed]
+     n=4: 2 of 3 generators stay adjacent, 1 leave  [as claimed]
+     n=5: 3 of 4 generators stay adjacent, 1 leave  [as claimed]
+     n=6: 4 of 5 generators stay adjacent, 1 leave  [as claimed]
+     n=7: 5 of 6 generators stay adjacent, 1 leave  [as claimed]
+     n=8: 6 of 7 generators stay adjacent, 1 leave  [as claimed]
+
+==============================================================================
+(iii)+(iv) THE MISMATCH CENSUS ON THE ANTICHAIN, n = 3..8
+==============================================================================
+
+     n   |L(P)|   mag mism  predicted  per row  sign-only  diag pres     gate
+     3        6         12         12        2          0       True magnitude
+     4       24         48         48        2          0       True magnitude
+     5      120        240        240        2          0       True magnitude
+     6      720       1440       1440        2          0       True magnitude
+     7     5040      10080      10080        2          0       True magnitude
+     8    40320      80640      80640        2          0       True magnitude
+
+   'predicted' is 2|L(P)| = 2.n!, the closed form the repair's docstring
+   asserts.  'per row' is the set of per-row off-diagonal magnitude
+   mismatch counts over all n! rows -- a single value 2 is the claim
+   'exactly one neighbour of every vertex changes'.
+
