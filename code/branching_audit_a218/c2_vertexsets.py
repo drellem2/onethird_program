@@ -84,24 +84,54 @@ for (a, b, n, da, db) in count_eq_set_ne:
           % (a, b, n, len(da), da, db))
 print()
 
-# what the document's table column says
+# what the document's table column says.
+#
+# WIDENED ON A RE-RUN (mg-13b2, and this is a note from the repair, not from
+# the audit).  This block used to accept only the COUNT form -- six bare
+# integers -- because that is what the column carried when the audit was taken.
+# The finding below asked for the column to report the SET instead, and it now
+# does, so a count-only parser would report "NOT PARSED" and raise a SELF-ERROR
+# on a re-run: an audit instrument scoring its own repair as its own bug.  It
+# now accepts either form and says which one it found.  The FINDING is raised
+# only against the count form, which is what the finding is about.  The
+# committed out_c2_vertexsets.txt is NOT regenerated: it is the record of what
+# this audit found, not a live gate (the same call mg-a318 made for mg-8a5c).
 doc = open(DOC).read()
-row_re = re.compile(r"^\|\s*(\d)\s*\|\s*132\s*\|.*?\|\s*([\d,\s*]+?)\s*\|\s*[^|]*\|\s*$",
+count_re = re.compile(r"^\|\s*(\d)\s*\|\s*132\s*\|.*?\|\s*([\d,\s*]+?)\s*\|\s*[^|]*\|\s*$",
+                      re.M)
+set_re = re.compile(r"^\|\s*(\d)\s*\|\s*132\s*\|.*?\|\s*`((?:\[[\d,]+\]\s*)+)`\s*\|\s*[^|]*\|\s*$",
                     re.M)
-doc_rows = {}
-for m in row_re.finditer(doc):
-    beta = int(m.group(1))
+doc_rows, doc_sets = {}, {}
+for m in count_re.finditer(doc):
     nums = [int(x) for x in re.findall(r"\d+", m.group(2))]
     if len(nums) == 6:
-        doc_rows[beta] = nums
-print("     THE DOCUMENT'S OWN COLUMN, parsed out of section 0's four-row table")
-print("     (heading: '# irreducibles at n = 1...6'):")
+        doc_rows[int(m.group(1))] = nums
+for m in set_re.finditer(doc):
+    groups = re.findall(r"\[([\d,]+)\]", m.group(2))
+    if len(groups) == 6:
+        doc_sets[int(m.group(1))] = [[int(x) for x in g.split(",")] for g in groups]
+form = "SET" if doc_sets else ("COUNT" if doc_rows else "NEITHER")
+print("     THE DOCUMENT'S OWN COLUMN, parsed out of section 0's four-row table.")
+print("     Form found: %s.  (The audit found a COUNT, headed" % form)
+print("     '# irreducibles at n = 1...6'; mg-13b2 replaced it with the set.)")
 for beta in BETAS:
-    print("       beta=%d : %s   -- mine, as counts: %s"
-          % (beta, doc_rows.get(beta, "NOT PARSED"),
-             [len(mine[(beta, n)]) for n in range(1, NMAX + 1)]))
+    if doc_sets:
+        print("       beta=%d : %s   -- mine, as sets: %s"
+              % (beta, doc_sets.get(beta, "NOT PARSED"),
+                 [[d for (p, d) in mine[(beta, n)]] for n in range(1, NMAX + 1)]))
+    else:
+        print("       beta=%d : %s   -- mine, as counts: %s"
+              % (beta, doc_rows.get(beta, "NOT PARSED"),
+                 [len(mine[(beta, n)]) for n in range(1, NMAX + 1)]))
 for beta in BETAS:
-    if beta not in doc_rows:
+    if doc_sets:
+        want = [[d for (p, d) in mine[(beta, n)]] for n in range(1, NMAX + 1)]
+        if beta not in doc_sets:
+            SELF.append("could not parse the section-0 table row for beta=%d" % beta)
+        elif doc_sets[beta] != want:
+            FIND.append("section 0's table row for beta=%d prints the set %s; "
+                        "measured %s" % (beta, doc_sets[beta], want))
+    elif beta not in doc_rows:
         SELF.append("could not parse the section-0 table row for beta=%d" % beta)
     elif doc_rows[beta] != [len(mine[(beta, n)]) for n in range(1, NMAX + 1)]:
         FIND.append("section 0's table row for beta=%d prints %s; measured counts "
@@ -110,7 +140,7 @@ for beta in BETAS:
 print()
 
 b1_vs_b3 = [c for c in count_eq_set_ne if set((c[0], c[1])) == {3, 1}]
-if b1_vs_b3:
+if b1_vs_b3 and not doc_sets:
     FIND.append(
         "section 0's vertex column is a COUNT and is IDENTICAL for beta = 3, 2 "
         "and 1 (1,2,2,3,3,4), but the vertex SETS at beta = 3 and beta = 1 "
@@ -120,6 +150,13 @@ if b1_vs_b3:
         "carry it."
         % (len(b1_vs_b3), ", ".join("n=%d: %s vs %s" % (c[2], c[3], c[4])
                                     for c in b1_vs_b3)))
+elif b1_vs_b3:
+    print("     THE FINDING THIS SCRIPT RAISED IS CLOSED (checked, not assumed):")
+    print("     the column now carries the vertex SET, so the %d levels at which"
+          % len(b1_vs_b3))
+    print("     beta = 3 and beta = 1 have equal counts and unequal sets are")
+    print("     visible in it.  Repaired at mg-13b2.")
+print()
 
 # the document's own scoped sentence, checked
 print("     the document's sentence 'At beta = 0 the tower has fewer irreducibles")

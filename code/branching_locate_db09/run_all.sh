@@ -9,3 +9,13 @@ python3 -u t1_tl.py        > out_t1_tl.txt     ; tail -1 out_t1_tl.txt
 python3 -u t2_gz.py        > out_t2_gz.txt     ; tail -1 out_t2_gz.txt
 python3 -u t3_ours.py      > out_t3_ours.txt   ; tail -1 out_t3_ours.txt
 python3 -u t4_quotes.py    > out_t4_quotes.txt ; tail -1 out_t4_quotes.txt
+# t5 checks the delivered document's disposition labels against the tree and
+# against named historical commits, so unlike t1..t4 it needs a git checkout.
+# It is the one script here that exits non-zero when it fails, because a label
+# that has stopped being true is a gate and not a report.
+if git rev-parse --git-dir > /dev/null 2>&1; then
+    python3 -u t5_labels.py > out_t5_labels.txt ; tail -1 out_t5_labels.txt
+else
+    echo "t5_labels.py NOT RUN: this is not a git checkout, and t5 reads the"
+    echo "diffs of 03d7f91, 2e66d03 and f4eaea6.  Its committed output stands."
+fi
