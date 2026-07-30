@@ -1,0 +1,218 @@
+==============================================================================
+mg-c4c8 H1 -- every `return` in face_complex.py, deleted alone
+==============================================================================
+
+==============================================================================
+THE POPULATION -- enumerated from the syntax tree, not from a list
+==============================================================================
+  file: code/face_geometry/face_complex.py (36097 bytes)
+  56 `return` statements, in 43 function(s)
+  of these, 11 are in the four functions mg-d0e2's nine mutations touch:
+      absorb_trace                     5
+      absorb_trace.find                1
+      gate_violations                  2
+      diagonal_moves                   2
+      absorbable_by_diagonal_twist     1
+  the remaining 45 are the rest of the file
+  [HOLDS ] every return in the file has a registered prediction -- 56 returns, 56 predictions
+        predictions were written before any mutant ran
+        WOULD DIFFER UNDER: a return being added to or removed from face_complex.py without a prediction being written for it.  A population that grows while the prediction table does not is how a deletion test comes to cover less than it says
+
+PREDICTIONS, registered before the runs (C = artifact CHANGES, I = BYTE-IDENTICAL):
+   #    function                         art  exit  why
+   1    Poset.__repr__                   I    0     no call site: nothing reprs a Poset
+   2    Poset.leq                        I    0     no call site: `.leq(` occurs nowhere
+   3    Poset.comparable                 C    1     controls.py:487 uses it
+   4    Poset.automorphisms              C    1     posets.py len(P.automorphisms())
+   5    Poset.is_connected               I    0     the n == 0 early exit; no empty poset
+   6    Poset.is_connected               C    1     posets.py branches on it
+   7    Poset.is_antichain               C    1     controls.py:388 and posets.py
+   8    Poset.is_chain                   C    1     posets.py describes with it
+   9    Poset.canonical_key              C    1     posets.py keys a dict with it
+   10   order_ideals                     C    1     the whole complex is built from it
+   11   sur_iso.rec                      C    1     bare return: without it the recursion diverges
+   12   sur_iso                          C    1     controls cross-checks the chain description
+   13   face_from_sur_iso                C    1     same cross-check
+   14   proper_ideals                    C    1     vertices of the complex
+   15   chains_of_ideals                 C    1     the complex itself
+   16   linear_extensions.rec            I    0     bare return at the base case; with all n placed the loop bel
+   17   linear_extensions                C    1     facets are linear extensions
+   18   le_to_facet                      C    1     every facet is built by it
+   19   le_to_facet_offbyone             C    1     NEGATIVE CONTROL 4's I4 mode
+   20   facet_to_le                      C    1     controls.py uses it twice
+   21   boundary_matrix                  C    1     every Laplacian
+   22   down_laplacian_from_boundary     C    1     every Laplacian
+   23   top_laplacians                   C    1     the central object
+   24   adjacent_transposition_graph     C    1     claim (1)'s right side
+   25   at_laplacian                     C    1     claim (1)'s right side
+   26   _ambient_coxeter_laplacian       C    1     the cache-hit return; two posets share an n, so it is taken
+   27   _ambient_coxeter_laplacian       C    1     the cache-miss return
+   28   coxeter_compression              C    1     controls.py uses it twice
+   29   perm_sign                        C    1     the twist E = diag(sgn w)
+   30   twist                            C    1     claim (1)'s left side
+   31   rank_mod_p                       C    1     reduced_betti's default path
+   32   rank_exact                       C    1     controls.py asks for exact ranks
+   33   det_shift_mod_p                  I    0     the singular early exit; k in (3,5,7,11,13) is unlikely to b
+   34   det_shift_mod_p                  I    0     returning None makes both sides None, the comparison False, 
+   35   not_isospectral                  C    1     the trace early exit; without it a separated pair falls to f
+   36   not_isospectral                  I    0     the frobenius early exit; the trace above catches the same p
+   37   not_isospectral                  I    0     the det early exit; trace or frobenius catch the separated p
+   38   not_isospectral                  I    0     None is falsy exactly where False was
+   39   reduced_betti                    C    1     controls.py checks Betti numbers
+   40   mat_eq                           I    0     the length guard; every mat_eq call in controls.py is shape-
+   41   mat_eq                           C    1     None is falsy: every equality becomes False
+   42   mat_sub                          C    1     residuals are printed
+   43   is_diagonal                      C    1     controls.py tests diagonality
+   44   trace                            C    1     controls.py prints traces
+   45   frobenius2                       I    0     only `not_isospectral` calls it, and only after the trace te
+   46   absorb_trace                     C    1     gate `shape` -- mg-9220's AFTER-5
+   47   absorb_trace                     C    0     gate `diagonal` -- AFTER-1, trace only
+   48   absorb_trace                     C    1     gate `magnitude` -- AFTER-2
+   49   absorb_trace.find                C    1     the union-find root; None unpacks badly
+   50   absorb_trace                     C    1     the `parity` contradiction -- AFTER-6
+   51   absorb_trace                     C    1     the accepting return; None has no .absorbable
+   52   gate_violations                  I    0     the shape return.  controls.py calls gate_violations only af
+   53   gate_violations                  C    1     the violation set itself
+   54   diagonal_moves                   I    0     the shape return, same reason as 52
+   55   diagonal_moves                   C    1     the routing quantity itself
+   56   absorbable_by_diagonal_twist     C    1     the wrapper; None is falsy and rows quote it
+
+==============================================================================
+THE BASELINE
+==============================================================================
+  [HOLDS ] the unmutated tree regenerates the committed controls_output.txt byte-identically and exits 0 -- 23684 bytes
+        23684 bytes regenerated, 23684 committed, exit 0
+        WOULD DIFFER UNDER: any edit to controls.py, face_complex.py or posets.py not followed by regenerating the artifact.  Every row below is a comparison against THIS run, not against the committed file, so a stale committed artifact would show up here and not silently downstream
+
+==============================================================================
+EVERY RETURN, DELETED ALONE
+==============================================================================
+   #    function                         line   artifact  exit   pred   match
+   1    Poset.__repr__                   L77    IDENTICAL 0      I/0    match
+   2    Poset.leq                        L80    IDENTICAL 0      I/0    match
+   3    Poset.comparable                 L83    IDENTICAL 0      C/1    *** MISS ***
+   4    Poset.automorphisms              L94    IDENTICAL 0      C/1    *** MISS ***
+   5    Poset.is_connected               L99    IDENTICAL 0      I/0    match
+   6    Poset.is_connected               L112   IDENTICAL 0      C/1    *** MISS ***
+   7    Poset.is_antichain               L115   CHANGES   1      C/1    match
+   8    Poset.is_chain                   L118   IDENTICAL 0      C/1    *** MISS ***
+   9    Poset.canonical_key              L127   CHANGES   1      C/1    match
+   10   order_ideals                     L149   CHANGES   1      C/1    match
+   11   sur_iso.rec                      L165   CHANGES   1      C/1    match
+   12   sur_iso                          L178   CHANGES   1      C/1    match
+   13   face_from_sur_iso                L191   CHANGES   1      C/1    match
+   14   proper_ideals                    L196   CHANGES   1      C/1    match
+   15   chains_of_ideals                 L225   CHANGES   1      C/1    match
+   16   linear_extensions.rec            L239   IDENTICAL 0      I/0    match
+   17   linear_extensions                L249   CHANGES   1      C/1    match
+   18   le_to_facet                      L259   CHANGES   1      C/1    match
+   19   le_to_facet_offbyone             L283   CHANGES   1      C/1    match
+   20   facet_to_le                      L295   CHANGES   1      C/1    match
+   21   boundary_matrix                  L339   CHANGES   1      C/1    match
+   22   down_laplacian_from_boundary     L358   CHANGES   1      C/1    match
+   23   top_laplacians                   L474   CHANGES   1      C/1    match
+   24   adjacent_transposition_graph     L512   CHANGES   1      C/1    match
+   25   at_laplacian                     L524   CHANGES   1      C/1    match
+   26   _ambient_coxeter_laplacian       L535   IDENTICAL 0      C/1    *** MISS ***
+   27   _ambient_coxeter_laplacian       L548   CHANGES   1      C/1    match
+   28   coxeter_compression              L566   CHANGES   1      C/1    match
+   29   perm_sign                        L581   CHANGES   1      C/1    match
+   30   twist                            L588   IDENTICAL 0      C/1    *** MISS ***
+   31   rank_mod_p                       L621   IDENTICAL 0      C/1    *** MISS ***
+   32   rank_exact                       L650   CHANGES   1      C/1    match
+   33   det_shift_mod_p                  L662   CHANGES   1      I/0    *** MISS ***
+   34   det_shift_mod_p                  L674   CHANGES   0      I/0    *** MISS ***
+   35   not_isospectral                  L694   IDENTICAL 0      C/1    *** MISS ***
+   36   not_isospectral                  L696   IDENTICAL 0      I/0    match
+   37   not_isospectral                  L699   CHANGES   0      I/0    *** MISS ***
+   38   not_isospectral                  L700   CHANGES   1      I/0    *** MISS ***
+   39   reduced_betti                    L719   CHANGES   1      C/1    match
+   40   mat_eq                           L728   IDENTICAL 0      I/0    match
+   41   mat_eq                           L729   CHANGES   1      C/1    match
+   42   mat_sub                          L734   CHANGES   1      C/1    match
+   43   is_diagonal                      L738   CHANGES   1      C/1    match
+   44   trace                            L742   IDENTICAL 0      C/1    *** MISS ***
+   45   frobenius2                       L748   IDENTICAL 0      I/0    match
+   46   absorb_trace                     L837   CHANGES   1      C/1    match
+   47   absorb_trace                     L840   CHANGES   0      C/0    match
+   48   absorb_trace                     L843   CHANGES   1      C/1    match
+   49   absorb_trace.find                L853   CHANGES   1      C/1    match
+   50   absorb_trace                     L865   CHANGES   1      C/1    match
+   51   absorb_trace                     L869   CHANGES   1      C/1    match
+   52   gate_violations                  L889   IDENTICAL 0      I/0    match
+   53   gate_violations                  L896   CHANGES   1      C/1    match
+   54   diagonal_moves                   L912   IDENTICAL 0      I/0    match
+   55   diagonal_moves                   L913   CHANGES   1      C/1    match
+   56   absorbable_by_diagonal_twist     L925   CHANGES   1      C/1    match
+
+==============================================================================
+PREDICTION SCORE -- misses kept as written
+==============================================================================
+  43 of 56 matched.
+   MISS #3   Poset.comparable                 predicted C/1, observed I/0
+   MISS #4   Poset.automorphisms              predicted C/1, observed I/0
+   MISS #6   Poset.is_connected               predicted C/1, observed I/0
+   MISS #8   Poset.is_chain                   predicted C/1, observed I/0
+   MISS #26  _ambient_coxeter_laplacian       predicted C/1, observed I/0
+   MISS #30  twist                            predicted C/1, observed I/0
+   MISS #31  rank_mod_p                       predicted C/1, observed I/0
+   MISS #33  det_shift_mod_p                  predicted I/0, observed C/1
+   MISS #34  det_shift_mod_p                  predicted I/0, observed C/0
+   MISS #35  not_isospectral                  predicted C/1, observed I/0
+   MISS #37  not_isospectral                  predicted I/0, observed C/0
+   MISS #38  not_isospectral                  predicted I/0, observed C/1
+   MISS #44  trace                            predicted C/1, observed I/0
+
+==============================================================================
+THE FOCUSED VERDICT -- the four functions the nine mutations touch
+==============================================================================
+  11 returns; 9 CHANGE the artifact under individual deletion, 2 leave it BYTE-IDENTICAL
+      #46  absorb_trace                     L837   CHANGES   exit 1, 24887 bytes
+      #47  absorb_trace                     L840   CHANGES   exit 0, 23684 bytes
+      #48  absorb_trace                     L843   CHANGES   exit 1, 23534 bytes
+      #49  absorb_trace.find                L853   CHANGES   exit 1, 4030 bytes
+      #50  absorb_trace                     L865   CHANGES   exit 1, 24771 bytes
+      #51  absorb_trace                     L869   CHANGES   exit 1, 4030 bytes
+      #52  gate_violations                  L889   IDENTICAL exit 0, 23684 bytes
+      #53  gate_violations                  L896   CHANGES   exit 1, 7681 bytes
+      #54  diagonal_moves                   L912   IDENTICAL exit 0, 23684 bytes
+      #55  diagonal_moves                   L913   CHANGES   exit 1, 26468 bytes
+      #56  absorbable_by_diagonal_twist     L925   CHANGES   exit 1, 4030 bytes
+  [HOLDS ] ABSORB_TRACE IS COVERED AT THE GRANULARITY OF A RETURN: all 6 of its `return` statements, each deleted ALONE, move the artifact.  mg-e7bc's finding does not survive on this function
+        absorb_trace L837 CHANGES; absorb_trace L840 CHANGES; absorb_trace L843 CHANGES; absorb_trace.find L853 CHANGES; absorb_trace L865 CHANGES; absorb_trace L869 CHANGES
+        WOULD DIFFER UNDER: a `return` being added to `absorb_trace` that no constructed pair reaches -- which is the state its `shape` gate's first return was in until mg-9220, and the state 52 and 54 below are in now.  Also under `controls.py` losing the two UNREACHED_GATE_PAIRS rows: without them AFTER-5 and AFTER-6 go byte-identical again
+  [FINDING] 2 MORE INERT RETURN(S) AT THE SAME GRANULARITY, IN THE SAME REPAIR'S BLAST RADIUS: gate_violations L889; diagonal_moves L912.  Each is a `return` whose individual deletion moves NOT ONE BYTE of the artifact -- the exact condition mg-e7bc named for `absorb_trace`'s first `shape` return.  They are the shape guards of `gate_violations` and `diagonal_moves`, the two companion procedures the same docstrings cite; mg-9220 fixed the one return its ticket named and did not sweep the other two, and no mutation in d2_deletion.py deletes either of them
+
+==============================================================================
+AND THE REST OF THE FILE -- the returns the battery cannot see
+==============================================================================
+  16 of the 45 returns outside the four functions are BYTE-IDENTICAL under individual deletion:
+      #1   Poset.__repr__                   L77    exit 0, 23684 bytes
+      #2   Poset.leq                        L80    exit 0, 23684 bytes
+      #3   Poset.comparable                 L83    exit 0, 23684 bytes
+      #4   Poset.automorphisms              L94    exit 0, 23684 bytes
+      #5   Poset.is_connected               L99    exit 0, 23684 bytes
+      #6   Poset.is_connected               L112   exit 0, 23684 bytes
+      #8   Poset.is_chain                   L118   exit 0, 23684 bytes
+      #16  linear_extensions.rec            L239   exit 0, 23684 bytes
+      #26  _ambient_coxeter_laplacian       L535   exit 0, 23684 bytes
+      #30  twist                            L588   exit 0, 23684 bytes
+      #31  rank_mod_p                       L621   exit 0, 23684 bytes
+      #35  not_isospectral                  L694   exit 0, 23684 bytes
+      #36  not_isospectral                  L696   exit 0, 23684 bytes
+      #40  mat_eq                           L728   exit 0, 23684 bytes
+      #44  trace                            L742   exit 0, 23684 bytes
+      #45  frobenius2                       L748   exit 0, 23684 bytes
+
+  This is CONTEXT, not a finding against mg-9220: its ticket is the `shape`
+  gate, and no claim in the repair says the whole file is deletion-covered.  It
+  is printed because '9 of 9' and '43 rows' are sentences about populations,
+  and the population of returns in this file is 56.
+  [HOLDS ] the file-wide census is reported rather than summarised: 56 returns, 18 byte-identical under individual deletion, 2 of those inside the four functions the nine mutations touch
+        byte-identical set: #1 Poset.__repr__, #2 Poset.leq, #3 Poset.comparable, #4 Poset.automorphisms, #5 Poset.is_connected, #6 Poset.is_connected, #8 Poset.is_chain, #16 linear_extensions.rec, #26 _ambient_coxeter_laplacian, #30 twist, #31 rank_mod_p, #35 not_isospectral, #36 not_isospectral, #40 mat_eq, #44 trace, #45 frobenius2, #52 gate_violations, #54 diagonal_moves
+        WOULD DIFFER UNDER: nothing -- this claim is a report of the rows above and is scored TRUE by construction.  It is here so the number that a summary would carry is written beside the rows that produce it, which is mg-8aae's finding applied to this file
+
+==============================================================================
+4 claim(s) scored; 0 BROKEN.  1 FINDING(s).
+  FINDING: 2 MORE INERT RETURN(S) AT THE SAME GRANULARITY, IN THE SAME REPAIR'S BLAST RADIUS: gate_violations L889; diagonal_moves L912.  Each is a `return` whose individual deletion moves NOT ONE BYTE of the artifact -- the exact condition mg-e7bc named for `absorb_trace`'s first `shape` return.  They are the shape guards of `gate_violations` and `diagonal_moves`, the two companion procedures the same docstrings cite; mg-9220 fixed the one return its ticket named and did not sweep the other two, and no mutation in d2_deletion.py deletes either of them
+==============================================================================

@@ -1,0 +1,92 @@
+==============================================================================
+mg-c4c8 H4 -- every declared unit, checked against its own patch
+==============================================================================
+
+==============================================================================
+1. THE DECLARED UNIT vs THE PATCH -- all eleven
+==============================================================================
+PREDICTIONS, registered before the runs (EXACT = the declaration accounts for
+every unit the patch removes):
+   BEFORE-1  EXACT
+   BEFORE-2  UNDERSTATES
+   AFTER-1   UNDERSTATES
+   AFTER-2   UNDERSTATES
+   AFTER-3   EXACT
+   AFTER-4   EXACT
+   AFTER-5   UNDERSTATES
+   AFTER-6   UNDERSTATES
+   R1        UNDERSTATES
+   R2        UNDERSTATES
+   R3        UNDERSTATES
+
+   tag       DECLARED (r/s/c)       MEASURED (r/s/c)       their n verdict
+   BEFORE-1  0/0/1                  0/0/1                  0       EXACT
+   BEFORE-2  1/0/0                  1/1/0                  1       *** UNDERSTATES ***
+   AFTER-1   1/0/0                  1/1/0                  1       *** UNDERSTATES ***
+   AFTER-2   1/0/0                  1/1/0                  1       *** UNDERSTATES ***
+   AFTER-3   0/0/0                  0/0/0                  0       EXACT
+   AFTER-4   0/1/0                  0/1/0                  0       EXACT
+   AFTER-5   1/0/0                  1/1/1                  1       *** UNDERSTATES ***
+   AFTER-6   1/0/0                  1/1/0                  1       *** UNDERSTATES ***
+   R1        1/0/0                  1/1/0                  1       *** UNDERSTATES ***
+   R2        1/0/0                  1/1/0                  1       *** UNDERSTATES ***
+   R3        2/0/0                  2/2/0                  2       *** UNDERSTATES ***
+
+   the sentence each reading is a reading OF:
+   BEFORE-1  (5cae82c^) one CLAUSE of a compound condition (`or A[i][i] != B[i][i]`); the `return` it guards stays and still answers on the other clause
+   BEFORE-2  (5cae82c^) one `return` statement -- the magnitude gate
+   AFTER-1   (live tree) one `return` statement -- gate `diagonal`
+   AFTER-2   (live tree) one `return` statement -- gate `magnitude`
+   AFTER-3   (live tree) NO statement: the ORDER of two gates, both returns kept
+   AFTER-4   (live tree) one statement, and not a `return`: the `signs_read += 1` counter
+   AFTER-5   (live tree) one `return` statement -- gate `shape`, which is ONE return since mg-9220 merged the two
+   AFTER-6   (live tree) one `return` statement -- the `parity` contradiction branch
+   R1        (c7f9673) one `return` statement -- the FIRST of the pinned tree's two `shape` returns
+   R2        (c7f9673) one `return` statement -- the SECOND of them
+   R3        (c7f9673) TWO `return` statements -- the PAIR, which is what AFTER-5 removed until mg-9220.  KEPT DELIBERATELY as the specimen
+
+  prediction score: 11 of 11 matched.
+  [HOLDS ] THE COUNTER IS HONEST: `returns_removed`, which counts lines beginning `return ` in the patch text, agrees with the number of `return` nodes the patch actually removes, on 11 of 11 mutations
+        BEFORE-1: counter 0, AST 0; BEFORE-2: counter 1, AST 1; AFTER-1: counter 1, AST 1; AFTER-2: counter 1, AST 1; AFTER-3: counter 0, AST 0; AFTER-4: counter 0, AST 0; AFTER-5: counter 1, AST 1; AFTER-6: counter 1, AST 1; R1: counter 1, AST 1; R2: counter 1, AST 1; R3: counter 2, AST 2
+        WOULD DIFFER UNDER: a patch whose replacement text contains a `return` inside a string or a comment, or a multi-line return whose first line does not begin with the keyword.  The counter is a line heuristic and this is the parse that says the heuristic is right here
+  [FINDING] THE DECLARED UNIT IS FINER THAN THE PATCH ON 8 OF 11 MUTATIONS, AND ON AFTER-5 THE DIFFERENCE IS THE THIRD-LEVEL UNIT ITSELF.  Each of BEFORE-2, AFTER-1, AFTER-2, AFTER-5, AFTER-6, R1, R2, R3 declares 'one `return` statement' (R3: two) and its patch removes the `return` TOGETHER WITH THE `if` THAT GUARDS IT -- measured by parsing both trees, not read off the prose.  AFTER-5 removes, in addition, a boolean condition with TWO CLAUSES: `m != len(B) or any(len(A[i]) != len(B[i]) for i in range(m))`.  So the line a reader consults says the unit is one return, and the unit is a return plus a two-clause condition -- which is mg-e7bc's own sentence, at the level below the one it was written about.  THE RESULTS ARE NOT AFFECTED: H1 ran the strictly-return-only version of AFTER-1, -2, -5 and -6 (returns #47, #48, #46, #50, each replaced by `pass` with its `if` left standing) and every artifact verdict and exit code agreed.  This is a defect of the DECLARATION, which is now the thing the evidence rests on
+
+==============================================================================
+2. AND THE LANDING DOCUMENT'S TABLE, against the code it describes
+==============================================================================
+  [HOLDS ] docs/landing-mg-e7bc-granularity.md's `ret` column names all 11 mutations and every figure equals the returns its patch removes, measured here from the trees
+        table: AFTER-1=1, AFTER-2=1, AFTER-3=0, AFTER-4=0, AFTER-5=1, AFTER-6=1, BEFORE-1=0, BEFORE-2=1, R1=1, R2=1, R3=2
+        WOULD DIFFER UNDER: a mutation being added to d2_deletion.py without the table being regenerated, or a figure in the table being edited by hand.  The table is prose about code and this is the only thing that compares them
+
+==============================================================================
+3. THE INERT RETURN IS GONE RATHER THAN ANNOTATED
+==============================================================================
+  [HOLDS ] THE SHAPE GATE HAS ONE `return` AND HAD TWO: 1 at HEAD, 2 at c7f9673.  The statement mg-e7bc found inert is REMOVED FROM THE SOURCE, not annotated -- there is no second `shape` return carrying a comment about why it stays
+        HEAD: 1 `shape` return(s) at line(s) [837]; c7f9673: 2 at line(s) [808, 811]
+        WOULD DIFFER UNDER: the inert return being restored with an explanation beside it, which is the outcome pm-onethird names as not a fix: a comment is a reason a statement does not have.  Counted from the tree, so a return re-added inside an `if False:` or behind a flag would still be counted here
+  [HOLDS ] and NOTHING WAS ADDED TO controls.py TO WATCH IT INSTEAD: the number of constructed-pair entries is 18 at HEAD and 18 at c7f9673
+        UNREACHED_GATE_PAIRS mentioned 3 time(s); pair entries 18 -> 18
+        WOULD DIFFER UNDER: a pair being added to UNREACHED_GATE_PAIRS whose only purpose is to make the first return fire -- which is the 'detection' half of the ticket that mg-9220 declined, and which would leave an inert statement in the tree with a row built to visit it
+
+==============================================================================
+4. FLOOR ITEM -- the provenance of the pinned commits
+==============================================================================
+Chosen by this audit; no list in the brief names it.  R1, R2 and R3 are the whole
+reproduction of mg-e7bc's finding, and they are measurements about whatever tree
+`TWO_RETURN_REF` names.  The docstring says it is 'the last commit in which
+`absorb_trace`'s `shape` gate had TWO `return` statements'.  That is a claim about the
+history of one file, and it is checked by walking the history.
+
+  6 commit(s) touched face_complex.py; 2 of them have TWO `shape` returns in
+  `absorb_trace`.  The newest of those is c7f967394cf7.
+  [HOLDS ] THE PIN IS WHAT ITS DOCSTRING SAYS: c7f9673 resolves to c7f967394cf7, and that is the NEWEST commit touching face_complex.py whose `absorb_trace` has two `shape` returns
+        newest two-return commit c7f967394cf7; pin resolves to c7f967394cf7; 2 two-return commit(s) in all
+        WOULD DIFFER UNDER: a later commit reintroducing a second `shape` return, or the pin being moved to an ancestor.  Either makes R1/R2/R3 measurements about a tree the sentence beside them does not describe -- and the sentence is the only thing a reader has, since a resolved sha in a transcript cannot be checked against a claim nobody wrote down
+  [HOLDS ] and PRE_REPAIR_REF (5cae82c^ -> 61de12133f74) really is a tree from BEFORE the predicate was instrumented: it has no `absorb_trace` and no `Trace` at all
+        29028 bytes at that ref
+        WOULD DIFFER UNDER: the pin being moved forward past mg-5f9a, which is the exact defect mg-04a8 fixed when the ref was `main`: the BEFORE half would then be contrasting the tree with itself
+
+==============================================================================
+6 claim(s) scored; 0 BROKEN.  1 FINDING(s).
+  FINDING: THE DECLARED UNIT IS FINER THAN THE PATCH ON 8 OF 11 MUTATIONS, AND ON AFTER-5 THE DIFFERENCE IS THE THIRD-LEVEL UNIT ITSELF.  Each of BEFORE-2, AFTER-1, AFTER-2, AFTER-5, AFTER-6, R1, R2, R3 declares 'one `return` statement' (R3: two) and its patch removes the `return` TOGETHER WITH THE `if` THAT GUARDS IT -- measured by parsing both trees, not read off the prose.  AFTER-5 removes, in addition, a boolean condition with TWO CLAUSES: `m != len(B) or any(len(A[i]) != len(B[i]) for i in range(m))`.  So the line a reader consults says the unit is one return, and the unit is a return plus a two-clause condition -- which is mg-e7bc's own sentence, at the level below the one it was written about.  THE RESULTS ARE NOT AFFECTED: H1 ran the strictly-return-only version of AFTER-1, -2, -5 and -6 (returns #47, #48, #46, #50, each replaced by `pass` with its `if` left standing) and every artifact verdict and exit code agreed.  This is a defect of the DECLARATION, which is now the thing the evidence rests on
+==============================================================================
