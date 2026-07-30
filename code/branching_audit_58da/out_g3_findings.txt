@@ -1,0 +1,147 @@
+==========================================================================
+G3  QUESTION A -- ARE THE 24 FINDINGS REAL?
+==========================================================================
+
+   The 24 findings, reproduced here rather than quoted: c1_branching.py at
+   286d5030, run against out_t1_tl.txt at d1dd84d2.
+
+      SELF-ERRORS 0   FINDINGS 24   TOTAL BAD 24   exit 1
+
+--------------------------------------------------------------------------
+(i) THE MECHANISM, MEASURED -- WHY 'target ?' AND NOT 'CANNOT READ'
+--------------------------------------------------------------------------
+   c1 finds the target's vertex counts with one regex, quoted from its
+   own source at 286d5030:
+
+       m = re.match(r"\s*(\d)\s+((?:\d+\s+){5}\d+)\s*$", line)
+
+   and then compares with
+
+       tgt_counts.get(beta, [None] * 6)[n - 1] != mine_c
+
+   so a cell the regex never filled is compared as None, and None differs from
+   every integer.  ABSENCE IS RENDERED AS DISAGREEMENT.  That is not an
+   inference about the code; it is what the two lines above do, and the row
+   below counts how many lines each target offers the regex.
+
+   lines in T1b2 matching c1's count regex, 286d5030 (the reproduction's)  : 4
+          3        1    2    2    3    3    4
+          2        1    2    2    3    3    4
+          1        1    2    2    3    3    4
+          0        1    1    2    2    3    3
+   lines in T1b2 matching c1's count regex, d1dd84d2 (HEAD)                : 0
+
+   4 rows at the old revision, one per parameter, six counts each = 24
+   cells.  0 rows at HEAD.  The regex is looking for a table mg-13b2
+   deleted -- on mg-a218's OWN finding X1, which said the count was the
+   defect.  The parser that read it was not widened with c2's.
+
+--------------------------------------------------------------------------
+(ii) THE 24, ONE AT A TIME.  Established before any is called a defect
+--------------------------------------------------------------------------
+   CONFIRMED      = the target states the datum and it disagrees with c1.
+   PARSER ARTIFACT = the target states the datum -- in this or a stronger
+                     form -- and it AGREES; the word 'disagrees' is false and
+                     the accusation is the parser's, not the target's.
+   UNKNOWN         = the target does not determine the datum at all, so
+                     nothing can be concluded either way.
+
+   #   finding as raised by c1                                target states      class
+    1  beta=0 n=1: target ?, mine 1                          [0:1] -> 1         PARSER ARTIFACT
+    2  beta=0 n=2: target ?, mine 1                          [0:1] -> 1         PARSER ARTIFACT
+    3  beta=0 n=3: target ?, mine 2                          [0:1,1:2] -> 2     PARSER ARTIFACT
+    4  beta=0 n=4: target ?, mine 2                          [0:1,1:2] -> 2     PARSER ARTIFACT
+    5  beta=0 n=5: target ?, mine 3                          [0:1,1:4,2:5] -> 3 PARSER ARTIFACT
+    6  beta=0 n=6: target ?, mine 3                          [0:1,1:4,2:5] -> 3 PARSER ARTIFACT
+    7  beta=1 n=1: target ?, mine 1                          [0:1] -> 1         PARSER ARTIFACT
+    8  beta=1 n=2: target ?, mine 2                          [0:1,1:1] -> 2     PARSER ARTIFACT
+    9  beta=1 n=3: target ?, mine 2                          [0:1,1:1] -> 2     PARSER ARTIFACT
+   10  beta=1 n=4: target ?, mine 3                          [0:1,1:3,2:1] -> 3 PARSER ARTIFACT
+   11  beta=1 n=5: target ?, mine 3                          [0:1,1:4,2:1] -> 3 PARSER ARTIFACT
+   12  beta=1 n=6: target ?, mine 4                          [0:1,1:4,2:9,3:1] -> 4 PARSER ARTIFACT
+   13  beta=2 n=1: target ?, mine 1                          [0:1] -> 1         PARSER ARTIFACT
+   14  beta=2 n=2: target ?, mine 2                          [0:1,1:1] -> 2     PARSER ARTIFACT
+   15  beta=2 n=3: target ?, mine 2                          [0:1,1:2] -> 2     PARSER ARTIFACT
+   16  beta=2 n=4: target ?, mine 3                          [0:1,1:3,2:2] -> 3 PARSER ARTIFACT
+   17  beta=2 n=5: target ?, mine 3                          [0:1,1:4,2:5] -> 3 PARSER ARTIFACT
+   18  beta=2 n=6: target ?, mine 4                          [0:1,1:5,2:9,3:5] -> 4 PARSER ARTIFACT
+   19  beta=3 n=1: target ?, mine 1                          [0:1] -> 1         PARSER ARTIFACT
+   20  beta=3 n=2: target ?, mine 2                          [0:1,1:1] -> 2     PARSER ARTIFACT
+   21  beta=3 n=3: target ?, mine 2                          [0:1,1:2] -> 2     PARSER ARTIFACT
+   22  beta=3 n=4: target ?, mine 3                          [0:1,1:3,2:2] -> 3 PARSER ARTIFACT
+   23  beta=3 n=5: target ?, mine 3                          [0:1,1:4,2:5] -> 3 PARSER ARTIFACT
+   24  beta=3 n=6: target ?, mine 4                          [0:1,1:5,2:9,3:5] -> 4 PARSER ARTIFACT
+
+   CONFIRMED         0 of 24
+   PARSER ARTIFACT  24 of 24
+   UNKNOWN           0 of 24
+   population: the 24 findings c1 raises against the HEAD target,
+   classified one at a time and none by inheritance from another.
+
+   AND c1's OWN POPULATION LINE, checked because it is a count that
+   names a population and the population is empty:
+     vertex counts: 24 cells compared, population: every (beta,n) with beta in {3,2,1,0} and 1 <= n <= 6
+     cells actually compared against a value the target states in the form c1 reads: 0
+     -- mg-d330 booked this and it is CONFIRMED here, not re-opened.
+
+--------------------------------------------------------------------------
+(iii) THE 174 NON-FINDINGS -- ARE THEY AGREEMENT, OR SILENCE?
+--------------------------------------------------------------------------
+   This is the half the count cannot answer.  On the HEAD target c1
+   reports 0 disagreements over 53 dimension cells and 121 edge cells.  A
+   parser blind in those channels would report the same 0.  So each channel
+   is corrupted on a copy of the HEAD target and the DIRECTION IS PREDICTED
+   BEFORE THE PROBE: the probe must make c1 red, with a finding of the named
+   shape.  A probe that stays green is a channel reporting nothing.
+
+   probe                                                            predicted  actual  fires
+   one digit of one EDGE cell (beta=1, [L(4,2)] of L(5,2) dim 1)  RED        RED     YES
+        first new finding: [L(5,2):L(4,2)] at beta=1 disagrees: target 7, mine 1
+   one digit of a MULTIPLICITY-2 edge (beta=1, [L(3,0)] of L(4,1) RED        RED     YES
+        first new finding: [L(4,1):L(3,0)] at beta=1 disagrees: target 1, mine 2
+   one digit of one DIMENSION cell (beta=1, L(6,2) dim 9 -> dim 8 RED        RED     YES
+        first new finding: dim L(6,2) at beta=1 disagrees: target 8, mine 9
+   DELETING a whole L(n,p) row (beta=1, L(5,2) dim 1)             RED        RED     YES
+        first new finding: I measure a vertex the target does not print: L(5,2) dim 1 at beta=1
+   DELETING every edge row of one parameter block (beta = 0)      RED        RED     YES
+        first new finding: I measure a vertex the target does not print: L(2,0) dim 1 at beta=0
+   NULL PROBE: a prose line inside T1b2, no figure touched        green      green   YES
+   CONTROL on the count channel, at 286d5030 where it was LIVE: o RED        RED     YES
+        first new finding: vertex COUNT disagrees at beta=3 n=6: target 9, mine 4
+
+   probes firing as predicted: 7 of 7, population: the 7 corruption probes above -- 3 on the edge channel, 1 on the dimension channel, 1 null and 1 control on the count channel at the old revision
+
+   READ THIS TOGETHER WITH (ii).  The 53 dimension and 121 edge cells go
+   RED under a one-digit change, so their 0 disagreements is a measurement.
+   The 24 vertex cells go red under NOTHING, because they compare against a
+   value that is not there -- and at the old revision the same channel goes
+   red on a one-digit change, which is what a live channel looks like.  The
+   two are distinguished by the probes, not by the counts.
+
+--------------------------------------------------------------------------
+VERDICT ON QUESTION A
+--------------------------------------------------------------------------
+   Of the 24 findings c1_branching.py raises against the target:
+
+     CONFIRMED       : 0
+     PARSER ARTIFACT : 24
+     UNKNOWN         : 0
+
+   Every one of the 24 names a cell where the target states the vertex set
+   in a form STRICTLY RICHER than the count c1 is looking for, and where
+   that set agrees with c1's own measurement label for label.  The target
+   does not disagree with c1 anywhere.  The findings are the parser's.
+
+   THE DEFECT IS REAL AND IT IS c1's, NOT THE TARGET'S.  It is exactly the
+   one mg-d330 booked: a channel that has gone blind books its blindness as
+   FINDINGS against the target instead of SELF-ERRORS against itself, and
+   c1's own population line then reports 24 cells compared where 0 were.
+   Confirmed here by the probes above, not re-opened.
+
+   The other 174 cells are unaffected and their agreement is real: 7 of 7
+   corruption probes on those channels fire.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the parse of the 24 raised findings, the 3-box partition, and the application of the 7 probes
+FINDINGS: 0, population: the 24 findings classified one at a time and the 7 corruption probes on the 53 dimension and 121 edge channels
+TOTAL BAD: 0

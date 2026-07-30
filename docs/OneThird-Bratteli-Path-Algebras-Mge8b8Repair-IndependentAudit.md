@@ -458,8 +458,27 @@ Committed outputs: `out_selftest_a218.txt`, `out_c0_repro.txt`,
 **Exit codes are the finding channel, deliberately.** Every `c*.py` exits `0`
 iff `SELF-ERRORS == 0` **and** `FINDINGS == 0`, and both numbers are printed
 separately, so a non-zero exit never means the instrument is broken.
-`c2`, `c4` and `c5` exit `1`; those are E3, E7 and E6. **Every count in every
+~~`c2`, `c4` and `c5` exit `1`; those are E3, E7 and E6.~~ **Every count in every
 output names its population.**
+
+**CORRECTED (`mg-58da`), and this sentence is why the correction is here rather
+than in a commit message: it was written in the present tense about code a
+reader will run, and a reader who ran it got another answer.** The struck
+sentence was true when this audit was taken, at `286d5030`. It is not true now,
+and the exit codes have moved twice since:
+
+| revision | scripts exiting `1` | why |
+|---|---|---|
+| `286d5030` — as audited | `c2`, `c4`, `c5` | E3, E7, E6, as written above |
+| `ed9cde4` — after the mg-13b2 repair | `c1`, `c3` | the repair closed E3/E6/E7 and *opened* two: `c1`'s vertex parser went blind on the rewritten `T1b2` (i) and booked it as 24 findings against the target; `c3` swept up the withdrawn phrases sitting unmarked in the repair's own new `t5_labels.py` |
+| after `mg-58da` | `c3` only | `c1`'s parser is widened to read either form and to book what it cannot read as a **SELF-ERROR**, so it exits `0` with all 198 cells compared; `c3` remains **OPEN** — it is mg-d330's second finding and is not repaired there |
+
+**`out_c1_branching.txt` is deliberately NOT regenerated**, the call `mg-a318`
+made for `mg-8a5c` and `mg-13b2` made for `c2` here: a committed audit output is
+the record of what that audit found, not a live gate. `code/branching_audit_58da/g1_provenance.py`
+re-runs `c1_branching.py` at `286d5030` against the target as it stood there and
+confirms that file **byte for byte** — so the record is checkable rather than
+merely preserved.
 
 There is **no network script in this directory at all** — every source this
 audit needs was fetched and committed by mg-db09 and by mg-2060, and this audit

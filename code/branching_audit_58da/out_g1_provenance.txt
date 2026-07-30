@@ -1,0 +1,91 @@
+==========================================================================
+G1  QUESTION B -- DOES THE 198-CELL REPRODUCTION STILL STAND?
+==========================================================================
+
+Answered by re-running at the old revision, which is the cheap and decisive
+route.  Nothing here is inferred from a diff being 'small' or from the
+mathematics being 'untouched': the script is run and its own output is read.
+
+--------------------------------------------------------------------------
+(i) THE REVISION, NAMED
+--------------------------------------------------------------------------
+   286d5030902d  mg-a218 -- where the reproduction was taken
+      docs+audit: independent audit of the mg-db09 repair (mg-e8b8 / 2e66d03) — THE WITHDRAWAL IS REAL
+   ed9cde49ab81  mg-13b2 -- the repair that widened one script
+      docs+repair: THE VERTEX COLUMN REPORTS THE SET AND THE LABELS ARE MEASURED — the column that pri
+   d1dd84d21c5c  HEAD of this branch
+      evidence+control: THE INSTRUMENT THAT RAISED THE FINDINGS NOW REPORTS ZERO — mg-835f's own audit
+
+--------------------------------------------------------------------------
+(ii) c1'S READ PATH, FOUND IN ITS SOURCE RATHER THAN ASSUMED
+--------------------------------------------------------------------------
+   every open() in c1_branching.py at 286d5030902d:
+      txt = open(TARGET_OUT).read()
+
+   the one external file c1 reads:  code/branching_locate_db09/out_t1_tl.txt
+
+   commits touching each part of the reproduction, 286d5030..d1dd84d2:
+      c1_branching.py  (the script)                  NONE
+      kern_a218.py  (its kernel -- the meas)         NONE
+      out_t1_tl.txt  (the target it compares)        ed9cde49
+
+   sha256 of the measuring half, at both revisions:
+      c1_branching.py          bddeb6c4f57f70cb ... bddeb6c4f57f70cb   SAME
+      kern_a218.py             70356cbca847bc20 ... 70356cbca847bc20   SAME
+
+   THE CHANGE DID TOUCH THE READ PATH: ed9cde49.
+   So the reproduction as taken -- c1's measurement against that
+   file -- has to be REDONE against the file as it now stands.
+   That is g2's job.  What g1 settles is what was true at 286d5030.
+
+--------------------------------------------------------------------------
+(iii) THE RE-RUN AT 286d5030902d
+--------------------------------------------------------------------------
+   c1_branching.py @ 286d5030, against out_t1_tl.txt @ 286d5030
+      SELF-ERRORS 0   FINDINGS 0   TOTAL BAD 0   exit 0
+      vertex counts           24 cells compared
+      vertex dimensions       53 cells compared
+      edge multiplicities    121 cells compared
+      TOTAL CELLS            198
+
+   against the committed out_c1_branching.txt at that revision:
+      re-run   sha256 671349aa9c70d350d1b8b141762b25d5
+      committed sha256 671349aa9c70d350d1b8b141762b25d5
+      BYTE-IDENTICAL.  The committed record is what the code does.
+
+--------------------------------------------------------------------------
+(iv) DID THE MEASUREMENT MOVE, OR ONLY THE COMPARISON?
+--------------------------------------------------------------------------
+   c1's output has three parts: (i) its own vertex sets, (ii) its own
+   edge table, and (iii) the comparison against the target.  Parts (i) and
+   (ii) read nothing outside this instrument.  If they are byte-identical
+   across the two runs then no mathematics moved and the whole question is
+   about (iii), which is a question about reading.
+
+   sections (i)+(ii), old-target run : sha256 a8db5dbd4c75876513a77a9b6ee4f8c5
+   sections (i)+(ii), new-target run : sha256 a8db5dbd4c75876513a77a9b6ee4f8c5
+   BYTE-IDENTICAL -- 125 lines.  NO MATHEMATICS MOVED.
+   c1's own 24 vertex sets, both runs, cell by cell: all 24 equal
+
+--------------------------------------------------------------------------
+VERDICT ON QUESTION B, derived from the rows above and not asserted
+--------------------------------------------------------------------------
+   THE 198-CELL REPRODUCTION STANDS AT 286d5030902d.
+   Re-run there just now: 24 vertex-count + 53 vertex-dimension + 121 edge
+   cells = 198 compared, 0 disagreements, exit 0, and the output is
+   byte-identical to the committed record.
+   Re-stated with the revision named, which is what a reproduction needs:
+
+     >> At 286d5030902d, mg-a218's c1_branching.py -- a third instrument sharing
+     >> no code with the two it audits -- measured the branching graph of
+     >> TL_n(beta) for beta in {3,2,1,0} and 1 <= n <= 6 and agreed with
+     >> mg-e8b8's committed out_t1_tl.txt in all 198 cells.
+
+   AND IT NEEDS REDOING AT HEAD, because ed9cde49 touched the read
+   path.  The claim above is about a comparison against a FILE, and that
+   file was rewritten.  g2 redoes it.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the 12 git reads and the one read-path enumeration this script needs
+FINDINGS: 0, population: the 3 populations of the re-run, its exit code, its byte-comparison against the committed record, the 2 sha comparisons of the measuring half, and the 2 measurement-invariance checks
+TOTAL BAD: 0
