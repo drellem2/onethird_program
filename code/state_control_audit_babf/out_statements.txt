@@ -1,0 +1,58 @@
+mg-babf — do mg-7870's control and the statements published around it agree?
+======================================================================================
+mg-2216's instruction: fix the control OR narrow the statements.  Which happened?
+
+S1  docs/OneThird-STATE-Landing-Control-mg2da3-IndependentAudit.md (mg-2da3's ticket, item 1, quoted by mg-2216)
+      STATEMENT: A control for that change must read the working tree / `HEAD` and **must fail when the file is mutated**.
+      still in the tree verbatim: True  (docs/OneThird-STATE-Landing-Control-mg2da3-IndependentAudit.md, code/state_landing_control_2da3/COVERAGE.md)
+      present before the repair (6b1eacf): True   -> mg-7870 did NOT touch it
+      it FORBIDS   : any mutation of STATE.md or the state-history README
+      control PERMITS: B01 B02 B03 B04 B05 B06 B07 B14 B15 — nine mutations of the two files, all exit 0
+      READING      : This is a universal over mutations of THE FILE.  It has exactly one true reading and the control does not satisfy it; COVERAGE.md's own 'Not covered, on purpose' section is a written admission of that.
+      VERDICT      : STATEMENT AND CONTROL DISAGREE
+
+S2  docs/state-history/README.md, the A1 correction block (a DIGESTED region)
+      STATEMENT: it exits **non-zero** both when the repair is damaged (`1`) and when a measured constant of the landing has moved (`2`) — never green about a delta that is no longer the delta it was written for.
+      still in the tree verbatim: True  (docs/OneThird-STATE-Landing-Control-mg2da3-IndependentAudit.md, docs/state-history/README.md)
+      present before the repair (6b1eacf): True   -> mg-7870 did NOT touch it
+      it FORBIDS   : the certified delta ceasing to be present, in any sense
+      control PERMITS: B06 — b68db5d's own F1 correction block wrapped in an HTML comment, absent from the rendered page, control exits 0
+      READING      : TWO READINGS, and they differ.  (a) 'the delta' = the BYTES b68db5d wrote: under this reading B06 leaves them in the file and the sentence survives.  (b) 'the delta' = what b68db5d ADDED TO THE DOCUMENT: under this reading B06 removes the F1 correction block from every rendered view of the README while the control stays green, and the sentence is falsified.  I cannot adjudicate between them from the text and do not try; reading (b) is the one a reader of the README would take, and it is the reading under which the sentence is doing work.
+      VERDICT      : STATEMENT AND CONTROL DISAGREE
+
+S3  STATE.md, Appendix A, the convention this cluster establishes, item (4)
+      STATEMENT: that instrument ships with a **negative control in the same commit** showing it exits non-zero when that tree is mutated
+      still in the tree verbatim: True  (STATE.md)
+      present before the repair (6b1eacf): True   -> mg-7870 did NOT touch it
+      it FORBIDS   : a mutated tree on which the negative control does not exit non-zero
+      control PERMITS: B01 B02 B04 B05 B06 B07 — the tree is mutated and the instrument exits 0
+      READING      : Same universal shape as S1, in the file that publishes the CONVENTION the whole cluster is meant to establish.  This is the statement with the longest reach: it is not about one instrument, it is the rule the next instrument in this repo will be written to.
+      VERDICT      : STATEMENT AND CONTROL DISAGREE
+
+S4  code/state_landing_control_2da3/COVERAGE.md
+      STATEMENT: Per that finding, the control was widened to match the wider statements rather than the statements narrowed to match the control
+      still in the tree verbatim: True  (code/state_landing_control_2da3/COVERAGE.md)
+      present before the repair (6b1eacf): None   -> mg-7870 introduced it
+      it FORBIDS   : the wider statements still exceeding the control
+      control PERMITS: its own document — COVERAGE.md's 'Not covered, on purpose' section, five bullets, enumerates the ways the control does not match them
+      READING      : This is the one that is false on its own page and needs no mutation to show it.  S1 and S3 are universal; a bounded control cannot be widened to match a universal.  The two repairs mg-2216 offered were 'fix the control' and 'narrow the statements'; the control was widened (really: strengthened) but not to universality, and S1 and S3 were not narrowed at all.
+      VERDICT      : STATEMENT AND CONTROL DISAGREE
+
+NARROWINGS THE REPAIR DID ADD — recorded so the finding is not overstated
+--------------------------------------------------------------------------------------
+  N1  docs/state-history/README.md
+      "the goal is bounded, stated coverage, not total coverage"
+      present now: True; present at 6b1eacf: False  (added by mg-7870, in the correction block directly beneath the A1 block)
+  N2  code/state_landing_control_2da3/COVERAGE.md
+      "The goal is not a control that catches everything"
+      present now: True; present at 6b1eacf: False  (added by mg-7870, COVERAGE.md's opening line)
+
+  These are real and they matter: bounded coverage is now STATED, in two places,
+  and one of them sits directly beneath S2.  What they are not is a narrowing OF
+  S1, S2 or S3.  A general disclaimer added nearby does not strike an absolute
+  sentence that is still published as written — and S1 and S3 are not in either
+  of the two documents the disclaimers were added to.
+
+======================================================================================
+4 statements checked, 4 still disagree with the control, 0 narrowed.
+======================================================================================

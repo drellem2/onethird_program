@@ -1,0 +1,57 @@
+mg-babf — mg-2216's five B2 mutations, RE-IMPLEMENTED and re-run
+======================================================================================
+Every one of these exited 0 against the PRE-repair delta_control.py.
+mg-7870 claims the repair closes all five.  This is the independent check.
+
+certified row : line :135 (1-indexed), located by attempt id, not line number
+content cell  : 7876 characters stripped, 7878 raw, 8010 bytes stripped
+
+POSITIVE CONTROL — clean tree: delta_control.py exit 0   as expected
+
+M01  [single-character]  expect: catch
+      row :135 cell: 'every ridge in 1 or 2 facets' -> '1 or 3' (one character, a false statement about the pseudomanifold)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+
+M02  [length-preserving]  expect: catch
+      row :135 cell: 'the proof is sound' -> 'the proof is bogus' (five characters, the row's verdict on its own proof)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+
+M03  [whitespace-only]  expect: catch
+      row :135 cell: the ASCII spaces in '**The mathematics.**' -> U+00A0 (no visible character changes; the heading stops rendering)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+
+M05  [reordering]  expect: catch
+      row :135 cell: two adjacent sentences swapped (length AND whitespace-separated token multiset both preserved, asserted in code)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+
+M06  [bulk-but-quiet]  expect: catch
+      row :135 cell: the last 3,000 of 7,876 characters replaced by 'x', '**' count preserved (38% of the certified cell)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+
+======================================================================================
+RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 6fd6ac3bafb182d1 == 6fd6ac3bafb182d1
+======================================================================================
+SUMMARY — mg-2216's five B2 mutations against the REPAIRED instrument
+======================================================================================
+  id    class                 expect     exit  verdict
+  M01   single-character      catch      2     CAUGHT
+  M02   length-preserving     catch      2     CAUGHT
+  M03   whitespace-only       catch      2     CAUGHT
+  M05   reordering            catch      2     CAUGHT
+  M06   bulk-but-quiet        catch      2     CAUGHT
+
+  5 mutations: 5 of 5 expected-catch CAUGHT, 0 SILENT MISSES, 0 expected-tolerate (0 noisy)
+
+VERDICT: B2 CLOSES.  All five mutations that exited 0 against the pre-repair
+         instrument are now non-zero, reproduced by an implementation that
+         shares no code with mg-2216's battery or mg-7870's repair.

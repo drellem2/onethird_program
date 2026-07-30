@@ -1,0 +1,88 @@
+mg-babf — mg-7870's coverage statement, audited as a claim
+======================================================================================
+
+1. HOW MANY REGIONS ARE DIGESTED — the same number in every place that says so?
+-------------------------------------------------------------------------------
+  [TRUE    ] C1.1  COVERAGE.md's table heading and delta_control.py's CERTIFIED agree
+             measured: CERTIFIED has 9 entries; COVERAGE.md says 9
+  [TRUE    ] C1.2  the commit message's region count agrees with the code
+             measured: commit e924590 says 9; CERTIFIED has 9
+  [FALSE   ] C1.3  the README's own correction block: "the certified set is now **eight** regions"
+             measured: the README says eight (8); CERTIFIED has 9, COVERAGE.md says 9, the commit message says 9
+             the README sentence sits INSIDE readme.A1.7870, a DIGESTED region — so the figure is certified byte-for-byte and is still wrong
+
+2. THE TABLE IN COVERAGE.md AGAINST THE CODE — ids and character counts
+-----------------------------------------------------------------------
+  [TRUE    ] C2.1  COVERAGE.md's table lists exactly the ids in CERTIFIED, in order
+             measured: table ['cell.tree', 'cell.base', 'readme.F2', 'readme.F1', 'readme.B1', 'readme.B1.A3', 'readme.index', 'readme.A1', 'readme.A1.7870']
+             code  ['cell.tree', 'cell.base', 'readme.F2', 'readme.F1', 'readme.B1', 'readme.B1.A3', 'readme.index', 'readme.A1', 'readme.A1.7870']
+  [TRUE    ] C2.2  every character count in the table equals the code's constant
+             measured: 9 rows compared; 0 disagree
+
+3. THE DIGESTS THEMSELVES, RECOMPUTED BY THIS FILE'S OWN EXTRACTORS
+-------------------------------------------------------------------
+  [TRUE    ] C3.1  each certified sha256 is the sha256 of that region, recomputed independently
+             measured: 9 regions recomputed with my own parser and locators; 0 disagree
+
+4. THE NORMALISATION CLAIMS
+---------------------------
+  [TRUE    ] C4.1  COVERAGE.md: "On this material `.strip()` and `.strip(\" \\t\\r\\n\")` agree, so adopting the explicit rule moved no published number"
+             measured: compared on all 9 certified regions; 0 differ
+  [TRUE    ] C4.2  COVERAGE.md: "the cell is still 7,876 characters stripped / 7,878 raw"
+             measured: stripped 7876, raw 7878
+  [TRUE    ] C4.3  COVERAGE.md: "**U+00A0 is not whitespace to this rule**"
+             measured: N('\xa0x\xa0') = '\xa0x\xa0'  (str.strip() would give 'x')
+             behaviour under a mutation is measured separately, in mutations_babf.py B09
+
+5. 'header line included' AND 'markers sit outside the figures they certify'
+----------------------------------------------------------------------------
+  [TRUE    ] C5.1  COVERAGE.md: "Each README region is the **whole** blockquote or paragraph, **header line included**"
+             measured: 7 README regions checked; 0 do not start at their block head
+  [TRUE    ] C5.2  COVERAGE.md: "**Markers sit outside the figures they certify.**"
+             measured: 7 README markers checked against the figures in their own regions (comma-grouped numbers and standalone runs of 3+ digits; git hashes, `mg-` ids and `4d` excluded as identifiers, not figures); 0 markers key on a figure their region certifies
+             necessary condition, not sufficient: a marker could still key on a non-numeric claim its region certifies, and that is not mechanically decidable.  Stated as a limit of this check, not as a pass
+  [TRUE    ] C5.3  COVERAGE.md: "Regions are located by a content marker, never by line number"
+             measured: markers that are line numbers: 0; all 9 regions resolve through find_row / quote_block / paragraph, none through an index
+
+6. THE EXCLUSION LIST — is anything claimed as covered that is not?
+-------------------------------------------------------------------
+  [FALSE   ] C6.1  COVERAGE.md, "Not covered, on purpose": "**The rest of `STATE.md`'s ledger** — every row but `:135`."
+             measured: row :135 is 9028 raw characters in 3 fields [842, 304, 7878]; the digest covers the widest field only, 7878 of 9028 (87.3%). 1150 characters of the certified row are digested by nothing
+             the table row above it is precise ('row `mg-276d`'s content cell'); this sentence is the one that over-reaches, and it is the sentence a reader goes to for what is NOT covered.  Measured behaviour: mutations_babf.py B01/B02
+  [FALSE   ] C6.2  COVERAGE.md lists what is not covered: other rows, other README blocks, edge padding, whether a change is legitimate, other revisions
+             measured: the list does not mention a region's POSITION or CONTEXT.  A digest is a function of the block's bytes and of nothing else, so a certified block can be moved, fenced, commented out or preceded by a retraction with its digest intact
+             measured behaviour: mutations_babf.py B04/B05/B06/B07, all exit 0
+
+7. THE EVIDENCE TABLE
+---------------------
+  [TRUE    ] C7.1  COVERAGE.md: mg-2216's battery re-run gives "10 caught, **0 missed**, 4 tolerated by design, 0 noisy"
+             measured: out_battery_2216_rerun.txt's own summary line: 14 mutations: 10 caught, 0 MISSED, 4 tolerated by design, 0 noisy
+             that this file REPRODUCES is checked in reproduce.sh, not here
+  [TRUE    ] C7.2  COVERAGE.md: out_control.txt is "clean 0; NC1–NC3 exit 1; NC4–NC6 exit 2"
+             measured: exit codes found in out_control.txt per NC: NC1->[1], NC2->[1], NC3->[1], NC4->[2], NC5->[2], NC6->[2]
+  [TRUE    ] C7.3  COVERAGE.md: out_mutations.txt is "a **frozen record of the pre-repair instrument**"
+             measured: byte-identical to its state at 6b1eacf: True (6459 characters)
+
+8. WHAT THE COMMIT CERTIFIES vs WHAT IT DIGESTS
+-----------------------------------------------
+  [TRUE    ] C8.1  the docstring's own DIGESTED count agrees with CERTIFIED
+             measured: docstring says 9; CERTIFIED has 9
+  [FALSE   ] C8.2  the docstring's "WHAT IT CERTIFIES" names "STATE.md row :135" — the ROW
+             measured: present in the docstring: True; the row is 9028 characters and 7878 are digested
+             same defect as C6.1, in a second place.  The line it certifies is named as a whole and 12.7% of it is outside every digest
+
+9. DID THE REPAIR PRESERVE WHAT WAS ALREADY RIGHT?
+--------------------------------------------------
+  [TRUE    ] C9.1  the repair did not re-open b68db5d's or mg-2da3's existing README/STATE content
+             measured: numstat docs/state-history/README.md: +37 -0 (no deletions => pure insertion)
+  [TRUE    ] C9.2  the commit's SCOPE paragraph: "THE PINNED BATTERY IS BYTE-IDENTICAL"
+             measured: git diff 6b1eacf..e924590 -- code/state_audit_6a2f/ : EMPTY
+             that it still REPRODUCES out_audit.txt is checked in reproduce.sh
+
+======================================================================================
+21 claims checked: 17 TRUE, 4 FALSE, 0 UNTESTED
+  FALSE  C1.3  the README's own correction block: "the certified set is now **eight** regions"
+  FALSE  C6.1  COVERAGE.md, "Not covered, on purpose": "**The rest of `STATE.md`'s ledger** — every row but `:135`."
+  FALSE  C6.2  COVERAGE.md lists what is not covered: other rows, other README blocks, edge padding, whether a change is legitimate, other revisions
+  FALSE  C8.2  the docstring's "WHAT IT CERTIFIES" names "STATE.md row :135" — the ROW
+======================================================================================

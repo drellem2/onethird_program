@@ -1,0 +1,39 @@
+mg-babf — did mg-7870's repair preserve what was already right?
+======================================================================================
+
+P1. THE PINNED BATTERY
+----------------------
+  [HOLDS] P1.1  code/state_audit_6a2f/ is byte-identical across the repair
+           measured: git diff 6b1eacf..e924590 -- code/state_audit_6a2f/ : EMPTY
+  [HOLDS] P1.2  and byte-identical against main in this working tree
+           measured: EMPTY
+  [HOLDS] P1.3  it still reproduces out_audit.txt byte-identically
+           measured: exit 0; committed 96291 bytes, produced 96291 bytes; identical: True
+  [HOLDS] P1.4  the pinned battery is blind to a mutation of MINE, as it was to mg-bd41's gutting and mg-2216's M06
+           measured: with b68db5d's F1 correction block HTML-commented out of the README, the battery exits 0 and emits 96291 bytes, identical to the committed output: True
+           this HOLDS in the sense that the A1 finding is re-confirmed a third time from a third mutation; the battery is doing exactly what it was built to do and pinning is a feature there, which is why nothing here asks it to change
+
+P2. "NOTHING WAS LOST" IS NOT RE-OPENED
+--------------------------------------
+  [HOLDS] P2.1  the repair deletes no line of STATE.md or the state-history README
+           measured: 0 removed lines in the repair's diff over those two files
+  [HOLDS] P2.2  the repair touches only the control's own directory and the README
+           measured: files touched: ['code/state_landing_control_2da3/COVERAGE.md', 'code/state_landing_control_2da3/delta_control.py', 'code/state_landing_control_2da3/negative_control.py', 'code/state_landing_control_2da3/out_battery_2216_rerun.txt', 'code/state_landing_control_2da3/out_control.txt', 'code/state_landing_control_2da3/run_all.sh', 'docs/state-history/README.md']
+  [HOLDS] P2.3  the control-vs-content framing sentence is present and unaltered
+           measured: "...none of this touches 'nothing was lost', which STANDS" present: True; unchanged across the repair: True
+
+P3. THE THREE RECORD CORRECTIONS, RE-DERIVED FROM SOURCE
+--------------------------------------------------------
+  [HOLDS] P3.A3  the ancestry: "two commits before mg-34bf's parent" was off by one
+           measured: %p chain: 57f962f <- 97cb533 <- 60f4dac; 60f4dac is mg-34bf's parent's PARENT, not two before the parent
+  [HOLDS] P3.A2  the over-claim: mg-6a2f DID name the source, and the new part is new
+           measured: the phrase is in docs/OneThird-STATE-Restructure-IndependentAudit.md at :212 (mg-2216 published :212); db08b4c:STATE.md is 327 lines with 0 occurrences of mg-a3d4
+  [HOLDS] P3.A1  the blind certification: the pinned battery cannot see the tree
+           measured: re-established at P1.4 from a third independent mutation (identical output: True)
+           and mechanically: no script in code/state_audit_6a2f/ opens the working tree or resolves HEAD — checked next
+  [HOLDS] P3.A1b  the mechanical test Appendix A publishes: "does any script open the working tree or resolve HEAD?"
+           measured: 6 scripts in code/state_audit_6a2f/; 0 open STATE.md directly or mention HEAD
+
+======================================================================================
+11 preservation checks: 11 HOLD, 0 BROKEN
+======================================================================================
