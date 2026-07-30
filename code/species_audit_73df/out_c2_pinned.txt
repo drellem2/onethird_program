@@ -1,0 +1,93 @@
+==============================================================================
+C2a  the measuring routine does not SKIP -- so a 0 is an identity
+==============================================================================
+
+  If `five_columns` skipped an associativity test whenever mu(x, y)
+  left the collection, then a collection closed under nothing would
+  report 0 by having tested nothing.  It does not skip: the assoc,
+  coassoc and compat loops call mu and de unconditionally and compare
+  the two sides in the ambient.  Demonstrated by counting the tests
+  actually performed on the smallest sub-collection in the sweep.
+
+  associativity triples actually evaluated, per rule:
+    fewest : index % 7 == 3  ->  2346 triples
+    most   : index % 2 == 0  ->  8496 triples
+
+  NON-VACUOUS -- every 0 reported below is an identity holding on at least 2346
+  evaluated triples, not the absence of a test.
+
+==============================================================================
+C2b  24 sub-collections, chosen arithmetically: are the three pinned?
+==============================================================================
+
+  rule              size      assoc    coassoc     compat
+
+  index % 2 == 0    2200          0          0          0
+  index % 2 == 1    2199          0          0          0
+  index % 3 == 0    1467          0          0          0
+  index % 3 == 1    1466          0          0          0
+  index % 3 == 2    1466          0          0          0
+  index % 4 == 0    1100          0          0          0
+  index % 4 == 1    1100          0          0          0
+  index % 4 == 2    1100          0          0          0
+  index % 4 == 3    1099          0          0          0
+  index % 5 == 0     880          0          0          0
+  index % 5 == 1     880          0          0          0
+  index % 5 == 2     880          0          0          0
+  index % 5 == 3     880          0          0          0
+  index % 5 == 4     879          0          0          0
+  index % 6 == 0     734          0          0          0
+  index % 6 == 1     733          0          0          0
+  index % 6 == 2     733          0          0          0
+  index % 6 == 3     733          0          0          0
+  index % 6 == 4     733          0          0          0
+  index % 6 == 5     733          0          0          0
+  index % 7 == 0     629          0          0          0
+  index % 7 == 1     629          0          0          0
+  index % 7 == 2     629          0          0          0
+  index % 7 == 3     628          0          0          0
+
+  cells non-zero: 0 of 72
+  PINNED -- confirmed on 24 sub-collections chosen by an arithmetic rule
+
+==============================================================================
+C2c  THE SWEEP IS NOT VACUOUS -- the same 24 with a mutated product
+==============================================================================
+
+  Identical sweep, product replaced by rotate(concat).  If the sweep
+  above were measuring nothing, this one would also report 0.  It must
+  fire on every collection, and on the associativity column in
+  particular.
+
+  rule              size      assoc    coassoc     compat
+
+  index % 2 == 0    2200       5652          0       8116
+  index % 2 == 1    2199       6108          0      11768
+  index % 3 == 0    1467       3950          0       6606
+  index % 3 == 1    1466       3836          0       6472
+  index % 3 == 2    1466       3866          0       6698
+  index % 4 == 0    1100       2796          0       4114
+  index % 4 == 1    1100       3064          0       5922
+  index % 4 == 2    1100       2736          0       3918
+  index % 4 == 3    1099       2972          0       5732
+  index % 5 == 0     880       2384          0       4058
+  index % 5 == 1     880       2362          0       3972
+  index % 5 == 2     880       2242          0       3794
+  index % 5 == 3     880       2278          0       3962
+  index % 5 == 4     879       2278          0       3900
+  index % 6 == 0     734       1878          0       2644
+  index % 6 == 1     733       2000          0       3852
+  index % 6 == 2     733       1830          0       2804
+  index % 6 == 3     733       2000          0       3872
+  index % 6 == 4     733       1800          0       2584
+  index % 6 == 5     733       2000          0       3864
+  index % 7 == 0     629       1636          0       2874
+  index % 7 == 1     629       1660          0       2938
+  index % 7 == 2     629       1650          0       2842
+  index % 7 == 3     628       1634          0       2850
+
+  the mutated sweep fires on associativity for all 24 -- so the pinned result in C2b is a measurement
+
+==============================================================================
+C2 TOTAL BAD: 0
+==============================================================================

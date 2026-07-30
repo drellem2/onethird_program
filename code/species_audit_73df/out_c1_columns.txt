@@ -1,0 +1,140 @@
+==============================================================================
+C1a  the five columns, MY collections, the published operations fixed
+==============================================================================
+
+  collection                                on [4]
+      prod_closurecoprod_closure      assoc    coassoc     compat
+
+  K0  F (the baseline)                        4399
+      predicted           0          0          0          0          0
+      actual              0          0          0          0          0
+      verdict            ok         ok         ok         ok         ok
+      must reproduce mg-7d75's row from disjoint code
+
+  K1  ODD number of blocks                    2199
+      predicted           +          +          0          0          0
+      actual            626      14938          0          0          0
+      verdict            ok         ok         ok         ok         ok
+      odd + odd = even, so the repair's account of its own missed
+      prediction requires this column to fire
+
+  K2  posets with EVEN many relations         2223
+      predicted           0          +          0          0          0
+      actual              0       8880          0          0          0
+      verdict            ok         ok         ok         ok         ok
+      disjoint union ADDS relation counts so the product should be
+      closed; restriction drops relations and should not be
+
+  K3  first block a singleton                 2672
+      predicted           0          +          0          0          0
+      actual              0       3516          0          0          0
+      verdict            ok         ok         ok         ok         ok
+      concatenation keeps the left factor's first block; restriction
+      does not
+
+  K4  every third element                     1467
+      predicted           +          +          0          0          0
+      actual            307       7348          0          0          0
+      verdict            ok         ok         ok         ok         ok
+      a subset with no meaning; closed under nothing
+
+  K5  the full ambient P x Sigma             16425
+      predicted           0          0          0          0          0
+      actual              0          0          0          0          0
+      verdict            ok         ok         ok         ok         ok
+      the whole Hadamard product, so closed
+
+  K6  F-opposite (the wrong pairing)          4399
+      predicted           0          0          0          0          0
+      actual              0          0          0          0          0
+      verdict            ok         ok         ok         ok         ok
+      same size as F and semantically wrong, and still closed
+
+==============================================================================
+C1b  the five columns, MY operation mutations, the collection fixed at F
+==============================================================================
+
+  Collection held fixed at F, 4 399 basis elements on [4].
+
+  O1  product = LINKED union of posets        4399
+      predicted           0          0          0          0          +
+      actual              0          0          0          0       6110
+      verdict            ok         ok         ok         ok         ok
+      stays in the cone, is associative, keeps the coproduct:
+      compatibility alone
+
+  O2  coproduct non-zero when T is lower      4399
+      predicted           0          0          0          +          +
+      actual              0          0          0          0          0
+      verdict            ok         ok         ok       MISS       MISS
+      restrictions are still faces, so only the two axioms that read the
+      condition should move
+
+  O3  coproduct: right factor's poset opposed    4399
+      predicted           0          +          0          +          +
+      actual              0      13874          0     113076          0
+      verdict            ok         ok         ok         ok       MISS
+      the right restriction is no longer a face of its own cone
+
+  O4  product = reverse(concat)               4399
+      predicted           +          0          +          0          +
+      actual           9148          0      12192          0          0
+      verdict            ok         ok         ok         ok       MISS
+      leaves the cone and is not associative
+
+  O5  product = concat with factors swapped    4399
+      predicted           0          0          0          0          0
+      actual              0          0          0          0          0
+      verdict            ok         ok         ok         ok         ok
+      the opposite product of an associative one; mg-7d75's control
+      (iii) from disjoint code, and it should NOT fire
+
+==============================================================================
+C1c  THE PER-COLUMN VERDICT, from mutations this audit chose
+==============================================================================
+
+  column           fails on a COLLECTION?     fails on an OPERATION?    
+  prod_closure     YES                        YES                       
+  coprod_closure   YES                        YES                       
+  assoc            NO -- pinned at 0          YES                       
+  coassoc          NO -- pinned at 0          YES                       
+  compat           NO -- pinned at 0          YES                       
+
+  columns with NO demonstrated failure under MY mutations: 0 
+
+  This agrees with mg-6f61's R2c on every cell of the verdict table,
+  reached through mutations that share nothing with it.  The document's
+  section 5 reading -- TWO columns test our subspecies and THREE test
+  the ambient Hadamard product -- is CONFIRMED, and section 0 agreeing
+  with it is the repair going the right way.
+
+==============================================================================
+C1d  the two closure columns pass for the AMBIENT and for the WRONG pairing
+==============================================================================
+
+  full ambient P x Sigma (16 425 on [4]) : prod 0  coprod 0
+  F-opposite (4 399 on [4], wrong pairing): prod 0  coprod 0
+
+  CONFIRMED.  So the two columns that CAN fail return 0 for a collection that
+  is not ours and for one that is deliberately the wrong pairing, and
+  what they establish is CLOSURE and not IDENTIFICATION -- which is
+  what section 5 says and what section 0 now says.  This is the half of
+  the repair that most needed an independent check, because it is the
+  half that limits the document's own headline.
+
+==============================================================================
+C1e  MY MISSED PREDICTIONS
+==============================================================================
+
+  60 cells, every one predicted before the run.
+  cells missed: 4
+
+  A battery whose predictions all land is a battery whose predictions
+  were written after the run.  Misses are printed above in place and
+  are NOT folded into TOTAL BAD, for the same reason mg-6f61 gives:
+  a finding counted as a fault gets edited away.
+
+==============================================================================
+C1 PREDICTIONS MISSED: 4 of 60
+C1 TOTAL BAD: 0
+==============================================================================
