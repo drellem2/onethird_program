@@ -1,0 +1,61 @@
+==============================================================================
+A4  X4 -- YOUNG-FIBONACCI, AND THE NEW CLAIM THE REPAIR DERIVES
+==============================================================================
+
+words with rank <= 6: 33   (Fibonacci 1+1+2+3+5+8+13)
+
+[R6] EVERY INTERVAL [0,w], rank(w) <= 6
+  intervals: 33;  distributive: 28;  NOT distributive: 5
+  non-distributive words: [(2, 2, 1), (1, 2, 2, 1), (2, 1, 2, 1), (2, 2, 1, 1), (2, 2, 2)]
+  smallest non-distributive witness: w = 221  (rank 5)
+
+  ATTACKING '5 ARE NOT DISTRIBUTIVE' -- each one re-checked by exhibiting
+  the failing triple a, b, c with a^(bvc) != (a^b)v(a^c):
+    w=221    |interval|=11  failing triple (4, 5, 7)
+    w=1221   |interval|=12  failing triple (4, 5, 7)
+    w=2121   |interval|=13  failing triple (4, 5, 7)
+    w=2211   |interval|=15  failing triple (4, 5, 8)
+    w=222    |interval|=15  failing triple (4, 5, 8)
+
+  RECONSTRUCTION: each distributive interval as J(P) from its
+  join-irreducibles, rebuilt and compared as a lattice:
+    reconstructions: 28, bad: 0
+
+  THE YOUNG SIDE: all intervals [0,lam] with |lam| <= 6
+    30 intervals, non-distributive: 0
+
+[NEW CLAIM] 'Row 10 has the SAME index-set contact ... on 28 of 33'
+  The Young headline is not just 'the intervals are J(P)' -- it NAMES the
+  P: the skew cell posets.  So the comparable question for YF is which P
+  arise there.  Measured:
+    |P|=0: 1 distinct P arise from YF intervals; 1 of them are skew cell posets
+    |P|=1: 1 distinct P arise from YF intervals; 1 of them are skew cell posets
+    |P|=2: 1 distinct P arise from YF intervals; 1 of them are skew cell posets
+    |P|=3: 2 distinct P arise from YF intervals; 2 of them are skew cell posets
+    |P|=4: 3 distinct P arise from YF intervals; 3 of them are skew cell posets
+    |P|=5: 4 distinct P arise from YF intervals; 2 of them are skew cell posets
+    |P|=6: 5 distinct P arise from YF intervals; 2 of them are skew cell posets
+    total distinct P from YF intervals to rank 6: 17; skew cell posets among them: 12; NOT skew: 5
+    For Young's lattice the answer to the same question is: ALL of them,
+    and the class is CLOSED and NAMED (the skew cell posets).  For
+    Young-Fibonacci no class is named by anyone in this arc.
+
+[N3] 'NO DIFFERENTIAL POSET IS FINITE' -- the reason mg-41aa gives is
+  definitional (locally finite, infinitely many ranks).  A stronger one:
+  on a FINITE poset U and D are finite matrices, so tr(DU) = tr(UD) and
+  tr(DU - UD) = 0, while tr(r.I) = r.|P| > 0.  No finite non-empty poset
+  is r-differential for any r >= 1, whatever else it satisfies.
+  The trace argument is a PROOF, not a measurement: with U the cover
+  matrix and D = U^T, tr(DU) = tr(U^T U) = tr(U U^T) = tr(UD) for every
+  finite poset whatsoever.  Running it over examples would be a
+  restatement (the defect mg-3b51 flagged in this repo as R1d), so it
+  is booked here as an ARGUMENT and not as evidence.
+
+  What IS a measurement, and is reported as FORCED anyway: DU - UD
+  built as a full matrix on every poset to n <= 6, counting how many
+  satisfy DU - UD = I.  The answer cannot be anything but 0, by the
+  line above; it is here only as a check that the matrices are the
+  matrices the argument is about.
+  posets checked: 405;  satisfying DU - UD = I: 0;  max tr(DU - UD): 0
+
+SUMMARY a4_yf: intervals 33, distributive 28, non-distributive 5, witness 221; reconstructions bad 0; Young intervals 30 non-distributive 0; distinct P from YF 17 of which skew 12; posets to n<=6 with DU-UD=I: 0 of 405 (FORCED)

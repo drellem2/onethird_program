@@ -1,0 +1,30 @@
+==============================================================================
+A3  X2 -- THE GRID, AND WHAT IS STILL NEGATIVE AROUND IT
+==============================================================================
+
+[R3] THREE CONSTRUCTIONS COMPARED, p,q = 1..6
+  pairs: 36
+  grid !~ J(C_p + C_q):            0
+  grid !~ [(q),(q+p,q)]:           0   <-- the constructed claim
+  |[mu,lam]| != (p+1)(q+1):        0
+  cell poset of (q+p,q)/(q) !~ C_p + C_q:  0
+
+[N1] THE SURVIVING NEGATIVE -- 'C_p + C_q is a straight cell poset in 0 of N'
+  attacked by CONSTRUCTION: every lam of the right size is built and
+  compared, not just the ones a reason rules out.
+  pairs tested: 36;  C_p + C_q is a straight cell poset in 0 of them
+  (reason, independent of the measurement: D_lam contains the cell (1,1),
+   which is below every cell, so D_lam has a MINIMUM; C_p + C_q with
+   p,q >= 1 has two minimal elements.  The measurement agrees.)
+
+[N2] THE GRID IS NOT [0,lam] FOR ANY lam -- checked over every lam,
+  which is more than the struck sentence's reason established.
+  grid ~ [0,lam] for some lam: 0 of 25 pairs
+
+[N2'] ... AND YET IT IS AN INTERVAL [mu,lam].  Both halves at once:
+  p=1 q=1: |grid|=4  |[(1),(2,1)]|=4  isomorphic: True
+  p=2 q=3: |grid|=12  |[(3),(5,3)]|=12  isomorphic: True
+  p=3 q=3: |grid|=16  |[(3),(6,3)]|=16  isomorphic: True
+  p=5 q=5: |grid|=36  |[(5),(10,5)]|=36  isomorphic: True
+
+SUMMARY a3_grid: pairs 36; grid!~J(C+C) 0; grid!~[(q),(q+p,q)] 0; size wrong 0; cell-poset mismatch 0; C_p+C_q straight-hits 0; grid-is-[0,lam] hits 0

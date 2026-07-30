@@ -1,0 +1,51 @@
+==============================================================================
+A2  'EXACTLY THE SKEW CELL POSETS' -- BOTH DIRECTIONS, WITHOUT BIRKHOFF
+==============================================================================
+
+[R1a] THE SMALLEST WITNESS, ISOMORPHISM CONSTRUCTED ELEMENT BY ELEMENT
+  P = 2-antichain.  J(P) ideals: [[], [0], [1], [0, 1]]
+  [(1),(2,1)] = [(1, 0), (1, 1), (2, 0), (2, 1)]
+  phi:
+      []       -> (1, 0)
+      [0]      -> (2, 0)
+      [1]      -> (1, 1)
+      [0, 1]   -> (2, 1)
+  bijective: True   order-preserving and -reflecting on every pair: True
+  the 2-antichain is a straight cell poset D_lam: False
+
+[R1b] INTERVAL LATTICE CLASSES, and the box-growth control ON THE LATTICES
+  n=1  interval lattice classes: box n,n+1,n+2 -> 1,1,1  stable  (0.0s)
+  n=2  interval lattice classes: box n,n+1,n+2 -> 2,2,2  stable  (0.0s)
+  n=3  interval lattice classes: box n,n+1,n+2 -> 5,5,5  stable  (0.0s)
+  n=4  interval lattice classes: box n,n+1,n+2 -> 11,11,11  stable  (0.1s)
+  n=5  interval lattice classes: box n,n+1,n+2 -> 26,26,26  stable  (1.7s)
+  n=6  interval lattice classes: box n,n+1,n+2 -> 62,62,62  stable  (42.5s)
+  lattice-level box movements: 0
+
+[R1b-control] UNNORMALISED (mu, lambda) SWEEP -- no row/column trimming
+  every pair mu subset lambda with |lambda/mu| = n and lambda inside a
+  (n+2) x (n+2) box, with NO left-edge normalisation and NO empty-row ban.
+  n=1      30 raw (mu,lambda) pairs -> 1 classes; normalised gives 1; IDENTICAL (0.0s)
+  n=2     210 raw (mu,lambda) pairs -> 2 classes; normalised gives 2; IDENTICAL (0.0s)
+  n=3    1540 raw (mu,lambda) pairs -> 5 classes; normalised gives 5; IDENTICAL (0.1s)
+  n=4   12306 raw (mu,lambda) pairs -> 11 classes; normalised gives 11; IDENTICAL (3.0s)
+  n=5  102060 raw (mu,lambda) pairs -> 26 classes; normalised gives 26; IDENTICAL (85.6s)
+  unnormalised-sweep disagreements: 0
+
+[R1c] EVERY POSET TESTED AGAINST EVERY INTERVAL, n = 1..6
+  n=1  posets 1      J(P) IS an interval: 1     skew classes: 1     straight: 1    (0.0s)
+  n=2  posets 2      J(P) IS an interval: 2     skew classes: 2     straight: 1    (0.0s)
+  n=3  posets 5      J(P) IS an interval: 5     skew classes: 5     straight: 2    (0.0s)
+  n=4  posets 16     J(P) IS an interval: 11    skew classes: 11    straight: 3    (0.0s)
+  n=5  posets 63     J(P) IS an interval: 26    skew classes: 26    straight: 4    (0.1s)
+  n=6  posets 318    J(P) IS an interval: 62    skew classes: 62    straight: 6    (1.3s)
+
+  TOTALS to n<=6: 107 of 405 posets have J(P) an interval; af28's wording
+  admits 17 of them; 90 are interval posets that B2's old wording excluded.
+
+  DIRECTION 1 (skew => interval): failures 0
+  DIRECTION 2 (interval => skew): COUNTEREXAMPLES FOUND: 0
+
+  mg-41aa's published figures for n<=6: 107 interval posets of 405, 17 straight, 90 excluded
+
+SUMMARY a2_exactly: witness bad 0; lattice box movements 0; unnormalised-sweep disagreements 0; skew-not-interval 0; interval-not-skew 0; interval posets to n<=6 = 107 of 405 (straight 17)

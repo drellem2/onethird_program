@@ -1,0 +1,9 @@
+grep for a TEST (not a mention) of Bergeron-Li (3),(4),(5) in:
+  code/branching_af28/  code/branching_audit_6ad0/  code/branching_repair_41aa/
+../branching_repair_41aa/out_r3_rescope.txt:20:  projectivity of A_{m+n} over A_m (x) A_n, the idempotent condition,
+../branching_repair_41aa/out_r3_rescope.txt:21:  and the Mackey-type identity -- are untested by mg-af28, by
+../branching_repair_41aa/r3_rescope.py:150:    print("  projectivity of A_{m+n} over A_m (x) A_n, the idempotent condition,", file=OUT)
+../branching_repair_41aa/r3_rescope.py:151:    print("  and the Mackey-type identity -- are untested by mg-af28, by", file=OUT)
+
+Every hit above is a PRINT statement naming the conditions, not a test.
+mg-41aa's 'untested by anyone' holds inside this repo.
