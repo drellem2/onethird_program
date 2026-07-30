@@ -138,23 +138,35 @@ hypothesis, refuted by Daniel in one line. For **general** posets cycles do exis
 explicit n=9 witness, dropping the smallest known from 11 to 9; n=8 is **open**, not absent. No tension:
 transitivity is forced by the forbidden band `[1/3, 2/3]`, which a general poset does not satisfy.)*
 
-## Decision 2026-07-30 17:35 — the control lineage is CLOSED at five (pm-onethird; Daniel may OVERRIDE)
+## RETRACTED 2026-07-30 17:42 — I closed the control lineage on a false premise, and have reopened it
 
-Five controls were built over the same certified regions in one day, each closing its predecessor's gap and
-exposing a new layer: pinned-revision battery (blind at the *input*), substring control (blind at the *mutation
-set* — an auditor's 14 mutations, **8 silent**), content digest (**8 → 0**, verified by re-running the auditor's
-own battery), presentation record (**"the layer it claims is closed"**, 140 of 140 against two real GFM
-renderers). **That is a genuinely closed set of layers, independently confirmed.**
+**At 17:35 this roadmap said the control lineage was CLOSED at five, on the grounds that "the layer it claims is
+closed" and the residual was a single placement accident, adversarial-shaped, with no adversary. That was
+wrong, the ticket (mg-a05f) is withdrawn and shelved, and mayor's mg-bee1 supersedes it.**
 
-**The residual, recorded rather than fixed:** the presentation check catches mg-babf's B07 **by an accident of
-placement** — the same paragraph one line earlier exits 0. Going into `COVERAGE.md` as a known accepted gap
-(mg-a05f).
+**What the audit actually says.** I took "the layer it claims is closed" and the 140-of-140 figure from
+mg-218d's **commit subject** and did not read its body. The 140 of 140 covers **L5/L6 only**. The body:
 
-**Why we stop.** The evasion is *"move a paragraph exactly one line earlier"* — **adversarial-shaped, and we
-have no adversary.** These controls exist to catch accidental corruption of a correction record, and the digest
-plus presentation layers cover that comprehensively. Four consecutive iterations each closed their layer and
-moved the blind spot, so a sixth would predictably do the same: a smaller residual at constant cost, with no
-reason to expect a fixed point. **The value now lives in the stated boundary, not in more reach.**
+- **The certified property is FALSE AS STATED.** *"A mutation that changes what a reader sees must change a
+  digest"* is a **universal**; the mechanism is quantified **over a region's own section**.
+- **Ten of sixteen reader-visible mutations exit 0.** L0, L1 and L2 fire on **none of their six**.
+- One-line demonstration: the retraction as the first block **inside** the section exits 2; the same paragraph
+  one line earlier, as the last block of the **previous** section, exits 0 — **and a reader sees the same page
+  in both.**
+
+**Ten of sixteen is not an adversarial residual — those are ordinary reader-visible changes, and most of them
+pass.** The proportionality argument was sound reasoning about a state of the world that does not exist.
+
+**How it happened, recorded because it is this arc's own standing lesson landing on its author:** I acted on an
+author-written **commit subject** after spending the day establishing that headlines carry the strongest wording
+in a deliverable and are not audited by merging. A headline reading CLOSED and a body reading FALSE AS STATED
+are the same artifact.
+
+**What is happening instead:** mg-bee1 (dispatched, audit pre-filed alongside) fixes **the statement first** —
+the false universal appears in capitals in three places — with the warning that a document-global position
+re-baselines on every unrelated edit, so that trade must be named rather than taken quietly. **Fixing a false
+claim was never the decision I was entitled to stop; only building a sixth mechanism was.** That judgement is
+deferred to mg-bee1's evidence.
 
 ## Now (in flight)
 - **mg-2da3** — repair the blind certification in `b68db5d`. mg-bd41 gutted `STATE.md` **175,552 → 37,958
