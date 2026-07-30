@@ -1,0 +1,96 @@
+==============================================================================
+mg-e7bc G2 -- the deletion test, run by this audit, on this tree
+==============================================================================
+
+PREDICTIONS, registered before the runs:
+   tag   mutation                                                   artifact         exit
+   D1    delete gate 'shape' (BOTH returns)                         CHANGES          1
+   D2    delete gate 'diagonal'                                     CHANGES          0
+   D3    delete gate 'magnitude'                                    CHANGES          1
+   D4    delete gate 'parity' (the contradiction branch)            CHANGES          1
+   D5    stop counting signs_read                                   CHANGES          0
+   D6    swap the two forced gates' order                           CHANGES          0
+   D7    delete 'diagonal' from gate_violations                     CHANGES          0
+   D8    delete 'magnitude' from gate_violations                    CHANGES          0
+   D9    invert diagonal_moves (the routing)                        CHANGES          1
+   E1*   MINE: delete ONLY the FIRST `shape` return (m != len(B))   BYTE-IDENTICAL   0
+   E2*   MINE: delete ONLY the SECOND `shape` return (ragged rows)  CHANGES          1
+
+   (*) E1 and E2 are this audit's own and no list in the ticket names them.
+
+------------------------------------------------------------------------------
+BASELINE
+------------------------------------------------------------------------------
+  [HOLDS ] controls.py regenerates its committed artifact byte for byte and exits 0 -- 23680 bytes
+        23680 regenerated, 23680 committed, exit 0
+        WOULD DIFFER UNDER: any edit to controls.py, face_complex.py or posets.py that is not followed by regenerating controls_output.txt.  Without this line every 'CHANGED' below could be a stale committed file rather than a mutation
+  baseline row labels: 43 rows -- 41 PASS, 2 CANNOT FAIL, 0 FAIL
+
+------------------------------------------------------------------------------
+THE DELETION TEST -- BOTH DIRECTIONS, one line per mutation
+------------------------------------------------------------------------------
+   tag   mutation                                                     bytes          verdict  exit vs prediction
+   D1    delete gate 'shape' (BOTH returns)                           24879          CHANGED     1 MATCH
+   D2    delete gate 'diagonal'                                       23680          CHANGED     0 MATCH
+   D3    delete gate 'magnitude'                                      23530          CHANGED     1 MATCH
+   D4    delete gate 'parity' (the contradiction branch)              24767          CHANGED     1 MATCH
+   D5    stop counting signs_read                                     23677          CHANGED     0 MATCH
+   D6    swap the two forced gates' order                             23680          CHANGED     0 MATCH
+   D7    delete 'diagonal' from gate_violations                       23671          CHANGED     0 MATCH
+   D8    delete 'magnitude' from gate_violations                      23671          CHANGED     0 MATCH
+   D9    invert diagonal_moves (the routing)                          26464          CHANGED     1 MATCH
+   E1*   MINE: delete ONLY the FIRST `shape` return (m != len(B))     23680   BYTE-IDENTICAL     0 MATCH
+   E2*   MINE: delete ONLY the SECOND `shape` return (ragged rows)    24879          CHANGED     1 MATCH
+
+PREDICTION SCORE -- 11 of 11 matched.  Misses, kept as written:
+   none
+
+------------------------------------------------------------------------------
+PER GATE, BOTH DIRECTIONS -- deleted-and-changed, deleted-and-identical
+------------------------------------------------------------------------------
+  DELETED AND CHANGED   (9 of the 9 mg-d0e2 ran): D1, D2, D3, D4, D5, D6, D7, D8, D9
+  DELETED AND IDENTICAL (0 of the 9): none
+  [HOLDS ] THE DELETION TEST BITES ON 9 OF THE 9 mg-d0e2 RAN, measured by this audit's own mutations against a baseline it generated itself.  mg-d0e2 measured 7 of 9 against mg-5f9a
+        identical on: none
+        WOULD DIFFER UNDER: either constructed-pair row leaving controls.py, or its expected value being taken from `absorb_trace` instead of from `absorbable_bruteforce` -- G3 makes the second change and reports what happens to D1 and D4
+
+------------------------------------------------------------------------------
+THE TWO THAT MOVED NOTHING -- INSTRUMENTED, OR EXPLAINED?
+------------------------------------------------------------------------------
+The ticket allows two routes and forbids a third.  Instrumenting the
+branch means a scored row FAILS when it is deleted; writing an
+explanation instead means the artifact gains a sentence and no row
+moves.  Which happened is read off the rows, not off the commit.
+
+  [HOLDS ] D1 (delete gate 'shape' (BOTH returns)) -- which left the artifact BYTE-IDENTICAL under mg-d0e2 -- now CHANGES it (23680 -> 24879 bytes), exits 1, and EXACTLY ONE row fails: "instrument check: the predicate's `shape` branch, which NO (poset, mutat"
+        1 row(s) fail; 43 rows scored
+        WOULD DIFFER UNDER: the constructed pair for that branch no longer reaching it.  The route taken was INSTRUMENTATION -- a row that fails -- and not an explanation: an explanation would leave the row count and every label where they are, and this deletion moves one
+  [clear  ] D1 is still invisible to the deletion test
+  [HOLDS ] D4 (delete gate 'parity' (the contradiction branch)) -- which left the artifact BYTE-IDENTICAL under mg-d0e2 -- now CHANGES it (23680 -> 24767 bytes), exits 1, and EXACTLY ONE row fails: "instrument check: the predicate's `parity` branch, which NO (poset, muta"
+        1 row(s) fail; 43 rows scored
+        WOULD DIFFER UNDER: the constructed pair for that branch no longer reaching it.  The route taken was INSTRUMENTATION -- a row that fails -- and not an explanation: an explanation would leave the row count and every label where they are, and this deletion moves one
+  [clear  ] D4 is still invisible to the deletion test
+  [HOLDS ] and the artifact carries exactly 1 SCORED ROW for the `shape` branch -- it is a row, not a paragraph
+        WOULD DIFFER UNDER: the row being demoted to a `measured, not scored` bullet, which is where this repository puts sentences it does not want scored -- and which would make the branch invisible again while leaving the artifact looking fuller
+  [HOLDS ] and the artifact carries exactly 1 SCORED ROW for the `parity` branch -- it is a row, not a paragraph
+        WOULD DIFFER UNDER: the row being demoted to a `measured, not scored` bullet, which is where this repository puts sentences it does not want scored -- and which would make the branch invisible again while leaving the artifact looking fuller
+
+------------------------------------------------------------------------------
+FLOOR, NOT SCOPE -- THE `shape` GATE HAS TWO RETURNS AND ONE IS COVERED
+------------------------------------------------------------------------------
+mg-04a8 deletes both together and says in `d2_deletion.py`: "Both
+returns of the shape gate go together: they are one gate, and
+deleting one of two would leave the other answering."  That is an
+assertion about which return the constructed pairs reach.  Here it
+is measured by deleting each alone.
+
+   FIRST  return  `if m != len(B)`            -> BYTE-IDENTICAL, exit 0
+   SECOND return  `if len(A[i]) != len(B[i])` -> CHANGED, exit 1
+  [HOLDS ] the SECOND `shape` return is covered: deleting it alone changes the artifact and exits 1
+        WOULD DIFFER UNDER: the ragged constructed pair being dropped or made non-ragged -- it is the only input in the whole battery whose rows are of unequal length
+  [FINDING] THE FIRST `shape` RETURN IS STILL INVISIBLE.  Deleting `if m != len(B): return Trace(False, "shape", 0)` ALONE leaves the artifact BYTE-IDENTICAL at 23680 bytes, every row green, exit 0 -- which is exactly the state mg-d0e2 found the whole `shape` gate in.  Cause, measured: the pair built for it is 2x2 against 3x3, and with the first return gone it falls into the loop where len(A[0]) = 2 != 3 = len(B[0]) fires the SECOND return, returning False at gate 'shape' identically.  So the row's clause 'the 2 built to be REJECTED return at the `shape` gate on 2 of 2' is satisfied by ONE of the two returns doing all the work.  mg-04a8 ASSERTED this bundling was safe ("deleting one of two would leave the other answering") and that sentence is true -- but it is the reason the branch is uncovered, not a reason it need not be: a pair with len(A) != len(B) and NO ragged row (e.g. 2x2 against 3x3 with B square) would separate them
+
+==============================================================================
+7 claim(s) scored; 0 BROKEN.  1 FINDING(s).
+  FINDING: THE FIRST `shape` RETURN IS STILL INVISIBLE.  Deleting `if m != len(B): return Trace(False, "shape", 0)` ALONE leaves the artifact BYTE-IDENTICAL at 23680 bytes, every row green, exit 0 -- which is exactly the state mg-d0e2 found the whole `shape` gate in.  Cause, measured: the pair built for it is 2x2 against 3x3, and with the first return gone it falls into the loop where len(A[0]) = 2 != 3 = len(B[0]) fires the SECOND return, returning False at gate 'shape' identically.  So the row's clause 'the 2 built to be REJECTED return at the `shape` gate on 2 of 2' is satisfied by ONE of the two returns doing all the work.  mg-04a8 ASSERTED this bundling was safe ("deleting one of two would leave the other answering") and that sentence is true -- but it is the reason the branch is uncovered, not a reason it need not be: a pair with len(A) != len(B) and NO ragged row (e.g. 2x2 against 3x3 with B square) would separate them
+==============================================================================
