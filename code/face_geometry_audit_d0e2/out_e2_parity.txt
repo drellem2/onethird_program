@@ -1,0 +1,35 @@
+== E2: is the parity gate reachable anywhere the battery looks? ==
+
+POPULATION: the 86 posets up to isomorphism with 2 <= n <= 5 -- the same population
+the battery's baseline row names, re-derived here from posets.py.
+
+WHERE THE PREDICATE RETURNS, per population the battery feeds it
+  NC4 biting (poset, mutation) pairs             n= 297  shape   0  diagonal 237  magnitude  60  parity   0
+                                                          reached the parity system 0, REJECTED THERE 0, returned absorbable 0
+  [OK    ] the NC4 biting population is 297 (poset, mutation) pairs -- the artifact's '297'
+  the |L(P)| <= 8 brute-force agreement row      n= 306  shape   0  diagonal 153  magnitude  45  parity 108
+                                                          reached the parity system 108, REJECTED THERE 0, returned absorbable 108
+  [OK    ] the brute-force row's population is 306 (poset, mutation) pairs -- the artifact's '306'
+  NC3 facet-parity corruption, biting posets     n=  82  shape   0  diagonal   0  magnitude   0  parity  82
+                                                          reached the parity system 82, REJECTED THERE 0, returned absorbable 82
+  the two instrument-check rows' pairs           n= 172  shape   0  diagonal  86  magnitude   0  parity  86
+                                                          reached the parity system 86, REJECTED THERE 0, returned absorbable 86
+
+  [OK    ] ACROSS ALL FOUR POPULATIONS THE BATTERY FEEDS THE PREDICATE (297 + 306 + 82 + 172 = 857 pairs), the number decided NOT ABSORBABLE at the parity gate is 0.  That is why deleting the parity gate changes not one byte: the branch is unreached, not mis-described
+
+WHAT THE BRUTE-FORCE ROW CAN AND CANNOT SEE
+  It is the only row that checks the union-find against an independent
+  decision.  Over its own 306 pairs it exercises the predicate's forced
+  gates and its ACCEPTING parity path, and never its rejecting one.
+  A predicate that had lost the ability to reject a contradictory sign
+  system would agree with brute force on all 306 and the row would pass.
+  [OK    ] a contradictory 3x3 sign system IS decided at the parity gate by the shipped predicate: gate='parity' absorbable=False signs_read=3 -- so the branch is live code, reachable in principle, and simply not reached by anything this battery constructs
+  [OK    ] and brute force over all 2^3 sign vectors agrees it is not absorbable, so this pair WOULD separate a broken parity rule -- no pair of its kind is in the 306 the row tests
+
+HOW WELL DOES THE PRINTED REASON AGREE WITH THE PREDICATE?
+  the SHIPPED label vs the predicate ... 297 of 297 biting pairs
+  mg-da45's deciding_gate vs the same ... 240 of 297 biting pairs
+  [OK    ] the shipped label agrees with the predicate on 297 of the 297 NC4 biting pairs -- necessarily, because it IS the predicate's return value and not a second procedure.  That is the whole content of the repair
+  [OK    ] and the thing it replaced agrees on 240 of 297, DIFFERING on 57 -- mg-1c80's '57 of 297', re-measured here and not quoted.  (Note for the record: the audit ticket phrases this as a relabelling 'agreeing on 57'; the measurement is that it DISAGREES on 57 and agrees on 240.  mg-5f9a's commit and landing doc both state it the right way round)
+
+E2 claims broken: 0

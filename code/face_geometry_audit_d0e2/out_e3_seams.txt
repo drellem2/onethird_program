@@ -1,0 +1,50 @@
+== E3: seam-check of a twice-corrected artifact ==
+
+THE ARTIFACT'S OWN CONTROL, AND ITS THRESHOLD
+  the row reports: [PASS] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
+  [OK    ] THRESHOLD: the row scans the 62 lines strictly above itself and says 'lines scanned: 62' -- the extent is printed and it is correct
+  [OK    ] THRESHOLD: it says '40 row names among them'; the artifact carries 41 scored rows, of which this row is one, so 40 is right
+  [OK    ] THRESHOLD: the banner literal it refuses to find is 17 characters, which is the length it prints
+
+THE REPAIR'S 'EVERY SCORED ROW KEEPS ITS LABEL' CHECK -- DEMONSTRATED, NOT ARGUED
+  d2_deletion.py:167-177 extracts rows by SUBSTRING and compares
+  `a.split(' ')[1]` between the baseline and the mutant.  Row lines in
+  this artifact are indented, so that token is the empty string for
+  every one of them.  Run the check on an artifact where EVERY row has
+  been flipped to [FAIL]:
+      -> '43 rows, 0 label change(s)', check HOLDS = True
+  [FINDING] the check REPORTS 43 rows and 0 label changes, and HOLDS, on an artifact in which all 41 scored rows read [FAIL].  The label half of the claim 'every scored row keeps its label and its condition' is VACUOUS -- it compares the empty string with the empty string 43 times
+  [OK    ] every one of the 43 lines it compares yields the token ''
+  What survives: the length comparison, which does catch a row appearing
+  or vanishing -- and that is what actually fired for the magnitude
+  deletion (68 -> 66 lines).  The CONCLUSION 'AFTER-1 and AFTER-3 change
+  no decision' is TRUE -- E1 re-derives it with a real label comparison
+  and gets 0 changes -- but this check is not what established it.
+
+THE POPULATION BEHIND '43 SCORED ROWS'
+  [FINDING] counted by substring the artifact has 43 such lines; counted as rows (line-initial marker) it has 41.  '43 rows' is published in the commit message, twice in the landing doc and twice in out_d2_deletion.txt
+      not a row: * the absorbability predicate -- which after mg-8a12 scores ONE row (I4) and is stated as a theorem for 
+      not a row: * row scoring, and who owns it: every row above is vacuous on the sub-population named in it, exactly as
+  [OK    ] the 2 over-counted lines are both 'measured, not scored' bullets that MENTION [CANNOT FAIL] in their prose -- and the artifact says in terms that lines in that block 'are measurements, not rows'
+  [OK    ] the rest of the same sentence is right: 2 rows carry [CANNOT FAIL], which is what the doc and the artifact's own summary say
+
+STALE REFERENCE INSIDE THE REPAIR'S OWN CENTRAL DOCSTRING
+  [OK    ] `controls.deciding_gate` does not exist: mg-5f9a deleted it outright and d1_trace.py asserts its absence in the AST ('controls.py defines NO gate procedure of its own')
+  [FINDING] ...and yet `absorb_trace`'s own docstring -- the predicate this whole repair is about -- still says "the label is produced here and `controls.deciding_gate` is a call to this function, not a second implementation of it".  It describes a design that was NOT shipped: the name has no referent, and the repair's own d1_trace.py is what proves it
+
+CROSS-SITE AGREEMENT -- the trace table, stated in three places
+  [OK    ] the artifact prints I1 = 15 diagonal + 57 magnitude + 0 parity
+  [OK    ] the landing doc's table prints the same 15/57/0 for I1
+  [OK    ] the doc's ALL row totals 237 diagonal + 60 magnitude + 0 parity, which E2 re-derived independently over the same 297 pairs
+  [OK    ] mg-1c80's 57-of-297 disagreement is reproduced, not quoted
+
+EARLIER ITEMS' ARTIFACTS -- did anything retreat?
+  [OK    ] SUBSTANCE, n = 8: mg-1c80's antichain sweep (46232 words, n = 2..8) regenerates BYTE-IDENTICALLY against the repaired tree -- 1973 bytes, exit 0.  Nothing about the n = 8 confirmation was weakened
+  [OK    ] mg-da45's landing verifier regenerates BYTE-IDENTICALLY -- 6001 bytes, exit 0, 25 claims scored, 0 BROKEN -- and `verify_landing.py` itself carries no mg-5f9a edit (last touched by f024985, mg-da45's own commit)
+  [OK    ] its bottom line is '25 claim(s) scored; 0 BROKEN.'
+  [OK    ] DISCLOSED AND ACCURATE: that verifier's closing prose still reads 'the file now MEASURES which gate settled it', the framing mg-1c80 refuted -- mg-5f9a's commit says in terms that it left it as another item's artifact rather than editing it, and that is what it did
+
+E3 claims broken: 0   findings about the subject: 3
+  FINDING: the check REPORTS 43 rows and 0 label changes, and HOLDS, on an artifact in which all 41 scored rows read [FAIL]
+  FINDING: counted by substring the artifact has 43 such lines; counted as rows (line-initial marker) it has 41
+  FINDING: 
