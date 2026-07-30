@@ -1,0 +1,49 @@
+==========================================================================
+T4  QUOTATIONS, checked verbatim against the pdftotext extraction
+==========================================================================
+
+  OV-branching           OK     The same definition of the branching graph applies to any chain
+  OV-branching           OK     of finite-dimensional semisimple algebras
+  OV-branching           OK     If the multiplicities of all restrictions are equal 0 or 1, then
+  OV-canonical           OK     If the branching is simple, the decomposition
+  OV-canonical           OK     into the sum of irreducible G(n − 1)-modules is canonical.
+  OV-canonical           OK     Such chains are increasing paths from
+  OV-wedderburn          OK     Recall the following fundamental isomorphism:
+  OV-wedderburn          OK     Proposition 1.1. The algebra GZ(n) is the algebra of all operato
+  OV-prop14              OK     Remark 1.3. For an arbitrary inductive family of semisimple alge
+  OV-prop14              OK     (1) The restriction of any finite-dimensional irreducible comple
+  OV-prop14              OK     (2) The centralizer Z(M, N ) is commutative.
+  TL-prop41              OK     Then, we have an exact sequence of TLn−1 -modules,
+  TL-cor46               OK     Corollary 4.6. When q is not a root of unity, TLn is a semisimpl
+  TL-wedderburn          OK     Theorem B.1 (Wedderburn). Let A be a complex, finite-dimensional
+  TL-wedderburn          OK     Wedderburn’s theorem does not hold when semisimplicity is relaxe
+  MSS-thm418             OK     Theorem 4.18. Let B be a connected left regular band with suppor
+  MSS-thm418             OK     is unipotent lower triangular with respect to any linear extensi
+  MS-quasihereditary     OK     The algebras of finite (von Neumann) regular monoids provide nat
+  MS-quasihereditary     OK     Recall that a k-algebra is split basic if all its irreducible re
+
+  NEGATIVE CONTROLS --- each is one word away from a quotation above
+  and each must be rejected:
+  OV-prop14              REJECTED   Remark 1.3. For an arbitrary inductive family of algebras, t
+  OV-branching           REJECTED   If the multiplicities of all restrictions are equal 0 or 1, 
+  MSS-thm418             REJECTED   is unipotent upper triangular with respect to any linear ext
+  OV-canonical           REJECTED   into the sum of irreducible G(n − 1)-modules is unique.
+  TL-cor46               REJECTED   Corollary 4.6. When q is a root of unity, TLn is a semisimpl
+
+  Windows loaded: 9.  Sizes (characters): {'MS-quasihereditary': 1987, 'MSS-thm418': 1133, 'OV-branching': 1517, 'OV-canonical': 1302, 'OV-prop14': 1501, 'OV-wedderburn': 1606, 'TL-cor46': 1519, 'TL-prop41': 861, 'TL-wedderburn': 2072}
+
+  NOT CHECKED HERE, and flagged in the document instead:
+   * Graham-Lehrer, Cellular algebras, Invent. Math. 123 (1996) --- the
+     statement that a cellular algebra has a SYMMETRIC Cartan matrix is
+     taken from a SECONDARY source (the Wikipedia article on cellular
+     algebras, which states it without proof) and the original was NOT
+     read.  It is the one load-bearing citation here that is not from a
+     PDF I have on disk.
+   * Goodman-de la Harpe-Jones, Coxeter Graphs and Towers of Algebras
+     (MSRI 14, 1989), Chapter 2 --- located, NOT read; it is not
+     openly available and nothing here depends on it.
+   * Putcha, J. Algebra 205 (1998) 53-76 --- located, NOT read.  It is
+     quoted at second hand THROUGH Margolis-Steinberg, whose sentence
+     naming it is checked above.
+
+TOTAL BAD: 0
