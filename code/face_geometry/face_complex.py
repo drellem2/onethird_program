@@ -258,6 +258,30 @@ def le_to_facet(w):
     return tuple(chain)
 
 
+def le_to_facet_offbyone(w):
+    """A DELIBERATELY MIS-INDEXED facet enumeration.
+
+    Exists only so that NEGATIVE CONTROL 4 (mg-2789) can corrupt the map
+    L(P) -> facets of F(P); the probe never calls it.
+
+    The correct rule (`le_to_facet`) takes the prefixes w[:1], ..., w[:n-1].
+    This one takes the prefixes of w[1:] instead:
+        {w[1]}, {w[1],w[2]}, ..., {w[1],...,w[n-1]},
+    the classic off-by-one on the same loop.  It is still injective on words
+    and still returns a strictly increasing chain of n-1 sets, so nothing
+    downstream complains -- but the sets are in general NOT order ideals of P,
+    and the pattern of which facets share a ridge changes.  The resulting
+    complex is therefore a DIFFERENT incidence structure, not a relabelled
+    copy of the right one.
+    """
+    chain = []
+    mask = 0
+    for t in range(1, len(w)):
+        mask |= 1 << w[t]
+        chain.append(mask)
+    return tuple(chain)
+
+
 def facet_to_le(facet, n):
     """Inverse of le_to_facet."""
     w = []
@@ -337,7 +361,11 @@ def down_laplacian_from_boundary(M, nrows, ncols, allowed_rows=None):
 # The three objects the sketch's claims compare
 # --------------------------------------------------------------------------
 
-def top_laplacians(P, sign_mode="true"):
+INCIDENCE_MODES = ("true", "facet_offbyone", "ridge_facets",
+                   "split_free_as_interior", "ridge_drop", "facet_swap01")
+
+
+def top_laplacians(P, sign_mode="true", incidence_mode="true"):
     """Top absolute and top relative Hodge Laplacians of F(P), plus bookkeeping.
 
     The top faces of F(P) are the facets = linear extensions (n-1 vertices,
@@ -353,11 +381,46 @@ def top_laplacians(P, sign_mode="true"):
     NEGATIVE CONTROL 3 (the construction-side control, mg-e0ce F2).  The probe
     always runs with the default "true".
 
+    `incidence_mode` exists only for NEGATIVE CONTROL 4 (mg-2789).  It corrupts
+    the INCIDENCE STRUCTURE rather than the signs -- the sites are named in
+    controls.py -- and the probe always runs with the default "true".
+
+      "true"                   the construction as defined.
+      "facet_offbyone"         facets built by `le_to_facet_offbyone`: the map
+                               L(P) -> facets is mis-indexed, so the ridge
+                               sharing pattern is a different complex.
+      "ridge_facets"           one interior ridge's facet list is mis-recorded:
+                               its second incidence is re-targeted onto a facet
+                               it does not meet.  Row weight and signs are
+                               untouched, so the free/interior split below is
+                               untouched: the only thing wrong is WHICH facets
+                               that ridge joins.
+      "split_free_as_interior" the boundary matrix is exactly right, but one
+                               FREE ridge is counted as interior, i.e. the
+                               boundary subcomplex dF(P) is taken one ridge too
+                               small when forming the relative complex.
+      "ridge_drop"             one interior ridge is missing from the complex
+                               altogether (an incomplete ridge enumeration).
+      "facet_swap01"           facets 0 and 1 exchanged.  A REJECTED CANDIDATE,
+                               kept because the reason it was rejected is the
+                               point: exchanging two columns conjugates L^rel
+                               by a (signed) permutation matrix, so it is
+                               isospectral -- a relabelling of the facet set,
+                               i.e. a gauge.  NEGATIVE CONTROL 4 measures that
+                               and does not score it as one of its rows.
+
     Returns a dict.
     """
     n = P.n
     les = linear_extensions(P)
-    facets = [le_to_facet(w) for w in les]
+    if incidence_mode == "facet_offbyone":
+        facets = [le_to_facet_offbyone(w) for w in les]
+    elif incidence_mode in INCIDENCE_MODES:
+        facets = [le_to_facet(w) for w in les]
+    else:
+        raise ValueError("unknown incidence_mode %r" % (incidence_mode,))
+    if incidence_mode == "facet_swap01" and len(facets) >= 2:
+        facets[0], facets[1] = facets[1], facets[0]
     fidx = {f: i for i, f in enumerate(facets)}
 
     # ridges = (n-3)-faces that lie in some facet == all (n-2)-subsets of facets
@@ -373,10 +436,36 @@ def top_laplacians(P, sign_mode="true"):
     for r, row in M.items():
         ridge_facets[r] = sorted(row.keys())
 
+    mutated_ridge = None
+    if incidence_mode == "ridge_facets":
+        for r in range(nr):
+            if len(ridge_facets[r]) != 2:
+                continue
+            j1, j2 = ridge_facets[r]
+            j3 = next((j for j in range(nc) if j not in (j1, j2)), None)
+            if j3 is None:          # fewer than 3 facets: mutation undefined
+                break
+            M[r][j3] = M[r].pop(j2)
+            ridge_facets[r] = sorted(M[r].keys())
+            mutated_ridge = r
+            break
+    elif incidence_mode == "ridge_drop":
+        for r in range(nr):
+            if len(ridge_facets[r]) == 2:
+                del M[r]
+                ridge_facets[r] = []
+                mutated_ridge = r
+                break
+
     interior_rows = {r for r in range(nr) if len(ridge_facets[r]) == 2}
     free_rows = {r for r in range(nr) if len(ridge_facets[r]) == 1}
-    assert interior_rows | free_rows == set(range(nr)), \
-        "a ridge lies in 0 or >=3 facets"
+    multi_rows = {r for r in range(nr) if len(ridge_facets[r]) >= 3}
+    if incidence_mode == "true":
+        assert interior_rows | free_rows == set(range(nr)), \
+            "a ridge lies in 0 or >=3 facets"
+    if incidence_mode == "split_free_as_interior" and free_rows:
+        mutated_ridge = min(free_rows)
+        interior_rows = interior_rows | {mutated_ridge}
 
     L_abs = down_laplacian_from_boundary(M, nr, nc)
     L_rel = down_laplacian_from_boundary(M, nr, nc, allowed_rows=interior_rows)
@@ -393,6 +482,9 @@ def top_laplacians(P, sign_mode="true"):
         "L_abs": L_abs,
         "L_rel": L_rel,
         "ridge_facets": ridge_facets,
+        "incidence_mode": incidence_mode,
+        "n_multi_ridges": len(multi_rows),
+        "mutated_ridge": mutated_ridge,
     }
 
 
@@ -557,6 +649,56 @@ def rank_exact(M, nrows, ncols):
     return rank
 
 
+def det_shift_mod_p(A, shift, p=(1 << 31) - 1):
+    """det(A - shift.I) mod p, by Gaussian elimination over F_p."""
+    m = len(A)
+    B = [[(A[i][j] - (shift if i == j else 0)) % p for j in range(m)]
+         for i in range(m)]
+    det = 1
+    for c in range(m):
+        piv = next((r for r in range(c, m) if B[r][c]), None)
+        if piv is None:
+            return 0
+        if piv != c:
+            B[c], B[piv] = B[piv], B[c]
+            det = -det
+        det = det * B[c][c] % p
+        inv = pow(B[c][c], p - 2, p)
+        for r in range(c + 1, m):
+            f = B[r][c] * inv % p
+            if f:
+                Bc, Br = B[c], B[r]
+                for k in range(c, m):
+                    Br[k] = (Br[k] - f * Bc[k]) % p
+    return det % p
+
+
+def not_isospectral(A, B, shifts=(3, 5, 7, 11, 13)):
+    """True iff A and B are PROVABLY not isospectral.  ONE-SIDED: False means
+    "no invariant checked here separated them", never "they are isospectral".
+
+    Both matrices must be symmetric integer matrices (L^rel and its twist are).
+    Checked, cheapest first: the trace (sum of the eigenvalues), the sum of the
+    squares of the entries (= trace of the square = sum of the squared
+    eigenvalues), and finally det(. - k.I) mod a prime for a few k, which are
+    values of the characteristic polynomial.  Any of these differing over Z
+    forces the characteristic polynomials to differ; differing residues force
+    differing integers, so a difference found mod p is a proof.
+
+    Used by NEGATIVE CONTROL 4: a corruption whose spectrum provably moves is
+    not a similarity transform of the true matrix at all -- not a diagonal sign
+    conjugation, not a relabelling of the facets, not anything.
+    """
+    if trace(A) != trace(B):
+        return True
+    if frobenius2(A) != frobenius2(B):
+        return True
+    for k in shifts:
+        if det_shift_mod_p(A, k) != det_shift_mod_p(B, k):
+            return True
+    return False
+
+
 def reduced_betti(faces, use_exact=False):
     """Reduced Betti numbers over Q of the simplicial complex given by
     `faces` (dict d -> list of d-faces, including d = -1 for the empty face).
@@ -593,3 +735,65 @@ def mat_sub(A, B):
 
 def is_diagonal(A):
     return all(A[i][j] == 0 for i in range(len(A)) for j in range(len(A)) if i != j)
+
+
+def trace(A):
+    return sum(A[i][i] for i in range(len(A)))
+
+
+def frobenius2(A):
+    """sum of squares of the entries = trace(A^2) for symmetric A = sum of the
+    squares of the eigenvalues."""
+    return sum(x * x for row in A for x in row)
+
+
+def absorbable_by_diagonal_twist(A, B):
+    """Is there a diagonal sign matrix S = diag(s), s_i in {+1,-1}, with
+    S.A.S == B ?  An exact decision procedure over the whole family, not a
+    search over a few candidates.
+
+    THIS IS THE QUESTION A NEGATIVE CONTROL MUST ANSWER ABOUT ITSELF (mg-5630):
+    the orientation twist E = diag(sgn w) is a member of this family, so is
+    NEGATIVE CONTROL 2's M3 twist ("-1 on one facet, +1 elsewhere"), and so is
+    the diag((-1)^j) that NEGATIVE CONTROL 3's facet-parity corruption turns
+    out to equal.  If this returns True for a corruption, the corruption is a
+    re-orientation the battery already varies -- a sign gauge, not a
+    construction error.
+
+    Method: s_i^2 = 1 pins every diagonal entry, |s_i s_j| = 1 pins every
+    absolute value, and each nonzero off-diagonal entry forces the product
+    s_i s_j.  What remains is a parity system, solved by union-find.
+    """
+    m = len(A)
+    if m != len(B):
+        return False
+    for i in range(m):
+        if len(A[i]) != len(B[i]) or A[i][i] != B[i][i]:
+            return False
+        for j in range(m):
+            if abs(A[i][j]) != abs(B[i][j]):
+                return False
+    parent = list(range(m))
+    rel = [0] * m               # rel[x] = parity of s_x against parent[x]
+
+    def find(x):
+        p = 0
+        while parent[x] != x:
+            p ^= rel[x]
+            x = parent[x]
+        return x, p
+
+    for i in range(m):
+        for j in range(i + 1, m):
+            if A[i][j] == 0:
+                continue
+            need = 0 if B[i][j] == A[i][j] else 1        # s_i s_j = (-1)^need
+            ri, pi = find(i)
+            rj, pj = find(j)
+            if ri == rj:
+                if pi ^ pj != need:
+                    return False
+            else:
+                parent[ri] = rj
+                rel[ri] = pi ^ pj ^ need
+    return True
