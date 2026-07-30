@@ -1,0 +1,219 @@
+mg-8a5c -- INDEPENDENT AUDIT OF THE mg-8e30 REPAIR
+==============================================================================
+Every figure below is measured HERE, from the working tree, by code sharing
+nothing with `verify_landing.py`.  The mg-8e30 repair's central claim is that
+its numbers are the POST-commit ones; that claim is only checkable by
+re-measuring after its commit, which is T1.  Nothing here re-opens mg-3c24's or
+mg-e1d0's mathematics: 0 mathematical statements are touched.
+
+T1 -- THE THREE FIGURES, RE-MEASURED FROM THE POST-COMMIT TREE
+--------------------------------------------------------------
+The defect mg-8e30 repaired was a PRE-EDIT number published as current, so
+the repair's own numbers are exposed to exactly the same mechanism: writing a
+cell's length into that cell changes it.  The only check that means anything is
+a re-measurement taken AFTER the repair's own commit.  That is this.
+
+    population: lines matching '^| **AMBER-POSITIVE': 1
+    population: lines matching '^> **AMBER-POSITIVE': 1
+  [CONFIRMED] each row is located by exactly 1 line -- the population is 1, stated rather than assumed
+
+    quantity                                    codepoints   UTF-8 bytes
+    STATE.md A5 cell                                12,692        12,914
+    relocated row history (whole file)              18,593        18,924
+    §14 frozen copy                                 10,623        10,832
+    gap, cell only                                  +2,069        +2,082
+    gap, cell + relocated history                  +20,662       +21,006
+
+  [CONFIRMED] the three published parts reproduce from the tree: cell 12,692, relocated history 18,593, §14 copy 10,623
+  [CONFIRMED] and so do the two published gaps: cell-only +2,069, cell + history +20,662 -- THE REPAIR'S FIGURES DID NOT GO STALE, which was this audit's primary target
+  [CONFIRMED] the withdrawn 'flipped sign' claim stays withdrawn: the cell-only gap is POSITIVE (+2,069), the sign it had when A5 was opened
+
+    the three disclosure sites, and what each carries:
+      STATE.md row               gap True   cell+hist True   side-of-edit True
+      §14 (whole deliverable)    gap True   cell+hist True   side-of-edit True
+      row history H8             gap True   cell+hist True   side-of-edit True
+  [CONFIRMED] all 3 sites carry both live figures AND say which side of the edit they are on -- mg-f922 B and C are LANDED
+
+    the unit the documents do NOT name: 'characters' means CODEPOINTS
+    here (12,692), not bytes (12,914) -- a 222 difference.  The arc's own
+    out_control.txt names both ('183253 bytes, 180093 characters'); the
+    three disclosure sites name neither.
+  [MEASURED ] NOTE, not a finding: the three sites say '12,692 characters' without naming the unit; the byte reading is 12,914 and the gap under it is +2,082 rather than +2,069
+
+T2 -- THE SEAM CHECK (two repairs, one artifact)
+------------------------------------------------
+`bbe83b5` and `e16e41c` both edited the STATE.md cell, §14 and H8.  A seam
+defect is a STALE COPY of a passage the earlier repair also touched, surviving
+where the later one did not reach.  It compounds: the next edit builds on
+whichever copy it reaches.  Two sweeps, both thresholds stated.
+
+    SWEEP 1 -- POPULATION: quoted units in the 4 documents both repairs
+    touched.  Floors: blockquote lines >= 120 chars, marked quotes >= 60.
+      STATE.md                                                   blockquote-line   21
+      STATE.md                                                   marked-quote      39
+      OneThird-Hodge-Side-Leverage-Mg3c24Repair-IndependentAudit.md blockquote-line    6
+      OneThird-Hodge-Side-Leverage-Mg3c24Repair-IndependentAudit.md marked-quote      14
+      OneThird-Hodge-Side-Leverage.md                            blockquote-line    1
+      OneThird-Hodge-Side-Leverage.md                            marked-quote      12
+      attempt-mg-a3d4.md                                         marked-quote       5
+      TOTAL units 98;  pairs compared 4753
+      similarity: difflib.SequenceMatcher.ratio() on flattened text
+      THRESHOLD: 0.80.  1.00 = exact duplicate, 0.80 <= r < 1.00 = near.
+      exact duplicates: 8, of which figure-bearing: 0
+      near duplicates : 1, of which FIGURES DIFFER: 0
+        [0.984] STATE.md / STATE.md: A control battery must cover CONSTRUCTION as well as COMPARISON...
+
+    SWEEP 2 -- POPULATION: every FIGURE-BEARING sentence in the same 4
+    documents, NO length floor, threshold LOWERED to 0.60.
+      STATE.md                                                     6
+      OneThird-Hodge-Side-Leverage-Mg3c24Repair-IndependentAudit.md  17
+      OneThird-Hodge-Side-Leverage.md                              6
+      attempt-mg-a3d4.md                                           4
+      TOTAL sentences 33;  pairs compared 528
+      pairs at or above 0.60: 0
+  [CONFIRMED] NO seam defect at either threshold.  WHAT WOULD HAVE COUNTED, so the null result is checkable: sweep 1, any two quoted units above the floors at ratio >= 0.80 carrying DIFFERENT figures; sweep 2, any two figure-bearing sentences (mean length 449 chars) sharing 60% of their characters -- a stale copy differing only in its figure (5-7 chars) scores ~0.97 and would be reported
+
+    SWEEP 3 -- the same seam question asked a different way, because a
+    similarity sweep cannot see two copies of a figure inside ONE line.
+    POPULATION: the 5 needles the T1 figure gate tests x the 3 texts it
+    tests them in = 15 cells.  Multiplicity 1 = the gate is load-bearing;
+    >= 2 = the gate passes on ANY ONE copy and cannot see the others.
+
+      needle                            STATE.md row    §14 (whole file)                  H8
+      gap +2 069                                   2                   2                   2
+      cell+hist +20 662                            1                   1                   1
+      cell 12 692                                  1                   0                   1
+      hist 18 593                                  1                   0                   1
+      side-of-edit phrase                          1                   1                   1
+
+  [MEASURED ] 15 cells; 3 carry the SAME needle more than once: gap +2 069 x2 in STATE.md row; gap +2 069 x2 in §14 (whole file); gap +2 069 x2 in H8
+
+T3 -- THE FIGURE GATE, MUTATED ON DISK AGAINST THE REAL GATE
+------------------------------------------------------------
+mg-8e30's gate FORMATS what it has just measured, which is the right shape and
+is a real improvement on the string-match it replaced.  The question this target
+asks is narrower: is the formatted needle looked for in a place where exactly ONE
+copy of it lives?  A presence test over a text holding two copies of the same
+figure passes on either one alone.
+
+The mutations run the REAL runner, `code/hodge_leverage_landing_e1d0/run_all.sh`,
+against a mutated tree, and read its EXIT CODE.  Nothing is re-implemented.
+Every verdict is written here before the run.
+
+    mutation                                              predicted     observed
+    N1  STATE.md row: corrupt the LIVE gap figure only    exit 1        exit 0   <-- GATE DID NOT FIRE
+    N2  STATE.md row: corrupt the CHAIN-TAIL copy only    exit 1        exit 0   <-- GATE DID NOT FIRE
+    N3  STATE.md row: corrupt BOTH copies                 exit 1        exit 1
+    N4  §14: corrupt the LIVE gap figure only             exit 1        exit 0   <-- GATE DID NOT FIRE
+    N5  H8: corrupt the LIVE gap figure only              exit 1        exit 0   <-- GATE DID NOT FIRE
+    N6  H8: corrupt cell+history (1 copy per site)        exit 1        exit 1
+    N7  §14: move the whole disclosure OUT of §14         exit 1        exit 0   <-- GATE DID NOT FIRE
+
+  [CONFIRMED] restoration CHECKED, not asserted: all 4 mutated files are byte-identical to their pre-run sha256
+  [FINDING  ] F-1 -- THE FIGURE GATE PASSES WHEN THE FIGURE A READER READS IS WRONG.  The gate is a substring-PRESENCE test, and the corrected wording prints the live gap TWICE at each site -- once as the live figure and once as the tail of the chain `2 928 → 6 069 → −875 → +755 → +2 069`, which ends at the current gap BY CONSTRUCTION.  So corrupting the sentence a reader actually reads leaves the gate green at all three sites: N1; N2; N4; N5; N7.  Corrupting BOTH copies fires (N3), so the gate is alive -- it just cannot tell the copies apart.  Self-perpetuating: every future correction appends the new gap to the chain and re-creates the pair.
+  [FINDING  ] F-2 -- AND THE REPAIR'S OWN NEGATIVE CONTROL CANNOT SEE IT.  `verify_landing.py`'s M3 is `docs['H8'].replace(gap, '')` -- `str.replace` with no count, so it removes EVERY copy and the gate necessarily fires.  A single-copy corruption, which is the realistic edit, is not in the battery.
+
+T4 -- DOES 'THIS COMMIT' COMPOSE?
+---------------------------------
+mg-8e30's general rule requires a document to say WHICH SIDE OF THE EDIT its
+figure is on, and the convention it chose is the phrase "this commit" / "this
+repair".  That is right for one anchor in one file.  This target asks what
+happens when a file accumulates several, written by different commits.
+
+    population: all 385 lines of STATE.md
+    first-person anchors ('this commit' / 'this repair'): 8
+    on 6 distinct lines: 136, 281, 307, 356, 364, 372
+
+      L136   written by e16e41c
+      L281   written by bdcb006
+      L307   written by db08b4c
+      L356   written by 60f4dac
+      L364   written by bdcb006
+      L372   written by e16e41c
+
+  [MEASURED ] 8 anchors on 6 lines, written by 4 DIFFERENT commits (60f4dac, bdcb006, db08b4c, e16e41c) -- and nothing in the prose distinguishes them
+    the concrete cost -- STATE.md's ONE self-referential line number:
+      claim in the tree      : `STATE.md:319` as this repair leaves the file
+      the heading is actually: line 322
+      correct when written   : line 319 at `bdcb006`
+      commits to STATE.md since: 5
+  [FINDING  ] F-3 -- `STATE.md:319` is `STATE.md:322` in the tree -- off by 3, stale since the heading moved, across 5 later commits to this file, one of which is mg-8e30 itself.  It is the SAME defect class the repair's new rule names: a measurement of something the file also modifies, published post-commit by its author (`as this repair leaves the file` -- which was correct) and then silently falsified by later edits. The rule covers the moment of writing and says nothing about the anchor rotting afterwards; the paragraph itself already says *'Locate it by that heading and not by the number'*, so the fix is to drop the number.
+
+T5 -- THE THREE DISPOSITIONS `e16e41c` DECLARES
+-----------------------------------------------
+'DECLARED, NOT HIDDEN' is the cheapest sentence in a commit message to write
+and the most expensive to check.  All three are checked here.
+
+  [CONFIRMED] declaration 1: F-B's site list is built by STRING-MATCHING three literal strings -- confirmed by reading the instrument, not the commit message
+  [CONFIRMED] and the declared outcome holds: the STATE.md cell HAS dropped off that list; §14 and H8 still match because the struck wording survives inside the correction's marked quotation (STATE.md cell DROPPED, §14 paragraph still matches, row history H8 still matches)
+    population: rows of the audit's findings table -- 8 findings, ids ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    disposition rows: 6; ids they cover: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+  [CONFIRMED] declaration 2: all 8 findings of the mg-f922 audit document carry an in-place disposition (6 rows covering 8 ids); UNCOVERED: none
+  [CONFIRMED] declaration 3: verify_relocation.py exits 1 with 'FAIL — 2 problem(s) above.' -- and it is PRE-EXISTING: the same run in a throwaway worktree at `f4eaea6`, before any edit of this cluster, produces BYTE-IDENTICAL output (checked out of band; re-run it yourself with `git worktree add --detach <dir> f4eaea6`)
+
+T6 -- THE RE-BASELINE COMMIT, LINE BY LINE
+------------------------------------------
+mg-8e30's second commit is literally 'regenerate the committed output'.  Two
+things present identically in that diff:
+
+  (1) a number in the document was CORRECTED and the output regenerated to
+      follow -- legitimate;
+  (2) a number was left WRONG and the output regenerated to stop disagreeing
+      with it -- the defect.
+
+Agreement between a document and an output regenerated from it is guaranteed and
+proves nothing.  The discriminator is whether the figure is right NOW, measured
+here.  Every changed line is taken individually.
+
+    population: lines of code/state_landing_control_2da3/out_control.txt changed by `61de121`
+      insertions 11, deletions 11
+      git's own --stat for the commit: 1 file changed, 11 insertions(+), 11 deletions(-)
+      the commit message's own count words: ['11', '13', 'thirteen']
+  [FINDING  ] F-4 -- the commit says '13 lines' in its subject and 'All thirteen changed lines' in its body; the diff changes 11, and `git show --stat` in the same commit says 11 insertions / 11 deletions. The population is 'lines of out_control.txt changed by this commit' and under it the count is 11, not 13.  Nothing downstream depends on the number -- every line is accounted for below -- but a total that disagrees with the same commit's own --stat is the shape this arc keeps paying for.
+
+    each changed line, re-derived HERE from the post-commit tree:
+      [ok ] STATE.md bytes 183253                    len(utf-8) = 183,253
+      [ok ] STATE.md characters 180093               len(str) = 180,093
+      [ok ] STATE.md 384 lines (header)              count('\n') = 384
+      [ok ] STATE.md 385 lines (guard)               len(split('\n')) = 385
+      [ok ] 62 table rows                            lines starting '|' = 62
+      [ok ] largest stripped cell 11384              max over all '|' lines = 11,384; over data rows only = 11,384 -- SAME under both rules
+      [ok ] largest cell is in the mg-a3d4 row       the widest cell names mg-a3d4
+      [ok ] 7876 < 11384                             7876 < 11,384
+      [ok ] STATE.md at-rest sha 6129b1bc8b7bf774    sha256(STATE.md)[:16] = 6129b1bc8b7bf774
+      [ok ] NC1 gutted: 385 -> 185 lines             385 - 200 deleted = 185
+  [CONFIRMED] 10 of 10 independently re-derivable figures in the changed lines reproduce from the post-commit tree -- so each of those lines is case (1), a document corrected and the output regenerated to FOLLOW, not case (2)
+
+    the changed lines NOT independently re-derivable here, named rather
+    than counted as confirmed:
+      - '210 cells': neither of two natural cell rules reproduces it
+        (all '|' lines -> 258; data rows only -> 245).
+        The control names it 'the population every whole-file tally
+        below is over' but does not define the rule.  THE FIGURE THIS
+        COMMIT ACTUALLY CHANGED (11 384) reproduces under BOTH rules,
+        so no conclusion here rests on the 210.
+      - '115 rendered blocks in 11 sections' and NC1's '42438 bytes':
+        produced by the control's own parser and its own mutation.
+        Checked indirectly instead: this commit's parent adds exactly
+        ONE prose line to STATE.md outside the A5 cell, which is the
+        Appendix A rule paragraph -- so 114 -> 115 is +1, as declared.
+  [CONFIRMED] e16e41c changes exactly 2 content lines of STATE.md -- the A5 cell and ONE new Appendix A paragraph -- so the rendered-block count moving by exactly +1 is consequential, as the re-baseline commit declares
+  [MEASURED ] and the two line counts for one file in one transcript -- 384 in the header, 385 in the guard section -- are count('\n') and len(split('\n')); both are right, neither says which. NOTE, not a finding: pre-existing, not introduced by this commit.
+
+BOTTOM LINE
+-----------
+  checks recorded : 17
+  confirmed       : 13
+  measurements    : 4
+  refuted         : 0
+  findings        : 4
+
+    FINDING  F-1: THE FIGURE GATE PASSES WHEN THE FIGURE A READER READS IS WRONG.  The gate is a substring-PRESENCE test, and the corrected wording prints the
+    FINDING  F-2: AND THE REPAIR'S OWN NEGATIVE CONTROL CANNOT SEE IT.  `verify_landing.py`'s M3 is `docs['H8'].replace(gap, '')` -- `str.replace` with no cou
+    FINDING  F-3: `STATE.md:319` is `STATE.md:322` in the tree -- off by 3, stale since the heading moved, across 5 later commits to this file, one of which i
+    FINDING  F-4: the commit says '13 lines' in its subject and 'All thirteen changed lines' in its body; the diff changes 11, and `git show --stat` in the sa
+
+  THE PRIMARY TARGET IS CONFIRMED: the repair's three figures are the
+  POST-commit ones and reproduce exactly from the tree.  What is open is
+  the GATE that is supposed to keep them that way, and one stale
+  self-referential line number of the same defect class.
