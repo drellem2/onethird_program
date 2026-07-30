@@ -1,8 +1,17 @@
 ==========================================================================
 T1a  dim TL_n = sum_p (dim V_{n,p})^2  --- the PATH-PAIR count
 ==========================================================================
-A basis indexed by pairs of paths with a common endpoint exists iff
-dim A = sum over the top-level vertices of (number of paths)^2.
+CORRECTED HEADING (mg-13b2, on mg-2060's X2).  This block used to say
+that a basis indexed by pairs of paths with a common endpoint exists
+IFF dim A = sum over the top-level vertices of (number of paths)^2.
+The 'only if' direction is right.  THE 'if' DIRECTION IS FALSE, and the
+counterexample is on this script's own T1c table.  What is measured
+here is the count identity and nothing more; T1c2 refutes the converse
+at every parameter where it can be refuted.
+
+A basis of MATRIX UNITS indexed by pairs of paths with a common
+endpoint exists ONLY IF dim A = sum over the top-level vertices of
+(number of paths)^2.
 
   n dim TL_n    Catalan cell-module dims (dim V_{n,p})
   1        1          1  [1]   sum of squares = 1
@@ -82,25 +91,90 @@ not do.
 
 Graham-Lehrer: the irreducibles are the non-zero L(n,p) = V_{n,p}/rad<,>.
 
-  (i) THE VERTEX SET --- number of irreducibles at each level
+  (i) THE VERTEX SET --- the vertices, and NOT their number
 
-  beta   n=1  n=2  n=3  n=4  n=5  n=6
-  3        1    2    2    3    3    4
-  2        1    2    2    3    3    4
-  1        1    2    2    3    3    4
-  0        1    1    2    2    3    3
+  REPORTED AS A SET (mg-13b2, on mg-a218's X1).  A vertex of this graph
+  is an IRREDUCIBLE MODULE, so the datum the hypothesis is about is the
+  SET of them.  The break this whole block repairs was that equality of
+  ONE STATISTIC was taken for identity of the structure -- and a count
+  is one statistic.  A count column is therefore NOT printed beside
+  this one: two different vertex sets can carry the same cardinality,
+  and they do, at 10 of the 36 cells compared below.
+
+  Canonical form of a vertex: the pair (p, dim L(n,p)).  Two vertex sets
+  are EQUAL iff these lists are equal.
+
+  beta = 3
+     n=1  [0:1]
+     n=2  [0:1,1:1]
+     n=3  [0:1,1:2]
+     n=4  [0:1,1:3,2:2]
+     n=5  [0:1,1:4,2:5]
+     n=6  [0:1,1:5,2:9,3:5]
+  beta = 2
+     n=1  [0:1]
+     n=2  [0:1,1:1]
+     n=3  [0:1,1:2]
+     n=4  [0:1,1:3,2:2]
+     n=5  [0:1,1:4,2:5]
+     n=6  [0:1,1:5,2:9,3:5]
+  beta = 1
+     n=1  [0:1]
+     n=2  [0:1,1:1]
+     n=3  [0:1,1:1]
+     n=4  [0:1,1:3,2:1]
+     n=5  [0:1,1:4,2:1]
+     n=6  [0:1,1:4,2:9,3:1]
+  beta = 0
+     n=1  [0:1]
+     n=2  [0:1]
+     n=3  [0:1,1:2]
+     n=4  [0:1,1:2]
+     n=5  [0:1,1:4,2:5]
+     n=6  [0:1,1:4,2:5]
 
   The number of CELL modules at level n is [1, 2, 2, 3, 3, 4] --- parameter-free.
-  THE VERTEX SETS DIFFER.  At beta = 0 there are fewer irreducibles
-  at every even level, so the graphs at beta = 3 and beta = 0 do
-  not even have the same number of vertices.
-    n=2 beta=0: vertices p=[0]   vs beta=3: p=[0, 1]
-    n=4 beta=0: vertices p=[0, 1]   vs beta=3: p=[0, 1, 2]
-    n=6 beta=0: vertices p=[0, 1, 2]   vs beta=3: p=[0, 1, 2, 3]
+
+  THE VERTEX SETS, COMPARED PAIRWISE.  Population: the 36 cells --- 6
+  ordered pairs of the 4 parameters x 6 levels.
+
+    cells where the COUNT agrees and the SET does not: 10 of 36
+      beta=3 vs beta=1 at n=3: both have 2 vertices, [0:1,1:2] vs [0:1,1:1]
+      beta=3 vs beta=1 at n=4: both have 3 vertices, [0:1,1:3,2:2] vs [0:1,1:3,2:1]
+      beta=3 vs beta=1 at n=5: both have 3 vertices, [0:1,1:4,2:5] vs [0:1,1:4,2:1]
+      beta=3 vs beta=1 at n=6: both have 4 vertices, [0:1,1:5,2:9,3:5] vs [0:1,1:4,2:9,3:1]
+      beta=2 vs beta=1 at n=3: both have 2 vertices, [0:1,1:2] vs [0:1,1:1]
+      beta=2 vs beta=1 at n=4: both have 3 vertices, [0:1,1:3,2:2] vs [0:1,1:3,2:1]
+      beta=2 vs beta=1 at n=5: both have 3 vertices, [0:1,1:4,2:5] vs [0:1,1:4,2:1]
+      beta=2 vs beta=1 at n=6: both have 4 vertices, [0:1,1:5,2:9,3:5] vs [0:1,1:4,2:9,3:1]
+      beta=1 vs beta=0 at n=3: both have 2 vertices, [0:1,1:1] vs [0:1,1:2]
+      beta=1 vs beta=0 at n=5: both have 3 vertices, [0:1,1:4,2:1] vs [0:1,1:4,2:5]
+
+  THE VERTEX SETS DIFFER, and at TWO parameters, not one:
+    beta = 1 differs from beta = 3 at 4 of the 6 levels (n = 3, 4, 5, 6); the COUNT differs at 0 of them
+      n=3  [0:1,1:1]   vs beta=3: [0:1,1:2]
+      n=4  [0:1,1:3,2:1]   vs beta=3: [0:1,1:3,2:2]
+      n=5  [0:1,1:4,2:1]   vs beta=3: [0:1,1:4,2:5]
+      n=6  [0:1,1:4,2:9,3:1]   vs beta=3: [0:1,1:5,2:9,3:5]
+    beta = 0 differs from beta = 3 at 3 of the 6 levels (n = 2, 4, 6); the COUNT differs at 3 of them
+      n=2  [0:1]   vs beta=3: [0:1,1:1]
+      n=4  [0:1,1:2]   vs beta=3: [0:1,1:3,2:2]
+      n=6  [0:1,1:4,2:5]   vs beta=3: [0:1,1:5,2:9,3:5]
+    -- so at beta = 1 a COUNT column would have printed the beta = 3
+       row unchanged at every level while the graph was different at
+       four of them.  That is the failure mode of the withdrawn
+       claim, in the column that reports it.
 
   cross-check tying this to T1c: sum over the vertices of (dim L)^2
   must be the dimension of the semisimple quotient, computed there by
   two other routes.
+
+  THE COLUMN AS SECTION 0 OF THE DELIVERED DOCUMENT PRINTS IT, dimensions
+  only (the labels are an unbroken run from 0, checked above):
+    beta = 3 :  [1] [1,1] [1,2] [1,3,2] [1,4,5] [1,5,9,5]
+    beta = 2 :  [1] [1,1] [1,2] [1,3,2] [1,4,5] [1,5,9,5]
+    beta = 1 :  [1] [1,1] [1,1] [1,3,1] [1,4,1] [1,4,9,1]
+    beta = 0 :  [1] [1] [1,2] [1,2] [1,4,5] [1,4,5]
 
   (ii) THE EDGES --- [L(n,p) restricted to TL_{n-1} : L(n-1,q)]
 
@@ -236,6 +310,67 @@ route 2: Graham-Lehrer's criterion for a cellular algebra --- the
    TL_n(3) is semisimple for every n             reproduced
 
 ==========================================================================
+T1c2  THE 'iff' OF T1a IS FALSE, MEASURED  (mg-13b2, on mg-2060's X2)
+==========================================================================
+mg-2060's X2: T1a asserted that the path-pair basis exists IFF the
+count identity holds.  The converse is refuted here rather than in
+prose, and it is refuted at every (n, beta) where it can be.
+
+A basis of matrix units indexed by pairs of paths is exactly an
+isomorphism A = sum_lambda End(V_lambda), and by Wedderburn -- quoted
+in the delivered document, in both directions -- that holds iff A is
+SEMISIMPLE.  No new derivation is introduced here; the criterion is the
+theorem the document already quotes.  So wherever the count identity
+holds and rad(A) is non-zero, the 'if' direction is false at that pair.
+
+  n   beta    dim A sum (#paths)^2    dim rad      count identity?
+  2      3        2              2          0                  yes
+  2      2        2              2          0                  yes
+  2      1        2              2          0                  yes
+  2      0        2              2          1                  yes
+  3      3        5              5          0                  yes
+  3      2        5              5          0                  yes
+  3      1        5              5          3                  yes
+  3      0        5              5          0                  yes
+  4      3       14             14          0                  yes
+  4      2       14             14          0                  yes
+  4      1       14             14          3                  yes
+  4      0       14             14          9                  yes
+  5      3       42             42          0                  yes
+  5      2       42             42          0                  yes
+  5      1       42             42         24                  yes
+  5      0       42             42          0                  yes
+  6      3      132            132          0                  yes
+  6      2      132            132          0                  yes
+  6      1      132            132         33                  yes
+  6      0      132            132         90                  yes
+
+  THE COUNT IDENTITY HOLDS AT ALL 20 (n, beta) PAIRS.  It is
+  parameter-free: the link states are defined without reference to
+  beta, so it CANNOT distinguish the semisimple parameters from the
+  others, and an 'iff' resting on it is false wherever the two part.
+  They part at 7 of the 20 pairs:
+    TL_2(0): dim 2 = sum (#paths)^2 = 2, and rad has dimension 1 -- so it is NOT semisimple and has NO such basis
+    TL_3(1): dim 5 = sum (#paths)^2 = 5, and rad has dimension 3 -- so it is NOT semisimple and has NO such basis
+    TL_4(1): dim 14 = sum (#paths)^2 = 14, and rad has dimension 3 -- so it is NOT semisimple and has NO such basis
+    TL_4(0): dim 14 = sum (#paths)^2 = 14, and rad has dimension 9 -- so it is NOT semisimple and has NO such basis
+    TL_5(1): dim 42 = sum (#paths)^2 = 42, and rad has dimension 24 -- so it is NOT semisimple and has NO such basis
+    TL_6(1): dim 132 = sum (#paths)^2 = 132, and rad has dimension 33 -- so it is NOT semisimple and has NO such basis
+    TL_6(0): dim 132 = sum (#paths)^2 = 132, and rad has dimension 90 -- so it is NOT semisimple and has NO such basis
+
+  THE SMALLEST IS TL_2(0) = k[e]/(e^2), which is mg-2060's own
+  counterexample: dim 2, path-pair count 1^2 + 1^2 = 2, radical of
+  dimension 1.  It is on T1c's table above and always was.
+
+  What is TRUE, and is the statement the document did not make: a
+  CELLULAR algebra has a cellular basis indexed by pairs of paths,
+  multiplying with lower-cell terms, and it degenerates to matrix units
+  exactly when every cell form is non-degenerate -- exactly when the
+  algebra is semisimple.  The lower-cell terms are what 'the basis
+  survives' elided.  Nothing else in this instrument depended on the
+  'iff': T1a's own numbers are the count identity, unchanged.
+
+==========================================================================
 T1d  THE VERDICT --- WITHDRAWN AND REPLACED  (mg-e8b8, from mg-2060)
 ==========================================================================
 WHAT THIS BLOCK USED TO SAY, and it was wrong:
@@ -249,7 +384,10 @@ The invariant was never measured at beta != 3 under the definition this
 instrument quotes; the path-pair count was, and equality of that one
 statistic was taken for identity of the structure.  T1b2 measures the
 branching graph itself, at every parameter.  It is not the same graph:
-the vertex set differs at beta = 0 and multiplicities reach 2 at
+the vertex SET differs at beta = 1 and at beta = 0 -- and at beta = 1
+it differs while the NUMBER of vertices agrees with beta = 3 at every
+level, which is why T1b2 (i) reports the set and no count column sits
+beside it (mg-13b2, on mg-a218) -- and multiplicities reach 2 at
 beta = 1 and beta = 0.  THE SEPARATING EXAMPLE IS WITHDRAWN.
 
 What is still true, and is measured here:
@@ -288,5 +426,14 @@ What is still true, and is measured here:
   What survives without semisimplicity is the COUNT, not the
   DECOMPOSITION: dim TL_n = sum_p (dim V_{n,p})^2 holds at every beta
   (T1a); the direct sum of endomorphism algebras does not.
+
+  MARKED IN PLACE (mg-13b2).  These two sentences used to read '(T1a),
+  so the pairs-of-paths BASIS exists throughout; the direct sum does
+  not.'  That was mg-2060's X2 and mg-e8b8 corrected it HERE while
+  booking X2 as untouched -- the correction was right and the
+  disclosure was not.  X2's remaining sites -- T1a's 'iff', corrected
+  above and refuted in T1c2, and a FOURTH site in section 1 of the
+  delivered document that no list named -- are closed here, so X2 is
+  closed at all four: two at 2e66d03 unmarked, two at mg-13b2.
 
 TOTAL BAD: 0

@@ -3,8 +3,13 @@
 **Work item:** mg-db09. **Date:** 2026-07-30. **Audited:** mg-2060
 (`docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md`). **Repaired:**
 mg-e8b8, 2026-07-30, and the repair is a **withdrawal** — see the banner below.
+**Audited again:** mg-a218
+(`docs/OneThird-Bratteli-Path-Algebras-Mge8b8Repair-IndependentAudit.md`);
+**repaired:** mg-13b2, 2026-07-30 — the vertex column now reports the **set**,
+and the disposition labels are reconciled with the diff and **checked by an
+instrument** (§8, `t5_labels.py`).
 **Computation:** permitted, used, committed (`code/branching_locate_db09/`,
-`run_all.sh`, ~6 min, 699 520-assertion self-test, four test scripts, all four
+`run_all.sh`, ~6 min, 699 520-assertion self-test, five test scripts, all five
 `TOTAL BAD: 0`).
 
 > ## ⚠ WHAT THIS DOCUMENT NO LONGER CLAIMS — read before §0
@@ -18,7 +23,10 @@ mg-e8b8, 2026-07-30, and the repair is a **withdrawal** — see the banner below
 > that column"*. **It was not measured, and it is not the same graph.** Under the
 > definition this document itself quotes from Vershik–Okounkov — vertices are the
 > **irreducibles**, edges are the restriction multiplicities — the vertex set
-> differs at `β = 0` and multiplicities reach `2` at `β = 1` and `β = 0`. What was
+> differs at `β = 1` **and** at `β = 0`, and multiplicities reach `2` at `β = 1`
+> and `β = 0`. (At `β = 1` the *number* of vertices agrees with `β = 3` at every
+> level while the set does not, which is why the table in §0 reports the set;
+> `mg-13b2`, on `mg-a218`'s finding.) What was
 > equal at every parameter was **one statistic**, the path-pair count `132` at
 > `n = 6`; **equality of that statistic was taken for identity of the structure**.
 > The invariant is now measured at every parameter, in this document's own
@@ -137,16 +145,38 @@ with the restriction multiplicities recovered from characters and their
 **uniqueness, integrality, non-negativity** and `Σ_q m_q·dim L(n-1,q) =
 dim L(n,p)` all checked rather than assumed):
 
-| `β` | `dim TL_6` | `dim ⊕_λ End(L_λ)` | endomorphism algebra? | # irreducibles at `n = 1…6` | branching, **MEASURED** |
+| `β` | `dim TL_6` | `dim ⊕_λ End(L_λ)` | endomorphism algebra? | vertex SET at `n = 1…6` | branching, **MEASURED** |
 |---|---|---|---|---|---|
-| 3 | 132 | **132** | **yes** | 1, 2, 2, 3, 3, 4 | multiplicity-free |
-| 2 | 132 | **132** | **yes** | 1, 2, 2, 3, 3, 4 | multiplicity-free |
-| 1 | 132 | **99** | **no** | 1, 2, 2, 3, 3, 4 | **NOT multiplicity-free** |
-| 0 | 132 | **42** | **no** | **1, 1, 2, 2, 3, 3** | **NOT multiplicity-free** |
+| 3 | 132 | **132** | **yes** | `[1] [1,1] [1,2] [1,3,2] [1,4,5] [1,5,9,5]` | multiplicity-free |
+| 2 | 132 | **132** | **yes** | `[1] [1,1] [1,2] [1,3,2] [1,4,5] [1,5,9,5]` | multiplicity-free |
+| 1 | 132 | **99** | **no** | `[1] [1,1] [1,1] [1,3,1] [1,4,1] [1,4,9,1]` | **NOT multiplicity-free** |
+| 0 | 132 | **42** | **no** | `[1] [1] [1,2] [1,2] [1,4,5] [1,4,5]` | **NOT multiplicity-free** |
 
-**The vertex set is not even the same.** At `β = 0` the tower has fewer
-irreducibles at every *even* level. And the multiplicities reach 2 — five of
-them, each surviving its own dimension check:
+**The vertex column reports the SET and not its size, and that is the point of
+it (`mg-13b2`, on `mg-a218`'s finding).** A vertex of this graph is an
+**irreducible module**, so each bracket is the level's vertex set written as
+`dim L(n,p)` for `p` ascending — the canonical form. `T1b2` prints the fuller
+form `[p:dim L(n,p)]`, checks that the live labels are an unbroken run from `0`,
+and then **checks that the abbreviation separates exactly the pairs the fuller
+form separates**, on every cell, rather than arguing that it must. **No count
+column is printed beside this one on purpose:** *"equality of one statistic was
+taken for identity of the structure"* is exactly how the withdrawn claim above
+broke, and a cardinality is one statistic. This column ends at `n = 6` where the
+sum of the squares is the `dim ⊕_λ End(L_λ)` column two to its left — `132`,
+`132`, `99`, `42` — which ties it to a figure computed by two other routes.
+
+**Where a count would have hidden the difference, measured.** Over the 36 cells
+— 6 ordered pairs of the four parameters × 6 levels — there are **10 at which
+the number of vertices agrees and the vertex set does not**. Four of them are
+`β = 3` against `β = 1`, which the old column printed as the same six numbers at
+every level: `[1,2]` vs `[1,1]` at `n = 3`, `[1,3,2]` vs `[1,3,1]` at `n = 4`,
+`[1,4,5]` vs `[1,4,1]` at `n = 5`, `[1,5,9,5]` vs `[1,4,9,1]` at `n = 6`.
+
+**So the vertex set differs at TWO parameters, not one.** At `β = 0` the tower
+has fewer irreducibles at every *even* level — the count differs there too. At
+`β = 1` the count agrees with `β = 3` at **every** level and the graph is
+different at four of the six. And the multiplicities reach 2 — five of them,
+each surviving its own dimension check:
 `[L(4,1)↓ : L(3,0)] = 2` and `[L(6,2)↓ : L(5,1)] = 2` at `β = 1`;
 `[L(3,1)↓ : L(2,0)] = 2`, `[L(5,1)↓ : L(4,0)] = 2` and `[L(5,2)↓ : L(4,1)] = 2`
 at `β = 0`.
@@ -213,6 +243,15 @@ multiplicity-free (`T1b2`). The top-right cell is inhabited by `kF(P)` and by
 irreducibles are one-dimensional, so a restriction of one to any subalgebra is
 one-dimensional, hence irreducible, hence of multiplicity one (D6). That is
 forced for every `P`, so it is an argument and is booked as one.
+
+**MARKED IN PLACE (mg-13b2, on mg-a218's finding).** The top-right cell reads
+*"Path-pair **count** survives"*. It read *"Path-pair **basis** survives"* until
+`2e66d03`, which corrected it — that was **mg-2060's X2**, and the same commit
+booked X2 under *"Deliberately NOT repaired, and each is open"* in §8. **The
+correction went the right way and the disclosure did not.** X2's remaining
+sites — T1a's *"iff"*, and a **fourth site in §1's clause table that no list
+named** — are corrected in this repair, and the *"iff"* is refuted in `T1c2`;
+§8 now books X2 as closed and names which commit closed which site.
 
 **Failure of semisimplicity BREAKS the conclusion. Failure of
 multiplicity-freeness WEAKENS it — and weakens only the adverb.** **This
@@ -351,7 +390,7 @@ of the relationship.
 | *"a suitable category"* | *"any chain `M(0) ⊂ M(1) ⊂ M(2) ⊂ …` of finite-dimensional semisimple algebras"* (VO §1) | **finite-dimensional and semisimple.** Not "abelian", not "monoidal", not "with duals". This is the whole of "suitable", and dropping the semisimplicity is what T1 measures |
 | *"with a rank function"* | the level `n` of the chain; the branching graph is graded by it, and `G(0)^∧` is a single vertex | **not an extra hypothesis — it is the indexing.** A rank function with no chain of algebras under it gives nothing (§2 item 4) |
 | *"a multiplicity-free branching rule"* | *"the multiplicities are simple, or the branching is simple"* (VO §1) | multiplicities in `{0,1}`, equivalently (VO Prop. 1.4) *"the centralizer `Z(M,N)` is commutative"* |
-| *"the Bratteli/path algebra"* | matrix units indexed by pairs of increasing paths with a common endpoint; `dim = Σ_λ (#paths to λ)²` | **this survives without semisimplicity** — T1a measures it at every `β` — which is precisely why the statement looks parameter-independent when it is not |
+| *"the Bratteli/path algebra"* | matrix units indexed by pairs of increasing paths with a common endpoint; `dim = Σ_λ (#paths to λ)²` | **the COUNT survives without semisimplicity and the MATRIX UNITS do not.** T1a measures the dimension identity at every `β`; `T1c2` shows the algebra is not semisimple at 7 of the 20 `(n, β)` pairs, and matrix units would force semisimplicity. **Corrected (mg-13b2):** this cell said *"this survives without semisimplicity"* with *"this"* reaching back to the matrix units — a **fourth site of mg-2060's X2, named by no list**, found by sweeping for the phrase while closing the other three. It is why the statement looks parameter-independent when it is not |
 | *"is canonically an endomorphism algebra"* | `C[G(n)] = ⊕_λ End(V^λ)` (VO (1.4)), plus *"the decomposition … is canonical"* | **two statements.** The equality is Wedderburn and needs semisimplicity alone. The adverb is Remark 1.3 and needs multiplicity-freeness |
 
 **The vacuity trap, and it was already on the record.** Every graded graph with a
@@ -422,7 +461,9 @@ still right at every `n ≤ 6` (`dim TL_n = Σ_p (dim V_{n,p})²`, 0 bad) and th
 algebra is not a sum of endomorphism algebras (99 and 42 out of 132 at `n = 6`).
 **CORRECTED (mg-e8b8): this row used to read "the branching graph is unchanged
 and multiplicity-free", and it is neither.** Measured at every parameter under
-Vershik–Okounkov's definition (`T1b2`), the vertex set differs at `β = 0` and
+Vershik–Okounkov's definition (`T1b2`), the vertex set differs at `β = 1` and at
+`β = 0` — at `β = 1` with the same *number* of vertices as `β = 3` at every level
+(`mg-13b2`) — and
 multiplicities reach 2 at both `β = 1` and `β = 0` — so these two parameters fall
 out of the family on the *multiplicity-freeness* hypothesis as well as on
 semisimplicity, and the row cannot be used to tell the two apart. Published
@@ -526,15 +567,25 @@ only evidence that the near-miss discipline works.**
    > list bought here: it did not catch the error, and it is why the error was
    > caught.
    >
-   > Two further defects in this neighbourhood were named by **no** list and are
-   > **not repaired by mg-e8b8**, whose scope was the two withdrawn claims:
+   > Two further defects in this neighbourhood were named by **no** list:
    > T1a's *"a path-pair basis exists **iff** `dim A = Σ (#paths)²`"* is false in
    > the "if" direction (`TL_2(0) = k[e]/(e²)` satisfies the count and has no
    > non-trivial idempotents), and §1's table below states VO Prop. 1.4 as an
    > **unconditional** equivalence when VO state it *"for an arbitrary inductive
    > family of **semisimple** algebras"* — and measured on this document's own
    > object the criterion returns "multiplicity-free" at `β = 1`, where the
-   > multiplicity is 2. Both are open. See mg-2060 §4, X2 and X3.
+   > multiplicity is 2. See mg-2060 §4, X2 and X3.
+   >
+   > **CORRECTED (mg-13b2): this paragraph said "not repaired by mg-e8b8 … Both
+   > are open", and mg-e8b8 had already repaired two of X2's three sites.** X2
+   > is now **CLOSED at all FOUR of its sites** — §0's 2×2 table and `T1d`'s
+   > printed line at `2e66d03`, unmarked at the time and marked in place now;
+   > T1a's *"iff"* here, refuted at 7 of 20 `(n, β)` pairs in `T1c2`; and **a
+   > fourth site in §1's clause table, named by no list and found while closing
+   > the other three** — it said the path-algebra *"survives without
+   > semisimplicity"* with *"this"* reaching back to the matrix units. **X3 is
+   > still open**, and it is the only one of the two that ever was. §8 carries
+   > the commit-by-commit account.
 
 4. **Attack the Cartan computation.** T3c rebuilds it from MSS's own proof
    (`χ(b) = |bB ∩ L_Y|`, `χ = Σ_Z C_{Z,Y} χ_Z`) rather than from their closed
@@ -570,7 +621,7 @@ only evidence that the near-miss discipline works.**
 | # | claim | status | scope |
 |---|---|---|---|
 | **D1** | Daniel's sentence is Vershik–Okounkov §1 with the hypotheses merged; `⊕_λ End(V^λ)` is their (1.4) and needs semisimplicity alone; *"canonical"* is their word and needs multiplicity-freeness, by their Remark 1.3 | **QUOTED** | 4 passages verbatim from the rendered PDF, plus 5 near-miss negative controls all rejected (T4) |
-| **D2** | ~~there is a multiplicity-free tower whose branching graph and path-pair count are parameter-independent and which is a sum of endomorphism algebras at some parameters and not others~~ | **WITHDRAWN (mg-e8b8, on mg-2060's finding).** No such tower is exhibited by this document. | The **path-pair count** is parameter-independent (`132` at `n = 6`) and the **`⊕End` figures** `132/132/99/42` stand, on three instruments. The **branching graph is not**: measured at every parameter under VO's definition (`T1b2`), the vertex set differs at `β = 0` (1,1,2,2,3,3 against 1,2,2,3,3,4) and multiplicities reach 2 at `β = 1` and `β = 0`. Multiplicity-freeness moves in exact step with semisimplicity, so `TL_n(β)` separates the hypotheses in neither direction |
+| **D2** | ~~there is a multiplicity-free tower whose branching graph and path-pair count are parameter-independent and which is a sum of endomorphism algebras at some parameters and not others~~ | **WITHDRAWN (mg-e8b8, on mg-2060's finding).** No such tower is exhibited by this document. | The **path-pair count** is parameter-independent (`132` at `n = 6`) and the **`⊕End` figures** `132/132/99/42` stand, on three instruments. The **branching graph is not**: measured at every parameter under VO's definition (`T1b2`), the vertex set differs at `β = 1` (`[1,4,9,1]` against `[1,5,9,5]` at `n = 6`, with the same *number* of vertices at every level) and at `β = 0` (`[1,4,5]` against `[1,5,9,5]`), and multiplicities reach 2 at `β = 1` and `β = 0`. Multiplicity-freeness moves in exact step with semisimplicity, so `TL_n(β)` separates the hypotheses in neither direction. **Updated (mg-13b2, on mg-a218's finding):** this row substantiated the vertex-set claim with vertex *counts*, which is the statistic-for-structure substitution the withdrawal is about |
 | **D2b** | both off-diagonal cells of the 2×2 table are INHABITED: multiplicity-free and not semisimple by `kF(P)`; semisimple and not multiplicity-free by `ℂS_4` on a skipped chain and by `ℂ ⊂ M_2(ℂ)` | **BUILT AND MEASURED**, and it is what the builds actually establish | this is the surviving content of D2 together with D3. `kF(P)` is in the first cell by D6 (all irreducibles one-dimensional — an argument, forced, and booked as one) together with `52` of `541` measured. It does **not** establish which hypothesis carries the conclusion; D4 does not rest on it |
 | **D3** | there is a semisimple tower with a multiplicity-2 edge for which `⊕_λ End(V^λ)` still holds and the GZ algebra is not maximal commutative | **BUILT AND MEASURED** | `ℂS_4` on three skipped chains and `ℂS_5` on one; `ℂ ⊂ M_2(ℂ)`; OV Prop. 1.4 tested on 6 pairs, 0 false positives, 0 false negatives |
 | **D4** | so semisimplicity is load-bearing and multiplicity-freeness is not: its failure costs the adverb | **STANDS — and its basis is CORRECTED (mg-e8b8). It is a consequence of the QUOTED THEOREMS, not a synthesis of the builds** | `A ≅ ⊕_λ End(V_λ) ⟺ A` semisimple for every finite-dimensional algebra, because a finite direct sum of endomorphism algebras **is** semisimple — no branching hypothesis appears in it. Remark 1.3 (D1, quoted) gives the adverb. It was booked as *"THE SYNTHESIS OF D2 AND D3, and it is mine"*; **D2 is withdrawn and the verdict does not need it.** mg-2060 reached the same conclusion by the same route and calls it *"an argument from the theorem mg-db09 quotes, not a measurement"* |
@@ -647,10 +698,25 @@ cd code/branching_locate_db09 && ./run_all.sh    # ~6 min, pure Python 3, NO NET
 ```
 
 Committed outputs: `out_selftest.txt` (699 520 assertions), `out_t1_tl.txt`,
-`out_t2_gz.txt`, `out_t3_ours.txt`, `out_t4_quotes.txt`. All four `TOTAL BAD`
+`out_t2_gz.txt`, `out_t3_ours.txt`, `out_t4_quotes.txt`, `out_t5_labels.txt`.
+All five `TOTAL BAD`
 lines are `0`. `./fetch_sources.sh` is the one network script and `run_all.sh`
 does not call it; `sources_db09.txt` is the committed `pdftotext` extraction the
 quotations are checked against.
+
+**What `mg-13b2` added to the instrument.** `T1c2` in `t1_tl.py`, which refutes
+T1a's withdrawn *"iff"* at 7 of the 20 `(n, β)` pairs; the rewritten `T1b2` (i),
+which reports the vertex **set** in canonical form with **no count column beside
+it**; and **`t5_labels.py`**, which measures every disposition label in this
+document — **29 labels, 100 checks**. It is the only script here that needs a **git
+checkout**, because a label saying *"corrected at `2e66d03`"* is a claim about a
+diff, and the only one that **exits non-zero** when it fails, because a label
+that has stopped being true is a gate and not a report. Its checks are
+statements about the **current tree** or about **named historical commits** —
+never about the diff of the commit it is part of, which is the trap `mg-8e30`
+paid for and the reason it reads the same on a re-run. It carries a **7-mutation
+corruption battery**, applied in memory: each mutation reopens one defect this
+repair closed and names the check that must go red. **All 7 fire.**
 
 **What the repair changed in the instrument (mg-e8b8).** `t1_tl.py` gained
 **`T1b2`**, which measures the branching graph as Vershik–Okounkov define it — on
@@ -730,9 +796,14 @@ share a common umbrella?"* is **"open"**, not **"yes, quasi-hereditary"**.
 
 ## 8. THE REPAIR — WHAT mg-e8b8 CHANGED, AND WHAT IT DID NOT
 
-**Scope.** mg-e8b8 repaired the two things mg-2060 left outstanding and nothing
-else. It changed **no mathematics**: every figure this document reports still
-reproduces, and the one new measurement (`T1b2`) agrees with the audit's.
+**Scope. CORRECTED (mg-13b2): this paragraph said mg-e8b8 repaired the two
+things mg-2060 left outstanding "and nothing else", and it also closed two
+sites of X2 — the finding it books below as untouched.** The sentence and the
+list under it disagreed with the diff in the same direction, and that is the
+defect `mg-a218` raised. It changed **no mathematics**: every figure this
+document reports still reproduces, and the one new measurement (`T1b2`) agrees
+with the audit's. **This section now carries a status column rather than a
+disposition sentence, and `t5_labels.py` measures every row of it.**
 
 **Repaired.**
 
@@ -754,19 +825,56 @@ reproduces, and the one new measurement (`T1b2`) agrees with the audit's.
 4. **At source, not only in prose.** `t1_tl.py` no longer prints the withdrawn
    claim; `T1b2` measures the real invariant; the instrument README says so.
 
-**Deliberately NOT repaired, and each is open** — they were named by mg-2060 and
-are outside this ticket:
+**Named by mg-2060, and where each one now stands.** This list was headed
+*"Deliberately NOT repaired, and each is open"* until `mg-13b2`. **It was wrong
+about its first entry, and wrongly in the direction that flatters the commit:
+mg-e8b8 had already closed two of X2's three sites.** A reader trusting the
+label believed all three were open; a reader trusting the diff believed X2 was
+addressed; neither reading was right. The heading is now a status column and
+every row of it is checked against the tree and against the named commits by
+`t5_labels.py`.
 
-* **T1a's *"iff"*** (mg-2060 X2) — false in the "if" direction; `TL_2(0)` is the
-  counterexample and it is on this document's own T1c table.
-* **§1's unconditional reading of VO Prop. 1.4** (X3) — VO state it for
-  *semisimple* families, and the criterion returns the wrong answer on this
-  document's own object at `β = 1`.
-* **D5's *"each listed with its size"*** (X5) — T3b prints twelve sizes for
-  twenty classes.
-* **§7's count of four one-line derivations** (X6) — mg-2060's census finds
-  eight, three unflagged.
-* **The `n = 6` 95.7% figure** — still arithmetic, re-derived by nobody.
+| # | finding | site(s) | status |
+|---|---|---|---|
+| **X2** | T1a's *"iff"* — false in the "if" direction; `TL_2(0)` is the counterexample and it is on this document's own T1c table | **four**, not the three mg-2060 named: §0's 2×2 table, `T1d`'s printed line, T1a's header, and §1's clause table | **CLOSED — and closed in two commits, which is why the old label was wrong.** `2e66d03` (mg-e8b8) corrected the 2×2 table and `T1d` **without a marker at either**, while booking X2 as untouched. `mg-13b2` corrects T1a's header, adds **`T1c2`** — which refutes the converse at **7 of the 20 `(n, β)` pairs**, `TL_2(0)` the smallest — marks the two earlier sites in place, and closes **a fourth site named by no list**: §1's clause table said the path algebra *"survives without semisimplicity"*, the antecedent being the matrix units |
+| **X3** | §1's unconditional reading of VO Prop. 1.4 — VO state it for *semisimple* families, and the criterion returns the wrong answer on this document's own object at `β = 1` | §1's table | **OPEN.** Untouched by `2e66d03` and by `mg-13b2`; the unqualified sentence is still in §1 |
+| **X5** | D5's *"each listed with its size"* — T3b prints twelve sizes for twenty classes | D5, `t3_ours.py` | **OPEN.** `t3_ours.py` is byte-identical across both commits |
+| **X6** | §7's count of four one-line derivations — mg-2060's census finds eight, three unflagged | §7 | **OPEN.** §7 still says four |
+| — | the `n = 6` 95.7% figure — still arithmetic | §0, D5 | **OPEN, and disclosed where it is quoted.** Re-derived by nobody; `\|F\| = 4683` puts the trace form out of reach on all three instruments |
+
+**What `mg-13b2` repaired**, on mg-a218's audit of this repair:
+
+1. **§0's vertex column reports the SET, not a count** (mg-a218 X1). It printed
+   `1,2,2,3,3,4` identically at `β = 3`, `2` and `1` — and at `β = 1` the graph
+   is different from `β = 3` at four of the six levels. **A future reader
+   comparing that column across parameters would have concluded the graphs
+   agree, which is the inference that broke this document in the first place,
+   sitting beside the corrected prose.** The column now carries the canonical
+   form `dim L(n,p)`, `p` ascending; `T1b2` prints the fuller `[p:dim]` form,
+   checks the abbreviation does not collide, and prints **no count column beside
+   it**.
+2. **The disposition labels are reconciled with the diff** (mg-a218 X2), which is
+   the table above, the marker at §0's 2×2 table, the marker in `T1d`, and the
+   corrected outcome note at §4 item 3.
+3. **X2 turned out to have a fourth site, and no list named it.** Closing the
+   third meant sweeping for the phrase, and §1's clause table said the
+   path algebra *"survives without semisimplicity"* with *"this"* reaching back
+   to the **matrix units** — the same false claim, in a live table, in the
+   section whose whole subject is what happens when a hypothesis is dropped.
+   **It is booked as found by this repair and not by mg-2060**, whose census
+   named three.
+4. **The labels are now checked by an instrument, not by reading.**
+   `t5_labels.py` takes **every** disposition label in this document — **29 of
+   them, 100 checks** — states what each one asserts about the tree or about a
+   **named commit**, and measures it. Its verdict is in `out_t5_labels.txt` and
+   it ends with a `TOTAL BAD` line like every other script here. It also carries
+   a **7-mutation corruption battery**: each mutation reopens one defect this
+   repair closed and names the check that must go red, **and all 7 fire** — a
+   checker that never fires is indistinguishable from one that cannot.
+   **The labels are a convention adopted on the day this
+   document was written and they are already load-bearing** — a reader consults
+   the label precisely so as not to read the diff — **which is the argument for
+   auditing them, not for dropping them.**
 
 **What survived the repair on purpose.** §4's pre-filed attack list is intact,
 including **item 3, which named this exact row, called the measurement *"its

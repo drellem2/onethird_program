@@ -1,0 +1,249 @@
+==========================================================================
+T5  EVERY DISPOSITION LABEL, CHECKED AGAINST THE TREE AND THE DIFF
+==========================================================================
+mg-13b2, on mg-a218's finding that a label said 'deliberately NOT
+repaired' while the diff had closed 2 of that finding's 3 sites.
+
+A label is checked, never read.  Each check is a statement about the
+CURRENT TREE or about a NAMED HISTORICAL COMMIT --- never about the
+diff of the commit this script is part of, which is why it says the
+same thing on a re-run.
+
+commits named by the labels: 03d7f91 (mg-db09, as delivered), 2e66d03
+(mg-e8b8, the repair mg-a218 audited), f4eaea6 (the roadmap retraction).
+
+--------------------------------------------------------------------------
+SECTION banner 1   The separating example is WITHDRAWN
+  asserts: the withdrawn phrase is asserted nowhere, at source or in prose, and the commit named as the withdrawal is the one that deleted it
+    [ok] the banner carries the word                          2 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the withdrawn phrase survives only inside withdrawals 2 block(s) carry it, 0 of them unmarked (window: the block and the one before it)
+    [ok] and the repair is what deleted it                    1 deleted line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+    [ok] T1b's old heading is gone from source                0 occurrence(s) in code/branching_locate_db09/t1_tl.py
+    [ok] the repair is what deleted that too                  1 deleted line(s) in code/branching_locate_db09/t1_tl.py at 2e66d03
+    [ok] the committed output no longer asserts it            1 block(s) carry it, 0 of them unmarked (window: the block and the one before it)
+--------------------------------------------------------------------------
+SECTION banner 2   D10 --- the deliverable --- is a CONJECTURE, not a result
+  asserts: the ledger agrees, the NOT-CLAIMED row agrees, and the retraction it cites is a real commit
+    [ok] the banner says it                                   1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the ledger row says it                               1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the NOT CLAIMED row says it                          1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the retraction commit exists and says so             commit f4eaea6 subject
+--------------------------------------------------------------------------
+SECTION banner 3   Nothing else in the document is withdrawn
+  asserts: exactly one ledger row carries WITHDRAWN, and it is D2
+    [ok] D2 is withdrawn                                      1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] no other ledger row is                               1 ledger row(s) carry WITHDRAWN
+--------------------------------------------------------------------------
+SECTION 0   ~~Both halves are settled here by BUILDING~~ WITHDRAWN (mg-e8b8)
+  asserts: the struck sentence is struck in place and the repair deleted the unstruck one
+    [ok] struck in place                                      1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the repair deleted the assertion                     1 deleted line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+--------------------------------------------------------------------------
+SECTION 0   1. ~~Multiplicity-free and NOT semisimple~~ WITHDRAWN (mg-e8b8)
+  asserts: same, for the object-1 heading
+    [ok] struck in place                                      1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the repair deleted the assertion                     1 deleted line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+--------------------------------------------------------------------------
+SECTION 0   CORRECTED (mg-e8b8) --- the 2x2 cell placement
+  asserts: TL_6(1) and TL_6(0) are in the bottom-right cell now and were not before
+    [ok] the bottom-right cell holds them                     1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] with the figures                                     1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the repair moved them                                1 added line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+--------------------------------------------------------------------------
+SECTION 0   MARKED IN PLACE (mg-13b2) --- 'Path-pair count survives'
+  asserts: this is X2's second site: mg-e8b8 corrected it and booked X2 as untouched, and the marker now says so
+    [ok] the cell reads count                                 1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the repair is what changed it                        1 added line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+    [ok] from basis                                           1 deleted line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+    [ok] and the marker is here                               1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+--------------------------------------------------------------------------
+SECTION 0   the vertex column reports the SET (mg-13b2, on mg-a218's X1)
+  asserts: the column carries the canonical form, the instrument prints the same form, and no count column sits beside it
+    [ok] the header says SET                                  1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the old count header is gone                         0 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] beta = 1 and beta = 3 are visibly different          beta=1 row present once, the beta=3/2 rows twice
+    [ok] the instrument prints the same canonical form        1 occurrence(s) in code/branching_locate_db09/out_t1_tl.txt
+    [ok] and the document's four rows ARE the instrument's    4 of 4 rows agree character for character
+    [ok] and reports the cells a count would hide             1 occurrence(s) in code/branching_locate_db09/out_t1_tl.txt
+--------------------------------------------------------------------------
+SECTION 0   Where the two percentages stand after the audit (mg-e8b8)
+  asserts: 90.4% is derived, 95.7% is still arithmetic, and no commit since the delivery re-derived it
+    [ok] the n=6 figure is booked as arithmetic               1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the n=5 figure is booked as derived                  2 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] and t3 has not moved since delivery                  sha256 73fea34fee8d vs 73fea34fee8d at 03d7f91
+    [ok] nor has its output                                   sha256 9c0fa9bcf953 vs 9c0fa9bcf953 at 03d7f91
+--------------------------------------------------------------------------
+SECTION 1   Corrected (mg-13b2) --- the path-algebra row of the clause table
+  asserts: a FOURTH site of X2, named by no list: the row said the matrix units survive without semisimplicity
+    [ok] the row now separates count from matrix units        1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the old wording is gone                              0 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] and it points at the refutation                      5 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+--------------------------------------------------------------------------
+SECTION 3   CORRECTED (mg-e8b8) --- 'the branching graph is unchanged and multiplicity-free'
+  asserts: the phrase is quoted as corrected and the repair deleted the assertion
+    [ok] quoted only as corrected                             1 block(s) carry it, 0 of them unmarked (window: the block and the one before it)
+    [ok] the repair deleted it                                1 deleted line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+--------------------------------------------------------------------------
+SECTION 3   Corrected (mg-e8b8) --- 'are all multiplicity-free' with no qualifier
+  asserts: the qualifier is in and the unqualified line was deleted by the repair
+    [ok] the qualifier is in                                  1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the repair deleted the unqualified line              1 deleted line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+--------------------------------------------------------------------------
+SECTION 4 item 3   CORRECTED (mg-13b2): this paragraph said 'not repaired by mg-e8b8 ... Both are open'
+  asserts: the false 'both are open' is gone and the two findings are booked separately
+    [ok] the correction is recorded                           1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] 'Both are open' is gone                              0 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] X2 is booked closed                                  1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] X3 is booked open                                    1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] and the fourth X2 site is named                      1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+--------------------------------------------------------------------------
+SECTION 5   D2 --- WITHDRAWN (mg-e8b8, on mg-2060's finding)
+  asserts: the claim is struck in the ledger and the repair deleted the standing version of the row
+    [ok] struck                                               1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the repair deleted the standing row                  1 deleted line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+--------------------------------------------------------------------------
+SECTION 5   D2 --- Updated (mg-13b2): the row substantiated the vertex set with counts
+  asserts: the row now carries vertex sets
+    [ok] the row carries sets                                 1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the count form is gone from it                       no D2 row line carries the count form
+--------------------------------------------------------------------------
+SECTION 5   D4 --- STANDS, and its basis is CORRECTED (mg-e8b8)
+  asserts: the verdict stands and its basis is the quoted theorem, not the builds
+    [ok] the row says so                                      1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the old basis is quoted as replaced                  1 block(s) carry it, 0 of them unmarked (window: the block and the one before it)
+--------------------------------------------------------------------------
+SECTION 5   D5 --- Updated (mg-e8b8), and two wording defects NOT repaired (X5)
+  asserts: X5 is open: t3 has not moved since delivery and D5 still discloses it
+    [ok] D5 discloses X5                                      1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] t3 has not moved since delivery                      sha256 73fea34fee8d vs 73fea34fee8d at 03d7f91
+    [ok] the repair did not touch it                          NOT in the 7 paths 2e66d03 touched
+--------------------------------------------------------------------------
+SECTION 5   D12 --- Updated (mg-e8b8)
+  asserts: mg-2060's CMPX evaluation is carried in the row and in section 2
+    [ok] the row carries it                                   1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] section 2 row 3 carries the current state            3 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+--------------------------------------------------------------------------
+SECTION 6   What the repair changed in the instrument (mg-e8b8)
+  asserts: T1b2 was added, T1b was renamed, T1d prints the withdrawal, and t2/t3/t4 are byte-identical to the delivered state
+    [ok] T1b2 is in source                                    1 occurrence(s) in code/branching_locate_db09/t1_tl.py
+    [ok] T1b's heading is the corrected one                   1 occurrence(s) in code/branching_locate_db09/t1_tl.py
+    [ok] T1d prints the withdrawal                            1 occurrence(s) in code/branching_locate_db09/out_t1_tl.txt
+    [ok] t2 byte-identical to delivery                        sha256 d72059bc35e1 vs d72059bc35e1 at 03d7f91
+    [ok] t3 byte-identical to delivery                        sha256 73fea34fee8d vs 73fea34fee8d at 03d7f91
+    [ok] t4 byte-identical to delivery                        sha256 adaf4cd31bb2 vs adaf4cd31bb2 at 03d7f91
+    [ok] out_t2 byte-identical to delivery                    sha256 2bf1dea4046b vs 2bf1dea4046b at 03d7f91
+    [ok] out_t3 byte-identical to delivery                    sha256 9c0fa9bcf953 vs 9c0fa9bcf953 at 03d7f91
+    [ok] out_t4 byte-identical to delivery                    sha256 a7ef1c138552 vs a7ef1c138552 at 03d7f91
+--------------------------------------------------------------------------
+SECTION 7   SUPERSEDED (mg-e8b8) --- the successor question
+  asserts: the superseded sentence is struck and the replacement names the antichain family
+    [ok] struck in place                                      1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the replacement is there                             1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+--------------------------------------------------------------------------
+SECTION 8   Repaired 1 --- five sites of the multiplicity-free assertion
+  asserts: none of the five still asserts it
+    [ok] site 1, the 'measured (not cited)' sentence          2 block(s) carry it, 0 of them unmarked (window: the block and the one before it)
+    [ok] site 2, 'held fixed down that column'                1 block(s) carry it, 0 of them unmarked (window: the block and the one before it)
+    [ok] site 3, section 0's four-row table                   1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] site 4, the 2x2 cell                                 1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] site 5, section 3's two sentences                    1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+--------------------------------------------------------------------------
+SECTION 8   Repaired 4 --- at source, not only in prose
+  asserts: the instrument and its README carry the repair
+    [ok] the instrument measures the real invariant           6 occurrence(s) in code/branching_locate_db09/t1_tl.py
+    [ok] the README says so                                   2 occurrence(s) in code/branching_locate_db09/README.md
+    [ok] and carries the mg-13b2 corrections                  1 occurrence(s) in code/branching_locate_db09/README.md
+--------------------------------------------------------------------------
+SECTION 8   X2 --- CLOSED, in two commits (mg-e8b8 unmarked, mg-13b2)
+  asserts: all four known sites are closed: the 2x2 cell and T1d at 2e66d03, T1a's header and the section-1 row here
+    [ok] the 'iff' is gone from source                        0 occurrence(s) in code/branching_locate_db09/t1_tl.py
+    [ok] the corrected header is in source                    1 occurrence(s) in code/branching_locate_db09/t1_tl.py
+    [ok] the refutation block exists                          1 occurrence(s) in code/branching_locate_db09/t1_tl.py
+    [ok] and is in the committed output                       1 occurrence(s) in code/branching_locate_db09/out_t1_tl.txt
+    [ok] with mg-2060's own counterexample smallest           1 occurrence(s) in code/branching_locate_db09/out_t1_tl.txt
+    [ok] T1d's site was closed by the repair                  1 deleted line(s) in code/branching_locate_db09/t1_tl.py at 2e66d03
+    [ok] and is marked in place now                           1 occurrence(s) in code/branching_locate_db09/t1_tl.py
+    [ok] the 2x2 site was closed by the repair                1 added line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+    [ok] and the status table books X2 closed                 1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+--------------------------------------------------------------------------
+SECTION 8   X3 --- OPEN
+  asserts: the unqualified reading of VO Prop. 1.4 is still in section 1's table
+    [ok] the site is still in force                           1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] with no semisimplicity qualifier on it               1 unqualified row(s) --- OPEN asserts exactly 1
+    [ok] untouched by the repair                              not added or rewritten at 2e66d03
+--------------------------------------------------------------------------
+SECTION 8   X5 --- OPEN
+  asserts: T3b's twelve sizes are still twelve
+    [ok] t3 unchanged since delivery                          sha256 73fea34fee8d vs 73fea34fee8d at 03d7f91
+    [ok] and the defect is disclosed at D5                    1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+--------------------------------------------------------------------------
+SECTION 8   X6 --- OPEN
+  asserts: section 7 still says four one-line derivations
+    [ok] section 7 still says four                            1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] and the count is disclosed as disputed               1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+--------------------------------------------------------------------------
+SECTION 8   the n = 6 95.7% figure --- OPEN
+  asserts: still arithmetic, disclosed where it is quoted
+    [ok] disclosed in section 0                               1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] disclosed at D5                                      2 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] and nothing re-derived it                            sha256 73fea34fee8d vs 73fea34fee8d at 03d7f91
+--------------------------------------------------------------------------
+SECTION 8   Scope --- CORRECTED (mg-13b2): 'and nothing else' was false
+  asserts: the repair's own diff shows it touched two of X2's sites as well as the two withdrawn claims it books
+    [ok] the correction is recorded                           1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] the diff carries X2's second site                    1 added line(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md at 2e66d03
+    [ok] and X2's third                                       1 deleted line(s) in code/branching_locate_db09/t1_tl.py at 2e66d03
+--------------------------------------------------------------------------
+SECTION 8   What survived the repair on purpose --- section 4's list is intact
+  asserts: all six pre-filed attack items are present, with their outcomes appended
+    [ok] six pre-filed attack items                           6 attack items found, mg-2060 counted 6
+    [ok] item 3 keeps its dimension-shadow wording            1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+    [ok] and its outcome is appended, not substituted         1 occurrence(s) in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+THE CORRUPTION BATTERY --- does any of this bite?
+--------------------------------------------------------------------------
+Each row reopens one closed defect IN MEMORY and names the check
+that must go red.  Population: the 7 mutations below, against the
+100 checks above.  Nothing on disk is modified.
+
+  [fires] X2 site 2 reopened: the 2x2 cell says 'basis' again
+         must redden: the cell reads count                           1 check(s) red
+  [fires] X2 site 3 reopened: T1a says 'iff' again
+         must redden: the 'iff' is gone from source                  2 check(s) red
+  [fires] X1 reopened: the vertex column goes back to a count
+         must redden: beta = 1 and beta = 3 are visibly different    2 check(s) red
+  [fires] the document's column drifts one digit from what the instrument measured, while staying set-shaped
+         must redden: and the document's four rows ARE the instrument's 1 check(s) red
+  [fires] the false 'Both are open' restored at section 4 item 3
+         must redden: 'Both are open' is gone                        1 check(s) red
+  [fires] the instrument stops reporting the cells a count would hide
+         must redden: and reports the cells a count would hide       1 check(s) red
+  [fires] X3 silently closed while its label still says OPEN --- the exact label-versus-diff defect this script exists for
+         must redden: with no semisimplicity qualifier on it         2 check(s) red
+
+EXTENT OF THIS CHECK, stated so it cannot be read as wider than it is:
+  labels checked      : 29
+  individual checks   : 100
+  corruptions applied : 7, all in memory
+  files read          : 10
+      code/branching_locate_db09/README.md
+      code/branching_locate_db09/out_t1_tl.txt
+      code/branching_locate_db09/out_t2_gz.txt
+      code/branching_locate_db09/out_t3_ours.txt
+      code/branching_locate_db09/out_t4_quotes.txt
+      code/branching_locate_db09/t1_tl.py
+      code/branching_locate_db09/t2_gz.py
+      code/branching_locate_db09/t3_ours.py
+      code/branching_locate_db09/t4_quotes.py
+      docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+  commits consulted   : 03d7f91, 2e66d03, f4eaea6
+
+  WHAT IT DOES NOT COVER.  It checks the labels this document
+  carries; it cannot find a claim that was quietly changed and
+  never labelled at all.  That is a seam sweep (mg-a218's c4), not
+  a label audit, and the fourth X2 site recorded in section 1 was
+  found by sweeping and not by this script.
+
+TOTAL BAD: 0

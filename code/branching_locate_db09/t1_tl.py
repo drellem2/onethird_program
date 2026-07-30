@@ -60,8 +60,17 @@ def bad(msg):
 print("=" * 74)
 print("T1a  dim TL_n = sum_p (dim V_{n,p})^2  --- the PATH-PAIR count")
 print("=" * 74)
-print("A basis indexed by pairs of paths with a common endpoint exists iff")
-print("dim A = sum over the top-level vertices of (number of paths)^2.")
+print("CORRECTED HEADING (mg-13b2, on mg-2060's X2).  This block used to say")
+print("that a basis indexed by pairs of paths with a common endpoint exists")
+print("IFF dim A = sum over the top-level vertices of (number of paths)^2.")
+print("The 'only if' direction is right.  THE 'if' DIRECTION IS FALSE, and the")
+print("counterexample is on this script's own T1c table.  What is measured")
+print("here is the count identity and nothing more; T1c2 refutes the converse")
+print("at every parameter where it can be refuted.")
+print()
+print("A basis of MATRIX UNITS indexed by pairs of paths with a common")
+print("endpoint exists ONLY IF dim A = sum over the top-level vertices of")
+print("(number of paths)^2.")
 print()
 print("%3s %8s %10s %s" % ("n", "dim TL_n", "Catalan", "cell-module dims (dim V_{n,p})"))
 for n in range(1, NMAX + 1):
@@ -154,38 +163,116 @@ for b in BETAS:
     for n in range(1, NMAX + 1):
         simples[(n, b)] = tl_simples(n, b)
 
-print("  (i) THE VERTEX SET --- number of irreducibles at each level")
-print()
-print("  %-6s %s" % ("beta", "  ".join("n=%d" % n for n in range(1, NMAX + 1))))
 vtx = {}
 for b in BETAS:
-    row = []
     for n in range(1, NMAX + 1):
-        live = [p for (p, d, c) in simples[(n, b)] if d > 0]
-        vtx[(n, b)] = live
-        row.append(len(live))
-    print("  %-6s %s" % (b, "  ".join("%3d" % x for x in row)))
+        vtx[(n, b)] = [(p, d) for (p, d, c) in simples[(n, b)] if d > 0]
+
+
+def vset(pairs):
+    return "[" + ",".join("%d:%d" % (p, d) for (p, d) in pairs) + "]"
+
+
+def vdims(pairs):
+    return "[" + ",".join("%d" % d for (p, d) in pairs) + "]"
+
+
+count_eq_set_ne = []
+for i, b1 in enumerate(BETAS):
+    for b2 in BETAS[i + 1:]:
+        for n in range(1, NMAX + 1):
+            s1, s2 = vtx[(n, b1)], vtx[(n, b2)]
+            if len(s1) == len(s2) and s1 != s2:
+                count_eq_set_ne.append((b1, b2, n, s1, s2))
+CELLS = len(BETAS) * (len(BETAS) - 1) // 2 * NMAX
+
+print("  (i) THE VERTEX SET --- the vertices, and NOT their number")
+print()
+print("  REPORTED AS A SET (mg-13b2, on mg-a218's X1).  A vertex of this graph")
+print("  is an IRREDUCIBLE MODULE, so the datum the hypothesis is about is the")
+print("  SET of them.  The break this whole block repairs was that equality of")
+print("  ONE STATISTIC was taken for identity of the structure -- and a count")
+print("  is one statistic.  A count column is therefore NOT printed beside")
+print("  this one: two different vertex sets can carry the same cardinality,")
+print("  and they do, at %d of the %d cells compared below."
+      % (len(count_eq_set_ne), CELLS))
+print()
+print("  Canonical form of a vertex: the pair (p, dim L(n,p)).  Two vertex sets")
+print("  are EQUAL iff these lists are equal.")
+print()
+for b in BETAS:
+    print("  beta = %s" % b)
+    for n in range(1, NMAX + 1):
+        print("     n=%d  %s" % (n, vset(vtx[(n, b)])))
 print()
 print("  The number of CELL modules at level n is %s --- parameter-free."
       % [n // 2 + 1 for n in range(1, NMAX + 1)])
+print()
+# the labels live at p = 0,1,...,k with no gaps, which is what lets the
+# delivered document abbreviate a vertex set to its dimensions alone.
+for b in BETAS:
+    for n in range(1, NMAX + 1):
+        labels = [p for (p, d) in vtx[(n, b)]]
+        if labels != list(range(len(labels))):
+            bad("the live labels at (n,beta)=(%d,%s) are %s, not an unbroken "
+                "run from 0 -- the dimensions-only abbreviation used in the "
+                "delivered document is then ambiguous and must be widened"
+                % (n, b, labels))
+# and the abbreviation is checked, not argued: it must separate exactly the
+# pairs the full canonical form separates, on every cell compared below.
+for i, b1 in enumerate(BETAS):
+    for b2 in BETAS[i + 1:]:
+        for n in range(1, NMAX + 1):
+            if ((vdims(vtx[(n, b1)]) == vdims(vtx[(n, b2)]))
+                    != (vtx[(n, b1)] == vtx[(n, b2)])):
+                bad("the dimensions-only abbreviation collides at "
+                    "(n,beta1,beta2)=(%d,%s,%s)" % (n, b1, b2))
+print("  THE VERTEX SETS, COMPARED PAIRWISE.  Population: the %d cells --- %d"
+      % (CELLS, len(BETAS) * (len(BETAS) - 1) // 2))
+print("  ordered pairs of the %d parameters x %d levels." % (len(BETAS), NMAX))
+print()
+print("    cells where the COUNT agrees and the SET does not: %d of %d"
+      % (len(count_eq_set_ne), CELLS))
+for (b1, b2, n, s1, s2) in count_eq_set_ne:
+    print("      beta=%s vs beta=%s at n=%d: both have %d vertices, %s vs %s"
+          % (b1, b2, n, len(s1), vset(s1), vset(s2)))
+if not count_eq_set_ne:
+    bad("no cell has an equal count and an unequal vertex set -- mg-a218 "
+        "measured 10 of 36, and this instrument now disagrees with it")
+print()
 same_vertices = all(vtx[(n, b)] == vtx[(n, 3)]
                     for b in BETAS for n in range(1, NMAX + 1))
 if same_vertices:
     bad("the vertex sets agree at every parameter -- mg-2060 measured them "
         "to differ at beta = 0, and this instrument now agrees with it")
 else:
-    print("  THE VERTEX SETS DIFFER.  At beta = 0 there are fewer irreducibles")
-    print("  at every even level, so the graphs at beta = 3 and beta = 0 do")
-    print("  not even have the same number of vertices.")
-    for n in range(1, NMAX + 1):
-        for b in BETAS:
-            if vtx[(n, b)] != vtx[(n, 3)]:
-                print("    n=%d beta=%d: vertices p=%s   vs beta=3: p=%s"
-                      % (n, b, vtx[(n, b)], vtx[(n, 3)]))
+    print("  THE VERTEX SETS DIFFER, and at TWO parameters, not one:")
+    for b in BETAS:
+        levels = [n for n in range(1, NMAX + 1) if vtx[(n, b)] != vtx[(n, 3)]]
+        if not levels:
+            continue
+        fewer = [n for n in levels if len(vtx[(n, b)]) < len(vtx[(n, 3)])]
+        print("    beta = %s differs from beta = 3 at %d of the %d levels "
+              "(n = %s); the COUNT differs at %d of them"
+              % (b, len(levels), NMAX, ", ".join(str(n) for n in levels),
+                 len(fewer)))
+        for n in levels:
+            print("      n=%d  %s   vs beta=3: %s"
+                  % (n, vset(vtx[(n, b)]), vset(vtx[(n, 3)])))
+    print("    -- so at beta = 1 a COUNT column would have printed the beta = 3")
+    print("       row unchanged at every level while the graph was different at")
+    print("       four of them.  That is the failure mode of the withdrawn")
+    print("       claim, in the column that reports it.")
 print()
 print("  cross-check tying this to T1c: sum over the vertices of (dim L)^2")
 print("  must be the dimension of the semisimple quotient, computed there by")
 print("  two other routes.")
+print()
+print("  THE COLUMN AS SECTION 0 OF THE DELIVERED DOCUMENT PRINTS IT, dimensions")
+print("  only (the labels are an unbroken run from 0, checked above):")
+for b in BETAS:
+    print("    beta = %s :  %s"
+          % (b, " ".join(vdims(vtx[(n, b)]) for n in range(1, NMAX + 1))))
 
 print()
 print("  (ii) THE EDGES --- [L(n,p) restricted to TL_{n-1} : L(n-1,q)]")
@@ -313,6 +400,71 @@ for msg, ok in ctrl:
 
 print()
 print("=" * 74)
+print("T1c2  THE 'iff' OF T1a IS FALSE, MEASURED  (mg-13b2, on mg-2060's X2)")
+print("=" * 74)
+print("mg-2060's X2: T1a asserted that the path-pair basis exists IFF the")
+print("count identity holds.  The converse is refuted here rather than in")
+print("prose, and it is refuted at every (n, beta) where it can be.")
+print()
+print("A basis of matrix units indexed by pairs of paths is exactly an")
+print("isomorphism A = sum_lambda End(V_lambda), and by Wedderburn -- quoted")
+print("in the delivered document, in both directions -- that holds iff A is")
+print("SEMISIMPLE.  No new derivation is introduced here; the criterion is the")
+print("theorem the document already quotes.  So wherever the count identity")
+print("holds and rad(A) is non-zero, the 'if' direction is false at that pair.")
+print()
+print("%3s %6s %8s %14s %10s %20s" %
+      ("n", "beta", "dim A", "sum (#paths)^2", "dim rad", "count identity?"))
+refutations = []
+for n in range(2, NMAX + 1):
+    for b in BETAS:
+        d, r, ss, ranks = table[(n, b)]
+        paths = sum(len(link_states(n, p)) ** 2 for p in range(n // 2 + 1))
+        holds = (paths == d)
+        if not holds:
+            bad("the path-pair count identity fails at (n,beta)=(%d,%s): "
+                "%d vs %d" % (n, b, paths, d))
+        print("%3d %6s %8d %14d %10d %20s"
+              % (n, b, d, paths, r, "yes" if holds else "NO"))
+        if holds and r > 0:
+            refutations.append((n, b, d, paths, r))
+print()
+print("  THE COUNT IDENTITY HOLDS AT ALL %d (n, beta) PAIRS.  It is"
+      % (4 * (NMAX - 1)))
+print("  parameter-free: the link states are defined without reference to")
+print("  beta, so it CANNOT distinguish the semisimple parameters from the")
+print("  others, and an 'iff' resting on it is false wherever the two part.")
+print("  They part at %d of the %d pairs:"
+      % (len(refutations), 4 * (NMAX - 1)))
+for (n, b, d, paths, r) in refutations:
+    print("    TL_%d(%s): dim %d = sum (#paths)^2 = %d, and rad has dimension "
+          "%d -- so it is NOT semisimple and has NO such basis"
+          % (n, b, d, paths, r))
+if not refutations:
+    bad("no (n,beta) refutes the 'if' direction -- mg-2060 exhibited "
+        "TL_2(0), and this instrument now disagrees with it")
+else:
+    sm = min(refutations, key=lambda t: t[2])
+    print()
+    print("  THE SMALLEST IS TL_%d(%s) = k[e]/(e^2), which is mg-2060's own"
+          % (sm[0], sm[1]))
+    print("  counterexample: dim %d, path-pair count 1^2 + 1^2 = %d, radical of"
+          % (sm[2], sm[3]))
+    print("  dimension %d.  It is on T1c's table above and always was." % sm[4])
+    if not (sm[0] == 2 and sm[1] == 0 and sm[2] == 2 and sm[4] == 1):
+        bad("the smallest refutation is not TL_2(0) with a 1-dimensional "
+            "radical, which is what mg-2060 named")
+print()
+print("  What is TRUE, and is the statement the document did not make: a")
+print("  CELLULAR algebra has a cellular basis indexed by pairs of paths,")
+print("  multiplying with lower-cell terms, and it degenerates to matrix units")
+print("  exactly when every cell form is non-degenerate -- exactly when the")
+print("  algebra is semisimple.  The lower-cell terms are what 'the basis")
+print("  survives' elided.  Nothing else in this instrument depended on the")
+print("  'iff': T1a's own numbers are the count identity, unchanged.")
+
+print()
+print("=" * 74)
 print("T1d  THE VERDICT --- WITHDRAWN AND REPLACED  (mg-e8b8, from mg-2060)")
 print("=" * 74)
 print("WHAT THIS BLOCK USED TO SAY, and it was wrong:")
@@ -326,7 +478,10 @@ print("The invariant was never measured at beta != 3 under the definition this")
 print("instrument quotes; the path-pair count was, and equality of that one")
 print("statistic was taken for identity of the structure.  T1b2 measures the")
 print("branching graph itself, at every parameter.  It is not the same graph:")
-print("the vertex set differs at beta = 0 and multiplicities reach 2 at")
+print("the vertex SET differs at beta = 1 and at beta = 0 -- and at beta = 1")
+print("it differs while the NUMBER of vertices agrees with beta = 3 at every")
+print("level, which is why T1b2 (i) reports the set and no count column sits")
+print("beside it (mg-13b2, on mg-a218) -- and multiplicities reach 2 at")
 print("beta = 1 and beta = 0.  THE SEPARATING EXAMPLE IS WITHDRAWN.")
 print()
 print("What is still true, and is measured here:")
@@ -368,6 +523,15 @@ print()
 print("  What survives without semisimplicity is the COUNT, not the")
 print("  DECOMPOSITION: dim TL_n = sum_p (dim V_{n,p})^2 holds at every beta")
 print("  (T1a); the direct sum of endomorphism algebras does not.")
+print()
+print("  MARKED IN PLACE (mg-13b2).  These two sentences used to read '(T1a),")
+print("  so the pairs-of-paths BASIS exists throughout; the direct sum does")
+print("  not.'  That was mg-2060's X2 and mg-e8b8 corrected it HERE while")
+print("  booking X2 as untouched -- the correction was right and the")
+print("  disclosure was not.  X2's remaining sites -- T1a's 'iff', corrected")
+print("  above and refuted in T1c2, and a FOURTH site in section 1 of the")
+print("  delivered document that no list named -- are closed here, so X2 is")
+print("  closed at all four: two at 2e66d03 unmarked, two at mg-13b2.")
 
 print()
 print("TOTAL BAD: %d" % BAD)
