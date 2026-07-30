@@ -1,0 +1,171 @@
+==============================================================================
+D5a  M0 -- THE UNMUTATED SCRATCH COPY (control on this harness)
+==============================================================================
+
+  M0a  no mutation                                          s1_extent.py     exit 0, predicted 0  ok
+           | (a) at ebecd89, the state mg-73df audited      git unavailable -- SKIPPED, and this line
+           | (b) at 83ac472, before mg-f8fa                 git unavailable -- SKIPPED, and this line
+           | S1 TOTAL BAD: 0
+  M0b  no mutation                                          s2_seam.py       exit 0, predicted 0  ok
+           | S2 TOTAL BAD: 0
+  M0c  no mutation                                          check_doc.py     exit 0, predicted 0  ok
+           | CHECK_DOC: PASS   (0 problem(s))
+  M0d  no mutation                                          w3_scope.py      exit 0, predicted 0  ok
+           | W3 SCOPE: PASS   (0 problem(s))
+
+==============================================================================
+D5b  s1_extent.py -- INSIDE the extent it claims: MUST FIRE
+==============================================================================
+
+  M1   restore ebecd89's t6_fock_and_record.py              s1_extent.py     exit 1, predicted 1  ok
+           | STILL ASSERTED  X3     code/species_7d75/t6_fock_and_record.py:149
+  M2   restore ebecd89's out_t6_fock_and_record.txt         s1_extent.py     exit 1, predicted 1  ok
+           | STILL ASSERTED  X3     code/species_7d75/out_t6_fock_and_record.txt:66
+  M3   restore ebecd89's t4_one_operation.py                s1_extent.py     exit 1, predicted 1  ok
+           | STILL ASSERTED  Y2     code/species_7d75/t4_one_operation.py:22
+  M4   restore ebecd89's document                           s1_extent.py     exit 1, predicted 1  ok
+           | Y1  the document states which extents the checkers cover   *** MISSING ***
+           | Y2  §0's headline box no longer asserts the plain isomorphism *** 1 LEFT ***
+           | Y3  the duplicate copy's miscount of the banner            *** 1 LEFT ***
+           | Y3  the stale 'if there is one' left standing above §14.3  *** 1 LEFT ***
+           | Y4  mg-f8fa's filing described as shelved                  *** 1 LEFT ***
+  M6   §0's headline box back to the plain isomorphism      s1_extent.py     exit 1, predicted 1  ok
+           | Y2     §0, the descent algebra read as an ISOMORPHI .          .          .          ok
+           | Y2  §0 states the ANTI-isomorphism the body measures       ok
+           | Y2  §0's headline box no longer asserts the plain isomorphism *** 1 LEFT ***
+  M13  X3 planted in a NEW .md inside code/species_7d75     s1_extent.py     exit 1, predicted 1  ok
+           | STILL ASSERTED  X3     code/species_7d75/NOTE.md:2
+
+==============================================================================
+D5c  s1_extent.py -- OUTSIDE the extent it claims: MUST STAY SILENT
+==============================================================================
+
+  M19  X3 planted in code/species_audit_73df (declared sile s1_extent.py     exit 0, predicted 0  ok
+  M20  X3 planted in another docs/ file (declared silent)   s1_extent.py     exit 0, predicted 0  ok
+       Both silences are DECLARED, in the extent line, by name.
+
+==============================================================================
+D5d  s1_extent.py -- THE BOUNDARY: A FILE THE EXTENT CLAIMS AND SKIPS
+==============================================================================
+
+  M12  X3 planted in code/species_7d75/run_all.sh           s1_extent.py     exit 1, predicted 0  *** PREDICTION MISSED ***
+       code/species_7d75 is one of the FOUR TREES the extent names.
+       run_all.sh is inside it and is not one of the FIVE SKIPPED
+       FILES the run prints.  It is dropped by an extension filter
+       that appears in no extent line and in no printed list.
+
+==============================================================================
+D5e  s1_extent.py -- IS THE MARKER LOAD-BEARING?
+==============================================================================
+
+  M10  delete the 'CORRECTED AT SOURCE (mg-a4ef' line only  s1_extent.py     exit 0, predicted 0  ok
+  M11  delete the marker AND every other clause in the wind s1_extent.py     exit 0, predicted 1  *** PREDICTION MISSED ***
+  M11b the same, with the SECOND 'closure' removed too (add s1_extent.py     exit 1, predicted 1  ok
+           | STILL ASSERTED  X3     code/species_7d75/t6_fock_and_record.py:163
+       M10 vs M11 is the over-determination of D2e, measured: 59% of
+       the occurrences inside the extent are held by two or more
+       independent clauses, so deleting the marker the repair points
+       at need not move the number.
+
+==============================================================================
+D5f  check_doc.py -- BOTH DIRECTIONS
+==============================================================================
+
+  M18  un-strike §4's AM 17.5 quotation (INSIDE its extent) check_doc.py     exit 1, predicted 1  ok
+           | §4, the AM §17.5 quotation                 occurrences 1   outside a strike 1  *** STILL
+           | 3  the corrected AM §17.5 species                          ok
+  M2b  X3 asserted in code/species_7d75 (OUTSIDE its extent check_doc.py     exit 0, predicted 0  ok
+           | CHECK_DOC: PASS   (0 problem(s))
+       The second is declared: 'It reads no code.'  True, measured.
+
+==============================================================================
+D5g  w3_scope.py -- BOTH DIRECTIONS
+==============================================================================
+
+  M21  X4 asserted in code/species_7d75 (INSIDE its extent) w3_scope.py      exit 1, predicted 1  ok
+           | STILL ASSERTED AT  NOTE.md:2
+           | W3 SCOPE: FAIL   (1 problem(s))
+  M22  X4 asserted in code/species_repair_6f61 (OUTSIDE it) w3_scope.py      exit 0, predicted 0  ok
+           | W3 SCOPE: PASS   (0 problem(s))
+       Both as declared: 'over ONE tree'.
+
+==============================================================================
+D5h  s2_seam.py -- BOTH DIRECTIONS, AND ITS BOUNDARY
+==============================================================================
+
+  M5   restore ebecd89's document -- the duplicate box retu s2_seam.py       exit 1, predicted 1  ok
+           | *** NEAR-DUPLICATE  56% similar: lines 1010-1019 and 1047-1058
+  M8   delete the 'Eight things changed' banner             s2_seam.py       exit 1, predicted 1  ok
+           | the banner announces          : '- things changed'
+           | *** the banner no longer announces its own item count ***
+           | prose references such as 'the banner at the top'.  S2c is 2 named
+  M9   rename the heading '### 14.2' to '### 14.5'          s2_seam.py       exit 1, predicted 1  ok
+           | §14.2   *** REFERS TO NOTHING ***
+           | §14.3's 'as §14.2 predicted' still has a §14.2 to name         *** DANGLING ***
+  M17  an EXACT duplicate of a LONG block quote (>300 chars s2_seam.py       exit 1, predicted 1  ok
+           | *** NEAR-DUPLICATE  100% similar: lines 119-137 and 1255-1273
+  M16  an EXACT duplicate of a SHORT block quote (139 chars s2_seam.py       exit 0, predicted 0  ok
+           | and until mg-d633 that case exited 0 while this run said 'worst pair
+           | worst pair among the 19 over 60 chars: 53%  (lines 482-483 vs 490-491), said-twice thres
+           | worst pair among the 12 over 300 chars: 7%  (lines 175-181 vs 623-628), threshold 45%
+           | worst pair among the 100 over 60 chars: 57%  (lines 470-473 vs 1255-1256), said-twice th
+           | worst pair among the 64 over 300 chars: 24%  (lines 165-173 vs 485-488), threshold 45%
+  M25  an EXACT duplicate of a SHORT prose paragraph (98 ch s2_seam.py       exit 1, predicted 0  *** PREDICTION MISSED ***
+           | prose paragraphs       132 passage(s):  64 over 300 chars (the 45% sweep),
+       M16 is 100%% similar, inside the ONE document the extent says
+       it sweeps, and the run reports 'worst pair 5%'.  The EXTENT
+       paragraph names two limits -- cross-document, and paraphrase
+       below 45%% -- and neither is this one.
+
+==============================================================================
+D5i  X8 -- THE ELEVENTH STRIKE, ON NO LIST
+==============================================================================
+
+  M14a un-strike §1's 'three independent agreements'        check_doc.py     exit 0, predicted 0  ok
+           | CHECK_DOC: PASS   (0 problem(s))
+  M14b the same mutation                                    s1_extent.py     exit 0, predicted 0  ok
+           | S1 TOTAL BAD: 0
+  M14c the same mutation                                    s2_seam.py       exit 0, predicted 0  ok
+           | S2 TOTAL BAD: 0
+  M15a X8 asserted unmarked in code/species_7d75            s1_extent.py     exit 0, predicted 0  ok
+  M15b the same, against mg-73df's own c4_scope.py          c4_scope.py      exit 0, predicted 1  *** PREDICTION MISSED ***
+           | *** STILL ASSERTED    X8                               NOTE.md:2
+           | X8                               NOTE.md:2
+           | C4 STILL ASSERTED AT SOURCE: 1
+       A statement the document withdrew, restored to live prose, and
+       every checker in the arc reports clean -- except the one whose
+       list carries it, which is the one this repair did not union.
+
+==============================================================================
+D5j  THE DELETED BOX PUT BACK, AND w3_scope.py AIMED AT BOTH HISTORIES
+==============================================================================
+
+  M7   re-insert ONLY the deleted duplicate box into §14    s2_seam.py       exit 1, predicted 1  ok
+==============================================================================
+     w3_scope.py against the two trees its own docstring cites
+==============================================================================
+
+  M23  w3_scope.py against the tree at 83ac472   exit 1, predicted 1  ok
+           | W3 SCOPE: FAIL   (12 problem(s))
+  M24  w3_scope.py against the tree at ebecd89   exit 0, predicted 0  ok
+           | W3 SCOPE: PASS   (0 problem(s))
+       M23 is the exit-code fix mg-a4ef disclosed beyond mg-73df's
+       five, measured: 12 problems and a nonzero exit.  M24 is
+       mg-73df's control (b) -- w3_scope PASSES the tree its own
+       MAJOR was found in.
+
+==============================================================================
+D5 PREDICTIONS MISSED: 4 of 34
+==============================================================================
+    MISSED  M12    exit 1, predicted 0
+    MISSED  M11    exit 0, predicted 1
+    MISSED  M25    exit 1, predicted 0
+    MISSED  M15b   exit 0, predicted 1
+
+EXTENT OF THIS NUMBER.  D5 runs 34 mutations against 5 checkers in a
+scratch copy of docs/ and 5 code trees.  It probes the boundary of
+each checker's PRINTED extent in both directions and nothing else: it
+does not test the mathematics, does not mutate the code trees'
+algorithms, and cannot show that a checker is right -- only where it
+stops.  A mutation this file does not contain is a boundary nobody
+has probed.

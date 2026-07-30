@@ -166,9 +166,19 @@ falsifier.**
 not a discrepancy at all. It is the difference between the two Fock functors applied to one
 species.** `dim K̄(Π)_n = |Π[n]| = Bell(n)` (symmetric functions in **noncommuting**
 variables); `dim K(Π)_n = |Π[n]/S_n| = p(n)` (symmetric functions). Measured to `n = 7`, 0
-bad (T6a). Aguiar–Mahajan §17.5, quoting their own §17.4: *"`K̄(Π)` is the algebra of
-symmetric functions in noncommuting variables and `K(Π)` is the familiar Hopf algebra of
-symmetric functions."*
+bad (T6a). Aguiar–Mahajan §17.5, quoting their own §17.4, records both values — **and the
+rendering of that sentence with `K̄(Π)` in the first slot and `K(Π)` in the second is a
+MISQUOTATION. The book's species is `Π*` in both slots.** The extraction, the correction and
+why the difference is mathematically harmless (AM §17.4.1, *"Since `Π` and `Π∗` are
+isomorphic"*) are at **§4**, which is where the strike lives.
+
+> **This paragraph carried that misquotation as a direct quotation with a section citation,
+> live and unmarked, from `83ac472` until mg-d633 — 310 lines above the §4 strike that
+> retracts it, in the same document, past four passes and with every checker green** (mg-7dd3
+> **B1**). **A reader of §0 has no reason to reach §4**, so the strike was invisible exactly to
+> the population holding the wrong belief. A correction is only as good as the odds that
+> whoever holds the false belief encounters it — which is why it is fixed *here*, and why
+> §14.5 adds the checker that compares a strike against the rest of its own document.
 
 **Four things that must be said in the same breath as the yes, because each of them limits
 it.** *(The fourth was added by the repair mg-6f61; it was stated correctly in §3 and in
@@ -1164,15 +1174,76 @@ that code, and the correction mg-f8fa itself centres on was still live at source
 **WHICH EXTENTS EACH CHECKER COVERS.** This is the half §14.3 did not do, and it is why a
 passing run kept reading as coverage. It is now printed by the run itself:
 
-| checker | statements | targets |
-|---|---|---|
-| `check_doc.py` (mg-6f61) | 10 of 11 | **1 file** — this document |
-| `w3_scope.py` (mg-f8fa) | **2 of 11** | 1 tree — `code/species_7d75` |
-| `s1_extent.py` (mg-a4ef) | **11 of 11** | this document **+ 4 code trees** |
+| checker | statements | targets | extent measured (mg-d633) |
+|---|---|---|---|
+| `check_doc.py` (mg-6f61) | 10 of 11 | **2 files** — this document, and the repair document for C4's five assertions | was **narrower** than the code reads; **claim corrected** |
+| `w3_scope.py` (mg-f8fa) | **2 of 11** | 1 tree — `code/species_7d75`, **18 files, every regular file** | was **wider**; **code widened** |
+| `s1_extent.py` (mg-a4ef) | **11 of 11** | this document **+ 4 code trees**, every regular file of each | was **wider**; **code widened** |
+| `s2_seam.py` (mg-a4ef) | n/a — a shape, not a list | this document; every passage over 60 normalised chars | was **wider**; **code widened** |
+| `e2_crosssection.py` (mg-d633) | every strike, whatever it says | **100 `.md` files** under `docs/` and `code/`; 12 carry a strike, 30 strikes measured | measured at birth, both directions |
 
 **A passing run of any one of them is not coverage of another's extent**, and `S1 TOTAL BAD:
 0` is now followed by a statement of what it is silent about: the other documents in `docs/`,
-the two audit trees, and any statement not on the list.
+the audit trees, and any statement not on the list.
+
+### 14.5 The printed extent was measured, and half of it was false — added by mg-d633
+
+**§14.4's remedy was the right one and it relocated the trust rather than removing it.** Once
+every checker prints its own extent, every other green result in this document rests on those
+lines being true — and **two of the four were wider than what the code read**, which is worse
+than printing no extent at all. A bare `TOTAL BAD: 0` invites the question *of what?*; an
+extent line **answers** it, authoritatively, so a false one converts a reader's correct
+suspicion into false confidence.
+
+**The two, and which repair each got — they are different repairs with different costs and a
+reader is entitled to know which happened.**
+
+1. **`s1_extent.py` printed *"SKIPPED, NAMED, so the exclusion cannot grow unseen — 5
+   file(s)"*. The real exclusion was 9.** An extension filter dropped the four `run_all.sh`
+   inside the four trees the extent names; it appeared in no extent line and on no printed
+   list. **THE CODE WAS WIDENED**, not the claim narrowed: every regular file in every tree is
+   now read, the named list is again the whole exclusion, and anything undecodable is printed
+   by name. `w3_scope.py` had the same filter over its one tree and got the same repair.
+2. **`s2_seam.py`'s extent named two limits and omitted `MIN_CHARS = 300`**, which removed 6 of
+   17 block quotes and 65 of 124 prose paragraphs from the comparison *altogether* — an exact,
+   100 %-identical duplicate of a short block quote exited 0 while the run said *"worst pair
+   5 %"*. **THE CODE WAS WIDENED**: a second pass compares every passage over 60 normalised
+   characters to every other for near-identity at 90 %, the 45 % sweep keeps its 300-character
+   floor because two *different* quotations of one book score 52.8 % on vocabulary alone, and
+   the passages neither pass compares are now printed one per line instead of being counted.
+3. **And one narrower than reality, which is the safe direction and still a false statement.**
+   `check_doc.py` said it read *"ONE FILE … It reads no code."* It reads two; the second
+   carries five of its own assertions. **THE CLAIM WAS NARROWED** — nothing was widened,
+   because nothing needed to be.
+
+**Then each was probed in both directions**, which is the part that makes the extent a
+measurement instead of a sentence: a mutation planted **inside** the claimed extent must make
+the checker **fire**, and a mutation **outside** it must leave the checker **silent**.
+**Twenty-eight probes, five checkers**, every exit code predicted before the run, per-checker
+results in `code/species_extent_d633/out_e3_bothways.txt`.
+
+> **A structural remedy is not done when it ships. It is done when its single point has been
+> measured in both directions.** Printing the extent removed the failure mode and created one
+> place where everything is now trusted at once; a single point that has only been read is not
+> a measured one.
+
+**And the cross-section check, because this will recur.** §0 asserted, live, the sentence §4
+strikes — same document, 310 lines apart, since `83ac472`, past four passes, **with every
+checker green and every extent line true**. No checker was wrong: `check_doc.py` requires the
+struck string to occur only inside a strike, and it does — the stored string carries its
+lead-in and §0's copy had a different one. **A list of sentences is not a list of claims, and a
+per-section checker cannot see this by construction — which is why all of them were green.**
+
+`code/species_extent_d633/e2_crosssection.py` is the check that can: **for every span the
+document strikes through, the longest verbatim run it shares with that same document outside
+every strike.** A run of 8 or more tokens that is half the strike or more is the claim itself said
+again, not a shared lead-in. It is exonerated only if the paragraph carrying it *says* the
+claim is retracted — **not** merely by naming a ticket nearby, because a ±6-line window
+containing an unrelated `mg-6f61` exonerates §0's copy and that is measured, not supposed. Run
+over 100 `.md` files, it measures 30 strikes and reports **0 standing**; the other ten in
+this document share 45 % or less with it.
+
+**For each retraction, every other occurrence of the claim must be struck or removed too.**
 
 **What this section does not claim.** That the list is complete — it is the union of two
 lists, and mg-73df's own finding is that a union of lists is still a list. Y2 was added to it

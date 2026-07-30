@@ -76,18 +76,48 @@ DISARMERS = [
 ]
 
 
+# mg-d633 (mg-7dd3's BROKEN A1): THE CODE WAS WIDENED, NOT THE CLAIM NARROWED.
+#
+# This function used to filter on `.py/.txt/.md` BEFORE the named exclusion was
+# consulted.  Four `run_all.sh` -- one in each of the four trees the extent
+# names -- were therefore dropped by a rule that appeared in no extent line and
+# on no printed list, while the run said "SKIPPED, NAMED, so the exclusion
+# cannot grow unseen -- 5 file(s)".  A forbidden sentence planted in one of
+# them exited 0.  The printed extent was WIDER THAN WHAT THE CODE READ, which
+# is worse than printing none: a bare total invites the question `of what?`,
+# and an extent line answers it.
+#
+# So the scan now reads EVERY REGULAR FILE in each tree.  The only remaining
+# exclusions are the five named in EXCLUDE and any file that is not decodable
+# as UTF-8 text -- and the second kind is NAMED IN THE OUTPUT, one by one, as
+# it is found, so it cannot grow unseen either.  There is no extension rule
+# left to leave out of a sentence.
 def tree_files(root):
+    """(files scanned, files skipped because they are not UTF-8 text)."""
     if not os.path.isdir(root):
-        return []
-    return sorted(f for f in os.listdir(root)
-                  if (f.endswith(".py") or f.endswith(".txt")
-                      or f.endswith(".md")) and f not in EXCLUDE)
+        return [], []
+    scanned, undecodable = [], []
+    for f in sorted(os.listdir(root)):
+        p = os.path.join(root, f)
+        if not os.path.isfile(p) or f in EXCLUDE:
+            continue
+        try:
+            open(p, encoding="utf-8").read()
+        except (UnicodeDecodeError, OSError):
+            undecodable.append(f)
+            continue
+        scanned.append(f)
+    return scanned, undecodable
+
+
+def tree_scanned(root):
+    return tree_files(root)[0]
 
 
 def scan_tree(root):
     """{correction_id: [(file, line)]} for everything still ASSERTED."""
     out = {}
-    for f in tree_files(root):
+    for f in tree_scanned(root):
         text = open(os.path.join(root, f), encoding="utf-8").read()
         for cid, _label, _doc, pats, own in CORRECTIONS:
             for ln, asserted in scan(text, pats, own):
@@ -107,17 +137,33 @@ print("  which is the UNION of check_doc.py's %d STRICKEN rows and"
       % (len(CORRECTIONS) - 1))
 print("  w3_scope.py's 2 FORBIDDEN rows, plus Y2, which is new here.")
 print()
-print("  THE TARGETS: the document, and %d code trees --" % len(TREES))
+print("  THE TARGETS: the document, and %d code trees.  EVERY REGULAR FILE in"
+      % len(TREES))
+print("  each tree is read -- there is no extension rule (mg-d633) --")
+undecodable = []
 for t in TREES:
     root = os.path.join(REPO, "code", t)
-    print("      code/%-24s %3d file(s)" % (t, len(tree_files(root))))
+    scanned, undec = tree_files(root)
+    undecodable += [(t, f) for f in undec]
+    print("      code/%-24s %3d file(s) read" % (t, len(scanned)))
 print()
 print("  SKIPPED, NAMED, so the exclusion cannot grow unseen -- %d file(s):"
       % len(EXCLUDE))
 for e in sorted(EXCLUDE):
     print("      %s" % e)
-print("  Note what is NOT skipped: committed out_*.txt.  A forbidden sentence")
-print("  in a committed output is precisely the defect this repair closes.")
+print("  and %d file(s) skipped as not decodable UTF-8 text, NAMED THE SAME"
+      % len(undecodable))
+print("  WAY rather than filtered by a rule no sentence carries:")
+for t, f in undecodable:
+    print("      code/%s/%s" % (t, f))
+if not undecodable:
+    print("      (none)")
+print("  Those two lists are the WHOLE exclusion.  Until mg-d633 a third one")
+print("  existed and was printed nowhere: an extension filter that dropped the")
+print("  four run_all.sh inside the four trees named above, so the extent line")
+print("  claimed more than the code read (mg-7dd3 A1, BROKEN).  Note also what")
+print("  is NOT skipped: committed out_*.txt.  A forbidden sentence in a")
+print("  committed output is precisely the defect this repair closes.")
 print()
 print("  WHAT THE OTHER TWO CHECKERS COVER, STATED SO IT CANNOT BE READ AS")
 print("  MORE:")
@@ -154,7 +200,7 @@ for cid, label, _doc, pats, own in CORRECTIONS:
             continue
         # present but exonerated?
         occurs = False
-        for f in tree_files(root):
+        for f in tree_scanned(root):
             text = open(os.path.join(root, f), encoding="utf-8").read()
             if scan(text, pats, own):
                 occurs = True
@@ -300,9 +346,16 @@ print("S1 TOTAL BAD: %d" % bad)
 print("=" * 78)
 print()
 print("EXTENT OF THIS NUMBER, stated because mg-73df's MAJOR is what happens")
-print("when it is not: %d corrections over the document and %d code trees."
+print("when it is not: %d corrections over the document and %d code trees,"
       % (len(CORRECTIONS), len(TREES)))
-print("It says NOTHING about docs/ other than the one document named above,")
-print("about the audit trees code/species_audit_a61f and")
-print("code/species_audit_73df, or about any statement not in the list.")
+print("EVERY REGULAR FILE of each, less the %d named above and the %d named as"
+      % (len(EXCLUDE), len(undecodable)))
+print("undecodable.  It says NOTHING about docs/ other than the one document")
+print("named above, about the audit trees code/species_audit_a61f,")
+print("code/species_audit_73df, code/species_audit_7dd3 or the instrument")
+print("code/species_extent_d633, or about any statement not in the list.")
+print("AND IT SAYS NOTHING ABOUT WHETHER A STRUCK CLAIM IS RESTATED ELSEWHERE")
+print("IN THE DOCUMENT IN OTHER WORDS -- this list matches SENTENCES, and a")
+print("sentence is not a claim (mg-7dd3 B1).  That is:")
+print("    python3 code/species_extent_d633/e2_crosssection.py")
 sys.exit(1 if bad else 0)

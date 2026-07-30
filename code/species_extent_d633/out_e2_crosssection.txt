@@ -1,0 +1,106 @@
+==============================================================================
+E2a  EVERY STRIKE AGAINST ITS OWN DOCUMENT
+==============================================================================
+
+  Rule: a run of >= 8 shared tokens that is >= 50% of the strike is
+  the CLAIM said again, not a shared lead-in.  Every strike is listed
+  with its measurement whether it fires or not, so the margins are
+  visible instead of a verdict.
+
+  code/species_audit_7dd3/PREDICTIONS.md                      1 strike(s)
+       1 below the rule,  0 exonerated,  0 STANDING
+        strike line 107   run   1 of   1 (100%)  restated at line 105    below the rule
+
+  code/species_audit_7dd3/README.md                           1 strike(s)
+       1 below the rule,  0 exonerated,  0 STANDING
+        strike line 18    run   0 of   1 (  0%)  restated at line -      below the rule
+
+  code/species_repair_6f61/README.md                          1 strike(s)
+       1 below the rule,  0 exonerated,  0 STANDING
+        strike line 52    run   0 of   1 (  0%)  restated at line -      below the rule
+
+  code/state_landing_control_2da3/COVERAGE.md                 1 strike(s)
+       1 below the rule,  0 exonerated,  0 STANDING
+        strike line 353   run   4 of  12 ( 33%)  restated at line 359    below the rule
+
+  docs/OneThird-Audit-mg-73df-Species-Repair-Final-State.md   1 strike(s)
+       0 below the rule,  1 exonerated,  0 STANDING
+        strike line 82    run  18 of  18 (100%)  restated at line 96     exonerated: quoted inside a declared table of stricken strings
+
+  docs/OneThird-Audit-mg-7dd3-Extent-Repair.md                3 strike(s)
+       3 below the rule,  0 exonerated,  0 STANDING
+        strike line 57    run   1 of   1 (100%)  restated at line 275    below the rule
+        strike line 205   run  17 of 746 (  2%)  restated at line 205    below the rule
+        strike line 59    run  24 of 2023 (  1%)  restated at line 271    below the rule
+
+  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md    4 strike(s)
+       4 below the rule,  0 exonerated,  0 STANDING
+        strike line 112   run   6 of  11 ( 55%)  restated at line 574    below the rule
+        strike line 75    run   4 of  17 ( 24%)  restated at line 76     below the rule
+        strike line 708   run   8 of  40 ( 20%)  restated at line 711    below the rule
+        strike line 573   run   5 of  33 ( 15%)  restated at line 422    below the rule
+
+  docs/OneThird-Hodge-Side-Leverage.md                        2 strike(s)
+       1 below the rule,  1 exonerated,  0 STANDING
+        strike line 1011  run   6 of   6 (100%)  restated at line 482    below the rule
+        strike line 1011  run  21 of  38 ( 55%)  restated at line 481    exonerated: the paragraph says it does not hold
+
+  docs/OneThird-Species-Hopf-Monoids-Repair-Extent.md         1 strike(s)
+       1 below the rule,  0 exonerated,  0 STANDING
+        strike line 55    run   0 of   1 (  0%)  restated at line -      below the rule
+
+  docs/OneThird-Species-Hopf-Monoids-Repair-Remainder.md      1 strike(s)
+       1 below the rule,  0 exonerated,  0 STANDING
+        strike line 103   run   7 of  38 ( 18%)  restated at line 112    below the rule
+
+  docs/OneThird-Species-Hopf-Monoids-Repair.md                3 strike(s)
+       3 below the rule,  0 exonerated,  0 STANDING
+        strike line 402   run   1 of   1 (100%)  restated at line 392    below the rule
+        strike line 116   run   7 of  19 ( 37%)  restated at line 27     below the rule
+        strike line 48    run  12 of  45 ( 27%)  restated at line 26     below the rule
+
+  docs/OneThird-Species-Hopf-Monoids-Where-This-Lives.md     11 strike(s)
+      10 below the rule,  1 exonerated,  0 STANDING
+        strike line 359   run   8 of  13 ( 62%)  restated at line 13     exonerated: the paragraph says it does not hold
+        strike line 846   run   5 of  11 ( 45%)  restated at line 272    below the rule
+        strike line 267   run  17 of  50 ( 34%)  restated at line 271    below the rule
+        strike line 802   run  14 of  45 ( 31%)  restated at line 829    below the rule
+        strike line 311   run   2 of   7 ( 29%)  restated at line 310    below the rule
+        strike line 220   run   5 of  18 ( 28%)  restated at line 625    below the rule
+        strike line 486   run  11 of  42 ( 26%)  restated at line 490    below the rule
+        strike line 936   run   8 of  31 ( 26%)  restated at line 756    below the rule
+        strike line 714   run   7 of  35 ( 20%)  restated at line 756    below the rule
+        strike line 613   run   3 of  18 ( 17%)  restated at line 613    below the rule
+        strike line 871   run  15 of 118 ( 13%)  restated at line 1076   below the rule
+
+  12 file(s) carry a strike, 30 strike(s) measured, 0 standing.
+
+==============================================================================
+E2b  CONTROLS -- a detector only ever seen to pass is worth nothing
+==============================================================================
+
+  (a) B1 restored -- §0 carries the sentence §4 strikes      fires, 1 finding -- ok
+        strike line 476 restated at line 169, run 31 of 42
+  (b) the same sentence in a paragraph that RETRACTS it       silent -- ok
+  (c) mg-a4ef's ±6-line ticket-id rule, applied to (a)        DISARMED -- ok, the narrowing is load-bearing
+        `mg-6f61` sits 5 line(s) from the restatement, and is about an
+        UNRELATED correction.  That is why exoneration here needs
+        the paragraph to SAY the claim does not hold.
+  (d) 400 tokens of this document appended, no new strike     silent -- ok
+  (e) a document with no strike                               silent -- ok
+
+==============================================================================
+E2 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER.  100 markdown file(s) -- every *.md under docs/
+and under code/, recursively.  12 of them carry at least one strike and
+30 strike(s) were measured; a file with no `~~` contributes nothing and
+is not evidence of anything.  IT READS NO .py, NO .txt AND NO CODE: a
+claim struck in a document and asserted in a code tree is s1_extent.py's
+extent, not this one, and that division is the whole of mg-73df's MAJOR
+said once more.  WITHIN a document it compares a strike ONLY against
+that document -- a claim struck here and asserted in ANOTHER file is
+invisible to every checker in this repository, and that is the next
+hole, named rather than closed.  And it matches VERBATIM RUNS: a claim
+restated in different words, at any length, is invisible to it.

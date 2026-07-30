@@ -6,11 +6,12 @@ S1a  EXTENT DECLARATION -- what is enforced, and over what
   which is the UNION of check_doc.py's 10 STRICKEN rows and
   w3_scope.py's 2 FORBIDDEN rows, plus Y2, which is new here.
 
-  THE TARGETS: the document, and 4 code trees --
-      code/species_7d75              17 file(s)
-      code/species_repair_6f61       12 file(s)
-      code/species_remainder_f8fa    11 file(s)
-      code/species_repair_a4ef        8 file(s)
+  THE TARGETS: the document, and 4 code trees.  EVERY REGULAR FILE in
+  each tree is read -- there is no extension rule (mg-d633) --
+      code/species_7d75              18 file(s) read
+      code/species_repair_6f61       13 file(s) read
+      code/species_remainder_f8fa    12 file(s) read
+      code/species_repair_a4ef        9 file(s) read
 
   SKIPPED, NAMED, so the exclusion cannot grow unseen -- 5 file(s):
       OUTCOMES.md
@@ -18,8 +19,15 @@ S1a  EXTENT DECLARATION -- what is enforced, and over what
       out_c4_scope_73df_after.txt
       out_c5_doc_73df_after.txt
       stricken_a4ef.py
-  Note what is NOT skipped: committed out_*.txt.  A forbidden sentence
-  in a committed output is precisely the defect this repair closes.
+  and 0 file(s) skipped as not decodable UTF-8 text, NAMED THE SAME
+  WAY rather than filtered by a rule no sentence carries:
+      (none)
+  Those two lists are the WHOLE exclusion.  Until mg-d633 a third one
+  existed and was printed nowhere: an extension filter that dropped the
+  four run_all.sh inside the four trees named above, so the extent line
+  claimed more than the code read (mg-7dd3 A1, BROKEN).  Note also what
+  is NOT skipped: committed out_*.txt.  A forbidden sentence in a
+  committed output is precisely the defect this repair closes.
 
   WHAT THE OTHER TWO CHECKERS COVER, STATED SO IT CANNOT BE READ AS
   MORE:
@@ -99,7 +107,13 @@ S1 TOTAL BAD: 0
 ==============================================================================
 
 EXTENT OF THIS NUMBER, stated because mg-73df's MAJOR is what happens
-when it is not: 11 corrections over the document and 4 code trees.
-It says NOTHING about docs/ other than the one document named above,
-about the audit trees code/species_audit_a61f and
-code/species_audit_73df, or about any statement not in the list.
+when it is not: 11 corrections over the document and 4 code trees,
+EVERY REGULAR FILE of each, less the 5 named above and the 0 named as
+undecodable.  It says NOTHING about docs/ other than the one document
+named above, about the audit trees code/species_audit_a61f,
+code/species_audit_73df, code/species_audit_7dd3 or the instrument
+code/species_extent_d633, or about any statement not in the list.
+AND IT SAYS NOTHING ABOUT WHETHER A STRUCK CLAIM IS RESTATED ELSEWHERE
+IN THE DOCUMENT IN OTHER WORDS -- this list matches SENTENCES, and a
+sentence is not a claim (mg-7dd3 B1).  That is:
+    python3 code/species_extent_d633/e2_crosssection.py

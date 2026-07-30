@@ -1,0 +1,192 @@
+==============================================================================
+D3a  ALL BLOCK QUOTES, EVERY PAIR
+==============================================================================
+
+  the document has 17 block quotes, as mg-73df and mg-a4ef both counte *** FAILS ***
+
+  block quotes: 19 passage(s); 19 above my 60-character floor (0 dropped, Markdown rules); 171 pair(s) compared
+                mg-a4ef compares 12 of them, at a 300-character floor.
+
+      run   sim   lines          lines          chars     seen by s2_seam.py?
+      12     3.1% 119-137        441-464        1495/1962 yes
+      7      4.2% 7-53           441-464        3404/1962 yes
+      6     52.8% 482-483        490-491        139/164   NO -- below its 300-char floor
+      4     12.2% 85-110         482-483        1418/139  NO -- below its 300-char floor
+      4     12.0% 85-110         490-491        1418/164  NO -- below its 300-char floor
+      4      3.4% 7-53           361-379        3404/1358 yes
+      4      2.7% 7-53           119-137        3404/1495 yes
+      4      2.2% 7-53           85-110         3404/1418 yes
+      3      9.5% 361-379        482-483        1358/139  NO -- below its 300-char floor
+      3      9.1% 119-137        482-483        1495/139  NO -- below its 300-char floor
+
+      DUPLICATES by the run criterion (>= 12 shared words): 1
+      pairs above 45% similarity                        : 1
+      highest pair BELOW the threshold                 : 38.4% (6.6 points under), longest shared run 2 word(s)
+
+      ABOVE 45%: lines 482-483 vs 490-491, 52.8% similar, longest
+                 shared run 6 word(s) -- same subject, NOT said twice
+
+      12 shared words: lines 119-137 and 441-464
+          *** UNDECLARED REPETITION ***
+  that repetition is on the declared inspected list                    *** FAILS ***
+
+==============================================================================
+D3b  ALL PROSE PARAGRAPHS, EVERY PAIR
+==============================================================================
+
+  prose paragraphs: 131 passage(s); 99 above my 60-character floor (32 dropped, Markdown rules); 4851 pair(s) compared
+                    mg-a4ef compares 64 of them, at a 300-character floor.
+
+      run   sim   lines          lines          chars     seen by s2_seam.py?
+      15     2.3% 910-917        1017-1021      639/396   yes
+      13     2.1% 878-908        1075-1081      2537/538  yes
+      10     3.2% 861-876        1075-1081      1292/538  yes
+      10     3.1% 861-876        878-908        1292/2537 yes
+      10     2.2% 731-768        980-985        3089/762  yes
+      10     1.5% 878-908        993-1005       2537/996  yes
+      9     12.0% 274-282        980-985        773/762   yes
+      8     24.2% 165-173        485-488        739/311   yes
+      8      8.0% 187-212        512-515        1917/345  yes
+      8      7.2% 187-212        434-439        1917/474  yes
+
+      DUPLICATES by the run criterion (>= 12 shared words): 2
+      pairs above 45% similarity                        : 0
+      highest pair BELOW the threshold                 : 40.9% (4.1 points under), longest shared run 1 word(s)
+
+
+      *** SAID TWICE: lines 910-917 and 1017-1021, 15 shared words
+      *** SAID TWICE: lines 878-908 and 1075-1081, 13 shared words
+          *** UNDECLARED REPETITION ***
+  that repetition is on the declared inspected list                    *** FAILS ***
+          *** UNDECLARED REPETITION ***
+  that repetition is on the declared inspected list                    *** FAILS ***
+
+==============================================================================
+D3b'  CONTROL -- THE SAME SWEEP ON THE DOCUMENT mg-73df AUDITED
+==============================================================================
+
+  A duplicate detector only ever seen to find nothing is worth
+  nothing.  The same code, unchanged, is run against the document at
+  ebecd89, where the box stood twice and mg-73df measured 56%.
+
+      block quotes at ebecd89: 17; pairs sharing >= 12 words: 2
+      FOUND  lines 1010-1019 vs 1047-1058  55.7% similar, 17 shared words
+      FOUND  lines 100-118 vs 412-435  3.1% similar, 12 shared words
+  the sweep FINDS mg-73df's pair in the document that had it           ok
+  and it measures it above 45%, as mg-73df did at 56%                  ok
+
+==============================================================================
+D3c  THE SWEEP'S OWN EXTENT -- WHAT THE 300-CHARACTER FLOOR HIDES
+==============================================================================
+
+  s2_seam.py's EXTENT paragraph, in full:
+
+      "S2a is a similarity sweep over ONE document and cannot see a
+       duplicate spread across two documents, or one paraphrased
+       below 45%."
+
+  It does not mention MIN_CHARS.  The S2a line above it prints the
+  surviving count -- '17 passage(s), 11 longer than 300 characters' --
+  so the number is visible; the EXTENT sentence, which is the line a
+  reader is meant to take as the statement of what the zero ranged
+  over, is not.
+
+  block quotes         7 of  19 passages are at or below 300 chars
+                     105 of 171 pairs are therefore never compared, at ANY
+                     similarity -- including an exact duplicate.
+  prose paragraphs    67 of 131 passages are at or below 300 chars
+                     2835 of 4851 pairs are therefore never compared, at ANY
+                     similarity -- including an exact duplicate.
+
+  s2_seam.py's EXTENT paragraph states the 300-character floor         ok
+  d5 plants an EXACT duplicate of a short block quote and measures
+  the exit code.  A 100%%-similar pair inside the one document the
+  extent says it sweeps is the boundary probe the strengthened brief
+  asks for.
+
+==============================================================================
+D3d  EVERY INTERNAL CROSS-REFERENCE, INCLUDING THE ONES s2_seam FILTERS
+==============================================================================
+
+  headings present            : 0, 1, 10, 11, 12, 13, 14, 14.1, 14.2, 14.3, 14.4, 14.5, 2, 2.1, 2.2, 2.3, 3, 4, 5, 6, 7, 8, 9
+  sections that use sub-heads : 14, 2
+
+      §10.10  DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §13.1   DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §13.4   DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §14.2   checked by s2_seam                       resolves
+      §14.3   checked by s2_seam                       resolves
+      §14.4   checked by s2_seam                       resolves
+      §14.5   checked by s2_seam                       resolves
+      §17.4   DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §17.5   DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §2.1    checked by s2_seam                       resolves
+      §2.2    checked by s2_seam                       resolves
+      §2.3    checked by s2_seam                       resolves
+      §2.6    DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §4.1    DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §6.1    DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §6.2    DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §6.4    DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §6.5    DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+      §8.13   DROPPED by s2_seam's 'subheaded' filter  refers to no heading
+
+  every reference s2_seam CHECKS resolves                              ok
+  12 of 19 §N.M references are dropped before the check.
+  They are dropped for a stated and correct reason -- this document
+  writes '§6.1' for item 1 of §6's numbered list, and '§17.4' for a
+  section of Aguiar-Mahajan -- and s2_seam.py says so in a comment.
+  It is not said in the EXTENT paragraph, which claims only that S2b
+  'resolves numbered sub-section references only'.  A reader takes
+  that to mean all of them.
+  no dropped reference happens to name a §14.x that does not exist     ok
+
+==============================================================================
+D3e  THE BY-NAME CHAIN §14.3 -> §14.2, WHICH A RESOLVED DUPLICATE BREAKS
+==============================================================================
+
+  §14.3 names §14.2                                                    ok
+  the sentence §14.3 quotes back is in §14.2                           ok
+
+  s2_seam.py assigns that exact sentence to a local `quoted` and the
+  identifier appears 1 time(s) in the whole file.
+  s2_seam.py's `quoted` is DEAD -- assigned, never used                ok
+  Its value carries a hard newline: 'outside\nevery beam currently pointed at '
+  `TEXT.count(that)` is 0 -- so had the check been wired up it
+  Absent: yes.  The check that is missing is also the check that
+  was wrong.
+  would have reported the document's correct by-name answer as
+  BROKEN.  The check that is missing is also the check that was wrong.
+  D3e above does it against the FLATTENED §14.2, which is what the
+  document actually says.
+
+==============================================================================
+D3f  TWO COUNTS s2_seam.py STATES ABOUT ITSELF
+==============================================================================
+
+  S2c is headed 'THE THREE STALENESS PATTERNS THIS SEAM PRODUCED' and
+  the EXTENT paragraph says 'S2c is three named patterns'.
+  Its PATTERNS table has 2 row(s); the section prints 5 checks.
+  the stated count of three matches the artifact                       *** FAILS ***
+
+  This is five-versus-eight in miniature, in the file written to
+  catch five-versus-eight, and it is the same defect class the seam
+  finding is about: a count in prose that no artifact carries.
+
+  the committed out_s2_seam.txt has no stray '%%' from an unformatted  ok
+  (`print("... 56%% ...")` with no format operator prints the two
+  characters literally.  Cosmetic, in a committed output.)
+
+==============================================================================
+D3 TOTAL BAD: 5
+==============================================================================
+
+EXTENT OF THIS NUMBER.  D3 sweeps ONE document -- OneThird-Species-Hopf-Monoids-Where-This-Lives.md --
+for near-duplicate BLOCK QUOTES and PROSE PARAGRAPHS, all 19 and 131 of
+them, every pair, with NO length floor, at a stated threshold of 30%.
+It does NOT compare block quotes against prose, does not sweep tables,
+headings or list items, does not look at any other document, and
+cannot see a duplicate that has been paraphrased below 30%.  Its
+cross-reference check covers §N.M forms only -- not prose references
+such as 'the banner at the top', which is the form that carried the
+five-versus-eight nobody's checker caught.
