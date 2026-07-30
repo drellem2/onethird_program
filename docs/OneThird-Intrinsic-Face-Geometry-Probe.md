@@ -21,6 +21,23 @@ foundation" narrowed in §10 and §12; **F5** §8.2's *"hence the mixing time"* 
 *"not a similar one"* corrected. §11 records what the self-audit got wrong about F1, because that is
 the finding about method. **Where this document and the audit disagreed, the audit won.**
 
+**Second-round status (independent audit mg-5630 of the mg-78c0 landing, `fcc8a11`; repairs landed by
+mg-1319).** Verdict **OVERSTATED**, with **0 BROKEN mathematics** — every committed number reproduced
+independently, `controls_output.txt` and `probe_output_n6.txt` byte-identically, the D2 upgrade fully
+earned, the adopted control **faithfully ported**, and *"the pipeline survived the control it was
+missing"* pressed as self-flattering and found honest. What was overstated is this document's and
+`STATE.md`'s claims **about the repair**, in three places where the **text claimed more than the code
+verified** — one pattern, not three slips: **(a)** NEGATIVE CONTROL 3's coverage — its corruption is a
+diagonal `±1` gauge, isospectral and absorbable into the twist, so **coverage of the construction went
+from zero to ONE ABSORBABLE SIGN GAUGE: a relocation of the gap, not a closure**, with `le_to_facet`
+the named uncovered site (§5, re-sized); **(b)** the all-`+1` row's *"both matrices unchanged"* — true,
+and in fact a theorem, but **measured by neither run cited for it**; now proved *and* measured (§5);
+**(c)** the battery's own scoring — a row that provably cannot fail printed `[PASS]` under a bottom
+line reading `ALL CONTROLS PASS`; it now scores `[CANNOT FAIL]` and suppresses that bottom line.
+Also: the `n ≤ 6` half of F3's coverage sentence corrected to `n ≤ 5` for Lemma 1 (§11), the audit's
+`38/38` population flagged as a `[:20]` truncation (§5), and F4's last unpatched site patched (§12).
+**Nothing mathematical is struck. Net: REAL PROGRESS ON D2, RELOCATION NOT CLOSURE ON THE CONTROL GAP.**
+
 ---
 
 ## §0 — Verdict
@@ -346,8 +363,15 @@ This section previously offered N1 as one of two demonstrations that *the Laplac
 the wrong answer. That was wrong on both halves, and the mg-e0ce audit is right: N1 runs a locally
 defined `bad_boundary` through the homology path and **never touches `top_laplacians`**; and its
 corruption **could not have fired there anyway** — rebuild `L^rel` and `L^abs` with all-`+1`
-simplicial signs and **neither matrix changes**, so claims (1)–(3) still hold (audit: 41/41 posets;
-reproduced here on 86/86, `controls_output.txt`, NEGATIVE CONTROL 3). Nor does N2 close the gap: of
+simplicial signs and **neither matrix changes**, so claims (1)–(3) still hold. **Cite this correctly
+(mg-5630 §3.2 → mg-1319): it is a THEOREM, not a count.** The simplicial sign of an incidence depends
+only on the ridge (a ridge omits exactly one ideal cardinality, so the deletion index is fixed by the
+ridge), giving `d_true = diag(row signs) · d_allplus`, a row rescaling `dᵀd` cannot see — true for
+every finite poset. The counts confirm it rather than establishing it, and they are now counts *of
+this statement*: `L^rel` unchanged 86/86 **and** `L^abs` unchanged 86/86, claims (1)/(2)/(3) re-run
+under the corruption 86/86/86 (`controls_output.txt`, NEGATIVE CONTROL 3). *(The previously cited
+figures — the audit's 41/41 and this battery's 86/86 — measured **claim-(1) survival**, not matrix
+equality, so neither of them measured the sentence they were attached to.)* Nor does N2 close the gap: of
 its five mutations, **only M2 perturbs the construction** of the Laplacian from the complex — M1 and
 M3 perturb the twist, M4 and M5 perturb the target. So as originally submitted the battery had **no
 negative control on the boundary-matrix construction**. The gap was in the argument for trusting the
@@ -361,22 +385,51 @@ against the true one, and the difference between them is the whole finding:
 | sign convention used to build the boundary matrix | effect on `L^abs`, `L^rel` | claim (1) |
 |---|---|---|
 | true, `(−1)^{t−1}` | — | holds, 86/86 posets `n ≤ 5` |
-| all `+1` | **both matrices unchanged**, 86/86 | still holds — **this corruption cannot fire here** |
-| facet-parity (flip every incidence of the odd-indexed facets) | off-diagonal part changes | **rejected on 82/82 posets with `\|L(P)\| ≥ 2`**; vacuous on the 4 with `\|L(P)\| = 1` (one facet, no second column to flip against) |
+| all `+1` | **both matrices unchanged** — `L^rel` 86/86 **and** `L^abs` 86/86, each compared | claims (1)/(2)/(3) each re-run under the corruption: 86/86/86 — **this corruption cannot fire here, and that is a THEOREM**; scored `[CANNOT FAIL]`, not `[PASS]` |
+| facet-parity (flip every incidence of the odd-indexed facets) | off-diagonal part changes, **by the diagonal conjugation `L ↦ D·L·D`, `D = diag((−1)^j)`** | **rejected on 82/82 posets with `\|L(P)\| ≥ 2`**; vacuous on the 4 with `\|L(P)\| = 1` (one facet, no second column to flip against) |
+
+**(F2, re-sized 2026-07-30 from the mg-5630 audit §2.2, §3.2 — landed by mg-1319; three repairs, all in this table and all in `controls.py`.)** *(i)* The all-`+1` row's *"both matrices unchanged"* is **true and provable for every finite poset** — a ridge omits exactly one ideal cardinality, so the deletion index is fixed by the ridge alone, `d_true = diag(row signs) · d_allplus`, and `dᵀd` cannot see a row rescaling — **but neither run originally cited for it measured it**: the control compared only the twisted `L^rel`, `L^abs` was never compared, and `claim2_test`/`claim3_test` took no `sign_mode`. The code now checks what the message claims, on both matrices and all three claims. **Prefer the proof to the count.** *(ii)* Because that row's corruption **provably cannot change the object under test**, it is a theorem and not a control, and it is now scored `[CANNOT FAIL]` — a battery whose bottom line reads `ALL CONTROLS PASS` over a tautological row is the same reads-as-covered defect one notch down. *(iii)* The facet-parity row covers **one absorbable sign gauge**, not the construction — see the re-sizing note below the next paragraph.
 
 The audit's own run of the same control fires on **38/38** posets with `|L(P)| ≥ 2` in its
-population (20 posets per `n` at `n = 3,4,5`; `out_extra.txt`, X3); the port here runs it on all 86
+population, which is **41 = 5 + 16 + 20** (`out_extra.txt`, X3); the port here runs it on all 86
 posets with `2 ≤ n ≤ 5` and fires on 82/82. Both numbers are of the same control on different
-populations.
+populations. **Flagged because `38/38` is quoted as a headline (mg-5630 §3.3 → mg-1319): the audit's
+population is a `[:20]` TRUNCATION — `construction_side_control()` iterates `posets_upto_iso(n)[:20]`
+for `n = 3,4,5`, so at `n = 5` it saw 20 of the 63 posets, in enumeration order.** This section
+previously described it as *"20 posets per `n` at `n = 3,4,5`"*, which is 60 and contradicted the 41
+quoted twice here. Substantively harmless — the number that matters is the port's complete `n ≤ 5`
+population, 82/82 — but an unflagged truncation under a headline number is not something a reader can
+recover. *(The `82`-vs-`86` gap is **not** a truncation and is fully accounted for in the table above.)*
 
 **State the result of adopting it accurately: the pipeline SURVIVED the control it was missing.**
 The construction was never wrong — the all-`+1` row is not a failure of the instrument, it is the
 proof that the alternating sign is load-bearing for the *homology* of `F(P)` (where N1 does fire) and
-**not** for claims (1)–(3). What was missing was a control that could distinguish a correct
-construction from an incorrect one, and now that one exists the construction passes it. The lesson
-routes forward rather than backward: **a control battery must cover construction as well as
-comparison**, and counting a control on a neighbouring code path as covering the construction is the
-specific mistake to avoid.
+**not** for claims (1)–(3). The lesson routes forward rather than backward: **a control battery must
+cover construction as well as comparison**, and counting a control on a neighbouring code path as
+covering the construction is the specific mistake to avoid.
+
+**⚠️ WHAT N3 COVERS, SIZED CORRECTLY (mg-5630 §2.2–§2.3, landed by mg-1319). This paragraph
+previously ended *"what was missing was a control that could distinguish a correct construction from
+an incorrect one, and now that one exists the construction passes it."* That is struck: N3 does not
+distinguish a correct construction from an incorrect one in general.** Its corruption is a
+**diagonal `±1` gauge conjugation** — `d_parity = diag((−1)^i) · d_allplus · diag((−1)^j)`, so
+`L_parity = D · L_true · D` with `D = diag((−1)^j)`, verified exactly on 82/82
+(`code/face_geometry_audit_5630/out_nc3.txt`, line C). Hence it is **isospectral**, and it is
+**absorbable into the twist**: claim (1) run with parity signs and twist `E·D` passes again on
+**86/86** (line D), so the corruption is observationally identical to corrupting the *twist* — which
+is exactly what N2's **M1** and **M3** already do, and it sits inside the same diagonal-`±1` gauge
+that §8.1's own statement of claim (1) is modulo. The positive control on the control, which this
+document did not run (line F): a **mis-indexed facet enumeration** — a corruption of `le_to_facet`,
+the step F3 above establishes is load-bearing — leaves N3's negative lines **SILENT, still rejecting
+82/82 verbatim**; dropping a ridge moves the row only through the bite-count (82 → 78). And N3's one
+line with genuine detection power, *"true signs: claim (1) holds 86/86"*, is **not a negative control
+at all**: it restates N2's last line. **So the honest sizing is: coverage of the construction went
+from ZERO to ONE ABSORBABLE SIGN GAUGE — a relocation of the gap, not a closure — and `le_to_facet`
+is the concrete site still uncovered.** A control that would satisfy the rule perturbs the
+**incidence structure** (a ridge's facet list, the free/interior split, the facet or ridge
+enumeration), i.e. a corruption that is not a diagonal conjugation. **Do not over-correct: the port is
+faithful, the true-sign build passes, the instrument was never wrong, and *the pipeline survived the
+control it was missing* stands. The defect is the description of what such a control covers.**
 
 **N2 — the claim-(1) identity test rejects corrupted inputs.** Five named corruptions of the
 *comparison* (four of the five perturb the twist or the target; only M2 perturbs which Laplacian is
@@ -709,9 +762,12 @@ Both self-audits were careful, and both were run in good faith on the right clau
 landed **inside the clause 4c was checking** — see the boxed note above — and the external pass found
 it immediately. The limit is not carelessness and cannot be fixed by more care: **a self-audit cannot
 see the sentence it is auditing.** Two things the external pass also did that no self-audit produces:
-it closed the purity and Lemma-1 cross-checks from `n ≤ 4` to `n ≤ 6` by a build that never uses
-Lemma 1, and it supplied the control this battery was missing (F2). Neither is a correction; both are
-coverage a second instrument buys and a re-reading does not.
+it closed **purity to `n ≤ 6` (404/404 on `2 ≤ n ≤ 6`) and the Lemma-1 cross-check to `n ≤ 5`
+(87/87, all `k`)** from `n ≤ 4`, by a build that never uses Lemma 1, and it supplied the control this
+battery was missing (F2). Neither is a correction; both are coverage a second instrument buys and a
+re-reading does not. *(Sentence corrected 2026-07-30, mg-5630 §4.2 → mg-1319: it previously said
+`n ≤ 6` for **both** checks, contradicting the corrective numbers §2 states above. Only purity reached
+`n ≤ 6`. `404` vs `405` is not a discrepancy — the audit's range starts at `n = 2`.)*
 
 ---
 
@@ -726,4 +782,17 @@ foundation"* named as **the foundation claims (1)–(3) supply** (F4); (3) the f
 it stands in `STATE.md` is the authority and carries these plus the audit's own verdict; the version
 below is the proposal it was derived from.
 
-> **GREEN · PROVEN, all finite posets (mg-276d; computation permitted and used — 405 posets, controls both directions)** | the **intrinsic face-geometry program's foundation** (doc: `OneThird-Intrinsic-Face-Geometry-Probe.md`; audit: `OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md`; code: `code/face_geometry/`, `run_all.sh`, ~17 s) | **All three `n = 4` claims in `intrinsic_face_geometry_program.tex` are theorems for every finite poset, not `n = 4` coincidences.** With `F(P)` the compatible face complex — which is exactly the order complex of the proper part of `J(P)`, pure of dimension `n−2`, with facets `L(P)` and **every ridge in 1 or 2 facets** (a pseudomanifold with boundary; this is the structural fact that makes "relative" well-posed) — and `E = diag(sgn w)`: **(1)** `E·L^rel_top·E = D − A = Σ_t(1−τ_t)`, the unweighted adjacent-transposition Laplacian, as an **equality of matrices**; **(2)** `E·L^abs_top·E = (n−1)I − A =` the compression of `Σ_i(1−s_i)` from `C[S_n]`; **(3)** the free ridges at `w` are in **bijection** with the generators forbidden at `w`, and `L^abs − L^rel` is the diagonal count of them. **Three corrections to the source.** (i) The twist is attached to claim (1) only in the sketch but is **equally required for claim (2)** — untwisted, (1) and (2) each hold on only 6 of 405 posets, all of them chains with `\|L(P)\| = 1`. (ii) The sketch writes `Σ_i(1−s_i)` without saying which side `s_i` acts on, and **the two readings are not interchangeable**: claim (2) is true for the **right/position** action and **false** for the left/value one, which holds on only 3/5, 5/16, 8/63 posets at `n = 3,4,5`. The **antichain refutes the left/value reading at every `n ≥ 3`, and that is PROVEN** (two lines: `s_1 s_2` is a right-neighbour of `s_1` and not a left-neighbour; at `n = 2` the readings coincide) — verified computationally to `n = 8`. The position reading is forced — the ridge move swaps `w_t` with `w_{t+1}`. (iii) *"records **precisely** the forbidden generators"* is true at the level of the **complex** (which ones) and an overstatement at the level of the **Laplacian difference**, which is diagonal and records only **how many**. **One interpretation, labelled CONDITIONAL:** the source never defines "relative"; the probe reads it as relative to the boundary subcomplex generated by the free ridges, which is the reading claim (3) itself selects. Everything else is unconditional given it. **Population:** all 405 posets up to isomorphism with `n ≤ 6` (A000112-checked), of which **394 are non-degenerate** (`\|L(P)\| ≥ 2` **and** at least one free ridge) — so this is not an identity between two trivial objects; and separately the general statements are **proved**, so the population is all finite posets. **No failure mode found:** 275 posets with non-trivial `Aut`, 108 disconnected, all pass; the antichain degenerates correctly to the ambient Coxeter Laplacian (`∂F = ∅`, `L^rel = L^abs`) and is **named as the one subclass where the bridge says nothing new**; the chain degenerates to `0 = 0`. **Controls both directions:** homology reproduced on `S¹`/`S²`/disc/wedge, A000112 counts, `Sur_iso` cross-enumerated against chains, `∂∘∂ = 0`, and `ker L^abs_top` agreeing with `H_{n−2}(F(P))` computed by a **disjoint code path** — plus **five named mutations of the identity test, each rejected on 100% of the posets where it bites**, with vacuity *computed* and reported (M3 is vacuous exactly where `\|L(P)\| ≤ 2`). **Those five do not cover the construction:** four of them perturb the twist or the target, and the submitted battery had **no negative control on the boundary-matrix construction** — the one that looked like it did (all-`+1` simplicial signs) runs on the homology path and **cannot fire on the Laplacian at all** (both top Laplacians are unchanged by it). The construction-side control is the **audit's** (`code/face_geometry_audit_e0ce/audit_extra.py` X3, facet-parity signs, fires 38/38 where `\|L(P)\| ≥ 2`), now adopted into the probe's own battery as NEGATIVE CONTROL 3 (fires 82/82 on all posets `n ≤ 5`) — and **the true-sign build passes it. The pipeline survived the control it was missing:** the gap was in the argument for trusting the instrument, not in the instrument. **THE HONEST NET, and it must travel with the headline: this is an exact dictionary between two descriptions of one matrix, so it carries no bound and no new tool.** Whether it has leverage depends on whether the Hodge side has techniques the graph side lacks — **the probe took no position on that and did not test it.** It also carries **nothing** about BK or block moves, **nothing** about the faces below the top two dimensions (the proof uses facets and ridges only, so the sketch's "higher faces record braid relations" is untouched), and **nothing** about weighted or degree-normalised chains (uniform rescaling *is* covered; `D^{−1/2}(D−A)D^{−1/2}` is **not** the top relative Hodge Laplacian when `D` is non-constant). The most useful pairing the bridge does deliver: **"restrict the ambient dynamics" vs "build them intrinsically" is exactly "absolute vs relative Hodge theory on `F(P)`"**, and connectivity of the adjacent-transposition graph is exactly `dim H_{n−2}(F(P),∂F(P)) = 1`. **`A(P)` was NOT built** (out of scope, per ticket). **Recommendation, not action:** the operator-algebra ticket need not re-establish **the foundation claims (1)–(3) supply** — and that is the only foundation established here: the sketch's left-regular-band product, its higher-codimension faces, its Young-module picture and its BK realisation are **all untouched**; but the cheaper next probe is to price the program's actual bet — take one Hodge technique for the top relative Laplacian of a pseudomanifold-with-boundary and ask whether it says anything non-trivial about `λ₂(Δ_AT)`. |
+**The F4 site below is now patched, and the call is explicit (mg-5630 §4.3 → mg-1319).** The audit
+found the F4 narrowing applied at §10, at §12's recommendation clause and in the live `STATE.md` row,
+but **not** in this proposed row's *subject line*, and judged it a stale-proposal artifact rather than
+a live over-claim because the disclosure note above exists. **The call taken here: patch it, and keep
+the provenance visible in-line rather than rely on the disclosure.** Reason — a reader who lands on
+the block below by search or by quotation does not necessarily read the note above it, and *"the
+foundation"* unqualified is exactly the phrase F4 was raised to remove; an unpatched site a future
+reader finds without the disclosure is how a narrowing silently un-narrows. The original wording is
+preserved in the marker so nothing about what was proposed is lost. **Two further sizings below are
+superseded by the mg-5630 audit and are corrected in §5 and in the live `STATE.md` row, not here:**
+the construction-side control's coverage (**one absorbable sign gauge, a relocation of the gap, not a
+closure**) and the all-`+1` row's citation.
+
+> **GREEN · PROVEN, all finite posets (mg-276d; computation permitted and used — 405 posets, controls both directions)** | the **foundation claims (1)–(3) supply** for the intrinsic face-geometry program ⟪F4 — subject line narrowed 2026-07-30 by mg-1319; as originally proposed it read *"the **intrinsic face-geometry program's foundation**"*⟫ (doc: `OneThird-Intrinsic-Face-Geometry-Probe.md`; audit: `OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md`; code: `code/face_geometry/`, `run_all.sh`, ~17 s) | **All three `n = 4` claims in `intrinsic_face_geometry_program.tex` are theorems for every finite poset, not `n = 4` coincidences.** With `F(P)` the compatible face complex — which is exactly the order complex of the proper part of `J(P)`, pure of dimension `n−2`, with facets `L(P)` and **every ridge in 1 or 2 facets** (a pseudomanifold with boundary; this is the structural fact that makes "relative" well-posed) — and `E = diag(sgn w)`: **(1)** `E·L^rel_top·E = D − A = Σ_t(1−τ_t)`, the unweighted adjacent-transposition Laplacian, as an **equality of matrices**; **(2)** `E·L^abs_top·E = (n−1)I − A =` the compression of `Σ_i(1−s_i)` from `C[S_n]`; **(3)** the free ridges at `w` are in **bijection** with the generators forbidden at `w`, and `L^abs − L^rel` is the diagonal count of them. **Three corrections to the source.** (i) The twist is attached to claim (1) only in the sketch but is **equally required for claim (2)** — untwisted, (1) and (2) each hold on only 6 of 405 posets, all of them chains with `\|L(P)\| = 1`. (ii) The sketch writes `Σ_i(1−s_i)` without saying which side `s_i` acts on, and **the two readings are not interchangeable**: claim (2) is true for the **right/position** action and **false** for the left/value one, which holds on only 3/5, 5/16, 8/63 posets at `n = 3,4,5`. The **antichain refutes the left/value reading at every `n ≥ 3`, and that is PROVEN** (two lines: `s_1 s_2` is a right-neighbour of `s_1` and not a left-neighbour; at `n = 2` the readings coincide) — verified computationally to `n = 8`. The position reading is forced — the ridge move swaps `w_t` with `w_{t+1}`. (iii) *"records **precisely** the forbidden generators"* is true at the level of the **complex** (which ones) and an overstatement at the level of the **Laplacian difference**, which is diagonal and records only **how many**. **One interpretation, labelled CONDITIONAL:** the source never defines "relative"; the probe reads it as relative to the boundary subcomplex generated by the free ridges, which is the reading claim (3) itself selects. Everything else is unconditional given it. **Population:** all 405 posets up to isomorphism with `n ≤ 6` (A000112-checked), of which **394 are non-degenerate** (`\|L(P)\| ≥ 2` **and** at least one free ridge) — so this is not an identity between two trivial objects; and separately the general statements are **proved**, so the population is all finite posets. **No failure mode found:** 275 posets with non-trivial `Aut`, 108 disconnected, all pass; the antichain degenerates correctly to the ambient Coxeter Laplacian (`∂F = ∅`, `L^rel = L^abs`) and is **named as the one subclass where the bridge says nothing new**; the chain degenerates to `0 = 0`. **Controls both directions:** homology reproduced on `S¹`/`S²`/disc/wedge, A000112 counts, `Sur_iso` cross-enumerated against chains, `∂∘∂ = 0`, and `ker L^abs_top` agreeing with `H_{n−2}(F(P))` computed by a **disjoint code path** — plus **five named mutations of the identity test, each rejected on 100% of the posets where it bites**, with vacuity *computed* and reported (M3 is vacuous exactly where `\|L(P)\| ≤ 2`). **Those five do not cover the construction:** four of them perturb the twist or the target, and the submitted battery had **no negative control on the boundary-matrix construction** — the one that looked like it did (all-`+1` simplicial signs) runs on the homology path and **cannot fire on the Laplacian at all** (both top Laplacians are unchanged by it). The construction-side control is the **audit's** (`code/face_geometry_audit_e0ce/audit_extra.py` X3, facet-parity signs, fires 38/38 where `\|L(P)\| ≥ 2`), now adopted into the probe's own battery as NEGATIVE CONTROL 3 (fires 82/82 on all posets `n ≤ 5`) — and **the true-sign build passes it. The pipeline survived the control it was missing:** the gap was in the argument for trusting the instrument, not in the instrument. **THE HONEST NET, and it must travel with the headline: this is an exact dictionary between two descriptions of one matrix, so it carries no bound and no new tool.** Whether it has leverage depends on whether the Hodge side has techniques the graph side lacks — **the probe took no position on that and did not test it.** It also carries **nothing** about BK or block moves, **nothing** about the faces below the top two dimensions (the proof uses facets and ridges only, so the sketch's "higher faces record braid relations" is untouched), and **nothing** about weighted or degree-normalised chains (uniform rescaling *is* covered; `D^{−1/2}(D−A)D^{−1/2}` is **not** the top relative Hodge Laplacian when `D` is non-constant). The most useful pairing the bridge does deliver: **"restrict the ambient dynamics" vs "build them intrinsically" is exactly "absolute vs relative Hodge theory on `F(P)`"**, and connectivity of the adjacent-transposition graph is exactly `dim H_{n−2}(F(P),∂F(P)) = 1`. **`A(P)` was NOT built** (out of scope, per ticket). **Recommendation, not action:** the operator-algebra ticket need not re-establish **the foundation claims (1)–(3) supply** — and that is the only foundation established here: the sketch's left-regular-band product, its higher-codimension faces, its Young-module picture and its BK realisation are **all untouched**; but the cheaper next probe is to price the program's actual bet — take one Hodge technique for the top relative Laplacian of a pseudomanifold-with-boundary and ask whether it says anything non-trivial about `λ₂(Δ_AT)`. |

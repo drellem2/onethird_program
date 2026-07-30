@@ -14,6 +14,16 @@ believed:
   only if the test rejects it, and the report states on how many posets each
   mutation was rejected.
 
+SCORING (mg-5630 section 2.6, landed by mg-1319).  "A control that cannot fail
+is not a control" is enforced by the scoring, not merely stated here.  A row
+whose corruption provably cannot change the object under test is scored
+[CANNOT FAIL] -- never [PASS] -- and its presence makes the bottom line unable
+to read ALL CONTROLS PASS.  That row is still checked: if the fact it reports
+were false the run FAILS, because a broken theorem is a real failure.  The
+defect this replaces: the row for all-+1 signs printed [PASS] under a battery
+ending ALL CONTROLS PASS, while the mg-e0ce instrument scored the identical
+fact as a FAIL row.  Neither is right; a tautology is a third thing.
+
 Run:  python3 controls.py
 """
 
@@ -28,14 +38,86 @@ from face_complex import (
 from posets import all_posets, POSET_COUNTS, cover_string
 
 FAIL = []
+CANNOT_FAIL = []
 
 
-def check(name, ok, detail=""):
-    status = "PASS" if ok else "FAIL"
+def score(ok, cannot_fail):
+    """The label a row gets.  Three outcomes, not two."""
+    if not ok:
+        return "FAIL"          # a false tautology is a failure, not a vacuous row
+    return "CANNOT FAIL" if cannot_fail else "PASS"
+
+
+def check(name, ok, detail="", cannot_fail=False):
+    """Score one row.
+
+    `cannot_fail=True` marks a row whose corruption provably cannot change the
+    object under test.  Such a row is NOT a pass: it is recorded separately and
+    printed as [CANNOT FAIL], and it suppresses the ALL CONTROLS PASS bottom
+    line.  It is still verified -- `ok` false lands in FAIL as usual, because a
+    theorem that does not hold is a genuine failure, not a vacuous row.
+    """
+    status = score(ok, cannot_fail)
     print("  [%s] %s%s" % (status, name, ("  -- " + detail) if detail else ""))
     if not ok:
         FAIL.append(name)
+    elif cannot_fail:
+        CANNOT_FAIL.append(name)
     return ok
+
+
+def summarise(fails, cannot_fail_rows):
+    """Return (lines, exit_code) for the bottom line.
+
+    Pure function of the two tallies so that it can be exercised directly --
+    see `scoring_self_test`.  The single invariant it enforces: the string
+    "ALL CONTROLS PASS" is reachable only when BOTH tallies are empty.
+    """
+    lines = []
+    if fails:
+        lines.append("CONTROLS FAILED: %d" % len(fails))
+        lines.extend("   - " + f for f in fails)
+        return lines, 1
+    if cannot_fail_rows:
+        lines.append("CONTROLS: 0 failures, but %d row(s) CANNOT FAIL and are "
+                     "NOT scored as passes:" % len(cannot_fail_rows))
+        lines.extend("   - " + (t if len(t) <= 78 else t[:75] + "...")
+                     for t in cannot_fail_rows)
+        lines.append("A row that cannot fail covers nothing, so this battery's "
+                     "bottom line is NOT 'all controls pass'.")
+        return lines, 0
+    lines.append("ALL CONTROLS PASS")
+    return lines, 0
+
+
+def scoring_self_test():
+    """A control on the scoring logic itself.
+
+    The repair in mg-1319 changed scoring LOGIC, so the logic gets a control of
+    its own -- the mg-4ad1 discipline applied to the instrument that reports it.
+    Stated exactly, because overstating what a control covers is the defect this
+    whole change is landing: TWO of the five rows below FIRE on the pre-repair
+    behaviour (it labelled a tautological row PASS, and printed ALL CONTROLS
+    PASS over it).  The other three pin behaviour that must not change -- a real
+    failure still reports first and exits nonzero, a false tautology is still a
+    failure, and a clean run still reaches the ALL CONTROLS PASS bottom line.
+    """
+    print("CONTROL ON THE SCORING -- a tautological row must not read as a pass")
+    banner = "ALL CONTROLS PASS"
+    taut_lines, taut_code = summarise([], ["a row that cannot fail"])
+    clean_lines, clean_code = summarise([], [])
+    fail_lines, fail_code = summarise(["a real failure"], ["a row that cannot fail"])
+    check("a row that cannot fail is labelled %r, not %r"
+          % (score(True, True), score(True, False)),
+          score(True, True) == "CANNOT FAIL" and score(True, False) == "PASS")
+    check("a cannot-fail row whose reported fact is FALSE is still a %r"
+          % score(False, True), score(False, True) == "FAIL")
+    check("a cannot-fail row suppresses the %r bottom line" % banner,
+          banner not in "\n".join(taut_lines) and taut_code == 0)
+    check("with no cannot-fail row the bottom line is %r" % banner,
+          clean_lines == [banner] and clean_code == 0)
+    check("a real failure still exits nonzero and is reported first",
+          fail_code == 1 and fail_lines[0].startswith("CONTROLS FAILED"))
 
 
 # --------------------------------------------------------------------------
@@ -249,8 +331,8 @@ def claim1_test(P, **kw):
     return mat_eq(L, target)
 
 
-def claim2_test(P, use_twist=True):
-    td = top_laplacians(P)
+def claim2_test(P, use_twist=True, sign_mode="true"):
+    td = top_laplacians(P, sign_mode=sign_mode)
     les = td["les"]
     L = td["L_abs"]
     if use_twist:
@@ -260,10 +342,10 @@ def claim2_test(P, use_twist=True):
     return mat_eq(L, target)
 
 
-def claim3_test(P):
+def claim3_test(P, sign_mode="true"):
     """Claim (3), at the level of the Laplacians: L^abs - L^rel is diagonal and
     its (w,w) entry is the number of FORBIDDEN adjacent transpositions at w."""
-    td = top_laplacians(P)
+    td = top_laplacians(P, sign_mode=sign_mode)
     les = td["les"]
     D = mat_sub(td["L_abs"], td["L_rel"])
     if not is_diagonal(D):
@@ -367,15 +449,32 @@ def negative_control_construction(nmax):
     Two sign corruptions are run, and the difference between them is the point:
 
       all-+1 signs  do NOT change either top Laplacian, so this corruption
-                    CANNOT fire here.  Reported, not hidden: it is why
-                    NEGATIVE CONTROL 1 was never a construction-side control.
-                    (The alternating sign is load-bearing for the homology of
-                    F(P), where NEGATIVE CONTROL 1 does fire -- just not for
-                    claims (1)-(3).)
+                    CANNOT fire here -- and that is a THEOREM, not an
+                    observation on 86 posets (mg-5630 section 2.2(a)): a ridge
+                    omits exactly one ideal cardinality, so the deletion index
+                    is fixed by the ridge alone and d_true = diag(row signs) .
+                    d_allplus, a row rescaling that d^T d cannot see.  Scored
+                    [CANNOT FAIL], not [PASS].  It is why NEGATIVE CONTROL 1
+                    was never a construction-side control.  (The alternating
+                    sign is load-bearing for the homology of F(P), where
+                    NEGATIVE CONTROL 1 does fire -- just not for claims
+                    (1)-(3).)
 
       facet-parity  flips the sign of every incidence of the odd-indexed
                     facets.  This does change the off-diagonal part, and the
-                    identity test must reject it.
+                    identity test must reject it.  Read the row narrowly: the
+                    corruption is the diagonal +-1 conjugation
+                    L_parity = D . L_true . D with D = diag((-1)^j), so it is
+                    ISOSPECTRAL and ABSORBABLE into the twist (claim (1) with
+                    parity signs and twist E.D passes again on 86/86).  It is
+                    the M1/M3 content reached through the construction's code
+                    path, and it CANNOT FAIL on a construction error that is
+                    not a per-facet sign convention -- demonstrated in
+                    code/face_geometry_audit_5630/out_nc3.txt line F, where a
+                    mis-indexed facet enumeration leaves this row rejecting
+                    82/82 verbatim.  So the battery covers ONE ABSORBABLE SIGN
+                    GAUGE of the construction, not the construction; le_to_facet
+                    is the named uncovered site.
 
     The true-sign build passes throughout: the instrument was never wrong, the
     argument for trusting it was missing this control.
@@ -387,14 +486,29 @@ def negative_control_construction(nmax):
     check("true simplicial signs: claim (1) holds on %d/%d posets" % (n_true, len(ps)),
           n_true == len(ps))
 
-    plus_same = sum(1 for P in ps
-                    if mat_eq(claim1_pair(P, sign_mode="allplus")[0],
-                              claim1_pair(P)[0]))
-    plus_pass = sum(1 for P in ps if claim1_test(P, sign_mode="allplus") is True)
-    check("all-+1 signs leave both top Laplacians UNCHANGED on %d/%d posets, so "
-          "claim (1) still holds on %d -- this corruption cannot fire on the "
-          "construction (reported, not a pass)" % (plus_same, len(ps), plus_pass),
-          plus_same == len(ps) and plus_pass == len(ps))
+    # "BOTH top Laplacians unchanged" and "claims (1)-(3) survive" are MEASURED,
+    # each on the object named (mg-5630 section 3.2): the previous version of
+    # this row printed "both top Laplacians UNCHANGED" while comparing only the
+    # twisted L^rel, and never re-ran claims (2) or (3) under sign_mode at all.
+    # A printed control message must not assert more than the code printing it
+    # verifies -- the same defect as scoring a tautology [PASS].
+    plus_rel = plus_abs = 0
+    for P in ps:
+        td_true, td_plus = top_laplacians(P), top_laplacians(P, sign_mode="allplus")
+        plus_rel += mat_eq(td_plus["L_rel"], td_true["L_rel"])
+        plus_abs += mat_eq(td_plus["L_abs"], td_true["L_abs"])
+    plus_c1 = sum(1 for P in ps if claim1_test(P, sign_mode="allplus") is True)
+    plus_c2 = sum(1 for P in ps if claim2_test(P, sign_mode="allplus") is True)
+    plus_c3 = sum(1 for P in ps if claim3_test(P, sign_mode="allplus") is True)
+    check("all-+1 signs leave both top Laplacians UNCHANGED -- L^rel on %d/%d, "
+          "L^abs on %d/%d, each compared -- and claims (1)/(2)/(3) re-run under "
+          "the corruption still hold on %d/%d/%d.  PROVABLE for every finite "
+          "poset (the simplicial sign depends only on the ridge, so d_true = "
+          "diag(row signs) . d_allplus and d^T d cannot see it), so this row is "
+          "a theorem and not a test of the construction"
+          % (plus_rel, len(ps), plus_abs, len(ps), plus_c1, plus_c2, plus_c3),
+          plus_rel == plus_abs == plus_c1 == plus_c2 == plus_c3 == len(ps),
+          cannot_fail=True)
 
     par_app = [P for P in bites
                if not mat_eq(claim1_pair(P, sign_mode="parity")[0],
@@ -402,13 +516,18 @@ def negative_control_construction(nmax):
     par_rej = sum(1 for P in par_app if not claim1_test(P, sign_mode="parity"))
     check("facet-parity signs -- rejected on %d/%d posets with |L(P)| >= 2 where "
           "the mutation bites (%d posets have |L(P)| = 1: a single facet, no "
-          "second column to flip against)"
+          "second column to flip against).  Scope of this row, stated narrowly: "
+          "the corruption is the diagonal conjugation L -> D.L.D, D = diag((-1)^j), "
+          "so it is isospectral and absorbable into the twist -- it covers ONE "
+          "SIGN GAUGE of the construction and cannot fail on a non-sign "
+          "construction error (out_nc3.txt line F)"
           % (par_rej, len(par_app), len(ps) - len(bites)),
           par_rej == len(par_app) and len(par_app) == len(bites))
 
 
 def main():
     nmax_cheap = int(sys.argv[1]) if len(sys.argv) > 1 else 5
+    scoring_self_test()
     positive_control_homology()
     negative_control_signs()
     positive_control_poset_counts(nmax_cheap)
@@ -417,12 +536,11 @@ def main():
     negative_control_identity(min(nmax_cheap, 5))
     negative_control_construction(min(nmax_cheap, 5))
     print()
-    if FAIL:
-        print("CONTROLS FAILED: %d" % len(FAIL))
-        for f in FAIL:
-            print("   - " + f)
-        sys.exit(1)
-    print("ALL CONTROLS PASS")
+    lines, code = summarise(FAIL, CANNOT_FAIL)
+    for line in lines:
+        print(line)
+    if code:
+        sys.exit(code)
 
 
 if __name__ == "__main__":
