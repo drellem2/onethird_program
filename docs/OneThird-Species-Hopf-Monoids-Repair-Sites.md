@@ -237,12 +237,16 @@ discovered by whoever next runs mg-6cb9's instrument.
 ## 6. WHAT THIS REPAIR DID NOT DO
 
 1. **It did not close mg-6cb9's F4, F5, F6 or F7.** F4 (the shipped `out_e2_crosssection.txt`
-   predating its own commit) is incidentally corrected by this commit regenerating the d633
-   outputs against the tree that ships, per Appendix A's rule that *a commit which measures
-   something it also modifies must publish the post-commit measurement* — but that is a
-   consequence of regenerating, not a repair of the mechanism, and the next commit that adds a
-   markdown file without re-running will make it false again. F6 — `e2`'s `RUN_MIN` seam being two
-   tokens wide — is untouched and remains as mg-6cb9 measured it.
+   predating its own commit) is **incidentally corrected for this commit**: the d633 outputs were
+   regenerated against the tree that ships, and `out_a2_6cb9_after.txt` was then **re-run after
+   the commit landed** — per Appendix A's rule that *a commit which measures something it also
+   modifies must publish the post-commit measurement* — so mg-6cb9's own two F4 rows now read
+   `the COMMITTED run's extent line is true at HEAD — ok` and `the committed CENSUS is right for
+   the shipped tree — ok`. That is a correct artifact, **not a repaired mechanism**: the next
+   commit that adds a markdown file without re-running will make it false again, and nothing
+   here stops it. (`A2 TOTAL BAD` remains **1**, and the one row is **R29** — mg-6cb9's own kept
+   prediction miss, which this ticket did not touch.) F6 — `e2`'s `RUN_MIN` seam being two tokens
+   wide — is untouched and remains as mg-6cb9 measured it.
 2. **It did not wire `e2` anywhere but the three species runners.** Every other tree in this
    repository carrying a document with a strike still does not run it. That is a much larger
    wiring question than F2 asked, and it is named here rather than closed.
