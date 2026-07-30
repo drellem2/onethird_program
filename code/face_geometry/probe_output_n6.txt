@@ -61,6 +61,19 @@ ker L^abs_top matches (1 iff antichain, else 0) on 405/405 posets
 ker L^abs_top histogram: {0: 399, 1: 6}   (antichains in population: 6)
 
 ==============================================================================
+SCOPE CHECK -- which SIDE does s_i act on?
+The sketch writes the ambient Coxeter Laplacian as sum_i (1 - s_i) in
+C[S_n] without saying whether s_i acts on the left (swapping the VALUES
+i, i+1) or on the right (swapping the POSITIONS i, i+1).  Claim (2) is
+TRUE for the right/position action and FALSE for the left/value one.
+==============================================================================
+  n=2: LEFT-action form of claim (2) holds on only 2/2 posets; smallest witness against: None
+  n=3: LEFT-action form of claim (2) holds on only 3/5 posets; smallest witness against: (antichain)
+  n=4: LEFT-action form of claim (2) holds on only 5/16 posets; smallest witness against: (antichain)
+  n=5: LEFT-action form of claim (2) holds on only 8/63 posets; smallest witness against: (antichain)
+  (the right/position form holds on 405/405 -- see the summary table)
+
+==============================================================================
 THE FOUR-ELEMENT EXAMPLE -- all 16 posets on 4 elements
 (the sketch says 'the four-element example', singular, and does not
 say which poset; so all 16 are reported)

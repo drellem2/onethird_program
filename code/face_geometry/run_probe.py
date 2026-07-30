@@ -58,6 +58,31 @@ def kernel_dim(L):
     return k
 
 
+def left_compression(P):
+    """Compression to C[L(P)] of sum_i (1 - s_i) with s_i acting on the LEFT,
+    i.e. swapping the VALUES i and i+1 in the word rather than the positions.
+
+    This exists only to show that the two readings of the sketch's
+    `sum_i (1 - s_i)` are genuinely different and that claim (2) selects one of
+    them.  It is not used by any claim.
+    """
+    from itertools import permutations
+    n = P.n
+    allp = sorted(permutations(range(n)))
+    idx = {w: i for i, w in enumerate(allp)}
+    N = len(allp)
+    amb = [[0] * N for _ in range(N)]
+    for w in allp:
+        i = idx[w]
+        amb[i][i] += n - 1
+        for t in range(n - 1):
+            v = tuple((t + 1 if x == t else t if x == t + 1 else x) for x in w)
+            amb[i][idx[v]] -= 1
+    les = linear_extensions(P)
+    keep = [idx[w] for w in les]
+    return [[amb[a][b] for b in keep] for a in keep]
+
+
 def probe_one(P):
     n = P.n
     td = top_laplacians(P)
@@ -224,6 +249,29 @@ def main():
         ka[r["ker_abs"]] = ka.get(r["ker_abs"], 0) + 1
     print("ker L^abs_top histogram: %s   (antichains in population: %d)"
           % (dict(sorted(ka.items())), sum(1 for r in rows if r["antichain"])))
+
+    print()
+    print("=" * 78)
+    print("SCOPE CHECK -- which SIDE does s_i act on?")
+    print("The sketch writes the ambient Coxeter Laplacian as sum_i (1 - s_i) in")
+    print("C[S_n] without saying whether s_i acts on the left (swapping the VALUES")
+    print("i, i+1) or on the right (swapping the POSITIONS i, i+1).  Claim (2) is")
+    print("TRUE for the right/position action and FALSE for the left/value one.")
+    print("=" * 78)
+    for n in range(2, min(nmax, 5) + 1):
+        ok = tot_n = 0
+        wit = None
+        for P in all_posets(n):
+            td = top_laplacians(P)
+            L = twist(td["L_abs"], td["les"])
+            tot_n += 1
+            if mat_eq(L, left_compression(P)):
+                ok += 1
+            elif wit is None:
+                wit = cover_string(P)
+        print("  n=%d: LEFT-action form of claim (2) holds on only %d/%d posets; "
+              "smallest witness against: %s" % (n, ok, tot_n, wit))
+    print("  (the right/position form holds on 405/405 -- see the summary table)")
 
     print()
     print("=" * 78)
