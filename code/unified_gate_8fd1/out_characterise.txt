@@ -1,0 +1,57 @@
+==========================================================================
+(A) THE TRI-EQUIVALENCE   stable <=> AC(P) = Pi_n <=> share-an-end
+==========================================================================
+ n   classes  stable  AC=Pi_n  share-end  height<=2  all agree
+ 1         1       1        1          1          1  YES
+ 2         2       2        2          2          2  YES
+ 3         5       4        4          4          4  YES
+ 4        16       6        6          6          9  YES
+ 5        63       8        8          8         21  YES
+ 6       318      10       10         10         56  YES
+
+  (height<=2 is strictly weaker than the other three, as it must be:
+   it is an intermediate step of the proof, not an equivalent.)
+
+==========================================================================
+(B) IS AC(P) A LATTICE, AND IS IT ONE INSIDE Pi_n?
+==========================================================================
+ n=2: classes=  2   AC(P) NOT join-closed in Pi_n:   0   AC(P) not a lattice under refinement: 0
+ n=3: classes=  5   AC(P) NOT join-closed in Pi_n:   0   AC(P) not a lattice under refinement: 0
+ n=4: classes= 16   AC(P) NOT join-closed in Pi_n:   7   AC(P) not a lattice under refinement: 0
+ n=5: classes= 63   AC(P) NOT join-closed in Pi_n:  49   AC(P) not a lattice under refinement: 0
+
+ first witness for join-failure (n=4):  P with relations [(0, 1), (0, 2), (0, 3), (1, 2)]
+   03|1|2  acyclic, 0|1|23  acyclic, but their Pi_n-join 023|1  is CYCLIC
+
+ the document's own named witness, P = {a<c, b<d} at n=4:
+   03|1|2 acyclic=True ; 0|12|3 acyclic=True ; join = 03|12 acyclic=False
+   -- so {a,d}|{b,c} is not merely a bad REFINEMENT of an acyclic
+      partition, it is the Pi_n-JOIN of two acyclic ones.
+
+==========================================================================
+(C) DOES THE QUOTIENT LATTICE REMEMBER THE POSET?
+==========================================================================
+ n   labelled posets   distinct AC(P)   largest fibre   |{P,P^op}|=2
+ 2                 3                1               3   0 of 1 fibres
+ 3                19                4              13   3 of 4 fibres
+ 4               219               49              45   33 of 49 fibres
+ 5              4231             1316             131   1000 of 1316 fibres
+
+ a maximal fibre at n=5 (posets sharing one quotient lattice):
+     empty (antichain)
+     [(0, 1)]
+     [(0, 1), (0, 2)]
+     [(0, 1), (0, 2), (0, 3)]
+     [(0, 1), (0, 2), (0, 3), (0, 4)]
+     [(0, 1), (0, 2), (0, 4)]
+     [(0, 1), (0, 3)]
+     [(0, 1), (0, 3), (0, 4)]
+ ... 131 posets in that fibre.
+
+==========================================================================
+(D) THE EQUIVALENCE BEYOND THE EXHAUSTIVE RANGE (random posets)
+==========================================================================
+ n=7  400 random posets (877 partitions each): stable=168,  disagreements with the theorem: 0
+ n=8  400 random posets (4140 partitions each): stable=151,  disagreements with the theorem: 0
+ n=9  400 random posets (21147 partitions each): stable=123,  disagreements with the theorem: 0
+

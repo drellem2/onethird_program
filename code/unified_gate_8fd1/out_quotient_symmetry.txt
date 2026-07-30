@@ -1,0 +1,242 @@
+==========================================================================
+n = 1   isomorphism classes of poset: 1   partitions of [n]: 1
+==========================================================================
+AC(P) is a join-closed subset of Pi_n on every class: YES
+smallest |AC(P)|: 1, attained by antichain A_1
+
+POSETS WITH G(P) = S_1  (the full relabelling group preserves the quotient lattice):  1 of 1
+    |AC|=  1 of   1  full-lattice=True   share-an-end=True   antichain A_1
+
+distribution of |G(P)| over the 1 classes (|S_1| = 1):
+    |G| = 1    : 1 classes
+classes where G(P) is STRICTLY LARGER than {sigma : sigma.P in {P, P^op}}: 0
+
+CHAIN C_1:  |AC| = 1 (= 2^(n-1) = 1),  |G(C_1)| = 1,  S_n-stable: True
+ANTICHAIN A_1: |AC| = 1 (= all partitions: True),  S_n-stable: True
+
+==========================================================================
+n = 2   isomorphism classes of poset: 2   partitions of [n]: 2
+==========================================================================
+AC(P) is a join-closed subset of Pi_n on every class: YES
+smallest |AC(P)|: 2, attained by antichain A_2
+
+POSETS WITH G(P) = S_2  (the full relabelling group preserves the quotient lattice):  2 of 2
+    |AC|=  2 of   2  full-lattice=True   share-an-end=True   antichain A_2
+    |AC|=  2 of   2  full-lattice=True   share-an-end=True   chain C_2
+
+distribution of |G(P)| over the 2 classes (|S_2| = 2):
+    |G| = 2    : 2 classes
+classes where G(P) is STRICTLY LARGER than {sigma : sigma.P in {P, P^op}}: 0
+
+CHAIN C_2:  |AC| = 2 (= 2^(n-1) = 2),  |G(C_2)| = 2,  S_n-stable: True
+ANTICHAIN A_2: |AC| = 2 (= all partitions: True),  S_n-stable: True
+
+==========================================================================
+n = 3   isomorphism classes of poset: 5   partitions of [n]: 5
+==========================================================================
+AC(P) is a join-closed subset of Pi_n on every class: YES
+smallest |AC(P)|: 4, attained by chain C_3
+
+POSETS WITH G(P) = S_3  (the full relabelling group preserves the quotient lattice):  4 of 5
+    |AC|=  5 of   5  full-lattice=True   share-an-end=True   antichain A_3
+    |AC|=  5 of   5  full-lattice=True   share-an-end=True   down-star (1 below 1) + 1 isolated
+    |AC|=  5 of   5  full-lattice=True   share-an-end=True   down-star (1 below 2)
+    |AC|=  5 of   5  full-lattice=True   share-an-end=True   up-star (2 below 1)
+
+distribution of |G(P)| over the 5 classes (|S_3| = 6):
+    |G| = 2    : 1 classes
+    |G| = 6    : 4 classes
+classes where G(P) is STRICTLY LARGER than {sigma : sigma.P in {P, P^op}}: 3
+    |G|=6 > |D|=2   down-star (1 below 1) + 1 isolated
+    |G|=6 > |D|=2   down-star (1 below 2)
+    |G|=6 > |D|=2   up-star (2 below 1)
+
+CHAIN C_3:  |AC| = 4 (= 2^(n-1) = 4),  |G(C_3)| = 2,  S_n-stable: False
+ANTICHAIN A_3: |AC| = 5 (= all partitions: True),  S_n-stable: True
+
+==========================================================================
+n = 4   isomorphism classes of poset: 16   partitions of [n]: 15
+==========================================================================
+AC(P) is a join-closed subset of Pi_n on every class: NO
+smallest |AC(P)|: 8, attained by chain C_4
+
+POSETS WITH G(P) = S_4  (the full relabelling group preserves the quotient lattice):  6 of 16
+    |AC|= 15 of  15  full-lattice=True   share-an-end=True   antichain A_4
+    |AC|= 15 of  15  full-lattice=True   share-an-end=True   down-star (1 below 1) + 2 isolated
+    |AC|= 15 of  15  full-lattice=True   share-an-end=True   down-star (1 below 2) + 1 isolated
+    |AC|= 15 of  15  full-lattice=True   share-an-end=True   down-star (1 below 3)
+    |AC|= 15 of  15  full-lattice=True   share-an-end=True   up-star (2 below 1) + 1 isolated
+    |AC|= 15 of  15  full-lattice=True   share-an-end=True   up-star (3 below 1)
+
+distribution of |G(P)| over the 16 classes (|S_4| = 24):
+    |G| = 2    : 6 classes
+    |G| = 4    : 1 classes
+    |G| = 8    : 3 classes
+    |G| = 24   : 6 classes
+classes where G(P) is STRICTLY LARGER than {sigma : sigma.P in {P, P^op}}: 9
+    |G|=24 > |D|=4   down-star (1 below 1) + 2 isolated
+    |G|=24 > |D|=2   down-star (1 below 2) + 1 isolated
+    |G|=24 > |D|=6   down-star (1 below 3)
+    |G|=2 > |D|=1   relations=[(0, 1), (0, 2), (0, 3), (1, 2)]
+    |G|=2 > |D|=1   relations=[(0, 1), (0, 3), (1, 3), (2, 3)]
+    |G|=8 > |D|=2   relations=[(0, 2), (0, 3), (1, 2)]
+    |G|=24 > |D|=2   up-star (2 below 1) + 1 isolated
+    |G|=24 > |D|=6   up-star (3 below 1)
+    |G|=8 > |D|=4   relations=[(0, 3), (1, 2)]
+
+CHAIN C_4:  |AC| = 8 (= 2^(n-1) = 8),  |G(C_4)| = 2,  S_n-stable: False
+ANTICHAIN A_4: |AC| = 15 (= all partitions: True),  S_n-stable: True
+
+==========================================================================
+n = 5   isomorphism classes of poset: 63   partitions of [n]: 52
+==========================================================================
+AC(P) is a join-closed subset of Pi_n on every class: NO
+smallest |AC(P)|: 16, attained by chain C_5
+
+POSETS WITH G(P) = S_5  (the full relabelling group preserves the quotient lattice):  8 of 63
+    |AC|= 52 of  52  full-lattice=True   share-an-end=True   antichain A_5
+    |AC|= 52 of  52  full-lattice=True   share-an-end=True   down-star (1 below 1) + 3 isolated
+    |AC|= 52 of  52  full-lattice=True   share-an-end=True   down-star (1 below 2) + 2 isolated
+    |AC|= 52 of  52  full-lattice=True   share-an-end=True   down-star (1 below 3) + 1 isolated
+    |AC|= 52 of  52  full-lattice=True   share-an-end=True   down-star (1 below 4)
+    |AC|= 52 of  52  full-lattice=True   share-an-end=True   up-star (2 below 1) + 2 isolated
+    |AC|= 52 of  52  full-lattice=True   share-an-end=True   up-star (3 below 1) + 1 isolated
+    |AC|= 52 of  52  full-lattice=True   share-an-end=True   up-star (4 below 1)
+
+distribution of |G(P)| over the 63 classes (|S_5| = 120):
+    |G| = 1    : 6 classes
+    |G| = 2    : 25 classes
+    |G| = 4    : 15 classes
+    |G| = 6    : 2 classes
+    |G| = 8    : 4 classes
+    |G| = 12   : 3 classes
+    |G| = 120  : 8 classes
+classes where G(P) is STRICTLY LARGER than {sigma : sigma.P in {P, P^op}}: 24
+    |G|=120 > |D|=12   down-star (1 below 1) + 3 isolated
+    |G|=120 > |D|=4   down-star (1 below 2) + 2 isolated
+    |G|=120 > |D|=6   down-star (1 below 3) + 1 isolated
+    |G|=120 > |D|=24   down-star (1 below 4)
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (1, 2)]
+    |G|=2 > |D|=1   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (2, 3)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (1, 3), (2, 3)]
+    |G|=4 > |D|=1   relations=[(0, 1), (0, 2), (0, 3), (1, 2)]
+    |G|=2 > |D|=1   relations=[(0, 1), (0, 2), (0, 4), (1, 2), (1, 4), (2, 4), (3, 4)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 2), (0, 4), (1, 4), (2, 4), (3, 4)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 3), (0, 4), (1, 3), (2, 3)]
+    |G|=2 > |D|=1   relations=[(0, 1), (0, 3), (0, 4), (1, 4), (2, 3)]
+    |G|=4 > |D|=2   relations=[(0, 2), (0, 3), (0, 4), (1, 2)]
+    |G|=4 > |D|=1   relations=[(0, 1), (0, 3), (1, 3), (2, 3)]
+    |G|=2 > |D|=1   relations=[(0, 3), (0, 4), (1, 2), (1, 3), (2, 3)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 4), (1, 4), (2, 4), (3, 4)]
+    |G|=8 > |D|=2   relations=[(0, 2), (0, 3), (1, 2)]
+    |G|=4 > |D|=2   relations=[(0, 3), (0, 4), (1, 3), (2, 3)]
+    |G|=4 > |D|=2   relations=[(0, 3), (0, 4), (1, 2)]
+    |G|=120 > |D|=4   up-star (2 below 1) + 2 isolated
+    |G|=120 > |D|=6   up-star (3 below 1) + 1 isolated
+    |G|=120 > |D|=24   up-star (4 below 1)
+    |G|=4 > |D|=2   relations=[(0, 4), (1, 3), (2, 3)]
+    |G|=8 > |D|=4   relations=[(0, 3), (1, 2)]
+
+CHAIN C_5:  |AC| = 16 (= 2^(n-1) = 16),  |G(C_5)| = 2,  S_n-stable: False
+ANTICHAIN A_5: |AC| = 52 (= all partitions: True),  S_n-stable: True
+
+==========================================================================
+n = 6   isomorphism classes of poset: 318   partitions of [n]: 203
+==========================================================================
+AC(P) is a join-closed subset of Pi_n on every class: NO
+smallest |AC(P)|: 32, attained by chain C_6
+
+POSETS WITH G(P) = S_6  (the full relabelling group preserves the quotient lattice):  10 of 318
+    |AC|=203 of 203  full-lattice=True   share-an-end=True   antichain A_6
+    |AC|=203 of 203  full-lattice=True   share-an-end=True   down-star (1 below 1) + 4 isolated
+    |AC|=203 of 203  full-lattice=True   share-an-end=True   down-star (1 below 2) + 3 isolated
+    |AC|=203 of 203  full-lattice=True   share-an-end=True   down-star (1 below 3) + 2 isolated
+    |AC|=203 of 203  full-lattice=True   share-an-end=True   down-star (1 below 4) + 1 isolated
+    |AC|=203 of 203  full-lattice=True   share-an-end=True   down-star (1 below 5)
+    |AC|=203 of 203  full-lattice=True   share-an-end=True   up-star (2 below 1) + 3 isolated
+    |AC|=203 of 203  full-lattice=True   share-an-end=True   up-star (3 below 1) + 2 isolated
+    |AC|=203 of 203  full-lattice=True   share-an-end=True   up-star (4 below 1) + 1 isolated
+    |AC|=203 of 203  full-lattice=True   share-an-end=True   up-star (5 below 1)
+
+distribution of |G(P)| over the 318 classes (|S_6| = 720):
+    |G| = 1    : 72 classes
+    |G| = 2    : 123 classes
+    |G| = 4    : 52 classes
+    |G| = 6    : 12 classes
+    |G| = 8    : 13 classes
+    |G| = 12   : 24 classes
+    |G| = 16   : 6 classes
+    |G| = 24   : 2 classes
+    |G| = 48   : 3 classes
+    |G| = 72   : 1 classes
+    |G| = 720  : 10 classes
+classes where G(P) is STRICTLY LARGER than {sigma : sigma.P in {P, P^op}}: 55
+    |G|=720 > |D|=48   down-star (1 below 1) + 4 isolated
+    |G|=720 > |D|=12   down-star (1 below 2) + 3 isolated
+    |G|=720 > |D|=12   down-star (1 below 3) + 2 isolated
+    |G|=720 > |D|=24   down-star (1 below 4) + 1 isolated
+    |G|=720 > |D|=120   down-star (1 below 5)
+    |G|=12 > |D|=6   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 2)]
+    |G|=2 > |D|=1   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (2, 3)]
+    |G|=2 > |D|=1   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 4), (2, 4), (3, 4)]
+    |G|=8 > |D|=4   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 3), (2, 3)]
+    |G|=12 > |D|=6   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 4), (2, 4), (3, 4)]
+    |G|=12 > |D|=2   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (1, 2)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3)]
+    |G|=2 > |D|=1   relations=[(0, 1), (0, 2), (0, 3), (0, 5), (1, 2), (1, 3), (1, 5), (2, 3), (2, 5), (3, 5), (4, 5)]
+    |G|=4 > |D|=1   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (2, 3)]
+    |G|=2 > |D|=1   relations=[(0, 1), (0, 2), (0, 3), (0, 5), (1, 2), (1, 5), (2, 5), (3, 5), (4, 5)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 2), (0, 4), (0, 5), (1, 2), (1, 4), (2, 4), (3, 4)]
+    |G|=2 > |D|=1   relations=[(0, 2), (0, 3), (0, 4), (0, 5), (1, 5), (2, 3), (2, 4), (3, 4)]
+    |G|=8 > |D|=2   relations=[(0, 1), (0, 2), (0, 3), (0, 4), (1, 3), (2, 3)]
+    |G|=12 > |D|=6   relations=[(0, 1), (0, 2), (0, 3), (0, 5), (1, 5), (2, 5), (3, 5), (4, 5)]
+    |G|=8 > |D|=4   relations=[(0, 1), (0, 2), (0, 4), (0, 5), (1, 4), (2, 4), (3, 4)]
+    |G|=4 > |D|=2   relations=[(0, 2), (0, 3), (0, 4), (0, 5), (1, 5), (2, 4), (3, 4)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 3), (0, 4), (0, 5), (1, 3), (2, 3)]
+    |G|=12 > |D|=6   relations=[(0, 2), (0, 3), (0, 4), (0, 5), (1, 2)]
+    |G|=12 > |D|=2   relations=[(0, 1), (0, 2), (0, 3), (1, 2)]
+    |G|=4 > |D|=1   relations=[(0, 1), (0, 2), (0, 4), (1, 2), (1, 4), (2, 4), (3, 4)]
+    |G|=2 > |D|=1   relations=[(0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 2), (0, 5), (1, 2), (1, 5), (2, 5), (3, 5), (4, 5)]
+    |G|=8 > |D|=2   relations=[(0, 1), (0, 2), (0, 4), (1, 4), (2, 4), (3, 4)]
+    |G|=4 > |D|=2   relations=[(0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (2, 4), (3, 4)]
+    |G|=8 > |D|=4   relations=[(0, 1), (0, 2), (0, 5), (1, 5), (2, 5), (3, 5), (4, 5)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 3), (0, 4), (1, 3), (2, 3)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 4), (0, 5), (1, 4), (2, 4), (3, 4)]
+    |G|=2 > |D|=1   relations=[(0, 1), (0, 3), (0, 4), (1, 4), (2, 3)]
+    |G|=4 > |D|=2   relations=[(0, 1), (0, 4), (0, 5), (1, 5), (2, 3), (2, 4), (3, 4)]
+    |G|=4 > |D|=2   relations=[(0, 2), (0, 3), (0, 4), (1, 2)]
+    |G|=16 > |D|=8   relations=[(0, 3), (0, 4), (0, 5), (1, 3), (2, 3)]
+    |G|=12 > |D|=6   relations=[(0, 3), (0, 4), (0, 5), (1, 2)]
+    |G|=4 > |D|=2   relations=[(0, 2), (0, 4), (1, 2), (1, 4), (2, 4), (3, 4)]
+    |G|=12 > |D|=2   relations=[(0, 1), (0, 3), (1, 3), (2, 3)]
+    |G|=2 > |D|=1   relations=[(0, 3), (0, 4), (1, 2), (1, 3), (2, 3)]
+    |G|=12 > |D|=2   relations=[(0, 1), (0, 4), (1, 4), (2, 4), (3, 4)]
+    |G|=12 > |D|=6   relations=[(0, 1), (0, 5), (1, 5), (2, 5), (3, 5), (4, 5)]
+    |G|=16 > |D|=4   relations=[(0, 2), (0, 3), (1, 2)]
+    |G|=4 > |D|=2   relations=[(0, 3), (0, 4), (1, 3), (2, 3)]
+    |G|=12 > |D|=6   relations=[(0, 4), (0, 5), (1, 4), (2, 4), (3, 4)]
+    |G|=4 > |D|=2   relations=[(0, 3), (0, 4), (1, 2)]
+    |G|=16 > |D|=8   relations=[(0, 4), (0, 5), (1, 3), (2, 3)]
+    |G|=720 > |D|=12   up-star (2 below 1) + 3 isolated
+    |G|=720 > |D|=12   up-star (3 below 1) + 2 isolated
+    |G|=720 > |D|=24   up-star (4 below 1) + 1 isolated
+    |G|=720 > |D|=120   up-star (5 below 1)
+    |G|=12 > |D|=6   relations=[(0, 5), (1, 4), (2, 4), (3, 4)]
+    |G|=4 > |D|=2   relations=[(0, 4), (1, 3), (2, 3)]
+    |G|=16 > |D|=8   relations=[(0, 3), (1, 2)]
+
+CHAIN C_6:  |AC| = 32 (= 2^(n-1) = 32),  |G(C_6)| = 2,  S_n-stable: False
+ANTICHAIN A_6: |AC| = 203 (= all partitions: True),  S_n-stable: True
+
+==========================================================================
+SUMMARY
+==========================================================================
+  n   iso classes   G(P) = S_n   fraction
+  1             1            1   1.0000
+  2             2            2   1.0000
+  3             5            4   0.8000
+  4            16            6   0.3750
+  5            63            8   0.1270
+  6           318           10   0.0314
