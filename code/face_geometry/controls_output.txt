@@ -1,3 +1,9 @@
+CONTROL ON THE SCORING -- a tautological row must not read as a pass
+  [PASS] a row that cannot fail is labelled 'CANNOT FAIL', not 'PASS'
+  [PASS] a cannot-fail row whose reported fact is FALSE is still a 'FAIL'
+  [PASS] a cannot-fail row suppresses the 'ALL CONTROLS PASS' bottom line
+  [PASS] with no cannot-fail row the bottom line is 'ALL CONTROLS PASS'
+  [PASS] a real failure still exits nonzero and is reported first
 POSITIVE CONTROL 1 -- reduced Betti numbers of standard complexes
   [PASS] boundary of a triangle = S^1 -> reduced betti {0: 0, 1: 1}  -- expected {0: 0, 1: 1}
   [PASS] filled triangle = disc (contractible) -> reduced betti {0: 0, 1: 0, 2: 0}  -- expected {0: 0, 1: 0, 2: 0}
@@ -28,7 +34,9 @@ NEGATIVE CONTROL 2 -- the claim-(1) test must FAIL on corrupted inputs
   [PASS] uncorrupted claim-(1) test passes on 86/86 posets
 NEGATIVE CONTROL 3 -- corrupt the CONSTRUCTION of L^rel (mg-e0ce F2)
   [PASS] true simplicial signs: claim (1) holds on 86/86 posets
-  [PASS] all-+1 signs leave both top Laplacians UNCHANGED on 86/86 posets, so claim (1) still holds on 86 -- this corruption cannot fire on the construction (reported, not a pass)
-  [PASS] facet-parity signs -- rejected on 82/82 posets with |L(P)| >= 2 where the mutation bites (4 posets have |L(P)| = 1: a single facet, no second column to flip against)
+  [CANNOT FAIL] all-+1 signs leave both top Laplacians UNCHANGED -- L^rel on 86/86, L^abs on 86/86, each compared -- and claims (1)/(2)/(3) re-run under the corruption still hold on 86/86/86.  PROVABLE for every finite poset (the simplicial sign depends only on the ridge, so d_true = diag(row signs) . d_allplus and d^T d cannot see it), so this row is a theorem and not a test of the construction
+  [PASS] facet-parity signs -- rejected on 82/82 posets with |L(P)| >= 2 where the mutation bites (4 posets have |L(P)| = 1: a single facet, no second column to flip against).  Scope of this row, stated narrowly: the corruption is the diagonal conjugation L -> D.L.D, D = diag((-1)^j), so it is isospectral and absorbable into the twist -- it covers ONE SIGN GAUGE of the construction and cannot fail on a non-sign construction error (out_nc3.txt line F)
 
-ALL CONTROLS PASS
+CONTROLS: 0 failures, but 1 row(s) CANNOT FAIL and are NOT scored as passes:
+   - all-+1 signs leave both top Laplacians UNCHANGED -- L^rel on 86/86, L^abs o...
+A row that cannot fail covers nothing, so this battery's bottom line is NOT 'all controls pass'.
