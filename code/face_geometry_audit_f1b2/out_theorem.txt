@@ -1,0 +1,26 @@
+==============================================================================
+(1) THE THEOREM HALF over EVERY eligible ridge choice, rebuilt from the
+    boundary matrix (no use of top_laplacians' mutation branches)
+==============================================================================
+  I1: 1449 eligible ridge choices that bite; diagonal MOVES on 1449 of them; reported absorbable on 0
+  I2:  981 eligible ridge choices that bite; diagonal MOVES on 981 of them; reported absorbable on 0
+  I3: 1459 eligible ridge choices that bite; diagonal MOVES on 1459 of them; reported absorbable on 0
+  mg-fcf1 reported 1449/981/1459 for I1/I2/I3, quoted by mg-8a12's [CANNOT FAIL] row.
+
+==============================================================================
+(2a) IS `L_mut - L_true == predicted delta` AN IDENTITY?
+==============================================================================
+  I1: identity holds on 72/72 biting posets, UNTWISTED -- so the twisted comparison mg-8a12 scores adds exactly one further requirement: twist(L_true) == target, i.e. CLAIM (1).
+  I2: identity holds on 82/82 biting posets, UNTWISTED -- so the twisted comparison mg-8a12 scores adds exactly one further requirement: twist(L_true) == target, i.e. CLAIM (1).
+  I3: identity holds on 82/82 biting posets, UNTWISTED -- so the twisted comparison mg-8a12 scores adds exactly one further requirement: twist(L_true) == target, i.e. CLAIM (1).
+
+==============================================================================
+(2b) DOES THE CAUSATION HALF CATCH A MUTATION THAT IS NOT THE LOCAL EDIT
+     IT DECLARES?  Injected: ridge_drop drops TWO interior ridges.
+==============================================================================
+  a two-ridge drop declared as a one-ridge drop: bites on 72 posets
+  the ABSORBABILITY half mg-8a12 removed  would score: absorbable on 0/72, diagonal moves on 72/72  ->  row still GREEN
+  the CAUSATION half mg-8a12 added        would score: residual == prediction on 0/72  ->  row RED
+  So the causation half has content the absorbability half did not: it constrains the mutation to be
+  the edit it declares.  It is not a tautology.  What it does not do is make the row able to fail on a
+  defect in the CONSTRUCTION the section exists to test -- for that, see part 4.

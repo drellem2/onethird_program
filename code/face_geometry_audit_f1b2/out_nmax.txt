@@ -1,0 +1,28 @@
+==============================================================================
+mg-f1b2 part 5 -- the two rows mg-8a12 adds, at every supported nmax
+==============================================================================
+
+  ---- python3 controls.py 2   (exit 1) ----
+    routing check: [FAIL]  4 of 4 rows forced
+    theorem row:   [CANNOT FAIL]  covers I1, I2, I3, I4   <-- and PRINTS 'I4 moves one, though no closed form for it is recorded in DIAGONAL_MOVES'
+    CONTROLS FAILED: 3
+
+  ---- python3 controls.py 3   (exit 0) ----
+    routing check: [PASS]  3 of 4 rows forced
+    theorem row:   [CANNOT FAIL]  covers I1, I2, I3
+
+  ---- python3 controls.py 4   (exit 0) ----
+    routing check: [PASS]  3 of 4 rows forced
+    theorem row:   [CANNOT FAIL]  covers I1, I2, I3
+
+  ---- python3 controls.py 5   (exit 0) ----
+    routing check: [PASS]  3 of 4 rows forced
+    theorem row:   [CANNOT FAIL]  covers I1, I2, I3
+
+  READING.  At n <= 2 the routing check FAILS (4 of 4 forced) and the theorem row prints
+  'I4 moves one' -- an assertion that the off-by-one moves a diagonal entry, which the same
+  file measures as FALSE on 3 posets at n >= 3 (diagonal preserved).  The row's guard is
+  `theorem_absorb == 0 and theorem_diag == theorem_app`, an aggregate over the posets where
+  the mutation applies; at n <= 2 the off-by-one applies nowhere, so 0 == 0 and the guard
+  cannot see the false sentence it prints.  'A FALSE theorem is still a failure' does not hold
+  for the per-row half of what the row asserts.

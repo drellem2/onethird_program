@@ -1,0 +1,34 @@
+==============================================================================
+mg-f1b2 AUDIT OF mg-8a12 -- can the repair's own new rows fail?
+==============================================================================
+
+A. THE COMMITTED POPULATION (n <= 5, 86 posets): rebuild of every count mg-8a12 prints, plus the gate that actually decided each 'not absorbable'.
+  I1 app=72  diag_preserved=0  (antichains 0, |L(P)| []) absorb=0 spec=66 caused=72
+       gate that decided 'not absorbable': {'diagonal': 72}
+  I2 app=82  diag_preserved=0  (antichains 0, |L(P)| []) absorb=0 spec=82 caused=82
+       gate that decided 'not absorbable': {'diagonal': 82}
+  I3 app=82  diag_preserved=0  (antichains 0, |L(P)| []) absorb=0 spec=82 caused=82
+       gate that decided 'not absorbable': {'diagonal': 82}
+  I4 app=61  diag_preserved=3  (antichains 3, |L(P)| [6, 24, 120]) absorb=0 spec=58 caused=-
+       gate that decided 'not absorbable': {'magnitude': 3, 'diagonal': 58}
+  forced rows (diag_preserved == 0): ['I1', 'I2', 'I3']   routing condition 0 < 3 < 4 -> True
+
+B. IS THE ROUTING CHECK'S ANSWER FORCED?  It is scored [PASS] on '0 < len(forced_rows) < len(muts)'.  Run the split at every n it can be run at:
+  n <= 2 (  2 posets): diag_preserved = {'I1': 0, 'I2': 0, 'I3': 0, 'I4': 0} ; forced = ['I1', 'I2', 'I3', 'I4'] ; 0 < 4 < 4 -> False
+  n <= 3 (  7 posets): diag_preserved = {'I1': 0, 'I2': 0, 'I3': 0, 'I4': 1} ; forced = ['I1', 'I2', 'I3'] ; 0 < 3 < 4 -> True
+  n <= 4 ( 23 posets): diag_preserved = {'I1': 0, 'I2': 0, 'I3': 0, 'I4': 2} ; forced = ['I1', 'I2', 'I3'] ; 0 < 3 < 4 -> True
+  n <= 5 ( 86 posets): diag_preserved = {'I1': 0, 'I2': 0, 'I3': 0, 'I4': 3} ; forced = ['I1', 'I2', 'I3'] ; 0 < 3 < 4 -> True
+  n <= 6 (404 posets): diag_preserved = {'I1': 0, 'I2': 0, 'I3': 0, 'I4': 4} ; forced = ['I1', 'I2', 'I3'] ; 0 < 3 < 4 -> True
+
+C. ROW I4's STATED GROUND FOR KEEPING ABSORBABILITY SCORED: 'the diagonal is preserved on 3 of them, so the predicate had to decide on the off-diagonal signs and could have returned absorbable'.  On those 3 posets, which gate decided it?
+  n=3 None                   |L(P)|=6   antichain=True  gate=magnitude              off-diagonal MAGNITUDE mismatches=12  sign-only mismatches=0  spectrum moved=False
+  n=4 None                   |L(P)|=24  antichain=True  gate=magnitude              off-diagonal MAGNITUDE mismatches=48  sign-only mismatches=0  spectrum moved=False
+  n=5 None                   |L(P)|=120 antichain=True  gate=magnitude              off-diagonal MAGNITUDE mismatches=240  sign-only mismatches=0  spectrum moved=False
+
+D. IS THE CAUSATION CONDITION (residual == prediction) EQUIVALENT TO CLAIM (1) ON THE UNCORRUPTED BUILD?  pred = twist(delta) and obs = twist(L_mut) - target, so pred == obs iff twist(L_true) == target AND L_mut - L_true == delta.  Check the second conjunct separately -- if it is an identity, the scored condition is claim (1) again:
+  I1: L_mut - L_true == predicted delta on 72/72 biting posets (UNTWISTED, so claim (1) is not involved)
+  I2: L_mut - L_true == predicted delta on 82/82 biting posets (UNTWISTED, so claim (1) is not involved)
+  I3: L_mut - L_true == predicted delta on 82/82 biting posets (UNTWISTED, so claim (1) is not involved)
+
+E. THE BASELINE ROW: is 'claim (1) holds on the uncorrupted build, 86/86' new to this battery?
+  claim (1) on the true build: 86/86.  NEGATIVE CONTROL 3 line 1 prints the same computation ('true simplicial signs: claim (1) holds on 86/86'), and the probe's own headline is that claim (1) is PROVEN for every finite poset (mg-276d, audit-confirmed mg-e0ce).

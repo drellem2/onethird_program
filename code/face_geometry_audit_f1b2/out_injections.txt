@@ -1,0 +1,66 @@
+==============================================================================
+mg-f1b2 part 4 -- which NEGATIVE CONTROL 4 rows react to a CONSTRUCTION
+                  error in the pipeline?
+==============================================================================
+
+  D0 no defect (control)
+      instrument 1 (diagonal conjugation)  PASS
+      instrument 2 (one diagonal moved)    PASS
+      instrument 3 (vs brute force)        PASS
+      baseline  [NEW in mg-8a12]           PASS
+      I1                                   PASS
+      I2                                   PASS
+      I3                                   PASS
+      I4                                   PASS
+      theorem row  [NEW in mg-8a12]        CANNOT FAIL
+      routing check  [NEW in mg-8a12]      PASS
+      battery exit code 0
+
+  D1 the pipeline's ridge enumeration is incomplete: one interior ridge is
+     dropped from the TRUE build (the defect row I3 is named for)
+      instrument 1 (diagonal conjugation)  PASS
+      instrument 2 (one diagonal moved)    PASS
+      instrument 3 (vs brute force)        PASS
+      baseline  [NEW in mg-8a12]           FAIL
+      I1                                   FAIL
+      I2                                   FAIL
+      I3                                   FAIL
+      I4                                   FAIL
+      theorem row  [NEW in mg-8a12]        CANNOT FAIL
+      routing check  [NEW in mg-8a12]      PASS
+      battery exit code 1
+
+  D2 the pipeline's le_to_facet is mis-indexed: the TRUE build uses the
+     off-by-one map (the defect row I4 is named for)
+      instrument 1 (diagonal conjugation)  PASS
+      instrument 2 (one diagonal moved)    PASS
+      instrument 3 (vs brute force)        PASS
+      baseline  [NEW in mg-8a12]           FAIL
+      I1                                   FAIL
+      I2                                   FAIL
+      I3                                   FAIL
+      I4                                   FAIL
+      theorem row  [NEW in mg-8a12]        CANNOT FAIL
+      routing check  [NEW in mg-8a12]      FAIL
+      battery exit code 1
+
+  D3 the pipeline's free/interior split is wrong: one free ridge is counted
+     as interior in the TRUE build (the defect row I2 is named for)
+      instrument 1 (diagonal conjugation)  PASS
+      instrument 2 (one diagonal moved)    PASS
+      instrument 3 (vs brute force)        PASS
+      baseline  [NEW in mg-8a12]           FAIL
+      I1                                   FAIL
+      I2                                   FAIL
+      I3                                   FAIL
+      I4                                   FAIL
+      theorem row  [NEW in mg-8a12]        CANNOT FAIL
+      routing check  [NEW in mg-8a12]      PASS
+      battery exit code 1
+
+  READING.  Three genuine construction errors, each one the very defect a row is named
+  for.  The baseline row and all four mutation rows react to all three -- the section does
+  cover construction, and that part of mg-2789 and mg-8a12 stands.  The ROUTING CHECK
+  stays GREEN under D1 and D3, and reddens under D2 only because the off-by-one build
+  makes row I4's own mutation vacuous, which row I4 already reports itself.  It detects
+  nothing that is not already detected, which is what 'cannot fail' means operationally.
