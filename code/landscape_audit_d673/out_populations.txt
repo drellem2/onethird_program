@@ -1,0 +1,77 @@
+==============================================================================
+mg-d673 AUDIT INSTRUMENT 1 -- POPULATIONS, RECOMPUTED FROM SCRATCH
+Canonical form = min over the FULL S_n orbit.  No code shared with
+code/landscape_ebd8/ or any other instrument in the repo.
+==============================================================================
+
+  n=1:     1 iso classes  (A000112 says 1) OK   | connected     1  (A000608 says 1) OK
+  n=2:     2 iso classes  (A000112 says 2) OK   | connected     1  (A000608 says 1) OK
+  n=3:     5 iso classes  (A000112 says 5) OK   | connected     3  (A000608 says 3) OK
+  n=4:    16 iso classes  (A000112 says 16) OK   | connected    10  (A000608 says 10) OK
+  n=5:    63 iso classes  (A000112 says 63) OK   | connected    44  (A000608 says 44) OK
+  n=6:   318 iso classes  (A000112 says 318) OK   | connected   238  (A000608 says 238) OK
+
+  [certification against two external OEIS sequences: PASS]
+
+------------------------------------------------------------------------------
+B/C: |F(P)| and |AC(P)| summed over isomorphism classes
+------------------------------------------------------------------------------
+ n  classes  sum|F(P)|   target      sum|AC|acyc  sum|AC|supp   target
+ 1        1          1        1 OK              1            1     None OK
+ 2        2          5        5 OK              4            4        4 OK
+ 3        5         37       37 OK             24           24       24 OK
+ 4       16        397      397 OK            206          206      206 OK
+ 5       63       5757     5757 OK           2353         2353     2353 OK
+ 6      318     117169     None OK          37029        37029    37029 OK
+
+  sum of |F(P)| over iso classes, n=1..5  = 6197   (repo Theorem L carries 6197)
+
+------------------------------------------------------------------------------
+D: AC(P) closed under the Pi_n MEET (common refinement)?  under the
+   Pi_n JOIN?  -- against the repo's own 7/16 (n=4), 49/63 (n=5)
+------------------------------------------------------------------------------
+  n=2: meet-failures 0/2, join-failures 0/2
+  n=3: meet-failures 0/5, join-failures 0/5
+  n=4: meet-failures 0/16, join-failures 7/16   repo says 7/16 -> OK
+  n=5: meet-failures 0/63, join-failures 49/63   repo says 49/63 -> OK
+  n=6: meet-failures 0/318, join-failures 298/318
+
+------------------------------------------------------------------------------
+E: mu(0,1) of AC(P) vs (-1)^(n-1) * (# cyclic classes of lin ext)
+   -- Jenca-Sarkoci.  NOTE the population this test actually covers:
+   it is n/a for n<3, so it does NOT cover all 405 posets to n=6.
+------------------------------------------------------------------------------
+  n=3: 0 bad of 5
+  n=4: 0 bad of 16
+  n=5: 0 bad of 63
+  n=6: 0 bad of 318
+  posets on which P2 is even DEFINED (n>=3, n<=  6): 402
+  posets with n>=1 up to n=6: 405
+  posets with n>=2 up to n=6: 404
+
+------------------------------------------------------------------------------
+E': is 'cyclic classes' = 'linear extensions' exactly on the
+    CONNECTED posets?  (if it were equal everywhere the test would
+    not discriminate, which is the target's claim)
+------------------------------------------------------------------------------
+  n=3: connected with e != e_C: 0 (expect 0)   | disconnected: 2, of which e != e_C: 2  -> discriminating on 2 of 2
+  n=4: connected with e != e_C: 0 (expect 0)   | disconnected: 6, of which e != e_C: 6  -> discriminating on 6 of 6
+  n=5: connected with e != e_C: 0 (expect 0)   | disconnected: 19, of which e != e_C: 19  -> discriminating on 19 of 19
+  n=6: connected with e != e_C: 0 (expect 0)   | disconnected: 80, of which e != e_C: 80  -> discriminating on 80 of 80
+
+------------------------------------------------------------------------------
+F: is 'every block is an antichain of P' ALONE the same set as
+   'in AC(P) and every block an antichain'?  The target's sec 0
+   item 2 and its L2 table state the closed form without the
+   acyclicity side condition.
+------------------------------------------------------------------------------
+  n=2: partitions with all blocks antichains but NOT in AC(P): 0
+  n=3: partitions with all blocks antichains but NOT in AC(P): 0
+  n=4: partitions with all blocks antichains but NOT in AC(P): 1
+        witness P = [(0, 3), (1, 2)]  pi = ac|bd
+  n=5: partitions with all blocks antichains but NOT in AC(P): 18
+  n=6: partitions with all blocks antichains but NOT in AC(P): 455
+
+==============================================================================
+INSTRUMENT 1 TOTAL DISAGREEMENTS: 0
+==============================================================================
