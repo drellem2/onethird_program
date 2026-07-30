@@ -111,10 +111,32 @@ code, which is exactly what G-1 was.
 
   [CONFIRMED] and `out_audit_8e30.txt` is byte-identical to `main`: the frozen artifact is frozen, measured rather than asserted.  A document left wrong with its evidence bent to agree presents identically in a diff to a document corrected with its evidence regenerated to follow -- so which is which is written down
 
+R4 -- mg-835f's OWN INSTRUMENT, UNMODIFIED, RE-RUN
+--------------------------------------------------
+The strongest check available, and it costs nothing but time: the instrument
+that FOUND G-1 and G-2 is re-run against the repaired tree without a byte of it
+being edited.  A repair scored only by its own new instrument is a repair
+scored by the party that wrote it.
+
+`code/hodge_leverage_audit_835f/audit_a318_repair.py` is invoked directly
+rather than through its runner, so its COMMITTED transcript is not overwritten:
+`out_audit_a318.txt` is the run as TAKEN and stays frozen.  It mutates the tree
+and restores it under its own `finally` + sha256, and refuses to run against a
+dirty one.
+
+    exit 0, findings 0
+      U1 the STATE.md row: a WRONG figure restated in ordinary prose at the sitegate passes  GATE FIRES   <-- PREDICTION MISSED
+      U1 §14: a WRONG figure restated in ordinary prose at the site           gate passes  GATE FIRES   <-- PREDICTION MISSED
+      U1 H8: a WRONG figure restated in ordinary prose at the site            gate passes  GATE FIRES   <-- PREDICTION MISSED
+
+  [CONFIRMED] mg-835f's own U1 probes -- the three it observed at `gate passes` and raised G-1 on -- now read GATE FIRES at 3 of 3, measured by the instrument that raised the finding rather than by the one that repairs it
+  [CONFIRMED] and that instrument, unmodified, now reports 0 findings at exit 0 -- it reported 2 (G-1 and G-2) against the tree it was taken against.  Its predictions are LEFT AS WRITTEN and now read `PREDICTION MISSED`, which is the correct record of a gate that got wider after the prediction was made
+  [CONFIRMED] and its COMMITTED transcript is untouched by this run, sha256-verified -- the frozen artifact stays the run as taken
+
 BOTTOM LINE
 -----------
-  checks recorded : 15
-  confirmed       : 13
+  checks recorded : 18
+  confirmed       : 16
   measurements    : 2
   refuted         : 0
 
@@ -123,4 +145,6 @@ BOTTOM LINE
   of 3 sites now makes the real runner red at 3 of 3, in two shapes,
   and every restoration returns it to green.  G-2: the bottom line
   is derived from its PRIMARY rows, and the check that they agree is
-  shown FIRING when they are forced apart.
+  shown FIRING when they are forced apart.  AND mg-835f's OWN
+  INSTRUMENT AGREES: unmodified, it now reports 0 findings at exit 0,
+  with its three U1 rows reading GATE FIRES.
