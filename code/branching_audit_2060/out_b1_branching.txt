@@ -1,0 +1,192 @@
+==========================================================================
+B1a  THE VERTEX SET OF THE BRANCHING GRAPH, at each parameter
+==========================================================================
+A vertex of the branching graph at level n is an IRREDUCIBLE module
+of TL_n(beta).  Graham-Lehrer: the irreducibles are the non-zero
+L(n,p) = V(n,p)/rad<,>.  The cell modules V(n,p) are parameter-
+independent; the SIMPLE ones are not.
+
+  n    beta=3  beta=2  beta=1  beta=0
+  n=1   1      1      1      1   (cell modules: 1)
+  n=2   2      2      2      1   (cell modules: 2)
+  n=3   2      2      2      2   (cell modules: 2)
+  n=4   3      3      3      2   (cell modules: 3)
+  n=5   3      3      3      3   (cell modules: 3)
+  n=6   4      4      4      3   (cell modules: 4)
+
+  which p survive, by parameter:
+    beta=3:
+      n=1  vertices p = [0]            dims [1]
+      n=2  vertices p = [0, 1]         dims [1, 1]
+      n=3  vertices p = [0, 1]         dims [1, 2]
+      n=4  vertices p = [0, 1, 2]      dims [1, 3, 2]
+      n=5  vertices p = [0, 1, 2]      dims [1, 4, 5]
+      n=6  vertices p = [0, 1, 2, 3]   dims [1, 5, 9, 5]
+    beta=2:
+      n=1  vertices p = [0]            dims [1]
+      n=2  vertices p = [0, 1]         dims [1, 1]
+      n=3  vertices p = [0, 1]         dims [1, 2]
+      n=4  vertices p = [0, 1, 2]      dims [1, 3, 2]
+      n=5  vertices p = [0, 1, 2]      dims [1, 4, 5]
+      n=6  vertices p = [0, 1, 2, 3]   dims [1, 5, 9, 5]
+    beta=1:
+      n=1  vertices p = [0]            dims [1]
+      n=2  vertices p = [0, 1]         dims [1, 1]
+      n=3  vertices p = [0, 1]         dims [1, 1]
+      n=4  vertices p = [0, 1, 2]      dims [1, 3, 1]
+      n=5  vertices p = [0, 1, 2]      dims [1, 4, 1]
+      n=6  vertices p = [0, 1, 2, 3]   dims [1, 4, 9, 1]
+    beta=0:
+      n=1  vertices p = [0]            dims [1]
+      n=2  vertices p = [0]            dims [1]
+      n=3  vertices p = [0, 1]         dims [1, 2]
+      n=4  vertices p = [0, 1]         dims [1, 2]
+      n=5  vertices p = [0, 1, 2]      dims [1, 4, 5]
+      n=6  vertices p = [0, 1, 2]      dims [1, 4, 5]
+
+  *** THE VERTEX SET IS NOT THE SAME AT EVERY PARAMETER. ***
+  mg-db09 section 0: 'The branching graph is measured (not cited)
+  to be the same multiplicity-free graph at each'.  Under
+  Vershik-Okounkov's definition of the branching graph --- the one
+  mg-db09 quotes --- the graphs at beta = 3 and beta = 0 do not
+  even have the same number of vertices.
+    n=2  beta=0: vertices [0]   vs beta=3: [0, 1]
+    n=4  beta=0: vertices [0, 1]   vs beta=3: [0, 1, 2]
+    n=6  beta=0: vertices [0, 1, 2]   vs beta=3: [0, 1, 2, 3]
+==========================================================================
+B1b  THE EDGES, from characters, at every parameter
+==========================================================================
+[L(n,p) restricted to TL_{n-1} : L(n-1,q)] --- composition-factor
+multiplicities, not cell-module multiplicities.  Over a field of
+characteristic 0 the characters of the pairwise non-isomorphic simple
+modules of a finite-dimensional algebra are linearly independent, so the
+multiplicities are the unique solution of
+
+    chi_{L(n,p)} restricted  =  sum_q  m_q * chi_{L(n-1,q)}
+
+on the diagram basis of TL_{n-1}.  Uniqueness is CHECKED, not assumed,
+and so is integrality and non-negativity.
+
+  ---- beta = 3 ----
+      L(2,0) dim 1   ->  [L(1,0)]=1
+      L(2,1) dim 1   ->  [L(1,0)]=1
+      L(3,0) dim 1   ->  [L(2,0)]=1  [L(2,1)]=0
+      L(3,1) dim 2   ->  [L(2,0)]=1  [L(2,1)]=1
+      L(4,0) dim 1   ->  [L(3,0)]=1  [L(3,1)]=0
+      L(4,1) dim 3   ->  [L(3,0)]=1  [L(3,1)]=1
+      L(4,2) dim 2   ->  [L(3,0)]=0  [L(3,1)]=1
+      L(5,0) dim 1   ->  [L(4,0)]=1  [L(4,1)]=0  [L(4,2)]=0
+      L(5,1) dim 4   ->  [L(4,0)]=1  [L(4,1)]=1  [L(4,2)]=0
+      L(5,2) dim 5   ->  [L(4,0)]=0  [L(4,1)]=1  [L(4,2)]=1
+      L(6,0) dim 1   ->  [L(5,0)]=1  [L(5,1)]=0  [L(5,2)]=0
+      L(6,1) dim 5   ->  [L(5,0)]=1  [L(5,1)]=1  [L(5,2)]=0
+      L(6,2) dim 9   ->  [L(5,0)]=0  [L(5,1)]=1  [L(5,2)]=1
+      L(6,3) dim 5   ->  [L(5,0)]=0  [L(5,1)]=0  [L(5,2)]=1
+      multiplicity-free at beta = 3 ?  YES
+
+  ---- beta = 2 ----
+      L(2,0) dim 1   ->  [L(1,0)]=1
+      L(2,1) dim 1   ->  [L(1,0)]=1
+      L(3,0) dim 1   ->  [L(2,0)]=1  [L(2,1)]=0
+      L(3,1) dim 2   ->  [L(2,0)]=1  [L(2,1)]=1
+      L(4,0) dim 1   ->  [L(3,0)]=1  [L(3,1)]=0
+      L(4,1) dim 3   ->  [L(3,0)]=1  [L(3,1)]=1
+      L(4,2) dim 2   ->  [L(3,0)]=0  [L(3,1)]=1
+      L(5,0) dim 1   ->  [L(4,0)]=1  [L(4,1)]=0  [L(4,2)]=0
+      L(5,1) dim 4   ->  [L(4,0)]=1  [L(4,1)]=1  [L(4,2)]=0
+      L(5,2) dim 5   ->  [L(4,0)]=0  [L(4,1)]=1  [L(4,2)]=1
+      L(6,0) dim 1   ->  [L(5,0)]=1  [L(5,1)]=0  [L(5,2)]=0
+      L(6,1) dim 5   ->  [L(5,0)]=1  [L(5,1)]=1  [L(5,2)]=0
+      L(6,2) dim 9   ->  [L(5,0)]=0  [L(5,1)]=1  [L(5,2)]=1
+      L(6,3) dim 5   ->  [L(5,0)]=0  [L(5,1)]=0  [L(5,2)]=1
+      multiplicity-free at beta = 2 ?  YES
+
+  ---- beta = 1 ----
+      L(2,0) dim 1   ->  [L(1,0)]=1
+      L(2,1) dim 1   ->  [L(1,0)]=1
+      L(3,0) dim 1   ->  [L(2,0)]=1  [L(2,1)]=0
+      L(3,1) dim 1   ->  [L(2,0)]=0  [L(2,1)]=1
+      L(4,0) dim 1   ->  [L(3,0)]=1  [L(3,1)]=0
+      L(4,1) dim 3   ->  [L(3,0)]=2  [L(3,1)]=1   <-- MULTIPLICITY > 1
+      L(4,2) dim 1   ->  [L(3,0)]=0  [L(3,1)]=1
+      L(5,0) dim 1   ->  [L(4,0)]=1  [L(4,1)]=0  [L(4,2)]=0
+      L(5,1) dim 4   ->  [L(4,0)]=1  [L(4,1)]=1  [L(4,2)]=0
+      L(5,2) dim 1   ->  [L(4,0)]=0  [L(4,1)]=0  [L(4,2)]=1
+      L(6,0) dim 1   ->  [L(5,0)]=1  [L(5,1)]=0  [L(5,2)]=0
+      L(6,1) dim 4   ->  [L(5,0)]=0  [L(5,1)]=1  [L(5,2)]=0
+      L(6,2) dim 9   ->  [L(5,0)]=0  [L(5,1)]=2  [L(5,2)]=1   <-- MULTIPLICITY > 1
+      L(6,3) dim 1   ->  [L(5,0)]=0  [L(5,1)]=0  [L(5,2)]=1
+      multiplicity-free at beta = 1 ?  NO
+
+  ---- beta = 0 ----
+      L(2,0) dim 1   ->  [L(1,0)]=1
+      L(3,0) dim 1   ->  [L(2,0)]=1
+      L(3,1) dim 2   ->  [L(2,0)]=2   <-- MULTIPLICITY > 1
+      L(4,0) dim 1   ->  [L(3,0)]=1  [L(3,1)]=0
+      L(4,1) dim 2   ->  [L(3,0)]=0  [L(3,1)]=1
+      L(5,0) dim 1   ->  [L(4,0)]=1  [L(4,1)]=0
+      L(5,1) dim 4   ->  [L(4,0)]=2  [L(4,1)]=1   <-- MULTIPLICITY > 1
+      L(5,2) dim 5   ->  [L(4,0)]=1  [L(4,1)]=2   <-- MULTIPLICITY > 1
+      L(6,0) dim 1   ->  [L(5,0)]=1  [L(5,1)]=0  [L(5,2)]=0
+      L(6,1) dim 4   ->  [L(5,0)]=0  [L(5,1)]=1  [L(5,2)]=0
+      L(6,2) dim 5   ->  [L(5,0)]=0  [L(5,1)]=0  [L(5,2)]=1
+      multiplicity-free at beta = 0 ?  NO
+
+  Summary --- the hypothesis mg-db09 says it holds FIXED:
+    beta = 3 : branching multiplicity-free = True
+    beta = 2 : branching multiplicity-free = True
+    beta = 1 : branching multiplicity-free = False
+    beta = 0 : branching multiplicity-free = False
+
+  *** MULTIPLICITY-FREENESS IS NOT HELD FIXED DOWN THE COLUMN. ***
+  mg-db09 section 0: 'Multiplicity-freeness is held fixed down
+  that column and the conclusion changes.'  Measured here under
+  the definition mg-db09 itself quotes, it is not held fixed.
+==========================================================================
+B1c  VERSHIK-OKOUNKOV Prop. 1.4, applied to mg-db09's own example
+==========================================================================
+mg-db09 section 1 adopts Prop. 1.4 as the equality-form of the
+multiplicity-freeness hypothesis --- 'multiplicities in {0,1},
+equivalently (VO Prop. 1.4) the centralizer Z(M,N) is commutative' ---
+and mg-db09's T2c uses exactly that test on the symmetric-group side.
+Here it is, applied to the Temperley-Lieb side, where mg-db09 did not
+run it.
+
+  n     beta   dim Z(M,N)     commutative? semisimple?
+  3     3      3              yes        yes
+  3     2      3              yes        yes
+  3     1      3              yes        no
+  3     0      3              yes        yes
+  4     3      4              yes        yes
+  4     2      4              yes        yes
+  4     1      4              yes        no
+  4     0      4              yes        no
+  5     3      5              yes        yes
+  5     2      5              yes        yes
+  5     1      5              yes        no
+  5     0      5              yes        yes
+==========================================================================
+B1d  VERDICT ON THE SEPARATING EXAMPLE
+==========================================================================
+What survives of mg-db09's T1, measured:
+
+  * The CELL modules V(n,p) and their dimensions are parameter-independent.
+    Confirmed here (selftest: the Catalan triangle at every beta).
+  * dim TL_n = sum_p (dim V(n,p))^2 at every beta.  Confirmed --- it is
+    the Catalan identity and has nothing to do with beta.
+  * The algebra is a direct sum of endomorphism algebras exactly at the
+    parameters where it is semisimple.  Confirmed, and it is Wedderburn
+    in BOTH directions: a finite direct sum of full matrix algebras IS
+    semisimple, so the implication 'not semisimple => not sum_lambda End'
+    holds for EVERY finite-dimensional algebra and could not have failed
+    for any example.
+
+What does not survive:
+
+  * that the BRANCHING GRAPH is the same at each parameter, and
+  * that MULTIPLICITY-FREENESS is held fixed down the column,
+
+under the definition of 'branching graph' that mg-db09 quotes from
+Vershik-Okounkov and uses everywhere else in the document.  See B1a/B1b.
+
+TOTAL BAD: 2

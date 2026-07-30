@@ -1,0 +1,111 @@
+==========================================================================
+B4a  THE TRACE-FORM RADICAL WITH NO CAP, all 87 classes to n <= 5
+==========================================================================
+dim kF(P)/rad computed as the rank of the trace form of the regular
+representation (Dickson, characteristic 0), compared with |AC(P)|.
+mg-db09 tested 67 of 87 and exempted 20 over |F(P)| <= 90.  Nothing is
+exempt here.
+
+  n = 1: 1 of 1 classes tested, 1 agree
+  n = 2: 2 of 2 classes tested, 2 agree
+  n = 3: 5 of 5 classes tested, 5 agree
+  n = 4: 16 of 16 classes tested, 16 agree
+  n = 5: 63 of 63 classes tested, 63 agree
+  tested 87, exempt 0, agree 87
+
+  Classes that mg-db09's |F(P)| <= 90 cap exempted, each computed
+  here: [102, 102, 104, 104, 114, 114, 120, 126, 126, 132, 148, 150, 150, 176, 176, 176, 220, 220, 308, 541]
+  count: 20
+
+  The n = 5 antichain, |F| = 541, |AC| = 52:
+    dim kF/rad = 52 by the trace form on a fourth instrument.
+    radical = 541 - 52 = 489, which is 489/541 = 90.4%.
+  This is the first time in this lineage the 90.4% figure is derived
+  from the RADICAL rather than from the identity dim kF/rad = |AC|.
+
+  mg-db09's T3b prints its exemptions as a SET of sizes:
+    [102, 104, 114, 120, 126, 132, 148, 150, 176, 220, 308, 541]
+  which is 12 numbers for 20 exempt classes.  The document's D5 and
+  its section 4 item 5 both say the 20 are 'each listed with its
+  size'.  Twelve distinct sizes are listed; eight classes share a
+  size with another and are not individually identifiable from the
+  output.  Sizes with multiplicity, measured here:
+    [(102, 2), (104, 2), (114, 2), (120, 1), (126, 2), (132, 1), (148, 1), (150, 2), (176, 3), (220, 2), (308, 1), (541, 1)]
+
+  NOT ESTABLISHED HERE: the n = 6 figure.  |F(antichain_6)| = 4683 and the
+  trace form is a 4683 x 4683 matrix; this audit did not compute it and
+  says so.  The 95.7% remains arithmetic on |F| = 4683 and |AC| = 203
+  together with the CITED identity dim kF/rad = |AC|.  mg-db09's D5 says
+  this correctly; its COMMIT MESSAGE does not (see the audit document).
+
+==========================================================================
+B4b  THE CARTAN MATRIX by MSS formula (4.9), the Moebius route
+==========================================================================
+C_{X,Y} = sum_{Z <= X} |e_Z B  intersect  L_Y| * mu(Z, X)
+
+on Lambda(B) = AC(P) ordered so that the support map is a JOIN map:
+X <= Y iff Y refines X, with the identity face's support {[n]} as the
+minimum.  L_Y = the faces of support exactly Y.  e_Z = a fixed face of
+support Z.  mu is the Moebius function of Lambda(B), computed here by
+recursion from the order relation.
+
+mg-db09 deliberately did NOT use this formula (its section 4 item 4:
+'rebuilt here from their own proof ... because the order convention on
+Lambda(B) is the part I was least sure of.  An auditor should rebuild it
+from formula (4.9) instead').  This is that rebuild.
+
+  P              |Lam|  dim A    sum C    unit diag triangular col check   symmetric
+  antichain 2    2      3        3        yes       yes        yes         NO
+  chain 2        2      2        2        yes       yes        yes         yes
+  antichain 3    5      13       13       yes       yes        yes         NO
+  chain 3        4      4        4        yes       yes        yes         yes
+  V-poset 3      5      6        6        yes       yes        yes         NO
+  antichain 4    15     75       75       yes       yes        yes         NO
+  chain 4        8      8        8        yes       yes        yes         yes
+  antichain 5    52     541      541      yes       yes        yes         NO
+  chain 5        16     16       16       yes       yes        yes         yes
+
+  Rebuilt from formula (4.9) with the Moebius function, the numbers agree
+  with mg-db09's T3c on every row it printed: same |Lambda|, same dim A,
+  same sum C, unit diagonal and lower triangular everywhere, symmetric
+  exactly on the chains.  The order convention mg-db09 said it was least
+  sure of is the one used here (X <= Y iff Y refines X) and it is the one
+  that makes (4.9) come out right.
+
+  The per-column identity sum_X C_{X,Y} = |L_Y| holds on every row.  It
+  is strictly stronger than the document's sum C = dim A, which is its
+  total, and it is the check that would catch an error that moves mass
+  between columns.
+
+==========================================================================
+B4c  'SYMMETRIC AND UNITRIANGULAR IMPLIES THE IDENTITY', executed
+==========================================================================
+mg-db09 flags this one-liner as its own most expensive derivation
+if wrong (section 7, item (a); section 4 item 1).  It is:
+
+  C symmetric, and C unipotent lower triangular with respect to SOME
+  linear extension  =>  C = I  =>  (for a split basic algebra) A is
+  semisimple.
+
+The permutation subtlety, which the document does not spell out: 'lower
+triangular with respect to SOME linear extension' means P C P^T is lower
+unitriangular for a permutation matrix P.  Permutation similarity
+preserves symmetry, so P C P^T is symmetric AND lower triangular, hence
+diagonal, hence (unit diagonal) the identity.  Executed on our rows:
+
+  antichain 2    symmetric: no    semisimple: no    agree: yes
+  chain 2        symmetric: yes   semisimple: yes   agree: yes
+  antichain 3    symmetric: no    semisimple: no    agree: yes
+  chain 3        symmetric: yes   semisimple: yes   agree: yes
+  V-poset 3      symmetric: no    semisimple: no    agree: yes
+  antichain 4    symmetric: no    semisimple: no    agree: yes
+  chain 4        symmetric: yes   semisimple: yes   agree: yes
+  antichain 5    symmetric: no    semisimple: no    agree: yes
+  chain 5        symmetric: yes   semisimple: yes   agree: yes
+
+  9 of 9.  The one-liner mg-db09 flagged as the expensive one HOLDS, and
+  the equivalence it predicts (symmetric Cartan <=> semisimple, for a
+  split basic algebra with unitriangular Cartan) is confirmed on every
+  row.  Combined with B3c, section 2 row 1 of the document stands.
+
+TOTAL BAD: 0

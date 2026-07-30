@@ -1,0 +1,42 @@
+==========================================================================
+B7a  dim GZ(n) against the number of involutions in S_n  (T2a)
+==========================================================================
+  n    dim GZ(n)   # involutions   agree?
+  1    1           1               yes
+  2    2           2               yes
+  3    4           4               yes
+  4    10          10              yes
+  5    26          26              yes
+==========================================================================
+B7b  dim GZ for chains with a level removed  (T2b)
+==========================================================================
+  chain                      dim GZ    # paths   maximal?
+  S_1 < S_2 < S_3 < S_4      10        10        yes
+  S_1 < S_2 < S_4            8         10        NO
+  S_1 < S_3 < S_4            7         10        NO
+  S_1 < S_4                  5         10        NO
+  S_1 < S_2 < S_3 < S_4 < S_5 26        26        yes
+  S_1 < S_2 < S_3 < S_5      18        26        NO
+==========================================================================
+B7c  Z(M,N) and commutativity  (T2c)
+==========================================================================
+  pair                   dim Z(M,N)    commutative?
+  Z(CS_3, CS_2)          4             yes   adjacent
+  Z(CS_4, CS_3)          7             yes   adjacent
+  Z(CS_5, CS_4)          12            yes   adjacent
+  Z(CS_4, CS_2)          14            NO   level(s) skipped
+  Z(CS_5, CS_3)          28            NO   level(s) skipped
+  Z(CS_5, CS_2)          66            NO   level(s) skipped
+==========================================================================
+B7d  C S_4 semisimple, and C inside M_2(C)  (T2d)
+==========================================================================
+  dim C S_4 = 24, dim rad = 0, 1+1+4+9+9 = 24
+  M_2(C): the unique simple restricts to 2 copies of the simple of
+  C, so the Bratteli diagram has a DOUBLE EDGE; dim GZ = 1 < 2 = the
+  number of paths.  This is a two-line fact about a 4-dimensional
+  algebra and is not recomputed.
+
+  All of mg-db09's T2a/T2b/T2c/T2d numbers reproduce on an
+  instrument that shares no code with it.
+
+TOTAL BAD: 0
