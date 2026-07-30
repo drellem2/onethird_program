@@ -1,0 +1,165 @@
+==============================================================================
+R2a  the five columns, the collection varied, the operations fixed
+==============================================================================
+
+  Operations held fixed at the published ones: product = concatenation
+  in the Hadamard product P x Sigma, coproduct = restriction with the
+  lower-set condition (Aguiar-Mahajan 13.1.1 / 13.4.2 / 8.13).  Only
+  the SET of basis elements changes.
+
+  collection                                 on [4]
+                 prod_closure  coprod_closure      assoc    coassoc     compat
+
+  B0  F (ours)                                 4399
+      predicted          0          0          0          0          0
+      actual             0          0          0          0          0
+      verdict           ok         ok         ok         ok         ok
+      the baseline mg-7d75 reports
+
+  C1  the full ambient P x Sigma              16425
+      predicted          0          0          0          0          0
+      actual             0          0          0          0          0
+      verdict           ok         ok         ok         ok         ok
+      closed, because it is the whole Hadamard product
+
+  C2  F-opposite (wrong pairing)               4399
+      predicted          0          0          0          0          0
+      actual             0          0          0          0          0
+      verdict           ok         ok         ok         ok         ok
+      same size as F, semantically wrong, and still closed
+
+  C3  F-broken (every 2nd element)             2200
+      predicted          +          +          0          0          0
+      actual           216       6988          0          0          0
+      verdict           ok         ok         ok         ok         ok
+      closed under nothing; only the closure columns may move
+
+  C4  chains only                               192
+      predicted          +          0          0          0          0
+      actual           396          0          0          0          0
+      verdict           ok         ok         ok         ok         ok
+      not closed under disjoint union; IS closed under restriction
+
+  C5  even number of blocks                    2200
+      predicted          +          +          0          0          0
+      actual             0      12186          0          0          0
+      verdict         MISS         ok         ok         ok         ok
+      an arbitrary predicate with no closure meaning
+
+  READING.  Associativity, coassociativity and compatibility return 0
+  for a collection closed under NOTHING, for one closed under only
+  half of the operations, and for an arbitrary predicate.  They are
+  identities of the AMBIENT operations -- associativity of
+  concatenation and coassociativity of restriction are identities of
+  tuples and of sets -- so no choice of sub-collection can move them.
+
+==============================================================================
+R2b  the same five columns, the operations varied, the collection fixed
+==============================================================================
+
+  Collection held fixed at F, 4 399 basis elements on [4].  Only the
+  MAPS change.  This is the half A3b does not run, and without it
+  'these three columns cannot fail' is an inference rather than a
+  measurement.
+
+  O1  product = rotate(concat)                 4399
+      predicted          +          0          +          0          +
+      actual          7984          0      12192          0      20388
+      verdict           ok         ok         ok         ok         ok
+      leaves the cone, and is not associative
+
+  O2  coproduct = restriction, factors swapped   4399
+      predicted          0          +          0          +          +
+      actual             0      40468          0     266459          0
+      verdict           ok         ok         ok         ok       MISS
+      lands in the wrong component and is not coassociative
+
+  O3  product = merge last block with first    4399
+      predicted          0          0          0          0          +
+      actual             0          0          0          0       3408
+      verdict           ok         ok         ok         ok         ok
+      stays in the cone and IS associative; only compatibility should go
+
+==============================================================================
+R2c  THE PER-COLUMN VERDICT
+==============================================================================
+
+  column           fails on a COLLECTION?   fails on an OPERATION?  
+  prod_closure     YES                      YES                     
+  coprod_closure   YES                      YES                     
+  assoc            NO -- pinned at 0        YES                     
+  coassoc          NO -- pinned at 0        YES                     
+  compat           NO -- pinned at 0        YES                     
+
+  So the honest count of what the table in section 5 establishes:
+
+    * TWO columns are tests OF OUR TWO SUBSPECIES -- product closure
+      and coproduct closure.  Both can fail and both are measured at
+      0, over 4 399 basis elements.  That is the result: F and AC are
+      CLOSED under the published operations.
+    * THREE columns are tests OF THE AMBIENT HADAMARD PRODUCT.  They
+      are verified ONCE, not 4 399 times, and no sub-collection can
+      move them.  They are not evidence about F and AC at all.
+
+  And the two columns that CAN fail return 0 for the full ambient and
+  for a deliberately wrong pairing as well as for ours, so what they
+  establish is CLOSURE and not IDENTIFICATION.
+
+==============================================================================
+R2d  O3 is a compatibility control that section 5 did not have
+==============================================================================
+
+  mg-7d75's four controls (i)-(iv) leave compatibility without an
+  isolated control: (ii) the Tits product breaks closure,
+  associativity and compatibility together -- and mg-a61f's X5 shows
+  its 1 442 product failures are exactly the 1 442 disjoint-ground-set
+  pairs, so it fires on a type mismatch.  O3 above stays inside the
+  cone, is associative, keeps the coproduct, and breaks compatibility
+  alone.  That is the control the section was missing, and it is
+  reported here rather than folded into the section-5 table, because
+  the section-5 table is mg-7d75's and this is a repair.
+
+==============================================================================
+R2e  THE TWO MISSED PREDICTIONS, AND WHY THEY MISSED
+==============================================================================
+
+  Written before the run, missed, and kept exactly as written.  Neither
+  is edited away and neither changes a per-column verdict; both make
+  the reading in R2c stronger rather than weaker.
+
+  C5, product closure: predicted +, got 0.  I called 'an even number of
+  blocks' an ARBITRARY predicate with no closure meaning.  It is not
+  arbitrary: concatenation ADDS block counts, so the even-block faces
+  are closed under the product by parity, and only the coproduct sees
+  it.  A predicate with no geometric content whatever passes the
+  product-closure column -- which is X3's point about that column, made
+  by an accident I did not foresee.
+
+  O2, compatibility: predicted +, got 0.  Interchanging the two tensor
+  factors of the coproduct is a SYMMETRY of the compatibility axiom:
+  swapping Delta on both sides of
+      Delta_{S2,T2} . mu_{S1,T1}  =  (mu (x) mu) . (Delta (x) Delta)
+  permutes the four corners A,B,C,D consistently, so the two sides move
+  together.  Coassociativity is not symmetric that way and it fires,
+  266 459 times.  The lesson is the one X5 states about control (ii):
+  a corruption is not a control until you know which column it can
+  reach.
+
+==============================================================================
+R2f  PREDICTED vs ACTUAL, summary
+==============================================================================
+
+  45 cells, every one of them predicted before the run.
+  cells missed: 2  (both explained in R2e)
+  columns with NO demonstrated failure on either axis: 0 
+
+  TOTAL BAD below counts columns left UNDEMONSTRATED, which is the
+  failure mode this file exists to exclude.  The missed predictions are
+  reported on their own line, above and in run_all.sh's summary, and
+  are not folded into it -- a miss is a finding, and a finding that is
+  counted as a fault gets edited away.
+
+==============================================================================
+R2 PREDICTIONS MISSED: 2 of 45
+R2 TOTAL BAD: 0
+==============================================================================

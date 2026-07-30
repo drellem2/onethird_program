@@ -76,8 +76,25 @@ T1e  AC(P) is a subset of Pi[n] for EVERY poset P -- degree is respected
   Every one of the 242 labelled posets to n = 4 has AC(P) inside Pi[n].
   REFUTED HYPOTHESIS, kept on the record: AC(P) = Pi[n] holds for 3 of 3
   posets at n = 2, 13 of 19 at n = 3 and 45 of 219 at n = 4, against 1
-  antichain at each n.  The smallest poset with AC(P) != Pi[n] is
-  {a<c, b<d}, where the partition ad|bc has a 2-cycle in its quotient.
+  antichain at each n.
+
+  CORRECTED 2026-07-30 (mg-6f61), on mg-a61f's X1.  This block used to
+  ASSERT 'the smallest poset with AC(P) != Pi[n] is {a<c, b<d}'.  That
+  is FALSE, and the table printed eleven lines above refutes it: 19 - 13
+  = 6 labelled posets at n = 3 already fail.  The claim is now COMPUTED
+  rather than asserted, from the same sweep as the table.
+
+  smallest n with a witness : 3
+  labelled witnesses there  : 6
+  one of them               : 0<1, 0<2, 1<2
+
+  The smallest is the 3-ELEMENT CHAIN a < b < c, where the partition
+  {a,c}|{b} has a 2-cycle in the quotient: a < b sends {a,c} to {b} and
+  b < c sends {b} back to {a,c}.  Six labelled posets at n = 3, one
+  isomorphism class.  {a<c, b<d} IS a witness and is NOT the smallest;
+  the reason originally given -- two blocks B, C with b1 < c1 and
+  c2 < b2 -- forces |B| >= 2 and |C| >= 1, hence n >= 3, and n = 3 is
+  attained.  See code/species_repair_6f61/out_r1_smallest.txt.
 
 ==============================================================================
 T1f  CONTROL -- a deliberately WRONG orbit invariant must disagree

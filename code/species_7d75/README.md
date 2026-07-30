@@ -12,6 +12,22 @@ Committed outputs: `out_selftest.txt` (759 assertions), `out_t1_grading.txt`,
 
 Every `t*` script ends with a `TOTAL BAD` line. All six are `0`.
 
+**REPAIRED 2026-07-30 (mg-6f61), on mg-a61f's X1.** `t1_grading.py`'s T1e used
+to **assert** *"the smallest poset with `AC(P) != Pi[n]` is `{a<c, b<d}`"*. That
+is **false** — the smallest is the **3-element chain** — and the table T1e prints
+eleven lines above it already said so (`19 - 13 = 6` witnesses at `n = 3`). The
+claim is now **computed** from the same sweep, and T1e **fails** if it is not the
+3-chain with 6 labellings. See `code/species_repair_6f61/` and
+`docs/OneThird-Species-Hopf-Monoids-Repair.md`.
+
+**Also repaired in the document, not here:** `t5_hopf_monoid.py`'s five-column
+table is correct, but **only two of its columns can fail on a sub-collection** —
+associativity, coassociativity and compatibility are identities of the ambient
+Hadamard product and are pinned at 0 for every collection. `t5_hopf_monoid.py`
+itself already says the right thing (*"what T5 establishes is CLOSURE"*); it was
+§0 of the document that disagreed with it. The per-column demonstration is
+`code/species_repair_6f61/r2_columns.py`.
+
 ## What each file does
 
 | file | what it decides |
@@ -20,7 +36,7 @@ Every `t*` script ends with a `TOTAL BAD` line. All six are `0`.
 | `hopf7d75.py` | the Hopf-monoid layer: Aguiar–Mahajan's poset / set-composition / set-partition (co)products on an arbitrary finite ground set, and the two candidate subspecies |
 | `t1_grading.py` | **the grading falsifier, run first.** `|Π[n]| = Bell(n)`; `Π[n]/S_n` = integer partitions, `p(n)` of them; `p(n)` = #conjugacy classes of `S_n`; `AC(antichain) = Π[n]` **as sets** |
 | `t2_operation.py` | `Φ : kF(P) → k^{AC(P)}` is a surjective algebra map with nilpotent kernel, so `kF(P)/rad = k^{AC(P)}` — a fresh re-anchor of mg-af28 B5 / mg-6ad0 A4a, with no trace form and no citation |
-| `t3_bidigare.py` | **Bidigare's theorem built from both definitions and compared structure constant by structure constant.** Four candidate identifications are run; two hold, two fail |
+| `t3_bidigare.py` | **Bidigare's theorem built from both definitions and compared structure constant by structure constant.** Four candidate identifications are run; two hold, two fail — **and the four are two statements each computed twice, so this is ONE control run twice** (mg-a61f X4; see the repair document) |
 | `t4_one_operation.py` | `(kF(P))^{Aut(P)}/rad = k^{AC(P)/Aut(P)}` on every poset class to `n ≤ 5`, and both of Daniel's instances read off that one table |
 | `t5_hopf_monoid.py` | the bimonoid axioms of Aguiar–Mahajan, checked exhaustively on the ground set `[4]` for both candidate subspecies, with four controls |
 | `t6_fock_and_record.py` | the two Fock functors; the Bell(n)/p(n) resolution; the correction to mg-af28's Bergeron–Li negative; the failed candidate map to `Sym` |
