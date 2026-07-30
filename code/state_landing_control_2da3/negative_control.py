@@ -5,7 +5,23 @@ A reproduction is only evidence if the instrument could have failed.  b68db5d's 
 sentence cited a battery that could not, so this file does for the new instrument what
 mg-bd41 did to the old one: mutilate the working tree, re-run, and read the exit code.
 
-THREE MUTATIONS, weakest last:
+    WHAT THIS FILE IS AND IS NOT (mg-7870).  mg-2216 showed that this file was the reason
+    the instrument's blindness went unseen: NC3 cuts the certified README block INCLUDING
+    its header, and the header was the only thing the check tested, so the one mutation the
+    author chose was precisely the mutation the check was shaped around.  Eight of mg-2216's
+    fourteen independent mutations exited 0.
+
+    So the standing rule for this file is now explicit: IT DEMONSTRATES, IT DOES NOT
+    ESTABLISH.  An author's own negative control cannot establish that an instrument is
+    sensitive, because the author picks the mutations.  The establishing evidence for the
+    digest repair is mg-2216's battery — written before the repair, by someone else, with
+    its own table parser — RE-RUN against the repaired instrument and captured verbatim at
+    code/state_landing_control_2da3/out_battery_2216_rerun.txt: 14 mutations, 10 caught,
+    0 MISSED, 4 tolerated by design, 0 noisy.  Read that file, not this one, for whether
+    the control works.  NC5 and NC6 below exist to show the MECHANISM firing in-place; they
+    are deliberately not chosen from mg-2216's list.
+
+SIX MUTATIONS, weakest last:
 
   NC1  THE SAME GUTTING mg-bd41 USED — STATE.md's lines 101-300 deleted outright and line
        1 replaced with "TOTALLY DESTROYED", 175,552 -> ~38,000 bytes.  Under this exact
@@ -18,7 +34,23 @@ THREE MUTATIONS, weakest last:
        accident (any large mutation breaks any parser) still has to fail this one.
 
   NC3  THE F1 CORRECTION BLOCK CUT OUT OF docs/state-history/README.md — the other half of
-       the delta.  STATE.md is untouched, so this isolates the README half.
+       the delta.  STATE.md is untouched, so this isolates the README half.  NOTE, because
+       it is the whole of mg-2216's B1: this cut takes the block's HEADER with it, and the
+       pre-repair instrument tested only headers.  It is kept here unchanged as the record
+       of how a negative control can be satisfied by the mutation it was shaped around.
+
+  NC5  ONE CHARACTER INSIDE A CERTIFIED README REGION, length-preserving: the index note's
+       moved-cell figure **7,878** -> **7,879**.  No header touched, no block deleted, no
+       length changed — the class of mutation the header-substring check could not see and
+       the digest cannot miss.  Expected MOVED (2): the F1 repair's sentences are all
+       intact, and only the region's bytes have changed.
+
+  NC6  500 CHARACTERS INSIDE THE CERTIFIED LEDGER CELL, length-preserving: the LETTERS of
+       the cell's last 500 characters sorted among the positions letters already occupied.
+       Character count, byte count, character multiset and the '**' parity invariant are
+       all preserved exactly; the prose is destroyed.  Everything else in the instrument is
+       satisfied, so the region digest is the only thing that can fire.  Expected MOVED (2),
+       for the same reason as NC5.
 
 SAFETY.  Both files are snapshotted as bytes before anything is written, restored in a
 `finally`, and re-checked by sha256 afterwards.  The script REFUSES TO RUN if either file
@@ -39,6 +71,10 @@ BATTERY = "code/state_audit_6a2f/run_all.sh"
 BATTERY_OUT = os.path.join(REPO, "code/state_audit_6a2f/out_audit.txt")
 
 F1_BLOCK_MARKER = "**`no 4d tally` is a correction, and `133` / `220` are its cost"
+
+# NC5's target: a certified README region, mutated by exactly one character.
+INDEX_FIGURE = "took row `:135`'s to **7,878**"
+INDEX_FIGURE_FALSE = "took row `:135`'s to **7,879**"
 
 
 def sha(b):
@@ -83,6 +119,37 @@ def row_index(text, key):
             hits.append(i)
     assert len(hits) == 1, f"key {key!r} matched {len(hits)} rows"
     return hits[0]
+
+
+def scramble_cell_tail(text, key, n):
+    """Sort the LETTERS of the last `n` characters of row `key`'s content cell, in place.
+
+    Only alphabetic characters move, and they move only among the positions alphabetic
+    characters already occupied: every '*', every backtick, every space and every digit
+    stays exactly where it was.  So length, byte count, character multiset AND the '**'
+    parity invariant of section 6 are all preserved, which is the point — the only thing
+    left that can fire is the region digest.  Returns (new text, stripped length before,
+    stripped length after); the two lengths are printed so the reader can see the mutation
+    is length-preserving rather than being told so.
+    """
+    lines = text.split("\n")
+    i = row_index(text, key)
+    bars = [k for k, ch in enumerate(lines[i])
+            if ch == "|" and (k == 0 or lines[i][k - 1] != "\\")]
+    cells = [lines[i][bars[k] + 1:bars[k + 1]] for k in range(len(bars) - 1)]
+    k = max(range(len(cells)), key=lambda x: len(cells[x]))
+    raw = cells[k]
+    stripped = raw.strip(" \t\r\n")
+    lead = raw[:len(raw) - len(raw.lstrip(" \t\r\n"))]
+    trail = raw[len(raw.rstrip(" \t\r\n")):]
+    tail = stripped[-n:]
+    letters = iter(sorted(c for c in tail if c.isalpha()))
+    new = stripped[:-n] + "".join(next(letters) if c.isalpha() else c for c in tail)
+    assert len(new) == len(stripped), "NC6 is not length-preserving"
+    assert sorted(new) == sorted(stripped), "NC6 does not preserve the character multiset"
+    assert new.count("**") == stripped.count("**"), "NC6 disturbs the ** parity invariant"
+    lines[i] = lines[i][:bars[k] + 1] + lead + new + trail + lines[i][bars[k + 1]:]
+    return "\n".join(lines), len(stripped), len(new)
 
 
 CODES = {}
@@ -215,6 +282,36 @@ def main():
         print("=" * 78)
         report("delta_control.py    ", *run_control(), tag="NC4")
         print()
+
+        # ---- NC5 -------------------------------------------------------------------
+        with open(STATE, "wb") as fh:
+            fh.write(state0)
+        assert rtext.count(INDEX_FIGURE) == 1, "index figure is not unique"
+        with open(README, "w", encoding="utf-8") as fh:
+            fh.write(rtext.replace(INDEX_FIGURE, INDEX_FIGURE_FALSE, 1))
+        print("=" * 78)
+        print("NC5 — ONE CHARACTER FALSIFIED INSIDE A CERTIFIED README REGION")
+        print(f"      {INDEX_FIGURE!r} -> {INDEX_FIGURE_FALSE!r}: length-preserving, no")
+        print("      header touched, no block deleted.  This is the class the pre-repair")
+        print("      header-substring check could not see.")
+        print("=" * 78)
+        report("delta_control.py    ", *run_control(), tag="NC5")
+        print()
+
+        # ---- NC6 -------------------------------------------------------------------
+        with open(README, "wb") as fh:
+            fh.write(readme0)
+        scrambled, before, after = scramble_cell_tail(text, "mg-276d", 500)
+        with open(STATE, "w", encoding="utf-8") as fh:
+            fh.write(scrambled)
+        print("=" * 78)
+        print("NC6 — 500 CHARACTERS OF THE CERTIFIED CELL SORTED IN PLACE")
+        print(f"      cell {before} -> {after} characters (stripped): identical count,")
+        print("      identical character multiset, prose destroyed.  Length-and-substring")
+        print("      checking is transparent to this; a digest is not.")
+        print("=" * 78)
+        report("delta_control.py    ", *run_control(), tag="NC6")
+        print()
     finally:
         with open(STATE, "wb") as fh:
             fh.write(state0)
@@ -231,7 +328,8 @@ def main():
     print(f"RESTORED — STATE.md sha {sha(s1)} == {sha(state0)}, "
           f"README sha {sha(r1)} == {sha(readme0)}")
     print("=" * 78)
-    want_by_tag = {"clean": (0,), "NC1": (1,), "NC2": (1,), "NC3": (1,), "NC4": (2,)}
+    want_by_tag = {"clean": (0,), "NC1": (1,), "NC2": (1,), "NC3": (1,), "NC4": (2,),
+                   "NC5": (2,), "NC6": (2,)}
     for tag, want in want_by_tag.items():
         got = CODES.get(tag)
         label = {0: "must be 0", 1: "must be 1 (FAIL)",
@@ -243,8 +341,15 @@ def main():
         print(f"\nVERDICT: THE NEGATIVE CONTROL DID NOT ESTABLISH WHAT IT CLAIMS — {bad}")
         return 1
     print("\nVERDICT: delta_control.py exits 0 on the clean tree and NON-ZERO under all")
-    print("         four mutations.  It is a control that can fail, and it fails on the")
+    print("         six mutations.  It is a control that can fail, and it fails on the")
     print("         very change b68db5d's cited battery is blind to.")
+    print()
+    print("         THIS IS A DEMONSTRATION, NOT THE EVIDENCE.  The author of an instrument")
+    print("         picks the mutations his own negative control runs, so this file cannot")
+    print("         establish sensitivity — that is exactly how the pre-repair version")
+    print("         passed while missing 8 of mg-2216's 14.  The establishing evidence is")
+    print("         out_battery_2216_rerun.txt: mg-2216's independent battery, written")
+    print("         before this repair and re-run against it unmodified.")
     return 0
 
 

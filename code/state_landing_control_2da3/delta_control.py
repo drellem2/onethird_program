@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """mg-2da3 — a WORKING-TREE control for b68db5d's delta (mg-7735's landing).
 
+    mg-7870: THE CERTIFYING MECHANISM IS NOW A CONTENT DIGEST, NOT A LIST OF SUBSTRINGS.
+    See "WHY THE MECHANISM CHANGED" and "COVERAGE" below.  The substring checks are still
+    here; they no longer carry the certification.
+
 WHY THIS EXISTS.  b68db5d's headline evidence sentence is
 
     "I re-ran both: `sh code/state_audit_6a2f/run_all.sh` reproduces out_audit.txt
@@ -22,25 +26,115 @@ measured delta, which is what a baseline is for.  Run negative_control.py to see
 WHAT IT CERTIFIES — the two files b68db5d changed:
 
     STATE.md                       row :135, the F1 repair (one line, +173 characters)
-    docs/state-history/README.md   the F1 / F2 / B1 correction blocks
+    docs/state-history/README.md   the F1 / F2 / B1 correction blocks, and the A1 / A3
+                                   blocks this repair's own record rests on
+
+WHY THE MECHANISM CHANGED (mg-7870, repairing mg-2216's B1 and B2).
+------------------------------------------------------------------
+The first version of this file certified those regions by asserting that five chosen
+SUBSTRINGS were present.  mg-2216 built fourteen independent mutations and EIGHT of them
+exited 0:
+
+    the certified cell's "every ridge in 1 or 2 facets" -> "1 or 3"    (one character)
+    the certified cell's "the proof is sound" -> "bogus"              (five characters)
+    the certified cell's ASCII spaces -> U+00A0                       (no visible change)
+    two adjacent sentences of the cell swapped                        (length AND tokens kept)
+    the last 3,000 of the cell's 7,876 characters replaced by 'x'     (38% of the cell)
+    the README F1 block hollowed, its header kept                     (1,556-character body)
+    the README F2 block's "13,188 -> 7,703 characters" falsified
+    the README A1 block's "175,552 to 37,958 bytes" falsified         (this repair's own figure)
+
+The README half was blind because it tested BLOCK HEADERS, and the negative control this
+file ships cuts each block INCLUDING its header — the one mutation the check is shaped
+around.  The STATE.md half was blind because presence-of-substring plus total-length is
+transparent to every length-preserving edit.
+
+Extending the list a third time would fail the same way, because "does it catch mutation
+X?" is open-ended and every list is a list somebody chose.  So the list was not extended.
+Each certified region now carries a SHA-256 OF ITS NORMALISED BYTES, compared against a
+constant recorded here.  That converts an unbounded question into a closed one: a digest
+cannot be fooled by a length-preserving edit, a whitespace substitution, a reordering or a
+bulk overwrite, and it is equally unfooled by mutations nobody has thought of.
+
+THE NORMALISATION IS THE ONLY PLACE A MUTATION CAN STILL HIDE, so it is one rule and it is
+stated in full:
+
+    N(region) = the region's characters with ASCII SPACE, TAB, CR and LF removed from the
+                TWO ENDS of the whole region — nothing else — encoded UTF-8.
+
+Nothing interior is touched: no case folding, no Unicode normalisation, no whitespace
+collapsing, no line-ending rewriting, no markdown parsing.  U+00A0 is NOT whitespace to
+this rule (Python's str.strip() would eat it; `.strip(" \\t\\r\\n")` does not), so the
+whitespace-substitution mutation dies on the digest like any other.  The rule tolerates
+exactly one class of edit — padding at a region's outer edge, e.g. trailing spaces before
+a cell's closing pipe — and that tolerance is deliberate and is on the record below.
+
+The digested cell is 7,876 characters, the same figure b68db5d's message reports under its
+own "stripped" convention: on this material `.strip()` and `.strip(" \\t\\r\\n")` agree, so
+the normalisation change moves no published number.
+
+WHAT THE SUBSTRING CHECKS ARE FOR NOW.  They no longer certify; they CLASSIFY.  A digest
+says only "these are not the bytes that were certified".  The substring checks say whether
+the load-bearing sentences of the repair are still there, which is what separates FAIL
+("the repair is damaged") from MOVED ("the region changed; go look at the diff").  Both
+are non-zero.  The block markers additionally LOCATE each README region; a block that
+cannot be located is a FAIL, so the header line is covered by the locator and by the
+digest, which spans the whole block including it.
+
+COVERAGE — what is digested, and what is deliberately not.
+----------------------------------------------------------
+DIGESTED (9 regions, listed in CERTIFIED below):
+    STATE.md      row mg-276d's content cell, in the working tree      7,876 chars
+    STATE.md      the same cell at b68db5d^, the BEFORE of the delta   7,703 chars
+    README        the F2 correction block                              2,306 chars
+    README        the F1 correction block                              1,643 chars
+    README        the B1 attribution-correction paragraph                565 chars
+    README        the B1 bullet's A3 correction block                    719 chars
+    README        the index note carrying the moved cell figure           310 chars
+    README        the A1 correction block (b68db5d's headline sentence) 3,060 chars
+    README        the mg-2216 / mg-7870 correction to that A1 block       2,736 chars
+
+NOT COVERED, on purpose — this instrument certifies b68db5d's DELTA, not the two files:
+    * Every other row of STATE.md's ledger, and every other line of it.  Only the whole-file
+      ** parity and largest-cell checks in section 6 look outside the certified row, and
+      those are invariants, not digests.  Deleting an unrelated ledger row exits 0 here.
+    * Every other paragraph, table and block of the state-history README, including the
+      per-row index table's own numeric columns and all ten attempt-*.md files.
+    * Padding at the outer edge of a digested region (see the normalisation rule).
+    * WHETHER A CHANGE IS LEGITIMATE.  A digest mismatch is reported as MOVED and exits
+      non-zero; this instrument does not and cannot decide whether the new bytes are damage
+      or a correct later edit.  Re-baseline with `--emit-baseline` and say which commit
+      moved it.  The point is that it cannot go quietly green either way.
+    * Anything in the two files at any revision other than the working tree and b68db5d^.
+
+The goal is not a control that catches everything.  It is a control whose coverage is
+stated and bounded, so the next auditor can test the boundary instead of guessing at it.
 
 HOW IT LOCATES THINGS, and this is deliberate.  Every check keys on CONTENT — the ledger
-row is found by its attempt id, the cell by being the row's widest — never by line number
-and never by a frozen blob comparison.  The scope mismatch this arc keeps hitting (mg-6a2f
-F1: "a claim about a cell, checked against a clause") is what line-anchored checking buys
-you.  A key-based check also survives legitimate later commits that insert lines above the
-row, so this instrument does not age out the way a line-pinned one would.
+row is found by its attempt id, the cell by being the row's widest, each README region by a
+marker inside it — never by line number and never by a whole-file frozen blob comparison.
+The scope mismatch this arc keeps hitting (mg-6a2f F1: "a claim about a cell, checked
+against a clause") is what line-anchored checking buys you.  A key-based check also
+survives legitimate later commits that insert lines above the row, so this instrument does
+not age out the way a line-pinned one would.  The digests are per-REGION for the same
+reason: a digest of the whole file would fire on every unrelated edit and would have to be
+re-baselined into meaninglessness.
 
 EXIT CODES, both non-zero on failure and distinguishable on purpose:
 
     0   every check passed
-    1   FAIL   — a certification check failed.  b68db5d's repair is damaged in the tree.
-    2   MOVED  — the repair is intact but a measured constant of the landing has changed,
-                 i.e. row :135 or the README index was legitimately edited after b68db5d.
-                 That is not a defect; it means this instrument must be re-baselined and
-                 the new figure recorded.  It exits non-zero so it CANNOT go on quietly
+    1   FAIL   — a certification check failed.  b68db5d's repair is damaged in the tree,
+                 or a certified region can no longer be located at all.
+    2   MOVED  — the repair's load-bearing sentences are intact, but a certified region's
+                 content digest no longer matches, or a measured constant of the landing
+                 has changed.  Re-baseline this instrument, record the new figure, and say
+                 which commit moved it.  It exits non-zero so it CANNOT go on quietly
                  reporting green about a delta that is no longer the delta it was written
                  for — which is the whole failure this file was filed against.
+
+Exit 3 is deliberately NOT used for digest mismatches: mg-2216's independent battery reads
+1 and 2, and an instrument that invents a code its own auditor's harness scores as a miss
+would be repairing the defect by hiding it.
 
 INSTRUMENT DISCIPLINE (this arc has been bitten by all three):
   * `wc -m` counts BYTES on this box (LC_CTYPE=C) and agrees with `wc -c`, so cross-checking
@@ -53,10 +147,12 @@ INSTRUMENT DISCIPLINE (this arc has been bitten by all three):
     MINOR finding outside this ticket's brief, and it stays open.
   * Every tally is over UNBOUNDED input.  No head/tail/sed -n/--limit anywhere; each count
     prints the population it was taken over.
+  * The digests are printed in full, not truncated, so a reader can recompute one by hand.
 
-Imports nothing from code/state_restructure_34bf/, code/state_audit_6a2f/ or
-code/state_landing_audit_bd41/.
+Imports nothing from code/state_restructure_34bf/, code/state_audit_6a2f/,
+code/state_landing_audit_bd41/ or code/state_control_audit_2216/.
 """
+import hashlib
 import os
 import subprocess
 import sys
@@ -79,6 +175,8 @@ GAP_CHARS = 399                # counterexample -> F1 sentence, inside row :135'
 GAP_WORDS = 72
 
 # --- the text the F1 repair put in the tree ----------------------------------------------
+# These CLASSIFY (damaged vs merely changed) and LOCATE.  They do not certify; the digests
+# below do.  Adding to this list does not widen coverage — see "WHY THE MECHANISM CHANGED".
 F1_NARROW = "This row states no 4d *tally* of its own"
 F1_ABSOLUTE_QUOTED = 'mg-34bf wrote that as an absolute *"states no count of its own"*'
 F1_ATTRIBUTION = "mg-6a2f F1, narrowed to the true claim by mg-7735"
@@ -86,21 +184,30 @@ F1_COUNTEREXAMPLE = "five previous rows"
 F1_OLD_ABSOLUTE = "This row states no count of its own"
 
 README = "docs/state-history/README.md"
-README_MARKERS = [
-    ("F2 correction block",
-     "**THOSE FIVE FIGURES WERE WRONG, here and in `57f962f`'s commit message"),
-    ("F2 names the frozen message as still carrying it",
-     "`57f962f`'s commit message is frozen and still carries its list"),
-    ("F1 correction block",
-     "**`no 4d tally` is a correction, and `133` / `220` are its cost"),
-    ("B1 attribution correction",
-     "**Two corrections to this bullet, from mg-6a2f §B1, made by mg-7735.**"),
-    ("index note carries the moved cell figure",
-     "mg-7735's F1 correction took row `:135`'s to **7,878**"),
-]
 
 FAIL, MOVED = 1, 2
 _seen = {FAIL: 0, MOVED: 0}
+_digest_misses = []
+
+
+# =========================================================================================
+# THE NORMALISATION — the whole of it.  See the module docstring.
+# =========================================================================================
+EDGE = " \t\r\n"
+
+
+def norm(text):
+    """N(region): strip ASCII space/tab/CR/LF from the two ends, encode UTF-8.
+
+    Deliberately NOT str.strip(), which also strips U+00A0, U+2028 and friends — the
+    whitespace-substitution mutation must die on the digest, not be normalised away.
+    Nothing interior is touched.
+    """
+    return text.strip(EDGE).encode("utf-8")
+
+
+def digest(text):
+    return hashlib.sha256(norm(text)).hexdigest()
 
 
 def exit_code():
@@ -171,6 +278,129 @@ def widest(cells):
     return max(cells, key=len)
 
 
+# =========================================================================================
+# REGION EXTRACTORS.  Each returns (first line number, last line number, region text) or
+# raises LookupError, which the caller turns into a FAIL.  Every one locates by a marker
+# inside the region — never by line number.
+# =========================================================================================
+
+
+def _unique_marker_line(lines, marker):
+    hits = [i for i, l in enumerate(lines) if marker in l]
+    if len(hits) != 1:
+        raise LookupError(f"marker matched {len(hits)} lines, need exactly 1")
+    return hits[0]
+
+
+def quote_block(text, marker):
+    """The maximal run of consecutive blockquote lines containing `marker`.
+
+    A blockquote line is one whose first non-space character is '>', so the bullet-indented
+    correction blocks are found on the same rule as the top-level ones.  The run INCLUDES
+    the header line: hollowing a block while keeping its header changes the digest, which
+    is mg-2216's B1.
+    """
+    lines = text.split("\n")
+    i = _unique_marker_line(lines, marker)
+
+    def is_quote(k):
+        return 0 <= k < len(lines) and lines[k].lstrip().startswith(">")
+
+    if not is_quote(i):
+        raise LookupError("marker line is not a blockquote line")
+    s = i
+    while is_quote(s - 1):
+        s -= 1
+    e = i + 1
+    while is_quote(e):
+        e += 1
+    return s + 1, e, "\n".join(lines[s:e])
+
+
+def paragraph(text, marker):
+    """The maximal run of consecutive non-blank, non-blockquote lines containing `marker`.
+
+    Used for the two certified regions that are prose rather than blockquotes: the B1
+    attribution correction (inside a bullet) and the index note that carries the moved
+    cell figure.
+    """
+    lines = text.split("\n")
+    i = _unique_marker_line(lines, marker)
+
+    def is_body(k):
+        return (0 <= k < len(lines) and lines[k].strip()
+                and not lines[k].lstrip().startswith(">"))
+
+    if not is_body(i):
+        raise LookupError("marker line is blank or a blockquote line")
+    s = i
+    while is_body(s - 1):
+        s -= 1
+    e = i + 1
+    while is_body(e):
+        e += 1
+    return s + 1, e, "\n".join(lines[s:e])
+
+
+# =========================================================================================
+# THE CERTIFIED REGIONS.  (id, label, kind, marker, characters after N, sha256 of N)
+#
+# Baselined at mg-7870 against the working tree at 6b1eacf.  Regenerate with:
+#     python3 code/state_landing_control_2da3/delta_control.py --emit-baseline
+# and, when you paste the result in, say in the commit message WHICH COMMIT MOVED IT.
+#
+# RULE FOR CHOOSING A MARKER, learned from this repair's own NC5: a marker must sit
+# OUTSIDE the figures and claims its region certifies.  A marker that contains them is
+# self-defeating — falsify the figure and the region stops being locatable, so the
+# instrument reports FAIL "not locatable" instead of MOVED "these are not the certified
+# bytes".  Both are non-zero, so nothing goes green either way, but the classification is
+# wrong and a reader chasing a FAIL looks for a deletion that is not there.  readme.index
+# keys on the sentence that introduces the figures, not on "**7,878**"; readme.F1 keys on
+# "no 4d tally is a correction" and deliberately not on the "133 / 220" that follow it.
+# =========================================================================================
+CERTIFIED = [
+    ("cell.tree", "row :135's content cell, WORKING TREE", "cell", None, 7876,
+     "b53ad402349d531fb8d18893ca55c380517ed3b809bfc0d4aeb0c41b795ccf87"),
+    ("cell.base", f"row :135's content cell at {BASELINE}", "cell-base", None, 7703,
+     "8316d1b578e497c80c34820e9ae25057edb75faf2ec1bcf8fe67dd667f341fcc"),
+    ("readme.F2", "the F2 correction block", "quote",
+     "**THOSE FIVE FIGURES WERE WRONG, here and in `57f962f`'s commit message", 2306,
+     "ad9143cc402c797a600166968d7fbc4d1dc9423f03f00d373dfc026004020b06"),
+    ("readme.F1", "the F1 correction block", "quote",
+     "**`no 4d tally` is a correction", 1643,
+     "f81e2cdc63bd0fbcc2790f2878959ac4aab35c54ce9690fdec84ab7e0dc51908"),
+    ("readme.B1", "the B1 attribution correction", "para",
+     "**Two corrections to this bullet, from mg-6a2f §B1, made by mg-7735.**", 565,
+     "0a82cf6e268e3c14feed39dd9b0526f30a48bec0dec092c2ed25a1eb62564991"),
+    ("readme.B1.A3", "the B1 bullet's A3 ancestry correction", "quote",
+     "**`two commits before mg-34bf's parent` was off by one", 719,
+     "3105129a342e1b68b6d229e6adb223f2a33044dd612d18b72490dfb19dcedb51"),
+    ("readme.index", "the index note carrying the moved cell figure", "para",
+     "**`cell before` and `cell after` are measured at", 310,
+     "a1e051c6f2bfa83f3be63870b5a6b80c41bce10e96069695a2999b3681570acc"),
+    ("readme.A1", "the A1 correction block (b68db5d's headline sentence)", "quote",
+     "**`b68db5d`'s HEADLINE VERIFICATION SENTENCE IS BLIND TO THE CHANGE IT CERTIFIES",
+     3060, "edd94cc24bf1b6f0a78b1c311a974e986f84875c54a102b8c9cae9452f9b8468"),
+    ("readme.A1.7870", "the mg-2216 / mg-7870 correction to the A1 block", "quote",
+     "DID NOT ESTABLISH WHAT THE BLOCK ABOVE CLAIMS", 2736,
+     "59ab8f5068742edb7e67ae0efd060d0eeb09f3174d8789df29ac529304620bd2"),
+]
+
+
+def extract(rid, kind, marker, state_tree, state_base, readme_tree):
+    """(where, region text) for a certified region.  Raises LookupError if unlocatable."""
+    if kind in ("cell", "cell-base"):
+        text = state_tree if kind == "cell" else state_base
+        hits = find_row(text, ROW_KEY)
+        if len(hits) != 1:
+            raise LookupError(f"key {ROW_KEY} matched {len(hits)} rows")
+        n, cells = hits[0]
+        return (f"STATE.md:{n}" if kind == "cell"
+                else f"{BASELINE}:STATE.md:{n}"), widest(cells)
+    s, e, text = (quote_block if kind == "quote" else paragraph)(readme_tree, marker)
+    return f"{README}:{s}-{e}", text
+
+
 def check(label, ok, detail="", kind=FAIL):
     verdict = "pass" if ok else ("FAIL" if kind == FAIL else "MOVED")
     print(f"  [{verdict}] {label}")
@@ -181,8 +411,19 @@ def check(label, ok, detail="", kind=FAIL):
     return ok
 
 
+def emit_baseline(state_tree, state_base, readme_tree):
+    """Print a pasteable CERTIFIED table for the tree as it stands."""
+    print("# regenerated by --emit-baseline; say which commit moved each figure")
+    for rid, label, kind, marker, _chars, _sha in CERTIFIED:
+        where, text = extract(rid, kind, marker, state_tree, state_base, readme_tree)
+        print(f'    ("{rid}", ...)  # {where}\n'
+              f'     {len(norm(text).decode())}, "{digest(text)}"')
+    return 0
+
+
 def main():
     print("mg-2da3 — working-tree control for b68db5d's delta")
+    print("           (mg-7870: certified by CONTENT DIGEST; coverage stated in the header)")
     print(f"certified side  : the WORKING TREE (STATE.md, {README})")
     print(f"baseline side   : {BASELINE}  — used ONLY as the BEFORE of a measured delta")
     print()
@@ -191,6 +432,9 @@ def main():
     state_tree = state_tree_b.decode("utf-8")
     state_base = blob(BASELINE, "STATE.md").decode("utf-8")
     readme_tree = tree(README).decode("utf-8")
+
+    if "--emit-baseline" in sys.argv:
+        return emit_baseline(state_tree, state_base, readme_tree)
 
     lines_tree = state_tree.split("\n")
     print(f"STATE.md in the working tree: {len(state_tree_b)} bytes, "
@@ -215,7 +459,7 @@ def main():
         return FAIL
     row_line, row_cells = hits[0]
     cell_raw = widest(row_cells)
-    cell = cell_raw.strip()
+    cell = cell_raw.strip(EDGE)
     check("it is a three-column row", len(row_cells) == 3, f"columns: {len(row_cells)}")
     print(f"         at line :{row_line} in this tree "
           f"(observed, not asserted — the check above is key-based)")
@@ -230,10 +474,37 @@ def main():
         print("=" * 78)
         return FAIL
     base_cell_raw = widest(base_hits[0][1])
-    base_cell = base_cell_raw.strip()
+    base_cell = base_cell_raw.strip(EDGE)
 
-    # ---- 2. the F1 repair itself --------------------------------------------------------
-    print("2. THE F1 REPAIR — present in the tree, absent at the baseline")
+    # ---- 2. THE CERTIFICATION ITSELF: a content digest per certified region --------------
+    print("2. CERTIFIED REGION DIGESTS — sha256 of N(region), N = strip ASCII space/tab/")
+    print("   CR/LF from the two ends and nothing else.  This is what certifies the delta;")
+    print(f"   {len(CERTIFIED)} regions, all located by content, all printed in full.")
+    for rid, label, kind, marker, want_chars, want_sha in CERTIFIED:
+        try:
+            where, text = extract(rid, kind, marker, state_tree, state_base, readme_tree)
+        except LookupError as exc:
+            check(f"{rid} — {label}: LOCATABLE", False, f"{exc}")
+            _digest_misses.append((rid, label, "not locatable"))
+            continue
+        got_norm = norm(text)
+        got_chars, got_sha = len(got_norm.decode("utf-8")), digest(text)
+        ok = got_sha == want_sha
+        check(f"{rid} — {label}", ok,
+              f"{where}; {got_chars} characters, {len(got_norm)} bytes after N\n"
+              f"         certified sha256 {want_sha}\n"
+              f"         measured  sha256 {got_sha}"
+              + ("" if ok else
+                 f"\n         >>> the bytes of this region are NOT the bytes that were "
+                 f"certified ({got_chars - want_chars:+d} characters)"),
+              kind=MOVED)
+        if not ok:
+            _digest_misses.append((rid, label, f"{got_chars - want_chars:+d} characters"))
+    print()
+
+    # ---- 3. the F1 repair itself — CLASSIFIERS, not the certification --------------------
+    print("3. THE F1 REPAIR — present in the tree, absent at the baseline")
+    print("   (these separate 'damaged' from 'changed'; section 2 is what certifies)")
     check("tree row states the NARROW claim", F1_NARROW in cell,
           f'"{F1_NARROW}"')
     check("tree row QUOTES the false absolute it replaced", F1_ABSOLUTE_QUOTED in cell)
@@ -242,8 +513,8 @@ def main():
     check("baseline row did NOT carry the narrow claim", F1_NARROW not in base_cell)
     print()
 
-    # ---- 3. the counterexample the repair exists because of ------------------------------
-    print("3. THE COUNTEREXAMPLE THAT MADE THE ABSOLUTE FALSE — still in the cell,")
+    # ---- 4. the counterexample the repair exists because of ------------------------------
+    print("4. THE COUNTEREXAMPLE THAT MADE THE ABSOLUTE FALSE — still in the cell,")
     print("   and still EARLIER in it than the sentence that used to deny it")
     i = cell.find(F1_COUNTEREXAMPLE)
     j = cell.find(F1_NARROW)
@@ -259,8 +530,8 @@ def main():
               f"measured {len(gap.split())} whitespace-separated words", kind=MOVED)
     print()
 
-    # ---- 4. the measured delta ----------------------------------------------------------
-    print("4. THE MEASURED DELTA — tree against baseline, both conventions printed")
+    # ---- 5. the measured delta ----------------------------------------------------------
+    print("5. THE MEASURED DELTA — tree against baseline, both conventions printed")
     print(f"         stripped: {len(base_cell)} -> {len(cell)} characters")
     print(f"         raw     : {len(base_cell_raw)} -> {len(cell_raw)} characters "
           f"(raw = including the space either side of the boundary pipe)")
@@ -275,8 +546,9 @@ def main():
           f"measured {len(cell) - len(base_cell):+d}", kind=MOVED)
     print()
 
-    # ---- 5. whole-file invariants b68db5d claims, measured on the TREE -------------------
-    print("5. WHOLE-FILE INVARIANTS, measured on the working tree")
+    # ---- 6. whole-file invariants b68db5d claims, measured on the TREE -------------------
+    print("6. WHOLE-FILE INVARIANTS, measured on the working tree")
+    print("   (invariants, NOT digests — the rest of the ledger is outside coverage)")
     odd = [(n, k) for n, cells in rows_tree for k, c in enumerate(cells)
            if c.count("**") % 2]
     check("** parity is even in every cell",
@@ -287,11 +559,11 @@ def main():
     big_hits = find_row(state_tree, BIGGEST_KEY)
     if check(f"exactly one ledger row keys to {BIGGEST_KEY}", len(big_hits) == 1,
              f"found {len(big_hits)}"):
-        big_cell = widest(big_hits[0][1]).strip()
-        largest = max(cells_tree, key=lambda c: len(c.strip()))
+        big_cell = widest(big_hits[0][1]).strip(EDGE)
+        largest = max(cells_tree, key=lambda c: len(c.strip(EDGE)))
         check(f"the {BIGGEST_KEY} row still holds the largest cell in the file",
-              largest.strip() == big_cell,
-              f"largest cell is {len(largest.strip())} characters (stripped), "
+              largest.strip(EDGE) == big_cell,
+              f"largest cell is {len(largest.strip(EDGE))} characters (stripped), "
               f"over all {len(cells_tree)} cells")
         check(f"and it is still {BIGGEST_STRIPPED} characters (stripped)",
               len(big_cell) == BIGGEST_STRIPPED, f"measured {len(big_cell)}", kind=MOVED)
@@ -299,27 +571,48 @@ def main():
               len(cell) < len(big_cell), f"{len(cell)} < {len(big_cell)}")
     print()
 
-    # ---- 6. the README half of the delta -------------------------------------------------
-    print(f"6. {README} — the correction blocks b68db5d added, in the tree")
+    # ---- 7. the README half of the delta -------------------------------------------------
+    print(f"7. {README} — the correction blocks b68db5d and this repair added")
     print(f"         {len(readme_tree.encode())} bytes, {len(readme_tree)} characters, "
           f"{len(readme_tree.split(chr(10)))} lines")
-    for label, marker in README_MARKERS:
-        check(label, marker in readme_tree,
-              "" if marker in readme_tree else f"missing: {marker!r}")
+    print("         (their CONTENT is certified in section 2; these lines report where")
+    print("          each one was found and how much of it the digest spans)")
+    for rid, label, kind, marker, want_chars, _sha in CERTIFIED:
+        if kind in ("cell", "cell-base"):
+            continue
+        try:
+            where, text = extract(rid, kind, marker, state_tree, state_base, readme_tree)
+        except LookupError as exc:
+            print(f"  [FAIL] {rid} — {label}: {exc}")
+            continue
+        head, _, body = text.partition("\n")
+        print(f"  {rid:<14} {where:<38} header {len(head.strip(EDGE))} chars, "
+              f"body {len(body.strip(EDGE))} chars")
     print()
 
     worst = exit_code()
     print("=" * 78)
     if worst == 0:
-        print("RESULT: PASS — every check above read the working tree and every one held.")
+        print("RESULT: PASS — every check above read the working tree and every one held,")
+        print(f"        including {len(CERTIFIED)} region digests.  Coverage is stated in")
+        print("        this file's header: what is digested, and what is not.")
         print("        This instrument CAN fail; negative_control.py makes it fail.")
     elif worst == MOVED:
-        print("RESULT: MOVED (exit 2) — the F1 repair is intact, but a measured constant")
-        print("        of the landing has changed.  Row :135 or the README index was")
-        print("        edited after b68db5d.  That is not necessarily a defect: RE-BASELINE")
-        print("        this instrument, record the new figure, and say which commit moved")
-        print("        it.  It exits non-zero rather than quietly reporting green about a")
-        print("        delta that is no longer the delta it was written for.")
+        print("RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,")
+        if _digest_misses:
+            print("        but a CERTIFIED REGION'S CONTENT IS NOT THE CONTENT THAT WAS")
+            print("        CERTIFIED:")
+            for rid, label, why in _digest_misses:
+                print(f"          {rid} — {label} ({why})")
+            print("        A digest says only that the bytes changed.  It does NOT say")
+            print("        whether that is damage or a legitimate later edit, and this")
+            print("        instrument does not guess: go read the diff.")
+        else:
+            print("        but a measured constant of the landing has changed.")
+        print("        If the change is legitimate: RE-BASELINE with --emit-baseline,")
+        print("        record the new figures, and say which commit moved them.  It exits")
+        print("        non-zero rather than quietly reporting green about a delta that is")
+        print("        no longer the delta it was written for.")
     else:
         print("RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree.")
         if _seen[MOVED]:

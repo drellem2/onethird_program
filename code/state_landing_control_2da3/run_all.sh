@@ -22,10 +22,26 @@
 # in docs/state-history/README.md, which is where this cluster's corrections to frozen
 # commit messages already go.
 #
+# mg-7870 REPAIRED THE CERTIFYING MECHANISM.  mg-2216 audited this instrument with fourteen
+# independent mutations and EIGHT exited 0, including a 1,556-character correction-block body
+# and 38% of the certified ledger cell: the check enumerated substrings, and enumeration is
+# transparent to length-preserving edits and to block bodies whose headers survive.  Each
+# certified region now carries a SHA-256 of its normalised bytes.  COVERAGE.md, beside this
+# script, states which regions are digested, what the normalisation is, and what is
+# deliberately not covered — read that first.
+#
 # ~25 s total, most of it the two full runs of the pinned battery that negative_control.py
 # performs for contrast.  negative_control.py MUTATES STATE.md and the state-history README
 # in the working tree and restores them under a finally + sha256 check; it refuses to run
 # if either is already dirty.  out_control.txt is this script's committed output.
+#
+# THE EVIDENCE THAT THE REPAIR WORKS IS NOT IN THIS SCRIPT, and deliberately so: an author's
+# own negative control cannot establish sensitivity, because the author picks the mutations.
+# It is code/state_control_audit_2216/mutation_battery.py — written before the repair, by
+# someone else — re-run unmodified and captured verbatim at out_battery_2216_rerun.txt
+# (14 mutations, 10 caught, 0 MISSED, 4 tolerated by design, 0 noisy).  Reproduce it with:
+#     python3 code/state_control_audit_2216/mutation_battery.py
+# It is not run here because it mutates the same two files and takes ~30 s on its own.
 set -e
 cd "$(git rev-parse --show-toplevel)"
 
