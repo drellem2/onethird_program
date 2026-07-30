@@ -1,0 +1,45 @@
+==============================================================================
+T5  dim kF(P)/rad = |AC(P)|, and hence all irreducibles are
+    1-dimensional: measured from the multiplication table via the
+    trace form.  Size cap on |F(P)|: 1200 (skips are listed, not hidden).
+==============================================================================
+
+   n  classes  tested  skipped   rank(G) != |AC(P)|
+   1        1       1        0                    0
+   2        2       2        0                    0
+   3        5       5        0                    0
+   4       16      16        0                    0
+   5       63      63        0                    0
+   6      318     308       10                    0
+
+  Skipped (|F(P)| over the cap), listed in full:
+      n=6  |F(P)|=1224  x1
+      n=6  |F(P)|=1232  x2
+      n=6  |F(P)|=1460  x3
+      n=6  |F(P)|=1844  x2
+      n=6  |F(P)|=2612  x1
+      n=6  |F(P)|=4683  x1
+
+  How far from semisimple, since that is the hypothesis the
+  Okounkov-Vershik programme runs on (an inductive family of
+  SEMISIMPLE algebras): dim kF(P) = |F(P)|, dim rad = |F(P)|-|AC(P)|.
+   n   P            |F(P)|   |AC(P)|   dim rad   rad / dim
+   2   antichain        3         2         1      0.333
+   2   chain            2         2         0      0.000
+   3   antichain       13         5         8      0.615
+   3   chain            4         4         0      0.000
+   4   antichain       75        15        60      0.800
+   4   chain            8         8         0      0.000
+   5   antichain      541        52       489      0.904
+   5   chain           16        16         0      0.000
+   6   antichain     4683       203      4480      0.957
+   6   chain           32        32         0      0.000
+
+  Reading: the semisimple quotient of kF(P) is a product of |AC(P)|
+  copies of the field.  Whatever branching graph one builds from this
+  family, its vertices are the elements of a support lattice and its
+  edge multiplicities are not the invariant the programme is about.
+
+==============================================================================
+SUMMARY t_lrb_reps: 0 bad, 10 classes skipped over the size cap
+==============================================================================

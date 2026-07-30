@@ -1,0 +1,50 @@
+==============================================================================
+SELF-TEST for code/branching_af28
+==============================================================================
+
+-- enumeration certificates ------------------------------------------
+  ok   poset classes n=1..6 (A000112)                         [1, 2, 5, 16, 63, 318]
+  ok   moves per n, total over classes (repo's own 1,5,37,397,5757) [1, 5, 37, 397, 5757]
+  ok   |F(antichain_n)| = ordered Bell A000670                [1, 3, 13, 75, 541]
+  ok   |AC(antichain_n)| = Bell A000110                       [1, 2, 5, 15, 52]
+  ok   |F(chain_n)| = 2^(n-1)                                 [1, 2, 4, 8, 16, 32]
+  ok   |L(chain_n)| = 1                                       [1, 1, 1, 1, 1, 1]
+  ok   |L(antichain_n)| = n!                                  [1, 2, 6, 24, 120]
+
+-- T0 anchor: the two definitions of a move agree ---------------------
+  ok   P-compatible ordered set partitions == chains in J(P), n<=5, bad 0
+
+-- T1: J(D_lambda) = [0,lambda] and maximal chains = SYT --------------
+  ok   partitions tested to n=7                               44
+  ok   |J(D_lambda)| != |[0,lambda]| count                    0
+  ok   e(D_lambda) != f^lambda (hook length formula) count    0
+  ok   f^(3,2,1) = 16                                         16
+  ok   f^(4,2,1) = 35                                         35
+  ok   sum_lambda (f^lambda)^2 = n! for n=6                   720
+
+-- T2: shape posets among all posets ----------------------------------
+  ok   shape-poset classes n=1..8                             [1, 1, 2, 3, 4, 6, 8, 12]
+  ok   shape posets at n=6 out of 318                         (6, 318)
+
+-- T3: differential condition -----------------------------------------
+  ok   Young's lattice to rank 8: differential below the top, r 1
+  ok   Young's lattice to rank 8: differential on the whole truncation False
+  ok   Young-Fibonacci to rank 8: differential below the top, r 1
+  ok   Young-Fibonacci rank sizes are Fibonacci               [1, 1, 2, 3, 5, 8, 13, 21]
+  ok   posets 2<=n<=6 whose J(P) is differential (either sense) 0
+
+-- T5: dim kF(P)/rad = |AC(P)| ----------------------------------------
+  ok   classes tested at n<=5 (all of them)                   87
+  ok   rank of the trace form != |AC(P)|, count               0
+
+-- T6: no non-identity invertible move --------------------------------
+  ok   moves acting bijectively but not as the identity, n<=5 0
+
+-- T7: concatenation is a non-unital semigroup homomorphism -----------
+  ok   concatenation lands outside F(P+Q), count              0
+  ok   pairs (P,Q) with |P|,|Q| <= 3                          64
+  ok   of those, concatenation unital                         0
+
+==============================================================================
+27 assertions, 0 failures
+==============================================================================

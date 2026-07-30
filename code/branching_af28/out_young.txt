@@ -1,0 +1,108 @@
+==============================================================================
+T0  Anchor: P-compatible ordered set partitions = chains in J(P).
+    (Re-derived here so that everything below rests on this file,
+     not on mg-ebd8's instruments.)
+==============================================================================
+
+   n  classes  moves   set-equality bad
+   1        1      1                  0
+   2        2      5                  0
+   3        5     37                  0
+   4       16    397                  0
+   5       63   5757                  0
+
+==============================================================================
+T1  J(D_lambda) = [0, lambda] in Young's lattice, and the maximal
+    chains of J(D_lambda) = SYT(lambda).  Tested as equalities.
+==============================================================================
+
+  n  lam            |J(D_lam)|  |[0,lam]|  bad  e(D_lam)  |SYT|   HLF  bad
+  1  (1,)                   2          2    .         1       1     1    .
+  2  (2,)                   3          3    .         1       1     1    .
+  2  (1, 1)                 3          3    .         1       1     1    .
+  3  (3,)                   4          4    .         1       1     1    .
+  3  (2, 1)                 5          5    .         2       2     2    .
+  3  (1, 1, 1)              4          4    .         1       1     1    .
+  4  (4,)                   5          5    .         1       1     1    .
+  4  (3, 1)                 7          7    .         3       3     3    .
+  4  (2, 2)                 6          6    .         2       2     2    .
+  4  (2, 1, 1)              7          7    .         3       3     3    .
+  4  (1, 1, 1, 1)           5          5    .         1       1     1    .
+  5  (5,)                   6          6    .         1       1     1    .
+  5  (4, 1)                 9          9    .         4       4     4    .
+  5  (3, 2)                 9          9    .         5       5     5    .
+  5  (3, 1, 1)             10         10    .         6       6     6    .
+  5  (2, 2, 1)              9          9    .         5       5     5    .
+  5  (2, 1, 1, 1)           9          9    .         4       4     4    .
+  5  (1, 1, 1, 1, 1)         6          6    .         1       1     1    .
+  6  (6,)                   7          7    .         1       1     1    .
+  6  (5, 1)                11         11    .         5       5     5    .
+  6  (4, 2)                12         12    .         9       9     9    .
+  6  (4, 1, 1)             13         13    .        10      10    10    .
+  6  (3, 3)                10         10    .         5       5     5    .
+  6  (3, 2, 1)             14         14    .        16      16    16    .
+  6  (3, 1, 1, 1)          13         13    .        10      10    10    .
+  6  (2, 2, 2)             10         10    .         5       5     5    .
+  6  (2, 2, 1, 1)          12         12    .         9       9     9    .
+  6  (2, 1, 1, 1, 1)        11         11    .         5       5     5    .
+  6  (1, 1, 1, 1, 1, 1)         7          7    .         1       1     1    .
+  7  (7,)                   8          8    .         1       1     1    .
+  7  (6, 1)                13         13    .         6       6     6    .
+  7  (5, 2)                15         15    .        14      14    14    .
+  7  (5, 1, 1)             16         16    .        15      15    15    .
+  7  (4, 3)                14         14    .        14      14    14    .
+  7  (4, 2, 1)             19         19    .        35      35    35    .
+  7  (4, 1, 1, 1)          17         17    .        20      20    20    .
+  7  (3, 3, 1)             16         16    .        21      21    21    .
+  7  (3, 2, 2)             16         16    .        21      21    21    .
+  7  (3, 2, 1, 1)          19         19    .        35      35    35    .
+  7  (3, 1, 1, 1, 1)        16         16    .        15      15    15    .
+  7  (2, 2, 2, 1)          14         14    .        14      14    14    .
+  7  (2, 2, 1, 1, 1)        15         15    .        14      14    14    .
+  7  (2, 1, 1, 1, 1, 1)        13         13    .         6       6     6    .
+  7  (1, 1, 1, 1, 1, 1, 1)         8          8    .         1       1     1    .
+
+  partitions tested: 44   lattice-iso bad: 0   SYT/chain bad: 0
+
+==============================================================================
+T2  How much of the family is Young?  The posets P for which J(P) is
+    an interval of Young's lattice are exactly the cell posets
+    D_lambda.  Counted against all posets.
+==============================================================================
+
+   n   shape posets   all posets   fraction   (all-posets source)
+   1              1            1     1.0000   enumerated here (= A000112)
+   2              1            2     0.5000   enumerated here (= A000112)
+   3              2            5     0.4000   enumerated here (= A000112)
+   4              3           16     0.1875   enumerated here (= A000112)
+   5              4           63     0.0635   enumerated here (= A000112)
+   6              6          318     0.0189   enumerated here (= A000112)
+   7              8         2045     0.0039   A000112, cited
+   8             12        16999     0.0007   A000112, cited
+
+  Note: D_lambda and D_(lambda') are isomorphic posets (transpose),
+  so the shape count is at most the number of partitions and is
+  smaller; it is computed here by canonical form, not by that rule.
+
+==============================================================================
+T6  Is the action of the monoid on the states the action of a group?
+    For every poset: how many moves act on L(P) as a bijection, and
+    how many of those act as something other than the identity map?
+==============================================================================
+
+   n  classes  moves   act bijectively   bijective & not identity map
+   1        1      1                 1                              0
+   2        2      5                 3                              0
+   3        5     37                10                              0
+   4       16    397                37                              0
+   5       63   5757               151                              0
+
+  Every move is idempotent, so a move acting bijectively acts as the
+  identity map.  Measured non-identity invertible elements: 0.
+  The image of F(P) in the transformation monoid of L(P) therefore
+  contains no non-trivial invertible element: it is not a group, and
+  for P = D_lambda it is not the S_n-action on the GT basis of S^lambda.
+
+==============================================================================
+SUMMARY t_young: anchor bad 0; T1 iso bad 0, SYT bad 0; T6 bad 0
+==============================================================================
