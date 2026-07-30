@@ -1,0 +1,61 @@
+==============================================================================
+W2a  the Tits product's product-closure failures, classified
+==============================================================================
+
+  Exhaustive over every ground set I subset [4], every decomposition
+  I = S + T, and every pair (x, y) in F[S] x F[T].
+
+  pairs tested                                        11301
+  product-closure FAILURES                             1442
+  pairs with BOTH ground sets non-empty                1442
+  pairs with an EMPTY side                             9859
+
+   failures with both ground sets non-empty            1442
+   failures with an empty side                            0
+   of the failures, ones NOT returning the empty
+     composition                                          0
+
+  P1  every failure has both ground sets non-empty     ok
+  P2  every both-non-empty pair fails (SET EQUALITY)   ok
+  P3  every failure returns the EMPTY composition      ok
+  P4  the empty-side pairs are non-vacuous and all pass ok
+
+  So the failure count is not a measurement of how near the Tits
+  product comes to being mu_{S,T}.  It is the number of pairs on which
+  mu_{S,T} is defined and the Tits product is not, and it would be the
+  same number for ANY map that returns the empty composition there.
+
+==============================================================================
+W2b  the CONTROL -- the column separates type-correctness, not nearness
+==============================================================================
+
+  P5: a type-CORRECT corruption must NOT fire on product closure.
+
+  mu_{S,T}, uncorrupted (concatenation)                       0  ok
+  control (v): last block of x merged into first of y         0  ok
+  control (ii), the Tits product                           1442  ok
+  P4b: control (ii) with its guard REMOVED                11300  ok
+
+  A wrong product that respects the type fails product closure 0 times
+  and a right-shaped product on the wrong type fails it 1442 times.
+  The column is a TYPE check.  It is not a distance.
+
+==============================================================================
+W2c  what is NOT withdrawn
+==============================================================================
+
+  The conclusion control (ii) was cited for stands, and this file makes
+  it stronger rather than weaker:
+
+    THE BAND PRODUCT IS INVISIBLE TO THE HOPF STRUCTURE.
+
+  mu_{S,T} is defined on factors with DISJOINT ground sets; the Tits
+  product intersects blocks; across disjoint sets every intersection is
+  empty.  That is a statement about the two maps' domains, true at
+  EVERY ground set rather than measured on [4], and no re-count can
+  weaken it.  Nothing downstream that cites it -- mg-ebd8's and
+  mg-af28's spectral work, lambda_2, Delta_AT -- needs revising.
+
+==============================================================================
+W2 TOTAL BAD: 0
+==============================================================================

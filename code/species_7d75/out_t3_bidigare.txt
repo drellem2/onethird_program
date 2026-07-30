@@ -34,7 +34,7 @@ T3c  Solomon's descent algebra, built inside kS_n
    5    120          16  A:True  B:True                                  yes
 
 ==============================================================================
-T3d  THE COMPARISON -- four candidate identifications, three are controls
+T3d  THE COMPARISON -- four candidate identifications; T3e counts the controls
 ==============================================================================
 
   Candidate: O_alpha  <->  d_{T(alpha)}.
@@ -55,6 +55,45 @@ T3d  THE COMPARISON -- four candidate identifications, three are controls
   2 of 4 hold and 2 fail, so the comparison is discriminating.
   Bidigare's Theorem 10.13 is REPRODUCED here from the two
   definitions, with no step taken on the theorem's authority.
+  HOW MANY INDEPENDENT CONTROLS THAT IS, is T3e -- and it is fewer
+  than four columns suggests.
+
+==============================================================================
+T3e  the four columns are TWO STATEMENTS, EACH COMPUTED TWICE
+==============================================================================
+
+  Conventions A and B differ only by the order of composition in kS_n,
+  so the claim is that B is IDENTICALLY the opposite algebra of A:
+
+      c^U_{S,T}(Sol, B)  =  c^U_{T,S}(Sol, A)   for every S, T, U.
+
+  If that holds, the column iso/B carries nothing anti/A does not, and
+  likewise anti/B and iso/A.  Asserted before; computed here.
+
+   n   pairs (S,T)   B(S,T) vs A(T,S)   CONTROL: B(S,T) vs A(S,T)
+   1             1                  0                           0
+   2             4                  0                           0
+   3            16                  0                           2
+   4            64                  0                          26
+   5           256                  0                         170
+
+  The left column is a MISMATCH count and is 0 at every n <= 5.
+
+  THE CONTROL, and T3e is worth nothing without it: the un-swapped
+  comparison MUST disagree, or the routine cannot tell the opposite
+  algebra from the algebra.  kS_n is commutative at n <= 2, so it
+  cannot fire there and must fire from n = 3.
+      control fires at n = [3, 4, 5]   expected [3, 4, 5]   ok
+
+  SO THE COUNT IS: {anti/A, iso/B} is ONE statement and it holds;
+  {iso/A, anti/B} is ONE statement and it fails.  T3d is ONE control,
+  RUN TWICE -- not three, as this file used to say.  iso/B, listed
+  there as a control, is the surviving identification in a mirror.
+
+  NOT WITHDRAWN: the comparison is still discriminating -- 472
+  mismatching structure constants at n = 5 separate isomorphism from
+  anti-isomorphism -- and Theorem 10.13 is still reproduced entry for
+  entry.  ONLY THE CONTROL COUNT WAS OVERSTATED.
 
 ==============================================================================
 T3 TOTAL BAD: 0

@@ -1,0 +1,54 @@
+# target: code/species_7d75
+
+==============================================================================
+W3a  the corrected statements are not still ASSERTED in the instrument
+==============================================================================
+
+  This is the negative half, and it is the load-bearing one -- the
+  same shape as check_doc.py's strike test, moved from the document to
+  the code.  A corrected statement may survive ONLY where it is being
+  quoted as corrected: within 4 lines of a marker saying so.  Anywhere
+  else it is still in force, whatever the prose elsewhere says.
+
+  X4  T3d's control count                        ok
+        quoted as corrected at README.md:33
+        quoted as corrected at t3_bidigare.py:42
+        quoted as corrected at t3_bidigare.py:43
+  X5  control (ii) read as a near miss           ok
+
+==============================================================================
+W3b  EVERY occurrence of the CITED identification is marked, not only the ledger
+==============================================================================
+
+  Rule: any line in code/species_7d75 that identifies the semisimple
+  quotient with the CHARACTER RING of S_n must have the scope marker
+  within 8 lines of it, in the same file.  The step from k^{Pi_n/S_n}
+  to the character ring is ledger S4; the Fock-functor statement is
+  S5.  Neither Solomon nor Garsia-Reutenauer/Atkinson was read, here
+  or by mg-a61f.
+
+  README.md                              line 40    marked
+  README.md                              line 63    marked
+  out_t4_one_operation.txt               line 34    marked
+  out_t6_fock_and_record.txt             line 16    marked
+  out_t6_fock_and_record.txt             line 26    marked
+  t4_one_operation.py                    line 201   marked
+  t6_fock_and_record.py                  line 66    marked
+  t6_fock_and_record.py                  line 76    marked
+
+  8 occurrence(s) checked.
+
+==============================================================================
+W3c  the corrected readings are present at source
+==============================================================================
+
+  t3_bidigare.py X4  two statements, each computed twice        ok
+  t3_bidigare.py X4  and the count is COMPUTED, not asserted    ok
+  t5_hopf_monoid.py X5  control (ii) reads as a type mismatch      ok
+  t5_hopf_monoid.py X5  and its conclusion is stated to survive    ok
+  README.md      X5  the conventions bullet is repaired         ok
+  README.md      S4  the S_n half is named as unverified        ok
+
+==============================================================================
+W3 SCOPE: PASS   (0 problem(s))
+==============================================================================

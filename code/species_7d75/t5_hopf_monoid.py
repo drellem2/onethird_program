@@ -182,7 +182,55 @@ print("      F  : prod closure %d  coprod closure %d  assoc %d  coassoc %d"
       % (f2["prod_closure"], f2["coprod_closure"], f2["assoc"], f2["coassoc"],
          f2["compat"]))
 fired2 = (f2["prod_closure"] > 0 or f2["assoc"] > 0 or f2["compat"] > 0)
-print("      control fires: %s" % ("YES" if fired2 else "NO"))
+print("      control fires: %s -- ON A TYPE MISMATCH, see below"
+      % ("YES" if fired2 else "NO"))
+print()
+
+# --- what those counts are, computed (mg-f8fa, on mg-a61f's X5) ------------
+uni2 = {}
+for k in range(GROUND + 1):
+    for J in combinations(range(GROUND), k):
+        uni2[frozenset(J)] = set(elems_F(frozenset(J)))
+pairs = both_ne = failures = fail_both_ne = 0
+for J, els in uni2.items():
+    for (S, T) in decompositions(J):
+        for x in uni2[S]:
+            for y in uni2[T]:
+                pairs += 1
+                bn = bool(S) and bool(T)
+                both_ne += bn
+                if mu_tits(x, y) not in els:
+                    failures += 1
+                    fail_both_ne += bn
+setwise = (failures == both_ne == fail_both_ne)
+bad += (not setwise) + (failures != f2["prod_closure"])
+print("      WHAT THE %d IS, AND IT IS NOT A NEAR MISS (mg-f8fa, on mg-a61f's"
+      % f2["prod_closure"])
+print("      X5).  Of %d pairs (x, y) tested, %d have BOTH ground sets"
+      % (pairs, both_ne))
+print("      non-empty, %d fail product closure, and the two sets are EQUAL"
+      % failures)
+print("      rather than merely equinumerous: %s." % ("verified" if setwise
+                                                      else "*** NOT EQUAL ***"))
+print()
+print("      mu_{S,T} takes its two factors on DISJOINT ground sets.  The")
+print("      Tits product intersects blocks.  Across disjoint non-empty sets")
+print("      every intersection is empty, so the Tits product returns the")
+print("      EMPTY composition on a non-empty ground set, which is not a face")
+print("      of it.  The control fires on a TYPE MISMATCH -- the two maps have")
+print("      different domains of definition -- and not because the Tits")
+print("      product nearly works.  The counts are weaker evidence than they")
+print("      look, and no count on either side could strengthen or weaken it.")
+print()
+print("      THE CONCLUSION DRAWN FROM THIS CONTROL IS NOT withdrawn, and it")
+print("      rests on the type statement rather than on the counts: THE BAND")
+print("      PRODUCT IS INVISIBLE TO THE HOPF STRUCTURE.  That holds at every")
+print("      ground set rather than on [%d].  Nothing downstream that cites it"
+      % GROUND)
+print("      -- mg-ebd8's and mg-af28's spectral work, lambda_2, Delta_AT --")
+print("      needs revising.  See code/species_remainder_f8fa/w2_typemismatch")
+print("      for the same measurement from disjoint code, with the control")
+print("      that a type-CORRECT corruption fails this column 0 times.")
 print()
 print("  (iii) keep every object and the coproduct, but REVERSE the order of")
 print("      concatenation in the product.  Associativity survives, so this")
