@@ -1,0 +1,50 @@
+==============================================================================
+W1  T3d's four columns are two statements, each computed twice
+==============================================================================
+
+  Solomon's descent algebra is rebuilt here inside kS_n from
+  permutations and their descent sets, under both composition
+  conventions.  Products are compared as MULTISETS of permutations, so
+  no expansion in the d_T basis is assumed anywhere.
+
+   n   pairs (S,T)   B(S,T) vs A(T,S)   CONTROL: B(S,T) vs A(S,T)
+   1             1                  0                           0
+   2             4                  0                           0
+   3            16                  0                           2
+   4            64                  0                          26
+   5           256                  0                         170
+
+  Left column is a MISMATCH count and is 0 at every n: convention B is
+  the opposite algebra of convention A on the nose, with no n at which
+  they come apart.
+
+==============================================================================
+W1b  the control, and it must fire or W1a establishes nothing
+==============================================================================
+
+  P2/P3: comparing B(S,T) against A(S,T) UN-swapped must disagree, or
+  the comparison above cannot distinguish the opposite algebra from
+  the algebra.  kS_n is commutative at n <= 2, so it cannot fire there.
+
+  control fires at n = [3, 4, 5]   expected n = [3, 4, 5]   ok
+
+==============================================================================
+W1c  the restated count
+==============================================================================
+
+  {anti/A, iso/B}  is ONE statement, and it HOLDS.
+  {iso/A,  anti/B} is ONE statement, and it FAILS (472 mismatching
+                   structure constants at n = 5, t3_bidigare.py T3d).
+
+  So T3d is ONE control, RUN TWICE -- not three controls, and not two.
+  The column listed as a control in the original text, iso/B, is the
+  surviving identification seen in a mirror.
+
+  WHAT IS NOT WITHDRAWN, and it is the whole substance: the comparison
+  IS discriminating.  Isomorphism is separated from anti-isomorphism
+  decisively, and Bidigare's Theorem 10.13 is reproduced from the two
+  definitions.  ONLY THE CONTROL COUNT WAS OVERSTATED.
+
+==============================================================================
+W1 TOTAL BAD: 0
+==============================================================================

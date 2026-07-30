@@ -1,0 +1,180 @@
+"""W3 -- THE CHECKER THAT MG-6F61 DID NOT BUILD: the INSTRUMENT, not the
+document.
+
+mg-6f61 built `code/species_repair_6f61/check_doc.py`, which requires every
+false sentence to survive only inside the strike that replaces it -- IN
+`docs/OneThird-Species-Hopf-Monoids-Where-This-Lives.md`.  It reads one file.
+That is why three of mg-a61f's findings were repaired in the prose and left
+standing in `code/species_7d75/`, where a successor re-runs them:
+
+  X4  `t3_bidigare.py` headed T3d "four candidate identifications, three are
+      controls" and its vacuity branch read "the three controls did not fire".
+  X5  `code/species_7d75/README.md` presented control (ii)'s 1 442 / 252 /
+      11 020 under "Conventions that have bitten this repo before" as
+      measuring "how differently" the two products behave -- the near-miss
+      reading the audit refuted.
+  S4  `t4_one_operation.py` printed "Sol(S_n) / rad = k^{Pi_n / S_n} = the
+      character ring of S_n" and `t6_fock_and_record.py` printed "K(Pi) =
+      symmetric functions, whose degree-n component is the character ring of
+      S_n", both unmarked, both inside a run that ends TOTAL BAD: 0.  The
+      second equality in each is ledger S4 / S5: cited to Solomon and to
+      Garsia-Reutenauer/Atkinson, neither read here or by the audit.  A
+      reader is given no way to tell the measured half from the cited one.
+
+THIS FILE IS THE DETECTOR FOR ALL THREE, AND IT WAS RUN AGAINST THE
+PRE-REPAIR TREE FIRST: it reported 6 problems there.  A checker written after
+the fix and never seen to fail is not a checker.  `out_w3_scope_before.txt`
+is the failing run, committed beside the passing one.
+
+    python3 code/species_remainder_f8fa/w3_scope.py
+"""
+
+import os
+import re
+import sys
+
+from kernf8fa import hdr
+
+bad = 0
+HERE = os.path.dirname(os.path.abspath(__file__))
+# The directory under test defaults to the source instrument.  It is
+# overridable so the SAME checker can be pointed at the pre-repair tree --
+# which is how `out_w3_scope_before.txt` is produced, and the reason that
+# file is evidence rather than decoration:
+#
+#     git worktree list                      # from this repo
+#     mkdir -p /tmp/pre && git archive 83ac472 code/species_7d75 \
+#         | tar -x -C /tmp/pre
+#     python3 w3_scope.py /tmp/pre/code/species_7d75
+#
+SRC = (os.path.abspath(sys.argv[1]) if len(sys.argv) > 1
+       else os.path.normpath(os.path.join(HERE, "..", "species_7d75")))
+print("# target: %s" % os.path.join(*SRC.split(os.sep)[-2:]))
+print()
+
+FILES = sorted(f for f in os.listdir(SRC)
+               if f.endswith(".py") or f.endswith(".txt")
+               or f.endswith(".md"))
+TEXT = {f: open(os.path.join(SRC, f), encoding="utf-8").read() for f in FILES}
+LINES = {f: TEXT[f].splitlines() for f in FILES}
+
+
+# ---------------------------------------------------------------------------
+# A.  The corrected statements must not still be ASSERTED at source.
+# ---------------------------------------------------------------------------
+FORBIDDEN = [
+    ("X4  T3d's control count",
+     [r"three\s+are\s+controls", r"the\s+three\s+controls",
+      r"three\s+of\s+the\s+four\s+(?:columns\s+)?are\s+the\s+control"]),
+    ("X5  control (ii) read as a near miss",
+     [r"measures\s+how\s+differently"]),
+]
+
+# Deliberately NARROW.  An earlier version of this file accepted a bare
+# "REPAIRED" or "CORRECTED" nearby, and the pre-repair README disarmed it by
+# accident: an unrelated "the error mg-1953 repaired" four lines above the
+# near-miss bullet made the bullet read as already corrected.  A marker has to
+# name THIS repair, or say in so many words that the sentence no longer holds.
+QUOTED_AS_CORRECTED = re.compile(r"mg-f8fa|used\s+to|no\s+longer", re.I)
+QWINDOW = 4
+
+hdr("W3a  the corrected statements are not still ASSERTED in the instrument")
+print()
+print("  This is the negative half, and it is the load-bearing one -- the")
+print("  same shape as check_doc.py's strike test, moved from the document to")
+print("  the code.  A corrected statement may survive ONLY where it is being")
+print("  quoted as corrected: within %d lines of a marker saying so.  Anywhere"
+      % QWINDOW)
+print("  else it is still in force, whatever the prose elsewhere says.")
+print()
+for label, pats in FORBIDDEN:
+    asserted, quoted = [], []
+    for f in FILES:
+        for i, ln in enumerate(LINES[f]):
+            if not any(re.search(p, ln, re.I) for p in pats):
+                continue
+            lo, hi = max(0, i - QWINDOW), min(len(LINES[f]), i + QWINDOW + 1)
+            near = "\n".join(LINES[f][lo:hi])
+            (quoted if QUOTED_AS_CORRECTED.search(near)
+             else asserted).append("%s:%d" % (f, i + 1))
+    ok = not asserted
+    bad += (not ok)
+    print("  %-46s %s" % (label, "ok" if ok else "*** STILL ASSERTED ***"))
+    for h in asserted:
+        print("        STILL ASSERTED AT  %s" % h)
+    for h in quoted:
+        print("        quoted as corrected at %s" % h)
+print()
+
+
+# ---------------------------------------------------------------------------
+# B.  EVERY occurrence of the cited identification carries its ledger row.
+# ---------------------------------------------------------------------------
+CITED = re.compile(r"character\s+ring", re.I)
+MARKER = re.compile(r"ledger\s+S[45]|CITED,?\s+NOT\s+(?:DERIVED|VERIFIED)"
+                    r"|NOT\s+VERIFIED\s+HERE", re.I)
+WINDOW = 8
+
+hdr("W3b  EVERY occurrence of the CITED identification is marked, not only"
+    " the ledger")
+print()
+print("  Rule: any line in code/species_7d75 that identifies the semisimple")
+print("  quotient with the CHARACTER RING of S_n must have the scope marker")
+print("  within %d lines of it, in the same file.  The step from k^{Pi_n/S_n}"
+      % WINDOW)
+print("  to the character ring is ledger S4; the Fock-functor statement is")
+print("  S5.  Neither Solomon nor Garsia-Reutenauer/Atkinson was read, here")
+print("  or by mg-a61f.")
+print()
+found = 0
+for f in FILES:
+    for i, ln in enumerate(LINES[f]):
+        if not CITED.search(ln):
+            continue
+        found += 1
+        lo, hi = max(0, i - WINDOW), min(len(LINES[f]), i + WINDOW + 1)
+        near = "\n".join(LINES[f][lo:hi])
+        ok = bool(MARKER.search(near))
+        bad += (not ok)
+        print("  %-38s line %-5d %s"
+              % (f, i + 1, "marked" if ok else "*** UNMARKED ***"))
+if not found:
+    bad += 1
+    print("  *** NO OCCURRENCE FOUND -- the detector is looking at the wrong")
+    print("      tree, or the identification was deleted rather than scoped ***")
+else:
+    print()
+    print("  %d occurrence(s) checked." % found)
+print()
+
+
+# ---------------------------------------------------------------------------
+# C.  The positive half: the corrected readings are present at source.
+# ---------------------------------------------------------------------------
+REQUIRED = [
+    ("t3_bidigare.py", "X4  two statements, each computed twice",
+     r"two\s+statements,?\s+each\s+computed\s+twice"),
+    ("t3_bidigare.py", "X4  and the count is COMPUTED, not asserted",
+     r"T3e"),
+    ("t5_hopf_monoid.py", "X5  control (ii) reads as a type mismatch",
+     r"type\s+mismatch"),
+    ("t5_hopf_monoid.py", "X5  and its conclusion is stated to survive",
+     r"NOT\s+withdrawn|is\s+not\s+withdrawn"),
+    ("README.md", "X5  the conventions bullet is repaired",
+     r"type\s+mismatch"),
+    ("README.md", "S4  the S_n half is named as unverified",
+     r"ledger\s+S4"),
+]
+
+hdr("W3c  the corrected readings are present at source")
+print()
+for f, label, pat in REQUIRED:
+    ok = f in TEXT and bool(re.search(pat, TEXT[f], re.I))
+    bad += (not ok)
+    print("  %-14s %-46s %s" % (f, label, "ok" if ok else "*** MISSING ***"))
+print()
+
+print("=" * 78)
+print("W3 SCOPE: %s   (%d problem(s))" % ("PASS" if bad == 0 else "FAIL", bad))
+print("=" * 78)
+sys.exit(0)

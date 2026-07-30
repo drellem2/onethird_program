@@ -30,8 +30,21 @@ never share a line of code.
        |{w : des(w) subset T(alpha)}| = |O_alpha|.
   T3d  THE COMPARISON.  Four candidate identifications are run --
        {isomorphism, anti-isomorphism} x {two composition conventions in kS_n}
-       -- and exactly which ones hold is reported.  Three of the four are the
-       control: if the harness cannot separate them, T3d proves nothing.
+       -- and exactly which ones hold is reported.  At least one must fail:
+       if the harness cannot separate them, T3d proves nothing.
+  T3e  HOW MANY CONTROLS THAT ACTUALLY IS, computed rather than counted off
+       the table.  Convention B is identically the OPPOSITE ALGEBRA of
+       convention A, so T3d's four columns are TWO STATEMENTS, EACH COMPUTED
+       TWICE: {anti/A, iso/B} is one and it holds, {iso/A, anti/B} is one and
+       it fails.  ONE control, run twice.
+
+CORRECTED AT SOURCE 2026-07-30 (mg-f8fa), on mg-a61f's X4.  T3d used to be
+headed "four candidate identifications, three are controls" and its vacuity
+branch used to read "the three controls did not fire".  mg-6f61 restated the
+count in the document and left it standing here, which is the copy a
+successor re-runs.  T3e now COMPUTES the statement the count rests on and
+fails if it is not true -- and carries its own control, because an identity
+checked by a routine that returns 0 on everything is not checked.
 """
 
 import sys
@@ -204,7 +217,8 @@ for n in range(1, NMAX + 1):
              "yes" if sizes_ok else "NO"))
 print()
 
-hdr("T3d  THE COMPARISON -- four candidate identifications, three are controls")
+hdr("T3d  THE COMPARISON -- four candidate identifications; T3e counts the"
+    " controls")
 print()
 print("  Candidate: O_alpha  <->  d_{T(alpha)}.")
 print("  iso  : c^gamma_{alpha,beta}(Sigma) = c^gamma_{alpha,beta}(Sol)")
@@ -245,14 +259,67 @@ if not holds:
     print("  by this construction of the two algebras.")
     bad += 1
 elif not fails:
-    print("  ALL FOUR hold, so the comparison is VACUOUS -- the three controls")
-    print("  did not fire and T3d establishes nothing.")
+    print("  ALL FOUR hold, so the comparison is VACUOUS -- nothing failed")
+    print("  and T3d establishes nothing.")
     bad += 1
 else:
     print("  %d of 4 hold and %d fail, so the comparison is discriminating."
           % (len(holds), len(fails)))
     print("  Bidigare's Theorem 10.13 is REPRODUCED here from the two")
     print("  definitions, with no step taken on the theorem's authority.")
+    print("  HOW MANY INDEPENDENT CONTROLS THAT IS, is T3e -- and it is fewer")
+    print("  than four columns suggests.")
+print()
+
+# ---------------------------------------------------------------------------
+# T3e -- the control count, COMPUTED (mg-f8fa, on mg-a61f's X4)
+# ---------------------------------------------------------------------------
+hdr("T3e  the four columns are TWO STATEMENTS, EACH COMPUTED TWICE")
+print()
+print("  Conventions A and B differ only by the order of composition in kS_n,")
+print("  so the claim is that B is IDENTICALLY the opposite algebra of A:")
+print()
+print("      c^U_{S,T}(Sol, B)  =  c^U_{T,S}(Sol, A)   for every S, T, U.")
+print()
+print("  If that holds, the column iso/B carries nothing anti/A does not, and")
+print("  likewise anti/B and iso/A.  Asserted before; computed here.")
+print()
+print("   n   pairs (S,T)   B(S,T) vs A(T,S)   CONTROL: B(S,T) vs A(S,T)")
+opp_fired = []
+for n in range(1, NMAX + 1):
+    subs, tabs, _ = SOL[n]
+    A = tabs["A"][0]
+    B = tabs["B"][0]
+    swapped = sum(1 for S in subs for T in subs if B[(S, T)] != A[(T, S)])
+    plain = sum(1 for S in subs for T in subs if B[(S, T)] != A[(S, T)])
+    bad += (swapped != 0)
+    if plain:
+        opp_fired.append(n)
+    print("  %2d %13d %18d %27d" % (n, len(subs) ** 2, swapped, plain))
+print()
+print("  The left column is a MISMATCH count and is 0 at every n <= %d."
+      % NMAX)
+print()
+print("  THE CONTROL, and T3e is worth nothing without it: the un-swapped")
+print("  comparison MUST disagree, or the routine cannot tell the opposite")
+print("  algebra from the algebra.  kS_n is commutative at n <= 2, so it")
+print("  cannot fire there and must fire from n = 3.")
+expected_fire = list(range(3, NMAX + 1))
+ctl_ok = (opp_fired == expected_fire)
+bad += (not ctl_ok)
+print("      control fires at n = %s   expected %s   %s"
+      % (opp_fired or "NONE", expected_fire,
+         "ok" if ctl_ok else "*** CONTROL MISSED ***"))
+print()
+print("  SO THE COUNT IS: {anti/A, iso/B} is ONE statement and it holds;")
+print("  {iso/A, anti/B} is ONE statement and it fails.  T3d is ONE control,")
+print("  RUN TWICE -- not three, as this file used to say.  iso/B, listed")
+print("  there as a control, is the surviving identification in a mirror.")
+print()
+print("  NOT WITHDRAWN: the comparison is still discriminating -- 472")
+print("  mismatching structure constants at n = 5 separate isomorphism from")
+print("  anti-isomorphism -- and Theorem 10.13 is still reproduced entry for")
+print("  entry.  ONLY THE CONTROL COUNT WAS OVERSTATED.")
 print()
 print("=" * 78)
 print("T3 TOTAL BAD: %d" % bad)

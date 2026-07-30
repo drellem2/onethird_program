@@ -22,6 +22,19 @@ reporting `TOTAL BAD: 0`).
 > The reasoning and the instrument are in `docs/OneThird-Species-Hopf-Monoids-Repair.md` and
 > `code/species_repair_6f61/`. Every repaired passage is marked in place; **nothing false has
 > been deleted without being quoted where it stood.**
+>
+> **AND THE SAME CORRECTIONS ARE NOW AT SOURCE (mg-f8fa, `docs/OneThird-Species-Hopf-Monoids-Repair-Remainder.md`,
+> `code/species_remainder_f8fa/`).** Three of the corrections above were made **in this
+> document and left standing in `code/species_7d75/`**, which is the copy a successor
+> re-runs: `t3_bidigare.py` still headed T3d *"three are controls"*; the instrument README
+> still read control (ii)'s counts as measuring *"how differently"* the two products behave;
+> and `t4_one_operation.py` / `t6_fock_and_record.py` still printed the identification with the
+> **character ring of `S_n`** unmarked, inside runs ending `TOTAL BAD: 0`. mg-6f61's
+> `check_doc.py` could not have caught any of it — **it reads this file and nothing else.**
+> All three are repaired at source, **T3d's count and control (ii)'s set equality are now
+> COMPUTED rather than restated**, and `w3_scope.py` is the checker for the instrument: it
+> reports **12 problems** against the pre-repair tree and **0** now. **No claim in this
+> document is softened by any of it** — one is strengthened (§5, control (ii)).
 
 **What this document is.** Daniel asked a question that two prior tickets did not answer.
 mg-ebd8 and mg-af28 both answered *"does our construction reproduce `S_n` representation
@@ -328,6 +341,13 @@ Theorem 10.13 states. ~~Three of the four columns are the control, and they fire
 > structure constants at `n = 5`** — and the theorem itself is reproduced exactly, entry for
 > entry, by mg-a61f's disjoint instrument. **Only the control COUNT was overstated.**
 > Read: *one control, computed twice, and it fires.*
+>
+> **AND IT IS NOW COMPUTED, NOT RESTATED (mg-f8fa).** `t3_bidigare.py` went on printing
+> *"three are controls"* after this box was written; it now carries a **T3e** that measures
+> `c^U_{S,T}(Sol, B) = c^U_{T,S}(Sol, A)` — **0 mismatches at every `n ≤ 5`** — and **fails**
+> if it is false. Its own control, the un-swapped comparison, must fire and does: **2, 26,
+> 170 at `n = 3, 4, 5`**, and cannot fire at `n ≤ 2` where `kS_n` is commutative. Both
+> columns reproduce independently in `code/species_remainder_f8fa/w1_opposite.py`.
 
 ### 2.3 Both instances, one identity (T4)
 
@@ -403,6 +423,16 @@ about Solomon's map that I did not test.
 > **Being located is a real result. Presenting it as verified is not**, and the difference is
 > the difference between *"someone has proved this"* and *"we have checked this"*. The same
 > distinction applies to §4's Fock functors, which are **quoted, not evaluated here**.
+>
+> **AND THE BOUNDARY IS NOW STATED IN THE INSTRUMENT TOO (mg-f8fa).** `t4_one_operation.py`
+> printed `Sol(S_n)/rad = k^{Π_n/S_n} = the character ring of S_n` and
+> `t6_fock_and_record.py` printed the `K(Π)` half — **both unmarked, inside runs ending
+> `TOTAL BAD: 0`**, so a reader of the output had nothing telling them the two equalities in
+> that line are not of the same kind. Both now name **S4** (and **S5**), both unread sources,
+> and the specific untested link: that **Solomon's labelling by cycle types agrees with the
+> orbit labelling by block sizes** is not checked anywhere.
+> `code/species_remainder_f8fa/w3_scope.py` enforces it over **every** occurrence in
+> `code/species_7d75` — eight of them — and fails if a ninth is added unmarked.
 
 ---
 
@@ -592,6 +622,17 @@ Tits product's block intersections are all empty.** It is a statement about the 
 types, which no count could strengthen and no re-count can weaken. **Nothing downstream that
 cites "the band product is invisible to the Hopf structure" — mg-ebd8's and mg-af28's
 spectral work, `λ₂`, `Δ_AT` — needs revising.**
+
+**AND IT IS NOW MEASURED AS A SET EQUALITY, AT SOURCE (mg-f8fa).** The 1 442 failures and the
+1 442 both-non-empty pairs are the **same pairs**, not merely the same count, and every one of
+them returns the **empty composition** — checked in `t5` control (ii) itself and again from
+disjoint code in `code/species_remainder_f8fa/w2_typemismatch.py`, four predictions written
+before the run and four met. **Two controls make it a reading rather than a story:** a
+type-**correct** corruption of the product (mg-6f61's control (v)) fails this column **0**
+times, and control (ii) with its own guard removed fails it **11 300** of 11 301. **The column
+is a type check. It is not a distance.** The instrument README had gone on describing the
+counts as measuring *"how differently"* the two products behave — in its *"conventions that
+have bitten this repo before"* section — and no longer does.
 
 ---
 
@@ -865,6 +906,7 @@ Ordered by expected yield.
 | **S11** | The candidate space is the thirteen entries of §9; rows 4, 5, 8, 9 were **located and not read**; rows 1–3, 6, 7, 10, 11 were read at least in extract | **REPORT ON A SEARCH** | not a claim about the literature. Queries were targeted, not exhaustive |
 | **S12** | ~~The `Aut(P)` form of the radical theorem was **not located** stated in that generality, and this is the weakest claim here~~ | **WITHDRAWN as a claim about the literature** *(mg-6f61, on mg-a61f's X2)* | It is a **corollary** of the quoted AM §10.10 plus the Reynolds operator, so **there is no gap to locate and nothing here waits on a search**. What survives is a much narrower and uninteresting report: I did not find the equivariant form *written down*, and I did not look hard. **No successor literature search should be filed on this row** — see §10 item 2 |
 | **S13** *(mg-6f61)* | §8 C3's *"the smallest poset with `AC(P) ≠ Π[n]` is `{a<c, b<d}`"* was **FALSE**; the smallest is the **3-element chain** | **MEASURED, corrected at source** | 242 labelled posets to `n ≤ 4`; 6 labelled witnesses at `n = 3` in one isomorphism class, 174 at `n = 4`; 11 predictions written before the run, 11 met; a control shows the search can return `n = 2` |
+| **S14** *(mg-f8fa)* | Three of mg-6f61's corrections — **X4's control count, X5's reading of control (ii), and S4/S5's scope** — were made in this document and **left standing in `code/species_7d75/`**, the copy a successor re-runs | **MEASURED, and repaired at source** | `code/species_remainder_f8fa/w3_scope.py`, the same checker, reports **12 problems** against the tree at `83ac472` and **0** after. T3d's count and control (ii)'s set equality are now **computed** by the source instrument and it **fails** if either is wrong. **No claim is softened; §5's control (ii) conclusion is strengthened from a count on `[4]` to a statement about the two maps' types at every ground set.** mg-6f61's `check_doc.py` reads one file and could not have caught any of it |
 | **NOT CLAIMED** | that anything here is new; that anything here is publishable; that the searches were exhaustive; that our `F` is or is not one of the published Hopf monoids; that anything about the walk, `λ₂`, `Δ_AT` or the pricing follows; that the framework says anything about `S^λ`, `f^λ` or multiplicities | | |
 
 ---
@@ -872,8 +914,9 @@ Ordered by expected yield.
 ## 12. REPRODUCE
 
 ```
-cd code/species_7d75      && ./run_all.sh   # ~46 s, pure Python 3, NO NETWORK
-cd code/species_repair_6f61 && ./run_all.sh # ~30 s, the mg-6f61 repair, NO NETWORK
+cd code/species_7d75         && ./run_all.sh # ~46 s, pure Python 3, NO NETWORK
+cd code/species_repair_6f61  && ./run_all.sh # ~30 s, the mg-6f61 repair, NO NETWORK
+cd code/species_remainder_f8fa && ./run_all.sh # ~15 s, the mg-f8fa remainder, NO NETWORK
 ```
 
 Committed outputs: `out_selftest.txt` (759 assertions), `out_t1_grading.txt`,
@@ -882,6 +925,14 @@ Committed outputs: `out_selftest.txt` (759 assertions), `out_t1_grading.txt`,
 The repair's outputs are `code/species_repair_6f61/out_r1_smallest.txt`,
 `out_r2_columns.txt`, `out_r3_quotes.txt` and `out_check_doc.txt`; its
 `R2 PREDICTIONS MISSED` line is **not** zero and is meant to be read.
+
+The remainder's outputs are `code/species_remainder_f8fa/out_selftest.txt` (2 114 assertions),
+`out_w1_opposite.txt`, `out_w2_typemismatch.txt` and `out_w3_scope.txt`; **`out_w3_scope_before.txt`
+is the same checker run against the pre-repair tree and reports `FAIL (12 problems)`. It is
+committed on purpose** — a checker written after the fix and never seen to fail is not a
+checker. mg-6f61's battery and mg-a61f's battery both re-run **unmodified** against the
+repaired tree; `CHECK_DOC` is `PASS`, and mg-a61f's output is **byte-identical**
+(`A4 TOTAL BAD: 1`, which is X1, and 0 elsewhere).
 
 **Sources**
 
@@ -1005,3 +1056,40 @@ expensive half.**
 >
 > The repair's own instrument reports **2 of 45 predicted cells missed** (§5). Both are
 > published rather than tidied, because the alternative is a battery that cannot be wrong.
+
+### 14.3 The eighth defect was found, and it was in the code — added by mg-f8fa
+
+**§14.2 predicted that a further defect, if one existed, would be *"outside every beam
+currently pointed at this document"*. It was, and the reason is sharper than "nobody looked":
+every beam was pointed at the document.**
+
+mg-6f61 built the strongest control in this arc — `check_doc.py`, which requires every false
+sentence to survive **only** inside the strike that replaces it. It passes. **It opens one
+file.** Three of the corrections it certifies were made here and left in force in
+`code/species_7d75/`: T3d's header still read *"three are controls"*, the instrument README
+still read control (ii)'s counts as a near miss — in a section titled *"conventions that have
+bitten this repo before"*, which exists to stop exactly that — and the character-ring
+identification printed unmarked inside runs ending `TOTAL BAD: 0`.
+
+**Three properties, and the third is the one that generalises:**
+
+1. **A passing checker is read as coverage.** `check_doc.py` reporting `PASS, 0 problems` is
+   what made the instrument look repaired. Nothing said which files it read.
+2. **The defect landed in the section written to prevent it.** *"Conventions that have bitten
+   this repo before"* was carrying one.
+3. **The fix is one line of scope, not more diligence: when a repair corrects a statement that
+   also appears in code or in committed output, the checker for that repair must take the code
+   directory as a target too.** `w3_scope.py` does, it takes the directory as an argument so
+   it can be aimed at any tree, and **it was observed to fail before it was observed to pass** —
+   12 problems at `83ac472`, 0 now.
+
+**And the same failure was found one level down, inside that checker, and is kept on the
+record.** Its first version accepted a bare *"REPAIRED"* near a forbidden string as evidence
+the string was being quoted rather than asserted. The pre-repair README disarmed it **by
+accident** — an unrelated *"the error mg-1953 repaired"* four lines above the near-miss bullet
+made the bullet score `ok` on a tree where it was plainly false. **A checker that an adjacent
+unrelated word can disarm reports coverage it does not have**, which is this section's finding
+arriving against its own instrument. The marker now has to name the repair.
+
+**Nothing in §14.3 is a retraction.** Every conclusion the corrected numbers were cited for
+survives, and control (ii)'s is now stronger than the version that was corrected.

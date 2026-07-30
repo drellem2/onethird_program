@@ -57,7 +57,30 @@ T5e  CONTROLS -- four corruptions; two fire, two do not and why
       is the product this repo's walk runs on; it is NOT the product of
       the Hopf monoid of set compositions, and it should break.
       F  : prod closure 1442  coprod closure 0  assoc 252  coassoc 0  compat 11020
-      control fires: YES
+      control fires: YES -- ON A TYPE MISMATCH, see below
+
+      WHAT THE 1442 IS, AND IT IS NOT A NEAR MISS (mg-f8fa, on mg-a61f's
+      X5).  Of 11301 pairs (x, y) tested, 1442 have BOTH ground sets
+      non-empty, 1442 fail product closure, and the two sets are EQUAL
+      rather than merely equinumerous: verified.
+
+      mu_{S,T} takes its two factors on DISJOINT ground sets.  The
+      Tits product intersects blocks.  Across disjoint non-empty sets
+      every intersection is empty, so the Tits product returns the
+      EMPTY composition on a non-empty ground set, which is not a face
+      of it.  The control fires on a TYPE MISMATCH -- the two maps have
+      different domains of definition -- and not because the Tits
+      product nearly works.  The counts are weaker evidence than they
+      look, and no count on either side could strengthen or weaken it.
+
+      THE CONCLUSION DRAWN FROM THIS CONTROL IS NOT withdrawn, and it
+      rests on the type statement rather than on the counts: THE BAND
+      PRODUCT IS INVISIBLE TO THE HOPF STRUCTURE.  That holds at every
+      ground set rather than on [4].  Nothing downstream that cites it
+      -- mg-ebd8's and mg-af28's spectral work, lambda_2, Delta_AT --
+      needs revising.  See code/species_remainder_f8fa/w2_typemismatch
+      for the same measurement from disjoint code, with the control
+      that a type-CORRECT corruption fails this column 0 times.
 
   (iii) keep every object and the coproduct, but REVERSE the order of
       concatenation in the product.  Associativity survives, so this
