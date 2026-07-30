@@ -1,0 +1,43 @@
+==============================================================================
+mg-3b51 AUDIT 3 -- R2, THE E8 REPLACEMENT
+==============================================================================
+
+SCOPE, INHERITED AND RESTATED.  The band tested is the one the
+document IDENTIFIES (feasible words of the poset shelling
+antimatroid, greedy product), not one read off Björner's Thm 4.15 or
+his (4.8).  Neither mg-d673 nor mg-1953 could obtain those, and
+neither could I.  Everything below is therefore a check of the
+document's own object; it is NOT a check that the object is
+Björner's.  mg-1953's E8 row states this limit and it is correct.
+
+--------------------------------------------------------------------------------------------------------------
+  n  classes  band ok phi->F(P)        hom img closed     proper  injective band<=F(P)
+--------------------------------------------------------------------------------------------------------------
+  1        1      1/1      1/1        1/1        1/1        0/1        0/1        0/1
+  2        2      2/2      2/2        2/2        2/2        0/2        0/2        0/2
+  3        5      5/5      5/5        5/5        5/5        5/5        0/5        0/5
+  4       16    16/16    16/16      16/16      16/16      16/16       0/16       0/16
+  5       63    63/63    63/63      63/63      63/63      63/63       0/63       0/63
+--------------------------------------------------------------------------------------------------------------
+
+    'proper' counts posets where the IMAGE is a PROPER subset of
+    F(P).  mg-1953 claims proper EXACTLY for n >= 3: 0/2 at n = 2,
+    then all.  'injective' must be 0 everywhere.
+
+------------------------------------------------------------------------------
+C7  THE ANTICHAIN CARDINALITIES.  |band| against |F(P)|.
+    band = A000522 (arrangements of a set), F(P) = A000670
+    (ordered Bell / Fubini).
+------------------------------------------------------------------------------
+  n         |band| |F(antichain)|  band > F?
+  1              2              1        YES
+  2              5              3        YES
+  3             16             13        YES
+  4             65             75         no
+  5            326            541         no
+
+    A000522 : 1, 2, 5, 16, 65, 326    A000670 : 1, 1, 3, 13, 75, 541
+    The document quotes 'free LRB 5, 16 vs ordered Bell 3, 13 at
+    n = 2, 3'.  Those are the n = 2 and n = 3 entries above.
+
+==============================================================================
