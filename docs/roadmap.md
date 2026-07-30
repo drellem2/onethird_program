@@ -199,31 +199,47 @@ taken for identity of the structure.**
 shadow"*, and asked an auditor whether the shadow was enough. It was not — and that disclosure is what aimed
 the audit at it.
 
-## Now (in flight) — 2026-07-30 20:10
+## Where this stands, 2026-07-30 22:00 — the mathematics is settled; the CHECKING APPARATUS is what is churning
 
-**Every repair filed today has landed. What is in flight is four independent audits and nothing else.**
+**Worth stating plainly, because it is the product-level read and it is not visible from any single ticket.**
 
-- **mg-73df** — audit of the mg-7d75 repair, scoped to the **final document state** (mg-6f61 + mg-f8fa),
-  because one fixed the prose and the other fixed what the prose described. Carries a **seam check** neither
-  repair's brief asks for; if it finds nothing it must say **what would have counted**.
-- **mg-2060** — audit of mg-db09 (the Bratteli split). Primary target: **verify the do-not-develop instruction
-  BY MEASUREMENT** — a brief is not a control.
-- **mg-f922** — audit of mg-e1d0. Must verify the **enlargement** was recorded where a reader of the open
-  finding meets it, not merely that the false sentence was struck.
-- **mg-1c80** — audit of mg-da45. The failure mode is a **new plausible reason that is also not what decides**;
-  read the predicate, not the repair's description of it.
+Across today's audits on this lineage the mathematics has come back **sound, repeatedly** — *0 BROKEN
+mathematics*, every committed number reproducing from disjoint instruments, headline results confirmed and in
+two cases **strengthened** beyond what was claimed. **What keeps failing is the apparatus that certifies it**,
+and the recent findings are almost entirely of that kind: a printed extent wider than the code reads, a presence
+test passing while the figure a reader meets is wrong, a check measuring label *stability* rather than
+*correctness*, a claim struck in one section and live in another with every checker green.
 
-## Next
+**I considered stopping this lineage and decided against it — and the reasoning matters more than the verdict,
+because I made the opposite call at 17:35 on a misread and had to retract it.**
 
-- **mg-344a** — Daniel workspace: review the obstruction. `assignee=human`, so it waits on him. Today's audited
-  evidence is appended to it, so it is usable on sight.
-- **Held deliberately, not forgotten:** the quasi-hereditary follow-up — *what does that property buy, and does
-  our non-semisimple side have an analogue of the canonical basis multiplicity-freeness gives us for free?* Not
-  filed until mg-2060 reports, because it would rest entirely on an unaudited result.
+- **The defect rate is NOT diminishing.** Today's audits on it returned 3, 2, 2, 2, 2, 1, 1, 1, 1, 0, 0, 0
+  BROKEN. A stop is defensible when the residual is shrinking toward the adversarial; this is not that.
+- **The defects are reader-visible, not adversarial-shaped.** *"The figure a reader meets is wrong"* and *"a
+  retraction invisible to whoever holds the belief"* are ordinary readers encountering false statements — not
+  a mutation crafted to evade.
+- **But the fix pattern has shifted, and that is the useful part: the last three repairs removed failure modes
+  rather than adding detectors** — derive rather than duplicate, print the extent, instrument the predicate so
+  the reason is produced by the code path. **Six gates were built on this document and most were later found
+  unable to fail in some direction; the structural moves have held better.** Prefer them.
 
-*(Decay note, measured: this section was rebuilt at 19:20 and was **stale again by 20:10** — 8 of the 11 ticket
-IDs it listed had completed within 50 minutes. The check is mechanical — read the status of every ID listed and
-treat any `done` as a rot marker — and at this cadence it needs running every sweep, not on provocation.)*
+**So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
+on an audit that measured its extents in both directions — that, not fatigue, is the signal.
+
+## Now (in flight) — 2026-07-30 22:00
+
+- **mg-04a8** — 2 of 9 gates still move nothing under deletion, and the repair's own check holds on an artifact
+  where every row reads `[FAIL]`.
+- **mg-d633** — two of four printed extents are **wider than the code reads**, and a quotation is struck in §4
+  while live in §0 with every checker green.
+- **mg-835f** — audit of the figure-gate repair.
+
+## Next (gated, releases automatically)
+
+- **mg-e7bc** (on mg-04a8), **mg-6cb9** (on mg-d633) — both pre-filed in the same action as their parents.
+- **mg-344a** — Daniel workspace, `assignee=human`, waits on him; today's audited evidence is appended.
+- **Held, not forgotten:** the quasi-hereditary follow-up stays unfiled — **D10 is unverified**, so a ticket
+  built on it would rest on a retracted claim.
 
 ## Later (decided, not yet filed)
 - `onethird_program` ships two `controls.py` and two `run_all.sh` and has **no CI of any kind** — by the
