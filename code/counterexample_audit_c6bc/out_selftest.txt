@@ -1,0 +1,25 @@
+==============================================================================
+SELFTEST -- controls on kern6bc.py
+==============================================================================
+
+  [POSITIVE] enumeration against A000112, n = 1..7                    ok
+             {1: 1, 2: 2, 3: 5, 4: 16, 5: 63, 6: 318, 7: 2045}
+  [POSITIVE] e(antichain_4) = 24 and e(chain_4) = 1                   ok
+             got 24 and 1
+  [THEOREM ] sum of m_X over ALL levels = e(P), n = 4, 5              ok
+             19 posets checked, 0 disagreements
+  [NEGATIVE] breaking the level test changes qmass                    ok
+             3 of 16 posets at n = 5 change
+  [NEGATIVE] the same loop on #minimal elements DOES differ           ok
+             50 of 88 posets at n = 6 -- so 'invariant under duality' is a
+             measurement and not a property of the loop
+  [NEGATIVE] mean-instead-of-max changes the extremal set             ok
+             4 of 16 posets at n = 5 change status
+  [POSITIVE] pruned enumeration = full enumeration on e <= 9, n = 5..8 ok
+             n=5 32/32  n=6 60/60  n=7 97/97  n=8 144/144
+  [POSITIVE] canonical() is blind to 120 relabellings                 ok
+             0 disagreements
+
+==============================================================================
+ALL SELFTESTS PASS, AND THE THREE NEGATIVE CONTROLS FIRE.
+==============================================================================

@@ -1,0 +1,82 @@
+A2  THE CUT-ELEMENT THEOREM, INDEPENDENTLY DERIVED AND PROBED
+
+==============================================================================
+1.  THE THEOREM, re-derived here and then verified by construction
+==============================================================================
+
+    Let x be a cut element of Q -- comparable to every other element -- and
+    P = Q - x.  Write D = {z : z < x} and U = {z : z > x}; D u U = P because x
+    is comparable to everything, and transitivity puts every element of D below
+    every element of U in P.  So in every linear extension of P the whole of D
+    precedes the whole of U, and there is exactly one slot -- the D/U boundary
+    -- at which x may be inserted.  Insertion is therefore a BIJECTION
+    L(P) -> L(Q).
+
+      e(Q) = e(P).  Inc(Q) = Inc(P), x being comparable to everything.  The
+      bijection preserves the relative order of every pair in P, so p(y,z) is
+      unchanged for every incomparable pair, hence delta(Q) = delta(P),
+      tie-freeness and majority-acyclicity are inherited, and L*(Q) is L*(P)
+      with x at the same boundary.
+
+    THAT IS THE WHOLE ARGUMENT, and it is the repair's.  It is correct.  What
+    it does NOT cover is qmass, which the repair says plainly and measures.
+
+  cut points (P, D), the repair's count      : 257
+  cut extensions Q up to isomorphism         : 209
+  (e, delta, qmass) inherited, of those      : 209
+  failures                                   : 0
+
+The repair prints 257.  That is the (poset, cut point) count; the
+count of extensions up to isomorphism is 209.  Both give 0 failures, so
+the figure is right and the convention is worth naming, not correcting.
+
+==============================================================================
+2.  NC1 -- 'A NEGATIVE CONTROL, AND IT FIRES'.  IT CANNOT NOT FIRE.
+==============================================================================
+
+    NC1 adjoins a new MAXIMAL element above an arbitrary PROPER down-set D and
+    reports that (e, delta, qmass) is not inherited on 1378 of 1378.  It is a
+    conjunction, and its first conjunct cannot hold:
+
+      If D is a proper down-set then P \ D contains a maximal element m of P.
+      Take any linear extension of P and move m to the end; x may then be
+      placed last, or immediately before m.  Two distinct placements, so
+      e(Q) > e(P) for EVERY such D.
+
+    So "(e, delta, qmass) all inherited: 0" is a theorem about e alone and the
+    control is incapable of failing -- which is exactly mg-3b51's finding
+    against mg-1953, the one the repair says it applied "before an auditor has
+    to".  It applied it to C2 and not to NC1.
+
+    The control that CAN fail is the same measurement on delta alone, and on
+    qmass alone.  Those are run here.  They are not vacuous:
+
+  non-cut adjunctions tested                 : 1378
+  e(Q) = e(P)          -- CANNOT HAPPEN      : 0
+  delta(Q) = delta(P)  -- the live control   : 53
+  qmass(Q) = qmass(P)  -- the live control   : 29
+  both delta and qmass inherited             : 9
+
+FINDING (A2-1).  NC1 as published is a control that must fire: its e
+conjunct is 0 of 1378 by a one-line argument, independently of delta and
+qmass.  Re-run on the statistic the theorem is USED for, it still
+fires but not perfectly: delta survives a non-cut adjunction 53 times
+in 1378 (3.8%).  So 'inherited is a property of cut extension and not
+of adjoining an element' is true as a tendency and false as an
+implication.  Nothing downstream depends on it -- the dependence
+argument only needs the theorem's forward direction -- but the
+sentence claims a converse the measurement does not support.
+
+==============================================================================
+3.  DOES A WEAKER HYPOTHESIS DO THE SAME WORK?
+==============================================================================
+
+    The theorem's hypothesis is used twice: once to get Inc(Q) = Inc(P) (which
+    needs x comparable to EVERYTHING and cannot be weakened), and once to get
+    the single insertion slot.  Section 2 answers the empirical form of the
+    question: 53 of 1378 non-cut adjunctions preserve delta anyway.  Those are
+    cases where the CONCLUSION holds without the hypothesis, so the hypothesis
+    is sufficient and not necessary -- but no weaker hypothesis stated in the
+    repair would capture them, and the repair does not claim one.  The theorem
+    is used only in the direction it is proved.  NOT A FINDING.
+
