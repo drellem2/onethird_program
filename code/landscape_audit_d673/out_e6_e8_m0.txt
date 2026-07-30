@@ -1,0 +1,76 @@
+==============================================================================
+mg-d673 AUDIT INSTRUMENT 3 -- E6, M_0 AND E8: the three things the
+target's own pre-filed audit ranks 1-3 as UNMEASURED.
+==============================================================================
+
+------------------------------------------------------------------------------
+E6  Brown's G = { F : sigma_i(F) >= 0, i in J } vs the repo's F(P),
+    with sign vectors READ OFF A NUMERIC REALISATION of the braid
+    arrangement (not defined combinatorially from the block order).
+------------------------------------------------------------------------------
+  n      faces   encoding      G == F(P)   Tits == repo chambers==e(P)
+  2          3   faithful          0 bad          0 bad          0 bad
+  3         13   faithful          0 bad          0 bad          0 bad
+  4         75   faithful          0 bad          0 bad          0 bad
+  5        541   faithful          0 bad          0 bad          0 bad
+
+------------------------------------------------------------------------------
+M_0  Brown's total-multiplicity identity, run with the DOCUMENT's
+     stated rule (blocks are antichains) and with the INSTRUMENT's
+     docstring rule (blocks are antichains AND the quotient is
+     acyclic).  They differ; only one of them satisfies Brown.
+------------------------------------------------------------------------------
+  n  classes  doc rule: sum m != |L(P)| code rule: sum m != |L(P)| extra flats
+  2        2              0 of 2 posets              0 of 2 posets          0
+  3        5              0 of 5 posets              0 of 5 posets          0
+  4       16             1 of 16 posets             0 of 16 posets          1
+      first witness at n=4: P = [a<d,b<c], |L(P)| = 6
+        document's rule gives sum m = 7  (Brown's (10) says 6)
+        instrument's rule gives sum m = 6  OK
+        spurious level: ac|bd with m = 1 (all blocks antichains, quotient NOT acyclic)
+  5       63            10 of 63 posets             0 of 63 posets         18
+
+------------------------------------------------------------------------------
+E8  Bjorner's greedoid band on the poset shelling antimatroid vs
+    F(P).  The document says: 'A proper submonoid of ours'.
+------------------------------------------------------------------------------
+  n=2, 2 classes:
+     the band's IMAGE under w -> ({w_1}..{w_k},rest) is in F(P): 2 of 2
+     the BAND ITSELF is strictly LARGER than all of F(P): 2 of 2
+     word -> move map is INJECTIVE              : 0 of 2
+     its IMAGE is closed under the repo product : 2 of 2
+     the map is a monoid HOMOMORPHISM           : 2 of 2
+     its IMAGE is a PROPER submonoid of F(P)    : 0 of 2
+  n=3, 5 classes:
+     the band's IMAGE under w -> ({w_1}..{w_k},rest) is in F(P): 5 of 5
+     the BAND ITSELF is strictly LARGER than all of F(P): 3 of 5
+     word -> move map is INJECTIVE              : 0 of 5
+     its IMAGE is closed under the repo product : 5 of 5
+     the map is a monoid HOMOMORPHISM           : 5 of 5
+     its IMAGE is a PROPER submonoid of F(P)    : 5 of 5
+  n=4, 16 classes:
+     the band's IMAGE under w -> ({w_1}..{w_k},rest) is in F(P): 16 of 16
+     the BAND ITSELF is strictly LARGER than all of F(P): 0 of 16
+     word -> move map is INJECTIVE              : 0 of 16
+     its IMAGE is closed under the repo product : 16 of 16
+     the map is a monoid HOMOMORPHISM           : 16 of 16
+     its IMAGE is a PROPER submonoid of F(P)    : 16 of 16
+  n=5, 63 classes:
+     the band's IMAGE under w -> ({w_1}..{w_k},rest) is in F(P): 63 of 63
+     the BAND ITSELF is strictly LARGER than all of F(P): 0 of 63
+     word -> move map is INJECTIVE              : 0 of 63
+     its IMAGE is closed under the repo product : 63 of 63
+     the map is a monoid HOMOMORPHISM           : 63 of 63
+     its IMAGE is a PROPER submonoid of F(P)    : 63 of 63
+
+  The antichain, in detail (the case the document names):
+  n     |band|     |F(P)|    |image|        2^n  band supports image supports
+  2          5          3          3          4              4            2
+  3         16         13         10          8              8            5
+  4         65         75         41         16             16           12
+  5        326        541        206         32             32           27
+
+  |F(antichain)| is the ordered Bell number; |band| at the antichain
+  is sum_k n!/(n-k)! = the free left regular band on n generators.
+
+==============================================================================

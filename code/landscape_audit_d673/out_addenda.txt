@@ -1,0 +1,60 @@
+==============================================================================
+mg-d673 AUDIT -- ADDENDA
+==============================================================================
+
+------------------------------------------------------------------------------
+A. Jenca-Sarkoci Example 3.7: P = B_2, the 4-element Boolean lattice
+   (0 < a, 0 < b, a < 1, b < 1), recomputed with my own instruments
+------------------------------------------------------------------------------
+   |AC(P)| = |O(P)| = 11      (target/JS say 11)   OK
+   mu(0,1)                 = -2      (target says -2)     OK
+   spheres = |mu|          = 2      (JS say 2)           OK
+   e(P) = 2, connected = True, sphere dimension n-3 = 1
+
+------------------------------------------------------------------------------
+B. THE POPULATIONS THE DOCUMENT'S CLAIMS ARE ABOUT
+------------------------------------------------------------------------------
+   read from the target's OWN committed out_identify_lattice.txt:
+     n=2:   2 classes   P2 n/a (not run)
+     n=3:   5 classes   P2 run
+     n=4:  16 classes   P2 run
+     n=5:  63 classes   P2 run
+     n=6: 318 classes   P2 run
+
+   P1 population (rows n=2..6)                    = 404
+   P2 population (rows n=3..6; P2 is n/a for n<3) = 402
+   all isomorphism classes with 1 <= n <= 6       = 405
+
+   ledger E3 says the two definitions agree 'on all 405 classes at
+   n <= 6'                                        -> actual 404   *** the number is 404 ***
+   sec 6 item 5 says P2 'passes on 405 posets'    -> actual 402   *** the number is 402 ***
+
+------------------------------------------------------------------------------
+C. THE PAIR COUNTS, RECOMPUTED (sum over iso classes of |F(P)|^2)
+------------------------------------------------------------------------------
+   n=1: sum |F(P)|^2 =        1   target/note quote        1   OK
+   n=2: sum |F(P)|^2 =       13   target/note quote       13   OK
+   n=3: sum |F(P)|^2 =      321   target/note quote      321   OK
+   n=4: sum |F(P)|^2 =    13853   target/note quote    13853   OK
+   n=5: sum |F(P)|^2 =   922073   target/note quote   922073   OK
+   total over n=1..5                    = 936261
+   (the document's sec 0 and its L2 table quote '922 073 pairs' as the
+    n <= 5 figure; 922 073 is the n = 5 ROW.  The n <= 5 total is 936261.)
+
+------------------------------------------------------------------------------
+D. |free LRB on n generators| vs |F(antichain)| = ordered Bell number
+------------------------------------------------------------------------------
+   n free LRB (A000522) F(antichain) (A000670) band bigger?
+   1              2                  1        YES
+   2              5                  3        YES
+   3             16                 13        YES
+   4             65                 75         no
+   5            326                541         no
+   6           1957               4683         no
+
+   The document says Bjorner's greedoid band at the antichain 'is the
+   free LRB' AND is 'a proper submonoid of ours', in the same table
+   cell.  At n = 2 and n = 3 the free LRB is strictly LARGER than the
+   whole of F(antichain), so it cannot be a submonoid of it.
+
+==============================================================================

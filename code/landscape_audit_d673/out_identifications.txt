@@ -1,0 +1,64 @@
+==============================================================================
+mg-d673 AUDIT INSTRUMENT 4 -- ARE THE IDENTIFICATIONS TOO GENEROUS?
+==============================================================================
+
+------------------------------------------------------------------------------
+I1  BROWN section 4.3 -- chains in J(P), with the product formed by
+    LATTICE operations only (joins and meets of order ideals).
+------------------------------------------------------------------------------
+  n  classes  J(P) dist sum|chains|    = sum|F(P)|    bijection products agree max <-> lin ext
+  1        1        1/1          1           1 OK        0 bad     0 bad of 1          0 bad
+  2        2        2/2          5           5 OK        0 bad    0 bad of 13          0 bad
+  3        5        5/5         37          37 OK        0 bad   0 bad of 321          0 bad
+  4       16      16/16        397         397 OK        0 bad 0 bad of 13853          0 bad
+  5       63      63/63       5757        5757 OK        0 bad 0 bad of 922073          0 bad
+
+    HYPOTHESIS CHECK.  Brown section 4.3 asks for a finite
+    DISTRIBUTIVE lattice L.  J(P) is one (column 3).  By Birkhoff's
+    theorem every finite distributive lattice is J(P) for a unique
+    finite poset P, so section 4.3's class and ours are the SAME
+    class -- the citation does not require anything we lack, and it
+    does not cover a strictly smaller class either.
+
+------------------------------------------------------------------------------
+I2  CZEDLI-LENKEHEGYI: O(P) = { Ker f : f : P -> Q order-preserving,
+    Q ANY poset }, built by searching all labelled posets Q, against
+    the repo's AC(P).  Equality of SETS; both are ordered by
+    refinement, so equality of sets is equality of LATTICES.
+------------------------------------------------------------------------------
+  n  classes sum|O(P)| (CL) sum|AC(P)| (repo)   disagree
+  1        1              1              1   0 posets
+  2        2              4              4   0 posets
+  3        5             24             24   0 posets
+  4       16            206            206   0 posets
+  5       63           2353           2353   0 posets
+
+    NOTE ON WHAT THIS DOES AND DOES NOT SETTLE.  It settles that the
+    repo's AC(P) IS the lattice of order congruences as that object
+    is DEFINED in the modern literature.  It does not verify that
+    Sturm (1971) or Czedli-Lenkehegyi (1983) state it -- neither the
+    target nor this audit read those papers; both take the
+    attribution from Jenca-Sarkoci's citation of them.
+
+------------------------------------------------------------------------------
+I3  'BROWN'S THEOREM 2 IS STRICTLY SHARPER THAN WHAT THE REPO USES'
+    -- both sides run, and every level compared.  A level where one
+    is BETTER than the other is a level where they DISAGREE.
+------------------------------------------------------------------------------
+  n  classes     levels  disagreements levels Brown names 0
+  1        1          1              0                  0
+  2        2          4              0                  1
+  3        5         24              0                 11
+  4       16        206              0                125
+  5       63       2353              0               1674
+
+    READING.  The two agree at EVERY level.  So Brown's Theorem 2 is
+    not sharper in the sense a bound is sharper -- there is no case
+    where it gives a better number, because it gives the SAME
+    number.  What it gives that the repo's identity does not is the
+    answer in CLOSED FORM: the spectrum-carrying levels are named
+    a priori rather than discovered by a solve.  The document says
+    'strictly more informative', which is right; the commit subject
+    says 'STRICTLY SHARPER', which is a bound word and is not.
+
+==============================================================================

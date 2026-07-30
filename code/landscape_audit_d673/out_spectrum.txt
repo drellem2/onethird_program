@@ -1,0 +1,73 @@
+==============================================================================
+mg-d673 AUDIT INSTRUMENT 2 -- THE CLOSED FORM AGAINST THE ACTUAL
+MATRIX SPECTRUM, IN EXACT RATIONAL ARITHMETIC.
+The counting identity is not used anywhere in this file.
+==============================================================================
+
+------------------------------------------------------------------------------
+2.1  THE WORKED EXAMPLE P = {a<b, c<d}, against the note's OWN
+     published sec 5a and sec 5b tables
+------------------------------------------------------------------------------
+  |F(P)| = 26 moves, |L(P)| = 6 linear extensions, |AC(P)| = 14 levels
+
+  sec 5a: level -> multiplicity, closed form vs the note's published table
+     abcd       closed form 0   note 0   OK
+     a|bcd      closed form 0   note 0   OK
+     ab|cd      closed form 0   note 0   OK
+     abc|d      closed form 0   note 0   OK
+     abd|c      closed form 0   note 0   OK
+     ac|bd      closed form 1   note 1   OK
+     acd|b      closed form 0   note 0   OK
+     a|b|cd     closed form 0   note 0   OK
+     a|bc|d     closed form 1   note 1   OK
+     a|bd|c     closed form 1   note 1   OK
+     ab|c|d     closed form 0   note 0   OK
+     ac|b|d     closed form 1   note 1   OK
+     ad|b|c     closed form 1   note 1   OK
+     a|b|c|d    closed form 1   note 1   OK
+     sum of multiplicities = 6, |L(P)| = 6  -> OK
+     levels covered: 14 of 14 in the note's table; disagreements: 0
+
+  sec 5b under w1 (the note's own published column):
+     ac|bd      lambda = 3/16     note says 3/16      OK
+     a|bc|d     lambda = 15/32    note says 15/32     OK
+     a|bd|c     lambda = 13/32    note says 13/32     OK
+     ac|b|d     lambda = 9/32     note says 9/32      OK
+     ad|b|c     lambda = 11/32    note says 11/32     OK
+     a|b|c|d    lambda = 1        note says 1         OK
+     dim ker multiset [1, 1, 1, 1, 1, 1], note says [1, 1, 1, 1, 1, 1]  OK ; sum 6 of 6 (M is diagonalisable)
+
+  sec 5b under w2 (the note's own published column):
+     ac|bd      lambda = 11/32    note says 11/32     OK
+     a|bc|d     lambda = 9/16     note says 9/16      OK
+     a|bd|c     lambda = 17/32    note says 17/32     OK
+     ac|b|d     lambda = 13/32    note says 13/32     OK
+     ad|b|c     lambda = 11/32    note says 11/32     OK
+     a|b|c|d    lambda = 1        note says 1         OK
+     dim ker multiset [2, 1, 1, 1, 1], note says [2, 1, 1, 1, 1]  OK ; sum 6 of 6 (M is diagonalisable)
+
+  sec 5b under w3 (the note's own published column):
+     ac|bd      lambda = 7/32     note says 7/32      OK
+     a|bc|d     lambda = 11/32    note says 11/32     OK
+     a|bd|c     lambda = 7/16     note says 7/16      OK
+     ac|b|d     lambda = 1/4      note says 1/4       OK
+     ad|b|c     lambda = 9/32     note says 9/32      OK
+     a|b|c|d    lambda = 1        note says 1         OK
+     dim ker multiset [1, 1, 1, 1, 1, 1], note says [1, 1, 1, 1, 1, 1]  OK ; sum 6 of 6 (M is diagonalisable)
+
+------------------------------------------------------------------------------
+2.2  EXHAUSTIVE SWEEP: closed form vs dim ker(M - lambda I), generic
+     weights, exact rationals
+------------------------------------------------------------------------------
+     (posets with |L(P)| <= 40; the exact nullity is O(e^3) per eigenvalue)
+
+  n  classes  checked    skipped  sum m = e dims match diagonalisable
+  1        1        1          0      0 bad      0 bad      0 bad
+  2        2        2          0      0 bad      0 bad      0 bad
+  3        5        5          0      0 bad      0 bad      0 bad
+  4       16       16          0      0 bad      0 bad      0 bad
+  5       63       61          2      0 bad      0 bad      0 bad
+
+==============================================================================
+INSTRUMENT 2 TOTAL DISAGREEMENTS: 0
+==============================================================================
