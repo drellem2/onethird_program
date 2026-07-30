@@ -104,6 +104,7 @@ def probe_one(P):
         "c1": c1, "c2": c2, "c3_lap": c3_lap, "c3_bij": c3_bij,
         "c1_untwisted": c1_untw, "c2_untwisted": c2_untw,
         "ker_rel": kernel_dim(L_rel_tw),
+        "ker_abs": kernel_dim(L_abs_tw),
         "antichain": P.is_antichain(),
         "chain": P.is_chain(),
         "disconnected": not P.is_connected(),
@@ -184,6 +185,15 @@ def main():
           % (len(nondeg), tot, sum(r["c1"] for r in nondeg)))
     both_triv = [r for r in rows if r["nLE"] == 1]
     print("posets where BOTH sides are the zero 1x1 matrix: %d" % len(both_triv))
+    print("excluded as degenerate: %d chains (|L(P)|=1) union %d antichains (no free "
+          "ridge); the n=1 poset is both, so %d distinct"
+          % (sum(1 for r in rows if r["chain"]),
+             sum(1 for r in rows if r["antichain"]), tot - len(nondeg)))
+    for n in range(1, nmax + 1):
+        rs = [r for r in nondeg if r["n"] == n]
+        if rs:
+            print("  largest non-degenerate instance at n=%d: |L(P)| = %d"
+                  % (n, max(r["nLE"] for r in rs)))
 
     print()
     print("=" * 78)
@@ -194,6 +204,26 @@ def main():
     for r in rows:
         kd[r["ker_rel"]] = kd.get(r["ker_rel"], 0) + 1
     print("kernel dimension histogram over all %d posets: %s" % (tot, dict(sorted(kd.items()))))
+
+    print()
+    print("=" * 78)
+    print("CROSS-CHECK -- Hodge theory vs the homology code, two independent routes")
+    print("In top degree the Hodge Laplacian has no up-part, so")
+    print("   ker L^abs_top  =  H_{n-2}(F(P); Q)   (absolute top homology).")
+    print("The Laplacian route computes the left side from the top two dimensions")
+    print("only; controls.py POSITIVE CONTROL 4 computes the right side from the")
+    print("ranks of every boundary matrix of the whole complex.  They must agree,")
+    print("and the known answer is 1 iff P is an antichain, else 0.")
+    print("=" * 78)
+    agree = sum(1 for r in rows
+                if r["ker_abs"] == (1 if r["antichain"] else 0))
+    print("ker L^abs_top matches (1 iff antichain, else 0) on %d/%d posets"
+          % (agree, tot))
+    ka = {}
+    for r in rows:
+        ka[r["ker_abs"]] = ka.get(r["ker_abs"], 0) + 1
+    print("ker L^abs_top histogram: %s   (antichains in population: %d)"
+          % (dict(sorted(ka.items())), sum(1 for r in rows if r["antichain"])))
 
     print()
     print("=" * 78)

@@ -36,12 +36,29 @@ AND at least one generator is forbidden somewhere (so rel != abs).
 ==============================================================================
 non-degenerate posets: 394 of 405; claim (1) holds on 394 of them
 posets where BOTH sides are the zero 1x1 matrix: 6
+excluded as degenerate: 6 chains (|L(P)|=1) union 6 antichains (no free ridge); the n=1 poset is both, so 11 distinct
+  largest non-degenerate instance at n=3: |L(P)| = 3
+  largest non-degenerate instance at n=4: |L(P)| = 12
+  largest non-degenerate instance at n=5: |L(P)| = 60
+  largest non-degenerate instance at n=6: |L(P)| = 360
 
 ==============================================================================
 KERNEL OF THE TWISTED RELATIVE TOP LAPLACIAN
 (= dim H_{n-2}(F(P), dF(P); Q); equals 1 iff the AT graph is connected)
 ==============================================================================
 kernel dimension histogram over all 405 posets: {1: 405}
+
+==============================================================================
+CROSS-CHECK -- Hodge theory vs the homology code, two independent routes
+In top degree the Hodge Laplacian has no up-part, so
+   ker L^abs_top  =  H_{n-2}(F(P); Q)   (absolute top homology).
+The Laplacian route computes the left side from the top two dimensions
+only; controls.py POSITIVE CONTROL 4 computes the right side from the
+ranks of every boundary matrix of the whole complex.  They must agree,
+and the known answer is 1 iff P is an antichain, else 0.
+==============================================================================
+ker L^abs_top matches (1 iff antichain, else 0) on 405/405 posets
+ker L^abs_top histogram: {0: 399, 1: 6}   (antichains in population: 6)
 
 ==============================================================================
 THE FOUR-ELEMENT EXAMPLE -- all 16 posets on 4 elements

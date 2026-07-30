@@ -1,0 +1,573 @@
+# Viability probe: the intrinsic face-geometry program at `n = 4`, `n = 5`, `n = 6`
+
+**Work item:** mg-276d. **Source under probe:** `~/files/intrinsic_face_geometry_program.tex`,
+*"Sketch of an Intrinsic Geometric Program for Linear Extension Dynamics"* (Daniel, 2026-07-30).
+**Scope:** probe only. **`A(P)` was not built** — see §10.
+
+**Re-derivable:** every number below is produced by `code/face_geometry/run_all.sh`
+(pure Python 3, no third-party packages, exact integer arithmetic, ~11 s).
+Committed outputs: `code/face_geometry/controls_output.txt`,
+`code/face_geometry/probe_output_n6.txt`.
+
+---
+
+## §0 — Verdict
+
+**GREEN.** All three claims are **PROVEN for every finite poset**, not merely verified at `n = 4`.
+They are not `n = 4` coincidences and they are not artefacts of a lucky poset.
+
+The computation (all **405** posets up to isomorphism on `n ≤ 6`) came first and is reported in §6;
+the proof in §4 came after and is what upgrades the verdict from *PROVEN-by-computation on 405
+posets* to *PROVEN*. Both are given, and the ledger (§9) labels each claim by which of the two
+supports it.
+
+Read §0 with §8 attached, which is the honest half:
+
+- **What is established.** For every finite poset `P`, the top relative Hodge Laplacian of the
+  compatible face complex `F(P)`, conjugated by the sign twist, **is** the adjacent-transposition
+  Laplacian `D − A` on `L(P)` — the *same matrix*, not a similar one, not one up to normalisation.
+  Claims (2) and (3) likewise, in full.
+- **What is not.** This is an **exact dictionary between two descriptions of one matrix**, and by
+  itself it supplies **no new bound and no new tool**. It is a bridge in the sense the ticket asked
+  for — a statement on one side can be read on the other — and it is *only* that. Nothing here
+  touches BK dynamics, block moves, weighted or normalised chains, or the faces of `F(P)` below the
+  top two dimensions. §8.3 lists exactly what the bridge does not carry.
+- **One correction to the source.** The sketch attaches *"up to the orientation/sign twist"* to
+  claim (1) only. **The twist is needed for claim (2) as well**, and by the same conjugation. The
+  untwisted form of (1) and of (2) fails on **399 of the 405** posets tested — the 6 exceptions are
+  exactly the chains, where `|L(P)| = 1` and both sides are the zero `1×1` matrix (§6.3).
+
+---
+
+## §1 — Pinning the example (ticket step 1)
+
+The sketch says *"the four-element example"* — **singular, and it never says which poset.** The
+document contains no figure, no Hasse diagram, no relation list, and no other four-element
+reference. Two readings are available and the text does not choose between them: *the* example
+could mean a specific poset the author had in hand, or simply *the case `n = 4`*.
+
+**It cannot be determined from the document.** So, per the ticket, no guess was made: **all 16
+posets on four elements were tested** (`probe_output_n6.txt`, final table). All 16 satisfy all
+three claims, including both degenerate ends (the antichain, where `L(P) = S_4` and `|L| = 24`;
+the chain, where `|L| = 1`) and everything between.
+
+This matters for a reason beyond bookkeeping: had the claim held on only some of the 16, "the
+four-element example" would have been unresolvable evidence. It holds on all 16, so the ambiguity
+is discharged rather than worked around.
+
+---
+
+## §2 — The objects, rebuilt from the definitions
+
+Everything below is built from the sketch's own definitions. Nothing checks the source's
+arithmetic; the source reports no numbers to check.
+
+Let `P` be a finite poset on a ground set of `n` elements.
+
+**Order ideals.** `J(P)` = the lattice of order ideals (down-sets) of `P`, ordered by inclusion.
+It is distributive (Birkhoff) and graded by cardinality, of rank `n`.
+
+**Face complex.** `F(P) = ⊔_k Sur_iso(P,[k])`, the surjective isotone maps `P → [k]`, equivalently
+the ordered set partitions of `P` compatible with `P`. Grading by `k`.
+
+**Linear extensions.** `L(P)`, written as words `w = (w_1,…,w_n)` listing `P` in a compatible order.
+
+**The adjacent-transposition Laplacian.** `Δ_AT := Σ_{t=1}^{n−1} (1 − τ_t)` acting on `C[L(P)]`,
+where `τ_t` swaps the entries in positions `t, t+1` if the result is again a linear extension and
+acts as the identity otherwise. As a matrix, `Δ_AT = D − A`, with `A` the adjacency matrix of the
+adjacent-transposition graph on `L(P)` and `D` its degree matrix. **This is the object the probe
+matches against, and §8.3 states precisely which other Laplacians it is not.**
+
+**The ambient Coxeter Laplacian.** `Σ_{i=1}^{n−1} (1 − s_i)` on `C[S_n]`, `s_i` acting on the right
+(swap of positions `i, i+1`). Its *compression* to `C[L(P)]` is `ι* (Σ_i(1−s_i)) ι` for the
+inclusion `ι : C[L(P)] ↪ C[S_n]`.
+
+**Independence of the implementation.** In the code, `Sur_iso(P,[k])` is enumerated by brute force
+directly from the definition; `L(P)` is enumerated by repeated minimal-element choice; the ambient
+Coxeter Laplacian is built as a genuine `n! × n!` matrix and then cut down. None of the three is
+built via the chain description of Lemma 1 — that description is *derived* below and then *checked*
+against the brute-force enumerations (POSITIVE CONTROL 3).
+
+---
+
+## §3 — Four structural lemmas
+
+These are the content. Claims (1)–(3) are corollaries.
+
+### Lemma 1 (the face complex is an order complex) — PROVEN
+
+The map `f ↦ (f^{-1}{1,…,i})_{i=1}^{k−1}` is a bijection
+```
+Sur_iso(P,[k])  ≅  { chains  I_1 ⊊ ⋯ ⊊ I_{k−1}  of proper nonempty order ideals of P }.
+```
+
+*Proof.* `f` is isotone iff every `f^{-1}{1,…,i}` is a down-set (if `x <_P y` then `f(x) ≤ f(y)`,
+so `y ∈ f^{-1}{1..i} ⟹ x ∈ f^{-1}{1..i}`; conversely if every such preimage is a down-set and
+`x <_P y`, then `x` lies in the preimage at level `f(y)`, so `f(x) ≤ f(y)`). `f` is surjective iff
+all `k` fibres are nonempty, i.e. iff `∅ ⊊ I_1 ⊊ ⋯ ⊊ I_{k−1} ⊊ P`. The inverse sends a chain to
+`f(x) = min{ i : x ∈ I_i }` with `I_k := P`. ∎
+
+So `F(P)` **is** the order complex `Δ(J(P) ∖ {∅,P})`: a simplicial complex whose vertices are the
+proper nonempty ideals and whose faces are chains of them. An element of `Sur_iso(P,[k])` is a face
+with `k−1` vertices, i.e. of dimension `k−2`.
+
+*Verified independently:* POSITIVE CONTROL 3 checks this bijection degree by degree against the
+brute-force enumeration of `Sur_iso(P,[k])`, for all 24 posets with `n ≤ 4`, all `k`.
+
+### Lemma 2 (facets = linear extensions; purity) — PROVEN
+
+`F(P)` is **pure of dimension `n−2`**, and its facets are in bijection with `L(P)`.
+
+*Proof.* `J(P)` is graded by cardinality, so a maximal chain in `J(P)` is
+`∅ = I_0 ⊊ I_1 ⊊ ⋯ ⊊ I_n = P` with `|I_t| = t`. Setting `w_t := I_t ∖ I_{t−1}` (a single element)
+lists `P` in an order compatible with `P`, i.e. a linear extension; and `w ↦ (I_t = {w_1,…,w_t})`
+inverts it. Deleting `I_0` and `I_n` leaves `n−1` vertices, so each facet has dimension `n−2`. ∎
+
+*Verified independently:* POSITIVE CONTROL 3, all posets `n ≤ 4`.
+
+### Lemma 3 (`F(P)` is a pseudomanifold with boundary; free ridges = forbidden generators) — PROVEN
+
+Call a codimension-1 face of a facet a **ridge**. Then:
+
+**(a)** every ridge lies in **exactly one or exactly two** facets;
+
+**(b)** for the facet of `w ∈ L(P)` and the ridge `ρ_t` got by deleting `I_t` (`1 ≤ t ≤ n−1`):
+```
+ρ_t lies in two facets  ⟺  w_t and w_{t+1} are P-incomparable  ⟺  τ_t is legal at w,
+```
+and in that case the second facet is the one of `w·s_t`. Equivalently,
+```
+ρ_t is FREE (in one facet)  ⟺  w_t <_P w_{t+1}  ⟺  the generator s_t is FORBIDDEN at w.
+```
+
+*Proof.* The facets containing `ρ_t` are the maximal chains of the interval `[I_{t−1}, I_{t+1}]` in
+`J(P)`, an interval of rank 2 in a distributive lattice. Every rank-2 interval of a distributive
+lattice is either a 3-element chain or a diamond `B_2` — a distributive lattice has no interval
+`[x,y]` of rank 2 with three or more atoms, since two distinct atoms already join to `y`, and a
+third atom `c` would give `c = c ∧ y = c ∧ (a ∨ b) = (c∧a) ∨ (c∧b) = x`, a contradiction. So there
+are one or two maximal chains, proving (a).
+
+For (b): write `a = w_t`, `b = w_{t+1}`, so `I_{t+1} ∖ I_{t−1} = {a,b}` and `I_t = I_{t−1} ∪ {a}`.
+The interval is a diamond iff `I_{t−1} ∪ {b}` is also an ideal, i.e. iff every `P`-predecessor of
+`b` lies in `I_{t−1}`, i.e. iff `a ≮_P b`. Since `a` precedes `b` in a linear extension, `b ≮_P a`
+automatically; so this says exactly that `a` and `b` are incomparable, i.e. that swapping them
+yields another linear extension, and the resulting chain is the facet of `w·s_t`. ∎
+
+*Verified independently:* POSITIVE CONTROL 3 checks (a) for all posets `n ≤ 4` from the ridge
+incidence table; the probe checks (b) as a set equality, facet by facet, for all 405 posets `n ≤ 6`
+(column `(3)bij`).
+
+### Lemma 4 (two facets share at most one ridge) — PROVEN
+
+*Proof.* If `σ ≠ τ` share ridges `ρ_1 ≠ ρ_2`, then `σ ∖ ρ_1` and `σ ∖ ρ_2` are two *different*
+vertices of `σ`, and each is "the unique vertex of `σ` not in `τ`" (as `|σ| = |τ| = n−1` and
+`ρ_i ⊆ σ ∩ τ` has `n−2` vertices). Contradiction. ∎
+
+---
+
+## §4 — The three claims, proven
+
+**Boundary map.** Order the vertices of every face by inclusion (a chain is totally ordered). For a
+facet `σ = (I_1,…,I_{n−1})` the standard simplicial boundary is
+```
+∂σ = Σ_{t=1}^{n−1} (−1)^{t−1} (I_1,…,Î_t,…,I_{n−1}).
+```
+Give `C_•(F(P))` the inner product in which faces are orthonormal. `F(P)` has dimension `n−2`, so
+in top degree the Hodge Laplacian has no up-part and equals the down-Laplacian `∂*∂`.
+
+**Boundary subcomplex.** `∂F(P)` := the subcomplex generated by the free ridges. Since it has
+dimension `≤ n−3`, `C_{n−2}(F,∂F) = C_{n−2}(F)` and `C_{n−3}(F,∂F)` is the span of the **interior**
+ridges. So the relative boundary `∂_rel` is `∂` followed by the projection killing free ridges, and
+```
+L^rel_top := ∂_rel* ∂_rel ,        L^abs_top := ∂* ∂ .
+```
+*(This is the reading of "relative" the probe adopts; §7 addresses the fact that the sketch does not
+define it, and why this reading is the intended one.)*
+
+**Computing both.** For facets `σ, τ`, `⟨∂*∂σ, τ⟩ = Σ_ρ [ρ:σ][ρ:τ]`.
+
+- Diagonal, absolute: `σ` has exactly `n−1` ridges, each contributing `(±1)² = 1`. So
+  `(L^abs)_{σσ} = n−1`.
+- Diagonal, relative: only interior ridges survive, and by Lemma 3(b) these are exactly the legal
+  transpositions at `w`. So `(L^rel)_{σσ} = deg_A(σ)`.
+- Off-diagonal, `σ ≠ τ`: by Lemma 4 they share at most one ridge, and by Lemma 3(b) they share one
+  iff `τ = σ·s_t` for some `t`. In that case `σ` and `τ` differ only in their `t`-th ideal, so the
+  shared ridge sits at **index `t` in both**, and both incidence numbers equal `(−1)^{t−1}`;
+  their product is `+1`. A shared ridge lies in two facets, hence is interior, hence survives in
+  the relative complex too. So both Laplacians have the same off-diagonal part, namely `+A`.
+
+Therefore, **for every finite poset `P`**:
+```
+L^abs_top = (n−1)·I + A ,        L^rel_top = D + A .                              (★)
+```
+
+**The twist.** Let `ε(w) = sgn(w) = (−1)^{inv(w)}` and `E = diag(ε)`. If `τ = σ·s_t` then `τ`'s word
+differs from `σ`'s by a transposition, so `ε(τ) = −ε(σ)`. Hence `E A E = −A`, while `E` commutes
+with every diagonal matrix. Conjugating (★):
+
+> ### Theorem A (claim (1)) — PROVEN, all finite posets
+> ```
+> E · L^rel_top(F(P)) · E   =   D − A   =   Σ_{t=1}^{n−1} (1 − τ_t)   =   Δ_AT .
+> ```
+
+> ### Theorem B (claim (2)) — PROVEN, all finite posets
+> ```
+> E · L^abs_top(F(P)) · E   =   (n−1)·I − A   =   ι* ( Σ_{i=1}^{n−1}(1 − s_i) ) ι .
+> ```
+> *Proof of the second equality.* `Σ_i (1 − s_i) = (n−1)I − Σ_i R_{s_i}` on `C[S_n]`, and
+> `(Σ_i R_{s_i})_{w,v} = 1` exactly when `v = w·s_i` for some `i`. Restricting rows and columns to
+> `L(P)` leaves `(n−1)I` on the diagonal and the **induced-subgraph** adjacency `A` off it. ∎
+>
+> **The twist is required here too.** The sketch attaches "up to the orientation/sign twist" to
+> claim (1) alone; without `E`, (2) reads `(n−1)I + A = (n−1)I − A`, false whenever `A ≠ 0`.
+
+> ### Theorem C (claim (3)) — PROVEN, all finite posets, in two readings
+> **Strong (complex-level, and this is the real statement).** For each `w ∈ L(P)`, Lemma 3(b) gives a
+> **bijection** between the free ridges of the facet of `w` and the positions `t` at which the
+> generator `s_t` is forbidden at `w` (i.e. `w_t <_P w_{t+1}`).
+>
+> **Weak (Laplacian-level).** `L^abs_top − L^rel_top = diag( (n−1) − deg_A(w) )` = the diagonal
+> matrix counting forbidden generators.
+>
+> **These are not the same statement, and the difference is worth keeping.** The Laplacian
+> difference records only *how many* generators are forbidden at each `w`; *which* ones is visible
+> only in the face incidence, not in the matrix. The sketch's wording — "records **precisely** the
+> forbidden generators" — is true in the strong reading and an overstatement in the weak one.
+
+**Uniqueness of the twist.** `E` is not a convenient choice; it is forced. Any diagonal `±1` matrix
+`E' = diag(η)` satisfying `E' L^rel E' = D − A` must have `η(σ)η(τ) = −1` on every edge of the
+adjacent-transposition graph. That graph is connected (classical: any linear extension can be
+carried to any other by legal adjacent transpositions), so such an `η` is unique up to a global
+sign, and `ε = sgn` is one. Equivalently: the twist is the unique orientation of the facets making
+`F(P)` coherently oriented, and the adjacent-transposition graph is bipartite with `sgn` as the
+bipartition. **NEGATIVE CONTROL M3 exhibits this**: a diagonal `±1` matrix that is *not* of this
+form is rejected by the identity test on all 72 posets where it differs from `E` (and coincides with
+`E` on the 14 where `|L(P)| ≤ 2`, where there is only one edge to get right).
+
+---
+
+## §5 — Controls (ticket: "run a positive control")
+
+`code/face_geometry/controls.py`; output committed at `controls_output.txt`. **All pass.**
+
+### Positive controls — the machinery reproduces answers known independently of this program
+
+| # | control | result |
+|---|---|---|
+| P1 | reduced Betti numbers of `S¹` (triangle boundary), a disc, `S²` (octahedron boundary), two disjoint edges, wedge of two circles | all 5 correct, exact arithmetic over `Q` |
+| P2 | count of posets up to isomorphism, `n = 1..5`: must be `1, 2, 5, 16, 63` (OEIS A000112) | correct |
+| P3 | brute-force `Sur_iso(P,[k])` `≡` chains of proper ideals; `∂∘∂ = 0`; facets `≡` `L(P)`; every ridge in 1 or 2 facets | all pass, all 24 posets `n ≤ 4`, all `k` |
+| P4 | reduced homology of `F(P)` against the known theorem: `Δ(J(P)∖{∅,P}) ≃ S^{n−2}` if `P` is an antichain, acyclic otherwise | all pass, all 86 posets `2 ≤ n ≤ 5` |
+| P5 | Hodge cross-check: `ker L^abs_top` (computed from the top two dimensions only) vs `H_{n−2}(F(P))` (computed by P4 from the ranks of **every** boundary matrix) | agree on all 405 posets `n ≤ 6` |
+
+P5 is the sharpest of these: the two sides are computed by disjoint code paths over different parts
+of the complex, and Hodge theory predicts they must agree.
+
+### Negative controls — the test is shown to fail where it should
+
+The ticket's requirement is that the Laplacian code be demonstrated to produce the **wrong** answer
+on a case where the answer is known. Two independent demonstrations:
+
+**N1 — the homology code is not sign-blind.** Replacing the alternating simplicial signs by all
+`+1` and recomputing `S¹` gives reduced Betti `{0: −1, 1: 0}` instead of the truth `{0: 0, 1: 1}` —
+a manifestly wrong answer (a negative Betti number), so the machinery is sensitive to exactly the
+structure it is supposed to be sensitive to.
+
+**N2 — the claim-(1) identity test rejects corrupted inputs.** Five named corruptions, each run on
+every poset with `2 ≤ n ≤ 5`:
+
+| mutation | rejected on | vacuous on | why vacuous there |
+|---|---|---|---|
+| M1 — drop the sign twist (compare `L^rel` to `D − A` directly) | 82/82 | 4 | `\|L(P)\| = 1`: no off-diagonal to flip |
+| M2 — use the absolute Laplacian in place of the relative one | 82/82 | 4 | the antichains (`\|L\| = 2, 6, 24, 120`): `∂F = ∅`, so `L^rel = L^abs` |
+| M3 — wrong twist: `−1` on one facet, `+1` elsewhere | 72/72 | 14 | `\|L(P)\| ≤ 2`: one edge, both patterns give product `−1` |
+| M4 — scale the target Laplacian by 2 | 82/82 | 4 | `\|L(P)\| = 1`: the target is the zero matrix |
+| M5 — delete one edge from the target graph | 82/82 | 4 | `\|L(P)\| = 1`: no edge to delete |
+
+and the **uncorrupted** test passes on 86/86.
+
+**"Vacuous" is computed, not asserted.** A mutation counts as applicable on a poset only when it
+actually changes one of the two matrices being compared; where it does not, demanding rejection
+would be demanding a false negative. The counts are reported so the reader can see the reach of
+each mutation, and the `|L(P)|` values on which each is vacuous are printed by `controls.py` rather
+than asserted here. M3's 14 vacuous cases are exactly the posets with `|L(P)| ≤ 2`: with one edge,
+both sign patterns give the product `−1` across it, so the mutation is genuinely not a mutation
+there.
+**This is the failure direction this program has been burned by** (a control that passes because it
+cannot fail), so it is stated in the open rather than left to be discovered.
+
+---
+
+## §6 — The computation (ticket steps 2–4)
+
+`code/face_geometry/run_probe.py`; output committed at `probe_output_n6.txt`.
+
+### §6.1 Population tested
+
+**All posets up to isomorphism on `n = 1,…,6` elements — 405 in total** (`1 + 2 + 5 + 16 + 63 + 318`,
+matching A000112, checked by P2). Not a sample: the complete isomorphism-class enumeration at each
+size. Largest instance: the `n = 6` antichain, `|L(P)| = 720`.
+
+### §6.2 Result
+
+| `n` | posets | claim (1) | claim (2) | claim (3) weak | claim (3) strong | max `\|L(P)\|` |
+|---|---|---|---|---|---|---|
+| 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| 2 | 2 | 2 | 2 | 2 | 2 | 2 |
+| 3 | 5 | 5 | 5 | 5 | 5 | 6 |
+| 4 | 16 | 16 | 16 | 16 | 16 | 24 |
+| 5 | 63 | 63 | 63 | 63 | 63 | 120 |
+| 6 | 318 | 318 | 318 | 318 | 318 | 720 |
+| **all** | **405** | **405** | **405** | **405** | **405** | |
+
+**Population tested and population it holds on are the same set: all 405.** No witness against any
+of the three claims exists in the tested population.
+
+### §6.3 The twist is load-bearing, not cosmetic
+
+The *untwisted* form of claim (1) holds on **6 of 405** posets, and of claim (2) on the same 6 —
+and all 6 have `|L(P)| = 1` (the chains, one per `n`), where both sides are the zero `1×1` matrix.
+So on every poset with more than one linear extension, the twist is required. This is the datum
+behind the correction in §0.
+
+### §6.4 The identity is not degenerate
+
+An identity that holds only where both sides are trivial is not a bridge. Define **non-degenerate**
+as: the adjacent-transposition graph has at least one edge (`|L(P)| ≥ 2`, so `A ≠ 0`) **and** at
+least one ridge is free (so `L^rel ≠ L^abs` and claim (3) has content).
+
+**394 of the 405 posets are non-degenerate, and claim (1) holds on all 394.** The 11 excluded are
+the 6 chains (`|L(P)| = 1`) and the 5 antichains with `n ≥ 2` (no free ridge). Both sides are
+non-trivial on the remaining 394 — for instance at `n = 6` the largest non-degenerate instance has
+`|L(P)| = 360`.
+
+### §6.5 Failure modes (ticket step 4)
+
+| subclass | count | (1) | (2) | (3) strong |
+|---|---|---|---|---|
+| antichain (`L(P) = S_n`) | 6 | 6 | 6 | 6 |
+| chain (`\|L(P)\| = 1`) | 6 | 6 | 6 | 6 |
+| **disconnected** | 108 | 108 | 108 | 108 |
+| **non-trivial `Aut(P)`** | 275 | 275 | 275 | 275 |
+| trivial `Aut(P)` | 130 | 130 | 130 | 130 |
+| connected, not a chain, not an antichain | 291 | 291 | 291 | 291 |
+| `\|L(P)\| ≥ 10` | 291 | 291 | 291 | 291 |
+
+- **Non-trivial automorphisms: no effect.** 275 of the 405 posets have `|Aut(P)| > 1` (up to
+  `|Aut| = 720` for the `n = 6` antichain) and all pass. Structurally this is expected: every object
+  in the statement is built functorially from the *labelled* poset, and `Aut(P)` acts compatibly on
+  both sides, so it cannot separate them.
+- **Disconnected posets: no effect.** 108 of 405, all pass. (`J(P ⊔ Q) = J(P) × J(Q)`; nothing in
+  Lemmas 1–4 uses connectivity of `P`.)
+- **The antichain degenerates to something known, as it should.** `L(P) = S_n`, `F(P)` is the full
+  Coxeter complex of `S_n`, no ridge is free, so `∂F(P) = ∅` and `L^rel = L^abs`. Theorems A and B
+  then say the same thing, and it is the ambient statement: `E L E = (n−1)I − A(Cayley)` — the
+  Coxeter Laplacian itself. Claim (3) is *vacuously* true here (nothing is forbidden). **This is the
+  one subclass where the bridge tells you nothing you did not have**, and it is named as such
+  rather than counted as a success.
+- **The chain degenerates to nothing at all.** `|L(P)| = 1`, both sides the zero `1×1` matrix. Also
+  counted, also not evidence.
+
+### §6.6 A structural by-product, verified
+
+`ker(E L^rel_top E) = ker(D − A)` has dimension **1 for all 405 posets**. This is the relative top
+homology `H_{n−2}(F(P), ∂F(P); Q)`, and its being 1-dimensional is exactly the classical
+connectivity of the adjacent-transposition graph on `L(P)`, read on the other side of the bridge
+(§8.2). The generator is the twisted all-ones vector `Σ_w sgn(w)·σ_w` — the relative fundamental
+class of `F(P)`.
+
+---
+
+## §7 — "Relative" is not defined in the source. Which reading, and why
+
+The sketch never defines the relative Hodge Laplacian. The probe adopts **relative to the boundary
+subcomplex `∂F(P)` generated by the free ridges**, and this must be labelled as an interpretation.
+
+Three reasons to believe it is the intended one, given in order of strength:
+
+1. **Claim (3) selects it.** Under this reading the difference `L^abs − L^rel` is precisely the
+   forbidden-generator count and the free ridges are precisely the forbidden generators — which is
+   what the sketch's claim (3) says, in the sketch's own words ("the boundary correction records
+   precisely the forbidden generators"). A reading of "relative" that did not make claim (3) come
+   out true would be the wrong reading of a document that asserts claim (3).
+2. **Lemma 3(a) makes it well-posed.** "Relative Hodge Laplacian" is standard for a
+   manifold-with-boundary; `F(P)` is not a manifold, but Lemma 3(a) shows it is a **pseudomanifold
+   with boundary** (every ridge in one or two facets), which is exactly the structure the relative
+   top Laplacian needs.
+3. **It is the only reading under which claims (1) and (2) are different statements.** Absolute and
+   relative differ precisely on the non-antichains; without the boundary the sketch's (1) and (2)
+   would be the same claim written twice.
+
+**Labelled honestly:** the identification of "relative" is `CONDITIONAL` on this reading (§9, row
+L1). Everything downstream of it is unconditional given it.
+
+---
+
+## §8 — The bridge, stated precisely (ticket step 5)
+
+### §8.1 Statement
+
+> **The bridge.** For **every finite poset `P`** on `n` elements, with `F(P)` the compatible face
+> complex, `∂F(P)` its boundary subcomplex (free ridges), the standard simplicial inner product
+> (faces orthonormal, **unweighted**), and `E = diag(sgn w)`:
+> ```
+>          Δ_AT  =  E · L^rel_top(F(P)) · E
+> ```
+> where `Δ_AT = Σ_t (1 − τ_t) = D − A` is the unweighted adjacent-transposition Laplacian on `L(P)`.
+> `E` is a signed permutation matrix and an involution, so this is **equality of matrices after a
+> relabelling of basis vectors by signs** — not similarity up to an unknown conjugator, not equality
+> up to normalisation, not an isospectral coincidence.
+
+**Class of poset:** all finite posets, no restriction. **Normalisation:** unweighted; `Δ_AT` as
+written, with no `1/(n−1)` and no degree normalisation. **The twist:** `E = diag(sgn)`, unique up to
+global sign (§4).
+
+### §8.2 What a statement on one side becomes on the other
+
+| on the dynamics side (`L(P)`, `Δ_AT`) | on the geometry side (`F(P)`, Hodge) |
+|---|---|
+| the full spectrum of `Δ_AT` | the full spectrum of the top relative Hodge Laplacian of `F(P)` — **identical multiset** |
+| `ker Δ_AT` (the constants) | `H_{n−2}(F(P), ∂F(P); Q)`, the relative top homology |
+| the adjacent-transposition graph on `L(P)` is **connected** | `F(P)` has a **unique relative fundamental class** — `dim H_{n−2}(F,∂F) = 1` (verified: all 405) |
+| the spectral gap `λ_2(Δ_AT)`, hence the mixing time of the adjacent-transposition chain | the **first nonzero eigenvalue of the top relative Hodge Laplacian** of `F(P)` |
+| the forbidden generators at `w` | the free ridges of the facet `w` — the local geometry of `∂F(P)` (Theorem C, strong form) |
+| the *ambient* Coxeter Laplacian, compressed to `C[L(P)]` | the top **absolute** Hodge Laplacian of `F(P)` (Theorem B) |
+| what the compression loses when passing `S_n → L(P)` | the boundary correction `L^abs − L^rel` (Theorem C) |
+
+The last two rows are the most useful pairing: **the difference between "restrict the ambient
+dynamics" and "build the dynamics intrinsically" is exactly the difference between absolute and
+relative Hodge theory on `F(P)`.** That is a genuine reframing of the ambient-vs-intrinsic question
+in the ticket's sense — a statement about `S_n` and a statement about the geometry of `F(P)` become
+the same statement.
+
+### §8.3 What the bridge does NOT carry — read this before quoting §8.1
+
+Each of these is a scope boundary that Theorems A–C do **not** cross. None is a conjecture about
+which the probe is agnostic; each is something simply not established.
+
+1. **It supplies no bound and no new tool.** `Δ_AT` and `E L^rel E` are the same matrix. Any
+   statement true of one is true of the other *because they are equal*, which is why the dictionary
+   is exact and also why it is, on its own, free of content. Whether it has leverage depends
+   entirely on whether the Hodge side carries techniques the graph side does not — **the probe did
+   not test that and takes no position on it.**
+2. **Nothing about BK.** Claims (1)–(3) concern adjacent transpositions only. Block moves are not
+   adjacent transpositions; no part of the proof touches them. The sketch's §"Connection to BK-Type
+   Dynamics" is explicitly conditional (*"If block moves can be realized as…"*) and this probe
+   neither supports nor undermines it.
+3. **Only the top two dimensions are used.** The proof of (1)–(3) uses facets and ridges — i.e.
+   `Sur_iso(P,[n])` and `Sur_iso(P,[n−1])` — and nothing else. The sketch's suggestion that the
+   higher-codimension faces "record commuting moves, braid relations, and local factorization
+   structure" is **untested here** and receives no support from (1)–(3).
+4. **Unweighted only.** The identity is for the standard inner product with faces orthonormal. The
+   *normalised* Laplacian `D^{-1/2}(D−A)D^{-1/2}` is **not** a scalar multiple of `D−A` when `D` is
+   non-constant, and is **not** the top relative Hodge Laplacian in this inner product. Uniform
+   rescalings *are* covered: the lazy chain `(1/(n−1))Σ_t τ_t` has generator `(1/(n−1))(D−A)`, an
+   overall constant. Any weighted chain (non-uniform generator rates, a non-uniform stationary
+   measure) would need a weighted Hodge Laplacian, which is **not tested and not proven**.
+5. **It does not build `A(P)`.** No operator algebra was constructed; see §10.
+6. **The left-regular-band product is unused.** The sketch equips `F(P)` with an LRB product by
+   refinement. Claims (1)–(3) never use it; the probe treats `F(P)` purely as a simplicial complex.
+
+---
+
+## §9 — Claim ledger
+
+Labels: **PROVEN** = proof given here, all finite posets. **PROVEN-by-computation (population)** =
+verified by exhaustive computation on a stated population, no proof. **CONDITIONAL (condition)**.
+**HEURISTIC**. Reductions asserted in prose are included, as the ticket requires.
+
+| # | claim | label | population / condition |
+|---|---|---|---|
+| L1 | "relative" in the source means relative to the boundary subcomplex generated by the free ridges | **CONDITIONAL** | the source does not define it; three reasons in §7, the strongest being that claim (3) is true only under this reading. Everything below is unconditional *given* L1. |
+| L2 | `Sur_iso(P,[k])` ≅ chains of `k−1` proper nonempty ideals; `F(P) = Δ(J(P)∖{∅,P})` | **PROVEN** (Lemma 1) | all finite posets; independently checked on all 24 posets `n ≤ 4`, all `k` |
+| L3 | `F(P)` is pure of dimension `n−2` with facets `≡ L(P)` | **PROVEN** (Lemma 2) | all finite posets; checked `n ≤ 4` |
+| L4 | every ridge of `F(P)` lies in exactly 1 or 2 facets (`F(P)` is a pseudomanifold with boundary) | **PROVEN** (Lemma 3(a)) | all finite posets; checked `n ≤ 4`. Uses only distributivity of `J(P)` |
+| L5 | free ridges at `w` ↔ forbidden generators at `w`, bijectively | **PROVEN** (Lemma 3(b)) | all finite posets; checked as a set equality on all 405 posets `n ≤ 6` |
+| L6 | two distinct facets share at most one ridge | **PROVEN** (Lemma 4) | all finite posets |
+| L7 | `L^abs_top = (n−1)I + A` and `L^rel_top = D + A` | **PROVEN** (§4, from L2–L6) | all finite posets |
+| **A** | **claim (1):** `E · L^rel_top · E = D − A = Σ_t(1−τ_t)` | **PROVEN** (Theorem A) | **all finite posets.** Also **PROVEN-by-computation** on all 405 posets up to iso with `n ≤ 6`, of which 394 are non-degenerate |
+| **B** | **claim (2):** `E · L^abs_top · E =` compression of `Σ_i(1−s_i)` from `C[S_n]` | **PROVEN** (Theorem B) | all finite posets; computation as above |
+| **C1** | **claim (3), strong:** free ridges at `w` are in bijection with the forbidden generators at `w` | **PROVEN** (Theorem C / L5) | all finite posets; computation as above |
+| **C2** | **claim (3), weak:** `L^abs_top − L^rel_top = diag(#forbidden generators)` | **PROVEN** (Theorem C) | all finite posets; computation as above |
+| C3 | the *Laplacian difference alone* identifies **which** generators are forbidden | **FALSE as stated** | it is a diagonal matrix and records only the **count**. The identification of *which* lives in the face incidence (C1), not in the matrix. The source's "records **precisely** the forbidden generators" is correct in reading C1 and an overstatement in reading C2. |
+| D | the twist is needed for claim (2) as well as claim (1) | **PROVEN** + **PROVEN-by-computation** | untwisted (1) and (2) each hold on 6 of 405 posets, all with `\|L(P)\| = 1` |
+| E | `E = diag(sgn)` is the unique diagonal `±1` twist up to global sign | **PROVEN** (§4) | all finite posets; uses connectivity of the adjacent-transposition graph on `L(P)` (classical, not proved here — see H1) |
+| F | `dim H_{n−2}(F(P), ∂F(P); Q) = 1`, generated by `Σ_w sgn(w) σ_w` | **PROVEN-by-computation** | all 405 posets `n ≤ 6`. Equivalent to H1 given Theorem A, so it is *proven* modulo the classical fact, but the probe verified it rather than citing a proof |
+| G | `ker L^abs_top = H_{n−2}(F(P)) =` 1 iff `P` is an antichain, else 0 | **PROVEN-by-computation** | all 405 posets `n ≤ 6`, by two independent code paths (P4, P5) |
+| H1 | the adjacent-transposition graph on `L(P)` is connected | **cited, not proved here** | classical; used only in claim E (uniqueness of the twist) and to interpret F. Nothing in Theorems A–C depends on it |
+| H2 | the bridge gives leverage — i.e. Hodge theory supplies tools the graph picture does not | **HEURISTIC / untested** | the probe took no position; §8.3(1) |
+| H3 | higher-codimension faces of `F(P)` record braid relations / commuting moves / factorisation | **untested** | not used anywhere in (1)–(3); §8.3(3) |
+| H4 | the identity extends to weighted or normalised adjacent-transposition chains | **untested** | §8.3(4). The uniform lazy rescaling *is* covered (constant multiple); degree-normalisation is **not** |
+| H5 | BK / block-move operators relate to this geometry | **untested** | §8.3(2) |
+
+---
+
+## §10 — Recommendation (recommend, do not act)
+
+The ticket says: if GREEN, the operator-algebra construction is the next ticket, and pm-onethird
+scopes it. `A(P)` was **not** built. Two observations offered as scoping input, not as work:
+
+- The foundation the sketch rests on is **sound and is a theorem, not an example.** The
+  operator-algebra ticket does not need to re-establish it.
+- **The cheapest next probe is not `A(P)`.** Theorems A–C use only the top two dimensions of
+  `F(P)`, so they say nothing about whether the *rest* of the complex carries dynamical content.
+  The program's actual bet (§8.3(1)) is that the Hodge side has tools the graph side lacks. A
+  probe of *that* — pick one concrete Hodge-theoretic technique for the top relative Laplacian of a
+  pseudomanifold-with-boundary and ask whether it says anything non-trivial about `λ_2(Δ_AT)` —
+  would price the program's central bet far more cheaply than constructing `A(P)`. Offered as a
+  recommendation; the routing decision is pm-onethird's.
+
+---
+
+## §11 — Self-audit (Appendix A steps 4c, 4d)
+
+Run on this document before submission, per the standing process. Recorded rather than merely
+performed, because the arc is five-for-five on sound arithmetic with an over-wide generalisation.
+
+**Step 4d — what is the most general statement this document writes, and what does its
+establishing instance hold fixed?** The most general statements are **Theorems A, B, C**, quantified
+over *all finite posets*. They are supported by a **proof** (§3–§4), not by generalisation from the
+405-poset computation — which is the specific hazard the ticket named. The proof's inputs, stated so
+they can be attacked: (i) `J(P)` distributive, hence rank-2 intervals are chains or diamonds
+(Lemma 3(a) — this is where finiteness and the poset axioms enter, and it is the load-bearing step);
+(ii) `J(P)` graded by cardinality (Lemma 2); (iii) the standard simplicial signs and the orthonormal
+inner product (§4); (iv) reading L1 of "relative". **No step uses `n ≤ 6`, connectivity of `P`,
+triviality of `Aut(P)`, or any property of a particular poset.** Removing any of (i)–(iv) breaks the
+result, and (iv) is the only one that is an interpretation rather than a fact — it is labelled
+CONDITIONAL in the ledger.
+
+**Scope axes other than `n`, checked separately** (the axis the mg-09ea instance missed):
+*regime* — the population is the complete isomorphism-class enumeration at each `n ≤ 6`, not a
+sample from a regime, so there is no off-class inference; *inference* — the general statement is a
+proof, so the instance-to-law step that has misfired five times in this arc is not being taken here;
+*normalisation* — this is the axis where an over-wide reading is available, and §8.3(4) and ledger
+row H4 close it explicitly (degree-normalised Laplacians are **not** covered); *object* — §8.3(2,3)
+close the BK and higher-face axes.
+
+**Step 4c — the summaries diffed against the body, clause by clause.** §0, the §8.1 box, the ledger
+and the proposed `STATE.md` row (§12) are four separate summaries of one body and they fail
+independently. Diffed:
+
+- §0 says "PROVEN for every finite poset" — matches ledger rows A/B/C1/C2 and §4. It carries the
+  conditional on L1 by pointing at §8 rather than by restating it, so **§0's second bullet and §8
+  must not be separated when quoted**; that instruction is in §0 itself.
+- §0's correction about the twist is stated as covering claim (2) only, matching row D. It is *not*
+  stated as "the source is wrong about the twist" — the source's claim (1) attribution is correct as
+  far as it goes.
+- §8.1 carries "unweighted" and "all finite posets, no restriction" inline, not by reference.
+- The strong/weak split of claim (3) is stated in Theorem C, in ledger rows C1/C2/C3, and in
+  §8.3 — and row C3 is labelled **FALSE as stated** rather than being quietly dropped, because the
+  source's word "precisely" is true in one reading and not the other.
+- The word "bridge" appears in §0 and §8.1 and is qualified in both by §8.3(1). It is **not**
+  claimed anywhere that the bridge yields a bound.
+
+**What this self-audit cannot do.** It cannot catch an error in the part of the derivation the
+author would re-read as correct. The external audit stage is not substituted for.
+
+---
+
+## §12 — Proposed `STATE.md` row
+
+Audited as an artifact per step 4c; **it carries its own conditions rather than pointing at them.**
+
+> **GREEN · PROVEN, all finite posets (mg-276d; computation permitted and used — 405 posets, controls both directions)** | the **intrinsic face-geometry program's foundation** (doc: `OneThird-Intrinsic-Face-Geometry-Probe.md`; code: `code/face_geometry/`, `run_all.sh`, ~11 s) | **All three `n = 4` claims in `intrinsic_face_geometry_program.tex` are theorems for every finite poset, not `n = 4` coincidences.** With `F(P)` the compatible face complex — which is exactly the order complex of the proper part of `J(P)`, pure of dimension `n−2`, with facets `L(P)` and **every ridge in 1 or 2 facets** (a pseudomanifold with boundary; this is the structural fact that makes "relative" well-posed) — and `E = diag(sgn w)`: **(1)** `E·L^rel_top·E = D − A = Σ_t(1−τ_t)`, the unweighted adjacent-transposition Laplacian, as an **equality of matrices**; **(2)** `E·L^abs_top·E = (n−1)I − A =` the compression of `Σ_i(1−s_i)` from `C[S_n]`; **(3)** the free ridges at `w` are in **bijection** with the generators forbidden at `w`, and `L^abs − L^rel` is the diagonal count of them. **Two corrections to the source.** The twist is attached to claim (1) only in the sketch but is **equally required for claim (2)** — untwisted, (1) and (2) each hold on only 6 of 405 posets, all of them chains with `\|L(P)\| = 1`. And *"records **precisely** the forbidden generators"* is true at the level of the **complex** (which ones) and an overstatement at the level of the **Laplacian difference**, which is diagonal and records only **how many**. **One interpretation, labelled CONDITIONAL:** the source never defines "relative"; the probe reads it as relative to the boundary subcomplex generated by the free ridges, which is the reading claim (3) itself selects. Everything else is unconditional given it. **Population:** all 405 posets up to isomorphism with `n ≤ 6` (A000112-checked), of which **394 are non-degenerate** (`\|L(P)\| ≥ 2` **and** at least one free ridge) — so this is not an identity between two trivial objects; and separately the general statements are **proved**, so the population is all finite posets. **No failure mode found:** 275 posets with non-trivial `Aut`, 108 disconnected, all pass; the antichain degenerates correctly to the ambient Coxeter Laplacian (`∂F = ∅`, `L^rel = L^abs`) and is **named as the one subclass where the bridge says nothing new**; the chain degenerates to `0 = 0`. **Controls both directions:** homology reproduced on `S¹`/`S²`/disc/wedge, A000112 counts, `Sur_iso` cross-enumerated against chains, `∂∘∂ = 0`, and `ker L^abs_top` agreeing with `H_{n−2}(F(P))` computed by a **disjoint code path** — plus **five named mutations of the identity test, each rejected on 100% of the posets where it bites**, with vacuity *computed* and reported (M3 is vacuous exactly where `\|L(P)\| ≤ 2`). **THE HONEST NET, and it must travel with the headline: this is an exact dictionary between two descriptions of one matrix, so it carries no bound and no new tool.** Whether it has leverage depends on whether the Hodge side has techniques the graph side lacks — **the probe took no position on that and did not test it.** It also carries **nothing** about BK or block moves, **nothing** about the faces below the top two dimensions (the proof uses facets and ridges only, so the sketch's "higher faces record braid relations" is untouched), and **nothing** about weighted or degree-normalised chains (uniform rescaling *is* covered; `D^{−1/2}(D−A)D^{−1/2}` is **not** the top relative Hodge Laplacian when `D` is non-constant). The most useful pairing the bridge does deliver: **"restrict the ambient dynamics" vs "build them intrinsically" is exactly "absolute vs relative Hodge theory on `F(P)`"**, and connectivity of the adjacent-transposition graph is exactly `dim H_{n−2}(F(P),∂F(P)) = 1`. **`A(P)` was NOT built** (out of scope, per ticket). **Recommendation, not action:** the operator-algebra ticket need not re-establish the foundation; but the cheaper next probe is to price the program's actual bet — take one Hodge technique for the top relative Laplacian of a pseudomanifold-with-boundary and ask whether it says anything non-trivial about `λ₂(Δ_AT)`. |

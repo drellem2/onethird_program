@@ -20,12 +20,11 @@ POSITIVE CONTROL 3 -- Sur_iso(P,[k]) (brute force) == chains of proper ideals, a
 POSITIVE CONTROL 4 -- reduced homology of F(P) = order complex of the proper part of J(P): S^{n-2} iff P is an antichain, otherwise acyclic
   [PASS] reduced homology of F(P) matches the known answer (n<=5)
 NEGATIVE CONTROL 2 -- the claim-(1) test must FAIL on corrupted inputs
-  [PASS] M1 no sign twist (L^rel compared to D-A directly) -- rejected on 82/82 posets where the mutation bites (4 vacuous)
-  [PASS] M2 absolute Laplacian in place of the relative one -- rejected on 82/82 posets where the mutation bites (4 vacuous)
-  [PASS] M3 wrong twist (sgn replaced by -1 on one facet, +1 elsewhere) -- rejected on 72/72 posets where the mutation bites (14 vacuous)
-  [PASS] M4 target Laplacian scaled by 2 -- rejected on 82/82 posets where the mutation bites (4 vacuous)
-  [PASS] M5 one edge deleted from the target graph -- rejected on 82/82 posets where the mutation bites (4 vacuous)
+  [PASS] M1 no sign twist (L^rel compared to D-A directly) -- rejected on 82/82 posets where the mutation bites (4 vacuous, on |L(P)| in [1])
+  [PASS] M2 absolute Laplacian in place of the relative one -- rejected on 82/82 posets where the mutation bites (4 vacuous, on |L(P)| in [2, 6, 24, 120])
+  [PASS] M3 wrong twist (sgn replaced by -1 on one facet, +1 elsewhere) -- rejected on 72/72 posets where the mutation bites (14 vacuous, on |L(P)| in [1, 2])
+  [PASS] M4 target Laplacian scaled by 2 -- rejected on 82/82 posets where the mutation bites (4 vacuous, on |L(P)| in [1])
+  [PASS] M5 one edge deleted from the target graph -- rejected on 82/82 posets where the mutation bites (4 vacuous, on |L(P)| in [1])
   [PASS] uncorrupted claim-(1) test passes on 86/86 posets
 
 ALL CONTROLS PASS
-python3 controls.py 5  0.34s user 0.00s system 99% cpu 0.342 total

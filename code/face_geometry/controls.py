@@ -309,7 +309,7 @@ def negative_control_identity(nmax):
     """
     print("NEGATIVE CONTROL 2 -- the claim-(1) test must FAIL on corrupted inputs")
     ps = [P for n in range(2, nmax + 1) for P in all_posets(n)]
-    tally, applicable, skipped = {}, {}, {}
+    tally, applicable, skipped, vac_sizes = {}, {}, {}, {}
     M1 = "M1 no sign twist (L^rel compared to D-A directly)"
     M2 = "M2 absolute Laplacian in place of the relative one"
     M3 = "M3 wrong twist (sgn replaced by -1 on one facet, +1 elsewhere)"
@@ -330,6 +330,7 @@ def negative_control_identity(nmax):
             mut = fn()
             if mat_eq(mut[0], truth[0]) and mat_eq(mut[1], truth[1]):
                 skipped[name] = skipped.get(name, 0) + 1   # vacuous here
+                vac_sizes.setdefault(name, set()).add(len(linear_extensions(P)))
                 continue
             applicable[name] = applicable.get(name, 0) + 1
             if not mat_eq(mut[0], mut[1]):
@@ -338,7 +339,9 @@ def negative_control_identity(nmax):
         n_app = applicable[name]
         n_rej = tally.get(name, 0)
         check("%s -- rejected on %d/%d posets where the mutation bites "
-              "(%d vacuous)" % (name, n_rej, n_app, skipped.get(name, 0)),
+              "(%d vacuous, on |L(P)| in %s)"
+              % (name, n_rej, n_app, skipped.get(name, 0),
+                 sorted(vac_sizes.get(name, set()))),
               n_rej == n_app)
     # And the uncorrupted test must PASS on those same posets.
     n_pass = sum(1 for P in ps if claim1_test(P) is True)
