@@ -226,26 +226,23 @@ because I made the opposite call at 17:35 on a misread and had to retract it.**
 **So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
 on an audit that measured its extents in both directions — that, not fatigue, is the signal.
 
-## Now (in flight) — 2026-07-30 23:25
+## Now (in flight) — 2026-07-30 23:45
 
-- **mg-9220** — the deletion test ran at **gate** grain where the claim is about **returns**; re-run per return
-  and delete what is inert.
-- **mg-58da** — `c1_branching.py` produced the 198-cell reproduction **and** now reports 24 findings where its
-  parser is blind. Two separate questions: are the findings real (the parser now), and does the reproduction
-  stand (provenance — settled by re-running at the old revision).
-- **mg-6cb9** — audit of the extent repair; must confirm the **cross-section check FIRES**.
+- **mg-821e** — three open sites at **three different grains**: a **contingent extent** ("every regular file",
+  true only because no tree has a subdirectory), a **check called by 0 of 3 `run_all.sh`**, and an **anchor that
+  deletes green at the reader-facing site**. Amended mid-flight: for the uncalled check, **ask whether the thing
+  it guards can be removed before wiring it**.
+- **mg-9220** — re-run the deletion test **per return**, not per gate, and delete what is inert.
+- **mg-58da** — separate the two questions about `c1_branching.py`: are the 24 findings real (the parser now),
+  and does the 198-cell reproduction stand (provenance — re-run at the old revision).
 - **mg-8aae** — audit of the figure-gate repair.
 
 ## Next (gated, releases automatically)
 
-- **mg-c4c8** (on mg-9220), **mg-321d** (on mg-58da) — pre-filed in the same action as their parents.
-- **mg-344a** — Daniel workspace, `assignee=human`, waits on him.
-- **Held, not forgotten:** the quasi-hereditary follow-up stays unfiled while D10 is unverified.
-
-*(Closed cleanly since 23:05: **mg-8916**, verified in the strongest available form — **the auditor's own
-instrument, unmodified, re-run against the repaired tree, reporting 0 findings at exit 0**, with its committed
-transcript sha256-verified untouched. Finding a defect requires independence from the author; closing one
-requires identity with the finder, and the hash is what makes that checkable rather than social.)*
+- **mg-c4c8** (on mg-9220), **mg-321d** (on mg-58da), and mg-821e's own audit — all pre-filed in the same action
+  as their parents.
+- **mg-344a** — Daniel workspace, `assignee=human`.
+- **Held, not forgotten:** the quasi-hereditary follow-up, while D10 is unverified.
 
 ## Later (decided, not yet filed)
 - `onethird_program` ships two `controls.py` and two `run_all.sh` and has **no CI of any kind** — by the
