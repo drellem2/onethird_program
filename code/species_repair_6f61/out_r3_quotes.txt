@@ -1,0 +1,80 @@
+==============================================================================
+R3a  the three repaired quotations, against the committed extraction
+==============================================================================
+
+  AM 17.4/17.5  species              OK
+      in the rendered extraction : yes
+      in the repaired document   : yes
+      the wrong text survives ONLY struck: yes
+      pre-flagged by mg-7d75     : YES
+      section 10 item 1 said outright that the species names in this quote 
+      were an inference from surrounding text. Predicted, and wrong in 
+      exactly the predicted way.
+
+  Aguiar-Ardila 12  braid cone       OK
+      in the rendered extraction : yes
+      in the repaired document   : yes
+      the wrong text survives ONLY struck: yes
+      pre-flagged by mg-7d75     : NO
+      NOT pre-flagged. Two divergences in one sentence: (R^I)/R^I is not an 
+      expression the paper contains, and the inequality runs the other way.
+
+  Marshall-Martin 2.1  truncation    OK
+      in the rendered extraction : yes
+      in the repaired document   : yes
+      pre-flagged by mg-7d75     : NO
+      NOT pre-flagged. The document stopped ONE SENTENCE short of the paper 
+      naming the terminology collision this ticket turns on.
+
+  Joyal foreword  K(Pi) = Lambda     OK
+      in the rendered extraction : yes
+      in the repaired document   : yes
+      the clean sentence three lines below a passage the document already 
+      quoted. The 17.5 reconstruction was never needed.
+
+==============================================================================
+R3b  the other ten quotations are untouched and still present
+==============================================================================
+
+  AM 10.10  radical theorem          still in the document: yes
+  AM Thm 10.13                       still in the document: yes
+  AM 13.1.1  posets                  still in the document: yes
+  AM Def 8.1  species                still in the document: yes
+  AM 13.4.2  lower set               still in the document: yes
+  AM 8.13  Hadamard                  still in the document: yes
+  AM Ch. 11  connected               still in the document: yes
+  Joyal foreword  K(p)               still in the document: yes
+  AM posets as chambers              still in the document: yes
+  Marshall-Martin 2.1                still in the document: yes
+
+  These are mg-a61f's own A5a needles.  They are checked here so that
+  the audit's battery still applies to the repaired document and can be
+  re-run UNMODIFIED -- which it was; see the repair document.
+
+==============================================================================
+R3c  ANTICIPATED vs UNANTICIPATED, which is the point of the exercise
+==============================================================================
+
+  divergences pre-flagged by mg-7d75 section 10 item 1 : 1
+      AM 17.4/17.5  species
+  divergences NOT pre-flagged                          : 2
+      Aguiar-Ardila 12  braid cone
+      Marshall-Martin 2.1  truncation
+
+  Both counts matter and they do not weigh the same. The pre-flagged 
+  divergence tells you the author knew the extraction was lossy and said so 
+  -- it confirms a stated caveat and costs nothing. The two unflagged ones 
+  tell you HOW FAR the lossiness reached, which is precisely what the 
+  pre-file could not say, because a pre-file enumerates the places its author 
+  already suspects.
+
+  And note what found them: the check was EXECUTED against rendered PDFs 
+  rather than asserted. mg-7d75 named the right attack and did not run it; 
+  mg-a61f ran it. A named attack that is not executed produces the 
+  pre-flagged row and neither of the other two.
+
+  the document now states which were anticipated and which were not: yes
+
+==============================================================================
+R3 TOTAL BAD: 0
+==============================================================================

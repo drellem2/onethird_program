@@ -25,6 +25,12 @@ claimed for them, computed by mutually independent routes.
        n = 3, 13 of the 19 labelled posets have AC(P) = Pi[3].  What T1d
        establishes is the direction actually used downstream: the ANTICHAIN
        gives ALL of Pi[n].
+       CORRECTED 2026-07-30 (mg-6f61), on mg-a61f's X1: this block used to
+       assert "the smallest poset with AC(P) != Pi[n] is {a<c, b<d}", which is
+       FALSE -- the smallest is the 3-ELEMENT CHAIN, and the table this block
+       prints eleven lines earlier already said so (19 - 13 = 6 witnesses at
+       n = 3).  The smallest witness is now COMPUTED from the same sweep and
+       the run fails if it is not the 3-chain.
 
   T1f  THE CONTROL THAT MUST FIRE.  The same orbit machinery is run on a
        DELIBERATELY WRONG invariant (number of blocks instead of the multiset
@@ -141,8 +147,40 @@ print()
 print("  Every one of the 242 labelled posets to n = 4 has AC(P) inside Pi[n].")
 print("  REFUTED HYPOTHESIS, kept on the record: AC(P) = Pi[n] holds for 3 of 3")
 print("  posets at n = 2, 13 of 19 at n = 3 and 45 of 219 at n = 4, against 1")
-print("  antichain at each n.  The smallest poset with AC(P) != Pi[n] is")
-print("  {a<c, b<d}, where the partition ad|bc has a 2-cycle in its quotient.")
+print("  antichain at each n.")
+print()
+print("  CORRECTED 2026-07-30 (mg-6f61), on mg-a61f's X1.  This block used to")
+print("  ASSERT 'the smallest poset with AC(P) != Pi[n] is {a<c, b<d}'.  That")
+print("  is FALSE, and the table printed eleven lines above refutes it: 19 - 13")
+print("  = 6 labelled posets at n = 3 already fail.  The claim is now COMPUTED")
+print("  rather than asserted, from the same sweep as the table.")
+smallest_n = None
+smallest_wit = None
+for m in range(1, 5):
+    for P in all_posets(m):
+        if set(AC_by_acyclicity(P)) != set(set_partitions(m)):
+            smallest_n = m
+            smallest_wit = P
+            break
+    if smallest_n is not None:
+        break
+n_wit = sum(1 for P in all_posets(smallest_n)
+            if set(AC_by_acyclicity(P)) != set(set_partitions(smallest_n)))
+rel = sorted(smallest_wit[1])
+print()
+print("  smallest n with a witness : %d" % smallest_n)
+print("  labelled witnesses there  : %d" % n_wit)
+print("  one of them               : %s"
+      % (", ".join("%d<%d" % (a, b) for (a, b) in rel) or "antichain"))
+bad += (smallest_n != 3 or n_wit != 6)
+print()
+print("  The smallest is the 3-ELEMENT CHAIN a < b < c, where the partition")
+print("  {a,c}|{b} has a 2-cycle in the quotient: a < b sends {a,c} to {b} and")
+print("  b < c sends {b} back to {a,c}.  Six labelled posets at n = 3, one")
+print("  isomorphism class.  {a<c, b<d} IS a witness and is NOT the smallest;")
+print("  the reason originally given -- two blocks B, C with b1 < c1 and")
+print("  c2 < b2 -- forces |B| >= 2 and |C| >= 1, hence n >= 3, and n = 3 is")
+print("  attained.  See code/species_repair_6f61/out_r1_smallest.txt.")
 print()
 
 hdr("T1f  CONTROL -- a deliberately WRONG orbit invariant must disagree")

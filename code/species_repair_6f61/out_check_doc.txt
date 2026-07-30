@@ -1,0 +1,83 @@
+==============================================================================
+C1  every false sentence occurs EXACTLY ONCE and is STRUCK
+==============================================================================
+
+  §8 C3, the extremal claim                  occurrences 1   outside a strike 0  ok
+  §0, the five-axiom count                   occurrences 1   outside a strike 0  ok
+  §1, the Aguiar–Ardila quotation            occurrences 1   outside a strike 0  ok
+  §4, the AM §17.5 quotation                 occurrences 1   outside a strike 0  ok
+  §2.2, the control count                    occurrences 1   outside a strike 0  ok
+  §5, control (ii)'s accounting              occurrences 1   outside a strike 0  ok
+  §6 item 6, 'measured, not proved'          occurrences 1   outside a strike 0  ok
+  §9 row 6, the inequality direction         occurrences 2   outside a strike 0  ok
+  §10 item 2, the withdrawn errand           occurrences 1   outside a strike 0  ok
+  S12, the withdrawn non-location            occurrences 1   outside a strike 0  ok
+
+==============================================================================
+C2  every correction is present
+==============================================================================
+
+  1  the smallest witness is the 3-chain                     ok
+  1  with its count and its class                            ok
+  1  and the shape of the error is named                     ok
+  2  §0 states the per-column reading                        ok
+  2  §5 carries the per-column table                         ok
+  2  and every column is shown able to fail                  ok
+  2  §0 and §5 are stated to have disagreed                  ok
+  3  the corrected Aguiar–Ardila text                        ok
+  3  the corrected AM §17.5 species                          ok
+  3  anticipated vs unanticipated is stated                  ok
+  4  the terminology collision is named                      ok
+  4  and the usage is fixed                                  ok
+  5  the S_n half is stated unverified in §0                 ok
+  5  and in §3, naming S4 and both sources                   ok
+  5  located is distinguished from verified                  ok
+  A  the four hedges on §2.3 are corrected                   ok
+  A  the successor search is withdrawn                       ok
+  A  §10 item 2 is closed                                    ok
+  B  T3d is two statements, not four                         ok
+  C  control (ii) is a type mismatch                         ok
+  C  and its conclusion explicitly survives                  ok
+  meta  the incompleteness finding is recorded               ok
+  meta  §10 item 6 is marked incomplete in place             ok
+  meta  the repair's own self-assessment is limited beside itself ok
+  meta  §13's scope claim carries its exception              ok
+
+==============================================================================
+C3  mg-a61f's own anchors survive the repair
+==============================================================================
+
+  a6  §10 item 6 heading                     ok
+  a6  §10 item 6 names §2.3                  ok
+  a6  §13 scope note                         ok
+  a5  AM 10.10                               ok
+  a5  AM Thm 10.13                           ok
+  a5  AM 13.1.1                              ok
+  a5  AM 17.4/17.5                           ok
+  a5  AM Def 8.1                             ok
+  a5  AM 13.4.2                              ok
+  a5  AM 8.13                                ok
+  a5  AM Ch. 11                              ok
+  a5  Joyal foreword                         ok
+  a5  AM posets as chambers                  ok
+  a5  Aguiar-Ardila 12                       ok
+  a5  Marshall-Martin 2.1                    ok
+  a5  Marshall-Martin closure                ok
+
+  These are the strings mg-a61f's a5_quotes.py and a6_boundary.py
+  classify.  All present, so the auditor's battery applies to the
+  REPAIRED document and can be re-run unmodified.
+
+==============================================================================
+C4  the repair document
+==============================================================================
+
+  names its target                           ok
+  names the audit                            ok
+  names the instrument                       ok
+  records the missed predictions             ok
+  records what it did NOT repair             ok
+
+==============================================================================
+CHECK_DOC: PASS   (0 problem(s))
+==============================================================================

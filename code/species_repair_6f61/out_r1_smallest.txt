@@ -1,0 +1,94 @@
+==============================================================================
+R1a  the T1e table, recomputed from a third independent instrument
+==============================================================================
+
+  Posets are carried here as TUPLES OF UP-MASKS and enumerated as the
+  FIXED POINTS OF THE TRANSITIVE CLOSURE; faces come from block-index
+  functions.  Neither representation nor route is shared with
+  code/species_7d75/ or code/species_audit_a61f/.
+
+   n  labelled posets  AC subset Pi[n]  AC = Pi[n]  witnesses  antichains
+   1                1                1           1          0           1
+   2                3                3           3          0           1
+   3               19               19          13          6           1
+   4              219              219          45        174           1
+
+==============================================================================
+R1b  the witnesses at n = 3, printed in full
+==============================================================================
+
+    P = {b<a, c<a, c<b}           missing from AC(P): b|ac
+    P = {b<a, b<c, c<a}           missing from AC(P): ab|c
+    P = {a<b, c<a, c<b}           missing from AC(P): a|bc
+    P = {a<c, b<a, b<c}           missing from AC(P): a|bc
+    P = {a<b, a<c, c<b}           missing from AC(P): ab|c
+    P = {a<b, a<c, b<c}           missing from AC(P): b|ac
+
+  All 6 are the SAME isomorphism class in its 6 labellings: the 3-element chain.
+
+  Why, on the smallest one.  P = a < b < c and X = {a,c} | {b}:
+    a < b sends the block {a,c} to the block {b};
+    b < c sends the block {b} to the block {a,c};
+  so the quotient digraph is a 2-cycle and X is not in AC(P).
+
+  Every missing partition at n = 3 has block sizes {2,1}: yes
+
+  THE STATED REASON IN C3 IS SOUND AND THE CONCLUSION DRAWN FROM IT IS
+  NOT.  'A cycle needs two blocks B, C with b1 < c1 and c2 < b2' forces
+  |B| >= 2 and |C| >= 1, hence n >= 3 -- and 3 is attained.  C3 read its
+  own bound as 4.
+
+==============================================================================
+R1c  {a<c, b<d} IS a witness -- what C3 got right
+==============================================================================
+
+  P = {a<c, b<d}
+  X = bc|ad in AC(P): no
+  so P is a witness at n = 4: yes
+
+  C3's example is correct, its reason is correct, and the word
+  'smallest' is the whole of the error.
+
+==============================================================================
+R1d  the corrected sentence, generated from the measurement
+==============================================================================
+
+  Smallest witness with AC(P) != Pi[n]: the 3-ELEMENT CHAIN a < b < c,
+  where {a,c}|{b} has a 2-cycle in the quotient -- 6 labelled posets
+  at n = 3, one isomorphism class.  ({a<c, b<d} is also a witness and
+  is not the smallest.)
+
+==============================================================================
+R1e  CONTROL -- the search must be able to return n = 2
+==============================================================================
+
+  The identical search with the acyclicity test replaced by the
+  strictly stronger 'the quotient digraph has NO EDGES at all'.  Under
+  that test AC'(P) = Pi[n] iff P is an antichain, so a witness must
+  appear at n = 2.  If the search cannot return 2, then 3 is a fact
+  about the instrument.
+
+  control's smallest n: 2  (control fires: YES)
+
+==============================================================================
+R1f  PREDICTED vs ACTUAL
+==============================================================================
+
+  row                                                                pred   actual
+  P1  AC(P) subset Pi[n] for all 242 labelled posets to n <= 4        242      242  as predicted
+  P2  labelled posets with AC(P) = Pi[n], n = 1,2,3,4            (1, 3, 13, 45) (1, 3, 13, 45)  as predicted
+  P3  smallest n admitting a witness AC(P) != Pi[n]                     3        3  as predicted
+  P4a labelled witnesses at n = 3                                       6        6  as predicted
+  P4b isomorphism classes of witness at n = 3                           1        1  as predicted
+  P4c that class is the 3-element CHAIN                              True     True  as predicted
+  P5  labelled witnesses at n = 4                                     174      174  as predicted
+  P6  {a<c, b<d} is itself a witness (only 'smallest' is false)      True     True  as predicted
+  P7  every witness at n = 3 has block sizes {2,1}                   True     True  as predicted
+  P8  two routes to AC agree on every poset to n <= 4                True     True  as predicted
+  P9  CONTROL: with 'no edges in the quotient' the smallest n is        2        2  as predicted
+
+  All 11 predictions written before the run were met.
+
+==============================================================================
+R1 TOTAL BAD: 0
+==============================================================================
