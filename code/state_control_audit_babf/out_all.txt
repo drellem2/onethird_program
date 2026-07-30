@@ -1,0 +1,379 @@
+### 1. claims_audit.py       — mg-7870's coverage statement, against the code
+mg-babf — mg-7870's coverage statement, audited as a claim
+======================================================================================
+
+1. HOW MANY REGIONS ARE DIGESTED — the same number in every place that says so?
+-------------------------------------------------------------------------------
+  [TRUE    ] C1.1  COVERAGE.md's table heading and delta_control.py's CERTIFIED agree
+             measured: CERTIFIED has 9 entries; COVERAGE.md says 9
+  [TRUE    ] C1.2  the commit message's region count agrees with the code
+             measured: commit e924590 says 9; CERTIFIED has 9
+  [FALSE   ] C1.3  the README's own correction block: "the certified set is now **eight** regions"
+             measured: the README says eight (8); CERTIFIED has 9, COVERAGE.md says 9, the commit message says 9
+             the README sentence sits INSIDE readme.A1.7870, a DIGESTED region — so the figure is certified byte-for-byte and is still wrong
+
+2. THE TABLE IN COVERAGE.md AGAINST THE CODE — ids and character counts
+-----------------------------------------------------------------------
+  [TRUE    ] C2.1  COVERAGE.md's table lists exactly the ids in CERTIFIED, in order
+             measured: table ['cell.tree', 'cell.base', 'readme.F2', 'readme.F1', 'readme.B1', 'readme.B1.A3', 'readme.index', 'readme.A1', 'readme.A1.7870']
+             code  ['cell.tree', 'cell.base', 'readme.F2', 'readme.F1', 'readme.B1', 'readme.B1.A3', 'readme.index', 'readme.A1', 'readme.A1.7870']
+  [TRUE    ] C2.2  every character count in the table equals the code's constant
+             measured: 9 rows compared; 0 disagree
+
+3. THE DIGESTS THEMSELVES, RECOMPUTED BY THIS FILE'S OWN EXTRACTORS
+-------------------------------------------------------------------
+  [TRUE    ] C3.1  each certified sha256 is the sha256 of that region, recomputed independently
+             measured: 9 regions recomputed with my own parser and locators; 0 disagree
+
+4. THE NORMALISATION CLAIMS
+---------------------------
+  [TRUE    ] C4.1  COVERAGE.md: "On this material `.strip()` and `.strip(\" \\t\\r\\n\")` agree, so adopting the explicit rule moved no published number"
+             measured: compared on all 9 certified regions; 0 differ
+  [TRUE    ] C4.2  COVERAGE.md: "the cell is still 7,876 characters stripped / 7,878 raw"
+             measured: stripped 7876, raw 7878
+  [TRUE    ] C4.3  COVERAGE.md: "**U+00A0 is not whitespace to this rule**"
+             measured: N('\xa0x\xa0') = '\xa0x\xa0'  (str.strip() would give 'x')
+             behaviour under a mutation is measured separately, in mutations_babf.py B09
+
+5. 'header line included' AND 'markers sit outside the figures they certify'
+----------------------------------------------------------------------------
+  [TRUE    ] C5.1  COVERAGE.md: "Each README region is the **whole** blockquote or paragraph, **header line included**"
+             measured: 7 README regions checked; 0 do not start at their block head
+  [TRUE    ] C5.2  COVERAGE.md: "**Markers sit outside the figures they certify.**"
+             measured: 7 README markers checked against the figures in their own regions (comma-grouped numbers and standalone runs of 3+ digits; git hashes, `mg-` ids and `4d` excluded as identifiers, not figures); 0 markers key on a figure their region certifies
+             necessary condition, not sufficient: a marker could still key on a non-numeric claim its region certifies, and that is not mechanically decidable.  Stated as a limit of this check, not as a pass
+  [TRUE    ] C5.3  COVERAGE.md: "Regions are located by a content marker, never by line number"
+             measured: markers that are line numbers: 0; all 9 regions resolve through find_row / quote_block / paragraph, none through an index
+
+6. THE EXCLUSION LIST — is anything claimed as covered that is not?
+-------------------------------------------------------------------
+  [FALSE   ] C6.1  COVERAGE.md, "Not covered, on purpose": "**The rest of `STATE.md`'s ledger** — every row but `:135`."
+             measured: row :135 is 9028 raw characters in 3 fields [842, 304, 7878]; the digest covers the widest field only, 7878 of 9028 (87.3%). 1150 characters of the certified row are digested by nothing
+             the table row above it is precise ('row `mg-276d`'s content cell'); this sentence is the one that over-reaches, and it is the sentence a reader goes to for what is NOT covered.  Measured behaviour: mutations_babf.py B01/B02
+  [FALSE   ] C6.2  COVERAGE.md lists what is not covered: other rows, other README blocks, edge padding, whether a change is legitimate, other revisions
+             measured: the list does not mention a region's POSITION or CONTEXT.  A digest is a function of the block's bytes and of nothing else, so a certified block can be moved, fenced, commented out or preceded by a retraction with its digest intact
+             measured behaviour: mutations_babf.py B04/B05/B06/B07, all exit 0
+
+7. THE EVIDENCE TABLE
+---------------------
+  [TRUE    ] C7.1  COVERAGE.md: mg-2216's battery re-run gives "10 caught, **0 missed**, 4 tolerated by design, 0 noisy"
+             measured: out_battery_2216_rerun.txt's own summary line: 14 mutations: 10 caught, 0 MISSED, 4 tolerated by design, 0 noisy
+             that this file REPRODUCES is checked in reproduce.sh, not here
+  [TRUE    ] C7.2  COVERAGE.md: out_control.txt is "clean 0; NC1–NC3 exit 1; NC4–NC6 exit 2"
+             measured: exit codes found in out_control.txt per NC: NC1->[1], NC2->[1], NC3->[1], NC4->[2], NC5->[2], NC6->[2]
+  [TRUE    ] C7.3  COVERAGE.md: out_mutations.txt is "a **frozen record of the pre-repair instrument**"
+             measured: byte-identical to its state at 6b1eacf: True (6459 characters)
+
+8. WHAT THE COMMIT CERTIFIES vs WHAT IT DIGESTS
+-----------------------------------------------
+  [TRUE    ] C8.1  the docstring's own DIGESTED count agrees with CERTIFIED
+             measured: docstring says 9; CERTIFIED has 9
+  [FALSE   ] C8.2  the docstring's "WHAT IT CERTIFIES" names "STATE.md row :135" — the ROW
+             measured: present in the docstring: True; the row is 9028 characters and 7878 are digested
+             same defect as C6.1, in a second place.  The line it certifies is named as a whole and 12.7% of it is outside every digest
+
+9. DID THE REPAIR PRESERVE WHAT WAS ALREADY RIGHT?
+--------------------------------------------------
+  [TRUE    ] C9.1  the repair did not re-open b68db5d's or mg-2da3's existing README/STATE content
+             measured: numstat docs/state-history/README.md: +37 -0 (no deletions => pure insertion)
+  [TRUE    ] C9.2  the commit's SCOPE paragraph: "THE PINNED BATTERY IS BYTE-IDENTICAL"
+             measured: git diff 6b1eacf..e924590 -- code/state_audit_6a2f/ : EMPTY
+             that it still REPRODUCES out_audit.txt is checked in reproduce.sh
+
+======================================================================================
+21 claims checked: 17 TRUE, 4 FALSE, 0 UNTESTED
+  FALSE  C1.3  the README's own correction block: "the certified set is now **eight** regions"
+  FALSE  C6.1  COVERAGE.md, "Not covered, on purpose": "**The rest of `STATE.md`'s ledger** — every row but `:135`."
+  FALSE  C6.2  COVERAGE.md lists what is not covered: other rows, other README blocks, edge padding, whether a change is legitimate, other revisions
+  FALSE  C8.2  the docstring's "WHAT IT CERTIFIES" names "STATE.md row :135" — the ROW
+======================================================================================
+--- exit 0
+
+### 2. regression_2216_b2.py — mg-2216's five B2 mutations, re-implemented
+mg-babf — mg-2216's five B2 mutations, RE-IMPLEMENTED and re-run
+======================================================================================
+Every one of these exited 0 against the PRE-repair delta_control.py.
+mg-7870 claims the repair closes all five.  This is the independent check.
+
+certified row : line :135 (1-indexed), located by attempt id, not line number
+content cell  : 7876 characters stripped, 7878 raw, 8010 bytes stripped
+
+POSITIVE CONTROL — clean tree: delta_control.py exit 0   as expected
+
+M01  [single-character]  expect: catch
+      row :135 cell: 'every ridge in 1 or 2 facets' -> '1 or 3' (one character, a false statement about the pseudomanifold)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+
+M02  [length-preserving]  expect: catch
+      row :135 cell: 'the proof is sound' -> 'the proof is bogus' (five characters, the row's verdict on its own proof)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+
+M03  [whitespace-only]  expect: catch
+      row :135 cell: the ASCII spaces in '**The mathematics.**' -> U+00A0 (no visible character changes; the heading stops rendering)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+
+M05  [reordering]  expect: catch
+      row :135 cell: two adjacent sentences swapped (length AND whitespace-separated token multiset both preserved, asserted in code)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+
+M06  [bulk-but-quiet]  expect: catch
+      row :135 cell: the last 3,000 of 7,876 characters replaced by 'x', '**' count preserved (38% of the certified cell)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+
+======================================================================================
+RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 6fd6ac3bafb182d1 == 6fd6ac3bafb182d1
+======================================================================================
+SUMMARY — mg-2216's five B2 mutations against the REPAIRED instrument
+======================================================================================
+  id    class                 expect     exit  verdict
+  M01   single-character      catch      2     CAUGHT
+  M02   length-preserving     catch      2     CAUGHT
+  M03   whitespace-only       catch      2     CAUGHT
+  M05   reordering            catch      2     CAUGHT
+  M06   bulk-but-quiet        catch      2     CAUGHT
+
+  5 mutations: 5 of 5 expected-catch CAUGHT, 0 SILENT MISSES, 0 expected-tolerate (0 noisy)
+
+VERDICT: B2 CLOSES.  All five mutations that exited 0 against the pre-repair
+         instrument are now non-zero, reproduced by an implementation that
+         shares no code with mg-2216's battery or mg-7870's repair.
+--- exit 0
+
+### 3. mutations_babf.py     — my own battery, none of it mg-2216's  (exit 1 = findings)
+mg-babf — INDEPENDENT mutation battery against mg-7870's digest-based control
+======================================================================================
+None of these is one of mg-2216's fourteen.  Those are the repair's known-answer
+set; they are re-run as a regression in regression_2216_b2.py, not reused here.
+
+STATE.md  at rest : 177464 bytes, 174405 characters
+README.md at rest : 22759 bytes, 22568 characters
+certified row     : line :135, 9028 characters, 3 fields of widths [842, 304, 7878]
+                    the digest covers the WIDEST field only (7878 of 9028 raw characters, 87.3% of the line)
+mutations         : 15, each applied to the snapshot, never stacked
+
+POSITIVE CONTROL — clean tree: delta_control.py exit 0   as expected
+
+B01  [certified-row]  expect: catch
+      row :135 FIELD 1 (the row's own verdict): '**GREEN · PROVEN, all finite posets' -> '**RED · REFUTED, no finite poset'
+      character delta: STATE.md -3, README +0
+      delta_control.py exit 0   SILENT — exits 0, nothing fires
+
+B02  [certified-row]  expect: catch
+      row :135 FIELD 2: 'foundation claims (1)–(3) supply' -> 'FABRICATED claims (1)–(9) supply'
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 0   SILENT — exits 0, nothing fires
+
+B03  [certified-row]  expect: tolerate
+      row :135: 'RETRACTED — the proof in this row does not close.' appended AFTER the closing pipe (outside every field the parser returns; GFM drops it too)
+      character delta: STATE.md +50, README +0
+      delta_control.py exit 0   SILENT — exits 0, nothing fires
+
+B04  [locator-position]  expect: catch
+      the mg-7870 correction block MOVED VERBATIM under a new heading 'Appendix Z — superseded drafts ... nothing below is in force'
+      character delta: STATE.md +0, README +93
+      delta_control.py exit 0   SILENT — exits 0, nothing fires
+
+B05  [locator-context]  expect: catch
+      the certified F1 correction block wrapped in a ```text fence — bytes identical, renders as a code sample instead of a correction
+      character delta: STATE.md +0, README +12
+      delta_control.py exit 0   SILENT — exits 0, nothing fires
+
+B06  [locator-context]  expect: catch
+      the certified F1 correction block wrapped in an HTML comment — bytes identical, ABSENT from the rendered page
+      character delta: STATE.md +0, README +9
+      delta_control.py exit 0   SILENT — exits 0, nothing fires
+
+B07  [locator-context]  expect: catch
+      a 'RETRACTED 2026-08-01 ... is void' paragraph inserted immediately ABOVE the mg-7870 correction block; the block itself untouched
+      character delta: STATE.md +0, README +149
+      delta_control.py exit 0   SILENT — exits 0, nothing fires
+
+B09  [normalisation]  expect: catch
+      U+00A0 appended at the F2 block's OUTER edge (COVERAGE.md: U+00A0 is not whitespace to N, so the tolerance must not extend to it)
+      character delta: STATE.md +0, README +1
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] readme.F2 — the F2 correction block
+
+B10  [normalisation]  expect: tolerate
+      four ASCII spaces appended at the F2 block's OUTER edge (the stated tolerance, tested on a README block rather than on the ledger cell)
+      character delta: STATE.md +0, README +4
+      delta_control.py exit 0   SILENT — exits 0, nothing fires
+
+B11  [normalisation]  expect: catch
+      one trailing space on an INTERIOR line of the F2 block (invisible rendered, invisible in most diffs, one character)
+      character delta: STATE.md +0, README +1
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] readme.F2 — the F2 correction block
+
+B12  [normalisation]  expect: catch
+      one ASCII '-' -> U+2010 HYPHEN inside the mg-7870 correction block (visually identical; NFKC would have folded it)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] readme.A1.7870 — the mg-2216 / mg-7870 correction to the A1 block
+
+B13  [normalisation]  expect: catch
+      U+200B ZERO WIDTH SPACE inserted mid-word in 'pseudomanifold' in the certified cell (zero visible change, +1 character)
+      character delta: STATE.md +1, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] cell.tree — row :135's content cell, WORKING TREE
+        [MOVED] tree cell is 7876 characters (stripped)
+        [MOVED] the delta is +173 characters
+
+B14  [stated-boundary]  expect: tolerate
+      the per-row index table's '7,705' falsified to '9,705' (COVERAGE.md names this uncovered — confirming the statement, not hunting a miss)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 0   SILENT — exits 0, nothing fires
+
+B15  [stated-boundary]  expect: tolerate
+      STATE.md Appendix A: 'Re-running a revision-pinned instrument' -> 'Re-running a working-tree instrument' — the convention this cluster establishes, inverted
+      character delta: STATE.md -2, README +0
+      delta_control.py exit 0   SILENT — exits 0, nothing fires
+
+B16  [parser]  expect: catch
+      the certified row indented by ONE SPACE (the parser requires the line to start with '|')
+      character delta: STATE.md +1, README +0
+      delta_control.py exit 1   CAUGHT (FAIL)
+        [FAIL] exactly one ledger row keys to mg-276d in the working tree
+
+======================================================================================
+RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 6fd6ac3bafb182d1 == 6fd6ac3bafb182d1
+======================================================================================
+SUMMARY — mg-babf's own battery against the repaired instrument
+======================================================================================
+  id    class                 expect     exit  verdict
+  B01   certified-row         catch      0     SILENT   <<< SILENT MISS
+  B02   certified-row         catch      0     SILENT   <<< SILENT MISS
+  B03   certified-row         tolerate   0     SILENT
+  B04   locator-position      catch      0     SILENT   <<< SILENT MISS
+  B05   locator-context       catch      0     SILENT   <<< SILENT MISS
+  B06   locator-context       catch      0     SILENT   <<< SILENT MISS
+  B07   locator-context       catch      0     SILENT   <<< SILENT MISS
+  B09   normalisation         catch      2     CAUGHT
+  B10   normalisation         tolerate   0     SILENT
+  B11   normalisation         catch      2     CAUGHT
+  B12   normalisation         catch      2     CAUGHT
+  B13   normalisation         catch      2     CAUGHT
+  B14   stated-boundary       tolerate   0     SILENT
+  B15   stated-boundary       tolerate   0     SILENT
+  B16   parser                catch      1     CAUGHT
+
+  15 mutations: 5 of 11 expected-catch CAUGHT, 6 SILENT MISSES, 4 expected-tolerate (0 noisy)
+
+READ THE 'tolerate' ROWS AS BOUNDARY CONFIRMATIONS, NOT AS PASSES: B03, B10, B14
+and B15 exit 0 because COVERAGE.md says they are outside the boundary, and the
+point of running them is that the statement is now TESTED rather than trusted.
+--- exit 1
+
+### 4. statements_audit.py   — do the statements and the control agree?
+mg-babf — do mg-7870's control and the statements published around it agree?
+======================================================================================
+mg-2216's instruction: fix the control OR narrow the statements.  Which happened?
+
+S1  docs/OneThird-STATE-Landing-Control-mg2da3-IndependentAudit.md (mg-2da3's ticket, item 1, quoted by mg-2216)
+      STATEMENT: A control for that change must read the working tree / `HEAD` and **must fail when the file is mutated**.
+      still in the tree verbatim: True  (docs/OneThird-STATE-Landing-Control-mg2da3-IndependentAudit.md, code/state_landing_control_2da3/COVERAGE.md)
+      present before the repair (6b1eacf): True   -> mg-7870 did NOT touch it
+      it FORBIDS   : any mutation of STATE.md or the state-history README
+      control PERMITS: B01 B02 B03 B04 B05 B06 B07 B14 B15 — nine mutations of the two files, all exit 0
+      READING      : This is a universal over mutations of THE FILE.  It has exactly one true reading and the control does not satisfy it; COVERAGE.md's own 'Not covered, on purpose' section is a written admission of that.
+      VERDICT      : STATEMENT AND CONTROL DISAGREE
+
+S2  docs/state-history/README.md, the A1 correction block (a DIGESTED region)
+      STATEMENT: it exits **non-zero** both when the repair is damaged (`1`) and when a measured constant of the landing has moved (`2`) — never green about a delta that is no longer the delta it was written for.
+      still in the tree verbatim: True  (docs/OneThird-STATE-Landing-Control-mg2da3-IndependentAudit.md, docs/state-history/README.md)
+      present before the repair (6b1eacf): True   -> mg-7870 did NOT touch it
+      it FORBIDS   : the certified delta ceasing to be present, in any sense
+      control PERMITS: B06 — b68db5d's own F1 correction block wrapped in an HTML comment, absent from the rendered page, control exits 0
+      READING      : TWO READINGS, and they differ.  (a) 'the delta' = the BYTES b68db5d wrote: under this reading B06 leaves them in the file and the sentence survives.  (b) 'the delta' = what b68db5d ADDED TO THE DOCUMENT: under this reading B06 removes the F1 correction block from every rendered view of the README while the control stays green, and the sentence is falsified.  I cannot adjudicate between them from the text and do not try; reading (b) is the one a reader of the README would take, and it is the reading under which the sentence is doing work.
+      VERDICT      : STATEMENT AND CONTROL DISAGREE
+
+S3  STATE.md, Appendix A, the convention this cluster establishes, item (4)
+      STATEMENT: that instrument ships with a **negative control in the same commit** showing it exits non-zero when that tree is mutated
+      still in the tree verbatim: True  (STATE.md)
+      present before the repair (6b1eacf): True   -> mg-7870 did NOT touch it
+      it FORBIDS   : a mutated tree on which the negative control does not exit non-zero
+      control PERMITS: B01 B02 B04 B05 B06 B07 — the tree is mutated and the instrument exits 0
+      READING      : Same universal shape as S1, in the file that publishes the CONVENTION the whole cluster is meant to establish.  This is the statement with the longest reach: it is not about one instrument, it is the rule the next instrument in this repo will be written to.
+      VERDICT      : STATEMENT AND CONTROL DISAGREE
+
+S4  code/state_landing_control_2da3/COVERAGE.md
+      STATEMENT: Per that finding, the control was widened to match the wider statements rather than the statements narrowed to match the control
+      still in the tree verbatim: True  (code/state_landing_control_2da3/COVERAGE.md)
+      present before the repair (6b1eacf): None   -> mg-7870 introduced it
+      it FORBIDS   : the wider statements still exceeding the control
+      control PERMITS: its own document — COVERAGE.md's 'Not covered, on purpose' section, five bullets, enumerates the ways the control does not match them
+      READING      : This is the one that is false on its own page and needs no mutation to show it.  S1 and S3 are universal; a bounded control cannot be widened to match a universal.  The two repairs mg-2216 offered were 'fix the control' and 'narrow the statements'; the control was widened (really: strengthened) but not to universality, and S1 and S3 were not narrowed at all.
+      VERDICT      : STATEMENT AND CONTROL DISAGREE
+
+NARROWINGS THE REPAIR DID ADD — recorded so the finding is not overstated
+--------------------------------------------------------------------------------------
+  N1  docs/state-history/README.md
+      "the goal is bounded, stated coverage, not total coverage"
+      present now: True; present at 6b1eacf: False  (added by mg-7870, in the correction block directly beneath the A1 block)
+  N2  code/state_landing_control_2da3/COVERAGE.md
+      "The goal is not a control that catches everything"
+      present now: True; present at 6b1eacf: False  (added by mg-7870, COVERAGE.md's opening line)
+
+  These are real and they matter: bounded coverage is now STATED, in two places,
+  and one of them sits directly beneath S2.  What they are not is a narrowing OF
+  S1, S2 or S3.  A general disclaimer added nearby does not strike an absolute
+  sentence that is still published as written — and S1 and S3 are not in either
+  of the two documents the disclaimers were added to.
+
+======================================================================================
+4 statements checked, 4 still disagree with the control, 0 narrowed.
+======================================================================================
+--- exit 0
+
+### 5. preservation.py       — did the repair preserve what was already right?
+mg-babf — did mg-7870's repair preserve what was already right?
+======================================================================================
+
+P1. THE PINNED BATTERY
+----------------------
+  [HOLDS] P1.1  code/state_audit_6a2f/ is byte-identical across the repair
+           measured: git diff 6b1eacf..e924590 -- code/state_audit_6a2f/ : EMPTY
+  [HOLDS] P1.2  and byte-identical against main in this working tree
+           measured: EMPTY
+  [HOLDS] P1.3  it still reproduces out_audit.txt byte-identically
+           measured: exit 0; committed 96291 bytes, produced 96291 bytes; identical: True
+  [HOLDS] P1.4  the pinned battery is blind to a mutation of MINE, as it was to mg-bd41's gutting and mg-2216's M06
+           measured: with b68db5d's F1 correction block HTML-commented out of the README, the battery exits 0 and emits 96291 bytes, identical to the committed output: True
+           this HOLDS in the sense that the A1 finding is re-confirmed a third time from a third mutation; the battery is doing exactly what it was built to do and pinning is a feature there, which is why nothing here asks it to change
+
+P2. "NOTHING WAS LOST" IS NOT RE-OPENED
+--------------------------------------
+  [HOLDS] P2.1  the repair deletes no line of STATE.md or the state-history README
+           measured: 0 removed lines in the repair's diff over those two files
+  [HOLDS] P2.2  the repair touches only the control's own directory and the README
+           measured: files touched: ['code/state_landing_control_2da3/COVERAGE.md', 'code/state_landing_control_2da3/delta_control.py', 'code/state_landing_control_2da3/negative_control.py', 'code/state_landing_control_2da3/out_battery_2216_rerun.txt', 'code/state_landing_control_2da3/out_control.txt', 'code/state_landing_control_2da3/run_all.sh', 'docs/state-history/README.md']
+  [HOLDS] P2.3  the control-vs-content framing sentence is present and unaltered
+           measured: "...none of this touches 'nothing was lost', which STANDS" present: True; unchanged across the repair: True
+
+P3. THE THREE RECORD CORRECTIONS, RE-DERIVED FROM SOURCE
+--------------------------------------------------------
+  [HOLDS] P3.A3  the ancestry: "two commits before mg-34bf's parent" was off by one
+           measured: %p chain: 57f962f <- 97cb533 <- 60f4dac; 60f4dac is mg-34bf's parent's PARENT, not two before the parent
+  [HOLDS] P3.A2  the over-claim: mg-6a2f DID name the source, and the new part is new
+           measured: the phrase is in docs/OneThird-STATE-Restructure-IndependentAudit.md at :212 (mg-2216 published :212); db08b4c:STATE.md is 327 lines with 0 occurrences of mg-a3d4
+  [HOLDS] P3.A1  the blind certification: the pinned battery cannot see the tree
+           measured: re-established at P1.4 from a third independent mutation (identical output: True)
+           and mechanically: no script in code/state_audit_6a2f/ opens the working tree or resolves HEAD — checked next
+  [HOLDS] P3.A1b  the mechanical test Appendix A publishes: "does any script open the working tree or resolve HEAD?"
+           measured: 6 scripts in code/state_audit_6a2f/; 0 open STATE.md directly or mention HEAD
+
+======================================================================================
+11 preservation checks: 11 HOLD, 0 BROKEN
+======================================================================================
+--- exit 0
+
