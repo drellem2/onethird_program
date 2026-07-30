@@ -1,0 +1,103 @@
+population: all posets on 2..5 elements up to isomorphism, N = 86
+claim (1) on the uncorrupted rebuild: holds on 86/86 (ideal-lattice route, le_to_facet not used)
+
+==============================================================================
+A. REPRODUCE THE FIRE.  Own counts, own population, own predicates.
+==============================================================================
+row     bites    vac vacuous |L(P)|               absorbable spec-moved
+I1      72/72     14 [1, 2]                             0/72      66/72
+I2      82/82      4 [2, 6, 24, 120]                    0/82      82/82
+I3      82/82      4 [1]                                0/82      82/82
+I4      61/61     25 [1, 2, 3, 4, 5, 6, 8, 12, 24]       0/61      58/61
+
+==============================================================================
+B. IS THE 'NOT ABSORBABLE' ANSWER A MEASUREMENT OR A THEOREM?
+   absorbable_by_diagonal_twist returns False the instant a DIAGONAL
+   entry moves (s_i^2 = 1 pins the diagonal).  So for any mutation
+   that provably changes diag(L^rel), 'absorbable 0/N' is arithmetic,
+   not evidence -- the same defect shape as mg-78c0's all-plus-1 row.
+==============================================================================
+  I1   diagonal of L^rel moves on 72/72 biting posets; diagonal PRESERVED on 0/72
+       -> on every one of them the predicate cannot return True: this row's absorbability count is FORCED.
+  I2   diagonal of L^rel moves on 82/82 biting posets; diagonal PRESERVED on 0/82
+       -> on every one of them the predicate cannot return True: this row's absorbability count is FORCED.
+  I3   diagonal of L^rel moves on 82/82 biting posets; diagonal PRESERVED on 0/82
+       -> on every one of them the predicate cannot return True: this row's absorbability count is FORCED.
+  I4   diagonal of L^rel moves on 58/61 biting posets; diagonal PRESERVED on 3/61
+       -> the predicate does real work on 3 poset(s): the diagonal matches and the off-diagonal signs decide.
+
+  The exact algebra, verified rather than argued:
+    I2: L_mut == L_true + e_j.e_j^T exactly (j = the free ridge's one facet) on 82/82 posets where it applies.
+        A rank-one bump on ONE diagonal entry.  Non-absorbability and trace-motion are both immediate, for every finite poset.
+    I3: L_mut == L_true minus that ridge's rank-one outer product on 82/82 posets where it applies.
+        Both diagonal entries drop by 1, so again forced.
+    I1: the abandoned facet's diagonal entry drops by exactly 1 on 72/72 posets where it applies -- forced too.
+
+==============================================================================
+C. IS I4 A GAUGE?  The section rejected facet_swap01 because a
+   relabelling of the facet set is a signed-permutation conjugation,
+   hence isospectral.  Is the off-by-one one of those?
+==============================================================================
+  The off-by-one is the TRUE map composed with a cyclic rotation of
+  the word:  prefixes(w[1:]) = prefixes_true(rot(w)),
+  rot(w) = (w1,...,w_{n-1},w0).  So whenever rot maps L(P) onto
+  itself, the mutated facet SET equals the true facet set and the
+  mutation is a pure relabelling -- exactly the rejected gauge.
+
+  (antichain)            n=2 |L(P)|=2    bites=False facet set IDENTICAL, sigma = rot; L_mut == P^T.L_true.P : True
+  (antichain)            n=3 |L(P)|=6    bites=True  facet set IDENTICAL, sigma = rot; L_mut == P^T.L_true.P : True
+  (antichain)            n=4 |L(P)|=24   bites=True  facet set IDENTICAL, sigma = rot; L_mut == P^T.L_true.P : True
+  (antichain)            n=5 |L(P)|=120  bites=True  facet set IDENTICAL, sigma = rot; L_mut == P^T.L_true.P : True
+
+  posets where the off-by-one is a pure facet relabelling: 4/86
+  ... of which it BITES (so is counted in row I4) on 3:
+      (antichain)            |L(P)|=6     isospectral BY CONSTRUCTION (permutation similarity) = True; corroborated by charpoly mod p at 8 shifts = True
+                               R.spectrum_provably_moved says False -- so this poset is one of the row's unproved remainder, and it is not merely unproved: it is PROVABLY isospectral.
+      (antichain)            |L(P)|=24    isospectral BY CONSTRUCTION (permutation similarity) = True; corroborated by charpoly mod p at 26 shifts = True
+                               R.spectrum_provably_moved says False -- so this poset is one of the row's unproved remainder, and it is not merely unproved: it is PROVABLY isospectral.
+      (antichain)            |L(P)|=120   isospectral BY CONSTRUCTION (permutation similarity) = True; corroborated by charpoly mod p at 122 shifts = True
+                               R.spectrum_provably_moved says False -- so this poset is one of the row's unproved remainder, and it is not merely unproved: it is PROVABLY isospectral.
+
+  Row I4's biting posets on which no invariant separated the spectra, listed:
+      (antichain)            n=3 |L(P)|=6    facet set identical to the true one: True ; charpoly agrees mod p at 8 shifts: True
+      (antichain)            n=4 |L(P)|=24   facet set identical to the true one: True ; charpoly agrees mod p at 26 shifts: True
+      (antichain)            n=5 |L(P)|=120  facet set identical to the true one: True ; charpoly agrees mod p at 122 shifts: True
+
+==============================================================================
+D. VACUITY, recomputed, and the REASON checked against the real one.
+==============================================================================
+  I1   vacuous on 14 posets, |L(P)| in [1, 2]
+       kinds: chain=4 antichain=1 other=9
+       real reason: fewer than 3 facets, so the re-target has no third facet to aim at (or no interior ridge at all)
+       posets vacuous for some OTHER reason: 0
+  I2   vacuous on 4 posets, |L(P)| in [2, 6, 24, 120]
+       kinds: chain=0 antichain=4 other=0
+       real reason: no FREE ridge exists, i.e. F(P) is a sphere -- the antichains
+       vacuous posets that DO have a free ridge: 0
+  I3   vacuous on 4 posets, |L(P)| in [1]
+       kinds: chain=4 antichain=0 other=0
+       real reason: no interior ridge exists
+       vacuous posets that DO have an interior ridge: 0
+  I4   vacuous on 25 posets, |L(P)| in [1, 2, 3, 4, 5, 6, 8, 12, 24]
+       kinds: chain=4 antichain=1 other=20
+       real reason: the off-by-one happens to leave L^rel numerically unchanged
+       vacuous posets where the facet SET really did change (so L^rel not changing is a coincidence, not an identity): 24
+
+==============================================================================
+E. INSTANCE-DEPENDENCE.  The audited code always mutates the FIRST
+   eligible ridge.  Sweep every eligible ridge instead: does any
+   choice make the corruption absorbable, or stop it biting?
+==============================================================================
+  I1   over ALL 1449 eligible (poset, ridge) choices: absorbable on 0, failed to bite on 0
+  I2   over ALL 981 eligible (poset, ridge) choices: absorbable on 0, failed to bite on 0
+  I3   over ALL 1459 eligible (poset, ridge) choices: absorbable on 0, failed to bite on 0
+
+==============================================================================
+F. mg-5630's PREMISE, re-derived: is NC3's parity corruption really
+   L_parity = D.L_true.D with D = diag((-1)^j)?
+==============================================================================
+  L_parity == D.L_true.D verified on 86/86 posets; the corruption bites on 82.
+  So mg-5630's gauge-absorption premise, which mg-2789 is built on, is CONFIRMED by an independent rebuild.
+
+==============================================================================
+done
