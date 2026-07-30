@@ -1,0 +1,188 @@
+mg-7d5a -- RE-MEASURING THIS LANDING'S OWN CLAIMS
+==============================================================================
+Nothing below is inherited from mg-6653, from mg-f2e1, or from the
+ticket.  Where the ticket and the audit disagreed -- on whether
+c50ce32 carried the two defects mg-1319 repaired -- the audit is
+right and T1 shows why.
+
+TARGET 1 -- THE SENTENCE THIS LANDING STRIKES, AND THE ONE IT LANDS INSTEAD
+---------------------------------------------------------------------------
+mg-f2e1's Appendix A block and commit message: row G-double-prime was
+'added to STATE.md by the mg-a806 landing ... into the file that no
+trigger watched', nominated as 'the strongest available evidence' for
+widening A5 to cover STATE.md.  Four independent refutations, each
+re-measured here from git and not quoted from mg-6653.
+
+  [REFUTED  ] the row was ever added to STATE.md
+        -- git log -S on STATE.md returns 2 commit(s): ba3ec79, 1e61031.
+           1e61031 is mg-a2bd's STRIKE RECORD and ba3ec79 is mg-f2e1 QUOTING the
+           claim under audit.  No commit ever added the row to STATE.md.
+  [MEASURED ] where the row actually landed
+        f6756c0 : docs/OneThird-Hodge-Side-Leverage.md line 877 -- that document's OWN ledger row,
+        labelled PROVEN, 'free from G + Theorem L'.
+  [REFUTED  ] f6756c0 touches STATE.md
+        -- f6756c0's 4 files are:
+             code/hodge_leverage/run_all.sh
+             code/hodge_leverage/run_sweep.py
+             code/hodge_leverage/sweep_output.txt
+             docs/OneThird-Hodge-Side-Leverage.md
+           None of them is STATE.md.
+  [REFUTED  ] some other mg-a806 commit put the row into STATE.md
+        -- mg-a806's STATE.md commits are 16bee79, 5b63037; 0 of them contain the row.
+  [REFUTED  ] 'the file that no trigger watched' describes f6756c0
+        -- 3 of f6756c0's 4 files are instruments the PRE-EXISTING A5 clause
+           already names -- a harness, a sweep script, and the text an instrument
+           prints:
+             code/hodge_leverage/run_all.sh
+             code/hodge_leverage/run_sweep.py
+             code/hodge_leverage/sweep_output.txt
+           The old clause fired on the commit that carried the arc's only BROKEN item.
+  [REFUTED  ] mg-d39d, cited as the source, supports the claim
+        -- mg-d39d's own commit message says the opposite:
+             'ledger row without being rebuilt. Blast radius is two lines and STATE.md is clean.'
+
+  THE REPLACEMENT ARGUMENT, re-measured rather than adopted:
+
+  [CONFIRMED] c50ce32 (mg-60d3) touches STATE.md AND NOTHING ELSE
+        -- files: ['STATE.md']
+           shortstat: 1 file changed, 13 insertions(+), 5 deletions(-)
+           Under the pre-existing clause -- which fires on instruments -- this commit
+           triggered NOTHING.  That is the hole, and it is an existence proof, not an
+           anecdote.
+  [CONFIRMED] the two defects mg-1319 repaired rode in via c0cf104's STATE.md hunk, not c50ce32's
+        -- c0cf104's STATE.md hunk is 8 added lines; the Lemma-1 'n <= 6'
+           overstatement present: True; the 'SIX for six' 4d contradiction present: True.
+           c0cf104 ALSO touches controls.py (11 files total), which is the only reason
+           those eight lines were audited at all.
+           NOTE: mg-f2e1's TICKET asserted c50ce32 carried them.  It did not, mg-f2e1
+           declined to inherit that, and this landing does not reintroduce it.
+
+TARGET 2 -- THE 38/38 POPULATION, ENUMERATED FROM THE WORKING TREE, WITH THE METHOD
+-----------------------------------------------------------------------------------
+METHOD, stated because this is the THIRD pass over this population and
+the first two were both wrong in the same direction:
+  1. take every file git would commit -- tracked AND not-yet-tracked,
+     minus what .gitignore excludes
+     (`git ls-files --cached --others --exclude-standard`).  No manual
+     file list, so a file cannot be omitted by being forgotten, and
+     `--others` is load-bearing: with `--cached` alone this scanner
+     would not see the files of the landing that runs it, and would
+     report a population that changes the moment they are added;
+  2. read each as UTF-8, skipping anything that does not decode;
+  3. count EVERY occurrence of the literal '38/38', not lines carrying it;
+  4. group into SITES by enclosing paragraph (see `sites_in`);
+  5. classify each file; the ONE exclusion is this run's own
+     transcript, 'code/face_geometry_landing_7d5a/out_verify.txt',
+     because a scanner that counts its own output cannot regenerate
+     byte-identically.  This instrument's own SOURCE is counted with
+     the rest, and nothing else is excluded.
+
+  [MEASURED ] population in the working tree as it will be committed
+        50 occurrence(s) of '38/38', on 44 line(s), in 12 file(s), in 35 site(s).
+
+        LIVE        STATE.md                                                                6 occ,  2 site(s) on line(s) [135, 276]
+        LIVE        code/face_geometry_audit_5630/audit_x3_equivalence.py                   1 occ,  1 site(s) on line(s) [84]
+        INSTRUMENT  code/face_geometry_audit_6653/out_verify_claims.txt                     2 occ,  1 site(s) on line(s) [41, 45]
+        INSTRUMENT  code/face_geometry_audit_6653/run_all.sh                                1 occ,  1 site(s) on line(s) [21]
+        INSTRUMENT  code/face_geometry_audit_6653/verify_claims.py                          5 occ,  3 site(s) on line(s) [172, 177, 194, 203, 280]
+        INSTRUMENT  code/face_geometry_landing_7d5a/run_all.sh                              1 occ,  1 site(s) on line(s) [11]
+        INSTRUMENT  code/face_geometry_landing_7d5a/verify_landing.py                       5 occ,  4 site(s) on line(s) [19, 182, 183, 234, 429]
+        FROZEN AUDIT docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md         2 occ,  2 site(s) on line(s) [45, 311]
+        LIVE        docs/OneThird-Intrinsic-Face-Geometry-Probe.md                          9 occ,  4 site(s) on line(s) [42, 44, 421, 424, 828, 830, 835]
+        FROZEN AUDIT docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md  5 occ,  5 site(s) on line(s) [22, 64, 88, 259, 267]
+        FROZEN AUDIT docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md  8 occ,  6 site(s) on line(s) [23, 405, 414, 422, 423, 429, 440, 559]
+        FROZEN AUDIT docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md  5 occ,  5 site(s) on line(s) [196, 227, 247, 343, 387]
+
+  BY CLASS:
+        FROZEN AUDIT      4 file(s)  20 occurrence(s)  18 site(s)
+        INSTRUMENT        5 file(s)  14 occurrence(s)  10 site(s)
+        LIVE              3 file(s)  16 occurrence(s)   7 site(s)
+
+  WHY THIS LANDING NAMES A CLASS AND NOT A LIST.  mg-1319 claimed a
+  universal ('flagged at every site'), which was false; mg-f2e1
+  replaced it with a list of members, which was incomplete in exactly
+  the same direction.  A list of members of a growing population is a
+  claim that expires: this landing's own audit will add occurrences to
+  the FROZEN AUDIT class the day it is written, and this file added
+  some to INSTRUMENT the day it was written.  The class boundary does
+  not expire, so that is what the STATE.md paragraph now asserts, with
+  this instrument as the way to recover the numbers on demand.
+
+  [CONFIRMED] every LIVE file is one of the three the A5 narrowing test admits -- i.e. the class boundary the STATE.md paragraph asserts holds here
+        -- LIVE files found:
+             STATE.md
+             code/face_geometry_audit_5630/audit_x3_equivalence.py
+             docs/OneThird-Intrinsic-Face-Geometry-Probe.md
+  [CONFIRMED] every occurrence sits in one of the three classes the paragraph names
+        -- files falling outside LIVE / FROZEN AUDIT / INSTRUMENT: none
+           An empty list is what the paragraph asserts: every occurrence is LIVE, or in
+           a frozen audit document, or in an audit/landing instrument's own source or
+           transcript -- text that exists in order to count, not to be read for the number.
+
+TARGET 3 -- ROW 135's GROWTH, ON mg-f7bc's OWN METRIC (line bytes, no newline)
+------------------------------------------------------------------------------
+mg-f2e1 reported 'row 135 grew a further 949 bytes (+7.6%) here'.
+de54c3a is ba3ec79's parent, so 'a further' means de54c3a -> ba3ec79.
+
+        c0cf104  L135 =   7832 bytes /   7702 chars   mg-78c0  -- mg-f7bc's F7 BASELINE
+        db08b4c  L135 =  11727 bytes /  11544 chars   mg-1319  -- F7 measured the growth to here
+        de54c3a  L135 =  12455 bytes /  12252 chars   parent of ba3ec79
+        ba3ec79  L135 =  14582 bytes /  14340 chars   mg-f2e1  -- the commit under repair
+        HEAD     L135 =  14582 bytes /  14340 chars   this landing
+
+  [REFUTED  ] mg-f2e1's '+949 bytes (+7.6%)' reproduces
+        -- de54c3a -> ba3ec79 is +2127 bytes (+17.1%), or +2088 characters.
+           Reported: +949 (+7.6%).  UNDERSTATED by 2.24x.
+           The +7.6% shares de54c3a's denominator, so the percentage is the
+           wrong numerator over the right base, not a different metric.
+  [MEASURED ] the figure that matters for the restructure decision
+        mg-f7bc's F7 flagged row 135 for GROWTH at +49.7% (7832 -> 11727 bytes).
+        Across the two landings since, the same row is now 14582 bytes: +6750 (+86.2%)
+        on the F7 baseline.  The decision to restructure was taken on +49.7%;
+        the true figure is 86.2%, so the correction STRENGTHENS that decision.
+        It does not weaken it and must not be reported as if it might.
+  [CONFIRMED] rows 131-134 are untouched by this landing, as by the last one
+        -- L131-134 at de54c3a: [5351, 9228, 13487, 10824]
+           L131-134 at HEAD:     [5351, 9228, 13487, 10824]
+
+TARGET 4 -- THE PROBE's SECTION-HEAD CHANGELOG vs THE HUNKS ba3ec79 CONTAINS
+----------------------------------------------------------------------------
+E3's own lesson, stated three times in ba3ec79: a changelog is an
+assertion ABOUT a diff and nothing checks it against the diff.  So:
+
+  [MEASURED ] the hunks ba3ec79 has in the Probe, in post-image line numbers
+        lines 34-48
+        lines 142-158
+        lines 810-822
+        §2   lines  109- 158   touched by ba3ec79: True
+        §5   lines  348- 474   touched by ba3ec79: False
+        §11  lines  707- 788   touched by ba3ec79: False
+        §12  lines  789- 823   touched by ba3ec79: True
+
+  [REFUTED  ] the changelog's claim 'the per-site enumeration in §5' is supported by the diff
+        -- §5 is NOT in any hunk of ba3ec79.  And independently of the diff, §5
+           carries the truncation FLAG mg-1319 landed -- 'Flagged because 38/38 is
+           quoted as a headline ... the audit's population is a [:20] TRUNCATION' --
+           and nothing resembling a per-site list.  The line asserting it is the line
+           E3 rewrote, in the sentence that names that exact failure mode.
+  [CONFIRMED] the changelog's claim about §2 is supported by the diff
+        -- §2 IS in a hunk, and the corrected sentence is the one the document
+           labels '(F3, ...)'.  This half of the entry stands.
+  [CONFIRMED] the changelog's claim about §12 is supported by the diff
+        -- §12 IS in a hunk -- the reversal preamble and the second marker.
+           This half of the entry stands.
+  [REFUTED  ] 'the entry that stood here claimed the correction outright' is exact
+        -- The entry it replaced read:
+             "Also: the `n ≤ 6` half of F3's coverage sentence corrected to `n ≤ 5` for Lemma 1 (§11), the audit's"
+           It DID carry a location tag, '(§11)', and §11 WAS corrected by mg-1319.
+           So it misidentified the scope rather than omitting a location: it named one
+           of the two sites and read as covering the sentence.  mg-6653 recorded this
+           and did not file it; this landing fixes it because it is the same class as
+           A4 and the line is being rewritten anyway.
+
+==============================================================================
+15 scored statement(s); 8 REFUTED.
+
+The REFUTED rows are the point: every one of them is a claim mg-f2e1
+or its changelog made, re-measured and found false.  A run with zero
+REFUTED rows would mean this landing had nothing to repair.

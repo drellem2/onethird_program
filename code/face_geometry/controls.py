@@ -63,6 +63,45 @@ CANNOT_FAIL = []
 ROW_NAMES = []      # every row's printed name, for the artifact check in main()
 
 
+class ArtifactTee:
+    """Records every line this run writes to stdout, verbatim, while writing it.
+
+    `run_all.sh` builds `controls_output.txt` as `python3 controls.py 5 | tee
+    controls_output.txt`, so what this object records IS the artifact.  It is
+    installed as `sys.stdout` in `main()` so that the artifact check reads what
+    a grep of the file would read, whatever route printed it -- a row name, a
+    `detail=` string, a section heading, or a bare `print()` added tomorrow.
+
+    Why at the stream and not at `check()` (mg-7d5a, from mg-6653's A2): the
+    previous version of the check scanned `ROW_NAMES` only, so ATTACKS B and C
+    reached the artifact by printing through a route the check did not model.
+    A check that enumerates the routes it knows about can always be evaded by a
+    new one; a check on the byte stream cannot.
+    """
+
+    def __init__(self, stream):
+        self._stream = stream
+        self._partial = ""
+        self._lines = []
+
+    def write(self, s):
+        self._stream.write(s)
+        self._partial += s
+        while "\n" in self._partial:
+            line, self._partial = self._partial.split("\n", 1)
+            self._lines.append(line)
+
+    def flush(self):
+        self._stream.flush()
+
+    def lines_so_far(self):
+        """Every complete line written, plus any unterminated tail."""
+        return list(self._lines) + ([self._partial] if self._partial else [])
+
+
+ARTIFACT = None     # the ArtifactTee installed by main(); None when unused
+
+
 def score(ok, cannot_fail):
     """The label a row gets.  Three outcomes, not two."""
     if not ok:
@@ -1055,7 +1094,7 @@ def negative_control_incidence(nmax):
 
 
 def artifact_banner_check():
-    """No control row may print the all-pass banner in its own text.
+    """Nothing this run prints may carry the all-pass banner except the bottom line.
 
     Added by mg-f2e1 from the mg-f7bc audit's F5.  The A4 scoring repair
     (mg-1319) suppressed the banner in the BOTTOM LINE and then emitted it twice
@@ -1065,27 +1104,60 @@ def artifact_banner_check():
     artifact, as the true bottom line; after the repair a grep for it returned
     two false positives first.
 
-    Scoped exactly: this checks the row NAMES this run printed, which is what a
-    grep of the artifact reads.  It does not police `detail` strings, the section
-    headings, or this file's own prose -- so it makes the artifact's occurrences
-    of the banner exactly the bottom line's, and claims nothing further.
+    WIDENED FROM ROW NAMES TO THE BYTE STREAM (mg-7d5a, from mg-6653's A2).  As
+    mg-f2e1 wrote it this scanned `ROW_NAMES` only, while its own docstring
+    concluded that it "makes the artifact's occurrences of the banner exactly
+    the bottom line's".  It did not, and mg-6653 CONSTRUCTED the false positive
+    twice with the check in place: ATTACK B put the banner in a `detail=` string
+    (printed on the SAME line as the row name, behind the same [PASS] prefix, so
+    a grep cannot tell them apart) and ATTACK C printed it as a bare section
+    heading.  Both reached the artifact with the check reporting "offending
+    rows: none" and the battery exiting 0 -- the F5 defect in full, one
+    generation on, inside the control built to remove it.  It now scans every
+    line `ArtifactTee` has recorded, which is every line of the artifact.
+
+    Scoped exactly, and this is what it now buys.  (a) It reads the lines
+    written BEFORE it runs.  Everything after it is `summarise`'s bottom line,
+    which is the one place the banner is licensed -- so "the artifact's
+    occurrences of the banner are exactly the bottom line's" is now the property
+    enforced rather than the property claimed.  (b) It scans for the exact
+    17-character literal, case-sensitive: a row name carrying the banner with a
+    doubled space is not detected and should not be (mg-6653's ATTACK D fixes
+    that boundary).  (c) It says nothing about this FILE's prose, which never
+    reaches the artifact, nor about text a caller appends to
+    `controls_output.txt` outside the `tee`.
+
+    It remains a control and not a proven property: mg-6653's ATTACKS A, B and C
+    each make it FAIL and exit 1.  If it is ever narrowed to a scope where no
+    constructible mutation can trip it, the SCORING section above applies and it
+    must be re-scored [CANNOT FAIL].
 
     The offender report MASKS the banner rather than quoting it.  A control that
     printed the offending text verbatim would put the string back into the
     artifact on precisely the run that objects to it, which is the defect one
     level up.
     """
-    print("CONTROL ON THE ARTIFACT -- no row may print the banner it denies")
+    print("CONTROL ON THE ARTIFACT -- nothing above the bottom line may carry the banner")
     banner = "ALL CONTROLS PASS"
     mask = "<all-pass-banner>"
-    offenders = [n.replace(banner, mask) for n in ROW_NAMES if banner in n]
-    check("no control row's own text contains the %d-char all-pass banner literal"
-          % len(banner), not offenders,
-          "rows scanned: %d; offending rows: %s (banner masked as %s)"
-          % (len(ROW_NAMES), offenders if offenders else "none", mask))
+    scanned = ARTIFACT.lines_so_far() if ARTIFACT is not None else list(ROW_NAMES)
+    offenders = ["line %d: %s" % (i + 1, line.strip().replace(banner, mask))
+                 for i, line in enumerate(scanned) if banner in line]
+    check("no line this run printed carries the %d-char all-pass banner literal, "
+          "and in particular no control row's own text contains it" % len(banner),
+          not offenders,
+          "lines scanned: %d (the whole artifact above this row; %d row names "
+          "among them); offending lines: %s (banner masked as %s)"
+          % (len(scanned), len(ROW_NAMES), offenders if offenders else "none", mask))
 
 
 def main():
+    global ARTIFACT
+    # Everything below this line is the artifact; `artifact_banner_check` reads
+    # it back.  Installed here rather than at import so that importing this
+    # module for its functions does not hijack stdout.
+    ARTIFACT = ArtifactTee(sys.stdout)
+    sys.stdout = ARTIFACT
     nmax_cheap = int(sys.argv[1]) if len(sys.argv) > 1 else 5
     scoring_self_test()
     positive_control_homology()
