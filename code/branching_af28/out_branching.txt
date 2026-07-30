@@ -1,0 +1,75 @@
+==============================================================================
+T3  Stanley's differential condition DU - UD = rI on J(P), with the
+    two known 1-differential posets as POSITIVE CONTROLS.
+==============================================================================
+
+  CONTROLS (must pass on the ranks below the top; the top rank of a
+  truncation never can, since U kills it):
+    Young's lattice   to rank 8: 67 elements; whole: FAILS; ranks<=7: r=1 PASS
+    Young-Fibonacci   to rank 8: 88 elements; whole: FAILS; ranks<=7: r=1 PASS
+
+  TEST -- J(P) for every poset P:
+   n  classes   J(P) differential   J(P) differential below the top
+   1        1                   0                                 1
+   2        2                   0                                 0
+   3        5                   0                                 0
+   4       16                   0                                 0
+   5       63                   0                                 0
+   6      318                   0                                 0
+
+  The posets whose J(P) satisfies the condition below the top:
+    n=1  up-sets [0]
+
+  Reading: the condition fails at 1-hat for EVERY finite J(P) because
+  U(1-hat) = 0 while UD(1-hat) contains 1-hat, so no finite lattice
+  with a maximum is a differential poset.  The truncated column is
+  there so that this trivial obstruction is not doing all the work.
+
+==============================================================================
+T7  Bergeron-Li axiom (2) for a tower of algebras: an injective UNITAL
+    algebra map A_m (x) A_n -> A_{m+n}.  Candidate: concatenation
+    F(P) x F(Q) -> F(P + Q).
+==============================================================================
+
+  |P| |Q|  pairs   lands in F(P+Q)  injective  homomorphism  unital
+    1   1      1            0 bad        1/1         0 bad  0/1
+    1   2      2            0 bad        2/2         0 bad  0/2
+    1   3      5            0 bad        5/5         0 bad  0/5
+    2   1      2            0 bad        2/2         0 bad  0/2
+    2   2      4            0 bad        4/4         0 bad  0/4
+    2   3     10            0 bad      10/10         0 bad  0/10
+    3   1      5            0 bad        5/5         0 bad  0/5
+    3   2     10            0 bad      10/10         0 bad  0/10
+    3   3     25            0 bad      25/25         0 bad  0/25
+
+  Concatenation is an injective SEMIGROUP homomorphism (64 cases, 0 bad
+  landings/products, 0 non-injective) and is UNITAL in 0 of 64 cases:
+  it sends (1_P, 1_Q) to the two-block move, not to 1_{P+Q}.  So the
+  map exists but does NOT satisfy Bergeron-Li axiom (2) as stated.
+  Whether some other map does, this test does not decide.
+
+==============================================================================
+T8  Brown 2000 §4.3's hypothesis is a finite DISTRIBUTIVE lattice.
+    Which standard branching graphs meet it?
+==============================================================================
+
+  Tested on INTERVALS [0-hat, x], not on truncations: a truncation of
+  an infinite lattice at rank r is not a lattice at all (two elements
+  of top rank lose their join), so it would answer the wrong question.
+
+  Young's lattice: every interval [0, lambda] with |lambda| <= 6
+      30 intervals, non-distributive: 0
+  Young-Fibonacci: every interval [0, w] with rank(w) <= 6
+      33 intervals, not a lattice: 0, non-distributive: 5
+      smallest witness: w = (2, 2, 1), failing triple (a,b,c) = ((1, 1, 1), (1, 2), (1, 2, 1))
+
+  Reading: of the two 1-differential LATTICES (Stanley 1988 for
+  Young's; Byrnes 2012 that there are no others), only Young's is
+  distributive -- the Young-Fibonacci lattice is modular but not
+  distributive.  So Brown §4.3's construction reaches the Young graph
+  and does not reach the other one.
+
+==============================================================================
+SUMMARY t_branching: T3 truncated-passers 1; T7 unital 0 of 64;
+  T8 Young intervals non-distributive 0 of 30; Young-Fibonacci intervals non-distributive 5 of 33
+==============================================================================
