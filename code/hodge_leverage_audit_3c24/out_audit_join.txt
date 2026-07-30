@@ -1,0 +1,148 @@
+==============================================================================
+mg-3c24 -- INDEPENDENT AUDIT of mg-a2bd (the G'' strike)
+==============================================================================
+
+Every object below is rebuilt in rebuild.py from the definitions:
+  posets     : brute-force canonicalisation over all n! relabellings
+  faces      : P-compatible ORDERED PARTITIONS, peeled off the front
+  links      : REFINEMENTS of the face, weighted by PRODUCTS of
+               linear-extension counts of the induced subposets
+  lambda_2   : EXACT rational INERTIA of W - tD (not a float sweep)
+  spectra    : Householder + implicit-shift QL (not cyclic Jacobi)
+
+A  THE POPULATION
+     n=1  posets up to isomorphism =   1
+     n=2  posets up to isomorphism =   2
+     n=3  posets up to isomorphism =   5
+     n=4  posets up to isomorphism =  16
+     n=5  posets up to isomorphism =  63
+     n=6  posets up to isomorphism = 318
+     total n <= 6 : 405   (deliverable: 405)  AGREE
+
+   ... n=2 swept
+   ... n=3 swept
+   ... n=4 swept
+   ... n=5 swept
+   ... n=6 swept
+
+B  THE STRIKE -- ledger row G'' AS WRITTEN (a PER-LEVEL claim)
+     'gamma_i >= 1/2 for every finite poset having a dimension-i
+      face one of whose blocks induces an antichain of size >= 3'
+
+      n=2  (poset, level) pairs with such a face=   0   gamma_i < 1/2 on  0
+      n=3  (poset, level) pairs with such a face=   1   gamma_i < 1/2 on  0
+      n=4  (poset, level) pairs with such a face=   7   gamma_i < 1/2 on  0
+      n=5  (poset, level) pairs with such a face=  70   gamma_i < 1/2 on  4
+      n=6  (poset, level) pairs with such a face= 676   gamma_i < 1/2 on 51
+
+    population      : 754 (poset, level) pairs, n <= 6   (mg-a2bd: 754)  AGREE
+    COUNTEREXAMPLES : 55                                (mg-a2bd: 55)   AGREE
+    smallest n      : 5                                 (mg-a2bd: 5)    AGREE
+
+    the n = 5 counterexamples, named:
+      A_2 (+) A_3    i=0  gamma_i=1/4   covers=
+      A_3 (+) A_2    i=0  gamma_i=1/4   covers=
+      A_3 (+) C_2    i=0  gamma_i=1/4   covers=
+      C_2 (+) A_3    i=0  gamma_i=1/4   covers=
+    all four are ordinal sums: True
+
+    distinct gamma values among the n = 6 counterexamples:
+      0.166667, 0.250000, 0.333333, 0.406975, 0.408367
+
+C  THE STRIKE -- G'' under the PER-FACE reading its proof argues
+    faces (all posets n <= 6, levels -1..n-4) with a block inducing
+    an antichain of size >= 3, and how many have lambda_2 < 1/2
+
+      qualifying faces : 7989   (mg-a2bd/mg-d39d: 7989)  AGREE
+      of them FAILING  : 3901   (mg-a2bd/mg-d39d: 3901)  AGREE
+
+D  ROW G''' -- THE ROW mg-a2bd ADDED BEYOND ITS BRIEF
+    'gamma_i >= 1/2 for every finite poset having a dimension-i face
+     whose blocks are one antichain of size >= 3 AND SINGLETONS
+     OTHERWISE', labelled PROVEN.  Tested, not accepted:
+
+      (poset, level) pairs meeting the hypothesis : 381
+      of them with gamma_i < 1/2                  : 0  -> G''' HOLDS
+      the stronger PER-FACE form (every such face has
+      lambda_2(link) >= 1/2):  faces=4088  failures=0  -> holds per face too
+
+E  THEOREM J -- the full-spectrum join identity, independently
+    link side : my own refinement-built weighted 1-skeleton
+    factor side: assembled from F(P|_B) for the non-singleton blocks
+
+      n=2  genuine-join links tested=    0   mismatches=0
+      n=3  genuine-join links tested=    0   mismatches=0
+      n=4  genuine-join links tested=   39   mismatches=0
+      n=5  genuine-join links tested= 1426   mismatches=0
+      n=6  genuine-join links tested=47381   mismatches=0
+
+    total genuine-join links tested : 48846   (mg-a2bd: 48846)  AGREE
+    spectrum mismatches             : 0
+    worst deviation                 : 5.274e-16
+
+    the smallest counterexample, re-derived by hand:
+      P = A_2 (+) A_3, sigma = ({0,1},{2,3,4}), i = 0
+      factors: F(A_2) (p=0) and F(A_3) (p=1), D = 2
+      J predicts the hexagon's 1/2 lands at (1/2)*(1/2) = 1/4
+      measured link spectrum on 1-perp: [-0.5, -0.5, -0.25, -0.25, 0.0, 0.25, 0.25]
+      EXACT inertia of W - (1/4)D : (1, 2, 5)
+      -> exactly one eigenvalue above 1/4 (the constant 1),
+         and 1/4 IS an eigenvalue: lambda_2 = 1/4 exactly
+
+F  THEOREM G AND ROW G'
+
+    (a) lambda_2(F(A_m)) decided EXACTLY by rational inertia
+        m=3  |V|=   6  inertia(W - D/2) = (1, 2, 3)   lambda_2 = 1/2 EXACTLY
+        m=4  |V|=  14  inertia(W - D/2) = (1, 3, 10)   lambda_2 = 1/2 EXACTLY
+        m=5  |V|=  30  inertia(W - D/2) = (1, 4, 25)   lambda_2 = 1/2 EXACTLY
+        m=6  |V|=  62  inertia(W - D/2) = (1, 5, 56)   lambda_2 = 1/2 EXACTLY
+        m=7  |V|= 126  inertia(W - D/2) = (1, 6, 119)   lambda_2 = 1/2 EXACTLY
+        m=8  |V|= 254  inertia(W - D/2) = (1, 7, 246)   lambda_2 = 1/2 EXACTLY
+        m=9  |V|= 510  lambda_2 = 0.500000000000 (float; exact inertia at |V|=510 is out of budget)
+
+    (b) Theorem G's eigenfunction, EXACTLY, on my own F(A_m):
+        f(S) = sum_{i in S} a_i with sum a_i = 0;  is Pf = f/2 ?
+        m=3  max |(Pf)(S) - f(S)/2| over 2 a-vectors = 0
+        m=4  max |(Pf)(S) - f(S)/2| over 2 a-vectors = 0
+        m=5  max |(Pf)(S) - f(S)/2| over 2 a-vectors = 0
+        m=6  max |(Pf)(S) - f(S)/2| over 2 a-vectors = 0
+        m=7  max |(Pf)(S) - f(S)/2| over 2 a-vectors = 0
+        m=8  max |(Pf)(S) - f(S)/2| over 2 a-vectors = 0
+        m=9  max |(Pf)(S) - f(S)/2| over 2 a-vectors = 0
+
+    (c) row G': is gamma_i(A_n) attained EXACTLY at the
+        one-big-block face?  Exhaustive over ALL faces, exact.
+        A_3 i=-1  m=3  one-big-block faces=   1 (all >= 1/2: True)   other faces=   0 (any >= 1/2: False, max n/a)
+        A_4 i=-1  m=4  one-big-block faces=   1 (all >= 1/2: True)   other faces=   0 (any >= 1/2: False, max n/a)
+        A_4 i= 0  m=3  one-big-block faces=   8 (all >= 1/2: True)   other faces=   6 (any >= 1/2: False, max 0.000000)
+        A_5 i=-1  m=5  one-big-block faces=   1 (all >= 1/2: True)   other faces=   0 (any >= 1/2: False, max n/a)
+        A_5 i= 0  m=4  one-big-block faces=  10 (all >= 1/2: True)   other faces=  20 (any >= 1/2: False, max 0.250000)
+        A_5 i= 1  m=3  one-big-block faces=  60 (all >= 1/2: True)   other faces=  90 (any >= 1/2: False, max 0.000000)
+        A_6 i=-1  m=6  one-big-block faces=   1 (all >= 1/2: True)   other faces=   0 (any >= 1/2: False, max n/a)
+        A_6 i= 0  m=5  one-big-block faces=  12 (all >= 1/2: True)   other faces=  50 (any >= 1/2: False, max 0.333333)
+        A_6 i= 1  m=4  one-big-block faces=  90 (all >= 1/2: True)   other faces= 450 (any >= 1/2: False, max 0.250000)
+        A_6 i= 2  m=3  one-big-block faces= 480 (all >= 1/2: True)   other faces=1080 (any >= 1/2: False, max 0.000000)
+        -> argmax is EXACTLY the one-big-block face set: True
+
+    (d) the same by L + J over block-size multisets, n = 7..9
+        lambda_2(link) = max_j (b_j-2)/D * lambda_2(F(A_{b_j}))
+        A_7 i=-1  m=7  one-big-block lambda_2=0.500000   best other=n/a at sizes None
+        A_7 i= 0  m=6  one-big-block lambda_2=0.500000   best other=0.375000 at sizes (2, 5)
+        A_7 i= 1  m=5  one-big-block lambda_2=0.500000   best other=0.333333 at sizes (2, 4)
+        A_7 i= 2  m=4  one-big-block lambda_2=0.500000   best other=0.250000 at sizes (2, 3)
+        A_7 i= 3  m=3  one-big-block lambda_2=0.500000   best other=0.000000 at sizes (2, 2)
+        A_8 i=-1  m=8  one-big-block lambda_2=0.500000   best other=n/a at sizes None
+        A_8 i= 0  m=7  one-big-block lambda_2=0.500000   best other=0.400000 at sizes (2, 6)
+        A_8 i= 1  m=6  one-big-block lambda_2=0.500000   best other=0.375000 at sizes (2, 5)
+        A_8 i= 2  m=5  one-big-block lambda_2=0.500000   best other=0.333333 at sizes (2, 4)
+        A_8 i= 3  m=4  one-big-block lambda_2=0.500000   best other=0.250000 at sizes (2, 3)
+        A_8 i= 4  m=3  one-big-block lambda_2=0.500000   best other=0.000000 at sizes (2, 2)
+        A_9 i=-1  m=9  one-big-block lambda_2=0.500000   best other=n/a at sizes None
+        A_9 i= 0  m=8  one-big-block lambda_2=0.500000   best other=0.416667 at sizes (2, 7)
+        A_9 i= 1  m=7  one-big-block lambda_2=0.500000   best other=0.400000 at sizes (2, 6)
+        A_9 i= 2  m=6  one-big-block lambda_2=0.500000   best other=0.375000 at sizes (2, 5)
+        A_9 i= 3  m=5  one-big-block lambda_2=0.500000   best other=0.333333 at sizes (2, 4)
+        A_9 i= 4  m=4  one-big-block lambda_2=0.500000   best other=0.250000 at sizes (2, 3)
+        A_9 i= 5  m=3  one-big-block lambda_2=0.500000   best other=0.000000 at sizes (2, 2)
+
+(no wall-clock line: this file regenerates byte-for-byte)
