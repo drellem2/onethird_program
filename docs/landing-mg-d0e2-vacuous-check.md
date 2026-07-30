@@ -3,7 +3,9 @@
 **Item:** mg-04a8. **Closes:** mg-d0e2's OUTSTANDING 1 and OUTSTANDING 2, and the
 requirement that audit attached to the repair.
 **Code:** `code/face_geometry/controls.py`, `code/face_geometry/face_complex.py`,
-instrument in `code/face_geometry_instr_5f9a/` (`run_all.sh`, 73 s, 56 claims, 0 BROKEN).
+instrument in `code/face_geometry_instr_5f9a/` (`run_all.sh`, 112 s, 72 claims, 0 BROKEN
+— **the figures in this file track the live tree; mg-9220 moved several, see the
+amendment at the end**).
 
 mg-d0e2 booked mg-5f9a's repair as real and did not re-open it. This lands the two things
 it left open. Neither is a mathematical result; both are about whether the checks that
@@ -35,7 +37,7 @@ no sign vector satisfies. Two new rows in NEGATIVE CONTROL 4's instrument-check 
 
 | row | pairs | what they are |
 |---|---|---|
-| the `shape` branch | 3 | 2×2 against 3×3; same order but **ragged** (the second `shape` return); and an accepting pair, identical 2×2 |
+| the `shape` branch | 3 | 2×2 against 3×3; same order but **ragged** (which `m != len(B)` alone does not see); and an accepting pair, identical 2×2 |
 | the `parity` branch | 2 | a **contradictory** system — `s0s1 = +1` and `s0s2 = +1` force `s1s2 = +1`, and the pair demands `s1s2 = −1`; and an accepting pair on the same support, `s = (+1,−1,−1)` |
 
 Each list carries a pair the branch must **accept** as well as one it must reject.
@@ -174,9 +176,13 @@ today; a check pinned to a commit answers the question it was written to ask.
 ## Numbers, re-measured here rather than carried
 
 - Battery: **43 scored rows** (41 + the two added here), 2 [CANNOT FAIL], 0 failures,
-  exit 0, 23,680 bytes. `probe_output_n6.txt` is **byte-identical** — no mathematics moved.
-- Instrument: `run_all.sh`, 73 s, **56 claims, 0 BROKEN**, exit 0 (d1 16, d2 25, d3 6, d4 9).
-- mg-d0e2's own `e1_deletion.py`, unmodified: **9 of 9 mutations change the artifact.**
+  exit 0, 23,684 bytes. `probe_output_n6.txt` is **byte-identical** — no mathematics moved.
+  (23,680 at mg-04a8; mg-9220 rewrote four characters of one row's text.)
+- Instrument: `run_all.sh`, 112 s, **72 claims, 0 BROKEN**, exit 0 (d1 17, d2 33, d3 6, d4 16).
+  (73 s and 56 claims at mg-04a8, d1 16 / d2 25 / d3 6 / d4 9.)
+- mg-d0e2's own `e1_deletion.py`, unmodified: **9 of 9 mutations change the artifact** —
+  measured at mg-04a8, and **re-run at that pinned commit** by `d4` since mg-9220, because
+  against the live tree its first mutation no longer applies. See the amendment.
 - Nothing retreated, scored in `d4` rather than asserted: its `e2_parity.py` is **0 BROKEN**
   (the 297/306/82/172 split and the 57-of-297 disagreement are untouched), and its
   `e3_seams.py` is **2 BROKEN**, both of them frozen literals of the same kind as its row
@@ -185,7 +191,7 @@ today; a check pinned to a commit answers the question it was written to ask.
   them and both correct. Two of its three findings about mg-5f9a are **gone**: F3 (the
   43-versus-41 row count) and F4 (the stale docstring).
 - `code/face_geometry_landing_da45/out_verify.txt` regenerated: **1 line**, the artifact's
-  byte count, 20,738 → 23,680. Its own `run_all.sh` says that file reads the live tree and
+  byte count, 20,738 → 23,680 (→ 23,684 at mg-9220). Its own `run_all.sh` says that file reads the live tree and
   "will drift when controls.py's counts next change", which is what happened. Still 25
   claims, 0 BROKEN, exit 0, and `verify_landing.py` itself is not edited.
 
@@ -218,3 +224,31 @@ today; a check pinned to a commit answers the question it was written to ask.
    OUTSTANDING halves and the requirement attached to them.
 7. **`run_all.sh` still does not use `| tee`** — a pipeline's status is the last command's,
    so `tee` would mask a verifier exiting 1 (mg-f922).
+
+---
+
+## Amendment, mg-9220: the `shape` gate's deletion was at the wrong granularity
+
+**This section is the correction, not a footnote to it.** The repair above deletes
+`absorb_trace`'s **two** `shape` returns **together**, on the stated ground that "they are
+one gate, and deleting one of two would leave the other answering". mg-e7bc deleted each
+alone and found the sentence true and the conclusion not: **deleting the first —
+`if m != len(B)` — leaves the artifact byte-identical**, because the 2×2-against-3×3 pair
+falls into the loop and the *second* return answers `False` at gate `shape` identically.
+So the CHANGES above is a claim about **the pair**, and the row's clause "the 2 built to
+be REJECTED return at the `shape` gate on 2 of 2" was satisfied with one return doing all
+the work.
+
+mg-9220 **merged the two into one condition and deleted nothing else** — removal rather
+than detection; **no pair was added to `controls.py`** to notice the first return being
+reached. It also made every mutation declare the unit it removes, counted from its own
+patch text.
+
+What that moves in the figures above: the artifact is **23,684** bytes (one row's text),
+the instrument is **72 claims** in **112 s**, and **mg-d0e2's `e1_deletion.py` no longer
+applies to the live tree** — its first mutation names the seven lines of the two-return
+gate, so it stops at `anchor occurs 0 times`. `d4` runs it against **`c7f9673`,
+materialised whole**, where it still says 9 of 9, and scores the live abort beside it.
+mg-e7bc's own `g2`/`g3` stop in the same place for the same reason and are scored too.
+
+Full record: `docs/landing-mg-e7bc-granularity.md`.

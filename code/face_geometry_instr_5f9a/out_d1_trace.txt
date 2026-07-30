@@ -15,7 +15,11 @@ B. ONE IMPLEMENTATION -- checked in the SOURCE, not only in the counts
 ==============================================================================
   [HOLDS ] `absorbable_by_diagonal_twist` is a single `return absorb_trace(...).absorbable` -- so the gate label and the answer come from ONE execution and cannot be produced by different orders
         AST body after the docstring: 1 statement(s)
-  [HOLDS ] every `return` in `absorb_trace` carries its gate label as a literal at the return site: 6 returns, labels ['diagonal', 'magnitude', 'parity', 'shape']
+  [HOLDS ] every `return` in `absorb_trace` carries its gate label as a LITERAL at the return site, and the four gates are all of them: 5 returns, labels ['diagonal', 'magnitude', 'parity', 'shape'], per gate diagonal 1, magnitude 1, parity 2, shape 1
+        WOULD DIFFER UNDER: a gate label computed instead of written at the return site, or a fifth label appearing.  The count was FROZEN AT 6 until mg-9220, which merged the `shape` gate's two returns into one; a literal here would only have had to be edited to 5, and it said nothing about what the returns are
+  [HOLDS ] and each of the 4 REJECTING returns is deleted by EXACTLY ONE mutation of d2_deletion.py's AFTER table -- return Trace(False, "shape", 0) <- AFTER-5; return Trace(False, "diagonal", 0) <- AFTER-1; return Trace(False, "magnitude", 0) <- AFTER-2; return Trace(False, "parity", signs_read) <- AFTER-6.  The remaining 1 return(s) accept, and deleting one of those leaves the function returning None rather than answering differently
+        0 return(s) not covered by exactly one mutation: none
+        WOULD DIFFER UNDER: a return added to `absorb_trace` without a mutation of its own, or two returns bundled into one mutation again.  The second is what mg-e7bc found: `shape`'s two returns went together, the pair moved the artifact, and the first one alone moved nothing
   [HOLDS ] controls.py defines NO gate procedure of its own -- `deciding_gate` is gone and nothing replaced it; the rows call `absorb_trace`
         functions in controls.py with 'gate' in the name: none
 
@@ -44,5 +48,5 @@ D. THE ROUTING QUESTION IS ASKED DIRECTLY (`diagonal_moves`)
   [HOLDS ] I4: the diagonal MOVES on 58/61; the trace happens to return at the diagonal gate on 58/61.  Routing uses the first
 
 ==============================================================================
-16 claim(s) scored; 0 BROKEN.
+17 claim(s) scored; 0 BROKEN.
 ==============================================================================

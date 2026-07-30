@@ -190,6 +190,32 @@ today.  A check pinned to a commit answers the question it was written to ask.
 """
 
 
+TWO_RETURN_REF = "c7f9673"
+"""The tree the PER RETURN half of the deletion test is about: mg-04a8, the last
+commit in which `absorb_trace`'s `shape` gate had TWO `return` statements.
+
+mg-9220 merged them into one, so the granularity finding cannot be reproduced on
+this tree -- there is nothing left to delete one of.  It is reproduced against
+this commit instead, for the reason `PRE_REPAIR_REF` gives: a check pinned to a
+commit answers the question it was written to ask, and "delete only the first of
+the two `shape` returns" is a question about a tree where there are two.
+"""
+
+
+def load_module(path, name):
+    """Import a single .py file under a chosen module name.
+
+    Used to hold THIS tree's `absorb_trace` and the pinned tree's side by side
+    in one process.  `face_complex.py` imports nothing local, so a file loaded
+    this way is the whole implementation and not a stub over the live one.
+    """
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(name, path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
 def write_ref_tree(files, ref=PRE_REPAIR_REF):
     """Materialise a named commit's copy of the named face_geometry files in a
     temp dir, and return (dir, resolved sha).

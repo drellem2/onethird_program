@@ -2,10 +2,13 @@
 # mg-5f9a: closing mg-1c80's F1 -- regenerate this landing's transcript.
 #
 # Pure Python 3, no third-party packages.  Measured runtime 2026-07-30 on a 2024
-# laptop: 73 s total -- d1 0.6 s, d2 22 s (ten full control batteries, three of
-# them built from the PRE-REPAIR commit's sources), d3 15 s (two more, plus two
-# runs of mg-da45's landing verifier over the whole 86-poset population), d4 35 s
-# (mg-d0e2's own e1, e2 and e3, all three run unmodified as subprocesses).
+# laptop: 112 s total -- d1 0.6 s, d2 40 s (fourteen full control batteries: ten
+# on this tree and on the PRE-REPAIR commit's sources, four more on the
+# TWO-RETURN commit for the per-return section), d3 15 s (two more, plus two runs
+# of mg-da45's landing verifier over the whole 86-poset population), d4 55 s
+# (mg-d0e2's own e1, e2 and e3 and mg-e7bc's g1, g2 and g3, all run unmodified as
+# subprocesses, two of them against a pinned commit materialised with
+# `git archive`).  72 claims, 0 BROKEN: d1 17, d2 33, d3 6, d4 16.
 #
 # mg-04a8 added d4 and rewrote d2's label check.  d2's BEFORE half now reads a
 # PINNED COMMIT rather than `main`: once mg-5f9a merged, "main's artifact
@@ -13,6 +16,17 @@
 # deletion it then attempted did not even apply -- the shipped file stopped at
 # `anchor occurs 0 times`.  A check pinned to a branch asks about whatever that
 # branch holds today.
+#
+# mg-9220 made the deletion test PER RETURN.  mg-e7bc found that d2 deleted the
+# `shape` gate's TWO return statements together and its "the artifact CHANGES"
+# was read as a statement about each -- and deleting the FIRST alone left the
+# artifact byte-identical.  Every mutation now declares the unit it removes, the
+# returns it takes out are counted from its own patch text, d1 checks the table
+# against the SOURCE (every rejecting return deleted by exactly one mutation),
+# and the inert return is GONE: it was merged into the second's condition rather
+# than covered by a new row.  Two independent instruments were anchored to the
+# text it removed; d4 runs each against this tree AND against the pinned commit
+# it was written for, and scores both.
 #
 # WHAT IT IS FOR.  mg-da45 printed a gate name as the reason its rows answered
 # as they did.  mg-1c80 deleted that gate from the predicate and the artifact
