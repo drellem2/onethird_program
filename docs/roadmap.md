@@ -110,17 +110,27 @@ forecast. The bound is a *consequence* of the hypothesis and useless as a *test*
 
 **AND THE AUDIT FOUND THE ONE POSITIVE SIGNAL OF THE DAY, UNDER A CLAIMED NULL.** A *different* statistic
 in §4 was reported as distinguishing extremal posets "not weakly, but by an exact tie" — i.e. not at all.
-That universal is **false**, and the correction runs against the document's own verdict. The nine committed
-rows are all `e(P)=3` groups, and **the `e=3` group is vacuous by construction**: a non-chain poset with
-`e(P)=3` has `delta = 1/3` exactly, so *every* member is extremal and the reported tie is a tautology with
-nothing to compare against. In the one non-vacuous group examined — `e=9` at n=7, of size 13 — `qmass=1`
-holds for **exactly three posets, and those three are exactly the extremal ones**: p = 1/C(13,3) = **1/286**
-under a random-label null. At n=6 the `e=9` extremal poset is **strictly above** all six others in its group.
+That universal is **false**. The nine committed rows were all `e(P)=3` groups, and **the `e=3` group is
+vacuous by construction**: a non-chain poset with `e(P)=3` has `delta = 1/3` exactly, so *every* member is
+extremal and the reported tie is a tautology with nothing to compare against. In every group where the tie
+**could** fail, it does: `qmass=1` picks out exactly the extremal posets — 1 of 7, 3 of 13, 6 of 20 — and the
+sibling statistic `qfrac` **is** null under the same treatment, so this is not an artefact of the method.
+Re-measured in mg-dea5, audited in mg-0a11.
 
-**This is a hypothesis, not a result** — one group, found after the fact, among those that happened to be
-non-vacuous. It is being re-measured over non-vacuous groups only (mg-dea5, audit mg-0a11 gated). **If it
-replicates it is the most consequential finding of this arc, which is exactly why it gets the harshest
-reading.**
+**THE EVIDENTIAL STRENGTH IS 1/5, NOT 1/38,760 — corrected here, and it was sent to Daniel wrong.** mg-0a11:
+the n=8 "new population" is **20 of 20 chain-extensions of the n=7 group**, so given n=7 the **n=8 outcome had
+probability 1**. The sequence 1/7 → 1/286 → 1/38,760 is *"not evidence accumulating with n; it is one
+observation"*, deterministically nested. **Multiplicity was never the problem; DEPENDENCE is**, and the repair
+does not discuss it. Distinct cores per group: 5, 5, 5 at n=6,7,8 and 6 at n=9,10,11, with **exactly one
+extremal core at every size**; the honest exact p over distinct cores is **1/5**, and the whole `e=9` family
+from n=5 to n=11 (160 group memberships) has **six cores**.
+
+**Do not over-correct — that is the likelier error from here and the more comfortable one.** The audit is
+explicit that the mathematics holds, every figure reproduces from a disjoint instrument, and **the separation
+replicates three sizes past its reach**. The claim is falsifiable, has had **six independent chances to fail,
+and has taken none**. **The consequence for planning: strengthening this needs INDEPENDENT CORES, not larger
+`n`** — extending the chain adds no information, which is what "probability 1" means. Six cores is the sample
+size, and they are *"the entire empirical content of this arc's most consequential claim."*
 
 *(Provenance notes. The Condorcet-cycle branch is struck for counterexamples: pm-onethird's caveat that `L*`
 might not exist was wrong — a general obstruction imported without checking it against the strength of this
