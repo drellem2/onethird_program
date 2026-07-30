@@ -15,6 +15,10 @@ E2a  EVERY STRIKE AGAINST ITS OWN DOCUMENT
        1 below the rule,  0 exonerated,  0 STANDING
         strike line 18    run   0 of   1 (  0%)  restated at line -      below the rule
 
+  code/species_extent_audit_6cb9/PREDICTIONS.md               1 strike(s)
+       1 below the rule,  0 exonerated,  0 STANDING
+        strike line 102   run   1 of   1 (100%)  restated at line 32     below the rule
+
   code/species_repair_6f61/README.md                          1 strike(s)
        1 below the rule,  0 exonerated,  0 STANDING
         strike line 52    run   0 of   1 (  0%)  restated at line -      below the rule
@@ -35,15 +39,20 @@ E2a  EVERY STRIKE AGAINST ITS OWN DOCUMENT
 
   docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md    4 strike(s)
        4 below the rule,  0 exonerated,  0 STANDING
-        strike line 112   run   6 of  11 ( 55%)  restated at line 574    below the rule
-        strike line 75    run   4 of  17 ( 24%)  restated at line 76     below the rule
-        strike line 708   run   8 of  40 ( 20%)  restated at line 711    below the rule
-        strike line 573   run   5 of  33 ( 15%)  restated at line 422    below the rule
+        strike line 120   run   6 of  11 ( 55%)  restated at line 625    below the rule
+        strike line 83    run   4 of  17 ( 24%)  restated at line 84     below the rule
+        strike line 774   run   8 of  40 ( 20%)  restated at line 777    below the rule
+        strike line 624   run   5 of  33 ( 15%)  restated at line 461    below the rule
 
   docs/OneThird-Hodge-Side-Leverage.md                        2 strike(s)
        1 below the rule,  1 exonerated,  0 STANDING
         strike line 1011  run   6 of   6 (100%)  restated at line 482    below the rule
         strike line 1011  run  21 of  38 ( 55%)  restated at line 481    exonerated: the paragraph says it does not hold
+
+  docs/OneThird-Species-Hopf-Monoids-ExtentRepair-IndependentAudit.md  2 strike(s)
+       2 below the rule,  0 exonerated,  0 STANDING
+        strike line 123   run   1 of   1 (100%)  restated at line 28     below the rule
+        strike line 128   run  17 of 585 (  3%)  restated at line 97     below the rule
 
   docs/OneThird-Species-Hopf-Monoids-Repair-Extent.md         1 strike(s)
        1 below the rule,  0 exonerated,  0 STANDING
@@ -73,7 +82,7 @@ E2a  EVERY STRIKE AGAINST ITS OWN DOCUMENT
         strike line 613   run   3 of  18 ( 17%)  restated at line 613    below the rule
         strike line 871   run  15 of 118 ( 13%)  restated at line 1076   below the rule
 
-  12 file(s) carry a strike, 30 strike(s) measured, 0 standing.
+  14 file(s) carry a strike, 33 strike(s) measured, 0 standing.
 
 ==============================================================================
 E2b  CONTROLS -- a detector only ever seen to pass is worth nothing
@@ -93,9 +102,9 @@ E2b  CONTROLS -- a detector only ever seen to pass is worth nothing
 E2 TOTAL BAD: 0
 ==============================================================================
 
-EXTENT OF THIS NUMBER.  100 markdown file(s) -- every *.md under docs/
-and under code/, recursively.  12 of them carry at least one strike and
-30 strike(s) were measured; a file with no `~~` contributes nothing and
+EXTENT OF THIS NUMBER.  123 markdown file(s) -- every *.md under docs/
+and under code/, recursively.  14 of them carry at least one strike and
+33 strike(s) were measured; a file with no `~~` contributes nothing and
 is not evidence of anything.  IT READS NO .py, NO .txt AND NO CODE: a
 claim struck in a document and asserted in a code tree is s1_extent.py's
 extent, not this one, and that division is the whole of mg-73df's MAJOR

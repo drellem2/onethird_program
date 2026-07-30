@@ -207,25 +207,115 @@ print("  REPAIRED document and can be re-run unmodified.")
 print()
 
 # ---------------------------------------------------------------------------
-# 4.  The repair document exists and points at the target.
+# 4.  The repair document exists and points at the target -- AT THE SITE.
+#
+# mg-6cb9's F3, MAJOR.  This section used to be `flat(s) in flat(rep)`: a
+# PRESENCE test over the whole file.  Three of its five anchors occur more than
+# once in that document -- `mg-a61f` 19 times, `code/species_repair_6f61`
+# twice, `2 of 45` three times -- so for three of five it was a check on NO
+# SITE: delete the copy a reader meets and the run stayed GREEN, and only
+# deleting EVERY copy fired.  mg-8a5c found this exact shape in the Hodge tree,
+# mg-a318 repaired it there by writing each figure once per site, mg-835f
+# measured that repair at 12 of 12.  The species tree had not had the pass.
+#
+# WHICH OF THE THREE REMEDIES, AND WHY.  The brief's first choice is one copy;
+# its second is deriving the others from it; its third is checking at the
+# reader-facing site.  One copy is not available here and the reason is not
+# effort: `mg-a61f` is a ticket id in running prose, and a document that names
+# the audit it answers exactly once is a worse document.  Deriving is not
+# available either -- these are markdown files, there is no generator, and
+# inventing one to hold a ticket id would be a new machine to keep alive.  So
+# this is the third remedy, and it is the third remedy DONE PROPERLY: every
+# assertion below names the section a reader meets it in, and it is checked
+# THERE.  Multiplicity elsewhere is printed as a number and has no vote.
+#
+# A site here is a markdown heading region.  Two assertions are checked at TWO
+# sites each, because both are reader-facing and neither is the other's copy:
+# the front matter tells a reader what the instrument is, and section 11 is the
+# command a reader runs.
 # ---------------------------------------------------------------------------
-hdr("C4  the repair document")
+hdr("C4  the repair document -- EVERY ANCHOR AT ITS OWN SITE (mg-821e)")
+
+
+def sections(text):
+    """{heading line: body} for every ATX heading region, in order.
+
+    The region of a heading runs to the next heading of ANY level, so `## 2.`
+    does not swallow `### 2.1`.  A reader's site is a heading region: it is
+    the unit a table of contents points at.
+    """
+    lines = text.splitlines()
+    starts = [i for i, ln in enumerate(lines) if ln.startswith("#")]
+    out = []
+    for j, i in enumerate(starts):
+        end = starts[j + 1] if j + 1 < len(starts) else len(lines)
+        out.append((lines[i], "\n".join(lines[i:end])))
+    return out
+
+
+# (assertion, needle, site regex, why this site is where a reader meets it)
+C4_SITES = [
+    ("names its target", "OneThird-Species-Hopf-Monoids-Where-This-Lives",
+     r"^# Repair of mg-7d75",
+     "front matter: the **Target:** line, above the fold"),
+    ("names the audit", "mg-a61f",
+     r"^# Repair of mg-7d75",
+     "front matter: the **Audit landed:** line"),
+    ("names the instrument", "code/species_repair_6f61",
+     r"^# Repair of mg-7d75",
+     "front matter: the **Instrument:** line"),
+    ("names the instrument", "code/species_repair_6f61",
+     r"^## 11\. REPRODUCE",
+     "section 11: the command a reader actually runs"),
+    ("records the missed predictions", "2 of 45",
+     r"^### 2\.1 ",
+     "section 2.1, whose heading promises the number"),
+    ("records the missed predictions", "2 of 45",
+     r"^## 11\. REPRODUCE",
+     "section 11: what a reader is told the run will print"),
+    ("records what it did NOT repair", "WHAT THIS REPAIR DID NOT DO",
+     r"^## 10\. ",
+     "section 10's own heading"),
+]
 
 if os.path.exists(REPAIR):
     rep = open(REPAIR, encoding="utf-8").read()
-    for label, s in [
-        ("names its target", "OneThird-Species-Hopf-Monoids-Where-This-Lives"),
-        ("names the audit", "mg-a61f"),
-        ("names the instrument", "code/species_repair_6f61"),
-        ("records the missed predictions", "2 of 45"),
-        ("records what it did NOT repair", "WHAT THIS REPAIR DID NOT DO"),
-    ]:
-        ok = flat(s) in flat(rep)
+    secs = sections(rep)
+    frep = flat(rep)
+    for label, s, site_pat, why in C4_SITES:
+        site = next((body for head, body in secs
+                     if re.search(site_pat, head)), None)
+        copies = frep.count(flat(s))
+        if site is None:
+            bad += 1
+            print("  %-42s *** NO SUCH SECTION: %s ***" % (label, site_pat))
+            continue
+        here = flat(site).count(flat(s))
+        ok = here >= 1
         bad += (not ok)
-        print("  %-42s %s" % (label, "ok" if ok else "*** MISSING ***"))
+        print("  %-42s %-9s at its site: %s"
+              % (label, "ok" if ok else "*** GONE ***", why))
+        print("  %-42s %d cop%s in the file, %d at this site%s"
+              % ("", copies, "y" if copies == 1 else "ies", here,
+                 "" if ok else "  <-- the copy a reader meets is the one"
+                 " that was deleted, and the others do not stand in for it"))
+    # Section 10 must also have a body: a heading alone records nothing.
+    body10 = next((b for h, b in secs if re.search(r"^## 10\. ", h)), "")
+    ok = len(flat(body10)) > 200
+    bad += (not ok)
+    print("  %-42s %s  (%d chars under the heading)"
+          % ("and section 10 is not an empty heading",
+             "ok" if ok else "*** EMPTY ***", len(flat(body10))))
 else:
     bad += 1
     print("  *** the repair document does not exist ***")
+print()
+print("  Each row above is a SITE, not a presence.  Until mg-821e this section")
+print("  asked only whether the string occurred anywhere in the file, so")
+print("  deleting the copy a reader reads left the run green for 3 of the 5")
+print("  assertions and only deleting EVERY copy fired (mg-6cb9 F3).  The")
+print("  copy counts are printed because they are the reason: an anchor with")
+print("  19 copies is not better covered than one with 1, it is less.")
 print()
 
 print("=" * 78)
@@ -240,6 +330,12 @@ print("    docs/OneThird-Species-Hopf-Monoids-Where-This-Lives.md")
 print("It reads a SECOND file for section C4's five assertions and for nothing")
 print("else:")
 print("    docs/OneThird-Species-Hopf-Monoids-Repair.md")
+print("Those five assertions are checked at %d NAMED SITES within that file and"
+      % len(C4_SITES))
+print("NOT over the file as a whole (mg-821e, on mg-6cb9's F3).  A pass means")
+print("each anchor is present IN THE SECTION A READER MEETS IT IN.  It says")
+print("nothing about the rest of that file, and a copy of an anchor somewhere")
+print("else in it neither helps nor is required.")
 print("Until mg-d633 this paragraph said 'ONE FILE' and stopped.  That was")
 print("NARROWER than what the code read -- the safe direction, and still a")
 print("false statement, and it would have told the next person deciding what")

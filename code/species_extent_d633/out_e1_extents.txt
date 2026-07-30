@@ -6,7 +6,7 @@ E1a  WHAT EACH CHECKER ACTUALLY READS
   w3_scope.py          exit 0    18 file(s) under the repo (0 docs, 18 code), 0 outside, 0 binary
   s1_extent.py         exit 0    53 file(s) under the repo (1 docs, 52 code), 55 outside, 18 binary
   s2_seam.py           exit 0     1 file(s) under the repo (1 docs, 0 code), 0 outside, 0 binary
-  e2_crosssection.py   exit 0   100 file(s) under the repo (67 docs, 33 code), 0 outside, 0 binary
+  e2_crosssection.py   exit 0   123 file(s) under the repo (77 docs, 46 code), 0 outside, 0 binary
 
   'outside' is the temporary copies s1_extent.py makes for its own
   controls (c) and (d).  'binary' is shutil.copytree's byte copies.
@@ -29,6 +29,8 @@ E1b  THE PRINTED EXTENT AGAINST THE READ SET, PER CHECKER
   reads nothing else under code/                                   ok
   run_all.sh is among them -- the file the old filter dropped      ok
   the printed extent says 'every regular file'                     ok
+  and says AT WHAT DEPTH -- the condition F1 left unstated         ok
+  and names the ONE directory rule it keeps                        ok
   the printed file count agrees with what was read                 ok
 
   s1_extent.py -- claims the document + 4 trees, less a NAMED list
@@ -37,13 +39,23 @@ E1b  THE PRINTED EXTENT AGAINST THE READ SET, PER CHECKER
   reads NONE of the 5 files it names as skipped                    ok
   the four run_all.sh are read -- the A1 hole, closed              ok
   every skipped file is NAMED in the run                           ok
+  the printed extent says AT WHAT DEPTH (mg-6cb9 F1)               ok
+  and names the ONE directory rule it keeps                        ok
+  every file BELOW a tree root is read (0 today)                   ok
   the printed count for code/species_7d75 is 18, and 18 were read  ok
   the printed count for code/species_repair_6f61 is 13, and 13 wer ok
   the printed count for code/species_remainder_f8fa is 12, and 12  ok
   the printed count for code/species_repair_a4ef is 9, and 9 were  ok
 
+  0 file(s) sit below a tree root today.  That number is printed
+  rather than assumed: when it was 0 and both walks were
+  non-recursive, 'EVERY REGULAR FILE' was a TRUE sentence resting on a
+  condition no sentence stated, and E1 -- listing the same way -- could
+  not disagree.  E1 walks now, so the two computations are independent
+  and a scan that stops at the root is a FINDING here, not a match.
+
   e2_crosssection.py -- claims every *.md under docs/ and code/
-  reads every .md under docs/ and code/ (100)                      ok
+  reads every .md under docs/ and code/ (123)                      ok
   reads no .py, .txt or anything else                              ok
   the printed extent states that count                             ok
 

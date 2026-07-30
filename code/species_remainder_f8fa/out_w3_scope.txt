@@ -1,6 +1,7 @@
 # target: code/species_7d75
 
-# files read: 18   (skipped as not UTF-8 text: none)
+# files read: 18, 0 of them below the tree root   (skipped as not
+# UTF-8 text: none; skipped as __pycache__: the whole directory rule)
 
 ==============================================================================
 W3a  the corrected statements are not still ASSERTED in the instrument
@@ -55,11 +56,16 @@ W3c  the corrected readings are present at source
 W3 SCOPE: PASS   (0 problem(s))
 ==============================================================================
 
-EXTENT OF THAT VERDICT (added mg-a4ef).  MEASURED mg-d633.  This
-enforces TWO corrected statements -- X4 and X5 -- plus the
-character-ring rule, over ONE tree: 18 file(s), every regular file in it,
-with no extension rule (that rule existed until mg-d633 and dropped
-run_all.sh while this line said 'over ONE tree').
+EXTENT OF THAT VERDICT (added mg-a4ef).  MEASURED mg-d633.  DEEPENED
+mg-821e.  This enforces TWO corrected statements -- X4 and X5 -- plus
+the character-ring rule, over ONE tree of 18 file(s).
+It reads every regular file in it, AT ANY DEPTH: no extension rule
+and no depth rule.  The extension rule existed until mg-d633 and
+dropped run_all.sh while this line said 'over ONE tree'; the depth
+rule existed until mg-821e and dropped every subdirectory while this
+line made the same claim -- true, and true only because the tree had
+no subdirectory (mg-6cb9 F1).  The one directory rule left is __pycache__/,
+and it is named here rather than left to be inferred from the code.
 mg-6f61 enumerated ten stricken sentences; eight of
 them are NOT on this list, and X3 and the AM 17.5 quotation were in
 force in code/species_7d75 for the whole time this file reported

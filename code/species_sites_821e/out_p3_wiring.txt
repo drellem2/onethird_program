@@ -1,0 +1,109 @@
+
+==============================================================================
+P3a  CAN THE GENERATOR BE REMOVED, SO THAT NO CHECK IS NEEDED?
+==============================================================================
+
+  The generator, stated precisely so that it can be argued with: A
+  CLAIM STRUCK AT ONE SITE OF A DOCUMENT CAN STAND UN-STRUCK AT
+  ANOTHER SITE OF THE SAME DOCUMENT, because striking is per
+  occurrence and a document may state one claim in more than one
+  place.  Three candidate removals, each measured.
+
+  (1) IS THE GENERATOR LIVE?
+      14 document(s) carry a strike and 33 strike(s) are measured
+      e2's own control (a) restores B1 and it fires: yes
+      -> LIVE.  ok
+
+  (2) REMOVAL (a): STOP MARKING.  Delete every `~~ ~~` in the target
+      document -- keep the text, drop the strike -- and put B1 back.
+      the document's 11 strike(s) go to 0; the repo-wide count goes
+      33 -> 22, and the SWEEP reports 0 standing.  THE FALSE BELIEF IS
+      STILL IN §0 AND NOTHING CAN SEE IT.  Removal (a) does not make
+      the class impossible, it makes it INVISIBLE.  REJECTED, measured
+      PREDICTION MISSED, KEPT: I wrote `exit 0` and the exit is 1.
+      Not the sweep -- e2's own CONTROL (a).  That control restores B1
+      by REVERSING §0's repair, and with the strikes deleted the
+      paragraph it reverses into is gone, so it prints `the control
+      cannot run` and books itself as failed.  The detector reports
+      ITSELF broken instead of reporting the false belief, which
+      sharpens the conclusion rather than softening it: removal (a)
+      takes out the detector and the evidence in one move.
+
+  (3) REMOVAL (b): FORBID RESTATEMENT.  One copy per claim, so a strike
+      has nothing to be compared against.
+      3 of the 33 strike(s) measured are EXONERATED: the claim IS
+      restated, and legitimately -- quoted back in order to correct it.
+      A rule that forbids restating a struck claim forbids correcting
+      one.  44 more sit below the rule as shared lead-ins.  There is no
+      generator to delete either: these are markdown files written by
+      hand.  REJECTED, measured
+
+  (4) HAS B1 BEEN CLOSED FOR ANOTHER REASON?  No: (1)'s control
+      restores it and it fires, which is the definition of can-still-
+      arise.  And the per-section checkers are all still green while it
+      stands -- P3c measures exactly that.
+
+  OUTCOME 2.  The generator is not removable; the check is wired into
+  all three runners.  Removal was rejected because (a) converts a
+  detectable defect into an undetectable one and (b) forbids the
+  correction of a struck claim.  Recorded here so the next person does
+  not re-ask -- and if either measurement above stops holding, the
+  question is open again.
+
+
+==============================================================================
+P3b  EACH RUNNER RUN, AND THE CHECK'S OWN OUTPUT READ FROM IT
+==============================================================================
+
+  A runner is not asked whether it MENTIONS the check.  It is run, and
+  its stdout is searched for the check's own output.  The deletion test
+  removes the wiring block -- ONE unit, 20 lines, counted from the
+  patch itself -- and the check's output must disappear with it.
+
+  runner                     exit     check's output present?  unwired
+  species_repair_6f61        0        YES                      output gone, exit 0 -- ok
+        14 file(s) carry a strike, 33 strike(s) measured, 0 standing.
+        E2 TOTAL BAD: 0
+  species_remainder_f8fa     0        YES                      output gone, exit 0 -- ok
+        14 file(s) carry a strike, 33 strike(s) measured, 0 standing.
+        E2 TOTAL BAD: 0
+  species_repair_a4ef        0        YES                      output gone, exit 0 -- ok
+        14 file(s) carry a strike, 33 strike(s) measured, 0 standing.
+        E2 TOTAL BAD: 0
+
+  3 of 3 runners execute it.  mg-6cb9 measured 0 of 3.
+
+
+==============================================================================
+P3c  B1 RESTORED ON DISK -- THE HISTORICAL FAILURE, REPRODUCED
+==============================================================================
+
+  §0's corrected paragraph is REVERSED back to the misquotation it
+  carried from `83ac472` until mg-d633.  Every per-section checker was
+  green for that whole time and every extent line was true.  Each
+  runner is then run twice: as it is now, and with the wiring block
+  removed.  The second column is the state mg-6cb9 measured.
+
+  runner                     wired (now)            unwired (before)
+  species_repair_6f61        exit 1, CAUGHT         exit 0, green -- as it was
+  species_remainder_f8fa     exit 1, CAUGHT         exit 0, green -- as it was
+  species_repair_a4ef        exit 1, CAUGHT         exit 0, green -- as it was
+
+  That is the whole of OPEN 2.  The artifact was present and the
+  behaviour was absent; the behaviour is now in the run, and the
+  deletion test above shows the wiring is what put it there.
+
+==============================================================================
+P3 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER.  THREE runners -- code/species_repair_6f61, code/species_remainder_f8fa, code/species_repair_a4ef -- each executed as a
+script four times: unmutated, unwired, with B1 restored, and with B1
+restored and unwired.  It says NOTHING about `code/species_7d75`, which
+has no checker in it, and nothing about `code/species_extent_d633`,
+which already called the check.  It measures WHETHER THE CHECK RUNS and
+whether it fires on B1; it says nothing about the other holes e2's own
+extent line names -- a claim restated in ANOTHER document, or restated
+in different words, both of which remain invisible to it and are named
+as invisible there.  The removal question in P3a is answered for THIS
+generator only.

@@ -1,0 +1,91 @@
+
+==============================================================================
+P1a  EVERY PROBE, PREDICTED EXIT FIRST
+==============================================================================
+
+  `exp` was written into PREDICTIONS.md before any of this ran.
+  IN    = inside what the printed extent claims -> must FIRE (exit 1).
+  OUT   = outside it, or under the one stated directory rule -> 0.
+  DEL   = the deletion test: the same plant with the ONE line that
+          makes the walk descend removed.  Must go SILENT again, or
+          the repair is not what is doing the work.
+  GUARD = run against `e1_extents.py`, whose exit 1 means AN EXTENT
+          LINE IS FALSE.  Its polarity is the opposite of a checker's.
+
+  id     checker          dir    mutation                                           exp  got  verdict
+  P0a    w3_scope.py      -      unmutated                                          0    0    as predicted
+  P0b    s1_extent.py     -      unmutated                                          0    0    as predicted
+  P0c    e1_extents.py    -      unmutated                                          0    0    as predicted
+  P1     w3_scope.py      IN     X4 one level down: species_7d75/sub/leak.md        1    1    as predicted
+  P2     s1_extent.py     IN     X3 one level down: species_7d75/sub/leak.md        1    1    as predicted
+  P3     s1_extent.py     IN     X1 TWO levels down, another tree: a4ef/sub/deep/n. 1    1    as predicted
+  P4     s1_extent.py     IN     X1 in an EXTENSIONLESS file in a subdirectory      1    1    as predicted
+  P5     s1_extent.py     IN     X1 in sub/PREDICTIONS.md -- EXCLUDE is not a basen 1    1    as predicted
+  P6     s1_extent.py     OUT    X1 under __pycache__ -- the ONE stated directory r 0    0    as predicted
+  P7     s1_extent.py     OUT    X1 in a subdirectory of a tree S1 DISCLAIMS        0    0    as predicted
+  P8     w3_scope.py      OUT    X4 in a subdirectory of ANOTHER tree               0    0    as predicted
+  P9     s1_extent.py     OUT    a named exclusion at the ROOT still excluded       0    0    as predicted
+  P10    w3_scope.py      DEL    P1's plant, with w3_scope.py's descent line remove 0    0    as predicted
+  P11    s1_extent.py     DEL    P2's plant, with s1_extent.py's descent line remov 0    0    as predicted
+  P12    e1_extents.py    GUARD  a subdirectory planted and S1 NOT recursing -- E1  1    1    as predicted
+  P13    e1_extents.py    GUARD  the same, with W3 not recursing -- E1 must catch t 1    1    as predicted
+  P14    e1_extents.py    GUARD  a subdirectory planted, everything recursing -- no 0    0    as predicted
+  P15    e1_extents.py    GUARD  E1's OWN descent line removed: it must not certify 1    1    as predicted
+
+  INSIDE  5 of 5 fired      (mg-6cb9 measured 0 of 2 at these sites)
+  OUTSIDE 4 of 4 silent
+  DELETED 2 of 2 went silent again
+  GUARD   4 of 4 as predicted
+
+
+==============================================================================
+P1b  THE PRINTED SENTENCE, AND THE ONE RULE THAT SURVIVES
+==============================================================================
+
+  s1_extent.py     says 'AT ANY DEPTH'                   ok
+  s1_extent.py     says 'no depth rule'                  ok
+  s1_extent.py     says '__pycache__'                    ok
+  w3_scope.py      says 'AT ANY DEPTH'                   ok
+  w3_scope.py      says 'no depth rule'                  ok
+  w3_scope.py      says '__pycache__'                    ok
+
+  The point of P1b is that the surviving rule is CARRIED BY A SENTENCE.
+  mg-6cb9's finding was not that a rule existed -- it was that the rule
+  was in the code and in no sentence, so the claim rested on a
+  condition of the tree that nobody had stated.  One rule is left and
+  it is printed; P6 is the probe that shows it is real.
+
+
+==============================================================================
+P1c  mg-6cb9's OWN ROWS, AND ONE OF THEM WILL STILL READ RED
+==============================================================================
+
+  Q10 and Q17 planted X4 and X3 in `code/species_7d75/sub/leak.md` and
+  got exit 0.  P1 and P2 are the same plants: 1 and 1.
+
+  Q17e is different and this file says so rather than leaving it to be
+  discovered.  It plants the same subdirectory and runs `e1_extents.py`,
+  and mg-6cb9 scores a WIDE row as good ONLY when the exit is 1.  That
+  polarity is right for a checker and inverted for a CHECKER OF
+  CHECKERS: E1 exits 1 when an extent line is FALSE.  With the walks
+  repaired no extent line is false, so Q17e's exit is 0 -- P14 above,
+  predicted 0 -- and mg-6cb9's table will print `*** EXTENT WIDER ***`
+  against a tree where the extent is true.  THAT LABEL IS THAT
+  INSTRUMENT'S SCORING, NOT A SURVIVING DEFECT, and the way to tell the
+  two apart is P12/P13/P15: with a walk put back to non-recursive, E1
+  exits 1, 1 and 1.  It could not do that before this ticket, which
+  is precisely what Q17e found.
+
+==============================================================================
+P1 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER.  18 probes over THREE files -- `w3_scope.py`,
+`s1_extent.py` and `e1_extents.py` -- each one mutation applied to the
+REAL worktree and undone, with `git status --porcelain` compared before
+and after every probe.  It says NOTHING about `check_doc.py` (P2 is its
+file), about `s2_seam.py` or `e2_crosssection.py` (P3 is theirs), and
+nothing about any tree other than the four `s1_extent.py` names and the
+one `w3_scope.py` names.  Depth is tested to TWO levels and to an
+extensionless file; it is not tested against a symlink, a device node
+or a directory the walk cannot read, and those are not claimed.
