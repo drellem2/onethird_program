@@ -1,0 +1,123 @@
+mg-2216 — INDEPENDENT mutation battery against mg-2da3's delta_control.py
+======================================================================================
+STATE.md  at rest : 177464 bytes, 174405 characters, sha 54a41150fd75f97e
+README.md at rest : 20003 bytes, 19830 characters, sha 12299b436e7e66c7
+certified row     : line :135, content cell 7876 characters stripped / 7878 raw
+mutations         : 14, none of them mg-2da3's; each applied to the snapshot, never stacked
+
+POSITIVE CONTROL — clean tree
+  delta_control.py exit 0   as expected
+
+M01  [single-character]  expect: catch
+      row :135 cell: 'ridge in 1 or 2 facets' -> '1 or 3' (one character, a false theorem)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 0   >>> MISSED <<<
+
+M02  [length-preserving]  expect: catch
+      row :135 cell: 'the proof is sound' -> 'the proof is bogus' (5 chars, verdict inverted)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 0   >>> MISSED <<<
+
+M03  [whitespace-only]  expect: catch
+      row :135 cell: the spaces in '**The mathematics.**' -> U+00A0 (0 visible change)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 0   >>> MISSED <<<
+
+M04  [whitespace-only]  expect: tolerate
+      row :135 raw field: 40 trailing spaces before the closing pipe
+      character delta: STATE.md +39, README +0
+      delta_control.py exit 0   tolerated, as designed
+
+M05  [reordering]  expect: catch
+      row :135 cell: two adjacent sentences swapped (length AND token multiset preserved)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 0   >>> MISSED <<<
+
+M06  [bulk-but-quiet]  expect: catch
+      row :135 cell: last 3,000 characters replaced by 'x' ('**' markers preserved)
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 0   >>> MISSED <<<
+
+M07  [length-preserving]  expect: catch
+      row :135 cell: the per-row-history pointer deleted (violates the README's rule 2)
+      character delta: STATE.md -158, README +0
+      delta_control.py exit 2   CAUGHT (MOVED)
+        [MOVED] tree cell is 7876 characters (stripped)
+        [MOVED] the delta is +173 characters
+
+M08  [out-of-row]  expect: tolerate
+      a different >2,000-character ledger row deleted outright
+      character delta: STATE.md -2226, README +0
+      delta_control.py exit 0   tolerated, as designed
+
+M09  [readme-interior]  expect: catch
+      README: the F1 correction block hollowed out, its first line kept
+      character delta: STATE.md +0, README -1556
+      delta_control.py exit 0   >>> MISSED <<<
+
+M10  [readme-interior]  expect: catch
+      README: the F2 block's '13,188 -> 7,703 characters' falsified to 9,703
+      character delta: STATE.md +0, README +0
+      delta_control.py exit 0   >>> MISSED <<<
+
+M11  [readme-interior]  expect: catch
+      README: the repair's OWN A1 block figure '37,958 bytes' falsified to 137,958
+      character delta: STATE.md +0, README +1
+      delta_control.py exit 0   >>> MISSED <<<
+
+M12  [tolerance]  expect: tolerate
+      60 lines inserted above the certified row
+      character delta: STATE.md +570, README +0
+      delta_control.py exit 0   tolerated, as designed
+
+M13  [tolerance]  expect: tolerate
+      the certified row moved to the end of the file, byte-identical
+      character delta: STATE.md +1, README +0
+      delta_control.py exit 0   tolerated, as designed
+
+M14  [tolerance]  expect: catch
+      the certified row duplicated (its key no longer identifies one row)
+      character delta: STATE.md +9029, README +0
+      delta_control.py exit 1   CAUGHT (FAIL)
+        [FAIL] exactly one ledger row keys to mg-276d in the working tree
+
+======================================================================================
+THE PINNED BATTERY, UNDER M06 (not under mg-bd41's gutting)
+======================================================================================
+  code/state_audit_6a2f/run_all.sh reproduces out_audit.txt byte-identically: True (96291 bytes)
+  Same conclusion as mg-bd41 A1, reached from a different mutation: the
+  battery is pinned to 97cb533 / 60f4dac / 57f962f and cannot see the tree.
+
+======================================================================================
+RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 12299b436e7e66c7 == 12299b436e7e66c7
+======================================================================================
+SUMMARY
+======================================================================================
+       class               expect     exit  verdict
+  M01  single-character    catch      0     >>> MISSED <<<
+  M02  length-preserving   catch      0     >>> MISSED <<<
+  M03  whitespace-only     catch      0     >>> MISSED <<<
+  M04  whitespace-only     tolerate   0     tolerated, as designed
+  M05  reordering          catch      0     >>> MISSED <<<
+  M06  bulk-but-quiet      catch      0     >>> MISSED <<<
+  M07  length-preserving   catch      2     CAUGHT (MOVED)
+  M08  out-of-row          tolerate   0     tolerated, as designed
+  M09  readme-interior     catch      0     >>> MISSED <<<
+  M10  readme-interior     catch      0     >>> MISSED <<<
+  M11  readme-interior     catch      0     >>> MISSED <<<
+  M12  tolerance           tolerate   0     tolerated, as designed
+  M13  tolerance           tolerate   0     tolerated, as designed
+  M14  tolerance           catch      1     CAUGHT (FAIL)
+
+  14 mutations: 2 caught, 8 MISSED, 4 tolerated by design, 0 noisy
+
+  MISSED — damage to material delta_control.py states it certifies, on which
+  it exits 0:
+    M01 [single-character] row :135 cell: 'ridge in 1 or 2 facets' -> '1 or 3' (one character, a false theorem)
+    M02 [length-preserving] row :135 cell: 'the proof is sound' -> 'the proof is bogus' (5 chars, verdict inverted)
+    M03 [whitespace-only] row :135 cell: the spaces in '**The mathematics.**' -> U+00A0 (0 visible change)
+    M05 [reordering] row :135 cell: two adjacent sentences swapped (length AND token multiset preserved)
+    M06 [bulk-but-quiet] row :135 cell: last 3,000 characters replaced by 'x' ('**' markers preserved)
+    M09 [readme-interior] README: the F1 correction block hollowed out, its first line kept
+    M10 [readme-interior] README: the F2 block's '13,188 -> 7,703 characters' falsified to 9,703
+    M11 [readme-interior] README: the repair's OWN A1 block figure '37,958 bytes' falsified to 137,958

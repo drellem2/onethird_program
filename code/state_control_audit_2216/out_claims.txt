@@ -1,0 +1,90 @@
+mg-2216 — audit of bf17716's non-instrument claims
+======================================================================================
+
+T2. DID THE REPAIR PRESERVE THE PINNED BATTERY?
+  [ok] code/state_audit_6a2f/ is byte-identical across the repair
+        git diff --name-only bf17716^..bf17716 -- code/state_audit_6a2f -> '' (empty = untouched)
+  [ok] the repair touched exactly 6 files, none of them an existing instrument
+        STATE.md
+        code/state_landing_control_2da3/delta_control.py
+        code/state_landing_control_2da3/negative_control.py
+        code/state_landing_control_2da3/out_control.txt
+        code/state_landing_control_2da3/run_all.sh
+        docs/state-history/README.md
+  [ok] the historical reproduction still works, byte-identically, at this commit
+        96291 bytes produced vs 96291 committed; exit 0
+  [ok] no script in the pinned battery opens the working tree or resolves HEAD (the commit's own claim, re-run here)
+        scripts matching open(|HEAD: none
+
+T2b. THE ONE-GREP TEST THE CONVENTION PROMOTES, applied to this repo
+     Appendix A: "does any script in it open the working tree or resolve HEAD?"
+  [NO] the test is asked of a DIRECTORY, and no directory in code/ is mixed (so 'any script' cannot license citing a pinned one)
+        counterexample_probe_24a3: tree-reading ['check_doc.py', 'probe.py'], pinned ['bridge.py', 'core.py', 'selftest.py']
+        face_geometry_audit_f1b2: tree-reading ['audit_injections.py'], pinned ['audit_gates.py', 'audit_nmax2.py', 'audit_scoring.py', 'audit_theorem_and_content.py']
+        face_geometry_audit_fcf1: tree-reading ['audit_extra.py'], pinned ['audit_gauge.py', 'audit_nc4.py', 'rebuild.py']
+        landscape_audit_d673: tree-reading ['audit_addenda.py'], pinned ['audit_e6_e8_m0.py', 'audit_identifications.py', 'audit_populations.py', 'audit_spectrum.py', 'diag_p2.py', 'diag_p2_cross.py']
+        state_landing_audit_bd41: tree-reading ['instrument_sensitivity.py', 'multiset_whole.py', 'verify_landing_figures.py'], pinned ['cellmeasure.py']
+        state_restructure_34bf: tree-reading ['a3_reading_path.py', 'build.py', 'dump.py', 'regen_checks.py', 'verify_relocation.py'], pinned ['cells.py', 'spec.py']
+        unified_gate_audit_446b: tree-reading ['audit_crosscheck.py', 'audit_quotes.py', 'audit_scope.py'], pinned ['audit_beyond.py', 'audit_l1.py', 'audit_l2.py', 'audit_proof.py']
+
+T3. IS THE CORRECTION FINDABLE FROM THE CLAIM IT CORRECTS?
+  [ok] the new control is named in at least one document a reader lands on
+        named in:
+        STATE.md
+        code/state_landing_control_2da3/negative_control.py
+        code/state_landing_control_2da3/run_all.sh
+        docs/state-history/README.md
+  [NO] THE POINT OF USE CARRIES A POINTER: re-running the pinned battery surfaces the correction
+        grep over every script in the pinned battery for the correction or the new control: no hit.
+        A future agent who runs the battery and is about to cite it meets nothing.
+  [NO] the per-row history of the row b68db5d edited carries the correction (the repo's rule 2: 'the row keeps a pointer naming it')
+        docs/state-history/attempt-mg-276d.md mentions neither mg-2da3 nor the new control.
+        The correction lives only in docs/state-history/README.md and STATE.md's Appendix A.
+  [ok] the A3 correction sits adjacent to the bullet it corrects (the good pattern)
+        the A3 blockquote opens 573 characters after the bullet it corrects — a reader of the claim meets the correction.
+  [ok] the A1 correction (the ticket's headline) is in a section of its own at the end of the same file
+        placed after '## How completeness is checked'; nothing above it points down at it,
+        and the claim it corrects is in a frozen commit message.
+  [ok] the convention has repo precedent for correcting a commit log (Appendix A)
+        STATE.md Appendix A already corrects `ba3ec79`'s commit message on that basis.
+  [ok] mg-7735 itself put its F1/F2 corrections in this README (the cited precedent)
+        git log -S over the F2 block returns b68db5d.
+
+T4. THE COMMIT'S OWN FACTUAL CLAIMS
+  [ok] A3's correction is right: 60f4dac is mg-34bf's PARENT'S PARENT, not two commits before the parent
+        57f962f <- 97cb533 <- 60f4dac (re-derived from git log --format=%p)
+  [ok] A2's correction is right: mg-6a2f DID name the source, at :212 of its document
+        :212 = | pm-onethird's ticket (a stale revision, line bytes) | 5.4 / 9.2 / 13.5 / 10.8 / 11.7 |
+  [ok] and the hash db08b4c is the real new contribution: 327 lines, 0 'mg-a3d4'
+        327 lines, 0 occurrences of mg-a3d4
+  [ok] CAVEAT AUDITED — 'b68db5d's SECOND cited re-run IS genuine': verify_relocation.py's completeness half really opens the working tree
+        code/state_restructure_34bf/verify_relocation.py:95 -> new = open("STATE.md", encoding="utf-8").read()
+  [ok] and its four cited figures reproduce here exactly
+        cells changed = 10; words in those cells at base = 11625; maximal verbatim runs covering them = 125; words not found anywhere reachable = 0
+  [ok] CAVEAT AUDITED — the 'FAIL Appendix A changed' really is pre-existing
+        it fails at this clean commit, and Appendix A had already diverged from 57f962f at bdcb006,
+        two commits before b68db5d — so the repair's +2 lines did not cause it.
+  [ok] b68db5d: 380 lines, 210 cells (the commit's SCOPE paragraph)
+        measured 380 lines, 62 table rows, 210 cells
+  [ok] bf17716: 382 lines, 210 cells (the commit's SCOPE paragraph)
+        measured 382 lines, 62 table rows, 210 cells
+  [ok] row :135 is byte-for-byte what b68db5d left (the commit's 'not re-opened' claim)
+        compared as whole lines
+  [ok] no per-row history file and no ledger row was touched by the repair
+        changed files: STATE.md, code/state_landing_control_2da3/delta_control.py, code/state_landing_control_2da3/negative_control.py, code/state_landing_control_2da3/out_control.txt, code/state_landing_control_2da3/run_all.sh, docs/state-history/README.md
+  [ok] 'NOTHING WAS LOST' is restated as STANDING and is not re-verified
+        the commit message states it stands and cites mg-6a2f and mg-bd41 for it.
+  [NO] the '~25 s' runtime the repair states for its own battery
+        measured wall time is in the bracket under 5 s, against a stated ~25 s in both the commit message and run_all.sh:25.
+        the pinned battery it runs twice is itself in the bracket under 2 s.
+  [ok] out_control.txt reproduces byte-identically
+        7410 bytes vs 7410 committed
+
+======================================================================================
+21 checks held, 4 did not.
+DID NOT HOLD:
+  - the test is asked of a DIRECTORY, and no directory in code/ is mixed (so 'any script' cannot license citing a pinned one)
+  - THE POINT OF USE CARRIES A POINTER: re-running the pinned battery surfaces the correction
+  - the per-row history of the row b68db5d edited carries the correction (the repo's rule 2: 'the row keeps a pointer naming it')
+  - the '~25 s' runtime the repair states for its own battery
+======================================================================================
