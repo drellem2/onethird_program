@@ -1,0 +1,15 @@
+==============================================================================
+AUDIT: Theorem D and Theorem N1, independent rebuild
+==============================================================================
+  N1a  E L^rel E == Delta_AT     (mg-276d's bridge, re-derived here)
+  N1b  Delta_AT  == N^T N        (the incidence factorisation)
+  N1c  d_rel E   == N up to a sign per row  (N1's own new clause)
+
+n=1 posets=  1  D=  1/  1  N1a=  1  N1b=  1  N1c=  1  #interior==deg on   1  (|L|>=2:   0)
+n=2 posets=  2  D=  2/  2  N1a=  2  N1b=  2  N1c=  2  #interior==deg on   2  (|L|>=2:   1)
+n=3 posets=  5  D=  5/  5  N1a=  5  N1b=  5  N1c=  5  #interior==deg on   5  (|L|>=2:   4)
+n=4 posets= 16  D= 16/ 16  N1a= 16  N1b= 16  N1c= 16  #interior==deg on  16  (|L|>=2:  15)
+n=5 posets= 63  D= 63/ 63  N1a= 63  N1b= 63  N1c= 63  #interior==deg on  63  (|L|>=2:  62)
+n=6 posets=318  D=318/318  N1a=318  N1b=318  N1c=318  #interior==deg on 318  (|L|>=2: 317)
+
+TOTAL over 405 posets: D=405  N1a=405  N1b=405  N1c=405

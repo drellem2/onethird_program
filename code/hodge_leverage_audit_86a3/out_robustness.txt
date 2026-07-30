@@ -1,0 +1,9 @@
+n=1 posets=  1   E L^abs E == (deg+free)I - A on   1   deg+free == n-1 on   1
+n=2 posets=  2   E L^abs E == (deg+free)I - A on   2   deg+free == n-1 on   2
+n=3 posets=  5   E L^abs E == (deg+free)I - A on   5   deg+free == n-1 on   5
+n=4 posets= 16   E L^abs E == (deg+free)I - A on  16   deg+free == n-1 on  16
+n=5 posets= 63   E L^abs E == (deg+free)I - A on  63   deg+free == n-1 on  63
+n=6 posets=318   E L^abs E == (deg+free)I - A on 318   deg+free == n-1 on 318
+
+So under EITHER reading the top-degree Hodge operator is a graph object:
+  relative -> Delta_AT = D - A ;  absolute -> (n-1)I - A .

@@ -1,0 +1,36 @@
+==============================================================================
+AUDIT: Theorem G rebuilt from scratch (no shared link code)
+==============================================================================
+
+G1  closed-form induced weights vs brute-force facet counting
+    m= 3  vertices=  6  verts match=True  w(S) match=True  w(S,T) match=True
+    m= 4  vertices= 14  verts match=True  w(S) match=True  w(S,T) match=True
+    m= 5  vertices= 30  verts match=True  w(S) match=True  w(S,T) match=True
+    m= 6  vertices= 62  verts match=True  w(S) match=True  w(S,T) match=True
+    m= 7  vertices=126  verts match=True  w(S) match=True  w(S,T) match=True
+
+G2  P f = f/2 exactly, f(S) = sum_{i in S} a_i with sum a_i = 0
+    (exact rationals; several independent choices of a; m up to 14)
+    m= 3  |V|=    6  max |Pf - f/2| = 0   <f,1>_pi = 0   f != 0: True
+    m= 4  |V|=   14  max |Pf - f/2| = 0   <f,1>_pi = 0   f != 0: True
+    m= 5  |V|=   30  max |Pf - f/2| = 0   <f,1>_pi = 0   f != 0: True
+    m= 6  |V|=   62  max |Pf - f/2| = 0   <f,1>_pi = 0   f != 0: True
+    m= 7  |V|=  126  max |Pf - f/2| = 0   <f,1>_pi = 0   f != 0: True
+    m= 8  |V|=  254  max |Pf - f/2| = 0   <f,1>_pi = 0   f != 0: True
+    m= 9  |V|=  510  max |Pf - f/2| = 0   <f,1>_pi = 0   f != 0: True
+    m=10  |V|= 1022  max |Pf - f/2| = 0   <f,1>_pi = 0   f != 0: True
+    m=11  |V|= 2046  max |Pf - f/2| = 0   <f,1>_pi = 0   f != 0: True
+    m=12  |V|= 4094  max |Pf - f/2| = 0   <f,1>_pi = 0   f != 0: True
+
+G3  is 1/2 the SECOND eigenvalue, or only AN eigenvalue?
+    (full spectrum of the reversible walk, dense symmetric solver)
+    m= 3  |V|=   6  lambda_1=1.000000000000  lambda_2=0.500000000000  lambda_min=-1.000000000000   lambda_2 == 1/2: True
+    m= 4  |V|=  14  lambda_1=1.000000000000  lambda_2=0.500000000000  lambda_min=-0.500000000000   lambda_2 == 1/2: True
+    m= 5  |V|=  30  lambda_1=1.000000000000  lambda_2=0.500000000000  lambda_min=-0.333333333333   lambda_2 == 1/2: True
+    m= 6  |V|=  62  lambda_1=1.000000000000  lambda_2=0.500000000000  lambda_min=-0.250000000000   lambda_2 == 1/2: True
+    m= 7  |V|= 126  lambda_1=1.000000000000  lambda_2=0.500000000000  lambda_min=-0.200000000000   lambda_2 == 1/2: True
+    m= 8  |V|= 254  lambda_1=1.000000000000  lambda_2=0.500000000000  lambda_min=-0.166666666667   lambda_2 == 1/2: True
+    m= 9  |V|= 510  lambda_1=1.000000000000  lambda_2=0.500000000000  lambda_min=-0.142857142857   lambda_2 == 1/2: True
+
+    (m = 3..9 covers A_3..A_9; the deliverable's equality row G'
+     claims A_3..A_7 only.)

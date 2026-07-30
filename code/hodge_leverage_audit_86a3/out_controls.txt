@@ -1,0 +1,29 @@
+==============================================================================
+AUDIT §10: the mg-5630 test applied to the negative-control battery
+==============================================================================
+
+Q1/Q2/Q3  X2, scored three ways
+     as-implemented : mutated vertex set != this codebase's link
+     as-described   : mutated vertex count != Theorem L's prediction
+     downstream     : the mutated links make (LG) FALSE
+    as-implemented, vs the CORRECT link : fires on 4946 faces, vacuous on 1245
+    as-implemented, vs the BUGGY  link  : fires on 0 faces, vacuous on 6191
+      -> so X2 is NOT a gauge in disguise: injecting the very bug it
+         mutates toward makes it go silent (0 fires => FAIL).  It is
+         a DISTINGUISHABILITY check -- it certifies the link is not
+         that one alternative object -- and nothing more.  Contrast
+         X1b/X3/X4/X5, which are scored by a downstream FAILURE.
+    the correct link's vertex count matches Theorem L on 6191 of 6191 faces
+    as-described (Theorem L count)      : fires on 4946 faces, vacuous on 1245
+    downstream ((LG) falsified)         : fires on 0 posets, vacuous on 81
+
+Q4  X1a's diagnosis, tested at the two levels it could be meant
+    §10: 'uniform link weights come out with lambda_2 at least as
+    large as the induced-measure ones on every poset here, so the
+    mutated bound is smaller and still true'.
+    at the LINK level: uniform gives a SMALLER lambda_2 on 75 of 2748 links  -> the sentence as written is FALSE at this level
+    at the GAMMA level: uniform gives a smaller gamma_i on 9 levels
+    mutated bound strictly LARGER than the true bound on 4 posets
+    X1a fires (mutated bound exceeds the truth) on 0 posets; vacuous on 81; bound value changed on 55
+    -> the OPERATIVE half ('X1a cannot fire') is confirmed; the
+       per-link monotonicity offered as its reason is not true.
