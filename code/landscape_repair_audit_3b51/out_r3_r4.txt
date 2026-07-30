@@ -1,0 +1,93 @@
+==============================================================================
+mg-3b51 AUDIT 2 -- R3 ('sharper' -> 'more informative') AND R4
+==============================================================================
+
+------------------------------------------------------------------------------
+B1  TWO-SIDED COMPARISON, LEVEL BY LEVEL.  Repo's triangular solve
+    (rebuilt from the identity) vs Brown's REPAIRED closed form.
+------------------------------------------------------------------------------
+  n  classes    levels     disagreeing levels         bad posets
+  2        2         4                      0                  0
+  3        5        24                      0                  0
+  4       16       206                      0                  0
+  5       63      2353                      0                  0
+  6      318     37029                      0                  0
+tot      404     39616                      0                  0
+
+    n <= 5 levels: 2587      n <= 6 levels: 39616
+
+------------------------------------------------------------------------------
+B2  SUPPORT.  Is  m_X != 0  exactly on M_0?
+------------------------------------------------------------------------------
+  n    levels   levels where supp != M_0
+  2         4                          0
+  3        24                          0
+  4       206                          0
+  5      2353                          0
+  6     37029                          0
+
+------------------------------------------------------------------------------
+B3  WHAT THEOREM 2 BUYS -- the TRUE gain, counted.  Levels carrying
+    ZERO, named a priori instead of discovered by a solve.
+------------------------------------------------------------------------------
+  n    levels     carry zero  carry nonzero
+  2         4              1              3
+  3        24             11             13
+  4       206            125             81
+  5      2353           1674            679
+  6     37029          28988           8041
+
+------------------------------------------------------------------------------
+B4  IS IT 'SHARPER' IN ANY DIRECTION?  A bound word needs one.
+------------------------------------------------------------------------------
+  n  closed form >    closed form <            equal
+  2              0                0                4
+  3              0                0               24
+  4              0                0              206
+  5              0                0             2353
+  6              0                0            37029
+
+    Neither side is ever larger anywhere.  'Sharper' has no direction
+    to point in; 'more informative' is a statement about WHEN the
+    answer is available, and B3 counts it.
+
+------------------------------------------------------------------------------
+B5  POPULATIONS (R4), rebuilt.
+------------------------------------------------------------------------------
+  n   classes     moves product pairs     levels
+  1         1         1             1          1
+  2         2         5            13          4
+  3         5        37           321         24
+  4        16       397         13853        206
+  5        63      5757        922073       2353
+  6       318         -             -      37029
+
+    classes  1..6                 : 1, 2, 5, 16, 63, 318
+    classes  2 <= n <= 6  (E3)    : 404   [document says 404]
+    classes  3 <= n <= 6  (item 5): 402   [document says 402]
+    classes  n <= 5       (E1)    : 87   [document says 87]
+    moves    n <= 5 total         : 6197   [document says 6 197]
+    product pairs n <= 5 total    : 936261   [document says 936 261]
+    product pairs n = 5 row       : 922073   [document says 922 073]
+    levels   2 <= n <= 6 total    : 39616   [document says 39 616]
+    levels   2 <= n <= 5 total    : 2587   [document says 2 353 at n=5]
+
+------------------------------------------------------------------------------
+B6  THE STEP mg-1953 DOES NOT RE-DERIVE.  Brown's Theorem 2 says
+    m_X = |mu(X, V)|.  The document -- original and repaired -- uses
+    prod_B (|B|-1)! and never checks that identification.  Moebius
+    function of Pi_n computed here from its defining recursion.
+------------------------------------------------------------------------------
+  n      flats         |mu(0,X)| != prod (|B|-1)!
+  1          1                         0 bad of 1
+  2          2                         0 bad of 2
+  3          5                         0 bad of 5
+  4         15                        0 bad of 15
+  5         52                        0 bad of 52
+  6        203                       0 bad of 203
+
+    Closed under the repair's own range.  The link holds; it was
+    simply never exercised by mg-1953's instruments, which take
+    prod_B (|B|-1)! as the statement rather than as a specialisation.
+
+==============================================================================

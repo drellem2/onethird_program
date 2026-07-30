@@ -1,0 +1,160 @@
+mg-3b51 audit self-test, n <= 6
+
+(a) EXTERNAL SEQUENCES -- the enumeration is not self-certified
+  A000112 poset isomorphism classes at n=1                       1            OK
+  A000110 set partitions (flats) at n=1                          1            OK
+  A000112 poset isomorphism classes at n=2                       2            OK
+  A000110 set partitions (flats) at n=2                          2            OK
+  A000112 poset isomorphism classes at n=3                       5            OK
+  A000110 set partitions (flats) at n=3                          5            OK
+  A000112 poset isomorphism classes at n=4                       16           OK
+  A000110 set partitions (flats) at n=4                          15           OK
+  A000112 poset isomorphism classes at n=5                       63           OK
+  A000110 set partitions (flats) at n=5                          52           OK
+  A000112 poset isomorphism classes at n=6                       318          OK
+  A000110 set partitions (flats) at n=6                          203          OK
+  A000670 |F(antichain)| at n=1                                  1            OK
+  A000522 |greedoid band at the antichain| at n=1                2            OK
+  A000670 |F(antichain)| at n=2                                  3            OK
+  A000522 |greedoid band at the antichain| at n=2                5            OK
+  A000670 |F(antichain)| at n=3                                  13           OK
+  A000522 |greedoid band at the antichain| at n=3                16           OK
+  A000670 |F(antichain)| at n=4                                  75           OK
+  A000522 |greedoid band at the antichain| at n=4                65           OK
+  A000670 |F(antichain)| at n=5                                  541          OK
+  A000522 |greedoid band at the antichain| at n=5                326          OK
+
+(b) THE TWO DECISION PROCEDURES FOR 'X MEETS U', CROSS-VALIDATED
+  n=1 constructive vs |X|!-search disagreements (of 1 flats)     0            OK
+  n=2 constructive vs |X|!-search disagreements (of 4 flats)     0            OK
+  n=3 constructive vs |X|!-search disagreements (of 25 flats)    0            OK
+  n=4 constructive vs |X|!-search disagreements (of 240 flats)   0            OK
+  n=5 constructive vs |X|!-search disagreements (of 3276 flats)  0            OK
+
+(b2) AC(P) BY TWO ROUTES -- acyclic quotient vs supports of moves
+  n=1 posets where the two AC(P) routes disagree                 0            OK
+  n=2 posets where the two AC(P) routes disagree                 0            OK
+  n=3 posets where the two AC(P) routes disagree                 0            OK
+  n=4 posets where the two AC(P) routes disagree                 0            OK
+  n=5 posets where the two AC(P) routes disagree                 0            OK
+
+(c) EVERY NUMBER THIS AUDIT'S DOCUMENT CARRIES
+  n=2 posets where the ORIGINAL rule breaks Brown's identity     0            OK
+  n=2 posets where the REPAIRED rule breaks Brown's identity     0            OK
+  n=2 ORIGINAL rule != M_0 (constructed), as sets                0            OK
+  n=2 REPAIRED rule != M_0 (constructed), as sets                0            OK
+  n=2 spurious flats under the ORIGINAL rule                     0            OK
+  n=2 disagreeing flats that lie INSIDE AC(P)                    0            OK
+  n=2 disagreeing flats that lie OUTSIDE AC(P)                   0            OK
+  n=3 posets where the ORIGINAL rule breaks Brown's identity     0            OK
+  n=3 posets where the REPAIRED rule breaks Brown's identity     0            OK
+  n=3 ORIGINAL rule != M_0 (constructed), as sets                0            OK
+  n=3 REPAIRED rule != M_0 (constructed), as sets                0            OK
+  n=3 spurious flats under the ORIGINAL rule                     0            OK
+  n=3 disagreeing flats that lie INSIDE AC(P)                    0            OK
+  n=3 disagreeing flats that lie OUTSIDE AC(P)                   0            OK
+  n=4 posets where the ORIGINAL rule breaks Brown's identity     1            OK
+  n=4 posets where the REPAIRED rule breaks Brown's identity     0            OK
+  n=4 ORIGINAL rule != M_0 (constructed), as sets                1            OK
+  n=4 REPAIRED rule != M_0 (constructed), as sets                0            OK
+  n=4 spurious flats under the ORIGINAL rule                     1            OK
+  n=4 disagreeing flats that lie INSIDE AC(P)                    0            OK
+  n=4 disagreeing flats that lie OUTSIDE AC(P)                   1            OK
+  n=5 posets where the ORIGINAL rule breaks Brown's identity     10           OK
+  n=5 posets where the REPAIRED rule breaks Brown's identity     0            OK
+  n=5 ORIGINAL rule != M_0 (constructed), as sets                10           OK
+  n=5 REPAIRED rule != M_0 (constructed), as sets                0            OK
+  n=5 spurious flats under the ORIGINAL rule                     18           OK
+  n=5 disagreeing flats that lie INSIDE AC(P)                    0            OK
+  n=5 disagreeing flats that lie OUTSIDE AC(P)                   18           OK
+  n=6 posets where the ORIGINAL rule breaks Brown's identity     101          OK
+  n=6 posets where the REPAIRED rule breaks Brown's identity     0            OK
+  n=6 ORIGINAL rule != M_0 (constructed), as sets                101          OK
+  n=6 REPAIRED rule != M_0 (constructed), as sets                0            OK
+  n=6 spurious flats under the ORIGINAL rule                     455          OK
+  n=6 disagreeing flats that lie INSIDE AC(P)                    0            OK
+  n=6 disagreeing flats that lie OUTSIDE AC(P)                   455          OK
+  total flats at n=6 (318 classes x 203)                         64554        OK
+
+    the witness, on the auditor's labels
+  P={a<d,b<c}: |L(P)|                                            6            OK
+  P={a<d,b<c}: ORIGINAL rule sums to                             7            OK
+  P={a<d,b<c}: REPAIRED rule sums to                             6            OK
+  P={a<d,b<c}: the spurious flat                                 ['ac|bd']    OK
+  P={a<c,b<d}: ORIGINAL rule sums to                             7            OK
+  P={a<c,b<d}: the spurious flat                                 ['ad|bc']    OK
+
+    R3 -- the two-sided comparison and the true gain
+  n=2 levels                                                     4            OK
+  n=2 disagreeing levels (solve vs closed form)                  0            OK
+  n=2 levels where supp(m) != M_0                                0            OK
+  n=2 levels carrying zero                                       1            OK
+  n=2 levels where the closed form is LARGER                     0            OK
+  n=2 levels where the closed form is SMALLER                    0            OK
+  n=3 levels                                                     24           OK
+  n=3 disagreeing levels (solve vs closed form)                  0            OK
+  n=3 levels where supp(m) != M_0                                0            OK
+  n=3 levels carrying zero                                       11           OK
+  n=3 levels where the closed form is LARGER                     0            OK
+  n=3 levels where the closed form is SMALLER                    0            OK
+  n=4 levels                                                     206          OK
+  n=4 disagreeing levels (solve vs closed form)                  0            OK
+  n=4 levels where supp(m) != M_0                                0            OK
+  n=4 levels carrying zero                                       125          OK
+  n=4 levels where the closed form is LARGER                     0            OK
+  n=4 levels where the closed form is SMALLER                    0            OK
+  n=5 levels                                                     2353         OK
+  n=5 disagreeing levels (solve vs closed form)                  0            OK
+  n=5 levels where supp(m) != M_0                                0            OK
+  n=5 levels carrying zero                                       1674         OK
+  n=5 levels where the closed form is LARGER                     0            OK
+  n=5 levels where the closed form is SMALLER                    0            OK
+  n=6 levels                                                     37029        OK
+  n=6 disagreeing levels (solve vs closed form)                  0            OK
+  n=6 levels where supp(m) != M_0                                0            OK
+  n=6 levels carrying zero                                       28988        OK
+  n=6 levels where the closed form is LARGER                     0            OK
+  n=6 levels where the closed form is SMALLER                    0            OK
+  levels, 2 <= n <= 6, total                                     39616        OK
+
+    R4 -- the populations
+  classes 2 <= n <= 6 (E3's population)                          404          OK
+  classes 3 <= n <= 6 (item 5's population)                      402          OK
+  classes n <= 5 (E1's population)                               87           OK
+  moves n <= 5 total                                             6197         OK
+  product pairs n <= 5 total                                     936261       OK
+  product pairs n = 5 row                                        922073       OK
+  levels n <= 5 TOTAL (not 2 353 -- that is the n = 5 ROW)       2588         OK
+  levels 2 <= n <= 5 total                                       2587         OK
+
+    the Moebius step mg-1953 does not re-derive
+  n=1 flats where |mu(0,X)| != prod (|B|-1)!                     0            OK
+  n=2 flats where |mu(0,X)| != prod (|B|-1)!                     0            OK
+  n=3 flats where |mu(0,X)| != prod (|B|-1)!                     0            OK
+  n=4 flats where |mu(0,X)| != prod (|B|-1)!                     0            OK
+  n=5 flats where |mu(0,X)| != prod (|B|-1)!                     0            OK
+  n=6 flats where |mu(0,X)| != prod (|B|-1)!                     0            OK
+
+    R2 -- the E8 replacement
+  n=1 phi is a monoid homomorphism                               1            OK
+  n=1 image of phi lies in F(P)                                  1            OK
+  n=1 phi is injective                                           0            OK
+  n=1 image is a PROPER submonoid                                0            OK
+  n=2 phi is a monoid homomorphism                               2            OK
+  n=2 image of phi lies in F(P)                                  2            OK
+  n=2 phi is injective                                           0            OK
+  n=2 image is a PROPER submonoid                                0            OK
+  n=3 phi is a monoid homomorphism                               5            OK
+  n=3 image of phi lies in F(P)                                  5            OK
+  n=3 phi is injective                                           0            OK
+  n=3 image is a PROPER submonoid                                5            OK
+  n=4 phi is a monoid homomorphism                               16           OK
+  n=4 image of phi lies in F(P)                                  16           OK
+  n=4 phi is injective                                           0            OK
+  n=4 image is a PROPER submonoid                                16           OK
+  n=5 phi is a monoid homomorphism                               63           OK
+  n=5 image of phi lies in F(P)                                  63           OK
+  n=5 phi is injective                                           0            OK
+  n=5 image is a PROPER submonoid                                63           OK
+
+SELF-TEST PASSED -- every number this audit carries is reproduced.

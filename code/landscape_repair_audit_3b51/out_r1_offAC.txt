@@ -1,0 +1,91 @@
+==============================================================================
+mg-3b51 AUDIT 1 -- THE ACYCLICITY REPAIR, EXERCISED OUTSIDE AC(P)
+Independent instrument.  X ranges over ALL FLATS at every step.
+==============================================================================
+
+------------------------------------------------------------------------------
+A1  M_0 DECIDED BY NUMERIC CONSTRUCTION (certificate both ways),
+    compared as a SET against each rule, over all flats.
+------------------------------------------------------------------------------
+  n  classes    flats  DOC == M_0                   REPAIRED == M_0             
+  2        2        4  0 bad of 2                   0 bad of 2                  
+  3        5       25  0 bad of 5                   0 bad of 5                  
+  4       16      240  1 bad of 16                  0 bad of 16                 
+  5       63     3276  10 bad of 63                 0 bad of 63                 
+  6      318    64554  101 bad of 318               0 bad of 318                
+
+------------------------------------------------------------------------------
+A2  BROWN'S TOTAL-MULTIPLICITY IDENTITY  sum_X m_X = |L(P)|,
+    summed over ALL FLATS.
+------------------------------------------------------------------------------
+  n  classes  DOC: sum != |L(P)|       REPAIRED: sum != |L(P)|    spurious
+  2        2  0 of 2 posets            0 of 2 posets                     0
+  3        5  0 of 5 posets            0 of 5 posets                     0
+  4       16  1 of 16 posets           0 of 16 posets                    1
+  5       63  10 of 63 posets          0 of 63 posets                   18
+  6      318  101 of 318 posets        0 of 318 posets                 455
+
+------------------------------------------------------------------------------
+A3  THE AUDITOR'S WITNESS, ON ITS OWN LABELS.
+------------------------------------------------------------------------------
+    P = {a<d, b<c}   |L(P)| = 6
+    DOC rule       sum_X m_X = 7   (Brown's identity requires 6)  MISMATCH
+    REPAIRED rule  sum_X m_X = 6   (Brown's identity requires 6)  ok
+    spurious flat  ac|bd      m = 1  blocks antichains: True,  in AC(P): False,  meets U: False
+        NO-certificate from the constructive test: block cycle 1 -> 0 -> 1
+
+    mg-1953's own instrument reports the witness as P = {a<c, b<d}
+    with spurious flat ad|bc.  Both are the two-disjoint-2-chains
+    class; the labelling differs.  Checked directly:
+        P = {a<c, b<d}  |L(P)| = 6  DOC sum = 7
+
+------------------------------------------------------------------------------
+A4  WHERE THE DEFECT LIVES.  Every flat on which DOC and REPAIRED
+    disagree, split by whether it is INSIDE or OUTSIDE AC(P).
+------------------------------------------------------------------------------
+  n    disagreeing   inside AC(P)  outside AC(P)
+  2              0              0              0
+  3              0              0              0
+  4              1              0              1
+  5             18              0             18
+  6            455              0            455
+
+    Reading: the disagreement set is 100% outside AC(P) at every n.
+    That is not luck -- DOC and AC(P) intersect in exactly REPAIRED
+    ({antichain blocks} and {acyclic quotient}), so no check confined
+    to AC(P) can distinguish the two rules AT ALL.  A1/A2 above range
+    over all flats, so they can, and they do.
+
+------------------------------------------------------------------------------
+A5  mg-1953's OWN CONTROL R1d, EXAMINED FOR POWER TO FAIL.
+    R1d restricts DOC to AC(P) and reports '0 bad of 318'.
+------------------------------------------------------------------------------
+    DOC-restricted-to-AC(P) == REPAIRED, as SETS OF FLATS:
+        404 of 404 posets to n <= 6  (an identity, not a measurement)
+    So R1d's number is the REPAIRED rule's number under another name.
+    It cannot come out any other way, and it cannot fail while the
+    repaired rule passes.  The CONTENT of R1d is right; its billing
+    as a control that 'must fire' and as a DEMONSTRATION is not --
+    it is a restatement of a set identity, and the honest reading is
+    that the restriction PROVABLY hides the defect rather than being
+    measured to.
+
+------------------------------------------------------------------------------
+A6  MUTATION.  Would a check of this shape have caught the defect?
+    Four wrong variants of the repaired statement, run through the
+    same two tests at n <= 6.  A test with power kills all four.
+------------------------------------------------------------------------------
+rule                         A1: != M_0             A2: sum != |L(P)|     
+DOC (mg-ebd8)                112 bad of 404         112 bad of 404        
+REPAIRED (mg-1953)           0 bad of 404           0 bad of 404          
+mut: acyclic only            399 bad of 404         399 bad of 404        
+mut: convex+acyclic          399 bad of 404         399 bad of 404        
+mut: acyclic if >=3 blocks   15 bad of 404          15 bad of 404         
+
+    KILLED means a nonzero count.  The repaired rule is the only one
+    of the five that survives both columns.
+
+==============================================================================
+A7 runs separately (audit_r1_n7.py) -- n = 7, one order past the
+repair's range.
+==============================================================================

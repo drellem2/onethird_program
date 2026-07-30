@@ -1,0 +1,34 @@
+==============================================================================
+mg-3b51 AUDIT 1 / A7 -- n = 7, ONE ORDER PAST THE REPAIR'S RANGE
+==============================================================================
+
+  labelled representatives swept : 5439
+  flats per poset (Bell(7))      : 877
+  flat evaluations               : 4770003
+  isomorphism classes covered    : all 2 045 (A000112) -- every
+      7-poset is a 6-poset plus a maximal element over an ideal,
+      and all 318 six-element classes are extended in every way
+
+------------------------------------------------------------------------------
+A7a  M_0 (constructed) == rule, as sets of flats
+------------------------------------------------------------------------------
+     REPAIRED rule : 0 bad of 5439
+     DOC rule      : 2837 bad of 5439
+
+------------------------------------------------------------------------------
+A7b  Brown's identity  sum over ALL 877 flats of m_X = |L(P)|
+------------------------------------------------------------------------------
+     REPAIRED rule : 0 bad of 5439
+     DOC rule      : 2837 bad of 5439
+
+------------------------------------------------------------------------------
+A7c  spurious flats at n = 7 (DOC nonzero, not in M_0): 39828
+     first DOC failure: P = {a<d, b<e, c<f}
+        |L(P)| = 630,  DOC sum = 917,  REPAIRED sum = 630
+
+==============================================================================
+READING.  The repaired statement survives one order past the range
+in which it was repaired, and the original statement fails harder.
+This does not make the repaired rule a theorem -- it is a
+specialisation of one, and neither mg-1953 nor this audit proves it.
+==============================================================================
