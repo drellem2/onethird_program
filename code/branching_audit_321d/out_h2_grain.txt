@@ -1,0 +1,90 @@
+==========================================================================
+H2  IS THE NARROWING AT THE GRAIN OF THE BLINDNESS?
+==========================================================================
+
+   HEAD of this branch : 673b4c005026f0caa47bd57079e0096afefffc6c
+   docs+repair: THE REPRODUCTION STANDS AT 286d5030 AND ALL 24 FINDINGS ARE THE PARSER'S — re-run a
+   the repair under audit IS HEAD : True
+
+--------------------------------------------------------------------------
+(i) THE FILE MOVED.  DID THE MEASUREMENT?
+--------------------------------------------------------------------------
+   c1_branching.py has two halves: it MEASURES the branching graph from
+   its own kernel, and it COMPARES that measurement against a file.  mg-58da
+   edited the comparing half.  Whether the measuring half moved is not a
+   question about the file -- it is a question about the output, and it is
+   answered by running both revisions against the SAME target and diffing.
+
+   FILE GRAIN:
+      c1_branching.py  bddeb6c4f57f70cb ... 8bacc19be4d85a57   CHANGED
+      kern_a218.py     70356cbca847bc20 ... 70356cbca847bc20   SAME
+
+   MEASUREMENT GRAIN -- both script revisions, THE SAME target (@286d5030):
+      sections (i)+(ii), c1 @ 286d5030 : sha256 a8db5dbd4c75876513a77a9b6ee4f8c5
+      sections (i)+(ii), c1 @ 673b4c00 : sha256 a8db5dbd4c75876513a77a9b6ee4f8c5
+      BYTE-IDENTICAL -- 125 lines
+      c1's own 24 vertex sets, both revisions : all 24 equal
+      kernel sha across the edit              : UNCHANGED
+
+   the two grains give OPPOSITE answers: the file CHANGED, the
+   measurement did NOT.  Which one is 'the measuring half of the
+   reproduction' is the whole question.
+
+--------------------------------------------------------------------------
+(ii) SITE 1 -- g1 ON THE TREE AS COMMITTED
+--------------------------------------------------------------------------
+   g1_provenance.py, run in place, unmodified, at HEAD.  Its committed
+   out_g1_provenance.txt reports FINDINGS 0 and PREDICTIONS.md records
+   'P2 g1_provenance.py ACTUAL 0 HIT'.  Both were taken before this ticket's
+   own commit existed.
+
+   live now : SELF-ERRORS 0   FINDINGS 1   exit 1
+   committed: SELF-ERRORS 0   FINDINGS 0   exit 0 (implied by 0/0)
+
+   live FINDING: code/branching_audit_a218/c1_branching.py changed between 286d5030 and HEAD; the measuring half of the reproduction is not the same code
+
+   its own PREDICTIONS.md : P2  g1_provenance.py            ACTUAL 0   HIT
+
+
+--------------------------------------------------------------------------
+(iii) SITE 2 -- g4'S ATTRIBUTION, BY COMMIT vs BY WORKING TREE
+--------------------------------------------------------------------------
+   g4 answers 'which of the five were touched, and by whom'.  This is
+   the exact question this audit's ticket asks.  Its expression is
+
+       if sha@286d5030 != sha@HEAD:      touched_13b2.append(f)
+       if sha@HEAD     != sha@worktree:  touched_58da.append(f)
+
+   which attributes by 'is it committed yet', not by commit.  git log
+   attributes by commit and cannot drift.
+
+   script                  git log 286d5030..HEAD             sha-diff verdict
+     c1_branching.py         673b4c00                    13b2
+     c2_vertexsets.py        ed9cde49                    13b2
+     c3_withdrawal.py        NONE                        none
+     c4_seam.py              NONE                        none
+     c5_record.py            NONE                        none
+
+   TRUTH, by commit:  ed9cde4 touched 1 -- c2_vertexsets.py
+                      673b4c0 touched 1 -- c1_branching.py
+   g4's expression :  '13b2'  2 -- c1_branching.py, c2_vertexsets.py
+                      '58da'  0 -- none
+
+   what g4 PRINTS, run in place at HEAD:
+      ed9cde4 : 2 -- c1_branching.py, c2_vertexsets.py
+      mg-58da : 0 -- none
+      column header : script                 286d5030 -> d1dd84d2       d1dd84d2 -> working
+
+   and g4's own ROW for c1_branching.py, which names the commit:
+      c1_branching.py        CHANGED (673b4c00)         same
+   BELIEVE THE ROWS: the row names 673b4c00.  The summary attributes
+   the same file to ed9cde4.
+
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, subprocess run and parse this script performs
+FINDINGS: 3, population: the 2 sites of the provenance-grain question -- g1's measuring-half check and g4's attribution summary -- and the 4 measurements that decide each
+   FINDING: g1_provenance.py exits 1 on the tree as committed, with a finding its own section (iv) refutes: it compares c1_branching.py BY FILE SHA and books any difference as 'the measuring half of the reproduction is not the same code', but this ticket's edit changed the comparing half only -- run at both revisions against the same target, c1's sections (i)+(ii) are byte-identical (125 lines, sha256 a8db5dbd4c758765) and its own 24 vertex sets are equal, and kern_a218.py -- the file g1 itself labels 'the measuring half' -- is unchanged. The provenance question is asked at the grain of a FILE where the property is about a MEASUREMENT, so the repair trips its own instrument. The committed out_g1_provenance.txt (FINDINGS 0) and PREDICTIONS.md ('P2 ... ACTUAL 0 HIT') were both recorded before this commit existed and neither reproduces at HEAD
+   FINDING: g1's live FINDINGS (1) differ from its committed record (0): the documented reproduce command does not reproduce the committed output
+   FINDING: g4_fleet.py's set-level attribution is FALSE on the tree as committed: it says 'touched by ed9cde4 (mg-13b2): 2 -- c1_branching.py, c2_vertexsets.py' and 'touched by mg-58da: 0 -- none', where git log says ed9cde4 touched 1 (c2_vertexsets.py) and 673b4c0 touched 1 (c1_branching.py). c1_branching.py is attributed to a commit that never touched it. The cause is the same grain error as g1's: attribution is computed as 'committed sha vs WORKING-TREE sha', which identifies this ticket's change with 'whatever is not yet committed' -- true for exactly as long as the change is uncommitted, and false the instant it lands. g4's own ROW is right (it prints 'CHANGED (673b4c00)' via git log); only the SUMMARY drifts. The verdict paragraph in section (vii) repeats the false attribution, and the column header is the hard-coded literal 'd1dd84d2 -> working' while the column is computed from HEAD = 673b4c00
+TOTAL BAD: 3
