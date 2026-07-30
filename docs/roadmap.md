@@ -226,20 +226,26 @@ because I made the opposite call at 17:35 on a misread and had to retract it.**
 **So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
 on an audit that measured its extents in both directions — that, not fatigue, is the signal.
 
-## Now (in flight) — 2026-07-30 22:00
+## Now (in flight) — 2026-07-30 23:05
 
-- **mg-04a8** — 2 of 9 gates still move nothing under deletion, and the repair's own check holds on an artifact
-  where every row reads `[FAIL]`.
-- **mg-d633** — two of four printed extents are **wider than the code reads**, and a quotation is struck in §4
-  while live in §0 with every checker green.
-- **mg-835f** — audit of the figure-gate repair.
+- **mg-8916** — the figure gate reads the site (12 of 12 both ways) but a wrong figure in **ordinary prose**
+  beside it is invisible; and the instrument's own bottom line asserts a target its own T1 row refutes. Asked
+  for **removal before gating** on the prose site.
+- **mg-9220** — the deletion test was applied at the **gate** level where the claim is about **returns**:
+  deleting two together changes the artifact, deleting the first alone leaves it byte-identical.
+- **mg-6cb9** — audit of the extent repair. Must confirm the **cross-section check FIRES**; one never shown to
+  fire would be the vacuous-check defect a fourth time, in a check built to close that class.
+- **mg-d330** — audit of the disposition-label repair.
 
 ## Next (gated, releases automatically)
 
-- **mg-e7bc** (on mg-04a8), **mg-6cb9** (on mg-d633) — both pre-filed in the same action as their parents.
-- **mg-344a** — Daniel workspace, `assignee=human`, waits on him; today's audited evidence is appended.
-- **Held, not forgotten:** the quasi-hereditary follow-up stays unfiled — **D10 is unverified**, so a ticket
-  built on it would rest on a retracted claim.
+- **mg-8aae** (on mg-8916), **mg-abd2** (on mg-9220) — pre-filed in the same action as their parents.
+- **mg-344a** — Daniel workspace, `assignee=human`, waits on him.
+- **Held, not forgotten:** the quasi-hereditary follow-up stays unfiled — D10 is unverified.
+
+*(Rot check, 23:05: 4 of 6 IDs listed at 22:00 had completed. The 22:20 check was clean because nothing was
+finishing; this one is not, because three repairs landed in between. **The check's value is that it does not
+depend on noticing** — run it every cycle regardless of whether the document feels current.)*
 
 ## Later (decided, not yet filed)
 - `onethird_program` ships two `controls.py` and two `run_all.sh` and has **no CI of any kind** — by the
