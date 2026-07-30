@@ -2,9 +2,17 @@
 # mg-5f9a: closing mg-1c80's F1 -- regenerate this landing's transcript.
 #
 # Pure Python 3, no third-party packages.  Measured runtime 2026-07-30 on a 2024
-# laptop: 38 s total -- d1 0.6 s, d2 17 s (six full control batteries, two of
-# them built from `main`'s sources), d3 20 s (two more, plus two runs of
-# mg-da45's landing verifier over the whole 86-poset population).
+# laptop: 73 s total -- d1 0.6 s, d2 22 s (ten full control batteries, three of
+# them built from the PRE-REPAIR commit's sources), d3 15 s (two more, plus two
+# runs of mg-da45's landing verifier over the whole 86-poset population), d4 35 s
+# (mg-d0e2's own e1, e2 and e3, all three run unmodified as subprocesses).
+#
+# mg-04a8 added d4 and rewrote d2's label check.  d2's BEFORE half now reads a
+# PINNED COMMIT rather than `main`: once mg-5f9a merged, "main's artifact
+# regenerates from main's sources" was a statement about this tree, and the
+# deletion it then attempted did not even apply -- the shipped file stopped at
+# `anchor occurs 0 times`.  A check pinned to a branch asks about whatever that
+# branch holds today.
 #
 # WHAT IT IS FOR.  mg-da45 printed a gate name as the reason its rows answered
 # as they did.  mg-1c80 deleted that gate from the predicate and the artifact
@@ -53,3 +61,7 @@ run out_d2_deletion.txt d2_deletion.py
 echo
 echo "== d3: reintroduction, and whether anything sees it =="
 run out_d3_reintroduction.txt d3_reintroduction.py
+
+echo
+echo "== d4: mg-d0e2's OWN deletion test, unmodified, against the repair =="
+run out_d4_auditor_rerun.txt d4_auditor_rerun.py
