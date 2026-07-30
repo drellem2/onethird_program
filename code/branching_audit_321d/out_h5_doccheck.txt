@@ -1,0 +1,62 @@
+==========================================================================
+H5  THE DOCUMENT'S FIGURES, READ AT THE SITE, AGAINST THE RUN
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) EVERY GATED FIGURE, READ AT ITS OWN SITE
+--------------------------------------------------------------------------
+   figure                                   document   run    
+     198 cells in §2's re-run block             198      198   agree
+     0 disagreements in §2's re-run block         0        0   agree
+     PARSER ARTIFACT census, §3 table            24       24   agree
+     CONFIRMED census, §3 table                   0        0   agree
+     UNKNOWN census, §3 table                     0        0   agree
+     ACCOUNTED FOR, §3 table                     24       24   agree
+     pairs agreeing, §4                          10       10   agree
+     pairs total, §4                             10       10   agree
+     c0_repro, §4                                 5        5   agree
+     members re-run, §4 heading                   5        5   agree
+     members stating figures, §4                  2        2   agree
+     M-1 probes firing, §6                        0        0   agree
+     M-1 probe count, §6                          3        3   agree
+     M-2 directions, §6                           4        4   agree
+     g1's live findings, §5                       1        1   agree
+     selftest assertions, §0                     60       60   agree
+
+   figures gated : 17 of the 17 gates listed in this script's GATES
+   table, each anchored to one line of OneThird-Bratteli-Path-Algebras-Mg58daRepair-IndependentAudit.md
+   disagreements : 0
+
+--------------------------------------------------------------------------
+(ii) THE DELETION TEST -- EVERY GATE MADE TO FIRE AT ITS OWN SITE
+--------------------------------------------------------------------------
+   Each figure is corrupted ALONE, at its own site, in a scratch copy
+   of the document, and the gate must go red naming that figure and no other.
+   A null probe changes an unrelated word and must stay green.
+
+     198 cells in §2's re-run block           198 -> 205   FIRES
+     0 disagreements in §2's re-run block     0 -> 7   FIRES
+     PARSER ARTIFACT census, §3 table         24 -> 31   FIRES
+     CONFIRMED census, §3 table               0 -> 7   FIRES
+     UNKNOWN census, §3 table                 0 -> 7   FIRES
+     ACCOUNTED FOR, §3 table                  24 -> 31   FIRES
+     pairs agreeing, §4                       10 -> 17   FIRES
+     pairs total, §4                          10 -> 17   FIRES
+     c0_repro, §4                             5 -> 12   FIRES
+     members re-run, §4 heading               5 -> 12   FIRES
+     members stating figures, §4              2 -> 9   FIRES
+     M-1 probes firing, §6                    0 -> 7   FIRES
+     M-1 probe count, §6                      3 -> 10   FIRES
+     M-2 directions, §6                       4 -> 11   FIRES
+     g1's live findings, §5                   1 -> 8   FIRES
+     selftest assertions, §0                  60 -> 67   FIRES
+
+     NULL PROBE (unrelated word changed)      green
+
+   probes firing : 16 of 16, population: one corruption per gated
+   figure, each mutating that figure alone at its own site.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, subprocess run and parse this script performs
+FINDINGS: 0, population: every figure this audit's document publishes that is derived from a committed out_h*.txt, read at its own site, plus the corruption probe on each and one null probe
+TOTAL BAD: 0

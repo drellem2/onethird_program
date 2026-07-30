@@ -1,0 +1,134 @@
+==========================================================================
+H3  THE SET-LEVEL PROPERTY -- ALL FIVE, NOT JUST THE CHANGED ONE
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE FIVE, NAMED FROM DISK RATHER THAN FROM A LIST
+--------------------------------------------------------------------------
+   every c<digit>_*.{py,sh} in code/branching_audit_a218:
+      c0_repro.sh
+      c1_branching.py
+      c2_vertexsets.py
+      c3_withdrawal.py
+      c4_seam.py
+      c5_record.py
+
+   what mg-a218's own run_all.sh runs, in order:
+      selftest_a218.py
+      c0_repro.sh
+      c1_branching.py
+      c2_vertexsets.py
+      c3_withdrawal.py
+      c4_seam.py
+      c5_record.py
+
+   THE FIVE (the c*.py members run_all.sh runs) : c1_branching.py, c2_vertexsets.py, c3_withdrawal.py, c4_seam.py, c5_record.py
+
+   in the same directory and NOT among the five, with the reason:
+     selftest_a218.py       tests the kernel, not the target; prints no TOTAL BAD
+     c0_repro.sh            a harness that re-runs the TARGET's instrument, not a check of its own
+     kern_a218.py           the kernel the five share
+
+   g4_fleet.py's hard-coded list : c1_branching.py, c2_vertexsets.py, c3_withdrawal.py, c4_seam.py, c5_record.py
+   matches what is on disk       : True
+
+--------------------------------------------------------------------------
+(ii) WHO TOUCHED WHICH, BY COMMIT, ACROSS THE WHOLE DIRECTORY
+--------------------------------------------------------------------------
+   code/branching_audit_a218, every tracked .py/.sh, 286d5030..HEAD
+
+     c0_repro.sh            untouched               
+     c1_branching.py        673b4c00                   <- one of the five
+     c2_vertexsets.py       ed9cde49                   <- one of the five
+     c3_withdrawal.py       untouched                  <- one of the five
+     c4_seam.py             untouched                  <- one of the five
+     c5_record.py           untouched                  <- one of the five
+     kern_a218.py           untouched               
+     run_all.sh             untouched               
+     selftest_a218.py       untouched               
+
+   of the five, touched by ed9cde4 (mg-13b2) : 1 -- c2_vertexsets.py
+   of the five, touched by 673b4c0 (mg-58da) : 1 -- c1_branching.py
+   kern_a218.py, the kernel the five share   : UNTOUCHED
+
+--------------------------------------------------------------------------
+(iii) ALL FIVE, RE-RUN.  NOT JUST THE CHANGED ONE.
+--------------------------------------------------------------------------
+   Each member is run IN PLACE with its stdout captured here and never
+   redirected into its committed out_*.txt.  'The changed one runs' is not the
+   property; the property is that the set reports one coherent verdict.
+
+   script                  committed @286d5030    live at HEAD
+                           self/find   exit       self/find   exit
+     c1_branching.py         0/0       (0)      0/0       (0)
+     c2_vertexsets.py        0/1       (1)      0/0       (0)
+     c3_withdrawal.py        0/0       (0)      0/1       (1)
+     c4_seam.py              0/1       (1)      0/0       (0)
+     c5_record.py            0/1       (1)      0/0       (0)
+
+   members actually re-run here : 5 of 5 -- c1_branching.py, c2_vertexsets.py, c3_withdrawal.py, c4_seam.py, c5_record.py
+   green : 4 of 5 -- c1_branching.py, c2_vertexsets.py, c4_seam.py, c5_record.py
+   red   : 1 of 5 -- c3_withdrawal.py
+
+   c3_withdrawal.py exits 1, SELF 0 FINDINGS 1:
+      FINDING: every occurrence sits inside a withdrawal or correction -- unmarked: code/branching_locate_db09/out_t5_labels.txt:145 'measured (not cited)'; code/branching_loc
+
+
+--------------------------------------------------------------------------
+(iv) THE FIGURES -- DO THEY AGREE ACROSS ALL FIVE?
+--------------------------------------------------------------------------
+   'Do the figures agree across all of them' presupposes that all of
+   them state figures.  That is measured, not assumed: each member's live
+   stdout is searched for the 24 vertex cells, with this instrument's own
+   reader.  A member that states none is named as stating none -- which is a
+   different fact from a member that states them and agrees.
+
+     c1_branching.py        states 24 of the 24 vertex cells
+     c2_vertexsets.py       states 24 of the 24 vertex cells
+     c3_withdrawal.py       states  0 of the 24 vertex cells
+     c4_seam.py             states  0 of the 24 vertex cells
+     c5_record.py           states  0 of the 24 vertex cells
+
+   of the five, stating the 24 vertex figures : 2 -- c1_branching.py, c2_vertexsets.py
+   of the five, stating none of them          : 3 -- c3_withdrawal.py, c4_seam.py, c5_record.py
+   (c3, c4 and c5 are text/record checks over prose and git history.
+    They carry no vertex figure, so 'the figures agree' is vacuous for
+    them and is reported as vacuous rather than as agreement.)
+
+   every source that states the 24, cross-compared, cell by cell:
+
+     source                                        cells   vs target
+     the target, out_t1_tl.txt (mg-e8b8, 1st)     24/24   24/24
+     c1_branching.py, live (mg-a218, 3rd)         24/24   24/24
+     c2_vertexsets.py, live (mg-a218, 3rd)        24/24   24/24
+     out_b1_branching.txt (mg-2060, 2nd)          24/24   24/24
+     out_e1_vertexsets.txt (mg-d330, 4th)         24/24   24/24
+
+   sources this script could read : 5 of 5
+   pairs of sources agreeing on all 24 cells : 10 of 10
+   population: every unordered pair drawn from the 5 sources this
+   script could read, compared at all 24 (beta,n) cells.  Sources it
+   could not read are in the SELF-ERROR channel and are not here.
+
+--------------------------------------------------------------------------
+(v) c0_repro.sh, ON A SCRATCH COPY
+--------------------------------------------------------------------------
+   identical: 5 of 5, population: the five committed out_*.txt
+   exit 0
+
+--------------------------------------------------------------------------
+VERDICT ON THE SET-LEVEL PROPERTY, DERIVED FROM THE ROWS ABOVE
+--------------------------------------------------------------------------
+   The five: c1_branching.py, c2_vertexsets.py, c3_withdrawal.py, c4_seam.py, c5_record.py.
+   Touched by ed9cde4: 1 (c2_vertexsets.py).  By 673b4c0: 1 (c1_branching.py).  Kernel: untouched.
+   All five re-run in place here: 5 of 5.
+   Green: 4 of 5.  Red: c3_withdrawal.py.
+   Vertex figures: 2 of the five state them, and every source in the tree
+   that states them agrees with the target at 24 of 24 cells.
+
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, subprocess run and parse this script performs
+FINDINGS: 1, population: the membership of the five, the 8 per-file attributions, the 5 live exit codes, the 24 vertex cells across every instrument that states them, and c0_repro.sh
+   FINDING: the set-level property does NOT hold on the tree as committed: 4 of the five are green and c3_withdrawal.py exits 1. That is mg-d330's second finding and mg-58da books it and leaves it OPEN rather than working around it; it is re-derived here and NOT closed here either. The corroboration among the members that measure the vertex cells IS re-established -- all five were re-run, not only the changed one, and every instrument in the tree that states the 24 agrees with the target at 24 of 24
+TOTAL BAD: 1

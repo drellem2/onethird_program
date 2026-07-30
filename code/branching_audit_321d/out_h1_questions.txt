@@ -1,0 +1,141 @@
+==========================================================================
+H1  THE TWO QUESTIONS -- KEPT SEPARATE, AND EACH ANSWERED?
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE REVISIONS, NAMED IN FULL
+--------------------------------------------------------------------------
+   286d5030902d09a7eb336a4a5dec18bf7b9de64c  mg-a218, where the 198-cell reproduction was taken
+      docs+audit: independent audit of the mg-db09 repair (mg-e8b8 / 2e66d03) — THE WITHDRAWAL
+   673b4c005026f0caa47bd57079e0096afefffc6c  mg-58da, the repair under audit
+      docs+repair: THE REPRODUCTION STANDS AT 286d5030 AND ALL 24 FINDINGS ARE THE PARSER'S — 
+   673b4c005026f0caa47bd57079e0096afefffc6c  HEAD of this branch
+
+   the document names B's revision as a 12-char prefix; does it resolve?
+      '286d5030902d' appears in the document          : True
+      git rev-parse '286d5030902d'                    : 286d5030902d09a7eb336a4a5dec18bf7b9de64c
+
+--------------------------------------------------------------------------
+(ii) SEPARATION CHECK 1 -- THE TWO ANSWERS ARE DIFFERENT
+--------------------------------------------------------------------------
+   A single verdict cannot answer 'yes' and 'no'.  So if the document's
+   two answers point in opposite directions, they are not one verdict wearing
+   two labels.  Read out of the bottom-line table's own rows.
+
+   row B: does the 198-cell reproduction still stand?
+        -> **YES, at `286d5030902d`** — re-run there, **198 cells, 0 disagreements, exit 0, byte-identical 
+   row A: are the 24 findings real?
+        -> **NO — 24 of 24 are PARSER ARTIFACTS. 0 CONFIRMED, 0 UNKNOWN.** The target states the datum at e
+
+   B's answer is affirmative               : True
+   A's answer is negative (not real)       : True
+
+--------------------------------------------------------------------------
+(iii) SEPARATION CHECK 2 -- DIFFERENT SCRIPTS, INDEPENDENT EXITS
+--------------------------------------------------------------------------
+   The stronger form of the same check: A and B are answered by
+   different programs, each with its own exit code, and neither reads the
+   other's conclusion.  If g3 consulted g1's verdict the two would be one.
+
+   g1_provenance.py answers B    : True
+   g3_findings.py   answers A    : True
+   any of g1/g2/g3 reading another's output : NONE
+
+   each exits on its OWN totals (sys.exit(1 if (SELF or FIND) else 0)):
+      g1  True
+      g2  True
+      g3  True
+
+--------------------------------------------------------------------------
+(iv) QUESTION B, RE-DERIVED HERE -- THE RE-RUN, NOT AN ASSERTION
+--------------------------------------------------------------------------
+   'The change did not touch that path' is an assertion until the
+   re-run shows it, and the re-run is cheap.  Done here, on this instrument's
+   own scratch tree, independently of g1.
+
+   c1_branching.py @ 286d5030902d  vs  out_t1_tl.txt @ 286d5030902d
+      SELF-ERRORS 0   FINDINGS 0   TOTAL BAD 0   exit 0
+      vertex                  24 cells compared
+      vertex dimensions       53 cells compared
+      edge multiplicities    121 cells compared
+      TOTAL CELLS            198
+
+   against out_c1_branching.txt as committed at that revision:
+      re-run    sha256 671349aa9c70d350d1b8b141762b25d587af8a0821ccbcd454c662bfb4efcc34
+      committed sha256 671349aa9c70d350d1b8b141762b25d587af8a0821ccbcd454c662bfb4efcc34
+      BYTE-IDENTICAL.
+
+   >> B, re-stated with the revision named in full, on this
+   >> instrument's own re-run: at
+   >> 286d5030902d09a7eb336a4a5dec18bf7b9de64c,
+   >> mg-a218's c1_branching.py compared 198 cells against mg-e8b8's
+   >> committed out_t1_tl.txt and disagreed in 0 of them.
+
+--------------------------------------------------------------------------
+(v) QUESTION A, RE-DERIVED HERE -- ALL 24, ONE AT A TIME
+--------------------------------------------------------------------------
+   Each of the 24 gets a status.  A residual UNKNOWN bucket is honest;
+   a reduction of 24 to a smaller number without saying what happened to the
+   rest is not.  So the population is fixed at 24 FIRST and every one of the
+   24 is accounted for, whatever its status.
+
+   findings the UNREPAIRED c1 raises against the HEAD target : 24
+   of those, vertex-cell findings                            : 24
+   cells my own reader finds in the target's subsection (i)  : 24 of 24
+
+   #   cell         c1 raised            target states (my reader)   class
+    1  beta=3 n=1    target ?, mine 1    [0:1]                       PARSER ARTIFACT
+    2  beta=3 n=2    target ?, mine 2    [0:1,1:1]                   PARSER ARTIFACT
+    3  beta=3 n=3    target ?, mine 2    [0:1,1:2]                   PARSER ARTIFACT
+    4  beta=3 n=4    target ?, mine 3    [0:1,1:3,2:2]               PARSER ARTIFACT
+    5  beta=3 n=5    target ?, mine 3    [0:1,1:4,2:5]               PARSER ARTIFACT
+    6  beta=3 n=6    target ?, mine 4    [0:1,1:5,2:9,3:5]           PARSER ARTIFACT
+    7  beta=2 n=1    target ?, mine 1    [0:1]                       PARSER ARTIFACT
+    8  beta=2 n=2    target ?, mine 2    [0:1,1:1]                   PARSER ARTIFACT
+    9  beta=2 n=3    target ?, mine 2    [0:1,1:2]                   PARSER ARTIFACT
+   10  beta=2 n=4    target ?, mine 3    [0:1,1:3,2:2]               PARSER ARTIFACT
+   11  beta=2 n=5    target ?, mine 3    [0:1,1:4,2:5]               PARSER ARTIFACT
+   12  beta=2 n=6    target ?, mine 4    [0:1,1:5,2:9,3:5]           PARSER ARTIFACT
+   13  beta=1 n=1    target ?, mine 1    [0:1]                       PARSER ARTIFACT
+   14  beta=1 n=2    target ?, mine 2    [0:1,1:1]                   PARSER ARTIFACT
+   15  beta=1 n=3    target ?, mine 2    [0:1,1:1]                   PARSER ARTIFACT
+   16  beta=1 n=4    target ?, mine 3    [0:1,1:3,2:1]               PARSER ARTIFACT
+   17  beta=1 n=5    target ?, mine 3    [0:1,1:4,2:1]               PARSER ARTIFACT
+   18  beta=1 n=6    target ?, mine 4    [0:1,1:4,2:9,3:1]           PARSER ARTIFACT
+   19  beta=0 n=1    target ?, mine 1    [0:1]                       PARSER ARTIFACT
+   20  beta=0 n=2    target ?, mine 1    [0:1]                       PARSER ARTIFACT
+   21  beta=0 n=3    target ?, mine 2    [0:1,1:2]                   PARSER ARTIFACT
+   22  beta=0 n=4    target ?, mine 2    [0:1,1:2]                   PARSER ARTIFACT
+   23  beta=0 n=5    target ?, mine 3    [0:1,1:4,2:5]               PARSER ARTIFACT
+   24  beta=0 n=6    target ?, mine 3    [0:1,1:4,2:5]               PARSER ARTIFACT
+
+   CONFIRMED         0 of 24
+   PARSER ARTIFACT  24 of 24
+   UNKNOWN           0 of 24
+   ACCOUNTED FOR    24 of 24   <- every one of the 24 has a status
+   population: the 24 vertex cells (beta,n), beta in {3,2,1,0},
+   1 <= n <= 6, that the unrepaired c1 raises against the HEAD target.
+
+--------------------------------------------------------------------------
+(vi) DOES MY CENSUS AGREE WITH mg-58da'S -- ROWS, NOT SUMMARY?
+--------------------------------------------------------------------------
+   rows in g3's own table carrying a class label : 24
+   CONFIRMED         g3's rows  0   mine  0   agree
+   PARSER ARTIFACT   g3's rows 24   mine 24   agree
+   UNKNOWN           g3's rows  0   mine  0   agree
+
+   and g3's own SUMMARY lines, compared against g3's own ROWS:
+      CONFIRMED        summary says 0, rows say 0
+      PARSER ARTIFACT  summary says 24, rows say 24
+      UNKNOWN          summary says 0, rows say 0
+
+--------------------------------------------------------------------------
+(vii) AND THE DOCUMENT'S OWN THREE BUCKETS, SUMMED
+--------------------------------------------------------------------------
+   the document's own table: {'CONFIRMED': 0, 'PARSER ARTIFACT': 24, 'UNKNOWN': 0}
+   sum: 24
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, subprocess run and parse this script performs
+FINDINGS: 0, population: the 3 separation checks, the 6 checks on B's re-run, the 4 checks on A's census, and the 24 cells classified independently here
+TOTAL BAD: 0

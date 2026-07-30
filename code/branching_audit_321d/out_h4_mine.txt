@@ -1,0 +1,81 @@
+==========================================================================
+H4  TWO THINGS I CHOSE: THE RECORD CHECK, AND THE MISREAD CHANNEL
+==========================================================================
+
+--------------------------------------------------------------------------
+M1 (i) WHAT g1 ACTUALLY COMPARES, QUOTED FROM ITS SOURCE
+--------------------------------------------------------------------------
+       out_old, rc_old = L.run_c1(old_target, script_rev=L.REV_A218)
+       committed = L.git_show(L.REV_A218, L.A218_DIR + "/out_c1_branching.txt")
+
+   Both sides are objects in git at 286d5030: the committed blob, and a re-run of
+   the code as it was AT THAT REVISION.  Neither side opens the file that
+   sits in code/branching_audit_a218/ today.  g1's read_worktree() is used
+   exactly once, for the TARGET, and never for the record.
+
+   g1 reads the worktree copy of out_c1_branching.txt : False
+   worktree copy vs the 286d5030 blob, right now            : IDENTICAL
+   so this is a BLINDNESS, not a wrong answer on today's tree.
+
+--------------------------------------------------------------------------
+M1 (ii) THE DELETION TEST -- CORRUPT THE RECORD A READER READS
+--------------------------------------------------------------------------
+   g1's record check, on three trees.  'fires' = it reports the record
+   as NOT byte-identical.  Direction predicted before each run.
+
+     unmodified tree (NULL PROBE -- must not fire)        predicted BYTE-IDENTICAL actual BYTE-IDENTICAL OK
+     record's TOTAL BAD corrupted 0 -> 99 on disk         predicted BYTE-IDENTICAL actual BYTE-IDENTICAL OK
+     record DELETED from the worktree entirely            predicted BYTE-IDENTICAL actual BYTE-IDENTICAL OK
+
+   probes whose direction was predicted correctly : 3 of 3
+   probes that made g1's record check fire        : 0 of 3
+   population: the 3 trees above -- unmodified, corrupted, deleted.
+
+
+--------------------------------------------------------------------------
+M2 (i) THE REGEX THE REPAIR LEFT UNANCHORED
+--------------------------------------------------------------------------
+       m = re.match(r"\s*(\d)\s+((?:\d+\s+){5}\d+)\s*$", line)
+
+   Seven integers, first field one digit, anchored to nothing but the line.
+   The repair added a THIRD branch for a cell the target does not state -- at
+   CELL grain, correctly -- but a cell the target states WRONGLY, or a line
+   that is not the table at all, still lands in the FINDING channel.  The
+   distinction the repair draws is present/absent; the distinction that
+   matters is 'the target said this' / 'I decided this'.
+
+   mg-58da's own lib58da.py says so, in the docstring of the reader it wrote
+   to avoid the problem:
+       "fooled by an unrelated row of digits.  Returns {} if absent."
+   -- noticed, avoided in the new reader, and not fixed in the old one
+   nor booked as a finding.
+
+--------------------------------------------------------------------------
+M2 (ii) THE DELETION TEST -- ABSENT vs MISREAD, SAME CELLS
+--------------------------------------------------------------------------
+   the REPAIRED c1, run against four targets.  Predicted self/find/exit
+   is in PREDICTIONS.md and is printed beside the actual.
+
+     target                                              predicted        actual
+     HEAD target, untouched (NULL PROBE)                0/0/0           0/0/0           HIT
+     beta=2 SET rows deleted -- ABSENT                  6/0/1           6/0/1           HIT
+     the same, plus one stray 7-integer row -- MISREAD  0/6/1           0/6/1           HIT
+     stray row alone, SET rows intact -- SET wins       0/0/0           0/0/0           HIT
+
+   directions predicted correctly : 4 of 4
+   population: the four targets above -- untouched, absent, misread,
+   and stray-row-with-sets-intact.
+
+   what the MISREAD run says, quoted from its own stdout:
+      FINDING: vertex COUNT disagrees at beta=2 n=1: target 9, mine 1
+      FINDING: vertex COUNT disagrees at beta=2 n=2: target 9, mine 2
+      FINDING: vertex COUNT disagrees at beta=2 n=3: target 9, mine 2
+      vertex cells: 24 cells compared, 0 not compared because this script could not read them; population: every (beta,n) with beta in {3,2,1,0} and 1 <= n 
+
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, subprocess run and parse this script performs
+FINDINGS: 2, population: the 3 probes on M1 (g1's record check) and the 4 probes on M2 (the misread channel), each with its direction predicted before the run
+   FINDING: M1. g1_provenance.py's byte-for-byte confirmation of the committed record NEVER READS THE FILE IN THE TREE. Both sides of its comparison come from git at 286d5030 -- `committed = git_show(REV_A218, out_c1_branching.txt)` against a re-run of the code at that same revision -- so it certifies a blob against itself. Deletion-tested on three trees: corrupting the record's own TOTAL BAD line from 0 to 99 on disk, and DELETING the file outright, both leave g1 printing 'BYTE-IDENTICAL. The committed record is what the code does.' 0 of 3 probes fire; the null probe is among them, so the check is not merely insensitive, it is looking somewhere else. The document's section 3 says the record is 'checkable rather than merely preserved' -- what is checkable is git's copy, and preservation of the reader's copy is exactly what is not checked. This is the mg-a318 shape (the gate does not read the figure at the site) one instrument over
+   FINDING: M2. The repair's narrowing is at the grain of the blindness for ABSENCE and at no grain at all for MISREAD. Same six cells, two targets one line apart: with the beta=2 SET rows deleted the REPAIRED c1 reports SELF-ERRORS 6 / FINDINGS 0 -- correct, and per cell. Add one stray line of seven integers anywhere in T1b2 whose first field is '2' -- not a vertex table, matched only because the count regex is anchored to nothing -- and the same six cells report SELF-ERRORS 0 / FINDINGS 6, accusing the target of stating vertex counts it never stated. That is the defect mg-d330 raised, in the branch the repair kept: the third branch distinguishes present from absent, where the distinction that matters is 'the target said this' from 'I decided this'. mg-58da's own lib58da.py docstring records that c1's parser 'can be fooled by an unrelated row of digits' and writes a subsection-anchored reader to avoid it; the old parser was not anchored with it and the residue is not booked in the document's NOT CLAIMED section
+TOTAL BAD: 2
