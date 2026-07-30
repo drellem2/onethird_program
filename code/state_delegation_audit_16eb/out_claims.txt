@@ -1,0 +1,125 @@
+================================================================================================
+mg-16eb — THE CLAIMS mg-0049 ADDED, CHECKED.  Scope: the 9ca11c4 + 5594c69 diff.
+================================================================================================
+
+1. delta_control.py's HEADER AND TABLE COMMENTS — the file no checker in this
+   repository can check, because every checker reads it as the ground truth.
+
+  [BROKEN] delta_control.py:233
+           the guards-only decomposition lives in `code/state_delegation_repair_0049/guards_only_0049.py`
+           os.path.exists -> False.  The script that does this is code/state_delegation_repair_0049/split_0049.py.
+           COVERAGE.md, code/state_delegation_repair_0049/README.md and code/state_landing_control_2da3/run_all.sh all name it
+           correctly; delta_control.py is the one document of the four that does not,
+           and it is the one no checker reads as a claim.
+  [BROKEN] delta_control.py:233
+           that decomposition runs against "all six rows"
+           mutations_0049.ROWS has 9 rows and split_0049.py runs all of them; COVERAGE.md says
+           "all nine rows" and README.md's table says 9.  delta_control.py says "six", which is mg-5644's population, not this one's.
+  [BROKEN] delta_control.py:757 (the DELEGATED_PRESENTATION comment)
+           "the two tables cannot drift apart quietly in EITHER direction"
+           battery16eb.py A3: a row in DELEGATED and absent here -> exit 2.  That direction holds.
+           battery16eb.py A1: a row HERE and in nothing else            -> exit 0.
+           battery16eb.py A2: a whole TARGET FILE here and in nothing else -> exit 0.
+           Nothing iterates DELEGATED_PRESENTATION; section 2c iterates DELEGATED and looks
+           rows up in it with .get(..., "").  A5 shows mg-bee1's table does NOT have this
+           hole — its keys are cross-checked against the sections the certified text cites.
+  [holds] delta_control.py:748 (the DELEGATED_PRESENTATION comment)
+           `position` "reads 'no block (the span opens on an ATX heading ...)' on every row"
+           population: all 5 delegated sections; 5 of 5 read that way.
+  [holds] delta_control.py:753
+           "Baselined by mg-0049 against the working tree at 8ce78fb"
+           all 5 records recomputed from 8ce78fb:docs/state-history/attempt-mg-276d.md and compared to the pinned table.
+           (8ce78fb is two commits before mg-0049's parent db2b77d; the target file is byte-identical
+           at 8ce78fb, db2b77d and HEAD, so the sentence is imprecise about the base and true about the bytes.)
+  [BROKEN] delta_control.py:346 (the EXIT CODES table)
+           exit 1 is "a region ... NO LONGER PRESENTED TO A READER"; exit 2 is drift, "re-baseline this instrument"
+           render16eb.py: with `<details>` at the top of the target, both renderers put all
+           5 cited sections inside a never-closed <details> carrying no `open` attribute, so
+           0 of 5 are shown to a reader.  That is R1's and R8's outcome, which the same
+           table classifies exit 1.  battery16eb.py B3 and mg-0049's own R5: exit 2.
+           The instruction attached to exit 2 is to re-baseline — that is, to accept it.
+
+2. presentation.py's HEADER — same file class, same absence of a checker.
+
+  [holds] presentation.py:24
+           "NOTHING IN THIS FILE CHANGED EXCEPT ONE MESSAGE AND FOUR SELF-TEST CASES"
+           the 11 certified presentation digests in PRESENTATION are byte-identical to db2b77d's
+           (git diff over the table is empty) and delta_control.py exits 0 on the clean tree, so the
+           new `opens_on_heading` branch changes no certified record: no certified region's span
+           opens on an ATX heading.
+
+3. COVERAGE.md — the ONE added document that has an external checker (coverage218d.py).
+
+  [holds] COVERAGE.md:276
+           "split_0049.py measures this over all nine rows"
+           mutations_0049.ROWS has 9 rows.
+  [holds] COVERAGE.md:276-278
+           the regime figure "8 of 9"
+           found in out_split.txt, which this audit reproduced byte-identically from its own run.
+  [holds] COVERAGE.md:276-278
+           the regime figure "4 of 9"
+           found in out_split.txt, which this audit reproduced byte-identically from its own run.
+  [holds] COVERAGE.md:276-278
+           the regime figure "2 of 9"
+           found in out_split.txt, which this audit reproduced byte-identically from its own run.
+  [holds] COVERAGE.md:243-244
+           the R1/R2 table: exit 0 against mg-bee1, exit 1 against mg-0049
+           mg-5644's own battery re-run UNMODIFIED by this audit prints "expected exit 0 ... got exit 1"
+           for Q1 and Q2, and the re-run is byte-identical to the committed out_5644_rerun.txt.
+
+4. THE mg-0049 README's 'What is NOT undone' TABLE — the table that answers the
+   over-correction question, so a wrong cross-reference in it is load-bearing.
+
+  [BROKEN] code/state_delegation_repair_0049/README.md:105-106
+           mg-218d's and mg-5644's batteries are "re-run in section 7 of run_all.sh"
+           run_all.sh's section 7 is 'coverage218d.py — COVERAGE.md checked against the code, not against itself"'.
+           mg-5644's battery is section 8, and mg-218d's sixteen are re-run
+           inside it (mg-5644's own run_all.sh section 5).  Both rows of the table say 7.
+           The re-runs THEMSELVES happen and this audit reproduced both byte-identically;
+           what is wrong is only the pointer.
+  [holds] code/state_delegation_repair_0049/README.md:152
+           render0049.py: "100 comparisons"
+           found in out_render.txt, reproduced by this audit.
+  [holds] code/state_delegation_repair_0049/README.md:110
+           coverage218d.py: "40 of 40"
+           found in out_coverage218d.txt, reproduced by this audit.
+  [holds] code/state_delegation_repair_0049/README.md:23
+           mg-5644's renderers agreed "over 60 comparisons"
+           found in mg-5644's own committed out_render.txt, which this audit reproduced.
+
+5. render0049.py's OWN VERDICT — the repair's instrument for 'what a reader is
+   shown', on the one row where it is asked about a container.
+
+  [BROKEN] code/state_delegation_repair_0049/render0049.py:11 and out_render.txt
+           R5: "`<details>` at the top SUPPRESSES NOTHING: every cited section is still on the page as the document's own prose" — 5/5 ANY, 5/5 HEADING, both renderers
+           render16eb.py, same two renderers, same mutation: 5 of 5 cited sections have their
+           TEXT IN THE HTML — which is the number render0049.py measures — and 0 of 5 are SHOWN
+           to a reader, because every one is a descendant of a <details> that is never closed and
+           carries no `open` attribute.  `</details>` occurrences in the rendered page: 0.
+           "Is the text in the artefact?" versus "is a reader shown it?" is the exact distinction
+           mg-4acd was landed to draw.  It is the repair's own visibility instrument that does not
+           draw it, on the one row of the five where the mutation is a CONTAINER rather than a
+           suppressor.
+
+================================================================================================
+11 of 17 checkable claims mg-0049 ADDED hold against the tree.
+6 do not:
+    delta_control.py:233
+        the guards-only decomposition lives in `code/state_delegation_repair_0049/guards_only_0049.py`
+    delta_control.py:233
+        that decomposition runs against "all six rows"
+    delta_control.py:757 (the DELEGATED_PRESENTATION comment)
+        "the two tables cannot drift apart quietly in EITHER direction"
+    delta_control.py:346 (the EXIT CODES table)
+        exit 1 is "a region ... NO LONGER PRESENTED TO A READER"; exit 2 is drift, "re-baseline this instrument"
+    code/state_delegation_repair_0049/README.md:105-106
+        mg-218d's and mg-5644's batteries are "re-run in section 7 of run_all.sh"
+    code/state_delegation_repair_0049/render0049.py:11 and out_render.txt
+        R5: "`<details>` at the top SUPPRESSES NOTHING: every cited section is still on the page as the document's own prose" — 5/5 ANY, 5/5 HEADING, both renderers
+
+WHERE THE BROKEN ONES ARE.  4 of the 6 are in
+delta_control.py, the file coverage218d.py reads as the ground truth box and
+therefore cannot check.  0 are in COVERAGE.md, the one added document that has an
+external checker — and COVERAGE.md names split_0049.py and 'all nine rows'
+correctly in the same paragraph where delta_control.py does not.
+================================================================================================

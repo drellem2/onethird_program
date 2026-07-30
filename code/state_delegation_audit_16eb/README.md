@@ -6,15 +6,15 @@ mg-218d, which audited mg-4acd, which repaired mg-babf.
 
 ```sh
 D=$(mktemp -d) && npm install --prefix "$D" marked markdown-it
-NODE_PATH="$D/node_modules" sh code/state_delegation_audit_16eb/run_all.sh    # ~12 min
+NODE_PATH="$D/node_modules" sh code/state_delegation_audit_16eb/run_all.sh    # ~25 min
 ```
 
 ## Verdict
 
 **THE REPAIR IS REAL AND NOTHING WAS RETREATED FROM.** mg-5644's `Q1` and `Q2` — the two
 rows that showed a reader a blank page at exit 0 — are exit 1, measured on mg-5644's own
-battery re-run unmodified. Every committed output of mg-0049's run reproduces
-**byte-identically** from this audit's independent run. `141/141`, the `10→6`, the surviving
+battery re-run unmodified. All **7 of 7** committed outputs of mg-0049's two commits
+reproduce **byte-identically** from this audit's independent runs. `141/141`, the `10→6`, the surviving
 document-global-ordinal negative, `40/40`, `27` model cases `0` wrong and `negative_control`
 `10/10` all stand. The section-8 guard was **extended**, not duplicated: one list, one loop,
 the same two guards. **8 of 8** new mutations behaved as this audit predicted before the run.
@@ -35,8 +35,9 @@ on the repair's own new material rather than on anything it inherited.
 
 **None of the three BROKEN is on mg-0049's own list of where it might have failed.** That
 list names `R3`/`R4`, `delegation_map()`'s derivation, and `L2`. mg-a61f established the rule
-this audit applied: a self-filed list of one's weak points **directs attention**, and the
-broken row is the one it omits. Eight for eight, that rule has now held.
+this audit applied — a self-filed list of one's weak points **directs attention**, and the
+broken row is the one it omits — and it held again here. All eight new rows are aimed away
+from that list; every one of the three BROKEN came out of them.
 
 ---
 
@@ -201,8 +202,8 @@ the restated bound, the exit-code semantics and the `DELEGATED_PRESENTATION` pro
 `claims16eb.py` is the check that did not exist:
 
 ```
-11 of 16 checkable claims mg-0049 ADDED hold against the tree.
-WHERE THE BROKEN ONES ARE.  3 of the 5 are in delta_control.py, the file coverage218d.py
+11 of 17 checkable claims mg-0049 ADDED hold against the tree.
+WHERE THE BROKEN ONES ARE.  4 of the 6 are in delta_control.py, the file coverage218d.py
 reads as the ground truth box and therefore cannot check.  0 are in COVERAGE.md, the one
 added document that has an external checker.
 ```
@@ -259,7 +260,7 @@ lineage's own rule is *"say which commit moved it"*.
 | the brief's question | answer, and how it was measured here |
 |---|---|
 | were mg-5644's and mg-218d's batteries re-run **unmodified**? | **yes**, by `git diff` and not by reading the committed outputs. `git diff a4aeeb9..HEAD -- code/state_layer_audit_218d/` and `git diff 3a80d99..HEAD -- code/state_delegation_audit_5644/` are both **0 bytes**. mg-bee1's directory has a 2,111-byte `.md` diff (the correction of record, appended under the row, leaving the row verbatim) and **0 bytes** of non-`.md` diff |
-| do the committed outputs reproduce? | **yes, byte-identically**, all six, from this audit's own runs: `out_battery_0049.txt`, `out_split.txt`, `out_render.txt`, `out_coverage218d.txt`, `out_5644_rerun.txt`, and `state_landing_control_2da3/out_control.txt`. **0 figures in this repair are unreproduced** |
+| do the committed outputs reproduce? | **yes, byte-identically, 7 of 7** — every `out_*.txt` mg-0049's two commits added or changed, regenerated from its producer by `reproduce16eb.py` and diffed with sha256 printed on both sides. **0 figures in this repair are unreproduced** |
 | was the section-8 guard **extended** or **duplicated**? | **extended.** One `guarded` list, one loop, the same two guards, `STATE.md` and the README and every declared target in the same iteration. No second mechanism |
 | over-correction — did `141/141`, the `10→6`, the statement repair or the document-global-ordinal negative retreat? | **none of them.** `render218d.py`: `141 of 141`. mg-218d's sixteen re-run inside mg-5644's: `6 of 16` silent, down from 10, with `P2 P3 P4 P6 S1 I1` still the silent list. `globalpos_bee1.py` re-run unmodified and byte-identical: the negative stands. `presentation.py`: `27 cases, 0 wrong`. `negative_control.py`: `10/10`. `coverage218d.py`: `40 of 40` |
 | was the bound restated in terms of **what a reader is shown**? | **yes, and the restatement is sound** — but see BROKEN 1: the *instrument* that measures "what a reader is shown" was not restated with it |
@@ -285,8 +286,8 @@ was executed once. **8 of 8** behaved as predicted.
 Plus one construction that is not a row: `C1` followed by the instrument's own documented
 recovery path, `--emit-baseline` and both tables spliced back verbatim — **still exit 1**.
 
-Six of the eight are aimed at what mg-0049's self-filed list does **not** name. Four of the
-eight are controls whose only job is to make the other four mean something.
+All eight are aimed at what mg-0049's self-filed list does **not** name. Three of the eight
+(`A3`, `A5`, `B2`) are controls whose only job is to make the other five mean something.
 
 ## Where I would look next, in order
 
@@ -318,6 +319,7 @@ eight are controls whose only job is to make the other four mean something.
 | `battery16eb.py` | the eight against the real control as a subprocess, plus the **recovery demonstration** |
 | `claims16eb.py` | every checkable claim mg-0049 **added**, checked. Scope is the diff, not the repository |
 | `render16eb.py` | what a reader is **actually** shown, on `marked` and `markdown-it`, with the tag stack walked rather than the tags stripped |
+| `reproduce16eb.py` | mg-0049's seven committed `out_*.txt` regenerated from their producers and diffed byte for byte. Reading a committed output is inheriting a verdict; this is the alternative |
 | `run_all.sh` | all of the above, plus the three `git diff` proofs and mg-5644's whole audit re-run unmodified |
 
 `out_*.txt` are the committed outputs of a single run of `run_all.sh`.

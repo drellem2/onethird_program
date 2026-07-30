@@ -1,0 +1,282 @@
+### 1. delegated5644.py — B1: six mutations on the surface mg-bee1 CREATED
+==========================================================================================
+mg-5644 — B1: SIX MUTATIONS ON THE SURFACE mg-bee1 CREATED
+'expected' is what THIS AUDIT PREDICTED BEFORE THE RUN, written into this file before it was executed.
+Q1 and Q2 are mg-babf's B06 and B05 — HTML comment, code fence — moved one file out onto
+the delegated target.  Q5 and Q6 are positive controls.
+==========================================================================================
+  !!  Q1    L4 on L1's surface     the cited file HTML-commented whole (reader sees nothing)  expected exit 0    got exit 1 (FAIL)
+  !!  Q2    L4 on L1's surface     the cited file fenced whole (renders as a code sample)     expected exit 0    got exit 1 (FAIL)
+  OK  Q3    L1 stated boundary     a retraction at the TOP of the target                      expected exit 0    got exit 0 (PASS)
+  OK  Q4    L1 stated boundary     a new UNCITED section appended to the target               expected exit 0    got exit 0 (PASS)
+  OK  Q5    L1 delegated content   a cited section's HEADING retitled (positive control)      expected exit 1    got exit 1 (FAIL)
+  OK  Q6    L1 delegated content   a contradiction inserted INSIDE cited H3 (positive)        expected exit 2    got exit 2 (MOVED)
+
+  6 of 6 rows run; 4 behaved as this audit predicted; 2 did not.
+
+  MUTATIONS THAT SURPRISED THIS AUDIT (predicted != observed):
+    Q1  predicted exit 0, got exit 1
+    Q2  predicted exit 0, got exit 1
+
+==========================================================================================
+WHAT Q1 AND Q2 MEAN
+==========================================================================================
+  Both exit 0.  In both, every one of the five sections the certified ledger cell
+  cites BY NAME is byte-identical and every delegated digest matches, and a reader
+  who follows any of the cell's six links is shown a blank page (Q1) or a wall of
+  unrendered source (Q2).  That is exactly the state mg-babf's B05/B06 put the F1
+  block into while the control said PASS — the state mg-4acd was filed to close.
+
+  It is closed for the two files this instrument READS: section 8's default-deny
+  guards report raw HTML in prose and unmodelled block constructs over the whole
+  of STATE.md and the state-history README, so neither Q1 nor Q2 has an analogue
+  there.  The delegated target gets neither guard, and neither does any other
+  file a certified region may come to cite.
+
+  So 'closed for cited sections' is FALSE AS STATED, in the same shape as the
+  sentence mg-bee1 was filed to repair: the claim is quantified over cited
+  sections and the mechanism is quantified over their BYTES.
+
+  NOTE: ['Q1', 'Q2'] did NOT exit 0 — this finding does not reproduce; read the rows.
+==========================================================================================
+
+### 2. norm5644.py      — B2: the L0 probes, and every character of the population
+THE POPULATION.  str.strip() removes 29 characters; the published rule admits 4;
+so 25 characters in EDGE make the code stop meaning its own rule.  The probes name 2.
+
+==========================================================================================
+mg-5644 — B2: EIGHT MUTATIONS AT THE L0 PROBES
+'expected' is what THIS AUDIT PREDICTED BEFORE THE RUN, written into this file before it was executed.
+==========================================================================================
+  OK  E1    L0 published rule      EDGE widened by the 23 whitespace chars no probe names     expected exit 0    got exit 0 (PASS)
+  OK  E2    L0 published rule      EDGE widened by U+00A0 (mg-bee1's I3, restated)            expected exit 1    got exit 1 (FAIL)
+  OK  E3    L0 published rule      EDGE widened by U+2028 (probe 3's own character)           expected exit 1    got exit 1 (FAIL)
+  OK  E4    L0 published rule      EDGE widened by U+000C alone (FORM FEED, unprobed)         expected exit 0    got exit 0 (PASS)
+  OK  E5    L0 published rule      EDGE widened by U+2003 alone (EM SPACE, unprobed)          expected exit 0    got exit 0 (PASS)
+  OK  E6    L0 'nothing INTERIOR'  norm() gains an interior .replace(U+200B, '')              expected exit 0    got exit 0 (PASS)
+  OK  E7    L0 'nothing INTERIOR'  norm() gains an interior .replace(U+00A0, ' ') (positive)  expected exit 1    got exit 1 (FAIL)
+  OK  E8    L0 published rule      norm() widened to a bare .strip() (mg-218d's I2, restated) expected exit 1    got exit 1 (FAIL)
+
+  8 of 8 rows run; 8 behaved as this audit predicted; 0 did not.
+
+==========================================================================================
+THE SWEEP — every character, not a sample
+==========================================================================================
+  Each of the 25 characters above added to EDGE on its own, one full run of the control each.
+  population 25; 2 fire; 23 exit 0
+  FIRE   (2): U+00A0 U+2028
+  SILENT (23): U+000B U+000C U+001C U+001D U+001E U+001F U+0085 U+1680 U+2000 U+2001 U+2002 U+2003 U+2004 U+2005 U+2006 U+2007 U+2008 U+2009 U+200A U+2029 U+202F U+205F U+3000
+
+  The two that fire are the two the probes name.  The other 23 are one edit each.
+
+==========================================================================================
+THE VERDICT ON THE TWO PUBLISHED SENTENCES
+==========================================================================================
+  'they fire on a widened EDGE constant exactly as on a widened strip() call'
+      — FALSE for 23 of 25 widenings.  True for 2:
+        the two the probe list was built around.
+  'raises ... the code drifting from its own published rule, from free to two edits'
+      — FALSE.  E1, E4, E5, E6 and every row of the sweep's silent list are ONE
+        edit, and the probes are left in place and passing.
+
+  WHAT IS TRUE, and this audit does not retract it: mg-218d's I2 — the widening
+  to a bare str.strip() — DOES now fire (E8), because a bare strip() eats U+00A0
+  and U+2028 and probes 2 and 3 are built from exactly those.  The specific
+  divergence mg-218d found is closed.  The RULE is not asserted, and the two
+  sentences above say it is.
+
+  This is not a certification-of-the-instrument complaint.  delta_control.py's
+  'nothing certifies the instrument' caveat is correct and is not the issue: it
+  covers an edit that deletes the probes.  Every row above LEAVES THE PROBES IN
+  PLACE AND PASSING, which is the case the caveat says is covered.
+==========================================================================================
+
+### 3. render5644.py    — B1 measured against two real GFM renderers, not a model
+==========================================================================================
+mg-5644 — IS A READER SHOWN THE CITED SECTIONS?  Measured, on two renderers.
+==========================================================================================
+  target      docs/state-history/attempt-mg-276d.md
+  population  the 5 sections the certified ledger cell cites BY NAME: H1 H2 H3 H4 H5
+  tests       ANY     — the section's heading text appears anywhere a reader looks
+              HEADING — it appears as a <h1>..<h6>, i.e. as the document's own prose
+
+  Q1  one `<!--` line at the top, never closed
+        marked       ANY 0/5   HEADING 0/5   as prose: (none)
+        markdown-it  ANY 0/5   HEADING 0/5   as prose: (none)
+
+  Q2  one ``` line at the top, never closed
+        marked       ANY 5/5   HEADING 0/5   as prose: (none)
+        markdown-it  ANY 5/5   HEADING 0/5   as prose: (none)
+
+  Q0  unmutated — the positive control
+        marked       ANY 5/5   HEADING 5/5   as prose: H1 H2 H3 H4 H5
+        markdown-it  ANY 5/5   HEADING 5/5   as prose: H1 H2 H3 H4 H5
+
+==========================================================================================
+VERDICT
+==========================================================================================
+  60 comparisons over 2 independent renderers; both renderers agreed on every one.
+  Q0 unmutated   : all 5 cited sections rendered AS HEADINGS on both — as expected
+  Q1 HTML comment: 0 cited sections visible AT ALL on either        — CONFIRMED
+  Q2 code fence  : 0 as headings, 5 as literal source on both — CONFIRMED
+
+  Q1 IS THE STRONG ROW.  A reader who follows any of the certified cell's six
+  links is shown a BLANK PAGE by both renderers, and delta_control.py exits 0.
+
+  Q2 IS THE WEAKER ROW AND IS REPORTED AS SUCH.  The characters are still on the
+  page; what is gone is that they are the document's prose.  Every cited section
+  becomes the contents of a code sample — the exact state mg-babf's B05 put the
+  F1 block into, which mg-4acd's `state` field classifies as a miss and which
+  this control now exits 0 on when it happens one file out.
+
+  This is a measurement, not a reading of the spec.
+==========================================================================================
+
+### 4. l2pop5644.py     — mg-bee1's L2 negative, tested BY CONSTRUCTION
+==========================================================================================
+mg-5644 — CAN L2 BE CLOSED BY A POPULATION RULE?  The construction, then its cost.
+==========================================================================================
+  control exit on the unmutated tree: 0
+  blockquote blocks in docs/state-history/README.md: 7 (the population)
+  of those, CERTIFIED by delta_control.py: 6; not certified: 1
+
+    lines   15-44   CERTIFIED      > **THOSE FIVE FIGURES WERE WRONG, here and in `57f962f`'s commi
+    lines  187-227  CERTIFIED      > **`b68db5d`'s HEADLINE VERIFICATION SENTENCE IS BLIND TO THE C
+    lines  229-264  CERTIFIED      > **"`negative_control.py` proves it fires" DID NOT ESTABLISH WH
+    lines  266-313  CERTIFIED      > **WHETHER THESE ARE THE CERTIFIED BYTES IS NOT THE SAME QUESTI
+    lines  315-378  CERTIFIED      > **THE PROPERTY THE BLOCK ABOVE PUBLISHES IS FALSE AS PUBLISHED
+    lines  380-387  not certified  > **`which located the source the audit did not name` is an over
+    lines  406-425  CERTIFIED      > **`no 4d tally` is a correction, and `133` / `220` are its cos
+
+  So the DECLARED not-certified list this rule needs has 1 entries, fixed at the tree it is written against.
+
+==========================================================================================
+DOES IT CATCH THE LAYER, OR ONLY mg-218d's MUTATION?
+==========================================================================================
+  FIRES  S1-as-built  mg-218d's own S1: an inverted near-copy under a new heading
+           undeclared blockquote at lines 439-458: > **LATER NOTE: `no 4d tally` was a correction, and `133
+  FIRES  S1-verbatim  a VERBATIM duplicate of a certified block, header untouched
+           one marker now matches TWO blocks: > **`no 4d tally` is a correction, and `133` / `220`
+  FIRES  S1'          the same near-copy placed in the MIDDLE of the file instead
+           undeclared blockquote at lines 46-46: > **A CONTRADICTING NEAR-COPY.**
+  FIRES  S1''         a near-copy with NO new heading at all
+           undeclared blockquote at lines 437-437: > **A SECOND F1 BLOCK THAT DISAGREES.**
+  FIRES  S1'''        a certified block's DUPLICATE inserted directly above it
+           undeclared blockquote at lines 187-187: > **A NEAR-COPY THAT DISAGREES.**
+  FIRES  R1           an EXISTING uncertified blockquote deleted (the rot direction)
+           a declared blockquote is GONE: > **`which located the source the audit did not name` is
+
+  6 of 6 fire.  The rule is not shaped around S1: it is
+  shaped around the POPULATION, so it fires on a near-copy anywhere, with or
+  without a new heading, and in the removal direction too.
+
+==========================================================================================
+WHAT IT WOULD COST — the same standard mg-bee1 held the document-global ordinal to
+==========================================================================================
+  A population rule re-baselines whenever the population changes.  Below: every
+  commit in this repository that touched docs/state-history/README.md, oldest
+  first, with its blockquote count.  The population is stated and nothing is
+  sampled.
+    6 commits touched it; 5 commit-to-commit transitions
+    the blockquote count changed at 5 of them  (100%)
+    series: 0 2 4 5 6 7
+
+==========================================================================================
+VERDICT ON THE NEGATIVE, WITH ITS BOUND
+==========================================================================================
+  'closing that by counting blockquotes would catch mg-218d's mutation and not
+   the layer' — NOT TRUE AS STATED of a population rule.  The construction above
+  is not a count and is not shaped around S1; it fires on every mutation that
+  changes the blockquote population of the README, in both directions.
+
+  'What would close L2 is a rule that decides which blocks ought to be certified,
+   and there is not one here' — the rule above IS one, and its discipline is
+  already in delta_control.py: section 8 is default-deny over an enumerated
+  population, and this is the same move applied to the region set.
+
+  THE BOUND, and it is why this audit reports the negative as OVERSTATED rather
+  than FALSE, and files no BROKEN on it.  The construction closes L2 for
+  BLOCKQUOTE blocks in ONE file.  A contradicting near-copy written as a plain
+  paragraph, or as a table, or placed in STATE.md, is outside its population and
+  still exits 0.  So mg-bee1's substantive point — that no rule here decides
+  which blocks OUGHT to be certified in general — stands.  What does not stand is
+  the specific claim that the available fix is mutation-shaped: it is not, it is
+  cheap, and declining it costs more than the argument for declining it says.
+==========================================================================================
+
+### 5. mg-218d's SIXTEEN, re-run UNMODIFIED on mg-218d's own harness
+###    (not this audit's — the point is that nothing of mg-218d's was edited)
+mg-218d — THE LAYER BATTERY.  Mutations at the layers mg-4acd does NOT claim.
+
+THE QUESTION THIS BATTERY ASKS is not "does the presentation record work?".  Four
+iterations of this control have each closed their predecessor's gap and exposed a new
+layer, so the useful question is WHICH LAYER IS UNCONTROLLED NOW.  Re-running mg-babf's
+four is necessary and not sufficient: after mg-4acd they are the author's known-answer
+set.  This battery is built at the layers ABOVE the one that was just closed.
+
+THE STACK, named so that a verdict can be attached to each layer:
+
+    L0  INSTRUMENT        the code and the baked-in constants that define every layer below
+    L1  FILE SELECTION    which files are read at all — and what the certified text POINTS AT
+    L2  REGION SET        which regions inside those files are certified
+    L3  REGION LOCATION   which bytes are the region                     (locator)
+    L4  PRESENTATION      is a reader shown them, and where              (mg-4acd)
+    L5  BYTE CONTENT      are these the certified bytes                  (mg-7870)
+    L6  NORMALISATION     the equivalence rule under which L5 is asked   (mg-7870/mg-babf)
+
+Every mutation below carries the exit code THIS AUDIT PREDICTED before it was run, so a
+row that surprised me is visible as a row that surprised me.  A battery whose predictions
+are written after the run is a battery that cannot be wrong.
+
+    python3 code/state_layer_audit_218d/layers218d.py
+
+BASELINE: the control on the unmutated tree -> exit 0 (PASS)
+
+==========================================================================================
+mg-218d LAYER BATTERY — 16 mutations at L0-L4
+'expected' is what THIS AUDIT PREDICTED BEFORE RUNNING, not what the instrument claims.
+==========================================================================================
+  OK  L3a   L3 region location     a certified region DELETED outright                            expected exit 1    got exit 1 (FAIL)
+  OK  L3b   L3 region location     the locator MARKER reworded, block still in force              expected exit 1    got exit 1 (FAIL)
+  OK  L3c   L3 region location     the ledger row's attempt id renamed                            expected exit 1    got exit 1 (FAIL)
+  OK  L3d   L3 region location     a certified region duplicated verbatim                         expected exit 1    got exit 1 (FAIL)
+  OK  P1    L4 presentation        B07 restated: retraction INSIDE the certified section          expected exit 2    got exit 2 (MOVED)
+  OK  P2    L4 presentation        THE SAME PARAGRAPH one line earlier, across the heading        expected exit 0    got exit 0 (PASS)
+  OK  P3    L4 presentation        document-wide retraction in an unrelated section               expected exit 0    got exit 0 (PASS)
+  OK  P4    L4 presentation        a new 'READ THIS FIRST — superseded' section near the top      expected exit 0    got exit 0 (PASS)
+  OK  P5    L4 presentation        POSITIVE CONTROL: the README's H1 retitled                     expected exit 2    got exit 2 (MOVED)
+  OK  P6    L4 presentation        STATE.md: retraction of the Attempt index, other section       expected exit 0    got exit 0 (PASS)
+  OK  S1    L2 region set          a contradicting near-copy of a certified block added           expected exit 0    got exit 0 (PASS)
+  >>> T1    L1 reference target    a section the certified cell links to BY NAME deleted          expected exit 0    got exit 1 (FAIL)
+  >>> T2    L1 reference target    the F1 repair INVERTED in the file the cell points at          expected exit 0    got exit 2 (MOVED)
+  >>> T3    L1 reference target    that file emptied (7 links from the certified cell)            expected exit 0    got exit 1 (FAIL)
+  OK  I1    L0 instrument          one entry deleted from CERTIFIED (ten regions -> nine)         expected exit 0    got exit 0 (PASS)
+  >>> I2    L0 instrument          the normalisation widened to .strip() (mg-babf's rule undone)  expected exit 0    got exit 1 (FAIL)
+
+  12 of 16 mutations behaved as this audit predicted; 4 did not.
+
+==========================================================================================
+PER-LAYER VERDICT — which layers of the stack fire, read off the rows above
+==========================================================================================
+  L0 instrument          2 mutations: 1 fire, 1 exit 0
+                         silent: I1
+  L1 reference target    3 mutations: 3 fire, 0 exit 0
+  L2 region set          1 mutations: 0 fire, 1 exit 0
+                         silent: S1
+  L4 presentation        6 mutations: 2 fire, 4 exit 0
+                         silent: P2, P3, P4, P6
+  L3 region location     4 mutations: 4 fire, 0 exit 0
+
+6 of 16 mutations changed what a reader is shown and exited 0:
+    P2  L4 presentation        THE SAME PARAGRAPH one line earlier, across the heading
+    P3  L4 presentation        document-wide retraction in an unrelated section
+    P4  L4 presentation        a new 'READ THIS FIRST — superseded' section near the top
+    P6  L4 presentation        STATE.md: retraction of the Attempt index, other section
+    S1  L2 region set          a contradicting near-copy of a certified block added
+    I1  L0 instrument          one entry deleted from CERTIFIED (ten regions -> nine)
+
+MUTATIONS THAT SURPRISED THIS AUDIT (predicted != observed):
+    T1  predicted exit 0, got exit 1
+    T2  predicted exit 0, got exit 2
+    T3  predicted exit 0, got exit 1
+    I2  predicted exit 0, got exit 1

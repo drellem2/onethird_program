@@ -1,0 +1,45 @@
+================================================================================================
+mg-16eb — WHAT A READER IS SHOWN, measured on two real GFM renderers
+================================================================================================
+Population: 2 renderers x 5 cited sections x 4 documents = 40 section
+observations, plus 2 renderers x 3 mutated documents = 6 whole-page checks.
+
+R0  unmutated — the positive control
+    marked       text-in-html 5/5   SHOWN TO A READER 5/5   order H1-H2-H3-H4-H5
+    markdown-it  text-in-html 5/5   SHOWN TO A READER 5/5   order H1-H2-H3-H4-H5
+
+B3  <details><summary> at the top of the target
+    marked       text-in-html 5/5   SHOWN TO A READER 0/5   order H1-H2-H3-H4-H5
+                 every cited section sits inside [1] closed <details> element(s); </details> in page: 0
+    markdown-it  text-in-html 5/5   SHOWN TO A READER 0/5   order H1-H2-H3-H4-H5
+                 every cited section sits inside [1] closed <details> element(s); </details> in page: 0
+
+C1  a closed code example inside cited section H3
+    marked       text-in-html 5/5   SHOWN TO A READER 5/5   order H1-H2-H3-H4-H5
+                 the example renders as a code block: True; its text is on the page: True
+    markdown-it  text-in-html 5/5   SHOWN TO A READER 5/5   order H1-H2-H3-H4-H5
+                 the example renders as a code block: True; its text is on the page: True
+
+B1  cited sections H3 and H4 exchanged
+    marked       text-in-html 5/5   SHOWN TO A READER 5/5   order H1-H2-H4-H3-H5
+    markdown-it  text-in-html 5/5   SHOWN TO A READER 5/5   order H1-H2-H4-H3-H5
+
+================================================================================================
+WHAT THE RENDERERS SAY, against what the control says
+================================================================================================
+  B3   both renderers: 5 of 5 cited sections have their TEXT in the HTML and 0 of
+       5 are SHOWN to a reader — every one is inside a <details> with no `open`
+       attribute that is never closed.  mg-0049's render0049.py measures the
+       first number for the same shape (its R5) and records 'SUPPRESSES NOTHING'.
+       The control exits 2 on it: DRIFT, 're-baseline and record the new figure'.
+       R1 and R8 produce the same blank page and are exit 1, damage.
+
+  C1   both renderers: 5 of 5 shown, the example rendered as a code block, its
+       text on the page.  The control exits 1 and prints 'THE CERTIFIED CELL
+       SENDS A READER TO THIS SECTION AND THE READER IS SHOWN NOTHING OF IT'.
+
+  B1   both renderers: 5 of 5 shown, in the exchanged order.  The control exits 0.
+
+  40 section observations; 0 rows where this file and its own prediction
+  disagree.
+================================================================================================
