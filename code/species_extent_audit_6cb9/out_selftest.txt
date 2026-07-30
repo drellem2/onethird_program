@@ -1,0 +1,59 @@
+==============================================================================
+selftestd6cb9 -- the harness, and the half of it that must NOT happen
+==============================================================================
+
+  1  the restore contract
+  a plant CHANGES the file while the probe is open                   ok
+  and the file is byte-identical afterwards                          ok
+  git status is unchanged afterwards                                 ok
+
+  2  new files and new directories, and that they do NOT survive
+  a new file exists inside the probe                                 ok
+  and is GONE afterwards                                             ok
+  a new file in a new SUBDIRECTORY exists inside the probe           ok
+  the file is gone afterwards                                        ok
+  and so is the directory it needed                                  ok
+  git status is still unchanged                                      ok
+
+  3  the mutation helper refuses to do nothing
+  replace_once RAISES when its target is absent                      ok
+  the tree survived that raise                                       ok
+  replace_once changes exactly ONE occurrence                        ok
+  and it is undone                                                   ok
+
+  4  a restored .py must not leave live bytecode behind
+     (this is the defect that inverted A3d's seam probe, kept in
+     OUTCOMES.md; the source and the mutant are the same SIZE and the
+     restore lands in the same SECOND, so the .pyc validates)
+  disarming RUN_FRAC makes e2 red (its own controls catch it)        ok
+  and e2 is green again immediately after the restore                ok
+  no __pycache__ survives the probe                                  ok
+  the run after the restore reports its controls firing              ok
+
+  5  the checkers are green on the tree as found
+  check_doc.py exits 0 unmutated                                     ok
+  w3_scope.py exits 0 unmutated                                      ok
+  s1_extent.py exits 0 unmutated                                     ok
+  s2_seam.py exits 0 unmutated                                       ok
+  e1_extents.py exits 0 unmutated                                    ok
+  e2_crosssection.py exits 0 unmutated                               ok
+
+  6  s1_extent.py's historical controls are ARMED here
+  no 'git unavailable' line in a run from the real worktree          ok
+  control (a) at ebecd89 reports a count                             ok
+  control (b) at 83ac472 reports a count                             ok
+  mg-d633's sandbox does NOT copy .git                               ok
+
+  7  the small helpers
+  flat collapses whitespace                                          ok
+  norm_toks lowercases and splits                                    ok
+  norm_toks of a 7-word phrase has 7 tokens                          ok
+  run_checker returns a nonzero code for a checker that fails        ok
+
+  8  and nothing above changed the worktree
+  git status --porcelain is what it was at line 1                    ok
+  the audited document is byte-identical                             ok
+
+==============================================================================
+selftestd6cb9: 33 assertion(s), 0 failed
+==============================================================================
