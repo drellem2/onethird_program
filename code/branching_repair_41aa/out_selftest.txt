@@ -1,0 +1,44 @@
+==============================================================================
+SELF-TEST  code/branching_repair_41aa
+==============================================================================
+
+  1   A000112: posets on 0..6 points                                 PASS
+  2   every enumerated relation is a poset                           PASS
+  3   enumerated classes are pairwise non-isomorphic (n = 5)         PASS
+  4   canon is invariant under all 24 relabellings (all 16 posets, n=4) PASS
+  5   iso agrees with canon on all 256 ordered pairs (n = 4)         PASS
+  6   |J(antichain_n)| = 2^n for n <= 6                              PASS
+  7   |J(chain_n)| = n+1 for n <= 6                                  PASS
+  8   |L(antichain_n)| = n! for n <= 5                               PASS
+  9   J(P) is a lattice, every P with n <= 4                         PASS
+  10  J(P) is distributive, every P with n <= 4                      PASS
+  11  Birkhoff: join-irreducibles of J(P) = P, every P with n <= 4   PASS
+  12  M3 is a lattice                                                PASS
+  13  M3 is NOT distributive                                         PASS
+  14  N5 is a lattice                                                PASS
+  15  N5 is NOT distributive                                         PASS
+  16  the Boolean lattice B_3 IS distributive                        PASS
+  17  A000041: partitions of 1..8                                    PASS
+  18  conjugation is an involution on partitions of 7                PASS
+  19  e(D_lambda) = hook length formula, every lambda with |lambda| <= 6 PASS
+  20  sum_lambda (f^lambda)^2 = n! for n <= 7                        PASS
+  21  f^(3,2,1) = 16 (standard textbook value)                       PASS
+  22  |[empty, (3,2)]| = 9 sub-diagrams, counted by hand             PASS
+  23  J(D_lambda) = [empty, lambda], every lambda |- 5               PASS
+  24  the skew shape (2,1)/(1) is the 2-element ANTICHAIN            PASS
+  25  (2,1)/(1) is not a straight cell poset                         PASS
+  26  straight cell poset classes, n = 1..7                          PASS
+  27  |grid(p,q)| = (p+1)(q+1) for p,q <= 4                          PASS
+  28  grid(p,q) = J(C_p + C_q) for all 16 pairs p,q <= 4             PASS
+  29  partitions in the b x b box = C(2b, b), b = 1..5               PASS
+  30  Young-Fibonacci rank sizes to rank 6 are Fibonacci             PASS
+  31  Young-Fibonacci: DU - UD = I below the top rank                PASS
+  32  Young-Fibonacci intervals [0-hat, w], rank(w) <= 6             PASS
+  33  of those, non-distributive (af28's T8 says 5)                  PASS
+  34  mk rejects a cycle                                             PASS
+  35  the ligature-dropping reader renders 'finite' as 'nite'        PASS
+  36  ... and 'different' as 'dierent'                               PASS
+
+==============================================================================
+SELF-TEST: 36 assertions, 0 failed
+==============================================================================

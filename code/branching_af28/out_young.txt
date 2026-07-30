@@ -65,24 +65,52 @@ T1  J(D_lambda) = [0, lambda] in Young's lattice, and the maximal
   partitions tested: 44   lattice-iso bad: 0   SYT/chain bad: 0
 
 ==============================================================================
-T2  How much of the family is Young?  The posets P for which J(P) is
-    an interval of Young's lattice are exactly the cell posets
-    D_lambda.  Counted against all posets.
+T2  How much of the family is Young?  Two questions, not one:
+      which P have J(P) = [0, lambda]?   exactly the STRAIGHT cell
+        posets D_lambda (T1).
+      which P have J(P) = [mu, lambda], any interval?  exactly the
+        SKEW cell posets lambda/mu.
+    Counted against all posets.  CORRECTED by mg-41aa: the earlier
+    version of this test asserted the second class equalled the
+    first and measured only the first.
 ==============================================================================
 
-   n   shape posets   all posets   fraction   (all-posets source)
-   1              1            1     1.0000   enumerated here (= A000112)
-   2              1            2     0.5000   enumerated here (= A000112)
-   3              2            5     0.4000   enumerated here (= A000112)
-   4              3           16     0.1875   enumerated here (= A000112)
-   5              4           63     0.0635   enumerated here (= A000112)
-   6              6          318     0.0189   enumerated here (= A000112)
-   7              8         2045     0.0039   A000112, cited
-   8             12        16999     0.0007   A000112, cited
+   n   straight D_lam   skew = interval posets   all posets   straight  interval
+   1                1                       1             1     1.0000    1.0000
+   2                1                       2             2     0.5000    1.0000
+   3                2                       5             5     0.4000    1.0000
+   4                3                      11            16     0.1875    0.6875
+   5                4                      26            63     0.0635    0.4127
+   6                6                      62           318     0.0189    0.1950
+   7                8                     149*         2045     0.0039    0.0729
+   8               12                     360*        16999     0.0007    0.0212
+
+  * n = 7 and n = 8 skew counts are NOT enumerated in this file --
+    this file's canonical form is a min over all n! relabellings and
+    the skew enumeration costs minutes at n = 7 and hours at n = 8.
+    Both were computed twice on other instruments, agreeing:
+    code/branching_repair_41aa (r1_exactly.py, r1b_skew8.py) and
+    code/branching_audit_6ad0/a2_intervals.py (n=8 behind SKEW8=1).
+    The all-posets column is A000112, cited, for n = 7, 8 and
+    enumerated here for n <= 6.
+
+  THE WITNESS, so the correction is not taken on trust:
+    both 2-cell straight shapes (2) and (1,1) give the 2-CHAIN, so
+    the 2-element ANTICHAIN is not any D_lambda: confirmed
+    the skew shape (2,1)/(1) has cells [(0, 1), (1, 0)] and is the 2-element
+    antichain: confirmed
+    |J(2-antichain)| = 4 = |[(1), (2,1)]| = 4, the interval being ['(1,)', '(1, 1)', '(2,)', '(2, 1)']
 
   Note: D_lambda and D_(lambda') are isomorphic posets (transpose),
-  so the shape count is at most the number of partitions and is
+  so the straight count is at most the number of partitions and is
   smaller; it is computed here by canonical form, not by that rule.
+  The same holds for skew shapes under transposition of lambda/mu.
+
+  READING.  The direction of section 0 consequence 1 -- ours contains
+  theirs, as a vanishing fraction -- survives on BOTH columns.  The
+  three numbers quoted in ledger B2 are the straight column and are
+  reproduced here unchanged; they are not counts of the class B2
+  named.  At n <= 3 EVERY poset is a skew shape poset.
 
 ==============================================================================
 T6  Is the action of the monoid on the states the action of a group?

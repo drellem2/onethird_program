@@ -1,0 +1,119 @@
+==============================================================================
+R1a  THE SMALLEST WITNESS, WITH THE ISOMORPHISM CONSTRUCTED.
+     B2: the posets P with J(P) an interval of Young's lattice are
+     EXACTLY the cell posets.  Here is one that is not.
+==============================================================================
+
+  P = the 2-element ANTICHAIN.
+    the two 2-cell straight shapes are (2) and (1,1); their cell
+    posets are both the 2-CHAIN, so the straight class at n = 2 has 1 member(s).
+    is P a straight cell poset D_lambda?   NO
+    is P a SKEW cell poset?                YES   ((2, 1)/(1,), cells [(0, 1), (1, 0)])
+
+    the induced map J(P) -> [(1), (2,1)], element by element:
+        ideal {}         ->  (1,)
+        ideal {0}        ->  (2,)
+        ideal {1}        ->  (1, 1)
+        ideal {0,1}      ->  (2, 1)
+
+    bijection onto [(1),(2,1)] and order-preserving both ways: YES
+
+  CONCLUSION R1a: B2's "exactly" is FALSE.  The 2-element antichain
+  is not a cell poset and J(it) IS an interval of Young's lattice.
+  Reproduces mg-6ad0's A2a on a third instrument, and adds the map.
+
+==============================================================================
+R1b  THE TEST B2 NEVER RAN.  For EVERY poset class P on n <= 6
+     elements, is J(P) an interval of Young's lattice?  Decided by
+     exhibiting the isomorphism and checking it on every pair.
+==============================================================================
+
+   n  classes  J(P) an interval  straight D_lam  af28 said  misses  bad maps
+   1        1                 1               1          1       0         0
+   2        2                 2               1          1       1         0
+   3        5                 5               2          2       3         0
+   4       16                11               3          3       8         0
+   5       63                26               4          4      22         0
+   6      318                62               6          6      56         0
+
+  Every "J(P) an interval" cell above is a CONSTRUCTED isomorphism
+  J(P) -> [mu, lambda], verified on every pair of ideals in both
+  directions: 0 bad maps.
+  Posets af28's "exactly" excludes but which ARE interval posets: 90.
+
+==============================================================================
+R1c  THE CONVERSE.  R1b found the interval posets among the skew
+     shapes.  Could a poset OUTSIDE that class still have J(P) an
+     interval?  Two checks: an exhaustive one at n <= 5, and the
+     structural reason the search is complete.
+==============================================================================
+
+  (i) EXHAUSTIVE.  For each poset class NOT a skew shape, J(P) is
+      tested against every interval [mu, lambda] with |lambda/mu| = n
+      and |[mu, lambda]| = |J(P)|.  A hit here would break the
+      corrected claim.
+
+   n  non-skew classes  intervals tried  hits
+   1                  0                0     0
+   2                  0                0     0
+   3                  0                0     0
+   4                  5              180     0
+   5                 37             4520     0
+
+  (ii) WHY THE SEARCH IS COMPLETE.  An order isomorphism of finite
+       lattices carries join-irreducibles to join-irreducibles, and
+       the join-irreducibles of J(P) are the principal ideals, i.e.
+       P itself.  So J(P) = [mu, lambda] forces P = the join-
+       irreducible poset of [mu, lambda].  Measured: that poset is
+       the cell poset of lambda/mu, on every skew shape to n <= 6.
+
+   n  skew shapes  ji([mu,lam]) = cells(lam/mu)  bad
+   1            1                            1    0
+   2            2                            2    0
+   3            5                            5    0
+   4           11                           11    0
+   5           26                           26    0
+   6           62                           62    0
+
+  exhaustive hits outside the skew class: 0;  join-irreducible
+  reconstructions bad: 0.
+
+==============================================================================
+R1d  THE CORRECTED FRACTIONS, and a control on the enumeration.
+==============================================================================
+
+   n   straight D_lam   skew = interval posets   all posets    af28   corrected
+   1                1                        1            1  1.0000      1.0000
+   2                1                        2            2  0.5000      1.0000
+   3                2                        5            5  0.4000      1.0000
+   4                3                       11           16  0.1875      0.6875
+   5                4                       26           63  0.0635      0.4127
+   6                6                       62          318  0.0189      0.1950
+   7                8                      149         2045  0.0039      0.0729
+   8               12                      360        16999  0.0007      0.0212   (r1b_skew8.py)
+
+  af28's three numbers 6/318, 8/2045, 12/16999 are the STRAIGHT
+  column and are reproduced here exactly.  They are not counts of
+  the class B2 names.  The corrected numbers are 62/318, 149/2045,
+  360/16999 -- understated by a factor of 10 to 30.
+  At n <= 3 EVERY poset is a skew shape poset (1/1, 2/2, 5/5).
+
+  CONTROL ON THE ENUMERATION.  The search is bounded by the claim
+  that a skew diagram with n cells fits, after trimming empty rows
+  and columns, in the n x n box.  If that were wrong the counts
+  would be too low.  Grow the box and see:
+
+   n   box n   box n+1   box n+2   stable
+   1       1         1         1   .
+   2       2         2         2   .
+   3       5         5         5   .
+   4      11        11        11   .
+   5      26        26        26   .
+
+  box-growth instabilities: 0
+
+==============================================================================
+SUMMARY r1_exactly: witness bad 0; constructed maps bad 0; posets
+  af28's "exactly" wrongly excludes 90; converse hits 0; join-
+  irreducible reconstructions bad 0; box instabilities 0
+==============================================================================

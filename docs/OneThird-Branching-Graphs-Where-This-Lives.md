@@ -1,7 +1,20 @@
 # Towers of algebras and branching graphs: does this construction meet them?
 
 **Work item:** mg-af28. **Date:** 2026-07-30. **Computation:** permitted, used, committed
-(`code/branching_af28/`, `run_all.sh`, ~5 min, 27-assertion self-test).
+(`code/branching_af28/`, `run_all.sh`, ~6 min, 31-assertion self-test).
+
+***Repaired 2026-07-30 by mg-41aa**, landing four findings of
+`docs/OneThird-Audit-mg-af28-Branching-Graphs.md` (mg-6ad0): the two **BROKEN** items X1 and
+X2, both of which were refuted by construction and both of which are on the **negative**
+side, and the two re-scopings X3 and X4. **The headline is untouched and comes out stronger,
+not weaker** — mg-6ad0 confirmed `J(D_λ) → [∅, λ]` as a **lattice** isomorphism, and X2's
+correction says Brown's own worked example lattice **is** an interval of Young's lattice, so
+the contact is closer than this document argued. Every struck sentence is quoted where it
+stood. Figures in the repaired passages come from `code/branching_repair_41aa/`, which
+imports nothing from `branching_af28/` or `branching_audit_6ad0/`; the reasoning, and a
+per-claim statement of what was checked and what a falsifier would have looked like, is in
+`docs/OneThird-Branching-Graphs-Repair.md`. **mg-6ad0's X5, X6 and X7 are deliberately NOT
+landed here — they are outside this repair's brief and have no successor ticket; see §9.***
 
 **What this document is.** mg-d673's MAJOR finding was that row Q of
 `docs/OneThird-Landscape-Where-This-Lives.md` licensed a *"no"* about the literature over a
@@ -43,9 +56,26 @@ row-and-column-increasing fillings.
 
 1. **The direction is "ours contains theirs", not "theirs contains ours".** The repo's
    family ranges over *all* finite posets; the branching-graph programme's distributive
-   piece is the cell posets. That is a **vanishing** fraction: **6 of 318** at `n = 6`,
-   **8 of 2 045** at `n = 7`, **12 of 16 999** at `n = 8` (T2). So on the index sets, this
-   construction **generalises** the Young case.
+   piece is the posets whose ideal lattice is an interval of Young's lattice — the **skew**
+   cell posets `λ/μ`, of which the straight `D_λ` are the sub-family realising the intervals
+   `[∅, λ]`. Both are a **vanishing** fraction (T2):
+
+   | `n` | straight `D_λ`, i.e. `J(P) = [∅, λ]` | skew `λ/μ`, i.e. `J(P) = [μ, λ]` | all posets |
+   |---|---|---|---|
+   | 6 | 6 (0.0189) | **62** (0.1950) | 318 |
+   | 7 | 8 (0.0039) | **149** (0.0729) | 2 045 |
+   | 8 | 12 (0.0007) | **360** (0.0212) | 16 999 |
+
+   So on the index sets, this construction **generalises** the Young case.
+
+   > **CORRECTED (mg-41aa, landing mg-6ad0's X1).** This item previously read: *"the
+   > branching-graph programme's distributive piece is the cell posets. That is a **vanishing**
+   > fraction: **6 of 318** at `n = 6`, **8 of 2 045** at `n = 7`, **12 of 16 999** at
+   > `n = 8`."* The three numbers are correct and are reproduced unchanged — but they count
+   > the **straight** cell posets, and the class this sentence names is the **skew** ones,
+   > which is 10 to 30 times larger. The **direction** of the item survives on either column
+   > and is why this is a correction and not a retraction. **At `n ≤ 3` every poset is a skew
+   > cell poset** (1/1, 2/2, 5/5), so the "vanishing" is a statement about `n ≥ 4` only.
 
 2. **Nothing else transfers, and the reasons are theorems rather than absences.** §2
    enumerates them: finiteness kills the differential condition outright; distributivity
@@ -62,10 +92,25 @@ row-and-column-increasing fillings.
    *branching*, *differential*, *Gelfand*, *Okounkov*, *Vershik*, *Fomin*, *dual graded*
    or *tower of algebras*, against live controls of 8 *distributive lattice*, 19 *maximal
    chains*, 6 *left regular band*, 28 *Tsetlin*, 24 *derangement* (`out_scan_brown.txt`).
-   His worked `§4.3` example is the `p × q` grid of lattice paths (the "kids walk" is
-   `§4.4`); that grid is `J(C_p ⊔ C_q)`, which for `p, q ≥ 1` is **not** an interval of
-   Young's lattice — `D_λ` has a minimum and `C_p ⊔ C_q` does not. And I did not locate
-   the identification on the branching-graph side either (§3, rows 4–7).
+   And I did not locate the identification on the branching-graph side either (§3,
+   rows 4–7). **What this rests on is the keyword census and nothing else** — see the
+   correction immediately below, which removes the sentence that used to be offered
+   alongside it.
+
+   > **STRUCK (mg-41aa, landing mg-6ad0's X2).** This item previously continued: *"His
+   > worked `§4.3` example is the `p × q` grid of lattice paths (the "kids walk" is `§4.4`);
+   > that grid is `J(C_p ⊔ C_q)`, which for `p, q ≥ 1` is **not** an interval of Young's
+   > lattice — `D_λ` has a minimum and `C_p ⊔ C_q` does not."* **The reason is true and the
+   > conclusion is false.** "`D_λ` has a minimum" rules out intervals of the form `[∅, λ]`
+   > and says nothing about a general `[μ, λ]`, whose poset is a skew shape and need not
+   > have a minimum. Constructed and verified pair by pair for every `p, q ≤ 5`:
+   > `λ/μ = (q+p, q)/(q) ≅ C_p ⊔ C_q`, so **Brown's own `§4.3` example lattice IS the
+   > interval `[(q), (q+p, q)]` of Young's lattice**, with `|[μ, λ]| = (p+1)(q+1)`, **0 bad
+   > of 25** (`code/branching_repair_41aa/out_r2_grid.txt`). This is one of the three
+   > elementary derivations §5 item 5 flags as mine rather than a citation, and it is the
+   > one that was wrong. Consequence 3's actual claim is untouched, and the correction runs
+   > **toward** the headline: the located source's worked example is an instance of the very
+   > contact this document reports.
 
 **The harshest available reading of consequence 1, stated because this is where enthusiasm
 would be the expensive error.** The identification is about **index sets**. `SYT(λ)` is our
@@ -85,12 +130,12 @@ Tested against the published definitions, one hypothesis at a time.
 
 | the programme's hypothesis | what we have | verdict |
 |---|---|---|
-| **Bergeron–Li axiom (2)**: *"The (external) multiplication `ρ_{m,n} : A_m ⊗ A_n → A_{m+n}` is an injective homomorphism of algebras, for all `m` and `n` (sending `1_m ⊗ 1_n` to `1_{m+n}`)"* — quoted from `arXiv:math/0612170` §3.1 | the natural candidate is block concatenation `F(P) × F(Q) → F(P ⊔ Q)`. **Measured over all 64 pairs with `|P|,|Q| ≤ 3`:** it always lands in `F(P ⊔ Q)` (0 bad), is always injective (64/64), is always a semigroup homomorphism (0 bad products) — and is **unital in 0 of 64 cases**, because it sends `(1_P, 1_Q)` to the two-block move | **axiom fails** for this map. Whether another map satisfies it is not decided here |
+| **Bergeron–Li axiom (2)**: *"The (external) multiplication `ρ_{m,n} : A_m ⊗ A_n → A_{m+n}` is an injective homomorphism of algebras, for all `m` and `n` (sending `1_m ⊗ 1_n` to `1_{m+n}`)"* — quoted from `arXiv:math/0612170` **§3.1, titled *"Tower of Algebras (Preserving unities)"*** | the natural candidate is block concatenation `F(P) × F(Q) → F(P ⊔ Q)`. **Measured over all 64 pairs with `|P|,|Q| ≤ 3`:** it always lands in `F(P ⊔ Q)` (0 bad), is always injective (64/64), is always a semigroup homomorphism (0 bad products) — and is **unital in 0 of 64 cases**, because it sends `(1_P, 1_Q)` to the two-block move | **§3.1's axiom fails** for this map, on unitality and on nothing else. **The same paper's §3.6, *"Tower of Algebras (not Preserving unities)"*, takes as input *"an algebra injection not necessarily preserving unities"* — exactly what is measured here — and was not evaluated** (mg-41aa, landing mg-6ad0's X3; §2 item 5) |
 | a tower is **`ℕ`-graded**: `A = ⊕_{n≥0} A_n` | our index is a *poset*, not an integer. An `ℕ`-indexed subfamily closed under the `⊔` that the external product needs satisfies `P_m ⊔ P_n = P_{m+n}`, hence `P_n = P_1^{⊔n}` (elementary, and **ours** — flagged as a derivation, not a citation) | at `P_1` = a point this is the **antichain** sequence, i.e. the classical braid case; no poset-specific tower located |
 | **Okounkov–Vershik** runs on an inductive family of **semisimple** algebras, and builds the Gelfand–Tsetlin algebra as a maximal commutative subalgebra, which is maximal *iff the branching graph has no multiple edges* | `kF(P)` is very far from semisimple: measured `dim kF(P)/rad = |AC(P)|` on **all 87 classes to `n ≤ 5`** and **308 of 318 at `n = 6`** (10 over the size cap, each listed), **0 bad**. At the `n = 5` antichain that is `541` against `52` — the radical is **90.4%** of the algebra, and **95.7%** at `n = 6` | **hypothesis fails.** OV supplies the *indexing* of our state space at `P = D_λ` and nothing else |
 | a **branching graph / Bratteli diagram** records restriction multiplicities of irreducibles | Brown: this class of semigroups has irreducible representations that *"can be worked out explicitly (they are all 1-dimensional)"*, indexed by the support lattice — corroborated by the measurement above | **no multiplicity data exists to record.** Any Bratteli diagram here has the support lattice as vertex set and multiplicities 0/1 by construction |
 | **Stanley's differential condition** `DU − UD = rI`, `r ≥ 1` | fails for **every** finite `J(P)`: `U(1̂) = 0` while `UD(1̂) ∋ 1̂`. Measured over all **405 classes to `n ≤ 6`**: **0** satisfy it; with the top rank exempted, **exactly 1** does, and it is the one-element poset. **Positive controls in the same code path**: Young's lattice to rank 8 and the Young–Fibonacci lattice to rank 8 both return `r = 1` | **no contact**, and the obstruction is finiteness, so it is not a near miss |
-| **Brown §4.3** needs a finite **distributive** lattice | of the two *known* 1-differential lattices, only Young's is distributive. Measured: **all 30 intervals `[∅, λ]`, `|λ| ≤ 6`, of Young's lattice are distributive (0 bad)**; **5 of the 33 intervals `[∅̂, w]`, `rank(w) ≤ 6`, of the Young–Fibonacci lattice are not**, smallest witness `w = 221` | the construction **reaches the Young graph and no other differential poset** |
+| **Brown §4.3** needs a finite **distributive** lattice | of the two *known* 1-differential lattices, only Young's is distributive. Measured: **all 30 intervals `[∅, λ]`, `|λ| ≤ 6`, of Young's lattice are distributive (0 bad)**; **5 of the 33 intervals `[∅̂, w]`, `rank(w) ≤ 6`, of the Young–Fibonacci lattice are not**, smallest witness `w = 221` | **at the level of WHOLE lattices**: Young's is the only *distributive* 1-differential lattice, and every interval `[∅, λ]` of it is distributive. **Not** *"reaches the Young graph and no other differential poset"* — Brown §4.3 needs a **finite** lattice and no differential poset is finite, so at that level the statement consumes nothing at all. At the level where the contact actually lives — finite intervals — **28 of the 33** Young–Fibonacci intervals to rank 6 **are** distributive (mg-41aa, landing mg-6ad0's X4; §2 item 2) |
 
 ---
 
@@ -99,6 +144,11 @@ Tested against the published definitions, one hypothesis at a time.
 This ticket exists because a *"no"* was given without an enumeration. So each reason is
 named, with the measurement or the citation that carries it.
 
+*(**mg-41aa**: items 2 and 5 are re-scoped below, and the re-scoping makes this heading too
+strong in one respect. At the level of finite **intervals** the index-set contact **does**
+extend — to 28 of the 33 finite Young–Fibonacci intervals, item 2. What does not extend is
+the **representation theory**, which is items 3, 4, 6 and 7, and those are untouched.)*
+
 1. **Finiteness.** Differential posets and dual graded graphs are locally finite with a
    `0̂` and infinitely many ranks; `J(P)` for finite `P` is finite with a `1̂`. The
    identity fails at `1̂` for elementary reasons and this is not repairable by truncation
@@ -106,16 +156,31 @@ named, with the measurement or the citation that carries it.
    truncation of an infinite lattice is not even a lattice — two elements of top rank lose
    their join — which is why T8 tests intervals and not truncations.*
 
-2. **Distributivity.** Stanley (1988): *"Young's lattice is the only 1-differential
-   distributive lattice"*; Byrnes (2012) is reported to have shown that Young's and
-   Young–Fibonacci are the only 1-differential lattices at all. *(Both statements taken
-   from the Wikipedia article on differential posets; **I read neither original**, and my
-   argument uses only the first.)* The logic needs only Stanley: Brown §4.3's hypothesis is
-   *distributive lattice*, and a differential poset that is a distributive lattice is
-   Young's — so Young's is the **only** differential poset his construction can consume,
-   whatever the full classification of differential lattices turns out to be. T8 measures
-   the illustrative case: Young–Fibonacci, the other known 1-differential lattice, is not
-   distributive (5 of its 33 intervals to rank 6 fail, smallest witness `w = 221`).
+2. **Distributivity, and it is a statement about whole lattices only.** Stanley (1988):
+   *"Young's lattice is the only 1-differential distributive lattice"*; Byrnes (2012) is
+   reported to have shown that Young's and Young–Fibonacci are the only 1-differential
+   lattices at all. *(Both statements taken from the Wikipedia article on differential
+   posets; **I read neither original**, and my argument uses only the first.)* **What
+   Stanley licenses:** among differential posets that are distributive lattices, Young's is
+   the only one. T8 measures the illustrative case: Young–Fibonacci, the other known
+   1-differential lattice, is not distributive as a whole (5 of its 33 intervals to rank 6
+   fail, smallest witness `w = 221`).
+
+   > **RE-SCOPED (mg-41aa, landing mg-6ad0's X4).** This item previously continued: *"Brown
+   > §4.3's hypothesis is `distributive lattice`, and a differential poset that is a
+   > distributive lattice is Young's — so Young's is the **only** differential poset his
+   > construction can consume, whatever the full classification of differential lattices
+   > turns out to be."* **At the level of whole differential posets that is true and
+   > empty:** Brown §4.3's hypothesis is a **finite** distributive lattice, and no
+   > differential poset is finite — item 1 above says exactly that — so Brown consumes
+   > **none** of them, Young's lattice included. The level at which this document's own
+   > contact lives is the finite **intervals**, and there the claim is false: of the **33**
+   > intervals `[0̂, w]` of Young–Fibonacci with `rank(w) ≤ 6`, the **28** that T8 finds
+   > distributive are finite distributive lattices, so Brown §4.3 consumes each of them, and
+   > by Birkhoff each is `J(P)` for a poset `P` built from its join-irreducibles — **28
+   > reconstructions, 0 bad** (`code/branching_repair_41aa/out_r3_rescope.txt`, reproducing
+   > mg-6ad0's A6 on a third instrument, with T8's 33/5 and its witness `w = (2,2,1)`
+   > reproduced exactly). **T8's measurement is right; only its reading was too wide.**
 
 3. **The algebra is basic, not semisimple.** T5. The programme's invariant — restriction
    multiplicities between semisimple layers — has no counterpart, because there are no
@@ -125,9 +190,36 @@ named, with the measurement or the citation that carries it.
    bijectively act as the identity map. So at `P = D_λ` the monoid is not `S_n` and the
    walk is not transport of the `S_n`-action along the Gelfand–Tsetlin basis.
 
-5. **No tower.** §1, rows 1–2: Bergeron–Li's axiom (2) fails for the natural map, and the
-   `ℕ`-grading it presupposes forces disjoint powers, which lands back at the classical
-   antichain case.
+5. **No tower under §3.1's definition, and an OPEN QUESTION under §3.6's.** §1, rows 1–2:
+   Bergeron–Li's axiom (2) as stated in **§3.1, *"Tower of Algebras (Preserving unities)"***,
+   fails for the natural map — measured, on unitality, 0 of 64 — and the `ℕ`-grading it
+   presupposes forces disjoint powers `P_n = P_1^{⊔n}`.
+
+   > **RE-SCOPED (mg-41aa, landing mg-6ad0's X3).** This item previously read: *"**No
+   > tower.** §1, rows 1–2: Bergeron–Li's axiom (2) fails for the natural map, and the
+   > `ℕ`-grading it presupposes forces disjoint powers, which lands back at the classical
+   > antichain case."* The measurement is right and is not withdrawn. **The negative it
+   > licensed is not.** The cited paper contains **two** tower definitions, and this document
+   > tested one: §3.1 is titled *"Tower of Algebras (Preserving unities)"* and **§3.6 is
+   > titled *"Tower of Algebras (not Preserving unities)"***, taking as input *"an algebra
+   > injection not necessarily preserving unities"* — which is precisely what block
+   > concatenation was measured to be (injective, multiplicative, non-unital). All four
+   > strings located verbatim in the PDF, in both the printed spelling and the spelling a
+   > ligature-dropping extractor produces (`code/branching_repair_41aa/out_r3_rescope.txt`;
+   > mg-6ad0's `out_a6_quotes.txt` located three of them independently).
+   >
+   > **THE OPEN QUESTION, NAMED RATHER THAN ANSWERED.** *Does `A_n = kF(P_1^{⊔n})` satisfy
+   > Bergeron–Li's §3.6 conditions?* Conditions (3), (4) and (5) — projectivity of `A_{m+n}`
+   > over `A_m ⊗ A_n`, the idempotent condition, and the Mackey-type identity — are
+   > **untested by mg-af28, by mg-6ad0 and by mg-41aa**. Testing them is new mathematics,
+   > which every ticket in this lineage forbids, so **no verdict is manufactured here.** Row
+   > 3 of §3 is a **hedge, not a "no"** — the same repair mg-1953 correctly applied to row Q,
+   > and the reason this repair exists: a negative was licensed over a definition space of
+   > one, in a paper containing two, inside the very enumeration filed to cure a negative
+   > licensed over a candidate space of two.
+   >
+   > *The clause "which lands back at the classical antichain case" is separately wrong —
+   > `P_1` is arbitrary (mg-6ad0's X7) — and is **not** repaired here; see §9.*
 
 6. **The one bridge that does exist consumes the symmetry we do not have.** Bidigare's
    theorem — that for a finite Coxeter group `W` with reflection arrangement `A_W`, the
@@ -162,14 +254,14 @@ this table is the finding, not the headline.
 |---|---|---|---|---|
 | **1** | **FI-modules / representation stability** (Church–Ellenberg–Farb) | **no — not re-run here** | booked to E10 | mg-ebd8 searched it and reported no contact; outside this ticket's brief and not re-tested. Named so the space is complete |
 | **2** | **Deligne's `Rep(S_t)`** | **no — not re-run here** | booked to E10 | as above |
-| **3** | **Towers of algebras** (Bergeron–Li, `arXiv:math/0612170`; Bergeron–Lam–Li) | **yes** | **ADJACENT — axiom tested and failed** | axiom (2) quoted verbatim and tested: concatenation is injective and multiplicative but **not unital**, 0 of 64 (T7). The `ℕ`-grading forces disjoint powers. §1, §2.5 |
+| **3** | **Towers of algebras** (Bergeron–Li, `arXiv:math/0612170`; Bergeron–Lam–Li) | **yes — one of the paper's two definitions** | **ADJACENT — §3.1's axiom (2) fails on unitality; §3.6 weakens exactly that clause and was not evaluated** | axiom (2) of **§3.1** *("Preserving unities")* quoted verbatim and tested: concatenation is injective and multiplicative but **not unital**, 0 of 64 (T7). The `ℕ`-grading forces disjoint powers. **§3.6** *("not Preserving unities")* takes an injection *"not necessarily preserving unities"* as its input; its conditions (3),(4),(5) are untested by anyone and testing them is new mathematics. **This is a hedge, not a "no"** *(re-scoped by mg-41aa under mg-6ad0's X3; §1, §2.5)* |
 | **4** | **Stanley's differential posets** | **yes** | **NO CONTACT, with the theorem that says why** | finiteness (T3, 0 of 405) and Stanley's uniqueness theorem. This **upgrades** row K from *"empty"* to *"no, and here is why, and here is the one place where contact does exist"* |
 | **5** | **Fomin's dual graded graphs** | **yes** | **NO CONTACT** | same finiteness obstruction; and there is no second graph on our vertex set — the programme's content is a growth/RSK bijection, which needs the pair. Context on how rigid the structure is: Gaetz (`arXiv:1803.11168`) proves that for `r = 1` or `r` prime, *"wreath products of a fixed group with the symmetric groups are the only `r`-dual tower of groups"* |
 | **6** | **Okounkov–Vershik / Gelfand–Tsetlin** | **yes** | **ADJACENT — and it is the source of the one real contact** | OV needs semisimple inductive families (T5 refutes the hypothesis for us). What it supplies is the identification of `SYT(λ)` as the GT basis of `S^λ`, which is our state space at `P = D_λ`. §0 |
 | **7** | **Diagram algebras via Schur–Weyl** (partition, Brauer, Temperley–Lieb, rook) | **yes** | **NOT LOCATED** | these are centraliser algebras with diagram bases and multiplicity-carrying Bratteli diagrams; I located no order-cone, order-congruence or `P`-compatible-partition object among them. A search report, not a claim about the literature |
 | **8** | **Bratteli diagrams / AF algebras** in general | **yes** | **VACUOUS INSTANCE** | true and contentless; §2.7 |
 | **9** | **Fulman, *Commutation relations and Markov chains*** (`arXiv:0712.1375`), down-up chains on the Young, Schur and Kingman graphs | **yes** | **ADJACENT — different state space** | his chains move on the **vertices** of a branching graph, driven by the `U`/`D` operators; ours moves on the **maximal chains**. The Plancherel growth process is likewise a measure on paths, not a Markov chain on the set of paths |
-| **10** | **Okada algebras and the Okada monoid** (`arXiv:2404.16733`) | **yes** | **ADJACENT — the closest structural analogue found** | a *monoid* whose algebra tower has a differential poset (Young–Fibonacci) as its Bratteli diagram: the shape of the thing Daniel's question asks for. But it is a different monoid (aperiodic, a labelled Temperley–Lieb arc-diagram model), and the lattice it realises is the one Brown §4.3 provably cannot consume (T8). **Located from abstracts; not read** |
+| **10** | **Okada algebras and the Okada monoid** (`arXiv:2404.16733`) | **yes** | **ADJACENT — the closest structural analogue found** | a *monoid* whose algebra tower has a differential poset (Young–Fibonacci) as its Bratteli diagram: the shape of the thing Daniel's question asks for. It is a different monoid (aperiodic, a labelled Temperley–Lieb arc-diagram model). **Located from abstracts; not read.** *Re-scoped by mg-41aa under mg-6ad0's X4: this row previously added "and the lattice it realises is the one Brown §4.3 provably cannot consume (T8)". That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Brown §4.3 consumes them and each is a `J(P)`. Row 10 therefore has the **same index-set contact** this document headlines for Young's, on 28 of 33 intervals; what keeps it ADJACENT is that it is a different monoid, which is the reason above and not the withdrawn one.* |
 | **11** | **Gaetz, dual towers of groups** (`arXiv:1803.11168`) | **yes** | **CONTEXT, not contact** | rigidity of the dual-graded-graph structure; see row 5 |
 | **12** | **Bidigare–Solomon → `NSym`/`QSym` → the `0`-Hecke tower** | **yes** | **the one documented bridge, and it needs the symmetry we lose** | §2.6. This is the honest answer to *"is there a route from this family into the tower programme"*: yes, at the antichain end, and it dates from the 1990s (Bidigare's thesis; GKLLRT; Krob–Thibon) — *decades stated from the secondary literature, since I read none of the three* |
 
@@ -242,6 +334,16 @@ Ordered by how much I expect them to yield.
    `p,q ≥ 1`, is not an interval of Young's lattice. All three are one-liners, all three are
    flagged in place, and all three are the kind of thing this arc breaks on.
 
+   > **THIS ATTACK LANDED, AND IT WAS THE WORST FINDING IN THE DOCUMENT (mg-6ad0, landed by
+   > mg-41aa).** Of the three: (b) is correct and correctly used (brute force over all 87
+   > classes to `n = 5`, 0 counterexamples). (a) is correct **as a derivation** but is
+   > mis-used downstream in §2 item 5 — mg-6ad0's X7, **not repaired here**, §9. **(c) is
+   > FALSE**, and its second half is struck at §0 consequence 3: the grid *is* the interval
+   > `[(q), (q+p, q)]`. Only the first half of (c) survives — the grid *is* `J(C_p ⊔ C_q)`,
+   > re-verified for all 25 pairs `p, q ≤ 5`. **This is the second consecutive document in
+   > this arc in which beyond-brief material carries the worst finding**, and it was
+   > pre-filed here by name, which is the only reason it was cheap to find.
+
 6. **Attack the two verbatim quotations, because of how they were obtained.** Bergeron–Li's
    axiom (2) and Brown's *"they are all 1-dimensional"* were read out of the arXiv PDFs by
    the same Flate-decode-and-extract routine as `scan_brown.py`, **not** from a rendered
@@ -262,27 +364,38 @@ Ordered by how much I expect them to yield.
 | # | claim | status | scope |
 |---|---|---|---|
 | **B1** | `J(D_λ)` is the interval `[∅, λ]` of Young's lattice, by the map "ideal ↦ shape", and the maximal chains of `J(D_λ)` are `SYT(λ)` with `e(D_λ) = f^λ` | **MEASURED** | 44 partitions, `n ≤ 7`, order isomorphism checked on every pair in both directions, 0 bad; `f^λ` against an independently coded hook length formula, 0 bad |
-| **B2** | the posets `P` for which `J(P)` is an interval of Young's lattice are exactly the cell posets, and they are a vanishing fraction: 6/318 (`n=6`), 8/2 045 (`n=7`), 12/16 999 (`n=8`) | **MEASURED + CITED** | shape classes computed by canonical form; the `n ≥ 7` totals are **A000112, cited not computed**; `n ≤ 6` totals are enumerated here and agree with A000112 |
+| **B2** | the posets `P` for which `J(P)` is an interval `[μ, λ]` of Young's lattice are exactly the **SKEW** cell posets `λ/μ`, a vanishing fraction: **62/318** (`n=6`), **149/2 045** (`n=7`), **360/16 999** (`n=8`); those with `J(P) = [∅, λ]` are exactly the straight cell posets `D_λ`, 6/318, 8/2 045, 12/16 999 | **MEASURED both columns; the "exactly" now TESTED** | straight and skew classes by canonical form (T2, `n ≤ 6` here; `n = 7, 8` skew from `code/branching_repair_41aa`, agreeing with mg-6ad0). The "exactly" is tested **in both directions** in `r1_exactly.py`: for all **405** poset classes to `n ≤ 6` an isomorphism `J(P) → [μ, λ]` is **constructed and checked on every pair**, and no poset outside the skew class matches any interval of the right size (exhaustive to `n ≤ 5`). `n ≥ 7` totals are **A000112, cited not computed** |
+| **B2′** | *(the version this replaces, mg-6ad0's X1)* — B2 formerly read *"the posets `P` for which `J(P)` is an interval of Young's lattice are **exactly** the cell posets, … 6/318, 8/2 045, 12/16 999"* | **BROKEN — the "exactly" was FALSE and was never tested** | the 2-element antichain is not a `D_λ` and `J(it) = [(1), (2,1)]`; T2 measured `{canon(D_λ) : λ ⊢ n}` and nothing else. The three numbers were right about the straight class and understated the named class by 10× to 30× |
 | **B3** | no finite `J(P)` is a differential poset, and none is one even with the top rank exempted (bar the one-element poset) | **MEASURED, with positive controls** | 405 classes to `n ≤ 6`. Controls: Young's lattice and Young–Fibonacci both return `r = 1` in the same code path |
-| **B4** | of the two 1-differential lattices only Young's is distributive, so Brown §4.3 reaches the Young graph and no other | **MEASURED + CITED** | 30 Young intervals, 0 non-distributive; 33 Young–Fibonacci intervals, 5 non-distributive, witness `w = 221`. Stanley's and Byrnes's classification statements are **cited from a secondary source and not read** |
+| **B4** | **as whole lattices**: every interval `[∅, λ]` of Young's lattice is distributive and the Young–Fibonacci lattice is not, and Young's is the only *distributive* 1-differential lattice | **MEASURED + CITED** | 30 Young intervals, 0 non-distributive; 33 Young–Fibonacci intervals, 5 non-distributive, witness `w = 221` — all reproduced by mg-6ad0 and by mg-41aa. Stanley's and Byrnes's classification statements are **cited from a secondary source and not read** |
+| **B4′** | *(the reading this replaces, mg-6ad0's X4)* — B4 formerly concluded *"so Brown §4.3 reaches the Young graph and no other differential poset"* | **RE-SCOPED — true and empty at the level stated, false at the level that matters** | Brown §4.3 needs a **finite** distributive lattice and no differential poset is finite, so at whole-poset level it consumes none, Young's included. At interval level, **28 of 33** Young–Fibonacci intervals are distributive and each is `J(P)` for an explicitly constructed `P`, **0 bad** |
 | **B5** | `dim kF(P)/rad = |AC(P)|`, consistent with Brown's *"they are all 1-dimensional"* | **MEASURED** | trace-form rank in exact rational arithmetic; all 87 classes to `n ≤ 5` and 308 of 318 at `n = 6`, 0 bad. **The step from this to "all irreducibles are 1-dimensional" is Brown's theorem, cited, not re-derived here** |
 | **B6** | no move acts on `L(P)` bijectively without acting as the identity map | **MEASURED** | 6 197 moves over 87 classes to `n ≤ 5`, 0 |
-| **B7** | block concatenation `F(P) × F(Q) → F(P ⊔ Q)` is an injective semigroup homomorphism and is **not** unital, so it fails Bergeron–Li axiom (2) | **MEASURED + QUOTED** | 64 pairs, `|P|,|Q| ≤ 3`; axiom quoted verbatim from `arXiv:math/0612170` §3.1 |
+| **B7** | block concatenation `F(P) × F(Q) → F(P ⊔ Q)` is an injective semigroup homomorphism and is **not** unital, so it fails Bergeron–Li axiom (2) **of §3.1, *"Tower of Algebras (Preserving unities)"*** | **MEASURED + QUOTED** | 64 pairs, `|P|,|Q| ≤ 3`; axiom quoted verbatim from `arXiv:math/0612170` §3.1, quotation re-verified by mg-6ad0 and by mg-41aa |
+| **B7′** | *(the scope this adds, mg-6ad0's X3)* — the same paper's **§3.6, *"Tower of Algebras (not Preserving unities)"***, takes as input *"an algebra injection not necessarily preserving unities"*, which is what B7 measures concatenation to be | **QUOTED; the consequence is an OPEN QUESTION, not a verdict** | both section titles and the input clause located verbatim, in both spellings, on a third extractor. Bergeron–Li conditions (3),(4),(5) under the §3.6 weakening are **untested by anyone** and testing them is new mathematics. **B7 does not license a "no tower"; it licenses "§3.1's axiom fails"** |
 | **B8** | Brown (2000) contains none of the branching-graph vocabulary | **MEASURED** | keyword census of the arXiv PDF with five present-word controls, one of which (`left regular band`) failed on the first run because Brown hyphenates it, and was fixed in the scanner, not in the finding |
 | **B9** | the candidate space is the twelve programmes of §3; rows 1–2 were **not re-run**; rows 3–6, 8–12 were searched; row 7 is the least-searched | **REPORT ON A SEARCH** | not a claim about the literature. Queries were targeted, not exhaustive |
 | **B10** | the walk on `SYT(λ)` given by `P = D_λ` was **not located** in either literature | **REPORT ON A SEARCH** | explicitly **not** a novelty claim; §5 item 3 |
-| **NOT CLAIMED** | that anything here is new; that anything here is publishable; that the searches were exhaustive; anything about `λ₂`, `Δ_AT` or the pricing; anything about the `S_n`-structure carried on `SYT(λ)` interacting with the walk, which is untested | | |
+| **NOT CLAIMED** | that anything here is new; that anything here is publishable; that the searches were exhaustive; anything about `λ₂`, `Δ_AT` or the pricing; anything about the `S_n`-structure carried on `SYT(λ)` interacting with the walk, which is untested; **(mg-41aa)** that a tower of algebras exists over this family under Bergeron–Li §3.6, which is an open question and not a claim in either direction; that mg-6ad0's X5, X6 and X7 are answered here — they are not | | |
 
 ---
 
 ## 7. REPRODUCE
 
 ```
-cd code/branching_af28 && ./run_all.sh        # ~5 min, pure Python 3
+cd code/branching_af28      && ./run_all.sh   # ~6 min, pure Python 3
+cd code/branching_repair_41aa && ./run_all.sh # ~4 min, pure Python 3  (mg-41aa)
 ```
 
-Committed outputs: `out_selftest.txt` (27 assertions), `out_young.txt`, `out_branching.txt`,
+Committed outputs: `out_selftest.txt` (31 assertions), `out_young.txt`, `out_branching.txt`,
 `out_lrb_reps.txt`, `out_scan_brown.txt`. `scan_brown.py` is the only step needing network.
+
+mg-41aa's repair instrument is `code/branching_repair_41aa/` (36-assertion self-test,
+sharing no code with `branching_af28/` or `branching_audit_6ad0/`): `out_r1_exactly.txt`,
+`out_r1b_skew8.txt`, `out_r2_grid.txt`, `out_r3_rescope.txt`, `out_check_doc.txt`. The
+audit it lands is `docs/OneThird-Audit-mg-af28-Branching-Graphs.md` (mg-6ad0,
+`code/branching_audit_6ad0/`), and that battery was re-run **unmodified** against the
+repair — see `docs/OneThird-Branching-Graphs-Repair.md` §5.
 
 ---
 
@@ -295,10 +408,47 @@ Three things this document deliberately does **not** do.
   ledger row E10 now say of towers of algebras, Okounkov–Vershik and diagram algebras that
   they are *"claimed neither way — they were not searched"*. They have now been searched.
   Whether to fold this document's §3 back into row Q is pm-onethird's call, not mine.
-* It does **not** develop mathematics. Two elementary one-line derivations were needed to
-  test hypotheses and are flagged in place (§2.6, §1 row 2) and pre-filed for audit (§5
-  item 5). Everything else compares our objects against published descriptions of other
-  objects. *This is the instruction mg-ebd8 violated twice, in exactly this position, which
-  is why it is called out here rather than assumed.*
+* It does **not** develop mathematics. **Three** elementary one-line derivations were
+  needed to test hypotheses and are flagged in place (§2.6, §1 row 2, §0 consequence 3) and
+  pre-filed for audit (§5 item 5). Everything else compares our objects against published
+  descriptions of other objects. *This is the instruction mg-ebd8 violated twice, in exactly
+  this position, which is why it is called out here rather than assumed.* **(mg-41aa: this
+  bullet said "Two" while §5 item 5 listed three — the under-count is corrected, and the
+  third derivation is the one that turned out to be false. See §5 item 5 and §9.)**
 * It does **not** touch `STATE.md`, the semigroup note, `λ₂`, `Δ_AT` or the roadmap
   pricing.
+
+---
+
+## 9. WHAT mg-41aa's REPAIR DELIBERATELY LEFT OPEN
+
+mg-6ad0 raised seven items. This repair was scoped by the filing mayor to **four** — X1, X2
+(both BROKEN, both refuted by construction, both on the negative side) and X3, X4 (both
+re-scoped above). The remaining three are recorded here, unrepaired and with **no successor
+ticket**, so that pm-onethird makes the call rather than the record losing them:
+
+* **X5 — ledger rows B6 and B7 are booked MEASURED with sample sizes that cannot do any
+  work.** Both answers are forced for every poset of every size: `F(P)` is a band, so an
+  idempotent bijection of a finite set is the identity (B6); and concatenation sends
+  `(1_P, 1_Q)` to a two-block move, which is `1_{P⊔Q}` only if a block is empty (B7). Both
+  arguments **are** stated in prose in `out_young.txt` and `out_branching.txt`; the defect
+  is that §6 books them as evidence. This is mg-3b51's R1d finding one document later.
+* **X6 — B8's five present-word controls could not have caught B8's one documented failure
+  mode.** The extractor drops `fi`/`ff` ligatures (`finite` → `nite`, 57 times); 2 of the 12
+  absent keywords bear a ligature and 0 of the 5 controls does, so a genuine *"differential"*
+  in Brown would have scored 0 with every control green. **B8's conclusion survives** a
+  ligature-aware re-run — all twelve keywords absent in both spellings — and mg-41aa's own
+  quotation search (§2 item 5) is ligature-aware for exactly this reason. It is the
+  **warrant** in B8's scope column that is wrong, not the finding.
+* **X7 — §2 item 5's clause "which lands back at the classical antichain case" drops a
+  condition its own §1 row 2 states.** The derivation forces `P_n = P_1^{⊔n}` for an
+  **arbitrary** finite `P_1`; only `P_1` = a point gives the antichain sequence. The clause
+  is left standing in the struck text quoted at §2 item 5 and is flagged there.
+
+**And the pattern the audit named, which is the reason this repair exists at all.** mg-af28
+was filed because mg-d673 found a *"no"* licensed over a candidate space of **two**. Inside
+the enumeration written to cure that, X3 is a *"no"* licensed over a definition space of
+**one, in a paper containing two** — the ticket's own defect recurring in its own apparatus.
+And X2, the worst finding, sits in beyond-brief material that this document flagged as its
+own and pre-filed by name: the second consecutive generation in this arc where the unbriefed
+one-liners are the least controlled part of the deliverable.

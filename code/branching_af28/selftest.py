@@ -10,6 +10,7 @@ import sys
 from core_af28 import (poset_classes, moves_from_chains, moves_bruteforce, AC,
                        linear_extensions, ideals_of, partitions, conj,
                        cell_poset, sub_shapes, hook_length_formula, canon,
+                       skew_cell_poset, skew_shape_classes,
                        young_fibonacci, move_product, act)
 
 N = 0
@@ -90,11 +91,25 @@ def main():
           sum(hook_length_formula(l) ** 2 for l in partitions(6)), 720)
     print()
 
-    print("-- T2: shape posets among all posets ----------------------------------")
+    print("-- T2: straight and skew shape posets among all posets ----------------")
     shp = [len({canon(cell_poset(lam)[0]) for lam in partitions(n)})
            for n in range(1, 9)]
-    check("shape-poset classes n=1..8", shp, [1, 1, 2, 3, 4, 6, 8, 12])
-    check("shape posets at n=6 out of 318", (shp[5], 318), (6, 318))
+    check("STRAIGHT shape-poset classes n=1..8", shp, [1, 1, 2, 3, 4, 6, 8, 12])
+    check("straight shape posets at n=6 out of 318", (shp[5], 318), (6, 318))
+    # mg-41aa, X1 of mg-6ad0's audit: the class "J(P) is an interval of Young's
+    # lattice" is the SKEW shapes, not the straight ones, and nothing in this
+    # directory used to test the difference.  n <= 6 only; n = 7, 8 cost minutes
+    # and hours under this file's n! canonical form and are cited in T2 with
+    # their provenance.
+    skw = [len(skew_shape_classes(n)) for n in range(1, 7)]
+    check("SKEW shape-poset classes n=1..6", skw, [1, 2, 5, 11, 26, 62])
+    check("skew shape posets at n=6 out of 318", (skw[5], 318), (62, 318))
+    check("at n <= 3 EVERY poset is a skew shape poset",
+          skw[:3], [len(poset_classes(n)) for n in range(1, 4)])
+    check("the 2-element antichain is a skew shape but not a straight one",
+          (canon(skew_cell_poset((2, 1), (1,))[0]) == canon((0, 0)),
+           canon((0, 0)) in {canon(cell_poset(l)[0]) for l in partitions(2)}),
+          (True, False))
     print()
 
     print("-- T3: differential condition -----------------------------------------")

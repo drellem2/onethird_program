@@ -22,9 +22,13 @@ SELF-TEST for code/branching_af28
   ok   f^(4,2,1) = 35                                         35
   ok   sum_lambda (f^lambda)^2 = n! for n=6                   720
 
--- T2: shape posets among all posets ----------------------------------
-  ok   shape-poset classes n=1..8                             [1, 1, 2, 3, 4, 6, 8, 12]
-  ok   shape posets at n=6 out of 318                         (6, 318)
+-- T2: straight and skew shape posets among all posets ----------------
+  ok   STRAIGHT shape-poset classes n=1..8                    [1, 1, 2, 3, 4, 6, 8, 12]
+  ok   straight shape posets at n=6 out of 318                (6, 318)
+  ok   SKEW shape-poset classes n=1..6                        [1, 2, 5, 11, 26, 62]
+  ok   skew shape posets at n=6 out of 318                    (62, 318)
+  ok   at n <= 3 EVERY poset is a skew shape poset            [1, 2, 5]
+  ok   the 2-element antichain is a skew shape but not a straight one (True, False)
 
 -- T3: differential condition -----------------------------------------
   ok   Young's lattice to rank 8: differential below the top, r 1
@@ -46,5 +50,5 @@ SELF-TEST for code/branching_af28
   ok   of those, concatenation unital                         0
 
 ==============================================================================
-27 assertions, 0 failures
+31 assertions, 0 failures
 ==============================================================================

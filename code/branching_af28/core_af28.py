@@ -284,6 +284,75 @@ def cell_poset(lam):
     return tuple(up), cells
 
 
+def contained(mu, lam):
+    """Diagram containment mu subset lam."""
+    return len(mu) <= len(lam) and all(mu[i] <= lam[i] for i in range(len(mu)))
+
+
+def skew_cell_poset(lam, mu):
+    """The cell poset of the SKEW shape lam/mu: the cells of lam not in mu,
+    ordered componentwise.  With mu = () this is `cell_poset(lam)`.
+
+    Added by mg-41aa, repairing X1 of mg-6ad0's audit.  The posets P for which
+    J(P) is an interval [mu, lambda] of Young's lattice are these, not just the
+    straight ones -- see T2.
+    """
+    assert contained(mu, lam), (mu, lam)
+    cells = [(i, j) for i, p in enumerate(lam)
+             for j in range(mu[i] if i < len(mu) else 0, p)]
+    n = len(cells)
+    up = []
+    for a in range(n):
+        r = 0
+        ia, ja = cells[a]
+        for b in range(n):
+            ib, jb = cells[b]
+            if (ia, ja) != (ib, jb) and ia <= ib and ja <= jb:
+                r |= 1 << b
+        up.append(r)
+    return tuple(up), cells
+
+
+def partitions_in_box(b):
+    """Every partition whose diagram fits inside the b x b box."""
+    out = set()
+
+    def rec(i, cap, cur):
+        if i == b:
+            out.add(tuple(x for x in cur if x > 0))
+            return
+        for v in range(min(cap, b), -1, -1):
+            cur.append(v)
+            rec(i + 1, v, cur)
+            cur.pop()
+    rec(0, b, [])
+    return sorted(out, key=lambda x: (sum(x), x))
+
+
+def skew_shape_classes(n):
+    """Isomorphism classes of skew cell posets with n cells, as canon -> shape.
+
+    A skew diagram with n cells has at most n nonempty rows and at most n
+    nonempty columns, so after deleting empty rows and columns it sits inside
+    the n x n box.  mg-41aa's r1_exactly.py checks that bound by growing the
+    box, and mg-6ad0's a2_intervals.py enumerates the same class by the same
+    bound on a different instrument.
+    """
+    seen = {}
+    for lam in partitions_in_box(n):
+        t = sum(lam) - n
+        if t < 0:
+            continue
+        for mu in (partitions(t) if t else [()]):
+            if not contained(mu, lam):
+                continue
+            up, cells = skew_cell_poset(lam, mu)
+            if len(up) != n:
+                continue
+            seen.setdefault(canon(up), (lam, mu))
+    return seen
+
+
 def sub_shapes(lam):
     """All partitions mu with mu contained in lambda (the interval [0, lambda]
     of Young's lattice), built directly from containment of diagrams."""
