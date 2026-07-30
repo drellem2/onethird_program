@@ -1,0 +1,32 @@
+==============================================================================
+1.  the §9.4 sufficient test on A_6 -- one n past every population
+    ledger row B6 cites (run_lrb.py stops at n=5; mg-86a3's n=6
+    pass is capped at |L(P)| <= 14 and A_6 has |L| = 720)
+==============================================================================
+A_3 : |L|=   6  faces=    13  candidate faces=1 [([0, 1, 2],)]
+      directed AT edges=12  reachable by a candidate=0  UNREACHABLE=12  ->  NOT a Brown walk
+A_4 : |L|=  24  faces=    75  candidate faces=1 [([0, 1, 2, 3],)]
+      directed AT edges=72  reachable by a candidate=0  UNREACHABLE=72  ->  NOT a Brown walk
+A_5 : |L|= 120  faces=   541  candidate faces=1 [([0, 1, 2, 3, 4],)]
+      directed AT edges=480  reachable by a candidate=0  UNREACHABLE=480  ->  NOT a Brown walk
+A_6 : |L|= 720  faces=  4683  candidate faces=1 [([0, 1, 2, 3, 4, 5],)]
+      directed AT edges=3600  reachable by a candidate=0  UNREACHABLE=3600  ->  NOT a Brown walk
+
+==============================================================================
+2.  the clause is not merely computational: it is a two-line THEOREM
+    for every n >= 3.  Checked mechanically on n = 3..7:
+    min over all k>=2 ordered partitions of sum_{i<j}|B_i||B_j|,
+    and whether the reversing chamber realises exactly that many
+    inversions (>= 2 means x.c is not c and not an AT neighbour).
+==============================================================================
+    n=3  min cross-block pairs = 2 (>=2: True)   witness mismatches = 0
+    n=4  min cross-block pairs = 3 (>=2: True)   witness mismatches = 0
+    n=5  min cross-block pairs = 4 (>=2: True)   witness mismatches = 0
+    n=6  min cross-block pairs = 5 (>=2: True)   witness mismatches = 0
+    n=7  min cross-block pairs = 6 (>=2: True)   witness mismatches = 0
+
+    => for every n >= 3 the identity face is the ONLY candidate, so
+       no AT edge is reachable and the lazy AT walk is NOT a Brown
+       walk on A_n.  The row's 'including all antichains n >= 3' is
+       TRUE and is a theorem; the label PROVEN-by-computation on a
+       n <= 5 population is the wrong one in BOTH directions.

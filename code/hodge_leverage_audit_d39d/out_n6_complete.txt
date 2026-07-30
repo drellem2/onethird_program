@@ -1,0 +1,31 @@
+n=2  posets=  2   NOT a Brown walk:   0   vacuous:  1   undecided by this test:  1
+      undecided: |L(P)|=  2  candidate faces=3     
+n=3  posets=  5   NOT a Brown walk:   2   vacuous:  1   undecided by this test:  2
+      undecided: |L(P)|=  2  candidate faces=6     0<1 0<2
+      undecided: |L(P)|=  2  candidate faces=6     0<2 1<2
+n=4  posets= 16   NOT a Brown walk:  11   vacuous:  1   undecided by this test:  4
+      undecided: |L(P)|=  2  candidate faces=12    0<1 0<2 1<3 2<3
+      undecided: |L(P)|=  2  candidate faces=12    0<1 1<2 1<3
+      undecided: |L(P)|=  2  candidate faces=12    0<2 1<2 2<3
+      undecided: |L(P)|=  4  candidate faces=10    0<2 0<3 1<2 1<3
+n=5  posets= 63   NOT a Brown walk:  55   vacuous:  1   undecided by this test:  7
+      undecided: |L(P)|=  2  candidate faces=24    0<1 0<2 1<3 2<3 3<4
+      undecided: |L(P)|=  2  candidate faces=24    0<1 1<2 1<3 2<4 3<4
+      undecided: |L(P)|=  2  candidate faces=24    0<1 1<2 2<3 2<4
+      undecided: |L(P)|=  2  candidate faces=24    0<2 1<2 2<3 3<4
+      undecided: |L(P)|=  4  candidate faces=20    0<1 0<2 1<3 1<4 2<3 2<4
+      undecided: |L(P)|=  4  candidate faces=20    0<2 0<3 1<2 1<3 2<4 3<4
+      undecided: |L(P)|=  4  candidate faces=20    0<2 1<2 2<3 2<4
+n=6  posets=318   NOT a Brown walk: 305   vacuous:  1   undecided by this test: 12
+      undecided: |L(P)|=  2  candidate faces=48    0<1 0<2 1<3 2<3 3<4 4<5
+      undecided: |L(P)|=  2  candidate faces=48    0<1 1<2 1<3 2<4 3<4 4<5
+      undecided: |L(P)|=  2  candidate faces=48    0<1 1<2 2<3 2<4 3<5 4<5
+      undecided: |L(P)|=  2  candidate faces=48    0<1 1<2 2<3 3<4 3<5
+      undecided: |L(P)|=  2  candidate faces=48    0<2 1<2 2<3 3<4 4<5
+      undecided: |L(P)|=  4  candidate faces=40    0<1 0<2 1<3 1<4 2<3 2<4 3<5 4<5
+      undecided: |L(P)|=  4  candidate faces=40    0<1 0<2 1<3 2<3 3<4 3<5
+      undecided: |L(P)|=  4  candidate faces=40    0<1 1<2 1<3 2<4 2<5 3<4 3<5
+      undecided: |L(P)|=  4  candidate faces=40    0<2 0<3 1<2 1<3 2<4 3<4 4<5
+      undecided: |L(P)|=  4  candidate faces=40    0<2 1<2 2<3 2<4 3<5 4<5
+      undecided: |L(P)|=  4  candidate faces=40    0<2 1<2 2<3 3<4 3<5
+      undecided: |L(P)|=  8  candidate faces=28    0<2 0<3 1<2 1<3 2<4 2<5 3<4 3<5

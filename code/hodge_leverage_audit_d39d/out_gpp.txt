@@ -1,0 +1,35 @@
+posets up to isomorphism, n = 0..6: 1 1 2 5 16 63 318   (A000112: 1 1 2 5 16 63 318)
+
+n=2 done
+n=3 done
+n=4 done
+n=5 done
+n=6 done
+
+==============================================================================
+(a) PER-FACE reading -- 'one block induces an antichain of size >= 3
+    therefore lambda_2(link sigma) >= 1/2', which is what §6's
+    sentence argues:
+    faces with such a block: 7989
+    faces where lambda_2(link) < 1/2: 3901   <-- COUNTEREXAMPLES
+      n=5 rel=[]  i=0  lambda_2=0.250000  blocks=['0b11', '0b11100']
+      n=5 rel=[]  i=0  lambda_2=0.250000  blocks=['0b101', '0b11010']
+      n=5 rel=[]  i=0  lambda_2=0.250000  blocks=['0b110', '0b11001']
+      n=5 rel=[]  i=0  lambda_2=0.250000  blocks=['0b1001', '0b10110']
+      n=5 rel=[]  i=0  lambda_2=0.250000  blocks=['0b1010', '0b10101']
+      n=5 rel=[]  i=0  lambda_2=0.250000  blocks=['0b1100', '0b10011']
+      n=5 rel=[]  i=0  lambda_2=0.250000  blocks=['0b10001', '0b1110']
+      n=5 rel=[]  i=0  lambda_2=0.250000  blocks=['0b10010', '0b1101']
+
+(b) PER-LEVEL reading -- ledger row G'' as written:
+    (poset, level) pairs having such a face: 754
+    of those with gamma_i < 1/2: 55
+      n=5 rel=[(0, 3), (0, 4), (1, 3), (1, 4), (2, 3), (2, 4)]  i=0  gamma=0.250000
+      n=5 rel=[(0, 3), (0, 4), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]  i=0  gamma=0.250000
+      n=5 rel=[(0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4)]  i=0  gamma=0.250000
+      n=5 rel=[(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4)]  i=0  gamma=0.250000
+      n=6 rel=[(0, 4), (0, 5), (1, 4), (1, 5), (2, 4), (2, 5), (3, 4), (3, 5)]  i=0  gamma=0.333333
+      n=6 rel=[(0, 4), (0, 5), (1, 4), (1, 5), (2, 4), (2, 5), (3, 4), (3, 5), (4, 5)]  i=0  gamma=0.333333
+      n=6 rel=[(0, 3), (0, 4), (0, 5), (1, 4), (1, 5), (2, 4), (2, 5), (3, 5)]  i=0  gamma=0.408367
+      n=6 rel=[(0, 3), (0, 4), (0, 5), (1, 4), (1, 5), (2, 4), (2, 5), (3, 5), (4, 5)]  i=0  gamma=0.408367
+==============================================================================

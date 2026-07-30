@@ -1,0 +1,26 @@
+==============================================================================
+V_k IS A BROWN WALK FOR EVERY k -- explicit witness, exact rationals
+(the deliverable and STATE.md say 'positive for every k TESTED' and
+ k tested = 1,2,3,4, while calling the family INFINITE / UNBOUNDED)
+==============================================================================
+  k    n   |L(P)|   AT graph = Q_k   witness weights sum to 1   sum_x w(x) T_x == P_lazy
+  1    2        2   True              True (nonneg: True)        True
+  2    4        4   True              True (nonneg: True)        True
+  3    6        8   True              True (nonneg: True)        True
+  4    8       16   True              True (nonneg: True)        True
+  5   10       32   True              True (nonneg: True)        True
+  6   12       64   True              True (nonneg: True)        True
+  7   14      128   True              True (nonneg: True)        True
+  8   16      256   True              True (nonneg: True)        True
+
+==============================================================================
+So V_k is positive for EVERY k, by a witness that is uniform in k --
+a one-line proof, not four data points.  Both directions are wrong
+in the landed text:
+  * 'positive for every k TESTED' and 'PROVEN ... for k <= 4' are
+    UNDER-claims -- the statement is a theorem;
+  * 'the positive class is UNBOUNDED' / 'the INFINITE family V_k' are
+    OVER-claims relative to the evidence actually cited (k <= 4),
+    and they carry the MAJOR finding: 'genuine counterexamples, an
+    infinite family of them, not a coverage gap'.
+==============================================================================
