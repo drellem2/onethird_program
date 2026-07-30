@@ -60,6 +60,7 @@ from posets import all_posets, POSET_COUNTS, cover_string
 
 FAIL = []
 CANNOT_FAIL = []
+ROW_NAMES = []      # every row's printed name, for the artifact check in main()
 
 
 def score(ok, cannot_fail):
@@ -80,6 +81,7 @@ def check(name, ok, detail="", cannot_fail=False):
     """
     status = score(ok, cannot_fail)
     print("  [%s] %s%s" % (status, name, ("  -- " + detail) if detail else ""))
+    ROW_NAMES.append(name)
     if not ok:
         FAIL.append(name)
     elif cannot_fail:
@@ -121,10 +123,22 @@ def scoring_self_test():
     behaviour (it labelled a tautological row PASS, and printed ALL CONTROLS
     PASS over it).  The other three pin behaviour that must not change -- a real
     failure still reports first and exits nonzero, a false tautology is still a
-    failure, and a clean run still reaches the ALL CONTROLS PASS bottom line.
+    failure, and a clean run still reaches the all-pass bottom line.
+
+    THE ROW NAMES BELOW MUST NOT CONTAIN THE BANNER LITERAL (mg-f7bc F5, landed
+    by mg-f2e1).  As first written they did, so this self-test put two
+    [PASS]-prefixed copies of the all-pass banner into the first five lines of
+    `controls_output.txt` -- above a bottom line that explicitly denies it.  Any
+    grep for the banner on the artifact then returned two false positives before
+    the one true answer, i.e. the A4 repair reintroduced, in the artifact, the
+    exact reads-as-covered defect it exists to remove: output text claiming more
+    than the code that prints it verifies.  The assertions still compare against
+    `banner`; only the printed NAME is indirect, so the artifact contains the
+    string once and only where it is true.
     """
     print("CONTROL ON THE SCORING -- a tautological row must not read as a pass")
     banner = "ALL CONTROLS PASS"
+    banner_name = "the all-pass banner"          # never the literal; see above
     taut_lines, taut_code = summarise([], ["a row that cannot fail"])
     clean_lines, clean_code = summarise([], [])
     fail_lines, fail_code = summarise(["a real failure"], ["a row that cannot fail"])
@@ -133,9 +147,9 @@ def scoring_self_test():
           score(True, True) == "CANNOT FAIL" and score(True, False) == "PASS")
     check("a cannot-fail row whose reported fact is FALSE is still a %r"
           % score(False, True), score(False, True) == "FAIL")
-    check("a cannot-fail row suppresses the %r bottom line" % banner,
+    check("a cannot-fail row keeps %s out of the bottom line" % banner_name,
           banner not in "\n".join(taut_lines) and taut_code == 0)
-    check("with no cannot-fail row the bottom line is %r" % banner,
+    check("with no cannot-fail row the bottom line IS %s" % banner_name,
           clean_lines == [banner] and clean_code == 0)
     check("a real failure still exits nonzero and is reported first",
           fail_code == 1 and fail_lines[0].startswith("CONTROLS FAILED"))
@@ -1040,6 +1054,37 @@ def negative_control_incidence(nmax):
           "unscored.")
 
 
+def artifact_banner_check():
+    """No control row may print the all-pass banner in its own text.
+
+    Added by mg-f2e1 from the mg-f7bc audit's F5.  The A4 scoring repair
+    (mg-1319) suppressed the banner in the BOTTOM LINE and then emitted it twice
+    in `scoring_self_test`'s row names, on [PASS]-prefixed lines four lines from
+    the top of `controls_output.txt`, above a bottom line reading "...is NOT 'all
+    controls pass'".  Pre-repair the string occurred exactly once in the
+    artifact, as the true bottom line; after the repair a grep for it returned
+    two false positives first.
+
+    Scoped exactly: this checks the row NAMES this run printed, which is what a
+    grep of the artifact reads.  It does not police `detail` strings, the section
+    headings, or this file's own prose -- so it makes the artifact's occurrences
+    of the banner exactly the bottom line's, and claims nothing further.
+
+    The offender report MASKS the banner rather than quoting it.  A control that
+    printed the offending text verbatim would put the string back into the
+    artifact on precisely the run that objects to it, which is the defect one
+    level up.
+    """
+    print("CONTROL ON THE ARTIFACT -- no row may print the banner it denies")
+    banner = "ALL CONTROLS PASS"
+    mask = "<all-pass-banner>"
+    offenders = [n.replace(banner, mask) for n in ROW_NAMES if banner in n]
+    check("no control row's own text contains the %d-char all-pass banner literal"
+          % len(banner), not offenders,
+          "rows scanned: %d; offending rows: %s (banner masked as %s)"
+          % (len(ROW_NAMES), offenders if offenders else "none", mask))
+
+
 def main():
     nmax_cheap = int(sys.argv[1]) if len(sys.argv) > 1 else 5
     scoring_self_test()
@@ -1051,6 +1096,7 @@ def main():
     negative_control_identity(min(nmax_cheap, 5))
     negative_control_construction(min(nmax_cheap, 5))
     negative_control_incidence(min(nmax_cheap, 5))
+    artifact_banner_check()
     print()
     lines, code = summarise(FAIL, CANNOT_FAIL)
     for line in lines:
