@@ -1,0 +1,77 @@
+==========================================================================
+c3  WITHDRAWAL COMPLETENESS, D10's STATUS, AND THE SURVIVAL OF THE
+    NEAR-MISS DISCLOSURE
+==========================================================================
+
+(1) IS THE WITHDRAWAL STATED AS A WITHDRAWAL?
+
+    [ok] the word WITHDRAWN appears in the section-0 banner             pass
+    [ok] the separating example is called WITHDRAWN, not refined/clarified pass
+    [ok] the withdrawal is NOT dressed as a refinement                  pass
+    [ok] D2 in the claim ledger is struck through and marked WITHDRAWN  pass
+    [ok] section 8 reports it as a withdrawal, 'not as a refinement, not as a clarification' pass
+
+(2) IS THE VERDICT ATTRIBUTED TO THE THEOREM?
+
+    [ok] section 0 says the verdict survives ON THE THEOREM and not on the builds pass
+    [ok] the Wedderburn equivalence is stated as the basis              pass
+    [ok] D4's status says its basis is corrected and rests on the QUOTED THEOREMS pass
+    [ok] section 0 says the 2x2 table is not the evidence for the verdict pass
+
+(3) IS THE WITHDRAWN CLAIM STILL ASSERTED ANYWHERE -- PROSE OR INSTRUMENT?
+
+    occurrences of a withdrawn phrase: 8, population: 16 files (the delivered document plus every .py/.txt/.md/.sh in code/branching_locate_db09/), searched for 5 phrases
+    the phrases: 'same multiplicity-free graph at each'; 'held fixed down that column'; 'held FIXED'; 'MEASURED (not cited)'; 'measured (not cited)'
+    a marked occurrence is one with a withdrawal/correction marker within
+    12 lines either side; the markers are: corrected, failing phrase, no longer, used to read, used to say, was *asserted*, was asserted, was wrong, what was claimed, withdraw, wrong
+    [ok] every occurrence sits inside a withdrawal or correction        pass
+
+(4) DOES D10 READ AS A CONJECTURE?
+
+    [ok] the D10 ledger row exists                                      pass
+    [ok] the D10 ledger row's status says CONJECTURE and NOT A RESULT   pass
+    [ok] section 2 row 2's verdict says CONJECTURED, not 'contains both' pass
+    [ok] the section-0 deliverable block is headed as a conjecture      pass
+    [ok] the answer to the umbrella question is stated as 'open', not 'yes' pass
+    [ok] no sentence still asserts kF(P) IS quasi-hereditary without a hedge pass
+    [ok] 'what would establish it' is stated as concrete numbered steps (>= 3) pass
+         steps found: 4
+    [ok] step 1 is READ PUTCHA                                          pass
+
+(5) IS THE RETRACTION RECORDED IN THE DOCUMENT ITSELF?
+
+    [ok] the retracting commit hash f4eaea6 is named in the document    pass
+    [ok] the delivery time 19:50 is in the document                     pass
+    [ok] the retraction time 20:45 is in the document                   pass
+    [ok] the document says a retraction living only in mail/roadmap is not one pass
+    [ok] the retraction is recorded at BOTH the section-0 banner and D10 in full pass
+
+(6) ARE THE OTHER UNVERIFIED ITEMS MARKED, NOT SILENTLY RETAINED?
+
+    [ok] the n = 6 95.7% figure is marked as still arithmetic / not re-derived pass
+    [ok] 'a band is a regular monoid' is marked NOT CHECKED and owned   pass
+    [ok] CMPX (A2)(ii), (A4), (A5), (A6) are marked untested            pass
+    [ok] the Putcha characteristic hypothesis is marked NOT VERIFIED    pass
+    [ok] Putcha is marked NOT read                                      pass
+    [ok] T1a's 'iff' is named as open and NOT repaired                  pass
+    [ok] section 1's unconditional VO Prop 1.4 reading is named as open pass
+    [ok] D5's 'each listed with its size' is named as open              pass
+    [ok] section 7's count of one-line derivations is named as open     pass
+
+(7) DID THE NEAR-MISS DISCLOSURE SURVIVE THE REPAIR?
+    A DELETION TEST: every sentence of the PRE-REPAIR section-4 item 3
+    must still be present in the repaired document, verbatim.
+
+    sentences in the PRE-REPAIR item 3: 6, population: every sentence of item 3 at 03d7f91 longer than 25 characters
+    [ok] every pre-repair sentence of item 3 survives verbatim          pass
+    [ok] the phrase 'its dimension shadow' survives                     pass
+    [ok] the question 'whether that shadow is enough' survives          pass
+    [ok] item 3 now carries its OUTCOME appended in place, not a rewrite pass
+    [ok] the document says deleting the disclosure would be a loss      pass
+    [ok] all 6 pre-filed attack items survive (none deleted)            pass
+         old ['1', '2', '3', '4', '5', '6'] new ['1', '2', '3', '4', '5', '6']
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the git reads and section locations this script needs
+FINDINGS: 0, population: the 38 named text checks above
+TOTAL BAD: 0

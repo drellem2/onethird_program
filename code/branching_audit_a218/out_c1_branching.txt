@@ -1,0 +1,149 @@
+==========================================================================
+c1  THE BRANCHING GRAPH, MEASURED IN EVERY CELL, ON A THIRD INSTRUMENT
+==========================================================================
+
+Vershik-Okounkov's definition, which is the definition in play because it is
+the one the target document quotes: at level n the VERTICES are the
+irreducible modules of the n-th algebra and the EDGES are the restriction
+multiplicities.  Graham-Lehrer: the irreducibles of TL_n(beta) are the
+non-zero L(n,p) = V(n,p)/rad<,>.
+
+Multiplicities are recovered from characters -- in characteristic 0 the
+trace functions of pairwise non-isomorphic simples are linearly independent
+-- and UNIQUENESS, INTEGRALITY, NON-NEGATIVITY and
+sum_q m_q dim L(n-1,q) = dim L(n,p) are all checked here, not assumed.
+
+(i)  THE VERTEX SET AT EVERY LEVEL OF EVERY PARAMETER
+     printed as the SET of labelled vertices p:dim L(n,p), not as a count
+
+  beta = 3
+    n=1  count 1   set { p=0:dim 1 }
+    n=2  count 2   set { p=0:dim 1, p=1:dim 1 }
+    n=3  count 2   set { p=0:dim 1, p=1:dim 2 }
+    n=4  count 3   set { p=0:dim 1, p=1:dim 3, p=2:dim 2 }
+    n=5  count 3   set { p=0:dim 1, p=1:dim 4, p=2:dim 5 }
+    n=6  count 4   set { p=0:dim 1, p=1:dim 5, p=2:dim 9, p=3:dim 5 }
+
+  beta = 2
+    n=1  count 1   set { p=0:dim 1 }
+    n=2  count 2   set { p=0:dim 1, p=1:dim 1 }
+    n=3  count 2   set { p=0:dim 1, p=1:dim 2 }
+    n=4  count 3   set { p=0:dim 1, p=1:dim 3, p=2:dim 2 }
+    n=5  count 3   set { p=0:dim 1, p=1:dim 4, p=2:dim 5 }
+    n=6  count 4   set { p=0:dim 1, p=1:dim 5, p=2:dim 9, p=3:dim 5 }
+
+  beta = 1
+    n=1  count 1   set { p=0:dim 1 }
+    n=2  count 2   set { p=0:dim 1, p=1:dim 1 }
+    n=3  count 2   set { p=0:dim 1, p=1:dim 1 }
+    n=4  count 3   set { p=0:dim 1, p=1:dim 3, p=2:dim 1 }
+    n=5  count 3   set { p=0:dim 1, p=1:dim 4, p=2:dim 1 }
+    n=6  count 4   set { p=0:dim 1, p=1:dim 4, p=2:dim 9, p=3:dim 1 }
+
+  beta = 0
+    n=1  count 1   set { p=0:dim 1 }
+    n=2  count 1   set { p=0:dim 1 }
+    n=3  count 2   set { p=0:dim 1, p=1:dim 2 }
+    n=4  count 2   set { p=0:dim 1, p=1:dim 2 }
+    n=5  count 3   set { p=0:dim 1, p=1:dim 4, p=2:dim 5 }
+    n=6  count 3   set { p=0:dim 1, p=1:dim 4, p=2:dim 5 }
+
+(ii) THE EDGES -- [L(n,p) restricted to TL_{n-1} : L(n-1,q)]
+     EVERY ordered pair (p,q), zeros included
+
+  ---- beta = 3 ----
+    L(2,0) dim 1  ->  [L(1,0)]=1
+    L(2,1) dim 1  ->  [L(1,0)]=1
+    L(3,0) dim 1  ->  [L(2,0)]=1  [L(2,1)]=0
+    L(3,1) dim 2  ->  [L(2,0)]=1  [L(2,1)]=1
+    L(4,0) dim 1  ->  [L(3,0)]=1  [L(3,1)]=0
+    L(4,1) dim 3  ->  [L(3,0)]=1  [L(3,1)]=1
+    L(4,2) dim 2  ->  [L(3,0)]=0  [L(3,1)]=1
+    L(5,0) dim 1  ->  [L(4,0)]=1  [L(4,1)]=0  [L(4,2)]=0
+    L(5,1) dim 4  ->  [L(4,0)]=1  [L(4,1)]=1  [L(4,2)]=0
+    L(5,2) dim 5  ->  [L(4,0)]=0  [L(4,1)]=1  [L(4,2)]=1
+    L(6,0) dim 1  ->  [L(5,0)]=1  [L(5,1)]=0  [L(5,2)]=0
+    L(6,1) dim 5  ->  [L(5,0)]=1  [L(5,1)]=1  [L(5,2)]=0
+    L(6,2) dim 9  ->  [L(5,0)]=0  [L(5,1)]=1  [L(5,2)]=1
+    L(6,3) dim 5  ->  [L(5,0)]=0  [L(5,1)]=0  [L(5,2)]=1
+    multiplicity-free at beta = 3 over 2 <= n <= 6 ?  YES     (sum over the 4 vertices at n = 6 of (dim L)^2: 132)
+
+  ---- beta = 2 ----
+    L(2,0) dim 1  ->  [L(1,0)]=1
+    L(2,1) dim 1  ->  [L(1,0)]=1
+    L(3,0) dim 1  ->  [L(2,0)]=1  [L(2,1)]=0
+    L(3,1) dim 2  ->  [L(2,0)]=1  [L(2,1)]=1
+    L(4,0) dim 1  ->  [L(3,0)]=1  [L(3,1)]=0
+    L(4,1) dim 3  ->  [L(3,0)]=1  [L(3,1)]=1
+    L(4,2) dim 2  ->  [L(3,0)]=0  [L(3,1)]=1
+    L(5,0) dim 1  ->  [L(4,0)]=1  [L(4,1)]=0  [L(4,2)]=0
+    L(5,1) dim 4  ->  [L(4,0)]=1  [L(4,1)]=1  [L(4,2)]=0
+    L(5,2) dim 5  ->  [L(4,0)]=0  [L(4,1)]=1  [L(4,2)]=1
+    L(6,0) dim 1  ->  [L(5,0)]=1  [L(5,1)]=0  [L(5,2)]=0
+    L(6,1) dim 5  ->  [L(5,0)]=1  [L(5,1)]=1  [L(5,2)]=0
+    L(6,2) dim 9  ->  [L(5,0)]=0  [L(5,1)]=1  [L(5,2)]=1
+    L(6,3) dim 5  ->  [L(5,0)]=0  [L(5,1)]=0  [L(5,2)]=1
+    multiplicity-free at beta = 2 over 2 <= n <= 6 ?  YES     (sum over the 4 vertices at n = 6 of (dim L)^2: 132)
+
+  ---- beta = 1 ----
+    L(2,0) dim 1  ->  [L(1,0)]=1
+    L(2,1) dim 1  ->  [L(1,0)]=1
+    L(3,0) dim 1  ->  [L(2,0)]=1  [L(2,1)]=0
+    L(3,1) dim 1  ->  [L(2,0)]=0  [L(2,1)]=1
+    L(4,0) dim 1  ->  [L(3,0)]=1  [L(3,1)]=0
+    L(4,1) dim 3  ->  [L(3,0)]=2  [L(3,1)]=1   <-- MULTIPLICITY 2
+    L(4,2) dim 1  ->  [L(3,0)]=0  [L(3,1)]=1
+    L(5,0) dim 1  ->  [L(4,0)]=1  [L(4,1)]=0  [L(4,2)]=0
+    L(5,1) dim 4  ->  [L(4,0)]=1  [L(4,1)]=1  [L(4,2)]=0
+    L(5,2) dim 1  ->  [L(4,0)]=0  [L(4,1)]=0  [L(4,2)]=1
+    L(6,0) dim 1  ->  [L(5,0)]=1  [L(5,1)]=0  [L(5,2)]=0
+    L(6,1) dim 4  ->  [L(5,0)]=0  [L(5,1)]=1  [L(5,2)]=0
+    L(6,2) dim 9  ->  [L(5,0)]=0  [L(5,1)]=2  [L(5,2)]=1   <-- MULTIPLICITY 2
+    L(6,3) dim 1  ->  [L(5,0)]=0  [L(5,1)]=0  [L(5,2)]=1
+    multiplicity-free at beta = 1 over 2 <= n <= 6 ?  NO     (sum over the 4 vertices at n = 6 of (dim L)^2: 99)
+
+  ---- beta = 0 ----
+    L(2,0) dim 1  ->  [L(1,0)]=1
+    L(3,0) dim 1  ->  [L(2,0)]=1
+    L(3,1) dim 2  ->  [L(2,0)]=2   <-- MULTIPLICITY 2
+    L(4,0) dim 1  ->  [L(3,0)]=1  [L(3,1)]=0
+    L(4,1) dim 2  ->  [L(3,0)]=0  [L(3,1)]=1
+    L(5,0) dim 1  ->  [L(4,0)]=1  [L(4,1)]=0
+    L(5,1) dim 4  ->  [L(4,0)]=2  [L(4,1)]=1   <-- MULTIPLICITY 2
+    L(5,2) dim 5  ->  [L(4,0)]=1  [L(4,1)]=2   <-- MULTIPLICITY 2
+    L(6,0) dim 1  ->  [L(5,0)]=1  [L(5,1)]=0  [L(5,2)]=0
+    L(6,1) dim 4  ->  [L(5,0)]=0  [L(5,1)]=1  [L(5,2)]=0
+    L(6,2) dim 5  ->  [L(5,0)]=0  [L(5,1)]=0  [L(5,2)]=1
+    multiplicity-free at beta = 0 over 2 <= n <= 6 ?  NO     (sum over the 3 vertices at n = 6 of (dim L)^2: 42)
+
+  the multiplicity-2 edges, over the population of all 121 (beta,n,p,q) cells with beta in {3,2,1,0} and 2 <= n <= 6:
+    beta=1  [L(4,1) : L(3,0)] = 2
+    beta=1  [L(6,2) : L(5,1)] = 2
+    beta=0  [L(3,1) : L(2,0)] = 2
+    beta=0  [L(5,1) : L(4,0)] = 2
+    beta=0  [L(5,2) : L(4,1)] = 2
+
+(iii) EVERY CELL, AGAINST mg-e8b8's COMMITTED out_t1_tl.txt
+
+     vertex counts: 24 cells compared, population: every (beta,n) with beta in {3,2,1,0} and 1 <= n <= 6
+     vertex dimensions: 53 cells compared, population: every L(n,p) the target prints in T1b2, 2 <= n <= 6, plus every vertex I measure
+     edge multiplicities: 121 cells compared, population: every ordered pair (p,q) of vertices at consecutive levels, every beta in {3,2,1,0}, 2 <= n <= 6
+
+     the four figures in the document's own four-row table:
+       beta=3   dim TL_6 = 132   sum_lambda dim End(L_lambda) = 132
+       beta=2   dim TL_6 = 132   sum_lambda dim End(L_lambda) = 132
+       beta=1   dim TL_6 = 132   sum_lambda dim End(L_lambda) = 99
+       beta=0   dim TL_6 = 132   sum_lambda dim End(L_lambda) = 42
+
+     the five multiplicity-2 edges the document names, checked one by one:
+       beta=1  [L(4,1) : L(3,0)]  document says 2, mine says 2   agree
+       beta=1  [L(6,2) : L(5,1)]  document says 2, mine says 2   agree
+       beta=0  [L(3,1) : L(2,0)]  document says 2, mine says 2   agree
+       beta=0  [L(5,1) : L(4,0)]  document says 2, mine says 2   agree
+       beta=0  [L(5,2) : L(4,1)]  document says 2, mine says 2   agree
+     multiplicity-2 cells I measure that the document does not name: 0, population: all 121 (beta,n,p,q) cells
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every uniqueness/integrality/non-negativity/dimension check on the 53 character solves in this script
+FINDINGS: 0, population: the 24 vertex-count cells, 53 vertex-dimension cells and 121 edge cells compared above
+TOTAL BAD: 0
