@@ -1,0 +1,36 @@
+====================================================================================================
+mg-0049 — WHICH MECHANISM CATCHES WHICH ROW, on the delegated surface
+====================================================================================================
+  target: docs/state-history/attempt-mg-276d.md
+  population: all 9 mutations of mutations_0049.py, every one of them applied to a string in memory.
+  the UNMUTATED target scores {'content': 0, 'guards': 0, 'presented': 0, 'record': 0} — every column silent, which is the control on this file itself.
+
+  row    content  guards  presented  record    mg-bee1  guards-only  mg-0049    battery  what
+  --------------------------------------------------------------------------------------------------------------------
+  R1           0       2          1       0          0            2        1          1  the cited file HTML-commented whole (reader sees nothing)
+  R2           0       0          1       0          0            0        1          1  the cited file fenced whole (renders as a code sample)
+  R3           0       0          0       0          0            0        0          0  a retraction at the TOP of the target
+  R4           0       0          0       0          0            0        0          0  a new UNCITED section appended to the target
+  R5           0       2          0       0          0            2        2          2  a <details> wrapper: suppresses nothing, is raw HTML
+  R6           0       0          0       2          0            0        2          2  the cited sections moved under an 'Appendix Z' heading
+  R7           1       0          0       0          1            1        1          1  a cited section DELETED (positive control)
+  R8           0       2          1       0          0            2        1          1  the whole file inside a CLOSED HTML comment
+  R9           0       2          0       0          0            2        2          2  one TAB in the target's uncited opening paragraph
+
+  silent (exit 0) under mg-bee1        : ['R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R8', 'R9']  — 8 of 9
+  silent under a GUARDS-ONLY extension : ['R2', 'R3', 'R4', 'R6']  — 4 of 9
+  silent under mg-0049                 : ['R3', 'R4']  — 2 of 9
+
+  READ THE THIRD LINE AGAINST THE SECOND.  A guards-only extension — the literal
+  reading of the recommendation this repair was filed on — leaves R2 at exit 0:
+  the fence is inside the modelled subset, so no guard is meant to see it, and a
+  reader following the certified cell's links is still shown a wall of unrendered
+  source.  Only the presentation record catches it, on `state = fenced-code`, and
+  it is the SAME record and the SAME presentation.py that catch it in the two
+  files the instrument reads.  One mechanism, both halves of it, across the file
+  boundary the repair drew.
+
+  R3 and R4 are silent in every regime INCLUDING this one, and that is the bound:
+  they are text a reader IS shown, outside every cited section.  R9 is silent
+  under mg-bee1 and fires here on the guards alone — the cost, not the win.
+====================================================================================================

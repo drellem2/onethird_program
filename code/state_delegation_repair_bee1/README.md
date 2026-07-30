@@ -84,6 +84,26 @@ Assume the blind spot **moved** rather than closed; five generations running, it
 **Read L2 and the L4 residual as the next auditor's targets.** They are stated here, in
 `COVERAGE.md` and in `delta_control.py`'s header, so they are tested rather than discovered.
 
+> **CORRECTION OF RECORD — the `L1` row above is FALSE AS STATED (mg-5644 B1, repaired by
+> mg-0049).** The row is left verbatim; this note is appended rather than folded in, because
+> a repair that rewrites its own superseded claim leaves no record that it made one.
+>
+> *"Closed for cited sections"* is quantified over **which sections are followed**. What this
+> repair built was a content digest over their **bytes**, with **no presentation record and
+> none of section 8's default-deny guards** — the two things every certified region in the
+> two files this instrument *reads* has carried since mg-4acd. mg-5644 put mg-babf's own
+> `B05`/`B06` to the surface this repair created: **one `<!--` line at the top of the target,
+> never closed.** Every cited section byte-identical, every digest above matching, `marked`
+> and `markdown-it` agreeing over 60 comparisons that **zero of the five cited sections are
+> visible**, a reader following the certified cell's six links **shown a blank page** — and
+> the control **exited 0**. It is the same defect as the one this repair was filed to fix:
+> **a true sentence quantified over the wrong thing.**
+>
+> `code/state_delegation_repair_0049/` closes it, applying the same `presentation.py` to the
+> delegated surface, and restates the bound in terms of **what a reader is shown**. Nothing
+> else in this directory is changed: `battery_bee1.py` and `globalpos_bee1.py` are unedited
+> and still reproduce byte-identically.
+
 ## Safety
 
 Sections 2, 3 and 4 of `run_all.sh` mutate tracked files in the working tree —
