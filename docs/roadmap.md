@@ -173,22 +173,31 @@ re-baselines on every unrelated edit, so that trade must be named rather than ta
 claim was never the decision I was entitled to stop; only building a sixth mechanism was.** That judgement is
 deferred to mg-bee1's evidence.
 
-## Now (in flight)
-- **mg-2da3** — repair the blind certification in `b68db5d`. mg-bd41 gutted `STATE.md` **175,552 → 37,958
-  bytes** and the headline battery still reproduced its reference byte-identically. The battery pins fixed
-  revisions, so it is blind to the landing **by construction** — correct for reproducing a historical audit,
-  false as certification of new edits. Scoped to the certification, **not** the conclusion.
-- **mg-1953** — repair mg-ebd8's *derivations* (the locating is confirmed and out of scope): the closed form
-  drops the acyclicity condition (455 spurious flats at n=6), E8's submonoid claim is self-contradictory,
-  and one row licenses a "no" over a candidate space of **two**.
-- **mg-a7b4** — pre-filed audit of mg-24a3, running.
+## Now (in flight) — 2026-07-30 19:20
 
-## Next (dep-gated, releases automatically)
-- **mg-2216** — audit of mg-2da3. The deliverable *is* an instrument, so an author-validated control is the
-  very defect being repaired; told to build its own mutation, and a *small* one.
-- **mg-3b51** — audit of mg-1953. Must check the acyclicity fix **outside `AC(P)`** — the region where the
-  original error was invisible to its own measurement.
-- **mg-344a** — Daniel workspace: review the obstruction. `assignee=human`, so it waits on Daniel.
+- **mg-db09** — Daniel's second proposal: *category + rank function + multiplicity-free branching ⇒ the
+  Bratteli/path algebra is canonically an endomorphism algebra*. Locating exercise. **We fail its hypothesis
+  hard** (`kF(P)` radical 95.7% at n=6), so the deliverable is *which hypothesis is load-bearing* and whether
+  the branching axis and the species axis are instances of one thing.
+- **mg-f8fa** — the remainder of mg-a61f not carried by mg-6f61: four hedges **under-claim** a located
+  identity and route a successor to a search that cannot succeed; T3d's four candidates are two; control (ii)'s
+  1442 "failures" are a type mismatch whose **conclusion is right and must survive**.
+- **mg-16eb** — audit of mg-0049 (mayor's repair of mg-bee1, where the repair itself created a defect).
+
+## Next (queued / gated)
+
+- **mg-73df** — audit of the mg-7d75 repair, **scope widened to the FINAL document state** (mg-6f61 +
+  mg-f8fa). Deliberately sequenced behind mg-f8fa so it audits the final state rather than an intermediate
+  one, and so two workers are not on one document at once. Carries a **seam check** neither repair's brief
+  asks for: two corrections can each be right and jointly inconsistent.
+- **mg-2060** — audit of mg-db09, gated. Primary target: **verify the do-not-develop instruction BY
+  MEASUREMENT** — a brief is not a control.
+- **mg-344a** — Daniel workspace: review the obstruction. `assignee=human`, so it waits on him. Today's
+  audited evidence was appended to it so it is usable on sight.
+
+*(Maintenance note: this section was stale by four hours until 19:20 — every item it listed had completed
+while the headline sections above were corrected six times. The sections carrying the day's findings got
+attention; the ones describing operational state rotted. Worth knowing about how this document decays.)*
 
 ## Later (decided, not yet filed)
 - `onethird_program` ships two `controls.py` and two `run_all.sh` and has **no CI of any kind** — by the
