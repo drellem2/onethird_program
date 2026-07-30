@@ -1,0 +1,114 @@
+==============================================================================
+C5a  DUPLICATE PASSAGES -- every block quote against every other
+==============================================================================
+
+  17 block quotes in the document, 11 of them longer than 300
+  characters and therefore comparable.
+
+  *** NEAR-DUPLICATE  56% similar
+      lines 1010-1019 and lines 1047-1058
+
+      first  only: this section,
+      second only: §14 itself,
+      first  only: itself
+      first  only: own
+      first  only: — the five items in the banner at the top —
+      first  only: and
+      second only: plus four folded in from a second, shelved filing — so
+      first  only: therefore
+      first  only: mg-a61f's audit was.
+      second only: those two were.
+      first  only: did not conduct an
+      second only: conducted no
+      first  only: missed , so
+      second only: missed.
+      first  only: there is one,
+      second only: one exists,
+      second only: that the second filing found four items the first did not is the direct evidence for this — two readers of one audit produced two different lists, and neither w
+      first  only: ,
+      second only: (§5).
+      first  only: explained in §5 — that number is
+      second only: are
+      first  only: tidied
+      second only: tidied,
+
+==============================================================================
+C5b  cross-references that the SECOND pass left stale
+==============================================================================
+
+  the banner announces its own item count                          ok
+      'Eight things changed'
+  14's back-reference to that banner agrees with it                *** NO ***
+      back-reference says 'five', banner says 'Eight'
+  the second filing is not described as SHELVED while 14.3 records it as executed *** NO ***
+      both present
+  no passage still says 'an eighth defect, IF there is one' after 14.3 reports it found *** NO ***
+      2 such passage(s)
+  r2_columns.py's docstring cell count matches its own output      *** NO ***
+      docstring says 40 cells, the run prints 45
+
+==============================================================================
+C5c  WHAT HAD TO SURVIVE, AND WHAT HAD TO NOT BE SOFTENED
+==============================================================================
+
+  survives  control (ii)'s conclusion is explicitly NOT withdrawn        ok
+  survives  the band product is still invisible to the Hopf structure    ok
+  survives  the headline is still a THEOREM, not a measurement           ok
+  survives  2.3 has no n dependence                                      ok
+  survives  the poset half is 87 of 87 with NO cap                       ok
+  survives  and 179 of 179 out of sample                                 ok
+  survives  the S_n half is NOT independently verified                   ok
+  survives  Solomon is named as unread                                   ok
+  survives  Garsia-Reutenauer / Atkinson is named as unread              ok
+  survives  the Fock statement is LOCATED, not re-derived                ok
+  survives  being located is stated to be a REAL result                  ok
+  survives  the successor literature search is cancelled                 ok
+  survives  and its errand withdrawn where it was written                ok
+  survives  T3d is reported as TWO statements, not four                  ok
+  survives  control (ii)'s 1 442 are the 1 442 disjoint-ground-set pairs ok
+
+  struck    2.3 re-hedged as 'measured, not proved'                      ok (1, all inside a strike)
+  struck    2.3 re-described as not located in that generality           ok (1, all inside a strike)
+  struck    'three of the four columns are the control'                  ok (2, all inside a strike)
+  struck    'fires hard' as the reading of control (ii)                  ok (1, all inside a strike)
+  struck    the smallest witness given as \{a<c, b<d\}                   ok (1, all inside a strike)
+
+  Both directions are checked, because after a BROKEN finding the
+  comfortable error is retreating too far: a hedge reinstated by the
+  second pass over a claim the first pass strengthened would be a
+  defect, and it would look like caution.
+
+==============================================================================
+C5d  the document's numbers against the outputs they are cited to
+==============================================================================
+
+  4 399              doc yes  code/species_7d75/out_t5_hopf_monoid.txt             ok
+  2 685              doc yes  code/species_7d75/out_t5_hopf_monoid.txt             ok
+  216                doc yes  code/species_repair_6f61/out_r2_columns.txt          ok
+  6 988              doc yes  code/species_repair_6f61/out_r2_columns.txt          ok
+  396                doc yes  code/species_repair_6f61/out_r2_columns.txt          ok
+  12 186             doc yes  code/species_repair_6f61/out_r2_columns.txt          ok
+  12 192             doc yes  code/species_repair_6f61/out_r2_columns.txt          ok
+  266 459            doc yes  code/species_repair_6f61/out_r2_columns.txt          ok
+  3 408              doc yes  code/species_repair_6f61/out_r2_columns.txt          ok
+  16 425             doc yes  code/species_repair_6f61/out_r2_columns.txt          ok
+  75 512             doc yes  code/species_7d75/out_t5_hopf_monoid.txt             ok
+  22 614             doc yes  code/species_7d75/out_t6_fock_and_record.txt         ok
+  529                doc yes  code/species_7d75/out_t6_fock_and_record.txt         ok
+  1 442              doc yes  code/species_remainder_f8fa/out_w2_typemismatch.txt  ok
+  11 301             doc yes  code/species_remainder_f8fa/out_w2_typemismatch.txt  ok
+  11 300             doc yes  code/species_remainder_f8fa/out_w2_typemismatch.txt  ok
+  472                doc yes  code/species_7d75/out_t3_bidigare.txt                ok
+  170                doc yes  code/species_7d75/out_t3_bidigare.txt                ok
+  174                doc yes  code/species_repair_6f61/out_r1_smallest.txt         ok
+  12 problems        doc yes  code/species_remainder_f8fa/out_w3_scope_before.txt  ok
+  eight of them      doc yes  code/species_remainder_f8fa/out_w3_scope.txt         ok
+  759 assertions     doc yes  code/species_7d75/out_selftest.txt                   ok
+  2 114 assertions   doc yes  code/species_remainder_f8fa/out_selftest.txt         ok
+  45 predicted cells doc yes  code/species_repair_6f61/out_r2_columns.txt          ok
+
+  24 of 24 cited figures located in the output they are cited to.
+
+==============================================================================
+C5 TOTAL BAD: 5
+==============================================================================

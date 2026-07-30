@@ -1,0 +1,69 @@
+==============================================================================
+C3a  the four candidate identifications, rebuilt from both definitions
+==============================================================================
+
+  O_alpha <-> d_{T(alpha)}.  Entries are counts of mismatching
+  structure constants.  iso : c(Sigma) = c(Sol);  anti : c(Sigma)_{a,b}
+  = c(Sol)_{b,a}.  Conventions A and B are the two orders of
+  composition in kS_n.
+
+   n   iso/A  anti/A   iso/B  anti/B
+   1       0       0       0       0    ok
+   2       0       0       0       0    ok
+   3       4       0       0       4    ok
+   4      54       0       0      54    ok
+   5     472       0       0     472    ok
+
+  Reproduced entry for entry from code that shares nothing with
+  code/species_7d75.  The identification is an ANTI-isomorphism and
+  the plain-isomorphism reading FAILS, by 472 structure constants at
+  n = 5.
+
+==============================================================================
+C3b  convention B IS the opposite algebra of convention A (T3e)
+==============================================================================
+
+   n   B(S,T) vs A(T,S)   CONTROL: B(S,T) vs A(S,T)
+   1                  0                            0    ok
+   2                  0                            0    ok
+   3                  0                            2    ok
+   4                  0                           26    ok
+   5                  0                          170    ok
+
+  0 at every n <= 5, and the un-swapped control fires from n = 3 with
+  2, 26, 170 -- both columns as t3_bidigare.py's T3e reports them, from
+  disjoint code.  So T3d is ONE control run twice.  mg-f8fa's second
+  brief item is CONFIRMED at source and in the document.
+
+==============================================================================
+C3c  IS the left side Solomon's descent algebra, or its OPPOSITE?
+==============================================================================
+
+  Section 0's headline box says the left side IS Solomon's descent
+  algebra.  Everywhere else the document says ANTI-isomorphic, and so
+  does Theorem 10.13 as section 0 quotes it.  Decidable test: if the
+  two were BOTH anti-isomorphic and isomorphic, Sol would be
+  isomorphic to its own opposite, and then the two dimensions below
+  would agree.
+
+    n  dim A  dim rad L = {x in J R = {x in J 
+                      : J.x = 0} : x.J = 0} A iso A^op?
+
+    2      2        0          0          0 possible
+    3      4        1          1          1 possible
+    4      8        3          2          2 possible
+    5     16        9          5          5 possible
+
+  dim rad Sol(S_n) = 2^{n-1} - p(n): n=2: 0 = 2 - 2, n=3: 1 = 4 - 3, n=4: 3 = 8 - 5, n=5: 9 = 16 - 7
+
+  NOT REFUTED at n <= 5: the two dimensions agree at every n
+  tested, so this invariant does not separate Sol from Sol^op and
+  the finding stands at the level of WORDING and not of truth:
+  section 0 states as an equality the reading its own section 2.2
+  measures to fail by 472 structure constants, and that AM 10.13
+  -- quoted in section 0 itself -- states with an 'op'.  Reported
+  as MINOR for that reason, and deliberately not as BROKEN.
+
+==============================================================================
+C3 TOTAL BAD: 0
+==============================================================================
