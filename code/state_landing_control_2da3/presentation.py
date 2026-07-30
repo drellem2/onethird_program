@@ -21,9 +21,43 @@ certified bytes?"* and answers it correctly.  The locator answers *"which bytes 
 certified ones?"* — and, silently, *"and is anybody shown them?"* — and that second
 question was never controlled.
 
-THE PROPERTY THIS FILE EXISTS TO CERTIFY:
+THE PROPERTY THIS FILE CERTIFIES, STATED TO ITS BOUND (mg-bee1, repairing mg-218d's B1).
 
-    A MUTATION THAT CHANGES WHAT A READER SEES MUST CHANGE A DIGEST.
+    A mutation that changes HOW A CERTIFIED REGION IS PRESENTED — the container it renders
+    in, the heading path in force over it, or its ordinal among the blocks OF ITS OWN
+    SECTION — must change a digest.
+
+    CROSS-SECTION CONTEXT IS NOT COVERED.  A block a reader passes immediately before a
+    certified region, but on the other side of a heading, is not a field of any record
+    here, and a mutation that adds one exits 0.
+
+WHAT THAT SENTENCE REPLACES, AND WHY THE REPLACEMENT IS THE REPAIR.  This file, COVERAGE.md
+and e4426c9's commit message all published the property in capitals as
+
+    A MUTATION THAT CHANGES WHAT A READER SEES MUST CHANGE A DIGEST
+
+— universally quantified over mutations.  The mechanism is quantified over A REGION'S OWN
+SECTION: `heading` is the ATX path and `position` is an ordinal among the blocks of that
+section.  Nothing outside the section is a field.  mg-218d demonstrated the gap with a pair
+of mutations differing by ONE LINE:
+
+    P1  mg-babf's B07 restated — the retraction as the first block INSIDE the certified
+        section                                                              exit 2
+    P2  THE SAME PARAGRAPH ONE LINE EARLIER — the last block of the section before
+                                                                             exit 0
+
+A reader is shown the same page in both.  So B07, one of the four mutations e4426c9 leads
+with, is caught by where its author happened to put the paragraph and not by a property.
+Three more at this layer exit 0: a retraction in an unrelated section of the README; a new
+"READ THIS FIRST — this document is superseded" section near the top; the same in STATE.md.
+The positive control — the README's H1 retitled — DOES fire, because `heading` carries
+path[0].  The layer is not inert; it is bounded, and the bound is the section.
+
+THE DEFECT WAS IN THE STATEMENT, and the statement is what the next reader relies on, so
+the statement is what is repaired.  The mechanism is unchanged: mg-bee1 measured what a
+document-global `position` would buy and what it would cost, and did not take the trade —
+see COVERAGE.md, "The document-global ordinal, costed and NOT taken", and
+code/state_delegation_repair_bee1/ for the measurement.
 
 THE CLOSURE ARGUMENT — why this is a small job and not "implement a renderer".
 ------------------------------------------------------------------------------
@@ -39,13 +73,21 @@ three ways to do that:
         which changes its bytes and fires the content digest.)
     (b) change the HEADING the region sits under — by moving the region, or by moving,
         adding or deleting a heading around it.
-    (c) change the region's POSITION among the blocks a reader passes on the way to it —
-        which is how B07 works: nothing inside the block moves, but a retraction now
-        stands immediately above it.
+    (c) change the region's POSITION among the blocks OF ITS OWN SECTION — which is how
+        B07 works: nothing inside the block moves, but a retraction now stands immediately
+        above it, under the same heading.
 
 (a) is a state, (b) is a path, (c) is an ordinal.  All three are block-level facts, and
 block-level structure is a much smaller thing to model than markdown rendering.  That is
 what this file models, and it models nothing else.
+
+WHERE THE CLOSURE ARGUMENT IS TOO STRONG, said here rather than left to be found again.
+(c) is stated above as a fact about the region's own section, and that is the whole of it:
+a block inserted in ANOTHER section is an outside edit that changes what a reader passes
+and moves no field of any record.  So "an edit outside a region can only change how the
+region is presented in three ways" is true of the three ways THIS FILE MODELS, and is not
+an exhaustive account of what an outside edit can do to a reader.  mg-218d's P2/P3/P4/P6
+are the counterexamples, and they are named in the property above rather than absorbed.
 
 WHAT THIS FILE IS NOT.  It is NOT a markdown renderer, it does not emit HTML, and it does
 not resolve any inline construct — emphasis, links, code spans (except when masking them

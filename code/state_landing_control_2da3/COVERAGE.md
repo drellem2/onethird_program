@@ -7,7 +7,10 @@ whenever `CERTIFIED` changes.
 
 Landed by **mg-7870**, repairing the two BROKEN items in **mg-2216**'s audit of
 **mg-2da3** / `bf17716`. Extended by **mg-4acd**, repairing B1 in **mg-babf**'s audit of
-mg-7870 / `e924590` — *the boundary moved, so the statement moved with it*.
+mg-7870 / `e924590` — *the boundary moved, so the statement moved with it*. Repaired by
+**mg-bee1** against **mg-218d**'s audit of mg-4acd / `e4426c9`: *the boundary had not
+moved — the statement had over-run it*, and a certified region turned out to delegate its
+content to a file outside the certified set.
 
 ## The mechanism
 
@@ -18,6 +21,7 @@ Each certified region carries **two** digests, compared against constants baked 
 |---|---|---|
 | **content** — SHA-256 of the region's normalised bytes | *are these the certified bytes?* | mg-7870 |
 | **presentation** — SHA-256 of the region's presentation record | *is a reader shown them, in the same place?* | mg-4acd |
+| **delegated** — SHA-256 of each target section a region cites *by name* | *does what it points at still say what it said?* | mg-bee1 |
 
 > **Why a second digest rather than a wider first one.** mg-babf probed the content digest
 > from a standing start and it held: mg-2216's five survivors were re-implemented from their
@@ -28,8 +32,68 @@ Each certified region carries **two** digests, compared against constants baked 
 > block wrapped in a code fence; **the same block wrapped in an HTML comment, absent from
 > every rendered view of the README**; and a *"RETRACTED … is void"* paragraph inserted
 > immediately above a certified block. A digest of a *located* region cannot see any of them,
-> because none of them is inside the region. The property the second digest certifies is:
-> **a mutation that changes what a reader SEES must change a digest.**
+> because none of them is inside the region.
+
+## The property, stated to its bound
+
+**This is the sentence a future reader relies on, so it is stated to exactly what the
+mechanism delivers and no wider.**
+
+> **A mutation that changes HOW A CERTIFIED REGION IS PRESENTED — the container it renders
+> in, the heading path in force over it, or its ordinal among the blocks of ITS OWN
+> SECTION — must change a digest.**
+>
+> **Cross-section context is NOT covered.** A block a reader passes immediately before a
+> certified region, but on the other side of a heading, is not a field of any record here.
+
+mg-4acd published this property unqualified — *"A MUTATION THAT CHANGES WHAT A READER SEES
+MUST CHANGE A DIGEST"*, in capitals, in `presentation.py`, in this file and in `e4426c9`'s
+commit message, universally quantified over mutations. **As published it is false**, and
+**mg-218d** demonstrated it with a pair of mutations differing by **one line**:
+
+| | mutation | exit |
+|---|---|---|
+| **P1** | mg-babf's B07 restated — the retraction as the first block **inside** the certified section | **2 (MOVED)** |
+| **P2** | **the same paragraph one line earlier** — the last block of the section before | **0 (PASS)** |
+
+A reader is shown the same page in both. `position` sees two different sections. So B07 —
+one of the four mutations `e4426c9`'s message leads with — is caught by where its author
+happened to put the paragraph and not by a property of the mechanism. Three more at that
+layer exit 0: a retraction in an unrelated section of the README; a new *"READ THIS FIRST —
+this document is superseded"* section near the top; the same in `STATE.md`. The positive
+control — the README's H1 retitled — **does** fire, because `heading` carries `path[0]`, so
+the layer is not inert. It is bounded, and the bound is the section.
+
+**mg-bee1 repaired the statement and left the mechanism alone.** The commit message of
+`e4426c9` cannot be edited and still carries the unqualified form; the correction of record
+is the `mg-218d B1 and B2` block in `docs/state-history/README.md`, which is itself
+certified.
+
+### The document-global ordinal, costed and NOT taken
+
+The obvious fix is to make `position` an ordinal among the blocks of the **whole document**.
+It is not taken, and the reasons are measurements rather than taste. They are reproducible
+from `code/state_delegation_repair_bee1/`.
+
+1. **It re-baselines on most commits.** A document-global ordinal moves for every certified
+   region below a block inserted or removed **anywhere**, and its companion field — the
+   document's block count — moves for every such edit anywhere at all. `STATE.md` is this
+   project's living ledger. `globalpos_bee1.py` measures the rate over the recent history of
+   both certified files and prints it; a control re-baselined on most commits stops being
+   read, which is the same cost this file already refuses to pay for a renderer dependency.
+2. **It still does not make the unqualified sentence true.** A retraction that **replaces**
+   an existing paragraph in another section adds no block, removes none, moves no ordinal,
+   and changes what a reader sees. `globalpos_bee1.py` runs that mutation (**P7**) against a
+   document-global implementation and it exits 0 there too. Trading a silent miss for a
+   guard that cries wolf and *still* not obtaining the property is not a trade worth making.
+3. **It does nothing for the layers that fire on nothing.** L0 (the instrument), L1 (what a
+   certified region points at) and L2 (the region set) are not presentation layers, and no
+   ordinal reaches them. L1 is repaired below by a different mechanism; L0 is narrowed; L2
+   is named and left open.
+
+**What would be needed to close it honestly is a claim about the reader's path, not about
+block layout** — and this file does not have one to offer. The finding is recorded as
+*stated, not closed*.
 
 > **Why the mechanism changed rather than the list.** The first version certified by
 > asserting five chosen substrings were present, and mg-2216 got **8 of 14** independent
@@ -80,7 +144,7 @@ region, so the presentation layer only has to answer for edits OUTSIDE it** — 
 edit can only change how a region is presented by changing its container, its heading, or its
 position. Three block-level facts, not a renderer.
 
-## Digested regions — 10
+## Digested regions — 11
 
 Each carries **both** digests.
 
@@ -96,6 +160,7 @@ Each carries **both** digests.
 | `readme.A1` | the A1 correction block (`b68db5d`'s headline sentence) | 3,060 |
 | `readme.A1.7870` | the mg-2216 / mg-7870 correction to that A1 block | 2,736 |
 | `readme.A1.4acd` | the mg-babf / mg-4acd correction to that A1 block | 3,695 |
+| `readme.A1.bee1` | the mg-218d / mg-bee1 correction to that A1 block | 5,040 |
 
 *mg-babf B4: the README sentence saying the set was "eight" was wrong when it was written —
 the code, this file and mg-7870's own commit message all said nine and enumerated nine. The
@@ -120,6 +185,65 @@ non-zero and nothing goes green either way, but the classification is wrong. Thi
 by this repair's own NC5 and fixed: `readme.index` keys on the sentence that *introduces*
 the figures, and `readme.F1` deliberately does not key on the `133` / `220` it corrects.
 
+## What a certified region POINTS AT — the delegated sections (mg-bee1)
+
+**The certified ledger cell is not self-contained.** Row `:135`'s content cell carries
+**six inline links** into `docs/state-history/attempt-mg-276d.md` (seven occurrences of that
+path — one link's own text *is* the path) and cites five of that file's sections, **H1–H5,
+by name**. The target opens *"Every passage below was moved verbatim out of that cell … The
+row now asserts current state and points here."* A reader who follows the certified region
+reads that file, and until mg-bee1 nothing certified it: **mg-218d** deleted a cited
+section, **inverted the F1 repair inside it** so that the row and the file it sends you to
+say opposite things, and emptied the file entirely — **all three exited 0**.
+
+The list below already named `attempt-*.md` as *files* not covered. What was named nowhere
+is that **the thing that IS certified is a pointer**. That is the difference between "we did
+not certify that file" and "the region we certified delegates its content to it".
+
+**What is delegated is what is cited**, and that is the whole rule. `delta_control.py`
+section 2c reads each certified region's **own bytes**, extracts every inline link, resolves
+repo-relative targets against the file carrying them, and treats a link whose **text** names
+a section (`H<n>`) as a citation of that section by name. Each cited section is digested
+under the same `N` as every other certified region.
+
+| event | verdict | why |
+|---|---|---|
+| a cited section is **gone** from the target | **FAIL** | a certified region sending a reader somewhere unreadable is damage, exactly as a certified region nobody is shown is damage |
+| a cited section's **bytes moved** | **MOVED** | on the same footing as a region's own bytes moving |
+| a target is **cited and not declared**, or **declared and not cited** | **MOVED** | the delegation surface itself changed; re-baseline and say which commit moved it |
+| a declared target **file is missing** | **FAIL** | a delegation this instrument certified no longer resolves |
+
+An **undeclared** target is reported and **not followed**: this instrument has no baseline
+for it, so the honest report is that the surface moved, not that a certified delegation
+broke. That keeps `negative_control.py`'s NC6 — 500 characters of the cell sorted in place,
+which scrambles the link text along with everything else — classified **MOVED**, which is
+what it is.
+
+**Delegated content — 5 sections of 1 file**
+
+| target | sections cited by name | cited by |
+|---|---|---|
+| `docs/state-history/attempt-mg-276d.md` | `H1` `H2` `H3` `H4` `H5` | `cell.tree` |
+
+**The bound, stated because it is the next auditor's target.** Only the **cited** sections
+are delegated. The target's own framing — its title, its opening paragraph, its uncited
+sections — is outside coverage, and a retraction inserted at the top of that file exits 0.
+The baseline cell at `b68db5d^` carries the same six links and is deliberately **not**
+followed: it is the BEFORE side of a measured delta, not text a reader is shown today.
+
+## The normalisation, as an assertion rather than only as prose (mg-bee1)
+
+mg-218d widened `norm()` from `.strip(" \t\r\n")` to `.strip()` — the exact rule mg-babf
+probed five ways and cleared — and **the control exited 0**, because on this material the
+two agree. The rule was published in three documents and read by nothing. `delta_control.py`
+section 0 now checks it **behaviourally**: the four sentences above become four probes, so a
+widened `strip()` call *or* a widened `EDGE` constant is a non-zero exit.
+
+**This is claimed narrowly and is not a certification of the instrument.** An edit that
+changes `norm()` *and* deletes the probes walks past, and nothing inside a file can stop
+that — **nothing certifies the instrument**. What it does is raise one specific silent
+divergence, the code drifting from its own published rule, from free to two edits.
+
 ## Not covered, on purpose
 
 This instrument certifies **`b68db5d`'s delta**, not the two files it touched.
@@ -129,7 +253,8 @@ This instrument certifies **`b68db5d`'s delta**, not the two files it touched.
   the certified row are the whole-file `**`-parity and largest-cell **invariants**, which
   are invariants and not digests.
 - **The rest of the state-history README** — every other paragraph, table and block,
-  including the per-row index table's own numeric columns, and all ten `attempt-*.md` files.
+  including the per-row index table's own numeric columns, and every part of the ten
+  `attempt-*.md` files **except the sections a certified region cites by name** (above).
 - **Padding at the outer edge of a digested region** (the normalisation rule above).
 - **Whether a change is legitimate.** A digest mismatch is reported as MOVED and exits
   non-zero. The instrument does not and cannot decide whether the new bytes are damage or a
@@ -155,8 +280,47 @@ So this is what the second digest does *not* decide:
   deliberately.
 - **Anything below the block level of a table.** Column alignment, cell wrapping, the width a
   cell renders at: not modelled, not certified.
-- **Whether the model matches a real renderer.** See the cost below. This is the one that
-  matters.
+- **Whether the model matches a real renderer.** ~~See the cost below. This is the one that
+  matters.~~ **This was the named residual risk and it was TESTED and HELD** — mg-218d
+  installed `marked` 18.0.7 and `markdown-it` 14.3.0 outside the repo and compared: 9 of 9
+  certified regions at rest, 123 of 123 comparable blocks of both files in full (population
+  stated: 143 blocks, 20 carried no comparable sentinel), 8 of 8 context mutations —
+  **140 of 140 over two independent implementations**, including the M12/M13 reversal below.
+  The cost paragraph still stands as the cost; what no longer stands is calling it "the one
+  that matters". It is measured. The layers below are not.
+
+### Which layer is uncontrolled after mg-bee1
+
+**Five generations of this control have each closed their predecessor's gap and exposed a
+new one, so this section assumes the blind spot MOVED rather than closed.** mg-218d ran
+sixteen mutations at the layers above mg-4acd's, each carrying **the exit code predicted
+before the run**; sixteen of sixteen matched. Ten changed what a reader is shown and exited
+0. This is where they stand after this repair.
+
+| layer | what it decides | after mg-bee1 |
+|---|---|---|
+| **L0 instrument** | the constants and rules that define every layer below | **partly closed.** `norm()` is now checked against its published rule (`I2`). Deleting an entry from `CERTIFIED` still exits 0 (`I1`) |
+| **L1 what a region points at** | the files and sections the certified text delegates to | **closed for cited sections** (`T1` `T2` `T3`). The target's own framing is not |
+| **L2 region set** | which regions inside the two files are certified | **OPEN** (`S1`) |
+| **L3 region location** | which bytes are the region | closed by the marker locator; all four of mg-218d's fire, each classified FAIL |
+| **L4 presentation** | is a reader shown them, and where | **section-local, and now SAID to be** (`P2` `P3` `P4` `P6` still exit 0) |
+| **L5 byte content** | are these the certified bytes | closed by mg-7870 |
+| **L6 normalisation** | the equivalence rule L5 is asked under | closed by mg-7870, probed five ways by mg-babf, now asserted by section 0 |
+
+**L2 is the one to read as open.** A contradicting near-copy of the F1 correction block,
+added under a new heading with a two-word change to its header so the locator still matches
+exactly one line, exits **0**: a reader meets two F1 blocks that disagree. **No digest over
+a chosen set of regions can see a region that is not on the set**, and the cheap fix —
+asserting a blockquote count over the README — would catch mg-218d's specific mutation and
+not the layer. This lineage has twice established that a check shaped around the mutation
+its author had in mind is the defect, not the repair, so it is not taken. What would close
+L2 is a rule that decides which blocks *ought* to be certified, and there is not one here.
+
+**L0 cannot be closed from inside.** `CERTIFIED`, `PRESENTATION`, `DELEGATED` and `norm()`
+are constants in the file that reads them, and **nothing certifies the instrument**.
+`code/state_layer_audit_218d/coverage218d.py` — an external check, written by the auditor —
+compares this file's region table against `CERTIFIED` element by element and would catch
+`I1`; that is where that check belongs, and it is not moved in here.
 
 ### The cost of the mechanism, stated here because it is a trade
 
@@ -211,7 +375,17 @@ always bought: the instrument does not rot when lines are inserted elsewhere in 
 
 **Stated plainly, because it is the weak point: this reclassification is argued from the GFM
 table rules and is not verified against a renderer.** If a renderer disagrees, mg-2216 was
-right and these two rows are noise. Both runs are committed — mg-7870's is left frozen at
+right and these two rows are noise.
+
+> **IT IS NOW VERIFIED — mg-218d, and it is left standing rather than folded in.** Under
+> **both** `marked` 18.0.7 and `markdown-it` 14.3.0 the certified cell under M12 and M13
+> renders as **prose, not a table cell**: the model's *pipes-in-a-paragraph (no header +
+> delimiter row above it)* is what both implementations actually do. **mg-4acd is right and
+> mg-2216's tolerance was wrong**, and this is no longer an argument. The paragraph above is
+> kept as written because it is the claim that was made at the time; this is what happened
+> to it.
+
+Both runs are committed — mg-7870's is left frozen at
 `out_battery_2216_rerun.txt` and the new one is `out_battery_2216_rerun_4acd.txt` — so the
 disagreement is on the record rather than folded away.
 
@@ -224,6 +398,10 @@ disagreement is on the record rather than folded away.
 | the same, as mg-7870 ran it — **left frozen, no longer reproduces** | `out_battery_2216_rerun.txt` | 10 caught, 0 missed, 4 tolerated, 0 noisy |
 | mg-babf's own run against the pre-repair instrument — **left frozen** | `code/state_control_audit_babf/out_mutations.txt` | 5 of 11 caught, **6 silent misses** |
 | this instrument's own negative control (demonstration, not evidence) | `out_control.txt` | clean 0; NC1–NC3, NC7, NC10 exit 1; NC4–NC6, NC8, NC9 exit 2 |
+| **mg-218d's independent 16-mutation LAYER battery, re-run unmodified** | `code/state_delegation_repair_bee1/out_layers_bee1.txt` | **T1, T2 and T3 go from exit 0 to non-zero**; L3 and L4 unchanged; `I1` and `S1` still 0 — see the layer table above |
+| mg-218d's presentation-model-vs-renderer comparison, re-run unmodified | `code/state_layer_audit_218d/out_render.txt` | 140 of 140 over two renderers — **not re-run by mg-bee1**, which changed no line of `presentation.py`'s model |
+| mg-bee1's own 7 new mutations, each with its exit code predicted before the run | `code/state_delegation_repair_bee1/out_battery_bee1.txt` | 7 of 7 as predicted |
+| the document-global ordinal, measured rather than argued | `code/state_delegation_repair_bee1/out_globalpos.txt` | what it would close, what it would re-baseline, and the mutation it still misses |
 | the revision-pinned mg-6a2f battery | `code/state_audit_6a2f/out_audit.txt` | byte-identical, 96,291 bytes; empty diff against `main` |
 
 The batteries are the evidence and the negative control is not, for the reason mg-2216 gave:
