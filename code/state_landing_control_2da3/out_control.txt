@@ -1,0 +1,141 @@
+### 1. delta_control.py    — does b68db5d's delta hold IN THE WORKING TREE?
+mg-2da3 — working-tree control for b68db5d's delta
+certified side  : the WORKING TREE (STATE.md, docs/state-history/README.md)
+baseline side   : b68db5d^  — used ONLY as the BEFORE of a measured delta
+
+STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
+                             62 table rows, 210 cells (the population every whole-file tally below is over)
+
+1. THE ROW b68db5d EDITED, located by attempt id (not by line number)
+  [pass] exactly one ledger row keys to mg-276d in the working tree
+         found 1
+  [pass] it is a three-column row
+         columns: 3
+         at line :135 in this tree (observed, not asserted — the check above is key-based)
+
+  [pass] the same key locates exactly one row at b68db5d^
+         found 1
+2. THE F1 REPAIR — present in the tree, absent at the baseline
+  [pass] tree row states the NARROW claim
+         "This row states no 4d *tally* of its own"
+  [pass] tree row QUOTES the false absolute it replaced
+  [pass] tree row ATTRIBUTES the correction
+  [pass] baseline row carried the bare absolute
+  [pass] baseline row did NOT carry the narrow claim
+
+3. THE COUNTEREXAMPLE THAT MADE THE ABSOLUTE FALSE — still in the cell,
+   and still EARLIER in it than the sentence that used to deny it
+  [pass] the cell still opens on "five previous rows"
+  [pass] it precedes the F1 sentence
+         counterexample at char 49, F1 sentence at char 448
+  [pass] the gap is 399 characters
+         measured 399 characters (from the start of the phrase to the start of the sentence)
+  [pass] the gap is 72 words
+         measured 72 whitespace-separated words
+
+4. THE MEASURED DELTA — tree against baseline, both conventions printed
+         stripped: 7703 -> 7876 characters
+         raw     : 7705 -> 7878 characters (raw = including the space either side of the boundary pipe)
+         bytes   : 7835 -> 8010 (stripped convention)
+  [pass] baseline cell is 7703 characters (stripped)
+         measured 7703
+  [pass] tree cell is 7876 characters (stripped)
+         measured 7876
+  [pass] the delta is +173 characters
+         measured +173
+
+5. WHOLE-FILE INVARIANTS, measured on the working tree
+  [pass] ** parity is even in every cell
+         over all 210 cells; 0 odd
+  [pass] exactly one ledger row keys to mg-a3d4
+         found 1
+  [pass] the mg-a3d4 row still holds the largest cell in the file
+         largest cell is 8440 characters (stripped), over all 210 cells
+  [pass] and it is still 8440 characters (stripped)
+         measured 8440
+  [pass] the edited row is still smaller than it
+         7876 < 8440
+
+6. docs/state-history/README.md — the correction blocks b68db5d added, in the tree
+         20003 bytes, 19830 characters, 284 lines
+  [pass] F2 correction block
+  [pass] F2 names the frozen message as still carrying it
+  [pass] F1 correction block
+  [pass] B1 attribution correction
+  [pass] index note carries the moved cell figure
+
+==============================================================================
+RESULT: PASS — every check above read the working tree and every one held.
+        This instrument CAN fail; negative_control.py makes it fail.
+==============================================================================
+
+### 2. negative_control.py — can it fail?  (and can the pinned battery?)
+STATE.md  at rest: 177464 bytes, sha 54a41150fd75f97e
+README.md at rest: 20003 bytes, sha 12299b436e7e66c7
+
+==============================================================================
+POSITIVE CONTROL — clean tree
+==============================================================================
+  delta_control.py    : exit 0   as expected
+      RESULT: PASS — every check above read the working tree and every one held.
+  mg-6a2f battery     : reproduces out_audit.txt byte-identically: True (96291 bytes vs 96291 committed)
+
+==============================================================================
+NC1 — STATE.md GUTTED (mg-bd41's mutation, reproduced exactly)
+      177464 -> 39870 bytes, 383 -> 183 lines (200 deleted, line 1 replaced)
+==============================================================================
+  delta_control.py    : exit 1   CONTROL FIRES
+      RESULT: FAIL (exit 1) — the row b68db5d edited is not identifiable in the
+      [FAIL] exactly one ledger row keys to mg-276d in the working tree
+  mg-6a2f battery     : reproduces out_audit.txt byte-identically: True (96291 bytes vs 96291 committed)
+      ^ THE CONTRAST.  Same destroyed tree.  The revision-pinned battery
+        is unmoved because it reads 97cb533 / 60f4dac / 57f962f and never
+        the tree — correct for reproducing mg-6a2f's historical audit,
+        and worthless as evidence about any later commit's edits.
+
+==============================================================================
+NC2 — ROW :135 REVERTED TO b68db5d^ (only the certified edit is undone)
+      line 135: 9028 -> 8855 characters; every other line untouched
+==============================================================================
+  delta_control.py    : exit 1   CONTROL FIRES
+      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree.
+      [FAIL] tree row states the NARROW claim
+      [FAIL] tree row QUOTES the false absolute it replaced
+      [FAIL] tree row ATTRIBUTES the correction
+      [FAIL] it precedes the F1 sentence
+      [MOVED] the gap is 399 characters
+      [MOVED] the gap is 72 words
+      ... and 2 more failing checks (8 in total)
+
+==============================================================================
+NC3 — THE F1 CORRECTION BLOCK CUT OUT OF THE README (STATE.md intact)
+      284 -> 264 lines (blockquote lines 255-274 removed)
+==============================================================================
+  delta_control.py    : exit 1   CONTROL FIRES
+      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree.
+      [FAIL] F1 correction block
+
+==============================================================================
+NC4 — ROW :135 LEGITIMATELY EDITED (the F1 repair left intact, the cell
+      grown by a sentence).  This is the AGED-OUT path, not a damaged one:
+      the instrument must report MOVED and still exit NON-ZERO, so it can
+      never go on reporting green about a delta that has changed under it.
+      line 135: 9028 -> 9047 characters
+==============================================================================
+  delta_control.py    : exit 2   CONTROL FIRES
+      RESULT: MOVED (exit 2) — the F1 repair is intact, but a measured constant
+      [MOVED] tree cell is 7876 characters (stripped)
+      [MOVED] the delta is +173 characters
+
+==============================================================================
+RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 12299b436e7e66c7 == 12299b436e7e66c7
+==============================================================================
+  clean  exit 0   must be 0          ok
+  NC1    exit 1   must be 1 (FAIL)   ok
+  NC2    exit 1   must be 1 (FAIL)   ok
+  NC3    exit 1   must be 1 (FAIL)   ok
+  NC4    exit 2   must be 2 (MOVED)  ok
+
+VERDICT: delta_control.py exits 0 on the clean tree and NON-ZERO under all
+         four mutations.  It is a control that can fail, and it fails on the
+         very change b68db5d's cited battery is blind to.

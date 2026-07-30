@@ -94,11 +94,21 @@ net. Two boundary rulings, stated so they can be argued with rather than guessed
   `:356` today are the same bytes.
 
   **Two corrections to this bullet, from mg-6a2f §B1, made by mg-7735.** The repair is
-  **`mg-3f21`'s**, at `60f4dac` — two commits before mg-34bf's parent — and **`mg-ae62`
-  explicitly did *not* touch it**; this file credited the wrong commit. And *repaired* is not
+  **`mg-3f21`'s**, at `60f4dac` — **mg-34bf's parent's parent**: ONE commit before its parent
+  `97cb533`, two before the landing `57f962f` — and **`mg-ae62` explicitly did *not* touch
+  it**; this file credited the wrong commit. And *repaired* is not
   *closed*: mg-3f21 struck the **evidence** the finding was filed on, and the finding
   **survives in abstract form with no existence proof**. It is still **OPEN**, and
   pm-onethird's to size. Nothing in this change touches it.
+
+  > **`two commits before mg-34bf's parent` was off by one — mg-bd41 A3, BROKEN, corrected
+  > here by mg-2da3.** The ancestry is linear `57f962f <- 97cb533 <- 60f4dac`, so `60f4dac`
+  > is the parent's parent. It was wrong in this bullet and in `b68db5d`'s commit message;
+  > this site CLOSES, the frozen message still carries it. **The attribution the clause sits
+  > inside is CORRECT and is not disturbed** — mg-bd41 traced the paragraph across all 35
+  > revisions of `STATE.md` (`d5a3043` created it at 691 bytes, `60f4dac` repaired it to
+  > 2,582, byte-identical from `60f4dac` onward) and `git log -S "landed by mg-3f21"` returns
+  > exactly `60f4dac`. An off-by-one in the distance, not an error in the credit.
 - **The prose narrative at `STATE.md:138–176`.** Several of those paragraphs carry the same
   claim-beside-its-own-retraction shape. They are not rows and were not in scope. Named
   here so the omission is visible rather than silent.
@@ -167,6 +177,69 @@ ledger cell; relocating it here would have made a fourth, and Appendix A's parag
 The checker names the figure because a scanner must; this file does not, for the same
 reason Appendix A gives — *"text that exists in order to COUNT the number, not to be read
 for it"* is not a coverage claim, and a summary is. So that disclosure stayed in the cell.
+
+## What certifies a change to these files, and what does not
+
+```
+sh code/state_landing_control_2da3/run_all.sh    # the delta control + its negative control
+```
+
+> **`b68db5d`'s HEADLINE VERIFICATION SENTENCE IS BLIND TO THE CHANGE IT CERTIFIES —
+> mg-bd41 A1, BROKEN, corrected here by mg-2da3 because the commit is frozen.** That commit
+> opens on *"I re-ran both: `sh code/state_audit_6a2f/run_all.sh` reproduces `out_audit.txt`
+> BYTE-IDENTICALLY **with these edits applied**"*. It does reproduce — 96,291 bytes,
+> `cmp`-clean — and **it would reproduce if the edits were catastrophic**. mg-bd41 gutted
+> `STATE.md` from **175,552 to 37,958 bytes** (200 lines deleted, line 1 replaced with
+> `TOTALLY DESTROYED`) and the battery emitted the identical 96,291 bytes.
+>
+> **Stated plainly: that re-run is evidence about `57f962f`. It is not, and cannot be,
+> evidence about `b68db5d`.** Every script in `code/state_audit_6a2f/` pins `97cb533` /
+> `60f4dac` / `57f962f` and reads the committed `docs/state-history/*.md` at `57f962f`; not
+> one opens the working tree or resolves `HEAD`.
+>
+> **The battery is not the defect and is not changed.** Reproducing an audit of a specific
+> historical state is what mg-6a2f built it for, and pinning is a *feature* there — pointing
+> it at the working tree would destroy the only thing it is good for. The defect is the
+> citation: re-running a revision-pinned instrument in a later commit converts a valid
+> control into one that **cannot fail**, and it does so **silently**, because the command
+> succeeds and the bytes match.
+>
+> **What was missing was a second instrument, and it now exists.**
+> `code/state_landing_control_2da3/delta_control.py` certifies `b68db5d`'s actual delta —
+> row `:135`'s F1 repair and this file's F1 / F2 / B1 blocks — reading the **working tree**
+> for everything it certifies, with `b68db5d^` used only as the *before* side of a measured
+> delta. It locates the row by its attempt id rather than by line number, so it does not rot
+> when lines are inserted above it, and it exits **non-zero** both when the repair is damaged
+> (`1`) and when a measured constant of the landing has moved (`2`) — never green about a
+> delta that is no longer the delta it was written for. `negative_control.py` proves it fires:
+> under mg-bd41's exact gutting, under a revert of row `:135` alone, and under a cut of this
+> file's F1 block it exits non-zero every time, while the pinned battery — same destroyed
+> tree, same run — goes on reproducing its 96,291 bytes.
+>
+> **In fairness, `b68db5d`'s SECOND cited re-run is genuine.** `verify_relocation.py`'s
+> completeness half opens the working tree, its tallies move when the file moves, and its
+> **10 cells / 11,625 words / 125 maximal runs / 0 unaccounted** is a real measurement. The
+> commit holds real evidence. It led with the one that was not.
+>
+> **And none of this touches "nothing was lost", which STANDS.** mg-6a2f established it
+> twice with independently-written instruments and mg-bd41 confirmed it a **third** time from
+> a different corpus construction — 0 of 31,538 baseline token occurrences unaccounted. A
+> blind certification of a one-line edit is a **control** defect, not a content defect.
+
+> **`which located the source the audit did not name` is an over-claim — mg-bd41 A2, BROKEN,
+> corrected here by mg-2da3.** `b68db5d` writes that of its F2 re-derivation. mg-6a2f **did**
+> name the source, at `:212` of its own document — *"pm-onethird's ticket (a stale revision,
+> line bytes)"* — together with the row (`:131`), the scope (the whole line, all three
+> columns) and the vintage (older than the base commit). **What is new is the hash
+> `db08b4c`**, which is a real contribution and is verified: 327 lines, zero occurrences of
+> `mg-a3d4`. The F2 block at the top of this file states the identification without the
+> over-claim; the frozen commit message still carries it.
+
+**The general rule this generated is in `STATE.md`'s Appendix A** — *"Re-running a
+REVISION-PINNED instrument certifies the revision it is pinned to, never the commit that
+re-ran it"*. Read it before citing any battery in this directory's orbit as evidence for a
+commit: `verify_relocation.py`'s completeness half and `a3_reading_path.py` read the working
+tree and can be cited for a change to it; everything under `code/state_audit_6a2f/` cannot.
 
 ## The three A3 sites (`a3_reading_path.py`)
 
