@@ -9,8 +9,9 @@ sandbox could not:
       sandbox has no `.git`, so `s1_extent.py`'s controls (a) and (b) fall
       into their `git archive` failure branch and contribute nothing.  Every
       probe here edits the tree it will be committed in, and proves the
-      restore rather than asserting it -- `git status --porcelain` before and
-      after, byte for byte, and the run stops if they differ.
+      restore rather than asserting it -- `git status --porcelain` AND the
+      full `git diff` before and after, byte for byte, and the run stops if
+      they differ.  Porcelain alone is not enough here; see `git_status`.
 
   2.  RUN A `run_all.sh`, not a checker.  OPEN 2 is `merged is not live` at
       script level: the check that closes B1 existed, was correct, and was
@@ -37,7 +38,8 @@ import sys
 
 __all__ = ["hdr", "REPO", "sh", "git_status", "Probe", "run_checker",
            "run_runner", "flat", "plant", "replace_once", "preserve",
-           "delete_at_site", "sections", "out_files", "WIRE_MARK", "unwire"]
+           "delete_at_site", "sections", "out_files", "WIRE_MARK", "unwire",
+           "PRE_REPAIR"]
 
 # The wiring block mg-821e adds to the three species runners, and the deletion
 # test that takes it out again.  BOTH LIVE HERE rather than in `p3_wiring.py`
@@ -46,6 +48,25 @@ __all__ = ["hdr", "REPO", "sh", "git_status", "Probe", "run_checker",
 # instrument -- twelve `run_all.sh` -- from inside the self-test.  That is in
 # OUTCOMES.md, and it cost more than the refactor.
 WIRE_MARK = "# mg-821e, on mg-6cb9's F2.  THE CROSS-SECTION CHECK, WIRED."
+
+# THE PRE-REPAIR REF, PINNED, AND NOT `HEAD`.
+#
+# Two measurements in this instrument compare the repaired artifact with the
+# one it replaced: `p2_sites.py` runs `check_doc.py` as it stood before this
+# ticket, and `selftest821e.py` asserts that undoing the wiring gives back the
+# runner byte for byte.  Both were written against `HEAD`, and both were true
+# until the moment the repair was committed -- at which point `HEAD` BECAME the
+# repair, `p2_sites.py` reported the old checker firing 7 of 7, and the
+# self-test reported the wiring absent from three runners that carry it.
+#
+# A comparison against `HEAD` does not fail when the repair lands.  It silently
+# changes what it is comparing, and starts measuring the repair against itself.
+# That is this ticket's own finding one level out: a check whose meaning
+# depends on a condition nobody stated -- here, `HEAD does not contain this
+# work` -- and the condition went false in the ordinary course of doing the
+# work.  So the ref is PINNED, the way `s1_extent.py` pins `ebecd89` and
+# `83ac472` and `d2_deletion.py` pins its own.
+PRE_REPAIR = "b6bc2ef"          # the commit this branch left from (mg-9220)
 
 # The one-line mutations that REMOVE THE RECURSION, one per repaired site.
 # Each declares the unit it deletes: the line telling `os.walk` which
@@ -85,8 +106,8 @@ def unwire(text):
     # The block was inserted after a blank line and ends before one, so cutting
     # it out leaves two blanks touching.  Close the seam, and the result is
     # BYTE-IDENTICAL to the runner before this ticket -- which the self-test
-    # asserts against `git show HEAD:`, because "the wiring is a pure addition"
-    # is a claim and that comparison is the measurement of it.
+    # asserts against `git show PRE_REPAIR:`, because "the wiring is a pure
+    # addition" is a claim and that comparison is the measurement of it.
     if i > 0 and out[i - 1:i] == ["\n"] and out[i:i + 1] == ["\n"]:
         del out[i]
     return "".join(out)

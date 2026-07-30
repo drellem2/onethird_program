@@ -18,14 +18,14 @@ files, each with its own probe file and its own deletion test.
 
 ```
 kern821e.py        in-place mutation with a verified restore, plus run_runner()
-selftest821e.py    86 assertions on the harness contract, over half of them
+selftest821e.py    89 assertions on the harness contract, over half of them
                    that something does NOT happen
 p1_depth.py        OPEN 1.  18 probes: IN / OUT / DELETION TEST / GUARD
 p2_sites.py        OPEN 3.  7 site deletions x 2 checkers, 3 non-site
                    mutations, 4 delete-every-copy mutations
 p3_wiring.py       OPEN 2.  the removal question, then 12 run_all.sh runs
 PREDICTIONS.md     every exit code, written before the run.  3 were wrong
-OUTCOMES.md        what happened, including 4 defects in this instrument
+OUTCOMES.md        what happened, including 7 defects in this instrument
 ```
 
 ## Three things worth knowing before you run it

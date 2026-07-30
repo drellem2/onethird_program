@@ -22,7 +22,8 @@ reader meets it in, with multiplicity elsewhere printed as a number that has no
 vote.
 
   P2a  every site, deleted ONE AT A TIME, against the repaired checker AND
-       against the checker as it stood at HEAD.  The difference is the repair.
+       against the checker as it stood BEFORE this ticket, at a PINNED ref.
+       The difference is the repair.
   P2b  the OTHER direction: deleting a NON-site copy is not a finding.
   P2c  the count that made this possible, per anchor.
 
@@ -34,7 +35,7 @@ import subprocess
 import sys
 
 from kern821e import (hdr, REPO, git_status, Probe, run_checker, flat,
-                      sections, delete_at_site, replace_once)
+                      sections, delete_at_site, replace_once, PRE_REPAIR)
 
 bad = 0
 
@@ -67,16 +68,24 @@ SITES = [
 
 
 def before_checker(old):
-    """`check_doc.py` as committed at HEAD, dropped in beside the live one.
+    """`check_doc.py` as it stood BEFORE this ticket, beside the live one.
 
     Run from the same directory, so it resolves `docs/` identically.  This is
     the reproduction: the finding is not quoted from mg-6cb9, it is re-measured
     against the code that carried it.
+
+    Pinned to `PRE_REPAIR`, not `HEAD`.  Against `HEAD` this comparison was
+    correct until the repair was committed and then silently began measuring
+    the repair against itself -- 7 of 7 at "HEAD", which reads as the finding
+    never having existed.  See the note on `PRE_REPAIR` in `kern821e.py`.
     """
-    p = subprocess.run(["git", "show", "HEAD:" + CHECK_DOC], cwd=REPO,
+    p = subprocess.run(["git", "show", PRE_REPAIR + ":" + CHECK_DOC], cwd=REPO,
                        capture_output=True, text=True)
     if p.returncode != 0 or "C4  the repair document" not in p.stdout:
-        raise AssertionError("cannot read check_doc.py at HEAD")
+        raise AssertionError("cannot read check_doc.py at " + PRE_REPAIR)
+    if "C4_SITES" in p.stdout:
+        raise AssertionError("the pinned ref already carries the repair: "
+                             + PRE_REPAIR)
     return p.stdout
 
 
@@ -108,12 +117,15 @@ def run(edits, which=CHECK_DOC):
 hdr("P2a  DELETE THE COPY A READER MEETS -- ONE SITE AT A TIME")
 
 print("  Each row deletes ONE anchor from ONE heading region and leaves every")
-print("  other copy in the file untouched.  `HEAD` is `check_doc.py` as")
-print("  committed before this ticket, run from the same directory against the")
-print("  same mutated document: a presence test over the whole file.")
+print("  other copy in the file untouched.  `was` is `check_doc.py` as")
+print("  committed at %s, BEFORE this ticket -- run from the same" % PRE_REPAIR)
+print("  directory against the same mutated document: a presence test over")
+print("  the whole file.  The ref is PINNED and not `HEAD`, because against")
+print("  `HEAD` this column stops being a comparison the moment the repair")
+print("  lands and starts measuring the repair against itself.")
 print()
 print("  %-4s %-32s %-22s %-6s %-6s %s"
-      % ("id", "anchor", "site", "HEAD", "now", "verdict"))
+      % ("id", "anchor", "site", "was", "now", "verdict"))
 
 rep_text = open(os.path.join(REPO, REPAIR_DOC), encoding="utf-8").read()
 frep = flat(rep_text)
@@ -132,9 +144,9 @@ for sid, label, needle, repl, site_pat, site_name in SITES:
 print()
 fired_head = sum(1 for r in rows if r[4] == 1)
 fired_now = sum(1 for r in rows if r[5] == 1)
-print("  %d of %d fired at HEAD.  %d of %d fire now."
+print("  %d of %d fired before the repair.  %d of %d fire now."
       % (fired_head, len(rows), fired_now, len(rows)))
-print("  The rows where HEAD is 0 are mg-6cb9's F3: an anchor with more copies")
+print("  The rows where `was` is 0 are mg-6cb9's F3: an anchor with more copies")
 print("  was LESS covered, because the surviving copies stood in for the one a")
 print("  reader had lost.")
 print()
@@ -179,7 +191,7 @@ for sid, label, needle, repl, _sp, _sn in SITES[:5]:
     was, _ = run([edit, (BEFORE, before_checker)], which=BEFORE)
     ok = (was == 1 and now == 1)
     bad += (not ok)
-    print("  %-4s every copy of %-34s HEAD %d, now %d  %s"
+    print("  %-4s every copy of %-34s was %d, now %d  %s"
           % (sid, ("`%s`" % needle)[:34], was, now,
              "both fire -- ok" if ok else "*** ONE DID NOT ***"))
 print()

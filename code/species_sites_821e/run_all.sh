@@ -25,7 +25,14 @@
 set -e
 cd "$(dirname "$0")"
 
-python3 -B selftest821e.py | tee out_selftest.txt
+# NOT `| tee`: in a pipeline `set -e` sees the exit status of `tee`, which is
+# always 0, so a FAILING self-test would not stop the run.  Every other runner
+# in this arc does exactly that, and this one did too until its own self-test
+# went red and the run still exited 0 -- a control that exists and does
+# nothing, which is the class this ticket is about.
+python3 -B selftest821e.py > out_selftest.txt || {
+    cat out_selftest.txt; echo "SELFTEST FAILED"; exit 1; }
+cat out_selftest.txt
 python3 -B p1_depth.py     > out_p1_depth.txt   || { echo "P1 FAILED"; exit 1; }
 python3 -B p2_sites.py     > out_p2_sites.txt   || { echo "P2 FAILED"; exit 1; }
 python3 -B p3_wiring.py    > out_p3_wiring.txt  || { echo "P3 FAILED"; exit 1; }
