@@ -434,7 +434,22 @@ CELL_DELTA = 173
 # moves it must measure the cell AFTER their own edit to it — re-baselining from a run taken
 # before the edit reproduces mg-f922 B one layer down.  This value was taken from the tree
 # with every document edit of mg-8e30 already applied.
-BIGGEST_STRIPPED = 11384
+#
+# RE-BASELINED AGAIN 2026-07-30 by mg-a318 (landing mg-8a5c F-1), 11384 -> 12059 characters,
+# per the same instruction.  WHICH COMMIT MOVED IT: mg-a318's own, and nothing else — the
+# cell was 11384 at f58f7fd.  WHY: mg-8e30's replacement gate was a substring-PRESENCE test
+# and its own corrected wording printed the live gap TWICE in this cell (once as the live
+# figure, once as the tail of the chain `2 928 → 6 069 → −875 → +755 → …`, which ends at the
+# current gap BY CONSTRUCTION), so the gate certified that a correct value existed while the
+# figure a reader met could be wrong, at all three sites (mg-8a5c F-1).  The cell now states
+# the live figure ONCE and the chain's tail POINTS AT it rather than restating it, and says
+# so; the gate reads each figure out of the statement that asserts it.  +675 characters,
+# +5.9%.
+#
+# THE SAME CAVEAT ONE LAYER ON, and it applies to this re-baseline as it did to the last:
+# this value was taken from the tree with every document edit of mg-a318 already applied,
+# including the ones that changed the very figures the cell publishes.
+BIGGEST_STRIPPED = 12059
 GAP_CHARS = 399                # counterexample -> F1 sentence, inside row :135's cell
 GAP_WORDS = 72
 

@@ -38,6 +38,25 @@ stale self-referential locator of the same defect class.**
 **Nothing retreated.** Every declaration `e16e41c` makes under *"DECLARED, NOT HIDDEN"* is
 checked here and holds, one of them more strongly than declared (below).
 
+⚠️ **DISPOSITION, added 2026-07-30 by mg-a318 — annotated in place rather than answered
+elsewhere, which is this arc's own convention for closing an audit.**
+
+| | disposition |
+|---|---|
+| **F-1** | **LANDED, both halves, and the structural half first.** The chain's tail now **points at** the live figure instead of restating it, so each live figure is **written once per site** — mg-8a5c's own multiplicity table, re-run at the repair, reports **0 of 15 cells carrying a needle more than once** (was 3, all of them the live gap). And the gate no longer asks whether a value *occurs*: `verify_landing.py` **reads each figure out of the statement that asserts it** — by label from the `STATE.md` row and §14, by row label from H8's `AFTER mg-8e30` column — and compares it to what the run measured. Marked quotations are excluded before reading, so a quoted withdrawn figure cannot satisfy a check. **N7 is landed with it:** §14 and H8 are anchored on their **sections**, so relocating a disclosure out of its section fires the gate |
+| **F-2** | **LANDED.** The battery is rebuilt to **nine** mutations, every one a **single-copy** change, run through `figure_gate` — **the same function the gate calls**, not a paraphrase, which is the other half of what let the old battery certify a gate slightly unlike the live one. N1–N3 are mg-8a5c's N1/N4/N5, the three single-copy corruptions the old gate observed at exit 0; N5 reinstates the duplicate itself, so the structural repair cannot be silently undone; N6 is the relocation |
+| **F-3** | **NOT LANDED**, and named so it is not mistaken for done — the stale `STATE.md:319` locator and the *"this commit"* ambiguity are pm-onethird's to size |
+| **F-4** | **NOT LANDED** (a commit message; nothing in the tree rests on it) |
+
+⚠️ **AND ONE CONSEQUENCE OF THE STRUCTURAL FIX, DECLARED HERE BECAUSE IT LIVES IN THIS AUDIT'S
+OWN INSTRUMENT.** `audit_repair_8e30.py`'s mutation **N2** — *"corrupt the CHAIN-TAIL copy only"* —
+**has no target any more**, because there is no second copy to corrupt. Its `nth(..., 1)` now
+finds nothing and the mutation is a no-op, which a naive re-run would report as a gate that
+failed to fire. **The predicate is amended by mg-a318 to say so** (it reports `N/A — no second
+copy exists` and counts it as the defect being structurally gone), and `out_audit_8e30.txt` is
+**left as committed**: it is the record of what the audit found at `f58f7fd`, not a live gate, and
+overwriting it would destroy the evidence the finding was made on.
+
 ---
 
 ## 1. The primary target: re-measured from the POST-commit state

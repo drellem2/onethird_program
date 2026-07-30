@@ -36,7 +36,7 @@ whether the enlargement was disclosed anywhere.
     57f962f            9,748       10,483     10,623       -875  after  mg-34bf restructure
     6c0f0da            9,748       10,483     10,623       -875  before mg-e1d0 (this instrument's landing)
     bbe83b5           11,378       16,268     10,623       +755  at     mg-e1d0 -- the commit that printed the row ABOVE as current
-    tree              12,692       18,593     10,623     +2,069  the WORKING TREE -- this run's own side of the edit
+    tree              13,367       21,027     10,623     +2,744  the WORKING TREE -- this run's own side of the edit
 
   [MEASURED ] mg-a2bd: STATE.md row 13,551 -> 16,692 chars (+3,141); §14 copy 10,623 -> 10,623 (+0)
   [CONFIRMED] the mismatch A5 reports MORE THAN DOUBLED in the commit that edited the paragraph: 2,928 -> 6,069 chars
@@ -49,14 +49,14 @@ whether the enlargement was disclosed anywhere.
   metric A5 was opened on no longer means what it meant, which is
   itself the thing a reader must be told:
 
-    STATE.md row cell                        :  12,692 chars
-    relocated per-row history (attempt-mg-a3d4.md) :  18,593 chars
-    STATE.md row, cell + relocated history    :  31,285 chars
+    STATE.md row cell                        :  13,367 chars
+    relocated per-row history (attempt-mg-a3d4.md) :  21,027 chars
+    STATE.md row, cell + relocated history    :  34,394 chars
     §14 copy (frozen since mg-a806)           :  10,623 chars
-    gap, cell only                            :  +2,069 chars
-    gap, cell + relocated history             : +20,662 chars
+    gap, cell only                            :  +2,744 chars
+    gap, cell + relocated history             : +23,771 chars
 
-  [CONFIRMED] the cell-only gap is NON-MONOTONE across the chain (+2,928 -> +6,069 -> -875 -> -875 -> +755 -> +2,069) while the clause mismatch below only grew -- so a char count does not measure it, in EITHER direction
+  [CONFIRMED] the cell-only gap is NON-MONOTONE across the chain (+2,928 -> +6,069 -> -875 -> -875 -> +755 -> +2,744) while the clause mismatch below only grew -- so a char count does not measure it, in EITHER direction
   [CONFIRMED] and the −875 this instrument's own landing printed as CURRENT is the figure at its PARENT: `bbe83b5` added +1,630 chars to the cell it was measuring, so the figure was stale in the commit that published it -- the defect this instrument exists to check for, one generation on (mg-f922 B/C)
   [MEASURED ] so this landing records the CLAUSE mismatch, measured below, and records the char history as history rather than as the live figure
   clause probes -- asserted by the STATE.md row, absent from §14:
@@ -69,11 +69,38 @@ whether the enlargement was disclosed anywhere.
 
   [CONFIRMED] 6 of 6 probed clauses are asserted by the STATE.md row and by nothing in §14 -- A5 stands, on clauses rather than on chars
 
+  the three sites, anchored to the SECTION that records A5:
+    the STATE.md row   13,367 chars (the row itself)
+    §14                16,640 chars (the section, not 115,383 for the whole deliverable)
+    H8                  7,418 chars (the section, not 20,529 for the whole file)
+
   [CONFIRMED] GATE: the false sentence is STRUCK -- it appears 1 time in §14 and 1 of those is inside 'used to end "..."', i.e. quoted as the struck text and asserted nowhere
-  [CONFIRMED] GATE: the enlargement 2 928 -> 6 069 is stated at BOTH the §14 paragraph and the place A5 is recorded (the STATE.md row)
-  [CONFIRMED] GATE: the CURRENT cell-only gap, FORMATTED FROM THIS RUN'S OWN MEASUREMENT (+2 069), is stated at every place A5 is recorded -- the STATE.md row yes, §14 yes, H8 yes
-  [CONFIRMED] GATE: and so are the parts it is built from -- cell 12 692, relocated history 18 593, cell + history +20 662
+  [CONFIRMED] GATE: the enlargement 2 928 -> 6 069 is stated at BOTH the §14 section and the place A5 is recorded (the STATE.md row)
+  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell only' READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
+  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell only' is WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell + relocated history' READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
+  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell + relocated history' is WRITTEN ONCE -- +23 771 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ the STATE.md row: 'STATE.md row cell' READ AT THE SITE = 13 367, MEASURED THIS RUN = 13 367
+  [CONFIRMED] GATE @ the STATE.md row: 'STATE.md row cell' is WRITTEN ONCE -- 13 367 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ the STATE.md row: 'relocated history (this row's own file)' READ AT THE SITE = 21 027, MEASURED THIS RUN = 21 027
+  [CONFIRMED] GATE @ the STATE.md row: 'relocated history (this row's own file)' is WRITTEN ONCE -- 21 027 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ the STATE.md row: 'deliverable §14 copy, frozen since mg-a806' READ AT THE SITE = 10 623, MEASURED THIS RUN = 10 623
+  [CONFIRMED] GATE @ §14: 'gap, cell only' READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
+  [CONFIRMED] GATE @ §14: 'gap, cell only' is WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ §14: 'gap, cell + relocated history' READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
+  [CONFIRMED] GATE @ §14: 'gap, cell + relocated history' is WRITTEN ONCE -- +23 771 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ H8: 'gap, cell only' READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
+  [CONFIRMED] GATE @ H8: 'gap, cell only' is WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ H8: 'gap, cell + relocated history' READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
+  [CONFIRMED] GATE @ H8: 'gap, cell + relocated history' is WRITTEN ONCE -- +23 771 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ H8: 'STATE.md row cell' READ AT THE SITE = 13 367, MEASURED THIS RUN = 13 367
+  [CONFIRMED] GATE @ H8: 'STATE.md row cell' is WRITTEN ONCE -- 13 367 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ H8: 'relocated history (this row's own file)' READ AT THE SITE = 21 027, MEASURED THIS RUN = 21 027
+  [CONFIRMED] GATE @ H8: 'relocated history (this row's own file)' is WRITTEN ONCE -- 21 027 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ H8: 'deliverable §14 copy, frozen since mg-a806' READ AT THE SITE = 10 623, MEASURED THIS RUN = 10 623
+  [CONFIRMED] GATE: and the row points at H8, so the third site is reachable from the first
   [CONFIRMED] GATE: and every site says WHICH SIDE OF THE EDIT its figure is on -- 'measured AFTER this commit's own edit' at all three.  A measurement of something the same commit modifies is only checkable from the post-commit state
+  [CONFIRMED] GATE: and the chain's last term DERIVES from the live figure rather than restating it -- 'the live cell-only gap given above' at the row and §14, and a pointer to the AFTER column at H8.  The figure is written once per site; every later mention refers to that occurrence
   [CONFIRMED] GATE: and both say A5 is MARKED, not landed -- marking a finding and landing it are also different acts
 
 TARGET 2 (F2) -- TWO SITE COUNTS IN ONE COMMIT
@@ -121,26 +148,31 @@ TARGET 4 (F4) -- A RULE ABOUT ENUMERATING A BRIEF, MIS-ENUMERATING ITS BRIEF
   [CONFIRMED] F4 was HALF-landed for a generation: mg-ae62 fixed the site it found by quoting it and the other stood.  A repair covering only the instance already known is this arc's most-repeated defect, so this is reported as half-landed rather than as new
   [CONFIRMED] the CONCLUSION survives at both sites: G″ is none of mg-a806's items, whether the count is written four or six
 
-NEGATIVE CONTROL -- THE FIGURE GATE, MUTATED
---------------------------------------------
-The gate this replaced string-matched `−875` and therefore survived the
-commit that falsified it.  This one formats what it has just measured, so a
-change to the measured object must break it.  Four mutations, verdicts written
-before the run.  Nothing is written to disk.
+NEGATIVE CONTROL -- THE FIGURE GATE, MUTATED ONE COPY AT A TIME
+---------------------------------------------------------------
+Nine mutations, verdicts written before the run, applied in memory to the
+three site texts and evaluated by `figure_gate` itself.  Nothing is written to
+disk.  N1/N3/N4 are mg-8a5c's N1/N4/N5 -- the three single-copy corruptions
+that the previous gate observed at exit 0 while predicting exit 1.
 
-    mutation                                                  predicted           observed
-    M1  the cell grows by one char after the figure was taken GATE FIRES          GATE FIRES
-    M2  the row history grows (cell+history figure goes stale)GATE FIRES          GATE FIRES
-    M3  one site drops the gap figure (H8)                    GATE FIRES          GATE FIRES
-    M4  unmutated -- the tree as it stands                    gate passes         gate passes
+    mutation                                                      predicted     observed
+    N1  STATE.md row: corrupt the LIVE gap figure ONLY            GATE FIRES    GATE FIRES
+    N2  §14: corrupt the LIVE gap figure ONLY                     GATE FIRES    GATE FIRES
+    N3  H8: corrupt the LIVE gap in the AFTER column ONLY         GATE FIRES    GATE FIRES
+    N4  H8: corrupt cell + relocated history ONLY                 GATE FIRES    GATE FIRES
+    N5  STATE.md row: the DUPLICATE reinstated (F-1's own shape)  GATE FIRES    GATE FIRES
+    N6  §14: the disclosure RELOCATED out of the section          GATE FIRES    GATE FIRES
+    N7  the cell grows by one char after the figures were taken   GATE FIRES    GATE FIRES
+    N8  the row history grows by one char                         GATE FIRES    GATE FIRES
+    N9  unmutated -- the tree as it stands                        gate passes   gate passes
 
-  [CONFIRMED] 4 of 4 mutations moved the gate as predicted -- the figure gate is falsifiable by exactly the edit that defeated the one it replaces (a change to the object being measured)
+  [CONFIRMED] 9 of 9 mutations moved the gate as predicted.  The three that matter are N1-N3: corrupting ONLY the figure a reader meets, at each of the three sites, which the presence-test gate observed at exit 0 (mg-8a5c N1/N4/N5). N5 fires on the duplicate itself, so the structural repair cannot be silently undone
 
 BOTTOM LINE
 -----------
-  checks recorded : 34
+  checks recorded : 56
   measurements    : 3
-  confirmed       : 31
+  confirmed       : 53
   refuted         : 0
 
   All four findings are measured and all four stand.  F4 stands as
