@@ -1,0 +1,50 @@
+==============================================================================
+(1) BLOCK QUOTES IN THE GATE DOC vs THE CITED DOCUMENTS, line by line
+==============================================================================
+gate:43    10 lines  EXACT MATCH in source lines 697..707
+gate:57     7 lines  EXACT MATCH in source lines 713..719
+gate:67     3 lines  EXACT MATCH in source lines 721..723
+gate:199    6 lines  the gate's OWN theorem statement, not a quotation
+
+VERDICT on the quotations: all block quotes are exact, no paraphrase smuggled into a quote
+
+==============================================================================
+(2) LINE-NUMBER CITATIONS, DEREFERENCED
+==============================================================================
+gate 1.1 cites source SS8 as "lines 691-723":
+   691  OneThird-Hodge-Side-Leverage.md    :691   ## §8 — Negative: representation theory does not descend
+   723  OneThird-Hodge-Side-Leverage.md    :723   That is true and says nothing about `λ₂`.
+   next '## ' heading is line 727, so the section body is 691..726 -- citation covers the prose (the remainder is a horizontal rule)
+gate 1.1 cites ledger rows N2 / N2-prime as "lines 1019-1020":
+   1019 OneThird-Hodge-Side-Leverage.md    :1019  | **N2** | for every non-antichain the span of the shape-`α` faces is not an `S_n`-submodule of `Ind
+   1020 OneThird-Hodge-Side-Leverage.md    :1020  | **N2'** | `Σ_i s_i` is not central in `C[S_n]` for `n ≥ 3`, so characters do not diagonalise `Δ_AT
+gate 1 cites the mg-86a3 audit "rows at lines 75, 475, 500-501":
+   75   OneThird-Hodge-Side-Leverage-Indep :75    | **§8** (N2) representation theory does not descend | "the AT graph of a non-antichain has no `S_n`
+   475  OneThird-Hodge-Side-Leverage-Indep :475   | "Also settled, negatively: representation theory does not descend" | **Sound.** Proof checked line
+   500  OneThird-Hodge-Side-Leverage-Indep :500   | N2 | shape-`α` face span is not an `S_n`-submodule | PROVEN | ✅ proof checked line by line |
+   501  OneThird-Hodge-Side-Leverage-Indep :501   | N2' | `Σ_i s_i` not central for `n ≥ 3` | PROVEN | ✅ |
+
+==============================================================================
+(3) INLINE FRAGMENTS, SEARCHED IN THE WHOLE NORMALISED DOCUMENT
+==============================================================================
+  [OK ] N2 ledger scope line, quoted in gate 1.1                   found
+  [OK ] auditor restatement, quoted in gate 1.2                    found
+  [OK ] auditor verdict words, quoted in gate 1.2                  found
+  [OK ] 'proof checked line by line', quoted in gate 1             found
+  [OK ] source SS9.4 heading, paraphrased in gate 1.3              found
+  [OK ] the words gate 2.6 attributes to SS9.1                     found
+  [OK ] SS9.1's parenthetical CONTINUED past what gate 2.6 quotes  found
+  [OK ] ledger row B2's operation (opposite convention to the gate's 'join') found
+
+Context for the last three rows: the SS9.1 parenthetical is ONE sentence.
+Gate 2.6 quotes its first clause and calls the content of its last clause
+unrecorded.  Both clauses, verbatim from the source:
+   src:749   (Note that the acyclic partitions are *not* closed under refinement: for `P = {a<c, b<d}` the
+   src:750   partition `{a,d}|{b,c}` refines the acyclic one-block partition and is cyclic. So `L_P` is a lattice
+   src:751   for the reverse-refinement order and the join is the common refinement, not a sublattice of the
+   src:752   partition lattice under refinement.)
+
+and what gate 2.6 says about them:
+   gate:282  The source (§9.1) records that acyclic partitions are *"NOT closed under refinement"* with this same
+   gate:283  witness; that they also fail the **join** appears to be unrecorded, and it matters here, because
+   gate:284  "partitions-as-set-quotients and faces-as-poset-quotients are two instances of one mechanism" is at

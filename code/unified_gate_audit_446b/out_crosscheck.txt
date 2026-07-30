@@ -1,0 +1,40 @@
+==============================================================================
+(A) FIVE NUMBERS THE EXISTING PIPELINE ALREADY CARRIES, RE-DERIVED
+==============================================================================
+  poset          pipeline   mine       agree
+  antichain A_5  52         52         YES
+  chain C_5      16         16         YES
+  fence n=5      45         45         YES
+  C_2+C_3        37         37         YES
+  V+A_2 n=5      52         52         YES
+  (pipeline numbers are |support lattice| from the LRB product in code/hodge_leverage/lrb_output.txt; mine are |AC(P)| from acyclicity)
+  ALL FIVE AGREE: True
+
+  Note the sharpest one: V+A_2 = the poset {0<1, 0<2} with 2 isolated points -- a STAR,
+  not an antichain -- and the pipeline recorded |support lattice| = 52 = B_5 = |Pi_5| for it
+  in a commit that predates mg-8fd1.  The existing pipeline therefore already carried
+  an instance of the gate document's central positive claim (a non-antichain whose
+  quotient lattice is ALL of Pi_n), independently of the new code.
+
+==============================================================================
+(B) DOES THE QUOTIENT LATTICE REMEMBER THE POSET?  n = 4, 5, brute force
+==============================================================================
+  n=4: labelled posets 219, distinct AC(P) 49, largest fibre 45
+        every member of the largest fibre is an antichain-or-star: True
+  n=5: labelled posets 4231, distinct AC(P) 1316, largest fibre 131
+        every member of the largest fibre is an antichain-or-star: True
+        composition: 1 antichain + 75 labelled down-stars + 55 labelled up-stars = 131
+
+==============================================================================
+(C) 'STABLE' vs 'STABLE UP TO THE RELABELLING THAT INDUCES IT'
+==============================================================================
+  setwise stabiliser   G(P)  = {sigma : sigma.AC(P) = AC(P)}
+  gate's alternative   G'(P) = {sigma : AC(sigma P) = AC(P)}
+  pointwise stabiliser G0(P) = {sigma : sigma.pi = pi for every pi in AC(P)}
+  n=3: classes 5;  G(P) != G'(P) on 0 of them;  pointwise stabiliser nontrivial on 0
+  n=4: classes 16;  G(P) != G'(P) on 0 of them;  pointwise stabiliser nontrivial on 0
+  n=5: classes 63;  G(P) != G'(P) on 0 of them;  pointwise stabiliser nontrivial on 0
+  So the two readings coincide (the action on AC(P) is by relabelling, and
+  AC(sigma P) = sigma.AC(P) identically), while the POINTWISE stabiliser is
+  trivial for n >= 2 -- 'stable' can only mean setwise, and the gate document
+  states the setwise version and its equivalent form explicitly.

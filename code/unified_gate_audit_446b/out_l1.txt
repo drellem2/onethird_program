@@ -1,0 +1,49 @@
+==============================================================================
+(A) N2 RE-DERIVED FROM THE DEFINITION -- AND IT IS A STATEMENT ABOUT THE
+    AMBIENT ACTION ON ALL ORDERED PARTITIONS OF SHAPE alpha
+==============================================================================
+  n  classes   classes where EVERY shape-alpha face set is S_n-invariant   which
+  2        2   1                                                        antichain A_2
+  3        5   1                                                        antichain A_3
+  4       16   1                                                        antichain A_4
+  5       63   1                                                        antichain A_5
+  pipeline (code/hodge_leverage/theorems_output.txt SS N2) records 1 per n,
+  the antichain, for n = 2..5 -- reproduced above from a disjoint route.
+
+  So the gate document's SS1.2 report of N2 -- universally quantified over all
+  finite posets and all alpha with >= 2 parts, hypothesis 'OP_alpha transitive
+  and F_alpha(P) nonempty proper', conclusion 'span F_alpha(P) is not an
+  S_n-submodule of Ind_{S_alpha}^{S_n}1' -- is FAITHFUL to what is provable,
+  and the n <= 5 sweep is indeed a check and not the evidence.
+
+==============================================================================
+(B) THE WIDENED SENTENCE, TESTED: A NON-AMBIENT S_3-MODULE STRUCTURE ON A
+    NON-ANTICHAIN'S CHAMBER SPACE THAT COMMUTES WITH Delta_AT
+==============================================================================
+  P = {0 < 1} with 2 isolated  (a non-antichain, so N2 applies to it)
+  chambers (linear extensions): [(0, 1, 2), (0, 2, 1), (2, 0, 1)]
+  Delta_AT = D - A on the AT graph:
+      [1, -1, 0]
+      [-1, 2, -1]
+      [0, -1, 1]
+  exact eigenpairs verified: lambda=0 on [1, 1, 1], lambda=1 on [1, 0, -1], lambda=3 on [1, -2, 1]
+  rho: S_3 -> GL(C^chambers), rho(sigma) = diag(1, sgn, sgn) in the eigenbasis
+      is a group homomorphism (all 36 pairs, exact rationals): True
+      commutes with Delta_AT exactly: True
+      isotypic decomposition: trivial on span(1,1,1), sign on span{(1,0,-1),(1,-2,1)}
+      -> a PROPER decomposition into Delta_AT-invariant isotypic pieces, 1 + 2
+
+  and for the SAME poset, N2 holds -- every shape-alpha face set with >= 2 parts:
+      alpha=(1, 1, 1) |OP_alpha|=6   |F_alpha(P)|=3   nonempty proper: True   S_3-invariant: False
+      alpha=(1, 2)    |OP_alpha|=3   |F_alpha(P)|=2   nonempty proper: True   S_3-invariant: False
+      alpha=(2, 1)    |OP_alpha|=3   |F_alpha(P)|=2   nonempty proper: True   S_3-invariant: False
+
+  CONCLUSION.  N2 is exactly what the gate document's SS1.2 says it is, and
+  its 'one route, not the leg' answer is right.  But the sentence the gate
+  document nominates as the negative's BITE -- 'the similarity to S_n cannot
+  be an S_n-module structure, at any n, for any non-antichain' (line 22, and
+  ledger row Q2 labelled PROVEN) -- drops the word AMBIENT, and what is left
+  is not what N2 proves: above is a non-antichain, an honest S_3-module
+  structure on its face/chamber space, and a block-diagonalisation of Delta_AT
+  by its isotypic pieces.  The repair is one word: 'cannot be an S_n-module
+  structure INHERITED FROM THE AMBIENT ACTION ON ORDERED PARTITIONS'.
