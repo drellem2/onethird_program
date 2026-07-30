@@ -408,7 +408,18 @@ BIGGEST_KEY = "mg-a3d4"        # the row holding the largest cell in the file (:
 CELL_AFTER_STRIPPED = 7876
 CELL_BEFORE_STRIPPED = 7703
 CELL_DELTA = 173
-BIGGEST_STRIPPED = 8440
+# RE-BASELINED 2026-07-30 by mg-e1d0 (landing mg-3c24), 8440 -> 10070 characters, per the
+# instruction this instrument prints when it reports MOVED.  WHICH COMMIT MOVED IT: mg-e1d0's
+# own, and nothing else — the mg-a3d4 cell was 8440 at every commit from 57f962f to a13b4a9.
+# WHY, stated rather than left to be inferred, because "a cell grew and the growth was not
+# disclosed" is literally the finding being landed: the cell gained the restored base-case
+# condition on row G′ (mg-3c24 F3) and the disclosure that mg-d39d's A5 was ENLARGED after it
+# was opened (mg-3c24 F1).  +1630 characters, +19.3%.  The long-form records for both went to
+# docs/state-history/attempt-mg-a3d4.md as H7 and H8 rather than into the cell — the
+# restructure convention — which is why the growth is 1630 and not roughly twice that.
+# This constant is the ONLY figure this landing moved; every content digest and every
+# presentation record above is untouched.
+BIGGEST_STRIPPED = 10070
 GAP_CHARS = 399                # counterexample -> F1 sentence, inside row :135's cell
 GAP_WORDS = 72
 
