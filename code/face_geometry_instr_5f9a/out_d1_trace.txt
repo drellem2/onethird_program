@@ -1,0 +1,48 @@
+==============================================================================
+mg-5f9a part 1 -- the gate label is returned BY the predicate
+==============================================================================
+posets n <= 5: 86
+
+==============================================================================
+A. THE REFACTOR DECIDED NOTHING DIFFERENTLY
+==============================================================================
+  [HOLDS ] union-find (the shipped predicate) vs BFS 2-colouring: 516 agree, 0 disagree
+  [HOLDS ] union-find vs brute force over all 2^m sign vectors (m <= 8): 306 agree, 0 disagree
+  [HOLDS ] this tree's predicate vs `main`'s, on the same 516 pairs: 516 identical, 0 differ
+
+==============================================================================
+B. ONE IMPLEMENTATION -- checked in the SOURCE, not only in the counts
+==============================================================================
+  [HOLDS ] `absorbable_by_diagonal_twist` is a single `return absorb_trace(...).absorbable` -- so the gate label and the answer come from ONE execution and cannot be produced by different orders
+        AST body after the docstring: 1 statement(s)
+  [HOLDS ] every `return` in `absorb_trace` carries its gate label as a literal at the return site: 6 returns, labels ['diagonal', 'magnitude', 'parity', 'shape']
+  [HOLDS ] controls.py defines NO gate procedure of its own -- `deciding_gate` is gone and nothing replaced it; the rows call `absorb_trace`
+        functions in controls.py with 'gate' in the name: none
+
+==============================================================================
+C. WHAT WAS CORRECTED, re-measured here (mg-1c80's 57 of 297)
+==============================================================================
+   row  corruption                bites |  trace: diag mag par |  mg-da45 priority   | differ | both | signs
+   I1   ridge_facets                72 |            15   57   0 |       72    0   0 |     57 |   72 |     0
+   I2   split_free_as_interior      82 |            82    0   0 |       82    0   0 |      0 |   82 |     0
+   I3   ridge_drop                  82 |            82    0   0 |       82    0   0 |      0 |   82 |     0
+   I4   facet_offbyone              61 |            58    3   0 |       58    3   0 |      0 |   58 |     0
+   ALL                             297 |           237   60   0 |      294    3   0 |     57 |  294 |     0
+  [HOLDS ] the two orders disagree on 57 of the 297 biting pairs -- mg-1c80 measured 57 of 297 and that is what the artifact was printing
+  [HOLDS ] BOTH forced gates are violated on 294 of the 297, so on those the gate a trace names is a fact about the order and nothing more
+  [HOLDS ] the predicate read 0 off-diagonal SIGNS in total over the 297 pairs -- the one quantity in this table no ordering can move
+  [HOLDS ] the artifact prints the TRACE's split for I1 ('I1 72 biting = 15 diagonal + 57 magnitude')
+  [HOLDS ] the artifact no longer prints the priority order's split ('I1 72 biting = 72 diagonal + 0 magnitude')
+  [HOLDS ] the artifact warns, where it prints a gate, that the gates are not exclusive and the label is the first one REACHED
+
+==============================================================================
+D. THE ROUTING QUESTION IS ASKED DIRECTLY (`diagonal_moves`)
+==============================================================================
+  [HOLDS ] I1: the diagonal MOVES on 72/72; the trace happens to return at the diagonal gate on 15/72.  Routing uses the first
+  [HOLDS ] I2: the diagonal MOVES on 82/82; the trace happens to return at the diagonal gate on 82/82.  Routing uses the first
+  [HOLDS ] I3: the diagonal MOVES on 82/82; the trace happens to return at the diagonal gate on 82/82.  Routing uses the first
+  [HOLDS ] I4: the diagonal MOVES on 58/61; the trace happens to return at the diagonal gate on 58/61.  Routing uses the first
+
+==============================================================================
+16 claim(s) scored; 0 BROKEN.
+==============================================================================
