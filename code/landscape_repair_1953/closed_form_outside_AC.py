@@ -37,10 +37,24 @@ Three tests, and the first is the one the target never ran:
 
   R1c  THE WITNESS, printed in full: P = {a<d, b<c} at n = 4.
 
-  R1d  A CONTROL THAT MUST FIRE.  Restrict X to AC(P) -- what the target's
-       instrument did -- and re-run R1b.  If (DOC) passes there while failing
-       in R1b, the restriction is demonstrated to be what hid the defect,
-       rather than merely alleged to be.
+  R1d  THE IDENTITY -- NOT A CONTROL.  Restricted to AC(P) -- what the
+       target's instrument ranged over -- (DOC) and (REPAIRED) are the SAME SET
+       OF FLATS, because
+
+           {antichain blocks} n {acyclic quotient} = (REPAIRED)
+
+       is a one-line set identity.  So the target's measurement could not have
+       seen the difference, whatever it had measured.  R1d exhibits that
+       identity by enumeration (0 posets where the two sides differ, all 404
+       classes at 2 <= n <= 6) and re-runs R1b on AC(P) to show the sum agrees
+       there too.  It CANNOT FAIL while (REPAIRED) passes, so by this repo's
+       own criterion -- code/hodge_leverage_audit_86a3/audit_controls.py:4,
+       "a control must be able to FAIL on the construction it guards" -- it is
+       NOT a control and is not evidence.  R1a and R1b range over all flats and
+       are where the discriminating power is; R1d says why no check confined to
+       AC(P) could ever have had any.  (mg-3b51 A1: this block was originally
+       billed as "A CONTROL THAT MUST FIRE" and the restriction as
+       "demonstrated" rather than stated.  Relabelled by mg-aec7.)
 
 Exhaustive over all isomorphism classes to n = 6.
 """
@@ -63,7 +77,8 @@ def analyse(n):
     flats = set_partitions(n)
     s = dict(classes=0, geom_vs_doc_bad=0, geom_vs_rep_bad=0,
              doc_sum_bad=0, rep_sum_bad=0, spurious=0, flats=0,
-             doc_sum_bad_onAC=0, rep_sum_bad_onAC=0, witness=None)
+             doc_sum_bad_onAC=0, rep_sum_bad_onAC=0,
+             doc_ne_rep_onAC=0, witness=None)
     for rel in iso_classes(n):
         s['classes'] += 1
         s['flats'] += len(flats)
@@ -97,7 +112,10 @@ def analyse(n):
         if rep_sum != e:
             s['rep_sum_bad'] += 1
 
-        # R1d -- the control: the same two rules, restricted to AC(P)
+        # R1d -- the IDENTITY: restricted to AC(P) the two rules are the same
+        # set of flats.  Exhibited, not tested: it cannot come out otherwise.
+        if (M0_doc & AC) != M0_rep:
+            s['doc_ne_rep_onAC'] += 1
         doc_onAC = sum(multiplicity(flats[k]) for k in M0_doc & AC)
         rep_onAC = sum(multiplicity(flats[k]) for k in M0_rep & AC)
         if doc_onAC != e:
@@ -180,25 +198,45 @@ def main():
     print()
 
     print("-" * 78)
-    print("R1d  THE CONTROL THAT MUST FIRE.  The same two rules restricted to")
-    print("     AC(P), which is what the target's instrument did.  If the")
-    print("     document's rule passes HERE while failing in R1b, then the")
-    print("     restriction is what hid the defect.")
+    print("R1d  THE IDENTITY -- NOT A CONTROL.  Restricted to AC(P), which is")
+    print("     what the target's instrument ranged over, the two rules are the")
+    print("     SAME SET OF FLATS:  {antichain blocks} n {acyclic quotient} IS")
+    print("     the repaired rule.  Exhibited by enumeration below, and it")
+    print("     cannot come out otherwise -- see the note under the table.")
     print("-" * 78)
-    print("%3s %8s %30s %30s"
-          % ("n", "classes", "doc rule ON AC(P)", "repaired rule ON AC(P)"))
+    print("%3s %8s %26s %26s %18s"
+          % ("n", "classes", "doc rule ON AC(P)", "repaired rule ON AC(P)",
+             "the two SETS"))
+    tot_cls = tot_ne = 0
     for n in range(2, nmax + 1):
         s = rows[n]
-        print("%3d %8d %30s %30s"
+        tot_cls += s['classes']
+        tot_ne += s['doc_ne_rep_onAC']
+        print("%3d %8d %26s %26s %18s"
               % (n, s['classes'],
                  "%d bad of %d" % (s['doc_sum_bad_onAC'], s['classes']),
-                 "%d bad of %d" % (s['rep_sum_bad_onAC'], s['classes'])))
+                 "%d bad of %d" % (s['rep_sum_bad_onAC'], s['classes']),
+                 "%d differ of %d" % (s['doc_ne_rep_onAC'], s['classes'])))
+    print("%3s %8d %26s %26s %18s"
+          % ("all", tot_cls, "", "", "%d differ of %d" % (tot_ne, tot_cls)))
+    print()
+    print("     THIS TABLE CANNOT COME OUT ANY OTHER WAY, and that is the")
+    print("     point of it.  The rightmost column is a ONE-LINE SET IDENTITY")
+    print("     exhibited on every class; the two 'bad' columns are then the")
+    print("     same column twice.  By this repo's own criterion --")
+    print("     code/hodge_leverage_audit_86a3/audit_controls.py:4, 'a control")
+    print("     must be able to FAIL on the construction it guards' -- R1d is")
+    print("     NOT a control and is not evidence.  It is the reason no check")
+    print("     confined to AC(P) could have caught the defect, whatever it")
+    print("     had measured.  (mg-3b51 A1; relabelled by mg-aec7.)")
     print()
     print("=" * 78)
     print("READING.  R1a is the derivation and R1b its consequence; they must")
-    print("agree, and they do.  R1d is the control: the document's rule is")
-    print("sound on AC(P) and false off it, so a measurement restricted to")
-    print("AC(P) cannot see the defect.  The repaired rule passes everywhere.")
+    print("agree, and they do, and the mutation panel in the audit shows both")
+    print("have power.  R1d is not a fourth test: it is the stated identity")
+    print("that explains why the target's measurement, confined to AC(P), was")
+    print("blind to a rule that is false off it.  The repaired rule passes")
+    print("everywhere.")
     print("=" * 78)
 
 
