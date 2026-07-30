@@ -1,0 +1,102 @@
+
+==============================================================================
+G. ROW I1's UNPROVED REMAINDER (6 of 72).  I1 moves one diagonal
+   entry down and another up, so the TRACE cannot separate the
+   spectra by construction.  Are those 6 posets gauges?
+==============================================================================
+  0<1                      n=3 |L(P)|=3   charpoly agrees mod p at 5 shifts: True   signed-permutation conjugate: True      facet set changed: False
+  0<1 0<3 1<2              n=4 |L(P)|=3   charpoly agrees mod p at 5 shifts: True   signed-permutation conjugate: True      facet set changed: False
+  0<1 1<3 2<3              n=4 |L(P)|=3   charpoly agrees mod p at 5 shifts: True   signed-permutation conjugate: True      facet set changed: False
+  0<1 1<2 1<4 2<3          n=5 |L(P)|=3   charpoly agrees mod p at 5 shifts: True   signed-permutation conjugate: True      facet set changed: False
+  0<1 0<3 1<2 2<4 3<4      n=5 |L(P)|=3   charpoly agrees mod p at 5 shifts: True   signed-permutation conjugate: True      facet set changed: False
+  0<1 1<3 2<3 3<4          n=5 |L(P)|=3   charpoly agrees mod p at 5 shifts: True   signed-permutation conjugate: True      facet set changed: False
+
+  Read: a False in the charpoly column would be a proof the spectrum
+  moved that the audited invariant list missed; a True is evidence
+  of isospectrality, and a signed-permutation conjugate is a PROOF
+  that the corruption is a relabelling gauge on that poset.
+
+==============================================================================
+H. WHICH PRINTED MEASUREMENTS ARE TAUTOLOGIES OF THE CODE PATH?
+==============================================================================
+  1. 'the target D-A is byte-identical on 344/344 (poset, mutation)
+     pairs'.  claim1_pair computes the target as at_laplacian(P);
+     `incidence_mode` is not an argument of at_laplacian and is not
+     forwarded to it.  So the target cannot differ, for any poset,
+     any mutation, at any n.  344/344 is 4 x 86 and is forced.
+     evidence, from the committed source:
+       _, target = at_laplacian(P)
+       target = [row[:] for row in target]
+       target = [[t * 2 for t in row] for row in target]
+
+  2. 'no ridge lies in >= 3 facets under any of the four mutations'.
+     For I1 the re-targeted ridge's facet list is {j1,j3}, size 2 by
+     construction; I2 does not touch the boundary matrix at all; I3
+     deletes a row.  So three of the four entries are forced and
+     only the I4 entry is a measurement.  Recomputed here:
+       I1   posets with a ridge in >= 3 facets: 0
+       I2   posets with a ridge in >= 3 facets: 0
+       I3   posets with a ridge in >= 3 facets: 0
+       I4   posets with a ridge in >= 3 facets: 0
+
+==============================================================================
+I. WHAT ROW I4's 25 VACUOUS POSETS MEAN FOR 'le_to_facet IS COVERED'
+==============================================================================
+  posets where the off-by-one produces a DIFFERENT facet set and the
+  claim-(1) test is nevertheless silent: 24 of 86
+  by |L(P)|: [(1, 4), (2, 6), (3, 3), (4, 2), (5, 1), (6, 4), (8, 2), (12, 1), (24, 1)]
+  of those, with |L(P)| >= 3 (so not a 1x1 or 2x2 degeneracy): 14
+      0<1 0<2 0<3              n=4 |L(P)|=6
+      0<1 0<3 1<2              n=4 |L(P)|=3
+      0<1 0<2 0<3 0<4          n=5 |L(P)|=24
+      0<1 0<3 0<4 1<2          n=5 |L(P)|=12
+      0<1 0<4 1<2 1<3          n=5 |L(P)|=8
+      0<1 1<2 1<3 1<4          n=5 |L(P)|=6
+      0<1 1<2 1<4 2<3          n=5 |L(P)|=3
+      0<1 0<4 1<2 2<3          n=5 |L(P)|=4
+      0<1 0<3 1<2 2<4 3<4      n=5 |L(P)|=3
+      0<1 0<3 1<2 1<4 3<4      n=5 |L(P)|=5
+      0<1 0<2 1<3 1<4 2<3 2<4  n=5 |L(P)|=4
+      0<1 0<2 0<4 1<3 2<3      n=5 |L(P)|=8
+      ... and 2 more
+
+  So a mis-indexed le_to_facet really does build a different complex
+  on these posets and claim (1) still holds there.  The row's own
+  wording ('where the corruption changes L^rel', 25 vacuous) is
+  correctly scoped; what is NOT said anywhere is that the vacuity is
+  a numerical coincidence rather than an identity -- on 24 of the 25
+  the incidence structure genuinely is wrong and the pipeline does
+  not notice.  Contrast row I1/I2/I3, whose vacuity is 'the mutation
+  did not apply'.  Two different kinds of vacuity, one label.
+
+==============================================================================
+J. mg-5630's LINE-F EXPERIMENT, re-run independently.
+   Under each mutation, do NEGATIVE CONTROL 3's own lines move?
+==============================================================================
+  uncorrupted: NC3 line 3 (parity) bites on 82/86
+  I1   NC3 line 2 all-+1-unchanged 86/86 (SILENT); NC3 line 3 parity bites 82 (unchanged -> reads verbatim)
+  I2   NC3 line 2 all-+1-unchanged 86/86 (SILENT); NC3 line 3 parity bites 82 (unchanged -> reads verbatim)
+  I3   NC3 line 2 all-+1-unchanged 86/86 (SILENT); NC3 line 3 parity bites 72 (moved to 72 -> bite-count accident)
+  I4   NC3 line 2 all-+1-unchanged 86/86 (SILENT); NC3 line 3 parity bites 79 (moved to 79 -> bite-count accident)
+
+  Reproduces the committed 86/86 SILENT on all four, and the
+  82 / 82 / 72 / 79 parity bite-counts, from an independent build.
+  NEGATIVE CONTROL 3 therefore could not have caught any of the four
+  incidence errors: its detecting line is a sign gauge and stays a
+  sign gauge under all of them.  That part of mg-2789's case STANDS.
+
+==============================================================================
+K. THE ABSORBABILITY DECISION PROCEDURE, BRUTE-FORCED.
+==============================================================================
+  my BFS decision == brute force over all 2^m sign vectors on 306/306 (poset, mutation) pairs with |L(P)| <= 8
+  (the committed instrument check reports 306/306 on the same
+   population and cutoff; 51 posets here have |L(P)| <= 8, 6 modes -> 306)
+
+==============================================================================
+L. THE REJECTED CANDIDATE, checked: is facet_swap01 really a gauge?
+==============================================================================
+  bites on 72/86; absorbable into a diagonal +-1 twist on 0/72; spectrum provably moved on 0/72
+  it IS a signed-permutation conjugate of the true matrix on 72/72 -- so 'a relabelling of the facet set is a gauge' is verified, and the ground on which facet_swap01 was rejected is sound.
+
+==============================================================================
+done
