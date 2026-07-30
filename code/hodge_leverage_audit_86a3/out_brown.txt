@@ -1,0 +1,70 @@
+1-2. band axioms and supports == acyclic partitions
+    n=1  axiom violations=0  associativity violations=0  support mismatches=0
+    n=2  axiom violations=0  associativity violations=0  support mismatches=0
+    n=3  axiom violations=0  associativity violations=0  support mismatches=0
+    n=4  axiom violations=0  associativity violations=0  support mismatches=0
+    n=5  axiom violations=0  associativity violations=(skipped)  support mismatches=0
+
+3. Brown multiplicities: nonnegative integers summing to |L(P)|
+    n=1  posets=  1  negative m_X: 0   sum != |L(P)|: 0
+    n=2  posets=  2  negative m_X: 0   sum != |L(P)|: 0
+    n=3  posets=  5  negative m_X: 0   sum != |L(P)|: 0
+    n=4  posets= 16  negative m_X: 0   sum != |L(P)|: 0
+    n=5  posets= 63  negative m_X: 0   sum != |L(P)|: 0
+
+4. predicted spectrum vs the actual matrix (exact rational ranks)
+   SIX weight families -- the deliverable used three.  Identical
+   multiplicities m_X are reused across all six, which is what
+   'independent of w' has to mean operationally.
+    n=2  ({i},rest) faces        correct on  2 of  2
+    n=2  3^k on k-block faces    correct on  2 of  2
+    n=2  chambers only           correct on  2 of  2
+    n=2  generic all faces       correct on  2 of  2
+    n=2  two-block faces         correct on  2 of  2
+    n=2  uniform all faces       correct on  2 of  2
+    n=3  ({i},rest) faces        correct on  5 of  5
+    n=3  3^k on k-block faces    correct on  5 of  5
+    n=3  chambers only           correct on  5 of  5
+    n=3  generic all faces       correct on  5 of  5
+    n=3  two-block faces         correct on  5 of  5
+    n=3  uniform all faces       correct on  5 of  5
+    n=4  ({i},rest) faces        correct on 16 of 16
+    n=4  3^k on k-block faces    correct on 16 of 16
+    n=4  chambers only           correct on 16 of 16
+    n=4  generic all faces       correct on 16 of 16
+    n=4  two-block faces         correct on 16 of 16
+    n=4  uniform all faces       correct on 16 of 16
+
+5. §9.4 DECIDED, not left undecided: exact rational LP
+    n=2  NOT a Brown walk:  0   IS a Brown walk:  1   vacuous: 1
+        [test said UNDECIDED]  (antichain)                        |L(P)|= 2  ->  IS a Brown walk
+            witness w: 1/2 on [0, 0], 1/2 on [1, 1]
+    n=3  NOT a Brown walk:  2   IS a Brown walk:  2   vacuous: 1
+        [test said UNDECIDED]  0<1 0<2                            |L(P)|= 2  ->  IS a Brown walk
+            witness w: 1/4 on [0, 0], 1/2 on [0, 1], 1/4 on [1, 1]
+        [test said UNDECIDED]  0<2 1<2                            |L(P)|= 2  ->  IS a Brown walk
+            witness w: 1/4 on [0, 0], 1/2 on [0, 1], 1/4 on [1, 1]
+    n=4  NOT a Brown walk: 11   IS a Brown walk:  4   vacuous: 1
+        [test said UNDECIDED]  0<1 0<2 0<3 1<2 1<3                |L(P)|= 2  ->  IS a Brown walk
+            witness w: 1/6 on [0, 0], 2/3 on [0, 1], 1/6 on [1, 1]
+        [test said UNDECIDED]  0<1 0<2 0<3 1<3 2<3                |L(P)|= 2  ->  IS a Brown walk
+            witness w: 1/6 on [0, 0], 2/3 on [0, 1], 1/6 on [1, 1]
+        [test said UNDECIDED]  0<2 0<3 1<2 1<3                    |L(P)|= 4  ->  IS a Brown walk
+            witness w: 1/6 on [0, 0, 2, 2], 1/6 on [0, 1, 0, 1], 1/3 on [0, 1, 2, 3], 1/6 on [1, 1, 3, 3], 1/6 on [2, 3, 2, 3]
+        [test said UNDECIDED]  0<2 0<3 1<2 1<3 2<3                |L(P)|= 2  ->  IS a Brown walk
+            witness w: 1/6 on [0, 0], 2/3 on [0, 1], 1/6 on [1, 1]
+    n=5  NOT a Brown walk: 55   IS a Brown walk:  7   vacuous: 1
+        [test said UNDECIDED]  0<1 0<2 0<3 0<4 1<2 1<3 1<4 2<3 2<4 |L(P)|= 2  ->  IS a Brown walk
+            witness w: 1/8 on [0, 0], 3/4 on [0, 1], 1/8 on [1, 1]
+        [test said UNDECIDED]  0<1 0<2 0<3 0<4 1<2 1<3 1<4 2<4 3<4 |L(P)|= 2  ->  IS a Brown walk
+            witness w: 1/8 on [0, 0], 3/4 on [0, 1], 1/8 on [1, 1]
+        [test said UNDECIDED]  0<1 0<2 0<3 0<4 1<3 1<4 2<3 2<4    |L(P)|= 4  ->  IS a Brown walk
+            witness w: 1/8 on [0, 0, 2, 2], 1/8 on [0, 1, 0, 1], 1/2 on [0, 1, 2, 3], 1/8 on [1, 1, 3, 3], 1/8 on [2, 3, 2, 3]
+        [test said UNDECIDED]  0<1 0<2 0<3 0<4 1<3 1<4 2<3 2<4 3<4 |L(P)|= 2  ->  IS a Brown walk
+            witness w: 1/8 on [0, 0], 3/4 on [0, 1], 1/8 on [1, 1]
+        [test said UNDECIDED]  0<2 0<3 0<4 1<2 1<3 1<4 2<3 2<4    |L(P)|= 4  ->  IS a Brown walk
+            witness w: 1/8 on [0, 0, 2, 2], 1/8 on [0, 1, 0, 1], 1/2 on [0, 1, 2, 3], 1/8 on [1, 1, 3, 3], 1/8 on [2, 3, 2, 3]
+        [test said UNDECIDED]  0<2 0<3 0<4 1<2 1<3 1<4 2<3 2<4 3<4 |L(P)|= 2  ->  IS a Brown walk
+            witness w: 1/8 on [0, 0], 3/4 on [0, 1], 1/8 on [1, 1]
+        [test said UNDECIDED]  0<2 0<3 0<4 1<2 1<3 1<4 2<4 3<4    |L(P)|= 4  ->  IS a Brown walk
+            witness w: 1/8 on [0, 0, 2, 2], 1/8 on [0, 1, 0, 1], 1/2 on [0, 1, 2, 3], 1/8 on [1, 1, 3, 3], 1/8 on [2, 3, 2, 3]

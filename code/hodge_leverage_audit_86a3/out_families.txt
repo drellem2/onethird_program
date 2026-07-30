@@ -1,0 +1,11 @@
+C_a + C_a
+  n=2 |L|=  2 gamma= bound=2.000000 truth=2.000000 ratio=1.00
+  n=4 |L|=  6 gamma=0.500,0.500 bound=0.500000 truth=0.585786 ratio=1.17
+  n=6 |L|= 20 gamma=0.500,0.500,0.500,0.500 bound=0.125000 truth=0.267949 ratio=2.14
+  n=8 |L|= 70 gamma=0.500,0.500,0.500,0.500,0.500,0.500 bound=0.031250 truth=0.152241 ratio=4.87
+fences
+  n=3 |L|=  2 gamma=0.000 bound=2.000000 truth=2.000000 ratio=1.00
+  n=4 |L|=  5 gamma=0.333,0.500 bound=0.666667 truth=0.829914 ratio=1.24
+  n=5 |L|= 16 gamma=0.407,0.500,0.500 bound=0.296512 truth=0.488390 ratio=1.65
+  n=6 |L|= 61 gamma=0.442,0.500,0.500,0.500 bound=0.139510 truth=0.319444 ratio=2.29
+  n=7 |L|=272 gamma=0.460,0.500,0.500,0.500,0.500 bound=0.067501 truth=0.226161 ratio=3.35
