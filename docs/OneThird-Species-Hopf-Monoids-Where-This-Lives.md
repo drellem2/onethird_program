@@ -32,9 +32,25 @@ reporting `TOTAL BAD: 0`).
 > **character ring of `S_n`** unmarked, inside runs ending `TOTAL BAD: 0`. mg-6f61's
 > `check_doc.py` could not have caught any of it — **it reads this file and nothing else.**
 > All three are repaired at source, **T3d's count and control (ii)'s set equality are now
-> COMPUTED rather than restated**, and `w3_scope.py` is the checker for the instrument: it
-> reports **12 problems** against the pre-repair tree and **0** now. **No claim in this
-> document is softened by any of it** — one is strengthened (§5, control (ii)).
+> COMPUTED rather than restated**, and `w3_scope.py` is the checker for **two of those
+> corrections** over the instrument tree: it reports **12 problems** against the pre-repair
+> tree and **0** now. **No claim in this document is softened by any of it** — one is
+> strengthened (§5, control (ii)).
+>
+> **AND THE LIST IS NOW ONE LIST (mg-a4ef,
+> `docs/OneThird-Species-Hopf-Monoids-Repair-Extent.md`, `code/species_repair_a4ef/`, on the
+> independent audit mg-73df, `docs/OneThird-Audit-mg-73df-Species-Repair-Final-State.md`,
+> `ebecd89`).**
+> The scope above was widened and **the list was not**: `w3_scope.py` enforces **2** of the
+> corrections and `check_doc.py` enforces **10 over one file**, so **X3 — the correction
+> mg-f8fa itself centres on — was still in force in `t6_fock_and_record.py` and in its
+> committed output, inside a run ending `T6 TOTAL BAD: 0`**, along with the AM §17.5
+> quotation. Both are now corrected **at source**; `stricken_a4ef.py` is the **union** of both
+> checkers' tables and `s1_extent.py` runs it over the document **and every code tree**, with
+> **the extent of each checker printed by the run** (§14.4). §0's own headline box also said
+> the left side **is** Solomon's descent algebra where it is **anti**-isomorphic, in the
+> document and in `t4_one_operation.py`; both are corrected. **Nothing is withdrawn and no
+> figure changes.**
 
 **What this document is.** Daniel asked a question that two prior tickets did not answer.
 mg-ebd8 and mg-af28 both answered *"does our construction reproduce `S_n` representation
@@ -84,7 +100,10 @@ species/Hopf-monoid programme, and both of Daniel's cases are values of a single
 >
 > * **`Aut(P)` trivial** → `k F(P)/rad = k^{AC(P)}`, indexed by the **quotients of `P`**.
 >   *[the poset-quotient story]*
-> * **`P` the antichain, `Aut(P) = S_n`** → the left side is **Solomon's descent algebra**
+> * **`P` the antichain, `Aut(P) = S_n`** → the left side is **anti-isomorphic to Solomon's
+>   descent algebra** *(corrected mg-a4ef: this box read "**is** Solomon's descent algebra",
+>   which is the reading §2.2 measures to fail by **472** structure constants at `n = 5`, and
+>   which AM Thm 10.13 — quoted thirty lines below, in this same section — contradicts)*
 >   and the right side is `k^{Π_n/S_n}`, indexed by the **integer partitions of `n`**.
 >   *[the `S_n` story — **and the last step of it, from `k^{Π_n/S_n}` to `S_n`'s character
 >   ring, is ledger **S4**: CITED to Solomon and to Garsia–Reutenauer/Atkinson, and NOT
@@ -907,6 +926,7 @@ Ordered by expected yield.
 | **S12** | ~~The `Aut(P)` form of the radical theorem was **not located** stated in that generality, and this is the weakest claim here~~ | **WITHDRAWN as a claim about the literature** *(mg-6f61, on mg-a61f's X2)* | It is a **corollary** of the quoted AM §10.10 plus the Reynolds operator, so **there is no gap to locate and nothing here waits on a search**. What survives is a much narrower and uninteresting report: I did not find the equivariant form *written down*, and I did not look hard. **No successor literature search should be filed on this row** — see §10 item 2 |
 | **S13** *(mg-6f61)* | §8 C3's *"the smallest poset with `AC(P) ≠ Π[n]` is `{a<c, b<d}`"* was **FALSE**; the smallest is the **3-element chain** | **MEASURED, corrected at source** | 242 labelled posets to `n ≤ 4`; 6 labelled witnesses at `n = 3` in one isomorphism class, 174 at `n = 4`; 11 predictions written before the run, 11 met; a control shows the search can return `n = 2` |
 | **S14** *(mg-f8fa)* | Three of mg-6f61's corrections — **X4's control count, X5's reading of control (ii), and S4/S5's scope** — were made in this document and **left standing in `code/species_7d75/`**, the copy a successor re-runs | **MEASURED, and repaired at source** | `code/species_remainder_f8fa/w3_scope.py`, the same checker, reports **12 problems** against the tree at `83ac472` and **0** after. T3d's count and control (ii)'s set equality are now **computed** by the source instrument and it **fails** if either is wrong. **No claim is softened; §5's control (ii) conclusion is strengthened from a count on `[4]` to a statement about the two maps' types at every ground set.** mg-6f61's `check_doc.py` reads one file and could not have caught any of it |
+| **S15** *(mg-a4ef)* | **X3 — the correction mg-f8fa's own repair centres on — was still asserted in `code/species_7d75/t6_fock_and_record.py` AND in its committed output, inside a run ending `T6 TOTAL BAD: 0`**, together with the AM §17.5 quotation; both are named verbatim in `check_doc.py`'s own `STRICKEN` table. §0's headline box and `t4_one_operation.py` also read the descent-algebra identification as an isomorphism where it is **anti**-isomorphic | **MEASURED, and repaired at source** | `code/species_repair_a4ef/s1_extent.py` runs **one list — the union of `check_doc.py`'s ten rows and `w3_scope.py`'s two, plus Y2 — over the document and all four code trees**, with 4 controls: **4 still-asserted at `ebecd89` and 9 at `83ac472`, against 0 now**. mg-73df's own `c4_scope.py`, re-run unmodified, goes **4 → 0**. **Every checker now prints its own extent**, which is the half §14.3 did not do |
 | **NOT CLAIMED** | that anything here is new; that anything here is publishable; that the searches were exhaustive; that our `F` is or is not one of the published Hopf monoids; that anything about the walk, `λ₂`, `Δ_AT` or the pricing follows; that the framework says anything about `S^λ`, `f^λ` or multiplicities | | |
 
 ---
@@ -917,6 +937,7 @@ Ordered by expected yield.
 cd code/species_7d75         && ./run_all.sh # ~46 s, pure Python 3, NO NETWORK
 cd code/species_repair_6f61  && ./run_all.sh # ~30 s, the mg-6f61 repair, NO NETWORK
 cd code/species_remainder_f8fa && ./run_all.sh # ~15 s, the mg-f8fa remainder, NO NETWORK
+cd code/species_repair_a4ef  && ./run_all.sh # ~5 s,  the mg-a4ef extent repair, NO NETWORK
 ```
 
 Committed outputs: `out_selftest.txt` (759 assertions), `out_t1_grading.txt`,
@@ -933,6 +954,16 @@ committed on purpose** — a checker written after the fix and never seen to fai
 checker. mg-6f61's battery and mg-a61f's battery both re-run **unmodified** against the
 repaired tree; `CHECK_DOC` is `PASS`, and mg-a61f's output is **byte-identical**
 (`A4 TOTAL BAD: 1`, which is X1, and 0 elsewhere).
+
+The extent repair's outputs are `code/species_repair_a4ef/out_selftest.txt` (133 assertions),
+`out_s1_extent.txt` and `out_s2_seam.txt`, both `TOTAL BAD: 0` — **and `S1`'s zero is followed
+in the output by a statement of what it ranged over**, which is the point of it (§14.4).
+`out_c4_scope_73df_after.txt` and `out_c5_doc_73df_after.txt` are **mg-73df's own instrument
+re-run unmodified against the repaired tree**, committed there rather than over mg-73df's
+committed outputs: those are the record of what that audit found when it looked, so
+`code/species_audit_73df` is the one tree here that does **not** regenerate byte-identically,
+deliberately. `code/species_repair_a4ef/PREDICTIONS.md` was written before any edit and any
+run; `OUTCOMES.md` scores it at **5 of 22 missed, kept as written**.
 
 **Sources**
 
@@ -1007,16 +1038,13 @@ did not think of and a location does not. **The check that caught C3 was not a s
 reading up-page**: the refuting count sat in this document's own T1e row, sixty lines above
 the claim.
 
-> **THE SAME LIMITATION APPLIES TO THIS SECTION, AND IT IS STATED HERE RATHER THAN LEFT FOR
-> THE NEXT AUDITOR TO FIND.** §14 is itself a self-assessment written by a repair about the
-> document it repaired. Its own list of *what mg-6f61 fixed* — the five items in the banner
-> at the top — is a list of the places **mg-a61f named**, and it is therefore complete only
-> to the extent that mg-a61f's audit was. **This repair did not conduct an independent
-> search for defects mg-a61f missed**, so an eighth defect, if there is one, is in exactly
-> the position §8 C3 was in: outside every beam currently pointed at this document. The
-> repair's own instrument reports **2 of 45 predicted cells missed**, both explained in
-> §5 — that number is published rather than tidied because the alternative is a battery that
-> cannot be wrong.
+*(This section carried its limitation box **twice** — once here and once as §14.2 — in two
+versions that did not agree. The copy that stood here called the banner's list *"the five
+items"* where the banner says **eight**, traced it to mg-a61f alone, and was still saying *"an
+eighth defect, **if there is one**"* twelve lines above §14.3, which reports that the eighth
+defect **was found**. **Resolved to one copy by mg-a4ef, on mg-73df's Y3**: §14.2 survives,
+because it traces the list to **two** sources and carries the evidence for doing so. Nothing
+the deleted copy said is lost — it said less.)*
 
 ### 14.1 The correction ran in BOTH directions, and most of it ran upward
 
@@ -1047,15 +1075,20 @@ expensive half.**
 > **THE SAME LIMITATION APPLIES TO §14 ITSELF, AND IT IS STATED HERE RATHER THAN LEFT FOR
 > THE NEXT AUDITOR TO FIND.** §14 is a self-assessment written by a repair about the document
 > it repaired. Its list of *what mg-6f61 fixed* is a list of the places **mg-a61f named**,
-> plus four folded in from a second, shelved filing — so it is complete only to the extent
-> that those two were. **This repair conducted no independent search for defects mg-a61f
-> missed.** An eighth defect, if one exists, is in exactly the position §8 C3 was in: outside
-> every beam currently pointed at this document. **That the second filing found four items
-> the first did not is the direct evidence for this — two readers of one audit produced two
-> different lists, and neither was a subset of the other.**
+> plus four folded in from a **second filing of the same audit** — so it is complete only to
+> the extent that those two were. **This repair conducted no independent search for defects
+> mg-a61f missed.** An eighth defect, if one exists, is in exactly the position §8 C3 was in:
+> outside every beam currently pointed at this document. **That the second filing found four
+> items the first did not is the direct evidence for this — two readers of one audit produced
+> two different lists, and neither was a subset of the other.**
 >
 > The repair's own instrument reports **2 of 45 predicted cells missed** (§5). Both are
 > published rather than tidied, because the alternative is a battery that cannot be wrong.
+>
+> *(Corrected mg-a4ef, on mg-73df's Y4: this paragraph read* "a second, **shelved** filing"*.
+> That filing was not shelved. It was dispatched as **mg-f8fa**, it ran, and **§14.3 eleven
+> lines below is its record** — so the final state described one filing as shelved and as
+> executed within twelve lines of itself.)*
 
 ### 14.3 The eighth defect was found, and it was in the code — added by mg-f8fa
 
@@ -1093,3 +1126,56 @@ arriving against its own instrument. The marker now has to name the repair.
 
 **Nothing in §14.3 is a retraction.** Every conclusion the corrected numbers were cited for
 survives, and control (ii)'s is now stronger than the version that was corrected.
+
+### 14.4 The scope was widened and the LIST was not — added by mg-a4ef
+
+**§14.3's fix was right and it was not enough.** It widened what the checker *reads*. It did
+not widen what the checker *looks for*, and the correction left in force at source was **X3 —
+the correction this whole repair centres on** — in `t6_fock_and_record.py` and in its
+**committed output, inside a run ending `T6 TOTAL BAD: 0`**. mg-73df found it. Both sentences
+were named **verbatim in `check_doc.py`'s own `STRICKEN` table**, so this was never a
+correction anybody forgot: it was one enumerated as stricken and then enforced in one file
+only.
+
+> **A checker has two scopes — what it reads and what it looks for — and fixing one reads as
+> fixing both.** `check_doc.py` had the full list over one file. `w3_scope.py` had a two-item
+> list over a directory. Between them every file was covered and every statement was covered,
+> and **no statement was covered in every file.**
+
+**This is the third generation of the same defect on this document, and the second time it
+recurred inside the repair that fixed it** — mg-6f61 fixed prose and left code, mg-f8fa fixed
+that code, and the correction mg-f8fa itself centres on was still live at source.
+
+**What mg-a4ef changed.**
+
+1. **X3 is corrected at source**, in `t6_fock_and_record.py` and in the regenerated
+   `out_t6_fock_and_record.txt`. The struck sentence survives there only inside a passage
+   naming the repair, which is `check_doc.py`'s own rule moved to the code.
+2. **The AM §17.5 quotation is corrected at source** in the same file's docstring: the book's
+   species is `Π*` in both slots (§4).
+3. **§0's headline box no longer says the left side *is* Solomon's descent algebra**, and
+   neither does `t4_one_operation.py`, which carried the same plain reading and which nobody's
+   list named. It is **anti**-isomorphic — AM Thm 10.13, §2.2, §9 rows 3 and 8, ledger **S2**,
+   and T3d's `472` all say so.
+4. **There is now ONE list.** `code/species_repair_a4ef/stricken_a4ef.py` is the union of
+   `check_doc.py`'s ten `STRICKEN` rows and `w3_scope.py`'s two `FORBIDDEN` rows, and
+   `s1_extent.py` runs it over the document **and every code tree**.
+
+**WHICH EXTENTS EACH CHECKER COVERS.** This is the half §14.3 did not do, and it is why a
+passing run kept reading as coverage. It is now printed by the run itself:
+
+| checker | statements | targets |
+|---|---|---|
+| `check_doc.py` (mg-6f61) | 10 of 11 | **1 file** — this document |
+| `w3_scope.py` (mg-f8fa) | **2 of 11** | 1 tree — `code/species_7d75` |
+| `s1_extent.py` (mg-a4ef) | **11 of 11** | this document **+ 4 code trees** |
+
+**A passing run of any one of them is not coverage of another's extent**, and `S1 TOTAL BAD:
+0` is now followed by a statement of what it is silent about: the other documents in `docs/`,
+the two audit trees, and any statement not on the list.
+
+**What this section does not claim.** That the list is complete — it is the union of two
+lists, and mg-73df's own finding is that a union of lists is still a list. Y2 was added to it
+because it was found; **the next defect will be one nobody has enumerated**, and the only
+structural improvement offered here is that a correction now has **one** place to be recorded
+instead of two, so the next one cannot be enforced in half the tree by accident.

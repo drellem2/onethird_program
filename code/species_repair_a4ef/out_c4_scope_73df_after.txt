@@ -1,0 +1,95 @@
+==============================================================================
+C4a  all EIGHT of mg-6f61's corrections, scanned at source
+==============================================================================
+
+  target: code/species_7d75 -- the tree w3_scope.py checks and the
+  copy a successor re-runs.
+
+    quoted as corrected   X1                               README.md:16
+    quoted as corrected   X1                               out_t1_grading.txt:82
+    quoted as corrected   X1                               out_t1_grading.txt:94
+    quoted as corrected   X1                               t1_grading.py:29
+    quoted as corrected   X1                               t1_grading.py:32
+    quoted as corrected   X1                               t1_grading.py:153
+    quoted as corrected   X1                               t1_grading.py:180
+    quoted as corrected   X3                               out_t6_fock_and_record.txt:72
+    quoted as corrected   X3                               t6_fock_and_record.py:164
+    quoted as corrected   X4                               README.md:33
+    quoted as corrected   X4                               t3_bidigare.py:42
+    quoted as corrected   X4                               t3_bidigare.py:43
+    quoted as corrected   X5                               README.md:86
+
+
+  still asserted: 0      quoted as corrected: 13
+
+==============================================================================
+C4b  the two trees nobody points a checker at
+==============================================================================
+
+  code/species_repair_6f61           still asserted: 0   quoted as corrected: 18
+  code/species_remainder_f8fa        still asserted: 0   quoted as corrected: 6
+
+  These two are the repair's OWN instruments.  A hit here would be the
+  same defect one directory further out; there is none, and that is
+  reported as a NEGATIVE result rather than left unsaid.
+
+==============================================================================
+C4c  CONTROL (a): the same detector against the PRE-REPAIR tree
+==============================================================================
+
+  tree at 83ac472: still asserted 8, quoted as corrected 7
+
+    STILL ASSERTED (pre)  X3                               out_t6_fock_and_record.txt:55
+    STILL ASSERTED (pre)  X3                               t6_fock_and_record.py:138
+    STILL ASSERTED (pre)  X4                               out_t3_bidigare.txt:37
+    STILL ASSERTED (pre)  X4                               t3_bidigare.py:207
+    STILL ASSERTED (pre)  X4                               t3_bidigare.py:248
+    STILL ASSERTED (pre)  X5                               README.md:60
+    STILL ASSERTED (pre)  X6/X7                            t6_fock_and_record.py:15
+    STILL ASSERTED (pre)  X6/X7                            t6_fock_and_record.py:16
+
+  the detector catches X4, X5 on the pre-repair tree: yes
+  and it reports MORE there (8) than now (0): yes
+
+==============================================================================
+C4d  CONTROL (b): w3_scope.py PASSES the tree this file has hits on
+==============================================================================
+
+  w3_scope.py against code/species_7d75 : W3 SCOPE: PASS   (0 problem(s))
+  this file against the same tree       : 0 statement(s) still
+                                          asserted
+
+  No gap: every one of mg-6f61's corrections is either marked at
+  source or absent from it.
+
+==============================================================================
+C4e  CONTROL (c): w3_scope FAILS on a NINTH unmarked occurrence
+==============================================================================
+
+  after adding one unmarked 'character ring' line:
+    9 occurrence(s) checked.
+    W3 SCOPE: FAIL   (1 problem(s))
+  CONFIRMED -- the document's claim that it 'fails if a ninth is added
+  unmarked' is true.
+
+==============================================================================
+C4f  CONTROL (d): this detector fires on an injected statement
+==============================================================================
+
+  injected 'three are controls' into a scratch copy:
+    still asserted before 0, after 1 : fires
+
+==============================================================================
+C4g  w3_scope.py's own docstring disagrees with its own evidence file
+==============================================================================
+
+  w3_scope.py docstring                : 'it reported 12 problems'
+  out_w3_scope_before.txt              : FAIL (12 problems)
+  document, section 14.3 and ledger S14: 12 problems
+
+  consistent
+
+==============================================================================
+C4 STILL ASSERTED AT SOURCE: 0
+C4 TOTAL BAD: 0
+==============================================================================

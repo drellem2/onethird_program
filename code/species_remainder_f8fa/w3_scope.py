@@ -22,9 +22,23 @@ standing in `code/species_7d75/`, where a successor re-runs them:
       reader is given no way to tell the measured half from the cited one.
 
 THIS FILE IS THE DETECTOR FOR ALL THREE, AND IT WAS RUN AGAINST THE
-PRE-REPAIR TREE FIRST: it reported 6 problems there.  A checker written after
+PRE-REPAIR TREE FIRST: it reported 12 problems there.  A checker written after
 the fix and never seen to fail is not a checker.  `out_w3_scope_before.txt`
 is the failing run, committed beside the passing one.
+
+(That number read "6" until mg-a4ef, on mg-73df's Y5, against its own
+evidence file's `FAIL (12 problems)` and against sections 14.3 and S14, which
+both say 12.  A checker's own account of the run that falsified it told a
+successor the falsification was half the size it was.)
+
+ITS EXTENT, STATED, WHICH IS mg-73df's MAJOR (see section 14.4).  This file
+enforces TWO of the eleven corrections -- X4 and X5 -- over ONE tree, plus the
+character-ring rule.  `check_doc.py` enforces ten of them over ONE file.  So
+between them every file was covered and every statement was covered, and NO
+STATEMENT WAS COVERED IN EVERY FILE -- which is how X3 stayed in force in
+`t6_fock_and_record.py` inside a run ending `T6 TOTAL BAD: 0`.  The union of
+the two lists over all trees is `code/species_repair_a4ef/s1_extent.py`.
+A PASS HERE IS NOT COVERAGE OF THAT EXTENT.
 
     python3 code/species_remainder_f8fa/w3_scope.py
 """
@@ -177,4 +191,16 @@ print()
 print("=" * 78)
 print("W3 SCOPE: %s   (%d problem(s))" % ("PASS" if bad == 0 else "FAIL", bad))
 print("=" * 78)
-sys.exit(0)
+print()
+print("EXTENT OF THAT VERDICT (added mg-a4ef).  This checker enforces TWO")
+print("corrected statements -- X4 and X5 -- plus the character-ring rule,")
+print("over ONE tree.  mg-6f61 enumerated ten stricken sentences; eight of")
+print("them are NOT on this list, and X3 and the AM 17.5 quotation were in")
+print("force in code/species_7d75 for the whole time this file reported")
+print("PASS.  A PASS HERE IS NOT COVERAGE OF THE OTHER NINE STATEMENTS.")
+print("The union of both lists over all trees is:")
+print("    python3 code/species_repair_a4ef/s1_extent.py")
+# mg-a4ef: this was `sys.exit(0)` unconditionally, so a run reporting
+# `FAIL (12 problems)` still exited 0 -- the same shape as the finding this
+# file exists to carry.  Beyond mg-73df's five; recorded in the repair doc.
+sys.exit(1 if bad else 0)

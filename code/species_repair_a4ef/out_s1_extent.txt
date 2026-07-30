@@ -1,0 +1,105 @@
+==============================================================================
+S1a  EXTENT DECLARATION -- what is enforced, and over what
+==============================================================================
+
+  THE LIST: 11 corrections, from code/species_repair_a4ef/stricken_a4ef.py,
+  which is the UNION of check_doc.py's 10 STRICKEN rows and
+  w3_scope.py's 2 FORBIDDEN rows, plus Y2, which is new here.
+
+  THE TARGETS: the document, and 4 code trees --
+      code/species_7d75              17 file(s)
+      code/species_repair_6f61       12 file(s)
+      code/species_remainder_f8fa    11 file(s)
+      code/species_repair_a4ef        8 file(s)
+
+  SKIPPED, NAMED, so the exclusion cannot grow unseen -- 5 file(s):
+      OUTCOMES.md
+      PREDICTIONS.md
+      out_c4_scope_73df_after.txt
+      out_c5_doc_73df_after.txt
+      stricken_a4ef.py
+  Note what is NOT skipped: committed out_*.txt.  A forbidden sentence
+  in a committed output is precisely the defect this repair closes.
+
+  WHAT THE OTHER TWO CHECKERS COVER, STATED SO IT CANNOT BE READ AS
+  MORE:
+      check_doc.py   10 of 11 statements  x  1 file  (the document)
+      w3_scope.py     2 of 11 statements  x  1 tree  (code/species_7d75)
+      s1_extent.py   11 of 11 statements  x  4 trees + the document
+
+  A PASSING RUN OF EITHER OF THE FIRST TWO IS NOT COVERAGE OF THE
+  OTHER'S EXTENT.  That sentence is the whole of mg-73df's MAJOR.
+
+==============================================================================
+S1b  EVERY CORRECTION x EVERY TREE
+==============================================================================
+
+  key:  .  = the statement does not occur in that tree
+        ok = it occurs and every occurrence is marked as corrected
+        !! = STILL ASSERTED
+
+                                                      7d75       repair_6f  remainder  repair_a4
+  X1     §8 C3, the extremal claim                    .          ok         .          ok       
+  X3     §0, the five-axiom count                     ok         ok         .          ok       
+  X6a    §1, the Aguiar–Ardila quotation              .          ok         .          ok       
+  X6b    §9 row 6, the inequality direction           .          ok         .          ok       
+  X7     §4, the AM §17.5 quotation                   .          .          .          ok       
+  X4     §2.2, the control count                      ok         ok         ok         ok       
+  X5     §5, control (ii)'s accounting                .          ok         .          ok       
+  X2a    §6 item 6, 'measured, not proved'            .          ok         .          ok       
+  X2b    §10 item 2, the withdrawn errand             .          ok         .          ok       
+  X2c    S12, the withdrawn non-location              .          ok         .          ok       
+  Y2     §0, the descent algebra read as an ISOMORPHI .          .          .          ok       
+
+
+  0 statement-occurrence(s) still asserted at source.
+
+==============================================================================
+S1c  THE DOCUMENT -- struck sentences struck, corrections present
+==============================================================================
+
+  X1     §8 C3, the extremal claim                      occ 1  outside a strike 0  ok
+  X3     §0, the five-axiom count                       occ 1  outside a strike 0  ok
+  X6a    §1, the Aguiar–Ardila quotation                occ 1  outside a strike 0  ok
+  X6b    §9 row 6, the inequality direction             occ 2  outside a strike 0  ok
+  X7     §4, the AM §17.5 quotation                     occ 1  outside a strike 0  ok
+  X4     §2.2, the control count                        occ 1  outside a strike 0  ok
+  X5     §5, control (ii)'s accounting                  occ 1  outside a strike 0  ok
+  X2a    §6 item 6, 'measured, not proved'              occ 1  outside a strike 0  ok
+  X2b    §10 item 2, the withdrawn errand               occ 1  outside a strike 0  ok
+  X2c    S12, the withdrawn non-location                occ 1  outside a strike 0  ok
+
+  Y2  §0 states the ANTI-isomorphism the body measures       ok
+  Y3  the self-assessment survives in exactly ONE version    ok
+  Y1  the document states which extents the checkers cover   ok
+
+  Y2  §0's headline box no longer asserts the plain isomorphism gone
+  Y3  the duplicate copy's miscount of the banner            gone
+  Y3  the stale 'if there is one' left standing above §14.3  gone
+  Y4  mg-f8fa's filing described as shelved                  gone
+
+==============================================================================
+S1d  CONTROLS -- the detector is shown to fire, and shown not to be disarmed
+==============================================================================
+
+  (a) at ebecd89, the state mg-73df audited       4 asserted (now 0), catches X3,X7,Y2  ok
+        and X3 there is at  out_t6_fock_and_record.txt:66
+        and X3 there is at  t6_fock_and_record.py:149
+  (b) at 83ac472, before mg-f8fa                  9 asserted (now 0), catches X3,X4,X5,X7,Y2  ok
+        and X3 there is at  out_t6_fock_and_record.txt:55
+        and X3 there is at  t6_fock_and_record.py:138
+  (c) one statement injected into a scratch copy  1 asserted (now 0)                     ok
+  (d) not disarmed by: 'and the framework it ...' still asserted -- ok
+  (d) not disarmed by: 'the error mg-1953 repaired ...' still asserted -- ok
+  (d) not disarmed by: 'this REPAIRED thing is ...' still asserted -- ok
+  (d) but a marker naming mg-a4ef DOES exonerate ok
+
+==============================================================================
+S1 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER, stated because mg-73df's MAJOR is what happens
+when it is not: 11 corrections over the document and 4 code trees.
+It says NOTHING about docs/ other than the one document named above,
+about the audit trees code/species_audit_a61f and
+code/species_audit_73df, or about any statement not in the list.

@@ -1,0 +1,50 @@
+==============================================================================
+S2a  THE SAME THING SAID TWICE -- every passage against every other
+==============================================================================
+
+  mg-73df found ONE pair at 56%%, in the block quotes.  The threshold
+  here is 45%, below what it found, and the sweep is run over prose
+  paragraphs as well -- a check written to catch the instance you
+  already know about catches exactly that instance.
+
+  block quotes            17 passage(s),  11 longer than 300 characters
+                         worst pair 5%  (lines 85-110 vs 119-137), threshold 45%
+
+  prose paragraphs       124 passage(s),  59 longer than 300 characters
+                         worst pair 22%  (lines 204-220 vs 764-772), threshold 45%
+
+==============================================================================
+S2b  CROSS-REFERENCES RESOLVE, AND BACK-REFERENCED COUNTS AGREE
+==============================================================================
+
+  sections that use sub-headings: 14, 2
+  sub-sections referred to      : 14.2, 14.3, 14.4, 2.1, 2.2, 2.3
+      §14.2   resolves
+      §14.3   resolves
+      §14.4   resolves
+      §2.1    resolves
+      §2.2    resolves
+      §2.3    resolves
+
+  the banner announces          : 'Eight things changed'
+  back-references to that count : none
+
+==============================================================================
+S2c  THE THREE STALENESS PATTERNS THIS SEAM PRODUCED
+==============================================================================
+
+  a filing described as shelved AND as executed                  ok
+  §14.2 answered by name by §14.3, and present exactly once      ok
+  every 'an eighth defect, IF ...' is inside §14.2 (1 of 1)      ok
+  the §14 limitation box occurs exactly ONCE (found 1)           ok
+  §14.3's 'as §14.2 predicted' still has a §14.2 to name         ok
+
+==============================================================================
+S2 TOTAL BAD: 0
+==============================================================================
+
+EXTENT.  S2a is a similarity sweep over ONE document and cannot see a
+duplicate spread across two documents, or one paraphrased below 45%.
+S2b resolves numbered sub-section references only, not prose
+references such as 'the banner at the top'.  S2c is three named
+patterns and is a regression guard, not a search.
