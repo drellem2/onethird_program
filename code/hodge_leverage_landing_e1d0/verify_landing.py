@@ -39,7 +39,20 @@ itself, about another document, or about a ticket -- and each was wrong.
       working tree is how an instrument run before `git commit` sees the
       post-commit state; reading `HEAD` is how it sees the parent's.  The
       GATE below no longer string-matches a frozen figure either: it FORMATS
-      what it has just measured and requires the documents to carry that.
+      what it has just measured and compares the documents' own figure with
+      that.
+
+      ⚠️ CORRECTED AGAIN 2026-07-30 (mg-8a5c finding F-1, landed by mg-a318).
+      Formatting the measurement is necessary and was not sufficient: the gate
+      then asked whether the formatted value OCCURRED SOMEWHERE in the file,
+      and the corrected wording printed the live gap TWICE per site.  A
+      PRESENCE TEST certifies that a correct value exists, not that the figure
+      a reader meets is correct, so corrupting the sentence a reader actually
+      reads left the run green at all three sites.  The gate now READS EACH
+      FIGURE OUT OF THE STATEMENT THAT ASSERTS IT, at a site anchored to the
+      SECTION rather than the file, and the duplicate is GONE rather than
+      detected -- the chain's tail points at the live figure instead of
+      restating it.
 
   T2  TWO SITE COUNTS IN ONE COMMIT (F2).  §6's disposition table is counted
       row by row from the tree; §14's count word is read out of §14.  Neither
@@ -134,10 +147,194 @@ def head(title):
 def doc_num(v, signed=False):
     """A number in the format the documents write it: space thousands
     separator, U+2212 for a negative sign.  Used by the GATE to FORMAT what it
-    has just measured and then look for that in the prose -- never to match a
-    figure frozen into the source of this file."""
+    has just measured and then compare the documents' own figure against that
+    -- never to match a figure frozen into the source of this file."""
     s = f"{v:+,}" if signed else f"{v:,}"
     return s.replace(",", " ").replace("-", "−")
+
+
+def flat(text):
+    return " ".join(text.split())
+
+
+def section(text, prefix):
+    """The markdown section whose heading line starts with `prefix`, up to the
+    next heading of the same or shallower level, heading included.  Located BY
+    CONTENT, never by line number.
+
+    ⚠️ A SITE IS A SECTION, NOT THE FILE THAT CONTAINS IT (mg-8a5c N7).  The
+    gate this replaced anchored §14 on the whole deliverable, so the entire
+    disclosure paragraph could be relocated verbatim into a new appendix at the
+    end of the document and the gate would still pass."""
+    lines = text.split("\n")
+    starts = [i for i, l in enumerate(lines) if l.startswith(prefix)]
+    if len(starts) != 1:
+        raise SystemExit(f"expected exactly 1 heading starting {prefix!r}, "
+                         f"got {len(starts)}")
+    i = starts[0]
+    level = len(lines[i]) - len(lines[i].lstrip("#"))
+    end = len(lines)
+    for j in range(i + 1, len(lines)):
+        lv = len(lines[j]) - len(lines[j].lstrip("#"))
+        if 0 < lv <= level:
+            end = j
+            break
+    return "\n".join(lines[i:end])
+
+
+# --------------------------------------------------------------------------
+# THE THREE SITES A5 IS RECORDED AT, AND HOW EACH ONE'S FIGURES ARE READ
+#
+# ⚠️ REBUILT 2026-07-30 (mg-8a5c finding F-1, landed by mg-a318).  The gate
+# `e16e41c` shipped formatted what it had just measured -- right, and kept --
+# and then asked whether that string OCCURRED SOMEWHERE in the file.  A
+# PRESENCE TEST certifies that a correct value exists; it does not certify
+# that the figure a reader meets is correct, and the corrected wording printed
+# the live gap TWICE per site (once as the live figure, once as the tail of
+# the chain `2 928 → 6 069 → −875 → +755 → …`, which ends at the current gap
+# BY CONSTRUCTION).  So corrupting the sentence a reader actually reads left a
+# correct copy standing and the run stayed green, at all three sites.
+#
+# What follows READS EACH FIGURE OUT OF THE STATEMENT THAT ASSERTS IT and
+# compares it to the measurement.  The document's own words are the input; the
+# measurement is the expected value.  A wrong figure at the site is a wrong
+# figure to the gate, whatever else the file happens to contain.
+#
+# The duplicate itself is GONE rather than detected -- the chain's tail now
+# points at the live figure instead of restating it -- and the gate requires
+# EXACTLY ONE written occurrence per site so a second copy fires it.  That
+# ordering is deliberate: a duplicated literal is a seam waiting to happen,
+# and derivation removes the failure mode where a gate only detects it.
+# --------------------------------------------------------------------------
+
+# key -> (how this instrument names it, is it a LIVE figure that moves with
+# the tree?).  A live figure must be written exactly once per site; a frozen
+# one (the §14 copy) may legitimately recur in the quoted history.
+FIGURES = {
+    "gap":  ("gap, cell only", True),
+    "both": ("gap, cell + relocated history", True),
+    "cell": ("STATE.md row cell", True),
+    "hist": ("relocated history (this row's own file)", True),
+    "copy": ("deliverable §14 copy, frozen since mg-a806", False),
+}
+
+
+def assertions(raw):
+    """The site's text with its MARKED QUOTATIONS removed.
+
+    Every one of these sites keeps the wording it corrected, as a quotation of
+    what was struck -- that is deliberate and is itself gated above.  But a
+    quotation of a withdrawn figure is not an assertion of it, and a gate that
+    reads one cannot tell the live figure from the one it replaced: §14 quotes
+    *"... sits +9 608 characters above this copy"* in the same shape as the
+    sentence that states the live figure.  So the gate reads ASSERTIONS."""
+    f = flat(raw)
+    for pat in (r'\*"(.+?)"\*', r"\*'(.+?)'\*"):
+        f = re.sub(pat, " ⟨struck quotation⟩ ", f)
+    return f
+
+
+def read_state_row(raw):
+    """The figures as the `STATE.md` row itself states them."""
+    f = assertions(raw)
+    return {
+        "gap":  re.findall(r"cell-only gap \*\*([−+][\d ]+?)\*\*", f),
+        "cell": re.findall(r"cell \*\*([\d ]+?)\*\* characters against", f),
+        "copy": re.findall(r"§14's frozen \*\*([\d ]+?)\*\*", f),
+        "hist": re.findall(r"relocated history \*\*([\d ]+?)\*\*", f),
+        "both": re.findall(r"cell \+ history \*\*([−+][\d ]+?)\*\*", f),
+    }
+
+
+def read_deliv_14(raw):
+    """The figures as the deliverable's §14 states them.  §14 publishes two."""
+    f = assertions(raw)
+    return {
+        "gap":  re.findall(r"cell-only gap \*\*([−+][\d ]+?)\*\*", f),
+        "both": re.findall(r"sits \*\*([−+][\d ]+?)\*\* characters above this copy", f),
+    }
+
+
+def read_hist_h8(raw):
+    """The `AFTER mg-8e30` column of H8's three-column table -- the column a
+    reader of H8 is told is the live one.  Read out of the table by ROW LABEL,
+    so a figure that is right in one of the historical columns and wrong in the
+    live one is a failure, which is the whole point."""
+    lines = raw.split("\n")
+    heads = [i for i, l in enumerate(lines)
+             if "AFTER mg-8e30" in l and "at bbe83b5^" in l]
+    if len(heads) != 1:
+        return {}
+    labels = {"STATE.md row cell": "cell",
+              "this file (the relocated history)": "hist",
+              "deliverable §14 copy (frozen since mg-a806)": "copy",
+              "gap, cell only": "gap",
+              "gap, cell + relocated history": "both"}
+    out = {k: [] for k in labels.values()}
+    for l in lines[heads[0] + 1:]:
+        if l.strip().startswith("```"):
+            break
+        cols = re.split(r"\s{2,}", l.strip())
+        if len(cols) == 4 and cols[0] in labels:
+            out[labels[cols[0]]].append(cols[3])
+    return out
+
+
+SITES = [
+    ("the STATE.md row", read_state_row, ("gap", "both", "cell", "hist", "copy")),
+    ("§14",              read_deliv_14,  ("gap", "both")),
+    ("H8",               read_hist_h8,   ("gap", "both", "cell", "hist", "copy")),
+]
+
+
+def site_texts():
+    """The three sites, each anchored to the SECTION that records A5."""
+    return {
+        "the STATE.md row": state_row(tree(STATE)),
+        "§14":              section(tree(DELIV), "## §14 — `STATE.md` row, as landed"),
+        "H8":               section(tree(HIST), "### H8 — "),
+    }
+
+
+def figure_gate(texts, measured):
+    """THE FIGURE GATE.  Returns [(ok, detail), ...].
+
+    THIS FUNCTION IS THE GATE.  T1 calls it on the tree and the negative
+    control calls it on mutated copies of the same texts -- there is no second
+    implementation to drift out of step with it, which is how the battery
+    `e16e41c` shipped came to test a gate slightly unlike the live one.
+
+    Two checks per (site, figure):
+      (a) AT THE SITE -- the value the document writes in the statement that
+          asserts it, compared to what this run measured;
+      (b) WRITTEN ONCE -- a live figure occurs exactly once in the site, so
+          nothing can go stale in one copy while another satisfies a check.
+    """
+    out = []
+    for name, reader, keys in SITES:
+        got = reader(texts[name])
+        for key in keys:
+            label, live = FIGURES[key]
+            want = measured[key]
+            said = got.get(key) or []
+            if len(said) != 1:
+                out.append((False,
+                            f"GATE @ {name}: '{label}' -- expected exactly 1 "
+                            f"statement of it at this site, found {len(said)} "
+                            f"{said}.  A figure a reader cannot find, or finds "
+                            f"twice, is not a figure this gate can stand behind"))
+                continue
+            out.append((said[0] == want,
+                        f"GATE @ {name}: '{label}' READ AT THE SITE = "
+                        f"{said[0]}, MEASURED THIS RUN = {want}"))
+            if live:
+                n = flat(texts[name]).count(want)
+                out.append((n == 1,
+                            f"GATE @ {name}: '{label}' is WRITTEN ONCE -- {want} "
+                            f"occurs {n}x in this site.  A second written copy "
+                            f"must instead DERIVE from the first by pointing at "
+                            f"it; that is what removes the failure mode"))
+    return out
 
 
 # --------------------------------------------------------------------------
@@ -299,55 +496,71 @@ whether the enlargement was disclosed anywhere.
            "than on chars")
 
     # ---- THE GATE: what this landing leaves in the tree.
+    #
+    # ⚠️ EVERY CHECK BELOW IS ANCHORED TO THE SITE THAT RECORDS A5 -- the
+    # `STATE.md` row, the deliverable's §14 SECTION, and H8 -- and not to the
+    # file that contains it (mg-8a5c F-1 and N7, landed by mg-a318).  A gate
+    # satisfied from elsewhere in the file is a gate on the copy nobody reads.
     print()
-    flat_d_now = " ".join(tree(DELIV).split())
-    flat_s_now = " ".join(tree(STATE).split())
+    texts = site_texts()
+    flat_row_now = flat(texts["the STATE.md row"])
+    flat_d14_now = flat(texts["§14"])
+    flat_h8_now = flat(texts["H8"])
+    print(f"  the three sites, anchored to the SECTION that records A5:")
+    print(f"    the STATE.md row  {len(flat_row_now):>7,} chars (the row itself)")
+    print(f"    §14               {len(flat_d14_now):>7,} chars (the section, "
+          f"not {len(flat(tree(DELIV))):,} for the whole deliverable)")
+    print(f"    H8                {len(flat_h8_now):>7,} chars (the section, "
+          f"not {len(flat(tree(HIST))):,} for the whole file)")
+    print()
+
     false_now = "the corresponding `STATE.md` row carries the same clauses"
     # It must survive ONLY as a quotation of what was struck, never as an
     # assertion -- a strike that deletes the sentence without trace leaves a
     # reader unable to check what was struck.
-    occurrences = flat_d_now.count(false_now)
-    quoted = flat_d_now.count('used to end *"and ' + false_now + '"*')
+    occurrences = flat_d14_now.count(false_now)
+    quoted = flat_d14_now.count('used to end *"and ' + false_now + '"*')
     record(occurrences == 1 and quoted == 1,
            f"GATE: the false sentence is STRUCK -- it appears {occurrences} time "
            f"in §14 and {quoted} of those is inside 'used to end \"...\"', i.e. "
            "quoted as the struck text and asserted nowhere")
-    record("2 928 → 6 069" in flat_d_now and "2 928 → 6 069" in flat_s_now,
+    record("2 928 → 6 069" in flat_d14_now and "2 928 → 6 069" in flat_row_now,
            "GATE: the enlargement 2 928 -> 6 069 is stated at BOTH the §14 "
-           "paragraph and the place A5 is recorded (the STATE.md row)")
-    flat_h_now = " ".join(tree(HIST).split())
+           "section and the place A5 is recorded (the STATE.md row)")
 
-    # THE FIGURE GATE.  Formatted from the measurement three lines up, never
-    # from a constant in this file.  The version this replaced looked for the
-    # literal strings "−875" and "+9 608", so it went on passing after the very
-    # commit it was gating made both of them false (mg-f922 B/C).  A gate built
-    # out of what it has just measured cannot do that: change the cell and the
-    # needle changes with it.
-    gap_now = doc_num(aH - bH, signed=True)
-    both_now = doc_num(aH + histlen - bH, signed=True)
-    cell_now, hist_now = doc_num(aH), doc_num(histlen)
-    # Anchored on the ROW, not on STATE.md as a whole: A5 is recorded in the
-    # row, and a figure that satisfies the gate from somewhere else in the file
-    # is not a figure a reader of A5 meets.
-    flat_row_now = " ".join(state_row(tree(STATE)).split())
-    where = {"the STATE.md row": flat_row_now, "§14": flat_d_now, "H8": flat_h_now}
-    hits = {n: gap_now in t for n, t in where.items()}
-    record(all(hits.values()) and "row history H8" in flat_row_now,
-           f"GATE: the CURRENT cell-only gap, FORMATTED FROM THIS RUN'S OWN "
-           f"MEASUREMENT ({gap_now}), is stated at every place A5 is recorded -- "
-           + ", ".join(f"{n} {'yes' if v else 'NO'}" for n, v in hits.items()))
-    record(cell_now in flat_row_now and hist_now in flat_h_now
-           and both_now in flat_row_now and both_now in flat_h_now
-           and both_now in flat_d_now,
-           f"GATE: and so are the parts it is built from -- cell {cell_now}, "
-           f"relocated history {hist_now}, cell + history {both_now}")
+    # THE FIGURE GATE.  Every needle is FORMATTED from the measurement above,
+    # never from a constant in this file -- and every figure is READ OUT OF the
+    # statement that asserts it and compared, never searched for.  See the
+    # header comment on `figure_gate`.
+    measured = {"gap":  doc_num(aH - bH, signed=True),
+                "both": doc_num(aH + histlen - bH, signed=True),
+                "cell": doc_num(aH),
+                "hist": doc_num(histlen),
+                "copy": doc_num(bH)}
+    for ok, detail in figure_gate(texts, measured):
+        record(ok, detail)
+
+    record("row history H8" in flat_row_now,
+           "GATE: and the row points at H8, so the third site is reachable from "
+           "the first")
     side = "measured AFTER this commit's own edit"
-    record(all(side in t for t in where.values()),
+    record(all(side in t for t in (flat_row_now, flat_d14_now, flat_h8_now)),
            f"GATE: and every site says WHICH SIDE OF THE EDIT its figure is on "
            f"-- '{side}' at all three.  A measurement of something the same "
            "commit modifies is only checkable from the post-commit state")
-    record("A5 itself is still NOT landed" in flat_s_now
-           and "remains pm-onethird's to size and is NOT done here" in flat_d_now,
+    # THE DERIVATION CLAUSE.  The structural half of the mg-8a5c repair is that
+    # the chain's tail POINTS AT the live figure instead of restating it.  A
+    # reader must be told that, or the single occurrence looks like an omission
+    # and the next editor helpfully writes the number back in.
+    derive = "the live cell-only gap given above"
+    record(derive in flat_row_now and derive in flat_d14_now
+           and "`AFTER mg-8e30`" in flat_h8_now,
+           f"GATE: and the chain's last term DERIVES from the live figure "
+           f"rather than restating it -- '{derive}' at the row and §14, and a "
+           "pointer to the AFTER column at H8.  The figure is written once per "
+           "site; every later mention refers to that occurrence")
+    record("A5 itself is still NOT landed" in flat_row_now
+           and "remains pm-onethird's to size and is NOT done here" in flat_d14_now,
            "GATE: and both say A5 is MARKED, not landed -- marking a finding and "
            "landing it are also different acts")
 
@@ -567,56 +780,110 @@ def t4():
 # NEGATIVE CONTROL -- can the new figure gate fail?
 # --------------------------------------------------------------------------
 def negative_control():
-    """The gate this replaced could NOT fail on the thing it existed to catch:
-    it matched the literal string `−875`, so the commit that made −875 false
-    left it passing.  A replacement gate is worth nothing unless it is shown to
-    fire, so each mutation below is applied IN MEMORY with its expected verdict
-    written down first.  Nothing on disk is touched."""
-    head("NEGATIVE CONTROL -- THE FIGURE GATE, MUTATED")
-    print("""The gate this replaced string-matched `−875` and therefore survived the
-commit that falsified it.  This one formats what it has just measured, so a
-change to the measured object must break it.  Four mutations, verdicts written
-before the run.  Nothing is written to disk.
+    """A gate is worth nothing unless it is shown to fire on the edit it exists
+    to catch, and this gate has been wrong about that twice.
+
+      * The gate mg-e1d0 shipped matched the literal `−875`, so the commit that
+        made −875 false left it passing (mg-f922 B/C).
+      * The gate mg-8e30 replaced it with formatted its own measurement, which
+        is right -- but its battery mutated with `str.replace` and NO COUNT, so
+        every mutation removed EVERY copy of the figure and the gate
+        necessarily fired.  THE REALISTIC EDIT -- ONE COPY -- WAS NOT IN THE
+        BATTERY, and the gate was in fact blind to it at all three sites
+        (mg-8a5c F-1/F-2).
+
+    So the battery below mutates SINGLE OCCURRENCES, includes the reinstatement
+    of the duplicate itself, and includes the relocation of a whole disclosure
+    out of its section.  Every mutation is applied IN MEMORY to the site texts
+    and run through `figure_gate` -- THE SAME FUNCTION T1 CALLS, not a
+    paraphrase of it, because the battery that missed F-1 was testing a
+    re-implementation.  Verdicts are written before the run.  Nothing on disk
+    is touched."""
+    head("NEGATIVE CONTROL -- THE FIGURE GATE, MUTATED ONE COPY AT A TIME")
+    print("""Nine mutations, verdicts written before the run, applied in memory to the
+three site texts and evaluated by `figure_gate` itself.  Nothing is written to
+disk.  N1/N3/N4 are mg-8a5c's N1/N4/N5 -- the three single-copy corruptions
+that the previous gate observed at exit 0 while predicting exit 1.
 """)
     a = len(state_row(tree(STATE)))
     b = len(deliv_row(tree(DELIV)))
     h = len(tree(HIST))
-    docs = {"the STATE.md row": " ".join(state_row(tree(STATE)).split()),
-            "§14": " ".join(tree(DELIV).split()),
-            "H8": " ".join(tree(HIST).split())}
+    base = site_texts()
 
-    def gate(cell, hist, texts):
-        """The live gate, parameterised on the measurement and the documents."""
-        gap = doc_num(cell - b, signed=True)
-        both = doc_num(cell + hist - b, signed=True)
-        return (all(gap in t for t in texts.values())
-                and doc_num(cell) in texts["the STATE.md row"]
-                and doc_num(hist) in texts["H8"]
-                and both in texts["the STATE.md row"] and both in texts["H8"])
+    def measure(cell=None, hist=None):
+        cell = a if cell is None else cell
+        hist = h if hist is None else hist
+        return {"gap":  doc_num(cell - b, signed=True),
+                "both": doc_num(cell + hist - b, signed=True),
+                "cell": doc_num(cell),
+                "hist": doc_num(hist),
+                "copy": doc_num(b)}
+
+    live = measure()
+
+    def corrupt(site, key, bad):
+        """Change the ONE occurrence a reader meets.  After the mg-a318 repair
+        there is exactly one, which is what makes this mutation possible to
+        state at all: before it, `replace(x, y, 1)` hit whichever copy came
+        first in the file and the other went on satisfying the gate."""
+        t = dict(base)
+        t[site] = t[site].replace(live[key], bad, 1)
+        assert t[site] != base[site], f"{key} not present at {site}"
+        return t
+
+    def duplicate(site, key):
+        """Write the figure a SECOND time at the site -- the exact shape F-1
+        lived in, reinstated."""
+        t = dict(base)
+        t[site] = t[site] + f"\n\n(and the gap is {live[key]}, restated)\n"
+        return t
+
+    def relocate_14():
+        """Move the whole disclosure out of §14 into an appendix (mg-8a5c N7).
+        To the §14 SITE that is simply the paragraph no longer being in it."""
+        t = dict(base)
+        paras = t["§14"].split("\n\n")
+        t["§14"] = "\n\n".join(p for p in paras
+                               if "The live figures, **measured AFTER" not in p)
+        assert t["§14"] != base["§14"]
+        return t
 
     cases = [
-        ("M1  the cell grows by one char after the figure was taken",
-         "GATE FIRES", lambda: gate(a + 1, h, docs)),
-        ("M2  the row history grows (cell+history figure goes stale)",
-         "GATE FIRES", lambda: gate(a, h + 1, docs)),
-        ("M3  one site drops the gap figure (H8)",
-         "GATE FIRES", lambda: gate(a, h, dict(docs, **{"H8": docs["H8"].replace(doc_num(a - b, signed=True), "")}))),
-        ("M4  unmutated -- the tree as it stands",
-         "gate passes", lambda: gate(a, h, docs)),
+        ("N1  STATE.md row: corrupt the LIVE gap figure ONLY",
+         "GATE FIRES", lambda: figure_gate(corrupt("the STATE.md row", "gap", "+9 999"), live)),
+        ("N2  §14: corrupt the LIVE gap figure ONLY",
+         "GATE FIRES", lambda: figure_gate(corrupt("§14", "gap", "+9 999"), live)),
+        ("N3  H8: corrupt the LIVE gap in the AFTER column ONLY",
+         "GATE FIRES", lambda: figure_gate(corrupt("H8", "gap", "+9 999"), live)),
+        ("N4  H8: corrupt cell + relocated history ONLY",
+         "GATE FIRES", lambda: figure_gate(corrupt("H8", "both", "+9 998"), live)),
+        ("N5  STATE.md row: the DUPLICATE reinstated (F-1's own shape)",
+         "GATE FIRES", lambda: figure_gate(duplicate("the STATE.md row", "gap"), live)),
+        ("N6  §14: the disclosure RELOCATED out of the section",
+         "GATE FIRES", lambda: figure_gate(relocate_14(), live)),
+        ("N7  the cell grows by one char after the figures were taken",
+         "GATE FIRES", lambda: figure_gate(base, measure(cell=a + 1))),
+        ("N8  the row history grows by one char",
+         "GATE FIRES", lambda: figure_gate(base, measure(hist=h + 1))),
+        ("N9  unmutated -- the tree as it stands",
+         "gate passes", lambda: figure_gate(base, live)),
     ]
-    print(f"    {'mutation':<58}{'predicted':<20}{'observed'}")
+    print(f"    {'mutation':<62}{'predicted':<14}{'observed'}")
     ok = True
     for name, predicted, fn in cases:
-        fired = not fn()
+        fired = not all(o for o, _ in fn())
         observed = "GATE FIRES" if fired else "gate passes"
         agree = observed == predicted
         ok = ok and agree
-        print(f"    {name:<58}{predicted:<20}{observed}"
+        print(f"    {name:<62}{predicted:<14}{observed}"
               f"{'' if agree else '   <-- DISAGREES'}")
     print()
-    record(ok, "4 of 4 mutations moved the gate as predicted -- the figure gate "
-               "is falsifiable by exactly the edit that defeated the one it "
-               "replaces (a change to the object being measured)")
+    record(ok, f"{len(cases)} of {len(cases)} mutations moved the gate as "
+               "predicted.  The three that matter are N1-N3: corrupting ONLY "
+               "the figure a reader meets, at each of the three sites, which "
+               "the presence-test gate observed at exit 0 (mg-8a5c N1/N4/N5). "
+               "N5 fires on the duplicate itself, so the structural repair "
+               "cannot be silently undone")
 
 
 def main():

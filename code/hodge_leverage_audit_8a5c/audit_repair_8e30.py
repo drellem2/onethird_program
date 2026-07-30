@@ -375,7 +375,16 @@ Every verdict is written here before the run.
         nth(STATE, gap, "+9 999", 0)
 
     def m_chain_state():
-        nth(STATE, gap, "+9 999", 1)
+        # ⚠️ AMENDED 2026-07-30 by mg-a318, which landed this audit's F-1.  The
+        # structural half of that repair REMOVES the second copy: the chain's
+        # tail now points at the live figure instead of restating it.  So this
+        # mutation has no target, `nth` returns False, and a naive re-run would
+        # print "GATE DID NOT FIRE" for a mutation that was never applied and
+        # re-open F-1 on the strength of it.  Returning the applied flag lets
+        # the caller report the absence of a second copy as what it is: the
+        # defect gone rather than the gate blind.  The VERDICT of this audit is
+        # untouched, and `out_audit_8e30.txt` is the run as taken at `f58f7fd`.
+        return nth(STATE, gap, "+9 999", 1)
 
     def m_both_state():
         nth(STATE, gap, "+9 999", 0)
@@ -414,7 +423,12 @@ Every verdict is written here before the run.
     print(f"    {'mutation':<54}{'predicted':<14}{'observed'}")
     holes = []
     for name, predicted, fn in cases:
-        fn()
+        applied = fn()
+        if applied is False:
+            restore()
+            print(f"    {name:<54}{'exit ' + str(predicted):<14}"
+                  f"N/A -- NO SECOND COPY EXISTS (the duplicate is GONE)")
+            continue
         got = 1 if run_gate() != 0 else 0
         restore()
         agree = got == predicted
