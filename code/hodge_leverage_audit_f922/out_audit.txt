@@ -1,0 +1,190 @@
+==============================================================================
+mg-f922 -- INDEPENDENT AUDIT of mg-e1d0 (bbe83b5), the mg-3c24 repair
+==============================================================================
+Nothing here re-opens mg-3c24's mathematics: it found 0 BROKEN and every
+number reproduced from a disjoint route, and T4 checks that the repair did not
+disturb that in either direction.  What is measured is the repair.
+
+T1 -- THE FOUR FIGURES, RE-DERIVED BY A DIFFERENT ROUTE
+-------------------------------------------------------
+The landing locates both rows by the literal prefix '**AMBER-POSITIVE'.
+This locates the STATE.md cell as the unique table line naming mg-a3d4, and
+§14's copy as the unique block-quote line naming the priced bet.  Different
+anchors; if the figures differ, one of the two is measuring the wrong row.
+
+    commit     STATE.md cell   §14 copy       gap  when
+    522048f           13,551     10,623    +2,928  before mg-a2bd
+    1e61031           16,692     10,623    +6,069  after  mg-a2bd
+    6c0f0da            9,748     10,623      -875  before mg-e1d0 (the repair)
+    bbe83b5           11,378     10,623      +755  at     mg-e1d0
+    HEAD              11,378     10,623      +755  HEAD (this audit)
+
+  [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
+  [CONFIRMED] §14's copy is STATIC at 10,623 chars across the same commit
+  [CONFIRMED] so the gap A5 reports went 2,928 -> 6,069 -- ENLARGED, and more than doubled (2.07x)
+  [CONFIRMED] and both files are in that ONE commit, so the enlargement and the reassurance sentence are the same act
+
+T2 -- WAS THE ENLARGEMENT RECORDED WHERE A READER OF A5 MEETS IT?
+-----------------------------------------------------------------
+The parent had to do two things: strike the false sentence, and record
+the ENLARGEMENT where A5 is read.  Below, every site in the repository that
+states A5 -- found by sweeping for the finding label, not from a list.
+
+  files stating mg-d39d's A5:
+    [ENLARGEMENT STATED] STATE.md
+    [ENLARGEMENT STATED] docs/OneThird-Hodge-Side-Leverage-GppStrike-IndependentAudit.md
+    [NOT STATED        ] docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md
+    [ENLARGEMENT STATED] docs/OneThird-Hodge-Side-Leverage.md
+    [NOT STATED        ] docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md
+    [NOT STATED        ] docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md
+    [ENLARGEMENT STATED] docs/state-history/attempt-mg-a3d4.md
+
+  [CONFIRMED] the enlargement 2 928 -> 6 069 IS recorded at the STATE.md cell, at the §14 paragraph and in the relocated row history -- (b) landed at the three sites the landing names
+  [CONFIRMED] `docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md` is where A5 is STATED (its finding table and its §6)
+  [FINDING  ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker: not mg-3c24, not mg-e1d0, not the enlargement.  A reader who goes to A5 itself still meets the gap it was opened with
+  [CONFIRMED] and the practice is ESTABLISHED, not hypothetical: `1e61031` annotated mg-86a3's audit document IN PLACE ('ANNOTATION ADDED 2026-07-30 BY mg-a2bd'), and §6's disposition table counts that file as one of its three sites -- so F-A is an omission, not a convention
+
+T3 -- IS THE FIGURE A READER MEETS THE CURRENT ONE?
+---------------------------------------------------
+The disclosure's own words: 'a reader of A5 must meet the current gap
+rather than the one it was opened with'.  So the figure it prints AS current is
+measured against the tree it ships in.
+
+                                       at the parent  in the tree
+    STATE.md cell                              9,748       11,378
+    relocated row history                     10,483       16,268
+    §14 copy                                  10,623       10,623
+    gap, cell only                              -875         +755
+    gap, cell + relocated history             +9,608      +17,023
+
+  [CONFIRMED] the two figures the landing prints as CURRENT -- −875 and +9 608 -- are the figures at its own PARENT `6c0f0da`
+  [FINDING  ] F-B -- the cell-only gap in the tree is +755, not −875: the landing's own commit added +1,630 chars to the cell, so the figure it prints as current was made stale BY THE COMMIT THAT PRINTS IT.  Sites asserting it in the present tense: STATE.md cell, §14 paragraph, row history H8
+  [FINDING  ] F-C -- and the sign claim inverts: the disclosure says the cell-only gap has FLIPPED SIGN (negative); in the tree it is +755, positive.  '+9 608' is likewise +17,023 in the tree
+  [CONFIRMED] and the paragraph claims every figure in it is re-measured by T1 -- which is the claim the two figures above do not meet
+
+T4 -- DID THE REPAIR OVER-CORRECT?
+----------------------------------
+mg-3c24: 0 BROKEN mathematics, the strike is right and right for the
+right reason.  A repair that hedges the strike or reopens the counterexample
+counts is a defect in the other direction.  Diffed across the landing.
+
+  [CONFIRMED] every counterexample / strike / Theorem-G figure occurs the same number of times before and after the repair, in both files -- nothing reopened, nothing re-counted
+  [CONFIRMED] row `G″` is still struck through and still labelled FALSE AS A UNIVERSAL -- the strike is not hedged
+  [CONFIRMED] and row `G′` is still explicitly NOT narrowed, at both the deliverable and the summary
+  [CONFIRMED] no hedging verb was introduced next to the strike (searched 5 forms, found 0)
+
+T5 -- THE RESTORED CONDITION, SWEPT FOR RATHER THAN LISTED
+----------------------------------------------------------
+The landing's instrument checks a hard-coded list of FOUR sites.  This
+sweeps the two live documents for the CONCLUSION -- 'the max over a level is
+attained at the one-big-block face' -- and asks of each occurrence whether the
+base case is stated within reach of it.
+
+  every occurrence of the conclusion, and how far the base case is from it:
+    [CONDITIONED, base case 37 chars away] STATE.md @63208
+        …P)` is reopened**; and the same fact **repairs row `G′` upward rather than narrowing it** — the per-level max is attained exactly at the one-big-block face — **…
+    [CONDITIONED, base case 35 chars away] STATE.md @122265
+        …is worth more than a struck row, and the same fact repairs row `G′` in the other direction (the per-level max is attained at the one-big-block face **given the …
+    [UNCONDITIONED, no base case within 900 chars either side] docs/OneThird-Hodge-Side-Leverage.md @38805
+        …ywhere in that file, and §10's control table is unchanged by it. #### The second consequence: `γ_i` for `A_n` is attained at the one-big-block face, and that is…
+    [CONDITIONED, base case 195 chars away] docs/OneThird-Hodge-Side-Leverage.md @40284
+        …r* dimension-`i` face has `λ₂(link) ≤ max_j (b_j−2)/(2D) < 1/2`, so **`γ_i = λ₂(F(A_{n−i−1})) = 1/2` exactly, attained at the one-big-block faces and at no othe…
+    [UNCONDITIONED, no base case within 900 chars either side] docs/OneThird-Hodge-Side-Leverage.md @74060
+        …t_verify_join.txt` `J1`). **Two consumers:** it is why G″ is false, and it is the missing step in row G′ (the max over a level is attained at the one-big-block …
+
+  [CONFIRMED] 5 sites state the conclusion (the landing's instrument names four)
+  [CONFIRMED] the restored wording at STATE.md is the right one: the base case `λ₂(F(A_m)) ≤ 1/2`, J alone does not give it, and Theorem G gives only `≥ 1/2` in both directions
+  [CONFIRMED] and it agrees with §6.1 ('the computational half, verified for b ≤ 9') and with ledger row `G′` ('what stays computational is only the base case') -- the two sites the ticket says already carried it
+  [CONFIRMED] and the summary states it as COMPUTATIONAL, not as a consequence
+  [FINDING  ] F-D -- docs/OneThird-Hodge-Side-Leverage.md (flat offset 38805) states the conclusion with NO base case: …ywhere in that file, and §10's control table is unchanged by it. #### The second consequence: `γ_i` for `A_n` is attaine…
+  [FINDING  ] F-D -- docs/OneThird-Hodge-Side-Leverage.md (flat offset 74060) states the conclusion with NO base case: …t_verify_join.txt` `J1`). **Two consumers:** it is why G″ is false, and it is the missing step in row G′ (the max over a…
+  [FINDING  ] F-D* -- and the sharpest of those is inside ledger row **J** itself -- 'the missing step in row G′ (the max over a level is attained at the one-big-block face)' -- which attributes to J alone exactly the conclusion F3 says J alone does not carry
+  [CONFIRMED] and every unconditioned site was introduced by `1e61031` -- the same commit mg-3c24 audited, so these are misses of the same sweep, not new damage
+  [CONFIRMED] which refutes the landing's own census, stated in H7 verbatim: 'only the two `STATE.md` summaries dropped it'
+
+T6 -- COUNT THE BRIEF YOURSELF
+------------------------------
+    mg-a806's numbered items, read from the ticket: B1, B2, B3, B4, B5, B6
+  [CONFIRMED] mg-a806's brief has 6 numbered items, B1-B6 -- SIX
+  [CONFIRMED] STATE.md Appendix A now says SIX (corrected by mg-ae62)
+  [CONFIRMED] and the deliverable's §13 -- the site mg-ae62 left standing -- now says SIX too: F4's second half, closed here
+  [CONFIRMED] and it names all six against the ticket: B1 ledger row B6, B2 the scope sentence, B3 N1's label, B4 the §10 table, B5 Theorem G's prominence, B6 the Appendix A rule -- each matches the ticket's own item
+  [CONFIRMED] neither live site ASSERTS four (0 assertions found), and both keep the old wording as an explicitly marked CORRECTED-FROM quotation -- struck, not deleted, so a reader can check what changed
+  [CONFIRMED] the CONCLUSION survives the recount: `G″` is none of the six
+
+T7 -- BEYOND THE BRIEF (declared): THE LANDING'S OWN EVIDENCE ARTIFACT
+----------------------------------------------------------------------
+Nothing in the brief names this.  Chosen because the landing's whole
+argument is 'every number is RE-MEASURED, none quoted', and that argument rests
+on one committed transcript.
+
+  [CONFIRMED] re-run at HEAD the landing's own instrument EXITS 1 -- non-zero, i.e. it refutes a claim the landing makes
+  [CONFIRMED] the COMMITTED transcript records 0 refuted; re-running it at the commit it ships in gives 1
+  [FINDING  ] F-E -- the landing's committed evidence does not reproduce at the commit it was committed in -- the same defect class the sibling commit `3756553` exists to prevent ('leaving it at the old figures would publish a control output that no longer reproduces')
+  [CONFIRMED] and it cannot: the transcript embeds the sha it was run at (a13b4a9) on its own HEAD line, and that commit is an ancestor of `bbe83b5` -- so byte-identical regeneration is impossible at the landing or at any descendant
+  [FINDING  ] F-F -- `code/hodge_leverage_landing_e1d0/run_all.sh` states 'this transcript regenerates byte-identically AT THIS COMMIT (verified, two runs)'. It embeds a13b4a9, which is not the landing and not its parent, so the statement is false by construction
+  [CONFIRMED] and the runner pipes the instrument into `tee`, so the pipeline's status is tee's: `set -e` cannot see a non-zero verifier
+  [CONFIRMED] measured: verifier exits 1, its runner exits 0 -- the runner cannot report the failure
+  [CONFIRMED] H8's table prints the relocated history at 10 483 chars and the combined gap at +9 608
+  [CONFIRMED] neither figure appears anywhere in the transcript H8 cites as having re-measured them (it prints 26,016 and +15,393)
+  [FINDING  ] F-G -- so H8's '+9 608' is not a re-measurement of the tree it ships in: it is the parent's history file (10 483) against the parent's cell, while the instrument cited beside it printed the post-edit history file
+  [CONFIRMED] mg-3c24's summary table carries 7 findings, F1-F7
+  [CONFIRMED] the landing names what it deliberately did not do -- no new Appendix A rule, and A5-A8 not landed
+  [FINDING  ] F-H -- but that list does not name mg-3c24's F5, F6 or F7. The commit subject is 'CLOSE mg-3c24'; four of seven findings are landed.  F7 mg-3c24 itself declares needs no repair in the tree, so the live remainder is F5 and F6 -- both still in the tree, no successor ticket for either, and nothing anywhere saying they are open.  That is the not-filed shape this landing exists to repair, one generation on and two findings narrower
+  [CONFIRMED] and F5 and F6 are verifiably still in the tree unrepaired, so they are open rather than silently fixed
+
+T8 -- WHAT COULD NOT BE BROKEN
+------------------------------
+  [CONFIRMED] the mg-2da3 landing control exits 0 and its committed transcript regenerates BYTE-IDENTICALLY -- the re-baseline `3756553` is honest and the 11 digests / 11 presentation records are intact
+  [CONFIRMED] and it reports PASS on 11 content digests and the same number of presentation records, read from the working tree
+  [CONFIRMED] T1's four figures, the strike, the counterexample counts, Theorem G, row G′'s non-narrowing, F2's deferral and F4's second site: all stand as the landing states them
+
+NEGATIVE CONTROL -- four mutations, verdicts predicted before the run
+---------------------------------------------------------------------
+An instrument validated only by its author is the defect this arc keeps
+finding.  Each mutation below is applied IN MEMORY to the text a check reads,
+and the predicted verdict was written into this file before it was run.
+
+    mutation                                            predicted                         observed
+    M1  strip '2 928 → 6 069' from the STATE.md cell    T2(b) FAILS                       as predicted
+    M2  set the cell so the printed −875 is true        T3 staleness STOPS firing         as predicted
+    M3  add the base case to ledger row J's clause      T5 unconditioned count DROPS by 1 as predicted
+    M4  revert the deliverable's §13 to 'four things'   T6 FAILS                          as predicted
+
+  [CONFIRMED] 4 of 4 mutations moved the verdict exactly as predicted before the run -- these checks can fail
+
+MY OWN NEAR MISSES -- what this instrument got wrong first
+----------------------------------------------------------
+A claim of compliance is cheap; a claim of non-compliance against
+yourself costs something.  Both of these were REFUTED verdicts produced by the
+first version of this file, both against a tree that was right.
+
+  [NEAR MISS 1] T5 windowed for the base case WITHIN A LINE.  §6.1's occurrence sits in a bullet whose condition is ~90 chars earlier in the SAME sentence, split across a line break, and the check scored it UNCONDITIONED.  A false positive of precisely the kind this audit files against others.  Fixed by windowing the flattened document and printing the distance.
+
+  [NEAR MISS 2] T6 asserted that the string 'four things' must be ABSENT, and REFUTED on both files.  Wrong: every survival is inside the correction's own marked quotation of what it replaced -- the same strike-don't-delete convention F1's repair follows and which this audit credits it for.  An instrument that cannot tell an assertion from a quotation of a struck assertion files false findings.  Fixed to test the assertion.
+
+  [NEAR MISS 3] T5 double-counted §6.1's heading, once from the prose sweep and once from a separate heading pass, and would have reported 4 unconditioned sites where there are 2 distinct ones.  Deduped by offset.
+
+
+BOTTOM LINE
+-----------
+  checks recorded : 49
+  confirmed       : 39
+  measurements    : 0
+  refuted         : 0
+  findings        : 10
+
+    FINDING  F-A: the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker: not mg-3c24, not mg-e1d0, not the enlargement.  A reader who goes to A5 itself still meets the gap it was opened with
+    FINDING  F-B: the cell-only gap in the tree is +755, not −875: the landing's own commit added +1,630 chars to the cell, so the figure it prints as current was made stale BY THE COMMIT THAT PRINTS IT.  Sites asserting it in the present tense: STATE.md cell, §14 paragraph, row history H8
+    FINDING  F-C: and the sign claim inverts: the disclosure says the cell-only gap has FLIPPED SIGN (negative); in the tree it is +755, positive.  '+9 608' is likewise +17,023 in the tree
+    FINDING  F-D: docs/OneThird-Hodge-Side-Leverage.md (flat offset 38805) states the conclusion with NO base case: …ywhere in that file, and §10's control table is unchanged by it. #### The second consequence: `γ_i` for `A_n` is attaine…
+    FINDING  F-D: docs/OneThird-Hodge-Side-Leverage.md (flat offset 74060) states the conclusion with NO base case: …t_verify_join.txt` `J1`). **Two consumers:** it is why G″ is false, and it is the missing step in row G′ (the max over a…
+    FINDING  F-D*: and the sharpest of those is inside ledger row **J** itself -- 'the missing step in row G′ (the max over a level is attained at the one-big-block face)' -- which attributes to J alone exactly the conclusion F3 says J alone does not carry
+    FINDING  F-E: the landing's committed evidence does not reproduce at the commit it was committed in -- the same defect class the sibling commit `3756553` exists to prevent ('leaving it at the old figures would publish a control output that no longer reproduces')
+    FINDING  F-F: `code/hodge_leverage_landing_e1d0/run_all.sh` states 'this transcript regenerates byte-identically AT THIS COMMIT (verified, two runs)'. It embeds a13b4a9, which is not the landing and not its parent, so the statement is false by construction
+    FINDING  F-G: so H8's '+9 608' is not a re-measurement of the tree it ships in: it is the parent's history file (10 483) against the parent's cell, while the instrument cited beside it printed the post-edit history file
+    FINDING  F-H: but that list does not name mg-3c24's F5, F6 or F7. The commit subject is 'CLOSE mg-3c24'; four of seven findings are landed.  F7 mg-3c24 itself declares needs no repair in the tree, so the live remainder is F5 and F6 -- both still in the tree, no successor ticket for either, and nothing anywhere saying they are open.  That is the not-filed shape this landing exists to repair, one generation on and two findings narrower
+
+  A finding here is a defect in the REPAIR, not in mg-3c24 and not in
+  the mathematics.  Exit 1 whenever any is present: this instrument is
+  a control, and a control that cannot fail is worth nothing.
