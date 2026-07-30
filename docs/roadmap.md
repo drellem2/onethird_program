@@ -194,31 +194,31 @@ quasi-hereditary.** They are genuinely different generalisations that agree on `
 question is no longer "what single construction covers both" but "what does quasi-hereditary buy", and whether
 our non-semisimple side has an analogue of the canonical basis multiplicity-freeness hands us for free.**
 
-## Now (in flight) — 2026-07-30 19:20
+## Now (in flight) — 2026-07-30 20:10
 
-- **mg-db09** — Daniel's second proposal: *category + rank function + multiplicity-free branching ⇒ the
-  Bratteli/path algebra is canonically an endomorphism algebra*. Locating exercise. **We fail its hypothesis
-  hard** (`kF(P)` radical 95.7% at n=6), so the deliverable is *which hypothesis is load-bearing* and whether
-  the branching axis and the species axis are instances of one thing.
-- **mg-f8fa** — the remainder of mg-a61f not carried by mg-6f61: four hedges **under-claim** a located
-  identity and route a successor to a search that cannot succeed; T3d's four candidates are two; control (ii)'s
-  1442 "failures" are a type mismatch whose **conclusion is right and must survive**.
-- **mg-16eb** — audit of mg-0049 (mayor's repair of mg-bee1, where the repair itself created a defect).
+**Every repair filed today has landed. What is in flight is four independent audits and nothing else.**
 
-## Next (queued / gated)
+- **mg-73df** — audit of the mg-7d75 repair, scoped to the **final document state** (mg-6f61 + mg-f8fa),
+  because one fixed the prose and the other fixed what the prose described. Carries a **seam check** neither
+  repair's brief asks for; if it finds nothing it must say **what would have counted**.
+- **mg-2060** — audit of mg-db09 (the Bratteli split). Primary target: **verify the do-not-develop instruction
+  BY MEASUREMENT** — a brief is not a control.
+- **mg-f922** — audit of mg-e1d0. Must verify the **enlargement** was recorded where a reader of the open
+  finding meets it, not merely that the false sentence was struck.
+- **mg-1c80** — audit of mg-da45. The failure mode is a **new plausible reason that is also not what decides**;
+  read the predicate, not the repair's description of it.
 
-- **mg-73df** — audit of the mg-7d75 repair, **scope widened to the FINAL document state** (mg-6f61 +
-  mg-f8fa). Deliberately sequenced behind mg-f8fa so it audits the final state rather than an intermediate
-  one, and so two workers are not on one document at once. Carries a **seam check** neither repair's brief
-  asks for: two corrections can each be right and jointly inconsistent.
-- **mg-2060** — audit of mg-db09, gated. Primary target: **verify the do-not-develop instruction BY
-  MEASUREMENT** — a brief is not a control.
-- **mg-344a** — Daniel workspace: review the obstruction. `assignee=human`, so it waits on him. Today's
-  audited evidence was appended to it so it is usable on sight.
+## Next
 
-*(Maintenance note: this section was stale by four hours until 19:20 — every item it listed had completed
-while the headline sections above were corrected six times. The sections carrying the day's findings got
-attention; the ones describing operational state rotted. Worth knowing about how this document decays.)*
+- **mg-344a** — Daniel workspace: review the obstruction. `assignee=human`, so it waits on him. Today's audited
+  evidence is appended to it, so it is usable on sight.
+- **Held deliberately, not forgotten:** the quasi-hereditary follow-up — *what does that property buy, and does
+  our non-semisimple side have an analogue of the canonical basis multiplicity-freeness gives us for free?* Not
+  filed until mg-2060 reports, because it would rest entirely on an unaudited result.
+
+*(Decay note, measured: this section was rebuilt at 19:20 and was **stale again by 20:10** — 8 of the 11 ticket
+IDs it listed had completed within 50 minutes. The check is mechanical — read the status of every ID listed and
+treat any `done` as a rot marker — and at this cadence it needs running every sweep, not on provocation.)*
 
 ## Later (decided, not yet filed)
 - `onethird_program` ships two `controls.py` and two `run_all.sh` and has **no CI of any kind** — by the
