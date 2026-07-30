@@ -658,7 +658,11 @@ dimensions must add to `|L(P)|` — which also certifies diagonalisability.
   multiplicity `D(n−|S|)`, the derangement number. The Brown machinery reproduces it exactly for
   `n = 2,…,5`, and neither derangements nor subset-indexing appear anywhere in `lrb.py`.
 
-### §9.4 Scope: `Δ_AT` is *not* in this family
+### §9.4 Scope: this family reaches `Δ_AT` only where `Δ_AT` is already free
+
+*(Heading corrected in repair of **F1**. It previously read "`Δ_AT` is *not* in this family", which is
+false as a universal — see the F1 block below, where the replacement is given and is stronger. The
+committed artifact `lrb_output.txt` §5 carries the same correction at its own site.)*
 
 Stated with the positive result, not after it.
 
