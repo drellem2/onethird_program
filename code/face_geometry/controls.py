@@ -50,14 +50,35 @@ says so: `s_i^2 = 1` pins every diagonal entry AND `|s_i s_j| = 1` pins every
 absolute value; only what survives both is a parity system where a sign is
 consulted.  mg-8a12 routed on the first and printed a preserved diagonal as
 proof that "the off-diagonal signs actually decide" for the one row it keeps
-absorbability scored in.  They do not: on every poset that row cites the
-magnitudes differ, so the second gate settles it, and 0 of the 297 biting
-(poset, mutation) pairs in the section reach the parity system at all.  The
-gate is now MEASURED where the claim is made (`deciding_gate`, below) and every
-row that speaks about it says which gate fired.  What deliberately did NOT
-change: row I4 keeps `absorb == 0` in its scored condition.  The clause is
-true, it is not evidence, and removing it is a scoring change that belongs to
-its own item -- this one corrects a printed reason, which was false.
+absorbability scored in.  They do not: 0 of the 297 biting (poset, mutation)
+pairs in the section reach the parity system at all.
+
+AND THE SECOND ATTEMPT AT SAYING WHY WAS ALSO NOT A TRACE (mg-1c80's F1, landed
+by mg-5f9a).  This is the THIRD version of one sentence, and the first two
+failed the same way: a reason written ALONGSIDE the procedure it is about.
+mg-da45's `deciding_gate` tested all diagonals and then all magnitudes; the
+predicate interleaves the two BY ROW, so the two orders named different gates on
+57 of the 297 pairs, and DELETING THE GATE THE ARTIFACT CALLED DECISIVE LEFT THE
+ARTIFACT BYTE-IDENTICAL.  A reason a deletion cannot disturb is not the reason
+the code has.
+
+SO NO THIRD REASON IS WRITTEN HERE.  The predicate is INSTRUMENTED instead
+(`face_complex.absorb_trace`): it returns the gate it returned at and the number
+of signs it read, and `absorbable_by_diagonal_twist` is a wrapper over it, so
+what the rows print is emitted by the code path rather than asserted beside it.
+Three questions that mg-da45 answered with one function are now three functions
+-- `diagonal_moves` (a property of the matrices; drives the routing and is the
+theorem's hypothesis), `absorb_trace` (one execution; ORDER-DEPENDENT, and every
+row that quotes a gate says so), `gate_violations` (exhaustive, so it measures
+whether the gate named was load-bearing: on 294 of the 297 pairs both forced
+gates are violated and neither is).  What the rows now rest on is `signs_read`,
+which no ordering can move.  Verified by the deletion test that caught the last
+version, in code/face_geometry_instr_5f9a/: delete a gate from the predicate and
+the artifact must CHANGE.
+
+What deliberately did NOT change: row I4 keeps `absorb == 0` in its scored
+condition.  The clause is true, it is not evidence, and removing it is a scoring
+change that belongs to its own item -- this one corrects a printed reason.
 
 Run:  python3 controls.py
 """
@@ -69,7 +90,8 @@ from face_complex import (
     linear_extensions, le_to_facet, facet_to_le, top_laplacians, at_laplacian,
     coxeter_compression, twist, mat_eq, mat_sub, is_diagonal, reduced_betti,
     rank_mod_p, rank_exact, adjacent_transposition_graph, perm_sign,
-    absorbable_by_diagonal_twist, not_isospectral,
+    absorbable_by_diagonal_twist, absorb_trace, gate_violations, diagonal_moves,
+    not_isospectral,
 )
 from posets import all_posets, POSET_COUNTS, cover_string
 
@@ -635,47 +657,39 @@ DIAGONAL_MOVES = {
 }
 
 
-def deciding_gate(A, B):
-    """WHICH gate of `absorbable_by_diagonal_twist` settles the pair (A, B).
-
-    The predicate answers "is A = S . B . S for a diagonal sign matrix S" in
-    three stages, and ITS OWN DOCSTRING names two of the three as forced
-    arithmetic (face_complex.py:763-765): `s_i^2 = 1` pins every DIAGONAL entry,
-    `|s_i s_j| = 1` pins every ABSOLUTE VALUE, and only what survives both is a
-    parity system in which a SIGN is actually consulted.  A "not absorbable"
-    reached at either of the first two gates is forced whatever the signs are;
-    only an answer reached in the parity system is an answer about signs.
-
-    WHY THIS FUNCTION EXISTS (mg-f1b2 F1, landed by mg-da45).  mg-8a12 measured
-    the FIRST gate only (`diag_preserved`) and printed a preserved diagonal as
-    proof that "the off-diagonal signs actually decide" in the one row it keeps
-    absorbability scored for.  They do not: on every poset that row cites, the
-    magnitudes differ and the second gate fires.  The lesson of this whole
-    lineage is that a property has to be COMPUTED where it is claimed, so the
-    gate is measured here rather than argued for anywhere.
-
-    Returns "shape", "diagonal", "magnitude" or "parity".  The first three are
-    forced -- the predicate returns False there for every sign vector; only
-    "parity" is a place where the answer could come out either way.
-    """
-    m = len(A)
-    if m != len(B) or any(len(A[i]) != len(B[i]) for i in range(m)):
-        return "shape"
-    if any(A[i][i] != B[i][i] for i in range(m)):
-        return "diagonal"
-    if any(abs(A[i][j]) != abs(B[i][j]) for i in range(m) for j in range(m)):
-        return "magnitude"
-    return "parity"
+# NO GATE PROCEDURE LIVES IN THIS FILE ANY MORE (mg-1c80's F1, landed by
+# mg-5f9a).  There used to be one -- `deciding_gate` -- and it was the defect:
+# it tested ALL diagonals and then ALL magnitudes, which is not the order
+# `absorbable_by_diagonal_twist` uses (that one interleaves the two BY ROW), so
+# the two named different gates on 57 of the 297 biting pairs and the artifact
+# printed the wrong split.  Deleting the gate it called decisive from the
+# predicate left the artifact BYTE-IDENTICAL, which is the proof that the name
+# was not the code's.
+#
+# The replacement is not a better procedure alongside the predicate; it is the
+# predicate reporting itself.  `face_complex.absorb_trace` returns the gate it
+# returned at and how many signs it read, and `absorbable_by_diagonal_twist` is
+# a wrapper over it, so a caller cannot get a gate from one execution and an
+# answer from another.  Rows below call `absorb_trace` directly -- a local alias
+# would be one more place for the two to drift apart.
 
 
 def entry_mismatches(A, B):
     """(magnitude mismatches, sign-only mismatches) between two same-shape
     matrices, counted by ENTRY.
 
-    The second number is the one the routing claim turns on: an entry with
-    |A[i][j]| == |B[i][j]| and A[i][j] != B[i][j] is an entry a sign decision
-    could have been made on.  Zero of them means the predicate never consulted a
-    sign, however many posets had their diagonal preserved.
+    The second number counts entries a sign decision COULD have been made on:
+    |A[i][j]| == |B[i][j]| and A[i][j] != B[i][j].
+
+    IT IS NOT THE MEASURE OF WHETHER A SIGN WAS CONSULTED, and mg-da45 read it
+    that way ("zero of them means the predicate never consulted a sign").  That
+    is an inference about the predicate drawn from outside it, which is the
+    error this lineage keeps repeating.  The predicate now reports the thing
+    directly -- `Trace.signs_read`, the number of off-diagonal constraints its
+    union-find loop actually consumed -- and that is what the rows quote.  This
+    stays because "how far apart are these two matrices" is a fair question in
+    its own right, and because a nonzero count here with `signs_read == 0` is
+    exactly the disagreement worth seeing.
     """
     m = len(A)
     mag = sum(1 for i in range(m) for j in range(m)
@@ -817,11 +831,14 @@ def negative_control_incidence(nmax):
     "absorbable on 0 of N" is arithmetic at every n and cannot fail -- it is a
     THEOREM being read out as an 82-poset count, mg-78c0's defect shape.  So
     each row measures `diag_preserved`, the number of its biting posets on which
-    the diagonal is unchanged, and routes on it:
+    the diagonal is unchanged -- asked directly, of the two matrices, by
+    `diagonal_moves` (mg-5f9a; mg-da45 read it off a gate label instead, which is
+    a different question) -- and routes on it:
 
       diag_preserved > 0   absorbability stays in the row's scored condition
                            (this is I4: 3 of 61)
-      diag_preserved == 0  the answer was forced at the diagonal gate;
+      diag_preserved == 0  the diagonal moved on every one of them, and a moved
+                           diagonal is not absorbable for ANY sign vector, so
                            absorbability is REMOVED from the row and stated as a
                            proven property in a single [CANNOT FAIL] row (this is
                            I1, I2 and I3)
@@ -846,12 +863,20 @@ def negative_control_incidence(nmax):
     generators and one out of the set, so exactly one neighbour of every vertex
     changes: 2|L(P)| mismatched entries at every n >= 3.
 
-    `deciding_gate` (above) therefore measures WHICH gate settles every biting
-    pair, the counts are printed in each row that speaks about absorbability and
-    in the measured block, and the routing row states what its split is a split
-    BETWEEN.  Nothing here routes on a gate it has not measured, and no new
-    scored row was added to say so -- scoring "my routing quantity is the right
-    one" is the move that produced this generation of the defect.
+    AND THE SECOND ATTEMPT TO SAY WHICH GATE WAS ALSO NOT A TRACE (mg-1c80's F1,
+    landed by mg-5f9a).  mg-da45 answered it with `deciding_gate`, which tested
+    all diagonals and then all magnitudes; the predicate interleaves the two BY
+    ROW, so the two orders named different gates on 57 of the 297 biting pairs,
+    and deleting the gate the artifact called decisive left the artifact
+    BYTE-IDENTICAL.  The predicate now REPORTS its own gate and its own count of
+    signs read (`face_complex.absorb_trace`), every row that quotes a gate says
+    the label is the first one REACHED, and `gate_violations` measures the rest:
+    on 294 of the 297 pairs BOTH forced gates are violated, so on those no gate
+    name is load-bearing.  What the rows rest on instead is the sign count, which
+    no ordering can move.  Still no new scored row -- scoring "my routing
+    quantity is the right one" is the move that produced two generations of the
+    defect, and the deletion test in code/face_geometry_instr_5f9a/ is what
+    checks this one instead.
 
     WHAT WAS NOT CHANGED, and it is a choice.  Row I4 keeps `absorb == 0` in its
     scored condition: the count is true, the correction owed was to the reason
@@ -949,17 +974,20 @@ def negative_control_incidence(nmax):
 
     same_target = 0
     multi_ridge = {}
-    forced_rows, theorem_app, theorem_diag, theorem_absorb = [], 0, 0, 0
+    forced_rows = []
+    theorem_app = theorem_diag = theorem_absorb = theorem_both = 0
     # WHICH GATE settles each absorbability answer, tallied over every biting
     # pair the section scores (mg-f1b2 F1, mg-da45).  `gate_rows` is read out in
     # the measured block below; `tot_*` carry the section-wide totals the routing
     # row now has to state.
-    gate_rows, tot_app, tot_parity, tot_sign = [], 0, 0, 0
+    gate_rows = []
+    tot_app = tot_shape = tot_parity = tot_sign = tot_signs_read = tot_both = 0
     for name, mode, localised in muts:
         app = rej = absorb = spec = 0
         caused = shape_ok = diag_preserved = diag_moved = residual_max = 0
         gates = {"diagonal": 0, "magnitude": 0, "parity": 0}
         mag_entries = sign_entries = 0
+        signs_read = both_gates = only_mag = sign_any = 0
         vac, vac_sizes = 0, set()
         for P in ps:
             L_true, target = claim1_pair(P)
@@ -989,18 +1017,38 @@ def negative_control_incidence(nmax):
                                       for i in range(m)):
                 continue                   # counted in app, absent from shape_ok
             shape_ok += 1
-            # WHICH GATE decided, measured rather than assumed (mg-f1b2 F1,
-            # mg-da45).  A moved diagonal forces the answer at gate 1; a
-            # preserved diagonal does NOT mean the answer is a decision, because
-            # gate 2 (|s_i s_j| = 1) is forced by the same arithmetic.  Only
-            # `gates["parity"]` counts pairs where a sign was consulted at all.
-            gate = deciding_gate(L_mut, target)
-            gates[gate] = gates.get(gate, 0) + 1
-            if gate == "diagonal":
-                diag_moved += 1            # forced at gate 1: s_i^2 = 1 pins the diagonal
+            # THREE DIFFERENT QUESTIONS, ASKED SEPARATELY (mg-1c80 F1, mg-5f9a).
+            # mg-da45 asked them with one function and printed the answer to one
+            # as the answer to another:
+            #
+            #  (a) DID THE DIAGONAL MOVE?  A property of the two matrices.  It
+            #      is the hypothesis of the theorem the forced rows route to
+            #      (s_i^2 = 1 pins the diagonal), it holds at every n, and it
+            #      says nothing about what the code tested first -- so it is
+            #      asked directly, by `diagonal_moves`, and drives the routing.
+            #  (b) WHERE DID THE PREDICATE RETURN?  A fact about one execution,
+            #      emitted by the predicate itself.  Order-dependent: the two
+            #      forced gates are interleaved by row, so this is the first
+            #      gate REACHED and not the reason for the answer.
+            #  (c) WHICH GATES WOULD HAVE CAUGHT IT AT ALL?  Exhaustive, so
+            #      order-free.  This is what says whether (b) is load-bearing:
+            #      a pair violating both gates is rejected with either deleted.
+            moved = diagonal_moves(L_mut, target)               # (a)
+            tr = absorb_trace(L_mut, target)                    # (b)
+            gates[tr.gate] = gates.get(tr.gate, 0) + 1
+            signs_read += tr.signs_read
+            viol = gate_violations(L_mut, target)               # (c)
+            both_gates += len(viol & {"diagonal", "magnitude"}) == 2
+            only_mag += viol == frozenset(["magnitude"])
+            # the sign census over EVERY same-shape pair, not just the ones
+            # whose diagonal survived: the section total is printed as "anywhere"
+            # and mg-1c80's F2 found it summed over 3 of the 297 (mg-5f9a).
+            sign_any += entry_mismatches(L_mut, target)[1]
+            if moved:
+                diag_moved += 1            # the theorem's hypothesis holds here
             else:
-                diag_preserved += 1        # the diagonal survived -- gate 2 or the parity
-                dm, ds = entry_mismatches(L_mut, target)   # system settles these
+                diag_preserved += 1        # the diagonal survived: absorbability
+                dm, ds = entry_mismatches(L_mut, target)   # stays scored on these
                 mag_entries += dm
                 sign_entries += ds
             delta = predicted_incidence_delta(P, mode) if localised else None
@@ -1039,6 +1087,8 @@ def negative_control_incidence(nmax):
             theorem_diag += diag_moved     # counted, not derived: a poset whose
                                            # shape moved is verified for neither
             theorem_absorb += absorb
+            theorem_both += both_gates    # how many of them the OTHER
+                                          # forced gate also catches
         else:
             cond = cond and absorb == 0
         check("%s -- the claim-(1) test rejects on %d/%d posets where the corruption "
@@ -1061,26 +1111,41 @@ def negative_control_incidence(nmax):
                   "%d, so 'not absorbable' is forced -- see the [CANNOT FAIL] row "
                   "below (mg-8a12)." % app) if forced else
                  ("Absorbable into a diagonal +-1 twist on %d of those %d, and this "
-                  "row DOES score it -- but the answer is FORCED here too, at the "
-                  "predicate's SECOND gate, and mg-8a12 printed the opposite (mg-f1b2 "
-                  "F1, corrected by mg-da45).  Measured, not argued: the diagonal is "
-                  "preserved on %d of the %d, and of those, %d are settled by "
-                  "|s_i s_j| = 1 -- %d off-diagonal magnitudes differ on them and %d "
+                  "row DOES score it.  WHAT THE PREDICATE DID, reported by the "
+                  "predicate itself and not by a procedure standing next to it "
+                  "(mg-1c80 F1, landed by mg-5f9a): over the %d same-shape pairs it "
+                  "read %d off-diagonal SIGNS in total, so no sign entered any answer "
+                  "in this row.  The diagonal is preserved on %d of the %d, and of "
+                  "those, %d are settled by |s_i s_j| = 1 -- and on those %d that "
+                  "gate is the ONLY one violated, measured exhaustively rather than "
+                  "inferred from the order, so there it is load-bearing and not "
+                  "merely first: %d off-diagonal magnitudes differ on them and %d "
                   "entries differ in SIGN ALONE -- while %d reach the parity system "
                   "where a sign is consulted at all.  So 'the predicate had to decide "
-                  "on the off-diagonal signs and could have returned absorbable' was "
-                  "false: no sign was consulted anywhere in this row.  The clause is "
-                  "kept in the condition because it is TRUE, not because it is "
-                  "evidence; dropping it and extending the [CANNOT FAIL] row to this "
-                  "corruption is a SCORING change and is deliberately NOT made here."
-                  % (absorb, app, diag_preserved, app, gates["magnitude"],
-                     mag_entries, sign_entries, gates["parity"]))),
+                  "on the off-diagonal signs and could have returned absorbable' is "
+                  "false, which is mg-f1b2's F1.  WHAT IS NOT CLAIMED HERE, because "
+                  "mg-da45 claimed it and mg-1c80 refuted it: that a gate NAME "
+                  "explains the other %d pairs.  Both forced gates are violated on "
+                  "%d of the %d, so on those the gate a trace names is a fact about "
+                  "the order the code tests in, and deleting either one leaves their "
+                  "answers alone.  The clause is kept in the condition because it is "
+                  "TRUE, not because it is evidence; dropping it and extending the "
+                  "[CANNOT FAIL] row to this corruption is a SCORING change and is "
+                  "deliberately NOT made here."
+                  % (absorb, app, shape_ok, signs_read,
+                     diag_preserved, app, gates["magnitude"], only_mag,
+                     mag_entries, sign_entries, gates["parity"],
+                     app - only_mag, both_gates, app))),
               cond)
         gate_rows.append((name.split(" ")[0], app, gates["diagonal"],
-                          gates["magnitude"], gates["parity"], sign_entries))
+                          gates["magnitude"], gates["parity"], signs_read,
+                          both_gates, diag_moved))
         tot_app += app
+        tot_shape += shape_ok
         tot_parity += gates["parity"]
-        tot_sign += sign_entries
+        tot_sign += sign_any
+        tot_signs_read += signs_read
+        tot_both += both_gates
 
     # The property removed from those rows, stated once, as what it is.  Same
     # treatment mg-1319 gave the all-+1 row: still verified, never a pass.  It is
@@ -1099,7 +1164,15 @@ def negative_control_incidence(nmax):
               "swept every eligible ridge choice (1449/981/1459 for I1/I2/I3), not "
               "just the first one this file mutates.  A FALSE theorem is still a "
               "failure: if the diagonal stopped moving, or the predicate did report "
-              "absorbable, this row FAILS"
+              "absorbable, this row FAILS.  AND WHAT LINE (i) IS NOT: a claim about "
+              "which test in the code fires.  It is an implication -- moved diagonal "
+              "=> not absorbable -- and the implementation realises it REDUNDANTLY, "
+              "which is measured here and not argued: on %d of these %d pairs the "
+              "|s_i s_j| = 1 gate is violated TOO (it runs over j == i), so deleting "
+              "the s_i^2 = 1 gate from the predicate changes no answer on any of "
+              "them.  mg-da45 printed a gate name as though it were this argument; "
+              "the argument stands and the gate name was not evidence for it "
+              "(mg-1c80 F1, mg-5f9a)"
               % (", ".join(n.split(" ")[0] for n, _, _, _ in forced_rows),
                  ", ".join("%s on %d/%d" % (n.split(" ")[0], a - ab, a)
                            for n, _, a, ab in forced_rows),
@@ -1108,7 +1181,8 @@ def negative_control_incidence(nmax):
                      m, "%s moves one, though no closed form for it is recorded "
                         "in DIAGONAL_MOVES" % n.split(" ")[0])
                      for n, m, _, _ in forced_rows),
-                 theorem_diag, theorem_app, theorem_absorb),
+                 theorem_diag, theorem_app, theorem_absorb,
+                 theorem_both, theorem_app),
               theorem_absorb == 0 and theorem_diag == theorem_app,
               cannot_fail=True)
 
@@ -1117,21 +1191,24 @@ def negative_control_incidence(nmax):
     # cover nothing, which is worse than the defect it replaces.  So the routing
     # has to be shown to separate on this population, the same way the gauge
     # detector and the absorbability instrument are shown to separate above.
-    check("routing check on the mg-8a12 repair: the DIAGONAL-GATE split SEPARATES on "
+    check("routing check on the mg-8a12 repair: the MOVED-DIAGONAL split SEPARATES on "
           "this population -- %d of the %d rows have their absorbability answer forced "
           "by a moved diagonal and are stated as a theorem; on the remaining %d the "
           "diagonal survives and absorbability stays scored. "
           "If it routed every row one way it would be a relabelling of the whole "
-          "section, not a decision about each row.  WHAT THIS DOES NOT SHOW, and "
-          "mg-8a12 printed that it did (mg-f1b2 F1, corrected by mg-da45): that the "
-          "answer on the row it keeps is a DECISION.  `diag_preserved` is the FIRST of "
-          "the predicate's two forced gates, and the second (|s_i s_j| = 1) is forced "
-          "by the same arithmetic -- measured over all four rows, %d of the %d biting "
-          "(poset, mutation) pairs reach the parity system and %d entries anywhere "
-          "differ in sign alone.  The split is between two forced gates, not between "
-          "forced and decided"
+          "section, not a decision about each row.  IT ROUTES ON `diagonal_moves`, a "
+          "question about the two matrices, and NOT on which gate the predicate "
+          "returned at -- those are different questions and mg-da45 asked them with "
+          "one function (mg-1c80 F1, mg-5f9a).  WHAT THIS DOES NOT SHOW, and mg-8a12 "
+          "printed that it did: that the answer on the row it keeps is a DECISION.  "
+          "Measured over all four rows, from the predicate's own execution: it read "
+          "%d off-diagonal SIGNS in total, reached the parity system on "
+          "%d of the %d biting (poset, mutation) pairs, and %d entries anywhere in "
+          "the %d same-shape pairs differ in sign alone.  A count of signs read is "
+          "what this sentence can support; a gate name is not, because the two forced "
+          "gates are interleaved by row and %d of the pairs violate BOTH"
           % (len(forced_rows), len(muts), len(muts) - len(forced_rows),
-             tot_parity, tot_app, tot_sign),
+             tot_signs_read, tot_parity, tot_app, tot_sign, tot_shape, tot_both),
           0 < len(forced_rows) < len(muts))
 
     # ---- measurements, deliberately NOT scored as PASS/FAIL rows ----------
@@ -1144,28 +1221,40 @@ def negative_control_incidence(nmax):
           "the 1-or-2-facets property POSITIVE CONTROL 3 verifies: that check "
           "would not have caught these either"
           % (N, ", ".join("%s on %d" % (m, c) for m, c in multi_ridge.items())))
-    print("    * WHICH GATE of absorbable_by_diagonal_twist settles each answer, per "
-          "row -- %s.  The first two are FORCED arithmetic (s_i^2 = 1 pins every "
-          "diagonal entry, |s_i s_j| = 1 pins every absolute value); only the parity "
-          "system consults a sign.  Section totals: %d of %d biting (poset, mutation) "
-          "pairs reach it, on %d entr%s differing in sign alone.  This is mg-f1b2's F1 "
-          "measured inside the file it is about (mg-da45), and it is a MEASUREMENT and "
-          "not a row: scoring 'my routing quantity is the right one' would repeat, one "
-          "generation on, the move this whole section exists to record"
-          % ("; ".join("%s %d biting = %d diagonal + %d magnitude + %d parity"
-                       % (tag, a, d, mg, pa)
-                       for tag, a, d, mg, pa, _ in gate_rows),
-             tot_parity, tot_app, tot_sign, "y" if tot_sign == 1 else "ies"))
-    nc3_app = nc3_absorb = nc3_spec = nc3_parity = 0
+    print("    * WHERE THE PREDICATE RETURNED, per row -- a TRACE, emitted by "
+          "`absorb_trace` at the return statement that fired, not a second procedure "
+          "run alongside it (mg-1c80 F1, mg-5f9a): %s.  READ THE THIRD COLUMN BEFORE "
+          "QUOTING THE FIRST TWO.  The gates are not exclusive and this is the first "
+          "one REACHED: the two forced tests are interleaved BY ROW inside the "
+          "predicate, so the diagonal/magnitude split depends on the order and on how "
+          "the rows happen to be indexed.  'both' counts pairs that violate BOTH "
+          "forced gates and would be rejected with either one deleted -- on those the "
+          "gate named is a fact about this execution and nothing else.  WHAT DOES NOT "
+          "DEPEND ON THE ORDER, and is the number the section's claims rest on: the "
+          "predicate read %d off-diagonal SIGNS in total over the %d biting (poset, "
+          "mutation) pairs and reached the parity system on %d, with %d entr%s "
+          "differing in sign alone across all %d same-shape pairs.  This is a "
+          "MEASUREMENT and not a row: scoring 'my routing quantity is the right one' "
+          "is the move that produced two generations of this defect"
+          % ("; ".join("%s %d biting = %d diagonal + %d magnitude + %d parity "
+                       "(both forced gates violated on %d; diagonal moved on %d; "
+                       "%d signs read)"
+                       % (tag, a, d, mg, pa, bo, dm, sr)
+                       for tag, a, d, mg, pa, sr, bo, dm in gate_rows),
+             tot_signs_read, tot_app, tot_parity,
+             tot_sign, "y" if tot_sign == 1 else "ies", tot_shape))
+    nc3_app = nc3_absorb = nc3_spec = nc3_parity = nc3_signs = 0
     for P in ps:
         L_true, target = claim1_pair(P)
         L_par, _ = claim1_pair(P, sign_mode="parity")
         if mat_eq(L_par, L_true):
             continue
         nc3_app += 1
-        nc3_absorb += absorbable_by_diagonal_twist(L_par, target)
+        tr = absorb_trace(L_par, target)          # the predicate, instrumented
+        nc3_absorb += tr.absorbable
         nc3_spec += not_isospectral(L_par, L_true)
-        nc3_parity += deciding_gate(L_par, target) == "parity"
+        nc3_parity += tr.gate == "parity"
+        nc3_signs += tr.signs_read
     print("    * the absorbability predicate -- which after mg-8a12 scores ONE row "
           "(I4) and is stated as a theorem for I1/I2/I3 -- applied to NEGATIVE "
           "CONTROL 3's facet-parity corruption instead, would score it FAIL: that "
@@ -1178,10 +1267,15 @@ def negative_control_incidence(nmax):
           "(mg-f1b2 F1, corrected by mg-da45): NC3's corruption is D.L.D by "
           "construction, so its magnitudes ARE the target's and a sign is what is "
           "left to decide, while row I4's magnitudes differ on every poset where its "
-          "diagonal survives -- the two are settled at different gates, and I4's is "
-          "forced. It is NOT a witness for I1/I2/I3 either: no witness exists there, "
-          "which is the point of the [CANNOT FAIL] row."
-          % (nc3_absorb, nc3_app, nc3_spec, nc3_app, nc3_parity, nc3_app))
+          "diagonal survives. SAID AS THE PREDICATE'S OWN EXECUTION REPORTS IT rather "
+          "than as a gate name (mg-1c80 F1, mg-5f9a): here it READ %d off-diagonal "
+          "signs, and over the whole of NEGATIVE CONTROL 4 it read %d. That is the "
+          "separation -- not that the two are 'settled at different gates', which "
+          "depends on the order the gates are tested in. It is NOT a witness for "
+          "I1/I2/I3 either: no witness exists there, which is the point of the "
+          "[CANNOT FAIL] row."
+          % (nc3_absorb, nc3_app, nc3_spec, nc3_app, nc3_parity, nc3_app,
+             nc3_signs, tot_signs_read))
     for name, mode, _ in muts:
         plus_same = par_bite = 0
         for P in ps:
@@ -1249,8 +1343,14 @@ def negative_control_incidence(nmax):
           "rejection is caused by the corruption (residual == prediction). The "
           "unreachable half is stated once, as a theorem, in the [CANNOT FAIL] row. "
           "AND THE ABSORBABILITY ANSWER WAS FORCED ON ALL FOUR, NOT THREE (mg-f1b2 "
-          "F1, corrected by mg-da45): three at the diagonal gate and I4 at the "
-          "absolute-value gate, as the gate table above measures. mg-8a12 removed the "
+          "F1, corrected by mg-da45): on all four the predicate answered without "
+          "reading a single off-diagonal sign, which the trace above counts. mg-da45 "
+          "said this as 'three at the diagonal gate and I4 at the absolute-value "
+          "gate'; THAT SENTENCE IS WITHDRAWN (mg-1c80 F1, mg-5f9a) -- it named a gate "
+          "per row, the naming came from a procedure that tested the gates in an "
+          "order the predicate does not use, and on I1 the predicate's own order "
+          "gives 15 diagonal + 57 magnitude and not 72 + 0. What was true in it is "
+          "the word FORCED, and that is now carried by the sign count. mg-8a12 removed the "
           "clause from the three; row I4 still carries a forced clause in a scored "
           "condition and now SAYS SO in its own row rather than claiming the "
           "off-diagonal signs decide it. Removing it -- and with it the reason this "

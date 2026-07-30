@@ -37,7 +37,7 @@ TARGET 1 -- WHICH GATE DECIDES, rebuilt from face_complex alone
 TARGET 2 -- THE ARTIFACT: it regenerates, and it now says T1's numbers
 ----------------------------------------------------------------------
   [HOLDS ] controls_output.txt regenerates byte-identically from a fresh run
-        17964 bytes, exit 0
+        20738 bytes, exit 0
   [HOLDS ] the artifact has exactly one row I4
   [HOLDS ] row I4 prints 'preserved on 3 of the 61', and T1 measured it independently
   [HOLDS ] row I4 prints '3 are settled by |s_i s_j| = 1', and T1 measured it independently
@@ -45,7 +45,7 @@ TARGET 2 -- THE ARTIFACT: it regenerates, and it now says T1's numbers
   [HOLDS ] row I4 prints '0 entries differ in SIGN ALONE', and T1 measured it independently
   [HOLDS ] row I4 prints 'while 0 reach the parity system', and T1 measured it independently
   [HOLDS ] the routing row prints the section total T1 measured: '0 of the 297 biting'
-  [HOLDS ] the false premise 'the off-diagonal signs actually decide' asserts nothing -- 2 occurrence(s) in controls.py + the artifact, every one of them quoted inside a correction
+  [HOLDS ] the false premise 'the off-diagonal signs actually decide' asserts nothing -- 1 occurrence(s) in controls.py + the artifact, every one of them quoted inside a correction
   [HOLDS ] the false premise 'had to decide on the off-diagonal signs and could have' asserts nothing -- 1 occurrence(s) in controls.py + the artifact, every one of them quoted inside a correction
   [HOLDS ] the false premise 'was decided on the off-diagonal signs' asserts nothing -- it does not appear at all in controls.py or the artifact
   [HOLDS ] the false premise 'the answer is a real decision' asserts nothing -- it does not appear at all in controls.py or the artifact

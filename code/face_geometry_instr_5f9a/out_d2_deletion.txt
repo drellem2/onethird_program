@@ -1,0 +1,49 @@
+==============================================================================
+mg-5f9a part 2 -- the deletion test, before and after
+==============================================================================
+
+PREDICTIONS, registered before the runs:
+   BEFORE-1  main: delete the s_i^2 = 1 gate (mg-1c80's M2 verbatim)        artifact BYTE-IDENTICAL, exit 0 -- the finding this landing answers
+   BEFORE-2  main: delete the |s_i s_j| = 1 gate (mg-1c80's M1)             artifact CHANGES, exit 1 -- that gate is what forbids I4's antichains
+   AFTER-1*  this tree: delete the s_i^2 = 1 gate from `absorb_trace`       artifact CHANGES, exit 0 -- no decision moves, but the trace does
+   AFTER-2   this tree: delete the |s_i s_j| = 1 gate from `absorb_trace`   artifact CHANGES, exit 1 -- as at main
+   AFTER-3*  this tree: test row i's magnitudes BEFORE row i's diagonal     artifact CHANGES, exit 0 -- same answers, different trace
+   AFTER-4   this tree: stop counting the signs the union-find reads        artifact CHANGES, exit 0 -- NC3's 1459 is printed
+
+==============================================================================
+BEFORE -- `main`'s tree, where mg-1c80 found the artifact unmoved
+==============================================================================
+  [HOLDS ] main's committed controls_output.txt regenerates from main's sources
+        17964 bytes regenerated, 17964 committed, exit 0
+  [HOLDS ] BEFORE-1 -- delete the s_i^2 = 1 gate: artifact BYTE-IDENTICAL (predicted BYTE-IDENTICAL), exit 0 (predicted 0)
+        17964 bytes out vs 17964 baseline; unmutated baseline exited 0
+  [HOLDS ] BEFORE-2 -- delete the |s_i s_j| = 1 gate: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)
+        17805 bytes out vs 17964 baseline; unmutated baseline exited 0
+
+==============================================================================
+AFTER -- this tree, where the gate label is emitted by the code path
+==============================================================================
+  [HOLDS ] this tree's controls_output.txt regenerates byte-identically
+        20738 bytes regenerated, 20738 committed, exit 0
+  [HOLDS ] AFTER-1 -- delete the s_i^2 = 1 gate: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)
+        20738 bytes out vs 20738 baseline; unmutated baseline exited 0
+  [HOLDS ] AFTER-2 -- delete the |s_i s_j| = 1 gate: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)
+        20588 bytes out vs 20738 baseline; unmutated baseline exited 0
+  [HOLDS ] AFTER-3 -- magnitudes before the diagonal: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)
+        20738 bytes out vs 20738 baseline; unmutated baseline exited 0
+  [HOLDS ] AFTER-4 -- stop counting signs read: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)
+        20735 bytes out vs 20738 baseline; unmutated baseline exited 0
+
+==============================================================================
+WHAT MOVED, AND WHAT DID NOT
+==============================================================================
+  [HOLDS ] AFTER-1: every scored row keeps its label and its condition -- 43 rows, 0 label change(s)
+  [HOLDS ] AFTER-1: the lines that DID move are the ones reporting where the predicate went -- 2 line(s)
+        line 47; line 53
+  [HOLDS ] AFTER-3: every scored row keeps its label and its condition -- 43 rows, 0 label change(s)
+  [HOLDS ] AFTER-3: the lines that DID move are the ones reporting where the predicate went -- 2 line(s)
+        line 47; line 53
+
+==============================================================================
+12 claim(s) scored; 0 BROKEN.
+==============================================================================

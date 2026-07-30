@@ -30,6 +30,7 @@ isotone maps directly by brute force, and `chains_of_ideals` builds the chain
 complex; `selftest.py` checks the two agree for every poset tested.
 """
 
+from collections import namedtuple
 from fractions import Fraction
 from itertools import combinations, permutations
 
@@ -747,10 +748,44 @@ def frobenius2(A):
     return sum(x * x for row in A for x in row)
 
 
-def absorbable_by_diagonal_twist(A, B):
-    """Is there a diagonal sign matrix S = diag(s), s_i in {+1,-1}, with
-    S.A.S == B ?  An exact decision procedure over the whole family, not a
-    search over a few candidates.
+Trace = namedtuple("Trace", "absorbable gate signs_read")
+
+ABSORB_GATES = ("shape", "diagonal", "magnitude", "parity")
+
+
+def absorb_trace(A, B):
+    """`absorbable_by_diagonal_twist`, INSTRUMENTED: the decision, together with
+    the gate the code actually returned at and how many signs it actually read.
+
+    Returns Trace(absorbable, gate, signs_read):
+
+      gate       -- "shape", "diagonal", "magnitude" or "parity": the label
+                    written at the `return` statement that fired.  It is
+                    EMITTED BY THE CODE PATH, not recomputed from A and B
+                    afterwards, and it is the only thing in this file entitled
+                    to be called the gate that settled a pair.
+      signs_read -- how many off-diagonal constraints s_i s_j the union-find
+                    loop actually consumed.  0 means no sign entered the
+                    decision, whatever the gate says.
+
+    WHY THIS EXISTS, and it is the third attempt at one sentence (mg-8a12 ->
+    mg-da45 -> mg-5f9a).  Two previous versions of "which gate decided" were
+    written ALONGSIDE the predicate and both were wrong about it: mg-8a12 read
+    only `diag_preserved` and mg-da45's `deciding_gate` tested all diagonals and
+    then all magnitudes, which is not this function's order -- it interleaves
+    the two BY ROW.  On 57 of the 297 biting pairs in NEGATIVE CONTROL 4 the two
+    orders name different gates (mg-1c80 F1).  A reason asserted next to a
+    procedure can disagree with it; a reason returned by the procedure cannot.
+    So the label is produced here and `controls.deciding_gate` is a call to this
+    function, not a second implementation of it.
+
+    THE LABEL IS A TRACE AND NOT A CAUSE, and this is the limitation to read
+    before quoting a gate count.  The gates are NOT exclusive: a pair can
+    violate several and this reports the FIRST ONE REACHED.  In particular the
+    magnitude test runs over j == i as well, so on matrices with non-negative
+    diagonals every "diagonal" here is also a magnitude violation, and deleting
+    the diagonal gate would change these labels while changing no decision.
+    `gate_violations` below measures that exhaustively rather than arguing it.
 
     THIS IS THE QUESTION A NEGATIVE CONTROL MUST ANSWER ABOUT ITSELF (mg-5630):
     the orientation twist E = diag(sgn w) is a member of this family, so is
@@ -766,15 +801,18 @@ def absorbable_by_diagonal_twist(A, B):
     """
     m = len(A)
     if m != len(B):
-        return False
+        return Trace(False, "shape", 0)
     for i in range(m):
-        if len(A[i]) != len(B[i]) or A[i][i] != B[i][i]:
-            return False
+        if len(A[i]) != len(B[i]):
+            return Trace(False, "shape", 0)
+        if A[i][i] != B[i][i]:
+            return Trace(False, "diagonal", 0)
         for j in range(m):
             if abs(A[i][j]) != abs(B[i][j]):
-                return False
+                return Trace(False, "magnitude", 0)
     parent = list(range(m))
     rel = [0] * m               # rel[x] = parity of s_x against parent[x]
+    signs_read = 0
 
     def find(x):
         p = 0
@@ -787,13 +825,70 @@ def absorbable_by_diagonal_twist(A, B):
         for j in range(i + 1, m):
             if A[i][j] == 0:
                 continue
+            signs_read += 1
             need = 0 if B[i][j] == A[i][j] else 1        # s_i s_j = (-1)^need
             ri, pi = find(i)
             rj, pj = find(j)
             if ri == rj:
                 if pi ^ pj != need:
-                    return False
+                    return Trace(False, "parity", signs_read)
             else:
                 parent[ri] = rj
                 rel[ri] = pi ^ pj ^ need
-    return True
+    return Trace(True, "parity", signs_read)
+
+
+def gate_violations(A, B):
+    """The SET of gates the pair (A, B) violates, computed EXHAUSTIVELY -- no
+    short-circuit, so no dependence on the order the gates are tested in.
+
+    This is the companion `absorb_trace` needs to be quotable.  A trace reports
+    the first gate reached; whether that gate is the reason for the answer is a
+    different question, and the only honest way to ask it is to test the others
+    too.  A pair whose set is {"diagonal", "magnitude"} would have been rejected
+    with either gate removed, so neither of them is load-bearing on it; a pair
+    whose set is {"magnitude"} alone is one the magnitude gate really does
+    settle.
+
+    "parity" is never in the returned set: reaching the parity system is not a
+    violation.  A pair with an empty set cleared both forced gates.
+    """
+    m = len(A)
+    if m != len(B) or any(len(A[i]) != len(B[i]) for i in range(m)):
+        return frozenset(["shape"])
+    bad = set()
+    if any(A[i][i] != B[i][i] for i in range(m)):
+        bad.add("diagonal")
+    if any(abs(A[i][j]) != abs(B[i][j])
+           for i in range(m) for j in range(m)):
+        bad.add("magnitude")
+    return frozenset(bad)
+
+
+def diagonal_moves(A, B):
+    """Does A differ from B on the DIAGONAL?  A property of the two matrices,
+    asked directly.
+
+    NOT a statement about `absorb_trace`'s execution, and kept apart from it on
+    purpose (mg-5f9a).  This is the hypothesis of the theorem NEGATIVE CONTROL
+    4 routes its forced rows to -- S.A.S = B with s_i^2 = 1 pins every diagonal
+    entry, so a corruption that moves one is not absorbable for ANY sign vector
+    -- and that implication holds at every n independently of what the code
+    tests first.  mg-da45's `deciding_gate` served both purposes at once, which
+    is how a routing quantity came to be printed as a trace of the predicate.
+    """
+    if len(A) != len(B) or any(len(A[i]) != len(B[i]) for i in range(len(A))):
+        return False                    # shapes differ: no diagonal to compare
+    return any(A[i][i] != B[i][i] for i in range(len(A)))
+
+
+def absorbable_by_diagonal_twist(A, B):
+    """Is there a diagonal sign matrix S = diag(s), s_i in {+1,-1}, with
+    S.A.S == B ?  An exact decision procedure over the whole family, not a
+    search over a few candidates.
+
+    The decision half of `absorb_trace` (above), which is where the method and
+    the caveats are documented.  One implementation, so a caller that wants the
+    gate as well as the answer cannot get a gate from a different procedure.
+    """
+    return absorb_trace(A, B).absorbable
