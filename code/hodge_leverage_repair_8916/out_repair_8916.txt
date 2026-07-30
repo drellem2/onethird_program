@@ -67,20 +67,23 @@ are the figures `e16e41c` published and this instrument audits `e16e41c`.
 
 Two runs.  Verdicts written before both.
 
-    RUN 1 -- as it stands.  exit 2
+  [CONFIRMED] the mg-8a5c instrument ran to completion (exit 1; it exits 1 whenever a FINDING is present, and F-3 and F-4 are still open) -- any other code is a crash and the two runs below would compare nothing
+    RUN 1 -- as it stands.  exit 1
       T1 row   [REFUTED  ] the three published parts reproduce from the tree: cell 13,367, relocated history 21,027, §14 copy 10,623
       T1 row   [REFUTED  ] and so do the two published gaps: cell-only +2,744, cell + history +23,771 -- THE REPAIR'S FIGURES DID NOT GO STALE, whi
+      check    [CONFIRMED] SUMMARY vs ROWS: the BOTTOM LINE's primary-target sentence says REFUTED and its 2 PRIMARY rows say REFUTED -- they agree
 
   [CONFIRMED] 2 of 2 PRIMARY rows read [REFUTED] at this tree -- a later commit moved the figures mg-8e30 published, which is a true statement about a tree this audit was never taken against
   [CONFIRMED] and the bottom line NO LONGER prints 'THE PRIMARY TARGET IS CONFIRMED' while those rows are refuted.  The summary follows the rows; mg-835f G-2 is CLOSED
-  [REFUTED  ] and the SUMMARY vs ROWS check is present and green -- the sentence printed and the rows it summarises agree
+  [CONFIRMED] and the SUMMARY vs ROWS check is present and green -- the sentence printed and the rows it summarises agree
 
     RUN 2 -- THE SAME RUN WITH THE SUMMARY FORCED to the sentence it
-    used to print unconditionally.  exit 2
+    used to print unconditionally.  exit 1
+      check    [REFUTED  ] SUMMARY vs ROWS: the BOTTOM LINE's primary-target sentence says CONFIRMED and its 2 PRIMARY rows say REFUTED -- THEY DIS
 
-  [REFUTED  ] FORCED TO DISAGREE, THE CHECK FIRES.  This is the demonstration the ticket requires: a summary-versus-rows check never shown to fire is the vacuous-check defect this arc has produced three times
-  [REFUTED  ] and the forced run reproduces the EXACT shape mg-835f found -- 'THE PRIMARY TARGET IS CONFIRMED' printed in the same transcript as its own refuted PRIMARY rows.  It is now reachable only by forcing it, and forcing it is caught
-  [REFUTED  ] and the forced run refutes exactly one MORE check than the normal run (2 -> 2) -- the check moves the count, so it is not decorative
+  [CONFIRMED] FORCED TO DISAGREE, THE CHECK FIRES.  This is the demonstration the ticket requires: a summary-versus-rows check never shown to fire is the vacuous-check defect this arc has produced three times
+  [CONFIRMED] and the forced run reproduces the EXACT shape mg-835f found -- 'THE PRIMARY TARGET IS CONFIRMED' printed in the same transcript as its own refuted PRIMARY rows.  It is now reachable only by forcing it, and forcing it is caught
+  [CONFIRMED] and the forced run refutes exactly one MORE check than the normal run (3 -> 4) -- the check moves the count, so it is not decorative
 
 R3 -- THE RESIDUE, AND WHICH ARTIFACT IS FROZEN
 -----------------------------------------------
@@ -110,14 +113,14 @@ code, which is exactly what G-1 was.
 
 BOTTOM LINE
 -----------
-  checks recorded : 14
-  confirmed       : 8
+  checks recorded : 15
+  confirmed       : 13
   measurements    : 2
-  refuted         : 4
+  refuted         : 0
 
-  REFUTED -- a claim this repair makes did not hold, and the
-  prose must not be written:
-    - and the SUMMARY vs ROWS check is present and green -- the sentence printed and the rows it summarises agree
-    - FORCED TO DISAGREE, THE CHECK FIRES.  This is the demonstration the ticket requires: a summary-versus-rows check never shown to fire is the vacuous-ch
-    - and the forced run reproduces the EXACT shape mg-835f found -- 'THE PRIMARY TARGET IS CONFIRMED' printed in the same transcript as its own refuted PRI
-    - and the forced run refutes exactly one MORE check than the normal run (2 -> 2) -- the check moves the count, so it is not decorative
+  BOTH OPEN SITES ARE CLOSED, AND BOTH ARE MEASURED IN BOTH
+  DIRECTIONS.  G-1: the wrong prose figure that was invisible at 3
+  of 3 sites now makes the real runner red at 3 of 3, in two shapes,
+  and every restoration returns it to green.  G-2: the bottom line
+  is derived from its PRIMARY rows, and the check that they agree is
+  shown FIRING when they are forced apart.
