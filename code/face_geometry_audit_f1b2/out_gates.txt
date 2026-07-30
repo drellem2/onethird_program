@@ -1,0 +1,46 @@
+==============================================================================
+mg-f1b2 part 2 -- WHICH GATE DECIDES 'not absorbable', for every
+                  corruption NEGATIVE CONTROL 4 touches (n <= 5)
+==============================================================================
+
+  corruption                      bites  diagMV  diagOK   magMM  parity  absorb
+                                         forced          forced    REAL        
+  I1 ridge_facets                    72      72       0       0       0       0
+  I2 split_free_as_interior          82      82       0       0       0       0
+  I3 ridge_drop                      82      82       0       0       0       0
+  I4 facet_offbyone                  61      58       3       3       0       0
+  swap01 (rejected candidate)        72      35      37      37       0       0
+  NC3 facet-parity (the witness)     82       0      82       0      82      82
+
+  Across the FOUR SCORED mutations: 297 biting (poset, mutation) pairs, of which 0 reach
+  the parity system.  Every absorbability answer in the scored rows -- I4's included --
+  is settled at a gate that s_i^2 = 1 or |s_i s_j| = 1 forces.
+  The ONE corruption that reaches the parity system is NEGATIVE CONTROL 3's facet-parity
+  gauge, which is absorbable 82/82 -- it is a witness that the predicate CAN say True, but
+  it says nothing about row I4, whose magnitudes differ.
+
+==============================================================================
+THE 3 POSETS mg-8a12 KEEPS ROW I4's ABSORBABILITY SCORED FOR
+==============================================================================
+  the printed row (controls.py:892-895): 'Absorbable into a diagonal +-1 twist on 0 of
+  those 61, and this row DOES score it: the diagonal is preserved on 3 of them, so the
+  predicate had to decide on the off-diagonal signs and could have returned absorbable.'
+  mg-fcf1's out_nc4.txt:27, which mg-8a12 routes on: '-> the predicate does real work on
+  3 poset(s): the diagonal matches and the off-diagonal signs decide.'
+
+  n=3 antichain |L(P)|=6    diagonal preserved=True   off-diagonal MAGNITUDE mismatches=12    (2 per row)  sign-only mismatches=0  absorbable=False
+  n=4 antichain |L(P)|=24   diagonal preserved=True   off-diagonal MAGNITUDE mismatches=48    (2 per row)  sign-only mismatches=0  absorbable=False
+  n=5 antichain |L(P)|=120  diagonal preserved=True   off-diagonal MAGNITUDE mismatches=240   (2 per row)  sign-only mismatches=0  absorbable=False
+  n=6 antichain |L(P)|=720  diagonal preserved=True   off-diagonal MAGNITUDE mismatches=1440  (2 per row)  sign-only mismatches=0  absorbable=False
+
+  Zero sign-only mismatches at every n: there is not one entry on which a sign decision
+  could have been made.  The predicate returns False at the absolute-value gate, before
+  any sign is consulted.
+
+  AND IT IS FORCED AT EVERY n, not just measured here.  The off-diagonal support of L^rel
+  is the adjacent-transposition graph (that is claim (1), and it is proven).  The off-by-one
+  map is prefixes_true(rot(w)) with rot the cyclic rotation of POSITIONS, which carries n-2 of
+  the n-1 generators s_1..s_{n-1} to generators and the remaining one out of the set -- so
+  exactly one neighbour of each vertex changes, giving 2 mismatched entries per row (12,
+  48, 240, 1440 at n = 3, 4, 5, 6 = 2|L(P)|).  Row I4's absorbability answer is therefore
+  forced too, on precisely the posets mg-8a12 keeps it scored for.
