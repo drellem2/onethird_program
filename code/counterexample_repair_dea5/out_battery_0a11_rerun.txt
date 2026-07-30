@@ -1,0 +1,53 @@
+==============================================================================
+A4  mutation battery against the repair's doc-checkers,
+    and four self-mutations against this audit's own
+==============================================================================
+
+  baseline code/counterexample_repair_dea5/check_doc_repair.py  exit 0 (clean)
+  baseline code/counterexample_probe_24a3/check_doc.py          exit 0 (clean)
+  baseline code/counterexample_audit_0a11/check_doc_audit.py    exit 0 (clean)
+
+  [caught     ] M1a the headline p-value is wrong THROUGHOUT the repair doc exit 1
+                the target document carries its own copy of the same string, and the
+                two documents are concatenated before matching
+  [ok         ] M1b the headline p-value is wrong in BOTH documents        exit 1
+                the mechanism the checker exists for
+  [ok         ] M2  a struck sentence is put back into live prose          exit 1
+                the inverted STRUCK assertion
+  [ok         ] M3  the instrument's own output is altered                 exit 1
+                prose is checked against the printed quantity
+  [ok         ] M4  a replacement sentence is removed                      exit 1
+                the LIVE set
+  [caught     ] M5  the n=8 and n=6 rho|e figures are SWAPPED              exit 1
+                same strings, different rows -- is the ASSOCIATION checked?
+  [caught     ] M6  a NON-VACUOUS group is relabelled VACUOUS              exit 1
+                the exact defect being repaired, in the repair's own table
+  [caught     ] M7a the whole multiple-comparison section is DELETED       exit 1
+                'is the post-hoc position stated?' -- the brief's second target
+  [caught     ] M7b the post-hoc FRAMING is deleted, the numbers left in place exit 1
+                the same section with only its prose removed: does the checker
+                protect the FRAMING, or only the figures inside it?
+  [caught     ] M8  'pre-specified' is upgraded to a confirmed discovery   exit 1
+                status language, checked in the overclaiming direction
+  [caught     ] M9  'n = 8 is now settled' is restated as 'no cycle exists at any n' exit 1
+                the open -> absent drift the brief asks to flag
+  [caught     ] M10 the 'not a filter' caveat is deleted                   exit 1
+                a caveat removed while the claim it qualifies stays
+  [caught     ] M11 a figure is deleted from the repair but survives in the target exit 1
+                the two documents are concatenated before matching
+  [caught     ] M12 the repair's own text asserts a struck claim           exit 1
+                STRUCK regions are located in the TARGET only
+  [caught     ] M13 the target's headline is silently un-repaired          exit 1
+                does the EXTENDED check_doc.py notice its own subject changing?
+  [ok         ] S1  MY OWN figure is wrong in MY OWN document              exit 1
+                a control validated by its own author is not a control
+  [ok         ] S2  MY OWN figure is moved OUT of its declared section     exit 1
+                the property M1a showed the subject's checker lacks
+  [ok         ] S3  MY OWN 'could not establish' section is emptied        exit 1
+                the guard on this audit's own limits
+  [ok         ] S4  a silent miss I found is dropped from my write-up      exit 1
+                the guard tying the battery's output to the prose
+
+==============================================================================
+SILENT MISSES: 0
+==============================================================================

@@ -110,6 +110,32 @@ STRUCK = {
 }
 
 
+# Sentences the mg-dea5 repair INSTALLED in this document, and the mg-a893 landing
+# of mg-0a11's audit added to.  They must be PRESENT and OUTSIDE every epitaph.
+#
+# mg-0a11's M13 is why this list exists.  The whole point of the mg-dea5 repair is
+# the quantifier in headline 3 -- "picks out EXACTLY the delta-extremal posets",
+# replacing an exact-tie universal measured on a vacuous control.  That sentence
+# could be reverted to "picks out SOME OF the delta-extremal posets" and this file,
+# whose entire subject is this document, exited 0: nothing in CHECKS or STRUCK
+# mentions it.  A checker that does not require the repair it certifies to still be
+# in the document certifies the document it was pointed at, not the repair.
+LIVE = [
+    ("headline 3 quantifier",
+     "`qmass = 1` picks out **exactly** the `\u03b4`-extremal\n   posets"),
+    ("section 4 perfect, both inclusions",
+     "the `qmass = 1` members are **exactly** the extremal ones"),
+    ("section 4 vacuity definition",
+     "Call an `e`-group **vacuous** if every member of it"),
+    ("section 4 dependence correction",
+     "**the honest exact `p` is `1/5`**"),
+    ("section 4 core column",
+     "| 8 | **9** | 20 | 6 | 6 | **perfect** | `1/38760` | `1` | 5 | **`1/5`** |"),
+    ("section 2 exhaustive cycle result",
+     "The smallest `n` carrying a majority cycle is exactly 9."),
+]
+
+
 def struck_regions(doc):
     """Spans of the doc occupied by a '> **STRUCK' blockquote."""
     spans = []
@@ -160,6 +186,20 @@ def main():
     print("  (%d struck entries: the instrument still prints the figure, and the doc"
           % len(STRUCK))
     print("   must carry the sentence ONLY inside a '> **STRUCK' block.  See STRUCK.)")
+    print()
+    print("  LIVE -- the repaired sentences must still BE the document (mg-a893):")
+    for label, sentence in LIVE:
+        hits, i = [], doc.find(sentence)
+        while i >= 0:
+            hits.append(i)
+            i = doc.find(sentence, i + 1)
+        live = [i for i in hits if not any(a <= i < b for a, b in spans)]
+        ok = bool(live)
+        if not ok:
+            bad.append(("live: " + label, False, True, sentence, ""))
+        print("  [%s] %-34s %s"
+              % ("ok  " if ok else "FAIL", label,
+                 "live" if ok else "MISSING, STRUCK OR REWORDED"))
     print()
     # global guards
     guards = []

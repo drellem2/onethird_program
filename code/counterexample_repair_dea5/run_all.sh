@@ -24,5 +24,6 @@ python3 -u controls.py  > out_controls.txt
 python3 -u theorem4.py  > out_theorem4.txt
 python3 -u section4.py  > out_section4.txt
 python3 -u cycles.py    > out_cycles.txt
+python3 -u cores.py     > out_cores.txt
 python3 -u check_doc_repair.py > out_check_doc.txt
-echo "wrote out_controls.txt out_theorem4.txt out_section4.txt out_cycles.txt out_check_doc.txt"
+echo "wrote out_controls.txt out_theorem4.txt out_section4.txt out_cycles.txt out_cores.txt out_check_doc.txt"
