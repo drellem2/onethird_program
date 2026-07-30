@@ -1,0 +1,62 @@
+==============================================================================
+mg-1953 REPAIR 1 -- BROWN'S CLOSED FORM, EXERCISED OUTSIDE AC(P).
+X ranges over ALL FLATS (all set partitions), never over AC(P).
+==============================================================================
+
+------------------------------------------------------------------------------
+R1a  THE DERIVATION.  M_0 = 'flats meeting the open cone U', decided
+     BY CONSTRUCTION (search over all orderings of the blocks; no
+     acyclicity test on the geometric side), against the DOCUMENT's
+     rule and against the REPAIRED rule.
+------------------------------------------------------------------------------
+  n  classes     flats              M_0 == doc rule         M_0 == repaired rule
+  2        2         4                   0 bad of 2                   0 bad of 2
+  3        5        25                   0 bad of 5                   0 bad of 5
+  4       16       240                  1 bad of 16                  0 bad of 16
+  5       63      3276                 10 bad of 63                  0 bad of 63
+  6      318     64554               101 bad of 318                 0 bad of 318
+
+------------------------------------------------------------------------------
+R1b  THE CONSEQUENCE.  Brown's total-multiplicity identity, summed
+     over ALL FLATS:  sum_X m_X = |L(P)|.
+------------------------------------------------------------------------------
+  n  classes    doc rule: sum != |L(P)| repaired rule: sum != |L(P)|    spurious
+  2        2              0 of 2 posets              0 of 2 posets           0
+  3        5              0 of 5 posets              0 of 5 posets           0
+  4       16             1 of 16 posets             0 of 16 posets           1
+  5       63            10 of 63 posets             0 of 63 posets          18
+  6      318          101 of 318 posets            0 of 318 posets         455
+
+     'spurious' counts the flats the DOCUMENT's rule gives a nonzero
+     multiplicity that Brown's M_0 does not contain: every block an
+     antichain of P, quotient NOT acyclic, so the flat misses U.
+
+------------------------------------------------------------------------------
+R1c  THE WITNESS.
+------------------------------------------------------------------------------
+  n=2: no witness -- the document's rule holds on all 2 classes
+  n=3: no witness -- the document's rule holds on all 5 classes
+  n=4  first witness  P = {a<c, b<d},  |L(P)| = 6
+        document's rule   sum m = 7   (Brown's (10) requires 6)
+        repaired rule     sum m = 6   OK
+        spurious flat: ad|bc      m = 1   blocks antichains: True,  quotient acyclic: False,  meets U: False
+
+------------------------------------------------------------------------------
+R1d  THE CONTROL THAT MUST FIRE.  The same two rules restricted to
+     AC(P), which is what the target's instrument did.  If the
+     document's rule passes HERE while failing in R1b, then the
+     restriction is what hid the defect.
+------------------------------------------------------------------------------
+  n  classes              doc rule ON AC(P)         repaired rule ON AC(P)
+  2        2                     0 bad of 2                     0 bad of 2
+  3        5                     0 bad of 5                     0 bad of 5
+  4       16                    0 bad of 16                    0 bad of 16
+  5       63                    0 bad of 63                    0 bad of 63
+  6      318                   0 bad of 318                   0 bad of 318
+
+==============================================================================
+READING.  R1a is the derivation and R1b its consequence; they must
+agree, and they do.  R1d is the control: the document's rule is
+sound on AC(P) and false off it, so a measurement restricted to
+AC(P) cannot see the defect.  The repaired rule passes everywhere.
+==============================================================================

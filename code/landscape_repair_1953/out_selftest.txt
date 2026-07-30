@@ -1,0 +1,116 @@
+mg-1953 self-test, n <= 6
+
+EXTERNAL SEQUENCES -- the enumeration is not self-certified
+  A000112 isomorphism classes at n=1                         1              OK
+  A000112 isomorphism classes at n=2                         2              OK
+  A000112 isomorphism classes at n=3                         5              OK
+  A000112 isomorphism classes at n=4                         16             OK
+  A000112 isomorphism classes at n=5                         63             OK
+  A000112 isomorphism classes at n=6                         318            OK
+  A000670 |F(antichain)| at n=1                              1              OK
+  A000522 |free LRB| at n=1                                  2              OK
+  A000670 |F(antichain)| at n=2                              3              OK
+  A000522 |free LRB| at n=2                                  5              OK
+  A000670 |F(antichain)| at n=3                              13             OK
+  A000522 |free LRB| at n=3                                  16             OK
+  A000670 |F(antichain)| at n=4                              75             OK
+  A000522 |free LRB| at n=4                                  65             OK
+  A000670 |F(antichain)| at n=5                              541            OK
+  A000522 |free LRB| at n=5                                  326            OK
+
+R1 -- the closed form OUTSIDE AC(P) (the repaired clause)
+  n=2 posets where the ORIGINAL rule breaks Brown's (10)     0              OK
+  n=2 posets where the REPAIRED rule breaks Brown's (10)     0              OK
+  n=2 spurious flats under the ORIGINAL rule                 0              OK
+  n=2 M_0 (built geometrically) != original rule             0              OK
+  n=2 M_0 (built geometrically) != REPAIRED rule             0              OK
+  n=2 CONTROL: original rule restricted to AC(P)             0              OK
+  n=3 posets where the ORIGINAL rule breaks Brown's (10)     0              OK
+  n=3 posets where the REPAIRED rule breaks Brown's (10)     0              OK
+  n=3 spurious flats under the ORIGINAL rule                 0              OK
+  n=3 M_0 (built geometrically) != original rule             0              OK
+  n=3 M_0 (built geometrically) != REPAIRED rule             0              OK
+  n=3 CONTROL: original rule restricted to AC(P)             0              OK
+  n=4 posets where the ORIGINAL rule breaks Brown's (10)     1              OK
+  n=4 posets where the REPAIRED rule breaks Brown's (10)     0              OK
+  n=4 spurious flats under the ORIGINAL rule                 1              OK
+  n=4 M_0 (built geometrically) != original rule             1              OK
+  n=4 M_0 (built geometrically) != REPAIRED rule             0              OK
+  n=4 CONTROL: original rule restricted to AC(P)             0              OK
+  n=5 posets where the ORIGINAL rule breaks Brown's (10)     10             OK
+  n=5 posets where the REPAIRED rule breaks Brown's (10)     0              OK
+  n=5 spurious flats under the ORIGINAL rule                 18             OK
+  n=5 M_0 (built geometrically) != original rule             10             OK
+  n=5 M_0 (built geometrically) != REPAIRED rule             0              OK
+  n=5 CONTROL: original rule restricted to AC(P)             0              OK
+  n=6 posets where the ORIGINAL rule breaks Brown's (10)     101            OK
+  n=6 posets where the REPAIRED rule breaks Brown's (10)     0              OK
+  n=6 spurious flats under the ORIGINAL rule                 455            OK
+  n=6 M_0 (built geometrically) != original rule             101            OK
+  n=6 M_0 (built geometrically) != REPAIRED rule             0              OK
+  n=6 CONTROL: original rule restricted to AC(P)             0              OK
+
+R1c -- the witness, named in the document
+  P = {a<c, b<d}: |L(P)|                                     6              OK
+  P = {a<c, b<d}: sum m under the ORIGINAL rule              7              OK
+  P = {a<c, b<d}: sum m under the REPAIRED rule              6              OK
+  P = {a<c, b<d}: the spurious flat                          ['ad|bc']      OK
+  P = {a<c, b<d}: does that flat meet U?                     False          OK
+
+R2 -- E8: homomorphic image, proper for n >= 3
+  n=2 the word->move map is a HOMOMORPHISM                   2              OK
+  n=2 its image lies in F(P)                                 2              OK
+  n=2 its image is closed under the product                  2              OK
+  n=2 the map is INJECTIVE (must be 0 -- never)              0              OK
+  n=2 the image is a PROPER submonoid                        0              OK
+  n=3 the word->move map is a HOMOMORPHISM                   5              OK
+  n=3 its image lies in F(P)                                 5              OK
+  n=3 its image is closed under the product                  5              OK
+  n=3 the map is INJECTIVE (must be 0 -- never)              0              OK
+  n=3 the image is a PROPER submonoid                        5              OK
+  n=4 the word->move map is a HOMOMORPHISM                   16             OK
+  n=4 its image lies in F(P)                                 16             OK
+  n=4 its image is closed under the product                  16             OK
+  n=4 the map is INJECTIVE (must be 0 -- never)              0              OK
+  n=4 the image is a PROPER submonoid                        16             OK
+  n=5 the word->move map is a HOMOMORPHISM                   63             OK
+  n=5 its image lies in F(P)                                 63             OK
+  n=5 its image is closed under the product                  63             OK
+  n=5 the map is INJECTIVE (must be 0 -- never)              0              OK
+  n=5 the image is a PROPER submonoid                        63             OK
+
+R3 -- 'sharper' as a two-sided comparison (must be 0 everywhere)
+  n=2 levels                                                 4              OK
+  n=2 DISAGREEING levels (repo solve vs Brown)               0              OK
+  n=2 levels named zero a priori                             1              OK
+  n=3 levels                                                 24             OK
+  n=3 DISAGREEING levels (repo solve vs Brown)               0              OK
+  n=3 levels named zero a priori                             11             OK
+  n=4 levels                                                 206            OK
+  n=4 DISAGREEING levels (repo solve vs Brown)               0              OK
+  n=4 levels named zero a priori                             125            OK
+  n=5 levels                                                 2353           OK
+  n=5 DISAGREEING levels (repo solve vs Brown)               0              OK
+  n=5 levels named zero a priori                             1674           OK
+  n=6 levels                                                 37029          OK
+  n=6 DISAGREEING levels (repo solve vs Brown)               0              OK
+  n=6 levels named zero a priori                             28988          OK
+
+R4 -- the populations the corrected sentences are about
+  n=1 moves                                                  1              OK
+  n=1 product pairs                                          1              OK
+  n=2 moves                                                  5              OK
+  n=2 product pairs                                          13             OK
+  n=3 moves                                                  37             OK
+  n=3 product pairs                                          321            OK
+  n=4 moves                                                  397            OK
+  n=4 product pairs                                          13853          OK
+  n=5 moves                                                  5757           OK
+  n=5 product pairs                                          922073         OK
+  n <= 5 classes (document said 63)                          87             OK
+  n <= 5 product pairs (document said 922 073)               936261         OK
+  n <= 5 moves                                               6197           OK
+  2 <= n <= 6 classes, E3's population (said 405)            404            OK
+  3 <= n <= 6 classes, P2's population (said 405)            402            OK
+
+SELF-TEST PASSED -- every number the document carries is reproduced.
