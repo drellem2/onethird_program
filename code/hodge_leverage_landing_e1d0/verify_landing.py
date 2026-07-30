@@ -67,6 +67,19 @@ itself, about another document, or about a ticket -- and each was wrong.
       census does and does not cover, and N10-N14 of the negative control for
       it firing on the probes that were silent.
 
+      ⚠️ MADE POSITION-AWARE 2026-07-30 (mg-8aae finding H-1, landed by
+      mg-8eca).  A MULTISET IS INVARIANT UNDER A PERMUTATION.  Two DECLARED
+      figures of equal length EXCHANGED with each other in ordinary prose
+      leave the multiset identical, every designated statement correct and
+      the length unchanged -- and the run stayed at exit 0 at 2 of 2 sites
+      probed, with H8's own table then saying the `STATE.md` row SHRANK
+      across mg-a2bd and the chain the whole finding was born in running
+      backwards.  The gate measured a property the failure it guarded
+      PRESERVES.  The roster is now an ORDERED list of slots and the census
+      compares the SEQUENCE as well as the bag; N15-N18 of the negative
+      control are the exchanges, and R1 of `code/hodge_leverage_repair_8eca/`
+      runs them on disk against the real runner.
+
   T2  TWO SITE COUNTS IN ONE COMMIT (F2).  §6's disposition table is counted
       row by row from the tree; §14's count word is read out of §14.  Neither
       is quoted from the audit.
@@ -261,6 +274,24 @@ FIGURES = {
 # moved fires -- including a wrong prose figure that reuses a value already on
 # the roster, which a set-membership test would pass.
 #
+# ⚠️ MADE POSITION-AWARE 2026-07-30 (mg-8aae finding H-1, landed by mg-8eca).
+# A MULTISET IS INVARIANT UNDER A PERMUTATION, so the census above could not
+# see one.  mg-8aae exchanged two DECLARED figures of equal length in ordinary
+# prose -- `13 551` with `16 692` in H8's own mg-a2bd table, and the chain
+# `2 928 → 6 069 → −875 → +755` run backwards in its last two terms -- and the
+# runner stayed at exit 0 at 2 of 2 sites.  Every one of the three checks was
+# satisfied: inside the section, not inside a marked quotation, figure-shaped,
+# length-preserving, every designated statement still correct.  The section
+# asserted two figures the wrong way round and the gate was silent, BECAUSE THE
+# PROPERTY THE GATE MEASURED WAS INVARIANT UNDER THE FAILURE IT GUARDED.
+#
+# So the roster below is no longer a bag of counts: it is an ORDERED LIST of
+# the figure tokens each site is licensed to carry, IN THE ORDER A READER MEETS
+# THEM.  `ORDER` is the single declaration -- the multiset the census compares
+# is DERIVED from it, and so is `LIVE_CENSUS`, so the two cannot drift apart.
+# A transposition changes the sequence while preserving the multiset, and the
+# sequence is what is compared.
+#
 # WHAT IT DOES NOT COVER, stated so this extent is not the next wide one:
 #   * marked quotations are exempt, because `assertions()` strips them -- a
 #     quotation of a withdrawn figure is not an assertion of it, which is the
@@ -270,106 +301,182 @@ FIGURES = {
 #     optionally signed, thousands separated by a space (`+23 771`, `48 846`),
 #     or signed with three or more digits (`−875`, `+755`).  A bare `405` or a
 #     ticket id is not a figure of this class and is not read.
+#   * two occurrences of THE SAME token exchanged with each other are not
+#     distinguishable by anything here, because they are the same token: the
+#     sequence is over VALUES, and swapping equal values is the identity map.
+#     Position is covered; identity of equal figures is not, and cannot be.
 #
-# AND IT IS FAIL-CLOSED: a NEW historical figure, legitimately added to a site,
-# fires until it is entered on the roster with what it is.  That is a cost and
-# it is the same cost as U5's -- an editor meets a red run for an honest edit.
-# It is the right direction for this arc: the roster IS the declaration the
-# repair's own Appendix A rule asks for, kept where a checker reads it.
+# AND IT IS FAIL-CLOSED, now in two ways: a NEW historical figure fires until
+# it is entered on the roster with what it is, and an EXISTING one fires until
+# its slot in `ORDER` is moved to where a reader now meets it.  That is a cost
+# and it is the same cost as U5's -- an editor meets a red run for an honest
+# edit.  It is the right direction for this arc: the roster IS the declaration
+# the repair's own Appendix A rule asks for, kept where a checker reads it.
 # --------------------------------------------------------------------------
 FIGURE_TOKEN = re.compile(
     r"(?<![\w−+])(?:[−+]?\d{1,3}(?: \d{3})+|[−+]\d{3,})(?!\d)")
 
-# site -> {figure key: how many times the LIVE value is written at this site}.
-# The VALUES come from the measurement, never from a constant here.
-LIVE_CENSUS = {
-    "the STATE.md row": {"gap": 1, "both": 1, "cell": 1, "hist": 1, "copy": 1},
-    "§14":              {"gap": 1, "both": 1, "copy": 1},
-    "H8":               {"gap": 1, "both": 1, "cell": 1, "hist": 1, "copy": 5},
+# site -> the figure tokens the section is licensed to assert, IN ORDER.
+# `@key` is a LIVE figure, substituted at the value measured THIS RUN, never
+# from a constant here; anything else is a historical token, which `HISTORICAL`
+# below says what it is.  This list is the ONE declaration of both position and
+# multiplicity: the multiset the census compares is derived from it.
+ORDER = {
+    "the STATE.md row": [
+        "48 846",
+        "2 928", "6 069", "−875", "+1 630", "+755", "−875",
+        "@gap", "@cell", "@copy", "@hist", "@both",
+        "−875",
+        "2 928", "6 069", "−875", "+755",
+    ],
+    "§14": [
+        "13 551", "16 692", "@copy",
+        "2 928", "6 069", "−875", "+1 630", "+755", "+17 023",
+        "@gap", "@both",
+        "2 928", "6 069", "−875", "+755",
+        "44 055",
+    ],
+    "H8": [
+        "13 551", "16 692", "+3 141", "@copy", "2 928", "6 069",
+        "9 748", "10 483", "@copy", "−875", "+9 608",
+        "+1 630", "+5 785",
+        "−875",
+        "9 748", "11 378", "@cell",
+        "10 483", "16 268", "@hist",
+        "@copy", "@copy", "@copy",
+        "−875", "+755", "@gap",
+        "+9 608", "+17 023", "@both",
+        "2 928", "6 069", "−875", "+755",
+        "48 846", "10 483", "+9 608",
+    ],
 }
 
-# site -> {token: (count, what it is)}.  Every historical figure a reader meets
-# at the site, declared.  These are frozen by construction: each is a figure at
-# a named past commit, and git does not move.
+# site -> {token: what it is}.  Every historical figure a reader meets at the
+# site, declared.  These are frozen by construction: each is a figure at a
+# named past commit, and git does not move.  The COUNT is not written here --
+# it is `ORDER`'s, counted, so a roster that says "twice" and a document that
+# writes it three times cannot both be satisfied by editing one of them.
 HISTORICAL = {
     "the STATE.md row": {
-        "2 928":   (2, "the clause mismatch A5 reports, before mg-a2bd"),
-        "6 069":   (2, "the same mismatch after mg-a2bd more than doubled it"),
-        "−875":    (4, "the cell-only gap at bbe83b5^, published by bbe83b5 as "
-                       "current and WITHDRAWN"),
-        "+1 630":  (1, "the characters bbe83b5 added to this cell in the commit "
-                       "that measured it"),
-        "+755":    (2, "the cell-only gap at bbe83b5, superseded"),
-        "48 846":  (1, "genuine-join links checked for ledger row J -- a count "
-                       "of links, not a length"),
+        "2 928":   "the clause mismatch A5 reports, before mg-a2bd",
+        "6 069":   "the same mismatch after mg-a2bd more than doubled it",
+        "−875":    "the cell-only gap at bbe83b5^, published by bbe83b5 as "
+                   "current and WITHDRAWN",
+        "+1 630":  "the characters bbe83b5 added to this cell in the commit "
+                   "that measured it",
+        "+755":    "the cell-only gap at bbe83b5, superseded",
+        "48 846":  "genuine-join links checked for ledger row J -- a count "
+                   "of links, not a length",
     },
     "§14": {
-        "13 551":  (1, "the STATE.md row before mg-a2bd"),
-        "16 692":  (1, "the STATE.md row after mg-a2bd"),
-        "2 928":   (2, "the clause mismatch A5 reports, before mg-a2bd"),
-        "6 069":   (2, "the same mismatch after mg-a2bd"),
-        "−875":    (2, "the cell-only gap at bbe83b5^, WITHDRAWN"),
-        "+1 630":  (1, "the characters bbe83b5 added to the STATE.md cell"),
-        "+755":    (2, "the cell-only gap at bbe83b5, superseded"),
-        "+17 023": (1, "cell + relocated history at bbe83b5, superseded"),
-        "44 055":  (1, "links enumerated over 4 <= n <= 6 -- a count of links, "
-                       "not a length"),
+        "13 551":  "the STATE.md row before mg-a2bd",
+        "16 692":  "the STATE.md row after mg-a2bd",
+        "2 928":   "the clause mismatch A5 reports, before mg-a2bd",
+        "6 069":   "the same mismatch after mg-a2bd",
+        "−875":    "the cell-only gap at bbe83b5^, WITHDRAWN",
+        "+1 630":  "the characters bbe83b5 added to the STATE.md cell",
+        "+755":    "the cell-only gap at bbe83b5, superseded",
+        "+17 023": "cell + relocated history at bbe83b5, superseded",
+        "44 055":  "links enumerated over 4 <= n <= 6 -- a count of links, "
+                   "not a length",
     },
     "H8": {
-        "13 551":  (1, "the STATE.md row before mg-a2bd"),
-        "16 692":  (1, "the STATE.md row after mg-a2bd"),
-        "+3 141":  (1, "what mg-a2bd added to the STATE.md row"),
-        "2 928":   (2, "the clause mismatch A5 reports, before mg-a2bd"),
-        "6 069":   (2, "the same mismatch after mg-a2bd"),
-        "9 748":   (2, "the STATE.md row cell at bbe83b5^"),
-        "11 378":  (1, "the STATE.md row cell at bbe83b5"),
-        "10 483":  (3, "this file (the relocated history) at bbe83b5^"),
-        "16 268":  (1, "this file at bbe83b5"),
-        "−875":    (4, "the cell-only gap at bbe83b5^, WITHDRAWN"),
-        "+755":    (2, "the cell-only gap at bbe83b5, superseded"),
-        "+9 608":  (3, "cell + relocated history at bbe83b5^, understated"),
-        "+17 023": (1, "cell + relocated history at bbe83b5, superseded"),
-        "+1 630":  (1, "the characters bbe83b5 added to the STATE.md cell"),
-        "+5 785":  (1, "the characters bbe83b5 added to this file"),
-        "48 846":  (1, "genuine-join links checked for ledger row J"),
+        "13 551":  "the STATE.md row before mg-a2bd",
+        "16 692":  "the STATE.md row after mg-a2bd",
+        "+3 141":  "what mg-a2bd added to the STATE.md row",
+        "2 928":   "the clause mismatch A5 reports, before mg-a2bd",
+        "6 069":   "the same mismatch after mg-a2bd",
+        "9 748":   "the STATE.md row cell at bbe83b5^",
+        "11 378":  "the STATE.md row cell at bbe83b5",
+        "10 483":  "this file (the relocated history) at bbe83b5^",
+        "16 268":  "this file at bbe83b5",
+        "−875":    "the cell-only gap at bbe83b5^, WITHDRAWN",
+        "+755":    "the cell-only gap at bbe83b5, superseded",
+        "+9 608":  "cell + relocated history at bbe83b5^, understated",
+        "+17 023": "cell + relocated history at bbe83b5, superseded",
+        "+1 630":  "the characters bbe83b5 added to the STATE.md cell",
+        "+5 785":  "the characters bbe83b5 added to this file",
+        "48 846":  "genuine-join links checked for ledger row J",
     },
 }
+
+# DERIVED from `ORDER`, never written twice.  {site: {figure key: how many
+# times the LIVE value is written at this site}} -- the shape the mg-8916 and
+# mg-8aae instruments read.
+LIVE_CENSUS = {
+    site: {key: [e[1:] for e in seq if e.startswith("@")].count(key)
+           for key in dict.fromkeys(e[1:] for e in seq if e.startswith("@"))}
+    for site, seq in ORDER.items()
+}
+
+
+def figure_sequence(raw):
+    """Every figure-shaped token the site ASSERTS, IN THE ORDER A READER MEETS
+    THEM.  Marked quotations are removed first, by `assertions`, on the
+    convention already in force at these sites: a quotation of a withdrawn
+    figure is not an assertion of it."""
+    return FIGURE_TOKEN.findall(assertions(raw))
 
 
 def figure_tokens(raw):
-    """Every figure-shaped token the site ASSERTS, as a sorted list.  Marked
-    quotations are removed first, by `assertions`, on the convention already in
-    force at these sites: a quotation of a withdrawn figure is not an assertion
-    of it."""
-    return sorted(FIGURE_TOKEN.findall(assertions(raw)))
+    """The same tokens as a SORTED list -- the multiset view, kept because the
+    census's licensing half is a multiset question and because two other
+    instruments read it."""
+    return sorted(figure_sequence(raw))
+
+
+def expected_sequence(site, measured):
+    """The figure tokens this site is licensed to carry, IN ORDER: the live
+    figures AT THE VALUES MEASURED THIS RUN in their declared slots, and the
+    historical roster in theirs."""
+    return [measured[e[1:]] if e.startswith("@") else e for e in ORDER[site]]
 
 
 def expected_census(site, measured):
-    """The multiset of figure tokens this site is licensed to carry: the live
-    figures AT THE VALUES MEASURED THIS RUN, plus the declared historical
-    roster.  Returns (counter, collisions)."""
+    """The MULTISET of figure tokens this site is licensed to carry, counted
+    off `expected_sequence`.  Returns (counter, collisions)."""
     want = {}
-    for key, n in LIVE_CENSUS[site].items():
-        want[measured[key]] = want.get(measured[key], 0) + n
-    collisions = sorted(t for t in HISTORICAL[site] if t in want)
-    for token, (n, _) in HISTORICAL[site].items():
-        want[token] = want.get(token, 0) + n
+    for t in expected_sequence(site, measured):
+        want[t] = want.get(t, 0) + 1
+    live = {measured[e[1:]] for e in ORDER[site] if e.startswith("@")}
+    collisions = sorted(t for t in HISTORICAL[site] if t in live)
     return want, collisions
 
 
 def census_gate(name, raw, measured):
-    """THE CENSUS, for one site.  Returns [(ok, detail), ...]."""
+    """THE CENSUS, for one site.  Returns [(ok, detail), ...].
+
+    Two questions, and they are different questions.  IS EVERY FIGURE LICENSED
+    is a multiset question and the multiset answers it.  IS EACH LICENSED
+    FIGURE WHERE A READER SHOULD MEET IT is a positional question, and a
+    multiset is invariant under exactly the failure that asks it -- which is
+    mg-8aae H-1.  Both are asked here, and both are recorded."""
     want, collisions = expected_census(name, measured)
+    seq = figure_sequence(raw)
     got = {}
-    for t in figure_tokens(raw):
+    for t in seq:
         got[t] = got.get(t, 0) + 1
     out = []
-    if collisions:
+    undeclared = sorted({e for e in ORDER[name] if not e.startswith("@")}
+                        - set(HISTORICAL[name]))
+    unused = sorted(set(HISTORICAL[name]) - set(ORDER[name]))
+    if collisions or undeclared or unused:
+        why = []
+        if collisions:
+            why.append(f"{collisions} is declared as a historical figure AND "
+                       "equals a live measurement this run, so the two cannot "
+                       "be told apart by counting")
+        if undeclared:
+            why.append(f"{undeclared} holds a slot in ORDER and HISTORICAL "
+                       "does not say what it is")
+        if unused:
+            why.append(f"{unused} is declared in HISTORICAL and holds no slot "
+                       "in ORDER, so nothing checks it")
         out.append((False,
-                    f"GATE @ {name}: CENSUS ROSTER -- {collisions} is declared "
-                    "as a historical figure AND equals a live measurement this "
-                    "run.  The two cannot be told apart by counting, so the "
-                    "roster must name the historical one differently or drop it"))
+                    f"GATE @ {name}: CENSUS ROSTER -- " + "; ".join(why)
+                    + ".  The roster must name the historical figure "
+                    "differently, drop it, or give it the slot a reader meets "
+                    "it in"))
     extra = sorted((t, got[t] - want.get(t, 0)) for t in got
                    if got[t] != want.get(t, 0))
     gone = sorted((t, want[t] - got.get(t, 0)) for t in want
@@ -392,9 +499,41 @@ def census_gate(name, raw, measured):
                     f"{sum(got.values())} figure token(s) a reader meets in "
                     f"this SECTION are licensed ({sum(LIVE_CENSUS[name].values())} "
                     f"live occurrence(s) at the values measured this run, "
-                    f"{sum(n for n, _ in HISTORICAL[name].values())} declared "
-                    "historical), and no other figure is asserted here.  Prose "
-                    "is read, not only the designated statements"))
+                    f"{sum(1 for e in ORDER[name] if not e.startswith('@'))} "
+                    "declared historical), and no other figure is asserted "
+                    "here.  Prose is read, not only the designated statements"))
+
+    # ⚠️ (d) THE POSITIONAL HALF (mg-8aae H-1, landed by mg-8eca).  The check
+    # above is invariant under a permutation of the site's own declared
+    # figures; this one is not, and it is the ONLY one that is not.
+    exp = expected_sequence(name, measured)
+    if seq == exp:
+        out.append((True,
+                    f"GATE @ {name}: FIGURE ORDER -- all {len(seq)} figure "
+                    "token(s) are in the declared slot a reader meets them in. "
+                    "The census above is a MULTISET and a multiset is invariant "
+                    "under a permutation, so two declared figures exchanged in "
+                    "ordinary prose passed it (mg-8aae H-1); this compares the "
+                    "SEQUENCE, which a transposition changes"))
+    else:
+        i = next((k for k in range(min(len(seq), len(exp))) if seq[k] != exp[k]),
+                 min(len(seq), len(exp)))
+        moved = sorted(set(seq) & set(exp)
+                       & {t for t in set(seq) | set(exp)
+                          if seq.count(t) == exp.count(t)}
+                       - {t for k, t in enumerate(exp)
+                          if k < len(seq) and seq[k] == t})
+        out.append((False,
+                    f"GATE @ {name}: FIGURE ORDER -- the section asserts "
+                    f"{len(seq)} figure token(s) and licenses {len(exp)}, and "
+                    f"they first differ at occurrence {i + 1}: the section "
+                    f"reads {seq[i] if i < len(seq) else '(end)'} where the "
+                    f"roster licenses {exp[i] if i < len(exp) else '(end)'}"
+                    + (f".  Same multiplicity, different slot: {moved}"
+                       if moved else "")
+                    + ".  A figure attached to the wrong statement is the wrong "
+                    "figure a reader meets, and exchanging two of them leaves "
+                    "the census above IDENTICAL (mg-8aae H-1)"))
     return out
 
 
@@ -708,13 +847,20 @@ whether the enlargement was disclosed anywhere.
     print("        prose included -- against the live values plus a declared")
     print("        historical roster.  Marked quotations are exempt by the")
     print("        convention `assertions()` states; text outside the section is")
-    print("        not read, because a site is a section (mg-835f G-1/mg-8916).")
+    print("        not read, because a site is a section (mg-835f G-1/mg-8916);")
+    print("    (d) and each of those tokens IN THE SLOT A READER MEETS IT IN.")
+    print("        (c) alone is a MULTISET and is invariant under a permutation,")
+    print("        so two declared figures EXCHANGED in ordinary prose passed it")
+    print("        at 2 of 2 sites (mg-8aae H-1); (d) compares the SEQUENCE.")
+    print("        NOT covered by (d): two occurrences of the SAME token")
+    print("        exchanged, which is the identity map on values (mg-8eca).")
     for name, _r, _k in SITES:
         want, _c = expected_census(name, {"gap":  doc_num(aH - bH, signed=True),
                                           "both": doc_num(aH + histlen - bH, signed=True),
                                           "cell": doc_num(aH), "hist": doc_num(histlen),
                                           "copy": doc_num(bH)})
         print(f"        {name:<20} {sum(want.values()):>3} licensed figure tokens "
+              f"in {len(ORDER[name])} declared slots "
               f"({len(HISTORICAL[name])} historical values declared)")
     print()
 
@@ -1004,14 +1150,17 @@ def negative_control():
     re-implementation.  Verdicts are written before the run.  Nothing on disk
     is touched."""
     head("NEGATIVE CONTROL -- THE FIGURE GATE, MUTATED ONE COPY AT A TIME")
-    print("""Fourteen mutations, verdicts written before the run, applied in memory to the
+    print("""Eighteen mutations, verdicts written before the run, applied in memory to the
 three site texts and evaluated by `figure_gate` itself.  Nothing is written to
 disk.  N1/N3/N4 are mg-8a5c's N1/N4/N5 -- the three single-copy corruptions
 that the previous gate observed at exit 0 while predicting exit 1.  N9 is the
 unmutated control.  N10-N12 are mg-835f's own U1 probes, the three the run
 stayed GREEN on until mg-8916 widened the gate; N13 is the one a
 set-membership census would still pass; N14 is the fail-closed cost, stated as
-a cost.
+a cost.  N15-N18 are mg-8aae's H-1: two DECLARED figures EXCHANGED with each
+other, the mutation a MULTISET cannot see because a transposition preserves it
+exactly, which the run stayed GREEN on at 2 of 2 sites until mg-8eca made the
+roster positional.
 """)
     a = len(state_row(tree(STATE)))
     b = len(deliv_row(tree(DELIV)))
@@ -1053,6 +1202,38 @@ a cost.
         t = dict(base)
         t[site] = t[site] + f"\n\nThe gap is now {value} characters.\n"
         return t
+
+    def transpose(site, before, after):
+        """⚠️ ADDED 2026-07-30 (mg-8aae H-1, landed by mg-8eca).  EXCHANGE two
+        DECLARED figures with each other, in ordinary prose, at one site.
+
+        That it IS a permutation and nothing else is ASSERTED here, not hoped
+        for -- a probe that also changed the bag, moved a designated statement
+        or changed the length would be re-measuring the census that already
+        existed rather than the positional check this exists to exercise."""
+        t = dict(base)
+        assert t[site].count(before) == 1, (site, before)
+        t[site] = t[site].replace(before, after, 1)
+        assert len(t[site]) == len(base[site]), "not length-preserving"
+        assert t[site] != base[site]
+        assert figure_tokens(t[site]) == figure_tokens(base[site]), \
+            "not a permutation: the multiset moved"
+        reader = dict((n, r) for n, r, _k in SITES)[site]
+        assert reader(t[site]) == reader(base[site]), \
+            "not a permutation: a designated statement moved"
+        return t
+
+    # The two mg-8aae probed, verbatim, plus one more per site exchanged in the
+    # OTHER positional sense -- an earlier pair rather than a later one at the
+    # STATE.md row, a later-column value moved earlier at H8.  A transposition
+    # is its own inverse, so "both orderings" of one pair are one text; two
+    # disjoint pairs per site is what makes the demonstration not a single
+    # accident.
+    CHAIN = "2 928 → 6 069 → −875 → +755"
+    H8_TABLE = ("STATE.md row  before mg-a2bd :  13 551 chars\n"
+                "    STATE.md row  after  mg-a2bd :  16 692 chars")
+    H8_HIST_ROW = ("this file (the relocated history)                   "
+                   "10 483        16 268")
 
     def relocate_14():
         """Move the whole disclosure out of §14 into an appendix (mg-8a5c N7).
@@ -1099,6 +1280,30 @@ a cost.
          "GATE FIRES", lambda: figure_gate(prose("the STATE.md row", "+755"), live)),
         ("N14 §14: a NEW historical figure, undeclared (the fail-closed cost)",
          "GATE FIRES", lambda: figure_gate(prose("§14", "12 345"), live)),
+        # ⚠️ N15-N18 ADDED 2026-07-30 (mg-8aae H-1, landed by mg-8eca).  N15 and
+        # N17 are mg-8aae's own two permutation probes, verbatim -- the ones the
+        # run stayed GREEN on at 2 of 2 sites.  N16 and N18 exchange a second,
+        # disjoint pair at the same site in the other positional sense, so the
+        # demonstration is not one accident per site.  Every one of the four is
+        # asserted to be a permutation and nothing else before it is scored.
+        ("N15 H8: two DECLARED figures EXCHANGED (mg-8aae's own probe)",
+         "GATE FIRES", lambda: figure_gate(
+             transpose("H8", H8_TABLE,
+                       H8_TABLE.replace("13 551", "\0").replace("16 692", "13 551")
+                       .replace("\0", "16 692")), live)),
+        ("N16 H8: the row-history line's two historical columns EXCHANGED",
+         "GATE FIRES", lambda: figure_gate(
+             transpose("H8", H8_HIST_ROW,
+                       H8_HIST_ROW.replace("10 483        16 268",
+                                           "16 268        10 483")), live)),
+        ("N17 STATE.md row: the chain's LAST two terms exchanged (mg-8aae)",
+         "GATE FIRES", lambda: figure_gate(
+             transpose("the STATE.md row", CHAIN,
+                       "2 928 → 6 069 → +755 → −875"), live)),
+        ("N18 STATE.md row: the chain's FIRST two terms exchanged",
+         "GATE FIRES", lambda: figure_gate(
+             transpose("the STATE.md row", CHAIN,
+                       "6 069 → 2 928 → −875 → +755"), live)),
     ]
     print(f"    {'mutation':<70}{'predicted':<14}{'observed'}")
     ok = True
@@ -1111,7 +1316,11 @@ a cost.
               f"{'' if agree else '   <-- DISAGREES'}")
     print()
     record(ok, f"{len(cases)} of {len(cases)} mutations moved the gate as "
-               "predicted.  The three that matter are N1-N3: corrupting ONLY "
+               "predicted.  N15-N18 are mg-8aae's H-1 -- two DECLARED figures "
+               "EXCHANGED with each other, which leaves the census's multiset "
+               "IDENTICAL and which this gate passed at 2 of 2 sites until the "
+               "roster was made positional (mg-8eca).  The three that matter "
+               "are N1-N3: corrupting ONLY "
                "the figure a reader meets, at each of the three sites, which "
                "the presence-test gate observed at exit 0 (mg-8a5c N1/N4/N5). "
                "N5 fires on the duplicate itself, so the structural repair "
