@@ -226,6 +226,43 @@ sh code/state_landing_control_2da3/run_all.sh    # the delta control + its negat
 > a different corpus construction — 0 of 31,538 baseline token occurrences unaccounted. A
 > blind certification of a one-line edit is a **control** defect, not a content defect.
 
+> **"`negative_control.py` proves it fires" DID NOT ESTABLISH WHAT THE BLOCK ABOVE CLAIMS
+> — mg-2216 B1/B2, BROKEN, repaired by mg-7870.** The instrument the block above describes
+> certified by asserting five chosen **substrings** were present, and mg-2216 built fourteen
+> independent mutations of which **eight exited 0** — one character of the certified cell
+> (*"every ridge in 1 or 2 facets"* → *"1 or 3"*), five characters inverting the row's verdict
+> on its own proof, an ASCII-space → U+00A0 substitution with no visible change, two adjacent
+> sentences swapped, **3,000 of the cell's 7,876 characters** replaced by `x`, this file's F1
+> block **hollowed to its header, its 1,556-character body deleted**, and two falsified
+> figures — *"13,188 → 7,703 characters"* and the **`175,552 to 37,958 bytes`** the A1
+> correction above rests on.
+>
+> **The README half was blind because it tested block HEADERS, and `negative_control.py`
+> cuts each block including its header.** The author's mutation was the mutation the check
+> was shaped around, which is the closed loop this cluster exists to open.
+>
+> **The repair replaces the mechanism rather than extending the list**, because *"does it
+> catch mutation X?"* is open-ended and every list is a list somebody chose. Each certified
+> region now carries a **SHA-256 of its normalised bytes**; the normalisation is one stated
+> rule (strip ASCII space/tab/CR/LF from the two ends, nothing else), and it is the only
+> place a mutation can still hide. **`code/state_landing_control_2da3/COVERAGE.md` states
+> which regions are digested and what is deliberately not covered** — the goal is bounded,
+> stated coverage, not total coverage. The certified set is now **eight** regions, wider than
+> the *"row `:135`'s F1 repair and this file's F1 / F2 / B1 blocks"* the block above claims:
+> the A1 and A3 correction blocks and the index note are digested too.
+>
+> **The evidence is mg-2216's battery, not this repair's negative control.** An instrument
+> whose only evidence of sensitivity is the negative control its own author wrote is the
+> defect being repaired, one level up. mg-2216's fourteen mutations, re-run **unmodified**
+> against the repaired instrument: **10 caught, 0 missed, 4 tolerated by design, 0 noisy** —
+> captured verbatim at `code/state_landing_control_2da3/out_battery_2216_rerun.txt`.
+> `code/state_control_audit_2216/out_mutations.txt` is now a frozen record of the pre-repair
+> instrument and no longer reproduces; that is the finding landing, not a regression.
+>
+> **The pinned battery is still not touched and still reproduces `out_audit.txt`
+> byte-identically** — 96,291 bytes, verified across this repair, as mg-2216 verified it
+> across the last one.
+
 > **`which located the source the audit did not name` is an over-claim — mg-bd41 A2, BROKEN,
 > corrected here by mg-2da3.** `b68db5d` writes that of its F2 re-derivation. mg-6a2f **did**
 > name the source, at `:212` of its own document — *"pm-onethird's ticket (a stale revision,
