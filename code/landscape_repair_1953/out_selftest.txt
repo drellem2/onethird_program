@@ -24,31 +24,37 @@ R1 -- the closed form OUTSIDE AC(P) (the repaired clause)
   n=2 spurious flats under the ORIGINAL rule                 0              OK
   n=2 M_0 (built geometrically) != original rule             0              OK
   n=2 M_0 (built geometrically) != REPAIRED rule             0              OK
-  n=2 CONTROL: original rule restricted to AC(P)             0              OK
+  n=2 R1d IDENTITY (not a control): doc & AC(P) != repaired  0              OK
+  n=2 R1d, its consequence: original rule summed on AC(P)    0              OK
   n=3 posets where the ORIGINAL rule breaks Brown's (10)     0              OK
   n=3 posets where the REPAIRED rule breaks Brown's (10)     0              OK
   n=3 spurious flats under the ORIGINAL rule                 0              OK
   n=3 M_0 (built geometrically) != original rule             0              OK
   n=3 M_0 (built geometrically) != REPAIRED rule             0              OK
-  n=3 CONTROL: original rule restricted to AC(P)             0              OK
+  n=3 R1d IDENTITY (not a control): doc & AC(P) != repaired  0              OK
+  n=3 R1d, its consequence: original rule summed on AC(P)    0              OK
   n=4 posets where the ORIGINAL rule breaks Brown's (10)     1              OK
   n=4 posets where the REPAIRED rule breaks Brown's (10)     0              OK
   n=4 spurious flats under the ORIGINAL rule                 1              OK
   n=4 M_0 (built geometrically) != original rule             1              OK
   n=4 M_0 (built geometrically) != REPAIRED rule             0              OK
-  n=4 CONTROL: original rule restricted to AC(P)             0              OK
+  n=4 R1d IDENTITY (not a control): doc & AC(P) != repaired  0              OK
+  n=4 R1d, its consequence: original rule summed on AC(P)    0              OK
   n=5 posets where the ORIGINAL rule breaks Brown's (10)     10             OK
   n=5 posets where the REPAIRED rule breaks Brown's (10)     0              OK
   n=5 spurious flats under the ORIGINAL rule                 18             OK
   n=5 M_0 (built geometrically) != original rule             10             OK
   n=5 M_0 (built geometrically) != REPAIRED rule             0              OK
-  n=5 CONTROL: original rule restricted to AC(P)             0              OK
+  n=5 R1d IDENTITY (not a control): doc & AC(P) != repaired  0              OK
+  n=5 R1d, its consequence: original rule summed on AC(P)    0              OK
   n=6 posets where the ORIGINAL rule breaks Brown's (10)     101            OK
   n=6 posets where the REPAIRED rule breaks Brown's (10)     0              OK
   n=6 spurious flats under the ORIGINAL rule                 455            OK
   n=6 M_0 (built geometrically) != original rule             101            OK
   n=6 M_0 (built geometrically) != REPAIRED rule             0              OK
-  n=6 CONTROL: original rule restricted to AC(P)             0              OK
+  n=6 R1d IDENTITY (not a control): doc & AC(P) != repaired  0              OK
+  n=6 R1d, its consequence: original rule summed on AC(P)    0              OK
+  n=6 flats evaluated (Bell(6) x 318)                        64554          OK
 
 R1c -- the witness, named in the document
   P = {a<c, b<d}: |L(P)|                                     6              OK
@@ -113,4 +119,25 @@ R4 -- the populations the corrected sentences are about
   2 <= n <= 6 classes, E3's population (said 405)            404            OK
   3 <= n <= 6 classes, P2's population (said 405)            402            OK
 
-SELF-TEST PASSED -- every number the document carries is reproduced.
+THE DOCUMENT ITSELF -- figures read out of OneThird-Landscape-Where-This-Lives.md
+  s0 E1 populations (section 0 item 1)                       87 936261 87                   OK
+  s0 Brown levels (section 0 item 2)                         37029                          OK
+  s2 two-sided comparison (section 2)                        39616 (4, 24, 206, 2353, 37029) OK
+  s2 levels named zero (section 2)                           28988 37029 1674 2353          OK
+  s3.2 n=6 row (section 3.2 table)                           318 37029 318                  OK
+  s3.3 n<=5 total row (section 3.3 table)                    87 6197 87 936261              OK
+  s3.3 move counts (section 3.3 prose)                       (1, 5, 37, 397, 5757)          OK
+  R1a geometric vs the two rules (section 8 row R1)          318 1 16 10 63 101 318         OK
+  R1b flats and spurious (section 8 row R1)                  64554 455                      OK
+  R1c the witness (section 8 row R1)                         6 7                            OK
+  R1d the identity (section 8 row R1)                        404 404 318                    OK
+  R2 E8 columns (section 8 row R2)                           63 63 63                       OK
+  R2 band vs F(P) at the antichain (section 8 row R2)        5 3 16 13                      OK
+  R3 two-sided comparison (section 8 row R3)                 39616 (4, 24, 206, 2353, 37029) 404 OK
+  R3 levels named zero (section 8 row R3)                    28988 37029 1674 2353          OK
+  R4 the corrected populations (section 8 row R4)            404 402                        OK
+  R4 rebuilt populations (section 8 row R4)                  (1, 2, 5, 16, 63, 318) (1, 5, 37, 397, 5757) 6197 (1, 4, 24, 206, 2353, 37029) (1, 13, 321, 13853, 922073) 936261 OK
+
+SELF-TEST PASSED -- every number the document carries is reproduced,
+and every figure listed in document_figures.py was found IN the
+document and agrees.  Both directions.

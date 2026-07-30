@@ -42,21 +42,35 @@ R1c  THE WITNESS.
         spurious flat: ad|bc      m = 1   blocks antichains: True,  quotient acyclic: False,  meets U: False
 
 ------------------------------------------------------------------------------
-R1d  THE CONTROL THAT MUST FIRE.  The same two rules restricted to
-     AC(P), which is what the target's instrument did.  If the
-     document's rule passes HERE while failing in R1b, then the
-     restriction is what hid the defect.
+R1d  THE IDENTITY -- NOT A CONTROL.  Restricted to AC(P), which is
+     what the target's instrument ranged over, the two rules are the
+     SAME SET OF FLATS:  {antichain blocks} n {acyclic quotient} IS
+     the repaired rule.  Exhibited by enumeration below, and it
+     cannot come out otherwise -- see the note under the table.
 ------------------------------------------------------------------------------
-  n  classes              doc rule ON AC(P)         repaired rule ON AC(P)
-  2        2                     0 bad of 2                     0 bad of 2
-  3        5                     0 bad of 5                     0 bad of 5
-  4       16                    0 bad of 16                    0 bad of 16
-  5       63                    0 bad of 63                    0 bad of 63
-  6      318                   0 bad of 318                   0 bad of 318
+  n  classes          doc rule ON AC(P)     repaired rule ON AC(P)       the two SETS
+  2        2                 0 bad of 2                 0 bad of 2      0 differ of 2
+  3        5                 0 bad of 5                 0 bad of 5      0 differ of 5
+  4       16                0 bad of 16                0 bad of 16     0 differ of 16
+  5       63                0 bad of 63                0 bad of 63     0 differ of 63
+  6      318               0 bad of 318               0 bad of 318    0 differ of 318
+all      404                                                          0 differ of 404
+
+     THIS TABLE CANNOT COME OUT ANY OTHER WAY, and that is the
+     point of it.  The rightmost column is a ONE-LINE SET IDENTITY
+     exhibited on every class; the two 'bad' columns are then the
+     same column twice.  By this repo's own criterion --
+     code/hodge_leverage_audit_86a3/audit_controls.py:4, 'a control
+     must be able to FAIL on the construction it guards' -- R1d is
+     NOT a control and is not evidence.  It is the reason no check
+     confined to AC(P) could have caught the defect, whatever it
+     had measured.  (mg-3b51 A1; relabelled by mg-aec7.)
 
 ==============================================================================
 READING.  R1a is the derivation and R1b its consequence; they must
-agree, and they do.  R1d is the control: the document's rule is
-sound on AC(P) and false off it, so a measurement restricted to
-AC(P) cannot see the defect.  The repaired rule passes everywhere.
+agree, and they do, and the mutation panel in the audit shows both
+have power.  R1d is not a fourth test: it is the stated identity
+that explains why the target's measurement, confined to AC(P), was
+blind to a rule that is false off it.  The repaired rule passes
+everywhere.
 ==============================================================================

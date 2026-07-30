@@ -1,0 +1,149 @@
+==============================================================================
+mg-3b51 AUDIT 4 -- SCOPE OF THE REPAIR, MEASURED ON THE TEXT
+==============================================================================
+
+------------------------------------------------------------------------------
+D1  THE BOUND WORD.  Occurrences of 'sharper' in docs/ and STATE.md
+------------------------------------------------------------------------------
+  total occurrences in docs/ + STATE.md : 23
+  of those, in the repaired document    : 3
+    line 105   QUOTED/REFUTED
+    line 173   QUOTED/REFUTED
+    line 372   QUOTED/REFUTED
+  elsewhere (unrelated arcs / other documents):
+    docs/OneThird-Landscape-Repair-IndependentAudit.md:201
+    docs/OneThird-Landscape-Repair-IndependentAudit.md:366
+    docs/OneThird-Hodge-Side-Leverage.md:127
+    docs/OneThird-Hodge-Side-Leverage.md:233
+    docs/OneThird-Hodge-Side-Leverage.md:887
+    docs/OneThird-L4-Branch-ii-Consumability-IndependentAudit.md:149
+    docs/roadmap.md:41
+    docs/roadmap.md:42
+    docs/roadmap.md:132
+    docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md:91
+    docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md:399
+    docs/OneThird-Intrinsic-Face-Geometry-Probe.md:787
+    docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md:138
+    docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md:213
+    STATE.md:136
+    STATE.md:167
+
+------------------------------------------------------------------------------
+D2  THE ADOPTION ARGUMENT ('we use a weaker tool; adopt Theorem 2')
+------------------------------------------------------------------------------
+  /weaker tool/ : 3 hit(s)
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:202  negated/withdrawn (window +/-2 lines)
+     docs/OneThird-Landscape-Where-This-Lives.md:107  negated/withdrawn (window +/-2 lines)
+     docs/OneThird-Landscape-Where-This-Lives.md:471  negated/withdrawn (window +/-2 lines)
+  /weaker form/ : 4 hit(s)
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:202  negated/withdrawn (window +/-2 lines)
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:366  negated/withdrawn (window +/-2 lines)
+     docs/OneThird-Landscape-Where-This-Lives.md:173  negated/withdrawn (window +/-2 lines)
+     docs/OneThird-Landscape-Where-This-Lives.md:501  negated/withdrawn (window +/-2 lines)
+  /adopt.{0,40}Theorem 2/ : 3 hit(s)
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:202  negated/withdrawn (window +/-2 lines)
+     docs/OneThird-Landscape-Where-This-Lives.md:108  negated/withdrawn (window +/-2 lines)
+     docs/OneThird-Landscape-Where-This-Lives.md:471  negated/withdrawn (window +/-2 lines)
+  /Theorem 2.{0,40}adopt/ : 0 hit(s)
+
+------------------------------------------------------------------------------
+D3  RE-OPENING.  Ledger status words, ORIGINAL vs REPAIRED.
+------------------------------------------------------------------------------
+  E1    **MEASURED + QUOTED**                  -> **MEASURED + QUOTED**                  
+  E2    μ(X,V)\                                -> μ(X,V)\                                
+  E3    **MEASURED + QUOTED**                  -> **MEASURED + QUOTED**                  
+  E4    **QUOTED**                             -> **QUOTED**                             
+  E5    **QUOTED + MEASURED**                  -> **QUOTED + MEASURED**                  
+  E6    **READING OF QUOTED SOURCES**          -> **READING OF QUOTED SOURCES**          
+  E7    **QUOTED**                             -> **QUOTED**                             
+  E8    **READING**, not measured              -> **MEASURED**                           CHANGED
+  E9    **READING OF A QUOTED SOURCE**         -> **READING OF A QUOTED SOURCE**         
+  E10   **REPORT ON A SEARCH**                 -> **REPORT ON A SEARCH**                 
+  E11   **REPORT ON A SEARCH**                 -> **REPORT ON A SEARCH**                 
+
+  status words changed: 1 of 11
+  Anything other than E8 changing here would be a re-opening of the
+  locating, which mg-1953's brief forbids.
+
+------------------------------------------------------------------------------
+D4  OVER-CORRECTING.  Headline and NOT CLAIMED row.
+------------------------------------------------------------------------------
+  ORIGINAL headline present: True
+  REPAIRED headline present: True
+  NOT CLAIMED row identical: True
+  §0 item 1 (F(P) = Brown §4.3)  still 'The monoid is Brown's': True
+  §0 item 3 (worked example)     still present: True
+
+------------------------------------------------------------------------------
+D5  ROW Q.  The candidate space.
+------------------------------------------------------------------------------
+  enumerated candidates: 7
+    (1) FI-modules / representation stability
+    (2) Deligne's interpolation categories `Rep(S_t)`
+    (3) towers of algebras / branching graphs
+    (4) differential posets
+    (5) dual graded graphs
+    (6) Okounkov–Vershik branching-graph
+    (7) diagram algebras
+  'no contact' claimed for : [('1', '2')]
+  claimed NEITHER WAY      : ['3), (6) and (7']
+  withdrawn to a hedge     : True
+  booked under a ledger row: True
+  states a CONTACT CRITERION (what would have counted as a hit)
+                           : True
+
+------------------------------------------------------------------------------
+D6  BEYOND THE BRIEF.  Marked repair sites vs the enumerated brief.
+------------------------------------------------------------------------------
+  marked lines: 45
+  sites with no authorising brief item: 12
+    line 11   > were false. Every repaired sentence is marked ⚠️ in place and listed with its measurement in
+    line 53   reads `m_X = ∏_{B∈X}(|B|−1)!` if every block of `X` is an **antichain of `P`** ⚠️ **and the quotient
+    line 89   **Two places where the literature is ahead of the repo, not behind it** ⚠️ *(originally "one place",
+    line 96   ⚠️ **"STRICTLY SHARPER" — the phrase in this work item's own commit subject (`714aceb`) — is
+    line 228  halves — it is one published theorem, one of whose worked examples *is* an order cone ⚠️ *(originally
+    line 300  are exactly the levels **all of whose blocks are antichains of `P`** ⚠️ **and whose quotient is
+    line 319  ⚠️ *The total row is added because the original quoted this table's `n = 5` row as if it were the
+    line 345  removes a figure's sentence, fails the self-test. ⚠️ *Added by mg-aec7 on mg-3b51's A3: the
+    line 390  > ⚠️ **EXECUTED. mg-d673 ran items 1, 2, 3, 5 and 6 and item 1 and item 3 both returned BROKEN —
+    line 468  ⚠️ **Second operational consequence, added by the repair and pointing the other way.** The claim in
+    line 543  for. ⚠️ *mg-3b51's own committed `out_scope_text.txt` is a frozen record of its run against
+    line 548  ⚠️ **One thing this section had to learn the hard way, recorded because it is the same lesson again.**
+
+  Two text corrections in the repaired document are outside the
+  enumerated brief and outside mg-d673's findings; both are checked
+  by hand in the audit document (one place -> two places; thirty
+  years old -> twenty-six).
+
+------------------------------------------------------------------------------
+D7  THE SAME SLIP R4 REPAIRS, IN THE FIGURE R3 RESTS ON.
+    R4 fixes two 'n = 5 ROW quoted as an n <= 5 TOTAL' slips.  The
+    headline figure for R3 is carried elsewhere in the repo as
+    '2,353 levels to n <= 5'.  Levels by n are 1, 4, 24, 206, 2 353,
+    so the n <= 5 total is 2 588 (2 587 for 2 <= n <= 5) and 2 353
+    is the n = 5 ROW.
+------------------------------------------------------------------------------
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:185  table row, per-n column -- correct
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:190  *** quoted as an n <= 5 TOTAL -- the R4 slip ***
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:193  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:226  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:290  *** quoted as an n <= 5 TOTAL -- the R4 slip ***
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:292  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:293  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:296  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Repair-IndependentAudit.md:297  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Where-This-Lives.md:102  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Where-This-Lives.md:103  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Where-This-Lives.md:295  table row, per-n column -- correct
+     docs/OneThird-Landscape-Where-This-Lives.md:501  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Where-This-Lives.md:502  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Where-This-Lives.md:532  labelled as the n = 5 row -- correct
+     docs/roadmap.md:47   labelled as the n = 5 row -- correct
+     docs/roadmap.md:48   *** quoted as an n <= 5 TOTAL -- the R4 slip ***
+     docs/OneThird-Landscape-Where-This-Lives-IndependentAudit.md:207  labelled as the n = 5 row -- correct
+     docs/OneThird-Landscape-Where-This-Lives-IndependentAudit.md:212  labelled as the n = 5 row -- correct
+
+     The repaired document itself is CLEAN here: it writes
+     '(4, 24, 206, 2 353, 37 029 by n)' and '1 674 of 2 353 at n = 5'.
+
+==============================================================================
