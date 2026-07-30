@@ -1,0 +1,94 @@
+==============================================================================
+D4a  THE FIFTEEN SURVIVALS, RE-CHECKED AT HEAD
+==============================================================================
+
+  survives  1  control (ii)'s conclusion is explicitly NOT withdrawn   ok
+  survives  2  the band product is still invisible to the Hopf structu ok
+  survives  3  the headline is a THEOREM, not a measurement            ok
+  survives  4  §2.3 has no `n` dependence                              ok
+  survives  5  the poset half is 87 of 87 classes                      ok
+  survives  6  with NO size cap                                        ok
+  survives  7  and 179 of 179 out of sample                            ok
+  survives  8  the `S_n` half is NOT verified here                     ok
+  survives  9  Solomon named as cited and unread                       ok
+  survives  10 Garsia-Reutenauer / Atkinson named as unread            ok
+  survives  11 located is distinguished from verified, in both directi ok
+  survives  12 the successor literature search is cancelled            ok
+  survives  13 and its errand withdrawn where it was written           ok
+  survives  14 T3d is TWO statements, each computed twice              ok
+  survives  15 control (ii)'s 1 442 are the disjoint-ground-set pairs  ok
+
+==============================================================================
+D4b  THE FIVE THAT MUST SURVIVE ONLY INSIDE A STRIKE
+==============================================================================
+
+  struck    §2.3 re-hedged as 'measured, not proved'                   ok
+  struck    §2.3 re-described as not located in that generality        ok
+  struck    'three of the four columns are the control'                ok
+  struck    'fires hard' as the reading of control (ii)                ok
+  struck    the smallest witness given as \{a<c, b<d\}                 ok
+
+==============================================================================
+D4c  THE DIFF -- WHAT mg-a4ef REMOVED, AND WHAT IT HEDGED
+==============================================================================
+
+  20 line(s) removed, 106 added.
+
+  EVERY REMOVED LINE, so nothing is dropped unseen:
+      - > COMPUTED rather than restated**, and `w3_scope.py` is the checker for the instrument: it
+      - > reports **12 problems** against the pre-repair tree and **0** now. **No claim in this
+      - > document is softened by any of it** — one is strengthened (§5, control (ii)).
+      - > * **`P` the antichain, `Aut(P) = S_n`** → the left side is **Solomon's descent algebra**
+      - > **THE SAME LIMITATION APPLIES TO THIS SECTION, AND IT IS STATED HERE RATHER THAN LEFT FOR
+      - > THE NEXT AUDITOR TO FIND.** §14 is itself a self-assessment written by a repair about the
+      - > document it repaired. Its own list of *what mg-6f61 fixed* — the five items in the banner
+      - > at the top — is a list of the places **mg-a61f named**, and it is therefore complete only
+      - > to the extent that mg-a61f's audit was. **This repair did not conduct an independent
+      - > search for defects mg-a61f missed**, so an eighth defect, if there is one, is in exactly
+      - > the position §8 C3 was in: outside every beam currently pointed at this document. The
+      - > repair's own instrument reports **2 of 45 predicted cells missed**, both explained in
+      - > §5 — that number is published rather than tidied because the alternative is a battery that
+      - > cannot be wrong.
+      - > plus four folded in from a second, shelved filing — so it is complete only to the extent
+      - > that those two were. **This repair conducted no independent search for defects mg-a61f
+      - > missed.** An eighth defect, if one exists, is in exactly the position §8 C3 was in: outside
+      - > every beam currently pointed at this document. **That the second filing found four items
+      - > the first did not is the direct evidence for this — two readers of one audit produced two
+      - > different lists, and neither was a subset of the other.**
+
+  HEDGING WORDS IN THE ADDED LINES: 0
+  no hedging word is added to the document                             ok
+
+  IS ANYTHING THE DELETED COPY SAID ACTUALLY LOST?  Longest run of
+  each removed line still present in the document at HEAD:
+      20 removed line(s); 19 have a run of 6+ tokens still present
+      run 5   > search for defects mg-a61f missed**, so an eighth defect, if the
+              DELIBERATE, Y3 -- the stale prediction
+  every line whose content did not survive is a named finding          ok
+  So mg-a4ef's 'nothing the deleted copy said is lost -- it said
+  less' is MEASURED, not taken.
+
+==============================================================================
+D4d  EVERY TREE'S VERDICT LINE, BEFORE AND AFTER
+==============================================================================
+
+      out_t6_fock_and_record.txt                     T6 TOTAL BAD: 0    unchanged
+      out_t5_hopf_monoid.txt                         T5 TOTAL BAD: 0    unchanged
+      out_t3_bidigare.txt                            T3 TOTAL BAD: 0    unchanged
+      out_check_doc.txt                              CHECK_DOC: PASS    unchanged
+      out_r2_columns.txt                             R2 TOTAL BAD: 0    unchanged
+      out_w3_scope.txt                               W3 SCOPE: PASS     unchanged
+
+  Nothing retreated numerically either: a repair that hedged would
+  most cheaply do it by letting a count move.
+
+==============================================================================
+D4 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER.  D4 checks the 15 survivals mg-73df enumerated
+and the 5 it required to stay struck -- ITS list, not a new one -- plus
+every line the mg-a4ef diff touched in the document and 6 verdict
+lines.  It does NOT re-verify the mathematics behind any survival, does
+not read the code trees for hedging, and cannot see a weakening that
+neither changes a listed sentence nor appears in the document diff.

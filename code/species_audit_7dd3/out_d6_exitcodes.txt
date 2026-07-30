@@ -1,0 +1,73 @@
+==============================================================================
+D6a  IS THE FINAL EXIT CONDITIONAL?  (static, every script in the arc)
+==============================================================================
+
+      code/species_7d75           t1_grading.py          sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_7d75           t2_operation.py        sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_7d75           t3_bidigare.py         sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_7d75           t4_one_operation.py    sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_7d75           t5_hopf_monoid.py      sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_7d75           t6_fock_and_record.py  sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_repair_6f61    check_doc.py           sys.exit(1 if bad else 0)
+      code/species_repair_6f61    r1_smallest.py         sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_repair_6f61    r2_columns.py          sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_repair_6f61    r3_quotes.py           sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_repair_6f61    selftest6f61.py        sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_remainder_f8fa selftestf8fa.py        sys.exit(1 if fails else 0)
+      code/species_remainder_f8fa w1_opposite.py         sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_remainder_f8fa w2_typemismatch.py     sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_remainder_f8fa w3_scope.py            sys.exit(1 if bad else 0)
+      code/species_repair_a4ef    s1_extent.py           sys.exit(1 if bad else 0)
+      code/species_repair_a4ef    s2_seam.py             sys.exit(1 if bad else 0)
+      code/species_repair_a4ef    selftesta4ef.py        sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_73df     c1_columns.py          sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_73df     c2_pinned.py           sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_73df     c3_bidigare.py         sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_73df     c4_scope.py            sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_73df     c5_doc.py              sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_73df     selftest73df.py        sys.exit(1 if fails else 0)
+      code/species_audit_a61f     a1_headline.py         sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_a61f     a2_bidigare.py         sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_a61f     a3_hopf.py             sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_a61f     a4_counts.py           sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_a61f     a5_quotes.py           sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_a61f     a6_boundary.py         sys.exit(0)   <- UNCONDITIONAL 0
+      code/species_audit_a61f     selftesta61f.py        sys.exit(0)   <- UNCONDITIONAL 0
+
+  31 script(s) with a final exit; 25 exit 0 unconditionally.
+
+==============================================================================
+D6b  DOES ANY OF THEM PRINT A NONZERO VERDICT AND EXIT 0?
+==============================================================================
+
+  Run, not inferred.  Only the two mg-a4ef re-ran as its own
+  corroboration, because those are the ones it stands on.
+
+      code/species_audit_73df/c4_scope.py
+          C4 STILL ASSERTED AT SOURCE: 0
+          C4 TOTAL BAD: 0
+          exit code 0
+          consistent
+
+      code/species_audit_73df/c5_doc.py
+          C5 TOTAL BAD: 1
+          exit code 0
+          *** REPORTS A FINDING AND EXITS 0 ***
+
+  mg-a4ef's disclosure -- 'It now exits 1 on failure.  check_doc.py
+  already did.' -- is true of the two files it names.  The instrument
+  it re-ran UNMODIFIED to corroborate itself has the same defect, and
+  the committed out_c5_doc_73df_after.txt ends C5 TOTAL BAD: 1 with an
+  exit code of 0.  This is mg-73df's code and not mg-a4ef's; what is
+  mg-a4ef's is standing on it and saying the shape was closed.
+
+==============================================================================
+D6 TOTAL BAD: 1
+==============================================================================
+
+EXTENT OF THIS NUMBER.  D6 reads the LAST `sys.exit(...)` at column 0
+in every non-kernel .py in the six species trees -- 31 script(s) --
+and RUNS exactly two of them.  A script whose exit is conditional but
+on the wrong variable would pass D6a, and a script D6b does not run is
+a static reading only.  It says nothing about any tree outside
+code/species_*.

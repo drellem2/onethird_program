@@ -1,0 +1,243 @@
+==============================================================================
+D2a  THE LISTS AGAINST THE DOCUMENT'S OWN ~~STRIKES~~
+==============================================================================
+
+  the document strikes 11 sentences.
+
+  check_doc.py     STRICKEN     10 row(s)
+  w3_scope.py      FORBIDDEN     2 row(s)
+  stricken_a4ef.py CORRECTIONS  11 row(s)  <- 'the ONE list'
+  c4_scope.py      CORRECTIONS   6 row(s)  <- mg-73df's, 8 findings
+
+  check_doc.py's STRICKEN has 10 rows, as its extent line says         ok
+  stricken_a4ef.py has 11 rows, as its extent line says                ok
+
+  THE ARITHMETIC.  11 rows, of which Y2 has NO struck sentence, so the
+  one list covers 10 of the document's 11 strikes.
+
+      it passes every Hopf-monoid axiom with 0 failures on 4 3 X3
+      *"Define a braid cone to be a cone in `(ℝ^I)/ℝ^I` cut ou X6a
+      as three independent agreements about the term           *** ON NO LIST ***
+      Three of the four columns are the control, and they fire X4
+      *"Recall from Section 17.4 that `K̄(Π)` is the algebra o X7
+      **fires hard**: 1 442 closure, 252 associativity, 11 020 X5
+      **The `Aut(P)`-invariant identity of §2.3 is measured, n X2a
+      *"Smallest witness with `AC(P) ≠ Π[n]`: `P = {a<c, b<d}` X1
+      `y(i) ≤ y(j)`                                            X6a
+      **Attack §2.3's non-location, because it is the one plac X2b
+      The `Aut(P)` form of the radical theorem was **not locat X2c
+
+  every sentence the document strikes is on the one list               *** FAILS ***
+
+  THE STRIKE THAT IS ON NO LIST:
+      as three independent agreements about the term
+      on check_doc.py's STRICKEN     : no
+      on w3_scope.py's FORBIDDEN     : no
+      on stricken_a4ef.py's ONE LIST : no
+      on mg-73df's c4_scope.py       : YES
+      -- mg-a61f's X8.  The union was taken over TWO of the THREE
+         lists that existed when it was written, and the third is
+         the one mg-a4ef re-runs unmodified as its independent
+         corroboration.
+
+==============================================================================
+D2f  THE LEAD-IN TEST -- IS EACH STRUCK SENTENCE STRUCK EVERYWHERE?
+==============================================================================
+
+  Every checker in this arc stores a withdrawn claim as ONE EXACT
+  SENTENCE and asks whether that sentence occurs outside a strike.
+  A sentence has a LEAD-IN.  The same claim introduced by different
+  words is a different string, and is invisible to all of them --
+  while every extent line stays true: the file IS read, the statement
+  IS on the list, and the run IS clean.
+
+  So, for each of the 11 strikes: the LONGEST run of consecutive words
+  it shares with the document OUTSIDE every strike.
+  A short shared run is a shared lead-in and means nothing.  A long
+  one is the claim itself, said again somewhere the strike does not
+  reach.  The line where it is said is printed.
+
+  strike 5   run 31  of 42  ( 74%)  line 169   *** THE CLAIM ITSELF, SAID AGAIN ***
+      *"Recall from Section 17.4 that `K̄(Π)` is the algebra of symmetri
+      shared: ` k ̄ ( π ) ` is the algebra of symmetric functions in noncommuting variables and ` k ( π ) ` is the familiar hopf algebra of symmetric functions
+      exoneration clauses at line 169: names-a-repair
+          the clause 'names-a-repair' comes from line 174: it.** *(The fourth was added by the repair mg-6f61; it was stated correctly in §3 and in
+
+  strike 2   run 17  of 50  ( 34%)  line 261   lead-in only
+      *"Define a braid cone to be a cone in `(ℝ^I)/ℝ^I` cut out by inequ
+
+  strike 10  run 15  of 118 ( 13%)  line 1066  lead-in only
+      **Attack §2.3's non-location, because it is the one place I assert
+
+  strike 8   run 14  of 47  ( 30%)  line 819   lead-in only
+      *"Smallest witness with `AC(P) ≠ Π[n]`: `P = {a<c, b<d}`, where `a
+
+  strike 4   run 8   of 13  ( 62%)  line 13    lead-in only
+      Three of the four columns are the control, and they fire.
+
+  strike 11  run 8   of 31  ( 26%)  line 746   lead-in only
+      The `Aut(P)` form of the radical theorem was **not located** state
+
+  strike 7   run 7   of 35  ( 20%)  line 746   lead-in only
+      **The `Aut(P)`-invariant identity of §2.3 is measured, not proved,
+
+  strike 1   run 5   of 18  ( 28%)  line 615   lead-in only
+      it passes every Hopf-monoid axiom with 0 failures on 4 399 basis e
+
+  strike 9   run 5   of 11  ( 45%)  line 262   lead-in only
+      `y(i) ≤ y(j)`
+
+  strike 6   run 3   of 18  ( 17%)  line 603   lead-in only
+      **fires hard**: 1 442 closure, 252 associativity, 11 020 compatibi
+
+  strike 3   run 2   of 7   ( 29%)  line 300   lead-in only
+      as three independent agreements about the term
+
+  every struck claim is struck or explicitly negated at EVERY occurren *** FAILS ***
+
+  THE CLAIM THE ONE LIST HOLDS AND EVERY CHECKER PASSES ON:
+      struck at   : the occurrence the list stores, with its
+                    lead-in 'Recall from Section 17.4 that'
+      asserted at : line 169, same document, no strike, and the
+                    only marker within six lines is an unrelated
+                    'added by the repair mg-6f61' about a
+                    DIFFERENT correction to the same section
+      why nothing sees it: check_doc.py and stricken_a4ef.py both
+          store the sentence WITH its lead-in, so it occurs once
+          and is struck once.  Every extent line is TRUE.
+
+==============================================================================
+D2b  WHAT EACH CHECKER OPENS -- MEASURED, NOT READ OFF THE SOURCE
+==============================================================================
+
+  check_doc.py  -- its extent line: 'enforces all 10 stricken
+                   sentences over ONE FILE ... It reads no code.'
+        opens  docs/OneThird-Species-Hopf-Monoids-Repair.md
+        opens  docs/OneThird-Species-Hopf-Monoids-Where-This-Lives.md
+  it reads no code -- TRUE                                             ok
+  it opens exactly ONE file, as 'ONE FILE' reads                       *** FAILS ***
+        ^ the extent line is about the STRICKEN list, which really is
+          enforced over one file.  But the checker READS two, and the
+          second carries five of its own assertions (C4).  NARROWER
+          than reality, which is the safe direction and still false.
+
+  w3_scope.py   -- its extent line: 'TWO corrected statements -- X4
+                   and X5 -- plus the character-ring rule, over ONE
+                   tree.'
+        opens 17 file(s), all under code/species_7d75/
+  every file it opens is inside code/species_7d75                      ok
+        does NOT open: run_all.sh
+  the only file in the tree it does not read is run_all.sh             ok
+
+  s1_extent.py  -- its extent line: '11 corrections over the document
+                   and 4 code trees', and 'SKIPPED, NAMED, so the
+                   exclusion cannot grow unseen -- 5 file(s)'.
+        opens 49 file(s) inside the repository
+  it opens the document                                                ok
+        code/species_7d75             18 file(s), 17 read, skipped: run_all.sh
+            UNDECLARED SKIP: run_all.sh
+        code/species_repair_6f61      13 file(s), 12 read, skipped: run_all.sh
+            UNDECLARED SKIP: run_all.sh
+        code/species_remainder_f8fa   12 file(s), 11 read, skipped: run_all.sh
+            UNDECLARED SKIP: run_all.sh
+        code/species_repair_a4ef      14 file(s),  8 read, skipped: OUTCOMES.md, PREDICTIONS.md, out_c4_scope_73df_after.txt, out_c5_doc_73df_after.txt, run_all.sh, stricken_a4ef.py
+            UNDECLARED SKIP: run_all.sh
+
+==============================================================================
+D2c  THE DECLARED EXCLUSION AGAINST THE REAL ONE
+==============================================================================
+
+  stricken_a4ef.py names 5 skipped file(s), and s1_extent.py prints
+  that list under 'SKIPPED, NAMED, so the exclusion cannot grow
+  unseen'.  But tree_files() also filters on extension .py/.txt/.md, and that
+  filter is in no extent line and in no printed list.
+
+      SILENTLY OUTSIDE THE SCAN, NOT NAMED ANYWHERE:  code/species_7d75/run_all.sh
+      SILENTLY OUTSIDE THE SCAN, NOT NAMED ANYWHERE:  code/species_repair_6f61/run_all.sh
+      SILENTLY OUTSIDE THE SCAN, NOT NAMED ANYWHERE:  code/species_remainder_f8fa/run_all.sh
+      SILENTLY OUTSIDE THE SCAN, NOT NAMED ANYWHERE:  code/species_repair_a4ef/run_all.sh
+
+  the declared exclusion is the whole exclusion                        *** FAILS ***
+  A file inside a tree the extent CLAIMS is covered, excluded by a
+  rule the extent does not state.  d5 plants a statement in one and
+  measures the exit code.
+
+==============================================================================
+D2d  THE WHOLE REPOSITORY, SWEPT WITH THE SAME LIST
+==============================================================================
+
+  declared extent      0 still-asserted occurrence(s)
+  declared silent     31 still-asserted occurrence(s)
+        X1    code/species_audit_73df/out_c5_doc.txt:74
+        X1    code/species_audit_a61f/a4_counts.py:77
+        X1    code/species_audit_a61f/out_a4_counts.txt:20
+        X1    code/species_repair_a4ef/out_c5_doc_73df_after.txt:47
+        X1    docs/OneThird-Audit-mg-7d75-Species-Hopf-Monoids.md:321
+        X1    docs/OneThird-Branching-Graphs-Repair.md:52
+        X1    docs/OneThird-Branching-Graphs-Where-This-Lives.md:138
+        X1    docs/OneThird-Branching-Graphs-Where-This-Lives.md:167
+        X1    docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md:470
+        X1    docs/OneThird-Hodge-Side-Leverage.md:749
+        X1    docs/OneThird-Hodge-Side-Leverage.md:1023
+        X1    docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md:281
+        X1    docs/OneThird-Landscape-Repair-IndependentAudit.md:94
+        X1    docs/OneThird-Landscape-Repair-IndependentAudit.md:96
+        ... and 17 more
+  outside             44 still-asserted occurrence(s)
+        X1    code/branching_af28/out_branching.txt:64
+        X1    code/branching_af28/t_branching.py:331
+        X1    code/branching_audit_5800/a2_exactly.py:35
+        X1    code/branching_audit_5800/a2_exactly.py:37
+        X1    code/branching_audit_5800/out_a2_exactly.txt:5
+        X1    code/branching_audit_6ad0/a2_intervals.py:116
+        X1    code/branching_audit_6ad0/out_a2_intervals.txt:2
+        X1    code/branching_repair_41aa/out_r1_exactly.txt:2
+        X1    code/branching_repair_41aa/r1_exactly.py:20
+        X1    code/branching_repair_41aa/r1_exactly.py:145
+        X1    code/counterexample_audit_a7b4/out_shrink.txt:3
+        X1    code/counterexample_audit_a7b4/shrink_witness.py:56
+        X1    code/face_geometry/probe_output_n6.txt:70
+        X1    code/face_geometry/probe_output_n6.txt:71
+        ... and 30 more
+
+  nothing on the list is still asserted INSIDE the declared extent     ok
+  The other two buckets are NOT counted as defects: mg-a4ef declares
+  the audit trees and the rest of docs/ out of extent, and this audit
+  is measuring whether the declaration is honest, not widening it.
+
+==============================================================================
+D2e  THE REACH OF THE EXONERATION RULE -- the beyond-list target
+==============================================================================
+
+  Every worker in this arc has argued about WHEN a hit is exonerated.
+  Nobody has measured HOW MANY independent clauses hold each hit down.
+  A hit held by one clause is a marker doing work.  A hit held by
+  three is a marker that can be deleted without the number moving --
+  and the number is what a reader is shown.
+
+  56 occurrence(s) of a listed statement inside the declared extent.
+      held by 1 clause(s):  23 occurrence(s)
+      held by 2 clause(s):  20 occurrence(s)
+      held by 3 clause(s):  13 occurrence(s)
+
+      clause names-a-repair   fires on  19 of 56
+      clause negates          fires on  30 of 56
+      clause own-negation     fires on  31 of 56
+      clause declared-table   fires on  22 of 56
+
+  OVER-DETERMINED (2+ clauses): 33 of 56 = 59%
+  Not a defect on its own -- but it is the reason a repair can delete
+  the marker it points at and see no change, and it is printed by
+  nothing else in this arc.  d5's M10 measures exactly that.
+
+==============================================================================
+D2 TOTAL BAD: 4
+==============================================================================
+
+EXTENT OF THIS NUMBER.  D2 ranges over 12 statements -- the 11 the
+document strikes, plus Y2 -- across EVERY .py/.txt/.md/.sh file under
+docs/ and code/ except this audit's own tree: 645 file(s) walked.
+It does NOT read PDFs, .html, .gz or any binary; it does not check
+mathematics; and its verdict on a statement is only as good as the
+patterns in statements7dd3.py, which are hand-written and which
+selftest7dd3.py exercises in both directions.

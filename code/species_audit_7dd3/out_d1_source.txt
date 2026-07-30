@@ -1,0 +1,89 @@
+==============================================================================
+D1a  Y1 -- THE MAJOR.  X3 AND THE AM 17.5 QUOTATION, AT SOURCE
+==============================================================================
+
+  mg-73df found X3 at t6_fock_and_record.py:149 and at
+  out_t6_fock_and_record.txt:66, unmarked, inside a run ending
+  T6 TOTAL BAD: 0.  Both files are opened here directly.
+
+      t6_fock_and_record.py                          line 164   held by {names-a-repair, negates, own-negation}
+  t6_fock_and_record.py: X3 occurs 1 time(s), 0 asserted               ok
+      out_t6_fock_and_record.txt                     line 72    held by {names-a-repair, negates, own-negation}
+  out_t6_fock_and_record.txt: X3 occurs 1 time(s), 0 asserted          ok
+  t6_fock_and_record.py: X7 occurs 0 time(s), 0 asserted               ok
+  out_t6_fock_and_record.txt: X7 occurs 0 time(s), 0 asserted          ok
+
+  t6 source states the corrected reading: CLOSURE, AND ONLY CLOSURE    ok
+  t6 source names the repair at the correction                         ok
+  the committed OUTPUT carries the same correction                     ok
+  the live prose no longer claims the axiom count                      ok
+  the AM 17.5 quotation at source now reads Pi* in BOTH slots          ok
+  and says why the difference is harmless (17.4.1), as section 4 does  ok
+  the run that contains it still ends T6 TOTAL BAD: 0                  ok
+
+==============================================================================
+D1b  Y2 -- THE DESCENT ALGEBRA, IN THE DOCUMENT AND AT SOURCE
+==============================================================================
+
+  t4_one_operation.py: Y2 occurs 0 time(s), 0 asserted                 ok
+  t4 line 22 region states the ANTI-isomorphism                        ok
+  t4 names the repair and the measurement that decides it              ok
+  section 0's headline box reads anti-isomorphic                       ok
+  and the old reading is gone from the document entirely               ok
+  AM Thm 10.13 is still quoted in section 0, as mg-73df relied on      ok
+
+==============================================================================
+D1c  Y3 / Y4 -- THE SEAM, AT SOURCE IN THE DOCUMENT
+==============================================================================
+
+  the limitation box occurs exactly ONCE (found 1)                     ok
+  the surviving copy is section 14.2's                                 ok
+  the surviving copy traces the list to TWO sources                    ok
+  the five-versus-eight miscount is gone                               ok
+  the banner it miscounted still says eight                            ok
+  'a second, shelved filing' is gone                                   ok
+  and the correction is stated in place, not silently                  ok
+  a note records that the duplicate was resolved, not just deleted     ok
+
+  AND THE BY-NAME REFERENCE §14.3 MAKES OF §14.2 -- the thing a
+  resolved duplicate most easily breaks:
+  §14.2 and §14.3 both exist and are in order                          ok
+  §14.3 answers §14.2 BY NAME                                          ok
+  and the sentence §14.3 quotes back IS in §14.2                       ok
+
+==============================================================================
+D1d  Y5 -- THE TWO DOCSTRINGS, AGAINST THEIR OWN COMMITTED RUNS
+==============================================================================
+
+  w3_scope.py's docstring says 12 problems                             ok
+  and its own evidence file says FAIL (12 problems)                    ok
+  the '6' is gone from the docstring's claim                           ok
+  r2_columns.py's docstring says 45 cells                              ok
+  and its own run prints 45 cells and MISSED: 2 of 45                  ok
+  the '40' is gone                                                     ok
+
+  BEYOND mg-73df's FIVE, claimed by mg-a4ef: w3_scope.py exited 0
+  unconditionally.  The source is read here; d5 RUNS it.
+  w3_scope.py's last line is a conditional exit                        ok
+  and the unconditional exit(0) is gone                                ok
+
+==============================================================================
+D1e  THE EXTENT LINES EXIST AT SOURCE (their TRUTH is d2's job)
+==============================================================================
+
+  check_doc.py prints an extent after its verdict                      ok
+  w3_scope.py prints an extent after its verdict                       ok
+  s1_extent.py prints an extent after TOTAL BAD                        ok
+  s2_seam.py prints an extent after TOTAL BAD                          ok
+  the document states the extents too (§14.4)                          ok
+
+==============================================================================
+D1 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER.  D1 checks the SEVEN corrections mg-a4ef claims,
+in the SIX files it names plus the document, by reading those files.
+It says nothing about any other file, about whether the corrections are
+COMPLETE (d2), about the seam beyond the one pair (d3), or about
+anything mg-a4ef did not claim.  A pass here means the claims are true
+where they were made -- not that they are all the claims that were due.
