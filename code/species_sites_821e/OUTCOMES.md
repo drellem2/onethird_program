@@ -1,8 +1,10 @@
 # mg-821e — what happened, including this instrument's own defects
 
-**3 of the predictions in `PREDICTIONS.md` were wrong and are kept as written.** Five defects in
-this instrument are recorded below; **two of them made a measurement read as its own opposite**,
-and one of those is the same class of defect the ticket exists to repair.
+**3 of the predictions in `PREDICTIONS.md` were wrong and are kept as written.** Seven defects in
+this instrument are recorded below; **three of them made a measurement read as its own
+opposite**, and **three are the same classes of defect this ticket exists to repair** — a check
+resting on an unstated condition, a control that exists and does nothing, and a comparison that
+silently stops comparing.
 
 ---
 
@@ -97,6 +99,38 @@ now one line on purpose, with a comment saying why, and `A1 TOTAL BAD` is back t
 **This is the argument for re-running the auditor's instrument rather than quoting it.** No probe
 of mine would have caught it: my probes ask whether the checkers fire in the right places, and
 this was a check in somebody else's tree reading a string in a committed transcript.
+
+## 6. Two comparisons anchored to `HEAD` — and `HEAD` became the repair
+
+`p2_sites.py` ran `check_doc.py` "as committed at `HEAD`" and the self-test asserted
+`unwire(runner) == git show HEAD:`. Both were correct, and both were correct **only while HEAD
+did not contain this work**. The moment the repair was committed, `p2_sites.py` reported the old
+checker firing **7 of 7** — which reads as *the finding never existed* — and the self-test
+reported the wiring **absent** from three runners that carry it.
+
+Neither failed loudly at the right time. **A comparison against `HEAD` does not break when the
+repair lands; it silently changes what it is comparing, and starts measuring the repair against
+itself.** That is this ticket's own OPEN 1 one level out: a check whose meaning rests on a
+condition nobody stated — *HEAD does not contain this work* — and the condition went false in the
+ordinary course of doing the work.
+
+Both are now pinned to `PRE_REPAIR = b6bc2ef`, the commit this branch left from, the way
+`s1_extent.py` pins `ebecd89` and `83ac472`. Both call sites also assert that the pinned ref does
+**not** already carry the repair, so a pin later moved onto a repaired commit is a loud failure
+rather than a quiet 7 of 7.
+
+**It was caught by running the whole tree again after committing**, which is the only reason it
+is in this file rather than in the next audit.
+
+## 7. A failing self-test that did not stop the run
+
+`run_all.sh` had `python3 -B selftest821e.py | tee out_selftest.txt`. Under `set -e` a pipeline's
+status is the **last** command's, and `tee` always exits 0 — so when defect 6 turned the
+self-test red, the runner printed six `*** FAILED ***` lines and **exited 0**.
+
+**A control that exists, is correct, and does nothing** — which is the exact shape of OPEN 2,
+committed by the runner of the instrument repairing it. Fixed to redirect and guard on the exit
+code. Every other `run_all.sh` in this arc still uses `| tee`; that is noted and not touched.
 
 ---
 

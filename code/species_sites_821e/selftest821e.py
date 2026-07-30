@@ -16,7 +16,7 @@ import sys
 
 from kern821e import (REPO, git_status, Probe, sections, delete_at_site,
                       replace_once, preserve, out_files, NO_RECURSE,
-                      WIRE_MARK, unwire)
+                      WIRE_MARK, unwire, PRE_REPAIR)
 
 n = 0
 bad = 0
@@ -169,12 +169,17 @@ for t in WIRED:
     ck("unwire is a DELETION -- nothing else changes in %s" % t,
        all(ln in text.splitlines() for ln in stripped.splitlines()))
     # THE WHOLE CLAIM, MEASURED: the wiring is a pure addition, so undoing it
-    # must give back the runner as committed at HEAD, byte for byte.  Anything
-    # weaker leaves room for the deletion test to be removing something else.
-    head = subprocess.run(["git", "show", "HEAD:code/%s/run_all.sh" % t],
+    # must give back the runner as committed BEFORE this ticket, byte for
+    # byte.  Anything weaker leaves room for the deletion test to be removing
+    # something else.  Pinned, not `HEAD` -- see `PRE_REPAIR` in kern821e.py.
+    head = subprocess.run(["git", "show", "%s:code/%s/run_all.sh"
+                           % (PRE_REPAIR, t)],
                           cwd=REPO, capture_output=True, text=True)
-    ck("HEAD's copy of %s is readable" % t, head.returncode == 0)
-    ck("unwire(%s) is BYTE-IDENTICAL to HEAD" % t, stripped == head.stdout)
+    ck("the pre-repair copy of %s is readable" % t, head.returncode == 0)
+    ck("the pinned ref does NOT already carry the wiring (%s)" % t,
+       WIRE_MARK not in head.stdout)
+    ck("unwire(%s) is BYTE-IDENTICAL to the pre-repair copy" % t,
+       stripped == head.stdout)
     ck("and the wiring really did add something to %s" % t,
        len(text) > len(head.stdout))
     try:

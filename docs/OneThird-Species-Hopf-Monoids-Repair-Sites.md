@@ -3,7 +3,7 @@
 **Work item:** mg-821e. **Date:** 2026-07-31.
 **Repairs:** `docs/OneThird-Species-Hopf-Monoids-ExtentRepair-IndependentAudit.md` (mg-6cb9,
 `26c8d5c`), which audited mg-d633 / `e8fbd4f`.
-**Instrument:** `code/species_sites_821e/`, 5 Python files, 86-assertion self-test.
+**Instrument:** `code/species_sites_821e/`, 5 Python files, 89-assertion self-test.
 `sh run_all.sh`, ~4 minutes, **no network**.
 
 ---
@@ -18,7 +18,7 @@ different grains, not variations of one bug and not to be closed with one fix.*
 |---|---|---|---|
 | **1** | *"EVERY REGULAR FILE in each tree is read"* was true **only because no tree had a subdirectory** — a claim measured, true, and contingent on a condition nobody stated | **the walks recurse.** `s1_extent.py`, `w3_scope.py` and `e1_extents.py` all use `os.walk`. One directory rule is left, `__pycache__`, and it is **printed in the extent line** | 18 probes. **5 of 5** inside fire, **4 of 4** outside silent, **2 of 2** deletion tests go silent again, **4 of 4** guards |
 | **2** | the check closing B1 was **called by 0 of 3** species runners — present in the tree, absent from every run | **the removal question was asked first** and answered with measurements (**outcome 2**), then the check was wired into all three and **verified by running them** | **3 of 3** runners print the check's own output. With B1 restored on disk, **3 of 3 catch it wired** and **3 of 3 are green unwired** |
-| **3** | C4 was a **presence test** over a document that writes 3 of its 5 anchors more than once — deleting the copy a reader meets left the run green | **seven (site, anchor) pairs**, each checked in the heading region a reader meets it in; multiplicity elsewhere is printed and has no vote | **2 of 7** fire against the checker at `HEAD`; **7 of 7** fire now. **3 of 3** non-site mutations stay silent |
+| **3** | C4 was a **presence test** over a document that writes 3 of its 5 anchors more than once — deleting the copy a reader meets left the run green | **seven (site, anchor) pairs**, each checked in the heading region a reader meets it in; multiplicity elsewhere is printed and has no vote | **2 of 7** fire against the checker as it stood before this ticket; **7 of 7** fire now. **3 of 3** non-site mutations stay silent |
 
 **And the strongest evidence is not mine.** mg-6cb9's own `a1_bothways.py`, **unmodified**, re-run
 against the repaired tree: `A1 TOTAL BAD` **1 → 0**; **Q2** — the prediction that *was* finding F3
@@ -32,7 +32,13 @@ diff` compared before and after so the tree they measure is the tree that ships.
 says which, why, and what measurement separates the two readings.
 
 **Nothing retreated. 0 mathematics disturbed. 3 of this instrument's own predictions were wrong
-and are kept as written** (`OUTCOMES.md`).
+and are kept as written, and 7 defects in this instrument are recorded** (`OUTCOMES.md`) — **three
+of them the very classes this ticket repairs**, committed by the instrument repairing them: a
+comparison anchored to `HEAD` that stopped comparing the moment the repair landed (both such
+comparisons are now pinned to `b6bc2ef`, with an assertion that the pin does not already carry
+the repair); a self-test piped through `tee`, so a red self-test left the runner exiting 0; and a
+`git status --porcelain` restore contract that could not see a probe fail to restore an
+already-modified file.
 
 ---
 
@@ -150,7 +156,7 @@ E2 TOTAL BAD: 0
 
 **3 of 3.** And the deletion test: remove the block — one unit, 20 lines, counted from the patch —
 and the output disappears from all three runs, with each runner still exiting 0. The self-test
-asserts the strong form: `unwire(runner)` is **byte-identical to `git show HEAD:`** for all three,
+asserts the strong form: `unwire(runner)` is **byte-identical to `git show b6bc2ef:`** for all three,
 so *the wiring is a pure addition* is a measurement rather than a claim.
 
 `code/species_extent_d633/run_all.sh` already called the check and was **not** given a second
@@ -195,7 +201,7 @@ others from it; failing that, check at the reader-facing site.
   reader-facing and neither is the other's copy: the front matter tells a reader what the
   instrument is; §11 is the command a reader runs.
 
-| anchor | copies | declared site(s) | delete that copy — at `HEAD` | now |
+| anchor | copies | declared site(s) | delete that copy — before | now |
 |---|---|---|---|---|
 | names its target | 1 | front matter | 1 | **1** |
 | names the audit | **19** | front matter | **0** | **1** |
@@ -203,7 +209,7 @@ others from it; failing that, check at the reader-facing site.
 | records `2 of 45` | **3** | §2.1; §11 REPRODUCE | **0**, **0** | **1**, **1** |
 | records what it did NOT repair | 1 | §10's heading | 1 | **1** |
 
-**2 of 7 at `HEAD`; 7 of 7 now.** The copy counts are printed in the run because they are the
+**2 of 7 before the repair; 7 of 7 now.** The copy counts are printed in the run because they are the
 reason: **an anchor with 19 copies was the least covered of the five.**
 
 **And it is wrong in the other direction too, or it would just be a stricter presence test.**

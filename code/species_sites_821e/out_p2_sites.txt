@@ -4,11 +4,14 @@ P2a  DELETE THE COPY A READER MEETS -- ONE SITE AT A TIME
 ==============================================================================
 
   Each row deletes ONE anchor from ONE heading region and leaves every
-  other copy in the file untouched.  `HEAD` is `check_doc.py` as
-  committed before this ticket, run from the same directory against the
-  same mutated document: a presence test over the whole file.
+  other copy in the file untouched.  `was` is `check_doc.py` as
+  committed at b6bc2ef, BEFORE this ticket -- run from the same
+  directory against the same mutated document: a presence test over
+  the whole file.  The ref is PINNED and not `HEAD`, because against
+  `HEAD` this column stops being a comparison the moment the repair
+  lands and starts measuring the repair against itself.
 
-  id   anchor                           site                   HEAD   now    verdict
+  id   anchor                           site                   was    now    verdict
   S1   names its target                 front matter           1      1      FIRES
   S2   names the audit                  front matter           0      1      FIRES
   S3   names the instrument             front matter           0      1      FIRES
@@ -17,8 +20,8 @@ P2a  DELETE THE COPY A READER MEETS -- ONE SITE AT A TIME
   S6   records the missed predictions   section 11 REPRODUCE   0      1      FIRES
   S7   records what it did NOT repair   section 10's heading   1      1      FIRES
 
-  2 of 7 fired at HEAD.  7 of 7 fire now.
-  The rows where HEAD is 0 are mg-6cb9's F3: an anchor with more copies
+  2 of 7 fired before the repair.  7 of 7 fire now.
+  The rows where `was` is 0 are mg-6cb9's F3: an anchor with more copies
   was LESS covered, because the surviving copies stood in for the one a
   reader had lost.
 
@@ -39,10 +42,10 @@ P2b  THE OTHER DIRECTION -- and the one case a presence test caught
   And the case the presence test DID catch -- every copy deleted.  Both
   checkers must fire; this is the only mutation the old one could see.
 
-  S1   every copy of `OneThird-Species-Hopf-Monoids-Whe HEAD 1, now 1  both fire -- ok
-  S2   every copy of `mg-a61f`                          HEAD 1, now 1  both fire -- ok
-  S3   every copy of `code/species_repair_6f61`         HEAD 1, now 1  both fire -- ok
-  S5   every copy of `2 of 45`                          HEAD 1, now 1  both fire -- ok
+  S1   every copy of `OneThird-Species-Hopf-Monoids-Whe was 1, now 1  both fire -- ok
+  S2   every copy of `mg-a61f`                          was 1, now 1  both fire -- ok
+  S3   every copy of `code/species_repair_6f61`         was 1, now 1  both fire -- ok
+  S5   every copy of `2 of 45`                          was 1, now 1  both fire -- ok
 
 
 ==============================================================================
