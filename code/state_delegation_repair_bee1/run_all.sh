@@ -32,7 +32,19 @@ python3 code/state_delegation_repair_bee1/battery_bee1.py
 echo
 
 echo "############################################################################"
-echo "# 4. THE CONTROL AND ITS OWN DEMONSTRATION — both must still hold."
+echo "# 4. THE THREE PREDECESSOR INSTRUMENTS, RE-RUN UNMODIFIED.  Nothing this"
+echo "#    repair did may weaken what survived: mg-babf's 15, mg-2216's 14, and"
+echo "#    mg-218d's check of COVERAGE.md against the code."
+echo "############################################################################"
+python3 code/state_control_audit_babf/mutations_babf.py
+echo
+python3 code/state_control_audit_2216/mutation_battery.py
+echo
+python3 code/state_layer_audit_218d/coverage218d.py
+echo
+
+echo "############################################################################"
+echo "# 5. THE CONTROL AND ITS OWN DEMONSTRATION — both must still hold."
 echo "############################################################################"
 python3 code/state_landing_control_2da3/presentation.py > /dev/null && \
     echo "presentation.py self-test: exit 0"

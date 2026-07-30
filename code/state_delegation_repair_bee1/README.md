@@ -35,7 +35,31 @@ the certified set**. Ten of sixteen mutations changed what a reader is shown and
 | `battery_bee1.py` | 7 new mutations at the boundary of the new mechanism, each carrying **the exit code predicted before the run**. Three are predicted **silent**: they are the stated bound, tested |
 | `out_globalpos.txt`, `out_battery_bee1.txt` | committed runs of the two |
 | `out_layers_bee1.txt` | **mg-218d's 16-mutation battery, re-run UNMODIFIED** — the evidence, and the only rows here that were not written by the author of the repair |
-| `run_all.sh` | all four sections |
+| `out_battery_babf_bee1.txt`, `out_battery_2216_bee1.txt` | mg-babf's 15 and mg-2216's 14, re-run unmodified against the repaired instrument: **11 of 11 caught / 0 silent misses** and **10 caught / 0 missed / 2 tolerated / 2 noisy**, identical to what mg-4acd and mg-218d each measured |
+| `out_coverage_bee1.txt` | mg-218d's `coverage218d.py`, re-run unmodified: **40 of 40** claims in `COVERAGE.md` still hold against the code, and **3 of 3** uncontrolled layers are now NAMED there — it measured 0 of 3 against `e4426c9` |
+| `run_all.sh` | all five sections |
+
+## What the re-run of mg-218d's battery shows
+
+Re-run **unmodified** — not one line of `code/state_layer_audit_218d/` is touched by this
+repair. Its silent rows go from **ten of sixteen to six of sixteen**:
+
+| row | mg-218d measured | after mg-bee1 |
+|---|---|---|
+| `T1` a cited section deleted from the target | 0 | **1 (FAIL)** |
+| `T2` the F1 repair inverted in the target | 0 | **2 (MOVED)** |
+| `T3` the target emptied | 0 | **1 (FAIL)** |
+| `I2` `norm()` widened to `.strip()` | 0 | **1 (FAIL)** |
+| `P2` `P3` `P4` `P6` cross-section context | 0 | 0 — **stated, not closed** |
+| `S1` a contradicting near-copy added | 0 | 0 — **open, and named** |
+| `I1` an entry dropped from `CERTIFIED` | 0 | 0 — **open, and named** |
+| `L3a`–`L3d`, `P1`, `P5` | fire | fire, unchanged |
+
+Those four rows now read as *"predicted 0, got non-zero"* in `out_layers_bee1.txt`. **That
+is the finding landing, not a regression in mg-218d's battery** — its predictions were
+written against `e4426c9` and were correct against `e4426c9`. Its own frozen run stays at
+`code/state_layer_audit_218d/out_layers.txt`, and this one is a separate file, so neither
+overwrites the other's evidence.
 
 ## The predict-first discipline is mg-218d's and is kept
 

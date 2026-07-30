@@ -41,6 +41,21 @@
 # presentation.py is a MODEL of a renderer, not a renderer, and that is the layer nothing
 # above it now controls.  Read COVERAGE.md first.
 #
+# mg-bee1 REPAIRED THE STATEMENT AND CLOSED WHAT A CERTIFIED REGION POINTS AT.  mg-218d
+# audited mg-4acd with a real renderer in the room and the MECHANISM HELD — 140 of 140
+# comparisons over marked and markdown-it, including the M12/M13 reversal COVERAGE.md itself
+# calls unverified — but ten of sixteen mutations changed what a reader is shown and exited 0.
+# Two findings.  (1) The property was published UNQUALIFIED and is FALSE as published: the
+# same retraction paragraph, moved ONE LINE EARLIER across a heading, goes from exit 2 to
+# exit 0.  It is restated to its bound wherever it is published, and the document-global
+# ordinal that would close those rows is MEASURED and rejected in
+# code/state_delegation_repair_bee1/: it would re-baseline on 83% of the commits that have
+# touched STATE.md and STILL leave the unqualified sentence false.  (2) The certified ledger
+# cell DELEGATES its content to docs/state-history/attempt-mg-276d.md, citing five sections
+# by name; deleting one, inverting the F1 repair there, and emptying the file all exited 0.
+# SECTION 2c is that repair — what is delegated is what is cited.  Section 0 of
+# delta_control.py checks norm() behaviourally against its own published rule.
+#
 # SECTION 0 is presentation.py's own self-test.  It checks the MODEL against its own stated
 # subset — every claim the header makes about which constructs are modelled and which are
 # default-denied has a case — and it emphatically does NOT check the model against a real
