@@ -1,0 +1,65 @@
+==============================================================================
+mg-1953 REPAIR 2 -- THE REPLACEMENT SENTENCES, EACH MEASURED.
+==============================================================================
+
+------------------------------------------------------------------------------
+R2  E8 / row H.  Document: 'A PROPER SUBMONOID OF OURS'.
+    Replacement: the word-to-move map is a monoid HOMOMORPHISM whose
+    IMAGE is a submonoid of F(P), proper exactly for n >= 3.
+------------------------------------------------------------------------------
+  n  classes        hom  img<=F(P) img closed    1 in img      PROPER   injective band>|F(P)|   img==F(P)
+  2        2     2 of 2     2 of 2     2 of 2      2 of 2      0 of 2      0 of 2      2 of 2      2 of 2
+  3        5     5 of 5     5 of 5     5 of 5      5 of 5      5 of 5      0 of 5      3 of 5      0 of 5
+  4       16   16 of 16   16 of 16   16 of 16    16 of 16    16 of 16     0 of 16     0 of 16     0 of 16
+  5       63   63 of 63   63 of 63   63 of 63    63 of 63    63 of 63     0 of 63     0 of 63     0 of 63
+
+    The antichain in detail -- the case the document's own cell names
+    'the free LRB' while also calling it a submonoid:
+  n      |band| (free LRB)         |F(antichain)|   band > F(P)?
+  2                      5                      3            YES
+  3                     16                     13            YES
+  4                     65                     75             no
+  5                    326                    541             no
+
+    |band| = sum_k n!/(n-k)! (A000522, the free left regular band on
+    n generators); |F(antichain)| = the ordered Bell number A000670.
+    A set strictly larger than F(P) cannot be a submonoid of F(P).
+
+------------------------------------------------------------------------------
+R3  'STRICTLY SHARPER' vs 'strictly more informative'.  Both sides
+    run at EVERY level: the repo's triangular solve, and Brown's
+    closed form.  Sharper would need a level where they differ.
+------------------------------------------------------------------------------
+  n  classes    levels  cum.levels   disagreeing levels     posets bad   levels named 0
+  2        2         4           4               0 of 4         0 of 2           1 of 4
+  3        5        24          28              0 of 24         0 of 5         11 of 24
+  4       16       206         234             0 of 206        0 of 16       125 of 206
+  5       63      2353        2587            0 of 2353        0 of 63     1674 of 2353
+  6      318     37029       39616           0 of 37029       0 of 318   28988 of 37029
+
+    0 disagreeing levels anywhere: Brown's answer IS the repo's
+    answer.  What Theorem 2 adds is that the last column is known
+    BEFORE the solve -- more informative, not sharper.
+
+------------------------------------------------------------------------------
+R4  The populations behind the corrected arithmetic.
+------------------------------------------------------------------------------
+  n   classes     moves    levels  product pairs    cum.classes
+  1         1         1         1              1              1
+  2         2         5         4             13              3
+  3         5        37        24            321              8
+  4        16       397       206          13853             24
+  5        63      5757      2353         922073             87
+  6       318    117169     37029       92369333            405
+
+    The three populations the corrected sentences are about:
+      n <= 5, ALL classes incl. n=1 (the chains_in_JP table's own
+      range):  87 classes,  936261 product pairs
+        -- the document said 63 classes and 922 073 pairs, which
+           are the n = 5 ROW: 63 and 922073
+      n = 2..6 (identify_lattice's own range, E3's population):  404 classes
+        -- the document said 405, which is n = 1..6: 405
+      n = 3..6 (P2's population; P2 is n/a for n < 3):  402 classes
+        -- the document's section 6 item 5 said 405 there too
+
+==============================================================================
