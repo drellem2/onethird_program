@@ -1,0 +1,75 @@
+mg-218d — THE LAYER BATTERY.  Mutations at the layers mg-4acd does NOT claim.
+
+THE QUESTION THIS BATTERY ASKS is not "does the presentation record work?".  Four
+iterations of this control have each closed their predecessor's gap and exposed a new
+layer, so the useful question is WHICH LAYER IS UNCONTROLLED NOW.  Re-running mg-babf's
+four is necessary and not sufficient: after mg-4acd they are the author's known-answer
+set.  This battery is built at the layers ABOVE the one that was just closed.
+
+THE STACK, named so that a verdict can be attached to each layer:
+
+    L0  INSTRUMENT        the code and the baked-in constants that define every layer below
+    L1  FILE SELECTION    which files are read at all — and what the certified text POINTS AT
+    L2  REGION SET        which regions inside those files are certified
+    L3  REGION LOCATION   which bytes are the region                     (locator)
+    L4  PRESENTATION      is a reader shown them, and where              (mg-4acd)
+    L5  BYTE CONTENT      are these the certified bytes                  (mg-7870)
+    L6  NORMALISATION     the equivalence rule under which L5 is asked   (mg-7870/mg-babf)
+
+Every mutation below carries the exit code THIS AUDIT PREDICTED before it was run, so a
+row that surprised me is visible as a row that surprised me.  A battery whose predictions
+are written after the run is a battery that cannot be wrong.
+
+    python3 code/state_layer_audit_218d/layers218d.py
+
+BASELINE: the control on the unmutated tree -> exit 0 (PASS)
+
+==========================================================================================
+mg-218d LAYER BATTERY — 16 mutations at L0-L4
+'expected' is what THIS AUDIT PREDICTED BEFORE RUNNING, not what the instrument claims.
+==========================================================================================
+  OK  L3a   L3 region location     a certified region DELETED outright                            expected exit 1    got exit 1 (FAIL)
+  OK  L3b   L3 region location     the locator MARKER reworded, block still in force              expected exit 1    got exit 1 (FAIL)
+  OK  L3c   L3 region location     the ledger row's attempt id renamed                            expected exit 1    got exit 1 (FAIL)
+  OK  L3d   L3 region location     a certified region duplicated verbatim                         expected exit 1    got exit 1 (FAIL)
+  OK  P1    L4 presentation        B07 restated: retraction INSIDE the certified section          expected exit 2    got exit 2 (MOVED)
+  OK  P2    L4 presentation        THE SAME PARAGRAPH one line earlier, across the heading        expected exit 0    got exit 0 (PASS)
+  OK  P3    L4 presentation        document-wide retraction in an unrelated section               expected exit 0    got exit 0 (PASS)
+  OK  P4    L4 presentation        a new 'READ THIS FIRST — superseded' section near the top      expected exit 0    got exit 0 (PASS)
+  OK  P5    L4 presentation        POSITIVE CONTROL: the README's H1 retitled                     expected exit 2    got exit 2 (MOVED)
+  OK  P6    L4 presentation        STATE.md: retraction of the Attempt index, other section       expected exit 0    got exit 0 (PASS)
+  OK  S1    L2 region set          a contradicting near-copy of a certified block added           expected exit 0    got exit 0 (PASS)
+  OK  T1    L1 reference target    a section the certified cell links to BY NAME deleted          expected exit 0    got exit 0 (PASS)
+  OK  T2    L1 reference target    the F1 repair INVERTED in the file the cell points at          expected exit 0    got exit 0 (PASS)
+  OK  T3    L1 reference target    that file emptied (7 links from the certified cell)            expected exit 0    got exit 0 (PASS)
+  OK  I1    L0 instrument          one entry deleted from CERTIFIED (ten regions -> nine)         expected exit 0    got exit 0 (PASS)
+  OK  I2    L0 instrument          the normalisation widened to .strip() (mg-babf's rule undone)  expected exit 0    got exit 0 (PASS)
+
+  16 of 16 mutations behaved as this audit predicted; 0 did not.
+
+==========================================================================================
+PER-LAYER VERDICT — which layers of the stack fire, read off the rows above
+==========================================================================================
+  L0 instrument          2 mutations: 0 fire, 2 exit 0
+                         silent: I1, I2
+  L1 reference target    3 mutations: 0 fire, 3 exit 0
+                         silent: T1, T2, T3
+  L2 region set          1 mutations: 0 fire, 1 exit 0
+                         silent: S1
+  L4 presentation        6 mutations: 2 fire, 4 exit 0
+                         silent: P2, P3, P4, P6
+  L3 region location     4 mutations: 4 fire, 0 exit 0
+
+10 of 16 mutations changed what a reader is shown and exited 0:
+    P2  L4 presentation        THE SAME PARAGRAPH one line earlier, across the heading
+    P3  L4 presentation        document-wide retraction in an unrelated section
+    P4  L4 presentation        a new 'READ THIS FIRST — superseded' section near the top
+    P6  L4 presentation        STATE.md: retraction of the Attempt index, other section
+    S1  L2 region set          a contradicting near-copy of a certified block added
+    T1  L1 reference target    a section the certified cell links to BY NAME deleted
+    T2  L1 reference target    the F1 repair INVERTED in the file the cell points at
+    T3  L1 reference target    that file emptied (7 links from the certified cell)
+    I1  L0 instrument          one entry deleted from CERTIFIED (ten regions -> nine)
+    I2  L0 instrument          the normalisation widened to .strip() (mg-babf's rule undone)
+
+No mutation surprised this audit: every predicted exit code was the observed one.

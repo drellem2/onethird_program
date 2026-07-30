@@ -1,0 +1,114 @@
+mg-218d — THE MODEL AGAINST A REAL RENDERER.  The layer mg-4acd named as uncontrolled.
+
+WHAT THIS TESTS.  `presentation.py` is, in its own words, "a MODEL of a renderer, not a
+renderer ... it is NOT measured against an implementation, because there is none here to
+measure against", and COVERAGE.md ends the paragraph: "the way to test it is to install a
+GFM renderer and compare."  This audit did that.  `marked` (GFM) and `markdown-it`
+(CommonMark + the GFM table extension) are installed OUTSIDE the repo and the comparison
+is run against both, because agreeing with one renderer is agreeing with one renderer.
+
+    npm install --prefix "$DIR" marked markdown-it
+    NODE_PATH="$DIR/node_modules" python3 code/state_layer_audit_218d/render218d.py
+
+THE COMPARISON.  For each certified region a SENTINEL is chosen: the longest run of plain
+characters in it that carries no inline markdown, so it survives rendering unchanged.  The
+rendered HTML is walked with an element stack, and the sentinel is classified by WHERE it
+lands — prose, a table cell, a code sample, or nowhere at all.  That classification is set
+beside the `state` the instrument PRINTS for the same region.  Agreement is evidence the
+model is right about this document; a disagreement is the failure mode the model's own
+header names.
+
+WHAT IT CANNOT DO.  Two renderers agreeing on ~120 blocks of two documents is not a proof
+that the model matches GFM in general; it is a measurement over the material the control
+actually certifies, plus eight mutations.  It is stated that way and not more.
+
+RENDERER VERSIONS PINNED IN THIS RUN: marked 18.0.7, markdown-it 14.3.0, node v22.23.1
+
+================================================================================================
+A. AT REST — the instrument's printed `state` against two real renderers
+================================================================================================
+  OK  cell.tree        model=gfm-table-row    marked=table-cell                         markdown-it=table-cell
+  OK  readme.F2        model=rendered         marked=prose                              markdown-it=prose
+  OK  readme.F1        model=rendered         marked=prose                              markdown-it=prose
+  OK  readme.B1        model=rendered         marked=prose                              markdown-it=prose
+  OK  readme.B1.A3     model=rendered         marked=prose                              markdown-it=prose
+  OK  readme.index     model=rendered         marked=prose                              markdown-it=prose
+  OK  readme.A1        model=rendered         marked=prose                              markdown-it=prose
+  OK  readme.A1.7870   model=rendered         marked=prose                              markdown-it=prose
+  OK  readme.A1.4acd   model=rendered         marked=prose                              markdown-it=prose
+
+  9 of 9 certified regions: BOTH renderers put the region where the model says it is.
+  (Nine, not ten: `cell.base` is a blob at b68db5d^ and not a file in the tree,
+   so there is nothing on disk for a renderer to read.  It is the same row of
+   the same table as `cell.tree` at an earlier revision.)
+
+================================================================================================
+A2. EVERY BLOCK IN BOTH FILES — not only the certified ten.  The model resolves
+    the whole document; a model that is right about ten regions and wrong about
+    the document is a model that will be wrong about the eleventh region.
+================================================================================================
+  123 of 123 compared blocks agree with BOTH renderers; 0 disagree, and every one of them is printed above.
+  Population: 143 blocks in the two files; 123 carried a sentinel that could be compared, 20 skipped — no markup-free run; 0 skipped — sentinel not unique in the source.
+
+================================================================================================
+B. UNDER MUTATION — does the model's verdict match what a renderer does?
+   `control` is the exit code delta_control.py returned; `model` is the `state`
+   it printed for that region; the two right-hand columns are the renderers.
+================================================================================================
+  OK  B04  block moved under 'Appendix Z ... not in force'
+        region readme.A1.7870   control exit 2   model state: rendered
+        model predicts a reader sees it as: prose
+        marked       actually renders it as: prose
+        markdown-it  actually renders it as: prose
+  OK  B05  block wrapped in a ```text fence
+        region readme.F1        control exit 1   model state: fenced-code
+        model predicts a reader sees it as: code-sample
+        marked       actually renders it as: code-sample
+        markdown-it  actually renders it as: code-sample
+  OK  B06  block wrapped in an HTML comment
+        region readme.F1        control exit 1   model state: html-comment
+        model predicts a reader sees it as: ABSENT (a reader is shown nothing)
+        marked       actually renders it as: ABSENT (a reader is shown nothing)
+        markdown-it  actually renders it as: ABSENT (a reader is shown nothing)
+  OK  B07  retraction immediately above the block
+        region readme.A1.7870   control exit 2   model state: rendered
+        model predicts a reader sees it as: prose
+        marked       actually renders it as: prose
+        markdown-it  actually renders it as: prose
+  OK  M12  60 lines inserted above the certified row
+        region cell.tree        control exit 1   model state: pipes-in-a-paragraph (no header + delimiter row above it)
+        model predicts a reader sees it as: prose
+        marked       actually renders it as: prose
+        markdown-it  actually renders it as: prose
+  OK  M13  the certified row moved to the end of the file
+        region cell.tree        control exit 1   model state: pipes-in-a-paragraph (no header + delimiter row above it)
+        model predicts a reader sees it as: prose
+        marked       actually renders it as: prose
+        markdown-it  actually renders it as: prose
+  OK  P1   mg-218d: retraction INSIDE the section
+        region readme.A1.7870   control exit 2   model state: rendered
+        model predicts a reader sees it as: prose
+        marked       actually renders it as: prose
+        markdown-it  actually renders it as: prose
+  OK  P2   mg-218d: the SAME line one line earlier
+        region readme.A1.7870   control exit 0   model state: rendered
+        model predicts a reader sees it as: prose
+        marked       actually renders it as: prose
+        markdown-it  actually renders it as: prose
+
+  8 of 8 mutations: BOTH renderers did what the model said they would.
+
+================================================================================================
+VERDICT ON THE NAMED RESIDUAL RISK
+================================================================================================
+  140 of 140 comparisons agree, over 2 independent renderers.
+  This does not establish that presentation.py matches GFM in general.  It is a
+  measurement over the regions this control certifies, every comparable block of
+  the two files it reads, and eight mutations — and that is the whole of what it
+  establishes.  A construct absent from these two documents is not tested here.
+
+  The two rows that matter most are M12 and M13: COVERAGE.md reverses mg-2216's
+  published tolerance for them, argues the reversal from the GFM table rules,
+  and says plainly that the argument is NOT verified against a renderer and
+  that 'if a renderer disagrees, mg-2216 was right and these two rows are
+  noise'.  They are verified above.
