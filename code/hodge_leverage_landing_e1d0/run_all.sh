@@ -30,12 +30,27 @@
 #   this landing's parent and passes at this landing.  They are the reason the
 #   run is worth committing: they score the repair rather than describing it.
 #
-# So this transcript regenerates byte-identically AT THIS COMMIT (verified, two
-# runs) and will NOT after later commits land on either file -- the same caveat
-# mg-7d5a recorded for its own scanner.  A GATE line that stops passing is a
-# regression, not a stale artifact; that is what it is for.
+# REPRODUCTION CONTRACT, stated in terms of the FILES READ rather than a commit
+# (⚠️ REWRITTEN 2026-07-30, mg-f922 findings E and F, landed by mg-8e30).  This
+# transcript regenerates byte-identically for any tree in which STATE.md, the
+# deliverable and docs/state-history/attempt-mg-a3d4.md are unchanged, and the
+# fixed history rows regenerate at any commit whatever, because git does not
+# move.  It embeds no sha of its own: the previous version printed
+# `git rev-parse --short HEAD` into its T1 table, which made
+# "regenerates at THIS COMMIT" false the moment it was committed.  A GATE line
+# that stops passing is a regression, not a stale artifact; that is what it is
+# for.
+#
+# ⚠️ AND THE RUNNER REPORTS THE VERIFIER'S STATUS.  It used to pipe into `tee`,
+# so under `set -e` the pipeline's status was tee's and the runner exited 0
+# while the verifier exited 1 -- which is how a transcript recording 0 refuted
+# came to be committed alongside a run that refuted one.  It now redirects,
+# captures the status and exits with it.
 set -e
 cd "$(dirname "$0")"
 
 echo "== mg-e1d0: this landing's claims, re-measured from git and the tree =="
-python3 verify_landing.py | tee out_verify.txt
+status=0
+python3 verify_landing.py > out_verify.txt || status=$?
+cat out_verify.txt
+exit "$status"

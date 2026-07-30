@@ -419,7 +419,22 @@ CELL_DELTA = 173
 # restructure convention — which is why the growth is 1630 and not roughly twice that.
 # This constant is the ONLY figure this landing moved; every content digest and every
 # presentation record above is untouched.
-BIGGEST_STRIPPED = 10070
+#
+# RE-BASELINED AGAIN 2026-07-30 by mg-8e30 (landing mg-f922 B/C), 10070 -> 11384 characters,
+# per the same instruction.  WHICH COMMIT MOVED IT: mg-8e30's own, and nothing else — the
+# mg-a3d4 cell was 10070 at every commit from bbe83b5 to f4eaea6.  WHY: the cell's disclosure
+# of mg-d39d's A5 printed −875 as the CURRENT cell-only gap, and that was the figure at
+# `bbe83b5^`; `bbe83b5` added +1630 characters to the cell it was measuring, so the gap was
+# +755 the moment the sentence was committed and the companion "flipped sign" claim was
+# inverted (mg-f922 findings B and C).  The correction restates the figure from the
+# POST-commit state and says so at the figure.  +1314 characters, +13.0%.
+#
+# AND NOTE WHAT THIS CONSTANT IS, because this landing is about exactly that: it is a
+# measurement of a cell, kept in a file the same commit can edit independently.  Whoever
+# moves it must measure the cell AFTER their own edit to it — re-baselining from a run taken
+# before the edit reproduces mg-f922 B one layer down.  This value was taken from the tree
+# with every document edit of mg-8e30 already applied.
+BIGGEST_STRIPPED = 11384
 GAP_CHARS = 399                # counterexample -> F1 sentence, inside row :135's cell
 GAP_WORDS = 72
 
