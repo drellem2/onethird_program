@@ -6,12 +6,30 @@ This file is that statement. It is kept beside the instrument and is regenerated
 whenever `CERTIFIED` changes.
 
 Landed by **mg-7870**, repairing the two BROKEN items in **mg-2216**'s audit of
-**mg-2da3** / `bf17716`.
+**mg-2da3** / `bf17716`. Extended by **mg-4acd**, repairing B1 in **mg-babf**'s audit of
+mg-7870 / `e924590` — *the boundary moved, so the statement moved with it*.
 
 ## The mechanism
 
-Each certified region carries a **SHA-256 of its normalised bytes**, compared against a
-constant baked into `delta_control.py`. Substring presence no longer certifies anything.
+Each certified region carries **two** digests, compared against constants baked into
+`delta_control.py`. Substring presence no longer certifies anything.
+
+| digest | question it answers | added by |
+|---|---|---|
+| **content** — SHA-256 of the region's normalised bytes | *are these the certified bytes?* | mg-7870 |
+| **presentation** — SHA-256 of the region's presentation record | *is a reader shown them, in the same place?* | mg-4acd |
+
+> **Why a second digest rather than a wider first one.** mg-babf probed the content digest
+> from a standing start and it held: mg-2216's five survivors were re-implemented from their
+> published prose and **all five fire**, and five independent probes of the normalisation all
+> landed correctly. What mg-babf found instead is that the blind spot had **moved one layer
+> up, into the LOCATOR**. Four mutations changed **no certified byte** and exited **0**: a
+> certified block moved verbatim under *"Appendix Z … nothing below is in force"*; the F1
+> block wrapped in a code fence; **the same block wrapped in an HTML comment, absent from
+> every rendered view of the README**; and a *"RETRACTED … is void"* paragraph inserted
+> immediately above a certified block. A digest of a *located* region cannot see any of them,
+> because none of them is inside the region. The property the second digest certifies is:
+> **a mutation that changes what a reader SEES must change a digest.**
 
 > **Why the mechanism changed rather than the list.** The first version certified by
 > asserting five chosen substrings were present, and mg-2216 got **8 of 14** independent
@@ -41,7 +59,30 @@ whole of the tolerance, and it is why mg-2216's M04 correctly exits 0.
 On this material `.strip()` and `.strip(" \t\r\n")` agree, so adopting the explicit rule
 moved no published number: the cell is still 7,876 characters stripped / 7,878 raw.
 
-## Digested regions — 9
+## The presentation record — the whole of it
+
+    P(region) = state | heading | position | presented
+
+| field | what it is | which mutation it closes |
+|---|---|---|
+| `state` | `rendered`, or `fenced-code` / `html-comment` / `html-block`; for the ledger cell, whether its line renders as a **GFM table row** and how many of its fields GFM shows | the fence, and the HTML comment |
+| `heading` | the ATX heading path in force where the region sits | the move to *"Appendix Z"* |
+| `position` | the region's ordinal among the **blocks** of its section, and that section's block count | the retraction inserted above |
+| `presented` | SHA-256 of the region's text with block-quote markers removed | (the reader's-eye view of the bytes) |
+
+Every field is **printed in full** by `delta_control.py` section 2b, so any of these digests
+can be recomputed by hand. A region whose `state` is not `rendered` / `gfm-table-row` is a
+**FAIL**, not a MOVED: certified bytes that nobody is shown are damage, not drift.
+
+`presentation.py`, beside this file, is the whole mechanism and states its closure argument
+in its own header. The short form: **the content digest already fires on every edit INSIDE a
+region, so the presentation layer only has to answer for edits OUTSIDE it** — and an outside
+edit can only change how a region is presented by changing its container, its heading, or its
+position. Three block-level facts, not a renderer.
+
+## Digested regions — 10
+
+Each carries **both** digests.
 
 | id | region | chars after `N` |
 |---|---|---|
@@ -54,6 +95,12 @@ moved no published number: the cell is still 7,876 characters stripped / 7,878 r
 | `readme.index` | the index note carrying the moved cell figure | 310 |
 | `readme.A1` | the A1 correction block (`b68db5d`'s headline sentence) | 3,060 |
 | `readme.A1.7870` | the mg-2216 / mg-7870 correction to that A1 block | 2,736 |
+| `readme.A1.4acd` | the mg-babf / mg-4acd correction to that A1 block | 3,695 |
+
+*mg-babf B4: the README sentence saying the set was "eight" was wrong when it was written —
+the code, this file and mg-7870's own commit message all said nine and enumerated nine. The
+correction is recorded in `readme.A1.4acd` rather than made silently inside another agent's
+certified block.*
 
 The certified set is **wider** than the scope the A1 block published — *"row `:135`'s F1
 repair and this file's F1 / F2 / B1 blocks"* — because mg-2216 falsified two statements that
@@ -92,18 +139,103 @@ This instrument certifies **`b68db5d`'s delta**, not the two files it touched.
   is `code/state_audit_6a2f/run_all.sh`'s job; that battery is revision-pinned on purpose,
   is not touched by this repair, and is byte-identical across it.
 
+### Not covered by the PRESENTATION layer either (mg-4acd)
+
+The whole point of a bounded coverage statement is that the next auditor tests the boundary.
+mg-babf tested the last one and found it was silent about everything the **locator** decides.
+So this is what the second digest does *not* decide:
+
+- **Inline presentation.** `presentation.py` resolves **block** structure only. Emphasis,
+  links, code spans and entities inside a region are certified as **bytes** by the content
+  digest and are never rendered or compared as rendered. Nothing is lost by this: an edit to
+  inline markup is an edit inside the region, and the content digest already fires on it.
+- **The row's index within the ledger table**, and any region's absolute line number.
+  Position is certified as an ordinal among the **blocks of a section**, never as a row or
+  line number, so **deleting an unrelated ledger row still exits 0** — as it did before, and
+  deliberately.
+- **Anything below the block level of a table.** Column alignment, cell wrapping, the width a
+  cell renders at: not modelled, not certified.
+- **Whether the model matches a real renderer.** See the cost below. This is the one that
+  matters.
+
+### The cost of the mechanism, stated here because it is a trade
+
+mg-babf's brief proposed digesting the **rendered text** and named the cost: a dependency on
+a renderer, under which *a renderer upgrade becomes a false positive*. **The direction is
+taken. The mechanism is not**, for three reasons:
+
+1. **No renderer is available.** This box has no `markdown`, `markdown_it`, `mistune`,
+   `commonmark` or `cmarkgfm` module and no `pandoc`, `cmark` or `cmark-gfm` binary. A
+   control that cannot run is not a control.
+2. **Every instrument in this cluster imports nothing.** A certification whose verdict
+   depends on a third-party version is a certification about that version too.
+3. **The named cost is real.** A renderer upgrade re-baselines every region at once, and a
+   control re-baselined wholesale stops being read.
+
+**The cost taken instead is not smaller, only different, and it is the new uncontrolled
+layer: `presentation.py` is a MODEL of a renderer, not a renderer.** Where model and renderer
+disagree, this control is wrong. The model is argued from the CommonMark 0.31 block rules and
+the GFM table extension; it is **not measured against an implementation**, because there is
+none here to measure against.
+
+What bounds the damage is **default-deny**, and it is checked over both files in full by
+`delta_control.py` section 8:
+
+| guard | at rest | on trip |
+|---|---|---|
+| block constructs outside the declared subset (setext underlines, indented code, tabs, CR) | **0** | exit 2 |
+| raw-HTML tokens in text presented as prose, code fences and code spans masked | **0** | exit 2 |
+
+That second guard is one rule over the whole file rather than a list of tags, and it is
+deliberately wider than "things that suppress": it fires on `<details>`, on
+`<span style="display:none">`, on a bare `<div>` — mechanisms that change what a reader sees
+without suppressing anything, and which no enumeration would have contained.
+
+**What is NOT bounded is the model being confident and wrong** — a construct it classifies as
+`rendered` that a real renderer suppresses, or the reverse. That is where the blind spot has
+moved to, it is named here rather than left to be discovered, and the way to test it is to
+install a GFM renderer and compare.
+
+### A published tolerance reversed, deliberately
+
+mg-2216's **M12** (60 lines inserted above the certified row) and **M13** (the row moved to
+the end of the file, byte-identical) were declared *tolerate* and now **fire**. Both break the
+ledger table: M12's filler lands inside the table and splits it, so the certified row has no
+delimiter row above it; M13 lifts the row out of the table entirely. Under GFM a run of
+pipe-delimited lines with no delimiter row is a paragraph containing pipes, not a table — so
+under both, the certified cell stops being a cell any reader sees, and the property above
+requires them to fire.
+
+Locating **by attempt id** rather than by line number is unchanged, and still buys what it
+always bought: the instrument does not rot when lines are inserted elsewhere in the file.
+
+**Stated plainly, because it is the weak point: this reclassification is argued from the GFM
+table rules and is not verified against a renderer.** If a renderer disagrees, mg-2216 was
+right and these two rows are noise. Both runs are committed — mg-7870's is left frozen at
+`out_battery_2216_rerun.txt` and the new one is `out_battery_2216_rerun_4acd.txt` — so the
+disagreement is on the record rather than folded away.
+
 ## Evidence
 
 | what | where | result |
 |---|---|---|
-| mg-2216's **independent** 14-mutation battery, re-run unmodified | `out_battery_2216_rerun.txt` | 10 caught, **0 missed**, 4 tolerated by design, 0 noisy |
-| this instrument's own negative control (demonstration, not evidence) | `out_control.txt` | clean 0; NC1–NC3 exit 1; NC4–NC6 exit 2 |
+| **mg-babf's independent 15-mutation battery, re-run unmodified** | `out_battery_babf_rerun.txt` | **11 of 11 expected-catch CAUGHT, 0 SILENT MISSES**, 4 tolerated by design, 0 noisy |
+| mg-2216's independent 14-mutation battery, re-run unmodified | `out_battery_2216_rerun_4acd.txt` | 10 caught, **0 missed**, 2 tolerated by design, 2 noisy (M12/M13 — see the reversal above) |
+| the same, as mg-7870 ran it — **left frozen, no longer reproduces** | `out_battery_2216_rerun.txt` | 10 caught, 0 missed, 4 tolerated, 0 noisy |
+| mg-babf's own run against the pre-repair instrument — **left frozen** | `code/state_control_audit_babf/out_mutations.txt` | 5 of 11 caught, **6 silent misses** |
+| this instrument's own negative control (demonstration, not evidence) | `out_control.txt` | clean 0; NC1–NC3, NC7, NC10 exit 1; NC4–NC6, NC8, NC9 exit 2 |
+| the revision-pinned mg-6a2f battery | `code/state_audit_6a2f/out_audit.txt` | byte-identical, 96,291 bytes; empty diff against `main` |
 
-The battery is the evidence and the negative control is not, for the reason mg-2216 gave:
+The batteries are the evidence and the negative control is not, for the reason mg-2216 gave:
 an instrument whose only evidence of sensitivity is the negative control its own author
-wrote is the defect being repaired, one level up. mg-2216's battery was written **before**
-this repair, by someone else, with its own table parser, and was re-run here **unmodified**.
+wrote is the defect being repaired, one level up. Each battery was written **before** the
+repair it now tests, by someone else, with its own harness and its own table parser, and each
+is re-run here **unmodified**. mg-babf's six silent misses go to **zero**; NC7–NC10 are
+deliberately **not** drawn from mg-babf's list, for the same reason mg-7870's NC5/NC6 were not
+drawn from mg-2216's.
 
-`code/state_control_audit_2216/out_mutations.txt` is a **frozen record of the pre-repair
-instrument** and no longer reproduces — that is the finding landing, not a regression. The
-post-repair run of the same battery is `out_battery_2216_rerun.txt`, here.
+`code/state_control_audit_2216/out_mutations.txt` and
+`code/state_control_audit_babf/out_mutations.txt` are **frozen records of the instrument each
+audit found** and no longer reproduce — that is each finding landing, not a regression. The
+post-repair runs live here, one file per battery per repair, so no run overwrites another's
+evidence.

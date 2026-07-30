@@ -5,6 +5,12 @@
     See "WHY THE MECHANISM CHANGED" and "COVERAGE" below.  The substring checks are still
     here; they no longer carry the certification.
 
+    mg-4acd: EACH REGION NOW CARRIES A SECOND DIGEST, OF WHAT A READER SEES.  The content
+    digest answers "are these the certified bytes?".  It does not answer "is anybody shown
+    them?", and mg-babf got four mutations past it on exactly that gap — including this
+    file's own certified F1 block HTML-commented out of the rendered page.  See "WHAT A
+    READER SEES" below.
+
 WHY THIS EXISTS.  b68db5d's headline evidence sentence is
 
     "I re-ran both: `sh code/state_audit_6a2f/run_all.sh` reproduces out_audit.txt
@@ -81,9 +87,69 @@ are non-zero.  The block markers additionally LOCATE each README region; a block
 cannot be located is a FAIL, so the header line is covered by the locator and by the
 digest, which spans the whole block including it.
 
+WHAT A READER SEES (mg-4acd, repairing mg-babf's B1).
+-----------------------------------------------------
+The digest above was the right move and it is not undone.  What mg-babf found is that the
+blind spot MOVED ONE LAYER UP.  A digest answers *"are these the certified bytes?"* — now
+correctly, on all five of mg-2216's survivors.  The LOCATOR answers *"which bytes are the
+certified ones?"*, and underneath that it was silently answering *"and is anybody shown
+them?"* — a question nothing controlled.  Four mutations changed NO certified byte and
+exited 0:
+
+    a certified block MOVED VERBATIM under "Appendix Z ... nothing below is in force"
+    a certified block wrapped in a ```text FENCE, rendering as a code sample
+    a certified block wrapped in an HTML COMMENT, absent from every rendered view
+    a "RETRACTED ... is void" paragraph inserted immediately ABOVE a certified block
+
+THE PROPERTY NOW CERTIFIED:  A MUTATION THAT CHANGES WHAT A READER SEES MUST CHANGE A
+DIGEST.  Each region carries a second digest, of its PRESENTATION RECORD — an ordered,
+printed-in-full set of four block-level facts:
+
+    state       is the region presented as prose at all, or is it inside a code fence, an
+                HTML comment or a raw HTML block?  (for the ledger cell: does its line
+                render as a GFM table row, and which of its fields does GFM show?)
+    heading     the ATX heading path in force where the region sits
+    position    the region's ordinal among the blocks of its section, and the section's
+                block count
+    presented   sha256 of the region's text with block-quote markers removed
+
+Why those four and not a renderer's output: see presentation.py, which is the whole of the
+new mechanism and states its closure argument, its declared subset and its cost.  The
+short form of the closure argument is that the CONTENT digest already fires on every edit
+INSIDE a region, so the presentation layer only has to answer for edits OUTSIDE it, and
+the ways an outside edit can change how a region is presented are block-level and few.
+
+THE COST, because this is a trade and not a free win.  mg-babf proposed digesting the
+RENDERED text and named the cost: a dependency on a renderer, under which a renderer
+upgrade becomes a false positive.  The direction is taken, the mechanism is not — no
+markdown renderer exists on this box (checked: no markdown / markdown_it / mistune /
+commonmark / cmarkgfm module, no pandoc / cmark / cmark-gfm binary), and every instrument
+in this cluster imports nothing.  THE COST TAKEN INSTEAD is that presentation.py is a
+MODEL of a renderer rather than a renderer: where model and renderer disagree, this
+control is wrong, and the model is argued from the CommonMark and GFM block rules rather
+than measured against an implementation, because there is none here to measure against.
+What bounds it is DEFAULT-DENY — a construct outside the declared subset, or any raw HTML
+in prose, is reported and exits non-zero rather than passing.  What is NOT bounded is the
+model being confident and wrong, and that is now the uncontrolled layer.  It is named
+here, and in COVERAGE.md, so the next auditor tests it rather than discovers it.
+
+POSITION IS NOW CERTIFIED, AND THAT REVERSES A PUBLISHED TOLERANCE.  mg-2216's M12 (60
+lines inserted above the certified row) and M13 (the row moved to the end of the file,
+byte-identical) were declared TOLERATE against this file's stated design goal of surviving
+line insertion.  Both now fire, and the reason is not a change of taste: both break the
+ledger table — M12 splits it so the certified row has no delimiter row above it, M13 lifts
+the row out of the table entirely — so under GFM the row stops rendering as a table row and
+becomes pipes in a paragraph.  That is a change to what a reader sees, so under the
+property above it must fire.  The reclassification is argued from the GFM table rules and
+is NOT verified against a renderer, for the reason given above; it is recorded in
+COVERAGE.md as a reversal rather than folded in quietly.  Locating BY KEY rather than by
+line number is unchanged and still buys what it always bought: the instrument does not rot
+when lines are inserted somewhere else in the file.
+
 COVERAGE — what is digested, and what is deliberately not.
 ----------------------------------------------------------
-DIGESTED (9 regions, listed in CERTIFIED below):
+DIGESTED (9 regions, listed in CERTIFIED below), each with TWO digests — content and
+presentation:
     STATE.md      row mg-276d's content cell, in the working tree      7,876 chars
     STATE.md      the same cell at b68db5d^, the BEFORE of the delta   7,703 chars
     README        the F2 correction block                              2,306 chars
@@ -96,11 +162,23 @@ DIGESTED (9 regions, listed in CERTIFIED below):
 
 NOT COVERED, on purpose — this instrument certifies b68db5d's DELTA, not the two files:
     * Every other row of STATE.md's ledger, and every other line of it.  Only the whole-file
-      ** parity and largest-cell checks in section 6 look outside the certified row, and
-      those are invariants, not digests.  Deleting an unrelated ledger row exits 0 here.
+      ** parity and largest-cell checks in section 6, and the two presentation guards in
+      section 8, look outside the certified row, and those are invariants, not digests.
+      Deleting an unrelated ledger row exits 0 here.
     * Every other paragraph, table and block of the state-history README, including the
       per-row index table's own numeric columns and all ten attempt-*.md files.
     * Padding at the outer edge of a digested region (see the normalisation rule).
+    * THE ROW'S INDEX WITHIN THE LEDGER TABLE, and any certified region's absolute line
+      number.  Position is certified as an ordinal among the BLOCKS of a section, not as a
+      row number or a line number, so that deleting an unrelated ledger row stays outside
+      coverage — which it was before mg-4acd and still is.
+    * INLINE presentation.  presentation.py resolves block structure only: emphasis, links,
+      code spans and entities inside a region are certified as BYTES by the content digest
+      and are not rendered or compared as rendered.
+    * WHETHER THE MODEL MATCHES THE RENDERER.  presentation.py is a model of a renderer
+      argued from the CommonMark / GFM block rules, not measured against one.  Constructs
+      outside its declared subset are reported by the section-8 guards and exit non-zero;
+      the residual exposure is a construct the model classifies CONFIDENTLY AND WRONGLY.
     * WHETHER A CHANGE IS LEGITIMATE.  A digest mismatch is reported as MOVED and exits
       non-zero; this instrument does not and cannot decide whether the new bytes are damage
       or a correct later edit.  Re-baseline with `--emit-baseline` and say which commit
@@ -123,14 +201,21 @@ re-baselined into meaninglessness.
 EXIT CODES, both non-zero on failure and distinguishable on purpose:
 
     0   every check passed
-    1   FAIL   — a certification check failed.  b68db5d's repair is damaged in the tree,
-                 or a certified region can no longer be located at all.
+    1   FAIL   — a certification check failed.  b68db5d's repair is damaged in the tree, a
+                 certified region can no longer be located at all, or a certified region is
+                 NO LONGER PRESENTED TO A READER — inside a code fence, inside an HTML
+                 comment, inside a raw HTML block, or (for the ledger cell) no longer
+                 rendering as a table row.  A region nobody is shown is damage, not drift.
     2   MOVED  — the repair's load-bearing sentences are intact, but a certified region's
-                 content digest no longer matches, or a measured constant of the landing
-                 has changed.  Re-baseline this instrument, record the new figure, and say
-                 which commit moved it.  It exits non-zero so it CANNOT go on quietly
-                 reporting green about a delta that is no longer the delta it was written
-                 for — which is the whole failure this file was filed against.
+                 content digest no longer matches, its PRESENTATION RECORD no longer
+                 matches (it moved under a different heading, or its position among the
+                 blocks of its section changed), a measured constant of the landing has
+                 changed, or a presentation guard tripped — a block construct outside
+                 presentation.py's declared subset, or raw HTML in text presented as prose.
+                 Re-baseline this instrument, record the new figure, and say which commit
+                 moved it.  It exits non-zero so it CANNOT go on quietly reporting green
+                 about a delta that is no longer the delta it was written for — which is
+                 the whole failure this file was filed against.
 
 Exit 3 is deliberately NOT used for digest mismatches: mg-2216's independent battery reads
 1 and 2, and an instrument that invents a code its own auditor's harness scores as a miss
@@ -150,12 +235,17 @@ INSTRUMENT DISCIPLINE (this arc has been bitten by all three):
   * The digests are printed in full, not truncated, so a reader can recompute one by hand.
 
 Imports nothing from code/state_restructure_34bf/, code/state_audit_6a2f/,
-code/state_landing_audit_bd41/ or code/state_control_audit_2216/.
+code/state_landing_audit_bd41/, code/state_control_audit_2216/ or
+code/state_control_audit_babf/.  The one module it does import, presentation.py, sits
+beside it and is part of this instrument.
 """
 import hashlib
 import os
 import subprocess
 import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import presentation as pres              # noqa: E402  (path fixed up on the line above)
 
 REPO = subprocess.run(["git", "rev-parse", "--show-toplevel"],
                       capture_output=True, text=True, check=True).stdout.strip()
@@ -384,7 +474,41 @@ CERTIFIED = [
     ("readme.A1.7870", "the mg-2216 / mg-7870 correction to the A1 block", "quote",
      "DID NOT ESTABLISH WHAT THE BLOCK ABOVE CLAIMS", 2736,
      "59ab8f5068742edb7e67ae0efd060d0eeb09f3174d8789df29ac529304620bd2"),
+    ("readme.A1.4acd", "the mg-babf / mg-4acd correction to the A1 block", "quote",
+     "mg-babf B1, BROKEN, repaired by mg-4acd", 3695,
+     "779702c03697be89bfd9c40ffc483e78aec834a6d3eb58989ac60399aef45c11"),
 ]
+
+# =========================================================================================
+# THE PRESENTATION BASELINE (mg-4acd).  rid -> sha256 of the region's PRESENTATION RECORD.
+#
+# The record is four ordered fields — state, heading, position, presented — serialised one
+# `key=value` per line and hashed.  Every field is PRINTED IN FULL by section 2b, so a
+# reader can recompute any of these by hand, exactly as for the content digests.
+#
+# Baselined by mg-4acd against the working tree at 1db0be9.  Regenerate with
+#     python3 code/state_landing_control_2da3/delta_control.py --emit-baseline
+# and say in the commit message WHICH COMMIT MOVED IT.
+#
+# A NOTE ON WHAT MOVES THESE.  A presentation digest is by construction sensitive to the
+# region's surroundings: adding or removing a block anywhere in the region's section moves
+# `position` for every block after it in that section, and renaming a heading moves
+# `heading` for every region under it.  That is not a defect, it is the coverage: position
+# and context are what the four mutations exploited.  It is also the running cost, and it
+# is stated in COVERAGE.md beside the mechanism rather than discovered later.
+# =========================================================================================
+PRESENTATION = {
+    "cell.tree": "a621c910868ba3bc254216e983fb8cb84da6007d94a01f24e2f71c2a60ecba0e",
+    "cell.base": "14e4171a94061a951b0e4b653d11f42857ee328b6fd6e13d870727faf4fe7b77",
+    "readme.F2": "dbe341f97e051849c23746029854c43dcac35812f5332f8f5fb39b3e36e6565d",
+    "readme.F1": "52edb2c400a888536146c716dabb14837fa14f75dad026b80f797ff1c708c63b",
+    "readme.B1": "7d1a3e1daaee38e0622e4133a2c475828d4928d2a42b30cde51e58cfc6f3fa5d",
+    "readme.B1.A3": "245cc23b4b24a718a7fe220dff71937878496f5546c6e11dce99481dc3ac95b9",
+    "readme.index": "5a73c86c64b2ec773e73dff12ee0f49f8477f7397ebe901f5049d364c907d4df",
+    "readme.A1": "f642d170bc7bdc7c869ea8f23e1f452c2994a27fb16a446e554c5bcb975a2780",
+    "readme.A1.7870": "25892df23732ba028e28ba99d83b5cc4aa16d552f2d877dfd44fdff1c81e3326",
+    "readme.A1.4acd": "5c28bc769bf19d59ed094432ee6629bf048e48cbcd32eababdf32e1be315fade",
+}
 
 
 def extract(rid, kind, marker, state_tree, state_base, readme_tree):
@@ -401,6 +525,33 @@ def extract(rid, kind, marker, state_tree, state_base, readme_tree):
     return f"{README}:{s}-{e}", text
 
 
+def presentation_record(kind, marker, docs, state_tree, state_base, readme_tree):
+    """The PRESENTATION RECORD of a certified region: what a reader is shown, and where.
+
+    Same locating rule as extract() — by content marker, never by line number — because a
+    presentation record about the wrong region would be worse than none.
+    """
+    if kind in ("cell", "cell-base"):
+        text = state_tree if kind == "cell" else state_base
+        hits = find_row(text, ROW_KEY)
+        if len(hits) != 1:
+            raise LookupError(f"key {ROW_KEY} matched {len(hits)} rows")
+        n, cells = hits[0]
+        return pres.table_record(docs["cell" if kind == "cell" else "base"], n - 1, cells)
+    s, e, _text = (quote_block if kind == "quote" else paragraph)(readme_tree, marker)
+    return pres.region_record(docs["readme"], s - 1, e - 1)
+
+
+def is_presented(record):
+    """True iff a reader is shown this region as prose (or as a GFM table row).
+
+    Anything else — a code fence, an HTML comment, a raw HTML block, pipes that no longer
+    form a table row — means the certified bytes are present and nobody sees them, which is
+    exactly the state mg-babf's B05/B06 put the F1 block into while the control said PASS.
+    """
+    return dict(record)["state"] in ("rendered", "gfm-table-row")
+
+
 def check(label, ok, detail="", kind=FAIL):
     verdict = "pass" if ok else ("FAIL" if kind == FAIL else "MOVED")
     print(f"  [{verdict}] {label}")
@@ -411,19 +562,49 @@ def check(label, ok, detail="", kind=FAIL):
     return ok
 
 
-def emit_baseline(state_tree, state_base, readme_tree):
-    """Print a pasteable CERTIFIED table for the tree as it stands."""
+def emit_baseline(docs, state_tree, state_base, readme_tree):
+    """Print a PASTEABLE CERTIFIED table and PRESENTATION map for the tree as it stands.
+
+    Two mg-babf MINORs are fixed here rather than left in the documented recovery path:
+    the emitter used to print a literal "..." in place of the label / kind / marker, so
+    what two documents told you to paste was not pasteable; and it crashed with an
+    uncaught LookupError emitting NOTHING AT ALL if any one region was unlocatable, which
+    is precisely the tree it exists for.  Unlocatable regions are now emitted commented
+    out, with the reason, and the rest of the table still comes out.
+    """
     print("# regenerated by --emit-baseline; say which commit moved each figure")
+    print("CERTIFIED = [")
     for rid, label, kind, marker, _chars, _sha in CERTIFIED:
-        where, text = extract(rid, kind, marker, state_tree, state_base, readme_tree)
-        print(f'    ("{rid}", ...)  # {where}\n'
-              f'     {len(norm(text).decode())}, "{digest(text)}"')
+        m = "None" if marker is None else '"%s"' % marker.replace('"', '\\"')
+        try:
+            where, text = extract(rid, kind, marker, state_tree, state_base, readme_tree)
+        except LookupError as exc:
+            print(f'    # UNLOCATABLE ({exc}) — left for a human:')
+            print(f'    # ("{rid}", "{label}", "{kind}", {m}, ?, "?"),')
+            continue
+        print(f'    ("{rid}", "{label}", "{kind}",  # {where}\n'
+              f'     {m},\n'
+              f'     {len(norm(text).decode())}, "{digest(text)}"),')
+    print("]")
+    print("PRESENTATION = {")
+    for rid, _label, kind, marker, _chars, _sha in CERTIFIED:
+        try:
+            record = presentation_record(kind, marker, docs,
+                                         state_tree, state_base, readme_tree)
+        except LookupError as exc:
+            print(f'    # "{rid}": UNLOCATABLE ({exc}) — left for a human')
+            continue
+        for k, v in record:
+            print(f"    # {k:<10} {v}")
+        print(f'    "{rid}": "{pres.record_digest(record)}",')
+    print("}")
     return 0
 
 
 def main():
     print("mg-2da3 — working-tree control for b68db5d's delta")
-    print("           (mg-7870: certified by CONTENT DIGEST; coverage stated in the header)")
+    print("           (mg-7870: certified by CONTENT DIGEST — are these the certified bytes?)")
+    print("           (mg-4acd: and by PRESENTATION RECORD — is a reader shown them?)")
     print(f"certified side  : the WORKING TREE (STATE.md, {README})")
     print(f"baseline side   : {BASELINE}  — used ONLY as the BEFORE of a measured delta")
     print()
@@ -432,9 +613,11 @@ def main():
     state_tree = state_tree_b.decode("utf-8")
     state_base = blob(BASELINE, "STATE.md").decode("utf-8")
     readme_tree = tree(README).decode("utf-8")
+    docs = {"cell": pres.Doc(state_tree), "base": pres.Doc(state_base),
+            "readme": pres.Doc(readme_tree)}
 
     if "--emit-baseline" in sys.argv:
-        return emit_baseline(state_tree, state_base, readme_tree)
+        return emit_baseline(docs, state_tree, state_base, readme_tree)
 
     lines_tree = state_tree.split("\n")
     print(f"STATE.md in the working tree: {len(state_tree_b)} bytes, "
@@ -500,6 +683,40 @@ def main():
               kind=MOVED)
         if not ok:
             _digest_misses.append((rid, label, f"{got_chars - want_chars:+d} characters"))
+    print()
+
+    # ---- 2b. WHAT A READER SEES: a presentation record per certified region --------------
+    print("2b. CERTIFIED PRESENTATION RECORDS — the content digest above says these are the")
+    print("    certified BYTES; these say a reader is still SHOWN them, in the same place.")
+    print("    Four fields, printed in full, hashed in the order printed.  A region that is")
+    print("    no longer presented at all is a FAIL; one that moved is a MOVED.")
+    for rid, label, kind, marker, _chars, _sha in CERTIFIED:
+        try:
+            record = presentation_record(kind, marker, docs,
+                                         state_tree, state_base, readme_tree)
+        except LookupError as exc:
+            check(f"{rid} — {label}: LOCATABLE for presentation", False, f"{exc}")
+            _digest_misses.append((rid, label, "not locatable"))
+            continue
+        want = PRESENTATION.get(rid, "")
+        got = pres.record_digest(record)
+        shown = is_presented(record)
+        detail = "\n".join(f"         {k:<10} {v}" for k, v in record).lstrip()
+        detail += (f"\n         certified record sha256 {want}"
+                   f"\n         measured  record sha256 {got}")
+        if not shown:
+            detail += ("\n         >>> THE CERTIFIED BYTES ARE PRESENT AND NOBODY IS SHOWN "
+                       "THEM.")
+            check(f"{rid} — {label}: PRESENTED", False, detail, kind=FAIL)
+            _digest_misses.append((rid, label, "not presented to a reader"))
+        else:
+            ok = got == want
+            if not ok:
+                detail += ("\n         >>> a reader does not see this region where the "
+                           "certified record says it is")
+            check(f"{rid} — {label}: presentation", ok, detail, kind=MOVED)
+            if not ok:
+                _digest_misses.append((rid, label, "presentation record moved"))
     print()
 
     # ---- 3. the F1 repair itself — CLASSIFIERS, not the certification --------------------
@@ -590,18 +807,48 @@ def main():
               f"body {len(body.strip(EDGE))} chars")
     print()
 
+    # ---- 8. THE PRESENTATION GUARDS — default-deny over both certified files -------------
+    print("8. PRESENTATION GUARDS, over BOTH certified files in full")
+    print("   presentation.py models a declared subset of CommonMark + GFM block structure.")
+    print("   These two guards are how that subset is BOUNDED rather than assumed: a")
+    print("   construct it does not model, or raw HTML in text presented as prose, is")
+    print("   reported and exits non-zero instead of passing.  Both are 0 as things stand.")
+    for label, doc, nlines in (("STATE.md", docs["cell"], len(docs["cell"].lines)),
+                               (README, docs["readme"], len(docs["readme"].lines))):
+        anom = doc.anomalies()
+        html = doc.html_tokens()
+        check(f"{label}: 0 block constructs outside the modelled subset",
+              not anom,
+              f"over all {nlines} lines; "
+              + ("0 found" if not anom else "; ".join(
+                  f":{n} {kind} {text!r}" for n, kind, text in anom[:6])),
+              kind=MOVED)
+        check(f"{label}: 0 raw-HTML tokens in text presented as prose",
+              not html,
+              f"over all {nlines} lines, code fences and inline code spans masked; "
+              + ("0 found" if not html else "; ".join(
+                  f":{n} {tok!r} in {text!r}" for n, tok, text in html[:6])),
+              kind=MOVED)
+        print(f"         {len(doc.blocks)} rendered blocks in "
+              f"{len(doc.siblings)} sections (the population section 2b's positions are"
+              f" ordinals within)")
+    print()
+
     worst = exit_code()
     print("=" * 78)
     if worst == 0:
         print("RESULT: PASS — every check above read the working tree and every one held,")
-        print(f"        including {len(CERTIFIED)} region digests.  Coverage is stated in")
-        print("        this file's header: what is digested, and what is not.")
-        print("        This instrument CAN fail; negative_control.py makes it fail.")
+        print(f"        including {len(CERTIFIED)} content digests and the same number of")
+        print("        PRESENTATION RECORDS: the certified bytes are the certified bytes,")
+        print("        AND a reader is still shown them, in the same place, as prose.")
+        print("        Coverage is stated in this file's header and in COVERAGE.md: what")
+        print("        is digested, what is not, and what the presentation model cannot")
+        print("        see.  This instrument CAN fail; negative_control.py makes it fail.")
     elif worst == MOVED:
         print("RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,")
         if _digest_misses:
-            print("        but a CERTIFIED REGION'S CONTENT IS NOT THE CONTENT THAT WAS")
-            print("        CERTIFIED:")
+            print("        but a CERTIFIED REGION'S CONTENT, OR ITS PRESENTATION, IS NOT")
+            print("        WHAT WAS CERTIFIED:")
             for rid, label, why in _digest_misses:
                 print(f"          {rid} — {label} ({why})")
             print("        A digest says only that the bytes changed.  It does NOT say")
@@ -614,7 +861,8 @@ def main():
         print("        non-zero rather than quietly reporting green about a delta that is")
         print("        no longer the delta it was written for.")
     else:
-        print("RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree.")
+        print("RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,")
+        print("        or a certified region is no longer PRESENTED to a reader at all.")
         if _seen[MOVED]:
             print(f"        ({_seen[FAIL]} FAIL, {_seen[MOVED]} MOVED; FAIL is reported"
                   " because it is the more serious of the two.)")
