@@ -1,0 +1,77 @@
+==============================================================================
+mg-1c80 part 1 -- WHICH GATE, recomputed from a second implementation
+==============================================================================
+
+A. THE REBUILD AGREES WITH `face_complex`, matrix for matrix
+   E.L^rel.E over 6 incidence modes x 86 posets : 516 agree, 0 DISAGREE
+   target D-A                                  : 86 agree, 0 DISAGREE
+   NC3 facet-parity build                      : 86 agree, 0 DISAGREE
+
+A'. THE ABSORBABILITY DECISION, three ways (union-find / 2-colouring /
+    brute force over all 2^m sign vectors)
+   union-find vs 2-colouring : 516/516 agree
+   2-colouring vs brute force: 306/306 agree (|L(P)| <= 8)
+
+==============================================================================
+B. THE GATE SPLIT, under BOTH readings of 'which gate settles the pair'
+==============================================================================
+
+   controls.deciding_gate tests ALL diagonals, then ALL magnitudes.
+   absorbable_by_diagonal_twist tests row i's diagonal, then row i's
+   magnitudes, then row i+1's -- the two gates are INTERLEAVED BY ROW.
+   Where a pair violates both, the two readings can name different gates.
+
+   row    corruption               bites shape |  diag   mag   par |  diag   mag   par | differ
+                                            ok |  deciding_gate()  |  predicate's own  |       
+   I1     ridge_facets                72    72 |    72     0     0 |    15    57     0 |     57
+   I2     split_free_as_interior      82    82 |    82     0     0 |    82     0     0 |      0
+   I3     ridge_drop                  82    82 |    82     0     0 |    82     0     0 |      0
+   I4     facet_offbyone              61    61 |    58     3     0 |    58     3     0 |      0
+   swap01 facet_swap01                72     - |    35    37     0 |    35    37     0 |      0   (NOT scored)
+   NC3    facet-parity gauge          82     - |     0     0    82 |     -     -     - |      -   (NOT scored)
+
+   SECTION TOTALS over the four SCORED rows:
+     biting (poset, mutation) pairs .................. 297
+     of them with the compared matrices same-shape ... 297
+     reaching the PARITY system (deciding_gate) ...... 0
+     reaching the PARITY system (predicate's order) .. 0
+     reported absorbable ............................. 0
+     pairs the two readings attribute DIFFERENTLY .... 57
+
+==============================================================================
+C. 'ENTRIES DIFFERING IN SIGN ALONE' -- printed scope vs computed scope
+==============================================================================
+
+   `controls.py` accumulates `sign_entries` INSIDE the `diag_preserved`
+   branch (controls.py:1001-1005), so `tot_sign` is a sum over the pairs
+   whose diagonal survived.  The routing row prints it as
+     '%d entries ANYWHERE differ in sign alone', over 'all four rows',
+   and the gate table as a 'Section total'.  Both scopes measured here:
+
+   row    corruption                sign(all) sign(diagOK)     mag(all)  mag(diagOK)
+   I1     ridge_facets                      0          0          432            0
+   I2     split_free_as_interior            0          0           82            0
+   I3     ridge_drop                        0          0          328            0
+   I4     facet_offbyone                    0          0         1484          300
+   TOTAL                                    0          0
+
+   pairs the printed number is a total OVER  : 297
+   pairs the printed number is COMPUTED over : 3
+
+==============================================================================
+D. THE THREE POSETS ROW I4 KEEPS ABSORBABILITY SCORED FOR
+==============================================================================
+
+   n=3 |L(P)|=6    antichain=True   gate(exec)=magnitude gate(pri)=magnitude
+        magnitude mismatches: whole matrix   12, off-diagonal   12 (2.0 per row)
+        sign-only mismatches: whole matrix    0, off-diagonal    0
+        absorbable (2-colouring) = False ; (brute force) = False
+   n=4 |L(P)|=24   antichain=True   gate(exec)=magnitude gate(pri)=magnitude
+        magnitude mismatches: whole matrix   48, off-diagonal   48 (2.0 per row)
+        sign-only mismatches: whole matrix    0, off-diagonal    0
+        absorbable (2-colouring) = False ; (brute force) = n/a (m > 8)
+   n=5 |L(P)|=120  antichain=True   gate(exec)=magnitude gate(pri)=magnitude
+        magnitude mismatches: whole matrix  240, off-diagonal  240 (2.0 per row)
+        sign-only mismatches: whole matrix    0, off-diagonal    0
+        absorbable (2-colouring) = False ; (brute force) = n/a (m > 8)
+

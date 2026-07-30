@@ -1,0 +1,123 @@
+==============================================================================
+mg-1c80 part 4 -- the witness, and whether the condition moved
+==============================================================================
+
+1. NC3's PARITY GAUGE IS ABSORBABLE **BY CONSTRUCTION**
+
+   Claim under audit: 'NC3's corruption is D.L.D by construction, so its
+   magnitudes ARE the target's'.  Tested by exhibiting s and checking
+   s_i . A_ij . s_j == B_ij entry by entry -- no predicate consulted.
+
+   s = ((-1)^j) verifies E.L^rel(parity).E == S . (D-A) . S on 86/86 posets
+   bites (L^rel changes) on 82 posets; magnitudes identical to the target
+     on 82/82 of them; the predicate returns absorbable on 82/82.
+   So it reaches the parity system for a reason that is prior to the
+   measurement: a conjugation by a diagonal +-1 matrix cannot change an
+   absolute value.  It witnesses that the PREDICATE can say True.  It
+   cannot witness anything about a pair whose magnitudes differ.
+
+2. DOES THE REPAIR KEEP A WITNESS FOR ROW I4?
+
+   controls.py          : 3 line(s) mention a witness
+   controls_output.txt  : 1 line(s) mention a witness
+
+     > It is also the ONLY corruption anywhere in this section that reaches the parity system (82/82), so it is a witness that the PREDICATE can return absorbable, and it is the gauge this section exists to get past (mg-5630).
+     > IT IS NOT A WITNESS THAT ROW I4 IS FALSIFIABLE, and mg-8a12 printed that it was (mg-f1b2 F1, corrected by mg-da45): NC3's corruption is D.L.D by construction, so its magnitudes ARE the target's and a sign is what is left to decide, while row I4's magnitudes differ on every poset where its diagonal survives -- the two are settled at different gates, and I4's is forced.
+     > It is NOT a witness for I1/I2/I3 either: no witness exists there, which is the point of the [CANNOT FAIL] row.
+
+   The claim 'row I4 is falsifiable' and the phrase 'this is the witness'
+   are searched for by name:
+     'row I4 is falsifiable'                        in controls.py: False  in artifact: False
+     'this is the witness'                          in controls.py: False  in artifact: False
+     'IT IS NOT A WITNESS THAT ROW I4 IS FALSIFIABLE' in controls.py: False  in artifact: True
+
+   Can row I4's SCORED CONDITION fail, clause by clause?  (The condition
+   is `app > 0 and rej == app and shape_ok == app and absorb == 0`.)
+     app = 61, rej = 61, shape_ok = 61, absorb = 0
+     claim (1) holds on the UNCORRUPTED build on 86/86 posets, and it is
+       PROVEN for every finite poset (mg-276d).  Given that, L_mut != L_true
+       iff L_mut != target, so `rej == app` is an identity, not a test.
+     |facets| = |L(P)| under every incidence mode (le_to_facet_offbyone is
+       injective on words), so `shape_ok == app` is an identity too.
+     `absorb == 0` is forced -- parts 1, 2 and 3.
+     What is left that can fail: `app > 0`, i.e. the corruption biting at all.
+
+==============================================================================
+3. DID THE CONDITION MOVE?  code-only diff of controls.py, HEAD~1 -> HEAD
+==============================================================================
+
+   executable lines: 446 before, 474 after
+   code-only diff (44 hunk lines):
+     --- HEAD~1
+     +++ HEAD
+     @@ -272,2 +272,16 @@
+      DIAGONAL_MOVES = { : , : , : , }
+     +def deciding_gate ( A , B ) :
+     +m = len ( A )
+     +if m != len ( B ) or any ( len ( A [ i ] ) != len ( B [ i ] ) for i in range ( m ) ) :
+     +return
+     +if any ( A [ i ] [ i ] != B [ i ] [ i ] for i in range ( m ) ) :
+     +return
+     +if any ( abs ( A [ i ] [ j ] ) != abs ( B [ i ] [ j ] ) for i in range ( m ) for j in range ( m ) ) :
+     +return
+     +return
+     +def entry_mismatches ( A , B ) :
+     +m = len ( A )
+     +mag = sum ( 1 for i in range ( m ) for j in range ( m ) if abs ( A [ i ] [ j ] ) != abs ( B [ i ] [ j ] ) )
+     +sgn = sum ( 1 for i in range ( m ) for j in range ( m ) if abs ( A [ i ] [ j ] ) == abs ( B [ i ] [ j ] ) and
+     +return mag , sgn
+      def predicted_incidence_delta ( P , mode ) :
+     @@ -334,2 +348,3 @@
+      forced_rows , theorem_app , theorem_diag , theorem_absorb = [ ] , 0 , 0 , 0
+     +gate_rows , tot_app , tot_parity , tot_sign = [ ] , 0 , 0 , 0
+      for name , mode , localised in muts :
+     @@ -337,2 +352,4 @@
+      caused = shape_ok = diag_preserved = diag_moved = residual_max = 0
+     +gates = { : 0 , : 0 , : 0 }
+     +mag_entries = sign_entries = 0
+      vac , vac_sizes = 0 , set ( )
+     @@ -358,6 +375,11 @@
+      shape_ok += 1
+     -if all ( L_mut [ i ] [ i ] == target [ i ] [ i ] for i in range ( m ) ) :
+     +gate = deciding_gate ( L_mut , target )
+     +gates [ gate ] = gates . get ( gate , 0 ) + 1
+     +if gate == :
+     +diag_moved += 1
+     +else :
+      diag_preserved += 1
+     -else :
+     -diag_moved += 1
+     +dm , ds = entry_mismatches ( L_mut , target )
+     +mag_entries += dm
+     +sign_entries += ds
+      delta = predicted_incidence_delta ( P , mode ) if localised else None
+     @@ -380,6 +402,10 @@
+      cond = cond and absorb == 0
+     -check ( % ( name , rej , app , vac , sorted ( vac_sizes ) , spec , app , ( % ( caused , app , residual_max , 
+     +check ( % ( name , rej , app , vac , sorted ( vac_sizes ) , spec , app , ( % ( caused , app , residual_max , 
+     +gate_rows . append ( ( name . split ( ) [ 0 ] , app , gates [ ] , gates [ ] , gates [ ] , sign_entries ) )
+     +tot_app += app
+     +tot_parity += gates [ ]
+     +tot_sign += sign_entries
+      if forced_rows :
+      check ( % ( . join ( n . split ( ) [ 0 ] for n , _ , _ , _ in forced_rows ) , . join ( % ( n . split ( ) [ 0 
+     -check ( % ( len ( forced_rows ) , len ( muts ) , len ( muts ) - len ( forced_rows ) ) , 0 < len ( forced_rows
+     +check ( % ( len ( forced_rows ) , len ( muts ) , len ( muts ) - len ( forced_rows ) , tot_parity , tot_app , 
+      print ( )
+     @@ -387,3 +413,4 @@
+      print ( % ( N , . join ( % ( m , c ) for m , c in multi_ridge . items ( ) ) ) )
+     -nc3_app = nc3_absorb = nc3_spec = 0
+     +print ( % ( . join ( % ( tag , a , d , mg , pa ) for tag , a , d , mg , pa , _ in gate_rows ) , tot_parity , 
+     +nc3_app = nc3_absorb = nc3_spec = nc3_parity = 0
+      for P in ps :
+     @@ -396,3 +423,4 @@
+      nc3_spec += not_isospectral ( L_par , L_true )
+     -print ( % ( nc3_absorb , nc3_app , nc3_spec , nc3_app ) )
+     +nc3_parity += deciding_gate ( L_par , target ) ==
+     +print ( % ( nc3_absorb , nc3_app , nc3_spec , nc3_app , nc3_parity , nc3_app ) )
+      for name , mode , _ in muts :
+
+   The scored conditions themselves, extracted from the AST:
+     HEAD~1  : forced = diag_preserved == 0 | cond = app > 0 and rej == app and (shape_ok == app) | cond = cond and caused == app | cond = cond and absorb == 0
+     HEAD    : forced = diag_preserved == 0 | cond = app > 0 and rej == app and (shape_ok == app) | cond = cond and caused == app | cond = cond and absorb == 0
+

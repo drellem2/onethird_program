@@ -1,0 +1,57 @@
+==============================================================================
+mg-1c80 part 6 -- mutation battery
+==============================================================================
+
+PREDICTIONS, registered before the run:
+
+   id   mutation                                                    exit artifact  
+   M1   delete the |s_i s_j| = 1 gate from the predicate               1 CHANGES   
+   M2   delete the s_i^2 = 1 gate from the predicate                   0 IDENTICAL 
+   M3   deciding_gate reports 'parity' where it reports 'magnitude     0 CHANGES   
+   M4   entry_mismatches returns the magnitude count as the sign c     0 CHANGES   
+   M5   row I4's printed reason reverted to mg-8a12's, denial remo     0 CHANGES   
+   M6   row I4's `absorb == 0` deleted from its scored condition       0 IDENTICAL 
+   M7   sign_entries accumulated over ALL biting pairs (the F2 rep     0 IDENTICAL 
+   M8   a real sign-only mismatch injected on I4's DIAGONAL-MOVED      0 CHANGES   
+
+   M1: the brute-force-agreement instrument row disagrees with the crippled union-find, and row I4's `absorb == 0` breaks: the absolute-value gate is what forbids its three antichains
+   M2: SILENT.  Both matrices have a non-negative diagonal, so every diagonal mismatch is also an absolute-value mismatch and the magnitude loop (which runs over j == i too) already catches it.  The gate the repair calls 'the first forced gate' is subsumed by the second on this population
+   M3: the gate attribution is deliberately unscored, so nothing reddens; only the printed table and row I4's numbers move
+   M4: same: the sign count is printed, never scored
+   M5: the battery does not read its own prose; the artifact re-acquires the false premise and only a text check can see it
+   M6: SILENT.  The condition is what decides PASS/FAIL, and I4 passes either way, so removing the clause the whole repair is about changes not one byte of the artifact
+   M7: SILENT.  Widening the sign census from 3 pairs to 297 changes nothing TODAY, because the answer really is 0 on all 297.  That is exactly why the narrow scope is invisible
+   M8: row I4's scored clauses are untouched by an off-diagonal sign flip, so the battery stays green -- and the printed 'entries anywhere differ in sign alone' stays 0 while the truth is not
+
+==============================================================================
+RESULTS
+==============================================================================
+
+   id   mutation                                         exit   pred artifact   pred     
+   M1   delete the |s_i s_j| = 1 gate from the predica      1      1 CHANGES    CHANGES   
+        first failing row: [FAIL] instrument check: the union-find absorbability decision agrees with bru
+   M2   delete the s_i^2 = 1 gate from the predicate        0      0 IDENTICAL  IDENTICAL 
+   M3   deciding_gate reports 'parity' where it report      0      0 CHANGES    CHANGES   
+        printed sign-alone total: 0
+   M4   entry_mismatches returns the magnitude count a      0      0 CHANGES    CHANGES   
+        printed sign-alone total: 300
+   M5   row I4's printed reason reverted to mg-8a12's,      0      0 CHANGES    CHANGES   
+        false premise re-asserted in the artifact: True
+   M6   row I4's `absorb == 0` deleted from its scored      0      0 IDENTICAL  IDENTICAL 
+   M7   sign_entries accumulated over ALL biting pairs      0      0 IDENTICAL  IDENTICAL 
+   M8   a real sign-only mismatch injected on I4's DIA      0      0 CHANGES    CHANGES   
+        printed sign-alone total: 0
+
+   predictions correct: 8 of 8
+
+==============================================================================
+M8 IN FULL -- the printed number and the truth, side by side
+==============================================================================
+
+   pairs carrying an injected sign-only mismatch ...... 55
+   entries differing in SIGN ALONE, in truth .......... 110
+   what the routing row prints under M8 ............... see the table above
+
+   The battery stays green and the sentence stays '0'.  This is what a
+   claim computed at 1% of the population it is printed over buys you.
+
