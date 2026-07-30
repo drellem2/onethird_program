@@ -1,0 +1,38 @@
+population: 86 iso classes for 2<=n<=5 (expect 86 = 2+5+16+63)
+  per n: {2: 2, 3: 5, 4: 16, 5: 63}
+  |L(P)|>=2 on 82 of 86  (expect 82)
+A  true signs: claim (1) holds on 86/86   [doc says 86/86]
+B  allplus: L_rel unchanged 86/86 ; L_abs unchanged 86/86 ; twisted LHS 86/86
+   allplus: claim (1) still holds on 86/86   [doc: 86/86]
+   TRUE boundary = diag(row signs) * ALLPLUS boundary on 86/86 posets
+C  facet-parity: bites on 82/82 of the |L|>=2 posets, rejected on 82   [doc: rejected 82/82, bites on all 82]
+   parity L_rel == diag((-1)^j) . true L_rel . diag((-1)^j) on 82/82
+D  parity + twist E.D  => claim (1) holds again on 86/86 posets   (if 86: the corruption is a re-orientation absorbable into E, i.e. the same class as M1/M3)
+E  parity preserves the spectrum of L_rel by construction (conjugation by an involution) -- see C.
+F  CORRUPTED PIPELINE (drop ridge #0 from the complex):
+     NC3 line1 true-signs pass  : 39/86  FIRES (line 1 catches it)
+     NC3 line2 allplus-unchanged: 86/86  SILENT
+     NC3 line3 parity-rejected  : 78 of 78 biting  FIRES (bite-count or rejection changed)
+F  CORRUPTED PIPELINE (swap facets 0 and 1 (mis-indexed facet enumeration)):
+     NC3 line1 true-signs pass  : 14/86  FIRES (line 1 catches it)
+     NC3 line2 allplus-unchanged: 86/86  SILENT
+     NC3 line3 parity-rejected  : 82 of 82 biting  SILENT (still rejects)
+G  Corollary B' -- left/value vs right/position on the ANTICHAIN:
+     n=2: neighbourhoods differ at w=s_1? NO  ; some w differs? NO  ; s_1s_2=None in R\L? -
+     n=3: neighbourhoods differ at w=s_1? YES ; some w differs? YES ; s_1s_2=(1, 2, 0) in R\L? True
+     n=4: neighbourhoods differ at w=s_1? YES ; some w differs? YES ; s_1s_2=(1, 2, 0, 3) in R\L? True
+     n=5: neighbourhoods differ at w=s_1? YES ; some w differs? YES ; s_1s_2=(1, 2, 0, 3, 4) in R\L? True
+     n=6: neighbourhoods differ at w=s_1? YES ; some w differs? YES ; s_1s_2=(1, 2, 0, 3, 4, 5) in R\L? True
+     n=7: neighbourhoods differ at w=s_1? YES ; some w differs? YES ; s_1s_2=(1, 2, 0, 3, 4, 5, 6) in R\L? True
+     n=8: neighbourhoods differ at w=s_1? YES ; some w differs? YES ; s_1s_2=(1, 2, 0, 3, 4, 5, 6, 7) in R\L? True
+H  claim (2) LEFT reading on the antichain (full matrix test):
+     n=2 right : claim (2) HOLDS
+     n=2 left  : claim (2) HOLDS
+     n=3 right : claim (2) HOLDS
+     n=3 left  : claim (2) FAILS
+     n=4 right : claim (2) HOLDS
+     n=4 left  : claim (2) FAILS
+     n=5 right : claim (2) HOLDS
+     n=5 left  : claim (2) FAILS
+     n=6 right : claim (2) HOLDS
+     n=6 left  : claim (2) FAILS

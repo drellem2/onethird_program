@@ -1,0 +1,11 @@
+posets matched across all three enumerators: 86 (2<=n<=5; expect 86)
+  audit enum: 86   deliverable enum: 86   mine: 86
+
+L(P) enumeration order identical between the two codebases: 63/86
+
+mode true     : per-poset agreement audit-X3 == adopted-NC3 == mine on 86/86 
+mode allplus  : per-poset agreement audit-X3 == adopted-NC3 == mine on 86/86 
+mode parity   : per-poset agreement audit-X3 == adopted-NC3 == mine on 86/86 
+
+audit X3 population re-derived: 41 posets (5+16+20), |L|>=2 on 38
+  MY implementation on THAT population: true pass 41 ; allplus pass 41 ; parity rejected 38 of 38 where |L|>=2   [audit reports: 41, 41, 38 of 38]
