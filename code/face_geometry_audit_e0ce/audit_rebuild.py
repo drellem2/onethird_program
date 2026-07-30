@@ -81,16 +81,45 @@ def sgn(w):
 
 # ----------------------------------------------------------- face complex --
 
+def _set_partitions(n, k):
+    """Set partitions of [n] into exactly k nonempty blocks, as block-id tuples."""
+    out = []
+    def rec(i, assign, used):
+        if n - i < k - used:
+            return
+        if i == n:
+            if used == k:
+                out.append(tuple(assign))
+            return
+        for b in range(min(used + 1, k)):
+            assign.append(b)
+            rec(i + 1, assign, used + (1 if b == used else 0))
+            assign.pop()
+    rec(0, [], 0)
+    return out
+
+
+_SP_CACHE = {}
+
+
 def sur_iso(rel, n, k):
-    """Surjective isotone maps P -> [k], as tuples f with f[x] in 0..k-1."""
+    """Surjective isotone maps P -> [k], as tuples f with f[x] in 0..k-1.
+
+    Built as (set partition into k blocks) x (ordering of blocks), then filtered
+    by isotonicity.  No order ideals, no lattice -- deliberately NOT their
+    Lemma-1 route, which is tested separately as a claim.
+    """
     if k <= 0 or k > n:
         return []
+    key = (n, k)
+    if key not in _SP_CACHE:
+        _SP_CACHE[key] = _set_partitions(n, k)
     out = []
-    for f in product(range(k), repeat=n):
-        if len(set(f)) != k:
-            continue
-        if all(f[i] <= f[j] for (i, j) in rel):
-            out.append(f)
+    for part in _SP_CACHE[key]:
+        for p in permutations(range(k)):
+            f = tuple(p[b] for b in part)
+            if all(f[i] <= f[j] for (i, j) in rel):
+                out.append(f)
     return out
 
 
@@ -282,8 +311,26 @@ def analyse(rel, n, do_left=True):
                 lemma1_ok = False
     # graded-by-cardinality is implicit in the ideal enumeration above
 
-    # ---- kernel of twisted L^rel  (= relative top homology)
-    ker_dim = m - matrank(Lrel)
+    # ---- kernel of twisted L^rel  (= relative top homology).
+    # exact rank where affordable; elsewhere use #components of the AT graph,
+    # which equals dim ker(D-A) for a graph Laplacian.
+    if m <= 120:
+        ker_dim = m - matrank(Lrel)
+        ker_exact = True
+    else:
+        par = list(range(m))
+        def fnd(x):
+            while par[x] != x:
+                par[x] = par[par[x]]; x = par[x]
+            return x
+        for i in range(m):
+            for j in range(m):
+                if A[i][j]:
+                    a, b = fnd(i), fnd(j)
+                    if a != b:
+                        par[a] = b
+        ker_dim = len({fnd(x) for x in range(m)})
+        ker_exact = False
 
     # ---- degeneracy bookkeeping
     is_antichain = len(rel) == 0
@@ -314,7 +361,7 @@ def analyse(rel, n, do_left=True):
         star_abs=star_abs, star_rel=star_rel,
         claim2_right_ambient=claim2_right_ambient, claim2_left_ambient=claim2_left_ambient,
         lemma1_ok=lemma1_ok, ker_dim=ker_dim,
-        is_antichain=is_antichain, is_chain=is_chain, nondegenerate=nondegenerate,
+        ker_exact=ker_exact, is_antichain=is_antichain, is_chain=is_chain, nondegenerate=nondegenerate,
         aut=aut, connected=connected, rel=rel,
     )
 

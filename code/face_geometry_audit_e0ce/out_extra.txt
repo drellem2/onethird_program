@@ -1,0 +1,18 @@
+X1 -- PURITY of F(P): every Sur_iso(P,[n-1]) face lies in a facet?
+   404/404 posets (2<=n<=6) PURE; violations: none
+
+X2 -- antichain as a witness against the LEFT/value reading of claim (2)
+   n=2: right- and left-Cayley neighbourhoods differ? NO    first witness w=-
+   n=3: right- and left-Cayley neighbourhoods differ? YES   first witness w=(0, 2, 1)
+   n=4: right- and left-Cayley neighbourhoods differ? YES   first witness w=(0, 1, 3, 2)
+   n=5: right- and left-Cayley neighbourhoods differ? YES   first witness w=(0, 1, 2, 4, 3)
+   n=6: right- and left-Cayley neighbourhoods differ? YES   first witness w=(0, 1, 2, 3, 5, 4)
+   n=7: right- and left-Cayley neighbourhoods differ? YES   first witness w=(0, 1, 2, 3, 4, 6, 5)
+   n=8: right- and left-Cayley neighbourhoods differ? YES   first witness w=(0, 1, 2, 3, 4, 5, 7, 6)
+   proof for all n>=3: take w = s_1.  Right-neighbours of s_1 include
+   s_1 s_2; left-neighbours are {s_j s_1}.  s_1 s_2 != s_2 s_1, and for
+   j>=3, s_j s_1 = s_1 s_j != s_1 s_2.  So the neighbourhoods differ,
+   and on the antichain the compression is the whole matrix. QED
+
+X3 -- construction-side negative control (missing from the deliverable)
+   41 posets: true signs pass 41; all-+1 signs STILL pass 41 (control cannot fire); facet-parity signs rejected 38 of 38 where |L|>=2
