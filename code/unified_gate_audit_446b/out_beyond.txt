@@ -1,0 +1,33 @@
+==============================================================================
+(1) IS 'TEST THE ADJACENT TRANSPOSITIONS ONLY' THE FULL CONDITION?
+==============================================================================
+  n=2: classes 2, generator-stability vs full-S_n-stability disagreements: 0
+  n=3: classes 5, generator-stability vs full-S_n-stability disagreements: 0
+  n=4: classes 16, generator-stability vs full-S_n-stability disagreements: 0
+  n=5: classes 63, generator-stability vs full-S_n-stability disagreements: 0
+  n=6: classes 318, generator-stability vs full-S_n-stability disagreements: 0
+  -> the stabiliser of a subset is a subgroup, so generators suffice; confirmed empirically.  The gate document's n=7,8,9 method is sound.
+
+==============================================================================
+(2) THE THEOREM AT n = 7, 8, 9 -- MY DRAWS, AND THE NON-DEGENERATE CASES
+==============================================================================
+  n=7  predicted stable population 2(n-1) = 12 shapes (antichain + 11 stars): all have AC = Pi_n (=877) and are stable: True
+       three explicit non-star shapes (disjoint 2-chain+edge etc.): all UNSTABLE as predicted: True
+       400 own draws: stable 174, disagreements with the theorem 0
+       stable draws by number of relations: 0 rel: 85, 1 rel: 75, 2 rel: 12, 3 rel: 2
+       of the 174 stable draws, 160 have <= 1 relation (antichain or a single edge) = 92%
+  n=8  predicted stable population 2(n-1) = 14 shapes (antichain + 13 stars): all have AC = Pi_n (=4140) and are stable: True
+       three explicit non-star shapes (disjoint 2-chain+edge etc.): all UNSTABLE as predicted: True
+       300 own draws: stable 116, disagreements with the theorem 0
+       stable draws by number of relations: 0 rel: 47, 1 rel: 58, 2 rel: 10, 3 rel: 1
+       of the 116 stable draws, 105 have <= 1 relation (antichain or a single edge) = 91%
+  n=9  predicted stable population 2(n-1) = 16 shapes (antichain + 15 stars): all have AC = Pi_n (=21147) and are stable: True
+       three explicit non-star shapes (disjoint 2-chain+edge etc.): all UNSTABLE as predicted: True
+       200 own draws: stable 70, disagreements with the theorem 0
+       stable draws by number of relations: 0 rel: 26, 1 rel: 37, 2 rel: 7
+       of the 70 stable draws, 63 have <= 1 relation (antichain or a single edge) = 90%
+
+  (3) is the line above: with the gate document's own density menu, the
+  positive direction of its n=7,8,9 sweep is carried almost entirely by
+  posets with at most one relation.  The theorem's interesting positive
+  cases -- stars with |S| >= 2 -- are supplied by (a) here, not by that sweep.

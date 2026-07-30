@@ -1,0 +1,38 @@
+==============================================================================
+STEP 1 OF THE PROOF OF (1) => (3), TESTED ON EVERY 3-CHAIN AT n <= 6
+==============================================================================
+  n  classes  with a   3-chains   H1 fails   H2 FAILS   H2r FAILS   posets with
+     (total)  3-chain   (x,u,y)   (cyclic)   (acyclic)  ('leaves')  NO good triple
+  3        5        1         1          0          0           0   0
+  4       16        7        13          0          1           4   0
+  5       63       42       128          0         17          59   0
+  6      318      262      1238          0        217         689   0
+
+  H1 (the cycle) never fails.  H2 -- the assertion that {x,u} + singletons is
+  ACYCLIC -- fails on the triples listed below, and its stated reason ('every
+  arrow leaves it') fails far more often still, since anything below x sends an
+  arrow INTO the block.  Smallest witnesses:
+     n=4  P=[(1, 0), (2, 0), (2, 1), (3, 0), (3, 1), (3, 2)]   x=3 u=1 y=0 :  {x,u}={3,1} + singletons is CYCLIC
+     n=5  P=[(2, 0), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (4, 3)]   x=4 u=2 y=0 :  {x,u}={4,2} + singletons is CYCLIC
+     n=5  P=[(2, 0), (2, 1), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (4, 3)]   x=4 u=2 y=1 :  {x,u}={4,2} + singletons is CYCLIC
+     n=5  P=[(2, 0), (2, 1), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (4, 3)]   x=4 u=2 y=0 :  {x,u}={4,2} + singletons is CYCLIC
+     n=5  P=[(1, 0), (2, 0), (2, 1), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (4, 3)]   x=3 u=1 y=0 :  {x,u}={3,1} + singletons is CYCLIC
+     n=5  P=[(1, 0), (2, 0), (2, 1), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (4, 3)]   x=4 u=2 y=1 :  {x,u}={4,2} + singletons is CYCLIC
+
+  The 4-chain 0<1<2<3 with x=0,u=2,y=3 is the smallest: the quotient by
+  {0,2}|{1}|{3} has {0,2} -> {1} (from 0<1) and {1} -> {0,2} (from 1<2).
+
+==============================================================================
+THE REPAIR: TAKE THE 3-CHAIN INSIDE THE COVER RELATION,  x -< u -< y
+==============================================================================
+  n  classes with 3-chain   cover-3-chains   H1 fails   H2 fails
+  3                   1                1          0          0   (posets with a 3-chain but no cover-3-chain: 0)
+  4                   7               11          0          0   (posets with a 3-chain but no cover-3-chain: 0)
+  5                  42               95          0          0   (posets with a 3-chain but no cover-3-chain: 0)
+  6                 262              826          0          0   (posets with a 3-chain but no cover-3-chain: 0)
+
+  0 failures of either half once the 3-chain is taken inside the covers, at
+  every n <= 6: every poset with a 3-chain has a saturated one, and for a
+  covering pair x -< u no element sits strictly between them, so the only
+  possible return path to {x,u} would be a chain x < ... < u or u < ... < x.
+  That is the missing hypothesis; with it Step 1 goes through as written.

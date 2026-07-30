@@ -1,0 +1,69 @@
+==============================================================================
+(3a) LITERATURE: every citation in the gate document, and whether the repo
+     already carried it (a new name would be evidence of a survey)
+==============================================================================
+  Brown         gate:  3 mentions   already in repo: YES (95)
+  Bidigare      gate:  1 mentions   already in repo: YES (4)
+  Hanlon        gate:  1 mentions   already in repo: YES (4)
+  Rockmore      gate:  1 mentions   already in repo: YES (4)
+  Diaconis      gate:  2 mentions   already in repo: YES (11)
+  Saliola       gate:  1 mentions   already in repo: YES (4)
+  Aldous        gate:  1 mentions   already in repo: YES (7)
+  Caputo        gate:  1 mentions   already in repo: YES (6)
+  Liggett       gate:  1 mentions   already in repo: YES (6)
+  Richthammer   gate:  1 mentions   already in repo: YES (6)
+  Young         gate:  6 mentions   already in repo: YES (6)
+  citations introduced by the gate document that the repo did not already carry: NONE
+  claims made ABOUT the literature (the forbidden activity would produce these):
+     gate:299  the poset-quotient instance is known in it.
+     gate:301  both ends. Any literature search framed around Young modules or isotypic decompositions of the
+     gate:302  face space will return nothing usable, and knowing that in advance is what this gate bought.
+     gate:306  4. **Not started here, deliberately:** no literature survey, no categorical formalism, no touching of
+     gate:332  | **NOT CLAIMED** | anything about whether the LRB/support-lattice family is the right home — that is the surv
+
+==============================================================================
+(3b) CATEGORICAL FORMALISM: category-theory vocabulary in the gate document
+==============================================================================
+  morphism               gate:26   antichains** — it is `2(n−1)` isomorphism classes, antichains and *stars* — but **chains are not in
+  morphism               gate:227  **Evidence.** The equivalence (1)⇔(2)⇔(3) is checked **exhaustively on every isomorphism class at
+  category               gate:13   faces-as-poset-quotients might be two instances of **one mechanism**, with a graded category,
+  categories             gate:307  the conjecture pricing in `docs/roadmap.md`, and nothing about "other set-represented categories"
+  categories             gate:332  | **NOT CLAIMED** | anything about whether the LRB/support-lattice family is the right home — that i
+
+==============================================================================
+(3c) CONJECTURE PRICING: files the commit touched, and pricing vocabulary
+==============================================================================
+code/unified_gate_8fd1/characterise.py           | 233 ++++++++++++++++
+ code/unified_gate_8fd1/out_characterise.txt      |  57 ++++
+ code/unified_gate_8fd1/out_quotient_symmetry.txt | 242 +++++++++++++++++
+ code/unified_gate_8fd1/quotient_symmetry.py      | 284 +++++++++++++++++++
+ docs/OneThird-Unified-Framework-Gate.md          | 332 +++++++++++++++++++++++
+ 5 files changed, 1148 insertions(+)
+  docs/roadmap.md    touched by the commit: no
+  STATE.md           touched by the commit: no
+     gate:61   > symmetric case — which is the historical reason the antichain gap needed Aldous' conjecture and its
+     gate:307  the conjecture pricing in `docs/roadmap.md`, and nothing about "other set-represented categories"
+     gate:332  | **NOT CLAIMED** | anything about whether the LRB/support-lattice family is the right home — that is the surv
+
+==============================================================================
+(3d) OTHER SET-REPRESENTED CATEGORIES
+==============================================================================
+  gate:307  the conjecture pricing in `docs/roadmap.md`, and nothing about "other set-represented categories"
+  gate:309  not to have the uniform symmetry that would have motivated generalising.
+  gate:332  | **NOT CLAIMED** | anything about whether the LRB/support-lattice family is the right home — that is the survey. Anythi
+
+==============================================================================
+(4) WHAT THE GATE DOCUMENT ADDED BEYOND ITS BRIEF
+==============================================================================
+  * SS2.4 Theorem for all n (the ticket asked for n = 3,4,5 and 6 'if cheap', and for a characterisation IF a non-degenerate stable class existed)
+      -> responsive but beyond; PROOF DEFECT -- see audit_proof.py
+  * SS2.3 two corrections to the ticket's own description of chains
+      -> TRUE: |AC(C_n)| = 2^{n-1}, |G| = 2, unique minimiser -- reproduced
+  * SS2.5 |G(P)| histogram, D(P) comparison, non-injectivity of P -> AC(P)
+      -> TRUE: 55/318 and 24/63 and 4231 -> 1316 with fibre 131 -- reproduced
+  * SS2.6 AC(P) is not a sublattice of Pi_n (join failure)
+      -> mathematics TRUE (7/16, 49/63 reproduced); NOVELTY CLAIM FALSE -- the source says it
+  * SS1.3 the LRB mechanism as the live route, and the mg-66a6 identity of families
+      -> responsive to L1's question; correctly attributed
+  * SS3 scope for the next ticket
+      -> the ticket asked for the world statement; SS3.2 makes a claim about the literature

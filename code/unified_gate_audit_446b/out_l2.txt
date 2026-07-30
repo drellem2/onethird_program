@@ -1,0 +1,145 @@
+==============================================================================
+n = 1   route: brute force over all 16 relations
+  isomorphism classes         : 1   (A000112 says 1)  OK
+  sum of orbit sizes n!/|Aut| : 1   (A001035 says 1)  OK
+  labelled posets enumerated  : 1   OK
+  acyclicity: Kahn vs topological-ordering route disagreements: 0
+  'sigma.AC(P)=AC(P)' vs 'AC(sigma P)=AC(P)' disagreements: 0
+  S_n-STABLE CLASSES: 1 of 1   (2(n-1) = 1)
+      |AC|=  1 of   1  AC=Pi_n:True  share-end:True  star/antichain:True   antichain A_1
+  |G(P)| histogram: 1 x1
+  classes with G(P) strictly larger than {sigma: sigma.P in {P,P^op}}: 0
+  smallest |AC(P)| = 1, attained by 1 class(es): antichain A_1
+  AC(P) NOT closed under the Pi_n JOIN (coarsening): 0 of 1 classes
+  AC(P) NOT closed under the Pi_n MEET (common refinement, the SOURCE's 'join'): 0 of 1 classes
+  AC(P) fails to be a lattice under refinement: 0 of 1 classes
+  TRI-EQUIVALENCE stable <=> AC=Pi_n <=> share-an-end <=> antichain-or-star: holds on all 1 classes
+  height<=2 classes (the proof's intermediate step): 1  -- strictly weaker, as the doc says
+  CHAIN C_1: |AC| = 1, 2^(n-1) = 1, consecutive-interval partitions = 1, |G| = 1, stable = True
+
+==============================================================================
+n = 2   route: brute force over all 256 relations
+  isomorphism classes         : 2   (A000112 says 2)  OK
+  sum of orbit sizes n!/|Aut| : 3   (A001035 says 3)  OK
+  labelled posets enumerated  : 3   OK
+  acyclicity: Kahn vs topological-ordering route disagreements: 0
+  'sigma.AC(P)=AC(P)' vs 'AC(sigma P)=AC(P)' disagreements: 0
+  S_n-STABLE CLASSES: 2 of 2   (2(n-1) = 2)
+      |AC|=  2 of   2  AC=Pi_n:True  share-end:True  star/antichain:True   antichain A_2
+      |AC|=  2 of   2  AC=Pi_n:True  share-end:True  star/antichain:True   chain C_2
+  |G(P)| histogram: 2 x2
+  classes with G(P) strictly larger than {sigma: sigma.P in {P,P^op}}: 0
+  smallest |AC(P)| = 2, attained by 2 class(es): antichain A_2; chain C_2
+  AC(P) NOT closed under the Pi_n JOIN (coarsening): 0 of 2 classes
+  AC(P) NOT closed under the Pi_n MEET (common refinement, the SOURCE's 'join'): 0 of 2 classes
+  AC(P) fails to be a lattice under refinement: 0 of 2 classes
+  TRI-EQUIVALENCE stable <=> AC=Pi_n <=> share-an-end <=> antichain-or-star: holds on all 2 classes
+  height<=2 classes (the proof's intermediate step): 2  -- strictly weaker, as the doc says
+  CHAIN C_2: |AC| = 2, 2^(n-1) = 2, consecutive-interval partitions = 2, |G| = 2, stable = True
+
+==============================================================================
+n = 3   route: brute force over all 4096 relations
+  isomorphism classes         : 5   (A000112 says 5)  OK
+  sum of orbit sizes n!/|Aut| : 19   (A001035 says 19)  OK
+  labelled posets enumerated  : 19   OK
+  acyclicity: Kahn vs topological-ordering route disagreements: 0
+  'sigma.AC(P)=AC(P)' vs 'AC(sigma P)=AC(P)' disagreements: 0
+  S_n-STABLE CLASSES: 4 of 5   (2(n-1) = 4)
+      |AC|=  5 of   5  AC=Pi_n:True  share-end:True  star/antichain:True   antichain A_3
+      |AC|=  5 of   5  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<1 +1 isolated
+      |AC|=  5 of   5  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<2
+      |AC|=  5 of   5  AC=Pi_n:True  share-end:True  star/antichain:True   up-star 2<1
+  |G(P)| histogram: 2 x1, 6 x4
+  classes with G(P) strictly larger than {sigma: sigma.P in {P,P^op}}: 3
+  smallest |AC(P)| = 4, attained by 1 class(es): chain C_3
+  AC(P) NOT closed under the Pi_n JOIN (coarsening): 0 of 5 classes
+  AC(P) NOT closed under the Pi_n MEET (common refinement, the SOURCE's 'join'): 0 of 5 classes
+  AC(P) fails to be a lattice under refinement: 0 of 5 classes
+  TRI-EQUIVALENCE stable <=> AC=Pi_n <=> share-an-end <=> antichain-or-star: holds on all 5 classes
+  height<=2 classes (the proof's intermediate step): 4  -- strictly weaker, as the doc says
+  CHAIN C_3: |AC| = 4, 2^(n-1) = 4, consecutive-interval partitions = 4, |G| = 2, stable = False
+
+==============================================================================
+n = 4   route: brute force over all 65536 relations
+  isomorphism classes         : 16   (A000112 says 16)  OK
+  sum of orbit sizes n!/|Aut| : 219   (A001035 says 219)  OK
+  labelled posets enumerated  : 219   OK
+  acyclicity: Kahn vs topological-ordering route disagreements: 0
+  'sigma.AC(P)=AC(P)' vs 'AC(sigma P)=AC(P)' disagreements: 0
+  S_n-STABLE CLASSES: 6 of 16   (2(n-1) = 6)
+      |AC|= 15 of  15  AC=Pi_n:True  share-end:True  star/antichain:True   antichain A_4
+      |AC|= 15 of  15  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<1 +2 isolated
+      |AC|= 15 of  15  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<2 +1 isolated
+      |AC|= 15 of  15  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<3
+      |AC|= 15 of  15  AC=Pi_n:True  share-end:True  star/antichain:True   up-star 2<1 +1 isolated
+      |AC|= 15 of  15  AC=Pi_n:True  share-end:True  star/antichain:True   up-star 3<1
+  |G(P)| histogram: 2 x6, 4 x1, 8 x3, 24 x6
+  classes with G(P) strictly larger than {sigma: sigma.P in {P,P^op}}: 9
+  smallest |AC(P)| = 8, attained by 1 class(es): chain C_4
+  AC(P) NOT closed under the Pi_n JOIN (coarsening): 7 of 16 classes
+  AC(P) NOT closed under the Pi_n MEET (common refinement, the SOURCE's 'join'): 0 of 16 classes
+  AC(P) fails to be a lattice under refinement: 0 of 16 classes
+  TRI-EQUIVALENCE stable <=> AC=Pi_n <=> share-an-end <=> antichain-or-star: holds on all 16 classes
+  height<=2 classes (the proof's intermediate step): 9  -- strictly weaker, as the doc says
+  CHAIN C_4: |AC| = 8, 2^(n-1) = 8, consecutive-interval partitions = 8, |G| = 2, stable = False
+
+==============================================================================
+n = 5   route: brute force over all 33554432 relations
+  isomorphism classes         : 63   (A000112 says 63)  OK
+  sum of orbit sizes n!/|Aut| : 4231   (A001035 says 4231)  OK
+  labelled posets enumerated  : 4231   OK
+  acyclicity: Kahn vs topological-ordering route disagreements: 0
+  'sigma.AC(P)=AC(P)' vs 'AC(sigma P)=AC(P)' disagreements: (exhaustive at n<=4 only)
+  S_n-STABLE CLASSES: 8 of 63   (2(n-1) = 8)
+      |AC|= 52 of  52  AC=Pi_n:True  share-end:True  star/antichain:True   antichain A_5
+      |AC|= 52 of  52  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<1 +3 isolated
+      |AC|= 52 of  52  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<2 +2 isolated
+      |AC|= 52 of  52  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<3 +1 isolated
+      |AC|= 52 of  52  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<4
+      |AC|= 52 of  52  AC=Pi_n:True  share-end:True  star/antichain:True   up-star 2<1 +2 isolated
+      |AC|= 52 of  52  AC=Pi_n:True  share-end:True  star/antichain:True   up-star 3<1 +1 isolated
+      |AC|= 52 of  52  AC=Pi_n:True  share-end:True  star/antichain:True   up-star 4<1
+  |G(P)| histogram: 1 x6, 2 x25, 4 x15, 6 x2, 8 x4, 12 x3, 120 x8
+  classes with G(P) strictly larger than {sigma: sigma.P in {P,P^op}}: 24
+  smallest |AC(P)| = 16, attained by 1 class(es): chain C_5
+  AC(P) NOT closed under the Pi_n JOIN (coarsening): 49 of 63 classes
+  AC(P) NOT closed under the Pi_n MEET (common refinement, the SOURCE's 'join'): 0 of 63 classes
+  AC(P) fails to be a lattice under refinement: 0 of 63 classes
+  TRI-EQUIVALENCE stable <=> AC=Pi_n <=> share-an-end <=> antichain-or-star: holds on all 63 classes
+  height<=2 classes (the proof's intermediate step): 21  -- strictly weaker, as the doc says
+  CHAIN C_5: |AC| = 16, 2^(n-1) = 16, consecutive-interval partitions = 16, |G| = 2, stable = False
+
+==============================================================================
+n = 6   route: natural labelling (4824 naturally-labelled posets)
+  isomorphism classes         : 318   (A000112 says 318)  OK
+  sum of orbit sizes n!/|Aut| : 130023   (A001035 says 130023)  OK
+  acyclicity: Kahn vs topological-ordering route disagreements: (not run at n=6)
+  'sigma.AC(P)=AC(P)' vs 'AC(sigma P)=AC(P)' disagreements: (exhaustive at n<=4 only)
+  S_n-STABLE CLASSES: 10 of 318   (2(n-1) = 10)
+      |AC|=203 of 203  AC=Pi_n:True  share-end:True  star/antichain:True   antichain A_6
+      |AC|=203 of 203  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<1 +4 isolated
+      |AC|=203 of 203  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<2 +3 isolated
+      |AC|=203 of 203  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<3 +2 isolated
+      |AC|=203 of 203  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<4 +1 isolated
+      |AC|=203 of 203  AC=Pi_n:True  share-end:True  star/antichain:True   down-star 1<5
+      |AC|=203 of 203  AC=Pi_n:True  share-end:True  star/antichain:True   up-star 2<1 +3 isolated
+      |AC|=203 of 203  AC=Pi_n:True  share-end:True  star/antichain:True   up-star 3<1 +2 isolated
+      |AC|=203 of 203  AC=Pi_n:True  share-end:True  star/antichain:True   up-star 4<1 +1 isolated
+      |AC|=203 of 203  AC=Pi_n:True  share-end:True  star/antichain:True   up-star 5<1
+  |G(P)| histogram: 1 x72, 2 x123, 4 x52, 6 x12, 8 x13, 12 x24, 16 x6, 24 x2, 48 x3, 72 x1, 720 x10
+  classes with G(P) strictly larger than {sigma: sigma.P in {P,P^op}}: 55
+  smallest |AC(P)| = 32, attained by 1 class(es): chain C_6
+  TRI-EQUIVALENCE stable <=> AC=Pi_n <=> share-an-end <=> antichain-or-star: holds on all 318 classes
+  height<=2 classes (the proof's intermediate step): 56  -- strictly weaker, as the doc says
+  CHAIN C_6: |AC| = 32, 2^(n-1) = 32, consecutive-interval partitions = 32, |G| = 2, stable = False
+
+==============================================================================
+SUMMARY: population of S_n-stable quotient lattices
+==============================================================================
+  n   classes   stable   2(n-1)
+  1         1        1        1   OK
+  2         2        2        2   OK
+  3         5        4        4   OK
+  4        16        6        6   OK
+  5        63        8        8   OK
+  6       318       10       10   OK
