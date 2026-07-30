@@ -2,7 +2,7 @@
 
 *For Daniel. Written 2026-07-30 (mg-6016). Everything numerical here is produced by
 `code/semigroup_note/note_check.py`; its committed output is `code/semigroup_note/note_check_output.txt`.
-Regenerate with `code/semigroup_note/run_all.sh` — pure Python 3, no dependencies, about 45 seconds, and
+Regenerate with `code/semigroup_note/run_all.sh` — pure Python 3, no dependencies, about 15 seconds, and
 the output file reproduces byte-identically. That script shares no code with `code/hodge_leverage/` or
 `code/face_geometry/`: it rebuilds the objects from their definitions in exact rational arithmetic, so the
 numbers below are independent of the pipeline they are about.*
@@ -105,7 +105,9 @@ walk absorbing. A structure satisfying (i) and (ii) is called a **left regular b
 for ordered partitions, and the only thing that needs checking for us is that `P`-compatibility survives
 the product (**closure**).
 
-*Verified.* On the worked example: `x·x = x` on 26 of 26 moves; `x·y·x = x·y` on 676 of 676 pairs; closure
+*Proved, and verified.* Closure holds for every `n` and every `P` — a short lexicographic-monotonicity
+argument, written out in §8 — so the sweeps below are a check on the code rather than the evidence for the
+claim. On the worked example: `x·x = x` on 26 of 26 moves; `x·y·x = x·y` on 676 of 676 pairs; closure
 on 676 of 676; associativity on 17 576 of 17 576 triples. Exhaustively over **every labelled poset** on
 `n` elements, 0 failures throughout:
 
@@ -190,9 +192,11 @@ arrow `{a,d} → {b,c}`. Since `c < d`, there is an arrow `{b,c} → {a,d}`. Tha
 > **The commitment levels of `P` are exactly the partitions whose quotient is acyclic** — contract the
 > blocks, keep the induced arrows between distinct blocks, and demand no directed cycle.
 
-*Verified:* on this poset the two descriptions (supports of moves; acyclic quotients) give the same 14
+*Proved, and verified:* the blockquote is a theorem for every `n` and every `P` — the argument is short and
+is in §8. On this poset the two descriptions (supports of moves; acyclic quotients) give the same 14
 partitions. Exhaustively, they agree on **every labelled poset up to 5 elements**: 1 of 1, 3 of 3, 19 of
-19, 219 of 219, 4 231 of 4 231. Not proven in general — see §8.
+19, 219 of 219, 4 231 of 4 231 — and the independent audit checked the same agreement **constructively at
+`n = 6, 7 and 8`**.
 
 This is the sense in which the example is not degenerate: for a poset like an antichain, *every* partition
 is a level and the acyclic condition does nothing. Here it removes one, and you can see it removing it.
@@ -297,9 +301,11 @@ All six spectrum-carrying levels, under all three weightings:
 | `a\|b\|c\|d` (1) | **1** | **1** | **1** |
 
 **Checked against the actual 6 × 6 matrix, in exact rational arithmetic**, by computing
-`dim ker(M − λI)` for each predicted `λ`. Under `w1`: dimensions `1,1,1,1,1,1`, summing to 6 of 6 — so the
-spectrum is right and `M` is diagonalisable. Under `w2`: `1,1,1,2` summing to 6 of 6. Under `w3`:
-`1,1,1,1,1,1` summing to 6 of 6.
+`dim ker(M − λI)` for each predicted `λ`. Under `w1`: six distinct numbers, dimensions `1,1,1,1,1,1`,
+summing to 6 of 6 — so the spectrum is right and `M` is diagonalisable. Under `w2`: only **five** distinct
+numbers, because `ac|bd` and `ad|b|c` both evaluate to `11/32` (this is the collision discussed in §5c);
+the dimensions at `1, 9/16, 17/32, 13/32, 11/32` are `1,1,1,1,2`, summing to 6 of 6. Under `w3`: six
+distinct numbers again, `1,1,1,1,1,1` summing to 6 of 6.
 
 ### 5c. The point of the whole note
 
@@ -550,13 +556,34 @@ attractive part of §5 is the part we did not do.
   arrangement case due to Bidigare–Hanlon–Rockmore and Brown–Diaconis. We cite it; we did not prove it and
   do not claim to. The classical shuffle results in §7 (the Tsetlin spectrum, the `a`-shuffle spectrum) are
   likewise classical — here they are **controls**, showing the machinery reproduces known answers.
-- **Ours.** Two things, both modest. First, the **identification**: that this construction — `P`-compatible
-  ordered partitions of a poset, acting on its linear extensions — satisfies the hypothesis, so the theorem
-  applies to it. Second, the **description of the commitment levels** as exactly the partitions with acyclic
-  quotient, which is what makes the multiplicity formula computable from `P`.
-- **The status of the second one.** It is **verified exhaustively only to five elements** — every labelled
-  poset on `≤ 5` elements (1, 3, 19, 219 and 4 231 of them at `n = 1..5`), 0 disagreements. It is **not
-  proven in general**. Nothing in this note should be read as saying otherwise.
+- **Ours.** Two things, both modest, and both **proved for every `n` and every `P`**. First, the
+  **identification**: that this construction — `P`-compatible ordered partitions of a poset, acting on its
+  linear extensions — satisfies the hypothesis, so the theorem applies to it. Second, the **description of
+  the commitment levels** as exactly the partitions with acyclic quotient, which is what makes the
+  multiplicity formula computable from `P`.
+- **The status of both, exactly.** They are **elementary theorems, not patterns observed in small cases**.
+  Here are the proofs; neither mentions `n`.
+
+  *The identification.* Only closure needs checking (§2), and closure is lexicographic monotonicity. Let
+  `x = (B_1…B_k)` and `y = (C_1…C_l)` be `P`-compatible. The blocks of `x·y` are the non-empty `B_p ∩ C_q`,
+  indexed in lexicographic order of `(p,q)`. If `i < j` in `P`, with `i ∈ B_p ∩ C_q` and `j ∈ B_p' ∩ C_q'`,
+  then compatibility of `x` gives `p ≤ p'` and compatibility of `y` gives `q ≤ q'`, so `(p,q)` is
+  lexicographically no later than `(p',q')`: `i`'s block in `x·y` does not come after `j`'s. So `x·y` is
+  `P`-compatible. ∎
+
+  *The level description.* One direction: an arrow of the quotient joins two *distinct* blocks, and
+  compatibility makes the tail's index no larger than the head's, hence strictly smaller — every arrow
+  strictly increases the index, so a directed cycle would give `p < p`. The support of a move therefore has
+  acyclic quotient. The other: given an acyclic quotient, order the blocks by any topological sort. If
+  `i < j` in `P` they either share a block or the arrow `block(i) → block(j)` forces
+  `index(block(i)) < index(block(j))`, so that ordering is a `P`-compatible move, and its support is the
+  partition we started with. ∎
+
+  The exhaustive sweeps quoted in §2 and §4 — every labelled poset on `≤ 5` elements (1, 3, 19, 219 and
+  4 231 of them at `n = 1..5`), 0 disagreements — are therefore a check on the code, not the evidence for
+  the claim. The independent audit re-derived both proofs from scratch and verified them **constructively
+  at `n = 6, 7 and 8`**, past anything this note computes; see
+  `docs/OneThird-Semigroup-Walk-Family-Note-IndependentAudit.md`.
 
 ---
 
@@ -582,5 +609,7 @@ attractive part of §5 is the part we did not do.
    family — move-to-front / Tsetlin and the inverse riffle shuffles included, both verified against their
    classical spectra.
 6. The adjacent-transposition walk is not in the family except where its spectrum was already obvious. The
-   theorem is standard; ours is the identification plus the acyclic-cut description of the levels, verified
-   to five elements and not proven in general.
+   diagonalisation theorem is standard, cited, and **not ours**. Ours is the identification plus the
+   acyclic-cut description of the levels — and both are **elementary theorems for every `n`**, proved in §8,
+   checked exhaustively on all 4 231 labelled posets at `n ≤ 5`, and then checked constructively at
+   `n = 6, 7, 8` in the independent audit, past this note's own range.
