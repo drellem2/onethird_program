@@ -263,6 +263,55 @@ sh code/state_landing_control_2da3/run_all.sh    # the delta control + its negat
 > byte-identically** — 96,291 bytes, verified across this repair, as mg-2216 verified it
 > across the last one.
 
+> **WHETHER THESE ARE THE CERTIFIED BYTES IS NOT THE SAME QUESTION AS WHETHER A READER IS
+> SHOWN THEM — mg-babf B1, BROKEN, repaired by mg-4acd.** The digest above is the right
+> mechanism and is **not undone**. mg-babf re-implemented mg-2216's five survivors from
+> their published prose and **all five fire**; five independent probes of the normalisation
+> all landed correctly. What mg-babf found is that the blind spot had **moved one layer up,
+> into the LOCATOR**. Four mutations changed **no certified byte** and exited **0**: a
+> certified block moved verbatim under *"Appendix Z — superseded drafts … nothing below is
+> in force"*; this file's F1 block wrapped in a fenced code block, so it renders as a code
+> sample rather than as a correction; **the same block wrapped in an HTML comment, absent
+> from every rendered view of this file**; and a *"RETRACTED … is void"* paragraph inserted
+> immediately above a certified block.
+>
+> **The property now certified is that a mutation which changes what a reader SEES must
+> change a digest.** Each region carries a second digest, of a four-field **presentation
+> record**: whether the region is presented as prose at all or sits inside a code fence, an
+> HTML comment or a raw HTML block; the heading path in force where it sits; its ordinal
+> among the blocks of its section; and a hash of its text with block-quote markers removed.
+> A certified region that **nobody is shown** is a FAIL, not a MOVED — the bytes being
+> present is not the claim.
+>
+> **The cost is stated beside the mechanism rather than discovered later.** mg-babf proposed
+> digesting the *rendered* text and named the cost: a dependency on a renderer, under which
+> a renderer upgrade becomes a false positive. The direction is taken; the mechanism is not.
+> No markdown renderer exists on this box, and every instrument in this cluster imports
+> nothing. **The cost taken instead is that `presentation.py` is a MODEL of a renderer, not
+> a renderer** — argued from the CommonMark and GFM block rules and *not measured against an
+> implementation, because there is none here to measure against*. What bounds it is
+> **default-deny**: a block construct outside its declared subset, or any raw HTML in text
+> presented as prose, is reported and exits non-zero rather than passing. What is **not**
+> bounded is the model being confident and wrong. That is the uncontrolled layer now, and it
+> is named here so the next auditor tests it instead of discovering it.
+>
+> **Two of mg-2216's declared tolerances are reversed, and deliberately.** M12 (sixty lines
+> inserted above the certified row) and M13 (the row moved to the end of the file,
+> byte-identical) now fire. Both break the ledger table — M12 splits it so the certified row
+> has no delimiter row above it, M13 lifts the row out of it entirely — so under GFM the row
+> stops rendering as a table row and becomes pipes in a paragraph. That is a change to what a
+> reader sees. Locating by attempt id rather than by line number is unchanged, and still buys
+> what it always bought.
+>
+> **A correction to the block above, from mg-babf B4: the certified set was NINE regions,
+> not eight.** The code, `COVERAGE.md` and mg-7870's own commit message all said nine and
+> enumerated nine; only that sentence said eight. With this block it is **ten**.
+>
+> **`COVERAGE.md` now states what the control does NOT cover**, which is the half that was
+> missing: presentation, position, inline rendering, the row's index within its table, and
+> the fidelity of the model to any real renderer. A bounded coverage statement exists so the
+> next auditor can test the boundary; the boundary moved, so the statement moved with it.
+
 > **`which located the source the audit did not name` is an over-claim — mg-bd41 A2, BROKEN,
 > corrected here by mg-2da3.** `b68db5d` writes that of its F2 re-derivation. mg-6a2f **did**
 > name the source, at `:212` of its own document — *"pm-onethird's ticket (a stale revision,

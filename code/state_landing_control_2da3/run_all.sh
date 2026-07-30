@@ -30,6 +30,22 @@
 # script, states which regions are digested, what the normalisation is, and what is
 # deliberately not covered — read that first.
 #
+# mg-4acd EXTENDED THE CERTIFICATION FROM THE BYTES TO WHAT A READER SEES.  mg-babf audited
+# the digest and it HELD — mg-2216's five survivors all fire, and five probes of the
+# normalisation all landed correctly — but the blind spot had moved one layer up, into the
+# LOCATOR: four mutations changed NO CERTIFIED BYTE and exited 0, including this file's own
+# certified F1 block HTML-commented out of the rendered README.  Each region now carries a
+# SECOND digest, of a four-field PRESENTATION RECORD (state / heading / position / presented),
+# computed by presentation.py beside this script.  A region nobody is shown is a FAIL.
+# COVERAGE.md states what the presentation layer does NOT cover, and what the mechanism COSTS:
+# presentation.py is a MODEL of a renderer, not a renderer, and that is the layer nothing
+# above it now controls.  Read COVERAGE.md first.
+#
+# SECTION 0 is presentation.py's own self-test.  It checks the MODEL against its own stated
+# subset — every claim the header makes about which constructs are modelled and which are
+# default-denied has a case — and it emphatically does NOT check the model against a real
+# renderer, which is impossible here and is the residual risk COVERAGE.md names.
+#
 # ~25 s total, most of it the two full runs of the pinned battery that negative_control.py
 # performs for contrast.  negative_control.py MUTATES STATE.md and the state-history README
 # in the working tree and restores them under a finally + sha256 check; it refuses to run
@@ -37,14 +53,20 @@
 #
 # THE EVIDENCE THAT THE REPAIR WORKS IS NOT IN THIS SCRIPT, and deliberately so: an author's
 # own negative control cannot establish sensitivity, because the author picks the mutations.
-# It is code/state_control_audit_2216/mutation_battery.py — written before the repair, by
-# someone else — re-run unmodified and captured verbatim at out_battery_2216_rerun.txt
-# (14 mutations, 10 caught, 0 MISSED, 4 tolerated by design, 0 noisy).  Reproduce it with:
-#     python3 code/state_control_audit_2216/mutation_battery.py
-# It is not run here because it mutates the same two files and takes ~30 s on its own.
+# It is two INDEPENDENT batteries, each written before the repair it tests, by someone else,
+# each re-run UNMODIFIED and captured verbatim:
+#     python3 code/state_control_audit_babf/mutations_babf.py     -> out_battery_babf_rerun.txt
+#         15 mutations, 11 of 11 expected-catch CAUGHT, 0 SILENT MISSES (was 6), 0 noisy
+#     python3 code/state_control_audit_2216/mutation_battery.py   -> out_battery_2216_rerun_4acd.txt
+#         14 mutations, 10 caught, 0 MISSED, 2 tolerated, 2 NOISY — M12 and M13, a published
+#         tolerance REVERSED on purpose and argued in COVERAGE.md, not folded in quietly
+# Neither is run here because both mutate the same two files and each takes ~30 s on its own.
 set -e
 cd "$(git rev-parse --show-toplevel)"
 
+echo "### 0. presentation.py     — does the model match its own DECLARED SUBSET?"
+python3 code/state_landing_control_2da3/presentation.py
+echo
 echo "### 1. delta_control.py    — does b68db5d's delta hold IN THE WORKING TREE?"
 python3 code/state_landing_control_2da3/delta_control.py
 echo

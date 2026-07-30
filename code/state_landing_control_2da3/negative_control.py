@@ -21,7 +21,7 @@ mg-bd41 did to the old one: mutilate the working tree, re-run, and read the exit
     the control works.  NC5 and NC6 below exist to show the MECHANISM firing in-place; they
     are deliberately not chosen from mg-2216's list.
 
-SIX MUTATIONS, weakest last:
+TEN MUTATIONS, weakest last within each layer:
 
   NC1  THE SAME GUTTING mg-bd41 USED — STATE.md's lines 101-300 deleted outright and line
        1 replaced with "TOTALLY DESTROYED", 175,552 -> ~38,000 bytes.  Under this exact
@@ -52,6 +52,28 @@ SIX MUTATIONS, weakest last:
        satisfied, so the region digest is the only thing that can fire.  Expected MOVED (2),
        for the same reason as NC5.
 
+  NC7  ONE CLOSING CODE FENCE DELETED, above the certified blocks.  Every one of them is
+       now inside a code sample.  No certified byte changes and no certified line is
+       touched — the suppressing edit is a DELETION somewhere else entirely.
+
+  NC8  A CERTIFIED BLOCK WRAPPED IN <details>, which suppresses NOTHING: it still parses
+       as markdown and still renders, collapsed behind a click.  Caught by the RAW-HTML
+       GUARD, which is one rule over the whole file rather than a list of tags.
+
+  NC9  A CERTIFIED BLOCK MOVED WITHIN ITS OWN SECTION, byte-identical.  The heading path
+       is unchanged, so this isolates `position` from `heading`.
+
+  NC10 THE LEDGER TABLE'S DELIMITER ROW DELETED.  Without it there is no GFM table: the
+       whole ledger renders as a paragraph of pipes and the certified cell is not a cell
+       any reader sees.  Expected FAIL, not MOVED — a region nobody is shown is damage.
+
+  NC7-NC10 (mg-4acd) DEMONSTRATE THE PRESENTATION LAYER, and NONE of them is one of
+       mg-babf's four.  Those four are now this repair's known-answer set — mg-4acd built
+       against them and re-ran them as evidence — so re-using them here would reproduce the
+       exact closed loop mg-2216 opened.  They are re-run, unmodified, at
+       out_battery_babf_rerun.txt; these four are different mutations of the same layer.
+       Every one changes NOT ONE CERTIFIED BYTE.
+
 SAFETY.  Both files are snapshotted as bytes before anything is written, restored in a
 `finally`, and re-checked by sha256 afterwards.  The script REFUSES TO RUN if either file
 is already dirty, so it can never restore a working tree to the wrong state.
@@ -71,6 +93,23 @@ BATTERY = "code/state_audit_6a2f/run_all.sh"
 BATTERY_OUT = os.path.join(REPO, "code/state_audit_6a2f/out_audit.txt")
 
 F1_BLOCK_MARKER = "**`no 4d tally` is a correction, and `133` / `220` are its cost"
+F2_BLOCK_MARKER = "**THOSE FIVE FIGURES WERE WRONG, here and in `57f962f`'s commit message"
+
+
+def _quote_span(lines, marker):
+    """[start, end) of the maximal blockquote run carrying `marker`.  Written here rather
+    than imported from delta_control.py: a negative control that shares the locator with
+    the instrument it is mutating is testing the locator against itself."""
+    hits = [i for i, l in enumerate(lines) if marker in l]
+    assert len(hits) == 1, f"marker matched {len(hits)} lines"
+    i = hits[0]
+    s = i
+    while s > 0 and lines[s - 1].lstrip().startswith(">"):
+        s -= 1
+    e = i + 1
+    while e < len(lines) and lines[e].lstrip().startswith(">"):
+        e += 1
+    return s, e
 
 # NC5's target: a certified README region, mutated by exactly one character.
 INDEX_FIGURE = "took row `:135`'s to **7,878**"
@@ -312,6 +351,93 @@ def main():
         print("=" * 78)
         report("delta_control.py    ", *run_control(), tag="NC6")
         print()
+
+        # ---- NC7 -------------------------------------------------------------------
+        # The presentation layer, mg-4acd.  Every mutation from here down leaves EVERY
+        # certified byte exactly as certified, and changes only what a reader is shown.
+        with open(STATE, "wb") as fh:
+            fh.write(state0)
+        rlines = rtext.split("\n")
+        fences = [i for i, l in enumerate(rlines) if l.startswith("```")]
+        assert len(fences) >= 4 and len(fences) % 2 == 0, "unexpected fence layout"
+        victim = fences[-1]                       # the last CLOSING fence in the file
+        cut_fence = rlines[:victim] + rlines[victim + 1:]
+        with open(README, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(cut_fence))
+        print("=" * 78)
+        print("NC7 — ONE CLOSING CODE FENCE DELETED, three lines above the first certified")
+        print(f"      block below it (README line {victim + 1}).  Not one line of any")
+        print("      certified region is touched and not one certified byte changes; every")
+        print("      correction block after it is now INSIDE a code sample.  This is the")
+        print("      shape of mg-babf's B05 without being B05: the suppressing edit is a")
+        print("      DELETION somewhere else, which no list of block wrappers would name.")
+        print("=" * 78)
+        report("delta_control.py    ", *run_control(), tag="NC7")
+        print()
+
+        # ---- NC8 -------------------------------------------------------------------
+        with open(README, "wb") as fh:
+            fh.write(readme0)
+        s8, e8 = _quote_span(rlines, F1_BLOCK_MARKER)
+        wrapped = (rlines[:s8] + ["<details><summary>F1 — click to expand</summary>", ""]
+                   + rlines[s8:e8] + ["", "</details>"] + rlines[e8:])
+        with open(README, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(wrapped))
+        print("=" * 78)
+        print("NC8 — THE F1 BLOCK WRAPPED IN <details>, which SUPPRESSES NOTHING.")
+        print("      The block still parses as markdown and still renders — collapsed, behind")
+        print("      a click.  No enumeration of 'ways to hide a block' catches this, because")
+        print("      it does not hide it; the RAW-HTML GUARD catches it, and that guard is one")
+        print("      rule over the whole file rather than a list of tags.")
+        print("=" * 78)
+        report("delta_control.py    ", *run_control(), tag="NC8")
+        print()
+
+        # ---- NC9 -------------------------------------------------------------------
+        with open(README, "wb") as fh:
+            fh.write(readme0)
+        s9, e9 = _quote_span(rlines, F2_BLOCK_MARKER)
+        head9 = next(i for i, l in enumerate(rlines) if l.startswith("## "))
+        block9 = rlines[s9:e9]
+        moved = rlines[:s9] + rlines[e9:]
+        title = next(i for i, l in enumerate(moved) if l.startswith("# "))
+        at = title + 1
+        moved = moved[:at] + [""] + block9 + moved[at:]
+        with open(README, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(moved))
+        print("=" * 78)
+        print("NC9 — THE F2 BLOCK MOVED WITHIN ITS OWN SECTION, byte-identical.")
+        print(f"      From line {s9 + 1} to line {at + 2}, still above the first '## '")
+        print(f"      (line {head9 + 1}), so the heading path it sits under is unchanged and")
+        print("      only `position` fires.  This isolates the ordinal from")
+        print("      the heading path — mg-babf's B04 moves both at once.")
+        print("=" * 78)
+        report("delta_control.py    ", *run_control(), tag="NC9")
+        print()
+
+        # ---- NC10 ------------------------------------------------------------------
+        with open(README, "wb") as fh:
+            fh.write(readme0)
+        i10 = row_index(text, "mg-276d")
+        j = i10
+        while j > 0 and ls[j - 1].startswith("|"):
+            j -= 1
+        assert set(ls[j + 1].replace("|", "").replace("-", "")) <= {" ", ":"}, \
+            "the line under the ledger header is not a GFM delimiter row"
+        no_delim = ls[:j + 1] + ls[j + 2:]
+        with open(STATE, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(no_delim))
+        print("=" * 78)
+        print("NC10 — THE LEDGER TABLE'S DELIMITER ROW DELETED (STATE.md line "
+              f"{j + 2}).")
+        print("      The certified row is byte-identical and still the only row keyed to")
+        print("      mg-276d.  Without a delimiter row there is no GFM table: the whole")
+        print("      ledger renders as a paragraph of pipes, and the certified cell is not")
+        print("      a cell any reader sees.  Expected FAIL, not MOVED — a certified region")
+        print("      nobody is shown is damage.")
+        print("=" * 78)
+        report("delta_control.py    ", *run_control(), tag="NC10")
+        print()
     finally:
         with open(STATE, "wb") as fh:
             fh.write(state0)
@@ -329,7 +455,8 @@ def main():
           f"README sha {sha(r1)} == {sha(readme0)}")
     print("=" * 78)
     want_by_tag = {"clean": (0,), "NC1": (1,), "NC2": (1,), "NC3": (1,), "NC4": (2,),
-                   "NC5": (2,), "NC6": (2,)}
+                   "NC5": (2,), "NC6": (2,), "NC7": (1,), "NC8": (2,), "NC9": (2,),
+                   "NC10": (1,)}
     for tag, want in want_by_tag.items():
         got = CODES.get(tag)
         label = {0: "must be 0", 1: "must be 1 (FAIL)",
@@ -348,8 +475,9 @@ def main():
     print("         picks the mutations his own negative control runs, so this file cannot")
     print("         establish sensitivity — that is exactly how the pre-repair version")
     print("         passed while missing 8 of mg-2216's 14.  The establishing evidence is")
-    print("         out_battery_2216_rerun.txt: mg-2216's independent battery, written")
-    print("         before this repair and re-run against it unmodified.")
+    print("         out_battery_2216_rerun.txt and out_battery_babf_rerun.txt: two")
+    print("         independent batteries, each written before the repair it now tests,")
+    print("         each re-run unmodified.")
     return 0
 
 

@@ -1,6 +1,44 @@
+### 0. presentation.py     — does the model match its own DECLARED SUBSET?
+presentation.py — SELF-TEST of the DECLARED SUBSET
+======================================================================================
+Each case asserts what the module header CLAIMS about one construct.  This checks
+the model against its own statement; it does NOT check the model against a
+renderer, and no case below should ever be read as if it did.
+
+  #  state         heading        anom html  claim
+  1  rendered      H                 0    0  ok   a plain paragraph is rendered
+  2  rendered      H                 0    0  ok   a blockquote is rendered
+  3  fenced-code   H                 0    0  ok   a fenced block is not prose
+  4  fenced-code   H                 0    0  ok   a fence SWALLOWS what follows until it closes
+  5  fenced-code   H                 0    0  ok   an UNCLOSED fence swallows the rest of the document
+  6  fenced-code   H                 0    0  ok   a tilde fence is a fence too
+  7  fenced-code   H                 0    0  ok   a fence is closed only by its OWN character at its OWN length
+  8  html-comment  H                 0    1  ok   an HTML comment hides what it wraps
+  9  html-block    H                 0    1  ok   a raw HTML block is not prose
+ 10  rendered      H                 0    2  ok   a <details> wrapper suppresses NOTHING and is caught by the html guard alone
+ 11  html-comment  H                 0    1  ok   an HTML comment is caught by the html guard as well as by `state`
+ 12  rendered      A>B>C             0    0  ok   the heading path is the ATX chain in force
+ 13  rendered      A>D               0    0  ok   a deeper heading pops back on a shallower one
+ 14  rendered      H                 0    0  ok   a thematic break is NOT a setext underline
+ 15  rendered      H                 1    0  ok   a setext underline IS default-denied
+ 16  rendered      H                 1    0  ok   an indented code block is default-denied
+ 17  rendered      H                 1    0  ok   a tab is default-denied
+ 18  rendered      H                 0    0  ok   a code span is not raw HTML
+ 19  fenced-code   H                 0    0  ok   HTML inside a fence is not raw HTML
+
+POSITION — what moves a region's presentation record, and what does not
+     ok   record MOVES — a paragraph inserted ABOVE moves the ordinal
+     ok   record MOVES — a paragraph inserted BELOW moves the sibling count
+     ok   record MOVES — moving the block under a new heading moves the path
+     ok   record holds — editing a NEIGHBOURING block moves neither
+
+======================================================================================
+23 cases, 0 wrong
+
 ### 1. delta_control.py    — does b68db5d's delta hold IN THE WORKING TREE?
 mg-2da3 — working-tree control for b68db5d's delta
-           (mg-7870: certified by CONTENT DIGEST; coverage stated in the header)
+           (mg-7870: certified by CONTENT DIGEST — are these the certified bytes?)
+           (mg-4acd: and by PRESENTATION RECORD — is a reader shown them?)
 certified side  : the WORKING TREE (STATE.md, docs/state-history/README.md)
 baseline side   : b68db5d^  — used ONLY as the BEFORE of a measured delta
 
@@ -18,7 +56,7 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
          found 1
 2. CERTIFIED REGION DIGESTS — sha256 of N(region), N = strip ASCII space/tab/
    CR/LF from the two ends and nothing else.  This is what certifies the delta;
-   9 regions, all located by content, all printed in full.
+   10 regions, all located by content, all printed in full.
   [pass] cell.tree — row :135's content cell, WORKING TREE
          STATE.md:135; 7876 characters, 8010 bytes after N
          certified sha256 b53ad402349d531fb8d18893ca55c380517ed3b809bfc0d4aeb0c41b795ccf87
@@ -32,7 +70,7 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
          certified sha256 ad9143cc402c797a600166968d7fbc4d1dc9423f03f00d373dfc026004020b06
          measured  sha256 ad9143cc402c797a600166968d7fbc4d1dc9423f03f00d373dfc026004020b06
   [pass] readme.F1 — the F1 correction block
-         docs/state-history/README.md:292-311; 1643 characters, 1671 bytes after N
+         docs/state-history/README.md:341-360; 1643 characters, 1671 bytes after N
          certified sha256 f81e2cdc63bd0fbcc2790f2878959ac4aab35c54ce9690fdec84ab7e0dc51908
          measured  sha256 f81e2cdc63bd0fbcc2790f2878959ac4aab35c54ce9690fdec84ab7e0dc51908
   [pass] readme.B1 — the B1 attribution correction
@@ -55,6 +93,87 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
          docs/state-history/README.md:229-264; 2736 characters, 2754 bytes after N
          certified sha256 59ab8f5068742edb7e67ae0efd060d0eeb09f3174d8789df29ac529304620bd2
          measured  sha256 59ab8f5068742edb7e67ae0efd060d0eeb09f3174d8789df29ac529304620bd2
+  [pass] readme.A1.4acd — the mg-babf / mg-4acd correction to the A1 block
+         docs/state-history/README.md:266-313; 3695 characters, 3711 bytes after N
+         certified sha256 779702c03697be89bfd9c40ffc483e78aec834a6d3eb58989ac60399aef45c11
+         measured  sha256 779702c03697be89bfd9c40ffc483e78aec834a6d3eb58989ac60399aef45c11
+
+2b. CERTIFIED PRESENTATION RECORDS — the content digest above says these are the
+    certified BYTES; these say a reader is still SHOWN them, in the same place.
+    Four fields, printed in full, hashed in the order printed.  A region that is
+    no longer presented at all is a FAIL; one that moved is a MOVED.
+  [pass] cell.tree — row :135's content cell, WORKING TREE: presentation
+         state      gfm-table-row
+         heading    1/3–2/3 Program — State of the Wall > Attempt index (so nothing is re-walked)
+         position   block 1 of 3 in its section
+         columns    3 presented
+         presented  a7278bf8ee72a53e4fd582942a1157bc04f6788663e7d2d3c017bd24b93c224b
+         certified record sha256 a621c910868ba3bc254216e983fb8cb84da6007d94a01f24e2f71c2a60ecba0e
+         measured  record sha256 a621c910868ba3bc254216e983fb8cb84da6007d94a01f24e2f71c2a60ecba0e
+  [pass] cell.base — row :135's content cell at b68db5d^: presentation
+         state      gfm-table-row
+         heading    1/3–2/3 Program — State of the Wall > Attempt index (so nothing is re-walked)
+         position   block 1 of 3 in its section
+         columns    3 presented
+         presented  5c55f1feab6d8d967a966bd655fe906755fc21ca648347969629eeffdd200bd2
+         certified record sha256 14e4171a94061a951b0e4b653d11f42857ee328b6fd6e13d870727faf4fe7b77
+         measured  record sha256 14e4171a94061a951b0e4b653d11f42857ee328b6fd6e13d870727faf4fe7b77
+  [pass] readme.F2 — the F2 correction block: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger
+         position   block 3 of 3 in its section
+         presented  d824eb5ba7ef062dd935dfd5f24f8d0798681f2f71e9def5b2e913394b55ac84
+         certified record sha256 dbe341f97e051849c23746029854c43dcac35812f5332f8f5fb39b3e36e6565d
+         measured  record sha256 dbe341f97e051849c23746029854c43dcac35812f5332f8f5fb39b3e36e6565d
+  [pass] readme.F1 — the F1 correction block: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > The three A3 sites (`a3_reading_path.py`)
+         position   block 2 of 2 in its section
+         presented  ffa3d1b6b56d182c59fbc28ecc0c36b4b5d2e9f0afb05e870ad832585c7721b5
+         certified record sha256 52edb2c400a888536146c716dabb14837fa14f75dad026b80f797ff1c708c63b
+         measured  record sha256 52edb2c400a888536146c716dabb14837fa14f75dad026b80f797ff1c708c63b
+  [pass] readme.B1 — the B1 attribution correction: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What was NOT touched
+         position   block 2 of 3 in its section
+         presented  0a82cf6e268e3c14feed39dd9b0526f30a48bec0dec092c2ed25a1eb62564991
+         certified record sha256 7d1a3e1daaee38e0622e4133a2c475828d4928d2a42b30cde51e58cfc6f3fa5d
+         measured  record sha256 7d1a3e1daaee38e0622e4133a2c475828d4928d2a42b30cde51e58cfc6f3fa5d
+  [pass] readme.B1.A3 — the B1 bullet's A3 ancestry correction: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What was NOT touched
+         position   block 3 of 3 in its section
+         presented  436636ae9cd726ad367c2f1f24026ef5c40c86bb771268b6217f02e85f5f5ca2
+         certified record sha256 245cc23b4b24a718a7fe220dff71937878496f5546c6e11dce99481dc3ac95b9
+         measured  record sha256 245cc23b4b24a718a7fe220dff71937878496f5546c6e11dce99481dc3ac95b9
+  [pass] readme.index — the index note carrying the moved cell figure: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > The index
+         position   block 2 of 4 in its section
+         presented  a1e051c6f2bfa83f3be63870b5a6b80c41bce10e96069695a2999b3681570acc
+         certified record sha256 5a73c86c64b2ec773e73dff12ee0f49f8477f7397ebe901f5049d364c907d4df
+         measured  record sha256 5a73c86c64b2ec773e73dff12ee0f49f8477f7397ebe901f5049d364c907d4df
+  [pass] readme.A1 — the A1 correction block (b68db5d's headline sentence): presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
+         position   block 2 of 6 in its section
+         presented  11ce5d7edaeab027da84ea31161f235637a686dd4c1ca46ca4b3ab30796596c0
+         certified record sha256 f642d170bc7bdc7c869ea8f23e1f452c2994a27fb16a446e554c5bcb975a2780
+         measured  record sha256 f642d170bc7bdc7c869ea8f23e1f452c2994a27fb16a446e554c5bcb975a2780
+  [pass] readme.A1.7870 — the mg-2216 / mg-7870 correction to the A1 block: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
+         position   block 3 of 6 in its section
+         presented  37d7cc33fe4e75edcac714fd7f89b6e251008ee450f308303911c193a22b6750
+         certified record sha256 25892df23732ba028e28ba99d83b5cc4aa16d552f2d877dfd44fdff1c81e3326
+         measured  record sha256 25892df23732ba028e28ba99d83b5cc4aa16d552f2d877dfd44fdff1c81e3326
+  [pass] readme.A1.4acd — the mg-babf / mg-4acd correction to the A1 block: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
+         position   block 4 of 6 in its section
+         presented  101d333d0dc1fc8d7c2c7e6d6405049e0e07f5bb6b78bcf70e201480b7c755cd
+         certified record sha256 5c28bc769bf19d59ed094432ee6629bf048e48cbcd32eababdf32e1be315fade
+         measured  record sha256 5c28bc769bf19d59ed094432ee6629bf048e48cbcd32eababdf32e1be315fade
 
 3. THE F1 REPAIR — present in the tree, absent at the baseline
    (these separate 'damaged' from 'changed'; section 2 is what certifies)
@@ -100,27 +219,47 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
          7876 < 8440
 
 7. docs/state-history/README.md — the correction blocks b68db5d and this repair added
-         22759 bytes, 22568 characters, 321 lines
+         26472 bytes, 26265 characters, 370 lines
          (their CONTENT is certified in section 2; these lines report where
           each one was found and how much of it the digest spans)
   readme.F2      docs/state-history/README.md:15-44     header 87 chars, body 2218 chars
-  readme.F1      docs/state-history/README.md:292-311   header 87 chars, body 1555 chars
+  readme.F1      docs/state-history/README.md:341-360   header 87 chars, body 1555 chars
   readme.B1      docs/state-history/README.md:96-102    header 84 chars, body 478 chars
   readme.B1.A3   docs/state-history/README.md:104-111   header 88 chars, body 628 chars
   readme.index   docs/state-history/README.md:138-141   header 90 chars, body 219 chars
   readme.A1      docs/state-history/README.md:187-227   header 84 chars, body 2975 chars
   readme.A1.7870 docs/state-history/README.md:229-264   header 89 chars, body 2646 chars
+  readme.A1.4acd docs/state-history/README.md:266-313   header 89 chars, body 3605 chars
+
+8. PRESENTATION GUARDS, over BOTH certified files in full
+   presentation.py models a declared subset of CommonMark + GFM block structure.
+   These two guards are how that subset is BOUNDED rather than assumed: a
+   construct it does not model, or raw HTML in text presented as prose, is
+   reported and exits non-zero instead of passing.  Both are 0 as things stand.
+  [pass] STATE.md: 0 block constructs outside the modelled subset
+         over all 383 lines; 0 found
+  [pass] STATE.md: 0 raw-HTML tokens in text presented as prose
+         over all 383 lines, code fences and inline code spans masked; 0 found
+         114 rendered blocks in 11 sections (the population section 2b's positions are ordinals within)
+  [pass] docs/state-history/README.md: 0 block constructs outside the modelled subset
+         over all 370 lines; 0 found
+  [pass] docs/state-history/README.md: 0 raw-HTML tokens in text presented as prose
+         over all 370 lines, code fences and inline code spans masked; 0 found
+         29 rendered blocks in 9 sections (the population section 2b's positions are ordinals within)
 
 ==============================================================================
 RESULT: PASS — every check above read the working tree and every one held,
-        including 9 region digests.  Coverage is stated in
-        this file's header: what is digested, and what is not.
-        This instrument CAN fail; negative_control.py makes it fail.
+        including 10 content digests and the same number of
+        PRESENTATION RECORDS: the certified bytes are the certified bytes,
+        AND a reader is still shown them, in the same place, as prose.
+        Coverage is stated in this file's header and in COVERAGE.md: what
+        is digested, what is not, and what the presentation model cannot
+        see.  This instrument CAN fail; negative_control.py makes it fail.
 ==============================================================================
 
 ### 2. negative_control.py — can it fail?  (and can the pinned battery?)
 STATE.md  at rest: 177464 bytes, sha 54a41150fd75f97e
-README.md at rest: 22759 bytes, sha 6fd6ac3bafb182d1
+README.md at rest: 26472 bytes, sha 07878fcf5ed7d49a
 
 ==============================================================================
 POSITIVE CONTROL — clean tree
@@ -147,22 +286,23 @@ NC2 — ROW :135 REVERTED TO b68db5d^ (only the certified edit is undone)
       line 135: 9028 -> 8855 characters; every other line untouched
 ==============================================================================
   delta_control.py    : exit 1   CONTROL FIRES
-      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree.
+      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,
       [MOVED] cell.tree — row :135's content cell, WORKING TREE
+      [MOVED] cell.tree — row :135's content cell, WORKING TREE: presentation
       [FAIL] tree row states the NARROW claim
       [FAIL] tree row QUOTES the false absolute it replaced
       [FAIL] tree row ATTRIBUTES the correction
       [FAIL] it precedes the F1 sentence
-      [MOVED] the gap is 399 characters
-      ... and 3 more failing checks (9 in total)
+      ... and 4 more failing checks (10 in total)
 
 ==============================================================================
 NC3 — THE F1 CORRECTION BLOCK CUT OUT OF THE README (STATE.md intact)
-      321 -> 301 lines (blockquote lines 292-311 removed)
+      370 -> 350 lines (blockquote lines 341-360 removed)
 ==============================================================================
   delta_control.py    : exit 1   CONTROL FIRES
-      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree.
+      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,
       [FAIL] readme.F1 — the F1 correction block: LOCATABLE
+      [FAIL] readme.F1 — the F1 correction block: LOCATABLE for presentation
       [FAIL] readme.F1 — the F1 correction block: marker matched 0 lines, need exactly 1
 
 ==============================================================================
@@ -175,6 +315,7 @@ NC4 — ROW :135 LEGITIMATELY EDITED (the F1 repair left intact, the cell
   delta_control.py    : exit 2   CONTROL FIRES
       RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
       [MOVED] cell.tree — row :135's content cell, WORKING TREE
+      [MOVED] cell.tree — row :135's content cell, WORKING TREE: presentation
       [MOVED] tree cell is 7876 characters (stripped)
       [MOVED] the delta is +173 characters
 
@@ -187,6 +328,7 @@ NC5 — ONE CHARACTER FALSIFIED INSIDE A CERTIFIED README REGION
   delta_control.py    : exit 2   CONTROL FIRES
       RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
       [MOVED] readme.index — the index note carrying the moved cell figure
+      [MOVED] readme.index — the index note carrying the moved cell figure: presentation
 
 ==============================================================================
 NC6 — 500 CHARACTERS OF THE CERTIFIED CELL SORTED IN PLACE
@@ -197,9 +339,60 @@ NC6 — 500 CHARACTERS OF THE CERTIFIED CELL SORTED IN PLACE
   delta_control.py    : exit 2   CONTROL FIRES
       RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
       [MOVED] cell.tree — row :135's content cell, WORKING TREE
+      [MOVED] cell.tree — row :135's content cell, WORKING TREE: presentation
 
 ==============================================================================
-RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 6fd6ac3bafb182d1 == 6fd6ac3bafb182d1
+NC7 — ONE CLOSING CODE FENCE DELETED, three lines above the first certified
+      block below it (README line 185).  Not one line of any
+      certified region is touched and not one certified byte changes; every
+      correction block after it is now INSIDE a code sample.  This is the
+      shape of mg-babf's B05 without being B05: the suppressing edit is a
+      DELETION somewhere else, which no list of block wrappers would name.
+==============================================================================
+  delta_control.py    : exit 1   CONTROL FIRES
+      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,
+      [FAIL] readme.F1 — the F1 correction block: PRESENTED
+      [FAIL] readme.A1 — the A1 correction block (b68db5d's headline sentence): PRESENTED
+      [FAIL] readme.A1.7870 — the mg-2216 / mg-7870 correction to the A1 block: PRESENTED
+      [FAIL] readme.A1.4acd — the mg-babf / mg-4acd correction to the A1 block: PRESENTED
+
+==============================================================================
+NC8 — THE F1 BLOCK WRAPPED IN <details>, which SUPPRESSES NOTHING.
+      The block still parses as markdown and still renders — collapsed, behind
+      a click.  No enumeration of 'ways to hide a block' catches this, because
+      it does not hide it; the RAW-HTML GUARD catches it, and that guard is one
+      rule over the whole file rather than a list of tags.
+==============================================================================
+  delta_control.py    : exit 2   CONTROL FIRES
+      RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
+      [MOVED] readme.F1 — the F1 correction block: presentation
+      [MOVED] docs/state-history/README.md: 0 raw-HTML tokens in text presented as prose
+
+==============================================================================
+NC9 — THE F2 BLOCK MOVED WITHIN ITS OWN SECTION, byte-identical.
+      From line 15 to line 3, still above the first '## '
+      (line 46), so the heading path it sits under is unchanged and
+      only `position` fires.  This isolates the ordinal from
+      the heading path — mg-babf's B04 moves both at once.
+==============================================================================
+  delta_control.py    : exit 2   CONTROL FIRES
+      RESULT: MOVED (exit 2) — the F1 repair's load-bearing sentences are intact,
+      [MOVED] readme.F2 — the F2 correction block: presentation
+
+==============================================================================
+NC10 — THE LEDGER TABLE'S DELIMITER ROW DELETED (STATE.md line 113).
+      The certified row is byte-identical and still the only row keyed to
+      mg-276d.  Without a delimiter row there is no GFM table: the whole
+      ledger renders as a paragraph of pipes, and the certified cell is not
+      a cell any reader sees.  Expected FAIL, not MOVED — a certified region
+      nobody is shown is damage.
+==============================================================================
+  delta_control.py    : exit 1   CONTROL FIRES
+      RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,
+      [FAIL] cell.tree — row :135's content cell, WORKING TREE: PRESENTED
+
+==============================================================================
+RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 07878fcf5ed7d49a == 07878fcf5ed7d49a
 ==============================================================================
   clean  exit 0   must be 0          ok
   NC1    exit 1   must be 1 (FAIL)   ok
@@ -208,6 +401,10 @@ RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 6fd6a
   NC4    exit 2   must be 2 (MOVED)  ok
   NC5    exit 2   must be 2 (MOVED)  ok
   NC6    exit 2   must be 2 (MOVED)  ok
+  NC7    exit 1   must be 1 (FAIL)   ok
+  NC8    exit 2   must be 2 (MOVED)  ok
+  NC9    exit 2   must be 2 (MOVED)  ok
+  NC10   exit 1   must be 1 (FAIL)   ok
 
 VERDICT: delta_control.py exits 0 on the clean tree and NON-ZERO under all
          six mutations.  It is a control that can fail, and it fails on the
@@ -217,5 +414,6 @@ VERDICT: delta_control.py exits 0 on the clean tree and NON-ZERO under all
          picks the mutations his own negative control runs, so this file cannot
          establish sensitivity — that is exactly how the pre-repair version
          passed while missing 8 of mg-2216's 14.  The establishing evidence is
-         out_battery_2216_rerun.txt: mg-2216's independent battery, written
-         before this repair and re-run against it unmodified.
+         out_battery_2216_rerun.txt and out_battery_babf_rerun.txt: two
+         independent batteries, each written before the repair it now tests,
+         each re-run unmodified.
