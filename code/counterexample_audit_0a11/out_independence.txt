@@ -1,0 +1,116 @@
+
+==============================================================================
+A2.1  qmass is inherited along cut extension -- measured exhaustively
+==============================================================================
+  delta is inherited by the one-line theorem above.  qmass is not proved
+  here, so it is measured on EVERY cut extension of EVERY poset in the
+  section 4 population at n = 5 and n = 6.
+
+  cut extensions inside the population : 257
+  (delta, qmass) inherited             : 257
+  inheritance failures                 : 0
+
+==============================================================================
+A2.2  the e = 9 family to n = 11, and how much of it is new
+==============================================================================
+  Targeted exhaustive enumeration of every poset with e(P) <= 9 up to
+  n = 11.  That class is closed under deleting a MAXIMAL element, since
+  e(P - x) <= e(P) for x maximal, so the enumeration stays exhaustive.
+  It reproduces the repair's group sizes 7 / 13 / 20 at n = 6 / 7 / 8 and
+  carries the measurement three sizes further than the repair reached.
+
+  qmass is computed DIRECTLY (from all Bell(n) partitions) to n = 9;
+  at n = 10, 11 every member is a cut extension (A2.3) so its qmass is
+  inherited, which is the finding rather than an assumption.
+
+  n |  N | k extremal | qmass=1 | perfect | repair-style exact p
+   5 |  2 |          0 |       0 | True    | n/a
+   6 |  7 |          1 |       1 | True    | 1/7
+   7 | 13 |          3 |       3 | True    | 1/286
+   8 | 20 |          6 |       6 | True    | 1/38760
+   9 | 29 |         10 |      10 | True    | 1/20030010
+  10 | 39 |         15 | inherit | inherit | 1/25140840660
+  11 | 50 |         21 | inherit | inherit | 1/67327446062800
+
+==============================================================================
+A2.3  EVERY member above n = 6 is a cut extension of a smaller member
+==============================================================================
+  n |  N | with a cut element | CUT-FREE | cut-free AND extremal
+   5 |  2 |                  0 |        2 | 0
+   6 |  7 |                  4 |        3 | 1
+   7 | 13 |                 13 |        0 | 0
+   8 | 20 |                 20 |        0 | 0
+   9 | 29 |                 28 |        1 | 0
+  10 | 39 |                 39 |        0 | 0
+  11 | 50 |                 50 |        0 | 0
+
+  The containment below is EXACTLY as strong as the cut-free count above:
+  group(n+1) is contained in the cut extensions of group(n) precisely when
+  group(n+1) has no cut-free member.  It fails at n = 5 -> 6 (3 new members)
+  and at n = 8 -> 9 (1 new member) and holds everywhere else.  The reduction
+  is onto group(n) at every step, in every case.
+
+  n=5 -> n=6 : 22 cut extensions generated in all, 4 survive e=9
+               and the population, 18 do not; group(n+1) is inside
+               the survivors : False
+               reduction hits 2 of the 2 members at n=5
+  n=6 -> n=7 : 77 cut extensions generated in all, 13 survive e=9
+               and the population, 64 do not; group(n+1) is inside
+               the survivors : True
+               reduction hits 7 of the 7 members at n=6
+  n=7 -> n=8 : 138 cut extensions generated in all, 20 survive e=9
+               and the population, 118 do not; group(n+1) is inside
+               the survivors : True
+               reduction hits 13 of the 13 members at n=7
+  n=8 -> n=9 : 208 cut extensions generated in all, 28 survive e=9
+               and the population, 180 do not; group(n+1) is inside
+               the survivors : False
+               reduction hits 20 of the 20 members at n=8
+  n=9 -> n=10 : 305 cut extensions generated in all, 39 survive e=9
+               and the population, 266 do not; group(n+1) is inside
+               the survivors : True
+               reduction hits 29 of the 29 members at n=9
+  n=10 -> n=11 : 410 cut extensions generated in all, 50 survive e=9
+               and the population, 360 do not; group(n+1) is inside
+               the survivors : True
+               reduction hits 39 of the 39 members at n=10
+
+==============================================================================
+A2.4  THE COUNT THAT MATTERS: distinct cores, per group and overall
+==============================================================================
+  Two members with the same core have the same (delta, qmass) by A2.1.
+  So a group of N members with C distinct cores offers C, not N,
+  opportunities for the hypothesis to fail.
+
+  n |  N | k extremal | distinct cores | extremal cores | repair's p | core-level p
+   6 |  7 |          1 |              5 |              1 | 1/7             | 1/5
+   7 | 13 |          3 |              5 |              1 | 1/286           | 1/5
+   8 | 20 |          6 |              5 |              1 | 1/38760         | 1/5
+   9 | 29 |         10 |              6 |              1 | 1/20030010      | 1/6
+  10 | 39 |         15 |              6 |              1 | 1/25140840660   | 1/6
+  11 | 50 |         21 |              6 |              1 | 1/67327446062800 | 1/6
+
+  The whole family, n = 5 .. 11, pooled:
+
+    core n | delta | qmass | covers
+         5 | 4/9   | 8/9   | [(0, 2), (0, 3), (1, 3), (2, 4)]
+         5 | 4/9   | 8/9   | [(0, 2), (1, 3), (1, 4), (2, 4)]
+         6 | 4/9   | 2/3   | [(0, 2), (0, 3), (1, 3), (3, 4), (4, 5)]
+         6 | 1/3   | 1     | [(0, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 5)]
+         6 | 4/9   | 2/3   | [(0, 2), (1, 5), (2, 3), (3, 4), (3, 5)]
+         9 | 4/9   | 1/3   | [(0, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8)]
+
+    distinct cores in the whole family : 6
+    of which extremal                  : 1
+    separation perfect on the cores    : True
+    exact p over the distinct cores    : 1/C(6,1) = 1/6
+
+  READ.  The separation is REAL and it holds everywhere it was looked at,
+  including three sizes beyond the repair's reach.  What is not real is the
+  GROWTH of its p-value with n.  1/7 -> 1/286 -> 1/38760 is not evidence
+  accumulating; it is the same 5 posets counted with more chain elements
+  glued on.  The repair calls n = 8 'a pre-specified test in a NEW
+  POPULATION' whose 'family of tests has SIZE 1'.  The test family does
+  have size 1.  The population is not new: conditional on the n = 7 group
+  -- which the repair itself names as a generating observation -- the
+  n = 8 result had probability 1, not 1/38760.

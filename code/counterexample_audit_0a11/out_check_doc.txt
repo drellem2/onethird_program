@@ -1,0 +1,44 @@
+==============================================================================
+CHECK: this audit's figures, each against ITS OWN output file and
+       each inside ITS OWN section
+==============================================================================
+  [ok  ] all 20 inherited         out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] cores at n=8             out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] core-level p in verdict  out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] core-level p in body     out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] 138 generated            out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] six cores                out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] inheritance 257          out:yes  in-section:yes  also-elsewhere:yes
+  [ok  ] cut-free at n=9          out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] family to n=11           out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] exact p 1/38760          out:yes  in-section:yes  also-elsewhere:yes
+  [ok  ] AUC=1                    out:yes  in-section:yes  also-elsewhere:yes
+  [ok  ] exhaustive 19446         out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] A001035 at n=8           out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] n=9 witness e            out:yes  in-section:yes  also-elsewhere:yes
+  [ok  ] n=9 margins              out:yes  in-section:yes  also-elsewhere:yes
+  [ok  ] n=9 deletions            out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] n=10 e                   out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] n=11 e                   out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] population n=8           out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] prop V n=8               out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] rho|e qmass              out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] tau_b and z n=8          out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] sensitivity qfrac n=6    out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] saturation n=8           out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] raw effect n=8           out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] attainability n=8        out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] deflation argmax         out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] deflation unique         out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] silent misses            out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] M1a silent               out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] M2 caught                out:yes  in-section:yes  also-elsewhere:no 
+  [ok  ] baseline clean           out:yes  in-section:yes  also-elsewhere:no 
+
+==============================================================================
+GUARDS
+==============================================================================
+  all guards clean
+
+ALL 32 FIGURES VERIFIED against their own output file AND inside their
+own section.  GUARDS CLEAN.
