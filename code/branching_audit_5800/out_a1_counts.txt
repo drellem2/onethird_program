@@ -1,0 +1,63 @@
+==============================================================================
+A1  THE CORRECTED FRACTIONS, RE-ENUMERATED
+==============================================================================
+
+all posets, enumerated by ADD-A-MAXIMAL-ELEMENT (3.2s):
+  n=1  mine=1       A000112=1       OK 
+  n=2  mine=2       A000112=2       OK 
+  n=3  mine=5       A000112=5       OK 
+  n=4  mine=16      A000112=16      OK 
+  n=5  mine=63      A000112=63      OK 
+  n=6  mine=318     A000112=318     OK 
+  n=7  mine=2045    A000112=2045    OK 
+  n=8  mine=16999   A000112=16999   OK 
+  A000112 disagreements: 0
+
+skew cell poset classes (box = n) and straight cell poset classes:
+  n=1  skew=1     straight=1     all=1       (0.0s)
+  n=2  skew=2     straight=1     all=2       (0.0s)
+  n=3  skew=5     straight=2     all=5       (0.0s)
+  n=4  skew=11    straight=3     all=16      (0.0s)
+  n=5  skew=26    straight=4     all=63      (0.0s)
+  n=6  skew=62    straight=6     all=318     (0.0s)
+  n=7  skew=149   straight=8     all=2045    (0.3s)
+  n=8  skew=360   straight=12    all=16999   (1.8s)
+
+CONTAINMENT CONTROL -- straight subset skew subset all:
+  containment failures: 0
+
+THE TABLE mg-41aa WRITES INTO THE DOCUMENT, RE-DERIVED:
+  n | straight (claimed) | skew (claimed) | all (claimed)
+  4 |    3 (   3)        |   11 (  11)   |     16 (    16)
+  5 |    4 (   4)        |   26 (  26)   |     63 (    63)
+  6 |    6 (   6)        |   62 (  62)   |    318 (   318)
+  7 |    8 (   8)        |  149 ( 149)   |   2045 (  2045)
+  8 |   12 (  12)        |  360 ( 360)   |  16999 ( 16999)
+  rows disagreeing with mg-41aa: 0
+
+af28's STRAIGHT column, which the repair says is reproduced UNCHANGED:
+  af28: [1, 1, 2, 3, 4, 6, 8, 12]
+  mine: [1, 1, 2, 3, 4, 6, 8, 12]
+  straight-column disagreements: 0
+
+THE n <= 3 CLAIM -- 'AT n<=3 EVERY POSET IS A SKEW SHAPE POSET (1/1, 2/2, 5/5)':
+  n=1  skew 1 of 1  ALL
+  n=2  skew 2 of 2  ALL
+  n=3  skew 5 of 5  ALL
+  n=4  skew 11 of 16  5 NOT skew
+      a poset at n=4 that is NOT skew: relations [(1, 0), (2, 0), (3, 0)]
+      a poset at n=4 that is NOT skew: relations [(2, 0), (2, 1), (3, 0), (3, 1)]
+      a poset at n=4 that is NOT skew: relations [(1, 0), (2, 0), (2, 1), (3, 0), (3, 1)]
+
+BOX-GROWTH CONTROL (mg-41aa's own §7 attack 2), run at EVERY n to 8:
+  n=1  box n,n+1,n+2 -> [1, 1, 1]  stable
+  n=2  box n,n+1,n+2 -> [2, 2, 2]  stable
+  n=3  box n,n+1,n+2 -> [5, 5, 5]  stable
+  n=4  box n,n+1,n+2 -> [11, 11, 11]  stable
+  n=5  box n,n+1,n+2 -> [26, 26, 26]  stable
+  n=6  box n,n+1,n+2 -> [62, 62, 62]  stable
+  n=7  box n,n+1,n+2 -> [149, 149, 149]  stable
+  n=8  box n,n+1,n+2 -> [360, 360, 360]  stable
+  movements: 0
+
+SUMMARY a1_counts: A000112 disagreements 0; containment failures 0; table rows disagreeing 0; straight-column disagreements 0; box movements 0

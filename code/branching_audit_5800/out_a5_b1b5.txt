@@ -1,0 +1,23 @@
+==============================================================================
+A5  B1 AS A LATTICE ISOMORPHISM, AND B5 WITHOUT A TRACE FORM
+==============================================================================
+
+[B1] J(D_lam) -> [0, lam], MEET AND JOIN, every pair, lam |- n <= 7
+  partitions: 44
+  largest interval: 19 elements
+  order failures (both directions, every pair): 0
+  MEET not preserved: 0
+  JOIN not preserved: 0
+  => B1 is a LATTICE isomorphism, not merely an order isomorphism: True
+
+[B5] dim kF(P)/rad = |AC(P)|, with NO trace form and NO cited theorem,
+  n <= 5.  F(P) is the set of P-compatible ORDERED set partitions with
+  the block-intersection product; AC(P) is the set of supports.
+  posets: 87;  LRB failures: 0;  character-multiplicativity failures: 0
+  Phi surjective (|AC| characters linearly independent) failures: 0
+  dim ker Phi != |F(P)| - |AC(P)| failures: 0
+  ker Phi NOT nilpotent: 0
+  => dim kF(P)/rad = |AC(P)| for all 87 posets to n <= 5, with no trace
+     form and no cited theorem: True
+
+SUMMARY a5_b1b5: B1 order 0, meet 0, join 0; B5 posets 87, LRB bad 0, character-hom bad 0, surjectivity bad 0, kernel-dim bad 0, non-nilpotent 0

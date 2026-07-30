@@ -1,0 +1,40 @@
+  ok  1  bits
+  ok  2  popcount
+  ok  3  the five 3-element posets are pairwise non-isomorphic
+  ok  4  canon is label-independent on the 3-chain
+  ok  5  enumerate_posets reproduces A000112 to n=7: [1, 2, 5, 16, 63, 318, 2045]
+  ok  6  J(antichain_3) has 8 elements
+  ok  7  J(chain_3) has 4 elements
+  ok  8  J(antichain_3) is a distributive lattice
+  ok  9  Birkhoff: Irr(J(P)) = P for all 87 posets to n<=5, 0 bad
+  ok 10  canon is invariant under random relabelling of J(P) for all 87 posets to n<=5, 3 relabellings each (261 lattices, up to 32 elements)
+  ok 11  M3 is a non-distributive lattice
+  ok 12  N5 is a non-distributive lattice
+  ok 13  C2 x C2 is distributive
+  ok 14  straight_shapes reproduces A000041 to n=8
+  ok 15  |[(), (2,1)]| = 5
+  ok 16  |[(1), (2,1)]| = 4  (the 2-antichain's ideal lattice, hand-checked: (1),(1,1),(2),(2,1))
+  ok 17  [(), (2,1)] is a distributive lattice
+  ok 18  every 3-cell skew shape has 3 cells
+  ok 19  2-antichain IS a skew cell poset
+  ok 20  2-antichain is NOT a straight cell poset
+  ok 21  Young-Fibonacci rank sizes are Fibonacci to rank 7
+  ok 22  '1' is covered by '11' and by '2'
+  ok 23  '21' covers '11' (2 left of the leftmost 1) and '2' (delete the leftmost 1)
+  ok 24  '12' covers only '2' -- the 2 is to the RIGHT of the leftmost 1
+  ok 25  DU - UD = I as an operator identity on YF below rank 6, 0 violations
+  ok 26  every YF interval [0,w] with rank(w) <= 5 is a lattice
+  ok 27  maximal chains of [(), lam] = hook length formula, all lam |- 1
+  ok 28  sum (f^lam)^2 = n! = 1 at n=1
+  ok 29  maximal chains of [(), lam] = hook length formula, all lam |- 2
+  ok 30  sum (f^lam)^2 = n! = 2 at n=2
+  ok 31  maximal chains of [(), lam] = hook length formula, all lam |- 3
+  ok 32  sum (f^lam)^2 = n! = 6 at n=3
+  ok 33  maximal chains of [(), lam] = hook length formula, all lam |- 4
+  ok 34  sum (f^lam)^2 = n! = 24 at n=4
+  ok 35  maximal chains of [(), lam] = hook length formula, all lam |- 5
+  ok 36  sum (f^lam)^2 = n! = 120 at n=5
+  ok 37  maximal chains of [(), lam] = hook length formula, all lam |- 6
+  ok 38  sum (f^lam)^2 = n! = 720 at n=6
+
+SELFTEST 5800: 38 assertions, 0 failures

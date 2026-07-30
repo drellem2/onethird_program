@@ -1,0 +1,62 @@
+==============================================================================
+A7  THE REPAIRED DOCUMENTS, READ OFF DISK
+==============================================================================
+
+[1] NUMBERS IN THE REPAIRED TEXT vs THIS AUDIT'S OWN MEASUREMENTS
+  ok   n=6 skew count 62 appears in the repaired document
+  ok   n=7 skew count 149 appears in the repaired document
+  ok   n=8 skew count 360 appears in the repaired document
+  ok   n=6 all posets 318 appears in the repaired document
+  ok   n=7 all posets 2 045 appears in the repaired document
+  ok   n=8 all posets 16 999 appears in the repaired document
+  (each of these was independently enumerated in out_a1_counts.txt;
+   the audit's values are 62 / 149 / 360 and 318 / 2045 / 16999)
+  ok   repair document states 107 of 405 interval posets
+  ok   repair document states 17 admitted by af28's wording
+  ok   repair document states 90 excluded
+  ok   repair document states 33 YF intervals
+  ok   repair document states 5 non-distributive
+  ok   repair document states 28 distributive
+  ok   repair document states witness (2,2,1)/221
+  ok   repair document states 30 Young intervals
+  ok   the n<=3 claim is stated in the repaired document
+  ok   out_young.txt states the n<=3 claim
+
+[2] THE STRUCK SENTENCES -- present, once, and inside a struck block
+  ok   X1 fractions is still present in the document
+  ok   X1 fractions stands ONLY inside a strike block or the §9 record
+  ok   X1 fractions: quote at line 73 carries a strike marker
+  ok   X2 grid sentence is still present in the document
+  ok   X4 no-other-differential-poset is still present in the document
+  ok   X3 antichain clause (mg-6ad0's X7, NOT repaired here) is still present in the document
+  ok   X3 antichain clause (mg-6ad0's X7, NOT repaired here) stands ONLY inside a strike block or the §9 record
+  ok   X3 antichain clause (mg-6ad0's X7, NOT repaired here): quote at line 221 carries a strike marker
+  ok   consequence 3's false conclusion is no longer asserted outside a strike
+  ok   B2's untested 'exactly the cell posets' is gone from live text
+  ok   out_young.txt no longer asserts the untested 'exactly'
+
+[3] BEYOND-BRIEF: what the commit changed that X1-X4 did not require
+  mg-41aa's brief (mg show mg-41aa) is X1, X2, X3, X4.  Items below are
+  changes in the delivered diff that no one of the four requires.
+  B1  §8's 'Two elementary one-line derivations' -> 'Three'      present:True
+      why it is beyond brief: entailed by X2 and declared in §6 of the repair document
+  B2  §2 heading note: 'the index-set contact DOES extend' to YF present:True
+      why it is beyond brief: NEW positive claim; X4 asked only that the old reading be re-scoped
+  B3  §3 row 10: 'the SAME index-set contact ... on 28 of 33'    present:True
+      why it is beyond brief: NEW positive claim about the Okada monoid
+  B4  §5 item 5(c) verdict block on the three one-liners         present:True
+      why it is beyond brief: records X7 (explicitly NOT repaired) and re-verifies (b)
+  B5  new §9 recording X5, X6, X7 unrepaired                     present:True
+      why it is beyond brief: record only, no claim -- declared in the brief's spirit
+
+  THE ONE THAT CARRIES A CLAIM: B2/B3.  Measured in out_a4_yf.txt --
+  28 of 33 YF intervals ARE distributive and each IS a J(P), which is
+  true; but the 28 intervals yield only 17 distinct P, of which 5 are
+  NOT skew cell posets.  So the FAMILY of index sets is not the same
+  family; what is the same is that both are ideal lattices, which for a
+  finite distributive lattice is Birkhoff and nothing more.
+
+==============================================================================
+A7: 27 checks, 0 failed
+==============================================================================
+SUMMARY a7_doc: 27 checks, 0 failed

@@ -1,0 +1,29 @@
+==============================================================================
+A6  X3 -- THE SECOND TOWER DEFINITION, ON A FOURTH EXTRACTOR
+==============================================================================
+
+source: https://arxiv.org/pdf/math/0612170 (241602 bytes)
+extracted characters: 60949
+
+searched in BOTH spellings -- as printed, and ligature-dropped:
+  S3.1 title             printed:True  ligature-dropped:True   FOUND
+  S3.6 title             printed:True  ligature-dropped:True   FOUND
+  S3.6 input clause      printed:True  ligature-dropped:True   FOUND
+  axiom (2) clause       printed:True  ligature-dropped:True   FOUND
+  axiom (2) unit clause  printed:True  ligature-dropped:True   FOUND
+  S3.6 defers to [10]    printed:True  ligature-dropped:True   FOUND
+
+context for 'Tower of Algebras (Preserving unities)':
+   ...Tower of Algebras (Preserving unities). Let A = ( L n  0 A n ;  ) be a graded algebra. We call it a tower of algebras over eld K = C if the following conditions are satis ed: (1) A n is a nite-dimensional algebra with unit 1 n , for each n . A 0  = K . (2) ...
+
+context for 'Tower of Algebras (not Preserving unities)':
+   ...Tower of Algebras (not Preserving unities) and Result 2. In [3], we consider a semi-tower of algebras with  not preserving unities. If we weaken the condition of  and modify the de nitions of induction and restriction we can still get results similar as abov...
+
+WHAT S3.6 CALLS ITS OWN OBJECT (not quoted by mg-41aa):
+   we consider a semi-tower of algebras with  not preserving unities. If we weaken the condition of  and modify the de nitions of induction and restric
+
+DOES ANY INSTRUMENT IN THIS REPO TEST BERGERON-LI (3), (4), (5)?
+  (this is the claim 'untested by mg-af28, by mg-6ad0 and by mg-41aa')
+  grep is run by run_all.sh, not here -- see out_a6_grep.txt
+
+SUMMARY a6_quotes: 0 of 6 target strings ABSENT (0 = X3's factual base holds)
