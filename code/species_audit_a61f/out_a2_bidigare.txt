@@ -1,0 +1,66 @@
+==============================================================================
+A2a/A2b  both algebras built from their definitions, no shared code
+==============================================================================
+
+   n  |Sigma_n|  #orbits  2^(n-1)  orbit products constant  |S_n|  d_T closed A  d_T closed B
+   1          1        1        1                    True      1          True          True
+   2          3        2        2                    True      2          True          True
+   3         13        4        4                    True      6          True          True
+   4         75        8        8                    True     24          True          True
+   5        541       16       16                    True    120          True          True
+
+  Orbits of set compositions are indexed by their BLOCK-SIZE SEQUENCE,
+  i.e. by the compositions of n, and the orbit sums close under the
+  Tits product.  Solomon's d_T = sum over des(w) <= T close under both
+  composition conventions.  Both algebras have dimension 2^(n-1).
+
+==============================================================================
+A2c  the comparison -- four candidate identifications
+==============================================================================
+
+  Candidate: O_alpha <-> d_{T(alpha)}, T(alpha) the partial sums.
+  iso  : c^g_{a,b}(Sigma) = c^g_{a,b}(Sol)
+  anti : c^g_{a,b}(Sigma) = c^g_{b,a}(Sol)
+
+   n   iso/A  anti/A   iso/B  anti/B     (mismatching structure constants)
+   2       0       0       0       0
+   3       4       0       0       4
+   4      54       0       0      54
+   5     472       0       0     472
+
+  HOLDS at every n in 2..5 : [('A', 'anti'), ('B', 'iso')]
+  FAILS somewhere           : [('A', 'iso'), ('B', 'anti')]
+
+  mg-7d75's T3d table reproduced exactly: True
+
+==============================================================================
+A2d  HOW MANY HYPOTHESES ARE THOSE FOUR CANDIDATES?
+==============================================================================
+
+  mg-7d75 reports '2 of 4 hold and 2 fail, so the comparison is
+  discriminating', and section 2.2 of the document says 'the two that
+  hold are the two that say ANTI-ISOMORPHISM'.  One of the two that
+  holds is labelled iso/B.  So the question is whether convention B is
+  the opposite algebra of convention A, in which case iso/B and anti/A
+  are THE SAME STATEMENT and there are two hypotheses, not four.
+
+   n  c^g_{a,b}(Sol,B) = c^g_{b,a}(Sol,A) for all a,b,g   mismatches
+   2  True                                                       0
+   3  True                                                       0
+   4  True                                                       0
+   5  True                                                       0
+
+  Convention B IS the opposite algebra of convention A, identically.
+  So the four columns of T3d are two statements, each computed twice:
+      {iso/A, anti/B} is one statement -- and it fails;
+      {anti/A, iso/B} is the other  -- and it holds.
+  The theorem is reproduced and the comparison IS discriminating; what
+  is not the case is that it survived three independent controls.  It
+  survived ONE, run twice.  mg-7d75's section 2.2 says 'three of the
+  four columns are the control, and they fire' -- two of those three
+  columns are the same control in a mirror, and one of them is not a
+  control at all: iso/B is the surviving identification.
+
+==============================================================================
+A2 TOTAL BAD: 0
+==============================================================================

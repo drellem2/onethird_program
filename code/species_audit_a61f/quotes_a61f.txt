@@ -1,0 +1,169 @@
+# Passages extracted from the RENDERED PDFs by poppler pdftotext (not by a
+# Flate-decode string scrape).  Regenerate with ./fetch_sources.sh.
+# Sources: AM = Aguiar-Mahajan, Monoidal Functors, Species and Hopf Algebras,
+#   https://pi.math.cornell.edu/~maguiar/a.pdf
+# AA = Aguiar-Ardila, arXiv:1709.07504 (pdf as served 2026-07-30)
+# MM = Marshall-Martin, Australas. J. Combin. 92(3) 419-449,
+#   https://ajc.maths.uq.edu.au/pdf/92/ajc_v92_p419.pdf
+
+@@ AM-8.1  [am.txt lines 22935-22950]
+• Set× , whose objects are finite sets and whose morphisms are bijections
+between finite sets;
+235
+
+236
+
+8. MONOIDAL STRUCTURES ON SPECIES
+
+• Vec, whose objects are vector spaces over k and whose morphisms are
+linear maps between vector spaces.
+Definition 8.1. A set species is a functor
+Set× −→ Set.
+A vector species is a functor
+
+Set× −→ Vec.
+A morphism between species p and q is a natural transformation between the
+
+@@ AM-10.10  [am.txt lines 29992-29996]
+We proceed. Let A be the algebra of faces Σ[I], and let J be its Jacobson radical. Bidigare [45] showed that J is precisely the kernel of its support
+map. This result was generalized to left regular bands by Brown [70], also see [12,
+Lemma 2.5.5]. Thus, A/J is the algebra of flats Π[I], and the quotient map is the
+−
+→
+
+@@ AM-10.13  [am.txt lines 29508-29513]
+It follows from (10.42) and the first diagram in (10.40) that the bottom horizontal
+map sends σT to dT as defined in (10.43) and (10.47). Hence the image of the
+bottom horizontal map is precisely the descent algebra. As a consequence:
+op
+Theorem 10.13 (Bidigare). The descent algebra is isomorphic to (Σ[n])Sn .
+10.9. Directed faces and directed flats
+
+@@ AM-10.8.3  [am.txt lines 29463-29475]
+
+(D, C).
+
+(D,C): F D=C
+
+10.8.3. Invariant subalgebras. Since Σ and IL are species, the components Σ[n]
+and IL[n] are Sn -modules. Further, since these species are monoids with respect
+to the Hadamard product, the components are algebras whose products commute
+with the Sn -action. This yields subalgebras of Sn -invariants
+(Σ[n])Sn ֒→ Σ[n] and (IL[n])Sn ֒→ IL[n].
+We make these subalgebras explicit.
+A basis for the subalgebra (Σ[n])Sn is given by
+X
+
+@@ AM-13.1.1  [am.txt lines 38142-38144]
+13.1.1. The Hopf monoid of posets. Given a finite set I, let P[I] be the vector
+space with basis the set of all partial orders on I. For instance, P[{a, b}] is 3dimensional, spanned by the posets {a < b}, {b < a}, and {a, b} (no relations).
+It is customary to represent posets by their Hasse diagrams. As an example, the
+
+@@ AM-13.4.2  [am.txt lines 40136-40141]
+
+On the other hand, the Hopf monoid of posets of Section 13.1.1 is P0 . This follows
+by comparing (13.2) and (13.20), and noting that
+eS,T (p) = 0 ⇐⇒ S is a lower set of p.
+The deformation of the Hopf monoid of simple graphs is only interesting if
+q = 0. This is because
+
+@@ AM-8.13-had  [am.txt lines 1186-1190]
+for every finite set I. It turns out that the Hadamard product functor
+× : Sp × Sp → Sp
+is bilax. It follows that the Hadamard product h1 × h2 of two Hopf monoids h1 and
+h2 is again a Hopf monoid. It follows also that the functor h × − : Sp → Sp is bilax
+for any bimonoid h. In particular, the functor L × − : Sp → Sp is bilax; hence so is
+
+@@ AM-ch11-conn  [am.txt lines 2210-2213]
+Antipode formulas (Chapter 11). Recall that a Hopf monoid is a bimonoid with
+an antipode. As for graded vector spaces, a connected bimonoid in species is automatically a Hopf monoid. The antipode can be expressed as an alternating sum,
+where each summand is a composite of an iterated coproduct with an iterated
+product. This is the species analogue of Takeuchi’s antipode formula for connected
+
+@@ AM-17.4.1  [am.txt lines 48669-48695]
+17.4.1. The associated Hopf algebras. Now let us apply the Fock functors to
+these Hopf monoids. As mentioned in Proposition 17.1, we have
+−
+→
+−
+→
+K( Π ∗ ) = ΠZ∗ ,
+K(Π) = ΠL ,
+K( Π) = ΠZ ,
+K(Π∗ ) = ΠL∗ ,
+−
+→
+−
+→
+K(Π) = K( Π) = ΛL ,
+K(Π∗ ) = K( Π ∗ ) = ΛL∗ .
+Since Π and Π∗ are isomorphic, it follows that ΛL ∼
+= ΠL∗ . Let us
+= ΛL∗ and ΠL ∼
+write Λ for the former and Π for the latter from now on.
+The object Λ is the Hopf algebra of symmetric functions. It is most often
+viewed as a subalgebra of the algebra of formal power series in countably many
+variables [138, 252, 319, 341]. The Hopf algebra viewpoint can be found in the
+works of Geissinger [141] and Zelevinsky [381]. The object Π is the Hopf algebra
+of symmetric functions in noncommuting variables studied in [140, 315, 377], Even
+though the Hopf monoid Π is commutative, the Hopf algebra Π is not. This example
+shows that K does not preserve commutativity.
+
+@@ AM-17.5  [am.txt lines 48822-48828]
+
+and K(G) → K(Π∗ ).
+
+Recall from Section 17.4 that K(Π∗ ) is the algebra of symmetric functions in noncommuting variables and K(Π∗ ) is the familiar Hopf algebra of symmetric functions.
+Thus the first map associates a symmetric function in noncommuting variables to
+a labeled graph, and the second associates a symmetric function to an unlabeled
+graph. The latter is the chromatic symmetric function of Ray and Wright [302] and
+
+@@ AM-joyal-K  [am.txt lines 1108-1119]
+If V = k, it is called the bosonic Fock functor and denoted K. By definition, we
+have
+M
+K(p) =
+p[n]Sn ,
+n
+
+where p[n]Sn denotes the space of Sn -coinvariants of p[n].
+The Hopf algebra K(Π) is the algebra of symmetric functions Λ (when k is of
+characteristic 0), and it is self dual, since Π is self-dual. The Hopf algebra K(Σ)
+is the algebra of noncommutative symmetric functions NΛ and the Hopf algebra
+K(Σ∗ ) is the algebra of quasi-symmetric functions QΛ.
+
+@@ AM-posets-chambers  [am.txt lines 2061-2065]
+above kind can be constructed by minimal principles.
+Many of these combinatorial objects can be interpreted geometrically. For example, posets can be viewed as appropriate unions of chambers (top-dimensional
+cones, to be precise) in the Coxeter complex of type A. This interpretation extends to preposets. This forges a link with the ideas of Chapters 10 and 12. We
+then observe that the morphisms relating the Hopf monoid of posets to the Hopf
+monoids based on linear orders, linear set partitions and set compositions, initially
+
+@@ AA-braidcone  [aa.txt lines 3040-3045]
+able to find in the literature.
+Define a braid cone to be a cone in (RI)∗ = RI cut out by inequalities of the form y(i) ≥
+y(j) for i, j ∈ I. Define a root subspace of RI to be a subspace spanned by vectors of the
+form ei − ej for i, j ∈ I; these vectors are the roots of the root system AI = {ei − ej | i, j ∈ I}
+in the sense of Lie theory. [47] Define an affine root subspace of RI to be a translate of a
+root subspace.
+
+@@ MM-realization  [mm.txt lines 162-172]
+Figure 1: (Left) A preposet Q on [6]. (Right) A linear extension Q′ of Q.
+The (open) geometric realization kP k of a preposet P on [n] is the polyhedron
+in Rn defined by equalities and inequalities corresponding to the relations of P . For
+instance, the preposet Q shown in Figure 1 corresponds to the polyhedron
+{(x1 , . . . , x6 ) ∈ R6 : x2 = x4 < x1 , x5 < x1 , x5 < x3 = x6 }.
+We may also define kP k as the interior of the union of the closures of the geometric
+realizations of preposet linear extensions of P . Accordingly, geometric realization
+gives a bijection between preposets and convex unions of cones of the braid arrangement. (These objects are called “braid cones” in [14], but we reserve that term for
+single cones of the braid arrangement.)
+The intersections of the braid cones with the (n − 2)-sphere
+Pn
+
+@@ MM-closure  [mm.txt lines 459-464]
+A poset is a chain forest if it is the disjoint union of chains. The subspecies
+CF ⊂ LOI of lattices of order ideals of chain forests (with possible phantoms) is a
+Hopf monoid. (More generally, the argument of Proposition 3.5 implies that any
+family of posets that is closed under disjoint union, induced subposet, and deletion
+of order filters gives rise to a Hopf submonoid of LOI.)
+A hierarchy of all the Hopf submonoids of SF we have described (as well as AMat,
