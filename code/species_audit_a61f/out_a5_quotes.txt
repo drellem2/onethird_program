@@ -1,0 +1,139 @@
+==============================================================================
+A5a  every quotation in mg-7d75, checked against a rendered extraction
+==============================================================================
+
+  The four passages section 10 item 1 asks for are rows 1-4.
+
+  AM 10.10  radical thm    VERBATIM                  document still says it: yes
+      the book: 'Bidigare [45] showed that J is precisely the kernel of its 
+      support map.' Whole passage matches word for word.
+
+  AM Thm 10.13             VERBATIM                  document still says it: yes
+      the book prints the superscript 'op' on the line above the theorem 
+      statement; the anti-isomorphism reading in section 2.2 is the book's.
+
+  AM 13.1.1  posets        VERBATIM                  document still says it: yes
+      the book: 'Given a finite set I, let P[I] be the vector space with 
+      basis the set of all partial orders on I.'
+
+  AM 17.4/17.5             DIVERGES                  document still says it: yes
+      the book's species is Pi-STAR in BOTH slots, not Pi. mg-7d75 section 
+      10 item 1 predicted this exact quote would be wrong and it is.
+
+  AM Def 8.1  species      VERBATIM                  document still says it: yes
+      including 'whose objects are finite sets and whose morphisms are 
+      bijections between finite sets'.
+
+  AM 13.4.2  lower set     VERBATIM                  document still says it: yes
+      'e_{S,T}(p) = 0 <=> S is a lower set of p' and 'the Hopf monoid of 
+      posets of Section 13.1.1 is P_0' are both in 13.4.2, word for word.
+
+  AM 8.13  Hadamard        VERBATIM-BUT-RELOCATED    document still says it: yes
+      the sentence is verbatim from the BOOK'S INTRODUCTION; section 8.13 
+      is indeed 'The Hadamard product and an interchange law on species', 
+      so the attribution points at the right material.
+
+  AM Ch. 11  connected     VERBATIM                  document still says it: yes
+      from a paragraph the book itself heads 'Antipode formulas (Chapter 
+      11)'. The result is also stated in section 8.4. Attribution 
+      defensible.
+
+  Joyal foreword  K(p)     VERBATIM                  document still says it: yes
+      AND: three lines below it the foreword says in clean text 'The Hopf 
+      algebra K(Pi) is the algebra of symmetric functions Lambda' -- which 
+      is the statement section 4 reconstructed from the garbled 17.5 
+      passage.
+
+  AM posets as chambers    VERBATIM                  document still says it: yes
+      in the book's introduction rather than a chapter introduction; the 
+      book hyphenates 'top-dimensional'.
+
+  Aguiar-Ardila 12         DIVERGES                  document still says it: yes
+      the PDF as served says 'a cone in (R^I)* = R^I ... of the form y(i) 
+      >= y(j)'. mg-7d75 has '(R^I)/R^I' and 'y(i) <= y(j)'. The direction 
+      flip is harmless; '(R^I)/R^I' is not a expression the paper contains 
+      and reads as a symbol-drop artefact.
+
+  Marshall-Martin 2.1      VERBATIM-BUT-TRUNCATED    document still says it: yes
+      the paper's VERY NEXT SENTENCE is '(These objects are called "braid 
+      cones" in [14], but we reserve that term for single cones of the 
+      braid arrangement.)' -- [14] is Aguiar-Ardila. See A5b.
+
+  Marshall-Martin closure  ACCURATE                  document still says it: yes
+      the paper: 'any family of posets that is closed under disjoint union, 
+      induced subposet, and deletion of order filters gives rise to a Hopf 
+      submonoid of LOI.'
+
+  11 of 13 quotations check out against the rendered PDFs; 2 diverge.
+
+  READING.  mg-7d75 pre-filed this as its highest-yield attack and was
+  right about which quote would fail: the 17.5 passage, where it says
+  outright that 'the species names in that quote are my inference'.
+  The inference got the FUNCTOR right and the SPECIES wrong (Pi for
+  Pi-star).  That is harmless here -- the book says on the same page
+  'Since Pi and Pi* are isomorphic' -- but the document presents it
+  inside quotation marks as text from the book, and it is not.
+
+  The Aguiar-Ardila divergence was NOT pre-filed and is the same defect
+  in a second place: '(R^I)/R^I' is not an expression the paper
+  contains.  Every mathematical use mg-7d75 makes of that quote --
+  that C(P) is the literature's braid cone -- survives it.
+
+==============================================================================
+A5b  'THREE INDEPENDENT PUBLISHED SOURCES' -- one of them says otherwise
+==============================================================================
+
+  mg-7d75 section 1 closes with:
+
+     'So the dictionary poset <-> braid cone on which this whole ticket
+      turns is not ours; it is stated in three independent published
+      sources, one of them the book named in the brief.'
+
+  The three are Aguiar-Ardila, Marshall-Martin and Aguiar-Mahajan.  The
+  Marshall-Martin quote stops one sentence early.  The next sentence:
+
+     '(These objects are called "braid cones" in [14], but we reserve
+      that term for single cones of the braid arrangement.)'
+
+  [14] is Aguiar-Ardila.  So Marshall-Martin is not a third source
+  agreeing on the term; it is a source recording that the term means
+  two different things in the two papers -- and the two meanings are
+  precisely the two objects this ticket is about.  Under Aguiar-Ardila
+  the whole cone C(P) is a braid cone; under Marshall-Martin a braid
+  cone is a single cone of the arrangement, i.e. an element of F(P).
+
+  Nothing mathematical breaks.  What breaks is the count: the claim is
+  supported by two sources and a third that flags the terminology as
+  non-standard, and the sentence that flags it is the one immediately
+  after the words mg-7d75 quotes.
+
+==============================================================================
+A5c  what a rendered extraction ADDS that mg-7d75 did not have
+==============================================================================
+
+  1. Section 10.8.3 of the book, three pages before Theorem 10.13,
+     says: 'This yields subalgebras of S_n-invariants (Sigma[n])^{S_n}
+     ... A basis for the subalgebra (Sigma[n])^{S_n} is given by' the
+     orbit sums.  mg-7d75's T3a/T3b MEASURE that the orbits are the
+     compositions of n and that the orbit sums span a subalgebra, and
+     report it as a measurement.  It is measured correctly; it is also
+     stated in the source, on the facing page of the theorem being
+     reproduced.  T4a's 'the Aut(P)-orbit sums span a subalgebra -- 0
+     failures' is the same fact for a general finite group.
+
+  2. Joyal's foreword, immediately after the passage mg-7d75 quotes:
+     'The Hopf algebra K(Pi) is the algebra of symmetric functions
+     Lambda (when k is of characteristic 0), and it is self dual, since
+     Pi is self-dual.'  This is the section 4 identification, in clean
+     prose, in a passage the document was already reading.  The
+     reconstruction from the garbled 17.5 passage was not necessary.
+
+  3. Section 17.4.1 gives the whole table -- K(Pi) = Lambda,
+     Kbar(Pi) = the Hopf algebra of symmetric functions in noncommuting
+     variables -- and says 'Since Pi and Pi* are isomorphic'.  So the
+     Bell(n)-vs-p(n) resolution of section 4 is confirmed against the
+     source, with the species corrected.
+
+==============================================================================
+A5 TOTAL BAD: 0
+==============================================================================

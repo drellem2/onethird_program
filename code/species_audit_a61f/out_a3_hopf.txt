@@ -1,0 +1,86 @@
+==============================================================================
+A3a  mg-7d75's T5b/T5c table, rebuilt here
+==============================================================================
+
+  species                    dim[4]     prod   coprod     assoc   coassoc    compat
+  F   (ours)                   4399        0        0         0         0         0
+  AC  (ours)                   2685        0        0         0         0         0
+
+  mg-7d75's 4399 / 2685 basis elements reproduced: True
+  mg-7d75's 0 failures in all five columns reproduced: True
+
+==============================================================================
+A3b  WHAT ELSE PASSES?  the same battery on three other subspecies
+==============================================================================
+
+  species                    dim[4]     prod   coprod     assoc   coassoc    compat
+  ambient P x Sigma           16425        0        0         0         0         0
+  F-opposite (wrong)           4399        0        0         0         0         0
+  F broken (every 2nd)         2200      195     5610         0         0         0
+
+  the FULL ambient passes all five columns          : True
+  the WRONG pairing (opposite cone) passes all five : True
+  the BROKEN subset still passes assoc/coassoc/compat: True
+  ... while its product-closure column fires        : True (195)
+
+  READING.  Three of mg-7d75's five columns -- assoc, coassoc,
+  compat -- return 0 for a subset of F that is closed under
+  nothing.  They cannot fail for any collection of (poset, face)
+  pairs whatever, because the operations are inherited from the
+  ambient Hadamard product and associativity of CONCATENATION and
+  coassociativity of RESTRICTION are identities of tuples and sets,
+  not properties of the subspecies.  And the two columns that CAN
+  fail -- the two closure columns -- return 0 for the full ambient
+  and for the wrong pairing as well as for ours.
+
+  So '0 failures across 5 axioms on 4 399 basis elements' is one
+  fact about our subspecies (it is closed), not five, and the
+  4 399 is the size of the ambient degree-4 component rather than
+  a count of independent tests.  mg-7d75's own section 5 says
+  'what T5 establishes is CLOSURE ... and NOT that the operations
+  are forced', which is the correct reading; section 0's phrasing
+  'AXIOMS CHECKED, NOT ANALOGISED ... 0 failures across 5 axioms'
+  is the one that overstates it, and section 0 is what gets quoted.
+
+==============================================================================
+A3c  mg-7d75's four controls, re-run, plus what control (ii) really is
+==============================================================================
+
+  species                    dim[4]     prod   coprod     assoc   coassoc    compat
+  (i)  no lower-set cond       4399        0        0         0         0         0
+  (ii) Tits product            4399     1442        0       252         0     11020
+  (iii) reversed concat        4399        0        0         0         0         0
+  (iv) antichain cond          4399        0        0         0     75512         0
+
+  mg-7d75's control (ii) 1442 / 252 / 11020 reproduced: True
+  mg-7d75's control (iv) 75512 coassoc failures reproduced: True
+
+  WHAT CONTROL (ii) ACTUALLY TESTS.  mu_{S,T} takes a face of a cone on
+  S and a face of a cone on the DISJOINT set T.  The Tits product F.G
+  intersects the blocks of F with the blocks of G, so on disjoint
+  ground sets every intersection is empty and the product is the empty
+  composition -- it is not a near-miss product, it is an operation of
+  the wrong type being fed arguments it is not defined on.  Both
+  mg-7d75's code and this one paper over that with a guard that falls
+  back to concatenation when either argument is empty.  Below: how many
+  of the (x, y) pairs the control counts have DISJOINT nonempty ground
+  sets, i.e. how many are type errors rather than false products.
+
+  product-closure pairs examined by the battery : 11301
+  ... with both factors nonempty and disjoint   : 1442 (12.8%)
+
+  So control (ii) fires, but it fires on a type mismatch.  It does not
+  establish that the Tits product is a NEAR miss for the Hopf-monoid
+  product; it establishes that it is not the same kind of map.  The
+  document's section 6 item 5 conclusion -- 'the band structure is not
+  carried by the Hopf monoid' -- is correct and is the important line;
+  the 1442 / 252 / 11020 do not add evidence to it.
+
+  Controls (i) and (iii) do not fire and mg-7d75 says so and says why.
+  Verified independently here: both come out all-zero above, and the
+  document's explanations (the R_q family at q = 1; the opposite
+  monoid) are consistent with what is measured.
+
+==============================================================================
+A3 TOTAL BAD: 0
+==============================================================================

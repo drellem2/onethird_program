@@ -1,0 +1,110 @@
+==============================================================================
+A4a  the grading falsifier (T1) and the antichain row of section 0
+==============================================================================
+
+  Bell(n) n<=7   doc: [1, 2, 5, 15, 52, 203, 877]        measured: [1, 2, 5, 15, 52, 203, 877] AGREES
+  p(n) n<=7      doc: [1, 2, 3, 5, 7, 11, 15]            measured: [1, 2, 3, 5, 7, 11, 15]  AGREES
+  |Sigma_n| n<=5 doc: [1, 3, 13, 75, 541]                measured: [1, 3, 13, 75, 541]      AGREES
+  labelled posets doc: [1, 3, 19, 219]                    measured: [1, 3, 19, 219]          AGREES
+  classes n<=5   doc: [1, 2, 5, 16, 63]                  measured: [1, 2, 5, 16, 63]        AGREES
+  AC(P) in Pi[n] doc: [1, 3, 19, 219]                    measured: [1, 3, 19, 219]          AGREES
+                 degree respected on all 242 labelled posets to n = 4
+  AC(P) = Pi[n]  doc: [1, 3, 13, 45]                     measured: [1, 3, 13, 45]           AGREES
+                 mg-7d75 T1e: '3 of 3 at n=2, 13 of 19 at n=3, 45 of 219 at n=4'
+
+==============================================================================
+A4b  section 8 C3, 'the smallest poset with AC(P) != Pi[n]' -- BROKEN
+==============================================================================
+
+  mg-7d75 section 8 C3 and T1e both say:
+      "The smallest poset with AC(P) != Pi[n] is {a<c, b<d}, where the
+       partition ad|bc has a 2-cycle in its quotient."
+  and give the reason:
+      "a cycle needs two blocks B, C with b1 < c1 and c2 < b2, which no
+       poset on <= 2 elements admits."
+
+  n = 1 :   1 labelled posets,   0 of them have AC(P) != Pi[n]
+  n = 2 :   3 labelled posets,   0 of them have AC(P) != Pi[n]
+  n = 3 :  19 labelled posets,   6 of them have AC(P) != Pi[n]
+  n = 4 : 219 labelled posets, 174 of them have AC(P) != Pi[n]
+
+  The smallest n with a witness is n = 3, not 4.
+  Witnesses at n = 3 (all 6 of them, one isomorphism class -- the
+  3-ELEMENT CHAIN, in its 6 labellings):
+    P = [(0, 1), (0, 2), (1, 2)]     missing from AC(P): [[[0, 2], [1]]]
+    P = [(0, 1), (0, 2), (2, 1)]     missing from AC(P): [[[0, 1], [2]]]
+    P = [(0, 1), (2, 0), (2, 1)]     missing from AC(P): [[[0], [1, 2]]]
+    P = [(0, 2), (1, 0), (1, 2)]     missing from AC(P): [[[0], [1, 2]]]
+    P = [(1, 0), (1, 2), (2, 0)]     missing from AC(P): [[[0, 1], [2]]]
+    P = [(1, 0), (2, 0), (2, 1)]     missing from AC(P): [[[0, 2], [1]]]
+
+  The stated reason is sound as far as it goes and rules out n <= 2 --
+  the two blocks need |B| >= 2 and |C| >= 1, so at least 3 elements --
+  but the document then jumps to a 4-element example.  The 3-chain
+  a < b < c with the partition {a,c} | {b} is a cycle: a < b goes one
+  way and b < c goes the other.  {a<c, b<d} IS a witness; it is not
+  the smallest one, and T1e's own row '13 of 19 at n = 3' records 6
+  labelled witnesses at n = 3 two paragraphs above the claim.
+  smallest witness n doc: 4                                  measured: 3                        BROKEN
+                 INTERNAL CONTRADICTION with mg-7d75's own T1e table
+
+==============================================================================
+A4c  section 2.3 / T4c -- the two instances
+==============================================================================
+
+  dim(kSig)^Sn   doc: [1, 2, 4, 8, 16]                   measured: [1, 2, 4, 8, 16]         AGREES
+                 = 2^(n-1)
+  |Pi_n/S_n|     doc: [1, 2, 3, 5, 7]                    measured: [1, 2, 3, 5, 7]          AGREES
+                 = p(n)
+  Aut(P)=1 classes doc: [1, 1, 2, 5, 19]                   measured: [1, 1, 2, 5, 19]         AGREES
+                 mg-7d75 T4c: '19 of the 63 classes at n = 5 have Aut(P) = 1'
+  T2 skipped n=5 doc: 24                                 measured: 24                       AGREES
+                 classes with |F(P)| > 80
+
+==============================================================================
+A4d  T4d -- the control that the group must be Aut(P), not S_n
+==============================================================================
+
+  T4d non-antichain doc: [(1, 1), (4, 4), (15, 15)]         measured: [(1, 1), (4, 4), (15, 15)] AGREES
+                 mg-7d75: 'fired on all 20 non-antichain classes'
+
+  This control is real but weak: it says S_n does not preserve the cone
+  of a non-antichain poset, which is true for the trivial reason that
+  the cone has a smaller symmetry group.  The substantive control on
+  the identity is in a1_headline.py A1e, where the INDEX SET is varied.
+
+==============================================================================
+A4e  T6b -- the two Fock functors on OUR species
+==============================================================================
+
+  dim Kbar(F)_n  doc: [1, 7, 121, 4399]                  measured: [1, 7, 121, 4399]        AGREES
+  dim K(F)_n     doc: [1, 4, 24, 218]                    measured: [1, 4, 24, 218]          AGREES
+  dim Kbar(AC)_n doc: [1, 6, 89, 2685]                   measured: [1, 6, 89, 2685]         AGREES
+  dim K(AC)_n    doc: [1, 4, 20, 152]                    measured: [1, 4, 20, 152]          AGREES
+
+==============================================================================
+A4f  T6c -- the Bergeron-Li unitality reproduction, 0 of 529
+==============================================================================
+
+  BL pairs       doc: 529                                measured: 529                      AGREES
+                 labelled posets with 1 <= |P|,|Q| <= 3: 23 x 23
+  BL unital      doc: 0                                  measured: 0                        AGREES
+
+  Reproduced, and mg-7d75 reports it correctly as a reproduction of
+  mg-af28.  What should be said in the same breath, and is not: the
+  count is 0 for every pair of NONEMPTY posets by inspection, because
+  the concatenation of two nonempty tuples has at least two blocks and
+  the identity face has one.  The move from mg-af28's 64 to 529 is a
+  wider net over a statement that has no exceptions to find.
+
+==============================================================================
+A4g  T6d -- the forgetful map AC -> Pi and its 22614 coproduct failures
+==============================================================================
+
+  Sym map product doc: 0                                  measured: 0                        AGREES
+  Sym map coproduct doc: 22614                              measured: 22614                    AGREES
+
+==============================================================================
+A4 checks: 21, agreeing: 20, BROKEN: 1
+A4 TOTAL BAD: 1
+==============================================================================

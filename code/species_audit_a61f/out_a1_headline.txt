@@ -1,0 +1,115 @@
+==============================================================================
+A1a  the identity on all 87 classes to n <= 5, NO CAP, via the trace form
+==============================================================================
+
+  dim A/rad is computed as the RANK OF THE TRACE FORM B(x,y) = tr(L_xy)
+  (Dickson: in characteristic 0 the Jacobson radical is the radical of
+  that form).  Rank is taken modulo two primes, 2147483647 and 1000003; a
+  disagreement between them would be reported as a failure.
+
+   n  classes  |Aut|>1  identity holds  identity FAILS  prime disagreement  max dim kF(P)
+   1        1        0               1               0                    0              1
+   2        2        1               2               0                    0              3
+   3        5        3               5               0                    0             13
+   4       16       11              16               0                    0             75
+   5       63       44              63               0                    0            541
+
+  mg-7d75's T4a exempted 4 of the 63 classes at n = 5 from its
+  nilpotency step over a dim <= 90 cap.  There is no cap here and no
+  exemption: 87 of 87 classes are tested for the identity itself.
+
+==============================================================================
+A1b  the rows BETWEEN the two extremes -- mg-7d75 prints only the ends
+==============================================================================
+
+  mg-7d75 section 2.3 shows |Aut| = n! (the antichain) and |Aut| = 1.
+  A formula in one argument should also hold in between, and the
+  interesting content is whether |AC/Aut| < |AC| there, i.e. whether the
+  symmetry is actually doing something on the flats.
+
+   |Aut|  classes  identity holds  of which |AC/Aut| < |AC|  (n = 5 only)
+       1       19              19                          0
+       2       27              27                         27
+       4        6               6                          6
+       6        6               6                          6
+      12        2               2                          2
+      24        2               2                          2
+     120        1               1                          1
+
+  43 classes at n = 5 are strictly between the two rows mg-7d75 shows,
+  and on 43 of them the quotient by Aut(P) is strictly smaller than
+  AC(P).  Those are the rows where the identity says something that
+  neither of the printed extremes says, and they are all correct.
+
+==============================================================================
+A1c  OUT OF SAMPLE: n = 6, past mg-7d75's stated reach
+==============================================================================
+
+  isomorphism classes on 6 points, built by adjoining a maximal element
+  to each 5-point class: 318  (OEIS A000112(6) = 318)
+  |F(P)| <= 300:  tested 179   skipped 139   identity holds 179   FAILS 0
+
+  The identity is not an n <= 5 phenomenon.  A1d says why no n could
+  have broken it.
+
+==============================================================================
+A1d  THE PROOF, and an exact check of its two steps
+==============================================================================
+
+  Write A = kF(P), G = Aut(P), k of characteristic 0.
+
+  (1)  A/rad A = k^{AC(P)}.  This is Bidigare's radical theorem, which
+       mg-7d75 quotes in full from Aguiar-Mahajan section 10.10 and
+       which Brown extended to left regular bands: rad A = ker(supp).
+
+  (2)  G acts on A by algebra automorphisms (it permutes F(P) and the
+       Tits product is equivariant), and |G| is invertible in k, so the
+       Reynolds operator e = (1/|G|) sum_g g is a projection A -> A^G
+       and taking G-invariants is EXACT.  Applying it to
+       0 -> rad A -> A -> k^{AC} -> 0 gives
+            A^G / (rad A)^G  =  ( k^{AC} )^G  =  k^{AC/G}.
+
+  (3)  (rad A)^G is a nilpotent ideal of A^G, so it lies in rad(A^G);
+       and the quotient above is a product of copies of k, hence
+       semisimple, so rad(A^G) lies in (rad A)^G.  They are equal, and
+            A^G / rad(A^G)  =  k^{ AC(P)/G }.
+
+  Three lines, no new object, and no dependence on n.  What follows for
+  the audit is in the ledger, not here: the identity is a COROLLARY of
+  the theorem mg-7d75 quotes, not a measurement awaiting a citation.
+
+  Step (2) and step (3) checked EXACTLY over Q, all classes to n <= 4:
+
+   n  classes  dim(rad A)^G = dim rad(A^G)  ...FAILS  dim A^G/(rad A)^G = |AC/G|  ...FAILS
+   1        1                            1         0                               1         0
+   2        2                            2         0                               2         0
+   3        5                            5         0                               5         0
+   4       16                           16         0                              16         0
+
+==============================================================================
+A1e  CONTROLS -- two WRONG index sets, one of them this repo's own error
+==============================================================================
+
+  If dim A^G/rad were insensitive to the index set, A1a would prove
+  nothing.  Two substitutes are run against the same left-hand side.
+
+  (i)  Pi[n]/G in place of AC(P)/G  -- the full partition lattice.
+  (ii) the OPEN-cone flats in place of AC(P): the partitions in AC(P)
+       whose every block is an antichain of P.  Conflating these two is
+       exactly the error mg-1953 repaired (R1, 455 spurious flats at
+       n = 6), and code/species_7d75/README.md names it as the
+       convention that has bitten this repo before.
+
+   n  classes  (i) disagrees  (i) agrees  (ii) disagrees  (ii) agrees
+   2        2              0            2               1            1
+   3        5              1            4               4            1
+   4       16             10            6              15            1
+   5       63             55            8              62            1
+
+  Both controls fire.  The right-hand side of the identity is not a
+  free parameter: AC(P)/Aut(P) is the index set and neither of the two
+  nearby candidates reproduces the dimension.
+
+==============================================================================
+A1 TOTAL BAD: 0
+==============================================================================
