@@ -1,0 +1,28 @@
+==========================================================================
+c0  REPRODUCTION of code/branching_locate_db09/ against its committed
+    outputs, on a scratch copy
+==========================================================================
+
+    run_all.sh exit code: 0
+
+      out_selftest.txt  IDENTICAL
+      out_t1_tl.txt  IDENTICAL
+      out_t2_gz.txt  IDENTICAL
+      out_t3_ours.txt  IDENTICAL
+      out_t4_quotes.txt  IDENTICAL
+
+    identical: 5 of 5, population: the five committed out_*.txt
+    files of code/branching_locate_db09/
+
+    the document's stated instrument facts, checked against the run:
+      out_selftest.txt last number (the assertion count): 699520
+      the document says 699 520
+      -> agrees
+      test-script outputs ending TOTAL BAD: 0 -- 4 of 4, population:
+      the four TEST-script outputs t1..t4 (the self-test is not one of the
+      four and prints no TOTAL BAD line)
+      out_selftest.txt reports 'all passed'  -- yes
+
+--------------------------------------------------------------------------
+FINDINGS: 0, population: the five output files plus the two stated facts
+TOTAL BAD: 0

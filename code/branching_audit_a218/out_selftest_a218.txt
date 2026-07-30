@@ -1,0 +1,37 @@
+==========================================================================
+SELF-TEST of the mg-a218 instrument
+==========================================================================
+
+S1  link-state counts against the ballot numbers C(n,p) - C(n,p-1)
+    19 assertions, population: every (n,p) with 1 <= n <= 7, 0 <= p <= n//2
+S2  sum_p (dim V(n,p))^2 = dim TL_n = Catalan(n)
+    7 assertions, population: every n with 1 <= n <= 7
+S3  diagram basis: |diagrams(n)| = Catalan(n), all planar, all matchings
+    404 assertions, population: every diagram of TL_n for 1 <= n <= 6 (1+2+5+14+42+132 = 196 diagrams) plus 2 per n
+S4  the TL relations, on diagrams, for every generator index and n <= 6,
+    at beta = 0, 1, 2, 3
+    280 assertions, population: every (n, beta, i, j) with 2 <= n <= 6, beta in {0,1,2,3}, i and j generator indices
+S5  associativity of the diagram product, sampled over all triples at n <= 4
+    2878 assertions, population: every ordered triple of diagrams of TL_n, 1 <= n <= 4 (1 + 8 + 125 + 2744)
+S6  the module axiom: (d1 d2) v = d1 (d2 v) on every cell module,
+    every pair of diagrams, every link state, n <= 5, beta in {0,1,2,3}
+    75600 assertions, population: every (n, beta, p, d1, d2, link state) with 1 <= n <= 5, beta in {0,1,2,3}
+S7  the bilinear form is symmetric and is contravariant enough to have
+    a radical that is a submodule (checked by construction in trace_on_L)
+    784 assertions, population: every ordered pair of link states in every (n, beta, p) with 1 <= n <= 6, beta in {0,1,2,3}
+S8  PUBLISHED CONTROLS (Ridout-Saint-Aubin arXiv:1204.4505, Cor. 4.6 and
+    the remark after Cor. 4.8), each checked by sum_p (dim L)^2 vs dim TL_n
+      TL_n(2) semisimple for every n <= 6              reproduced
+      TL_n(3) semisimple for every n <= 6              reproduced
+      TL_n(0) semisimple exactly for n odd (n <= 6)    reproduced
+      TL_n(1) NOT semisimple for 3 <= n <= 6           reproduced
+      TL_1(1) and TL_2(1) semisimple                   reproduced
+    5 assertions, population: the 5 published control statements above, each quantified over its own range of n
+S9  TWO DISJOINT ROUTES to dim A/rad: sum_p (dim L(n,p))^2 from the Gram
+    ranks, against the rank of the trace form of the regular representation
+    24 assertions, population: every (n, beta) with 1 <= n <= 6 and beta in {0,1,2,3}; disagreements: 0
+
+--------------------------------------------------------------------------
+ASSERTIONS: 80001, population: every check in S1-S9 above
+SELF-ERRORS: 0, population: the 80001 assertions above
+TOTAL BAD: 0

@@ -1,0 +1,103 @@
+==========================================================================
+c2  THE VERTEX SET AGAINST THE VERTEX COUNT, AND THE ROW-FOR-ROW CLAIM
+==========================================================================
+
+(A)  IS THE VERTEX SET EQUAL WHEREVER THE VERTEX COUNT IS EQUAL?
+
+     A vertex of the branching graph is an irreducible module.  Two
+     graphs have the same vertex set at level n only if the labelled
+     vertices agree -- here, the multiset of dim L(n,p).  Counting them
+     is a statistic ABOUT the vertex set, not the vertex set.
+
+     beta = 3 against beta = 2
+       n=1  count EQUAL, set EQUAL              dims [1]  vs  [1]
+       n=2  count EQUAL, set EQUAL              dims [1, 1]  vs  [1, 1]
+       n=3  count EQUAL, set EQUAL              dims [1, 2]  vs  [1, 2]
+       n=4  count EQUAL, set EQUAL              dims [1, 3, 2]  vs  [1, 3, 2]
+       n=5  count EQUAL, set EQUAL              dims [1, 4, 5]  vs  [1, 4, 5]
+       n=6  count EQUAL, set EQUAL              dims [1, 5, 9, 5]  vs  [1, 5, 9, 5]
+
+     beta = 3 against beta = 1
+       n=1  count EQUAL, set EQUAL              dims [1]  vs  [1]
+       n=2  count EQUAL, set EQUAL              dims [1, 1]  vs  [1, 1]
+       n=3  count EQUAL, set DIFFER             dims [1, 2]  vs  [1, 1]
+       n=4  count EQUAL, set DIFFER             dims [1, 3, 2]  vs  [1, 3, 1]
+       n=5  count EQUAL, set DIFFER             dims [1, 4, 5]  vs  [1, 4, 1]
+       n=6  count EQUAL, set DIFFER             dims [1, 5, 9, 5]  vs  [1, 4, 9, 1]
+
+     beta = 3 against beta = 0
+       n=1  count EQUAL, set EQUAL              dims [1]  vs  [1]
+       n=2  count differ (2 vs 1), set DIFFER   dims [1, 1]  vs  [1]
+       n=3  count EQUAL, set EQUAL              dims [1, 2]  vs  [1, 2]
+       n=4  count differ (3 vs 2), set DIFFER   dims [1, 3, 2]  vs  [1, 2]
+       n=5  count EQUAL, set EQUAL              dims [1, 4, 5]  vs  [1, 4, 5]
+       n=6  count differ (4 vs 3), set DIFFER   dims [1, 5, 9, 5]  vs  [1, 4, 5]
+
+     beta = 2 against beta = 1
+       n=1  count EQUAL, set EQUAL              dims [1]  vs  [1]
+       n=2  count EQUAL, set EQUAL              dims [1, 1]  vs  [1, 1]
+       n=3  count EQUAL, set DIFFER             dims [1, 2]  vs  [1, 1]
+       n=4  count EQUAL, set DIFFER             dims [1, 3, 2]  vs  [1, 3, 1]
+       n=5  count EQUAL, set DIFFER             dims [1, 4, 5]  vs  [1, 4, 1]
+       n=6  count EQUAL, set DIFFER             dims [1, 5, 9, 5]  vs  [1, 4, 9, 1]
+
+     beta = 2 against beta = 0
+       n=1  count EQUAL, set EQUAL              dims [1]  vs  [1]
+       n=2  count differ (2 vs 1), set DIFFER   dims [1, 1]  vs  [1]
+       n=3  count EQUAL, set EQUAL              dims [1, 2]  vs  [1, 2]
+       n=4  count differ (3 vs 2), set DIFFER   dims [1, 3, 2]  vs  [1, 2]
+       n=5  count EQUAL, set EQUAL              dims [1, 4, 5]  vs  [1, 4, 5]
+       n=6  count differ (4 vs 3), set DIFFER   dims [1, 5, 9, 5]  vs  [1, 4, 5]
+
+     beta = 1 against beta = 0
+       n=1  count EQUAL, set EQUAL              dims [1]  vs  [1]
+       n=2  count differ (2 vs 1), set DIFFER   dims [1, 1]  vs  [1]
+       n=3  count EQUAL, set DIFFER             dims [1, 1]  vs  [1, 2]
+       n=4  count differ (3 vs 2), set DIFFER   dims [1, 3, 1]  vs  [1, 2]
+       n=5  count EQUAL, set DIFFER             dims [1, 4, 1]  vs  [1, 4, 5]
+       n=6  count differ (4 vs 3), set DIFFER   dims [1, 4, 9, 1]  vs  [1, 4, 5]
+
+     LEVELS WHERE THE COUNT AGREES AND THE SET DOES NOT: 10, population: the 36 (parameter-pair, level) cells above (6 ordered pairs of the 4 parameters x 6 levels)
+       beta=3 vs beta=1 at n=3: both have 2 vertices, dims [1, 2] vs [1, 1]
+       beta=3 vs beta=1 at n=4: both have 3 vertices, dims [1, 3, 2] vs [1, 3, 1]
+       beta=3 vs beta=1 at n=5: both have 3 vertices, dims [1, 4, 5] vs [1, 4, 1]
+       beta=3 vs beta=1 at n=6: both have 4 vertices, dims [1, 5, 9, 5] vs [1, 4, 9, 1]
+       beta=2 vs beta=1 at n=3: both have 2 vertices, dims [1, 2] vs [1, 1]
+       beta=2 vs beta=1 at n=4: both have 3 vertices, dims [1, 3, 2] vs [1, 3, 1]
+       beta=2 vs beta=1 at n=5: both have 3 vertices, dims [1, 4, 5] vs [1, 4, 1]
+       beta=2 vs beta=1 at n=6: both have 4 vertices, dims [1, 5, 9, 5] vs [1, 4, 9, 1]
+       beta=1 vs beta=0 at n=3: both have 2 vertices, dims [1, 1] vs [1, 2]
+       beta=1 vs beta=0 at n=5: both have 3 vertices, dims [1, 4, 1] vs [1, 4, 5]
+
+     THE DOCUMENT'S OWN COLUMN, parsed out of section 0's four-row table
+     (heading: '# irreducibles at n = 1...6'):
+       beta=3 : [1, 2, 2, 3, 3, 4]   -- mine, as counts: [1, 2, 2, 3, 3, 4]
+       beta=2 : [1, 2, 2, 3, 3, 4]   -- mine, as counts: [1, 2, 2, 3, 3, 4]
+       beta=1 : [1, 2, 2, 3, 3, 4]   -- mine, as counts: [1, 2, 2, 3, 3, 4]
+       beta=0 : [1, 1, 2, 2, 3, 3]   -- mine, as counts: [1, 1, 2, 2, 3, 3]
+
+     the document's sentence 'At beta = 0 the tower has fewer irreducibles
+     at every EVEN level' -- checked level by level:
+       n=1 (odd) : beta=0 has 1, beta=3 has 1   equal
+       n=2 (even): beta=0 has 1, beta=3 has 2   fewer
+       n=3 (odd) : beta=0 has 2, beta=3 has 2   equal
+       n=4 (even): beta=0 has 2, beta=3 has 3   fewer
+       n=5 (odd) : beta=0 has 3, beta=3 has 3   equal
+       n=6 (even): beta=0 has 3, beta=3 has 4   fewer
+     verdict: holds, population: the 3 even and 3 odd levels 1 <= n <= 6
+
+(B)  THE REPAIR'S OWN NEW CLAIM: 'agrees ROW FOR ROW with mg-2060's
+     B1a/B1b on a disjoint instrument'.  Measured, not accepted.
+
+     rows published by each instrument:
+       mg-e8b8  T1b2      : 53 rows
+       mg-2060  B1b       : 53 rows
+       mg-a218  this file : 53 rows
+     rows on which all THREE instruments agree exactly (dimension and every edge): 53, population: the 53 distinct (beta,n,p) rows published by any of the three
+     -> the repair's 'agrees ROW FOR ROW with mg-2060's B1a/B1b' is CONFIRMED, and this audit is the third instrument
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the 53 character solves this script performs
+FINDINGS: 1, population: the 36 (parameter-pair, level) set-vs-count cells and the 53 cross-instrument rows
+   FINDING: section 0's vertex column is a COUNT and is IDENTICAL for beta = 3, 2 and 1 (1,2,2,3,3,4), but the vertex SETS at beta = 3 and beta = 1 differ at 4 of the 6 levels (n=3: [1, 2] vs [1, 1], n=4: [1, 3, 2] vs [1, 3, 1], n=5: [1, 4, 5] vs [1, 4, 1], n=6: [1, 5, 9, 5] vs [1, 4, 9, 1]). The document substantiates 'the vertex set is not even the same' only at beta = 0. The instrument (T1b2) prints the dimensions and has the evidence; the table does not carry it.
+TOTAL BAD: 1

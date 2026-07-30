@@ -1,0 +1,156 @@
+==========================================================================
+c4  SEAM CHECK -- STALE COPIES OF PASSAGES A REPAIR ALREADY TOUCHED
+==========================================================================
+
+    SIMILARITY THRESHOLD: 0.80  (difflib.SequenceMatcher ratio on
+    whitespace-, markup- and case-normalised text).
+    Minimum passage length: 60 characters after normalisation.
+    A copy counts as MARKED if any of these appears within 12 lines
+    either side: asserted, broken, conjecture, corrected, does not hold, failing phrase, fails, is false, no longer, not established, not evaluated, not read, outcome, retract, superseded, unverified, updated, used to read, used to say, was wrong, what was claimed, withdraw, withdrawn
+
+    touched passages: 101, population: every deleted ('-') line of the 2 correcting commits 2e66d03, f4eaea6 that is at least 60 characters long
+      2e66d03: 88 deleted passages
+      f4eaea6: 13 deleted passages
+
+    units swept: 1360, population: 6 files --
+      docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md   574 units
+      docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md   353 units
+      docs/roadmap.md                                            178 units
+      code/branching_locate_db09/out_t1_tl.txt                   87 units
+      code/branching_locate_db09/t1_tl.py                        127 units
+      code/branching_locate_db09/README.md                       41 units
+
+    comparisons made: 137360, population: every (swept unit, touched passage) pair whose lengths are within 50% of each other
+    surviving copies at or above 0.80: 34 distinct (file, line) sites
+
+    Each site is classified:
+      EDIT IN PLACE -- the surviving text is itself an added ('+') line of
+                       the same commit, i.e. it IS the replacement.  The
+                       question for these is whether the edit is disclosed.
+      SECOND COPY   -- the surviving text is not an added line, i.e. a copy
+                       standing somewhere the repair did not edit.
+    Either way it is a FINDING only if it is UNMARKED.
+
+      1.000  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:708
+             surviving : **One thing it does do that is worth pm-onethird's attention.** ~~The successor
+             deleted by 2e66d03 : **One thing it does do that is worth pm-onethird's attention.** The successor
+      1.000  MARKED     SECOND COPY    docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md:28
+             surviving : Multiplicity-freeness
+  is held **FIXED** down that column and the conclusion changes.
+             deleted by 2e66d03 : Multiplicity-freeness is held fixed down that column and the conclusion changes.
+      0.992  MARKED     SECOND COPY    docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md:117
+             surviving : > *"Multiplicity-freeness is held **FIXED** across those four rows and the
+             deleted by 2e66d03 : Multiplicity-freeness is held FIXED across those four rows and the
+      0.985  MARKED     SECOND COPY    docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md:112
+             surviving : > *"**1. Multiplicity-free and NOT semisimple — the conclusion fails.** The
+             deleted by 2e66d03 : **1. Multiplicity-free and NOT semisimple — the conclusion fails.** The
+      0.981  MARKED     SECOND COPY    docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md:113
+             surviving : > Temperley–Lieb tower `TL_1 ⊂ TL_2 ⊂ ⋯` at four parameters. The branching graph
+             deleted by 2e66d03 : Temperley–Lieb tower `TL_1 ⊂ TL_2 ⊂ ⋯` at four parameters. The branching graph is
+      0.962  MARKED     EDIT IN PLACE  code/branching_locate_db09/out_t1_tl.txt:243
+             surviving : 'At n = 6 the branching graph is the same multiplicity-free graph
+             deleted by 2e66d03 : At n = 6 the branching graph is the same multiplicity-free graph for
+      0.962  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:218
+             surviving : multiplicity-freeness WEAKENS it — and weakens only the adverb.** **This
+             deleted by 2e66d03 : multiplicity-freeness WEAKENS it — and weakens only the adverb.**
+      0.961  MARKED     EDIT IN PLACE  code/branching_locate_db09/t1_tl.py:320
+             surviving : print("    'At n = 6 the branching graph is the same multiplicity-free graph")
+             deleted by 2e66d03 : print("At n = 6 the branching graph is the same multiplicity-free graph for")
+      0.952  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:389
+             surviving : Eight were evaluated. **One of them is not a negative** — row 2 — and it was
+             deleted by 2e66d03 : Eight were evaluated. **One of them is not a negative** — row 2 — and it is the
+      0.951  MARKED     SECOND COPY    docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md:118
+             surviving : > conclusion changes. So multiplicity-freeness is not what carries it."* (T1d)
+             deleted by 2e66d03 : conclusion changes.  So multiplicity-freeness is not what carries it.
+      0.945  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:649
+             surviving : Committed outputs: `out_selftest.txt` (699 520 assertions), `out_t1_tl.txt`,
+             deleted by 2e66d03 : Committed outputs: `out_selftest.txt` (698 963 assertions), `out_t1_tl.txt`,
+      0.945  MARKED     EDIT IN PLACE  code/branching_locate_db09/README.md:10
+             surviving : Committed outputs: `out_selftest.txt` (699 520 assertions), `out_t1_tl.txt`,
+             deleted by 2e66d03 : Committed outputs: `out_selftest.txt` (698 963 assertions), `out_t1_tl.txt`,
+      0.944  MARKED     SECOND COPY    docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:16
+             surviving : **measured** (not cited) to be the same multiplicity-free
+> graph at each
+             deleted by 2e66d03 : **measured** (not cited) to be the same multiplicity-free graph at each — every
+      0.944  MARKED     SECOND COPY    docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:740
+             surviving : MEASURED (not cited) to be the same multiplicity-free
+   graph at each
+             deleted by 2e66d03 : **measured** (not cited) to be the same multiplicity-free graph at each — every
+      0.943  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:112
+             surviving : **1. ~~Multiplicity-free and NOT semisimple — the conclusion fails.~~ WITHDRAWN
+             deleted by 2e66d03 : **1. Multiplicity-free and NOT semisimple — the conclusion fails.** The
+      0.926  UNMARKED   EDIT IN PLACE  code/branching_locate_db09/t1_tl.py:368
+             surviving : print("  What survives without semisimplicity is the COUNT, not the")
+             deleted by 2e66d03 : print("  What survives without semisimplicity is the BASIS, not the")
+      0.919  MARKED     SECOND COPY    docs/roadmap.md:221
+             surviving : our non-semisimple side have an analogue of the canonical basis multiplicity-freeness gives us f
+             deleted by f4eaea6 : our non-semisimple side has an analogue of the canonical basis multiplicity-freeness han
+      0.918  MARKED     SECOND COPY    docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md:114
+             surviving : > is **measured** (not cited) to be the same multiplicity-free graph at each"*
+             deleted by 2e66d03 : **measured** (not cited) to be the same multiplicity-free graph at each — every
+      0.918  MARKED     EDIT IN PLACE  docs/roadmap.md:182
+             surviving : - **`kF(P)` has multiplicity-free branching for free** (all irreducibles one-dimensional) **and 
+             deleted by f4eaea6 : **`kF(P)` has multiplicity-free branching FOR FREE** — all its irreducibles are one-dime
+      0.890  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:421
+             surviving : still right at every `n ≤ 6` (`dim TL_n = Σ_p (dim V_{n,p})²`, 0 bad) and the
+             deleted by 2e66d03 : right size at every `n ≤ 6` (`dim TL_n = Σ_p (dim V_{n,p})²`, 0 bad), the
+      0.887  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:298
+             surviving : The diagram algebras of the branching axis are in it too. **If the umbrella
+             deleted by 2e66d03 : diagram algebras of the branching axis are in it too. **Inside that umbrella the
+      0.869  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:165
+             surviving : the regular representation, and `Σ_p (rank of the Gram matrix of V_{n,p})²` —
+             deleted by 2e66d03 : representation, and `Σ_p (rank of the Gram matrix of V_{n,p})²` — with **0
+      0.865  MARKED     EDIT IN PLACE  code/branching_locate_db09/out_t1_tl.txt:257
+             surviving : beta   dim TL_6 dim of sum_lambda End(L_lambda) endomorphism algebra?   branching mult-free?
+             deleted by 2e66d03 : beta   dim TL_6 dim of sum_lambda End(L_lambda) endomorphism algebra?
+      0.849  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:681
+             surviving : - Putcha, *Complex representations of finite monoids II: highest weight categories and quivers*,
+             deleted by 2e66d03 : - Putcha, *Complex representations of finite monoids II: highest weight categories and q
+      0.848  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:261
+             surviving : > **THE HEADLINE**, *"the branching axis and the species axis share a PROPERTY,
+             deleted by f4eaea6 : **THE HEADLINE: the branching axis and the species axis share a PROPERTY, not a CONSTRUC
+      0.844  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:207
+             surviving : | **not multiplicity-free** | **`⊕End` HOLDS**, canonicity fails: the path basis needs a choice.
+             deleted by 2e66d03 : | **not multiplicity-free** | **`⊕End` HOLDS**, canonicity fails: the path basis needs a
+      0.837  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:396
+             surviving : | **2** | **Quasi-hereditary algebras / highest weight categories** (Cline–Parshall–Scott) | **p
+             deleted by 2e66d03 : | **2** | **Quasi-hereditary algebras / highest weight categories** (Cline–Parshall–Scot
+      0.834  MARKED     SECOND COPY    docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:629
+             surviving : the branching axis and the species axis share a PROPERTY,
+not a CONSTRUCTION — quasi-hereditary
+             deleted by f4eaea6 : **THE HEADLINE: the branching axis and the species axis share a PROPERTY, not a CONSTRUC
+      0.828  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:710
+             surviving : axioms of a tower of recollement (Cox–Martin–Parker–Xi)?**~~ **SUPERSEDED
+             deleted by 2e66d03 : axioms of a tower of recollement (Cox–Martin–Parker–Xi)?** That is the branching
+      0.824  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:419
+             surviving : same towers at non-generic parameters. Temperley–Lieb at `β = 1` (`q` a primitive
+             deleted by 2e66d03 : non-generic parameters. Temperley–Lieb at `β = 1` (`q` a primitive 6th root of
+      0.814  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:682
+             surviving : - Cox–Martin–Parker–Xi, *Representation theory of towers of recollement*, J. Algebra **302** (20
+             deleted by 2e66d03 : - Cox–Martin–Parker–Xi, *Representation theory of towers of recollement*, J. Algebra **3
+      0.812  MARKED     SECOND COPY    docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md:27
+             surviving : The branching graph is **measured** (not cited)
+  to be the same multiplicity-free graph at each
+             deleted by 2e66d03 : **measured** (not cited) to be the same multiplicity-free graph at each — every
+      0.810  MARKED     EDIT IN PLACE  code/branching_locate_db09/t1_tl.py:13
+             surviving : tower is Temperley-Lieb, TL_1 subset TL_2 subset ... , at beta = 3 (generic),
+             deleted by 2e66d03 : The tower is Temperley-Lieb, TL_1 subset TL_2 subset ... , at the parameters
+      0.805  MARKED     EDIT IN PLACE  docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:75
+             surviving : **~~Both halves are settled here by BUILDING the object each would forbid, not by
+             deleted by 2e66d03 : "canonically". Both halves are settled here by BUILDING the object each would
+
+    CALIBRATION -- the two deleted passages named in this script's own
+    docstring, scored explicitly, so a null result is legible.
+
+      probe 'the branching graph is unchanged and multiplicity-free'
+        best match among the deleted passages : 0.746 (NOT among the deleted passages)
+        best surviving copy                   : 0.806 at docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md:743  MARKED
+      probe 'Multiplicity-freeness is held FIXED across those four ro'
+        best match among the deleted passages : 0.935 (so the repair did delete it)
+        best surviving copy                   : 0.928 at docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md:117  MARKED
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the 6 files and 2 commits this sweep must read
+FINDINGS: 1, population: the 34 surviving-copy sites at or above 0.80
+   FINDING: a passage deleted by 2e66d03 survives UNMARKED at code/branching_locate_db09/t1_tl.py:368 (similarity 0.926, EDIT IN PLACE): 'print("  What survives without semisimplicity is the COUNT, not the")'
+TOTAL BAD: 1

@@ -1,0 +1,65 @@
+==========================================================================
+c5  THE RETRACTION AS A RECORD (the item no list names), AND X2's
+    DISCLOSURE
+==========================================================================
+
+(1) IS THE RECORD ACCURATE? -- the two times and the 55-minute interval
+
+      the roadmap commit that INTRODUCED the headline : 6c0f0da  2026-07-30 19:52:23 +0100
+      the roadmap commit that RETRACTED it            : f4eaea6  2026-07-30 20:42:49 +0100
+    [ok] the headline really is in docs/roadmap.md at 6c0f0da         pass
+    [ok] commit f4eaea6 is the retraction the document names          pass
+      measured interval between those two commits    : 50.4 minutes
+      the document states                            : 55 minutes,
+                                                        19:50 -> 20:45
+    [--] the document's stated times match the commits to the minute  note
+         commits are 19:52 and 20:42; the document says 19:50 and 20:45
+    [--] the document's stated 55 minutes matches the measured interval note
+         measured 50.4 minutes commit-to-commit; the document says 55. The two stated clock times are rounded in OPPOSITE directions (19:50 vs 19:52:23, and 20:45 vs 20:42:49), which stretches the interval by about 5 minutes. The overstatement runs AGAINST the author's interest -- a longer time to retract is the worse number -- and 55 is exactly right given the two times the document states, which are the roadmap's own.
+
+(2) DOES THE PLACE THE DOCUMENT POINTS AT STILL CARRY THE RETRACTION?
+    docs/roadmap.md is rebuilt several times an hour in this repo, so
+    'see the roadmap' is a pointer that can rot.
+
+      roadmap commits since the retraction: 0, population: every commit touching docs/roadmap.md after f4eaea6
+    [ok] the CURRENT roadmap still carries the retraction             pass
+    [ok] the current roadmap still names the 19:50 delivery           pass
+    [ok] the current roadmap no longer asserts the headline as a result pass
+
+(3) THE RETRACTION IS IN TWO PLACES, WHICH IS THE POINT
+
+    [ok] the delivered document carries the retraction independently of the roadmap pass
+    [ok] the document says WHY it repeats it                          pass
+
+(4) IS 'DELIBERATELY NOT REPAIRED' ACCURATE ABOUT mg-2060's X2?
+    X2 has three sites in mg-2060's write-up.  Each is checked here
+    against the pre-repair and post-repair text.
+
+      T1a's 'iff' header, in t1_tl.py and its committed output   pre-repair: yes  post-repair: yes
+      section 0's 2x2 table cell, 'Path-pair BASIS survives'     pre-repair: yes  post-repair: REMOVED
+      T1d's printed 'the pairs-of-paths basis exists throughout' pre-repair: yes  post-repair: REMOVED
+
+      X2 sites the repair CHANGED: 2 of 3, population: the three sites mg-2060's X2 names
+        - section 0's 2x2 table cell, 'Path-pair BASIS survives'
+        - T1d's printed 'the pairs-of-paths basis exists throughout'
+
+      the document's section 8 books X2 under 'Deliberately NOT repaired,
+      and each is open': yes
+    [!!] nothing in X2 was repaired, as section 8 says                FAIL
+         the repair CHANGED 2 of the 3 sites of X2 (section 0's 2x2 table cell, 'Path-pair BASIS survives'; T1d's printed 'the pairs-of-paths basis exists throughout') while section 8 books X2 as 'Deliberately NOT repaired, and each is open' and section 4 item 3's outcome says the two further defects are 'not repaired by mg-e8b8'. The changes go the RIGHT way -- they remove a false claim -- but they are undisclosed, and neither site carries a CORRECTED note the way the document's other six CORRECTED/WITHDRAWN (mg-e8b8) sites do.
+
+      what IS still in force, so the finding is not overstated:
+        T1a's 'iff' header is still printed verbatim by t1_tl.py and is
+        still in the committed out_t1_tl.txt, inside a run ending
+        TOTAL BAD: 0.  So X2's primary site is genuinely unrepaired and
+        section 8 is right about THAT site.
+        checked: the 'iff' line is in out_t1_tl.txt -- yes
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the git reads this script needs
+NOTES (recorded, not scored): 2, population: the 10 named checks above
+   NOTE: the document's stated times match the commits to the minute -- commits are 19:52 and 20:42; the document says 19:50 and 20:45
+   NOTE: the document's stated 55 minutes matches the measured interval -- measured 50.4 minutes commit-to-commit; the document says 55. The two stated clock times are rounded in OPPOSITE directions (19:50 vs 19:52:23, and 20:45 vs 20:42:49), which stretches the interval by about 5 minutes. The overstatement runs AGAINST the author's interest -- a longer time to retract is the worse number -- and 55 is exactly right given the two times the document states, which are the roadmap's own.
+FINDINGS: 1, population: the 10 named checks above
+   FINDING: nothing in X2 was repaired, as section 8 says -- the repair CHANGED 2 of the 3 sites of X2 (section 0's 2x2 table cell, 'Path-pair BASIS survives'; T1d's printed 'the pairs-of-paths basis exists throughout') while section 8 books X2 as 'Deliberately NOT repaired, and each is open' and section 4 item 3's outcome says the two further defects are 'not repaired by mg-e8b8'. The changes go the RIGHT way -- they remove a false claim -- but they are undisclosed, and neither site carries a CORRECTED note the way the document's other six CORRECTED/WITHDRAWN (mg-e8b8) sites do.
+TOTAL BAD: 1
