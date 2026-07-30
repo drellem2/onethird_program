@@ -226,26 +226,26 @@ because I made the opposite call at 17:35 on a misread and had to retract it.**
 **So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
 on an audit that measured its extents in both directions — that, not fatigue, is the signal.
 
-## Now (in flight) — 2026-07-30 23:05
+## Now (in flight) — 2026-07-30 23:25
 
-- **mg-8916** — the figure gate reads the site (12 of 12 both ways) but a wrong figure in **ordinary prose**
-  beside it is invisible; and the instrument's own bottom line asserts a target its own T1 row refutes. Asked
-  for **removal before gating** on the prose site.
-- **mg-9220** — the deletion test was applied at the **gate** level where the claim is about **returns**:
-  deleting two together changes the artifact, deleting the first alone leaves it byte-identical.
-- **mg-6cb9** — audit of the extent repair. Must confirm the **cross-section check FIRES**; one never shown to
-  fire would be the vacuous-check defect a fourth time, in a check built to close that class.
-- **mg-d330** — audit of the disposition-label repair.
+- **mg-9220** — the deletion test ran at **gate** grain where the claim is about **returns**; re-run per return
+  and delete what is inert.
+- **mg-58da** — `c1_branching.py` produced the 198-cell reproduction **and** now reports 24 findings where its
+  parser is blind. Two separate questions: are the findings real (the parser now), and does the reproduction
+  stand (provenance — settled by re-running at the old revision).
+- **mg-6cb9** — audit of the extent repair; must confirm the **cross-section check FIRES**.
+- **mg-8aae** — audit of the figure-gate repair.
 
 ## Next (gated, releases automatically)
 
-- **mg-8aae** (on mg-8916), **mg-abd2** (on mg-9220) — pre-filed in the same action as their parents.
+- **mg-c4c8** (on mg-9220), **mg-321d** (on mg-58da) — pre-filed in the same action as their parents.
 - **mg-344a** — Daniel workspace, `assignee=human`, waits on him.
-- **Held, not forgotten:** the quasi-hereditary follow-up stays unfiled — D10 is unverified.
+- **Held, not forgotten:** the quasi-hereditary follow-up stays unfiled while D10 is unverified.
 
-*(Rot check, 23:05: 4 of 6 IDs listed at 22:00 had completed. The 22:20 check was clean because nothing was
-finishing; this one is not, because three repairs landed in between. **The check's value is that it does not
-depend on noticing** — run it every cycle regardless of whether the document feels current.)*
+*(Closed cleanly since 23:05: **mg-8916**, verified in the strongest available form — **the auditor's own
+instrument, unmodified, re-run against the repaired tree, reporting 0 findings at exit 0**, with its committed
+transcript sha256-verified untouched. Finding a defect requires independence from the author; closing one
+requires identity with the finder, and the hash is what makes that checkable rather than social.)*
 
 ## Later (decided, not yet filed)
 - `onethird_program` ships two `controls.py` and two `run_all.sh` and has **no CI of any kind** — by the
