@@ -1,0 +1,230 @@
+mg-e720 -- INDEPENDENT AUDIT OF mg-7d5a (d5a3043), RE-MEASURED
+==========================================================================
+Rows scored REPRODUCED are mg-7d5a's claims that a disjoint rebuild
+confirms.  Rows scored REFUTED are this audit's findings.
+
+TARGET 1 -- THE FOUR REFUTATIONS, RE-MEASURED FROM GIT
+--------------------------------------------------------------------------
+  [REPRODUCED] c50ce32 touches STATE.md and nothing else
+        files: ['STATE.md']
+        1 file changed, 13 insertions(+), 5 deletions(-)
+        So a commit whose whole content is program state existed, and the
+        pre-existing instrument clause fired nothing on it.  The widening's
+        replacement evidence is TRUE.
+  [REPRODUCED] f6756c0 touches no STATE.md and does touch three instruments
+        files: ['code/hodge_leverage/run_all.sh', 'code/hodge_leverage/run_sweep.py', 'code/hodge_leverage/sweep_output.txt', 'docs/OneThird-Hodge-Side-Leverage.md']
+        instrument files among them: ['code/hodge_leverage/run_all.sh', 'code/hodge_leverage/run_sweep.py', 'code/hodge_leverage/sweep_output.txt']
+        The pre-existing clause names 'a harness ... or the text an instrument
+        prints'.  It fired on this commit.
+  [REPRODUCED] the row landed at docs/OneThird-Hodge-Side-Leverage.md:877 in f6756c0
+        line 877 as f6756c0 left it:
+          | **G″** | `γ_i ≥ 1/2` for **every finite poset** having a dimension-`i` face one of whose blocks induces an antichain o
+  [REPRODUCED] no commit ever added the row to STATE.md
+        git log -S 'G″'   -- STATE.md : ['ba3ec79', '1e61031']  (mg-f2e1 quoting, mg-a2bd's strike record)
+        git log -G <row text> -- STATE.md : ['1e61031']  (the strike record only)
+        The -G form is the stronger test and mg-7d5a did not run it: the row's own
+        wording has only ever entered STATE.md inside mg-a2bd's record of striking it.
+  [REPRODUCED] mg-d39d, cited as the sentence's source, says STATE.md is clean
+        522048f (mg-d39d): ' rebuilt. Blast radius is two lines and STATE.md is clean.'
+  [REPRODUCED] the two mg-1319 defects rode in on c0cf104's STATE.md hunk, not c50ce32's
+        c0cf104's STATE.md hunk: 8 added lines; Lemma-1 'n <= 6' present: True; 'SIX for six' present: True
+        c50ce32's STATE.md hunk carries either: False
+        So mg-7d5a's refusal to inherit the ticket's version is CORRECT.
+  [REPRODUCED] the trigger, the STATE.md clause, THE HOLE and the narrowing test are textually UNTOUCHED
+        AND ON ANY COMMIT THAT ADDS OR MODIFIES PROGRA   identical: True
+        Trigger the audit stage on any commit that ADD   identical: True
+        THE HOLE, and it was in this rule's own wordin   identical: True
+        Does a REPAIR need a fresh audit? The narrowin   identical: True
+        So H0 holds on the load-bearing text: a STATE.md-only commit still triggers.
+
+TARGET 2 -- THE 38/38 POPULATION, ENUMERATED FROM THE COMMIT
+--------------------------------------------------------------------------
+METHOD.  Every path in `git ls-tree -r d5a3043`; each blob decoded as UTF-8
+(anything that does not decode is reported, not silently skipped);
+occurrences of the literal counted, not lines; occurrences grouped into
+sites by enclosing paragraph.  NO exclusions: this instrument's own files
+are not in the commit, so it has nothing to exclude and nothing to declare.
+
+        STATE.md                                                                  6 occ   2 site(s)
+        code/face_geometry_audit_5630/audit_x3_equivalence.py                     1 occ   1 site(s)
+        code/face_geometry_audit_6653/out_verify_claims.txt                       2 occ   1 site(s)
+        code/face_geometry_audit_6653/run_all.sh                                  1 occ   1 site(s)
+        code/face_geometry_audit_6653/verify_claims.py                            5 occ   3 site(s)
+        code/face_geometry_landing_7d5a/out_verify.txt                            4 occ   3 site(s)
+        code/face_geometry_landing_7d5a/run_all.sh                                1 occ   1 site(s)
+        code/face_geometry_landing_7d5a/verify_landing.py                         5 occ   4 site(s)
+        docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md           2 occ   2 site(s)
+        docs/OneThird-Intrinsic-Face-Geometry-Probe.md                            9 occ   4 site(s)
+        docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md    5 occ   5 site(s)
+        docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md   8 occ   6 site(s)
+        docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md   5 occ   5 site(s)
+
+  [REPRODUCED] mg-7d5a's '50 occurrences in 12 files, 35 sites' reproduces, given its one declared exclusion
+        at d5a3043: 54 occurrence(s) in 13 file(s), 38 site(s).
+        mg-7d5a excludes exactly one file -- its own transcript, code/face_geometry_landing_7d5a/out_verify.txt
+        (4 occ, 3 sites) -- by name and in its own output.
+        54-4 = 50, 13-1 = 12, 38-3 = 35.  All three numbers are EXACT on
+        independently-written code, and the paragraph's method is what makes that
+        checkable.  This is the first stated method in three generations of this claim.
+        Completeness of the population, tried and could not break: non-UTF-8 blobs
+        carrying the literal: none; .gitignore'd worktree files carrying it: none
+        (3 ignored files, 0 hits), so the scanner's exclusions lose nothing here.
+  [REPRODUCED] the three class tallies in the STATE.md paragraph reproduce
+        LIVE         3 files, 16 occ, 7 sites   (paragraph: 3 / 16 / 7)
+        FROZEN AUDIT 4 files, 20 occ, 18 sites   (paragraph: 4 / 20 / 18)
+        INSTRUMENT   5 files, 14 occ, 10 sites   (paragraph: 5 / 14 / 10)
+  [REPRODUCED] every occurrence outside LIVE is in a frozen audit document or an instrument's source/transcript
+        files outside all three classes: none.  The CLASS half of the paragraph is
+        TRUE, and it is the half that does not expire.
+  [REPRODUCED] every site in the three LIVE files names the truncation
+        unflagged LIVE sites: none
+        Checked by searching each site's own paragraph for
+        'trunc' / '[:20]' / "OWN population".  The weakest of the seven is
+        audit_x3_equivalence.py:84, whose comment says 'the audit's OWN population'
+        and is disclosed as a truncation only by the `[:20]` in the code three lines
+        below it.
+  [  REFUTED ] the LIVE class is assigned by the boundary the paragraph states
+        The stated boundary is the A5 test: 'the artifacts a reader consults INSTEAD
+        OF the source'.  The A5 exclusion list, in this same file and section, says
+        a code comment does NOT qualify -- verbatim: 'A README, a code comment, a
+        path correction, a typo fix, ... do not: nobody retires a question on their
+        authority.'  audit_x3_equivalence.py:84 IS a code comment, and it is in the
+        LIVE class.  It is there because mg-f2e1's member list had it ('One
+        instrument comment ... correct as written'), i.e. it is INHERITED, in the
+        paragraph whose whole point is that the class replaces the inherited list.
+        Direction: conservative (it makes 'every LIVE site is flagged' a STRONGER
+        claim), so the defect is in the boundary's application, not in the number.
+        Applying the stated boundary gives LIVE = 2 files / 15 occ / 6 sites.
+
+TARGET 3 -- ROW 135's GROWTH, ON A STATED METRIC
+--------------------------------------------------------------------------
+METRIC (mg-f7bc's F7, restated so it can be checked): the number of UTF-8
+bytes in the single STATE.md line containing 'THE PIPELINE SURVIVED THE CONTROL ',
+newline EXCLUDED.  The row is located by that marker, not by line number,
+so the measurement does not depend on line numbers holding still.
+
+        c0cf104     7832 bytes /   7702 chars   mg-78c0  -- F7's baseline
+        db08b4c    11727 bytes /  11544 chars   mg-1319  -- F7 measured growth to here
+        de54c3a    12455 bytes /  12252 chars   parent of ba3ec79
+        ba3ec79    14582 bytes /  14340 chars   mg-f2e1  -- the commit under repair
+        d5a3043    14582 bytes /  14340 chars   mg-7d5a  -- this landing
+
+  [REPRODUCED] mg-f7bc's F7 pair 7,832 -> 11,727 reproduces on this metric
+        7832 -> 11727 bytes, +49.7%.  The metric is therefore the right one.
+  [REPRODUCED] mg-7d5a's correction '+2,127 bytes (+17.1%), or +2,088 characters'
+        de54c3a -> ba3ec79 = +2127 bytes (+17.08%), +2088 characters.  EXACT.
+  [REPRODUCED] mg-f2e1's '+949 bytes (+7.6%)' is the wrong numerator over the right base
+        949 / 12455 = 7.62%, which is the +7.6% reported, so the denominator is
+        de54c3a's and only the numerator is wrong.  2127 / 949 = 2.24x understated.
+  [REPRODUCED] 'row 135 is now 14,582 bytes -- +86.2%' on the F7 baseline
+        14582 bytes, +86.2% on 7832.  The roadmap's restructure decision cites 49.7%
+        as its evidence, so the correction STRENGTHENS it, as mg-7d5a says.
+  [REPRODUCED] row 135 untouched by this landing, rows 131-134 byte-identical
+        L131-134 at de54c3a and at HEAD: [5351, 9228, 13487, 10824]
+        row 135: 14582 = 14582.  No restructure.
+
+TARGET 4 -- EVERY CHANGELOG CLAUSE AGAINST THE DIFF IT DESCRIBES
+--------------------------------------------------------------------------
+        ba3ec79's hunks in the Probe (post-image lines): [(34, 48), (142, 158), (810, 822)]
+        §2   lines  109- 158   touched by ba3ec79: True
+        §5   lines  348- 474   touched by ba3ec79: False
+        §11  lines  707- 788   touched by ba3ec79: False
+        §12  lines  789- 823   touched by ba3ec79: True
+
+  [REPRODUCED] the struck clause 'the per-site enumeration in §5' is unsupported: §5 is not in any hunk
+        §5 untouched, §2 and §12 both touched.  mg-7d5a's 'its three hunks in this
+        file are the §-head changelog, §2 and §12' is EXACT: [(34, 48), (142, 158), (810, 822)] covers 34-48 (before
+        §0 at line 50), §2 and §12.
+  [REPRODUCED] §5 carries a truncation FLAG and nothing resembling a per-site enumeration
+        §5 contains 'Flagged because `38/38` is quoted as a headline ... a `[:20]`
+        TRUNCATION' and no list of sites.  Landed by db08b4c (mg-1319): git log -S
+        on that flag returns ['db08b4c'].
+  [REPRODUCED] 'the entry that stood here claimed the correction outright' was imprecise: it did carry (§11)
+        the replaced entry read: "Also: the `n ≤ 6` half of F3's coverage sentence corrected to `n ≤ 5` for Lemma 1 (§11)"
+        So it named one of two sites rather than none.
+        mg-7d5a's second correction is CORRECT.
+  [REPRODUCED] mg-7d5a's own changelog block asserts nothing outside its own diff
+        d5a3043's hunks in the Probe: ['@@ -36,13 +36,26 @@ and in fact a theorem, but **measured by neither run cited for it**; now proved'] -- one, in the §-head changelog.  Its block
+        claims (a) the old wording, (b) that §5 has no enumeration and is untouched by
+        ba3ec79, (c) that the (§11) tag was there, (d) 'Both are fixed above' and (e)
+        that the STATE.md claim is now a class statement.  (a)-(c) are facts about
+        other objects and each reproduces above; (d) is in this hunk; (e) is in this
+        commit's STATE.md hunk.  H4 is DISCHARGED -- no clause asserts absent work.
+
+TARGET 5 -- WHAT THE LANDING ADDED BEYOND ITS BRIEF, AND WHAT IS IN IT
+--------------------------------------------------------------------------
+  [  REFUTED ] the three paragraphs give one consistent account of why f6756c0 was audited
+        STATE.md:341  (A1, the commit's own headline refutation, verified by its T1):
+            '... so THE PRE-EXISTING clause already fired on the commit that carried
+             the arc's only BROKEN item ...'
+        STATE.md:343  (the OPEN finding this landing FILED, beyond its brief):
+            'mg-d39d caught it, but as a landing audit under the narrowing test's new
+             mathematical content branch, NOT BECAUSE OF ANY ARTIFACT CLAUSE.'
+        STATE.md:351  (the A7 re-sizing):
+            'f6756c0 -- a REPAIR commit to a deliverable, exempt by the narrowing test
+             two paragraphs up, AUDITED ONLY BECAUSE it added new mathematical content.'
+        The instrument clause IS an artifact clause -- the same section closes with
+        'Two artifact classes trigger -- instruments, and the state-of-the-program
+        summary'.  Lines 343 and 351 are false, by the measurement at line 341, ten lines
+        away, which this commit made itself.
+  [  REFUTED ] the A7 sizing does not narrow the stage below the standing rule set
+        As landed, STATE.md:351 reads 'a repair to one re-enters it only if the repair
+        widens or adds new mathematical content'.  STATE.md:355, in the same section,
+        says 'The narrowing test above is about mathematical CLAIMS and DOES NOT EXEMPT
+        INSTRUMENTS: adopting a control, rescoring a row, or rewording what a control
+        prints is not a narrowing'.  A repair to a deliverable that touches an
+        instrument therefore re-enters the stage by the instrument clause -- f6756c0 is
+        that case and this commit proved it.  The word 'only' removes that route.
+        H6/H7 asked for a sizing; this is a sizing PAST the true claim.
+  [  REFUTED ] 'exempt by the narrowing test two paragraphs up' locates the rule correctly
+        The narrowing test is at STATE.md:309.  Two paragraphs above 351 is 'THE HOLE',
+        which only refers to it.  Inherited from mg-6653's 'the narrowing test two
+        paragraphs earlier', which was wrong there too.
+  [  REFUTED ] the A6 narrowing attributes its quotation to the right commit
+        STATE.md:339 says 'the commit that repaired it says the repair "changes
+        behaviour"'.
+        Commit that repaired mg-5630's A4 (its message: 'the scoring defect
+        fixed in controls.py'):            ['db08b4c']  (mg-1319)
+        Commits whose message says 'changes behaviour': ['a85fb28', 'ba3ec79']
+          -- ba3ec79 is mg-f2e1, REPORTING the repair a generation later; a85fb28 is
+             mg-6653's audit, which correctly wrote 'this commit's own message'; and
+             d5a3043 is this landing.
+        d5a3043's own COMMIT MESSAGE gets it right ('ba3ec79's own message').  Only the
+        sentence it wrote into STATE.md moves the quotation to the repairing commit.
+        The POINT of A6 -- the defect was in scoring logic, so 'the whole population sat
+        in text' is false -- STANDS, and the narrowing to 'concentrated in' is correct.
+  [  REFUTED ] the STATUS block added to mg-6653's run_all.sh describes its own effect correctly
+        The block asserts: 'verify_claims.py -- ... Its FINDINGS are unaffected; only
+        the transcript is.'  Present in the file: True.
+        Re-run at this commit, verify_claims.py moves from 'REFUTED CLAIMS: 7' to
+        'REFUTED CLAIMS: 9': 'the five named LIVE sites are all in fact flagged' and
+        'the section-2 sentence now reads n<=5 for the Lemma-1 cross-check' both flip
+        from [REPRODUCED] to [REFUTED].  Both flip because THIS LANDING added 13 lines
+        to the Probe's section head, and verify_claims.py matches sites by hard-coded
+        (file, line) pairs (verify_claims.py:240-248) and reads Probe line 140 directly
+        (verify_claims.py:329).  The substantive facts are unchanged -- the sites are
+        still flagged, §2 still reads n<=5 -- but the instrument's scored FINDINGS are
+        not, and the block was added to tell a reader they are.  Run:
+          python3 code/face_geometry_audit_6653/verify_claims.py | grep 'REFUTED CLAIMS'
+
+==========================================================================
+26 scored statement(s); 20 REPRODUCED, 6 REFUTED.
+   - the LIVE class is assigned by the boundary the paragraph states
+   - the three paragraphs give one consistent account of why f6756c0 was audited
+   - the A7 sizing does not narrow the stage below the standing rule set
+   - 'exempt by the narrowing test two paragraphs up' locates the rule correctly
+   - the A6 narrowing attributes its quotation to the right commit
+   - the STATUS block added to mg-6653's run_all.sh describes its own effect correctly
+
+WHERE THEY LAND.  Four of the six are in material outside the seven items
+of the brief: the OPEN finding this landing FILED (STATE.md:343), the
+A7 rule-narrowing beyond what H7 asked for (351), the paragraph-locator
+inherited with it, and the STATUS block written into another audit's
+harness.  The remaining two are inside a sentence about the landing's own
+method -- 'nothing is inherited' (the LIVE class) and 'the commit that
+repaired it' (A6).  Sixth consecutive generation of that shape, and the
+arc's own rule predicted it again.
+
+The CONTROL half of this audit is scored separately, by
+attack_artifact_check.py: the code repair HOLDS and the claim written
+around it does not.

@@ -1,0 +1,94 @@
+mg-e720 -- INDEPENDENT ATTACK BATTERY ON artifact_banner_check AS REPAIRED BY mg-7d5a
+==============================================================================
+Object under attack: code/face_geometry/controls.py at d5a3043.
+The artifact is the child's stdout, which is what `| tee controls_output.txt` writes.
+An attack SUCCEEDS iff the 17-char literal reaches a non-bottom line,
+the control row reports no offenders, and the battery exits 0.
+
+-- POSITIVE CONTROL ON THE REPAIRED CONTROL ---------------------------------
+
+A  the banner in a row NAME (pre-repair route)
+  exit code                     : 1
+  banner lines in the artifact  : 2  (of which NOT the bottom line: 2)
+       line 4   [PASS] a cannot-fail row keeps ALL CONTROLS PASS out of the bottom line
+       line 5   [PASS] with no cannot-fail row the bottom line IS ALL CONTROLS PASS
+  the control row               : [FAIL] no line this run printed carries the 17-char all-pass banner literal, and in particular no contro
+  ==> POSITIVE CONTROL HOLDS
+
+-- mg-6653's TWO ROUTES, REBUILT AT DIFFERENT SITES -------------------------
+
+B  the banner in a `detail=` string (new site: incidence battery)
+  exit code                     : 1
+  banner lines in the artifact  : 1  (of which NOT the bottom line: 1)
+       line 60  [PASS] incidence battery reached its bottom row  -- clean-run bottom line is 'ALL CONTROLS PASS'
+  the control row               : [FAIL] no line this run printed carries the 17-char all-pass banner literal, and in particular no contro
+  ==> attack repelled
+
+C  the banner as a bare print() heading (new site: first control)
+  exit code                     : 1
+  banner lines in the artifact  : 1  (of which NOT the bottom line: 1)
+       line 8   [PASS] reference bottom line: ALL CONTROLS PASS
+  the control row               : [FAIL] no line this run printed carries the 17-char all-pass banner literal, and in particular no contro
+  ==> attack repelled
+
+D  one artifact line assembled from two write() calls
+  exit code                     : 1
+  banner lines in the artifact  : 1  (of which NOT the bottom line: 1)
+       line 60  [PASS] split across writes: ALL CONTROLS PASS
+  the control row               : [FAIL] no line this run printed carries the 17-char all-pass banner literal, and in particular no contro
+  ==> attack repelled
+
+-- ROUTES NO GENERATION HAS TRIED -------------------------------------------
+
+P1  a bare print() AFTER the check, above the bottom line
+  exit code                     : 0
+  banner lines in the artifact  : 1  (of which NOT the bottom line: 1)
+       line 62  [PASS] battery clean: ALL CONTROLS PASS
+  the control row               : [PASS] no line this run printed carries the 17-char all-pass banner literal, and in particular no contro
+  ==> ATTACK SUCCEEDS -- the banner is in the artifact, the control says none, exit 0
+
+P2  a NEW control row appended after the check
+  exit code                     : 0
+  banner lines in the artifact  : 1  (of which NOT the bottom line: 1)
+       line 63  [PASS] with no cannot-fail row the bottom line is ALL CONTROLS PASS
+  the control row               : [PASS] no line this run printed carries the 17-char all-pass banner literal, and in particular no contro
+  ==> ATTACK SUCCEEDS -- the banner is in the artifact, the control says none, exit 0
+
+P3  os.write(1, ...) -- into the artifact, around the tee
+  exit code                     : 0
+  banner lines in the artifact  : 1  (of which NOT the bottom line: 1)
+       line 1   [PASS] via fd 1: ALL CONTROLS PASS
+  the control row               : [PASS] no line this run printed carries the 17-char all-pass banner literal, and in particular no contro
+  ==> ATTACK SUCCEEDS -- the banner is in the artifact, the control says none, exit 0
+
+P6  a module-level print, before main() installs the tee
+  exit code                     : 0
+  banner lines in the artifact  : 1  (of which NOT the bottom line: 1)
+       line 1   [PASS] import-time banner: ALL CONTROLS PASS
+  the control row               : [PASS] no line this run printed carries the 17-char all-pass banner literal, and in particular no contro
+  ==> ATTACK SUCCEEDS -- the banner is in the artifact, the control says none, exit 0
+
+==============================================================================
+SUMMARY
+  A  the banner in a row NAME (pre-repair route) POSITIVE CONTROL HOLDS
+  B  the banner in a `detail=` string (new site: incidence battery) attack repelled
+  C  the banner as a bare print() heading (new site: first control) attack repelled
+  D  one artifact line assembled from two write() calls attack repelled
+  P1  a bare print() AFTER the check, above the bottom line ATTACK SUCCEEDS -- the banner is in the artifact, the control says none, exit 0
+  P2  a NEW control row appended after the check ATTACK SUCCEEDS -- the banner is in the artifact, the control says none, exit 0
+  P3  os.write(1, ...) ATTACK SUCCEEDS -- the banner is in the artifact, the control says none, exit 0
+  P6  a module-level print, before main() installs the tee ATTACK SUCCEEDS -- the banner is in the artifact, the control says none, exit 0
+
+BOTTOM LINE.  The CODE repair is real and it holds where mg-6653 broke it:
+B, C and D are repelled and A still fires, so the row is a control and not
+a tautology.  What does NOT hold is the SIZE of the claim written around it.
+4 route(s) put the literal into the artifact with the control reporting
+"offending lines: none" and the battery exiting 0: P1, P2, P3, P6.
+Three of the four are a bare print().  The property enforced is
+"no line printed BEFORE this row, through sys.stdout, after main() installed
+the tee" -- which equals "the artifact's occurrences are exactly the bottom
+line's" only while this row stays last in main(), and nothing checks that.
+The check's own DETAIL string says it exactly right -- "the whole artifact
+above this row".  The printed HEADING, the docstring's "which is every line
+of the artifact", and the commit message's "including a bare print() added
+tomorrow" each say more than the code does.
