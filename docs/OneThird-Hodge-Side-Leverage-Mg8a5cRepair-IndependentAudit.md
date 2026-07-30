@@ -47,10 +47,10 @@ LANDED and F-3 and F-4 NOT LANDED, and none is re-marked here.
 
 **What is open is one level out from the gate, and one sentence short of the summary repair.**
 
-| | severity | finding |
-|---|---|---|
-| **G-1** | **MODERATE** | the gate reads **one designated statement per site**; a reader reads the **section**. A wrong figure written into the site in **ordinary prose** — not in the labelled form the gate's regex locates — is not seen, at **3 of the 3 sites**, at exit 0. This is not F-1 reopened: F-1's own shape now fires 12 of 12. It is F-1's **mechanism** one level out, and the arc has precedent that the next correction *adds* a mention rather than corrupting the existing one — that is exactly how F-1 was born, out of mg-8e30's own corrected wording |
-| **G-2** | **MINOR–MODERATE** | `7f66005` exists to make `audit_repair_8e30.py` "tell the truth on a RE-RUN". Its BOTTOM LINE has **two** sentences and **one** was amended. Re-run at HEAD the instrument prints two `[REFUTED]` lines in **T1, its own declared PRIMARY TARGET** — *"the three published parts reproduce from the tree"* and *"THE REPAIR'S FIGURES DID NOT GO STALE"* — and then prints, unconditionally, *"THE PRIMARY TARGET IS CONFIRMED: the repair's three figures are the POST-commit ones and reproduce exactly from the tree."* Both are in the same transcript. This is the shape `7f66005`'s own commit message calls "the defect this whole arc keeps paying for", surviving inside the fix for it |
+| | severity | finding | disposition |
+|---|---|---|---|
+| **G-1** | **MODERATE** | the gate reads **one designated statement per site**; a reader reads the **section**. A wrong figure written into the site in **ordinary prose** — not in the labelled form the gate's regex locates — is not seen, at **3 of the 3 sites**, at exit 0. This is not F-1 reopened: F-1's own shape now fires 12 of 12. It is F-1's **mechanism** one level out, and the arc has precedent that the next correction *adds* a mention rather than corrupting the existing one — that is exactly how F-1 was born, out of mg-8e30's own corrected wording | ⚠️ **LANDED 2026-07-30 by mg-8916, BY WIDENING THE CODE — the stated extent is NOT narrowed.** `figure_gate` now also takes a **CENSUS** of every figure-shaped token the *section* asserts, prose included, against the live measurements plus a declared roster of each site's historical figures. The three U1 probes that were silent here **fire 3 of 3 on disk against the real runner**, and so does the probe a set-membership test would pass (a wrong prose figure reusing a roster value); all 6 restorations return the run to exit 0, sha256-checked — `code/hodge_leverage_repair_8916/` R1 |
+| **G-2** | **MINOR–MODERATE** | `7f66005` exists to make `audit_repair_8e30.py` "tell the truth on a RE-RUN". Its BOTTOM LINE has **two** sentences and **one** was amended. Re-run at HEAD the instrument prints two `[REFUTED]` lines in **T1, its own declared PRIMARY TARGET** — *"the three published parts reproduce from the tree"* and *"THE REPAIR'S FIGURES DID NOT GO STALE"* — and then prints, unconditionally, *"THE PRIMARY TARGET IS CONFIRMED: the repair's three figures are the POST-commit ones and reproduce exactly from the tree."* Both are in the same transcript. This is the shape `7f66005`'s own commit message calls "the defect this whole arc keeps paying for", surviving inside the fix for it | ⚠️ **LANDED 2026-07-30 by mg-8916.** The bottom line is no longer written: it is **DERIVED** from the rows tagged `PRIMARY`, and a `SUMMARY vs ROWS` check compares the two and is recorded like any other check. **T1 is not relaxed to keep the summary true** — it audits `e16e41c`, so its expectations are the figures `e16e41c` published. The check is **shown firing**: forced to the sentence it used to print unconditionally, it goes `[REFUTED]` and moves the refuted count — `code/hodge_leverage_repair_8916/` R2 |
 
 **Neither is a retraction of the repair.** The repair did the harder half first and did it
 right; both findings are about the edge of what it now covers.
@@ -61,6 +61,16 @@ because an auditor that repairs what it is auditing destroys the measurement. Bo
 are pm-onethird's to size. **mg-3c24 merged with findings and no successor was ever filed** —
 the audit-successor detector recovered that drop, and it is the reason this paragraph exists
 rather than being left implied.
+
+⚠️ **BOTH ARE NOW LANDED, by mg-8916 (2026-07-30), and the successor was filed rather than
+dropped.** The dispositions above are annotated in place; the repair and its evidence are
+[`OneThird-Hodge-Side-Leverage-Mg835fRepair.md`](OneThird-Hodge-Side-Leverage-Mg835fRepair.md)
+and `code/hodge_leverage_repair_8916/`, `run_all.sh`, ~30 s. **Nothing in the body of this audit
+below this line has been edited** — the measurements it reports are the measurements it took,
+against the tree it took them against, and a later repair must not rewrite them. In particular
+**§6's U1 rows still read `gate passes`, and they were correct when taken**: that is what the
+gate did before mg-8916, and `code/hodge_leverage_repair_8916/` R1 is the record of the same
+probes firing after it.
 
 ---
 
@@ -298,7 +308,20 @@ The transcript regenerates byte-identically at any tree in which `STATE.md`,
 `docs/OneThird-Hodge-Side-Leverage-Mg8e30Repair-IndependentAudit.md`,
 `code/hodge_leverage_landing_e1d0/`, `code/hodge_leverage_audit_8a5c/` and
 `code/state_landing_control_2da3/` are unchanged; it embeds no sha of its own, and it was
-checked byte-identical across two consecutive runs. It **mutates the tree and restores it**,
+checked byte-identical across two consecutive runs.
+
+⚠️ **THAT CONTRACT IS BROKEN BY mg-8916, DELIBERATELY, AND `out_audit_a318.txt` IS FROZEN AT
+THIS RUN.** mg-8916 edits `code/hodge_leverage_landing_e1d0/verify_landing.py` (the G-1
+widening) and `code/hodge_leverage_audit_8a5c/audit_repair_8e30.py` (the G-2 derivation), which
+are two of the seven paths named above. A re-run therefore does **not** reproduce this
+transcript — §6's three U1 rows would read `GATE FIRES`, which is the repair. **The committed
+transcript is the run as TAKEN and is not regenerated**; the post-repair measurement of the same
+probes is `code/hodge_leverage_repair_8916/out_repair_8916.txt`. Which artifact is frozen and
+which is regenerated is stated in both, because a document left wrong with its evidence bent to
+agree presents identically in a diff to a document corrected with its evidence regenerated to
+follow.
+
+It **mutates the tree and restores it**,
 refuses to run against a dirty one (scoped to the three files it will `git checkout --`), and
 verifies every restoration by sha256. `git status` is clean after a run except for
 `code/hodge_leverage_audit_835f/`.
