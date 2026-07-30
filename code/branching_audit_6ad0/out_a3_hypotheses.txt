@@ -1,0 +1,113 @@
+==============================================================================
+A3a  B3 re-measured, and asked whether it CAN fail.
+==============================================================================
+
+   n  classes   J(P) differential   J(P) differential below the top
+   1        1                   0                                 1
+   2        2                   0                                 0
+   3        5                   0                                 0
+   4       16                   0                                 0
+   5       63                   0                                 0
+   6      318                   0                                 0
+
+  Passers below the top: [1]
+
+  READING.  The full-lattice column is a MEASUREMENT OF A THEOREM and
+  cannot be anything but 0: J(P) is finite with a maximum, U kills the
+  maximum, and UD does not.  af28 says exactly this in out_branching
+  and in section 2 item 1, so it is not hidden -- but B3's headline
+  '0 of 405' is not evidence, it is arithmetic.  The truncated column,
+  which is the one that could have come out either way, is reproduced
+  here independently and agrees: 1, the one-element poset.
+
+==============================================================================
+A3b  'Brown section 4.3 reaches the Young graph and no other
+     differential poset' -- tested at the level where af28's OWN
+     contact lives, namely finite intervals.
+==============================================================================
+
+  CONTROLS on this file's Young-Fibonacci implementation:
+    rank sizes are Fibonacci to rank 6:            PASS
+    DU - UD = rI below the top rank:                r = 1  PASS
+    every interval [0-hat, w] to rank 6 is a lattice:   PASS
+
+  af28's other T8 column, recomputed: Young intervals [0,lambda]
+    with |lambda| <= 6: 30 intervals, non-distributive 0 (af28: 30 and 0)
+    antichain n=5: |F|=541 |AC|=52  radical is 90.4% of the algebra
+    antichain n=6: |F|=4683 |AC|=203  radical is 95.7% of the algebra
+    (af28 section 1 row 3 states 90.4% and 95.7%.)
+
+  Intervals [0-hat, w] of the Young-Fibonacci lattice, rank(w) <= 6:
+    total 33;  DISTRIBUTIVE 28;  non-distributive 5
+  (af28's T8 reports 33 total and 5 non-distributive -- reproduced.)
+
+  So Brown section 4.3's hypothesis -- a finite distributive lattice --
+  is SATISFIED by 28 of the 33 finite intervals of the OTHER known
+  1-differential lattice.  Each of those is J(P) for an explicit P,
+  by Birkhoff.  Exhibiting them:
+
+    w              |[0,w]|   P with J(P) = [0,w]   (poset on its join-irreducibles)
+    ()                   1   0 elements, 0 relations .
+    (1,)                 2   1 elements, 0 relations .
+    (1, 1)               3   2 elements, 1 relations .
+    (2,)                 3   2 elements, 1 relations .
+    (1, 1, 1)            4   3 elements, 3 relations .
+    (1, 2)               4   3 elements, 3 relations .
+    (2, 1)               5   3 elements, 2 relations .
+    (1, 1, 1, 1)         5   4 elements, 6 relations .
+    (1, 1, 2)            5   4 elements, 6 relations .
+    (1, 2, 1)            6   4 elements, 5 relations .
+    (2, 1, 1)            7   4 elements, 4 relations .
+    (2, 2)               7   4 elements, 4 relations .
+    (1, 1, 1, 2)         6   5 elements, 10 relations .
+    (1, 1, 2, 1)         7   5 elements, 9 relations .
+    (1, 2, 1, 1)         8   5 elements, 8 relations .
+    (1, 2, 2)            8   5 elements, 8 relations .
+    (2, 1, 1, 1)         9   5 elements, 7 relations .
+    (2, 1, 2)            9   5 elements, 7 relations .
+    (1, 1, 2, 2)         9   6 elements, 13 relations .
+    (1, 2, 1, 2)        10   6 elements, 12 relations .
+    (2, 1, 1, 2)        11   6 elements, 11 relations .
+
+    reconstructions attempted 28, J(P) != interval: 0
+
+  CONCLUSION A3b.  At the level of WHOLE differential posets, B4 is
+  right and follows from Stanley's uniqueness theorem.  At the level
+  of FINITE INTERVALS -- which is the only level at which af28's own
+  contact exists, since Young's lattice is infinite and is itself not
+  a J(P) -- 'reaches the Young graph and no other' is FALSE, and row
+  10's 'the lattice it realises is the one Brown section 4.3 provably
+  cannot consume' is FALSE for 28 of its 33 finite intervals.
+
+==============================================================================
+A3c  B6 and B7: can either measurement come out otherwise?
+==============================================================================
+
+  B6: 'no move acts on L(P) bijectively without acting as the identity
+  map', reported as MEASURED over 6 197 moves.
+    F(P) is a BAND: x.x = x for all 440 moves over all posets to n=4,
+    non-idempotent found: 0.
+    The action of an idempotent transformation is an idempotent map,
+    and an idempotent bijection of a finite set is the identity.  So
+    B6's count is 0 by a two-line argument for every poset and every
+    n, not just the 87 classes tested.  af28 states this argument in
+    out_young.txt and in section 2 item 4, so it is disclosed -- but
+    the ledger books it as MEASURED, and the measurement CANNOT FAIL.
+
+  B7: 'concatenation is not unital, 0 of 64'.
+    1_P is the one-block move.  Concatenation sends (1_P, 1_Q) to the
+    TWO-block move (P then Q), which equals 1_{P+Q} only if one of the
+    two blocks is empty.  Both P and Q are nonempty in all 64 pairs
+    (|P|,|Q| in 1..3), so 'unital in 0 of 64' is forced.  Checking:
+    64 of 64 pairs give a two-block image, i.e. non-unital by counting
+    blocks alone, with no reference to F(P) at all.
+
+  READING.  Neither is wrong.  Both are booked in the ledger as
+  MEASURED with a sample size, and in both the sample size is doing no
+  work: the answer is forced for every poset of every size.  This is
+  the defect mg-3b51 reported against mg-1953's R1d, recurring in a
+  ledger row rather than in a control.
+
+==============================================================================
+SUMMARY a3_hypotheses: truncated-passers 1; YF intervals distributive 28 of 33 (non-dist 5), reconstruction bad 0; non-idempotent moves 0; forced non-unital 64 of 64
+==============================================================================

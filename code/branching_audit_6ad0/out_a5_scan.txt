@@ -1,0 +1,66 @@
+==============================================================================
+A5  Brown (2000) keyword census, re-run with ligature-aware matching
+    and with ligature-bearing controls.  arXiv:math/0006145.
+==============================================================================
+
+  bytes downloaded: 532339   (af28 recorded 532339)
+  characters extracted (whitespace and hyphens removed): 121561
+  (af28 recorded 123453 by its own routine)
+
+  STEP 1 -- is the extraction dropping ligatures?  Each control word
+  is searched BOTH as spelt and as a ligature-dropping reader would
+  render it.  If the second column dominates, ligatures are gone.
+
+    word            as spelt   ligature-dropped spelling   count
+    finite                2   nite                           57
+    defined               0   dened                          26
+    fixed                 0   xed                            15
+    different             0   dierent                         9
+    coefficient           0   coecient                        0
+
+    LIGATURES ARE DROPPED: YES (4 of 5 controls found only in the
+    ligature-dropped spelling).
+
+  STEP 2 -- af28's five controls, and whether any of them could have
+  detected the ligature loss.
+
+    control                     count   contains fi/ff/fl?
+    distributive lattice            8   no
+    maximal chains                 19   no
+    left regular band               6   no
+    Tsetlin                        28   no
+    derangement                    24   no
+
+    0 of 5 af28 controls bear a ligature.  So the failure mode af28
+    documents in its own section 5 item 6 was OUTSIDE the reach of its
+    own control set.
+
+  STEP 3 -- the census, each absent-word keyword searched in BOTH
+  spellings.  A nonzero in EITHER column refutes B8 for that word.
+
+    keyword                  as spelt   ligature-dropped   verdict
+    Young                           0                  0   absent
+    tableau                         0                  0   absent
+    Bratteli                        0                  0   absent
+    branching                       0                  0   absent
+    differential poset              0                  0   absent   <- ligature-bearing keyword
+    differential                    0                  0   absent   <- ligature-bearing keyword
+    Gelfand                         0                  0   absent
+    Okounkov                        0                  0   absent
+    Vershik                         0                  0   absent
+    Fomin                           0                  0   absent
+    dual graded                     0                  0   absent
+    tower of algebras               0                  0   absent
+
+  STEP 4 -- verdict.
+
+    B8 SURVIVES.  All twelve keywords are absent in both spellings,
+    including the two that af28's instrument could not have
+    detected: 'differential' and 'differential poset'.
+
+    What does NOT survive is B8's scope note, 'keyword census ... with
+    five present-word controls'.  The controls establish that the
+    extraction produces text.  They do not establish that it produces
+    the text of the two keywords whose absence the finding needs, and
+    af28 had already identified the mechanism by which it does not.
+

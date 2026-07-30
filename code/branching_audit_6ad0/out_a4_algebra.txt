@@ -1,0 +1,80 @@
+==============================================================================
+A4a  B5 without the trace form: characters + nilpotent kernel.
+     Size cap |F(P)| <= 90; every skip is listed.
+==============================================================================
+
+   n  classes tested skipped  sigma-hom bad  chi not multiplicative  Phi not onto  kernel not nilpotent  != |AC|
+   1        1      1       0              0                       0             0                     0        0
+   2        2      2       0              0                       0             0                     0        0
+   3        5      5       0              0                       0             0                     0        0
+   4       16     16       0              0                       0             0                     0        0
+   5       63     43      20              0                       0             0                     0        0
+
+  Skipped over the cap, listed in full:
+    n=5 |F(P)|=102  x2
+    n=5 |F(P)|=104  x2
+    n=5 |F(P)|=114  x2
+    n=5 |F(P)|=120  x1
+    n=5 |F(P)|=126  x2
+    n=5 |F(P)|=132  x1
+    n=5 |F(P)|=148  x1
+    n=5 |F(P)|=150  x2
+    n=5 |F(P)|=176  x3
+    n=5 |F(P)|=220  x2
+    n=5 |F(P)|=308  x1
+    n=5 |F(P)|=541  x1
+
+  Reading: Phi: kF(P) -> k^{AC(P)} is a surjective algebra map whose
+  kernel is a nilpotent ideal, on every poset tested.  Hence
+  kF(P)/rad = k^{AC(P)} and dim kF(P)/rad = |AC(P)| -- B5 CONFIRMED
+  by a route that uses no theorem of Dickson and no trace form.
+
+==============================================================================
+A4b  section 5 item 5(a) and its USE in section 2 item 5.
+==============================================================================
+
+  The derivation, as af28 states it in section 1 row 2: an N-indexed
+  family closed under the disjoint union the external product needs
+  satisfies P_m + P_n = P_{m+n}, hence P_n = P_1^{+n}.  CORRECT: put
+  m = 1 and induct.
+
+  What section 1 row 2 then says: 'at P_1 = a point this is the
+  ANTICHAIN sequence, i.e. the classical braid case'.  Correctly
+  conditioned.
+  What section 2 item 5 says: 'the N-grading it presupposes forces
+  disjoint powers, WHICH LANDS BACK AT THE CLASSICAL ANTICHAIN CASE'.
+  The condition has been dropped, and the conclusion does not follow:
+  P_1 is an arbitrary finite poset.
+
+  Exhibiting the families the dropped condition loses.  For each
+  choice of P_1, P_n = P_1^{+n} is a legitimate N-graded +-closed
+  family, and it is the antichain sequence only for P_1 = a point.
+
+   P_1                 |P_2|  |F(P_2)|  |AC(P_2)|  P_2 an antichain?
+   a point                  2         3          2  yes
+   the 2-chain              4        26         14  NO
+   the 2-antichain          4        75         15  yes
+   the 3-chain              6       252        106  NO
+   V (one below two)        6       730        174  NO
+
+  So the derivation constrains the family to disjoint powers but does
+  NOT constrain it to antichains.  section 2 item 5's reason is wrong;
+  its conclusion ('no tower') still stands, but on the OTHER leg --
+  the unitality failure of A3c, which applies to every P_1 equally.
+
+==============================================================================
+A4c  section 5 item 5(b): Aut(P) = S_n exactly when P is an antichain.
+==============================================================================
+
+   n  classes  Aut(P) = S_n  of which antichains  counterexamples
+   1        1             1                     1                0
+   2        2             1                     1                0
+   3        5             1                     1                0
+   4       16             1                     1                0
+   5       63             1                     1                0
+
+  CONFIRMED: 0 counterexamples.  af28's 5(b) holds.
+
+==============================================================================
+SUMMARY a4_algebra: B5 route bad [0, 0, 0, 0, 0] (20 skipped); Aut counterexamples 0
+==============================================================================
