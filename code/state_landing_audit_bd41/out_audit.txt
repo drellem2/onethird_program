@@ -1,0 +1,311 @@
+### 1. verify_landing_figures.py — every figure b68db5d writes about itself
+
+==============================================================================
+1. FILE-LEVEL INVARIANTS the commit asserts about itself
+==============================================================================
+  [OK  ] STATE.md lines at db08b4c
+          claimed 327 lines   measured 327 lines
+  [OK  ] STATE.md lines at 60f4dac
+          claimed 367 lines   measured 367 lines
+  [OK  ] STATE.md lines at bdcb006 (mg-ae62)
+          claimed 377 lines   measured 377 lines
+  [OK  ] STATE.md lines at 672915e (mg-a053)
+          claimed 380 lines   measured 380 lines
+  [OK  ] STATE.md lines at b68db5d (mg-7735)
+          claimed 380 lines   measured 380 lines
+
+  -> '380 lines before and after' and the 367 -> 377 -> 380 progression
+     ('mg-ae62 added 10 lines and mg-a053 added 3') both hold.
+  [OK  ] STATE.md lines changed by b68db5d
+          claimed [135] (1-indexed)   measured [135] (1-indexed)
+  [OK  ] column-count vector of the whole file identical
+          claimed True   measured True
+  [OK  ] cells with ODD ** count at HEAD (of 210 cells, whole file)
+          claimed 0 cells   measured 0 cells
+  [OK  ] row :135 column count at HEAD
+          claimed 3 columns   measured 3 columns
+
+==============================================================================
+2. THE CELL ARITHMETIC — raw vs stripped, the convention split
+==============================================================================
+  A markdown cell `| ... |` can be measured WITH or WITHOUT its bounding spaces.
+  b68db5d uses BOTH, in the same change, without naming either.
+
+                          raw chars  strip chars  raw bytes  strip bytes
+  60f4dac :135                13190        13188      13418        13416
+  57f962f :135                 7705         7703       7837         7835
+  b68db5d :135                 7878         7876       8012         8010
+  60f4dac :136                15386        15384      15674        15672
+  b68db5d :136                 8442         8440       8577         8575
+
+  The README index table + its new annotation use RAW:
+  [OK  ] README table   :135 cell before
+          claimed 13190 raw chars   measured 13190 raw chars
+  [OK  ] README table   :135 cell after 
+          claimed 7705 raw chars   measured 7705 raw chars
+  [OK  ] README annot.  :135 at HEAD    
+          claimed 7878 raw chars   measured 7878 raw chars
+  [OK  ] README table   :136 cell after 
+          claimed 8442 raw chars   measured 8442 raw chars
+
+  The README's NEW F2 block and the commit message use STRIPPED:
+  [OK  ] README F2 blk  :135 cell before
+          claimed 13188 stripped chars   measured 13188 stripped chars
+  [OK  ] README F2 blk  :135 cell after 
+          claimed 7703 stripped chars   measured 7703 stripped chars
+  [OK  ] commit msg     :135 at HEAD    
+          claimed 7876 stripped chars   measured 7876 stripped chars
+  [OK  ] commit msg     :136 largest    
+          claimed 8440 stripped chars   measured 8440 stripped chars
+
+  -> Every figure is correct under ONE convention.  No figure names its convention,
+     and the new F2 block asserts its figures are 'the same figures the index below
+     carries' while giving 13,188 / 7,703 against the table's 13,190 / 7,705.
+
+  Largest cells at HEAD, over ALL 210 cells in the file (unbounded scan):
+      :136 col3  8442 raw chars
+      :135 col3  7878 raw chars
+      :133 col3  6876 raw chars
+  [OK  ] ':136 remains the largest cell' (whole file)
+          claimed (136, 3)   measured (136, 3)
+
+  The README index table in full — 'cell before' at 60f4dac, 'cell after' at
+  57f962f, RAW chars, content cell = the row's widest cell (row :89 sits in a
+  4-column table, so 'the third column' is not portable):
+  [OK  ]     :89 before/after
+          claimed (1556, 1585) raw chars   measured (1556, 1585) raw chars
+  [OK  ]     :114 before/after
+          claimed (725, 555) raw chars   measured (725, 555) raw chars
+  [OK  ]     :124 before/after
+          claimed (1467, 1621) raw chars   measured (1467, 1621) raw chars
+  [OK  ]     :130 before/after
+          claimed (2597, 2052) raw chars   measured (2597, 2052) raw chars
+  [OK  ]     :131 before/after
+          claimed (4918, 3651) raw chars   measured (4918, 3651) raw chars
+  [OK  ]     :132 before/after
+          claimed (8630, 4804) raw chars   measured (8630, 4804) raw chars
+  [OK  ]     :133 before/after
+          claimed (12696, 6876) raw chars   measured (12696, 6876) raw chars
+  [OK  ]     :134 before/after
+          claimed (9974, 6247) raw chars   measured (9974, 6247) raw chars
+  [OK  ]     :135 before/after
+          claimed (13190, 7705) raw chars   measured (13190, 7705) raw chars
+  [OK  ]     :136 before/after
+          claimed (15386, 8442) raw chars   measured (15386, 8442) raw chars
+  [OK  ]   cells in the table that moved after the landing
+          claimed [(135, 7705, 7878)]   measured [(135, 7705, 7878)]
+  -> the annotation's 'No other cell in the table has changed' holds, and all
+     twenty of the table's own figures reproduce exactly.
+
+==============================================================================
+3. F2 — the 'five consecutive giants' correction
+==============================================================================
+  Claim: cells :132-:136 at 60f4dac, characters = 8.6 / 12.7 / 10.0 / 13.2 / 15.4
+  [OK  ]   measured cell chars / 1000
+          claimed [8.6, 12.7, 10.0, 13.2, 15.4] KB   measured [8.6, 12.7, 10.0, 13.2, 15.4] KB
+  [OK  ]   'the same figures the index below carries'
+          claimed [8630, 12696, 9974, 13190, 15386] raw chars   measured [8630, 12696, 9974, 13190, 15386] raw chars
+
+  Claim: 5.4 / 9.2 / 13.5 / 10.8 / 11.7 are rows :131-:135's whole LINES,
+         in BYTES, at db08b4c
+  [OK  ]   measured line bytes / 1000
+          claimed [5.4, 9.2, 13.5, 10.8, 11.7] KB   measured [5.4, 9.2, 13.5, 10.8, 11.7] KB
+
+  Claim: 11.5 KB is row :135's whole LINE at db08b4c (11,544 chars; bytes 11,727)
+  [OK  ]   :135 line chars at db08b4c
+          claimed 11544 chars   measured 11544 chars
+  [OK  ]   :135 line bytes at db08b4c
+          claimed 11727 bytes   measured 11727 bytes
+  [OK  ]   db08b4c 'mg-a3d4' occurrences (whole file)
+          claimed 0   measured 0
+  [OK  ]   row :131's cell at 60f4dac
+          claimed 4.9 KB (chars)   measured 4.9 KB (chars)
+
+==============================================================================
+4. F1 — the 'states no 4d tally' correction and its measured cost
+==============================================================================
+  [OK  ]   site 1a words, before
+          claimed 103 words   measured 103 words
+  [OK  ]   three-assertion sequence, before
+          claimed 190 words   measured 190 words
+  [OK  ]   reading time, before
+          claimed 45.6 s @ 250 wpm   measured 45.6 s @ 250 wpm
+  [OK  ]   site 1a words, after 
+          claimed 133 words   measured 133 words
+  [OK  ]   three-assertion sequence, after 
+          claimed 220 words   measured 220 words
+  [OK  ]   reading time, after 
+          claimed 52.8 s @ 250 wpm   measured 52.8 s @ 250 wpm
+  [OK  ]   sites 2 and 3 lines apart
+          claimed 55 lines   measured 55 lines
+  [OK  ]   acceptance (c): sequence under a minute
+          claimed True   measured True
+  [OK  ]   gap from the counting phrase to the assertion
+          claimed 399 chars   measured 399 chars
+  [OK  ]   same gap in words
+          claimed 72 words   measured 72 words
+
+==============================================================================
+5. THE REOPENING-NOTICE OFFSETS — 9,316 (new) and 8,402 (diagnosed)
+==============================================================================
+  db08b4c :135 — offset of the coverage-gap reopening notice:
+      notice start '**⚠️'    line-chars=  8373  line-bytes=  8501  cellraw=  7224  cellstrip=  7223
+      text start 'BUT'       line-chars=  8378  line-bytes=  8510  cellraw=  7229  cellstrip=  7228
+  60f4dac :135 — offset of the coverage-gap reopening notice:
+      notice start '**⚠️'    line-chars= 10461  line-bytes= 10628  cellraw=  9312  cellstrip=  9311
+      text start 'BUT'       line-chars= 10466  line-bytes= 10637  cellraw=  9317  cellstrip=  9316
+  [OK  ]   new figure 9,316 == 'BUT' in the STRIPPED cell at 60f4dac
+          claimed 9316 chars   measured 9316 chars
+  [OK  ]   ... and 13,188 is that same stripped cell
+          claimed 13188 chars   measured 13188 chars
+  -> 9,316 is measured from 'BUT', not from the notice's own start (9,311/9,312).
+     Correct, but anchor-dependent by 5 chars and the anchor is not stated.
+
+  The DIAGNOSED figure: '8,402 is an offset into that line'.
+  Exhaustive hunt — every revision of STATE.md, every line, 6 coordinate systems,
+  3 anchor choices — for an offset EXACTLY equal to 8,402:
+      searched 35 revisions, 71424 (line, coordinate, anchor) triples
+  [OK  ]   offsets equal to 8,402 found
+          claimed 0 hits   measured 0 hits
+      nearest at db08b4c :135 : 8,373 line-chars / 8,501 line-bytes (notice start)
+      -> 8,402 lands 29 chars INSIDE the notice.  True only in the vacuous sense
+         that 8,402 < 11,544; the correspondence is asserted, not established.
+
+==============================================================================
+6. '5.4 is not a cell at any revision' — the universal
+==============================================================================
+  scanned 35 revisions x every cell x {raw,stripped} x {chars,bytes} = 23920 measurements
+  [OK  ]   cells rounding to 5.4 KB, ever
+          claimed 0 cells   measured 0 cells
+
+==============================================================================
+7. B1 — the attribution correction, and 'two commits before mg-34bf's parent'
+==============================================================================
+  [OK  ]   57f962f:343 and b68db5d:356 are the same bytes
+          claimed True   measured True
+
+  The paragraph across every revision that contains it:
+      d5a3043  :343    691 bytes   <<< CHANGED
+      60f4dac  :343   2582 bytes   <<< CHANGED
+      57f962f  :343   2582 bytes 
+      bdcb006  :353   2582 bytes 
+      672915e  :356   2582 bytes 
+      b68db5d  :356   2582 bytes 
+  -> created by d5a3043 (mg-7d5a), repaired by 60f4dac (mg-3f21), and byte-identical
+     from 60f4dac onward: mg-ae62 (bdcb006) did NOT touch it.  Attribution CORRECT.
+  [OK  ]   paragraph line 57f962f -> bdcb006 (mg-ae62, +10)
+          claimed 10 lines   measured 10 lines
+  [OK  ]   paragraph line bdcb006 -> 672915e (mg-a053, +3)
+          claimed 3 lines   measured 3 lines
+
+  mg-34bf = 57f962f; its parent = 97cb533; and 60f4dac = 60f4dac
+      commits from 60f4dac to mg-34bf's PARENT : 1
+      commits from 60f4dac to mg-34bf ITSELF   : 2
+  [FAIL]   claim '60f4dac is two commits before mg-34bf's PARENT'
+          claimed 2 commits   measured 1 commits
+  -> it is ONE commit before the parent (two before mg-34bf itself).  Off by one,
+     in the commit message AND in the durable README bullet.
+
+==============================================================================
+8. F3 (left open, but restated) — the byte/char label
+==============================================================================
+  [OK  ]   'file 192,898 -> 164,577 in real bytes': base
+          claimed 192898 bytes   measured 192898 bytes
+  [OK  ]   'file 192,898 -> 164,577 in real bytes': landing
+          claimed 164577 bytes   measured 164577 bytes
+
+  The commit calls the README's 188,870 -> 161,269 'a character count'.
+      actual characters: 189237 -> 161636
+      README's figures are characters MINUS NEWLINES (367 lines each side).
+      The substance (labelled bytes, is not bytes) holds; the label 'character
+      count' is itself one unit off.
+
+==============================================================================
+RESULT: 55 checks passed, 1 failed
+==============================================================================
+
+### 2. instrument_sensitivity.py — do the cited re-runs SEE the change?
+STATE.md at rest: 175552 bytes, sha 7174481c3588d1ea
+
+==============================================================================
+A. THE mg-6a2f BATTERY  —  'reproduces out_audit.txt BYTE-IDENTICALLY
+                            with these edits applied'
+==============================================================================
+  clean tree: reproduces the committed out_audit.txt : True
+
+  NEGATIVE CONTROL: STATE.md gutted 175552 -> 37958 bytes, 381 -> 181 lines
+  battery output still byte-identical to out_audit.txt : True
+
+  >>> THE CONTROL DOES NOT FIRE.  Every script in the battery pins fixed
+      revisions (97cb533 / 60f4dac / 57f962f) and reads the committed
+      docs/state-history/*.md at 57f962f.  None of them opens the working
+      tree or resolves HEAD, so the battery is BLIND to b68db5d by
+      construction.  'Reproduces byte-identically WITH THESE EDITS
+      APPLIED' is therefore true and carries no information about the
+      edits: it would read identically if the edits were catastrophic.
+
+==============================================================================
+B. verify_relocation.py's COMPLETENESS HALF  —  'unaffected by my edits'
+==============================================================================
+  NEGATIVE CONTROL: row :135's content cell truncated to 200 chars
+      cells changed                      : 9
+      words in those cells at base       : 9470
+      maximal verbatim runs covering them: 112
+      words not found anywhere reachable : 0
+
+  STATE.md restored: sha 7174481c3588d1ea == 7174481c3588d1ea  (True)
+
+  with STATE.md intact at HEAD:
+      cells changed                      : 10
+      words in those cells at base       : 11625
+      maximal verbatim runs covering them: 125
+      words not found anywhere reachable : 0
+
+  >>> THIS control DOES fire — the completeness half opens the working tree
+      (verify_relocation.py:95) and its tallies move when the file moves.  So
+      the commit's SECOND cited re-run is genuine evidence, and the property
+      it reports (10 cells, 11,625 words, 125 maximal runs, 0 unaccounted)
+      is a real measurement at HEAD.  The first one is not.
+
+STATE.md final check: sha 7174481c3588d1ea == 7174481c3588d1ea
+
+### 3. multiset_whole.py — is mg-6a2f's completeness property still whole?
+--- at the LANDING (mg-34bf, the property mg-6a2f verified) (57f962f) ---
+  files in corpus            : 12  (STATE.md + 11 docs/state-history/*.md)
+  baseline distinct tokens   : 3250
+  baseline token OCCURRENCES : 31538
+  UNACCOUNTED occurrences    : 0
+
+--- at HEAD (after mg-7735's edit) -- THE QUESTION (b68db5d) ---
+  files in corpus            : 12  (STATE.md + 11 docs/state-history/*.md)
+  baseline distinct tokens   : 3250
+  baseline token OCCURRENCES : 31538
+  UNACCOUNTED occurrences    : 4
+  unaccounted tokens (all 4):
+      'primary' x1
+      'you' x1
+      'should' x1
+      'treat' x1
+
+--- ISOLATING THE COMMIT: landing -> HEAD spans THREE commits, not one ---
+  57f962f  mg-34bf   (the landing)           unaccounted= 0   -
+  bdcb006  mg-ae62                           unaccounted= 5   counterexample, primary, should, treat, you
+  672915e  mg-a053  (mg-7735's PARENT)       unaccounted= 5   counterexample, primary, should, treat, you
+  b68db5d  mg-7735  (the change under audit) unaccounted= 4   primary, should, treat, you
+
+  VERDICT ON THE SECOND TARGET.
+  The property mg-6a2f verified is a claim about the RESTRUCTURE (60f4dac ->
+  57f962f).  It reproduces here EXACTLY: 0 of 31,538 baseline token
+  occurrences unaccounted, by a tokenizer and a corpus construction written
+  for this audit.  NOTHING WAS LOST is CONFIRMED a third time.
+
+  mg-7735 did NOT break it.  The erosion visible at HEAD was introduced by
+  bdcb006 (mg-ae62), which dropped 5 baseline token occurrences when it
+  rewrote Appendix A's template step 4d.  mg-7735 RESTORED one of the five
+  ('counterexample', via its new README paragraph), taking 5 -> 4.
+
+  Reported because no instrument watches this: verify_relocation.py's
+  completeness half checks only the ten RESTRUCTURED cells' words, so it
+  reports 0 unaccounted at HEAD and cannot see a whole-file drop elsewhere.
+
+property holds at landing: True;  still holds at HEAD: False
