@@ -1,0 +1,1752 @@
+### 1. relocation_check.py  — was anything LOST?
+==============================================================================
+mg-6a2f INDEPENDENT RELOCATION CHECK
+==============================================================================
+baseline  97cb533:STATE.md   192,898 bytes, 367 lines
+after     57f962f:STATE.md   164,577 bytes, 367 lines
+history files: 11, 61,568 bytes
+lines differing: 10  -> [89, 114, 124, 130, 131, 132, 133, 134, 135, 136]
+
+------------------------------------------------------------------------------
+A. WHOLE-FILE TOKEN MULTISET CHECK (global; catches drops on ANY line)
+------------------------------------------------------------------------------
+baseline token occurrences : 30,388 (8,357 distinct)
+after-corpus occurrences   : 35,360 (8,911 distinct)
+RESULT: 0 baseline token occurrences unaccounted for. PASS.
+
+------------------------------------------------------------------------------
+B. PER-CELL MAXIMAL-RUN DECOMPOSITION, REACHABLE-FROM-ROW ONLY
+------------------------------------------------------------------------------
+line  89 | cols changed [1] |   254 words ->    6 runs, shortest   1, LOST 0
+         links: ledger-row-11-L4.md
+         3 run(s) shorter than 5 words:
+           len 1: '11'
+           len 2: '**OPEN** (AMBER)'
+           len 1: 'any'
+line 114 | cols changed [2] |   131 words ->    5 runs, shortest   3, LOST 0
+         links: attempt-mg-c47a-drop.md
+         1 run(s) shorter than 5 words:
+           len 3: '**DROP (tractability only)**'
+line 124 | cols changed [2] |   233 words ->    5 runs, shortest   4, LOST 0
+         links: attempt-mg-48ab.md
+         1 run(s) shorter than 5 words:
+           len 4: '**GREEN-partial · diagnostic (mg-48ab)**'
+line 130 | cols changed [2] |   444 words ->    7 runs, shortest   5, LOST 0
+         links: attempt-mg-210d.md
+line 131 | cols changed [2] |   798 words ->   11 runs, shortest   8, LOST 0
+         links: attempt-mg-a58f.md
+line 132 | cols changed [2] |  1429 words ->   23 runs, shortest   8, LOST 0
+         links: attempt-mg-88bd.md
+line 133 | cols changed [2] |  2207 words ->   23 runs, shortest  11, LOST 0
+         links: attempt-mg-63e3.md
+line 134 | cols changed [2] |  1705 words ->   25 runs, shortest  15, LOST 0
+         links: attempt-mg-3af9.md
+line 135 | cols changed [2] |  2300 words ->   15 runs, shortest  22, LOST 0
+         links: attempt-mg-276d.md
+line 136 | cols changed [2] |  2689 words ->   26 runs, shortest  11, LOST 0
+         links: attempt-mg-a3d4.md
+
+TOTAL: 10 cells, 12,190 baseline words, 146 maximal runs, 0 words unreachable from their row, shortest run 1
+
+------------------------------------------------------------------------------
+B'. STRICT VARIANT — decompose ONLY the changed cell against
+    (after version of that same cell) U (files that cell links to).
+    This is the comparable setup to the author's reported 11,625 / 125 / 8.
+------------------------------------------------------------------------------
+line  89 col 1 |   250 words ->    3 runs, shortest  42, LOST 0
+line 114 col 2 |   117 words ->    3 runs, shortest  11, LOST 0
+line 124 col 2 |   220 words ->    3 runs, shortest  20, LOST 0
+line 130 col 2 |   426 words ->    5 runs, shortest  10, LOST 0
+line 131 col 2 |   772 words ->    9 runs, shortest  10, LOST 0
+line 132 col 2 |  1396 words ->   21 runs, shortest   8, LOST 0
+line 133 col 2 |  2151 words ->   21 runs, shortest  11, LOST 0
+line 134 col 2 |  1631 words ->   23 runs, shortest  15, LOST 0
+line 135 col 2 |  2155 words ->   13 runs, shortest  27, LOST 0
+line 136 col 2 |  2507 words ->   24 runs, shortest  11, LOST 0
+
+STRICT TOTAL: 10 cells, 11,625 words, 125 maximal runs, 0 unaccounted, shortest run 8
+author reported: 10 cells, 11,625 words, 125 maximal runs, 0 unaccounted, shortest run 8
+
+### 2. stated_properties.py — every number mg-34bf states about itself
+
+==============================================================================
+1. FILE-LEVEL
+==============================================================================
+lines: before 367  after 367   (claim: same 367, no line inserted/deleted)
+lines differing: 10 -> [89, 114, 124, 130, 131, 132, 133, 134, 135, 136]   (claim: ten ledger cells)
+STATE.md size: before 189,237 chars / 192,898 bytes
+               after  161,636 chars / 164,577 bytes
+  delta: 27,601 chars / 28,321 bytes
+  README claims: 188,870 -> 161,269 'bytes'  (delta 27,601)
+
+==============================================================================
+2. PER-ROW CELL SIZES vs THE README INDEX TABLE
+==============================================================================
+  : 89 col1  measured chars  1,554 ->  1,583 | README  1,556 ->  1,585 | measured BYTES  1,584 ->  1,617  <-- MISMATCH
+  :114 col2  measured chars    723 ->    553 | README    725 ->    555 | measured BYTES    734 ->    557  <-- MISMATCH
+  :124 col2  measured chars  1,465 ->  1,619 | README  1,467 ->  1,621 | measured BYTES  1,502 ->  1,660  <-- MISMATCH
+  :130 col2  measured chars  2,595 ->  2,050 | README  2,597 ->  2,052 | measured BYTES  2,696 ->  2,112  <-- MISMATCH
+  :131 col2  measured chars  4,916 ->  3,649 | README  4,918 ->  3,651 | measured BYTES  5,072 ->  3,751  <-- MISMATCH
+  :132 col2  measured chars  8,628 ->  4,802 | README  8,630 ->  4,804 | measured BYTES  8,872 ->  4,930  <-- MISMATCH
+  :133 col2  measured chars 12,694 ->  6,874 | README 12,696 ->  6,876 | measured BYTES 13,005 ->  7,026  <-- MISMATCH
+  :134 col2  measured chars  9,972 ->  6,245 | README  9,974 ->  6,247 | measured BYTES 10,237 ->  6,406  <-- MISMATCH
+  :135 col2  measured chars 13,188 ->  7,703 | README 13,190 ->  7,705 | measured BYTES 13,416 ->  7,835  <-- MISMATCH
+  :136 col2  measured chars 15,384 ->  8,440 | README 15,386 ->  8,442 | measured BYTES 15,672 ->  8,575  <-- MISMATCH
+  index table matches CHARACTER counts exactly: False   (it is labelled 'bytes')
+
+==============================================================================
+3. THE 'FIVE CONSECUTIVE GIANTS' FIGURES
+==============================================================================
+  rows 132-136 measured, cell characters: 8,628, 12,694, 9,972, 13,188, 15,384
+  rows 132-136 measured, KB (chars/1000):  8.6 / 12.7 / 10.0 / 13.2 / 15.4
+  commit message states:  5.4 / 8.6 / 12.7 / 10.0 / 15.4 KB
+  README states:          5.4 / 9.2 / 13.5 / 10.8 / 15.4 KB
+  ticket (pm-onethird, stale rev) stated: 5,351 / 9,228 / 13,487 / 10,824 / 11,727 bytes = 5.4/9.2/13.5/10.8/11.7
+  -> row 135 (13.2 KB, the SECOND-largest cell in the file) appears in NEITHER list.
+
+==============================================================================
+4. LARGEST CELL ANYWHERE
+==============================================================================
+  before: line 136 col 2: 15,384 chars / 15,672 bytes
+  after: line 136 col 2: 8,440 chars / 8,575 bytes
+  claim: largest cell 15,386 -> 8,442 'bytes'
+
+==============================================================================
+5. ROW COUNT / RENUMBERING / COLUMNS 1-2
+==============================================================================
+  rows: before 58  after 58
+  (line, col0, col1) identical for every row: False
+  Full-ledger '#' column unchanged: True  -> ['1', '2', '3a', '3b', '4', '5', '6', '7', '8', '9', '10', '11']
+
+==============================================================================
+6. APPENDIX A BYTE-IDENTICAL
+==============================================================================
+  Appendix A heading at line 180
+  byte-identical from line 180 to EOF: True
+  no changed line is >= 180: True
+
+==============================================================================
+7. HISTORY FILE TOTALS AND 'BYTES MOVED'
+==============================================================================
+  ten row-history files: 51,082 chars / 52,126 bytes   (README claims 52,126 'bytes')
+  README.md itself: 9,380 chars / 9,442 bytes
+  of the ten files, text matching the baseline verbatim: ~45,784 chars; new header/scaffold: ~5,079 chars
+  README claims '36,188 bytes of ledger text moved'
+  new (non-baseline) text added into the ten rows: ~3,443 chars   (README: 'about 5 KB')
+
+==============================================================================
+8. 'BYTES MOVED' and 'NEW POINTER TEXT', measured by partitioning each baseline cell
+==============================================================================
+  row |  before |  stayed |   MOVED |   after | new-in-row
+  : 89 |   1,554 |   1,130 |     425 |   1,583 |     +453
+  :114 |     723 |     224 |     500 |     553 |     +329
+  :124 |   1,465 |   1,320 |     146 |   1,619 |     +299
+  :130 |   2,595 |   1,642 |     954 |   2,050 |     +408
+  :131 |   4,916 |   3,171 |   1,746 |   3,649 |     +478
+  :132 |   8,628 |   3,663 |   4,966 |   4,802 |   +1,139
+  :133 |  12,694 |   5,154 |   7,541 |   6,874 |   +1,720
+  :134 |   9,972 |   5,935 |   4,038 |   6,245 |     +310
+  :135 |  13,188 |   6,112 |   7,077 |   7,703 |   +1,591
+  :136 |  15,384 |   6,924 |   8,461 |   8,440 |   +1,516
+  TOT |         |  35,275 |  35,854 |         |   +8,243
+  README claims: 36,188 'bytes' of ledger text moved; 'about 5 KB' of new pointer text in rows
+
+==============================================================================
+9. COLUMNS OTHER THAN THE RESTRUCTURED ONE
+==============================================================================
+  : 89  restructured col 1 of 4; all other columns identical: True
+  :114  restructured col 2 of 3; all other columns identical: True
+  :124  restructured col 2 of 3; all other columns identical: True
+  :130  restructured col 2 of 3; all other columns identical: True
+  :131  restructured col 2 of 3; all other columns identical: True
+  :132  restructured col 2 of 3; all other columns identical: True
+  :133  restructured col 2 of 3; all other columns identical: True
+  :134  restructured col 2 of 3; all other columns identical: True
+  :135  restructured col 2 of 3; all other columns identical: True
+  :136  restructured col 2 of 3; all other columns identical: True
+
+==============================================================================
+10. MECHANISM SENTENCES THE TICKET NAMED BY NAME
+==============================================================================
+  'joins suppress': baseline 0  after-STATE 0  history 0  total-after 0
+  'the pipeline survived the control it was missing': baseline 0  after-STATE 0  history 0  total-after 0
+  'coverage went from ZERO to ONE ABSORBABLE SIGN GAUGE': baseline 2  after-STATE 2  history 0  total-after 2
+  'SUPPRESS': baseline 0  after-STATE 0  history 0  total-after 0
+  'absorbable sign gauge': baseline 2  after-STATE 2  history 0  total-after 2
+
+### 3. insertions.py        — what was ADDED (the other direction)
+==============================================================================
+INSERTED SPANS IN THE REWRITTEN STATE.md CELLS
+==============================================================================
+
+--- STATE.md:89 col1   7 inserted span(s)
+   + SUPERSEDED
+   + site;
+   + index**
+   + [row
+   + H1](docs/state-history/ledger-row-11-L4.md).
+   + *(Full per-row
+   + cell, verbatim: [`docs/state-history/ledger-row-11-L4.md`](docs/state-history/ledger-row-11-L4.md).)*
+
+--- STATE.md:114 col2   7 inserted span(s)
+   + with:
+   + REJECTED,
+   + corrected**
+   + [row
+   + H1](docs/state-history/attempt-mg-c47a-drop.md).
+   + *(Full per-row
+   + cell, verbatim: [`docs/state-history/attempt-mg-c47a-drop.md`](docs/state-history/attempt-mg-c47a-drop.md).)*
+
+--- STATE.md:124 col2   5 inserted span(s)
+   + **Corrects
+   + [row
+   + H1](docs/state-history/attempt-mg-48ab.md).
+   + *(Full per-row
+   + cell, verbatim: [`docs/state-history/attempt-mg-48ab.md`](docs/state-history/attempt-mg-48ab.md).)*
+
+--- STATE.md:130 col2   9 inserted span(s)
+   + "honest caveat"
+   + row),
+   + *"best
+   + 0"*
+   + retirement**
+   + [row
+   + H1](docs/state-history/attempt-mg-210d.md).
+   + *(Full per-row
+   + cell, verbatim: [`docs/state-history/attempt-mg-210d.md`](docs/state-history/attempt-mg-210d.md).)*
+
+--- STATE.md:131 col2   10 inserted span(s)
+   + text;
+   + [row
+   + H1](docs/state-history/attempt-mg-a58f.md).
+   + raised
+   + mg-e35c)
+   + below**
+   + [row
+   + H2](docs/state-history/attempt-mg-a58f.md).
+   + *(Full per-row
+   + cell, verbatim: [`docs/state-history/attempt-mg-a58f.md`](docs/state-history/attempt-mg-a58f.md).)*
+
+--- STATE.md:132 col2   25 inserted span(s)
+   + framing**
+   + [row
+   + H1](docs/state-history/attempt-mg-88bd.md).
+   + (iii):
+   + F2);
+   + below**
+   + [row
+   + H2](docs/state-history/attempt-mg-88bd.md).
+   + row)**
+   + [row
+   + H3](docs/state-history/attempt-mg-88bd.md).
+   + F8/F9);
+   + below**
+   + [row
+   + H4](docs/state-history/attempt-mg-88bd.md).
+   + labels/attributions
+   + (§6.4's
+   + F6
+   + bound's attribution);
+   + statement. Their
+   + consequences:**
+   + [row
+   + H5](docs/state-history/attempt-mg-88bd.md).
+   + *(Full per-row
+   + cell, verbatim: [`docs/state-history/attempt-mg-88bd.md`](docs/state-history/attempt-mg-88bd.md).)*
+
+--- STATE.md:133 col2   41 inserted span(s)
+   + live**
+   + [row
+   + H1](docs/state-history/attempt-mg-63e3.md).
+   + 13,
+   + true"*,
+   + [row
+   + H2](docs/state-history/attempt-mg-63e3.md).
+   + omission;
+   + [row
+   + H3](docs/state-history/attempt-mg-63e3.md).
+   + premise
+   + have"*,
+   + `n`;
+   + undamaged**
+   + [row
+   + H4](docs/state-history/attempt-mg-63e3.md).
+   + pasted**
+   + [row
+   + H5](docs/state-history/attempt-mg-63e3.md).
+   + seven
+   + contributions,
+   + correct,
+   + C1/C2/C3 separation,
+   + C3, *"`W`
+   + theorems"*, *"do
+   + unrepairable'"*
+   + §7
+   + [row
+   + H6](docs/state-history/attempt-mg-63e3.md).
+   + calibrations
+   + licence,
+   + box**
+   + [row
+   + H7](docs/state-history/attempt-mg-63e3.md).
+   + **`F`
+   + roles
+   + witness;
+   + [row
+   + H8](docs/state-history/attempt-mg-63e3.md).
+   + *(Full per-row
+   + cell, verbatim: [`docs/state-history/attempt-mg-63e3.md`](docs/state-history/attempt-mg-63e3.md).)*
+
+--- STATE.md:134 col2   6 inserted span(s)
+   + `V*`,
+   + three**
+   + [row
+   + H1](docs/state-history/attempt-mg-3af9.md).
+   + *(Full per-row
+   + cell, verbatim: [`docs/state-history/attempt-mg-3af9.md`](docs/state-history/attempt-mg-3af9.md).)*
+
+--- STATE.md:135 col2   25 inserted span(s)
+   + FIRE HERE,
+   + OUTCOME
+   + different:
+   + UPGRADE
+   + alone.
+   + sites;
+   + `4d`**
+   + [row
+   + H1](docs/state-history/attempt-mg-276d.md).
+   + **F1
+   + retraction**
+   + [row
+   + H2](docs/state-history/attempt-mg-276d.md).
+   + poset,
+   + well;
+   + [row
+   + H3](docs/state-history/attempt-mg-276d.md).
+   + closed**
+   + [row
+   + H4](docs/state-history/attempt-mg-276d.md).
+   + (mg-a3d4,
+   + pending**
+   + [row
+   + H5](docs/state-history/attempt-mg-276d.md). *(Full per-row
+   + cell, verbatim: [`docs/state-history/attempt-mg-276d.md`](docs/state-history/attempt-mg-276d.md).)*
+
+--- STATE.md:136 col2   29 inserted span(s)
+   + step-4d
+   + [row
+   + H1](docs/state-history/attempt-mg-a3d4.md).
+   + annotated
+   + §7.1)**
+   + [row
+   + H2](docs/state-history/attempt-mg-a3d4.md).
+   + read,
+   + fact,
+   + LP
+   + POSITIVELY
+   + `V_k`**
+   + [row
+   + H3](docs/state-history/attempt-mg-a3d4.md).
+   + assumed. None
+   + downgraded,
+   + rebuild**
+   + [row
+   + H4](docs/state-history/attempt-mg-a3d4.md).
+   + dropping
+   + less
+   + join**
+   + [row
+   + H5](docs/state-history/attempt-mg-a3d4.md).
+   + assumed**
+   + [row
+   + H6](docs/state-history/attempt-mg-a3d4.md).
+   + *(Full per-row
+   + cell, verbatim: [`docs/state-history/attempt-mg-a3d4.md`](docs/state-history/attempt-mg-a3d4.md).)*
+
+==============================================================================
+INSERTED SPANS IN THE HISTORY FILES
+==============================================================================
+
+--- docs/state-history/README.md   294 inserted span(s)
+   + Per-row histories
+   + asserts CURRENT STATE.
+   + say,
+   + struck,
+   + linked
+   + Landed
+   + **mg-34bf**,
+   + design:
+   + able
+   + contain
+   + retraction."*
+   + aesthetic
+   + attempt-index
+   + cells
+   + 9.2
+   + 13.5
+   + 10.8
+   + 15.4 KB,
+   + notice
+   + byte 8,402
+   + 11.5 KB
+   + separation
+   + retraction.
+   + words:
+   + weaker.*
+   + asserts
+   + only.**
+   + now,
+   + status,
+   + citations.
+   + retraction,
+   + supersession
+   + here**,
+   + keeps
+   + pointer naming
+   + **RELOCATION,
+   + DELETION.**
+   + summarised, condensed, paraphrased
+   + dropped.
+   + cell's
+   + character.
+   + cells
+   + touched. 4. **If
+   + X"
+   + understood,
+   + pointer
+   + relocated,
+   + iff
+   + **(a)**
+   + **used
+   + say**,
+   + **(b)**
+   + **adjudication
+   + BROKEN-as-labelled, struck, downgraded, mislabelled
+   + nested
+   + **(c)**
+   + **derivation,
+   + evidence**
+   + states;
+   + **(d)**
+   + **defect-mechanism note**:
+   + survived,
+   + happen.
+   + (d)
+   + numbered `H1`, `H2`,
+   + sections,
+   + number.
+   + *Supporting record* section, reachable
+   + trailing
+   + **stayed**
+   + citation,
+   + instruction,
+   + net.
+   + rulings,
+   + guessed at:
+   + **Corrections
+   + EXTERNAL
+   + sketch)
+   + **stayed
+   + row**.
+   + programme's
+   + relocate
+   + forbids.
+   + evidence**,
+   + stayed
+   + boundaries;
+   + mid-sentence.
+   + touched
+   + **Appendix A**
+   + byte-identical
+   + `60f4dac`.
+   + moved;
+   + cell.
+   + **`STATE.md:343`**,
+   + ONE"*
+   + classifies
+   + `mg-ae62` repairs.
+   + scope;
+   + name.
+   + narrative
+   + `STATE.md:138–176`.** Several
+   + claim-beside-its-own-retraction shape.
+   + Named
+   + visible
+   + **Columns
+   + (verdict, attempt)
+   + completeness check's
+   + key stable.
+   + **Line numbers.**
+   + inserted
+   + deleted,
+   + self-references (`:89`
+   + `:132`)
+   + `mg-ae62`'s
+   + line.
+   + convention
+   + documented
+   + numbering
+   + identity**
+   + renumbered,
+   + removed.
+   + |---|---|---|---|---|---|
+   + `STATE.md:89`
+   + [`ledger-row-11-L4.md`](ledger-row-11-L4.md)
+   + 1,556
+   + 1,585
+   + 1,449
+   + `STATE.md:114`
+   + [`attempt-mg-c47a-drop.md`](attempt-mg-c47a-drop.md)
+   + 725
+   + 555
+   + 1,652
+   + `STATE.md:124`
+   + [`attempt-mg-48ab.md`](attempt-mg-48ab.md)
+   + 1,467
+   + 1,621
+   + 1,265
+   + `STATE.md:130`
+   + [`attempt-mg-210d.md`](attempt-mg-210d.md)
+   + 2,597
+   + 2,052
+   + 2,128
+   + `STATE.md:131`
+   + (mg-a58f)**
+   + [`attempt-mg-a58f.md`](attempt-mg-a58f.md)
+   + 4,918
+   + 3,651
+   + 3,426
+   + `STATE.md:132`
+   + (mg-88bd)**
+   + [`attempt-mg-88bd.md`](attempt-mg-88bd.md)
+   + 8,630
+   + 4,804
+   + 6,913
+   + `STATE.md:133`
+   + (mg-63e3)**
+   + [`attempt-mg-63e3.md`](attempt-mg-63e3.md)
+   + 12,696
+   + 6,876
+   + 9,808
+   + `STATE.md:134`
+   + (mg-3af9)**
+   + [`attempt-mg-3af9.md`](attempt-mg-3af9.md)
+   + 9,974
+   + 6,247
+   + 5,752
+   + `STATE.md:135`
+   + (mg-276d)**
+   + [`attempt-mg-276d.md`](attempt-mg-276d.md)
+   + 13,190
+   + 7,705
+   + 9,049
+   + `STATE.md:136`
+   + PRICED (mg-a3d4)**
+   + [`attempt-mg-a3d4.md`](attempt-mg-a3d4.md)
+   + 15,386
+   + 8,442
+   + 10,684
+   + `STATE.md`: **15,386
+   + 8,442 bytes**
+   + mg-a3d4
+   + overall: 188,870
+   + 161,269 bytes. **36,188
+   + moved**,
+   + ten
+   + 52,126
+   + difference
+   + headers,
+   + new. About
+   + KB
+   + pointer
+   + grew. **Rows 132–136
+   + large,
+   + fixed.**
+   + mg-a3d4
+   + asserts
+   + forty
+   + Getting
+   + cells
+   + couple
+   + condensing
+   + breath
+   + terseness.
+   + met:
+   + retraction.
+   + How completeness
+   + python3 code/state_restructure_34bf/verify_relocation.py
+   + lost python3 code/state_restructure_34bf/a3_reading_path.py
+   + `verify_relocation.py`
+   + relocation spec
+   + builder's splitter.
+   + stood
+   + `60f4dac`
+   + decomposes
+   + **maximal
+   + runs**
+   + found,
+   + word,
+   + rewritten
+   + **that
+   + rewritten
+   + to**.
+   + **10 cells, 11,625 words, 123
+   + runs,
+   + unaccounted
+   + shortest
+   + words.
+   + precisely.
+   + altered,
+   + reachable
+   + starting
+   + *added*
+   + pointers
+   + relocation
+   + judged.
+   + completeness
+   + quality
+   + asserts
+   + disturb:
+   + present
+   + column;
+   + byte-identical;
+   + truncated-
+   + figure
+   + directory.
+   + figure's
+   + cell; relocating
+   + checker
+   + figure
+   + must;
+   + *"text
+   + is.
+   + stayed
+   + cell.
+   + (`a3_reading_path.py`)
+   + disagreed
+   + *"reported
+   + commit"*
+   + **4d**.
+   + step-4d
+   + begin
+   + byte 1,544
+   + 14,340-byte
+   + run, interleaved
+   + byte 4,951;
+   + **second
+   + cell**, 103 words,
+   + **states
+   + own**
+   + tallies,
+   + Reading
+   + assertions
+   + sequence: **190 words, 45.6
+   + 250 wpm.**
+   + How
+   + `code/state_restructure_34bf/`
+   + builder. `spec.py`
+   + per-row assignment
+   + passages
+   + **anchor guards**
+   + key
+   + start
+   + splitter
+   + loudly
+   + relocating
+   + text.
+   + mis-mapping
+   + built. `build.py` asserts
+   + partition
+   + emitted
+   + once)
+   + relocation
+   + bold span,
+   + anything.
+
+--- docs/state-history/attempt-mg-210d.md   30 inserted span(s)
+   + SOUND
+   + (mg-210d):
+   + Per-row
+   + *Attempt index*,
+   + mg-34bf, 2026-07-30.
+   + **moved verbatim**
+   + cell.
+   + rewritten, condensed, summarised
+   + dropped,
+   + asserts
+   + `code/state_restructure_34bf/verify_relocation.py`
+   + pre-restructure
+   + present
+   + [`README.md`](README.md)
+   + convention.
+   + Corrections, retractions, supersessions
+   + notes *Why
+   + exists:
+   + able
+   + contain
+   + retraction.
+   + now;
+   + say,
+   + struck,
+   + why,
+   + Sections
+   + numbered `H1`, `H2`,
+   + number.*
+   + H1
+   + "honest caveat",
+
+--- docs/state-history/attempt-mg-276d.md   45 inserted span(s)
+   + (mg-276d):
+   + Per-row
+   + *Attempt index*,
+   + (mg-276d)**
+   + mg-34bf, 2026-07-30.
+   + **moved verbatim**
+   + cell.
+   + rewritten, condensed, summarised
+   + dropped,
+   + asserts
+   + `code/state_restructure_34bf/verify_relocation.py`
+   + pre-restructure
+   + present
+   + [`README.md`](README.md)
+   + convention.
+   + Corrections, retractions, supersessions
+   + notes *Why
+   + exists:
+   + able
+   + contain
+   + retraction.
+   + now;
+   + say,
+   + struck,
+   + why,
+   + Sections
+   + numbered `H1`, `H2`,
+   + number.*
+   + H1
+   + step-4d
+   + H2
+   + H3
+   + all-+1
+   + H4
+   + gauge-conjugation
+   + H5
+   + discharged
+   + Supporting
+   + derivations, constructions,
+   + *These passages
+   + states.
+   + argument.
+   + them**;
+   + stayed
+   + row.*
+
+--- docs/state-history/attempt-mg-3af9.md   40 inserted span(s)
+   + W*
+   + (mg-3af9):
+   + Per-row
+   + *Attempt index*,
+   + (mg-3af9)**
+   + mg-34bf, 2026-07-30.
+   + **moved verbatim**
+   + cell.
+   + rewritten, condensed, summarised
+   + dropped,
+   + asserts
+   + `code/state_restructure_34bf/verify_relocation.py`
+   + pre-restructure
+   + present
+   + [`README.md`](README.md)
+   + convention.
+   + Corrections, retractions, supersessions
+   + notes *Why
+   + exists:
+   + able
+   + contain
+   + retraction.
+   + now;
+   + say,
+   + struck,
+   + why,
+   + Sections
+   + numbered `H1`, `H2`,
+   + number.*
+   + H1
+   + arguments
+   + `V*`,
+   + Supporting
+   + derivations, constructions,
+   + *These passages
+   + states.
+   + argument.
+   + them**;
+   + stayed
+   + row.*
+
+--- docs/state-history/attempt-mg-48ab.md   30 inserted span(s)
+   + GREEN-partial
+   + (mg-48ab):
+   + Per-row
+   + *Attempt index*,
+   + mg-34bf, 2026-07-30.
+   + **moved verbatim**
+   + cell.
+   + rewritten, condensed, summarised
+   + dropped,
+   + asserts
+   + `code/state_restructure_34bf/verify_relocation.py`
+   + pre-restructure
+   + present
+   + [`README.md`](README.md)
+   + convention.
+   + Corrections, retractions, supersessions
+   + notes *Why
+   + exists:
+   + able
+   + contain
+   + retraction.
+   + now;
+   + say,
+   + struck,
+   + why,
+   + Sections
+   + numbered `H1`, `H2`,
+   + number.*
+   + H1
+   + 5.4;
+
+--- docs/state-history/attempt-mg-63e3.md   54 inserted span(s)
+   + RED-conditional
+   + (mg-63e3):
+   + Per-row
+   + *Attempt index*,
+   + (mg-63e3)**
+   + mg-34bf, 2026-07-30.
+   + **moved verbatim**
+   + cell.
+   + rewritten, condensed, summarised
+   + dropped,
+   + asserts
+   + `code/state_restructure_34bf/verify_relocation.py`
+   + pre-restructure
+   + present
+   + [`README.md`](README.md)
+   + convention.
+   + Corrections, retractions, supersessions
+   + notes *Why
+   + exists:
+   + able
+   + contain
+   + retraction.
+   + now;
+   + say,
+   + struck,
+   + why,
+   + Sections
+   + numbered `H1`, `H2`,
+   + number.*
+   + H1
+   + discharged
+   + H2
+   + (Cor.
+   + 13)
+   + H3
+   + n-dependence
+   + H4
+   + "1/n
+   + have"
+   + H5
+   + (IB)'s
+   + H7
+   + calibrations
+   + H8
+   + roles
+   + `F`,
+   + Supporting
+   + derivations, constructions,
+   + *These passages
+   + states.
+   + argument.
+   + them**;
+   + stayed
+   + row.*
+
+--- docs/state-history/attempt-mg-88bd.md   51 inserted span(s)
+   + (mg-88bd):
+   + Per-row
+   + *Attempt index*,
+   + (mg-88bd)**
+   + mg-34bf, 2026-07-30.
+   + **moved verbatim**
+   + cell.
+   + rewritten, condensed, summarised
+   + dropped,
+   + asserts
+   + `code/state_restructure_34bf/verify_relocation.py`
+   + pre-restructure
+   + present
+   + [`README.md`](README.md)
+   + convention.
+   + Corrections, retractions, supersessions
+   + notes *Why
+   + exists:
+   + able
+   + contain
+   + retraction.
+   + now;
+   + say,
+   + struck,
+   + why,
+   + Sections
+   + numbered `H1`, `H2`,
+   + number.*
+   + H1
+   + F1's steelman,
+   + F4's
+   + fourth"
+   + H2
+   + F2)
+   + H3
+   + "and
+   + available"
+   + H4
+   + satisfiability;
+   + F8/F9)
+   + H5
+   + derivations,
+   + F6
+   + Supporting
+   + derivations, constructions,
+   + *These passages
+   + states.
+   + argument.
+   + them**;
+   + stayed
+   + row.*
+
+--- docs/state-history/attempt-mg-a3d4.md   49 inserted span(s)
+   + AMBER-POSITIVE
+   + PRICED (mg-a3d4):
+   + lacks? Per-row
+   + *Attempt index*,
+   + PRICED (mg-a3d4)**
+   + mg-34bf, 2026-07-30.
+   + **moved verbatim**
+   + cell.
+   + rewritten, condensed, summarised
+   + dropped,
+   + asserts
+   + `code/state_restructure_34bf/verify_relocation.py`
+   + pre-restructure
+   + present
+   + [`README.md`](README.md)
+   + convention.
+   + Corrections, retractions, supersessions
+   + notes *Why
+   + exists:
+   + able
+   + contain
+   + retraction.
+   + now;
+   + say,
+   + struck,
+   + why,
+   + Sections
+   + numbered `H1`, `H2`,
+   + number.*
+   + H1
+   + A_12,
+   + methodological
+   + H2
+   + H3
+   + read,
+   + H4
+   + battery: absorbability,
+   + H5
+   + G″
+   + H6
+   + G″
+   + Supporting
+   + derivations, constructions,
+   + *These passages
+   + states.
+   + argument.
+   + them**;
+   + stayed
+   + row.*
+
+--- docs/state-history/attempt-mg-a58f.md   43 inserted span(s)
+   + RED-for-lever
+   + (mg-a58f):
+   + O(1)
+   + Per-row
+   + *Attempt index*,
+   + (mg-a58f)**
+   + mg-34bf, 2026-07-30.
+   + **moved verbatim**
+   + cell.
+   + rewritten, condensed, summarised
+   + dropped,
+   + asserts
+   + `code/state_restructure_34bf/verify_relocation.py`
+   + pre-restructure
+   + present
+   + [`README.md`](README.md)
+   + convention.
+   + Corrections, retractions, supersessions
+   + notes *Why
+   + exists:
+   + able
+   + contain
+   + retraction.
+   + now;
+   + say,
+   + struck,
+   + why,
+   + Sections
+   + numbered `H1`, `H2`,
+   + number.*
+   + H1
+   + prove,
+   + §2.1,
+   + advantage)
+   + H2
+   + Supporting
+   + derivations, constructions,
+   + *These passages
+   + states.
+   + argument.
+   + them**;
+   + stayed
+   + row.*
+
+--- docs/state-history/attempt-mg-c47a-drop.md   29 inserted span(s)
+   + only):
+   + (mg-c47a) Per-row
+   + *Attempt index*,
+   + mg-34bf, 2026-07-30.
+   + **moved verbatim**
+   + cell.
+   + rewritten, condensed, summarised
+   + dropped,
+   + asserts
+   + `code/state_restructure_34bf/verify_relocation.py`
+   + pre-restructure
+   + present
+   + [`README.md`](README.md)
+   + convention.
+   + Corrections, retractions, supersessions
+   + notes *Why
+   + exists:
+   + able
+   + contain
+   + retraction.
+   + now;
+   + say,
+   + struck,
+   + why,
+   + Sections
+   + numbered `H1`, `H2`,
+   + number.*
+   + H1
+   + leading
+
+--- docs/state-history/ledger-row-11-L4.md   31 inserted span(s)
+   + Per-row
+   + *Full ledger*,
+   + 11.
+   + mg-34bf, 2026-07-30.
+   + **moved verbatim**
+   + cell.
+   + rewritten, condensed, summarised
+   + dropped,
+   + asserts
+   + `code/state_restructure_34bf/verify_relocation.py`
+   + pre-restructure
+   + present
+   + [`README.md`](README.md)
+   + convention.
+   + Corrections, retractions, supersessions
+   + notes *Why
+   + exists:
+   + able
+   + contain
+   + retraction.
+   + now;
+   + say,
+   + struck,
+   + why,
+   + Sections
+   + numbered `H1`, `H2`,
+   + number.*
+   + H1
+   + superseded
+   + "with
+   + available"
+
+TOTAL inserted tokens across the whole change: 1083
+
+### 4. additions_and_drift.py — retraction adjacency (all 58 rows) + citations
+==============================================================================
+D. ADDITIONS — after-corpus sentences absent verbatim from the baseline
+==============================================================================
+409 added sentence-units
+
+### STATE.md:89  (2)
+   + **The conditional form this clause used to carry is SUPERSEDED and the earlier *"with no repair available"* is STRUCK at this site; the candidate repair **(IB)** is recorded in repaired form at the mg-63e3 row of the attempt index** — [row history H1](docs/state-history/ledger-row-11-L4.md).
+   + Separately and **modulus-free**: branch **(iii) as a *standalone universal* is refuted at every `ε > 0`, for every modulus** — (iii) is a disjunct and was never asserted standalone, so this kills the standalone reading and every `ε`-calibration of it, not L4 *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/ledger-row-11-L4.md`](docs/state-history/ledger-row-11-L4.md).)*
+
+### STATE.md:114  (2)
+   + **Do not repeat the reason the deliverable led with: that inference is REJECTED, and two further scope claims of the deliverable are corrected** — [row history H1](docs/state-history/attempt-mg-c47a-drop.md). The "shrinking trend" support is circular (see below) and is withdrawn.
+   + *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-c47a-drop.md`](docs/state-history/attempt-mg-c47a-drop.md).)*
+
+### STATE.md:124  (2)
+   + **Corrects mg-a1ec Finding 5.4 and quarantines the misattributed Aires–Kahn step** — [row history H1](docs/state-history/attempt-mg-48ab.md). The MS Thm 1.3(iii)/Rem 1.8 citation is now **verified ✓** (checked verbatim against the paper: equality ⟹ companions incomparable; k=1 ⟹ every poset supercritical; equality forces flat `r=1`, geometric ray excluded; and the paper has **no rate/stability version** — confirming the residual is genuinely open here).
+   + *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-48ab.md`](docs/state-history/attempt-mg-48ab.md).)*
+
+### STATE.md:130  (2)
+   + **The "honest caveat" this row used to carry is RETIRED (mg-88bd, audited mg-e35c — F8; see that row), and the verdict *"best constant this route proves = 0"* is untouched by the retirement** — [row history H1](docs/state-history/attempt-mg-210d.md). **Do not over-correct: (R) is not thereby sufficient.**
+   + *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-210d.md`](docs/state-history/attempt-mg-210d.md).)*
+
+### STATE.md:131  (3)
+   + **Four corrections landed against prior text; the fourth is current state and stays here** — [row history H1](docs/state-history/attempt-mg-a58f.md). (4) Given (B), the mg-210d master bound alone yields `1−λ_std = O(1/n)`, so **(A) SPREAD and `Λ = O(1)` are off the critical path** (both still true; (F2) simply postdates the certificate).
+   + **The limit-vs-rate scoping question this row raised is ANSWERED (mg-88bd, audited mg-e35c) at the mg-88bd row below** — [row history H2](docs/state-history/attempt-mg-a58f.md). **On the ticket's own target: the lemma implies the wall.**
+   + *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-a58f.md`](docs/state-history/attempt-mg-a58f.md).)*
+
+### STATE.md:132  (6)
+   + **Two audit corrections to the deliverable's own framing** — [row history H1](docs/state-history/attempt-mg-88bd.md). **The genuine news is about the corpus's two asymptotic renderings** — this document's limit (`λ_std → 1`) and mg-7ae7's rate (`1 − λ_std ≤ C/(γn)`) are **both genuinely stronger than the architecture needs**, and mg-7ae7's `1/(γn)` is inherited from Theorem E's *output shape*, not demanded by any consumer.
+   + **Branch (iii): arithmetic CONFIRMED, framing OVERSTATED (audit F2); the current status of (iii) is at ledger row 11 and at the mg-63e3 row below** — [row history H2](docs/state-history/attempt-mg-88bd.md). **The larger Step-6 gap, which the deliverable missed and which was written down nowhere (audit F3): branch (ii) is unconsumed.**
+   + **F3's second half — *"and there is no repair available"* — is STRUCK (mg-63e3, audited mg-f825; see that row)** — [row history H3](docs/state-history/attempt-mg-88bd.md). **The *reason* clause is CONFIRMED and now proven far more strongly** — the transfer's failure is quantitative and survives `ε → 0`, **for every strictly positive modulus** (mg-63e3/mg-f825 proved this at `F(ε) = Ω(ε)`; mg-3af9, audited mg-c8c6, **discharged the condition** — sub-linear moduli included).
+   + **Satisfiability: CONFIRMED non-trivially, with a hand witness the deliverable does not have** (audit §4). **THE FALSE LOSS — *"the weakening buys the mg-210d route nothing"* is OVERSTATED (audit F8/F9); its live consequence is carried at the mg-210d row above and in *Second clean residual* below** — [row history H4](docs/state-history/attempt-mg-88bd.md). **Two BROKEN derivations of labels/attributions — F5 (§6.4's budget row) and F6 (the master bound's attribution); neither changes a mathematical statement.
+   + Their live consequences:** — [row history H5](docs/state-history/attempt-mg-88bd.md). The consequence is one-directional: the right calibration under the repair is mg-3ce3's first RED, and the probe reports **0 RED / 6681 up to `ε = 0.20`**, supporting `ε_leak ≈ 0.20` hence `ε_spec ≲ 2×10⁻²` — **100× larger than the deliverable's `2×10⁻⁴`, i.e. the error inflates the pessimism.**
+   + *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-88bd.md`](docs/state-history/attempt-mg-88bd.md).)*
+
+### STATE.md:133  (7)
+   + **What this row asserted while the condition was still live** — [row history H1](docs/state-history/attempt-mg-63e3.md). **The witness is entirely CONFIRMED** — the auditor rebuilt family **W** from scratch (poset axioms, slot bijection, all thirteen exact rationals, the `n = 8` instance element-by-element, the second both-chains family, the `d_TV` figures): `Δ₁ = 1/n` at `t = 2`, `p^{P[A]}_{xy} = 1/2`, `p^P_{xy} = 1/4`, `{x,y}` the sides' only incomparable pair, `p^P_{x,b_1} = 1/2`, `δ(W) = 1/2`.
+   + **⚠️ THE UNIVERSAL IS STRUCK — do not restore it: the deliverable's Cor.
+   + 4.3 / ledger claim 13, *"there is no modulus `F` for which transport is true"*, is BROKEN as a universal** — [row history H2](docs/state-history/attempt-mg-63e3.md). The correct replacement is a **dichotomy, not a kill**, and the second horn has never been recorded anywhere in the corpus: **either** `F(ε) = Ω(ε)`, and `W` shows Step 6's stated transfer cannot consume (ii) at any `ε`, with no improvement to Steps 2–5 repairing it; **or** L4 holds only with `F(ε) = o(ε)`, in which case branch (ii) is unavailable exactly in the minimal-leakage regime `εn = O(1)` and **L4 is thereby a strictly stronger conjecture than the source's wording suggests**, since shrinking `F` strengthens (ii) *and* (iii) at once.
+   + **⚠️ THE `n`-DEPENDENCE CLAUSE IS DELIBERATELY NOT LANDED — a decision, not an omission; it rests on an invalid quantifier step** — [row history H3](docs/state-history/attempt-mg-63e3.md). **A second premise of the deliverable is BROKEN — *"`1/n` is (up to constants) the smallest nonzero leakage a prefix cut can have"*, false by a factor of `n`; the witness is undamaged** — [row history H4](docs/state-history/attempt-mg-63e3.md). **(IB) IS RECORDED IN REPAIRED FORM — the stated version is FALSE and must not be pasted** — [row history H5](docs/state-history/attempt-mg-63e3.md). **Recorded form — *(IB) Interface Balance (repaired)*: there is a modulus `G` such that if `P` is not a chain and `P` is within `G(ε)n` interface modifications of an ordinal sum `P[A] ⊕ P[B]` across a cut with `Δ₁(A,B) ≤ ε`, then `P` has a `1/3`-balanced pair — and *if no side of the cut supplies one*, it may be taken at the interface.**
+   + **KEEP VERBATIM — the deliverable's seven durable contributions, all correct, including the C1/C2/C3 separation, the explicit declining of C3, *"`W` refutes implications, not theorems"*, *"do not record this as 'branch (ii) is unrepairable'"* and §7 property 5** — [row history H6](docs/state-history/attempt-mg-63e3.md). **Two calibrations of the deliverable, neither fatal — Step 6's licence, and the `:527` box** — [row history H7](docs/state-history/attempt-mg-63e3.md). **Untouched:** mg-88bd's `ε_spec` pinning (it prices Step 2's *input*, upstream of the transport failure — claim 31 CONFIRMED); `δ` (Axis 2) vs `Δ₁` (Axis 1) kept distinct throughout.
+   + **`F` has two roles in L4 — a budget in (ii) and an error tolerance in (iii) — and only the first admits or excludes a witness; that is the direct cause of the quantifier failure** — [row history H8](docs/state-history/attempt-mg-63e3.md). **Constraint compliance CLEAN** (verified at the commit, not from the document's own sentence): one `.md` each, zero scripts, zero datasets, zero enumerations; every rational hand-reproduced by the auditor.
+   + *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-63e3.md`](docs/state-history/attempt-mg-63e3.md).)*
+
+### STATE.md:134  (2)
+   + **The proof defect, the counterexamples `U*` and `V*`, and the general mechanism behind all three** — [row history H1](docs/state-history/attempt-mg-3af9.md). **Recorded form: the inequality holds *for certificates that do not propagate* — i.e. under the removal reading, or under a modification reading in which the modified poset agrees with `P` off `S`.**
+   + *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-3af9.md`](docs/state-history/attempt-mg-3af9.md).)*
+
+### STATE.md:135  (7)
+   + **⚠️ STEP 4d DID FIRE HERE, and the OUTCOME — not the firing — is what is different: the over-wide statement was TRUE and provable, so it was repaired by an UPGRADE rather than a strike, which is why it holds the second 4d tally alone.
+   + This row states no count of its own and points at Appendix A's two tallies instead, so it cannot rot on the next recount.
+   + This is the first of the three A3 sites; the other two are Appendix A, *"STEP 4d … AND THEY MUST NOT SHARE ONE TALLY"* and template step `4d`** — [row history H1](docs/state-history/attempt-mg-276d.md). **The mathematics.**
+   + **F1 — the one over-labelled universal — was repaired by an upgrade, not a retraction** — [row history H2](docs/state-history/attempt-mg-276d.md). (iii) *"records **precisely** the forbidden generators"* is true at the level of the **complex** (which ones) and an overstatement at the level of the **Laplacian difference**, which is diagonal and records only **how many**.
+   + **The all-`+1` invariance is a THEOREM for every finite poset, its citation is repaired, and `controls.py` now measures it as well; prefer the proof to the count** — [row history H3](docs/state-history/attempt-mg-276d.md). The auditor supplied the missing control (facet-parity signs, `audit_extra.py` X3), it **fires on 38/38** posets with `\|L(P)\| ≥ 2` **in its own population, which is 41 = 5+16+20 and NOT 60: `construction_side_control()` iterates `posets_upto_iso(n)[:20]`, so at `n = 5` it saw 20 of 63 posets in enumeration order — a truncation, flagged here because `38/38` is quoted as a headline** (the number that matters is the port's complete `n ≤ 5` population, 82/82).
+   + **⚠️ THE COVERAGE GAP IS RELOCATED, NOT CLOSED (mg-5630 §2.2–§2.3, landed by mg-1319), and this row previously read as though it were closed** — [row history H4](docs/state-history/attempt-mg-276d.md). **So coverage went from ZERO to ONE ABSORBABLE SIGN GAUGE; `le_to_facet` is the named uncovered site and F3 in the same commit calls it load-bearing.
+   + **The cheaper next probe this row recommended WAS RUN AND IS AUDITED (mg-a3d4, audited mg-86a3, landed by mg-a806 — the next row): the answer is NO for `Δ_AT` and it is carried by a theorem, so this row's closing suggestion is DISCHARGED, not pending** — [row history H5](docs/state-history/attempt-mg-276d.md). *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-276d.md`](docs/state-history/attempt-mg-276d.md).)*
+
+### STATE.md:136  (8)
+   + **Theorem G's proof, the auditor's independent rebuild of it, and what the arc's step-4d record makes of that** — [row history H1](docs/state-history/attempt-mg-a3d4.md). **(1) The top two dimensions of `F(P)` are graph theory verbatim — and the CONCLUSION is unconditional even though one equation is not.**
+   + **The inherited conditional was declared in the self-audit and carried nowhere else — mg-5630's defect class, repaired rather than annotated (rows N1a/N1b/N1c/N1r, §7.1)** — [row history H2](docs/state-history/attempt-mg-a3d4.md). **And the repair is a strengthening: the pricing is robust to the condition, provably.**
+   + **What the proposed row used to read, and why its *"undecided"* was a resting place rather than a fact, with the exact rational LP that decides every open case POSITIVELY and the infinite family `V_k`** — [row history H3](docs/state-history/attempt-mg-a3d4.md). **⭐ THE REPLACEMENT, AND IT IS STRICTLY BETTER THAN WHAT IT REPLACES — THIS IS THE WORDING TO QUOTE: THE SEMIGROUP TECHNIQUE REACHES `Δ_AT` ONLY WHERE `Δ_AT` IS ALREADY FREE.**
+   + **CONTROLS — the credit was verified rather than assumed.
+   + None of the six mutations is a gauge in disguise, two calibration defects were repaired, no row was downgraded, and the one control gap the deliverable named itself is CLOSED by the audit's own rebuild** — [row history H4](docs/state-history/attempt-mg-a3d4.md). **NOT CLAIMED:** that no other Hodge technique can help (weighted/normalised Laplacians, `L_k` far from the top, discrete Morse theory and the toric/Coxeter half of the source are **untouched**); anything about BK; anything about weighted or degree-normalised chains.
+   + **STRUCK, with the mechanism recorded next to the strike — the mechanism is the valuable part and it is this arc's signature failure stated cleanly: singleton blocks contribute no factor to Theorem L's join, and dropping that hypothesis makes the link a genuine join in which an exact `1/2` in a factor is strictly less than `1/2` in the join** — [row history H5](docs/state-history/attempt-mg-a3d4.md). That is now ledger row **J** of the deliverable (PROVEN, §6.1), checked as a **full-spectrum** identity on all **48 846** genuine-join links of all 405 posets `n ≤ 6` with 0 mismatches (`code/hodge_leverage_join/`, ~21 s; link side measured by brute force from the facet list with no use of Theorem L).
+   + **Nothing consumed `G″`, and that is swept for rather than assumed** — [row history H6](docs/state-history/attempt-mg-a3d4.md). **NOT landed, and named so it is not mistaken for done:** mg-d39d's A2 (the replacement scope clause is an unhedged universal at 12 of 13 sites), A3 (`V_k` *"infinite"*), A4 (a replication recorded as closing a **control** gap — in both the deliverable §10 **and this row above**), A5, A6, A7, A8, and its `n = 6`-complete contribution.
+   + *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-a3d4.md`](docs/state-history/attempt-mg-a3d4.md).)*
+
+### docs/state-history/README.md  (141)
+   + # Per-row histories for `STATE.md`'s ledger
+   + **A ledger row asserts CURRENT STATE.
+   + Everything a row used to say, and everything that
+   + struck, retired or corrected it, lives here — one file per row, linked from the row.**
+   + Landed by **mg-34bf**, 2026-07-30, on the ticket's design: *"a row must not be able to
+   + contain a claim and its own retraction."*
+   + The defect being fixed was measured, not
+   + aesthetic — five consecutive attempt-index rows were single table cells of 5.4 / 9.2 / 13.5
+   + / 10.8 / 15.4 KB, and the reopening notice in one of them sat at byte 8,402 of an
+   + 11.5 KB cell with no structural separation between a claim and its retraction.
+   + mg-f7bc's words: *the thing that let the original three-way contradiction survive is now
+   + stronger, not weaker.*
+   + ## The rule
+   + **A row asserts current state only.**
+   + What is true now, at what status, over what
+   + population, with its citations.
+   + **Every retraction, correction, supersession and mechanism note relocates here**, and
+   + the row keeps a pointer naming it.
+   + **RELOCATION, NOT DELETION.**
+   + Nothing was summarised, condensed, paraphrased or
+   + dropped.
+   + Every passage in these files is the ledger cell's own text, character for
+   + character.
+   + The mechanism records are the most valuable content in those cells and none
+   + of them was touched.
+   + **If the current claim needs a "this used to say X" to be understood, the pointer goes
+   + in the row and the text goes here.**
+   + ## What relocated, exactly
+   + A passage moved iff it is:
+   + - **(a)** a report of what a row, this document, or a prior ledger row **used to say**, or
+   + a strike / retirement / correction of it;
+   + - **(b)** an **adjudication of a deliverable or an audit** — over-wide, BROKEN-as-labelled,
+   + struck, downgraded, mislabelled — or an audit tally or nested provenance chain;
+   + - **(c)** a **derivation, construction, enumeration or numeric evidence** supporting a
+   + claim the row still states;
+   + - **(d)** a **defect-mechanism note**: why a defect survived, or what let it happen.
+   + (a), (b) and (d) are the numbered `H1`, `H2`, … sections, which the row cites by number.
+   + (c) is the *Supporting record* section, reachable from the row's trailing pointer.
+   + A passage **stayed** in the row if it is a status or verdict headline, a live claim with
+   + its scope and population, a citation, an open item, an explicit instruction, or the honest
+   + net.
+   + Two boundary rulings, stated so they can be argued with rather than guessed at:
+   + - **Corrections to an EXTERNAL source document** (the `.tex` sketch) are live facts about
+   + that source and **stayed in the row**.
+   + Only corrections to text inside this programme's
+   + own record relocate — that adjacency is what the ticket forbids.
+   + - Where one sentence carried **both a claim and its evidence**, it stayed in the row.
+   + cut points are sentence boundaries; nothing was cut mid-sentence.
+   + ## What was NOT touched
+   + - **Appendix A** — byte-identical to the base commit `60f4dac`.
+   + No rule moved; no rule was
+   + inside a ledger cell.
+   + - **`STATE.md:343`**, the *"the corrected fact RELOCATES A HOLE RATHER THAN CLOSING ONE"*
+   + paragraph, which an audit classifies BROKEN and OPEN and which `mg-ae62` repairs.
+   + in Appendix A, so it was out of scope; pm-onethird also asked for it by name.
+   + - **The prose narrative at `STATE.md:138–176`.**
+   + Several of those paragraphs carry the same
+   + claim-beside-its-own-retraction shape.
+   + They are not rows and were not in scope.
+   + Named
+   + here so the omission is visible rather than silent.
+   + - **Columns 1 and 2** of every row (verdict, attempt) — unchanged, which is also what makes
+   + the completeness check's row key stable.
+   + - **Line numbers.**
+   + `STATE.md` has exactly the same number of lines as before and no line
+   + was inserted or deleted, because two live self-references (`:89` and `:132`) and
+   + `mg-ae62`'s brief point into the file by line.
+   + That is why this convention is documented
+   + here and not in a new paragraph of `STATE.md`.
+   + - **Row numbering and row identity** — no row renumbered, added or removed.
+   + ## The index
+   + | row | which row | history file | cell before | cell after | history bytes |
+   + |---|---|---|---|---|---|
+   + | `STATE.md:89` | row 11 | [`ledger-row-11-L4.md`](ledger-row-11-L4.md) | 1,556 | 1,585 | 1,449 |
+   + | `STATE.md:114` | the **DROP (tractability only)** row | [`attempt-mg-c47a-drop.md`](attempt-mg-c47a-drop.md) | 725 | 555 | 1,652 |
+   + | `STATE.md:124` | the **GREEN-partial · diagnostic (mg-48ab)** row | [`attempt-mg-48ab.md`](attempt-mg-48ab.md) | 1,467 | 1,621 | 1,265 |
+   + | `STATE.md:130` | the **SOUND negative · actionable (mg-210d)** row | [`attempt-mg-210d.md`](attempt-mg-210d.md) | 2,597 | 2,052 | 2,128 |
+   + | `STATE.md:131` | the **RED-for-lever · AMBER-redirect · CORRECTS MERGED WORK (mg-a58f)** row | [`attempt-mg-a58f.md`](attempt-mg-a58f.md) | 4,918 | 3,651 | 3,426 |
+   + | `STATE.md:132` | the **OVERSTATED · core CONFIRMED-conditionally · RE-SHAPES (R) (mg-88bd)** row | [`attempt-mg-88bd.md`](attempt-mg-88bd.md) | 8,630 | 4,804 | 6,913 |
+   + | `STATE.md:133` | the **RED-conditional · witness fully CONFIRMED · CORRECTS MERGED WORK (mg-63e3)** row | [`attempt-mg-63e3.md`](attempt-mg-63e3.md) | 12,696 | 6,876 | 9,808 |
+   + | `STATE.md:134` | the **RED · UNCONDITIONAL · witness `W*` fully CONFIRMED · DISCHARGES row 11's condition (mg-3af9)** row | [`attempt-mg-3af9.md`](attempt-mg-3af9.md) | 9,974 | 6,247 | 5,752 |
+   + | `STATE.md:135` | the **GREEN · PROVEN, all finite posets · first proof-carried generalisation in the arc (mg-276d)** row | [`attempt-mg-276d.md`](attempt-mg-276d.md) | 13,190 | 7,705 | 9,049 |
+   + | `STATE.md:136` | the **AMBER-POSITIVE · THE BET IS PRICED (mg-a3d4)** row | [`attempt-mg-a3d4.md`](attempt-mg-a3d4.md) | 15,386 | 8,442 | 10,684 |
+   + Largest cell anywhere in `STATE.md`: **15,386 → 8,442 bytes** (the mg-a3d4 row).
+   + `STATE.md` overall: 188,870 → 161,269 bytes.
+   + **36,188 bytes of ledger text moved**, and the
+   + ten history files total 52,126 bytes — the difference is the per-file headers, which are new.
+   + About 5 KB of new pointer text went into the rows, which is why two small rows grew.
+   + **Rows 132–136 are still large, and that is reported rather than fixed.**
+   + What is left in
+   + them is live claims — the mg-a3d4 row alone asserts about forty of them.
+   + Getting those
+   + cells below a couple of kilobytes would mean condensing prose, which the ticket forbids in
+   + the same breath as it asks for terseness.
+   + The binding constraint was met: no row now
+   + contains a claim and its own retraction.
+   + ## How completeness is checked
+   + python3 code/state_restructure_34bf/verify_relocation.py # nothing was lost
+   + python3 code/state_restructure_34bf/a3_reading_path.py # the three A3 sites
+   + `verify_relocation.py` does **not** read the relocation spec and does not use the builder's
+   + splitter.
+   + It takes each ledger cell as it stood at `60f4dac` and decomposes it into
+   + **maximal verbatim runs** that can still be found, word for word, in the rewritten cell or
+   + in a history file **that the rewritten cell links to**.
+   + At the landing commit: **10 cells,
+   + 11,625 words, 123 maximal runs, 0 words unaccounted for**, shortest run 8 words.
+   + Read that result precisely.
+   + It establishes that no word was dropped and no wording inside a
+   + run was altered, and that everything counted as kept is reachable by a reader starting at
+   + the row.
+   + It says nothing about whether text was *added* — pointers were — and nothing about
+   + whether the relocation was well judged.
+   + It is a completeness check, not a quality one.
+   + It also asserts three things the restructure must not disturb: every ledger row still
+   + present under an unchanged verdict column; Appendix A byte-identical; and the truncated-
+   + population figure quoted in the mg-276d row absent from every file in this directory.
+   + Appendix A pins that figure's LIVE population to three named files, one of which is that
+   + ledger cell; relocating it here would have made a fourth, and Appendix A's paragraph false.
+   + The checker names the figure because a scanner must; this file does not, for the same
+   + reason Appendix A gives — *"text that exists in order to COUNT the number, not to be read
+   + for it"* is not a coverage claim, and a summary is.
+   + So that disclosure stayed in the cell.
+   + ## The three A3 sites (`a3_reading_path.py`)
+   + The sites that disagreed under mg-1319 — `STATE.md`'s own *"reported three incompatible
+   + ways in one commit"* — are the mg-276d ledger row, Appendix A's *"STEP 4d … AND THEY MUST
+   + NOT SHARE ONE TALLY"* paragraph, and template step **4d**.
+   + The row's step-4d clause used to
+   + begin at byte 1,544 of a 14,340-byte cell and run, interleaved with the row's mathematics,
+   + to byte 4,951; it is now the **second sentence of the cell**, 103 words, and it **states no
+   + count of its own** — it points at Appendix A's two tallies, which are 55 lines apart in one
+   + Reading the three assertions in sequence: **190 words, 45.6 s at 250 wpm.**
+   + ## How these files are produced
+   + `code/state_restructure_34bf/` holds the builder.
+   + `spec.py` carries the per-row assignment
+   + of passages plus a table of **anchor guards** — the first 44 characters each passage key
+   + must start with at the base commit — so a change to the passage splitter fails loudly
+   + instead of silently relocating the wrong text.
+   + That guard caught one real mis-mapping while
+   + this change was being built.
+   + `build.py` asserts the partition (every passage emitted exactly
+   + once) and that no relocation split a bold span, before it writes anything.
+
+### docs/state-history/attempt-mg-210d.md  (17)
+   + # Attempt index — SOUND negative · actionable (mg-210d): best constant lower bound on λ_std
+   + Per-row history for `STATE.md` § *Attempt index*, the **SOUND negative · actionable (mg-210d)** row.
+   + Split out of the ledger cell by mg-34bf, 2026-07-30.
+   + Every passage below was **moved verbatim** out of that cell.
+   + Nothing was rewritten,
+   + condensed, summarised or dropped, and no citation was changed.
+   + The row now asserts current
+   + state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
+   + clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+   + present in the row or in this file.
+   + See [`README.md`](README.md) for the convention.
+   + ## Corrections, retractions, supersessions and mechanism notes
+   + *Why this section exists: a ledger row must not be able to contain a claim and its own
+   + The row states what is true now; what it used to say, what was struck, and why,
+   + is here.
+   + Sections are numbered `H1`, `H2`, … and the row cites them by number.*
+   + ### H1 — the retired "honest caveat", and why the row's own verdict is untouched by the retirement
+
+### docs/state-history/attempt-mg-276d.md  (27)
+   + # Attempt index — GREEN · PROVEN, all finite posets (mg-276d): the foundation claims (1)–(3) supply
+   + Per-row history for `STATE.md` § *Attempt index*, the **GREEN · PROVEN, all finite posets · first proof-carried generalisation in the arc (mg-276d)** row.
+   + Split out of the ledger cell by mg-34bf, 2026-07-30.
+   + Every passage below was **moved verbatim** out of that cell.
+   + Nothing was rewritten,
+   + condensed, summarised or dropped, and no citation was changed.
+   + The row now asserts current
+   + state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
+   + clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+   + present in the row or in this file.
+   + See [`README.md`](README.md) for the convention.
+   + ## Corrections, retractions, supersessions and mechanism notes
+   + *Why this section exists: a ledger row must not be able to contain a claim and its own
+   + The row states what is true now; what it used to say, what was struck, and why,
+   + is here.
+   + Sections are numbered `H1`, `H2`, … and the row cites them by number.*
+   + ### H1 — the step-4d clause — first of the three A3 sites
+   + ### H2 — F1, the one over-labelled universal, repaired by an upgrade
+   + ### H3 — the all-+1 invariance theorem, and the repair of its citation
+   + ### H4 — the relocated coverage gap, the gauge-conjugation mechanism, and the positive control on the control
+   + ### H5 — the recommended next probe, and the answer that discharged it
+   + ## Supporting record — derivations, constructions, evidence and audit provenance
+   + *These passages support claims the row still states.
+   + They moved so that the row reads as an
+   + assertion rather than as an argument.
+   + **No claim moved with them**; where a passage carried
+   + both a claim and its evidence it stayed in the row.*
+
+### docs/state-history/attempt-mg-3af9.md  (23)
+   + # Attempt index — RED · UNCONDITIONAL · witness W* fully CONFIRMED (mg-3af9): does a sub-linear modulus rescue branch (ii)?
+   + Per-row history for `STATE.md` § *Attempt index*, the **RED · UNCONDITIONAL · witness `W*` fully CONFIRMED · DISCHARGES row 11's condition (mg-3af9)** row.
+   + Split out of the ledger cell by mg-34bf, 2026-07-30.
+   + Every passage below was **moved verbatim** out of that cell.
+   + Nothing was rewritten,
+   + condensed, summarised or dropped, and no citation was changed.
+   + The row now asserts current
+   + state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
+   + clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+   + present in the row or in this file.
+   + See [`README.md`](README.md) for the convention.
+   + ## Corrections, retractions, supersessions and mechanism notes
+   + *Why this section exists: a ledger row must not be able to contain a claim and its own
+   + The row states what is true now; what it used to say, what was struck, and why,
+   + is here.
+   + Sections are numbered `H1`, `H2`, … and the row cites them by number.*
+   + ### H1 — the arguments under Theorem A, the promotion clause and the §4.1 row — the counterexamples `U*` and `V*`, and the general mechanism
+   + ## Supporting record — derivations, constructions, evidence and audit provenance
+   + *These passages support claims the row still states.
+   + They moved so that the row reads as an
+   + assertion rather than as an argument.
+   + **No claim moved with them**; where a passage carried
+   + both a claim and its evidence it stayed in the row.*
+
+### docs/state-history/attempt-mg-48ab.md  (17)
+   + # Attempt index — GREEN-partial · diagnostic (mg-48ab): AF equality-case vs the frozen hypothesis
+   + Per-row history for `STATE.md` § *Attempt index*, the **GREEN-partial · diagnostic (mg-48ab)** row.
+   + Split out of the ledger cell by mg-34bf, 2026-07-30.
+   + Every passage below was **moved verbatim** out of that cell.
+   + Nothing was rewritten,
+   + condensed, summarised or dropped, and no citation was changed.
+   + The row now asserts current
+   + state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
+   + clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+   + present in the row or in this file.
+   + See [`README.md`](README.md) for the convention.
+   + ## Corrections, retractions, supersessions and mechanism notes
+   + *Why this section exists: a ledger row must not be able to contain a claim and its own
+   + The row states what is true now; what it used to say, what was struck, and why,
+   + is here.
+   + Sections are numbered `H1`, `H2`, … and the row cites them by number.*
+   + ### H1 — corrects mg-a1ec Finding 5.4; quarantines the misattributed Aires–Kahn step
+
+### docs/state-history/attempt-mg-63e3.md  (30)
+   + # Attempt index — RED-conditional · witness fully CONFIRMED (mg-63e3): can Step 6 consume L4's branch (ii)?
+   + Per-row history for `STATE.md` § *Attempt index*, the **RED-conditional · witness fully CONFIRMED · CORRECTS MERGED WORK (mg-63e3)** row.
+   + Split out of the ledger cell by mg-34bf, 2026-07-30.
+   + Every passage below was **moved verbatim** out of that cell.
+   + Nothing was rewritten,
+   + condensed, summarised or dropped, and no citation was changed.
+   + The row now asserts current
+   + state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
+   + clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+   + present in the row or in this file.
+   + See [`README.md`](README.md) for the convention.
+   + ## Corrections, retractions, supersessions and mechanism notes
+   + *Why this section exists: a ledger row must not be able to contain a claim and its own
+   + The row states what is true now; what it used to say, what was struck, and why,
+   + is here.
+   + Sections are numbered `H1`, `H2`, … and the row cites them by number.*
+   + ### H1 — the conditional status this row carried before mg-3af9 discharged it
+   + ### H2 — the struck universal (Cor.
+   + 4.3 / ledger claim 13)
+   + ### H3 — the n-dependence clause that was deliberately not landed, and the invalid quantifier step under it
+   + ### H4 — the second BROKEN premise, "1/n is the smallest nonzero leakage a prefix cut can have"
+   + ### H5 — (IB)'s false interface clause, and its two refutations
+   + ### H7 — two calibrations of the deliverable, neither fatal
+   + ### H8 — the two roles of `F`, and the audit's ledger tally
+   + ## Supporting record — derivations, constructions, evidence and audit provenance
+   + *These passages support claims the row still states.
+   + They moved so that the row reads as an
+   + assertion rather than as an argument.
+   + **No claim moved with them**; where a passage carried
+   + both a claim and its evidence it stayed in the row.*
+
+### docs/state-history/attempt-mg-88bd.md  (27)
+   + # Attempt index — OVERSTATED · core CONFIRMED-conditionally · RE-SHAPES (R) (mg-88bd): the operative λ_std form
+   + Per-row history for `STATE.md` § *Attempt index*, the **OVERSTATED · core CONFIRMED-conditionally · RE-SHAPES (R) (mg-88bd)** row.
+   + Split out of the ledger cell by mg-34bf, 2026-07-30.
+   + Every passage below was **moved verbatim** out of that cell.
+   + Nothing was rewritten,
+   + condensed, summarised or dropped, and no citation was changed.
+   + The row now asserts current
+   + state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
+   + clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+   + present in the row or in this file.
+   + See [`README.md`](README.md) for the convention.
+   + ## Corrections, retractions, supersessions and mechanism notes
+   + *Why this section exists: a ledger row must not be able to contain a claim and its own
+   + The row states what is true now; what it used to say, what was struck, and why,
+   + is here.
+   + Sections are numbered `H1`, `H2`, … and the row cites them by number.*
+   + ### H1 — audit F1's steelman, and F4's "the source's THIRD form, not a fourth"
+   + ### H2 — branch (iii) — arithmetic CONFIRMED, framing OVERSTATED (audit F2)
+   + ### H3 — F3's struck second half, "and there is no repair available"
+   + ### H4 — why §7.2 did not settle satisfiability; THE FALSE LOSS (audit F8/F9)
+   + ### H5 — the two BROKEN label/attribution derivations, F5 and F6
+   + ## Supporting record — derivations, constructions, evidence and audit provenance
+   + *These passages support claims the row still states.
+   + They moved so that the row reads as an
+   + assertion rather than as an argument.
+   + **No claim moved with them**; where a passage carried
+   + both a claim and its evidence it stayed in the row.*
+
+### docs/state-history/attempt-mg-a3d4.md  (28)
+   + # Attempt index — AMBER-POSITIVE · THE BET IS PRICED (mg-a3d4): does the face/Hodge side carry technique the graph side lacks?
+   + Per-row history for `STATE.md` § *Attempt index*, the **AMBER-POSITIVE · THE BET IS PRICED (mg-a3d4)** row.
+   + Split out of the ledger cell by mg-34bf, 2026-07-30.
+   + Every passage below was **moved verbatim** out of that cell.
+   + Nothing was rewritten,
+   + condensed, summarised or dropped, and no citation was changed.
+   + The row now asserts current
+   + state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
+   + clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+   + present in the row or in this file.
+   + See [`README.md`](README.md) for the convention.
+   + ## Corrections, retractions, supersessions and mechanism notes
+   + *Why this section exists: a ledger row must not be able to contain a claim and its own
+   + The row states what is true now; what it used to say, what was struck, and why,
+   + is here.
+   + Sections are numbered `H1`, `H2`, … and the row cites them by number.*
+   + ### H1 — Theorem G's proof, the independent rebuild to A_12, and its methodological sizing
+   + ### H2 — the inherited conditional that was carried nowhere else
+   + ### H3 — what ledger row B6 used to read, and why "undecided" was a resting place
+   + ### H4 — the control battery: absorbability, two repaired calibration defects, and what could not be broken
+   + ### H5 — the mechanism recorded beside the G″ strike
+   + ### H6 — the sweep that established nothing consumed G″
+   + ## Supporting record — derivations, constructions, evidence and audit provenance
+   + *These passages support claims the row still states.
+   + They moved so that the row reads as an
+   + assertion rather than as an argument.
+   + **No claim moved with them**; where a passage carried
+   + both a claim and its evidence it stayed in the row.*
+
+### docs/state-history/attempt-mg-a58f.md  (24)
+   + # Attempt index — RED-for-lever · AMBER-redirect (mg-a58f): the (B-bias) O(1) locality lemma
+   + Per-row history for `STATE.md` § *Attempt index*, the **RED-for-lever · AMBER-redirect · CORRECTS MERGED WORK (mg-a58f)** row.
+   + Split out of the ledger cell by mg-34bf, 2026-07-30.
+   + Every passage below was **moved verbatim** out of that cell.
+   + Nothing was rewritten,
+   + condensed, summarised or dropped, and no citation was changed.
+   + The row now asserts current
+   + state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
+   + clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+   + present in the row or in this file.
+   + See [`README.md`](README.md) for the convention.
+   + ## Corrections, retractions, supersessions and mechanism notes
+   + *Why this section exists: a ledger row must not be able to contain a claim and its own
+   + The row states what is true now; what it used to say, what was struck, and why,
+   + is here.
+   + Sections are numbered `H1`, `H2`, … and the row cites them by number.*
+   + ### H1 — the first three of the four corrections (this document's § The single lemma to prove, ledger row 8, mg-dbd1 §2.1, the (A)+(B) route's advertised advantage)
+   + ### H2 — the limit-vs-rate scoping question, and its answer
+   + ## Supporting record — derivations, constructions, evidence and audit provenance
+   + *These passages support claims the row still states.
+   + They moved so that the row reads as an
+   + assertion rather than as an argument.
+   + **No claim moved with them**; where a passage carried
+   + both a claim and its evidence it stayed in the row.*
+
+### docs/state-history/attempt-mg-c47a-drop.md  (17)
+   + # Attempt index — DROP (tractability only): width ≥ 4, n ≥ 10 residual gap (mg-c47a)
+   + Per-row history for `STATE.md` § *Attempt index*, the **DROP (tractability only)** row.
+   + Split out of the ledger cell by mg-34bf, 2026-07-30.
+   + Every passage below was **moved verbatim** out of that cell.
+   + Nothing was rewritten,
+   + condensed, summarised or dropped, and no citation was changed.
+   + The row now asserts current
+   + state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
+   + clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+   + present in the row or in this file.
+   + See [`README.md`](README.md) for the convention.
+   + ## Corrections, retractions, supersessions and mechanism notes
+   + *Why this section exists: a ledger row must not be able to contain a claim and its own
+   + The row states what is true now; what it used to say, what was struck, and why,
+   + is here.
+   + Sections are numbered `H1`, `H2`, … and the row cites them by number.*
+   + ### H1 — the deliverable's rejected leading argument, and two corrected scope claims
+
+### docs/state-history/ledger-row-11-L4.md  (17)
+   + # Full ledger row 11 — L4 near-ordinal-sum stability
+   + Per-row history for `STATE.md` § *Full ledger*, row 11.
+   + Split out of the ledger cell by mg-34bf, 2026-07-30.
+   + Every passage below was **moved verbatim** out of that cell.
+   + Nothing was rewritten,
+   + condensed, summarised or dropped, and no citation was changed.
+   + The row now asserts current
+   + state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
+   + clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+   + present in the row or in this file.
+   + See [`README.md`](README.md) for the convention.
+   + ## Corrections, retractions, supersessions and mechanism notes
+   + *Why this section exists: a ledger row must not be able to contain a claim and its own
+   + The row states what is true now; what it used to say, what was struck, and why,
+   + is here.
+   + Sections are numbered `H1`, `H2`, … and the row cites them by number.*
+   + ### H1 — the superseded conditional form, and the struck "with no repair available"
+
+==============================================================================
+E. RETRACTION ADJACENCY — all table cells in the after file
+==============================================================================
+--- row at line 87 :: '9'
+    col2 [false as stated] ...false as stated (2/126)...
+--- row at line 89 :: '11'
+    col1 [SUPERSED] ...njecture, it does not repair Step 6.  **The conditional form this clause used to carry is SUPERSEDED and the earlier *"with no repair available"* is STRUCK at this site; the candidate repa...
+    col1 [STRUCK] ...m this clause used to carry is SUPERSEDED and the earlier *"with no repair available"* is STRUCK at this site; the candidate repair **(IB)** is recorded in repaired form at the mg-63e3 r...
+    col1 [refuted] ...11-L4.md). Separately and **modulus-free**: branch **(iii) as a *standalone universal* is refuted at every `ε > 0`, for every modulus** — (iii) is a disjunct and was never asserted standa...
+--- row at line 114 :: '**DROP (tractability only)**'
+    col2 [corrected] ...led with: that inference is REJECTED, and two further scope claims of the deliverable are corrected** — [row history H1](docs/state-history/attempt-mg-c47a-drop.md). The "shrinking trend" s...
+    col2 [withdrawn] ...ry/attempt-mg-c47a-drop.md). The "shrinking trend" support is circular (see below) and is withdrawn. *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-h...
+--- row at line 116 :: '**CORRECTION to merged work**'
+    col0 [CORRECTION] ...**CORRECTION to merged work**...
+--- row at line 122 :: '**untried · new object**'
+    col2 [refuted] ..."primitive ⟹ good mixer" in `λ_std` is *refuted* (primitives reach `λ≈0.96`); the incomparability graph's own expansion is unexamined...
+--- row at line 125 :: '**RED-for-residual · AMBER-redirect (mg-dcae, verified sound)**'
+    col2 [REFUTED] ...ab residual — an *unconditional* k=1 stability bound `N_i² ≥ (1+cΦ)N_{i−1}N_{i+1}` — is **REFUTED by hand** (verified in full): for `P = C_n⊔C_n`, `x=min` of one chain, at i=2, `Φ₂=1/2` e...
+--- row at line 130 :: '**SOUND negative · actionable (mg-210d)**'
+    col2 [RETIRED] ...guished order is *canonical*, not chosen. **The "honest caveat" this row used to carry is RETIRED (mg-88bd, audited mg-e35c — F8; see that row), and the verdict *"best constant this route...
+    col2 [reopen] ...**A door recorded as the wrong shape is now the right shape with the wrong size:** (R) is reopened as a live quantitative question, not closed. All four load-bearing claims hand-verified...
+--- row at line 131 :: '**RED-for-lever · AMBER-redirect · CORRECTS MERGED WORK (mg-a58f; audi'
+    col2 [retired] ... strong as the crux, and it silently re-imposes the `E[inv_e] = O(n)` requirement mg-8201 retired as "structurally unnecessary". **The lossy step is located exactly:** both derivations bo...
+--- row at line 132 :: '**OVERSTATED · core CONFIRMED-conditionally · RE-SHAPES (R) (mg-88bd, '
+    col2 [STRUCK] ...anch (ii) is unconsumed.** **F3's second half — *"and there is no repair available"* — is STRUCK (mg-63e3, audited mg-f825; see that row)** — [row history H3](docs/state-history/attempt-...
+--- row at line 133 :: '**RED-conditional · witness fully CONFIRMED · CORRECTS MERGED WORK (mg'
+    col0 [REFUTED] ...D: 0 arithmetic defects anywhere, 1 BROKEN universal, 1 BROKEN premise, 1 candidate lemma REFUTED as stated, 1 unledgered result stronger than the headline)**...
+    col2 [STRUCK] ...^P_{x,b_1} = 1/2`, `δ(W) = 1/2`. **No arithmetic defect anywhere.** **⚠️ THE UNIVERSAL IS STRUCK — do not restore it: the deliverable's Cor. 4.3 / ledger claim 13, *"there is no modulus ...
+    col2 [refuted] ... suggests**, since shrinking `F` strengthens (ii) *and* (iii) at once. **The route is not refuted; it is priced.** **⚠️ THE `n`-DEPENDENCE CLAUSE IS DELIBERATELY NOT LANDED — a decision, ...
+    col2 [refuted] ... from its own ledger, and it is MODULUS-FREE: branch (iii) as a *standalone universal* is refuted at every `ε > 0`, for every modulus.** (iii)'s hypothesis is `Δ₁ ≤ ε` **alone** — no `\|S...
+--- row at line 134 :: '**RED · UNCONDITIONAL · witness `W*` fully CONFIRMED · DISCHARGES row '
+    col2 [REFUTED] ...tronger conjecture**, with the burden on `(i) ∨ (iii)`. Not a repair. **`(ii) ⟹ (iii)` is REFUTED at every modulus**, so the "drop (ii), keep (i)∨(iii)" repair stays unavailable. **State ...
+    col2 [refuted] ...e limits plainly, they matter: `W*` refutes implications, not theorems — L4 itself is NOT refuted** (branch (i) holds: `p^P_{x,b_1} = 1/2`, `δ(W*) = 1/2`) **and the 1/3–2/3 conjecture is ...
+    col2 [no longer] ...ds the ratio. **⚠️ NOW THE PART THAT DID NOT LAND AS WRITTEN. The over-reach moved: it is no longer in the headline, it is in the new general theorem introduced to explain the headline.** *...
+    col2 [REFUTED] ...(ε) < ε/2`"* — carries the same condition, and under the transitive-closure reading it is REFUTED: there IS such a witness.** **(3) The vacuity clause** (any `o(ε)` modulus empties (ii) g...
+    col2 [REFUTED] ...olled loss in `Φ`?* **(5) The §4.1 table row *"(ii) + minimality ⟹ balanced pair in `P` — REFUTED"* is BROKEN AS LABELLED and is recorded as a *route* refutation only:** `W*` **satisfies*...
+--- row at line 135 :: '**GREEN · PROVEN, all finite posets · first proof-carried generalisati'
+    col2 [strike] ...over-wide statement was TRUE and provable, so it was repaired by an UPGRADE rather than a strike, which is why it holds the second 4d tally alone. This row states no count of its own and...
+    col2 [retract] ...ed to `n = 8`. **F1 — the one over-labelled universal — was repaired by an upgrade, not a retraction** — [row history H2](docs/state-history/attempt-mg-276d.md). (iii) *"records **precise...
+    col2 [was wrong] ...n the instrument.** Do not read this row as "a control was broken" or "the Laplacian code was wrong"; neither happened, and the port is faithful (same rule, same indexing, per-poset agreeme...
+    col2 [previously read] ...OVERAGE GAP IS RELOCATED, NOT CLOSED (mg-5630 §2.2–§2.3, landed by mg-1319), and this row previously read as though it were closed** — [row history H4](docs/state-history/attempt-mg-276d.md). **S...
+--- row at line 136 :: '**AMBER-POSITIVE · THE BET IS PRICED, AND THE PRICING IS CARRIED BY A '
+    col0 [STRUCK] ...TED with 1 BROKEN, the arc's first, in ledger row `G″`, a row the ticket never asked for: STRUCK by mg-a2bd with the mechanism recorded beside it. THEOREM G STANDS and nothing here depen...
+    col2 [corrected] ...**⭐ THE CONFIRMATION FIRST, because it is the load-bearing result and because a corrected row must not bury what it upheld. THE `2^{Θ(n)}` LOSS IS A THEOREM.** **Theorem G's proof...
+    col2 [CORRECTED] ...sely the left-regular-band product mg-276d recorded as UNUSED (its §8.3(6)). **⚠️ SCOPE — CORRECTED, AND THE CORRECTION IS A STRENGTHENING. LEDGER ROW B6 IS FALSIFIED AS A UNIVERSAL: IT HAS...
+    col2 [CORRECTION] ...ar-band product mg-276d recorded as UNUSED (its §8.3(6)). **⚠️ SCOPE — CORRECTED, AND THE CORRECTION IS A STRENGTHENING. LEDGER ROW B6 IS FALSIFIED AS A UNIVERSAL: IT HAS GENUINE COUNTEREXAM...
+    col2 [used to read] ... UNIVERSAL: IT HAS GENUINE COUNTEREXAMPLES, NOT A COVERAGE GAP.** **What the proposed row used to read, and why its *"undecided"* was a resting place rather than a fact, with the exact rationa...
+    col2 [withdrawn] ...**Read this as a real technique that does not reach the bridge quantity, NOT as claim (3) withdrawn.** One cheap open question is created and is claimed by nobody: characterise the positive...
+    col2 [reopen] ...2` stands, the `2^{Θ(n)}` headline stands, the `A(P)` NOT-BUILT routing stands and is NOT reopened, and everything mg-a806 was ASKED to land it landed correctly.** What broke is **ledger...
+    col2 [STRUCK] ...r at `n = 5` being `A_3 ⊕ A_2`, `A_3 ⊕ C_2`, `A_2 ⊕ A_3`, `C_2 ⊕ A_3`, all `γ_0 = 1/4`. **STRUCK, with the mechanism recorded next to the strike — the mechanism is the valuable part and ...
+    col2 [strike] ...2 ⊕ A_3`, `C_2 ⊕ A_3`, all `γ_0 = 1/4`. **STRUCK, with the mechanism recorded next to the strike — the mechanism is the valuable part and it is this arc's signature failure stated cleanl...
+    col2 [reopen] ...ound **weaker** on the affected posets rather than stronger, so **nothing about `A(P)` is reopened**; and the same fact **repairs row `G′` upward rather than narrowing it** — the per-lev...
+--- row at line 236 :: '**mg-09ea**'
+    col1 [refuted] ...ample (`c` happens to sit in a 2%-wide band) read as a law about `c`'s informativeness; **refuted by the deliverable's own dataset** (`c` accounts for 25% of `R`'s variance)...
+    col2 [refuted] ...ledger row CORRECT; the §0 point and the prose of the section introduced to *replace* the refuted picture**...
+--- row at line 237 :: '**mg-e0ce**'
+    col1 [retract] ...tement is TRUE**: repaired by an *upgrade* (a two-line proof the auditor supplied), not a retraction — so it belongs to the second tally, not the first. **Not** a mere label error: no pro...
+--- row at line 239 :: '**mg-86a3**'
+    col1 [strike] ...the semigroup technique reaches `Δ_AT` only where `Δ_AT` is already free"*), so this is a strike-and-replace, not an upgrade...
+--- row at line 241 :: '**mg-d39d**'
+    col1 [strike] ...presses `λ₂` by `p/(p+q+1) < 1`. **FIRST BROKEN MATHEMATICS IN THE ARC.** Repaired by a **strike with the mechanism recorded beside it** (row **J**)...
+
+scanned 58 table rows (incl. header rows)
+==============================================================================
+F. CITATIONS — every reference in a baseline changed cell must survive
+==============================================================================
+distinct references in baseline changed cells: 64 (156 occurrences)
+RESULT: every reference survives at >= its baseline multiplicity. PASS.
+
+### 5. deictic_refs.py      — references re-pointed by relocation
+==============================================================================
+A. deictic phrases in the REWRITTEN cells
+==============================================================================
+
+### STATE.md:89 (AFTER)   (2 site(s))
+   [that row]  ...r for *every strictly positive* modulus — UNCONDITIONAL, and the `Ω(ε)` condition is DISCHARGED** (mg-3af9, audited mg-c8c6 — see that row): `F(ε) = ε/4` and every `F(ε) = o(ε)` are included, via the witness **`W*`**, which lives arbitrarily far **outside** the `Δ₁·n ...
+   [this cell]  ...so this kills the standalone reading and every `ε`-calibration of it, not L4 *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/ledger-row-11-L4.md`](docs/state-history/ledger-row-11-L4.md).)*...
+
+### STATE.md:114 (AFTER)   (2 site(s))
+   [see below]  ...erable are corrected** — [row history H1](docs/state-history/attempt-mg-c47a-drop.md). The "shrinking trend" support is circular (see below) and is withdrawn. *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-c47a...
+   [this cell]  ...md). The "shrinking trend" support is circular (see below) and is withdrawn. *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-c47a-drop.md`](docs/state-history/attempt-mg-c47a-drop.md).)*...
+
+### STATE.md:124 (AFTER)   (1 site(s))
+   [this cell]  ...cause the argument is at k=1 (Ma–Shenfeld Ex. 1.4 shows k≥3 would break it). *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-48ab.md`](docs/state-history/attempt-mg-48ab.md).)*...
+
+### STATE.md:130 (AFTER)   (3 site(s))
+   [this row]  ...inear extension**, and `1/3` is exactly the threshold — the distinguished order is *canonical*, not chosen. **The "honest caveat" this row used to carry is RETIRED (mg-88bd, audited mg-e35c — F8; see that row), and the verdict *"best constant this route proves = 0"* i...
+   [that row]  ...hed order is *canonical*, not chosen. **The "honest caveat" this row used to carry is RETIRED (mg-88bd, audited mg-e35c — F8; see that row), and the verdict *"best constant this route proves = 0"* is untouched by the retirement** — [row history H1](docs/state-history/...
+   [this cell]  ...ll four load-bearing claims hand-verified; scripts benign (n≤7, no dataset). *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-210d.md`](docs/state-history/attempt-mg-210d.md).)*...
+
+### STATE.md:131 (AFTER)   (2 site(s))
+   [this row]  ... 1` as stated here needs only **(LIB-weak)** `E[inv_e] = o(n²)` — never attacked by any arc. **The limit-vs-rate scoping question this row raised is ANSWERED (mg-88bd, audited mg-e35c) at the mg-88bd row below** — [row history H2](docs/state-history/attempt-mg-a58f.md...
+   [this cell]  ...OVEN → **PLAUSIBLE** (rests on the `Θ(√m)` HEURISTIC rate); nil consequence. *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-a58f.md`](docs/state-history/attempt-mg-a58f.md).)*...
+
+### STATE.md:132 (AFTER)   (2 site(s))
+   [that row]  ...branch (ii) is unconsumed.** **F3's second half — *"and there is no repair available"* — is STRUCK (mg-63e3, audited mg-f825; see that row)** — [row history H3](docs/state-history/attempt-mg-88bd.md). **The *reason* clause is CONFIRMED and now proven far more strongly...
+   [this cell]  ...udit's): a genuine notation catch plus a re-pricing — not new mathematics.** *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-88bd.md`](docs/state-history/attempt-mg-88bd.md).)*...
+
+### STATE.md:133 (AFTER)   (2 site(s))
+   [this row]  ...ε)` form below is what *this* deliverable established and is kept for provenance, not because the restriction still binds. **What this row asserted while the condition was still live** — [row history H1](docs/state-history/attempt-mg-63e3.md). **The witness is entirel...
+   [this cell]  ...eorem it did not claim. The mathematics is right; the quantifiers are not.** *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-63e3.md`](docs/state-history/attempt-mg-63e3.md).)*...
+
+### STATE.md:134 (AFTER)   (1 site(s))
+   [this cell]  ...e broken universal, in the newly-general theorem rather than the headline.** *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-3af9.md`](docs/state-history/attempt-mg-3af9.md).)*...
+
+### STATE.md:135 (AFTER)   (8 site(s))
+   [This row]  ...nt was TRUE and provable, so it was repaired by an UPGRADE rather than a strike, which is why it holds the second 4d tally alone. This row states no count of its own and points at Appendix A's two tallies instead, so it cannot rot on the next recount. This is the firs...
+   [this row]  ...RVIVED THE CONTROL IT WAS MISSING — the gap was in the argument for trusting the instrument, not in the instrument.** Do not read this row as "a control was broken" or "the Laplacian code was wrong"; neither happened, and the port is faithful (same rule, same indexing...
+   [this row]  ...des, on a strictly larger population). **⚠️ THE COVERAGE GAP IS RELOCATED, NOT CLOSED (mg-5630 §2.2–§2.3, landed by mg-1319), and this row previously read as though it were closed** — [row history H4](docs/state-history/attempt-mg-276d.md). **So coverage went from ZER...
+   [the next row]  ...r-algebra ticket **— none is queued, and `A(P)` is NOT to be built as a route to `λ₂(Δ_AT)` (routing, pm-onethird 2026-07-30; see the next row) —** need not re-establish **the foundation claims (1)–(3) supply** — and that is the *only* foundation established here (F4): th...
+   [this row]  ...ct, its higher-codimension faces, its Young-module picture and its BK realisation are **all untouched**. **The cheaper next probe this row recommended WAS RUN AND IS AUDITED (mg-a3d4, audited mg-86a3, landed by mg-a806 — the next row): the answer is NO for `Δ_AT` and ...
+   [the next row]  ... untouched**. **The cheaper next probe this row recommended WAS RUN AND IS AUDITED (mg-a3d4, audited mg-86a3, landed by mg-a806 — the next row): the answer is NO for `Δ_AT` and it is carried by a theorem, so this row's closing suggestion is DISCHARGED, not pending** — [ro...
+   [this row]  ...ITED (mg-a3d4, audited mg-86a3, landed by mg-a806 — the next row): the answer is NO for `Δ_AT` and it is carried by a theorem, so this row's closing suggestion is DISCHARGED, not pending** — [row history H5](docs/state-history/attempt-mg-276d.md). *(Full per-row recor...
+   [this cell]  ...ED, not pending** — [row history H5](docs/state-history/attempt-mg-276d.md). *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-276d.md`](docs/state-history/attempt-mg-276d.md).)*...
+
+### STATE.md:136 (AFTER)   (2 site(s))
+   [this row]  ...f 13 sites), A3 (`V_k` *"infinite"*), A4 (a replication recorded as closing a **control** gap — in both the deliverable §10 **and this row above**), A5, A6, A7, A8, and its `n = 6`-complete contribution. *(Full per-row record — every passage relocated from this cell, ...
+   [this cell]  ...nd this row above**), A5, A6, A7, A8, and its `n = 6`-complete contribution. *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/attempt-mg-a3d4.md`](docs/state-history/attempt-mg-a3d4.md).)*...
+
+==============================================================================
+B. deictic phrases in the RELOCATED text (history files)
+==============================================================================
+
+### docs/state-history/attempt-mg-210d.md   (2 site(s))
+   [that row]  ...aveat", and why the row's own verdict is untouched by the retirement  **Honest caveat RETIRED (mg-88bd, audited mg-e35c — F8; see that row).**  This row used to carry *"(R) ⟹ a constant `λ_std`, which does **not** by itself give `δ` (rate ≠ the problem; the `λ_std → δ...
+   [This row]  ...y the row's own verdict is untouched by the retirement  **Honest caveat RETIRED (mg-88bd, audited mg-e35c — F8; see that row).**  This row used to carry *"(R) ⟹ a constant `λ_std`, which does **not** by itself give `δ` (rate ≠ the problem; the `λ_std → δ` conversion s...
+
+### docs/state-history/attempt-mg-276d.md   (5 site(s))
+   [this row]  ...dix A had been recounted to **nine** (tallies 8 + 1) — **one count, two incompatible values, in one document: the exact A3 defect this row was repaired for, recurring at the repair site because the row hard-codes a number that Appendix A recounts.**  Appendix A's own ...
+   [this row]  ...ndix A's own resolution applies verbatim — *"the repair is not to pick a bigger number, it is to stop reporting one number"* — so this row now points at the tallies instead of restating their sizes, which cannot rot on the next recount.  ### H2 — F1, the one over-labe...
+   [this row]  ...e positive control on the control  **⚠️ BUT THE COVERAGE GAP IS RELOCATED, NOT CLOSED (mg-5630 §2.2–§2.3, landed by mg-1319), and this row previously read as though it were closed.**  NC3's corruption is a **diagonal `±1` gauge conjugation** — `L_parity = D·L_true·D`,...
+   [the next row]  ... anything non-trivial about `λ₂(Δ_AT)`.  **⭐ THAT PROBE WAS RUN AND IS AUDITED — mg-a3d4, audited mg-86a3, landed by mg-a806; see the next row. The answer is NO for `Δ_AT`, and it is carried by a theorem: the standard link-based technique is `2^{Θ(n)}` lossy (Theorem G, r...
+   [this row]  ...ly absent from the graph side — Brown's theorem for the face SEMIGROUP — reaches `Δ_AT` only where `Δ_AT` is already diagonal. So this row's closing suggestion is DISCHARGED, not pending.**  ## Supporting record — derivations, constructions, evidence and audit provena...
+
+### docs/state-history/attempt-mg-63e3.md   (1 site(s))
+   [this row]  ...struck, and why, is here. Sections are numbered `H1`, `H2`, … and the row cites them by number.*  ### H1 — the conditional status this row carried before mg-3af9 discharged it  As of mg-63e3/mg-f825 it was genuinely *conditional* and *almost certainly the operative ca...
+
+### docs/state-history/attempt-mg-88bd.md   (2 site(s))
+   [that row]  ...ble"  **F3's second half — *"and there is no repair available"* — is now OVERSTATED and is STRUCK (mg-63e3, audited mg-f825 — see that row):** it named a property of the *branch* on evidence about the branch's *statement* only, and it never ran the ordinal-sum route; ...
+   [that row]  ...ut the branch's *statement* only, and it never ran the ordinal-sum route; a candidate repair **(IB)** exists (repaired form — see that row).  ### H4 — why §7.2 did not settle satisfiability; THE FALSE LOSS (audit F8/F9)  **Why the deliverable's own §7.2 did not settle...
+
+### docs/state-history/attempt-mg-a58f.md   (1 site(s))
+   [that row]  ...-vs-rate scoping question, and its answer  **Scoping question flagged, not picked — since ANSWERED (mg-88bd, audited mg-e35c; see that row):** this document states the conclusion as a limit, mg-7ae7 states the operative target as the rate `1−λ_std ≤ C/(γn)`; those dif...
+
+==============================================================================
+C. for comparison: the same phrases in the BASELINE cells
+==============================================================================
+  : 89  baseline  1  ->  row  2 + history  0 =  2
+  :114  baseline  1  ->  row  2 + history  0 =  2
+  :124  baseline  0  ->  row  1 + history  0 =  1
+  :130  baseline  2  ->  row  3 + history  2 =  5
+  :131  baseline  1  ->  row  2 + history  1 =  3
+  :132  baseline  2  ->  row  2 + history  2 =  4
+  :133  baseline  0  ->  row  2 + history  1 =  3
+  :134  baseline  0  ->  row  1 + history  0 =  1
+  :135  baseline  7  ->  row  8 + history  5 = 13
+  :136  baseline  1  ->  row  2 + history  0 =  2
+
+### 6. cut_points.py        — 'nothing was cut mid-sentence'
+transitions between kept and relocated text: 97
+  ending at a sentence boundary: 86
+  NOT at a sentence boundary   : 11
+
+  :114  STAYED->MOVED
+     ...alone**. **Do not repeat the reason the deliverable led   ||CUT||   with:** it argued Q1's strongest form ("low δ forces...
+
+  :131  STAYED->MOVED
+     ...mg-dbd1/mg-8201 *and* the footrule form this document uses.) **Four   ||CUT||   corrections:** (1) **this document's § *The single lemma to...
+
+  :132  STAYED->MOVED
+     ...5 adds no bound, it re-reads Step 4.** **Branch   ||CUT||   (iii) — arithmetic CONFIRMED, framing OVERSTATED** (audit F2). The...
+
+  :133  STAYED->MOVED
+     ...**⚠️ THE `n`-DEPENDENCE CLAUSE IS DELIBERATELY NOT LANDED —   ||CUT||   this is a decision, not an omission.** The deliverable...
+
+  :133  STAYED->MOVED
+     ...to mg-3ce3, carrying both.** **KEEP VERBATIM — the deliverable's   ||CUT||   durable contribution, and all of it correct:** (1) the...
+
+  :134  STAYED->MOVED
+     ...≥ 1/F(ε)`, every strictly positive modulus admits it. **The   ||CUT||   escape is constructed, not asserted** — the auditor attacked...
+
+  :135  STAYED->MOVED
+     ...**proved**, so the population is all finite posets. **The   ||CUT||   two degenerate subclasses are named as NON-EVIDENCE, not counted...
+
+  :135  STAYED->MOVED
+     ...all three modes, on a strictly larger population). **⚠️   ||CUT||   BUT THE COVERAGE GAP IS RELOCATED, NOT CLOSED (mg-5630...
+
+  :136  STAYED->MOVED
+     ...computation. **CONTROLS — the credit was verified rather than   ||CUT||   assumed, and it is the half of this that...
+
+  :136  STAYED->MOVED
+     ...1/4`. **STRUCK, with the mechanism recorded next to the   ||CUT||   strike, because the mechanism is the valuable part and...
+
+  :136  STAYED->MOVED
+     ...consumed `G″`, and that is swept for rather than   ||CUT||   assumed**: three sites in the repository (the deliverable's §6...
+
+==============================================================================
+DIRECT TEST: does every relocated PARAGRAPH stand as whole sentences?
+(the 11 above are artifacts of greedy run boundaries where a pointer headline
+ shares a prefix with the passage it points at -- checked directly instead)
+==============================================================================
+  docs/state-history/attempt-mg-88bd.md: start_ok=False end_ok=True
+     'mg-210d Thm 2.4 builds it from the **unconditional** Buser cut bound with **indicator** vectors `1_A' ... 'separate tool that *does* consume `Pr[j≺i] < 1/3` once and yields `λ_std > 1/3`.'
+  docs/state-history/attempt-mg-a3d4.md: start_ok=False end_ok=True
+     "mg-5630's absorbability test was applied to all six mutations: **NONE is a gauge in disguise, none i" ... "d by a downstream FAILURE — so mg-5630's specific defect is NOT repeated here.**"
+  137 relocated paragraphs; 2 not whole-sentence-bounded
