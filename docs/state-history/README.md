@@ -312,6 +312,71 @@ sh code/state_landing_control_2da3/run_all.sh    # the delta control + its negat
 > the fidelity of the model to any real renderer. A bounded coverage statement exists so the
 > next auditor can test the boundary; the boundary moved, so the statement moved with it.
 
+> **THE PROPERTY THE BLOCK ABOVE PUBLISHES IS FALSE AS PUBLISHED, AND A CERTIFIED ROW'S
+> MEANING CAN LIVE IN A FILE NOTHING CERTIFIES — mg-218d B1 and B2, BROKEN, repaired by
+> mg-bee1.** The mechanism above is right and is **not undone**: mg-218d verified it against
+> two real GFM renderers — `marked` and `markdown-it`, **140 of 140** comparisons, including
+> the M12/M13 reversal `COVERAGE.md` itself flags as unverified — and the locator fires on
+> all four of the mutations the ticket asked it about. What moved is the **statement**, and
+> then the layer above it.
+>
+> **B1. "A mutation that changes what a reader SEES must change a digest" is universally
+> quantified over mutations; the mechanism is quantified over a region's OWN SECTION.**
+> `heading` is the ATX path and `position` is an ordinal among the blocks *of that section*.
+> Nothing outside the section is a field. mg-218d's demonstration is a pair differing by one
+> line: the `RETRACTED … is void` paragraph as the first block **inside** the certified
+> section exits **2**; **the same paragraph one line earlier**, as the last block of the
+> section before, exits **0** — and a reader is shown the same page in both. So the mutation
+> `e4426c9` leads with is caught by where its author put the paragraph, not by a property.
+> Three more at that layer exit 0: a retraction in an unrelated section of this file, a new
+> *"READ THIS FIRST — this document is superseded"* section near the top, and the same in
+> `STATE.md`.
+>
+> **The repair is the sentence, in every place it was published.** The property now reads:
+> *a mutation that changes how a certified region is presented — the container it renders
+> in, the heading path in force over it, or its ordinal among the blocks of **its own
+> section** — must change a digest*, and **cross-section context is named as uncovered**.
+> An over-claimed control is worse than a narrow one, because the sentence is what the next
+> reader relies on. `e4426c9`'s commit message cannot be edited and still carries the
+> unqualified form; this block is the correction of record.
+>
+> **The obvious fix was measured and NOT taken.** A document-global `position` would close
+> all four of those mutations — and it re-baselines on a block added or removed anywhere
+> above a certified region, which on these two files is most commits; `code/state_delegation_repair_bee1/`
+> reports the measured rate over the recent history of both. It also does **not** make the
+> unqualified sentence true: a retraction that *replaces* an existing paragraph elsewhere
+> changes what a reader sees, adds no block, and exits 0 under the global ordinal too. Trading
+> a silent miss for a guard that cries wolf on every commit, and still not getting the
+> property, is not a trade worth taking silently, so it was not taken at all.
+>
+> **B2. The certified ledger cell delegates its content to a file outside the certified
+> set.** Row `:135`'s cell carries **six** inline links into `attempt-mg-276d.md` (seven
+> occurrences of the path — one link's text is the path) and cites sections **H1–H5 by
+> name**, and that file opens *"Every passage below was moved verbatim out of that cell …
+> The row now asserts current state and points here."* Deleting a cited section, **inverting
+> the F1 repair there** so the row and the file it sends you to say opposite things, and
+> emptying the file all exited **0**. `COVERAGE.md` named `attempt-*.md` as *files* not
+> covered; what was named nowhere is that the thing it *does* certify is a **pointer**.
+>
+> **What is delegated is what is cited.** The control now reads each certified region's own
+> bytes, extracts every inline link, and digests the target sections a link cites **by
+> name** — a cited section that is gone is a **FAIL**, one whose bytes moved is a **MOVED**,
+> and a target cited but undeclared (or declared but no longer cited) is a **MOVED**, so the
+> delegation surface cannot grow or rot silently. It is one rule over the regions' own text,
+> not a list of files somebody chose. Its bound: only the **cited** sections are delegated,
+> so a retraction at the top of that file, outside every cited section, still exits 0.
+>
+> **What is uncontrolled after this repair, named rather than left to be discovered.**
+> Cross-section presentation context (B1, above — stated, not closed). The **region set**:
+> a contradicting near-copy of a certified block, added under a new heading, exits 0, because
+> no digest over a chosen set of regions can see a region that is not on the set — closing
+> that by counting blockquotes would catch mg-218d's mutation and not the layer, which is
+> the enumeration failure this lineage has already diagnosed twice. And the **instrument**:
+> deleting an entry from `CERTIFIED` narrows coverage silently and exits 0. What did close
+> there is narrower and is claimed as narrow — `norm()` is now checked **behaviourally**
+> against the rule three documents publish for it, so widening it to `str.strip()` is a
+> non-zero exit instead of the silent no-op it was.
+
 > **`which located the source the audit did not name` is an over-claim — mg-bd41 A2, BROKEN,
 > corrected here by mg-2da3.** `b68db5d` writes that of its F2 re-derivation. mg-6a2f **did**
 > name the source, at `:212` of its own document — *"pm-onethird's ticket (a stale revision,

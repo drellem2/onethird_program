@@ -11,6 +11,14 @@
     file's own certified F1 block HTML-commented out of the rendered page.  See "WHAT A
     READER SEES" below.
 
+    mg-bee1: TWO REPAIRS OF mg-218d'S AUDIT.  (1) THE PROPERTY mg-4acd PUBLISHED IS FALSE
+    AS PUBLISHED and is restated to its bound below — the mechanism is section-local and
+    the sentence was universally quantified.  (2) A CERTIFIED REGION'S MEANING CAN LIVE IN
+    A FILE OUTSIDE THE CERTIFIED SET: the certified ledger cell links six times into
+    docs/state-history/attempt-mg-276d.md and cites five of its sections BY NAME, and
+    deleting one of them, inverting the F1 repair inside it, or emptying the file all
+    exited 0.  Section 2c is the repair.  See "WHAT A CERTIFIED REGION POINTS AT" below.
+
 WHY THIS EXISTS.  b68db5d's headline evidence sentence is
 
     "I re-ran both: `sh code/state_audit_6a2f/run_all.sh` reproduces out_audit.txt
@@ -101,9 +109,20 @@ exited 0:
     a certified block wrapped in an HTML COMMENT, absent from every rendered view
     a "RETRACTED ... is void" paragraph inserted immediately ABOVE a certified block
 
-THE PROPERTY NOW CERTIFIED:  A MUTATION THAT CHANGES WHAT A READER SEES MUST CHANGE A
-DIGEST.  Each region carries a second digest, of its PRESENTATION RECORD — an ordered,
-printed-in-full set of four block-level facts:
+THE PROPERTY CERTIFIED, STATED TO ITS BOUND (mg-bee1, repairing mg-218d's B1):
+
+    A mutation that changes HOW A CERTIFIED REGION IS PRESENTED — the container it renders
+    in, the heading path in force over it, or its ordinal among the blocks OF ITS OWN
+    SECTION — must change a digest.
+
+That sentence was published unqualified — "A MUTATION THAT CHANGES WHAT A READER SEES MUST
+CHANGE A DIGEST", in capitals, here, in presentation.py and in e4426c9's commit message —
+and as published it is FALSE.  mg-218d showed it with a pair differing by ONE LINE: the
+B07 retraction as the first block INSIDE the certified section exits 2; THE SAME PARAGRAPH
+ONE LINE EARLIER, as the last block of the section before, exits 0, and a reader is shown
+the same page in both.  See presentation.py's header for the full demonstration and
+COVERAGE.md for what was and was not done about it.  Each region carries a second digest,
+of its PRESENTATION RECORD — an ordered, printed-in-full set of four block-level facts:
 
     state       is the region presented as prose at all, or is it inside a code fence, an
                 HTML comment or a raw HTML block?  (for the ledger cell: does its line
@@ -146,10 +165,47 @@ COVERAGE.md as a reversal rather than folded in quietly.  Locating BY KEY rather
 line number is unchanged and still buys what it always bought: the instrument does not rot
 when lines are inserted somewhere else in the file.
 
+WHAT A CERTIFIED REGION POINTS AT (mg-bee1, repairing mg-218d's B2).
+--------------------------------------------------------------------
+The certified ledger cell is not self-contained.  It carries SIX inline links into
+docs/state-history/attempt-mg-276d.md (seven occurrences of that path: one link's own text
+is the path) and cites five of that file's sections — H1 to H5 — BY NAME.  The target
+opens "Every passage below was moved verbatim out of that cell ... The row now asserts
+current state and points here."  A reader who follows the certified region reads that file.
+Nothing certified it, and three mutations at it exited 0: a cited section deleted; the F1
+repair INVERTED there, so the row and the file it sends you to say opposite things; the
+file emptied with all six links left dangling.
+
+WHAT IS DELEGATED IS WHAT IS CITED, and that is the whole rule.  Section 2c reads each
+certified region's OWN BYTES, extracts every inline link, and for each link whose text
+names a section (`H<n>`) treats that section of the target as DELEGATED CONTENT of the
+citing region.  Every delegated section carries a content digest under the same N as every
+other certified region.  Three consequences, all deliberate:
+
+    * A cited section that is missing is a FAIL, not a MOVED — a certified region pointing
+      at something a reader cannot read is damage, exactly as a certified region nobody is
+      shown is damage.
+    * A delegated section whose bytes change is a MOVED, on the same footing as a region's
+      own bytes changing.
+    * DEFAULT-DENY BOTH WAYS.  A link target found in a certified region and NOT declared
+      in DELEGATED is non-zero, and a declared target no longer cited by any region is
+      non-zero.  So the delegation surface cannot grow or rot silently; it is one rule over
+      the certified regions' own text, not a list of files somebody chose.
+
+THE BOUND, said here because it is the next auditor's target: only the CITED sections are
+delegated.  The target file's own framing — its title, its opening paragraph, its
+uncited sections — is outside coverage, and a retraction inserted at the top of that file
+exits 0.  The baseline cell at b68db5d^ carries the same six links and is deliberately NOT
+followed: it is the BEFORE side of a measured delta, not text a reader is shown today.
+
 COVERAGE — what is digested, and what is deliberately not.
 ----------------------------------------------------------
-DIGESTED (9 regions, listed in CERTIFIED below), each with TWO digests — content and
-presentation:
+DIGESTED (11 regions, listed in CERTIFIED below), each with TWO digests — content and
+presentation.  The figures below are the characters after N and are printed, measured, by
+section 2 on every run; this list is the human-readable copy of CERTIFIED and nothing reads
+it.  (mg-bee1: it said "9 regions" and enumerated nine after mg-4acd made the set ten — a
+drift in this docstring, not in the code, COVERAGE.md or the run, all three of which said
+ten.  Corrected here and the tenth entry added.)
     STATE.md      row mg-276d's content cell, in the working tree      7,876 chars
     STATE.md      the same cell at b68db5d^, the BEFORE of the delta   7,703 chars
     README        the F2 correction block                              2,306 chars
@@ -159,6 +215,13 @@ presentation:
     README        the index note carrying the moved cell figure           310 chars
     README        the A1 correction block (b68db5d's headline sentence) 3,060 chars
     README        the mg-2216 / mg-7870 correction to that A1 block       2,736 chars
+    README        the mg-babf / mg-4acd correction to that A1 block       3,695 chars
+    README        the mg-218d / mg-bee1 correction to that A1 block     (section 2 prints it)
+
+DELEGATED (mg-bee1), digested under the same N but NOT carrying a presentation record —
+these are sections of a file the certified text POINTS AT, not regions of the two files
+this instrument reads:
+    docs/state-history/attempt-mg-276d.md   sections H1-H5, cited BY NAME by the ledger cell
 
 NOT COVERED, on purpose — this instrument certifies b68db5d's DELTA, not the two files:
     * Every other row of STATE.md's ledger, and every other line of it.  Only the whole-file
@@ -166,7 +229,21 @@ NOT COVERED, on purpose — this instrument certifies b68db5d's DELTA, not the t
       section 8, look outside the certified row, and those are invariants, not digests.
       Deleting an unrelated ledger row exits 0 here.
     * Every other paragraph, table and block of the state-history README, including the
-      per-row index table's own numeric columns and all ten attempt-*.md files.
+      per-row index table's own numeric columns, and every part of the ten attempt-*.md
+      files EXCEPT the sections a certified region cites by name (section 2c).
+    * CROSS-SECTION PRESENTATION CONTEXT (mg-218d B1, NOT closed — see the property above).
+      A retraction paragraph one line earlier than the one that fires, on the other side of
+      a heading, exits 0; so does one in an unrelated section, a new "READ THIS FIRST"
+      section near the top, and the same in STATE.md.  COVERAGE.md costs the obvious fix.
+    * THE REGION SET ITSELF (mg-218d M2, L2, NOT closed).  A contradicting near-copy of a
+      certified block, added under a new heading, exits 0: a digest over a chosen set of
+      regions cannot see a region that is not on the set.  Naming it here is the whole of
+      what this repair does about it.
+    * THIS INSTRUMENT (mg-218d M1, L0, PARTLY closed).  Deleting an entry from CERTIFIED
+      narrows coverage silently and exits 0.  What section 0 does close is the narrower
+      question of whether norm() still APPLIES the rule this file PUBLISHES; it is a
+      behavioural check on one stated rule and is not a certification of the instrument,
+      which nothing here can be.
     * Padding at the outer edge of a digested region (see the normalisation rule).
     * THE ROW'S INDEX WITHIN THE LEDGER TABLE, and any certified region's absolute line
       number.  Position is certified as an ordinal among the BLOCKS of a section, not as a
@@ -202,14 +279,19 @@ EXIT CODES, both non-zero on failure and distinguishable on purpose:
 
     0   every check passed
     1   FAIL   — a certification check failed.  b68db5d's repair is damaged in the tree, a
-                 certified region can no longer be located at all, or a certified region is
+                 certified region can no longer be located at all, a certified region is
                  NO LONGER PRESENTED TO A READER — inside a code fence, inside an HTML
                  comment, inside a raw HTML block, or (for the ledger cell) no longer
-                 rendering as a table row.  A region nobody is shown is damage, not drift.
+                 rendering as a table row — a section a certified region CITES BY NAME is
+                 gone from the file it points at, or norm() no longer applies the rule this
+                 file publishes.  A region nobody is shown, and a citation that leads
+                 nowhere, are both damage rather than drift.
     2   MOVED  — the repair's load-bearing sentences are intact, but a certified region's
                  content digest no longer matches, its PRESENTATION RECORD no longer
                  matches (it moved under a different heading, or its position among the
-                 blocks of its section changed), a measured constant of the landing has
+                 blocks of its section changed), a DELEGATED section's bytes have changed
+                 or the delegation surface itself has (a target cited and not declared, or
+                 declared and no longer cited), a measured constant of the landing has
                  changed, or a presentation guard tripped — a block construct outside
                  presentation.py's declared subset, or raw HTML in text presented as prose.
                  Re-baseline this instrument, record the new figure, and say which commit
@@ -241,6 +323,7 @@ beside it and is part of this instrument.
 """
 import hashlib
 import os
+import re
 import subprocess
 import sys
 
@@ -298,6 +381,35 @@ def norm(text):
 
 def digest(text):
     return hashlib.sha256(norm(text)).hexdigest()
+
+
+# --- the published rule, checked BEHAVIOURALLY rather than only stated (mg-bee1) ----------
+# mg-218d's I2 widened norm() from `.strip(EDGE)` to `.strip()` — the exact rule mg-babf
+# probed five ways and cleared — and the control exited 0, because on this material the two
+# agree.  So the rule was published in three documents and read by nothing.  These probes
+# are the rule as an assertion: each one is a sentence of the docstring above, and each
+# fails if the code stops meaning it.  They are BEHAVIOURAL, not textual, so they fire on a
+# widened EDGE constant exactly as on a widened strip() call.
+#
+# WHAT THIS IS NOT.  It is not a certification of this instrument: an edit that changes
+# norm() AND deletes these probes walks past, and nothing inside a file can stop that.  It
+# raises one specific silent divergence — the code drifting from its own published rule —
+# from free to two edits, and that is the whole claim.
+NORM_RULE = [
+    ("space/tab/CR/LF are stripped from the two ends",
+     " \t\r\nx y\r\n \t", "x y"),
+    ("U+00A0 at an end is NOT whitespace to this rule (str.strip() eats it)",
+     "\u00a0x\u00a0", "\u00a0x\u00a0"),
+    ("U+2028 at an end is NOT whitespace to this rule (str.strip() eats it)",
+     "\u2028x\u2028", "\u2028x\u2028"),
+    ("nothing INTERIOR is touched",
+     "a \t  \n b", "a \t  \n b"),
+]
+
+
+def norm_rule_probes():
+    """(label, ok) for each published property of N.  All True iff norm() reads as stated."""
+    return [(label, norm(src) == want.encode("utf-8")) for label, src, want in NORM_RULE]
 
 
 def exit_code():
@@ -477,6 +589,9 @@ CERTIFIED = [
     ("readme.A1.4acd", "the mg-babf / mg-4acd correction to the A1 block", "quote",
      "mg-babf B1, BROKEN, repaired by mg-4acd", 3695,
      "779702c03697be89bfd9c40ffc483e78aec834a6d3eb58989ac60399aef45c11"),
+    ("readme.A1.bee1", "the mg-218d / mg-bee1 correction to the A1 block", "quote",
+     "mg-218d B1 and B2, BROKEN, repaired by", 5040,
+     "30f205b22f3a4cbf0121a98e20c9817d5f3bcad51d1ca6f8f0c3dc2739a72be4"),
 ]
 
 # =========================================================================================
@@ -489,6 +604,15 @@ CERTIFIED = [
 # Baselined by mg-4acd against the working tree at 1db0be9.  Regenerate with
 #     python3 code/state_landing_control_2da3/delta_control.py --emit-baseline
 # and say in the commit message WHICH COMMIT MOVED IT.
+#
+# WHICH COMMIT MOVED THESE, and it is worth reading as a measurement of the running cost
+# rather than as bookkeeping: mg-bee1 added ONE certified block to the README, in the
+# `## What certifies a change to these files, and what does not` section.  No certified
+# region's BYTES changed, so no CONTENT digest moved.  Four PRESENTATION digests moved —
+# readme.A1, readme.A1.7870, readme.A1.4acd and the new readme.A1.bee1 — because the
+# section's block count went 6 -> 7 and that count is a field of the record.  That is the
+# section-local cost, paid once per generation of this lineage by the generation that adds
+# a block.  COVERAGE.md costs the DOCUMENT-GLOBAL alternative against it.
 #
 # A NOTE ON WHAT MOVES THESE.  A presentation digest is by construction sensitive to the
 # region's surroundings: adding or removing a block anywhere in the region's section moves
@@ -505,10 +629,96 @@ PRESENTATION = {
     "readme.B1": "7d1a3e1daaee38e0622e4133a2c475828d4928d2a42b30cde51e58cfc6f3fa5d",
     "readme.B1.A3": "245cc23b4b24a718a7fe220dff71937878496f5546c6e11dce99481dc3ac95b9",
     "readme.index": "5a73c86c64b2ec773e73dff12ee0f49f8477f7397ebe901f5049d364c907d4df",
-    "readme.A1": "f642d170bc7bdc7c869ea8f23e1f452c2994a27fb16a446e554c5bcb975a2780",
-    "readme.A1.7870": "25892df23732ba028e28ba99d83b5cc4aa16d552f2d877dfd44fdff1c81e3326",
-    "readme.A1.4acd": "5c28bc769bf19d59ed094432ee6629bf048e48cbcd32eababdf32e1be315fade",
+    "readme.A1": "4a39b45770b65b16e454c815a1122fbe5f256f3ee1bb891ed3aeeda0841575b1",
+    "readme.A1.7870": "4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327",
+    "readme.A1.4acd": "5cab7f6bc3c786be33d8745744fd0c3361b5a2af2ca3a3666b0e67c844002350",
+    "readme.A1.bee1": "df248b6b754bde6f76529d7b925006a3d3494cb63bf2394351bd95f5502275be",
 }
+
+
+# =========================================================================================
+# WHAT A CERTIFIED REGION POINTS AT (mg-bee1, repairing mg-218d's B2).
+#
+# DELEGATED: target path -> {section name cited by a certified region: (chars after N,
+# sha256 of N)}.  The KEYS are not a list somebody chose: `delegation_map()` derives them
+# from the certified regions' own bytes, and section 2c fires if the derived set and this
+# table disagree in either direction.  What is in the table is the BASELINE of the
+# delegated content, exactly as CERTIFIED is the baseline of the regions' own.
+#
+# Baselined by mg-bee1 against the working tree at e1bacd2.  Regenerate with
+#     python3 code/state_landing_control_2da3/delta_control.py --emit-baseline
+# and say in the commit message WHICH COMMIT MOVED IT.
+# =========================================================================================
+_LINK = re.compile(r"\[((?:[^\]\\]|\\.)*)\]\(([^)\s]+)\)")
+_CITE = re.compile(r"\bH([1-9][0-9]*)\b")
+
+DELEGATED = {
+    "docs/state-history/attempt-mg-276d.md": {
+        "H1": (3473, "3c8e966f7412ed8a7d9dd522fce40071283abb555477b3b5071225b8ecffda64"),
+        "H2": (383, "4413b9e81ea4f590762a36ba0253032a365ee180bd9f98a42ebd73b3bc53b670"),
+        "H3": (544, "cea7a8207b7dedb11eae2d3b7ea9bc75a22e4cd07e9536eb90e35de1d432fc60"),
+        "H4": (779, "14ffec4dd742c4f2867a3079b51166c8f1d40804e64f7ad38f2368310489cd8f"),
+        "H5": (864, "4e192bc8bde4fca17021e507e7308fd86a844ae7d54109eb5811e1aeebb4aa6e"),
+    },
+}
+
+# The certified regions whose links are FOLLOWED.  `cell-base` is excluded on purpose: it
+# is the BEFORE side of a measured delta, so its links are a fact about b68db5d^ and not
+# about the page a reader is shown today.  Following them would make every edit to the
+# target a mismatch against a historical pointer, which is not a claim this file makes.
+FOLLOWED_KINDS = ("cell", "quote", "para")
+
+
+def outbound(text):
+    """(link text, target) for every inline markdown link in a region's own bytes."""
+    return [(m.group(1), m.group(2)) for m in _LINK.finditer(text)]
+
+
+def delegation_map(regions):
+    """(target path -> {section names cited by name}, target -> {citing region ids}).
+
+    ONE RULE over the regions' own text, not a list of files: every inline link whose
+    target is a repo-relative path is a delegation of that region to that file, and a link
+    whose TEXT names a section (`H<n>`) is a citation of that section by name.  A link
+    target that is a URL, a fragment, or an absolute path is not a repo path and is not a
+    delegation — nothing outside this repository is followed by this instrument.
+
+    `regions` is (region id, the directory its FILE sits in, its text): a relative link is
+    resolved against the file that carries it, so a README region linking `README.md` and
+    the ledger cell linking `docs/state-history/...` both land on the same repo path.
+    """
+    names, citers = {}, {}
+    for rid, basedir, text in regions:
+        for label, target in outbound(text):
+            if "://" in target or target.startswith(("#", "/", "mailto:")):
+                continue
+            path = os.path.normpath(os.path.join(basedir, target))
+            names.setdefault(path, set())
+            citers.setdefault(path, set()).add(rid)
+            for m in _CITE.finditer(label):
+                names[path].add("H" + m.group(1))
+    return names, citers
+
+
+def named_section(text, name):
+    """The ATX section of `text` whose heading title begins with `name`.
+
+    Heading line INCLUDED, running to the next heading of the same or a shallower level —
+    so retitling the heading, hollowing the body, or deleting the section all move or
+    remove the digest.  Exactly one heading must match; zero or two is a LookupError, on
+    the same rule as every other locator here.
+    """
+    lines = text.split("\n")
+    pat = re.compile(r"^(#{1,6})\s+" + re.escape(name) + r"\b")
+    hits = [(i, len(pat.match(l).group(1))) for i, l in enumerate(lines) if pat.match(l)]
+    if len(hits) != 1:
+        raise LookupError(f"heading {name!r} matched {len(hits)} lines, need exactly 1")
+    i, level = hits[0]
+    j = i + 1
+    deeper = re.compile(r"^#{1,%d}\s" % level)
+    while j < len(lines) and not deeper.match(lines[j]):
+        j += 1
+    return i + 1, j, "\n".join(lines[i:j])
 
 
 def extract(rid, kind, marker, state_tree, state_base, readme_tree):
@@ -598,6 +808,34 @@ def emit_baseline(docs, state_tree, state_base, readme_tree):
             print(f"    # {k:<10} {v}")
         print(f'    "{rid}": "{pres.record_digest(record)}",')
     print("}")
+    followed = []
+    for rid, _label, kind, marker, _chars, _sha in CERTIFIED:
+        if kind not in FOLLOWED_KINDS:
+            continue
+        try:
+            _where, text = extract(rid, kind, marker, state_tree, state_base, readme_tree)
+        except LookupError:
+            continue
+        followed.append((rid, "" if kind == "cell" else os.path.dirname(README), text))
+    cited, _citers = delegation_map(followed)
+    print("DELEGATED = {")
+    for target in sorted(cited):
+        print(f'    "{target}": {{')
+        try:
+            target_text = tree(target).decode("utf-8")
+        except OSError as exc:
+            print(f"        # UNREADABLE ({exc}) — left for a human")
+            print("    },")
+            continue
+        for name in sorted(cited[target], key=lambda s: (len(s), s)):
+            try:
+                _s, _e, body = named_section(target_text, name)
+            except LookupError as exc:
+                print(f'        # "{name}": UNLOCATABLE ({exc}) — left for a human')
+                continue
+            print(f'        "{name}": ({len(norm(body).decode())}, "{digest(body)}"),')
+        print("    },")
+    print("}")
     return 0
 
 
@@ -627,6 +865,21 @@ def main():
     cells_tree = [c for _, cells in rows_tree for c in cells]
     print(f"                             {len(rows_tree)} table rows, "
           f"{len(cells_tree)} cells (the population every whole-file tally below is over)")
+    print()
+
+    # ---- 0. THE NORMALISATION, AS AN ASSERTION AND NOT ONLY AS PROSE (mg-bee1) -----------
+    print("0. THE NORMALISATION N, CHECKED AGAINST THE RULE THIS FILE PUBLISHES")
+    print("   Every digest below is taken under N.  mg-218d widened N from .strip(EDGE) to")
+    print("   .strip() and this control exited 0, because on this material the two agree —")
+    print("   so the rule was published in three documents and read by nothing.  These are")
+    print("   the published sentences as behavioural probes.  They do NOT certify this")
+    print("   instrument; nothing inside a file can.  They stop the code from drifting")
+    print("   away from its own stated rule for free.")
+    for rlabel, ok in norm_rule_probes():
+        check(f"N: {rlabel}", ok,
+              "" if ok else ">>> norm() no longer applies the rule this file publishes; "
+                            "every digest below is taken under a different equivalence "
+                            "than the one that was certified", kind=FAIL)
     print()
 
     # ---- 1. locate the row b68db5d edited, by key, in the tree ---------------------------
@@ -717,6 +970,86 @@ def main():
             check(f"{rid} — {label}: presentation", ok, detail, kind=MOVED)
             if not ok:
                 _digest_misses.append((rid, label, "presentation record moved"))
+    print()
+
+    # ---- 2c. WHAT A CERTIFIED REGION POINTS AT (mg-bee1) ---------------------------------
+    print("2c. DELEGATED CONTENT — the sections a certified region CITES BY NAME in a file")
+    print("    outside the two this instrument reads.  The certified ledger cell is not")
+    print("    self-contained: it links into the attempt file and cites its sections by")
+    print("    name, so a reader who follows the certified text reads them.  WHAT IS")
+    print("    DELEGATED IS WHAT IS CITED — the rule and its bound are in this file's")
+    print("    header.  A cited section that is gone is a FAIL; one whose bytes moved is a")
+    print("    MOVED; a target cited and not declared, or declared and not cited, is a")
+    print("    MOVED, so the delegation surface cannot grow or rot silently.")
+    followed = []
+    for rid, label, kind, marker, _chars, _sha in CERTIFIED:
+        if kind not in FOLLOWED_KINDS:
+            continue
+        try:
+            _where, text = extract(rid, kind, marker, state_tree, state_base, readme_tree)
+        except LookupError:
+            continue                      # already reported as a FAIL in section 2
+        basedir = "" if kind == "cell" else os.path.dirname(README)
+        followed.append((rid, basedir, text))
+    cited, citers = delegation_map(followed)
+    print(f"         {len(followed)} certified regions followed "
+          f"(every kind but the {BASELINE} baseline cell, which is a historical pointer)")
+    check("the delegation surface is exactly what is DECLARED",
+          set(cited) == set(DELEGATED),
+          f"cited by certified regions: {sorted(cited) or '(none)'}\n"
+          f"         declared in DELEGATED: {sorted(DELEGATED) or '(none)'}",
+          kind=MOVED)
+    for target in sorted(set(cited) | set(DELEGATED)):
+        want = DELEGATED.get(target, {})
+        names = cited.get(target, set())
+        who = ", ".join(sorted(citers.get(target, ())))
+        print(f"  {target}")
+        print(f"         cited by {who or '(nothing)'}; "
+              f"{len(names)} section(s) cited by name: {', '.join(sorted(names)) or '(none)'}")
+        if target not in DELEGATED:
+            # An UNDECLARED target is not followed.  This instrument has no baseline for
+            # it, so the honest report is that the delegation surface moved — already
+            # counted by the check above — and not FAIL "the file is missing", which would
+            # say a certified delegation stopped resolving when there was never one.
+            print("         (not declared; not followed — see the surface check above)")
+            continue
+        try:
+            target_text = tree(target).decode("utf-8")
+        except OSError as exc:
+            check(f"{target}: the file a certified region points at EXISTS", False,
+                  f"{exc}\n"
+                  f"         >>> a DECLARED delegation of a certified region no longer "
+                  f"resolves", kind=FAIL)
+            _digest_misses.append((target, "delegated target", "the file is not there"))
+            continue
+        check(f"{target}: the section names cited are the section names declared",
+              names == set(want),
+              f"cited {sorted(names)}; declared {sorted(want)}", kind=MOVED)
+        for name in sorted(names | set(want), key=lambda s: (len(s), s)):
+            wc, wsha = want.get(name, (None, None))
+            try:
+                s, e, body = named_section(target_text, name)
+            except LookupError as exc:
+                check(f"{target} {name}: CITED BY NAME and PRESENT", False,
+                      f"{exc}\n"
+                      f"         >>> a certified region sends a reader to a section that "
+                      f"is not there", kind=FAIL)
+                _digest_misses.append((target, f"delegated section {name}", str(exc)))
+                continue
+            got_norm = norm(body)
+            got_sha = digest(body)
+            ok = got_sha == wsha
+            check(f"{target} {name}", ok,
+                  f"lines {s}-{e}; {len(got_norm.decode('utf-8'))} characters, "
+                  f"{len(got_norm)} bytes after N\n"
+                  f"         certified sha256 {wsha}\n"
+                  f"         measured  sha256 {got_sha}"
+                  + ("" if ok else
+                     "\n         >>> the certified cell cites this section BY NAME and its "
+                     "bytes are not the bytes that were certified"), kind=MOVED)
+            if not ok:
+                _digest_misses.append((target, f"delegated section {name}",
+                                       "delegated bytes moved"))
     print()
 
     # ---- 3. the F1 repair itself — CLASSIFIERS, not the certification --------------------
