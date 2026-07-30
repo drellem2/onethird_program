@@ -117,13 +117,18 @@ extremal and the reported tie is a tautology with nothing to compare against. In
 sibling statistic `qfrac` **is** null under the same treatment, so this is not an artefact of the method.
 Re-measured in mg-dea5, audited in mg-0a11.
 
-**THE EVIDENTIAL STRENGTH IS 1/5, NOT 1/38,760 — corrected here, and it was sent to Daniel wrong.** mg-0a11:
-the n=8 "new population" is **20 of 20 chain-extensions of the n=7 group**, so given n=7 the **n=8 outcome had
-probability 1**. The sequence 1/7 → 1/286 → 1/38,760 is *"not evidence accumulating with n; it is one
-observation"*, deterministically nested. **Multiplicity was never the problem; DEPENDENCE is**, and the repair
-does not discuss it. Distinct cores per group: 5, 5, 5 at n=6,7,8 and 6 at n=9,10,11, with **exactly one
-extremal core at every size**; the honest exact p over distinct cores is **1/5**, and the whole `e=9` family
-from n=5 to n=11 (160 group memberships) has **six cores**.
+**THE EVIDENTIAL STRENGTH IS 1/4 — corrected twice, and the SECOND correction reverses a planning conclusion.**
+mg-0a11: the n=8 "new population" is **20 of 20 chain-extensions of the n=7 group**, so given n=7 the n=8 outcome
+had **probability 1**. The sequence 1/7 → 1/286 → 1/38,760 is *"not evidence accumulating with n; it is one
+observation"*, deterministically nested. **Multiplicity was never the problem; DEPENDENCE is.** Then mg-c6bc:
+the dependence is **not** exhausted by cut elements — **order duality collapses the five cores to three**, so the
+honest exact p over genuinely distinct cores is **1/4**, not 1/5.
+
+**REVERSED (mg-c6bc): "nothing enters after n=6" is FALSE — a cut-free sixth core enters at n=9.** So **larger
+`n` DOES yield new independent cores**, and the advice recorded here at 17:20 — *strengthening this needs
+independent cores, not larger `n`* — **was wrong and would have ruled out a route that works.** Both corrections
+went to Daniel in one message, led by this one: the p-value is the part that travels and it points the opposite
+way to the finding that matters.
 
 **Do not over-correct — that is the likelier error from here and the more comfortable one.** The audit is
 explicit that the mathematics holds, every figure reproduces from a disjoint instrument, and **the separation
