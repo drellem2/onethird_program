@@ -10,7 +10,10 @@ Landed by **mg-7870**, repairing the two BROKEN items in **mg-2216**'s audit of
 mg-7870 / `e924590` — *the boundary moved, so the statement moved with it*. Repaired by
 **mg-bee1** against **mg-218d**'s audit of mg-4acd / `e4426c9`: *the boundary had not
 moved — the statement had over-run it*, and a certified region turned out to delegate its
-content to a file outside the certified set.
+content to a file outside the certified set. Repaired again by **mg-0049** against
+**mg-5644**'s audit of mg-bee1 / `a2d5a81`+`2a29f30`: *the repair had created an
+uncontrolled surface* — the delegated sections got a content digest and neither a
+presentation record nor a guard, so one `<!--` line showed a reader a blank page at exit 0.
 
 ## The mechanism
 
@@ -22,6 +25,7 @@ Each certified region carries **two** digests, compared against constants baked 
 | **content** — SHA-256 of the region's normalised bytes | *are these the certified bytes?* | mg-7870 |
 | **presentation** — SHA-256 of the region's presentation record | *is a reader shown them, in the same place?* | mg-4acd |
 | **delegated** — SHA-256 of each target section a region cites *by name* | *does what it points at still say what it said?* | mg-bee1 |
+| **delegated presentation** — SHA-256 of each cited section's presentation record | *is a reader shown what the citation sends them to?* | mg-0049 |
 
 > **Why a second digest rather than a wider first one.** mg-babf probed the content digest
 > from a standing start and it held: mg-2216's five survivors were re-implemented from their
@@ -225,9 +229,75 @@ what it is.
 |---|---|---|
 | `docs/state-history/attempt-mg-276d.md` | `H1` `H2` `H3` `H4` `H5` | `cell.tree` |
 
-**The bound, stated because it is the next auditor's target.** Only the **cited** sections
-are delegated. The target's own framing — its title, its opening paragraph, its uncited
-sections — is outside coverage, and a retraction inserted at the top of that file exits 0.
+### Is a reader SHOWN what the citation sends them to (mg-0049)
+
+**mg-bee1 stopped at the bytes, and that was the defect.** The two files this instrument
+**reads** carry three things: a content digest, a presentation record, and section 8's
+default-deny guards over the whole file. The file it **points at** carried the first of the
+three. So the surface the repair itself created was the one place where *"are these the
+certified bytes?"* was asked and *"is anybody shown them?"* was not — and mg-5644 collected
+on it with the two mutations mg-4acd exists to catch, moved one file out:
+
+| | mutation | against mg-bee1 | against mg-0049 |
+|---|---|---|---|
+| `Q1`/`R1` | one `<!--` line at the top of the target, never closed | **exit 0** | **exit 1** |
+| `Q2`/`R2` | one ` ``` ` line at the top of the target, never closed | **exit 0** | **exit 1** |
+
+In both, every cited section is byte-identical and every delegated digest matches, and
+`marked` and `markdown-it` agreed over 60 comparisons that **zero of the five cited sections
+were visible at all**. A reader following the certified cell's six links **was shown a blank
+page**.
+
+**The asymmetry was the defect, so the asymmetry is what was removed, and nothing new was
+built.** Each cited section now carries a **presentation record** from the same
+`presentation.py` that serves the eleven certified regions — taken over the **whole
+section**, heading line included, so `state` is `rendered` only if every line of it is — and
+**every declared target file** is read by section 8's two default-deny guards exactly as
+`STATE.md` and the README are.
+
+| event | verdict | why |
+|---|---|---|
+| a cited section is present and **shown to nobody** | **FAIL** | on the same footing as a certified region nobody is shown |
+| a cited section's **presentation record moved** — it now sits under a different heading path | **MOVED** | re-baseline and say which commit moved it |
+| the target file trips either **section-8 guard** | **MOVED** | a construct the model does not resolve, or raw HTML in prose, on a surface a certified region points at |
+
+`position` is **inert** on this surface and the record says so in those words rather than
+dressing it up: a section is not a block, so it has no ordinal among blocks. The two fields
+that carry the coverage here are `state` and `heading`.
+
+**Which of the two halves catches which row — measured, because the one-line summary of this
+repair is wrong.** mg-5644's recommendation, and the work item filed from it, both say to
+extend section 8's guards. Taken literally and **alone that closes `R1` and not `R2`**: a
+fenced code block is *inside* `presentation.py`'s declared subset, so `anomalies()` is silent
+about it by design and `html_tokens()` skips fenced lines by construction. `R2` is caught by
+the presentation record alone, on `state = fenced-code` — which is exactly how the same
+mutation is caught in the two files the instrument reads. It is still **one** mechanism;
+both halves of it simply had to cross the file boundary.
+`code/state_delegation_repair_0049/split_0049.py` measures this over all nine rows: **8 of 9
+silent under mg-bee1, 4 of 9 under a guards-only extension, 2 of 9 here** — and those two are
+the bound below.
+
+**The bound, stated in terms of what a READER IS SHOWN.** This lineage's recurring defect is
+a true sentence quantified over the wrong thing, and mg-bee1 published this bound as *"closed
+for **cited sections**"* — quantified over **which sections are followed**, which says
+nothing about whether a reader sees them. What is certified is:
+
+> A reader who follows a certified region's citation **is shown** the section it names, as
+> prose, under the heading path that was certified — for every section any certified region
+> cites by name.
+
+> **What a reader is shown on that page outside those sections is not certified.** The
+> target's title, its opening paragraph and its uncited sections are text a reader **is**
+> shown, and no field of any record answers for them: a retraction at the top of the target
+> (`R3`) and an uncited section appended to it (`R4`) both still exit **0**. The claim is
+> about the sections a citation **lands on**, not about the page they sit in.
+
+**The cost, printed rather than conceded.** Extending default-deny to a third file means the
+target pays what the two certified files already pay: `R9` — a single tab in the target's
+uncited opening paragraph, which changes **nothing** a reader sees on either renderer — exits
+**2**. A re-baseline nobody expected is how a control stops being run, so the row is in the
+battery and this sentence is in the coverage statement.
+
 The baseline cell at `b68db5d^` carries the same six links and is deliberately **not**
 followed: it is the BEFORE side of a measured delta, not text a reader is shown today.
 
@@ -289,23 +359,44 @@ So this is what the second digest does *not* decide:
   The cost paragraph still stands as the cost; what no longer stands is calling it "the one
   that matters". It is measured. The layers below are not.
 
-### Which layer is uncontrolled after mg-bee1
+### Which layer is uncontrolled after mg-0049
 
-**Five generations of this control have each closed their predecessor's gap and exposed a
+**Six generations of this control have each closed their predecessor's gap and exposed a
 new one, so this section assumes the blind spot MOVED rather than closed.** mg-218d ran
 sixteen mutations at the layers above mg-4acd's, each carrying **the exit code predicted
 before the run**; sixteen of sixteen matched. Ten changed what a reader is shown and exited
-0. This is where they stand after this repair.
+0. mg-5644 then found the seventh gap **on ground mg-bee1's own repair had just laid**. This
+is where they stand now.
 
-| layer | what it decides | after mg-bee1 |
+| layer | what it decides | after mg-0049 |
 |---|---|---|
-| **L0 instrument** | the constants and rules that define every layer below | **partly closed.** `norm()` is now checked against its published rule (`I2`). Deleting an entry from `CERTIFIED` still exits 0 (`I1`) |
-| **L1 what a region points at** | the files and sections the certified text delegates to | **closed for cited sections** (`T1` `T2` `T3`). The target's own framing is not |
+| **L0 instrument** | the constants and rules that define every layer below | **partly closed.** `norm()` is now checked against its published rule (`I2`). Deleting an entry from `CERTIFIED` still exits 0 (`I1`), and mg-5644's `norm5644.py` shows 23 of 25 single-character widenings of `EDGE` still exit 0 |
+| **L1 what a region points at** | the files and sections the certified text delegates to | **closed for the cited sections' bytes AND for whether a reader is shown them** (`T1` `T2` `T3`; `R1` `R2` `R6` `R8`). What a reader is shown on that page **outside** the cited sections is not (`R3` `R4`) — see the bound above |
 | **L2 region set** | which regions inside the two files are certified | **OPEN** (`S1`) |
 | **L3 region location** | which bytes are the region | closed by the marker locator; all four of mg-218d's fire, each classified FAIL |
-| **L4 presentation** | is a reader shown them, and where | **section-local, and now SAID to be** (`P2` `P3` `P4` `P6` still exit 0) |
+| **L4 presentation** | is a reader shown them, and where | **section-local, and now SAID to be** (`P2` `P3` `P4` `P6` still exit 0). **Now applied on the delegated surface too** (`R1` `R2`), where it is bounded to the cited sections in exactly the same shape |
 | **L5 byte content** | are these the certified bytes | closed by mg-7870 |
-| **L6 normalisation** | the equivalence rule L5 is asked under | closed by mg-7870, probed five ways by mg-babf, now asserted by section 0 |
+| **L6 normalisation** | the equivalence rule L5 is asked under | closed by mg-7870, probed five ways by mg-babf, asserted by section 0, and shown by mg-5644 to be asserted only at 2 of the 25 characters that matter |
+
+**Where the blind spot has moved to, and it is the same shape one file out.** Seven for
+seven this has moved rather than closed, and this generation was the sharpest form of it:
+the gap was on ground the previous repair itself laid. Assume the same of this one. The
+layer to read as newly open is **what a reader is shown on the delegated target OUTSIDE its
+cited sections** — the target's title, its opening paragraph, its uncited sections. `R3`
+puts *"RETRACTED — everything below is void"* at the top of the file the certified cell sends
+a reader to, and it exits **0**; `R4` appends a whole uncited section and it exits **0**.
+That is **structurally identical** to the cross-section gap named above for the two certified
+files: a bound at the section, with a reader who does not read in sections. It has simply
+been carried across the file boundary along with the mechanism.
+
+**Where I would look next, in order.** (1) **A reader-scoped rather than section-scoped bound
+on the delegated target** — the honest version of the sentence is about a *page*, and every
+mechanism here is about a *section*; that mismatch is the whole lineage in one line. (2)
+**The delegation surface's own derivation.** `delegation_map()` follows links whose *text*
+matches `H<n>`; a certified region that cites a section in prose — "see H4 of the attempt
+file" — without a link, or links it with different text, delegates nothing and nothing says
+so. (3) **L2**, still open and now open on two surfaces rather than one: a near-copy of a
+cited section, added to the target under a new name, is a region that is not on the set.
 
 **L2 is the one to read as open.** A contradicting near-copy of the F1 correction block,
 added under a new heading with a two-word change to its header so the locator still matches

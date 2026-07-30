@@ -11,6 +11,14 @@
     file's own certified F1 block HTML-commented out of the rendered page.  See "WHAT A
     READER SEES" below.
 
+    mg-0049: THE DELEGATED SURFACE IS NOW READ THE WAY THE TWO CERTIFIED FILES ARE.
+    mg-bee1 (below) created a second region set and gave it a content digest, no
+    presentation record and no guards; mg-5644 put mg-babf's own B05/B06 to it one file
+    out and A READER FOLLOWING THE CERTIFIED CELL'S SIX LINKS WAS SHOWN A BLANK PAGE while
+    the control exited 0.  No new mechanism: section 2c now takes each cited section's
+    PRESENTATION RECORD from the same presentation.py, and section 8's default-deny guards
+    now read every declared target.  See "WHAT A CERTIFIED REGION POINTS AT" below.
+
     mg-bee1: TWO REPAIRS OF mg-218d'S AUDIT.  (1) THE PROPERTY mg-4acd PUBLISHED IS FALSE
     AS PUBLISHED and is restated to its bound below — the mechanism is section-local and
     the sentence was universally quantified.  (2) A CERTIFIED REGION'S MEANING CAN LIVE IN
@@ -192,11 +200,57 @@ other certified region.  Three consequences, all deliberate:
       non-zero.  So the delegation surface cannot grow or rot silently; it is one rule over
       the certified regions' own text, not a list of files somebody chose.
 
-THE BOUND, said here because it is the next auditor's target: only the CITED sections are
-delegated.  The target file's own framing — its title, its opening paragraph, its
-uncited sections — is outside coverage, and a retraction inserted at the top of that file
-exits 0.  The baseline cell at b68db5d^ carries the same six links and is deliberately NOT
-followed: it is the BEFORE side of a measured delta, not text a reader is shown today.
+IS A READER SHOWN WHAT THE CITATION SENDS THEM TO (mg-0049, repairing mg-5644's B1).
+------------------------------------------------------------------------------------
+mg-bee1 stopped at the bytes.  Every delegated section got a content digest and NOTHING
+ELSE — no presentation record, and none of the section-8 guards that read the two certified
+files end to end.  So the surface the repair itself created was the one surface of the three
+where "are these the certified bytes?" was asked and "is anybody shown them?" was not, and
+mg-5644 collected on it with the two mutations mg-4acd exists to catch, moved one file out:
+
+    Q1  one `<!--` line at the top of the target, never closed                     exit 0
+    Q2  one ``` line at the top of the target, never closed                        exit 0
+
+In both, every cited section is byte-identical and every delegated digest matches; `marked`
+and `markdown-it` agreed over 60 comparisons that ZERO of the five cited sections were
+visible at all.  A READER FOLLOWING THE CERTIFIED CELL'S SIX LINKS WAS SHOWN A BLANK PAGE.
+
+THE ASYMMETRY IS THE DEFECT, so the asymmetry is what is removed, and nothing new is built.
+Each cited section now carries a PRESENTATION RECORD from the same presentation.py that
+serves the eleven certified regions — over the WHOLE section, heading line included, so
+`state` is `rendered` only if every line of it is — and every DECLARED TARGET FILE is read
+by section 8's two default-deny guards exactly as STATE.md and the README are.  A cited
+section a reader is shown nothing of is a FAIL, on the same footing as a certified region
+nobody is shown.  Q1 and Q2 both now exit 1.
+
+WHICH OF THE TWO CATCHES WHICH, because the difference is the reason both were needed and a
+one-line summary of this repair would get it wrong.  The section-8 guards catch Q1: `<!--`
+is a raw-HTML token in prose.  THEY DO NOT CATCH Q2 — a fence is INSIDE the modelled subset,
+so `anomalies()` is silent about it and `html_tokens()` skips fenced lines by construction.
+Q2 is caught by the presentation record alone, on `state = fenced-code`.  Extending only the
+guards, which is the cheap reading of mg-5644's own recommendation, would have closed one of
+the two and left the other exactly where it was.  This is measured, not argued:
+code/state_delegation_repair_0049/guards_only_0049.py runs the guards-only control against
+all six rows and prints the split.
+
+THE BOUND, STATED IN TERMS OF WHAT A READER IS SHOWN — which is the correction of record
+this lineage keeps needing, because its recurring defect is a true sentence quantified over
+the wrong thing.  mg-bee1 published the bound as "closed for CITED SECTIONS", quantified
+over WHICH SECTIONS ARE FOLLOWED, and mg-5644 showed that a claim in that shape says nothing
+about whether a reader sees them.  What is now certified:
+
+    A reader who follows a certified region's citation IS SHOWN the section it names, as
+    prose, under the heading path that was certified — for every section any certified
+    region cites by name.
+
+    WHAT A READER IS SHOWN ON THAT PAGE OUTSIDE THOSE SECTIONS IS NOT CERTIFIED.  The
+    target's title, its opening paragraph and its uncited sections are text a reader is
+    shown and no field of any record here answers for them, so a retraction inserted at the
+    top of the target still exits 0 (mg-5644's Q3, re-measured, not inherited).  The claim
+    is about the sections a citation LANDS ON, not about the page they sit in.
+
+The baseline cell at b68db5d^ carries the same six links and is deliberately NOT followed:
+it is the BEFORE side of a measured delta, not text a reader is shown today.
 
 COVERAGE — what is digested, and what is deliberately not.
 ----------------------------------------------------------
@@ -218,10 +272,12 @@ ten.  Corrected here and the tenth entry added.)
     README        the mg-babf / mg-4acd correction to that A1 block       3,695 chars
     README        the mg-218d / mg-bee1 correction to that A1 block     (section 2 prints it)
 
-DELEGATED (mg-bee1), digested under the same N but NOT carrying a presentation record —
-these are sections of a file the certified text POINTS AT, not regions of the two files
-this instrument reads:
+DELEGATED (mg-bee1; mg-0049 gave it the other two of the three), digested under the same N,
+AND carrying a presentation record, AND read by the section-8 guards — these are sections of
+a file the certified text POINTS AT, not regions of the two files this instrument reads:
     docs/state-history/attempt-mg-276d.md   sections H1-H5, cited BY NAME by the ledger cell
+`position` is inert on this surface and is printed saying so: a section is not a block, so
+it has no ordinal among blocks.  `state` and `heading` are what carry the coverage here.
 
 NOT COVERED, on purpose — this instrument certifies b68db5d's DELTA, not the two files:
     * Every other row of STATE.md's ledger, and every other line of it.  Only the whole-file
@@ -235,6 +291,13 @@ NOT COVERED, on purpose — this instrument certifies b68db5d's DELTA, not the t
       A retraction paragraph one line earlier than the one that fires, on the other side of
       a heading, exits 0; so does one in an unrelated section, a new "READ THIS FIRST"
       section near the top, and the same in STATE.md.  COVERAGE.md costs the obvious fix.
+    * THE DELEGATED TARGET'S PAGE OUTSIDE ITS CITED SECTIONS (mg-0049, NOT closed, and this
+      is where the blind spot has moved to).  What is certified there is that a reader is
+      shown the sections a citation LANDS ON.  The same reader is shown the target's title,
+      its opening paragraph and its uncited sections, and no field of any record answers for
+      those: a retraction at the top of the target, or an uncited section appended to it,
+      exits 0 (mg-5644's Q3 and Q4, re-measured here as R3 and R4).  It is the SAME SHAPE as
+      the cross-section item above — a bound at the section — one file out.
     * THE REGION SET ITSELF (mg-218d M2, L2, NOT closed).  A contradicting near-copy of a
       certified block, added under a new heading, exits 0: a digest over a chosen set of
       regions cannot see a region that is not on the set.  Naming it here is the whole of
@@ -283,15 +346,17 @@ EXIT CODES, both non-zero on failure and distinguishable on purpose:
                  NO LONGER PRESENTED TO A READER — inside a code fence, inside an HTML
                  comment, inside a raw HTML block, or (for the ledger cell) no longer
                  rendering as a table row — a section a certified region CITES BY NAME is
-                 gone from the file it points at, or norm() no longer applies the rule this
-                 file publishes.  A region nobody is shown, and a citation that leads
-                 nowhere, are both damage rather than drift.
+                 gone from the file it points at OR IS STILL THERE AND SHOWN TO NOBODY, or
+                 norm() no longer applies the rule this file publishes.  A region nobody is
+                 shown, a citation that leads nowhere, and a citation that lands on a
+                 section a reader is shown nothing of, are all damage rather than drift.
     2   MOVED  — the repair's load-bearing sentences are intact, but a certified region's
                  content digest no longer matches, its PRESENTATION RECORD no longer
                  matches (it moved under a different heading, or its position among the
-                 blocks of its section changed), a DELEGATED section's bytes have changed
-                 or the delegation surface itself has (a target cited and not declared, or
-                 declared and no longer cited), a measured constant of the landing has
+                 blocks of its section changed), a DELEGATED section's bytes or PRESENTATION
+                 RECORD have changed or the delegation surface itself has (a target cited
+                 and not declared, or declared and no longer cited), a measured constant of
+                 the landing has
                  changed, or a presentation guard tripped — a block construct outside
                  presentation.py's declared subset, or raw HTML in text presented as prose.
                  Re-baseline this instrument, record the new figure, and say which commit
@@ -662,6 +727,45 @@ DELEGATED = {
     },
 }
 
+# =========================================================================================
+# IS A READER SHOWN THE SECTION THE CERTIFIED CELL SENDS THEM TO (mg-0049, repairing
+# mg-5644's B1)?  target path -> {cited section name: sha256 of its PRESENTATION RECORD}.
+#
+# mg-bee1 built the table above and stopped there, and mg-5644 put mg-babf's B05 and B06 to
+# it one file out: one `<!--` line at the top of the target, never closed, changes no byte of
+# any cited section, so every digest above matches and the control exited 0 — while `marked`
+# and `markdown-it` agreed, over 60 comparisons, that ZERO of the five cited sections were
+# visible at all.  A reader following the certified cell's six links was shown a BLANK PAGE.
+#
+# THE ASYMMETRY WAS THE WHOLE DEFECT and it is what is removed: the two files this instrument
+# READS carry a content digest, a presentation record and the section-8 default-deny guards.
+# The file it POINTS AT carried the first of the three.  It now carries all three, through the
+# same `presentation.py` and the same section-8 guard loop — no second mechanism.
+#
+# The record of a delegated section is the record of the WHOLE SECTION, heading line
+# included, so `state` is `rendered` only if every line of it is.  `position` is inert here
+# and is said to be rather than dressed up: a section is not a block, so it has no ordinal
+# among blocks, and the field reads "no block (the span opens on an ATX heading ...)" on
+# every row.  The two fields that carry weight on this surface are `state` (mg-5644's Q1 and
+# Q2) and `heading` (the B04 shape: the section moved under a "void" heading with its bytes
+# untouched).
+#
+# Baselined by mg-0049 against the working tree at 8ce78fb.  Regenerate with
+#     python3 code/state_landing_control_2da3/delta_control.py --emit-baseline
+# and say in the commit message WHICH COMMIT MOVED IT.  A cited section present in DELEGATED
+# and absent here has no certified record, so its comparison fails and exits non-zero: the
+# two tables cannot drift apart quietly in either direction.
+# =========================================================================================
+DELEGATED_PRESENTATION = {
+    "docs/state-history/attempt-mg-276d.md": {
+        "H1": "63321891836147afbdd11c9fb3c917693381a3f1c8752411f07d5b29759165f2",
+        "H2": "b7dffa489a7ca562892e75c51e4e2506cde52dd314b39d6469be3100923b3fcc",
+        "H3": "2fae29f7da64900f5ec7bd10ffd2199666feb11b65a50279c9adaef5e908747e",
+        "H4": "b57d0a4a3ddf28fad92ceb06885abde591bb86d3309b4f9a7351e015d8b61277",
+        "H5": "f6ae6325c5307d5a6c088990ad5f49b7b2f9f8347e73458b55c66f072fcbe406",
+    },
+}
+
 # The certified regions whose links are FOLLOWED.  `cell-base` is excluded on purpose: it
 # is the BEFORE side of a measured delta, so its links are a fact about b68db5d^ and not
 # about the page a reader is shown today.  Following them would make every edit to the
@@ -818,22 +922,39 @@ def emit_baseline(docs, state_tree, state_base, readme_tree):
             continue
         followed.append((rid, "" if kind == "cell" else os.path.dirname(README), text))
     cited, _citers = delegation_map(followed)
+    targets = {}
     print("DELEGATED = {")
     for target in sorted(cited):
         print(f'    "{target}": {{')
         try:
-            target_text = tree(target).decode("utf-8")
+            targets[target] = tree(target).decode("utf-8")
         except OSError as exc:
             print(f"        # UNREADABLE ({exc}) — left for a human")
             print("    },")
             continue
         for name in sorted(cited[target], key=lambda s: (len(s), s)):
             try:
-                _s, _e, body = named_section(target_text, name)
+                _s, _e, body = named_section(targets[target], name)
             except LookupError as exc:
                 print(f'        # "{name}": UNLOCATABLE ({exc}) — left for a human')
                 continue
             print(f'        "{name}": ({len(norm(body).decode())}, "{digest(body)}"),')
+        print("    },")
+    print("}")
+    print("DELEGATED_PRESENTATION = {")
+    for target in sorted(targets):
+        tdoc = pres.Doc(targets[target])
+        print(f'    "{target}": {{')
+        for name in sorted(cited[target], key=lambda s: (len(s), s)):
+            try:
+                s, e, _body = named_section(targets[target], name)
+            except LookupError as exc:
+                print(f'        # "{name}": UNLOCATABLE ({exc}) — left for a human')
+                continue
+            record = pres.region_record(tdoc, s - 1, e - 1)
+            for k, v in record:
+                print(f"        # {k:<10} {v}")
+            print(f'        "{name}": "{pres.record_digest(record)}",')
         print("    },")
     print("}")
     return 0
@@ -853,6 +974,20 @@ def main():
     readme_tree = tree(README).decode("utf-8")
     docs = {"cell": pres.Doc(state_tree), "base": pres.Doc(state_base),
             "readme": pres.Doc(readme_tree)}
+
+    # Every DECLARED delegated target, read once and resolved once (mg-0049).  Section 2c
+    # takes each cited section's content digest AND its presentation record off this, and
+    # section 8 runs the same two default-deny guards over it that it runs over the two
+    # certified files — so the two sections cannot disagree about what the file says, and
+    # the surface this instrument POINTS AT is read exactly as the surfaces it READS are.
+    delegated_text, delegated_docs, delegated_unreadable = {}, {}, {}
+    for _target in sorted(DELEGATED):
+        try:
+            delegated_text[_target] = tree(_target).decode("utf-8")
+        except OSError as exc:
+            delegated_unreadable[_target] = exc
+            continue
+        delegated_docs[_target] = pres.Doc(delegated_text[_target])
 
     if "--emit-baseline" in sys.argv:
         return emit_baseline(docs, state_tree, state_base, readme_tree)
@@ -1013,15 +1148,15 @@ def main():
             # say a certified delegation stopped resolving when there was never one.
             print("         (not declared; not followed — see the surface check above)")
             continue
-        try:
-            target_text = tree(target).decode("utf-8")
-        except OSError as exc:
+        if target in delegated_unreadable:
             check(f"{target}: the file a certified region points at EXISTS", False,
-                  f"{exc}\n"
+                  f"{delegated_unreadable[target]}\n"
                   f"         >>> a DECLARED delegation of a certified region no longer "
                   f"resolves", kind=FAIL)
             _digest_misses.append((target, "delegated target", "the file is not there"))
             continue
+        target_text = delegated_text[target]
+        target_doc = delegated_docs[target]
         check(f"{target}: the section names cited are the section names declared",
               names == set(want),
               f"cited {sorted(names)}; declared {sorted(want)}", kind=MOVED)
@@ -1050,6 +1185,33 @@ def main():
             if not ok:
                 _digest_misses.append((target, f"delegated section {name}",
                                        "delegated bytes moved"))
+
+            # ---- and is a reader SHOWN it?  (mg-0049, repairing mg-5644's B1) ------------
+            # The same presentation.py, over the whole section, heading line included.  A
+            # section every byte of which is certified and which a reader is shown NOTHING
+            # of is exactly the state mg-5644's Q1 put all five of these into while this
+            # control said PASS.
+            record = pres.region_record(target_doc, s - 1, e - 1)
+            want_rec = DELEGATED_PRESENTATION.get(target, {}).get(name, "")
+            got_rec = pres.record_digest(record)
+            pdetail = "\n".join(f"         {k:<10} {v}" for k, v in record).lstrip()
+            pdetail += (f"\n         certified record sha256 {want_rec or '(none declared)'}"
+                        f"\n         measured  record sha256 {got_rec}")
+            if not is_presented(record):
+                pdetail += ("\n         >>> THE CERTIFIED CELL SENDS A READER TO THIS "
+                            "SECTION AND THE READER IS SHOWN NOTHING OF IT.")
+                check(f"{target} {name}: PRESENTED to a reader", False, pdetail, kind=FAIL)
+                _digest_misses.append((target, f"delegated section {name}",
+                                       "cited, and not shown to a reader"))
+            else:
+                okp = got_rec == want_rec
+                if not okp:
+                    pdetail += ("\n         >>> a reader is not shown this cited section "
+                                "where the certified record says it is")
+                check(f"{target} {name}: presentation", okp, pdetail, kind=MOVED)
+                if not okp:
+                    _digest_misses.append((target, f"delegated section {name}",
+                                           "delegated presentation record moved"))
     print()
 
     # ---- 3. the F1 repair itself — CLASSIFIERS, not the certification --------------------
@@ -1141,13 +1303,19 @@ def main():
     print()
 
     # ---- 8. THE PRESENTATION GUARDS — default-deny over both certified files -------------
-    print("8. PRESENTATION GUARDS, over BOTH certified files in full")
+    print("8. PRESENTATION GUARDS, over both certified files AND every DECLARED DELEGATED")
+    print("   TARGET, each in full (mg-0049: the targets were not read here before, and one")
+    print("   `<!--` line at the top of one of them showed a reader a blank page at exit 0).")
     print("   presentation.py models a declared subset of CommonMark + GFM block structure.")
     print("   These two guards are how that subset is BOUNDED rather than assumed: a")
     print("   construct it does not model, or raw HTML in text presented as prose, is")
     print("   reported and exits non-zero instead of passing.  Both are 0 as things stand.")
-    for label, doc, nlines in (("STATE.md", docs["cell"], len(docs["cell"].lines)),
-                               (README, docs["readme"], len(docs["readme"].lines))):
+    guarded = [("STATE.md", docs["cell"]), (README, docs["readme"])]
+    guarded += [(t, delegated_docs[t]) for t in sorted(delegated_docs)]
+    print(f"         {len(guarded)} files guarded: "
+          + ", ".join(label for label, _doc in guarded))
+    for label, doc in guarded:
+        nlines = len(doc.lines)
         anom = doc.anomalies()
         html = doc.html_tokens()
         check(f"{label}: 0 block constructs outside the modelled subset",
@@ -1170,10 +1338,14 @@ def main():
     worst = exit_code()
     print("=" * 78)
     if worst == 0:
+        n_deleg = sum(len(v) for v in DELEGATED.values())
         print("RESULT: PASS — every check above read the working tree and every one held,")
         print(f"        including {len(CERTIFIED)} content digests and the same number of")
         print("        PRESENTATION RECORDS: the certified bytes are the certified bytes,")
         print("        AND a reader is still shown them, in the same place, as prose.")
+        print(f"        The same two questions are answered for {n_deleg} DELEGATED sections")
+        print("        of the file the certified text points at — a reader who follows a")
+        print("        citation is shown the section it names (mg-0049).")
         print("        Coverage is stated in this file's header and in COVERAGE.md: what")
         print("        is digested, what is not, and what the presentation model cannot")
         print("        see.  This instrument CAN fail; negative_control.py makes it fail.")

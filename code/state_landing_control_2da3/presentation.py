@@ -21,6 +21,15 @@ certified bytes?"* and answers it correctly.  The locator answers *"which bytes 
 certified ones?"* — and, silently, *"and is anybody shown them?"* — and that second
 question was never controlled.
 
+mg-0049 (repairing mg-5644's B1): NOTHING IN THIS FILE CHANGED EXCEPT ONE MESSAGE AND FOUR
+SELF-TEST CASES.  What changed is WHERE IT IS APPLIED.  mg-bee1 created a second region set
+— sections of a file a certified region POINTS AT — and gave it a content digest and no
+presentation record, so mg-babf's B05/B06 worked verbatim one file out: `<!--` on line 1 of
+the target and a reader following the certified cell's six links is shown a BLANK PAGE while
+every delegated digest matches and the control exits 0.  `region_record` already answers
+that question for any line span; `delta_control.py` section 2c now asks it about every cited
+section, and section 8's guards now read every declared target file.  See `_SECTION_CASES`.
+
 THE PROPERTY THIS FILE CERTIFIES, STATED TO ITS BOUND (mg-bee1, repairing mg-218d's B1).
 
     A mutation that changes HOW A CERTIFIED REGION IS PRESENTED — the container it renders
@@ -370,11 +379,26 @@ def region_record(doc, first, last):
 
     Printed in full by the control so a reader can recompute the digest by hand, exactly
     as the content digests are.
+
+    `state` is the set of states over the WHOLE span, so a span any part of which is inside
+    a fence, an HTML comment or a raw HTML block is not `rendered`.  That is what makes this
+    one function serve a certified region (a few lines) and a DELEGATED SECTION (a heading
+    and everything under it, mg-0049) without a second mechanism for the second.
+
+    A span whose first line is an ATX HEADING has no block ordinal, because a heading is a
+    section delimiter and not a block — `position` says so in those words rather than
+    reporting the blank-separator case, which is the other way to have no block and is a
+    different fact (mg-0049: the message used to claim `blank separator` for both).
     """
     states = sorted({doc.state[i] for i in range(first, last + 1)})
     block = doc.block_at(first)
     if block is None:
-        position = "no block (the region's first line is a blank separator)"
+        _d, _content = strip_quotes(doc.lines[first])
+        opens_on_heading = (doc.state[first] == RENDERED and _d == 0
+                            and _ATX.match(_content) is not None)
+        position = ("no block (the span opens on an ATX heading, which is a section "
+                    "delimiter and not a block)" if opens_on_heading else
+                    "no block (the region's first line is a blank separator)")
         heading = " > ".join(doc.heading[first]) or "(no heading)"
     else:
         _f, _l, section, ordinal, _kind = block
@@ -511,6 +535,25 @@ _POSITION_CASES = [
 ]
 
 
+# mg-0049 — THE DELEGATED SHAPE: a span that is a WHOLE ATX SECTION, heading line included.
+# These are the four facts `delta_control.py` section 2c now reads off a cited section of a
+# file a certified region points at, asserted here against this model.  Each case is
+# (name, the document, the heading line that opens the span, expected state, whether the
+# record must differ from the first case's).  The mutations are the ones mg-5644's Q1 and Q2
+# used, one file out: a container opened ABOVE the section, changing no byte of it.
+_SECTION = "### H3 — a cited section\n\nBody of the cited section.\n"
+_SECTION_CASES = [
+    ("a cited section, untouched, is presented as prose",
+     "# T\n\n## C\n\n" + _SECTION, RENDERED, False),
+    ("an unclosed HTML comment ABOVE it hides the whole section",
+     "# T\n\n<!--\n\n## C\n\n" + _SECTION, HTML_COMMENT, True),
+    ("an unclosed fence ABOVE it turns the whole section into a code sample",
+     "# T\n\n```\n\n## C\n\n" + _SECTION, FENCED_CODE, True),
+    ("a new heading ABOVE it moves the heading path, changing no byte of it",
+     "# T\n\n## C\n\n## Appendix Z — void\n\n" + _SECTION, RENDERED, True),
+]
+
+
 def _self_test():
     bad = 0
     print("presentation.py — SELF-TEST of the DECLARED SUBSET")
@@ -549,8 +592,27 @@ def _self_test():
         if not ok:
             print(f"       {dict(r0)}\n       {dict(r1)}")
     print()
+    print("DELEGATED SHAPE — a span that is a whole ATX section (mg-0049)")
+    base = None
+    for name, text, want_state, want_moved in _SECTION_CASES:
+        doc = Doc(text)
+        i = next(k for k, l in enumerate(doc.lines) if l.startswith("### H3"))
+        rec = region_record(doc, i, len(doc.lines) - 1)
+        got_state = dict(rec)["state"]
+        dig = record_digest(rec)
+        if base is None:
+            base = dig
+        moved = dig != base
+        ok = got_state == want_state and moved == want_moved
+        bad += not ok
+        print(f"     {'ok  ' if ok else 'WRONG'} state {got_state:<13} record "
+              f"{'MOVES ' if moved else 'holds '}— {name}")
+        if not ok:
+            print(f"       expected state {want_state}, "
+                  f"record {'moved' if want_moved else 'held'}")
+    print()
     print("=" * 86)
-    print(f"{len(_CASES) + len(_POSITION_CASES)} cases, {bad} wrong")
+    print(f"{len(_CASES) + len(_POSITION_CASES) + len(_SECTION_CASES)} cases, {bad} wrong")
     return 1 if bad else 0
 
 
