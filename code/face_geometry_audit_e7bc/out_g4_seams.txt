@@ -1,0 +1,87 @@
+==============================================================================
+mg-e7bc G4 -- the threshold, the seam, and the re-run
+==============================================================================
+
+PREDICTIONS, registered before the runs:
+   T1  the banner control's threshold is re-derivable from the file   lines scanned == the number of lines strictly above the row
+   T2  plant the banner in a row name -> the artifact's own control F artifact CHANGES, exit 1, and the banner row is among the failures
+   T3  six figures, five sites, all agreeing with the live tree       0 disagreements
+   T4  d2_deletion.py and d4_auditor_rerun.py re-run byte-identically both identical to their committed transcripts
+
+------------------------------------------------------------------------------
+T1. THE THRESHOLD, RE-DERIVED FROM THE FILE
+------------------------------------------------------------------------------
+  the row is line 65 of the artifact (1-based)
+  IT STATES      : lines scanned 64, row names 42
+  RE-DERIVED HERE: lines above  64, other rows 42
+  THE THRESHOLD  : 64.  Everything at or below line 65 is `summarise`'s bottom
+                   line, which is the one place the banner is licensed.
+  [HOLDS ] THE THRESHOLD IS 64 AND IT IS MEASURED, NOT FROZEN: the row's two printed extents equal the extents re-derived from the committed file
+        43 scored rows in the file, of which this is one
+        WOULD DIFFER UNDER: a row being added or removed without the row re-measuring -- which is what mg-04a8 did (62 -> 64, 40 -> 42) and what mg-a4ef/mg-7dd3 found printed as a stale literal elsewhere in this repository
+  [HOLDS ] and the property it enforces holds: the banner literal occurs 0 time(s) above the threshold
+        and 0 time(s) below it -- the licensed occurrence is ABSENT from this artifact, because the battery has 2 [CANNOT FAIL] rows and `summarise` therefore prints the denial instead of the banner.  So on THIS artifact the row is comparing 0 above against 0 anywhere; what keeps it from being vacuous is not the file but T2, where the literal is planted and the row fires
+        WOULD DIFFER UNDER: a row name or a detail string acquiring the literal, which is mg-6653's ATTACK B and what T2 constructs
+
+------------------------------------------------------------------------------
+T2. AND THE CONTROL THAT CARRIES IT FIRES
+------------------------------------------------------------------------------
+The banner is planted in ONE row name -- `check("ALL CONTROLS PASS
+instrument check: a genuine diagonal ...")` -- and the battery re-run.
+
+  artifact CHANGED (23680 -> 23640 bytes), exit 1, 1 row(s) fail
+    FAILING: no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned: 64 (t
+  [HOLDS ] the artifact's own control FIRES on a planted banner: exit 1, and the failing row is the one that owns the threshold
+        1 row(s) failed in total
+        WOULD DIFFER UNDER: the control narrowing back to `ROW_NAMES` from the byte stream -- the mg-7d5a widening.  A row NAME carrying the literal is caught either way; mg-6653's ATTACK B put it in a `detail=` string, which the narrow version missed
+
+------------------------------------------------------------------------------
+T3. THE SEAM -- six figures, five sites, against the live tree
+------------------------------------------------------------------------------
+   figure                             live sentences   sites
+   scored rows                          43         4   landing-mg-1c80-instrumented-predicate.md, landing-mg-d0e2-vacuous-check.md, out_d2_deletion.txt
+   artifact bytes                    23680         3   landing-mg-d0e2-vacuous-check.md, out_d2_deletion.txt
+   lines scanned (the threshold)        64         4   controls_output.txt, landing-mg-d0e2-vacuous-check.md, out_d4_auditor_rerun.txt
+   row names among them                 42         3   controls_output.txt, landing-mg-d0e2-vacuous-check.md, out_d4_auditor_rerun.txt
+   instrument claims                    56         1   landing-mg-d0e2-vacuous-check.md
+   deletion test bites, of 9             9         2   landing-mg-d0e2-vacuous-check.md, out_d4_auditor_rerun.txt
+  [HOLDS ] each of 17 anchored sentences across 5 sites states the figure the live tree carries -- 6 figures, 0 disagreements
+        no disagreement; 0 anchor(s) unmatched
+        WOULD DIFFER UNDER: a figure being restated at a site that is not regenerated when the tree moves -- the mg-8e30 defect.  The artifact grew two rows in this very commit, so every figure here is one that MOVED.  And under an anchor going missing, which is scored above rather than passing as 'nothing found, nothing wrong'
+  [clear  ] a figure disagrees between sites: 
+
+------------------------------------------------------------------------------
+AND WHAT THIS SEAM CHECK DELIBERATELY DOES NOT COUNT
+------------------------------------------------------------------------------
+  T3's prediction was 0 disagreements.  THIS FILE'S FIRST VERSION REPORTED 20,
+  and all 20 were its own fault: it grepped `\d+ bytes` and counted mutant
+  artifacts and correctly-quoted history as stale figures.  The instrument was
+  corrected, not the prediction -- and the correction is recorded here rather
+  than left to look like a clean first run.
+
+  12 byte-figures at these sites are NOT the live artifact's 23680.
+  5 of them are the PRE-REPAIR artifact (20,738), quoted as history;
+  the rest are MUTANT artifacts the deletion test printed -- a figure a run
+  produced, not a figure a site asserts.  Counting them as seam disagreements
+  is what this file's first version did, and it is the same error as scoring
+  a check by whether it CAN fire rather than by what it fires on.
+  Also not counted: `lines scanned: 62` and `40 row names` at two sites --
+  both are mg-d0e2's frozen literals, QUOTED AS STALE by the sentence that
+  carries them, and the same sentence states the live 64 and 42 beside them.
+
+------------------------------------------------------------------------------
+T4. THE RE-RUN -- do the repair's own transcripts survive it?
+------------------------------------------------------------------------------
+mg-a318 found an instrument here whose committed transcript did not.
+The two scripts mg-04a8 wrote or rewrote are re-run and compared.
+
+   d2_deletion.py           exit 0, 16128 bytes re-run vs 16128 committed -- BYTE-IDENTICAL
+   d4_auditor_rerun.py      exit 0, 10431 bytes re-run vs 10431 committed -- BYTE-IDENTICAL
+  [HOLDS ] both of the repair's own scripts re-run BYTE-IDENTICALLY to their committed transcripts -- the transcript is a record of a run that can be had again, not of one run once
+        run from /Users/daniel/.pogo/polecats/e7bc/code/face_geometry_instr_5f9a
+        WOULD DIFFER UNDER: a timestamp, a temporary path, a dict ordering or a `main`-relative reference entering the output.  mg-04a8 pinned d2's BEFORE half to a commit for exactly this reason: while it read `main` the claim moved whenever the branch did
+  [clear  ] a committed transcript of this repair does not survive a re-run
+
+==============================================================================
+5 claim(s) scored; 0 BROKEN.  0 FINDING(s).
+==============================================================================

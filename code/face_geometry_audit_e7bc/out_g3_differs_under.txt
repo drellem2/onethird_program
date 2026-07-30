@@ -1,0 +1,134 @@
+==============================================================================
+mg-e7bc G3 -- the WOULD DIFFER UNDER statements, tested by making the change
+==============================================================================
+
+------------------------------------------------------------------------------
+THE POPULATION -- how many claims carry a statement, and how many do not
+------------------------------------------------------------------------------
+   script                     claims statements   claim() signature
+   out_d1_trace.txt               16          0   NO differs_under parameter
+   out_d2_deletion.txt            25         25   requires differs_under
+   out_d3_reintroduction.txt        6          0   NO differs_under parameter
+   out_d4_auditor_rerun.txt        9          9   requires differs_under
+   TOTAL                          56         34
+  [HOLDS ] the repair's instrument scores 56 claims across four scripts and 34 of them carry a WOULD DIFFER UNDER statement
+        counts read from the committed transcripts' own bottom lines, not from run_all.sh's summary
+        WOULD DIFFER UNDER: a claim being added to d1 or d3, which would widen the gap, or either of them gaining the parameter, which would close it
+  [HOLDS ] and in d2_deletion.py it is a REQUIRED argument with no default, so a claim cannot be written there without one
+        WOULD DIFFER UNDER: a default appearing in the signature, which is how a required field quietly becomes optional
+  [FINDING] THE REQUIREMENT IS IMPLEMENTED IN 2 OF THE 4 SCRIPTS, covering 34 of the instrument's 56 claims.  out_d1_trace.txt (16 claims) and out_d3_reintroduction.txt (6 claims) carry none at all -- their `claim()` is still `def claim(text, ok, detail="")`.  This is not an oversight of scope: d1_trace.py WAS edited by this same commit (15 lines, the pre-repair pin), and the one differs-under sentence it gained was written into a CODE COMMENT -- 'ITS ANSWER WOULD DIFFER UNDER: any edit to `absorb_trace` that changes a decision on the 516 pairs below' -- where the transcript a reader checks does not carry it.  mg-d0e2's requirement was that each check state it IN THE CODE; the repair's own framing is that the transcript should carry it ('so the transcript carries it'), and for 22 claims it does not
+
+PREDICTIONS, registered before the runs:
+   S1  run_case: 'deleting a gate that no row's answer depends on'              REFUTED
+   S2  positive control: 'the repaired check reverting to a comparison against  CONFIRMED
+   S3  positive control: '...or to a substring row scan'                        REFUTED
+   S4  the shipped check: 'nothing available to a corruption of the artifact'   REFUTED
+   S5  AFTER-5/6 and d4: 'its expected value being taken from the predicate rat REFUTED
+
+------------------------------------------------------------------------------
+S1 -- the statement `run_case` prints under EVERY one of its 8 cases
+------------------------------------------------------------------------------
+The string is a literal in `run_case`, so all eight byte-comparison
+claims carry the same sentence.  For the six cases predicting
+CHANGES it is right.  BEFORE-1 predicts BYTE-IDENTICAL, and for it
+the sentence names the state of affairs under which the claim
+HOLDS.  Tested by making the change on THIS tree: E1* from G2 is a
+gate whose deletion no row's answer depends on.
+
+   the literal appears 8 time(s) in out_d2_deletion.txt
+   change made: delete `if m != len(B): return Trace(False, "shape", 0)`
+   result: artifact BYTE-IDENTICAL, exit 0; a claim predicting BYTE-IDENTICAL still HOLDS
+  [HOLDS ] the sentence is one literal shared by all 8 of `run_case`'s byte-comparison claims -- it is not derived from the case
+        WOULD DIFFER UNDER: `run_case` computing the statement from `want_change`, which is the one input that decides whether the named change would break the claim or make it
+  [FINDING] AN UNMEASURED 'DIFFERS UNDER' THAT IS INVERTED FOR ONE OF ITS 8 USES.  `run_case` prints the same sentence under every case, and for BEFORE-1 -- the one case whose registered prediction is BYTE-IDENTICAL -- 'deleting a gate that no row's answer depends on' is precisely what makes the claim HOLD, not what would make it differ.  Measured on this tree by making the change: deleting the first `shape` return is a gate no row's answer depends on, the artifact stays byte-identical at 23680 bytes, exit 0, and a claim predicting BYTE-IDENTICAL still HOLDS.  The sentence is correct for the other 7 uses; the requirement is 'state what would alter THIS answer', and a constant cannot
+   IS X THE FAILURE THE CHECK GUARDS AGAINST?  For AFTER-1..6 and BEFORE-2, yes:
+   a gate going dead is exactly what the deletion test exists to catch.  For BEFORE-1 it is
+   the experiment itself.
+
+------------------------------------------------------------------------------
+S2 -- 'the repaired check reverting to a comparison against the baseline's own labels'
+------------------------------------------------------------------------------
+Predicted CONFIRMED.  It is not, and the miss is the finding.  Three
+inputs are needed to say what the reversion does and does not do.
+
+   input 1 -- the all-[FAIL] artifact, which is the claim this
+             statement is attached to:
+       as repaired by mg-04a8:                 RED
+       reverted to the baseline comparison:    RED -- the answer does NOT differ
+       reverted to the SHIPPED check entire:   green -- and THIS is what flips it
+   input 2 -- the wrong-but-stable case: a row registered as failing
+             that did not fail, labels identical to the baseline's:
+       as repaired by mg-04a8:                 RED
+       reverted to the baseline comparison:    green -- the answer DOES differ here
+  [HOLDS ] MEASURED, AGAINST THE PREDICTION: the reversion the statement names does NOT change the answer on the artifact the claim is about -- a correctly-parsed baseline comparison also goes RED on the all-[FAIL] flip, because every label moved.  What restores green there is the shipped `a.split(' ')[1]` token, which this statement does not name.  On the wrong-but-stable input the reversion DOES change the answer, from RED to green
+        this claim scores the four measurements above, not the prediction
+        WOULD DIFFER UNDER: the baseline acquiring a [FAIL] row, which would make the all-[FAIL] flip a stable relabelling instead of a moving one
+  [FINDING] THE DIFFERS-UNDER ON THE POSITIVE-CONTROL CLAIM NAMES A REVERSION THAT DOES NOT MOVE IT.  'The repaired check reverting to a comparison against the baseline's own labels' is attached to the claim 'THE REPAIRED CHECK ON THE SAME ARTIFACT GOES RED'.  Made: a baseline-label comparison ALSO goes red on that artifact -- all 43 labels moved, so stability is exactly what it does not have.  The reversion that restores green is the shipped token bug, which the sentence does not mention.  The statement is right about WHICH SEMANTICS is the defect and mg-04a8's prose is right that 'stability is what a wrong label has too' -- measured here on the wrong-but-stable input, where the reversion does flip the answer from RED to green.  But it is attached to the one claim whose input it cannot move, so the transcript reads as though the positive control tests the stability semantics, and it does not: mg-04a8's own c2 control does
+
+------------------------------------------------------------------------------
+S3 -- '...or to a substring row scan'
+------------------------------------------------------------------------------
+   with `scored_rows` replaced by the shipped substring scan:
+     on the broken artifact:   RED (45 'rows' seen)
+     on the clean artifact:    RED
+  [FINDING] A 'DIFFERS UNDER' THAT DOES NOT.  The positive-control claim says its answer would differ if the repaired check reverted 'to a substring row scan'.  Made: with `scored_rows` replaced by the shipped substring selection, the check STILL GOES RED on the broken artifact -- the 45 lines it then treats as rows include the 2 prose bullets, and the label mismatch on the real rows is untouched.  The row scan is what fixed the published COUNT (mg-d0e2's F3, 43 vs 41); it is not what makes the check non-vacuous.  The two repairs are named in one sentence as though either alone would restore the defect, and only the first would
+   IS X THE FAILURE THE CHECK GUARDS AGAINST?  No -- it is a change the check
+   happens to survive.  The failure is the stability comparison, which is S2.
+
+------------------------------------------------------------------------------
+S4 -- the shipped check: 'nothing available to a corruption of the artifact'
+------------------------------------------------------------------------------
+   every row flipped to [FAIL]      shipped check HOLDS
+   one scored row LINE deleted      shipped check GOES RED
+   one scored row UN-INDENTED       shipped check GOES RED
+  [FINDING] 'NOTHING AVAILABLE' IS TOO WIDE BY 2 CORRUPTIONS.  mg-04a8 scores the shipped check's vacuity TRUE -- correctly -- and states its answer would differ under 'nothing available to a corruption of the artifact ... its answer is fixed by the INDENTATION and cannot depend on any label'.  The second half is exactly right and is the finding.  The first half is refuted by one scored row LINE deleted and one scored row UN-INDENTED: the shipped check also compares ROW COUNTS, so a corruption that removes a marker-bearing line moves its answer without touching a label.  Scope, stated the way the sentence should have been: nothing available to a corruption that PRESERVES the set of marker-bearing lines and their indentation
+   IS X THE FAILURE THE CHECK GUARDS AGAINST?  The statement's job here is the
+   opposite -- to admit the check guards against nothing.  It overshoots by one class.
+
+------------------------------------------------------------------------------
+S5 -- 'its expected value being taken from the predicate rather than from absorbable_bruteforce'
+------------------------------------------------------------------------------
+This is the crux of the whole repair, and both `d2_deletion.py` and
+`d4_auditor_rerun.py` say the change would put the two branches back
+out of reach.  Made: `truth = absorbable_bruteforce(A, B)` becomes
+`truth = tr.absorbable`.
+
+   the substitution ALONE:                artifact BYTE-IDENTICAL, exit 0
+   substitution + delete `shape`:         artifact CHANGED, exit 1
+   substitution + delete `parity`:        artifact CHANGED, exit 1
+  [HOLDS ] the substitution alone leaves the artifact BYTE-IDENTICAL and exits 0 -- on an unmutated predicate the two expected values agree, which is why nothing in the battery notices the difference until a gate goes
+        WOULD DIFFER UNDER: the predicate disagreeing with the definition on one of the five constructed pairs, which is the state the row exists to detect
+  [FINDING] THE NAMED CHANGE DOES NOT RESTORE THE DEFECT, and the statement says it would.  With the expected value taken from the predicate itself, deleting the `shape` gate still CHANGES the artifact (exit 1) and deleting the `parity` branch still does (exit 1).  Cause, measured: each row scores THREE things, not one -- agreement with brute force, agreement with the answer REGISTERED beside each pair before the run, and that the rejected pairs return at the named gate.  Killing the brute-force channel leaves the registered channel, and the registered answers are literals in `UNREACHED_GATE_PAIRS` that no mutation of the predicate can move.  The repair is therefore MORE robust than its own statement claims -- but the statement is still an untested assertion about a check, which is the defect one level up that this ticket names, and it appears in the transcript of `d4_auditor_rerun.py` as the sole differs-under of its headline 9-of-9 claim
+   IS X THE FAILURE THE CHECK GUARDS AGAINST?  Yes in kind -- an expected value
+   copied from the subject is the defect mg-d0e2 named -- but not in fact: here it
+   is not sufficient to cause the failure the sentence attributes to it.
+
+------------------------------------------------------------------------------
+SCORE ON THE FIVE STATEMENTS
+------------------------------------------------------------------------------
+   tag predicted  observed   verdict
+   S1  REFUTED    REFUTED    MATCH
+   S2  CONFIRMED  REFUTED    *** MISS ***
+   S3  REFUTED    REFUTED    MATCH
+   S4  REFUTED    REFUTED    MATCH
+   S5  REFUTED    REFUTED    MATCH
+
+   4 of 5 predictions matched.  Of the five statements, 0 were CONFIRMED
+   by making the change and 5 were REFUTED.
+   THE MISS IS KEPT: S2 was predicted CONFIRMED on the reasoning that a stability
+   comparison passes an all-[FAIL] flip.  It does not -- the flip moves every label.
+   The prediction confused the shipped check's PARSING BUG with its SEMANTICS, which
+   is the same conflation mg-04a8's own commit message warns against, made here by
+   this audit and caught by running it.
+   Population: 34 WOULD DIFFER UNDER statements across the four transcripts;
+   five tested, chosen for being load-bearing on the repair's account of itself.
+
+==============================================================================
+5 claim(s) scored; 0 BROKEN.  6 FINDING(s).
+  FINDING: THE REQUIREMENT IS IMPLEMENTED IN 2 OF THE 4 SCRIPTS, covering 34 of the instrument's 56 claims.  out_d1_trace.txt (16 claims) and out_d3_reintroduction.txt (6 claims) carry none at all -- their `claim()` is still `def claim(text, ok, detail="")`.  This is not an oversight of scope: d1_trace.py WAS edited by this same commit (15 lines, the pre-repair pin), and the one differs-under sentence it gained was written into a CODE COMMENT -- 'ITS ANSWER WOULD DIFFER UNDER: any edit to `absorb_trace` that changes a decision on the 516 pairs below' -- where the transcript a reader checks does not carry it.  mg-d0e2's requirement was that each check state it IN THE CODE; the repair's own framing is that the transcript should carry it ('so the transcript carries it'), and for 22 claims it does not
+  FINDING: AN UNMEASURED 'DIFFERS UNDER' THAT IS INVERTED FOR ONE OF ITS 8 USES.  `run_case` prints the same sentence under every case, and for BEFORE-1 -- the one case whose registered prediction is BYTE-IDENTICAL -- 'deleting a gate that no row's answer depends on' is precisely what makes the claim HOLD, not what would make it differ.  Measured on this tree by making the change: deleting the first `shape` return is a gate no row's answer depends on, the artifact stays byte-identical at 23680 bytes, exit 0, and a claim predicting BYTE-IDENTICAL still HOLDS.  The sentence is correct for the other 7 uses; the requirement is 'state what would alter THIS answer', and a constant cannot
+  FINDING: THE DIFFERS-UNDER ON THE POSITIVE-CONTROL CLAIM NAMES A REVERSION THAT DOES NOT MOVE IT.  'The repaired check reverting to a comparison against the baseline's own labels' is attached to the claim 'THE REPAIRED CHECK ON THE SAME ARTIFACT GOES RED'.  Made: a baseline-label comparison ALSO goes red on that artifact -- all 43 labels moved, so stability is exactly what it does not have.  The reversion that restores green is the shipped token bug, which the sentence does not mention.  The statement is right about WHICH SEMANTICS is the defect and mg-04a8's prose is right that 'stability is what a wrong label has too' -- measured here on the wrong-but-stable input, where the reversion does flip the answer from RED to green.  But it is attached to the one claim whose input it cannot move, so the transcript reads as though the positive control tests the stability semantics, and it does not: mg-04a8's own c2 control does
+  FINDING: A 'DIFFERS UNDER' THAT DOES NOT.  The positive-control claim says its answer would differ if the repaired check reverted 'to a substring row scan'.  Made: with `scored_rows` replaced by the shipped substring selection, the check STILL GOES RED on the broken artifact -- the 45 lines it then treats as rows include the 2 prose bullets, and the label mismatch on the real rows is untouched.  The row scan is what fixed the published COUNT (mg-d0e2's F3, 43 vs 41); it is not what makes the check non-vacuous.  The two repairs are named in one sentence as though either alone would restore the defect, and only the first would
+  FINDING: 'NOTHING AVAILABLE' IS TOO WIDE BY 2 CORRUPTIONS.  mg-04a8 scores the shipped check's vacuity TRUE -- correctly -- and states its answer would differ under 'nothing available to a corruption of the artifact ... its answer is fixed by the INDENTATION and cannot depend on any label'.  The second half is exactly right and is the finding.  The first half is refuted by one scored row LINE deleted and one scored row UN-INDENTED: the shipped check also compares ROW COUNTS, so a corruption that removes a marker-bearing line moves its answer without touching a label.  Scope, stated the way the sentence should have been: nothing available to a corruption that PRESERVES the set of marker-bearing lines and their indentation
+  FINDING: THE NAMED CHANGE DOES NOT RESTORE THE DEFECT, and the statement says it would.  With the expected value taken from the predicate itself, deleting the `shape` gate still CHANGES the artifact (exit 1) and deleting the `parity` branch still does (exit 1).  Cause, measured: each row scores THREE things, not one -- agreement with brute force, agreement with the answer REGISTERED beside each pair before the run, and that the rejected pairs return at the named gate.  Killing the brute-force channel leaves the registered channel, and the registered answers are literals in `UNREACHED_GATE_PAIRS` that no mutation of the predicate can move.  The repair is therefore MORE robust than its own statement claims -- but the statement is still an untested assertion about a check, which is the defect one level up that this ticket names, and it appears in the transcript of `d4_auditor_rerun.py` as the sole differs-under of its headline 9-of-9 claim
+==============================================================================
