@@ -48,7 +48,7 @@ mg-2da3 — working-tree control for b68db5d's delta
 certified side  : the WORKING TREE (STATE.md, docs/state-history/README.md)
 baseline side   : b68db5d^  — used ONLY as the BEFORE of a measured delta
 
-STATE.md in the working tree: 179344 bytes, 176229 characters, 382 lines
+STATE.md in the working tree: 183253 bytes, 180093 characters, 384 lines
                              62 table rows, 210 cells (the population every whole-file tally below is over)
 
 0. THE NORMALISATION N, CHECKED AGAINST THE RULE THIS FILE PUBLISHES
@@ -313,11 +313,11 @@ STATE.md in the working tree: 179344 bytes, 176229 characters, 382 lines
   [pass] exactly one ledger row keys to mg-a3d4
          found 1
   [pass] the mg-a3d4 row still holds the largest cell in the file
-         largest cell is 10070 characters (stripped), over all 210 cells
-  [pass] and it is still 10070 characters (stripped)
-         measured 10070
+         largest cell is 11384 characters (stripped), over all 210 cells
+  [pass] and it is still 11384 characters (stripped)
+         measured 11384
   [pass] the edited row is still smaller than it
-         7876 < 10070
+         7876 < 11384
 
 7. docs/state-history/README.md — the correction blocks b68db5d and this repair added
          31546 bytes, 31307 characters, 435 lines
@@ -342,10 +342,10 @@ STATE.md in the working tree: 179344 bytes, 176229 characters, 382 lines
    reported and exits non-zero instead of passing.  Both are 0 as things stand.
          3 files guarded: STATE.md, docs/state-history/README.md, docs/state-history/attempt-mg-276d.md
   [pass] STATE.md: 0 block constructs outside the modelled subset
-         over all 383 lines; 0 found
+         over all 385 lines; 0 found
   [pass] STATE.md: 0 raw-HTML tokens in text presented as prose
-         over all 383 lines, code fences and inline code spans masked; 0 found
-         114 rendered blocks in 11 sections (the population section 2b's positions are ordinals within)
+         over all 385 lines, code fences and inline code spans masked; 0 found
+         115 rendered blocks in 11 sections (the population section 2b's positions are ordinals within)
   [pass] docs/state-history/README.md: 0 block constructs outside the modelled subset
          over all 435 lines; 0 found
   [pass] docs/state-history/README.md: 0 raw-HTML tokens in text presented as prose
@@ -371,7 +371,7 @@ RESULT: PASS — every check above read the working tree and every one held,
 ==============================================================================
 
 ### 2. negative_control.py — can it fail?  (and can the pinned battery?)
-STATE.md  at rest: 179344 bytes, sha 07727b4ddbe2ea12
+STATE.md  at rest: 183253 bytes, sha 6129b1bc8b7bf774
 README.md at rest: 31546 bytes, sha 8e851e6be8954407
 
 ==============================================================================
@@ -383,7 +383,7 @@ POSITIVE CONTROL — clean tree
 
 ==============================================================================
 NC1 — STATE.md GUTTED (mg-bd41's mutation, reproduced exactly)
-      179344 -> 39870 bytes, 383 -> 183 lines (200 deleted, line 1 replaced)
+      183253 -> 42438 bytes, 385 -> 185 lines (200 deleted, line 1 replaced)
 ==============================================================================
   delta_control.py    : exit 1   CONTROL FIRES
       RESULT: FAIL (exit 1) — the row b68db5d edited is not identifiable in the
@@ -508,7 +508,7 @@ NC10 — THE LEDGER TABLE'S DELIMITER ROW DELETED (STATE.md line 113).
       [FAIL] cell.tree — row :135's content cell, WORKING TREE: PRESENTED
 
 ==============================================================================
-RESTORED — STATE.md sha 07727b4ddbe2ea12 == 07727b4ddbe2ea12, README sha 8e851e6be8954407 == 8e851e6be8954407
+RESTORED — STATE.md sha 6129b1bc8b7bf774 == 6129b1bc8b7bf774, README sha 8e851e6be8954407 == 8e851e6be8954407
 ==============================================================================
   clean  exit 0   must be 0          ok
   NC1    exit 1   must be 1 (FAIL)   ok
