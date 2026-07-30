@@ -1,0 +1,218 @@
+mg-8aae -- INDEPENDENT AUDIT OF THE mg-8916 REPAIR OF mg-835f
+==============================================================================
+Target: `b055ae5` + `f5360bf` + `d1dd84d`.  0 mathematical statements are
+touched here and no finding of mg-835f or mg-8a5c is re-marked.  Predicted exit
+code, written into `PREDICTIONS.md` before the first run: 1.
+
+A1 -- WHICH OF THE THREE REPAIRS WAS DONE, AND IS IT SAID
+---------------------------------------------------------
+The ticket names three dispositions for G-1 and warns that a SILENT
+NARROWING reads as a fix while being a reduction in coverage.  So: what did the
+repair do, is the choice stated, and does the measurement it rests on hold when
+re-derived here?
+
+  [CONFIRMED] the disposition is STATED, in the document ('CLOSED BY WIDENING THE CODE. The stated extent is not narrowed') and again at the widening in `verify_landing.py`.  It is neither of the ticket's two named repairs and it says so, so nothing is narrowed silently
+  [CONFIRMED] and it is a WIDENING and not a re-wording: `census_gate` does not exist at `b055ae5^` and is called by `figure_gate` at HEAD
+  [CONFIRMED] check (a) survives the widening: `(a) the DESIGNATED STATEMENT at ea...` is still printed as part of the extent
+  [CONFIRMED] check (b) survives the widening: `(b) each LIVE figure written exact...` is still printed as part of the extent
+
+  the claim the choice rests on -- 'there is nothing to remove' --
+  re-derived with this instrument's own tokenizer:
+    the STATE.md row     gap=1/1  both=1/1  cell=1/1  hist=1/1  copy=1/1
+    §14                  gap=1/1  both=1/1  copy=1/1
+    H8                   gap=1/1  both=1/1  cell=1/1  hist=1/1  copy=5/5
+  [CONFIRMED] 0 live figure is written more times than its site licenses, over the 3 sites and 12 (site, figure) pairs -- independently re-derived, so the ticket's PREFERRED repair (remove the prose duplicate) genuinely had nothing to remove and the choice really was between widening the code and narrowing the claim
+
+  the printed extent, re-counted by a tokenizer sharing no regex
+  with the one that produced it:
+    the STATE.md row     runner says  17   this instrument counts  17   agree   (6 historical values declared)
+    §14                  runner says  16   this instrument counts  16   agree   (9 historical values declared)
+    H8                   runner says  36   this instrument counts  36   agree   (16 historical values declared)
+  [CONFIRMED] 3 of 3 sites agree on the token count and the total is 69, which is the 69 the document prints.  The extent is not a number written beside the gate: two independent tokenizers reach it
+  [CONFIRMED] and the clean tree is green: the real runner exits 0
+
+A2 -- mg-835f's 12 OF 12 IS NOT WEAKENED, CHECKED AT ROW GRANULARITY
+--------------------------------------------------------------------
+mg-835f's primary target: 12 reader-facing figures corrupted ON DISK make
+the run red and 12 restorations make it green.  mg-8916 added a third check to
+the same function.  A widening that made the run red for a NEW reason while the
+old check went quiet would keep the headline and lose the result -- so this is
+not an exit-code check.
+
+  population: the 12 (site, figure) pairs `SITES` designates -- 5 at the
+  STATE.md row, 2 at §14, 5 at H8.  Each is corrupted to a DIFFERENT figure OF
+  THE SAME LENGTH, so no measurement moves underneath the gate.  Required, per
+  probe: the runner goes red, AND the `READ AT THE SITE` row FOR THAT FIGURE is
+  among the refuted rows.  Then restored, sha256-checked, and re-run.
+
+    probe                                               red?   AT-THE-SITE row   restored
+    the STATE.md row / gap, cell only                   RED    [FAIL]            green
+    the STATE.md row / gap, cell + relocated history    RED    [FAIL]            green
+    the STATE.md row / STATE.md row cell                RED    [FAIL]            green
+    the STATE.md row / relocated history (this row's own file)RED    [FAIL]            green
+    the STATE.md row / deliverable §14 copy, frozen since mg-a806RED    [FAIL]            green
+    §14 / gap, cell only                                RED    [FAIL]            green
+    §14 / gap, cell + relocated history                 RED    [FAIL]            green
+    H8 / gap, cell only                                 RED    [FAIL]            green
+    H8 / gap, cell + relocated history                  RED    [FAIL]            green
+    H8 / STATE.md row cell                              RED    [FAIL]            green
+    H8 / relocated history (this row's own file)        RED    [FAIL]            green
+    H8 / deliverable §14 copy, frozen since mg-a806     RED    [FAIL]            green
+
+  [CONFIRMED] 12 of 12 designated-figure corruptions make the real runner red -- mg-835f's primary target reproduces on this tree after the widening
+  [CONFIRMED] and in 12 of 12 the row that failed is the `READ AT THE SITE` row FOR THAT FIGURE, not merely some other row of the widened gate.  The old check is doing the old work; the census did not absorb it
+  [CONFIRMED] 12 of 12 restorations return the runner to exit 0, each verified byte-identical by sha256
+
+A3 -- A WRONG FIGURE IN ORDINARY PROSE: MY WORDING, MY SLOTS
+------------------------------------------------------------
+Not mg-835f's sentence and not mg-8916's named ballast.  The slot is chosen
+here by a procedure and CONTROLLED FIRST: blanked length-preservingly, the
+runner must stay green -- so a fire below is attributable to the FIGURE and not
+to the edit.  Then the same slot carries this instrument's own sentence.
+
+  population: 3 sites x 2 wrong-figure shapes.  `+9 999` is off the roster;
+  `+1 630` IS on the roster at all three sites, which is the shape a
+  SET-membership census passes.  Verdicts written before the run.
+
+    probe                                                     control   predicted   observed    restored
+    the STATE.md row: prose +9 999                            green     GATE FIRES  GATE FIRES  silent
+        [REFUTED  ] GATE @ the STATE.md row: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +9 999 appears 1x, licensed 0x.  Every figure a reader
+    §14: prose +9 999                                         green     GATE FIRES  GATE FIRES  silent
+        [REFUTED  ] GATE @ §14: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +9 999 appears 1x, licensed 0x.  Every figure a reader meets in thi
+    H8: prose +9 999                                          green     GATE FIRES  GATE FIRES  silent
+        [REFUTED  ] GATE @ H8: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +9 999 appears 1x, licensed 0x.  Every figure a reader meets in this
+    the STATE.md row: prose +1 630                            green     GATE FIRES  GATE FIRES  silent
+        [REFUTED  ] GATE @ the STATE.md row: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +1 630 appears 2x, licensed 1x.  Every figure a reader
+    §14: prose +1 630                                         green     GATE FIRES  GATE FIRES  silent
+        [REFUTED  ] GATE @ §14: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +1 630 appears 2x, licensed 1x.  Every figure a reader meets in thi
+    H8: prose +1 630                                          green     GATE FIRES  GATE FIRES  silent
+        [REFUTED  ] GATE @ H8: FIGURE CENSUS -- 1 unlicensed figure(s) at this site: +1 630 appears 2x, licensed 1x.  Every figure a reader meets in this
+
+  [CONFIRMED] 6 of 6 probe slots passed their CONTROL: blanked, the runner stays green, so the slot is prose no check reads and a fire is attributable to the figure written into it
+  [CONFIRMED] 6 of 6 wrong-prose probes make the real runner red, at 3 of 3 sites and in both shapes, on wording chosen here.  G-1 is closed against an instrument that is not the repair's own
+  [CONFIRMED] 6 of 6 restorations return the runner to exit 0, sha256-verified -- the gate does not fire on everything
+
+A4 -- THE CENSUS IS A MULTISET, SO A PERMUTATION IS INVISIBLE
+-------------------------------------------------------------
+Audited because no line of the brief names it and because it is G-1's own
+shape one generation on.  The census asks whether every figure a reader meets
+is licensed.  It cannot ask whether each is attached to the statement it
+belongs to -- a multiset comparison has no notion of position.  So: exchange
+two DECLARED figures OF EQUAL LENGTH in ordinary prose.
+
+  Nothing about the mutation is out of the gate's declared reach.  It is inside
+  the section; it is not inside a marked quotation; every token is of the
+  figure-shaped class; every designated statement is untouched; the length is
+  preserved.  The gate's three checks are all satisfied and the section is
+  wrong.  Predicted, before the run: GATE SILENT, exit 0, at 2 of 2.
+
+    probe                                                     predicted   observed    restored
+  [CONFIRMED] H8: the mutation is a PERMUTATION and nothing else -- the multiset of 36 figure tokens is IDENTICAL before and after, and every designated statement reads the same value
+    H8: two declared figures exchanged                        gate SILENT gate passes green
+        what a reader now reads: H8's own table now says the STATE.md row SHRANK across mg-a2bd, against the `(+3 141)` printed on the same line
+  [CONFIRMED] the STATE.md row: the mutation is a PERMUTATION and nothing else -- the multiset of 17 figure tokens is IDENTICAL before and after, and every designated statement reads the same value
+    the STATE.md row: two declared figures exchanged          gate SILENT gate passes green
+        what a reader now reads: the chain F-1 was born in now runs the two gap figures backwards -- it asserts the gap reached +755 BEFORE it went negative
+
+  [CONFIRMED] 2 of 2 permutation probes leave the real runner at exit 0.  A wrong figure a reader meets, inside the section, in ordinary prose, not quoted, of the figure-shaped class -- and the widened gate is silent
+  [FINDING  ] H-1 -- THE CENSUS IS A MULTISET, SO A PERMUTATION OF DECLARED FIGURES IS INVISIBLE.  Two roster figures of equal length exchanged in ordinary prose keep the multiset identical and every designated statement correct; the runner stays at exit 0 at 2 of 2 sites probed.  This is not one of the three exclusions the repair prints ('marked quotations / outside the section / not figure-shaped'), so the printed extent is again slightly wider than the code -- which is G-1's own shape.  MODERATE: the widening is real and closes what mg-835f found; what is wrong is the extent list, which should name POSITION as uncovered
+
+A5 -- `SUMMARY vs ROWS`: SHOWN TO FIRE, THEN PROBED THE OTHER WAY
+-----------------------------------------------------------------
+G-2's defect was an artifact: a transcript containing 'THE PRIMARY TARGET IS
+CONFIRMED' and its own refuted PRIMARY rows.  Direction 1 is the repair's own
+forcing hook, run here rather than read from its transcript.  Direction 2 makes
+the SAME ARTIFACT a different way -- by editing the sentence rather than the
+verdict variable -- which is how the defect actually arose.
+
+    direction 0 -- as it stands
+      SUMMARY vs ROWS : [CONFIRMED]
+      refuted         : 3
+      exit            : 1
+  [CONFIRMED] the `SUMMARY vs ROWS` check EXISTS and is recorded as a check on the ordinary path
+    direction 1 -- summary FORCED to CONFIRMED, rows left refuted
+      SUMMARY vs ROWS : [REFUTED  ]
+      refuted         : 3 -> 4
+      exit            : 1 -> 1
+  [CONFIRMED] FORCED APART, the check GOES RED.  It is shown firing, not argued to be able to fire
+  [CONFIRMED] and the refuted count moves by exactly one (3 -> 4), so the check is not decorative and it is the check that moved
+
+    direction 2 -- the SENTENCE is made to disagree with the rows,
+    with the verdict variable left alone.  This is the shape G-2
+    actually had: a hand-written bottom line.
+      the transcript now prints : THE PRIMARY TARGET IS CONFIRMED IN THIS TREE: 2 of 2 rows ta
+      while its PRIMARY rows are: refuted
+      SUMMARY vs ROWS           : [CONFIRMED]
+      refuted                   : 3 -> 3
+      exit                      : 1 -> 1
+  [CONFIRMED] the artifact G-2 named is REPRODUCED: the transcript prints 'THE PRIMARY TARGET IS CONFIRMED' while its own PRIMARY rows are [REFUTED], with no environment variable set
+  [REFUTED  ] and `SUMMARY vs ROWS` DOES NOT catch it: it stays [CONFIRMED] and the refuted count does not move (3 -> 3)
+  [FINDING  ] H-2 -- `SUMMARY vs ROWS` COMPARES A VARIABLE WITH ITSELF.  It scores `printed == derived` where `printed = FORCE_SUMMARY or derived`, so off the forcing hook it is `x == x` and cannot fail for any input.  It does not read the sentence that is printed: with the REFUTED branch's own headline edited to say CONFIRMED, the transcript reproduces G-2's exact artifact and the check stays [CONFIRMED].  The DERIVATION is the real repair and it is sound -- the verdict cannot be chosen by hand any more.  What is overstated is the check: the document calls it a comparison of 'the printed verdict with the rows' verdict', and it is a comparison of the rows' verdict with itself.  MODERATE, and it is the vacuous-check shape wearing the fix's name: it was demonstrated firing only through a hook built for the demonstration
+
+A6 -- mg-835f's OWN INSTRUMENT, UNMODIFIED, RE-RUN HERE
+-------------------------------------------------------
+mg-8916's R4 makes this claim; it is re-taken here rather than read out of
+its transcript, and the frozen transcript is sha256-checked afterwards.
+
+  [CONFIRMED] `code/hodge_leverage_audit_835f/audit_a318_repair.py` is byte-identical between `b055ae5^` and HEAD -- the instrument that RAISED G-1 and G-2 was not edited by the repair
+      its U1 rows : 3 read GATE FIRES, 0 read gate passes
+      its findings: 0
+      its exit    : 0
+  [CONFIRMED] 3 of 3 of its U1 rows now read GATE FIRES where it observed exit 0 at 3 of 3 -- measured by re-running it, not by quoting it
+  [CONFIRMED] and it returns 0 findings at exit 0: the instrument that raised the findings reports none
+  [CONFIRMED] and its committed transcript is sha256-identical afterwards -- the frozen run as TAKEN was not overwritten by this re-run
+
+A7 -- THE RULE APPLIED TO THE REPAIR'S OWN SUMMARY: BELIEVE THE ROWS
+--------------------------------------------------------------------
+'If this deliverable's own summary disagrees with its own rows, believe the
+rows and report the summary as the defect.'  The repair document's header is a
+summary; `out_repair_8916.txt` is its rows.
+
+      the transcript's own rows : {'checks recorded': 18, 'confirmed': 16, 'measurements': 2, 'refuted': 0}
+      the document's header     : 18 checks, 0 refuted
+  [CONFIRMED] the document's header says 18 checks and the transcript records 18 -- they agree
+  [CONFIRMED] and on the refuted count: header 0, transcript 0
+  [CONFIRMED] and the document's 'Predicted exit code ... Observed: 0' is consistent with a transcript recording 0 refuted
+
+  the document's tables, row by row, against the transcript:
+    6 of 6 wrong-prose probes fire                      in the transcript
+    6 of 6 restorations silent                          in the transcript
+    0 live figures over-written                         in the transcript
+    `SUMMARY vs ROWS` fires when forced                 in the transcript
+    mg-835f's instrument: 3 of 3 U1 rows fire           in the transcript
+  [CONFIRMED] 5 of 5 of the document's headline rows are located verbatim in the transcript it cites -- the summary is not just internally consistent, its rows exist
+
+A8 -- SEAM CHECK, AND THE THRESHOLD
+-----------------------------------
+A SEAM is the join between two workers.  Here: mg-835f wrote an audit and
+mg-8916 repaired against it, editing the audited RUNNER, a second audit's
+SOURCE and two documents.  A seam defect is a passage the repair DELETED that
+still stands somewhere with nothing saying it was corrected.
+
+  THRESHOLD: 0.80 similarity, minimum passage length 60 characters
+  after normalisation -- the same threshold and minimum mg-a218/mg-d330 used,
+  so the sweeps are comparable.  Swept population: the 7 files a reader of
+  this arc actually reads, at HEAD.  Deleted passages come from the three
+  commits `b055ae5`, `f5360bf`, `d1dd84d`.
+
+    deleted passages          : 32
+    ...rewritten in place     : 26  (an edit, not a seam)
+    deleted passages swept    : 6
+    live lines swept          : 2285
+  [CONFIRMED] 0 unmarked survivals of a passage the repair deleted, over 6 deleted passages x 2285 live lines at threshold 0.80, minimum 60 chars, marker window ±12 lines.  A passage that survives AND is marked as corrected within the window is not a seam defect and is not counted
+
+BOTTOM LINE
+-----------
+  checks recorded : 30
+  confirmed       : 29
+  measurements    : 0
+  refuted         : 1
+  findings        : 2
+
+    FINDING  H-1: THE CENSUS IS A MULTISET, SO A PERMUTATION OF DECLARED FIGURES IS INVISIBLE.  Two roster figures of equal length exchanged in ordinary prose keep the 
+    FINDING  H-2: `SUMMARY vs ROWS` COMPARES A VARIABLE WITH ITSELF.  It scores `printed == derived` where `printed = FORCE_SUMMARY or derived`, so off the forcing hook
+
+  PARTIAL: 2 finding(s) and 1 refuted row(s).
+  mg-835f's 12 of 12 is intact at row granularity, G-1 is closed
+  against wording this instrument chose, and mg-835f's own
+  instrument reports zero.  What is open is stated above.
