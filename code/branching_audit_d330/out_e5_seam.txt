@@ -1,0 +1,62 @@
+==========================================================================
+E5  THE SEAM BETWEEN mg-a218 AND mg-13b2
+==========================================================================
+threshold          : 0.80  (difflib.SequenceMatcher ratio)
+normalisation      : whitespace, markdown emphasis, case
+minimum passage    : 60 characters after normalisation
+marker window      : 12 lines either side
+
+touched passages   : 38 distinct lines deleted by ed9cde4 and at least 60
+                     characters long after normalisation
+swept units        : 1619 lines in 6 files
+                     docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md               636
+                     docs/OneThird-Bratteli-Path-Algebras-Mge8b8Repair-IndependentAudit.md  260
+                     docs/OneThird-Bratteli-Path-Algebras-IndependentAudit.md               325
+                     code/branching_locate_db09/t1_tl.py                                    201
+                     code/branching_locate_db09/out_t1_tl.txt                               151
+                     code/branching_locate_db09/README.md                                   46
+comparisons        : 61522
+
+--------------------------------------------------------------------------
+SURVIVORS AT OR ABOVE THE THRESHOLD
+--------------------------------------------------------------------------
+   sites surviving    : 17
+   of which EDIT IN PLACE (the survivor is itself an added line of the
+     same commit, so the question is whether the edit is disclosed): 11
+   of which SECOND COPY : 6
+   MARKED               : 17
+   UNMARKED             : 0
+
+   -> every survivor sits within 12 lines of a marker.
+
+--------------------------------------------------------------------------
+WHAT WOULD HAVE COUNTED --- two calibration probes, scored
+--------------------------------------------------------------------------
+   A sweep that finds nothing has to show it can find something.
+
+   CORRECTED DURING CONSTRUCTION, and recorded here rather than in a
+   commit message.  My first two probes were sentences I WROTE in the
+   shape of the withdrawn claims.  Both scored ~0.41 against the best
+   deleted passage and raised a SELF-ERROR --- correctly: a probe that
+   cannot reach the threshold calibrates nothing.  A probe has to be a
+   passage this commit REALLY deleted, placed where a marker is not.
+
+   probe 1: a line ed9cde4 really deleted
+      | **D2** | ~~there is a multiplicity-free tower whose branching graph and path-pair coun
+      [ok] the sweep MATCHES it at all               : 1 hit(s)
+      [n/a] and classifies it unmarked in bare prose  : 0 hit(s)  (the line carries its own marker)
+      [ok] the same line with a marker beside it     : 0 unmarked hit(s)
+   probe 2: a line ed9cde4 really deleted
+      | *"the Bratteli/path algebra"* | matrix units indexed by pairs of increasing paths with
+      [ok] the sweep MATCHES it at all               : 1 hit(s)
+      [ok] and classifies it unmarked in bare prose  : 1 hit(s)
+      [ok] the same line with a marker beside it     : 0 unmarked hit(s)
+
+   -> the sweep bites. What would have counted: any of the 38 passages
+      ed9cde4 deleted, standing anywhere in the 1619 swept units with no
+      disposition marker within 12 lines either side.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the git read and the 6 file reads
+FINDINGS: 0, population: the 17 survivors at or above 0.80 over 61522 comparisons
+TOTAL BAD: 0
