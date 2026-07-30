@@ -2,8 +2,9 @@
 
 **Work item mg-8916. Lands the two sites mg-835f left open on the mg-a318 repair
 (`b80dea0` + `7f66005`).**
-**Instrument: `code/hodge_leverage_repair_8916/`, `run_all.sh`, ~30 s. Committed transcript:
-`out_repair_8916.txt`. Predicted exit code, written before the first run: 0. Observed: 0.**
+**Instrument: `code/hodge_leverage_repair_8916/`, `run_all.sh`, ~3 min. Committed transcript:
+`out_repair_8916.txt`. Predicted exit code, written before the first run: 0. Observed: 0.
+18 checks, 0 refuted.**
 
 ---
 
@@ -158,6 +159,25 @@ one, so the check is not decorative.
 
 ---
 
+## The check that is not this repair's own: mg-835f's instrument, unmodified
+
+**A repair scored only by its own new instrument is a repair scored by the party that wrote it.**
+So R4 re-runs `code/hodge_leverage_audit_835f/audit_a318_repair.py` — **the instrument that
+found G-1 and G-2** — against the repaired tree, without a byte of it being edited. It is
+invoked directly rather than through its runner, so its committed transcript is not overwritten,
+and R4 checks that by sha256 rather than asserting it.
+
+| | as taken (frozen transcript) | re-run against the repaired tree |
+|---|---|---|
+| its three **U1** rows | `gate passes` ×3 | **`GATE FIRES` ×3** |
+| its **findings** | **2** (G-1, G-2) | **0** |
+| its **exit code** | 1 | **0** |
+
+Its predictions are **left as written** and now read `PREDICTION MISSED` — which is the correct
+record of a gate that got wider after the prediction was made, and not something to tidy away.
+
+---
+
 ## Which artifact was written, and which was regenerated
 
 Stated because a document left wrong with its evidence **bent to agree** presents identically in
@@ -194,12 +214,12 @@ the census roster reproduces without a re-baseline.
 
 ## Reproduction
 
-    sh code/hodge_leverage_repair_8916/run_all.sh     # ~30 s, exit 0
+    sh code/hodge_leverage_repair_8916/run_all.sh     # ~3 min, exit 0
 
 The transcript regenerates byte-identically at any tree in which `STATE.md`,
 `docs/OneThird-Hodge-Side-Leverage.md`, `docs/state-history/attempt-mg-a3d4.md`,
-`code/hodge_leverage_landing_e1d0/` and `code/hodge_leverage_audit_8a5c/` are unchanged; it
-embeds no sha of its own, and it was checked byte-identical across two consecutive runs. It
+`code/hodge_leverage_landing_e1d0/`, `code/hodge_leverage_audit_8a5c/` and
+`code/hodge_leverage_audit_835f/` are unchanged; it embeds no sha of its own, and it was checked byte-identical across two consecutive runs. It
 **mutates the tree and restores it**, refuses to run against a dirty one (scoped to the three
 files it will `git checkout --`, plus the one the mg-8a5c instrument restores), and verifies
 every restoration by sha256. `git status` is clean after a run except for

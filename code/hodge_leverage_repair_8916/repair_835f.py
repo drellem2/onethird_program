@@ -47,6 +47,10 @@ saying-which the ticket asks for.
       does not cover, printed rather than left to be found; and which artifact
       in this repair is a frozen run and which is regenerated to follow.
 
+  R4  mg-835f's OWN INSTRUMENT, UNMODIFIED, RE-RUN against the repaired tree.
+      A repair scored only by its own new instrument is a repair scored by the
+      party that wrote it.  Its committed transcript is NOT overwritten.
+
 PREDICTED EXIT CODE, WRITTEN BEFORE THE FIRST RUN: 0.  Every probe's verdict is
 written before it runs and any disagreement is a refutation.
 
@@ -59,10 +63,12 @@ restoration is CHECKED by sha256, not asserted.
 REPRODUCTION CONTRACT, in terms of the FILES READ.  This transcript regenerates
 byte-identically for any tree in which `STATE.md`,
 `docs/OneThird-Hodge-Side-Leverage.md`, `docs/state-history/attempt-mg-a3d4.md`,
-`code/hodge_leverage_landing_e1d0/` and `code/hodge_leverage_audit_8a5c/` are
-unchanged.  It embeds no sha of its own.
+`code/hodge_leverage_landing_e1d0/`, `code/hodge_leverage_audit_8a5c/` and
+`code/hodge_leverage_audit_835f/` are unchanged.  It embeds no sha of its own.
 
-Pure Python 3 + git.  No third-party packages.  Runtime ~30 s.
+Pure Python 3 + git.  No third-party packages.  Runtime ~3 min, almost all of
+it the 13 runs of the audited runner, the 2 runs of the mg-8a5c instrument and
+the one run of mg-835f's own instrument in R4.
 """
 
 import hashlib
@@ -78,6 +84,8 @@ import verify_landing as V                              # noqa: E402  the REPAIR
 RUNNER = os.path.join(LANDING, "verify_landing.py")
 AUDIT_8A5C = os.path.join(REPO, "code/hodge_leverage_audit_8a5c/audit_repair_8e30.py")
 AUDIT_8A5C_OUT = "code/hodge_leverage_audit_8a5c/out_audit_8e30.txt"
+AUDIT_835F = os.path.join(REPO, "code/hodge_leverage_audit_835f/audit_a318_repair.py")
+AUDIT_835F_OUT = "code/hodge_leverage_audit_835f/out_audit_a318.txt"
 
 MUTABLE = [V.STATE, V.DELIV, V.HIST]
 # Not mutated here, but the mg-8a5c instrument R2 invokes restores it by
@@ -457,6 +465,51 @@ code, which is exactly what G-1 was.
 
 
 # --------------------------------------------------------------------------
+# R4 -- THE AUDITOR'S OWN INSTRUMENT, UNMODIFIED, AGAINST THE REPAIRED TREE
+# --------------------------------------------------------------------------
+def r4():
+    head("R4 -- mg-835f's OWN INSTRUMENT, UNMODIFIED, RE-RUN")
+    print("""The strongest check available, and it costs nothing but time: the instrument
+that FOUND G-1 and G-2 is re-run against the repaired tree without a byte of it
+being edited.  A repair scored only by its own new instrument is a repair
+scored by the party that wrote it.
+
+`code/hodge_leverage_audit_835f/audit_a318_repair.py` is invoked directly
+rather than through its runner, so its COMMITTED transcript is not overwritten:
+`out_audit_a318.txt` is the run as TAKEN and stays frozen.  It mutates the tree
+and restores it under its own `finally` + sha256, and refuses to run against a
+dirty one.
+""")
+    r = subprocess.run([sys.executable, AUDIT_835F], capture_output=True,
+                       text=True, cwd=REPO)
+    out = r.stdout
+    u1 = [l.strip() for l in out.split("\n")
+          if "U1 " in l and "ordinary prose at the site" in l and "  " in l.strip()]
+    findings = [l.strip() for l in out.split("\n") if "[FINDING" in l]
+    print(f"    exit {r.returncode}, findings {len(findings)}")
+    for l in u1:
+        print(f"      {l[:150]}")
+    for l in findings:
+        print(f"      {l[:150]}")
+    print()
+    fires = sum(1 for l in u1 if "GATE FIRES" in l)
+    record(len(u1) == 3 and fires == 3,
+           f"mg-835f's own U1 probes -- the three it observed at `gate passes` "
+           f"and raised G-1 on -- now read GATE FIRES at {fires} of {len(u1)}, "
+           "measured by the instrument that raised the finding rather than by "
+           "the one that repairs it")
+    record(len(findings) == 0 and r.returncode == 0,
+           f"and that instrument, unmodified, now reports {len(findings)} "
+           f"findings at exit {r.returncode} -- it reported 2 (G-1 and G-2) "
+           "against the tree it was taken against.  Its predictions are LEFT AS "
+           "WRITTEN and now read `PREDICTION MISSED`, which is the correct "
+           "record of a gate that got wider after the prediction was made")
+    record(sha(AUDIT_835F_OUT) == CLEAN[AUDIT_835F_OUT],
+           "and its COMMITTED transcript is untouched by this run, sha256-"
+           "verified -- the frozen artifact stays the run as taken")
+
+
+# --------------------------------------------------------------------------
 def main():
     print("mg-8916 -- THE mg-835f REPAIR, MEASURED IN BOTH DIRECTIONS")
     print("=" * 78)
@@ -474,13 +527,14 @@ restorations make it green again.  0 mathematical statements are touched.""")
                          f"instrument and the mg-8a5c one it invokes both "
                          f"restore by `git checkout --`, which would destroy "
                          f"uncommitted edits to these files.")
-    for p in MUTABLE:
+    for p in MUTABLE + [AUDIT_835F_OUT]:
         CLEAN[p] = sha(p)
 
     try:
         r1()
         r2()
         r3()
+        r4()
     finally:
         restore(*MUTABLE)
 
@@ -504,7 +558,9 @@ restorations make it green again.  0 mathematical statements are touched.""")
     print("  of 3 sites now makes the real runner red at 3 of 3, in two shapes,")
     print("  and every restoration returns it to green.  G-2: the bottom line")
     print("  is derived from its PRIMARY rows, and the check that they agree is")
-    print("  shown FIRING when they are forced apart.")
+    print("  shown FIRING when they are forced apart.  AND mg-835f's OWN")
+    print("  INSTRUMENT AGREES: unmodified, it now reports 0 findings at exit 0,")
+    print("  with its three U1 rows reading GATE FIRES.")
     return 0
 
 
