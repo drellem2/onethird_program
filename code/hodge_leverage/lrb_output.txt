@@ -47,6 +47,20 @@ n=6  posets=318   posets with a negative m_X: 0   posets where sum m_X != |L(P)|
    chamber c.  If some AT edge (c,d) is then unreachable -- no such x
    has x.c = d -- the lazy AT walk, which gives (c,d) probability
    1/(2(n-1)) > 0, cannot be written as sum_x w(x) T_x with w >= 0.
+   
+   READ THE 'undecided by this test' ROWS WITH THIS (mg-a806, from the
+   mg-86a3 audit, F1): the test below is SUFFICIENT only, and every
+   case it leaves open is in fact DECIDED, and decided POSITIVELY --
+   the lazy AT walk IS a Brown walk there, by exact rational LP with
+   witnesses (code/hodge_leverage_audit_86a3/exact_lp.py).  The
+   |L(P)| <= 4 boundary is an artifact of stopping at n = 5: at n = 6
+   there is a positive with |L(P)| = 8, and the family V_k (ordinal sum
+   of k 2-antichains, |L(P)| = 2^k) is positive for every k tested, so
+   ledger row B6 is FALSIFIED as a universal rather than coverage-
+   gapped.  The scope statement that STANDS is stronger: on V_k the AT
+   graph is the hypercube Q_k, so Delta_AT is already diagonal -- THE
+   SEMIGROUP TECHNIQUE REACHES Delta_AT ONLY WHERE Delta_AT IS ALREADY
+   FREE.  Nothing printed below changes; what changes is what it means.
 ==============================================================================
 n=2  posets=  2   NOT a Brown walk (an AT edge is unreachable):   0   vacuous (|L(P)|=1, no edge):  1   undecided by this test:  1
       undecided: (antichain)              |L(P)|= 2  AT edges= 2  candidate faces=3
