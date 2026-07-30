@@ -173,6 +173,27 @@ re-baselines on every unrelated edit, so that trade must be named rather than ta
 claim was never the decision I was entitled to stop; only building a sixth mechanism was.** That judgement is
 deferred to mg-bee1's evidence.
 
+## Where the programme now sits, 2026-07-30 19:50 (UNAUDITED — mg-2060 running)
+
+**Daniel's Bratteli statement, located at his own generality, SPLITS — and the split places us exactly.**
+
+- **Semisimplicity carries the "IS"** (the algebra *is* a sum of endomorphism algebras).
+- **Multiplicity-freeness carries the "CANONICALLY"** (it removes the choice).
+
+**`kF(P)` has multiplicity-free branching FOR FREE** — all its irreducibles are one-dimensional — **and fails
+semisimplicity maximally**: 541 vs 52 at n=5, 4683 vs 203 at n=6, re-derived on a third instrument. **So we hold
+exactly the hypothesis carrying "canonically" and lack exactly the one carrying "is an endomorphism algebra".**
+
+**Both halves settled BY CONSTRUCTION, not argument.** Multiplicity-free but not semisimple: `TL_n(β)` at
+β = 3,2,1,0 — same branching graph, path-pair count 132 at n=6 at each, a sum of endomorphism algebras at two
+parameters (132/132) and not at the other two (99 and 42 of 132). Semisimple but not multiplicity-free:
+`C[S_4]` on skipped chains — conclusion survives while `dim GZ` drops 10 → 8, 7, 5.
+
+**THE HEADLINE: the branching axis and the species axis share a PROPERTY, not a CONSTRUCTION —
+quasi-hereditary.** They are genuinely different generalisations that agree on `S_n`. **So the productive
+question is no longer "what single construction covers both" but "what does quasi-hereditary buy", and whether
+our non-semisimple side has an analogue of the canonical basis multiplicity-freeness hands us for free.**
+
 ## Now (in flight) — 2026-07-30 19:20
 
 - **mg-db09** — Daniel's second proposal: *category + rank function + multiplicity-free branching ⇒ the
