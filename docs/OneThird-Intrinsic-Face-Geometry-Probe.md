@@ -36,13 +36,26 @@ and in fact a theorem, but **measured by neither run cited for it**; now proved 
 line reading `ALL CONTROLS PASS`; it now scores `[CANNOT FAIL]` and suppresses that bottom line.
 Also: the `n ≤ 6` half of F3's coverage sentence corrected to `n ≤ 5` for Lemma 1 — **at §11 by
 mg-1319, and at §2, which is the sentence this document itself labels `(F3, …)`, only now by mg-f2e1
-(mg-f7bc F2). The entry that stood here claimed the correction outright while §2 still read `n ≤ 6`,
-so A2 was a PARTIAL repair and this line was the defect: a changelog is an assertion ABOUT a diff and
-nothing checks it against the diff.** The audit's `38/38` population flagged as a `[:20]` truncation
-at §5 by mg-1319 — **and at §12 by mg-f2e1, the site mg-1319's *"flagged at every site where `38/38`
-appears"* missed (mg-f7bc F1); that claim was false when written, so the per-site enumeration in §5
-and in `STATE.md` Appendix A replaces it rather than being restated more confidently.** And F4's last
-unpatched site patched (§12).
+(mg-f7bc F2). The entry that stood here tagged that correction `(§11)`, and §11 *was* corrected — but
+the same overstatement stood at §2, so the entry named one of two sites while reading as though it
+covered the sentence. A2 was a PARTIAL repair and this line was the defect: a changelog is an
+assertion ABOUT a diff and nothing checks it against the diff.** The audit's `38/38` population
+flagged as a `[:20]` truncation at §5 by mg-1319 — **and at §12 by mg-f2e1, the site mg-1319's
+*"flagged at every site where `38/38` appears"* missed (mg-f7bc F1); that claim was false when
+written, so the flag at §12 and the class statement in `STATE.md` Appendix A replace it rather than
+restating it more confidently.** And F4's last unpatched site patched (§12).
+
+**⚠️ TWO CORRECTIONS TO THIS ENTRY, 2026-07-30 (mg-6653 A4 and its recorded imprecision; landed by
+mg-7d5a) — and they are corrections of the kind this entry exists to name, in the entry that names
+them.** *First:* it read *"the per-site enumeration in §5 and in `STATE.md` Appendix A"*. **§5 carries
+no enumeration** — it carries the truncation FLAG mg-1319 landed — **and §5 is not touched by
+`ba3ec79` at all**: that commit's three hunks in this file are the §-head changelog, §2 and §12
+(re-measured at `code/face_geometry_landing_7d5a/verify_landing.py` T4, which reads the hunks out of
+the commit and the section bounds out of the post-image). A changelog line asserting content absent
+from its own diff, inside the sentence that names that failure mode, is the defect at the third
+generation. *Second:* *"claimed the correction outright"* was itself imprecise — the replaced entry
+did carry `(§11)`. Both are fixed above, and the `STATE.md` claim is now a class statement, which is
+what §5 and Appendix A actually support.
 **Nothing mathematical is struck. Net: REAL PROGRESS ON D2, RELOCATION NOT CLOSURE ON THE CONTROL GAP.**
 
 ---

@@ -1,0 +1,84 @@
+mg-6653 -- ADVERSARIAL BATTERY AGAINST mg-f2e1's E5 (CONTROL ON THE ARTIFACT)
+==============================================================================
+
+BASELINE -- the committed artifact, unmutated
+  grep 'ALL CONTROLS PASS'                : 0 hit(s)  <-- correct: this battery's bottom line denies it
+  grep -i 'all controls pass'              : 1 hit(s), and it is the negation
+  grep 'all-pass banner'                   : 3 hit(s) -- the indirection mg-f2e1 substituted
+  NOTE, and it is the honest limit of the fix: line 5 of the artifact reads
+       '[PASS] with no cannot-fail row the bottom line IS the all-pass banner'
+       A [PASS] row five lines from the top still SAYS the bottom line is the
+       all-pass banner, above a bottom line saying it is not. The row is
+       conditional ('with no cannot-fail row'), exactly as mg-1319's was; what
+       changed is that the LITERAL is gone, so the defect is now invisible to
+       grep rather than absent from the artifact. That is what E5 claimed to do
+       and it is not more than that.
+
+ATTACK A -- POSITIVE CONTROL ON THE NEW CONTROL: mg-1319's two row names, verbatim
+  exit code                        : 1
+  grep 'ALL CONTROLS PASS' on the artifact : 2 hit(s) at line(s) [4, 5]
+       line 4   [PASS] a cannot-fail row suppresses the 'ALL CONTROLS PASS' bottom line
+       line 5   [PASS] with no cannot-fail row the bottom line is 'ALL CONTROLS PASS'
+  of which [PASS]-prefixed         : 2
+  CONTROL ON THE ARTIFACT          : [FAIL] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
+  bottom line                      : - no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text cont
+  ==> POSITIVE CONTROL HOLDS
+
+ATTACK B -- the banner moved into a `detail=` string (same line, same [PASS] prefix)
+  exit code                        : 1
+  grep 'ALL CONTROLS PASS' on the artifact : 1 hit(s) at line(s) [6]
+       line 6   [PASS] a real failure still exits nonzero and is reported first  -- clean-run bottom line is 'ALL CONTROLS PAS
+  of which [PASS]-prefixed         : 1
+  CONTROL ON THE ARTIFACT          : [FAIL] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
+  bottom line                      : - no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text cont
+  ==> attack repelled
+
+ATTACK C -- the banner printed as a section heading, outside check()
+  exit code                        : 1
+  grep 'ALL CONTROLS PASS' on the artifact : 1 hit(s) at line(s) [2]
+       line 2   [PASS] bottom line for a clean run: ALL CONTROLS PASS
+  of which [PASS]-prefixed         : 1
+  CONTROL ON THE ARTIFACT          : [FAIL] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
+  bottom line                      : - no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text cont
+  ==> attack repelled
+
+ATTACK D -- a row name carrying the banner with a doubled space (scope boundary)
+  exit code                        : 0
+  grep 'ALL CONTROLS PASS' on the artifact : 0 hit(s)
+  of which [PASS]-prefixed         : 0
+  CONTROL ON THE ARTIFACT          : [PASS] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
+  bottom line                      : A row that cannot fail covers nothing, so this battery's bottom line is NOT 'all controls pass'.
+  ==> attack repelled
+
+ATTACK E -- can the banner be reached with a non-empty CANNOT FAIL tally?
+  exit code                        : 1
+  grep 'ALL CONTROLS PASS' on the artifact : 0 hit(s)
+  of which [PASS]-prefixed         : 0
+  CONTROL ON THE ARTIFACT          : [PASS] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
+  bottom line                      : - a cannot-fail row keeps the all-pass banner out of the bottom line
+  ==> attack repelled
+
+==============================================================================
+  ATTACK A  POSITIVE CONTROL HOLDS
+  ATTACK B  attack repelled
+  ATTACK C  attack repelled
+  ATTACK D  attack repelled
+  ATTACK E  attack repelled
+
+BOTTOM LINE. The literal is gone from the artifact and ATTACK A shows the new control
+is a control and not a tautology -- both of mg-f2e1's E5 claims hold, and ATTACK E
+shows the A4 repair underneath it is sound: unguarding the tally makes the SELF-TEST's
+own assertion fail and the run exit 1, which is the right instrument catching it.
+
+But ATTACKS B and C construct the F5 defect in full with the new control in place:
+a [PASS]-prefixed line near the top of controls_output.txt carrying 'ALL CONTROLS
+PASS', above a bottom line denying it, with the control reporting 'offending rows:
+none' and exit 0. B is the cheaper route -- `detail` prints on the SAME LINE as the
+row name, behind the same [PASS] prefix, so a grep cannot tell them apart.
+
+The control scans ROW_NAMES only. Its docstring discloses that, and then says it
+'makes the artifact's occurrences of the banner exactly the bottom line's, and claims
+nothing further' -- the wider of the two adjacent sentences, and the one to strike.
+ATTACK D fixes the other boundary: what the control buys is exactly 'no row name
+contains these 17 characters', which is the right scope for it to have and less than
+the docstring's last clause asserts.
