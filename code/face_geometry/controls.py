@@ -34,6 +34,16 @@ already vary.  NEGATIVE CONTROL 4 answers the question with a decision
 procedure (`absorbable_by_diagonal_twist`) rather than an argument, on its own
 four mutations and on NEGATIVE CONTROL 3's, and prints both answers.
 
+AND THE ANSWER TO THAT QUESTION IS NOT AUTOMATICALLY A CONTROL ROW (mg-8a12,
+landing mg-fcf1's F2).  Asking it is right; SCORING it is right only where the
+predicate could have answered either way.  For three of NEGATIVE CONTROL 4's
+four mutations the answer is forced by arithmetic -- s_i^2 = 1 pins every
+diagonal entry, so a corruption that moves one can never be absorbed -- and a
+forced answer scored [PASS] is exactly the defect this file's SCORING section
+exists to stop.  NEGATIVE CONTROL 4 now COMPUTES which of its rows are in that
+position (`diag_preserved`, below) instead of asserting it either way, and
+routes them to a [CANNOT FAIL] row.
+
 Run:  python3 controls.py
 """
 
@@ -539,8 +549,78 @@ def negative_control_construction(nmax):
           par_rej == len(par_app) and len(par_app) == len(bites))
 
 
+# Why each single-site incidence corruption provably moves a DIAGONAL entry of
+# L^rel, which is what makes its "not absorbable into a diagonal twist" answer a
+# theorem rather than a measurement (mg-8a12, mg-fcf1 F2).  Read out by the
+# [CANNOT FAIL] row of NEGATIVE CONTROL 4 for whichever rows are forced, so the
+# printed argument always names the rows it is actually about.
+DIAGONAL_MOVES = {
+    "split_free_as_interior":
+        "I2 is exactly L_true + e_j.e_j^T, j the free ridge's one facet, so one "
+        "diagonal entry rises by 1",
+    "ridge_drop":
+        "I3 is L_true minus that ridge's rank-one outer product, so both its "
+        "facets' diagonal entries drop by 1",
+    "ridge_facets":
+        "I1 moves a rank-one term from one facet to another, so the abandoned "
+        "facet's diagonal entry drops by 1",
+}
+
+
+def predicted_incidence_delta(P, mode):
+    """The perturbation `mode` is PREDICTED to make to the untwisted L^rel,
+    computed from the corrupted site alone.  None if the mutation did not apply.
+
+    THIS IS THE CAUSATION EVIDENCE (mg-8a12, C4(c)).  "The test rejects" is not
+    by itself evidence that the test SAW the corruption: mg-5630's line F found
+    a row that appeared to fire only because a bite-count moved 82 -> 78, an
+    accident of a len() comparison rather than a detection.  So each of I1, I2
+    and I3 is required to reject with a residual that MATCHES a prediction made
+    without looking at the corrupted matrix.
+
+    The prediction reads only the TRUE build: L^rel = sum over interior ridges r
+    of d_r^T d_r, so changing what one ridge contributes changes L^rel by
+    exactly that rank-one term.  With d_r the true boundary row of the ridge the
+    mutation touches (`mutated_ridge`):
+
+      I2 split_free_as_interior   ridge r joins the relative complex:  + d_r^T d_r
+      I3 ridge_drop               ridge r leaves it:                   - d_r^T d_r
+      I1 ridge_facets             r's second incidence moves from facet j2 to a
+                                  facet j3 it does not meet: d_r^T d_r is
+                                  replaced by d_r'^T d_r' with that entry moved
+
+    I4 (facet_offbyone) re-indexes the whole facet enumeration, so it has no
+    single site and gets no prediction here -- see the row itself.
+    """
+    r = top_laplacians(P, incidence_mode=mode)["mutated_ridge"]
+    if r is None:
+        return None
+    td = top_laplacians(P)
+    M, _, nc = boundary_matrix(td["facets"], td["ridges"])
+    row = M.get(r, {})
+
+    def outer(vec, sgn=1):
+        D = [[0] * nc for _ in range(nc)]
+        for a, va in vec.items():
+            for b, vb in vec.items():
+                D[a][b] += sgn * va * vb
+        return D
+
+    if mode == "split_free_as_interior":
+        return outer(row)
+    if mode == "ridge_drop":
+        return outer(row, -1)
+    if mode == "ridge_facets":
+        j1, j2 = sorted(row.keys())
+        j3 = next(j for j in range(nc) if j not in (j1, j2))
+        gained, lost = outer({j1: row[j1], j3: row[j2]}), outer(row, -1)
+        return [[gained[i][j] + lost[i][j] for j in range(nc)] for i in range(nc)]
+    return None
+
+
 def negative_control_incidence(nmax):
-    """NEGATIVE CONTROL 4 -- corrupt the INCIDENCE STRUCTURE of F(P) (mg-2789).
+    """NEGATIVE CONTROL 4 -- corrupt the INCIDENCE STRUCTURE of F(P) (mg-2789,
+    repaired by mg-8a12 after the mg-fcf1 audit).
 
     WHY THIS EXISTS.  Until this control, every negative control in the battery
     was either a comparison-side mutation or a sign gauge.  NEGATIVE CONTROL 2:
@@ -590,18 +670,47 @@ def negative_control_incidence(nmax):
     changes L^rel is necessarily rejected by an equality test: the rejection
     count is arithmetic, not evidence.  The informative parts of each row are
     (a) that the corruption BITES at all, on the stated part of the population,
-    and (b) that it is not absorbable into a parameter the battery already
-    varies.  NEGATIVE CONTROL 3's "still rejects 82/82" did not separate those
-    two, which is what mg-5630 found and what this section is built not to
+    (b) that the rejection is CAUSED by the corruption rather than by a side
+    effect, and (c) that it is not absorbable into a parameter the battery
+    already varies.  NEGATIVE CONTROL 3's "still rejects 82/82" did not separate
+    these, which is what mg-5630 found and what this section is built not to
     repeat.
 
-    (b) IS COMPUTED, NOT ASSERTED.  For every poset where a mutation bites,
+    (b) IS THE HALF mg-2789 LEFT IMPLICIT, and mg-8a12 supplies it: on every
+    biting poset the residual L_mut - (D - A) is required to equal a prediction
+    made from the corrupted site alone, without reading the corrupted matrix
+    (`predicted_incidence_delta`).  That is what separates "the test saw the
+    corruption" from "something else moved and the comparison noticed", which is
+    the failure mg-5630's line F caught.  The shape of the compared matrices is
+    checked too, so no rejection can be a dimension mismatch.
+
+    (c) IS COMPUTED, NOT ASSERTED.  For every poset where a mutation bites,
     `absorbable_by_diagonal_twist` decides exactly whether the corrupted matrix
     is S . (target) . S for SOME diagonal sign matrix S -- the family that
     contains the orientation twist E, M3's one-facet twist, and NEGATIVE
-    CONTROL 3's D.  One absorbable poset fails the row.  Reported alongside,
-    where it can be proved: that a spectral invariant moves, which rules out
-    any similarity transform whatever, diagonal or not.
+    CONTROL 3's D.  Reported alongside, where it can be proved: that a spectral
+    invariant moves, which rules out any similarity transform whatever, diagonal
+    or not.
+
+    AND (c) IS SCORED ONLY WHERE THE PREDICATE COULD HAVE SAID EITHER THING
+    (mg-8a12, landing mg-fcf1's F2 -- this is the repair).  `s_i^2 = 1` pins
+    every diagonal entry, so `absorbable_by_diagonal_twist` returns False the
+    instant a diagonal entry moves.  On a mutation that provably moves one,
+    "absorbable on 0 of N" is arithmetic at every n and cannot fail -- it is a
+    THEOREM being read out as an 82-poset count, mg-78c0's defect shape.  So
+    each row measures `diag_preserved`, the number of its biting posets on which
+    the diagonal is unchanged and the off-diagonal signs actually decide:
+
+      diag_preserved > 0   the predicate did real work; absorbability stays in
+                           the row's scored condition (this is I4: 3 of 61)
+      diag_preserved == 0  the answer was forced; absorbability is REMOVED from
+                           the row and stated as a proven property in a single
+                           [CANNOT FAIL] row (this is I1, I2 and I3)
+
+    mg-2789 scored the forced answer as part of four passing rows and printed
+    that it had added no [CANNOT FAIL] row.  Both are corrected here.  The
+    mathematics is untouched: the corruptions are not gauges, and that is a
+    stronger statement than mg-2789 claimed for it, just not a measured one.
 
     WHAT THIS SECTION DOES NOT SHOW.  It tests the four sites above, on the
     posets stated in each row, and nothing wider.  It does not certify the rest
@@ -611,18 +720,22 @@ def negative_control_incidence(nmax):
     do not use.
     """
     print("NEGATIVE CONTROL 4 -- corrupt the INCIDENCE STRUCTURE of F(P), at four "
-          "named sites (mg-2789)")
+          "named sites (mg-2789, scoring repaired by mg-8a12)")
     ps = [P for n in range(2, nmax + 1) for P in all_posets(n)]
     N = len(ps)
+    # The third field says whether the mutation has a SINGLE named site, so that
+    # its effect on L^rel can be predicted from that site alone (C4(c)).  It is a
+    # statement about the shape of the mutation, not about how it scores -- what
+    # scores is computed below.
     muts = [
         ("I1 a ridge's facet list (one interior ridge re-targeted onto a facet it "
-         "does not meet)", "ridge_facets"),
+         "does not meet)", "ridge_facets", True),
         ("I2 the free/interior split (one free ridge counted as interior)",
-         "split_free_as_interior"),
+         "split_free_as_interior", True),
         ("I3 the ridge enumeration (one interior ridge missing from the complex)",
-         "ridge_drop"),
+         "ridge_drop", True),
         ("I4 the facet enumeration le_to_facet (mis-indexed by one)",
-         "facet_offbyone"),
+         "facet_offbyone", False),
     ]
     # A POSITIVE CONTROL ON THIS CONTROL'S OWN INSTRUMENT, run before the
     # instrument is used on anything.  "absorbable on 0/N" is worthless if it is
@@ -654,7 +767,7 @@ def negative_control_incidence(nmax):
         m = len(L_true)
         if m > 8:
             continue
-        for mode in ["true", "facet_swap01"] + [md for _, md in muts]:
+        for mode in ["true", "facet_swap01"] + [md for _, md, _ in muts]:
             A = claim1_pair(P, incidence_mode=mode)[0]
             brute = False
             for bits in range(1 << m):
@@ -669,10 +782,23 @@ def negative_control_incidence(nmax):
           "brute force over all 2^m sign vectors on %d/%d (poset, mutation) pairs "
           "with |L(P)| <= 8" % (agree, cases), agree == cases and cases > 0)
 
+    # C4(a) (mg-8a12): the corruptions are measured against an UNCORRUPTED run of
+    # the same code path, and that run is a scored row rather than an assumption.
+    # Without it, a pipeline that rejected everything would score four perfect
+    # rows below; with it, "rejects on all of them" means something.
+    n_base = sum(1 for P in ps if claim1_test(P, incidence_mode="true") is True)
+    check("baseline -- with NO corruption (incidence_mode='true') the claim-(1) test "
+          "does NOT reject, on %d/%d posets: every poset up to isomorphism with "
+          "2 <= n <= %d.  This is the population every count below is taken over, and "
+          "the reason a rejection below is a detection rather than a pipeline that "
+          "rejects everything" % (n_base, N, nmax), n_base == N)
+
     same_target = 0
     multi_ridge = {}
-    for name, mode in muts:
+    forced_rows, theorem_app, theorem_diag, theorem_absorb = [], 0, 0, 0
+    for name, mode, localised in muts:
         app = rej = absorb = spec = 0
+        caused = shape_ok = diag_preserved = diag_moved = residual_max = 0
         vac, vac_sizes = 0, set()
         for P in ps:
             L_true, target = claim1_pair(P)
@@ -691,11 +817,128 @@ def negative_control_incidence(nmax):
                 absorb += 1
             if not_isospectral(L_mut, L_true):
                 spec += 1
+            # C4(c): is the comparison even of the same shape, and does the
+            # residual match a prediction made from the corrupted site WITHOUT
+            # reading L_mut?  I.e. is this a detection or a len() accident of the
+            # kind mg-5630's line F caught?  Shape is settled FIRST: on a
+            # mismatch there is no residual to speak of, the row fails on
+            # shape_ok, and nothing below may index into a ragged matrix.
+            m = len(L_true)
+            if len(L_mut) != m or any(len(L_mut[i]) != len(L_true[i])
+                                      for i in range(m)):
+                continue                   # counted in app, absent from shape_ok
+            shape_ok += 1
+            if all(L_mut[i][i] == target[i][i] for i in range(m)):
+                diag_preserved += 1        # here the absorbability answer is not forced
+            else:
+                diag_moved += 1            # here it is forced: s_i^2 = 1 pins the diagonal
+            delta = predicted_incidence_delta(P, mode) if localised else None
+            if delta is not None:
+                s = [perm_sign(w) for w in linear_extensions(P)]
+                pred = [[s[i] * delta[i][j] * s[j] for j in range(m)] for i in range(m)]
+                obs = [[L_mut[i][j] - target[i][j] for j in range(m)] for i in range(m)]
+                caused += mat_eq(pred, obs) and any(v for r_ in pred for v in r_)
+            residual_max = max(residual_max, sum(
+                1 for i in range(m) for j in range(m) if L_mut[i][j] != target[i][j]))
+        # THE REPAIR (mg-8a12, landing mg-fcf1's F2), and the lesson it carries.
+        #
+        # PROVING A PROPERTY AND TESTING FOR IT ARE DIFFERENT OPERATIONS.  A
+        # requirement phrased "show that X holds" will be implemented as a green
+        # row when the surrounding artifact is a control battery -- which is
+        # exactly what happened: mg-2789's acceptance bar said "show your
+        # corruption is NOT absorbable into a parameter the battery already
+        # varies", the polecat showed it, and the showing became three passing
+        # control rows that no possible construction error could have turned red.
+        # The mandated guard became the thing that cannot fail.  This is the
+        # FOURTH generation of one defect (mg-09ea -> mg-60d3 -> mg-5630/NC3 ->
+        # NC4) and the first caused by the remedy's own specification.
+        #
+        # So which half of this row is a measurement is DECIDED HERE, from the
+        # population, rather than written in by hand: a hand-written answer is
+        # the failure mode being repaired.  If the predicate could not have said
+        # "absorbable" on any poset this row counts, its answer is a theorem and
+        # belongs in the [CANNOT FAIL] row below, not in a scored condition.
+        forced = (diag_preserved == 0)
+        cond = app > 0 and rej == app and shape_ok == app
+        if localised:
+            cond = cond and caused == app
+        if forced:
+            forced_rows.append((name, mode, app, absorb))
+            theorem_app += app
+            theorem_diag += diag_moved     # counted, not derived: a poset whose
+                                           # shape moved is verified for neither
+            theorem_absorb += absorb
+        else:
+            cond = cond and absorb == 0
         check("%s -- the claim-(1) test rejects on %d/%d posets where the corruption "
-              "changes L^rel (%d vacuous, on |L(P)| in %s); absorbable into a diagonal "
-              "+-1 twist on %d of those %d; spectrum provably moved on %d of those %d"
-              % (name, rej, app, vac, sorted(vac_sizes), absorb, app, spec, app),
-              app > 0 and rej == app and absorb == 0)
+              "changes L^rel (%d vacuous, on |L(P)| in %s); spectrum provably moved on "
+              "%d of those %d.  %s  %s"
+              % (name, rej, app, vac, sorted(vac_sizes), spec, app,
+                 ("The residual equals a perturbation predicted from the corrupted "
+                  "site alone on %d/%d and has at most %d nonzero entr%s on any poset, "
+                  "and the compared matrices have the same shape on %d/%d: the "
+                  "rejection is CAUSED by this corruption, not by a size change or a "
+                  "moved count (mg-5630 line F)." % (caused, app, residual_max,
+                                                     "y" if residual_max == 1 else "ies",
+                                                     shape_ok, app))
+                 if localised else
+                 ("The mutation re-indexes the whole facet enumeration, so it has no "
+                  "single site and no residual prediction is made; up to %d matrix "
+                  "entries move.  Shape unchanged on %d/%d, so the rejection is not a "
+                  "size mismatch." % (residual_max, shape_ok, app)),
+                 ("Absorbability is NOT scored in this row: the diagonal moves on all "
+                  "%d, so 'not absorbable' is forced -- see the [CANNOT FAIL] row "
+                  "below (mg-8a12)." % app) if forced else
+                 ("Absorbable into a diagonal +-1 twist on %d of those %d, and this "
+                  "row DOES score it: the diagonal is preserved on %d of them, so the "
+                  "predicate had to decide on the off-diagonal signs and could have "
+                  "returned absorbable." % (absorb, app, diag_preserved))),
+              cond)
+
+    # The property removed from those rows, stated once, as what it is.  Same
+    # treatment mg-1319 gave the all-+1 row: still verified, never a pass.  It is
+    # emitted only if some row was in fact forced -- if a later mutation set makes
+    # every absorbability answer a real decision, this row disappears rather than
+    # failing, because "no theorem to report" is not a broken theorem.
+    if forced_rows:
+        check("PROVEN PROPERTY, not a control row -- the corruptions %s are NOT "
+              "absorbable into a diagonal +-1 twist (%s), and those counts are FORCED "
+              "at every n, so this is scored [CANNOT FAIL] and NOT as %d passing "
+              "controls.  The argument, in two lines: (i) S.A.S = B with s_i^2 = 1 "
+              "pins every diagonal entry, so a corruption that moves one can never be "
+              "absorbed into a diagonal twist; (ii) each of these moves one -- %s.  "
+              "Both lines are checked, not asserted: the diagonal moves on %d/%d "
+              "biting posets and the predicate reports absorbable on %d, and mg-fcf1 "
+              "swept every eligible ridge choice (1449/981/1459 for I1/I2/I3), not "
+              "just the first one this file mutates.  A FALSE theorem is still a "
+              "failure: if the diagonal stopped moving, or the predicate did report "
+              "absorbable, this row FAILS"
+              % (", ".join(n.split(" ")[0] for n, _, _, _ in forced_rows),
+                 ", ".join("%s on %d/%d" % (n.split(" ")[0], a - ab, a)
+                           for n, _, a, ab in forced_rows),
+                 len(forced_rows),
+                 "; ".join(DIAGONAL_MOVES.get(
+                     m, "%s moves one, though no closed form for it is recorded "
+                        "in DIAGONAL_MOVES" % n.split(" ")[0])
+                     for n, m, _, _ in forced_rows),
+                 theorem_diag, theorem_app, theorem_absorb),
+              theorem_absorb == 0 and theorem_diag == theorem_app,
+              cannot_fail=True)
+
+    # A POSITIVE CONTROL ON THE REPAIR ITSELF.  RELABELLING IS NOT DETECTING: a
+    # repair that routed every row to [CANNOT FAIL] would look attended to and
+    # cover nothing, which is worse than the defect it replaces.  So the routing
+    # has to be shown to separate on this population, the same way the gauge
+    # detector and the absorbability instrument are shown to separate above.
+    check("routing check on the mg-8a12 repair: the forced/measured split "
+          "SEPARATES on this population -- %d of the %d rows have their "
+          "absorbability answer forced by a moved diagonal and are stated as a "
+          "theorem; the absorbability answer on the remaining %d was decided on the "
+          "off-diagonal signs and stays scored. "
+          "If it routed every row one way it would be a relabelling of the whole "
+          "section, not a decision about each row"
+          % (len(forced_rows), len(muts), len(muts) - len(forced_rows)),
+          0 < len(forced_rows) < len(muts))
 
     # ---- measurements, deliberately NOT scored as PASS/FAIL rows ----------
     print("  measured, not scored:")
@@ -716,14 +959,18 @@ def negative_control_incidence(nmax):
         nc3_app += 1
         nc3_absorb += absorbable_by_diagonal_twist(L_par, target)
         nc3_spec += not_isospectral(L_par, L_true)
-    print("    * the predicate that scores the four rows above, applied to NEGATIVE "
+    print("    * the absorbability predicate -- which after mg-8a12 scores ONE row "
+          "(I4, where the diagonal is preserved on 3 of 61 and the answer is a real "
+          "decision) and is stated as a theorem for I1/I2/I3 -- applied to NEGATIVE "
           "CONTROL 3's facet-parity corruption instead, would score it FAIL: that "
           "corruption is absorbable into a diagonal +-1 twist on %d/%d of the posets "
-          "where it bites and its spectrum provably moves on %d/%d. So the four rows "
-          "are falsifiable and this is the witness -- it is the gauge this section "
-          "exists to get past (mg-5630)."
+          "where it bites and its spectrum provably moves on %d/%d. So the predicate "
+          "CAN return absorbable and row I4 is falsifiable; this is the witness, and "
+          "it is the gauge this section exists to get past (mg-5630). It is NOT a "
+          "witness for I1/I2/I3: no witness exists there, which is the point of the "
+          "[CANNOT FAIL] row."
           % (nc3_absorb, nc3_app, nc3_spec, nc3_app))
-    for name, mode in muts:
+    for name, mode, _ in muts:
         plus_same = par_bite = 0
         for P in ps:
             base = claim1_pair(P, incidence_mode=mode)[0]
@@ -756,21 +1003,41 @@ def negative_control_incidence(nmax):
           "L^rel by a signed permutation matrix, so it is isospectral, and the "
           "spectrum provably moves on %d/%d. A relabelling of the facet set is a "
           "gauge, so it is not scored above; row I4 replaces it with an off-by-one "
-          "in le_to_facet, whose spectrum does move."
+          "in le_to_facet, whose spectrum moves on 58 of the 61 posets where it "
+          "bites -- NOT on all of them: mg-2789 wrote 'whose spectrum does move' and "
+          "that is false as written (mg-fcf1 F1). On the 3 antichains the off-by-one "
+          "is prefixes_true(rot(w)), rot maps L(P) = S_n onto itself, and the "
+          "mutation is a bare permutation conjugation -- the same gauge. Corrected "
+          "here because it is a printed claim wider than the code verifies; RESCOPING "
+          "row I4 for it is NOT done here and needs its own item."
           % (sw_app, N, sw_absorb, sw_app, sw_spec, sw_app))
     print("    * where a row reports the spectrum moving on fewer than all of its "
-          "biting posets, NO claim is made either way on the remainder: the trace, "
-          "the sum of squared entries and det(. - k.I) mod (2^31-1) for k in "
-          "{3,5,7,11,13} did not separate those. The diagonal-twist decision is "
-          "exact on every one of them, and that is the absorbability question; "
-          "non-isospectrality is the stronger one-sided extra.")
+          "biting posets, THIS FILE makes no claim either way on the remainder: the "
+          "trace, the sum of squared entries and det(. - k.I) mod (2^31-1) for k in "
+          "{3,5,7,11,13} did not separate those. That is a limit of the invariants "
+          "used here and NOT an open question -- mg-fcf1 settled every one of them "
+          "adversely, exhibiting each as a signed-permutation conjugate (I1's 6, all "
+          "|L(P)| = 3 with sigma = (0,2,1); I4's 3, the antichains above). The "
+          "diagonal-twist decision is exact on every one of them, and that is the "
+          "absorbability question; non-isospectrality is the stronger one-sided "
+          "extra.")
     print("    * row scoring, and who owns it: every row above is vacuous on the "
           "sub-population named in it, exactly as NEGATIVE CONTROL 2's M1-M5 are, "
           "and the scoring does not model vacuity -- only the [CANNOT FAIL] label, "
           "which mg-1319 landed and OWNS (see SCORING at the top of this file). "
-          "mg-2789 added no [CANNOT FAIL] row: each of the four rows above fails if "
-          "its corruption stops biting or turns out absorbable. The lines in this "
-          "block are measurements, not rows, and are deliberately unscored.")
+          "mg-2789 printed here that it 'added no [CANNOT FAIL] row: each of the "
+          "four rows above fails if its corruption stops biting or turns out "
+          "absorbable'. THAT WAS FALSE, and this is the correction (mg-8a12, landing "
+          "mg-fcf1 F2). For I1, I2 and I3 neither failure mode was reachable: the "
+          "diagonal moves, so the corruption cannot stop biting AND cannot be "
+          "absorbable, both by arithmetic at every n. Three of the four rows were "
+          "[CANNOT FAIL] rows scored as passes, under a battery whose own SCORING "
+          "section forbids exactly that. What now stands scored is the half that can "
+          "fail: that each corruption reaches the population at all, and that the "
+          "rejection is caused by the corruption (residual == prediction). The "
+          "unreachable half is stated once, as a theorem, in the [CANNOT FAIL] row. "
+          "The lines in this block are measurements, not rows, and are deliberately "
+          "unscored.")
 
 
 def main():
