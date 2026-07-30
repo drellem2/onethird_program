@@ -1,0 +1,70 @@
+==============================================================================
+PER-n SUMMARY -- population tested vs population the claim holds on
+==============================================================================
+  n   posets   (1) OK   (2) OK  (3)L OK   (3)bij  max|L(P)|
+  1        1        1        1        1        1          1
+  2        2        2        2        2        2          2
+  3        5        5        5        5        5          6
+  4       16       16       16       16       16         24
+  5       63       63       63       63       63        120
+  6      318      318      318      318      318        720
+all      405      405      405      405      405
+
+==============================================================================
+IS THE TWIST NEEDED?  (how often the UNtwisted form also holds)
+==============================================================================
+claim (1) untwisted holds on 6/405 posets (6 of those have |L(P)|=1)
+claim (2) untwisted holds on 6/405 posets (6 of those have |L(P)|=1)
+-> the twist is NOT cosmetic: it is needed except where L(P) is a point.
+
+==============================================================================
+FAILURE-MODE BREAKDOWN -- the claim on named subclasses
+==============================================================================
+subclass                                         count     (1)     (2)  (3)bij
+antichain (L(P) = S_n)                               6       6       6       6
+chain (|L(P)| = 1)                                   6       6       6       6
+disconnected                                       108     108     108     108
+non-trivial Aut(P)                                 275     275     275     275
+trivial Aut(P)                                     130     130     130     130
+connected, not a chain, not an antichain           291     291     291     291
+|L(P)| >= 10                                       291     291     291     291
+
+==============================================================================
+DEGENERACY CHECK -- an identity that holds only where both sides are
+trivial is not a bridge.  Non-degenerate = the AT graph has an edge
+AND at least one generator is forbidden somewhere (so rel != abs).
+==============================================================================
+non-degenerate posets: 394 of 405; claim (1) holds on 394 of them
+posets where BOTH sides are the zero 1x1 matrix: 6
+
+==============================================================================
+KERNEL OF THE TWISTED RELATIVE TOP LAPLACIAN
+(= dim H_{n-2}(F(P), dF(P); Q); equals 1 iff the AT graph is connected)
+==============================================================================
+kernel dimension histogram over all 405 posets: {1: 405}
+
+==============================================================================
+THE FOUR-ELEMENT EXAMPLE -- all 16 posets on 4 elements
+(the sketch says 'the four-element example', singular, and does not
+say which poset; so all 16 are reported)
+==============================================================================
+covers                 tags                         |L| ridges   free  (1)  (2)   (3)L (3)bij
+(antichain)            antichain,disconnected,|Aut|=24    24     36      0 True True   True   True
+0<1                    disconnected,|Aut|=2          12     21      6 True True   True   True
+0<1 0<2                disconnected,|Aut|=2           8     15      6 True True   True   True
+0<1 0<2 0<3            |Aut|=6                        6     12      6 True True   True   True
+0<1 0<3 1<2            -                              3      7      5 True True   True   True
+0<1 1<2 1<3            |Aut|=2                        2      5      4 True True   True   True
+0<1 1<2 2<3            chain                          1      3      3 True True   True   True
+0<1 0<2 1<3 2<3        |Aut|=2                        2      5      4 True True   True   True
+0<1 1<2                disconnected                   4      9      6 True True   True   True
+0<2 1<2 2<3            |Aut|=2                        2      5      4 True True   True   True
+0<1 1<3 2<3            -                              3      7      5 True True   True   True
+0<1 0<3 2<3            -                              5     10      5 True True   True   True
+0<2 0<3 1<2 1<3        |Aut|=4                        4      8      4 True True   True   True
+0<2 1<2                disconnected,|Aut|=2           8     15      6 True True   True   True
+0<3 1<3 2<3            |Aut|=6                        6     12      6 True True   True   True
+0<1 2<3                disconnected,|Aut|=2           6     12      6 True True   True   True
+
+NO WITNESS AGAINST ANY OF THE THREE CLAIMS in the tested population.
+Population tested: all posets up to isomorphism on n = 1..6 elements (405 posets).
