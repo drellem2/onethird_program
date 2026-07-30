@@ -1,0 +1,72 @@
+
+==============================================================================
+S4  THE QUOTIENT SIDE  (document section 4)
+==============================================================================
+n    tie-free  #extremal    qmass ext vs rest        z    qfrac ext vs rest        z
+3           1  (too few)
+4           3  (too few)
+5          16          3   1.000 vs 0.825    +1.16    0.642 vs 0.446    +2.90   AGREES
+6          88          5   1.000 vs 0.734    +1.95    0.590 vs 0.316    +3.40   AGREES
+7         671          8   1.000 vs 0.593    +2.64    0.541 vs 0.203    +4.49   AGREES
+
+S4a  SATURATION CONTROL: the qmass = 1 club
+  n=5: 6 of 16 saturate (37.5% of the population); of those, 50.0% are extremal   AGREES
+  n=6: 11 of 88 saturate (12.5% of the population); of those, 45.5% are extremal   AGREES
+  n=7: 20 of 671 saturate (3.0% of the population); of those, 40.0% are extremal   AGREES
+
+S4b  THE UNIVERSAL SENTENCE: 'EVERY extremal poset is rank 1 -- and TIED WITH
+     EVERY OTHER MEMBER of their group'.  Checked on EVERY extremal poset, with
+     no cap on the number printed and no minimum group size.
+    n=5 e=3    1<0 2<1 3<0 4<2 4<3          qmass=1       rank 1 of 3   TIED WITH 2
+    n=5 e=3    1<0 2<1 3<2 4<1              qmass=1       rank 1 of 3   TIED WITH 2
+    n=5 e=3    2<0 3<1 3<2 4<3              qmass=1       rank 1 of 3   TIED WITH 2
+    n=6 e=3    1<0 2<1 3<0 4<2 4<3 5<4      qmass=1       rank 1 of 4   TIED WITH 3
+    n=6 e=3    1<0 2<1 3<2 4<1 5<3 5<4      qmass=1       rank 1 of 4   TIED WITH 3
+    n=6 e=3    1<0 2<1 3<2 4<3 5<2          qmass=1       rank 1 of 4   TIED WITH 3
+    n=6 e=3    2<0 3<1 3<2 4<3 5<4          qmass=1       rank 1 of 4   TIED WITH 3
+    n=6 e=9    2<0 3<1 3<2 4<3 5<1 5<2      qmass=1       rank 1 of 7   TIED WITH 0   <-- NOT tied with every other member
+    n=7 e=3    1<0 2<1 3<0 4<2 4<3 5<4 6<5  qmass=1       rank 1 of 5   TIED WITH 4
+    n=7 e=3    1<0 2<1 3<2 4<1 5<3 5<4 6<5  qmass=1       rank 1 of 5   TIED WITH 4
+    n=7 e=3    1<0 2<1 3<2 4<3 5<2 6<4 6<5  qmass=1       rank 1 of 5   TIED WITH 4
+    n=7 e=3    1<0 2<1 3<2 4<3 5<4 6<3      qmass=1       rank 1 of 5   TIED WITH 4
+    n=7 e=3    2<0 3<1 3<2 4<3 5<4 6<5      qmass=1       rank 1 of 5   TIED WITH 4
+    n=7 e=9    1<0 2<1 3<0 4<2 4<3 5<4 6<2  qmass=1       rank 1 of 13  TIED WITH 2   <-- NOT tied with every other member
+    n=7 e=9    2<0 3<1 3<2 4<3 5<1 5<2 6<4  qmass=1       rank 1 of 13  TIED WITH 2   <-- NOT tied with every other member
+    n=7 e=9    2<0 3<1 3<2 4<3 5<4 6<3      qmass=1       rank 1 of 13  TIED WITH 2   <-- NOT tied with every other member
+
+  extremal posets examined: 16;  not rank 1: 0;  NOT tied with every other member of their e-group: 4
+    n=6  2<0 3<1 3<2 4<3 5<1 5<2        e=9  group size 7, tied with 0; other qmass values in the group: ['2/3', '8/9']
+    n=7  1<0 2<1 3<0 4<2 4<3 5<4 6<2 6<3 e=9  group size 13, tied with 2; other qmass values in the group: ['1', '2/3', '8/9']
+    n=7  2<0 3<1 3<2 4<3 5<1 5<2 6<4 6<5 e=9  group size 13, tied with 2; other qmass values in the group: ['1', '2/3', '8/9']
+    n=7  2<0 3<1 3<2 4<3 5<4 6<3        e=9  group size 13, tied with 2; other qmass values in the group: ['1', '2/3', '8/9']
+
+==============================================================================
+S5.1  THEOREM 3 (convexity) and its two counts
+==============================================================================
+(level, block) pairs, n=3..7 : 3246401   AGREES   -- non-convex blocks found: 0
+(poset, nonempty subset) pairs: 281977   AGREES   -- '{B}+singletons is a level IFF B convex' failures: 0
+
+==============================================================================
+S5.2  THEOREM 4:  lambda_2 = max over incomparable pairs of s(x,y)
+==============================================================================
+non-chain posets n=3..7: 2442  AGREES ; mismatches: 0 AGREES
+
+S5.2a  the supporting multiplicity fact: every all-chain level other than the
+       finest has m_X = 0, and the finest has m = 1
+all-chain levels other than the finest: 65481  AGREES ; violations: 0
+
+==============================================================================
+S5.3  primitivity <=> strictly positive excess at every 2-block level
+==============================================================================
+2-block partitions over all 2447 posets: 139765  AGREES ; failures of the level description or of the excess identity: 0
+posets where 'primitive <=> positive excess everywhere' fails: 0 of 2447  AGREES
+
+==============================================================================
+S5.4  PROPOSITION 6 (frozen => e(P) >= 4) and the e(P) = 3 count
+==============================================================================
+  n=3: 1 of 1 extremal posets have e(P) = 3   AGREES
+  n=4: 2 of 2 extremal posets have e(P) = 3   AGREES
+  n=5: 3 of 3 extremal posets have e(P) = 3   AGREES
+  n=6: 4 of 5 extremal posets have e(P) = 3   AGREES
+  n=7: 5 of 8 extremal posets have e(P) = 3   AGREES
+  smallest e(P) over all non-chains with delta < 1/2 (sanity): 3

@@ -1,0 +1,112 @@
+
+==============================================================================
+S5.2b  delta_walk against delta -- the document's one surviving signal
+==============================================================================
+n=4  pairs=44    rho_pair=0.9957  mean|err|=0.00408  max|err|=1/40
+      rho(delta,delta_walk) all non-chains = 1.0000 (ctl n/a) ; primitive = 1.0000 (ctl n/a)
+      pairs where delta_walk side is LARGER: 7 ; posets with delta_walk > delta: 0
+n=5  pairs=286   rho_pair=0.9950  mean|err|=0.00750  max|err|=5/132
+      rho(delta,delta_walk) all non-chains = 0.9981 (ctl 0.8703) ; primitive = 0.9913 (ctl 1.0000)
+      pairs where delta_walk side is LARGER: 74 ; posets with delta_walk > delta: 5
+n=6  pairs=2195  rho_pair=0.9945  mean|err|=0.00939  max|err|=5/114
+      rho(delta,delta_walk) all non-chains = 0.9855 (ctl 0.8919) ; primitive = 0.9753 (ctl 0.8494)
+      pairs where delta_walk side is LARGER: 759 ; posets with delta_walk > delta: 37
+      vs document: pairs AGREES ; rho_pair AGREES ; mean|err| AGREES ; rho_all AGREES ; ctl_all AGREES ; rho_prim AGREES ; ctl_prim AGREES ; wrong pairs AGREES ; wrong posets AGREES
+n=7  pairs=20123 rho_pair=0.9947  mean|err|=0.01017  max|err|=182/3447
+      rho(delta,delta_walk) all non-chains = 0.9723 (ctl 0.9234) ; primitive = 0.9645 (ctl 0.8937)
+      pairs where delta_walk side is LARGER: 8286 ; posets with delta_walk > delta: 302
+
+S5.2c  the FALSE POSITIVE the document names, and a search for others
+  n=5: 0 posets have delta_walk < 1/3 while delta >= 1/3 (FALSE POSITIVES); true positives available: 0
+  n=6: 1 posets have delta_walk < 1/3 while delta >= 1/3 (FALSE POSITIVES); true positives available: 0
+        2<0 2<1 3<0 4<2 4<3 5<3          delta_walk=12/37    delta=5/14     primitive=True
+  n=7: 2 posets have delta_walk < 1/3 while delta >= 1/3 (FALSE POSITIVES); true positives available: 0
+        1<0 2<0 3<1 3<2 4<1 5<3 5<4 6<4  delta_walk=12/37    delta=5/14     primitive=False
+        2<0 2<1 3<0 4<2 4<3 5<3 6<4 6<5  delta_walk=12/37    delta=5/14     primitive=False
+
+==============================================================================
+S5.5  THEOREM 7 (no free lunch), verified on the ACTUAL matrix
+==============================================================================
+(poset, t) cases at n <= 4: 95 ; failures of 'uniform stationary AND lambda_2 = t': 0
+(the document reports 0 bad of 57 cases; the case COUNT differs only because I
+ used five values of t rather than three)
+
+S5.5a  IS THE UNIFORM-MOVE WEIGHT IN W_unif?  pairs with pi == p exactly
+  n=5: 146 of 286 pairs have pi = p exactly; worst |pi - p| = 5/132   
+  n=6: 717 of 2195 pairs have pi = p exactly; worst |pi - p| = 5/114   AGREES
+  n=7: 3948 of 20123 pairs have pi = p exactly; worst |pi - p| = 182/3447   
+
+==============================================================================
+S5.2d  IS THEOREM 4 REALLY ABOUT THE UNIFORM-MOVE WEIGHT?
+==============================================================================
+The document states Theorem 4 'For the weight uniform on all P-compatible
+moves'.  Its proof uses only (i) lambda_X is non-increasing as X coarsens and
+(ii) m_X, both weight-independent.  Test: random weights, and the w_t family of
+Theorem 7, on every non-chain poset at n = 3,4,5.
+(poset, weight) cases: 405 ; failures of lambda_2 = max_pairs s_w(x,y): 0
+If 0, the theorem holds verbatim for every weight tested, not only the uniform
+one -- i.e. the hypothesis in the document's statement is not needed.
+
+==============================================================================
+S6  THE DETECTION SWEEP
+==============================================================================
+n=6, primitive non-chains, N=184
+  I0  #fibers=54   P[collide]=0.0219  %singleton=5.4%   AGREES
+  I1  #fibers=88   P[collide]=0.0094  %singleton=13.0%   AGREES
+  I2  #fibers=111  P[collide]=0.0043  %singleton=20.7%   AGREES
+  I3  #fibers=111  P[collide]=0.0043  %singleton=20.7%   AGREES
+  I4  #fibers=111  P[collide]=0.0043  %singleton=20.7%   AGREES
+
+S6a  I4 resolution across n, primitive non-chains
+  n=3 N=2     %singleton=100.0%  non-singleton fibers=0      DISAGREES doc=(4, 50.0, 1)
+  n=4 N=7     %singleton= 71.4%  non-singleton fibers=1      AGREES
+  n=5 N=31    %singleton= 35.5%  non-singleton fibers=10     AGREES
+  n=6 N=184   %singleton= 20.7%  non-singleton fibers=73     AGREES
+  n=7 N=1351  %singleton=  7.3%  non-singleton fibers=626    AGREES
+
+S6b  THE NEGATIVE: 'not one I4 fiber at any n<=7 holds two posets with
+     different delta'.  Checked on THREE populations, because the document's
+     table is computed on the primitive non-chains only.
+  population: primitive non-chains
+    n=3: 0 non-singleton fibers, 0 of them contain two different delta values
+    n=4: 1 non-singleton fibers, 0 of them contain two different delta values
+    n=5: 10 non-singleton fibers, 0 of them contain two different delta values
+    n=6: 73 non-singleton fibers, 0 of them contain two different delta values
+    n=7: 626 non-singleton fibers, 0 of them contain two different delta values
+  population: ALL non-chains
+    n=3: 1 non-singleton fibers, 0 of them contain two different delta values
+    n=4: 4 non-singleton fibers, 0 of them contain two different delta values
+    n=5: 24 non-singleton fibers, 0 of them contain two different delta values
+    n=6: 134 non-singleton fibers, 0 of them contain two different delta values
+    n=7: 963 non-singleton fibers, 0 of them contain two different delta values
+  population: ALL posets (chains included)
+    n=3: 1 non-singleton fibers, 0 of them contain two different delta values
+    n=4: 4 non-singleton fibers, 0 of them contain two different delta values
+    n=5: 24 non-singleton fibers, 0 of them contain two different delta values
+    n=6: 134 non-singleton fibers, 0 of them contain two different delta values
+    n=7: 963 non-singleton fibers, 0 of them contain two different delta values
+
+S6c  the correlation table at n=6 (primitive non-chains)
+  e(P)        rho=+0.400  rho|e=n/a   AGREES
+  #levels     rho=+0.374  rho|e=+0.079   AGREES
+  #lev m>0    rho=+0.379  rho|e=-0.068   AGREES
+  #moves      rho=+0.403  rho|e=-0.094   AGREES
+  max m_X     rho=+0.518  rho|e=+0.075   AGREES
+  lambda_2    rho=-0.139  rho|e=+0.075   AGREES
+  s_max       rho=-0.139  rho|e=+0.075   AGREES
+  width       rho=+0.508  rho|e=+0.046   AGREES
+  delta_walk  rho=+0.975  rho|e=+0.849   AGREES
+
+==============================================================================
+S7  THE ISOPERIMETRIC ARITHMETIC
+==============================================================================
+Markov: E[inv] < |Inc|/3 gives Pr[inv >= t|Inc|/3] <= 1/t, so half the mass is
+inside radius 2|Inc|/3.  Checked as an exact ball mass on the extremal and
+largest-e posets at each n <= 6.
+  n=5 1<0 2<1 3<0 4<2 4<3            |Inc|/3=2/3      Markov r=4/3      Pr[inv<r]=1
+  n=5 2<0 2<1 3<0                    |Inc|/3=7/3      Markov r=14/3     Pr[inv<r]=1
+  n=6 1<0 2<1 3<0 4<2 4<3 5<4        |Inc|/3=2/3      Markov r=4/3      Pr[inv<r]=1
+  n=6 3<0 3<1 4<2 5<0                |Inc|/3=11/3     Markov r=22/3     Pr[inv<r]=1
+max possible inversions n(n-1)/2 vs radius n(n-1)/3: the radius is 2/3 of the
+maximum, and the mass inside it is essentially everything -- the bound is loose,
+as the document says.

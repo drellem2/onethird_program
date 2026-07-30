@@ -1,0 +1,52 @@
+
+==============================================================================
+S3.1  PROPOSITION 2:  E[inv(L,L*)] = sum over Inc(P) of min(p,1-p)
+==============================================================================
+Checked by BRUTE FORCE: enumerate L(P), build L* from the majority relation,
+count inversions against it, average exactly -- on every non-chain n<=6, and
+against a SECOND completion of the majority relation for tie-break independence.
+non-chain posets with an acyclic majority relation checked: 398; mismatches: 0
+(a poset with a tied pair still has a well-defined min(p,1-p) sum; the check
+ above uses the completion my kernel produces, and ties contribute 1/2 either way)
+posets with a TIED pair, two completions each: 290; disagreements: 0
+
+==============================================================================
+S3.2  THE TABLE:  min 3delta, min R, #R<1, #3delta<1
+==============================================================================
+n   non-chains     min 3d      min R     #R<1     %R<1     #3d<1
+3            4          1          1        0     0.0%         0   AGREES
+      argmin R (1 poset): 2<0
+4           15          1          1        0     0.0%         0   AGREES
+      argmin R (5 posets): 2<0 3<1 3<2; 2<0 3<1; 2<0 2<1 3<0; 1<0 2<1 3<0
+5           62          1        4/5       11    17.7%         0   AGREES
+      argmin R (1 poset): 2<0 3<1 4<2
+6          317          1        3/4      124    39.1%         0   AGREES
+      argmin R (1 poset): 2<0 3<1 4<2 5<4
+7         2044          1      24/35     1232    60.3%         0   AGREES
+      argmin R (1 poset): 2<0 3<1 4<2 5<3 6<4
+
+==============================================================================
+S3.3  THE FAMILY TABLE (exact, past the exhaustive range)
+==============================================================================
+family            n     e(P)   3delta          R R<1?
+C_2 + C_2         4        6      3/2          1     no   AGREES
+C_3 + C_3         6       20      3/2        4/5    yes   AGREES
+C_4 + C_4         8       70      3/2      24/35    yes   AGREES
+C_5 + C_5        10      252      3/2     64/105    yes   AGREES
+C_6 + C_6        12      924      3/2    128/231    yes   AGREES
+1+2 under C_0     3        3        1          1     no   AGREES
+1+2 under C_1     4        3        1          1     no   AGREES
+1+2 under C_2     5        3        1          1     no   AGREES
+1+2 under C_3     6        3        1          1     no   AGREES
+1+2 under C_4     7        3        1          1     no   AGREES
+1+2 under C_5     8        3        1          1     no   AGREES
+1+2 under C_6     9        3        1          1     no   AGREES
+
+S3.3a  THE DOCUMENT'S SENTENCE 'the near-extremal families ... sit exactly ON
+       the boundary and never inside it' -- tested over ALL delta-extremal
+       posets, not only the named family:
+  n=3: 1 extremal (delta=1/3); R values ['1'] ; strictly inside R<1: 0
+  n=4: 2 extremal (delta=1/3); R values ['1'] ; strictly inside R<1: 0
+  n=5: 3 extremal (delta=1/3); R values ['1'] ; strictly inside R<1: 0
+  n=6: 5 extremal (delta=1/3); R values ['1'] ; strictly inside R<1: 0
+  n=7: 8 extremal (delta=1/3); R values ['1'] ; strictly inside R<1: 0

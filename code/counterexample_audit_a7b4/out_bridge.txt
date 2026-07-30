@@ -1,0 +1,31 @@
+==============================================================================
+B1  THEOREM 1, as an implication, tested on every poset n<=7 that has the
+    hypothesis available -- and on the hypothesis WEAKENED to 'every pair has
+    a majority', which is what the document says does NOT give transitivity.
+==============================================================================
+n=3:    5 posets |    1 with EVERY pair decided (majority exists) | 0 of those have a majority CYCLE | 0 frozen (counterexamples)
+n=4:   16 posets |    3 with EVERY pair decided (majority exists) | 0 of those have a majority CYCLE | 0 frozen (counterexamples)
+n=5:   63 posets |   16 with EVERY pair decided (majority exists) | 0 of those have a majority CYCLE | 0 frozen (counterexamples)
+n=6:  318 posets |   88 with EVERY pair decided (majority exists) | 0 of those have a majority CYCLE | 0 frozen (counterexamples)
+n=7: 2045 posets |  671 with EVERY pair decided (majority exists) | 0 of those have a majority CYCLE | 0 frozen (counterexamples)
+
+Reading: the second column is the population where the WEAKER hypothesis holds.
+The third is 0 at every n<=7, which is exactly what the document says must not
+be read as evidence for Theorem 1.
+
+==============================================================================
+B2  THE n=11 MAJORITY-CYCLE WITNESS, rebuilt from the covers in the document
+==============================================================================
+covers      : 0<2 0<6 0<9 1<3 1<9 2<10 3<6 3<7 4<5 4<6 6<10
+e(P)        : 78474      (document says 78474 -- AGREES)
+p(5,9)      : 597/1189 = 0.50210   document says 597/1189  -> AGREES
+p(9,6)      : 599/1189 = 0.50378   document says 599/1189  -> AGREES
+p(6,5)      : 1784/3567 = 0.50014   document says 1784/3567  -> AGREES
+tie-free    : True ; majority relation acyclic: False
+cycle found : [5, 9, 6, 5]
+every element present? isolated elements: [8]
+
+B2a  IS THE WITNESS REALLY ELEVEN ELEMENTS?  Delete the isolated element and
+     recompute: p(x,y) cannot change, so the cycle survives on n=10.
+     n=10, e(P)=7134, tie-free=True, acyclic=False, cycle=[5, 8, 6, 5]
+     e(11-elt)/e(10-elt) = 11 (inserting a free element into 11 slots)

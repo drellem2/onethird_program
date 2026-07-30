@@ -1,0 +1,23 @@
+==============================================================================
+n = 5 : tie-free non-chains = 16, extremal = 3 (delta = 1/3)
+  e(P) = 3   : group size 3  , extremal in it 3 , qmass = 1 in it 3 
+      qmass values in the group: ['1']
+
+==============================================================================
+n = 6 : tie-free non-chains = 88, extremal = 5 (delta = 1/3)
+  e(P) = 3   : group size 4  , extremal in it 4 , qmass = 1 in it 4 
+      qmass values in the group: ['1']
+  e(P) = 9   : group size 7  , extremal in it 1 , qmass = 1 in it 1 
+      qmass values in the group: ['1', '2/3', '8/9']
+      *** WITHIN THIS e-GROUP qmass = 1 PICKS OUT EXACTLY THE EXTREMAL POSETS: 1 of 7.
+      *** under a null that puts 1 marks at random on 7 posets the chance is 1/7 = 0.1429
+
+==============================================================================
+n = 7 : tie-free non-chains = 671, extremal = 8 (delta = 1/3)
+  e(P) = 3   : group size 5  , extremal in it 5 , qmass = 1 in it 5 
+      qmass values in the group: ['1']
+  e(P) = 9   : group size 13 , extremal in it 3 , qmass = 1 in it 3 
+      qmass values in the group: ['1', '2/3', '8/9']
+      *** WITHIN THIS e-GROUP qmass = 1 PICKS OUT EXACTLY THE EXTREMAL POSETS: 3 of 13.
+      *** under a null that puts 3 marks at random on 13 posets the chance is 1/286 = 0.0035
+
