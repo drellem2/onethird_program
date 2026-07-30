@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from kern5f9a import (                                              # noqa: E402
     BAR, FG, MODES, ROW, absorbable_2colour, absorbable_bruteforce, eq, head,
-    pair, priority_gate, write_main_tree,
+    pair, priority_gate, PRE_REPAIR_REF, write_ref_tree,
 )
 from face_complex import (                                          # noqa: E402
     absorb_trace, absorbable_by_diagonal_twist, gate_violations, diagonal_moves,
@@ -72,7 +72,13 @@ def main(nmax=5):
     claim("union-find vs brute force over all 2^m sign vectors (m <= 8): %d "
           "agree, %d disagree" % (agree_bf, dis_bf), dis_bf == 0)
 
-    tmp = write_main_tree(["face_complex.py", "posets.py"])
+    # The PRE-REPAIR predicate, read from a pinned commit and not from `main`
+    # (mg-04a8).  This claim is "the refactor decided nothing differently"; once
+    # mg-5f9a merged, `main` WAS the refactor and the claim became "this tree
+    # agrees with itself", which no defect can falsify.  ITS ANSWER WOULD DIFFER
+    # UNDER: any edit to `absorb_trace` that changes a decision on the 516 pairs
+    # below -- and, before the pin, under nothing at all.
+    tmp, pre_sha = write_ref_tree(["face_complex.py", "posets.py"])
     sys.path.insert(0, tmp)
     for m in ("face_complex", "posets"):
         sys.modules.pop(m, None)
@@ -92,8 +98,9 @@ def main(nmax=5):
                 same += 1
             else:
                 diff += 1
-    claim("this tree's predicate vs `main`'s, on the same %d pairs: %d identical, "
-          "%d differ" % (same + diff, same, diff), diff == 0)
+    claim("this tree's predicate vs the PRE-REPAIR one at %s (%s), on the same "
+          "%d pairs: %d identical, %d differ"
+          % (PRE_REPAIR_REF, pre_sha[:7], same + diff, same, diff), diff == 0)
 
     # ------------------------------------------------------------------- B
     head("B. ONE IMPLEMENTATION -- checked in the SOURCE, not only in the counts")

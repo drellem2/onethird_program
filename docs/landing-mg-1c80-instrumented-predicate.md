@@ -2,7 +2,8 @@
 
 **Item:** mg-5f9a. **Closes:** mg-1c80's F1 (the OUTSTANDING half of that audit).
 **Code:** `code/face_geometry/face_complex.py`, `code/face_geometry/controls.py`,
-instrument in `code/face_geometry_instr_5f9a/` (`run_all.sh`, 38 s, 34 claims, 0 BROKEN).
+instrument in `code/face_geometry_instr_5f9a/` (`run_all.sh`, 73 s, 56 claims, 0 BROKEN —
+as repaired by mg-04a8; 38 s and 34 claims as first landed).
 
 ## The defect, and why this is the third attempt at it
 
@@ -51,26 +52,51 @@ predicate; it is now the predicate's own counter, and it reads **0 over all 297 
 
 ## The verification mg-1c80 asked for, run on both sides
 
-`d2_deletion.py`, six predictions registered before the runs, 6 of 6 correct
-(12 claims scored, 0 BROKEN):
+> **CORRECTED BY mg-04a8, after mg-d0e2's audit.** Three things in this section as it
+> was first written did not hold up, and the corrections are folded in below rather than
+> appended: (i) the deletion test ran on two of the four gates `ABSORB_GATES` names, and
+> on the other two — `shape` and `parity` — **deleting the branch changed nothing**;
+> (ii) the "all 43 scored rows keep their labels" sentence rested on **a check that
+> cannot fail** — it compared the empty string with the empty string; (iii) the BEFORE
+> half read the branch `main`, which stopped being the pre-repair tree the moment this
+> landing merged. The table below is the re-run, `d2_deletion.py`, **eight mutations,
+> 25 claims scored, 0 BROKEN**.
 
-| | mutation | artifact | exit |
-|---|---|---|---|
-| BEFORE-1 | **`main`'s tree**: delete the `s_i^2 = 1` gate (mg-1c80's M2, verbatim) | **BYTE-IDENTICAL** | 0 |
-| BEFORE-2 | `main`'s tree: delete the `\|s_i s_j\| = 1` gate | CHANGES | 1 |
-| AFTER-1 | **this tree**: delete the `s_i^2 = 1` gate from `absorb_trace` | **CHANGES** | 0 |
-| AFTER-2 | this tree: delete the `\|s_i s_j\| = 1` gate | CHANGES | 1 |
-| AFTER-3 | this tree: test row *i*'s magnitudes **before** row *i*'s diagonal | CHANGES | 0 |
-| AFTER-4 | this tree: stop counting the signs the union-find reads | CHANGES | 0 |
+| | mutation | artifact | exit | row that fails |
+|---|---|---|---|---|
+| BEFORE-1 | **pre-repair tree** (`5cae82c^`): delete the `s_i^2 = 1` gate (mg-1c80's M2, verbatim) | **BYTE-IDENTICAL** | 0 | — |
+| BEFORE-2 | pre-repair tree: delete the `\|s_i s_j\| = 1` gate | CHANGES | 1 | — |
+| AFTER-1 | **this tree**: delete the `s_i^2 = 1` gate from `absorb_trace` | **CHANGES** | 0 | none |
+| AFTER-2 | this tree: delete the `\|s_i s_j\| = 1` gate | CHANGES | 1 | union-find vs brute force, 291/306 |
+| AFTER-3 | this tree: test row *i*'s magnitudes **before** row *i*'s diagonal | CHANGES | 0 | none |
+| AFTER-4 | this tree: stop counting the signs the union-find reads | CHANGES | 0 | none |
+| AFTER-5 | this tree: delete **both `shape` returns** — *was byte-identical* | **CHANGES** | 1 | the `shape` branch row |
+| AFTER-6 | this tree: delete the **`parity` contradiction branch** — *was byte-identical* | **CHANGES** | 1 | the `parity` branch row |
 
-The BEFORE half is mg-1c80's finding re-run rather than quoted — `main`'s committed
-`controls_output.txt` regenerates from `main`'s sources first (17,964 bytes), then the
-deletion leaves it at 17,964 identical bytes.
+The BEFORE half is mg-1c80's finding re-run rather than quoted — the **pre-repair
+commit's** committed `controls_output.txt` regenerates from that commit's own sources
+(17,964 bytes), then the deletion leaves it at 17,964 identical bytes. It reads a pinned
+commit and not `main`, because after this landing merged, `main` *was* this tree: the
+claim degraded to "this tree regenerates from itself", which no defect can falsify, and
+the deletion stopped applying at all (`anchor occurs 0 times`).
 
 AFTER-1 and AFTER-3 are the ones that matter: they change **no decision** — all 43 scored
-rows keep their labels and conditions, exit stays 0 — and they still move the artifact, on
-exactly the two lines that report where the predicate went (row I4 and the gate table).
-That is what "the reason is produced by the code path" means operationally.
+rows carry the label independently derived for them, exit stays 0 — and they still move
+the artifact, on exactly the two lines that report where the predicate went (row I4 and
+the gate table). That is what "the reason is produced by the code path" means
+operationally. **"Independently derived" is the correction**: the sentence originally
+here said the rows *kept* their labels, which is a stability claim, and stability is a
+property a wrong label has too. See the next section.
+
+### AFTER-2's fail-set was registered wrong, and that is recorded rather than edited away
+
+mg-04a8 registered AFTER-2 as breaking row I4, from mg-d0e2's note that three of I4's
+pairs violate the magnitude gate alone. The run says otherwise: **row I4 still passes
+61/61 with `absorb == 0` intact**, because with that gate gone those three pairs go on to
+the sign system and are rejected *there* — the answer does not move, only the gate that
+produces it. What fails is the union-find-versus-brute-force instrument row, 291 of 306.
+The miss is kept in `d2_deletion.py` under `MISREGISTERED`. Under the check this section
+originally carried, that registration would never have been tested at all.
 
 ## Numbers, re-measured here rather than carried
 
@@ -98,7 +124,12 @@ differently.**
 ## What did NOT change
 
 - **No mathematics.** The predicate's decision is identical on every pair tested.
-- **No scoring.** 43 rows, same labels, 2 [CANNOT FAIL], 0 failures, exit 0; row I4 keeps
+- **No scoring.** *(As of mg-04a8: 43 rows, of which two are new — see
+  `docs/landing-mg-d0e2-vacuous-check.md`. When this line was first written the artifact
+  carried **41**; the "43" published here was a substring count that also caught two prose
+  bullets quoting a marker mid-sentence, which is mg-d0e2's F3. The two figures agreeing
+  today is a coincidence and not a confirmation.)* Labels as independently derived,
+  2 [CANNOT FAIL], 0 failures, exit 0; row I4 keeps
   `absorb == 0` in its condition (removing it is a scoring change and still belongs to its
   own item); `forced = (diag_preserved == 0)` and the routing row's condition are
   untouched. The routing *values* are unchanged too (I1/I2/I3 forced, I4 scored) — only

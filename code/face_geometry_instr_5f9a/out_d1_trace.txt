@@ -8,7 +8,7 @@ A. THE REFACTOR DECIDED NOTHING DIFFERENTLY
 ==============================================================================
   [HOLDS ] union-find (the shipped predicate) vs BFS 2-colouring: 516 agree, 0 disagree
   [HOLDS ] union-find vs brute force over all 2^m sign vectors (m <= 8): 306 agree, 0 disagree
-  [HOLDS ] this tree's predicate vs `main`'s, on the same 516 pairs: 516 identical, 0 differ
+  [HOLDS ] this tree's predicate vs the PRE-REPAIR one at 5cae82c^ (61de121), on the same 516 pairs: 516 identical, 0 differ
 
 ==============================================================================
 B. ONE IMPLEMENTATION -- checked in the SOURCE, not only in the counts

@@ -1,49 +1,123 @@
 ==============================================================================
 mg-5f9a part 2 -- the deletion test, before and after
+(repaired by mg-04a8: two more deletions, and a label check that is not a stability test)
 ==============================================================================
 
 PREDICTIONS, registered before the runs:
-   BEFORE-1  main: delete the s_i^2 = 1 gate (mg-1c80's M2 verbatim)        artifact BYTE-IDENTICAL, exit 0 -- the finding this landing answers
-   BEFORE-2  main: delete the |s_i s_j| = 1 gate (mg-1c80's M1)             artifact CHANGES, exit 1 -- that gate is what forbids I4's antichains
-   AFTER-1*  this tree: delete the s_i^2 = 1 gate from `absorb_trace`       artifact CHANGES, exit 0 -- no decision moves, but the trace does
-   AFTER-2   this tree: delete the |s_i s_j| = 1 gate from `absorb_trace`   artifact CHANGES, exit 1 -- as at main
-   AFTER-3*  this tree: test row i's magnitudes BEFORE row i's diagonal     artifact CHANGES, exit 0 -- same answers, different trace
-   AFTER-4   this tree: stop counting the signs the union-find reads        artifact CHANGES, exit 0 -- NC3's 1459 is printed
+   BEFORE-1  pre-repair tree: delete the s_i^2 = 1 gate (mg-1c80's M2)      artifact BYTE-IDENTICAL, exit 0 -- the finding this landing answers
+   BEFORE-2  pre-repair tree: delete the |s_i s_j| = 1 gate (mg-1c80's M1)  artifact CHANGES, exit 1 -- that gate is what forbids I4's antichains
+   AFTER-1*  this tree: delete the s_i^2 = 1 gate from `absorb_trace`       artifact CHANGES, exit 0, NO row fails -- no decision moves, the trace does
+   AFTER-2   this tree: delete the |s_i s_j| = 1 gate from `absorb_trace`   artifact CHANGES, exit 1, the brute-force instrument row fails (*)
+   AFTER-3*  this tree: test row i's magnitudes BEFORE row i's diagonal     artifact CHANGES, exit 0, NO row fails -- same answers, different trace
+   AFTER-4   this tree: stop counting the signs the union-find reads        artifact CHANGES, exit 0, NO row fails
+   AFTER-5   this tree: delete BOTH `shape` returns (mg-d0e2 OUTSTANDING 1) artifact CHANGES, exit 1, the `shape` branch row fails -- it was invisible
+   AFTER-6   this tree: delete the `parity` contradiction branch (ditto)    artifact CHANGES, exit 1, the `parity` branch row fails -- ditto
+
+   (*) AFTER-2's fail-set was registered as 'row I4 fails' and that was WRONG: row I4 passes on 61/61; the union-find-vs-brute-force instrument row fails on 291/306.
+       The registration above is the corrected one; the miss is kept here rather than
+       edited away, and the label check below is what caught it.
 
 ==============================================================================
-BEFORE -- `main`'s tree, where mg-1c80 found the artifact unmoved
+BEFORE -- the PRE-REPAIR tree, where mg-1c80 found the artifact unmoved
 ==============================================================================
-  [HOLDS ] main's committed controls_output.txt regenerates from main's sources
+  [HOLDS ] 5cae82c^ (61de121) -- its committed controls_output.txt regenerates from its own sources
         17964 bytes regenerated, 17964 committed, exit 0
+        WOULD DIFFER UNDER: this ref moving, or that tree's battery ceasing to be reproducible.  Before mg-04a8 the ref was `main`, and after mg-5f9a merged this claim read 'this tree regenerates from itself' -- true under every possible defect, and the deletion below no longer even applied
   [HOLDS ] BEFORE-1 -- delete the s_i^2 = 1 gate: artifact BYTE-IDENTICAL (predicted BYTE-IDENTICAL), exit 0 (predicted 0)
         17964 bytes out vs 17964 baseline; unmutated baseline exited 0
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
   [HOLDS ] BEFORE-2 -- delete the |s_i s_j| = 1 gate: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)
         17805 bytes out vs 17964 baseline; unmutated baseline exited 0
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
 
 ==============================================================================
 AFTER -- this tree, where the gate label is emitted by the code path
 ==============================================================================
   [HOLDS ] this tree's controls_output.txt regenerates byte-identically
-        20738 bytes regenerated, 20738 committed, exit 0
+        23680 bytes regenerated, 23680 committed, exit 0
+        WOULD DIFFER UNDER: any edit to controls.py, face_complex.py or posets.py that is not followed by regenerating the committed artifact
+  [HOLDS ] BASELINE: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 0 row(s) read [FAIL] and the summary block lists 0; exit 0 agrees; each of the 0 registered row name(s) matches exactly one row (none registered)
+        0 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 0 named by the registered prediction; exit 0, and the battery exits 1 exactly when some row FAILs
+        WOULD DIFFER UNDER: any row reading [FAIL] in an unmutated run, or a summary block that disagrees with the rows above it
   [HOLDS ] AFTER-1 -- delete the s_i^2 = 1 gate: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)
-        20738 bytes out vs 20738 baseline; unmutated baseline exited 0
+        23680 bytes out vs 23680 baseline; unmutated baseline exited 0
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-1: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 0 row(s) read [FAIL] and the summary block lists 0; exit 0 agrees; each of the 0 registered row name(s) matches exactly one row (none registered)
+        0 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 0 named by the registered prediction; exit 0, and the battery exits 1 exactly when some row FAILs
+        WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
   [HOLDS ] AFTER-2 -- delete the |s_i s_j| = 1 gate: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)
-        20588 bytes out vs 20738 baseline; unmutated baseline exited 0
+        23530 bytes out vs 23680 baseline; unmutated baseline exited 0
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-2: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 1 row(s) read [FAIL] and the summary block lists 1; exit 1 agrees; each of the 1 registered row name(s) matches exactly one row (1)
+        1 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 1 named by the registered prediction; exit 1, and the battery exits 1 exactly when some row FAILs
+        WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
   [HOLDS ] AFTER-3 -- magnitudes before the diagonal: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)
-        20738 bytes out vs 20738 baseline; unmutated baseline exited 0
+        23680 bytes out vs 23680 baseline; unmutated baseline exited 0
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-3: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 0 row(s) read [FAIL] and the summary block lists 0; exit 0 agrees; each of the 0 registered row name(s) matches exactly one row (none registered)
+        0 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 0 named by the registered prediction; exit 0, and the battery exits 1 exactly when some row FAILs
+        WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
   [HOLDS ] AFTER-4 -- stop counting signs read: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)
-        20735 bytes out vs 20738 baseline; unmutated baseline exited 0
+        23677 bytes out vs 23680 baseline; unmutated baseline exited 0
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-4: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 0 row(s) read [FAIL] and the summary block lists 0; exit 0 agrees; each of the 0 registered row name(s) matches exactly one row (none registered)
+        0 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 0 named by the registered prediction; exit 0, and the battery exits 1 exactly when some row FAILs
+        WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
+  [HOLDS ] AFTER-5 -- delete both `shape` returns: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)
+        24879 bytes out vs 23680 baseline; unmutated baseline exited 0
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-5: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 1 row(s) read [FAIL] and the summary block lists 1; exit 1 agrees; each of the 1 registered row name(s) matches exactly one row (1)
+        1 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 1 named by the registered prediction; exit 1, and the battery exits 1 exactly when some row FAILs
+        WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
+  [HOLDS ] AFTER-6 -- delete the `parity` contradiction branch: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)
+        24767 bytes out vs 23680 baseline; unmutated baseline exited 0
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-6: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 1 row(s) read [FAIL] and the summary block lists 1; exit 1 agrees; each of the 1 registered row name(s) matches exactly one row (1)
+        1 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 1 named by the registered prediction; exit 1, and the battery exits 1 exactly when some row FAILs
+        WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
 
 ==============================================================================
 WHAT MOVED, AND WHAT DID NOT
 ==============================================================================
-  [HOLDS ] AFTER-1: every scored row keeps its label and its condition -- 43 rows, 0 label change(s)
   [HOLDS ] AFTER-1: the lines that DID move are the ones reporting where the predicate went -- 2 line(s)
-        line 47; line 53
-  [HOLDS ] AFTER-3: every scored row keeps its label and its condition -- 43 rows, 0 label change(s)
+        line 49; line 55
+        WOULD DIFFER UNDER: a trace label that stops depending on the code path -- which is the whole defect mg-1c80 found, and what BEFORE-1 still shows
   [HOLDS ] AFTER-3: the lines that DID move are the ones reporting where the predicate went -- 2 line(s)
-        line 47; line 53
+        line 49; line 55
+        WOULD DIFFER UNDER: a trace label that stops depending on the code path -- which is the whole defect mg-1c80 found, and what BEFORE-1 still shows
+  [HOLDS ] AFTER-5: exactly 1 row fails, and it is the row built for that branch -- "instrument check: the predicate's `shape` branch, which NO (pose"
+        WOULD DIFFER UNDER: the constructed pairs no longer reaching that branch, or the row scoring the predicate against itself instead of against brute force.  Before mg-04a8 these two deletions changed NOTHING: 20738 bytes in, 20738 identical bytes out, every row green
+  [HOLDS ] AFTER-6: exactly 1 row fails, and it is the row built for that branch -- "instrument check: the predicate's `parity` branch, which NO (pos"
+        WOULD DIFFER UNDER: the constructed pairs no longer reaching that branch, or the row scoring the predicate against itself instead of against brute force.  Before mg-04a8 these two deletions changed NOTHING: 20738 bytes in, 20738 identical bytes out, every row green
 
 ==============================================================================
-12 claim(s) scored; 0 BROKEN.
+THE POSITIVE CONTROL -- an artifact in which every row reads [FAIL]
+==============================================================================
+mg-d0e2 built it, ran the shipped check on it, and the shipped check
+HELD.  It is kept and committed here because a check nobody has seen
+go red on a broken input is a check nobody has tested.
+
+  [HOLDS ] the committed positive control is exactly the committed artifact with every scored row's marker replaced by [FAIL], and nothing else
+        23666 bytes; 43 of its 43 rows read [FAIL]
+        WOULD DIFFER UNDER: controls_output.txt changing without this file being regenerated -- a positive control that describes a previous artifact is testing nothing about this one
+  [HOLDS ] THE SHIPPED CHECK, VERBATIM, ON THAT ARTIFACT: 'every scored row keeps its label and its condition -- 45 rows, 0 label change(s)', HOLDS = True
+        reproduces mg-d0e2's F2 from this repository's own code rather than quoting the audit
+        WOULD DIFFER UNDER: nothing available to a corruption of the artifact.  It compares `a.split(' ')[1]` of two indented lines -- '' against '' -- so its answer is fixed by the INDENTATION and cannot depend on any label.  This claim is scored TRUE because the defect is real: it is the one claim in this file that would be BROKEN if the defect had been imagined
+  [HOLDS ] THE REPAIRED CHECK ON THE SAME ARTIFACT GOES RED: POSITIVE CONTROL: 43 scored row(s); every label equals the independently derived expectation (43 mismatch(es)); 43 row(s) read [FAIL] and the summary block lists 0; exit 0 agrees; each of the 0 registered row name(s) matches exactly one row (none registered) || first mismatch: "a row that cannot fail is labelled 'CANNOT FAIL', not 'PASS'" reads [FAIL], expected [PASS]
+        0 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 0 named by the registered prediction; exit 0, and the battery exits 1 exactly when some row FAILs
+        WOULD DIFFER UNDER: the repaired check reverting to a comparison against the baseline's own labels, or to a substring row scan.  Either restores the shipped behaviour and this claim is the thing that notices
+
+==============================================================================
+A CONTROL ON THE REPAIRED CHECK -- three inputs, exercised directly
+==============================================================================
+The positive control above shows it going red on a corrupted artifact.
+These show it saying YES when it should, and red for each of the two
+other ways a label claim can be wrong.  No battery is run: the check is
+a pure function of (text, exit code, registration).
+
+  [HOLDS ] on the unmutated artifact with nothing registered it says YES (True); with a row registered as failing that did NOT fail it goes red (False); with a registration naming no row at all it goes red (False)
+        WOULD DIFFER UNDER: the check losing either half.  The second case is the wrong-but-stable label -- the mutation did not break the row it was predicted to break, and the shipped stability check calls that a pass because the label did not move.  The third is a prediction that cannot be located, which reads as a prediction and is not one
+
+==============================================================================
+25 claim(s) scored; 0 BROKEN.
 ==============================================================================

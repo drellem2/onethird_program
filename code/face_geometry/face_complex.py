@@ -776,8 +776,12 @@ def absorb_trace(A, B):
     the two BY ROW.  On 57 of the 297 biting pairs in NEGATIVE CONTROL 4 the two
     orders name different gates (mg-1c80 F1).  A reason asserted next to a
     procedure can disagree with it; a reason returned by the procedure cannot.
-    So the label is produced here and `controls.deciding_gate` is a call to this
-    function, not a second implementation of it.
+    So the label is produced here and `controls.py` has NO gate procedure at all
+    -- `deciding_gate` was deleted outright and nothing, not even an alias,
+    replaced it (checked in the AST by
+    code/face_geometry_instr_5f9a/d1_trace.py).  An earlier draft of this
+    docstring said the name survived as a call to this function; it does not, and
+    describing a design that was not shipped is what mg-d0e2's F4 caught.
 
     THE LABEL IS A TRACE AND NOT A CAUSE, and this is the limitation to read
     before quoting a gate count.  The gates are NOT exclusive: a pair can

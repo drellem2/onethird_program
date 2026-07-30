@@ -171,19 +171,45 @@ def run_controls(cwd, nmax=5):
     return r.stdout, r.returncode
 
 
-def write_main_tree(files):
-    """Materialise `main`'s copy of the named face_geometry files in a temp dir.
+PRE_REPAIR_REF = "5cae82c^"
+"""The tree the BEFORE half of the deletion test is about: the commit before
+mg-5f9a instrumented the predicate.
+
+IT WAS `main`, AND `main` IS A MOVING TARGET (mg-04a8).  As written this file
+read `main:code/face_geometry/...`, which was the pre-repair tree only until
+mg-5f9a merged.  After that merge the BEFORE half was reading the tree it was
+supposed to be contrasting with, and its first claim -- "main's committed
+controls_output.txt regenerates from main's sources" -- became a statement that
+this tree regenerates from itself.  It cannot go red for any reason a reader of
+that sentence would care about.  The deletion it then attempts does not even
+apply: re-running the shipped file today stops at `BEFORE-1: anchor occurs 0
+times in main's face_complex.py`.
+
+A check pinned to a branch answers a question about whatever that branch holds
+today.  A check pinned to a commit answers the question it was written to ask.
+"""
+
+
+def write_ref_tree(files, ref=PRE_REPAIR_REF):
+    """Materialise a named commit's copy of the named face_geometry files in a
+    temp dir, and return (dir, resolved sha).
 
     Used for the BEFORE half of the deletion test: mg-1c80's finding is that the
     deletion left the artifact byte-identical AT THAT COMMIT, and a landing that
-    only shows the AFTER half is asking to be believed about the before.
+    only shows the AFTER half is asking to be believed about the before.  The
+    resolved sha is returned so the transcript records WHICH tree was measured
+    rather than a branch name that will mean something else next week.
     """
-    tmp = tempfile.mkdtemp(prefix="mg5f9a-main-")
+    tmp = tempfile.mkdtemp(prefix="mg5f9a-ref-")
     repo = os.path.abspath(os.path.join(FG, "..", ".."))
+    sha = subprocess.run(["git", "rev-parse", ref], cwd=repo,
+                         capture_output=True, text=True)
+    if sha.returncode != 0:
+        raise SystemExit("cannot resolve %s" % ref)
     for f in files:
-        blob = subprocess.run(["git", "show", "main:code/face_geometry/" + f],
+        blob = subprocess.run(["git", "show", "%s:code/face_geometry/%s" % (ref, f)],
                               cwd=repo, capture_output=True)
         if blob.returncode != 0:
-            raise SystemExit("cannot read main:code/face_geometry/%s" % f)
+            raise SystemExit("cannot read %s:code/face_geometry/%s" % (ref, f))
         open(os.path.join(tmp, f), "wb").write(blob.stdout)
-    return tmp
+    return tmp, sha.stdout.strip()

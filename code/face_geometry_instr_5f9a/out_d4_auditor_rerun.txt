@@ -1,0 +1,111 @@
+==============================================================================
+mg-04a8 part 4 -- mg-d0e2's own deletion test, unmodified, on this tree
+==============================================================================
+
+--- its transcript, verbatim ------------------------------------------------
+== E1: the deletion test, every gate the explanation names ==
+
+BASELINE -- the committed artifact, regenerated unmutated
+  [OK    ] controls.py reproduces its committed artifact byte for byte (23680 bytes, exit 0); committed is 23680 bytes
+  [OK    ] the unmutated battery exits 0
+
+DELETION TEST -- predictions were registered before the runs
+  delete gate 'shape'                bytes  23680 ->  24879  CHANGED          exit 1   predicted identical/0  *** MISS ***
+       no pair in any population has a shape mismatch, so the gate never fires
+  delete gate 'diagonal'             bytes  23680 ->  23680  CHANGED          exit 0   predicted changed/0  MATCH
+       294 of 297 violate both forced gates, so no ANSWER moves -- but the trace label the artifact prints does
+  delete gate 'magnitude'            bytes  23680 ->  23530  CHANGED          exit 1   predicted changed/1  MATCH
+       3 pairs in row I4 violate magnitude ALONE; their answers flip and a scored row fails
+  delete gate 'parity'               bytes  23680 ->  24767  CHANGED          exit 1   predicted changed/1  MATCH
+       the union-find-vs-brute-force instrument check should catch a predicate that can no longer reject
+  stop counting signs_read           bytes  23680 ->  23677  CHANGED          exit 0   predicted changed/0  MATCH
+       the count is what the rows now rest on, so it must be load-bearing on the bytes
+  swap the two forced gates' order   bytes  23680 ->  23680  CHANGED          exit 0   predicted changed/0  MATCH
+       same answers, different trace -- the artifact says the split depends on the order, so it must move when the order does
+  delete 'diagonal' from gate_violations bytes  23680 ->  23671  CHANGED          exit 0   predicted changed/0  MATCH
+       the 'both forced gates violated' counts are printed, so they must move
+  delete 'magnitude' from gate_violations bytes  23680 ->  23671  CHANGED          exit 0   predicted changed/0  MATCH
+       same, from the other side -- and row I4's 'the ONLY one violated' sentence is computed here
+  invert diagonal_moves (the routing) bytes  23680 ->  26464  CHANGED          exit 1   predicted changed/1  MATCH
+       the routing row scores the split, so inverting it must break a row
+
+PREDICTION SCORE -- 8 of 9 matched
+  MISS: delete gate 'shape'                  observed changed/exit 1, predicted identical/exit 0
+
+WHICH LINES MOVED, for each mutation that changed the artifact
+  delete gate 'shape'                  LINE COUNT MOVED 70 -> 68
+  delete gate 'diagonal'               2 line(s) moved
+        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+        - * WHERE THE PREDICATE RETURNED, per row
+  delete gate 'magnitude'              LINE COUNT MOVED 70 -> 68
+  delete gate 'parity'                 LINE COUNT MOVED 70 -> 68
+  stop counting signs_read             1 line(s) moved
+        - * the absorbability predicate
+  swap the two forced gates' order     2 line(s) moved
+        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+        - * WHERE THE PREDICATE RETURNED, per row
+  delete 'diagonal' from gate_violations 4 line(s) moved
+        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+        - [CANNOT FAIL] PROVEN PROPERTY, not a control row
+        - [PASS] routing check on the mg-8a12 repair: the MOVE
+        - * WHERE THE PREDICATE RETURNED, per row
+  delete 'magnitude' from gate_violations 4 line(s) moved
+        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+        - [CANNOT FAIL] PROVEN PROPERTY, not a control row
+        - [PASS] routing check on the mg-8a12 repair: the MOVE
+        - * WHERE THE PREDICATE RETURNED, per row
+  invert diagonal_moves (the routing)  LINE COUNT MOVED 70 -> 67
+
+SCORED ROWS -- does any deletion change a LABEL, not just a number?
+  [BROKEN] the unmutated battery scores 43 rows -- lines whose marker STARTS the line.  mg-5f9a publishes 43, which counts two 'measured, not scored' bullets that mention [CANNOT FAIL] in prose; see E3
+  delete gate 'shape'                  43 rows, 1 FAIL, labels MOVED
+  delete gate 'diagonal'               43 rows, 0 FAIL, labels UNCHANGED
+  delete gate 'magnitude'              43 rows, 1 FAIL, labels MOVED
+  delete gate 'parity'                 43 rows, 1 FAIL, labels MOVED
+  stop counting signs_read             43 rows, 0 FAIL, labels UNCHANGED
+  swap the two forced gates' order     43 rows, 0 FAIL, labels UNCHANGED
+  delete 'diagonal' from gate_violations 43 rows, 0 FAIL, labels UNCHANGED
+  delete 'magnitude' from gate_violations 43 rows, 0 FAIL, labels UNCHANGED
+  invert diagonal_moves (the routing)  42 rows, 1 FAIL, labels MOVED
+
+E1 claims broken: 1
+--- end of its transcript ---------------------------------------------------
+
+
+==============================================================================
+WHAT IT SAYS ABOUT THIS TREE
+==============================================================================
+  [HOLDS ] its nine mutations all ran and were parsed -- 9 of 9
+        delete gate 'shape' 23680->24879 CHANGED exit 1; delete gate 'diagonal' 23680->23680 CHANGED exit 0; delete gate 'magnitude' 23680->23530 CHANGED exit 1; delete gate 'parity' 23680->24767 CHANGED exit 1; stop counting signs_read 23680->23677 CHANGED exit 0; swap the two forced gates' order 23680->23680 CHANGED exit 0; delete 'diagonal' from gate_violations 23680->23671 CHANGED exit 0; delete 'magnitude' from gate_violations 23680->23671 CHANGED exit 0; invert diagonal_moves (the routing) 23680->26464 CHANGED exit 1
+        WOULD DIFFER UNDER: that audit's transcript format changing, which would make every claim below silently vacuous rather than wrong
+  [HOLDS ] THE DELETION TEST NOW BITES ON 9 OF 9.  mg-d0e2 measured 7 of 9 against mg-5f9a
+        WOULD DIFFER UNDER: either of the two constructed-pair rows leaving controls.py, or its expected answer being taken from the predicate rather than from `absorbable_bruteforce` -- either one puts the `shape` and `parity` branches back out of reach of every population and the artifact stops moving when they are deleted
+  [HOLDS ] "delete gate 'shape'" -- which left the artifact BYTE-IDENTICAL at 20738 bytes before this repair -- now changed the artifact (23680 -> 24879 bytes) and exits 1
+        WOULD DIFFER UNDER: the constructed pair for that branch no longer reaching it -- which is what `absorb_trace` returning a different gate on it would mean, and what the row in controls.py scores directly
+  [HOLDS ] "delete gate 'parity'" -- which left the artifact BYTE-IDENTICAL at 20738 bytes before this repair -- now changed the artifact (23680 -> 24767 bytes) and exits 1
+        WOULD DIFFER UNDER: the constructed pair for that branch no longer reaching it -- which is what `absorb_trace` returning a different gate on it would mean, and what the row in controls.py scores directly
+
+==============================================================================
+AND WHY IT EXITS 1, WHICH IS NOT A FAILURE OF THIS REPAIR
+==============================================================================
+  [HOLDS ] exactly 1 claim of that audit is BROKEN against this tree, and it is its ROW COUNT: it asserts 41, the number it measured at 5988134, and this tree has 43 -- the two constructed-pair rows this repair added
+        its exit status is 1; a frozen count measured against a tree that has since gained rows is a stale number, not a refutation
+        WOULD DIFFER UNDER: any OTHER claim of that audit going broken -- that would mean this repair disturbed something the audit had verified, and it is the reason this is scored rather than asserted in prose
+
+==============================================================================
+AND WHAT THE REST OF THAT AUDIT SAYS -- did anything retreat?
+==============================================================================
+  [HOLDS ] e2_parity.py: 0 claim(s) broken against this tree (expected 0).  it re-derives where the predicate returns over all four populations, and the 297/306/82/172 split and the 57-of-297 disagreement are untouched by this repair
+        exit 0; claims broken: 0
+        WOULD DIFFER UNDER: a claim of that audit about the MATHEMATICS or about the predicate's behaviour going broken -- that would be this repair disturbing something already verified, and it is the difference between a stale figure and a retreat
+  [HOLDS ] e3_seams.py: 2 claim(s) broken against this tree (expected 2).  its two remaining BROKEN claims are FROZEN LITERALS of the same kind as its row count -- it asserts the artifact says 'lines scanned: 62' and '40 row names among them', and the artifact now says 64 and 42.  Both are computed live by the row itself and both are correct: there are exactly 64 lines above it and 43 scored rows of which it is one
+        exit 1; claims broken: 2
+        WOULD DIFFER UNDER: a claim of that audit about the MATHEMATICS or about the predicate's behaviour going broken -- that would be this repair disturbing something already verified, and it is the difference between a stale figure and a retreat
+  [HOLDS ] and the two extents those frozen literals disagree with are printed LIVE by the row that owns them, and are right: 'lines scanned: 64' with 64 lines above it, '42 row names' with 43 scored rows of which it is one
+        WOULD DIFFER UNDER: a checker printing an extent it did not measure -- the mg-a4ef/mg-7dd3 defect.  These two move whenever a row is added, which is how this repair moved them
+  [HOLDS ] and the number it was frozen against is the one mg-5f9a PUBLISHED as 43 while the artifact carried 41 (mg-d0e2's F3).  The artifact now genuinely carries 43, so the old figure is right for the wrong reason and is corrected at its sites rather than left to be read as confirmation
+        WOULD DIFFER UNDER: the row population changing again without the doc sites being re-derived, which is the mg-8e30 defect (a figure measured before the edit that moved it)
+
+==============================================================================
+9 claim(s) scored; 0 BROKEN.
+==============================================================================
