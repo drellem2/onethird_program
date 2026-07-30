@@ -1,0 +1,80 @@
+C1  enumeration up to isomorphism, against A000112 (external sequence)
+  [ok ] n=1 : 1 classes   expected 1
+  [ok ] n=2 : 2 classes   expected 2
+  [ok ] n=3 : 5 classes   expected 5
+  [ok ] n=4 : 16 classes   expected 16
+  [ok ] n=5 : 63 classes   expected 63
+  [ok ] n=6 : 318 classes   expected 318
+  [ok ] n=7 : 2045 classes   expected 2045
+C2  canonical form is CONSTANT on isomorphism classes (all n! relabellings of
+    every class) and SEPARATES the classes -- the property a canonical form
+    must have.  (It need not equal the all-perms lexicographic minimum: the
+    search is restricted to invariant-respecting relabellings, which is sound
+    because every isomorphism respects the invariant.)
+  [ok ] n=1 : 1 classes, 1 distinct keys   0 not invariant
+  [ok ] n=2 : 2 classes, 2 distinct keys   0 not invariant
+  [ok ] n=3 : 5 classes, 5 distinct keys   0 not invariant
+  [ok ] n=4 : 16 classes, 16 distinct keys   0 not invariant
+  [ok ] n=5 : 63 classes, 63 distinct keys   0 not invariant
+  [ok ] n=6 : 318 classes, 318 distinct keys   0 not invariant
+C3  orbit count: sum over classes of n!/|Aut| == A001035 (labelled posets)
+  [ok ] n=1 : 1 labelled   expected 1
+  [ok ] n=2 : 3 labelled   expected 3
+  [ok ] n=3 : 19 labelled   expected 19
+  [ok ] n=4 : 219 labelled   expected 219
+  [ok ] n=5 : 4231 labelled   expected 4231
+  [ok ] n=6 : 130023 labelled   expected 130023
+  [ok ] n=7 : 6129859 labelled   expected 6129859
+C4  e(P) by subset DP == |L(P)| by direct enumeration
+  [ok ] n=1   0 bad of 1
+  [ok ] n=2   0 bad of 2
+  [ok ] n=3   0 bad of 5
+  [ok ] n=4   0 bad of 16
+  [ok ] n=5   0 bad of 63
+  [ok ] n=6   0 bad of 318
+C5  p(x,y) via e(P+{x<y}) == direct count over L(P)
+  [ok ] n=2   0 bad of 1 pairs
+  [ok ] n=3   0 bad of 7 pairs
+  [ok ] n=4   0 bad of 44 pairs
+  [ok ] n=5   0 bad of 286 pairs
+  [ok ] n=6   0 bad of 2195 pairs
+C6  levels: DFS acyclicity == 'some block order is P-compatible' (brute force)
+  [ok ] n=1   0 bad
+  [ok ] n=2   0 bad
+  [ok ] n=3   0 bad
+  [ok ] n=4   0 bad
+  [ok ] n=5   0 bad
+C7  #moves: sum of per-level topological-sort counts == explicit enumeration;
+    and for the ANTICHAIN it must be the Fubini number A000670 (external)
+  [ok ] n=1 counts agree   0 bad of 1
+  [ok ] n=1 antichain #moves = 1   expected 1
+  [ok ] n=2 counts agree   0 bad of 2
+  [ok ] n=2 antichain #moves = 3   expected 3
+  [ok ] n=3 counts agree   0 bad of 5
+  [ok ] n=3 antichain #moves = 13   expected 13
+  [ok ] n=4 counts agree   0 bad of 16
+  [ok ] n=4 antichain #moves = 75   expected 75
+  [ok ] n=5 counts agree   0 bad of 63
+  [ok ] n=5 antichain #moves = 541   expected 541
+  [ok ] n=6 counts agree   0 bad of 318
+  [ok ] n=6 antichain #moves = 4683   expected 4683
+C8  multiplicities: m_X >= 0 and sum over ALL levels == e(P)
+  [ok ] n=1   0 sum-bad, 0 with a negative multiplicity
+  [ok ] n=2   0 sum-bad, 0 with a negative multiplicity
+  [ok ] n=3   0 sum-bad, 0 with a negative multiplicity
+  [ok ] n=4   0 sum-bad, 0 with a negative multiplicity
+  [ok ] n=5   0 sum-bad, 0 with a negative multiplicity
+  [ok ] n=6   0 sum-bad, 0 with a negative multiplicity
+C9  spectrum: dim ker(M - lambda I) over Q equals the predicted multiplicity,
+    on the ACTUAL transition matrix under the uniform-move weight
+  [ok ] n=2   0 bad eigenvalue multiplicities over 2 posets
+  [ok ] n=3   0 bad eigenvalue multiplicities over 5 posets
+  [ok ] n=4   0 bad eigenvalue multiplicities over 16 posets
+  [ok ] n=5   0 bad eigenvalue multiplicities over 61 posets
+C10 majority relation: totality/acyclicity computed two ways agree
+  [ok ] n=2   0 bad
+  [ok ] n=3   0 bad
+  [ok ] n=4   0 bad
+  [ok ] n=5   0 bad
+
+ALL CONTROLS PASS
