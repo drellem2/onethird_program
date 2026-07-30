@@ -38,10 +38,16 @@ and should not be widened. The remaining candidate for novelty is the **applicat
 framework.
 
 **And the headline's own bound word did not survive.** The locating commit claimed Brown's Theorem 2 was
-**"strictly sharper"** than what the repo uses. The audit refuted it: **0 disagreements at every one of 2,353
-levels** to n≤5 — Brown's answer is the *same* answer. "Strictly more informative" is the correct phrase. A
-ticket to adopt Brown's Theorem 2 on the strength of the headline was deliberately **not** filed, and will
-not be.
+**"strictly sharper"** than what the repo uses. The audit refuted it, and the repair then extended the
+refutation to **0 disagreeing levels of 39,616 to n≤6** — Brown's answer is the *same* answer, so "sharper"
+has no direction to point in. "Strictly more informative" is the correct phrase. A ticket to adopt Brown's
+Theorem 2 on the strength of the headline was deliberately **not** filed, and will not be.
+
+*(Correction, 2026-07-30 16:15, pm-onethird's own error. This line previously read "0 disagreements at every
+one of 2,353 levels to n≤5". **2,353 is the n=5 ROW, not the n≤5 total, which is 2,588** — levels run 1, 4,
+24, 206, 2,353 by n. Caught by mg-3b51, which noted it was mine and not a defect in the document it was
+auditing. The irony is exact: mg-1953 was repairing two "n=5 row quoted as an n≤5 total" slips, and I
+reproduced the same slip in the sentence reporting that repair. The 39,616 figure above is a genuine total.)*
 
 **Conditions that would reopen A(P)** — a price is not a property, so these are named rather than left to be
 re-derived: ledger rows **U1** and **U3**, i.e. the weighted/normalised Hodge Laplacians (mg-276d H4, still
