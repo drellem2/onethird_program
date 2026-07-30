@@ -1,0 +1,36 @@
+==============================================================================
+T2a/T2b/T2c  the operation on F(P), all poset classes, |F(P)| <= 80
+==============================================================================
+
+   n classes tested skipped  AC two routes differ  supp not a hom  Phi not onto  ker not nilpotent
+   1       1      1       0                     0               0             0                  0
+   2       2      2       0                     0               0             0                  0
+   3       5      5       0                     0               0             0                  0
+   4      16     16       0                     0               0             0                  0
+   5      63     39      24                     0               0             0                  0
+
+  Reading: on every poset class tested, AC(P) has the same two
+  descriptions, supp is a surjective semilattice homomorphism, and
+  Phi : kF(P) -> k^{AC(P)} is onto with nilpotent kernel.  Hence
+  kF(P)/rad = k^{AC(P)}: the characters of kF(P) ARE indexed by the
+  quotients of P.  Independent re-anchor of mg-af28 B5 / mg-6ad0 A4a.
+
+==============================================================================
+T2d  CONTROL -- a NON-radical ideal must fail the nilpotency routine
+==============================================================================
+
+  Same routine, same posets, but the subspace fed to it is the kernel
+  of Phi ENLARGED by the identity face (the whole one-block face), which
+  is idempotent and therefore cannot lie in any nilpotent ideal.
+
+   n classes tested  control fired (not nilpotent)  control FAILED to fire
+   2       2      2                               2                       0
+   3       5      5                               5                       0
+   4      16     16                              16                       0
+
+  The control fired on all 23 classes: the routine does distinguish
+  a nilpotent ideal from one containing an idempotent.
+
+==============================================================================
+T2 TOTAL BAD: 0
+==============================================================================
