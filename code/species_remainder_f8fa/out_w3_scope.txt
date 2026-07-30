@@ -1,5 +1,7 @@
 # target: code/species_7d75
 
+# files read: 18   (skipped as not UTF-8 text: none)
+
 ==============================================================================
 W3a  the corrected statements are not still ASSERTED in the instrument
 ==============================================================================
@@ -53,9 +55,12 @@ W3c  the corrected readings are present at source
 W3 SCOPE: PASS   (0 problem(s))
 ==============================================================================
 
-EXTENT OF THAT VERDICT (added mg-a4ef).  This checker enforces TWO
-corrected statements -- X4 and X5 -- plus the character-ring rule,
-over ONE tree.  mg-6f61 enumerated ten stricken sentences; eight of
+EXTENT OF THAT VERDICT (added mg-a4ef).  MEASURED mg-d633.  This
+enforces TWO corrected statements -- X4 and X5 -- plus the
+character-ring rule, over ONE tree: 18 file(s), every regular file in it,
+with no extension rule (that rule existed until mg-d633 and dropped
+run_all.sh while this line said 'over ONE tree').
+mg-6f61 enumerated ten stricken sentences; eight of
 them are NOT on this list, and X3 and the AM 17.5 quotation were in
 force in code/species_7d75 for the whole time this file reported
 PASS.  A PASS HERE IS NOT COVERAGE OF THE OTHER NINE STATEMENTS.

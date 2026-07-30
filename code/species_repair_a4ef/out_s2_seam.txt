@@ -2,26 +2,75 @@
 S2a  THE SAME THING SAID TWICE -- every passage against every other
 ==============================================================================
 
-  mg-73df found ONE pair at 56%%, in the block quotes.  The threshold
+  mg-73df found ONE pair at 56%, in the block quotes.  The threshold
   here is 45%, below what it found, and the sweep is run over prose
   paragraphs as well -- a check written to catch the instance you
   already know about catches exactly that instance.
 
-  block quotes            17 passage(s),  11 longer than 300 characters
-                         worst pair 5%  (lines 85-110 vs 119-137), threshold 45%
+  TWO PASSES, because one floor could not do both (mg-d633).  The
+  45% sweep needs long passages: two DIFFERENT quotations of one book
+  score 52.8% on vocabulary alone.  The said-twice pass needs no
+  length: an EXACT duplicate is an exact duplicate at 139 characters,
+  and until mg-d633 that case exited 0 while this run said 'worst pair
+  5%'.  Every passage over 60 normalised characters is now compared to
+  every other by one pass or both, and what neither compares is
+  PRINTED, one passage per line, rather than named as a number.
 
-  prose paragraphs       124 passage(s),  59 longer than 300 characters
-                         worst pair 22%  (lines 204-220 vs 764-772), threshold 45%
+  block quotes            19 passage(s):  12 over 300 chars (the 45% sweep),
+                          19 over 60 chars (the 90% said-twice pass, mg-d633),
+                           0 at or below 60 chars, COMPARED BY NEITHER:
+                             (none)
+                         worst pair among the 19 over 60 chars: 53%  (lines 482-483 vs 490-491), said-twice threshold 90%
+                         worst pair among the 12 over 300 chars: 7%  (lines 175-181 vs 623-628), threshold 45%
+
+  prose paragraphs       131 passage(s):  64 over 300 chars (the 45% sweep),
+                          99 over 60 chars (the 90% said-twice pass, mg-d633),
+                          32 at or below 60 chars, COMPARED BY NEITHER:
+                             lines 65-65: and, refining it four minutes later:
+                             lines 78-78: ---
+                             lines 232-232: ---
+                             lines 236-236: aguiar–mahajan, definition 8.1, verbatim:
+                             lines 249-249: two species carry the whole story.
+                             lines 262-262: c(p) = { x ∈ ℝ^n : x_i ≤ x_j whenever i < j 
+                             lines 316-316: ---
+                             lines 338-338: both algebras built from their definitions, 
+                             lines 348-348: the comparison, o_α ↔ d_{t(α)} with t(α) the
+                             lines 356-356: (entries are counts of mismatching structure
+                             lines 383-383: for every poset class p at n ≤ 5 , with g = 
+                             lines 415-415: ---
+                             lines 466-466: ---
+                             lines 498-498: measured (t6a), 0 bad:
+                             lines 534-534: ---
+                             lines 541-541: the published inputs, all quoted from aguiar
+                             lines 554-554: the two candidate subspecies:
+                             lines 559-559: the measurement , exhaustive on the ground s
+                             lines 666-666: ---
+                             lines 724-724: ---
+                             lines 770-770: ---
+                             lines 835-835: ---
+                             lines 855-855: ---
+                             lines 859-859: ordered by expected yield.
+                             lines 919-919: ---
+                             lines 942-942: ---
+                             lines 978-978: sources
+                             lines 987-987: ---
+                             lines 991-991: three things this document deliberately does
+                             lines 1007-1007: ---
+                             lines 1117-1117: three properties, and the third is the one t
+                             lines 1159-1159: what mg-a4ef changed.
+                         worst pair among the 99 over 60 chars: 41%  (lines 1105-1107 vs 1137-1138), said-twice threshold 90%
+                         worst pair among the 64 over 300 chars: 24%  (lines 165-173 vs 485-488), threshold 45%
 
 ==============================================================================
 S2b  CROSS-REFERENCES RESOLVE, AND BACK-REFERENCED COUNTS AGREE
 ==============================================================================
 
   sections that use sub-headings: 14, 2
-  sub-sections referred to      : 14.2, 14.3, 14.4, 2.1, 2.2, 2.3
+  sub-sections referred to      : 14.2, 14.3, 14.4, 14.5, 2.1, 2.2, 2.3
       §14.2   resolves
       §14.3   resolves
       §14.4   resolves
+      §14.5   resolves
       §2.1    resolves
       §2.2    resolves
       §2.3    resolves
@@ -30,7 +79,7 @@ S2b  CROSS-REFERENCES RESOLVE, AND BACK-REFERENCED COUNTS AGREE
   back-references to that count : none
 
 ==============================================================================
-S2c  THE THREE STALENESS PATTERNS THIS SEAM PRODUCED
+S2c  THE 2 STALENESS PATTERNS THIS SEAM PRODUCED, plus 3 written out
 ==============================================================================
 
   a filing described as shelved AND as executed                  ok
@@ -43,8 +92,22 @@ S2c  THE THREE STALENESS PATTERNS THIS SEAM PRODUCED
 S2 TOTAL BAD: 0
 ==============================================================================
 
-EXTENT.  S2a is a similarity sweep over ONE document and cannot see a
-duplicate spread across two documents, or one paraphrased below 45%.
-S2b resolves numbered sub-section references only, not prose
-references such as 'the banner at the top'.  S2c is three named
-patterns and is a regression guard, not a search.
+EXTENT.  Rewritten mg-d633, because two of its three sentences were
+wider than what the code read).  S2a sweeps ONE document:
+    docs/OneThird-Species-Hopf-Monoids-Where-This-Lives.md
+Its unit is the PASSAGE -- a run of block-quote lines, or a run of
+prose lines.  Markdown TABLES and HEADINGS are in no passage and are
+swept by neither pass.  Every passage over 60 normalised characters is
+compared to every other for near-identity at 90%; those over 300 are
+compared again at 45%.  So: a duplicate spread across TWO documents
+is invisible; a passage paraphrased below 45% is invisible; a passage
+between 60 and 300 characters is caught only if it is repeated at 90%
+or better, not merely similar; and a passage at or below 60 characters
+is compared to nothing at all -- those are LISTED ABOVE, one per line,
+not counted.  S2b resolves numbered sub-section references only, not
+prose references such as 'the banner at the top'.  S2c is 2 named
+patterns plus 3 checks written out, and is a regression guard, not a
+search.  NOTHING HERE READS ANY CODE TREE, and nothing here compares a
+STRUCK passage with a live one -- two passages that say the same thing
+where one is retracted is not a duplicate, it is B1, and it is:
+    python3 code/species_extent_d633/e2_crosssection.py

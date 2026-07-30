@@ -82,9 +82,19 @@ C4  the repair document
 CHECK_DOC: PASS   (0 problem(s))
 ==============================================================================
 
-EXTENT OF THAT VERDICT (added mg-a4ef).  This checker enforces all 10
-stricken sentences over ONE FILE -- the document named above.  It
-reads no code.  Two of the sentences it certifies as struck were in
+EXTENT OF THAT VERDICT (added mg-a4ef).  CORRECTED mg-d633.  This
+enforces all 10 stricken sentences, and every correction and anchor in
+C2 and C3, over ONE FILE:
+    docs/OneThird-Species-Hopf-Monoids-Where-This-Lives.md
+It reads a SECOND file for section C4's five assertions and for nothing
+else:
+    docs/OneThird-Species-Hopf-Monoids-Repair.md
+Until mg-d633 this paragraph said 'ONE FILE' and stopped.  That was
+NARROWER than what the code read -- the safe direction, and still a
+false statement, and it would have told the next person deciding what
+still needs covering that the repair document was uncovered (mg-7dd3
+C1).  It reads no code.  Two of the sentences it certifies as struck
+were in
 force in code/species_7d75 for the whole time it reported PASS, one of
 them inside a run ending T6 TOTAL BAD: 0 (mg-73df's MAJOR).  A PASS
 HERE IS NOT COVERAGE OF ANY CODE TREE.  The union of this list and

@@ -66,10 +66,26 @@ SRC = (os.path.abspath(sys.argv[1]) if len(sys.argv) > 1
 print("# target: %s" % os.path.join(*SRC.split(os.sep)[-2:]))
 print()
 
-FILES = sorted(f for f in os.listdir(SRC)
-               if f.endswith(".py") or f.endswith(".txt")
-               or f.endswith(".md"))
+# mg-d633, on mg-7dd3's A1: this listing filtered on `.py/.txt/.md`, so
+# "over ONE tree" in the extent below covered every file in the tree EXCEPT
+# `run_all.sh`, which is in it.  Same defect as `s1_extent.py`'s, one tree
+# narrower, and repaired the same way: THE CODE IS WIDENED, not the claim
+# narrowed.  Every regular file is read; anything undecodable is NAMED in the
+# output rather than dropped by a rule no sentence carries.
+FILES, UNDECODABLE = [], []
+for _f in sorted(os.listdir(SRC)):
+    if not os.path.isfile(os.path.join(SRC, _f)):
+        continue
+    try:
+        open(os.path.join(SRC, _f), encoding="utf-8").read()
+    except (UnicodeDecodeError, OSError):
+        UNDECODABLE.append(_f)
+        continue
+    FILES.append(_f)
 TEXT = {f: open(os.path.join(SRC, f), encoding="utf-8").read() for f in FILES}
+print("# files read: %d   (skipped as not UTF-8 text: %s)"
+      % (len(FILES), ", ".join(UNDECODABLE) if UNDECODABLE else "none"))
+print()
 LINES = {f: TEXT[f].splitlines() for f in FILES}
 
 
@@ -192,9 +208,13 @@ print("=" * 78)
 print("W3 SCOPE: %s   (%d problem(s))" % ("PASS" if bad == 0 else "FAIL", bad))
 print("=" * 78)
 print()
-print("EXTENT OF THAT VERDICT (added mg-a4ef).  This checker enforces TWO")
-print("corrected statements -- X4 and X5 -- plus the character-ring rule,")
-print("over ONE tree.  mg-6f61 enumerated ten stricken sentences; eight of")
+print("EXTENT OF THAT VERDICT (added mg-a4ef).  MEASURED mg-d633.  This")
+print("enforces TWO corrected statements -- X4 and X5 -- plus the")
+print("character-ring rule, over ONE tree: %d file(s), every regular file in it,"
+      % len(FILES))
+print("with no extension rule (that rule existed until mg-d633 and dropped")
+print("run_all.sh while this line said 'over ONE tree').")
+print("mg-6f61 enumerated ten stricken sentences; eight of")
 print("them are NOT on this list, and X3 and the AM 17.5 quotation were in")
 print("force in code/species_7d75 for the whole time this file reported")
 print("PASS.  A PASS HERE IS NOT COVERAGE OF THE OTHER NINE STATEMENTS.")

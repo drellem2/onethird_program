@@ -1,0 +1,73 @@
+==============================================================================
+E1a  WHAT EACH CHECKER ACTUALLY READS
+==============================================================================
+
+  check_doc.py         exit 0     2 file(s) under the repo (2 docs, 0 code), 0 outside, 0 binary
+  w3_scope.py          exit 0    18 file(s) under the repo (0 docs, 18 code), 0 outside, 0 binary
+  s1_extent.py         exit 0    53 file(s) under the repo (1 docs, 52 code), 55 outside, 18 binary
+  s2_seam.py           exit 0     1 file(s) under the repo (1 docs, 0 code), 0 outside, 0 binary
+  e2_crosssection.py   exit 0   100 file(s) under the repo (67 docs, 33 code), 0 outside, 0 binary
+
+  'outside' is the temporary copies s1_extent.py makes for its own
+  controls (c) and (d).  'binary' is shutil.copytree's byte copies.
+  Both are counted and named rather than filtered silently: mg-7dd3
+  recorded that an open()-tracer which swallowed the second would have
+  hidden the very hole it was written to find.
+
+==============================================================================
+E1b  THE PRINTED EXTENT AGAINST THE READ SET, PER CHECKER
+==============================================================================
+
+  check_doc.py -- claims TWO files, and names both
+  reads exactly {this document, the repair document}               ok
+  the printed extent names the document it enforces over           ok
+  the printed extent names the SECOND file too                     ok
+  and still says it reads no code                                  ok
+
+  w3_scope.py -- claims ONE tree, every regular file
+  reads every regular file of code/species_7d75 (18)               ok
+  reads nothing else under code/                                   ok
+  run_all.sh is among them -- the file the old filter dropped      ok
+  the printed extent says 'every regular file'                     ok
+  the printed file count agrees with what was read                 ok
+
+  s1_extent.py -- claims the document + 4 trees, less a NAMED list
+  reads the document                                               ok
+  reads every non-excluded regular file of all four trees (52)     ok
+  reads NONE of the 5 files it names as skipped                    ok
+  the four run_all.sh are read -- the A1 hole, closed              ok
+  every skipped file is NAMED in the run                           ok
+  the printed count for code/species_7d75 is 18, and 18 were read  ok
+  the printed count for code/species_repair_6f61 is 13, and 13 wer ok
+  the printed count for code/species_remainder_f8fa is 12, and 12  ok
+  the printed count for code/species_repair_a4ef is 9, and 9 were  ok
+
+  e2_crosssection.py -- claims every *.md under docs/ and code/
+  reads every .md under docs/ and code/ (100)                      ok
+  reads no .py, .txt or anything else                              ok
+  the printed extent states that count                             ok
+
+==============================================================================
+E1c  s2_seam.py -- an extent that is not a set of files
+==============================================================================
+
+  reads exactly one file, the document                             ok
+  block quotes: the run says 19 passage(s), 12 over 300, 19 over 6 ok
+  block quotes: all 0 passage(s) compared by NEITHER pass are prin ok
+  prose paragraphs: the run says 131 passage(s), 64 over 300, 99 o ok
+  prose paragraphs: all 32 passage(s) compared by NEITHER pass are ok
+
+  The point of E1c: s2_seam.py's extent is a claim about PASSAGES, and
+  the passages it excludes are now enumerated in its own output rather
+  than summarised by a threshold that the extent sentence omitted.
+
+==============================================================================
+E1 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER.  Five checkers, each run ONCE, unmodified, under
+an instrumented `open`.  It compares WHAT WAS READ with WHAT WAS
+PRINTED and nothing else: it does not test whether a checker's rules
+are right, whether its list is complete, or whether it FIRES on what it
+reads.  A checker that opens every file and looks at none of them
+passes E1 and fails E3, which is why both exist.

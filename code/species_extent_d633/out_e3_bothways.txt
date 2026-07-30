@@ -1,0 +1,66 @@
+==============================================================================
+E3  EVERY EXTENT PROBED IN BOTH DIRECTIONS
+==============================================================================
+
+  Exit codes were predicted in PREDICTIONS.md before this ran.
+  `finding` records whether the OUTPUT says something fired, which is
+  a different claim from the exit code -- three scripts in this arc
+  reported a finding and exited 0.
+
+  id    checker              dir  mutation                                             exp  got  finding 
+  P0a   check_doc.py         -    unmutated                                            0    0    no       
+  P1    check_doc.py         IN   un-strike X7 in the document                         1    1    yes      
+  P2    check_doc.py         IN   break C4's anchor in the repair document             1    1    yes      
+  P3    check_doc.py         OUT  X7 live in the remainder document                    0    0    no       
+  P4    check_doc.py         OUT  X3 live in species_7d75/t6                           0    0    no       
+  P0b   w3_scope.py          -    unmutated                                            0    0    no       
+  P5    w3_scope.py          IN   X4 in species_7d75/run_all.sh                        1    1    yes      
+  P6    w3_scope.py          IN   X4 in species_7d75/README.md                         1    1    yes      
+  P7    w3_scope.py          OUT  X4 in species_repair_6f61/README.md                  0    0    no       
+  P8    w3_scope.py          OUT  X3 in species_7d75/README.md -- a statement not on t 0    0    no       
+  P0c   s1_extent.py         -    unmutated                                            0    0    yes      
+  P9    s1_extent.py         IN   X3 in species_7d75/run_all.sh (mg-7dd3's M12, which  1    1    yes      
+  P10   s1_extent.py         IN   X3 in a NEW .md in species_7d75                      1    1    yes      
+  P11   s1_extent.py         IN   X3 in species_remainder_f8fa/run_all.sh              1    1    yes      
+  P11b  s1_extent.py         OUT  X3 six lines from an unrelated `mg-73df` -- the rule 0    0    yes      
+  P12   s1_extent.py         OUT  X3 in species_audit_73df -- a tree the extent declar 0    0    yes      
+  P13   s1_extent.py         OUT  X3 in a NAMED exclusion (species_repair_a4ef/OUTCOME 0    0    yes      
+  P0d   s2_seam.py           -    unmutated                                            0    0    yes      
+  P14   s2_seam.py           IN   a SHORT block quote duplicated exactly (mg-7dd3's M1 1    1    yes      
+  P14b  s2_seam.py           IN   mg-7dd3's M16 exactly -- the 139-char quote, located 1    1    yes      
+  P15   s2_seam.py           IN   a LONG block quote duplicated exactly                1    1    yes      
+  P16   s2_seam.py           OUT  a prose passage of <= 60 chars duplicated            0    0    yes      
+  P17   s2_seam.py           OUT  a table row duplicated                               0    0    yes      
+  P0e   e2_crosssection.py   -    unmutated                                            0    0    no       
+  P18   e2_crosssection.py   IN   §0's misquotation restored (B1 itself)               1    1    yes      
+  P19   e2_crosssection.py   IN   a struck claim restated in ANOTHER docs/*.md         1    1    yes      
+  P20   e2_crosssection.py   OUT  the same restatement, in a paragraph that retracts i 0    0    no       
+  P21   e2_crosssection.py   OUT  a struck claim restated in a .py in a code tree      0    0    no       
+
+==============================================================================
+E3b  PER CHECKER, BOTH DIRECTIONS
+==============================================================================
+
+  check_doc.py         baseline clean | INSIDE the claimed extent 2/2 fired | OUTSIDE it 2/2 stayed silent
+  w3_scope.py          baseline clean | INSIDE the claimed extent 2/2 fired | OUTSIDE it 2/2 stayed silent
+  s1_extent.py         baseline clean | INSIDE the claimed extent 3/3 fired | OUTSIDE it 3/3 stayed silent
+  s2_seam.py           baseline clean | INSIDE the claimed extent 3/3 fired | OUTSIDE it 2/2 stayed silent
+  e2_crosssection.py   baseline clean | INSIDE the claimed extent 2/2 fired | OUTSIDE it 2/2 stayed silent
+
+  A checker with a green INSIDE column and a green OUTSIDE column has
+  had its printed extent MEASURED, in both directions, rather than
+  read.  That is the sentence mg-7dd3 asked for and it is the whole
+  deliverable of this file.
+
+==============================================================================
+E3 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER.  28 probes over 5 checkers, each a SINGLE
+mutation against a fresh sandbox copy of docs/ and 6 code trees.  It
+says nothing about mutations nobody planted: an extent probed at two
+points is not an extent verified at every point, and the choice of
+points is mine.  Each probe tests ONE statement in ONE file -- no probe
+here plants two at once, and none tests a checker against a mutation
+of ITSELF.  The probes are listed above by name so a successor can see
+which regions were and were not touched.

@@ -154,6 +154,15 @@ TREES = [
 # is a hole.  `s1_extent.py` prints this list in its extent declaration so it
 # cannot grow without a reader seeing it.
 #
+# mg-d633, on mg-7dd3's A1: that paragraph was TRUE OF THIS LIST AND FALSE OF
+# THE SCAN.  A second, heuristic exclusion lived in `s1_extent.py`'s
+# `tree_files()` -- an extension filter, applied BEFORE this list was consulted,
+# which dropped the four `run_all.sh` inside the four trees below and appeared
+# in no extent line and on no printed list.  The scan now reads every regular
+# file and this list is again the whole of it, together with a second printed
+# list of anything undecodable.  An exclusion that is a heuristic is a hole
+# WHEREVER IT LIVES, including in the file that says so.
+#
 # Note what is NOT here: `out_t6_fock_and_record.txt`.  A committed output that
 # quotes a forbidden sentence is exactly the defect this ticket closes, so
 # "it is only an output" is not a reason to skip a file.  The three below are
