@@ -1,0 +1,30 @@
+==============================================================================
+IDENTIFICATION CHECK 3: is the programme's monoid F(P) the LRB that
+Brown names in section 4.3 -- chains in the distributive lattice
+J(P), multiplied by refining the first factor by the second?
+Brown, J. Theoret. Probab. 13 (2000) 871-938, arXiv:math/0006145.
+==============================================================================
+
+n    classes   moves      C1 chains <-> moves    C2 products correspond   C3 max <-> lin ext  
+1    1         1          0 bad of 1             0 bad of 1 pairs         0 bad of 1          
+2    2         5          0 bad of 2             0 bad of 13 pairs        0 bad of 2          
+3    5         37         0 bad of 5             0 bad of 321 pairs       0 bad of 5          
+4    16        397        0 bad of 16            0 bad of 13853 pairs     0 bad of 16         
+5    63        5757       0 bad of 63            0 bad of 922073 pairs    0 bad of 63         
+
+The worked example P = {a<b, c<d}
+  chains 0->1 in J(P)                 : 26
+  P-compatible ordered partitions     : 26   (the note says 26)  OK
+  maximal chains in J(P)              : 6
+  linear extensions of P              : 6   (the note says 6)   OK
+  |J(P)| (order ideals)               : 9
+
+  A sample product, both ways (x = (ac|bd), y = (a|b|cd)):
+    Brown  (refine chain x by chain y) : a|c|b|d
+    note   (blockwise intersection)    : a|c|b|d
+    agree: YES
+
+==============================================================================
+0 bad throughout means F(P) is not merely LIKE Brown's section-4.3
+left regular band: it IS it, under the ideal-difference bijection.
+==============================================================================
