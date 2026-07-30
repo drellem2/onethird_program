@@ -1,0 +1,85 @@
+==============================================================================
+A5  nine mutations against mg-a893's checkers, none of them in
+    mg-0a11's battery
+==============================================================================
+
+  baseline code/counterexample_repair_dea5/check_doc_repair.py  exit 0 (clean)
+  baseline code/counterexample_probe_24a3/check_doc.py          exit 0 (clean)
+  baseline code/counterexample_audit_0a11/check_doc_audit.py    exit 0 (clean)
+
+  [SILENT MISS] C1  the section is REVERSED by an insertion; every certified
+      byte is left exactly where it was exit 0
+                PURE INSERTION.  No needle deleted, no count changed, no cell moved,
+      no heading touched.  The paragraph now says the opposite.
+  [SILENT MISS] C2  the UNKEYED row of the 3.4 core table is falsified     exit 0
+                P4 gained two row keys for this table, n = 6 and n = 8, and the
+      n = 7 row between them has none.  Its core count and its
+      extremal-core count are rewritten here: the row now says the
+      separation at n = 7 was 2 of 4, which is not perfect.
+  [SILENT MISS] C3  'six distinct cores' at n = 11 is changed to 'five'    exit 0
+                the figure that makes the document internally consistent.  It is
+      the ONLY sentence in either document that contradicts
+      'Nothing enters the family after n = 6' -- and it is right.
+  [SILENT MISS] C4  the whole n = 11 clause is DELETED                     exit 0
+                same target, by removal rather than falsification.  The document
+      is left self-consistent and wrong.
+  [SILENT MISS] C5  the honest `p` is falsified in the TARGET document only exit 0
+                P1 is 'per document, with an exact count' -- and the figure the
+      whole repair exists to install has a FIGURES entry for the
+      repair and none for the target.  mg-0a11's M1a, re-created for
+      the new headline, pointing the other way.
+  [caught     ] C6  out_cores.txt's honest-`p` line is falsified           exit 1
+                EXPECTED TO FIRE.  P2 pairs the repair's sentence with this exact
+      printed line, so this is the control on C5: the mechanism works,
+      it is the COVERAGE that is one-sided.
+  [SILENT MISS] C7  the five-core table is HTML-commented out of the page  exit 0
+                the coverage boundary section 8.2 NAMES.  Naming is not handling:
+      this is a check that the named risk is real, and it is.
+  [SILENT MISS] C8  a region mg-4acd's presentation digest CERTIFIES is gutted exit 0
+                docs/state-history/README.md, the F1 correction block, region id
+      readme.F1 in delta_control.py's CERTIFIED table.  Does the
+      document-checker of this cluster see it?
+  [SILENT MISS] C9  the repair's own headline is falsified everywhere in BOTH
+      documents exit 0
+                run against mg-0a11's audit document checker rather than the
+      repair's, to see whether the AUDIT's checker notices its
+      subject being rewritten under it.
+
+==============================================================================
+SILENT MISSES: 6 of 6 defect probes
+==============================================================================
+  C1  the section is REVERSED by an insertion; every certified
+  C2  the UNKEYED row of the 3.4 core table is falsified
+  C3  'six distinct cores' at n = 11 is changed to 'five'
+  C4  the whole n = 11 clause is DELETED
+  C5  the honest `p` is falsified in the TARGET document only
+  C7  the five-core table is HTML-commented out of the page
+
+  C6, the control, FIRED -- the per-output pairing works on the new
+  file, so what is one-sided above is the COVERAGE and not the
+  mechanism.  C8 and C9 are scope questions, not defects: C8  a region mg-4acd's presentation digest CERTIFIES is gutted, C9  the repair's own headline is falsified everywhere in BOTH
+
+==============================================================================
+THE COMPOSITION QUESTION, ANSWERED IN BOTH DIRECTIONS
+==============================================================================
+
+  C8 runs one way live.  The other way needs no run and admits a proof:
+  mg-4acd's mechanism digests a fixed list of REGIONS, and that list --
+  CERTIFIED in code/state_landing_control_2da3/delta_control.py -- names
+  exactly two files:
+
+      STATE.md                       (row :135's content cell, two versions)
+      docs/state-history/README.md   (nine correction blocks)
+
+  Neither counterexample document is a certified region, and no edit to a file
+  outside the list can change the bytes or the presentation record of a region
+  inside it.  So no mutation of the repair document can move any digest, and
+  C8 shows that no mutation of a certified region moves the document-checker.
+
+  THE TWO MECHANISMS COEXIST.  They do not compose: their subjects are
+  disjoint, and the union of their coverage has a hole exactly the size of the
+  two counterexample documents' PRESENTATION -- which is what C7 walks through.
+  Section 8.2 says the two are "complementary, not redundant" and that is
+  correct as far as it goes; what it does not say is that complementary here
+  means DISJOINT, so nothing certifies that a reader of these two documents is
+  shown what the checker checked.

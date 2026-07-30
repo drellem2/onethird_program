@@ -1,0 +1,75 @@
+A3  A SECOND DEPENDENCE ROUTE, BUILT RATHER THAN ARGUED ABOUT
+
+==============================================================================
+1.  THE ARGUMENT, which is the repair's own with one word changed
+==============================================================================
+
+    The repair's step is: two members with the same core have the same
+    (delta, qmass) by a theorem, so they are not two independent chances for
+    the hypothesis "qmass = 1 marks exactly the extremal members" to fail; a
+    group of N members with C distinct cores offers C such chances, and the
+    exact p of a perfect separation is 1/C(C, c) rather than 1/C(N, k).
+
+    That step does not mention cut elements.  It only needs a map that FIXES
+    (delta, qmass) and is not the identity.  Cut extension is one.  Here is
+    another, and it is not a cut extension of anything:
+
+      P -> P^op, the ORDER DUAL.  Inc(P^op) = Inc(P) and p_{P^op}(x,y) =
+      p_P(y,x), so min(p, 1-p) is unchanged pair by pair and delta(P^op) =
+      delta(P); e(P^op) = e(P) by reversing every linear extension; the
+      majority relation reverses, so L*(P^op) is L* read backwards and the
+      partitions into L*-intervals are the SAME partitions; a partition's
+      block digraph reverses, so it is a level of P^op iff it is a level of P,
+      and e(P|_B) = e(P^op|_B) block by block, so every m_X is unchanged.
+      Hence qmass(P^op) = qmass(P).  EXACTLY, with nothing measured.
+
+    Duality relates two DISTINCT CORES.  It is not a cut extension: both are
+    cut-free by definition of core, so neither is an extension of the other.
+
+
+==============================================================================
+2.  THE INVARIANCE, measured over the whole population
+==============================================================================
+  n = 5   population   16   dual in population   16   (e, delta, qmass) differs 0
+  n = 6   population   88   dual in population   88   (e, delta, qmass) differs 0
+  n = 7   population  671   dual in population  671   (e, delta, qmass) differs 0
+
+The population is CLOSED under duality and the three statistics are
+invariant on it, 775 of 775, 0 failures.  This is stronger evidence
+than the repair has for qmass inheritance along cut extension (257
+measured cases), because for duality it is also proved.
+
+==============================================================================
+3.  THE FIVE CORES ARE THREE DUALITY CLASSES
+==============================================================================
+core    size    delta    qmass     dual  self-dual  covers
+C1         5      4/9      8/9       C2         no  0<2 0<3 1<3 2<4
+C2         5      4/9      8/9       C1         no  0<2 1<3 1<4 2<4
+C3         6      4/9      2/3       C4         no  0<2 1<5 2<3 3<4 3<5
+C4         6      4/9      2/3       C3         no  0<2 0<3 1<3 3<4 4<5
+C5         6      1/3        1       C5        yes  0<2 1<3 1<4 2<3 2<4 3<5
+
+  duality classes : {C1,C2}  {C3,C4}  {C5}
+  classes                     : 3
+  extremal classes            : 1
+  qmass = 1 classes           : 1
+
+FINDING (A3-1) -- THE HEADLINE.  The repair's `1/5` counts C1 and C2
+as two independent chances for the hypothesis to fail, and C3 and C4
+as two more.  They are not.  C2 = C1^op and C4 = C3^op, so their
+(delta, qmass) agree by the same kind of theorem the repair uses to
+collapse 20 members to 5 cores -- and a stronger one, since duality
+needs no measurement.  Applying the repair's OWN rule to its own
+cores gives 3 independent units, not 5, and
+
+      THE HONEST EXACT p OVER THE DUALITY CLASSES IS 1/3, NOT 1/5.
+
+This is a correction in the SAME direction as the repair's own -- the
+evidence is weaker again, by a further factor of 5/3 -- and it is
+found the way the repair's three predecessors' negatives were found:
+by building the object the negative forbids, not by arguing about
+sufficiency of evidence.
+
+WHAT IT DOES NOT TOUCH.  The separation is still perfect in both
+inclusions; the extremal class is still exactly the qmass = 1 class;
+the section 4 null is still false.  Only the strength moves.

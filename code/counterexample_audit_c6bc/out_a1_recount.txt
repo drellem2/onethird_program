@@ -1,0 +1,87 @@
+A1  INDEPENDENT RECOUNT of mg-a893 (90db267), from kern6bc.py
+
+kern6bc.py imports nothing from code/counterexample_repair_dea5/,
+code/counterexample_probe_24a3/ or code/counterexample_audit_0a11/.
+Definitions are taken from the DOCUMENTS: delta and Inc from section 1
+of the target, P-compatible move / level / m_X from section 1 of the
+Semigroup-Walk-Family-Note, qmass from section 4 of the target, cut
+element and core from section 3.4 of the repair.
+
+==============================================================================
+0.  THE ENUMERATION ITSELF, against A000112
+==============================================================================
+n          posets        A000112   population     e-groups
+5              63             63           16            9
+6             318            318           88           30
+7            2045           2045          671          138
+8           16999          16999         6420          691
+
+Population = non-chain, tie-free, majority-acyclic, as the repair
+defines it.  Agrees with the published 16 / 88 / 671 / 6420 and with
+691 e-groups at n = 8.
+
+==============================================================================
+1.  THE e = 9 GROUPS, AND THE TWO MEANINGS OF 'EXTREMAL'
+==============================================================================
+The target document defines delta-extremal ABSOLUTELY: delta(P) = 1/3,
+the value at which the conjecture is tight (target section 3, 'min 3delta
+= 1 says the conjecture is tight').  cores.py measures it RELATIVELY, as
+the minimum delta inside the group (`dmin = min(...)`, then `r[1] ==
+dmin`).  At n = 6, 7, 8 the two coincide.  At n = 5 they do not.
+
+n         N group min delta k = #(min delta) k = #(delta = 1/3)
+5         2            4/9                2                  0
+6         7            1/3                1                  1
+7        13            1/3                3                  3
+8        20            1/3                6                  6
+
+FINDING (A1-1).  out_cores.txt prints 'extremal in it  2' for the
+n = 5 e = 9 group and a row 'n=5  N=2  k extremal=2  extremal cores=2'.
+Under the DOCUMENT's definition that group contains NO extremal poset:
+both members have delta = 4/9.  The cell is the group minimum, which is
+a different quantity wearing the same word.  It does not propagate to
+either document -- the published core tables start at n = 6, where the
+two definitions agree -- so this is an instrument-output defect and not
+a document defect.
+
+==============================================================================
+2.  CUT ELEMENTS, CORES, AND THE CORE COUNT C
+==============================================================================
+n         N   with a cut element   cut-free        C extremal cores
+5         2                    0          2        2              0
+6         7                    4          3        5              1
+7        13                   13          0        5              1
+8        20                   20          0        5              1
+
+Reproduces 13 of 13 and 20 of 20 with a cut element, 0 cut-free, and
+C = 5 at n = 6, 7 and 8.
+
+==============================================================================
+3.  THE FIVE CORES, POOLED OVER n = 5..8
+==============================================================================
+size      delta    qmass  covers
+5           4/9      8/9  0<2 1<3 1<4 2<4
+5           4/9      8/9  0<2 0<3 1<3 2<4
+6           1/3        1  0<2 1<3 1<4 2<3 2<4 3<5
+6           4/9      2/3  0<2 0<3 1<3 3<4 4<5
+6           4/9      2/3  0<2 1<5 2<3 3<4 3<5
+
+  distinct cores, n = 5..8            : 5
+  of which delta-extremal (delta=1/3) : 1
+  qmass = 1 exactly on those          : YES
+
+Identical to out_cores.txt section 5, cover strings included.  The
+SEPARATION ITSELF -- perfect in both inclusions, one extremal core of
+five, qmass = 1 exactly there -- REPRODUCES.  Nothing in this audit
+weakens it.
+
+==============================================================================
+4.  group(n+1) AGAINST THE CUT EXTENSIONS OF group(n)
+==============================================================================
+n -> n+1   cut ext of grp(n)  = group(n+1)?  new members
+5 -> 6                    4             no            3
+6 -> 7                   13            YES            0
+7 -> 8                   20            YES            0
+
+Reproduces the repair's table: group(7) and group(8) are EXACTLY the
+cut extensions of their predecessors, and 3 members are new at n = 6.
