@@ -1,0 +1,66 @@
+== E1: the deletion test, every gate the explanation names ==
+
+BASELINE -- the committed artifact, regenerated unmutated
+  [OK    ] controls.py reproduces its committed artifact byte for byte (20738 bytes, exit 0); committed is 20738 bytes
+  [OK    ] the unmutated battery exits 0
+
+DELETION TEST -- predictions were registered before the runs
+  delete gate 'shape'                bytes  20738 ->  20738  BYTE-IDENTICAL   exit 0   predicted identical/0  MATCH
+       no pair in any population has a shape mismatch, so the gate never fires
+  delete gate 'diagonal'             bytes  20738 ->  20738  CHANGED          exit 0   predicted changed/0  MATCH
+       294 of 297 violate both forced gates, so no ANSWER moves -- but the trace label the artifact prints does
+  delete gate 'magnitude'            bytes  20738 ->  20588  CHANGED          exit 1   predicted changed/1  MATCH
+       3 pairs in row I4 violate magnitude ALONE; their answers flip and a scored row fails
+  delete gate 'parity'               bytes  20738 ->  20738  BYTE-IDENTICAL   exit 0   predicted changed/1  *** MISS ***
+       the union-find-vs-brute-force instrument check should catch a predicate that can no longer reject
+  stop counting signs_read           bytes  20738 ->  20735  CHANGED          exit 0   predicted changed/0  MATCH
+       the count is what the rows now rest on, so it must be load-bearing on the bytes
+  swap the two forced gates' order   bytes  20738 ->  20738  CHANGED          exit 0   predicted changed/0  MATCH
+       same answers, different trace -- the artifact says the split depends on the order, so it must move when the order does
+  delete 'diagonal' from gate_violations bytes  20738 ->  20729  CHANGED          exit 0   predicted changed/0  MATCH
+       the 'both forced gates violated' counts are printed, so they must move
+  delete 'magnitude' from gate_violations bytes  20738 ->  20729  CHANGED          exit 0   predicted changed/0  MATCH
+       same, from the other side -- and row I4's 'the ONLY one violated' sentence is computed here
+  invert diagonal_moves (the routing) bytes  20738 ->  23522  CHANGED          exit 1   predicted changed/1  MATCH
+       the routing row scores the split, so inverting it must break a row
+
+PREDICTION SCORE -- 8 of 9 matched
+  MISS: delete gate 'parity'                 observed identical/exit 0, predicted changed/exit 1
+
+WHICH LINES MOVED, for each mutation that changed the artifact
+  delete gate 'shape'                  no line moved
+  delete gate 'diagonal'               2 line(s) moved
+        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+        - * WHERE THE PREDICATE RETURNED, per row
+  delete gate 'magnitude'              LINE COUNT MOVED 68 -> 66
+  delete gate 'parity'                 no line moved
+  stop counting signs_read             1 line(s) moved
+        - * the absorbability predicate
+  swap the two forced gates' order     2 line(s) moved
+        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+        - * WHERE THE PREDICATE RETURNED, per row
+  delete 'diagonal' from gate_violations 4 line(s) moved
+        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+        - [CANNOT FAIL] PROVEN PROPERTY, not a control row
+        - [PASS] routing check on the mg-8a12 repair: the MOVE
+        - * WHERE THE PREDICATE RETURNED, per row
+  delete 'magnitude' from gate_violations 4 line(s) moved
+        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
+        - [CANNOT FAIL] PROVEN PROPERTY, not a control row
+        - [PASS] routing check on the mg-8a12 repair: the MOVE
+        - * WHERE THE PREDICATE RETURNED, per row
+  invert diagonal_moves (the routing)  LINE COUNT MOVED 68 -> 65
+
+SCORED ROWS -- does any deletion change a LABEL, not just a number?
+  [OK    ] the unmutated battery scores 41 rows -- lines whose marker STARTS the line.  mg-5f9a publishes 43, which counts two 'measured, not scored' bullets that mention [CANNOT FAIL] in prose; see E3
+  delete gate 'shape'                  41 rows, 0 FAIL, labels UNCHANGED
+  delete gate 'diagonal'               41 rows, 0 FAIL, labels UNCHANGED
+  delete gate 'magnitude'              41 rows, 1 FAIL, labels MOVED
+  delete gate 'parity'                 41 rows, 0 FAIL, labels UNCHANGED
+  stop counting signs_read             41 rows, 0 FAIL, labels UNCHANGED
+  swap the two forced gates' order     41 rows, 0 FAIL, labels UNCHANGED
+  delete 'diagonal' from gate_violations 41 rows, 0 FAIL, labels UNCHANGED
+  delete 'magnitude' from gate_violations 41 rows, 0 FAIL, labels UNCHANGED
+  invert diagonal_moves (the routing)  40 rows, 1 FAIL, labels MOVED
+
+E1 claims broken: 0
