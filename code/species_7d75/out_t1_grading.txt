@@ -1,0 +1,103 @@
+==============================================================================
+T1a  |Pi[n]| = Bell(n)   (enumeration vs the Bell triangle)
+==============================================================================
+
+   n   |Pi[n]|   Bell(n)   agree
+   0        1         1   yes
+   1        1         1   yes
+   2        2         2   yes
+   3        5         5   yes
+   4       15        15   yes
+   5       52        52   yes
+   6      203       203   yes
+   7      877       877   yes
+   8     4140      4140   yes
+
+==============================================================================
+T1b  S_n-orbits of Pi[n] ARE the integer partitions of n, count p(n)
+==============================================================================
+
+  Orbits are computed with actual permutations acting on actual set
+  partitions.  The map 'orbit -> multiset of block sizes' is then
+  checked to be a BIJECTION onto the integer partitions of n.
+
+   n   |Pi[n]|  #orbits    p(n)  orbit->blocksizes injective  onto
+   0        1        1       1   True                        True
+   1        1        1       1   True                        True
+   2        2        2       2   True                        True
+   3        5        3       3   True                        True
+   4       15        5       5   True                        True
+   5       52        7       7   True                        True
+   6      203       11      11   True                        True
+   7      877       15      15   True                        True
+
+==============================================================================
+T1c  p(n) = #conjugacy classes of S_n = #irreducible characters of S_n
+==============================================================================
+
+   n     p(n)   #cycle types of S_n   agree
+   0        1                     1   yes
+   1        1                     1   yes
+   2        2                     2   yes
+   3        3                     3   yes
+   4        5                     5   yes
+   5        7                     7   yes
+   6       11                    11   yes
+   7       15                    15   yes
+
+==============================================================================
+T1d  AC(antichain on [n]) = Pi[n], AS SETS
+==============================================================================
+
+   n   |AC(A_n)|   |Pi[n]|   equal as sets
+   0           1         1   yes
+   1           1         1   yes
+   2           2         2   yes
+   3           5         5   yes
+   4          15        15   yes
+   5          52        52   yes
+   6         203       203   yes
+
+==============================================================================
+T1e  AC(P) is a subset of Pi[n] for EVERY poset P -- degree is respected
+==============================================================================
+
+  The claim under test is only that the poset side lives in the same
+  degree.  The stronger guess 'AC(P) = Pi[n] iff P is an antichain' was
+  tested here and is FALSE; the counts below are what refuted it and
+  they are printed rather than dropped.
+
+   n  labelled posets  AC(P) subset of Pi[n]  AC(P) = Pi[n]  antichains
+   1                1                      1              1           1
+   2                3                      3              3           1
+   3               19                     19             13           1
+   4              219                    219             45           1
+
+  Every one of the 242 labelled posets to n = 4 has AC(P) inside Pi[n].
+  REFUTED HYPOTHESIS, kept on the record: AC(P) = Pi[n] holds for 3 of 3
+  posets at n = 2, 13 of 19 at n = 3 and 45 of 219 at n = 4, against 1
+  antichain at each n.  The smallest poset with AC(P) != Pi[n] is
+  {a<c, b<d}, where the partition ad|bc has a 2-cycle in its quotient.
+
+==============================================================================
+T1f  CONTROL -- a deliberately WRONG orbit invariant must disagree
+==============================================================================
+
+  The invariant used in T1b is the MULTISET OF BLOCK SIZES.  Here the
+  same code path is run with the invariant 'NUMBER OF BLOCKS', which is
+  coarser.  If the harness cannot tell them apart, T1b proves nothing.
+
+   n   true #orbits   #classes under 'number of blocks'   control fires
+   2              2                                      2   no
+   3              3                                      3   no
+   4              5                                      4   YES
+   5              7                                      5   YES
+   6             11                                      6   YES
+   7             15                                      7   YES
+
+  The control fires at 4 of 6 values of n (it cannot fire at n<=2,
+  where every partition of a fixed block count is a single orbit).
+
+==============================================================================
+T1 TOTAL BAD: 0
+==============================================================================

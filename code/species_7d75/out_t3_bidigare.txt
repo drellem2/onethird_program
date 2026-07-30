@@ -1,0 +1,61 @@
+==============================================================================
+T3a  S_n-orbits of set compositions = compositions of n
+==============================================================================
+
+   n  |Sigma_n|  #orbits  #compositions  2^(n-1)  orbit sizes = multinomial
+   1          1        1              1        1  yes
+   2          3        2              2        2  yes
+   3         13        4              4        4  yes
+   4         75        8              8        8  yes
+   5        541       16             16       16  yes
+
+==============================================================================
+T3b  the orbit sums span a subalgebra of kSigma_n -- structure constants
+==============================================================================
+
+  n=1  |Sigma_n|=1     #orbits=1    products not constant on orbits: 0
+  n=2  |Sigma_n|=3     #orbits=2    products not constant on orbits: 0
+  n=3  |Sigma_n|=13    #orbits=4    products not constant on orbits: 0
+  n=4  |Sigma_n|=75    #orbits=8    products not constant on orbits: 0
+  n=5  |Sigma_n|=541   #orbits=16   products not constant on orbits: 0
+
+  Constant on orbits for every pair, at every n <= 5: the orbit sums
+  do span a subalgebra, and its structure constants are the C below.
+
+==============================================================================
+T3c  Solomon's descent algebra, built inside kS_n
+==============================================================================
+
+   n  |S_n|  #subsets T  d_T closed under product  |{w:des(w)<=T}| = |O_alpha|
+   1      1           1  A:True  B:True                                  yes
+   2      2           2  A:True  B:True                                  yes
+   3      6           4  A:True  B:True                                  yes
+   4     24           8  A:True  B:True                                  yes
+   5    120          16  A:True  B:True                                  yes
+
+==============================================================================
+T3d  THE COMPARISON -- four candidate identifications, three are controls
+==============================================================================
+
+  Candidate: O_alpha  <->  d_{T(alpha)}.
+  iso  : c^gamma_{alpha,beta}(Sigma) = c^gamma_{alpha,beta}(Sol)
+  anti : c^gamma_{alpha,beta}(Sigma) = c^gamma_{beta,alpha}(Sol)
+  crossed with the two composition conventions A and B in kS_n.
+
+   n   iso/A  anti/A   iso/B  anti/B      (mismatching pairs)
+   1       0       0       0       0
+   2       0       0       0       0
+   3       4       0       0       4
+   4      54       0       0      54
+   5     472       0       0     472
+
+  HOLDS at every n in 2..5: [('A', 'anti'), ('B', 'iso')]
+  FAILS somewhere            : [('A', 'iso'), ('B', 'anti')]
+
+  2 of 4 hold and 2 fail, so the comparison is discriminating.
+  Bidigare's Theorem 10.13 is REPRODUCED here from the two
+  definitions, with no step taken on the theorem's authority.
+
+==============================================================================
+T3 TOTAL BAD: 0
+==============================================================================

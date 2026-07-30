@@ -1,0 +1,69 @@
+==============================================================================
+T4a/T4b  ( kF(P) )^Aut(P) / rad  =  k^{ AC(P)/Aut(P) },  all classes n<=5
+==============================================================================
+
+   n classes tested  |F|>cap  dim>cap  not closed  ill-defined  not onto  not nilpotent
+   1       1      1        0        0           0            0         0              0
+   2       2      2        0        0           0            0         0              0
+   3       5      5        0        0           0            0         0              0
+   4      16     16        0        0           0            0         0              0
+   5      63     63        0        4           0            0         0              0
+
+  Reading: on every poset class tested, the Aut(P)-orbit sums span a
+  subalgebra of kF(P), and the induced map onto functions on the
+  Aut(P)-orbits of AC(P) is onto with nilpotent kernel.  So
+  dim (kF(P))^Aut(P)/rad = |AC(P)/Aut(P)| on every class tested.
+
+==============================================================================
+T4c  THE TWO INSTANCES, read off that one identity
+==============================================================================
+
+  P = ANTICHAIN on [n]:  Aut(P) = S_n, F(P) = Sigma_n, AC(P) = Pi_n.
+
+   n  |Sigma_n|  dim (kSigma_n)^{S_n}  2^(n-1)  |Pi_n/S_n|   p(n)  agree
+   1          1                     1        1           1      1  yes
+   2          3                     2        2           2      2  yes
+   3         13                     4        4           3      3  yes
+   4         75                     8        8           5      5  yes
+   5        541                    16       16           7      7  yes
+
+  The left column is Solomon's descent algebra, by T3 (anti-isomorphic,
+  0 mismatching structure constants at n <= 5).  The right column is
+  the number of integer partitions of n, i.e. the number of irreducible
+  characters of S_n.  So this instance of the identity says:
+      Sol(S_n) / rad  =  k^{Pi_n / S_n}  =  the character ring of S_n.
+
+  P with Aut(P) TRIVIAL: the identity degenerates to kF(P)/rad =
+  k^{AC(P)}, indexed by the quotients of P -- the poset story.
+
+   n  classes with |Aut(P)|=1  of which |AC(P)/Aut| = |AC(P)|
+   1                         1                               1
+   2                         1                               1
+   3                         2                               2
+   4                         5                               5
+   5                        19                              19
+
+  BOTH ARE THE SAME LINE OF THE SAME TABLE.  Nothing distinguishes
+  them except which poset is fed in and how big its symmetry group is.
+
+==============================================================================
+T4d  CONTROL -- G must be Aut(P), not S_n
+==============================================================================
+
+  The same routine with the group replaced by the FULL S_n.  For a
+  non-antichain P, S_n does not preserve the braid cone, so the S_n-
+  orbit sums of F(P) are not even a subspace of kF(P), let alone a
+  subalgebra.  If the routine reports 'closed' anyway it is not
+  measuring what T4a claims.
+
+   n  non-antichain classes tested  control fired (orbits leave F(P))
+   2                              1                                   1
+   3                              4                                   4
+   4                             15                                  15
+
+  Fired on all 20 non-antichain classes: the cone genuinely cuts the
+  symmetry down from S_n to Aut(P), and T4a's group matters.
+
+==============================================================================
+T4 TOTAL BAD: 0
+==============================================================================

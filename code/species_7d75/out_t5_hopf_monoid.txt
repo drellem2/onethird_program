@@ -1,0 +1,91 @@
+==============================================================================
+T5a  connectedness: h[empty] is one-dimensional
+==============================================================================
+
+  F   h[empty] has 1 basis element(s)  connected
+  AC  h[empty] has 1 basis element(s)  connected
+
+  Connected, so by Aguiar-Mahajan Chapter 11 -- 'a connected bimonoid
+  in species is automatically a Hopf monoid' -- the bimonoid axioms
+  below are the whole of what has to be checked.
+
+==============================================================================
+T5b/T5c  bimonoid axioms on the ground set [4], exhaustive
+==============================================================================
+
+  species  basis elts on [4]  prod closure  coprod closure  assoc  coassoc  compat
+  F                     4399             0               0      0        0       0
+  AC                    2685             0               0      0        0       0
+
+  Every count is a FAILURE count.  All zero: both species are closed
+  under the product and coproduct of the Hadamard products P x Sigma
+  and P x Pi, and satisfy associativity, coassociativity and the
+  bimonoid compatibility axiom on every pair of decompositions.
+
+==============================================================================
+T5d  supp : F -> AC is a morphism of bimonoids
+==============================================================================
+
+  lands in AC: 0 bad   commutes with product: 0 bad   with coproduct: 0 bad
+
+  So the operation this ticket is about -- FACES TO FLATS, the support
+  map, which linearised is A -> A/rad -- is a morphism of bimonoids in
+  species between the two, on the nose.
+
+==============================================================================
+T5e  CONTROLS -- four corruptions; two fire, two do not and why
+==============================================================================
+
+  (i) drop the lower-set condition from the coproduct.
+      F  : prod closure 0  coprod closure 0  assoc 0  coassoc 0  compat 0
+      control fires: NO -- see below
+
+      THIS CONTROL DOES NOT FIRE, AND THAT IS CORRECT RATHER THAN A
+      DEFECT, so it is recorded rather than replaced.  It was designed
+      on the expectation that the lower-set condition is forced by the
+      axioms.  It is not.  Aguiar-Mahajan Section 13.4.2 defines a
+      ONE-PARAMETER FAMILY R_q of Hopf monoids of relations, with
+      coproduct carrying a factor q^{e_{S,T}}, and records that
+      'the Hopf monoid of posets of Section 13.1.1 is P_0', i.e. the
+      lower-set condition is the q = 0 member.  The unrestricted
+      coproduct is the q = 1 member, which is also a Hopf monoid.  So
+      the corruption produced a DIFFERENT PUBLISHED HOPF MONOID, not a
+      broken one, and what T5b/T5c establishes is closure, which holds
+      for both.  Control (iii) below is the replacement that fires.
+
+  (ii) use the TITS PRODUCT of faces in place of concatenation.  That
+      is the product this repo's walk runs on; it is NOT the product of
+      the Hopf monoid of set compositions, and it should break.
+      F  : prod closure 1442  coprod closure 0  assoc 252  coassoc 0  compat 11020
+      control fires: YES
+
+  (iii) keep every object and the coproduct, but REVERSE the order of
+      concatenation in the product.  Associativity survives, so this
+      isolates the compatibility axiom.
+      F  : prod closure 0  coprod closure 0  assoc 0  coassoc 0  compat 0
+      control fires: NO -- see below
+
+      ALSO DOES NOT FIRE, and again the reason is structural rather
+      than a defect: reversing concatenation everywhere is the OPPOSITE
+      monoid structure mu'_{S,T}(a,b) = mu_{T,S}(b,a), which is
+      compatible with the same coproduct.  Recorded, not replaced.
+
+  (iv) keep the product, and replace the lower-set condition on the
+      coproduct by 'S is an ANTICHAIN of p'.  This is a condition of
+      the same shape that is NOT one of the R_q family, so it should
+      break coassociativity.
+      F  : prod closure 0  coprod closure 0  assoc 0  coassoc 75512  compat 0
+      control fires: YES
+
+  A PRODUCT-side control (ii) and a COPRODUCT-side control (iv)
+  both fire, so the axioms in T5b/T5c are doing work on both
+  halves of the structure.  Controls (i) and (iii) do not fire and
+  the reasons are recorded above: each produces a different but
+  still legitimate bimonoid, so neither was ever a corruption.
+  THE HONEST READING: what T5 establishes is CLOSURE of our two
+  subspecies under published operations, which is exactly the
+  question asked, and NOT that the operations are forced.
+
+==============================================================================
+T5 TOTAL BAD: 0
+==============================================================================

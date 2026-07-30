@@ -1,0 +1,90 @@
+==============================================================================
+T6a  the Bell(n) / p(n) gap IS the full-vs-bosonic Fock functor gap
+==============================================================================
+
+   n  dim K-bar(Pi)_n = |Pi[n]|  Bell(n)   dim K(Pi)_n = |Pi[n]/S_n|   p(n)
+   1                          1        1                            1      1
+   2                          2        2                            2      2
+   3                          5        5                            3      3
+   4                         15       15                            5      5
+   5                         52       52                            7      7
+   6                        203      203                           11     11
+   7                        877      877                           15     15
+
+  Left pair: K-bar(Pi) = symmetric functions in NONCOMMUTING variables.
+  Right pair: K(Pi) = symmetric functions, whose degree-n component is
+  the character ring of S_n with the integer partitions as its basis.
+  The gap is not a discrepancy to be explained away; it is the two
+  functors, applied to ONE species.
+
+==============================================================================
+T6b  the same two functors on OUR species
+==============================================================================
+
+   n  labelled posets  dim K-bar(AC)_n  dim K(AC)_n  dim K-bar(F)_n  dim K(F)_n
+   1                1                1            1               1           1
+   2                3                6            4               7           4
+   3               19               89           20             121          24
+   4              219             2685          152            4399         218
+
+  Both functors are defined on our species too -- that is automatic
+  once T5 has shown it IS a species with the structure.  What is NOT
+  claimed is that either value is a known Hopf algebra; it is not
+  identified here and identifying it would be new mathematics.
+
+==============================================================================
+T6c  RECORD CORRECTION -- the axiom that killed the tower story is not
+==============================================================================
+     an axiom of a Hopf monoid in species
+
+  mg-af28 ledger B7: 'block concatenation F(P) x F(Q) -> F(P + Q) is an
+  injective semigroup homomorphism and is NOT unital, so it fails
+  Bergeron-Li axiom (2)', measured 0 of 64 unital.  Reproduced here:
+
+    pairs of LABELLED posets with |P|,|Q| <= 3 : 529
+    (af28's 64 is the same measurement over ISOMORPHISM CLASSES,
+     8 x 8; 23 x 23 = 529 here.  Not a disagreement -- a wider net.)
+    concatenation sends (1_P, 1_Q) to 1_{P+Q} : 0
+
+  CONFIRMED: it is not unital, and af28's rejection of the TOWERS
+  programme stands.  What does not follow -- and af28 did not claim it,
+  but nothing in the record separated the two -- is that the same map
+  fails for HOPF MONOIDS.  In a Hopf monoid in species the unit object
+  lives only in degree empty; there is no 1_S for nonempty S and no
+  unitality requirement on mu_{S,T} at all.  That same concatenation
+  IS mu_{S,T}, and T5 measured it against every Hopf monoid axiom with
+  0 failures on 4399 basis elements.
+
+  So the Bergeron-Li negative does NOT transfer, and the framework it
+  ruled out is not the framework this ticket is about.
+
+==============================================================================
+T6d  does the poset side map to Sym?  The obvious candidate FAILS
+==============================================================================
+
+  Candidate morphism AC -> Pi,  (p, X) |-> X.  If it were a morphism of
+  bimonoids, K of it would be a map from our side into K(Pi) = Sym and
+  Daniel's 'both land in one graded Hopf algebra' would be answered on
+  the nose.  Measured over the ground set [4]:
+
+    product   : 0 disagreements  (the product does commute with the forgetful map)
+    coproduct : 22614 disagreements
+
+  The coproduct of Pi is restriction and is NEVER zero.  Ours is zero
+  unless S is a lower set of p.  So the forgetful map is a map of
+  monoids and NOT of comonoids, and it is not a morphism of bimonoids.
+  MEASURED, not argued: 22614 of the decompositions above are killed on
+  our side and survive on Pi's.
+
+  What remains available is the Aguiar-Bergeron-Sottile universal
+  property -- every connected graded Hopf algebra with a character maps
+  uniquely to QSym.  That is a citation, it applies to our side as it
+  applies to everything else in the class, and BECAUSE it applies to
+  everything else in the class it does not identify our object with
+  anything.  Daniel's 'both land in one graded Hopf algebra by the same
+  universal property' is therefore TRUE AND NOT DISCRIMINATING, and the
+  content is at the species level, not at the QSym landing.
+
+==============================================================================
+T6 TOTAL BAD: 0
+==============================================================================
