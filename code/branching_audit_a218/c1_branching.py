@@ -169,7 +169,43 @@ txt = open(TARGET_OUT).read()
 seg = txt.split("T1b2  THE BRANCHING GRAPH AS VERSHIK-OKOUNKOV DEFINE IT")[1]
 seg = seg.split("T1c  SEMISIMPLICITY")[0]
 
-# vertex counts table
+# the vertex cells.  TWO FORMS, and which one is present is reported.
+#
+# WIDENED ON A RE-RUN (mg-58da), and the note is here rather than in a commit
+# message, per this repo's convention.  This block used to accept only the
+# COUNT form -- a beta digit followed by six integers on one line -- which is
+# what T1b2 (i) carried when this audit was taken at 286d5030.  mg-13b2
+# replaced that table with the labelled vertex SETS, on THIS SCRIPT'S OWN
+# finding X1, which said the count was the defect.  c2_vertexsets.py was
+# widened to accept either form at the same time.  This one was not, and the
+# consequence was measured by mg-d330: on a re-run against the repaired tree
+# it reported 24 FINDINGS reading 'target ?' -- one per vertex cell -- because
+# `tgt_counts.get(beta, [None] * 6)[n - 1] != mine_c` compares None against an
+# integer and None differs from every integer.  ABSENCE WAS RENDERED AS
+# DISAGREEMENT, and the instrument accused the target of being wrong where its
+# own parser had gone blind.  mg-58da established all 24 as parser artifacts:
+# 0 confirmed, 0 unknown, and the target agreeing with this script's own
+# measurement label for label at 24 of 24 cells.
+#
+# Three things change, and each is load-bearing:
+#
+#   1. the SET form is read, and preferred when present.  It is strictly more
+#      information than the count -- the count is len(set) -- so the cells are
+#      now compared as LABELLED SETS wherever the target offers them.  That is
+#      a stronger comparison than the one this audit originally made, not a
+#      weaker one.
+#   2. the COUNT form is still read, so a re-run against the target as it
+#      stood at 286d5030 still compares all 24 cells and still agrees.
+#   3. A CELL THE TARGET DOES NOT STATE IS A SELF-ERROR, NOT A FINDING.  This
+#      is the actual defect: an instrument that cannot read its target must
+#      say so about ITSELF.  A finding is a statement about the target, and
+#      "I could not find it" is not one.
+#
+# The committed out_c1_branching.txt is NOT regenerated: it is the record of
+# what this audit found at 286d5030, not a live gate.  That is the call
+# mg-a318 made for mg-8a5c and mg-13b2 made for c2 here, and g1 of
+# code/branching_audit_58da re-runs this script at 286d5030 and confirms the
+# committed file byte for byte.
 tgt_counts = {}
 for line in seg.splitlines():
     m = re.match(r"\s*(\d)\s+((?:\d+\s+){5}\d+)\s*$", line)
@@ -177,6 +213,25 @@ for line in seg.splitlines():
         b = int(m.group(1))
         if b in BETAS and b not in tgt_counts:
             tgt_counts[b] = [int(x) for x in m.group(2).split()]
+
+# the SET form: a 'beta = <b>' header and then 'n=<k>  [p:d,p:d,...]' rows
+tgt_sets = {}
+_cur = None
+for line in seg.splitlines():
+    m = re.match(r"\s*beta = (\d+)\s*$", line)
+    if m:
+        _cur = int(m.group(1))
+        continue
+    m = re.match(r"\s*n=(\d+)\s+\[([\d:,]*)\]\s*$", line)
+    if m and _cur is not None:
+        _verts = []
+        if m.group(2):
+            for _piece in m.group(2).split(","):
+                _p, _d = _piece.split(":")
+                _verts.append((int(_p), int(_d)))
+        tgt_sets[(_cur, int(m.group(1)))] = _verts
+
+vform = "SET" if tgt_sets else ("COUNT" if tgt_counts else "NEITHER")
 
 # edges
 tgt_edges = {}
@@ -195,15 +250,38 @@ for line in seg.splitlines():
             tgt_edges[(cur, n, p, int(mm.group(2)))] = int(mm.group(3))
 
 ncells_v = 0
+nblind_v = 0
 for beta in BETAS:
     for n in range(1, NMAX + 1):
-        mine_c = len(mine_vertices[(beta, n)])
-        if tgt_counts.get(beta, [None] * 6)[n - 1] != mine_c:
-            finding("vertex COUNT disagrees at beta=%d n=%d: target %s, mine %d"
-                    % (beta, n, tgt_counts.get(beta, ["?"] * 6)[n - 1], mine_c))
-        ncells_v += 1
-print("     vertex counts: %d cells compared, population: every (beta,n) with "
-      "beta in {3,2,1,0} and 1 <= n <= 6" % ncells_v)
+        mine_v = mine_vertices[(beta, n)]
+        mine_c = len(mine_v)
+        if (beta, n) in tgt_sets:
+            tv = tgt_sets[(beta, n)]
+            if len(tv) != mine_c:
+                finding("vertex COUNT disagrees at beta=%d n=%d: target %d, "
+                        "mine %d" % (beta, n, len(tv), mine_c))
+            elif tv != mine_v:
+                finding("vertex SET disagrees at beta=%d n=%d: target %s, "
+                        "mine %s" % (beta, n, tv, mine_v))
+            ncells_v += 1
+        elif beta in tgt_counts:
+            if tgt_counts[beta][n - 1] != mine_c:
+                finding("vertex COUNT disagrees at beta=%d n=%d: target %s, "
+                        "mine %d" % (beta, n, tgt_counts[beta][n - 1], mine_c))
+            ncells_v += 1
+        else:
+            # NOT a finding.  The target has not disagreed with anything; this
+            # script has failed to read it, and that is a fact about this
+            # script.  See the widening note above.
+            selferr("I cannot read a vertex cell for beta=%d n=%d out of the "
+                    "target in either the SET or the COUNT form; the cell is "
+                    "NOT compared and is NOT counted as compared"
+                    % (beta, n))
+            nblind_v += 1
+print("     vertex cells: %d cells compared, %d not compared because this "
+      "script could not read them; population: every (beta,n) with beta in "
+      "{3,2,1,0} and 1 <= n <= 6, which is 24. Form read: %s"
+      % (ncells_v, nblind_v, vform))
 
 ncells_d = 0
 for (beta, n, p), d in sorted(tgt_dims.items()):
@@ -282,13 +360,20 @@ print("     multiplicity-2 cells I measure that the document does not name: %d, 
 print()
 print("-" * 74)
 print("SELF-ERRORS: %d, population: every uniqueness/integrality/non-negativity/"
-      "dimension check on the %d character solves in this script"
+      "dimension check on the %d character solves in this script, PLUS the 24 "
+      "vertex cells this script attempts to read out of the target -- a cell "
+      "it cannot read is this script's failure and is booked here, not as a "
+      "finding against the target (mg-58da)"
       % (len(SELF), sum(len(mine_vertices[(b, n)]) for b in BETAS
                         for n in range(2, NMAX + 1))))
 for s in SELF:
     print("   SELF-ERROR: " + s)
-print("FINDINGS: %d, population: the %d vertex-count cells, %d vertex-dimension "
-      "cells and %d edge cells compared above" % (len(FIND), ncells_v, ncells_d, ncells_e))
+print("FINDINGS: %d, population: the %d vertex cells (read as %s), %d "
+      "vertex-dimension cells and %d edge cells COMPARED above -- %d cells in "
+      "total; the %d vertex cells this script could not read are in the "
+      "SELF-ERROR channel above and are not in this population"
+      % (len(FIND), ncells_v, vform, ncells_d, ncells_e,
+         ncells_v + ncells_d + ncells_e, nblind_v))
 for f in FIND:
     print("   FINDING: " + f)
 print("TOTAL BAD: %d" % (len(SELF) + len(FIND)))

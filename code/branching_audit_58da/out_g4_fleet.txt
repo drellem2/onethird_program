@@ -1,0 +1,194 @@
+==========================================================================
+G4  THE SET-LEVEL PROPERTY, RE-ESTABLISHED AFTER TWO CHANGES
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE FIVE, NAMED -- AND WHAT IS NOT ONE OF THEM
+--------------------------------------------------------------------------
+   c1_branching.py
+   c2_vertexsets.py
+   c3_withdrawal.py
+   c4_seam.py
+   c5_record.py
+
+   in the same directory and NOT among the five:
+     selftest_a218.py       the self-test: it tests the kernel, not the target, and prints no TOTAL BAD line
+     c0_repro.sh            a reproduction harness, not one of the five checks; it re-runs the TARGET's instrument
+     kern_a218.py           the kernel the five share
+
+--------------------------------------------------------------------------
+(ii) WHO TOUCHED WHICH MEMBER, BY SHA AND BY COMMIT
+--------------------------------------------------------------------------
+   script                 286d5030 -> d1dd84d2       d1dd84d2 -> working
+     c1_branching.py        same                       CHANGED (this ticket)
+     c2_vertexsets.py       CHANGED (ed9cde49)         same
+     c3_withdrawal.py       same                       same
+     c4_seam.py             same                       same
+     c5_record.py           same                       same
+
+   of the five, touched by ed9cde4 (mg-13b2) : 1 -- c2_vertexsets.py
+   of the five, touched by mg-58da           : 1 -- c1_branching.py
+   the kernel the five share, kern_a218.py   : UNCHANGED at both -- no mathematics moved in either change
+
+   THIS IS THE SHAPE OF THE FAILURE.  ed9cde4 widened c2 because a
+   re-run would otherwise have scored its own repair as c2's SELF-ERROR.
+   c1 had the same stale parser reading the same rewritten block and was not
+   widened with it.  One member was made to tell the truth on a re-run and
+   its sibling was left telling a falsehood -- and the falsehood was louder,
+   because c1 books its blindness as findings against the target.
+
+--------------------------------------------------------------------------
+(iii) ALL FIVE, RUN, AT THE THREE REVISIONS
+--------------------------------------------------------------------------
+   the 'committed' column is the record each audit left; the 'working'
+   column is what the script does now, run in place with its stdout
+   captured HERE and never redirected into the committed file.
+
+   script                 committed@286d5030   working tree now
+                          self/find  exit      self/find  exit
+     c1_branching.py        0/0      (exit 0)   0/0      (exit 0)
+     c2_vertexsets.py       0/1      (exit 1)   0/0      (exit 0)
+     c3_withdrawal.py       0/0      (exit 0)   0/1      (exit 1)
+     c4_seam.py             0/1      (exit 1)   0/0      (exit 0)
+     c5_record.py           0/1      (exit 1)   0/0      (exit 0)
+
+   green on the working tree: 4 of 5 -- c1_branching.py, c2_vertexsets.py, c4_seam.py, c5_record.py
+   red   on the working tree: 1 of 5 -- c3_withdrawal.py
+
+   c3_withdrawal.py exits 1 with SELF 0 FINDINGS 1:
+      FINDING: every occurrence sits inside a withdrawal or correction -- unmarked: code/branching_locate_db09/out_t5_labels.txt:145 'measured (not cited)'; code/bra
+
+   c3_withdrawal.py IS RED AND IT IS NOT THIS TICKET'S TO CLOSE.
+   Its findings are mg-d330's second finding: mg-13b2's own new
+   t5_labels.py and its committed output carry the withdrawn phrases as
+   SEARCH NEEDLES with no marker beside them, and c3 sweeps for exactly
+   those phrases.  It is a real finding against the repaired tree, it is
+   booked OPEN, and nothing here touches it.  It is reported rather than
+   worked around because the set-level property is that ALL FIVE are
+   green, and it is not, and saying otherwise would be the defect this
+   ticket exists to name.
+
+--------------------------------------------------------------------------
+(iv) THE FIGURES THAT LIVE BETWEEN THE MEMBERS
+--------------------------------------------------------------------------
+   The set-level property is not five green exit codes.  It is that the
+   members which measure the same thing still say the same thing.  Two of the
+   five measure the vertex sets independently of one another -- c1 from its
+   character solves and c2 from the same kernel but its own comparison -- and
+   the same 24 cells are carried by the four kernels in this tree.  A change
+   to one member's PARSER must not move any of them.
+
+   c1's vertex sets vs c2's, as dimension lists, all 24 cells: agree at 24 of 24
+
+   and against the target and the other instruments (g2 measures this
+   in full; repeated here because it is the fleet property, and a
+   fleet property stated in one script and checked in another is the
+   grain error this ticket is about):
+     out_t1_tl.txt   (mg-db09, 1st instrument)  24 of 24 agree with c1
+     c1 live         (mg-a218, 3rd instrument)  24 of 24 agree with c1
+     out_e1_vertex.. (mg-d330, 4th instrument)  24 of 24 agree with c1
+
+--------------------------------------------------------------------------
+(v) c0_repro.sh -- THE FLEET PROPERTY ONE LEVEL DOWN
+--------------------------------------------------------------------------
+   mg-a218's c0 re-runs the TARGET's own five scripts against the
+   repaired code and diffs all five committed outputs byte for byte.  That is
+   the same property at the target's grain, and this ticket changed nothing
+   the target reads, so it must still hold.
+   c0_repro.sh exit 0
+     out_selftest.txt  IDENTICAL
+     out_t1_tl.txt  IDENTICAL
+     out_t2_gz.txt  IDENTICAL
+     out_t3_ours.txt  IDENTICAL
+     out_t4_quotes.txt  IDENTICAL
+     test-script outputs ending TOTAL BAD: 0 -- 4 of 4, population:
+     four and prints no TOTAL BAD line)
+     TOTAL BAD: 0
+
+--------------------------------------------------------------------------
+(vi) THE REPAIR, DELETION-TESTED IN THE DIRECTION THAT MATTERS
+--------------------------------------------------------------------------
+   The widening is only worth having if a cell the target does not state
+   now lands in the SELF-ERROR channel instead of accusing the target.  So the
+   widened c1 is handed three targets and the direction is predicted first.
+
+   target                                              predicted            actual
+   the HEAD target (SET form)                          exit 0 s0 f0 c24 SET      exit 0 s0 f0 c24 SET      YES
+        why: all 24 cells compared as labelled sets, nothing to report
+   the 286d5030 target (COUNT form) -- backward compat exit 0 s0 f0 c24 COUNT    exit 0 s0 f0 c24 COUNT    YES
+        why: the form this audit was taken against must still be read
+   the HEAD target with all 24 set rows DELETED        exit 1 s24 f0 c0  NEITHER  exit 1 s24 f0 c0  NEITHER  YES
+        why: 24 SELF-ERRORS and 0 FINDINGS: it must accuse ITSELF
+
+   the third case is the deletion test.  Before the widening the SAME
+   input produced 24 FINDINGS and 0 SELF-ERRORS; the unrepaired script
+   is re-run here on the same input to show the move:
+     c1 @ 286d5030, blinded target : SELF 0  FINDINGS 24  exit 1
+     c1 widened,    blinded target : SELF 24  FINDINGS 0  exit 1
+     the 24 moved from the FINDINGS channel to the SELF-ERROR channel: YES
+
+--------------------------------------------------------------------------
+(vii) THE GATE THAT WATCHES THE SENTENCE IS A PRESENCE TEST
+--------------------------------------------------------------------------
+   mg-d330's e4 checks mg-a218's present-tense exit-code sentence, and
+   this ticket's own change moved that sentence for the third time, so the
+   sentence is struck at its site and replaced by a table of all three
+   revisions.  Whether that is ENOUGH is not a matter of opinion: e4's gate
+   is one substring test, quoted from its source --
+
+       CLAIM = "`c2`, `c4` and `c5` exit `1`"
+       if CLAIM in adoc:  ... finding(...)
+       else:              selferr("could not locate ...")
+
+   -- so it has exactly two states, PRESENT and ABSENT, and no state for
+   PRESENT AND MARKED.  Evaluated on three variants of the document, with the
+   direction predicted before each:
+
+   variant                                                    predicted   e4's gate says
+   the document as this ticket leaves it (STRUCK + corrected) finding     finding   YES
+   the same, with the sentence deleted outright               self-error  self-error   YES
+   a hypothetical unstruck restatement                        finding     finding   YES
+
+   the sentence IS struck at its site : YES
+   a CORRECTED block follows it       : YES
+   e4 raises the finding anyway       : YES
+
+   NOT REPAIRED HERE, and the reason is the whole ticket in miniature.  The
+   sentence could be rewritten to make the substring vanish and e4 would go
+   green.  That would satisfy the gate without informing the reader, and it
+   would leave the gate exactly as blind as it is.  Marking in place is the
+   right thing for the reader; e4's inability to see the marker is a finding
+   against e4, and it is booked as one rather than worked around.
+
+--------------------------------------------------------------------------
+VERDICT ON THE SET-LEVEL PROPERTY
+--------------------------------------------------------------------------
+   THE FIVE ARE: c1_branching.py, c2_vertexsets.py, c3_withdrawal.py, c4_seam.py, c5_record.py.
+
+   ed9cde4 touched 1 of them (c2_vertexsets.py).  This ticket touched 1 (c1_branching.py).  The kernel
+   they share is untouched by both, and c1's own measurement is byte-identical
+   across every revision in this table, so no mathematics moved at any point.
+
+   WHAT HOLDS.  The members that measure the vertex cells agree with each
+   other and with all four instruments in the tree, at 24 of 24 cells, after
+   both changes.  c0_repro.sh still regenerates the target's five committed
+   outputs.  4 of the five are green.
+
+   WHAT DOES NOT.  c3_withdrawal.py is red -- mg-d330's second finding, left OPEN here.  And, found by making this ticket's own
+   correction: mg-d330's e4 gate on the exit-code sentence is a PRESENCE TEST and cannot see
+   the marker beside it -- (vii), booked and NOT worked around.
+
+   THE GENERAL POINT, and it is the reason this was not a small edit: the
+   property is that the five CORROBORATE.  Widening one parser cannot be
+   checked by running that parser, because a parser that has been made to
+   agree with a target agrees with it.  It is checked by running the OTHER
+   members and the OTHER instruments against the same cells, which is (iv),
+   and by making the changed member fail on an input it genuinely cannot
+   read, which is (vi).
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the 15 sha reads, the 5 committed-output reads, and the parses of c1's, c2's and e1's live vertex rows
+FINDINGS: 2, population: the 5 exit codes on the working tree, the cross-member and cross-instrument agreement on the 24 vertex cells, c0_repro.sh, the 4 deletion-test cases on the widened c1, and the 3 variants on which mg-d330's exit-code gate is evaluated
+   FINDING: the set-level property does NOT hold on the working tree: c3_withdrawal.py exits 1 with 1 finding(s), which is mg-d330's second finding against mg-13b2's t5_labels.py and is left OPEN by this ticket
+   FINDING: mg-d330's e4_rerun.py gate on mg-a218's exit-code sentence is a PRESENCE TEST: it fires on the substring alone, so a sentence STRUCK IN PLACE with a correction beside it is indistinguishable from one left standing, and e4's finding text -- which says the sentence was 'left unchanged and unmarked' -- is now false of the tree while its exit code is unchanged. NOT REPAIRED HERE: e4 is mg-d330's committed instrument and rewriting the sentence to dodge the substring would turn the gate green while leaving it blind, which is the defect this arc keeps paying for
+TOTAL BAD: 2

@@ -1,0 +1,116 @@
+==========================================================================
+G2  QUESTION B, SECOND HALF -- THE 198 CELLS, REDONE AT HEAD
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) WHAT THE TARGET STATES AT EACH REVISION, MEASURED BOTH WAYS
+--------------------------------------------------------------------------
+   286d5030 (mg-a218's)   COUNT table: 24 cells   SET block:  0 cells   dim cells: 53   edge cells: 121
+   d1dd84d2 (HEAD)        COUNT table:  0 cells   SET block: 24 cells   dim cells: 53   edge cells: 121
+
+   So the vertex datum did not vanish: it changed RENDERING, from a
+   table of 24 cardinalities to 24 labelled sets.  A cardinality is a
+   function of a set, so the new form determines the old one and the
+   old one does not determine the new.  That is the direction mg-a218's
+   own finding X1 asked for.
+
+   T1b2 (ii) -- the 53 dimension and 121 edge cells -- is IDENTICAL
+   across ed9cde4, cell for cell.  Those 174 carry over unchanged.
+
+--------------------------------------------------------------------------
+(ii) THE 24 VERTEX CELLS, RECOVERED FROM THE SET BLOCK AND COMPARED
+--------------------------------------------------------------------------
+   'target' is read by this script's own parser, which shares no line
+   with c1's.  'mine' is c1's own section (i), which reads nothing
+   outside mg-a218's instrument.
+
+   beta  n   target set          count | c1 set              count | 
+     3   1   [0:1]               1     | [0:1]               1     | agree
+     3   2   [0:1,1:1]           2     | [0:1,1:1]           2     | agree
+     3   3   [0:1,1:2]           2     | [0:1,1:2]           2     | agree
+     3   4   [0:1,1:3,2:2]       3     | [0:1,1:3,2:2]       3     | agree
+     3   5   [0:1,1:4,2:5]       3     | [0:1,1:4,2:5]       3     | agree
+     3   6   [0:1,1:5,2:9,3:5]   4     | [0:1,1:5,2:9,3:5]   4     | agree
+     2   1   [0:1]               1     | [0:1]               1     | agree
+     2   2   [0:1,1:1]           2     | [0:1,1:1]           2     | agree
+     2   3   [0:1,1:2]           2     | [0:1,1:2]           2     | agree
+     2   4   [0:1,1:3,2:2]       3     | [0:1,1:3,2:2]       3     | agree
+     2   5   [0:1,1:4,2:5]       3     | [0:1,1:4,2:5]       3     | agree
+     2   6   [0:1,1:5,2:9,3:5]   4     | [0:1,1:5,2:9,3:5]   4     | agree
+     1   1   [0:1]               1     | [0:1]               1     | agree
+     1   2   [0:1,1:1]           2     | [0:1,1:1]           2     | agree
+     1   3   [0:1,1:1]           2     | [0:1,1:1]           2     | agree
+     1   4   [0:1,1:3,2:1]       3     | [0:1,1:3,2:1]       3     | agree
+     1   5   [0:1,1:4,2:1]       3     | [0:1,1:4,2:1]       3     | agree
+     1   6   [0:1,1:4,2:9,3:1]   4     | [0:1,1:4,2:9,3:1]   4     | agree
+     0   1   [0:1]               1     | [0:1]               1     | agree
+     0   2   [0:1]               1     | [0:1]               1     | agree
+     0   3   [0:1,1:2]           2     | [0:1,1:2]           2     | agree
+     0   4   [0:1,1:2]           2     | [0:1,1:2]           2     | agree
+     0   5   [0:1,1:4,2:5]       3     | [0:1,1:4,2:5]       3     | agree
+     0   6   [0:1,1:4,2:5]       3     | [0:1,1:4,2:5]       3     | agree
+
+   cells recovered from the HEAD target : 24 of 24
+   COUNTS agreeing with c1's measurement: 24 of 24
+   SETS agreeing with c1's measurement  : 24 of 24
+
+   AND THE OLD COMPARISON, for the record: at 286d5030 the target
+   stated only the 24 counts, and c1 compared 24 of them.
+   counts agreeing there: 24 of 24.
+
+   So the redoing does not weaken the reproduction, it strengthens it:
+   24 cells that were compared as CARDINALITIES are now comparable as
+   LABELLED SETS, and 10 of the 36 same-level pairs that a count column
+   showed as equal are separated by the set column (mg-13b2's own
+   figure, and mg-d330's e1 measured the same 10 on a fourth kernel).
+
+--------------------------------------------------------------------------
+(iii) THE SAME 24 CELLS ON EVERY INSTRUMENT IN THE TREE THAT PRINTS THEM
+--------------------------------------------------------------------------
+   A reproduction is a claim that independent instruments agree.  Four
+   kernels in this tree measure these vertex sets.  Their agreement is what
+   the 198-cell claim is FOR, so it is measured here rather than cited.
+
+   instrument                        cells   agreeing with c1
+     t1_tl.py (mg-db09, 1st)           24      24 of 24
+     c1_branching.py (mg-a218, 3rd)    24      24 of 24
+     e1_vertexsets.py (mg-d330, 4th)   24      24 of 24
+     b1_branching.py (mg-2060, 2nd)    24      24 of 24
+
+   pairwise, over every unordered pair of the 4 READABLE instruments:
+     pairs compared: 6, population: every unordered pair of the 4 readable instruments; pairs agreeing on all 24 cells: 6
+
+--------------------------------------------------------------------------
+(iv) CALIBRATION -- IS THE RECOVERY A COMPARISON, OR A RESTATEMENT?
+--------------------------------------------------------------------------
+   A recovery that agrees whatever the target says would print exactly
+   the rows above.  So each of the 24 cells is corrupted in turn, on a copy of
+   the HEAD target, and the comparison in (ii) is required to go red at that
+   cell and nowhere else.  The direction is predicted before each probe: RED.
+
+   probes fired: 24 of 24, population: all 24 vertex cells, each corrupted alone
+   probes that did not: 0
+
+   AND THE OTHER DIRECTION: with the target restored, the comparison
+   is green at 24 of 24 cells.
+
+--------------------------------------------------------------------------
+VERDICT ON QUESTION B AT HEAD
+--------------------------------------------------------------------------
+   The reproduction is REDONE at d1dd84d21c5c and it stands, with all
+   198 cells compared and 0 disagreements:
+
+      24 vertex cells   -- recovered from the SET block mg-13b2 installed,
+                           compared as LABELLED SETS and not merely as
+                           cardinalities, which is stronger than what was
+                           compared at 286d5030
+      53 dimension cells-- byte-identical across ed9cde4
+     121 edge cells     -- byte-identical across ed9cde4
+     198 total, 0 disagreements
+
+   4 independent kernels agree on all 24 vertex cells, 6 of 6 pairs.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the parses of c1's own output and of the 3 committed instrument outputs, and the 24 corruption sites
+FINDINGS: 0, population: the 24 vertex cells compared as sets and as counts, the 53 dimension and 121 edge cells carried across ed9cde4, the 10 cross-instrument comparisons and the 24 corruption probes
+TOTAL BAD: 0
