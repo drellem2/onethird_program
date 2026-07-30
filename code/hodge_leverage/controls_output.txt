@@ -1,0 +1,85 @@
+==============================================================================
+POSITIVE CONTROLS
+==============================================================================
+P1  lambda_2(Delta_AT(A_n)) vs Aldous / Caputo-Liggett-Richthammer
+      n=2  Lanczos=2.000000000000  2-2cos(pi/n)=2.000000000000  |diff|=6.66e-16
+      n=3  Lanczos=1.000000000000  2-2cos(pi/n)=1.000000000000  |diff|=8.88e-16
+      n=4  Lanczos=0.585786437627  2-2cos(pi/n)=0.585786437627  |diff|=8.88e-16
+      n=5  Lanczos=0.381966011250  2-2cos(pi/n)=0.381966011250  |diff|=1.05e-15
+      n=6  Lanczos=0.267949192431  2-2cos(pi/n)=0.267949192431  |diff|=1.52e-14
+      PASS
+P2  lambda2_weighted_graph vs closed forms for cycles and paths
+      C_4: got 0.000000000000  want 0.000000000000
+      C_5: got 0.309016994375  want 0.309016994375
+      C_6: got 0.500000000000  want 0.500000000000
+      C_7: got 0.623489801859  want 0.623489801859
+      C_8: got 0.707106781187  want 0.707106781187
+      P_2: got -1.000000000000  want -1.000000000000
+      P_3: got -0.000000000000  want 0.000000000000
+      P_4: got 0.500000000000  want 0.500000000000
+      P_5: got 0.707106781187  want 0.707106781187
+      P_6: got 0.809016994375  want 0.809016994375
+      PASS
+P3  dense Jacobi vs sparse Lanczos on the same Delta_AT matrices
+      (antichain)          |L|= 24  Jacobi=0.585786437627  Lanczos=0.585786437627
+      0<1                  |L|= 12  Jacobi=0.585786437627  Lanczos=0.585786437627
+      0<1 2<3              |L|= 30  Jacobi=0.381966011250  Lanczos=0.381966011250
+      0<1                  |L|= 60  Jacobi=0.381966011250  Lanczos=0.381966011250
+      PASS
+P4  the Tsetlin library: Brown's prediction vs the classical
+    move-to-front spectrum (eigenvalue sum_{i in S} w_i with
+    multiplicity = #derangements(n - |S|))
+      n=2  Brown: [(0, 1), (55, 1)]
+           Tsetlin: [(0, 1), (55, 1)]   match=True
+      n=3  Brown: [(0, 2), (13, 1), (16, 1), (39, 1), (68, 1)]
+           Tsetlin: [(0, 2), (13, 1), (16, 1), (39, 1), (68, 1)]   match=True
+      n=4  Brown: [(0, 9), (13, 2), (16, 2), (29, 1), (39, 2), (47, 2), (52, 1), (55, 1), (60, 1), (63, 1), (86, 1), (115, 1)]
+           Tsetlin: [(0, 9), (13, 2), (16, 2), (29, 1), (39, 2), (47, 2), (52, 1), (55, 1), (60, 1), (63, 1), (86, 1), (115, 1)]   match=True
+      n=5  Brown: [(0, 44), (13, 9), (16, 9), (29, 2), (34, 9), (39, 9), (47, 11), (50, 2), (52, 2), (55, 2), (60, 2), (63, 3), (68, 1), (73, 2), (76, 1), (81, 2), (86, 3), (89, 1), (94, 1), (97, 1), (99, 1), (102, 1), (120, 1), (149, 1)]
+           Tsetlin: [(0, 44), (13, 9), (16, 9), (29, 2), (34, 9), (39, 9), (47, 11), (50, 2), (52, 2), (55, 2), (60, 2), (63, 3), (68, 1), (73, 2), (76, 1), (81, 2), (86, 3), (89, 1), (94, 1), (97, 1), (99, 1), (102, 1), (120, 1), (149, 1)]   match=True
+      PASS
+P5  the localisation theorem as a memo key: same block types =>
+    same link lambda_2.  Memo disabled; every link computed directly.
+      n=2  distinct block-type keys=  0   clashes=0
+      n=3  distinct block-type keys=  5   clashes=0
+      n=4  distinct block-type keys= 24   clashes=0
+      n=5  distinct block-type keys= 97   clashes=0
+      PASS
+
+==============================================================================
+NEGATIVE CONTROLS (construction-side: each perturbs an object this
+work item BUILDS, not a downstream comparison)
+==============================================================================
+X1a MUTATE THE LINK WEIGHTS: uniform instead of the induced measure.
+    Question asked: does the (LG) bound built from the mutated links
+    become FALSE (exceed the true lambda_2)?
+      fires on 0 posets; vacuous on 37 (mutation changed no link, or |L(P)|=1); mutation changed the bound's VALUE on 365
+      DOES NOT FIRE, and this is reported rather than dropped.  The
+      reason is structural, not luck: uniform link weights come out
+      with lambda_2 at least as large as the induced-measure ones on
+      every poset here, which makes the mutated bound SMALLER and so
+      still true.  (LG) is a lower bound, so a mutation that inflates
+      gamma can never falsify it.  X1a is therefore NOT a usable
+      negative control for the link construction; X1b is.
+X1b MUTATE THE LINK INCIDENCE: keep the true vertex set but join every
+    pair (forget that a face of the link must be a CHAIN of ideals).
+    This deflates gamma, so it can and must falsify (LG).
+      fires (mutated bound exceeds the truth, i.e. the perturbed construction yields a FALSE theorem) on 398 posets; vacuous on 4
+      e.g. n=3 (antichain)        mutated bound=2.400000 > truth=1.000000
+      e.g. n=3 0<1                mutated bound=2.666667 > truth=1.000000
+      e.g. n=3 0<1 0<2            mutated bound=3.000000 > truth=2.000000
+X2  MUTATE THE LINK VERTEX SET: all proper ideals comparable with the
+    top ideal of sigma.  Must break the join decomposition (the
+    vertex count must stop matching sum_i #proper ideals of Q_i).
+      fires (mutated vertex set differs from the true link) on 4946 faces; vacuous on 1245 faces
+X3  MUTATE THE DOWN-UP WALK: treat every ridge as interior (pretend
+    free ridges lie in two facets).  Theorem D must fail.
+      fires (Theorem D fails under the mutation) on 399 posets; vacuous on 5 (no free ridge: the antichains)
+X4  MUTATE THE BAND PRODUCT: order intersections by (j,i).
+    The band axioms and/or the Brown spectrum must fail.
+      band axioms fail on 20 posets; Brown spectrum fails on 20; vacuous on 3 (the mutation equals the true product)
+X5  MUTATE THE MULTIPLICITY RULE: sum over Y <= X instead of Y >= X.
+    Must give negative multiplicities or a wrong total.
+      fires on 82 posets; vacuous on 4 (the mutated rule coincides with the true one, or stays nonnegative with the right total)
+
+summary: P1=PASS, P2=PASS, P3=PASS, P4=PASS, P5=PASS, X1b=PASS, X2=PASS, X3=PASS, X4=PASS, X5=PASS

@@ -1,0 +1,68 @@
+==============================================================================
+1-2. F(P) IS A LEFT REGULAR BAND, AND ITS SUPPORTS ARE THE ACYCLIC
+     PARTITIONS.  Exhaustive over all posets up to isomorphism.
+==============================================================================
+n=1  posets=  1   band-axiom violations=0   associativity violations=0   supports == acyclic partitions: 1/1   join-closed: 1/1
+n=2  posets=  2   band-axiom violations=0   associativity violations=0   supports == acyclic partitions: 2/2   join-closed: 2/2
+n=3  posets=  5   band-axiom violations=0   associativity violations=0   supports == acyclic partitions: 5/5   join-closed: 5/5
+n=4  posets= 16   band-axiom violations=0   associativity violations=0   supports == acyclic partitions: 16/16   join-closed: 16/16
+n=5  posets= 63   band-axiom violations=0   associativity violations=(skipped)   supports == acyclic partitions: 63/63   join-closed: 63/63
+
+==============================================================================
+3. BROWN MULTIPLICITIES: nonnegative integers summing to |L(P)|
+==============================================================================
+n=1  posets=  1   posets with a negative m_X: 0   posets where sum m_X != |L(P)|: 0
+n=2  posets=  2   posets with a negative m_X: 0   posets where sum m_X != |L(P)|: 0
+n=3  posets=  5   posets with a negative m_X: 0   posets where sum m_X != |L(P)|: 0
+n=4  posets= 16   posets with a negative m_X: 0   posets where sum m_X != |L(P)|: 0
+n=5  posets= 63   posets with a negative m_X: 0   posets where sum m_X != |L(P)|: 0
+n=6  posets=318   posets with a negative m_X: 0   posets where sum m_X != |L(P)|: 0
+
+==============================================================================
+4. THE PREDICTED SPECTRUM IS THE ACTUAL SPECTRUM
+   exact rational rank computations; three weight families
+==============================================================================
+  generic w on all faces                 n=2  posets checked= 2 (skipped 0, no such face)  spectrum correct= 2  diagonalisable= 2
+  generic w on all faces                 n=3  posets checked= 5 (skipped 0, no such face)  spectrum correct= 5  diagonalisable= 5
+  generic w on all faces                 n=4  posets checked=16 (skipped 0, no such face)  spectrum correct=16  diagonalisable=16
+  w on two-block faces only              n=2  posets checked= 2 (skipped 0, no such face)  spectrum correct= 2  diagonalisable= 2
+  w on two-block faces only              n=3  posets checked= 5 (skipped 0, no such face)  spectrum correct= 5  diagonalisable= 5
+  w on two-block faces only              n=4  posets checked=16 (skipped 0, no such face)  spectrum correct=16  diagonalisable=16
+  w on ({i},rest) faces (move-to-front)  n=2  posets checked= 2 (skipped 0, no such face)  spectrum correct= 2  diagonalisable= 2
+  w on ({i},rest) faces (move-to-front)  n=3  posets checked= 5 (skipped 0, no such face)  spectrum correct= 5  diagonalisable= 5
+  w on ({i},rest) faces (move-to-front)  n=4  posets checked=16 (skipped 0, no such face)  spectrum correct=16  diagonalisable=16
+
+  named larger instances (mod-p ranks, p = 2^31-1):
+    antichain A_5  |L(P)|=120  |support lattice|= 52  distinct eigenvalues= 52  spectrum correct=True  diagonalisable=True
+    chain C_5      |L(P)|=  1  |support lattice|= 16  distinct eigenvalues=  1  spectrum correct=True  diagonalisable=True
+    fence n=5      |L(P)|= 16  |support lattice|= 45  distinct eigenvalues= 14  spectrum correct=True  diagonalisable=True
+    C_2+C_3        |L(P)|= 10  |support lattice|= 37  distinct eigenvalues= 10  spectrum correct=True  diagonalisable=True
+    V+A_2 n=5      |L(P)|= 40  |support lattice|= 52  distinct eigenvalues= 26  spectrum correct=True  diagonalisable=True
+    A_6            |L(P)|=720 -- skipped (matrix too large for the exact-rank budget)
+
+==============================================================================
+5. SCOPE: the lazy adjacent-transposition walk is NOT a Brown walk.
+   A face x can carry weight in a Brown walk supported on the
+   adjacent-transposition graph only if x.c in {c} u N_AT(c) for EVERY
+   chamber c.  If some AT edge (c,d) is then unreachable -- no such x
+   has x.c = d -- the lazy AT walk, which gives (c,d) probability
+   1/(2(n-1)) > 0, cannot be written as sum_x w(x) T_x with w >= 0.
+==============================================================================
+n=2  posets=  2   NOT a Brown walk (an AT edge is unreachable):   0   vacuous (|L(P)|=1, no edge):  1   undecided by this test:  1
+      undecided: (antichain)              |L(P)|= 2  AT edges= 2  candidate faces=3
+n=3  posets=  5   NOT a Brown walk (an AT edge is unreachable):   2   vacuous (|L(P)|=1, no edge):  1   undecided by this test:  2
+      undecided: 0<1 0<2                  |L(P)|= 2  AT edges= 2  candidate faces=6
+      undecided: 0<2 1<2                  |L(P)|= 2  AT edges= 2  candidate faces=6
+n=4  posets= 16   NOT a Brown walk (an AT edge is unreachable):  11   vacuous (|L(P)|=1, no edge):  1   undecided by this test:  4
+      undecided: 0<1 1<2 1<3              |L(P)|= 2  AT edges= 2  candidate faces=12
+      undecided: 0<1 0<2 1<3 2<3          |L(P)|= 2  AT edges= 2  candidate faces=12
+      undecided: 0<2 1<2 2<3              |L(P)|= 2  AT edges= 2  candidate faces=12
+      undecided: 0<2 0<3 1<2 1<3          |L(P)|= 4  AT edges= 8  candidate faces=10
+n=5  posets= 63   NOT a Brown walk (an AT edge is unreachable):  55   vacuous (|L(P)|=1, no edge):  1   undecided by this test:  7
+      undecided: 0<1 1<2 2<3 2<4          |L(P)|= 2  AT edges= 2  candidate faces=24
+      undecided: 0<1 1<2 1<3 2<4 3<4      |L(P)|= 2  AT edges= 2  candidate faces=24
+      undecided: 0<1 0<2 1<3 2<3 3<4      |L(P)|= 2  AT edges= 2  candidate faces=24
+      undecided: 0<1 0<2 1<3 1<4 2<3 2<4  |L(P)|= 4  AT edges= 8  candidate faces=20
+      undecided: 0<2 1<2 2<3 3<4          |L(P)|= 2  AT edges= 2  candidate faces=24
+      undecided: 0<2 1<2 2<3 2<4          |L(P)|= 4  AT edges= 8  candidate faces=20
+      undecided: 0<2 0<3 1<2 1<3 2<4 3<4  |L(P)|= 4  AT edges= 8  candidate faces=20

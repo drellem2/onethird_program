@@ -1,0 +1,77 @@
+==============================================================================
+D. THE DOWN-UP WALK IS THE LAZY ADJACENT-TRANSPOSITION WALK
+   I - P_du  ==  Delta_AT / (2(n-1)),  exact rational check
+==============================================================================
+n=1  posets=  1  identity holds on   1  (non-degenerate, |L(P)|>=2:   0)
+n=2  posets=  2  identity holds on   2  (non-degenerate, |L(P)|>=2:   1)
+n=3  posets=  5  identity holds on   5  (non-degenerate, |L(P)|>=2:   4)
+n=4  posets= 16  identity holds on  16  (non-degenerate, |L(P)|>=2:  15)
+n=5  posets= 63  identity holds on  63  (non-degenerate, |L(P)|>=2:  62)
+n=6  posets=318  identity holds on 318  (non-degenerate, |L(P)|>=2: 317)
+
+==============================================================================
+L. LOCALISATION: link(sigma) = join of F(Q_i) over the blocks of sigma
+   verified as a simplicial isomorphism, every face of every poset
+==============================================================================
+n=1  posets=  1   faces checked=     1   isomorphism failures=0
+n=2  posets=  2   faces checked=     5   isomorphism failures=0
+n=3  posets=  5   faces checked=    37   isomorphism failures=0
+n=4  posets= 16   faces checked=   397   isomorphism failures=0
+n=5  posets= 63   faces checked=  5757   isomorphism failures=0
+
+==============================================================================
+H. CODIMENSION-2 LINKS: the complete list
+==============================================================================
+  over all posets with 4 <= n <= 6:
+  link        count  lambda_2            block types (non-singleton blocks, canonical)
+  C_4         10539  0.0                 A_2+A_2
+  C_6          3714  0.5                 A_3
+  P_2          6431  -1.0                C_2+C_2; C_3
+  P_3         17816  -0.0                A_2+C_2; Lambda; V
+  P_4          5555  0.5                 A_1+C_2
+
+  reading: C_4 = two commuting moves s_t s_u = s_u s_t (|t-u|>=2);
+           C_6 = the braid hexagon s_t s_{t+1} s_t = s_{t+1} s_t s_{t+1};
+           P_4, P_3, P_2 = the same two pictures truncated by the
+           boundary (free ridges deleted).  lambda_2 <= 1/2 always,
+           attained exactly at C_6 and P_4.
+
+==============================================================================
+G. gamma = 1/2 IS ATTAINED BY AN EXPLICIT EIGENFUNCTION (antichain)
+   f(S) = sum_{i in S} a_i with sum a_i = 0;  claim P f = f/2
+==============================================================================
+  A_3: 1-skeleton has    6 vertices;  max_u |(Pf)(u) - f(u)/2| = 0 (exact);  lambda_2 = 0.500000000000
+  A_4: 1-skeleton has   14 vertices;  max_u |(Pf)(u) - f(u)/2| = 0 (exact);  lambda_2 = 0.500000000000
+  A_5: 1-skeleton has   30 vertices;  max_u |(Pf)(u) - f(u)/2| = 0 (exact);  lambda_2 = 0.500000000000
+  A_6: 1-skeleton has   62 vertices;  max_u |(Pf)(u) - f(u)/2| = 0 (exact);  lambda_2 = 0.500000000000
+  A_7: 1-skeleton has  126 vertices;  max_u |(Pf)(u) - f(u)/2| = 0 (exact);  lambda_2 = 0.500000000000
+  A_8: 1-skeleton has  254 vertices;  max_u |(Pf)(u) - f(u)/2| = 0 (exact);  lambda_2 = (dense solver capped)
+
+==============================================================================
+N1. TWISTED, THE TOP RELATIVE BOUNDARY IS THE SIGNED INCIDENCE MATRIX
+    E L^rel E == N^T N   (so the top-degree Hodge structure is the
+    classical incidence factorisation of the graph Laplacian)
+==============================================================================
+n=1  posets=  1   identity holds on   1   (with >=1 edge:   0)
+n=2  posets=  2   identity holds on   2   (with >=1 edge:   1)
+n=3  posets=  5   identity holds on   5   (with >=1 edge:   4)
+n=4  posets= 16   identity holds on  16   (with >=1 edge:  15)
+n=5  posets= 63   identity holds on  63   (with >=1 edge:  62)
+n=6  posets=318   identity holds on 318   (with >=1 edge: 317)
+
+==============================================================================
+N2. REPRESENTATION THEORY DOES NOT DESCEND
+==============================================================================
+n=2  posets=  2   posets on which EVERY shape-alpha face span is an S_n-submodule: 1  (of which antichains: 1)
+n=3  posets=  5   posets on which EVERY shape-alpha face span is an S_n-submodule: 1  (of which antichains: 1)
+n=4  posets= 16   posets on which EVERY shape-alpha face span is an S_n-submodule: 1  (of which antichains: 1)
+n=5  posets= 63   posets on which EVERY shape-alpha face span is an S_n-submodule: 1  (of which antichains: 1)
+
+  and even where the S_n symmetry is present (the antichain),
+  sum_i s_i is central in C[S_n] iff n-1 = C(n,2):
+    n=2: True
+    n=3: False
+    n=4: False
+    n=5: False
+    n=6: False
+    n=7: False
