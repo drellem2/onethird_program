@@ -1,0 +1,177 @@
+mg-8eca -- THE mg-8aae REPAIR, MEASURED ON THE ARTIFACT
+==============================================================================
+mg-8aae returned PARTIAL with two open items and one closing note: both are
+the same two questions in different clothes.  IS THE MEASURED PROPERTY
+INVARIANT UNDER THE GUARDED FAILURE -- a multiset is invariant under exchange,
+`x == x` is invariant under everything -- and IS THE DEMONSTRATION AT THE RIGHT
+TARGET, the hook or the check.  Neither is a coverage problem and neither is
+fixed by checking more things, so neither is answered here by adding checks:
+R1 changes what the census measures, R2 changes where the summary check reads
+from, and each is then shown MOVING under the exact failure the old one sat
+still for.  0 mathematical statements are touched.
+
+R1 -- THE CENSUS IS POSITION-AWARE: EXCHANGES, ON DISK, BOTH SENSES
+-------------------------------------------------------------------
+H-1's mechanism in one line: A MULTISET IS INVARIANT UNDER A TRANSPOSITION,
+so the census could not see one.  The repair does not check MORE things -- it
+changes WHAT IS MEASURED.  The roster in `verify_landing.py` is now an ORDERED
+list of slots and the census compares the SEQUENCE as well as the bag, with the
+bag and `LIVE_CENSUS` DERIVED from the same list so the two cannot drift.
+
+  Each probe below exchanges two DECLARED figures of equal length, in ordinary
+  prose, inside the section, outside any marked quotation.  That it is a
+  PERMUTATION AND NOTHING ELSE is asserted before it is written: identical
+  multiset, identical designated reads, identical length.  A probe that also
+  moved the bag would be re-measuring the census that already existed.
+
+  Predicted, before the run: GATE FIRES at 4 of 4, the failing row is the
+  FIGURE ORDER row FOR THAT SITE, and 4 of 4 restorations return exit 0.
+
+    probe                                                               predicted   observed    restored
+  [CONFIRMED] H8 / mg-8aae's own probe: the mg-a2bd table's before/after: the mutation is a PERMUTATION and nothing else -- the MULTISET of 36 figure tokens is identical before and after, every designated statement reads the same value, and the length is unchanged
+    H8: mg-8aae's own probe: the mg-a2bd table's before/after           GATE FIRES  GATE FIRES  green
+        rows that failed: 1; the first of them: GATE @ H8: FIGURE ORDER -- the section asserts 36 figure token(s) and licenses 36, and they first 
+        what a reader would have read: H8's own table now says the STATE.md row SHRANK across mg-a2bd, against the (+3 141) printed on the same line
+  [CONFIRMED] H8 / the other sense: the row-history line's two historical columns: the mutation is a PERMUTATION and nothing else -- the MULTISET of 36 figure tokens is identical before and after, every designated statement reads the same value, and the length is unchanged
+    H8: the other sense: the row-history line's two historical columns  GATE FIRES  GATE FIRES  green
+        rows that failed: 1; the first of them: GATE @ H8: FIGURE ORDER -- the section asserts 36 figure token(s) and licenses 36, and they first 
+        what a reader would have read: the three-column table now says this file SHRANK from bbe83b5^ to bbe83b5, in the row whose growth is the reason the gap moved
+  [CONFIRMED] the STATE.md row / mg-8aae's own probe: the chain's LAST two terms: the mutation is a PERMUTATION and nothing else -- the MULTISET of 17 figure tokens is identical before and after, every designated statement reads the same value, and the length is unchanged
+    the STATE.md row: mg-8aae's own probe: the chain's LAST two terms   GATE FIRES  GATE FIRES  green
+        rows that failed: 1; the first of them: GATE @ the STATE.md row: FIGURE ORDER -- the section asserts 17 figure token(s) and licenses 17, a
+        what a reader would have read: the chain F-1 was born in now asserts the gap reached +755 BEFORE it went negative
+  [CONFIRMED] the STATE.md row / the other sense: the chain's FIRST two terms: the mutation is a PERMUTATION and nothing else -- the MULTISET of 17 figure tokens is identical before and after, every designated statement reads the same value, and the length is unchanged
+    the STATE.md row: the other sense: the chain's FIRST two terms      GATE FIRES  GATE FIRES  green
+        rows that failed: 1; the first of them: GATE @ the STATE.md row: FIGURE ORDER -- the section asserts 17 figure token(s) and licenses 17, a
+        what a reader would have read: the same chain now says the clause mismatch SHRANK, in the sentence that ends 'while the clause mismatch only ever grew'
+
+  [CONFIRMED] 4 of 4 exchanges make the REAL runner red, where the multiset census left it at exit 0.  The property the gate measures is no longer invariant under the failure it guards
+  [CONFIRMED] and at 4 of 4, the row that failed is the `FIGURE ORDER` row FOR THAT SITE and it is the ONLY row that failed -- the fire is attributable to the positional check, not to some other row of a widened gate going red for a new reason
+  [CONFIRMED] and 4 of 4 restorations return the runner to exit 0, sha256-verified: the gate does not fire on everything
+
+R2 -- `SUMMARY vs ROWS`: FIRED ON THE ARTIFACT, WITH NO HOOK SET
+----------------------------------------------------------------
+H-2's mechanism in one line: the check scored `printed == derived` where
+`printed = FORCE_SUMMARY or derived`, so off the hook it was `x == x` AND
+COULD NOT FAIL FOR ANY TREE.  The repair does not add checks -- it makes the
+two sides INDEPENDENTLY OBTAINED.  The printed verdict and its count are parsed
+back out of the lines the run will print; the rows' verdict and count are
+recomputed from the rows.
+
+  D2 IS THE ONE THAT MATTERS, and it sets no environment variable: it is
+  mg-8aae's own direction-2 edit, applied to the real file, with the transcript
+  read afterwards.  DEMONSTRATING A CHECK FIRES VIA A TEST HOOK PROVES THE HOOK
+  WORKS, NOT THE CHECK -- so D1 is kept because mg-8916 demonstrated it and
+  nothing is silently dropped, but it is not what the claim rests on.
+
+  D4 is the control that makes D2 mean something: the DEFECT IS REINSTATED
+  under D2's edit and the check must go GREEN AGAIN.  Without it, "the check
+  fires" and "the instrument fires" are the same sentence.
+
+  Predicted, before the run: D0 green; D1 red, count +1; D2 RED, count +1;
+  D3 RED, count +1; D4 GREEN, count back to D0's.
+
+    D0  as it stands                      [CONFIRMED]   refuted 3  exit 1
+  [CONFIRMED] D0: the `SUMMARY vs ROWS` check EXISTS, is recorded as a check, and is GREEN on the artifact as it stands -- so a red below is a discrimination and not a check that fires on everything
+    D1  the mg-8916 forcing hook          [REFUTED  ]   refuted 4  exit 1
+  [CONFIRMED] D1: the mg-8916 hook still fires and still moves the refuted count by exactly one (3 -> 4).  Nothing mg-8916 demonstrated is dropped by this repair; what changes is that it is no longer the ONLY way to make this check red
+    D2  the HEADLINE edited on disk       [REFUTED  ]   refuted 4  exit 1
+        the transcript prints : THE PRIMARY TARGET IS CONFIRMED IN THIS TREE: 2 of 2 rows tagged
+        while its PRIMARY rows: REFUTED
+  [CONFIRMED] D2: G-2's exact artifact is REPRODUCED with no environment variable set -- the transcript prints 'THE PRIMARY TARGET IS CONFIRMED' above its own [REFUTED] PRIMARY rows
+  [CONFIRMED] D2: AND THE CHECK CATCHES IT, on the REAL artifact, off no hook (3 -> 4, exactly one).  This is mg-8aae's own direction-2 mutation, verbatim, which the old check passed at [CONFIRMED] with the count unmoved
+    D3  the COUNT edited, verdict correct [REFUTED  ]   refuted 4  exit 1
+  [CONFIRMED] D3: with the verdict word LEFT CORRECT and only the parenthetical count moved, the check still fires (3 -> 4).  The second of the two independent reads carries weight on its own -- it is not decoration on the first
+    D4  the DEFECT reinstated, under D2   [CONFIRMED]   refuted 3  exit 1
+  [CONFIRMED] D4: THE DELETION TEST.  With `printed = FORCE_SUMMARY or derived` put back and D2's edit still applied, the same artifact goes UNCAUGHT again -- [CONFIRMED], count back to 3.  So D2's red is attributable to the two-line change and to nothing else, and the old check really was invariant under the failure it guarded
+  [CONFIRMED] and the mechanism is read off the source rather than argued: `printed = FORCE_SUMMARY or derived` is GONE from the code and `printed` is now parsed from the printed lines.  `FORCE_SUMMARY` still exists and still reaches the SENTENCE, which is why D1 still fires -- it no longer reaches the CHECK's left-hand side
+  [CONFIRMED] and the defect was really there to remove: `git log -G` on that exact code line returns 2 commit(s) for this file -- the one that introduced it and the one that removed it.  Neither sha nor subject is printed: one of the two is this run's own commit, and a transcript that names it stops regenerating the first time the branch is squashed or reworded
+
+R3 -- THE TWO INSTRUMENTS THIS ANSWERS TO, UNMODIFIED, RE-RUN
+-------------------------------------------------------------
+A repair scored only by the instrument its author wrote is a repair scored
+by its author.  So mg-8aae's instrument is re-run here -- not quoted from its
+transcript -- and its committed transcript is sha256-checked afterwards.  So is
+mg-8916's, because a repair that quietly drops what the last one demonstrated
+is a narrowing wearing a widening's name.
+
+  What a LANDED finding looks like from the raising instrument's side is a
+  MISSED PREDICTION: A4 predicted `gate SILENT` at 2 of 2 and A5 predicted its
+  direction-2 mutation would go uncaught.  Both should now be wrong, and the
+  instrument should say so in its own words rather than in ours.
+
+  Predicted, before the run: A4's two permutation rows read GATE FIRES; A5's
+  direction-2 row reports the check catching it; H-1 and H-2 are no longer
+  raised as findings.
+
+  [CONFIRMED] `code/hodge_leverage_audit_8aae/audit_8916_repair.py` is untouched by this repair -- the instrument that RAISED H-1 and H-2 was not edited by the commit that answers them
+      its A4 permutation rows : 2 of 2 read GATE FIRES
+      its findings            : 0
+      its exit                : 1
+  [CONFIRMED] 2 of 2 of its A4 permutation probes now read GATE FIRES where it observed exit 0 at 2 of 2 -- measured by re-running its instrument, not by quoting ours
+  [CONFIRMED] and neither H-1 nor H-2 is raised as a finding by the instrument that raised them (0 finding(s) remain)
+  [CONFIRMED] and its committed transcript is sha256-identical afterwards: the run as TAKEN is not overwritten to agree with this repair
+
+      mg-8916's own instrument: {'checks recorded': 18, 'confirmed': 16, 'measurements': 2, 'refuted': 0}  exit 0
+  [CONFIRMED] and mg-8916's own `repair_835f.py`, unmodified, still reports 18 checks / 0 refuted at exit 0 against the REPAIRED tree -- nothing it demonstrated is dropped, its `MG8916_FORCE_SUMMARY` demonstration included
+  [CONFIRMED] and mg-8916's committed transcript is untouched by this run and still carries the line mg-8aae's A7 looks for.  DECLARED, because it is a seam: A7's needle is an ECHO of the mg-8a5c check's message text, and this repair changed that text.  Regenerating `code/hodge_leverage_repair_8916/out_repair_8916.txt` would silently break A7 -- so it is left as TAKEN, which is what a frozen run is, and anyone who regenerates it must move A7's needle in the same commit
+
+R4 -- WHAT IS STILL NOT COVERED, PRINTED
+----------------------------------------
+An extent that is not printed becomes the next claim wider than its code.
+Both of mg-8aae's findings were exactly that, one generation apart, so this
+list is part of the repair rather than an afterthought.
+
+  THE CENSUS, after this repair, covers: every figure-shaped token the section
+  asserts, at the value it should have AND in the slot a reader meets it in.
+  It does NOT cover:
+
+    * two occurrences of the SAME token exchanged with each other.  This is
+      not an omission that can be closed: the sequence is over VALUES, and
+      exchanging equal values is the identity map on the artifact as well as
+      on the measurement.  There is nothing there to see.
+    * a figure outside the section, or inside a marked quotation, or not of
+      the figure-shaped class.  Unchanged from mg-8916, and unchanged
+      deliberately: `assertions()` states the quotation convention and a site
+      is a section.
+    * WHAT a figure means.  The roster says `10 483` is "this file at
+      bbe83b5^"; nothing checks that sentence against git.  A roster entry
+      whose PROSE is wrong is invisible here.
+
+  `SUMMARY vs ROWS`, after this repair, compares the printed verdict AND its
+  count against the rows, both sides obtained independently.  It does NOT
+  cover:
+
+    * the REST of the branch text, which is still hand-written prose asserting
+      things the rows do not carry ("the repair's three figures are the
+      POST-commit ones and reproduce exactly from the tree").  The verdict
+      sentence is checked; the paragraph around it is not.  mg-8aae named
+      this and it is named again here rather than quietly counted as closed.
+    * any row not tagged PRIMARY.  The bottom line speaks for the PRIMARY
+      rows and the check is scoped to exactly those.
+
+  [MEASURED ] the two exclusions that matter are stated above rather than left to be found: an exchange of EQUAL tokens (which is the identity map and cannot be seen), and the branch's surrounding prose (which is hand-written and unchecked).  NOT findings -- declared extent
+
+BOTTOM LINE
+-----------
+  [CONFIRMED] SUMMARY vs ROWS: the two sentences below, READ BACK OUT OF THE LINES THIS RUN WILL PRINT, say H-1 CLOSED (3, 3); H-2 CLOSED (3, 3), and the rows they summarise, counted again here, say H-1 CLOSED (3, 3); H-2 CLOSED (3, 3) -- they agree, and the two sides are obtained independently: one parsed from the printed sentences, one recomputed from the rows
+
+  checks recorded : 23
+  measurements    : 1
+  confirmed       : 22
+  refuted         : 0
+
+  mg-8aae H-1 IS CLOSED BY CHANGING WHAT THE CENSUS MEASURES: the roster is an ORDERED
+  list of slots, the multiset and LIVE_CENSUS are derived from it,
+  and the four exchanges make the REAL runner red ON DISK at the
+  FIGURE ORDER row for that site -- the mutation a multiset cannot
+  see, because a transposition preserves it exactly.
+  (3 of 3 rows tagged H-1 are [CONFIRMED].)
+
+  mg-8aae H-2 IS CLOSED BY CHANGING WHERE THE CHECK READS FROM: the printed verdict and
+  its count are parsed back out of the lines the run will print,
+  the rows' are recomputed, and D2 fires on the REAL ARTIFACT with
+  NO environment variable set -- with D4 showing that reinstating
+  the two removed lines makes the same artifact pass again.
+  (3 of 3 rows tagged H-2 are [CONFIRMED].)
+

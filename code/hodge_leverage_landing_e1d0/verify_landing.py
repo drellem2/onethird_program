@@ -859,9 +859,16 @@ whether the enlargement was disclosed anywhere.
                                           "both": doc_num(aH + histlen - bH, signed=True),
                                           "cell": doc_num(aH), "hist": doc_num(histlen),
                                           "copy": doc_num(bH)})
+        # ⚠️ THE SHAPE OF THIS LINE IS LOAD-BEARING and is deliberately left
+        # alone by mg-8eca: mg-8aae's A1 re-counts the printed extent by
+        # parsing it, with a tokenizer sharing no regex with this file's.  An
+        # instrument that raised a finding must be able to re-run unmodified
+        # against the repair that answers it, so the slot count goes on its own
+        # line rather than into this one.
         print(f"        {name:<20} {sum(want.values()):>3} licensed figure tokens "
-              f"in {len(ORDER[name])} declared slots "
               f"({len(HISTORICAL[name])} historical values declared)")
+        print(f"        {'':<20} {len(ORDER[name]):>3} declared SLOTS, in the "
+              "order a reader meets them (mg-8eca)")
     print()
 
     false_now = "the corresponding `STATE.md` row carries the same clauses"
