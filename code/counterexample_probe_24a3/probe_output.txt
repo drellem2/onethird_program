@@ -1,0 +1,1061 @@
+
+==============================================================================
+mg-24a3  --  A 1/3-2/3 COUNTEREXAMPLE UNDER THE SEMIGROUP ACTION
+==============================================================================
+Populations, methods and null models are stated inline.  No claim here
+depends on a random choice except the permutation p-values, which use
+seed 20260730.  All spectra and all balance statistics are EXACT rationals.
+
+Reminder of the definitions in use (see core.py and bridge.py docstrings):
+  delta(P) = max over incomparable pairs {x,y} of min(p, 1-p), p = Pr[x<y]
+             over the UNIFORM distribution on linear extensions.
+  A COUNTEREXAMPLE is a non-chain with delta(P) < 1/3.  NONE IS KNOWN, and
+  none exists at any size below.  Every statement about a counterexample is
+  of the form 'IF one exists THEN ...'.  Where the worst-balanced posets are
+  used they are a stated PROXY for one, and never called one.
+
+==============================================================================
+SECTION 1  THE BRIDGE OBJECT: majority tournament, L*, and concentration
+==============================================================================
+IF a counterexample P exists, then no incomparable pair of P is undecided,
+so orienting every pair by its majority gives a TOTAL orientation -- a
+tournament M(P) canonically determined by P.  If M(P) is acyclic it is a
+distinguished linear extension L* of P.  Acyclicity is NOT assumed below; it
+is tested.  Both branches are reported.
+
+-- 1a  THEOREM: a counterexample's majority relation is a LINEAR ORDER -------
+This is not tested, because it is proved.  Let P be a counterexample, so no
+incomparable pair has p in [1/3, 2/3].  Orient x -> y iff p(x,y) > 2/3.
+
+  TOTAL.  1/2 lies in the forbidden band, so no pair is tied and every pair is
+  oriented.  Comparable pairs have p = 1 and orient with P.
+  TRANSITIVE.  Suppose x -> y and y -> z.  Then
+      Pr[x<y AND y<z]  >=  p(x,y) + p(y,z) - 1  >  2/3 + 2/3 - 1  =  1/3,
+  and the event {x<y and y<z} is contained in {x<z}, so p(x,z) > 1/3.  The
+  hypothesis forbids p(x,z) in [1/3, 2/3], hence p(x,z) > 2/3, hence x -> z.
+
+So M(P) is a total, transitive, antisymmetric relation containing P: a linear
+extension L* of P, unconditionally, GIVEN that P is a counterexample.  The
+FORBIDDEN MIDDLE BAND is what closes the composition -- 'every pair has a
+majority' alone would not, and Condorcet cycles are a real phenomenon in
+majority tournaments in general.  That is the trap, and 1a' measures it.
+
+STATEMENT DISCIPLINE.  The theorem is conditional on a counterexample
+existing.  It says nothing about a general poset, and the sweep in 1a' is a
+DIFFERENT population where the hypothesis is false -- its results are not
+evidence for the theorem and must not be read as any.
+
+-- 1a' GENERAL POSETS ARE A DIFFERENT QUESTION -- swept, and NOT claimed -----
+M(P) here is the STRICT majority digraph of an arbitrary poset: x -> y iff
+p(x,y) > 1/2.  Ties (p = 1/2 exactly) are left unoriented.  General posets do
+NOT satisfy the counterexample hypothesis, so 1a does not apply to them and
+nothing below is offered as support for it.  NO CLAIM of general transitivity
+is made here: the sweep bounds the range in which no cycle occurs, and that
+is all it does.
+n      posets   cyclic M   tie-free  with ties strongest cycle
+3           5          0          2          3            -
+4          16          0          4         12            -
+5          63          0         17         46            -
+6         318          0         89        229            -
+7        2045          0        672       1373            -
+
+RESULT: 0 cyclic majority digraphs out of 2447 posets on 3..7 elements.
+So no poset in the exhaustive range has a majority cycle.  THAT IS NOT A
+THEOREM AND NOT EVIDENCE FOR ONE: it is a statement about posets of size
+<= 7, on a population where the counterexample hypothesis does not hold.
+The next block exhibits a majority cycle just outside this range, which is
+why the sweep must not be read as general transitivity.
+
+THERE IS NO CYCLIC BRANCH FOR A COUNTEREXAMPLE.  An earlier version of this
+brief forked on acyclicity; 1a's proof closes the fork, and the fork is
+deleted rather than left as a caveat.  A counterexample's majority relation is
+a linear order, full stop.  What follows concerns GENERAL posets only.
+
+AND THEY DO EXIST FOR GENERAL POSETS, just not in the exhaustive range.  A
+witness, rebuilt and re-verified here from its cover relations:
+    n = 11, e(P) = 78474, covers: 0<2 0<6 0<9 1<3 1<9 2<10 3<6 3<7 4<5 4<6 6<10
+    majority 3-CYCLE  5 -> 9 -> 6 -> 5, with margins
+        p(5,9) = 597/1189       = 0.50210   incomparable in P: True
+        p(9,6) = 599/1189       = 0.50378   incomparable in P: True
+        p(6,5) = 1784/3567      = 0.50014   incomparable in P: True
+    weakest edge 1784/3567 = 0.50014, which is INSIDE the band [1/3, 2/3] that the
+    counterexample hypothesis forbids.  So the cycle is real, and 1a's
+    proof excludes it for exactly the stated reason: every edge of a
+    counterexample's majority relation is decided by a margin above 2/3,
+    and this cycle's edges are decided by margins of about 1/2.
+
+    Found by random search (seed 4242; no cycle in 4200 random posets at each
+    of n = 8, 9, 10, and none in the exhaustive sweep to n = 7).  n = 11 is
+    NOT claimed to be minimal -- only that a witness exists and that the
+    exhaustive range above is too small to see one.  The moral is the one the
+    corrected brief states: an imported general caveat is not an obstruction
+    until it is checked against the strength of the specific hypothesis, and
+    here the sweep above would have been read as support for a theorem it
+    cannot support.
+
+-- 1b  L* is a linear extension of P  (verified, not assumed) ----------------
+  [ok  ] L* in L(P): 0 bad of 2447 posets  -- 0 bad
+       (it must be: a comparable pair has p = 1, so M contains P.)
+
+-- 1c  THE IDENTITY  E[inv(L,L*)] = sum over Inc(P) of min(p, 1-p) -----------
+Verified against direct enumeration of L(P), and shown INDEPENDENT of the
+tie-break in L* (a tied pair contributes 1/2 whichever way L* orients it).
+  [ok  ] closed form == enumeration: 0 bad of 398 posets (n<=6)  -- 0 bad
+  [ok  ] tie-break independent: 0 bad  -- 0 bad
+
+-- 1d  THE CONCENTRATION RATIO  R(P) = 3 E[inv(L,L*)] / |Inc(P)| -------------
+IF a counterexample exists THEN R(P) < 1.  Since R is 3x the MEAN and
+3 delta is 3x the MAX of the same per-pair numbers, R <= 3 delta always, so
+R < 1 is strictly weaker than the counterexample condition 3 delta < 1.
+The point of this table is HOW MUCH weaker.
+
+n    non-chain min 3delta      min R         #R<1           %R<1  #3delta<1
+3           4          1          1            0           0.0%          0
+4          15          1          1            0           0.0%          0
+5          62          1        4/5           11          17.7%          0
+6         317          1        3/4          124          39.1%          0
+7        2044          1      24/35         1232          60.3%          0
+
+READ THE LAST TWO COLUMNS TOGETHER.  #3delta<1 is 0 everywhere: no
+counterexample exists at these sizes, as expected.  #R<1 is NOT 0.  So the
+concentration condition is satisfied by posets that are PROVABLY NOT
+counterexamples, and satisfied by more of them as n grows.
+
+-- 1e  WHICH posets satisfy the concentration bound, and where the extremal ones sit 
+  n=5:
+    delta-EXTREMAL posets (delta = 1/3, 3 of them): R = 1
+    smallest R in the population:
+        R=4/5      3delta=6/5      |Inc|=6   e=10     0<2 1<3 2<4
+        R=13/15    3delta=4/3      |Inc|=5   e=9      0<2 0<3 1<2 3<4
+        R=13/15    3delta=4/3      |Inc|=5   e=9      0<2 1<3 1<4 2<4
+  n=6:
+    delta-EXTREMAL posets (delta = 1/3, 5 of them): R = 1
+    smallest R in the population:
+        R=3/4      3delta=6/5      |Inc|=8   e=15     0<2 1<3 2<4 4<5
+        R=39/49    3delta=9/7      |Inc|=7   e=14     0<2 0<3 1<2 3<4 4<5
+        R=39/49    3delta=9/7      |Inc|=7   e=14     0<2 1<3 1<5 2<4 4<5
+  n=7:
+    delta-EXTREMAL posets (delta = 1/3, 8 of them): R = 1
+    smallest R in the population:
+        R=24/35    3delta=9/7      |Inc|=12  e=35     0<2 1<3 2<4 3<5 4<6
+        R=135/187  3delta=45/34    |Inc|=11  e=34     0<2 1<3 1<4 2<4 3<5 5<6
+        R=135/187  3delta=45/34    |Inc|=11  e=34     0<2 1<3 1<6 2<4 3<5 4<6
+
+The mechanism is the mean/max gap and nothing subtler: a poset with many
+heavily-decided pairs and a few balanced ones has a small MEAN while its MAX
+stays large.  Disjoint unions of two chains are the extreme case, and they are
+this programme's own canonical UNFROZEN family (STATE: C_n + C_n has
+delta = 1/2).  Section 1f follows that family out past the exhaustive range.
+
+-- 1f  NAMED FAMILIES beyond the exhaustive range ----------------------------
+Cost note: these use the same exact O(2^n n) count DP; nothing here is
+enumerated over L(P), so n up to 12 is seconds.  No poset beyond n = 12 is
+computed anywhere in this probe.
+
+family                    n     e(P)     3delta          R       R<1?    |Inc|
+C_2 + C_2                 4        6        3/2          1         no        4
+C_2 + C_3                 5       10        6/5        4/5        YES        6
+C_2 + C_4                 6       15        6/5        3/4        YES        8
+C_2 + C_5                 7       21       10/7      26/35        YES       10
+C_2 + C_6                 8       28      39/28        5/7        YES       12
+C_3 + C_3                 6       20        3/2        4/5        YES        9
+C_3 + C_4                 7       35        9/7      24/35        YES       12
+C_3 + C_5                 8       56        3/2      23/35        YES       15
+C_3 + C_6                 9       84        5/4     79/126        YES       18
+C_4 + C_4                 8       70        3/2      24/35        YES       16
+C_4 + C_5                 9      126        4/3     64/105        YES       20
+C_4 + C_6                10      210      19/14       7/12        YES       24
+C_5 + C_5                10      252        3/2     64/105        YES       25
+C_5 + C_6                11      462      15/11    128/231        YES       30
+C_6 + C_6                12      924        3/2    128/231        YES       36
+1+2 under C_0             3        3          1          1         no        2
+1+2 under C_1             4        3          1          1         no        2
+1+2 under C_2             5        3          1          1         no        2
+1+2 under C_3             6        3          1          1         no        2
+1+2 under C_4             7        3          1          1         no        2
+1+2 under C_5             8        3          1          1         no        2
+1+2 under C_6             9        3          1          1         no        2
+fence_4                   4        5        6/5          1         no        3
+fence_5                   5       16        3/2      17/16         no        6
+fence_6                   6       61      84/61    573/610        YES       10
+fence_7                   7      272        3/2      39/40        YES       15
+fence_8                   8     1385  2028/1385  1274/1385        YES       21
+fence_9                   9     7936        3/2 52317/55552        YES       28
+fence_10                 10    50521 75138/50521 276197/303126        YES       36
+
+The 1+2-under-a-chain family holds delta = 1/3 exactly at every n -- it is the
+family that MEETS the conjecture's bound -- and its R is exactly 1 at every n.
+So the family that comes closest to the conjecture's boundary sits exactly ON
+the concentration boundary and never inside it, while two-chain families sit
+strictly inside it with delta far above 1/3.
+
+HONEST PRICING OF THE ADDENDUM'S QUANTITY.  R(P) < 1 is a true consequence of
+the counterexample hypothesis and it is correctly stated in the ticket as a
+consequence rather than a test.  What this section adds is the size of the
+slack: the condition is already met by real posets whose delta is far from
+1/3, its satisfying fraction GROWS with n, and the delta-extremal family sits
+on its boundary rather than inside it.  So it is not a usable filter on the
+search space, and the reason is structural (mean versus max), not a matter of
+the range being too small.
+
+==============================================================================
+SECTION 2  THE FACE-SIDE BALANCE CONSTANT -- the one place a signal appears
+==============================================================================
+The action supplies its OWN balance constant, and it needs no linear
+extensions to compute.  For an incomparable pair, over the weight that is
+uniform on the P-compatible moves, let
+    s   = Pr[the move leaves x,y in one block]         (pair not separated)
+    q   = Pr[x's block strictly before y's],  q' = the other way.
+The walk's own stationary marginal is pi(x<y) = q/(q+q') -- exact, proved in
+SECTION 4, and checked against the stationary vector of the actual matrix in
+selftest.py control C8.  Define, in exact parallel with delta,
+    delta_walk(P) = max over incomparable pairs of min(pi, 1-pi).
+
+delta uses the uniform measure on L(P); delta_walk uses a count of faces of
+the order cone.  They are different functionals of P.  How close are they?
+
+-- 2a  per-PAIR agreement, over every incomparable pair of every non-chain poset 
+n      #pairs        rho     %equal   mean |err|    max |err| max err as frac
+3           7     1.0000     100.0%      0.00000            0        0.00000
+4          44     0.9957      75.0%      0.00408         1/40        0.02500
+5         286     0.9950      51.0%      0.00750        5/132        0.03788
+6        2195     0.9945      32.7%      0.00939        5/114        0.04386
+
+-- 2b  per-POSET agreement, and whether it survives controlling for e(P) -----
+n           N rho(d,d_walk)       perm p     rho | e(P)
+4          15       1.0000       0.0015            n/a
+5          62       0.9981       0.0005         0.8703
+6         317       0.9855       0.0005         0.8919
+
+This is the ONLY invariant in the whole probe whose correlation with delta
+survives removing e(P).  Every other one in SECTION 5 collapses to near zero
+under that control.  So the signal is real and it is not the size axis.
+
+-- 2c  BUT IT IS NOT AN INEQUALITY IN EITHER DIRECTION -----------------------
+A one-sided bound would make this a certificate.  It is not one-sided:
+n            #pairs min(pi,1-pi) > min(p,1-p) delta_walk > delta
+3                 7                0                0
+4                44                7                0
+5               286               74                5
+6              2195              759               37
+
+Both directions occur.  So delta_walk can neither certify delta >= 1/3 nor
+witness delta < 1/3, and no rigorous filter follows from it.
+
+-- 2d  AND AT THE 1/3 THRESHOLD IT ALREADY MISFIRES --------------------------
+The only thing that matters for detection is behaviour at the decision line.
+n             N  #d_walk < 1/3     #delta < 1/3 false positives
+3             4              0                0              0
+4            15              0                0              0
+5            62              0                0              0
+6           317              1                0              1
+       FALSE POSITIVE: d_walk=12/37    delta=5/14      0<2 0<3 1<2 2<4 3<4 3<5
+
+THE TREND THAT DECIDES IT.  The approximation error grows with n while the
+margin it must resolve shrinks -- the delta-extremal posets sit AT 1/3, so the
+quantity to resolve is the distance from 1/3, which is 0 for them:
+n         max |err| min(delta) - 1/3
+3           0.00000        0.00000
+4           0.02500        0.00000
+5           0.03788        0.00000
+6           0.04386        0.00000
+
+So: a genuine, e(P)-independent signal, and a heuristic only.  IF a
+counterexample exists, delta_walk gives no way to recognise it: the error at
+n = 6 already exceeds the entire margin between the extremal posets and the
+conjecture's boundary, and the error is growing.  Stated as a filter rather
+than a test, 'delta_walk < 1/3' retains a small fraction of the population and
+is the most selective heuristic in this probe -- see SECTION 5, table A5.
+
+==============================================================================
+SECTION 3  THE QUOTIENT SIDE: is Q(P) organised around L*'s own chain?
+==============================================================================
+L* singles out one chain inside the acyclic-partition lattice Q(P): the
+partitions whose blocks are contiguous INTERVALS of L*.  There are exactly
+2^(n-1) of them and every one is a level, because ordering those blocks along
+L* is P-compatible (verified by the assertion in bridge.quotient_concentration).
+
+Two statistics, both 1 for a chain:
+  qfrac = 2^(n-1) / |Q(P)|                       share of the LEVELS
+  qmass = (sum of m_X over those levels) / e(P)   share of the SPECTRUM
+
+POPULATION: the TIE-FREE non-chain posets.  A counterexample is tie-free, and
+on tie-free posets L* is UNIQUE, so both statistics are canonical.  On posets
+with a tied pair L* depends on the tie-break and these numbers would not be
+well defined -- those posets are excluded and counted.
+
+n    tie-free  #extremal    qmass: extremal vs rest    qfrac: extremal vs rest
+3           1          -                  (too few)                           
+4           3          -                  (too few)                           
+5          16          3  1.000 vs 0.825  z=+1.16  0.642 vs 0.446  z=+2.90
+6          88          5  1.000 vs 0.734  z=+1.95  0.590 vs 0.316  z=+3.40
+7         671          8  1.000 vs 0.593  z=+2.64  0.541 vs 0.203  z=+4.49
+
+z is the EFFECT SIZE: (extremal mean - rest mean) / SD of the rest.  This is
+one null model -- 'the rest' at the same n is the size-matched comparison
+population, and it is the whole of it, not a sample.  IT IS NOT SUFFICIENT,
+and 2a says why.
+
+-- 3a  THE SATURATION CONTROL -- and it dissolves most of the effect above ---
+Every extremal poset has qmass = 1 EXACTLY, i.e. its whole spectrum sits on
+L*'s chain.  But qmass is bounded above by 1, so 'extremal posets have
+qmass = 1' is only informative if reaching 1 is rare.  It is not:
+
+n      tie-free     #qmass = 1     %qmass = 1   of those, %ext
+5            16              6          37.5%            50.0%
+6            88             11          12.5%            45.5%
+7           671             20           3.0%            40.0%
+
+So qmass = 1 is a large, mostly non-extremal club, and being in it is weak
+evidence.  The honest one-sided statement is the last column: among the posets
+that saturate, the extremal ones are a small minority.  A predicate satisfied
+by all extremal posets AND by many others is a filter on the search space only
+to the extent that it excludes the rest of the population -- quantified next.
+
+-- 3b  the same comparison controlling for e(P), WITH TIES REPORTED ----------
+A stricter size-match: compare each extremal poset only against tie-free
+posets with the SAME linear-extension count, since e(P) drives both qmass and
+delta.  Rank 1 means nobody is strictly higher -- which is uninformative if
+many are TIED, so the tie count is printed and is the number to read.
+    n=5 e=3     0<1 0<2 1<3 2<4 3<4        qmass=1      rank 1 of 3   TIED WITH 2
+    n=5 e=3     0<1 1<2 1<3 2<4            qmass=1      rank 1 of 3   TIED WITH 2
+    n=5 e=3     0<2 1<3 2<3 3<4            qmass=1      rank 1 of 3   TIED WITH 2
+    n=6 e=3     0<1 0<2 1<3 2<4 3<4 4<5    qmass=1      rank 1 of 4   TIED WITH 3
+    n=6 e=3     0<1 1<2 1<3 2<4 3<5 4<5    qmass=1      rank 1 of 4   TIED WITH 3
+    n=6 e=3     0<1 1<2 2<3 2<4 3<5        qmass=1      rank 1 of 4   TIED WITH 3
+    n=7 e=3     0<1 0<2 1<3 2<4 3<4 4<5 5< qmass=1      rank 1 of 5   TIED WITH 4
+    n=7 e=3     0<1 1<2 1<3 2<4 3<5 4<5 5< qmass=1      rank 1 of 5   TIED WITH 4
+    n=7 e=3     0<1 1<2 2<3 2<4 3<5 4<6 5< qmass=1      rank 1 of 5   TIED WITH 4
+
+
+-- 3c  the ONE-SIDED constraint, which is what survives ----------------------
+IF a counterexample exists, is it forced into the qmass = 1 club?  No -- that
+does not follow from anything proved here, and the extremal posets are a PROXY
+not a counterexample.  What IS measurable is how selective the club is, i.e.
+the fraction of the population a 'qmass = 1' filter would retain, and whether
+that fraction shrinks with n (a usable filter) or not.
+n         %retained %retained qfrac>=ext    verdict at this n
+5             37.5%          18.8%                 weak
+6             12.5%           9.1%            selective
+7              3.0%           2.1%            selective
+
+VERDICT ON SECTION 3 is stated in the deliverable, not here; the numbers above
+are the whole evidence for it, saturation control included.
+
+==============================================================================
+SECTION 4  NECESSARY CONDITIONS -- structural statements, verified exhaustively
+==============================================================================
+
+-- B1  every block of every commitment level is CONVEX in P ------------------
+  [ok  ] 0 bad of 3246401 (level, block) pairs, n=3,4,5,6,7  -- 0 bad
+
+-- B2  {B} + singletons is a level  <==>  B is convex ------------------------
+  [ok  ] 0 bad of 281977 (poset, subset) pairs  -- 0 bad
+       => the level data exposes e(P|_B) for exactly the CONVEX subsets B.
+
+-- B3  m_X = 0 for every all-chain level EXCEPT the finest one ---------------
+    If every block of X is a chain of P then prod_B e(P|_B) = 1, and the
+    finest level already contributes m = 1 to that sum, so every other level
+    refining X -- X included -- has m = 0.  The finest level is the ONE
+    exception and it always has m = 1: its blocks are singletons, hence chains.
+  [ok  ] 0 bad of 65481 all-chain levels other than the finest  -- 0 bad
+  [ok  ] the finest level has m = 1 on all posets  -- 0 bad
+
+-- B4  lambda_2 (uniform-move weight) = max over incomparable pairs of s(x,y) 
+  [ok  ] 0 bad of 2442 non-chain posets  -- 0 bad
+       => the action's spectral gap is a PAIR statistic of exactly the same
+          shape as delta: max over incomparable pairs of a per-pair number.
+
+-- B5  2-block levels are exactly {A, complement} with A a nontrivial order ideal or filter 
+  [ok  ] 0 bad of 139765 2-block partitions  -- 0 bad
+
+-- B6  PRIMITIVE  <==>  every 2-block level has strictly positive excess -----
+    excess({A,A^c}) := e(P) - e(P|_A) e(P|_A^c) = sum of m_Y over levels Y
+    that do NOT refine {A,A^c}.  Zero excess at some 2-block level == P is an
+    ordinal sum there == the incomparability graph is disconnected.
+  [ok  ] excess identity: 0 bad of 48826 2-block levels  -- 0 bad
+  [ok  ] PRIMITIVE <==> all-positive excess: 0 bad of 2447 posets  -- 0 bad
+
+-- B7  frozen (delta < 1/3) forces e(P) >= 4; and what the extremal posets do 
+    Proof: for an incomparable pair the two one-relation extension counts are
+    positive integers summing to e(P), and min < e(P)/3 needs e(P) > 3.
+    n=3: min delta = 1/3    over 1 posets; e(P) on them: min 3 max 3
+    n=4: min delta = 1/3    over 2 posets; e(P) on them: min 3 max 3
+    n=5: min delta = 1/3    over 3 posets; e(P) on them: min 3 max 3
+    n=6: min delta = 1/3    over 5 posets; e(P) on them: min 3 max 9
+    n=7: min delta = 1/3    over 8 posets; e(P) on them: min 3 max 9
+  [ok  ] no poset with delta < 1/3 found at any n tested (the conjecture holds here)
+
+    AND THIS IS A GENUINE CONSTRAINT, not a translation.  Most of the
+    delta-extremal posets have e(P) = 3, but e(P) >= 4 is forced for anything
+    frozen -- so IF a counterexample exists it does NOT resemble the extremal
+    posets in the coordinate the multiplicity identity reads off, and the
+    extremal posets are not near-misses there.  Counts:
+        n=3: 1 of 1 extremal posets have e(P) = 3 (below the frozen floor of 4)
+        n=4: 2 of 2 extremal posets have e(P) = 3 (below the frozen floor of 4)
+        n=5: 3 of 3 extremal posets have e(P) = 3 (below the frozen floor of 4)
+        n=6: 4 of 5 extremal posets have e(P) = 3 (below the frozen floor of 4)
+        n=7: 5 of 8 extremal posets have e(P) = 3 (below the frozen floor of 4)
+
+-- B8  NO FREE LUNCH: delta is weight-invariant on the uniformising polytope, 
+    lambda_2 is not.  w_t = t.(do-nothing) + (1-t).(uniform on the FINEST
+    moves) has the uniform distribution on L(P) as its stationary law for
+    every t, and lambda_2(w_t) = t.
+  [ok  ] 0 bad of 57 (poset, t) cases at n<=4
+       => delta(P) is the SAME for every weight in the polytope while
+          lambda_2 sweeps (0,1).  No spectral quantity of a measure-correct
+          walk can be a function of delta unless the weight is pinned by a
+          rule outside the stationarity requirement.
+
+-- B9  the exact reformulation of the counterexample condition ---------------
+    For any weight w whose walk has the uniform law on L(P) stationary,
+    p(x<y) = q_w(x<y) / (q_w(x<y) + q_w(y<x)).  Hence:
+
+      P is a counterexample  <==>  P is not a chain and for EVERY incomparable
+      pair {x,y},  min(q_w, q'_w) < (1/3)(q_w + q'_w):  the moves that
+      SEPARATE the pair are more than 2:1 lopsided.
+
+    Checked on the canonical uniform-move weight: the identity
+    pi = q/(q+q') is control C8; below, how far the uniform-move weight's own
+    pi is from the conjecture's p (it is NOT a uniformising weight in general).
+    n=3: 7 of 7 pairs have min(pi,1-pi) = min(p,1-p) exactly; worst gap 0
+    n=4: 33 of 44 pairs have min(pi,1-pi) = min(p,1-p) exactly; worst gap 1/40
+    n=5: 146 of 286 pairs have min(pi,1-pi) = min(p,1-p) exactly; worst gap 5/132
+    n=6: 717 of 2195 pairs have min(pi,1-pi) = min(p,1-p) exactly; worst gap 5/114
+
+    So the uniform-move weight -- the only canonical weight the action
+    supplies without extra input -- does NOT reproduce the conjecture's pair
+    marginals.  That is the honest statement of the obstruction.
+
+==============================================================================
+SECTION 5  SPECTRAL SEPARATION (the brief's original (a)) -- SECONDARY
+==============================================================================
+The ADDENDUM calls a search for spectral separation a fishing expedition, and
+it is right that nothing here predicts which invariant should move.  It is
+reported in full anyway, because a clean quantified NULL is a deliverable: it
+closes the route cheaply rather than leaving it open and unmeasured.
+
+==============================================================================
+(a) DETECTION at n = 3
+==============================================================================
+population: 5 posets up to isomorphism; 4 non-chains (chains excluded: delta undefined); 2 of those primitive (incomparability graph connected = can be a MINIMAL counterexample)
+
+-- delta distribution over all non-chains ------------------------------------
+min delta = 1/3   (conjecture asserts >= 1/3; TIGHT)
+distinct delta values (lowest 6): 1/3 x1, 1/2 x3
+EXTREMAL set (delta = min): 1 posets
+    0<2                                e=3     nlev=5    lam2=1/4       dwalk=1/3
+
+-- delta distribution over primitive non-chains ------------------------------
+min delta = 1/3   (conjecture asserts >= 1/3; TIGHT)
+distinct delta values (lowest 6): 1/3 x1, 1/2 x1
+EXTREMAL set (delta = min): 1 posets
+    0<2                                e=3     nlev=5    lam2=1/4       dwalk=1/3
+
+-- A1  resolution of each invariant, and the NULL MODEL (all non-chains, N=4) 
+rung   invariant                                                   #fibers P[collide] %singleton
+I0     e(P) alone -- the control                                         3     0.1667      50.0%
+I1     #levels + level-size profile                                      1     1.0000       0.0%
+I2     I1 + multiplicity profile                                         3     0.1667      50.0%
+I3     I2 + exact spectrum with multiplicities (uniform-move w)          3     0.1667      50.0%
+I4     full (Q(P), m, move-count) fingerprint                            3     0.1667      50.0%
+
+READ THIS AS THE NULL MODEL.  '%%singleton' is the fraction of ALL posets in
+the population that are already alone in their fiber.  An extremal poset being
+alone in its fiber carries information only to the extent that this number is
+below 100%.
+
+-- A2  are the extremal / near-extremal posets ISOLATED, and are their fibers PURE? 
+EXTREMAL = delta = 1/3 (1 posets).  NEAR = delta <= 1/2 (4 posets).
+rung   extremal alone baseline alone delta-range in extremal fibers
+I0            1/1              50.0%                [1/3 , 1/3]
+I1            0/1               0.0%                [1/3 , 1/2]
+I2            1/1              50.0%                [1/3 , 1/3]
+I3            1/1              50.0%                [1/3 , 1/3]
+I4            1/1              50.0%                [1/3 , 1/3]
+
+A fiber whose delta-range is a single point would mean the invariant PINS delta
+on that fiber.  A wide range means posets the invariant cannot tell apart have
+different balance -- i.e. the invariant provably cannot detect delta.
+
+-- A3  WITNESSES: pairs the finest invariant (I4) cannot separate but delta can 
+NONE: at n=3 every I4-fiber has constant delta.
+(That does not mean I4 determines delta -- it means no counterexample to
+ that is visible at this size.  See the fiber sizes in A1.)
+
+I4 non-singleton fibers: 1 (so I4 is NOT a complete invariant of the poset here)
+
+-- A4  does any invariant PREDICT delta?  rank correlation + permutation null 
+scalar                  rho    perm p  rho|e(P)   meaning
+e(P)                 -0.272    1.0000       n/a   linear-extension count (the axis STATE already tracks)
+nlev                    n/a                 n/a   #commitment levels = #acyclic-quotient partitions
+nlev_pos             -0.272    1.0000       n/a   #levels carrying nonzero multiplicity
+nmoves               -0.272    1.0000       n/a   #P-compatible moves (faces of the order cone)
+maxmult               0.333    1.0000       n/a   largest multiplicity
+lambda_2              0.272    1.0000       n/a   2nd eigenvalue, uniform-move weight (exact)
+gap                  -0.272    1.0000       n/a   1 - lambda_2
+s_max                 0.272    1.0000       n/a   max over incomp pairs of Pr[move does not separate]
+delta_walk            1.000    0.2739       n/a   the action's own balance constant (face-side delta)
+signimb              -1.000    0.2739       n/a   |sign imbalance| of P
+width                 0.333    1.0000       n/a   largest antichain (structural control)
+height               -0.333    1.0000       n/a   longest chain (structural control)
+nlev/e                0.272    1.0000       n/a   levels per linear extension
+
+rho    = Spearman correlation with delta over the 4 posets.
+perm p = two-sided permutation p-value, 2000 reps, seed 20260730 (1/2001 is the floor).
+rho|e  = the SAME correlation computed within groups of equal e(P) and pooled,
+         i.e. after removing everything explainable by the linear-extension
+         count.  A face-side invariant earns its keep only here.
+
+-- A5  one-sided SEARCH-SPACE constraints: 'a counterexample must have s <= t' 
+For each scalar, t = the extreme value over the EXTREMAL posets, and the
+fraction of the population satisfying the resulting one-sided bound.  A
+fraction near 1 means the condition is vacuous; near 0 means it is a real
+constraint on the search space (valid as a heuristic only -- the extremal
+posets are a PROXY for counterexamples, which do not exist at these sizes).
+scalar              t (max ext)    frac s<=t  direction
+e(P)                          3        50.0%     s >= t
+nlev                          5       100.0%     s <= t
+nlev_pos                      3        50.0%     s >= t
+nmoves                        8        50.0%     s >= t
+maxmult                       1        75.0%     s <= t
+lambda_2                    1/4        50.0%     s <= t
+gap                         3/4        50.0%     s >= t
+s_max                       1/4        50.0%     s <= t
+delta_walk                  1/3        25.0%     s <= t
+signimb                       1        25.0%     s >= t
+width                         2        75.0%     s <= t
+height                        2        75.0%     s >= t
+nlev/e                      5/3        50.0%     s <= t
+
+==============================================================================
+(a-bis) THE PER-PAIR EXPERIMENT at n = 3
+==============================================================================
+delta(P)     = max over incomparable pairs of  min(p, 1-p),  p from L(P).
+lambda_2(P)  = max over incomparable pairs of  s(x,y) = Pr[a uniform move
+               leaves the pair in one block]   (proved in (b), checked below).
+The action also has its own pair marginal pi(x<y) = q(x<y)/(q(x<y)+q(y<x)).
+If the action detected balance, min(pi,1-pi) would track min(p,1-p).
+
+(too few pairs)
+
+==============================================================================
+(a) DETECTION at n = 4
+==============================================================================
+population: 16 posets up to isomorphism; 15 non-chains (chains excluded: delta undefined); 7 of those primitive (incomparability graph connected = can be a MINIMAL counterexample)
+
+-- delta distribution over all non-chains ------------------------------------
+min delta = 1/3   (conjecture asserts >= 1/3; TIGHT)
+distinct delta values (lowest 6): 1/3 x2, 2/5 x1, 1/2 x12
+EXTREMAL set (delta = min): 2 posets
+    0<1 0<2 1<3                        e=3     nlev=12   lam2=1/4       dwalk=1/3
+    0<2 1<3 2<3                        e=3     nlev=12   lam2=1/4       dwalk=1/3
+
+-- delta distribution over primitive non-chains ------------------------------
+min delta = 2/5   (conjecture asserts >= 1/3; slack)
+distinct delta values (lowest 6): 2/5 x1, 1/2 x6
+EXTREMAL set (delta = min): 1 posets
+    0<2 0<3 1<2                        e=5     nlev=14   lam2=3/11      dwalk=3/8
+
+-- A1  resolution of each invariant, and the NULL MODEL (primitive non-chains, N=7) 
+rung   invariant                                                   #fibers P[collide] %singleton
+I0     e(P) alone -- the control                                         6     0.0476      71.4%
+I1     #levels + level-size profile                                      3     0.3333      14.3%
+I2     I1 + multiplicity profile                                         6     0.0476      71.4%
+I3     I2 + exact spectrum with multiplicities (uniform-move w)          6     0.0476      71.4%
+I4     full (Q(P), m, move-count) fingerprint                            6     0.0476      71.4%
+
+READ THIS AS THE NULL MODEL.  '%%singleton' is the fraction of ALL posets in
+the population that are already alone in their fiber.  An extremal poset being
+alone in its fiber carries information only to the extent that this number is
+below 100%.
+
+-- A2  are the extremal / near-extremal posets ISOLATED, and are their fibers PURE? 
+EXTREMAL = delta = 2/5 (1 posets).  NEAR = delta <= 1/2 (7 posets).
+rung   extremal alone baseline alone delta-range in extremal fibers
+I0            1/1              71.4%                [2/5 , 2/5]
+I1            0/1              14.3%                [2/5 , 1/2]
+I2            1/1              71.4%                [2/5 , 2/5]
+I3            1/1              71.4%                [2/5 , 2/5]
+I4            1/1              71.4%                [2/5 , 2/5]
+
+A fiber whose delta-range is a single point would mean the invariant PINS delta
+on that fiber.  A wide range means posets the invariant cannot tell apart have
+different balance -- i.e. the invariant provably cannot detect delta.
+
+-- A3  WITNESSES: pairs the finest invariant (I4) cannot separate but delta can 
+NONE: at n=4 every I4-fiber has constant delta.
+(That does not mean I4 determines delta -- it means no counterexample to
+ that is visible at this size.  See the fiber sizes in A1.)
+
+I4 non-singleton fibers: 1 (so I4 is NOT a complete invariant of the poset here)
+
+-- A4  does any invariant PREDICT delta?  rank correlation + permutation null 
+scalar                  rho    perm p  rho|e(P)   meaning
+e(P)                  0.412    0.5752       n/a   linear-extension count (the axis STATE already tracks)
+nlev                  0.342    1.0000       n/a   #commitment levels = #acyclic-quotient partitions
+nlev_pos              0.412    0.5752       n/a   #levels carrying nonzero multiplicity
+nmoves                0.412    0.5752       n/a   #P-compatible moves (faces of the order cone)
+maxmult               0.441    0.5862       n/a   largest multiplicity
+lambda_2             -0.618    0.2754       n/a   2nd eigenvalue, uniform-move weight (exact)
+gap                   0.618    0.2754       n/a   1 - lambda_2
+s_max                -0.618    0.2754       n/a   max over incomp pairs of Pr[move does not separate]
+delta_walk            1.000    0.1339       n/a   the action's own balance constant (face-side delta)
+signimb              -0.509    0.2844       n/a   |sign imbalance| of P
+width                 0.441    0.5862       n/a   largest antichain (structural control)
+height                0.000    1.0000       n/a   longest chain (structural control)
+nlev/e               -0.412    0.5752       n/a   levels per linear extension
+
+rho    = Spearman correlation with delta over the 7 posets.
+perm p = two-sided permutation p-value, 2000 reps, seed 20260730 (1/2001 is the floor).
+rho|e  = the SAME correlation computed within groups of equal e(P) and pooled,
+         i.e. after removing everything explainable by the linear-extension
+         count.  A face-side invariant earns its keep only here.
+
+-- A5  one-sided SEARCH-SPACE constraints: 'a counterexample must have s <= t' 
+For each scalar, t = the extreme value over the EXTREMAL posets, and the
+fraction of the population satisfying the resulting one-sided bound.  A
+fraction near 1 means the condition is vacuous; near 0 means it is a real
+constraint on the search space (valid as a heuristic only -- the extremal
+posets are a PROXY for counterexamples, which do not exist at these sizes).
+scalar              t (max ext)    frac s<=t  direction
+e(P)                          5        28.6%     s <= t
+nlev                         14        42.9%     s <= t
+nlev_pos                      5        28.6%     s <= t
+nmoves                       22        28.6%     s <= t
+maxmult                       1        42.9%     s <= t
+lambda_2                   3/11        14.3%     s >= t
+gap                        8/11        14.3%     s <= t
+s_max                      3/11        14.3%     s >= t
+delta_walk                  3/8        14.3%     s <= t
+signimb                       1        28.6%     s >= t
+width                         2        42.9%     s <= t
+height                        2        85.7%     s <= t
+nlev/e                     14/5        28.6%     s >= t
+
+==============================================================================
+(a-bis) THE PER-PAIR EXPERIMENT at n = 4
+==============================================================================
+delta(P)     = max over incomparable pairs of  min(p, 1-p),  p from L(P).
+lambda_2(P)  = max over incomparable pairs of  s(x,y) = Pr[a uniform move
+               leaves the pair in one block]   (proved in (b), checked below).
+The action also has its own pair marginal pi(x<y) = q(x<y)/(q(x<y)+q(y<x)).
+If the action detected balance, min(pi,1-pi) would track min(p,1-p).
+
+-- A6  correlation over ALL 44 incomparable pairs of ALL 15 non-chain posets -
+min(p,1-p)  vs  min(pi,1-pi)   [the action's own balance]:  rho = 0.9957  p = 0.0005
+min(p,1-p)  vs  s(x,y)         [non-separation mass]     :  rho = 0.2745  p = 0.0800
+pairs where the two balances are EQUAL: 33 of 44 (75.0%)
+|min(p,1-p) - min(pi,1-pi)|: mean 0.0041, max 0.0250
+the pair attaining delta = the pair attaining lambda_2: 13 of 15 posets (86.7%)
+
+A poset with k incomparable pairs would agree by chance about 1/k of the time;
+the mean 1/k over this population is 0.463.
+
+==============================================================================
+(a) DETECTION at n = 5
+==============================================================================
+population: 63 posets up to isomorphism; 62 non-chains (chains excluded: delta undefined); 31 of those primitive (incomparability graph connected = can be a MINIMAL counterexample)
+
+-- delta distribution over all non-chains ------------------------------------
+min delta = 1/3   (conjecture asserts >= 1/3; TIGHT)
+distinct delta values (lowest 6): 1/3 x3, 4/11 x1, 3/8 x1, 2/5 x5, 3/7 x2, 4/9 x2
+EXTREMAL set (delta = min): 3 posets
+    0<1 0<2 1<3 2<4 3<4                e=3     nlev=27   lam2=1/4       dwalk=1/3
+    0<1 1<2 1<3 2<4                    e=3     nlev=24   lam2=1/4       dwalk=1/3
+    0<2 1<3 2<3 3<4                    e=3     nlev=24   lam2=1/4       dwalk=1/3
+
+-- delta distribution over primitive non-chains ------------------------------
+min delta = 4/11   (conjecture asserts >= 1/3; slack)
+distinct delta values (lowest 6): 4/11 x1, 3/8 x1, 2/5 x3, 3/7 x2, 4/9 x2, 7/15 x2
+EXTREMAL set (delta = min): 1 posets
+    0<2 0<4 1<3 2<3                    e=11    nlev=41   lam2=1/5       dwalk=3/8
+
+-- A1  resolution of each invariant, and the NULL MODEL (primitive non-chains, N=31) 
+rung   invariant                                                   #fibers P[collide] %singleton
+I0     e(P) alone -- the control                                        16     0.0473      19.4%
+I1     #levels + level-size profile                                     14     0.0688      16.1%
+I2     I1 + multiplicity profile                                        21     0.0215      35.5%
+I3     I2 + exact spectrum with multiplicities (uniform-move w)         21     0.0215      35.5%
+I4     full (Q(P), m, move-count) fingerprint                           21     0.0215      35.5%
+
+READ THIS AS THE NULL MODEL.  '%%singleton' is the fraction of ALL posets in
+the population that are already alone in their fiber.  An extremal poset being
+alone in its fiber carries information only to the extent that this number is
+below 100%.
+
+-- A2  are the extremal / near-extremal posets ISOLATED, and are their fibers PURE? 
+EXTREMAL = delta = 4/11 (1 posets).  NEAR = delta <= 3/8 (2 posets).
+rung   extremal alone baseline alone delta-range in extremal fibers
+I0            1/1              19.4%              [4/11 , 4/11]
+I1            1/1              16.1%              [4/11 , 4/11]
+I2            1/1              35.5%              [4/11 , 4/11]
+I3            1/1              35.5%              [4/11 , 4/11]
+I4            1/1              35.5%              [4/11 , 4/11]
+
+A fiber whose delta-range is a single point would mean the invariant PINS delta
+on that fiber.  A wide range means posets the invariant cannot tell apart have
+different balance -- i.e. the invariant provably cannot detect delta.
+
+-- A3  WITNESSES: pairs the finest invariant (I4) cannot separate but delta can 
+NONE: at n=5 every I4-fiber has constant delta.
+(That does not mean I4 determines delta -- it means no counterexample to
+ that is visible at this size.  See the fiber sizes in A1.)
+
+I4 non-singleton fibers: 10 (so I4 is NOT a complete invariant of the poset here)
+
+-- A4  does any invariant PREDICT delta?  rank correlation + permutation null 
+scalar                  rho    perm p  rho|e(P)   meaning
+e(P)                  0.616    0.0005       n/a   linear-extension count (the axis STATE already tracks)
+nlev                  0.584    0.0005     0.022   #commitment levels = #acyclic-quotient partitions
+nlev_pos              0.578    0.0010    -0.337   #levels carrying nonzero multiplicity
+nmoves                0.594    0.0005     0.000   #P-compatible moves (faces of the order cone)
+maxmult               0.688    0.0005     0.508   largest multiplicity
+lambda_2             -0.083    0.6432     0.664   2nd eigenvalue, uniform-move weight (exact)
+gap                   0.083    0.6432    -0.664   1 - lambda_2
+s_max                -0.083    0.6432     0.664   max over incomp pairs of Pr[move does not separate]
+delta_walk            0.991    0.0005     1.000   the action's own balance constant (face-side delta)
+signimb              -0.756    0.0005    -0.552   |sign imbalance| of P
+width                 0.688    0.0005     0.552   largest antichain (structural control)
+height               -0.655    0.0005     0.137   longest chain (structural control)
+nlev/e               -0.619    0.0005    -0.193   levels per linear extension
+
+rho    = Spearman correlation with delta over the 31 posets.
+perm p = two-sided permutation p-value, 2000 reps, seed 20260730 (1/2001 is the floor).
+rho|e  = the SAME correlation computed within groups of equal e(P) and pooled,
+         i.e. after removing everything explainable by the linear-extension
+         count.  A face-side invariant earns its keep only here.
+
+-- A5  one-sided SEARCH-SPACE constraints: 'a counterexample must have s <= t' 
+For each scalar, t = the extreme value over the EXTREMAL posets, and the
+fraction of the population satisfying the resulting one-sided bound.  A
+fraction near 1 means the condition is vacuous; near 0 means it is a real
+constraint on the search space (valid as a heuristic only -- the extremal
+posets are a PROXY for counterexamples, which do not exist at these sizes).
+scalar              t (max ext)    frac s<=t  direction
+e(P)                         11        35.5%     s <= t
+nlev                         41        35.5%     s <= t
+nlev_pos                     10        35.5%     s <= t
+nmoves                       80        35.5%     s <= t
+maxmult                       2        77.4%     s >= t
+lambda_2                    1/5        38.7%     s <= t
+gap                         4/5        38.7%     s >= t
+s_max                       1/5        38.7%     s <= t
+delta_walk                  3/8         6.5%     s <= t
+signimb                       1        35.5%     s >= t
+width                         3        77.4%     s >= t
+height                        3        45.2%     s >= t
+nlev/e                    41/11        25.8%     s >= t
+
+==============================================================================
+(a-bis) THE PER-PAIR EXPERIMENT at n = 5
+==============================================================================
+delta(P)     = max over incomparable pairs of  min(p, 1-p),  p from L(P).
+lambda_2(P)  = max over incomparable pairs of  s(x,y) = Pr[a uniform move
+               leaves the pair in one block]   (proved in (b), checked below).
+The action also has its own pair marginal pi(x<y) = q(x<y)/(q(x<y)+q(y<x)).
+If the action detected balance, min(pi,1-pi) would track min(p,1-p).
+
+-- A6  correlation over ALL 286 incomparable pairs of ALL 62 non-chain posets 
+min(p,1-p)  vs  min(pi,1-pi)   [the action's own balance]:  rho = 0.9950  p = 0.0005
+min(p,1-p)  vs  s(x,y)         [non-separation mass]     :  rho = 0.4481  p = 0.0005
+pairs where the two balances are EQUAL: 146 of 286 (51.0%)
+|min(p,1-p) - min(pi,1-pi)|: mean 0.0075, max 0.0379
+the pair attaining delta = the pair attaining lambda_2: 41 of 62 posets (66.1%)
+
+A poset with k incomparable pairs would agree by chance about 1/k of the time;
+the mean 1/k over this population is 0.292.
+
+==============================================================================
+(a) DETECTION at n = 6
+==============================================================================
+population: 318 posets up to isomorphism; 317 non-chains (chains excluded: delta undefined); 184 of those primitive (incomparability graph connected = can be a MINIMAL counterexample)
+
+-- delta distribution over all non-chains ------------------------------------
+min delta = 1/3   (conjecture asserts >= 1/3; TIGHT)
+distinct delta values (lowest 6): 1/3 x5, 5/14 x1, 4/11 x2, 3/8 x2, 5/13 x2, 2/5 x11
+EXTREMAL set (delta = min): 5 posets
+    0<1 0<2 1<3 2<4 3<4 4<5            e=3     nlev=54   lam2=1/4       dwalk=1/3
+    0<1 1<2 1<3 2<4 3<5 4<5            e=3     nlev=54   lam2=1/4       dwalk=1/3
+    0<1 1<2 2<3 2<4 3<5                e=3     nlev=48   lam2=1/4       dwalk=1/3
+    0<2 1<3 1<4 2<3 2<4 3<5            e=9     nlev=74   lam2=1/4       dwalk=1/3
+    0<2 1<3 2<3 3<4 4<5                e=3     nlev=48   lam2=1/4       dwalk=1/3
+
+-- delta distribution over primitive non-chains ------------------------------
+min delta = 5/14   (conjecture asserts >= 1/3; slack)
+distinct delta values (lowest 6): 5/14 x1, 5/13 x2, 2/5 x2, 15/37 x2, 8/19 x3, 19/45 x2
+EXTREMAL set (delta = min): 1 posets
+    0<2 0<3 1<2 2<4 3<4 3<5            e=14    nlev=94   lam2=11/45     dwalk=12/37
+
+-- A1  resolution of each invariant, and the NULL MODEL (primitive non-chains, N=184) 
+rung   invariant                                                   #fibers P[collide] %singleton
+I0     e(P) alone -- the control                                        54     0.0219       5.4%
+I1     #levels + level-size profile                                     88     0.0094      13.0%
+I2     I1 + multiplicity profile                                       111     0.0043      20.7%
+I3     I2 + exact spectrum with multiplicities (uniform-move w)        111     0.0043      20.7%
+I4     full (Q(P), m, move-count) fingerprint                          111     0.0043      20.7%
+
+READ THIS AS THE NULL MODEL.  '%%singleton' is the fraction of ALL posets in
+the population that are already alone in their fiber.  An extremal poset being
+alone in its fiber carries information only to the extent that this number is
+below 100%.
+
+-- A2  are the extremal / near-extremal posets ISOLATED, and are their fibers PURE? 
+EXTREMAL = delta = 5/14 (1 posets).  NEAR = delta <= 5/13 (3 posets).
+rung   extremal alone baseline alone delta-range in extremal fibers
+I0            0/1               5.4%               [5/14 , 3/7]
+I1            1/1              13.0%              [5/14 , 5/14]
+I2            1/1              20.7%              [5/14 , 5/14]
+I3            1/1              20.7%              [5/14 , 5/14]
+I4            1/1              20.7%              [5/14 , 5/14]
+
+A fiber whose delta-range is a single point would mean the invariant PINS delta
+on that fiber.  A wide range means posets the invariant cannot tell apart have
+different balance -- i.e. the invariant provably cannot detect delta.
+
+-- A3  WITNESSES: pairs the finest invariant (I4) cannot separate but delta can 
+NONE: at n=6 every I4-fiber has constant delta.
+(That does not mean I4 determines delta -- it means no counterexample to
+ that is visible at this size.  See the fiber sizes in A1.)
+
+I4 non-singleton fibers: 73 (so I4 is NOT a complete invariant of the poset here)
+
+-- A4  does any invariant PREDICT delta?  rank correlation + permutation null 
+scalar                  rho    perm p  rho|e(P)   meaning
+e(P)                  0.400    0.0005       n/a   linear-extension count (the axis STATE already tracks)
+nlev                  0.374    0.0005     0.079   #commitment levels = #acyclic-quotient partitions
+nlev_pos              0.379    0.0005    -0.068   #levels carrying nonzero multiplicity
+nmoves                0.403    0.0005    -0.094   #P-compatible moves (faces of the order cone)
+maxmult               0.518    0.0005     0.075   largest multiplicity
+lambda_2             -0.139    0.0565     0.075   2nd eigenvalue, uniform-move weight (exact)
+gap                   0.139    0.0565    -0.075   1 - lambda_2
+s_max                -0.139    0.0565     0.075   max over incomp pairs of Pr[move does not separate]
+delta_walk            0.975    0.0005     0.849   the action's own balance constant (face-side delta)
+signimb              -0.599    0.0005    -0.078   |sign imbalance| of P
+width                 0.508    0.0005     0.046   largest antichain (structural control)
+height               -0.376    0.0005    -0.137   longest chain (structural control)
+nlev/e               -0.415    0.0005     0.078   levels per linear extension
+
+rho    = Spearman correlation with delta over the 184 posets.
+perm p = two-sided permutation p-value, 2000 reps, seed 20260730 (1/2001 is the floor).
+rho|e  = the SAME correlation computed within groups of equal e(P) and pooled,
+         i.e. after removing everything explainable by the linear-extension
+         count.  A face-side invariant earns its keep only here.
+
+-- A5  one-sided SEARCH-SPACE constraints: 'a counterexample must have s <= t' 
+For each scalar, t = the extreme value over the EXTREMAL posets, and the
+fraction of the population satisfying the resulting one-sided bound.  A
+fraction near 1 means the condition is vacuous; near 0 means it is a real
+constraint on the search space (valid as a heuristic only -- the extremal
+posets are a PROXY for counterexamples, which do not exist at these sizes).
+scalar              t (max ext)    frac s<=t  direction
+e(P)                         14        10.9%     s <= t
+nlev                         94        11.4%     s <= t
+nlev_pos                     14        10.9%     s <= t
+nmoves                      180         8.7%     s <= t
+maxmult                       1        12.0%     s <= t
+lambda_2                  11/45        31.5%     s >= t
+gap                       34/45        31.5%     s <= t
+s_max                     11/45        31.5%     s >= t
+delta_walk                12/37         0.5%     s <= t
+signimb                       0        73.4%     s <= t
+width                         2        12.0%     s <= t
+height                        3        72.3%     s >= t
+nlev/e                     47/7         9.8%     s >= t
+
+==============================================================================
+(a-bis) THE PER-PAIR EXPERIMENT at n = 6
+==============================================================================
+delta(P)     = max over incomparable pairs of  min(p, 1-p),  p from L(P).
+lambda_2(P)  = max over incomparable pairs of  s(x,y) = Pr[a uniform move
+               leaves the pair in one block]   (proved in (b), checked below).
+The action also has its own pair marginal pi(x<y) = q(x<y)/(q(x<y)+q(y<x)).
+If the action detected balance, min(pi,1-pi) would track min(p,1-p).
+
+-- A6  correlation over ALL 2195 incomparable pairs of ALL 317 non-chain posets 
+min(p,1-p)  vs  min(pi,1-pi)   [the action's own balance]:  rho = 0.9945  p = 0.0005
+min(p,1-p)  vs  s(x,y)         [non-separation mass]     :  rho = 0.5527  p = 0.0005
+pairs where the two balances are EQUAL: 717 of 2195 (32.7%)
+|min(p,1-p) - min(pi,1-pi)|: mean 0.0094, max 0.0439
+the pair attaining delta = the pair attaining lambda_2: 150 of 317 posets (47.3%)
+
+A poset with k incomparable pairs would agree by chance about 1/k of the time;
+the mean 1/k over this population is 0.183.
+
+==============================================================================
+(a) DETECTION at n = 7
+==============================================================================
+population: 2045 posets up to isomorphism; 2044 non-chains (chains excluded: delta undefined); 1351 of those primitive (incomparability graph connected = can be a MINIMAL counterexample)
+
+-- delta distribution over all non-chains ------------------------------------
+min delta = 1/3   (conjecture asserts >= 1/3; TIGHT)
+distinct delta values (lowest 6): 1/3 x8, 5/14 x2, 14/39 x1, 9/25 x1, 4/11 x3, 3/8 x3
+EXTREMAL set (delta = min): 8 posets
+    0<1 0<2 1<3 2<4 2<5 3<4 3<5 4<6    e=9     nlev=165  lam2=1/4       dwalk=-
+    0<1 0<2 1<3 2<4 3<4 4<5 5<6        e=3     nlev=108  lam2=1/4       dwalk=-
+    0<1 1<2 1<3 2<4 3<5 4<5 5<6        e=3     nlev=108  lam2=1/4       dwalk=-
+    0<1 1<2 2<3 2<4 3<5 4<6 5<6        e=3     nlev=108  lam2=1/4       dwalk=-
+    0<1 1<2 2<3 3<4 3<5 4<6            e=3     nlev=96   lam2=1/4       dwalk=-
+    0<2 1<3 1<4 2<3 2<4 3<5 4<6 5<6    e=9     nlev=165  lam2=1/4       dwalk=-
+    0<2 1<3 2<3 3<4 3<5 4<6            e=9     nlev=144  lam2=1/4       dwalk=-
+    0<2 1<3 2<3 3<4 4<5 5<6            e=3     nlev=96   lam2=1/4       dwalk=-
+
+-- delta distribution over primitive non-chains ------------------------------
+min delta = 14/39   (conjecture asserts >= 1/3; slack)
+distinct delta values (lowest 6): 14/39 x1, 9/25 x1, 8/21 x2, 23/60 x1, 9/23 x2, 11/28 x2
+EXTREMAL set (delta = min): 1 posets
+    0<2 0<4 1<3 1<6 2<3 2<6 3<5 4<5    e=39    nlev=317  lam2=5/24      dwalk=-
+
+-- A1  resolution of each invariant, and the NULL MODEL (primitive non-chains, N=1351) 
+rung   invariant                                                   #fibers P[collide] %singleton
+I0     e(P) alone -- the control                                       214     0.0079       1.2%
+I1     #levels + level-size profile                                    625     0.0011       5.1%
+I2     I1 + multiplicity profile                                       722     0.0007       7.3%
+I3     I2 + exact spectrum with multiplicities (uniform-move w)        722     0.0007       7.3%
+I4     full (Q(P), m, move-count) fingerprint                          725     0.0007       7.3%
+
+READ THIS AS THE NULL MODEL.  '%%singleton' is the fraction of ALL posets in
+the population that are already alone in their fiber.  An extremal poset being
+alone in its fiber carries information only to the extent that this number is
+below 100%.
+
+-- A2  are the extremal / near-extremal posets ISOLATED, and are their fibers PURE? 
+EXTREMAL = delta = 14/39 (1 posets).  NEAR = delta <= 9/25 (2 posets).
+rung   extremal alone baseline alone delta-range in extremal fibers
+I0            0/1               1.2%             [14/39 , 6/13]
+I1            1/1               5.1%            [14/39 , 14/39]
+I2            1/1               7.3%            [14/39 , 14/39]
+I3            1/1               7.3%            [14/39 , 14/39]
+I4            1/1               7.3%            [14/39 , 14/39]
+
+A fiber whose delta-range is a single point would mean the invariant PINS delta
+on that fiber.  A wide range means posets the invariant cannot tell apart have
+different balance -- i.e. the invariant provably cannot detect delta.
+
+-- A3  WITNESSES: pairs the finest invariant (I4) cannot separate but delta can 
+NONE: at n=7 every I4-fiber has constant delta.
+(That does not mean I4 determines delta -- it means no counterexample to
+ that is visible at this size.  See the fiber sizes in A1.)
+
+I4 non-singleton fibers: 626 (so I4 is NOT a complete invariant of the poset here)
+
+-- A4  does any invariant PREDICT delta?  rank correlation + permutation null 
+scalar                  rho    perm p  rho|e(P)   meaning
+e(P)                  0.328    0.0005       n/a   linear-extension count (the axis STATE already tracks)
+nlev                  0.298    0.0005    -0.092   #commitment levels = #acyclic-quotient partitions
+nlev_pos              0.292    0.0005    -0.241   #levels carrying nonzero multiplicity
+nmoves                0.323    0.0005    -0.014   #P-compatible moves (faces of the order cone)
+maxmult               0.463    0.0005     0.223   largest multiplicity
+lambda_2             -0.020    0.4268     0.113   2nd eigenvalue, uniform-move weight (exact)
+gap                   0.020    0.4268    -0.113   1 - lambda_2
+s_max                -0.020    0.4268     0.113   max over incomp pairs of Pr[move does not separate]
+delta_walk              n/a                       the action's own balance constant (face-side delta)
+signimb              -0.635    0.0005    -0.278   |sign imbalance| of P
+width                 0.459    0.0005     0.207   largest antichain (structural control)
+height               -0.347    0.0005    -0.075   longest chain (structural control)
+nlev/e               -0.343    0.0005    -0.125   levels per linear extension
+
+rho    = Spearman correlation with delta over the 1351 posets.
+perm p = two-sided permutation p-value, 2000 reps, seed 20260730 (1/2001 is the floor).
+rho|e  = the SAME correlation computed within groups of equal e(P) and pooled,
+         i.e. after removing everything explainable by the linear-extension
+         count.  A face-side invariant earns its keep only here.
+
+-- A5  one-sided SEARCH-SPACE constraints: 'a counterexample must have s <= t' 
+For each scalar, t = the extreme value over the EXTREMAL posets, and the
+fraction of the population satisfying the resulting one-sided bound.  A
+fraction near 1 means the condition is vacuous; near 0 means it is a real
+constraint on the search space (valid as a heuristic only -- the extremal
+posets are a PROXY for counterexamples, which do not exist at these sizes).
+scalar              t (max ext)    frac s<=t  direction
+e(P)                         39        15.1%     s <= t
+nlev                        317        19.2%     s <= t
+nlev_pos                     33        14.7%     s <= t
+nmoves                      768        14.7%     s <= t
+maxmult                       2        40.6%     s <= t
+lambda_2                   5/24        37.9%     s <= t
+gap                       19/24        37.9%     s >= t
+s_max                      5/24        37.9%     s <= t
+signimb                       1        31.2%     s >= t
+width                         3        55.3%     s <= t
+height                        4        30.5%     s >= t
+nlev/e                   317/39        13.6%     s >= t
+
+==============================================================================
+SECTION 7  THE ISOPERIMETRIC QUESTION -- stated as a question, with the
+==============================================================================
+            argument actually available, and its gap named.
+
+THE QUESTION.  IF a counterexample P exists, its uniform measure on L(P) has
+E[inv(L,L*)] < |Inc(P)|/3, while being supported on all e(P) chambers of the
+adjacent-transposition graph, whose degree is at most n-1.  Does 'most of the
+mass in a small inversion-ball, but spread over many chambers of a
+bounded-degree graph' force a contradiction?
+
+THE ARGUMENT I ACTUALLY HAVE, AND IT IS NOT ENOUGH.  Unconditionally, only
+Markov applies: Pr[inv >= t |Inc|/3] <= 1/t, so at least half the mass lies
+within inv < 2|Inc|/3.  With |Inc| <= n(n-1)/2 that radius is up to n(n-1)/3,
+which is 2/3 of the maximum possible inversion count -- not a small ball.  The
+count of permutations with fewer than that many inversions is a constant
+fraction of n!, so no counting contradiction follows.  Numbers on the actual
+population, to show the radius really is that loose:
+
+n    poset                             |Inc|/3     Markov r    Pr[inv < r]
+3    0<2                                   2/3          4/3              1
+3    (antichain)                             1            2            1/2
+4    0<1 0<2 1<3                           2/3          4/3              1
+4    (antichain)                             2            4            5/8
+5    0<1 0<2 1<3 2<4 3<4                   2/3          4/3              1
+5    (antichain)                          10/3         20/3         91/120
+6    0<1 0<2 1<3 2<4 3<4 4<5               2/3          4/3              1
+6    (antichain)                             5           10        551/720
+
+WHAT WOULD BE NEEDED, AND WHERE IT ALREADY LIVES.  To shrink the radius from
+Markov's 2|Inc|/3 to something like c|Inc| with c small, one needs a
+concentration inequality for inv(L,L*) under the linear-extension measure --
+the |Inc| pair-indicators are not independent, and their correlation structure
+is exactly the FKG/XYZ same-side-covariance obstruction already recorded in
+STATE.md as the (B-cov) half of the open (B) obligation.  So this question
+does not open a new route: it REDUCES to an obligation the ledger already
+carries as open.  It is written down here as a question with its gap named,
+and it is NOT offered as a route.
+
+==============================================================================
+SECTION 6  TREND: does the separation sharpen or wash out as n grows?
+==============================================================================
+n    population                  N    min d   I1 %sing   I3 %sing   I4 %sing
+3    all non-chains              4      1/3       0.0%      50.0%      50.0%
+4    primitive non-chains        7      2/5      14.3%      71.4%      71.4%
+5    primitive non-chains       31     4/11      16.1%      35.5%      35.5%
+6    primitive non-chains      184     5/14      13.0%      20.7%      20.7%
+7    primitive non-chains     1351    14/39       5.1%       7.3%       7.3%
+
+n     #extremal I4 collide    witnesses   argmax agree
+3             1          1            0             -
+4             1          1            0         86.7%
+5             1         10            0         66.1%
+6             1         73            0         47.3%
+7             1        626            0             -
+
+n     rho(delta,pi)   rho(delta,s)
+4            0.9957         0.2745
+5            0.9950         0.4481
+6            0.9945         0.5527
+
+AND THE TREND THAT MATTERS -- the ADDENDUM's concentration bound:
+n    min 3delta      min R     %pop R<1  slack min R
+3             1          1         0.0%       0.0000
+4             1          1         0.0%       0.0000
+5             1        4/5        17.7%       0.2000
+6             1        3/4        39.1%       0.2500
+7             1      24/35        60.3%       0.3143
+
+min 3delta is pinned at 1 (the conjecture is TIGHT and unviolated at every n
+reached).  min R falls away from 1 monotonically over the range, and the share
+of the population meeting the concentration bound rises.  The bound loosens
+as n grows; it does not sharpen.
+
+==============================================================================
+CONTROL STATUS
+==============================================================================
+all structural checks in (b) pass; run selftest.py for the instrument controls
