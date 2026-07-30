@@ -206,7 +206,7 @@ def positive_control_FP_homology(nmax):
 # --------------------------------------------------------------------------
 
 def claim1_pair(P, use_twist=True, use_relative=True, sign_fn=perm_sign,
-                perturb_edge=False, normalise=False):
+                perturb_edge=False, normalise=False, sign_mode="true"):
     """Return the pair (LHS, RHS) that claim (1) asserts to be equal:
 
         LHS = E . L^rel_top . E        (E = diag(sgn w), the orientation twist)
@@ -214,8 +214,12 @@ def claim1_pair(P, use_twist=True, use_relative=True, sign_fn=perm_sign,
 
     All the knobs exist so the negative controls can corrupt one ingredient at
     a time; the probe itself always runs with the defaults.
+
+    `sign_mode` corrupts the CONSTRUCTION of L^rel from the complex (the
+    simplicial signs of the boundary matrix); every other knob corrupts the
+    comparison or the target.  See NEGATIVE CONTROL 3.
     """
-    td = top_laplacians(P)
+    td = top_laplacians(P, sign_mode=sign_mode)
     les = td["les"]
     L = td["L_rel"] if use_relative else td["L_abs"]
     if use_twist:
@@ -349,6 +353,60 @@ def negative_control_identity(nmax):
           n_pass == len(ps))
 
 
+def negative_control_construction(nmax):
+    """NEGATIVE CONTROL 3 -- corrupt the CONSTRUCTION of the Laplacian.
+
+    Adopted from the mg-e0ce independent audit (finding F2, `audit_extra.py`
+    X3).  Of the five mutations in NEGATIVE CONTROL 2, M1 and M3 corrupt the
+    twist, M4 and M5 corrupt the target, and only M2 touches the construction
+    at all (it swaps which of the two Laplacians is built from the complex).
+    NONE of them perturbs the boundary matrix that both are built from -- and
+    NEGATIVE CONTROL 1, which looks as though it does, runs on the homology
+    path and never reaches top_laplacians.  This control closes that gap.
+
+    Two sign corruptions are run, and the difference between them is the point:
+
+      all-+1 signs  do NOT change either top Laplacian, so this corruption
+                    CANNOT fire here.  Reported, not hidden: it is why
+                    NEGATIVE CONTROL 1 was never a construction-side control.
+                    (The alternating sign is load-bearing for the homology of
+                    F(P), where NEGATIVE CONTROL 1 does fire -- just not for
+                    claims (1)-(3).)
+
+      facet-parity  flips the sign of every incidence of the odd-indexed
+                    facets.  This does change the off-diagonal part, and the
+                    identity test must reject it.
+
+    The true-sign build passes throughout: the instrument was never wrong, the
+    argument for trusting it was missing this control.
+    """
+    print("NEGATIVE CONTROL 3 -- corrupt the CONSTRUCTION of L^rel (mg-e0ce F2)")
+    ps = [P for n in range(2, nmax + 1) for P in all_posets(n)]
+    bites = [P for P in ps if len(linear_extensions(P)) >= 2]
+    n_true = sum(1 for P in ps if claim1_test(P, sign_mode="true") is True)
+    check("true simplicial signs: claim (1) holds on %d/%d posets" % (n_true, len(ps)),
+          n_true == len(ps))
+
+    plus_same = sum(1 for P in ps
+                    if mat_eq(claim1_pair(P, sign_mode="allplus")[0],
+                              claim1_pair(P)[0]))
+    plus_pass = sum(1 for P in ps if claim1_test(P, sign_mode="allplus") is True)
+    check("all-+1 signs leave both top Laplacians UNCHANGED on %d/%d posets, so "
+          "claim (1) still holds on %d -- this corruption cannot fire on the "
+          "construction (reported, not a pass)" % (plus_same, len(ps), plus_pass),
+          plus_same == len(ps) and plus_pass == len(ps))
+
+    par_app = [P for P in bites
+               if not mat_eq(claim1_pair(P, sign_mode="parity")[0],
+                             claim1_pair(P)[0])]
+    par_rej = sum(1 for P in par_app if not claim1_test(P, sign_mode="parity"))
+    check("facet-parity signs -- rejected on %d/%d posets with |L(P)| >= 2 where "
+          "the mutation bites (%d posets have |L(P)| = 1: a single facet, no "
+          "second column to flip against)"
+          % (par_rej, len(par_app), len(ps) - len(bites)),
+          par_rej == len(par_app) and len(par_app) == len(bites))
+
+
 def main():
     nmax_cheap = int(sys.argv[1]) if len(sys.argv) > 1 else 5
     positive_control_homology()
@@ -357,6 +415,7 @@ def main():
     positive_control_face_complex(min(nmax_cheap, 4))
     positive_control_FP_homology(min(nmax_cheap, 5))
     negative_control_identity(min(nmax_cheap, 5))
+    negative_control_construction(min(nmax_cheap, 5))
     print()
     if FAIL:
         print("CONTROLS FAILED: %d" % len(FAIL))

@@ -26,5 +26,9 @@ NEGATIVE CONTROL 2 -- the claim-(1) test must FAIL on corrupted inputs
   [PASS] M4 target Laplacian scaled by 2 -- rejected on 82/82 posets where the mutation bites (4 vacuous, on |L(P)| in [1])
   [PASS] M5 one edge deleted from the target graph -- rejected on 82/82 posets where the mutation bites (4 vacuous, on |L(P)| in [1])
   [PASS] uncorrupted claim-(1) test passes on 86/86 posets
+NEGATIVE CONTROL 3 -- corrupt the CONSTRUCTION of L^rel (mg-e0ce F2)
+  [PASS] true simplicial signs: claim (1) holds on 86/86 posets
+  [PASS] all-+1 signs leave both top Laplacians UNCHANGED on 86/86 posets, so claim (1) still holds on 86 -- this corruption cannot fire on the construction (reported, not a pass)
+  [PASS] facet-parity signs -- rejected on 82/82 posets with |L(P)| >= 2 where the mutation bites (4 posets have |L(P)| = 1: a single facet, no second column to flip against)
 
 ALL CONTROLS PASS

@@ -274,7 +274,7 @@ def facet_to_le(facet, n):
 # Simplicial chain complex with standard signs
 # --------------------------------------------------------------------------
 
-def boundary_matrix(faces_d, faces_dm1):
+def boundary_matrix(faces_d, faces_dm1, sign_mode="true"):
     """Standard simplicial boundary  d_d : C_d -> C_{d-1}.
 
     Faces are tuples of vertices in a fixed increasing order (here: increasing
@@ -283,15 +283,34 @@ def boundary_matrix(faces_d, faces_dm1):
 
     Returns a dict-of-dicts M[row][col] = coefficient, with rows indexed by
     faces_dm1 and columns by faces_d, plus the two index maps.
+
+    `sign_mode` exists ONLY so that a negative control can corrupt the
+    *construction* of the boundary matrix (mg-e0ce F2; NEGATIVE CONTROL 3 in
+    controls.py).  The probe itself always runs with "true".
+
+      "true"     the standard alternating sign (-1)^i.
+      "allplus"  every incidence +1.  Kept because it is the corruption that
+                 CANNOT fire on the top Laplacians -- see NEGATIVE CONTROL 3.
+      "parity"   (-1)^i times a global sign per column (facet), flipped on the
+                 odd-indexed columns.  This is the corruption that does fire.
     """
     row_idx = {f: i for i, f in enumerate(faces_dm1)}
     M = {}
     for j, f in enumerate(faces_d):
+        if sign_mode == "true":
+            col_sign = 1
+        elif sign_mode == "allplus":
+            col_sign = 1
+        elif sign_mode == "parity":
+            col_sign = 1 if j % 2 == 0 else -1
+        else:
+            raise ValueError("unknown sign_mode %r" % (sign_mode,))
         for i in range(len(f)):
             g = f[:i] + f[i + 1:]
             r = row_idx[g]
+            s = 1 if sign_mode == "allplus" else (-1) ** i * col_sign
             M.setdefault(r, {})
-            M[r][j] = M[r].get(j, 0) + (-1) ** i
+            M[r][j] = M[r].get(j, 0) + s
     return M, len(faces_dm1), len(faces_d)
 
 
@@ -318,7 +337,7 @@ def down_laplacian_from_boundary(M, nrows, ncols, allowed_rows=None):
 # The three objects the sketch's claims compare
 # --------------------------------------------------------------------------
 
-def top_laplacians(P):
+def top_laplacians(P, sign_mode="true"):
     """Top absolute and top relative Hodge Laplacians of F(P), plus bookkeeping.
 
     The top faces of F(P) are the facets = linear extensions (n-1 vertices,
@@ -329,6 +348,10 @@ def top_laplacians(P):
     (n-3)-faces contained in exactly one facet.  The relative complex
     C_*(F, dF) kills those ridges, so the relative top Laplacian is
     d_rel^T d_rel with the free rows dropped.
+
+    `sign_mode` is passed straight to boundary_matrix and exists only for
+    NEGATIVE CONTROL 3 (the construction-side control, mg-e0ce F2).  The probe
+    always runs with the default "true".
 
     Returns a dict.
     """
@@ -344,7 +367,7 @@ def top_laplacians(P):
             ridge_set.add(f[:i] + f[i + 1:])
     ridges = sorted(ridge_set)
 
-    M, nr, nc = boundary_matrix(facets, ridges)
+    M, nr, nc = boundary_matrix(facets, ridges, sign_mode=sign_mode)
     # which facets contain each ridge
     ridge_facets = {r: [] for r in range(nr)}
     for r, row in M.items():
