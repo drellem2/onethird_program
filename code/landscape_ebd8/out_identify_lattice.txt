@@ -1,0 +1,39 @@
+==============================================================================
+IDENTIFICATION CHECK: is AC(P) the order-congruence lattice O(P)?
+Predictions read off Jenca & Sarkoci, JCTA 122 (2014) 28-38
+(arXiv:1112.5782), and Koertesi-Radeleczki-Szilagyi, Math. Pannon.
+16 (2005) 39-55.  Nothing below is fitted.
+==============================================================================
+
+n    classes   connected   P2  mu = (-1)^(n-1) * spheres      P1 defs   P5 rank   P6 atoms 
+2    2         1           n/a (n<3)                          0 bad of 2 0 bad of 2 0 bad of 2
+3    5         3           0 bad of 5                         0 bad of 5 0 bad of 5 0 bad of 5
+4    16        10          0 bad of 16                        0 bad of 16 0 bad of 16 0 bad of 16
+5    63        44          0 bad of 63                        0 bad of 63 0 bad of 63 0 bad of 63
+6    318       238         0 bad of 318                       0 bad of 318 0 bad of 318 0 bad of 318
+
+P7 (meet = common refinement, i.e. closed under the Pi_n-meet):
+  n=2: 0 bad of 2
+  n=3: 0 bad of 5
+  n=4: 0 bad of 16
+  n=5: 0 bad of 63
+  n=6: 0 bad of 318
+
+P3 / P4 -- the two named degenerate ends (JS Ex. 3.5, Ex. 3.6)
+  n    |Pi_n|     antichain |AC|           chain |AC| (pred 2^(n-1))
+  2    2          2  = Pi_n OK             2  OK, all convex       
+  3    5          5  = Pi_n OK             4  OK, all convex       
+  4    15         15  = Pi_n OK            8  OK, all convex       
+  5    52         52  = Pi_n OK            16  OK, all convex      
+  6    203        203  = Pi_n OK           32  OK, all convex      
+
+P8 -- JS Example 3.7, P = B_2 (4-element Boolean lattice)
+  |AC(P)| by acyclic-quotient   = 11   (JS says 11)  OK
+  |O(P)|  by JS rho-cycle def   = 11                 OK
+  mu(0,1)                       = -2
+  spheres = |mu|                = 2   (JS says 2, dim n-3 = 1)  OK
+  e(P) = 2, connected = True
+
+==============================================================================
+TOTAL DISAGREEMENTS WITH THE PUBLISHED DESCRIPTION OF O(P): 0
+==============================================================================

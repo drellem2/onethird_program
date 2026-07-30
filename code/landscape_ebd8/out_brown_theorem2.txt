@@ -1,0 +1,54 @@
+==============================================================================
+IDENTIFICATION CHECK 2: is the programme's spectral result
+BROWN'S THEOREM 2 (walks on a CONVEX SET of chambers)?
+Brown, J. Theoret. Probab. 13 (2000) 871-938, arXiv:math/0006145.
+The closed form m_X = prod_B (|B|-1)! * [every block an antichain]
+is read off Brown; the programme's m_X is solved from its own
+counting identity.  Nothing is fitted.
+==============================================================================
+
+n    classes   levels    B1 closed form = solved B2 support = M_0 B3 total = |L(P)|
+2    2         4         0 bad of 2             0 bad of 2       0 bad of 2      
+3    5         24        0 bad of 5             0 bad of 5       0 bad of 5      
+4    16        206       0 bad of 16            0 bad of 16      0 bad of 16     
+5    63        2353      0 bad of 63            0 bad of 63      0 bad of 63     
+6    318       37029     0 bad of 318           0 bad of 318     0 bad of 318    
+
+B4 -- the antichain specialisation (the repo's section 7 formula)
+  m_X = prod_B (|B|-1)!  on every partition, and M_0 = Pi_n
+  n    |Pi_n|    sum m_X        n! ?            
+  2    2         2 OK           2  closed form agrees
+  3    5         6 OK           6  closed form agrees
+  4    15        24 OK          24  closed form agrees
+  5    52        120 OK         120  closed form agrees
+  6    203       720 OK         720  closed form agrees
+
+The worked example P = {a<b, c<d}: 14 levels, 6 linear extensions
+  (Brown section 4.1 illustrates Theorem 2 on exactly this configuration:
+   braid arrangement in R^4, U given by two inequalities, six chambers.)
+
+  level          programme    Brown |mu|   blocks     in M_0  
+  abcd           0            0            4          no      
+  abc|d          0            0            3x1        no      
+  abd|c          0            0            3x1        no      
+  ab|cd          0            0            2x2        no      
+  ab|c|d         0            0            2x1x1      no      
+  acd|b          0            0            3x1        no      
+  ac|bd          1            1            2x2        yes     
+  ac|b|d         1            1            2x1x1      yes     
+  a|bcd          0            0            1x3        no      
+  a|bc|d         1            1            1x2x1      yes     
+  ad|b|c         1            1            2x1x1      yes     
+  a|bd|c         1            1            1x2x1      yes     
+  a|b|cd         0            0            1x1x2      no      
+  a|b|c|d        1            1            1x1x1x1    yes     
+
+  sum of multiplicities = 6   (|L(P)| = 6)  OK
+  Brown's six chambers 1234,1324,1342,3124,3142,3412 vs ours: 6 states
+
+==============================================================================
+If every column reads 0 bad, the programme's multiplicity rule is
+Brown's Theorem 2 specialised to the order cone, and Brown's closed
+form is STRICTLY MORE INFORMATIVE than the triangular solve: it
+names the spectrum-carrying levels outright.
+==============================================================================
