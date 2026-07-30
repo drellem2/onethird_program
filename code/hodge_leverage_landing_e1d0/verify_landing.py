@@ -16,10 +16,30 @@ itself, about another document, or about a ticket -- and each was wrong.
       mg-a2bd edited that very paragraph, inserted a sentence asserting the
       row was UNCHANGED, left the false sentence standing, and in the SAME
       commit more than doubled the mismatch A5 reports.  Measured from git at
-      every commit in the chain, AND MEASURED AGAIN AT HEAD -- because the
-      `STATE.md` restructure (mg-34bf, `57f962f`) moved the row's history out
-      to a per-row file, so the char-gap the finding was OPENED on no longer
-      measures what it measured.  A reader of A5 must meet the CURRENT gap.
+      every commit in the chain, AND MEASURED AGAIN IN THE WORKING TREE --
+      because the `STATE.md` restructure (mg-34bf, `57f962f`) moved the row's
+      history out to a per-row file, so the char-gap the finding was OPENED on
+      no longer measures what it measured.  A reader of A5 must meet the
+      CURRENT gap.
+
+      ⚠️ CORRECTED 2026-07-30 (mg-f922 findings B/C/E/F, landed by mg-8e30).
+      THE LIVE ROW OF THIS TABLE READS THE WORKING TREE, NOT `HEAD`, AND THAT
+      IS THE WHOLE POINT.  As first written it read the cell from `git show
+      HEAD:STATE.md` and the row history from the tree, and it printed HEAD's
+      sha.  Run before a commit that edits those files, it therefore measured
+      the PRE-EDIT cell -- and mg-e1d0, the landing this instrument ships
+      with, wrote the pre-edit figure (−875) into three documents in the same
+      commit that added +1 630 characters to the cell being measured.  The
+      figure was false the moment it was committed.
+
+      THE GENERAL SHAPE, because the numbers are the smaller half of it:
+      WHEN A COMMIT REPORTS A MEASUREMENT OF SOMETHING THAT COMMIT ALSO
+      MODIFIES, THE MEASUREMENT MUST BE TAKEN FROM THE POST-COMMIT STATE, AND
+      THE DOCUMENT MUST SAY WHICH SIDE OF THE EDIT IT IS ON.  Reading the
+      working tree is how an instrument run before `git commit` sees the
+      post-commit state; reading `HEAD` is how it sees the parent's.  The
+      GATE below no longer string-matches a frozen figure either: it FORMATS
+      what it has just measured and requires the documents to carry that.
 
   T2  TWO SITE COUNTS IN ONE COMMIT (F2).  §6's disposition table is counted
       row by row from the tree; §14's count word is read out of §14.  Neither
@@ -58,6 +78,8 @@ HIST = "docs/state-history/attempt-mg-a3d4.md"
 
 STRIKE = "1e61031"          # mg-a2bd, the audited commit
 RESTRUCTURE = "57f962f"     # mg-34bf, the STATE.md restructure
+LANDING = "bbe83b5"         # mg-e1d0, the commit this instrument shipped in
+TREE = None                 # sentinel: the WORKING TREE, never a sha
 
 RESULTS = []
 
@@ -109,6 +131,15 @@ def head(title):
     print("-" * len(title))
 
 
+def doc_num(v, signed=False):
+    """A number in the format the documents write it: space thousands
+    separator, U+2212 for a negative sign.  Used by the GATE to FORMAT what it
+    has just measured and then look for that in the prose -- never to match a
+    figure frozen into the source of this file."""
+    s = f"{v:+,}" if signed else f"{v:,}"
+    return s.replace(",", " ").replace("-", "−")
+
+
 # --------------------------------------------------------------------------
 # T1 -- THE ENLARGEMENT
 # --------------------------------------------------------------------------
@@ -125,24 +156,34 @@ whether the enlargement was disclosed anywhere.
              (STRIKE, "after  mg-a2bd"),
              (f"{RESTRUCTURE}^", "before mg-34bf restructure"),
              (RESTRUCTURE, "after  mg-34bf restructure"),
-             ("HEAD", "HEAD (this landing's parent)")]
+             (f"{LANDING}^", "before mg-e1d0 (this instrument's landing)"),
+             (LANDING, "at     mg-e1d0 -- the commit that printed the row ABOVE as current"),
+             (TREE, "the WORKING TREE -- this run's own side of the edit")]
 
-    print("  commit-by-commit, both rows located BY CONTENT, not by line number:")
+    print("  commit-by-commit, all three files located BY CONTENT, not by line")
+    print("  number.  The last row is the TREE and is deliberately NOT a sha: a")
+    print("  transcript that embeds the commit it happened to be run at can never")
+    print("  regenerate at any later one, and reading the tree rather than HEAD is")
+    print("  what makes a pre-commit run report the POST-commit state.")
     print()
-    print(f"    {'commit':<10} {'STATE.md row':>13} {'§14 copy':>10} {'gap':>10}  when")
+    print(f"    {'commit':<10} {'STATE.md row':>13} {'row history':>12} "
+          f"{'§14 copy':>10} {'gap':>10}  when")
     rows = {}
     for ref, label in chain:
-        st = blob(ref, STATE)
-        dl = blob(ref, DELIV)
-        a = len(state_row(st))
-        b = len(deliv_row(dl))
-        sha = git("rev-parse", "--short", ref).strip()
-        rows[ref] = (a, b)
-        print(f"    {sha:<10} {a:>13,} {b:>10,} {a - b:>+10,}  {label}")
+        if ref is TREE:
+            st, dl, hs, name = tree(STATE), tree(DELIV), tree(HIST), "tree"
+        else:
+            st, dl, hs = blob(ref, STATE), blob(ref, DELIV), blob(ref, HIST)
+            name = git("rev-parse", "--short", ref).strip()
+        a, b = len(state_row(st)), len(deliv_row(dl))
+        h = len(hs) if hs is not None else None
+        rows[ref] = (a, b, h)
+        hcol = f"{h:>12,}" if h is not None else f"{'—':>12}"
+        print(f"    {name:<10} {a:>13,} {hcol} {b:>10,} {a - b:>+10,}  {label}")
     print()
 
-    a0, b0 = rows[f"{STRIKE}^"]
-    a1, b1 = rows[STRIKE]
+    a0, b0, _ = rows[f"{STRIKE}^"]
+    a1, b1, _ = rows[STRIKE]
     record(None,
            f"mg-a2bd: STATE.md row {a0:,} -> {a1:,} chars (+{a1 - a0:,}); "
            f"§14 copy {b0:,} -> {b1:,} (+{b1 - b0:,})")
@@ -180,22 +221,42 @@ whether the enlargement was disclosed anywhere.
 
     # ---- and now the CURRENT state, which is not the state A5 was opened on.
     print()
-    print("  THE CURRENT GAP -- and the metric A5 was opened on no longer means")
-    print("  what it meant, which is itself the thing a reader must be told:")
+    print("  THE CURRENT GAP, MEASURED IN THE TREE THIS RUN IS PART OF -- and the")
+    print("  metric A5 was opened on no longer means what it meant, which is")
+    print("  itself the thing a reader must be told:")
     print()
-    aH, bH = rows["HEAD"]
+    aH, bH, histlen = rows[TREE]
     hist = tree(HIST)
     print(f"    STATE.md row cell                        : {aH:>7,} chars")
-    print(f"    relocated per-row history ({os.path.basename(HIST)}) : {len(hist):>7,} chars")
-    print(f"    STATE.md row, cell + relocated history    : {aH + len(hist):>7,} chars")
+    print(f"    relocated per-row history ({os.path.basename(HIST)}) : {histlen:>7,} chars")
+    print(f"    STATE.md row, cell + relocated history    : {aH + histlen:>7,} chars")
     print(f"    §14 copy (frozen since mg-a806)           : {bH:>7,} chars")
     print(f"    gap, cell only                            : {aH - bH:>+7,} chars")
-    print(f"    gap, cell + relocated history             : {aH + len(hist) - bH:>+7,} chars")
+    print(f"    gap, cell + relocated history             : {aH + histlen - bH:>+7,} chars")
     print()
-    record(aH < bH,
-           f"the SIGN of the cell-only gap has flipped since A5 was opened "
-           f"({a0 - b0:+,} -> {aH - bH:+,}): the restructure moved history out, "
-           "so a char count no longer measures the clause mismatch")
+
+    # ⚠️ This line used to read "the SIGN of the cell-only gap has FLIPPED",
+    # scored as `aH < bH`, and the three documents printed the −875 it went
+    # with.  Both were true at `bbe83b5^` and false at `bbe83b5`, because
+    # `bbe83b5` added chars to the cell it was measuring.  The durable claim is
+    # not the sign at any one commit -- it is that the char gap moves in BOTH
+    # directions while the clause mismatch only grows, which is exactly why a
+    # char count cannot stand in for it.  (mg-f922 B/C, landed by mg-8e30.)
+    gaps = [rows[r][0] - rows[r][1]
+            for r in (f"{STRIKE}^", STRIKE, RESTRUCTURE, f"{LANDING}^", LANDING, TREE)]
+    deltas = [g2 - g1 for g1, g2 in zip(gaps, gaps[1:])]
+    record(any(d < 0 for d in deltas) and any(d > 0 for d in deltas),
+           "the cell-only gap is NON-MONOTONE across the chain ("
+           + " -> ".join(f"{g:+,}" for g in gaps)
+           + ") while the clause mismatch below only grew -- so a char count "
+             "does not measure it, in EITHER direction")
+    grew = rows[LANDING][0] - rows[f"{LANDING}^"][0]
+    record(rows[f"{LANDING}^"][0] - rows[f"{LANDING}^"][1] == -875 and grew > 0,
+           f"and the −875 this instrument's own landing printed as CURRENT is "
+           f"the figure at its PARENT: `{LANDING}` added {grew:+,} chars to the "
+           "cell it was measuring, so the figure was stale in the commit that "
+           "published it -- the defect this instrument exists to check for, "
+           "one generation on (mg-f922 B/C)")
     record(None,
            "so this landing records the CLAUSE mismatch, measured below, and "
            "records the char history as history rather than as the live figure")
@@ -255,12 +316,36 @@ whether the enlargement was disclosed anywhere.
            "GATE: the enlargement 2 928 -> 6 069 is stated at BOTH the §14 "
            "paragraph and the place A5 is recorded (the STATE.md row)")
     flat_h_now = " ".join(tree(HIST).split())
-    record("−875" in flat_s_now and "row history H8" in flat_s_now
-           and "+9 608" in flat_h_now and "−875" in flat_h_now
-           and "+9 608" in flat_d_now,
-           "GATE: the CURRENT figure is reachable from every place A5 is "
-           "recorded -- the row states the flipped gap (−875) and cites H8, H8 "
-           "carries both figures, §14 carries both")
+
+    # THE FIGURE GATE.  Formatted from the measurement three lines up, never
+    # from a constant in this file.  The version this replaced looked for the
+    # literal strings "−875" and "+9 608", so it went on passing after the very
+    # commit it was gating made both of them false (mg-f922 B/C).  A gate built
+    # out of what it has just measured cannot do that: change the cell and the
+    # needle changes with it.
+    gap_now = doc_num(aH - bH, signed=True)
+    both_now = doc_num(aH + histlen - bH, signed=True)
+    cell_now, hist_now = doc_num(aH), doc_num(histlen)
+    # Anchored on the ROW, not on STATE.md as a whole: A5 is recorded in the
+    # row, and a figure that satisfies the gate from somewhere else in the file
+    # is not a figure a reader of A5 meets.
+    flat_row_now = " ".join(state_row(tree(STATE)).split())
+    where = {"the STATE.md row": flat_row_now, "§14": flat_d_now, "H8": flat_h_now}
+    hits = {n: gap_now in t for n, t in where.items()}
+    record(all(hits.values()) and "row history H8" in flat_row_now,
+           f"GATE: the CURRENT cell-only gap, FORMATTED FROM THIS RUN'S OWN "
+           f"MEASUREMENT ({gap_now}), is stated at every place A5 is recorded -- "
+           + ", ".join(f"{n} {'yes' if v else 'NO'}" for n, v in hits.items()))
+    record(cell_now in flat_row_now and hist_now in flat_h_now
+           and both_now in flat_row_now and both_now in flat_h_now
+           and both_now in flat_d_now,
+           f"GATE: and so are the parts it is built from -- cell {cell_now}, "
+           f"relocated history {hist_now}, cell + history {both_now}")
+    side = "measured AFTER this commit's own edit"
+    record(all(side in t for t in where.values()),
+           f"GATE: and every site says WHICH SIDE OF THE EDIT its figure is on "
+           f"-- '{side}' at all three.  A measurement of something the same "
+           "commit modifies is only checkable from the post-commit state")
     record("A5 itself is still NOT landed" in flat_s_now
            and "remains pm-onethird's to size and is NOT done here" in flat_d_now,
            "GATE: and both say A5 is MARKED, not landed -- marking a finding and "
@@ -478,6 +563,62 @@ def t4():
            "items, whether the count is written four or six")
 
 
+# --------------------------------------------------------------------------
+# NEGATIVE CONTROL -- can the new figure gate fail?
+# --------------------------------------------------------------------------
+def negative_control():
+    """The gate this replaced could NOT fail on the thing it existed to catch:
+    it matched the literal string `−875`, so the commit that made −875 false
+    left it passing.  A replacement gate is worth nothing unless it is shown to
+    fire, so each mutation below is applied IN MEMORY with its expected verdict
+    written down first.  Nothing on disk is touched."""
+    head("NEGATIVE CONTROL -- THE FIGURE GATE, MUTATED")
+    print("""The gate this replaced string-matched `−875` and therefore survived the
+commit that falsified it.  This one formats what it has just measured, so a
+change to the measured object must break it.  Four mutations, verdicts written
+before the run.  Nothing is written to disk.
+""")
+    a = len(state_row(tree(STATE)))
+    b = len(deliv_row(tree(DELIV)))
+    h = len(tree(HIST))
+    docs = {"the STATE.md row": " ".join(state_row(tree(STATE)).split()),
+            "§14": " ".join(tree(DELIV).split()),
+            "H8": " ".join(tree(HIST).split())}
+
+    def gate(cell, hist, texts):
+        """The live gate, parameterised on the measurement and the documents."""
+        gap = doc_num(cell - b, signed=True)
+        both = doc_num(cell + hist - b, signed=True)
+        return (all(gap in t for t in texts.values())
+                and doc_num(cell) in texts["the STATE.md row"]
+                and doc_num(hist) in texts["H8"]
+                and both in texts["the STATE.md row"] and both in texts["H8"])
+
+    cases = [
+        ("M1  the cell grows by one char after the figure was taken",
+         "GATE FIRES", lambda: gate(a + 1, h, docs)),
+        ("M2  the row history grows (cell+history figure goes stale)",
+         "GATE FIRES", lambda: gate(a, h + 1, docs)),
+        ("M3  one site drops the gap figure (H8)",
+         "GATE FIRES", lambda: gate(a, h, dict(docs, **{"H8": docs["H8"].replace(doc_num(a - b, signed=True), "")}))),
+        ("M4  unmutated -- the tree as it stands",
+         "gate passes", lambda: gate(a, h, docs)),
+    ]
+    print(f"    {'mutation':<58}{'predicted':<20}{'observed'}")
+    ok = True
+    for name, predicted, fn in cases:
+        fired = not fn()
+        observed = "GATE FIRES" if fired else "gate passes"
+        agree = observed == predicted
+        ok = ok and agree
+        print(f"    {name:<58}{predicted:<20}{observed}"
+              f"{'' if agree else '   <-- DISAGREES'}")
+    print()
+    record(ok, "4 of 4 mutations moved the gate as predicted -- the figure gate "
+               "is falsifiable by exactly the edit that defeated the one it "
+               "replaces (a change to the object being measured)")
+
+
 def main():
     print("mg-e1d0 -- RE-MEASURING THIS LANDING'S OWN CLAIMS")
     print("=" * 78)
@@ -487,16 +628,20 @@ from a disjoint route.  What is measured here is the four DOCUMENTARY findings,
 each of which is a claim a document makes about itself, another document, or a
 ticket.  All four are measured from git and the tree.
 
-Note on regeneration, stated because it is the same caveat mg-7d5a recorded:
-T1's HEAD row, T2's tree line and T4 measure the LIVE tree, so they describe
-this landing's PARENT commit.  After this landing they will report the repaired
-state instead -- which is the point of measuring them rather than freezing the
-numbers into prose.""")
+Note on regeneration, stated because it is the same caveat mg-7d5a recorded,
+and CORRECTED 2026-07-30 (mg-f922 B/C/E/F, landed by mg-8e30): T1's live row,
+T2's tree line and T4 measure the WORKING TREE, so they describe the state the
+commit containing this run LEAVES BEHIND -- not `HEAD`, which during a run
+taken before `git commit` is that commit's PARENT.  That distinction is the
+whole of mg-f922 B: the version of this file that shipped with mg-e1d0 read
+`HEAD`, so it published the pre-edit figure as the current one in the commit
+that made it stale.  Nothing here embeds a sha of its own.""")
 
     t1()
     t2()
     t3()
     t4()
+    negative_control()
 
     head("BOTTOM LINE")
     bad = [t for t, ok in RESULTS if ok is False]

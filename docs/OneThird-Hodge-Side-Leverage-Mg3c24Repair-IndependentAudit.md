@@ -48,6 +48,35 @@ committed transcript recording **0**.
 **0 BROKEN mathematics. 0 over-correction. Every finding is a claim a document makes about itself —
 which is what mg-3c24 said of its own seven, and is now true of its repair.**
 
+> ⚠️ **ANNOTATION ADDED 2026-07-30 BY mg-8e30, landing findings B, C, E and F of this audit.**
+> Added in place, in the form `1e61031` used on mg-86a3's audit document, so that a reader who
+> arrives at a finding meets its disposition — which is this audit's own finding **A**, applied to
+> itself. **Nothing in this document is rewritten and no verdict is softened; the findings below
+> stand exactly as filed.**
+>
+> | | disposition |
+> |---|---|
+> | **B** | **LANDED.** All three sites restate the cell-only gap from the **post-commit** state and say so at the figure. |
+> | **C** | **LANDED.** The *"flipped sign"* / *"SIGN FLIPPED"* claim is **withdrawn** and is **not** replaced by the opposite claim — the correction restores no character-based claim in either direction. |
+> | **E** | **LANDED.** `verify_landing.py` exits **0** with **0 refuted** and `out_verify.txt` is regenerated against the tree it ships in. |
+> | **F** | **LANDED.** The transcript no longer embeds a sha: T1's live row reads the **working tree** and prints the word `tree`. `run_all.sh` redirects instead of piping into `tee`, captures the verifier's status and exits with it. |
+> | **G** | **LANDED incidentally to B/C.** T1's chain table now carries a **row-history column** at every commit, so every figure H8 states is printed by the transcript H8 cites. |
+> | **A, D, H** | **NOT landed. Open.** mg-8e30's brief is B/C plus the instrument and the general rule; A, D and H are named here so they are not read as closed. |
+>
+> **Two things measured rather than asserted, because this annotation would otherwise be the
+> compliance claim this audit distrusts.** (1) The general rule is in `STATE.md` Appendix A as
+> ***"A COMMIT THAT MEASURES SOMETHING IT ALSO MODIFIES MUST PUBLISH THE POST-COMMIT MEASUREMENT"***,
+> and the figure GATE now **formats what it has just measured** and looks for that, rather than
+> string-matching a frozen `−875`; a four-mutation negative control in the same file shows the new
+> gate fires on exactly the edit that defeated the old one. (2) **This audit's own instrument still
+> reports `F-B` and `F-C` when re-run, and that is expected rather than a repair that did not
+> take** — `F-B` fires on `gap ≠ −875`, which is true of every tree from here on, and its
+> site list is built by string-matching the struck wording, which now survives only inside the
+> correction's **marked quotation** at §14 and as the historical figure in H8. That is near miss
+> **(2)** of this audit's own §9, one generation on. `code/hodge_leverage_audit_f922/` is left
+> **untouched** — it is the frozen record of what it audited, and its `out_audit.txt` is not
+> regenerated.
+
 ---
 
 ## §2 — What could not be broken

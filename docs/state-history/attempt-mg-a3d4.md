@@ -95,7 +95,9 @@ which says the one-big-block face is the only one that can attain the factor's o
 
 **The individual sentence mg-a2bd added is true** — `G″` really never was in §14, and the row really is correctly unchanged *with respect to `G″`*. The defect is that a sentence in the direction of reassurance was inserted **immediately above a sentence a live finding says is false**, in the commit that made that finding **twice as true**. `1e61031` declares A2–A8 unlanded three times and says nothing about having widened one of them. **Not landing a finding and enlarging it are different acts, and only the first was disclosed.**
 
-**And the figure A5 was opened on no longer measures what it measured.** mg-34bf's restructure (`57f962f`) relocated this row's history into this file, so:
+**And the figure A5 was opened on no longer measures what it measured.** mg-34bf's restructure (`57f962f`) relocated this row's history into this file, which took the cell-only gap negative.
+
+⚠️ **THE TABLE THIS PARAGRAPH USED TO CARRY WAS MEASURED ONE COMMIT BEFORE THE COMMIT THAT PUBLISHED IT (CORRECTED 2026-07-30, mg-f922 findings B and C, landed by mg-8e30).** As written by `bbe83b5` it read:
 
 ```
     STATE.md row cell                          :   9 748 chars
@@ -105,9 +107,22 @@ which says the one-big-block face is the only one that can attain the factor's o
     gap, cell + relocated history              :  +9 608
 ```
 
+**Every one of those figures is the figure at `bbe83b5^`, and `bbe83b5` itself moved four of the five.** It added **+1 630** characters to the `STATE.md` cell and **+5 785** to this file — an edit to the very quantities the table reports — so the *"SIGN FLIPPED"* line was inverted, and the combined figure understated, from the instant they were committed. **`−875` was correct when it was measured and false when it was published.** The three columns below, **the last one measured AFTER this commit's own edit** to this file and to the cell:
+
+```
+                                                   at bbe83b5^    at bbe83b5  AFTER mg-8e30
+    STATE.md row cell                                    9 748        11 378        12 692
+    this file (the relocated history)                   10 483        16 268        18 593
+    deliverable §14 copy (frozen since mg-a806)         10 623        10 623        10 623
+    gap, cell only                                        −875          +755        +2 069
+    gap, cell + relocated history                       +9 608       +17 023       +20 662
+```
+
+**The sign claim is WITHDRAWN, and not replaced by the opposite one.** The point the sign was offered to make is better made by the whole sequence: the cell-only gap has gone `2 928 → 6 069 → −875 → +755 → +2 069`, **up, down and up again**, while the clause mismatch only ever grew. A quantity that moves in both directions while the thing it stands for moves in one is not a measurement of that thing — **in either direction**, which is why the correction restores no character-based claim.
+
 **So A5 stands on CLAUSES and not on characters**, and that is how it should be read from here on: **6 of 6** probed clauses are asserted by the row (or by this file) and by **nothing** in §14 — the mg-d39d second-generation audit block, ledger row `J` and its 48 846 genuine-join links, the struck `G″` and its mechanism, the *"one control gap … CLOSED by the audit's own rebuild"* clause, the A2–A8 not-landed declaration, and the row-history links themselves.
 
-Every figure above is re-measured from git and the tree by `code/hodge_leverage_landing_e1d0/verify_landing.py` **T1**; none is quoted from mg-3c24, which matters here more than usual because the finding *is* that nobody re-measured a number.
+Every figure above is re-measured from git and the tree by `code/hodge_leverage_landing_e1d0/verify_landing.py` **T1**; none is quoted from mg-3c24, which matters here more than usual because the finding *is* that nobody re-measured a number. ⚠️ **That sentence was itself half-true when written and is now made good (mg-f922 finding G, incidental to B/C):** T1 did not print this file's length at all, so the `10 483` and the `+9 608` above could not have come from it. T1's chain table now carries a **row-history column** at every commit and a final row that reads the **working tree** rather than `HEAD` — which is what lets a run taken before `git commit` report the state the commit leaves behind instead of its parent's.
 
 **What is landed and what is not.** The false sentence is **struck** in §14 and the enlargement is now **disclosed** at both §14 and the row. **A5 itself is NOT landed** — making §14 mirror the row, or retiring the mirror, remains pm-onethird's to size. **Marking a finding and landing it are also different acts, and this is the first.**
 
