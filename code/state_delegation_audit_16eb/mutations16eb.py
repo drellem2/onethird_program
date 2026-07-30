@@ -5,14 +5,15 @@ RECOVERY PATH, run to the letter on C1; see battery16eb.py section 2).
 
 WHY NEW ONES AT ALL.  mg-0049 was fitted to nine rows it wrote itself, and a fix fitted to
 known rows is a fix fitted to its test set.  mg-5644's Q1-Q6 and mg-0049's R1-R9 are re-run
-here unmodified, on their own harnesses, in `out_5644_rerun.txt` and `out_0049_rerun.txt` —
-that is the control on the control.  These ten are the rows nobody has run.
+here unmodified, on their own harnesses — mg-5644's whole audit in `out_5644_rerun.txt`, and
+mg-0049's nine in `out_reproduce.txt`, which regenerates its committed output and diffs the
+bytes.  That is the control on the control.  These eight are the rows nobody has run.
 
 WHERE THEY POINT.  mg-0049's commit message and `COVERAGE.md` both name where it thinks it
 might have failed: the target's page outside its cited sections (`R3`/`R4`), the derivation
 of the delegation surface, and `L2`.  This lineage established at mg-a61f that a pre-filed
 list of one's own weak points DIRECTS ATTENTION, and that the broken row is the one the list
-omits.  So eight of these ten are aimed at what the list does NOT name:
+omits.  So all eight are aimed at what the list does NOT name:
 
     A1 A2 A3 A5   the SECOND PINNED TABLE the repair added, and the precise claim it
                   published about how the two tables are kept in step
@@ -47,7 +48,6 @@ _H3_HEAD = "### H3 — the all-+1 invariance theorem, and the repair of its cita
 _H4_HEAD = ("### H4 — the relocated coverage gap, the gauge-conjugation mechanism, "
             "and the positive control on the control")
 _H5_HEAD = "### H5 — the recommended next probe, and the answer that discharged it"
-_SUPPORTING = "## Supporting record — derivations, constructions, evidence and audit provenance"
 
 _DP_OPEN = "DELEGATED_PRESENTATION = {\n"
 _DP_H3 = ('        "H3": "2fae29f7da64900f5ec7bd10ffd2199666feb11b65a50279c9adaef5e908747e",\n')
