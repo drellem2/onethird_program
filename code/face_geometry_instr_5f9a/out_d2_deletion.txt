@@ -1,6 +1,7 @@
 ==============================================================================
 mg-5f9a part 2 -- the deletion test, before and after
 (repaired by mg-04a8: two more deletions, and a label check that is not a stability test)
+(repaired by mg-9220: PER RETURN, not per gate, with the unit printed beside every result)
 ==============================================================================
 
 PREDICTIONS, registered before the runs:
@@ -10,12 +11,41 @@ PREDICTIONS, registered before the runs:
    AFTER-2   this tree: delete the |s_i s_j| = 1 gate from `absorb_trace`   artifact CHANGES, exit 1, the brute-force instrument row fails (*)
    AFTER-3*  this tree: test row i's magnitudes BEFORE row i's diagonal     artifact CHANGES, exit 0, NO row fails -- same answers, different trace
    AFTER-4   this tree: stop counting the signs the union-find reads        artifact CHANGES, exit 0, NO row fails
-   AFTER-5   this tree: delete BOTH `shape` returns (mg-d0e2 OUTSTANDING 1) artifact CHANGES, exit 1, the `shape` branch row fails -- it was invisible
+   AFTER-5   this tree: delete the ONE `shape` return (mg-d0e2 OUTSTANDING 1) artifact CHANGES, exit 1, the `shape` branch row fails -- it was invisible
    AFTER-6   this tree: delete the `parity` contradiction branch (ditto)    artifact CHANGES, exit 1, the `parity` branch row fails -- ditto
+   R1        PINNED two-return tree: delete ONLY the FIRST `shape` return   artifact BYTE-IDENTICAL, exit 0 -- mg-e7bc's finding, reproduced
+   R2        PINNED two-return tree: delete ONLY the SECOND `shape` return  artifact CHANGES, exit 1 -- the return that was doing all the work
+   R3        PINNED two-return tree: delete BOTH, as AFTER-5 used to        artifact CHANGES, exit 1 -- true of the PAIR, and of neither member
 
    (*) AFTER-2's fail-set was registered as 'row I4 fails' and that was WRONG: row I4 passes on 61/61; the union-find-vs-brute-force instrument row fails on 291/306.
        The registration above is the corrected one; the miss is kept here rather than
        edited away, and the label check below is what caught it.
+
+==============================================================================
+THE UNIT EVERY MUTATION REMOVES -- counted from its own patch text
+==============================================================================
+mg-e7bc: the deletion test was applied at the granularity of a GATE and read at
+the granularity of a RETURN.  A result line says "deleting X changes the artifact";
+that is a claim about X AT THE SIZE X WAS DELETED AT and about nothing finer.  So
+the size is counted here, printed beside every result below, and required to be at
+most one `return` -- because a patch that removes two licenses a claim about the
+PAIR and about neither member, which is exactly what AFTER-5 was.
+
+   tag       ret  unit removed
+   BEFORE-1  0    one CLAUSE of a compound condition (`or A[i][i] != B[i][i]`); the `return` it guards stays and still answers on the other clause
+   BEFORE-2  1    one `return` statement -- the magnitude gate
+   AFTER-1   1    one `return` statement -- gate `diagonal`
+   AFTER-2   1    one `return` statement -- gate `magnitude`
+   AFTER-3   0    NO statement: the ORDER of two gates, both returns kept
+   AFTER-4   0    one statement, and not a `return`: the `signs_read += 1` counter
+   AFTER-5   1    one `return` statement -- gate `shape`, which is ONE return since mg-9220 merged the two
+   AFTER-6   1    one `return` statement -- the `parity` contradiction branch
+   R1        1    one `return` statement -- the FIRST of the pinned tree's two `shape` returns
+   R2        1    one `return` statement -- the SECOND of them
+   R3        2    SPECIMEN -- TWO `return` statements -- the PAIR, which is what AFTER-5 removed until mg-9220.  KEPT DELIBERATELY as the specimen
+  [HOLDS ] no mutation in this file removes more than one `return` statement, the specimen R3 aside -- 7 of 10 remove exactly one, 3 remove none (a clause, an ordering and a counter), 0 remove more
+        multi-return mutations outside the specimen: none; the specimen removes 2 and is kept so the bundled deletion can be run beside the un-bundled pair
+        WOULD DIFFER UNDER: any mutation bundling two returns again, other than the named specimen.  Before mg-9220 AFTER-5 removed TWO and this claim would have been BROKEN -- which is the point: the bundling was invisible because nothing counted it
 
 ==============================================================================
 BEFORE -- the PRE-REPAIR tree, where mg-1c80 found the artifact unmoved
@@ -23,58 +53,100 @@ BEFORE -- the PRE-REPAIR tree, where mg-1c80 found the artifact unmoved
   [HOLDS ] 5cae82c^ (61de121) -- its committed controls_output.txt regenerates from its own sources
         17964 bytes regenerated, 17964 committed, exit 0
         WOULD DIFFER UNDER: this ref moving, or that tree's battery ceasing to be reproducible.  Before mg-04a8 the ref was `main`, and after mg-5f9a merged this claim read 'this tree regenerates from itself' -- true under every possible defect, and the deletion below no longer even applied
-  [HOLDS ] BEFORE-1 -- delete the s_i^2 = 1 gate: artifact BYTE-IDENTICAL (predicted BYTE-IDENTICAL), exit 0 (predicted 0)
-        17964 bytes out vs 17964 baseline; unmutated baseline exited 0
-        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
-  [HOLDS ] BEFORE-2 -- delete the |s_i s_j| = 1 gate: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)
-        17805 bytes out vs 17964 baseline; unmutated baseline exited 0
-        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] BEFORE-1 -- delete the s_i^2 = 1 gate: artifact BYTE-IDENTICAL (predicted BYTE-IDENTICAL), exit 0 (predicted 0)  [UNIT REMOVED: one CLAUSE of a compound condition (`or A[i][i] != B[i][i]`); the `return` it guards stays and still answers on the other clause]
+        17964 bytes out vs 17964 baseline; unmutated baseline exited 0; the patch removes 0 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 0 `return` statement(s) the patch takes out
+  [HOLDS ] BEFORE-2 -- delete the |s_i s_j| = 1 gate: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)  [UNIT REMOVED: one `return` statement -- the magnitude gate]
+        17805 bytes out vs 17964 baseline; unmutated baseline exited 0; the patch removes 1 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 1 `return` statement(s) the patch takes out
 
 ==============================================================================
 AFTER -- this tree, where the gate label is emitted by the code path
 ==============================================================================
   [HOLDS ] this tree's controls_output.txt regenerates byte-identically
-        23680 bytes regenerated, 23680 committed, exit 0
+        23684 bytes regenerated, 23684 committed, exit 0
         WOULD DIFFER UNDER: any edit to controls.py, face_complex.py or posets.py that is not followed by regenerating the committed artifact
   [HOLDS ] BASELINE: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 0 row(s) read [FAIL] and the summary block lists 0; exit 0 agrees; each of the 0 registered row name(s) matches exactly one row (none registered)
         0 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 0 named by the registered prediction; exit 0, and the battery exits 1 exactly when some row FAILs
         WOULD DIFFER UNDER: any row reading [FAIL] in an unmutated run, or a summary block that disagrees with the rows above it
-  [HOLDS ] AFTER-1 -- delete the s_i^2 = 1 gate: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)
-        23680 bytes out vs 23680 baseline; unmutated baseline exited 0
-        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-1 -- delete the s_i^2 = 1 gate: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)  [UNIT REMOVED: one `return` statement -- gate `diagonal`]
+        23684 bytes out vs 23684 baseline; unmutated baseline exited 0; the patch removes 1 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 1 `return` statement(s) the patch takes out
   [HOLDS ] AFTER-1: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 0 row(s) read [FAIL] and the summary block lists 0; exit 0 agrees; each of the 0 registered row name(s) matches exactly one row (none registered)
         0 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 0 named by the registered prediction; exit 0, and the battery exits 1 exactly when some row FAILs
         WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
-  [HOLDS ] AFTER-2 -- delete the |s_i s_j| = 1 gate: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)
-        23530 bytes out vs 23680 baseline; unmutated baseline exited 0
-        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-2 -- delete the |s_i s_j| = 1 gate: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)  [UNIT REMOVED: one `return` statement -- gate `magnitude`]
+        23534 bytes out vs 23684 baseline; unmutated baseline exited 0; the patch removes 1 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 1 `return` statement(s) the patch takes out
   [HOLDS ] AFTER-2: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 1 row(s) read [FAIL] and the summary block lists 1; exit 1 agrees; each of the 1 registered row name(s) matches exactly one row (1)
         1 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 1 named by the registered prediction; exit 1, and the battery exits 1 exactly when some row FAILs
         WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
-  [HOLDS ] AFTER-3 -- magnitudes before the diagonal: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)
-        23680 bytes out vs 23680 baseline; unmutated baseline exited 0
-        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-3 -- magnitudes before the diagonal: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)  [UNIT REMOVED: NO statement: the ORDER of two gates, both returns kept]
+        23684 bytes out vs 23684 baseline; unmutated baseline exited 0; the patch removes 0 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 0 `return` statement(s) the patch takes out
   [HOLDS ] AFTER-3: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 0 row(s) read [FAIL] and the summary block lists 0; exit 0 agrees; each of the 0 registered row name(s) matches exactly one row (none registered)
         0 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 0 named by the registered prediction; exit 0, and the battery exits 1 exactly when some row FAILs
         WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
-  [HOLDS ] AFTER-4 -- stop counting signs read: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)
-        23677 bytes out vs 23680 baseline; unmutated baseline exited 0
-        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-4 -- stop counting signs read: artifact CHANGES (predicted CHANGES), exit 0 (predicted 0)  [UNIT REMOVED: one statement, and not a `return`: the `signs_read += 1` counter]
+        23681 bytes out vs 23684 baseline; unmutated baseline exited 0; the patch removes 0 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 0 `return` statement(s) the patch takes out
   [HOLDS ] AFTER-4: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 0 row(s) read [FAIL] and the summary block lists 0; exit 0 agrees; each of the 0 registered row name(s) matches exactly one row (none registered)
         0 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 0 named by the registered prediction; exit 0, and the battery exits 1 exactly when some row FAILs
         WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
-  [HOLDS ] AFTER-5 -- delete both `shape` returns: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)
-        24879 bytes out vs 23680 baseline; unmutated baseline exited 0
-        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-5 -- delete the one `shape` return: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)  [UNIT REMOVED: one `return` statement -- gate `shape`, which is ONE return since mg-9220 merged the two]
+        24887 bytes out vs 23684 baseline; unmutated baseline exited 0; the patch removes 1 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 1 `return` statement(s) the patch takes out
   [HOLDS ] AFTER-5: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 1 row(s) read [FAIL] and the summary block lists 1; exit 1 agrees; each of the 1 registered row name(s) matches exactly one row (1)
         1 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 1 named by the registered prediction; exit 1, and the battery exits 1 exactly when some row FAILs
         WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
-  [HOLDS ] AFTER-6 -- delete the `parity` contradiction branch: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)
-        24767 bytes out vs 23680 baseline; unmutated baseline exited 0
-        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is
+  [HOLDS ] AFTER-6 -- delete the `parity` contradiction branch: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)  [UNIT REMOVED: one `return` statement -- the `parity` contradiction branch]
+        24771 bytes out vs 23684 baseline; unmutated baseline exited 0; the patch removes 1 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 1 `return` statement(s) the patch takes out
   [HOLDS ] AFTER-6: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 1 row(s) read [FAIL] and the summary block lists 1; exit 1 agrees; each of the 1 registered row name(s) matches exactly one row (1)
         1 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 1 named by the registered prediction; exit 1, and the battery exits 1 exactly when some row FAILs
         WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
+
+==============================================================================
+PER RETURN, NOT PER GATE -- the same test one level down
+==============================================================================
+AFTER-5 above removes ONE return, because there is one.  There were TWO until
+mg-9220, and AFTER-5 removed them together: the artifact changed, exit 1, one row
+failed, and the gate was booked as covered.  That result is a claim about the
+PAIR.  Below, each of the two is deleted ALONE against the tree that has them
+(c7f9673, pinned for the reason PRE_REPAIR_REF gives -- this tree has nothing left to
+delete one of).  Predictions were registered above.
+
+  [HOLDS ] c7f9673 (c7f9673) -- the two-return tree regenerates its own artifact, so the three results below are against a baseline of its own and not this tree's
+        23680 bytes regenerated, exit 0
+        WOULD DIFFER UNDER: that ref moving, or that tree ceasing to be reproducible.  Its artifact is NOT this tree's: mg-9220 edited one row's text, so comparing against the live committed file would report a difference this section is not about
+  [HOLDS ] R1 -- delete ONLY the first `shape` return (m != len(B)): artifact BYTE-IDENTICAL (predicted BYTE-IDENTICAL), exit 0 (predicted 0)  [UNIT REMOVED: one `return` statement -- the FIRST of the pinned tree's two `shape` returns]
+        23680 bytes out vs 23680 baseline; unmutated baseline exited 0; the patch removes 1 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 1 `return` statement(s) the patch takes out
+  [HOLDS ] R2 -- delete ONLY the second `shape` return (ragged rows): artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)  [UNIT REMOVED: one `return` statement -- the SECOND of them]
+        24879 bytes out vs 23680 baseline; unmutated baseline exited 0; the patch removes 1 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 1 `return` statement(s) the patch takes out
+  [HOLDS ] R3 -- delete BOTH, as AFTER-5 used to: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)  [UNIT REMOVED: TWO `return` statements -- the PAIR, which is what AFTER-5 removed until mg-9220.  KEPT DELIBERATELY as the specimen]
+        24879 bytes out vs 23680 baseline; unmutated baseline exited 0; the patch removes 2 `return` statement(s)
+        WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the 2 `return` statement(s) the patch takes out
+  [HOLDS ] THE GRANULARITY FINDING REPRODUCES: on the two-return tree the PAIR is load-bearing (R3 CHANGES) and the FIRST RETURN IS NOT (R1 leaves 23680 bytes, byte-identical).  R3 is the result AFTER-5 used to print, and it never entitled anyone to R1's line
+        R1 23680 bytes vs 23680 baseline; the 2x2-against-3x3 pair falls into the loop and the SECOND return answers False at gate 'shape' identically
+        WOULD DIFFER UNDER: a pair in `controls.py` with len(A) != len(B) and no ragged row -- a 2x2 against a three-row B whose first two rows are 2 wide would separate the two returns.  NO SUCH PAIR WAS ADDED (mg-9220): the inert return was deleted instead, because a statement that does nothing is removed rather than watched
+
+==============================================================================
+AND THE MERGE DID NOT QUIETLY NARROW THE GATE
+==============================================================================
+The first return was not cut, it was MERGED into the second's condition.  Cutting
+it is not the same edit: the three pairs below separate them, and R1's battery run
+cannot see any of them.  Three implementations are loaded side by side -- the
+pinned tree's two-return `absorb_trace`, this tree's merged one, and the pinned one
+with its first return CUT and nothing put in its place.
+
+  [HOLDS ] WHAT THE DELETED RETURN DID, on 3 pairs the battery does not contain: the merged gate answers as the two returns did on 3 of 3, and CUTTING the first instead of merging it changes the answer on 3 of 3
+        an empty A against a 1x1 B: two returns (False, 'shape'), merged (False, 'shape'), first return CUT (True, 'parity'); a 1x1 A against an empty B: two returns (False, 'shape'), merged (False, 'shape'), first return CUT ('raised', 'IndexError'); 2x2 against a THREE-row B whose first two rows are 2 wide: two returns (False, 'shape'), merged (False, 'shape'), first return CUT (True, 'parity')
+        WOULD DIFFER UNDER: the merged condition losing its `m != len(B)` half, which is the cut.  This is the answer to "remove it, or show what it does": it does nothing the battery can see, and these three are what it does
+  [HOLDS ] over 7921 constructed pairs: the merged gate gives the SAME DECISION on 7921 of 7921, the same (decision, gate) on 7795, and the 126 that move are all RAGGED pairs relabelled ['diagonal', 'magnitude'] -> 'shape' -- which is what `gate_violations` and `priority_gate` always said about them.  Cutting the first return instead moves the DECISION on 199
+        7921 pairs; 126 (decision, gate) moves; the battery's artifact is byte-identical across the merge, which is the same statement over the population that matters to the rows
+        WOULD DIFFER UNDER: a decision moving, which would make the merge a change to the predicate rather than to its text.  The population is every matrix over {0,1,-1} of order <= 2 plus four ragged and rectangular ones, crossed with itself -- built here, not taken from the battery, which has no ragged pair at all
 
 ==============================================================================
 WHAT MOVED, AND WHAT DID NOT
@@ -98,7 +170,7 @@ HELD.  It is kept and committed here because a check nobody has seen
 go red on a broken input is a check nobody has tested.
 
   [HOLDS ] the committed positive control is exactly the committed artifact with every scored row's marker replaced by [FAIL], and nothing else
-        23666 bytes; 43 of its 43 rows read [FAIL]
+        23670 bytes; 43 of its 43 rows read [FAIL]
         WOULD DIFFER UNDER: controls_output.txt changing without this file being regenerated -- a positive control that describes a previous artifact is testing nothing about this one
   [HOLDS ] THE SHIPPED CHECK, VERBATIM, ON THAT ARTIFACT: 'every scored row keeps its label and its condition -- 45 rows, 0 label change(s)', HOLDS = True
         reproduces mg-d0e2's F2 from this repository's own code rather than quoting the audit
@@ -119,5 +191,5 @@ a pure function of (text, exit code, registration).
         WOULD DIFFER UNDER: the check losing either half.  The second case is the wrong-but-stable label -- the mutation did not break the row it was predicted to break, and the shipped stability check calls that a pass because the label did not move.  The third is a prediction that cannot be located, which reads as a prediction and is not one
 
 ==============================================================================
-25 claim(s) scored; 0 BROKEN.
+33 claim(s) scored; 0 BROKEN.
 ==============================================================================

@@ -42,6 +42,37 @@ WHAT mg-d0e2 FOUND IN THIS FILE, and it is why the file was rewritten.
   it passed on; the last section runs both on it, and the repaired check goes
   red where the shipped one held.
 
+WHAT mg-e7bc FOUND IN THIS FILE, and it is why the file was rewritten AGAIN.
+
+  THE DELETION TEST WAS APPLIED AT THE GRANULARITY OF A GATE AND READ AT THE
+  GRANULARITY OF A RETURN.  `absorb_trace`'s `shape` gate had TWO `return`
+  statements.  AFTER-5 deleted them TOGETHER -- with the note "they are one
+  gate, and deleting one of two would leave the other answering" -- the artifact
+  changed, and the gate was booked as covered.  That sentence is TRUE, and it is
+  precisely why the branch stayed uncovered: DELETING THE FIRST ONE ALONE left
+  the artifact BYTE-IDENTICAL at 23,680 bytes, every row green, exit 0.  The
+  2x2-against-3x3 pair falls into the loop and the SECOND return answers False
+  at gate "shape" identically.
+
+  SO THE TEST PROVED THE PAIR WAS LOAD-BEARING AND PROVED NOTHING ABOUT EITHER
+  RETURN.  "Deleting X changes the artifact" is a claim about X AT THE
+  GRANULARITY X WAS DELETED AT, and nothing finer.  It is the same error one
+  level down that broke mg-db09, where equality of one statistic was taken for
+  identity of a structure.
+
+  BOTH HALVES ARE FIXED HERE.  Every mutation now declares THE UNIT IT REMOVES,
+  the number of `return` statements it removes is COUNTED FROM ITS OWN PATCH
+  TEXT rather than asserted, and a claim requires that no mutation removes more
+  than one.  The unit is printed beside every result, so a reader of a line
+  saying CHANGES can see what was taken out.  And the inert return is GONE:
+  mg-9220 merged the two into one total condition in `face_complex.py`, so this
+  tree has one `shape` return and AFTER-5 removes exactly it.  REMOVAL, NOT
+  DETECTION -- no row was added to `controls.py` to notice the first return
+  being reached, because a statement that does nothing is deleted rather than
+  watched.  The section PER RETURN below reproduces the finding against the
+  pinned two-return tree, and the section after it measures that the merge did
+  not quietly narrow the gate.
+
 EVERY CLAIM PRINTS WHAT WOULD MAKE IT ANSWER DIFFERENTLY (mg-d0e2's added
 requirement).  "Can this check fire?" is necessary and not sufficient: both
 vacuous checks this repository produced in one afternoon could fire in
@@ -60,7 +91,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from kern5f9a import (                                              # noqa: E402
-    BAR, FG, PRE_REPAIR_REF, head, mutate_tree, run_controls, write_ref_tree,
+    BAR, FG, PRE_REPAIR_REF, TWO_RETURN_REF, head, load_module, mutate_tree,
+    run_controls, write_ref_tree,
 )
 
 SCORE = []
@@ -96,19 +128,18 @@ NEW_ORDER = ('face_complex.py',
 NEW_SIGNS = ('face_complex.py',
              '            signs_read += 1\n',
              '            pass\n')
-# The two mg-d0e2 found invisible.  Both returns of the shape gate go together:
-# they are one gate, and deleting one of two would leave the other answering.
+# The two mg-d0e2 found invisible.  THE SHAPE GATE IS ONE `return` NOW: mg-9220
+# merged the two this mutation used to delete together, because deleting the
+# first of them ALONE moved not one byte (mg-e7bc).  So this patch removes ONE
+# return statement and the claim it licenses is a claim about that statement.
 NEW_SHAPE = ('face_complex.py',
              '    m = len(A)\n'
-             '    if m != len(B):\n'
+             '    if m != len(B) or any(len(A[i]) != len(B[i]) '
+             'for i in range(m)):\n'
              '        return Trace(False, "shape", 0)\n'
-             '    for i in range(m):\n'
-             '        if len(A[i]) != len(B[i]):\n'
-             '            return Trace(False, "shape", 0)\n'
-             '        if A[i][i] != B[i][i]:\n',
+             '    for i in range(m):\n',
              '    m = len(A)\n'
-             '    for i in range(m):\n'
-             '        if A[i][i] != B[i][i]:\n')
+             '    for i in range(m):\n')
 NEW_PARITY = ('face_complex.py',
               '            if ri == rj:\n'
               '                if pi ^ pj != need:\n'
@@ -129,6 +160,82 @@ PRE_MAG = ('face_complex.py',
            '                return False\n',
            '            pass\n')
 
+# ------------------------------------- the TWO-RETURN tree (mg-04a8, pinned)
+# The granularity finding is a fact about a tree in which the `shape` gate has
+# two `return` statements.  This tree has one, so the finding is reproduced
+# against `TWO_RETURN_REF` rather than quoted from mg-e7bc's transcript.  Each
+# of these removes exactly ONE return; the third removes the pair, which is what
+# AFTER-5 used to do.
+OLD_SHAPE_1 = ('face_complex.py',
+               '    m = len(A)\n'
+               '    if m != len(B):\n'
+               '        return Trace(False, "shape", 0)\n'
+               '    for i in range(m):\n',
+               '    m = len(A)\n'
+               '    for i in range(m):\n')
+OLD_SHAPE_2 = ('face_complex.py',
+               '        if len(A[i]) != len(B[i]):\n'
+               '            return Trace(False, "shape", 0)\n'
+               '        if A[i][i] != B[i][i]:\n',
+               '        if A[i][i] != B[i][i]:\n')
+
+# THE UNIT EACH MUTATION REMOVES, named beside it.  This is the second half of
+# mg-e7bc's fix: a deletion result is a claim about the unit that was deleted,
+# so the unit has to be written where the result is read.  `returns_removed`
+# below COUNTS the return statements from the patch text; the string says what
+# kind of thing went, since three of these remove no return at all.
+UNITS = [
+    ("BEFORE-1", PRE_DIAG,
+     "one CLAUSE of a compound condition (`or A[i][i] != B[i][i]`); the "
+     "`return` it guards stays and still answers on the other clause"),
+    ("BEFORE-2", PRE_MAG, "one `return` statement -- the magnitude gate"),
+    ("AFTER-1", NEW_DIAG, "one `return` statement -- gate `diagonal`"),
+    ("AFTER-2", NEW_MAG, "one `return` statement -- gate `magnitude`"),
+    ("AFTER-3", NEW_ORDER,
+     "NO statement: the ORDER of two gates, both returns kept"),
+    ("AFTER-4", NEW_SIGNS,
+     "one statement, and not a `return`: the `signs_read += 1` counter"),
+    ("AFTER-5", NEW_SHAPE,
+     "one `return` statement -- gate `shape`, which is ONE return since "
+     "mg-9220 merged the two"),
+    ("AFTER-6", NEW_PARITY,
+     "one `return` statement -- the `parity` contradiction branch"),
+    ("R1", OLD_SHAPE_1,
+     "one `return` statement -- the FIRST of the pinned tree's two `shape` "
+     "returns"),
+    ("R2", OLD_SHAPE_2,
+     "one `return` statement -- the SECOND of them"),
+    ("R3", ('face_complex.py', OLD_SHAPE_1[1] + OLD_SHAPE_2[1],
+            OLD_SHAPE_1[2] + OLD_SHAPE_2[2]),
+     "TWO `return` statements -- the PAIR, which is what AFTER-5 removed until "
+     "mg-9220.  KEPT DELIBERATELY as the specimen"),
+]
+
+SPECIMEN_TAGS = ("R3",)
+"""The mutation that removes two returns, kept rather than fixed.
+
+The same treatment `vacuous_check_as_shipped` gives the shipped label check: the
+defect is kept where it can be run, because a bundled deletion whose result was
+read one level down is easier to recognise beside the un-bundled pair than in a
+paragraph about it.  It is excluded from the at-most-one claim BY NAME, so a new
+mutation that bundles two returns is BROKEN rather than quietly tolerated.
+"""
+
+
+def returns_removed(edit):
+    """How many `return` statements this (file, old, new) patch takes out.
+
+    Counted from the patch text, not declared.  A mutation that removes two is
+    a mutation whose result licenses a claim about the PAIR and about neither
+    member -- which is exactly what AFTER-5 was before mg-9220, and the reason
+    this function exists rather than a sentence saying the same thing.
+    """
+    _f, old, new = edit
+    def n(text):
+        return sum(1 for ln in text.split("\n")
+                   if ln.strip().startswith("return "))
+    return n(old) - n(new)
+
 # THE REGISTERED EXPECTATION, written before the runs.  The fail-set is the half
 # that makes the label check non-vacuous: it says WHICH rows must read [FAIL],
 # by a substring of the row's own text, so a mutation that ought to break a row
@@ -146,10 +253,16 @@ PREDICTIONS = [
      "artifact CHANGES, exit 0, NO row fails -- same answers, different trace"),
     ("AFTER-4", "this tree: stop counting the signs the union-find reads",
      "artifact CHANGES, exit 0, NO row fails"),
-    ("AFTER-5", "this tree: delete BOTH `shape` returns (mg-d0e2 OUTSTANDING 1)",
+    ("AFTER-5", "this tree: delete the ONE `shape` return (mg-d0e2 OUTSTANDING 1)",
      "artifact CHANGES, exit 1, the `shape` branch row fails -- it was invisible"),
     ("AFTER-6", "this tree: delete the `parity` contradiction branch (ditto)",
      "artifact CHANGES, exit 1, the `parity` branch row fails -- ditto"),
+    ("R1", "PINNED two-return tree: delete ONLY the FIRST `shape` return",
+     "artifact BYTE-IDENTICAL, exit 0 -- mg-e7bc's finding, reproduced"),
+    ("R2", "PINNED two-return tree: delete ONLY the SECOND `shape` return",
+     "artifact CHANGES, exit 1 -- the return that was doing all the work"),
+    ("R3", "PINNED two-return tree: delete BOTH, as AFTER-5 used to",
+     "artifact CHANGES, exit 1 -- true of the PAIR, and of neither member"),
 ]
 
 # (*) AFTER-2'S FAIL-SET WAS REGISTERED WRONG THE FIRST TIME, and the corrected
@@ -359,16 +472,28 @@ def flip_all_rows(text):
     return "\n".join(out)
 
 
+def unit_of(tag):
+    """The unit named for `tag` in UNITS, and the number of `return` statements
+    its patch removes.  A tag with no entry is a programming error here, not a
+    result to be printed without one."""
+    for name, edit, unit in UNITS:
+        if name == tag:
+            return unit, returns_removed(edit)
+    raise SystemExit("%s: no UNITS entry -- a deletion result with no unit "
+                     "named beside it is what mg-e7bc found (mg-9220)" % tag)
+
+
 def run_case(tag, desc, tree_files, edits, baseline, base_code,
-             want_change, want_exit, want_fail_subs, baseline_cannot=()):
-    if tree_files is PRE_FILES:
-        root, _sha = write_ref_tree(tree_files)
+             want_change, want_exit, want_fail_subs, baseline_cannot=(),
+             ref=PRE_REPAIR_REF):
+    if tree_files is PRE_FILES or ref != PRE_REPAIR_REF:
+        root, _sha = write_ref_tree(tree_files, ref)
         for fname, old, new in edits:
             path = os.path.join(root, fname)
             text = open(path).read()
             if text.count(old) != 1:
                 raise SystemExit("%s: anchor occurs %d times in %s's %s"
-                                 % (tag, text.count(old), PRE_REPAIR_REF, fname))
+                                 % (tag, text.count(old), ref, fname))
             with open(path, "w") as fh:
                 fh.write(text.replace(old, new))
         cwd = root
@@ -376,14 +501,25 @@ def run_case(tag, desc, tree_files, edits, baseline, base_code,
         cwd = mutate_tree(edits, tree_files)
     out, code = run_controls(cwd)
     changed = out != baseline
-    claim("%s -- %s: artifact %s (predicted %s), exit %d (predicted %d)"
+    unit, n_ret = unit_of(tag)
+    # THE GRANULARITY IS PRINTED WHERE THE RESULT IS READ (mg-e7bc, mg-9220).
+    # "The artifact changes when X is deleted" is a claim about X at the size X
+    # was deleted at.  AFTER-5 used to remove two `return`s and be read as a
+    # statement about each of them; the unit and the return count are carried
+    # into the claim text so that reading cannot be made again silently.
+    claim("%s -- %s: artifact %s (predicted %s), exit %d (predicted %d)  "
+          "[UNIT REMOVED: %s]"
           % (tag, desc, "CHANGES" if changed else "BYTE-IDENTICAL",
-             "CHANGES" if want_change else "BYTE-IDENTICAL", code, want_exit),
+             "CHANGES" if want_change else "BYTE-IDENTICAL", code, want_exit,
+             unit),
           changed == want_change and code == want_exit,
           "deleting a gate that no row's answer depends on -- which is what "
-          "AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is",
-          "%d bytes out vs %d baseline; unmutated baseline exited %d"
-          % (len(out), len(baseline), base_code))
+          "AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND "
+          "under this line being read at a granularity finer than the %d "
+          "`return` statement(s) the patch takes out" % n_ret,
+          "%d bytes out vs %d baseline; unmutated baseline exited %d; the "
+          "patch removes %d `return` statement(s)"
+          % (len(out), len(baseline), base_code, n_ret))
     if want_fail_subs is not None:
         ok, msg, notes = check_labels(tag, out, code, want_fail_subs,
                                       baseline_cannot)
@@ -402,6 +538,8 @@ def main():
     print("mg-5f9a part 2 -- the deletion test, before and after")
     print("(repaired by mg-04a8: two more deletions, and a label check that is "
           "not a stability test)")
+    print("(repaired by mg-9220: PER RETURN, not per gate, with the unit "
+          "printed beside every result)")
     print(BAR)
     print("\nPREDICTIONS, registered before the runs:")
     for tag, desc, pred in PREDICTIONS:
@@ -411,6 +549,45 @@ def main():
     print("       The registration above is the corrected one; the miss is kept "
           "here rather than\n       edited away, and the label check below is "
           "what caught it.")
+
+    head("THE UNIT EVERY MUTATION REMOVES -- counted from its own patch text")
+    print("mg-e7bc: the deletion test was applied at the granularity of a GATE "
+          "and read at\nthe granularity of a RETURN.  A result line says "
+          "\"deleting X changes the artifact\";\nthat is a claim about X AT THE "
+          "SIZE X WAS DELETED AT and about nothing finer.  So\nthe size is "
+          "counted here, printed beside every result below, and required to be "
+          "at\nmost one `return` -- because a patch that removes two licenses a "
+          "claim about the\nPAIR and about neither member, which is exactly what "
+          "AFTER-5 was.\n")
+    print("   %-9s %-4s %s" % ("tag", "ret", "unit removed"))
+    multi = []
+    graded = [(t, e, u) for t, e, u in UNITS if t not in SPECIMEN_TAGS]
+    for tag, edit, unit in UNITS:
+        n = returns_removed(edit)
+        if n > 1 and tag not in SPECIMEN_TAGS:
+            multi.append((tag, n))
+        print("   %-9s %-4d %s%s"
+              % (tag, n, "SPECIMEN -- " if tag in SPECIMEN_TAGS else "", unit))
+    claim("no mutation in this file removes more than one `return` statement, "
+          "the specimen %s aside -- %d of %d remove exactly one, %d remove none "
+          "(a clause, an ordering and a counter), %d remove more"
+          % (", ".join(SPECIMEN_TAGS),
+             sum(1 for _t, e, _u in graded if returns_removed(e) == 1),
+             len(graded),
+             sum(1 for _t, e, _u in graded if returns_removed(e) == 0),
+             len(multi)),
+          not multi,
+          "any mutation bundling two returns again, other than the named "
+          "specimen.  Before mg-9220 AFTER-5 removed TWO and this claim would "
+          "have been BROKEN -- which is the point: the bundling was invisible "
+          "because nothing counted it",
+          "multi-return mutations outside the specimen: %s; the specimen "
+          "removes %d and is kept so the bundled deletion can be run beside "
+          "the un-bundled pair"
+          % ("; ".join("%s removes %d" % (t, n) for t, n in multi)
+             if multi else "none",
+             returns_removed([e for t, e, _u in UNITS
+                              if t in SPECIMEN_TAGS][0])))
 
     head("BEFORE -- the PRE-REPAIR tree, where mg-1c80 found the artifact unmoved")
     base_dir, pre_sha = write_ref_tree(PRE_FILES)
@@ -464,12 +641,150 @@ def main():
                   [NEW_ORDER], new_base, new_code, True, 0, [], base_cannot)
     run_case("AFTER-4", "stop counting signs read", NEW_FILES, [NEW_SIGNS],
              new_base, new_code, True, 0, [], base_cannot)
-    a5 = run_case("AFTER-5", "delete both `shape` returns", NEW_FILES,
+    a5 = run_case("AFTER-5", "delete the one `shape` return", NEW_FILES,
                   [NEW_SHAPE], new_base, new_code, True, 1,
                   ["the predicate's `shape` branch"], base_cannot)
     a6 = run_case("AFTER-6", "delete the `parity` contradiction branch",
                   NEW_FILES, [NEW_PARITY], new_base, new_code, True, 1,
                   ["the predicate's `parity` branch"], base_cannot)
+
+    head("PER RETURN, NOT PER GATE -- the same test one level down")
+    print("AFTER-5 above removes ONE return, because there is one.  There were "
+          "TWO until\nmg-9220, and AFTER-5 removed them together: the artifact "
+          "changed, exit 1, one row\nfailed, and the gate was booked as covered. "
+          " That result is a claim about the\nPAIR.  Below, each of the two is "
+          "deleted ALONE against the tree that has them\n(%s, pinned for the "
+          "reason PRE_REPAIR_REF gives -- this tree has nothing left to\ndelete "
+          "one of).  Predictions were registered above.\n" % TWO_RETURN_REF)
+    two_dir, two_sha = write_ref_tree(NEW_FILES, TWO_RETURN_REF)
+    two_base, two_code = run_controls(two_dir)
+    claim("%s (%s) -- the two-return tree regenerates its own artifact, so the "
+          "three results below are against a baseline of its own and not this "
+          "tree's" % (TWO_RETURN_REF, two_sha[:7]),
+          two_code == 0 and len(two_base) > 0,
+          "that ref moving, or that tree ceasing to be reproducible.  Its "
+          "artifact is NOT this tree's: mg-9220 edited one row's text, so "
+          "comparing against the live committed file would report a difference "
+          "this section is not about",
+          "%d bytes regenerated, exit %d" % (len(two_base), two_code))
+    r1 = run_case("R1", "delete ONLY the first `shape` return (m != len(B))",
+                  NEW_FILES, [OLD_SHAPE_1], two_base, two_code, False, 0,
+                  None, ref=TWO_RETURN_REF)
+    run_case("R2", "delete ONLY the second `shape` return (ragged rows)",
+             NEW_FILES, [OLD_SHAPE_2], two_base, two_code, True, 1,
+             None, ref=TWO_RETURN_REF)
+    run_case("R3", "delete BOTH, as AFTER-5 used to", NEW_FILES,
+             [OLD_SHAPE_1, OLD_SHAPE_2], two_base, two_code, True, 1,
+             None, ref=TWO_RETURN_REF)
+    claim("THE GRANULARITY FINDING REPRODUCES: on the two-return tree the PAIR "
+          "is load-bearing (R3 CHANGES) and the FIRST RETURN IS NOT (R1 leaves "
+          "%d bytes, byte-identical).  R3 is the result AFTER-5 used to print, "
+          "and it never entitled anyone to R1's line" % len(r1),
+          r1 == two_base,
+          "a pair in `controls.py` with len(A) != len(B) and no ragged row -- "
+          "a 2x2 against a three-row B whose first two rows are 2 wide would "
+          "separate the two returns.  NO SUCH PAIR WAS ADDED (mg-9220): the "
+          "inert return was deleted instead, because a statement that does "
+          "nothing is removed rather than watched",
+          "R1 %d bytes vs %d baseline; the 2x2-against-3x3 pair falls into the "
+          "loop and the SECOND return answers False at gate 'shape' identically"
+          % (len(r1), len(two_base)))
+
+    head("AND THE MERGE DID NOT QUIETLY NARROW THE GATE")
+    print("The first return was not cut, it was MERGED into the second's "
+          "condition.  Cutting\nit is not the same edit: the three pairs below "
+          "separate them, and R1's battery run\ncannot see any of them.  Three "
+          "implementations are loaded side by side -- the\npinned tree's two-"
+          "return `absorb_trace`, this tree's merged one, and the pinned one\n"
+          "with its first return CUT and nothing put in its place.\n")
+    two_fc = load_module(os.path.join(two_dir, "face_complex.py"), "fc_two")
+    new_fc = load_module(os.path.join(new_dir, "face_complex.py"), "fc_new")
+    cut_dir, _sha = write_ref_tree(NEW_FILES, TWO_RETURN_REF)
+    p = os.path.join(cut_dir, "face_complex.py")
+    txt = open(p).read()
+    _f, old, new = OLD_SHAPE_1
+    open(p, "w").write(txt.replace(old, new, 1))
+    cut_fc = load_module(p, "fc_cut")
+
+    def ask(fn, A, B):
+        try:
+            tr = fn(A, B)
+            return (tr.absorbable, tr.gate)
+        except Exception as exc:                        # noqa: BLE001
+            return ("raised", type(exc).__name__)
+
+    SEPARATORS = [
+        ("an empty A against a 1x1 B", [], [[1]]),
+        ("a 1x1 A against an empty B", [[1]], []),
+        ("2x2 against a THREE-row B whose first two rows are 2 wide",
+         [[0, 1], [1, 0]], [[0, 1], [1, 0], [0, 0]]),
+    ]
+    lines = []
+    agree_merge = separated = 0
+    for why, A, B in SEPARATORS:
+        o, n, c = (ask(two_fc.absorb_trace, A, B), ask(new_fc.absorb_trace, A, B),
+                   ask(cut_fc.absorb_trace, A, B))
+        agree_merge += (o == n)
+        separated += (o != c)
+        lines.append("%s: two returns %s, merged %s, first return CUT %s"
+                     % (why, o, n, c))
+    claim("WHAT THE DELETED RETURN DID, on %d pairs the battery does not "
+          "contain: the merged gate answers as the two returns did on %d of "
+          "%d, and CUTTING the first instead of merging it changes the answer "
+          "on %d of %d"
+          % (len(SEPARATORS), agree_merge, len(SEPARATORS), separated,
+             len(SEPARATORS)),
+          agree_merge == len(SEPARATORS) and separated == len(SEPARATORS),
+          "the merged condition losing its `m != len(B)` half, which is the "
+          "cut.  This is the answer to \"remove it, or show what it does\": it "
+          "does nothing the battery can see, and these three are what it does",
+          "; ".join(lines))
+
+    # And the same question asked over a population rather than three cases.
+    ENTRIES = (0, 1, -1)
+    mats = [[]]
+    for m in (1, 2):
+        for bits in range(len(ENTRIES) ** (m * m)):
+            flat, b = [], bits
+            for _k in range(m * m):
+                flat.append(ENTRIES[b % len(ENTRIES)])
+                b //= len(ENTRIES)
+            mats.append([flat[i * m:(i + 1) * m] for i in range(m)])
+    mats.append([[0, 1], [1, 0], [0, 0]])          # 3 rows, 2 wide
+    mats.append([[0, 1, 0], [1, 0]])               # ragged
+    mats.append([[0, 1], [1, 0, 0]])               # ragged the other way
+    mats.append([[0, 1, 0], [1, 0, 0], [0, 0, 0]])
+    same_dec = same_gate = pairs = cut_moved = 0
+    gate_moved = []
+    for A in mats:
+        for B in mats:
+            pairs += 1
+            o, n, c = (ask(two_fc.absorb_trace, A, B),
+                       ask(new_fc.absorb_trace, A, B),
+                       ask(cut_fc.absorb_trace, A, B))
+            same_dec += (o[0] == n[0])
+            same_gate += (o == n)
+            if o != n:
+                gate_moved.append((o, n))
+            cut_moved += (o[0] != c[0])
+    ragged_only = all(o[1] in ("diagonal", "magnitude") and n[1] == "shape"
+                      for o, n in gate_moved)
+    claim("over %d constructed pairs: the merged gate gives the SAME DECISION "
+          "on %d of %d, the same (decision, gate) on %d, and the %d that move "
+          "are all RAGGED pairs relabelled %r -> 'shape' -- which is what "
+          "`gate_violations` and `priority_gate` always said about them.  "
+          "Cutting the first return instead moves the DECISION on %d"
+          % (pairs, same_dec, pairs, same_gate, len(gate_moved),
+             sorted({o[1] for o, _n in gate_moved}) or "-", cut_moved),
+          same_dec == pairs and ragged_only and cut_moved > 0,
+          "a decision moving, which would make the merge a change to the "
+          "predicate rather than to its text.  The population is every matrix "
+          "over {0,1,-1} of order <= 2 plus four ragged and rectangular ones, "
+          "crossed with itself -- built here, not taken from the battery, "
+          "which has no ragged pair at all",
+          "%d pairs; %d (decision, gate) moves; the battery's artifact is "
+          "byte-identical across the merge, which is the same statement over "
+          "the population that matters to the rows" % (pairs, len(gate_moved)))
 
     head("WHAT MOVED, AND WHAT DID NOT")
     for tag, out in (("AFTER-1", a1), ("AFTER-3", a3)):

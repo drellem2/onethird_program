@@ -799,16 +799,43 @@ def absorb_trace(A, B):
     re-orientation the battery already varies -- a sign gauge, not a
     construction error.
 
+    THE `shape` GATE HAS ONE `return`, AND IT HAD TWO (mg-e7bc -> mg-9220).
+    THE UNIT A DELETION TEST REMOVES IS THE UNIT IT LICENSES A CLAIM ABOUT.
+    The test that guards this function deleted both `shape` returns TOGETHER,
+    the artifact changed, and the gate was booked as covered.  Deleting the
+    FIRST one ALONE -- `if m != len(B)` -- left the artifact BYTE-IDENTICAL,
+    every row green, exit 0: the 2x2-against-3x3 pair built for the gate falls
+    into the loop, where `len(A[0]) != len(B[0])` fires the SECOND return and
+    answers False at gate "shape" identically.  So the deletion proved the PAIR
+    was load-bearing and proved nothing about either return, and the first one,
+    at its own granularity, was doing nothing.
+
+    IT IS MERGED RATHER THAN SIMPLY CUT, and the difference is measured rather
+    than argued (d2_deletion.py, section PER RETURN).  Cut `if m != len(B)` and
+    put nothing in its place and this function answers ABSORBABLE for
+    ([], [[1]]), raises IndexError for ([[1]], []), and answers ABSORBABLE for a
+    2x2 against a three-row B whose first two rows are 2 wide -- against a brute
+    force that enumerates every s and finds none.  The one condition below
+    decides all three the way the two returns did, and it is the form the four
+    other shape guards in this repository already use (`gate_violations` below;
+    `absorbable_2colour`, `absorbable_bruteforce` and `priority_gate` in
+    code/face_geometry_instr_5f9a/kern5f9a.py).
+
+    ONE LABEL MOVES WITH THE MERGE, on pairs no population here contains: the
+    old order tested row 0's diagonal before row 1's width, so a pair RAGGED at
+    row 1 and diagonal-different at row 0 was traced "diagonal".  Hoisting the
+    width test labels it "shape" -- which is what `gate_violations` and
+    `priority_gate` always said about it, so the merge removes a disagreement
+    rather than creating one.  The artifact does not move.
+
     Method: s_i^2 = 1 pins every diagonal entry, |s_i s_j| = 1 pins every
     absolute value, and each nonzero off-diagonal entry forces the product
     s_i s_j.  What remains is a parity system, solved by union-find.
     """
     m = len(A)
-    if m != len(B):
+    if m != len(B) or any(len(A[i]) != len(B[i]) for i in range(m)):
         return Trace(False, "shape", 0)
     for i in range(m):
-        if len(A[i]) != len(B[i]):
-            return Trace(False, "shape", 0)
         if A[i][i] != B[i][i]:
             return Trace(False, "diagonal", 0)
         for j in range(m):

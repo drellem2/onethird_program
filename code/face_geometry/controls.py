@@ -742,9 +742,17 @@ def absorbable_bruteforce(A, B):
 # scored against is not written down: it is DERIVED by `absorbable_bruteforce`.
 #
 # EACH ROW'S ANSWER WOULD DIFFER UNDER:
-#   the shape row  -- deleting either `return Trace(False, "shape", 0)`.  Both
+#   the shape row  -- deleting the one `return Trace(False, "shape", 0)`.  Both
 #                     pairs then fall through to the sign system, are reported
 #                     ABSORBABLE, and brute force still says no s exists.
+#                     THERE IS ONE RETURN BECAUSE mg-9220 MERGED TWO.  With two,
+#                     deleting BOTH changed the artifact and deleting the FIRST
+#                     ALONE did not -- the 2x2-against-3x3 pair simply fell
+#                     through to the second, which answers False at `shape` just
+#                     the same (mg-e7bc).  So the deletion bit on the PAIR, not
+#                     on each return, and the inert one was REMOVED rather than
+#                     covered by a third pair: this row is not asked to detect
+#                     it, and no row here was added for it.
 #   the parity row -- deleting the `return Trace(False, "parity", signs_read)`
 #                     branch.  The contradictory pair is then reported
 #                     ABSORBABLE against a brute force that enumerated all 8 sign
@@ -764,7 +772,7 @@ UNREACHED_GATE_PAIRS = {
          [[0, 1], [1, 0]],
          [[0, 1, 0], [1, 0, 0], [0, 0, 0]]),
         ("same order, RAGGED -- row 0 has 2 entries on one side and 3 on the "
-         "other, which is the second `shape` return", False,
+         "other, which `m != len(B)` alone does not see", False,
          [[0, 1], [1, 0]],
          [[0, 1, 0], [1, 0]]),
         ("the accepting side: identical 2x2 matrices, s = (+1,+1)", True,

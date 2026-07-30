@@ -32,14 +32,31 @@ from face_complex import (                                          # noqa: E402
 )
 from posets import all_posets                                       # noqa: E402
 
+import d2_deletion as d2                                            # noqa: E402
+"""Imported for its MUTATION TABLE only -- `UNITS`, the (tag, patch, unit)
+list -- so the source-level census below can ask whether every rejecting
+`return` in `absorb_trace` has a mutation of its own (mg-9220).  No battery is
+run from here and no result of d2's is read; this is the deletion table checked
+against the source it deletes from, which is the one place the bundling mg-e7bc
+found could have been caught without running anything."""
+
 SCORE = []
 
 
-def claim(text, ok, detail=""):
+def claim(text, ok, detail="", differs_under=None):
+    """`differs_under` is optional here and required in d2/d4.
+
+    mg-e7bc's F3 is that this script carries none of them; it is not closed by
+    mg-9220, which added the two that do carry one.  Two statements written to
+    the standard is not the standard applied to sixteen, and saying so is
+    cheaper than a sentence implying otherwise.
+    """
     SCORE.append(ok)
     print("  [%s] %s" % ("HOLDS " if ok else "BROKEN", text))
     if detail:
         print("        " + detail)
+    if differs_under:
+        print("        WOULD DIFFER UNDER: %s" % differs_under)
 
 
 def main(nmax=5):
@@ -124,11 +141,58 @@ def main(nmax=5):
                if isinstance(n, ast.Return) and isinstance(n.value, ast.Call)
                and getattr(n.value.func, "id", "") == "Trace"]
     labels = sorted({n.value.args[1].value for n in returns})
-    claim("every `return` in `absorb_trace` carries its gate label as a literal "
-          "at the return site: %d returns, labels %s"
-          % (len(returns), labels),
-          len(returns) == 6 and labels == ["diagonal", "magnitude", "parity",
-                                           "shape"])
+    literal = all(isinstance(n.value.args[1], ast.Constant) for n in returns)
+    census = {}
+    for n in returns:
+        census[n.value.args[1].value] = census.get(n.value.args[1].value, 0) + 1
+    claim("every `return` in `absorb_trace` carries its gate label as a LITERAL "
+          "at the return site, and the four gates are all of them: %d returns, "
+          "labels %s, per gate %s"
+          % (len(returns), labels,
+             ", ".join("%s %d" % (g, census[g]) for g in sorted(census))),
+          literal and labels == ["diagonal", "magnitude", "parity", "shape"],
+          differs_under=
+          "a gate label computed instead of written at the return site, or a "
+          "fifth label appearing.  The count was FROZEN AT 6 until mg-9220, "
+          "which merged the `shape` gate's two returns into one; a literal "
+          "here would only have had to be edited to 5, and it said nothing "
+          "about what the returns are")
+    # AND EVERY REJECTING RETURN IS DELETED BY EXACTLY ONE MUTATION (mg-9220).
+    # mg-e7bc's finding was that the deletion test removed the `shape` gate's
+    # two returns TOGETHER and its result was read as a statement about each.
+    # Counting mutations against the SOURCE is what makes that impossible to
+    # repeat silently: a return with no mutation of its own is a return nothing
+    # has deleted, and a return in two mutations is a bundle.
+    rejecting = [n for n in returns if isinstance(n.value.args[0], ast.Constant)
+                 and n.value.args[0].value is False]
+    src_lines = src.split("\n")
+    after = [(t, e) for t, e, _u in d2.UNITS if t.startswith("AFTER")]
+    cover, uncovered = [], []
+    for n in rejecting:
+        line = src_lines[n.lineno - 1].strip()
+        hits = [t for t, e in after if line in e[1] and line not in e[2]]
+        cover.append((line[:46], hits))
+        if len(hits) != 1:
+            uncovered.append((line, hits))
+    accepting = [n for n in returns if n not in rejecting]
+    claim("and each of the %d REJECTING returns is deleted by EXACTLY ONE "
+          "mutation of d2_deletion.py's AFTER table -- %s.  The remaining %d "
+          "return(s) accept, and deleting one of those leaves the function "
+          "returning None rather than answering differently"
+          % (len(rejecting),
+             "; ".join("%s <- %s" % (ln, ",".join(h) or "NOTHING")
+                       for ln, h in cover),
+             len(accepting)),
+          not uncovered and len(rejecting) > 0,
+          "%d return(s) not covered by exactly one mutation: %s"
+          % (len(uncovered),
+             "; ".join("%s -> %s" % (ln.strip()[:40], h)
+                       for ln, h in uncovered) or "none"),
+          differs_under=
+          "a return added to `absorb_trace` without a mutation of its own, or "
+          "two returns bundled into one mutation again.  The second is what "
+          "mg-e7bc found: `shape`'s two returns went together, the pair moved "
+          "the artifact, and the first one alone moved nothing")
     ctl = open(os.path.join(FG, "controls.py")).read()
     ctl_fns = {n.name for n in ast.walk(ast.parse(ctl))
                if isinstance(n, ast.FunctionDef)}

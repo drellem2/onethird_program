@@ -1,96 +1,102 @@
 ==============================================================================
-mg-04a8 part 4 -- mg-d0e2's own deletion test, unmodified, on this tree
+mg-04a8 part 4 -- mg-d0e2's own deletion test, unmodified
+(mg-9220: run against THIS tree, where it no longer applies, and against the
+ PINNED commit it was written for, where it still says what it said)
 ==============================================================================
+
+==============================================================================
+AGAINST THIS TREE -- where the text its first mutation names is gone
+==============================================================================
+mg-9220 merged `absorb_trace`'s two `shape` returns into one.  This
+audit's first mutation deletes both as a single seven-line anchor,
+which is the granularity mg-e7bc found the result being read below.
+A mutation that cannot be applied is reported as such and not as a
+pass -- `kernd0e2.apply_edits` raises for exactly that reason, and
+the raise is that kernel working.
 
 --- its transcript, verbatim ------------------------------------------------
 == E1: the deletion test, every gate the explanation names ==
 
 BASELINE -- the committed artifact, regenerated unmutated
-  [OK    ] controls.py reproduces its committed artifact byte for byte (23680 bytes, exit 0); committed is 23680 bytes
+  [OK    ] controls.py reproduces its committed artifact byte for byte (23684 bytes, exit 0); committed is 23684 bytes
   [OK    ] the unmutated battery exits 0
 
 DELETION TEST -- predictions were registered before the runs
-  delete gate 'shape'                bytes  23680 ->  24879  CHANGED          exit 1   predicted identical/0  *** MISS ***
-       no pair in any population has a shape mismatch, so the gate never fires
-  delete gate 'diagonal'             bytes  23680 ->  23680  CHANGED          exit 0   predicted changed/0  MATCH
-       294 of 297 violate both forced gates, so no ANSWER moves -- but the trace label the artifact prints does
-  delete gate 'magnitude'            bytes  23680 ->  23530  CHANGED          exit 1   predicted changed/1  MATCH
-       3 pairs in row I4 violate magnitude ALONE; their answers flip and a scored row fails
-  delete gate 'parity'               bytes  23680 ->  24767  CHANGED          exit 1   predicted changed/1  MATCH
-       the union-find-vs-brute-force instrument check should catch a predicate that can no longer reject
-  stop counting signs_read           bytes  23680 ->  23677  CHANGED          exit 0   predicted changed/0  MATCH
-       the count is what the rows now rest on, so it must be load-bearing on the bytes
-  swap the two forced gates' order   bytes  23680 ->  23680  CHANGED          exit 0   predicted changed/0  MATCH
-       same answers, different trace -- the artifact says the split depends on the order, so it must move when the order does
-  delete 'diagonal' from gate_violations bytes  23680 ->  23671  CHANGED          exit 0   predicted changed/0  MATCH
-       the 'both forced gates violated' counts are printed, so they must move
-  delete 'magnitude' from gate_violations bytes  23680 ->  23671  CHANGED          exit 0   predicted changed/0  MATCH
-       same, from the other side -- and row I4's 'the ONLY one violated' sentence is computed here
-  invert diagonal_moves (the routing) bytes  23680 ->  26464  CHANGED          exit 1   predicted changed/1  MATCH
-       the routing row scores the split, so inverting it must break a row
-
-PREDICTION SCORE -- 8 of 9 matched
-  MISS: delete gate 'shape'                  observed changed/exit 1, predicted identical/exit 0
-
-WHICH LINES MOVED, for each mutation that changed the artifact
-  delete gate 'shape'                  LINE COUNT MOVED 70 -> 68
-  delete gate 'diagonal'               2 line(s) moved
-        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
-        - * WHERE THE PREDICATE RETURNED, per row
-  delete gate 'magnitude'              LINE COUNT MOVED 70 -> 68
-  delete gate 'parity'                 LINE COUNT MOVED 70 -> 68
-  stop counting signs_read             1 line(s) moved
-        - * the absorbability predicate
-  swap the two forced gates' order     2 line(s) moved
-        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
-        - * WHERE THE PREDICATE RETURNED, per row
-  delete 'diagonal' from gate_violations 4 line(s) moved
-        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
-        - [CANNOT FAIL] PROVEN PROPERTY, not a control row
-        - [PASS] routing check on the mg-8a12 repair: the MOVE
-        - * WHERE THE PREDICATE RETURNED, per row
-  delete 'magnitude' from gate_violations 4 line(s) moved
-        - [PASS] I4 the facet enumeration le_to_facet (mis-ind
-        - [CANNOT FAIL] PROVEN PROPERTY, not a control row
-        - [PASS] routing check on the mg-8a12 repair: the MOVE
-        - * WHERE THE PREDICATE RETURNED, per row
-  invert diagonal_moves (the routing)  LINE COUNT MOVED 70 -> 67
-
-SCORED ROWS -- does any deletion change a LABEL, not just a number?
-  [BROKEN] the unmutated battery scores 43 rows -- lines whose marker STARTS the line.  mg-5f9a publishes 43, which counts two 'measured, not scored' bullets that mention [CANNOT FAIL] in prose; see E3
-  delete gate 'shape'                  43 rows, 1 FAIL, labels MOVED
-  delete gate 'diagonal'               43 rows, 0 FAIL, labels UNCHANGED
-  delete gate 'magnitude'              43 rows, 1 FAIL, labels MOVED
-  delete gate 'parity'                 43 rows, 1 FAIL, labels MOVED
-  stop counting signs_read             43 rows, 0 FAIL, labels UNCHANGED
-  swap the two forced gates' order     43 rows, 0 FAIL, labels UNCHANGED
-  delete 'diagonal' from gate_violations 43 rows, 0 FAIL, labels UNCHANGED
-  delete 'magnitude' from gate_violations 43 rows, 0 FAIL, labels UNCHANGED
-  invert diagonal_moves (the routing)  42 rows, 1 FAIL, labels MOVED
-
-E1 claims broken: 1
+Traceback (most recent call last):
+  File "<repo>/code/face_geometry_audit_d0e2/e1_deletion.py", line 84, in <module>
+    out, status = run_battery(edits, label.replace(" ", "_")[:20])
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/code/face_geometry_audit_d0e2/kernd0e2.py", line 74, in run_battery
+    text = apply_edits(_load(path), edits, "%s/%s" % (tag, base))
+  File "<repo>/code/face_geometry_audit_d0e2/kernd0e2.py", line 49, in apply_edits
+    raise AssertionError(
+        "%s: anchor occurs %d times, expected exactly 1:\n%r"
+        % (where, n, old))
+AssertionError: delete_gate_'shape'/face_complex.py: anchor occurs 0 times, expected exactly 1:
+'    m = len(A)\n    if m != len(B):\n        return Trace(False, "shape", 0)\n    for i in range(m):\n        if len(A[i]) != len(B[i]):\n            return Trace(False, "shape", 0)\n        if A[i][i] != B[i][i]:'
 --- end of its transcript ---------------------------------------------------
 
+  [HOLDS ] it stops at its FIRST mutation with `anchor occurs 0 times`, naming the two-return `shape` gate this commit merged; 0 of its 9 mutations ran, and it exits 1
+        exit 1; the anchor it names is     if m != len(B):\n        return Trace(False, "shape", 0)
+        WOULD DIFFER UNDER: the merged condition being split back into two returns, which is the only thing that would make this anchor apply again.  NOT under this audit being edited -- it is not, and the pinned re-run below is what keeps its measurement alive
+  [HOLDS ] and its BASELINE claims ran before it stopped: it regenerated this tree's artifact byte for byte, so the abort is the mutation and not the tree
+        [OK    ] controls.py reproduces its committed artifact byte for byte (23684 bytes, exit 0); committed is 23684 bytes; [OK    ] the unmutated battery exits 0
+        WOULD DIFFER UNDER: this tree's controls_output.txt going stale, which would make the abort ambiguous between a missing anchor and a broken tree
 
 ==============================================================================
-WHAT IT SAYS ABOUT THIS TREE
+AGAINST THE PINNED COMMIT IT WAS WRITTEN FOR -- nothing is withdrawn
 ==============================================================================
-  [HOLDS ] its nine mutations all ran and were parsed -- 9 of 9
+c7f9673, materialised whole.  This is the run mg-04a8 published, re-run
+rather than quoted: 9 of 9 CHANGED, including the two mg-d0e2 found
+invisible.  It is a statement about THAT tree, and it stays true of
+it whatever this commit does.
+
+  [HOLDS ] its nine mutations all ran and were parsed at c7f9673 -- 9 of 9
         delete gate 'shape' 23680->24879 CHANGED exit 1; delete gate 'diagonal' 23680->23680 CHANGED exit 0; delete gate 'magnitude' 23680->23530 CHANGED exit 1; delete gate 'parity' 23680->24767 CHANGED exit 1; stop counting signs_read 23680->23677 CHANGED exit 0; swap the two forced gates' order 23680->23680 CHANGED exit 0; delete 'diagonal' from gate_violations 23680->23671 CHANGED exit 0; delete 'magnitude' from gate_violations 23680->23671 CHANGED exit 0; invert diagonal_moves (the routing) 23680->26464 CHANGED exit 1
         WOULD DIFFER UNDER: that audit's transcript format changing, which would make every claim below silently vacuous rather than wrong
-  [HOLDS ] THE DELETION TEST NOW BITES ON 9 OF 9.  mg-d0e2 measured 7 of 9 against mg-5f9a
-        WOULD DIFFER UNDER: either of the two constructed-pair rows leaving controls.py, or its expected answer being taken from the predicate rather than from `absorbable_bruteforce` -- either one puts the `shape` and `parity` branches back out of reach of every population and the artifact stops moving when they are deleted
-  [HOLDS ] "delete gate 'shape'" -- which left the artifact BYTE-IDENTICAL at 20738 bytes before this repair -- now changed the artifact (23680 -> 24879 bytes) and exits 1
+  [HOLDS ] THE DELETION TEST NOW BITES ON 9 OF 9 -- at c7f9673, RE-RUN here and not quoted; against this tree the same script does not apply.  mg-d0e2 measured 7 of 9 against mg-5f9a
+        WOULD DIFFER UNDER: either of the two constructed-pair rows leaving controls.py at that commit, which cannot happen -- it is a commit.  This line is here because the live run above can no longer make it, and a measurement that stops being runnable and is quoted instead is how a figure goes stale (mg-8e30)
+  [HOLDS ] "delete gate 'shape'" -- which left the artifact BYTE-IDENTICAL at 20738 bytes before mg-04a8 -- changed the artifact (23680 -> 24879 bytes) at c7f9673 and exits 1
         WOULD DIFFER UNDER: the constructed pair for that branch no longer reaching it -- which is what `absorb_trace` returning a different gate on it would mean, and what the row in controls.py scores directly
-  [HOLDS ] "delete gate 'parity'" -- which left the artifact BYTE-IDENTICAL at 20738 bytes before this repair -- now changed the artifact (23680 -> 24767 bytes) and exits 1
+  [HOLDS ] "delete gate 'parity'" -- which left the artifact BYTE-IDENTICAL at 20738 bytes before mg-04a8 -- changed the artifact (23680 -> 24767 bytes) at c7f9673 and exits 1
         WOULD DIFFER UNDER: the constructed pair for that branch no longer reaching it -- which is what `absorb_trace` returning a different gate on it would mean, and what the row in controls.py scores directly
+  [HOLDS ] AND THE GATE-LEVEL LINE IS EXACTLY THE ONE mg-e7bc TOOK APART: "delete gate 'shape'" at c7f9673 deletes TWO `return` statements in one anchor, so its CHANGED is a claim about the pair.  The per-return split is in d2_deletion.py, section PER RETURN
+        WOULD DIFFER UNDER: that mutation being split per return in the audit itself, which would make this line unnecessary rather than wrong
 
 ==============================================================================
-AND WHY IT EXITS 1, WHICH IS NOT A FAILURE OF THIS REPAIR
+mg-e7bc's OWN DELETION TEST -- the audit that found the granularity
 ==============================================================================
-  [HOLDS ] exactly 1 claim of that audit is BROKEN against this tree, and it is its ROW COUNT: it asserts 41, the number it measured at 5988134, and this tree has 43 -- the two constructed-pair rows this repair added
+It stops in the same place for the same reason: its D1 deletes the
+same two returns.  Its E1 and E2 -- the per-return split that is this
+commit's subject -- are re-run at 9d712be below.
+
+  [HOLDS ] against this tree it stops at D1 with `anchor occurs 0 times` and exits 1 -- the same merged text, named by a second instrument
+        '    m = len(A)\n    if m != len(B):\n        return Trace(False, "shape", 0)\n    for i in range(m):'
+        WOULD DIFFER UNDER: the merged condition being split back into two returns.  Two independent instruments naming the same absent anchor is what makes this a fact about the source text rather than about either of them
+  [HOLDS ] at 9d712be its OWN per-return split reproduces: E1 (first `shape` return alone) BYTE-IDENTICAL, E2 (second alone) CHANGED.  That is the finding this commit answers, measured on the tree it is about rather than taken from its transcript
+        E1*   MINE: delete ONLY the FIRST `shape` return (m != len(B))   BYTE-IDENTICAL   0; E1*   MINE: delete ONLY the FIRST `shape` return (m != len(B))     23680   BYTE-IDENTICAL     0 MATCH
+        WOULD DIFFER UNDER: that audit's table changing.  If this ever failed, the finding mg-9220 acted on would be unsupported and the merge below would have no reason
+
+==============================================================================
+AND THE REST OF THAT AUDIT, AGAINST THIS TREE -- every script named
+==============================================================================
+Four scripts, and each is stated rather than left to be found.  g4 is
+NOT run here: it re-runs THIS file, and this file running it would not
+terminate.  Its own run_all.sh runs it.
+
+  [HOLDS ] g1_positive_control.py against this tree: exit 0 (expected 0).  its `pc_all_pass.txt` control is REGENERATED by this commit -- it is a derived copy of controls_output.txt and its own claim says a control describing a previous artifact tests nothing about this one.  Its FINDING (the deleted-row corruption) is untouched and does not set its exit status
+        8 claim(s) scored; 0 BROKEN; last line: '=============================================================================='
+        WOULD DIFFER UNDER: g1 going red for any reason other than a stale derived control, or g3 going green -- the second would mean the anchor came back
+  [HOLDS ] g3_differs_under.py against this tree: exit 1 (expected nonzero).  it aborts on the same absent anchor: its `s1` mutation is the FIRST `shape` return, alone -- the very experiment that produced the finding this commit acts on.  It also freezes '56 claims across four scripts', a figure this commit moves.  Both are stale numbers about a tree that has changed, not retreats
+        no claim tally; last line: '\'    m = len(A)\\n    if m != len(B):\\n        return Trace(False, "shape", 0)\\n    for i in range(m):\''
+        WOULD DIFFER UNDER: g1 going red for any reason other than a stale derived control, or g3 going green -- the second would mean the anchor came back
+
+==============================================================================
+AND WHY IT EXITS 1 AT THE PINNED COMMIT, WHICH IS NOT A FAILURE
+==============================================================================
+  [HOLDS ] exactly 1 claim of that audit is BROKEN at c7f9673, and it is its ROW COUNT: it asserts 41, the number it measured at 5988134, and that tree has 43 -- the two constructed-pair rows mg-04a8 added
         its exit status is 1; a frozen count measured against a tree that has since gained rows is a stale number, not a refutation
-        WOULD DIFFER UNDER: any OTHER claim of that audit going broken -- that would mean this repair disturbed something the audit had verified, and it is the reason this is scored rather than asserted in prose
+        WOULD DIFFER UNDER: any OTHER claim of that audit going broken -- that would mean the repair disturbed something the audit had verified, and it is the reason this is scored rather than asserted in prose
 
 ==============================================================================
 AND WHAT THE REST OF THAT AUDIT SAYS -- did anything retreat?
@@ -107,5 +113,5 @@ AND WHAT THE REST OF THAT AUDIT SAYS -- did anything retreat?
         WOULD DIFFER UNDER: the row population changing again without the doc sites being re-derived, which is the mg-8e30 defect (a figure measured before the edit that moved it)
 
 ==============================================================================
-9 claim(s) scored; 0 BROKEN.
+16 claim(s) scored; 0 BROKEN.
 ==============================================================================
