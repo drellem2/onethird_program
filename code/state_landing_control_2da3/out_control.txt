@@ -48,7 +48,7 @@ mg-2da3 — working-tree control for b68db5d's delta
 certified side  : the WORKING TREE (STATE.md, docs/state-history/README.md)
 baseline side   : b68db5d^  — used ONLY as the BEFORE of a measured delta
 
-STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
+STATE.md in the working tree: 179344 bytes, 176229 characters, 382 lines
                              62 table rows, 210 cells (the population every whole-file tally below is over)
 
 0. THE NORMALISATION N, CHECKED AGAINST THE RULE THIS FILE PUBLISHES
@@ -313,11 +313,11 @@ STATE.md in the working tree: 177464 bytes, 174405 characters, 382 lines
   [pass] exactly one ledger row keys to mg-a3d4
          found 1
   [pass] the mg-a3d4 row still holds the largest cell in the file
-         largest cell is 8440 characters (stripped), over all 210 cells
-  [pass] and it is still 8440 characters (stripped)
-         measured 8440
+         largest cell is 10070 characters (stripped), over all 210 cells
+  [pass] and it is still 10070 characters (stripped)
+         measured 10070
   [pass] the edited row is still smaller than it
-         7876 < 8440
+         7876 < 10070
 
 7. docs/state-history/README.md — the correction blocks b68db5d and this repair added
          31546 bytes, 31307 characters, 435 lines
@@ -371,7 +371,7 @@ RESULT: PASS — every check above read the working tree and every one held,
 ==============================================================================
 
 ### 2. negative_control.py — can it fail?  (and can the pinned battery?)
-STATE.md  at rest: 177464 bytes, sha 54a41150fd75f97e
+STATE.md  at rest: 179344 bytes, sha 07727b4ddbe2ea12
 README.md at rest: 31546 bytes, sha 8e851e6be8954407
 
 ==============================================================================
@@ -383,7 +383,7 @@ POSITIVE CONTROL — clean tree
 
 ==============================================================================
 NC1 — STATE.md GUTTED (mg-bd41's mutation, reproduced exactly)
-      177464 -> 39870 bytes, 383 -> 183 lines (200 deleted, line 1 replaced)
+      179344 -> 39870 bytes, 383 -> 183 lines (200 deleted, line 1 replaced)
 ==============================================================================
   delta_control.py    : exit 1   CONTROL FIRES
       RESULT: FAIL (exit 1) — the row b68db5d edited is not identifiable in the
@@ -508,7 +508,7 @@ NC10 — THE LEDGER TABLE'S DELIMITER ROW DELETED (STATE.md line 113).
       [FAIL] cell.tree — row :135's content cell, WORKING TREE: PRESENTED
 
 ==============================================================================
-RESTORED — STATE.md sha 54a41150fd75f97e == 54a41150fd75f97e, README sha 8e851e6be8954407 == 8e851e6be8954407
+RESTORED — STATE.md sha 07727b4ddbe2ea12 == 07727b4ddbe2ea12, README sha 8e851e6be8954407 == 8e851e6be8954407
 ==============================================================================
   clean  exit 0   must be 0          ok
   NC1    exit 1   must be 1 (FAIL)   ok
