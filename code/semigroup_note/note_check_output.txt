@@ -1,0 +1,307 @@
+
+==============================================================================
+A.  The worked example  P = {a<b, c<d}
+==============================================================================
+orderings (|L(P)| = 6): abcd, acbd, acdb, cabd, cadb, cdab
+ordered partitions of 4 elements: 75;  compatible with P (= moves): 26
+  1 block(s):  1   (abcd)
+  2 block(s):  7   (abc|d) (ab|cd) (acd|b) (ac|bd) (a|bcd) (cd|ab) (c|abd)
+  3 block(s): 12   (ab|c|d) (ac|b|d) (a|bc|d) (a|b|cd) (ac|d|b) (a|cd|b) (a|c|bd) (c|ab|d) (cd|a|b) (c|ad|b) (c|a|bd) (c|d|ab)
+  4 block(s):  6   (a|b|c|d) (a|c|b|d) (a|c|d|b) (c|a|b|d) (c|a|d|b) (c|d|a|b)
+
+-- the action agrees with the product against a singleton move, on every (move, ordering) pair
+mismatches: 0 of 156
+
+-- the action never leaves the set of orderings
+results outside L(P): 0 of 156
+
+-- one step, spelled out
+   (ac|bd) applied to abcd  ->  acbd
+   (ac|bd) applied to acbd  ->  acbd
+   (ac|bd) applied to acdb  ->  acdb
+   (ac|bd) applied to cabd  ->  cabd
+   (ac|bd) applied to cadb  ->  cadb
+   (ac|bd) applied to cdab  ->  cadb
+
+-- nothing accumulates: a commitment made by one move is overwritten by a later one
+   start                       abcd
+   (a|c|bd) applied  ->  acbd   a is before c, and the move DECIDED that
+   (cd|ab) applied  ->  cdab   c is before a -- the decision is GONE
+   (a|c|bd) applied  ->  acdb   and back again
+
+-- every ordering is reachable from every ordering, so the walk mixes rather than absorbing
+orderings reachable from each: [6, 6, 6, 6, 6, 6]   (|L(P)| = 6)
+moves that fix every ordering: 1  (abcd)
+absorbing orderings (no move can leave): 0
+
+==============================================================================
+B.  The two identities:  x.x = x  and  x.y.x = x.y
+==============================================================================
+
+-- on the worked example, over all moves
+x.x = x                       : 26 of 26
+x.y.x = x.y                   : 676 of 676
+closure (x.y is again a move) : 676 of 676
+associativity                 : 17576 of 17576
+
+-- the same two identities read as statements about the walk
+   x.y acts as 'y first, then x'.  So x.y.x = x.y says: doing x, then y,
+   then x again is the same as doing y then x -- the earlier x leaves no trace.
+   x=(ac|bd)     y=(cd|ab)       'x,y,x' == 'y,x': True    x.y acts as 'y then x': True    'x,x' == 'x': True
+   x=(a|c|bd)    y=(cd|ab)       'x,y,x' == 'y,x': True    x.y acts as 'y then x': True    'x,x' == 'x': True
+   x=(cd|ab)     y=(a|c|bd)      'x,y,x' == 'y,x': True    x.y acts as 'y then x': True    'x,x' == 'x': True
+   x=(ac|bd)     y=(a|c|bd)      'x,y,x' == 'y,x': True    x.y acts as 'y then x': True    'x,x' == 'x': True
+
+-- exhaustively, on every LABELLED poset up to 4 elements
+n=1  posets    1   x.x=x: 0 bad of 1   x.y.x=x.y: 0 bad of 1   closure: 0 bad of 1   assoc: 0 bad of 1
+n=2  posets    3   x.x=x: 0 bad of 7   x.y.x=x.y: 0 bad of 17   closure: 0 bad of 17   assoc: 0 bad of 43
+n=3  posets   19   x.x=x: 0 bad of 121   x.y.x=x.y: 0 bad of 865   closure: 0 bad of 865   assoc: 0 bad of 6949
+n=4  posets  219   x.x=x: 0 bad of 4399   x.y.x=x.y: 0 bad of 109121   closure: 0 bad of 109121   assoc: 0 bad of (not run)
+
+-- at 5 elements, on one representative of each isomorphism class
+n=5  isomorphism classes 63   x.x=x: 0 bad of 5757   x.y.x=x.y: 0 bad of 922073   closure: 0 bad of 922073
+
+==============================================================================
+C.  Commitment levels, and the acyclic-cut description
+==============================================================================
+partitions of {a,b,c,d}                        : 15
+commitment levels (= the supports of the moves): 14
+partitions with acyclic quotient               : 14
+the two descriptions agree                     : True
+partition(s) that are NOT commitment levels    : ad|bc
+
+-- each level, and the moves that sit at it
+   abcd         <- (abcd)
+   a|bcd        <- (a|bcd)
+   acd|b        <- (acd|b)
+   ab|cd        <- (ab|cd) (cd|ab)
+   abd|c        <- (c|abd)
+   ac|bd        <- (ac|bd)
+   abc|d        <- (abc|d)
+   a|b|cd       <- (a|b|cd) (a|cd|b) (cd|a|b)
+   a|bd|c       <- (a|c|bd) (c|a|bd)
+   a|bc|d       <- (a|bc|d)
+   ad|b|c       <- (c|ad|b)
+   ac|b|d       <- (ac|b|d) (ac|d|b)
+   ab|c|d       <- (ab|c|d) (c|ab|d) (c|d|ab)
+   a|b|c|d      <- (a|b|c|d) (a|c|b|d) (a|c|d|b) (c|a|b|d) (c|a|d|b) (c|d|a|b)
+
+-- supports == acyclic partitions, checked on every LABELLED poset up to 5 elements
+n=1  agrees on 1 of 1 labelled posets
+n=2  agrees on 3 of 3 labelled posets
+n=3  agrees on 19 of 19 labelled posets
+n=4  agrees on 219 of 219 labelled posets
+n=5  agrees on 4231 of 4231 labelled posets
+
+==============================================================================
+D.  Multiplicities of the worked example -- from P alone, no probabilities
+==============================================================================
+   level X       prod_B |L(P|_B)|    m_X
+   abcd                   6          0
+   a|bcd                  3          0
+   acd|b                  3          0
+   ab|cd                  1          0
+   abd|c                  3          0
+   ac|bd                  4          1
+   abc|d                  3          0
+   a|b|cd                 1          0
+   a|bd|c                 2          1
+   a|bc|d                 2          1
+   ad|b|c                 2          1
+   ac|b|d                 2          1
+   ab|c|d                 1          0
+   a|b|c|d                1          1
+sum of multiplicities: 6   (|L(P)| = 6)   equal: True
+levels with a NONZERO multiplicity (6 of 14): ac|bd, a|bd|c, a|bc|d, ad|b|c, ac|b|d, a|b|c|d
+
+==============================================================================
+E.  The spectrum under three different weightings
+==============================================================================
+
+-- weighting w1
+   weights (the nonzero ones):
+      w(abcd)       = 1/8
+      w(ac|bd)      = 1/16
+      w(a|bcd)      = 3/16
+      w(ac|b|d)     = 3/32
+      w(a|bc|d)     = 5/32
+      w(a|c|bd)     = 1/32
+      w(c|ad|b)     = 7/32
+      w(a|b|c|d)    = 1/8
+      total = 1
+   each level's number, as a partial sum of move probabilities:
+      abcd         m=0  w(abcd)                                    = 1/8
+      a|bcd        m=0  w(abcd) + w(a|bcd)                         = 5/16
+      acd|b        m=0  w(abcd)                                    = 1/8
+      ab|cd        m=0  w(abcd)                                    = 1/8
+      abd|c        m=0  w(abcd)                                    = 1/8
+      ac|bd        m=1  w(abcd) + w(ac|bd)                         = 3/16
+      abc|d        m=0  w(abcd)                                    = 1/8
+      a|b|cd       m=0  w(abcd) + w(a|bcd)                         = 5/16
+      a|bd|c       m=1  w(abcd) + w(ac|bd) + w(a|bcd) + w(a|c|bd)  = 13/32
+      a|bc|d       m=1  w(abcd) + w(a|bcd) + w(a|bc|d)             = 15/32
+      ad|b|c       m=1  w(abcd) + w(c|ad|b)                        = 11/32
+      ac|b|d       m=1  w(abcd) + w(ac|bd) + w(ac|b|d)             = 9/32
+      ab|c|d       m=0  w(abcd)                                    = 1/8
+      a|b|c|d      m=1  w(abcd) + w(ac|bd) + w(a|bcd) + w(ac|b|d) + w(a|bc|d) + w(a|c|bd) + w(c|ad|b) + w(a|b|c|d) = 1
+   predicted spectrum: 1 (x1), 15/32 (x1), 13/32 (x1), 11/32 (x1), 9/32 (x1), 3/16 (x1)
+      dim ker(M - 1 I) = 1, predicted 1   OK
+      dim ker(M - 15/32 I) = 1, predicted 1   OK
+      dim ker(M - 13/32 I) = 1, predicted 1   OK
+      dim ker(M - 11/32 I) = 1, predicted 1   OK
+      dim ker(M - 9/32 I) = 1, predicted 1   OK
+      dim ker(M - 3/16 I) = 1, predicted 1   OK
+   dimensions sum to 6 of 6  ->  spectrum confirmed and M is diagonalisable
+
+-- weighting w2 -- same poset, different numbers
+   weights (the nonzero ones):
+      w(abcd)       = 1/4
+      w(ac|bd)      = 3/32
+      w(a|bcd)      = 1/8
+      w(ac|b|d)     = 1/16
+      w(a|bc|d)     = 3/16
+      w(a|c|bd)     = 1/16
+      w(c|ad|b)     = 3/32
+      w(a|b|c|d)    = 1/8
+      total = 1
+   each level's number, as a partial sum of move probabilities:
+      abcd         m=0  w(abcd)                                    = 1/4
+      a|bcd        m=0  w(abcd) + w(a|bcd)                         = 3/8
+      acd|b        m=0  w(abcd)                                    = 1/4
+      ab|cd        m=0  w(abcd)                                    = 1/4
+      abd|c        m=0  w(abcd)                                    = 1/4
+      ac|bd        m=1  w(abcd) + w(ac|bd)                         = 11/32
+      abc|d        m=0  w(abcd)                                    = 1/4
+      a|b|cd       m=0  w(abcd) + w(a|bcd)                         = 3/8
+      a|bd|c       m=1  w(abcd) + w(ac|bd) + w(a|bcd) + w(a|c|bd)  = 17/32
+      a|bc|d       m=1  w(abcd) + w(a|bcd) + w(a|bc|d)             = 9/16
+      ad|b|c       m=1  w(abcd) + w(c|ad|b)                        = 11/32
+      ac|b|d       m=1  w(abcd) + w(ac|bd) + w(ac|b|d)             = 13/32
+      ab|c|d       m=0  w(abcd)                                    = 1/4
+      a|b|c|d      m=1  w(abcd) + w(ac|bd) + w(a|bcd) + w(ac|b|d) + w(a|bc|d) + w(a|c|bd) + w(c|ad|b) + w(a|b|c|d) = 1
+   predicted spectrum: 1 (x1), 9/16 (x1), 17/32 (x1), 13/32 (x1), 11/32 (x2)
+      dim ker(M - 1 I) = 1, predicted 1   OK
+      dim ker(M - 9/16 I) = 1, predicted 1   OK
+      dim ker(M - 17/32 I) = 1, predicted 1   OK
+      dim ker(M - 13/32 I) = 1, predicted 1   OK
+      dim ker(M - 11/32 I) = 2, predicted 2   OK
+   dimensions sum to 6 of 6  ->  spectrum confirmed and M is diagonalisable
+
+-- weighting w3 -- different again
+   weights (the nonzero ones):
+      w(abcd)       = 1/16
+      w(ac|bd)      = 5/32
+      w(a|bcd)      = 3/32
+      w(ac|b|d)     = 1/32
+      w(a|bc|d)     = 3/16
+      w(a|c|bd)     = 1/8
+      w(c|ad|b)     = 7/32
+      w(a|b|c|d)    = 1/8
+      total = 1
+   each level's number, as a partial sum of move probabilities:
+      abcd         m=0  w(abcd)                                    = 1/16
+      a|bcd        m=0  w(abcd) + w(a|bcd)                         = 5/32
+      acd|b        m=0  w(abcd)                                    = 1/16
+      ab|cd        m=0  w(abcd)                                    = 1/16
+      abd|c        m=0  w(abcd)                                    = 1/16
+      ac|bd        m=1  w(abcd) + w(ac|bd)                         = 7/32
+      abc|d        m=0  w(abcd)                                    = 1/16
+      a|b|cd       m=0  w(abcd) + w(a|bcd)                         = 5/32
+      a|bd|c       m=1  w(abcd) + w(ac|bd) + w(a|bcd) + w(a|c|bd)  = 7/16
+      a|bc|d       m=1  w(abcd) + w(a|bcd) + w(a|bc|d)             = 11/32
+      ad|b|c       m=1  w(abcd) + w(c|ad|b)                        = 9/32
+      ac|b|d       m=1  w(abcd) + w(ac|bd) + w(ac|b|d)             = 1/4
+      ab|c|d       m=0  w(abcd)                                    = 1/16
+      a|b|c|d      m=1  w(abcd) + w(ac|bd) + w(a|bcd) + w(ac|b|d) + w(a|bc|d) + w(a|c|bd) + w(c|ad|b) + w(a|b|c|d) = 1
+   predicted spectrum: 1 (x1), 7/16 (x1), 11/32 (x1), 9/32 (x1), 1/4 (x1), 7/32 (x1)
+      dim ker(M - 1 I) = 1, predicted 1   OK
+      dim ker(M - 7/16 I) = 1, predicted 1   OK
+      dim ker(M - 11/32 I) = 1, predicted 1   OK
+      dim ker(M - 9/32 I) = 1, predicted 1   OK
+      dim ker(M - 1/4 I) = 1, predicted 1   OK
+      dim ker(M - 7/32 I) = 1, predicted 1   OK
+   dimensions sum to 6 of 6  ->  spectrum confirmed and M is diagonalisable
+
+-- the comparison that is the point of the note
+   w1  level->eigenvalue : ac|bd=3/16, a|bd|c=13/32, a|bc|d=15/32, ad|b|c=11/32, ac|b|d=9/32, a|b|c|d=1
+       distinct eigenvalues 1, 15/32, 13/32, 11/32, 9/32, 3/16 with multiplicities [1, 1, 1, 1, 1, 1]
+   w2  level->eigenvalue : ac|bd=11/32, a|bd|c=17/32, a|bc|d=9/16, ad|b|c=11/32, ac|b|d=13/32, a|b|c|d=1
+       distinct eigenvalues 1, 9/16, 17/32, 13/32, 11/32 with multiplicities [1, 1, 1, 1, 2]
+   w3  level->eigenvalue : ac|bd=7/32, a|bd|c=7/16, a|bc|d=11/32, ad|b|c=9/32, ac|b|d=1/4, a|b|c|d=1
+       distinct eigenvalues 1, 7/16, 11/32, 9/32, 1/4, 7/32 with multiplicities [1, 1, 1, 1, 1, 1]
+   the three eigenvalue lists are pairwise different : True
+   the level -> multiplicity table did not move; it never saw a probability:
+      abcd:0, a|bcd:0, acd|b:0, ab|cd:0, abd|c:0, ac|bd:1, abc|d:0, a|b|cd:0, a|bd|c:1, a|bc|d:1, ad|b|c:1, ac|b|d:1, ab|c|d:0, a|b|c|d:1
+   NOTE the one thing that DOES depend on w: two levels can land on the
+   same number, and then that number's multiplicity is the sum.  Under w2,
+   ac|bd and ad|b|c both give 11/32, so 11/32 has multiplicity 2 while each
+   LEVEL still has multiplicity 1.  Under w1 and w3 all six are distinct.
+
+==============================================================================
+F.  The antichain: the classical shuffle setting
+==============================================================================
+
+-- with no relations the orderings ARE S_n and the moves are ALL ordered set partitions -- the face semigroup of the braid arrangement
+n=1  |L(P)| = 1   = n! : True    moves   1   all ordered set partitions   1   equal: True    = Fubini(n) = 1 : True
+n=2  |L(P)| = 2   = n! : True    moves   3   all ordered set partitions   3   equal: True    = Fubini(n) = 3 : True
+n=3  |L(P)| = 6   = n! : True    moves  13   all ordered set partitions  13   equal: True    = Fubini(n) = 13 : True
+n=4  |L(P)| = 24  = n! : True    moves  75   all ordered set partitions  75   equal: True    = Fubini(n) = 75 : True
+n=5  |L(P)| = 120 = n! : True    moves 541   all ordered set partitions 541   equal: True    = Fubini(n) = 541 : True
+
+-- every partition is a commitment level, and m_X = prod_B (|B|-1)!
+n=2  levels   2  (= all partitions: True)   m_X = prod_B (|B|-1)! : True   sum m_X = 2 = n! : True
+n=3  levels   5  (= all partitions: True)   m_X = prod_B (|B|-1)! : True   sum m_X = 6 = n! : True
+n=4  levels  15  (= all partitions: True)   m_X = prod_B (|B|-1)! : True   sum m_X = 24 = n! : True
+n=5  levels  52  (= all partitions: True)   m_X = prod_B (|B|-1)! : True   sum m_X = 120 = n! : True
+
+-- instance 1 -- move-to-front / the Tsetlin library: weight only the moves ({i}, rest)
+n=2   2 distinct eigenvalues   Brown prediction == classical derangement spectrum (lambda_S = sum_{i in S} w_i, multiplicity D(n-|S|)): True   against the matrix: OK, diagonalisable
+n=3   5 distinct eigenvalues   Brown prediction == classical derangement spectrum (lambda_S = sum_{i in S} w_i, multiplicity D(n-|S|)): True   against the matrix: OK, diagonalisable
+n=4   9 distinct eigenvalues   Brown prediction == classical derangement spectrum (lambda_S = sum_{i in S} w_i, multiplicity D(n-|S|)): True   against the matrix: OK, diagonalisable
+n=5  14 distinct eigenvalues   Brown prediction == classical derangement spectrum (lambda_S = sum_{i in S} w_i, multiplicity D(n-|S|)): True
+
+-- instance 2 -- the inverse a-riffle shuffle (Gilbert-Shannon-Reeds)
+   GSR: label each card i.i.d. uniform in {1..a}, stably sort by label.
+   That IS the action of the move whose blocks are the label classes.
+n=2 a=2  w == GSR law: True   lambda_X = a^(|X|-n): True   spectrum == classical a^-j with Stirling multiplicities: True    GSR matrix (built with no semigroup): OK, diagonalisable
+n=2 a=3  w == GSR law: True   lambda_X = a^(|X|-n): True   spectrum == classical a^-j with Stirling multiplicities: True    GSR matrix (built with no semigroup): OK, diagonalisable
+n=3 a=2  w == GSR law: True   lambda_X = a^(|X|-n): True   spectrum == classical a^-j with Stirling multiplicities: True    GSR matrix (built with no semigroup): OK, diagonalisable
+n=3 a=3  w == GSR law: True   lambda_X = a^(|X|-n): True   spectrum == classical a^-j with Stirling multiplicities: True    GSR matrix (built with no semigroup): OK, diagonalisable
+n=4 a=2  w == GSR law: True   lambda_X = a^(|X|-n): True   spectrum == classical a^-j with Stirling multiplicities: True    GSR matrix (built with no semigroup): OK, diagonalisable
+n=4 a=3  w == GSR law: True   lambda_X = a^(|X|-n): True   spectrum == classical a^-j with Stirling multiplicities: True    GSR matrix (built with no semigroup): OK, diagonalisable
+n=5 a=2  w == GSR law: True   lambda_X = a^(|X|-n): True   spectrum == classical a^-j with Stirling multiplicities: True 
+n=5 a=3  w == GSR law: True   lambda_X = a^(|X|-n): True   spectrum == classical a^-j with Stirling multiplicities: True 
+
+-- instance 3 -- which classical shuffles are NOT in the family
+   Necessary condition, no nonnegativity needed: the target matrix must lie
+   in the LINEAR SPAN of the matrices T_x, x a move.  Exact rank test.
+   n=3  random-to-top (control: IS in the family)  in the linear span of the moves: True
+   n=3  top-to-random                              in the linear span of the moves: False
+   n=3  random transpositions                      in the linear span of the moves: False
+   n=3  lazy adjacent transpositions               in the linear span of the moves: False
+   n=4  random-to-top (control: IS in the family)  in the linear span of the moves: True
+   n=4  top-to-random                              in the linear span of the moves: False
+   n=4  random transpositions                      in the linear span of the moves: False
+   n=4  lazy adjacent transpositions               in the linear span of the moves: False
+
+==============================================================================
+G.  The boundary: the adjacent-transposition walk is not in the family
+==============================================================================
+The lazy AT walk gives every AT-neighbour of every ordering probability
+1/(2(n-1)).  Weights are nonnegative, so a move x is usable only if x.c is
+c or an AT-neighbour of c for EVERY ordering c.  If some AT edge is then
+unreachable, no weighting reproduces the walk.  (Sufficient, not necessary.)
+n=2  isomorphism classes  2 :  provably NOT in the family  0   single ordering (vacuous) 1   not decided by this test 1
+n=3  isomorphism classes  5 :  provably NOT in the family  2   single ordering (vacuous) 1   not decided by this test 2
+n=4  isomorphism classes 16 :  provably NOT in the family 11   single ordering (vacuous) 1   not decided by this test 4
+n=5  isomorphism classes 63 :  provably NOT in the family 55   single ordering (vacuous) 1   not decided by this test 7
+
+-- the antichain specifically
+n=2  usable moves 3   AT edges needed   2   of these supplied   2   -> AT walk in the family? yes
+n=3  usable moves 1   AT edges needed  12   of these supplied   0   -> AT walk in the family? NO
+n=4  usable moves 1   AT edges needed  72   of these supplied   0   -> AT walk in the family? NO
+n=5  usable moves 1   AT edges needed 480   of these supplied   0   -> AT walk in the family? NO
+
+==============================================================================
+done
+==============================================================================
