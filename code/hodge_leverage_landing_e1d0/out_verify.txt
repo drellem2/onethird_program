@@ -1,0 +1,120 @@
+mg-e1d0 -- RE-MEASURING THIS LANDING'S OWN CLAIMS
+==============================================================================
+Nothing below is inherited from mg-3c24 or from the ticket.  mg-3c24's
+MATHEMATICS is not re-opened: it found 0 BROKEN and every number reproduced
+from a disjoint route.  What is measured here is the four DOCUMENTARY findings,
+each of which is a claim a document makes about itself, another document, or a
+ticket.  All four are measured from git and the tree.
+
+Note on regeneration, stated because it is the same caveat mg-7d5a recorded:
+T1's HEAD row, T2's tree line and T4 measure the LIVE tree, so they describe
+this landing's PARENT commit.  After this landing they will report the repaired
+state instead -- which is the point of measuring them rather than freezing the
+numbers into prose.
+
+TARGET 1 (F1) -- THE FINDING WAS ENLARGED WHILE A SENTENCE SAID IT WAS UNCHANGED
+--------------------------------------------------------------------------------
+mg-d39d A5 (MODERATE, open): §14 asserts the `STATE.md` row 'carries the
+same clauses'; it does not.  mg-a2bd edited that paragraph and did not land A5.
+The question this target answers is not whether A5 was landed -- the commit says
+three times that it was not -- but whether the same commit ENLARGED it, and
+whether the enlargement was disclosed anywhere.
+
+  commit-by-commit, both rows located BY CONTENT, not by line number:
+
+    commit      STATE.md row   §14 copy        gap  when
+    522048f           13,551     10,623     +2,928  before mg-a2bd
+    1e61031           16,692     10,623     +6,069  after  mg-a2bd
+    97cb533           16,692     10,623     +6,069  before mg-34bf restructure
+    57f962f            9,748     10,623       -875  after  mg-34bf restructure
+    a13b4a9            9,748     10,623       -875  HEAD (this landing's parent)
+
+  [MEASURED ] mg-a2bd: STATE.md row 13,551 -> 16,692 chars (+3,141); §14 copy 10,623 -> 10,623 (+0)
+  [CONFIRMED] the mismatch A5 reports MORE THAN DOUBLED in the commit that edited the paragraph: 2,928 -> 6,069 chars
+  [CONFIRMED] one commit, both files: `1e61031` touches STATE.md and docs/OneThird-Hodge-Side-Leverage.md
+  [CONFIRMED] mg-a2bd INSERTED 'the row below is UNCHANGED by mg-a2bd's strike of G″, and that is a fact rather than an omission'
+  [CONFIRMED] and LEFT STANDING the sentence A5 is about -- 'the corresponding `STATE.md` row carries the same clauses' -- present before and after
+  [CONFIRMED] the enlargement is NOT disclosed in `1e61031`'s commit message (it declares A2-A8 unlanded, which is a different act)
+
+  THE CURRENT GAP -- and the metric A5 was opened on no longer means
+  what it meant, which is itself the thing a reader must be told:
+
+    STATE.md row cell                        :   9,748 chars
+    relocated per-row history (attempt-mg-a3d4.md) :  16,268 chars
+    STATE.md row, cell + relocated history    :  26,016 chars
+    §14 copy (frozen since mg-a806)           :  10,623 chars
+    gap, cell only                            :    -875 chars
+    gap, cell + relocated history             : +15,393 chars
+
+  [CONFIRMED] the SIGN of the cell-only gap has flipped since A5 was opened (+2,928 -> -875): the restructure moved history out, so a char count no longer measures the clause mismatch
+  [MEASURED ] so this landing records the CLAUSE mismatch, measured below, and records the char history as history rather than as the live figure
+  clause probes -- asserted by the STATE.md row, absent from §14:
+    [ONLY IN STATE.md] the one control gap the deliverable named itself is CLOSED
+    [ONLY IN STATE.md] the second-generation audit mg-d39d and its 1 BROKEN item
+    [ONLY IN STATE.md] ledger row J / the 48 846 genuine-join links
+    [ONLY IN STATE.md] row G″ struck, with the mechanism recorded
+    [ONLY IN STATE.md] the A2-A8 not-landed declaration
+    [ONLY IN STATE.md] the per-row history links added by the restructure
+
+  [CONFIRMED] 6 of 6 probed clauses are asserted by the STATE.md row and by nothing in §14 -- A5 stands, on clauses rather than on chars
+
+  [CONFIRMED] GATE: the false sentence is STRUCK -- it appears 1 time in §14 and 1 of those is inside 'used to end "..."', i.e. quoted as the struck text and asserted nowhere
+  [CONFIRMED] GATE: the enlargement 2 928 -> 6 069 is stated at BOTH the §14 paragraph and the place A5 is recorded (the STATE.md row)
+  [CONFIRMED] GATE: the CURRENT figure is reachable from every place A5 is recorded -- the row states the flipped gap (−875) and cites H8, H8 carries both figures, §14 carries both
+  [CONFIRMED] GATE: and both say A5 is MARKED, not landed -- marking a finding and landing it are also different acts
+
+TARGET 2 (F2) -- TWO SITE COUNTS IN ONE COMMIT
+----------------------------------------------
+  [MEASURED ] §6 table, counted row by row at `1e61031`: 3 sites
+  [CONFIRMED] §6's prose says 'Three sites' and its table has 3 rows -- these agree
+  [CONFIRMED] §14's 'The strike therefore touches §6 and the ledger and nothing else.' was added by the SAME commit
+  [CONFIRMED] so one commit reports THREE (§6) and TWO (§14) for the same object -- exactly the shape STATE.md's own Appendix A warns about
+  [CONFIRMED] GATE: §14 no longer ASSERTS a second site count -- the sentence survives only as the quotation of what was struck
+  [CONFIRMED] GATE: §6 remains the single source, 3 table rows and prose saying 'Three' -- unchanged by this landing
+  [CONFIRMED] GATE: §14 now defers to §6's table for the count rather than carrying an independent one
+
+TARGET 3 (F3) -- A CONDITION DROPPED IN THE SUMMARY
+---------------------------------------------------
+Theorem G gives `lambda_2(F(A_m)) >= 1/2` in BOTH directions and no upper
+bound.  Concluding that the per-level max is attained AT the one-big-block face
+needs J plus the computational base case `lambda_2(F(A_m)) <= 1/2`.  Part (a):
+which sites carry it.  Part (b): whether it is load-bearing.
+
+  the four sites, at the audited commit and in the tree this landing leaves:
+
+    site                                     at 1e61031    in the tree
+    deliverable §6.1 (the body)                 carries        carries
+    deliverable ledger row G′                   carries        carries
+    STATE.md row (the summary)                 DROPS IT        carries
+    STATE.md Appendix A tally bullet           DROPS IT        carries
+
+  [CONFIRMED] at `1e61031` the condition was carried by the two BODY sites and dropped by the two SUMMARY sites -- the finding, re-measured
+  [CONFIRMED] GATE: all four sites now carry the condition
+
+  IS THE CONDITION LOAD-BEARING?  Theorem J's closed form, evaluated over
+  every block-size multiset of every level of A_n, n <= 9 -- once with the
+  verified base case lambda_2(F(A_b)) = 1/2, once with a counterfactual
+  lambda_2(F(A_4)) = 9/10.  Nothing here is quoted; J is applied.
+
+  [CONFIRMED] under the verified base case the argmax is the one-big-block face at ALL 21 levels of A_4..A_9 -- the claim is TRUE on its population
+  [CONFIRMED] under the counterfactual lambda_2(F(A_4)) = 9/10 it FAILS at 4 of 21 levels, first at A_6, i = 0: argmax (4, 2) at 0.600 > 1/2
+  [CONFIRMED] so the base case is LOAD-BEARING, not decorative: the summary that drops it attributes to Theorem J alone a conclusion J does not carry
+
+TARGET 4 (F4) -- A RULE ABOUT ENUMERATING A BRIEF, MIS-ENUMERATING ITS BRIEF
+----------------------------------------------------------------------------
+  [CONFIRMED] at `1e61031` BOTH sites enumerate FOUR (ledger row B6, the scope sentence, N1's label, the §10 table) -- against a ticket with six. Two sites, worded differently, wrong the same way
+  [CONFIRMED] STATE.md Appendix A: corrected to six by mg-ae62, and its correction note still names the old 'four things' -- the site is right and the record of it having been wrong survives
+  [CONFIRMED] GATE: deliverable §13 now enumerates SIX (B1-B6) -- the second site, left uncorrected by mg-ae62, closed here
+  [CONFIRMED] F4 was HALF-landed for a generation: mg-ae62 fixed the site it found by quoting it and the other stood.  A repair covering only the instance already known is this arc's most-repeated defect, so this is reported as half-landed rather than as new
+  [CONFIRMED] the CONCLUSION survives at both sites: G″ is none of mg-a806's items, whether the count is written four or six
+
+BOTTOM LINE
+-----------
+  checks recorded : 30
+  measurements    : 3
+  confirmed       : 27
+  refuted         : 0
+
+  All four findings are measured and all four stand.  F4 stands as
+  HALF-landed -- mg-ae62 fixed the STATE.md site and left the
+  deliverable's; this landing closes the second.

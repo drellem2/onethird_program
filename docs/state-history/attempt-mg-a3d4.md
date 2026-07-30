@@ -3,11 +3,18 @@
 Per-row history for `STATE.md` § *Attempt index*, the **AMBER-POSITIVE · THE BET IS PRICED (mg-a3d4)** row.
 Split out of the ledger cell by mg-34bf, 2026-07-30.
 
-Every passage below was **moved verbatim** out of that cell. Nothing was rewritten,
-condensed, summarised or dropped, and no citation was changed. The row now asserts current
-state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause by
-clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
+Every passage below **as of `57f962f`** was **moved verbatim** out of that cell. Nothing was
+rewritten, condensed, summarised or dropped, and no citation was changed. The row now asserts
+current state and points here; `code/state_restructure_34bf/verify_relocation.py` checks, clause
+by clause against the pre-restructure `STATE.md`, that every clause of the old cell is still
 present in the row or in this file. See [`README.md`](README.md) for the convention.
+
+⚠️ **`H7` and `H8` are NOT relocations and must not be read as any** (added 2026-07-30 by
+mg-e1d0, landing mg-3c24 F1 and F3). They are records **written here in the first place**,
+because the convention this file establishes is that a row asserts current state and its
+argument lives here — so a correction landed after the restructure belongs here on arrival
+rather than being written into the cell and moved later. The relevant **claims** are in the
+row; what is here is the argument and the measurement.
 
 ## Corrections, retractions, supersessions and mechanism notes
 
@@ -52,6 +59,57 @@ Two calibration defects repaired: **X1a's retirement rested on a false structura
 ### H6 — the sweep that established nothing consumed G″
 
 **Nothing consumed `G″`, and that is swept for rather than assumed**: three sites in the repository (the deliverable's §6 paragraph, the ledger row, and the mg-86a3 audit cell that originated the sentence — now annotated), **no consumer anywhere, and it never appeared in this document at all.**
+
+### H7 — the condition the summary dropped from row `G′`, and the measurement that it is load-bearing
+
+*Added 2026-07-30 by mg-e1d0, landing **mg-3c24 F3**. Not a relocation.*
+
+The row used to say, with **no condition**, that *"the per-level max is attained exactly at the one-big-block face"*, and to attribute that to **Theorem J**. It is not a conclusion of J. J gives
+
+```
+    λ₂(link σ)  =  max_j (b_j − 2)/D · λ₂(F(A_{b_j}))   ∨   (−1/D),      (b_j − 2)/D ≤ 1
+```
+
+which says the one-big-block face is the only one that can attain the factor's own `λ₂` — **not that it wins.** To conclude that it wins you need an **upper** bound on the factors, and **Theorem G gives only `λ₂(F(A_m)) ≥ 1/2`, in both directions.** The missing premise is the computational base case **`λ₂(F(A_m)) ≤ 1/2`, verified for `m ≤ 9`**. Both the deliverable's §6.1 and its ledger row `G′` carry it; **only the two `STATE.md` summaries dropped it, and both now carry it.**
+
+**Note the shape, because it is the finding rather than the clause: this is the same defect as mg-d39d's A2** (*"the replacement scope clause is an unhedged universal at 12 of 13 sites"*), **which the same row names as unlanded three lines away.** The body is careful and the summary is not — step 4c, at a new site.
+
+**The condition is load-bearing rather than decorative, and that was measured rather than asserted.** Re-evaluating J's closed form over **every block-size multiset of every level of `A_4 … A_9`**: under the verified base case the argmax is the one-big-block face at **21 of 21** levels; under a counterfactual `λ₂(F(A_4)) = 9/10` it moves off it at **4 of 21**, first at `A_6, i = 0`, where the `(4,2)` face reaches **`0.600 > 1/2`**. So a reader who takes the unconditioned sentence at face value is holding a claim that fails on an arithmetically consistent alternative — `code/hodge_leverage_landing_e1d0/verify_landing.py` **T3**.
+
+**Sized in the other direction, because narrowing a true row is the failure this arc has had both ways: row `G′` is TRUE on its population and is NOT narrowed here.** What the summary dropped was the population, and the population is what is restored.
+
+### H8 — mg-d39d's finding A5 was ENLARGED after it was opened, and the enlargement was not disclosed
+
+*Added 2026-07-30 by mg-e1d0, landing **mg-3c24 F1**. Not a relocation.*
+
+**A5 (MODERATE, still OPEN).** The deliverable's §14 asserts that *"the corresponding `STATE.md` row carries the same clauses"* as the row above. It does not.
+
+**What `1e61031` (mg-a2bd) did.** It **edited that very paragraph**, inserting *"the row below is UNCHANGED by mg-a2bd's strike of `G″`, and that is a fact rather than an omission … the strike therefore touches §6 and the ledger and nothing else"*; it **left the false sentence standing, unmarked**; and in the **same commit** it added the whole *"⚠️ SECOND-GENERATION AUDIT"* block to this row and nothing to §14's copy:
+
+```
+    STATE.md row  before mg-a2bd :  13 551 chars
+    STATE.md row  after  mg-a2bd :  16 692 chars   (+3 141)
+    deliverable §14 copy         :  10 623 chars   (unchanged)
+    the mismatch A5 reports      :   2 928  ->  6 069 chars   (more than doubled)
+```
+
+**The individual sentence mg-a2bd added is true** — `G″` really never was in §14, and the row really is correctly unchanged *with respect to `G″`*. The defect is that a sentence in the direction of reassurance was inserted **immediately above a sentence a live finding says is false**, in the commit that made that finding **twice as true**. `1e61031` declares A2–A8 unlanded three times and says nothing about having widened one of them. **Not landing a finding and enlarging it are different acts, and only the first was disclosed.**
+
+**And the figure A5 was opened on no longer measures what it measured.** mg-34bf's restructure (`57f962f`) relocated this row's history into this file, so:
+
+```
+    STATE.md row cell                          :   9 748 chars
+    this file (the relocated history)          :  10 483 chars
+    deliverable §14 copy (frozen since mg-a806):  10 623 chars
+    gap, cell only                             :    −875   (SIGN FLIPPED)
+    gap, cell + relocated history              :  +9 608
+```
+
+**So A5 stands on CLAUSES and not on characters**, and that is how it should be read from here on: **6 of 6** probed clauses are asserted by the row (or by this file) and by **nothing** in §14 — the mg-d39d second-generation audit block, ledger row `J` and its 48 846 genuine-join links, the struck `G″` and its mechanism, the *"one control gap … CLOSED by the audit's own rebuild"* clause, the A2–A8 not-landed declaration, and the row-history links themselves.
+
+Every figure above is re-measured from git and the tree by `code/hodge_leverage_landing_e1d0/verify_landing.py` **T1**; none is quoted from mg-3c24, which matters here more than usual because the finding *is* that nobody re-measured a number.
+
+**What is landed and what is not.** The false sentence is **struck** in §14 and the enlargement is now **disclosed** at both §14 and the row. **A5 itself is NOT landed** — making §14 mirror the row, or retiring the mirror, remains pm-onethird's to size. **Marking a finding and landing it are also different acts, and this is the first.**
 
 ## Supporting record — derivations, constructions, evidence and audit provenance
 
