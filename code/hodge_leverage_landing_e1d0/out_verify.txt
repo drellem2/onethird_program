@@ -81,16 +81,25 @@ whether the enlargement was disclosed anywhere.
         prose included -- against the live values plus a declared
         historical roster.  Marked quotations are exempt by the
         convention `assertions()` states; text outside the section is
-        not read, because a site is a section (mg-835f G-1/mg-8916).
-        the STATE.md row      17 licensed figure tokens (6 historical values declared)
-        §14                   16 licensed figure tokens (9 historical values declared)
-        H8                    36 licensed figure tokens (16 historical values declared)
+        not read, because a site is a section (mg-835f G-1/mg-8916);
+    (d) and each of those tokens IN THE SLOT A READER MEETS IT IN.
+        (c) alone is a MULTISET and is invariant under a permutation,
+        so two declared figures EXCHANGED in ordinary prose passed it
+        at 2 of 2 sites (mg-8aae H-1); (d) compares the SEQUENCE.
+        NOT covered by (d): two occurrences of the SAME token
+        exchanged, which is the identity map on values (mg-8eca).
+        the STATE.md row      17 licensed figure tokens in 17 declared slots (6 historical values declared)
+        §14                   16 licensed figure tokens in 16 declared slots (9 historical values declared)
+        H8                    36 licensed figure tokens in 36 declared slots (16 historical values declared)
 
   [CONFIRMED] GATE: the false sentence is STRUCK -- it appears 1 time in §14 and 1 of those is inside 'used to end "..."', i.e. quoted as the struck text and asserted nowhere
   [CONFIRMED] GATE: the enlargement 2 928 -> 6 069 is stated at BOTH the §14 section and the place A5 is recorded (the STATE.md row)
   [CONFIRMED] GATE @ the STATE.md row: FIGURE CENSUS -- all 17 figure token(s) a reader meets in this SECTION are licensed (5 live occurrence(s) at the values measured this run, 12 declared historical), and no other figure is asserted here.  Prose is read, not only the designated statements
+  [CONFIRMED] GATE @ the STATE.md row: FIGURE ORDER -- all 17 figure token(s) are in the declared slot a reader meets them in. The census above is a MULTISET and a multiset is invariant under a permutation, so two declared figures exchanged in ordinary prose passed it (mg-8aae H-1); this compares the SEQUENCE, which a transposition changes
   [CONFIRMED] GATE @ §14: FIGURE CENSUS -- all 16 figure token(s) a reader meets in this SECTION are licensed (3 live occurrence(s) at the values measured this run, 13 declared historical), and no other figure is asserted here.  Prose is read, not only the designated statements
+  [CONFIRMED] GATE @ §14: FIGURE ORDER -- all 16 figure token(s) are in the declared slot a reader meets them in. The census above is a MULTISET and a multiset is invariant under a permutation, so two declared figures exchanged in ordinary prose passed it (mg-8aae H-1); this compares the SEQUENCE, which a transposition changes
   [CONFIRMED] GATE @ H8: FIGURE CENSUS -- all 36 figure token(s) a reader meets in this SECTION are licensed (9 live occurrence(s) at the values measured this run, 27 declared historical), and no other figure is asserted here.  Prose is read, not only the designated statements
+  [CONFIRMED] GATE @ H8: FIGURE ORDER -- all 36 figure token(s) are in the declared slot a reader meets them in. The census above is a MULTISET and a multiset is invariant under a permutation, so two declared figures exchanged in ordinary prose passed it (mg-8aae H-1); this compares the SEQUENCE, which a transposition changes
   [CONFIRMED] GATE @ the STATE.md row: 'gap, cell only' READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
   [CONFIRMED] GATE @ the STATE.md row: 'gap, cell only' is WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
   [CONFIRMED] GATE @ the STATE.md row: 'gap, cell + relocated history' READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
@@ -165,14 +174,17 @@ TARGET 4 (F4) -- A RULE ABOUT ENUMERATING A BRIEF, MIS-ENUMERATING ITS BRIEF
 
 NEGATIVE CONTROL -- THE FIGURE GATE, MUTATED ONE COPY AT A TIME
 ---------------------------------------------------------------
-Fourteen mutations, verdicts written before the run, applied in memory to the
+Eighteen mutations, verdicts written before the run, applied in memory to the
 three site texts and evaluated by `figure_gate` itself.  Nothing is written to
 disk.  N1/N3/N4 are mg-8a5c's N1/N4/N5 -- the three single-copy corruptions
 that the previous gate observed at exit 0 while predicting exit 1.  N9 is the
 unmutated control.  N10-N12 are mg-835f's own U1 probes, the three the run
 stayed GREEN on until mg-8916 widened the gate; N13 is the one a
 set-membership census would still pass; N14 is the fail-closed cost, stated as
-a cost.
+a cost.  N15-N18 are mg-8aae's H-1: two DECLARED figures EXCHANGED with each
+other, the mutation a MULTISET cannot see because a transposition preserves it
+exactly, which the run stayed GREEN on at 2 of 2 sites until mg-8eca made the
+roster positional.
 
     mutation                                                              predicted     observed
     N1  STATE.md row: corrupt the LIVE gap figure ONLY                    GATE FIRES    GATE FIRES
@@ -189,14 +201,18 @@ a cost.
     N12 H8: a WRONG figure in ORDINARY PROSE at the site                  GATE FIRES    GATE FIRES
     N13 STATE.md row: wrong prose REUSING a figure already on the roster  GATE FIRES    GATE FIRES
     N14 §14: a NEW historical figure, undeclared (the fail-closed cost)   GATE FIRES    GATE FIRES
+    N15 H8: two DECLARED figures EXCHANGED (mg-8aae's own probe)          GATE FIRES    GATE FIRES
+    N16 H8: the row-history line's two historical columns EXCHANGED       GATE FIRES    GATE FIRES
+    N17 STATE.md row: the chain's LAST two terms exchanged (mg-8aae)      GATE FIRES    GATE FIRES
+    N18 STATE.md row: the chain's FIRST two terms exchanged               GATE FIRES    GATE FIRES
 
-  [CONFIRMED] 14 of 14 mutations moved the gate as predicted.  The three that matter are N1-N3: corrupting ONLY the figure a reader meets, at each of the three sites, which the presence-test gate observed at exit 0 (mg-8a5c N1/N4/N5). N5 fires on the duplicate itself, so the structural repair cannot be silently undone.  N10-N12 are mg-835f's G-1 -- a wrong figure in ORDINARY PROSE beside the statement -- which this gate passed at 3 of 3 sites and now fires on at 3 of 3 (mg-8916)
+  [CONFIRMED] 18 of 18 mutations moved the gate as predicted.  N15-N18 are mg-8aae's H-1 -- two DECLARED figures EXCHANGED with each other, which leaves the census's multiset IDENTICAL and which this gate passed at 2 of 2 sites until the roster was made positional (mg-8eca).  The three that matter are N1-N3: corrupting ONLY the figure a reader meets, at each of the three sites, which the presence-test gate observed at exit 0 (mg-8a5c N1/N4/N5). N5 fires on the duplicate itself, so the structural repair cannot be silently undone.  N10-N12 are mg-835f's G-1 -- a wrong figure in ORDINARY PROSE beside the statement -- which this gate passed at 3 of 3 sites and now fires on at 3 of 3 (mg-8916)
 
 BOTTOM LINE
 -----------
-  checks recorded : 59
+  checks recorded : 62
   measurements    : 3
-  confirmed       : 56
+  confirmed       : 59
   refuted         : 0
 
   All four findings are measured and all four stand.  F4 stands as
