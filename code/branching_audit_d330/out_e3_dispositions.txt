@@ -1,0 +1,122 @@
+==========================================================================
+E3  SECTION 8'S STATUS TABLE, CHECKED AGAINST THE DIFF, BOTH DIRECTIONS
+==========================================================================
+commits: 03d7f91 (delivered), 2e66d03 (mg-e8b8), ed9cde4 (mg-13b2, the target)
+
+--------------------------------------------------------------------------
+X2   label: CLOSED, at FOUR sites, in TWO commits
+--------------------------------------------------------------------------
+   The label is a conjunction of four site-claims and a two-commit
+   attribution.  A partial would be a site still open, or a site
+   attributed to the wrong commit.  Each is separated below.
+
+   SITE 1 --- section 0's 2x2 table cell.  Label: closed at 2e66d03.
+      [ok] was OPEN at 03d7f91 ('Path-pair *basis* survives')               present
+      [ok] is CLOSED at 2e66d03 ('Path-pair *count* survives')              present
+      [ok] the false form is gone at 2e66d03                                absent
+      [ok] still closed in the working tree (the TABLE ROW says count)      present
+      [ok] the false form survives in the tree only as a marked quotation   present
+      [ok] and no table row still asserts it                                absent
+      [ok] carried NO marker at 2e66d03 -- which is why the old label was wrong absent
+      [ok] carries a marker now, added by ed9cde4                           present
+
+   SITE 2 --- T1d's printed line, in t1_tl.py and its committed output.
+              Label: closed at 2e66d03.
+      [ok] was OPEN at 03d7f91 in t1_tl.py                                  present
+      [ok] was OPEN at 03d7f91 in out_t1_tl.txt                             present
+      [ok] is CLOSED at 2e66d03 in t1_tl.py                                 absent
+      [ok] is CLOSED at 2e66d03 in out_t1_tl.txt                            absent
+      [ok] still closed in the working tree (source)                        absent
+      [ok] still closed in the working tree (committed output)              absent
+      [ok] carried NO marker at 2e66d03                                     absent
+      [ok] carries a marker now, added by ed9cde4 (source)                  present
+      [ok] and the marker reaches the READER, i.e. the committed output     present
+
+   SITE 3 --- T1a's 'iff' header.  Label: closed at ed9cde4, not before.
+      [ok] was OPEN at 03d7f91                                              present
+      [ok] was STILL OPEN at 2e66d03 -- the label says so                   present
+      [ok] and still open in 2e66d03's committed output                     present
+      [ok] is CLOSED in the working tree (source)                           absent
+      [ok] is CLOSED in the working tree (committed output)                 absent
+      [ok] the corrected form 'ONLY IF' is in source                        present
+      [ok] and in the committed output                                      present
+      [ok] the converse is REFUTED, in source (T1c2)                        present
+      [ok] and the refutation reaches the reader                            present
+      the refutation's own figures: 7 of 20 (n, beta) pairs
+
+   SITE 4 --- section 1's clause table.  Label: a FOURTH site, named by
+              no list, closed at ed9cde4.
+      [ok] was OPEN at 03d7f91                                              present
+      [ok] was STILL OPEN at 2e66d03 -- so it is genuinely a fourth site    present
+      [ok] is CLOSED in the working tree                                    absent
+      [ok] the corrected form is in place                                   present
+      [ok] with the marker naming it a fourth site                          present
+
+   AND THE COUNTING CLAIM ITSELF: 'four, not the three mg-2060 named'.
+      mg-2060's audit names T1a's iff                    YES
+      mg-2060's audit names section 0's 2x2 cell         YES
+      mg-2060's audit names T1d's printed line           YES
+      mg-2060's audit names section 1's clause table     no
+      -> mg-2060 names 3 of the 4 sites; section 8 says 'three'.
+
+--------------------------------------------------------------------------
+X3   label: OPEN.  Untouched by 2e66d03 and by ed9cde4.
+--------------------------------------------------------------------------
+      [ok] the unqualified site is still in force                           present
+      unqualified '(VO Prop. 1.4)' lines: 1 (OPEN asserts exactly 1)
+      2e66d03: 0 added line(s), 0 deleted line(s) carrying the site
+      ed9cde4: 0 added line(s), 0 deleted line(s) carrying the site
+
+--------------------------------------------------------------------------
+X5   label: OPEN.  t3_ours.py byte-identical across both commits.
+--------------------------------------------------------------------------
+      [ok] t3_ours.py identical to its state at 03d7f91
+      [ok] t3_ours.py identical to its state at 2e66d03
+      [ok] t3_ours.py identical to its state at ed9cde4
+      [ok] and D5 still discloses it ('T3b prints twelve exempt')           present
+
+--------------------------------------------------------------------------
+X6   label: OPEN.  Section 7 still says four one-line derivations.
+--------------------------------------------------------------------------
+      [ok] section 7 says four                                              present
+      [ok] and the dispute is disclosed                                     present
+      section 7 enumerates 4 derivations inline (a)-(d): consistent with 'four'
+
+--------------------------------------------------------------------------
+n = 6 95.7%   label: OPEN, re-derived by nobody.
+--------------------------------------------------------------------------
+      [ok] disclosed in section 0 ('remains arithmetic')                    present
+      [ok] disclosed at D5 ('still arithmetic')                             present
+      [ok] and nothing re-derived it: t3_ours.py unmoved since delivery
+
+--------------------------------------------------------------------------
+Repaired 1   label: FIVE sites of the multiplicity-free assertion
+--------------------------------------------------------------------------
+      [ok] site 1  section 0's 'MEASURED (not cited)' sentence      2 block(s), 0 unmarked
+      [ok] site 2  'Multiplicity-freeness is held fixed down that column' 1 block(s), 0 unmarked
+      [ok] site 3  section 0's four-row table                       1 block(s), 1 unmarked
+      [ok] site 4  the 2x2 cell placement                           1 block(s), 1 unmarked
+      [ok] site 5  section 3's two sentences                        1 block(s), 0 unmarked
+
+--------------------------------------------------------------------------
+A FIFTH SITE OF X2?  swept over the whole tree, not one document
+--------------------------------------------------------------------------
+   Section 8 says X2 has four sites and that the fourth was found by
+   sweeping.  A sweep of the same document would find the same four.
+   This one is over every tracked .md/.py/.txt/.sh in the repository.
+
+   swept population: 728 tracked .md/.py/.txt/.sh files
+   occurrences of an X2-shaped claim : 53
+   marker window                     : 8 lines either side
+   of those, UNMARKED                : 0
+   -> NO FIFTH SITE.  Every one of the 53 occurrences sits inside a
+      withdrawal, a correction, a refutation or a checker's needle.
+
+   CALIBRATION --- what would have counted, and does it still fire?
+      [ok] a bare unmarked assertion IS caught      : 2 hit(s)
+      [ok] the same assertion, marked, is NOT caught: 0 hit(s)
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the git reads and file reads above
+FINDINGS: 0, population: the 55 site-checks across X2's four sites, X3, X5, X6, the 95.7% figure, Repaired 1's five sites, and the whole-tree sweep
+TOTAL BAD: 0

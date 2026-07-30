@@ -1,0 +1,107 @@
+==========================================================================
+E2  THE LABEL POPULATION, AND WHAT READS IT
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE DENOMINATOR --- every disposition-marked line in the document
+--------------------------------------------------------------------------
+   population: the 885 lines of OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+   lines carrying a marker from t5's OWN named vocabulary : 35
+   lines carrying only a marker t5's docstring does NOT name : 14
+   lines carrying any disposition marker                  : 49
+
+--------------------------------------------------------------------------
+(ii) WHICH OF THOSE LINES DOES t5_labels.py READ?
+--------------------------------------------------------------------------
+   t5 declares 29 labels and 100 checks.
+   string needles t5 looks for anywhere: 88
+
+   CRITERION, stated so it cannot be read as wider than it is: a marked
+   line is REACHED if some t5 needle is a substring of it or of the
+   line above or below it (needles span wrapped lines).  A line no
+   needle touches is a disposition the label instrument cannot see.
+
+   marked lines REACHED by at least one t5 needle : 27 of 49
+   marked lines NO t5 needle reaches              : 22 of 49
+
+   A LINE IS NOT A LABEL, so an unreached line is not yet a finding: a
+   label spans a block, and t5 may reach it through a different line of
+   the same block.  Each marked line is therefore assigned to its BLOCK
+   (paragraph, or table row), and a block counts as covered if ANY of
+   its lines is reached.  Only a marked line in a block t5 reaches
+   NOWHERE is a disposition the instrument cannot see.
+
+   blocks carrying a disposition marker  : 26
+   of those, blocks t5 reaches somewhere : 18
+   blocks t5 reaches NOWHERE             : 8
+
+   the dark blocks, in document order --- these are the dispositions
+   the label instrument does not see at all:
+     lines 118-118   markers ['WITHDRAWN']
+         118  ### The two objects, built — one of them WITHDRAWN
+     lines 155-166   markers ['withdrawn']
+         163  taken for identity of the structure"* is exactly how the withdrawn claim above
+     lines 239-245   markers ['CORRECTED']
+         239  **CORRECTED (mg-e8b8).** `TL_6(1)` and `TL_6(0)` were in the top-right cell.
+     lines 537-544   markers ['NOT ESTABLISHED', 'NOT read', 'OUTCOME (']
+         537  > **OUTCOME (mg-2060): NOT ESTABLISHED, and the audit did not establish it
+         538  > either.** *"D10, which is the deliverable. … Putcha … still NOT read, and
+     lines 707-719   markers ['corrected', 'withdrawn']
+         708  T1a's withdrawn *"iff"* at 7 of the 20 `(n, β)` pairs; the rewritten `T1b2` (i),
+         712  checkout**, because a label saying *"corrected at `2e66d03`"* is a claim about a
+     lines 741-749   markers ['NOT evaluated', 'NOT read']
+         745  - Graham–Lehrer, *Cellular algebras*, Invent. Math. **123** (1996) — **NOT read**; the Carta
+         746  - Goodman–de la Harpe–Jones, *Coxeter Graphs and Towers of Algebras*, MSRI 14 (1989), Ch. 2 
+         747  - Putcha, *Complex representations of finite monoids II: highest weight categories and quive
+         748  - Cox–Martin–Parker–Xi, *Representation theory of towers of recollement*, J. Algebra **302**
+     lines 828-835   markers ['Deliberately NOT repaired']
+         829  *"Deliberately NOT repaired, and each is open"* until `mg-13b2`. **It was wrong
+     lines 847-877   markers ['corrected']
+         852  sitting beside the corrected prose.** The column now carries the canonical
+         858  corrected outcome note at §4 item 3.
+
+   FINDING: t5_labels.py is documented, in the delivered document and in its README, as measuring EVERY disposition label in this document. 8 of the 26 disposition-marked BLOCKS are reached by no needle it looks for. Its population is a hand-written list of 29 labels with no denominator derived from the document, so 'every' is unmeasured and the count 29 has no population beside it.
+
+--------------------------------------------------------------------------
+(iii) THE FIGURES THE DOCUMENT PRINTS ABOUT ITS OWN LABEL INSTRUMENT
+--------------------------------------------------------------------------
+   These are numbers in the prose about a script in the same commit.
+   mg-a318's standing rule for this repo is that a gate must read the
+   figure AT THE SITE rather than restate it, and mg-8e30's is that a
+   duplicated literal is the defect.  Measured against a live run.
+
+   t5_labels.py, run now: exit 0
+   live: labels 29, checks 100, corruptions 7, of which firing 7
+
+   every site at which a figure about t5 is RESTATED:
+     '29 labels, 100 checks'                              x1 in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+         labels: stated 29, live 29 agree
+         checks: stated 100, live 100 agree
+     '**29 of\n   them, 100 checks**'                     x1 in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+         labels: stated 29, live 29 agree
+         checks: stated 100, live 100 agree
+     '29 labels, 100 checks'                              x1 in code/branching_locate_db09/README.md
+         labels: stated 29, live 29 agree
+         checks: stated 100, live 100 agree
+     '**7-mutation corruption battery**'                  x1 in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+         muts: stated 7, live 7 agree
+     '**All 7 fire.**'                                    x1 in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+         fired: stated 7, live 7 agree
+     '**and all 7 fire**'                                 x1 in docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md
+         fired: stated 7, live 7 agree
+     'all 7 fire'                                         x1 in code/branching_locate_db09/README.md
+         fired: stated 7, live 7 agree
+
+   sites at which these figures are written : 7
+   sites at which a gate DERIVES them       : 0
+     -- no check in t5_labels.py, and nothing in run_all.sh, compares
+        the document's stated 29/100/7 to what the script produces.
+        The figures are correct today; nothing keeps them correct.
+   FINDING: the figures describing t5_labels.py are written at 7 sites and derived at 0: adding or removing one label makes the document and its README wrong with every gate in the tree still green
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the import of t5_labels.py and the 8 file reads above
+FINDINGS: 2, population: the 49 disposition-marked lines and the 7 restated figures
+   FINDING: t5_labels.py is documented, in the delivered document and in its README, as measuring EVERY disposition label in this document. 8 of the 26 disposition-marked BLOCKS are reached by no needle it looks for. Its population is a hand-written list of 29 labels with no denominator derived from the document, so 'every' is unmeasured and the count 29 has no population beside it.
+   FINDING: the figures describing t5_labels.py are written at 7 sites and derived at 0: adding or removing one label makes the document and its README wrong with every gate in the tree still green
+TOTAL BAD: 2

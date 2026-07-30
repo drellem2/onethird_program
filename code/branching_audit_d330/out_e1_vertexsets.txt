@@ -1,0 +1,150 @@
+==========================================================================
+E1  THE VERTEX COLUMN: A SET, OR A RENDERING OF ONE?
+==========================================================================
+A FOURTH instrument.  kern_d330.py builds Temperley-Lieb half-diagrams,
+the cellular form and dim L(n,p) = rank of the Gram matrix over Q from
+the combinatorial definition, sharing no code with mg-db09's kerndb09,
+mg-2060's kern2060 or mg-a218's kern_a218.
+
+--------------------------------------------------------------------------
+(i) THE VERTEX SETS, MEASURED AFRESH
+--------------------------------------------------------------------------
+   beta = 3   [0:1]  [0:1,1:1]  [0:1,1:2]  [0:1,1:3,2:2]  [0:1,1:4,2:5]  [0:1,1:5,2:9,3:5]
+   beta = 2   [0:1]  [0:1,1:1]  [0:1,1:2]  [0:1,1:3,2:2]  [0:1,1:4,2:5]  [0:1,1:5,2:9,3:5]
+   beta = 1   [0:1]  [0:1,1:1]  [0:1,1:1]  [0:1,1:3,2:1]  [0:1,1:4,2:1]  [0:1,1:4,2:9,3:1]
+   beta = 0   [0:1]  [0:1]  [0:1,1:2]  [0:1,1:2]  [0:1,1:4,2:5]  [0:1,1:4,2:5]
+
+   population: the 24 (beta, n) cells --- 4 parameters x 6 levels.
+
+   sum over the n = 6 vertices of (dim L)^2, against section 0's
+   'dim (+)_lambda End(L_lambda)' column:
+     beta = 3 : 132   document says 132   agree
+     beta = 2 : 132   document says 132   agree
+     beta = 1 : 99   document says 99   agree
+     beta = 0 : 42   document says 42   agree
+
+--------------------------------------------------------------------------
+(ii) SECTION 0'S COLUMN, READ AT THE SITE
+--------------------------------------------------------------------------
+   beta = 3  document ['1', '1,1', '1,2', '1,3,2', '1,4,5', '1,5,9,5']
+             measured ['1', '1,1', '1,2', '1,3,2', '1,4,5', '1,5,9,5']   agree
+   beta = 2  document ['1', '1,1', '1,2', '1,3,2', '1,4,5', '1,5,9,5']
+             measured ['1', '1,1', '1,2', '1,3,2', '1,4,5', '1,5,9,5']   agree
+   beta = 1  document ['1', '1,1', '1,1', '1,3,1', '1,4,1', '1,4,9,1']
+             measured ['1', '1,1', '1,1', '1,3,1', '1,4,1', '1,4,9,1']   agree
+   beta = 0  document ['1', '1', '1,2', '1,2', '1,4,5', '1,4,5']
+             measured ['1', '1', '1,2', '1,2', '1,4,5', '1,4,5']   agree
+
+--------------------------------------------------------------------------
+(iii) IS THE COLUMN'S RENDERING INJECTIVE ON THE SETS THAT OCCUR?
+--------------------------------------------------------------------------
+   The column prints dimensions alone.  That is a FUNCTION of the vertex
+   set, not the set.  It reports the set faithfully exactly when it is
+   injective.  T1b2 checks this on the 36 SAME-LEVEL (parameter-pair,
+   level) cells.  Checked here over EVERY unordered pair of the 24
+   measured cells, across levels as well as across parameters.
+
+   pairs compared: 276, population: every unordered pair of the 24 cells
+   pairs where the RENDERING agrees and the SET does not: 0
+   of which same-level pairs (the target's own population): 36
+   same-level pairs where the COUNT agrees and the SET does not: 10 of 36
+
+   WHY THE RENDERING IS INJECTIVE HERE, and it is a SIDE CONDITION and
+   not a property of the rendering: the labels p carried by the live
+   vertices are an unbroken run from 0 at every one of the 24 cells, so
+   the dimension list determines the labels.  Measured:
+     cells whose labels are NOT an unbroken run from 0: 0 of 24
+
+--------------------------------------------------------------------------
+(iv) TWO GENUINELY DIFFERENT VERTEX SETS, CONSTRUCTED
+--------------------------------------------------------------------------
+   A = [0:1,1:1]   --- two irreducibles, labelled p = 0 and p = 1
+   B = [0:1,2:1]   --- two irreducibles, labelled p = 0 and p = 2
+
+   These are DIFFERENT SETS: B's second vertex is L(n,2) and A's is
+   L(n,1), which are different modules of the same dimension.  They are
+   the pair a set column must separate and a count column cannot.
+
+   count of A            : 2
+   count of B            : 2   -> a COUNT column shows them EQUAL
+   column rendering of A : [1,1]
+   column rendering of B : [1,1]   -> the REPAIRED COLUMN ALSO SHOWS THEM
+                                    EQUAL.
+   full labelled form  A : [0:1,1:1]
+   full labelled form  B : [0:1,2:1]   -> only this separates them
+
+   SO THE COLUMN DOES NOT SEPARATE ARBITRARY VERTEX SETS.  What it
+   separates is the vertex sets that satisfy the side condition in
+   (iii).  Whether that is enough turns entirely on whether the side
+   condition is GATED --- which is (v).  A rendering with an unchecked
+   side condition is a count in disguise; a rendering with a checked
+   one is not.
+
+--------------------------------------------------------------------------
+(v) THE DELETION TEST ON THE GUARD
+--------------------------------------------------------------------------
+   B is injected into t1_tl.py's own `vtx` at (n=2, beta=3) in a scratch
+   copy --- nothing in the tree is touched.  The injected cell renders
+   as [1,1], exactly as the real one does, so the column does not move
+   and only a guard can see it.
+
+   [baseline]           unpatched t1_tl.py                TOTAL BAD: 0
+   [B injected]         guards intact                     TOTAL BAD: 3
+        the run-from-0 guard names the injected cell : YES
+        the collision guard fires                    : YES
+   [B injected, guards deleted]                          TOTAL BAD: 0
+
+   THE TEST: the guards are load-bearing iff injecting B is RED with
+   them and GREEN without them.  Anything else means something other
+   than the guard caught it, or nothing did.
+   RESULT: RED 3 -> GREEN 0.  The two guards are the whole of what
+   stands between the delivered column and a false equality, and
+   they are load-bearing.
+
+--------------------------------------------------------------------------
+(vi) IS A COUNT COLUMN RETAINED BESIDE THE SET COLUMN?
+--------------------------------------------------------------------------
+   section 0's four-row table, its columns:
+      `β`
+      `dim TL_6`
+      `dim ⊕_λ End(L_λ)`
+      endomorphism algebra?
+      vertex SET at `n = 1…6`
+      branching, **MEASURED**
+   columns that are a count of irreducibles: 0
+
+   the withdrawn count rendering, swept over the delivered document:
+      '1, 2, 2, 3, 3, 4'   0 line(s) []
+      '1,2,2,3,3,4'        1 line(s) [848]
+      '1, 1, 2, 2, 3, 3'   0 line(s) []
+
+   the same sweep over the target instrument's committed output:
+      '1, 2, 2, 3, 3, 4'   1 line(s) in out_t1_tl.txt
+         136: The number of CELL modules at level n is [1, 2, 2, 3, 3, 4] --- parameter-free.
+   NOTE, not scored as a finding: the sequence survives in T1b2 (i) as
+   'the number of CELL modules at level n', which is a different object
+   (cell modules, not irreducibles), is parameter-free, and says so on
+   the same line.  It is recorded because it is the literal sequence the
+   withdrawn column printed, ten lines under the vertex sets.
+
+--------------------------------------------------------------------------
+(vii) NO DIGEST STANDS IN FOR THE SET
+--------------------------------------------------------------------------
+   My brief: do not accept a hash without checking it is over the SET
+   and not over a rendering of it.
+   t1_tl.py       digest calls: 0
+   t5_labels.py   digest calls: 4
+        import hashlib
+        a = hashlib.sha256(blob(commit, path).encode()).hexdigest()
+        b = hashlib.sha256(read(path).encode()).hexdigest()
+        return a == b, "sha256 %s vs %s at %s" % (b[:12], a[:12], commit)
+   The vertex column carries the dimensions themselves; no digest
+   stands between a reader and the measurement.  The only digests in
+   the target are sha256 over WHOLE FILE CONTENTS in t5's
+   `unchanged_since`, which is a file-identity check and not a
+   rendering of a set.  Nothing to accept or reject here.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the parses and scratch runs this script needs
+FINDINGS: 0, population: the 24 measured cells, the 276 rendering pairs, the constructed pair, the deletion test, and section 0's table columns
+TOTAL BAD: 0
