@@ -1,0 +1,81 @@
+==========================================================================
+T2a  POSITIVE CONTROL --- the full symmetric group tower
+==========================================================================
+The number of paths from the root to level n in the branching graph is
+sum_lambda f^lambda = the number of involutions in S_n.  Okounkov-
+Vershik Prop. 1.1: GZ(n) is the algebra of operators diagonal in the
+Gelfand-Tsetlin basis, hence has that dimension and is MAXIMAL
+commutative.
+
+  n  dim GZ(n)  # involutions    dim centralizer   maximal?
+  1          1              1                  1        yes
+  2          2              2                  2        yes
+  3          4              4                  4        yes
+  4         10             10                 10        yes
+  5         26             26                 26        yes
+
+==========================================================================
+T2b  MULTIPLICITY-FREENESS SWITCHED OFF, SEMISIMPLICITY KEPT
+==========================================================================
+Same algebra C[S_4] --- still semisimple, still a sum of endomorphism
+algebras --- but the chain has a level removed, so the branching is no
+longer multiplicity-free.  Okounkov-Vershik Remark 1.3 predicts the GZ
+algebra stops being maximal commutative, and that is what is measured.
+
+chain                      dim GZ      # paths  dim centralizer     maximal?
+S_1 < S_2 < S_3 < S_4          10           10               10          yes
+S_1 < S_2 < S_4                 8           10               14           NO
+S_1 < S_3 < S_4                 7           10               16           NO
+S_1 < S_4                       5           10               24           NO
+S_1 < S_2 < S_3 < S_4 < S_5         26           26               26          yes
+S_1 < S_2 < S_3 < S_5          18           26               42           NO
+
+  Every skipped chain has dim GZ strictly below the number of paths,
+  and is not maximal commutative.  The GELFAND-TSETLIN BASIS is what
+  multiplicity-freeness buys, and it is what is lost.
+
+==========================================================================
+T2c  Okounkov-Vershik Prop. 1.4, tested as an equality
+==========================================================================
+'restriction from M to N has simple multiplicities  <=>  Z(M,N) is
+commutative'.  Adjacent steps of the symmetric group tower are the
+multiplicity-free case; skipping a level is not.
+
+pair                 dim Z(M,N)     commutative?
+Z(CS_3, CS_2)                 4              yes   adjacent
+Z(CS_4, CS_3)                 7              yes   adjacent
+Z(CS_5, CS_4)                12              yes   adjacent
+Z(CS_4, CS_2)                14               NO   level(s) skipped
+Z(CS_5, CS_3)                28               NO   level(s) skipped
+Z(CS_5, CS_2)                66               NO   level(s) skipped
+
+==========================================================================
+T2d  THE CONCLUSION SURVIVES ANYWAY --- sum_lambda End(V_lambda) holds
+==========================================================================
+C[S_4] is semisimple whatever chain is drawn through it, so Wedderburn
+still gives C[S_4] = sum_lambda End(V^lambda).  Measured: the radical
+is zero, and the dimension is a sum of squares of the irreducible
+dimensions 1,1,2,3,3.
+  dim C[S_4] = 24, dim rad = 0, 1+1+4+9+9 = 24
+
+  And the minimal witness, with no group in sight: C inside M_2(C).
+  The unique simple of M_2 restricts to 2 copies of the simple of C, so
+  the Bratteli diagram has a DOUBLE EDGE.
+  dim M_2 = 4, dim rad = 0  ->  M_2 = End(V), V of dimension 2
+  # paths from the root to the top vertex = 2
+  dim GZ = 1  (< 2), dim centralizer of GZ = 4  -> NOT maximal commutative
+
+==========================================================================
+T2e  THE VERDICT
+==========================================================================
+Dropping multiplicity-freeness costs the CANONICAL BASIS and nothing
+else: the algebra is still a direct sum of endomorphism algebras, and
+paths still index a basis of each irreducible --- but the path basis is
+no longer determined, because GZ is no longer maximal commutative and
+the decomposition into irreducibles of the smaller algebra involves a
+choice of splitting of a multiplicity space.
+
+Dropping semisimplicity costs the CONCLUSION (T1).  The two hypotheses
+are not on a par.
+
+TOTAL BAD: 0

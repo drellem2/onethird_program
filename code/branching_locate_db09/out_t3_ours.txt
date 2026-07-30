@@ -1,0 +1,125 @@
+==========================================================================
+T3a  THE ALGEBRA AGAINST ITS ENDOMORPHISM-ALGEBRA SHADOW
+==========================================================================
+Every irreducible representation of kF(P) is one-dimensional (Brown;
+re-anchored at T3b below by dim kF(P)/rad = |AC(P)| together with the
+commutativity of the quotient).  So the algebra that Daniel's statement
+would produce --- sum over the vertices of End(V) --- has dimension
+|AC(P)| exactly, one for each vertex.
+
+P                |F(P)|    |AC(P)|  sum End dim    radical %
+antichain 1           1          1            1         0.0%
+chain 1               1          1            1         0.0%
+antichain 2           3          2            2        33.3%
+chain 2               2          2            2         0.0%
+antichain 3          13          5            5        61.5%
+chain 3               4          4            4         0.0%
+antichain 4          75         15           15        80.0%
+chain 4               8          8            8         0.0%
+antichain 5         541         52           52        90.4%
+chain 5              16         16           16         0.0%
+antichain 6        4683        203          203        95.7%
+chain 6              32         32           32         0.0%
+
+  The two figures the ticket carries: the radical is 90.4% of the
+  algebra at the n=5 antichain and 95.7% at n=6.  Both reproduce here
+  from |F| and |AC| alone.
+
+  Same numbers as a ratio: how many times too big the algebra is.
+    antichain 1    |F|/|AC| = 1/1 = 1.0
+    antichain 2    |F|/|AC| = 3/2 = 1.5
+    antichain 3    |F|/|AC| = 13/5 = 2.6
+    antichain 4    |F|/|AC| = 75/15 = 5.0
+    antichain 5    |F|/|AC| = 541/52 = 10.4
+    antichain 6    |F|/|AC| = 4683/203 = 23.1
+
+==========================================================================
+T3b  dim kF(P)/rad = |AC(P)|, through the trace form
+==========================================================================
+All poset classes to n <= 5 with |F(P)| <= 90.  Larger classes are
+listed as exemptions with their sizes, not silently dropped.
+
+  n = 1: 1 of 1 classes tested, 1 agree
+  n = 2: 2 of 2 classes tested, 2 agree
+  n = 3: 5 of 5 classes tested, 5 agree
+  n = 4: 16 of 16 classes tested, 16 agree
+  n = 5: 43 of 63 classes tested, 43 agree
+  tested 67, exempt 20 (sizes: [102, 104, 114, 120, 126, 132, 148, 150, 176, 220, 308, 541])
+
+  The two AC routes --- supports of faces, and acyclicity of the
+  quotient --- are also compared, all classes to n <= 4:
+    disagreements: 0
+
+==========================================================================
+T3c  THE CARTAN MATRIX --- the invariant that separates the two sides
+==========================================================================
+Margolis-Saliola-Steinberg (arXiv:1508.05446) Thm 4.18 computes the
+Cartan matrix of the algebra of a left regular band and states that it
+is 'unipotent lower triangular with respect to any linear extension of
+the partial order on Lambda(B)'.  It is rebuilt here from their own
+proof --- the character of kL_Y is chi(b) = |bB intersect L_Y|, and
+chi = sum_Z C_{Z,Y} chi_Z --- and then tested for the three properties
+that matter.
+
+The self-check that makes this trustworthy: for a split basic algebra
+(all simples one-dimensional) the entries of the Cartan matrix must sum
+to dim A.
+
+P               |Lam|    dim A    sum C nonneg int  unit diag   triangular  symmetric
+antichain 2         2        3        3        yes        yes          yes         NO
+chain 2             2        2        2        yes        yes          yes        yes
+antichain 3         5       13       13        yes        yes          yes         NO
+chain 3             4        4        4        yes        yes          yes        yes
+V-poset 3           5        6        6        yes        yes          yes         NO
+antichain 4        15       75       75        yes        yes          yes         NO
+chain 4             8        8        8        yes        yes          yes        yes
+antichain 5        52      541      541        yes        yes          yes         NO
+chain 5            16       16       16        yes        yes          yes        yes
+
+  sum C = dim A on every row, 0 exceptions: the computation is right.
+  Unipotent lower triangular on every row: MSS Thm 4.18 reproduced
+  against our object.
+  SYMMETRIC exactly on the rows where the algebra is semisimple.
+
+  Why that last column decides the question.  A cellular algebra in the
+  sense of Graham-Lehrer --- Temperley-Lieb, Brauer, partition, Hecke,
+  and the whole non-semisimple continuation of the branching axis ---
+  has a SYMMETRIC Cartan matrix.  A left regular band algebra has a
+  UNITRIANGULAR one.  A matrix that is both is the identity, and an
+  algebra with identity Cartan matrix and one-dimensional simples is
+  semisimple.  So the two families meet only at their semisimple point.
+
+==========================================================================
+T3d  WHERE OUR FAMILY MEETS THE BRANCHING AXIS --- a census
+==========================================================================
+kF(P) is semisimple exactly when |F(P)| = |AC(P)|, by T3b.  Over all
+poset isomorphism classes:
+
+  n    classes     semisimple which
+  1          1              1 total order
+  2          2              1 total order
+  3          5              1 total order
+  4         16              1 total order
+  5         63              1 total order
+
+  1 class of 63 at n = 5, and it is the total order, where kF(P) is the
+  commutative algebra k^(2^(n-1)) --- a sum of 2^(n-1) copies of End of
+  a one-dimensional space.  Daniel's conclusion is TRUE there and
+  carries no information.
+
+==========================================================================
+T3e  MULTIPLICITY-FREENESS ON OUR SIDE --- an ARGUMENT, not evidence
+==========================================================================
+Every simple kF(P)-module is one-dimensional.  A one-dimensional module
+over any subalgebra is simple, so along ANY chain of subalgebras every
+restriction multiplicity is 0 or 1 and the branching graph is
+automatically a graph, never a multigraph.
+
+This is forced for every P of every size, so a measurement of it cannot
+do any work and is NOT booked as evidence here.  (mg-6ad0's X5 is the
+finding that this repo has booked forced answers as MEASURED before.)
+It is stated because it settles which side of T1/T2 we are on: we have
+the hypothesis that does not carry the conclusion, and we fail the one
+that does.
+
+TOTAL BAD: 0
