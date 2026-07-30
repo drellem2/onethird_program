@@ -138,6 +138,24 @@ hypothesis, refuted by Daniel in one line. For **general** posets cycles do exis
 explicit n=9 witness, dropping the smallest known from 11 to 9; n=8 is **open**, not absent. No tension:
 transitivity is forced by the forbidden band `[1/3, 2/3]`, which a general poset does not satisfy.)*
 
+## Decision 2026-07-30 17:35 — the control lineage is CLOSED at five (pm-onethird; Daniel may OVERRIDE)
+
+Five controls were built over the same certified regions in one day, each closing its predecessor's gap and
+exposing a new layer: pinned-revision battery (blind at the *input*), substring control (blind at the *mutation
+set* — an auditor's 14 mutations, **8 silent**), content digest (**8 → 0**, verified by re-running the auditor's
+own battery), presentation record (**"the layer it claims is closed"**, 140 of 140 against two real GFM
+renderers). **That is a genuinely closed set of layers, independently confirmed.**
+
+**The residual, recorded rather than fixed:** the presentation check catches mg-babf's B07 **by an accident of
+placement** — the same paragraph one line earlier exits 0. Going into `COVERAGE.md` as a known accepted gap
+(mg-a05f).
+
+**Why we stop.** The evasion is *"move a paragraph exactly one line earlier"* — **adversarial-shaped, and we
+have no adversary.** These controls exist to catch accidental corruption of a correction record, and the digest
+plus presentation layers cover that comprehensively. Four consecutive iterations each closed their layer and
+moved the blind spot, so a sixth would predictably do the same: a smaller residual at constant cost, with no
+reason to expect a fixed point. **The value now lives in the stated boundary, not in more reach.**
+
 ## Now (in flight)
 - **mg-2da3** — repair the blind certification in `b68db5d`. mg-bd41 gutted `STATE.md` **175,552 → 37,958
   bytes** and the headline battery still reproduced its reference byte-identically. The battery pins fixed
