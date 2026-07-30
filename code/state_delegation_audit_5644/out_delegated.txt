@@ -1,0 +1,35 @@
+==========================================================================================
+mg-5644 — B1: SIX MUTATIONS ON THE SURFACE mg-bee1 CREATED
+'expected' is what THIS AUDIT PREDICTED BEFORE THE RUN, written into this file before it was executed.
+Q1 and Q2 are mg-babf's B06 and B05 — HTML comment, code fence — moved one file out onto
+the delegated target.  Q5 and Q6 are positive controls.
+==========================================================================================
+  OK  Q1    L4 on L1's surface     the cited file HTML-commented whole (reader sees nothing)  expected exit 0    got exit 0 (PASS)
+  OK  Q2    L4 on L1's surface     the cited file fenced whole (renders as a code sample)     expected exit 0    got exit 0 (PASS)
+  OK  Q3    L1 stated boundary     a retraction at the TOP of the target                      expected exit 0    got exit 0 (PASS)
+  OK  Q4    L1 stated boundary     a new UNCITED section appended to the target               expected exit 0    got exit 0 (PASS)
+  OK  Q5    L1 delegated content   a cited section's HEADING retitled (positive control)      expected exit 1    got exit 1 (FAIL)
+  OK  Q6    L1 delegated content   a contradiction inserted INSIDE cited H3 (positive)        expected exit 2    got exit 2 (MOVED)
+
+  6 of 6 rows run; 6 behaved as this audit predicted; 0 did not.
+
+==========================================================================================
+WHAT Q1 AND Q2 MEAN
+==========================================================================================
+  Both exit 0.  In both, every one of the five sections the certified ledger cell
+  cites BY NAME is byte-identical and every delegated digest matches, and a reader
+  who follows any of the cell's six links is shown a blank page (Q1) or a wall of
+  unrendered source (Q2).  That is exactly the state mg-babf's B05/B06 put the F1
+  block into while the control said PASS — the state mg-4acd was filed to close.
+
+  It is closed for the two files this instrument READS: section 8's default-deny
+  guards report raw HTML in prose and unmodelled block constructs over the whole
+  of STATE.md and the state-history README, so neither Q1 nor Q2 has an analogue
+  there.  The delegated target gets neither guard, and neither does any other
+  file a certified region may come to cite.
+
+  So 'closed for cited sections' is FALSE AS STATED, in the same shape as the
+  sentence mg-bee1 was filed to repair: the claim is quantified over cited
+  sections and the mechanism is quantified over their BYTES.
+
+==========================================================================================

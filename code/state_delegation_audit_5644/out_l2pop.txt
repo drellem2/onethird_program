@@ -1,0 +1,70 @@
+==========================================================================================
+mg-5644 — CAN L2 BE CLOSED BY A POPULATION RULE?  The construction, then its cost.
+==========================================================================================
+  control exit on the unmutated tree: 0
+  blockquote blocks in docs/state-history/README.md: 7 (the population)
+  of those, CERTIFIED by delta_control.py: 6; not certified: 1
+
+    lines   15-44   CERTIFIED      > **THOSE FIVE FIGURES WERE WRONG, here and in `57f962f`'s commi
+    lines  187-227  CERTIFIED      > **`b68db5d`'s HEADLINE VERIFICATION SENTENCE IS BLIND TO THE C
+    lines  229-264  CERTIFIED      > **"`negative_control.py` proves it fires" DID NOT ESTABLISH WH
+    lines  266-313  CERTIFIED      > **WHETHER THESE ARE THE CERTIFIED BYTES IS NOT THE SAME QUESTI
+    lines  315-378  CERTIFIED      > **THE PROPERTY THE BLOCK ABOVE PUBLISHES IS FALSE AS PUBLISHED
+    lines  380-387  not certified  > **`which located the source the audit did not name` is an over
+    lines  406-425  CERTIFIED      > **`no 4d tally` is a correction, and `133` / `220` are its cos
+
+  So the DECLARED not-certified list this rule needs has 1 entries, fixed at the tree it is written against.
+
+==========================================================================================
+DOES IT CATCH THE LAYER, OR ONLY mg-218d's MUTATION?
+==========================================================================================
+  FIRES  S1-as-built  mg-218d's own S1: an inverted near-copy under a new heading
+           undeclared blockquote at lines 439-458: > **LATER NOTE: `no 4d tally` was a correction, and `133
+  FIRES  S1-verbatim  a VERBATIM duplicate of a certified block, header untouched
+           one marker now matches TWO blocks: > **`no 4d tally` is a correction, and `133` / `220`
+  FIRES  S1'          the same near-copy placed in the MIDDLE of the file instead
+           undeclared blockquote at lines 46-46: > **A CONTRADICTING NEAR-COPY.**
+  FIRES  S1''         a near-copy with NO new heading at all
+           undeclared blockquote at lines 437-437: > **A SECOND F1 BLOCK THAT DISAGREES.**
+  FIRES  S1'''        a certified block's DUPLICATE inserted directly above it
+           undeclared blockquote at lines 187-187: > **A NEAR-COPY THAT DISAGREES.**
+  FIRES  R1           an EXISTING uncertified blockquote deleted (the rot direction)
+           a declared blockquote is GONE: > **`which located the source the audit did not name` is
+
+  6 of 6 fire.  The rule is not shaped around S1: it is
+  shaped around the POPULATION, so it fires on a near-copy anywhere, with or
+  without a new heading, and in the removal direction too.
+
+==========================================================================================
+WHAT IT WOULD COST — the same standard mg-bee1 held the document-global ordinal to
+==========================================================================================
+  A population rule re-baselines whenever the population changes.  Below: every
+  commit in this repository that touched docs/state-history/README.md, oldest
+  first, with its blockquote count.  The population is stated and nothing is
+  sampled.
+    6 commits touched it; 5 commit-to-commit transitions
+    the blockquote count changed at 5 of them  (100%)
+    series: 0 2 4 5 6 7
+
+==========================================================================================
+VERDICT ON THE NEGATIVE, WITH ITS BOUND
+==========================================================================================
+  'closing that by counting blockquotes would catch mg-218d's mutation and not
+   the layer' — NOT TRUE AS STATED of a population rule.  The construction above
+  is not a count and is not shaped around S1; it fires on every mutation that
+  changes the blockquote population of the README, in both directions.
+
+  'What would close L2 is a rule that decides which blocks ought to be certified,
+   and there is not one here' — the rule above IS one, and its discipline is
+  already in delta_control.py: section 8 is default-deny over an enumerated
+  population, and this is the same move applied to the region set.
+
+  THE BOUND, and it is why this audit reports the negative as OVERSTATED rather
+  than FALSE, and files no BROKEN on it.  The construction closes L2 for
+  BLOCKQUOTE blocks in ONE file.  A contradicting near-copy written as a plain
+  paragraph, or as a table, or placed in STATE.md, is outside its population and
+  still exits 0.  So mg-bee1's substantive point — that no rule here decides
+  which blocks OUGHT to be certified in general — stands.  What does not stand is
+  the specific claim that the available fix is mutation-shaped: it is not, it is
+  cheap, and declining it costs more than the argument for declining it says.
+==========================================================================================

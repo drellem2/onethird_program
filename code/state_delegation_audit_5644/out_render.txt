@@ -1,0 +1,39 @@
+==========================================================================================
+mg-5644 — IS A READER SHOWN THE CITED SECTIONS?  Measured, on two renderers.
+==========================================================================================
+  target      docs/state-history/attempt-mg-276d.md
+  population  the 5 sections the certified ledger cell cites BY NAME: H1 H2 H3 H4 H5
+  tests       ANY     — the section's heading text appears anywhere a reader looks
+              HEADING — it appears as a <h1>..<h6>, i.e. as the document's own prose
+
+  Q1  one `<!--` line at the top, never closed
+        marked       ANY 0/5   HEADING 0/5   as prose: (none)
+        markdown-it  ANY 0/5   HEADING 0/5   as prose: (none)
+
+  Q2  one ``` line at the top, never closed
+        marked       ANY 5/5   HEADING 0/5   as prose: (none)
+        markdown-it  ANY 5/5   HEADING 0/5   as prose: (none)
+
+  Q0  unmutated — the positive control
+        marked       ANY 5/5   HEADING 5/5   as prose: H1 H2 H3 H4 H5
+        markdown-it  ANY 5/5   HEADING 5/5   as prose: H1 H2 H3 H4 H5
+
+==========================================================================================
+VERDICT
+==========================================================================================
+  60 comparisons over 2 independent renderers; both renderers agreed on every one.
+  Q0 unmutated   : all 5 cited sections rendered AS HEADINGS on both — as expected
+  Q1 HTML comment: 0 cited sections visible AT ALL on either        — CONFIRMED
+  Q2 code fence  : 0 as headings, 5 as literal source on both — CONFIRMED
+
+  Q1 IS THE STRONG ROW.  A reader who follows any of the certified cell's six
+  links is shown a BLANK PAGE by both renderers, and delta_control.py exits 0.
+
+  Q2 IS THE WEAKER ROW AND IS REPORTED AS SUCH.  The characters are still on the
+  page; what is gone is that they are the document's prose.  Every cited section
+  becomes the contents of a code sample — the exact state mg-babf's B05 put the
+  F1 block into, which mg-4acd's `state` field classifies as a miss and which
+  this control now exits 0 on when it happens one file out.
+
+  This is a measurement, not a reading of the spec.
+==========================================================================================
