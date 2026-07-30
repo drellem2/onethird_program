@@ -49,3 +49,12 @@ W3c  the corrected readings are present at source
 ==============================================================================
 W3 SCOPE: FAIL   (12 problem(s))
 ==============================================================================
+
+EXTENT OF THAT VERDICT (added mg-a4ef).  This checker enforces TWO
+corrected statements -- X4 and X5 -- plus the character-ring rule,
+over ONE tree.  mg-6f61 enumerated ten stricken sentences; eight of
+them are NOT on this list, and X3 and the AM 17.5 quotation were in
+force in code/species_7d75 for the whole time this file reported
+PASS.  A PASS HERE IS NOT COVERAGE OF THE OTHER NINE STATEMENTS.
+The union of both lists over all trees is:
+    python3 code/species_repair_a4ef/s1_extent.py

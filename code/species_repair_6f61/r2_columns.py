@@ -29,9 +29,14 @@ down before the run.
 
 THE PREDICT-FIRST DISCIPLINE.  Every mutation below carries the five-column
 outcome THIS REPAIR PREDICTED BEFORE THE RUN, written into this file before
-it was executed.  The run prints predicted-vs-actual for all 40 cells.  A
-battery whose expectations are written after the run cannot be wrong, which
-is the same as saying it cannot be evidence.
+it was executed.  The run prints predicted-vs-actual for all 45 cells, of
+which 2 were missed and both are published.  A battery whose expectations are
+written after the run cannot be wrong, which is the same as saying it cannot
+be evidence.
+
+(This docstring said "40 cells" until mg-a4ef, on mg-73df's Y5, against its
+own committed run -- `out_r2_columns.txt` prints "45 cells" and "MISSED: 2 of
+45" -- and against section 5, which says 45.)
 """
 
 import sys

@@ -63,8 +63,24 @@ T6c  RECORD CORRECTION -- the axiom that killed the tower story is not
   fails for HOPF MONOIDS.  In a Hopf monoid in species the unit object
   lives only in degree empty; there is no 1_S for nonempty S and no
   unitality requirement on mu_{S,T} at all.  That same concatenation
-  IS mu_{S,T}, and T5 measured it against every Hopf monoid axiom with
-  0 failures on 4399 basis elements.
+  IS mu_{S,T}, and T5 measures it on 4399 basis elements.
+
+  CORRECTED AT SOURCE (mg-a4ef, on mg-a61f's X3 via mg-73df).  What
+  stood here -- and in this file's committed output, inside a run that
+  ends by reporting ZERO BAD for T6 -- is the sentence section 0
+  of the document STRIKES:
+  'T5 measured it against every Hopf monoid axiom with 0 failures on
+  4399 basis elements'.  mg-6f61 struck it in the document and left it
+  in force here; mg-f8fa's w3_scope.py does not carry it on its list.
+  WHAT 4399 BASIS ELEMENTS MEASURE IS CLOSURE, AND ONLY CLOSURE.  Of
+  T5's five columns two CAN fail on our subspecies and three CANNOT:
+  associativity, coassociativity and compatibility are identities of
+  the AMBIENT Hadamard product, verified once and not 4399 times.
+  Each of the five is separately demonstrated able to fail, under
+  mutations whose outcome was written down before the run --
+  code/species_repair_6f61/out_r2_columns.txt (45 predicted cells, 2
+  missed and both published) and, from an instrument sharing no code,
+  code/species_audit_73df/out_c1_columns.txt (60 cells, 4 missed).
 
   So the Bergeron-Li negative does NOT transfer, and the framework it
   ruled out is not the framework this ticket is about.

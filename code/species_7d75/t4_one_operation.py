@@ -19,8 +19,17 @@ them on one instrument:
   * P a poset with Aut(P) trivial   ->   k^{AC(P)},    indexed by the
     QUOTIENTS OF P.                                       [the poset story]
   * P the antichain, G = S_n        ->   k^{Pi_n / S_n} = k^{p(n)},
-    indexed by INTEGER PARTITIONS, and the left side is Solomon's descent
-    algebra by T3.                                        [the S_n story]
+    indexed by INTEGER PARTITIONS, and the left side is ANTI-isomorphic to
+    Solomon's descent algebra by T3.                      [the S_n story]
+
+    CORRECTED AT SOURCE (mg-a4ef, on mg-73df's Y2).  This line used to say
+    "is Solomon's descent algebra".  It is the OPPOSITE algebra: Aguiar-
+    Mahajan Theorem 10.13 reads "The descent algebra is isomorphic to
+    (Sigma[n]^{S_n})^{op}", and T3d MEASURES the plain reading to fail by
+    0/0/4/54/472 mismatching structure constants at n = 1..5 while the
+    anti-isomorphism holds at 0 throughout.  Nothing downstream moves --
+    the radical quotient is commutative, so the op is invisible after /rad,
+    which is why the loose form survived.
 
   T4a  dim (kF(P))^G = |F(P)/G|, and the orbit sums span a subalgebra.
   T4b  Phi^G : (kF(P))^G -> k^{AC(P)/G} is well defined (independent of the

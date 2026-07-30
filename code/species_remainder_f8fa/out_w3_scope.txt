@@ -32,9 +32,9 @@ W3b  EVERY occurrence of the CITED identification is marked, not only the ledger
   out_t4_one_operation.txt               line 34    marked
   out_t6_fock_and_record.txt             line 16    marked
   out_t6_fock_and_record.txt             line 26    marked
-  t4_one_operation.py                    line 201   marked
-  t6_fock_and_record.py                  line 66    marked
-  t6_fock_and_record.py                  line 76    marked
+  t4_one_operation.py                    line 210   marked
+  t6_fock_and_record.py                  line 75    marked
+  t6_fock_and_record.py                  line 85    marked
 
   8 occurrence(s) checked.
 
@@ -52,3 +52,12 @@ W3c  the corrected readings are present at source
 ==============================================================================
 W3 SCOPE: PASS   (0 problem(s))
 ==============================================================================
+
+EXTENT OF THAT VERDICT (added mg-a4ef).  This checker enforces TWO
+corrected statements -- X4 and X5 -- plus the character-ring rule,
+over ONE tree.  mg-6f61 enumerated ten stricken sentences; eight of
+them are NOT on this list, and X3 and the AM 17.5 quotation were in
+force in code/species_7d75 for the whole time this file reported
+PASS.  A PASS HERE IS NOT COVERAGE OF THE OTHER NINE STATEMENTS.
+The union of both lists over all trees is:
+    python3 code/species_repair_a4ef/s1_extent.py

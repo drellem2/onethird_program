@@ -10,11 +10,20 @@ to that book states the definition:
     "By definition, we have K(p) = (+)_n p[n]_{S_n}, where p[n]_{S_n} denotes
      the space of S_n coinvariants of p[n]."
 
-and Section 17.4 is quoted in Section 17.5 as:
+and Section 17.4 is quoted in Section 17.5.  CORRECTED AT SOURCE (mg-a4ef,
+on mg-a61f's X6/X7 via mg-73df).  What this docstring printed was mg-7d75's
+RECONSTRUCTION with the species Pi in both slots -- the string section 4 of
+the document STRIKES -- and it was left in force here through two repairs.
+The book's species is Pi* in both slots.  As pdftotext serves it:
 
-    "Recall from Section 17.4 that K-bar(Pi) is the algebra of symmetric
-     functions in noncommuting variables and K(Pi) is the familiar Hopf
+    "Recall from Section 17.4 that K(Pi*) is the algebra of symmetric
+     functions in noncommuting variables and K(Pi*) is the familiar Hopf
      algebra of symmetric functions."
+
+(The two K's are distinguished in the book by an overline on the first; no
+extraction available here renders it.)  The Pi-vs-Pi* difference is
+mathematically harmless and the book says why on the same page -- Section
+17.4.1, "Since Pi and Pi* are isomorphic".
 
 So the Bell(n) / p(n) gap that this ticket was told to explain is the gap
 between the two Fock functors on ONE species, and this file measures it.
@@ -146,8 +155,24 @@ print("  but nothing in the record separated the two -- is that the same map")
 print("  fails for HOPF MONOIDS.  In a Hopf monoid in species the unit object")
 print("  lives only in degree empty; there is no 1_S for nonempty S and no")
 print("  unitality requirement on mu_{S,T} at all.  That same concatenation")
-print("  IS mu_{S,T}, and T5 measured it against every Hopf monoid axiom with")
-print("  0 failures on 4399 basis elements.")
+print("  IS mu_{S,T}, and T5 measures it on 4399 basis elements.")
+print()
+print("  CORRECTED AT SOURCE (mg-a4ef, on mg-a61f's X3 via mg-73df).  What")
+print("  stood here -- and in this file's committed output, inside a run that")
+print("  ends by reporting ZERO BAD for T6 -- is the sentence section 0")
+print("  of the document STRIKES:")
+print("  'T5 measured it against every Hopf monoid axiom with 0 failures on")
+print("  4399 basis elements'.  mg-6f61 struck it in the document and left it")
+print("  in force here; mg-f8fa's w3_scope.py does not carry it on its list.")
+print("  WHAT 4399 BASIS ELEMENTS MEASURE IS CLOSURE, AND ONLY CLOSURE.  Of")
+print("  T5's five columns two CAN fail on our subspecies and three CANNOT:")
+print("  associativity, coassociativity and compatibility are identities of")
+print("  the AMBIENT Hadamard product, verified once and not 4399 times.")
+print("  Each of the five is separately demonstrated able to fail, under")
+print("  mutations whose outcome was written down before the run --")
+print("  code/species_repair_6f61/out_r2_columns.txt (45 predicted cells, 2")
+print("  missed and both published) and, from an instrument sharing no code,")
+print("  code/species_audit_73df/out_c1_columns.txt (60 cells, 4 missed).")
 print()
 print("  So the Bergeron-Li negative does NOT transfer, and the framework it")
 print("  ruled out is not the framework this ticket is about.")
