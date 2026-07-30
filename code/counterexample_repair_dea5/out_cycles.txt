@@ -1,0 +1,123 @@
+==============================================================================
+MAJORITY CYCLES FOR GENERAL POSETS: THE SMALLEST IS AT n = 9, EXACTLY
+==============================================================================
+Majority cycles for GENERAL posets: the smallest one is at n = 9, exactly.
+
+What the target document says (section 2):
+
+    "Found by random search (seed 4242); no cycle in 4200 random posets at each of
+     n = 8, 9, 10.  n = 11 is not claimed to be minimal -- only that a witness
+     exists, and hence that the exhaustive range is too small to see one."
+
+Three things are wrong with that as evidence, and one of them is fatal:
+
+  * the search is not in the target's instrument, so `run_all.sh` reproduces the
+    PRINTING of the sentence and `check_doc.py` compares a string against a
+    print statement;
+  * there IS a cycle at n = 9 (mg-a7b4's witness, rebuilt and re-verified here
+    from its cover relations by an instrument that shares no code with either);
+  * there IS a cycle at n = 10, and it is the document's own n = 11 witness with
+    its isolated element deleted.
+
+This file replaces the sampling negative with an EXHAUSTIVE one where that is
+affordable and with a verified witness where it is not:
+
+    n <= 8   exhaustive over every isomorphism class, ties included:  NO cycle
+    n = 9    a cycle exists (witness, in full)
+    n = 10   a cycle exists (the n = 11 witness minus its isolated element)
+    n = 11   the document's witness, reproduced
+
+so the smallest n admitting a majority cycle is EXACTLY 9.
+
+It also runs a random search at n = 9 with the document's own sample size, three
+times over, and finds nothing -- while the witness sits three lines above it in
+the same output.  That is the point: a negative reported with a sample size on it
+is evidence-shaped and is not evidence.  Both halves are printed by the same
+instrument so a reader cannot take the number for the fact.
+
+------------------------------------------------------------------------------
+1. EXHAUSTIVE, n = 3..8, every isomorphism class, ties included
+------------------------------------------------------------------------------
+x -> y iff p(x,y) > 1/2; tied pairs are left unoriented, so a cycle here
+is a cycle of the strict majority relation.  Comparable pairs orient with P.
+
+n        posets   non-chains     tie-free with a cycle
+3             5            4            1            0
+4            16           15            3            0
+5            63           62           16            0
+6           318          317           88            0
+7          2045         2044          671            0
+8         16999        16998         6420            0
+
+  0 majority cycles in 19440 non-chain posets at n <= 8, EXHAUSTIVELY.
+  n = 8 is 16,998 non-chains up to isomorphism -- the whole population, not
+  a sample.  This is the line the document reported as a 4200-poset search.
+
+------------------------------------------------------------------------------
+2. n = 9: A CYCLE EXISTS.  The witness, rebuilt from its covers
+------------------------------------------------------------------------------
+  mg-a7b4's n = 9 witness
+    covers   0<5 0<8 1<4 1<6 2<3 2<7 3<6 4<8 5<7
+    n = 9   e(P) = 1431   tie-free = True   incomparable pairs = 24
+    isolated elements: none
+    majority cycle  0 -> 2 -> 1 -> 0
+      p(0,2) = 80/159       = 0.50314   INSIDE the band [1/3, 2/3]
+      p(2,1) = 80/159       = 0.50314   INSIDE the band [1/3, 2/3]
+      p(1,0) = 80/159       = 0.50314   INSIDE the band [1/3, 2/3]
+
+    and it does not shrink: single-element deletions
+      deletions that preserve a majority cycle: NONE (consistent with the exhaustive n = 8 sweep)
+
+------------------------------------------------------------------------------
+3. n = 10 and n = 11: the document's own witness, and its isolated element
+------------------------------------------------------------------------------
+  the document's n = 11 witness
+    covers   0<2 0<6 0<9 1<3 1<9 2<10 3<6 3<7 4<5 4<6 6<10
+    n = 11   e(P) = 78474   tie-free = True   incomparable pairs = 38
+    isolated elements: [8]
+    majority cycle  5 -> 9 -> 6 -> 5
+      p(5,9) = 597/1189     = 0.50210   INSIDE the band [1/3, 2/3]
+      p(9,6) = 599/1189     = 0.50378   INSIDE the band [1/3, 2/3]
+      p(6,5) = 1784/3567    = 0.50014   INSIDE the band [1/3, 2/3]
+
+    element 8 is isolated, so delete it:
+  the same witness on n = 10
+    covers   0<2 0<6 0<8 1<3 1<8 2<9 3<6 3<7 4<5 4<6 6<9
+    n = 10   e(P) = 7134   tie-free = True   incomparable pairs = 28
+    isolated elements: none
+    majority cycle  5 -> 8 -> 6 -> 5
+      p(5,8) = 597/1189     = 0.50210   INSIDE the band [1/3, 2/3]
+      p(8,6) = 599/1189     = 0.50378   INSIDE the band [1/3, 2/3]
+      p(6,5) = 1784/3567    = 0.50014   INSIDE the band [1/3, 2/3]
+    e(P) drops 78474 -> 7134, and 78474 = 11 * 7134 (a free element goes into
+    any of 11 slots), so the pair probabilities are unchanged.
+
+------------------------------------------------------------------------------
+4. THE SAME NEGATIVE THE DOCUMENT REPORTED, RUN HERE, AT n = 9
+------------------------------------------------------------------------------
+Sample size 4200 -- the document's own number -- at each of 3 densities,
+seed 4242.  A cycle at n = 9 exists (section 2 above).  The search:
+
+density       samples   non-chains       cycles
+0.20             4200         4200            0
+0.30             4200         4200            0
+0.40             4200         4195            0
+
+  0 cycles in 12595 random posets at n = 9 -- AND A CYCLE AT n = 9 EXISTS.
+  So this negative is FALSE as a statement about n = 9, and it is exactly
+  the shape of negative the document attached 4200 to.  The phenomenon is
+  rarer than this sampler reaches, and rare-and-present is indistinguishable
+  from absent to any sampler.  Only the exhaustive sweep of part 1 settles a
+  size, and only up to n = 8.
+
+------------------------------------------------------------------------------
+CONCLUSION
+------------------------------------------------------------------------------
+  n <= 8 : NO majority cycle, exhaustively, ties included (16,998 non-chains
+           at n = 8 alone).
+  n = 9  : a cycle EXISTS, witness verified above, and it is minimal in the
+           strong sense that no single-element deletion keeps it.
+  n = 10 : a cycle EXISTS, from the document's own n = 11 witness.
+  So the smallest n carrying a majority cycle is EXACTLY 9, and the
+  document's 'no cycle at n = 8, 9, 10' was wrong at 9 and at 10 and
+  unreproducible at all three.

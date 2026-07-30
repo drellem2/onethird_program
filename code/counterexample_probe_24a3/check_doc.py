@@ -89,19 +89,77 @@ CHECKS = [
     ("extremal e=3 n=6", "4 of 5", "n=6: 4 of 5 extremal posets have e(P) = 3"),
 ]
 
+# Entries whose DOC STRING WAS STRUCK from the document by the mg-dea5 repair.
+#
+# The struck sentences are still in the file -- quoted verbatim inside a
+# "> **STRUCK" epitaph, so the retraction is legible where the claim stood -- and
+# the arithmetic behind them is still correct, which is why they were listed here
+# in the first place.  But a checker that finds a string and cannot tell live prose
+# from an epitaph certifies a retracted claim, and that is exactly the hole mg-a7b4
+# named about this file (audit finding 1: "check_doc.py cannot catch this: its entry
+# for these rows checks that the string 'rank 1 of 5 tied with 4' appears in both the
+# prose and the output.  It does, and the arithmetic behind it is right.  The defect
+# is entirely in the quantifier.")
+#
+# So for these entries the doc-side assertion is INVERTED: the string must appear,
+# and EVERY occurrence of it must lie inside a struck block.  If a future edit puts
+# one of them back into live prose, this file fails.
+STRUCK = {
+    "random search budget",     # "4200 random posets" -- false at n = 9 and n = 10
+    "tie n=5", "tie n=6", "tie n=7",   # the e(P)-controlled "exact tie" universal
+}
+
+
+def struck_regions(doc):
+    """Spans of the doc occupied by a '> **STRUCK' blockquote."""
+    spans = []
+    lines = doc.split("\n")
+    pos = 0
+    start = None
+    for line in lines:
+        stripped = line.lstrip()
+        if start is None and stripped.startswith("> **STRUCK"):
+            start = pos
+        elif start is not None and not stripped.startswith(">"):
+            spans.append((start, pos))
+            start = None
+        pos += len(line) + 1
+    if start is not None:
+        spans.append((start, pos))
+    return spans
+
+
+def only_inside(doc, needle, spans):
+    """True iff `needle` occurs at least once and every occurrence is in a span."""
+    i = doc.find(needle)
+    if i < 0:
+        return False
+    while i >= 0:
+        if not any(a <= i < b for a, b in spans):
+            return False
+        i = doc.find(needle, i + 1)
+    return True
+
 
 def main():
     doc = open(DOC).read()
     out = open(PROBE).read() + open(SELF).read()
     bad = []
+    spans = struck_regions(doc)
     for label, in_doc, in_out in CHECKS:
-        d = in_doc in doc
+        struck = label in STRUCK
+        d = only_inside(doc, in_doc, spans) if struck else (in_doc in doc)
         o = in_out in out
         if not (d and o):
             bad.append((label, d, o, in_doc, in_out))
-        print("  [%s] %-34s doc:%s out:%s"
+        print("  [%s] %-34s doc:%s out:%s%s"
               % ("ok  " if (d and o) else "FAIL", label,
-                 "yes" if d else "NO ", "yes" if o else "NO "))
+                 "yes" if d else "NO ", "yes" if o else "NO ",
+                 "   STRUCK: quoted only inside its epitaph" if struck else ""))
+    print()
+    print("  (%d struck entries: the instrument still prints the figure, and the doc"
+          % len(STRUCK))
+    print("   must carry the sentence ONLY inside a '> **STRUCK' block.  See STRUCK.)")
     print()
     # global guards
     guards = []

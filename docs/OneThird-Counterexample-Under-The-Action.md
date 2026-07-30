@@ -8,6 +8,16 @@ code with `code/face_geometry/`, `code/hodge_leverage/` or `code/semigroup_note/
 from its definition in exact rational arithmetic, and it reproduces the worked example of
 `docs/OneThird-Semigroup-Walk-Family-Note.md` from scratch as a control (C10).*
 
+***Repaired 2026-07-30 by mg-dea5**, landing the three findings of
+`docs/OneThird-Counterexample-Under-The-Action-IndependentAudit.md` (mg-a7b4). Three passages changed: §4 and
+its two summaries (a false universal, struck, and the signal underneath it re-measured to `n = 8`), §5.2's
+Theorem 4 (generalised to every weight), and §2's sampling negative (struck; the smallest majority cycle is
+at `n = 9` exactly). Every struck sentence is quoted where it stood rather than paraphrased. The figures in
+the repaired passages come from `code/counterexample_repair_dea5/`, which imports nothing from
+`probe_24a3/` or `audit_a7b4/`; the reasoning is in
+`docs/OneThird-Counterexample-Under-The-Action-Repair.md`. **Nothing else in this document is touched, and
+neither headline answer moves.***
+
 ---
 
 ## 0. The one thing to read first: what is conditional and what is not
@@ -31,8 +41,13 @@ measurement over a stated population, and is labelled as one.
    quantified rather than asserted: it is already satisfied by **60.3% of the non-chain posets on 7
    elements**, none of which is a counterexample, the fraction **grows** with `n`, and the posets that
    satisfy it most strongly are this programme's own canonical *unfrozen* family (§3).
-3. **The quotient-side signal is real and entirely explained by `e(P)`.** Controlling for the
-   linear-extension count, the extremal posets are *tied with every other member of their group* (§4).
+3. **The quotient-side signal is real, and `e(P)` explains one of the two statistics and not the other.**
+   `qfrac` is fully accounted for by the linear-extension count (`ρ|e` between `−0.01` and `+0.02`). `qmass`
+   is **not**: at `ρ|e ≈ −0.27` it survives the control on 6420 posets at `n = 8`, and in all three
+   `e`-groups where the comparison is capable of failing, `qmass = 1` picks out **exactly** the `δ`-extremal
+   posets — 1 of 7, 3 of 13, 6 of 20, exact `p = 1/38760` on the one pre-specified test (§4). *This
+   corrects the original headline, which reported an exact tie; the tie was measured only on `e = 3` groups,
+   where every member is extremal by construction (mg-dea5).*
 4. **One genuine `e(P)`-independent signal exists** — the action's own balance constant `δ_walk`, computed
    from face counts with no reference to `L(P)`, tracks `δ` with per-pair correlation `0.9945` at `n = 6`.
    It is a **heuristic only**: it is not an inequality in either direction, it already misfires at the `1/3`
@@ -100,7 +115,9 @@ weaker hypothesis "every pair has a majority" does **not** give transitivity: ma
 extensions of a general poset genuinely do have directed cycles. Both facts are checked here, and the second
 one is the reason the first has to be argued rather than assumed:
 
-- **Exhaustively, no majority cycle occurs on any poset with `n ≤ 7`** — 0 of 2447. That is a fact about a
+- **Exhaustively, no majority cycle occurs on any poset with `n ≤ 8`** — 0 of 19,446, of which 19,440 are
+  non-chains, ties included. *(Extended from `n ≤ 7` / 0 of 2447 by mg-dea5,
+  `code/counterexample_repair_dea5/cycles.py`.)* That is a fact about a
   population where the counterexample hypothesis is *false*, so it is **not** evidence for Theorem 1 and is
   not offered as any. Theorem 1 needs no evidence; it has a proof.
 - **A majority cycle does exist for general posets.** Witness at `n = 11`, rebuilt and re-verified in
@@ -115,9 +132,28 @@ one is the reason the first has to be argued rather than assumed:
   | `p(6,5)` | `1784/3567` | 0.50014 |
 
   Every edge is decided by a margin of about `1/2` — **inside** the band a counterexample forbids. So the
-  cycle is real, and Theorem 1 excludes it for exactly the stated reason. Found by random search (seed
-  4242); no cycle in 4200 random posets at each of `n = 8, 9, 10`. **`n = 11` is not claimed to be
-  minimal** — only that a witness exists, and hence that the exhaustive range is too small to see one.
+  cycle is real, and Theorem 1 excludes it for exactly the stated reason.
+
+  > **STRUCK (mg-dea5, landing mg-a7b4 finding 3).** This paragraph previously read: *"Found by random
+  > search (seed 4242); no cycle in 4200 random posets at each of `n = 8, 9, 10`. **`n = 11` is not claimed
+  > to be minimal** — only that a witness exists, and hence that the exhaustive range is too small to see
+  > one."* The negative was **false at `n = 9` and at `n = 10`**, and the search that produced it was not in
+  > the committed instrument, so `run_all.sh` reproduced the printing of the sentence and `check_doc.py`
+  > compared a string against a `print` statement. Replaced by the exhaustive statement below, which
+  > `code/counterexample_repair_dea5/cycles.py` produces in full.
+
+  **The smallest `n` carrying a majority cycle is exactly 9.** Exhaustively over every isomorphism class,
+  ties included: **no cycle at `n ≤ 8`** — 19,440 non-chain posets, 16,998 of them at `n = 8` alone, the
+  whole population and not a sample. At `n = 9` a cycle **exists**: `0<5 0<8 1<4 1<6 2<3 2<7 3<6 4<8 5<7`,
+  `e(P) = 1431`, tie-free, no isolated element, 3-cycle `0 → 2 → 1 → 0` with all three margins exactly
+  `80/159`, and no single-element deletion preserves it — consistent with the exhaustive `n = 8` sweep. At
+  `n = 10` a cycle exists too, and it is the `n = 11` witness above with its **isolated element 8** deleted:
+  `e(P) = 7134` (and `78474 = 11 × 7134`), identical pair probabilities, same 3-cycle. **So `n = 11` is not
+  minimal, `n = 10` is not minimal, and `n = 9` is.** The same instrument also re-runs the sampling negative
+  — 4200 samples at each of three densities at `n = 9`, seed 4242, **0 cycles** — and prints it
+  directly beneath the witness, because that is the shape of the defect: a negative with a sample size on it
+  reads as evidence, and here the phenomenon is rarer than any sampler of that size reaches while being
+  present.
 
 The methodological point is the one the corrected brief makes: an imported general caveat is not an
 obstruction until it is checked against the strength of the specific hypothesis. Here the `n ≤ 7` sweep
@@ -203,7 +239,10 @@ usable constraint on the search space.
 
 ---
 
-## 4. The quotient side: a real effect, entirely explained by `e(P)`
+## 4. The quotient side: two statistics, and `e(P)` explains only one of them
+
+*(Heading repaired by mg-dea5. It read "a real effect, entirely explained by `e(P)`"; that is true of
+`qfrac` and false of `qmass`.)*
 
 `L*` singles out one chain inside `Q(P)`: the partitions whose blocks are contiguous **intervals** of `L*`.
 There are exactly `2^{n-1}` of them and every one is a level, because ordering those blocks along `L*` is
@@ -216,7 +255,10 @@ There are exactly `2^{n-1}` of them and every one is a level, because ordering t
 
 **Population: the tie-free non-chain posets.** A counterexample is tie-free (§2), and on a tie-free poset
 `L*` is unique, so both statistics are canonical; on a poset with a tied pair they would depend on the
-tie-break and are not well defined. Those posets are excluded and counted.
+tie-break and are not well defined. Those posets are excluded and counted. *(mg-dea5: tie-freeness alone is
+not sufficient — the majority relation must also be acyclic for `L*` to exist. Both instruments check it
+rather than assume it, and it holds for every poset at `n ≤ 8`; the count of posets excluded on that ground
+is 0 at every `n`, which is why the population sizes are unaffected.)*
 
 **Raw effect — present, and in the predicted direction.** Comparing the `δ`-extremal posets against the
 whole rest of the population at the same `n` (the size-matched null the brief requires, taken entire rather
@@ -227,23 +269,92 @@ than sampled):
 | 5 | 16 | 3 | 1.000 vs 0.825 | +1.16 | 0.642 vs 0.446 | +2.90 |
 | 6 | 88 | 5 | 1.000 vs 0.734 | +1.95 | 0.590 vs 0.316 | +3.40 |
 | 7 | 671 | 8 | 1.000 vs 0.593 | **+2.64** | 0.541 vs 0.203 | **+4.49** |
+| 8 | 6420 | 12 | 1.000 vs 0.461 | **+3.72** | 0.505 vs 0.120 | **+6.91** |
 
-**And it dissolves under two controls.**
+*(The `n = 8` row is mg-dea5's; every other cell is mg-24a3's and reproduces exactly.)*
+
+**One control dissolves it and the other does not, and which is which depends on the statistic.**
 
 *Saturation.* `qmass` is bounded above by `1`, and every extremal poset attains it. "Extremal posets have
 `qmass = 1`" is informative only if reaching `1` is rare, and the saturating club is large and mostly not
 extremal: 6 of 16 posets at `n = 5` (50.0% of them extremal), 11 of 88 at `n = 6` (45.5%), 20 of 671 at
-`n = 7` (40.0%).
+`n = 7` (40.0%), 36 of 6420 at `n = 8` (33.3%). This control stands and nothing below weakens it — it is a
+statement **across** `e`-groups, and it turns out to be compatible with an exact separation **inside** one.
+Note also what it says about selectivity: the club is `37.5%`, `12.5%`, `3.0%`, `0.6%` of the population at
+`n = 5 … 8`.
 
 *Controlling for `e(P)`.* Compare each extremal poset only against tie-free posets with the **same**
-linear-extension count. Every extremal poset is rank 1 — and **tied with every other member of its group**:
-rank 1 of 3 tied with 2 at `n = 5`, rank 1 of 4 tied with 3 at `n = 6`, rank 1 of 5 tied with 4 at `n = 7`.
+linear-extension count.
 
-> **Verdict on the quotient side: NULL, quantified.** The association between `qmass` and extremality is
-> real as a raw correlation and is entirely accounted for by the linear-extension count. Within a fixed
+> **STRUCK (mg-dea5, landing mg-a7b4 finding 1).** This paragraph previously continued: *"Every extremal
+> poset is rank 1 — and **tied with every other member of its group**: rank 1 of 3 tied with 2 at `n = 5`,
+> rank 1 of 4 tied with 3 at `n = 6`, rank 1 of 5 tied with 4 at `n = 7`."* And the verdict box previously
+> read: *"**Verdict on the quotient side: NULL, quantified.** The association between `qmass` and extremality
+> is real as a raw correlation and is entirely accounted for by the linear-extension count. Within a fixed
 > `e(P)` the statistic does not distinguish the extremal posets from anything at all — not weakly, but by an
-> exact tie. `Q(P)` is not organised around `L*`'s chain any more in the worst-balanced posets than in
-> size-matched others, once "size-matched" is read as `e(P)` and not merely `n`.
+> exact tie."* **The rank claim is true 16 of 16. The tie claim is false, and the verdict is false.** The
+> nine rows printed were all `e = 3` groups — the reporting loop broke after three rows per `n` and skipped
+> groups of size `< 3` — and an `e = 3` group is **vacuous by construction**: every member of it is
+> extremal, so the tie could not fail. In every group where it *could* fail, it does. The full
+> re-measurement is `docs/OneThird-Counterexample-Under-The-Action-Repair.md`.
+
+**Rank 1: 16 of 16, and trivially so** — extremal posets have `qmass = 1`, which is the maximum. **Tied with
+every other member of its group: 12 of 16.** The four exceptions are the extremal posets with `e(P) = 9`.
+
+**Vacuity, which is why the control had nothing in it.** Call an `e`-group **vacuous** if every member of it
+is `δ`-extremal, so that a tie is incapable of failing. Every non-chain `P` with `e(P) = 3` has `δ(P) = 1/3`
+exactly — for an incomparable pair the two augmented counts are positive integers summing to `3`, hence
+`{1,2}` — so **every `e = 3` group is vacuous**, and those are the only groups the instrument printed.
+(Verified on all `1, 2, 3, 4, 5, 6` non-chain posets with `e = 3` at `n = 3 … 8`.) Non-vacuous means the
+group contains an extremal **and** a non-extremal member.
+
+**Every group containing an extremal poset, no cap and no size floor, out to `n = 8`.** The `e`-values
+carrying extremal posets are `3` and `9` at every `n` reached; `e = 3` is always vacuous, so the whole
+testable evidence is the `e = 9` groups:
+
+| `n` | `e(P)` | group size `N` | extremal `k` | `qmass = 1` in it | separation | exact `p` | AUC |
+|---|---|---|---|---|---|---|---|
+| 5 | 3 | 3 | 3 | 3 | *vacuous* | — | — |
+| 6 | 3 | 4 | 4 | 4 | *vacuous* | — | — |
+| 7 | 3 | 5 | 5 | 5 | *vacuous* | — | — |
+| 8 | 3 | 6 | 6 | 6 | *vacuous* | — | — |
+| 6 | **9** | 7 | 1 | 1 | **perfect** | `1/7` | `1` |
+| 7 | **9** | 13 | 3 | 3 | **perfect** | `1/286` | `1` |
+| 8 | **9** | 20 | 6 | 6 | **perfect** | `1/38760` | `1` |
+
+*Perfect* means both inclusions: the `qmass = 1` members are **exactly** the extremal ones, so no
+non-extremal member of the group reaches `1` (the others sit at `8/9` or `2/3`). `p` is exact — every one of
+the `C(N,k)` random-label assignments is enumerated. **`n = 7` generated this hypothesis and `n = 6` was in
+the same table, so the test is `n = 8`**, where the pre-specified family has size **1** because there is
+exactly one non-vacuous group: `p = 1/38760 = 2.6 × 10⁻⁵`. Bonferroni over all three non-vacuous groups
+gives `≤ 7.7 × 10⁻⁵`; over all seven groups containing an extremal poset, counting the vacuous ones as if
+they had been testable, `≤ 1.8 × 10⁻⁴`.
+
+**And the powered test, on the whole population rather than the extremal dichotomy.** Pooled within-`e`
+association between `qmass` and `δ`, i.e. exactly the `ρ|e` column of §6 computed for the two statistics §6
+omits:
+
+| `n` | population | `e`-groups | `qmass` `ρ|e` | `qfrac` `ρ|e` | `qmass` Kendall `τ_b` | perm `p` |
+|---|---|---|---|---|---|---|
+| 6 | 88 | 27 | **−0.287** | −0.009 | −0.2978 | 0.0800 |
+| 7 | 671 | 127 | **−0.261** | +0.011 | −0.2626 | 0.0050 |
+| 8 | 6420 | 670 | **−0.273** | +0.018 | −0.2052 | 0.0050 |
+
+`ρ|e` is computed by §6's own recipe; the permutation `p` has a floor of `1/200 = 0.005` at 199 reps. **Every one of the nine invariants in §6's table is within `±0.10`;
+`qmass` is at `≈ −0.27` and stable in `n`.** The sign is the predicted one: more of the spectrum on `L*`'s
+chain goes with a **worse-balanced** poset. `qfrac` — whose *raw* effect is the larger of the two
+(`z = +4.49` at `n = 7`, `+6.91` at `n = 8`) — **is** null after the control, exactly as this section
+claimed for both.
+
+> **Corrected verdict on the quotient side: NOT a null for `qmass`, and a null for `qfrac`.** The `qfrac`
+> effect is entirely the linear-extension count. The `qmass` effect is not: within a fixed `e(P)` it survives
+> at `ρ|e ≈ −0.27` on 6420 posets at `n = 8`, and in all three `e`-groups where an exact tie was capable of
+> failing, `qmass = 1` picks out **exactly** the extremal posets. What this is **not**: it is not a statement
+> about counterexamples (the extremal posets satisfy `δ = 1/3`, the conjecture holding with equality); it is
+> not a filter (`qmass = 1` still retains 36 of 6420 posets at `n = 8`, only a third of them extremal, and
+> `qmass` costs more to compute than `δ`); and it is not explained (`qmass = 1` holds iff every
+> positive-multiplicity level is an `L*`-interval partition, and why that should coincide with `δ = 1/3`
+> inside an `e`-group is open). Three groups is three groups.
 
 ---
 
@@ -280,11 +391,21 @@ exactly, and §5.5 measures the gap it leaves.
 
 ### 5.2 The spectral gap is a pair statistic of exactly the same shape as `δ`
 
-> **Theorem 4.** For the weight uniform on all `P`-compatible moves and any non-chain `P`,
+> **Theorem 4.** For **any** probability weight on the `P`-compatible moves and any non-chain `P`,
 > ```
 >     lambda_2  =  max over incomparable pairs {x,y} of  s(x,y),
 > ```
-> where `s(x,y)` is the probability that a uniform move leaves `x` and `y` in the same block.
+> where `s(x,y)` is the probability that a move drawn from the weight leaves `x` and `y` in the same block,
+> and `λ₂ = max{ λ_X : m_X > 0, X ≠ the finest partition }`.
+
+*(**Generalised (mg-dea5), landing mg-a7b4 finding 2.** This was stated for the weight uniform on all moves.
+The proof below uses only that `λ_X` is non-increasing as `X` coarsens — true for any distribution on moves —
+and that `m_X` is a combinatorial invariant of `P`. Neither mentions the weight, so the hypothesis is
+removable, and the general form is the one §5.5 needs, since §5.5's whole argument is about weights other
+than the uniform-move one. Under `w_t` the theorem reads `λ₂ = t = max_{x∥y} s_{w_t}(x,y)`, which is exactly
+what Theorem 7's proof computes by hand. Verified on **972 (poset, weight) cases, 891 of them non-uniform,
+0 failures**, of which **228 are checked against the actual transition matrix** in exact rationals via
+`trace(Mᵏ) = Σ_X m_X λ_Xᵏ` for all `k` — which pins the whole spectrum, not just `λ₂`.)*
 
 *Proof.* `λ_X` is non-increasing as `X` coarsens, so `λ₂` is attained at a finest level above the bottom
 carrying positive multiplicity. If every block of `X` is a chain then `Π_B e(P|_B) = 1`, and the bottom level
@@ -294,8 +415,11 @@ refines `X`, is a level, and has `m_Z = e(P|_{x,y}) − 1 = 1`. So `λ₂` is at
 `λ_Z = s(x,y)` because a move's level is coarser than or equal to `Z` exactly when it does not separate the
 pair. ∎
 
-Verified: 0 bad of 2442 non-chain posets, `n = 3…7`; and the supporting multiplicity fact (0 bad of 65,481
-all-chain levels other than the finest; the finest always has `m = 1`).
+Verified: 0 bad of 2442 non-chain posets, `n = 3…7`, under the uniform-move weight; 0 bad of 972
+(poset, weight) cases over the weight families above. The supporting multiplicity fact (0 bad of 65,481
+all-chain levels other than the finest; the finest always has `m = 1`) is **structural** rather than
+measured: `m_X = Π_{B ∈ X} M(P|_B)` with `M(R) := m_{top(R)}`, and `M` vanishes on every chain of `≥ 2`
+elements (`code/counterexample_repair_dea5/levels.py`, control C7).
 
 So `δ` and `λ₂` are maxima over incomparable pairs of two different per-pair numbers — the **skew** of the
 separating-move measure and the **mass** of the non-separating moves. **These are independent coordinates of
@@ -502,18 +626,25 @@ down as a question with its gap named, and it is not offered as a route.**
 
 1. **Theorem.** If a counterexample exists, its majority relation is a linear order `L*` extending `P`
    (§2). The forbidden middle band is what closes the composition; majority cycles are real for general
-   posets (verified witness at `n = 11`, all edges at margin ≈ `1/2`) and are excluded here by that band.
-   The exhaustive `n ≤ 7` sweep finding no cycle is about a different population and is **not** evidence for
-   the theorem.
+   posets and are excluded here by that band. **The smallest such cycle is at `n = 9` exactly**: none at
+   `n ≤ 8` exhaustively (19,440 non-chains, ties included), a verified witness at `n = 9`, and the `n = 11`
+   witness reduces to `n = 10` by deleting its isolated element (mg-dea5). The exhaustive sweep finding no
+   cycle is about a population where the counterexample hypothesis is false and is **not** evidence for the
+   theorem.
 2. **The concentration consequence does not filter.** `R(P) = 3E[inv(L,L*)]/|Inc(P)| < 1` is necessary and
    is satisfied by 60.3% of non-chain posets at `n = 7`, none of them counterexamples; the fraction grows
    with `n`; the family meeting the conjecture's bound sits exactly **on** the boundary while
    maximally-unfrozen two-chain posets sit deep inside it. Mechanism: mean versus max (§3).
-3. **The quotient side is null after control.** The `qmass` effect (`z = +2.64` at `n = 7`) is entirely the
-   linear-extension count: within a fixed `e(P)` the extremal posets are tied with every other member of
-   their group (§4).
+3. **The quotient side splits: `qfrac` is null after control, `qmass` is not.** `qfrac` has the larger raw
+   effect (`z = +4.49` at `n = 7`) and `ρ|e` within `±0.02` — entirely the linear-extension count. `qmass`
+   has `ρ|e ≈ −0.27`, stable in `n`, against `|ρ|e| ≤ 0.10` for every invariant in §6's table; and in each of
+   the three `e`-groups where an exact tie was capable of failing, `qmass = 1` marks exactly the extremal
+   posets (1 of 7, 3 of 13, 6 of 20; pre-specified `p = 1/38760` at `n = 8`). The nine rows this document
+   originally reported as exact ties were all `e = 3` groups, where every member is extremal by construction
+   and the tie could not fail (§4, mg-dea5). Not a filter and not explained — see §4's corrected verdict.
 4. **Genuine necessary conditions, labelled.** Theorems: every level block is convex, and the level data can
-   express only convex-restriction counts (§5.1); `λ₂ = max_{x∥y} s(x,y)`, a pair statistic of the same
+   express only convex-restriction counts (§5.1); `λ₂ = max_{x∥y} s(x,y)` **for every weight, not only the
+   uniform-move one** (mg-dea5), a pair statistic of the same
    shape as `δ` but an independent coordinate of the same triple (§5.2); no-free-lunch — `δ` is invariant on
    the uniformising polytope while `λ₂` sweeps `[0,1]`, so spectral detection needs a weight rule external
    to stationarity (§5.5). A genuine constraint: frozen forces `e(P) ≥ 4`, which most extremal posets fail,
@@ -532,9 +663,13 @@ down as a question with its gap named, and it is not offered as a route.**
    it does not. The operative point is narrower: `I4` costs strictly more to compute than `δ` itself, so it
    is not a shortcut either way (§6).
 7. **Cost.** All 2447 posets on 3…7 elements; named families to `n = 12`; one `n = 11` witness; nothing
-   larger. About 11 minutes for both scripts. `n = 8` exhaustively was not attempted — the refinement
+   larger. About 11 minutes for both scripts. `n = 8` exhaustively was not attempted here — the refinement
    precompute for `Π_8` and the per-poset level work put it at roughly two orders of magnitude above the
-   `n = 7` pass, and nothing in §3, §4 or §6 shows a trend that reverses at `n = 8`.
+   `n = 7` pass. **`n = 8` has since been reached for §2 and §4** by mg-dea5, which replaces the
+   level-lattice inversion with the factorisation `m_X = Π_{B ∈ X} M(P|_B)` and so never builds the lattice:
+   all 16,999 isomorphism classes, about 7 minutes end to end (`code/counterexample_repair_dea5/`). §3 and §6 remain at
+   `n ≤ 7`. The forecast that no trend reverses at `n = 8` **held for §3 and §6 and failed for §4**, which is
+   where the trend was never measured under the control that matters.
 
 **What would change the picture.** A collision witness — two posets with the same `(Q(P), m)` and different
 `δ` — would close §6's open question negatively and is the cheapest next experiment; `n = 8` is where to look
