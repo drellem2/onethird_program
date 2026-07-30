@@ -1,0 +1,83 @@
+mg-da45 -- CLOSING mg-f1b2's F1: THE PRINTED REASON, RE-MEASURED
+==============================================================================
+Nothing here is inherited from mg-f1b2, from out_gates.txt or from
+the ticket, and nothing here imports controls.py.  The [REFUTED] row
+is mg-8a12's printed claim; the [HOLDS] rows are this landing's.
+
+TARGET 1 -- WHICH GATE DECIDES, rebuilt from face_complex alone
+---------------------------------------------------------------
+  A 'not absorbable' reached at the diagonal or the absolute-value
+  gate is forced by arithmetic whatever the signs are.  Only the
+  parity system is a place where a sign is consulted at all.
+
+  row   bites  diagonal  magnitude   parity    absorb  sign-only
+  I1       72        72          0        0         0          0
+  I2       82        82          0        0         0          0
+  I3       82        82          0        0         0          0
+  I4       61        58          3        0         0          0
+
+  [HOLDS ] every absorbability answer in the four scored rows is settled at a FORCED gate: 0 of 297 biting (poset, mutation) pairs reach the parity system
+  [HOLDS ] not one entry anywhere in those rows differs in SIGN ALONE (0), so there was no sign for the predicate to decide on
+  [HOLDS ] row I4's diagonal survives on 3 of its 61 biting posets -- the count mg-8a12 routes on is right
+  [REFUTED] 'the diagonal is preserved on 3 of them, SO the predicate had to decide on the off-diagonal signs and could have returned absorbable' (mg-8a12, controls_output.txt row I4)
+        All 3 are settled at the ABSOLUTE-VALUE gate: 300 off-diagonal
+        magnitudes differ on them and 0 entries differ in sign alone.
+        The predicate returns False before a sign is read.
+
+  AND IT IS FORCED AT EVERY n, not just measured to n=5.  The three
+  posets are antichains; the off-by-one is prefixes_true(rot(w)) with
+  rot the cyclic rotation of POSITIONS, so exactly one neighbour of
+  each vertex of the adjacent-transposition graph changes:
+    n=3  |L(P)|=6    magnitude mismatches=12    (2 per row)  sign-only=0  absorbable=False
+    n=4  |L(P)|=24   magnitude mismatches=48    (2 per row)  sign-only=0  absorbable=False
+    n=5  |L(P)|=120  magnitude mismatches=240   (2 per row)  sign-only=0  absorbable=False
+    n=6  |L(P)|=720  magnitude mismatches=1440  (2 per row)  sign-only=0  absorbable=False
+  [HOLDS ] 2|L(P)| magnitudes differ and 0 signs do, at n = 3, 4, 5 and 6 alike
+
+TARGET 2 -- THE ARTIFACT: it regenerates, and it now says T1's numbers
+----------------------------------------------------------------------
+  [HOLDS ] controls_output.txt regenerates byte-identically from a fresh run
+        17964 bytes, exit 0
+  [HOLDS ] the artifact has exactly one row I4
+  [HOLDS ] row I4 prints 'preserved on 3 of the 61', and T1 measured it independently
+  [HOLDS ] row I4 prints '3 are settled by |s_i s_j| = 1', and T1 measured it independently
+  [HOLDS ] row I4 prints '300 off-diagonal magnitudes differ on them', and T1 measured it independently
+  [HOLDS ] row I4 prints '0 entries differ in SIGN ALONE', and T1 measured it independently
+  [HOLDS ] row I4 prints 'while 0 reach the parity system', and T1 measured it independently
+  [HOLDS ] the routing row prints the section total T1 measured: '0 of the 297 biting'
+  [HOLDS ] the false premise 'the off-diagonal signs actually decide' asserts nothing -- 2 occurrence(s) in controls.py + the artifact, every one of them quoted inside a correction
+  [HOLDS ] the false premise 'had to decide on the off-diagonal signs and could have' asserts nothing -- 1 occurrence(s) in controls.py + the artifact, every one of them quoted inside a correction
+  [HOLDS ] the false premise 'was decided on the off-diagonal signs' asserts nothing -- it does not appear at all in controls.py or the artifact
+  [HOLDS ] the false premise 'the answer is a real decision' asserts nothing -- it does not appear at all in controls.py or the artifact
+  [HOLDS ] the false premise 'row I4 is falsifiable' asserts nothing -- it does not appear at all in controls.py or the artifact
+
+TARGET 3 -- THE CONDITION IS UNCHANGED, which is what was asked for
+-------------------------------------------------------------------
+  mg-f1b2's own remedy was to DROP `absorb == 0` from row I4.  The
+  ticket that landed this deliberately did not: the count is true,
+  what was false was the reason printed for scoring it.  So the
+  scoring must be verifiably where it was.
+  [HOLDS ] row I4 still scores absorbability (`cond = cond and absorb == 0`)
+  [HOLDS ] the forced/theorem routing still routes on the diagonal gate (`forced = (diag_preserved == 0)`)
+  [HOLDS ] the routing row's condition is untouched (`0 < len(forced_rows) < len(muts)`)
+  [HOLDS ] the battery still exits 0 with 0 failures
+  [HOLDS ] still exactly 2 [CANNOT FAIL] rows, and the bottom line still denies the all-pass banner
+  [HOLDS ] all four NEGATIVE CONTROL 4 mutation rows are still [PASS]
+
+TARGET 4 -- WHERE THE FALSE PREMISE STILL LIVES, named not claimed
+------------------------------------------------------------------
+  mg-8a12 did not invent the sentence; it adopted it.  The origin is
+  mg-fcf1's own audit instrument, and this landing does not touch
+  another item's committed audit artifact.  So it is counted here
+  rather than left for the next reader to discover.
+  [HOLDS ] mg-fcf1's instrument still prints it, on 2 file(s), and this landing says so instead of claiming the repo is clean
+        code/face_geometry_audit_fcf1/audit_nc4.py
+        code/face_geometry_audit_fcf1/out_nc4.txt
+  [HOLDS ] controls.py names that origin, so the correction is followable from the file that acted on it
+
+==============================================================================
+25 claim(s) scored; 0 BROKEN.
+
+The condition row I4 scores is unchanged and still true; what
+changed is that the file now MEASURES which gate settled it and
+prints that instead of a decision that never happened.
