@@ -1,0 +1,76 @@
+
+==============================================================================
+A3.1  EXHAUSTIVE: majority cycles over every isomorphism class n <= 8
+==============================================================================
+  'majority relation' is x -> y iff p(x,y) > 1/2; ties give no edge, so
+  tied posets are INCLUDED in the sweep rather than excluded from it.
+
+  n | classes | A000112 | sum n!/|Aut| | A001035 | non-chains | cycles
+  3 |       5 |       5 |           19 |           19 |          4 |      0
+  4 |      16 |      16 |          219 |          219 |         15 |      0
+  5 |      63 |      63 |         4231 |         4231 |         62 |      0
+  6 |     318 |     318 |       130023 |       130023 |        317 |      0
+  7 |    2045 |    2045 |      6129859 |      6129859 |       2044 |      0
+  8 |   16999 |   16999 |    431723379 |    431723379 |      16998 |      0
+
+  TOTAL over n = 3..8 : 19446 classes, 19440 non-chains, 0 majority cycles
+  the repair / the repaired document say: 19,446 classes, 19,440
+  non-chains, 0 cycles, 16,998 non-chains at n = 8.
+  MATCH: True
+
+  Note what the two OEIS checks buy: A000112 alone would be satisfied by
+  an enumerator that both over- and under-merges by the same amount, and
+  a missed class is exactly where an unseen cycle would hide.  The orbit
+  sum n!/|Aut| is a check on the LABELLED count and cannot be fooled the
+  same way.  Both agree at every n.
+
+==============================================================================
+A3.2  the n = 9 witness, rebuilt from the printed cover relations
+==============================================================================
+  covers      [(0, 5), (0, 8), (1, 4), (1, 6), (2, 3), (2, 7), (3, 6), (4, 8), (5, 7)]
+  e(P)        1431           (claimed 1431)
+  tie-free    True
+  isolated    []
+  cycle       [0, 2, 1, 0]        (claimed 0 -> 2 -> 1 -> 0)
+     p(0,2) = 80/159
+     p(2,1) = 80/159
+     p(1,0) = 80/159
+  all three margins 80/159 : True
+
+  ATTACK: does ANY single-element deletion preserve the cycle?  If one
+  did, the exhaustive n <= 8 sweep above would be wrong.
+  deletions preserving a cycle: none   (must be empty)
+
+==============================================================================
+A3.3  the n = 10 witness, and the n = 11 witness it comes from
+==============================================================================
+  n = 11  e(P) = 78474   (claimed 78474)
+          p(5,9) = 597/1189
+          p(9,6) = 599/1189
+          p(6,5) = 1784/3567
+          cycle    = [5, 9, 6, 5]
+          element 8 isolated: True
+  n = 10  (element 8 deleted)  e(P) = 7134   (claimed 7134)
+          78474 = 11 * 7134 ? True
+          cycle    = [5, 8, 6, 5]
+          covers   = [(0, 2), (0, 6), (0, 8), (1, 3), (1, 8), (2, 9), (3, 6), (3, 7), (4, 5), (4, 6), (6, 9)]
+
+==============================================================================
+A3.4  the SAMPLING negative the repair re-runs beside its witness
+==============================================================================
+  The repair prints '4200 random posets at each of three densities at
+  n = 9, seed 4242: 0 cycles' DIRECTLY BENEATH a witness proving the
+  region is non-empty.  That is the correct shape.  What it means
+  quantitatively is worth stating: the sampler's miss is not surprising.
+
+  Independent estimate of how rare a cycle is at n = 9, from a sampler
+  written here (seed 20260730, uniform random labelled posets by random
+  DAG closure at several densities):
+    density 0.15 : 0 cycles in 3000 samples
+    density 0.25 : 0 cycles in 3000 samples
+    density 0.35 : 0 cycles in 3000 samples
+    density 0.50 : 0 cycles in 3000 samples
+
+  READ: a negative of this shape is uninformative at this sample size in
+  BOTH instruments.  The repair says so and prints the witness next to
+  it; that is the correct handling and it is confirmed here.

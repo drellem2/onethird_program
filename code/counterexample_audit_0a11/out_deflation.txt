@@ -1,0 +1,20 @@
+
+==============================================================================
+A6.D1/D2  inside the three non-vacuous groups: is L* needed at all?
+==============================================================================
+  n | e | N  | k | max over ALL L reaches 1 | of those extremal | L* is argmax
+  6 | 9 |  7 | 1 |                        1 |                 1 | 7 of 7
+  7 | 9 | 13 | 3 |                        3 |                 3 | 13 of 13
+
+  (the n = 8 group is the n = 7 group with a cut element adjoined --
+   see check_independence.py -- so it is not listed separately here)
+
+==============================================================================
+A6.D3  'L* maximises qmass' over the whole population
+==============================================================================
+  repair reports: 14 of 16, 83 of 88, 583 of 669; unique 13 / 59 / 309
+
+  n | tested | skipped (e > 400) | L* attains max | max is unique
+  5 |     16 |                0 |             14 | 13
+  6 |     88 |                0 |             83 | 59
+  7 |    669 |                2 |            583 | 309

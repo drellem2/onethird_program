@@ -1,0 +1,127 @@
+
+==============================================================================
+A1.0  enumeration up to isomorphism, checked against OEIS
+==============================================================================
+  classes n=1..8   [1, 2, 5, 16, 63, 318, 2045, 16999]
+  A000112          [1, 2, 5, 16, 63, 318, 2045, 16999]   OK
+  sum n!/|Aut|     [1, 3, 19, 219, 4231, 130023, 6129859, 431723379]
+  A001035          [1, 3, 19, 219, 4231, 130023, 6129859, 431723379]   OK
+
+==============================================================================
+A1.1  Proposition V: every non-chain with e(P)=3 has delta=1/3
+==============================================================================
+  n | non-chains e=3 | of those delta=1/3 | counterexamples to V
+  3 |              1 |                  1 | 0
+  4 |              2 |                  2 | 0
+  5 |              3 |                  3 | 0
+  6 |              4 |                  4 | 0
+  7 |              5 |                  5 | 0
+  8 |              6 |                  6 | 0
+
+==============================================================================
+A1.2  the section-4 population, and both exclusions
+==============================================================================
+  n | non-chains | tied | cyclic majority | population | #extremal | min delta
+  5 |         62 |   46 |               0 |         16 |         3 | 1/3
+  6 |        317 |  229 |               0 |         88 |         5 | 1/3
+  7 |       2044 | 1373 |               0 |        671 |         8 | 1/3
+  8 |      16998 | 10578 |               0 |       6420 |        12 | 1/3
+
+==============================================================================
+A1.3  EVERY e-group containing an extremal poset -- no cap, no floor
+==============================================================================
+  the repair's table 3.1, recomputed.  'attainable negative' asks whether
+  a member of the group could have contradicted the hypothesis at all.
+
+  n | e(P) |  N | k ext | qmass=1 | distinct delta | status      | other qmass
+  5 |    3 |  3 |     3 |       3 |              1 | VACUOUS     | --
+  6 |    3 |  4 |     4 |       4 |              1 | VACUOUS     | --
+  6 |    9 |  7 |     1 |       1 |              2 | non-vacuous | 2/3, 8/9
+  7 |    3 |  5 |     5 |       5 |              1 | VACUOUS     | --
+  7 |    9 | 13 |     3 |       3 |              2 | non-vacuous | 2/3, 8/9
+  8 |    3 |  6 |     6 |       6 |              1 | VACUOUS     | --
+  8 |    9 | 20 |     6 |       6 |              2 | non-vacuous | 2/3, 8/9
+
+==============================================================================
+A1.4  NON-VACUITY, established by counting the population
+==============================================================================
+  A group is VACUOUS if every member is extremal (the tie cannot fail).
+  For each group: k extremal of N, and the delta values actually present.
+
+  n=5 e=3   N=3   extremal=3  non-extremal=0   VACUOUS
+        delta values present: 1/3
+        qmass on the extremal members     : 1
+        qmass on the non-extremal members : (none exist)
+        ATTAINABLE NEGATIVE: none -- there is no non-extremal member,
+        so no assignment of qmass values could have contradicted anything.
+
+  n=6 e=3   N=4   extremal=4  non-extremal=0   VACUOUS
+        delta values present: 1/3
+        qmass on the extremal members     : 1
+        qmass on the non-extremal members : (none exist)
+        ATTAINABLE NEGATIVE: none -- there is no non-extremal member,
+        so no assignment of qmass values could have contradicted anything.
+
+  n=6 e=9   N=7   extremal=1  non-extremal=6   non-vacuous
+        delta values present: 1/3, 4/9
+        qmass on the extremal members     : 1
+        qmass on the non-extremal members : 2/3, 8/9
+        ATTAINABLE NEGATIVE: a non-extremal member with qmass = 1, or an
+        extremal member with qmass < 1.  Both are values the statistic
+        takes elsewhere in the same population, so neither is excluded
+        by the definitions -- check_powered.py A5.4 counts how often the
+        refuting conjunction actually occurs.  But see check_independence.py:
+        NON-VACUOUS IS NOT THE SAME AS INDEPENDENT.
+
+  n=7 e=3   N=5   extremal=5  non-extremal=0   VACUOUS
+        delta values present: 1/3
+        qmass on the extremal members     : 1
+        qmass on the non-extremal members : (none exist)
+        ATTAINABLE NEGATIVE: none -- there is no non-extremal member,
+        so no assignment of qmass values could have contradicted anything.
+
+  n=7 e=9   N=13  extremal=3  non-extremal=10  non-vacuous
+        delta values present: 1/3, 4/9
+        qmass on the extremal members     : 1
+        qmass on the non-extremal members : 2/3, 8/9
+        ATTAINABLE NEGATIVE: a non-extremal member with qmass = 1, or an
+        extremal member with qmass < 1.  Both are values the statistic
+        takes elsewhere in the same population, so neither is excluded
+        by the definitions -- check_powered.py A5.4 counts how often the
+        refuting conjunction actually occurs.  But see check_independence.py:
+        NON-VACUOUS IS NOT THE SAME AS INDEPENDENT.
+
+  n=8 e=3   N=6   extremal=6  non-extremal=0   VACUOUS
+        delta values present: 1/3
+        qmass on the extremal members     : 1
+        qmass on the non-extremal members : (none exist)
+        ATTAINABLE NEGATIVE: none -- there is no non-extremal member,
+        so no assignment of qmass values could have contradicted anything.
+
+  n=8 e=9   N=20  extremal=6  non-extremal=14  non-vacuous
+        delta values present: 1/3, 4/9
+        qmass on the extremal members     : 1
+        qmass on the non-extremal members : 2/3, 8/9
+        ATTAINABLE NEGATIVE: a non-extremal member with qmass = 1, or an
+        extremal member with qmass < 1.  Both are values the statistic
+        takes elsewhere in the same population, so neither is excluded
+        by the definitions -- check_powered.py A5.4 counts how often the
+        refuting conjunction actually occurs.  But see check_independence.py:
+        NON-VACUOUS IS NOT THE SAME AS INDEPENDENT.
+
+
+==============================================================================
+A1.5  the exact p-values, recomputed by enumerating C(N,k) labellings
+==============================================================================
+  Statistic: mid-rank sum of qmass over the k marked members.
+  Null: the k marks fall on a uniformly random k-subset of the N members.
+  p = #{k-subsets with statistic >= observed} / C(N,k), enumerated in full.
+
+  n | e | N  | k | #qmass=1 | perfect | AUC | exact p        | 1/p
+  6 | 9 |  7 | 1 |        1 | True    |   1 | 1/7            | 7
+  7 | 9 | 13 | 3 |        3 | True    |   1 | 1/286          | 286
+  8 | 9 | 20 | 6 |        6 | True    |   1 | 1/38760        | 38760
+
+  (the saturation control and the raw effect table are in
+   check_powered.py, A5.2 and A5.3, which caches the whole-population
+   qmass pass rather than recomputing it here)

@@ -1,0 +1,75 @@
+
+==============================================================================
+A5.1  the powered test: pooled within-e(P) association
+==============================================================================
+  repair reports  qmass rho|e = -0.287 / -0.261 / -0.273  at n = 6/7/8
+                  qfrac rho|e = -0.009 / +0.011 / +0.018
+
+  TARGET'S RECIPE (mean-centre the RAW values in each group, pool, Spearman)
+  -- this is the recipe the repair states it used, so this is the check.
+
+  n | population | e-groups | used(>=3) | qmass rho|e | qfrac rho|e
+  5 |         16 |        9 |         2 |      -0.316 |      -0.101
+  6 |         88 |       30 |        12 |      -0.287 |      -0.009
+  7 |        671 |      138 |        82 |      -0.261 |      +0.011
+  8 |       6420 |      691 |       465 |      -0.273 |      +0.018
+
+  KENDALL tau_b AND THE TIE-CORRECTED z, on within-group pairs.
+
+  n | population | groups(>=2) | qmass tau_b |    z    | qfrac tau_b |    z
+  5 |         16 |           5 |     +0.0000 |   +0.00 |     +0.0000 |   +0.00
+  6 |         88 |          27 |     -0.2978 |   -1.76 |     -0.2259 |   -1.53
+  7 |        671 |         127 |     -0.2626 |   -5.65 |     -0.0569 |   -1.29
+  8 |       6420 |         670 |     -0.2052 |  -16.60 |     +0.0064 |   +0.54
+
+  repair reports  qmass tau_b / z  -0.2978/-1.76  -0.2626/-5.65  -0.2052/-16.60
+                  qfrac tau_b / z  -0.2259/-1.53  -0.0569/-1.29  +0.0064/+0.54
+
+  SENSITIVITY, a third recipe: rank INSIDE each group first, then centre
+  the ranks, then pool.  Same intent, different order of operations.
+  Reported because a headline that moves under it is a headline about the
+  recipe rather than about the data.
+
+  n | groups(>=3) | qmass rho | qfrac rho
+  5 |           0 |    +0.000 |    +0.000
+  6 |          12 |    -0.301 |    -0.331
+  7 |          82 |    -0.324 |    -0.070
+  8 |         465 |    -0.251 |    +0.007
+
+==============================================================================
+A5.2  the saturation control -- the 'not a filter' clause
+==============================================================================
+  n | population | qmass=1 | of those extremal | share of population
+  5 |         16 |       6 |                 3 |   37.5%
+  6 |         88 |      11 |                 5 |   12.5%
+  7 |        671 |      20 |                 8 |    3.0%
+  8 |       6420 |      36 |                12 |    0.6%
+
+  repair / target say: 6 of 16, 11 of 88, 20 of 671, 36 of 6420, with
+  50.0%% / 45.5%% / 40.0%% / 33.3%% of the club extremal.
+
+==============================================================================
+A5.3  the raw effect table (target section 4), recomputed
+==============================================================================
+  n | tie-free | #extremal | qmass ext | qmass rest | qfrac ext | qfrac rest
+  5 |       16 |         3 |     1.000 |      0.825 |     0.642 |      0.446
+  6 |       88 |         5 |     1.000 |      0.734 |     0.590 |      0.316
+  7 |      671 |         8 |     1.000 |      0.593 |     0.541 |      0.203
+  8 |     6420 |        12 |     1.000 |      0.461 |     0.505 |      0.120
+
+==============================================================================
+A5.4  ATTAINABILITY over the whole population
+==============================================================================
+  Is the refuting conjunction -- NON-extremal with qmass = 1 -- realisable?
+
+  n | non-extremal with qmass=1 | of all non-extremal | extremal with qmass<1
+  5 |                         3 |              23.08% |                     0
+  6 |                         6 |               7.23% |                     0
+  7 |                        12 |               1.81% |                     0
+  8 |                        24 |               0.37% |                     0
+
+  So the hypothesis IS falsifiable as a statement about posets: the
+  refuting conjunction occurs, and is the MAJORITY of the qmass = 1 club.
+  What is claimed is that it never occurs INSIDE an e-group containing an
+  extremal poset.  That is a real restriction -- see check_independence.py
+  for how many INDEPENDENT chances it had to fail.
