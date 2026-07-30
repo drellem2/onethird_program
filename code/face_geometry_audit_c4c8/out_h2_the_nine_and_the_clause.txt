@@ -1,0 +1,125 @@
+==============================================================================
+mg-c4c8 H2 -- the nine at their own unit, and the level below a return
+==============================================================================
+  [HOLDS ] baseline: the unmutated tree exits 0 and writes 23684 bytes
+        exit 0
+        WOULD DIFFER UNDER: the worktree being dirty, which would make every comparison below against a tree nobody committed
+
+==============================================================================
+1. THE NINE, RE-DERIVED FROM THE LIVE SOURCE AND RUN ON THE LIVE TREE
+==============================================================================
+mg-d0e2's e1_deletion.py cannot run here -- mg-9220 deleted the text its first
+mutation anchors on.  These are the same nine intents, located in the syntax tree
+instead of by string anchor, so they apply to whatever the tree currently says.
+
+PREDICTIONS, registered before the runs:
+   N1   delete gate 'shape'                        CHANGES    exit 1   (H1 #46 ran this exact edit)
+   N2   delete gate 'diagonal'                     CHANGES    exit 0   (H1 #47)
+   N3   delete gate 'magnitude'                    CHANGES    exit 1   (H1 #48)
+   N4   delete gate 'parity'                       CHANGES    exit 1   (H1 #50)
+   N5   stop counting signs_read                   CHANGES    exit 0   (blind: the artifact prints signs-read totals)
+   N6   swap the two forced gates' order           CHANGES    exit 0   (blind: same answers, different trace label)
+   N7   delete 'diagonal' from gate_violations     CHANGES    exit 0   (blind: the both-gates-violated counts are printed)
+   N8   delete 'magnitude' from gate_violations    CHANGES    exit 0   (blind: row I4's 'the ONLY one violated' sentence is computed here)
+   N9   invert diagonal_moves (the routing)        CHANGES    exit 1   (blind: the routing row scores the split)
+   N9x  invert diagonal_moves's SHAPE return (this audit's own slip) IDENTICAL  exit 0   (registered AFTER the slip and said so: H1 #54 is inert whole, so inverting it should be invisible too)
+
+   tag  mutation                                   artifact   exit  UNIT ACTUALLY REMOVED    match
+   N1   delete gate 'shape'                        CHANGES    1     1 return, 1 stmt, 0 clause match
+   N2   delete gate 'diagonal'                     CHANGES    0     1 return, 1 stmt, 0 clause match
+   N3   delete gate 'magnitude'                    CHANGES    1     1 return, 1 stmt, 0 clause match
+   N4   delete gate 'parity'                       CHANGES    1     1 return, 1 stmt, 0 clause match
+   N5   stop counting signs_read                   CHANGES    0     0 return, 1 stmt, 0 clause match
+   N6   swap the two forced gates' order           CHANGES    0     0 return, 0 stmt, 0 clause match
+   N7   delete 'diagonal' from gate_violations     CHANGES    0     0 return, 0 stmt, 0 clause match
+   N8   delete 'magnitude' from gate_violations    CHANGES    0     0 return, 0 stmt, 0 clause match
+   N9   invert diagonal_moves (the routing)        CHANGES    1     0 return, 0 stmt, 0 clause match
+   N9x  invert diagonal_moves's SHAPE return (this IDENTICAL  0     0 return, 0 stmt, 0 clause match
+
+  10 of 10 matched.
+  (N9x is this audit's own slip, promoted to a measurement; see `m_invert_return`.)
+  [HOLDS ] OF THE NINE, 4 REMOVE EXACTLY ONE `return` AND 5 REMOVE NONE.  'Per return on all nine' is not a property nine mutations can have: five of them are not deletions of a return at all -- one deletes a non-return statement, two neutralise a CONDITION, two are a reordering and an inversion
+        N1: 1 return(s), 1 stmt, 0 clause; N2: 1 return(s), 1 stmt, 0 clause; N3: 1 return(s), 1 stmt, 0 clause; N4: 1 return(s), 1 stmt, 0 clause; N5: 0 return(s), 1 stmt, 0 clause; N6: 0 return(s), 0 stmt, 0 clause; N7: 0 return(s), 0 stmt, 0 clause; N8: 0 return(s), 0 stmt, 0 clause; N9: 0 return(s), 0 stmt, 0 clause
+        WOULD DIFFER UNDER: one of the nine changing what it removes.  The counts here are measured by parsing both trees, not read off any declaration -- which is the check pm-onethird asked for, applied to mg-d0e2's list as well as to mg-9220's
+  [HOLDS ] AND ALL NINE STILL BITE ON THE LIVE TREE: 9 of 9 move the artifact -- mg-04a8's '9 of 9', re-measured after mg-9220 restructured the gate the first of them deletes
+        N1 CHANGES exit 1; N2 CHANGES exit 0; N3 CHANGES exit 1; N4 CHANGES exit 1; N5 CHANGES exit 0; N6 CHANGES exit 0; N7 CHANGES exit 0; N8 CHANGES exit 0; N9 CHANGES exit 1
+        WOULD DIFFER UNDER: the two UNREACHED_GATE_PAIRS rows leaving controls.py (N1 and N4 go byte-identical, which is the state mg-d0e2 found), or the merged `shape` condition losing its second clause (N1 stops being visible to the 2x2-against-ragged pair)
+  [FINDING] THREE OF THE NINE ARE RUN BY NOTHING IN THE TREE.  N7, N8, N9 target `gate_violations` and `diagonal_moves`; d2_deletion.py's eleven mutations touch neither function, and mg-d0e2's e1_deletion.py -- the only instrument that ever ran them -- aborts on this tree at its first mutation because mg-9220 deleted the text it anchors on.  d4_auditor_rerun.py preserves them by re-running e1 against the PINNED commit, which is a measurement about c7f9673.  On the live tree the standing evidence for those three is this file
+
+==============================================================================
+2. THE LEVEL BELOW A RETURN -- every clause of every deciding condition
+==============================================================================
+  population, read from the tree: 11 clause(s) in 5 condition(s)
+      absorb_trace                   guard  clause 1 of 2   m != len(B)
+      absorb_trace                   guard  clause 2 of 2   any(len(A[i]) != len(B[i]) for i in range(m))
+      gate_violations                guard  clause 1 of 2   m != len(B)
+      gate_violations                guard  clause 2 of 2   any(len(A[i]) != len(B[i]) for i in range(m))
+      diagonal_moves                 guard  clause 1 of 2   len(A) != len(B)
+      diagonal_moves                 guard  clause 2 of 2   any(len(A[i]) != len(B[i]) for i in range(len(A)))
+      Poset.leq                      value  clause 1 of 2   a == b
+      Poset.leq                      value  clause 2 of 2   (a, b) in self.less
+      Poset.comparable               value  clause 1 of 3   a == b
+      Poset.comparable               value  clause 2 of 3   (a, b) in self.less
+      Poset.comparable               value  clause 3 of 3   (b, a) in self.less
+
+PREDICTIONS, registered before the runs:
+   absorb_trace                   guard  c1  IDENTICAL  exit 0   (THE THIRD LEVEL: the battery's two shape pairs are both caught by clause 1)
+   absorb_trace                   guard  c2  CHANGES    exit 1   (the ragged pair needs this clause)
+   gate_violations                guard  c1  IDENTICAL  exit 0   (H1 #52 is inert whole)
+   gate_violations                guard  c2  IDENTICAL  exit 0   (H1 #52 is inert whole)
+   diagonal_moves                 guard  c1  IDENTICAL  exit 0   (H1 #54 is inert whole)
+   diagonal_moves                 guard  c2  IDENTICAL  exit 0   (H1 #54 is inert whole)
+   Poset.leq                      value  c1  IDENTICAL  exit 0   (H1 #2: no call site)
+   Poset.leq                      value  c2  IDENTICAL  exit 0   (H1 #2: no call site)
+   Poset.comparable               value  c1  IDENTICAL  exit 0   (H1 #3 is inert whole)
+   Poset.comparable               value  c2  IDENTICAL  exit 0   (H1 #3 is inert whole)
+   Poset.comparable               value  c3  IDENTICAL  exit 0   (H1 #3 is inert whole)
+
+   function                       kind   cls  artifact   exit  match
+   absorb_trace                   guard  1    IDENTICAL  0     match
+   absorb_trace                   guard  2    CHANGES    1     match
+   gate_violations                guard  1    IDENTICAL  0     match
+   gate_violations                guard  2    IDENTICAL  0     match
+   diagonal_moves                 guard  1    IDENTICAL  0     match
+   diagonal_moves                 guard  2    IDENTICAL  0     match
+   Poset.leq                      value  1    IDENTICAL  0     match
+   Poset.leq                      value  2    IDENTICAL  0     match
+   Poset.comparable               value  1    IDENTICAL  0     match
+   Poset.comparable               value  2    IDENTICAL  0     match
+   Poset.comparable               value  3    IDENTICAL  0     match
+
+  11 of 11 matched.
+  [FINDING] THE GRANULARITY ERROR RECURS AT THE THIRD LEVEL, IN THE STATEMENT THE REPAIR WROTE.  mg-9220 merged two `return`s into one guarded by `m != len(B) or any(len(A[i]) != len(B[i]) for i in range(m))`.  Deleting the RETURN moves the artifact (H1 #46, AFTER-5) -- and deleting the FIRST CLAUSE of its condition ALONE leaves the artifact BYTE-IDENTICAL, exit 0, every row green.  That is mg-e7bc's sentence with `return` replaced by `clause`: the deletion proves the CONDITION is load-bearing and proves nothing about either clause.  The unit moved from a pair of returns to a pair of clauses; the pair is still what the test bites on
+
+==============================================================================
+3. WHAT THE INERT CLAUSE DOES -- asked of the LIVE function
+==============================================================================
+The subject answers this by loading the PINNED two-return implementation with its
+first RETURN cut.  That is a measurement about c7f9673.  Here the LIVE merged
+condition has its first CLAUSE cut, and the live function is compared with itself
+over a population indexed by SHAPE, which is what the clause reads.
+
+  population: 170 matrices over 85 distinct shape profiles, 28900 pairs
+  outcome classes: 28900 pairs -- 26642 where both implementations terminate, 194 where BOTH raise, 2064 where the PINNED two-return form raises and the merged one decides, 0 the other way round
+  [HOLDS ] WHERE BOTH FORMS TERMINATE THE MERGE IS DECISION-PRESERVING ON A POPULATION THE SUBJECT DID NOT CHOOSE: 26642 of 26642 such pairs, of which 25130 also agree on the gate label
+        1512 of the 26642 terminating pairs differ in the gate LABEL, which is the relabelling mg-9220 discloses
+        WOULD DIFFER UNDER: the merged condition losing either clause, or the hoist changing an answer rather than a label.  The population here is 85 shape profiles rather than the subject's 89 mostly-square matrices, so this is not a re-run of their 7,921
+  [FINDING] THE MERGE IS NOT OUTCOME-PRESERVING, AND THE POPULATION THAT SHOWS IT IS ONE THE SUBJECT'S CANNOT REACH.  On 2064 of 28900 pairs the pinned two-return `absorb_trace` RAISES IndexError and the merged one returns (False, 'shape') -- every one of them a matrix with a row SHORTER than the matrix's own order, where the old form indexed `A[i][i]` before it had checked row i's width.  mg-9220's docstring and landing say the merged gate gives 'the SAME DECISION on 7,921 of 7,921'; that is true of its population, every ragged member of which has rows at least as long as its order, and the sentence is read as a statement about the merge.  The change is an IMPROVEMENT -- a total function replacing a partial one -- and it is undisclosed: the only behaviour change mg-9220 discloses is the 126 gate relabellings.  Examples: A widths [0, 0] vs B widths [0, 1]: pinned ('raised', 'IndexError'), merged (False, 'shape'); A widths [0, 0] vs B widths [0, 1]: pinned ('raised', 'IndexError'), merged (False, 'shape'); A widths [0, 0] vs B widths [0, 2]: pinned ('raised', 'IndexError'), merged (False, 'shape'); A widths [0, 0] vs B widths [0, 2]: pinned ('raised', 'IndexError'), merged (False, 'shape')
+  [HOLDS ] AND THE CLAUSE IS NOT INERT AS A PREDICATE, only as a battery input: cutting it from the LIVE condition moves the DECISION on 1608 of 28900 pairs and the (decision, gate) on 1824
+        A shape [] vs B shape [0]: live (False, 'shape'), cut (True, 'parity'); A shape [] vs B shape [0]: live (False, 'shape'), cut (True, 'parity'); A shape [] vs B shape [0, 0]: live (False, 'shape'), cut (True, 'parity'); A shape [] vs B shape [0, 0]: live (False, 'shape'), cut (True, 'parity')
+        WOULD DIFFER UNDER: the clause becoming genuinely redundant -- which is what a reader of the byte-identical row above would otherwise have to assume.  This is the measurement that makes the third-level finding a GRANULARITY finding and not a demand to delete the clause
+
+  So the answer to 'remove it, or show what it does' is SHOWN for the clause,
+  on the live tree, by this file.  What the subject shows is the same question
+  asked of the pinned tree's cut RETURN; the live clause is cut nowhere in the
+  repository, and the deletion test that reports per return does not report
+  per clause.
+
+  pinned tree: c7f9673 (c7f967394cf7)
+
+==============================================================================
+5 claim(s) scored; 0 BROKEN.  3 FINDING(s).
+  FINDING: THREE OF THE NINE ARE RUN BY NOTHING IN THE TREE.  N7, N8, N9 target `gate_violations` and `diagonal_moves`; d2_deletion.py's eleven mutations touch neither function, and mg-d0e2's e1_deletion.py -- the only instrument that ever ran them -- aborts on this tree at its first mutation because mg-9220 deleted the text it anchors on.  d4_auditor_rerun.py preserves them by re-running e1 against the PINNED commit, which is a measurement about c7f9673.  On the live tree the standing evidence for those three is this file
+  FINDING: THE GRANULARITY ERROR RECURS AT THE THIRD LEVEL, IN THE STATEMENT THE REPAIR WROTE.  mg-9220 merged two `return`s into one guarded by `m != len(B) or any(len(A[i]) != len(B[i]) for i in range(m))`.  Deleting the RETURN moves the artifact (H1 #46, AFTER-5) -- and deleting the FIRST CLAUSE of its condition ALONE leaves the artifact BYTE-IDENTICAL, exit 0, every row green.  That is mg-e7bc's sentence with `return` replaced by `clause`: the deletion proves the CONDITION is load-bearing and proves nothing about either clause.  The unit moved from a pair of returns to a pair of clauses; the pair is still what the test bites on
+  FINDING: THE MERGE IS NOT OUTCOME-PRESERVING, AND THE POPULATION THAT SHOWS IT IS ONE THE SUBJECT'S CANNOT REACH.  On 2064 of 28900 pairs the pinned two-return `absorb_trace` RAISES IndexError and the merged one returns (False, 'shape') -- every one of them a matrix with a row SHORTER than the matrix's own order, where the old form indexed `A[i][i]` before it had checked row i's width.  mg-9220's docstring and landing say the merged gate gives 'the SAME DECISION on 7,921 of 7,921'; that is true of its population, every ragged member of which has rows at least as long as its order, and the sentence is read as a statement about the merge.  The change is an IMPROVEMENT -- a total function replacing a partial one -- and it is undisclosed: the only behaviour change mg-9220 discloses is the 126 gate relabellings.  Examples: A widths [0, 0] vs B widths [0, 1]: pinned ('raised', 'IndexError'), merged (False, 'shape'); A widths [0, 0] vs B widths [0, 1]: pinned ('raised', 'IndexError'), merged (False, 'shape'); A widths [0, 0] vs B widths [0, 2]: pinned ('raised', 'IndexError'), merged (False, 'shape'); A widths [0, 0] vs B widths [0, 2]: pinned ('raised', 'IndexError'), merged (False, 'shape')
+==============================================================================
