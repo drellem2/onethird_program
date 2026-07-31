@@ -1,0 +1,110 @@
+==============================================================================
+T3  THE POPULATION -- A CASE OUTSIDE THE OLD DEFINITION
+==============================================================================
+
+==============================================================================
+T3a  F5 -- A TARGET NO NAME RULE COULD HAVE LISTED
+==============================================================================
+
+  THE CONTROL IS THE PRE-REPAIR RULE ITSELF, read out of the commit
+  where the defect is still present rather than retyped here:
+
+      k2_consume.py at 1ee1f1b, line 154
+          ([\w./]*?([\w]+)/(?:run_all|run_audit)\.sh)
+
+  case                                                       OLD rule  libc2b3.targets
+  p = subprocess.run(["sh", "code/zz_tree_56dc/zz_probe_56dc MISS      HIT ['zz_probe_56dc.sh']
+      a basename in no fixture in this arc
+  p = subprocess.run(["sh", "code/zz_tree_56dc/run_audit.sh" HIT       HIT ['run_audit.sh']
+      the name mg-7522's widening ADDED -- 0 sites in the arc name it
+  p = subprocess.run(["sh", "code/zz_tree_56dc/run_all.sh"], HIT       HIT ['run_all.sh']
+      the original name, which both rules must still catch
+
+      cases the PRE-REPAIR two-name rule catches      2 of 3
+      cases `libc2b3.targets` catches                 3 of 3
+
+  THE POPULATION IS REPAIRED, not the named instance: a basename
+  invented for this probe, which appears in no list in this arc, is
+  caught by the property and missed by the two-name rule at the
+  commit where that rule still runs.
+
+==============================================================================
+T3b  F6 -- A CONSUMING PIPELINE WITH NO `set -e`
+==============================================================================
+
+  Two fixtures of the SAME SHAPE, differing only in what the script
+  does when the discarded stage fails.  Both are put to the clause
+  as it stood at `bee07a1` and to the repaired disjunction:
+
+  fixture    set -e ERREXIT   REPAIRED consumed()    arm
+  loud.sh    no     MISSES    IN                     VALUE
+      captured into `COUNT`, read at 2 site(s): 8, 9
+  quiet.sh   no     MISSES    IN                     VALUE
+      captured into `COUNT`, read at 1 site(s): 7
+
+      fixtures the ERREXIT-only clause reaches        0 of 2
+      fixtures the repaired disjunction reaches       2 of 2
+
+==============================================================================
+T3c  THE FAILURE DIRECTION -- LOUD AND QUIET, BOTH RUN
+==============================================================================
+
+  mg-70c7 measured the direction of the ONE instance and found it
+  loud.  A rule that only caught loud failures would be a different
+  rule, so both directions are RUN here: each fixture twice, once
+  as written and once with the discarded `grep` given an option it
+  rejects, so it exits non-zero and prints nothing.
+
+  fixture    arm            exit   stdout                         in the population?
+  loud.sh    as written     0      count=7 / AGREES               IN
+  loud.sh    grep forced    1      count= / DISAGREES / usage: gr IN
+  quiet.sh   as written     0      rows seen: 7                   IN
+  quiet.sh   grep forced    0      rows seen: 0 / usage: grep [-a IN
+
+      loud fixture, discarded stage forced to fail    exit 1
+      quiet fixture, same forcing                     exit 0
+      ...and its printed answer changed from `rows seen: 7`
+         to `rows seen: 0 / usage: grep [-a` while still exiting 0
+
+  SO THE REPAIRED CLAUSE IS DIRECTION-BLIND, WHICH IS THE RIGHT
+  ANSWER.  The quiet fixture is in the population on exactly the
+  same terms as the loud one, and it is the one whose failure
+  mg-c2b3's whole sweep exists to find: a wrong number printed
+  under a green exit.  mg-70c7 measured the direction of its ONE
+  member and left the rule direction-free; the rule is therefore
+  the population rule it claims to be and not a loud-failure
+  detector wearing its name.
+
+==============================================================================
+T3d  DOES EITHER PREDICATE READ A FAILURE DIRECTION?
+==============================================================================
+
+  Asked of the code that decides membership, with the docstring
+  removed -- a docstring that DISCUSSES the direction is prose about
+  the rule and not part of it, which is the mention-vs-use distinction
+  this arc runs on.
+
+      lib7522.py             consumed()     direction tests in the CODE: 0
+      lib7522.py             captured_var() direction tests in the CODE: 0
+      lib7522.py             var_reads()    direction tests in the CODE: 0
+      libc2b3.py             targets()      direction tests in the CODE: 0
+
+  0 in every one.  Membership is decided by what the shell DOES with
+  the status, not by what the script does afterwards, and that is what
+  makes the quiet fixture above a member.
+
+==============================================================================
+T3 TOTAL FINDINGS: 0   TOTAL BAD: 0
+==============================================================================
+
+(no findings -- both population repairs hold against cases that
+ were outside the old definitions, and the F6 clause is
+ direction-blind in both directions, measured by running both)
+
+EXTENT OF THOSE NUMBERS.  TOTAL BAD counts a control that does not
+exhibit the defect it is the control for, a repaired rule that misses
+a case of its own shape, and a direction test inside a membership
+predicate.  It ranges over 3 F5 cases and 2 F6 fixtures, all built
+here, plus the pre-repair rule read at 1ee1f1b.  It does NOT establish
+that the VALUE arm is the right widening -- that is a disagreement
+with a definition, and mg-70c7 states the same limit.

@@ -1,0 +1,217 @@
+==============================================================================
+T5  THE PRESERVED TRANSCRIPT, AND THE CLASS IT BELONGS TO
+==============================================================================
+
+==============================================================================
+T5a  IT WAS NOT REGENERATED -- blob against blob
+==============================================================================
+
+      the sweep's own commit 52aeaf4     setting pipefail                   ticket  1   re-derived  0   DIFFERS
+      the working tree, here             setting pipefail                   ticket  1   re-derived  0   DIFFERS
+
+      the transcript BODY, byte-identical to 52aeaf4   yes
+      label lines prepended above it                 37 line(s)
+      the record itself, lines                      162 line(s)
+      the row still reads `ticket 1 / re-derived 0 / DIFFERS`   yes
+
+  AND THE READER WHO SCANS FOR THE ROW STILL FINDS THE ROW.  mg-dee4's
+  `a5_floor.py` reads this file with a scan for the first line carrying
+  `pipefail` and a verdict; the label above contains no such line, so
+  the scan returns the same row it returned before:
+      setting pipefail                   ticket  1   re-derived  0   DIFFERS
+
+==============================================================================
+T5b  THE HAZARD, MEASURED -- the same row re-derived at HEAD
+==============================================================================
+
+  The census row is `runners at bee07a1 setting pipefail`.  Re-derived at
+  the ticket's own revision under both spellings of the rule:
+
+      runners in the population                   64 file(s)
+      ...matching the PRE-REPAIR regex `set -o pipefail`    0 file(s)
+      ...matching the REPAIRED regex                        1 file(s)
+          code/state_restructure_34bf/run_all.sh
+
+      the ticket said                              1 file(s)
+      the committed transcript recorded            0 file(s), DIFFERS
+      a re-run at HEAD would record                1 file(s), AGREES
+
+  THAT IS THE HAZARD, IN ONE TABLE.  The transcript is a true record
+  of a run under a rule that no longer exists.  A reader who re-runs
+  it gets the opposite verdict and concludes the record was wrong.
+  The record is right; the rule changed.  Nothing about that is
+  visible from the transcript unless the transcript says it.
+
+==============================================================================
+T5c  THE NOTE -- at `main`, where it is absent, and at HEAD
+==============================================================================
+
+  A note is sufficient only if it says THREE things: that this is a
+  historical record, that it will not reproduce at HEAD, and WHICH
+  repair closed it.  All three are asked of each site:
+
+  `main` is the CONTROL -- the revision where the defect is still
+  present -- and the working tree is this ticket's answer to it.
+
+      site                               at main   here      names the repair?
+      the transcript itself              NO        yes       yes
+      mg-05eb's citation of it           NO        yes       yes
+      `k1_census.py`'s docstring         yes       yes       yes
+
+      sites carrying the note at `main`          1 of 3 file(s)
+      sites carrying the full note here          3 of 3 file(s)
+
+  THE CONTROL EXHIBITS THE DEFECT: at `main` the note is at 1 of
+  3 sites, and the two that lacked it are the transcript a reader
+  re-runs and the audit that cites it as evidence.  Preserving
+  evidence without labelling it converts a citation into a false
+  witness, and the label is what this ticket adds.
+
+==============================================================================
+T5d  THE CLASS, COUNTED -- one instance is not a population
+==============================================================================
+
+  POPULATION, NAMED AND MECHANICAL, AS A FUNNEL.  Every stage is a fact
+  about the repository rather than a judgement, and every stage's count
+  is printed so a reader can disagree with the stage rather than with a
+  total.  GRAIN: files, at every stage.
+
+    1. a committed `out_*.txt`;
+    2. CITED by name from OUTSIDE its own directory -- by a `.md`, or a
+       `.py`/`.sh` that names it;
+    3. it RECORDS A DEFECT: it carries one of this arc's own
+       defect verdicts, listed below rather than described;
+    4. its producing code has CHANGED SINCE it was written -- some
+       `*.py`/`*.sh` in its directory has a newer commit.  That is the
+       checkable half of *it will not reproduce*.
+
+      the defect verdicts, as a rule and not as a description:
+          \bDIFFERS\b   \bSWALLOWED\b   \bWRONG\b   ^FINDING:   TOTAL BAD: [1-9]   \bMISSED\b   \*\*\* 
+
+      committed `out_*.txt` in the repository          406 file(s)
+      ...cited by name from outside their directory    300 file(s)
+      ...that RECORD A DEFECT by the rule above         81 file(s)
+      ...whose producing code has changed since         38 file(s)
+      ...of those, carrying a staleness note             2 file(s)
+
+  THE 38, with the newest source that post-dates each.  25 are printed
+  and 13 are not -- named as a CAP rather than left as a silent
+  truncation, because a list that stops without saying so reads as a
+  list that ended:
+
+      code/branching_audit_2060/out_b1_branching.txt       *** NO NOTE
+          cited by 14 artifact(s): OneThird-Bratteli-Path-Algebras-C1Parser-ProvenanceAndFindings.md, OneThird-Bratteli-Path-Algebras-IndependentAudit.md, OneThird-Bratteli-Path-Algebras-Mg58daRepair-IndependentAudit.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/branching_audit_2060/out_b3_quotes.txt          *** NO NOTE
+          cited by 1 artifact(s): OneThird-Bratteli-Path-Algebras-IndependentAudit.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/branching_audit_2060/out_b6_ledger.txt          *** NO NOTE
+          cited by 1 artifact(s): OneThird-Bratteli-Path-Algebras-IndependentAudit.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/branching_audit_a218/out_c2_vertexsets.txt      *** NO NOTE
+          cited by 4 artifact(s): OneThird-Bratteli-Path-Algebras-Mg13b2Repair-IndependentAudit.md, OneThird-Bratteli-Path-Algebras-Mge8b8Repair-IndependentAudit.md, PREDICTIONS.md
+          2 newer source(s) in its directory, e.g. c1_branching.py
+      code/branching_audit_a218/out_c4_seam.txt            *** NO NOTE
+          cited by 1 artifact(s): OneThird-Bratteli-Path-Algebras-Mge8b8Repair-IndependentAudit.md
+          2 newer source(s) in its directory, e.g. c1_branching.py
+      code/branching_audit_a218/out_c5_record.txt          *** NO NOTE
+          cited by 1 artifact(s): OneThird-Bratteli-Path-Algebras-Mge8b8Repair-IndependentAudit.md
+          2 newer source(s) in its directory, e.g. c1_branching.py
+      code/branching_repair_76cc/out_r4_doccheck.txt       *** NO NOTE
+          cited by 1 artifact(s): repair-mg-69d1-bound-and-reason.md
+          2 newer source(s) in its directory, e.g. lib76cc.py
+      code/hodge_leverage_audit_7e39/out_audit_7e39.txt    *** NO NOTE
+          cited by 1 artifact(s): OneThird-Hodge-Side-Leverage-Mg6df0Repair-Audit.md
+          1 newer source(s) in its directory, e.g. audit_7e39.py
+      code/hodge_leverage_audit_835f/out_audit_a318.txt    *** NO NOTE
+          cited by 6 artifact(s): OneThird-Hodge-Side-Leverage-Mg6df0RepairAudit-Repair.md, OneThird-Hodge-Side-Leverage-Mg835fRepair.md, OneThird-Hodge-Side-Leverage-Mg8a5cRepair-IndependentAudit.md
+          1 newer source(s) in its directory, e.g. audit_a318_repair.py
+      code/hodge_leverage_audit_8a5c/out_audit_8e30.txt    *** NO NOTE
+          cited by 5 artifact(s): OneThird-Hodge-Side-Leverage-Mg835fRepair.md, OneThird-Hodge-Side-Leverage-Mg8e30Repair-IndependentAudit.md, audit_8eca_repair.py
+          1 newer source(s) in its directory, e.g. audit_repair_8e30.py
+      code/hodge_leverage_audit_8aae/out_audit_8916.txt    *** NO NOTE
+          cited by 6 artifact(s): OneThird-Hodge-Side-Leverage-Mg8916Repair-IndependentAudit.md, OneThird-Hodge-Side-Leverage-Mg8aaeRepair.md, PREDICTIONS.md
+          1 newer source(s) in its directory, e.g. audit_8916_repair.py
+      code/hodge_leverage_repair_8916/out_repair_8916.txt  *** NO NOTE
+          cited by 10 artifact(s): OneThird-Hodge-Side-Leverage-Mg835fRepair.md, OneThird-Hodge-Side-Leverage-Mg8916Repair-IndependentAudit.md, OneThird-Hodge-Side-Leverage-Mg8a5cRepair-IndependentAudit.md
+          1 newer source(s) in its directory, e.g. repair_835f.py
+      code/runner_exit_c2b3/out_k1_census.txt              NOTED
+          cited by 17 artifact(s): OUTCOMES.md, OUTCOMES.md, OneThird-RunnerExit-ArcWideSweep-IndependentAudit.md
+          4 newer source(s) in its directory, e.g. k1_census.py
+      code/runner_exit_c2b3/out_k4_control.txt             *** NO NOTE
+          cited by 1 artifact(s): OUTCOMES.md
+          4 newer source(s) in its directory, e.g. k1_census.py
+      code/species_7d75/out_t1_grading.txt                 *** NO NOTE
+          cited by 4 artifact(s): OneThird-Audit-mg-7d75-Species-Hopf-Monoids.md, OneThird-Species-Hopf-Monoids-Repair.md, OneThird-Species-Hopf-Monoids-Where-This-Lives.md
+          5 newer source(s) in its directory, e.g. run_all.sh
+      code/species_audit_73df/out_c1_columns.txt           *** NO NOTE
+          cited by 2 artifact(s): OneThird-Audit-mg-73df-Species-Repair-Final-State.md, t6_fock_and_record.py
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/species_audit_73df/out_c4_scope.txt             *** NO NOTE
+          cited by 1 artifact(s): OneThird-Audit-mg-73df-Species-Repair-Final-State.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/species_audit_73df/out_c5_doc.txt               *** NO NOTE
+          cited by 1 artifact(s): OneThird-Audit-mg-73df-Species-Repair-Final-State.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/species_audit_7dd3/out_d1_source.txt            *** NO NOTE
+          cited by 1 artifact(s): OneThird-Audit-mg-7dd3-Extent-Repair.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/species_audit_7dd3/out_d2_extent.txt            *** NO NOTE
+          cited by 1 artifact(s): OneThird-Audit-mg-7dd3-Extent-Repair.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/species_audit_7dd3/out_d3_seam.txt              *** NO NOTE
+          cited by 1 artifact(s): OneThird-Audit-mg-7dd3-Extent-Repair.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/species_audit_7dd3/out_d5_mutations.txt         *** NO NOTE
+          cited by 1 artifact(s): OneThird-Audit-mg-7dd3-Extent-Repair.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/species_audit_7dd3/out_d6_exitcodes.txt         *** NO NOTE
+          cited by 1 artifact(s): OneThird-Audit-mg-7dd3-Extent-Repair.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/species_audit_a61f/out_a1_headline.txt          *** NO NOTE
+          cited by 1 artifact(s): OneThird-Audit-mg-7d75-Species-Hopf-Monoids.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+      code/species_audit_a61f/out_a3_hopf.txt              *** NO NOTE
+          cited by 1 artifact(s): OneThird-Audit-mg-7d75-Species-Hopf-Monoids.md
+          1 newer source(s) in its directory, e.g. run_all.sh
+
+      ... and 13 more, every one of them *** NO NOTE ***:
+          code/species_audit_a61f/out_a4_counts.txt
+          code/species_extent_audit_6cb9/out_a2_crosssection.txt
+          code/species_extent_d633/out_d1_7dd3_after.txt
+          code/species_extent_d633/out_d2_7dd3_after.txt
+          code/species_extent_d633/out_d3_7dd3_after.txt
+          code/species_extent_d633/out_d5_7dd3_after.txt
+          code/species_remainder_f8fa/out_w3_scope_before.txt
+          code/species_repair_6f61/out_r2_columns.txt
+          code/species_repair_a4ef/out_c5_doc_73df_after.txt
+          code/state_delegation_repair_0049/out_5644_rerun.txt
+          code/state_delegation_repair_0049/out_coverage218d.txt
+          code/state_landing_control_2da3/out_battery_2216_rerun.txt
+          code/state_landing_control_2da3/out_battery_2216_rerun_4acd.txt
+
+      *** the class is larger than the instance ***
+
+  EXTENT OF THAT NUMBER, stated rather than implied.  Criterion 3 is
+  `the producing code changed`, which is NECESSARY for a transcript to
+  stop reproducing and not SUFFICIENT: a source edit that changes no
+  output leaves the transcript reproducing perfectly.  So this is an
+  UPPER BOUND on the class, and the direction is stated because a
+  bound whose direction is unstated is not a bound.  The one member
+  known to actually not reproduce -- measured in T5b -- is
+  `code/runner_exit_c2b3/out_k1_census.txt`.
+
+==============================================================================
+T5 TOTAL FINDINGS: 1   TOTAL BAD: 0
+==============================================================================
+
+FINDING: T5d the class the PM asked to have counted has 38 members and 2 carry a note.  A committed transcript that is cited from outside its own directory AND whose producing code has changed since it was written is a transcript a reader can re-run and disbelieve; 36 of them say nothing about that.  The one instance mg-70c7 found by its own conscience is labelled by this ticket -- it is one of the 2 noted -- and the remaining 36 are named above and are not this ticket's to relabel.  One instance found by a conscience is not a population
+
+EXTENT OF THOSE NUMBERS.  TOTAL BAD counts a destroyed record, a
+transcript body that is not byte-identical to the sweep's own commit, a
+control that does not exhibit the hazard, and a site still missing the
+note.  TOTAL FINDINGS counts the uncounted class.  It ranges over every
+committed `out_*.txt` in the repository and every tracked `*.md`,
+`*.py` and `*.sh` that could cite one.  It does NOT establish that a
+stale-looking transcript really fails to reproduce -- that would take
+re-running every suite in the arc, and criterion 3 is an upper bound.

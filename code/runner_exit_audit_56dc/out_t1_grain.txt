@@ -1,0 +1,216 @@
+==============================================================================
+T1  THE GRAIN -- FOR EVERY COUNT, SITES OR EXECUTIONS?
+==============================================================================
+
+==============================================================================
+T1a  EVERY PRINTED COUNT IN mg-70c7's TRANSCRIPTS, CLASSIFIED
+==============================================================================
+
+  POPULATION, NAMED: every line of mg-70c7's committed transcripts
+  that has the SHAPE of a printed count row -- a label, two or more
+  spaces, and an integer ending the line.  A shape rule over the line
+  and not a list of interesting labels: a hand-list of labels is how
+  this check would become the thing it audits.
+
+      transcripts read                                    7
+      printed count ROWS in them                         50
+
+  BY THE GRAIN THE ROW'S OWN LABEL CLAIMS:
+      EXECUTION    grain                                   3
+      SITE         grain                                  46
+      BOTH         grain                                   0
+      NONE         grain                                   1
+
+  BY HOW FAR AWAY THE GRAIN WORD HAD TO BE FOUND:
+      on the count's own label                           34
+      on one of the TWO lines above  (mg-70c7's E1 window)   11
+      ONLY in a column header further up                  4
+      nowhere within 8 lines                              1
+
+  THE ROWS WHOSE GRAIN IS ONLY IN A COLUMN HEADER.  A table row takes
+  its grain from the header, which can be six lines away; mg-70c7's own
+  E1 window is the line and the two above it, so these rows are outside
+  the reach of the check that repairs F1.  That is F4's defect --
+  line-locality -- asked of the grain check instead of the marker check:
+
+      out_r5_population.txt        16  bee07a1      EITHER            SITE   20 27
+      out_r5_population.txt        18  HEAD         ERREXIT           SITE   0 0
+      out_r5_population.txt        19  HEAD         VALUE             SITE   1 1
+      out_r5_population.txt        20  HEAD         EITHER            SITE   1 1
+
+  THE `NONE` ROWS -- a count with no grain word within 8 lines, which
+  is the shape mg-dee4 found.  Every one is printed, not folded away:
+
+      out_r2_anchor.txt            36  QUOTED-IN-A-CORRECTION OneThird-Ru 166
+
+  AND EVERY ROW WHOSE LABEL CLAIMS THE EXECUTION GRAIN, in full,
+  because those are the ones mg-dee4's F1 is about -- a count of runs
+  must be a count of runs:
+
+      out_r1_grain.txt             30  DISCARDED `git diff` EXECUTION label   8
+      out_r1_grain.txt             55  EXECUTIONS at run time         label   8
+      out_r1_grain.txt             57  ...NEVER RUN by mg-7522        label   4
+
+      count rows claiming the EXECUTION grain outright     3
+      ...and rows whose label carries BOTH grains          0
+
+  EXTENT OF THIS CLASSIFICATION, stated rather than implied.  It reads
+  the WORD, not the meaning: a count labelled `executions` that is
+  really sites is classified EXECUTION here.  T1c is what catches that
+  case, by re-deriving one such count at BOTH grains rather than by
+  reading its label harder.
+
+==============================================================================
+T1b  ONE LOOP, COUNTED BOTH WAYS -- the two numbers side by side
+==============================================================================
+
+  Read at 1ee1f1b^ under a loop expander written in `lib56dc`, which shares
+  no code with `lib7522` or `lib70c7`.  SITES is one row per source
+  line; EXECUTIONS is one row per run of that line.
+
+    runner                             loop items     SITES EXECUTIONS  why
+    state_delegation_audit_16eb        3                  2          6  2 line(s) x 3 item(s)
+    state_delegation_repair_0049       2                  1          2  1 line(s) x 2 item(s)
+    face_geometry_audit_f1b2           0 loop(s)          5          5  no loop encloses a `| tee`
+    face_geometry_audit_fcf1           0 loop(s)          3          3  no loop encloses a `| tee`
+
+      `git diff`  SITES  3   EXECUTIONS  8   ratio 2.67
+      `| tee`     SITES  8   EXECUTIONS  8   ratio 1.00
+      -----------------------------------------------
+      TOTAL       SITES 11   EXECUTIONS 16
+
+  SO THE PUBLISHED `16 of 16` IS AT THE EXECUTION GRAIN and is sound:
+  the 8 `| tee` lines lie in no loop, so their site count and their
+  execution count are the same number for a reason, not by luck, and
+  that reason is printed above rather than assumed.  `out_s2_status.txt`
+  states the same breakdown; this is an independent derivation of it.
+
+==============================================================================
+T1c  `executing sites` -- RE-DERIVED AT BOTH GRAINS
+==============================================================================
+
+  `out_r4_property.txt` prints `executing sites naming a *.sh  43` and
+  `...outside it  10`.  Both are re-derived here under a scan written
+  in `lib56dc`, at the ROW grain and at the SITE grain -- and at TWO
+  revisions, because a census over the whole repository moves with the
+  arc.  `973ca61` is the commit that PUBLISHED that transcript, read from
+  `git log -1 -- <the transcript>` rather than named by hand:
+
+      at 973ca61, the publishing commit
+          (site, target) ROWS            all  49    outside  10
+          distinct SITES                 all  47    outside   9
+          distinct basenames outside                6
+          outside rows READING the status           4
+
+      at HEAD, today
+          (site, target) ROWS            all  52    outside  11
+          distinct SITES                 all  50    outside  10
+          distinct basenames outside                7
+          outside rows READING the status           4
+
+  THE DIFFERENCE, NAMED SITE BY SITE, at the publishing commit.  A line
+  that executes something and names two different shell scripts is ONE
+  site and TWO rows:
+
+      code/runner_exit_c2b3/selftestc2b3.py:155
+          names `x.sh`, `b0.sh` -- counted 2 times under the `sites` label
+          ck("`sh ./x.sh` is seen", L.invocations("sh ./b0.sh | tee o.txt"),
+
+      the transcript prints, under the label `executing sites`:
+          all      43      outside the two names   10
+      this derivation at the same commit, ROW grain:
+          all      49      outside the two names   10
+      ...and at the SITE grain:
+          all      47      outside the two names   9
+
+  WHICH OF THOSE REPRODUCE, and which do not -- named rather than
+  averaged.  The OUTSIDE column reproduces exactly at both revisions.
+  The ALL column does not: the whole-repository census moved between
+  the run that wrote the transcript and the commit that ships it,
+  which is what a repository-wide census does while an arc is landing.
+  This probe therefore rests its finding on the column that
+  reproduces, and prints the one that does not rather than dropping it.
+
+      mg-70c7's OWN probe, re-run here at HEAD, exit 0
+      ...prints, under the label `executing sites`, outside:  11
+      this instrument, same rule, ROW grain, at HEAD:         11
+      ...at the SITE grain:                                   10
+
+      *** the label says SITES and the number counts ROWS ***
+
+==============================================================================
+T1d  THE SAME QUANTITY, AS FOUR ARTIFACTS STATE IT
+==============================================================================
+
+  A count is not repaired until the sentence carrying it is.  The
+  quantity is `executing sites at HEAD naming a *.sh whose basename is
+  neither run_all.sh nor run_audit.sh`.  Where each artifact states it:
+
+    artifact                               at                             states
+    README.md                              README.md:97                   9
+        At HEAD, **9 executing sites name a `*.sh` whose basename is neither**
+    the published document                 repair-mg-70c7-grain-and-population.md:176 9
+        At `HEAD`: **9 executing sites name a `*.sh` whose basename is neither
+    r4_property.py (its OWN docstring)     r4_property.py:7               9
+        repaired.  At HEAD, 9 executing sites name a `*.sh` whose basename is 
+    OUTCOMES.md (the scored R5a)           OUTCOMES.md:42                 9
+        | **R5a** | 9 sites outside the two names, 4 consuming | **HIT** |
+
+      places stating the quantity in prose           4
+      distinct values stated for it                  1
+      the value its own instrument prints           10
+      the value at the SITE grain                    9
+
+      *** the artifacts and their own transcript state two ***
+      *** different numbers for one quantity                ***
+
+==============================================================================
+T1e  THE `c0_repro.sh` CALLER COUNT -- three artifacts, three numbers
+==============================================================================
+
+  The same shape once more, on the F6 instance.  Who reads that
+  script's exit status?  `r5_population.py`'s own rule is reproduced
+  here -- a line naming `c0_repro.sh` and matching
+  `returncode|subprocess.|exits`, excluding the script itself -- so the
+  comparison is with the rule that printed the number and not with a
+  stricter one of mine.  Counted with and without the instrument trees:
+
+      sites, all                                    10 in 5 file(s)
+      ...excluding every instrument tree in this arc 9 in 4 file(s)
+
+          code/branching_audit_321d/h3_setlevel.py:339               
+          code/branching_audit_321d/h3_setlevel.py:346               
+          code/branching_audit_58da/g4_fleet.py:370                  
+          code/branching_audit_58da/g4_fleet.py:375                  
+          code/branching_audit_58da/g4_fleet.py:380                  
+          code/branching_repair_7e58/k3_setlevel.py:236              
+          code/branching_repair_7e58/k3_setlevel.py:243              
+          code/branching_repair_7e58/k3_setlevel.py:245              
+          code/runner_exit_c2b3/selftestc2b3.py:125                  
+          code/runner_exit_repair_70c7/r5_population.py:150          AN INSTRUMENT'S OWN LINE
+
+      out_r5_population.txt                                    10 sites / 5 files
+      repair-mg-70c7-grain-and-population.md                   nine sites / four files
+      lib7522.py                                               nine sites / three files
+      out_a1_outside.txt                                       9 sites / - files
+
+      *** four artifacts, more than one reading, none of them   ***
+      *** stating whether the instrument's own line is counted  ***
+
+==============================================================================
+T1 TOTAL FINDINGS: 3   TOTAL BAD: 0
+==============================================================================
+
+FINDING: T1c `out_r4_property.txt` labels its outside-the-two-names count 10 `executing sites`; it is a count of (SITE, TARGET) MATCH ROWS, reproduced exactly here at the publishing commit 973ca61 and at HEAD, and by mg-70c7's own probe re-run live.  The distinct-SITE count is 9.  One source line -- code/runner_exit_c2b3/selftestc2b3.py:155 -- names two different `*.sh` and is counted twice under a label that says `sites`.  The repair whose thesis is that a count must say what it ranges over prints a row count under a site label
+FINDING: T1d the quantity `executing sites at HEAD outside the two names` is stated as 9 at 4 places -- README.md:97, repair-mg-70c7-grain-and-population.md:176, r4_property.py:7, OUTCOMES.md:42 -- while the transcript those artifacts point at prints 10 and mg-70c7's own probe re-run live prints 11.  9 is the distinct-SITE count and 10 is the ROW count, so the prose is right about the grain its own instrument does not print, and `r4_property.py`'s docstring adds that this is "a measurement and not a citation of mg-dee4" -- it is a citation of mg-dee4, which measured 9 before the both-senses fixtures landed
+FINDING: T1e one quantity -- the sites reading `c0_repro.sh`'s exit status -- is published as 10 sites in 5 files / nine sites in four files / nine sites in three files / 9 sites in - files.  Re-derived here under `r5_population.py`'s own rule: 10 sites in 5 files counting every instrument tree's own lines, 9 in 4 without them.  The published numbers differ by whether the instrument counts itself and by sites against files, and no artifact says which reading it is at -- which is the same defect as a count that does not say whether it ranges over sites or runs
+
+EXTENT OF THOSE NUMBERS.  TOTAL BAD counts a failure of THIS
+instrument -- a loop expansion that does not come to 11 sites / 16
+executions, or a row-grain derivation that disagrees with the
+transcript it is re-deriving.  TOTAL FINDINGS counts a label whose
+grain differs from the number it prints, or a quantity published at
+two grains without saying which.  It ranges over mg-70c7's 7
+transcripts, its 4 reader-facing artifacts, and every tracked `*.py`
+and `*.sh` at HEAD.  It does NOT range over mg-c2b3's 34, which are
+inherited from a transcript nobody in this chain has re-run.
