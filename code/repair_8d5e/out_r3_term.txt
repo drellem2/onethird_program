@@ -1,0 +1,270 @@
+==========================================================================
+R3  A-2 -- THE TERM, QUALIFIED WHERE IT IS A LIVE CLAIM
+==========================================================================
+
+A count is a number and a population.  `17` was right about the population
+`boolean_operands` walks and wrong about the population its own words name,
+and the words are what a reader has.
+
+--------------------------------------------------------------------------
+(i) THE TWO POPULATIONS, WALKED HERE
+--------------------------------------------------------------------------
+   `anywhere` walks the WHOLE module for `ast.BoolOp` and takes every
+   value of every one -- no filter of any kind.  `deciding` restricts
+   that to what lies inside a deciding condition, which is what
+   `kern5f9a.boolean_operands` computes and what the four columns
+   classify.  The selftest requires the second to agree with the
+   SHIPPED walker span for span before this table is read, so the
+   difference below is a subtraction and not a disagreement.
+
+   file               operands of every and/or, anywhere     of those, deciding     difference
+   face_complex.py    35                                     15                     20
+   posets.py          4                                      2                      2
+   ALL                39                                     17                     22
+
+   IN NO COLUMN OF mg-69d1's TABLE : 22
+
+   and they are NAMED, because a count of what is uncovered that
+   cannot be pointed at is the same silence as no count at all:
+
+     file               function                     line  op   operand text
+     face_complex.py    Poset.__init__               65    and  b == c
+     face_complex.py    Poset.__init__               65    and  (a, d) not in less
+     face_complex.py    Poset.canonical_key          125   or   best is None
+     face_complex.py    Poset.canonical_key          125   or   rel < best
+     face_complex.py    order_ideals                 143   and  (mask >> b) & 1
+     face_complex.py    order_ideals                 143   and  not ((mask >> a) & 1)
+     face_complex.py    sur_iso                      169   and  (j, i) in P.less
+     face_complex.py    sur_iso                      169   and  assign[j] > v
+     face_complex.py    sur_iso                      172   and  (i, j) in P.less
+     face_complex.py    sur_iso                      172   and  v > assign[j]
+     face_complex.py    chains_of_ideals             211   and  w != v
+     face_complex.py    chains_of_ideals             211   and  (w & v) == w
+     face_complex.py    chains_of_ideals             221   and  w != top
+     face_complex.py    chains_of_ideals             221   and  (top & w) == top
+     face_complex.py    down_laplacian_from_boundary 352   and  allowed_rows is not None
+     face_complex.py    down_laplacian_from_boundary 352   and  r not in allowed_rows
+     face_complex.py    top_laplacians               423   and  incidence_mode == "facet_swap01"
+     face_complex.py    top_laplacians               423   and  len(facets) >= 2
+     face_complex.py    top_laplacians               467   and  incidence_mode == "split_free_as_interio
+     face_complex.py    top_laplacians               467   and  free_rows
+     posets.py          cover_string                 63    and  (a, c) in P.less
+     posets.py          cover_string                 63    and  (c, b) in P.less
+
+   THE REPAIR IS TO THE TERM AND NOT TO THE WALK, so both numbers are
+   expected to be exactly what mg-2c77 measured -- 39 and 17 -- and a
+   change in either would mean this ticket moved something it said it
+   was leaving alone.
+
+--------------------------------------------------------------------------
+(ii) THE SCORING RULE, AND ITS CONTROL
+--------------------------------------------------------------------------
+   THE RULE IS mg-2c77's, character for character.  A site is
+   QUALIFIED if the words `deciding condition` stand within 3 lines of
+   it in the same file; it QUOTES THE WIDE BOUND if `NO FURTHER` or
+   `is read as` stands in the same window; otherwise it asserts the
+   census unqualified.
+
+   THE UNHYPHENATED WORDS ARE THE TEST.  mg-2c77's rule does not accept
+   `deciding-condition`: its own q3_operands.py lines carrying the
+   hyphenated form were scored UNQUALIFIED by it.  Widening the rule to
+   accept the hyphen would have closed this finding by moving the
+   ruler, so every site repaired here carries the unhyphenated words in
+   the window as well as the hyphenated term in its sentence.
+
+   THE CONTROL.  The rule is run at adcfb1f1 -- the revision where mg-2c77's
+   table was committed -- and required to return that table's own 15
+   in-`d01ff32` sites.  Two rules that agree on constructed inputs can
+   still disagree on a tree.
+
+   sites stating the term at adcfb1f1      : 57
+   of those, UNQUALIFIED                    : 35
+   of those, in files d01ff32 touched       : 15
+   mg-2c77's finding names                  : 15
+
+   NON-VACUITY -- distinct labels the rule returned over that tree: 3
+      *** census, UNQUALIFIED
+      census, QUALIFIED
+      quotes the wide BOUND, not the census
+
+--------------------------------------------------------------------------
+(iii) THE 15, EACH WITH ITS KIND -- AND THE KIND IS DERIVED
+--------------------------------------------------------------------------
+   THE RULE FOR WHAT A SITE GETS, stated before the table:
+
+     a LIVE CLAIM about what the instrument covers  -- source, prose,
+       documentation -- is EDITED to carry the qualifier.
+     a TRANSCRIPT is not edited.  The source line that PRINTS it is
+       edited and the script is re-run by its own runner; a transcript
+       is a measurement and hand-editing one is falsifying it.
+     a RECORD committed before its own run -- a PREDICTIONS file -- gets
+       an ADDENDUM with the original text left standing.  A later
+       ticket does not get to rewrite what an earlier one predicted.
+
+   The KIND IS DERIVED from the path, not listed: `out_*.txt` is a
+   transcript, `PREDICTIONS.md` is a record, anything else is live.
+
+   site (line as at adcfb1f1)                           line  kind             treatment                    now
+   code/face_geometry_instr_5f9a/kern5f9a.py            507   live claim       EDITED to carry the qualifier census, QUALIFIED
+   code/repair_69d1/PREDICTIONS.md                      26    record, pre-run  ADDENDUM, original standing  census, QUALIFIED
+   code/repair_69d1/PREDICTIONS.md                      29    record, pre-run  ADDENDUM, original standing  census, QUALIFIED
+   code/repair_69d1/README.md                           33    live claim       EDITED to carry the qualifier census, QUALIFIED
+   code/repair_69d1/README.md                           8     live claim       EDITED to carry the qualifier census, QUALIFIED
+   code/repair_69d1/lib69d1.py                          6     live claim       EDITED to carry the qualifier gone
+   code/repair_69d1/out_p1_bound.txt                    154   transcript       re-run by its own runner     census, QUALIFIED
+   code/repair_69d1/out_selftest_69d1.txt               5     transcript       re-run by its own runner     census, QUALIFIED
+   code/repair_69d1/p1_bound.py                         15    live claim       EDITED to carry the qualifier census, QUALIFIED
+   code/repair_69d1/p1_bound.py                         152   live claim       EDITED to carry the qualifier census, QUALIFIED
+   code/repair_69d1/p1_bound.py                         57    live claim       EDITED to carry the qualifier census, QUALIFIED
+   code/repair_69d1/selftest_69d1.py                    59    live claim       EDITED to carry the qualifier census, QUALIFIED
+   docs/landing-mg-0b07-implicit-disjunction.md         153   live claim       EDITED to carry the qualifier census, QUALIFIED
+   docs/landing-mg-0b07-implicit-disjunction.md         29    live claim       EDITED to carry the qualifier census, QUALIFIED
+   docs/repair-mg-69d1-bound-and-reason.md              15    live claim       EDITED to carry the qualifier census, QUALIFIED
+
+   files that carried an unqualified site and still carry one : 0
+
+   The `now` column is scored PER FILE and not per line, because a
+   line number is an anchor into a file's text: editing the file moves
+   every site below the edit.  Scoring the old line number in the new
+   file would be A-1 in miniature -- the same number, about a
+   different line.
+
+--------------------------------------------------------------------------
+(iv) EVERY SITE IN THE TREE NOW, WITH A DISPOSITION
+--------------------------------------------------------------------------
+   The population is READ FROM THE TREE, untracked files included --
+   this deliverable's own files are in it and are marked.  Excluding
+   them by path would be the path list this lineage keeps rebuilding.
+
+   THE RESIDUE IS NAMED, NOT COUNTED.  Sites outside the repair's
+   population are not edited here, and each one says why: it is a
+   RECORD -- an audit's statement of what it found, or a transcript, or
+   a prediction file -- and rewriting another ticket's record to make
+   this ticket's count come out is the failure this arc exists to
+   avoid.
+
+   site                                                     line  scope              disposition
+   code/audit_2c77/PREDICTIONS.md                           87    mg-2c77's record   census, QUALIFIED
+   code/audit_2c77/PREDICTIONS.md                           97    mg-2c77's record   census, QUALIFIED
+   code/audit_2c77/PREDICTIONS.md                           178   mg-2c77's record   *** census, UNQUALIFIED
+   code/audit_2c77/README.md                                14    mg-2c77's record   *** census, UNQUALIFIED
+   code/audit_2c77/README.md                                72    mg-2c77's record   census, QUALIFIED
+   code/audit_2c77/lib2c77.py                               187   mg-2c77's record   *** census, UNQUALIFIED
+   code/audit_2c77/out_q3_operands.txt                      69    mg-2c77's record   *** census, UNQUALIFIED
+   code/audit_2c77/out_q3_operands.txt                      214   mg-2c77's record   census, QUALIFIED
+   code/audit_2c77/out_q3_operands.txt                      215   mg-2c77's record   census, QUALIFIED
+   code/audit_2c77/q3_operands.py                           15    mg-2c77's record   *** census, UNQUALIFIED
+   code/audit_2c77/q3_operands.py                           55    mg-2c77's record   *** census, UNQUALIFIED
+   code/audit_2c77/q3_operands.py                           148   mg-2c77's record   *** census, UNQUALIFIED
+   code/audit_2c77/q3_operands.py                           200   mg-2c77's record   *** census, UNQUALIFIED
+   code/audit_2c77/q3_operands.py                           235   mg-2c77's record   *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/PREDICTIONS.md             42    mg-eaef's record   *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/README.md                  7     mg-eaef's record   *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/README.md                  8     mg-eaef's record   *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/README.md                  45    mg-eaef's record   *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/README.md                  79    mg-eaef's record   quotes the wide BOUND, not the census
+   code/face_geometry_audit_eaef/README.md                  82    mg-eaef's record   quotes the wide BOUND, not the census
+   code/face_geometry_audit_eaef/e1_operand.py              140   mg-eaef's record   *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/e2_bound.py                76    mg-eaef's record   *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/e2_bound.py                167   mg-eaef's record   census, QUALIFIED
+   code/face_geometry_audit_eaef/e2_bound.py                191   mg-eaef's record   quotes the wide BOUND, not the census
+   code/face_geometry_audit_eaef/e2_bound.py                192   mg-eaef's record   quotes the wide BOUND, not the census
+   code/face_geometry_audit_eaef/out_e1_operand.txt         37    mg-eaef's record   quotes the wide BOUND, not the census
+   code/face_geometry_audit_eaef/out_e1_operand.txt         81    mg-eaef's record   census, QUALIFIED
+   code/face_geometry_audit_eaef/out_e1_operand.txt         125   mg-eaef's record   *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/out_e2_bound.txt           8     mg-eaef's record   *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/out_e2_bound.txt           59    mg-eaef's record   census, QUALIFIED
+   code/face_geometry_audit_eaef/out_e2_bound.txt           67    mg-eaef's record   census, QUALIFIED
+   code/face_geometry_audit_eaef/out_e2_bound.txt           74    mg-eaef's record   quotes the wide BOUND, not the census
+   code/face_geometry_instr_5f9a/d2_deletion.py             149   in d01ff32         quotes the wide BOUND, not the census
+   code/face_geometry_instr_5f9a/d2_deletion.py             1516  in d01ff32         quotes the wide BOUND, not the census
+   code/face_geometry_instr_5f9a/kern5f9a.py                511   in d01ff32         census, QUALIFIED
+   code/face_geometry_instr_5f9a/out_d2_deletion.txt        344   in d01ff32         quotes the wide BOUND, not the census
+   code/repair_69d1/PREDICTIONS.md                          26    in d01ff32         census, QUALIFIED
+   code/repair_69d1/PREDICTIONS.md                          30    in d01ff32         census, QUALIFIED
+   code/repair_69d1/PREDICTIONS.md                          135   in d01ff32         census, QUALIFIED
+   code/repair_69d1/PREDICTIONS.md                          136   in d01ff32         census, QUALIFIED
+   code/repair_69d1/README.md                               8     in d01ff32         census, QUALIFIED
+   code/repair_69d1/README.md                               27    in d01ff32         quotes the wide BOUND, not the census
+   code/repair_69d1/README.md                               33    in d01ff32         census, QUALIFIED
+   code/repair_69d1/out_p1_bound.txt                        80    in d01ff32         census, QUALIFIED
+   code/repair_69d1/out_p1_bound.txt                        175   in d01ff32         census, QUALIFIED
+   code/repair_69d1/out_selftest_69d1.txt                   5     in d01ff32         census, QUALIFIED
+   code/repair_69d1/p1_bound.py                             6     in d01ff32         quotes the wide BOUND, not the census
+   code/repair_69d1/p1_bound.py                             16    in d01ff32         census, QUALIFIED
+   code/repair_69d1/p1_bound.py                             24    in d01ff32         census, QUALIFIED
+   code/repair_69d1/p1_bound.py                             67    in d01ff32         census, QUALIFIED
+   code/repair_69d1/p1_bound.py                             165   in d01ff32         census, QUALIFIED
+   code/repair_69d1/p1_bound.py                             218   in d01ff32         census, QUALIFIED
+   code/repair_69d1/selftest_69d1.py                        62    in d01ff32         census, QUALIFIED
+   code/repair_8d5e/PREDICTIONS.md                          13    THIS REPAIR        census, QUALIFIED
+   code/repair_8d5e/README.md                               8     THIS REPAIR        census, QUALIFIED
+   code/repair_8d5e/lib8d5e.py                              79    THIS REPAIR        census, QUALIFIED
+   code/repair_8d5e/out_r4_self.txt                         82    THIS REPAIR        census, QUALIFIED
+   code/repair_8d5e/r3_term.py                              3     THIS REPAIR        census, QUALIFIED
+   code/repair_8d5e/selftest_8d5e.py                        118   THIS REPAIR        census, QUALIFIED
+   code/repair_8d5e/selftest_8d5e.py                        121   THIS REPAIR        census, QUALIFIED
+   code/repair_8d5e/selftest_8d5e.py                        125   THIS REPAIR        census, QUALIFIED
+   code/repair_8d5e/selftest_8d5e.py                        129   THIS REPAIR        census, QUALIFIED
+   code/repair_8d5e/selftest_8d5e.py                        133   THIS REPAIR        census, QUALIFIED
+   code/repair_8d5e/selftest_8d5e.py                        139   THIS REPAIR        quotes the wide BOUND, not the census
+   code/repair_8d5e/selftest_8d5e.py                        144   THIS REPAIR        quotes the wide BOUND, not the census
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md        23    mg-eaef's record   quotes the wide BOUND, not the census
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md        67    mg-eaef's record   *** census, UNQUALIFIED
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md        75    mg-eaef's record   *** census, UNQUALIFIED
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md        93    mg-eaef's record   *** census, UNQUALIFIED
+   docs/landing-mg-0b07-implicit-disjunction.md             29    in d01ff32         census, QUALIFIED
+   docs/landing-mg-0b07-implicit-disjunction.md             156   in d01ff32         census, QUALIFIED
+   docs/repair-mg-69d1-bound-and-reason.md                  15    in d01ff32         census, QUALIFIED
+   docs/repair-mg-69d1-bound-and-reason.md                  30    in d01ff32         quotes the wide BOUND, not the census
+   docs/repair-mg-8d5e-derived-anchor-and-the-term.md       128   THIS REPAIR        census, QUALIFIED
+   docs/repair-mg-8d5e-derived-anchor-and-the-term.md       233   THIS REPAIR        census, QUALIFIED
+
+   75 site(s) in all; 20 state the census without the deciding-condition
+   qualifier.
+
+   scope                    unqualified sites remaining
+   mg-2c77's record         9
+   mg-eaef's record         11
+
+   WHAT REMAINS, AND WHY IT REMAINS.  Every site left unqualified is
+   an audit's own record -- mg-2c77's finding text and transcripts,
+   mg-eaef's instrument and its write-up.  Each states what that audit
+   found at the moment it ran.  They are pointed at here and left
+   standing; the phrase in them is wide, and this ticket's answer to
+   that is this table, not an edit to their record.
+
+--------------------------------------------------------------------------
+(v) THE SWEEP IS UNMOVED -- THE CLASSIFIER'S EDIT IS A COMMENT
+--------------------------------------------------------------------------
+   The one file this repair touches that anything EXECUTES is
+   `kern5f9a.py`, and what was written there is a comment.  Measured
+   rather than asserted: the module is parsed before and after and the
+   two abstract syntax trees are compared.  Identical trees cannot
+   behave differently.
+
+   `before` is reached by the property -- the newest revision of the
+   file that does not carry the comment's own marker -- so this row is
+   correct both before this repair is committed and after.
+
+   kern5f9a.py before this repair, derived : d01ff32d
+   the source text differs                 : yes
+   the PARSED MODULE differs               : no
+
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   The term is qualified wherever it is a live claim, and the walk
+   is untouched.
+
+   the two populations                          : 39 anywhere, 17 deciding
+   operands in no column of mg-69d1's table     : 22, named in (i)
+   sites in files d01ff32 touched, unqualified  : 0 (was 15)
+   sites in this deliverable's own files        : 0
+   sites left unqualified anywhere, all records : 20
+   the shipped classifier's parsed module       : unchanged
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every source read and AST parse this script performs, the requirement that both census files parse and that neither walk come back empty, and the requirement that the scoring rule return more than one label over the tree it scores
+FINDINGS: 0, population: every operand of every `and`/`or` in the census's two files against mg-69d1's four columns; the 15 sites in files d01ff32 touched, each scored by mg-2c77's rule after the repair; every site in the tree stating the term, scored for a disposition; and the parsed module of the shipped classifier before and after the edit made to it here
+TOTAL BAD: 0

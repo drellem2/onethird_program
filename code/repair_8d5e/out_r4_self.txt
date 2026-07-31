@@ -1,0 +1,175 @@
+==========================================================================
+R4  THIS DELIVERABLE, CHECKED FOR THE DEFECTS IT REPAIRS
+==========================================================================
+
+A repair for an anchor that re-pointed, anchored on a file's history, would be
+the defect wearing the repair's clothes.  So would a repair for a term that
+denotes two populations, written with that term in two ways.
+
+--------------------------------------------------------------------------
+(i) EVERY ANCHOR THIS DELIVERABLE DERIVES
+--------------------------------------------------------------------------
+   ANCHORED ON A PROPERTY  the revision is found by asking what the
+     file CONTAINS, so an edit that does not change the property does
+     not move it.
+   PINNED AND CHECKED  the revision is written down AND a derivation
+     is run against it, so a pin that rots is loud.
+   ANCHORED ON A FILE'S HISTORY  re-points on the next unrelated edit.
+     This is the defect; nothing here may depend on one, and the two
+     that remain are printed as evidence and used by no measurement.
+
+   anchor                                     value     anchored on       how it is checked
+   libe34a.REPAIR_REV                         4755d029  property + pin    first commit where g1 carries 'kernel_source=', chec
+   libe34a.PRE_REV                            3bc2cf76  property + pin    its first parent, checked against a pin
+   libe34a.REV_7E58                           4372fae9  property + pin    first commit where g1 carries 'def measurement(', ch
+   libe34a.PRE_7E58_REV                       52aeaf43  property + pin    its first parent, checked against a pin
+   lib8d5e.Q3_REV_PIN                         adcfb1f1  pin + derivation  re-derived as the last commit touching mg-2c77's tra
+   lib8d5e.D01FF32_PIN                        d01ff32d  pin + derivation  re-derived as the last commit touching g1 before thi
+   r1 (v): libe34a before this repair         e494515b  property          newest revision of libe34a lacking 'def first_introd
+   r3 (v): kern5f9a before this repair        d01ff32d  property          newest revision of kern5f9a lacking the comment's ma
+   r4 (iii): the base of this repair's diff   3fbf6f68  property          newest revision at which code/repair_8d5e does not e
+   libe34a.LAST_TOUCHING_G1                   d01ff32d  FILE HISTORY      kept as evidence; used by no anchor and no measureme
+   libe34a.NTH_TOUCHING_1                     4755d029  FILE HISTORY      kept for the same reason; used by no anchor and no m
+
+   anchors derived from a file's HISTORY : 2, and each is declared unused
+      libe34a.LAST_TOUCHING_G1
+      libe34a.NTH_TOUCHING_1
+
+   Q3_REV_PIN re-derived  : adcfb1f1  (agrees)
+   D01FF32_PIN's subject  : docs+repair: THE BOUND IS NARROWED TO THE SWEEP WITH ALL 17 OPERAN
+
+   AND THE PERTURBATION.  A commit built here appends a comment to
+   every file these anchors derive from -- and to nothing else -- so
+   `it does not move` is a measurement rather than a property of the
+   week this was written in.
+
+   anchor           here         perturbed    
+   KERN             d01ff32d     d01ff32d     held
+   LIBE34A          e494515b     e494515b     held
+   PRE_REV          3bc2cf76     3bc2cf76     held
+   Q3               adcfb1f1     adcfb1f1     held
+   REPAIR_REV       4755d029     4755d029     held
+
+   files perturbed : 3;  anchors that moved : 0
+
+--------------------------------------------------------------------------
+(ii) EVERY TERM THIS DELIVERABLE USES IN A COUNT
+--------------------------------------------------------------------------
+   A term in a count needs a population, and the population has to be
+   the same one at every site.  Each term below is scored across THIS
+   deliverable's own files by the rule that applies to it -- for the
+   census phrase that is mg-2c77's rule, unchanged, so my count and its
+   count are the same measurement.
+
+   this deliverable's own files : 15
+      code/repair_8d5e/PREDICTIONS.md
+      code/repair_8d5e/README.md
+      code/repair_8d5e/lib8d5e.py
+      code/repair_8d5e/out_r1_anchor.txt
+      code/repair_8d5e/out_r2_kernel_half.txt
+      code/repair_8d5e/out_r3_term.txt
+      code/repair_8d5e/out_r4_self.txt
+      code/repair_8d5e/out_selftest_8d5e.txt
+      code/repair_8d5e/r1_anchor.py
+      code/repair_8d5e/r2_kernel_half.py
+      code/repair_8d5e/r3_term.py
+      code/repair_8d5e/r4_self.py
+      code/repair_8d5e/run_all.sh
+      code/repair_8d5e/selftest_8d5e.py
+      docs/repair-mg-8d5e-derived-anchor-and-the-term.md
+
+   term                           the population it denotes              sites
+   `explicit boolean operand`     the operands inside a deciding conditi 13, 0 without it
+      the operands inside a deciding condition -- 17 -- and not the 39 the bare phrase denotes
+   `15 site`                      sites stating the census unqualified I 7, 0 without it
+      sites stating the census unqualified IN FILES d01ff32 TOUCHED, at adcfb1f1 -- not tree-wide, where the figure is larger and moves
+
+   AND THE EDIT THIS REPAIR MADE TO ITS OWN PREDICTION FILE, BOOKED
+   HERE.  `code/repair_8d5e/PREDICTIONS.md` was committed before any
+   script existed, and one row of it -- the sentence describing A-2 --
+   was afterwards reworded so that it carries the unhyphenated words
+   the scoring rule looks for.  NO PREDICTED VALUE WAS TOUCHED and the
+   change is noted in the file itself.
+
+   It is booked here because the alternative was worse in both
+   directions: leaving it would have left this deliverable asserting
+   the census unqualified in the one file that says what it set out to
+   do, and editing it silently would be exactly the treatment this
+   ticket refuses to give anybody else's record.  The rule this repair
+   states for other people's prediction files -- an addendum, original
+   standing -- is the rule it applied to mg-69d1's; its own is
+   disclosed instead, and that difference is the finding-shaped part of
+   this deliverable.
+
+   the edit is disclosed in the file itself : yes
+
+--------------------------------------------------------------------------
+(iii) THE KINDS OF ARTIFACT THIS REPAIR EMITS
+--------------------------------------------------------------------------
+   The population is DERIVED, not listed: every path that differs
+   between this branch and the newest revision at which code/repair_8d5e does
+   not exist, plus everything still uncommitted.  A path in no kind is
+   a finding, because a list of kinds that does not cover its own
+   population is the shape of both defects above.
+
+   base, derived : 3fbf6f68  evidence: the committed transcripts of the mg-19ec suite
+   paths changed : 36
+
+   path                                                 kind                           disposition
+   code/branching_audit_e34a/k1_prerepair.py            another ticket's source        EDITED -- prose in (A-2) or the anchor itself (A-1)
+   code/branching_audit_e34a/libe34a.py                 another ticket's source        EDITED -- prose in (A-2) or the anchor itself (A-1)
+   code/branching_audit_e34a/out_k1_prerepair.txt       another ticket's transcript    REGENERATED by that ticket's own runner
+   code/branching_audit_e34a/out_k2_five.txt            another ticket's transcript    REGENERATED by that ticket's own runner
+   code/branching_audit_e34a/out_k3_undisturbed.txt     another ticket's transcript    REGENERATED by that ticket's own runner
+   code/branching_audit_e34a/out_k4_cancel.txt          another ticket's transcript    REGENERATED by that ticket's own runner
+   code/branching_audit_e34a/out_selftest_e34a.txt      another ticket's transcript    REGENERATED by that ticket's own runner
+   code/branching_audit_e34a/selftest_e34a.py           another ticket's source        EDITED -- prose in (A-2) or the anchor itself (A-1)
+   code/face_geometry_instr_5f9a/kern5f9a.py            another ticket's source        EDITED -- prose in (A-2) or the anchor itself (A-1)
+   code/repair_69d1/PREDICTIONS.md                      another ticket's pre-run record ADDENDUM in place, original row standing
+   code/repair_69d1/README.md                           another ticket's README        EDITED -- a live claim about what its instrument covers
+   code/repair_69d1/lib69d1.py                          another ticket's source        EDITED -- prose in (A-2) or the anchor itself (A-1)
+   code/repair_69d1/out_p1_bound.txt                    another ticket's transcript    REGENERATED by that ticket's own runner
+   code/repair_69d1/out_p2_rerun.txt                    another ticket's transcript    REGENERATED by that ticket's own runner
+   code/repair_69d1/out_p3_reason.txt                   another ticket's transcript    REGENERATED by that ticket's own runner
+   code/repair_69d1/out_p4_kinds.txt                    another ticket's transcript    REGENERATED by that ticket's own runner
+   code/repair_69d1/out_selftest_69d1.txt               another ticket's transcript    REGENERATED by that ticket's own runner
+   code/repair_69d1/p1_bound.py                         another ticket's source        EDITED -- prose in (A-2) or the anchor itself (A-1)
+   code/repair_69d1/selftest_69d1.py                    another ticket's source        EDITED -- prose in (A-2) or the anchor itself (A-1)
+   code/repair_8d5e/PREDICTIONS.md                      this repair's pre-run record   one row reworded, DISCLOSED in (ii) and in the file
+   code/repair_8d5e/README.md                           this repair's own source       new, and self-tested
+   code/repair_8d5e/lib8d5e.py                          this repair's own source       new, and self-tested
+   code/repair_8d5e/out_r1_anchor.txt                   this repair's transcript       written by run_all.sh, never by hand
+   code/repair_8d5e/out_r2_kernel_half.txt              this repair's transcript       written by run_all.sh, never by hand
+   code/repair_8d5e/out_r3_term.txt                     this repair's transcript       written by run_all.sh, never by hand
+   code/repair_8d5e/out_r4_self.txt                     this repair's transcript       written by run_all.sh, never by hand
+   code/repair_8d5e/out_selftest_8d5e.txt               this repair's transcript       written by run_all.sh, never by hand
+   code/repair_8d5e/r1_anchor.py                        this repair's own source       new, and self-tested
+   code/repair_8d5e/r2_kernel_half.py                   this repair's own source       new, and self-tested
+   code/repair_8d5e/r3_term.py                          this repair's own source       new, and self-tested
+   code/repair_8d5e/r4_self.py                          this repair's own source       new, and self-tested
+   code/repair_8d5e/run_all.sh                          this repair's own source       new, and self-tested
+   code/repair_8d5e/selftest_8d5e.py                    this repair's own source       new, and self-tested
+   docs/landing-mg-0b07-implicit-disjunction.md         a live document                EDITED to carry the qualifier
+   docs/repair-mg-69d1-bound-and-reason.md              a live document                EDITED to carry the qualifier
+   docs/repair-mg-8d5e-derived-anchor-and-the-term.md   this repair's own document     new, and scored in (ii)
+
+   AND THE ONE KIND THAT CANNOT BE REPAIRED.  The commit message of
+   `d01ff32` states the census unqualified, and mg-76cc's states the
+   inverted reason.  A commit message is immutable; its disposition is
+   a POINTER and not a fix, and k4 (i) counts the copy in mg-76cc's
+   message precisely because the anchor now selects that message
+   again -- which is A-1's second consequence stated as a benefit.
+
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   anchors this deliverable derives          : 11, of which 3 on a
+     property, 6 pinned-and-derived, 2 on a file's history and unused
+   anchors that moved under the perturbation  : 0 required, measured above
+   counted terms scored at every site         : 2
+   paths this repair changes, all in a kind   : 36
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone and subprocess run this script performs, plus the requirement that the perturbation commit really touch every file it names and really leave every property marker in place
+FINDINGS: 0, population: every revision this deliverable's scripts derive or pin, classified by what it is anchored on and re-derived under a perturbation; every counted term this deliverable uses, scored at every site in its own files; and every path this repair changes, scored against the kinds enumerated here
+TOTAL BAD: 0

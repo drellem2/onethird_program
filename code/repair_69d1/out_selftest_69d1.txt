@@ -2,7 +2,8 @@
 selftest_69d1 -- the instrument against constructed inputs
 ==========================================================================
 
--- the classifier: every explicit boolean operand, one named column
+-- the classifier: every DECIDING-CONDITION explicit boolean operand, one named column
+   (the population is the operands inside a deciding condition, not every `and`/`or` in the module)
   [ok  ] a top-level `or` yields 2 operands, both top
   [ok  ] an `and` inside a comprehension yields 2 operands, NEITHER top
   [ok  ] ...and the sweep's own enumerator finds 0 of them

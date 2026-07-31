@@ -18,12 +18,14 @@ because it is read as a guarantee.
    marker stands within 25 lines of the copy, in the same file.
 
    THE NARROW SENTENCE -- `DELETION REACHES THE TOP-LEVEL BOOLEAN OPERANDS OF THE D ...`:
+     code/audit_2c77/q2_bound_edge.py                         line 5
      code/face_geometry_instr_5f9a/d2_deletion.py             line 142
      code/face_geometry_instr_5f9a/d2_deletion.py             line 1506
      code/face_geometry_instr_5f9a/out_d2_deletion.txt        line 335
      code/repair_69d1/README.md                               line 30
-     code/repair_69d1/p1_bound.py                             line 65
-     docs/landing-mg-0b07-implicit-disjunction.md             line 33
+     code/repair_69d1/p1_bound.py                             line 78
+     code/repair_8d5e/r3_term.py                              line 10
+     docs/landing-mg-0b07-implicit-disjunction.md             line 36
      docs/repair-mg-69d1-bound-and-reason.md                  line 33
 
    THE WIDE SENTENCE -- `DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN O ...`:
@@ -32,11 +34,11 @@ because it is read as a guarantee.
      code/face_geometry_audit_eaef/out_e2_bound.txt           line 74    correction within 25 lines
      code/repair_69d1/README.md                               line 25    correction within 25 lines
      code/repair_69d1/p1_bound.py                             line 5     correction within 25 lines
-     code/repair_69d1/p1_bound.py                             line 64    correction within 25 lines
+     code/repair_69d1/p1_bound.py                             line 77    correction within 25 lines
      docs/landing-mg-0b07-implicit-disjunction.md             line 24    correction within 25 lines
      docs/repair-mg-69d1-bound-and-reason.md                  line 28    correction within 25 lines
 
-   8 copy/copies of the wide sentence, 0 of them live assertions; 7 copy/copies
+   8 copy/copies of the wide sentence, 0 of them live assertions; 9 copy/copies
    of the narrow one.
 
 
@@ -72,6 +74,25 @@ because it is read as a guarantee.
 
    population re-derived by an INDEPENDENT walk : 17
    sum of the four columns                     : 17
+
+   AND THE WIDER POPULATION, PRINTED BESIDE IT (mg-8d5e, on mg-2c77's
+   OPEN 2).  The four columns above classify the operands inside a
+   deciding condition.  Unqualified, `explicit boolean operand` denotes
+   every `and`/`or` operand ANYWHERE in these files -- in a `while`, in
+   an assignment, in an `if` whose body assigns and breaks -- and that
+   is a larger set.  Both are printed so the subtraction is on the page
+   and the 17 cannot read as the whole:
+
+   file               operands of every and/or, anywhere     of those, deciding     in no column here
+   face_complex.py    35                                     15                     20
+   posets.py          4                                      2                      2
+   ALL                39                                     17                     22
+
+   The 22 in no column are outside every deciding condition, so they
+   are outside the sweep's reach AND outside this table.  That is a
+   statement about what the census covers, not a defect in the columns:
+   the four columns are total over the population they name, which is
+   re-derived above at 17.
 
 --------------------------------------------------------------------------
 (iii) THE `swept` COLUMN AGAINST THE SWEEP'S OWN ROWS
@@ -151,5 +172,5 @@ because it is read as a guarantee.
 
 --------------------------------------------------------------------------
 SELF-ERRORS: 0, population: every git read and source read this script performs, the requirement that each of the 4 nested deletions really apply, and the requirement that the baseline artifact be non-empty before any comparison is made
-FINDINGS: 0, population: the 2 written forms of the bound sentence over every live site in the tree, the 17 explicit boolean operands of the census's two files against the 4 named columns, the `swept` column against the sweep's own enumerated rows, the 4 nested operands deleted one at a time against the control battery, and the classifier with one column deleted
+FINDINGS: 0, population: the 2 written forms of the bound sentence over every live site in the tree, the 17 explicit boolean operands of the census's two files that lie inside a deciding condition -- the deciding-condition qualifier is the population and not decoration (mg-8d5e) -- against the 4 named columns, the `swept` column against the sweep's own enumerated rows, the 4 nested operands deleted one at a time against the control battery, and the classifier with one column deleted
 TOTAL BAD: 0

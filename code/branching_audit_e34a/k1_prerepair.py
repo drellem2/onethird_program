@@ -63,19 +63,67 @@ complained is gone.  The only way to see it is to run the old predicate.
 """)
 
 # ---------------------------------------------------------------------------
-L.rule("(i) THE TWO PREDICATES, DERIVED FROM THE LOG RATHER THAN WRITTEN DOWN")
-print("""   `the predicate before this repair` is a claim about history, so it
-   is taken from history: the last commit that touched
-   g1_provenance.py, and then its first parent.  mg-76cc's own lib
-   carries that revision as a string literal, which is a figure that
-   cannot notice the file moving again.""")
+L.rule("(i) THE TWO PREDICATES, ANCHORED ON THE PROPERTY AND ON A PIN")
+print("""   `the predicate before this repair` is a claim about a PROPERTY --
+   the kernel half being present in the measurement -- so it is derived
+   from the property and not from the file's edit history (mg-8d5e, on
+   mg-2c77's OPEN 1).
+
+   It used to be derived from the history: the last commit that touched
+   g1_provenance.py, and then its first parent.  mg-69d1 then touched
+   g1_provenance.py to correct a SENTENCE, and the anchor followed the
+   edit -- both sides of this comparison became mg-76cc's ALREADY
+   REPAIRED predicate, with every number below unchanged and every one
+   of them about a different pair of revisions.  A literal cannot
+   notice that the file moved; a derivation cannot notice that it has
+   started measuring something else.  So there are now both, and they
+   are COMPARED.""")
 print()
-print("   the last commit touching %s" % L.G1_REL)
-print("     %s  %s" % (L.REPAIR_REV[:12], L.subject(L.REPAIR_REV)[:80]))
-print("   its first parent -- THE PRE-REPAIR PREDICATE")
-print("     %s  %s" % (L.PRE_REV[:12], L.subject(L.PRE_REV)[:80]))
-print("   and one repair further back, for context")
-print("     %s  %s" % (L.PRE_7E58_REV[:12], L.subject(L.PRE_7E58_REV)[:80]))
+print("     %-52s %-9s %-9s %s" % ("anchor", "derived", "pinned", ""))
+for label, got, pin, verdict in L.anchor_rows():
+    print("     %-52s %-9s %-9s %s" % (label, got[:8], pin[:8], verdict))
+print()
+for label, got, _pin, _v in L.anchor_rows():
+    if not label.startswith("  "):
+        print("     %s" % label.split(",")[0])
+        print("       %s  %s" % (got[:12], L.subject(got)[:78]))
+print()
+R.gate(not L.ANCHOR_DRIFT,
+       "the anchors this script measures against do not agree with themselves "
+       "on %d point(s): %s.  Every row below is about whichever revision pair "
+       "the derivation happens to return, and the numbers cannot say which"
+       % (len(L.ANCHOR_DRIFT), "; ".join(L.ANCHOR_DRIFT)))
+print("   anchors derived and pinned that disagree : %d" % len(L.ANCHOR_DRIFT))
+for row in L.ANCHOR_DRIFT:
+    print("      *** %s" % row)
+print()
+print("""   AND THE ANCHOR THAT RE-POINTED, PRINTED RATHER THAN DELETED.  The
+   quantity that moved is the evidence, and a repair that removed it
+   would leave the next reader with nothing to check the story
+   against.  The distance is the number of commits that touched the
+   file without touching the property:""")
+print()
+_drifted = [("the last commit touching g1_provenance.py -- the OLD anchor",
+             L.LAST_TOUCHING_G1, L.REPAIR_REV, "mg-76cc's repair"),
+            ("its first parent -- the OLD `before this repair`",
+             L.resolve(L.LAST_TOUCHING_G1 + "^"), L.PRE_REV,
+             "the pre-repair predicate"),
+            ("the 2nd-newest commit touching it -- the OLD `before mg-7e58`",
+             L.resolve(L.NTH_TOUCHING_1 + "^"), L.PRE_7E58_REV,
+             "before mg-7e58")]
+print("     %-58s %-9s %-9s %s"
+      % ("what the file's history returns", "history", "property", "apart"))
+for label, hist, prop, _what in _drifted:
+    print("     %-58s %-9s %-9s %d commit(s)"
+          % (label, hist[:8], prop[:8],
+             L.distance(prop, hist) if L.is_ancestor(prop, hist)
+             else L.distance(hist, prop)))
+print()
+print("   BOTH history anchors moved, and only one of them was named as a")
+print("   finding.  `%s` now holds %s, which is mg-76cc's parent under a"
+      % ("the 2nd-newest commit", L.resolve(L.NTH_TOUCHING_1 + "^")[:8]))
+print("   label that says mg-7e58: an index into a file's history is an")
+print("   anchor derived from that history and re-points for the same reason.")
 print()
 
 pre_src = L.git_show(L.PRE_REV, L.G1_REL)

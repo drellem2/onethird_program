@@ -27,7 +27,10 @@ the control still exits 1.
 > **CORRECTED BY mg-69d1 (mg-eaef's E5 and E4), and the sentence above is left as written so the
 > correction can be read against it.** That bound is **wider than the sweep**. Read as a
 > guarantee about *every* explicit boolean operand it is false: of the **17** in the two files
-> this census covers, **6 are not on the reached side** — 4 nested below the top level of their
+> this census covers that lie inside a deciding condition — the qualifier the count needs, added
+> by mg-8d5e on mg-2c77's OPEN 2, because unqualified the phrase denotes the **39** operands of
+> every `and`/`or` anywhere in those files —
+> **6 are not on the reached side** — 4 nested below the top level of their
 > own condition in `face_complex.py`, where the sweep cannot reach, and 2 in `posets.py`, which
 > the sweep does not visit. All 6 were in **neither** census column. The sentence now reads
 > **DELETION REACHES THE TOP-LEVEL BOOLEAN OPERANDS OF THE DECIDING CONDITIONS IN THE FILES THE
@@ -150,13 +153,21 @@ the sweep deletes 0 (mg-eaef's E4; corrected by mg-69d1).** It counts what `deci
 are now derived from one constant — `SWEEP_FILES` in `d2_deletion.py`, read by the sweep and by
 the table that describes it — and the column is headed `top-level`.
 
-**And every explicit boolean operand is now in exactly one named column** (mg-69d1, on E5):
+**And every deciding-condition explicit boolean operand is now in exactly one named column**
+(mg-69d1, on E5) — every operand of every `and`/`or` that lies inside a deciding condition:
 
 | file | swept | not swept: file | not swept: nested | not determined | all |
 |---|---|---|---|---|---|
 | `face_complex.py` | 11 | 0 | 4 | 0 | 15 |
 | `posets.py` | 0 | 2 | 0 | 0 | 2 |
 | **ALL** | **11** | **2** | **4** | **0** | **17** |
+
+**The qualifier is the population** (mg-8d5e, on mg-2c77's OPEN 2). Without it the phrase denotes
+every `and`/`or` operand *anywhere* in those two files — **39**, of which **22** are in no column
+above, because they are outside every deciding condition: 20 in `face_complex.py` and 2 in
+`posets.py`. `p1_bound.py` (ii) prints both figures side by side so the subtraction is on the page.
+The **bound** sentence was never wrong about this — it names *the deciding conditions* — it was the
+**census** that was stated wide.
 
 `not determined` is a **column, not an omission**: an operand the classifier cannot place is
 printed there rather than falling out of the table. An explicit *not determined* is checkable;

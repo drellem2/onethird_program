@@ -14,9 +14,9 @@ mg-76cc changed g1 and lib58da; g4 shares lib58da with it.
    mg-957f's own HEAD: a pinned scan stops being a measurement the
    moment anything lands after it.
 
-   range: 286d5030..4755d029
+   range: 286d5030..f7a30d13
      left  286d5030  docs+audit: independent audit of the mg-db09 repair (mg-
-     right 4755d029  docs+repair: THE KERNEL HALF OF THE PREDICATE IS BACK AN
+     right f7a30d13  predictions: mg-8d5e's predictions, committed BEFORE any
 
    route one -- git log <range> -- <path>:
      c1_branching.py          673b4c00
@@ -91,8 +91,8 @@ mg-76cc changed g1 and lib58da; g4 shares lib58da with it.
    the original three survived: they are looked for BY NAME.
 
    5 probe rows in g1's live output:
-     c1 @ 4755d029 (unmodified -- NULL PROBE)         silent     silent   HIT
-     kern @ 4755d029 (unmodified -- NULL PROBE)       silent     silent   HIT
+     c1 @ f7a30d13 (unmodified -- NULL PROBE)         silent     silent   HIT
+     kern @ f7a30d13 (unmodified -- NULL PROBE)       silent     silent   HIT
      c1 @ HEAD with the vertex DIMENSIONS off by one  FIRES      FIRES    HIT
      c1 @ HEAD with a line added past section (iii)   silent     silent   HIT
      kern @ HEAD with dim L(n,p) off by one           FIRES      FIRES    HIT

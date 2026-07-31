@@ -1,0 +1,155 @@
+==========================================================================
+R2  k1 RE-RUN, AND THE KERNEL-HALF CONFIRMATION RE-DERIVED
+==========================================================================
+
+mg-69d1 re-ran k4_cancel.py from this suite and did not re-run k1.  k1 is the
+script whose subject its own commit moved.
+
+--------------------------------------------------------------------------
+(i) k1_prerepair.py, RUN UNMODIFIED
+--------------------------------------------------------------------------
+   code/branching_audit_e34a/k1_prerepair.py, as a subprocess, nothing edited.
+   21 pinned g1 runs across 7 clones; several minutes.
+
+   exit 1
+   SELF-ERRORS 0, FINDINGS 1
+
+   what k1 measures                                     at HEAD  required
+   Backwards at the exit grain                          0        0        ok
+   Backwards at the finding grain                       0        0        ok
+   Files named by an old finding and by no new one      0        0        ok
+
+
+--------------------------------------------------------------------------
+(ii) THE ANCHOR PAIR THE RUN STATES, OUT OF ITS OWN STDOUT
+--------------------------------------------------------------------------
+   A number is only about a revision pair if the run says which pair.
+   Read back out of k1's own output rather than from the library this
+   script also imports -- two readings of one value that cannot
+   disagree are one reading.
+
+     mg-76cc repair, DERIVED from 'kernel_source='        4755d029  4755d029  agrees
+     its first parent -- THE PRE-REPAIR PREDICATE       3bc2cf76  3bc2cf76  agrees
+     mg-7e58 repair, DERIVED from 'def measurement('      4372fae9  4372fae9  agrees
+     its first parent                                   52aeaf43  52aeaf43  agrees
+
+   k1 names 3bc2cf76 as the pre-repair predicate : yes
+
+--------------------------------------------------------------------------
+(iii) THE KERNEL-HALF CONFIRMATION, WHICH IS ONE ROW
+--------------------------------------------------------------------------
+   mg-957f's F-1: bend kern_a218.py's dim L(n,p) one too big and the
+   predicate says nothing, because the kernel half had been deleted.
+   mg-76cc restored it.  The confirmation is not a 0 in a verdict
+   block; it is a DIFFERENCE between the two columns on this one
+   input:
+
+       the PRE-repair predicate  SILENT
+       the REPAIRED predicate    FIRES
+
+   Both are gated.  Under the drifted anchor this row read `both
+   fire`, because both columns were the same predicate -- and `both
+   fire` is what a comparison of a thing with itself prints whatever
+   the truth is.
+
+     predicate revision     exit   self   findings
+     before mg-7e58         1      0      2
+     BEFORE THIS REPAIR     0      0      0
+     this repair            1      1      3
+
+   the PRE-repair predicate is SILENT on the kernel bend : YES
+   the REPAIRED predicate FIRES on it                    : YES
+
+   k1's own bucket for this input : new fires, old silent new fires, old silent
+
+--------------------------------------------------------------------------
+(iv) THE FINDING SET, AGAINST THE COMMITTED TRANSCRIPT
+--------------------------------------------------------------------------
+   A count that did not move can still be a different set.  Both
+   lists are compared after normalising every hex token of 7 or more
+   characters: a revision that moved is not a finding that changed.
+
+   The comparison is against the transcript AS COMMITTED AT HEAD.  This
+   repair regenerates that transcript by mg-e34a's own runner, so the
+   two agreeing is the point and not an accident -- what would be a
+   finding is a difference this repair did not intend.
+
+   findings in this run                 : 1
+   findings in the committed transcript : 1
+
+     [also in record] the repaired predicate books a FINDING on 1 input(s) whose measurement at HEAD is byte-identical
+
+   0 new, 0 no longer booked.
+
+   AND THE TWO THAT ARE GONE FOR GOOD.  At the pre-repair HEAD k1
+   booked two findings saying its own pre-repair revision was not the
+   one mg-76cc pinned -- the drift, reported by the drifted
+   instrument.  Both are absent from this run because the anchor now
+   agrees with lib76cc's pin on the FILES, which k1 (i) checks:
+     g1_provenance.py         at e006581c vs at 3bc2cf76 : IDENTICAL
+     lib58da.py               at e006581c vs at 3bc2cf76 : IDENTICAL
+
+--------------------------------------------------------------------------
+(v) THE AUDITOR'S OWN INSTRUMENT, RE-RUN UNMODIFIED
+--------------------------------------------------------------------------
+   mg-2c77 raised both sites.  Its own scripts are run here against
+   the repaired tree with not one character changed, and what is
+   scored is WHICH of its findings survive -- not its verdict, because
+   its finding population is wider than this ticket's two open sites.
+
+   script                   exit     findings
+   q3_operands.py           1        2
+   q4_prerepair.py          1        1
+
+   A-2's finding -- `THE CENSUS IS STATED OVER A POPULATION WIDER
+   THAN THE ONE IT CLASSIFIES` -- is booked by q3 now : no, it is GONE
+
+   q3's OTHER findings are mg-2c77's and are NOT this ticket's open
+   sites.  Named rather than counted, so `2 remain` cannot read as
+   `2 unrepaired`:
+      `deleting the not swept: nested column makes the totality claim go red` is true of the operation
+      `not determined` cannot be reached by any INPUT: its two preceding guards, `not op.top` and `op.
+
+   AND q4 STILL FIRES, WHICH IS A DEFECT IN THE AUDITOR AND NOT IN
+   THE REPAIR.  Its gate is `PRE_REV == lib76cc.REV_957F` -- a
+   comparison of REVISION IDENTITY.  The property is FILE identity:
+   `e006581c` and the true parent of mg-76cc's repair are different
+   commits at which g1_provenance.py and lib58da.py are byte-identical,
+   which is what mg-e34a's own design says and what k1 (i) checks.
+   Both comparisons are made here so the difference is on the page:
+
+     lib76cc.REV_957F, the pin                      e006581c
+     libe34a.PRE_REV, this repair                   3bc2cf76
+     the same REVISION?                             NO
+     the same FILE -- g1_provenance.py?             yes
+     the same FILE -- lib58da.py?                   yes
+
+   q4's own finding text now names THE SAME REVISION on both sides of
+   its `moved from X to Y` clause : YES -- 4755d029 -> 4755d029
+
+   That is the tell.  A gate whose message says a value moved from a
+   revision to itself is not measuring movement; it is measuring
+   whether two identifiers are equal, and the identifiers were never
+   the property.  It is mg-2c77's instrument and this ticket does not
+   edit it -- the same rule applied to every other record here -- but
+   it is measured and pointed at rather than left to look like an
+   unclosed site.
+
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   k1 was re-run unmodified against the repaired anchor.
+
+   Backwards at the exit grain / finding grain / files named : 0 / 0 / 0
+   The kernel bend: pre-repair SILENT, repaired FIRES
+   Findings, this run against the committed transcript       : 1 vs 1
+   k1's exit code                                            : 1
+
+   k1 exits 1 and that is its predicted exit: it books the finding
+   about the cancelling pair, which mg-69d1 named as NOT CLOSED and
+   which this ticket does not close either.  What changed is that the
+   three coverage numbers are now about mg-76cc's repair.
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the subprocess runs of k1_prerepair.py and of mg-2c77's q3 and q4, the parse of k1's anchor table, its per-input grid, its bucket table and its verdict block, and the read of its committed transcript
+FINDINGS: 0, population: k1's three coverage numbers; its finding SET against the committed transcript after normalising revisions; the anchor pair the run states; the kernel-bend row at both grains, which is the row the kernel-half confirmation IS; and mg-2c77's own q3 and q4 re-run unmodified, scored for whether A-2's finding survives and whether the two derivations of `g1 BEFORE mg-76cc` agree on the FILES
+TOTAL BAD: 0

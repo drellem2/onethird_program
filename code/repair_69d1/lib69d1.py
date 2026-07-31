@@ -3,10 +3,12 @@
 TWO SITES, TWO KINDS OF DEFECT, ONE MECHANISM.
 
   OPEN 1 (mg-eaef, E5 and E4)  A STATED BOUND WIDER THAN THE SWEEP IT
-      DESCRIBES, with 4 of face_complex.py's 15 explicit boolean operands in
-      NEITHER census column.  `neither column` is not a third state; it is the
-      absence of an answer, and it is exactly the ambiguity a stated bound
-      exists to remove.
+      DESCRIBES, with 4 of face_complex.py's 15 DECIDING-CONDITION explicit
+      boolean operands -- those inside a deciding condition, which is the
+      qualifier the count needs and did not carry (mg-8d5e, on mg-2c77's
+      OPEN 2) -- in NEITHER census column.  `neither column` is not a third
+      state; it is the absence of an answer, and it is exactly the ambiguity
+      a stated bound exists to remove.
 
   OPEN 2 (mg-e34a, E-1)  A ROW THAT IS RIGHT AND A REASON THAT IS INVERTED.
       mg-76cc added a row to g1's section (v) AND a reason for it, and only the
@@ -132,6 +134,21 @@ REV_A218 = read_literal(read_worktree(LIB58DA_REL), "REV_A218")
 # mg-eaef's E4 was two populations about one thing, derived separately, twenty
 # lines apart, disagreeing; a third copy here would be a third chance to.
 SWEEP_FILES = tuple(read_literal(read_worktree(D2_REL), "SWEEP_FILES"))
+
+
+def all_boolean_operands(src):
+    """EVERY operand of EVERY `and`/`or` ANYWHERE in the module.
+
+    THE WIDER OF THE TWO POPULATIONS (mg-8d5e, on mg-2c77's OPEN 2).
+    `kern5f9a.boolean_operands` walks only inside a deciding condition, and
+    that restriction is what the four columns classify; this walk has no
+    restriction at all.  It is here so that p1 can print BOTH figures and the
+    subtraction between them, instead of printing the narrow one under a
+    phrase that denotes the wide one.
+    """
+    return [value
+            for node in ast.walk(ast.parse(src)) if isinstance(node, ast.BoolOp)
+            for value in node.values]
 
 
 # ---------------------------------------------------------------------------

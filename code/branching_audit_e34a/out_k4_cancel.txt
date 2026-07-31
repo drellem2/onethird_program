@@ -13,18 +13,34 @@ chosen.  Chosen: the sentence mg-76cc uses to justify the row it added.
    still in the population.
 
    THE CLAIM -- `changes that cancel would pass ...`:
-     code/branching_audit_58da/g1_provenance.py           line 42
-     code/branching_audit_58da/g1_provenance.py           line 257
-     code/branching_audit_58da/out_g1_provenance.txt      line 94
-     docs/repair-mg-76cc-kernel-half-and-five-outputs.md  line 109
+     code/audit_2c77/out_q5_discriminator.txt             line 12
+     code/branching_audit_58da/g1_provenance.py           line 276
+     code/branching_audit_58da/out_g1_provenance.txt      line 98
+     code/branching_audit_e34a/PREDICTIONS.md             line 125
+     code/branching_audit_e34a/k4_cancel.py               line 58
+     code/branching_audit_e34a/out_k4_cancel.txt          line 15
+     code/repair_69d1/README.md                           line 71
+     code/repair_69d1/out_p3_reason.txt                   line 19
+     code/repair_69d1/p2_rerun.py                         line 134
+     code/repair_69d1/p2_rerun.py                         line 143
+     code/repair_69d1/p3_reason.py                        line 6
+     code/repair_69d1/p3_reason.py                        line 61
+     docs/audit-mg-e34a-mg76cc-kernel-half-and-five.md    line 181
+     docs/repair-mg-69d1-bound-and-reason.md              line 142
+     docs/repair-mg-76cc-kernel-half-and-five-outputs.md  line 116
    in the COMMIT MESSAGE of 4755d029 : yes
 
-   4 place(s) in the tree, plus the commit message : 5 in all
+   15 place(s) in the tree, plus the commit message : 16 in all
 
    AND WHAT IS NOT SCORED, named so that a reader can see the line
    was drawn on purpose -- `a cancelling pair cannot pass`:
+     code/branching_audit_e34a/k4_cancel.py               line 59
+     code/branching_audit_e34a/out_k4_cancel.txt          line 25
      code/branching_repair_76cc/out_r1_kernel.txt         line 124
      code/branching_repair_76cc/r1_kernel.py              line 376
+     code/repair_69d1/out_p3_reason.txt                   line 139
+     code/repair_69d1/p3_reason.py                        line 293
+     docs/repair-mg-69d1-bound-and-reason.md              line 181
    That is a DIFFERENT sentence and it is TRUE: a cancelling pair
    cannot get through section (v), because the two halves catch it.
    Only the sentence about which ROW catches it is under test.
@@ -151,6 +167,6 @@ VERDICT
 --------------------------------------------------------------------------
 SELF-ERRORS: 0, population: every git read, c1 run and source read this script performs, plus the requirement that each bend really change the file it names and that the sentence under test really be in the tree
 FINDINGS: 2, population: the 3 half-rows of section (v) evaluated on a cancelling pair, the rationale sentence scored against them wherever it is written, and every predicted exit code in mg-76cc's PREDICTIONS.md against the transcript it names
-   FINDING: the rationale mg-76cc gives for the `both together` row is INVERTED, in 5 place(s) -- g1's docstring, g1's printed text, the repair's document and the commit message of 4755d029.  A pair of changes that cancel MOVES both half rows and leaves `both together` IDENTICAL: the row named `cancellation` is the only one of the three that a cancelling pair passes, and the two halves it was added to backstop are the two that catch it.  Measured above on a pair built for the purpose, not argued
+   FINDING: the rationale mg-76cc gives for the `both together` row is INVERTED, in 16 place(s) -- g1's docstring, g1's printed text, the repair's document and the commit message of 4755d029.  A pair of changes that cancel MOVES both half rows and leaves `both together` IDENTICAL: the row named `cancellation` is the only one of the three that a cancelling pair passes, and the two halves it was added to backstop are the two that catch it.  Measured above on a pair built for the purpose, not argued
    FINDING: mg-76cc's own findings_of() over-counts on 1 of the 5 committed transcripts read here (out_g4_fleet.txt trailer 2 vs reader 3): it matches the substring `   FINDING: `, so a finding QUOTED from a nested run at deeper indentation is counted as the outer script's own.  r3 uses this reader for its `names kern_a218.py` column, which is the column the whole OPEN 1 verdict turns on -- it happens not to bite there because g1 quotes no nested transcript, so this is a live defect with no live consequence rather than a wrong answer
 TOTAL BAD: 2

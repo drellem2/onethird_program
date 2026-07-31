@@ -12,11 +12,21 @@ mg-eaef found the stated bound WIDER than the sweep it describes, in two ways:
       `operands the sweep deletes`, and the sweep deletes 0 there.
 
 THE REPAIR IS TWO THINGS AND NEITHER IS A NEW TECHNIQUE.  The sentence is
-narrowed to what the sweep actually reaches, and every explicit boolean operand
-is put in exactly one NAMED column -- with `not determined` printed as a column
+narrowed to what the sweep actually reaches, and every DECIDING-CONDITION
+explicit boolean operand -- every operand of every `and`/`or` that lies inside
+a deciding condition, which is the population `boolean_operands` walks -- is
+put in exactly one NAMED column, with `not determined` printed as a column
 rather than left as an empty cell, because an empty cell is the absence of an
 answer and that absence is exactly the ambiguity a stated bound exists to
 remove.
+
+AND THE QUALIFIER IS PART OF THE COUNT (mg-8d5e, on mg-2c77's OPEN 2).  Written
+without it, `explicit boolean operand` denotes every `and`/`or` operand
+anywhere in the two files -- 39 of them -- and the 17 below read as the whole
+population when they are the 17 inside a deciding condition.  The BOUND
+sentence itself was never affected: it names `the deciding conditions` and is
+correct.  It is the CENSUS that was stated wide, and section (ii) now prints
+both figures so the subtraction is on the page rather than in a reader's head.
 
 WHAT THIS SCRIPT MEASURES, in order:
 
@@ -55,7 +65,10 @@ R = L.Report(
             "before any comparison is made",
     findpop="the 2 written forms of the bound sentence over every live site "
             "in the tree, the 17 explicit boolean operands of the census's "
-            "two files against the 4 named columns, the `swept` column "
+            "two files that lie inside a deciding condition -- the "
+            "deciding-condition qualifier is the population and not "
+            "decoration (mg-8d5e) -- against the 4 named columns, the "
+            "`swept` column "
             "against the sweep's own enumerated rows, the 4 nested operands "
             "deleted one at a time against the control battery, and the "
             "classifier with one column deleted")
@@ -150,7 +163,8 @@ R.check(bool(narrow_sites),
 R.gate(not live_wide,
        "the bound is still stated WIDER than the sweep at %d site(s): %s.  "
        "Read as written it promises that every explicit boolean operand is on "
-       "the reached side, and 6 of 17 are not"
+       "the reached side.  Of the 17 inside a deciding condition 6 are not, "
+       "and of the 39 anywhere in the two files 28 are not (mg-8d5e)"
        % (len(live_wide), ", ".join("%s:%s" % s for s in live_wide)))
 print()
 
@@ -198,6 +212,38 @@ print()
 total = K.operand_columns_total(sources)
 print("   population re-derived by an INDEPENDENT walk : %d" % total)
 print("   sum of the four columns                     : %d" % sum(allrow))
+print()
+print("""   AND THE WIDER POPULATION, PRINTED BESIDE IT (mg-8d5e, on mg-2c77's
+   OPEN 2).  The four columns above classify the operands inside a
+   deciding condition.  Unqualified, `explicit boolean operand` denotes
+   every `and`/`or` operand ANYWHERE in these files -- in a `while`, in
+   an assignment, in an `if` whose body assigns and breaks -- and that
+   is a larger set.  Both are printed so the subtraction is on the page
+   and the 17 cannot read as the whole:""")
+print()
+wide_per_file = {f: len(L.all_boolean_operands(sources[f])) for f in FILES}
+print("   %-18s %-38s %-22s %s"
+      % ("file", "operands of every and/or, anywhere",
+         "of those, deciding", "in no column here"))
+for fname in FILES:
+    narrow = sum(per_file[fname])
+    print("   %-18s %-38d %-22d %d"
+          % (fname, wide_per_file[fname], narrow,
+             wide_per_file[fname] - narrow))
+wide_all = sum(wide_per_file.values())
+print("   %-18s %-38d %-22d %d"
+      % ("ALL", wide_all, sum(allrow), wide_all - sum(allrow)))
+print()
+print("   The %d in no column are outside every deciding condition, so they"
+      % (wide_all - sum(allrow)))
+print("   are outside the sweep's reach AND outside this table.  That is a")
+print("   statement about what the census covers, not a defect in the columns:")
+print("   the four columns are total over the population they name, which is")
+print("   re-derived above at %d." % total)
+R.check(wide_all >= total,
+        "the unrestricted walk returned %d operands and the deciding-condition "
+        "walk %d; the restricted population cannot be the larger one and one "
+        "of the two walks is wrong" % (wide_all, total))
 R.gate(sum(allrow) == total and total > 0,
        "the classification is not total: %d operand(s) walked, %d placed in a "
        "column.  An operand in no column is an empty cell, which is the "

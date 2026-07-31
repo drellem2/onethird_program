@@ -5,7 +5,7 @@ Neither deferred.
 
 | | site | what was wrong | where the repair is |
 |---|---|---|---|
-| **OPEN 1** | mg-eaef, **E5** and **E4** | the stated bound is **wider than the sweep**, and 4 of 15 explicit boolean operands are in **neither** census column | `kern5f9a.py`, `d2_deletion.py`, `face_complex.py`, `run_all.sh`, `docs/landing-mg-0b07-…md` |
+| **OPEN 1** | mg-eaef, **E5** and **E4** | the stated bound is **wider than the sweep**, and 4 of 15 explicit boolean operands *inside a deciding condition* are in **neither** census column | `kern5f9a.py`, `d2_deletion.py`, `face_complex.py`, `run_all.sh`, `docs/landing-mg-0b07-…md` |
 | **OPEN 2** | mg-e34a, **E-1** | the `both together` row is right and its stated **reason is inverted** | `g1_provenance.py`, `lib76cc.py`, `r1_kernel.py`, `docs/repair-mg-76cc-…md` |
 
 ## What each script does
@@ -30,13 +30,22 @@ not. It now reads
 > DELETION REACHES THE TOP-LEVEL BOOLEAN OPERANDS OF THE DECIDING CONDITIONS IN
 > THE FILES THIS SWEEP VISITS, AND NOTHING ELSE
 
-and every explicit boolean operand is in exactly one **named** column:
+and every deciding-condition explicit boolean operand — every operand of every
+`and`/`or` that lies inside a deciding condition — is in exactly one **named**
+column:
 
 | file | swept | not swept: file | not swept: nested | not determined | all |
 |---|---|---|---|---|---|
 | `face_complex.py` | 11 | 0 | 4 | 0 | 15 |
 | `posets.py` | 0 | 2 | 0 | 0 | 2 |
 | **ALL** | **11** | **2** | **4** | **0** | **17** |
+
+**The qualifier is the population, not decoration** (mg-8d5e, on mg-2c77's
+OPEN 2). Unqualified, the phrase denotes every `and`/`or` operand *anywhere* in
+these two files — **39** — of which **22** are in no column above because they
+are outside every deciding condition. `p1_bound.py` (ii) now prints both
+figures and the subtraction. The **bound** sentence above was never affected:
+it names *the deciding conditions* and is correct.
 
 **`not determined` is a column and not an omission.** It reads 0 on this tree
 and is printed anyway. An explicit *not determined* is checkable; an empty cell

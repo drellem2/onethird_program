@@ -56,7 +56,13 @@ print("selftest_69d1 -- the instrument against constructed inputs")
 print("=" * 74)
 
 # ---------------------------------------------------------------------------
-print("\n-- the classifier: every explicit boolean operand, one named column")
+# The qualifier is the count's population and not decoration (mg-8d5e, on
+# mg-2c77's OPEN 2): the classifier's four columns hold the operands inside a
+# deciding condition, not every `and`/`or` in the module.
+print("\n-- the classifier: every DECIDING-CONDITION explicit boolean operand,"
+      " one named column")
+print("   (the population is the operands inside a deciding condition, not"
+      " every `and`/`or` in the module)")
 
 SRC_TOP = """
 def f(a, b):

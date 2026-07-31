@@ -1,0 +1,172 @@
+==========================================================================
+R1  A-1 -- THE ANCHOR, RE-POINTED AT THE PROPERTY AND PINNED
+==========================================================================
+
+A literal cannot notice that the file moved.  That is why mg-e34a derived.
+A derivation cannot notice that it has started measuring something else --
+and that failure is quieter, because the number is identical and means
+something else.  So the anchor is now both, and they are compared.
+
+--------------------------------------------------------------------------
+(i) THE ANCHOR AS IT NOW STANDS: DERIVED, PINNED, COMPARED
+--------------------------------------------------------------------------
+   The property is named by a marker that IS the repair rather than a
+   description of it.  `kernel_source=` is mg-76cc's two-source
+   signature -- the thing that makes "this script with that kernel"
+   expressible at all, and whose absence WAS mg-957f's F-1.  A commit
+   that edits prose in the same file does not move it.
+
+     anchor                                               derived   pinned    
+     mg-76cc repair, DERIVED from 'kernel_source='        4755d029  4755d029  agrees
+       its first parent -- THE PRE-REPAIR PREDICATE       3bc2cf76  3bc2cf76  agrees
+     mg-7e58 repair, DERIVED from 'def measurement('      4372fae9  4372fae9  agrees
+       its first parent                                   52aeaf43  52aeaf43  agrees
+
+   libe34a.ANCHOR_DRIFT : 0 row(s)
+
+   AND THE DERIVATION THAT RE-POINTED, KEPT AND PRINTED.  Deleting the
+   quantity that moved would leave the next reader nothing to check
+   the story against:
+
+     derived from the FILE'S HISTORY                                gives     the PROPERTY gives
+     the last commit touching g1_provenance.py                      d01ff32d  4755d029
+     its first parent -- the OLD `before this repair`               e5787e11  3bc2cf76
+     the 2nd-newest commit touching it, parent -- OLD `before mg-7e58` 3bc2cf76  52aeaf43
+
+   history anchors that no longer point where the property does : 3 of 3
+
+   BOTH of them moved, and mg-2c77 named one.  An index into a file's
+   history is an anchor derived from that history: mg-69d1's commit
+   pushed every index along by one, so the column k1 labels `before
+   mg-7e58` came to hold mg-76cc's parent.  The same defect, in the
+   same file, in a constant nobody looked at.
+
+--------------------------------------------------------------------------
+(ii) THE DEFECT REPRODUCED -- A COMMIT THAT MOVES THE FILE AND NOT THE PROPERTY
+--------------------------------------------------------------------------
+   Built here, as a COMMIT in a clone, because every derivation under
+   test reads `git log` and an edit left in the working tree is
+   invisible to all of them.  The commit appends a comment to
+   g1_provenance.py: the file moves, `kernel_source=` does not.
+
+   TWO outcomes are required and both are gated.  A repair whose
+   property anchor also moved would be no repair; a repair whose
+   file-history derivation did NOT move would mean the input never
+   exercised the defect and the row below would be vacuous.
+
+                                                    at this HEAD   after the commit
+     the last commit touching g1 (FILE HISTORY)     d01ff32d       56a8e938
+     REPAIR_REV (THE PROPERTY)                      4755d029       4755d029
+     PRE_REV (THE PROPERTY)                         3bc2cf76       3bc2cf76
+     the marker still in g1?                        yes            yes
+
+   the FILE-HISTORY derivation moved : YES
+   the PROPERTY anchor held          : YES
+   anchor disagreements reported in the clone : 0
+
+--------------------------------------------------------------------------
+(iii) THE FIX FAILING LOUDLY -- THREE BREAKS, EACH BUILT
+--------------------------------------------------------------------------
+   A check that cannot be made to fail is not a check.  Each break
+   below is a COMMIT in its own clone, and what is measured is whether
+   mg-e34a's own selftest goes red and says why -- not whether this
+   script noticed.  The instrument under test is the one that ships.
+
+     break                          selftest drift   what it must say
+     the PIN made wrong             exit 1   1       the pin now names mg-7e58's commit; the derivation still finds mg-76cc's
+        says: mg-76cc: derived from the property ('kernel_source=') gives 4755d029, the pin says 4372f
+     the MARKER made unfindable     exit 1   1       the property cannot be derived at all; the pin must be used AND the fallback said out loud
+        says: mg-76cc: the marker 'kernel_source_that_is_in_no_revision=' is in no commit of code/bran
+     the MARKER made non-monotone   exit 1   -       present, then absent again -- `first introducing` would answer about the first of two
+        FAIL the mg-76cc marker is monotone over g1's history: once present, present in every later 
+        ok   the mg-7e58 marker is monotone over g1's history (no gaps)
+        FAILED: the mg-76cc marker is monotone over g1's history: once present, present in every lat
+
+   population: the 3 breaks declared above, each built as a commit in a clone of
+   this branch and each scored by mg-e34a's own selftest rather than by this one.
+
+--------------------------------------------------------------------------
+(iv) THE SECOND CONSEQUENCE, IN A SECOND SCRIPT -- k4's COMMIT MESSAGE
+--------------------------------------------------------------------------
+   mg-2c77 named k1.  The same constant is `REPAIR_REV` in
+   k4_cancel.py, where it selects WHICH COMMIT MESSAGE is scanned for
+   the sentence under test.  So the drift did not merely re-label k1's
+   columns: it moved a population.
+
+   The arbiter is k4's OWN COMMITTED TRANSCRIPT, which was written when
+   the anchor still pointed at mg-76cc.  It is a third party to this
+   repair and it is not edited here.
+
+     which commit message k4 scans                  revision   carries the sentence?
+     k4's committed transcript recorded             4755d029   yes
+     under the FILE-HISTORY anchor (pre-repair)     d01ff32d   NO
+     under the PROPERTY anchor (this repair)        4755d029   yes
+
+   Under the drifted anchor the scan reads mg-69d1's message, which
+   does not carry the sentence, and a copy left the count without any
+   number moving that a reader could see.  That is the shape of the
+   whole finding: the figure is identical and it is about something
+   else.
+
+--------------------------------------------------------------------------
+(v) AND NOTHING ELSE -- EVERY REVISION CONSTANT libe34a EXPORTS
+--------------------------------------------------------------------------
+   The population is DERIVED, not listed: libe34a as it stood before
+   this repair is reached by the property -- the newest commit at which
+   the file does not carry `def first_introducing(` -- and run in a
+   clone beside the repaired one.  Naming a revision here would have
+   been this ticket's own version of A-1.
+
+   libe34a before this repair, derived : e494515b  docs+audit: independent audit of the mg-76cc repair (4755d02
+
+     constant           before     after      disposition
+     LAST_TOUCHING_G1   None       d01ff32d   NEW -- the derivation that re-pointed, kept as evidence and used by no anchor
+     NTH_TOUCHING_1     None       4755d029   NEW -- the second history derivation, kept for the same reason and used by no anchor
+     PRE_7E58_REV       3bc2cf76   52aeaf43   MOVED: it held mg-76cc's parent under a label saying mg-7e58
+     PRE_REV            e5787e11   3bc2cf76   MOVED, and that is the repair: back onto its parent
+     REPAIR_REV         d01ff32d   4755d029   MOVED, and that is the repair: back onto mg-76cc
+     REV_7E58           None       4372fae9   NEW -- the mg-7e58 anchor, named where it was not
+     REV_A218           286d5030   286d5030   unchanged -- read out of lib58da's own source, not from any history
+
+
+--------------------------------------------------------------------------
+(vi) A THIRD INSTANCE, OBSERVED AND NOT REPAIRED
+--------------------------------------------------------------------------
+   `code/repair_69d1/p3_reason.py` (i-b) runs its discriminator
+   AGAINST HEAD, described as `the committed tree, where the defect is
+   still present`, and self-errors if it finds 0 live assertions
+   there.  HEAD is an anchor that moves on every commit: mg-69d1's own
+   repair landing is what removed the last live assertion, so the
+   control has been vacuous since the moment the repair it belongs to
+   was committed.
+
+   THE SAME SHAPE AS A-1 -- a reference that follows an edit and keeps
+   printing -- in a script mg-2c77 did not name.  It is NOT repaired
+   here: this ticket's population is mg-2c77's two open sites, and
+   widening it would be a decision nobody asked for.  What is done is
+   to establish that this repair did not CAUSE it, by running the
+   script at the revision before this repair began.
+
+     p3_reason.py                                   exit       SELF-ERRORS
+     at 3fbf6f68, before this repair began          1          1
+     at this HEAD, after it                         1          1
+
+   It was already red before this repair touched anything, with the
+   same self-error.  Noted, pointed at, and left for whoever owns
+   the population it belongs to.
+
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   The anchor is derived from the PROPERTY, PINNED, and the two are
+   COMPARED, with the derivation that re-pointed kept and printed.
+
+   anchors derived and pinned that agree      : 4 of 4
+   history anchors that had re-pointed        : 3 of 3
+   breaks built, each red in mg-e34a's own selftest : 3
+   the second script the same anchor reaches  : k4_cancel.py (iv)
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every clone, git read and subprocess run this script performs, plus the requirement that each constructed commit really change the file it claims to change and really leave the property marker where it was
+FINDINGS: 0, population: the four anchors libe34a derives, each against its pin; the two outcomes of the reproduced drift in (ii); the three loud failures in (iii); k4's commit-message selection in (iv) against k4's own committed transcript; and every revision constant libe34a exports, scored in (v) for whether it moved and whether it was supposed to
+TOTAL BAD: 0

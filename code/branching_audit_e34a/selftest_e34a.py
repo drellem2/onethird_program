@@ -52,9 +52,45 @@ try:
 except ValueError:
     ok(True, "read_literal RAISES when the name is absent")
 ok(L.REPAIR_REV and len(L.REPAIR_REV) == 40,
-   "REPAIR_REV -- the last commit touching g1_provenance.py -- resolves")
+   "REPAIR_REV -- the first commit introducing the kernel half -- resolves")
 ok(L.PRE_REV == L.resolve(L.REPAIR_REV + "^"),
    "PRE_REV is exactly the first parent of REPAIR_REV")
+
+# mg-8d5e, on mg-2c77's OPEN 1.  The anchor is derived from the PROPERTY,
+# pinned, and the two compared; all three legs are asserted here, because a
+# run whose anchor has re-pointed prints the same numbers about a different
+# pair of revisions and nothing else in this suite can see it.
+ok(not L.ANCHOR_DRIFT,
+   "no anchor disagrees with its pin: %s"
+   % ("; ".join(L.ANCHOR_DRIFT) or "0 disagreements"))
+for _label, _got, _pin, _verdict in L.anchor_rows():
+    ok(_got == _pin,
+       "%s -- derived %s, pinned %s" % (_label.strip(), _got[:8], _pin[:8]))
+ok(L.first_introducing(L.G1_REL, "kernel_source=") == L.REPAIR_REV_PIN,
+   "the property anchor is the commit that introduced `kernel_source=`")
+ok(L.first_introducing(L.G1_REL, "no such marker in any revision") is None,
+   "first_introducing returns None -- not a revision -- for a marker that is "
+   "in no commit, so a typo'd marker cannot silently anchor on the file's "
+   "creation")
+_mono_ok, _mono_why = L.marker_is_monotone(L.G1_REL, L.MARK_76CC)
+ok(_mono_ok, "the mg-76cc marker is monotone over g1's history: once present, "
+             "present in every later commit (%s)" % (_mono_why or "no gaps"))
+_mono7_ok, _mono7_why = L.marker_is_monotone(L.G1_REL, L.MARK_7E58)
+ok(_mono7_ok, "the mg-7e58 marker is monotone over g1's history (%s)"
+              % (_mono7_why or "no gaps"))
+ok(L.LAST_TOUCHING_G1 != L.REPAIR_REV,
+   "NON-VACUITY: the file-history anchor and the property anchor return "
+   "DIFFERENT commits on this tree (%s vs %s), so the distinction the repair "
+   "makes is one this tree can exhibit"
+   % (L.LAST_TOUCHING_G1[:8], L.REPAIR_REV[:8]))
+ok(L.resolve(L.NTH_TOUCHING_1 + "^") != L.PRE_7E58_REV,
+   "and the SECOND history anchor had moved too: nth_touching(g1, 1)^ is %s "
+   "where `before mg-7e58` is %s"
+   % (L.resolve(L.NTH_TOUCHING_1 + "^")[:8], L.PRE_7E58_REV[:8]))
+ok(L.git_show(L.PRE_REV, L.G1_REL)
+   == L.git_show("e006581c2e1185cba3fa58c91a9fd4954bd63eae", L.G1_REL),
+   "g1 at PRE_REV is byte-identical to g1 at lib76cc's own pin e006581c -- "
+   "the two derivations of `g1 BEFORE mg-76cc` agree on the file")
 ok(L.git_show(L.PRE_REV, L.G1_REL) != L.read_worktree(L.G1_REL),
    "g1 at PRE_REV really differs from g1 here -- there is a predicate to run")
 ok(L.is_ancestor(L.PRE_REV, "HEAD"),
