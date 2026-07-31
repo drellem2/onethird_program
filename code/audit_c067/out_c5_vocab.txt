@@ -1,9 +1,9 @@
 ==============================================================================
 mg-c067 -- INDEPENDENT AUDIT of the mg-132a publication-anchor repair
 ==============================================================================
-    audited as of            : 806533bf4611
+    audited as of            : 378cf011b463
     510 .py files under `code/` in the tree at that rev
-    POPULATION ANCHOR: commit=806533bf46119b018616577ed75402e138d507d6 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
+    POPULATION ANCHOR: commit=378cf011b46399fc5b15883704e96478e2392da5 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
 
 ⚠️  THIS TRANSCRIPT IS A MEASUREMENT AT THE COMMIT ABOVE, NOT A LIVE PROPERTY OF
     THE REPOSITORY.  It was written by a run, and the step that displaces it is
@@ -69,23 +69,23 @@ carried both defects.  If the repair introduced `DISPLACED` beside it but left
 occurrence in every committed `.py` and `.md` under `code/` is classified by
 whether the sentence it sits in names WHICH defect it means.
 
-    files swept (630 committed `.py`/`.md` under `code/`)
-    occurrences of `stale`      : 205
+    files swept (631 committed `.py`/`.md` under `code/`)
+    occurrences of `stale`      : 211
     QUALIFIED (the sentence names rebase/merge/displaced/wrong-when-written within 2 lines) : 19
-    BARE (neither defect named nearby) : 186
-        code/audit_c067/c1_rebase.py:136  The predecessor's transcript said `0 STALE` while being stale, 2 of 2.  The
-        code/audit_c067/c1_rebase.py:137  question is whether the repair's transcript is stale in the same shape.  It is
-        code/audit_c067/c1_rebase.py:184  f"predecessor's `0 STALE` was stale AND WRONG -- the figures it "
-        code/audit_c067/c1_rebase.py:186  f"transcript's rows are stale AND STILL CORRECT: every claim it "
-        code/audit_c067/c1_rebase.py:188  f"run returns is green.  STALE-AND-RED and STALE-AND-GREEN are "
-        code/audit_c067/c2_anchors.py:42  another transcript's figure inside a finding that says that figure is stale.
-        code/audit_c067/c5_vocab.py:11  and neither states: the old undifferentiated word is `STALE`, and if it is
-        code/audit_c067/c5_vocab.py:150  L.head("C5d -- THE OLD WORD, SWEPT: IS `STALE` STILL DOING BOTH JOBS?")
-        code/audit_c067/c5_vocab.py:193  f"OF `stale` ACROSS {len(files)} COMMITTED `.py`/`.md` FILE(S) "
-        code/audit_c067/c5_vocab.py:198  f"occurrences predate this arc, and `stale` is a perfectly good "
-        ... and 176 more
-  [MEASURED ] C5d THE POPULATION IS 205 OCCURRENCE(S) OF `stale` ACROSS 630 COMMITTED `.py`/`.md` FILE(S) UNDER `code/` AT 806533b, of which 19 sit within two lines of a word that says WHICH defect is meant and 186 do not.  ⚠️ THIS IS A MEASUREMENT AND NOT AN ACCUSATION: the proximity test is a proxy, most of the bare occurrences predate this arc, and `stale` is a perfectly good English word in a sentence that is not making a verdict.  What it establishes is the SIZE of the vocabulary the repair introduced against the vocabulary already in the tree
-  [CONFIRMED] C5d' AND THE NEW WORD IS NOT RETROFITTED, WHICH IS CORRECT: mg-132a added `DISPLACED` where a VERDICT is produced and changed no prose elsewhere.  ⚠️ A DELIVERABLE THAT HAD REWRITTEN 186 OTHER SITES WOULD HAVE MADE ITS OWN TRANSCRIPT UNREVIEWABLE, and this arc has already recorded what a cosmetic edit does to an audit trail.  The gap is real, named, and left open on purpose; this row is where its size is on the record
+    BARE (neither defect named nearby) : 192
+        code/audit_c067/README.md:11  ## Verdict: **the repair holds.** Its own transcript is stale in its predecess
+        code/audit_c067/README.md:27  **And it is not the predecessor's failure.** The predecessor's `0 STALE` was s
+        code/audit_c067/README.md:29  stale **and still correct**: every claim is true of the commit it names, the l
+        code/audit_c067/README.md:30  with `0 refuted`, and no gate flips. `STALE-AND-RED` and `STALE-AND-GREEN` are
+        code/audit_c067/README.md:133  `C5d` sweeps the old word: **189 occurrences of `stale` across 623 committed `
+        code/audit_c067/README.md:142  finding that says that figure is stale. Then `C5c` tested `clause not in src`,
+        code/audit_c067/c1_rebase.py:171  The predecessor's transcript said `0 STALE` while being stale, 2 of 2.  The
+        code/audit_c067/c1_rebase.py:172  question is whether the repair's transcript is stale in the same shape.  It is
+        code/audit_c067/c1_rebase.py:219  f"predecessor's `0 STALE` was stale AND WRONG -- the figures it "
+        code/audit_c067/c1_rebase.py:221  f"transcript's rows are stale AND STILL CORRECT: every claim it "
+        ... and 182 more
+  [MEASURED ] C5d THE POPULATION IS 211 OCCURRENCE(S) OF `stale` ACROSS 631 COMMITTED `.py`/`.md` FILE(S) UNDER `code/` AT 378cf01, of which 19 sit within two lines of a word that says WHICH defect is meant and 192 do not.  ⚠️ THIS IS A MEASUREMENT AND NOT AN ACCUSATION: the proximity test is a proxy, most of the bare occurrences predate this arc, and `stale` is a perfectly good English word in a sentence that is not making a verdict.  What it establishes is the SIZE of the vocabulary the repair introduced against the vocabulary already in the tree
+  [CONFIRMED] C5d' AND THE NEW WORD IS NOT RETROFITTED, WHICH IS CORRECT: mg-132a added `DISPLACED` where a VERDICT is produced and changed no prose elsewhere.  ⚠️ A DELIVERABLE THAT HAD REWRITTEN 192 OTHER SITES WOULD HAVE MADE ITS OWN TRANSCRIPT UNREVIEWABLE, and this arc has already recorded what a cosmetic edit does to an audit trail.  The gap is real, named, and left open on purpose; this row is where its size is on the record
 
 SUMMARY
 ------------------------------------------------------------------
@@ -95,4 +95,4 @@ SUMMARY
     findings        : 0   (defects of the PARENT)
     refuted         : 0   (controls of THIS instrument that failed)
 
-    measured at     : 806533bf4611  -- re-run after any merge
+    measured at     : 378cf011b463  -- re-run after any merge

@@ -101,7 +101,22 @@ def refs_containing(commit):
 # --------------------------------------------------------------------------
 # The figure a transcript publishes.  Written from the shape the transcripts
 # actually use ("495 .py files under `code/`"), not copied.
-FIGURE_RE = re.compile(r"(\d[\d,\s]*?)\s*`?\.py`?\s+files")
+#
+# ⚠️ THE INNER CLASS IS `[\d, ]` AND NOT `[\d,\s]`, AND THIS IS A BUG THAT WAS
+# CAUGHT RATHER THAN AVOIDED.  With `\s` the group crosses a NEWLINE, and in
+# this audit's own banner the line above the figure ends in a commit sha:
+#
+#     audited as of            : 378cf011b463
+#     510 .py files under `code/` in the tree at that rev
+#
+# so `...b463` + newline + `510` parsed as the single figure `4611510`, and
+# `C2b` -- the row asserting that every declared anchor's tree yields the
+# published figure -- REFUTED on all six of this instrument's own transcripts.
+# The parent's `POP_FIGURE` uses literal spaces here and never had the defect.
+# An audit of figure provenance whose own figure grammar read the tail of a
+# commit sha as part of the population is worth the two lines it takes to say
+# so; see the third entry under `Two defects of this instrument` in README.md.
+FIGURE_RE = re.compile(r"(\d[\d, ]*?)\s*`?\.py`?\s+files")
 DECLARED_RE = re.compile(
     r"POPULATION ANCHOR:\s*commit=([0-9a-f]{7,40})\s+count=(\d+)"
     r"\s+digest=([0-9a-f]+)\s+scope=(\S+)")

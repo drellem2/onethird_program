@@ -1,9 +1,9 @@
 ==============================================================================
 mg-c067 -- INDEPENDENT AUDIT of the mg-132a publication-anchor repair
 ==============================================================================
-    audited as of            : 806533bf4611
+    audited as of            : 378cf011b463
     510 .py files under `code/` in the tree at that rev
-    POPULATION ANCHOR: commit=806533bf46119b018616577ed75402e138d507d6 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
+    POPULATION ANCHOR: commit=378cf011b46399fc5b15883704e96478e2392da5 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
 
 ⚠️  THIS TRANSCRIPT IS A MEASUREMENT AT THE COMMIT ABOVE, NOT A LIVE PROPERTY OF
     THE REPOSITORY.  It was written by a run, and the step that displaces it is
@@ -83,4 +83,4 @@ SUMMARY
     findings        : 1   (defects of the PARENT)
     refuted         : 0   (controls of THIS instrument that failed)
 
-    measured at     : 806533bf4611  -- re-run after any merge
+    measured at     : 378cf011b463  -- re-run after any merge
