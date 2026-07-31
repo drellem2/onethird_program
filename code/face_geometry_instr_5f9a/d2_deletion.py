@@ -112,6 +112,37 @@ TIME (mg-64b6).
   a provenance -- with each branch either checked by a claim here or given the
   reason it cannot arise.
 
+WHAT mg-0b07 FOUND IN THIS FILE, and it is why the file was rewritten A FOURTH
+TIME (mg-f7e1).
+
+  `clause` WAS NOT THE FLOOR, AND THE PREVIOUS ANSWER HAD REMOVED THE HANDLE
+  RATHER THAN THE RUNG.  mg-64b6 wrote the `shape` condition as `[len(row) for
+  row in A] != [len(row) for row in B]` and this file reported, correctly, that
+  `absorb_trace` had 0 deciding clauses left and that the regress therefore
+  stopped by construction.  A list comparison IS a disjunction -- true when the
+  LENGTHS differ or a common index does -- so the ORDER half was still there,
+  and mg-0b07 perturbed it: width half standing, order half gone, artifact
+  BYTE-IDENTICAL at 23,695, exit 0, every row green.  Rung two's sentence with
+  `clause` replaced by `sub-condition`, one spelling further down.
+
+  THE SUBTRACTION MOVE IS MADE ON THE IMPLICITNESS, NOT ON THE CONDITION.  The
+  guard now spells its disjunction with an `or`, so both halves are operands
+  the ENUMERATED sweep already runs deletes individually -- no new technique,
+  two more rows in a table that was already there.  The sweep measures the
+  width clause CHANGES/exit 1 and the ORDER clause BYTE-IDENTICAL/exit 0, and
+  the second result is PRINTED AS AN UNCOVERED CLAUSE on the line it is read
+  on, with the difference between INERT and UNCOVERED stated: the order half
+  moves decisions on real inputs, and nothing in `controls.py` reaches it.
+
+  AND THE BOUND OF THE INSTRUMENT IS STATED BESIDE THE TEST, because respelling
+  does not terminate -- `any(a != b for ...)` is a disjunction over rows with no
+  operator either.  The section THE BOUND OF THIS INSTRUMENT counts, from the
+  tree, the deciding conditions that are compounds this sweep cannot delete out
+  of, and carries a total that does not depend on the list of forms it knows
+  about.  DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS AND NO
+  FURTHER.  A green line that a reader takes for more than that is the defect;
+  the number is the remedy.
+
 EVERY CLAIM PRINTS WHAT WOULD MAKE IT ANSWER DIFFERENTLY (mg-d0e2's added
 requirement).  "Can this check fire?" is necessary and not sufficient: both
 vacuous checks this repository produced in one afternoon could fire in
@@ -124,6 +155,7 @@ tee-ing it.
 """
 
 import ast
+import collections
 import os
 import subprocess
 import sys
@@ -131,9 +163,10 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from kern5f9a import (                                              # noqa: E402
-    BAR, FG, PRE_REPAIR_REF, TWO_RETURN_REF, apply_edits, deciding_clauses,
-    drop_clause, finest_unit, head, load_module, mutate_tree, run_controls,
-    source_at, tree_with_source, unit_removed, write_ref_tree,
+    BAR, FG, PRE_REPAIR_REF, TWO_RETURN_REF, apply_edits, condition_census,
+    deciding_clauses, drop_clause, finest_unit, head, implicit_disjunctions,
+    load_module, mutate_tree, run_controls, source_at, tree_with_source,
+    unit_removed, write_ref_tree,
 )
 
 SCORE = []
@@ -178,15 +211,30 @@ NEW_SIGNS = ('face_complex.py',
              '            signs_read += 1\n',
              '            pass\n')
 # The two mg-d0e2 found invisible.  THE SHAPE GATE IS ONE `return` GUARDED BY A
-# ONE-CLAUSE CONDITION: mg-9220 merged the two returns this mutation used to
+# TWO-CLAUSE DISJUNCTION: mg-9220 merged the two returns this mutation used to
 # delete together (deleting the first of them ALONE moved not one byte,
-# mg-e7bc), and mg-64b6 rewrote the merged two-clause condition as a single
+# mg-e7bc), mg-64b6 rewrote the merged two-clause condition as a single
 # comparison of row-shape profiles (deleting its first CLAUSE alone moved not
-# one byte either, mg-c4c8).  So there is one `return` here, nothing inside its
-# condition to delete alone, and this patch removes exactly that return.
+# one byte either, mg-c4c8), and mg-0b07 found that the comparison was STILL a
+# disjunction with its order half unperturbable -- so the `or` is back, spelled
+# (mg-f7e1), and the two halves are swept individually below.  This patch
+# removes exactly the `return`, and the sweep is what speaks for the condition.
 NEW_SHAPE = ('face_complex.py',
              '        return Trace(False, "shape", 0)\n',
              '        pass\n')
+
+# THE TEXT THIS COMMIT REPLACES, as a computed mutation rather than a new pin.
+# The equivalence that has to hold is between two spellings of one condition, and
+# both are in this tree: the live one, and this patch's result.  A pin would be a
+# third thing with a provenance of its own to check (see the MERGED_REF walk
+# below for what that costs); an anchor that must occur exactly once is checked
+# by `mutate_tree` on every run.
+RESPELL_BACK = ('face_complex.py',
+                '    shape_A = [len(row) for row in A]\n'
+                '    shape_B = [len(row) for row in B]\n'
+                '    if len(shape_A) != len(shape_B) or any(\n'
+                '            a != b for a, b in zip(shape_A, shape_B)):\n',
+                '    if [len(row) for row in A] != [len(row) for row in B]:\n')
 NEW_PARITY = ('face_complex.py',
               '                    return Trace(False, "parity", signs_read)\n',
               '                    pass\n')
@@ -253,7 +301,8 @@ MUTATIONS = [
      "the counter that reports how many signs the union-find read"),
     ("AFTER-5", None, NEW_FILES, [NEW_SHAPE],
      "gate `shape` -- the branch mg-d0e2 found invisible, whose two returns "
-     "mg-9220 merged and whose two clauses mg-64b6 rewrote as one comparison"),
+     "mg-9220 merged, whose two clauses mg-64b6 rewrote as one comparison, and "
+     "whose disjunction mg-f7e1 spelled back out with an operator"),
     ("AFTER-6", None, NEW_FILES, [NEW_PARITY],
      "the `parity` contradiction branch -- the other branch mg-d0e2 found "
      "invisible"),
@@ -422,13 +471,33 @@ PREDICTIONS = [
 # so the table cannot be silently re-ordered under them, and a clause with no
 # entry is BROKEN rather than skipped.  (changes?, exit, why).
 #
-# EVERY ONE OF THESE NINE WAS RUN BY mg-c4c8's H2 on the tree this commit starts
+# NINE OF THESE ELEVEN WERE RUN BY mg-c4c8's H2 on the tree mg-64b6 started
 # from, and every one was BYTE-IDENTICAL at exit 0.  That is said here rather
-# than presented as foresight.  What is NOT carried over is the tenth and
-# eleventh -- `absorb_trace`'s two clauses -- because this commit removed them;
-# they are swept below against the pinned tree that still has them, where the
-# second is predicted to CHANGE.
+# than presented as foresight.
+#
+# AND SO WERE THE TWO NEW ONES, BY mg-0b07, BEFORE THE OPERATOR EXISTED (its p3,
+# rows S2 and S1).  That audit perturbed the one-comparison condition's two
+# MEANINGS by splicing each half in alone; this commit spells them as two
+# OPERANDS, so the same two experiments are now deletions of clauses and the sweep
+# runs them without being told they exist.  Registering the numbers that audit
+# published is not foresight and is not offered as any: what is new here is that
+# the sweep REACHES them.  If they came back other than as registered, the
+# spelling would not be equivalent to the comparison and the section below --
+# which measures exactly that -- would go red with them.
 CLAUSE_PRED = {
+    ("absorb_trace", "guard", 0): (False, 0,
+                                   "mg-0b07 p3 S2, the ORDER half: no pair in "
+                                   "the battery has len(A) != len(B) without "
+                                   "also being ragged, so the width clause "
+                                   "rejects them unaided.  UNCOVERED, NOT "
+                                   "INERT -- cut it and the predicate answers "
+                                   "ABSORBABLE for a 2x2 against a three-row B "
+                                   "whose first two rows are 2 wide"),
+    ("absorb_trace", "guard", 1): (True, 1,
+                                   "mg-0b07 p3 S1, the WIDTH half: the `shape` "
+                                   "row's second constructed pair is RAGGED at "
+                                   "the same order, and nothing else rejects "
+                                   "it"),
     ("gate_violations", "guard", 0): (False, 0,
                                       "mg-c4c8 H1 #52: this return is inert "
                                       "WHOLE, so no clause of its guard can "
@@ -919,6 +988,20 @@ def main():
     a6 = run_case("AFTER-6", "delete the `parity` contradiction branch",
                   new_base, new_code, True, 1,
                   ["the predicate's `parity` branch"], base_cannot)
+    # AFTER-5'S SITE, SAID WHERE AFTER-5 IS READ (mg-0b07 B1).  The FINEST UNIT
+    # on the line above is the finest unit of the PATCH and is exact.  The
+    # finest unit of the SITE is smaller, and a reader who takes the one for the
+    # other reads this line as covering the condition it leaves standing.
+    shape_guard = [cl for cl in deciding_clauses(source_at(None))
+                   if cl.func == "absorb_trace"]
+    print("   AFTER-5's SITE, WHICH IS NOT ITS PATCH: the `return` it removes "
+          "is guarded by a\n   condition of %d clause(s) -- %s.  This line "
+          "covers neither of them; each is\n   deleted alone in the section PER "
+          "CLAUSE below, where one of the two comes back\n   BYTE-IDENTICAL and "
+          "is printed as NOT COVERED.\n"
+          % (len(shape_guard),
+             "; ".join("`%s`" % " ".join((cl.source or "").split())
+                       for cl in shape_guard)))
 
     head("PER RETURN, NOT PER GATE -- the same test one level down")
     print("AFTER-5 above removes ONE return, because there is one.  There were "
@@ -1067,15 +1150,23 @@ def main():
           "condition, and DELETING THE FIRST\nCLAUSE ALONE MOVED NOT ONE BYTE -- "
           "the same sentence as mg-e7bc's with `return`\nreplaced by `clause`.  "
           "Gate -> return -> clause is three rungs of one regress.\n")
-    print("THIS COMMIT DOES NOT DESCEND A FOURTH.  The two clauses were saying "
-          "one thing --\nA and B do not have the same row-shape profile -- and "
-          "`absorb_trace` now says it\nwith one comparison and no boolean "
-          "operator.  There is no clause under that\n`return` for a fourth rung "
-          "to bite on, and the claim below is that fact read out of\nthe tree "
-          "rather than asserted.  The sweep itself is over the ENUMERATED "
-          "clauses of\nthe predicate layer, so a clause added tomorrow is swept "
-          "without anyone adding it\nto a list -- and a clause with no "
-          "registered prediction is BROKEN here, not skipped.\n")
+    print("mg-0b07: AND THAT WAS NOT THE FLOOR EITHER.  mg-64b6 answered the "
+          "third rung by\nwriting the condition as one comparison of two lists "
+          "and reporting 0 clauses left.\nA list comparison IS a disjunction -- "
+          "true when the LENGTHS differ or a common\nindex does -- so the ORDER "
+          "half survived with no operand to delete, and taking it\nout with the "
+          "width half standing left the artifact BYTE-IDENTICAL at 23,695, exit "
+          "0.\nMERGING HAD REMOVED THE HANDLE, NOT THE RUNG.\n")
+    print("SO THE OPERATOR IS BACK, AND THAT IS THE SUBTRACTION MOVE APPLIED TO "
+          "THE\nIMPLICITNESS (mg-f7e1).  Both halves are now operands this "
+          "sweep deletes one at a\ntime, so a level the instrument could not see "
+          "became one it can -- and what it\nsees is printed, including where it "
+          "sees nothing.  The sweep is over the\nENUMERATED clauses of the "
+          "predicate layer, so a clause added tomorrow is swept\nwithout anyone "
+          "adding it to a list, and a clause with no registered prediction is\n"
+          "BROKEN here rather than skipped.  What deletion CANNOT reach is "
+          "counted in the\nnext section rather than left as the reader's "
+          "assumption.\n")
     live_src = source_at(None)
     live_clauses = deciding_clauses(live_src)
     poset_src = source_at(None, "posets.py")
@@ -1092,20 +1183,22 @@ def main():
           % (len(poset_clauses),
              ", ".join("%s c%d" % (cl.func, cl.index + 1)
                        for cl in poset_clauses)))
-    print("\nPREDICTIONS, registered before the runs.  Every one of these nine "
-          "was run by\nmg-c4c8's H2 on the tree this commit started from and "
-          "every one was IDENTICAL;\nthat is said here rather than presented as "
-          "foresight.  The tenth and eleventh --\nthe two clauses this commit "
-          "removed -- are run below against the PINNED tree that\nstill has "
-          "them, and one of those is predicted to CHANGE.\n")
+    print("\nPREDICTIONS, registered before the runs.  Nine of these eleven "
+          "were run by\nmg-c4c8's H2 and every one was IDENTICAL; the two on "
+          "`absorb_trace` were run by\nmg-0b07's p3 as perturbations of the "
+          "one-comparison condition's two MEANINGS,\nbefore either was an "
+          "operand.  Both facts are said here rather than presented as\n"
+          "foresight.  mg-c4c8's own two clauses, which mg-64b6 removed, are "
+          "run below\nagainst the PINNED tree that still has them.\n")
     for key in sorted(CLAUSE_PRED):
         ch, ex, why = CLAUSE_PRED[key]
         print("   %-24s %-6s c%d  %-10s exit %d   (%s)"
               % (key[0], key[1], key[2] + 1,
                  "CHANGES" if ch else "IDENTICAL", ex, why))
     print()
-    print("   %-24s %-6s %-4s %-10s %-5s %s"
-          % ("function", "kind", "cls", "artifact", "exit", "match"))
+    print("   %-24s %-6s %-4s %-10s %-5s %-6s %s"
+          % ("function", "kind", "cls", "artifact", "exit", "match",
+             "what the result establishes about the clause"))
     sweep, sweep_hits = [], 0
     for cl in live_clauses:
         key = (cl.func, cl.kind, cl.index)
@@ -1121,10 +1214,18 @@ def main():
         ok = (changed == want_change) and (code == want_exit)
         sweep_hits += ok
         sweep.append((key, changed, code, ok))
-        print("   %-24s %-6s %-4d %-10s %-5d %s"
+        # WHAT THE RESULT ESTABLISHES, on the line the result is read on
+        # (mg-0b07).  A sweep that prints only IDENTICAL/CHANGES is read as
+        # coverage in both directions, and it is coverage in one: a clause whose
+        # deletion moves nothing has been REACHED by the test and not COVERED by
+        # it, and the two are one column apart.
+        print("   %-24s %-6s %-4d %-10s %-5d %-6s %s"
               % (cl.func, cl.kind, cl.index + 1,
                  "CHANGES" if changed else "IDENTICAL", code,
-                 "match" if ok else "MISS"))
+                 "match" if ok else "MISS",
+                 "the battery covers this clause"
+                 if changed else "NOT COVERED -- deletion establishes nothing "
+                 "about it"))
     claim("THE CLAUSE SWEEP RAN ON THE ENUMERATED POPULATION: %d clause(s) of "
           "the predicate layer, each deleted ALONE with the rest of its "
           "condition and its statement left standing, %d of %d predictions "
@@ -1141,24 +1242,49 @@ def main():
     fc_bool = sum(1 for cl in live_clauses if cl.func == "absorb_trace")
     nested = [cl for cl in live_clauses + poset_clauses
               if isinstance(cl.node.values[cl.index], ast.BoolOp)]
-    claim("AND `absorb_trace` HAS NO DECIDING CLAUSE LEFT: %d boolean clause(s) "
-          "in the conditions that decide its returns, counted from the tree.  "
-          "The finest deletable unit inside its `shape` gate IS the `return` "
-          "AFTER-5 removes, so AFTER-5's line is a claim about the whole of it "
-          "and the regress that ran gate -> return -> clause stops here by "
-          "construction rather than by another rung" % fc_bool,
-          fc_bool == 0,
-          "a boolean operator returning to any condition that decides a return "
-          "in `absorb_trace` -- at which point this claim goes red and the "
-          "sweep above acquires a row with no prediction, which is also red.  "
-          "NOT under the clause being merely hard to reach: the condition "
-          "either has operands or it does not, and this counts them",
-          "clauses in `absorb_trace`: %d; in `gate_violations`: %d; in "
+    fc_rows = [(k, ch, c) for k, ch, c, _ok in sweep if k[0] == "absorb_trace"]
+    uncovered = [k for k, ch, _c in fc_rows if ch is False]
+    claim("`absorb_trace`'S `shape` GUARD IS SWEPT AT %d CLAUSE(S), AND %d OF "
+          "THEM THE BATTERY CANNOT SEE.  mg-64b6 reported 0 clauses here and "
+          "the regress stopping by construction; that count was exact and the "
+          "conclusion was wrong, because the comparison it counted was itself a "
+          "disjunction (mg-0b07).  The operator is back, both halves are "
+          "deleted individually above, and the half no pair reaches is NAMED: "
+          "%s"
+          % (fc_bool, len(uncovered),
+             ", ".join("clause %d" % (k[2] + 1) for k in uncovered) or "none"),
+          fc_bool == 2 and len(fc_rows) == 2 and len(uncovered) == 1,
+          "a pair reaching the order half being added to `controls.py` -- at "
+          "which point clause 1 goes CHANGES, its registered prediction MISSES, "
+          "and this claim goes red saying so.  That is the intended way for it "
+          "to fail: the number it states is the coverage, not a target.  It "
+          "also goes red if the operator is merged away again, which would "
+          "return the sweep to reporting 0 clauses at a site that has two",
+          "clauses in `absorb_trace`: %d (%s); in `gate_violations`: %d; in "
           "`diagonal_moves`: %d (mg-c4c8 F3's two functions, whose returns are "
-          "inert WHOLE and which this commit did not touch)"
+          "inert WHOLE and which no commit in this lineage has touched)"
           % (fc_bool,
+             "; ".join("c%d %s" % (k[2] + 1, "CHANGES" if ch else "IDENTICAL")
+                       for k, ch, _c in fc_rows),
              sum(1 for cl in live_clauses if cl.func == "gate_violations"),
              sum(1 for cl in live_clauses if cl.func == "diagonal_moves")))
+    claim("AND THE UNCOVERED CLAUSE IS UNCOVERED AND NOT INERT, which is the "
+          "distinction mg-9220's merge turned on and this sweep would otherwise "
+          "blur: `%s` decides pairs the battery does not contain, so it cannot "
+          "be deleted as a statement that does nothing"
+          % (live_clauses[[cl.func for cl in live_clauses].index(
+              "absorb_trace")].source if fc_bool else "-"),
+          bool(uncovered) and any(cl.func == "absorb_trace"
+                                  for cl in live_clauses),
+          "that clause becoming genuinely inert -- which would need the width "
+          "half to subsume it, and it does not: `zip` stops at the shorter "
+          "profile.  The three separator pairs in the section above are the "
+          "measurement, and they are run against a brute force rather than "
+          "against the predicate",
+          "the pairs that separate them are printed in AND NEITHER REWRITE "
+          "QUIETLY NARROWED THE GATE above; an inert clause would be removed "
+          "here rather than reported, which is what mg-9220 did with the inert "
+          "`return`")
     claim("and THE SWEEP'S OWN GRAIN is the tree's: %d of the %d clauses are "
           "themselves boolean expressions, so 'top-level clause' and 'clause' "
           "name the same thing on this population"
@@ -1304,6 +1430,136 @@ def main():
           % (len(profile_mats),
              "disagreements: %s" % differ if differ else "no disagreement"))
 
+    # ------------------------------------------------------------------------
+    head("THE RESPELLING MOVED NOTHING -- the two texts, asked the same "
+         "questions")
+    print("mg-f7e1 replaced one comparison of two row-shape profiles with the "
+          "`or` that\ncomparison means.  That is a claim about a REWRITE, and "
+          "this lineage has one rule\nabout those: measure it.  The patch below "
+          "turns the live condition back into\nmg-64b6's text -- an anchor that "
+          "must occur exactly once -- and the battery is run\non the result.\n")
+    old_dir = mutate_tree([RESPELL_BACK], NEW_FILES)
+    old_out, old_code = run_controls(old_dir)
+    old_fc = load_module(os.path.join(old_dir, "face_complex.py"), "fc_onecmp")
+    claim("THE ONE-COMPARISON FORM REGENERATES THIS TREE'S ARTIFACT BYTE FOR "
+          "BYTE: %d bytes, exit %d, against %d and %d live.  The `or` and the "
+          "list comparison are the same predicate on everything this battery "
+          "asks"
+          % (len(old_out), old_code, len(new_base), new_code),
+          old_out == new_base and old_code == new_code,
+          "either spelling deciding a pair the other does not, which would make "
+          "this commit a change to the predicate rather than to its text.  "
+          "mg-9220's merge DID move 126 gate labels and make a partial function "
+          "total (mg-c4c8 F5); this one is required to move nothing, and the "
+          "requirement is checked rather than intended")
+    same3 = n3 = 0
+    differ3 = []
+    for A in profile_mats:
+        for B in profile_mats:
+            n3 += 1
+            o, n = ask(old_fc.absorb_trace, A, B), ask(new_fc.absorb_trace, A, B)
+            same3 += (o == n)
+            if o != n and len(differ3) < 4:
+                differ3.append(([len(r) for r in A], [len(r) for r in B], o, n))
+    claim("and over the SAME %d pairs across %d shape profiles the two "
+          "spellings agree on decision, gate label AND raised exception on %d "
+          "of %d" % (n3, len(shapes), same3, n3),
+          same3 == n3,
+          "`zip` truncating where the list comparison does not -- which is "
+          "exactly the risk this rewrite runs, since the order clause is what "
+          "stands in for the length half of `!=`.  Drop `len(shape_A) != "
+          "len(shape_B)` and this claim does NOT go red (the artifact is "
+          "byte-identical, which is the finding); drop the `zip` guard's "
+          "counterpart in the comparison and it does",
+          "population indexed by SHAPE PROFILE, %d matrices crossed with "
+          "itself.  %s"
+          % (len(profile_mats),
+             "disagreements: %s" % differ3 if differ3 else "no disagreement"))
+
+    # ------------------------------------------------------------------------
+    head("THE BOUND OF THIS INSTRUMENT -- what deletion reaches, and what it "
+         "does not")
+    print("DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS AND "
+          "NO FURTHER.\nThat sentence is the whole of mg-0b07's second option "
+          "and it is worth nothing as a\npromise, so it is a count.  Four "
+          "generations of this file each reported a floor and\neach was one "
+          "spelling above the real one; the reason the fifth does not is not "
+          "that\nsomebody looked harder, it is that the limit is now MEASURED "
+          "and printed beside\nthe green rows rather than inferred from them.\n")
+    print("A condition can package several decisions with no operator to "
+          "delete: `a < b < c`,\n`[..] != [..]`, `x in S`, `any(...)`.  The "
+          "sweep above reaches the operands of `or`\nand `and` and nothing "
+          "else.  Below, both populations are read out of the tree.\n")
+    print("   %-18s %-6s %-5s %-8s %-9s %s"
+          % ("file", "conds", "bool", "operands", "compounds", "expr nodes"))
+    for fname in ("face_complex.py", "posets.py"):
+        c = condition_census(source_at(None, fname))
+        print("   %-18s %-6d %-5d %-8d %-9d %d" % ((fname,) + c))
+    fc_census = condition_census(live_src)
+    fc_imp = implicit_disjunctions(live_src)
+    ps_imp = implicit_disjunctions(poset_src)
+    forms = collections.Counter(c.form for c in fc_imp)
+    print("\n   the compounds, named -- each is a decision this sweep cannot "
+          "delete out of:")
+    for fname, pop in (("face_complex.py", fc_imp), ("posets.py", ps_imp)):
+        for c in pop:
+            print("      %-16s %-24s %-6s %-11s %s"
+                  % (fname, c.func, c.kind, c.form,
+                     " ".join((c.source or "").split())[:44]))
+    claim("THE SWEEP DELETES %d OPERAND(S) OUT OF %d DECIDING CONDITION(S) IN "
+          "face_complex.py, AND %d COMPOUND(S) IN THOSE CONDITIONS HAVE NO "
+          "OPERAND TO DELETE (%s); posets.py adds %d more, which no claim here "
+          "covers.  This is the instrument's bound, stated beside its results: "
+          "a green row above covers the clause it names and says nothing about "
+          "any decision packed inside that clause"
+          % (fc_census[2], fc_census[0], fc_census[3],
+             ", ".join("%d %s" % (n, f) for f, n in sorted(forms.items())),
+             len(ps_imp)),
+          fc_census[3] > 0 and fc_census[2] > 0,
+          "every deciding condition becoming a plain boolean expression, at "
+          "which point the bound would be vacuous and this claim would say so "
+          "by counting 0 compounds.  NOT under the forms being renamed: the "
+          "population is enumerated from the tree, and the totals beside it do "
+          "not depend on the names",
+          "face_complex.py: %d deciding conditions, %d of them boolean, %d "
+          "deletable operands, %d unreachable compounds, %d expression nodes in "
+          "all.  THE LAST NUMBER HAS NO GRAIN -- it counts every node in every "
+          "deciding condition and depends on no classification, so a compound "
+          "in a form this file does not know about is inside it anyway, which "
+          "is the treatment `unit_removed` gives its own three chosen units"
+          % fc_census)
+    at_shape = [c for c in fc_imp if c.func == "absorb_trace"]
+    old_imp = [c for c in implicit_disjunctions(apply_edits(live_src,
+                                                            [RESPELL_BACK]))
+               if c.func == "absorb_trace"]
+    claim("AND THE CENSUS SEPARATES THE TWO SPELLINGS, so it is measuring the "
+          "thing it claims to: on mg-64b6's text `absorb_trace`'s guard is an "
+          "unreachable compound (%s) and on this tree it is an `or` with two "
+          "deletable operands, with %s left inside the second one -- which is "
+          "why the bound is stated and not declared closed"
+          % (", ".join(c.form for c in old_imp) or "none",
+             ", ".join(c.form for c in at_shape) or "nothing"),
+          any(c.form == "sequence" for c in old_imp)
+          and not any(c.form == "sequence" for c in at_shape)
+          and any(c.form == "quantifier" for c in at_shape),
+          "the census reporting the same thing for both texts, which would mean "
+          "it cannot see the difference this commit is.  Both readings are of "
+          "source text produced in this run: the second is `apply_edits` of the "
+          "live source with the same patch the battery ran on above",
+          "one-comparison guard: %s || this tree's guard: %s"
+          % ("; ".join("%s %s" % (c.form, " ".join((c.source or "").split()))
+                       for c in old_imp) or "no compound",
+             "; ".join("%s %s" % (c.form, " ".join((c.source or "").split()))
+                       for c in at_shape) or "no compound"))
+    print("\nWHAT THIS BOUND DOES NOT SAY.  It does not say the uncovered "
+          "compounds are wrong,\nor that anything is untested: `absorb_trace` "
+          "is checked against a brute force over\nall 2^m sign vectors by a "
+          "scored row, and its six returns are individually\ndeletable and "
+          "individually visible.  It says what the DELETION EVIDENCE reaches, "
+          "so\nthat a reader who wants to know whether a sub-decision is "
+          "covered can read the\nanswer instead of assuming it from a green "
+          "run.\n")
+
     head("WHAT MOVED, AND WHAT DID NOT")
     for tag, out in (("AFTER-1", a1), ("AFTER-3", a3)):
         moved = [i for i, (a, b) in enumerate(zip(new_base.split("\n"),
@@ -1398,7 +1654,7 @@ def main():
           "sentence -- the %d that are not carry the reason they cannot be"
           % (len(checked), len(SELF_DEFECT_BRANCHES),
              len(SELF_DEFECT_BRANCHES) - len(checked)),
-          len(checked) >= 6 and len(SELF_DEFECT_BRANCHES) == 8,
+          len(checked) >= 10 and len(SELF_DEFECT_BRANCHES) == 12,
           "nothing: this claim is a pointer to the branches above, and it is "
           "scored so that the list travels with the transcript instead of "
           "living in a document beside it.  The claims that do the work are "
@@ -1407,9 +1663,14 @@ def main():
           "number in this file is",
           "branches checked by a claim: the node-count claim (1), the "
           "read-back in every run_case (2), the nested-clause claim (3), the "
-          "pinned sweep (4), the shape-profile equivalence (5), the four "
-          "narrowed patches (8).  Branches with a stated reason instead: the "
-          "aim strings (6), the sub-clause regress (7)")
+          "pinned sweep (4), the shape-profile equivalence (5), the sub-clause "
+          "regress (7, answered wrongly by mg-64b6 and re-answered here), the "
+          "four narrowed patches (8), the expression-node total (9), the NOT "
+          "COVERED marker on the sweep's own rows (10), the respelling "
+          "equivalence (11), the uncovered-not-inert claim (12).  Branches "
+          "with a stated reason instead: the aim strings (6).  Branch 9 "
+          "carries a stated RESIDUE as well as a check, which is the honest "
+          "shape for a limit that has a limit")
 
     print("\n" + BAR)
     print("%d claim(s) scored; %d BROKEN." % (len(SCORE), SCORE.count(False)))
@@ -1468,12 +1729,59 @@ SELF_DEFECT_BRANCHES = [
          "printed on the same line, and the aim names the mutation's PURPOSE "
          "rather than its size."),
         ("The regress could continue below a clause -- an operand of `!=`, a "
-         "call, a name.",
-         "CANNOT ARISE FOR THE DELETION TEST, and the reason is structural: "
-         "deleting an operand of a comparison does not leave a condition, so "
-         "there is no smaller DELETION at this site.  A MUTATION test (invert "
-         "the comparison, drop a `len`) has a grain of its own and nothing "
-         "here speaks for it -- said plainly rather than left to be assumed."),
+         "call, a name.  THIS BRANCH WAS ANSWERED WRONGLY BY mg-64b6 AND THE "
+         "ANSWER IS KEPT HERE SO THE CORRECTION IS VISIBLE: 'CANNOT ARISE FOR "
+         "THE DELETION TEST -- deleting an operand of a comparison does not "
+         "leave a condition, so there is no smaller DELETION at this site.'  "
+         "The reason is TRUE and mg-0b07 checked it.  The conclusion does not "
+         "follow: it answers 'can anything smaller be DELETED', and the "
+         "question this lineage is about is 'can anything smaller be PERTURBED "
+         "and go unseen'.  At that very site the two came apart -- the list "
+         "comparison's order half was perturbable, uncovered, and had no "
+         "operand.",
+         "CHECKED, ON THE SECOND ATTEMPT.  The condition is spelled with an "
+         "operator so both halves are deletable and both are swept; the "
+         "compounds that remain BELOW a clause are counted in THE BOUND OF "
+         "THIS INSTRUMENT; and mg-0b07's own perturbation experiment -- which "
+         "is not a deletion and is not this file's -- is re-run unmodified "
+         "against this tree in d4_auditor_rerun.py."),
+        ("THE BOUND ITSELF HAS A BOUND.  `_compound_form` names four ways to "
+         "package several decisions with no operator (`or`/`and`, chained, "
+         "sequence, membership, quantifier); a fifth form nobody has thought "
+         "of counts 0 there exactly as the list comparison counted 0 in the "
+         "clause census.  The remedy for an unstated limit is a limit that "
+         "can itself be understated.",
+         "CHECKED, AND THE CHECK IS NARROWER THAN THE BRANCH -- said plainly.  "
+         "`condition_census` reports EXPRESSION NODES IN ALL, an absolute "
+         "count over every deciding condition that depends on no "
+         "classification, so an unnamed form is inside a printed number rather "
+         "than outside every number; and unlike `unit_removed`'s `nodes` it is "
+         "a total and not a difference, so mg-0b07's B4 (a size-preserving "
+         "substitution hiding in a net) cannot arise for it.  THE RESIDUE: "
+         "that total bounds how much is there and does not name what.  A form "
+         "nobody names is still not named."),
+        ("The bound could be stated in a document beside the run rather than "
+         "in it, which is how an instrument's limit becomes something a reader "
+         "of the transcript has to already know.",
+         "CHECKED: the census, the named compounds and the NOT COVERED marker "
+         "are printed in this transcript, and the marker is on the same line "
+         "as the sweep result it qualifies rather than in a paragraph above "
+         "it."),
+        ("The respelling could buy a visible clause with a BEHAVIOUR CHANGE -- "
+         "`zip` truncates where `!=` compares lengths, so an order difference "
+         "could be lost in the rewrite that was meant only to expose it.",
+         "CHECKED TWICE: the one-comparison text is reconstructed by patch in "
+         "this run and regenerates the artifact byte for byte, and both forms "
+         "are asked decision, gate label and raised exception over the "
+         "shape-profile population."),
+        ("The uncovered clause could be reported as UNCOVERED when it is "
+         "really INERT, which is a category error with a different remedy: an "
+         "inert clause should be deleted (mg-9220's move) and only an "
+         "uncovered one should be reported.",
+         "CHECKED: the separator pairs are run against a brute force that "
+         "enumerates every sign vector, and the claim beside the sweep states "
+         "which of the two the clause is.  A clause that turned out inert "
+         "would be removed here rather than named."),
         ("The four narrowed AFTER patches could have changed what the deletion "
          "test measures while making the declarations exact.",
          "CHECKED: the artifact verdict and exit code of every one is "

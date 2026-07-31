@@ -1,5 +1,17 @@
 # mg-0b07 — independent audit of mg-64b6 (`0fb0e00`)
 
+> **`p3_grain.py` NOW EXITS 1 AGAINST THE LIVE TREE, AND THAT IS THIS AUDIT WORKING**
+> (added by mg-f7e1, 2026-07-31 — no transcript or finding below is edited).
+> This audit's finding **B1** was acted on: `absorb_trace`'s `shape` condition is spelled
+> with an `or` again, so exactly one of `p3`'s six claims — *"`absorb_trace` contains 0
+> boolean operators of ANY kind"* — is **BROKEN**, because that is the thing the repair
+> put back. Its three perturbation rows (S1/S2/S3) still match 3 of 3 and its cross-run
+> against `b6bc2ef` still holds: the spelling moved, the units did not. The subject's own
+> `d4_auditor_rerun.py` runs this script unmodified and **scores exactly which claim broke
+> and why**, so the red is a measurement rather than a landmine. The commands below still
+> describe this audit's run against the tree it audited; against a tree at or after
+> `mg-f7e1`, `p3` exits 1 and `run_all.sh` with it.
+
 Run everything:
 
     ./run_all.sh            # ~10 min, 39 claims, 0 BROKEN, exit 0, 7 findings

@@ -1,5 +1,14 @@
 # Landing mg-c4c8: the third rung is removed, and the declaration is computed
 
+> **SUPERSEDED IN ONE PLACE by mg-f7e1 (2026-07-31), and only in one.** Everything about the
+> DERIVED DECLARATION below stands and was confirmed by mg-0b07 against a patch changed in two
+> directions. What does not stand is section 1's conclusion: `[len(row) for row in A] !=
+> [len(row) for row in B]` has no boolean operator — that count is exact — but it is still a
+> DISJUNCTION, and its ORDER half could be taken out with the width half standing for
+> byte-identical, exit 0. The `or` is back, both halves are swept, and the instrument's bound is
+> now a count printed beside its results. Full record:
+> `docs/landing-mg-0b07-implicit-disjunction.md`.
+
 **Item:** mg-64b6. **Closes:** mg-c4c8's OPEN 1 and OPEN 2.
 **Code:** `code/face_geometry/face_complex.py`, `code/face_geometry/controls.py`,
 instrument in `code/face_geometry_instr_5f9a/` (`run_all.sh`, 83 claims, 0 BROKEN).

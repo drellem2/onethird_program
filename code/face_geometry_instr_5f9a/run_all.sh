@@ -2,14 +2,20 @@
 # mg-5f9a: closing mg-1c80's F1 -- regenerate this landing's transcript.
 #
 # Pure Python 3, no third-party packages.  Measured runtime 2026-07-31 on a 2024
-# laptop: 143 s total -- d1 0.6 s, d2 58 s (twenty-six full control batteries: ten
+# laptop: 166 s total -- d1 0.6 s, d2 64 s (twenty-nine full control batteries: ten
 # on this tree and on the PRE-REPAIR commit's sources, four more on the
-# TWO-RETURN commit for the per-return section, nine for the CLAUSE sweep and
-# three on the TWO-CLAUSE commit), d3 15 s (two more, plus two runs of mg-da45's
-# landing verifier over the whole 86-poset population), d4 55 s (mg-d0e2's own
-# e1, e2 and e3 and mg-e7bc's g1, g2 and g3, all run unmodified as subprocesses,
-# two of them against a pinned commit materialised with `git archive`).
-# 83 claims, 0 BROKEN: d1 17, d2 44, d3 6, d4 16.
+# TWO-RETURN commit for the per-return section, eleven for the CLAUSE sweep, one
+# for the RESPELLING equivalence and three on the TWO-CLAUSE commit), d3 15 s
+# (two more, plus two runs of mg-da45's landing verifier over the whole 86-poset
+# population), d4 78 s (mg-d0e2's own e1, e2 and e3, mg-e7bc's g1, g2 and g3 and
+# mg-0b07's p3, all run unmodified as subprocesses, two of them against a pinned
+# commit materialised with `git archive`).
+# 92 claims, 0 BROKEN: d1 17, d2 49, d3 6, d4 20.
+#
+# d4's mg-0b07 subprocess is REQUIRED to exit 1 and one of its six claims is
+# REQUIRED to be BROKEN -- the one asserting the operator this commit put back
+# does not exist.  d4 names it rather than counting it, so a different claim
+# breaking is red here.
 #
 # mg-04a8 added d4 and rewrote d2's label check.  d2's BEFORE half now reads a
 # PINNED COMMIT rather than `main`: once mg-5f9a merged, "main's artifact
@@ -17,6 +23,22 @@
 # deletion it then attempted did not even apply -- the shipped file stopped at
 # `anchor occurs 0 times`.  A check pinned to a branch asks about whatever that
 # branch holds today.
+#
+# mg-f7e1 SPELLED THE DISJUNCTION WITH AN OPERATOR AND STATED THE BOUND.
+# mg-0b07 found that `clause` was not the floor: mg-64b6's one-comparison
+# condition, `[len(row) for row in A] != [len(row) for row in B]`, is a
+# disjunction Python spells with no operator, and its ORDER half could be taken
+# out with the width half standing for BYTE-IDENTICAL, exit 0, every row green.
+# Merging had removed the HANDLE, not the rung.  So the `or` is back --
+# subtraction applied to the implicitness -- both halves are swept by the clause
+# sweep that already existed, and the one the battery cannot see is printed as
+# NOT COVERED on the row that carries it.  No sixth technique was added.  d2 also
+# counts, from the tree, the compounds no deletion reaches (`any(...)`, `x in S`,
+# chained and sequence comparisons), so DELETION ESTABLISHES COVERAGE DOWN TO
+# EXPLICIT BOOLEAN OPERANDS AND NO FURTHER is a measured number beside the green
+# rows rather than a promise.  d4 runs mg-0b07's own grain probe unmodified: one
+# of its six claims is required to go RED -- the one asserting the operator does
+# not exist -- and its three perturbation rows are required not to move.
 #
 # mg-64b6 made it PER CLAUSE and made the declared unit DERIVED.  mg-c4c8 found
 # that mg-9220's merge left a condition of TWO CLAUSES and that deleting the first

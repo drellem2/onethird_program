@@ -755,14 +755,36 @@ def absorbable_bruteforce(A, B):
 #                     on each return, and the inert one was REMOVED rather than
 #                     covered by a third pair: this row is not asked to detect
 #                     it, and no row here was added for it.
-#                     AND ITS CONDITION HAS ONE CLAUSE BECAUSE mg-64b6 REWROTE
-#                     THE MERGE.  With two clauses, deleting the first alone
-#                     moved not one byte either (mg-c4c8) -- the same finding a
-#                     rung further down.  The condition is now a single
-#                     comparison of the two row-shape profiles, so there is no
-#                     clause under the return for a fourth rung to bite on, and
-#                     again NO ROW WAS ADDED HERE: the sub-unit was removed,
-#                     not watched.
+#                     AND ITS CONDITION IS A TWO-CLAUSE DISJUNCTION AGAIN,
+#                     SPELLED WITH AN OPERATOR ON PURPOSE (mg-0b07).  mg-64b6
+#                     wrote it as one comparison of the two row-shape profiles
+#                     and reported that there was no clause left to delete.
+#                     That was true and it was not the floor: a list comparison
+#                     IS a disjunction, and its ORDER half -- `len(A) != len(B)`
+#                     -- could be taken out with the width half standing for
+#                     BYTE-IDENTICAL, exit 0, every row here green.  Merging had
+#                     removed the handle, not the rung.  The `or` is back so the
+#                     two halves are operands a deletion test can take out one
+#                     at a time.
+#                     WHICH HALF THIS ROW CAN SEE, AND WHICH IT CANNOT.  Its
+#                     second pair is RAGGED at the same order, so it covers the
+#                     WIDTH clause: delete that clause alone and this row fails
+#                     (24,909 bytes, exit 1).  NO PAIR HERE SEPARATES THE ORDER
+#                     CLAUSE.  The first pair differs in order AND in width, so
+#                     the width half rejects it unaided; delete the order clause
+#                     alone and every row here is still green.
+#                     AND STILL NO ROW WAS ADDED FOR IT, which is a choice and
+#                     is stated rather than left as an absence.  A pair with
+#                     len(A) != len(B) and no ragged row -- a 2x2 against a
+#                     three-row B whose first two rows are 2 wide -- would cover
+#                     it in one line.  It is not added because the question this
+#                     lineage keeps failing is not "is this branch watched" but
+#                     "does the evidence say what it is read as saying": the
+#                     uncovered half is now NAMED, on the line its result is
+#                     read on (d2_deletion.py, section PER CLAUSE), and a reader
+#                     who wants it covered can add the pair here and watch that
+#                     line turn.  What is not acceptable is silence, and this is
+#                     the end of it.
 #   the parity row -- deleting the `return Trace(False, "parity", signs_read)`
 #                     branch.  The contradictory pair is then reported
 #                     ABSORBABLE against a brute force that enumerated all 8 sign
