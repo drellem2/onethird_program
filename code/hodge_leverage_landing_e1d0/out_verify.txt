@@ -69,10 +69,14 @@ whether the enlargement was disclosed anywhere.
 
   [CONFIRMED] 6 of 6 probed clauses are asserted by the STATE.md row and by nothing in §14 -- A5 stands, on clauses rather than on chars
 
-  the three sites, anchored to the SECTION that records A5:
-    the STATE.md row   13,367 chars (the row itself)
-    §14                16,640 chars (the section, not 115,383 for the whole deliverable)
-    H8                  7,418 chars (the section, not 20,529 for the whole file)
+  THE THREE SITES, and WHAT A SITE IS -- derived from the code that computes it:
+    the STATE.md row      13,410 chars /   3 line(s)  `framed_row()`  -- 170,098 of 183,508 chars of STATE.md are OUTSIDE it
+    §14                   16,647 chars /  72 line(s)  `section()`  -- 99,327 of 115,974 chars of docs/OneThird-Hodge-Side-Leverage.md are OUTSIDE it
+    H8                     7,852 chars /  52 line(s)  `section()`  -- 13,175 of 21,027 chars of docs/state-history/attempt-mg-a3d4.md are OUTSIDE it
+      framed_row   = the table ROW and the HEADER LINES it is read under -- not the table's other rows, which are outside this record
+      section      = the markdown SECTION, heading to the next heading of the same or shallower level -- not the file that contains it
+    TOTAL                 37,909 of 320,509 chars of the three files are inside a record (11.8%); 282,600 are outside every record (88.2%)
+  [CONFIRMED] GATE: every site's anchor has a DECLARED extent -- ['framed_row', 'section'] against ['framed_row', 'section'].  FAIL-CLOSED, because the sentence this replaces ('a site is a section') was true at 2 of 3 sites and nobody checked the third: a new site with a new anchor makes this red rather than inheriting a sentence written for a different shape
 
   EXTENT of the figure gate below, printed rather than assumed:
     (a) the DESIGNATED STATEMENT at each site, read and compared;
@@ -80,8 +84,9 @@ whether the enlargement was disclosed anywhere.
     (c) a CENSUS of every figure-shaped token the SECTION asserts --
         prose included -- against the live values plus a declared
         historical roster.  Marked quotations are exempt by the
-        convention `assertions()` states; text outside the section is
-        not read, because a site is a section (mg-835f G-1/mg-8916);
+        convention `assertions()` states; text outside the SITE is
+        not read, and what a site IS is printed above, per site,
+        from the code (mg-835f G-1/mg-8916; mg-ec07 E-2/mg-6df0);
     (d) and each of those tokens IN THE SLOT A READER MEETS IT IN.
         (c) alone is a MULTISET and is invariant under a permutation,
         so two declared figures EXCHANGED in ordinary prose passed it
@@ -110,8 +115,8 @@ whether the enlargement was disclosed anywhere.
   [CONFIRMED] GATE: the enlargement 2 928 -> 6 069 is stated at BOTH the §14 section and the place A5 is recorded (the STATE.md row)
   [CONFIRMED] GATE @ the STATE.md row: FIGURE CENSUS -- all 17 figure token(s) a reader meets in this SECTION are licensed (5 live occurrence(s) at the values measured this run, 12 declared historical), and no other figure is asserted here.  Prose is read, not only the designated statements
   [CONFIRMED] GATE @ the STATE.md row: FIGURE ORDER -- all 17 figure token(s) are in the declared slot a reader meets them in. The census above is a MULTISET and a multiset is invariant under a permutation, so two declared figures exchanged in ordinary prose passed it (mg-8aae H-1); this compares the SEQUENCE, which a transposition changes
-  [CONFIRMED] GATE @ the STATE.md row: RECORD PARTITION -- the section is 17 asserted figure token(s) and 18 segment(s) between them, and re-interleaving the two halves reproduces it BYTE FOR BYTE (13367 of 13367 chars).  This is what licenses 'the WHOLE record is compared': the figures are checked by FIGURE CENSUS and FIGURE ORDER, everything else by SITE RECORD, and nothing is in neither.  No field is named, so none can be left behind because nobody named it
-  [CONFIRMED] GATE @ the STATE.md row: SITE RECORD -- the 13,280 chars of this section that are NOT asserted figures are byte-identical to the declared record, in order.  A MULTISET is invariant under exchanging two figures (mg-8aae H-1) and a SEQUENCE OF FIGURES is invariant under exchanging the two LABELS they hang on (mg-9207 E2/E2b/E3); this compares the other half, so neither exchange is silent
+  [CONFIRMED] GATE @ the STATE.md row: RECORD PARTITION -- the section is 17 asserted figure token(s) and 18 segment(s) between them, and re-interleaving the two halves reproduces it BYTE FOR BYTE (13410 of 13410 chars).  This is what licenses 'the WHOLE record is compared': the figures are checked by FIGURE CENSUS and FIGURE ORDER, everything else by SITE RECORD, and nothing is in neither.  No field is named, so none can be left behind because nobody named it
+  [CONFIRMED] GATE @ the STATE.md row: SITE RECORD -- the 13,323 chars of this section that are NOT asserted figures are byte-identical to the declared record, in order.  A MULTISET is invariant under exchanging two figures (mg-8aae H-1) and a SEQUENCE OF FIGURES is invariant under exchanging the two LABELS they hang on (mg-9207 E2/E2b/E3); this compares the other half, so neither exchange is silent
   [CONFIRMED] GATE @ §14: FIGURE CENSUS -- all 16 figure token(s) a reader meets in this SECTION are licensed (3 live occurrence(s) at the values measured this run, 13 declared historical), and no other figure is asserted here.  Prose is read, not only the designated statements
   [CONFIRMED] GATE @ §14: FIGURE ORDER -- all 16 figure token(s) are in the declared slot a reader meets them in. The census above is a MULTISET and a multiset is invariant under a permutation, so two declared figures exchanged in ordinary prose passed it (mg-8aae H-1); this compares the SEQUENCE, which a transposition changes
   [CONFIRMED] GATE @ §14: RECORD PARTITION -- the section is 16 asserted figure token(s) and 17 segment(s) between them, and re-interleaving the two halves reproduces it BYTE FOR BYTE (16647 of 16647 chars).  This is what licenses 'the WHOLE record is compared': the figures are checked by FIGURE CENSUS and FIGURE ORDER, everything else by SITE RECORD, and nothing is in neither.  No field is named, so none can be left behind because nobody named it
@@ -249,11 +254,40 @@ left every figure token in its declared slot and the gate refuting NOTHING at
     N25 H8: the three-column table's ALIGNMENT shifted, no figure moved   REFUTED       all green
   [CONFIRMED] 7 of 7 label-side mutations are caught BY THE SITE RECORD ROW while every FIGURE CENSUS and FIGURE ORDER row stays green.  That second half is the point: it is the artifact's own evidence that the mutation moved no figure, so the fire is attributable to the half of the record that was not being compared before -- and not to a designated reader breaking, which would be re-measuring (a)
 
+    KIND x SITE -- every enumerated kind attempted at every site, mutation applied to
+    THE FILE and the sites re-cut from it.  Cells: FIRES / SILENT / n/a (with the reason).
+
+    kind                                                          the STATE.md row    §14                 H8                  
+    K01 the LIVE figure a reader meets, corrupted                 FIRES               FIRES               FIRES               
+    K02 the figure DUPLICATED at the site (mg-8a5c F-1's shape)   FIRES               FIRES               FIRES               
+    K03 a WRONG figure in ORDINARY PROSE (mg-835f G-1)            FIRES               FIRES               FIRES               
+    K04 wrong prose REUSING a figure on the roster (mg-8916)      FIRES               FIRES               FIRES               
+    K05 a NEW undeclared historical figure (the fail-closed cost  FIRES               FIRES               FIRES               
+    K06 two DECLARED FIGURES exchanged (mg-8aae H-1)              FIRES               FIRES               FIRES               
+    K07 two LABELS exchanged, no figure moved (mg-9207 E2)        FIRES (rec)         FIRES (rec)         FIRES (rec)         
+    K08 two table ROW LABELS exchanged (mg-9207 E2b)              n/a                 n/a                 FIRES (rec)         
+    K09 two COLUMN HEADERS exchanged (mg-9207 E3 -- mg-ec07's X1  FIRES (rec)         n/a                 FIRES (rec)         
+    K10 a figure inside a MARKED QUOTATION altered                n/a                 FIRES (rec)         n/a                 
+    K11 the table's ALIGNMENT shifted, no figure moved            n/a                 n/a                 FIRES (rec)         
+    K12 a whole PARAGRAPH relocated out of the site (mg-8a5c N7)  n/a                 FIRES (rec)         FIRES (rec)         
+
+      n/a  K08 @ the STATE.md row   fewer than two table rows carrying figures INSIDE this site (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
+      n/a  K08 @ §14                fewer than two table rows carrying figures INSIDE this site (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
+      n/a  K09 @ §14                no column header line inside this site
+      n/a  K10 @ the STATE.md row   no marked quotation carrying a figure at this site
+      n/a  K10 @ H8                 no marked quotation carrying a figure at this site
+      n/a  K11 @ the STATE.md row   no line here has two runs of two or more spaces to shift
+      n/a  K11 @ §14                no line here has two runs of two or more spaces to shift
+      n/a  K12 @ the STATE.md row   this site has no figure-free paragraph after the first to relocate
+
+  [CONFIRMED] 28 of 28 APPLICABLE cells of the 12x3 KIND x SITE product fire; 0 are SILENT and 8 do not apply, each with the reason its derivation failed printed above.  THE POPULATION IS THE PRODUCT: mg-ff3e enumerated the kinds and checked each at ONE SITE, which left kinds x (sites-1) untested while reading as complete -- and K09 at the STATE.md row is mg-ec07's X1, the cell that was exit 0 with the same kind CAUGHT at H8
+  [CONFIRMED] 8 of 8 applicable LABEL-SIDE cells (K07 -K11) are caught BY THE SITE RECORD ROW with every FIGURE CENSUS and FIGURE ORDER row green -- mg-ff3e's attribution claim, re-made over the PRODUCT rather than over one cell per kind.  The second half is what makes it evidence: the artifact's own rows say no figure moved, so the fire is the half of the record that was not compared before
+
 BOTTOM LINE
 -----------
-  checks recorded : 69
+  checks recorded : 72
   measurements    : 3
-  confirmed       : 66
+  confirmed       : 69
   refuted         : 0
 
   All four findings are measured and all four stand.  F4 stands as

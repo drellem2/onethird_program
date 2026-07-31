@@ -170,7 +170,61 @@ def find_line(text, prefix):
     return hits[0]
 
 
+def framed_row_index(lines, prefix):
+    """(top, row) -- the index of the table's header line and of the row
+    itself.  ONE derivation, used both to cut the site out and to write a
+    mutated site back, so the two cannot disagree about which lines the site
+    is."""
+    hits = [i for i, l in enumerate(lines) if l.startswith(prefix)]
+    if len(hits) != 1:
+        raise SystemExit(f"expected exactly 1 line starting {prefix!r}, "
+                         f"got {len(hits)}")
+    i = hits[0]
+    top = i
+    while top > 0 and lines[top - 1].startswith("|"):
+        top -= 1
+    # FAIL-CLOSED: no header, or the row IS the header, is a refusal rather
+    # than a silent fallback to the row alone.
+    if top > i - 2 or not re.fullmatch(r"\|[\s:|-]+\|", lines[top + 1].strip()):
+        raise SystemExit(f"the row starting {prefix!r} is not a row of a "
+                         f"markdown table with a header: nothing to frame it")
+    return top, i
+
+
+def framed_row(text, prefix):
+    """THE TABLE ROW STARTING WITH `prefix`, TOGETHER WITH THE HEADER OF THE
+    TABLE IT IS READ UNDER -- the header line and the delimiter line, then the
+    row.  Located BY CONTENT: the table is walked upwards from the row itself,
+    so inserting or deleting rows above it moves nothing here.
+
+    ⚠️ WHY A ROW IS NOT A SITE ON ITS OWN (mg-ec07 E-1/E-4, landed by
+    mg-6df0).  This site used to be `find_line` -- ONE LINE -- and the column
+    headers that say what its cells MEAN were outside it.  So exchanging the
+    ledger's `verdict` and `attempt` headers, which is mg-9207's E3 verbatim
+    and the kind mg-ff3e enumerated and CAUGHT at H8, was exit 0 with 0
+    refuted rows here.  A cell whose column header can be exchanged in silence
+    is a figure attached to the wrong statement, which is the defect this
+    whole gate exists for.
+
+    WHAT THIS IS NOT: it is not the table.  The ledger's other rows are
+    OUTSIDE this site and their verdict labels can still be exchanged in
+    silence -- measured, printed by `site_extents()`, and left open
+    deliberately, because covering them freezes tens of thousands of
+    characters of unrelated verdicts behind a reseal.  A site that is a row
+    and its frame is a bigger site than a row; it is not the file."""
+    lines = text.split("\n")
+    top, i = framed_row_index(lines, prefix)
+    return "\n".join([lines[top], lines[top + 1], lines[i]])
+
+
 def state_row(text):
+    """THE ROW ITSELF, which is what the LENGTH figures are measured on.
+
+    ⚠️ Deliberately NOT the site (mg-6df0).  The gate's site for STATE.md is
+    the row AND its table header (`framed_row`); the figure this arc has
+    published since mg-a2bd is the length of the ROW CELL.  Widening the
+    measured object would silently change five published figures, which is a
+    different act from widening what is compared."""
     return find_line(text, "| **AMBER-POSITIVE")
 
 
@@ -188,6 +242,30 @@ def head(title):
     print()
     print(title)
     print("-" * len(title))
+
+
+def heading(detail):
+    """A GATE ROW'S HEADING -- everything before the ` -- ` that introduces
+    its explanation.
+
+    ⚠️ THE ONE PLACE A ROW IS IDENTIFIED (mg-ec07 E-5, landed by mg-6df0).
+    Every row here explains itself by NAMING THE OTHER ROWS -- RECORD
+    PARTITION's says "...everything else by SITE RECORD, and nothing is in
+    neither" -- so a SUBSTRING TEST over the whole row matches rows it was
+    never meant to match: `"SITE RECORD" in d` selects 6 of the 34 rows where
+    this selects 3.
+
+    mg-ff3e found exactly this in its own scoring code, fixed it there with a
+    local `heading()`, and wrote it up as R5 item 3.  It did not ask where
+    else the same construct lived, and it lived FORTY LINES AWAY in
+    `reseal()`, in the file it was repairing -- where the excluded rows were
+    the three that license the whole "the record is lossless" claim.  A fix
+    applied at the site of discovery, in a file that contains the same
+    construct elsewhere, is a fix with a scope nobody chose.
+
+    So this is module-level and is used by every caller that has to say which
+    row it is looking at."""
+    return detail.split(" -- ")[0]
 
 
 def doc_num(v, signed=False):
@@ -316,7 +394,11 @@ FIGURES = {
 #   * marked quotations are exempt, because `assertions()` strips them -- a
 #     quotation of a withdrawn figure is not an assertion of it, which is the
 #     convention the sites already run on and which `assertions` documents;
-#   * a token outside the site is not read, because a site is a section;
+#   * a token outside the SITE is not read.  What a site IS differs by site
+#     and is PRINTED per site from the code that computes it (mg-ec07 E-2,
+#     landed by mg-6df0): two are sections, one is a table row and the header
+#     it is read under.  It was one sentence for all three until it was
+#     measured, and it was false at 1 of 3;
 #   * "figure-shaped" means this arc's own notation for a character count:
 #     optionally signed, thousands separated by a space (`+23 771`, `48 846`),
 #     or signed with three or more digits (`−875`, `+755`).  A bare `405` or a
@@ -474,7 +556,12 @@ LIVE_CENSUS = {
 # which is why the declaration is the skeleton TEXT and not a sha256 of it.  A
 # hash bump is a rubber stamp; a diff is a thing a reviewer can read.  And
 # `--reseal` REFUSES to run while any other gate row is refuted, so a document
-# whose figures are wrong cannot be blessed by resealing it.
+# whose figures are wrong cannot be blessed by resealing it -- ⚠️ AND THAT
+# REFUSAL EXCLUDED THE THREE ROWS THAT LICENSE THIS PARAGRAPH until mg-6df0.
+# It identified the rows to ignore with a SUBSTRING TEST over the whole row,
+# and the RECORD PARTITION row's own explanation names SITE RECORD, so with
+# `partition` bent lossy the blessing went through at exit 0 (mg-ec07 B2, on
+# disk).  It is keyed on `heading()` now.
 #
 # IT IS A DECLARATION AND NOT A DUPLICATE, which this arc distinguishes for a
 # reason (mg-a318 F-1).  A duplicate is a second place a READER meets the
@@ -484,10 +571,26 @@ LIVE_CENSUS = {
 #
 # WHAT IS STILL NOT COVERED, with the reason, because an omission is not
 # checkable and a stated reason is:
-#   * text OUTSIDE the site is not read, because a site is a section.  That is
-#     the one projection that remains, it is unchanged since mg-8a5c, and it is
-#     itself gated -- `section()` anchors BY CONTENT and N6 relocates a whole
-#     disclosure out of §14 to show the gate notices.
+#   * text OUTSIDE the site is not read.  ⚠️ WHAT A SITE IS DIFFERS BY SITE,
+#     and saying "a site is a section" was false at 1 of 3 of them until
+#     mg-6df0 (mg-ec07 E-2): §14 and H8 are sections; the STATE.md site is a
+#     table ROW AND THE HEADER IT IS READ UNDER, because as one line it
+#     excluded the column headers that say what its own cells mean -- and
+#     exchanging those was exit 0 (mg-ec07 E-1).  The extent is now PRINTED
+#     PER SITE from the code that computes it, `EXTENT_OF` is keyed on the
+#     anchor function, and a site whose anchor has no declared extent makes
+#     the run red.  It is still a projection, it is still the widest thing
+#     left, and its size is printed: ~88% of the three files is outside every
+#     record.  It is itself gated -- the anchors resolve BY CONTENT, N6
+#     relocates a whole disclosure out of §14, and the SITES x KINDS matrix
+#     below runs every kind at every site rather than one cell per row.
+#   * THE LEDGER'S OTHER ROWS.  The STATE.md site is a row and its frame, not
+#     the table: exchanging the verdict labels of two rows that are not this
+#     one is still silent (mg-ec07's X2, re-measured by mg-6df0's R3f).
+#     Covering it means freezing ~44 000 characters of unrelated verdicts
+#     behind a reseal, which is a trade pm-onethird sizes rather than a thing
+#     to do in passing -- so it is stated with its cost rather than left to
+#     be found.
 #   * two occurrences of the SAME figure token exchanged with each other are
 #     still the identity map on the artifact (mg-8eca), so there is nothing to
 #     detect -- not a blind spot but an empty set.
@@ -896,13 +999,136 @@ SITES = [
 ]
 
 
+# --------------------------------------------------------------------------
+# ⚠️ THE ANCHORS, AS DATA (mg-ec07 E-1/E-2/E-4, landed by mg-6df0).  One
+# table: the site's name, the file it lives in, the function that cuts it out,
+# the content it is anchored on, and the function that writes a mutated site
+# back into the file.
+#
+# WHY IT IS A TABLE AND NOT THREE HAND-WRITTEN CALLS.  Two things now have to
+# be derived from it rather than written beside it: WHAT EACH SITE IS -- the
+# printed extent, which was one sentence for all three and false at 1 of 3 --
+# and the negative control's SITES x KINDS matrix, which mutates THE FILE and
+# re-derives the site from it.  Both were sentences about the anchors; both
+# are now computed from the anchors.
+#
+# ⚠️ AND MUTATING THE FILE IS THE POINT.  The battery this replaces applied
+# every mutation to the SITE TEXT, which cannot exhibit a site-boundary defect
+# by construction: the frame of a site is not in the site's own text until the
+# frame is part of the site.  That is exactly how mg-9207's E3 came to be
+# caught at H8 and silent at the STATE.md row.
+# --------------------------------------------------------------------------
+def splice_section(raw, anchor, new_site):
+    """Write a mutated SECTION back into its file."""
+    old = section(raw, anchor)
+    if raw.count(old) != 1:
+        return None
+    return raw.replace(old, new_site, 1)
+
+
+def splice_framed_row(raw, anchor, new_site):
+    """Write a mutated FRAMED ROW back, at the indices the anchor itself
+    derives -- the header, the delimiter and the row, which are NOT adjacent
+    in the file.  A mutation that changes the site's line COUNT is refused
+    rather than guessed at.
+
+    ⚠️ By INDEX and not by content: the delimiter line `|---|---|---|` occurs
+    once per markdown table in the file, so a content-keyed write-back
+    silently refuses -- which is how the first version of this made every
+    STATE.md cell of the matrix read `n/a` while looking like a fact about
+    the site."""
+    lines = raw.split("\n")
+    top, i = framed_row_index(lines, anchor)
+    n = new_site.split("\n")
+    if len(n) != 3:
+        return None
+    lines[top], lines[top + 1], lines[i] = n
+    return "\n".join(lines)
+
+
+ANCHORS = [
+    ("the STATE.md row", STATE, framed_row, "| **AMBER-POSITIVE",
+     splice_framed_row),
+    ("§14", DELIV, section, "## §14 — `STATE.md` row, as landed",
+     splice_section),
+    ("H8", HIST, section, "### H8 — ", splice_section),
+]
+
+SITE_FILES = {name: path for name, path, _f, _a, _s in ANCHORS}
+
+
+def files_now():
+    """The three files this gate reads, from the WORKING TREE."""
+    return {path: tree(path) for path in dict.fromkeys(SITE_FILES.values())}
+
+
+def texts_from(files):
+    """The three sites, cut out of a (possibly mutated) copy of the three
+    files.  THE ONE PLACE A SITE IS CUT OUT: `site_texts()` is this applied to
+    the tree, and the negative control is this applied to a mutated copy, so
+    the battery and the gate cannot disagree about where a site ends."""
+    return {name: fn(files[path], anchor)
+            for name, path, fn, anchor, _s in ANCHORS}
+
+
 def site_texts():
-    """The three sites, each anchored to the SECTION that records A5."""
-    return {
-        "the STATE.md row": state_row(tree(STATE)),
-        "§14":              section(tree(DELIV), "## §14 — `STATE.md` row, as landed"),
-        "H8":               section(tree(HIST), "### H8 — "),
-    }
+    """The three sites as the tree has them."""
+    return texts_from(files_now())
+
+
+def with_site(files, name, new_site):
+    """`files` with one site replaced by `new_site`, or None if the mutation
+    cannot be written back (reported, never asserted -- mg-9207 J-3)."""
+    for n, path, fn, anchor, sp in ANCHORS:
+        if n == name:
+            raw = sp(files[path], anchor, new_site)
+            if raw is None:
+                return None
+            out = dict(files)
+            out[path] = raw
+            return out
+    return None
+
+# ⚠️ WHAT A SITE IS, KEYED ON THE FUNCTION THAT RETURNS IT (mg-ec07 E-2,
+# landed by mg-6df0).  The disclosure this replaces was one sentence for all
+# three sites -- "text outside the site is not read, BECAUSE A SITE IS A
+# SECTION" -- and it was FALSE AT 1 OF 3: the STATE.md site was one line from
+# `find_line`, so what it excluded was not "the rest of the file outside this
+# section" but "the whole ledger table this row is a row of, including its
+# column headers".  A scope sentence that is true where its author was looking
+# is the same defect as a fix applied where the defect was found.
+#
+# So the sentence is keyed to the code's own function name and the numbers are
+# MEASURED.  A site whose anchor has no entry here makes the run RED
+# (`site_extents` records it), which is what stops the next site inheriting a
+# sentence written for a different shape.
+EXTENT_OF = {
+    "section": "the markdown SECTION, heading to the next heading of the "
+               "same or shallower level -- not the file that contains it",
+    "framed_row": "the table ROW and the HEADER LINES it is read under -- "
+                  "not the table's other rows, which are outside this record",
+}
+
+def site_anchors():
+    """{site: the NAME OF THE FUNCTION that cuts it out}, taken from the
+    function object in `ANCHORS`.  Derived from the code that runs, not from a
+    sentence beside it and not from the source text: a site cannot be anchored
+    by one function and described as another."""
+    return {name: fn.__name__ for name, _p, fn, _a, _s in ANCHORS}
+
+
+def site_extents(texts):
+    """[(site, anchor, lines, chars, chars of its file, outside), ...] --
+    the extent of each site, MEASURED.  Every number a reader is given about
+    what this gate covers comes from here."""
+    anchors = site_anchors()
+    out = []
+    for name, _r, _k in SITES:
+        raw = tree(SITE_FILES[name])
+        out.append((name, anchors.get(name, "?"),
+                    len(texts[name].split("\n")), len(texts[name]),
+                    len(raw), len(raw) - len(texts[name])))
+    return out
 
 
 def figure_gate(texts, measured):
@@ -1121,12 +1347,35 @@ whether the enlargement was disclosed anywhere.
     flat_row_now = flat(texts["the STATE.md row"])
     flat_d14_now = flat(texts["§14"])
     flat_h8_now = flat(texts["H8"])
-    print(f"  the three sites, anchored to the SECTION that records A5:")
-    print(f"    the STATE.md row  {len(flat_row_now):>7,} chars (the row itself)")
-    print(f"    §14               {len(flat_d14_now):>7,} chars (the section, "
-          f"not {len(flat(tree(DELIV))):,} for the whole deliverable)")
-    print(f"    H8                {len(flat_h8_now):>7,} chars (the section, "
-          f"not {len(flat(tree(HIST))):,} for the whole file)")
+    # ⚠️ WHAT EACH SITE IS, MEASURED (mg-ec07 E-2, landed by mg-6df0).  This
+    # block used to be three hand-written parentheses saying "the section" --
+    # and one of the three sites was a LINE.  Every field below is derived:
+    # the anchor from `site_texts`'s own source, the sentence from `EXTENT_OF`
+    # keyed on that anchor, the counts from the site and its file.
+    ext = site_extents(texts)
+    print("  THE THREE SITES, and WHAT A SITE IS -- derived from the code "
+          "that computes it:")
+    for name, anchor, lines_n, chars, filechars, outside in ext:
+        print(f"    {name:<20} {chars:>7,} chars / {lines_n:>3} line(s)  "
+              f"`{anchor}()`  -- {outside:,} of {filechars:,} chars of "
+              f"{SITE_FILES[name]} are OUTSIDE it")
+    for anchor in dict.fromkeys(a for _n, a, *_r in ext):
+        print(f"      {anchor:<12} = {EXTENT_OF.get(anchor, '⚠️ NO DECLARED EXTENT')}")
+    inside_all = sum(c for _n, _a, _l, c, _f, _o in ext)
+    files_all = sum(len(tree(p)) for p in dict.fromkeys(SITE_FILES.values()))
+    print(f"    {'TOTAL':<20} {inside_all:>7,} of {files_all:,} chars of the "
+          f"three files are inside a record "
+          f"({100.0 * inside_all / files_all:.1f}%); "
+          f"{files_all - inside_all:,} are outside every record "
+          f"({100.0 * (files_all - inside_all) / files_all:.1f}%)")
+    record(all(a in EXTENT_OF for _n, a, *_r in ext),
+           f"GATE: every site's anchor has a DECLARED extent -- "
+           f"{sorted(set(a for _n, a, *_r in ext))} against "
+           f"{sorted(EXTENT_OF)}.  FAIL-CLOSED, because the sentence this "
+           f"replaces ('a site is a section') was true at 2 of 3 sites and "
+           f"nobody checked the third: a new site with a new anchor makes "
+           f"this red rather than inheriting a sentence written for a "
+           f"different shape")
     print()
     # THE EXTENT, PRINTED (mg-a4ef's convention; widened by mg-8916).  A gate
     # that does not print what it covers invites the reader to assume it covers
@@ -1137,8 +1386,9 @@ whether the enlargement was disclosed anywhere.
     print("    (c) a CENSUS of every figure-shaped token the SECTION asserts --")
     print("        prose included -- against the live values plus a declared")
     print("        historical roster.  Marked quotations are exempt by the")
-    print("        convention `assertions()` states; text outside the section is")
-    print("        not read, because a site is a section (mg-835f G-1/mg-8916);")
+    print("        convention `assertions()` states; text outside the SITE is")
+    print("        not read, and what a site IS is printed above, per site,")
+    print("        from the code (mg-835f G-1/mg-8916; mg-ec07 E-2/mg-6df0);")
     print("    (d) and each of those tokens IN THE SLOT A READER MEETS IT IN.")
     print("        (c) alone is a MULTISET and is invariant under a permutation,")
     print("        so two declared figures EXCHANGED in ordinary prose passed it")
@@ -1438,6 +1688,314 @@ def t4():
 # --------------------------------------------------------------------------
 # NEGATIVE CONTROL -- can the new figure gate fail?
 # --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ⚠️ SITES x KINDS (mg-ec07 E-4, landed by mg-6df0).  THE POPULATION IS THE
+# PRODUCT.
+#
+# mg-ff3e enumerated the kinds of edit its census had been blind to -- labels
+# beside a figure, a table's row labels, a COLUMN HEADING over a figure, a
+# figure inside a marked quotation, layout -- and probed each of them AT ONE
+# SITE.  Seven probes, all seven with a verdict written before the run and an
+# observed verdict after it.  What it was not, was the product: `kinds x
+# (sites - 1)` cells were never visited, and a table with one cell per row
+# reads as complete.
+#
+# X1 IS WHAT THAT COST.  The COLUMN HEADER kind was checked at H8 and caught
+# there.  The identical mutation at the STATE.md site -- exchanging the ledger
+# table's `verdict` and `attempt` headers -- was exit 0 with 0 refuted rows,
+# because that site was one line and its own column headers were outside it.
+#
+# So each kind below is a RULE, not a literal, and it is applied at EVERY
+# site.  A kind that cannot be derived at a site prints `n/a` WITH THE REASON
+# the derivation failed, which is a third answer and not a quiet pass: "there
+# is no marked quotation carrying a figure here" is a fact about the site,
+# and "it fired" and "it does not apply" are different things a reader is
+# entitled to tell apart.
+#
+# AND EVERY MUTATION GOES THROUGH THE FILE.  `with_site` splices the mutated
+# site back into a copy of its file and `texts_from` cuts all three sites out
+# again, so a mutation to a site's FRAME is visible exactly when the frame is
+# part of the site.  A battery that mutates site texts in place can never
+# exhibit a site-boundary defect: it is testing the projection it was handed.
+# --------------------------------------------------------------------------
+WRONG = {True: "+9 999", False: "99 999"}
+
+
+def _first_live(name, live):
+    """The first live figure this site is licensed to write, and its value."""
+    for key in dict((n, k) for n, _r, k in SITES)[name]:
+        if FIGURES[key][1]:
+            return key, live[key]
+    return None, None
+
+
+def _add_inline(site, sentence, live, name):
+    """Append `sentence` INLINE to the line carrying the site's first live
+    figure -- so the site's LINE COUNT does not move and the mutation can be
+    written back to a row as well as to a section."""
+    _k, val = _first_live(name, live)
+    lines = site.split("\n")
+    for i, l in enumerate(lines):
+        if val and val in l:
+            lines[i] = l + " " + sentence
+            return "\n".join(lines)
+    return None
+
+
+def _bold_spans(name, site):
+    """Uniquely-occurring bold labels carrying no figure -- and NOT inside the
+    site's own ANCHOR text.  A label exchange that moves the anchor relocates
+    the site rather than mislabelling a figure in it, and the anchors resolve
+    by content: the probe would be measuring `find_line`, not the record."""
+    anchor = next(a for n, _p, _f, a, _s in ANCHORS if n == name)
+    return [m.group(0) for m in re.finditer(r"\*\*(.+?)\*\*", site, re.S)
+            if not FIGURE_TOKEN.search(m.group(1))
+            and site.count(m.group(0)) == 1
+            and m.start() >= site.index(anchor) + len(anchor)]
+
+
+def _swap(text, a, b):
+    return text.replace(a, "\0", 1).replace(b, a, 1).replace("\0", b, 1)
+
+
+def _table_lines(site):
+    """Lines of an ASCII table inside the site: two or more runs of 2+ spaces.
+    A markdown row (`| a | b |`) counts too."""
+    return [l for l in site.split("\n")
+            if len(re.findall(r"\S(  +)\S", l)) >= 2
+            or (l.startswith("|") and l.count("|") >= 3)]
+
+
+def _header_line(name, site):
+    """THE LINE THAT NAMES THE COLUMNS THE SITE'S FIGURES ARE READ UNDER, or
+    None.  For a framed row it is the frame's own first line; for a section it
+    is a column line carrying no figure with figures under it."""
+    lines = site.split("\n")
+    if site_anchors()[name] == "framed_row":
+        return lines[0]
+    for i, l in enumerate(lines):
+        if len(re.findall(r"\S(  +)\S", l)) >= 2 \
+                and not FIGURE_TOKEN.search(l) \
+                and FIGURE_TOKEN.search("\n".join(lines[i + 1:i + 4])):
+            return l
+    return None
+
+
+def _cells(line):
+    if line.startswith("|"):
+        return [c for c in line.split("|")[1:-1]]
+    return re.split(r"(\s{2,})", line.strip())[::2]
+
+
+def k_figure(name, site, live):
+    key, val = _first_live(name, live)
+    if not val or site.count(val) != 1:
+        return None, "no live figure is written exactly once here"
+    return site.replace(val, WRONG[val[0] in "+−"], 1), None
+
+
+def k_duplicate(name, site, live):
+    key, val = _first_live(name, live)
+    if not val:
+        return None, "no live figure at this site"
+    return _add_inline(site, f"(and it is {val}, restated)", live, name), None
+
+
+def k_prose(name, site, live):
+    return _add_inline(site, "The gap is now +9 999 characters.",
+                       live, name), None
+
+
+def k_prose_roster(name, site, live):
+    known = sorted(HISTORICAL[name])
+    if not known:
+        return None, "no historical figure is declared for this site"
+    return _add_inline(site, f"The gap is now {known[0]} characters.",
+                       live, name), None
+
+
+def k_undeclared(name, site, live):
+    return _add_inline(site, "A new figure of 12 345 characters appears.",
+                       live, name), None
+
+
+def k_transpose(name, site, live):
+    seg, figs = partition(site)
+    pair = next(((i, j) for i in range(len(figs))
+                 for j in range(i + 1, len(figs)) if figs[i] != figs[j]), None)
+    if pair is None:
+        return None, "fewer than two figures of differing value here"
+    figs = list(figs)
+    figs[pair[0]], figs[pair[1]] = figs[pair[1]], figs[pair[0]]
+    return rejoin(seg, figs), None
+
+
+def k_label(name, site, live):
+    spans = _bold_spans(name, site)
+    if len(spans) < 2:
+        return None, "fewer than two uniquely-occurring figure-free labels"
+    return _swap(site, spans[0], spans[1]), None
+
+
+def k_row_label(name, site, live):
+    rows = [l for l in _table_lines(site) if FIGURE_TOKEN.search(l)]
+    if len(rows) < 2:
+        return None, ("fewer than two table rows carrying figures INSIDE this "
+                      "site (the ledger's other rows are outside it -- "
+                      "mg-ec07's X2, declared open)")
+    # Exchanged WITHIN THE TWO LINES, not across the site: these labels recur
+    # (H8's table names the same row at two commits), and a site-wide swap
+    # would move text the probe did not choose.
+    pair = next(((x, y) for i, x in enumerate(rows) for y in rows[i + 1:]
+                 if _cells(x)[0].strip() and _cells(y)[0].strip()
+                 and _cells(x)[0] != _cells(y)[0]
+                 and site.count(x) == 1 and site.count(y) == 1), None)
+    if pair is None:
+        return None, ("no two rows here carry distinct labels on lines that "
+                      "each occur once")
+    x, y = pair
+    a, b = _cells(x)[0], _cells(y)[0]
+    out = site.replace(x, x.replace(a, b, 1), 1)
+    return out.replace(y, y.replace(b, a, 1), 1), None
+
+
+def k_col_header(name, site, live):
+    line = _header_line(name, site)
+    if line is None:
+        return None, "no column header line inside this site"
+    cells = [c for c in _cells(line) if c.strip()]
+    if len(cells) < 2 or cells[0] == cells[1]:
+        return None, "the header line has fewer than two distinct columns"
+    return site.replace(line, _swap(line, cells[0], cells[1]), 1), None
+
+
+def k_quoted(name, site, live):
+    for s, e in quoted_spans(site):
+        m = FIGURE_TOKEN.search(site[s:e])
+        if m:
+            tok = m.group()
+            bad = tok[:-1] + ("8" if tok[-1] != "8" else "7")
+            return site[:s] + site[s:e].replace(tok, bad, 1) + site[e:], None
+    return None, "no marked quotation carrying a figure at this site"
+
+
+def k_layout(name, site, live):
+    for l in site.split("\n"):
+        runs = list(re.finditer(r"\S(  +)\S", l))
+        if len(runs) >= 2:
+            a, b = runs[0].span(1), runs[1].span(1)
+            new = l[:a[0]] + " " * (a[1] - a[0] - 1) + l[a[1]:b[0]] \
+                + " " * (b[1] - b[0] + 1) + l[b[1]:]
+            return site.replace(l, new, 1), None
+    return None, "no line here has two runs of two or more spaces to shift"
+
+
+def k_relocate(name, site, live):
+    paras = site.split("\n\n")
+    body = [p for p in paras[1:] if p.strip() and not FIGURE_TOKEN.search(p)]
+    if not body:
+        return None, ("this site has no figure-free paragraph after the "
+                      "first to relocate")
+    return site.replace("\n\n" + body[0], "", 1), None
+
+
+KINDS = [
+    ("K01 the LIVE figure a reader meets, corrupted", k_figure),
+    ("K02 the figure DUPLICATED at the site (mg-8a5c F-1's shape)", k_duplicate),
+    ("K03 a WRONG figure in ORDINARY PROSE (mg-835f G-1)", k_prose),
+    ("K04 wrong prose REUSING a figure on the roster (mg-8916)", k_prose_roster),
+    ("K05 a NEW undeclared historical figure (the fail-closed cost)", k_undeclared),
+    ("K06 two DECLARED FIGURES exchanged (mg-8aae H-1)", k_transpose),
+    ("K07 two LABELS exchanged, no figure moved (mg-9207 E2)", k_label),
+    ("K08 two table ROW LABELS exchanged (mg-9207 E2b)", k_row_label),
+    ("K09 two COLUMN HEADERS exchanged (mg-9207 E3 -- mg-ec07's X1)", k_col_header),
+    ("K10 a figure inside a MARKED QUOTATION altered", k_quoted),
+    ("K11 the table's ALIGNMENT shifted, no figure moved", k_layout),
+    ("K12 a whole PARAGRAPH relocated out of the site (mg-8a5c N7)", k_relocate),
+]
+
+
+def kind_matrix(base_files, live):
+    """EVERY KIND AT EVERY SITE.  Returns (cells, fires, na, silent)."""
+    base = texts_from(base_files)
+    names = [n for n, _r, _k in SITES]
+    print()
+    print("    KIND x SITE -- every enumerated kind attempted at every site, "
+          "mutation applied to")
+    print("    THE FILE and the sites re-cut from it.  Cells: FIRES / SILENT "
+          "/ n/a (with the reason).")
+    print()
+    print(f"    {'kind':<62}" + "".join(f"{n[:18]:<20}" for n in names))
+    cells, fires, na, silent, attributed, label_cells = [], 0, 0, 0, 0, 0
+    reasons = []
+    for title, fn in KINDS:
+        row = []
+        for name in names:
+            new_site, why = fn(name, base[name], live)
+            if new_site is None or new_site == base[name]:
+                row.append("n/a")
+                na += 1
+                reasons.append((title[:3], name, why or "the derivation "
+                                "produced no change"))
+                continue
+            files = with_site(base_files, name, new_site)
+            if files is None:
+                row.append("n/a")
+                na += 1
+                reasons.append((title[:3], name,
+                                "the mutation cannot be written back into the "
+                                "file without changing the site's line count"))
+                continue
+            try:
+                texts = texts_from(files)
+            except SystemExit as exc:
+                row.append("n/a")
+                na += 1
+                reasons.append((title[:3], name, f"the anchor no longer "
+                                                 f"resolves: {exc}"))
+                continue
+            rows = figure_gate(texts, live)
+            bad = [d for ok, d in rows if not ok]
+            label_side = title.startswith(("K07", "K08", "K09", "K10", "K11"))
+            if bad:
+                fires += 1
+                rec = any(heading(d).endswith("SITE RECORD") for d in bad)
+                fig = not any(heading(d).endswith(("FIGURE CENSUS",
+                                                   "FIGURE ORDER"))
+                              for d in bad)
+                row.append("FIRES" + (" (rec)" if rec and fig else ""))
+                if label_side:
+                    label_cells += 1
+                    attributed += rec and fig
+            else:
+                silent += 1
+                row.append("SILENT")
+            cells.append((title[:3], name, row[-1]))
+        print(f"    {title[:60]:<62}" + "".join(f"{c:<20}" for c in row))
+    print()
+    for tag, name, why in reasons:
+        print(f"      n/a  {tag} @ {name:<18} {why}")
+    print()
+    record(silent == 0,
+           f"{fires} of {fires + silent} APPLICABLE cells of the "
+           f"{len(KINDS)}x{len(names)} KIND x SITE product fire; {silent} are "
+           f"SILENT and {na} do not apply, each with the reason its "
+           f"derivation failed printed above.  THE POPULATION IS THE PRODUCT: "
+           f"mg-ff3e enumerated the kinds and checked each at ONE SITE, which "
+           f"left kinds x (sites-1) untested while reading as complete -- and "
+           f"K09 at the STATE.md row is mg-ec07's X1, the cell that was exit "
+           f"0 with the same kind CAUGHT at H8")
+    record(attributed == label_cells,
+           f"{attributed} of {label_cells} applicable LABEL-SIDE cells (K07 "
+           f"-K11) are caught BY THE SITE RECORD ROW with every FIGURE CENSUS "
+           f"and FIGURE ORDER row green -- mg-ff3e's attribution claim, "
+           f"re-made over the PRODUCT rather than over one cell per kind.  "
+           f"The second half is what makes it evidence: the artifact's own "
+           f"rows say no figure moved, so the fire is the half of the record "
+           f"that was not compared before")
+    return cells
+
+
 def negative_control():
     """A gate is worth nothing unless it is shown to fire on the edit it exists
     to catch, and this gate has been wrong about that twice.
@@ -1773,10 +2331,15 @@ left every figure token in its declared slot and the gate refuting NOTHING at
         # ⚠️ MATCHED ON THE ROW'S HEADING, NOT ANYWHERE IN THE ROW.  The
         # SITE RECORD row's own explanation names FIGURE CENSUS and FIGURE
         # ORDER, so a substring test over the whole line reports every probe
-        # as having broken a figure row.  This instrument's own first version
-        # did exactly that and its own attribution row caught it.
-        def heading(d):
-            return d.split(" -- ")[0]
+        # as having broken a figure row.  mg-ff3e's instrument did exactly
+        # that and its own attribution row caught it.
+        #
+        # ⚠️ THE LOCAL COPY THAT USED TO SIT HERE IS GONE (mg-ec07 E-5,
+        # landed by mg-6df0).  It was one of two places this file identified
+        # a row, and the other -- `reseal`'s refusal, forty lines down -- was
+        # still doing it by substring, which excluded the three RECORD
+        # PARTITION rows from the only refusal that guards the blessing path.
+        # One definition, at module level, for every caller.
         rec_failed = any(not o and heading(d).endswith("SITE RECORD")
                          for o, d in rows)
         fig_green = all(o for o, d in rows
@@ -1794,6 +2357,15 @@ left every figure token in its declared slot and the gate refuting NOTHING at
            f"not being compared before -- and not to a designated reader "
            f"breaking, which would be re-measuring (a)")
 
+    # ⚠️ AND THE SAME KINDS AT EVERY SITE (mg-ec07 E-4, landed by mg-6df0).
+    # Everything above is 25 named probes carrying their originating finding
+    # ids -- that provenance is why they are kept verbatim.  What they are
+    # not is the PRODUCT: N21 is the column-header kind at H8, and the same
+    # kind at the STATE.md row was exit 0.  The matrix below derives each
+    # kind at each site and mutates the FILE rather than the site text, so a
+    # site's own FRAME is in scope exactly when it is part of the site.
+    kind_matrix(files_now(), live)
+
 
 def reseal():
     """⚠️ THE ONE PLACE A DOCUMENT CAN BE BLESSED (mg-ff3e).  Regenerate
@@ -1803,7 +2375,19 @@ def reseal():
     is refuted: a section whose figures are wrong must not be sealed with them
     in it.  The declaration is the skeleton TEXT and not a sha256 of it for
     exactly this reason -- what this writes is meant to be read as a diff, and
-    a hash bump is a rubber stamp with no content to review."""
+    a hash bump is a rubber stamp with no content to review.
+
+    ⚠️ THE REFUSAL IS KEYED ON THE ROW'S HEADING (mg-ec07 E-5, landed by
+    mg-6df0).  It used to read `"SITE RECORD" not in d` -- a SUBSTRING TEST
+    over the whole row -- and the RECORD PARTITION row's own explanation
+    NAMES SITE RECORD, so 3 of 34 rows were excluded that were never meant to
+    be.  They were the three that license the whole claim: with `partition`
+    bent lossy, every RECORD PARTITION row was refuted and this function
+    BLESSED THE DOCUMENT ANYWAY (mg-ec07 B2, exit 0, on disk).  The record it
+    wrote was built from a partition that is not the section.
+
+    That construct is `heading()`'s to identify, and `heading()` is now the
+    only way any caller in this file says which row it means."""
     texts = site_texts()
     a = len(state_row(tree(STATE)))
     b = len(deliv_row(tree(DELIV)))
@@ -1812,7 +2396,7 @@ def reseal():
                 "both": doc_num(a + h - b, signed=True),
                 "cell": doc_num(a), "hist": doc_num(h), "copy": doc_num(b)}
     blocking = [d for ok, d in figure_gate(texts, measured)
-                if not ok and "SITE RECORD" not in d]
+                if not ok and not heading(d).endswith("SITE RECORD")]
     print("RESEAL -- regenerating the declared record of each census site")
     print("-" * 62)
     if blocking:

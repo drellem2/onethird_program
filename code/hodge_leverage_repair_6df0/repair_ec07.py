@@ -187,8 +187,21 @@ def measured_now():
 # transcript of this instrument is committed twice, once against the
 # unrepaired file and once against the repaired one, and every row below says
 # which state it is scoring.
-FIXED = "def heading(" in read(LANDING_REL) and \
-        '"SITE RECORD" not in d' not in read(LANDING_REL)
+# The refusal, before and after.  R1c reverts the second to the first and
+# changes NOTHING ELSE -- the finest unit the fix has.
+REFUSAL_PRE = '                if not ok and "SITE RECORD" not in d]'
+REFUSAL_POST = ('                if not ok '
+                'and not heading(d).endswith("SITE RECORD")]')
+
+
+#
+# ⚠️ KEYED ON THE REFUSAL ITSELF, not on the absence of the old string.  The
+# first version of this line read `'"SITE RECORD" not in d' not in src`, and
+# the repaired file QUOTES the construct it replaced in `reseal`'s own
+# docstring -- so the detector said PRE against a repaired artifact.  A test
+# for a defect that a description of the defect can trip is the same shape as
+# the defect: a substring where a structure was meant.
+FIXED = REFUSAL_POST.strip() in read(LANDING_REL)
 STATE_WORD = "POST (the repair is on disk)" if FIXED else \
              "PRE (the artifact as mg-ec07 audited it)"
 
@@ -245,13 +258,6 @@ LOSSY_FROM = "        segments.append(raw[last:m.start()])"
 LOSSY_TO = "        segments.append(raw[last:m.start()].lower())"
 LOSSY_FROM2 = "    segments.append(raw[last:])"
 LOSSY_TO2 = "    segments.append(raw[last:].lower())"
-
-# The refusal, before and after.  R1c reverts the second to the first and
-# changes NOTHING ELSE -- the finest unit the fix has.
-REFUSAL_PRE = '                if not ok and "SITE RECORD" not in d]'
-REFUSAL_POST = ('                if not ok '
-                'and not heading(d).endswith("SITE RECORD")]')
-
 
 def bend_lossy(src):
     """mg-ec07's B2: `partition` made LOSSY -- the segments lower-cased, so
@@ -467,6 +473,10 @@ def py_files():
 
 
 QUOTED_SPAN = re.compile(r"'[^']*'|`[^`]*`")
+# The same idea for PROSE: a sentence inside quotes is being discussed, not
+# asserted.  Double quotes are included here and excluded above, because the
+# construct R2a hunts for IS a double-quoted literal and this needle is not.
+PROSE_QUOTE = re.compile(r"'[^']*'|`[^`]*`|\"[^\"]*\"")
 
 
 def substring_hits(rel):
@@ -578,8 +588,15 @@ undispositioned and makes this section red.
         print(f"        -> {why if why else 'UNDISPOSITIONED'}")
         if not why:
             undeclared.append(rel)
+    # ⚠️ AN OCCURRENCE IS A CLAIM ONLY IF IT IS ASSERTED.  The same rule R2a
+    # uses for the construct: strip the line's QUOTED spans first -- here
+    # including double quotes, because this needle is prose and not a code
+    # literal -- and see whether the sentence survives.  A correction that
+    # quotes what it corrects must not read as a repetition of it, or the
+    # only way to pass the check is to delete the record of the defect.
     live_false = [(ln, s) for ln, s in said.get(LANDING_REL, [])
-                  if "SECTION, NOT THE FILE" not in s]
+                  if SENTENCE in PROSE_QUOTE.sub("", s).lower()
+                  and "SECTION, NOT THE FILE" not in s]
     n_said = sum(len(v) for v in said.values())
     record(not undeclared and (bool(FIXED) == (not live_false)),
            f"R2b the sentence '{SENTENCE}' occurs {n_said} time(s) across "
@@ -632,9 +649,15 @@ def matrix_lines(out):
         return []
     body = []
     for l in lines[i + 1:]:
-        if not l.strip():
+        # The table ends where the runner's own scoring row begins.  Blank
+        # lines are INSIDE it (the caption is two lines above the header),
+        # which is why this reads to the record line rather than to the first
+        # blank -- the first version stopped at the caption and reported a
+        # 0-row matrix against a runner that had printed twelve.
+        if l.strip().startswith("["):
             break
-        body.append(l.rstrip())
+        if l.strip():
+            body.append(l.rstrip())
     return body
 
 
@@ -658,10 +681,14 @@ then three cells bridged to disk against the real runner.
         for l in rows:
             print(l)
         print()
-        cells = [l for l in rows if l.strip().startswith(("K", "|"))]
-        fires = sum(l.count("FIRES") for l in rows)
-        na = sum(l.count("n/a") for l in rows)
-        silent = sum(l.count("SILENT") for l in rows)
+        # ⚠️ Counted over the CELL ROWS only.  Counting over the whole block
+        # includes the caption -- "Cells: FIRES / SILENT / n/a" -- and adds
+        # one to each of the three totals, which is a census reading its own
+        # legend.  The first version of this row did exactly that.
+        cells = [l for l in rows if re.match(r"\s*K\d\d ", l)]
+        fires = sum(l.count("FIRES") for l in cells)
+        na = sum(l.count("n/a") for l in cells)
+        silent = sum(l.count("SILENT") for l in cells)
         record(silent == 0,
                f"R3a the runner's own matrix is {len(cells)} KIND rows over "
                f"3 sites: {fires} cells FIRE, {na} are n/a with a derived "
@@ -721,6 +748,46 @@ then three cells bridged to disk against the real runner.
     record(ok1 and ok2 and ok3,
            f"R3 {sum([bool(ok1), bool(ok2), bool(ok3)])} of 3 restorations "
            f"are sha256-identical to the pre-probe file")
+
+    # ⚠️ R3g -- A CONTROL THIS REPAIR DISABLED, RE-PROVIDED (see R4g).  The
+    # audit's A5b bridges the in-memory figure-exchange fixture to disk: one
+    # exchange per site, exit 1, FIGURE ORDER refuted, SITE RECORD green.  It
+    # splices with `text.replace(site, new, 1)` and the STATE.md site is no
+    # longer a contiguous substring of its file, so it now raises instead of
+    # measuring.  Re-derived here through the artifact's own anchor table,
+    # because a repair that removes a control owes the measurement it removed.
+    print()
+    n = ok = 0
+    files0 = V.files_now()
+    for name, _r, _k in V.SITES:
+        raw = V.texts_from(files0)[name]
+        seg, figs = V.partition(raw)
+        pair = next(((i, j) for i in range(len(figs))
+                     for j in range(i + 1, len(figs)) if figs[i] != figs[j]),
+                    None)
+        if pair is None:
+            record(None, f"R3g {name}: no two figures of differing value")
+            continue
+        f2 = list(figs)
+        f2[pair[0]], f2[pair[1]] = f2[pair[1]], f2[pair[0]]
+        new_files = V.with_site(files0, name, V.rejoin(seg, f2))
+        rel = {v: v for v in (STATE, DELIV, HIST)}[
+            {"the STATE.md row": STATE, "§14": DELIV, "H8": HIST}[name]]
+        rc, out, rest = probe_on_disk(rel, lambda _t, nf=new_files, r=rel: nf[r])
+        fo = gate_row(out, name, "FIGURE ORDER")
+        sr = gate_row(out, name, "SITE RECORD")
+        n += 1
+        ok += rc == 1 and fo is False and sr is True and bool(rest)
+        record(rc == 1 and fo is False and sr is True,
+               f"R3g {name}: figures {figs[pair[0]]!r} and {figs[pair[1]]!r} "
+               f"exchanged ON DISK -- runner exit {rc} (predicted 1), FIGURE "
+               f"ORDER {'REFUTED' if fo is False else fo}, SITE RECORD "
+               f"{'green' if sr else sr}, restored {rest}")
+    record(ok == n,
+           f"R3g {ok} of {n} sites: a figure exchange on disk is caught by "
+           f"FIGURE ORDER with SITE RECORD green.  That is the audit's own "
+           f"A5b claim, re-measured after this repair stopped A5b from being "
+           f"able to make it -- mg-9207's C3 shape, on the artifact")
     return rc1
 
 
@@ -765,29 +832,61 @@ before the run.
     findings = [l.strip()[len("[FINDING  ] "):].split(" -- ")[0]
                 for l in out.split("\n") if l.strip().startswith("[FINDING")]
     ref = refuted_rows(out)
+    # ⚠️ WHICH SECTIONS ACTUALLY RAN.  A finding that is "no longer emitted"
+    # by a section that never executed is not evidence of anything, and the
+    # difference is invisible in a findings list.  Read from the audit's own
+    # section headings.
+    ran = [l.split(" -- ")[0].strip() for l in out.split("\n")
+           if re.match(r"^A\d[a-z]? -- ", l.strip())]
+    crashed = [l.strip() for l in out.split("\n")
+               if "Error" in l and ":" in l and not l.startswith(" ")]
     print(f"    exit code            : {r.returncode}")
+    print(f"    sections that ran    : {', '.join(ran) or '(none)'}")
     print(f"    findings emitted     : {', '.join(findings) or '(none)'}")
     print(f"    refuted rows         : {len(ref)}")
     for l in ref:
         print(f"      - {l[:150]}")
+    if crashed:
+        print(f"    ⚠️ it did not finish : {crashed[-1][:120]}")
     print()
+    record(None,
+           f"R4g ⚠️ THE DISTURBANCE THIS REPAIR CAUSES, FIRST, because "
+           f"everything else in this section is read against it: the audit "
+           f"{'STOPS EARLY' if crashed else 'runs to the end'} -- "
+           f"{crashed[-1][:90] if crashed else 'no error'}.  Its A5b splices "
+           f"a mutated site into its file with `text.replace(site, new, 1)`, "
+           f"which assumes A SITE IS A CONTIGUOUS SUBSTRING OF ITS FILE.  "
+           f"That is now false at 1 of 3 sites: the STATE.md site is a row "
+           f"and the header it is read under, and 22 ledger rows sit between "
+           f"them.  Sections after it do not run, so anything they would "
+           f"have said is ABSENT rather than answered -- and A5b's own claim "
+           f"is re-derived in R3g by an instrument that knows a site is an "
+           f"extent.  A5b crashing rather than reporting is mg-9207's J-3, "
+           f"one level up: a crash and a fired check are the same exit code")
     record(unchanged, "R4 the audit's source is sha256-identical before and "
                       "after: it is re-run, not adjusted")
     e1 = "EMITTED" if "E-1" in findings else "NOT emitted"
-    record(("E-1" in findings) != bool(FIXED),
+    a5_ran = any(s == "A5" for s in ran)
+    record(a5_ran and (("E-1" in findings) != bool(FIXED)),
            f"R4a E-1 -- 'the same kind of exchange is still silent at the "
-           f"STATE.md site' -- is {e1} in this state ({STATE_WORD}).  Its "
-           f"condition is X1 and X2 both exiting 0 with nothing refuted, and "
-           f"X1 no longer does")
+           f"STATE.md site' -- is {e1}, and A5, THE SECTION THAT EMITS IT, "
+           f"{'DID run' if a5_ran else 'did NOT run'} in this state "
+           f"({STATE_WORD}).  Its condition is X1 and X2 both exiting 0 with "
+           f"nothing refuted, and X1 no longer does.  Both halves are "
+           f"required: a finding absent from a section that never executed "
+           f"is not an answer")
     b2 = [l for l in out.split("\n") if "A7-B2 " in l]
     e5 = "still EMITTED" if "E-5" in findings else "NOT emitted"
-    b2line = b2[0].strip()[:120] if b2 else "(absent)"
+    b2line = b2[0].strip()[:120] if b2 else "(absent -- A7 did not run)"
+    a7_ran = any(s == "A7" for s in ran)
     record(None,
-           f"R4b E-5 is {e5}, AND THAT IS PREDICTED: its condition is "
-           f"`unintended`, a property of the ROW TEXTS -- rows whose "
-           f"explanations name other rows -- which this repair deliberately "
-           f"does not change.  The BEHAVIOURAL row is A7-B2, and it reads: "
-           f"{b2line}")
+           f"R4b E-5 is {e5} and A7, the section that emits it, "
+           f"{'ran' if a7_ran else 'DID NOT RUN'}.  ⚠️ SO THE AUDIT DOES NOT "
+           f"ANSWER E-5 IN THIS RUN, and its absence from the findings list "
+           f"is not evidence -- PREDICTIONS.md predicted it would still be "
+           f"emitted, from the row texts, and neither that prediction nor "
+           f"its opposite is tested here.  What answers E-5 is R1, which "
+           f"runs the blessing path directly: A7-B2's row reads {b2line}")
     a6 = [l for l in out.split("\n") if "A6 the sentence" in l]
     e2 = "still emitted" if "E-2" in findings else "not emitted"
     a6line = a6[0].strip()[:120] if a6 else "(absent)"

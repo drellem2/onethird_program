@@ -1,0 +1,79 @@
+mg-ff3e -- THE CENSUS IS POSITION-AWARE OVER THE WHOLE RECORD
+==============================================================================
+mg-8916 made the figure census a MULTISET.  mg-8aae exchanged two figures and
+the multiset did not move.  mg-8eca made it a SEQUENCE of figures.  mg-9207
+exchanged the two LABELS instead and the gate refuted NOTHING at 3 of 3 label
+sites, with mg-8aae's own reader-visible defect back on the page: H8's table
+saying the `STATE.md` row SHRANK across mg-a2bd.
+
+THE ASSIGNMENT SAYS DO NOT MAKE IT POSITION-AWARE FOR LABELS.  That relocates
+the defect a third time.  So the question this instrument is organised around
+is the SUBTRACTION question -- what GENERATES the instances -- and the answer
+is that the gate compares a PROJECTION of the section and each repair enlarged
+the projection BY ONE NAMED FIELD.  The complement was always everything else,
+and the next exchange moved into it.  The only projection with an empty kernel
+is the identity, so the repair is to compare the WHOLE RECORD.
+
+  4 mutable files read and pinned; 5 committed transcripts pinned frozen
+
+R1 -- THE LABEL HALF OF AN EXCHANGE, ON DISK, AGAINST THE REAL RUNNER
+---------------------------------------------------------------------
+An exchange has TWO HALVES: the figures, and the statements they hang on.
+mg-8eca closed the first and mg-9207 reopened the shape by moving the second.
+Every probe below is written TO DISK into the real document and scored by
+running `verify_landing.py` as a SUBPROCESS with no environment variable set.
+
+⚠️ SCORED AT GATE-ROW GRANULARITY.  `exit` is the runner's; the three columns
+after it are which GATE row said what.  They are not the same measurement, and
+mg-9207's J-3 is why: at its E2 the gate refuted 0 rows and the run still
+exited 1, out of an AssertionError in its own negative control.
+
+  [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
+
+    probe                                                          exit     RECORD     CENSUS      ORDER  gate  crash
+    E2  H8: the two mg-a2bd table LABELS exchanged (mg-9207's own,    1    REFUTED  CONFIRMED  CONFIRMED     1   True
+    E2b H8: the bbe83b5 table's two ROW LABELS exchanged (mg-9207'    1    REFUTED  CONFIRMED  CONFIRMED     1  False
+    E3  H8: the two historical COLUMN HEADERS exchanged (mg-9207's    1    REFUTED  CONFIRMED  CONFIRMED     1  False
+    E6  §14: the two CORRECTION ATTRIBUTIONS exchanged (a site mg-    1    REFUTED  CONFIRMED  CONFIRMED     1  False
+  [REFUTED  ] E7: the site text does not occur exactly once in STATE.md
+    E8  §14: a figure inside a MARKED QUOTATION altered               1    REFUTED  CONFIRMED  CONFIRMED     1  False
+    E9  H8: the three-column table's ALIGNMENT shifted, no figure     1    REFUTED  CONFIRMED  CONFIRMED     1  False
+  [REFUTED  ] R1b EVERY LABEL-SIDE EXCHANGE WRITTEN TO DISK MAKES THE REAL RUNNER RED: 6 of 7, at 3 of 3 sites, with no environment variable set and the gate never called in memory. mg-9207 observed the gate refuting NOTHING on the first three of these
+  [REFUTED  ] R1c and the row that caught it is the SITE RECORD row FOR THAT SITE: 6 of 7.  That is the half of the record that was not being compared -- not a designated reader breaking, which would be re-measuring the check mg-a318 already added
+  [REFUTED  ] R1d and that site's FIGURE CENSUS and FIGURE ORDER rows both stayed [CONFIRMED]: 6 of 7.  This is THE ARTIFACT'S OWN evidence that the mutation moved no figure -- asserted by the thing under test rather than by the prober, which is mg-9207's C4 convention pointed the other way
+  [REFUTED  ] R1e and 6 of 7 restorations return the runner to exit 0, each verified byte-identical by sha256.  The gate does not fire on everything, so the fires above are attributable to the exchange
+  [MEASURED ] R1f 1 of 7 runs exited by TRACEBACK rather than by the gate -- E2, and only E2, because mg-8eca's `transpose` asserts on a literal E2 rewrites.  That is mg-9207's J-3 UNCHANGED and out of this assignment's scope; the verdicts above survive it because they are read from the GATE ROWS, which print before the control runs.  An exit code is not a verdict unless you know which produced it
+
+R2 -- THE DEFECT REINSTATED, AT THREE DIFFERENT UNITS
+-----------------------------------------------------
+'The check fires' and 'the instrument fires' are the same sentence unless
+removing the check makes the same artifact go uncaught (mg-8eca D4).  And WHICH
+UNIT is removed is the whole question mg-9207's J-2 asks: a deletion test that
+can only remove a whole function cannot tell two clauses apart.
+
+D1 removes the SITE RECORD comparison as one unit.  D2 removes only the RECORD
+PARTITION row, which is a different check.  D3 removes NOTHING and instead
+makes the partition LOSSY -- a kernel put back -- which is the only way to find
+out whether the row that certifies 'nothing is left behind' would notice.
+
+
+    deletion                                        predicted  caught  exit   what it shows
+
+RESTORATION
+-----------
+  [CONFIRMED] every mutated file is restored and the restoration is CHECKED by sha256, not asserted: 4 of 4 byte-identical
+Traceback (most recent call last):
+  File "/Users/daniel/.pogo/polecats/6df0/code/hodge_leverage_repair_ff3e/repair_9207.py", line 821, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/daniel/.pogo/polecats/6df0/code/hodge_leverage_repair_ff3e/repair_9207.py", line 718, in main
+    r2(pristine, n)
+    ~~^^^^^^^^^^^^^
+  File "/Users/daniel/.pogo/polecats/6df0/code/hodge_leverage_repair_ff3e/repair_9207.py", line 448, in r2
+    write(path, new_whole)
+    ~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/daniel/.pogo/polecats/6df0/code/hodge_leverage_repair_ff3e/repair_9207.py", line 103, in write
+    fh.write(text)
+    ~~~~~~~~^^^^^^
+TypeError: write() argument must be str, not None
+exit=1

@@ -88,3 +88,25 @@ Written in advance, because a predictions file with no exposure is a formality:
 - **`R3g`'s 42.** The frame may need a joining newline that the record counts.
 - **`R4`'s row-by-row account.** I have read `audit_ec07.py` but not run it against a repaired
   tree; the rows that move may be a superset of the four above.
+
+---
+
+# The misses, kept as written
+
+Filled in after the runs. Nothing above was edited.
+
+| id | predicted | observed | what the miss was |
+|---|---|---|---|
+| `R3g` | the record grows by **42** characters (the header's length) | **43** — 37 866 → **37 909** | the two joining newlines. The prediction counted the header text and not the seam that makes it a site. Named in advance as the thing most likely to be wrong, and it was |
+| `R3b` | 24–33 of 36 cells applicable | **28 of 36**, 28 of 28 firing | inside the range, but only after two of the derivations were repaired: the first version reported **19** applicable, and 7 of the n/a cells were my own write-back refusing rather than a fact about the site. **A derivation that fails silently reads exactly like a site that has no such text** — which is the finding one level down, in this instrument |
+| `R4b` | E-5 **still emitted** by the re-run audit, from the row texts | **not emitted, and the section that emits it never ran** | the repair makes the audit stop early (`R4g`). The prediction is neither confirmed nor refuted, and the row says so rather than claiming the half that looks favourable |
+| `R4` (general) | four rows move | **the audit does not finish.** `A5b` splices a mutated site into its file with `text.replace(site, new, 1)` and the `STATE.md` site is no longer a contiguous substring of its file | I did not predict that a site could stop being a substring. It is the largest consequence of this repair, it is reported as `R4g`, and the measurement A5b was making is re-derived in `R3g` |
+| `FIXED` detection | — | the instrument reported **PRE against a repaired artifact** | it keyed on the ABSENCE of the old string, and the repaired file quotes the old string in the docstring that explains the repair. A test a *description* of the defect can trip is the defect's own shape. Now keyed on the refusal's own text |
+| `R3a` counts | — | 29 fires / 17 n/a / 1 silent against a matrix of 28 / 8 / 0 | the parser counted the table's own **legend** (`Cells: FIRES / SILENT / n/a`) as a row. A census that reads its own caption — same shape as mg-ec07's own B0, which counted the file doing the counting |
+
+**Six misses, four of them this instrument's own defects rather than wrong guesses.** Three of the
+four are the *same shape as the finding being repaired*: a check keyed on a substring of prose
+(`FIXED`), a census that includes its own legend (`R3a`), and a derivation whose silent failure is
+indistinguishable from a fact about the site (`R3b`). They were caught by rows in this file that
+compare a count against a second way of getting it — which is the only reason they are in this
+table rather than in the next audit.
