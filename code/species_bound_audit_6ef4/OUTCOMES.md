@@ -172,14 +172,20 @@ instrument that names the line in order to remove it, this one included.
 * **`A2 TOTAL BAD` exists as 10 commit objects and 5 distinct texts** — every one of the five has a
   rebase twin. mg-5040 reported "two commit messages". Neither an object count nor a text count is
   wrong; the sentence does not say which it is, and in a rebased history they are not the same
-  number. **44 file occurrences** exist besides.
+  number. **43 file occurrences** exist besides. (Those are the figures **at the revision this
+  section grades**, `3bf0cd2`. The post-commit re-run is in the second commit of this ticket and
+  reads 11 / 6 / 44, because **this audit's own commit message states a figure and joins the
+  population it counts** — F3 one level out, in the file about F3, which is mg-5040's kept defect 7
+  happening to its auditor.)
 * **THE SOURCE.** Exactly **two** artifacts in this repository are transcripts of a run of
   `a2_crosssection.py` — identified by markers lifted from that script's own source, at 67 and 59
   markers against 5, 4, 3, 3, 3 for everything that merely quotes it. They say **2** and **1**.
   `code/species_extent_audit_6cb9/out_a2_crosssection.txt` says **2** and was committed **first**;
   `code/species_sites_821e/out_a2_6cb9_after.txt` says **1** and is the one every commit message
   copied. **53 copies rest on 2 derivations, and the derivations disagree.** A contradicting
-  measurement was in the tree the whole time and nothing in the arc compared them.
+  measurement was in the tree the whole time and nothing in the arc compared them. The threshold is
+  argued with rather than trusted: the marker counts are printed, and the two populations are 67 and
+  59 against 5, 4, 3, 3, 3.
 * **3 committed files at HEAD still state the old figure bare**, including
   `code/species_sites_821e/out_a2_6cb9_after.txt:119` — the source itself.
 * **3 committed census figures at HEAD name no revision at all.** mg-5040's `MEASURED AT <rev>`
