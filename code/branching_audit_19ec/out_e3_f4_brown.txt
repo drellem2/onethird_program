@@ -1,0 +1,82 @@
+==============================================================================
+E3  mg-19ec: F4's replacement -- Brown section 4.3, re-read and
+    PINNED, and the one inference in the sentence tested.
+==============================================================================
+
+  URL                 : https://arxiv.org/pdf/math/0006145
+  bytes               : 532339
+  SHA-256             : 8e3ff96d7a49d60d02ac21ddd59172208849014c328547a533c6cda79a176299
+  (mg-dffa's w3_brown.py records neither, so a later reader cannot
+   tell whether they read the same bytes.  This is the pin.)
+
+  characters extracted: 123453
+
+  '4.3. Distributive lattices' occurs exactly once           ok (1)
+  '4.4. The kids walk' occurs exactly once                   ok (1)
+  4.3 precedes 4.4                                           ok (23630 < 25864)
+  section 4.3 occupies characters 23630 .. 25864 (2234 characters)
+  no other 4.x heading lies between 4.3 and 4.4              ok (next 4.x heading at 25864)
+
+-- E3a  the location
+  Brown's example sentence occurs exactly once in the paper  ok (1)
+    ... and strictly inside section 4.3                      ok (at 24412)
+  its maximal chains are the lattice paths, in the same span ok
+  Brown counts the chains 0 < x < 1 at (p+1)(q+1) - 2        ok
+  Brown prints NO size for the lattice                       ok
+
+-- E3b  'introduces exactly one example' -- what is inside the hedge
+  mg-dffa's proxy reproduces: 1 occurrence of 'example' in 4.3 ok (1)
+
+  ENUMERATED: every OTHER object-introducing construction in the
+  span, which a word count would not see.
+      Figure         9
+      consider       1
+  every Figure reference in section 4.3: ['Figure1', 'Figure3', 'Figure3\\(a\\)', 'Figure3\\(b\\)', 'Figure4', 'Figure5']
+  every 'consider' in 4.3 is inside Brown's one example sentence ok (1 'consider')
+  every lattice section 4.3 names explicitly: ['L=f0;1;2g\x02f0;1;2gintotheBooleanlat']
+  the only lattice 4.3 names explicitly is the product of two chains, at p=q=2 ok (1)
+
+  A MISS OF MINE, KEPT AS WRITTEN.  This probe first asked whether
+  every Figure reference in 4.3 pointed at the same figure NUMBER.
+  It does not -- Figures 1, 3, 4 and 5 are all cited -- and the
+  check fired.  It was the wrong predicate: reading the span shows
+  Figure 3 is the p x q grid, Figure 4 is a step of the walk ON
+  that grid, Figure 5 is that same grid at p=q=2 embedded in a
+  Boolean lattice, and Figure 1 is a back-reference to Section
+  4.2.  Four views of ONE object.  The predicate was replaced by
+  the lattice-naming one above, which is a reading; the miss is
+  recorded rather than deleted.
+
+  READING E3b.  The word count is a PROXY for the sentence the
+  document writes.  Here the proxy is corroborated by a reading:
+  the section's only `consider` sits inside the one example
+  sentence, and the only lattice the section names explicitly is
+  that same product of two chains.  So 'introduces exactly one
+  example' STANDS -- but it stands on this enumeration, not on
+  the word count, and mg-dffa's account states only the word
+  count as its evidence.
+
+-- E3c  'all located by position, strictly between the two headings'
+      section 4.3 is titled 'Distributive lattices'  at  23630  NOT strictly between (IS the first heading)
+      the one example                                at  24412  strictly between
+      its maximal chains are the lattice paths       at  24556  strictly between
+      'The kids walk' is section 4.4                 at  25864  NOT strictly between (IS the second heading)
+  2 of the 4 things the sentence lists are the HEADINGS themselves, not between them ok
+
+  READING E3c.  The located facts are all correct and the method
+  is what it says -- position, not keyword.  'All located by
+  position, strictly between the two section headings' is one
+  clause covering four items, two of which ARE the headings.  A
+  reader checking the sentence literally finds two misses; a
+  reader checking the claim finds it discharged.  Recorded as
+  imprecision, not as a defect.
+
+  VERDICT E3.  Premise (a) IS re-affirmed outside the strike, and
+  it is re-affirmed by reading rather than by hedging -- which is
+  what mg-5800 asked for and the harder of the two options it
+  offered.  The reading reproduces on a sixth extractor, from
+  bytes now pinned by digest.
+
+==============================================================================
+SUMMARY e3_f4_brown: findings 0; sha256 8e3ff96d7a49d60d02ac21ddd59172208849014c328547a533c6cda79a176299
+==============================================================================

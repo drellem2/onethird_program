@@ -1,0 +1,139 @@
+==============================================================================
+E5  mg-19ec: is FOUR the population?  Two predicates, both named.
+==============================================================================
+
+  THE UNIVERSE, NAMED
+    document              : OneThird-Branching-Graphs-Where-This-Lives.md
+    claim sites parsed    : 156
+    LIVE sites            : 98
+    LIVE sentences        : 316
+    mg-dffa was handed 4 and landed 4.
+
+==============================================================================
+  POP-1  COUNT CLAIMS  (F2a's and F2b's exact shape)
+==============================================================================
+    population : 19 live sentences state a count 'N of M'
+    unbounded  : 11 name no bound on the family they count within
+
+  [01] line 161  cell  ≤ 3`:** it always lands in `F(P ⊔ Q)` (0 bad), is always injective (64/64), is always a semigroup homomorphism (0 bad products) — and is **unital
+                        in 0 of 64 cases**, because it sends `(1_P, 1_Q)` to the two-block move
+
+  [02] line 175  para  At the level of finite **intervals** a contact of the same **kind** extends: **28 of the 33** finite Young–Fibonacci intervals are distributive, 
+                       so each is `J(P)` for some `P`, item 2.
+
+  [03] line 181  para  The Young–Fibonacci sentence is **Birkhoff plus a distributivity count**: every finite distributive lattice is `J` of its join-irreducibles, so "
+                       28 of the 33 are `J(P)`" says precisely "28 of the 33 are distributive", and **names no class of `P`**.
+
+  [04] line 181  para  On the Young side the same measurement returns **30 of 30** intervals distributive and **0** of the resulting `P` outside the skew class.)*
+
+  [05] line 195  para  The identity fails at `1̂` for elementary reasons and this is not repairable by truncation (T3: 0 of 405; with the top rank exempted, 1 of 405, t
+                       he one-element poset).
+
+  [06] line 236  para  **No tower under §3.1's definition, and an OPEN QUESTION under §3.6's.** §1, rows 1–2: Bergeron–Li's axiom (2) as stated in **§3.1, *"Tower of Al
+                       gebras (Preserving unities)"***, fails for the natural map — measured, on unitality, 0 of 64 — and the `ℕ`-grading it presupposes forces disjoint
+                        powers `P_n = P_1^{⊔n}`.
+
+  [07] line 300  cell  axiom (2) of **§3.1** *("Preserving unities")* quoted verbatim and tested: concatenation is injective and multiplicative but **not unital**, 0 of
+                        64 (T7).
+
+  [08] line 301  cell  finiteness (T3, 0 of 405) and Stanley's uniqueness theorem.
+
+  [09] line 307  cell  Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, on 28 of 33 intervals; what keeps 
+                       it ADJACENT is that it is a different monoid, which is the reason above and not the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: it 
+                       is not the SAME contact.
+
+  [10] line 414  cell  At interval level, **28 of 33** Young–Fibonacci intervals are distributive and each is `J(P)` for an explicitly constructed `P`, **0 bad**
+
+  [11] line 483  para  * **X6 — B8's five present-word controls could not have caught B8's one documented failure mode.** The extractor drops `fi`/`ff` ligatures (`fini
+                       te` → `nite`, 57 times); 2 of the 12 absent keywords bear a ligature and 0 of the 5 controls does, so a genuine *"differential"* in Brown would h
+                       ave scored 0 with every control green.
+
+==============================================================================
+  POP-2  EMPIRICAL UNIVERSALS, unattributed
+==============================================================================
+    population : 19 live sentences
+    unbounded  : 10
+
+  [01] line 38   para  Every relationship is reduced to **instance / special case / generalisation / adjacent / no contact**, with a reason, and every identification is
+                        tested as an **equality** built from the published definitions rather than asserted as a resemblance.
+
+  [02] line 165  cell  fails for **every** finite `J(P)`: `U(1̂) = 0` while `UD(1̂) ∋ 1̂`.
+
+  [03] line 166  cell  of the two *known* 1-differential lattices, only Young's is distributive.
+
+  [04] line 166  cell  **at the level of WHOLE lattices**: Young's is the only *distributive* 1-differential lattice, and every interval `[∅, λ]` of it is distributive.
+
+  [05] line 181  para  **It is a contact of the same kind and it is not the same contact.** The Young headline is a **classification** — the intervals of Young's lattic
+                       e are `J(P)` for `P` **exactly** the skew cell posets, a named closed class, which is the whole content of §0 consequence 1.
+
+  [06] line 300  cell  **ADJACENT — §3.1's axiom (2) fails on unitality; §3.6 weakens exactly that clause and was not evaluated**
+
+  [07] line 353  para  **Attack §2.6.** The chain *descent algebras → `NSym` → Grothendieck group of the `0`-Hecke tower* is three citations deep and **I read none of t
+                       he three in the original** — Bidigare's thesis, GKLLRT, Krob–Thibon.
+
+  [08] line 413  cell  **as whole lattices**: every interval `[∅, λ]` of Young's lattice is distributive and the Young–Fibonacci lattice is not, and Young's is the only
+                        *distributive* 1-differential lattice
+
+  [09] line 413  cell  30 Young intervals, 0 non-distributive; 33 Young–Fibonacci intervals, 5 non-distributive, witness `w = 221` — all reproduced by mg-6ad0 and by mg
+                       -41aa.
+
+  [10] line 483  para  * **X5 — ledger rows B6 and B7 are booked MEASURED with sample sizes that cannot do any work.** Both answers are forced for every poset of every 
+                       size: `F(P)` is a band, so an idempotent bijection of a finite set is the identity (B6); and concatenation sends `(1_P, 1_Q)` to a two-block move
+                       , which is `1_{P⊔Q}` only if a block is empty (B7).
+
+==============================================================================
+  POP-3  THE 33 YOUNG-FIBONACCI INTERVALS -- every site, and
+         whether it carries the rank bound.  This is the sharpest
+         form of the question: F2 was about THIS figure.
+==============================================================================
+    population : 8 live sentences state the figure 33 about
+                 Young-Fibonacci intervals
+    bounded    : 4 carry `rank(w) <= 6` in the same sentence
+    unbounded  : 4 do not
+
+  <01> line 166  cell  BOUNDED   **5 of the 33 intervals `[∅̂, w]`, `rank(w) ≤ 6`, of the Young–Fibonacci lattice are not**, smallest witness `w = 221`
+
+  <02> line 166  cell  BOUNDED   At the level where the contact actually lives — finite intervals — **28 of the 33** Young–Fibonacci intervals to rank 6 
+                                     **are** distributive (mg-41aa, landing mg-6ad0's X4; §2 item 2)
+
+  <03> line 175  para  UNBOUNDED At the level of finite **intervals** a contact of the same **kind** extends: **28 of the 33** finite Young–Fibonacci int
+                                     ervals are distributive, so each is `J(P)` for some `P`, item 2.
+
+  <04> line 181  para  UNBOUNDED The Young–Fibonacci sentence is **Birkhoff plus a distributivity count**: every finite distributive lattice is `J` of it
+                                     s join-irreducibles, so "28 of the 33 are `J(P)`" says precisely "28 of the 33 are distributive", and **names no class o
+                                     f `P`**.
+
+  <05> line 202  para  BOUNDED   T8 measures the illustrative case: Young–Fibonacci, the other known 1-differential lattice, is not distributive as a who
+                                     le (5 of its 33 intervals to rank 6 fail, smallest witness `w = 221`).
+
+  <06> line 307  cell  BOUNDED   That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Brown §4.3 
+                                     consumes them and each is a `J(P)`.
+
+  <07> line 413  cell  UNBOUNDED 30 Young intervals, 0 non-distributive; 33 Young–Fibonacci intervals, 5 non-distributive, witness `w = 221` — all reprod
+                                     uced by mg-6ad0 and by mg-41aa.
+
+  <08> line 414  cell  UNBOUNDED At interval level, **28 of 33** Young–Fibonacci intervals are distributive and each is `J(P)` for an explicitly construc
+                                     ted `P`, **0 bad**
+
+  mg-dffa edited 2 of these sites.  It changed the READING at both
+  -- 'the same contact' became 'a contact of the same kind' -- and
+  the BOUND at neither.
+
+==============================================================================
+  THE TWO POPULATIONS OVERLAP AT 0 SITE(S); the union is 21.
+==============================================================================
+
+  WHAT THIS IS AND IS NOT.  This is a CENSUS, not a verdict.  Both
+  predicates over-collect: an unbounded universal can be analytic
+  rather than measured, and the machine cannot tell.  The
+  deliverable adjudicates every site above by hand and says which
+  are instances of mg-5800's defect and which are not.  What the
+  census settles on its own is the narrower question actually
+  asked: the sites carrying this shape are not four, and two of
+  them are sentences mg-dffa itself wrote.
+
+==============================================================================
+SUMMARY e5_population: universe 316 live sentences in 98 live sites
+SUMMARY e5_population: POP-1 19 counts, 11 unbounded; POP-2 19 universals, 10 unbounded; union 21
+SUMMARY e5_population: mg-dffa landed 4
+==============================================================================

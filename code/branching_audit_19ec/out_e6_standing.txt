@@ -1,0 +1,80 @@
+==============================================================================
+E6  mg-19ec: the Birkhoff-free converse, re-measured HERE.
+==============================================================================
+
+-- E6a  the poset census
+     n = 1 :    1 classes
+     n = 2 :    2 classes
+     n = 3 :    5 classes
+     n = 4 :   16 classes
+     n = 5 :   63 classes
+     n = 6 :  318 classes
+  poset classes on 1..6 elements: 405                        ok (405)
+    the per-rank census is 1, 2, 5, 16, 63, 318              ok
+  skew cell poset classes on 1..6 cells: 107                 ok (107)
+    the per-rank census is 1, 2, 5, 11, 26, 62               ok
+
+-- E6b  the two heights, MEASURED, so the search bound is not an
+        appeal to Birkhoff
+  height(J(P)) = |P| on all 405                              ok (0 bad)
+  height([mu,lam]) = |lam/mu| on every skew shape to 6 cells ok (0 bad)
+     so a lattice isomorphic to J(P) must come from a skew shape
+     with exactly |P| cells, and that restriction is now a
+     measurement on this instrument.
+
+-- E6c  THE CONVERSE OF X1 AT n <= 6, WITHOUT BIRKHOFF
+     n   classes   J(P) IS a Young interval   skew cell posets
+     1         1                          1                  1
+     2         2                          2                  2
+     3         5                          5                  5
+     4        16                         11                 11
+     5        63                         26                 26
+     6       318                         62                 62
+  J(P) is a Young interval for exactly 107 of the 405        ok (107)
+  every skew cell poset MATCHES an interval (no direction lost) ok (0 skew classes with no interval)
+  no NON-skew poset matches any interval (the converse itself) ok (0 counterexamples)
+  0 counterexamples in either direction, at n <= 6           ok
+
+     HOW THIS IS BIRKHOFF-FREE.  The right-hand side is built from
+     PARTITIONS under containment; the left from ORDER IDEALS of P;
+     they are compared by an isomorphism search on the strict order
+     relation.  `join_irreducibles` is never called on this path --
+     checked below -- so no step of the measurement is Birkhoff's
+     theorem in disguise.
+  kern19ec's `iso` CALLS no join-irreducible routine (docstrings stripped) ok
+  this probe never calls join_irreducibles                   ok
+
+-- E6d  the route is still Birkhoff-free in the instrument that
+        owns it (mg-5800's A2)
+  a2_exactly.py exists and is unchanged by the repair commit ok
+    ... and no line of its CODE forms a join-irreducible (docstrings and comments stripped) ok ([])
+    ... and its committed output still says 'without Birkhoff' ok
+  mg-5800's S1 still reads '107 of 405 ... without Birkhoff' ok
+  mg-5800's audit document is untouched by the repair commit ok
+
+-- E6e  which ledger rows the repair actually touched, read out of
+        git and not out of the commit message
+     rows appearing on a changed line: ['10', 'B1', 'B5']
+  the ledger rows changed are exactly B1 and B5              ok (['B1', 'B5'])
+  B2, whose 'exactly' carries the converse, is NOT among them ok
+  the only §3 row changed is row 10                          ok (['10'])
+
+  VERDICT E6.  THE BIRKHOFF-FREE ROUTE SURVIVES.  It is not merely
+  undisturbed: it is re-measured here, on an instrument that shares
+  no code with any of the four before it, and it comes out at the
+  same 107 of 405 with 0 counterexamples in either direction.
+
+  WHAT IS NOT RE-DERIVED HERE, SAID RATHER THAN LEFT TO BE FOUND.
+  The skew class counts at n = 7 (149) and n = 8 (360) are NOT
+  reproduced on this instrument.  `canon` here is the plain n!
+  minimum and 8! per poset does not finish; the alternative is a
+  refined canonical form, which is exactly the shortcut mg-5800
+  recorded a control firing on -- its cheaper canon reproduced
+  A000112 to 16 999 while it was live.  So the limit is stated
+  instead of being bought with a weaker definition.  360 remains
+  derived by branching_repair_41aa alone, and F3's control is what
+  ties it to the published row.
+
+==============================================================================
+SUMMARY e6_standing: 405 classes, 107 matched, 0 counterexamples either way; failures 0
+==============================================================================

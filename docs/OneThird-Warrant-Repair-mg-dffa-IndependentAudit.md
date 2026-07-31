@@ -437,36 +437,54 @@ output. It is measured again** (`out_e6_standing.txt`):
 
 | | predicted | got |
 |---|---|---|
-| `code/branching_warrant_dffa/run_all.sh` | 0 | **0** — self-test 42/0, w1–w5 0 failures |
+| `code/branching_warrant_dffa/run_all.sh` | 0 | **0** |
 | `code/branching_repair_41aa/check_doc.py` | 0 | **0** — 31 checks, 0 failed |
-| `code/branching_audit_5800/run_all.sh` | 0 | **0** — self-test 38/0, a7_doc 27 checks 0 failed |
-| `code/branching_repair_41aa/run_all.sh` | 0 | see `out_upstream.txt` |
-| `code/branching_audit_6ad0/run_all.sh` | 0 | see `out_upstream.txt` |
-| `code/branching_af28/run_all.sh` | 0 | see `out_upstream.txt` |
-| `git status` over those directories afterwards | empty | see `out_upstream.txt` |
+| `code/branching_audit_5800/run_all.sh` | 0 | **0** |
+| `code/branching_repair_41aa/run_all.sh` | 0 | **0** |
+| `code/branching_audit_6ad0/run_all.sh` | 0 | **0** |
+| `code/branching_af28/run_all.sh` | 0 | **0** |
+| `git status` over those five directories after restore | empty | **CLEAN** |
 
-**0 BROKEN holds.** Every suite passes and every *figure* in every regenerated output is
-identical; the differences are elapsed times and, in mg-5800's `out_a7_doc.txt`, the line
-numbers of quotations that moved when mg-dffa's edits lengthened the document. Classified
-mechanically in `out_upstream.txt` by normalising `(12.3s)` and `line NNN` and re-comparing;
-the five directories are then restored with `git checkout --`, so **this audit's branch carries
-no regenerated output of a directory it does not own**.
+**6 of 6 exit codes matched their prediction. 0 BROKEN holds.**
 
-**One thing worth recording from that re-run.** mg-5800's `a7_doc.py` prints a beyond-brief
-diff, and two of its lines now read differently:
+**Every regenerated output was classified, not eyeballed** — normalised by replacing `(12.3s)`
+and `line NNN` with placeholders, then re-compared. Two files came back **TIMINGS / LINE
+NUMBERS ONLY**. **Three came back as content, and all three are accounted for:**
 
-```
--  B2  §2 heading note: 'the index-set contact DOES extend' to YF present:True
-+  B2  §2 heading note: 'the index-set contact DOES extend' to YF present:False
--  B3  §3 row 10: 'the SAME index-set contact ... on 28 of 33'    present:True
-+  B3  §3 row 10: 'the SAME index-set contact ... on 28 of 33'    present:False
-```
+* **`out_a7_doc.txt` — the F2 repair landing, seen from outside.** mg-5800's beyond-brief diff
+  now reads:
 
-**That flip is the F2 repair landing, seen from the outside** — the two wide phrasings mg-5800
-quoted are gone from the document. Those lines are informational rather than assertions
-(`a7_doc.py:161` prints, it does not `check()`), so the suite still reports 27 checks 0 failed
-and nothing goes red. Noted because a reader diffing that file could otherwise read a flip from
-`True` to `False` as a regression.
+  ```
+  -  B2  §2 heading note: 'the index-set contact DOES extend' to YF present:True
+  +  B2  §2 heading note: 'the index-set contact DOES extend' to YF present:False
+  -  B3  §3 row 10: 'the SAME index-set contact ... on 28 of 33'    present:True
+  +  B3  §3 row 10: 'the SAME index-set contact ... on 28 of 33'    present:False
+  ```
+
+  The two wide phrasings mg-5800 quoted are gone from the document, which is exactly what F2
+  asked for. Those lines are **informational, not assertions** — `a7_doc.py:161` prints, it
+  does not `check()` — so the suite still reports 27 checks 0 failed. Recorded because a
+  reader diffing that file could read `True → False` as a regression when it is the repair.
+
+* **`out_r1b_skew8.txt` — a timing my own normaliser did not recognise.**
+  `wall clock: 173 s` → `wall clock: 438 s`, on a machine running three agents at once. No
+  figure moved: **16 999 posets on 8 elements, and `SKEW8 360`, both identical.** My
+  normaliser handles `(12.3s)` and missed `wall clock: NNN s`, so a timing was filed as
+  content. **The classifier is deliberately left as it ran** rather than tuned after the
+  fact — a normaliser widened until nothing shows is worth nothing.
+
+* **`out_a6_grep.txt` — an artefact of running the suite, and a small real observation.**
+  One extra line appeared: `Binary file ../branching_repair_41aa/__pycache__/
+  r3_rescope.cpython-314.pyc matches`. mg-5800's A6 quotation grep is **not restricted to
+  source files**, so its output depends on whether Python has left a bytecode cache in a
+  sibling directory — which running the suite creates. Nothing about the quotations moved;
+  the grep's *population* is just wider than its purpose. Not a defect of this repair, and
+  not landed: it is filed here so the next reader of that file knows why the line comes and
+  goes.
+
+**The five directories were then restored with `git checkout --`, and `git status` over them
+is CLEAN** — so this audit's branch carries no regenerated output of a directory it does not
+own.
 
 ---
 
