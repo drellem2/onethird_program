@@ -239,13 +239,7 @@ remaining live false claims, fix the population* — so the §2.3 lineage is clo
 - **mg-3f3b** — **`n/a` is where a matrix hides**; construct is **1 touched of 6**; population published **429** against **448**
 - **mg-3946** — audit of the CI historical-SHA repair
 
-### Queued
 
-- **mg-e35b** (available) — mg-fcf1's five — three rows that cannot fail
-- **mg-a74f** (available) — mg-16eb's — the visibility instrument measures bytes in the HTML
-- **mg-d075** (available) — mg-19ec's — **8 sites state the figure, 4 unbounded**, incl. a clause faulting another for naming no class while itself unbounded
-- **mg-69b4** (available) — scoping — the busiest repo has no merge gate
-- **mg-344a** (available) — Daniel workspace, `assignee=human`
 
 **Practice change this window, not a ticket:** four audit verdicts this arc reached nobody, the last two on
 **consecutive merges**. Cause is a timing bug in my briefs — **the merging worker is reaped ~3s after its
@@ -255,10 +249,16 @@ verdict BEFORE submitting to the refinery.** *A superseded verdict is cheap, a l
 
 ## Next (gated / queued)
 
+- **mg-e35b** (available) — mg-fcf1's five — three rows that cannot fail
+- **mg-a74f** (available) — mg-16eb's — the visibility instrument measures bytes in the HTML
+- **mg-d075** (available) — mg-19ec's — **8 sites state the figure, 4 unbounded**, incl. a clause faulting another for naming no class while itself unbounded
+- **mg-69b4** (available) — scoping — the busiest repo has no merge gate
+- **mg-344a** (available) — Daniel workspace, `assignee=human`
+
+
 - *(mg-3934 — **resolved 07:13, see "Closed this window" above.** The 21-hour red is over and the
   mg-75f0 demo has executed. Kept only as a pointer so this section does not read as if it were still
   open; its audit **mg-3946** is claimed.)*
-- **mg-344a** — Daniel workspace, `assignee=human`.
 - **Blocked on the rebuild, not forgotten:** the template-effect measurement. The nightly redeploy failed
   (exit 7, drain stalled), so **mg-2375 and mg-ce5e are merged and not installed, and the treated population is
   empty.** Next window is 03:00Z tomorrow.
