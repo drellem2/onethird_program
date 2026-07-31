@@ -27,6 +27,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DOC = os.path.join(HERE, "..", "..", "docs",
                    "OneThird-Branching-Graphs-Where-This-Lives.md")
 YOUNG = os.path.join(HERE, "..", "branching_af28", "out_young.txt")
+SKEW8 = os.path.join(HERE, "out_r1b_skew8.txt")
 
 # Matched case-insensitively, so a prose "Re-scoped by mg-41aa" counts the same
 # as a heading "RE-SCOPED".
@@ -143,11 +144,41 @@ def main():
     check("out_young.txt prints the witness",
           "the 2-element ANTICHAIN is not any D_lambda: confirmed" in y,
           "(witness missing or refuted)")
+    rows = {}
     for n, straight, skew in ((6, 6, 62), (7, 8, 149), (8, 12, 360)):
         row = re.search(r"^\s*%d\s+(\d+)\s+(\d+)\*?\s+\d+\s" % n, y, re.M)
         got = (int(row.group(1)), int(row.group(2))) if row else None
+        rows[n] = got
         check("T2 row n=%d prints straight %d and skew %d" % (n, straight, skew),
               got == (straight, skew), "(got %r)" % (got,))
+
+    # mg-dffa, landing mg-5800's F3.  Every check above certifies
+    # out_young.txt's n = 8 row against a constant typed on the line above it,
+    # and out_young.txt's own 360 comes from `cited_skew` typed into
+    # code/branching_af28/t_young.py.  So nothing compared the COMPUTED 360
+    # with the PUBLISHED one: if r1b_skew8.py returned 361 tomorrow, every
+    # check above would still pass.  The number is right; the control could not
+    # fire on the thing it appeared to certify.
+    #
+    # This closes the chain at the one place it was open.  It reads the
+    # machine-readable line r1b_skew8.py emits for exactly this purpose -- the
+    # same line run_all.sh feeds to r1_exactly.py -- and compares it with the
+    # row.  A missing or unreadable file is a FAILURE, not a skip: a control
+    # that disappears when its input does is the defect again.
+    try:
+        s8 = open(SKEW8, encoding="utf-8").read()
+    except OSError as exc:
+        s8 = ""
+        print("  (out_r1b_skew8.txt unreadable: %s)" % exc, file=OUT)
+    hits = re.findall(r"^SKEW8 (\d+)\s*$", s8, re.M)
+    check("out_r1b_skew8.txt carries exactly one SKEW8 line",
+          len(hits) == 1, "(%d found)" % len(hits))
+    computed = int(hits[0]) if len(hits) == 1 else None
+    check("the COMPUTED n=8 skew count equals the one out_young.txt PUBLISHES",
+          computed is not None and rows.get(8) is not None
+          and computed == rows[8][1],
+          "(computed %r, published %r)"
+          % (computed, rows[8][1] if rows.get(8) else None))
     print(file=OUT)
 
     print("=" * 78, file=OUT)

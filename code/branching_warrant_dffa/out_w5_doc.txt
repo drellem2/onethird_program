@@ -1,0 +1,58 @@
+==============================================================================
+W5  docs/OneThird-Branching-Graphs-Where-This-Lives.md
+    46866 bytes, 508 lines, 78 blocks
+==============================================================================
+
+  -- PRESENT: the four narrowings landed ------------------------
+  1   F1/B1: the cell now says lattice isomorphism                 PASS
+  2   F1/B1: and names af28's own test at its own width            PASS
+  3   F1/B5: the cell scopes 'not re-derived' to af28              PASS
+  4   F1/B5: and records the two derivations that exist            PASS
+  5   F1/B5: attributing rather than claiming them                 PASS
+  6   F2: section 2's note says same KIND                          PASS
+  7   F2: and says it is not the same contact                      PASS
+  8   F2: with the measured divergence                             PASS
+  9   F2: row 10 narrowed the same way                             PASS
+  10  F4: premise (a) re-affirmed outside the strike               PASS
+  11  F4: with Brown's own sentence quoted live                    PASS
+  12  F4: and the scope of the reading stated                      PASS
+  13  the mg-dffa banner is present                                PASS
+  14  the evidence directory is cited                              PASS
+  15  the account document is cited                                PASS
+
+  -- GONE: the wide phrasings are not in force anywhere ---------
+  16  F1/B1: the old 'order isomorphism' scope line                PASS
+  17  F1/B5: the unscoped 'not re-derived here'                    PASS
+  18  F2: 'the index-set contact does extend'                      PASS
+  19  F2: row 10's 'same index-set contact'                        PASS
+
+  -- INTACT: mg-41aa's strikes, undisturbed ---------------------
+  20  X1's false "exactly"                                         PASS
+  21  X2's false grid sentence                                     PASS
+  22  X4's over-wide reading                                       PASS
+  23  X3's withdrawn bare negative                                 PASS
+  24  X4's withdrawn row-10 reason                                 PASS
+  25  X1's old bare-fraction sentence                              PASS
+
+  -- THE ACCOUNT DOCUMENT ---------------------------------------
+  26  docs/OneThird-Warrant-Repair-mg-dffa.md exists               PASS
+  27  it gives F1..F4 a section each                               PASS
+  28  F1 carries 'AS WRITTEN'                                      PASS
+  29  F1 carries 'THE EVIDENCE THAT EXISTS'                        PASS
+  30  F1 carries 'AS NARROWED'                                     PASS
+  31  F2 carries 'AS WRITTEN'                                      PASS
+  32  F2 carries 'THE EVIDENCE THAT EXISTS'                        PASS
+  33  F2 carries 'AS NARROWED'                                     PASS
+  34  F3 carries 'AS WRITTEN'                                      PASS
+  35  F3 carries 'THE EVIDENCE THAT EXISTS'                        PASS
+  36  F3 carries 'AS NARROWED'                                     PASS
+  37  F4 carries 'AS WRITTEN'                                      PASS
+  38  F4 carries 'THE EVIDENCE THAT EXISTS'                        PASS
+  39  F4 carries 'AS NARROWED'                                     PASS
+  40  it states what it located rather than measured               PASS
+  41  it states what it could NOT establish                        PASS
+
+==============================================================================
+W5: 41 checks, 0 failed
+==============================================================================
+SUMMARY w5_doc: checks 41, failures 0

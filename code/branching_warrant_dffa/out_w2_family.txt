@@ -1,0 +1,83 @@
+==============================================================================
+W2a  The Young-Fibonacci lattice to rank 6, and the control that
+     the Fibonacci rank sizes are NOT.
+==============================================================================
+
+  rank        0    1    2    3    4    5    6
+  elements    1    1    2    3    5    8   13
+  total elements of rank <= 6: 33
+
+  down-covers invert up-covers on every word                 ok (0)
+  DU - UD = I on every word of rank < 6                      ok (0)
+
+==============================================================================
+W2b  The 33 intervals [0, w], rank(w) <= 6: which are distributive?
+==============================================================================
+
+  every interval is a lattice                                ok (0 not)
+  intervals: 33    distributive: 28    NOT distributive: 5
+  the non-distributive ones, smallest first:
+      rank 5   w = 221
+      rank 6   w = 1221
+      rank 6   w = 2121
+      rank 6   w = 2211
+      rank 6   w = 222
+  smallest non-distributive witness is w = 221               ok
+
+==============================================================================
+W2c  The index sets.  P = join-irreducibles of each distributive
+     interval; how many distinct P, and are they skew cell posets?
+==============================================================================
+
+  |J(P)| = |interval| on every distributive interval         ok (0)
+  distributive intervals: 28      distinct P up to isomorphism: 17
+
+  skew cell poset classes, by number of cells:
+      k           0     1     2     3     4     5     6
+      classes     1     1     2     5    11    26    62
+
+   |P|  distinct P   of them NOT a skew cell poset   witnesses (w)
+     0            1                              0   
+     1            1                              0   
+     2            1                              0   
+     3            2                              0   
+     4            3                              0   
+     5            4                              2   1121 1211
+     6            5                              3   11121 11211 12111
+
+  distinct P: 17       NOT skew cell posets: 5
+
+  READING.  Every one of the 28 distributive Young-Fibonacci
+  intervals is J(P) -- that is Birkhoff, and it says nothing about
+  WHICH P.  The 17 distinct P that actually arise include 5 that
+  are not skew cell posets, so the index-set family is not the
+  family the Young headline classifies.  The contact is of the
+  same KIND; the class is not named and is not the same class.
+
+==============================================================================
+W2d  The Young side, for contrast: the intervals [0, lam].
+==============================================================================
+
+  intervals [0, lam] with |lam| <= 6: 30
+  all of them are distributive                               ok (30 of 30)
+  each one's join-irreducible poset IS the cell poset D_lam  ok
+  every P is a skew cell poset                               ok (0 not)
+  distinct P up to isomorphism: 18
+
+==============================================================================
+W2e  Control on the search box for the skew classes.
+==============================================================================
+
+  k = 0: class SET identical at box k and box k+1            ok (1 vs 1)
+  k = 1: class SET identical at box k and box k+1            ok (1 vs 1)
+  k = 2: class SET identical at box k and box k+1            ok (2 vs 2)
+  k = 3: class SET identical at box k and box k+1            ok (5 vs 5)
+  k = 4: class SET identical at box k and box k+1            ok (11 vs 11)
+  k = 5: class SET identical at box k and box k+1            ok (26 vs 26)
+  k = 6: class SET identical at box k and box k+1            ok (62 vs 62)
+
+==============================================================================
+SUMMARY w2_family: intervals 33, distributive 28, non-distributive 5,
+SUMMARY w2_family: distinct P 17, of them not skew cell posets 5,
+SUMMARY w2_family: failures 0
+==============================================================================

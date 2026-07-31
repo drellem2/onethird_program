@@ -1,0 +1,63 @@
+==============================================================================
+SELF-TEST  kerndffa
+==============================================================================
+
+  -- partitions and shapes --------------------------------------
+  1   p(n) for n = 0..8 is 1,1,2,3,5,7,11,15,22                      ok
+  2   partitions_upto(4) has 1+1+2+3+5 = 12 entries                  ok
+  3   partitions in a 3x3 box number C(6,3) = 20                     ok
+  4   conjugate is an involution on every partition of 6             ok
+  5   conjugate((3,1)) = (2,1,1)                                     ok
+  6   sub_partitions((2,1)) is the 5 subshapes                       ok
+  7   sub_partitions' size prune agrees with filtering afterwards    ok
+  8   skew_cells rejects mu not contained in lam                     ok
+  9   skew_cells((3,2),(1,)) has 4 cells                             ok
+
+  -- canonical form: invariant, AND separating --------------------
+  10  canon is unchanged by random relabelling (44+ posets, 6 each)  ok
+  11  canon separates the 2-chain from the 2-antichain               ok
+  12  canon separates all 5 posets on 3 elements                     ok
+  13  canon agrees with brute-force isomorphism on all pairs of 4-cell skew shapes ok
+
+  -- order ideals -------------------------------------------------
+  14  |J(antichain_n)| = 2^n for n = 1..6                            ok
+  15  |J(chain_n)| = n+1 for n = 1..6                                ok
+  16  |J(D_lam)| = number of subshapes of lam, all lam to n <= 5     ok
+
+  -- lattices: is_lattice must be able to say NO ------------------
+  17  the 2+2 'bowtie' is NOT a lattice (two incomparable joins)     ok
+  18  J(P) IS a lattice for every P to n <= 5                        ok
+  19  M3 (the diamond) is a lattice and is NOT distributive          ok
+  20  N5 (the pentagon) is a lattice and is NOT distributive         ok
+  21  J(P) IS distributive for every P to n <= 5                     ok
+  22  join_irreducibles of J(P) recover P, all P to n <= 4           ok
+
+  -- Young's lattice, built from partitions only ------------------
+  23  [0,(2,1)] has 5 elements                                       ok
+  24  [(1),(2,1)] has 4 elements                                     ok
+  25  [(1),(2,1)] as a poset is the 2-element ANTICHAIN's ideal lattice ok
+  26  shape_of_ideal maps the full ideal of D_lam back to lam, n <= 5 ok
+
+  -- Young-Fibonacci: the rank sizes are NOT the control ----------
+  27  rank sizes to 7 are the Fibonacci numbers                      ok
+  28  yf_down_covers is exactly the inverse of yf_up_covers, every word ok
+  29  (2,2) covers BOTH (1,2) and (2,1) -- the clause a single break loses ok
+  30  DU - UD = I on every word of rank < 7                          ok
+  31  a WRONG cover rule still gives Fibonacci rank sizes but fails DU-UD=I ok
+  32  every YF interval to rank 6 is a lattice                       ok
+  33  [0,(2,2,1)] is a YF interval that is NOT distributive          ok
+  34  [0,(1,1,1)] IS distributive                                    ok
+
+  -- skew cell posets: the membership test must say NO ------------
+  35  trimming a skew shape does not change its cell poset           ok
+  36  skew classes at k = 1..4 are 1, 2, 5, 11                       ok
+  37  every straight D_lam IS a skew cell poset, n <= 4              ok
+  38  the 3-antichain IS a skew cell poset                           ok
+  39  three minimal elements under a common top is NOT a skew cell poset ok
+  40  and it IS a genuine poset on 4 elements, with 2^3 + 1 = 9 ideals ok
+  41  so k = 4 has 16 - 11 = 5 poset classes outside the skew class  ok
+  42  the search box may be grown without changing the class SET, k <= 4 ok
+
+==============================================================================
+SELF-TEST: 42 assertions, 0 failed
+==============================================================================

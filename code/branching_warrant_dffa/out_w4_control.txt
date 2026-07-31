@@ -1,0 +1,29 @@
+==============================================================================
+W4  F3: the added control, exercised in both directions on the
+    real check_doc.py.
+==============================================================================
+
+  the repaired check_doc.py names the new check              ok
+  out_r1b_skew8.txt carries its machine-readable line        ok
+
+  W4a  unmutated tree: check_doc.py exits 0                  ok (exit 0, failures [])
+  the mutation changed the file                              ok
+  W4b  SKEW8 361: check_doc.py exits 1                       ok (exit 1)
+  W4b  and the ONLY failure named is the new check           ok (['the COMPUTED n=8 skew count equals the one out_young.txt PUBLISHES'])
+  W4c  out_r1b_skew8.txt absent: check_doc.py exits 1        ok (exit 1, failures ['out_r1b_skew8.txt carries exactly one SKEW8 line', 'the COMPUTED n=8 skew count equals the one out_young.txt PUBLISHES'])
+  the pre-repair check_doc.py was recovered from git         ok
+  and it does NOT contain the new check                      ok
+  W4d  pre-repair file passes on SKEW8 361 -- F3 confirmed   ok (exit 0, failures [])
+
+  READING.  Before this repair the chain from the ENUMERATED n = 8
+  count to the PUBLISHED one was open: the pre-repair check_doc.py
+  passes with the computed count set to 361 while out_young.txt
+  still prints 360.  After it, that same mutation fails, and fails
+  on the new check alone.  The published number never moved: 360
+  is what r1b_skew8.py computed and what W2's skew class count
+  agrees with at every n it reaches.  What changed is whether
+  anything would notice if it did move.
+
+==============================================================================
+SUMMARY w4_control: failures 0
+==============================================================================

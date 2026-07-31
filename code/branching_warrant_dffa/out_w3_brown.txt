@@ -1,0 +1,51 @@
+==============================================================================
+W3  Brown (2000) section 4.3, READ -- premise (a) of F4.
+    arXiv:math/0006145, pure-Python content-stream extraction.
+==============================================================================
+
+  bytes downloaded: 532339
+  characters extracted (whitespace and hyphens removed): 123453
+
+  section 4.3 heading 'Distributive lattices' occurs once    ok (1)
+  section 4.4 heading 'The kids walk' occurs once            ok (1)
+  4.3 precedes 4.4                                           ok (23630 < 25864)
+  section 4.3 spans characters 23630 .. 25864 (2234 characters)
+
+  Brown's example sentence occurs once in the paper          ok (1)
+  and it lies strictly INSIDE section 4.3                    ok (at 24412)
+  section 4.3 introduces exactly one example                 ok (1 'As an example of', 1 'example')
+  its maximal chains are the lattice paths                   ok
+  Brown counts the chains 0 < x < 1 at (p+1)(q+1) - 2        ok
+  section 4.4 is titled 'The kids walk', so 4.3 is not it    ok
+
+  Brown's sentence, as extracted (the extractor drops
+  inter-word spacing; bytes outside printable ASCII are shown
+  escaped, and the product symbol is one of them):
+
+      Asanexampleofadistributivelattice,considertheproductf0;1;:::;p
+      g\x02f0;1;:::;qgofachainoflengthpbyachainoflengthq.Thecasep=q=
+      2isshowninFigure3\(a\).Themaximalchainsarethelatticepathsfrom\
+      (0;0\)to\(p;q\),asinFigure3\(b\).Eachmaximalchainhaslengthp+q,
+      andthereare\x00p+q
+
+  READING.  Premise (a) is CONFIRMED BY READING, not inherited.
+  Brown's section 4.3 is titled 'Distributive lattices'; its one
+  worked example is the product of a chain of length p and a chain
+  of length q -- the p x q grid -- whose maximal chains are the
+  lattice paths; and the kids walk is section 4.4, not 4.3.  That
+  is mg-af28's reading, word for word, and it survives.
+
+  ONE THING STATED AT ITS OWN WIDTH.  Brown prints no size for the
+  lattice.  He counts the chains 0 < x < 1 at (p+1)(q+1) - 2, which
+  agrees with |L| = (p+1)(q+1) -- the size mg-41aa's grid
+  measurement reports.  That size follows from the definition of a
+  product of two chains; Brown's line corroborates it, and is not
+  the source of it.
+
+  SCOPE OF THE READING, STATED.  Sections 4.3 and the opening of
+  4.4 were read.  The rest of Brown (2000) is still unread by this
+  arc, and nothing here licenses a claim about any other section.
+
+==============================================================================
+SUMMARY w3_brown: failures 0
+==============================================================================
