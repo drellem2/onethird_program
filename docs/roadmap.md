@@ -226,60 +226,43 @@ because I made the opposite call at 17:35 on a misread and had to retract it.**
 **So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
 on an audit that measured its extents in both directions — that, not fatigue, is the signal.
 
-## Now (in flight) — 2026-07-31 09:42
+## Now (in flight) — 2026-07-31 10:32
 
-**✓ = carries the verdict-before-merge instruction.** Two treated tickets are now in flight; **the
-first merge of one is the first real test of that fix.** Everything unmarked had its body written
-before the change and will keep dropping verdicts regardless — *those merges are not evidence either
-way.*
+**✓ = carries the verdict-before-merge instruction, which is now CONFIRMED WORKING**: mg-3946 and
+mg-97fb each mailed their verdict from the polecat, before submitting, unprompted — the first two
+treated tickets, simultaneously. Five earlier verdicts had to be hand-recovered from commit messages.
 
+- **mg-132a** ✓ — **the F2 repair is F2 at HEAD, 2 of 2** — transcripts publish 473, the tree at their publishing commit holds 481. *Right when written; the MERGE rebased them.* **Nothing re-runs the check after one.**
+- **mg-330a** ✓ — audit of mg-8d5e — **sweep for a fourth history-derived anchor**
 - **mg-4adb** — `set -e` — one line outside every deletion population
-- **mg-3946** ✓ — audit of the CI historical-SHA repair — **the mg-75f0 demo's first green is its first RUN**
-- **mg-0242** — audit of the mg-069f body-strike repair — struck-count against refuted-count
-- **mg-56dc** — audit of mg-70c7 — carries the **PM ruling** on the deliberate non-regeneration
-- **mg-97fb** ✓ — audit of mg-3f3b — must **reconcile 1-of-6 against 0-of-6 by counting**, not adopt the later figure
-
-- **mg-132a** (high) — **the F2 repair is F2 at HEAD, 2 of 2.** Both transcripts publish **473**; the
-  tree at their publishing commit holds **481**. **They were right when written** — the pre-merge
-  commits hold exactly 473 — **and the merge rebased them onto a tree that had grown.** *F2 was
-  "wrong when written"; this is the complementary failure, and the repair's vocabulary has no word
-  for it: the publication step it separates from prose is THE RUN, and the step that broke this is
-  THE MERGE. Nothing re-runs the check after one.*
-- **mg-a471** (medium) — a `--only/--gates` **subset run overwrites the canonical report with an
-  unmarked partial one**, printing a ratio whose numerator is over rows run and denominator over the
-  full set, **exiting 0**. Plus three counting claims mg-3934 **fixed in one place and left stale in
-  three** — including **my own "21 hours", measured at 24 h 09 m over twelve consecutive red runs.**
-
-**THE VERDICT-ROUTING FIX WORKS — first test, both treated tickets, simultaneously.** mg-3946 and
-mg-97fb each mailed their verdict **from the polecat, before submitting to the refinery**, and each
-said so in terms (*"verdict written to mg-3946.result.json BEFORE submitting the merge, per the
-ticket"*). **Five verdicts in this arc had to be hand-recovered from commit messages; these two
-arrived on their own.**
+- **mg-a74f** ✓ — mg-16eb's — the visibility instrument measures **bytes in the HTML**
+- **mg-e35b** ✓ — mg-fcf1's five — three rows that cannot fail
 
 ## Next (gated / queued)
 
-- **mg-330a** ✓ — audit of mg-8d5e — **sweep for a fourth history-derived anchor**; two were found by the repair, none by the audit
-- **mg-e35b** ✓ — mg-fcf1's five — three rows that cannot fail
-- **mg-a74f** ✓ — mg-16eb's — the visibility instrument measures bytes in the HTML
+- **mg-cd04** ✓ — **mg-069f reproduced, in text it wrote in the SAME COMMIT, the defect it had just closed in the control** — a block exempting itself by its label, one document over from where the control looks. Plus EXEMPT blocks skipped on a 3-line label with **no length bound**; the longest is **53 lines** and holds mg-069f's own correction
+- **mg-a471** ✓ — a `--only/--gates` subset run **overwrites the canonical report with an unmarked partial one**, ratio halves over different populations, **exit 0**
+- **mg-bf79** ✓ — a count **labelled `executing sites` prints ROWS** (10) where four artifacts publish the SITE count (9); two copies of `figures()` disagree on 3
 - **mg-d075** ✓ — mg-19ec's — 8 sites state the figure, 4 unbounded
+- **mg-9a19** ✓ — audit of mg-cd04
+- **mg-c067** ✓ — audit of mg-132a
+- **mg-76d0** ✓ — audit of mg-a471
+- **mg-03d1** ✓ — audit of mg-bf79
 - **mg-aaf4** — audit of mg-d075
 - **mg-fcb2** ✓ — audit of mg-e35b
 - **mg-65eb** ✓ — audit of mg-a74f
 - **mg-69b4** ✓ — scoping — the busiest repo has no merge gate
 - **mg-344a** — Daniel workspace, `assignee=human`
 
-**Landed since the last regeneration:** mg-3f3b, mg-70c7 and mg-8d5e. mg-8d5e closed both of its sites and
-**found two further anchors of the same class that its audit never named** — an *index* into file history
-(`nth_touching(g1,1)^`, pushed along by one) and a second script consuming the same anchor to choose which
-commit message to scan. Its confirmation is **a difference between two columns, not a zero**: the pre-repair
-predicate is SILENT (0/0/0) where the repaired one FIRES (1/1/3). **The drifted anchor had read that as
-"both fire", because both columns had silently become the same predicate** — vacuous by construction, and
-printing a plausible number while being so.
+**The arc's running pattern, now five consecutive deliverables:** each found its own defect class in its
+own tooling. The tightest is mg-0242's G1 — a repair closed *"a block may no longer exempt itself by its
+label"* in its control **and broke that rule in prose it wrote in the same commit**, one document over
+from where the control looks. **Attention to a defect is concentrated exactly where the author is
+writing, which is exactly where it recurs.**
 
-**Standard adopted from it:** specify redundancy by **independence of failure mode**, not by count — *three
-checks that all break on a prose edit would be one check.* And **keep the thing that drifts as a detector
-rather than a dependency**: mg-8d5e retained the broken derivation, printed and used by no anchor, because
-*the quantity that moved is the evidence.*
+**Reconciliation is now settled practice, three for three.** Asking for a count to be *re-derived* rather
+than adopting the newer figure has refuted **both** figures every time: 4-of-15 vs all-17 (real: **39**);
+1-of-6 vs 0-of-6 (**different sixes, and seven existed**). *Neither party had the population.*
 
 ## Later (decided, not yet filed)
 - `onethird_program` ships two `controls.py` and two `run_all.sh` and has **no CI of any kind** — by the
