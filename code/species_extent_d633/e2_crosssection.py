@@ -80,14 +80,26 @@ def _anchor():
     if not rev:
         return "NO REVISION -- git could not be asked, so this census is " \
                "anchored to nothing and a reader should re-derive it"
+    # THE DIRTY CHECK IS ABOUT THE POPULATION THIS NUMBER COUNTS, and nothing
+    # else.  A blanket `git status` is dirty the moment this very run writes
+    # its own transcript, so every committed copy of this line would carry
+    # "PLUS UNCOMMITTED CHANGES" forever -- a qualifier that is always true is
+    # a qualifier that says nothing.  The census counts *.md under docs/ and
+    # code/, so that is what is asked about: if none of them differs from the
+    # revision named, the count IS that revision's, whatever else in the
+    # worktree has moved.
     try:
-        p = subprocess.run(["git", "-C", REPO, "status", "--porcelain"],
+        p = subprocess.run(["git", "-C", REPO, "status", "--porcelain",
+                            "--untracked-files=all", "--", "docs", "code"],
                            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-        dirty = bool(p.stdout.decode().strip())
+        rows = [ln for ln in p.stdout.decode().splitlines()
+                if ln.strip().endswith(".md")]
     except OSError:
-        dirty = True
-    return "%s%s" % (rev, "\n(PLUS UNCOMMITTED CHANGES IN THE WORKTREE, so "
-                          "the count is not that commit's)" if dirty else "")
+        rows = ["git could not be asked"]
+    return "%s%s" % (rev, "\n(PLUS %d UNCOMMITTED MARKDOWN CHANGE(S), so the "
+                          "count is not that commit's: %s)"
+                     % (len(rows), ", ".join(r[3:] for r in rows[:4]))
+                     if rows else "")
 
 
 ANCHOR = _anchor()

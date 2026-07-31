@@ -118,8 +118,7 @@ invisible to every checker in this repository, and that is the next
 hole, named rather than closed.  And it matches VERBATIM RUNS: a claim
 restated in different words, at any length, is invisible to it.
 
-MEASURED AT 4372fae
-(PLUS UNCOMMITTED CHANGES IN THE WORKTREE, so the count is not that commit's) (mg-5040, on mg-4700's F3).
+MEASURED AT cada54f (mg-5040, on mg-4700's F3).
 The file count above is a property of a TREE, not of this checker: it
 goes false the moment any commit adds or removes a markdown file, and
 re-running at commit time does not repair that, because a merge queue
@@ -137,5 +136,11 @@ on mg-4700's OPEN 1).  os.walk does not descend into a symlinked
 directory, and it swallows the error on a directory it cannot read.
 Rather than widen the walk a third time, it returns what it declined:
     declined, STATED:     code/species_extent_d633/__pycache__
+        directory rule, STATED: __pycache__/
+    declined, STATED:     code/species_remainder_f8fa/__pycache__
+        directory rule, STATED: __pycache__/
+    declined, STATED:     code/species_repair_6f61/__pycache__
+        directory rule, STATED: __pycache__/
+    declined, STATED:     code/species_repair_a4ef/__pycache__
         directory rule, STATED: __pycache__/
 A NOT STATED entry is counted into E2 TOTAL BAD above.
