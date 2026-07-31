@@ -201,6 +201,23 @@ def tree_files(root):
 
     Paths are relative to `root` and may contain a separator: the walk is
     RECURSIVE (mg-821e) and it NAMES WHAT IT DECLINED (mg-5040).
+
+    mg-4adb, on mg-6ef4's F1.  THE SECOND LAYER DECLINES TOO, AND IT USED TO
+    DECLINE UNDER ONE `except (UnicodeDecodeError, OSError)` INTO A LIST
+    CALLED `undecodable`.  A regular file this process cannot OPEN is not
+    undecodable: its bytes were never seen, so nothing is known about their
+    encoding.  It passed layer 1, failed here, and was filed under a bucket
+    naming a cause it does not have -- named, not counted, contents never
+    scanned.  The two are now separated by the exception that produced them
+    and counted by the rule layer 1 already uses:
+
+      UnicodeDecodeError  ->  `undecodable`, a STATED decline.  A sentence
+          carries it -- the extent below says the run is over every regular
+          file LESS the ones named as undecodable -- and the names are
+          printed, so it cannot grow unseen.
+      OSError             ->  `unstated`, COUNTED into S1 TOTAL BAD.  No
+          sentence in this file has ever put a regular file this process
+          cannot read outside the claim, so it arrives as RED.
     """
     reached, stated, unstated = walk_residue(root)
     scanned, undecodable = [], []
@@ -216,8 +233,14 @@ def tree_files(root):
             continue
         try:
             open(p, encoding="utf-8").read()
-        except (UnicodeDecodeError, OSError):
+        except UnicodeDecodeError:
             undecodable.append(rel)
+            continue
+        except OSError as err:
+            unstated.append((rel, "REACHED AND NOT READ: open() raised %s.  "
+                                  "This is NOT an encoding problem -- the "
+                                  "file's bytes were never seen"
+                                  % err.__class__.__name__))
             continue
         scanned.append(rel)
     return (sorted(scanned), sorted(undecodable), sorted(set(stated)),
@@ -276,7 +299,11 @@ for e in sorted(EXCLUDE):
     print("      %s" % e)
 print("  and %d file(s) skipped as not decodable UTF-8 text, NAMED THE SAME"
       % len(undecodable))
-print("  WAY rather than filtered by a rule no sentence carries:")
+print("  WAY rather than filtered by a rule no sentence carries.  THAT IS")
+print("  THE WHOLE OF THIS BUCKET (mg-4adb): a regular file this process")
+print("  cannot OPEN is NOT on this list, because nothing is known about the")
+print("  encoding of bytes that were never read.  It is a DECLINED, NOT")
+print("  STATED entry below and it is counted:")
 for t, f in undecodable:
     print("      code/%s/%s" % (t, f))
 if not undecodable:

@@ -146,24 +146,73 @@ def walk_residue(root, stated_dirs=STATED_DIR_RULES):
     return sorted(files), sorted(set(stated)), sorted(set(unstated))
 
 
-FILES, UNDECODABLE = [], []
+# mg-4adb, on mg-6ef4's F1.  THE SET IS BUILT IN TWO LAYERS AND ONLY THE
+# FIRST HAD A RESIDUE.  `walk_residue` above decides what is REACHED and names
+# everything it declined.  `open().read()` below decides which reached entries
+# are READ -- and until this ticket it declined under ONE
+# `except (UnicodeDecodeError, OSError)` whose printed sentence said the
+# reason was the file's ENCODING.  A REGULAR FILE THIS PROCESS CANNOT OPEN
+# passes layer 1 (isfile true, residue empty), fails layer 2 with
+# PermissionError, and was filed under a bucket naming a cause it does not
+# have: printed, NOT COUNTED, contents never scanned, this checker exit 0 with
+# a live X4 statement inside it.
+#
+# UNREADABLE IS NOT MIS-ENCODED, and the classification is repaired FIRST
+# because a wrong bucket sends every later reader to the wrong hypothesis --
+# a worse failure than no bucket at all.  The two are separated by the
+# exception that produced them, each is named with that exception's class, and
+# they are counted DIFFERENTLY, by the same rule layer 1 already uses:
+#
+#   ENCODING     STATED.  Not counted.  A sentence carries it and has since
+#                mg-d633: the printed extent says the run is over every
+#                regular file LESS the ones named as undecodable, and the
+#                names are printed here.  Like `__pycache__/`, it is a rule a
+#                reader can see before meeting a surprise.
+#   UNREADABLE   NOT STATED.  COUNTED.  No sentence in this file, or in any
+#                extent line in this repository, has ever said that a regular
+#                file this process cannot open is outside the claim.  So it is
+#                a finding, and it arrives as RED rather than as a printed
+#                aside under somebody else's reason.
+def read_residue(root, reached):
+    """(files, text, stated, unstated) for LAYER 2.
+
+    Nothing reached is dropped without landing in `stated` or `unstated`,
+    which is `walk_residue`'s contract applied to the layer below it.  The
+    file is read ONCE: the previous version tested decodability with one
+    `open` and then re-opened every survivor to build the text, so a file that
+    became unreadable between the two opens raised out of a dict
+    comprehension with no bucket at all.
+    """
+    files, text, stated, unstated = [], {}, [], []
+    for rel in reached:
+        p = os.path.join(root, rel)
+        try:
+            with open(p, encoding="utf-8") as fh:
+                text[rel] = fh.read()
+        except UnicodeDecodeError:
+            stated.append((rel, "file rule, STATED: bytes are not valid "
+                                "UTF-8 text (UnicodeDecodeError)"))
+            continue
+        except OSError as err:
+            unstated.append((rel, "REACHED AND NOT READ: open() raised %s.  "
+                                  "This is NOT an encoding problem -- the "
+                                  "file's bytes were never seen"
+                                  % err.__class__.__name__))
+            continue
+        files.append(rel)
+    return sorted(files), text, sorted(set(stated)), sorted(set(unstated))
+
+
 _REACHED, DECLINED_STATED, DECLINED_UNSTATED = walk_residue(SRC)
-for _rel in _REACHED:
-    _p = os.path.join(SRC, _rel)
-    try:
-        open(_p, encoding="utf-8").read()
-    except (UnicodeDecodeError, OSError):
-        UNDECODABLE.append(_rel)
-        continue
-    FILES.append(_rel)
-FILES.sort()
-UNDECODABLE.sort()
+FILES, TEXT, _READ_STATED, _READ_UNSTATED = read_residue(SRC, _REACHED)
+DECLINED_STATED = sorted(set(DECLINED_STATED) | set(_READ_STATED))
+DECLINED_UNSTATED = sorted(set(DECLINED_UNSTATED) | set(_READ_UNSTATED))
 NESTED = [f for f in FILES if os.sep in f]
-TEXT = {f: open(os.path.join(SRC, f), encoding="utf-8").read() for f in FILES}
-print("# files read: %d, %d of them below the tree root   (skipped as not"
-      % (len(FILES), len(NESTED)))
-print("# UTF-8 text: %s; skipped as %s: the whole directory rule)"
-      % (", ".join(UNDECODABLE) if UNDECODABLE else "none", PYCACHE))
+print("# files read: %d, %d of them below the tree root   (%d reached and not"
+      % (len(FILES), len(NESTED), len(_READ_STATED) + len(_READ_UNSTATED)))
+print("# read, listed by reason below; skipped as %s: the whole directory"
+      % PYCACHE)
+print("# rule)")
 if NESTED:
     for _f in NESTED:
         print("#   below the root: %s" % _f)
@@ -171,7 +220,13 @@ print("# THE BOUND (mg-5040): 'every regular file' means every regular file")
 print("# THIS WALK REACHED.  It is os.walk without followlinks, so it enters")
 print("# no symlinked directory and reads no entry that is not a regular")
 print("# file -- and it now RETURNS what it declined, so that bound is a")
-print("# measurement and not a promise about the tree's shape:")
+print("# measurement and not a promise about the tree's shape.")
+print("# AND THE SECOND LAYER IS IN THE SAME LIST (mg-4adb, on mg-6ef4's F1):")
+print("# reaching an entry and reading it are different acts and both can")
+print("# decline.  A file whose bytes are not UTF-8 is a STATED decline -- the")
+print("# extent below says so.  A regular file this process cannot OPEN is")
+print("# NOT: no sentence here has ever put it outside the claim, so it lands")
+print("# in the second list and is counted.  Both layers, one residue:")
 for _r, _why in DECLINED_STATED:
     print("#   declined, STATED:     %s   %s" % (_r, _why))
 for _r, _why in DECLINED_UNSTATED:
