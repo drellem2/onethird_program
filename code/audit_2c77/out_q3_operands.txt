@@ -1,0 +1,218 @@
+==========================================================================
+Q3 -- ALL THE OPERANDS, COUNTED HERE, AND THE COLUMN THAT READS 0
+==========================================================================
+--------------------------------------------------------------------------
+(i) TWO POPULATIONS, WALKED HERE
+--------------------------------------------------------------------------
+   `all` walks the WHOLE module for `ast.BoolOp` and takes every
+   value of every one -- no filter of any kind.  `deciding` restricts
+   that to what lies inside a deciding condition, which is what
+   `kern5f9a.boolean_operands` computes.  The self-test requires the
+   second to agree with the shipped walker SPAN FOR SPAN before this
+   table is read, so the difference below is a subtraction and not my
+   bug.
+
+   file               operands of every and/or, anywhere of those, in a deciding condition  difference
+   face_complex.py    35                                 15                                 20
+   posets.py          4                                  2                                  2
+   ALL                39                                 17                                 22
+
+--------------------------------------------------------------------------
+(ii) THE FOUR COLUMNS, FED FROM OUTSIDE, AND WHAT FALLS OUTSIDE THEM
+--------------------------------------------------------------------------
+   The SHIPPED classifier is called here -- `kern5f9a.operand_columns`
+   with `d2_deletion.SWEEP_FILES`, exactly as `d2` calls it.  Its four
+   columns are then subtracted from the unfiltered walk.  An operand in
+   the difference is in no column of mg-69d1's table, which is the
+   state mg-eaef's E4 was a finding about, one rung out.
+
+   file               swept   not swept: file   not swept: nested   not determined   in the table
+   face_complex.py    11      0                 4                   0                15
+   posets.py          0       2                 0                   0                2
+   ALL                11      2                 4                   0                17
+
+   independent walk of the same two files, unfiltered : 39
+   the four columns of mg-69d1's table                : 17
+   IN NO COLUMN AT ALL                                : 22
+
+   and they are NAMED, because a count of what is uncovered that cannot
+   be pointed at is the same silence as no count at all:
+
+     file               function                   line  op   operand text
+     face_complex.py    Poset.__init__             65    and  b == c
+     face_complex.py    Poset.__init__             65    and  (a, d) not in less
+     face_complex.py    Poset.canonical_key        125   or   best is None
+     face_complex.py    Poset.canonical_key        125   or   rel < best
+     face_complex.py    order_ideals               143   and  (mask >> b) & 1
+     face_complex.py    order_ideals               143   and  not ((mask >> a) & 1)
+     face_complex.py    sur_iso                    169   and  (j, i) in P.less
+     face_complex.py    sur_iso                    169   and  assign[j] > v
+     face_complex.py    sur_iso                    172   and  (i, j) in P.less
+     face_complex.py    sur_iso                    172   and  v > assign[j]
+     face_complex.py    chains_of_ideals           211   and  w != v
+     face_complex.py    chains_of_ideals           211   and  (w & v) == w
+     face_complex.py    chains_of_ideals           221   and  w != top
+     face_complex.py    chains_of_ideals           221   and  (top & w) == top
+     face_complex.py    down_laplacian_from_boundary 352   and  allowed_rows is not None
+     face_complex.py    down_laplacian_from_boundary 352   and  r not in allowed_rows
+     face_complex.py    top_laplacians             423   and  incidence_mode == "facet_swap01"
+     face_complex.py    top_laplacians             423   and  len(facets) >= 2
+     face_complex.py    top_laplacians             467   and  incidence_mode == "split_free_as_interior"
+     face_complex.py    top_laplacians             467   and  free_rows
+     posets.py          cover_string               63    and  (a, c) in P.less
+     posets.py          cover_string               63    and  (c, b) in P.less
+
+--------------------------------------------------------------------------
+(iii) WHERE THE CENSUS IS STATED, AND WHETHER IT CARRIES THE QUALIFIER
+--------------------------------------------------------------------------
+   The population is READ FROM THE TREE, not listed here.  Every line
+   containing `explicit boolean operand` is found with `git grep` over
+   the working tree, untracked files included.
+
+   THE RULE, STATED BEFORE THE TABLE.  A site is QUALIFIED if the words
+   `deciding condition` stand within 3 lines of it, in the same file.
+   A site is a QUOTATION rather than an assertion of the census if
+   `NO FURTHER` or `is read as` stands in the same window -- those are
+   the two markers of the wide BOUND being quoted in order to correct
+   it, which is a different sentence about a different thing.
+
+   MISS #2, KEPT.  This section first CONTROLLED on `mg-eaef qualified
+   the census every time`, and gated a self-error on it.  The self-error
+   fired: mg-eaef's own README says `4 of the 15 explicit boolean
+   operands in the file it counts`, with no qualifier either.  The
+   premise was mine and it was wrong, and the instrument said so before
+   the finding did.  What survives is not a claim about who wrote a
+   word; it is the SUBTRACTION in (i) and (ii), which does not depend
+   on any site's wording.  The table below is kept as CONTEXT and the
+   finding no longer rests on it.
+
+   THE POPULATION OF THE REPAIR'S OWN OUTPUT IS DERIVED, not listed: the
+   files `d01ff32` touched, read out of `git show --name-only`.  This
+   audit's own files are in the table too, and marked -- excluding them
+   by path would be the path list this lineage keeps rebuilding.
+
+   site                                                     line  in d01ff32 disposition
+   code/audit_2c77/PREDICTIONS.md                           87    THIS AUDIT census, QUALIFIED
+   code/audit_2c77/PREDICTIONS.md                           97    THIS AUDIT census, QUALIFIED
+   code/audit_2c77/PREDICTIONS.md                           178   THIS AUDIT *** census, UNQUALIFIED
+   code/audit_2c77/README.md                                14    THIS AUDIT *** census, UNQUALIFIED
+   code/audit_2c77/README.md                                72    THIS AUDIT census, QUALIFIED
+   code/audit_2c77/lib2c77.py                               187   THIS AUDIT *** census, UNQUALIFIED
+   code/audit_2c77/q3_operands.py                           15    THIS AUDIT *** census, UNQUALIFIED
+   code/audit_2c77/q3_operands.py                           55    THIS AUDIT *** census, UNQUALIFIED
+   code/audit_2c77/q3_operands.py                           148   THIS AUDIT *** census, UNQUALIFIED
+   code/audit_2c77/q3_operands.py                           200   THIS AUDIT *** census, UNQUALIFIED
+   code/audit_2c77/q3_operands.py                           235   THIS AUDIT *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/PREDICTIONS.md             42    no       *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/README.md                  7     no       *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/README.md                  8     no       *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/README.md                  45    no       *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/README.md                  79    no       quotes the wide BOUND, not the census
+   code/face_geometry_audit_eaef/README.md                  82    no       quotes the wide BOUND, not the census
+   code/face_geometry_audit_eaef/e1_operand.py              140   no       *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/e2_bound.py                76    no       *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/e2_bound.py                167   no       census, QUALIFIED
+   code/face_geometry_audit_eaef/e2_bound.py                191   no       quotes the wide BOUND, not the census
+   code/face_geometry_audit_eaef/e2_bound.py                192   no       quotes the wide BOUND, not the census
+   code/face_geometry_audit_eaef/out_e1_operand.txt         37    no       quotes the wide BOUND, not the census
+   code/face_geometry_audit_eaef/out_e1_operand.txt         81    no       census, QUALIFIED
+   code/face_geometry_audit_eaef/out_e1_operand.txt         125   no       *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/out_e2_bound.txt           8     no       *** census, UNQUALIFIED
+   code/face_geometry_audit_eaef/out_e2_bound.txt           59    no       census, QUALIFIED
+   code/face_geometry_audit_eaef/out_e2_bound.txt           67    no       census, QUALIFIED
+   code/face_geometry_audit_eaef/out_e2_bound.txt           74    no       quotes the wide BOUND, not the census
+   code/face_geometry_instr_5f9a/d2_deletion.py             149   yes      quotes the wide BOUND, not the census
+   code/face_geometry_instr_5f9a/d2_deletion.py             1516  yes      quotes the wide BOUND, not the census
+   code/face_geometry_instr_5f9a/kern5f9a.py                507   yes      *** census, UNQUALIFIED
+   code/face_geometry_instr_5f9a/out_d2_deletion.txt        344   yes      quotes the wide BOUND, not the census
+   code/repair_69d1/PREDICTIONS.md                          26    yes      *** census, UNQUALIFIED
+   code/repair_69d1/PREDICTIONS.md                          29    yes      *** census, UNQUALIFIED
+   code/repair_69d1/README.md                               8     yes      *** census, UNQUALIFIED
+   code/repair_69d1/README.md                               27    yes      quotes the wide BOUND, not the census
+   code/repair_69d1/README.md                               33    yes      *** census, UNQUALIFIED
+   code/repair_69d1/lib69d1.py                              6     yes      *** census, UNQUALIFIED
+   code/repair_69d1/out_p1_bound.txt                        154   yes      *** census, UNQUALIFIED
+   code/repair_69d1/out_selftest_69d1.txt                   5     yes      *** census, UNQUALIFIED
+   code/repair_69d1/p1_bound.py                             6     yes      quotes the wide BOUND, not the census
+   code/repair_69d1/p1_bound.py                             15    yes      *** census, UNQUALIFIED
+   code/repair_69d1/p1_bound.py                             57    yes      *** census, UNQUALIFIED
+   code/repair_69d1/p1_bound.py                             152   yes      *** census, UNQUALIFIED
+   code/repair_69d1/selftest_69d1.py                        59    yes      *** census, UNQUALIFIED
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md        23    no       quotes the wide BOUND, not the census
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md        67    no       *** census, UNQUALIFIED
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md        75    no       *** census, UNQUALIFIED
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md        93    no       *** census, UNQUALIFIED
+   docs/landing-mg-0b07-implicit-disjunction.md             29    yes      *** census, UNQUALIFIED
+   docs/landing-mg-0b07-implicit-disjunction.md             153   yes      *** census, UNQUALIFIED
+   docs/repair-mg-69d1-bound-and-reason.md                  15    yes      *** census, UNQUALIFIED
+   docs/repair-mg-69d1-bound-and-reason.md                  30    yes      quotes the wide BOUND, not the census
+
+   54 site(s) in all; 34 state the census without the deciding-condition
+   qualifier; 15 of those are in files d01ff32 touched.
+   NON-VACUITY -- the rule returned 3 distinct dispositions over the population,
+   so it is not labelling every site the same way: *** census, UNQUALIFIED; census, QUALIFIED; quotes the wide BOUND, not the census
+
+
+--------------------------------------------------------------------------
+(iv) `not determined` -- CAN ANY INPUT REACH IT?
+--------------------------------------------------------------------------
+   The repair's reason for printing the column at 0 is that `an
+   explicit not determined is CHECKABLE, and an empty cell is the
+   absence of an answer`.  That reason is the thing under test.  Asked
+   three ways.
+
+   (iv-a) THE BRANCH STRUCTURE.  `operand_columns`' chain is parsed out
+   of kern5f9a.py and its guards printed:
+
+     fname not in swept_files
+     not op.top
+     op.top
+     else  ->  cols['not determined'].append(op)
+
+   `op.top` is `node is cond` -- a bool.  `not op.top` and `op.top` are
+   exhaustive over a bool, so the `else` after them is unreachable for
+   every possible input, not merely for this tree.
+   the two exhaustive guards are present : yes: not op.top, op.top
+   an `else` stands after them           : yes
+   kern5f9a marks it                     : # pragma: no cover
+
+   (iv-b) A POPULATION LARGER THAN THE CENSUS'S TWO.  The shipped
+   classifier is run over EVERY python file in the repository that
+   parses -- each as though it were the swept file, so `not swept:
+   file` cannot absorb anything -- and `not determined` is read off:
+
+     python files under code/ : 447
+     parsed and classified    : 447   (unparsable, skipped: 0)
+     operands classified      : 614
+     landing in `not determined` : 0
+
+   (iv-c) THE DELETION TEST, PERFORMED TWO WAYS.
+   p1 (v) prints `with not swept: nested DELETED FROM THE CLASSIFIER`
+   and reports the totality claim GOES RED.  What it does is
+   `{c: v for c, v in cols.items() if c != 'not swept: nested'}` -- it
+   drops a key from the RESULT dict and re-sums.  The classifier is
+   never re-run.  Both operations are done here, on both columns, and
+   the difference between them is the measurement:
+
+     column               how it is deleted                sum     independent walk   verdict
+     -- none --           as shipped                       17      17                 GREEN
+     not swept: nested    p1's: drop the result key        13      17                 RED
+     not swept: nested    the branch, out of the source    17      17                 GREEN
+     not determined       p1's: drop the result key        17      17                 GREEN
+     not determined       the branch, out of the source    17      17                 GREEN
+
+   READ THE `not swept: nested` PAIR.  Dropping the key subtracts 4 and
+   the sum misses.  Deleting the BRANCH leaves the sum at 17, because
+   the 4 nested operands fall through to `not determined`, which is the
+   fall-through the docstring says it is.  So the column IS load-bearing
+   -- against an edit to the classifier, which no sentence in the repair
+   claims -- and it is still unreachable by any INPUT.
+
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every source read and AST parse this script performs, the requirement that the two census files parse and that neither operand walk come back empty, and the requirement that each column deletion really remove the branch it names
+FINDINGS: 3, population: every operand of every `and`/`or` anywhere in face_complex.py and posets.py scored against the four columns of mg-69d1's table; every site in the tree that states the census over `explicit boolean operands`, scored for the deciding-condition qualifier; and the `not determined` column asked three ways whether any input can reach it
+   FINDING: THE CENSUS IS STATED OVER A POPULATION WIDER THAN THE ONE IT CLASSIFIES.  `explicit boolean operand` denotes 39 operands in face_complex.py and posets.py; mg-69d1's table classifies 17 and 22 are in NO column of it -- 20 in face_complex.py and 2 in posets.py, named in (ii) above.  `boolean_operands` walks only inside `deciding_conditions`, and an `and` in a `while`, in an assignment, or in an `if` whose body does not return is outside every column.  The claim is written without the deciding-condition qualifier at 15 site(s) in files d01ff32 touched: code/face_geometry_instr_5f9a/kern5f9a.py:507, code/repair_69d1/PREDICTIONS.md:26, code/repair_69d1/PREDICTIONS.md:29, code/repair_69d1/README.md:8, code/repair_69d1/README.md:33, code/repair_69d1/lib69d1.py:6, code/repair_69d1/out_p1_bound.txt:154, code/repair_69d1/out_selftest_69d1.txt:5, code/repair_69d1/p1_bound.py:15, code/repair_69d1/p1_bound.py:57, code/repair_69d1/p1_bound.py:152, code/repair_69d1/selftest_69d1.py:59, docs/landing-mg-0b07-implicit-disjunction.md:29, docs/landing-mg-0b07-implicit-disjunction.md:153, docs/repair-mg-69d1-bound-and-reason.md:15.  This is mg-eaef's E4 state -- operands in neither column -- one rung out, in the artifact that repairs E4, and the narrowed BOUND sentence itself is NOT affected: it names `the deciding conditions` and is correct
+   FINDING: `deleting the not swept: nested column makes the totality claim go red` is true of the operation p1 PERFORMS and false of the operation p1 NAMES.  p1 (v) prints `with not swept: nested deleted from the classifier` and drops a key from the result dict; delete the branch from `operand_columns` itself and the totality claim stays GREEN at 17 of 17, because the 4 nested operands fall through into `not determined`.  The row's numbers are right for what the row does; the sentence beside it names something else -- which is the shape of the defect this repair was written to fix
+   FINDING: `not determined` cannot be reached by any INPUT: its two preceding guards, `not op.top` and `op.top`, are exhaustive over a bool, kern5f9a marks the branch `# pragma: no cover`, and 0 operand(s) landed there across 447 python files under code/ carrying 614 operands -- a population 36x the census's two files.  The stated reason for printing it is that `an explicit not determined is CHECKABLE` and that `nothing lands there ON THIS TREE`; both read as claims about the tree, and the 0 is a property of the control flow that no tree can move.  What CAN move it is an edit to the classifier, as the row above shows -- and that is not what either sentence says
+TOTAL BAD: 3

@@ -1,0 +1,76 @@
+==========================================================================
+SELFTEST -- the mg-2c77 instrument, before it is pointed at anything
+==========================================================================
+
+-- the position key: it must not merge two operands into one
+   ok    4 operands over two `or`s in a 4-line module: got 4
+   ok    the 4 position keys are distinct even though `a == b` occurs twice
+   ok    a TEXT key would have merged the two `a == b` into one (3 distinct texts for 4 operands) -- which is why the key is a span
+
+-- my deciding-condition reading against the shipped one, span for span
+   ok    face_complex.py: my walker found 73 deciding condition(s), not 0 -- an empty walk would make every subtraction below vacuous
+   ok    face_complex.py: my deciding conditions and kern5f9a's agree span for span (73 vs 73)
+   ok    posets.py: my walker found 6 deciding condition(s), not 0 -- an empty walk would make every subtraction below vacuous
+   ok    posets.py: my deciding conditions and kern5f9a's agree span for span (6 vs 6)
+
+-- my deciding-OPERAND walk against kern5f9a.boolean_operands, span for span
+   ok    face_complex.py: 15 deciding boolean operand(s), not 0
+   ok    face_complex.py: agrees with kern5f9a.boolean_operands span for span (15 vs 15)
+   ok    posets.py: 2 deciding boolean operand(s), not 0
+   ok    posets.py: agrees with kern5f9a.boolean_operands span for span (2 vs 2)
+
+-- the unfiltered walk is a SUPERSET of the deciding one, by construction
+   ok    face_complex.py: every deciding operand is in the unfiltered walk -- if it were not, the difference would be my bug and not a finding
+   ok    posets.py: every deciding operand is in the unfiltered walk -- if it were not, the difference would be my bug and not a finding
+
+-- the unfiltered walk really does see outside a deciding condition
+   ok    an `and` in an `if` whose body only assigns: 2 operands unfiltered
+   ok    the same `and`: 0 operands inside a deciding condition -- the `if` contains no `return`
+   ok    and the SHIPPED classifier puts it in NO column: all four columns empty on a file whose only boolean operator is outside a deciding condition
+
+-- and the same operand moved INSIDE a deciding condition is seen
+   ok    the same `and`, with a `return` in the `if`: 2 deciding operands
+   ok    and the shipped classifier puts both in `swept`
+
+-- the bends: each changes the file it names, and refuses otherwise
+   ok    bend_kern_up really changes its input (+4 bytes)
+   ok    bend_kern_up leaves a file that still parses
+   ok    bend_c1_down really changes its input (+25 bytes)
+   ok    bend_c1_down leaves a file that still parses
+   ok    conspire_a_kern really changes its input (+21 bytes)
+   ok    conspire_a_kern leaves a file that still parses
+   ok    conspire_a_c1 really changes its input (+120 bytes)
+   ok    conspire_a_c1 leaves a file that still parses
+   ok    conspire_b_kern really changes its input (+27 bytes)
+   ok    conspire_b_kern leaves a file that still parses
+   ok    conspire_b_c1 really changes its input (+146 bytes)
+   ok    conspire_b_c1 leaves a file that still parses
+
+-- and each refuses on ZERO occurrences and on MANY
+   ok    bend_kern_up refuses on 0 occurrences
+   ok    bend_c1_down refuses on 0 occurrences
+   ok    conspire_a_c1 refuses on 0 occurrences
+   ok    conspire_b_c1 refuses on 0 occurrences
+   ok    bend_kern_up refuses on 2 occurrences
+   ok    bend_c1_down refuses on 2 occurrences
+   ok    conspire_a_c1 refuses on 2 occurrences
+   ok    conspire_b_c1 refuses on 2 occurrences
+   ok    conspire_a_kern refuses when its marker is already present
+   ok    conspire_b_kern refuses when its marker is already present
+
+-- the IDENTICAL/MOVED test, on inputs whose answer is known
+   ok    the baseline c1 run terminates with a status this audit does not read: rc=1.  The verdict is the MEASURING half, and the comparing half is where a status lives
+   ok    the baseline run prints c1's 24 vertex sets: got 24
+   ok    the baseline against itself reads IDENTICAL
+   ok    c1 with every dimension one too small reads MOVED -- the test can go red
+
+-- the empty-baseline guard: a run that produces nothing is never IDENTICAL
+   ok    a c1 that dies prints 0 vertex sets
+   ok    and reads MOVED, not IDENTICAL -- two failed runs cannot agree
+
+-- SWEEP_FILES and REV_A218 are READ, not written down here
+   ok    SWEEP_FILES read out of d2_deletion.py: ('face_complex.py',)
+   ok    REV_A218 read out of lib58da.py resolves in this repository: 286d5030
+
+--------------------------------------------------------------------------
+ASSERTIONS PASSED: 48, FAILED: 0

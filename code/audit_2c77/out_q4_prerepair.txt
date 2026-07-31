@@ -1,0 +1,74 @@
+==========================================================================
+Q4 -- mg-e34a's PRE-REPAIR PREDICATE, RE-RUN AT THIS HEAD
+==========================================================================
+
+   HEAD                     : 20a0e17a
+   the script, run unmodified: code/branching_audit_e34a/k1_prerepair.py
+   mg-69d1 re-ran k4_cancel.py from this suite and did not re-run this
+   one; g1_provenance.py, which it edited, is the predicate this script
+   runs on both sides.
+
+--------------------------------------------------------------------------
+(i) THE VERDICT BLOCK, PARSED OUT OF ITS OWN STDOUT
+--------------------------------------------------------------------------
+
+   what k1 measures                                     at HEAD  required verdict
+   Backwards at the exit grain                          0        0        ok
+   Backwards at the finding grain                       0        0        ok
+   Files named by an old finding and by no new one      0        0        ok
+
+   inputs k1 declares and runs : 7
+   k1's exit code              : 1   (1 is expected: it books mg-e34a's own
+                                 three findings, which mg-69d1 named as NOT CLOSED)
+
+--------------------------------------------------------------------------
+(ii) THE FINDING SET, AGAINST THE COMMITTED TRANSCRIPT
+--------------------------------------------------------------------------
+   A count that did not move can still be a different set.  Both
+   finding lists are parsed and compared after normalising every hex
+   token of 7 or more characters -- a revision that moved is not a
+   finding that changed.
+
+   findings at 20a0e17a          : 3
+   findings in the committed transcript : 1
+
+     [*** NEW] g1_provenance.py is not the same at <rev> -- the revision mg-76cc pinned as `g1 BEFORE mg-76cc` -- as at <rev>
+     [*** NEW] lib58da.py is not the same at <rev> -- the revision mg-76cc pinned as `g1 BEFORE mg-76cc` -- as at <rev>, the 
+     [also in the transcript] the repaired predicate books a FINDING on 1 input(s) whose measurement at HEAD is byte-identical to the measur
+
+   2 new, 0 no longer booked.
+
+--------------------------------------------------------------------------
+(iii) WHAT k1 IS COMPARING NOW, AND WHAT IT WAS COMPARING BEFORE
+--------------------------------------------------------------------------
+   The two new findings are not noise.  `libe34a` derives the subject
+   of the comparison rather than writing it down:
+
+       REPAIR_REV = the last commit that touched g1_provenance.py
+       PRE_REV    = its first parent
+
+   and mg-69d1 TOUCHED g1_provenance.py.  So the derivation now returns
+   mg-69d1's own commit, and `the predicate as it stood before the
+   repair` is no longer mg-76cc's predecessor -- it is mg-69d1's.
+
+   The check is done here by importing libe34a and reading the values
+   the instrument actually uses, and by asking git the same question
+   from the repair's parent.
+
+   libe34a.REPAIR_REV, as the instrument derives it now     d01ff32d
+   libe34a.PRE_REV -- `the predicate before the repair`     e5787e11
+   lib76cc.REV_957F -- `g1 BEFORE mg-76cc`, the pin         e006581c
+   the same derivation run from d01ff32's PARENT (e5787e1)  4755d029
+
+   at e5787e1 the derivation returned mg-76cc's repair and PRE_REV
+   agreed with the pin.  At this HEAD it returns mg-69d1's commit,
+   and `before the repair` means before MG-69D1 -- which is
+   mg-76cc's ALREADY-REPAIRED predicate on both sides.
+
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the subprocess run of k1_prerepair.py, the parse of its verdict block and of its finding list, and the read of its committed transcript
+FINDINGS: 2, population: the three coverage numbers of mg-e34a's pre-repair comparison -- backwards at the exit grain, backwards at the finding grain, and files named by an old finding and by no new one -- each gated separately; the declared input count; and the finding SET at d01ff32 against the finding set in the committed transcript
+   FINDING: k1 books 2 finding(s) at 20a0e17a that are not in its committed transcript: g1_provenance.py is not the same at <rev> -- the revision mg-76cc pinned as `g1 BEFORE mg- | lib58da.py is not the same at <rev> -- the revision mg-76cc pinned as `g1 BEFORE mg-76cc` .  A finding count that did not move is not a finding set that did not move
+   FINDING: mg-e34a's PRE-REPAIR COMPARISON NO LONGER COMPARES MG-76CC's REPAIR.  `libe34a.REPAIR_REV` is derived as the last commit touching g1_provenance.py and mg-69d1 touched it, so REPAIR_REV moved from 4755d029 (mg-76cc's repair) to d01ff32d (mg-69d1's own) and PRE_REV moved from e006581c -- lib76cc's pin, `g1 BEFORE mg-76cc` -- to e5787e11.  Both sides of the comparison are now mg-76cc's REPAIRED predicate, differing only in the prose mg-69d1 edited.  The three coverage numbers still read 0/0/0 and they are 0 for a different reason: `the pre-repair predicate run against 7 inputs with 0 going backwards` is the confirmation that the kernel half is back, and this run does not re-derive it.  k1 says so itself, in the two findings above, and mg-69d1 re-ran k4_cancel.py from this suite but not k1
+TOTAL BAD: 2

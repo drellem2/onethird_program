@@ -1,0 +1,166 @@
+==========================================================================
+Q1 -- THE REASON mg-69d1 WROTE, AND THE INPUTS IT NAMES
+==========================================================================
+
+mg-76cc shipped a row and a reason and only the row was checked.  mg-69d1
+repaired the reason.  This asks the repaired reason the question that was not
+asked of the original: build what it names, and see.
+
+--------------------------------------------------------------------------
+(i) THE KINDS OF OUTPUT mg-69d1 EMITTED, AND WHICH ONES THIS AUDIT CHECKED
+--------------------------------------------------------------------------
+   mg-69d1's own p4 enumerates the kinds it emitted.  This is the
+   same enumeration made from OUTSIDE, over `git show --stat d01ff32`
+   and the diff, with a column saying where in THIS audit each kind is
+   checked.  A kind with no probe against it is named as unchecked
+   rather than left off the list.
+
+   kind                 the artifact                                   where it is checked
+   row                  g1's HALVES[2] -- (script, kernel) argument pa q1 (v): parsed out of 4755d02 and out of the tree and compared
+   reason (docstring)   g1's module docstring, the corrected paragraph q1 (ii)-(iv): both named inputs built and measured
+   reason (stdout)      the paragraph g1 PRINTS in section (ii)        q1 (vi): parsed out of g1's own committed transcript and scored
+   label                HALVES[2][1]: `cancellation` -> `conspiracy`   q1 (v): compared against 4755d02
+   comment              the comment above HALVES, and lib76cc's above  q1 (v): the anchor is exercised, not read
+   source anchor        lib76cc.HALF_BOTH_ROW, in a file the repair wa q1 (v): matched against the tree, count required to be 1
+   error message        r1_kernel.py's `the conspiracy case was never  q1 (vi): scored against the same measurement
+   classifier column    kern5f9a's `not determined`                    q3 -- NOT checked here
+   bound sentence       the narrowed sentence, in 7 places             q2 and q3 -- NOT checked here
+   transcript           out_g1_provenance.txt and the four out_p*.txt  q1 (vi) reads g1's; the rest NOT checked here
+   document             docs/repair-mg-69d1-bound-and-reason.md        q3 (iv): its census sentences are in q3's population
+   commit text          d01ff32's message                              q3 (iv): its census sentences are in q3's population
+
+   12 kind(s) enumerated, 3 of them NOT checked in this script and named: classifier column, bound sentence, transcript
+
+--------------------------------------------------------------------------
+(ii) THE FOUR INPUTS, BUILT, AND SHOWN TO BE WHAT THEY ARE CALLED
+--------------------------------------------------------------------------
+   An input characterised by the script that reads it is an input
+   nobody characterised.  Each pair below is required to be the KIND of
+   pair its name claims BEFORE any row rests on it, and a pair that
+   fails that requirement has its rows DROPPED rather than counted as
+   agreeing.
+
+   cancelling     c1   +25 byte(s), kern    +4 byte(s)   kern's dim L(n,p) one too BIG, c1's dims one too SMALL
+   conspiring-A   c1  +120 byte(s), kern   +21 byte(s)   kern gains DIM_SHIFT_69D1=1; c1 reads it with an INTEGER default of 0
+   conspiring-B   c1  +146 byte(s), kern   +27 byte(s)   kern gains EXTRA_VERTEX_2C77=True; c1 reads it with a BOOLEAN default of False and appends a vertex
+   one-sided      c1    +0 byte(s), kern    +4 byte(s)   kern's dims one too big and c1 UNTOUCHED -- neither cancelling nor conspiring
+
+   the baseline -- c1 and its kernel both at 286d5030 : sha a8db5dbd4c758765, 24 vertex sets
+
+--------------------------------------------------------------------------
+(iii) THE THREE ROWS, AT g1's OWN SIGNATURE AND AGAIN AT p3's
+--------------------------------------------------------------------------
+   g1 holds the un-bent file at 286d5030.  p3 holds it at HEAD.  Both are
+   run on every input, because the corrected reason is a claim about
+   g1's rows and p3 is what measured it.
+
+     g1's rows   (bent c1, 286d5030 kern) / (286d5030 c1, bent kern) / (bent, bent)
+     p3's rows   (bent c1, HEAD kern)     / (HEAD c1, bent kern)     / same
+
+   CANCELLING
+     rows       row              baseline           measured           verdict
+     g1         c1 half          a8db5dbd4c758765   0c91a182221d5880   MOVED
+     g1         kern half        a8db5dbd4c758765   cb329be9d6265c27   MOVED
+     g1         both together    a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     p3         c1 half          a8db5dbd4c758765   0c91a182221d5880   MOVED
+     p3         kern half        a8db5dbd4c758765   cb329be9d6265c27   MOVED
+     p3         both together    a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+
+   CONSPIRING-A
+     rows       row              baseline           measured           verdict
+     g1         c1 half          a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     g1         kern half        a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     g1         both together    a8db5dbd4c758765   cb329be9d6265c27   MOVED
+     p3         c1 half          a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     p3         kern half        a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     p3         both together    a8db5dbd4c758765   cb329be9d6265c27   MOVED
+
+   CONSPIRING-B
+     rows       row              baseline           measured           verdict
+     g1         c1 half          a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     g1         kern half        a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     g1         both together    a8db5dbd4c758765   83fde500baeaea5c   MOVED
+     p3         c1 half          a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     p3         kern half        a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     p3         both together    a8db5dbd4c758765   83fde500baeaea5c   MOVED
+
+   ONE-SIDED
+     rows       row              baseline           measured           verdict
+     g1         c1 half          a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     g1         kern half        a8db5dbd4c758765   cb329be9d6265c27   MOVED
+     g1         both together    a8db5dbd4c758765   cb329be9d6265c27   MOVED
+     p3         c1 half          a8db5dbd4c758765   a8db5dbd4c758765   IDENTICAL
+     p3         kern half        a8db5dbd4c758765   cb329be9d6265c27   MOVED
+     p3         both together    a8db5dbd4c758765   cb329be9d6265c27   MOVED
+
+--------------------------------------------------------------------------
+(iv) THE CORRECTED REASON, SCORED
+--------------------------------------------------------------------------
+   The sentence now in g1 says two things:
+
+     "on a CANCELLING pair both HALF rows MOVE and `both together`
+      prints IDENTICAL; on a CONSPIRING pair both HALF rows print
+      IDENTICAL and `both together` MOVES"
+
+   Scored below at g1's own row signature.  The third and fourth lines
+   are inputs the sentence does not name, and they are here because two
+   named cases read as a partition unless something says they do not.
+
+     input          c1 half      kern half    both together  caught at
+     cancelling     MOVED        MOVED        IDENTICAL      2 of 3 rows: c1 half, kern half
+     conspiring-A   IDENTICAL    IDENTICAL    MOVED          1 of 3 rows: both together
+     conspiring-B   IDENTICAL    IDENTICAL    MOVED          1 of 3 rows: both together
+     one-sided      IDENTICAL    MOVED        MOVED          2 of 3 rows: kern half, both together
+
+   g1's ROWS AGAINST p3's ROWS, verdict by verdict.  p3's docstring says it
+   uses `the same three (script, kernel) rows g1's HALVES uses`; it holds the
+   un-bent side at HEAD where g1 holds it at 286d5030.  If a verdict differs, the
+   corrected reason was measured against rows that are not the rows it is about.
+
+     cancelling     g1 MMI   p3 MMI   agree
+     conspiring-A   g1 IIM   p3 IIM   agree
+     conspiring-B   g1 IIM   p3 IIM   agree
+     one-sided      g1 IMM   p3 IMM   agree
+
+     0 of 12 row readings differ between the two signatures.
+
+--------------------------------------------------------------------------
+(v) THE ROW ITSELF, AND THE ANCHOR IN THE FILE THE REPAIR WAS NOT ABOUT
+--------------------------------------------------------------------------
+   The repair says the row's (script, kernel) pair is UNCHANGED and
+   only its LABEL moved.  Both halves of that are checked by parsing
+   `HALVES` out of 4755d02 and out of the tree -- as source, so a
+   rewritten expression cannot pass as the same argument.
+
+              4755d02                                                  the tree
+   row 0      'c1_branching.py', 'the script', head_c1, old_kern       'c1_branching.py', 'the script', head_c1, old_kern
+   row 1      'kern_a218.py', 'its kernel', old_c1, head_kern          'kern_a218.py', 'its kernel', old_c1, head_kern
+   row 2      'both together', 'cancellation', head_c1, head_kern      'both together', 'conspiracy', head_c1, head_kern
+
+   argument pair (script, kernel) : UNCHANGED
+   label                          : 'cancellation' -> 'conspiracy'
+
+   lib76cc.HALF_BOTH_ROW -- an EXACT source anchor, in a file mg-69d1
+   was not about, which r1_kernel.py's deletion test splices out of g1:
+     ',\n          ("both together", "conspiracy", head_c1, head_kern)]'
+     occurrences in g1_provenance.py as it stands: 1
+
+--------------------------------------------------------------------------
+(vi) IS `MOVED` A CATCH?  g1's FINDING-BOOKING BLOCK, EXECUTED
+--------------------------------------------------------------------------
+   The corrected reason turns entirely on the word `catches`.  A
+   printed `MOVED` is a catch only if it books a finding, and g1 exits
+   0 iff FINDINGS == 0.  So g1's own block is EXECUTED here on
+   synthetic input, in both directions, rather than read.
+
+     nothing moved            -> 0 finding(s) booked, naming: nothing
+     `both together` moved    -> 1 finding(s) booked, naming: both together
+     both halves moved        -> 2 finding(s) booked, naming: c1_branching.py, kern_a218.py
+
+   a MOVED row books a finding and g1 exits 0 iff FINDINGS == 0, so `catches`
+   is a gate that was seen to fire and not a word that was read.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read and c1 run this script performs, the requirement that each of the 6 bends really change the file it names, that the baseline run print c1's 24 vertex sets, and that each of the 3 inputs really be the KIND of input it is called before any row is read against it
+FINDINGS: 0, population: the 3 rows of g1's section (v) evaluated on 4 inputs -- a cancelling pair, two conspiring pairs of different shape, and a one-sided bend that is neither -- at g1's OWN row signature and again at p3's, 24 row readings; the two claims the corrected reason makes, scored against them; g1's finding-booking block executed in both directions; and the row's argument pair compared against 4755d02
+TOTAL BAD: 0
