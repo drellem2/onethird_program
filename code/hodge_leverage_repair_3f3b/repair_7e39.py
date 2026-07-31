@@ -849,8 +849,11 @@ def s3():
     head("S3 -- F5: THE VOCABULARY, DERIVED FROM WHAT THE GATE PRINTS")
     print("""The sweep exists because a hand-picked SITE is a scope nobody chose.  It then
 picked its VOCABULARY the same way: `ROW_NAMES`, five headings written out by
-hand, against a gate that prints six.  The lesson transferred to the axis it
-was learned on and not to the next one.
+hand, against a gate with SEVEN row kinds.  The lesson transferred to the axis
+it was learned on and not to the next one -- and mg-7e39 measured the gap with
+a regex over the gate's `print` calls, which sees six.  A derived vocabulary
+derived from the wrong thing is a hand list with extra steps, so the gate
+DECLARES the vocabulary and fails closed on a row that does not use it.
 """)
     src = read(LANDING_REL)
     hand = ["SITE RECORD", "RECORD PARTITION", "FIGURE CENSUS",
@@ -988,39 +991,46 @@ carry a number, because prose has no publication step.
           f"{len(SWEEP.py_files())}")
     print()
 
-    stale = []
+    # ⚠️ EACH TRANSCRIPT IS READ FROM GIT, NOT FROM THE WORKING TREE.  That is
+    # what "the commit that publishes it" means -- and it is also the only way
+    # this check can see THIS instrument's own transcript, which is truncated
+    # on disk by the redirect that is about to write it.  A check that cannot
+    # be applied to its author is a check with a scope nobody chose.
+    stale, unpublished = [], []
     for rel in COMPUTED:
-        try:
-            text = read(rel)
-        except OSError:
-            print(f"    {rel}: not present yet (first run)")
-            continue
-        m = POP_FIGURE.search(text)
-        if not m:
-            print(f"    {rel}: publishes no population figure")
-            continue
-        said = int(re.sub(r"\D", "", m.group(1)))
         rev = publishing_commit(rel)
         if rev is None:
-            have = len(SWEEP.py_files())
-            where = "the WORKING TREE (this file is modified here)"
-        else:
-            have = len(py_files_at(rev))
-            where = f"the tree at {rev[:12]}, the commit that last wrote it"
+            unpublished.append(rel)
+            print(f"    -- {rel}")
+            print(f"        NOT YET PUBLISHED at any commit (absent, or "
+                  f"modified in the working tree).  This row becomes a "
+                  f"measurement at the commit that lands it")
+            continue
+        text = git("show", f"{rev}:{rel}")
+        m = POP_FIGURE.search(text)
+        if not m:
+            print(f"    -- {rel}: publishes no population figure at {rev[:12]}")
+            continue
+        said = int(re.sub(r"\D", "", m.group(1)))
+        have = len(py_files_at(rev))
         mark = "  " if said == have else "⚠️"
         print(f"    {mark} {rel}")
-        print(f"        publishes {said} and {where} holds {have}")
+        print(f"        publishes {said}, and the tree at {rev[:12]} -- the "
+              f"commit that last wrote it -- holds {have}")
         if said != have:
             stale.append((rel, said, have, rev))
     print()
     record(not stale,
-           f"S4a of the {len(COMPUTED)} committed transcript(s) that publish a "
-           f"`.py` population, {len(stale)} disagree with the tree AT THE "
+           f"S4a of the {len(COMPUTED) - len(unpublished)} committed "
+           f"transcript(s) that publish a `.py` population, {len(stale)} "
+           f"disagree with the tree AT THE "
            f"COMMIT THAT PUBLISHES THEM.  This is the check mg-7e39's F2 is "
            f"the failure of, and it is keyed on each transcript's OWN "
            f"publishing commit rather than on HEAD -- so a merge that lands "
            f"elsewhere cannot make it red, and a transcript committed beside a "
-           f"tree it does not describe cannot make it green")
+           f"tree it does not describe cannot make it green.  "
+           f"{len(unpublished)} are not yet published at any commit and are "
+           f"named rather than counted as passes")
 
     carried = []
     for rel in PROSE:
