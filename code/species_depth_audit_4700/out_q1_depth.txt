@@ -1,0 +1,140 @@
+==============================================================================
+Q1a  A FORBIDDEN STATEMENT BELOW THE ROOT -- planted, and the checkers RUN
+==============================================================================
+
+  The planted file, verbatim, so a reader can see it carries no
+  exoneration:
+      | # planted by the mg-4700 audit, and removed again
+      | 
+      | Three of the four columns are the control, and they fire.
+
+  D1a   predicted exit 1                     got exit 1 (FIRES)             as predicted
+  D1b   predicted exit 1                     got exit 1 (FIRES)             as predicted
+        w3_scope.py names the path below the root: yes
+        s1_extent.py names it:                     yes
+        STILL ASSERTED  X4     code/species_7d75/sub/leak.md:3
+        STILL ASSERTED AT  sub/leak.md:3
+
+  D1c   predicted exit 1 from both           got w3 1 / s1 1                as predicted
+        the path as w3_scope.py prints it: #   below the root: a/b/c/leak.md
+
+  D1d   predicted s1 exit 1, w3 exit 0       got s1 1 / w3 0                as predicted
+        s1_extent.py:  STILL ASSERTED  X4     code/species_repair_a4ef/sub/leak.md:3
+        w3_scope.py is silent and that is CORRECT: its extent is ONE
+        tree and it says so.  A checker that fired here would be
+        reporting outside its own stated extent.
+
+==============================================================================
+Q1b  `__pycache__` -- the ONE rule that is printed, measured as still real
+==============================================================================
+
+  A repair that widened the walk until NOTHING was excluded would pass
+  every probe above and would have quietly dropped the one rule its
+  own extent line promises.  So the rule is measured in the direction
+  that can only fail: the same planted statement, under __pycache__.
+
+  D1e   predicted exit 0 from both           got w3 0 / s1 0                as predicted
+        and the rule is NAMED in both printed extents:
+            w3_scope.py   __pycache__ named
+            s1_extent.py  __pycache__ named
+
+  D1f   predicted e1 exit 0, path printed    got e1 0, printed yes          as predicted
+        code/species_7d75              19 file(s) read, 1 of them below the tree root
+        1 file(s) sit below a tree root today.  That number is printed
+
+==============================================================================
+Q1c  PUT EACH WALK BACK TO `os.listdir` -- E1 must FIRE
+==============================================================================
+
+  mg-6cb9's F1 was invisible because E1, whose job is deciding whether
+  a printed extent is TRUE, listed the tree the same way the subjects
+  did: `want <= got` held over a file none of the three could see.  An
+  instrument that computes its expectation the way the subject computes
+  its answer cannot disagree with the subject.  These three rows are
+  the guard, and each is ONE LINE reverted -- the line that tells the
+  walk to descend.
+
+  D1g   predicted exit 1                     got exit 1 (FIRES)             as predicted
+        reverted: w3_scope.py              os.walk(SRC) -> [(SRC, [], os.listdir(SRC))]
+          reads every regular file of code/species_7d75 (19)               *** FALSE ***
+  D1h   predicted exit 1                     got exit 1 (FIRES)             as predicted
+        reverted: s1_extent.py             os.walk(root) -> [(root, [], os.listdir(root))]
+          reads every non-excluded regular file of all four trees (53)     *** FALSE ***
+          every file BELOW a tree root is read (1 today)                   *** FALSE ***
+  D1i   predicted exit 1                     got exit 1 (FIRES)             as predicted
+        reverted: e1_extents.py (E1's OWN expectation) os.walk(root) -> [(root, [], os.listdir(root))]
+          the printed file count agrees with what was read                 *** FALSE ***
+
+==============================================================================
+Q1d  THE SYMLINKED DIRECTORY -- a second rule carried by no sentence
+==============================================================================
+
+  The brief: a claim true by accident of the current tree is invisible
+  by inspection, so ASK OF EVERY EXTENT WHAT STATE OF THE WORLD IT
+  SILENTLY ASSUMES.  `os.walk` does not descend into a symlinked
+  directory unless `followlinks=True`, and none of the three walks
+  passes it.  The link is classified into `dirnames`, so it is never a
+  candidate file either.  The extent lines name ONE directory rule.
+  This is a second, and it is invisible today for exactly the reason F1
+  was invisible: no tree has one.
+
+  D2a   predicted exit 0 (silent)            got exit 0 (silent)            as predicted
+  D2b   predicted exit 0 (silent)            got exit 1 (FIRES)             *** MISSED ***
+  D2c   predicted exit 0 (extent TRUE)       got exit 0 (silent)            as predicted
+
+        the same statement, in the same tree, one symlink away:
+            w3_scope.py   exit 0 (silent)
+            s1_extent.py  exit 1 (FIRES)
+            e1_extents.py exit 0 (silent) -- it CERTIFIES the extent as true
+        and neither printed extent mentions the file:
+            named by w3_scope.py:  no
+            named by s1_extent.py: no
+
+        WHY s1_extent.py exits 1, which is NOT what D2b predicted
+        and NOT the extent working:
+            its own S1b verdict:   0 statement-occurrence(s) still asserted at source.
+            its own extent line:   code/species_7d75              18 file(s) read, 0 of them below the tree root
+            the row that failed:   (c) one statement injected into a scratch copy  2 asserted (now 0)                     *** FAILED ***
+        The scan is blind.  Control (c) copytree()s the tree with
+        `symlinks=False`, which FOLLOWS the link and materialises
+        the planted file as a real one in the scratch copy, so the
+        injection count came out one high.  A reader of that run is
+        told the injection control is broken.  Nothing tells them a
+        forbidden statement is live in `code/species_7d75`.
+
+  *** FINDING.  The F1 SHAPE SURVIVES THE REPAIR one rule to the
+      side.  `EVERY REGULAR FILE ... AT ANY DEPTH` is still true
+      only because no tree contains a symlinked directory.  All
+      three walks are blind to it, E1 -- which walks the same
+      way -- cannot disagree and certifies the extent TRUE, and
+      the one non-zero exit comes from a control breaking for an
+      unrelated reason and naming the wrong thing.  This is the
+      sentence mg-821e wrote about `os.listdir`, with
+      `followlinks` in place of recursion. ***
+  D2d   predicted exit 1 (followed)          got exit 1 (FIRES)             as predicted
+        so the unstated rule is exactly `symlinked DIRECTORY`, not
+        `symlink`: a linked FILE is read.  That is what makes it a
+        DIRECTORY rule, and the extent line names one of those.
+
+  D2e   predicted no extent mentions it      got 0 of 3 mention it          as predicted
+        Three extents printed the word `__pycache__` and the phrase
+        `at any depth`.  None of the three printed `symlink`.  That is
+        the whole of the finding: the sentence is complete about the
+        rule somebody thought of.
+
+==============================================================================
+Q1 TOTAL BAD: 1
+Q1 PREDICTIONS MISSED: 1
+==============================================================================
+
+EXTENT OF THOSE NUMBERS.  Q1 measures the DEPTH claim of exactly three
+walks -- w3_scope.py's, s1_extent.py's and e1_extents.py's `regular()`
+-- by planting real files in the real worktree and RUNNING each
+checker.  It reads no walk and infers nothing from `os.walk` appearing
+in a source file.  It says nothing about the CONTENT of any extent
+beyond depth, nothing about the other two OPEN items, and nothing
+about any tree outside `code/species_7d75` and
+`code/species_repair_a4ef`, the two it plants in.  Q1 TOTAL BAD counts
+probes whose OUTCOME was wrong, not predictions that were wrong; the
+second number is separate on purpose, and D1i's miss is scored there
+and nowhere else.

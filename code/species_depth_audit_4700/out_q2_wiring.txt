@@ -1,0 +1,167 @@
+==============================================================================
+Q2a  ALL THREE `run_all.sh`, EXECUTED -- exit code and the check's own output
+==============================================================================
+
+  Nothing below is a grep of a script.  Each row is `sh run_all.sh`
+  from inside its own tree, and the quoted lines are that runner's
+  stdout.  The distinction is the whole of mg-6cb9's F2.
+
+  code/species_repair_a4ef      exit 0
+        | cross-section check (mg-821e), its own output:
+        |   15 file(s) carry a strike, 34 strike(s) measured, 0 standing.
+        | E2 TOTAL BAD: 0
+  code/species_remainder_f8fa   exit 0
+        | cross-section check (mg-821e), its own output:
+        |   15 file(s) carry a strike, 34 strike(s) measured, 0 standing.
+        | E2 TOTAL BAD: 0
+  code/species_repair_6f61      exit 0
+        | cross-section check (mg-821e), its own output:
+        |   15 file(s) carry a strike, 34 strike(s) measured, 0 standing.
+        | E2 TOTAL BAD: 0
+  D3a-c predicted 3 of 3 exit 0 + output     got 3 of 3                     as predicted
+
+  For comparison, the state mg-6cb9 measured: the same check reached by
+  0 of these 3 runners.  The difference is visible in stdout, which is
+  the only place it was ever going to be visible.
+
+==============================================================================
+Q2b  B1 ITSELF PUT BACK ON DISK -- with the control a red run needs
+==============================================================================
+
+  A red runner proves the wiring works only if the SAME document state
+  with the wiring REMOVED is green.  Without that control, `exit 1`
+  could be `check_doc.py` failing forty lines earlier and the
+  cross-section check never being reached at all.  Both halves are run.
+
+  code/species_repair_a4ef      WIRED    exit 1   names STANDING UN-STRUCK: yes
+        | strike line 476   run  31 of  42 ( 74%)  restated at line 169    *** STANDING UN-STRUCK **
+  code/species_repair_a4ef      UNWIRED  exit 0   green -- so the red above IS the wiring
+  code/species_remainder_f8fa   WIRED    exit 1   names STANDING UN-STRUCK: yes
+        | strike line 476   run  31 of  42 ( 74%)  restated at line 169    *** STANDING UN-STRUCK **
+  code/species_remainder_f8fa   UNWIRED  exit 0   green -- so the red above IS the wiring
+  code/species_repair_6f61      WIRED    exit 1   names STANDING UN-STRUCK: yes
+        | strike line 476   run  31 of  42 ( 74%)  restated at line 169    *** STANDING UN-STRUCK **
+  code/species_repair_6f61      UNWIRED  exit 0   green -- so the red above IS the wiring
+  D3d   predicted 3 of 3 caught              got 3 of 3 caught              as predicted
+
+  CAUGHT wired 3 of 3, GREEN unwired 3 of 3.  The second number is
+  what makes the first one mean anything.
+
+  `unwire()` above against af432ee~1, byte for byte:
+      code/species_repair_a4ef      identical
+      code/species_remainder_f8fa   identical
+      code/species_repair_6f61      identical
+  So the wiring really is an addition and nothing else moved -- and the
+  ref is PINNED.  Anchored on HEAD this row would have stopped
+  comparing on the day the repair landed (mg-821e's own 41ac5d4).
+
+==============================================================================
+Q2c  THE BLOCK IS NOT ONE UNIT -- each part deleted ALONE
+==============================================================================
+
+  mg-821e's deletion test removes the block as ONE unit, 20 lines, and
+  reports the output disappearing.  `Delete at the finest unit that has
+  a return`: the block has three separable parts, and two of them turn
+  out to have no return at all.
+
+  D3e  the `|| { ... exit 1; }` GUARD deleted alone, call kept, with
+       B1 restored on disk -- does the runner still go red?
+       code/species_repair_a4ef      exit 1   guard's message printed: no
+       code/species_remainder_f8fa   exit 1   guard's message printed: no
+       code/species_repair_6f61      exit 1   guard's message printed: no
+  D3e   predicted 3 of 3 still red           got 3 of 3 red                 as predicted
+
+  *** FINDING.  Deleting the guard moves the MESSAGE and not the
+      VERDICT.  `set -e` already aborts on a failed command
+      substitution in an assignment, so five of the block's
+      twenty lines have no return under the deletion test that
+      was run on the block as a whole.  The 20-line unit
+      OVERSTATES what is load-bearing; the guard's only
+      contribution is the diagnosis a reader gets, which is
+      what Q2d is about. ***
+
+  D3f  the two `echo`s that PRINT the check's output, deleted alone,
+       against the CLEAN tree.  The wiring comment says `The OUTPUT is
+       printed, not just the call made`.  What guards that sentence?
+
+       code/species_repair_a4ef      exit 0   any sign the check ran: NONE
+       code/species_remainder_f8fa   exit 0   any sign the check ran: NONE
+       code/species_repair_6f61      exit 0   any sign the check ran: NONE
+  D3f   predicted 3 of 3 green and silent    got 3 of 3                     as predicted
+
+  *** FINDING.  The claim that distinguishes this repair from the
+      state mg-6cb9 found -- `a call present in a script is not
+      evidence of execution, so the OUTPUT is printed` -- is itself
+      unguarded.  Delete the two `echo`s and all three runners exit
+      0 with no trace that the check ran, which is exactly the
+      reader-facing state F2 was about.  Nothing in any self-test
+      or checker asserts those lines exist. ***
+
+==============================================================================
+Q2d  ANY NON-ZERO EXIT REACHES A MESSAGE THAT NAMES ONE SPECIFIC FINDING
+==============================================================================
+
+  The guard prints `a struck claim stands un-struck elsewhere`.  That
+  is the ONE thing e2 exits 1 for -- but the `||` reaches it for a
+  crash, an import error, a missing file or a syntax error just as
+  readily, and stderr is not captured into $E2OUT, so the traceback
+  goes to the terminal while the summary line asserts a finding.
+
+  code/species_repair_a4ef      exit 1   claims a finding: yes  names one: no 
+  code/species_remainder_f8fa   exit 1   claims a finding: yes  names one: no 
+  code/species_repair_6f61      exit 1   claims a finding: yes  names one: no 
+  D3g   predicted claims a finding, names none got claims yes / names no      as predicted
+
+  A crash is reported as `a struck claim stands un-struck elsewhere`
+  with no such claim named.  This is MINOR -- the run does go red, and
+  the traceback is on stderr for anyone watching -- but it is the one
+  line a reader of the transcript is given, and it is false.
+
+==============================================================================
+Q2e  A RED SELF-TEST, SWALLOWED -- in two of the three runners repaired
+==============================================================================
+
+  `41ac5d4` fixed this in mg-821e's OWN runner: under `set -e` a
+  pipeline's status is the LAST command's, and `tee` always exits 0, so
+  a failing self-test does not stop the run.  Its message says `Every
+  other run_all.sh in this arc still uses | tee; noted, not touched.`
+  Two of those are the runners THIS repair edited -- it added twenty
+  lines to each -- so the swallow is measured here rather than taken on
+  the commit message's word.
+
+  code/species_repair_a4ef      exit 0   printed *** FAILED ***: yes  SWALLOWED
+  code/species_remainder_f8fa   exit 0   printed *** FAILED ***: yes  SWALLOWED
+  code/species_repair_6f61      exit 1   printed *** FAILED ***: no   stopped the run
+  D6a-c predicted a4ef+f8fa swallow, 6f61 not got a4ef True / f8fa True / 6f61 False as predicted
+
+  THE CLASS, COUNTED so these two are placed and not mistaken for all
+  of it: 10 run_all.sh in this repository pipe a SELF-TEST through
+  `tee` (23 use `| tee` anywhere).  Two of them are above.  This is a
+  repo-wide shape and mg-821e said so; what is measured here is that
+  two of the three files this repair opened still carry it.
+      code/branching_audit_2060/run_all.sh
+      code/branching_locate_db09/run_all.sh
+      code/species_7d75/run_all.sh
+      code/species_audit_73df/run_all.sh
+      code/species_audit_7dd3/run_all.sh
+      code/species_audit_a61f/run_all.sh
+      code/species_extent_audit_6cb9/run_all.sh
+      code/species_extent_d633/run_all.sh
+      code/species_remainder_f8fa/run_all.sh   <-- edited by this repair
+      code/species_repair_a4ef/run_all.sh   <-- edited by this repair
+
+==============================================================================
+Q2 TOTAL BAD: 4
+Q2 PREDICTIONS MISSED: 0
+==============================================================================
+
+EXTENT OF THOSE NUMBERS.  Q2 executed `run_all.sh` 21 times across the
+three species trees and read each runner's own stdout.  It greps no
+script for a call.  It covers the WIRING of e2_crosssection.py into
+those three runners and nothing else: not e2's own correctness (mg-d633
+and mg-6cb9 measured that, and Q4 re-runs mg-6cb9's battery unmodified),
+not the other two OPEN items, and not the fourth runner
+code/species_extent_d633/run_all.sh, which is where e2 already lived.
+Q2d is REPORTED and not scored: the run does go red, so it is a wrong
+message and not a missing verdict, and scoring it would put a
+cosmetic row beside two structural ones.
