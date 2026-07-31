@@ -38,6 +38,7 @@ E2e  THE ASYMMETRY AS STATED.  "The Young headline is a classification; the
 EXIT 1 if any check fails.  PREDICTED 1 -- E2c and E2d are predicted to fire.
 """
 
+import ast
 import os
 import re
 import sys
@@ -346,19 +347,33 @@ def e2f():
     less specific than what it replaced -- "of the same KIND" -- is examined
     for whether it is bounded or merely vague."""
     head("E2f  DID IT NARROW BY VAGUENESS?  The eight new phrasings, scanned.")
-    doc = read(DOC)
+    # Flattened, as w5_doc.py itself flattens: one of the required phrasings
+    # spans a line break in the document, and a raw find reported it missing
+    # while w5_doc.py -- which passes 41 of 41 -- finds it.
+    doc = re.sub(r"\s+", " ", read(DOC))
     w5 = read(os.path.join(CODE, "branching_warrant_dffa", "w5_doc.py"))
-    m = re.search(r"PRESENT = \[(.*?)\n\]", w5, re.S)
-    phr = re.findall(r'"((?:[^"\\]|\\.)*)"', m.group(1)) if m else []
-    phr = [p for p in phr if len(p) > 25]
+    m = re.search(r"PRESENT = (\[.*?\n\])", w5, re.S)
+    # Parse the LIST, not the quoted strings inside it: each entry is a
+    # (label, phrasing) pair and a bare string-scan collected the labels too,
+    # then reported 16 of them as "not located in the document" -- which they
+    # never were meant to be.  The phrasing is entry[1].
+    entries = ast.literal_eval(m.group(1)) if m else []
+    phr = [e[1] for e in entries]
     print("  the phrasings mg-dffa's own w5_doc.py requires to be PRESENT: %d"
           % len(phr), file=OUT)
     print(file=OUT)
     hedged = []
+    missing = []
     for p in phr:
-        needle = p.encode().decode("unicode_escape")
+        # Drops are COUNTED, never silent: an earlier version decoded these
+        # with `.encode().decode("unicode_escape")`, which mangled every
+        # non-ASCII character, and the entry containing an em-dash vanished
+        # from the scanned population without a word.  A silently truncated
+        # population is the very defect this audit is about.
+        needle = p
         idx = doc.find(needle)
         if idx < 0:
+            missing.append(needle)
             continue
         # The SENTENCE containing the phrase, not a fixed window: a +/-200
         # character window pulled in "a live claim MAY rest" from the
@@ -374,8 +389,10 @@ def e2f():
         if hits:
             hedged.append((needle, hits))
     print(file=OUT)
+    ck("every phrasing w5_doc.py requires was located in the document",
+       not missing, " (%d not located: %r)" % (len(missing), missing))
     ck("no new phrasing sits in a hedged sentence", not hedged,
-       " (%d)" % len(hedged))
+       " (%d of %d hedged)" % (len(hedged), len(phr) - len(missing)))
     print(file=OUT)
     print("  THE ONE CONSTRUCTION THAT IS LESS SPECIFIC THAN WHAT IT REPLACED.", file=OUT)
     print("  'the SAME index-set contact' became 'a contact of the same KIND'.", file=OUT)
@@ -395,12 +412,12 @@ def e2f():
     print(file=OUT)
     para = re.search(r"\*\(\*\*mg-dffa\*\*, landing mg-5800's F2.*?\)\*", doc, re.S)
     nxt = para.group() if para else ""
+    row10 = [l for l in read(DOC).split("\n") if l.startswith("| **10** |")]
     ck("the vaguer predicate is followed IN THE SAME PARAGRAPH by the "
        "difference,\n     stated definitely",
        "it is not the same contact" in nxt and "17 distinct" in nxt)
     ck("  ... and the same at row 10",
-       bool([l for l in doc.split("\n") if l.startswith("| **10** |")
-             and "it is not the SAME contact" in l]))
+       bool(row10) and "it is not the SAME contact" in row10[0])
     print(file=OUT)
     print("  VERDICT E2f.  NOT A HEDGE.  'Of the same kind' is a weaker", file=OUT)
     print("  predicate, but at both sites it is immediately BOUNDED by a", file=OUT)
