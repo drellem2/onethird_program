@@ -1,6 +1,6 @@
 ==============================================================================
 CHECK_DOC  docs/OneThird-Branching-Graphs-Where-This-Lives.md
-           41344 bytes, 455 lines, 73 blocks
+           46866 bytes, 508 lines, 78 blocks
 ==============================================================================
 
   -- PRESENT: the repair landed ----------------------------------
@@ -37,7 +37,9 @@ CHECK_DOC  docs/OneThird-Branching-Graphs-Where-This-Lives.md
   27  T2 row n=6 prints straight 6 and skew 62                       PASS
   28  T2 row n=7 prints straight 8 and skew 149                      PASS
   29  T2 row n=8 prints straight 12 and skew 360                     PASS
+  30  out_r1b_skew8.txt carries exactly one SKEW8 line               PASS
+  31  the COMPUTED n=8 skew count equals the one out_young.txt PUBLISHES PASS
 
 ==============================================================================
-CHECK_DOC: 29 checks, 0 failed
+CHECK_DOC: 31 checks, 0 failed
 ==============================================================================

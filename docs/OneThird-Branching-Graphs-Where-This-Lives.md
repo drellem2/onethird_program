@@ -16,6 +16,17 @@ per-claim statement of what was checked and what a falsifier would have looked l
 `docs/OneThird-Branching-Graphs-Repair.md`. **mg-6ad0's X5, X6 and X7 are deliberately NOT
 landed here — they are outside this repair's brief and have no successor ticket; see §9.***
 
+***Repaired again 2026-07-31 by mg-dffa**, landing the four MINOR findings of
+`docs/OneThird-Audit-mg-41aa-Repair.md` (mg-5800). **All four were WARRANT, not error: no
+number moves and no measurement is withdrawn or added to.** Two ledger cells were widened to
+what had already been measured (F1, rows B1 and B5); two sentences were narrowed to what
+their evidence carries (F2, §2's heading note and §3 row 10); one premise was **re-affirmed
+by reading Brown `§4.3`** rather than hedged (F4, §0 consequence 3); and one control that
+could not fire was closed in `code/branching_repair_41aa/check_doc.py` (F3). Evidence:
+`code/branching_warrant_dffa/`, which imports nothing from the four earlier instruments. The
+sentence-by-sentence account — as written, evidence, as narrowed — is
+`docs/OneThird-Warrant-Repair-mg-dffa.md`.***
+
 **What this document is.** mg-d673's MAJOR finding was that row Q of
 `docs/OneThird-Landscape-Where-This-Lives.md` licensed a *"no"* about the literature over a
 candidate space of **two** — FI-modules and Deligne — omitting **towers of algebras /
@@ -112,6 +123,23 @@ row-and-column-increasing fillings.
    > **toward** the headline: the located source's worked example is an instance of the very
    > contact this document reports.
 
+   **THE PREMISE THAT CORRECTION STANDS ON, RE-AFFIRMED OUTSIDE THE STRIKE — AND READ
+   (mg-dffa, landing mg-5800's F4).** *"Brown's own `§4.3` example lattice is a Young
+   interval"* has two premises: **(a)** Brown's worked `§4.3` example is the `p × q` grid,
+   and **(b)** that grid is the interval `[(q), (q+p, q)]`. **(b)** is measured — 25 pairs by
+   mg-41aa, 36 by mg-5800 from three definitions, 0 bad. **(a)** was mg-af28's reading of
+   Brown, and after the strike above it appeared in this document **only inside struck
+   text**, which is not a place a live claim may rest. It was therefore not hedged but
+   **read**: `§4.3` of `arXiv:math/0006145` is titled *"Distributive lattices"*; it
+   introduces exactly one example — *"As an example of a distributive lattice, consider the
+   product `{0,1,…,p} × {0,1,…,q}` of a chain of length `p` by a chain of length `q`"* —
+   whose *"maximal chains are the lattice paths from `(0,0)` to `(p,q)`"*; and *"The kids
+   walk"* is `§4.4`. All located **by position, strictly between the two section headings**
+   (`code/branching_warrant_dffa/out_w3_brown.txt`). Brown prints no size for the lattice; he
+   counts the chains `0̂ < x < 1̂` at `(p+1)(q+1) − 2`, which agrees with the `(p+1)(q+1)`
+   above. **What is now read is `§4.3` and the opening of `§4.4`, and nothing else: the rest
+   of Brown (2000) remains unread by this arc and B8 remains a keyword census.**
+
 **The harshest available reading of consequence 1, stated because this is where enthusiasm
 would be the expensive error.** The identification is about **index sets**. `SYT(λ)` is our
 state space at `P = D_λ` and it is the Gelfand–Tsetlin basis of `S^λ` — but the walk's
@@ -145,9 +173,24 @@ This ticket exists because a *"no"* was given without an enumeration. So each re
 named, with the measurement or the citation that carries it.
 
 *(**mg-41aa**: items 2 and 5 are re-scoped below, and the re-scoping makes this heading too
-strong in one respect. At the level of finite **intervals** the index-set contact **does**
-extend — to 28 of the 33 finite Young–Fibonacci intervals, item 2. What does not extend is
-the **representation theory**, which is items 3, 4, 6 and 7, and those are untouched.)*
+strong in one respect. At the level of finite **intervals** a contact of the same **kind**
+extends: **28 of the 33** finite Young–Fibonacci intervals are distributive, so each is
+`J(P)` for some `P`, item 2. What does not extend is the **representation theory**, which is
+items 3, 4, 6 and 7, and those are untouched.)*
+
+*(**mg-dffa**, landing mg-5800's F2, narrowing the sentence above and not the measurement
+under it. **It is a contact of the same kind and it is not the same contact.** The Young
+headline is a **classification** — the intervals of Young's lattice are `J(P)` for `P`
+**exactly** the skew cell posets, a named closed class, which is the whole content of §0
+consequence 1. The Young–Fibonacci sentence is **Birkhoff plus a distributivity count**:
+every finite distributive lattice is `J` of its join-irreducibles, so "28 of the 33 are
+`J(P)`" says precisely "28 of the 33 are distributive", and **names no class of `P`**. The
+families also differ. Measured on a fourth instrument: the 28 distributive Young–Fibonacci
+intervals yield **17 distinct `P`** up to isomorphism, of which **5 are not skew cell
+posets** — 2 of the 4 at `|P| = 5`, 3 of the 5 at `|P| = 6`
+(`code/branching_warrant_dffa/out_w2_family.txt`). On the Young side the same measurement
+returns **30 of 30** intervals distributive and **0** of the resulting `P` outside the skew
+class.)*
 
 1. **Finiteness.** Differential posets and dual graded graphs are locally finite with a
    `0̂` and infinitely many ranks; `J(P)` for finite `P` is finite with a `1̂`. The
@@ -261,7 +304,7 @@ this table is the finding, not the headline.
 | **7** | **Diagram algebras via Schur–Weyl** (partition, Brauer, Temperley–Lieb, rook) | **yes** | **NOT LOCATED** | these are centraliser algebras with diagram bases and multiplicity-carrying Bratteli diagrams; I located no order-cone, order-congruence or `P`-compatible-partition object among them. A search report, not a claim about the literature |
 | **8** | **Bratteli diagrams / AF algebras** in general | **yes** | **VACUOUS INSTANCE** | true and contentless; §2.7 |
 | **9** | **Fulman, *Commutation relations and Markov chains*** (`arXiv:0712.1375`), down-up chains on the Young, Schur and Kingman graphs | **yes** | **ADJACENT — different state space** | his chains move on the **vertices** of a branching graph, driven by the `U`/`D` operators; ours moves on the **maximal chains**. The Plancherel growth process is likewise a measure on paths, not a Markov chain on the set of paths |
-| **10** | **Okada algebras and the Okada monoid** (`arXiv:2404.16733`) | **yes** | **ADJACENT — the closest structural analogue found** | a *monoid* whose algebra tower has a differential poset (Young–Fibonacci) as its Bratteli diagram: the shape of the thing Daniel's question asks for. It is a different monoid (aperiodic, a labelled Temperley–Lieb arc-diagram model). **Located from abstracts; not read.** *Re-scoped by mg-41aa under mg-6ad0's X4: this row previously added "and the lattice it realises is the one Brown §4.3 provably cannot consume (T8)". That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Brown §4.3 consumes them and each is a `J(P)`. Row 10 therefore has the **same index-set contact** this document headlines for Young's, on 28 of 33 intervals; what keeps it ADJACENT is that it is a different monoid, which is the reason above and not the withdrawn one.* |
+| **10** | **Okada algebras and the Okada monoid** (`arXiv:2404.16733`) | **yes** | **ADJACENT — the closest structural analogue found** | a *monoid* whose algebra tower has a differential poset (Young–Fibonacci) as its Bratteli diagram: the shape of the thing Daniel's question asks for. It is a different monoid (aperiodic, a labelled Temperley–Lieb arc-diagram model). **Located from abstracts; not read.** *Re-scoped by mg-41aa under mg-6ad0's X4: this row previously added "and the lattice it realises is the one Brown §4.3 provably cannot consume (T8)". That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Brown §4.3 consumes them and each is a `J(P)`. Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, on 28 of 33 intervals; what keeps it ADJACENT is that it is a different monoid, which is the reason above and not the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: it is not the SAME contact. The Young headline classifies its index sets — `P` exactly the skew cell posets — whereas here no class of `P` is named, and the 28 intervals yield 17 distinct `P` of which 5 are not skew cell posets (§2 item 2; `code/branching_warrant_dffa/out_w2_family.txt`).** |
 | **11** | **Gaetz, dual towers of groups** (`arXiv:1803.11168`) | **yes** | **CONTEXT, not contact** | rigidity of the dual-graded-graph structure; see row 5 |
 | **12** | **Bidigare–Solomon → `NSym`/`QSym` → the `0`-Hecke tower** | **yes** | **the one documented bridge, and it needs the symmetry we lose** | §2.6. This is the honest answer to *"is there a route from this family into the tower programme"*: yes, at the antichain end, and it dates from the 1990s (Bidigare's thesis; GKLLRT; Krob–Thibon) — *decades stated from the secondary literature, since I read none of the three* |
 
@@ -363,13 +406,13 @@ Ordered by how much I expect them to yield.
 
 | # | claim | status | scope |
 |---|---|---|---|
-| **B1** | `J(D_λ)` is the interval `[∅, λ]` of Young's lattice, by the map "ideal ↦ shape", and the maximal chains of `J(D_λ)` are `SYT(λ)` with `e(D_λ) = f^λ` | **MEASURED** | 44 partitions, `n ≤ 7`, order isomorphism checked on every pair in both directions, 0 bad; `f^λ` against an independently coded hook length formula, 0 bad |
+| **B1** | `J(D_λ)` is the interval `[∅, λ]` of Young's lattice, by the map "ideal ↦ shape", and the maximal chains of `J(D_λ)` are `SYT(λ)` with `e(D_λ) = f^λ` | **MEASURED — and it is a LATTICE isomorphism** *(widened by mg-dffa, landing mg-5800's F1)* | 44 partitions, `n ≤ 7`. **Meet and join preserved on every pair, not the order alone**: measured three times on disjoint instruments — mg-6ad0 (`code/branching_audit_6ad0/out_a1_contact.txt`), mg-5800 (`code/branching_audit_5800/out_a5_b1b5.txt`) and mg-dffa (`code/branching_warrant_dffa/out_w1_ledger.txt`, 5 464 ordered pairs, the two sides built from order ideals and from containment of **partitions** respectively) — **0 bad each time**. T1 in `code/branching_af28/` itself tests the **order** isomorphism only, on every pair in both directions, 0 bad, though it prints the label `lattice-iso bad`. `f^λ` against an independently coded hook length formula, 0 bad |
 | **B2** | the posets `P` for which `J(P)` is an interval `[μ, λ]` of Young's lattice are exactly the **SKEW** cell posets `λ/μ`, a vanishing fraction: **62/318** (`n=6`), **149/2 045** (`n=7`), **360/16 999** (`n=8`); those with `J(P) = [∅, λ]` are exactly the straight cell posets `D_λ`, 6/318, 8/2 045, 12/16 999 | **MEASURED both columns; the "exactly" now TESTED** | straight and skew classes by canonical form (T2, `n ≤ 6` here; `n = 7, 8` skew from `code/branching_repair_41aa`, agreeing with mg-6ad0). The "exactly" is tested **in both directions** in `r1_exactly.py`: for all **405** poset classes to `n ≤ 6` an isomorphism `J(P) → [μ, λ]` is **constructed and checked on every pair**, and no poset outside the skew class matches any interval of the right size (exhaustive to `n ≤ 5`). `n ≥ 7` totals are **A000112, cited not computed** |
 | **B2′** | *(the version this replaces, mg-6ad0's X1)* — B2 formerly read *"the posets `P` for which `J(P)` is an interval of Young's lattice are **exactly** the cell posets, … 6/318, 8/2 045, 12/16 999"* | **BROKEN — the "exactly" was FALSE and was never tested** | the 2-element antichain is not a `D_λ` and `J(it) = [(1), (2,1)]`; T2 measured `{canon(D_λ) : λ ⊢ n}` and nothing else. The three numbers were right about the straight class and understated the named class by 10× to 30× |
 | **B3** | no finite `J(P)` is a differential poset, and none is one even with the top rank exempted (bar the one-element poset) | **MEASURED, with positive controls** | 405 classes to `n ≤ 6`. Controls: Young's lattice and Young–Fibonacci both return `r = 1` in the same code path |
 | **B4** | **as whole lattices**: every interval `[∅, λ]` of Young's lattice is distributive and the Young–Fibonacci lattice is not, and Young's is the only *distributive* 1-differential lattice | **MEASURED + CITED** | 30 Young intervals, 0 non-distributive; 33 Young–Fibonacci intervals, 5 non-distributive, witness `w = 221` — all reproduced by mg-6ad0 and by mg-41aa. Stanley's and Byrnes's classification statements are **cited from a secondary source and not read** |
 | **B4′** | *(the reading this replaces, mg-6ad0's X4)* — B4 formerly concluded *"so Brown §4.3 reaches the Young graph and no other differential poset"* | **RE-SCOPED — true and empty at the level stated, false at the level that matters** | Brown §4.3 needs a **finite** distributive lattice and no differential poset is finite, so at whole-poset level it consumes none, Young's included. At interval level, **28 of 33** Young–Fibonacci intervals are distributive and each is `J(P)` for an explicitly constructed `P`, **0 bad** |
-| **B5** | `dim kF(P)/rad = |AC(P)|`, consistent with Brown's *"they are all 1-dimensional"* | **MEASURED** | trace-form rank in exact rational arithmetic; all 87 classes to `n ≤ 5` and 308 of 318 at `n = 6`, 0 bad. **The step from this to "all irreducibles are 1-dimensional" is Brown's theorem, cited, not re-derived here** |
+| **B5** | `dim kF(P)/rad = |AC(P)|`, consistent with Brown's *"they are all 1-dimensional"* | **MEASURED — and the step to Brown's theorem has since been DERIVED, twice** *(widened by mg-dffa, landing mg-5800's F1)* | trace-form rank in exact rational arithmetic; all 87 classes to `n ≤ 5` and 308 of 318 at `n = 6`, 0 bad. **The step from this to "all irreducibles are 1-dimensional" is Brown's theorem, cited and not re-derived in `code/branching_af28/`** — but it has since been derived without it: `Φ : kF(P) → k^{AC(P)}` built from the product alone, surjective, `ker Φ` a nilpotent ideal, 0 bad — by mg-6ad0 on 67 of the 87 classes to `n ≤ 5` (20 over its cap of 90 on the size of `F(P)`, each listed) *"by a route that uses no theorem of Dickson and no trace form"*, and by mg-5800 on all 87 *"with NO trace form and NO cited theorem"* (`code/branching_audit_6ad0/out_a4_algebra.txt`, `code/branching_audit_5800/out_a5_b1b5.txt`). **mg-dffa LOCATED both results in those committed outputs; it did not re-run them and does not re-derive the step itself** |
 | **B6** | no move acts on `L(P)` bijectively without acting as the identity map | **MEASURED** | 6 197 moves over 87 classes to `n ≤ 5`, 0 |
 | **B7** | block concatenation `F(P) × F(Q) → F(P ⊔ Q)` is an injective semigroup homomorphism and is **not** unital, so it fails Bergeron–Li axiom (2) **of §3.1, *"Tower of Algebras (Preserving unities)"*** | **MEASURED + QUOTED** | 64 pairs, `|P|,|Q| ≤ 3`; axiom quoted verbatim from `arXiv:math/0612170` §3.1, quotation re-verified by mg-6ad0 and by mg-41aa |
 | **B7′** | *(the scope this adds, mg-6ad0's X3)* — the same paper's **§3.6, *"Tower of Algebras (not Preserving unities)"***, takes as input *"an algebra injection not necessarily preserving unities"*, which is what B7 measures concatenation to be | **QUOTED; the consequence is an OPEN QUESTION, not a verdict** | both section titles and the input clause located verbatim, in both spellings, on a third extractor. Bergeron–Li conditions (3),(4),(5) under the §3.6 weakening are **untested by anyone** and testing them is new mathematics. **B7 does not license a "no tower"; it licenses "§3.1's axiom fails"** |
@@ -396,6 +439,16 @@ sharing no code with `branching_af28/` or `branching_audit_6ad0/`): `out_r1_exac
 audit it lands is `docs/OneThird-Audit-mg-af28-Branching-Graphs.md` (mg-6ad0,
 `code/branching_audit_6ad0/`), and that battery was re-run **unmodified** against the
 repair — see `docs/OneThird-Branching-Graphs-Repair.md` §5.
+
+mg-dffa's warrant instrument is `code/branching_warrant_dffa/` (42-assertion self-test,
+importing nothing from the four earlier instrument directories): `out_w1_ledger.txt`,
+`out_w2_family.txt`, `out_w3_brown.txt`, `out_w4_control.txt`, `out_w5_doc.txt`. `w3_brown.py`
+is the only step needing network. The account of what it changed and why is
+`docs/OneThird-Warrant-Repair-mg-dffa.md`.
+
+```
+cd code/branching_warrant_dffa && ./run_all.sh # ~5 s, pure Python 3  (mg-dffa)
+```
 
 ---
 

@@ -1,0 +1,113 @@
+==============================================================================
+W1a  B1: J(D_lam) -> [0, lam] as a LATTICE isomorphism, measured.
+     Left side: order ideals of the cell poset.  Right side: the
+     PARTITIONS nu with nu contained in lam, under containment.
+==============================================================================
+
+   n  lam                  |J|  |[0,lam]|  order  meet  join
+   1  (1,)                    2         2      .     .     .
+   2  (2,)                    3         3      .     .     .
+   2  (1, 1)                  3         3      .     .     .
+   3  (3,)                    4         4      .     .     .
+   3  (2, 1)                  5         5      .     .     .
+   3  (1, 1, 1)               4         4      .     .     .
+   4  (4,)                    5         5      .     .     .
+   4  (3, 1)                  7         7      .     .     .
+   4  (2, 2)                  6         6      .     .     .
+   4  (2, 1, 1)               7         7      .     .     .
+   4  (1, 1, 1, 1)            5         5      .     .     .
+   5  (5,)                    6         6      .     .     .
+   5  (4, 1)                  9         9      .     .     .
+   5  (3, 2)                  9         9      .     .     .
+   5  (3, 1, 1)              10        10      .     .     .
+   5  (2, 2, 1)               9         9      .     .     .
+   5  (2, 1, 1, 1)            9         9      .     .     .
+   5  (1, 1, 1, 1, 1)         6         6      .     .     .
+   6  (6,)                    7         7      .     .     .
+   6  (5, 1)                 11        11      .     .     .
+   6  (4, 2)                 12        12      .     .     .
+   6  (4, 1, 1)              13        13      .     .     .
+   6  (3, 3)                 10        10      .     .     .
+   6  (3, 2, 1)              14        14      .     .     .
+   6  (3, 1, 1, 1)           13        13      .     .     .
+   6  (2, 2, 2)              10        10      .     .     .
+   6  (2, 2, 1, 1)           12        12      .     .     .
+   6  (2, 1, 1, 1, 1)        11        11      .     .     .
+   6  (1, 1, 1, 1, 1, 1)      7         7      .     .     .
+   7  (7,)                    8         8      .     .     .
+   7  (6, 1)                 13        13      .     .     .
+   7  (5, 2)                 15        15      .     .     .
+   7  (5, 1, 1)              16        16      .     .     .
+   7  (4, 3)                 14        14      .     .     .
+   7  (4, 2, 1)              19        19      .     .     .
+   7  (4, 1, 1, 1)           17        17      .     .     .
+   7  (3, 3, 1)              16        16      .     .     .
+   7  (3, 2, 2)              16        16      .     .     .
+   7  (3, 2, 1, 1)           19        19      .     .     .
+   7  (3, 1, 1, 1, 1)        16        16      .     .     .
+   7  (2, 2, 2, 1)           14        14      .     .     .
+   7  (2, 2, 1, 1, 1)        15        15      .     .     .
+   7  (2, 1, 1, 1, 1, 1)     13        13      .     .     .
+   7  (1, 1, 1, 1, 1, 1, 1)    8         8      .     .     .
+
+  partitions tested: 44   largest interval: 19 elements
+  ordered pairs tested: 5464
+  order failures, both directions, every pair                ok (0)
+  MEET not preserved                                         ok (0)
+  JOIN not preserved                                         ok (0)
+
+  => on 44 partitions to n <= 7 the map is a LATTICE isomorphism,
+     not merely an order isomorphism: True
+
+==============================================================================
+W1b  The old B1 cell and af28's printed label err in OPPOSITE
+     directions off one test.  Located in af28's own source.
+==============================================================================
+
+  t_young.py's T1 body located                               ok
+  T1 computes no meet                                        ok (0 occurrences)
+  T1 computes no join                                        ok (0 occurrences)
+  T1 nonetheless prints the label 'lattice-iso bad'          ok
+  out_young.txt carries that label                           ok (1 lines)
+      out_young.txt: partitions tested: 44   lattice-iso bad: 0   SYT/chain bad: 0
+
+  READING.  af28's T1 tests the ORDER isomorphism and labels the
+  result `lattice-iso`; af28's LEDGER cell B1 says `order
+  isomorphism` while the fact is a lattice isomorphism.  The output
+  over-labels and the ledger under-states, off the same run.
+  mg-dffa narrows the LEDGER cell only.  The label in
+  code/branching_af28/ is left alone: changing it would rewrite a
+  committed output that mg-5800 re-ran and found byte-identical,
+  and no ticket has asked for that.  It is recorded, not fixed.
+
+==============================================================================
+W1c  B5's re-derivation: LOCATED in two committed outputs, NOT
+     re-run here.  This is a weaker act than measuring and it is
+     named as one.
+==============================================================================
+
+  mg-6ad0 out_a4_algebra.txt: 'no theorem of Dickson and no trace form' ok
+  mg-6ad0 out_a4_algebra.txt: Phi surjective, kernel nilpotent ok
+  mg-5800 out_a5_b1b5.txt: 'NO trace form and NO cited theorem' ok
+  mg-5800 out_a5_b1b5.txt: 87 posets, 0 bad on every column  ok
+  mg-6ad0 out_a1_contact.txt: meet/join measured, 0 bad      ok
+  mg-5800 out_a5_b1b5.txt: meet/join measured, 0 bad         ok
+  mg-6ad0's A4a section isolated from A4b                    ok
+  A4a's table has one row per rank n = 1..5                  ok (5 rows)
+
+  mg-6ad0's own table, read off its output: 87 classes, 67 tested,
+  20 skipped over its |F(P)| <= 90 cap (each skip listed there).
+  its table is internally consistent                         ok
+  mg-5800 covered the classes mg-6ad0 capped out             ok
+
+  READING.  The step from `dim kF(P)/rad = |AC(P)|` to `all
+  irreducibles are 1-dimensional` was booked to Brown, cited and
+  not re-derived, in af28's ledger.  It has since been derived
+  twice with no trace form and no cited theorem: by mg-6ad0 on 67
+  of 87 classes to n <= 5, and by mg-5800 on all 87.  mg-dffa
+  LOCATES those results; it does not reproduce them, and the
+  narrowed ledger cell attributes them rather than claiming them.
+
+==============================================================================
+SUMMARY w1_ledger: partitions 44, failures 0
+==============================================================================
