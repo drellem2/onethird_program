@@ -251,8 +251,13 @@ newer count stand is what surfaced it.*
 
 ## Next (gated / queued)
 
-- **mg-6ef4** (audit of the walk-bound repair) — released, awaiting a dispatch slot.
-- **mg-dee4** (on mg-7522), **mg-ec07** (on mg-ff3e) — pre-filed in the same action as their parents.
+- **mg-3934** (audit mg-3946) — **CI has been RED on `main` in one_third_width_three for ~21 hours**,
+  8 of 8 runs. `Gate mutation demo` dies reading a file at historical SHA `af7fc2df`, which resolves in
+  a full clone and **cannot under `actions/checkout`'s default depth 1**. Precisely: the three earlier
+  steps run and pass; **the mg-75f0 class-closure demo has never once executed in CI**, so its first
+  green is its **first run**, not a restoration. And the workflow says of itself *"a green or red check
+  here INFORMS but does not BLOCK"* — **21 hours of red produced no response from anyone, including
+  me.** A permanently-red non-blocking check is worse than no check.
 - **mg-344a** — Daniel workspace, `assignee=human`.
 - **Blocked on the rebuild, not forgotten:** the template-effect measurement. The nightly redeploy failed
   (exit 7, drain stalled), so **mg-2375 and mg-ce5e are merged and not installed, and the treated population is
