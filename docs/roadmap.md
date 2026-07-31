@@ -284,6 +284,23 @@ on an audit that measured its extents in both directions — that, not fatigue, 
     passage **flagged rather than half-fixed** — *the first in the arc to name what it deliberately did
     not do.*
 
+- **Two further DROPPED VERDICTS**, found by running the detector over the **full** population of 60
+  rather than the 9 a broken filter surfaced:
+  - **mg-a74f** (audit mg-65eb) — mg-16eb on the delegated presentation record. Repair real, **7 of 7
+    outputs byte-identical**, 8 of 8 rows as predicted; but **the visibility instrument measures BYTES
+    IN THE HTML and calls it what a reader is shown**, and **6 of 17 added claims do not hold**. The
+    audit's framing is the durable part: **the blind spot moved three times, all three onto ground the
+    repair itself laid.**
+  - **mg-dffa** (audit mg-19ec) — mg-5800 on the two-negatives repair. **0 BROKEN**, every figure
+    reproduced from a disjoint instrument, and **the converse of X1 measured at n=6 WITHOUT Birkhoff**,
+    closing the repair's own weakest link. **4 MINOR, all about warrant**, unfixed.
+- **Method note, because the numbers were misleading in a way worth remembering.** Three predicates
+  over the same 60 audits gave **9**, **42**, and **3** — each silently asserted there was *one* way an
+  audit gets disposed of, when there are three (repo landing, successor ticket, clean verdict).
+  **The alarming number was the most wrong.** One remaining flag was a false positive created by a
+  filter I had added an hour earlier to fix a different control: excluding my own roadmap commits
+  blinded the detector to my own disposition route.
+
 ## Next (gated / queued)
 
 - **mg-6ef4** (audit of the walk-bound repair) — released, awaiting a dispatch slot.
