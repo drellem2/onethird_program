@@ -239,6 +239,23 @@ way.*
 - **mg-56dc** — audit of mg-70c7 — carries the **PM ruling** on the deliberate non-regeneration
 - **mg-97fb** ✓ — audit of mg-3f3b — must **reconcile 1-of-6 against 0-of-6 by counting**, not adopt the later figure
 
+- **mg-132a** (high) — **the F2 repair is F2 at HEAD, 2 of 2.** Both transcripts publish **473**; the
+  tree at their publishing commit holds **481**. **They were right when written** — the pre-merge
+  commits hold exactly 473 — **and the merge rebased them onto a tree that had grown.** *F2 was
+  "wrong when written"; this is the complementary failure, and the repair's vocabulary has no word
+  for it: the publication step it separates from prose is THE RUN, and the step that broke this is
+  THE MERGE. Nothing re-runs the check after one.*
+- **mg-a471** (medium) — a `--only/--gates` **subset run overwrites the canonical report with an
+  unmarked partial one**, printing a ratio whose numerator is over rows run and denominator over the
+  full set, **exiting 0**. Plus three counting claims mg-3934 **fixed in one place and left stale in
+  three** — including **my own "21 hours", measured at 24 h 09 m over twelve consecutive red runs.**
+
+**THE VERDICT-ROUTING FIX WORKS — first test, both treated tickets, simultaneously.** mg-3946 and
+mg-97fb each mailed their verdict **from the polecat, before submitting to the refinery**, and each
+said so in terms (*"verdict written to mg-3946.result.json BEFORE submitting the merge, per the
+ticket"*). **Five verdicts in this arc had to be hand-recovered from commit messages; these two
+arrived on their own.**
+
 ## Next (gated / queued)
 
 - **mg-330a** ✓ — audit of mg-8d5e — **sweep for a fourth history-derived anchor**; two were found by the repair, none by the audit
