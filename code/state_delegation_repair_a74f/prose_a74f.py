@@ -10,26 +10,40 @@ external checker — `coverage218d.py` — even though COVERAGE.md names the sam
 same count, correctly, in the same paragraph where `delta_control.py` gets both wrong.
 
 The difference is not care.  It is whether a program reads the prose as claims.  This file is
-that program, for two shapes of claim and only two:
+that program, for three shapes of claim and one shape of guard, and for nothing else:
 
     P1  every repo-relative path named in the text EXISTS at the revision being read
     P2  every `section N` reference to a `run_all.sh` RESOLVES to a section of it, and every
         mg-id and script basename named on the referencing line occurs in that section
-
-and one shape of guard against the next table:
-
+    P4  every `all N rows` phrase equals the `ROWS` of the script it names, derived from that
+        script's own AST (or from the module it imports `ROWS` from)
     P3  every module-level dict of `delta_control.py` keyed by repo paths is ITERATED by
         some `for` in that file.  A pinned table nothing visits cannot fail in the direction
         that would need visiting, which is broken claim 3 exactly; a third such table added
         later joins this population by existing.
 
 WHAT THIS DOES NOT CHECK, AND THE LIST IS THE POINT.  Every other claim in every file it
-walks: every count, every "cannot", every "measured over N", every claim about what a reader
-is shown.  Those sentences now sit NEXT TO checked ones in files this program walks, and a
-reader who knows this checker exists may take the neighbours as covered.  They are not.  Of
-the six claims mg-16eb refuted, P1 and P2 between them cover THREE (the path, the count, and
-one of the two section pointers); the other three are covered by `claims_a74f.py`'s anchored
-checks, which are hand checks of named sentences and are labelled as such there.
+walks: every count that is not an `all N rows` phrase, every "cannot", every "measured over
+N", every claim about what a reader is shown.  Those sentences now sit NEXT TO checked ones
+in files this program walks, and a reader who knows this checker exists may take the
+neighbours as covered.  They are not.
+
+WHAT IT DOES COVER, OF THE SIX CLAIMS mg-16eb REFUTED: P1 covers claim 1, P4 covers claim 2,
+P3 covers claim 3's code half, and P2 covers ONE of the two rows of claim 5.  That is three
+and a half of six.  It covers NEITHER claim 4 NOR claim 6, and it cannot: both are a name for
+a measured property that claims more than the measurement, and no reference-checker of this
+kind can see that.  Those two are caught by putting the instrument to a CONSTRUCTION —
+mg-16eb's B3 and C1, and this repair's `visible_a74f.py`.
+
+THE HALF OF CLAIM 5 IT MISSES, stated because a coverage figure without its gap is the defect
+one directory over.  mg-0049's README said BOTH batteries were re-run in section 7.  P2's
+fail-closed rule is that every mg-id on the referencing line must occur in the section named:
+the mg-5644 row fails, because section 7 does not mention mg-5644.  The mg-218d row PASSES at
+`bd24efc`, wrongly, because section 7 runs `coverage218d.py` and its echoed title does say
+`mg-218d`.  Deciding that the row is about mg-218d's BATTERY and not about mg-218d's coverage
+checker needs the sentence's meaning, and this program does not have it.  Claim 5's other
+half is caught by `claims_a74f.py`'s anchored check, which is a hand check of two named table
+rows and is labelled as one there.
 
     python3 code/state_delegation_repair_a74f/prose_a74f.py            # the working tree
     python3 code/state_delegation_repair_a74f/prose_a74f.py --rev REV  # any revision
@@ -56,6 +70,31 @@ DIRS = [
     "code/state_delegation_repair_a74f",
 ]
 EXTS = (".py", ".md", ".sh")
+
+# FILES WHOSE PROSE IS A REPORT OF ANOTHER FILE'S CLAIMS.  A checker that reads a report of
+# a defect as a fresh instance of the defect is measuring the wrong thing: `claims_a74f.py`
+# names `guards_only_0049.py` three times BECAUSE that path does not exist, and quotes "all
+# six rows" BECAUSE six is wrong.  These two files are excluded from P1, P2 and P4, and the
+# exclusion is FAIL-CLOSED IN BOTH DIRECTIONS: the count of matches each one suppresses is
+# printed on every run, an entry naming a file that is not in the population is a FAIL, and
+# an entry that suppresses NOTHING is a FAIL, so this list cannot rot into a silent blanket.
+# Nothing else is exempt.  In particular delta_control.py, both READMEs, COVERAGE.md,
+# render0049.py, every run_all.sh and this file itself are checked.
+REPORTS = {
+    "code/state_delegation_repair_a74f/PREDICTIONS.md":
+        "the predictions, which quote each of the six broken claims verbatim",
+    "code/state_delegation_repair_a74f/claims_a74f.py":
+        "the report of the six, which names each broken path and count to report it",
+}
+_suppressed = {}
+
+
+def reporting(rel):
+    return rel in REPORTS
+
+
+def note_suppressed(rel, n=1):
+    _suppressed[rel] = _suppressed.get(rel, 0) + n
 
 _PATH = re.compile(r"\b(?:code|docs)/[A-Za-z0-9_./-]*[A-Za-z0-9_-]\.(?:py|md|sh|js|txt|json)\b")
 _SECTION = re.compile(r"\bsection (\d+)\b")
@@ -125,6 +164,10 @@ def check_paths(files, rd, exists):
     for rel in files:
         text = rd(rel)
         for m in _PATH.finditer(text):
+            if reporting(rel):
+                if m.group(0) not in exists:
+                    note_suppressed(rel)
+                continue
             refs.append((rel, text[:m.start()].count("\n") + 1, m.group(0)))
     print(f"  population: {len(refs)} path references over {len(files)} files "
           f"({len(set(r[2] for r in refs))} distinct paths).  Computed from the tree, "
@@ -157,7 +200,7 @@ def check_sections(files, rd):
           + ", ".join(f"{os.path.basename(d) or d}={len(s)}"
                       for d, s in sorted(runalls.items())))
 
-    refs = []
+    refs, quoted_secs = [], []
     for rel in files:
         if rel.endswith("run_all.sh"):
             continue
@@ -168,10 +211,21 @@ def check_sections(files, rd):
             if not _RUNALL.search(line) and "re-run in section" not in line:
                 continue
             for m in _SECTION.finditer(line):
+                if reporting(rel):
+                    note_suppressed(rel)
+                    continue
+                if _quoted(line, m.start()):
+                    quoted_secs.append((rel, ln, m.group(0)))
+                    continue
                 refs.append((rel, ln, m.group(1), line.strip()))
     print(f"  population: {len(refs)} `section N` references to a run_all.sh, over the "
           f"{len([f for f in files if not f.endswith('run_all.sh')])} non-run_all.sh files "
           f"of the declared set.")
+    print(f"  {len(quoted_secs)} further reference(s) SKIPPED as quotations:")
+    for rel, ln, phrase in quoted_secs:
+        print(f"         (quoted, not asserted) {rel}:{ln}  {phrase!r}")
+    if not quoted_secs:
+        print("         (none)")
     bad = 0
     for rel, ln, num, line in refs:
         secs = runalls[os.path.dirname(rel)]
@@ -311,6 +365,9 @@ def check_counts(files, rd):
         for m in _COUNT.finditer(text):
             raw = m.group(1)
             said = int(raw) if raw.isdigit() else _WORD[raw]
+            if reporting(rel):
+                note_suppressed(rel)
+                continue
             bol = text.rfind("\n", 0, m.start()) + 1
             eol = text.find("\n", m.start())
             line = text[bol:eol if eol >= 0 else len(text)]
@@ -378,6 +435,34 @@ def main():
     n2, b2 = check_sections(files, rd)
     n3, b3 = check_tables(rd, files)
     n4, b4 = check_counts(files, rd)
+
+    print("=" * 100)
+    print("THE EXEMPTION LIST, PRINTED — FILES WHOSE PROSE REPORTS ANOTHER FILE'S CLAIMS")
+    print("=" * 100)
+    print("  A checker that reads a REPORT of a defect as a fresh instance of it is")
+    print("  measuring the wrong thing.  These files are excluded from P1, P2 and P4.  The")
+    print("  list is fail-closed both ways: an entry naming a file outside the population is")
+    print("  a FAIL, and an entry that suppresses nothing is a FAIL.")
+    if args.rev:
+        print(f"  NOT EVALUATED AT {args.rev}, with the reason rather than a bare `n/a`:")
+        print("  these two files are this deliverable's own and did not exist at that")
+        print("  revision, so 'the entry suppresses nothing' would be true of every entry")
+        print("  and would say nothing about whether the list has rotted.  The list is")
+        print("  fail-closed ON THE WORKING TREE, which is the tree it is a statement about;")
+        print("  run this file with no --rev to see it evaluated.")
+        for rel, why in sorted(REPORTS.items()):
+            print(f"    (not evaluated) {rel}  — {why}")
+    else:
+        for rel, why in sorted(REPORTS.items()):
+            n = _suppressed.get(rel, 0)
+            here = rel in files
+            ok = here and n > 0
+            report("EX", ok, rel, why,
+                   f"in the population: {here}; matches suppressed: {n}"
+                   + ("" if ok else "\n>>> a stale exemption: it is not doing the job it "
+                                    "claims, and an exemption nobody can see is the defect "
+                                    "this deliverable exists to repair"))
+    print()
 
     print("=" * 100)
     print("WHAT THIS RUN CHECKED, AND WHAT IT LEFT UNCHECKED")
