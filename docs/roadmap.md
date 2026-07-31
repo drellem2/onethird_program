@@ -264,6 +264,26 @@ on an audit that measured its extents in both directions — that, not fatigue, 
   going backwards at either grain**. That is the first use of that instruction to **confirm** rather than to
   catch — it is what makes "the kernel half is really back" a measurement instead of a claim.
 
+- **Two DROPPED VERDICTS, found 1–2 days late by a detector built this morning.** Both merged with **no
+  landing commit and no successor ticket**; nothing acted on either.
+  - **mg-fccb** (audit mg-8a71) — **time-sensitive.** mg-d112 (2026-07-29) confirmed the locality-lemma
+    mathematics but recorded **an unflagged DIRECTION ERROR in mg-dbd1 §2.3** — a *different document*,
+    standing uncorrected for two days. **Direction errors propagate silently, because every consumer
+    type-checks.**
+  - **mg-e35b** (audit mg-fcb2) — mg-fcf1 (2026-07-30) on the incidence-structure control battery:
+    **0 BROKEN mathematics** and `L_parity = D·L_true·D` confirmed 86/86, but **three of the four rows
+    CANNOT FAIL** (the scored condition is a theorem, not a measurement) while the output explicitly
+    claims it added no such row; the gauge standard used to **reject** `facet_swap01` **disqualifies 9
+    kept (poset,row) pairs**; two printed counts are tautologies of the code path; and on **24 of 86**
+    posets the pipeline is blind to its own named load-bearing site, stated nowhere.
+  - **The finding worth carrying beyond this arc:** row I4's hedge — *"no claim is made either way on the
+    remainder"* — covers **exactly the three posets where the answer is known and adverse**, making the
+    sentence it protects false as written. **A hedge is not automatically honest; enumerate the remainder
+    before writing one.**
+  - **A standard worth keeping**, named by mg-fcf1: that deliverable left STATE.md untouched with the
+    passage **flagged rather than half-fixed** — *the first in the arc to name what it deliberately did
+    not do.*
+
 ## Next (gated / queued)
 
 - **mg-6ef4** (audit of the walk-bound repair) — released, awaiting a dispatch slot.
