@@ -1,0 +1,377 @@
+==============================================================================
+mg-97fb -- INDEPENDENT AUDIT OF THE mg-3f3b `n/a`-AND-VOCABULARY REPAIR
+==============================================================================
+The object: mg-3f3b's repair of mg-7e39's four findings, landed at `4785086`
+and completed through `75333b2`.  The brief's primary target is EVERY `n/a`
+the repair leaves behind -- each read as a CLAIM about its site, with the case
+it says is impossible CONSTRUCTED.
+
+WHAT IS MINE AND WHAT IS THE ARTIFACT'S
+---------------------------------------
+MINE: every mutation below, written from the KIND TITLE and never from the
+`k_*` function that declines the cell; my own quotation readers (six of them,
+where the gate declares one); my own AST sweep and its `In`-comparison rule;
+my own site cutters, written from the DISCLOSURE SENTENCES in `EXTENT_OF`
+rather than from `framed_row`/`section`; and every population, from
+`git ls-tree` at a named commit.
+
+THE ARTIFACT'S: the gate itself, because the gate is the subject -- and it is
+scored by RUNNING IT AS A SUBPROCESS and reading gate rows out of its stdout.
+Nothing in this file imports `verify_landing`.  A matrix cell is read out of
+the printed matrix BY COLUMN OFFSET, never by counting substrings of the
+printed line (which is what `repair_ec07.py`'s own census does -- see E2).
+
+ON-DISK PROBES.  Every probe here mutates a file in the tree and restores it.
+A restore that is not byte-identical means this audit rewrote the artifact
+while auditing it, so every on-disk probe carries its own `restored` flag and
+one False makes the run RED.
+
+Pure Python 3 + git.  No third-party packages.  Runtime ~2 min.
+
+A0 -- PREFLIGHT
+---------------
+    HEAD                      : 53091324651d
+    the gate, unmutated       : exit 0
+    gate rows on the tree     : 34
+  [CONFIRMED] A0a the gate is green on the unmutated tree (exit 0), so every fire below is attributable to a probe of this instrument's and to nothing standing.  Predicted exit 0
+  [CONFIRMED] A0b the figure gate returns 34 rows on the tree.  Predicted 34 -- the population every row-selection number below is a fraction OF, named rather than assumed
+
+A1 -- THE MATRIX AT HEAD, READ BY COLUMN AND NOT BY SUBSTRING
+-------------------------------------------------------------
+    kind                                                          the STATE.md row    §14                 H8
+    K01 the LIVE figure a reader meets, corrupted                 FIRES               FIRES               FIRES
+    K02 the figure DUPLICATED at the site (mg-8a5c F-1's shape)   FIRES               FIRES               FIRES
+    K03 a WRONG figure in ORDINARY PROSE (mg-835f G-1)            FIRES               FIRES               FIRES
+    K04 wrong prose REUSING a figure on the roster (mg-8916)      FIRES               FIRES               FIRES
+    K05 a NEW undeclared historical figure (the fail-closed cost  FIRES               FIRES               FIRES
+    K06 two DECLARED FIGURES exchanged (mg-8aae H-1)              FIRES               FIRES               FIRES
+    K07 two LABELS exchanged, no figure moved (mg-9207 E2)        FIRES (rec)         FIRES (rec)         FIRES (rec)
+    K08 two table ROW LABELS exchanged (mg-9207 E2b)              n/a                 n/a                 FIRES (rec)
+    K09 two COLUMN HEADERS exchanged (mg-9207 E3 -- mg-ec07's X1  FIRES (rec)         n/a                 FIRES (rec)
+    K10 a figure inside a MARKED QUOTATION altered                n/a                 FIRES (rec)         n/a
+    K11 the table's ALIGNMENT shifted, no figure moved            FIRES (rec)         n/a                 FIRES (rec)
+    K12 a whole PARAGRAPH relocated out of the site (mg-8a5c N7)  n/a                 FIRES (rec)         FIRES (rec)
+
+  [CONFIRMED] A1a the product is 36 cells over 3 sites: 29 FIRE, 0 SILENT, 7 n/a.  Predicted 36 / 29 / 0 / 7.  Read cell by cell at the printed column offsets -- the report is the MATRIX and the population is the PRODUCT
+  [CONFIRMED] A1b (PRESERVE) 29 of 29 applicable cells FIRE and 0 are SILENT, scored by running the artifact as a SUBPROCESS and reading its stdout.  mg-7e39's 29 of 29, 0 silent, is undisturbed
+
+A2 -- EVERY `n/a` READ AS A CLAIM, AND THE CASE IT SAYS IS IMPOSSIBLE, CONSTRUCTED
+----------------------------------------------------------------------------------
+A matrix reports FIRE / SILENT / n/a and only the first two are measured.
+`n/a` is prose, and prose in the grammar of a fact about the SITE can be a
+fact about the DERIVATION -- which is what mg-7e39's F1 was.  So each of the
+seven is read as a CLAIM and the case it says is impossible is BUILT, from
+the KIND TITLE, on disk, against the gate as a subprocess.
+
+A reason FAILS if a mutation OF THE SAME KIND, at the SAME SITE, INSIDE the
+declared site boundary exists.  A reason that declines because the derivation
+cannot see the text -- "no such text here" where the site has such text -- is
+not accepted.
+
+    K08 @ the STATE.md row
+        CLAIM   : 1 of this site's 3 table row(s) carry a figure INSIDE the site, and an exchange needs two (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
+        MINE    : the site's row label exchanged with another LEDGER ROW's -- the nearest thing to the kind that exists, and it reaches ONE LINE OUTSIDE the declared site, which the reason names
+        IS IT THE SAME KIND, INSIDE THE SITE? no
+        RESULT  : exit 1, 0 row(s) refuted (0 SITE RECORD, 0 FIGURE), restored byte-identical: True
+        VERDICT : SURVIVES -- what I could build is a different kind or lands outside the declared site
+
+    K08 @ §14
+        CLAIM   : 0 of this site's 0 table row(s) carry a figure INSIDE the site, and an exchange needs two (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
+        MINE    : 1 of this site's 72 line(s) is a table row by ANY of my three readers (pipe with 3+ bars after lstrip, whitespace-column, tab), so there are no two row labels here to exchange
+        IS IT THE SAME KIND, INSIDE THE SITE? no
+        RESULT  : I decline too, with my own count, by a reader written here
+    K09 @ §14
+        CLAIM   : 0 of this site's 0 table line(s) is a column header inside the site
+        MINE    : 1 of this site's 72 line(s) is a table line at all by ANY of my three readers, so none of them is a column header
+        IS IT THE SAME KIND, INSIDE THE SITE? no
+        RESULT  : I decline too, with my own count, by a reader written here
+    K10 @ the STATE.md row
+        CLAIM   : 12 marked quotation(s) at this site and 0 of them carry a figure token
+        MINE    : the figure '−875' inside '`−875`' -- a span my reader `…`     a code span calls marked and the gate's ONE declared convention does not, which is why `partition` treats that token as an ASSERTION
+        IS IT THE SAME KIND, INSIDE THE SITE? no
+        RESULT  : the mutation could not be written back
+    K10 @ H8
+        CLAIM   : 5 marked quotation(s) at this site and 0 of them carry a figure token
+        MINE    : the figure '−875' inside '`−875`' -- a span my reader `…`     a code span calls marked and the gate's ONE declared convention does not, which is why `partition` treats that token as an ASSERTION
+        IS IT THE SAME KIND, INSIDE THE SITE? no
+        RESULT  : exit 1, 2 row(s) refuted (0 SITE RECORD, 2 FIGURE), restored byte-identical: True
+                  GATE @ H8: FIGURE CENSUS -- 2 unlicensed figure(s) at this site: −875 appears 3x, licensed 4x; −878 appe
+                  GATE @ H8: FIGURE ORDER -- the section asserts 36 figure token(s) and licenses 36, and they first differ
+        VERDICT : SURVIVES -- what I could build is a different kind or lands outside the declared site
+
+    K11 @ §14
+        CLAIM   : of this site's 72 line(s), 0 carry two runs of two or more spaces to shift and 0 of 0 pipe-table row(s) occur once and could have their cell padding moved
+        MINE    : a whitespace shift on an ordinary line of §14 -- NOT an instance of the kind, because the kind is a TABLE's alignment and this site holds no table by any of my three readers.  Run anyway, to see whether the site is blind to whitespace
+        IS IT THE SAME KIND, INSIDE THE SITE? no
+        RESULT  : exit 1, 1 row(s) refuted (1 SITE RECORD, 0 FIGURE), restored byte-identical: True
+                  GATE @ §14: SITE RECORD -- the section's NON-FIGURE text differs from the declared record: 72 line(s) ag
+        VERDICT : SURVIVES -- what I could build is a different kind or lands outside the declared site
+
+    K12 @ the STATE.md row
+        CLAIM   : this site is 1 paragraph(s) and 0 after the first are figure-free, so there is nothing to relocate out of it
+        MINE    : the site's only paragraph moved to the end of the file -- which DELETES the site rather than relocating a paragraph out of it, so it is a different kind
+        IS IT THE SAME KIND, INSIDE THE SITE? no
+        RESULT  : exit 1, 0 row(s) refuted (0 SITE RECORD, 0 FIGURE), restored byte-identical: True
+        VERDICT : SURVIVES -- what I could build is a different kind or lands outside the declared site
+
+  [CONFIRMED] A2a of the 7 `n/a` reason(s) the repaired matrix prints, 7 SURVIVE being read as a claim about their site and 0 do not: none.  Predicted 7 survivors, 0 failures.  mg-7e39 read 8 and 7 survived
+  [CONFIRMED] A2b 7 of 7 reason(s) carry a digit, which is the artifact's own fail-closed test.  E1 is what that test is worth
+
+A3 -- THE `n/a` THAT WAS DELETED: 8 -> 7, AND WHETHER THE CELL IS TESTED
+------------------------------------------------------------------------
+An `n/a` resolved by DELETING it -- replaced by a FIRE nobody built -- is
+worse than the `n/a`.  So the pre-repair matrix is re-run from ITS OWN
+COMMIT'S WORKTREE (its gate against its documents, not today's), the two
+matrices are diffed cell by cell, and the cell that moved is rebuilt here.
+
+    pre-repair worktree  : 979df7241f24 (exit 0)
+    n/a before / after   : 8 / 7
+      n/a -> FIRES (rec)  K11 @ the STATE.md row
+  [CONFIRMED] A3a exactly 1 cell(s) moved out of `n/a` between 979df72 and HEAD, 0 moved into it, and 0 became SILENT.  Predicted 1 / 0 / 0.  The matrix went from 8 `n/a` to 7 by covering a cell, not by dropping one
+  [CONFIRMED] A3b MY OWN pipe-table padding shift at HEAD (the repaired derivation): exit 1, 1 SITE RECORD row(s) refuted and 0 FIGURE row(s).  Restored byte-identical: True.  Predicted exit 1, record fires, no figure row -- the mutation's figure-token multiset is IDENTICAL to the site's by construction.  Written from the KIND TITLE, not from `k_layout`
+  [CONFIRMED] A3b MY OWN pipe-table padding shift at 803bd50 (mg-6df0's PARENT -- the defect's oldest state): exit 1, 1 SITE RECORD row(s) refuted and 0 FIGURE row(s).  Restored byte-identical: True.  Predicted exit 1, record fires, no figure row -- the mutation's figure-token multiset is IDENTICAL to the site's by construction.  Written from the KIND TITLE, not from `k_layout`
+  [CONFIRMED] A3c AND THE SAME PROBE FIRES AT BOTH COMMITS.  The GATE never had this hole -- only the MATRIX said there was nothing here to catch. mg-7e39's F1 is a defect of the instrument that reports coverage, not of the gate that provides it, and a control that fired only at HEAD would have been measuring my probe
+
+B1 -- THE CONSTRUCT: EXISTED / TOUCHED / LIVE, COUNTED HERE AT EACH COMMIT
+--------------------------------------------------------------------------
+    the gate DECLARES at HEAD : ['CENSUS ROSTER', 'FIGURE CENSUS', 'FIGURE ORDER', 'READ AT THE SITE', 'RECORD PARTITION', 'SITE RECORD', 'WRITTEN ONCE']
+    the gate PRINTS (distinct): ['FIGURE CENSUS', 'FIGURE ORDER', 'READ AT THE SITE', 'RECORD PARTITION', 'SITE RECORD', 'WRITTEN ONCE']
+    mg-6df0's hand list       : ['SITE RECORD', 'RECORD PARTITION', 'FIGURE CENSUS', 'FIGURE ORDER', 'CENSUS ROSTER']
+    MY vocabulary (both)      : ['CENSUS ROSTER', 'FIGURE CENSUS', 'FIGURE ORDER', 'READ AT THE SITE', 'RECORD PARTITION', 'SITE RECORD', 'WRITTEN ONCE']
+
+My vocabulary is derived at HEAD and applied at every commit, deliberately:
+"how many instances existed at 803bd50" is a question asked in TODAY'S
+vocabulary, and a vocabulary that was short is exactly what hid them.
+
+    803bd50  mg-6df0's parent :  7 live occurrence(s) of the construct over 448 `.py` files under `code/`  (+0 in `by_substring`, declared)
+    77306a7  mg-6df0 landed   :  6 live occurrence(s) of the construct over 448 `.py` files under `code/`  (+0 in `by_substring`, declared)
+    979df72  mg-3f3b's probe  :  6 live occurrence(s) of the construct over 481 `.py` files under `code/`  (+0 in `by_substring`, declared)
+    4785086  mg-3f3b's repair :  0 live occurrence(s) of the construct over 481 `.py` files under `code/`  (+0 in `by_substring`, declared)
+    5309132  HEAD            :  0 live occurrence(s) of the construct over 487 `.py` files under `code/`  (+0 in `by_substring`, declared)
+
+    at 803bd50  mg-6df0's parent:
+        code/hodge_leverage_audit_835f/audit_a318_repair.py:326  'READ AT THE SITE'
+        code/hodge_leverage_audit_835f/audit_a318_repair.py:327  'WRITTEN ONCE'
+        code/hodge_leverage_audit_8aae/audit_8916_repair.py:518  'FIGURE CENSUS'
+        code/hodge_leverage_audit_ec07/audit_ec07.py:714  'SITE RECORD'
+        code/hodge_leverage_landing_e1d0/verify_landing.py:1815  'SITE RECORD'
+        code/hodge_leverage_repair_6df0/repair_ec07.py:297  'SITE RECORD'
+        code/hodge_leverage_repair_8916/repair_835f.py:309  'FIGURE CENSUS'
+    at 77306a7  mg-6df0 landed:
+        code/hodge_leverage_audit_835f/audit_a318_repair.py:326  'READ AT THE SITE'
+        code/hodge_leverage_audit_835f/audit_a318_repair.py:327  'WRITTEN ONCE'
+        code/hodge_leverage_audit_8aae/audit_8916_repair.py:518  'FIGURE CENSUS'
+        code/hodge_leverage_audit_ec07/audit_ec07.py:714  'SITE RECORD'
+        code/hodge_leverage_repair_6df0/repair_ec07.py:303  'SITE RECORD'
+        code/hodge_leverage_repair_8916/repair_835f.py:309  'FIGURE CENSUS'
+    at 979df72  mg-3f3b's probe:
+        code/hodge_leverage_audit_835f/audit_a318_repair.py:326  'READ AT THE SITE'
+        code/hodge_leverage_audit_835f/audit_a318_repair.py:327  'WRITTEN ONCE'
+        code/hodge_leverage_audit_8aae/audit_8916_repair.py:518  'FIGURE CENSUS'
+        code/hodge_leverage_audit_ec07/audit_ec07.py:714  'SITE RECORD'
+        code/hodge_leverage_repair_6df0/repair_ec07.py:303  'SITE RECORD'
+        code/hodge_leverage_repair_8916/repair_835f.py:309  'FIGURE CENSUS'
+
+  [CONFIRMED] B1a EXISTED / TOUCHED / LIVE, counted here.  At 803bd50 (mg-6df0's parent) 7 EXISTED; mg-6df0 TOUCHED 1, leaving 6 LIVE at 77306a7.  At 979df72 6 were live; mg-3f3b TOUCHED 6, leaving 0 LIVE at 4785086 and 0 at HEAD.  Predicted 7 / 1 / 6 and 6 / 6 / 0
+
+    THE THREE NUMBERS, SIDE BY SIDE
+      mg-7e39 says : 6 existed at 803bd50, the repair touched 1, 5 are live at 77306a7
+      mg-3f3b says : the construct is 0 of 6, with an EMPTY disposition table
+      I count      : 7 existed at 803bd50, mg-6df0 touched 1, 6 live at 77306a7; mg-3f3b touched 6 of 6, 0 live at 4785086
+  [CONFIRMED] B1b THE RECONCILIATION, AND IT REFUTES BOTH DENOMINATORS.  The two sixes are not the same six.  mg-7e39's is (1 touched + 5 live) at 803bd50 and is short by 1 -- ['code/hodge_leverage_audit_835f/audit_a318_repair.py:327'], a `WRITTEN ONCE` occurrence its regex-derived vocabulary could not see.  mg-3f3b's is what was LIVE WHEN IT STARTED (6), which excludes the one mg-6df0 had already repaired -- a different set of the same size.  Both NUMERATORS hold; the population EXISTED is 7, not 6, and neither party's 6 names it
+  >> FINDING G4: NEITHER SIX IS THE POPULATION.  mg-7e39's `1 of 6` and mg-3f3b's `0 of 6` are two different sixes, and the number of instances that EXISTED at 803bd50 is 7.  mg-7e39's 6 is (1 touched + 5 live) counted with a vocabulary regexed out of the gate's `print` calls, which could not see `WRITTEN ONCE`; mg-3f3b's 6 is what was LIVE WHEN IT STARTED, which excludes the one mg-6df0 had already repaired.  Both numerators hold, both denominators are short, and they are short in opposite directions
+
+B2 -- THE FOUR THAT SELECT 6 GATE ROWS WHERE 3 WERE MEANT, ROW BY ROW
+---------------------------------------------------------------------
+    the gate's live rows at HEAD : 34
+
+       code/hodge_leverage_audit_835f/audit_a318_repair.py:326   'READ AT THE SITE'
+         12 of 34 rows by substring, 12 by heading -- 0 it was never meant to select
+       code/hodge_leverage_audit_835f/audit_a318_repair.py:327   'WRITTEN ONCE'
+         10 of 34 rows by substring, 10 by heading -- 0 it was never meant to select
+    ⚠️ code/hodge_leverage_audit_8aae/audit_8916_repair.py:518   'FIGURE CENSUS'
+         6 of 34 rows by substring, 3 by heading -- 3 it was never meant to select
+           EXTRA  GATE @ the STATE.md row: RECORD PARTITION
+           EXTRA  GATE @ §14: RECORD PARTITION
+           EXTRA  GATE @ H8: RECORD PARTITION
+    ⚠️ code/hodge_leverage_audit_ec07/audit_ec07.py:714   'SITE RECORD'
+         6 of 34 rows by substring, 3 by heading -- 3 it was never meant to select
+           EXTRA  GATE @ the STATE.md row: RECORD PARTITION
+           EXTRA  GATE @ §14: RECORD PARTITION
+           EXTRA  GATE @ H8: RECORD PARTITION
+    ⚠️ code/hodge_leverage_repair_6df0/repair_ec07.py:303   'SITE RECORD'
+         6 of 34 rows by substring, 3 by heading -- 3 it was never meant to select
+           EXTRA  GATE @ the STATE.md row: RECORD PARTITION
+           EXTRA  GATE @ §14: RECORD PARTITION
+           EXTRA  GATE @ H8: RECORD PARTITION
+    ⚠️ code/hodge_leverage_repair_8916/repair_835f.py:309   'FIGURE CENSUS'
+         6 of 34 rows by substring, 3 by heading -- 3 it was never meant to select
+           EXTRA  GATE @ the STATE.md row: RECORD PARTITION
+           EXTRA  GATE @ §14: RECORD PARTITION
+           EXTRA  GATE @ H8: RECORD PARTITION
+  [CONFIRMED] B2a of the 6 (file, kind) pair(s) live at 77306a7, 4 select exactly 6 rows where 3 were meant, each extra named above.  Predicted 4 of them at 6-vs-3.  The other(s) select the same by both tests and are the construct anyway
+
+C1 -- THE VOCABULARY: DERIVED FROM WHAT THE GATE PRINTS, DIFFED AGAINST HAND
+----------------------------------------------------------------------------
+    `ROW_NAMES` is assigned from : Call(func=Name(id='row_vocabulary', ctx=Load()), args=[Call(...
+  [CONFIRMED] C1a `ROW_NAMES` in `repair_ec07.py` is assigned from a CALL (row_vocabulary) that reads `ROW_KINDS` out of the gate BY AST, not from a list literal.  Derived, not hand-listed
+    declared by the gate  : ['CENSUS ROSTER', 'FIGURE CENSUS', 'FIGURE ORDER', 'READ AT THE SITE', 'RECORD PARTITION', 'SITE RECORD', 'WRITTEN ONCE']
+    PRINTED by the gate   : ['FIGURE CENSUS', 'FIGURE ORDER', 'READ AT THE SITE', 'RECORD PARTITION', 'SITE RECORD', 'WRITTEN ONCE']
+    the hand list         : ['CENSUS ROSTER', 'FIGURE CENSUS', 'FIGURE ORDER', 'RECORD PARTITION', 'SITE RECORD']
+    declared, never printed: ['CENSUS ROSTER']
+    PRINTED, not declared  : []
+    declared, not in hand  : ['READ AT THE SITE', 'WRITTEN ONCE']
+  [CONFIRMED] C1b every one of the 34 rows the gate PRINTS carries a kind the gate DECLARES: 0 printed-and-undeclared. The derived vocabulary is checked against the rows themselves, not against a second reading of the source
+  [CONFIRMED] C1c DERIVED vs HAND: the hand list is 5 and the declaration is 7; the gap is ['READ AT THE SITE', 'WRITTEN ONCE'] -- TWO names.  mg-7e39 measured this gap with a regex over the gate's `print` calls and found ONE, because `WRITTEN ONCE` was emitted as `'{label}' is WRITTEN ONCE`
+  [CONFIRMED] C1d CONTROL: 'FIGURE CENSUS' removed from `ROW_KINDS` and NOTHING else -> exit 1, 1 declared-vocabulary row(s) REFUTED.  Restored byte-identical: True.  Predicted exit 1. A fail-closed rule that cannot be made to fail is a sentence
+    at 803bd50 (mg-6df0's parent): the DECLARED vocabulary of 7 finds 7 occurrence(s) where the HAND list of 5 finds 5
+        seen only by the declared vocabulary: code/hodge_leverage_audit_835f/audit_a318_repair.py:326
+        seen only by the declared vocabulary: code/hodge_leverage_audit_835f/audit_a318_repair.py:327
+  [MEASURED ] C1e DERIVED vs HAND AS A COUNT OF OCCURRENCES at 803bd50: 7 by the gate's own declaration of 7 names, 5 by the hand list of 5, over 448 `.py` files under `code/`.  The 2 the hand list cannot see are ['code/hodge_leverage_audit_835f/audit_a318_repair.py:326', 'code/hodge_leverage_audit_835f/audit_a318_repair.py:327'].  mg-7e39 measured this gap as 5-against-4 with a vocabulary regexed out of the gate's `print` calls; the declaration sees more than either
+    at 77306a7 (mg-6df0 landed) : the DECLARED vocabulary of 7 finds 6 occurrence(s) where the HAND list of 5 finds 4
+        seen only by the declared vocabulary: code/hodge_leverage_audit_835f/audit_a318_repair.py:326
+        seen only by the declared vocabulary: code/hodge_leverage_audit_835f/audit_a318_repair.py:327
+  [MEASURED ] C1e DERIVED vs HAND AS A COUNT OF OCCURRENCES at 77306a7: 6 by the gate's own declaration of 7 names, 4 by the hand list of 5, over 448 `.py` files under `code/`.  The 2 the hand list cannot see are ['code/hodge_leverage_audit_835f/audit_a318_repair.py:326', 'code/hodge_leverage_audit_835f/audit_a318_repair.py:327'].  mg-7e39 measured this gap as 5-against-4 with a vocabulary regexed out of the gate's `print` calls; the declaration sees more than either
+
+C2 -- THE POPULATION, RECOMPUTED AT THE PUBLISHING COMMIT BY ME
+---------------------------------------------------------------
+    .py under code/ at 77306a7 (mg-6df0 landed) : 448
+    .py under code/ at 803bd50 (its parent)   : 448
+    .py under code/ at 4785086 (mg-3f3b landed) : 481
+    .py under code/ at 5309132 (HEAD)           : 487
+  [CONFIRMED] C2a THE HISTORICAL FACT, from `git ls-tree` and `git show` here and not quoted: the transcript as committed at 77306a7 publishes 429 and the tree at 77306a7 holds 448 `.py` under `code/` -- 19 in the population and not in the number. Wrong when written: its parent 803bd50 held 448 too
+
+    `COMPUTED` (hand-written) : ['<derived>', 'code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt']
+    `PROSE`    (hand-written) : ['code/hodge_leverage_repair_6df0/README.md', 'docs/OneThird-Hodge-Side-Leverage-Mg9207RepairAudit-Repair.md', 'code/hodge_leverage_repair_3f3b/README.md', 'docs/OneThird-Hodge-Side-Leverage-Mg6df0RepairAudit-Repair.md']
+    files in the tree publishing a `.py` population by the repair's OWN `POP_FIGURE` rule: 9
+      ⚠️ code/hodge_leverage_audit_7e39/README.md
+      ⚠️ code/hodge_leverage_audit_7e39/out_audit_7e39.txt
+      ⚠️ code/hodge_leverage_audit_97fb/PREDICTIONS.md
+         code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt
+         code/hodge_leverage_repair_6df0/README.md
+      ⚠️ code/hodge_leverage_repair_6df0/out_repair_6df0.txt
+      ⚠️ docs/OneThird-Hodge-Side-Leverage-Mg6df0Repair-Audit.md
+         docs/OneThird-Hodge-Side-Leverage-Mg6df0RepairAudit-Repair.md
+         docs/OneThird-Hodge-Side-Leverage-Mg9207RepairAudit-Repair.md
+  >> FINDING G2: THE F2 REPAIR'S OWN POPULATION IS A HAND LIST.  `COMPUTED` names 2 transcript(s) and `PROSE` 4 file(s); the tree holds 9 file(s) that publish a `.py` population by the repair's OWN rule, and 5 are in neither list: ['code/hodge_leverage_audit_7e39/README.md', 'code/hodge_leverage_audit_7e39/out_audit_7e39.txt', 'code/hodge_leverage_audit_97fb/PREDICTIONS.md', 'code/hodge_leverage_repair_6df0/out_repair_6df0.txt', 'docs/OneThird-Hodge-Side-Leverage-Mg6df0Repair-Audit.md'].  F2's repair checks a population it chose by hand -- which is F5, the finding this same deliverable landed one axis over
+  [MEASURED ] C2b ⚠️ THE POPULATION OF PUBLISHERS IS ITSELF A HAND LIST.  `COMPUTED` names 2 and `PROSE` names 4; sweeping the tree with the repair's own `POP_FIGURE` finds 9 file(s) that publish a `.py` population, 5 of them in NEITHER list: ['code/hodge_leverage_audit_7e39/README.md', 'code/hodge_leverage_audit_7e39/out_audit_7e39.txt', 'code/hodge_leverage_audit_97fb/PREDICTIONS.md', 'code/hodge_leverage_repair_6df0/out_repair_6df0.txt', 'docs/OneThird-Hodge-Side-Leverage-Mg6df0Repair-Audit.md'].  This is F5's defect -- a scope nobody chose -- landed on F2's axis by the deliverable that landed F5 on the vocabulary axis
+      -- code/hodge_leverage_audit_7e39/out_audit_7e39.txt: FIRST `POP_FIGURE` match is 429; the tree at dde93c50f9ad holds 463
+           context: ...E FIGURE AT ITS OWN COMMIT.  `out_repair_6df0.txt` publishes '429 .py files swept'; the t...
+      -- code/hodge_leverage_repair_6df0/out_repair_6df0.txt: FIRST `POP_FIGURE` match is 473; the tree at 3958b5a84bf4 holds 481
+           context: ...code/ keys on a row heading by substring)    [CONFIRMED] R2a 473 .py files swept, walked...
+      ⚠️ CARRIED IN PROSE  code/hodge_leverage_audit_7e39/README.md:51  | **F2** | the sweep publishes **429 `.py` files swept**; the tree at the co
+      ⚠️ CARRIED IN PROSE  code/hodge_leverage_audit_97fb/PREDICTIONS.md:165  states its corrected figures in **bold** (`**429 `.py` files swept**`), whic
+
+    ⚠️ code/hodge_leverage_repair_6df0/out_repair_6df0.txt
+        publishes 473; the tree at 3958b5a84bf4 -- the commit that now publishes it -- holds 481
+    ⚠️ code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt
+        publishes 473; the tree at 75333b2401da -- the commit that now publishes it -- holds 481
+  >> FINDING G5: THE F2 REPAIR IS F2 AT HEAD, 2 OF 2, AND ITS OWN TRANSCRIPT STILL SAYS 0 STALE.  Both transcripts in `COMPUTED` publish 473 and the tree at each one's publishing commit holds 481.  The transcripts were RIGHT WHEN WRITTEN -- the pre-merge commits hold exactly what they say -- and the MERGE REBASED them onto a larger tree, so the commit that publishes each figure is no longer the commit the figure was measured at.  The repair separates a figure a PUBLICATION STEP recomputes from a figure PROSE carries; the step that broke this is neither.  It is the merge, and nothing re-runs the check after one
+  [MEASURED ] C2d THE ARTIFACT'S OWN `COMPUTED` LIST, RE-CHECKED AT HEAD: 2 of 2 transcript(s) disagree with the tree at their own publishing commit.  `out_repair_3f3b.txt` records `S4a ... 0 disagree`, and that was true of the commits it was written against.  A check that reads git is a MEASUREMENT AT THE COMMIT IT RAN AT, and freezing its verdict in a transcript is the same move as freezing a population in prose
+  [MEASURED ] C2c THE OMITTED FILES, PUT THROUGH THE RULE THAT WOULD HAVE APPLIED TO THEM: 2 transcript(s) disagree with their own publishing commit and 2 population figure(s) are carried as a number in prose outside `"..."`.  ⚠️ ONE OF THOSE IS THE RULE'S OWN LIMIT AND NOT A DEFECT OF THE FILE: `POP_FIGURE` takes the FIRST match with no quotation exemption, and `out_audit_7e39.txt`'s first match is the 429 it is REPORTING AS THE DEFECT.  Extending `COMPUTED` to the transcripts it omits would not just widen the check, it would make it wrong -- which is what a hand-picked list hides: not only that the scope is short, but that the rule was never asked to work outside it
+
+D1 -- PRESERVE: THE SITE CUTTERS, WRITTEN FROM THE DISCLOSURE SENTENCES
+-----------------------------------------------------------------------
+    the STATE.md row     mine:   3 lines  13410 chars   gate:   3 lines  13410 chars (framed_row)  match
+    §14                  mine:  72 lines  16647 chars   gate:  72 lines  16647 chars (section)  match
+    H8                   mine:  52 lines   7852 chars   gate:  52 lines   7852 chars (section)  match
+  [CONFIRMED] D1a cutters written from the DISCLOSURE SENTENCES in `EXTENT_OF` -- not from `framed_row`/`section` -- reproduce the gate's own extent at 3 of 3 sites, line count and character count.  That is the test of whether a scope sentence is a SPECIFICATION or a LABEL.  mg-7e39's 3 of 3 is undisturbed
+
+D2 -- PRESERVE: THE REFUSAL, PROBED ONE ROW AT A TIME
+-----------------------------------------------------
+`partition` bent LOSSY AT ONE SITE ONLY, then `--reseal`.  A refusal that
+fires at both commits would be measuring my probe, so the same probe runs at
+`803bd50`, where the defect is still present.
+
+    HEAD      @ the STATE.md row   exit 1  1 RECORD PARTITION refuted  record unchanged  restored True
+    HEAD      @ §14                exit 1  1 RECORD PARTITION refuted  record unchanged  restored True
+    HEAD      @ H8                 exit 1  1 RECORD PARTITION refuted  record unchanged  restored True
+    803bd50   @ the STATE.md row   exit 0  0 RECORD PARTITION refuted  record CHANGED  restored True
+    803bd50   @ §14                exit 0  0 RECORD PARTITION refuted  record CHANGED  restored True
+    803bd50   @ H8                 exit 0  0 RECORD PARTITION refuted  record CHANGED  restored True
+  [CONFIRMED] D2a at HEAD, `partition` bent lossy AT ONE SITE AT A TIME then `--reseal`: 3 of 3 REFUSE with the record UNCHANGED. Predicted 3 of 3.  mg-7e39's result is undisturbed
+  [CONFIRMED] D2b CONTROL at 803bd50, where the defect is still present: the SAME probe BLESSES 3 of 3 with the record REWRITTEN.  Predicted 3 of 3.  A refusal that fired at both commits would be measuring my probe, not the repair
+
+E1 -- FLOOR: THE FAIL-CLOSED TEST FOR `A REASON CARRIES A COUNT` IS `\d`
+------------------------------------------------------------------------
+The repair's answer to F1 is that a decline with no measurement in it is
+RED.  There is no mechanical test for "is this sentence about the site"; the
+one the gate uses is
+
+    countless = [(t, n, w) for t, n, w in reasons if not re.search(r"\d", w)]
+
+-- ANY DIGIT ANYWHERE IN THE SENTENCE.  A ticket id is digits.  So the rule is
+run here over the EIGHT reasons the PRE-REPAIR matrix printed, at the commit
+where the defect is still present, and the question is how many of the
+sentences it exists to catch it would have caught.
+
+    K08 @ the STATE.md row   digit=Y  free-standing count=n  fewer than two table rows carrying figures INSIDE this site (the ledger's 
+    K08 @ §14                digit=Y  free-standing count=n  fewer than two table rows carrying figures INSIDE this site (the ledger's 
+    K09 @ §14                digit=n  free-standing count=n  no column header line inside this site
+    K10 @ the STATE.md row   digit=n  free-standing count=n  no marked quotation carrying a figure at this site
+    K10 @ H8                 digit=n  free-standing count=n  no marked quotation carrying a figure at this site
+    K11 @ the STATE.md row   digit=n  free-standing count=n  no line here has two runs of two or more spaces to shift
+    K11 @ §14                digit=n  free-standing count=n  no line here has two runs of two or more spaces to shift
+    K12 @ the STATE.md row   digit=n  free-standing count=n  this site has no figure-free paragraph after the first to relocate
+
+    ⚠️ PASSES ON A TICKET ID, WITH NO MEASUREMENT IN IT: K08 @ the STATE.md row
+        fewer than two table rows carrying figures INSIDE this site (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
+    ⚠️ PASSES ON A TICKET ID, WITH NO MEASUREMENT IN IT: K08 @ §14
+        fewer than two table rows carrying figures INSIDE this site (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
+  >> FINDING G1: THE FAIL-CLOSED RULE THAT MAKES AN `n/a` CARRY A COUNT IS `re.search(r'\d', reason)` -- ANY DIGIT.  Run over the 8 decline reasons the matrix printed at 979df72, every one of which is a sentence with no measurement in it, the rule blocks 6 and PASSES 2 -- 2 of them on the digits inside `mg-ec07`.  The control that makes a decline checkable by a reader is met by naming a ticket in it
+  [MEASURED ] E1a ⚠️ THE FAIL-CLOSED RULE IS SATISFIABLE BY A TICKET ID.  Run over the 8 reasons the matrix printed at 979df72 -- the commit where every one of them is a sentence with no measurement in it -- the rule blocks 6 and PASSES 2, and 2 of those pass on digits that belong to `mg-ec07` and carry no count at all.  Predicted: at least one passes.  The control that makes a decline carry its count is met by naming a ticket in it
+    the SAME measurement-free reason with `(mg-9207 E3)`: exit 0, flagged=False, restored=True
+    the SAME measurement-free reason without it        : exit 1, flagged=True, restored=True
+  [MEASURED ] E1b DEMONSTRATED AT HEAD, where the defect is present: one measurement-free decline reason, written twice, differing by the twelve characters `(mg-9207 E3)`.  Without the id the gate flags it and exits 1; with it the gate does not flag it and exits 0.  Same sentence, same absence of any measurement, opposite verdicts
+
+E2 -- FLOOR: THE MATRIX'S OWN CENSUS IS A SUBSTRING TEST OVER A WHOLE ROW
+-------------------------------------------------------------------------
+`repair_ec07.py`'s `R3a` censuses the matrix with
+
+    fires  = sum(l.count("FIRES")  for l in cells)
+    na     = sum(l.count("n/a")    for l in cells)
+    silent = sum(l.count("SILENT") for l in cells)
+
+over the printed line -- and the printed line carries the KIND TITLE in its
+first 62 columns.  That is a substring test over a whole row: the construct
+this entire arc repairs, in the census of the very matrix whose `n/a` cells
+are mg-7e39's F1.  It is outside the sweep's reach by construction, because
+the sweep's vocabulary is GATE ROW NAMES and these are cell values.
+
+It is right today and wrong in construction, which is the only reason nobody
+has met it.  So it is made to be wrong, at HEAD, where it is present.
+
+    by COLUMN (mine)    : {'FIRES': 29, 'SILENT': 0, 'n/a': 7}
+    by SUBSTRING (R3a's): {'FIRES': 29, 'SILENT': 0, 'n/a': 7}
+  [CONFIRMED] E2a at HEAD the two censuses agree ({'FIRES': 29, 'SILENT': 0, 'n/a': 7}), because no kind title happens to contain `FIRES`, `SILENT` or `n/a`.  Agreement is the reason this has never been noticed, not evidence that the census is sound
+    kind title renamed to contain the literal `n/a`, NO CELL CHANGED (exit 0, restored True):
+      by COLUMN    : 7 n/a  (was 7)
+      by SUBSTRING : 8 n/a  (was 7)
+  >> FINDING G3: THE MATRIX'S OWN CENSUS IS A SUBSTRING TEST OVER A WHOLE ROW.  `repair_ec07.py`'s `R3a` counts FIRES / n/a / SILENT with `l.count(...)` over a printed line that carries the KIND TITLE in its first 62 columns.  One kind title edited to contain the literal `n/a` moves the reported count by one with NO CELL CHANGED.  It is the construct this arc repairs, in the census of the very matrix whose `n/a` cells are mg-7e39's F1, and it is outside the sweep's reach because the sweep's vocabulary is gate-row names and these are cell values
+  [MEASURED ] E2b DEMONSTRATED AT HEAD: one kind TITLE edited to contain the literal `n/a` and no cell of the matrix changed.  The census by column still reads 7; the census by substring reads 8, one more than before.  A census that counts its own legend is the first version of this row, recorded in `repair_ec07.py`; a census that counts its own row TITLES is the version that replaced it
+
+F1 -- THIS INSTRUMENT, CHECKED FOR THE SHAPES IT AUDITS
+-------------------------------------------------------
+  [CONFIRMED] F1a 0 line(s) of this file identify a gate row by a substring of the whole row outside a declared function.  Predicted 0
+    on-disk probes run : 17
+  [CONFIRMED] F1b every one of the 17 on-disk probe(s) restored its file BYTE-IDENTICALLY; 0 did not: [].  A probe that rewrites the artifact while auditing it is the failure mg-3f3b named for itself, and this is the check for it
+  [CONFIRMED] F1c the predictions are committed at 53091324651d, before this script existed -- read out of `git log` here rather than asserted
+
+BOTTOM LINE
+-----------
+    checks       : 33
+    confirmed    : 25
+    measured     : 8
+    refuted      : 0
+    findings     : 5
+
+
+    FINDING G4: NEITHER SIX IS THE POPULATION.  mg-7e39's `1 of 6` and mg-3f3b's `0 of 6` are two different sixes, and the number of instances that EXISTED at 803bd50 is 7.  mg-7e39's 6 is (1 touched + 5 live) counted with a vocabulary regexed out of the gate's `print` calls, which could not see `WRITTEN ONCE`; mg-3f3b's 6 is what was LIVE WHEN IT STARTED, which excludes the one mg-6df0 had already repaired.  Both numerators hold, both denominators are short, and they are short in opposite directions
+
+    FINDING G2: THE F2 REPAIR'S OWN POPULATION IS A HAND LIST.  `COMPUTED` names 2 transcript(s) and `PROSE` 4 file(s); the tree holds 9 file(s) that publish a `.py` population by the repair's OWN rule, and 5 are in neither list: ['code/hodge_leverage_audit_7e39/README.md', 'code/hodge_leverage_audit_7e39/out_audit_7e39.txt', 'code/hodge_leverage_audit_97fb/PREDICTIONS.md', 'code/hodge_leverage_repair_6df0/out_repair_6df0.txt', 'docs/OneThird-Hodge-Side-Leverage-Mg6df0Repair-Audit.md'].  F2's repair checks a population it chose by hand -- which is F5, the finding this same deliverable landed one axis over
+
+    FINDING G5: THE F2 REPAIR IS F2 AT HEAD, 2 OF 2, AND ITS OWN TRANSCRIPT STILL SAYS 0 STALE.  Both transcripts in `COMPUTED` publish 473 and the tree at each one's publishing commit holds 481.  The transcripts were RIGHT WHEN WRITTEN -- the pre-merge commits hold exactly what they say -- and the MERGE REBASED them onto a larger tree, so the commit that publishes each figure is no longer the commit the figure was measured at.  The repair separates a figure a PUBLICATION STEP recomputes from a figure PROSE carries; the step that broke this is neither.  It is the merge, and nothing re-runs the check after one
+
+    FINDING G1: THE FAIL-CLOSED RULE THAT MAKES AN `n/a` CARRY A COUNT IS `re.search(r'\d', reason)` -- ANY DIGIT.  Run over the 8 decline reasons the matrix printed at 979df72, every one of which is a sentence with no measurement in it, the rule blocks 6 and PASSES 2 -- 2 of them on the digits inside `mg-ec07`.  The control that makes a decline checkable by a reader is met by naming a ticket in it
+
+    FINDING G3: THE MATRIX'S OWN CENSUS IS A SUBSTRING TEST OVER A WHOLE ROW.  `repair_ec07.py`'s `R3a` counts FIRES / n/a / SILENT with `l.count(...)` over a printed line that carries the KIND TITLE in its first 62 columns.  One kind title edited to contain the literal `n/a` moves the reported count by one with NO CELL CHANGED.  It is the construct this arc repairs, in the census of the very matrix whose `n/a` cells are mg-7e39's F1, and it is outside the sweep's reach because the sweep's vocabulary is gate-row names and these are cell values
