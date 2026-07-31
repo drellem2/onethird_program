@@ -1,0 +1,92 @@
+==============================================================================
+mg-c067 -- INDEPENDENT AUDIT of the mg-132a publication-anchor repair
+==============================================================================
+    audited as of            : 806533bf4611
+    510 .py files under `code/` in the tree at that rev
+    POPULATION ANCHOR: commit=806533bf46119b018616577ed75402e138d507d6 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
+
+⚠️  THIS TRANSCRIPT IS A MEASUREMENT AT THE COMMIT ABOVE, NOT A LIVE PROPERTY OF
+    THE REPOSITORY.  It was written by a run, and the step that displaces it is
+    A MERGE -- the refinery will rebase this file onto a tree that has grown,
+    and nothing re-runs after one.  The figure above will then be RIGHT WHEN
+    WRITTEN and DISPLACED, which is the parent's word and is used here on
+    purpose.  Re-check with:
+
+        sh code/audit_c067/run_all.sh --at <rev>
+
+    An audit that printed `0 REFUTED` and let you read it as `0 now` would be
+    committing the defect it was filed to examine.
+
+T1 -- EVERY TRANSCRIPT THIS AUDIT WRITES DECLARES ITS ANCHOR
+------------------------------------------------------------------
+
+The parent's central claim is that a figure without a resolvable measurement
+commit is an unfalsifiable assertion in a file.  If that is right, every
+transcript in this directory owes one.  Read from DISK here rather than from
+git, deliberately: at the moment this runs, these are the bytes about to be
+committed, and a check that could only see the previous commit could not see
+the thing it is about to ship.
+
+    transcript                   anchor     decl  mine digest ok  banner
+    out_c1_rebase.txt            806533b     510   510 YES        YES
+    out_c2_anchors.txt           806533b     510   510 YES        YES
+    out_c3_shopping.txt          806533b     510   510 YES        YES
+    out_c4_independence.txt      806533b     510   510 YES        YES
+    out_c5_vocab.txt             806533b     510   510 YES        YES
+  [CONFIRMED] T1 all 5 of this audit's OTHER transcript(s) (out_c1_rebase.txt, out_c2_anchors.txt, out_c3_shopping.txt, out_c4_independence.txt, out_c5_vocab.txt) carry a `POPULATION ANCHOR:` line whose commit RESOLVES, whose `count=` RE-DERIVES from `git ls-tree` at that commit, whose `digest=` matches an independent recomputation, and whose banner says the file is a measurement rather than a live property.  Failures: none
+
+    out_selftest_c067.txt        on disk: 0 byte(s) -- TRUNCATED BY THE REDIRECT THAT IS WRITING IT
+                                 in git : not committed at this rev
+  [MEASURED ] T1' ⚠️ AND THE ONE TRANSCRIPT THIS ROW CANNOT READ FROM DISK IS ITS OWN -- 0 bytes, because the shell redirect in `run_all.sh` truncated it before this process started.  THE FIRST VERSION OF T1 READ ALL SIX FROM DISK AND REFUTED ON EXACTLY THAT, which is kept as `P9` predicted it would be.  The fix is the parent's: read the self-transcript FROM GIT at its publishing commit -- which does not exist yet at this rev, so this row is a MEASUREMENT and not a pass, and resolves on the next run after these files are committed.  `anchor_132a.py`'s `verdict_for()` documents this exact hazard ('this instrument's own transcript is truncated on disk by the redirect that is about to write it') and I walked into it anyway
+
+T2 -- AND THIS AUDIT'S OWN FIGURES, THROUGH THE PARENT'S LATTICE
+------------------------------------------------------------------
+
+The rule under audit, turned on the auditor.  Before the first commit of these
+files there is no publishing commit to read, so the honest answer is
+`UNPUBLISHED` and the row says so rather than scoring absence as a pass.
+
+    out_c1_rebase.txt            UNPUBLISHED  (not committed at 806533b -- this becomes a measurement at the commit that lands it)
+    out_c2_anchors.txt           UNPUBLISHED  (not committed at 806533b -- this becomes a measurement at the commit that lands it)
+    out_c3_shopping.txt          UNPUBLISHED  (not committed at 806533b -- this becomes a measurement at the commit that lands it)
+    out_c4_independence.txt      UNPUBLISHED  (not committed at 806533b -- this becomes a measurement at the commit that lands it)
+    out_c5_vocab.txt             UNPUBLISHED  (not committed at 806533b -- this becomes a measurement at the commit that lands it)
+    out_selftest_c067.txt        UNPUBLISHED  (not committed at 806533b -- this becomes a measurement at the commit that lands it)
+  [CONFIRMED] T2 0 of this audit's transcript(s) are RED under the parent's own lattice: none.  6 are UNPUBLISHED at 806533b, which is not a pass and is named here rather than counted as one
+
+T3 -- THE DEFECT THIS AUDIT WILL COMMIT, PREDICTED BEFORE IT DOES
+------------------------------------------------------------------
+
+⚠️ NOT A CLAIM TO HAVE CLOSED THE GAP.  The refinery rebases this branch onto a
+`main` that has grown, exactly as it did to mg-132a four commits after mg-132a
+argued that it would.  So the population figures in these transcripts will be
+RIGHT WHEN WRITTEN and DISPLACED the moment they merge, and nothing in this
+directory can run after that.
+
+    `code/` .py population at 806533b          : 510
+    every figure above is measured against that tree
+    after the merge the publishing commit will hold : MORE, and these figures will read DISPLACED
+
+    THE ONE COMMAND THAT RE-CHECKS IT:
+
+        sh code/audit_c067/run_all.sh --at <post-merge-rev>
+        sh code/publication_anchor_132a/run_all.sh --at <post-merge-rev>
+
+  [MEASURED ] T3 THIS AUDIT INHERITS THE GAP IT REPORTS, AND SAYS SO BEFORE THE FACT RATHER THAN AFTER.  Its 510-file population is a measurement at 806533b; the merge will move it, no hook re-runs, and `C1d` is the row where this audit records that the PARENT's identical exposure went unaddressed for the whole window between its merge and this audit.  ⚠️ THE DIFFERENCE BETWEEN NAMING A GAP AND CLOSING IT IS EXACTLY THE DIFFERENCE THE PARENT DREW AT `A3c`, and this instrument is on the same side of it
+
+T4 -- PREDICTIONS BEFORE INSTRUMENT, READ OUT OF GIT
+------------------------------------------------------------------
+    PREDICTIONS.md first appears at : 0df8ec7
+    c1_rebase.py    first appears at : 806533b
+    the first is an ancestor of the second : YES
+  [CONFIRMED] T4 PREDICTIONS BEFORE INSTRUMENT, FROM `git log`: `PREDICTIONS.md` first appears at 0df8ec7 and `c1_rebase.py` at 806533b, and the first is an ancestor of the second.  'Decided before measuring' is a claim about the repository and is read out of git here
+
+SUMMARY
+------------------------------------------------------------------
+    checks          : 5
+    confirmed       : 3
+    measured        : 2
+    findings        : 0   (defects of the PARENT)
+    refuted         : 0   (controls of THIS instrument that failed)
+
+    measured at     : 806533bf4611  -- re-run after any merge

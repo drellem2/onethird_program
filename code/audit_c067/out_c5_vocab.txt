@@ -1,0 +1,98 @@
+==============================================================================
+mg-c067 -- INDEPENDENT AUDIT of the mg-132a publication-anchor repair
+==============================================================================
+    audited as of            : 806533bf4611
+    510 .py files under `code/` in the tree at that rev
+    POPULATION ANCHOR: commit=806533bf46119b018616577ed75402e138d507d6 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
+
+⚠️  THIS TRANSCRIPT IS A MEASUREMENT AT THE COMMIT ABOVE, NOT A LIVE PROPERTY OF
+    THE REPOSITORY.  It was written by a run, and the step that displaces it is
+    A MERGE -- the refinery will rebase this file onto a tree that has grown,
+    and nothing re-runs after one.  The figure above will then be RIGHT WHEN
+    WRITTEN and DISPLACED, which is the parent's word and is used here on
+    purpose.  Re-check with:
+
+        sh code/audit_c067/run_all.sh --at <rev>
+
+    An audit that printed `0 REFUTED` and let you read it as `0 now` would be
+    committing the defect it was filed to examine.
+
+C5a -- IS THERE A WORD FOR THE MERGE?
+------------------------------------------------------------------
+
+Not `does the README use the word merge` -- prose can say anything.  The test
+is whether the merge is a VERDICT the machinery can return: a value that a
+check produces, a reader sees, and a gate treats differently from its
+neighbours.
+
+    AGREES                 green
+    DISPLACED              green
+    INCONSISTENT           RED
+    UNANCHORED             RED
+    UNRESOLVABLE           RED
+    WRONG WHEN WRITTEN     RED
+  [CONFIRMED] C5a THE MERGE HAS A WORD AND IT IS A VERDICT, NOT A SENTENCE: `DISPLACED`, one of 6 rungs, green.  Its definition names the step -- 'right when written, moved by a rebase'.  ⚠️ THE TEST WAS DELIBERATELY NOT `DOES THE PROSE SAY MERGE`: a word that only exists in a README cannot be returned by a check, and the gap the ticket names is precisely that the machinery had one word where the world had two
+
+C5b -- AND ARE THE TWO DEFECTS DISTINGUISHED WHERE IT COUNTS?
+------------------------------------------------------------------
+
+`wrong when written` and `made wrong by a later rebase` must be separable by
+the reader AND by the gate.  The strong form of the test: construct two
+transcripts differing ONLY in which tree their anchor names, and check the
+lattice separates them.
+
+    same bytes, anchor 4a06b4c (holds 495) -> DISPLACED              green
+    same bytes, anchor 77306a7 (holds 448) -> WRONG WHEN WRITTEN     RED
+  [CONFIRMED] C5b THE TWO DEFECTS ARE SEPARATED BY THE GATE AND NOT ONLY BY THE PROSE: one transcript, two anchors, `DISPLACED` (green) against `WRONG WHEN WRITTEN` (red).  ⚠️ THE ONLY DIFFERENCE BETWEEN THE INPUTS IS WHICH TREE IS NAMED -- the published figure, the count field and every other byte are identical -- so what is being read off is the distinction itself and not some other property of the files
+
+C5c -- AND THE STEP IS NAMED IN THE FILE THAT WAS REPAIRED, NOT ONLY IN THE NEW ONE
+-----------------------------------------------------------------------------------
+
+A vocabulary that exists only in the deliverable that introduced it has not
+been adopted.  The repaired file is the test.
+
+    `DISPLACED` as a reported verdict                              YES
+    the word `rebase` naming the step                              YES
+    the word `merge` naming the step                               YES
+    the false clause never ASSERTED (1 occurrence(s), 1 quoted)    YES
+    the rule LOADED from the parent rather than copied             YES
+        line 1055: f"FALSE: 'a merge that lands elsewhere cannot make it red'.  A "
+  [CONFIRMED] C5c THE REPAIRED FILE CARRIES THE VOCABULARY: 5 of 5 -- `DISPLACED` is reported by `S4a`, the step is named as THE REBASE by `S4a'`, the population rule is IMPORTED from `anchor_132a` rather than copied, and the false clause survives at 1 site(s), all 1 of them INSIDE THE CORRECTION THAT RETRACTS IT ('...SAID SO IN A CLAUSE THAT WAS FALSE: ...'), asserted at 0.  ⚠️ THE IMPORT IS THE ONE THAT DECAYS SILENTLY: this repository has already recorded two copies of `figures()` disagreeing on 3 (`8c55168`)
+  [MEASURED ] C5c' ⚠️ A DEFECT OF THIS INSTRUMENT, KEPT RATHER THAN SMOOTHED AWAY.  The first version of the row above tested `CLAUSE not in src` and REFUTED, and I read the refutation as a finding against the parent before checking the site.  It is the opposite: the clause is present exactly once, inside the sentence that retracts it.  A correction note has to be able to state what it corrects -- WHICH IS THIS ARC'S OWN RULE, `S4b`'s 'a figure inside a QUOTATION is exempt', written in the very file I was testing.  I built a checker that would have flagged every correction note in the repository as the error it corrects, which is the same conflation of a claim with a mention that `C2a` caught me making about `429`.  TWICE IN ONE AUDIT, and the rule I needed was already on the page both times
+
+C5d -- THE OLD WORD, SWEPT: IS `STALE` STILL DOING BOTH JOBS?
+------------------------------------------------------------------
+
+⚠️ THE QUESTION THE TICKET IMPLIES AND DOES NOT ASK.  `STALE` is the word that
+carried both defects.  If the repair introduced `DISPLACED` beside it but left
+`STALE` in use meaning either, the gap is narrowed, not closed -- so every
+occurrence in every committed `.py` and `.md` under `code/` is classified by
+whether the sentence it sits in names WHICH defect it means.
+
+    files swept (630 committed `.py`/`.md` under `code/`)
+    occurrences of `stale`      : 205
+    QUALIFIED (the sentence names rebase/merge/displaced/wrong-when-written within 2 lines) : 19
+    BARE (neither defect named nearby) : 186
+        code/audit_c067/c1_rebase.py:136  The predecessor's transcript said `0 STALE` while being stale, 2 of 2.  The
+        code/audit_c067/c1_rebase.py:137  question is whether the repair's transcript is stale in the same shape.  It is
+        code/audit_c067/c1_rebase.py:184  f"predecessor's `0 STALE` was stale AND WRONG -- the figures it "
+        code/audit_c067/c1_rebase.py:186  f"transcript's rows are stale AND STILL CORRECT: every claim it "
+        code/audit_c067/c1_rebase.py:188  f"run returns is green.  STALE-AND-RED and STALE-AND-GREEN are "
+        code/audit_c067/c2_anchors.py:42  another transcript's figure inside a finding that says that figure is stale.
+        code/audit_c067/c5_vocab.py:11  and neither states: the old undifferentiated word is `STALE`, and if it is
+        code/audit_c067/c5_vocab.py:150  L.head("C5d -- THE OLD WORD, SWEPT: IS `STALE` STILL DOING BOTH JOBS?")
+        code/audit_c067/c5_vocab.py:193  f"OF `stale` ACROSS {len(files)} COMMITTED `.py`/`.md` FILE(S) "
+        code/audit_c067/c5_vocab.py:198  f"occurrences predate this arc, and `stale` is a perfectly good "
+        ... and 176 more
+  [MEASURED ] C5d THE POPULATION IS 205 OCCURRENCE(S) OF `stale` ACROSS 630 COMMITTED `.py`/`.md` FILE(S) UNDER `code/` AT 806533b, of which 19 sit within two lines of a word that says WHICH defect is meant and 186 do not.  ⚠️ THIS IS A MEASUREMENT AND NOT AN ACCUSATION: the proximity test is a proxy, most of the bare occurrences predate this arc, and `stale` is a perfectly good English word in a sentence that is not making a verdict.  What it establishes is the SIZE of the vocabulary the repair introduced against the vocabulary already in the tree
+  [CONFIRMED] C5d' AND THE NEW WORD IS NOT RETROFITTED, WHICH IS CORRECT: mg-132a added `DISPLACED` where a VERDICT is produced and changed no prose elsewhere.  ⚠️ A DELIVERABLE THAT HAD REWRITTEN 186 OTHER SITES WOULD HAVE MADE ITS OWN TRANSCRIPT UNREVIEWABLE, and this arc has already recorded what a cosmetic edit does to an audit trail.  The gap is real, named, and left open on purpose; this row is where its size is on the record
+
+SUMMARY
+------------------------------------------------------------------
+    checks          : 6
+    confirmed       : 4
+    measured        : 2
+    findings        : 0   (defects of the PARENT)
+    refuted         : 0   (controls of THIS instrument that failed)
+
+    measured at     : 806533bf4611  -- re-run after any merge
