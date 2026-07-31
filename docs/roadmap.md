@@ -255,13 +255,9 @@ verdict BEFORE submitting to the refinery.** *A superseded verdict is cheap, a l
 
 ## Next (gated / queued)
 
-- **mg-3934** (audit mg-3946) — **CI has been RED on `main` in one_third_width_three for ~21 hours**,
-  8 of 8 runs. `Gate mutation demo` dies reading a file at historical SHA `af7fc2df`, which resolves in
-  a full clone and **cannot under `actions/checkout`'s default depth 1**. Precisely: the three earlier
-  steps run and pass; **the mg-75f0 class-closure demo has never once executed in CI**, so its first
-  green is its **first run**, not a restoration. And the workflow says of itself *"a green or red check
-  here INFORMS but does not BLOCK"* — **21 hours of red produced no response from anyone, including
-  me.** A permanently-red non-blocking check is worse than no check.
+- *(mg-3934 — **resolved 07:13, see "Closed this window" above.** The 21-hour red is over and the
+  mg-75f0 demo has executed. Kept only as a pointer so this section does not read as if it were still
+  open; its audit **mg-3946** is claimed.)*
 - **mg-344a** — Daniel workspace, `assignee=human`.
 - **Blocked on the rebuild, not forgotten:** the template-effect measurement. The nightly redeploy failed
   (exit 7, drain stalled), so **mg-2375 and mg-ce5e are merged and not installed, and the treated population is
