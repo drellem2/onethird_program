@@ -1,0 +1,219 @@
+mg-6df0 -- THE REFUSAL, THE PRODUCT, AND THE EXTENT
+==============================================================================
+THREE FINDINGS, AND THEY ARE ONE SHAPE TWICE.
+
+  E-5  `--reseal` -- the one step that can make a wrong document green --
+       refuses while any gate row other than SITE RECORD is refuted, and it
+       identifies those rows with `"SITE RECORD" not in d`, A SUBSTRING TEST
+       OVER THE WHOLE ROW.  The RECORD PARTITION row's own explanation names
+       SITE RECORD, so 3 of 34 rows are excluded that were never meant to be,
+       and they are the three that license the whole "lossless" claim.  That
+       is R5 item 3 of mg-ff3e's own instrument VERBATIM: the defect it found
+       in its own scoring code, fixed there with `heading()`, forty lines from
+       where the same construct was live in the file it was repairing.
+
+  E-4  the same-kind enumeration was over KINDS, not over SITES x KINDS.
+       Seven probes, each checked at ONE SITE.  So mg-9207's own E3 -- two
+       COLUMN HEADERS exchanged -- is caught at H8 and is EXIT 0 at the
+       STATE.md site, because that site is one line from `find_line` and the
+       header of the table it sits in is outside it.
+
+  E-2  the sentence that sizes the residue for a reader -- "text outside the
+       site is not read, BECAUSE A SITE IS A SECTION" -- is false at 1 of 3
+       sites.
+
+WHAT THIS INSTRUMENT IS, AND WHAT IT IS NOT.  It does not re-implement the
+gate: it runs the REAL runner on disk, mutating the tree and restoring it
+sha256-verified.  Where it must classify a gate row it uses `heading()` --
+the same remedy the repair applies -- except in R1a, which measures the
+substring test itself and says so.
+
+THE ORDER IS PART OF THE DELIVERABLE.  This file and `PREDICTIONS.md` are
+committed BEFORE the fix, against the unrepaired artifact, because mg-ec07's
+closing note is that "enumerate before fixing" was unobservable in the
+repository afterwards even where it was followed.  R6 re-derives that ordering
+from git.
+
+
+R0 -- PREFLIGHT
+---------------
+  [CONFIRMED] R0 the 5 files this instrument mutates and restores are clean at start
+  the artifact on disk is: PRE (the artifact as mg-ec07 audited it)
+  [CONFIRMED] R0 the real runner on the clean tree exits 0 (predicted 0) with 0 refuted rows
+
+R1 -- THE REFUSAL, AT THE FINEST UNIT (mg-ec07 E-5)
+---------------------------------------------------
+`--reseal` is the ONE step in the artifact that can make a wrong document
+green.  mg-ec07 measured that it has been executed 0 times anywhere in the
+arc, so neither half of "it refuses while any other gate row is refuted" had a
+control until that audit built one.
+
+R1a classifies the gate rows BOTH WAYS and reports the disagreement.  R1b asks
+the blessing path the behavioural question, on disk.  R1c is the control: the
+fix reverted, one statement, nothing else -- if the blessing does not come
+back, the fix is not what is doing the work.
+
+    gate rows                                   : 34
+    contain 'SITE RECORD' ANYWHERE in the row   : 6
+    HEADING ends with 'SITE RECORD'             : 3
+    excluded by the substring test and not by   : 3  ['RECORD PARTITION']
+
+  [MEASURED ] R1a of 34 gate rows, 6 contain the string 'SITE RECORD' and 3 have a HEADING that ends with it.  The 3 that differ are the RECORD PARTITION rows -- one per site, and they are the rows that license 'the two halves are the whole record'.  This is a property of the row TEXTS and is the same in both states: the repair keys the refusal on the heading rather than editing the rows' own explanations
+  [CONFIRMED] R1b `partition` bent LOSSY, then `--reseal`: exit 0 (BLESSED), the record it wrote DID change.  Predicted 0 BLESSED in this state (PRE (the artifact as mg-ec07 audited it)).  A partition that is not the section is exactly the claim the RECORD PARTITION row exists to make, and the blessing path does not see it
+  [MEASURED ] R1c CONTROL NOT APPLIED: the heading-keyed refusal is not on disk in this state, so there is nothing to revert.  In PRE (the artifact as mg-ec07 audited it) the pre-repair predicate IS the live one, and R1b above is what it does
+  [CONFIRMED] R1d a wrong LIVE FIGURE (+2 744 -> +2 745 in §14), then `--reseal`: exit 1 (predicted 1, REFUSED) with site_records.txt sha256 UNCHANGED.  The repair widens the refusal and must not weaken the half that already worked (mg-ec07 B1)
+  [CONFIRMED] R1e after R1's four probes the tree is restored: the runner exits 0 with 0 refuted rows and site_records.txt is sha256-identical to the pre-probe file
+
+R2 -- EVERY OCCURRENCE OF THE CONSTRUCT, SWEPT FROM THE TREE
+------------------------------------------------------------
+THE FINDING IS NOT THE LINE, IT IS THE SCOPE.  mg-ff3e found this construct
+in its own scoring code, fixed it there with `heading()`, wrote it up as R5
+item 3 -- and did not ask where else the same shape lived.  It lived forty
+lines away in the file it was repairing.
+
+So the fix is not scored by the line it repaired.  It is scored by a sweep of
+the TREE for the construct, with every hit either repaired or carrying a
+disposition KEYED ON ITS EXACT LINE -- so that a new occurrence anywhere is
+undispositioned and makes this section red.
+
+    code/hodge_leverage_audit_8aae/audit_8916_repair.py:518
+        hit = [l for l in refuted_lines(lines) if "FIGURE CENSUS" in l]
+        exposure at HEAD: 'FIGURE CENSUS' selects 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
+        -> declared: A FOURTH LIVE OCCURRENCE, same shape and same disposition as repair_835f.py:309 -- it prints an example row and scores nothing
+    code/hodge_leverage_audit_ec07/audit_ec07.py:714
+        excl = [r for _ok, r in rows if "SITE RECORD" in r]
+        exposure at HEAD: 'SITE RECORD' selects 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
+        -> declared: the audit that RAISED E-5, measuring the same thing.  Re-running it UNMODIFIED is R4, so its source is not this repair's to edit
+    code/hodge_leverage_landing_e1d0/verify_landing.py:1815
+        if not ok and "SITE RECORD" not in d]
+        exposure at HEAD: 'SITE RECORD' selects 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
+        -> UNDISPOSITIONED: no reason on file
+    code/hodge_leverage_repair_6df0/repair_ec07.py:297
+        by_substring = [d for d in rows if "SITE RECORD" in d]
+        exposure at HEAD: 'SITE RECORD' selects 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
+        -> declared: R1a MEASURES the substring test; committing it is how the disagreement is counted.  Declared here, in R1a's own comment and in R6b
+    code/hodge_leverage_repair_8916/repair_835f.py:309
+        hit = [l for l in refuted if "FIGURE CENSUS" in l]
+        exposure at HEAD: 'FIGURE CENSUS' selects 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
+        -> declared: A THIRD LIVE OCCURRENCE, found by this sweep and NOT fixed here.  The selection feeds a `print` of one example row beside a probe whose verdict is the real runner's exit code -- no recorded verdict depends on it -- and the file is another deliverable's shipped instrument under a frozen transcript.  Exposure measured below; raised for a ticket rather than repaired in passing
+
+  [REFUTED  ] R2a 429 .py files swept; 5 line(s) identify a gate row by a SUBSTRING TEST over the whole row, 4 with a declared reason and 1 without.  Predicted 0 without.  The artifact's blessing path is AMONG THEM -- this is E-5, live.  ⚠️ THE SWEEP FOUND TWO OCCURRENCES NOBODY HAD REPORTED, in `repair_835f.py` and `audit_8916_repair.py` -- which is the whole argument for sweeping: the reported line is never the population
+
+    code/hodge_leverage_audit_835f/audit_a318_repair.py   1 occurrence(s)
+        :404  "site.  That is the gate's DECLARED scope -- a site is a section, not "
+        -> mg-a318's audit, same disposition -- and the earliest occurrence the sweep finds, which is where the sentence entered the arc
+    code/hodge_leverage_audit_ec07/audit_ec07.py   4 occurrence(s)
+        :579  "text OUTSIDE the site is not read, BECAUSE A SITE IS A SECTION"
+        :582  said = "a site is a section" in src.lower()
+        :584  "A6 the sentence 'a site is a SECTION' is printed beside the gate "
+        :608  "'text outside the site is not read, BECAUSE A SITE IS A SECTION' "
+        -> the audit that RAISED E-2, quoting it in order to test for it.  Re-run unmodified in R4
+    code/hodge_leverage_landing_e1d0/verify_landing.py   4 occurrence(s)
+        :211  ⚠️ A SITE IS A SECTION, NOT THE FILE THAT CONTAINS IT (mg-8a5c N7).  The   <- kept, documents `section()`
+        :319  #   * a token outside the site is not read, because a site is a section;
+        :487  #   * text OUTSIDE the site is not read, because a site is a section.  That is
+        :1141  print("        not read, because a site is a section (mg-835f G-1/mg-8916);")
+        -> THE ARTIFACT UNDER REPAIR.  Its live claims are what this repair removes; `section()`'s own docstring is kept because it is true of the function it documents (R2c)
+    code/hodge_leverage_repair_6df0/repair_ec07.py   3 occurrence(s)
+        :23  site is not read, BECAUSE A SITE IS A SECTION" -- is false at 1 of 3
+        :430  SENTENCE = "a site is a section"
+        :596  "docstring, which says a site is a section rather than the file "
+        -> this instrument QUOTING the sentence it is repairing
+    code/hodge_leverage_repair_8916/repair_835f.py   1 occurrence(s)
+        :438  "section, because a site is a section; and numbers that are not of "
+        -> mg-8916's shipped instrument, same disposition
+    code/hodge_leverage_repair_ff3e/repair_9207.py   1 occurrence(s)
+        :633  * TEXT OUTSIDE THE SITE.  A site is a SECTION, and this is the one
+        -> mg-ff3e's shipped instrument, printing it in R5 under a committed transcript.  Corrected in that deliverable's REPORT with a dated note -- this arc's convention -- rather than edited under a transcript that would then no longer match it
+  [CONFIRMED] R2b the sentence 'a site is a section' occurs 14 time(s) across 6 instrument files, 0 of them undispositioned; 3 occurrence(s) are LIVE CLAIMS ABOUT THE SITES in the artifact under repair, where predicted at least 1 in this state.  ⚠️ A SENTENCE NOBODY MEASURED SPREAD TO 6 FILES: the sweep is over the tree for that reason, and every file that carries it now has a written reason or makes this row red
+  [CONFIRMED] R2c and the one occurrence that is KEPT is `section()`'s own docstring, which says a site is a section rather than the file -- true of the function it documents, and the reason the OTHER two sites are sections at all
+
+R3 -- THE ENUMERATION AT THE RIGHT GRAIN: SITES x KINDS
+-------------------------------------------------------
+mg-ff3e's enumeration HAPPENED and was well-evidenced: seven probes, 7 of 7
+with a verdict written before the run and 7 of 7 with an observed verdict in
+the runner's own stdout.  What it was not, was the PRODUCT.  Each kind was
+checked at ONE SITE, and a table with one cell per row reads as complete.
+
+X1 is what that costs.  Below: the runner's own matrix (in memory, every run),
+then three cells bridged to disk against the real runner.
+
+  [CONFIRMED] R3a the runner prints NO SITES x KINDS matrix in this state. In PRE that is the finding (the battery is kinds, each at one site); in POST it would mean the repair is not on disk
+
+    probe  exit  refuted  what was exchanged
+    X3     1      3     H8's two historical COLUMN HEADERS, INSIDE a site (the control)
+    X1     0      0     STATE.md's ledger table COLUMN HEADERS -- the verdict column now reads `attemp
+    X2     0      0     the VERDICT LABELS of two ledger rows that are NOT this site's row
+
+  [CONFIRMED] R3e CONTROL first: the same kind INSIDE a site -- runner exit 1 (predicted 1), SITE RECORD @ H8 REFUTED.  If this moved, X1's move would be my probe rather than the repair
+  [CONFIRMED] R3d X1 ON DISK -- the two COLUMN HEADERS of STATE.md's ledger table exchanged, mg-9207's E3 verbatim at the site the enumeration did not visit: runner exit 0 with 0 refuted row(s), SITE RECORD @ the STATE.md row = True, FIGURE rows [True, True].  Predicted 0 in this state (PRE (the artifact as mg-ec07 audited it))
+  [MEASURED ] R3f X2 ON DISK -- the verdict labels of two ledger rows that are NOT this site's row: exit 0, 0 refuted.  STILL SILENT, IN BOTH STATES, AND DECLARED: this site is the row and the header it is read under, not the table.  Covering it means freezing the ledger's other 22 rows -- 44,335 characters of unrelated verdicts -- so that every edit to any of them is red until a reseal.  That is a trade pm-onethird sizes, not this repair; what this repair owes is the measurement, and this is it
+  [CONFIRMED] R3 3 of 3 restorations are sha256-identical to the pre-probe file
+
+R4 -- audit_ec07.py, RE-RUN UNMODIFIED
+--------------------------------------
+The audit that raised E-5, E-4 and E-2, re-run with no edits at all.  What
+this section reports is WHICH OF ITS ROWS MOVE, not a bottom line -- and two
+of its findings are predicted to be re-emitted, for reasons written down
+before the run.
+
+    exit code            : 1
+    findings emitted     : E-2, E-1, E-5, E-3, E-6, E-4
+    refuted rows         : 3
+      - A7-B0 1 invocations of `--reseal` anywhere under code/ outside this instrument's own directory (predicted 0).  ⚠️ The first version of this check coun
+      - A7-B2 `partition` bent LOSSY (segments lower-cased -- D3's shape): `--reseal` exits 0 -- PREDICTED 1, REFUSED, OBSERVED 0.  The record it wrote DID ch
+      - A7-B2b of 34 gate rows, 6 contain the string 'SITE RECORD' and are therefore excluded from `reseal`'s refusal.  3 are the SITE RECORD rows themselves,
+
+  [CONFIRMED] R4 the audit's source is sha256-identical before and after: it is re-run, not adjusted
+  [CONFIRMED] R4a E-1 -- 'the same kind of exchange is still silent at the STATE.md site' -- is EMITTED in this state (PRE (the artifact as mg-ec07 audited it)).  Its condition is X1 and X2 both exiting 0 with nothing refuted, and X1 no longer does
+  [MEASURED ] R4b E-5 is still EMITTED, AND THAT IS PREDICTED: its condition is `unintended`, a property of the ROW TEXTS -- rows whose explanations name other rows -- which this repair deliberately does not change.  The BEHAVIOURAL row is A7-B2, and it reads: [REFUTED  ] A7-B2 `partition` bent LOSSY (segments lower-cased -- D3's shape): `--reseal` exits 0 -- PREDICTED 1, REFUSE
+  [MEASURED ] R4c E-2 is still emitted because `finding("E-2", ...)` is called UNCONDITIONALLY in the audit's `a6()`.  What moves is its row: [CONFIRMED] A6 the sentence 'a site is a SECTION' is printed beside the gate in verify_landing.py
+  [MEASURED ] R4d the audit's byte census, which is its strongest CONFIRMED row and must not be disturbed: [CONFIRMED] A1 TOTAL 37866 of 37866 characters over the 3 sites (the STATE.md row 13 367 + §14 16 647 + H8 7 852) fire at HEAD
+  [MEASURED ] R4f AND THIS DELIVERABLE DISTURBS ONE OF ITS ROWS, named rather than counted away: the audit's B0 counts invocations of `--reseal` anywhere under `code/` and read 0 -- 'the one step that can make a wrong document green, executed 0 times anywhere in the arc'.  R1 executes it four times, so B0 now reads: [REFUTED  ] A7-B0 1 invocations of `--reseal` anywhere under code/ outside this instrument's own directory (pr.  The control it said did not exist is what this row is now counting
+  [CONFIRMED] R4e the audit still exits 1: it raises findings, two of them unconditionally or from row text.  An audit that went green here would mean I had edited it
+
+R5 -- THE EXTENT, DERIVED FROM THE CODE AND RE-MEASURED HERE
+------------------------------------------------------------
+E-2 is a sentence beside the gate that is false at 1 of 3 sites.  The remedy
+is not a better sentence: it is that the extent is DERIVED from the code and
+PRINTED as a measurement, so that it cannot be written wrong.
+
+This section re-measures it independently -- from the tree, with this file's
+own arithmetic -- and compares.
+
+    the STATE.md row       1 line(s)   13,367 chars
+    §14                   72 line(s)   16,647 chars
+    H8                    52 line(s)    7,852 chars
+                                      37,866 of 320,509 (11.8%) inside a record
+
+  [CONFIRMED] R5a the runner exposes what each site IS, derived from `site_texts`'s own source: (not exposed in this state).  A sentence keyed to the code's own function name cannot go on saying 'section' for a site that is a row
+  [CONFIRMED] R5b the runner's printed extent and this instrument's independent re-measurement agree: 37,866 of 320,509 characters of the three files are inside a record (11.8%), 282,643 outside (88.2%).  THE RESIDUE IS NOT CLOSED BY THIS REPAIR and the ratio barely moves: what closes is a KIND -- the frame a site's own figures are read under -- and saying otherwise would be the same defect one level up
+  [CONFIRMED] R5c `EXTENT_OF` is not present in this state -- the extent is a sentence in a comment, which is what E-2 is about
+
+R6 -- THIS DELIVERABLE, CHECKED FOR THE DEFECT IT REPAIRS
+---------------------------------------------------------
+Two shapes are being repaired here: A FIX WITH A SCOPE NOBODY CHOSE, and AN
+ENUMERATION AT THE WRONG GRAIN.  Both are shapes this deliverable can have.
+
+  * scope -- R2 sweeps the TREE for the construct rather than fixing the line
+    that was reported, and every hit is repaired or dispositioned by its exact
+    text;
+  * grain -- R3 reports the PRODUCT as a matrix, and R5 checks the scope
+    sentence at all three sites rather than at the one it was written for;
+  * order -- mg-ec07's closing note: "if you enumerate before fixing, commit
+    the probes first".  That is checkable from git, and this is the check.
+
+  [MEASURED ] R6a the probe file is NOT YET COMMITTED, so the ordering is not yet observable.  This row becomes a measurement at the commit that lands it and is re-derived at every run after
+  [CONFIRMED] R6b this instrument identifies gate rows by `heading()` everywhere except 1 line(s), 1 of them declared in DISPOSITIONS -- R1a, which measures the substring test.  `exposure()` performs the same test with the needle in a VARIABLE, which the sweep's rule does not see: it is named here rather than left for the audit, and it is a measurement of the defect in both cases.  A file that repairs a construct while committing it silently would be the finding, not the repair
+  [CONFIRMED] R6c and every scope sentence this deliverable writes is checked at ALL THREE SITES (R5a/R5b) rather than at the site it was written for.  That is the whole of E-2: the previous sentence was true where its author was looking
+
+BOTTOM LINE
+-----------
+  checks recorded : 28
+  measurements    : 8
+  confirmed       : 19
+  refuted         : 1
+  artifact state  : PRE (the artifact as mg-ec07 audited it)
+
+  REFUTED:
+    - R2a 429 .py files swept; 5 line(s) identify a gate row by a SUBSTRING TEST over the whole row, 4 with a declared reason and 1 without.  Predicted 0 wi
