@@ -1,0 +1,146 @@
+==============================================================================
+selftestdee4  BOTH SENSES AT EVERY RULE
+==============================================================================
+
+S1  `pipelines` -- a real pipe, and the three things that are not one
+  ok  IN : a real pipeline                                           got [1]
+  ok  OUT: `||` is not a pipe                                        got []
+  ok  OUT: `|&` is not a pipe                                        got []
+  ok  OUT: a `|` inside single quotes is an argument                 got []
+  ok  OUT: a `|` inside double quotes is an argument                 got []
+  ok  OUT: a comment quoting `| tee` is not a pipeline               got []
+  ok  IN : a pipe after an inline `#` that is not at line start      got [1]
+
+S2  `tee_pipelines` -- the SHAPE, distinguished from the property
+  ok  IN : a real `| tee`                                            got [1]
+  ok  OUT: a pipeline that is not a tee                              got []
+  ok  OUT: the word tee not after a pipe                             got []
+
+S3  `has_set_e` -- every spelling that sets it, and one that does not
+  ok  IN : `set -e`                                                  got True
+  ok  IN : `set -eu`                                                 got True
+  ok  IN : `set -euo pipefail`                                       got True
+  ok  IN : `set -o errexit`                                          got True
+  ok  OUT: `set -u` alone                                            got False
+  ok  OUT: `set -e` inside a comment                                 got False
+
+S4  `guarded` -- what stops errexit reading a status, and what does not
+  ok  IN : `cmd || true`                                             got True
+  ok  IN : `cmd || {`                                                got True
+  ok  IN : an `if` condition                                         got True
+  ok  OUT: a bare pipeline                                           got False
+  ok  OUT: `VAR=$(...)` is NOT guarded -- POSIX gives an assignment-only command the status of its last substitution got False
+
+S5  `discarded_stages` -- all but the last, in order
+  ok  three stages discard two                                       got 2
+  ok  one stage discards none                                        got 0
+  ok  the FIRST stage is first                                       got 'a'
+
+S6  `stage_can_fail` -- the conservative default, and the exceptions
+  ok  OUT: `echo` has no failure mode                                got False
+  ok  OUT: `printf` likewise                                         got False
+  ok  IN : an unknown external command counts as ABLE to fail        got True
+  ok  IN : an assignment prefix is stripped before classifying       got 'external command `git` can return non-zero'
+
+S7  `invocation` -- the interpreter and the script, not the redirect
+  ok  IN : python3                                                   got ('python3', 'a.py')
+  ok  IN : sh                                                        got ('sh', 'b.sh')
+  ok  OUT: no interpreter                                            got None
+
+S8  `ls_tracked` -- the population primitive, in both directions
+  ok  IN : the suffix filter selects                                 got True
+  ok  IN : the empty suffix selects everything                       got True
+  ok  OUT: a suffix nothing has                                      got []
+  ok  this tree's own `run_all.sh` is in the population              got True
+
+==============================================================================
+D1  A POPULATION DEFINED BY A NAME -- every filter site, enumerated
+==============================================================================
+
+  `ls_tracked(ref=None, suffixes=('.sh',))` CAN take a name filter.
+  That is on purpose and it is the opposite of mg-7522's structural
+  answer, for a stated reason: A1b's question is `is `.sh` itself a
+  name rule?` and a primitive that hard-codes `.sh` cannot ask it.
+  So the obligation here is enumeration, not absence.  Every call
+  site that passes a suffix or tests a basename:
+
+      call sites that name a file kind or a filename: 90
+      2    the NO-filter call -- A1b's population
+      6    the `*.sh` population, measured AGAINST the no-filter one in A1b
+      3    the `*.py` population for A1c's AST walk
+      3    a self-test fixture
+      22   reporting or grouping, not selecting the population
+      1    this file's own docstring, explaining why the primitive takes the argument -- a mention, and the third time in this arc that a rule has matched the documentation of its own absence
+      44   mg-c2b3's or mg-7522's OWN name rule, being measured next to the property rule
+      39   a suffix test inside a rule that is itself the subject
+  ok  every name-filter site has a disposition                       got 0
+
+==============================================================================
+D2  EVERY ANCHOR IN THIS TREE, WITH THE QUESTION IT SERVES
+==============================================================================
+
+      anchor uses: 78
+      census (ref=None / HEAD)            55
+      comparison (a pinned revision)      23
+
+  THE DEFAULT.  `ls_tracked`, `read` and `exists` all default to
+  `ref=None`, so a census that forgets to think about its anchor gets
+  the current world and a comparison has to ask for a revision.
+  ok  `ls_tracked` defaults to the current world                     got True
+
+==============================================================================
+D3  THIS TREE'S OWN `run_all.sh`, THROUGH A1'S OWN P2 PREDICATE
+==============================================================================
+
+      run_all.sh       set -e: no   pipelines: 0   in P2: 0
+  ok  run_all.sh has 0 pipelines of any kind                         got 0
+      steps that redirect and guard: 1 of 1
+  ok  every step of run_all.sh redirects and guards                  got 1
+
+  AND THE PYTHON, structurally.  Every subprocess here takes a LIST
+  argv.  There is ONE deliberate `/bin/sh -c`, in A2d, because
+  reproducing the pre-repair PIPELINE is the measurement -- it is
+  named here rather than hidden by a rule that would not see it.
+  ok  no file in this tree CALLS with shell=True or os.system        got []
+      declared `/bin/sh -c` sites: 2  a2_direct.py:250, selftestdee4.py:244
+  ok  the declared `/bin/sh -c` sites are a2_direct.py and this file's own detector got ['a2_direct.py', 'selftestdee4.py']
+
+==============================================================================
+D4  A STRENGTH MARKER -- OVER EVERY FILE OF THIS TREE, `.md` INCLUDED
+==============================================================================
+
+  The population is EVERY file, not `*.py` and `*.sh`.  That is the
+  direct consequence of A4b: mg-7522's equivalent check excluded the
+  `.md`, which is where three of its subject's four wrong artifacts
+  were.  The rule is the NINE-alternative one mg-7522 applied to its
+  subject, not the three-alternative one it applied to itself.
+
+  AND THE FIRST DRAFT OF THIS CHECK FIRED 26 TIMES ON ITS OWN
+  SOURCE -- on the regexes that detect the markers and on the
+  sentences quoting mg-7522's wording while dispositioning it.  That
+  is mg-7522's own recorded defect, reproduced here, and mg-7522's
+  own conclusion is followed: the fix is not a better pattern but a
+  different question.  So an occurrence is not scored PASS/FAIL; it
+  is DISPOSITIONED, with coverage checked in both directions.
+
+      files scanned                     12
+      MENTIONs (delimited or signalled) 51
+      bare occurrences, dispositioned   47
+          24   the detecting rule itself
+  ok  disposition rule `the detecting rule itself...` matches something got True
+          12   a QUOTATION of mg-c2b3's or mg-7522's own wording, being dispositioned
+  ok  disposition rule `a QUOTATION of mg-c2b3's or ...` matches something got True
+          23   a figure THIS RUN recomputes in the run that prints it
+  ok  disposition rule `a figure THIS RUN recomputes...` matches something got True
+      UNDISPOSITIONED                    0
+  ok  every bare strength marker in this tree has a disposition      got 0
+
+==============================================================================
+selftestdee4 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a rule that fires in only one
+direction, an undispositioned name filter, a mis-defaulted population
+primitive, a pipeline in this tree's own runner, a step that does not
+guard, a `shell=True`, and a bare strength marker.  It ranges over
+this tree's 12 files -- `*.py`, `*.sh` AND `*.md`.

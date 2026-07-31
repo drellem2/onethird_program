@@ -1,0 +1,108 @@
+==============================================================================
+A5  THE INSTRUMENT MG-7522 EDITED UNDER MG-05EB'S CITATIONS
+==============================================================================
+
+==============================================================================
+A5a  MG-C2B3'S OWN PROBES, RUN AT HEAD AGAINST THE REPAIRED LIBRARY
+==============================================================================
+
+  POPULATION, named: every `*.py` in `code/runner_exit_c2b3/` that
+  mg-7522's commit touched, plus that tree's self-test.  Derived from
+  `git show --name-only 1ee1f1b`, not hand-listed.
+
+      code/runner_exit_c2b3/k1_census.py
+      code/runner_exit_c2b3/k2_consume.py
+      code/runner_exit_c2b3/libc2b3.py
+      code/runner_exit_c2b3/selftestc2b3.py
+
+    probe                            exit   secs     verdict
+    k1_census.py                     0      4.8      runs clean
+    k2_consume.py                    0      5.2      runs clean
+    libc2b3.py                       0      0.0      runs clean
+    selftestc2b3.py                  0      0.0      runs clean
+
+  WHY THIS IS WORTH A SECTION.  mg-7522 changed these files and left
+  their transcripts alone, correctly.  The side effect is that the
+  code has no current record: a break in it would show up nowhere
+  until someone ran it.  Someone has now run it.
+
+==============================================================================
+A5b  THE `pipefail` FIGURE, RE-DERIVED BY THE SUBJECT'S OWN INSTRUMENT
+==============================================================================
+
+  mg-05eb's OPEN 2: `out_k1_census.txt` prints
+      setting pipefail   ticket 1   re-derived 0   DIFFERS
+  while four artifacts said `1, confirmed exactly`.  mg-7522 repaired
+  `libc2b3.PIPEFAIL_RE` and did not regenerate the transcript.  So the
+  row is read out of the LIVE run above and set beside the committed
+  one.
+
+      committed transcript : setting pipefail                   ticket  1   re-derived  0   DIFFERS
+      live run at HEAD     : setting pipefail                   ticket  1   re-derived  1   AGREES
+
+  THE REPAIR IS REAL AND IT IS VISIBLE IN THE SUBJECT'S OWN
+  INSTRUMENT.  The regex now matches `set -euo pipefail`, the
+  re-derived figure is 1, and the row that mg-05eb found DIFFERS
+  reads AGREES on a run that nobody committed.  This is the
+  strongest confirmation available for OPEN 2 and it is positive.
+
+==============================================================================
+A5c  THE TWO REWRITTEN RUNNERS, RUN AT HEAD
+==============================================================================
+
+  mg-7522 rewrote 63 lines of shell across these two files to remove
+  8 `| tee` pipelines.  A rewrite that removes a pipeline can also
+  remove a step.  Both are run whole and their exit codes read.
+
+    runner                                         exit   secs     steps reached
+    code/face_geometry_audit_f1b2/run_audit.sh     0      85.6     5 of 5
+    code/face_geometry_audit_fcf1/run_audit.sh     0      26.5     3 of 3
+
+  `steps reached` is a CONJUNCTION with the exit code, for the same
+  reason mg-7522 gives: an exit-code-only check cannot tell a repair
+  from a run that stopped early for an unrelated reason.  Reach is
+  read from the mtime of each step's REDIRECT TARGET, because the
+  repaired shape sends every step's output to a file and the target's
+  name never reaches the runner's stdout.
+
+==============================================================================
+A5d  DOES THE REPAIR STILL STOP THE RUN?  ONE SITE, AND SAID SO
+==============================================================================
+
+  mg-7522's S2c drives all 8 sites in both directions.  This is ONE
+  site on ONE runner -- a spot check, not a re-run of that control,
+  and the narrowing is stated here rather than left for a reader to
+  infer from a bare `PASS`.  The forced failure is an `atexit` hook
+  injected through `PYTHONPATH`; no tracked byte is edited.
+
+      runner            code/face_geometry_audit_f1b2/run_audit.sh
+      forced target     audit_scoring.py  (the FIRST python step, so a repair that
+                        stops the run leaves every later step unrun)
+      exit code         1
+      later steps that still ran   0 of 4
+      -> NON-ZERO AND STOPPED.  The repair holds on this site.
+
+==============================================================================
+A5e  THE WORKTREE IS AS IT WAS
+==============================================================================
+
+      `git status --porcelain` identical before and after: True
+
+  AND THAT IS A RESULT, not only a hygiene check: A5c re-ran both
+  runners whole and A5d re-ran one of them under a forced failure, so
+  every `out_*.txt` those runners write was rewritten.  The worktree
+  being identical afterwards means all 8 of those transcripts
+  regenerate byte for byte on this machine.
+
+==============================================================================
+A5 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a probe of mg-c2b3's that no longer
+runs, a `pipefail` row that does not stand in the expected relation to
+its committed transcript, a rewritten runner that does not exit 0, one
+forced-failure site that is not caught, and a worktree this probe
+changed.  It ranges over the 4 `*.py` of `code/runner_exit_c2b3/`
+that 1ee1f1b touched and the 2 rewritten runners.  It does NOT re-run
+mg-7522's 8-site control -- A5d is 1 site of the 8, and says so.
+

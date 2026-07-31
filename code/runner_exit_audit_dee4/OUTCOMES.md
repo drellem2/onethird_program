@@ -18,7 +18,7 @@ subject's four wrong artifacts were.*
 | id | probe | finding |
 |---|---|---|
 | **F1** | A2b | **`11 of 11 … read directly` is 11 LINES, not 11 statuses.** The 8 `\| tee` rows are derived from the runner's own bytes and are direct. The 3 `git diff` rows are a **hand-list of 3 argv containing 2 distinct commands**, over source lines that sit in `for` loops and execute **8** discarded `git diff`s at run time. The row labelled `state_delegation_audit_16eb/run_all.sh:39` runs a command **that is not on line 39** — line 39 carries a `':!*.md'` pathspec and the argv has none — so the `':!*.md'` form was never executed in any shape. A2c reads all 8 and they are **8 of 8 exit 0**: the verdict survives, the enumeration does not. |
-| **F2** | A3d | **The published document's `154 changed files` matches no anchor.** `s4_unpin.py`'s own committed transcript prints **166** for the same measurement; `1ee1f1b` against the pin is **257**, `1ee1f1b^` is **240**, `main` today is **263**. It is a bare prose figure in the section whose thesis is that anchors matter, in a document that states one commit later that *"a number that moves belongs in a transcript"* — a rule `c252f96` applied to the 2×2 totals **three paragraphs above this figure** and not to this one. |
+| **F2** | A3d | **The published document's `154 changed files` matches no anchor.** `s4_unpin.py`'s own committed transcript prints **166** for the same measurement; `1ee1f1b` against the pin is **257**, `1ee1f1b^` is **240**, and the worktree-against-the-pin figure moves as the arc grows — `out_a3_anchor.txt` carries the live one. It is a bare prose figure in the section whose thesis is that anchors matter, in a document that states one commit later that *"a number that moves belongs in a transcript"* — a rule `c252f96` applied to the 2×2 totals **three paragraphs above this figure** and not to this one. |
 | **F3** | A4a, A4b | **`0 USES` is a weaker claim than it reads.** `lib7522._STRENGTH` has **3** alternatives; `s3_figure.MARK`, the rule mg-7522 pointed at its subject, has **9**. **`verified` is named as one of the three markers in the D4 docstring, in the README and in the published document, and is not in the rule that produces the 0.** And the population is `MINE_PY + MINE_SH`: the README, `OUTCOMES.md`, `PREDICTIONS.md` and the published document are all outside it. mg-05eb's OPEN 2 was a figure wrong in four artifacts, **three of which are that excluded kind.** `out_s5_self.txt` states the extent; the README and the document print the 0 without it. |
 | **F4** | A4d | **`S3a`'s CLAIM rule is LINE-LOCAL and the strongest claim wrapped.** A claim is a line carrying both a marker and a number. `OUTCOMES.md:88` carries *"verified against the"*, and its figure `0 / 0 / 0 / 0 / 2111 / 0` is on line 89 — neither line is a claim. Widening the window by ONE line takes **mg-c2b3's own artifacts from 20 to 24**, so *"20 strength-marked numeric claims, every one dispositioned"* is exact about the 20 the rule saw and silent about the four a hard wrap stepped over. |
 | **F5** | A3c | **The repaired caller scan is still a NAME rule — with two names.** `k2_consume.py`'s target regex went from `run_all\.sh` to `(?:run_all\|run_audit)\.sh`. mg-7522's own library states the property (`\w+\.sh`) and its comment says the name rule *"is widened here to the property"* — **here** being the library, not the file it repaired. **9** executing sites at HEAD name a `*.sh` whose basename is neither, across 6 distinct target scripts, **4 of them reading the exit status**. The stated-limit comment mg-7522 added names the *literal-path* limit correctly and does not name this one. And **0 sites** at HEAD name `run_audit.sh`, so the widening it made is not exercised by anything in the arc. |
@@ -64,6 +64,17 @@ steps ran"* as a PASS for the same wrong reason. Reach is now read from the
 **mtime of each step's redirect target**. The lesson is mg-7522's own, one level
 down: a check that reads a *form of output* rather than a *fact about the run*
 will agree with you for the wrong reason.
+
+**And a second one, caught by this audit's own finding.** The first draft of
+`OUTCOMES.md`, the README and the published document each wrote *"`main` today
+is 263"* into prose — the live worktree-against-the-pin figure. Between drafting
+and the clean-tree run that produced the committed transcripts, this audit's own
+twelve files landed and it became **275**. That is **F2 reproduced inside the
+audit of F2**, and it is fixed the way `c252f96` fixed its neighbours: the three
+anchors that are pinned to commits (`240`, `257`, `166`) stay in prose because
+they cannot move, and the one that moves is now a pointer to
+`out_a3_anchor.txt`. The number was wrong for the same reason mg-7522's was —
+not carelessness, but a figure read once from a tree that then grew.
 
 ---
 

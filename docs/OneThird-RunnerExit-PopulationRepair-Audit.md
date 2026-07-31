@@ -220,7 +220,7 @@ name this one.
 |---|---|
 | `1ee1f1b^` against the pin | 240 |
 | `1ee1f1b` against the pin | 257 |
-| `main` today against the pin | 263 |
+| `main` today against the pin | *moves; `out_a3_anchor.txt` carries the live one* |
 | **mg-7522's own committed transcript** | **166** |
 | **the published document** | **154** |
 
@@ -361,6 +361,16 @@ forced-failure check would have read *"0 later steps ran"* as a PASS for exactly
 the wrong reason. It is mg-7522's own lesson one level down: a check that reads
 a **form of output** rather than a **fact about the run** will agree with you
 for the wrong reason.
+
+**And a second one, caught by this audit's own F2.** The first draft of this
+document wrote *"`main` today against the pin | 263"* into the table above.
+Between that draft and the clean-tree run that produced the committed
+transcripts, this audit's own twelve files landed and the figure became **275**.
+That is section 3's finding reproduced inside the section that reports it. The
+three anchors pinned to commits — `240`, `257`, `166` — stay in prose because
+they cannot move; the one that moves is now a pointer to `out_a3_anchor.txt`.
+mg-7522's `154` was wrong for the same reason, which is worth saying plainly:
+not carelessness, but a figure read once from a tree that then grew.
 
 **What cannot be checked here, stated rather than omitted:** whether P2 is the
 *right* predicate. Section 1 argues its consumption clause is narrower than the

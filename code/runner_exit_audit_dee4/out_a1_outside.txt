@@ -1,0 +1,190 @@
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+==============================================================================
+A1  THE NEW POPULATION, AND WHAT IS OUTSIDE IT
+==============================================================================
+
+==============================================================================
+A1a  MG-7522'S FIVE FIGURES, RE-DERIVED BY A PARSER WRITTEN FROM SCRATCH
+==============================================================================
+
+  COMPARISON, so the anchor is mg-c2b3's pin bee07a1 -- that is the
+  revision mg-7522's own table is stated at, and comparing two
+  parsers requires both to read the same bytes.
+
+    figure             mg-7522   re-derived  verdict
+    P0 files           72        72          AGREES
+    P1 files           23        23          AGREES
+    P1 pipelines       53        53          AGREES
+    P2 files           19        19          AGREES
+    P2 pipelines       26        26          AGREES
+    shape files        19        19          AGREES
+    shape pipelines    42        42          AGREES
+    name files         17        17          AGREES
+    name pipelines     34        34          AGREES
+
+  The two parsers agree on every one.  That is not a licence to stop:
+  agreement about a POPULATION says nothing about what is outside it,
+  which is A1b through A1d.
+
+==============================================================================
+A1b  IS `*.sh` ITSELF A NAME RULE?  EVERY TRACKED FILE, BY SHEBANG
+==============================================================================
+
+  `lib7522.ls_sh()` takes no name argument -- mg-7522 calls that
+  structural, and it is.  But the function still selects on the string
+  `.sh`, and an extension is a naming convention exactly as `run_all`
+  is.  So: every tracked file, whatever its name, read for a shell
+  shebang.  A hit would be a shell script the property cannot reach.
+
+      tracked files                              1099
+      distinct extensions                           8   .py 435, .txt 373, .md 189, .sh 87, (none) 7, .gz 6, .js 1, .html 1
+      NON-`.sh` files with a shell shebang          0
+
+  HOW THIS IS ESTABLISHED, so a reader can disagree with it: the
+  population is `git ls-files` with NO suffix filter, and the test is
+  the file's own first line.  It is not a list of extensions I thought
+  of.  `.sh` loses nothing HERE; it is still a name rule, and the next
+  shell script committed without the extension is invisible to it.
+
+==============================================================================
+A1c  CAN THE DEFECT LIVE IN PYTHON?  EVERY `*.py`, WALKED AS AN AST
+==============================================================================
+
+  A pipeline needs a shell.  Python gets one through `shell=True`,
+  `os.system`, `os.popen` or `subprocess.getoutput`.  Grepping for
+  those strings scores the sentence `we never use shell=True` as a
+  hit -- mg-05eb recorded that defect and mg-7522 hit it again, so
+  this is an AST walk over every tracked `*.py` in the repository.
+
+      tracked `*.py`                              435
+      files this walk could not parse               0
+      REAL shell-executing call sites               1
+          code/state_landing_audit_bd41/instrument_sensitivity.py:33  subprocess.run(shell=...)
+
+      shell-exec sites sitting inside a wrapper     1
+          code/state_landing_audit_bd41/instrument_sensitivity.py  def sh(cmd)
+      literal strings that REACH that shell         3
+          code/state_landing_audit_bd41/instrument_sensitivity.py:41    pipeline: False sh  2>&1
+          code/state_landing_audit_bd41/instrument_sensitivity.py:45    pipeline: False python3  2>&1
+          code/state_landing_audit_bd41/instrument_sensitivity.py:53    pipeline: False git status --porcelain -- STATE.md
+
+      OVER-READ: every string literal in those       1
+      files, whether or not it reaches a shell
+          instrument_sensitivity.py:100      NOT A COMMAND -- the mutation
+                                             payload appended to a truncated
+                                             STATE.md row; `|` there is a
+                                             markdown table cell terminator
+                                             and the string is written to a
+                                             FILE, never handed to a shell
+
+  ESTABLISHED: the defect cannot be hiding in the Python of this
+  repository.  There is exactly ONE place a Python file hands a string
+  to a shell; the strings that reach it are enumerated above and none
+  is a pipeline; and the one whole-file over-read hit is a markdown
+  cell terminator in a mutation payload, dispositioned rather than
+  removed from the rule.  A rule tuned until it goes green is not a
+  measurement -- that is mg-7522's own OUTCOMES.md lesson, applied here.
+
+==============================================================================
+A1d  INSIDE `*.sh`: WHICH CLAUSE OF P2 DROPS WHAT, AT HEAD
+==============================================================================
+
+  P2 is a conjunction.  A pipeline can fall out of it three ways, and
+  they are not equally safe.  Every pipeline at HEAD, with the clause
+  that excludes it named:
+
+    file:line                              set -e  guarded   excluded by
+    branching_audit_a218:36                no      no        no `set -e` in
+                                                             the file
+    branching_audit_a218:47                no      no        no `set -e` in
+                                                             the file
+
+      pipelines on command lines at HEAD            2
+      dropped: no `set -e`                          2
+      dropped: the line guards itself               0
+      dropped: no discarded stage can fail          0
+      IN P2 at HEAD                                 0
+
+==============================================================================
+A1e  THE ONE THAT IS OUTSIDE: `set -e` IS NOT THE ONLY CONSUMER
+==============================================================================
+
+  mg-7522's REASON for pulling the three `git diff ... | wc -c` lines
+  into the population is written in the file it repaired and in the
+  published document, and it is not about errexit:
+
+      "a `git diff` that failed produced an empty stream, `wc -c`
+       reported 0, and the proof read `-> 0 bytes`"
+
+  That is a claim about the VALUE.  P2's consumption test is
+  `has_set_e(file) and not guarded(line)` -- errexit, at FILE grain.
+  The two agree on those three lines only because those two files
+  happen to set `-e`.  Here is where they come apart:
+
+      code/branching_audit_a218/c0_repro.sh:36
+          diff "$SRC/$f" "$WORK/$f" | head -8
+          discarded stage CAN FAIL: True  external command `diff` can return non-zero
+
+      code/branching_audit_a218/c0_repro.sh:47
+          COUNT=$(grep -o '[0-9][0-9 ]*' "$WORK/out_selftest.txt" | tr -d ' ' | 
+          discarded stage CAN FAIL: True  external command `grep` can return non-zero
+          discarded stage CAN FAIL: True  external command `tr` can return non-zero
+          the value is assigned to `COUNT` and read at 2 place(s):
+                48  echo "      out_selftest.txt last number (the assertion count): 
+                50  if [ "$COUNT" = "699520" ]; then
+
+  IS THE STATUS CONSUMED?  Trace it forward rather than asserting it.
+
+      code/branching_audit_a218/c0_repro.sh reaches its own exit status at:
+            56  # The document says "four test scripts, all four `TOTAL BAD: 0`"
+            57  # self-test is NOT one of the four and does not print a TOTAL BA
+            64  L=$(grep -c '^TOTAL BAD: 0$' "$WORK/$f" 2>/dev/null || true)
+            68  echo "      test-script outputs ending TOTAL BAD: 0 -- $TBOK of 
+            70  echo "      four and prints no TOTAL BAD line)"
+            82  echo "TOTAL BAD: $BAD"
+            83  [ "$BAD" -eq 0 ] || exit 1
+
+      and its exit status is READ by (census at HEAD, unpinned):
+          code/branching_audit_321d/h3_setlevel.py:339  READS p = subprocess.run(["sh", "./c0_repro.sh"],
+          code/branching_audit_321d/h3_setlevel.py:346  READS "c0_repro.sh exits %d on a scratch copy of the tree:
+          code/branching_audit_58da/g4_fleet.py:364  READS print("(v) c0_repro.sh -- THE FLEET PROPERTY ONE LEV
+          code/branching_audit_58da/g4_fleet.py:370  READS p = subprocess.run(["sh", "c0_repro.sh"],
+          code/branching_audit_58da/g4_fleet.py:375  READS print("   c0_repro.sh exit %d" % p.returncode)
+          code/branching_audit_58da/g4_fleet.py:380  READS finding("c0_repro.sh exits %d on the working tree: t
+          code/branching_audit_58da/g4_fleet.py:537  no    both changes.  c0_repro.sh still regenerates the tar
+          code/branching_repair_7e58/k3_setlevel.py:227  no    L.rule("(v) c0_repro.sh -- THE SAME PROPERTY ONE LEV
+          code/branching_repair_7e58/k3_setlevel.py:236  READS p = subprocess.run(["sh", "c0_repro.sh"], cwd=os.pat
+          code/branching_repair_7e58/k3_setlevel.py:243  READS print("   c0_repro.sh exit %d" % p.returncode)
+          code/branching_repair_7e58/k3_setlevel.py:245  READS "c0_repro.sh exits %d on the repaired tree: the targ
+          code/branching_repair_7e58/k3_setlevel.py:255  no    re-derivation and not a re-run of what moved; c0_rep
+
+      SO: the pipeline's result reaches this script's exit status,
+      and 9 external caller(s) read that status.  It is consumed.
+      It is outside P2 for one reason only: the file sets `-u` and
+      not `-e`.
+
+      THE THREE RULES, ON THIS ONE FILE:
+          mg-c2b3's NAME rule  (`run_all.sh`)   MISSES -- it is c0_repro.sh
+          mg-c2b3's SHAPE rule (`| tee`)        MISSES -- there is no tee
+          mg-7522's PROPERTY rule (P2)          MISSES -- no `set -e`
+
+  THE DIRECTION IT FAILS IN, stated rather than left to be assumed:
+  a failing `grep` here empties the stream, `COUNT` becomes empty,
+  the comparison against `699520` reports DISAGREES and the script
+  exits 1.  That is fail-LOUD, not the silent green mg-c2b3 was
+  sweeping for.  This is a hole in the population, and on today's
+  bytes it is not a live swallow.  Both halves are the finding.
+
+==============================================================================
+A1 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a disagreement between two parsers
+on mg-7522's five figures, a shell script outside `*.sh`, an unparsed
+`*.py`, and a shell string carrying a pipeline.  It ranges over every
+tracked file in the repository at HEAD and every tracked `*.sh` at
+bee07a1.  It does NOT count A1e: a population hole is a finding about
+a predicate, and turning it into a BAD would say mg-7522 broke
+something it did not break.
+
+FINDING: A1e code/branching_audit_a218/c0_repro.sh:47 is a status-consuming pipeline OUTSIDE mg-7522's P2: the discarded `grep` and `tr` stages can fail, the value reaches the script's own exit code, and 9 caller(s) read that code

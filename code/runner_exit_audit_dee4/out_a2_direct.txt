@@ -1,0 +1,153 @@
+==============================================================================
+A2  THE STATUSES, READ DIRECTLY -- AND AT WHICH GRAIN
+==============================================================================
+
+==============================================================================
+A2a  THE 8 `| tee` SITES -- DERIVED, NOT LISTED
+==============================================================================
+
+  COMPARISON, so the pre-repair bytes are read at the pin bee07a1,
+  which is the anchor `s2_status.py` itself uses for this arm.
+
+    runner                                         line   discarded stage
+    code/face_geometry_audit_f1b2/run_audit.sh     14     audit_scoring.py
+    code/face_geometry_audit_f1b2/run_audit.sh     15     audit_gates.py
+    code/face_geometry_audit_f1b2/run_audit.sh     16     audit_theorem_and_co
+                                                          ntent.py
+    code/face_geometry_audit_f1b2/run_audit.sh     17     audit_injections.py
+    code/face_geometry_audit_f1b2/run_audit.sh     18     audit_nmax2.py
+    code/face_geometry_audit_fcf1/run_audit.sh     16     audit_nc4.py
+    code/face_geometry_audit_fcf1/run_audit.sh     20     audit_extra.py
+    code/face_geometry_audit_fcf1/run_audit.sh     24     audit_gauge.py
+
+      derived `| tee` sites                         8
+      rows in mg-7522's committed transcript        8
+
+  VERDICT.  These 8 are read DIRECTLY and the list is DERIVED from the
+  runner's own bytes -- the row set cannot drift from the source, and
+  the transcript carries a real exit code and a real wall time for
+  each.  This half of the claim is sound.
+
+==============================================================================
+A2b  THE 3 `git diff` SITES -- A HAND-LIST, AT THE WRONG GRAIN
+==============================================================================
+
+  THE SOURCE LINES, at 1ee1f1b^ -- the bytes mg-7522 repaired:
+
+      code/state_delegation_audit_16eb/run_all.sh:38
+          source : n=$(git diff "$base..HEAD" -- "$dir" | wc -c | tr -d ' ')
+          RAN    : git diff a4aeeb9..HEAD -- code/state_layer_audit_218d
+
+      code/state_delegation_audit_16eb/run_all.sh:39
+          source : nmd=$(git diff "$base..HEAD" -- "$dir" ':!*.md' | wc -c | tr -d ' 
+          RAN    : git diff 3a80d99..HEAD -- code/state_delegation_audit_5644
+          *** the source line has a `':!*.md'` pathspec and the
+              argv does not.  This row did not run line 39's
+              discarded stage; it ran line 38's, second
+              loop iteration, under line 39's label. ***
+
+      code/state_delegation_repair_0049/run_all.sh:39
+          source : n=$(git diff "$base..HEAD" -- "$dir" | wc -c | tr -d ' ')
+          RAN    : git diff a4aeeb9..HEAD -- code/state_layer_audit_218d
+
+  THE LOOPS.  Each line sits inside a `for pair in ...` loop, so the
+  number of discarded statuses at RUN TIME is not the number of lines:
+
+      code/state_delegation_audit_16eb/run_all.sh      3 pair(s), 2 pipeline line(s), 6 execution(s)
+      code/state_delegation_repair_0049/run_all.sh     2 pair(s), 1 pipeline line(s), 2 execution(s)
+
+      pipeline LINES mg-7522 counted                3
+      argv mg-7522 hand-listed                      3
+      DISTINCT commands among them                  2
+      discarded `git diff` EXECUTIONS at run time   8
+      of those, never executed by mg-7522           4
+          state_delegation_audit_16eb:39  diff a4aeeb9..HEAD -- code/state_layer_audit_218d :!*.md
+          state_delegation_audit_16eb:39  diff 3a80d99..HEAD -- code/state_delegation_audit_5644 :!*.md
+          state_delegation_audit_16eb:38  diff 2a29f30..HEAD -- code/state_delegation_repair_bee1
+          state_delegation_audit_16eb:39  diff 2a29f30..HEAD -- code/state_delegation_repair_bee1 :!*.md
+
+==============================================================================
+A2c  ALL EIGHT, READ DIRECTLY -- FILLING THE HOLE RATHER THAN REPORTING IT
+==============================================================================
+
+  Each row runs the DISCARDED stage with nothing in the way and reads
+  its exit status -- the number `wc -c` replaced with its own.  This
+  is mg-c2b3's K3b method and mg-7522's own, applied at the grain the
+  source lines actually execute at.  LIST argv, no shell, so
+  `returncode` is the target's own status.
+
+    source line                                discarded stage                                exit
+    state_delegation_audit_16eb:38             diff a4aeeb9..HEAD -- code/state_layer_audit_2 0
+    state_delegation_audit_16eb:39             diff a4aeeb9..HEAD -- code/state_layer_audit_2 0
+    state_delegation_audit_16eb:38             diff 3a80d99..HEAD -- code/state_delegation_au 0
+    state_delegation_audit_16eb:39             diff 3a80d99..HEAD -- code/state_delegation_au 0
+    state_delegation_audit_16eb:38             diff 2a29f30..HEAD -- code/state_delegation_re 0
+    state_delegation_audit_16eb:39             diff 2a29f30..HEAD -- code/state_delegation_re 0
+    state_delegation_repair_0049:39            diff a4aeeb9..HEAD -- code/state_layer_audit_2 0
+    state_delegation_repair_0049:39            diff 3a80d99..HEAD -- code/state_delegation_au 0
+
+      8 of 8 exit 0
+
+  SO THE CONCLUSION SURVIVES AND THE ENUMERATION DOES NOT.
+  mg-7522's retroactive clearance said `11 of 11`.  At the grain
+  the source actually executes, the eleven lines are EIGHT `| tee`
+  invocations plus EIGHT `git diff` invocations = 16 discarded
+  statuses.  mg-7522 read the 8 tee ones, and 3 hand-listed argv
+  (2 distinct commands) covering 4 of the 8 git ones.  All 8 git
+  ones read here are 0, so nothing was being swallowed: the
+  finding is about the word DIRECTLY and about the population --
+  which is the whole subject of this ticket -- and not about the
+  verdict.
+
+  WHAT REMAINS UNEXAMINED, named rather than folded into a total:
+      * the same fact at every intermediate commit.  Read at HEAD, on
+        one machine.  mg-7522 states this too and it is inherited.
+      * the 34 of mg-c2b3's own population are NOT re-run here.  They
+        are cited, not re-measured, and `45 of 45` is therefore 8 of 8
+        re-derived by me plus 3 re-derived by me plus 34 INHERITED.
+
+==============================================================================
+A2d  THE WORD `VERIFIED` -- THE BYTE COUNTS, ON BOTH ARMS
+==============================================================================
+
+  OUTCOMES.md: "`wc -c < FILE` counts the same bytes the pipeline
+  did, verified against the pre-repair output (`0 / 0 / 0 / 0 / 2111
+  / 0`, unchanged)".  `verified` is one of the three markers
+  mg-7522's own general form names, and NO probe in its tree computes
+  a byte count.  So both arms are run here, on the same inputs.
+
+      state_delegation_audit_16eb:38           pre 0        post 0        AGREE
+      state_delegation_audit_16eb:39           pre 0        post 0        AGREE
+      state_delegation_audit_16eb:38           pre 0        post 0        AGREE
+      state_delegation_audit_16eb:39           pre 0        post 0        AGREE
+      state_delegation_audit_16eb:38           pre 2111     post 2111     AGREE
+      state_delegation_audit_16eb:39           pre 0        post 0        AGREE
+      state_delegation_repair_0049:39          pre 0        post 0        AGREE
+      state_delegation_repair_0049:39          pre 0        post 0        AGREE
+
+      the six values of state_delegation_audit_16eb : 0 / 0 / 0 / 0 / 2111 / 0
+      OUTCOMES.md says                              : 0 / 0 / 0 / 0 / 2111 / 0
+      -> the `verified` claim HOLDS, re-derived on both arms
+
+  AND THE HALF THE FIGURE DOES NOT COVER.  OUTCOMES.md's parenthesis
+  lists SIX values, and `state_delegation_repair_0049` executes two
+  more that are not in it:
+      state_delegation_repair_0049 : 0 / 0
+  They are unchanged too, so the claim is true; it is named because a
+  figure covering 6 of 8 under the sentence `the byte counts` is the
+  same shape as `11 of 11` covering 4 of 8.
+
+==============================================================================
+A2 TOTAL BAD: 2
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a derived `| tee` site missing from
+mg-7522's transcript, a hand-listed argv that does not match the
+source line it is labelled with, a runtime execution never read, a
+non-zero discarded status, and a byte count that moved between the
+two arms.  It ranges over the 11 pipeline lines mg-7522 names and the
+16 discarded statuses they execute.  It does NOT range over mg-c2b3's
+own 34, which are INHERITED here and not re-measured.
+
+FINDING: A2b code/state_delegation_audit_16eb/run_all.sh:39 -- the source line carries a `':!*.md'` pathspec and the argv that was run does not; the discarded stage of that line was never executed
+FINDING: A2b the 3 `git diff` rows are a hand-list of 3 argv (2 distinct commands) over source lines that execute 8 discarded statuses at run time; 4 of the 8 were never run, and the `':!*.md'` form of line 39 was never run in any shape

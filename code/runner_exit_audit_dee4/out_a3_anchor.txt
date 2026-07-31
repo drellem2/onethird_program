@@ -1,0 +1,171 @@
+==============================================================================
+A3  THE ANCHOR OF A CENSUS IS NOT THE ANCHOR OF A COMPARISON
+==============================================================================
+
+==============================================================================
+A3a  EVERY ANCHOR IN THE REPAIRED FILES, READ FROM THE SOURCE
+==============================================================================
+
+    file           anchor                   present question it serves
+    k2_consume.py  CALLER_REF               yes     CENSUS -- what, in the
+                                                    world, reads a runner's
+                                                    exit status
+    k2_consume.py  REF                      yes     COMPARISON -- classify the
+                                                    runner text as it stood
+                                                    before the repair
+    libc2b3.py     TICKET_REF               yes     the pin itself
+    s4_unpin.py    changed_since(PINNED)    yes     COMPARISON -- did any
+                                                    committed transcript move
+    s4_unpin.py    changed_since(None)      yes     the HEAD side of the same
+                                                    comparison, shown to be 0
+                                                    by construction
+
+  THE LOAD-BEARING PAIR.  The census is `None` and the comparison is
+  `bee07a1`.  A repair that unpinned BOTH would have put mg-821e's
+  defect back; this one did not.  The document names which anchor
+  serves which purpose in two places -- `k2_consume.py`'s own comment
+  block, and S4e's anchor inventory.
+
+      `unpinned for the enumeration`             present
+      `still pinned for the classification`      *** ABSENT ***
+
+==============================================================================
+A3b  THE PRE-REPAIR PREDICATE, RUN AGAINST THE SAME INPUTS
+==============================================================================
+
+  mg-7522 changed FOUR things in this one scan.  Each is run in both
+  forms over the same bytes, so the effect of each is separable.
+
+    rule                                           sites   reading the status
+    pre-repair, as mg-c2b3 ran it                      1   1
+    pre-repair rule, HEAD bytes -- ANCHOR alone        1   1
+    …and the run_all.sh EXCLUSION dropped              1   1
+    …and the EXEC regex widened                        1   1
+    repaired, as it stands now                         1   1
+    mg-7522's own PROPERTY rule (lib7522._TARGET)      1   1
+
+      THE ANCHOR, ALONE: 1 site(s) pinned -> 1 at HEAD, same rule.
+
+  THAT IS NOT A NEGATIVE RESULT -- it is mg-7522's own F4, re-derived
+  from scratch.  Its README states the literal-path column of the 2x2
+  as `1 site` at the pin and `1 site` at HEAD, and the anchor alone
+  moving nothing is exactly what `unpinning is necessary and NOT
+  sufficient` means.  Two independent instruments now agree on it.
+      pinned literal               mg-7522 1   re-derived 1   AGREES
+      HEAD literal                 mg-7522 1   re-derived 1   AGREES
+
+  AND THE OTHER THREE CHANGES MOVE NOTHING EITHER, at this grain: the
+  `run_all.sh` exclusion, the EXEC widening and the target widening
+  each leave the count at 1.  Every one of them is defensible on its
+  own terms; none of them is what made the census correct.  The thing
+  that made it correct is the RUNTIME-PATH census mg-7522 published
+  separately and pointed at from a stated limit.
+
+==============================================================================
+A3c  THE REPAIRED TARGET RULE IS STILL A NAME RULE -- WITH TWO NAMES
+==============================================================================
+
+  `k2_consume.py`'s target regex went from `run_all\.sh` to
+  `(?:run_all|run_audit)\.sh`.  That is one filename replaced by two.
+  mg-7522's own library states the property -- "an executable source
+  that runs a shell script" -- and its `_TARGET` is `(\w+\.sh)`.
+
+  POPULATION FOR THIS CENSUS, named: every line of every tracked
+  `*.py` or `*.sh` at HEAD that EXECUTES something (mg-c2b3's own
+  `EXEC` rule, and not its `NOT_EXEC` exclusions) and names a token
+  ending in `.sh`.  Grouped by the target's BASENAME, because the
+  basename is the thing the two-name rule tests.
+
+    target basename            sites   read status in the two-name rule?
+    run_all.sh                 32      13          yes
+    c0_repro.sh                3       3           NO -- invisible to it
+    b0_repro.sh                2       0           NO -- invisible to it
+    b.sh                       1       0           NO -- invisible to it
+    b0.sh                      1       0           NO -- invisible to it
+    probe.sh                   1       1           NO -- invisible to it
+    x.sh                       1       0           NO -- invisible to it
+
+      executing sites naming a `*.sh`              41
+      …whose basename the two-name rule matches    32
+      …outside it, across  6 distinct basenames     9
+      …of those, reading the exit status            4
+
+  THE SITES THEMSELVES, so a reader can disagree with the rule rather
+  than with a total.  Some are fixtures inside a self-test and some
+  are live invocations; both are printed and neither is folded away:
+
+      code/branching_audit_2060/run_all.sh:18            -      b0_repro.sh
+      code/branching_audit_321d/h3_setlevel.py:339       READS  c0_repro.sh
+      code/branching_audit_58da/g4_fleet.py:370          READS  c0_repro.sh
+      code/branching_repair_7e58/k3_setlevel.py:236      READS  c0_repro.sh
+      code/runner_exit_c2b3/k2_consume.py:372            -      b0_repro.sh
+      code/runner_exit_c2b3/selftestc2b3.py:137          -      b0.sh
+      code/runner_exit_c2b3/selftestc2b3.py:137          -      x.sh
+      code/runner_exit_repair_7522/selftest7522.py:123   -      b.sh
+      code/runner_exit_repair_7522/selftest7522.py:230   READS  probe.sh
+
+      executing sites naming `run_audit.sh`         0
+      -- the name the repair ADDED to the rule.  At HEAD nothing
+      executes a `run_audit.sh` by literal path, so the widening from
+      one name to two is not exercised by any site in the arc.  The
+      two runners it was added for are executed by mg-7522's own S2
+      through a list argv it builds itself, which the literal-path
+      rule cannot see either.
+
+  THE STATED LIMIT NAMES THE OTHER HALF.  mg-7522 wrote a
+  stated-limit comment into `k2_consume.py` for the LITERAL-PATH
+  rule -- a real limit, correctly named.  The FILENAME limit in the
+  same regex, in the file whose section 1 is `a naming convention
+  is not a property`, is not named anywhere.  An absence that is
+  written down is checkable; this one is not written down.
+
+==============================================================================
+A3d  THE COMPARISON'S FIGURE -- `154 changed files`
+==============================================================================
+
+  The published document, section 3:
+
+      "anchored to the pin the byte-comparison sees **154 changed
+       files**; anchored to `HEAD` on a committed tree it sees 0, by
+       construction."
+
+  `s4_unpin.py` computes that with `git diff --name-only <ref> --`.
+  Re-derived at every anchor that could have produced it:
+
+      worktree vs the pin, now (what s4 prints)       275
+      1ee1f1b vs the pin (the repair commit)          257
+      1ee1f1b^ vs the pin (immediately before)        240
+      HEAD vs the pin                                 275
+      mg-7522's own committed transcript              166
+      the published document says                     154
+
+      *** NO ANCHOR REPRODUCES 154. ***
+
+  THIS IS THE DEFECT OF SECTION 2 IN THE DOCUMENT OF SECTION 3.
+  mg-05eb's OPEN 2 was a reader-facing artifact carrying a number
+  its own instrument's transcript disagreed with.  Here the
+  document says 154 and the instrument's transcript says 166.
+  And the rule was already written down by mg-7522 itself, one
+  commit later: "a number that moves belongs in a transcript".
+  c252f96 applied it to the runner count and to the 2x2 totals in
+  the SAME SECTION as this figure, and left this one as prose.
+
+  WHAT IS NOT WRONG, so the finding is not read wider than it is:
+  the CLAIM the figure supports -- that the pinned side is more
+  informative than the HEAD side -- holds at every anchor above,
+  and `s4_unpin.py` asserts the INEQUALITY rather than the number.
+
+==============================================================================
+A3 TOTAL BAD: 1
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a missing or mis-defaulted anchor in
+`k2_consume.py`, `libc2b3.py` or `s4_unpin.py`, an unpinning that did
+not widen the census, and a prose figure no anchor reproduces.  It
+ranges over every tracked `*.py` and `*.sh` at HEAD and at bee07a1.
+It does NOT count A3c: enumerating by two filenames instead of one is
+a narrower rule than mg-7522's own, not a broken one, and calling it
+BAD would overstate it.
+
+FINDING: A3c the repaired caller scan still enumerates targets by FILENAME -- `(?:run_all|run_audit)\.sh`, two names instead of one.  mg-7522's own library states the property instead.  9 executing sites at HEAD name a `*.sh` whose basename is neither, across 6 distinct target scripts, 4 of them reading the exit status; the `k2_consume.py` STATED-LIMIT comment names the literal-path limit and does not name this one
+FINDING: A3d the published document states the pinned byte-comparison as `154 changed files`; the same measurement is 275, 257, 240, 275 at the anchors above and 166 in mg-7522's own committed transcript.  No anchor reproduces 154.
