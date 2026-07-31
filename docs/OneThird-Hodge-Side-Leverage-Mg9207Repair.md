@@ -230,10 +230,18 @@ run.
 
 ## 8. What is NOT covered, printed rather than left to be found
 
-- **Text outside the site.** A site is a **section** — the one projection that remains. Unchanged
-  since mg-8a5c, stated where a reader meets the gate, and itself gated: `section()` anchors by
-  content and `N6` relocates a whole disclosure out of §14 to show the gate notices. Widening it
-  to the file is a different trade and is pm-onethird's to size.
+- **Text outside the site.** ~~A site is a **section**~~ — ⚠️ **CORRECTED 2026-07-31 (mg-ec07
+  `E-2`, landed by mg-6df0): that sentence was FALSE AT 1 OF 3 SITES when it was written.** §14 and
+  H8 were sections; the `STATE.md` site was **one line** from `find_line`, so what it excluded was
+  not *"the rest of the file outside this section"* but *"the whole ledger table this row is a row
+  of, including the column headers that say what its own cells mean"* — and exchanging those
+  headers was **exit 0 with 0 refuted rows** (mg-ec07 `E-1`/X1). The `STATE.md` site is now the row
+  **and the header lines it is read under**, and the extent is no longer a sentence: it is printed
+  per site, keyed on the function that cuts the site out, with the counts measured. The residue is
+  real and is **not** closed — **282 600 of 320 509 characters (88.2%)** of the three files are
+  outside every record — and widening further is still a trade pm-onethird sizes. It remains itself
+  gated: the anchors resolve by content, `N6` relocates a whole disclosure out of §14, and the
+  `SITES × KINDS` matrix runs every enumerated kind at every site.
 - **Two occurrences of the same figure token exchanged.** Still the identity map on the bytes: an
   **empty set**, not a blind spot, and the difference is checkable.
 - **What a roster entry MEANS.** `ORDER` says where `10 483` goes and `HISTORICAL` says it is
@@ -266,7 +274,7 @@ exhibit the defect, **the reason**, because a reason is checkable and an omissio
 |---|---|---|
 | 1 | `SITE RECORD` — skeleton against the declared record | **Can, and does not.** `==` on whole strings, so its kernel is empty by construction. What makes the string really *be* the whole non-figure half is `RECORD PARTITION`, and D3 shows that row failing when it is not |
 | 2 | `RECORD PARTITION` — `rejoin(segments, figures) == raw` | **Cannot.** Equality on two whole strings; there is no field structure to be partial about. Its risk is the opposite one — being unfalsifiable — and **D3 is the answer to that**, not to this |
-| 3 | R1's scoring of probe verdicts | **DID — twice, and both are kept.** `"FIGURE CENSUS" in row` matched the `SITE RECORD` row's own explanation, which *names* the other rows, so 7 of 7 probes were scored as having broken a figure row. And mg-9207's finding **IDs** were matched by prose, so `J-3`'s text — *"and E2 below where the gate saw NOTHING"* — counted as an E2 finding still standing. Both fixed by keying on the **heading** and on the **ID** rather than on the line |
+| 3 | R1's scoring of probe verdicts | **DID — twice, and both are kept.** `"FIGURE CENSUS" in row` matched the `SITE RECORD` row's own explanation, which *names* the other rows, so 7 of 7 probes were scored as having broken a figure row. And mg-9207's finding **IDs** were matched by prose, so `J-3`'s text — *"and E2 below where the gate saw NOTHING"* — counted as an E2 finding still standing. Both fixed by keying on the **heading** and on the **ID** rather than on the line. ⚠️ **AND THE FIX WAS APPLIED HERE ONLY (mg-ec07 `E-5`, landed by mg-6df0).** The same construct was live **forty lines from where this row was written**, in `verify_landing.py`'s `reseal()` — `"SITE RECORD" not in d`, excluding the three `RECORD PARTITION` rows from the only refusal that guards the blessing path, so a document whose record was provably not its section was **blessed at exit 0**. This row named the remedy and never asked where else the shape lived. A sweep of the tree for it, which mg-6df0 runs every time, finds two further live occurrences that nobody had reported |
 | 4 | R3's population — segments and figures from `partition` | **Cannot** in the field-by-field sense: nothing is named, the population is derived. Its real limit is that it is **in memory**, declared in its own heading rather than left to be found |
 | 5 | R4's re-run scoring | **Can.** Narrowed: rows are counted from their `[MARKER]`s rather than parsed out of a bottom-line sentence whose wording differs between the four instruments, and findings are identified by ID. This one is real and is stated rather than dressed up |
 | 6 | the frozen-transcript check — `sha256` before and after | **Cannot.** A hash over a whole file has no field structure |
