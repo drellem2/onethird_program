@@ -80,6 +80,26 @@ itself, about another document, or about a ticket -- and each was wrong.
       control are the exchanges, and R1 of `code/hodge_leverage_repair_8eca/`
       runs them on disk against the real runner.
 
+      ⚠️ MADE POSITION-AWARE OVER THE WHOLE RECORD 2026-07-31 (mg-9207
+      findings E2/E2b/E3, landed by mg-ff3e).  THE INVARIANCE HAD MOVED
+      RATHER THAN GONE AWAY.  An exchange has two halves -- the figures and
+      the statements they hang on -- and making the census positional over
+      the FIGURES left the LABELS invariant: exchanging H8's `before
+      mg-a2bd` / `after mg-a2bd` row labels puts mg-8aae's own defect back
+      (the table says the row SHRANK) with every figure token in its
+      declared slot and the gate refuting NOTHING, at 3 of 3 label sites.
+      The generator is that the gate compared a PROJECTION and each repair
+      widened it BY ONE NAMED FIELD, so the next exchange moved into what
+      was still dropped.  NAMING LABELS WOULD HAVE BOUGHT ONE MORE
+      GENERATION.  Instead the projection is made LOSSLESS: `partition`
+      cuts the section into (SEGMENTS, FIGURES) along a seam the record
+      itself defines, the figures are compared to `ORDER` and the segments
+      byte for byte to a declared record, and `rejoin(segments, figures) ==
+      raw` is checked every run so "the two halves are the whole record" is
+      MEASURED.  N19-N25 of the negative control are the label-side
+      exchanges, and `code/hodge_leverage_repair_ff3e/` runs them on disk
+      against the real runner.
+
   T2  TWO SITE COUNTS IN ONE COMMIT (F2).  §6's disposition table is counted
       row by row from the tree; §14's count word is read out of §14.  Neither
       is quoted from the audit.
@@ -410,12 +430,191 @@ LIVE_CENSUS = {
 }
 
 
+# --------------------------------------------------------------------------
+# ⚠️ MADE POSITION-AWARE OVER THE WHOLE RECORD 2026-07-31 (mg-9207's E2/E2b/E3,
+# landed by mg-ff3e).  THE INVARIANCE HAD MOVED RATHER THAN GONE AWAY.
+#
+# mg-8916 made the census a MULTISET of figure tokens.  mg-8aae exchanged two
+# figures and the multiset did not move.  mg-8eca made it a SEQUENCE of figure
+# tokens.  mg-9207 then exchanged the two LABELS instead -- H8's `mg-a2bd`
+# table saying the `STATE.md` row SHRANK, with every figure token still in its
+# declared slot and the length unchanged -- and the gate refuted NOTHING, at
+# 3 of 3 label sites.  The reader-visible defect mg-8aae raised was
+# reproducible from the OTHER HALF of the same exchange.
+#
+# WHAT GENERATES THE INSTANCES, which is the only question worth asking after
+# the third one.  The gate declares a PROJECTION of the site and compares that
+# projection to an expectation.  Whatever the projection drops is invisible,
+# and each repair so far enlarged the projection BY ONE NAMED FIELD -- values,
+# then order-of-values.  The complement was still everything else, so the next
+# exchange simply moved into it.  Widening field by field buys one generation
+# each, and the fix's author never sees the next one BECAUSE THEY ARE LOOKING
+# AT THE REPORTED ONE.  Naming labels here would have bought a fourth.
+#
+# SO THE PROJECTION IS MADE LOSSLESS RATHER THAN WIDER.  The site is cut in two
+# along a seam THE RECORD ITSELF DEFINES -- `partition` walks the figure-shaped
+# tokens and returns (SEGMENTS, FIGURES) -- and both halves are compared, both
+# positionally:
+#
+#   FIGURES   the asserted figure tokens, in order, against `ORDER`  -- (c)/(d)
+#   SEGMENTS  everything else, byte for byte, in order, against the
+#             DECLARED RECORD in `site_records.txt`                  -- (e)
+#
+# and `rejoin(segments, figures) == raw` is CHECKED EVERY RUN, per site, so
+# "the two halves are the whole record" is a measurement rather than a
+# sentence.  No field can be left behind because nobody named it: NO FIELD IS
+# NAMED AT ALL.  Labels, table row headings, column alignment, the text inside
+# a marked quotation and any field a later editor invents are in SEGMENTS the
+# moment they are written, without this file being touched.
+#
+# THE COST, stated because it is the reason this was not done first: any edit
+# to these three sections that is not a live measurement makes the run RED
+# until the declared record is regenerated (`python3 verify_landing.py
+# --reseal`).  That is one command, and its effect is a REVIEWABLE DIFF --
+# which is why the declaration is the skeleton TEXT and not a sha256 of it.  A
+# hash bump is a rubber stamp; a diff is a thing a reviewer can read.  And
+# `--reseal` REFUSES to run while any other gate row is refuted, so a document
+# whose figures are wrong cannot be blessed by resealing it.
+#
+# IT IS A DECLARATION AND NOT A DUPLICATE, which this arc distinguishes for a
+# reason (mg-a318 F-1).  A duplicate is a second place a READER meets the
+# claim, with nothing comparing the two, so one goes stale in silence.  The
+# declared record is read by the gate alone and compared to the document on
+# every run: a divergence IS the red run, so it cannot go stale quietly.
+#
+# WHAT IS STILL NOT COVERED, with the reason, because an omission is not
+# checkable and a stated reason is:
+#   * text OUTSIDE the site is not read, because a site is a section.  That is
+#     the one projection that remains, it is unchanged since mg-8a5c, and it is
+#     itself gated -- `section()` anchors BY CONTENT and N6 relocates a whole
+#     disclosure out of §14 to show the gate notices.
+#   * two occurrences of the SAME figure token exchanged with each other are
+#     still the identity map on the artifact (mg-8eca), so there is nothing to
+#     detect -- not a blind spot but an empty set.
+# --------------------------------------------------------------------------
+FIGURE_MARK = "⟦figure⟧"
+RECORD_MARK = "⟦record⟧ "
+RECORD_END = "⟦end⟧"
+SITE_RECORDS = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "site_records.txt")
+
+# The MARKED QUOTATION convention, in ONE place.  `assertions` (what the
+# designated readers and the census read) and `partition` (what the record is
+# cut on) are both derived from it, so the two halves of the record cannot be
+# read by two implementations that drift apart -- which is how the battery
+# `e16e41c` shipped came to test a gate slightly unlike the live one.
+QUOTE_PATTERNS = [re.compile(r'\*"(.+?)"\*', re.S),
+                  re.compile(r"\*'(.+?)'\*", re.S)]
+
+
+def quoted_spans(raw):
+    """The (start, end) spans of the site's MARKED QUOTATIONS, merged and in
+    order.  Offsets into `raw` itself, so the same convention can be applied
+    without flattening the text first."""
+    spans = sorted((m.start(), m.end())
+                   for pat in QUOTE_PATTERNS for m in pat.finditer(raw))
+    merged = []
+    for s, e in spans:
+        if merged and s < merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], e))
+        else:
+            merged.append((s, e))
+    return merged
+
+
+def partition(raw):
+    """THE WHOLE RECORD, cut in two along a seam the record defines.
+
+    Returns (segments, figures) where `figures` is every figure-shaped token
+    the site ASSERTS, in order, and `segments` is everything else, in order,
+    with `len(segments) == len(figures) + 1` and
+
+        rejoin(segments, figures) == raw
+
+    EXACTLY -- which `census_gate` checks on every run, per site.  That
+    equality is the whole point: it is what licenses the claim that (c)/(d)
+    plus (e) cover the section, with nothing in neither half."""
+    spans = quoted_spans(raw)
+    segments, figures, last = [], [], 0
+    for m in FIGURE_TOKEN.finditer(raw):
+        if any(s <= m.start() < e for s, e in spans):
+            continue                  # a quotation is not an assertion
+        segments.append(raw[last:m.start()])
+        figures.append(m.group())
+        last = m.end()
+    segments.append(raw[last:])
+    return segments, figures
+
+
+def rejoin(segments, figures):
+    """The inverse of `partition`: interleave the two halves back together."""
+    out = [segments[0]]
+    for f, s in zip(figures, segments[1:]):
+        out.append(f)
+        out.append(s)
+    return "".join(out)
+
+
+def skeleton(raw):
+    """THE SITE MINUS ITS ASSERTED FIGURES: every segment in order, with each
+    figure token replaced by a position marker.  Stable from run to run --
+    the live values are exactly what the marker hides -- so it moves only when
+    somebody edits the section."""
+    return FIGURE_MARK.join(partition(raw)[0])
+
+
+def declared_records():
+    """The DECLARED record of each site, read from `site_records.txt`.  Absent
+    file or absent site is FAIL-CLOSED: the gate fires rather than skipping."""
+    if not os.path.exists(SITE_RECORDS):
+        return {}
+    with open(SITE_RECORDS, encoding="utf-8") as fh:
+        lines = fh.read().split("\n")
+    out, name, buf = {}, None, []
+    for l in lines:
+        if l.startswith(RECORD_MARK):
+            name, buf = l[len(RECORD_MARK):], []
+        elif name is not None and l == RECORD_END:
+            out[name], name = "\n".join(buf), None
+        elif name is not None:
+            buf.append(l)
+    return out
+
+
+def render_records(texts):
+    """`site_records.txt` as it should read for these site texts."""
+    parts = [
+        "# THE DECLARED RECORD of each census site -- mg-ff3e, closing",
+        "# mg-9207's E2/E2b/E3.  Each block is the SECTION with every ASSERTED",
+        f"# figure token replaced by {FIGURE_MARK}: the half of the record the",
+        "# figure census does NOT compare, frozen so that exchanging two LABELS",
+        "# is not silent.  The figures themselves are declared by `ORDER` in",
+        "# `verify_landing.py` and are checked by value and by slot.",
+        "#",
+        "# Regenerate with:  python3 verify_landing.py --reseal",
+        "# It refuses while any other gate row is refuted, and the diff it",
+        "# produces is meant to be READ -- that is why this is text and not a",
+        "# sha256.",
+    ]
+    for name, _reader, _keys in SITES:
+        sk = skeleton(texts[name])
+        for l in sk.split("\n"):
+            if l.startswith(RECORD_MARK) or l == RECORD_END:
+                raise SystemExit(f"{name}: a line of the site collides with "
+                                 f"the record delimiter: {l[:60]!r}")
+        parts += [RECORD_MARK + name, sk, RECORD_END]
+    return "\n".join(parts) + "\n"
+
+
 def figure_sequence(raw):
     """Every figure-shaped token the site ASSERTS, IN THE ORDER A READER MEETS
-    THEM.  Marked quotations are removed first, by `assertions`, on the
+    THEM.  Derived from `partition`, which is the one place the site is cut
+    into figures and not-figures.  Marked quotations are exempt on the
     convention already in force at these sites: a quotation of a withdrawn
-    figure is not an assertion of it."""
-    return FIGURE_TOKEN.findall(assertions(raw))
+    figure is not an assertion of it.  ⚠️ Exempt from the CENSUS is not the
+    same as unchecked -- since mg-ff3e a quoted figure sits in a SEGMENT and is
+    frozen there byte for byte (N24)."""
+    return partition(raw)[1]
 
 
 def figure_tokens(raw):
@@ -534,6 +733,62 @@ def census_gate(name, raw, measured):
                     + ".  A figure attached to the wrong statement is the wrong "
                     "figure a reader meets, and exchanging two of them leaves "
                     "the census above IDENTICAL (mg-8aae H-1)"))
+
+    # ⚠️ (e) THE OTHER HALF OF THE RECORD (mg-9207 E2/E2b/E3, landed by
+    # mg-ff3e).  (c) and (d) are about the FIGURES.  This is about EVERYTHING
+    # ELSE, and the row above it is the proof that between them they are the
+    # section -- which is the difference between fixing the set and fixing the
+    # next field.
+    segments, seqf = partition(raw)
+    rebuilt = rejoin(segments, seqf)
+    out.append((rebuilt == raw,
+                f"GATE @ {name}: RECORD PARTITION -- the section is "
+                f"{len(seqf)} asserted figure token(s) and {len(segments)} "
+                f"segment(s) between them, and re-interleaving the two halves "
+                f"reproduces it BYTE FOR BYTE ({len(rebuilt)} of {len(raw)} "
+                f"chars).  This is what licenses 'the WHOLE record is "
+                f"compared': the figures are checked by FIGURE CENSUS and "
+                f"FIGURE ORDER, everything else by SITE RECORD, and nothing "
+                f"is in neither.  No field is named, so none can be left "
+                f"behind because nobody named it"))
+    got = FIGURE_MARK.join(segments)
+    want = declared_records().get(name)
+    if want is None:
+        out.append((False,
+                    f"GATE @ {name}: SITE RECORD -- no record is declared for "
+                    f"this site in {os.path.basename(SITE_RECORDS)}, so the "
+                    "half of the section that is not a figure is compared "
+                    "against nothing.  FAIL-CLOSED: a missing declaration is "
+                    "the same silence a missing check is.  Regenerate with "
+                    "`python3 verify_landing.py --reseal`"))
+    elif got == want:
+        out.append((True,
+                    f"GATE @ {name}: SITE RECORD -- the "
+                    f"{sum(len(s) for s in segments):,} "
+                    f"chars of this section that are NOT asserted figures are "
+                    f"byte-identical to the declared record, in order.  A "
+                    f"MULTISET is invariant under exchanging two figures "
+                    f"(mg-8aae H-1) and a SEQUENCE OF FIGURES is invariant "
+                    f"under exchanging the two LABELS they hang on (mg-9207 "
+                    f"E2/E2b/E3); this compares the other half, so neither "
+                    f"exchange is silent"))
+    else:
+        gl, wl = got.split("\n"), want.split("\n")
+        i = next((k for k in range(min(len(gl), len(wl))) if gl[k] != wl[k]),
+                 min(len(gl), len(wl)))
+        out.append((False,
+                    f"GATE @ {name}: SITE RECORD -- the section's NON-FIGURE "
+                    f"text differs from the declared record: "
+                    f"{len(gl)} line(s) against {len(wl)} declared, first "
+                    f"differing at line {i + 1} -- the section reads "
+                    f"{(gl[i] if i < len(gl) else '(end)')[:90]!r} where the "
+                    f"record declares "
+                    f"{(wl[i] if i < len(wl) else '(end)')[:90]!r}.  A LABEL "
+                    "exchanged with another label moves no figure and leaves "
+                    "FIGURE CENSUS and FIGURE ORDER green, which is how H8's "
+                    "table came to say the row SHRANK across mg-a2bd with the "
+                    "gate silent (mg-9207 E2).  If this edit is intended, "
+                    "`python3 verify_landing.py --reseal` and READ THE DIFF"))
     return out
 
 
@@ -545,11 +800,21 @@ def assertions(raw):
     quotation of a withdrawn figure is not an assertion of it, and a gate that
     reads one cannot tell the live figure from the one it replaced: §14 quotes
     *"... sits +9 608 characters above this copy"* in the same shape as the
-    sentence that states the live figure.  So the gate reads ASSERTIONS."""
+    sentence that states the live figure.  So the gate reads ASSERTIONS.
+
+    ⚠️ The spans come from `quoted_spans`, the SAME function `partition` cuts
+    the record on (mg-ff3e) -- here applied to the FLATTENED text and there to
+    the raw text, but one convention in one place.  Two implementations of it
+    is how the two halves of the record would come to disagree about which
+    bytes are in neither."""
     f = flat(raw)
-    for pat in (r'\*"(.+?)"\*', r"\*'(.+?)'\*"):
-        f = re.sub(pat, " ⟨struck quotation⟩ ", f)
-    return f
+    out, last = [], 0
+    for s, e in quoted_spans(f):
+        out.append(f[last:s])
+        out.append(" ⟨struck quotation⟩ ")
+        last = e
+    out.append(f[last:])
+    return "".join(out)
 
 
 def read_state_row(raw):
@@ -854,6 +1119,17 @@ whether the enlargement was disclosed anywhere.
     print("        at 2 of 2 sites (mg-8aae H-1); (d) compares the SEQUENCE.")
     print("        NOT covered by (d): two occurrences of the SAME token")
     print("        exchanged, which is the identity map on values (mg-8eca).")
+    print("    (e) and EVERYTHING ELSE IN THE SECTION -- every byte that is not")
+    print("        an asserted figure token -- byte for byte, in order, against")
+    print("        the declared record in `site_records.txt`.  (c) and (d) are")
+    print("        a projection onto the figures, and a projection is invariant")
+    print("        under any permutation of what it drops: exchanging the two")
+    print("        LABELS instead of the two figures was silent at 3 of 3 sites")
+    print("        (mg-9207 E2/E2b/E3).  (a)-(d) plus (e) are the WHOLE record,")
+    print("        and that is MEASURED rather than claimed -- the RECORD")
+    print("        PARTITION row re-interleaves the two halves and compares the")
+    print("        result to the section byte for byte.  No field is named, so")
+    print("        a field added later is covered the moment it is written.")
     for name, _r, _k in SITES:
         want, _c = expected_census(name, {"gap":  doc_num(aH - bH, signed=True),
                                           "both": doc_num(aH + histlen - bH, signed=True),
@@ -1157,7 +1433,7 @@ def negative_control():
     re-implementation.  Verdicts are written before the run.  Nothing on disk
     is touched."""
     head("NEGATIVE CONTROL -- THE FIGURE GATE, MUTATED ONE COPY AT A TIME")
-    print("""Eighteen mutations, verdicts written before the run, applied in memory to the
+    print("""Twenty-five mutations, verdicts written before the run, applied in memory to the
 three site texts and evaluated by `figure_gate` itself.  Nothing is written to
 disk.  N1/N3/N4 are mg-8a5c's N1/N4/N5 -- the three single-copy corruptions
 that the previous gate observed at exit 0 while predicting exit 1.  N9 is the
@@ -1167,7 +1443,10 @@ set-membership census would still pass; N14 is the fail-closed cost, stated as
 a cost.  N15-N18 are mg-8aae's H-1: two DECLARED figures EXCHANGED with each
 other, the mutation a MULTISET cannot see because a transposition preserves it
 exactly, which the run stayed GREEN on at 2 of 2 sites until mg-8eca made the
-roster positional.
+roster positional.  N19-N25 are mg-9207's E2/E2b/E3 and the rest of the same
+kind: an exchange has TWO HALVES, and moving the LABELS instead of the figures
+left every figure token in its declared slot and the gate refuting NOTHING at
+3 of 3 label sites until the record was compared WHOLE (mg-ff3e).
 """)
     a = len(state_row(tree(STATE)))
     b = len(deliv_row(tree(DELIV)))
@@ -1242,6 +1521,72 @@ roster positional.
     H8_HIST_ROW = ("this file (the relocated history)                   "
                    "10 483        16 268")
 
+    # ⚠️ ADDED 2026-07-31 (mg-9207 E2/E2b/E3, landed by mg-ff3e).  THE OTHER
+    # HALF OF AN EXCHANGE.  `transpose` above moves the FIGURES and asserts the
+    # multiset does not move.  This moves everything EXCEPT the figures and
+    # asserts the FIGURE SEQUENCE does not move -- so anything that fires can
+    # only be the segments, and a probe that fired for some other reason would
+    # be re-measuring (c)/(d) rather than exercising (e).
+    #
+    # AND IT REPORTS RATHER THAN ASSERTS (mg-9207 J-3).  A probe that raises
+    # AssertionError when its literal has moved exits 1, which is the same
+    # integer a fired gate produces, and a reader cannot tell them apart.  Each
+    # of these locates its text BY CONTENT and returns the string
+    # "PROBE NOT APPLIED" if it is not there, which DISAGREES with its
+    # prediction and is printed as itself.
+    def exchange(site, pairs):
+        """Exchange two pieces of NON-FIGURE text with each other, in place."""
+        t = dict(base)
+        s = t[site]
+        for a, b in pairs:
+            if s.count(a) != 1 or s.count(b) != 1:
+                return "PROBE NOT APPLIED"
+        for a, b in pairs:
+            s = s.replace(a, "\0", 1).replace(b, a, 1).replace("\0", b, 1)
+        if len(s) != len(base[site]) or s == base[site]:
+            return "PROBE NOT APPLIED"
+        if figure_sequence(s) != figure_sequence(base[site]):
+            return "PROBE NOT APPLIED"   # it moved a figure: not a label swap
+        t[site] = s
+        return t
+
+    def rewrite(site, before, after):
+        """A length-preserving edit to non-figure text that is not an exchange
+        -- the layout probe and the quoted-figure probe."""
+        t = dict(base)
+        s = t[site]
+        if s.count(before) != 1 or len(before) != len(after):
+            return "PROBE NOT APPLIED"
+        s = s.replace(before, after, 1)
+        if figure_sequence(s) != figure_sequence(base[site]):
+            return "PROBE NOT APPLIED"
+        t[site] = s
+        return t
+
+    def gate(mutated):
+        return mutated if isinstance(mutated, str) \
+            else figure_gate(mutated, live)
+
+    # The four kinds of thing the census was blind to, ENUMERATED before being
+    # fixed rather than one per generation: LABELS beside a figure (N19, N20),
+    # a COLUMN HEADING over a figure (N21), a FIGURE INSIDE A MARKED QUOTATION
+    # (N24, exempt from the census by a convention that is kept -- exempt from
+    # the census is not the same as free to be edited), and LAYOUT, which is
+    # what tells a reader which heading a figure sits under (N25).
+    H8_BEFORE, H8_AFTER = "before mg-a2bd", "after  mg-a2bd"
+    H8_BB_LAB1 = "STATE.md row cell                          :"
+    H8_BB_LAB2 = "this file (the relocated history)          :"
+    H8_HEAD = ("                                                   at bbe83b5^"
+               "    at bbe83b5  AFTER mg-8e30")
+    H8_HEAD_BAD = ("                                                   at bbe83b5 "
+                   "    at bbe83b5^ AFTER mg-8e30")
+    H8_GAP_ROW = ("    gap, cell only                                        "
+                  "−875          +755        +2 744")
+    H8_GAP_BAD = ("    gap, cell only                                          "
+                  "−875        +755        +2 744")
+    D14_QUOTED = "sits **+9 608** characters above this copy"
+    D14_QUOTED_BAD = "sits **+9 607** characters above this copy"
+
     def relocate_14():
         """Move the whole disclosure out of §14 into an appendix (mg-8a5c N7).
         To the §14 SITE that is simply the paragraph no longer being in it."""
@@ -1311,12 +1656,55 @@ roster positional.
          "GATE FIRES", lambda: figure_gate(
              transpose("the STATE.md row", CHAIN,
                        "6 069 → 2 928 → −875 → +755"), live)),
+        # ⚠️ N19-N25 ADDED 2026-07-31 (mg-9207 E2/E2b/E3, landed by mg-ff3e).
+        # THE OTHER HALF OF AN EXCHANGE.  N19 and N21 are mg-9207's own E2 and
+        # E3, verbatim; N20 is its E2b, at a pair of lines its predecessor's
+        # battery does not hard-code.  Every one of these left the gate
+        # refuting NOTHING, at 3 of 3 label sites, with every figure token in
+        # its declared slot.  N22 and N23 take the same shape to the two sites
+        # mg-9207 never probed on the label side, so the demonstration is at
+        # 3 of 3 SITES and not 3 probes at one.  N24 and N25 are the rest of
+        # the same-kind set, enumerated rather than waited for: a figure inside
+        # a marked quotation (exempt from the census, and exempt is not the
+        # same as editable) and the LAYOUT that tells a reader which column
+        # heading a figure sits under.
+        ("N19 H8: the two LABELS exchanged, figures left alone (mg-9207 E2)",
+         "GATE FIRES", lambda: gate(
+             exchange("H8", [(H8_BEFORE, H8_AFTER)]))),
+        ("N20 H8: the bbe83b5 table's two ROW LABELS exchanged (E2b)",
+         "GATE FIRES", lambda: gate(
+             exchange("H8", [(H8_BB_LAB1, H8_BB_LAB2)]))),
+        ("N21 H8: the two historical COLUMN HEADERS exchanged (E3)",
+         "GATE FIRES", lambda: gate(
+             rewrite("H8", H8_HEAD, H8_HEAD_BAD))),
+        ("N22 §14: the two CORRECTION ATTRIBUTIONS exchanged",
+         "GATE FIRES", lambda: gate(
+             exchange("§14", [("mg-f922", "mg-8a5c")]))),
+        ("N23 STATE.md row: two row-history ANCHOR LABELS exchanged",
+         "GATE FIRES", lambda: gate(
+             exchange("the STATE.md row",
+                      [("row history H1", "row history H2")]))),
+        ("N24 §14: a figure inside a MARKED QUOTATION altered",
+         "GATE FIRES", lambda: gate(
+             rewrite("§14", D14_QUOTED, D14_QUOTED_BAD))),
+        ("N25 H8: the three-column table's ALIGNMENT shifted, no figure moved",
+         "GATE FIRES", lambda: gate(
+             rewrite("H8", H8_GAP_ROW, H8_GAP_BAD))),
     ]
     print(f"    {'mutation':<70}{'predicted':<14}{'observed'}")
     ok = True
+    caught = {}
     for name, predicted, fn in cases:
-        fired = not all(o for o, _ in fn())
-        observed = "GATE FIRES" if fired else "gate passes"
+        rows = fn()
+        caught[name] = rows
+        if isinstance(rows, str):
+            # ⚠️ THE PROBE COULD NOT BE APPLIED (mg-9207 J-3).  Reported as
+            # itself, never as an AssertionError: a crash and a fired gate are
+            # the same exit code and a reader cannot tell them apart.
+            observed = rows
+        else:
+            observed = ("GATE FIRES" if not all(o for o, _ in rows)
+                        else "gate passes")
         agree = observed == predicted
         ok = ok and agree
         print(f"    {name:<70}{predicted:<14}{observed}"
@@ -1334,10 +1722,100 @@ roster positional.
                "cannot be silently undone.  N10-N12 are mg-835f's G-1 -- a "
                "wrong figure in ORDINARY PROSE beside the statement -- which "
                "this gate passed at 3 of 3 sites and now fires on at 3 of 3 "
-               "(mg-8916)")
+               "(mg-8916).  N19-N25 are mg-9207's E2/E2b/E3 and the rest of "
+               "that kind -- the LABELS exchanged instead of the figures -- "
+               "which this gate passed at 3 of 3 label sites and now fires on "
+               "(mg-ff3e)")
+
+    # ⚠️ WHICH ROW CAUGHT IT, AND WHICH ROWS DID NOT (mg-ff3e).  "The gate
+    # fires" is not the claim.  The claim is that the LABEL half is caught by
+    # the half of the record that was not being compared, WHILE THE FIGURE
+    # HALF STAYS GREEN -- which is the artifact's own evidence that the
+    # mutation moved no figure, asserted by the thing under test rather than
+    # by the prober (mg-9207 C4's convention, applied in the other direction).
+    print()
+    print("    the LABEL-side probes, by WHICH GATE ROW CAUGHT THEM:")
+    print(f"    {'probe':<70}{'SITE RECORD':<14}{'CENSUS+ORDER'}")
+    attributed = 0
+    label_cases = [c for c in cases if c[0][:3] in
+                   ("N19", "N20", "N21", "N22", "N23", "N24", "N25")]
+    for name, _p, _fn in label_cases:
+        rows = caught[name]
+        if isinstance(rows, str):
+            print(f"    {name:<70}{rows}")
+            continue
+        # ⚠️ MATCHED ON THE ROW'S HEADING, NOT ANYWHERE IN THE ROW.  The
+        # SITE RECORD row's own explanation names FIGURE CENSUS and FIGURE
+        # ORDER, so a substring test over the whole line reports every probe
+        # as having broken a figure row.  This instrument's own first version
+        # did exactly that and its own attribution row caught it.
+        def heading(d):
+            return d.split(" -- ")[0]
+        rec_failed = any(not o and heading(d).endswith("SITE RECORD")
+                         for o, d in rows)
+        fig_green = all(o for o, d in rows
+                        if heading(d).endswith(("FIGURE CENSUS",
+                                                "FIGURE ORDER")))
+        attributed += rec_failed and fig_green
+        print(f"    {name:<70}{'REFUTED' if rec_failed else 'green':<14}"
+              f"{'all green' if fig_green else 'a figure row failed'}")
+    record(attributed == len(label_cases),
+           f"{attributed} of {len(label_cases)} label-side mutations are "
+           f"caught BY THE SITE RECORD ROW while every FIGURE CENSUS and "
+           f"FIGURE ORDER row stays green.  That second half is the point: it "
+           f"is the artifact's own evidence that the mutation moved no figure, "
+           f"so the fire is attributable to the half of the record that was "
+           f"not being compared before -- and not to a designated reader "
+           f"breaking, which would be re-measuring (a)")
+
+
+def reseal():
+    """⚠️ THE ONE PLACE A DOCUMENT CAN BE BLESSED (mg-ff3e).  Regenerate
+    `site_records.txt` from the sections as they now stand.
+
+    It is deliberately NOT automatic, and it REFUSES while any other gate row
+    is refuted: a section whose figures are wrong must not be sealed with them
+    in it.  The declaration is the skeleton TEXT and not a sha256 of it for
+    exactly this reason -- what this writes is meant to be read as a diff, and
+    a hash bump is a rubber stamp with no content to review."""
+    texts = site_texts()
+    a = len(state_row(tree(STATE)))
+    b = len(deliv_row(tree(DELIV)))
+    h = len(tree(HIST))
+    measured = {"gap":  doc_num(a - b, signed=True),
+                "both": doc_num(a + h - b, signed=True),
+                "cell": doc_num(a), "hist": doc_num(h), "copy": doc_num(b)}
+    blocking = [d for ok, d in figure_gate(texts, measured)
+                if not ok and "SITE RECORD" not in d]
+    print("RESEAL -- regenerating the declared record of each census site")
+    print("-" * 62)
+    if blocking:
+        print(f"  REFUSED: {len(blocking)} gate row(s) other than SITE RECORD "
+              f"are refuted.  A section whose")
+        print("  figures are wrong must not be sealed with them in it:")
+        for d in blocking:
+            print(f"    - {d[:150]}")
+        return 1
+    before = declared_records()
+    text = render_records(texts)
+    with open(SITE_RECORDS, "w", encoding="utf-8") as fh:
+        fh.write(text)
+    after = declared_records()
+    for name, _r, _k in SITES:
+        was, now = before.get(name), after[name]
+        state = ("NEW" if was is None else
+                 "unchanged" if was == now else "CHANGED")
+        print(f"  {name:<20} {len(now.split(chr(10))):>4} lines  {state}")
+    print()
+    print(f"  written: {SITE_RECORDS}")
+    print("  READ THE DIFF.  This is the only step in this instrument that can")
+    print("  make a wrong document green, and it is a reviewable one.")
+    return 0
 
 
 def main():
+    if "--reseal" in sys.argv[1:]:
+        return reseal()
     print("mg-e1d0 -- RE-MEASURING THIS LANDING'S OWN CLAIMS")
     print("=" * 78)
     print("""Nothing below is inherited from mg-3c24 or from the ticket.  mg-3c24's
