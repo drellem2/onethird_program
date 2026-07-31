@@ -76,46 +76,31 @@ the TREE for the construct, with every hit either repaired or carrying a
 disposition KEYED ON ITS EXACT LINE -- so that a new occurrence anywhere is
 undispositioned and makes this section red.
 
-    code/hodge_leverage_audit_8aae/audit_8916_repair.py:518
-        hit = [l for l in refuted_lines(lines) if "FIGURE CENSUS" in l]
-        exposure at HEAD: 'FIGURE CENSUS' selects 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
-        -> declared: A FOURTH LIVE OCCURRENCE, same shape and same disposition as repair_835f.py:309 -- it prints an example row and scores nothing
-    code/hodge_leverage_audit_ec07/audit_ec07.py:714
-        excl = [r for _ok, r in rows if "SITE RECORD" in r]
-        exposure at HEAD: 'SITE RECORD' selects 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
-        -> declared: the audit that RAISED E-5, measuring the same thing.  Re-running it UNMODIFIED is R4, so its source is not this repair's to edit
-    code/hodge_leverage_repair_6df0/repair_ec07.py:303
-        by_substring = [d for d in rows if "SITE RECORD" in d]
-        exposure at HEAD: 'SITE RECORD' selects 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
-        -> declared: R1a MEASURES the substring test; committing it is how the disagreement is counted.  Declared here, in R1a's own comment and in R6b
-    code/hodge_leverage_repair_8916/repair_835f.py:309
-        hit = [l for l in refuted if "FIGURE CENSUS" in l]
-        exposure at HEAD: 'FIGURE CENSUS' selects 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
-        -> declared: A THIRD LIVE OCCURRENCE, found by this sweep and NOT fixed here.  The selection feeds a `print` of one example row beside a probe whose verdict is the real runner's exit code -- no recorded verdict depends on it -- and the file is another deliverable's shipped instrument under a frozen transcript.  Exposure measured below; raised for a ticket rather than repaired in passing
+    (no line in any .py under code/ keys on a row heading by substring)
 
-  [CONFIRMED] R2a 429 .py files swept; 4 line(s) identify a gate row by a SUBSTRING TEST over the whole row, 4 with a declared reason and 0 without.  Predicted 0 without.  The artifact's blessing path is NOT among them.  ⚠️ THE SWEEP FOUND TWO OCCURRENCES NOBODY HAD REPORTED, in `repair_835f.py` and `audit_8916_repair.py` -- which is the whole argument for sweeping: the reported line is never the population
+  [CONFIRMED] R2a 473 .py files swept, walked from the WORKING TREE at HEAD 8a07ae01fc45; 0 line(s) identify a gate row by a SUBSTRING TEST over the whole row, 0 with a declared reason and 0 without.  Predicted 0 without.  The artifact's blessing path is NOT among them.  ⚠️ THE SWEEP FOUND TWO OCCURRENCES NOBODY HAD REPORTED, in `repair_835f.py` and `audit_8916_repair.py` -- which is the whole argument for sweeping: the reported line is never the population.  Both are REPAIRED by mg-3f3b, together with the three the disposition table used to carry, so this count is now the whole answer rather than the undispositioned remainder of one
 
     code/hodge_leverage_audit_835f/audit_a318_repair.py   1 occurrence(s)
-        :404  "site.  That is the gate's DECLARED scope -- a site is a section, not "
+        :420  "site.  That is the gate's DECLARED scope -- a site is a section, not "
         -> mg-a318's audit, same disposition -- and the earliest occurrence the sweep finds, which is where the sentence entered the arc
     code/hodge_leverage_audit_ec07/audit_ec07.py   4 occurrence(s)
-        :579  "text OUTSIDE the site is not read, BECAUSE A SITE IS A SECTION"
-        :582  said = "a site is a section" in src.lower()
-        :584  "A6 the sentence 'a site is a SECTION' is printed beside the gate "
-        :608  "'text outside the site is not read, BECAUSE A SITE IS A SECTION' "
+        :594  "text OUTSIDE the site is not read, BECAUSE A SITE IS A SECTION"
+        :597  said = "a site is a section" in src.lower()
+        :599  "A6 the sentence 'a site is a SECTION' is printed beside the gate "
+        :623  "'text outside the site is not read, BECAUSE A SITE IS A SECTION' "
         -> the audit that RAISED E-2, quoting it in order to test for it.  Re-run unmodified in R4
     code/hodge_leverage_landing_e1d0/verify_landing.py   3 occurrence(s)
         :289  ⚠️ A SITE IS A SECTION, NOT THE FILE THAT CONTAINS IT (mg-8a5c N7).  The   <- kept, documents `section()`
         :575  #     and saying "a site is a section" was false at 1 of 3 of them until
-        :1375  f"replaces ('a site is a section') was true at 2 of 3 sites and "
+        :1419  f"replaces ('a site is a section') was true at 2 of 3 sites and "
         -> THE ARTIFACT UNDER REPAIR.  Its live claims are what this repair removes; `section()`'s own docstring is kept because it is true of the function it documents (R2c)
     code/hodge_leverage_repair_6df0/repair_ec07.py   3 occurrence(s)
         :23  site is not read, BECAUSE A SITE IS A SECTION" -- is false at 1 of 3
-        :436  SENTENCE = "a site is a section"
-        :613  "docstring, which says a site is a section rather than the file "
+        :487  SENTENCE = "a site is a section"
+        :724  "docstring, which says a site is a section rather than the file "
         -> this instrument QUOTING the sentence it is repairing
     code/hodge_leverage_repair_8916/repair_835f.py   1 occurrence(s)
-        :438  "section, because a site is a section; and numbers that are not of "
+        :453  "section, because a site is a section; and numbers that are not of "
         -> mg-8916's shipped instrument, same disposition
     code/hodge_leverage_repair_ff3e/repair_9207.py   1 occurrence(s)
         :633  * TEXT OUTSIDE THE SITE.  A site is a SECTION, and this is the one
@@ -145,18 +130,17 @@ then three cells bridged to disk against the real runner.
     K08 two table ROW LABELS exchanged (mg-9207 E2b)              n/a                 n/a                 FIRES (rec)
     K09 two COLUMN HEADERS exchanged (mg-9207 E3 -- mg-ec07's X1  FIRES (rec)         n/a                 FIRES (rec)
     K10 a figure inside a MARKED QUOTATION altered                n/a                 FIRES (rec)         n/a
-    K11 the table's ALIGNMENT shifted, no figure moved            n/a                 n/a                 FIRES (rec)
+    K11 the table's ALIGNMENT shifted, no figure moved            FIRES (rec)         n/a                 FIRES (rec)
     K12 a whole PARAGRAPH relocated out of the site (mg-8a5c N7)  n/a                 FIRES (rec)         FIRES (rec)
-      n/a  K08 @ the STATE.md row   fewer than two table rows carrying figures INSIDE this site (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
-      n/a  K08 @ §14                fewer than two table rows carrying figures INSIDE this site (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
-      n/a  K09 @ §14                no column header line inside this site
-      n/a  K10 @ the STATE.md row   no marked quotation carrying a figure at this site
-      n/a  K10 @ H8                 no marked quotation carrying a figure at this site
-      n/a  K11 @ the STATE.md row   no line here has two runs of two or more spaces to shift
-      n/a  K11 @ §14                no line here has two runs of two or more spaces to shift
-      n/a  K12 @ the STATE.md row   this site has no figure-free paragraph after the first to relocate
+      n/a  K08 @ the STATE.md row   1 of this site's 3 table row(s) carry a figure INSIDE the site, and an exchange needs two (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
+      n/a  K08 @ §14                0 of this site's 0 table row(s) carry a figure INSIDE the site, and an exchange needs two (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
+      n/a  K09 @ §14                0 of this site's 0 table line(s) is a column header inside the site
+      n/a  K10 @ the STATE.md row   12 marked quotation(s) at this site and 0 of them carry a figure token
+      n/a  K10 @ H8                 5 marked quotation(s) at this site and 0 of them carry a figure token
+      n/a  K11 @ §14                of this site's 72 line(s), 0 carry two runs of two or more spaces to shift and 0 of 0 pipe-table row(s) occur once and could have their cell padding moved
+      n/a  K12 @ the STATE.md row   this site is 1 paragraph(s) and 0 after the first are figure-free, so there is nothing to relocate out of it
 
-  [CONFIRMED] R3a the runner's own matrix is 12 KIND rows over 3 sites: 28 cells FIRE, 8 are n/a with a derived reason, 0 are SILENT (predicted 0 silent).  The population is the PRODUCT and the report is the MATRIX, not a total
+  [CONFIRMED] R3a the runner's own matrix is 12 KIND rows over 3 sites: 29 cells FIRE, 7 are n/a with a derived reason, 0 are SILENT (predicted 0 silent).  The population is the PRODUCT and the report is the MATRIX, not a total
 
     probe  exit  refuted  what was exchanged
     X3     1      3     H8's two historical COLUMN HEADERS, INSIDE a site (the control)
@@ -232,8 +216,8 @@ ENUMERATION AT THE WRONG GRAIN.  Both are shapes this deliverable can have.
   * order -- mg-ec07's closing note: "if you enumerate before fixing, commit
     the probes first".  That is checkable from git, and this is the check.
 
-  [CONFIRMED] R6a THE PROBES PRECEDE THE FIX, IN GIT: the first commit containing this probe file is 3145e87, and `verify_landing.py` at that commit does NOT carry the heading-keyed refusal.  mg-ec07's note on its parent was that 0 of 7 probes existed at any commit before the fix, so the discipline was unobservable afterwards even where it was followed
-  [CONFIRMED] R6b this instrument identifies gate rows by `heading()` everywhere except 1 line(s), 1 of them declared in DISPOSITIONS -- R1a, which measures the substring test.  `exposure()` performs the same test with the needle in a VARIABLE, which the sweep's rule does not see: it is named here rather than left for the audit, and it is a measurement of the defect in both cases.  A file that repairs a construct while committing it silently would be the finding, not the repair
+  [CONFIRMED] R6a THE PROBES PRECEDE THE FIX, IN GIT: the first commit containing this probe file is 803bd50, and `verify_landing.py` at that commit does NOT carry the heading-keyed refusal.  mg-ec07's note on its parent was that 0 of 7 probes existed at any commit before the fix, so the discipline was unobservable afterwards even where it was followed
+  [CONFIRMED] R6b this instrument identifies gate rows by `heading()` everywhere except 0 line(s).  ⚠️ mg-3f3b: the ONE deliberate performance of the construct -- R1a, which measures it -- is now a call to `by_substring` at line 361, 615, 1133, a DECLARED FUNCTION the sweep's rule recognises BY NAME.  It used to be the construct written inline under a disposition keyed on its line number, and a reason on a line is not a structure.  `exposure()` performs the same test with the needle in a VARIABLE, which the sweep's rule does not see: it is named here rather than left for the audit
   [CONFIRMED] R6c and every scope sentence this deliverable writes is checked at ALL THREE SITES (R5a/R5b) rather than at the site it was written for.  That is the whole of E-2: the previous sentence was true where its author was looking
 
 BOTTOM LINE

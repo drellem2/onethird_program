@@ -44,7 +44,8 @@ one level up: `heading()` was applied at the line the defect was found on — **
 | `S1b` | every `n/a` cell tried again with a mutation of the same kind **derived here from the kind title**, not from the artifact's code. 0 disagreements |
 | `S1c` | the pipe-table shift **on disk**: exit 1, `SITE RECORD` refuted, every FIGURE row green — **and the same in the PRE state**, which is the point. F1 understates coverage; the gate never had this hole |
 | `S1d` / `S1e` | the artifact's own cell moves `n/a` → `FIRES (rec)`, and **reverting that clause alone puts it back** |
-| `S2a` | the five occurrences mg-7e39 measured live, **each repaired and named**, with what each selected that it was never meant to |
+| `S2a` | the five occurrences mg-7e39 measured live **and the sixth that only a declared vocabulary could see**, each repaired and named, with what each selected that it was never meant to |
+| `S2b` / `S2d` | the declared measuring sites found **by name**, and each repaired binding classified by what it feeds — a printed line or **a recorded verdict**. The two that feed a verdict were re-run by hand: `out_a318_rerun.txt` |
 | `S2c` | the tree swept by **my** rule over **my** vocabulary — not the sweep's, whose scope is the thing under test |
 | `S3b` | a gate row renamed in a **copy** of the gate's source and the vocabulary **follows it**. A hand list returns the same five whatever the gate emits |
 | `S3c` | a source with no derivable vocabulary is a **refusal**, not an empty sweep |
@@ -67,7 +68,7 @@ better than the hand list's five, and still short, because a seventh row kind wa
 `'{label}' is WRITTEN ONCE` and the pattern wanted capitals straight after the label. The gate now
 **declares** `ROW_KINDS` and fails closed on any row that does not use it. Widening the vocabulary
 from six to seven immediately found **a seventh occurrence of the construct** —
-`audit_a318_repair.py:342` — which no vocabulary in this arc had ever been able to see.
+`audit_a318_repair.py:342` — which no vocabulary in this arc had ever been able to see: not the hand list, and not the regex.
 
 **3. A remedy can degenerate into the construct without anybody writing the construct.** Every
 heading-keyed test in this arc is `heading(d).endswith(NAME)`, and `heading()` is
