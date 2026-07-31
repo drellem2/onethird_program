@@ -1,0 +1,181 @@
+==============================================================================
+J1  THE CENSUS -- my own parser, over every `*.sh` in the repository
+==============================================================================
+
+==============================================================================
+J1a  ALL `*.sh` at bee07a1 (the sweep's pinned revision)
+==============================================================================
+
+  `*.sh` tracked in the repository              72
+    ...named run_all.sh                         64
+    ...NOT named run_all.sh                      8
+
+  with a REAL `| tee` pipeline, total           19 file(s), 42 pipeline(s)
+    ...in run_all.sh   (the sweep's whole population)  17
+    ...OUTSIDE it                                      2 file(s), 8 pipeline(s)
+
+  run_all.sh matching the ticket's bare grep    23
+  `*.sh` setting pipefail                        1
+  `*.sh` setting `set -e`                       65
+
+  THE FILES THE SWEEP'S POPULATION CANNOT CONTAIN, line by line:
+    code/face_geometry_audit_f1b2/run_audit.sh   set -e: yes
+        14   python3 audit_scoring.py            | tee out_scoring.txt
+        15   python3 audit_gates.py              | tee out_gates.txt
+        16   python3 audit_theorem_and_content.py | tee out_theorem.txt
+        17   python3 audit_injections.py         | tee out_injections.txt
+        18   python3 audit_nmax2.py              | tee out_nmax.txt
+    code/face_geometry_audit_fcf1/run_audit.sh   set -e: yes
+        16   python3 audit_nc4.py 5 | tee out_nc4.txt
+        20   python3 audit_extra.py | tee out_extra.txt
+        24   python3 audit_gauge.py | tee out_gauge.txt
+  Q1   predicted 72                           measured 72                           as predicted
+  Q2   predicted 64                           measured 64                           as predicted
+  Q3   predicted 23                           measured 23                           as predicted
+  Q4   predicted 17                           measured 17                           as predicted
+  Q5   predicted 2                            measured 2                            as predicted
+  Q6   predicted 8                            measured 8                            as predicted
+  Q8   predicted 0                            measured 1                            *** MISS ***
+
+==============================================================================
+J1a  ALL `*.sh` on disk at HEAD (post-sweep)
+==============================================================================
+
+  `*.sh` tracked in the repository              75
+    ...named run_all.sh                         67
+    ...NOT named run_all.sh                      8
+
+  with a REAL `| tee` pipeline, total            2 file(s), 8 pipeline(s)
+    ...in run_all.sh   (the sweep's whole population)   0
+    ...OUTSIDE it                                      2 file(s), 8 pipeline(s)
+
+  run_all.sh matching the ticket's bare grep     8
+  `*.sh` setting pipefail                        1
+  `*.sh` setting `set -e`                       67
+
+  THE FILES THE SWEEP'S POPULATION CANNOT CONTAIN, line by line:
+    code/face_geometry_audit_f1b2/run_audit.sh   set -e: yes
+        14   python3 audit_scoring.py            | tee out_scoring.txt
+        15   python3 audit_gates.py              | tee out_gates.txt
+        16   python3 audit_theorem_and_content.py | tee out_theorem.txt
+        17   python3 audit_injections.py         | tee out_injections.txt
+        18   python3 audit_nmax2.py              | tee out_nmax.txt
+    code/face_geometry_audit_fcf1/run_audit.sh   set -e: yes
+        16   python3 audit_nc4.py 5 | tee out_nc4.txt
+        20   python3 audit_extra.py | tee out_extra.txt
+        24   python3 audit_gauge.py | tee out_gauge.txt
+  Q7   predicted 2 files / 8 pipelines        measured 2 files / 8 pipelines        as predicted
+
+==============================================================================
+J1b  THE DISAGREEMENT WITH THE BARE GREP, RE-DERIVED INDEPENDENTLY
+==============================================================================
+
+  run_all.sh the bare grep counts and my parser does not: 6
+    code/face_geometry_audit_c4c8/run_all.sh       :34   # NOT `python3 x.py | tee out.txt`, and that is deliberate: 
+    code/face_geometry_audit_d0e2/run_all.sh       :20   # NOT `python3 x.py | tee out.txt`.  A pipeline's exit statu
+    code/face_geometry_audit_e7bc/run_all.sh       :31   # NOT `python3 x.py | tee out.txt`, and that is deliberate: 
+    code/face_geometry_instr_5f9a/run_all.sh       :48   # NOT `python3 x.py | tee out.txt`, and that is deliberate. 
+    code/hodge_leverage_audit_f922/run_all.sh      :42   # NOT `python3 audit_repair.py | tee out_audit.txt`.  A pipe
+    code/species_sites_821e/run_all.sh             :28   # NOT `| tee`: in a pipeline `set -e` sees the exit status o
+
+  Each is a header COMMENT saying the runner does not use `| tee`.
+  The sweep reported the same six; this is a second derivation from a
+  parser that has never seen the first one, which is what makes the
+  agreement worth anything.
+
+==============================================================================
+J1c  THE TICKET'S THIRD NUMBER -- `pipefail: 1`, and where it came from
+==============================================================================
+
+  The sweep re-derived `1` as `0` over run_all.sh and marked it DIFFERS.
+  A count that is wrong is a lead.  This is the whole repository at
+  bee07a1, every tracked file of any type, for the string `pipefail`:
+
+    bee07a1:code/state_restructure_34bf/run_all.sh:4:set -euo pipefail
+
+  total occurrences: 1, in 1 file(s)
+  ...of which in a `*.sh`: 1
+  Q9   predicted not in any *.sh              measured 1 in *.sh                    *** MISS ***
+
+  READING.  The ticket's `1` is not a runner that sets `pipefail`.  No
+  runner in this arc has ever set it.  The number is real but it counts
+  a different thing, and neither the ticket nor the sweep says which.
+
+==============================================================================
+J1d  WHAT THE POPULATION CHOICE COST -- stated as a number, not a caveat
+==============================================================================
+
+  files with a real `| tee` pipeline at bee07a1 : 19
+  files with a real `| tee` pipeline at HEAD      : 2
+  repaired by the sweep                           : 17
+  STILL PIPELINED AT HEAD                         : 2
+      code/face_geometry_audit_f1b2/run_audit.sh  (5 pipeline(s), set -e: yes)
+      code/face_geometry_audit_fcf1/run_audit.sh  (3 pipeline(s), set -e: yes)
+
+  The sweep's commit message says `17 runners repaired ... at 34 of 34
+  sites`.  Both halves are true of its population.  Over the population
+  a reader would assume -- shell runners in this repository -- the
+  sweep is 17 of 19 files and 34 of 42 pipelines.
+
+==============================================================================
+J1e  THE `pipefail` ROW -- what the instrument printed vs what the prose says
+==============================================================================
+
+  Q8 and Q9 MISSED because I inherited the sweep's `0` instead of
+  measuring it.  The ticket's `1` is RIGHT.  Two things follow, and
+  both are about the sweep, not the ticket.
+
+  1. WHY THE INSTRUMENT GOT 0.  `libc2b3.PIPEFAIL_RE` is:
+       PIPEFAIL_RE = re.compile(r"^\s*set\s+-o\s+pipefail")
+     The one runner that sets the option writes it as `set -euo pipefail`,
+     the combined form.  `-o\s+pipefail` cannot match it.
+
+  2. WHAT THE ARTIFACTS SAY.  These are the sweep's own committed files:
+     [MEASURED 0] code/runner_exit_c2b3/out_k1_census.txt      setting pipefail                   ticket  1   re-derived  0   DIFFERS
+     [ASSERTS  1] code/runner_exit_c2b3/README.md              | setting `pipefail` | 1 | **1** — confirmed exactly |
+     [ASSERTS  1] code/runner_exit_c2b3/OUTCOMES.md            | `pipefail` | 1 | **1** | AGREES |
+     [ASSERTS  1] docs/OneThird-RunnerExit-ArcWideSweep.md     | setting `pipefail` | 1 | **1** | confirmed exactly — `code/state_restructure
+     [ASSERTS  1] code/runner_exit_c2b3/k1_census.py           pipefail count (1) is confirmed exactly.
+
+     artifacts asserting 1 / confirmed / AGREES : 4
+     the instrument's own transcript            : 1 row saying 0, DIFFERS
+  Q23  predicted 4                            measured 4                            as predicted
+
+  FINDING.  Four reader-facing artifacts say the pipefail count was
+  CONFIRMED at 1 -- one of them naming `code/state_restructure_34bf/`
+  correctly -- while the instrument that is cited as having measured
+  it printed `re-derived 0 ... DIFFERS`.  The prose is right about
+  the world and wrong about its own measurement, which is the
+  SUMMARY vs ROWS defect this arc repaired in mg-8aae and mg-8eca,
+  reproduced inside the artifact that repairs swallowed statuses.
+
+  3. THE SHEBANG CLAIM, MEASURED.  The sweep's document says
+     "The shebang is `#!/bin/sh` on all 64 runners (measured)".
+     run_all.sh at bee07a1                : 64
+     ...whose first line is exactly `#!/bin/sh`: 59
+     ...NOT: code/hodge_leverage/run_all.sh                 #!/bin/bash
+     ...NOT: code/hodge_leverage_audit_3c24/run_all.sh      #!/bin/bash
+     ...NOT: code/hodge_leverage_audit_d39d/run_all.sh      #!/bin/bash
+     ...NOT: code/hodge_leverage_join/run_all.sh            #!/bin/bash
+     ...NOT: code/state_restructure_34bf/run_all.sh         #!/usr/bin/env bash
+  Q22  predicted ≥1 not /bin/sh               measured 5 not                        as predicted
+
+     The mechanism argument is NOT damaged by this: the one bash
+     runner legitimately sets `pipefail` because it really is bash.
+     What is damaged is the word `measured`.  The same blind spot
+     produced both sentences -- the census never saw that file.
+
+==============================================================================
+J1 TOTAL BAD: 2
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts (a) a run_all.sh still carrying a
+pipeline at HEAD, (b) the sweep's prose asserting a measurement its own
+committed transcript contradicts, and (c) a `measured` claim about all
+64 shebangs that is false.  It does NOT count prediction misses: those
+are scored separately below and kept as written in OUTCOMES.md.  It
+ranges over every tracked `*.sh` in this repository at bee07a1 and on
+disk, and over the five sweep artifacts named in J1e -- not over `.py`
+files that shell out, which are J2's subject.
+
+PREDICTIONS: 9 of 11 as predicted, 2 MISSED (Q8, Q9)

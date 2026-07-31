@@ -1,0 +1,135 @@
+==============================================================================
+J3  THE POSITIVE CONTROL -- behaviour of the real runner, both ways
+==============================================================================
+  POPULATION, DERIVED FROM J1's PARSER, NOT TYPED IN:
+    runners with a real `| tee` pipeline at bee07a1 and none now : 17
+    runners with a real `| tee` pipeline STILL, at HEAD       : 2
+
+
+==============================================================================
+J3a  RED -- the first scored step forced to fail, per FIXED runner
+==============================================================================
+
+  The target is NOT replaced by a stub.  It runs in full, prints all
+  of its real output, and is then made to report failure by an
+  `atexit` hook injected through PYTHONPATH -- so the row measures a
+  real instrument reporting a real non-zero, not a placeholder.  Shell
+  targets get an appended `exit 1`; the mechanism is named per row.
+
+  runner                                    forced target          exit  ran    stdout   later ran how            verdict
+  code/branching_audit_2060/run_all.sh       ./b0_repro.sh          1     yes    yes      none      append exit 1  caught
+  code/branching_locate_db09/run_all.sh      selftestdb09.py        1     yes    yes      none      atexit hook    caught
+  code/face_geometry/run_all.sh              controls.py            1     yes    yes      none      atexit hook    caught
+  code/face_geometry_audit_1c80/run_all.sh   a1_gates.py            1     yes    yes      none      atexit hook    caught
+  code/face_geometry_audit_6653/run_all.sh   verify_claims.py       1     yes    yes      none      atexit hook    caught
+  code/face_geometry_audit_e720/run_all.sh   verify_landing_claims.py 1     yes    yes      none      atexit hook    caught
+  code/face_geometry_landing_7d5a/run_all.sh verify_landing.py      1     yes    yes      none      atexit hook    caught
+  code/face_geometry_landing_da45/run_all.sh verify_landing.py      1     yes    yes      none      atexit hook    caught
+  code/landscape_audit_d673/run_all.sh       audit_populations.py   1     yes    yes      none      atexit hook    caught
+  code/species_7d75/run_all.sh               selftest.py            1     yes    yes      none      atexit hook    caught
+  code/species_audit_73df/run_all.sh         selftest73df.py        1     yes    yes      none      atexit hook    caught
+  code/species_audit_7dd3/run_all.sh         selftest7dd3.py        1     yes    yes      none      atexit hook    caught
+  code/species_audit_a61f/run_all.sh         selftesta61f.py        1     yes    yes      none      atexit hook    caught
+  code/species_extent_audit_6cb9/run_all.sh  selftest6cb9.py        1     yes    yes      none      atexit hook    caught
+  code/species_extent_d633/run_all.sh        selftestd633.py        1     yes    yes      none      atexit hook    caught
+  code/species_remainder_f8fa/run_all.sh     selftestf8fa.py        1     yes    yes      none      atexit hook    caught
+  code/species_repair_a4ef/run_all.sh        selftesta4ef.py        1     yes    yes      none      atexit hook    caught
+
+  17 of 17 FIXED runners exit non-zero AND stop at the forced step.
+  Q15  predicted 17 of 17 non-zero                measured 17 of 17                   as predicted
+  Q16  predicted 17 of 17 stop at the forced step measured 17 of 17                   as predicted
+  ...and the failing step's own text reached the RUNNER'S STDOUT in
+  17 of 17.  `| tee` did that at 34 of 34 by construction; a bare
+  redirect does it only where the `||` guard cats.  J4c is the census.
+
+==============================================================================
+J3b  GREEN -- the same runners, unmodified
+==============================================================================
+
+  Without this column, a runner that exits non-zero unconditionally
+  would have scored a perfect J3a.  This is the direction that makes
+  J3a mean something.
+
+  runner                                    exit   secs  verdict
+  code/branching_audit_2060/run_all.sh       0      199.2  green
+  code/branching_locate_db09/run_all.sh      0       64.1  green
+  code/face_geometry/run_all.sh              0       19.7  green
+  code/face_geometry_audit_1c80/run_all.sh   0       17.3  green
+  code/face_geometry_audit_6653/run_all.sh   0       11.9  green
+  code/face_geometry_audit_e720/run_all.sh   0        5.1  green
+  code/face_geometry_landing_7d5a/run_all.sh 0       11.2  green
+  code/face_geometry_landing_da45/run_all.sh 0        8.2  green
+  code/landscape_audit_d673/run_all.sh       0       84.9  green
+  code/species_7d75/run_all.sh               0       46.5  green
+  code/species_audit_73df/run_all.sh         0       71.8  green
+  code/species_audit_7dd3/run_all.sh         0       71.4  green
+  code/species_audit_a61f/run_all.sh         0      123.7  green
+  code/species_extent_audit_6cb9/run_all.sh  0       76.2  green
+  code/species_extent_d633/run_all.sh        0       48.0  green
+  code/species_remainder_f8fa/run_all.sh     0        4.1  green
+  code/species_repair_a4ef/run_all.sh        0        6.6  green
+
+  17 of 17 FIXED runners exit 0 unmodified.
+  Q17  predicted 17 of 17 exit 0                  measured 17 of 17                   as predicted
+
+==============================================================================
+J3c  THE NEGATIVE CONTROL -- the runners the sweep's population excluded
+==============================================================================
+
+  Same instrument, same forced failure, same reading of the runner's
+  own exit code.  These two files were never in the sweep's population
+  because they are not named `run_all.sh`.
+
+  runner                                    forced target          exit  ran    stdout   later ran how            verdict
+  code/face_geometry_audit_f1b2/run_audit.sh audit_scoring.py       0     yes    yes      out_gates.txt,out_theorem.txt,out_injections.txt,out_nmax.txt atexit hook    *** SWALLOWED ***
+  code/face_geometry_audit_fcf1/run_audit.sh audit_nc4.py           0     yes    yes      out_extra.txt,out_gauge.txt atexit hook    *** SWALLOWED ***
+
+  2 of 2 UNFIXED runners print the failure and exit 0.
+  Q18  predicted 2 of 2 exit 0                    measured 2 of 2                     as predicted
+
+  THE DEFECT, ALIVE, AT HEAD.  A `set -e` runner in this repository
+  prints `*** MG-05EB FORCED FAILURE ***` from its own step and exits 0.
+  It is the identical failure the sweep repaired 34 times, in a
+  file its census could not reach.  Counted as a finding, not as a
+  failure of this instrument.
+
+==============================================================================
+J3d  THE GENERAL FORM, ON J3
+==============================================================================
+
+   1. Every run here is `subprocess.run(["/bin/sh", <name>], ...)`:
+      list argv, no `shell=True`, no pipeline, so `returncode` is the
+      runner's own.  Structural, not a promise.
+   2. `returncode` is read on every path.  A timeout returns None and
+      prints `-`, never 0.
+   3. Every RED verdict is a CONJUNCTION of exit code, reach of the
+      forced marker into the runner's stdout, and no later step having
+      run.  Any one of the three alone would pass rows that are wrong:
+      code alone passes a runner that died for an unrelated reason;
+      reach alone passes the pre-repair text exactly.
+   4. `later ran` is measured by STAMPING every later transcript to
+      epoch 0 before the run and checking its mtime after -- a file
+      that exists is not evidence a step ran, which is mg-6cb9's F2.
+   5. The population is DERIVED from J1's parser inside this script,
+      not copied into it, so J3 cannot disagree with J1 about which
+      runners were fixed.
+   6. GREEN is run AFTER RED and restores tracked files between every
+      row, so a leaked forced-failure cannot make a GREEN row red.
+
+  worktree state after J3: clean
+
+==============================================================================
+J3 TOTAL BAD: 0
+==============================================================================
+
+EXTENT.  It counts, per FIXED runner, a RED row that did not catch
+(exit code, reach, or a later step running) and a GREEN row that is
+not 0, plus a dirty worktree at the end.  It does NOT count the
+SWALLOWED rows in J3c: those are the finding.  It ranges over the 17
+runners J1's parser says were repaired and the 2 it says were not,
+each run once in each direction on this machine at HEAD -- not over
+the batteries those runners execute, which J3 forces to fail on
+purpose and does not re-prove.
+
+PREDICTIONS: 4 of 4 as predicted, 0 MISSED (none)
+wall clock: 1111 s

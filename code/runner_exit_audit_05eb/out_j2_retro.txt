@@ -1,0 +1,227 @@
+==============================================================================
+J2  THE RETROACTIVE HALF, RE-ASKED FROM A MECHANICAL ENUMERATION
+==============================================================================
+
+==============================================================================
+J2a  R3 CONSUMERS, FOUND MECHANICALLY -- at the pin AND at HEAD
+==============================================================================
+
+  A file is an R3 CONSUMER when it BOTH executes a shell script AND
+  scores a variable against 0 / non-0.  Both halves are required: a
+  file that runs a runner and byte-compares its stdout is R1 and is
+  not at risk, which is the sweep's own rule and is kept.
+
+  R3 consumer files at bee07a1 (the sweep's caller-scan revision): 9
+      code/branching_audit_321d/h3_setlevel.py
+      code/branching_audit_58da/g4_fleet.py
+      code/hodge_leverage_audit_835f/audit_a318_repair.py
+      code/hodge_leverage_audit_8a5c/audit_repair_8e30.py
+      code/hodge_leverage_audit_f922/audit_repair.py
+      code/species_sites_821e/p3_wiring.py
+      code/state_control_audit_2216/mutation_battery.py
+      code/state_control_audit_babf/preservation.py
+      code/state_landing_control_2da3/negative_control.py
+
+  R3 consumer files at HEAD                                : 13
+      code/branching_audit_321d/h3_setlevel.py                 
+      code/branching_audit_58da/g4_fleet.py                    
+      code/branching_repair_7e58/k3_setlevel.py                <-- NOT AT THE PIN
+      code/hodge_leverage_audit_835f/audit_a318_repair.py      
+      code/hodge_leverage_audit_8a5c/audit_repair_8e30.py      
+      code/hodge_leverage_audit_f922/audit_repair.py           
+      code/runner_exit_c2b3/k3_retro.py                        <-- NOT AT THE PIN
+      code/runner_exit_c2b3/k4_control.py                      <-- NOT AT THE PIN
+      code/species_depth_audit_4700/q2_wiring.py               <-- NOT AT THE PIN
+      code/species_sites_821e/p3_wiring.py                     
+      code/state_control_audit_2216/mutation_battery.py        
+      code/state_control_audit_babf/preservation.py            
+      code/state_landing_control_2da3/negative_control.py      
+
+  Q11  predicted >= 4 at HEAD                       measured 13                       as predicted
+
+  ...and which of them score the exit status of a runner that had a
+  `| tee` pipeline at bee07a1 (19 such files, from J1):
+
+      code/runner_exit_c2b3/k3_retro.py                    -> face_geometry, face_geometry_audit_1c80, landscape_audit_d673, species_extent_d633
+      code/species_depth_audit_4700/q2_wiring.py           -> species_extent_d633, species_remainder_f8fa, species_repair_a4ef
+      code/species_sites_821e/p3_wiring.py                 -> species_remainder_f8fa, species_repair_a4ef
+
+  THE SWEEP'S HEADLINE, tested: "reads them from an exit status in
+  exactly ONE file".  Files measured here: 3.
+      code/runner_exit_c2b3/k3_retro.py                    *** NOT IN THE SWEEP'S NINE ***
+      code/species_depth_audit_4700/q2_wiring.py           *** NOT IN THE SWEEP'S NINE ***
+      code/species_sites_821e/p3_wiring.py                 (the sweep names this one)
+  Q12  predicted >= 2 claims outside the nine       measured 2 file(s) outside        as predicted
+
+  AND THE PART THAT WOULD OVERSTATE IT IF LEFT OUT.  Of the 2 outside
+  the nine, one is `code/runner_exit_c2b3/` -- the sweep's OWN
+  instrument, written after the defect, measuring it on purpose.  That
+  is not a past claim and it is not an exposure, and counting it as one
+  would inflate this finding to twice its size.  It is listed because
+  the sentence under test says `exactly ONE file`, and as a count of
+  files that score a runner's exit status that sentence is wrong three
+  ways; as a count of PAST CLAIMS AT RISK it is wrong once.  The once
+  is J2b.
+
+  past-claim R3 consumers of an affected runner, outside the nine: 1
+      code/species_depth_audit_4700/q2_wiring.py
+
+==============================================================================
+J2a2  A SECOND HOLE IN THE CALLER SCAN, AND WHAT WAS BEHIND IT
+==============================================================================
+
+  `k2_consume.py` builds its caller population as
+
+      files = [f for f in ... if (f.endswith('.py') or f.endswith('.sh'))
+               and not f.endswith('/run_all.sh')]
+
+  -- every `run_all.sh` is EXCLUDED from being a caller.  A runner that
+  runs another runner under `set -e` is a status consumer and cannot
+  appear in that table.  Measured over every `*.sh` at HEAD:
+
+    code/branching_audit_2060/b0_repro.sh          :10  -> run_all.sh                         in K2a's population  <-- target was AFFECTED
+    code/branching_audit_2060/run_all.sh           :18  -> ./b0_repro.sh                      INVISIBLE to K2a
+    code/branching_audit_a218/c0_repro.sh          :23  -> ./run_all.sh                       in K2a's population  <-- target was AFFECTED
+    code/state_delegation_audit_16eb/run_all.sh    :77  -> code/state_delegation_audit_5644/run_all.sh INVISIBLE to K2a
+    code/state_delegation_repair_0049/run_all.sh   :77  -> code/state_delegation_audit_5644/run_all.sh INVISIBLE to K2a
+
+  shell-level runner executions in the repository : 5
+  ...invisible to K2a by that filter              : 3
+  ...of those, targeting a runner that was AFFECTED: 0
+
+  THE HOLE IS REAL AND IT IS EMPTY.  Three executions could not appear
+  in K2a's table, and none of them targets an affected runner, so no
+  claim hangs on it.  Reported anyway: a hole that happens to be empty
+  and a hole that was checked and found empty are the same table row
+  and completely different pieces of evidence, and only the second one
+  survives the next runner someone adds.
+
+==============================================================================
+J2b  THE CLAIM THE ENUMERATION DID NOT CONSIDER
+==============================================================================
+
+  Q10  predicted absent at the pin                  measured absent                   as predicted
+
+  code/species_depth_audit_4700/q2_wiring.py
+    landed in: 5c16f5c 2026-07-31 docs+audit: independent audit of the mg-821e repair (af432ee + b534db7 + 41ac5d4)
+    at bee07a1: ABSENT
+    it calls `run_runner(t)`, which is `subprocess.run(["sh",
+    "run_all.sh"], ...)` and returns `p.returncode`, for
+    TREES = species_repair_a4ef, species_remainder_f8fa, species_repair_6f61
+    -- and TWO of those three had a `| tee` pipeline at the pin.
+
+    lines in it that score a runner's exit status: 8
+      114   ok = (rc == 0 and len(got) >= 2)
+      166   bad += (rc == 0) + (not named) + (not msg)
+      177   if rc2 == 0 else
+      179   bad += (rc2 != 0)
+      180   nc = sum(1 for t in TREES if wired_rc[t] != 0)
+      181   ng = sum(1 for t in TREES if unwired_rc[t] == 0)
+      230   nred = sum(1 for t in TREES if guard_rc[t] != 0)
+      323   swallowed = (rc == 0)
+
+  ITS COMMITTED CLAIM, quoted from code/species_depth_audit_4700/out_q2_wiring.txt:
+      Q2e  A RED SELF-TEST, SWALLOWED -- in two of the three runners repaired
+        code/species_repair_a4ef      exit 0   printed *** FAILED ***: yes  SWALLOWED
+        code/species_remainder_f8fa   exit 0   printed *** FAILED ***: yes  SWALLOWED
+        code/species_repair_6f61      exit 1   printed *** FAILED ***: no   stopped the run
+
+  READ IT AS A CLAIM.  `exit 0 ... SWALLOWED` is a claim about two
+  runners' EXIT CODES -- R3 by the sweep's own routing, read off the
+  status and nothing else.  It is not in the sweep's nine.  It is not
+  in the sweep's caller table.  It could not be: the file did not exist
+  at the revision the caller scan was pinned to.
+
+==============================================================================
+J2c  THE SAME PROBE, RE-RUN AT HEAD -- do those two rows still hold?
+==============================================================================
+
+  mg-4700's own probe text, reproduced rather than imported (importing
+  q2_wiring.py runs twenty-one `run_all.sh` at module level).  The stub
+  written over each self-test is byte-identical to mg-4700's RED_STUB.
+
+  code/species_repair_a4ef      exit 1    printed *** FAILED ***: yes  stopped the run
+  code/species_remainder_f8fa   exit 1    printed *** FAILED ***: yes  stopped the run
+  code/species_repair_6f61      exit 1    printed *** FAILED ***: no   stopped the run
+
+  worktree unchanged by J2c
+
+  mg-4700 committed:  a4ef SWALLOWED, f8fa SWALLOWED, 6f61 not
+  measured at HEAD :  a4ef not, f8fa not, 6f61 not
+  rows that FLIPPED: 2 -- species_repair_a4ef, species_remainder_f8fa
+  Q13  predicted the two SWALLOWED rows no longer hold measured 2 of 2 flipped           as predicted
+
+  WHAT THIS IS AND IS NOT.  It is NOT a defect in the repair -- the
+  repair is why they flipped and flipping is the repair working.  It is
+  a past claim that DEPENDED ON AN AFFECTED RUNNER'S EXIT CODE, which
+  is precisely the population item 3 of the ticket asks for, and it is
+  absent from the nine.  Two committed rows in this repository now
+  assert an exit code that the tree no longer produces, and no artifact
+  of the sweep says so.
+
+==============================================================================
+J2d  THE NINE, CHECKED PER CLAIM -- does each site still say what is quoted?
+==============================================================================
+
+  The sweep dispositions each of the nine with a reason -- that part is
+  done per claim and not in aggregate, and it is done well.  What is
+  checked here is narrower and is the thing a hand-written list rots
+  at: does the named FILE still exist and still contain the quoted text?
+
+    C1   code/species_sites_821e/p3_wiring.py                             site+text present
+    C2   code/species_sites_821e/p3_wiring.py                             site+text present
+    C3   code/species_sites_821e/p3_wiring.py                             site+text present
+    C4   code/branching_audit_2060/b0_repro.sh                            site+text present
+    C5   docs/OneThird-Species-Hopf-Monoids-ExtentRepair-IndependentAudit.md site+text present
+    C6   docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md site+text present
+    C7   docs/OneThird-Landscape-Where-This-Lives.md                      site+text present
+    C8   code/hodge_leverage_audit_f922/audit_repair.py                   site+text present
+    C9   docs/landing-mg-1c80-instrumented-predicate.md                   site+text present
+  Q14  predicted 9 of 9                             measured 9 of 9                   as predicted
+
+==============================================================================
+J2e  THE GENERAL FORM, ON J2
+==============================================================================
+
+  J2 decides whether other scripts' statuses were discarded, so the
+  question is whether J2 discards its own.  Checked, with the reason:
+
+   1. Every execution here is `L.run_sh`, which is
+      `subprocess.run(["/bin/sh", <name>], ...)` -- a LIST argv, no
+      `shell=True`, therefore no shell, therefore no pipeline.  That is
+      the branch that CANNOT exhibit the defect and the reason is
+      structural rather than a promise about how it is called.
+   2. `returncode` is read on every path.  The timeout path returns
+      None and prints as `-`, never as 0 -- a timeout rendered as 0
+      would be this defect in a different costume.
+   3. J2c's verdict is a CONJUNCTION: the exit code AND whether the
+      forced text reached the runner's stdout.  Scoring the code alone
+      would not distinguish `the stub ran and was caught` from `the
+      stub never ran`.
+   4. J2c snapshots `git status --porcelain` before and after, because
+      it writes over three tracked self-tests and a restore that did
+      not happen would silently corrupt every later section.
+   5. J2a is run at BOTH revisions, and the pin is the finding: a scan
+      pinned to one revision is reported as of that revision and not
+      as of the repository.
+   6. WHAT J2 CANNOT DO, said here rather than omitted: it finds
+      consumers by a syntactic rule over `.py` and `.sh`.  A consumer
+      that reaches a runner through a path assembled at runtime from
+      data is invisible to it, exactly as it was to the sweep's K2a.
+      J2a's rule is strictly wider than K2a's -- it resolves helper
+      functions and list-valued tree names -- but wider is not total.
+
+==============================================================================
+J2 TOTAL BAD: 1
+==============================================================================
+
+EXTENT.  It counts (a) an R3 consumer of an affected runner outside
+the sweep's nine, (b) J2c leaving the worktree dirty, (c) any of the
+nine whose site or quoted text has rotted.  It ranges over every
+tracked `.py` and `.sh` in this repository at bee07a1 and at HEAD,
+excluding this audit's own tree, and over the three species trees
+J2c executes.  It does NOT range over claims in prose that name no
+exit code -- those are R1/R2 by the sweep's routing, which this
+audit adopts rather than re-litigates.
+
+PREDICTIONS: 5 of 5 as predicted, 0 MISSED (none)
