@@ -226,102 +226,35 @@ because I made the opposite call at 17:35 on a misread and had to retract it.**
 **So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
 on an audit that measured its extents in both directions — that, not fatigue, is the signal.
 
-## Now (in flight) — 2026-07-31 04:25
+## Now (in flight) — 2026-07-31 06:10
 
-- **mg-7522** — the `| tee` sweep's population was defined by **filename**; two runners with 8 pipelines still
-  swallow at HEAD. Redefine the population by **property**, re-derive the counts, and re-establish the
-  retroactive clearance over the corrected population.
-- **mg-6df0** — the **mg-ec07 verdict** (merged `8cdda32`; 56 checks, 40 confirmed, 14 measured, 2
-  refuted, 6 findings, **0 mathematical statements touched**). **Confirmed:** lossless over the site at
-  **37,866 of 37,866** characters against a positive control of **462/37,866 (1.2%)** at the repair's
-  parent, and **847 of 847** figure exchanges undisturbed — enumerated from `partition` rather than from
-  anybody's list of twelve. **Open:**
-  - `--reseal`'s refusal **excludes 3 of 34 gate rows** via a substring test, and they are the three that
-    license the whole claim. **R5 item 3 verbatim — the defect this repair found in its own scoring code
-    and fixed there, still live forty lines away in the file it was repairing.** *A fix applied at the
-    site of discovery, in a file containing the same construct elsewhere, has a scope nobody chose.*
-  - the same-kind enumeration **happened and was well-evidenced**, but was over **KINDS, not SITES ×
-    KINDS** — each kind checked at one site, so the mutation caught at H8 is **exit 0 at the STATE.md
-    site**. The inherited disclosure *"a site is a section"* is **false at 1 of 3 sites**, with **88.2%
-    of characters outside every record**.
-  - Audit **mg-7e39** pre-filed in the same action: build the full product and **report the matrix, not
-    a total**.
-- **Process gap found in the same pass:** this verdict sat in a commit message for an hour. **The
-  refinery notifies the dispatcher; nothing notifies the consumer.** My audit check asked *does it have a
-  successor* when it needed to ask *have I received its verdict* first.
-- **mg-69d1** — carries the **two open sites** from the audits that just returned, both **PARTIAL**:
-  - *mg-eaef* — the instrument's **stated bound is WIDER than the sweep**, with **4 of 15 operands in neither
-    column**. A bound stated wider than its evidence is the printed-extent defect wearing the remedy for the
-    printed-extent defect; **a stated limit that over-claims is worse than none, because it is read as a
-    guarantee.** "Neither column" is not a third state — it is the absence of an answer.
-  - *mg-e34a* — the **row is right and its stated REASON is inverted**: build the cancelling pair the reason
-    names and both halves *move* while "both together" prints *identical*. **Fourth control tonight that is
-    right for a reason it does not have, and the second where the wrong reason came from a repair fixing that
-    very class.** Mechanism: **the repair added a ROW and a REASON, and only the row was checked** — and the
-    rightness of the row is exactly what makes the reason feel checked.
-  - Audit **mg-2c77** pre-filed in the same action, aimed at the *reasons* rather than the rows.
-- **Confirmed, and worth recording as such:** mg-e34a ran the **pre-repair predicate against 7 inputs with 0
-  going backwards at either grain**. That is the first use of that instruction to **confirm** rather than to
-  catch — it is what makes "the kernel half is really back" a measurement instead of a claim.
+**Regenerated against live status rather than appended to** — the previous section had 8 of 13
+asserted items already `done`.
 
-- **Two DROPPED VERDICTS, found 1–2 days late by a detector built this morning.** Both merged with **no
-  landing commit and no successor ticket**; nothing acted on either.
-  - **mg-fccb** (audit mg-8a71) — **time-sensitive.** mg-d112 (2026-07-29) confirmed the locality-lemma
-    mathematics but recorded **an unflagged DIRECTION ERROR in mg-dbd1 §2.3** — a *different document*,
-    standing uncorrected for two days. **Direction errors propagate silently, because every consumer
-    type-checks.**
-  - **mg-e35b** (audit mg-fcb2) — mg-fcf1 (2026-07-30) on the incidence-structure control battery:
-    **0 BROKEN mathematics** and `L_parity = D·L_true·D` confirmed 86/86, but **three of the four rows
-    CANNOT FAIL** (the scored condition is a theorem, not a measurement) while the output explicitly
-    claims it added no such row; the gauge standard used to **reject** `facet_swap01` **disqualifies 9
-    kept (poset,row) pairs**; two printed counts are tautologies of the code path; and on **24 of 86**
-    posets the pipeline is blind to its own named load-bearing site, stated nowhere.
-  - **The finding worth carrying beyond this arc:** row I4's hedge — *"no claim is made either way on the
-    remainder"* — covers **exactly the three posets where the answer is known and adverse**, making the
-    sentence it protects false as written. **A hedge is not automatically honest; enumerate the remainder
-    before writing one.**
-  - **A standard worth keeping**, named by mg-fcf1: that deliverable left STATE.md untouched with the
-    passage **flagged rather than half-fixed** — *the first in the arc to name what it deliberately did
-    not do.*
+- **mg-8a71** — audit of the §2.3 direction-error repair (mg-fccb landed `1b00147`)
+- **mg-2c77** — audit of mg-69d1 — **must reconcile 4-of-15 (audit) against all-17 (repair)**, not adopt the newer count
+- **mg-7e39** — audit of mg-6df0, which closed both sites and **committed its probes BEFORE the fix**
+- **mg-dffa** — mg-5800's 4 MINOR, all about warrant
+- **mg-4adb** — `set -e` — **one line outside every deletion population**, turning 3 of 3 runners green while they print the finding in full
 
-- **Two further DROPPED VERDICTS**, found by running the detector over the **full** population of 60
-  rather than the 9 a broken filter surfaced:
-  - **mg-a74f** (audit mg-65eb) — mg-16eb on the delegated presentation record. Repair real, **7 of 7
-    outputs byte-identical**, 8 of 8 rows as predicted; but **the visibility instrument measures BYTES
-    IN THE HTML and calls it what a reader is shown**, and **6 of 17 added claims do not hold**. The
-    audit's framing is the durable part: **the blind spot moved three times, all three onto ground the
-    repair itself laid.**
-  - **mg-dffa** (audit mg-19ec) — mg-5800 on the two-negatives repair. **0 BROKEN**, every figure
-    reproduced from a disjoint instrument, and **the converse of X1 measured at n=6 WITHOUT Birkhoff**,
-    closing the repair's own weakest link. **4 MINOR, all about warrant**, unfixed.
-- **Method note, because the numbers were misleading in a way worth remembering.** Three predicates
-  over the same 60 audits gave **9**, **42**, and **3** — each silently asserted there was *one* way an
-  audit gets disposed of, when there are three (repo landing, successor ticket, clean verdict).
-  **The alarming number was the most wrong.** One remaining flag was a false positive created by a
-  filter I had added an hour earlier to fix a different control: excluding my own roadmap commits
-  blinded the detector to my own disposition route.
+### Queued behind their parents
 
-- **Landed in the 05:00–05:50 window** — four items, and the arc is now closing faster than it opens:
-  - **mg-69d1** (`05:48`) — **the bound is narrowed to the sweep with all 17 operands in a named column,
-    and the row's reason is inverted no longer**: `not determined` is *printed at 0* rather than left as
-    an empty cell, and **both a cancelling and a conspiring pair are BUILT**, so the corrected reason is a
-    measurement rather than a restatement. *Open discrepancy for its audit mg-2c77 to reconcile: the audit
-    reported **4 of 15** operands, the repair reports **all 17**.*
-  - **mg-fccb** (`1b00147`, merged 05:38) — **the §2.3 direction error is struck at the site**, its **two
-    unflagged §5 consumers found**, and 2 overstatements narrowed. The brief's *"trace every consumer — a
-    direction error propagates silently because every consumer type-checks"* produced both finds; worth
-    keeping permanently in the direction-error brief. Audit **mg-8a71** released.
-  - **mg-7522** (`05:02`) — the `| tee` suite re-run on a clean tree, **S1–S5 and the self-test all 0
-    BAD**, with S3's dispositions re-keyed on line **content** instead of line **numbers**, and **the two
-    misses this repair's own prose caused recorded** rather than quietly fixed.
-  - **mg-4adb** (audit mg-d53d) — filed from mg-6ef4's verdict. The repair **subtracted**, but:
-    **`set -e` is the fifth rung, ONE LINE OUTSIDE EVERY DELETION POPULATION, and it turns 3 of 3 runners
-    GREEN while they print e2's finding in full.** The fix is trivial; the finding is not. **A mutation
-    population that excludes a line makes that line invisible to the control it certifies — and the
-    exclusion looks like nothing, because the certificate still reads 100%.**
-  - Worth keeping rather than "fixing": mg-6ef4's census **counts its own commit message** (10/5/43 →
-    11/6/44). **A census that counts commit messages must count its own**; silently excluding itself is
-    the error, and the one that would never have been noticed.
+- **mg-e35b** (available) — pre-filed audit, releases when its parent lands
+- **mg-fcb2** (pending) — pre-filed audit, releases when its parent lands
+- **mg-a74f** (available) — pre-filed audit, releases when its parent lands
+- **mg-65eb** (pending) — pre-filed audit, releases when its parent lands
+- **mg-19ec** (pending) — pre-filed audit, releases when its parent lands
+- **mg-d53d** (pending) — pre-filed audit, releases when its parent lands
+- **mg-70c7** (available) — mg-dee4's six findings — the site-vs-execution grain, the unreproducible 154, and the 9-vs-3 double standard
+- **mg-56dc** (pending) — pre-filed audit, releases when its parent lands
+- **mg-344a** (available) — pre-filed audit, releases when its parent lands
+
+**Resolved this window, and worth stating plainly because it has been open for a day:**
+**the `| tee` retroactive clearance HOLDS at the execution grain — 8 of 8 exit 0.** mg-dee4 found the
+enumeration wrong (*"11 of 11 read directly"* counted **lines**; 4 of the 8 executions were never run,
+and one row cited a line whose argv it does not carry), then **filled the hole rather than reporting it**.
+**The verdict survives; the enumeration does not** — and this is the first time the clearance has been
+established at a grain I trust.
 
 ## Next (gated / queued)
 
