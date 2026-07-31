@@ -1,0 +1,262 @@
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+mg-7e39 -- INDEPENDENT AUDIT of the mg-6df0 repair
+==============================================================================
+The repair under audit is the commit that keys `reseal()`'s refusal on
+`heading()` and replaces the kind-per-site battery with a SITES x KINDS
+matrix.  It is derived from git here, never named as a sha in this file.
+
+WHAT IS MINE AND WHAT IS THE ARTIFACT'S, stated up front because
+"replication is not corroboration when the copies share a source":
+
+  MINE      the site cutters (`my_section`, `my_framed_row`), the twelve kind
+            derivations, the write-back, the AST sweep, every population, and
+            the scoring -- which reads the runner's STDOUT from a SUBPROCESS.
+            No cell of B1's matrix is decided by anything imported from the
+            artifact.
+  THEIRS    the figure-token grammar and the figure/segment seam (`partition`)
+            in B6, and the gate itself everywhere.  The gate is the SUBJECT;
+            calling it is the measurement.  Where a population would otherwise
+            be defined by their regex, B6a cross-checks the token count with a
+            naive one of mine and prints both.
+
+B1's matrix and B3's refusal probes touch the WORKING TREE.  Every file is
+snapshotted as bytes before the first probe and restored and re-hashed after
+each one; B0c is the check that the restore held, and it is fail-closed.
+
+  repair under audit : 77306a7   (parent 803bd50)
+  tree              : 7cee1a1
+
+B0 -- PREFLIGHT: the tree, the artifact, and my cutters against theirs
+----------------------------------------------------------------------
+  [CONFIRMED] B0a the runner on a clean tree: exit 0, 34 gate rows, 0 refuted.  Predicted exit 0 / 0 refuted
+  [CONFIRMED] B0b the figure gate returns 34 rows.  Predicted 34, derived: 3 sites x 4 census rows = 12, plus 12 READ AT THE SITE rows over the 12 (site, key) pairs, plus 10 WRITTEN ONCE rows
+    rows by kind: 'STATE.md row cell' READ AT THE SITE = 1 2, 'STATE.md row cell' is WRITTEN ONCE 2, 'deliverable §14 copy, frozen since mg-a 2, 'gap, cell + relocated history' READ AT  3, 'gap, cell + relocated history' is WRITT 3, 'gap, cell only' READ AT THE SITE = +2 7 3, 'gap, cell only' is WRITTEN ONCE 3, 'relocated history (this row's own file) 4, FIGURE CENSUS 3, FIGURE ORDER 3, RECORD PARTITION 3, SITE RECORD 3
+  [CONFIRMED] B0d my cutters, written from the DISCLOSURE SENTENCES alone, reproduce the artifact's sites at 3 of 3: the STATE.md row 13,410 chars; §14 16,647 chars; H8 7,852 chars.  Two readings of the same sentence landing on the same bytes is what makes the sentence a specification rather than a label
+
+B1 -- SITES x KINDS, BUILT AGAIN: my derivations, my write-back, scored from the runner's stdout
+------------------------------------------------------------------------------------------------
+THE MATRIX IS THE GRAIN THE PARENT FAILED AT, so a matrix printed by the
+party under audit is the thing being audited and not the evidence for it.
+Every cell below is a mutation I derived, spliced into THE FILE by my own
+write-back, with `verify_landing.py` then run AS A SUBPROCESS and its gate
+rows read out of its stdout.  Nothing the artifact computes decides a cell.
+
+    kind                                                the STATE.md row      §14                   H8                    
+    K01 the LIVE figure a reader meets, corrupted       FIRES                 FIRES                 FIRES                 
+    K02 the figure DUPLICATED at the site               FIRES                 FIRES                 FIRES                 
+    K03 a WRONG figure in ORDINARY PROSE                FIRES                 FIRES                 FIRES                 
+    K04 wrong prose REUSING a figure on the roster      FIRES                 FIRES                 FIRES                 
+    K05 a NEW undeclared historical figure              FIRES                 FIRES                 FIRES                 
+    K06 two DECLARED FIGURES exchanged                  FIRES                 FIRES                 FIRES                 
+    K07 two LABELS exchanged, no figure moved           FIRES (rec)           FIRES (rec)           FIRES (rec)           
+    K08 two table ROW LABELS exchanged                  n/a                   n/a                   FIRES (rec)           
+    K09 two COLUMN HEADERS exchanged (mg-ec07's X1)     FIRES (rec)           n/a                   FIRES (rec)           
+    K10 a figure inside a MARKED QUOTATION altered      n/a                   FIRES (rec)           n/a                   
+    K11 the table's ALIGNMENT shifted, no figure moved  FIRES (rec)           n/a                   FIRES (rec)           
+    K12 a whole PARAGRAPH relocated out of the site     n/a                   FIRES (rec)           FIRES                 
+
+      n/a  K08 @ the STATE.md row   only 1 table row(s) carrying a figure lie INSIDE this site, in either table format
+      n/a  K08 @ §14                only 0 table row(s) carrying a figure lie INSIDE this site, in either table format
+      n/a  K09 @ §14                no column-header line inside this site, in either format
+      n/a  K10 @ the STATE.md row   12 marked quotation(s) at this site and none carries a figure token
+      n/a  K10 @ H8                 5 marked quotation(s) at this site and none carries a figure token
+      n/a  K11 @ §14                this site contains no table row whose alignment can shift
+      n/a  K12 @ the STATE.md row   this site is 1 paragraph(s) and none after the first is figure-free, so there is nothing to relocate out of it
+
+  [CONFIRMED] B1b 29 of 29 APPLICABLE cells of the 12x3 = 36 SITES x KINDS product FIRE; 0 SILENT, 0 crashed, 7 n/a.  Population: the product, not a total -- the matrix above is the finding and this line is its summary
+  [CONFIRMED] B1c every firing cell exits [1].  Predicted exit 1 at every one; a mutated tree that exits 0 is a silent cell wearing a fire's clothes
+  [CONFIRMED] B1d 9 of 9 applicable LABEL-SIDE cells (K07-K11) are caught BY SITE RECORD with every FIGURE CENSUS and FIGURE ORDER row green -- the attribution claim, over the product
+
+B1e -- MY MATRIX AGAINST THE ARTIFACT'S OWN, CELL BY CELL
+---------------------------------------------------------
+      K11 @ the STATE.md row   mine FIRES    theirs n/a
+  [CONFIRMED] B1e 35 of 36 cells agree with the artifact's own matrix; 1 disagree, and every disagreement above is about APPLICABILITY rather than about FIRES/SILENT
+
+B2 -- EVERY n/a REASON READ AS A CLAIM ABOUT THE SITE, AND FALSIFIED
+--------------------------------------------------------------------
+`n/a` IS WHERE A MATRIX HIDES.  The parent's own predictions record that its
+first matrix reported 19 applicable cells because a write-back was failing
+silently, and say in as many words that A DERIVATION THAT FAILS SILENTLY READS
+EXACTLY LIKE A SITE THAT HAS NO SUCH TEXT.  So every n/a reason below is read
+as a CLAIM ABOUT THE SITE and measured against the site independently.
+
+    the STATE.md row
+        pipe rows                                    3
+        whitespace-column rows                       0
+        table rows carrying a figure                 1
+        column-header line                           True
+        marked quotations                            12
+          ... of them carrying a figure              0
+        paragraphs                                   1
+        figure-free paragraphs after the first       0
+    §14
+        pipe rows                                    0
+        whitespace-column rows                       0
+        table rows carrying a figure                 0
+        column-header line                           False
+        marked quotations                            9
+          ... of them carrying a figure              1
+        paragraphs                                   7
+        figure-free paragraphs after the first       4
+    H8
+        pipe rows                                    0
+        whitespace-column rows                       11
+        table rows carrying a figure                 10
+        column-header line                           True
+        marked quotations                            5
+          ... of them carrying a figure              0
+        paragraphs                                   17
+        figure-free paragraphs after the first       9
+
+    the artifact reports 8 n/a cells; I report 7
+      K11 @ the STATE.md row: the artifact says n/a, I derived a mutation and the runner said FIRES
+  [MEASURED ] B2a of the artifact's 8 n/a cells, 7 are also n/a for a derivation written independently and 1 are not -- ['K11 @ the STATE.md row'].  A cell that is n/a for one derivation and applicable for another is a fact about the DERIVATION printed in the grammar of a fact about the SITE
+  >> FINDING F1: K11 @ the STATE.md row is reported `n/a` by the repair's own matrix with a reason phrased as a property of the site, and it is a property of the derivation: an independent mutation of the same kind FIRES at that cell, caught by SITE RECORD.  The published matrix is 8 n/a where it should be 7, and the cell it understates is on the K09/K11 label-side rows that carry the whole X1 argument.  It UNDERSTATES coverage and hides no hole -- the cell fires -- which is why it is a finding about the instrument and not about the gate
+      mine n/a K08 @ the STATE.md row   only 1 table row(s) carrying a figure lie INSIDE this site, in either table format
+      mine n/a K08 @ §14                only 0 table row(s) carrying a figure lie INSIDE this site, in either table format
+      mine n/a K09 @ §14                no column-header line inside this site, in either format
+      mine n/a K10 @ H8                 5 marked quotation(s) at this site and none carries a figure token
+      mine n/a K10 @ the STATE.md row   12 marked quotation(s) at this site and none carries a figure token
+      mine n/a K11 @ §14                this site contains no table row whose alignment can shift
+      mine n/a K12 @ the STATE.md row   this site is 1 paragraph(s) and none after the first is figure-free, so there is nothing to relocate out of it
+
+B3 -- THE REFUSAL: all 34 rows, and each of the 3 that the substring test excluded
+----------------------------------------------------------------------------------
+  [CONFIRMED] B3a of the 34 gate rows, 'SITE RECORD' as a SUBSTRING selects 6 and as a HEADING selects 3.  The 3 that differ: RECORD PARTITION @ H8; RECORD PARTITION @ the STATE.md row; RECORD PARTITION @ §14
+  [CONFIRMED] B3b 31 of 34 rows BLOCK a reseal when refuted and 3 are excluded by design (the SITE RECORD rows, which are what a reseal exists to rewrite).  Under the substring test it was 28 blocking and 6 excluded: the 3 rows in between are the ones that license 'the record is lossless'
+    the repair lands at   : 77306a7
+    the control runs at   : 803bd50  (the defect still present)
+
+  [CONFIRMED] B3c @ the STATE.md row: `partition` bent lossy AT THIS SITE ONLY, then `--reseal` -> exit 1, REFUSED, record sha 85ad5bfb5187 -> 85ad5bfb5187 (unchanged).  Blocking rows: RECORD PARTITION @ the STATE.md row
+  [CONFIRMED] B3c @ §14: `partition` bent lossy AT THIS SITE ONLY, then `--reseal` -> exit 1, REFUSED, record sha 85ad5bfb5187 -> 85ad5bfb5187 (unchanged).  Blocking rows: RECORD PARTITION @ §14
+  [CONFIRMED] B3c @ H8: `partition` bent lossy AT THIS SITE ONLY, then `--reseal` -> exit 1, REFUSED, record sha 85ad5bfb5187 -> 85ad5bfb5187 (unchanged).  Blocking rows: RECORD PARTITION @ H8
+  [CONFIRMED] B3d CONTROL @ the STATE.md row, at 803bd50 where the defect is still present: the SAME probe -> exit 0, BLESSED, record sha 1f85f72b4ac9 -> 4f6f2ea645fc (CHANGED).  A refusal that fires at both commits would be measuring my probe, not the repair
+  [CONFIRMED] B3d CONTROL @ §14, at 803bd50 where the defect is still present: the SAME probe -> exit 0, BLESSED, record sha 1f85f72b4ac9 -> d98ac9bc8888 (CHANGED).  A refusal that fires at both commits would be measuring my probe, not the repair
+  [CONFIRMED] B3d CONTROL @ H8, at 803bd50 where the defect is still present: the SAME probe -> exit 0, BLESSED, record sha 1f85f72b4ac9 -> 17461890f5b9 (CHANGED).  A refusal that fires at both commits would be measuring my probe, not the repair
+  [CONFIRMED] B3 THE REFUSAL COVERS THE THREE ROWS THE SUBSTRING TEST EXCLUDED: 3 of 3 refuse at HEAD and 3 of 3 BLESS at 803bd50, one site at a time -- the parent demonstrated this once with all three sites bent together, which is one cell of a three-cell population
+  [CONFIRMED] B3e @ the STATE.md row: a WRONG LIVE FIGURE on disk, then `--reseal` -> exit 1, REFUSED, record unchanged.  The half of the refusal that already worked is not weakened
+  [CONFIRMED] B3e @ §14: a WRONG LIVE FIGURE on disk, then `--reseal` -> exit 1, REFUSED, record unchanged.  The half of the refusal that already worked is not weakened
+  [CONFIRMED] B3e @ H8: a WRONG LIVE FIGURE on disk, then `--reseal` -> exit 1, REFUSED, record unchanged.  The half of the refusal that already worked is not weakened
+  [CONFIRMED] B3e 3 of 3 sites still refuse a wrong live figure
+
+B4 -- THE CONSTRUCT: HOW MANY EXIST, HOW MANY THE REPAIR TOUCHED
+----------------------------------------------------------------
+    row vocabulary, DERIVED from the code that prints the rows: ['CENSUS ROSTER', 'FIGURE CENSUS', 'FIGURE ORDER', 'READ AT THE SITE', 'RECORD PARTITION', 'SITE RECORD']
+    the parent's `ROW_NAMES`, a HAND LIST read out of its source: ['SITE RECORD', 'RECORD PARTITION', 'FIGURE CENSUS', 'FIGURE ORDER', 'CENSUS ROSTER']
+    in the derived vocabulary and not in the hand list: ['READ AT THE SITE']
+  [MEASURED ] B4a `.py` files under `code/`: 448 at 77306a7, the commit that SHIPS the transcript; 448 at its parent 803bd50, the commit the repair was measured against; and 449 at HEAD, which is 1 more because this audit's own probe file has joined the population it counts.  The committed transcript publishes 429
+  >> FINDING F2: THE SWEEP'S OWN POPULATION IS A STALE FIGURE AT ITS OWN COMMIT.  `out_repair_6df0.txt` publishes '429 .py files swept'; the tree at the commit that ships that transcript holds 448, and so did the commit before it (448) -- so the gap is not a merge that landed after the run, it was already there when the run was taken.  19 files are in the population and not in the number a reader is given.  The instrument is live and re-derives the count every run; what is frozen is the figure in the evidence.  This is mg-f922 B/C -- a figure stale in the commit that publishes it -- inside the sweep whose whole argument is that THE REPORTED LINE IS NEVER THE POPULATION
+
+    THE CONSTRUCT AT 77306a7, by my rule, with each hit's EXPOSURE over the 34 live rows:
+      code/hodge_leverage_audit_835f/audit_a318_repair.py:326
+          'READ AT THE SITE' in l
+          exposure: 12 of 34 rows by substring, 12 by heading -- 0 row(s) it was never meant to select  (harmless here, and still the construct)
+      code/hodge_leverage_audit_8aae/audit_8916_repair.py:518
+          'FIGURE CENSUS' in l
+          exposure: 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
+      code/hodge_leverage_audit_ec07/audit_ec07.py:714
+          'SITE RECORD' in r
+          exposure: 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
+      code/hodge_leverage_repair_6df0/repair_ec07.py:303
+          'SITE RECORD' in d
+          exposure: 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
+      code/hodge_leverage_repair_8916/repair_835f.py:309
+          'FIGURE CENSUS' in l
+          exposure: 6 of 34 rows by substring, 3 by heading -- 3 row(s) it was never meant to select
+
+    ... and the REMEDY sites, which are the same shape keyed correctly:
+      code/hodge_leverage_audit_ec07/audit_ec07.py:366  'FIGURE ORDER' in bad
+      code/hodge_leverage_audit_ec07/audit_ec07.py:367  'SITE RECORD' in bad
+      code/hodge_leverage_audit_ec07/audit_ec07.py:368  'RECORD PARTITION' in bad
+      code/hodge_leverage_audit_ec07/audit_ec07.py:369  'FIGURE CENSUS' in bad
+      code/hodge_leverage_audit_ec07/audit_ec07.py:716  r.split(' -- ')[0].endswith('SITE RECORD')
+      code/hodge_leverage_landing_e1d0/verify_landing.py:1962  heading(d).endswith('SITE RECORD')
+      code/hodge_leverage_landing_e1d0/verify_landing.py:1963  heading(d).endswith('FIGURE CENSUS')
+      code/hodge_leverage_landing_e1d0/verify_landing.py:1963  heading(d).endswith('FIGURE ORDER')
+      code/hodge_leverage_landing_e1d0/verify_landing.py:2343  heading(d).endswith('SITE RECORD')
+      code/hodge_leverage_landing_e1d0/verify_landing.py:2346  heading(d).endswith('FIGURE CENSUS')
+      code/hodge_leverage_landing_e1d0/verify_landing.py:2346  heading(d).endswith('FIGURE ORDER')
+      code/hodge_leverage_landing_e1d0/verify_landing.py:2399  heading(d).endswith('SITE RECORD')
+      code/hodge_leverage_repair_6df0/repair_ec07.py:304  heading(d).endswith('SITE RECORD')
+
+  [MEASURED ] B4c INSTANCES THAT EXIST at 77306a7, over the same 448 files, by three rules: 5 by MY rule (AST + derived vocabulary), 5 by the PARENT'S RULE with the derived vocabulary, and 4 by the parent's rule with its OWN hand list of 5 names -- which is the number its transcript publishes.  THE RULE IS NOT WHAT HIDES THE EXTRA ONE; THE HAND LIST IS
+  >> FINDING F5: THE SWEEP'S VOCABULARY IS A HAND LIST, WHICH IS A SCOPE NOBODY CHOSE ONE LEVEL UP.  `ROW_NAMES` in `repair_ec07.py` names 5 row headings by hand; the gate prints 6.  The same rule with a vocabulary derived from the code that prints the rows finds 5 occurrences where the hand list finds 4: code/hodge_leverage_audit_835f/audit_a318_repair.py:326 `'READ AT THE SITE' in l`.  The sweep exists because a hand-picked SITE is a scope nobody chose; it picks its VOCABULARY the same way
+  [MEASURED ] B4d INSTANCES THE REPAIR TOUCHED: 1 -- code/hodge_leverage_landing_e1d0/verify_landing.py:1815 'SITE RECORD' in d.  THE TWO NUMBERS ARE THE FINDING: 6 instances existed at 803bd50 and the repair changed 1 of them, leaving 5 live in the commit it landed in
+  >> FINDING F3: 5 instance(s) of the construct are LIVE in the commit the repair landed in, after a repair that touched 1.  Each carries a declared disposition in the parent's `DISPOSITIONS` table keyed on its exact line, so a new one anywhere is red -- but a disposition is a REASON, not a repair, and 1 of 6 is the scope the repair chose.  The brief asked for these two numbers and they are 1 and 6
+  [CONFIRMED] B4e in `verify_landing.py` itself: 7 row-identifying comparison(s), 0 by substring and 7 through `heading()`.  The claim under test is '`heading()` is now the only way any caller in that file names a row'
+  [CONFIRMED] B4f shell runners keying on a gate row name: 0.  The parent's sweep is over `.py` under `code/` only, so a `grep "SITE RECORD"` in a runner would be outside its population entirely -- checked here rather than assumed
+
+B5 -- EVERY SCOPE SENTENCE THE REPAIR WRITES, TESTED AT EVERY SITE
+------------------------------------------------------------------
+The sentence the repair INHERITED was false at 1 of 3 sites and nobody had
+checked the third.  So each sentence it writes is read here as a CLAIM and
+tried at all three, by an implementation written from the sentence rather than
+from the code.
+
+  [CONFIRMED] B5a `EXTENT_OF['framed_row']` -- "the table ROW and the HEADER LINES it is read under -- not the table's..." -- claimed of 1 site(s) (the STATE.md row) and reproduced from the sentence alone at 1 of 1
+  [CONFIRMED] B5a `EXTENT_OF['section']` -- "the markdown SECTION, heading to the next heading of the same or shall..." -- claimed of 2 site(s) (§14, H8) and reproduced from the sentence alone at 2 of 2
+  [CONFIRMED] B5b the framed_row sentence's SECOND HALF -- 'not the table's other rows' -- the ledger table this row belongs to is 25 line(s), 24 of them header-or-verdict rows; 3 lines are inside the site.  22 verdict rows of this table remain outside every record, which is mg-ec07's X2 and is declared open with its cost measured
+  [CONFIRMED] B5c 'a site whose anchor has no declared extent makes the run RED' -- the cutting function renamed and nothing else changed: exit 1, the DECLARED extent row REFUTED.  A fail-closed rule that cannot be made to fail is a sentence
+  [CONFIRMED] B5d 'a site is no longer a CONTIGUOUS SUBSTRING of its file at 1 of 3 sites' -- occurrences of each site in its own file: the STATE.md row 0, §14 1, H8 1.  Exactly the sites with 0 are non-contiguous
+  [CONFIRMED] B5e the record population: 37,866 -> 37,909 chars, +43.  The repair states 43 and states the `site_records.txt` diff as exactly two added lines; the diff is +2/-0 line(s)
+  [CONFIRMED] B5f the residue, re-derived: 37,909 of 320,509 chars of the three files are inside a record (11.8%); 282,600 are outside every record (88.2%).  The repair states 282 600 of 320 509 and 88.2%
+  [MEASURED ] B5g 'the negative control now MUTATES THE FILE and re-cuts the sites from it' -- `kind_matrix`, called from `negative_control`, routes all 36 of its attempts through `with_site` (1 call site(s) in the two functions).  The 19 further `figure_gate(...)` probes in `negative_control`'s OWN body are still handed MUTATED SITE TEXTS in memory.  Measured, not argued
+  >> FINDING F4: the repair's own commit message says THE NEGATIVE CONTROL NOW MUTATES THE FILE AND RE-CUTS THE SITES FROM IT.  The SITES x KINDS matrix it added does -- all 36 attempts go through `with_site`.  The 19 probes in `negative_control`'s own body do not: they still mutate site TEXT in memory, which is the construction the repair itself names as unable to exhibit a site-boundary defect ('a battery that mutates site texts in place cannot exhibit a site-boundary defect').  The claim is true of the part the repair built and is written of the whole function.  The 19 probes are figure-side, so nothing below them is known to be missed -- what is wrong is the scope of the sentence, which is this repair's own subject
+
+B6 -- DO NOT DISTURB: the byte census and the exchange census, re-derived
+-------------------------------------------------------------------------
+⚠️  A FIXTURE, declared: B6 calls the gate on strings in memory, as mg-ec07's
+A1 did.  B1 and B3 are the on-disk evidence.  The POPULATION here is mine --
+every character of every site, and every unordered pair of asserted figure
+slots with differing values -- and the seam that says what an asserted figure
+IS remains the artifact's `partition`, because that seam is the definition
+under audit.  The token counts are cross-checked against a naive regex of my
+own below.
+
+    the census lands at   : c7f9079
+    the control runs at   : eb600f7  (lossless not yet true)
+    the STATE.md row      13,410 chars   asserted figure slots  17 (`partition`)     9 distinct by my naive regex; it misses 2 distinct token(s) of the form it does not spell (+755, −875) -- the SIGNED-RUN form `+755`, which is why the seam stays theirs
+  [CONFIRMED] B6a the STATE.md row: 13410 of 13410 characters of this site cannot be substituted in silence
+  [MEASURED ] B6b-control the STATE.md row: the SAME instrument against the gate at eb600f7 catches 110 of 13410 (0.8%)
+    §14                   16,647 chars   asserted figure slots  16 (`partition`)    12 distinct by my naive regex; it misses 2 distinct token(s) of the form it does not spell (+755, −875) -- the SIGNED-RUN form `+755`, which is why the seam stays theirs
+  [CONFIRMED] B6a §14: 16647 of 16647 characters of this site cannot be substituted in silence
+  [MEASURED ] B6b-control §14: the SAME instrument against the gate at eb600f7 catches 112 of 16647 (0.7%)
+    H8                     7,852 chars   asserted figure slots  36 (`partition`)    19 distinct by my naive regex; it misses 2 distinct token(s) of the form it does not spell (+755, −875) -- the SIGNED-RUN form `+755`, which is why the seam stays theirs
+  [CONFIRMED] B6a H8: 7852 of 7852 characters of this site cannot be substituted in silence
+  [MEASURED ] B6b-control H8: the SAME instrument against the gate at eb600f7 catches 240 of 7852 (3.1%)
+  [CONFIRMED] B6a TOTAL 37909 of 37909 characters over the 3 sites fire at HEAD.  mg-ec07 confirmed 37 866 of 37 866; the population is now 37909 because the repair widened the STATE.md site by 43 characters.  REPORTING IT AS 37 866 WOULD BE THE STALE FIGURE ONE LEVEL UP
+  [CONFIRMED] B6b TOTAL 462 of 37909 fire against the pre-census gate at eb600f7 -- 1.2% against 100.0%.  mg-ec07 measured 462 of 37 866; the 43 new characters are a markdown header and delimiter carrying no figure token, so the control does not move
+
+      SITE RECORD           37909
+      FIGURE CENSUS           462
+      FIGURE ORDER            462
+  [CONFIRMED] B6c RECORD PARTITION fires on 0 of 37909 point mutations -- unfalsifiable by any document edit, which is why B3 had to bend the CODE to move it
+
+B6d -- 847 FIGURE EXCHANGES, RE-ENUMERATED
+------------------------------------------
+  [CONFIRMED] B6d 847 of 847 figure exchanges fire -- 127 of 127 at the STATE.md row / 116 of 116 at §14 / 604 of 604 at H8.  mg-ec07 confirmed 847 of 847 (127/116/604) and the two lines the STATE.md site gained carry no figure token, so the population does not move
+  [CONFIRMED] B6e on those 847: FIGURE ORDER refuted on 847, SITE RECORD green on 847, RECORD PARTITION green on 847.  The attribution mg-9207 established is undisturbed
+
+B7 -- THIS DELIVERABLE, CHECKED FOR THE DEFECT IT AUDITS
+--------------------------------------------------------
+  [CONFIRMED] B7a the probe file and the predictions precede the transcript in git: probe first appears at 7cee1a1, transcript at (uncommitted).  Re-derived from `git log`, not asserted
+    my own row-identifying comparisons: 8, of which 1 by substring
+      code/hodge_leverage_audit_7e39/audit_7e39.py:800  'SITE RECORD' in d
+  [CONFIRMED] B7b this instrument contains 1 substring comparison(s) against a row name, and each is B3a MEASURING the substring test itself -- declared, because measuring the defect is not committing it.  Every other row identification here goes through `row_kind`, my own heading parse
+
+BOTTOM LINE
+-----------
+  checks recorded : 47
+  measurements    : 8
+  confirmed       : 39
+  refuted         : 0
+  findings        : 5
+
+    F1: K11 @ the STATE.md row is reported `n/a` by the repair's own matrix with a reason phrased as a property of the site, and it is a property of the derivation: an 
+    F2: THE SWEEP'S OWN POPULATION IS A STALE FIGURE AT ITS OWN COMMIT.  `out_repair_6df0.txt` publishes '429 .py files swept'; the tree at the commit that ships that t
+    F5: THE SWEEP'S VOCABULARY IS A HAND LIST, WHICH IS A SCOPE NOBODY CHOSE ONE LEVEL UP.  `ROW_NAMES` in `repair_ec07.py` names 5 row headings by hand; the gate print
+    F3: 5 instance(s) of the construct are LIVE in the commit the repair landed in, after a repair that touched 1.  Each carries a declared disposition in the parent's 
+    F4: the repair's own commit message says THE NEGATIVE CONTROL NOW MUTATES THE FILE AND RE-CUTS THE SITES FROM IT.  The SITES x KINDS matrix it added does -- all 36 
+
+  the three site files, verify_landing.py and site_records.txt are restored byte-identical
