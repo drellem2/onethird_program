@@ -93,6 +93,8 @@ repairs are of **two different kinds**, because two of the five were not defects
 | `repair_835f.py:309` (`FIGURE CENSUS`) | `heading()` |
 | `audit_ec07.py:714` (`SITE RECORD`) | **`by_substring()`** — it *measures* the construct; `heading()` would delete the measurement |
 | `repair_ec07.py:303` (`SITE RECORD`) | **`by_substring()`** — mg-6df0's own `R1a`, the same measurement |
+| ⚠️ `audit_a318_repair.py:342` (`WRITTEN ONCE`) | `heading()` — **a sixth, in nobody's population.** It appeared only once the vocabulary came from the gate's own declaration; see §3 |
+| ⚠️ `audit_7e39.py:800` (`SITE RECORD`) | **`by_substring()`** — mg-7e39's own audit measures the construct too, and its file joined the tree after mg-6df0 counted |
 
 `by_substring` is a declared function whose name is what it does, and `substring_hits` recognises it
 **by name**. That is the point: **a reason on a line is not a structure.** A disposition has to be
@@ -115,8 +117,8 @@ than the disposition it replaced.
 
 **So the row grammar is repaired first**, the gate now **declares** `ROW_KINDS`, and a row whose
 heading ends in none of them makes the run **red**. `S2d` classifies what each repaired binding feeds
-— a printed line or a recorded verdict — and the one that feeds a verdict was **re-run by hand at
-this tree**: `12 of 12` and `10 of 12`, identical to the committed transcript, before and after
+— a printed line or a recorded verdict — and the one file whose bindings feed a verdict was **re-run
+by hand at this tree**: `12 of 12` and `10 of 12`, identical to the committed transcript, before and after
 (`code/hodge_leverage_repair_3f3b/out_a318_rerun.txt`).
 
 **`out_audit_a318.txt` is deliberately NOT regenerated from that run.** The rest of it differs from
