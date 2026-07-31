@@ -1,0 +1,160 @@
+==========================================================================
+K1  THE PRE-REPAIR PREDICATE, RUN AGAINST THE SAME INPUTS
+==========================================================================
+
+Coverage that went backwards is invisible from the new side by construction:
+every forward-looking test passes, because the thing that would have
+complained is gone.  The only way to see it is to run the old predicate.
+
+--------------------------------------------------------------------------
+(i) THE TWO PREDICATES, DERIVED FROM THE LOG RATHER THAN WRITTEN DOWN
+--------------------------------------------------------------------------
+   `the predicate before this repair` is a claim about history, so it
+   is taken from history: the last commit that touched
+   g1_provenance.py, and then its first parent.  mg-76cc's own lib
+   carries that revision as a string literal, which is a figure that
+   cannot notice the file moving again.
+
+   the last commit touching code/branching_audit_58da/g1_provenance.py
+     4755d0292fc9  docs+repair: THE KERNEL HALF OF THE PREDICATE IS BACK AND G-3 IS SHUT ON FIVE — 
+   its first parent -- THE PRE-REPAIR PREDICATE
+     3bc2cf760ea2  evidence: PUBLISH THE POST-COMMIT MEASUREMENT, WITH THE ANCHOR QUALIFIED BY THE 
+   and one repair further back, for context
+     52aeaf430150  control+repair: THE ARC-WIDE `| tee` SWEEP, AND WHICH PAST GREENS DEPENDED ON A 
+
+   g1 at 3bc2cf76 vs g1 here : DIFFER
+   lib58da at 3bc2cf76 vs here : DIFFER
+
+   mg-76cc wrote e006581c for this revision.  That is a DIFFERENT
+   commit from the parent derived above, and the two agree only if
+   g1_provenance.py and lib58da.py are byte-identical at both.  Checked,
+   because if they are not then mg-76cc ran something other than the
+   predicate its patch replaced:
+     g1_provenance.py         at e006581c vs at 3bc2cf76 : IDENTICAL
+     lib58da.py               at e006581c vs at 3bc2cf76 : IDENTICAL
+
+--------------------------------------------------------------------------
+(ii) THE INPUTS, DECLARED BEFORE ANY OF THEM IS RUN
+--------------------------------------------------------------------------
+   Each is one file changed AS A COMMIT in a clone of this branch.  A
+   commit, because g1 reads c1 and the kernel with `git show`: an edit
+   left in the working tree reaches nothing and comes back silent for a
+   reason that has nothing to do with the predicate.
+
+   `moves the measurement?` is about the tree AS IT WOULD STAND -- both
+   files as committed -- and is declared here, not observed later.
+
+     input                                      moves?   on whose  what it is
+     unmodified -- NULL                         no       mg-76cc   the tree as it stands
+     kern_a218.py: dim L(n,p) one too big       YES      mg-76cc   the measuring half, in the kernel -- mg-957f's F-1
+     c1_branching.py: vertex dims one too big   YES      mg-76cc   the measuring half, in the script -- mg-7e58's probe
+     c1_branching.py: a comment appended        no       mg-76cc   the file sha moves and nothing else does
+     c1_branching.py: a line past section (iii) no       mg-76cc   an edit in the COMPARING half
+     kern_a218.py: a comment appended           no       mg-e34a   the kernel's sha moves and nothing else does
+     THE CANCELLING PAIR: kern +1 and c1 -1     no       mg-e34a   both files move, the measurement does NOT
+
+--------------------------------------------------------------------------
+(iii) EVERY INPUT, EVERY PREDICATE REVISION
+--------------------------------------------------------------------------
+   Each pinned revision travels WITH ITS OWN lib58da, under a module
+   name of its own: mg-76cc changed lib58da.run_c1's signature in the
+   same commit as g1, and a pre-repair predicate run against the
+   repaired library is a third thing that never existed.
+   g1_provenance.py in the clone is never modified.
+
+   input                                      moves  before mg-7e58   BEFORE REPAIR    this repair
+                                              meas?  exit self find  exit self find  exit self find
+     unmodified -- NULL                         no     1    0    1     0    0    0     0    0    0    
+     kern_a218.py: dim L(n,p) one too big       YES    1    0    2     0    0    0     1    1    3    
+     c1_branching.py: vertex dims one too big   YES    1    0    1     1    1    3     1    1    4    
+     c1_branching.py: a comment appended        no     1    0    1     0    0    0     0    0    0    
+     c1_branching.py: a line past section (iii) no     1    0    1     0    0    0     0    0    0    
+     kern_a218.py: a comment appended           no     1    0    2     0    0    0     0    0    0    
+     THE CANCELLING PAIR: kern +1 and c1 -1     no     1    0    2     1    1    3     1    2    5    
+
+   population: the 7 inputs above x the 3 predicate revisions = 21 runs.
+
+--------------------------------------------------------------------------
+(iv) THE THREE BUCKETS, PER INPUT, UNFILTERED
+--------------------------------------------------------------------------
+   OLD = the predicate at 3bc2cf76, the parent of this repair.  NEW = the
+   predicate this repair ships.  EVERY input is bucketed -- not only the
+   ones an input list calls a defect.  mg-76cc's own r3 restricts its
+   backwards set to inputs it has declared `real defects`, which makes
+   the answer depend on the declaration; here the declaration is printed
+   beside the bucket and does not filter it.
+
+   input                                      exit grain          finding grain
+     unmodified -- NULL                         both silent         both silent
+     kern_a218.py: dim L(n,p) one too big       new fires, old silent new fires, old silent
+     c1_branching.py: vertex dims one too big   both fire           both fire
+     c1_branching.py: a comment appended        both silent         both silent
+     c1_branching.py: a line past section (iii) both silent         both silent
+     kern_a218.py: a comment appended           both silent         both silent
+     THE CANCELLING PAIR: kern +1 and c1 -1     both fire           both fire
+
+   INPUTS WHERE THE OLD PREDICATE FIRES AND THIS ONE IS SILENT
+     at the exit grain    : 0
+     at the finding grain : 0
+
+   AND WHAT EACH FINDING NAMES.  A bucket of `both fire` is not the
+   same as `the same thing was caught`.  Every file named by a
+   pre-repair finding, against every file named by a repaired one:
+
+     input                                      named by OLD             named by NEW
+     unmodified -- NULL                         -                        -
+     kern_a218.py: dim L(n,p) one too big       -                        kern_a218.py
+     c1_branching.py: vertex dims one too big   -                        c1_branching.py
+     c1_branching.py: a comment appended        -                        -
+     c1_branching.py: a line past section (iii) -                        -
+     kern_a218.py: a comment appended           -                        -
+     THE CANCELLING PAIR: kern +1 and c1 -1     -                        c1_branching.py, kern_a218.py
+
+   FILES A PRE-REPAIR FINDING NAMES AND NO REPAIRED FINDING DOES : 0
+
+--------------------------------------------------------------------------
+(v) THE OTHER DIRECTION -- WHAT THE REPAIRED PREDICATE FIRES ON
+--------------------------------------------------------------------------
+   A predicate restored by making it red on everything is not
+   restored.  Every input declared NOT to move the measurement, against
+   what EACH predicate did with it -- the pre-repair column is here so
+   that a pre-existing over-firing is not booked against this repair.
+
+     input                                      OLD findings   NEW findings
+     unmodified -- NULL                         0 silent       0 silent
+     c1_branching.py: a comment appended        0 silent       0 silent
+     c1_branching.py: a line past section (iii) 0 silent       0 silent
+     kern_a218.py: a comment appended           0 silent       0 silent
+     THE CANCELLING PAIR: kern +1 and c1 -1     3 FIRES        5 FIRES
+        NEW FINDING: c1's own measurement is not the same at 286d5030 and at HEAD when c1_branching.py is moved a
+        NEW FINDING: c1's own measurement is not the same at 286d5030 and at HEAD when kern_a218.py is moved and 
+        NEW FINDING: g1's measurement-grain check on 'c1 @ bf4dfe0b (unmodified -- NULL PROBE)': predicted silent
+        NEW FINDING: g1's measurement-grain check on 'kern @ bf4dfe0b (unmodified -- NULL PROBE)': predicted sile
+        NEW FINDING: g1's measurement-grain check on 'c1 @ HEAD with a line added past section (iii)': predicted 
+
+   INPUTS THAT DO NOT MOVE THE MEASUREMENT ON WHICH A FINDING IS
+   BOOKED :  by this repair 1,  by the pre-repair predicate 1
+      this repair : THE CANCELLING PAIR: kern +1 and c1 -1
+      pre-repair  : THE CANCELLING PAIR: kern +1 and c1 -1
+
+   population: the 5 of 7 inputs above declared in (ii) not to move the
+   measurement.  The declaration is checked, not assumed: k4 measures
+   the cancelling pair's measurement directly and prints the shas.
+
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   The pre-repair predicate was RUN, at 3bc2cf76, with its own lib58da,
+   against the same 7 inputs as the repaired one -- 5 of them mg-76cc's
+   own and 2 it does not have.
+
+   Backwards at the exit grain    : 0
+   Backwards at the finding grain : 0
+   Files named by an old finding and by no new one : 0
+   Inputs that do not move the measurement on which the repair fires : 1
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every clone, git read, subprocess run and transcript parse this script performs, plus the requirement that each input really change the file it claims to change and that each pinned revision really differ from the repaired one
+FINDINGS: 1, population: the per-input coverage comparison over the inputs x predicate revisions in (iii), at the exit grain and at the finding grain, and the file-naming comparison in (iv)
+   FINDING: the repaired predicate books a FINDING on 1 input(s) whose measurement at HEAD is byte-identical to the measurement at 286d5030: THE CANCELLING PAIR: kern +1 and c1 -1.  Its own `both together` row -- the only one of the three that asks the question the tree actually poses -- prints IDENTICAL on the same run, and the findings that outvote it come from half-moved trees that exist nowhere.  1 of these were already booked by the pre-repair predicate, so the class is not new; what is new is that mg-76cc's own rationale for the `both together` row NAMES this input and states the opposite outcome (k4 demonstrates it)
+TOTAL BAD: 1
