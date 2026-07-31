@@ -1,0 +1,113 @@
+==============================================================================
+J4  THE SCOPE QUESTION -- uniform repair, and whether it is stated
+==============================================================================
+
+==============================================================================
+J4a  THE 34 SITES, ON DISK -- what each became
+==============================================================================
+
+  pipelines at bee07a1 in the runners that were repaired: 34
+
+  ...now a redirect WITH an explicit `||` guard : 34
+  ...now a plain redirect, no guard on the line : 0
+  ...no redirect to that file at all            : 0
+  Q19  predicted 34 of 34 repaired                  measured 34 of 34                 as predicted
+
+==============================================================================
+J4b  IS THE DISTINCTION MADE, AND IS THE UNIFORM REPAIR STATED?
+==============================================================================
+
+  [yes] the 13 unaffected are NAMED individually          code/runner_exit_c2b3/out_k2_consume.txt
+  [yes] `Repaired anyway` appears beside them             code/runner_exit_c2b3/out_k2_consume.txt
+  [yes] the split 21/34 is in the reader-facing document  docs/OneThird-RunnerExit-ArcWideSweep.md
+  [yes] the reader-facing document says the unaffected sites were repaired anyway  docs/OneThird-RunnerExit-ArcWideSweep.md
+  [yes] the COMMIT MESSAGE carries the distinction        commit 52aeaf4 message
+
+  Q20  predicted the uniform repair IS stated       measured 5 of 5 present           as predicted
+  READING.  The sweep does not fix 34 sites and describe 21.  It names
+  the 13 individually, says which clause of the conjunction each fails,
+  and writes `Repaired anyway` next to them.  On item 4 of the
+  assignment the sweep is CLEAN, and this section exists to say so with
+  a measurement rather than to hunt for a fault that is not there.
+
+==============================================================================
+J4c  THE OTHER HALF OF WHAT `tee` DID -- the diagnosis on stdout
+==============================================================================
+
+  `cmd | tee f` writes the step's output to f AND to the runner's
+  stdout, on success and on failure alike.  `cmd > f` writes only f.
+  The sweep measured that f does not move (K3d, K3f).  That is the
+  file.  The other half is the terminal: on the FAILING path, does the
+  diagnosis still reach the runner's stdout?  It does only if the `||`
+  guard `cat`s the transcript.  Measured per site:
+
+  runner                                    transcript              guard cats?
+  code/branching_audit_2060/run_all.sh       out_b0_repro.txt       yes
+  code/branching_audit_2060/run_all.sh       out_selftest.txt       yes
+  code/branching_locate_db09/run_all.sh      out_selftest.txt       yes
+  code/face_geometry/run_all.sh              controls_output.txt    yes
+  code/face_geometry/run_all.sh              probe_output_n6.txt    yes
+  code/face_geometry_audit_1c80/run_all.sh   out_gates.txt          yes
+  code/face_geometry_audit_1c80/run_all.sh   out_antichain.txt      yes
+  code/face_geometry_audit_1c80/run_all.sh   out_n6.txt             yes
+  code/face_geometry_audit_1c80/run_all.sh   out_witness.txt        yes
+  code/face_geometry_audit_1c80/run_all.sh   out_claims.txt         yes
+  code/face_geometry_audit_1c80/run_all.sh   out_mutations.txt      yes
+  code/face_geometry_audit_6653/run_all.sh   out_verify_claims.txt  yes
+  code/face_geometry_audit_6653/run_all.sh   out_attack_banner.txt  yes
+  code/face_geometry_audit_e720/run_all.sh   out_verify.txt         yes
+  code/face_geometry_audit_e720/run_all.sh   out_attack.txt         yes
+  code/face_geometry_landing_7d5a/run_all.sh out_verify.txt         yes
+  code/face_geometry_landing_7d5a/run_all.sh out_attack_banner_after_repair.txt yes
+  code/face_geometry_landing_da45/run_all.sh out_verify.txt         yes
+  code/landscape_audit_d673/run_all.sh       out_populations.txt    yes
+  code/landscape_audit_d673/run_all.sh       out_spectrum.txt       yes
+  code/landscape_audit_d673/run_all.sh       out_e6_e8_m0.txt       yes
+  code/landscape_audit_d673/run_all.sh       out_identifications.txt yes
+  code/landscape_audit_d673/run_all.sh       out_addenda.txt        yes
+  code/species_7d75/run_all.sh               out_selftest.txt       yes
+  code/species_audit_73df/run_all.sh         out_selftest.txt       yes
+  code/species_audit_7dd3/run_all.sh         out_selftest.txt       yes
+  code/species_audit_a61f/run_all.sh         out_selftest.txt       yes
+  code/species_extent_audit_6cb9/run_all.sh  out_selftest.txt       yes
+  code/species_extent_d633/run_all.sh        out_selftest.txt       yes
+  code/species_remainder_f8fa/run_all.sh     out_selftest.txt       yes
+  code/species_remainder_f8fa/run_all.sh     out_w1_opposite.txt    yes
+  code/species_remainder_f8fa/run_all.sh     out_w2_typemismatch.txt yes
+  code/species_remainder_f8fa/run_all.sh     out_w3_scope.txt       yes
+  code/species_repair_a4ef/run_all.sh        out_selftest.txt       yes
+
+  sites where a failing step's own output no longer reaches stdout: 0
+  Q21  predicted 34 of 34 cat on failure            measured 34 of 34                 as predicted
+
+  Every repaired site cats its transcript inside the guard, so the
+  failing path prints what `tee` printed.  The sweep does not claim
+  this and does not measure it; it is nonetheless true, and being
+  true by construction at 34 of 34 is worth a row rather than an
+  assumption.
+
+==============================================================================
+J4d  THE GENERAL FORM, ON J4
+==============================================================================
+
+   1. J4 reads text and runs nothing, so it cannot discard an exit
+      status -- that is the branch that cannot exhibit the defect, and
+      the reason is that there is no subprocess in this file at all.
+      Verified in `selftest05eb.py` section S5 against these bytes.
+   2. Its own headline is DERIVED from its rows: `guarded + plain`
+      against `len(sites)`, both computed here, never typed in.
+   3. J4b is written to be able to come back CLEAN, and does.  A scope
+      audit that can only report faults is not measuring anything.
+
+==============================================================================
+J4 TOTAL BAD: 0
+==============================================================================
+
+EXTENT.  It counts (a) a pipeline site from the pin with no redirect on
+disk, (b) a missing element of the sweep's own scope statement, (c) a
+repaired site whose guard drops the failing step's output.  It ranges
+over the 34 pipeline sites in the 17 repaired runners, and over the
+five specific sentences J4b names -- not over the sweep's prose as a
+whole, which no instrument here reads.
+
+PREDICTIONS: 3 of 3 as predicted, 0 MISSED (none)

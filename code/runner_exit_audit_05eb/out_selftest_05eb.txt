@@ -1,0 +1,104 @@
+/Users/daniel/.pogo/polecats/05eb/code/runner_exit_audit_05eb/lib05eb.py:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+  A `|` inside quotes is an argument, not a pipe -- `grep -h 'A\|B' f` is one
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+==============================================================================
+S  SELF-TEST -- every rule in both senses
+==============================================================================
+
+==============================================================================
+S1  command_lines -- comments are not commands, commands are
+==============================================================================
+
+  [ok ] only line 4 is a command: shebang and comment are not            got [4]
+  [ok ] an indented comment is not a command line                        got [(2, 'cmd')]
+  [ok ] a blank line is not a command line                               got [(3, 'cmd')]
+
+==============================================================================
+S2  tee_pipelines -- both senses
+==============================================================================
+
+  [ok ] IN : a real pipeline is found                                    got [1]
+  [ok ] IN : `|tee` with no space is found                               got [1]
+  [ok ] IN : `| tee -a` is found                                         got [1]
+  [ok ] OUT: a comment saying `| tee` is NOT a pipeline                  got []
+  [ok ] OUT: `||` is not a pipe                                          got []
+  [ok ] OUT: the word `tee` alone is not a pipeline                      got []
+  [ok ] OUT: `| teexyz` is not `tee`                                     got []
+
+==============================================================================
+S3  bare_grep_tee -- the TICKET's instrument, which must be laxer
+==============================================================================
+
+  [ok ] the bare grep DOES count a comment (that is the disagreement)    got [1]
+  [ok ] ...and my parser does not, on the same bytes                     got []
+  [ok ] the bare grep finds nothing where there is nothing               got []
+
+==============================================================================
+S4  has_set_e / has_pipefail -- both senses, including the combined form
+==============================================================================
+
+  [ok ] IN : `set -e`                                                    got True
+  [ok ] IN : `set -eu`                                                   got True
+  [ok ] IN : `set -euo pipefail`                                         got True
+  [ok ] IN : `set -o errexit`                                            got True
+  [ok ] OUT: absent                                                      got False
+  [ok ] OUT: `# set -e` in a comment                                     got False
+  [ok ] IN : `set -o pipefail`                                           got True
+  [ok ] IN : `set -euo pipefail` -- THE COMBINED FORM.  This is the case got True
+  [ok ]      `libc2b3.PIPEFAIL_RE` cannot match, and it is the whole of J1e got False
+  [ok ] OUT: absent                                                      got False
+  [ok ] OUT: a comment about pipefail                                    got False
+
+==============================================================================
+S5  redirect_guard_sites -- and whether the guard cats
+==============================================================================
+
+  [ok ] two guarded sites found, the unguarded redirect is not one       got [('out_a.txt', True), ('out_b.txt', False)]
+  [ok ] OUT: a comment showing the idiom is not a site                   got []
+
+==============================================================================
+S6  THIS TREE, CHECKED BY THIS TREE'S OWN RULES
+==============================================================================
+
+  [ok ] this runner contains NO `| tee` pipeline                         got []
+  [ok ] IN : the any-pipeline rule DOES see a real pipe                  got [1]
+  [ok ] OUT: a `\|` alternation inside single quotes is NOT a pipe       got []
+  [ok ] OUT: `||` is not a pipe                                          got []
+  [ok ] this runner contains NO pipeline of ANY kind -- the branch that cannot exhibit the defect got []
+  [ok ] this runner sets `set -e`                                        got True
+  [ok ] every step in this runner is a redirect with a guard that CATS, so a failing section prints got []
+  [ok ] ...and there are 4 such steps (j1..j4) plus the self-test = 5    got 5
+
+==============================================================================
+S7  THE INSTRUMENTS THEMSELVES -- no shell, therefore no pipeline
+==============================================================================
+
+  Parsed, not grepped.  A grep for the string `shell=True` scores this
+  file BAD for the sentence you are reading, and scored four files BAD
+  on its first run for saying in a docstring that they do not use it.
+  That is the header-comment-counted-as-a-pipeline error, committed by
+  the instrument that exists to report it, so the rule now reads the
+  SYNTAX TREE: a `shell=` keyword on a real call, and a real call to
+  `os.system`.  Both senses are driven below.
+
+  [ok ] IN : the rule DOES see a real `shell=True` call                  got (1, 0)
+  [ok ] IN : the rule DOES see a real `os.system` call                   got (0, 1)
+  [ok ] OUT: a docstring naming both constructs is not either of them    got (0, 0)
+  [ok ] j1_census.py             no `shell=` and no `os.system` call     got (0, 0)
+  [ok ] j2_retro.py              no `shell=` and no `os.system` call     got (0, 0)
+  [ok ] j3_control.py            no `shell=` and no `os.system` call     got (0, 0)
+  [ok ] j4_scope.py              no `shell=` and no `os.system` call     got (0, 0)
+  [ok ] lib05eb.py               no `shell=` and no `os.system` call     got (0, 0)
+  [ok ] selftest05eb.py          no `shell=` and no `os.system` call     got (0, 0)
+  [ok ] sitecustomize_mg05eb.py  no `shell=` and no `os.system` call     got (0, 0)
+
+==============================================================================
+S TOTAL BAD: 0   (checks: 44)
+==============================================================================
+
+EXTENT.  These 44 checks range over the seven rules in `lib05eb.py`,
+each driven with an input it must accept and an input it must reject,
+over this tree's own `run_all.sh` bytes, and over every `.py` in this
+directory for the two constructs that could reintroduce a shell.  They
+do NOT range over the correctness of the JUDGEMENTS in j1-j4 -- those
+are measurements, and each states its own extent.
