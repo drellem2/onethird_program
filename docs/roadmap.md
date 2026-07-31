@@ -226,23 +226,27 @@ because I made the opposite call at 17:35 on a misread and had to retract it.**
 **So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
 on an audit that measured its extents in both directions — that, not fatigue, is the signal.
 
-## Now (in flight) — 2026-07-30 23:45
+## Now (in flight) — 2026-07-31 04:25
 
-- **mg-821e** — three open sites at **three different grains**: a **contingent extent** ("every regular file",
-  true only because no tree has a subdirectory), a **check called by 0 of 3 `run_all.sh`**, and an **anchor that
-  deletes green at the reader-facing site**. Amended mid-flight: for the uncalled check, **ask whether the thing
-  it guards can be removed before wiring it**.
-- **mg-9220** — re-run the deletion test **per return**, not per gate, and delete what is inert.
-- **mg-58da** — separate the two questions about `c1_branching.py`: are the 24 findings real (the parser now),
-  and does the 198-cell reproduction stand (provenance — re-run at the old revision).
-- **mg-8aae** — audit of the figure-gate repair.
+- **mg-7522** — the `| tee` sweep's population was defined by **filename**; two runners with 8 pipelines still
+  swallow at HEAD. Redefine the population by **property**, re-derive the counts, and re-establish the
+  retroactive clearance over the corrected population.
+- **mg-ff3e** — the census invariance **moved** (position-aware for figures, not labels). Fix the **set**, not
+  the next field.
+- **mg-e34a**, **mg-eaef** — audits of the kernel-half repair and the instrument-bound repair.
 
-## Next (gated, releases automatically)
+## Next (gated / queued)
 
-- **mg-c4c8** (on mg-9220), **mg-321d** (on mg-58da), and mg-821e's own audit — all pre-filed in the same action
-  as their parents.
+- **mg-6ef4** (audit of the walk-bound repair) — released, awaiting a dispatch slot.
+- **mg-dee4** (on mg-7522), **mg-ec07** (on mg-ff3e) — pre-filed in the same action as their parents.
 - **mg-344a** — Daniel workspace, `assignee=human`.
-- **Held, not forgotten:** the quasi-hereditary follow-up, while D10 is unverified.
+- **Blocked on the rebuild, not forgotten:** the template-effect measurement. The nightly redeploy failed
+  (exit 7, drain stalled), so **mg-2375 and mg-ce5e are merged and not installed, and the treated population is
+  empty.** Next window is 03:00Z tomorrow.
+
+*(Rot note: this section was 4h39m stale — 6 of 7 IDs completed. Cause worth recording: I committed to running
+the rot check every cycle and then ran the **audit-successor sweep** instead. Two different checks; running the
+adjacent one felt like compliance. **A substituted check is a skipped check.**)*
 
 ## Later (decided, not yet filed)
 - `onethird_program` ships two `controls.py` and two `run_all.sh` and has **no CI of any kind** — by the
