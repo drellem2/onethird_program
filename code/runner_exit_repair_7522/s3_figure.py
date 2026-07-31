@@ -166,68 +166,111 @@ bare = len([p for p, s in runners_pin.items() if L.bare_grep_tee(s)])
 tee34 = sum(len(L.tee_pipelines(s)) for s in runners_pin.values())
 tee17 = len([p for p, s in runners_pin.items() if L.tee_pipelines(s)])
 
-# (file substring, line, verdict, how it was checked)
+# THE DISPOSITION RULES.  Keyed on a SUBSTRING OF THE LINE, not on a line
+# number.  The first draft of this table was keyed on line numbers and this
+# very repair moved every one of them by adding its own correction notes -- a
+# key that the act of repairing invalidates is the same failure as a census
+# pinned to a revision that the act of landing invalidates, one file over.
+#
+# Each rule is (file substring, line substring, verdict, how it was checked).
+# Coverage is checked in BOTH directions: every mechanical hit must match a
+# rule, and every rule must match a hit.  A rule that has rotted is as much a
+# hole as a hit that has none.
 DISP = [
-    ("README.md", 26, "HOLDS",
-     "bare grep over run_all.sh @%s re-derives %d" % (L.PINNED, bare)),
-    ("README.md", 28, "WAS WRONG, NOW FIXED",
-     "the figure is 1 and the instrument said 0; S3b re-derives 1"),
-    ("OUTCOMES.md", 8, "HOLDS ABOUT ITS POPULATION",
-     "%d tee'd pipelines in %d run_all.sh @%s; S1d states what the "
-     "population excludes and S2a reads the rest" % (tee34, tee17, L.PINNED)),
-    ("OUTCOMES.md", 13, "NOT A CLAIM",
+    ("OUTCOMES.md", "34 tee'd targets", "HOLDS ABOUT ITS POPULATION",
+     "%d tee'd pipelines in %d run_all.sh @%s; S1d states what that population "
+     "excludes and S2a reads the rest" % (tee34, tee17, L.PINNED)),
+    ("OUTCOMES.md", "exactly 3", "NOT A CLAIM",
      "a PREDICTION with its miss kept as written -- 3 predicted, 8 measured"),
-    ("OUTCOMES.md", 15, "HOLDS ABOUT ITS POPULATION",
-     "17 is the name-defined runner count; over `*.sh` with a real `| tee` "
-     "it is 19, and the extra 2 are S2's subject"),
-    ("ArcWideSweep.md", 43, "HOLDS", "same measurement as README.md:26"),
-    ("ArcWideSweep.md", 45, "WAS WRONG, NOW FIXED", "same as README.md:28"),
-    ("ArcWideSweep.md", 99, "HOLDS",
-     "'all 34 carried a verdict' -- %d is the tee'd-pipeline count @%s"
-     % (tee34, L.PINNED)),
-    ("ArcWideSweep.md", 229, "WAS WRONG, NOW FIXED",
-     "'all 64' is %d of %d; S3c" % (n_pin_sh, n_pin_runs)),
-    ("k1_census.py", None, "WAS WRONG, NOW FIXED",
-     "the docstring said 'confirmed exactly' about the number its own "
-     "transcript marked DIFFERS"),
-    ("k2_consume.py", 6, "NOT A CLAIM",
-     "a quotation of the ticket's own words, inside the docstring"),
-    ("k2_consume.py", 266, "HOLDS", "'all 34 carried a verdict', as above"),
-    ("k3_retro.py", 24, "NOT A CLAIM",
-     "a description of what a 0 would mean, not an assertion that it was 0"),
-    ("k3_retro.py", 103, "HOLDS",
-     "a quotation of mg-2060's own claim text, being dispositioned"),
-    ("PREDICTIONS.md", 23, "NOT A CLAIM",
-     "a PREDICTION written before the instrument existed; OUTCOMES:8 is "
-     "where it becomes a claim and is dispositioned there"),
-    ("PREDICTIONS.md", 51, "NOT A CLAIM",
+    ("OUTCOMES.md", "at all 17 runners", "HOLDS ABOUT ITS POPULATION",
+     "17 is the name-defined runner count; over `*.sh` with a real `| tee` it "
+     "is 19, and the extra 2 are S2's subject"),
+    ("OUTCOMES.md", "docstring all reported", "WAS WRONG, NOW FIXED",
+     "this file's `pipefail` row read AGREES while the instrument's own "
+     "transcript read DIFFERS; mg-7522's note is the correction"),
+    ("OUTCOMES.md", "the population of every number", "SCOPE NOTE ADDED",
+     "not a wrong figure: mg-7522's note that every count in that section "
+     "is defined by a filename, which S1 measures"),
+    ("PREDICTIONS.md", "34 tee'd targets", "NOT A CLAIM",
+     "a PREDICTION written before the instrument existed; OUTCOMES is where "
+     "it becomes a claim and is dispositioned there"),
+    ("PREDICTIONS.md", "at exactly 3", "NOT A CLAIM",
      "the Q6 prediction that MISSED, kept as written"),
-    ("PREDICTIONS.md", 69, "NOT A CLAIM",
-     "the Q8 prediction; OUTCOMES:15 carries its result"),
-    ("run_all.sh", 17, "HOLDS",
-     "a stated runtime, not a measurement of the subject; the runner is "
-     "re-run by this repair and completes"),
+    ("PREDICTIONS.md", "reach is identical", "NOT A CLAIM",
+     "the Q8 prediction; OUTCOMES carries its result"),
+    ("README.md", "bare grep", "HOLDS",
+     "bare grep over run_all.sh @%s re-derives %d" % (L.PINNED, bare)),
+    ("README.md", "used to read", "WAS WRONG, NOW FIXED",
+     "the README's `pipefail` row; S3b re-derives the figure as 1 and the "
+     "old rule as 0 on the same bytes"),
+    ("k1_census.py", "docstring all said", "WAS WRONG, NOW FIXED",
+     "the docstring used to assert the figure its own transcript marked "
+     "DIFFERS; rewritten by mg-7522"),
+    ("k2_consume.py", "all 23 uniformly", "NOT A CLAIM",
+     "a quotation of the ticket's own words, inside the docstring"),
+    ("k2_consume.py", "all 34 carried a verdict", "HOLDS",
+     "%d is the tee'd-pipeline count @%s" % (tee34, L.PINNED)),
+    ("k3_retro.py", "past green is confirmed", "NOT A CLAIM",
+     "a description of what a 0 would mean, not an assertion that it was 0"),
+    ("k3_retro.py", "byte for byte", "HOLDS",
+     "a quotation of mg-2060's own claim text, being dispositioned"),
+    ("run_all.sh", "About 4 minutes", "HOLDS",
+     "a stated runtime, not a measurement of the subject"),
+    ("ArcWideSweep.md", "bare grep", "HOLDS",
+     "the same measurement as the README's row"),
+    ("ArcWideSweep.md", "printed `ticket 1", "WAS WRONG, NOW FIXED",
+     "the published document's `pipefail` row"),
+    ("ArcWideSweep.md", "all 34 carried a verdict", "HOLDS",
+     "%d is the tee'd-pipeline count @%s" % (tee34, L.PINNED)),
+    ("ArcWideSweep.md", "all 64", "WAS WRONG, NOW FIXED",
+     "the shebang sentence: `all 64` is %d of %d; S3c" % (n_pin_sh, n_pin_runs)),
 ]
 
-print("    %-22s %-24s %s" % ("artifact", "verdict", "how it was checked"))
-L.rows([("%s:%s" % (n, ln if ln else "docstring"), v, h)
-        for n, ln, v, h in DISP], (22, 24), indent="    ")
+def short(path):
+    """A label a reader can scan: the basename, with the arc-wide document
+    prefix dropped so one long filename does not set the column width."""
+    return os.path.basename(path).replace("OneThird-RunnerExit-", "")
+
+
+matched = {i: [] for i in range(len(DISP))}
+unmatched_hits = []
+table = []
+for p, ln, line in CLAIMS:
+    idx = [i for i, d in enumerate(DISP) if d[0] in p and d[1] in line]
+    if not idx:
+        unmatched_hits.append((p, ln, line))
+        table.append(("%s:%d" % (short(p), ln), "UNDISPOSITIONED",
+                      "*** no rule matches this line ***"))
+        continue
+    for i in idx:
+        matched[i].append((p, ln))
+    d = DISP[idx[0]]
+    table.append(("%s:%d" % (short(p), ln), d[2], d[3]))
+
+print("    %-22s %-26s %s" % ("artifact", "verdict", "how it was checked"))
+L.rows(table, (22, 26), indent="    ")
 print()
-n_fixed = len([d for d in DISP if d[2].startswith("WAS WRONG")])
-print("  %d claims: %d hold, %d are not claims, %d WERE WRONG and are fixed"
-      % (len(DISP),
-         len([d for d in DISP if d[2].startswith("HOLDS")]),
-         len([d for d in DISP if d[2] == "NOT A CLAIM"]), n_fixed))
+counts = {}
+for _a, v, _h in table:
+    counts[v] = counts.get(v, 0) + 1
+print("  %d claims: %s"
+      % (len(CLAIMS), ", ".join("%d %s" % (n, k)
+                                for k, n in sorted(counts.items()))))
 print()
-print("  COVERAGE.  S3a found %d lines mechanically and %d rows are"
-      % (len(CLAIMS), len(DISP)))
-print("  dispositioned above -- one per hit.  `k1_census.py`'s row is keyed on")
-print("  the FILE rather than on a line number, because this very repair")
-print("  rewrote that docstring and a line-numbered key would rot on contact.")
-if len(DISP) < len(CLAIMS):
-    BAD += 1
-    print("  *** fewer dispositions than mechanical hits -- something is")
-    print("      uncovered and this is the row that says so ***")
+print("  COVERAGE, BOTH DIRECTIONS.")
+print("      mechanical hits with no rule                 %3d"
+      % len(unmatched_hits))
+for p, ln, line in unmatched_hits:
+    print("          *** %s:%d  %s" % (p, ln, line[:60]))
+dead = [DISP[i] for i, v in matched.items() if not v]
+print("      rules matching no hit (rotted)               %3d" % len(dead))
+for d in dead:
+    print("          *** %s / %r" % (d[0], d[1]))
+if unmatched_hits or dead:
+    BAD += len(unmatched_hits) + len(dead)
+    print("      *** something is uncovered, and this is the row that says so")
+else:
+    print("      Every hit has a rule and every rule has a hit.")
 
 # ---------------------------------------------------------------------------
 L.hdr("S3e  THE PROSE AND THE INSTRUMENT NOW AGREE -- checked, not asserted")

@@ -73,9 +73,11 @@ disagreement is exhibited rather than described.
 **The general form.** *"Confirmed exactly", "verified", "byte-identical" mark
 where the author stopped looking, so they are a reason to check FIRST.* Applied:
 `s3_figure.py` derives the sweep's reader-facing artifacts from
-`git show --name-only 52aeaf4`, finds **18** strength-marked numeric claims, and
-dispositions every one. **Four were wrong** — the two `pipefail` rows, the
-`k1_census.py` docstring, and *"the shebang is `#!/bin/sh` on all 64 runners
+`git show --name-only 52aeaf4`, finds **20** strength-marked numeric claims, and
+dispositions every one — with coverage checked in **both** directions, so a hit
+with no rule and a rule with no hit are each an error. **Five were wrong:** the
+`pipefail` row in the README, in `OUTCOMES.md`, and in the published document;
+`k1_census.py`'s docstring; and *"the shebang is `#!/bin/sh` on all 64 runners
 (measured)"*, which is **59 of 64**. That last one is the same defect with the
 roles reversed: `k2_consume.py` printed *"on 59 of the 64"* and the document
 rounded it up to `all`.

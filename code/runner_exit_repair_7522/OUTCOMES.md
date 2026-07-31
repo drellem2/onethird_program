@@ -21,8 +21,8 @@
 | **Q15** | `pipefail` under mg-c2b3's regex: 0 | **MEASURED FIRST — not scored** |
 | **Q16** | under the repaired regex: 1 | **MEASURED FIRST — not scored** |
 | **Q17** | `#!/bin/sh` on 59 of 64 | **MEASURED FIRST — not scored** |
-| **Q18** | 10–20 strength-marked numeric claims | **HIT** — 18 |
-| **Q19** | 4 of them wrong | **HIT** |
+| **Q18** | 10–20 strength-marked numeric claims | **HIT** — 20 |
+| **Q19** | 4 of them wrong | **MISS — 5** |
 | **Q20** | 4700 appears in exactly one 2×2 cell | **HIT** — (HEAD, runtime-path) |
 | **Q21** | unpinning alone is not sufficient | **HIT** |
 | **Q22** | the pinned comparison sees strictly more | **HIT** — 154 vs 11 |
@@ -30,6 +30,14 @@
 | **Q24** | this tree's runner: 0 pipelines, every step guarded | **HIT** — 0, 6 of 6 |
 | **Q25** | 0 real `shell=True` / `os.system(` | **HIT** |
 | **Q26** | 0 USES of a strength marker, MENTIONs > 0 | **HIT** — 0 and 19 |
+
+**Q19, kept as written.** I predicted **4** wrong figures and the probe
+dispositions **5**. The one I did not predict is `OUTCOMES.md`'s own `pipefail`
+row, which reads `AGREES` for a number the same tree's committed transcript
+marks `DIFFERS`. mg-05eb named *"four reader-facing artifacts"* saying
+*"confirmed exactly"*; `OUTCOMES.md` said `AGREES` instead, so it fell outside
+the phrase and I inherited the boundary along with the count. **The miss is an
+instance of the finding it was predicting** — I keyed on a form of words.
 
 **Q23, kept as written.** I predicted *"2 `SWALLOWED` rows"* and the probe
 measures **3 lines containing the word**. Two are the claim rows —
