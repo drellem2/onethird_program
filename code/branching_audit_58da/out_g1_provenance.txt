@@ -13,8 +13,8 @@ mathematics being 'untouched': the script is run and its own output is read.
       docs+audit: independent audit of the mg-db09 repair (mg-e8b8 / 2e66d03) — THE WITHDRAWAL IS REAL
    ed9cde49ab81  mg-13b2 -- the repair that widened one script
       docs+repair: THE VERTEX COLUMN REPORTS THE SET AND THE LABELS ARE MEASURED — the column that pri
-   ef38841710ed  HEAD of this branch
-      docs+audit: independent audit of the mg-58da repair (673b4c0) — THE TWO QUESTIONS ARE KEPT SEPAR
+   e006581c2e11  HEAD of this branch
+      docs+audit: independent audit of the mg-7e58 repair (4372fae) — THE ATTRIBUTION IS RIGHT AT 17 O
 
 --------------------------------------------------------------------------
 (ii) c1'S READ PATH, FOUND IN ITS SOURCE RATHER THAN ASSUMED
@@ -24,7 +24,7 @@ mathematics being 'untouched': the script is run and its own output is read.
 
    the one external file c1 reads:  code/branching_locate_db09/out_t1_tl.txt
 
-   commits touching each part of the reproduction, 286d5030..ef388417:
+   commits touching each part of the reproduction, 286d5030..e006581c:
       c1_branching.py  (the script)                  673b4c00
       kern_a218.py  (its kernel -- the meas)         NONE
       out_t1_tl.txt  (the target it compares)        ed9cde49
@@ -87,11 +87,27 @@ mathematics being 'untouched': the script is run and its own output is read.
    instrument, are diffed byte for byte, together with its own 24 vertex sets
    parsed back out of them.
 
-   target form                          c1 @ 286d5030      c1 @ ef388417
-     the 286d5030 target (COUNT form)   a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
-       125 lines, c1's own 24 vertex sets equal
-     the HEAD target (SET form)         a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
-       125 lines, c1's own 24 vertex sets equal
+   AND THE MEASURING HALF IS TWO FILES, so the population here is two and each
+   is named (mg-76cc, on mg-957f's F-1).  c1_branching.py and kern_a218.py are
+   moved to HEAD ONE AT A TIME with the other held at 286d5030, so a finding says
+   WHICH file moved the measurement; then both are moved together, because two
+   changes that cancel would pass each half on its own.
+
+   target form / half moved to HEAD              @ 286d5030        @ HEAD
+     the 286d5030 target (COUNT form) -- 125 lines at 286d5030
+       c1_branching.py (the script) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
+         c1's own 24 vertex sets equal
+       kern_a218.py (its kernel) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
+         c1's own 24 vertex sets equal
+       both together (cancellation) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
+         c1's own 24 vertex sets equal
+     the HEAD target (SET form) -- 125 lines at 286d5030
+       c1_branching.py (the script) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
+         c1's own 24 vertex sets equal
+       kern_a218.py (its kernel) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
+         c1's own 24 vertex sets equal
+       both together (cancellation) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
+         c1's own 24 vertex sets equal
 
    the file grain, for contrast -- from (ii), and nothing is concluded
    from it:
@@ -100,24 +116,31 @@ mathematics being 'untouched': the script is run and its own output is read.
 
    THE FILE MOVED AND THE MEASUREMENT DID NOT.  c1_branching.py's
    sha differs across the range and its measurement is byte-for-byte
-   the same on both target forms, so mg-58da's edit is confined to
-   the comparing half and the 198 cells stand as re-run in (iii).
+   the same on both target forms, with kern_a218.py moved alone and
+   with both moved together, so mg-58da's edit is confined to the
+   comparing half and the 198 cells stand as re-run in (iii).
 
    AND THE CHECK IS SHOWN FIRING -- a check that cannot go red certifies
    nothing, and 'g1 stopped exiting 1' is exactly what silencing it
-   would look like.  Three c1 sources, direction predicted first:
+   would look like.  The probes run over BOTH files of the measuring
+   half, one varied at a time, direction predicted first:
 
-   c1 source                                        predicted  actual
-     c1 @ ef388417 (unmodified -- NULL PROBE)         silent     silent   HIT
+   measuring half varied                            predicted  actual
+     c1 @ e006581c (unmodified -- NULL PROBE)         silent     silent   HIT
+       why: the tree as it stands; must not fire
+     kern @ e006581c (unmodified -- NULL PROBE)       silent     silent   HIT
        why: the tree as it stands; must not fire
      c1 @ HEAD with the vertex DIMENSIONS off by one  FIRES      FIRES    HIT
-       why: the measuring half really moved; must fire
+       why: the measuring half really moved, in the script; must fire
      c1 @ HEAD with a line added past section (iii)   silent     silent   HIT
        why: the file moved, the measurement did not; must not fire
+     kern @ HEAD with dim L(n,p) off by one           FIRES      FIRES    HIT
+       why: the measuring half really moved, in the kernel; must fire
 
-   probes whose direction was predicted correctly : 3 of 3
-   population: the 3 c1 sources above, each run against the HEAD target
-   and diffed against c1 @ 286d5030 on the same target.
+   probes whose direction was predicted correctly : 5 of 5
+   population: the 5 (c1, kernel) pairs above -- 3 over c1 and 2 over
+   kern_a218.py -- each run against the HEAD target and diffed against
+   c1 @ 286d5030 WITH ITS OWN KERNEL on the same target.
 
 --------------------------------------------------------------------------
 VERDICT ON QUESTION B, derived from the rows above and not asserted
@@ -138,6 +161,6 @@ VERDICT ON QUESTION B, derived from the rows above and not asserted
    file was rewritten.  g2 redoes it.
 
 --------------------------------------------------------------------------
-SELF-ERRORS: 0, population: the 12 git reads and the one read-path enumeration this script needs
-FINDINGS: 0, population: the 3 populations of the re-run, its exit code, its byte-comparison against the committed record, the 2 measurement-invariance checks across targets in (iv), the 2 measurement-invariance checks across script revisions in (v) -- one per target form -- and the 3 direction probes on (v)'s own check.  The 2 file-sha comparisons are REPORTED and are not in this population (mg-7e58 / mg-321d G-1)
+SELF-ERRORS: 0, population: the 22 git reads this script and the re-runs it makes actually performed -- COUNTED, not written -- and the one read-path enumeration it needs
+FINDINGS: 0, population: the 3 populations of the re-run, its exit code, its byte-comparison against the committed record, the 2 measurement-invariance checks across targets in (iv), the 6 measurement-invariance checks across script revisions in (v) -- 2 target forms x the 3 halves of the measuring half, which are c1_branching.py, kern_a218.py and the two together -- and the 5 direction probes on (v)'s own check.  The 2 file-sha comparisons are REPORTED and are not in this population (mg-7e58 / mg-321d G-1); the kernel they used to cover is in it at the measurement grain instead (mg-76cc / mg-957f F-1)
 TOTAL BAD: 0

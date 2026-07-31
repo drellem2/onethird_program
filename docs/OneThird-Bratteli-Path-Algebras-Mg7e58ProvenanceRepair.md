@@ -103,9 +103,23 @@ rather than living only in this directory.
 `mg-321d`'s `G-3` — *the documented reproduce command does not reproduce* — was
 `G-1`'s consequence: `out_g1_provenance.txt` said `FINDINGS 0` and
 `PREDICTIONS.md` said `ACTUAL 0 HIT`, both recorded before `673b4c0` existed.
-`./run_all.sh` in `code/branching_audit_58da/` now reproduces its committed
-outputs, and §4's `B1` checks that it still does **once this repair is itself a
-commit**.
+`./run_all.sh` in `code/branching_audit_58da/` **reproduces its committed
+outputs up to the revision it names**, and §4's `B1` checks that it still does
+**once this repair is itself a commit**.
+
+> **NARROWED BY `mg-76cc`, on `mg-957f`'s `F-2`.** This sentence read
+> *"…now reproduces its committed outputs"*, without qualification, and it was
+> shut on evidence in which **1 of 5** of those outputs reproduced byte for
+> byte. The other four differ, in **9** lines, and every one of the nine is the
+> same thing: a revision printed into a file that is then committed. That
+> cannot be fixed — a transcript that prints `HEAD` is written **before** the
+> commit that commits it, so the byte-identity fixed point does not exist.
+> `code/branching_repair_76cc/r2_reproduce.py` demonstrates it at two distinct
+> revisions and closes the claim at **5 of 5** under a **named** normalisation
+> of that one revision, with **0** differing lines left unexplained and two
+> controls showing the normalisation still catches a real difference. What is
+> *not* reproduced, and is stated there rather than buried, is the revision
+> token itself.
 
 ---
 

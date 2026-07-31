@@ -1,0 +1,174 @@
+==========================================================================
+R2  OPEN 2 -- G-3 WAS SHUT AT ONE REVISION
+==========================================================================
+
+1 of 5 is not shut.  Either the other four reproduce, or the claim is wrong
+about what it is claiming.  Both are settled below, and the second turns out
+to be the true one -- which is why the claim is narrowed here rather than
+re-asserted.
+
+
+--------------------------------------------------------------------------
+(i) THE CLAIM, AS mg-7e58 WROTE IT
+--------------------------------------------------------------------------
+   docs/OneThird-Bratteli-Path-Algebras-Mg7e58ProvenanceRepair.md
+     "`./run_all.sh` in `code/branching_audit_58da/` now reproduces its committed outputs"
+
+   Read out of the file, not remembered:
+     the ABSOLUTE form is still in the document : no -- it has been narrowed
+
+
+--------------------------------------------------------------------------
+(ii) run_all.sh IN A CLONE, AND WHAT REPRODUCES BYTE FOR BYTE
+--------------------------------------------------------------------------
+   In a clone, because run_all.sh redirects into the very files under
+   test: run it in place and the record and the re-run are the same
+   bytes for the reason that they were written by the same command.
+
+   the committed record names its own revision : e006581c2e11
+     docs+audit: independent audit of the mg-7e58 repair (4372fae) — THE ATTRIBUTION IS RIGHT
+
+   run_all.sh exit 1 (g4 is expected to exit 1 -- mg-d330's second
+   finding, booked OPEN by mg-58da and not closed here)
+
+   file                        committed  re-run  differing  reproduces
+                               lines      lines   lines      byte for byte
+     out_selftest_58da.txt      7          7       0          YES
+     out_g1_provenance.txt      166        166     5          no
+     out_g2_redo.txt            116        116     1          no
+     out_g3_findings.txt        147        147     1          no
+     out_g4_fleet.txt           226        226     2          no
+
+   1 of 5 reproduce byte for byte, over 9 differing lines in all.
+   Population: the 5 files code/branching_audit_58da/run_all.sh writes.
+
+
+--------------------------------------------------------------------------
+(iii) EVERY DIFFERING LINE, AND WHAT EXPLAINS IT
+--------------------------------------------------------------------------
+   Not "they are all revisions" -- each line is shown to become
+   identical under ONE substitution, the recorded revision for the
+   recorded one and the clone's own HEAD for the fresh one, and lines
+   that do NOT are printed in full and counted.
+
+     out_g1_provenance.txt      line 16   revision substitution
+       committed:    e006581c2e11  HEAD of this branch
+       re-run   :    a031a7341010  HEAD of this branch
+     out_g1_provenance.txt      line 17   revision substitution
+       committed:       docs+audit: independent audit of the mg-7e58 repair (4372fae) — THE ATTRIBUTION IS RIG
+       re-run   :       mg-76cc: G-3, run_all.sh in a clone (mg-76cc)
+     out_g1_provenance.txt      line 27   revision substitution
+       committed:    commits touching each part of the reproduction, 286d5030..e006581c:
+       re-run   :    commits touching each part of the reproduction, 286d5030..a031a734:
+     out_g1_provenance.txt      line 129  revision substitution
+       committed:      c1 @ e006581c (unmodified -- NULL PROBE)         silent     silent   HIT
+       re-run   :      c1 @ a031a734 (unmodified -- NULL PROBE)         silent     silent   HIT
+     out_g1_provenance.txt      line 131  revision substitution
+       committed:      kern @ e006581c (unmodified -- NULL PROBE)       silent     silent   HIT
+       re-run   :      kern @ a031a734 (unmodified -- NULL PROBE)       silent     silent   HIT
+     out_g2_redo.txt            line 100  revision substitution
+       committed:    The reproduction is REDONE at e006581c2e11 and it stands, with all
+       re-run   :    The reproduction is REDONE at a031a7341010 and it stands, with all
+     out_g3_findings.txt        line 6    revision substitution
+       committed:    286d5030, run against out_t1_tl.txt at e006581c.
+       re-run   :    286d5030, run against out_t1_tl.txt at a031a734.
+     out_g4_fleet.txt           line 39   revision substitution
+       committed:    script                 286d5030 -> e006581c       e006581c -> working
+       re-run   :    script                 286d5030 -> a031a734       a031a734 -> working
+     out_g4_fleet.txt           line 47   revision substitution
+       committed:    commit in 286d5030..e006581c that touched any of the five:
+       re-run   :    commit in 286d5030..a031a734 that touched any of the five:
+
+   differing lines explained by ONE revision substitution : 9 of 9
+
+
+--------------------------------------------------------------------------
+(iv) THE FIVE, COMPARED WITH THAT ONE REVISION NORMALISED AWAY
+--------------------------------------------------------------------------
+   The normalisation's population, named: the 40-, 12- and 8-character
+   forms of ONE revision, and that revision's subject truncated to the
+   96 characters g1 truncates it to.  Nothing else is touched -- 286d5030
+   and ed9cde49 are pinned constants in these transcripts and MUST still
+   reproduce byte for byte, and they do, or the rows below would not be
+   zero.
+
+   file                        substitutions  substitutions  lines
+                               (committed)    (re-run)       differing
+     out_selftest_58da.txt      0              0              0
+     out_g1_provenance.txt      5              5              0
+     out_g2_redo.txt            1              1              0
+     out_g3_findings.txt        1              1              0
+     out_g4_fleet.txt           3              3              0
+
+   REPRODUCE UNDER THE NAMED NORMALISATION : 5 of 5, 0 lines unexplained.
+
+   the fresh run names its own revision  : a031a7341010
+   the clone's actual HEAD               : a031a7341010
+   the committed record's revision       : e006581c2e11
+     an ancestor of this branch          : yes
+     commits from it to this HEAD        : 0
+       0 means the record was taken at the tree's current HEAD and
+       has NOT yet been committed; it becomes 1 the moment it is,
+       and 1 is the freshest a committed record can ever be.  (v)
+       is why it can never be 0 once committed.
+
+
+--------------------------------------------------------------------------
+(v) WHY BYTE-IDENTITY CANNOT BE HAD -- DEMONSTRATED, NOT ARGUED
+--------------------------------------------------------------------------
+   The transcript prints HEAD.  Committing the transcript makes a new
+   commit, so HEAD is not what the transcript says by the time the
+   transcript is in the tree.  A record that reproduced byte for byte
+   would have to name the commit that contains it, which is a sha over
+   its own bytes.  No such file exists.
+
+   Shown, rather than argued: the SAME tree at TWO revisions -- the clone
+   above, and a clone with one further empty commit.  If the difference
+   were incidental, the two would differ in different places, or one of
+   them would come back clean.
+
+   revision                 raw differing lines   normalised
+     a031a7341010           9                     0
+     2a2bac4cf4a3           9                     0
+
+   the two revisions differ from the record at THE SAME 9 (file, line)
+   positions : yes
+
+
+--------------------------------------------------------------------------
+(vi) THE NORMALISATION IS NOT A BLANKET -- TWO CONTROLS
+--------------------------------------------------------------------------
+   A comparison that forgives everything reproduces everything.  So two
+   perturbations of the COMMITTED side, each of which must still be
+   caught after normalisation: one a figure, one a whole line.
+
+   control                                     applied  caught after
+                                                        normalisation
+     a figure changed in out_g3_findings.txt    yes      YES
+     a line changed in out_g4_fleet.txt         yes      YES
+
+
+--------------------------------------------------------------------------
+VERDICT ON OPEN 2
+--------------------------------------------------------------------------
+   G-3 IS CLOSED ON FIVE, AND THE CLAIM IS THE NARROWED ONE.
+
+     1 of 5 committed outputs reproduce byte for byte.  That number
+     cannot be raised, and (v) shows why: a transcript that names HEAD is
+     written before the commit that commits it.
+
+     5 of 5 reproduce with that ONE revision normalised away, over 10
+     substitutions on the committed side, with 0 lines unexplained -- and
+     the two controls in (vi) show the normalisation still catches a real
+     difference.
+
+   WHAT REMAINS, stated rather than buried: the revision token itself is
+   not reproduced.  A transcript naming some other real revision would
+   normalise clean; what constrains it is the ancestry row and the
+   staleness figure in (iv), and those are weaker than bytes.  The
+   absolute claim is withdrawn in the document rather than re-asserted.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every clone, run_all.sh invocation, transcript read and normalisation this script performs
+FINDINGS: 0, population: for each of the 5 committed outputs: that it names a revision where it prints one, that the fresh run names its own HEAD exactly, that the recorded revision is an ancestor, and that 0 lines survive the normalisation -- plus the 2 impossibility rows in (v) and the 2 controls in (vi)
+TOTAL BAD: 0

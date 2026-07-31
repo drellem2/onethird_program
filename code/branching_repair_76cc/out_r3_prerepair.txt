@@ -1,0 +1,132 @@
+==========================================================================
+R3  THE PRE-REPAIR PREDICATE, RUN AGAINST THE SAME INPUTS
+==========================================================================
+
+This section is the one that cannot be replaced by reading the new code.
+Coverage going backwards is invisible from the new side by construction.
+
+
+--------------------------------------------------------------------------
+(i) WHICH RETURNS THIS PATCH MOVED -- COUNTED OFF THE PATCH
+--------------------------------------------------------------------------
+   Every line of g1_provenance.py, in either revision, whose stripped
+   form begins `finding(` or `selferr(`.  Counted, not described.
+
+   g1 at e006581c : 12 return sites
+   g1 here          : 12 return sites
+   removed : 2
+      - finding("c1's own measurement is not the same at %s and at HEAD (moved on "
+      - selferr("could not build the probe %r out of c1 at HEAD (%s); it is "
+   added   : 2
+      + finding("c1's own measurement is not the same at %s and at HEAD when "
+      + selferr("could not build the probe %r out of %s at HEAD (%s); it is "
+
+   The counts move by less than the coverage does, and that is the
+   point of (iii): mg-76cc's patch changes the POPULATION two existing
+   returns range over -- HALVES went from an implicit one to a named
+   three, PROBES from three to five -- and a census of return sites
+   cannot see that.  mg-7e58's own census could not see F-1 either.
+
+
+--------------------------------------------------------------------------
+(ii) THE INPUTS, AND WHAT EACH ONE IS
+--------------------------------------------------------------------------
+   Five clones.  In each, exactly one file differs from this branch and
+   it differs AS A COMMIT, because g1 reads c1 and the kernel with
+   git_show and a working-tree edit reaches nothing.  The "real
+   regression?" column is declared here, before any of them is run.
+
+     unmodified -- NULL                         not      the tree as it stands
+     kern_a218.py: dim L(n,p) off by one        DEFECT   THE MEASURING HALF, in the kernel -- mg-957f's F-1
+     c1_branching.py: vertex dims off by one    DEFECT   the measuring half, in the script -- mg-7e58's own probe
+     c1_branching.py: a comment appended        not      the file sha moves and nothing else does
+     c1_branching.py: a line past section (iii) not      an edit in the COMPARING half -- mg-58da's own class
+
+
+--------------------------------------------------------------------------
+(iii) THE SAME FIVE INPUTS, THREE REVISIONS OF THE PREDICATE
+--------------------------------------------------------------------------
+
+   input                                      real   before mg-7e58 before mg-76cc this repair
+                                              defect exit find kern  exit find kern  exit find kern
+     unmodified -- NULL                         no     1    1    no    0    0    no    0    0    no   
+     kern_a218.py: dim L(n,p) off by one        YES    1    2    YES   0    0    no    1    3    YES  
+     c1_branching.py: vertex dims off by one    YES    1    1    no    1    3    no    1    4    no   
+     c1_branching.py: a comment appended        no     1    1    no    0    0    no    0    0    no   
+     c1_branching.py: a line past section (iii) no     1    1    no    0    0    no    0    0    no   
+
+   INPUTS WHERE AN OLDER PREDICATE CATCHES A REAL DEFECT AND THIS ONE
+   IS SILENT : 0
+
+   NON-DEFECT INPUTS ON WHICH THIS REPAIR FIRES : 0
+
+   population: the 5 inputs above x the 3 predicate revisions = 15 runs.
+   Each pinned revision is run WITH ITS OWN lib58da, under a name of
+   its own, with exactly one edit -- its import line -- so that no
+   predicate is judged against a library it never saw.
+
+
+--------------------------------------------------------------------------
+(iv) THE FOUR SCRIPTS THIS REPAIR NEVER OPENED
+--------------------------------------------------------------------------
+   lib58da.run_c1 grew two arguments.  Both default to what they
+   defaulted to before, which is a claim about a default, and a claim
+   about a default is exactly the kind that is true until it is not.
+
+   The call shapes are ENUMERATED from the four scripts' own source
+   first, so the population is theirs and not this script's idea of it:
+
+     selftest_58da.py     167  out_old, rc_old = L.run_c1(old_target)
+     selftest_58da.py     168  out_new, rc_new = L.run_c1(new_target)
+     selftest_58da.py     211  o, rc = L.run_c1(bad)
+     selftest_58da.py     215  o2, rc2 = L.run_c1(old_target)
+     g2_redo.py           49   out_old, _ = L.run_c1(old_target)
+     g3_findings.py       54   out_new, rc_new = L.run_c1(new_target)
+     g3_findings.py       55   out_old, rc_old = L.run_c1(old_target)
+     g3_findings.py       261  o, rc = L.run_c1(cor)
+     g4_fleet.py          416  out, rc = L.run_c1(txt, script_source=c1_new_src)
+     g4_fleet.py          441  o, rc = L.run_c1(blinded, script_source=old_c1_src)
+     g4_fleet.py          444  o2, rc2 = L.run_c1(blinded, script_source=c1_new_src)
+
+   mentions of run_c1 that are NOT calls, excluded by name:
+     selftest_58da.py     9    2. run_c1() really runs the script at the revision it names, against the
+
+   11 call sites over 4 scripts (1 prose mentions excluded).  None of
+   them names a kernel, so all 11 go through the default -- which is
+   what is compared below.
+
+   Then the four are RUN, end to end, in two clones: one carrying this
+   repair, one with g1_provenance.py and lib58da.py put back to e006581c.
+   The clones sit at different revisions, so the comparison is made under
+   the same named normalisation r2 uses -- and the count that matters is
+   lines that survive it.
+
+   script                  this repair      e006581c      lines differing
+                           exit self/find   exit self/find   normalised
+     selftest_58da.py       0    -/-         0    -/-         0
+     g2_redo.py             0    0/0         0    0/0         0
+     g3_findings.py         0    0/0         0    0/0         0
+     g4_fleet.py            1    0/2         1    0/2         0
+
+   population: the 4 scripts in code/branching_audit_58da/ that share
+   lib58da.run_c1 with g1 and were not edited by this repair.  g1 is
+   excluded BY NAME and not by silence: it is the thing that changed,
+   and (iii) is where it is compared.
+
+
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   THE PRE-REPAIR PREDICATES WERE RUN, AND ON THE SAME INPUTS.
+   5 inputs x 3 revisions.  Nothing an older predicate catches on a
+   real defect is silent here, and nothing that is not a defect is red.
+   The four scripts this repair never opened say the same thing with the
+   library before and after, at 4 of 4.
+
+   The instruction was applied to this repair as well as to the one it
+   fixes, which is the only way the class is visible at all.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every clone, git read, subprocess run and parse this script performs, plus the requirement that each input really change what it claims to change
+FINDINGS: 0, population: the coverage comparison over the 5 inputs x 3 g1 revisions in (iii), and the 4 untouched scripts compared across the two clones in (iv)
+TOTAL BAD: 0

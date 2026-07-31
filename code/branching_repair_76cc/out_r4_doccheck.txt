@@ -1,0 +1,118 @@
+==========================================================================
+R4  THE DELIVERABLE, CHECKED FOR THE DEFECT IT REMEDIES
+==========================================================================
+
+It restores detection, so it can remove detection.  Enumerated, branch by
+branch, with the one branch that cannot exhibit it named and reasoned rather
+than left out.
+
+
+--------------------------------------------------------------------------
+(i) THE SIX BRANCHES, AND WHERE EACH IS CHECKED
+--------------------------------------------------------------------------
+
+   branch                              kind        can remove  checked in
+                                                   detection?
+     g1_provenance.py section (v)      predicate   YES         r1_kernel.py
+     lib58da.run_c1's two new argument tool under  YES         r3_prerepair.py
+     the g1 SELF-ERRORS population lin declared un YES         r3_prerepair.py
+     r1 / r2 / r3 -- this instrument   gates       YES         selftest_76cc.py
+     run_all.sh                        runner      YES         r4_doccheck.py
+     PREDICTIONS.md                    record      no          -
+
+     g1_provenance.py section (v)
+        r1 (v): each unit mg-76cc added deleted ALONE, in the tree where its
+         effect exists, including the one-line F-1 REINTRODUCTION which must
+         make g1's own kernel probe MISS
+     lib58da.run_c1's two new arguments
+        r3 (iv): the 4 scripts this repair never opened, run end to end in t
+        wo clones, with the library before and after, compared under the nam
+        ed normalisation
+     the g1 SELF-ERRORS population line
+        it was a WRITTEN formula (3 + len(paths) * 3) that could not move wh
+        en its own patch moved; it is now COUNTED from the reads actually pe
+        rformed, and r3 (iii) runs the predicate that prints it
+     r1 / r2 / r3 -- this instrument
+        selftest_76cc.py asserts every helper they rest on is non-vacuous, a
+        nd r1 (v) and r2 (vi) each carry a control in which the gate must go
+         red
+     run_all.sh
+        (iv) below: a red script is put through the real runner and its exit
+         code must survive (mg-c2b3's class)
+     PREDICTIONS.md
+        IT CANNOT EXHIBIT THE DEFECT, and the reason is that it is not read 
+        by anything: no script parses it, no gate rests on it, and deleting 
+        it changes no exit code.  It is a record of what was predicted befor
+        e the run, kept with its misses; a record can be WRONG, which (ii) i
+        s about, but it cannot go quiet
+
+   branches that can exhibit the defect : 5 of 6, each with a named check
+   branches that cannot                 : 1, with the reason stated
+
+
+--------------------------------------------------------------------------
+(ii) EVERY FIGURE IN THE DOCUMENT, ANCHORED TO A RUN
+--------------------------------------------------------------------------
+   Figures of the form "N of M" in the mg-76cc document, each looked
+   for in the stdout of the run that is supposed to have produced it.  A
+   figure a reader cannot find in an output is a figure this instrument
+   did not measure.
+
+   distinct 'N of M' figures in the document : 7
+     24 of 24   anchored
+     1 of 5     anchored
+     9 of 9     anchored
+     5 of 5     anchored
+     3 of 4     anchored
+     4 of 4     anchored
+     4 of 5     anchored
+
+   unanchored : 0
+
+
+--------------------------------------------------------------------------
+(iii) THE G-3 CLAIM WAS NARROWED, NOT RE-ASSERTED
+--------------------------------------------------------------------------
+   mg-957f's F-2 is that G-3 was shut on 1 of 5.  The answer here is
+   five, under a normalisation that is named -- which means the ABSOLUTE
+   claim has to go, in the document that made it, or the same sentence
+   is still there saying the same wrong thing.
+
+     the ABSOLUTE claim is gone from OneThird-Bratteli-Path-Algebras-Mg7e58ProvenanceRepair.md yes
+     the NARROWED claim is present there                        yes
+     the mg-76cc document says WHAT REMAINS                     yes
+
+
+--------------------------------------------------------------------------
+(iv) THE RUNNER CANNOT SWALLOW A RED SCRIPT -- RUN, NOT READ
+--------------------------------------------------------------------------
+   mg-c2b3 swept this arc for runners whose exit code was eaten by a
+   pipe.  A runner that does that removes detection from every script
+   under it at once, which is this deliverable's own defect at the
+   coarsest possible grain.  So the real run_all.sh is copied into a temp
+   tree with every script replaced by a stub, and one stub made red.
+
+   lines in run_all.sh carrying a real pipe : 0
+   lines carrying `||`, which is not a pipe : 1
+     [ "$RC" -le "$WORST" ] || WORST=$RC
+     every stub green
+       predicted exit 0   actual exit 0   HIT
+     r2_reproduce.py made red
+       predicted exit 1   actual exit 1   HIT
+
+
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   THE DELIVERABLE IS OF THE SAME KIND AS THE DEFECT IT REPAIRS, AND IT
+   WAS CHECKED FOR IT.  6 branches, 5 of which can remove detection and
+   each of which has a named check; 1 that cannot, with the reason given
+   rather than the branch omitted.  The document's figures are anchored
+   to the runs, the absolute G-3 claim is withdrawn where it was made,
+   and the runner is shown propagating a red script rather than read for
+   pipes.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every file read, temp tree and subprocess run this script performs
+FINDINGS: 0, population: the 6 branches of this deliverable in (i), every figure of the form 'N of M' in the mg-76cc document (ii), the 3 claim rows in (iii), and the 2 runner rows in (iv)
+TOTAL BAD: 0
