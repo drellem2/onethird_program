@@ -1,0 +1,19 @@
+==========================================================================
+SELFTEST  mg-7e58's apparatus, before any of it is believed
+==========================================================================
+
+-- the readers, on input whose answer is known ------------------------
+-- the readers, on ABSENCE --------------------------------------------
+-- the readers, on HOSTILE input --------------------------------------
+-- c1_cells and c2_cells, against live output -------------------------
+-- cell locality: one corruption must move one cell -------------------
+-- replace_once refuses to corrupt zero sites or two ------------------
+-- totals_of and findings_of ------------------------------------------
+-- git helpers --------------------------------------------------------
+-- scratch_clone ------------------------------------------------------
+-- the Report channels stay apart -------------------------------------
+
+--------------------------------------------------------------------------
+   assertions: 65, population: the readers on known, absent and hostile input; cell locality; replace_once; the output parsers; the git helpers against the four named revisions; scratch_clone in its three modes; and the Report channels
+   failures  : 0
+TOTAL BAD: 0

@@ -1,0 +1,110 @@
+==========================================================================
+K3  10 OF 10 PAIRS AT 24 OF 24 CELLS -- RE-DERIVED, NOT QUOTED
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) ALL FIVE MEMBERS, RE-RUN IN PLACE
+--------------------------------------------------------------------------
+   Not only the members this repair touched -- it touched none of them.
+   Re-running only what changed would prove nothing about corroboration, which
+   is a property OF THE SET.  All five are run, in place, with their stdout
+   captured here and never redirected into their committed outputs.
+
+   member                  self/find   exit
+     c1_branching.py        0/0       0
+     c2_vertexsets.py       0/0       0
+     c3_withdrawal.py       0/1       1
+     c4_seam.py             0/0       0
+     c5_record.py           0/0       0
+
+   members actually re-run here : 5 of 5 -- c1_branching.py, c2_vertexsets.py, c3_withdrawal.py, c4_seam.py, c5_record.py
+   green : 4 of 5 -- c1_branching.py, c2_vertexsets.py, c4_seam.py, c5_record.py
+   red   : 1 of 5 -- c3_withdrawal.py
+
+   c3_withdrawal.py is red, and it was red before this repair.
+   Its finding is mg-d330's second, booked OPEN by mg-58da and
+   untouched here.  It is reported, not worked around: the
+   set-level property is that ALL FIVE are green and it is not.
+
+--------------------------------------------------------------------------
+(ii) FIVE SOURCES FOR THE 24 CELLS, READ FIVE DIFFERENT WAYS
+--------------------------------------------------------------------------
+
+   source                                          cells read
+     out_t1_tl.txt      (mg-e8b8, 1st instrument)   24 of 24
+     c1_branching.py    (mg-a218, 3rd instrument, live) 24 of 24
+     c2_vertexsets.py   (mg-a218, 3rd instrument, live) 24 of 24
+     out_b1_branching.. (mg-2060, 2nd instrument)   24 of 24
+     out_e1_vertexsets. (mg-d330, 4th instrument)   24 of 24
+
+   sources this script could read : 5
+
+--------------------------------------------------------------------------
+(iii) EVERY UNORDERED PAIR, AT EVERY ONE OF THE 24 CELLS
+--------------------------------------------------------------------------
+   pairs of sources agreeing on all 24 cells : 10 of 10
+   population: every unordered pair drawn from the 5 sources above,
+   compared at all 24 (beta,n) cells.  A source this script could not
+   read is in the SELF-ERROR channel and is not among these pairs.
+
+   cells compared in total : 240
+
+--------------------------------------------------------------------------
+(iv) THE READERS, PROBED AT ONE CELL EACH
+--------------------------------------------------------------------------
+   A reader that has gone blind agrees with everything.  So each source
+   is corrupted at ONE cell and its reader must move at that cell and at no
+   other.  The cell is beta=1, n=6 -- dims (1,4,9,1) -- because it is the only
+   n=6 cell no other parameter shares: aiming at beta=3's would have hit
+   beta=2's identical row as well, which is how the first run of this probe
+   found itself unable to aim.
+
+   And the corruption is scoped TO ONE LINE, located by a pattern that must
+   match exactly one: the same dim list appears in these files' prose, and a
+   probe that changed the prose instead would be testing nothing.
+
+   source                 baseline   corrupted at (1,6)   moved at
+     out_t1_tl.txt          24 cells   24 cells             [(1, 6)]   OK
+     out_b1_branching..     24 cells   24 cells             [(1, 6)]   OK
+     out_e1_vertexsets.     24 cells   24 cells             [(1, 6)]   OK
+     c1_branching.py        24 cells   24 cells             [(1, 6)]   OK
+     c2_vertexsets.py       24 cells   24 cells             [(1, 6)]   OK
+
+   probes moving exactly their own cell : 5 of 5
+   population: one corruption per source, each changing one dimension
+   of the (beta=1, n=6) cell on one line and nothing else.
+
+--------------------------------------------------------------------------
+(v) c0_repro.sh -- THE SAME PROPERTY ONE LEVEL DOWN
+--------------------------------------------------------------------------
+   mg-a218's c0 re-runs the TARGET's own five scripts and diffs all five
+   committed outputs byte for byte.  This repair changed nothing the target
+   reads, so it must still hold.  Run on a scratch copy so nothing here can
+   write into the audited directories.
+
+     out_selftest.txt  IDENTICAL
+     out_t1_tl.txt  IDENTICAL
+     out_t2_gz.txt  IDENTICAL
+     out_t3_ours.txt  IDENTICAL
+     out_t4_quotes.txt  IDENTICAL
+     identical: 5 of 5, population: the five committed out_*.txt
+   c0_repro.sh exit 0
+
+--------------------------------------------------------------------------
+VERDICT ON THE PROPERTY THIS REPAIR WAS TOLD NOT TO WEAKEN
+--------------------------------------------------------------------------
+   10 of 10 pairs of sources agree at all 24 cells, over 240 cell
+   comparisons; 5 of 5 members were re-run in place, not only the changed one
+   -- and this repair changed NONE of the five, which is why the check is a
+   re-derivation and not a re-run of what moved; c0_repro.sh regenerates the
+   target's five committed outputs.  5 of 5 readers move at their own cell
+   and nowhere else, so the agreement above is a measurement.
+
+   WHAT DOES NOT HOLD, unchanged from before this repair: c3_withdrawal.py is
+   red.  That is mg-d330's second finding, booked OPEN by mg-58da, and it is
+   reported here rather than worked around.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone, subprocess run and parse this script performs
+FINDINGS: 0, population: the 24 cells of every readable source, every unordered pair of them, the 5 members re-run in place, c0_repro.sh, and one locality probe per source
+TOTAL BAD: 0

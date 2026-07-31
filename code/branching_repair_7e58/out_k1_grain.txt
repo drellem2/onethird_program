@@ -1,0 +1,107 @@
+==========================================================================
+K1  THE TWO PROVENANCE SITES, REPAIRED AT THE GRAIN OF THE PROPERTY
+==========================================================================
+
+   worktree HEAD          : ef38841710edf28af76d0accc1c6aaf011ed9490
+   the audit being answered: ef38841710ed (mg-321d)
+   the repair it audits    : 673b4c005026 (mg-58da)
+   the reproduction's home : 286d5030902d (mg-a218)
+
+--------------------------------------------------------------------------
+(i) THE BEFORE STATE, REPRODUCED RATHER THAN QUOTED
+--------------------------------------------------------------------------
+   A clone of this worktree is checked out at ef388417 -- the tree mg-321d
+   audited -- and g1 and g4 are run there, unmodified.  Whatever they print is
+   what the defect actually was.
+
+   g1 @ ef388417 : SELF 0  FINDINGS 1  exit 1
+      FINDING: code/branching_audit_a218/c1_branching.py changed between 286d5030 and HEAD; the measuring half of the reproduction is not the same code
+
+   g4 @ ef388417 attribution summary, as printed there:
+      mg-13b2  : 2 -- c1_branching.py, c2_vertexsets.py
+      mg-58da  : 0 -- none
+
+--------------------------------------------------------------------------
+(ii) SITE 1 AFTER -- THE QUESTION ASKED OF THE MEASUREMENT
+--------------------------------------------------------------------------
+   The claim g1 used to make is 'the measuring half of the reproduction
+   is not the same code', on the evidence that c1_branching.py's sha moved.
+   It is re-derived here, in this script, on this script's own reader: run
+   BOTH script revisions against THE SAME target -- both target forms -- and
+   compare c1's own sections (i)+(ii) and the 24 vertex cells parsed out of
+   them.
+
+   target form                     c1 @ 286d5030   c1 @ ef388417   cells
+     the 286d5030 target (COUNT)    a8db5dbd4c758765 a8db5dbd4c758765  24/24  IDENTICAL
+     the HEAD target (SET)          a8db5dbd4c758765 a8db5dbd4c758765  24/24  IDENTICAL
+
+   the file grain, for contrast:
+     c1_branching.py      CHANGED
+     kern_a218.py         SAME
+
+   THE FILE MOVED AND THE MEASUREMENT DID NOT -- so g1's old finding
+   was false of the property it names, and the section that refutes it
+   was right.  The disposition is: THE SECTION IS RIGHT AND g1 SHOULD
+   NOT FIRE, and the way it is made not to fire is (iii).
+
+   g1 on the repaired tree, run in place : SELF 0  FINDINGS 0  exit 0
+
+--------------------------------------------------------------------------
+(iii) SITE 1 DELETION TEST -- g1 ITSELF, MADE TO GO RED
+--------------------------------------------------------------------------
+   This is the check that separates a repair from a silencing.  g1 is
+   NOT modified and NOT called with arguments: it is run in place, in a clone
+   whose c1_branching.py carries a real regression in the MEASURING half, and
+   it must exit 1 and say the measurement moved.  A hook planted for a probe
+   to find would not survive this, because the mutation is made to c1 -- the
+   thing g1 measures -- and never to g1.
+
+   clone                                   predicted   g1 exit  finding
+     UNMODIFIED clone (NULL PROBE)          exit 0      exit 0   no    HIT
+       why: nothing moved; g1 must stay green
+     c1's vertex DIMENSIONS off by one      exit 1      exit 1   YES   HIT
+       why: the measuring half really moved; g1 must go red
+       c1's own measurement is not the same at 286d5030 and at HEAD (moved on the 286d5030 target (COUNT form), the HEAD target (SET form)); the me
+     a comment appended to c1               exit 0      exit 0   no    HIT
+       why: the file sha moves and the measurement does not -- the exact case the old g1 got wrong
+     an edit inside c1's comparing half     exit 0      exit 0   no    HIT
+       why: mg-58da's own edit class; g1 must stay green
+
+   probes whose direction was predicted correctly : 4 of 4
+   population: the 4 clones above, each running g1 UNMODIFIED in place.
+
+--------------------------------------------------------------------------
+(iv) SITE 2 AFTER -- ATTRIBUTION DERIVED TWICE, INDEPENDENTLY OF g4
+--------------------------------------------------------------------------
+   Two routes to the same fact, neither of them g4's:
+
+     A. `git log 286d5030..HEAD -- <path>` per member
+     B. `git show --name-only <commit>` per commit, filtered to the directory
+
+   If they disagree, this script says so about ITSELF and compares nothing.
+   Only when they agree is the result put beside what g4 prints.
+
+   member                  route A (git log)     route B (name-only)
+     c1_branching.py        673b4c00              673b4c00
+     c2_vertexsets.py       ed9cde49              ed9cde49
+     c3_withdrawal.py       none                  none
+     c4_seam.py             none                  none
+     c5_record.py           none                  none
+
+   the truth, inverted -- one row per commit in the range:
+     673b4c00 mg-58da   touches c1_branching.py
+     ed9cde49 mg-13b2   touches c2_vertexsets.py
+
+   what g4 prints, against the truth derived above:
+     ticket    g4 says                        truth
+     mg-13b2   1 -- c2_vertexsets.py          1 -- c2_vertexsets.py
+     mg-58da   1 -- c1_branching.py           1 -- c1_branching.py
+
+   g4 on the repaired tree : exit 1, and it is PREDICTED to exit 1 --
+   c3_withdrawal.py is red (mg-d330's second finding, OPEN) and the e4
+   presence-test finding is booked and not worked around.  Neither is
+   an attribution finding; both are checked by name in k3.
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone, subprocess run and parse this script performs
+FINDINGS: 0, population: the 2 sites, each measured BEFORE and AFTER at its own grain, the 3 deletion probes that must make the repaired g1 fire, and the 2 independent derivations of g4's attribution compared against every one of the five
+TOTAL BAD: 0
