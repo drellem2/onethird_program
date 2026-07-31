@@ -268,6 +268,23 @@ def row_kind(detail):
     return m.group(1) if m else tail[:40]
 
 
+def inject(src, code):
+    """`src` with `code` spliced in BEFORE its `if __name__ == "__main__"`
+    block.
+
+    ⚠️ Appending it to the end does nothing, because `main()` has already run
+    by then -- which is how the first version of B3 and B5c reported the
+    artifact BLESSING a lossy record and a renamed anchor staying green: a
+    probe that never reached the code it was probing, reading as a fact about
+    the artifact.  That is the same shape as the finding B2 makes, in this
+    instrument, and it is kept in the misses table."""
+    marker = 'if __name__ == "__main__":'
+    if marker not in src:
+        return src + code
+    i = src.index(marker)
+    return src[:i] + code + "\n\n" + src[i:]
+
+
 BASELINE = {}
 
 
@@ -818,7 +835,7 @@ def b3(rows_head):
     head_rec = BASELINE[RECORDS_REL]
 
     def reseal_with(src, rec, mark):
-        write_rel(LANDING_REL, src + LOSSY.format(mark=mark))
+        write_rel(LANDING_REL, inject(src, LOSSY.format(mark=mark)))
         write_rel(RECORDS_REL, rec)
         before = sha(read_rel(RECORDS_REL))
         try:
@@ -924,14 +941,30 @@ def heading_names(tree):
                     else [node.target]
                 for t in targets:
                     for n in ast.walk(t):
-                        if isinstance(n, ast.Name):
+                        # ⚠️ STORE ONLY.  `kinds[row_kind(d)] = ...` binds
+                        # `kinds`; the `d` inside the subscript is READ.  The
+                        # first version of this whitelisted `d` and reported 0
+                        # occurrences in this very file -- a check that
+                        # exonerates its author is this arc's own defect, so
+                        # it is kept here as a comment rather than a story.
+                        if isinstance(n, ast.Name) \
+                                and isinstance(n.ctx, ast.Store):
                             out.add(n.id)
     return out
 
 
 def is_heading_expr(node, hnames):
+    """Is this operand A HEADING rather than a whole row?  Three ways to be
+    one: it came through `heading()`/`row_kind()`, it is a name bound from one
+    of those, or it is the heading parse WRITTEN INLINE -- `x.split(" -- ")[0]`
+    -- which is the same remedy spelled out."""
     for n in ast.walk(node):
         if isinstance(n, ast.Call) and getattr(n.func, "id", "") in HEADING_FUNCS:
+            return True
+        if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) \
+                and n.func.attr in ("split", "partition") and n.args \
+                and isinstance(n.args[0], ast.Constant) \
+                and n.args[0].value == " -- ":
             return True
         if isinstance(n, ast.Name) and n.id in hnames:
             return True
@@ -1009,64 +1042,103 @@ def their_rule_hits(src, vocab):
     return out
 
 
+def their_vocabulary():
+    """The parent's own `ROW_NAMES`, read out of its source by AST rather than
+    copied by hand -- so that "a hand list of five" is a measurement of their
+    file and not a claim about it."""
+    src = read_rel("code/hodge_leverage_repair_6df0/repair_ec07.py")
+    for node in ast.walk(ast.parse(src)):
+        if isinstance(node, ast.Assign) \
+                and any(getattr(t, "id", "") == "ROW_NAMES"
+                        for t in node.targets):
+            return [e.value for e in node.value.elts]
+    return []
+
+
+def exposure(rows, name):
+    """How many gate rows the SUBSTRING test selects that a HEADING test does
+    not.  A property of the rows, so it is the same wherever the hit lives."""
+    sub = [d for d in rows if name in d]
+    hd = [d for d in rows if name in d.split(" -- ")[0]]
+    return len(sub), len(hd)
+
+
 def py_files_at(commit):
     return sorted(p for p in git("ls-tree", "-r", "--name-only", commit,
                                  "--", "code").split("\n")
                   if p.endswith(".py"))
 
 
-def b4():
+def b4(rows_head):
     head("B4 -- THE CONSTRUCT: HOW MANY EXIST, HOW MANY THE REPAIR TOUCHED")
     vocab = row_vocabulary()
-    print(f"    row vocabulary, derived from the code that prints the rows: "
+    theirs_vocab = their_vocabulary()
+    print(f"    row vocabulary, DERIVED from the code that prints the rows: "
           f"{vocab}")
+    print(f"    the parent's `ROW_NAMES`, a HAND LIST read out of its source: "
+          f"{theirs_vocab}")
+    print(f"    in the derived vocabulary and not in the hand list: "
+          f"{sorted(set(vocab) - set(theirs_vocab))}")
     fix, pre = repair_commits()
 
+    # ⚠️ THE POPULATION IS THE TREE THE REPAIR SHIPPED IN, not HEAD: at HEAD
+    # this audit's own probe file has joined it, and a sweep that counts the
+    # file doing the counting is mg-ec07's own B0.  HEAD is reported beside it.
+    at_fix = py_files_at(fix)
+    at_probe = py_files_at(pre)
     at_head = py_files_at("HEAD")
     published = 429
     record(None,
-           f"B4a `.py` files under `code/` at HEAD: {len(at_head)}.  The "
-           f"committed transcript of the repair publishes {published} for the "
-           f"same sweep.  The population a reader meets is "
-           f"{len(at_head) - published} files short of the tree the transcript "
-           f"ships in")
-    at_probe = py_files_at(pre)
-    print(f"    ... and {len(at_probe)} at {pre[:7]}, the commit the repair "
-          f"was measured against -- so the gap is not a merge that landed "
-          f"after the run")
-    if len(at_head) != published:
+           f"B4a `.py` files under `code/`: {len(at_fix)} at {fix[:7]}, the "
+           f"commit that SHIPS the transcript; {len(at_probe)} at its parent "
+           f"{pre[:7]}, the commit the repair was measured against; and "
+           f"{len(at_head)} at HEAD, which is {len(at_head) - len(at_fix)} more "
+           f"because this audit's own probe file has joined the population it "
+           f"counts.  The committed transcript publishes {published}")
+    if len(at_fix) != published:
         finding("F2", f"THE SWEEP'S OWN POPULATION IS A STALE FIGURE AT ITS "
                       f"OWN COMMIT.  `out_repair_6df0.txt` publishes "
                       f"'{published} .py files swept'; the tree at the commit "
-                      f"that ships that transcript holds {len(at_head)}, and "
-                      f"so did the commit before it ({len(at_probe)}).  The "
-                      f"instrument is live and re-derives the count on every "
-                      f"run; what is frozen is the number in the evidence.  "
-                      f"This is mg-f922 B/C -- a figure stale in the commit "
-                      f"that publishes it -- inside the sweep whose whole "
-                      f"argument is that THE REPORTED LINE IS NEVER THE "
-                      f"POPULATION")
+                      f"that ships that transcript holds {len(at_fix)}, and so "
+                      f"did the commit before it ({len(at_probe)}) -- so the "
+                      f"gap is not a merge that landed after the run, it was "
+                      f"already there when the run was taken.  "
+                      f"{len(at_fix) - published} files are in the population "
+                      f"and not in the number a reader is given.  The "
+                      f"instrument is live and re-derives the count every run; "
+                      f"what is frozen is the figure in the evidence.  This is "
+                      f"mg-f922 B/C -- a figure stale in the commit that "
+                      f"publishes it -- inside the sweep whose whole argument "
+                      f"is that THE REPORTED LINE IS NEVER THE POPULATION")
 
     def sweep(commit, files):
-        mine, theirs = [], []
+        mine, theirs, theirs_own = [], [], []
         for rel in files:
             src = git("show", f"{commit}:{rel}")
             for ln, name, cls, expr in ast_hits(src, vocab):
                 mine.append((rel, ln, name, cls, expr))
             for ln, name, s in their_rule_hits(src, vocab):
                 theirs.append((rel, ln, name, s))
-        return mine, theirs
+            for ln, name, s in their_rule_hits(src, theirs_vocab):
+                theirs_own.append((rel, ln, name, s))
+        return mine, theirs, theirs_own
 
-    mine_head, theirs_head = sweep("HEAD", at_head)
-    mine_pre, theirs_pre = sweep(pre, at_probe)
+    mine_head, theirs_head, own_head = sweep(fix, at_fix)
+    mine_pre, theirs_pre, own_pre = sweep(pre, at_probe)
 
     con_head = [h for h in mine_head if h[3] == "CONSTRUCT"]
     con_pre = [h for h in mine_pre if h[3] == "CONSTRUCT"]
     print()
-    print("    THE CONSTRUCT AT HEAD, by my rule:")
+    print(f"    THE CONSTRUCT AT {fix[:7]}, by my rule, with each hit's "
+          f"EXPOSURE over the 34 live rows:")
     for rel, ln, name, cls, expr in sorted(con_head):
+        nsub, nhd = exposure([d for _ok, d in rows_head], name)
         print(f"      {rel}:{ln}")
         print(f"          {expr}")
+        print(f"          exposure: {nsub} of 34 rows by substring, {nhd} by "
+              f"heading -- {nsub - nhd} row(s) it was never meant to select"
+              + ("" if nsub != nhd else "  (harmless here, and still the "
+                                        "construct)"))
     print()
     print("    ... and the REMEDY sites, which are the same shape keyed "
           "correctly:")
@@ -1075,11 +1147,28 @@ def b4():
         print(f"      {rel}:{ln}  {expr}")
     print()
     record(None,
-           f"B4c INSTANCES THAT EXIST: {len(con_head)} at HEAD by my rule "
-           f"(AST, vocabulary derived from the code) against "
-           f"{len(theirs_head)} by the parent's own rule re-implemented "
-           f"(line regex, hand-listed vocabulary), over the same "
-           f"{len(at_head)} files")
+           f"B4c INSTANCES THAT EXIST at {fix[:7]}, over the same "
+           f"{len(at_fix)} files, by three rules: {len(con_head)} by MY rule "
+           f"(AST + derived vocabulary), {len(theirs_head)} by the PARENT'S "
+           f"RULE with the derived vocabulary, and {len(own_head)} by the "
+           f"parent's rule with its OWN hand list of "
+           f"{len(theirs_vocab)} names -- which is the number its transcript "
+           f"publishes.  THE RULE IS NOT WHAT HIDES THE EXTRA ONE; THE HAND "
+           f"LIST IS")
+    if len(own_head) < len(con_head):
+        hidden = [h for h in con_head if h[2] not in theirs_vocab]
+        finding("F5", f"THE SWEEP'S VOCABULARY IS A HAND LIST, WHICH IS A "
+                      f"SCOPE NOBODY CHOSE ONE LEVEL UP.  `ROW_NAMES` in "
+                      f"`repair_ec07.py` names {len(theirs_vocab)} row "
+                      f"headings by hand; the gate prints {len(vocab)}.  The "
+                      f"same rule with a vocabulary derived from the code that "
+                      f"prints the rows finds {len(con_head)} occurrences "
+                      f"where the hand list finds {len(own_head)}: "
+                      + "; ".join(f"{r}:{l} `{e}`"
+                                  for r, l, _n, _c, e in hidden)
+                      + ".  The sweep exists because a hand-picked SITE is a "
+                        "scope nobody chose; it picks its VOCABULARY the same "
+                        "way")
 
     touched = [h for h in con_pre if (h[0], h[2], h[4]) not in
                {(x[0], x[2], x[4]) for x in con_head}]
@@ -1089,16 +1178,17 @@ def b4():
               or "none")
            + f".  THE TWO NUMBERS ARE THE FINDING: {len(con_pre)} instances "
              f"existed at {pre[:7]} and the repair changed {len(touched)} of "
-             f"them, leaving {len(con_head)} live at HEAD")
+             f"them, leaving {len(con_head)} live in the commit it landed in")
     if len(con_head) > 0:
         finding("F3", f"{len(con_head)} instance(s) of the construct are LIVE "
-                      f"at HEAD after a repair that touched {len(touched)}.  "
-                      f"Each carries a declared disposition in the parent's "
-                      f"`DISPOSITIONS` table keyed on its exact line, so a "
-                      f"new one anywhere is red -- but a disposition is a "
-                      f"reason, not a repair, and the ratio "
-                      f"{len(touched)}:{len(con_head)} is the scope the "
-                      f"repair chose")
+                      f"in the commit the repair landed in, after a repair "
+                      f"that touched {len(touched)}.  Each carries a declared "
+                      f"disposition in the parent's `DISPOSITIONS` table keyed "
+                      f"on its exact line, so a new one anywhere is red -- but "
+                      f"a disposition is a REASON, not a repair, and "
+                      f"{len(touched)} of {len(con_pre)} is the scope the "
+                      f"repair chose.  The brief asked for these two numbers "
+                      f"and they are 1 and {len(con_pre)}")
 
     landing_hits = [h for h in mine_head if h[0] == LANDING_REL]
     landing_con = [h for h in landing_hits if h[3] == "CONSTRUCT"]
@@ -1157,19 +1247,29 @@ from the code.
                f"reproduced from the sentence alone at "
                f"{sum(mine[n] == theirs[n] for n in sites)} of {len(sites)}")
 
-    ledger = [l for l in files["STATE.md"].split("\n")
-              if l.startswith("| ") and l.count("|") >= 3
-              and not re.fullmatch(r"\|[\s:|-]+\|", l.strip())]
-    inside = [l for l in ledger if l in mine["the STATE.md row"].split("\n")]
-    record(len(inside) == 2,
+    # THE TABLE THIS ROW IS A ROW OF -- walked out from the row itself, not
+    # every pipe line in the file.
+    lines = files["STATE.md"].split("\n")
+    i = next(k for k, l in enumerate(lines) if l.startswith("| **AMBER-POSITIVE"))
+    top, bot = i, i
+    while top > 0 and lines[top - 1].startswith("|"):
+        top -= 1
+    while bot + 1 < len(lines) and lines[bot + 1].startswith("|"):
+        bot += 1
+    table = lines[top:bot + 1]
+    body = [l for l in table if not re.fullmatch(r"\|[\s:|-]+\|", l.strip())]
+    inside = [l for l in table if l in mine["the STATE.md row"].split("\n")]
+    record(len(inside) == 3,
            f"B5b the framed_row sentence's SECOND HALF -- 'not the table's "
-           f"other rows' -- STATE.md holds {len(ledger)} pipe-table row(s) and "
-           f"{len(inside)} of them are inside the site (the header and the "
-           f"row).  {len(ledger) - len(inside)} verdict rows remain outside "
-           f"every record, which is mg-ec07's X2 and is declared open")
+           f"other rows' -- the ledger table this row belongs to is "
+           f"{len(table)} line(s), {len(body)} of them header-or-verdict rows; "
+           f"{len(inside)} lines are inside the site.  "
+           f"{len(body) - (len(inside) - 1)} verdict rows of this table remain "
+           f"outside every record, which is mg-ec07's X2 and is declared open "
+           f"with its cost measured")
 
     # B5c -- fail-closed on an anchor with no declared extent
-    src = BASELINE[LANDING_REL] + '''
+    src = inject(BASELINE[LANDING_REL], '''
 
 # ---- mg-7e39 probe: an anchor whose function has NO declared extent ----
 def framed_row_mg7e39(text, prefix):
@@ -1178,7 +1278,7 @@ def framed_row_mg7e39(text, prefix):
 
 ANCHORS[0] = (ANCHORS[0][0], ANCHORS[0][1], framed_row_mg7e39,
               ANCHORS[0][3], ANCHORS[0][4])
-'''
+''')
     write_rel(LANDING_REL, src)
     try:
         rc, out = run_runner()
@@ -1229,26 +1329,35 @@ ANCHORS[0] = (ANCHORS[0][0], ANCHORS[0][1], framed_row_mg7e39,
 
     # B5g -- 'the mutation goes through the FILE'
     src_l = BASELINE[LANDING_REL]
+    km = src_l[src_l.index("def kind_matrix("):src_l.index("def negative_control(")]
     nc = src_l[src_l.index("def negative_control("):]
-    through_file = nc.count("with_site(")
+    through_file = km.count("with_site(") + nc.count("with_site(")
     in_memory = len(re.findall(r"figure_gate\((?!texts\b)", nc))
+    cells = len(V.KINDS) * len(V.SITES)
     record(None,
            f"B5g 'the negative control now MUTATES THE FILE and re-cuts the "
-           f"sites from it' -- in `negative_control` the matrix goes through "
-           f"`with_site` ({through_file} call site(s)) and "
-           f"{in_memory} further `figure_gate(...)` probe(s) in the same "
-           f"function are still handed MUTATED SITE TEXTS in memory.  The "
-           f"source scopes the claim to the matrix; the commit message states "
-           f"it of the negative control.  Measured, not argued")
+           f"sites from it' -- `kind_matrix`, called from `negative_control`, "
+           f"routes all {cells} of its attempts through `with_site` "
+           f"({through_file} call site(s) in the two functions).  The "
+           f"{in_memory} further `figure_gate(...)` probes in "
+           f"`negative_control`'s OWN body are still handed MUTATED SITE TEXTS "
+           f"in memory.  Measured, not argued")
     if in_memory:
         finding("F4", f"the repair's own commit message says THE NEGATIVE "
                       f"CONTROL NOW MUTATES THE FILE AND RE-CUTS THE SITES "
-                      f"FROM IT.  The SITES x KINDS matrix does; the other "
-                      f"{in_memory} probes in the same function still mutate "
-                      f"site TEXT in memory -- the construction the repair "
-                      f"itself names as unable to exhibit a site-boundary "
-                      f"defect.  The claim is true of the part the repair "
-                      f"built and is written of the whole function")
+                      f"FROM IT.  The SITES x KINDS matrix it added does -- "
+                      f"all {cells} attempts go through `with_site`.  The "
+                      f"{in_memory} probes in `negative_control`'s own body do "
+                      f"not: they still mutate site TEXT in memory, which is "
+                      f"the construction the repair itself names as unable to "
+                      f"exhibit a site-boundary defect ('a battery that "
+                      f"mutates site texts in place cannot exhibit a "
+                      f"site-boundary defect').  The claim is true of the part "
+                      f"the repair built and is written of the whole "
+                      f"function.  The 19 probes are figure-side, so nothing "
+                      f"below them is known to be missed -- what is wrong is "
+                      f"the scope of the sentence, which is this repair's own "
+                      f"subject")
 
 
 # --------------------------------------------------------------------------
@@ -1286,11 +1395,14 @@ own below.
     per_row = {}
     for name in MY_NAMES:
         raw = texts[name]
-        theirs_tok = len(V.partition(raw)[1])
-        naive = len(NAIVE_FIG.findall(raw))
+        toks = V.partition(raw)[1]
+        naive = set(NAIVE_FIG.findall(raw))
+        missed = sorted({t for t in toks if t not in naive})
         print(f"    {name:<20} {len(raw):>7,} chars   asserted figure slots "
-              f"{theirs_tok:>3} (`partition`)   {naive:>3} (my naive regex, "
-              f"quotations included)")
+              f"{len(toks):>3} (`partition`)   {len(naive):>3} distinct by my "
+              f"naive regex; it misses {len(missed)} distinct token(s) of the "
+              f"form it does not spell ({', '.join(missed[:3]) or 'none'}) -- "
+              f"the SIGNED-RUN form `+755`, which is why the seam stays theirs")
         nhead = npre = 0
         for i in range(len(raw)):
             mut = raw[:i] + ("X" if raw[i] != "X" else "Y") + raw[i + 1:]
@@ -1416,7 +1528,7 @@ def main():
     theirs = b1e(cells)
     b2(cells, theirs, live)
     b3(rows)
-    con_head, touched = b4()
+    con_head, touched = b4(rows)
     b5()
     b6()
     b7(con_head)
