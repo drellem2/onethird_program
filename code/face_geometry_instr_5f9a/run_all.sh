@@ -1,14 +1,15 @@
 #!/bin/sh
 # mg-5f9a: closing mg-1c80's F1 -- regenerate this landing's transcript.
 #
-# Pure Python 3, no third-party packages.  Measured runtime 2026-07-30 on a 2024
-# laptop: 112 s total -- d1 0.6 s, d2 40 s (fourteen full control batteries: ten
+# Pure Python 3, no third-party packages.  Measured runtime 2026-07-31 on a 2024
+# laptop: 143 s total -- d1 0.6 s, d2 58 s (twenty-six full control batteries: ten
 # on this tree and on the PRE-REPAIR commit's sources, four more on the
-# TWO-RETURN commit for the per-return section), d3 15 s (two more, plus two runs
-# of mg-da45's landing verifier over the whole 86-poset population), d4 55 s
-# (mg-d0e2's own e1, e2 and e3 and mg-e7bc's g1, g2 and g3, all run unmodified as
-# subprocesses, two of them against a pinned commit materialised with
-# `git archive`).  72 claims, 0 BROKEN: d1 17, d2 33, d3 6, d4 16.
+# TWO-RETURN commit for the per-return section, nine for the CLAUSE sweep and
+# three on the TWO-CLAUSE commit), d3 15 s (two more, plus two runs of mg-da45's
+# landing verifier over the whole 86-poset population), d4 55 s (mg-d0e2's own
+# e1, e2 and e3 and mg-e7bc's g1, g2 and g3, all run unmodified as subprocesses,
+# two of them against a pinned commit materialised with `git archive`).
+# 83 claims, 0 BROKEN: d1 17, d2 44, d3 6, d4 16.
 #
 # mg-04a8 added d4 and rewrote d2's label check.  d2's BEFORE half now reads a
 # PINNED COMMIT rather than `main`: once mg-5f9a merged, "main's artifact
@@ -16,6 +17,18 @@
 # deletion it then attempted did not even apply -- the shipped file stopped at
 # `anchor occurs 0 times`.  A check pinned to a branch asks about whatever that
 # branch holds today.
+#
+# mg-64b6 made it PER CLAUSE and made the declared unit DERIVED.  mg-c4c8 found
+# that mg-9220's merge left a condition of TWO CLAUSES and that deleting the first
+# alone moved not one byte -- the same finding one rung lower -- and that the
+# declared unit understated its own patch on 8 of 11.  `absorb_trace`'s `shape`
+# condition is now a single comparison of the two row-shape profiles, so there is
+# no clause under that `return` to delete alone; d2 sweeps the ENUMERATED clause
+# population of the predicate layer, runs the same sweep against the pinned commit
+# that still has the two clauses (where it goes red, which is how a sweep gets
+# tested), and DERIVES every declared unit from its own patch by parsing the tree
+# before and after it.  mg-9220's eleven written declarations are kept verbatim as
+# the specimen and measured: 8 of 11 understate.
 #
 # mg-9220 made the deletion test PER RETURN.  mg-e7bc found that d2 deleted the
 # `shape` gate's TWO return statements together and its "the artifact CHANGES"

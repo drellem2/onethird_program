@@ -18,7 +18,7 @@ the raise is that kernel working.
 == E1: the deletion test, every gate the explanation names ==
 
 BASELINE -- the committed artifact, regenerated unmutated
-  [OK    ] controls.py reproduces its committed artifact byte for byte (23684 bytes, exit 0); committed is 23684 bytes
+  [OK    ] controls.py reproduces its committed artifact byte for byte (23695 bytes, exit 0); committed is 23695 bytes
   [OK    ] the unmutated battery exits 0
 
 DELETION TEST -- predictions were registered before the runs
@@ -40,7 +40,7 @@ AssertionError: delete_gate_'shape'/face_complex.py: anchor occurs 0 times, expe
         exit 1; the anchor it names is     if m != len(B):\n        return Trace(False, "shape", 0)
         WOULD DIFFER UNDER: the merged condition being split back into two returns, which is the only thing that would make this anchor apply again.  NOT under this audit being edited -- it is not, and the pinned re-run below is what keeps its measurement alive
   [HOLDS ] and its BASELINE claims ran before it stopped: it regenerated this tree's artifact byte for byte, so the abort is the mutation and not the tree
-        [OK    ] controls.py reproduces its committed artifact byte for byte (23684 bytes, exit 0); committed is 23684 bytes; [OK    ] the unmutated battery exits 0
+        [OK    ] controls.py reproduces its committed artifact byte for byte (23695 bytes, exit 0); committed is 23695 bytes; [OK    ] the unmutated battery exits 0
         WOULD DIFFER UNDER: this tree's controls_output.txt going stale, which would make the abort ambiguous between a missing anchor and a broken tree
 
 ==============================================================================

@@ -799,41 +799,69 @@ def absorb_trace(A, B):
     re-orientation the battery already varies -- a sign gauge, not a
     construction error.
 
-    THE `shape` GATE HAS ONE `return`, AND IT HAD TWO (mg-e7bc -> mg-9220).
-    THE UNIT A DELETION TEST REMOVES IS THE UNIT IT LICENSES A CLAIM ABOUT.
-    The test that guards this function deleted both `shape` returns TOGETHER,
-    the artifact changed, and the gate was booked as covered.  Deleting the
-    FIRST one ALONE -- `if m != len(B)` -- left the artifact BYTE-IDENTICAL,
-    every row green, exit 0: the 2x2-against-3x3 pair built for the gate falls
-    into the loop, where `len(A[0]) != len(B[0])` fires the SECOND return and
-    answers False at gate "shape" identically.  So the deletion proved the PAIR
-    was load-bearing and proved nothing about either return, and the first one,
-    at its own granularity, was doing nothing.
+    THE `shape` GATE HAS ONE `return` AND ITS CONDITION HAS ONE CLAUSE, and it
+    reached that state one rung at a time (mg-e7bc -> mg-9220 -> mg-c4c8 ->
+    mg-64b6).  THE UNIT A DELETION TEST REMOVES IS THE UNIT IT LICENSES A CLAIM
+    ABOUT, and this gate has now been rewritten twice for that one sentence, at
+    two different sizes.
 
-    IT IS MERGED RATHER THAN SIMPLY CUT, and the difference is measured rather
-    than argued (d2_deletion.py, section PER RETURN).  Cut `if m != len(B)` and
-    put nothing in its place and this function answers ABSORBABLE for
-    ([], [[1]]), raises IndexError for ([[1]], []), and answers ABSORBABLE for a
-    2x2 against a three-row B whose first two rows are 2 wide -- against a brute
-    force that enumerates every s and finds none.  The one condition below
-    decides all three the way the two returns did, and it is the form the four
-    other shape guards in this repository already use (`gate_violations` below;
-    `absorbable_2colour`, `absorbable_bruteforce` and `priority_gate` in
-    code/face_geometry_instr_5f9a/kern5f9a.py).
+    RUNG ONE -- TWO RETURNS (mg-e7bc).  The test that guards this function
+    deleted both `shape` returns TOGETHER, the artifact changed, and the gate
+    was booked as covered.  Deleting the FIRST one ALONE -- `if m != len(B)` --
+    left the artifact BYTE-IDENTICAL, every row green, exit 0: the
+    2x2-against-3x3 pair built for the gate falls into the loop, where
+    `len(A[0]) != len(B[0])` fires the SECOND return and answers False at gate
+    "shape" identically.  So the deletion proved the PAIR was load-bearing and
+    proved nothing about either return.  mg-9220 MERGED the two rather than
+    cutting the first, and measured the difference rather than arguing it: cut
+    `if m != len(B)` and put nothing in its place and this function answers
+    ABSORBABLE for ([], [[1]]), raises IndexError for ([[1]], []), and answers
+    ABSORBABLE for a 2x2 against a three-row B whose first two rows are 2 wide
+    -- against a brute force that enumerates every s and finds none.
 
-    ONE LABEL MOVES WITH THE MERGE, on pairs no population here contains: the
+    RUNG TWO -- TWO CLAUSES (mg-c4c8).  The merged condition was `m != len(B)
+    or any(len(A[i]) != len(B[i]) for i in range(m))`, and deleting its FIRST
+    CLAUSE alone left the artifact BYTE-IDENTICAL, exit 0, every row green.
+    That is rung one's sentence with `return` replaced by `clause`: the unit
+    moved from a pair of returns to a pair of clauses and the pair was still
+    what the test bit on.
+
+    SO THE CONDITION BELOW HAS NO CLAUSE TO BE THE THIRD RUNG.  The two clauses
+    were saying one thing -- A and B do not have the same row-shape profile --
+    and it is written here as one comparison of two lists.  There is no boolean
+    operator in it, so the smallest deletable unit inside this gate IS the
+    `return`, and the deletion test that removes it (d2_deletion.py, AFTER-5)
+    is a claim about the whole of it.  The move is the merge's, made once more
+    instead of at the level below: REMOVE WHAT GENERATES THE FINDING RATHER
+    THAN MEASURE ITS OUTPUT.  `gate_violations` and `diagonal_moves` below
+    still carry the two-clause form; their `return`s are inert whole (mg-c4c8
+    F3) and this commit did not touch them.
+
+    IT IS THE SAME PREDICATE, MEASURED AND NOT ARGUED.  The condition below is
+    true exactly when the orders differ or some row width does, so nothing this
+    function returns can move.  d2_deletion.py's
+    section PER CLAUSE runs this form, the merged two-clause form and the
+    pinned two-return form side by side over a population indexed by SHAPE
+    PROFILE -- which is what the condition reads -- and reports decision, gate
+    label and raised exception for each.
+
+    ONE LABEL MOVED WITH THE MERGE, on pairs no population here contains: the
     old order tested row 0's diagonal before row 1's width, so a pair RAGGED at
     row 1 and diagonal-different at row 0 was traced "diagonal".  Hoisting the
     width test labels it "shape" -- which is what `gate_violations` and
-    `priority_gate` always said about it, so the merge removes a disagreement
-    rather than creating one.  The artifact does not move.
+    `priority_gate` always said about it, so the merge removed a disagreement
+    rather than creating one.  The artifact did not move for it, and does not
+    move for this rewrite either.  AND THE MERGE MADE THIS GATE TOTAL: the
+    two-return form indexed `A[i][i]` before it had checked row i's width and
+    raised IndexError on 2,064 of mg-c4c8's 28,900 pairs where this form
+    decides (its F5, undisclosed by mg-9220 and disclosed here).
 
     Method: s_i^2 = 1 pins every diagonal entry, |s_i s_j| = 1 pins every
     absolute value, and each nonzero off-diagonal entry forces the product
     s_i s_j.  What remains is a parity system, solved by union-find.
     """
     m = len(A)
-    if m != len(B) or any(len(A[i]) != len(B[i]) for i in range(m)):
+    if [len(row) for row in A] != [len(row) for row in B]:
         return Trace(False, "shape", 0)
     for i in range(m):
         if A[i][i] != B[i][i]:
