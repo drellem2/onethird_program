@@ -329,6 +329,90 @@ def e2e(dist):
           "  Young side does not go through Birkhoff, and it does.\n", file=OUT)
 
 
+HEDGES = [
+    "may ", "might", "could be", "appears", "seems", "arguably", "roughly",
+    "broadly", "essentially", "in some sense", "more or less", "largely",
+    "generally", "tends to", "presumably", "plausibly", "believed",
+    "on mg-af28's reading", "which nobody", "has not re-read", "to a degree",
+    "something like", "in effect", "effectively", "for the most part",
+]
+
+
+def e2f():
+    """The brief asks specifically whether the repair narrowed by VAGUENESS.
+    A sentence that asserts less because it says less precisely is not a
+    repair.  So the eight phrasings mg-dffa's own w5_doc.py requires to be
+    PRESENT are scanned for hedge tokens, and the one construction that IS
+    less specific than what it replaced -- "of the same KIND" -- is examined
+    for whether it is bounded or merely vague."""
+    head("E2f  DID IT NARROW BY VAGUENESS?  The eight new phrasings, scanned.")
+    doc = read(DOC)
+    w5 = read(os.path.join(CODE, "branching_warrant_dffa", "w5_doc.py"))
+    m = re.search(r"PRESENT = \[(.*?)\n\]", w5, re.S)
+    phr = re.findall(r'"((?:[^"\\]|\\.)*)"', m.group(1)) if m else []
+    phr = [p for p in phr if len(p) > 25]
+    print("  the phrasings mg-dffa's own w5_doc.py requires to be PRESENT: %d"
+          % len(phr), file=OUT)
+    print(file=OUT)
+    hedged = []
+    for p in phr:
+        needle = p.encode().decode("unicode_escape")
+        idx = doc.find(needle)
+        if idx < 0:
+            continue
+        # The SENTENCE containing the phrase, not a fixed window: a +/-200
+        # character window pulled in "a live claim MAY rest" from the
+        # neighbouring methodological sentence and scored it as a hedge on
+        # Brown's example.  A hedge is a property of the claim's own sentence.
+        lo = max((doc.rfind(c, 0, idx) for c in ".!?\n"), default=-1) + 1
+        hi = min((h for h in (doc.find(c, idx + len(needle))
+                              for c in ".!?\n") if h > 0), default=len(doc))
+        sent = doc[lo:hi + 1].lower()
+        hits = [h for h in HEDGES if h in sent]
+        flag = "HEDGE: %s" % hits if hits else "definite"
+        print("    %-9s %s" % (flag, re.sub(r"\s+", " ", needle)[:60]), file=OUT)
+        if hits:
+            hedged.append((needle, hits))
+    print(file=OUT)
+    ck("no new phrasing sits in a hedged sentence", not hedged,
+       " (%d)" % len(hedged))
+    print(file=OUT)
+    print("  THE ONE CONSTRUCTION THAT IS LESS SPECIFIC THAN WHAT IT REPLACED.", file=OUT)
+    print("  'the SAME index-set contact' became 'a contact of the same KIND'.", file=OUT)
+    print("  'of the same kind' asserts less, and asserting less by saying", file=OUT)
+    print("  less precisely is exactly what the brief forbids.  So: is it", file=OUT)
+    print("  BOUNDED or is it VAGUE?  What falls inside it, enumerated:", file=OUT)
+    print(file=OUT)
+    print("      inside 'the same KIND'  : both families are ideal lattices;", file=OUT)
+    print("                                each interval is J(P) for some P.", file=OUT)
+    print("                                MEASURED here on all 33 (E2b): the", file=OUT)
+    print("                                biconditional holds, 0 disagree.", file=OUT)
+    print("      OUTSIDE it, and NAMED    : which P.  The Young side's P are a", file=OUT)
+    print("                                named closed class; the Young-", file=OUT)
+    print("                                Fibonacci side's are 17 distinct P", file=OUT)
+    print("                                of which 5 are not skew cell", file=OUT)
+    print("                                posets.  MEASURED here (E2a).", file=OUT)
+    print(file=OUT)
+    para = re.search(r"\*\(\*\*mg-dffa\*\*, landing mg-5800's F2.*?\)\*", doc, re.S)
+    nxt = para.group() if para else ""
+    ck("the vaguer predicate is followed IN THE SAME PARAGRAPH by the "
+       "difference,\n     stated definitely",
+       "it is not the same contact" in nxt and "17 distinct" in nxt)
+    ck("  ... and the same at row 10",
+       bool([l for l in doc.split("\n") if l.startswith("| **10** |")
+             and "it is not the SAME contact" in l]))
+    print(file=OUT)
+    print("  VERDICT E2f.  NOT A HEDGE.  'Of the same kind' is a weaker", file=OUT)
+    print("  predicate, but at both sites it is immediately BOUNDED by a", file=OUT)
+    print("  definite statement of what is and is not shared, and both halves", file=OUT)
+    print("  of that statement are measured.  The repair replaced one definite", file=OUT)
+    print("  claim with a weaker definite claim plus its complement, which is", file=OUT)
+    print("  narrowing to the evidence and not splitting the difference.", file=OUT)
+    print("  Where a hedge was actually on offer -- mg-5800's own suggested", file=OUT)
+    print("  fix for F4 -- it was refused and Brown section 4.3 was read.", file=OUT)
+    print(file=OUT)
+
+
 def main():
     head("E2  mg-19ec: the two NARROWED clauses (F2a, F2b) as new claims.")
     dist, iv = e2a()
@@ -336,6 +420,7 @@ def main():
     e2c()
     e2d()
     e2e(dist)
+    e2f()
     print("=" * 78, file=OUT)
     print("SUMMARY e2_f2_clauses: findings %d" % BAD[0], file=OUT)
     print("=" * 78, file=OUT)

@@ -11,8 +11,11 @@
 # Exit status is the number of exit-code misses, as in run_all.sh.
 set -u
 cd "$(dirname "$0")"
+HERE=$(pwd)
 ROOT=$(cd ../.. && pwd)
-OUT=out_upstream.txt
+# ABSOLUTE: the classification section below runs from $ROOT, and a relative
+# $OUT put the report in the repository root on the first run.
+OUT="$HERE/out_upstream.txt"
 MISSES=0
 
 {
