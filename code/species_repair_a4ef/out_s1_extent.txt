@@ -27,6 +27,32 @@ S1a  EXTENT DECLARATION -- what is enforced, and over what
       __pycache__/ is not descended into -- compiled bytecode these runs
       write themselves, not authored text.  Nothing else is a
       directory rule: the walk is os.walk and it recurses.
+
+  THE BOUND OF 'EVERY REGULAR FILE', STATED (mg-5040, on mg-4700's
+  OPEN 1).  It means every regular file THE WALK ABOVE REACHED.  That
+  walk is os.walk WITHOUT followlinks, so it does not enter a
+  symlinked directory; it reads no entry that is not a regular file;
+  and until this ticket it dropped a directory it could not read
+  without saying so.  None of that is a promise about the shape of
+  these trees, because the walk now RETURNS EVERYTHING IT DECLINED,
+  with the reason, and both lists are printed here.  An entry that is
+  NOT the stated __pycache__/ rule is a FINDING, counted into S1 TOTAL BAD
+  below.  So the sentence and the code describe the same set: the day
+  a symlinked directory appears, this run goes RED and the claim
+  visibly stops matching, rather than quietly stopping being true --
+  which is what happened twice, at mg-6cb9 F1 (no subdirectory) and
+  again at mg-4700 F1 (no symlinked directory).
+      DECLINED, STATED -- 6 entr(ies):
+          code/species_repair_a4ef/OUTCOMES.md   file rule, STATED: on the EXCLUDE list
+          code/species_repair_a4ef/PREDICTIONS.md   file rule, STATED: on the EXCLUDE list
+          code/species_repair_a4ef/__pycache__   directory rule, STATED: __pycache__/
+          code/species_repair_a4ef/out_c4_scope_73df_after.txt   file rule, STATED: on the EXCLUDE list
+          code/species_repair_a4ef/out_c5_doc_73df_after.txt   file rule, STATED: on the EXCLUDE list
+          code/species_repair_a4ef/stricken_a4ef.py   file rule, STATED: on the EXCLUDE list
+      DECLINED, NOT STATED -- 0 entr(ies):
+          (none -- and this line is the whole claim.  It is a
+           measurement of what the walk did, not a list of the
+           rules anybody remembered to write down)
   Those three lists are the WHOLE exclusion.  Until mg-d633 a fourth
   existed and was printed nowhere: an extension filter that dropped the
   four run_all.sh inside the four trees named above, so the extent line
@@ -127,6 +153,11 @@ EVERY REGULAR FILE of each AT ANY DEPTH, less the 5 named above, the 0
 named as undecodable, and anything under __pycache__/ -- and those three
 lists are the whole of it, which is a claim about the CODE and not
 about the shape the trees happen to have today (mg-821e).
+EVERY REGULAR FILE means every regular file THE WALK REACHED, and the
+walk names what it declined: 6 stated, 0 not stated (mg-5040).  A
+non-empty second list is a finding here, so this sentence cannot be
+true by accident of the tree the way it was at mg-6cb9 and again at
+mg-4700.
 It says NOTHING about docs/ other than the one document
 named above, about the audit trees code/species_audit_a61f,
 code/species_audit_73df, code/species_audit_7dd3 or the instrument

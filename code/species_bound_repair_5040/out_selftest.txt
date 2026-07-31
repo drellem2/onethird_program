@@ -1,0 +1,31 @@
+selftest5040: the instrument's own contracts
+
+  the pin extracts                                                 ok
+  s1_extent.py at the pin does NOT carry the repair (walk_residue) ok
+  w3_scope.py at the pin does NOT carry the repair (walk_residue)  ok
+  e1_extents.py at the pin does NOT carry the repair (walk_residue ok
+  kernd633.py at the pin does NOT carry the repair (md_files_and_r ok
+  run_all.sh at the pin does NOT carry the repair (unfiltered)     ok
+  s1_extent.py in the worktree DOES carry it                       ok
+  kernd633.py in the worktree DOES carry it                        ok
+  run_all.sh in the worktree DOES carry it                         ok
+  the walk reaches a file below the root                           ok
+  the walk does NOT reach through a symlinked directory            ok
+  __pycache__ is declined and STATED                               ok
+  the symlinked directory is declined and NOT stated               ok
+  and the reason names symlink                                     ok
+  a Probe that leaves an untracked file reports NOT restored       ok
+  a Probe that writes and puts back reports restored               ok
+  the snapshot restores a file the probe never wrote               ok
+  and reports restored                                             ok
+  figures('A2 TOTAL BAD: 1') == [1]                                ok
+  figures('A2 TOTAL BAD is 2') == [2]                              ok
+  figures('A2 TOTAL BAD stays 1') == [1]                           ok
+  figures('(`A2 TOTAL BAD` remains **1**,') == [1]                 ok
+  figures('A2 TOTAL BAD 1, the one row') == [1]                    ok
+  figures('nothing here') == []                                    ok
+  the commit-message census reads more than one commit             ok
+  and it is anchored at the pin, so it cannot grow under the reade ok
+
+26 assertion(s), 0 failed
+selftest5040 ok

@@ -1,0 +1,161 @@
+
+==============================================================================
+R1a  THE CLEAN TREE -- all four checkers, nothing planted
+==============================================================================
+
+  P1f.  This is the row that stops every row below meaning nothing.
+
+  w3_scope.py              exit 0   residue printed: yes   ok
+  s1_extent.py             exit 0   residue printed: yes   ok
+  e1_extents.py            exit 0   residue printed: yes   ok
+  e2_crosssection.py       exit 0   residue printed: yes   ok
+
+  P1g.  All four print what their walk declined.  That list is the
+  bound, and it is a measurement rather than a sentence somebody
+  maintains: nothing below required this file to know in advance
+  which structures exist.
+
+
+==============================================================================
+R1b  FOUR STRUCTURES PLANTED IN THE REAL WORKTREE
+==============================================================================
+
+  Each is planted, all four checkers are run, and the worktree is put
+  back and PROVED back with `git status --porcelain` AND the full
+  `git diff`, both compared against the state at entry.
+
+      a SYMLINKED DIRECTORY holding a forbidden stat w3_scope.py          exit 1   NAMES IT
+      a SYMLINKED DIRECTORY holding a forbidden stat s1_extent.py         exit 1   NAMES IT
+      a SYMLINKED DIRECTORY holding a forbidden stat e1_extents.py        exit 1   NAMES IT
+      a SYMLINKED DIRECTORY holding a forbidden stat e2_crosssection.py   exit 1   NAMES IT
+      a FIFO                                         w3_scope.py          exit 1   NAMES IT
+      a FIFO                                         s1_extent.py         exit 1   NAMES IT
+      a FIFO                                         e1_extents.py        exit 1   NAMES IT
+      a FIFO                                         e2_crosssection.py   exit 0   does not name it
+      a BROKEN SYMLINK named leak.md                 w3_scope.py          exit 1   NAMES IT
+      a BROKEN SYMLINK named leak.md                 s1_extent.py         exit 1   NAMES IT
+      a BROKEN SYMLINK named leak.md                 e1_extents.py        exit 1   NAMES IT
+      a BROKEN SYMLINK named leak.md                 e2_crosssection.py   exit 1   NAMES IT
+      a DIRECTORY THIS PROCESS CANNOT READ           w3_scope.py          exit 1   NAMES IT
+      a DIRECTORY THIS PROCESS CANNOT READ           s1_extent.py         exit 1   NAMES IT
+      a DIRECTORY THIS PROCESS CANNOT READ           e1_extents.py        exit 1   NAMES IT
+      a DIRECTORY THIS PROCESS CANNOT READ           e2_crosssection.py   exit 1   NAMES IT
+
+  e1_extents.py / a BROKEN SYMLINK named leak.md           ok
+  e2_crosssection.py / a BROKEN SYMLINK named leak.md      ok
+  s1_extent.py / a BROKEN SYMLINK named leak.md            ok
+  w3_scope.py / a BROKEN SYMLINK named leak.md             ok
+  e1_extents.py / a DIRECTORY THIS PROCESS CANNOT RE       ok
+  s1_extent.py / a DIRECTORY THIS PROCESS CANNOT RE        ok
+  w3_scope.py / a DIRECTORY THIS PROCESS CANNOT RE         ok
+  e1_extents.py / a FIFO                                   ok
+  s1_extent.py / a FIFO                                    ok
+  w3_scope.py / a FIFO                                     ok
+  e1_extents.py / a SYMLINKED DIRECTORY holding a fo       ok
+  e2_crosssection.py / a SYMLINKED DIRECTORY holding a fo  ok
+  s1_extent.py / a SYMLINKED DIRECTORY holding a fo        ok
+  w3_scope.py / a SYMLINKED DIRECTORY holding a fo         ok
+
+  NOT SCORED, AND THE REASON IS THE POINT: e2_crosssection.py against
+  a fifo.  Its extent is every *.md, and a fifo named `pipe` is not in
+  it -- so silence there is CORRECT, and scoring it would be asking a
+  checker to widen its claim to cover a probe.  The broken symlink is
+  named `leak.md` for exactly this reason: it is inside e2's stated
+  extent, so e2 is scored on it.
+
+
+==============================================================================
+R1c  THE SAME FOUR, AGAINST 4372fae -- THE TREE BEFORE THIS REPAIR
+==============================================================================
+
+  Anchored on 4372fae, which git cannot move.  Not on HEAD: mg-821e
+  anchored two comparisons on HEAD and they stopped comparing
+  anything the moment its own repair landed (mg-4700, F3).
+
+  extracted 4372fae -> /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg5040-pre-4372fae
+  It has no .git, which matters for one row only and is stated there.
+
+      a SYMLINKED DIRECTORY holding a forbidden stat w3_scope.py          exit 0   does not name it
+      a SYMLINKED DIRECTORY holding a forbidden stat s1_extent.py         exit 1   does not name it
+      a SYMLINKED DIRECTORY holding a forbidden stat e1_extents.py        exit 0   does not name it
+      a SYMLINKED DIRECTORY holding a forbidden stat e2_crosssection.py   exit 0   does not name it
+      a FIFO                                         w3_scope.py          exit 0   does not name it
+      a FIFO                                         s1_extent.py         exit 1   NAMES IT
+      a FIFO                                         e1_extents.py        exit 0   does not name it
+      a FIFO                                         e2_crosssection.py   exit 0   does not name it
+      a BROKEN SYMLINK named leak.md                 w3_scope.py          exit 0   does not name it
+      a BROKEN SYMLINK named leak.md                 s1_extent.py         exit 1   NAMES IT
+      a BROKEN SYMLINK named leak.md                 e1_extents.py        exit 1   does not name it
+      a BROKEN SYMLINK named leak.md                 e2_crosssection.py   exit 1   NAMES IT
+      a DIRECTORY THIS PROCESS CANNOT READ           w3_scope.py          exit 0   does not name it
+      a DIRECTORY THIS PROCESS CANNOT READ           s1_extent.py         exit 1   NAMES IT
+      a DIRECTORY THIS PROCESS CANNOT READ           e1_extents.py        exit 0   does not name it
+      a DIRECTORY THIS PROCESS CANNOT READ           e2_crosssection.py   exit 0   does not name it
+
+  e1_extents.py / a BROKEN SYMLINK named leak.md           *** (1, False), predicted (0, False) ***
+  w3_scope.py / a BROKEN SYMLINK named leak.md             ok
+  e1_extents.py / a DIRECTORY THIS PROCESS CANNOT RE       ok
+  s1_extent.py / a DIRECTORY THIS PROCESS CANNOT RE        *** (1, True), predicted (0, False) ***
+  w3_scope.py / a DIRECTORY THIS PROCESS CANNOT RE         ok
+  e1_extents.py / a FIFO                                   ok
+  e2_crosssection.py / a FIFO                              ok
+  s1_extent.py / a FIFO                                    *** (1, True), predicted (0, False) ***
+  w3_scope.py / a FIFO                                     ok
+  e1_extents.py / a SYMLINKED DIRECTORY holding a fo       ok
+  e2_crosssection.py / a SYMLINKED DIRECTORY holding a fo  ok
+  w3_scope.py / a SYMLINKED DIRECTORY holding a fo         ok
+
+  DERIVED FROM THE ROWS ABOVE, not from a belief: at the pin,
+  s1_extent.py exits 1 on 4 of the 4 structures --
+      a BROKEN SYMLINK named leak.md
+      a DIRECTORY THIS PROCESS CANNOT READ
+      a FIFO
+      a SYMLINKED DIRECTORY holding a forbidden statement
+  and in each case the reason is its control, which copies the tree
+  with shutil.copytree: copytree FOLLOWS a symlinked directory, and it
+  RAISES on a fifo and on a directory it cannot read.  So the
+  pre-repair tree is LOUD and the diagnosis a reader is handed is that
+  the injection control broke, while its own scan reports 0 entries
+  below the root and a forbidden statement sits live.  mg-4700 found
+  this shape once, at D2b, and predicted silence here; it is three of
+  four.  An exit code alone would have scored the old tree as catching
+  these, which is why every row above carries the NAMES IT column too.
+
+  s1_extent.py against a symlinked directory is NOT scored at the pin.
+  mg-4700 measured it exiting 1 there -- for a reason that has nothing
+  to do with the extent: its control copies the tree with
+  shutil.copytree, which FOLLOWS the link, materialises the planted
+  file, and reports the injection control as broken.  A row that
+  scored the exit code alone would read that as the pre-repair tree
+  catching the symlink, which it does not.
+
+
+==============================================================================
+R1d  E1 FIRES ON A ROW ITS OWN `want <= got` CANNOT REACH
+==============================================================================
+
+  mg-4700 F1: e1_extents.py walks the way its subjects walk, so when
+  both decline the same thing `want` and `got` agree and E1 CERTIFIES
+  THE EXTENT AS TRUE.  Widening E1's walk would fix this instance and
+  buy one generation.  The row below fires with `want <= got` holding
+  everywhere, because it compares the walk against ITSELF.
+
+  e1_extents.py exits 1                                      ok
+  every `reads every ...` inclusion row is still ok          ok
+  the row that fails is the RESIDUE row                      ok
+  the worktree was restored                                  ok
+
+==============================================================================
+R1 TOTAL BAD: 0      R1 PREDICTIONS MISSED: 3
+==============================================================================
+
+EXTENT OF THIS NUMBER.  Four structures planted in ONE tree
+(code/species_7d75), each measured against FOUR checkers, twice: against
+the worktree as it ships and against an extraction of 4372fae.
+It says NOTHING about trees outside code/species_*, nothing about any
+checker not in the four, and nothing about whether a walk that
+FOLLOWED symlinks would be correct -- that is option 2 and this repair
+did not take it.  The four structures are not a claim to have
+enumerated the ways a walk can decline something: the repair's whole
+point is that the enumeration is not maintained by hand, and the fifth
+structure, whatever it is, will arrive in the same printed list.

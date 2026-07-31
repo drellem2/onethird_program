@@ -6,7 +6,7 @@ E1a  WHAT EACH CHECKER ACTUALLY READS
   w3_scope.py          exit 0    18 file(s) under the repo (0 docs, 18 code), 0 outside, 0 binary
   s1_extent.py         exit 0    53 file(s) under the repo (1 docs, 52 code), 55 outside, 18 binary
   s2_seam.py           exit 0     1 file(s) under the repo (1 docs, 0 code), 0 outside, 0 binary
-  e2_crosssection.py   exit 0   123 file(s) under the repo (77 docs, 46 code), 0 outside, 0 binary
+  e2_crosssection.py   exit 0   150 file(s) under the repo (86 docs, 64 code), 0 outside, 0 binary
 
   'outside' is the temporary copies s1_extent.py makes for its own
   controls (c) and (d).  'binary' is shutil.copytree's byte copies.
@@ -54,8 +54,19 @@ E1b  THE PRINTED EXTENT AGAINST THE READ SET, PER CHECKER
   not disagree.  E1 walks now, so the two computations are independent
   and a scan that stops at the root is a FINDING here, not a match.
 
+  the WALK'S RESIDUE -- what the enumeration declined, and whether the
+  sentence that quantifies over it says so (mg-5040)
+  species_7d75: declined nothing unstated (0 stated)               ok
+  species_repair_6f61: declined nothing unstated (0 stated)        ok
+  species_remainder_f8fa: declined nothing unstated (0 stated)     ok
+  species_repair_a4ef: declined nothing unstated (0 stated)        ok
+      nothing was declined outside the stated rules, in 4 tree(s).
+      That is a MEASUREMENT of this run, not a list of the rules
+      anybody remembered: plant a symlinked directory and the row
+      above goes red without one line of this file changing.
+
   e2_crosssection.py -- claims every *.md under docs/ and code/
-  reads every .md under docs/ and code/ (123)                      ok
+  reads every .md under docs/ and code/ (150)                      ok
   reads no .py, .txt or anything else                              ok
   the printed extent states that count                             ok
 

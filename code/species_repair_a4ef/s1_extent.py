@@ -112,38 +112,116 @@ DISARMERS = [
 # It holds compiled bytecode written by these runs themselves; its contents are
 # not decodable text, they are not authored, and they vary with the interpreter
 # that last ran.  That rule is stated, so it can be argued with.
+#
+# mg-5040, on mg-4700's OPEN 1: THE SENTENCE STOPS QUANTIFYING OVER A SET THIS
+# CODE ENUMERATES BY WALKING.
+#
+# The paragraph above is the SECOND generation of the same accident.  "EVERY
+# REGULAR FILE" was true because no tree had a subdirectory (mg-6cb9 F1); the
+# walk was made to recurse; it was then true because no tree had a SYMLINKED
+# DIRECTORY (mg-4700 F1).  `os.walk` does not descend into one without
+# `followlinks=True`, and the link lands in `dirnames`, so it is never a
+# candidate file either -- a second directory rule carried by no sentence,
+# invisible for exactly the reason the first one was.  A statement planted
+# behind a link left this checker's scan reading 0 files below the root.
+#
+# EACH WIDENING BUYS EXACTLY ONE GENERATION.  Depth, then symlinks, then mount
+# boundaries, then a directory this process cannot read, then whatever is
+# next.  So this is not widened a third time.
+#
+# OF THE TWO OPTIONS mg-5040 NAMES, THIS TAKES THE FIRST: STATE THE WALK'S
+# ACTUAL BOUND, so that the claim and the code describe the same set.  Not the
+# second -- making a filesystem walk TOTAL means `followlinks=True` plus cycle
+# detection, and it still leaves device nodes, unreadable directories and
+# mount boundaries outside, which is the third widening wearing the word
+# "total".
+#
+# A bound written in prose rots like any other copy, so it is not written in
+# prose.  THE WALK RETURNS ITS OWN RESIDUE: every entry it declined, with the
+# reason, WHETHER OR NOT ANYBODY THOUGHT OF THAT REASON IN ADVANCE.  The
+# residue is printed beside the count, and any entry in it that is not the one
+# stated rule is a FINDING that makes this run exit 1.  That is the
+# subtraction: what generated the generations was not the depth rule or the
+# symlink rule, it was the SILENCE, and the silence is what is removed.  The
+# day a symlinked directory appears in one of these trees the sentence VISIBLY
+# STOPS MATCHING instead of quietly stopping being true.
 PYCACHE = "__pycache__"
+STATED_DIR_RULES = (PYCACHE,)
 
 
-def tree_files(root):
-    """(files scanned, files skipped because they are not UTF-8 text).
+def walk_residue(root, stated_dirs=STATED_DIR_RULES):
+    """(files, stated, unstated) -- and nothing is dropped without landing in
+    one of the last two.  `stated` and `unstated` are (relpath, reason) pairs.
 
-    Paths are relative to `root` and may contain a separator: the walk is
-    RECURSIVE (mg-821e).  `__pycache__` is the one directory not descended
-    into, and the extent line says so.
+    `os.walk` silently declines four kinds of thing: a directory named by the
+    caller's own prune, a SYMLINKED directory (no `followlinks`), an entry
+    that is not a regular file, and any directory it raised an error on --
+    the last of which it swallows entirely unless `onerror` is given.  All
+    four are returned here.  The list is not a list of the rules somebody
+    remembered; it is a list of what actually happened.
     """
+    files, stated, unstated = [], [], []
     if not os.path.isdir(root):
-        return [], []
-    scanned, undecodable = [], []
-    for dirpath, dirnames, filenames in os.walk(root):
-        dirnames[:] = sorted(d for d in dirnames if d != PYCACHE)
+        return files, stated, unstated
+
+    def onerror(err):
+        p = getattr(err, "filename", None) or root
+        unstated.append((os.path.relpath(p, root),
+                         "os.walk raised %s and would otherwise have "
+                         "dropped it in silence" % err.__class__.__name__))
+
+    for dirpath, dirnames, filenames in os.walk(root, onerror=onerror):
+        keep = []
+        for d in sorted(dirnames):
+            p = os.path.join(dirpath, d)
+            rel = os.path.relpath(p, root)
+            if d in stated_dirs:
+                stated.append((rel, "directory rule, STATED: %s/" % d))
+            elif os.path.islink(p):
+                unstated.append((rel, "symlinked directory -- os.walk does "
+                                      "not descend without followlinks"))
+            else:
+                keep.append(d)
+        dirnames[:] = keep
         for f in sorted(filenames):
             p = os.path.join(dirpath, f)
             rel = os.path.relpath(p, root)
-            # EXCLUDE is matched on the path relative to the tree root and NOT
-            # on the basename.  The five names are printed root-relative, so a
-            # basename rule would make the printed list mean more than it says:
-            # `sub/PREDICTIONS.md` would be dropped by a name the reader can
-            # only see attached to the root.  It is read.
-            if not os.path.isfile(p) or rel in EXCLUDE:
-                continue
-            try:
-                open(p, encoding="utf-8").read()
-            except (UnicodeDecodeError, OSError):
-                undecodable.append(rel)
-                continue
-            scanned.append(rel)
-    return sorted(scanned), sorted(undecodable)
+            if os.path.isfile(p):
+                files.append(rel)
+            elif os.path.islink(p):
+                unstated.append((rel, "symlink that does not resolve to a "
+                                      "regular file"))
+            else:
+                unstated.append((rel, "not a regular file"))
+    return sorted(files), sorted(set(stated)), sorted(set(unstated))
+
+
+def tree_files(root):
+    """(scanned, undecodable, stated, unstated).
+
+    Paths are relative to `root` and may contain a separator: the walk is
+    RECURSIVE (mg-821e) and it NAMES WHAT IT DECLINED (mg-5040).
+    """
+    reached, stated, unstated = walk_residue(root)
+    scanned, undecodable = [], []
+    for rel in reached:
+        p = os.path.join(root, rel)
+        # EXCLUDE is matched on the path relative to the tree root and NOT
+        # on the basename.  The five names are printed root-relative, so a
+        # basename rule would make the printed list mean more than it says:
+        # `sub/PREDICTIONS.md` would be dropped by a name the reader can
+        # only see attached to the root.  It is read.
+        if rel in EXCLUDE:
+            stated.append((rel, "file rule, STATED: on the EXCLUDE list"))
+            continue
+        try:
+            open(p, encoding="utf-8").read()
+        except (UnicodeDecodeError, OSError):
+            undecodable.append(rel)
+            continue
+        scanned.append(rel)
+    return (sorted(scanned), sorted(undecodable), sorted(set(stated)),
+            sorted(set(unstated)))
 
 
 def tree_scanned(root):
@@ -179,10 +257,14 @@ print("  each tree is read, AT ANY DEPTH -- there is no extension rule")
 print("  (mg-d633) and no depth rule (mg-821e) --")
 undecodable = []
 subdirs = []
+declined_stated = []
+declined_unstated = []
 for t in TREES:
     root = os.path.join(REPO, "code", t)
-    scanned, undec = tree_files(root)
+    scanned, undec, st, unst = tree_files(root)
     undecodable += [(t, f) for f in undec]
+    declined_stated += [(t, r, why) for r, why in st]
+    declined_unstated += [(t, r, why) for r, why in unst]
     nested = [f for f in scanned if os.sep in f]
     subdirs += [(t, f) for f in nested]
     print("      code/%-24s %3d file(s) read, %d of them below the tree root"
@@ -204,6 +286,35 @@ print("      %s/ is not descended into -- compiled bytecode these runs"
       % PYCACHE)
 print("      write themselves, not authored text.  Nothing else is a")
 print("      directory rule: the walk is os.walk and it recurses.")
+print()
+print("  THE BOUND OF 'EVERY REGULAR FILE', STATED (mg-5040, on mg-4700's")
+print("  OPEN 1).  It means every regular file THE WALK ABOVE REACHED.  That")
+print("  walk is os.walk WITHOUT followlinks, so it does not enter a")
+print("  symlinked directory; it reads no entry that is not a regular file;")
+print("  and until this ticket it dropped a directory it could not read")
+print("  without saying so.  None of that is a promise about the shape of")
+print("  these trees, because the walk now RETURNS EVERYTHING IT DECLINED,")
+print("  with the reason, and both lists are printed here.  An entry that is")
+print("  NOT the stated %s/ rule is a FINDING, counted into S1 TOTAL BAD"
+      % PYCACHE)
+print("  below.  So the sentence and the code describe the same set: the day")
+print("  a symlinked directory appears, this run goes RED and the claim")
+print("  visibly stops matching, rather than quietly stopping being true --")
+print("  which is what happened twice, at mg-6cb9 F1 (no subdirectory) and")
+print("  again at mg-4700 F1 (no symlinked directory).")
+print("      DECLINED, STATED -- %d entr(ies):" % len(declined_stated))
+for t, r, why in declined_stated:
+    print("          code/%s/%s   %s" % (t, r, why))
+if not declined_stated:
+    print("          (none)")
+print("      DECLINED, NOT STATED -- %d entr(ies):" % len(declined_unstated))
+for t, r, why in declined_unstated:
+    print("          code/%s/%s   %s" % (t, r, why))
+if not declined_unstated:
+    print("          (none -- and this line is the whole claim.  It is a")
+    print("           measurement of what the walk did, not a list of the")
+    print("           rules anybody remembered to write down)")
+bad += len(declined_unstated)
 print("  Those three lists are the WHOLE exclusion.  Until mg-d633 a fourth")
 print("  existed and was printed nowhere: an extension filter that dropped the")
 print("  four run_all.sh inside the four trees named above, so the extent line")
@@ -414,6 +525,12 @@ print("named as undecodable, and anything under %s/ -- and those three"
       % PYCACHE)
 print("lists are the whole of it, which is a claim about the CODE and not")
 print("about the shape the trees happen to have today (mg-821e).")
+print("EVERY REGULAR FILE means every regular file THE WALK REACHED, and the")
+print("walk names what it declined: %d stated, %d not stated (mg-5040).  A"
+      % (len(declined_stated), len(declined_unstated)))
+print("non-empty second list is a finding here, so this sentence cannot be")
+print("true by accident of the tree the way it was at mg-6cb9 and again at")
+print("mg-4700.")
 print("It says NOTHING about docs/ other than the one document")
 print("named above, about the audit trees code/species_audit_a61f,")
 print("code/species_audit_73df, code/species_audit_7dd3 or the instrument")

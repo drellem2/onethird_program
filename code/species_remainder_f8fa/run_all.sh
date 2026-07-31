@@ -39,13 +39,29 @@ cat out_w3_scope.txt
 # section 2 of docs/OneThird-Species-Hopf-Monoids-Repair-Sites.md: OUTCOME 2,
 # the generator is not removable.  The OUTPUT is printed, not just the call
 # made: a call present in a script is not evidence of execution.
-E2OUT=$(python3 ../species_extent_d633/e2_crosssection.py) || {
-    echo "$E2OUT" | grep 'STANDING UN-STRUCK' || true
-    echo "E2 CROSS-SECTION FAILED -- a struck claim stands un-struck elsewhere"
-    exit 1
-}
-echo "cross-section check (mg-821e), its own output:"
-echo "$E2OUT" | grep -E 'strike\(s\) measured|^E2 TOTAL BAD:'
+# mg-5040, on mg-4700's OPEN 2.  ONE STATEMENT, AND IT IS THE ONE THAT HAS A
+# RETURN.
+# The block this replaces was twenty lines with THREE separable parts, and
+# the deletion test mg-821e applied to it was applied to the whole block.
+# Measured one part at a time (mg-4700 F2): deleting the `|| { ...; exit 1; }`
+# guard alone changed no verdict in 3 of 3 runners, because `set -e` already
+# aborts on a failed command substitution -- five lines that moved the MESSAGE
+# and not the VERDICT; and deleting the two `echo`s that PRINTED the check's
+# output left 3 of 3 exiting 0 with NO TRACE THE CHECK RAN, guarded by
+# nothing.  The guard also reported ANY non-zero exit as "a struck claim
+# stands un-struck elsewhere", so a crash in e2 was announced as a specific
+# finding e2 never made (mg-4700 F5).
+# That is the third structure the deletion test has missed -- after the gate
+# (mg-9220) and the clause (mg-64b6).  The answer is NOT a fourth level of
+# granularity: a test whose grain chases the code's structure never catches
+# up.  THE STRUCTURE IS REMOVED.  Running the check and printing its output
+# are now the SAME statement, so neither can be deleted without the other and
+# there is exactly one unit here that has a return; `set -e` carries the
+# verdict, which is what it was already doing.  Nothing is piped, because a
+# pipeline's status in POSIX sh is its LAST command's and `set -o pipefail`
+# is not available in dash (mg-c2b3).
+echo "cross-section check (mg-821e), its own output, unfiltered:"
+python3 ../species_extent_d633/e2_crosssection.py
 
 echo
 echo "out_w3_scope_before.txt is the SAME detector run against the tree"

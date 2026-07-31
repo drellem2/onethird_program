@@ -37,6 +37,10 @@ E2a  EVERY STRIKE AGAINST ITS OWN DOCUMENT
         strike line 205   run  17 of 746 (  2%)  restated at line 205    below the rule
         strike line 59    run  24 of 2023 (  1%)  restated at line 271    below the rule
 
+  docs/OneThird-Bratteli-Path-Algebras-Mge8b8Repair-IndependentAudit.md  1 strike(s)
+       1 below the rule,  0 exonerated,  0 STANDING
+        strike line 461   run   7 of  24 ( 29%)  restated at line 472    below the rule
+
   docs/OneThird-Bratteli-Path-Algebras-Where-This-Lives.md    4 strike(s)
        4 below the rule,  0 exonerated,  0 STANDING
         strike line 120   run   6 of  11 ( 55%)  restated at line 625    below the rule
@@ -82,7 +86,7 @@ E2a  EVERY STRIKE AGAINST ITS OWN DOCUMENT
         strike line 613   run   3 of  18 ( 17%)  restated at line 613    below the rule
         strike line 871   run  15 of 118 ( 13%)  restated at line 1076   below the rule
 
-  14 file(s) carry a strike, 33 strike(s) measured, 0 standing.
+  15 file(s) carry a strike, 34 strike(s) measured, 0 standing.
 
 ==============================================================================
 E2b  CONTROLS -- a detector only ever seen to pass is worth nothing
@@ -102,9 +106,9 @@ E2b  CONTROLS -- a detector only ever seen to pass is worth nothing
 E2 TOTAL BAD: 0
 ==============================================================================
 
-EXTENT OF THIS NUMBER.  123 markdown file(s) -- every *.md under docs/
-and under code/, recursively.  14 of them carry at least one strike and
-33 strike(s) were measured; a file with no `~~` contributes nothing and
+EXTENT OF THIS NUMBER.  150 markdown file(s) -- every *.md under docs/
+and under code/, recursively.  15 of them carry at least one strike and
+34 strike(s) were measured; a file with no `~~` contributes nothing and
 is not evidence of anything.  IT READS NO .py, NO .txt AND NO CODE: a
 claim struck in a document and asserted in a code tree is s1_extent.py's
 extent, not this one, and that division is the whole of mg-73df's MAJOR
@@ -113,3 +117,25 @@ that document -- a claim struck here and asserted in ANOTHER file is
 invisible to every checker in this repository, and that is the next
 hole, named rather than closed.  And it matches VERBATIM RUNS: a claim
 restated in different words, at any length, is invisible to it.
+
+MEASURED AT 4372fae
+(PLUS UNCOMMITTED CHANGES IN THE WORKTREE, so the count is not that commit's) (mg-5040, on mg-4700's F3).
+The file count above is a property of a TREE, not of this checker: it
+goes false the moment any commit adds or removes a markdown file, and
+re-running at commit time does not repair that, because a merge queue
+moves the tree afterwards.  POST-COMMIT IS NOT POST-MERGE -- mg-821e
+re-ran this per Appendix A, was then rebased onto a main eight
+markdown files larger, and shipped the pre-rebase artifact.  Naming
+the revision is what makes a committed copy of this line STALE rather
+than WRONG: git cannot move the revision, so the sentence stays true
+of the tree it names, and a reader can tell the two apart without
+re-deriving anything.  The mechanism is NOT removed by this and the
+next commit that adds a markdown file will make the count stale again.
+
+THE WALK'S RESIDUE, which is the other half of 'every *.md' (mg-5040,
+on mg-4700's OPEN 1).  os.walk does not descend into a symlinked
+directory, and it swallows the error on a directory it cannot read.
+Rather than widen the walk a third time, it returns what it declined:
+    declined, STATED:     code/species_extent_d633/__pycache__
+        directory rule, STATED: __pycache__/
+A NOT STATED entry is counted into E2 TOTAL BAD above.

@@ -250,9 +250,23 @@ discovered by whoever next runs mg-6cb9's instrument.
    `the COMMITTED run's extent line is true at HEAD — ok` and `the committed CENSUS is right for
    the shipped tree — ok`. That is a correct artifact, **not a repaired mechanism**: the next
    commit that adds a markdown file without re-running will make it false again, and nothing
-   here stops it. (`A2 TOTAL BAD` remains **1**, and the one row is **R29** — mg-6cb9's own kept
-   prediction miss, which this ticket did not touch.) F6 — `e2`'s `RUN_MIN` seam being two tokens
+   here stops it. F6 — `e2`'s `RUN_MIN` seam being two tokens
    wide — is untouched and remains as mg-6cb9 measured it.
+
+   > **CORRECTED, mg-5040.** This paragraph said `A2 TOTAL BAD` **remains 1**, the one row being
+   > R29. It does not. **Measured at `4372fae`** — the tree this work shipped in, which git cannot
+   > move — mg-6cb9's `a2_crosssection.py` reports
+   > `A2 TOTAL BAD` **2**; the second row is `the committed CENSUS is right for the shipped tree`
+   > (mg-4700 F3). The figure `1` was true in the worktree where `b534db7` measured it and false
+   > by the time the work merged: **post-commit is not post-merge**, and the rebase that landed it
+   > put the artifact inside a tree eight markdown files larger. The rows win, so this sentence
+   > moves to the rows and not the reverse. Two commit messages (`41ac5d4`, `b534db7`) carry the
+   > same wrong figure and cannot be edited; they are dispositioned in §5 of
+   > `docs/OneThird-Species-Hopf-Monoids-Bound-Repair.md`, together with the published transcript
+   > `code/species_sites_821e/out_a2_6cb9_after.txt`, which is the **one run all three were copies
+   > of**. mg-5040 regenerates the census, so a run in *its* tree reports `1` again — for a
+   > different reason, and that is exactly why the figure above names the revision it was measured
+   > at. A number with no tree attached cannot be corrected, only replaced.
 2. **It did not wire `e2` anywhere but the three species runners.** Every other tree in this
    repository carrying a document with a strike still does not run it. That is a much larger
    wiring question than F2 asked, and it is named here rather than closed.
@@ -261,6 +275,16 @@ discovered by whoever next runs mg-6cb9's instrument.
    re-opened.
 4. **It did not test depth beyond two levels, or against symlinks, device nodes, or directories
    the walk cannot read.** None of those is claimed by any extent line.
+
+   > **CORRECTED, mg-5040.** The second sentence is false, and it is the load-bearing one. The
+   > extent lines said *EVERY REGULAR FILE … AT ANY DEPTH*, which **does** claim a file behind a
+   > symlinked directory — and `os.walk` does not follow one without `followlinks=True`. mg-4700
+   > measured it: with a statement planted behind a link, `w3_scope.py` was silent and
+   > `e1_extents.py` **certified the extent as true**. "None of those is claimed" was the same
+   > mistake as the one this section is disclaiming, made in the disclaimer. mg-5040 does not widen
+   > the walk a third time; it makes each walk **return what it declined**, so a rule nobody
+   > thought of arrives as a printed line and a red run. See
+   > `docs/OneThird-Species-Hopf-Monoids-Bound-Repair.md` §2.
 5. **Reachable is still not read.** §2.1 measures that the check executes. Whether anyone reads
    its output is not measurable here, and F2 was about the runner, which is.
 
