@@ -1,0 +1,142 @@
+==============================================================================
+SELFTEST mg-7522 -- every rule driven in both senses
+==============================================================================
+
+==============================================================================
+S1  command_lines -- a comment is not a command
+==============================================================================
+
+  ok   a plain command is a command line                              
+  ok   a comment mentioning `| tee` is NOT                            
+  ok   an indented comment is NOT                                     
+  ok   a blank line is NOT                                            
+  ok   a command with a trailing comment IS                           
+
+==============================================================================
+S2  unquoted / pipelines -- a `|` inside quotes is an argument
+==============================================================================
+
+  ok   a real pipeline is found                                       
+  ok   `||` is not a pipeline                                         
+  ok   a `\|` inside single quotes is not                             
+  ok   a `|` inside double quotes is not                              
+  ok   a pipeline AND a quoted bar on one line is one pipeline        
+  ok   a `| tee` in a comment is not a pipeline                       
+  ok   tee_pipelines finds a real one                                 
+  ok   tee_pipelines does not find `| grep`                           
+  ok   the BARE GREP does count the comment (the ticket's rule, reproduced) 
+
+==============================================================================
+S3  stages / discarded_stages -- which status the shell throws away
+==============================================================================
+
+  ok   two stages for one pipe                                        
+  ok   three stages for two pipes                                     
+  ok   the LAST stage is not discarded                                
+  ok   a line with no pipe discards nothing                           
+
+==============================================================================
+S4  set -e / guarded / pipefail -- both senses, and the spelling bug
+==============================================================================
+
+  ok   `set -e` is found                                              
+  ok   `set -eu` is found                                             
+  ok   `set -euo pipefail` is set -e                                  
+  ok   `set -o errexit` is found                                      
+  ok   a bare `set -u` is NOT set -e                                  
+  ok   `set -e` inside a comment is NOT                               
+  ok   `cmd || true` is guarded                                       
+  ok   `cmd || { ... }` is guarded                                    
+  ok   an `if` condition is guarded                                   
+  ok   a bare pipeline is NOT guarded                                 
+  ok   `VAR=$(...)` is NOT guarded -- see S9 for why                  
+  ok   the OLD rule finds `set -o pipefail`                           
+  ok   the OLD rule MISSES `set -euo pipefail` -- the mg-c2b3 defect  
+  ok   the NEW rule finds `set -o pipefail`                           
+  ok   the NEW rule finds `set -euo pipefail`                         
+  ok   the NEW rule does not fire on a comment                        
+  ok   the NEW rule does not fire on `set -e` alone                   
+  ok   shebang read                                                   
+  ok   no shebang reads as empty                                      
+
+==============================================================================
+S5  invocation / arguments / stage_can_fail
+==============================================================================
+
+  ok   a python invocation is parsed                                  
+  ok   a `sh` invocation is parsed                                    
+  ok   a bare `echo` is not an invocation                             
+  ok   arguments stop at the pipe                                     
+  ok   arguments stop at a `;`                                        
+  ok   `echo` cannot fail                                             
+  ok   `printf` cannot fail                                           
+  ok   `git diff` CAN fail                                            
+  ok   an assignment prefix is stripped before naming the command     
+  ok   a continuation line says so rather than inventing a command    
+
+==============================================================================
+S6  THIS TREE'S OWN RUNNER, BY THIS TREE'S OWN RULES
+==============================================================================
+
+  ok   this runner contains no pipeline of any kind                   
+  ok   this runner sets -e                                            
+  ok   this runner is #!/bin/sh                                       
+  ok   every step redirects and guards                                
+  ok   no file in this tree USES `confirmed exactly` / `byte-identical` 
+  ..   18 MENTION(s) of those words -- the regexes that detect them, the
+       assertions of their absence, and quotations of mg-c2b3's own
+       wording.  A mention is not an occurrence; counting one as the
+       other is the defect this arc keeps finding.
+  ok   no file in this tree CALLS with shell=True or os.system        
+
+==============================================================================
+S7  THE POPULATION PRIMITIVE TAKES NO NAME ARGUMENT
+==============================================================================
+
+  ok   ls_sh's signature is (ref=None)                                
+  ok   ls_sh's CODE contains no runner-filename literal (docstring excluded -- it explains why there is none) 
+  ok   callers() defaults to the current world                        
+  ok   read() defaults to the current world                           
+
+==============================================================================
+S8  THE TWO REPAIRED RUNNERS, BY THESE RULES, AT BOTH REVISIONS
+==============================================================================
+
+  ok   face_geometry_audit_f1b2 HAD `| tee`                           
+  ok   face_geometry_audit_f1b2 has none now                          
+  ok   face_geometry_audit_f1b2 still sets -e                         
+  ok   face_geometry_audit_f1b2 guards every former site              
+  ok   face_geometry_audit_f1b2 cats each transcript back to stdout   
+  ok   face_geometry_audit_fcf1 HAD `| tee`                           
+  ok   face_geometry_audit_fcf1 has none now                          
+  ok   face_geometry_audit_fcf1 still sets -e                         
+  ok   face_geometry_audit_fcf1 guards every former site              
+  ok   face_geometry_audit_fcf1 cats each transcript back to stdout   
+
+==============================================================================
+S9  THE SHELL ITSELF -- the rule in `guarded` is MEASURED, not cited
+==============================================================================
+
+  `lib7522.guarded` refuses to call `VAR=$(...)` a guard.  That is a
+  claim about POSIX errexit, and mg-c2b3's own rule said the opposite.
+  Both senses are run on `/bin/sh` on this machine:
+
+  ok   assignment of a failing command aborts (exit)                  
+  ok   assignment of a failing command aborts (later step ran)        
+  ok   assignment of a failing PIPELINE does not (exit)               
+  ok   assignment of a failing PIPELINE does not (later step ran)     
+
+  So a pipeline inside an assignment is a place where a status is
+  consumed and thrown away at the same time, and treating the
+  assignment as a guard would have removed three real sites from the
+  population.  The rule is measured here and applied in S1.
+
+==============================================================================
+selftest: 71 assertions, 0 failed
+==============================================================================
+
+EXTENT.  These exercise the CLASSIFIER, in both senses at every rule,
+plus this tree's own runner and the two repaired runners by those same
+rules, plus the one claim about the shell that the population rule
+rests on.  They do not exercise the probes' reporting -- S1 to S5 are
+their own controls and each carries a TOTAL BAD with its extent.

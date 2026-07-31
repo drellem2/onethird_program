@@ -1,0 +1,160 @@
+==============================================================================
+S4  THE ANCHOR OF A CENSUS IS NOT THE ANCHOR OF A COMPARISON
+==============================================================================
+
+==============================================================================
+S4a  THE RULE, STATED ONCE
+==============================================================================
+
+  A baseline pinned to a revision is:
+
+      CORRECT for a COMPARISON.  The question is `did this move`, and
+      the answer needs a fixed side.  Anchored to HEAD, a comparison
+      compares the repaired tree with itself and reports no change
+      forever -- mg-821e's finding, and the reason for the pin.
+
+      BLIND for a CENSUS.  The question is `what exists`, and the
+      answer must see the current world.  Anchored to a revision, a
+      census cannot contain anything added after it -- not because the
+      rule is wrong but because the world it is asked about is stale.
+
+  The two uses want different anchors.  Where both appear in one file,
+  they are named; S4e checks that they are.
+
+==============================================================================
+S4b  THE 2x2 -- anchor x rule, MEASURED
+==============================================================================
+
+  Each cell is the number of EXECUTION sites found, and in brackets the
+  number that also READ the status.  The rule is a property of the scan;
+  the anchor is a property of the question.
+
+                         literal path only        + runtime path          
+  PINNED bee07a1         1 sites  [1 read]        19 sites  [14 read]     
+  HEAD (unpinned)        1 sites  [1 read]        48 sites  [26 read]     
+
+  WHERE `code/species_depth_audit_4700` APPEARS -- the site mg-05eb found
+  outside the enumeration.  One cell of four, and it is the one that
+  needs BOTH fixes:
+
+      HEAD (unpinned)        + runtime path       FOUND      8 site(s), 5 reading the status
+      HEAD (unpinned)        literal path only    not found  0 site(s), 0 reading the status
+      PINNED bee07a1         + runtime path       not found  0 site(s), 0 reading the status
+      PINNED bee07a1         literal path only    not found  0 site(s), 0 reading the status
+
+  EXACTLY ONE CELL.  Unpinning alone does not find it and widening
+  the rule alone does not find it: the pin and the literal-path
+  rule are two INDEPENDENT reasons the same site fell outside the
+  enumeration, and the ticket's remedy names one of the two.
+  Both are reported; only the anchor half is a change to mg-c2b3's
+  own scan, and the rule half lives here with its limit stated.
+
+      code/species_depth_audit_4700/kern4700.py:254  READS    p = subprocess.run(["sh", "run_all.sh"], cwd=d, capture_output=T
+      code/species_depth_audit_4700/q2_wiring.py:105  READS    rc, out = run_runner(t)
+      code/species_depth_audit_4700/q2_wiring.py:156  READS    rc, out = run_runner(t)
+      code/species_depth_audit_4700/q2_wiring.py:172  READS    rc2, _out2 = run_runner(t)
+      code/species_depth_audit_4700/q2_wiring.py:225  no       rc, out = run_runner(t)
+      code/species_depth_audit_4700/q2_wiring.py:253  no       rc, out = run_runner(t)
+      code/species_depth_audit_4700/q2_wiring.py:287  no       rc, out = run_runner(t)
+      code/species_depth_audit_4700/q2_wiring.py:322  READS    rc, out = run_runner(t)
+
+==============================================================================
+S4c  THE COMPARISON THAT MUST KEEP ITS PIN -- measured both ways
+==============================================================================
+
+  mg-c2b3's K3d asks `did any committed transcript move`.  It is a
+  COMPARISON.  Run it at the pin and again anchored to HEAD:
+
+      anchored to bee07a1        166 file(s) changed, 42 transcript(s)
+      anchored to HEAD             0 file(s) changed, 0 transcript(s)
+
+  Anchored to HEAD the question is `does the worktree differ from
+  itself`.  On a COMMITTED tree the answer is 0 BY CONSTRUCTION -- it
+  would print a clean bill for any repair whatsoever.  The 0 above is
+  this probe's own uncommitted edits if it is run mid-repair, and 0
+  once they land; either way it is a fact about the worktree and not
+  about the repair.  The pin is the whole content of that check.
+
+  MEASURED: the pinned side sees 166 files, the HEAD side sees 0.
+
+==============================================================================
+S4d  THE PAST CLAIM THAT SAT OUTSIDE THE ENUMERATION
+==============================================================================
+
+  mg-05eb's F3: `code/species_depth_audit_4700/q2_wiring.py` scores three
+  species runners on their exit status, and its committed transcript
+  asserts `exit 0 ... SWALLOWED` for two runners that were AFFECTED.
+  That is an R3 claim by mg-c2b3's own routing, and it was not among
+  the nine -- because the caller scan could not reach it.
+
+      the pin                          bee07a1
+      the tree's most recent commit    5c16f5c
+      the pin is an ancestor of it     YES
+
+  So the tree post-dates the pin and a pinned scan could not
+  contain it -- measured from git, not read off mg-05eb's prose.
+
+      `SWALLOWED` rows in code/species_depth_audit_4700/out_q2_wiring.txt: 3
+          Q2e  A RED SELF-TEST, SWALLOWED -- in two of the three runners repaired
+          code/species_repair_a4ef      exit 0   printed *** FAILED ***: yes  SWALLOWED
+          code/species_remainder_f8fa   exit 0   printed *** FAILED ***: yes  SWALLOWED
+
+  WHAT IS AND IS NOT SETTLED HERE.  S4 puts the site INSIDE the
+  enumeration; it does not re-run the claim.  mg-05eb's J2c already
+  measured that both rows flip when the probe is re-run at HEAD, and
+  that measurement is not repeated -- naming which probe settled it is
+  stronger than a second copy of the same run.
+
+==============================================================================
+S4e  SAY SO WHERE BOTH APPEAR -- checked on the bytes
+==============================================================================
+
+  code/runner_exit_c2b3/k2_consume.py, where a census and a comparison meet:
+
+      names the CENSUS use                       yes
+      names the COMPARISON use                   yes
+      carries the rule in one sentence           yes
+      the caller scan is unpinned                yes
+      the runner classification is still pinned  yes
+      the residual literal-path limit is stated  yes
+
+==============================================================================
+S4f  THE GENERAL FORM, ON THIS SECTION
+==============================================================================
+
+  S4 is a probe about the anchor of an enumeration, so the question it
+  owes is what ITS OWN enumerations are anchored to.  Every call, with
+  which kind it is:
+
+   1. S4b `scan(ref=None, ...)`   CENSUS      -- unpinned, on purpose.
+   2. S4b `scan(ref=PINNED, ...)` COMPARISON  -- pinned, because the
+      pinned answer is one side of the 2x2 being compared.
+   3. S4c `changed_since(PINNED)` COMPARISON  -- pinned, and S4c is the
+      row that shows why removing that pin would empty it.
+   4. S4d `git log -1 -- <tree>`  CENSUS      -- unpinned; it asks when
+      the tree last moved in the world as it stands.
+   5. S4e `L.read(K2, None)`      CENSUS      -- unpinned; it reads the
+      file as it is now, which is the only state whose wording matters.
+
+  The branch that CANNOT exhibit the defect, with the reason: S4 makes
+  no claim that anything is ABSENT from the world.  Every negative it
+  prints is `not found by THIS rule at THIS anchor`, and all four
+  combinations are printed, so a reader can see the rule and the anchor
+  that produced each answer instead of one number with neither.
+
+  THE LIMIT, stated rather than omitted: the runtime-path rule finds
+  the SITE but cannot name the TARGET TREE, because the path is
+  assembled from a variable and this is a line-local scan.  Rows in
+  that state print `(path built at run time)` rather than being
+  dropped -- a row that says `I cannot name the target` is a census
+  entry and a dropped row is not.
+
+==============================================================================
+S4 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts (a) the 2x2 not separating as the
+repair predicts, (b) the pinned comparison not being more informative
+than the HEAD-anchored one, (c) the 4700 tree not post-dating the pin,
+and (d) a missing sentence in code/runner_exit_c2b3/k2_consume.py.  It ranges over
+every tracked `*.py` and `*.sh` at HEAD and at bee07a1.

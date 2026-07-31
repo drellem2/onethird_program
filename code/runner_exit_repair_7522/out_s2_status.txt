@@ -1,0 +1,130 @@
+==============================================================================
+S2  THE STATUS THE PIPELINES DISCARDED, READ DIRECTLY
+==============================================================================
+
+==============================================================================
+S2a  EVERY PIPELINE THE SWEEP'S POPULATION DID NOT REACH, RUN DIRECTLY
+==============================================================================
+
+  Each row runs the DISCARDED stage of one pipeline with nothing in
+  the way and reads its exit status -- the number `tee` (or `wc`)
+  replaced with its own.  A 0 means the past green was green for the
+  right reason.  This is mg-c2b3's K3b method, unchanged, applied to
+  the members of the population its filename could not contain.
+
+  runner                                     discarded stage            exit    secs  verdict
+  face_geometry_audit_f1b2/run_audit.sh:14   audit_scoring.py              0    46.6  nothing was being swallowed
+  face_geometry_audit_f1b2/run_audit.sh:15   audit_gates.py                0     4.1  nothing was being swallowed
+  face_geometry_audit_f1b2/run_audit.sh:16   audit_theorem_and_content.py      0     0.6  nothing was being swallowed
+  face_geometry_audit_f1b2/run_audit.sh:17   audit_injections.py           0     7.4  nothing was being swallowed
+  face_geometry_audit_f1b2/run_audit.sh:18   audit_nmax2.py                0     2.3  nothing was being swallowed
+  face_geometry_audit_fcf1/run_audit.sh:16   audit_nc4.py                  0    16.3  nothing was being swallowed
+  face_geometry_audit_fcf1/run_audit.sh:20   audit_extra.py                0     1.1  nothing was being swallowed
+  face_geometry_audit_fcf1/run_audit.sh:24   audit_gauge.py                0     2.0  nothing was being swallowed
+  state_delegation_audit_16eb/run_all.sh:38  git diff                      0     0.0  nothing was being swallowed
+  state_delegation_audit_16eb/run_all.sh:39  git diff                      0     0.0  nothing was being swallowed
+  state_delegation_repair_0049/run_all.sh:39 git diff                      0     0.0  nothing was being swallowed
+
+  population: 11 pipelines -- the 8 `| tee` in the two runners the NAME
+  rule excluded, plus the 3 the SHAPE rule excluded.  Together with
+  mg-c2b3's 34, the corrected population is 45 and every member of it
+  has now had the discarded status read.
+
+  11 of 11 exit 0.  THE RETROACTIVE CLEARANCE NOW COVERS THE
+  CORRECTED POPULATION, not only the filename-defined one.
+
+  WHAT THIS DOES NOT ESTABLISH, stated rather than omitted: the
+  same fact at every intermediate commit.  It is read at HEAD, on
+  this machine, and the rows say so.
+
+==============================================================================
+S2b  POSITIVE CONTROL, PRE-REPAIR -- the defect, reproduced
+==============================================================================
+
+  PRE-REPAIR text, from `git show bee07a1:<runner>` -- the real
+  bytes as they stood, not a reconstruction.  A step is forced
+  to fail; the DEFECT is that the runner still exits 0 and the
+  later steps still run on an unchecked precondition.
+
+  runner:line                              forced target              exit  later  verdict
+  face_geometry_audit_f1b2/run_audit.sh:14 audit_scoring.py              0      4  SWALLOWED -- defect reproduced
+  face_geometry_audit_f1b2/run_audit.sh:15 audit_gates.py                0      3  SWALLOWED -- defect reproduced
+  face_geometry_audit_f1b2/run_audit.sh:16 audit_theorem_and_content.py      0      2  SWALLOWED -- defect reproduced
+  face_geometry_audit_f1b2/run_audit.sh:17 audit_injections.py           0      1  SWALLOWED -- defect reproduced
+  face_geometry_audit_f1b2/run_audit.sh:18 audit_nmax2.py                0      0  SWALLOWED -- defect reproduced
+  face_geometry_audit_fcf1/run_audit.sh:16 audit_nc4.py                  0      2  SWALLOWED -- defect reproduced
+  face_geometry_audit_fcf1/run_audit.sh:20 audit_extra.py                0      1  SWALLOWED -- defect reproduced
+  face_geometry_audit_fcf1/run_audit.sh:24 audit_gauge.py                0      0  SWALLOWED -- defect reproduced
+
+  8 of 8
+
+==============================================================================
+S2c  POSITIVE CONTROL, REPAIRED -- the defect, caught
+==============================================================================
+
+  REPAIRED text, as committed at HEAD.  The same step is forced
+  to fail; the repair is that the runner exits non-zero AND
+  stops there.  The verdict is the CONJUNCTION -- an exit-code-
+  only rule cannot tell a repair from an unrelated later error.
+
+  runner:line                              forced target              exit  later  verdict
+  face_geometry_audit_f1b2/run_audit.sh:14 audit_scoring.py              1      0  CAUGHT -- non-zero and stopped
+  face_geometry_audit_f1b2/run_audit.sh:15 audit_gates.py                1      0  CAUGHT -- non-zero and stopped
+  face_geometry_audit_f1b2/run_audit.sh:16 audit_theorem_and_content.py      1      0  CAUGHT -- non-zero and stopped
+  face_geometry_audit_f1b2/run_audit.sh:17 audit_injections.py           1      0  CAUGHT -- non-zero and stopped
+  face_geometry_audit_f1b2/run_audit.sh:18 audit_nmax2.py                1      0  CAUGHT -- non-zero and stopped
+  face_geometry_audit_fcf1/run_audit.sh:16 audit_nc4.py                  1      0  CAUGHT -- non-zero and stopped
+  face_geometry_audit_fcf1/run_audit.sh:20 audit_extra.py                1      0  CAUGHT -- non-zero and stopped
+  face_geometry_audit_fcf1/run_audit.sh:24 audit_gauge.py                1      0  CAUGHT -- non-zero and stopped
+
+  8 of 8
+
+==============================================================================
+S2d  NO COMMITTED TRANSCRIPT MOVED
+==============================================================================
+
+  `> f` and `| tee f` write the same bytes, so the prediction is that
+  the repair moves no committed transcript.  It is MEASURED, not
+  deduced: the repaired runners were executed in full in S2b/S2c and
+  the worktree is compared with its state before this probe started.
+
+  worktree unchanged by S2 (git status --porcelain identical)
+
+==============================================================================
+S2e  THE GENERAL FORM, ON THIS SECTION
+==============================================================================
+
+  S2 is a script that decides whether other scripts' statuses were
+  discarded, so the question it owes is whether it discards its own.
+  Enumerated, with the branches that CANNOT exhibit it and why:
+
+   1. Every subprocess here is a LIST argv with no `shell=True`, so no
+      shell parses it, so there is no pipeline, so `returncode` is the
+      target's own status.  Structural, not a promise about callers.
+   2. `returncode` is read on EVERY path including the timeout path,
+      which returns None and prints `-`, never 0.
+   3. Both arms are written to a scratch file and run from there, so
+      neither edits a tracked runner -- which is what makes S2d's
+      worktree comparison mean anything.
+   4. Every control verdict is a CONJUNCTION of exit code AND reach.
+      Reach is stamped-mtime, read BEFORE any restore.
+   5. The forced failure writes its marker to STDERR, so it cannot
+      land in the transcript whose bytes S2d checks.
+   6. The transcripts are restored by writing back exact bytes, not by
+      `git checkout -- .`, which rewrites every tracked file and would
+      have destroyed the mtime evidence in 4.
+   7. The LIMIT, stated: S2 forces these targets to FAIL, so it does
+      not re-prove that they pass.  S2a is the row that shows they do,
+      at HEAD, on this machine.
+
+==============================================================================
+S2 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts (a) a discarded status that is
+non-zero at HEAD, (b) a control site that fails its conjunction in
+either direction, and (c) the worktree not being restored.  It ranges
+over the 11 pipelines outside mg-c2b3's population and over the 16
+control sites in the two runners the NAME rule excluded.  It does NOT
+range over mg-c2b3's own 34, which K3b read and this probe does not
+re-read -- S1d states which population is whose.
