@@ -231,7 +231,24 @@ on an audit that measured its extents in both directions — that, not fatigue, 
 - **mg-7522** — the `| tee` sweep's population was defined by **filename**; two runners with 8 pipelines still
   swallow at HEAD. Redefine the population by **property**, re-derive the counts, and re-establish the
   retroactive clearance over the corrected population.
-*(mg-ff3e landed — the census-invariance repair; its audit mg-ec07 is running.)*
+- **mg-6df0** — the **mg-ec07 verdict** (merged `8cdda32`; 56 checks, 40 confirmed, 14 measured, 2
+  refuted, 6 findings, **0 mathematical statements touched**). **Confirmed:** lossless over the site at
+  **37,866 of 37,866** characters against a positive control of **462/37,866 (1.2%)** at the repair's
+  parent, and **847 of 847** figure exchanges undisturbed — enumerated from `partition` rather than from
+  anybody's list of twelve. **Open:**
+  - `--reseal`'s refusal **excludes 3 of 34 gate rows** via a substring test, and they are the three that
+    license the whole claim. **R5 item 3 verbatim — the defect this repair found in its own scoring code
+    and fixed there, still live forty lines away in the file it was repairing.** *A fix applied at the
+    site of discovery, in a file containing the same construct elsewhere, has a scope nobody chose.*
+  - the same-kind enumeration **happened and was well-evidenced**, but was over **KINDS, not SITES ×
+    KINDS** — each kind checked at one site, so the mutation caught at H8 is **exit 0 at the STATE.md
+    site**. The inherited disclosure *"a site is a section"* is **false at 1 of 3 sites**, with **88.2%
+    of characters outside every record**.
+  - Audit **mg-7e39** pre-filed in the same action: build the full product and **report the matrix, not
+    a total**.
+- **Process gap found in the same pass:** this verdict sat in a commit message for an hour. **The
+  refinery notifies the dispatcher; nothing notifies the consumer.** My audit check asked *does it have a
+  successor* when it needed to ask *have I received its verdict* first.
 - **mg-69d1** — carries the **two open sites** from the audits that just returned, both **PARTIAL**:
   - *mg-eaef* — the instrument's **stated bound is WIDER than the sweep**, with **4 of 15 operands in neither
     column**. A bound stated wider than its evidence is the printed-extent defect wearing the remedy for the
