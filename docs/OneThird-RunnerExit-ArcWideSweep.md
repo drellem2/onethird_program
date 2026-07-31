@@ -42,7 +42,27 @@ trusted. They are, at `bee07a1` (the revision the ticket cites, pinned — not
 | `run_all.sh` in the tree | 63 | **64** | `code/hodge_leverage_repair_8eca/` landed in `bee07a1`, after the ticket was written. It has no `\| tee`. |
 | matching the bare grep `\| *tee` | 23 | **23** | confirmed exactly |
 | containing a real `\| tee` **pipeline** | — | **17** | the ticket did not separate this |
-| setting `pipefail` | 1 | **1** | confirmed exactly — `code/state_restructure_34bf/` |
+| setting `pipefail` | 1 | **1** | re-derived by mg-7522 — `code/state_restructure_34bf/` writes `set -euo pipefail` |
+
+> **mg-7522 — this table's `pipefail` row, and its population.** The row used to
+> read *"1, confirmed exactly"* while `out_k1_census.txt` printed `ticket 1 /
+> re-derived 0 / DIFFERS` for the same number. The ticket was right:
+> `libc2b3.PIPEFAIL_RE` matched only the spelling `set -o pipefail`, and the one
+> runner that sets the option writes `set -euo pipefail`. The regex is repaired.
+> **The one figure this document said it had confirmed exactly was the one its
+> instrument had got wrong** — which is the general rule worth carrying:
+> *"confirmed exactly", "verified", "byte-identical" mark where the author
+> stopped looking, so they are a place to check first, not a reason to skip.*
+>
+> Every count in this table is over files **named** `run_all.sh`. That is a
+> naming convention and not a property of the defect. Two runners called
+> `run_audit.sh` carried eight `| tee` pipelines and were unrepaired at `HEAD`
+> after this sweep; three more pipelines in files that *are* named `run_all.sh`
+> throw a status away without using `| tee` at all. Over every tracked `*.sh`,
+> under the predicate *a pipeline whose status is consumed and whose discarded
+> stage can fail*, the population is **19 files / 26 lines** at `bee07a1`.
+> See `code/runner_exit_repair_7522/` and
+> `docs/OneThird-RunnerExit-PopulationRepair.md`.
 
 ### The six the grep counted and the parser did not
 
@@ -226,8 +246,11 @@ python3 x.py > out_x.txt || {
 cat out_x.txt
 ```
 
-**Not `set -o pipefail`.** The shebang is `#!/bin/sh` on all 64 runners
-(measured). On Linux that is normally dash, which has no `pipefail`:
+**Not `set -o pipefail`.** The shebang is `#!/bin/sh` on **59 of the 64**
+runners (measured — the figure `k2_consume.py` prints; this sentence read
+*"all 64"* until mg-7522, and the other five are `#!/bin/bash` or
+`#!/usr/bin/env bash`). On Linux `/bin/sh` is normally dash, which has no
+`pipefail`:
 `set -o pipefail` there writes *"Illegal option -o pipefail"* and returns
 non-zero, and under `set -e` that **aborts the runner at the line that was
 supposed to make it safer**. It would work on macOS, where `/bin/sh` is bash in

@@ -34,9 +34,23 @@ cd "$(git rev-parse --show-toplevel)"
 
 echo "### 0. THE TWO PREDECESSOR AUDIT DIRECTORIES ARE UNMODIFIED — proof, not assertion"
 echo "###    (a battery edited by the party it tests is not evidence about that party)"
+# mg-7522: this count used to be `git diff ... | wc -c | tr -d ' '`.  A
+# pipeline's exit status in POSIX sh is its LAST command's, so `git diff`'s
+# status was thrown away: a failing `git diff` produced an empty stream, `wc -c`
+# reported 0, and this section printed "0 bytes of diff" — the claim
+# "UNMODIFIED — proof, not assertion" read off a command that never ran.
+# `git diff` now redirects and has its own status read; the byte count is
+# unchanged because `wc -c < FILE` counts the same bytes the pipeline did.
+# mg-c2b3's sweep named neither this file (its shape rule was `| tee`) nor this
+# line; the PROPERTY is "a pipeline whose status is consumed and whose
+# discarded stage can fail".
+D7522=$(mktemp)
+trap 'rm -f "$D7522"' EXIT
 for pair in "a4aeeb9 code/state_layer_audit_218d" "3a80d99 code/state_delegation_audit_5644"; do
     base=${pair%% *}; dir=${pair#* }
-    n=$(git diff "$base..HEAD" -- "$dir" | wc -c | tr -d ' ')
+    git diff "$base..HEAD" -- "$dir" > "$D7522" || {
+        echo "    git diff $base..HEAD -- $dir/ FAILED"; exit 1; }
+    n=$(( $(wc -c < "$D7522") ))
     echo "    git diff $base..HEAD -- $dir/   ->   $n bytes of diff"
 done
 echo

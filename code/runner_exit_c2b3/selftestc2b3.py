@@ -102,6 +102,17 @@ ck("prose mentioning set -e is not",
    L.has_set_e("# a pipeline under set -e cannot see it\n"), False)
 ck("`set -o pipefail` is found", L.has_pipefail("set -o pipefail\n"), True)
 ck("a bare `set -e` is not pipefail", L.has_pipefail("set -e\n"), False)
+# mg-7522: the one spelling this rule did NOT know, which is the spelling the
+# arc's only pipefail-setting runner actually uses.  Its absence made this file
+# re-derive 0 where the ticket said 1, and four reader-facing artifacts then
+# reported the number as confirmed.  Both senses, so the widened rule cannot
+# have been widened into matching everything.
+ck("`set -euo pipefail` is found (mg-7522)",
+   L.has_pipefail("set -euo pipefail\n"), True)
+ck("a COMMENTED `set -euo pipefail` is not",
+   L.has_pipefail("# set -euo pipefail\n"), False)
+ck("prose mentioning pipefail is not",
+   L.has_pipefail("# not `set -o pipefail`: dash rejects it\n"), False)
 
 print()
 print("F.  guarded() -- does an explicit construct catch the status?")

@@ -129,7 +129,24 @@ predicted them:
 |---|---|---|---|
 | `run_all.sh` | 63 | **64** | DIFFERS — `code/hodge_leverage_repair_8eca/` landed in `bee07a1`, after the ticket |
 | bare grep `\| *tee` | 23 | **23** | AGREES |
-| `pipefail` | 1 | **1** | AGREES |
+| `pipefail` | 1 | **1** | AGREES — but see below |
 
 and the number the ticket did not separate: **17** runners contain a real
 pipeline. The other six are header comments saying they do not.
+
+**mg-7522 — the `pipefail` row was AGREES in this table and `DIFFERS` in the
+instrument's own transcript.** `out_k1_census.txt` prints `ticket 1 /
+re-derived 0 / DIFFERS`; this file, the README, the published document and
+`k1_census.py`'s docstring all reported **1, "confirmed exactly"**. The ticket
+was right and `libc2b3.PIPEFAIL_RE` was wrong — it matched only the spelling
+`set -o pipefail`, and `code/state_restructure_34bf/run_all.sh` writes
+`set -euo pipefail`. The regex is repaired and the row above now holds for a
+reason rather than by coincidence. The transcript is left as the record of the
+run that produced this commit; the corrected reading is in
+`code/runner_exit_repair_7522/out_s3_figure.txt`.
+
+**mg-7522 — the population of every number in this section.** All of them are
+over files *named* `run_all.sh`. Two runners called `run_audit.sh` carried eight
+`| tee` pipelines and were unrepaired at `HEAD` after this sweep, and three more
+throw a status away without using `| tee`. Over every tracked `*.sh` the census
+is **19 files / 42 `| tee` pipelines** at `bee07a1`.

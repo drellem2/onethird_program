@@ -14,8 +14,25 @@ matter:
     ticket exists to end.  The real count of runners containing a `| tee`
     PIPELINE is 17.
 
-Both numbers are printed, side by side, with the disagreement enumerated.  The
-pipefail count (1) is confirmed exactly.
+Both numbers are printed, side by side, with the disagreement enumerated.
+
+  * the PIPEFAIL count.  This docstring used to end "the pipefail count (1) is
+    confirmed exactly."  It was not confirmed and it was not this file that got
+    it wrong: `libc2b3.PIPEFAIL_RE` matched only `set -o pipefail`, and the one
+    runner that sets the option -- `code/state_restructure_34bf/run_all.sh` --
+    writes `set -euo pipefail`.  So this file printed `ticket 1 / re-derived 0 /
+    DIFFERS` while the README, `OUTCOMES.md`, the published document and this
+    docstring all said 1, "confirmed exactly".  THE TICKET WAS RIGHT.  mg-7522
+    repaired the regex; the count re-derives as 1 and AGREES.
+
+    The general form, which is the useful half: "confirmed exactly", "verified"
+    and "byte-identical" mark where an author STOPPED LOOKING.  They are a
+    reason to check FIRST, not a reason to skip.
+
+`out_k1_census.txt` in this directory is the transcript of the run that
+produced the sweep's commit, at its own revision, and is left as that record --
+it predates the mg-7522 repair and says so.  The corrected reading is published
+in `code/runner_exit_repair_7522/out_s3_figure.txt`.
 """
 
 import os
