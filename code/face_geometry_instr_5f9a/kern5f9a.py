@@ -201,9 +201,15 @@ def unit_census(src):
     `pass` is not counted as a statement: a patch that replaces a statement with
     `pass` has removed it, and counting the `pass` would report that nothing
     went.  Clauses are counted as `len(values) - 1` per `BoolOp`, so a condition
-    written without `and`/`or` contributes none -- which is the state
-    `absorb_trace`'s `shape` guard is in after mg-64b6, and the reason there is
-    no fourth rung at that site.
+    written without `and`/`or` contributes none.
+
+    AND THAT IS A BOUND, NOT A FLOOR (mg-0b07).  `absorb_trace`'s `shape` guard
+    was in exactly that state after mg-64b6 and its condition was still a
+    disjunction -- of two lists, spelled with `!=` -- whose order half this
+    census returned 0 for.  A count of boolean operands is a count of what can
+    be DELETED, and the question this lineage is about is what can be PERTURBED
+    unseen.  `implicit_disjunctions` below reports the compounds this number
+    cannot see, so the limit travels with the count.
     """
     tree = ast.parse(src)
     rets = sum(1 for n in ast.walk(tree) if isinstance(n, ast.Return))
@@ -378,6 +384,115 @@ def deciding_clauses(src):
                     name_of(fn), kind, k, len(cond.values), cond, op,
                     ast.get_source_segment(src, value)))
     return out
+
+
+Compound = collections.namedtuple("Compound", "func kind form source nodes")
+
+
+def deciding_conditions(src):
+    """Every condition that DECIDES A RETURN, whether or not it is a `BoolOp`.
+
+    `deciding_clauses` above enumerates the OPERANDS of the boolean conditions
+    among these.  This enumerates the conditions themselves, so the two
+    populations can be compared and the difference -- the conditions the clause
+    sweep cannot reach into at all -- is a number rather than an impression.
+    """
+    tree = ast.parse(src)
+    scope = {}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ClassDef):
+            for sub in node.body:
+                if isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    scope[sub] = node.name
+    out = []
+    for fn in [n for n in ast.walk(tree)
+               if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))]:
+        name = "%s.%s" % (scope[fn], fn.name) if fn in scope else fn.name
+        for node in ast.walk(fn):
+            if isinstance(node, ast.If) and any(
+                    isinstance(s, ast.Return) for s in ast.walk(node)):
+                out.append((name, "guard", node.test))
+            elif isinstance(node, ast.Return) and node.value is not None:
+                out.append((name, "value", node.value))
+    return out
+
+
+def _compound_form(node):
+    """The KIND of compound `node` is, or None.
+
+    THE LIST IS CHOSEN AND THAT IS THE POINT (mg-0b07).  These are the forms
+    known to package more than one decision into one expression:
+
+      `or` / `and`   -- the only one with deletable operands, and the only one
+                        the clause sweep reaches
+      chained        -- `a < b < c` is a conjunction with no `and`
+      sequence       -- `[..] != [..]`, the form mg-64b6's rewrite produced:
+                        true when the LENGTHS differ or a common index does
+      membership     -- `x in S` is a disjunction over the elements of S
+      quantifier     -- `any(...)` / `all(...)` over a generator: a disjunction
+                        or conjunction over as many terms as the generator
+                        yields, none of them nameable in the source
+
+    A form not on this list is invisible to this function, which is the defect
+    this function exists to report one rung up.  `condition_census` therefore
+    reports a total that does not depend on the list at all.
+    """
+    if isinstance(node, ast.BoolOp):
+        return "or" if isinstance(node.op, ast.Or) else "and"
+    if isinstance(node, ast.Compare):
+        if len(node.ops) > 1:
+            return "chained"
+        if isinstance(node.ops[0], (ast.In, ast.NotIn)):
+            return "membership"
+        SEQ = (ast.List, ast.Tuple, ast.Set, ast.ListComp, ast.SetComp,
+               ast.GeneratorExp, ast.DictComp, ast.Dict)
+        if isinstance(node.left, SEQ) or isinstance(node.comparators[0], SEQ):
+            return "sequence"
+    if (isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+            and node.func.id in ("any", "all")):
+        return "quantifier"
+    return None
+
+
+def implicit_disjunctions(src):
+    """Every compound inside a deciding condition that is NOT spelled with a
+    boolean operator -- the population the clause sweep cannot delete out of.
+
+    This is the instrument's BOUND, computed.  mg-0b07: `clause` was taken for
+    the floor because the census counted `and`/`or` operands and a list
+    comparison has none, so the `shape` gate's order half was uncovered AND
+    unnameable.  Naming the forms does not make them deletable; it makes the
+    reach of a green line a number a reader can see.
+    """
+    out = []
+    for func, kind, cond in deciding_conditions(src):
+        for node in ast.walk(cond):
+            form = _compound_form(node)
+            if form in (None, "or", "and"):
+                continue
+            out.append(Compound(func, kind, form,
+                                ast.get_source_segment(src, node),
+                                len(list(ast.walk(node)))))
+    return out
+
+
+def condition_census(src):
+    """(deciding conditions, boolean ones, operands the sweep can delete,
+    compounds it cannot reach, expression nodes in all).
+
+    THE LAST NUMBER IS THE ONE WITH NO GRAIN, and it is here for the reason
+    `unit_removed` carries `nodes`: the fourth number depends on
+    `_compound_form`'s chosen list of forms and can therefore be too small in
+    exactly the way this whole lineage keeps being too small.  The fifth counts
+    every expression node inside every deciding condition and depends on no
+    classification at all, so a compound in a form nobody thought of is inside
+    it whether or not the fourth number knows about it.
+    """
+    conds = deciding_conditions(src)
+    boolean = [c for c in conds if isinstance(c[2], ast.BoolOp)]
+    nodes = sum(len(list(ast.walk(c))) for _f, _k, c in conds)
+    return (len(conds), len(boolean), len(deciding_clauses(src)),
+            len(implicit_disjunctions(src)), nodes)
 
 
 def drop_clause(src, clause):

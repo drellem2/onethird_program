@@ -51,6 +51,17 @@ they were anchored to, and it is the price the ticket asked for -- a statement
 that does nothing is deleted, not watched.  Re-anchoring either audit would buy
 the independence back and is available to whoever wants it.
 
+AND mg-0b07's GRAIN PROBE IS ADDED, WHICH DOES APPLY (mg-f7e1).  It is the one
+independently written instrument that still runs against the live tree, because
+it locates the `shape` gate by what it RETURNS rather than by an anchor of source
+text -- so the respelling this commit performs moves the condition without moving
+what its perturbations name.  It is run unmodified below, one of its six claims
+is required to go RED (the one asserting there is no boolean operator, which is
+what this commit put back), and its three perturbation rows are required to be
+unchanged.  A repair whose auditor's every claim still holds has not changed what
+the auditor measured; a repair that moves rows the auditor was not about has
+changed something else.  Both are checked rather than hoped for.
+
 THIS FILE'S CLAIMS WOULD DIFFER UNDER: either constructed-pair row being removed
 from `controls.py`, or its expected value being taken from the predicate instead
 of from brute force -- both restore the state where those two deletions moved
@@ -76,6 +87,8 @@ REPO = os.path.normpath(os.path.join(HERE, "..", ".."))
 AUDIT = os.path.normpath(os.path.join(HERE, "..", "face_geometry_audit_d0e2"))
 AUDIT_E7BC = os.path.normpath(os.path.join(HERE, "..",
                                            "face_geometry_audit_e7bc"))
+AUDIT_0B07 = os.path.normpath(os.path.join(HERE, "..",
+                                           "face_geometry_audit_0b07"))
 
 # The commit mg-e7bc audited, and the commit mg-e7bc IS.  Each audit's mutations
 # are re-run against the tree it was written for, whole.
@@ -268,6 +281,87 @@ def main():
           or "E1/E2 result lines not found; exit %d" % e7_code)
     for root in (pinned_root, e7_root):
         shutil.rmtree(root, ignore_errors=True)
+
+    head("mg-0b07's OWN GRAIN PROBE, UNMODIFIED, AGAINST THE REPAIR IT ASKED "
+         "FOR")
+    print("That audit did not delete anything: it PERTURBED each half of the")
+    print("one-comparison `shape` condition and ran the whole battery for each,")
+    print("which is how it found a level with no operator to delete.  mg-f7e1")
+    print("spelled the disjunction with an `or`, so the two halves it perturbed")
+    print("are now operands d2's clause sweep deletes.  Its script is run here")
+    print("unmodified, for the reason every other audit in this file is: the")
+    print("subject's own instrument reporting that it passes is worth less than")
+    print("the instrument that found the defect reporting what it now sees.\n")
+    print("WHAT IS EXPECTED, AND IT IS NOT ALL GREEN.  Exactly one of its six")
+    print("claims asserts what this repair removes -- that `absorb_trace`")
+    print("contains no boolean operator of any kind -- and it MUST go red, or")
+    print("the operator is not there.  A repair whose auditor's every claim")
+    print("still holds has not changed the thing the auditor measured.\n")
+    p3_out, p3_code = run_script(AUDIT_0B07, "p3_grain.py")
+    print("--- its transcript, verbatim " + "-" * 48)
+    print(p3_out.rstrip())
+    print("--- end of its transcript " + "-" * 51)
+    print()
+    tally = re.search(r"(\d+) claim\(s\) scored; (\d+) BROKEN", p3_out)
+    scored = int(tally.group(1)) if tally else -1
+    n_broken = int(tally.group(2)) if tally else -1
+    broken_lines = [l.strip() for l in p3_out.split("\n")
+                    if l.strip().startswith("[BROKEN]")]
+    claim("it runs to completion against this tree -- %d claims scored, exit "
+          "%d -- rather than aborting on an anchor.  Its perturbations are "
+          "spliced at the `if` whose body returns 'shape', located in the tree, "
+          "so the rewrite moved them without moving what they name"
+          % (scored, p3_code),
+          scored == 6,
+          "that audit anchoring on source text instead of on the tree, which "
+          "is what stops mg-d0e2's and mg-e7bc's deletion tests above.  It does "
+          "not, and that is a property of how it was written",
+          "exit %d; %s" % (p3_code, tally.group(0) if tally else "no tally"))
+    claim("EXACTLY %d OF ITS CLAIMS IS BROKEN AND IT IS THE ONE THIS REPAIR IS "
+          "THE FALSIFICATION OF: %r.  Named, not counted -- 'one claim broke' "
+          "would be satisfied by any of the six"
+          % (n_broken, (broken_lines[0][:96] if broken_lines else "")),
+          n_broken == 1 and len(broken_lines) == 1
+          and "boolean operator of ANY kind" in broken_lines[0],
+          "any OTHER claim of that audit going red, which would mean this "
+          "repair disturbed something it had verified; and equally under that "
+          "claim HOLDING, which would mean `absorb_trace` still has no operator "
+          "and the repair did not land",
+          "; ".join(broken_lines) or "no BROKEN claim")
+    s_rows = re.findall(r"^   (S\d) -- .*?(CHANGES|BYTE-IDENTICAL)\s+exit "
+                        r"(\d)\s+(\d+) bytes\s+(match|MISS)", p3_out, re.M)
+    claim("AND ITS THREE PERTURBATION ROWS ARE UNCHANGED BY THE RESPELLING: "
+          "%d of %d still match, so the order half and the width half mean here "
+          "what they meant when they had no operator.  That is what makes this "
+          "commit a change of SPELLING and not of units -- and it is measured "
+          "by the instrument that named them, not by the one that renamed them"
+          % (sum(1 for r in s_rows if r[4] == "match"), len(s_rows)),
+          len(s_rows) == 3 and all(r[4] == "match" for r in s_rows)
+          and any(r[0] == "S2" and r[1] == "BYTE-IDENTICAL" for r in s_rows),
+          "either half answering differently after the rewrite -- the exact "
+          "risk of respelling a comparison as `or` + `zip`.  S2 staying "
+          "BYTE-IDENTICAL is required as well: if the order half had become "
+          "covered by accident this would say so, and d2's registered "
+          "prediction for that clause would MISS",
+          "; ".join("%s %s/%s %s bytes %s" % r for r in s_rows) or "no S rows")
+    cross = [l for l in p3_out.split("\n")
+             if "the live tree's two sub-conditions answer exactly as" in l]
+    claim("and its cross-check against %s still HOLDS -- the two sub-conditions "
+          "on this tree answer as the two CLAUSES do on the tree that had them, "
+          "so the units are still the same units under a third spelling"
+          % "b6bc2ef",
+          bool(cross) and cross[0].strip().startswith("[HOLDS"),
+          "the pinned comparison ceasing to agree, which would mean the `or` "
+          "form is a third predicate rather than a third spelling of one",
+          (cross[0].strip()[:150] if cross else "line not found"))
+    print("ITS TWO FINDINGS ARE PRINTED ABOVE AND NEITHER IS WITHDRAWN BY THIS")
+    print("RUN.  B1 says the order half comes back BYTE-IDENTICAL: it does, and")
+    print("d2's sweep now prints that result as NOT COVERED on the row that")
+    print("carries it.  B2 says AFTER-5's FINEST UNIT line states the finest")
+    print("unit of the PATCH where a reader takes it for the SITE: that line is")
+    print("unchanged and still exact about the patch, and d2 now prints the")
+    print("site's clause count beneath it.  A finding answered is not a finding")
+    print("deleted, and this script is the one that keeps saying so.\n")
 
     head("AND THE REST OF THAT AUDIT, AGAINST THIS TREE -- every script named")
     print("Four scripts, and each is stated rather than left to be found.  g4 is")

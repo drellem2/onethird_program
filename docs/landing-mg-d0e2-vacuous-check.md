@@ -278,3 +278,24 @@ against `b6bc2ef` where it goes red, and the eleven written declarations measure
 patches).
 
 Full record: `docs/landing-mg-c4c8-clause-and-derived-unit.md`.
+
+---
+
+## Amendment, mg-f7e1: "no boolean operator" was exact, and the rung was still there
+
+**A fourth time, and this one ends differently.** mg-0b07 read the count out of the tree and
+confirmed it — `absorb_trace` contained **0** boolean operators of any kind — and then perturbed
+the comparison anyway: `[len(row) for row in A] != [len(row) for row in B]` is true when the
+LENGTHS differ **or** a common index does, and taking the ORDER half out with the width half
+standing left the artifact **byte-identical at 23,695, exit 0, every row green**. **A merge removes
+a rung only if it removes a decision.** This one had removed the *handle*.
+
+mg-f7e1 does not merge again and does not add a sixth technique. The condition is spelled with an
+`or`, so the two halves are operands the clause sweep already ran; it reports the width half
+CHANGES/exit 1 and the order half BYTE-IDENTICAL/exit 0, and prints the second as **NOT COVERED**
+on the row that carries it. And what deletion cannot reach at all is **counted**: 11 compounds in
+`face_complex.py`'s deciding conditions with no operand to delete, beside a total that depends on
+no classification. The artifact does not move for the rewrite — 23,695 bytes, checked by
+reconstructing the old text in the run.
+
+Full record: `docs/landing-mg-0b07-implicit-disjunction.md`.

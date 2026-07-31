@@ -136,7 +136,7 @@ AFTER -- this tree, where the gate label is emitted by the code path
         0 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 0 named by the registered prediction; exit 0, and the battery exits 1 exactly when some row FAILs
         WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
   [HOLDS ] AFTER-5 -- delete the one `shape` return: artifact CHANGES (predicted CHANGES), exit 1 (predicted 1)  [UNIT REMOVED, DERIVED FROM THE PATCH: 1 `return`, 0 other statement(s), 0 boolean clause(s), 6 syntax node(s) in all, from `absorb_trace`; string(s) removed with it: 'shape']
-        24909 bytes out vs 23695 baseline; unmutated baseline exited 0.  AIMED AT: gate `shape` -- the branch mg-d0e2 found invisible, whose two returns mg-9220 merged and whose two clauses mg-64b6 rewrote as one comparison.  FINEST UNIT THIS LINE PERTURBS: one `return` statement, and nothing finer is removed.  The file the battery ran on IS byte-for-byte the source this unit was derived from
+        24909 bytes out vs 23695 baseline; unmutated baseline exited 0.  AIMED AT: gate `shape` -- the branch mg-d0e2 found invisible, whose two returns mg-9220 merged, whose two clauses mg-64b6 rewrote as one comparison, and whose disjunction mg-f7e1 spelled back out with an operator.  FINEST UNIT THIS LINE PERTURBS: one `return` statement, and nothing finer is removed.  The file the battery ran on IS byte-for-byte the source this unit was derived from
         WOULD DIFFER UNDER: deleting a gate that no row's answer depends on -- which is what AFTER-5 and AFTER-6 used to be, and what BEFORE-1 still is.  AND under this line being read at a granularity finer than the unit above, which is why the FINEST UNIT is printed with it
   [HOLDS ] AFTER-5: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 1 row(s) read [FAIL] and the summary block lists 1; exit 1 agrees; each of the 1 registered row name(s) matches exactly one row (1)
         1 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 1 named by the registered prediction; exit 1, and the battery exits 1 exactly when some row FAILs
@@ -147,6 +147,11 @@ AFTER -- this tree, where the gate label is emitted by the code path
   [HOLDS ] AFTER-6: 43 scored row(s); every label equals the independently derived expectation (0 mismatch(es)); 1 row(s) read [FAIL] and the summary block lists 1; exit 1 agrees; each of the 1 registered row name(s) matches exactly one row (1)
         1 row(s) named in this run's summary FAIL list, 2 CANNOT FAIL row(s) carried from the unmutated run, 1 named by the registered prediction; exit 1, and the battery exits 1 exactly when some row FAILs
         WOULD DIFFER UNDER: a row reading [FAIL] that the registered prediction and the summary block do not name, or a row this mutation was predicted to break still reading [PASS].  NOT under a label that is merely the same as the baseline's -- that is the shipped check, and it holds on an artifact where every row reads [FAIL]
+   AFTER-5's SITE, WHICH IS NOT ITS PATCH: the `return` it removes is guarded by a
+   condition of 2 clause(s) -- `len(shape_A) != len(shape_B)`; `any( a != b for a, b in zip(shape_A, shape_B))`.  This line covers neither of them; each is
+   deleted alone in the section PER CLAUSE below, where one of the two comes back
+   BYTE-IDENTICAL and is printed as NOT COVERED.
+
 
 ==============================================================================
 PER RETURN, NOT PER GATE -- the same test one level down
@@ -202,16 +207,27 @@ wrote.  The two returns became TWO CLAUSES of one condition, and DELETING THE FI
 CLAUSE ALONE MOVED NOT ONE BYTE -- the same sentence as mg-e7bc's with `return`
 replaced by `clause`.  Gate -> return -> clause is three rungs of one regress.
 
-THIS COMMIT DOES NOT DESCEND A FOURTH.  The two clauses were saying one thing --
-A and B do not have the same row-shape profile -- and `absorb_trace` now says it
-with one comparison and no boolean operator.  There is no clause under that
-`return` for a fourth rung to bite on, and the claim below is that fact read out of
-the tree rather than asserted.  The sweep itself is over the ENUMERATED clauses of
-the predicate layer, so a clause added tomorrow is swept without anyone adding it
-to a list -- and a clause with no registered prediction is BROKEN here, not skipped.
+mg-0b07: AND THAT WAS NOT THE FLOOR EITHER.  mg-64b6 answered the third rung by
+writing the condition as one comparison of two lists and reporting 0 clauses left.
+A list comparison IS a disjunction -- true when the LENGTHS differ or a common
+index does -- so the ORDER half survived with no operand to delete, and taking it
+out with the width half standing left the artifact BYTE-IDENTICAL at 23,695, exit 0.
+MERGING HAD REMOVED THE HANDLE, NOT THE RUNG.
 
-  population, read from the tree: 9 clause(s) in face_complex.py, which is
+SO THE OPERATOR IS BACK, AND THAT IS THE SUBTRACTION MOVE APPLIED TO THE
+IMPLICITNESS (mg-f7e1).  Both halves are now operands this sweep deletes one at a
+time, so a level the instrument could not see became one it can -- and what it
+sees is printed, including where it sees nothing.  The sweep is over the
+ENUMERATED clauses of the predicate layer, so a clause added tomorrow is swept
+without anyone adding it to a list, and a clause with no registered prediction is
+BROKEN here rather than skipped.  What deletion CANNOT reach is counted in the
+next section rather than left as the reader's assumption.
+
+  population, read from the tree: 11 clause(s) in face_complex.py, which is
   mg-c4c8's H2 population and the file every mutation in this instrument patches
+      absorb_trace             guard  clause 1 of 2   len(shape_A) != len(shape_B)
+      absorb_trace             guard  clause 2 of 2   any(
+            a != b for a, b in zip(shape_A, shape_B))
       gate_violations          guard  clause 1 of 2   m != len(B)
       gate_violations          guard  clause 2 of 2   any(len(A[i]) != len(B[i]) for i in range(m))
       diagonal_moves           guard  clause 1 of 2   len(A) != len(B)
@@ -225,39 +241,47 @@ to a list -- and a clause with no registered prediction is BROKEN here, not skip
   deciding clause(s) (_is_transitively_closed c1, _is_transitively_closed c2).  They are outside the predicate layer this deletion
   test mutates, and no claim here covers them.
 
-PREDICTIONS, registered before the runs.  Every one of these nine was run by
-mg-c4c8's H2 on the tree this commit started from and every one was IDENTICAL;
-that is said here rather than presented as foresight.  The tenth and eleventh --
-the two clauses this commit removed -- are run below against the PINNED tree that
-still has them, and one of those is predicted to CHANGE.
+PREDICTIONS, registered before the runs.  Nine of these eleven were run by
+mg-c4c8's H2 and every one was IDENTICAL; the two on `absorb_trace` were run by
+mg-0b07's p3 as perturbations of the one-comparison condition's two MEANINGS,
+before either was an operand.  Both facts are said here rather than presented as
+foresight.  mg-c4c8's own two clauses, which mg-64b6 removed, are run below
+against the PINNED tree that still has them.
 
    Poset.comparable         value  c1  IDENTICAL  exit 0   (mg-c4c8 H1 #3: inert whole)
    Poset.comparable         value  c2  IDENTICAL  exit 0   (ditto -- inert whole)
    Poset.comparable         value  c3  IDENTICAL  exit 0   (ditto -- inert whole)
    Poset.leq                value  c1  IDENTICAL  exit 0   (mg-c4c8 H1 #2: no call site in the battery)
    Poset.leq                value  c2  IDENTICAL  exit 0   (ditto -- no call site)
+   absorb_trace             guard  c1  IDENTICAL  exit 0   (mg-0b07 p3 S2, the ORDER half: no pair in the battery has len(A) != len(B) without also being ragged, so the width clause rejects them unaided.  UNCOVERED, NOT INERT -- cut it and the predicate answers ABSORBABLE for a 2x2 against a three-row B whose first two rows are 2 wide)
+   absorb_trace             guard  c2  CHANGES    exit 1   (mg-0b07 p3 S1, the WIDTH half: the `shape` row's second constructed pair is RAGGED at the same order, and nothing else rejects it)
    diagonal_moves           guard  c1  IDENTICAL  exit 0   (mg-c4c8 H1 #54: inert whole, for the same reason -- controls.py's own shape guard `continue`s first)
    diagonal_moves           guard  c2  IDENTICAL  exit 0   (ditto -- inert whole)
    gate_violations          guard  c1  IDENTICAL  exit 0   (mg-c4c8 H1 #52: this return is inert WHOLE, so no clause of its guard can move the artifact)
    gate_violations          guard  c2  IDENTICAL  exit 0   (ditto -- inert whole)
 
-   function                 kind   cls  artifact   exit  match
-   gate_violations          guard  1    IDENTICAL  0     match
-   gate_violations          guard  2    IDENTICAL  0     match
-   diagonal_moves           guard  1    IDENTICAL  0     match
-   diagonal_moves           guard  2    IDENTICAL  0     match
-   Poset.leq                value  1    IDENTICAL  0     match
-   Poset.leq                value  2    IDENTICAL  0     match
-   Poset.comparable         value  1    IDENTICAL  0     match
-   Poset.comparable         value  2    IDENTICAL  0     match
-   Poset.comparable         value  3    IDENTICAL  0     match
-  [HOLDS ] THE CLAUSE SWEEP RAN ON THE ENUMERATED POPULATION: 9 clause(s) of the predicate layer, each deleted ALONE with the rest of its condition and its statement left standing, 9 of 9 predictions matched
-        gate_violations guard c1 IDENTICAL; gate_violations guard c2 IDENTICAL; diagonal_moves guard c1 IDENTICAL; diagonal_moves guard c2 IDENTICAL; Poset.leq value c1 IDENTICAL; Poset.leq value c2 IDENTICAL; Poset.comparable value c1 IDENTICAL; Poset.comparable value c2 IDENTICAL; Poset.comparable value c3 IDENTICAL
+   function                 kind   cls  artifact   exit  match  what the result establishes about the clause
+   absorb_trace             guard  1    IDENTICAL  0     match  NOT COVERED -- deletion establishes nothing about it
+   absorb_trace             guard  2    CHANGES    1     match  the battery covers this clause
+   gate_violations          guard  1    IDENTICAL  0     match  NOT COVERED -- deletion establishes nothing about it
+   gate_violations          guard  2    IDENTICAL  0     match  NOT COVERED -- deletion establishes nothing about it
+   diagonal_moves           guard  1    IDENTICAL  0     match  NOT COVERED -- deletion establishes nothing about it
+   diagonal_moves           guard  2    IDENTICAL  0     match  NOT COVERED -- deletion establishes nothing about it
+   Poset.leq                value  1    IDENTICAL  0     match  NOT COVERED -- deletion establishes nothing about it
+   Poset.leq                value  2    IDENTICAL  0     match  NOT COVERED -- deletion establishes nothing about it
+   Poset.comparable         value  1    IDENTICAL  0     match  NOT COVERED -- deletion establishes nothing about it
+   Poset.comparable         value  2    IDENTICAL  0     match  NOT COVERED -- deletion establishes nothing about it
+   Poset.comparable         value  3    IDENTICAL  0     match  NOT COVERED -- deletion establishes nothing about it
+  [HOLDS ] THE CLAUSE SWEEP RAN ON THE ENUMERATED POPULATION: 11 clause(s) of the predicate layer, each deleted ALONE with the rest of its condition and its statement left standing, 11 of 11 predictions matched
+        absorb_trace guard c1 IDENTICAL; absorb_trace guard c2 CHANGES; gate_violations guard c1 IDENTICAL; gate_violations guard c2 IDENTICAL; diagonal_moves guard c1 IDENTICAL; diagonal_moves guard c2 IDENTICAL; Poset.leq value c1 IDENTICAL; Poset.leq value c2 IDENTICAL; Poset.comparable value c1 IDENTICAL; Poset.comparable value c2 IDENTICAL; Poset.comparable value c3 IDENTICAL
         WOULD DIFFER UNDER: a clause appearing in the predicate layer with no prediction beside it -- which is BROKEN here rather than skipped, because a population read from the tree and a table of expectations written by hand are two things that can disagree, and the tree is the one that is right
-  [HOLDS ] AND `absorb_trace` HAS NO DECIDING CLAUSE LEFT: 0 boolean clause(s) in the conditions that decide its returns, counted from the tree.  The finest deletable unit inside its `shape` gate IS the `return` AFTER-5 removes, so AFTER-5's line is a claim about the whole of it and the regress that ran gate -> return -> clause stops here by construction rather than by another rung
-        clauses in `absorb_trace`: 0; in `gate_violations`: 2; in `diagonal_moves`: 2 (mg-c4c8 F3's two functions, whose returns are inert WHOLE and which this commit did not touch)
-        WOULD DIFFER UNDER: a boolean operator returning to any condition that decides a return in `absorb_trace` -- at which point this claim goes red and the sweep above acquires a row with no prediction, which is also red.  NOT under the clause being merely hard to reach: the condition either has operands or it does not, and this counts them
-  [HOLDS ] and THE SWEEP'S OWN GRAIN is the tree's: 0 of the 9 clauses are themselves boolean expressions, so 'top-level clause' and 'clause' name the same thing on this population
+  [HOLDS ] `absorb_trace`'S `shape` GUARD IS SWEPT AT 2 CLAUSE(S), AND 1 OF THEM THE BATTERY CANNOT SEE.  mg-64b6 reported 0 clauses here and the regress stopping by construction; that count was exact and the conclusion was wrong, because the comparison it counted was itself a disjunction (mg-0b07).  The operator is back, both halves are deleted individually above, and the half no pair reaches is NAMED: clause 1
+        clauses in `absorb_trace`: 2 (c1 IDENTICAL; c2 CHANGES); in `gate_violations`: 2; in `diagonal_moves`: 2 (mg-c4c8 F3's two functions, whose returns are inert WHOLE and which no commit in this lineage has touched)
+        WOULD DIFFER UNDER: a pair reaching the order half being added to `controls.py` -- at which point clause 1 goes CHANGES, its registered prediction MISSES, and this claim goes red saying so.  That is the intended way for it to fail: the number it states is the coverage, not a target.  It also goes red if the operator is merged away again, which would return the sweep to reporting 0 clauses at a site that has two
+  [HOLDS ] AND THE UNCOVERED CLAUSE IS UNCOVERED AND NOT INERT, which is the distinction mg-9220's merge turned on and this sweep would otherwise blur: `len(shape_A) != len(shape_B)` decides pairs the battery does not contain, so it cannot be deleted as a statement that does nothing
+        the pairs that separate them are printed in AND NEITHER REWRITE QUIETLY NARROWED THE GATE above; an inert clause would be removed here rather than reported, which is what mg-9220 did with the inert `return`
+        WOULD DIFFER UNDER: that clause becoming genuinely inert -- which would need the width half to subsume it, and it does not: `zip` stops at the shorter profile.  The three separator pairs in the section above are the measurement, and they are run against a brute force rather than against the predicate
+  [HOLDS ] and THE SWEEP'S OWN GRAIN is the tree's: 0 of the 11 clauses are themselves boolean expressions, so 'top-level clause' and 'clause' name the same thing on this population
         nested boolean clauses: none
         WOULD DIFFER UNDER: a condition of the form `a or (b and c)`, where deleting the second top-level clause removes two.  The sweep would then be one rung coarser than the tree it reads -- which is the defect this whole lineage is about, committed by the instrument written to close it
 
@@ -268,9 +292,9 @@ found are swept at the pinned commit that has them -- which is both this sweep's
 positive control and mg-c4c8's F1, reproduced rather than quoted.
 
   [HOLDS ] b6bc2ef (b6bc2ef) -- the two-CLAUSE tree regenerates its own artifact, so the rows below are against a baseline of its own
-        23684 bytes regenerated, exit 0; `absorb_trace` has 2 deciding clause(s) there and 0 here
+        23684 bytes regenerated, exit 0; `absorb_trace` has 2 deciding clause(s) there and 2 here
         WOULD DIFFER UNDER: that ref moving, or that tree ceasing to be reproducible
-  [HOLDS ] AND THE PIN IS WHAT IT SAYS IT IS: of the 6 commits that ever touched face_complex.py, 1 has/have a two-CLAUSE `shape` condition in `absorb_trace`, and the NEWEST of them is b6bc2efed7b4 -- which is what b6bc2ef resolves to
+  [HOLDS ] AND THE PIN IS WHAT IT SAYS IT IS: of the 7 commits that ever touched face_complex.py, 1 has/have a two-CLAUSE `shape` condition in `absorb_trace`, and the NEWEST of them is b6bc2efed7b4 -- which is what b6bc2ef resolves to
         newest two-clause commit b6bc2efed7b4; pin resolves to b6bc2efed7b4; 1 two-clause commit(s) in all
         WOULD DIFFER UNDER: a later commit reintroducing a two-clause condition, or this pin being moved to an ancestor.  Either makes the rows above measurements about a tree the sentence beside them does not describe -- mg-c4c8's floor item, applied to the pin this commit adds rather than only to the one it inherited
    absorb_trace             clause 1 of 2 (m != len(B)): BYTE-IDENTICAL exit 0  23684 bytes
@@ -289,6 +313,67 @@ the condition reads.
   [HOLDS ] THE ONE-CLAUSE CONDITION IS THE TWO-CLAUSE CONDITION: over 28900 pairs across 85 shape profiles the merged form and this tree's form agree on the OUTCOME -- decision, gate label and raised exception -- on 28900 of 28900.  Not 'the same decision': the same answer, by all three channels
         population: every row-width tuple of length 0..3 with widths 0..3, filled two ways -- 170 matrices, crossed with itself.  It is indexed by SHAPE because that is what the condition reads; the entry-indexed population above cannot separate two shapes that differ in a row width nobody enumerated.  no disagreement
         WOULD DIFFER UNDER: either form being changed.  This is a stronger statement than the one mg-9220's merge could make -- that merge moved 126 gate labels and made a partial function total (mg-c4c8 F5) -- and it has to be, because a rewrite made to stop a deletion test descending must not buy that with a behaviour change nobody asked for
+
+==============================================================================
+THE RESPELLING MOVED NOTHING -- the two texts, asked the same questions
+==============================================================================
+mg-f7e1 replaced one comparison of two row-shape profiles with the `or` that
+comparison means.  That is a claim about a REWRITE, and this lineage has one rule
+about those: measure it.  The patch below turns the live condition back into
+mg-64b6's text -- an anchor that must occur exactly once -- and the battery is run
+on the result.
+
+  [HOLDS ] THE ONE-COMPARISON FORM REGENERATES THIS TREE'S ARTIFACT BYTE FOR BYTE: 23695 bytes, exit 0, against 23695 and 0 live.  The `or` and the list comparison are the same predicate on everything this battery asks
+        WOULD DIFFER UNDER: either spelling deciding a pair the other does not, which would make this commit a change to the predicate rather than to its text.  mg-9220's merge DID move 126 gate labels and make a partial function total (mg-c4c8 F5); this one is required to move nothing, and the requirement is checked rather than intended
+  [HOLDS ] and over the SAME 28900 pairs across 85 shape profiles the two spellings agree on decision, gate label AND raised exception on 28900 of 28900
+        population indexed by SHAPE PROFILE, 170 matrices crossed with itself.  no disagreement
+        WOULD DIFFER UNDER: `zip` truncating where the list comparison does not -- which is exactly the risk this rewrite runs, since the order clause is what stands in for the length half of `!=`.  Drop `len(shape_A) != len(shape_B)` and this claim does NOT go red (the artifact is byte-identical, which is the finding); drop the `zip` guard's counterpart in the comparison and it does
+
+==============================================================================
+THE BOUND OF THIS INSTRUMENT -- what deletion reaches, and what it does not
+==============================================================================
+DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS AND NO FURTHER.
+That sentence is the whole of mg-0b07's second option and it is worth nothing as a
+promise, so it is a count.  Four generations of this file each reported a floor and
+each was one spelling above the real one; the reason the fifth does not is not that
+somebody looked harder, it is that the limit is now MEASURED and printed beside
+the green rows rather than inferred from them.
+
+A condition can package several decisions with no operator to delete: `a < b < c`,
+`[..] != [..]`, `x in S`, `any(...)`.  The sweep above reaches the operands of `or`
+and `and` and nothing else.  Below, both populations are read out of the tree.
+
+   file               conds  bool  operands compounds expr nodes
+   face_complex.py    73     5     11       11        1002
+   posets.py          6      1     2        1         55
+
+   the compounds, named -- each is a decision this sweep cannot delete out of:
+      face_complex.py  _ambient_coxeter_laplacian guard  membership  n in _AMBIENT_CACHE
+      face_complex.py  mat_eq                   value  quantifier  all(len(a) == len(b) and all(x == y for x, y
+      face_complex.py  mat_eq                   value  quantifier  all(x == y for x, y in zip(a, b))
+      face_complex.py  is_diagonal              value  quantifier  all(A[i][j] == 0 for i in range(len(A)) for 
+      face_complex.py  absorb_trace             guard  quantifier  any( a != b for a, b in zip(shape_A, shape_B
+      face_complex.py  gate_violations          guard  quantifier  any(len(A[i]) != len(B[i]) for i in range(m)
+      face_complex.py  diagonal_moves           guard  quantifier  any(len(A[i]) != len(B[i]) for i in range(le
+      face_complex.py  diagonal_moves           value  quantifier  any(A[i][i] != B[i][i] for i in range(len(A)
+      face_complex.py  Poset.leq                value  membership  (a, b) in self.less
+      face_complex.py  Poset.comparable         value  membership  (a, b) in self.less
+      face_complex.py  Poset.comparable         value  membership  (b, a) in self.less
+      posets.py        _is_transitively_closed  guard  membership  (a, d) not in rel
+  [HOLDS ] THE SWEEP DELETES 11 OPERAND(S) OUT OF 73 DECIDING CONDITION(S) IN face_complex.py, AND 11 COMPOUND(S) IN THOSE CONDITIONS HAVE NO OPERAND TO DELETE (4 membership, 7 quantifier); posets.py adds 1 more, which no claim here covers.  This is the instrument's bound, stated beside its results: a green row above covers the clause it names and says nothing about any decision packed inside that clause
+        face_complex.py: 73 deciding conditions, 5 of them boolean, 11 deletable operands, 11 unreachable compounds, 1002 expression nodes in all.  THE LAST NUMBER HAS NO GRAIN -- it counts every node in every deciding condition and depends on no classification, so a compound in a form this file does not know about is inside it anyway, which is the treatment `unit_removed` gives its own three chosen units
+        WOULD DIFFER UNDER: every deciding condition becoming a plain boolean expression, at which point the bound would be vacuous and this claim would say so by counting 0 compounds.  NOT under the forms being renamed: the population is enumerated from the tree, and the totals beside it do not depend on the names
+  [HOLDS ] AND THE CENSUS SEPARATES THE TWO SPELLINGS, so it is measuring the thing it claims to: on mg-64b6's text `absorb_trace`'s guard is an unreachable compound (sequence) and on this tree it is an `or` with two deletable operands, with quantifier left inside the second one -- which is why the bound is stated and not declared closed
+        one-comparison guard: sequence [len(row) for row in A] != [len(row) for row in B] || this tree's guard: quantifier any( a != b for a, b in zip(shape_A, shape_B))
+        WOULD DIFFER UNDER: the census reporting the same thing for both texts, which would mean it cannot see the difference this commit is.  Both readings are of source text produced in this run: the second is `apply_edits` of the live source with the same patch the battery ran on above
+
+WHAT THIS BOUND DOES NOT SAY.  It does not say the uncovered compounds are wrong,
+or that anything is untested: `absorb_trace` is checked against a brute force over
+all 2^m sign vectors by a scored row, and its six returns are individually
+deletable and individually visible.  It says what the DELETION EVIDENCE reaches, so
+that a reader who wants to know whether a sub-decision is covered can read the
+answer instead of assuming it from a green run.
+
 
 ==============================================================================
 WHAT MOVED, AND WHAT DID NOT
@@ -361,16 +446,28 @@ elsewhere in this file it is named rather than repeated.
   6. The `aim` strings beside each mutation are prose and could acquire a size that contradicts the derived unit.
      NOT CHECKED, and it cannot be without parsing English -- which is the apparatus this repair removes rather than adds.  The reason it is survivable: nothing computes from an aim, the derived unit is printed on the same line, and the aim names the mutation's PURPOSE rather than its size.
 
-  7. The regress could continue below a clause -- an operand of `!=`, a call, a name.
-     CANNOT ARISE FOR THE DELETION TEST, and the reason is structural: deleting an operand of a comparison does not leave a condition, so there is no smaller DELETION at this site.  A MUTATION test (invert the comparison, drop a `len`) has a grain of its own and nothing here speaks for it -- said plainly rather than left to be assumed.
+  7. The regress could continue below a clause -- an operand of `!=`, a call, a name.  THIS BRANCH WAS ANSWERED WRONGLY BY mg-64b6 AND THE ANSWER IS KEPT HERE SO THE CORRECTION IS VISIBLE: 'CANNOT ARISE FOR THE DELETION TEST -- deleting an operand of a comparison does not leave a condition, so there is no smaller DELETION at this site.'  The reason is TRUE and mg-0b07 checked it.  The conclusion does not follow: it answers 'can anything smaller be DELETED', and the question this lineage is about is 'can anything smaller be PERTURBED and go unseen'.  At that very site the two came apart -- the list comparison's order half was perturbable, uncovered, and had no operand.
+     CHECKED, ON THE SECOND ATTEMPT.  The condition is spelled with an operator so both halves are deletable and both are swept; the compounds that remain BELOW a clause are counted in THE BOUND OF THIS INSTRUMENT; and mg-0b07's own perturbation experiment -- which is not a deletion and is not this file's -- is re-run unmodified against this tree in d4_auditor_rerun.py.
 
-  8. The four narrowed AFTER patches could have changed what the deletion test measures while making the declarations exact.
+  8. THE BOUND ITSELF HAS A BOUND.  `_compound_form` names four ways to package several decisions with no operator (`or`/`and`, chained, sequence, membership, quantifier); a fifth form nobody has thought of counts 0 there exactly as the list comparison counted 0 in the clause census.  The remedy for an unstated limit is a limit that can itself be understated.
+     CHECKED, AND THE CHECK IS NARROWER THAN THE BRANCH -- said plainly.  `condition_census` reports EXPRESSION NODES IN ALL, an absolute count over every deciding condition that depends on no classification, so an unnamed form is inside a printed number rather than outside every number; and unlike `unit_removed`'s `nodes` it is a total and not a difference, so mg-0b07's B4 (a size-preserving substitution hiding in a net) cannot arise for it.  THE RESIDUE: that total bounds how much is there and does not name what.  A form nobody names is still not named.
+
+  9. The bound could be stated in a document beside the run rather than in it, which is how an instrument's limit becomes something a reader of the transcript has to already know.
+     CHECKED: the census, the named compounds and the NOT COVERED marker are printed in this transcript, and the marker is on the same line as the sweep result it qualifies rather than in a paragraph above it.
+
+  10. The respelling could buy a visible clause with a BEHAVIOUR CHANGE -- `zip` truncates where `!=` compares lengths, so an order difference could be lost in the rewrite that was meant only to expose it.
+     CHECKED TWICE: the one-comparison text is reconstructed by patch in this run and regenerates the artifact byte for byte, and both forms are asked decision, gate label and raised exception over the shape-profile population.
+
+  11. The uncovered clause could be reported as UNCOVERED when it is really INERT, which is a category error with a different remedy: an inert clause should be deleted (mg-9220's move) and only an uncovered one should be reported.
+     CHECKED: the separator pairs are run against a brute force that enumerates every sign vector, and the claim beside the sweep states which of the two the clause is.  A clause that turned out inert would be removed here rather than named.
+
+  12. The four narrowed AFTER patches could have changed what the deletion test measures while making the declarations exact.
      CHECKED: the artifact verdict and exit code of every one is unchanged, and mg-c4c8's H1 ran the same four narrow patches independently and reports the same verdicts.
 
-  [HOLDS ] the enumeration above is printed with the run, and 6 of its 8 branches are checked BY A CLAIM IN THIS FILE rather than by a sentence -- the 2 that are not carry the reason they cannot be
-        branches checked by a claim: the node-count claim (1), the read-back in every run_case (2), the nested-clause claim (3), the pinned sweep (4), the shape-profile equivalence (5), the four narrowed patches (8).  Branches with a stated reason instead: the aim strings (6), the sub-clause regress (7)
+  [HOLDS ] the enumeration above is printed with the run, and 11 of its 12 branches are checked BY A CLAIM IN THIS FILE rather than by a sentence -- the 1 that are not carry the reason they cannot be
+        branches checked by a claim: the node-count claim (1), the read-back in every run_case (2), the nested-clause claim (3), the pinned sweep (4), the shape-profile equivalence (5), the sub-clause regress (7, answered wrongly by mg-64b6 and re-answered here), the four narrowed patches (8), the expression-node total (9), the NOT COVERED marker on the sweep's own rows (10), the respelling equivalence (11), the uncovered-not-inert claim (12).  Branches with a stated reason instead: the aim strings (6).  Branch 9 carries a stated RESIDUE as well as a check, which is the honest shape for a limit that has a limit
         WOULD DIFFER UNDER: nothing: this claim is a pointer to the branches above, and it is scored so that the list travels with the transcript instead of living in a document beside it.  The claims that do the work are the ones named in each branch.  The two counts are computed from the list rather than written beside it, for the reason every other number in this file is
 
 ==============================================================================
-44 claim(s) scored; 0 BROKEN.
+49 claim(s) scored; 0 BROKEN.
 ==============================================================================

@@ -799,11 +799,12 @@ def absorb_trace(A, B):
     re-orientation the battery already varies -- a sign gauge, not a
     construction error.
 
-    THE `shape` GATE HAS ONE `return` AND ITS CONDITION HAS ONE CLAUSE, and it
-    reached that state one rung at a time (mg-e7bc -> mg-9220 -> mg-c4c8 ->
-    mg-64b6).  THE UNIT A DELETION TEST REMOVES IS THE UNIT IT LICENSES A CLAIM
-    ABOUT, and this gate has now been rewritten twice for that one sentence, at
-    two different sizes.
+    THE `shape` GATE HAS ONE `return` AND ITS CONDITION IS A DISJUNCTION
+    SPELLED WITH AN OPERATOR, ON PURPOSE, and it reached that state one rung at
+    a time (mg-e7bc -> mg-9220 -> mg-c4c8 -> mg-64b6 -> mg-0b07).  THE UNIT A
+    DELETION TEST REMOVES IS THE UNIT IT LICENSES A CLAIM ABOUT, and this gate
+    has now been rewritten three times for that one sentence -- twice by
+    merging, and once, below, by UN-merging.
 
     RUNG ONE -- TWO RETURNS (mg-e7bc).  The test that guards this function
     deleted both `shape` returns TOGETHER, the artifact changed, and the gate
@@ -826,24 +827,57 @@ def absorb_trace(A, B):
     moved from a pair of returns to a pair of clauses and the pair was still
     what the test bit on.
 
-    SO THE CONDITION BELOW HAS NO CLAUSE TO BE THE THIRD RUNG.  The two clauses
-    were saying one thing -- A and B do not have the same row-shape profile --
-    and it is written here as one comparison of two lists.  There is no boolean
-    operator in it, so the smallest deletable unit inside this gate IS the
-    `return`, and the deletion test that removes it (d2_deletion.py, AFTER-5)
-    is a claim about the whole of it.  The move is the merge's, made once more
-    instead of at the level below: REMOVE WHAT GENERATES THE FINDING RATHER
-    THAN MEASURE ITS OUTPUT.  `gate_violations` and `diagonal_moves` below
-    still carry the two-clause form; their `return`s are inert whole (mg-c4c8
-    F3) and this commit did not touch them.
+    RUNG THREE -- ONE COMPARISON, TWO MEANINGS (mg-0b07).  mg-64b6 answered
+    rung two by writing the condition as `[len(row) for row in A] != [len(row)
+    for row in B]` and reporting that there was no clause left to delete.  That
+    was TRUE AND IT WAS NOT THE FLOOR.  A list comparison is a disjunction that
+    Python spells with no operator:
 
-    IT IS THE SAME PREDICATE, MEASURED AND NOT ARGUED.  The condition below is
-    true exactly when the orders differ or some row width does, so nothing this
-    function returns can move.  d2_deletion.py's
-    section PER CLAUSE runs this form, the merged two-clause form and the
-    pinned two-return form side by side over a population indexed by SHAPE
-    PROFILE -- which is what the condition reads -- and reports decision, gate
-    label and raised exception for each.
+        sa != sb  <=>  len(sa) != len(sb)  or  they differ at a common index
+
+    So the ORDER half survived the merge with no syntactic handle on it, and
+    mg-0b07 perturbed it directly: leave the width half standing and take the
+    order half out, and the artifact comes back BYTE-IDENTICAL at 23,695 bytes,
+    exit 0, every row green.  That is rung two's sentence with `clause` replaced
+    by `sub-condition`.  Merging had not removed the rung; it had removed the
+    HANDLE, and an uncovered thing that cannot be named is worse than one that
+    can, because the green above it is read as reaching further than it does.
+
+    SO THE MOVE HERE IS THE OPPOSITE OF THE PREVIOUS TWO, AND IT IS STILL
+    SUBTRACTION: what is subtracted is the IMPLICITNESS.  The condition below
+    spells the disjunction with an `or`, so both halves are operands the
+    enumerated clause sweep deletes individually and reports on.  Measured
+    (d2_deletion.py, section PER CLAUSE): deleting the WIDTH clause alone
+    CHANGES the artifact, exit 1; deleting the ORDER clause alone leaves it
+    BYTE-IDENTICAL, exit 0.  The second line is the point.  The order half is
+    NOT inert -- cut it and this function answers ABSORBABLE for a 2x2 against a
+    three-row B whose first two rows are 2 wide, against a brute force that
+    finds no s -- it is UNCOVERED, and nothing in `controls.py` was added to
+    watch it (see the `shape` row's note at `UNREACHED_GATE_PAIRS`).  The
+    difference between inert and uncovered is now printed rather than assumed.
+
+    AND THE BOUND OF THE INSTRUMENT IS STATED WITH IT, because respelling does
+    not terminate: `any(a != b for a, b in zip(...))` is itself a disjunction
+    over rows with no operator, and `!=` on two ints is not one only because
+    nothing smaller is being asked.  DELETION ESTABLISHES COVERAGE DOWN TO
+    EXPLICIT BOOLEAN OPERANDS AND NO FURTHER.  d2_deletion.py's section THE
+    BOUND OF THIS INSTRUMENT counts, from the tree, how many deciding conditions
+    are compounds the sweep cannot reach into, so the limit is a measured number
+    beside the test and not a promise that the evidence reaches the bottom.
+    `gate_violations` and `diagonal_moves` below carry the two-clause form for
+    their own reasons; their `return`s are inert whole (mg-c4c8 F3) and neither
+    this commit nor mg-64b6 touched them.
+
+    IT IS THE SAME PREDICATE, MEASURED AND NOT ARGUED, ACROSS BOTH REWRITES.
+    The condition below is true exactly when the orders differ or some common
+    row width does, which is what a list comparison means, so nothing this
+    function returns can move.  Both rewrites are measured over a population
+    indexed by SHAPE PROFILE -- which is what the condition reads -- reporting
+    decision, gate label AND raised exception: d2_deletion.py's section THE
+    RESPELLING MOVED NOTHING puts this form beside the one-comparison form it
+    replaces (reconstructed by patch in that run, and regenerating the artifact
+    byte for byte), and its section PER CLAUSE puts it beside the merged
+    two-clause form and the pinned two-return form.
 
     ONE LABEL MOVED WITH THE MERGE, on pairs no population here contains: the
     old order tested row 0's diagonal before row 1's width, so a pair RAGGED at
@@ -861,7 +895,10 @@ def absorb_trace(A, B):
     s_i s_j.  What remains is a parity system, solved by union-find.
     """
     m = len(A)
-    if [len(row) for row in A] != [len(row) for row in B]:
+    shape_A = [len(row) for row in A]
+    shape_B = [len(row) for row in B]
+    if len(shape_A) != len(shape_B) or any(
+            a != b for a, b in zip(shape_A, shape_B)):
         return Trace(False, "shape", 0)
     for i in range(m):
         if A[i][i] != B[i][i]:

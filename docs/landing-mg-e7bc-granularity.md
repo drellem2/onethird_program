@@ -185,3 +185,10 @@ rather than written, so `returns_removed` and the eleven sentences are both gone
 sentences are kept verbatim in `d2_deletion.py` as the specimen the comparison runs on.
 
 Full record: `docs/landing-mg-c4c8-clause-and-derived-unit.md`.
+
+**CORRECTED BY mg-f7e1 (2026-07-31), in one place: "no clause to delete alone" was true and was
+not the end of it.** A list comparison is a disjunction Python spells with no operator, and
+mg-0b07 took its ORDER half out with the width half standing — byte-identical, exit 0, every row
+green. Merging had removed the handle, not the rung. The condition is now spelled with an `or`,
+both halves are swept individually, and the one the battery cannot see is printed as NOT COVERED.
+Full record: `docs/landing-mg-0b07-implicit-disjunction.md`.
