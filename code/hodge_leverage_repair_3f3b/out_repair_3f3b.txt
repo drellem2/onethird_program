@@ -4,7 +4,8 @@ mg-3f3b -- mg-7e39's four findings, repaired and controlled
 
 S0 -- PREFLIGHT
 ---------------
-    HEAD                     : 3d7b32fdd240
+    HEAD                     : 7dc91808eb58
+    POPULATION ANCHOR: commit=7dc91808eb5859c78d57d7686dec539e106a8868 count=495 digest=2e41577f5263fbfb scope=code/**/*.py
     the runner, unmutated    : exit 0
     F1 (pipe-table alignment) : POST -- repaired
     F5 (derived vocabulary)  : POST -- repaired
@@ -101,10 +102,10 @@ number.
   [MEASURED ] S2d 3 of 6 repaired site(s) feed a RECORDED VERDICT rather than only a printed line: ['code/hodge_leverage_audit_835f/audit_a318_repair.py', 'code/hodge_leverage_audit_ec07/audit_ec07.py', 'code/hodge_leverage_repair_6df0/repair_ec07.py'].  Those are re-run BY HAND at this tree and the verdicts compared to the committed transcript -- `out_a318_rerun.txt`, 12 of 12 and 10 of 12 before and after.  The rest feed a `print` of one example row.  A repair inside another deliverable's instrument that moves its verdict has rewritten its evidence, which is worse than the disposition it replaces
     DECLARED MEASUREMENT  code/hodge_leverage_audit_7e39/audit_7e39.py  definition + 1 call site(s) at 815
     DECLARED MEASUREMENT  code/hodge_leverage_audit_ec07/audit_ec07.py  definition + 1 call site(s) at 729
-    DECLARED MEASUREMENT  code/hodge_leverage_repair_3f3b/repair_7e39.py  definition + 3 call site(s) at 243, 739, 808
+    DECLARED MEASUREMENT  code/hodge_leverage_repair_3f3b/repair_7e39.py  definition + 3 call site(s) at 243, 756, 825
     DECLARED MEASUREMENT  code/hodge_leverage_repair_6df0/repair_ec07.py  definition + 3 call site(s) at 361, 615, 1133
   [CONFIRMED] S2b 4 file(s) perform the construct through a DECLARED function whose name is what it does, found here by searching for the name rather than by reading a disposition table.  A structure a sweep can see is not the same object as a reason a reader must be handed
-  [CONFIRMED] S2c the whole tree -- 473 .py files under `code/` in the working tree -- swept by MY rule over MY vocabulary of 7: 0 line(s) identify a gate row by a substring test over the whole row, 0 of them without even a disposition.  Predicted 0 and 0.  A disposition table with nothing in it is the repair; a disposition table with four rows in it and a fifth occurrence its vocabulary cannot see is the finding
+  [CONFIRMED] S2c the whole tree -- 495 .py files under `code/` in the working tree -- swept by MY rule over MY vocabulary of 7: 0 line(s) identify a gate row by a substring test over the whole row, 0 of them without even a disposition.  Predicted 0 and 0.  A disposition table with nothing in it is the repair; a disposition table with four rows in it and a fifth occurrence its vocabulary cannot see is the finding
 
 S3 -- F5: THE VOCABULARY, DERIVED FROM WHAT THE GATE PRINTS
 -----------------------------------------------------------
@@ -126,8 +127,14 @@ DECLARES the vocabulary and fails closed on a row that does not use it.
   [CONFIRMED] S3c FAIL-CLOSED: a source from which no row heading can be derived is a REFUSAL, not an empty vocabulary.  A sweep with an empty vocabulary finds nothing and reads exactly like a tree with nothing in it -- which is F1's shape on this axis
   [MEASURED ] S3d with ['READ AT THE SITE', 'WRITTEN ONCE'] in the vocabulary the same rule finds 0 occurrence(s) the hand list cannot see.  mg-7e39 measured 1 at `audit_a318_repair.py:326`, the earliest occurrence in the arc; this run finds 0 because that line is repaired above
 
-S4 -- F2: THE POPULATION, RE-DERIVED AT THE COMMIT THAT PUBLISHES IT
---------------------------------------------------------------------
+S4 -- F2: THE POPULATION, RE-DERIVED AT THE COMMIT IT WAS MEASURED AT
+---------------------------------------------------------------------
+⚠️ RE-KEYED BY mg-132a.  This section used to ask "does the tree at the commit
+that PUBLISHES this figure hold it", and that question is the wrong one across a
+rebase: `git log -1` follows a file to its new resting place, so the commit that
+publishes a figure stops being the commit it was measured at the moment a merge
+moves it.  It asks both questions now and tells the answers apart.
+
 "429 .py files swept" was not a figure that went stale.  The tree at the
 commit which SHIPS that transcript holds 448, and so did the commit before it:
 19 files were in the population and not in the number on the day it was
@@ -141,16 +148,25 @@ carry a number, because prose has no publication step.
 
     .py under code/ at 77306a7 (mg-6df0 landed) : 448
     .py under code/ at 803bd50 (its parent)    : 448
-    .py under code/ at HEAD^  c1a57fd       : 473
-    .py under code/ at HEAD   3d7b32f       : 473
-    .py under code/ in the WORKING TREE       : 473
+    .py under code/ at HEAD^  d24bbeb       : 494
+    .py under code/ at HEAD   7dc9180       : 495
+    .py under code/ in the WORKING TREE       : 495
 
        code/hodge_leverage_repair_6df0/out_repair_6df0.txt
-        publishes 473, and the tree at c1a57fdd8d8c -- the commit that last wrote it -- holds 473
+        verdict   : DISPLACED  (anchor INFERRED)
+        publishes : 473
+        anchor    : 8a07ae01fc45 holds 473   reachable from the audited rev: NO
+        published : 3958b5a84bf4 holds 481
+        right when written -- 473 at 8a07ae01fc45 -- and rebased onto a tree of 481 at 3958b5a84bf4
        code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt
-        publishes 473, and the tree at 3d7b32fdd240 -- the commit that last wrote it -- holds 473
+        verdict   : DISPLACED  (anchor INFERRED)
+        publishes : 473
+        anchor    : 3d7b32fdd240 holds 473   reachable from the audited rev: NO
+        published : 75333b2401da holds 481
+        right when written -- 473 at 3d7b32fdd240 -- and rebased onto a tree of 481 at 75333b2401da
 
-  [CONFIRMED] S4a of the 2 committed transcript(s) that publish a `.py` population, 0 disagree with the tree AT THE COMMIT THAT PUBLISHES THEM.  This is the check mg-7e39's F2 is the failure of, and it is keyed on each transcript's OWN publishing commit rather than on HEAD -- so a merge that lands elsewhere cannot make it red, and a transcript committed beside a tree it does not describe cannot make it green.  0 are not yet published at any commit and are named rather than counted as passes
+  [CONFIRMED] S4a of the 2 committed transcript(s) that publish a `.py` population, 0 fail against THE TREE THEY WERE MEASURED AT, and 2 are DISPLACED -- right when written and rebased onto a tree that had grown.  ⚠️ THIS ROW USED TO BE KEYED ON `git log -1` AND SAID SO IN A CLAUSE THAT WAS FALSE: 'a merge that lands elsewhere cannot make it red'.  A merge that rebased THIS FILE'S OWN EVIDENCE made it red within four commits -- both transcripts published 473 against a publishing tree of 481, and both were CORRECT, because `git log -1` follows a file to wherever a rebase puts it.  The publishing commit is reported beside the anchor now instead of standing in for it.  0 are not yet published and are named rather than counted as passes: []
+  [MEASURED ] S4a' AND THIS IS A MEASUREMENT AT 7dc91808eb58, NOT A LIVE PROPERTY.  Nothing re-runs this check after a merge, and a merge is what broke it: the publication step this section separates from prose is THE RUN, and the step that displaced these two figures was THE REBASE.  Re-run `sh code/publication_anchor_132a/run_all.sh --at <rev>` after one; a committed `0 refuted` says only that the audit passed when it ran
   [CONFIRMED] S4b 0 population figure(s) are CARRIED as a number in the 4 prose file(s) this arc publishes for the sweep.  Predicted 0: prose points at the transcript line, because a number in prose has no publication step that recomputes it and goes stale silently at the next merge.  A figure inside a QUOTATION is exempt, and that is ONE rule rather than a skip-list -- it is how a correction note states the figure it corrects
   [MEASURED ] S4c THE HISTORICAL FACT, FROM GIT: the transcript as committed at 77306a7 publishes 429 and the tree at 77306a7 holds 448 `.py` files under `code/` -- 19 in the population and not in the number.  Re-derived here from `git ls-tree` at that commit, not quoted from mg-7e39
 
@@ -163,14 +179,14 @@ S5 -- THIS DELIVERABLE, CHECKED FOR THE FOUR SHAPES IT REPAIRS
 
 S6 -- THE ORDERING, RE-DERIVED FROM GIT
 ---------------------------------------
-    this instrument first committed at : 1d1d5b184eaf
-    commits from there to HEAD          : 5
-    `verify_landing.py` last changed at : 96670ebb08e2
-  [MEASURED ] S6a the predictions and this instrument are committed at 1d1d5b184eaf, 5 commit(s) before HEAD.  'Predict before measuring' is a claim about the repository and is read out of `git log` here rather than asserted in prose
+    this instrument first committed at : 979df7241f24
+    commits from there to HEAD          : 16
+    `verify_landing.py` last changed at : 478508621408
+  [MEASURED ] S6a the predictions and this instrument are committed at 979df7241f24, 16 commit(s) before HEAD.  'Predict before measuring' is a claim about the repository and is read out of `git log` here rather than asserted in prose
 
 SUMMARY
 -------
-    checks          : 22
+    checks          : 23
     confirmed       : 16
-    measured        : 6
+    measured        : 7
     refuted         : 0
