@@ -21,7 +21,11 @@ S1a  EXTENT DECLARATION -- what is enforced, and over what
       out_c5_doc_73df_after.txt
       stricken_a4ef.py
   and 0 file(s) skipped as not decodable UTF-8 text, NAMED THE SAME
-  WAY rather than filtered by a rule no sentence carries:
+  WAY rather than filtered by a rule no sentence carries.  THAT IS
+  THE WHOLE OF THIS BUCKET (mg-4adb): a regular file this process
+  cannot OPEN is NOT on this list, because nothing is known about the
+  encoding of bytes that were never read.  It is a DECLINED, NOT
+  STATED entry below and it is counted:
       (none)
   and ONE directory rule, which is the whole of the depth question:
       __pycache__/ is not descended into -- compiled bytecode these runs
@@ -42,7 +46,8 @@ S1a  EXTENT DECLARATION -- what is enforced, and over what
   visibly stops matching, rather than quietly stopping being true --
   which is what happened twice, at mg-6cb9 F1 (no subdirectory) and
   again at mg-4700 F1 (no symlinked directory).
-      DECLINED, STATED -- 8 entr(ies):
+      DECLINED, STATED -- 9 entr(ies):
+          code/species_7d75/__pycache__   directory rule, STATED: __pycache__/
           code/species_repair_6f61/__pycache__   directory rule, STATED: __pycache__/
           code/species_remainder_f8fa/__pycache__   directory rule, STATED: __pycache__/
           code/species_repair_a4ef/OUTCOMES.md   file rule, STATED: on the EXCLUDE list
@@ -156,7 +161,7 @@ named as undecodable, and anything under __pycache__/ -- and those three
 lists are the whole of it, which is a claim about the CODE and not
 about the shape the trees happen to have today (mg-821e).
 EVERY REGULAR FILE means every regular file THE WALK REACHED, and the
-walk names what it declined: 8 stated, 0 not stated (mg-5040).  A
+walk names what it declined: 9 stated, 0 not stated (mg-5040).  A
 non-empty second list is a finding here, so this sentence cannot be
 true by accident of the tree the way it was at mg-6cb9 and again at
 mg-4700.

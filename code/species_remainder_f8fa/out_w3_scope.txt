@@ -1,13 +1,20 @@
 # target: code/species_7d75
 
-# files read: 18, 0 of them below the tree root   (skipped as not
-# UTF-8 text: none; skipped as __pycache__: the whole directory rule)
+# files read: 18, 0 of them below the tree root   (0 reached and not
+# read, listed by reason below; skipped as __pycache__: the whole directory
+# rule)
 # THE BOUND (mg-5040): 'every regular file' means every regular file
 # THIS WALK REACHED.  It is os.walk without followlinks, so it enters
 # no symlinked directory and reads no entry that is not a regular
 # file -- and it now RETURNS what it declined, so that bound is a
-# measurement and not a promise about the tree's shape:
-#   declined: nothing at all
+# measurement and not a promise about the tree's shape.
+# AND THE SECOND LAYER IS IN THE SAME LIST (mg-4adb, on mg-6ef4's F1):
+# reaching an entry and reading it are different acts and both can
+# decline.  A file whose bytes are not UTF-8 is a STATED decline -- the
+# extent below says so.  A regular file this process cannot OPEN is
+# NOT: no sentence here has ever put it outside the claim, so it lands
+# in the second list and is counted.  Both layers, one residue:
+#   declined, STATED:     __pycache__   directory rule, STATED: __pycache__/
 
 ==============================================================================
 W3a  the corrected statements are not still ASSERTED in the instrument
@@ -77,7 +84,7 @@ AND THE BOUND OF THAT SENTENCE IS STATED (mg-5040, on mg-4700's OPEN
 force and carried by no sentence -- os.walk does not follow a
 SYMLINKED DIRECTORY -- so the claim was true a SECOND time only
 because of a shape the tree happened to have.  It is not widened a
-third time: the walk returns what it declined (0 stated, 0 not
+third time: the walk returns what it declined (1 stated, 0 not
 stated, both listed at the head of this run) and a not-stated entry
 is a finding, so the next rule nobody thought of arrives as RED
 rather than as silence.

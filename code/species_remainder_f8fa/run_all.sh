@@ -27,6 +27,12 @@ python3 w3_scope.py > out_w3_scope.txt || {
     cat out_w3_scope.txt; echo "w3_scope.py FAILED"; exit 1; }
 cat out_w3_scope.txt
 
+echo
+echo "out_w3_scope_before.txt is the SAME detector run against the tree"
+echo "before this repair: 12 problems.  It is committed on purpose -- a"
+echo "checker written after the fix and never seen to fail is not a checker."
+echo
+
 # mg-821e, on mg-6cb9's F2.  THE CROSS-SECTION CHECK, WIRED.
 # `e2_crosssection.py` is what closes mg-7dd3's B1: a claim struck in one
 # section of a document and standing un-struck in another, which no
@@ -56,14 +62,24 @@ cat out_w3_scope.txt
 # granularity: a test whose grain chases the code's structure never catches
 # up.  THE STRUCTURE IS REMOVED.  Running the check and printing its output
 # are now the SAME statement, so neither can be deleted without the other and
-# there is exactly one unit here that has a return; `set -e` carries the
-# verdict, which is what it was already doing.  Nothing is piped, because a
-# pipeline's status in POSIX sh is its LAST command's and `set -o pipefail`
+# there is exactly one unit here that has a return.  Nothing is piped, because
+# a pipeline's status in POSIX sh is its LAST command's and `set -o pipefail`
 # is not available in dash (mg-c2b3).
+#
+# mg-4adb, on mg-6ef4's F3.  THE STATEMENT THAT CARRIED THAT RETURN OUT OF
+# THIS FILE WAS `set -e`, AT THE TOP.  Deleted alone it turned 3 of 3 runners
+# GREEN while they printed e2's finding IN FULL, and it was in NO deletion
+# population this arc had used -- so the certificate could never have covered
+# the line that made it wrong.  THE FIX IS A MOVE, NOT AN ADDITION: a `||`
+# guard beside a `set -e` is a line whose deletion changes no verdict because
+# the other one catches it, which is mg-4700's F2 re-committed.  The gate is
+# now THE LAST COMMAND OF THIS FILE and a POSIX script's exit status is its
+# last command's, so what turns e2's exit code into this runner's is the CALL
+# ITSELF -- inside every population that has ever enumerated the block.
+# `set -e` stays, but nothing about this gate rests on it, and
+# code/species_rung_repair_4adb/v1_population.py measures that by deleting it,
+# in a population that is EVERY LINE OF THIS FILE with no exclusion at all.
+# NOTHING MAY BE APPENDED BELOW THE CALL: that is the rung, and section V1d
+# reads this file's source and goes red the day a line is added after it.
 echo "cross-section check (mg-821e), its own output, unfiltered:"
 python3 ../species_extent_d633/e2_crosssection.py
-
-echo
-echo "out_w3_scope_before.txt is the SAME detector run against the tree"
-echo "before this repair: 12 problems.  It is committed on purpose -- a"
-echo "checker written after the fix and never seen to fail is not a checker."

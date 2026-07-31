@@ -24,7 +24,7 @@ import sys
 
 RECORD = os.environ.get("D633_TRACE")
 _real_open = builtins.open
-text_reads, binary_reads = [], []
+text_reads, binary_reads, failed_reads = [], [], []
 
 # NOTHING IS SUBTRACTED HERE, AND TWO EARLIER VERSIONS SUBTRACTED SOMETHING.
 # The target's own path must NOT be dropped: `s1_extent.py` reads its own
@@ -36,15 +36,34 @@ text_reads, binary_reads = [], []
 # instead.  Both are in OUTCOMES.md.  The tracer now records every text read
 # and lets the caller decide, which is the only version of this that cannot
 # hide a read by accident.
+#
+# mg-4adb, on mg-6ef4's F1.  AND THE RECORD WAS TAKEN BEFORE THE CALL, so an
+# `open` that RAISED counted as a READ.  With an unreadable regular file
+# planted in one of the four trees, `e1_extents.py` compared its own walk
+# against this record, found the path present, and CERTIFIED the subject's
+# printed extent -- `reads every non-excluded regular file of all four trees`
+# -- AS TRUE, of a file no checker had read a byte of.  An instrument that
+# records intent and reports it as outcome cannot fail in the one direction it
+# exists to detect.
+# The record is now taken AFTER the real `open` returns, and a call that
+# raised is recorded in a THIRD list rather than dropped: subtracting it
+# silently would be the same defect wearing the opposite sign.
 def _open(file, mode="r", *a, **kw):
     try:
         path = os.path.abspath(os.fspath(file))
     except TypeError:                      # a file descriptor
         path = None
-    if path is not None and "w" not in mode and "a" not in mode \
-            and "x" not in mode and "+" not in mode:
+    reading = (path is not None and "w" not in mode and "a" not in mode
+               and "x" not in mode and "+" not in mode)
+    try:
+        handle = _real_open(file, mode, *a, **kw)
+    except OSError:
+        if reading:
+            failed_reads.append(path)
+        raise
+    if reading:
         (binary_reads if "b" in mode else text_reads).append(path)
-    return _real_open(file, mode, *a, **kw)
+    return handle
 
 
 builtins.open = _open
@@ -65,5 +84,6 @@ finally:
         with _real_open(RECORD, "w", encoding="utf-8") as fh:
             json.dump({"exit": code,
                        "text": sorted(set(text_reads)),
-                       "binary": sorted(set(binary_reads))}, fh)
+                       "binary": sorted(set(binary_reads)),
+                       "failed": sorted(set(failed_reads))}, fh)
 sys.exit(code)

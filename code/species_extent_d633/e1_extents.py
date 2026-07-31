@@ -68,32 +68,57 @@ def trace(rel):
             inside.append(os.path.relpath(f, REPO))
         else:
             outside += 1
+    # mg-4adb, on mg-6ef4's F1.  `data["text"]` is now what the checker READ.
+    # It used to be what the checker TRIED to read: the tracer recorded the
+    # path before calling the real `open`, so an attempt that raised was
+    # indistinguishable from a read, and every `want <= got` row below
+    # certified an extent over files whose bytes nobody had seen.  The
+    # attempts that RAISED are in `data["failed"]` -- kept, not dropped, and
+    # reported in E1a -- because subtracting them silently would be the same
+    # defect with the sign reversed.
+    failed = sorted(set(os.path.relpath(f, REPO) for f in data["failed"]
+                        if f.startswith(REPO + os.sep)))
     # NOTE: the tracer already drops runpy's own open of the target, ONCE.  A
     # checker that reads its own source as a TARGET -- s1_extent.py does, its
     # file being inside one of the four trees it scans -- is still recorded.
     return p.returncode, p.stdout, sorted(set(inside)), outside, \
-        len(data["binary"])
+        len(data["binary"]), failed
 
 
 hdr("E1a  WHAT EACH CHECKER ACTUALLY READS")
 
 READS = {}
 OUT = {}
+FAILED = {}
 for name, rel in CHECKERS:
-    code, out, inside, outside, nbin = trace(rel)
+    code, out, inside, outside, nbin, failed = trace(rel)
     READS[name] = inside
     OUT[name] = out
+    FAILED[name] = failed
     docs = [f for f in inside if f.startswith("docs/")]
     codef = [f for f in inside if f.startswith("code/")]
     print("  %-20s exit %d   %3d file(s) under the repo "
-          "(%d docs, %d code), %d outside, %d binary"
-          % (name, code, len(inside), len(docs), len(codef), outside, nbin))
+          "(%d docs, %d code), %d outside, %d binary, %d ATTEMPTED AND FAILED"
+          % (name, code, len(inside), len(docs), len(codef), outside, nbin,
+             len(failed)))
 print()
 print("  'outside' is the temporary copies s1_extent.py makes for its own")
 print("  controls (c) and (d).  'binary' is shutil.copytree's byte copies.")
 print("  Both are counted and named rather than filtered silently: mg-7dd3")
 print("  recorded that an open()-tracer which swallowed the second would have")
 print("  hidden the very hole it was written to find.")
+print()
+print("  'ATTEMPTED AND FAILED' is mg-4adb, on mg-6ef4's F1, and it is a")
+print("  column that did not exist because the tracer recorded the path")
+print("  BEFORE calling open.  An attempt that raised was counted as a read,")
+print("  so a checker could be certified as having read a file it could not")
+print("  open.  Every row below reads the READ set; this column is the part")
+print("  that used to be folded into it.")
+for name, _rel in CHECKERS:
+    for f in FAILED[name]:
+        print("      %-20s could NOT open %s" % (name, f))
+if not any(FAILED.values()):
+    print("      (no checker attempted a read that failed)")
 print()
 
 

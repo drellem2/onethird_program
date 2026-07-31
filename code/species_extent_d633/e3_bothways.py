@@ -77,6 +77,36 @@ def plant(rel, text, header="\n\n"):
     return go
 
 
+def plant_near(rel, marker, text, header="\n"):
+    """Plant `text` immediately after the line carrying `marker`.
+
+    mg-4adb.  P11b is a probe OF THE EXONERATION RULE: it needs its plant to
+    land within `kerna4ef.WINDOW` lines of a ticket id `NAMES_A_REPAIR`
+    matches, and it said so in its own label -- "six lines from an unrelated
+    `mg-73df`".  It got there by APPENDING TO THE END of a file that happened
+    to end with a sentence naming mg-73df, which is a property of where that
+    sentence sat and not of the rule.  mg-4adb moved the cross-section call to
+    the end of that runner, the sentence moved up with everything else, and
+    the plant stopped landing near the marker -- so the probe measured the
+    extent while its label still said the rule, and reported a MISS.
+
+    Keying the site on the MARKER instead of on the end of the file is the
+    same correction mg-7522's S3 made for line numbers: a probe that names a
+    property should locate itself by that property.  It raises if the marker
+    is absent, because a plant that lands somewhere unintended is worse than
+    a probe that stops.
+    """
+    def go(root):
+        lines = _read(root, rel).splitlines(True)
+        hits = [i for i, ln in enumerate(lines) if marker in ln]
+        if not hits:
+            raise RuntimeError("%r does not appear in %s" % (marker, rel))
+        i = hits[0]
+        lines.insert(i + 1, header + text + "\n")
+        _write(root, rel, "".join(lines))
+    return go
+
+
 def plant_new_md(tree, text):
     def go(root):
         _write(root, "code/%s/planted_d633.md" % tree,
@@ -257,9 +287,13 @@ PROBES = [
     ("P11", "s1_extent.py", S1, "IN",
      "X3 in species_remainder_f8fa/run_all.sh",
      plant("code/species_remainder_f8fa/run_all.sh", "# " + X3), 1),
+    # mg-4adb: the site is now located BY THE MARKER and no longer by the end
+    # of the file -- see plant_near's docstring.  The probe is unchanged in
+    # what it asks; only the way it finds the site it always meant is.
     ("P11b", "s1_extent.py", S1, "OUT",
      "X3 six lines from an unrelated `mg-73df` -- the rule, not the extent",
-     plant("code/species_repair_a4ef/run_all.sh", "# " + X3), 0),
+     plant_near("code/species_repair_a4ef/run_all.sh", "mg-73df",
+                "# " + X3), 0),
     ("P12", "s1_extent.py", S1, "OUT", "X3 in species_audit_73df -- a tree "
      "the extent declares silent",
      plant("code/species_audit_73df/README.md", X3), 0),

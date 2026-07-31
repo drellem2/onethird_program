@@ -22,6 +22,15 @@ cat out_selftest.txt
 python3 s1_extent.py    > out_s1_extent.txt || { echo "S1 FAILED"; exit 1; }
 python3 s2_seam.py      > out_s2_seam.txt   || { echo "S2 FAILED"; exit 1; }
 
+echo
+echo "Headline lines:"
+grep -h '^S[12] TOTAL BAD:\|^selftesta4ef' out_*.txt || true
+echo
+echo "S1's TOTAL BAD is followed IN THE OUTPUT by a statement of its extent."
+echo "That is the whole point of this instrument: mg-73df's MAJOR is what a"
+echo "TOTAL BAD: 0 means when nobody says what it ranged over."
+echo
+
 # mg-821e, on mg-6cb9's F2.  THE CROSS-SECTION CHECK, WIRED.
 # `e2_crosssection.py` is what closes mg-7dd3's B1: a claim struck in one
 # section of a document and standing un-struck in another, which no
@@ -51,17 +60,24 @@ python3 s2_seam.py      > out_s2_seam.txt   || { echo "S2 FAILED"; exit 1; }
 # granularity: a test whose grain chases the code's structure never catches
 # up.  THE STRUCTURE IS REMOVED.  Running the check and printing its output
 # are now the SAME statement, so neither can be deleted without the other and
-# there is exactly one unit here that has a return; `set -e` carries the
-# verdict, which is what it was already doing.  Nothing is piped, because a
-# pipeline's status in POSIX sh is its LAST command's and `set -o pipefail`
+# there is exactly one unit here that has a return.  Nothing is piped, because
+# a pipeline's status in POSIX sh is its LAST command's and `set -o pipefail`
 # is not available in dash (mg-c2b3).
+#
+# mg-4adb, on mg-6ef4's F3.  THE STATEMENT THAT CARRIED THAT RETURN OUT OF
+# THIS FILE WAS `set -e`, AT THE TOP.  Deleted alone it turned 3 of 3 runners
+# GREEN while they printed e2's finding IN FULL, and it was in NO deletion
+# population this arc had used -- so the certificate could never have covered
+# the line that made it wrong.  THE FIX IS A MOVE, NOT AN ADDITION: a `||`
+# guard beside a `set -e` is a line whose deletion changes no verdict because
+# the other one catches it, which is mg-4700's F2 re-committed.  The gate is
+# now THE LAST COMMAND OF THIS FILE and a POSIX script's exit status is its
+# last command's, so what turns e2's exit code into this runner's is the CALL
+# ITSELF -- inside every population that has ever enumerated the block.
+# `set -e` stays, but nothing about this gate rests on it, and
+# code/species_rung_repair_4adb/v1_population.py measures that by deleting it,
+# in a population that is EVERY LINE OF THIS FILE with no exclusion at all.
+# NOTHING MAY BE APPENDED BELOW THE CALL: that is the rung, and section V1d
+# reads this file's source and goes red the day a line is added after it.
 echo "cross-section check (mg-821e), its own output, unfiltered:"
 python3 ../species_extent_d633/e2_crosssection.py
-
-echo
-echo "Headline lines:"
-grep -h '^S[12] TOTAL BAD:\|^selftesta4ef' out_*.txt || true
-echo
-echo "S1's TOTAL BAD is followed IN THE OUTPUT by a statement of its extent."
-echo "That is the whole point of this instrument: mg-73df's MAJOR is what a"
-echo "TOTAL BAD: 0 means when nobody says what it ranged over."
