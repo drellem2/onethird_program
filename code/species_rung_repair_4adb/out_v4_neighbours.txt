@@ -1,0 +1,132 @@
+
+==============================================================================
+V4a  THE NEIGHBOURS -- WHAT THIS REPAIR TOUCHES, AND WHAT IT DID TO THEM
+==============================================================================
+
+  1. code/species_7d75/run_all.sh -- the tree w3_scope.py and
+     s1_extent.py quantify over, and the tree V2 plants in.
+  exit                                                             0
+  species_7d75 is green                                            ok
+
+  2. code/species_extent_d633/run_all.sh -- ships trace_open.py and
+     e1_extents.py, both changed by this ticket.
+  exit                                                             0
+  species_extent_d633 is green                                     ok
+  its E1 transcript carries the new ATTEMPTED AND FAILED column    ok
+        If the column is absent, the runner is green on a version of E1 that
+        still counts a failed open as a read.
+
+  3. code/species_extent_audit_6cb9/a1_bothways.py -- its Q18 plants a
+     non-UTF-8 file in species_7d75 and asserts s1_extent EXITS 0.
+     That assertion is the reason the ENCODING bucket is a STATED
+     decline here and is not counted: making it a finding would redden
+     a landed audit's control, and the control is right.
+  exit                                                             0
+  its Q18 row                                                      Q18    s1_extent.py         IN   a non-UTF-8 file added to species_7d7
+  Q18 is present and does not report a mismatch                    ok
+        Q18 row: Q18    s1_extent.py         IN   a non-UTF-8 file added to species_7d75               0    0    as p
+
+  4. code/species_bound_repair_5040/r2_wiring.py -- deletes lines from
+     the wiring block of all three runners.  This repair MOVED that
+     block to the end of each file, so if anything was going to break
+     from the move it is this.
+  exit                                                             0
+  its R2 TOTAL BAD                                                 R2 TOTAL BAD: 0
+  mg-5040's wiring probe is still green after the move             ok
+        It is a REPAIR probe, not an audit: green is its landed state, and a
+        red here would mean this repair broke the one it builds on.
+
+  5. code/species_bound_audit_6ef4/selftest6ef4.py -- asserts `set -e`
+     appears exactly once in each of the three runners.  This repair
+     deliberately did NOT delete that line, and this row is where that
+     decision is checked rather than asserted in a commit message.
+  exit                                                             0
+  its headline                                                     selftest6ef4: 30 assertions, 0 failed
+  mg-6ef4's self-test still passes                                 ok
+
+  6. code/species_bound_audit_6ef4/t2_wiring.py -- the probe that FOUND
+     this ticket's OPEN 1.  Its T2e row is written so that it reads
+     `ok` when the verdict SURVIVES the deletion of `set -e`; before
+     this repair it read *** FINDING ***.  Its exit code is 1 either
+     way, because T2f -- `set -e` is in the deletion population of none
+     of the three earlier instruments -- is a true statement about
+     those instruments that this repair does not touch.
+  exit                                                             1
+  its T2e row                                                      deleting `set -e` alone leaves the verdict intact in some runner ok
+  its T2f row                                                      `set -e` is in the deletion population of some instrument here   *** FINDI
+  mg-6ef4's T2e row now reads ok -- the finding this ticket repair ok
+        This is the audit's own instrument agreeing that OPEN 1 is closed,
+        measured by the file that raised it and not by the file repairing it.
+  and its T2f row is UNCHANGED -- still a finding about the three  ok
+        T2f is closed by mg-4adb's own population containing every line that
+        exists, not by adding a fourth name to an audit's table after the fact.
+        An audit is a record of what was true when it ran.
+
+  7. code/runner_exit_c2b3/k3_retro.py looks for `E2OUT=$(` in two of
+     these runners and reports the cross-section block GONE when it is
+     absent.  It IS absent -- and it was absent before this ticket.
+     mg-5040 removed that block.  Measured from git rather than by
+     running c2b3's whole runner, because the question is whether THIS
+     repair caused it and git answers that exactly:
+  occurrences of `E2OUT=$(` at 77306a7                             0
+  occurrences of `E2OUT=$(` on disk                                0
+  k3_retro's condition is PRE-EXISTING, not caused here            ok
+        NOTED, NOT FIXED.  It is mg-5040's subtraction seen from an instrument
+        that still expects the structure mg-5040 removed, and repairing it is
+        a different ticket's judgement about which of the two is right.
+
+  NOT RUN AS WHOLE RUNNERS, and named so the omission is not silent:
+      code/species_bound_repair_5040/run_all.sh   (~25 min; the file
+          that carries the dependency, r2_wiring.py, IS run above)
+      code/species_bound_audit_6ef4/run_all.sh    (~12 min; its two
+          dependent files ARE run above)
+      code/species_extent_audit_6cb9/run_all.sh   (its dependent file,
+          a1_bothways.py, IS run above)
+      code/species_depth_audit_4700/q2_wiring.py  and
+      code/species_sites_821e/p3_wiring.py        -- the other two
+          deletion populations mg-6ef4's T2f names.  They are AUDITS
+          of states this repair is two and three tickets downstream
+          of, and their committed transcripts are the record of what
+          was true when they ran.  Re-running an audit against a tree
+          it did not audit does not test this repair; it replaces a
+          record with a measurement of something else.
+      code/runner_exit_c2b3/run_all.sh            -- row 7 answers the
+          only question about it that this repair can be responsible
+          for, and answers it from git.
+  That is a judgement about what this repair touches.  It is written
+  here so a reader can disagree with it, which is the difference
+  between a stated bound and a silent one.
+
+  exit code, a1_bothways.py                                        0
+  exit code, r2_wiring.py                                          0
+  exit code, selftest6ef4.py                                       0
+  exit code, species_7d75                                          0
+  exit code, species_extent_d633                                   0
+  exit code, t2_wiring.py                                          1
+
+
+==============================================================================
+V4b  ONE OF THEM, FORCED RED -- A TABLE THAT COULD NOT HAVE BEEN RED IS NOT EVIDENCE
+==============================================================================
+
+  `selftest6ef4.py` is the one chosen, because its green row above is
+  a claim about a line THIS REPAIR could have deleted and did not.  So
+  the line is deleted here, and it must say so.
+
+      selftest6ef4.py with `set -e` deleted from species_repair_a4ef: exit 1
+          species_repair_a4ef: `set -e` appears exactly once               *** FAILED ***
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  it goes red, and on the assertion that names the deleted line    ok
+        If this is a finding, row 5 above says nothing.
+
+==============================================================================
+V4 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  Seven rows, named above with the reason
+each could have been broken, plus one forced-red control.  It says
+NOTHING about instruments that read these files and are not on that
+list.  The list is a judgement about what this repair touches, and a
+judgement about what to leave out of a population is exactly what
+mg-6ef4's F3 was -- so it is written where a reader can disagree.

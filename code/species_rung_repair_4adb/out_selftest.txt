@@ -1,0 +1,49 @@
+==============================================================================
+selftest4adb -- the helpers, in both directions
+==============================================================================
+
+  without() removes the one matching line                            ok
+  without() RAISES when the line is not there                        ok
+  without() RAISES when the line is there twice                      ok
+  without() matches on the STRIPPED line, not on a substring         ok
+  without() does NOT match a line that merely contains the needle    ok
+  drop_index() removes exactly one line                              ok
+  drop_index() removes the LAST line when asked                      ok
+  drop_index() RAISES past the end                                   ok
+  drop_index() over every index of a file gives files one line short ok
+  steps() finds the two invocations and nothing else                 ok
+  steps() does not take a `cat` of a transcript for a step           ok
+  steps() does not take a COMMENTED invocation for a step            ok
+  force_step() keeps the redirect                                    ok
+  force_step() keeps the `|| {` guard opener                         ok
+  force_step() changes only the one line it was given                ok
+  force_step() leaves a file with the same number of lines           ok
+  disposition(): exit 0 is GATE LOST whatever was printed            ok
+  disposition(): non-zero with the finding printed is `gate fired`   ok
+  disposition(): non-zero WITHOUT the finding is BROKE EARLY         ok
+  species_repair_a4ef: the call is the LAST command                  ok
+  species_repair_a4ef: the call appears exactly once                 ok
+  species_repair_a4ef: the heading is immediately above it           ok
+  species_repair_a4ef: `set -e` appears exactly once                 ok
+  species_remainder_f8fa: the call is the LAST command               ok
+  species_remainder_f8fa: the call appears exactly once              ok
+  species_remainder_f8fa: the heading is immediately above it        ok
+  species_remainder_f8fa: `set -e` appears exactly once              ok
+  species_repair_6f61: the call is the LAST command                  ok
+  species_repair_6f61: the call appears exactly once                 ok
+  species_repair_6f61: the heading is immediately above it           ok
+  species_repair_6f61: `set -e` appears exactly once                 ok
+  species_repair_a4ef at 77306a7: the call is NOT the last command   ok
+  species_repair_a4ef at 77306a7: `set -e` is there exactly once     ok
+  species_remainder_f8fa at 77306a7: the call is NOT the last comman ok
+  species_remainder_f8fa at 77306a7: `set -e` is there exactly once  ok
+  species_repair_6f61 at 77306a7: the call is NOT the last command   ok
+  species_repair_6f61 at 77306a7: `set -e` is there exactly once     ok
+  a probe that plants a file and cleans up reports restored=True     ok
+  and the file is gone afterwards                                    ok
+  a probe that LEAVES a file behind reports restored=False           ok
+  a probe can plant a file at mode 400 and remove it                 ok
+
+==============================================================================
+selftest4adb: 41 assertions, 0 failed
+==============================================================================
