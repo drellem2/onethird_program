@@ -1,0 +1,244 @@
+==========================================================================
+S1  EVERY DERIVED ANCHOR, RESOLVED -- NOT ITS LOGIC, ITS ANSWER
+==========================================================================
+
+   The parent finding is that a DERIVED anchor silently re-pointed when an
+   unrelated sentence was edited in the file it derives from, AND THE
+   PRINTED NUMBER DID NOT CHANGE.  So this section does not read the
+   derivation.  It runs it and prints where it lands.
+
+
+--------------------------------------------------------------------------
+(i) THE FOUR ANCHORS, RESOLVED, AGAINST WHAT THEIR PROSE CLAIMS
+--------------------------------------------------------------------------
+   Each row is: the label libe34a prints, the revision the derivation
+   RETURNS when run here, the pin written beside it, and THE SUBJECT OF
+   THE COMMIT IT LANDS ON.  The subject is the half a sha comparison
+   cannot supply: `4755d029 agrees with 4755d029` is true of any
+   derivation that has drifted onto its own pin, and the drifted anchor
+   of A-1 printed exactly that shape of agreement.
+
+   The derivations are re-run HERE, from libe34a's own sentences, not
+   taken from libe34a's module-level values.
+
+   anchor                                         resolved  pinned    
+   mg-76cc repair                                 4755d029  4755d029  agrees
+     its first parent -- THE PRE-REPAIR PREDICATE 3bc2cf76  3bc2cf76  agrees
+   mg-7e58 repair                                 4372fae9  4372fae9  agrees
+     its first parent                             52aeaf43  52aeaf43  agrees
+
+   AND WHAT EACH ONE LANDS ON, WHICH A SHA COMPARISON CANNOT SAY:
+     REPAIR_REV             4755d029  docs+repair: THE KERNEL HALF OF THE PREDICATE IS BACK AND G-3 IS SHUT ON
+     PRE_REV                3bc2cf76  evidence: PUBLISH THE POST-COMMIT MEASUREMENT, WITH THE ANCHOR QUALIFIED
+     REV_7E58               4372fae9  docs+repair: THE PROVENANCE APPARATUS IS NOW RIGHT ABOUT ITSELF — g1 ask
+     PRE_7E58_REV           52aeaf43  control+repair: THE ARC-WIDE `| tee` SWEEP, AND WHICH PAST GREENS DEPEND
+
+   AND THE MARKER IS REALLY THE PROPERTY, NOT A STRING THAT HAPPENS TO
+   AGREE.  The two-sided test says the marker is present at the anchor
+   and absent at its first parent.  Both halves, checked here:
+
+     REPAIR_REV     'kernel_source='     at 4755d029: PRESENT   at 3bc2cf76: absent
+     REV_7E58       'def measurement('   at 4372fae9: PRESENT   at 52aeaf43: absent
+
+--------------------------------------------------------------------------
+(ii) THE HISTORY DERIVATIONS THE REPAIR KEPT, RESOLVED
+--------------------------------------------------------------------------
+   These are what the anchor USED to be.  Re-derived here, at this
+   HEAD, so that the distance is a measurement and not a quotation.
+
+   what the file's history returns                            history   property  apart
+   the newest commit touching g1_provenance.py -- the OLD anchor d01ff32d  4755d029  21 commit(s)
+   its first parent -- the OLD `before this repair`           e5787e11  3bc2cf76  21 commit(s)
+   the 2nd-newest commit's parent -- the OLD `before mg-7e58` 3bc2cf76  52aeaf43  9 commit(s)
+
+   The third row is the one only the repair found: `the 2nd-newest
+   commit` now lands on 3bc2cf76, which is mg-76cc's parent, under a label
+   that says mg-7e58.  Its subject:
+     evidence: PUBLISH THE POST-COMMIT MEASUREMENT, WITH THE ANCHOR QUALIFI
+   An index into a file's history is an anchor derived from that
+   history, and it re-points for the same reason the newest-touching
+   one does.
+
+
+--------------------------------------------------------------------------
+(iii) IS THE DRIFT GATE WHERE THE ANCHOR IS USED?
+--------------------------------------------------------------------------
+   ANCHOR_DRIFT is built once, at import of libe34a.  A consumer that
+   reads an anchor and does NOT gate on ANCHOR_DRIFT will run on a
+   drifted anchor and print a plausible number, which is A-1 exactly.
+   So: every file that reads any of the four anchors, against every
+   file that gates on ANCHOR_DRIFT.
+
+   The population is every .py under code/branching_audit_e34a.
+
+   script                 anchors it reads                           drift gate?
+   k1_prerepair.py        PRE_7E58_REV, PRE_REV, REPAIR_REV          yes
+   k2_five.py             PRE_7E58_REV                               *** NO
+   k4_cancel.py           REPAIR_REV                                 *** NO
+   selftest_e34a.py       PRE_7E58_REV, PRE_REV, REPAIR_REV          yes
+
+   scripts reading an anchor                     : 4
+   of those, carrying the ANCHOR_DRIFT gate      : 2
+   of those, NOT carrying it                     : 2
+      k2_five.py             reads PRE_7E58_REV
+      k4_cancel.py           reads REPAIR_REV
+   *** FINDING: 2 of 4 scripts in code/branching_audit_e34a read a derived anchor WITHOUT gating on ANCHOR_DRIFT: k2_five.py, k4_cancel.py.  The repair makes a drifted anchor loud in selftest_e34a.py and k1_prerepair.py (i) and nowhere else, so a drifted anchor is SILENT in the very scripts whose numbers move -- k4_cancel.py is the script the repair itself identifies as the one `where the count actually moved`, and it does not carry the gate.  Run alone, it would print a number derived from a drifted anchor with nothing to say so
+
+--------------------------------------------------------------------------
+(iv) THE SWEEP FOR A FOURTH -- EVERY REVISION ANCHOR UNDER code/
+--------------------------------------------------------------------------
+   The repair found two anchors of this class that mg-2c77's audit did
+   not name, and asks whether there is a third.  mg-8d5e's own r4
+   enumerates 11 anchors and scopes that enumeration to
+   code/repair_8d5e/.  Here the sweep is REPO-WIDE and classifies by
+   HOW the revision is obtained, because that is what decides whether
+   an unrelated edit moves it:
+
+     NEWEST    `log -1 --format=%H -- <path>`         re-points on ANY edit
+     INDEXED   `log --format=%H -- <path>` then [n]   every index shifts
+     OLDEST    `log --reverse ... -- <path>` then [0] STABLE: a file's
+                                                     creation does not move
+     PICKAXE   `log -S <marker> -- <path>`            derived from a PROPERTY
+     RANGE     `log <a>..<b> -- <path>`               a set, not an anchor
+     UNRESTRICTED  no pathspec                        an anchor on the branch
+
+   NEWEST and INDEXED are the defect class.  OLDEST is named separately
+   on purpose: lumping it in would count a safe construct as the defect
+   and inflate the population, which is the mirror of A-2.
+
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+   kind                  sites   what it is
+   NEWEST                7       HISTORY-DERIVED -- the A-1 defect class
+   INDEXED               8       HISTORY-DERIVED -- the A-1 second half
+   UNRESTRICTED          1       HISTORY-DERIVED on the branch, not a file
+   OLDEST                10      stable against later edits
+   PICKAXE               6       PROPERTY-DERIVED
+   RANGE                 4       a set, not an anchor
+   ALL                   36      call sites, walked by ast
+
+   AND EVERY HISTORY-DERIVED SITE, NAMED.  A count of what is uncovered
+   that cannot be pointed at is the same silence as no count at all:
+      NEWEST        code/audit_2c77/q4_prerepair.py:193
+                    at_parent = L.git("log", "--format=%H", "-1", "e5787e1", "--",
+      NEWEST        code/audit_330a/lib330a.py:180
+                    out = git("log", "-1", "--format=%H", rev, "--", path, repo=repo).strip()
+      INDEXED       code/audit_330a/lib330a.py:188
+                    out = git("log", "--format=%H", rev, "--", path, repo=repo).split()
+      INDEXED       code/branching_audit_957f/lib957f.py:141
+                    out = git("log", "--format=%H", rev_range, "--", path, repo=repo)
+      NEWEST        code/branching_audit_e34a/libe34a.py:137
+                    out = git("log", "-1", "--format=%H", rev, "--", path, repo=repo).strip()
+      INDEXED       code/branching_audit_e34a/libe34a.py:349
+                    out = git("log", "--format=%H", "--", path, repo=repo).split()
+      NEWEST        code/branching_repair_76cc/lib76cc.py:177
+                    out = git("log", "-1", "--format=%H", "--", path, repo=repo).strip()
+      INDEXED       code/branching_repair_7e58/k2_selfprov.py:222
+                    allc = [h for h in L.git("log", "--format=%H", "--all", "--", p).split() if h]
+      INDEXED       code/face_geometry_audit_c4c8/h4_declared_unit.py:271
+                    log = subprocess.run(
+      INDEXED       code/face_geometry_audit_eaef/e5_floor.py:73
+                    r = subprocess.run(["git", "-C", REPO, "log", "--format=%H", "--", path],
+      INDEXED       code/face_geometry_instr_5f9a/d2_deletion.py:1349
+                    hist = subprocess.run(
+      NEWEST        code/hodge_leverage_repair_3f3b/repair_7e39.py:961
+                    return git("log", "-1", "--format=%H", "--", rel).strip() or None
+      NEWEST        code/repair_8d5e/lib8d5e.py:139
+                    return (git("log", "-1", "--format=%H", rev, "--", path,
+      INDEXED       code/repair_8d5e/lib8d5e.py:153
+                    for h in git("log", "--format=%H", rev, "--", path, repo=repo).split():
+      UNRESTRICTED  code/repair_8d5e/lib8d5e.py:167
+                    for h in git("log", "--format=%H", rev, repo=repo).split():
+      NEWEST        code/runner_exit_audit_56dc/t1_grain.py:186
+                    PUB = M.git("log", "-1", "--format=%H", "--", TR).strip()[:7]
+
+   AND THE TWO NAMED HELPERS, WHICH HIDE THEIR FLAGS.  A call to
+   `last_touching(p)` contains no `--format=%H` at all:
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+      CALL  last_touching  code/audit_330a/selftest_330a.py:61
+      CALL  nth_touching   code/audit_330a/selftest_330a.py:63
+      DEF   last_touching  code/branching_audit_e34a/libe34a.py:130
+      CALL  last_touching  code/branching_audit_e34a/libe34a.py:336
+      DEF   nth_touching   code/branching_audit_e34a/libe34a.py:339
+      CALL  nth_touching   code/branching_audit_e34a/libe34a.py:353
+      DEF   last_touching  code/branching_repair_76cc/lib76cc.py:176
+      DEF   last_touching  code/repair_8d5e/lib8d5e.py:138
+      CALL  last_touching  code/repair_8d5e/r4_self.py:116
+      CALL  last_touching  code/repair_8d5e/r4_self.py:120
+      CALL  last_touching  code/repair_8d5e/r4_self.py:127
+      CALL  last_touching  code/repair_8d5e/r4_self.py:128
+      CALL  last_touching  code/repair_8d5e/r4_self.py:167
+      CALL  last_touching  code/repair_8d5e/selftest_8d5e.py:162
+      CALL  last_touching  code/repair_8d5e/selftest_8d5e.py:204
+      CALL  last_touching  code/repair_8d5e/selftest_8d5e.py:209
+
+   population of HISTORY-DERIVED revision anchors under code/ :
+     by explicit git log call (ast-walked)        : 16
+     by a named helper (last_touching/nth_touching): 4 definition(s),
+                                                    12 call site(s)
+   population of PROPERTY-DERIVED anchors under code/ :
+     by pickaxe (`log -S`)                        : 6
+     by the two-sided `first_introducing`         : 5 definition(s)
+
+   THE ANSWER TO `IS THERE A FOURTH`.  There are 16 history-derived
+   git log call sites and 12 call sites of the two named helpers, over
+   12 directories.  The two the repair named are two of them.  The
+   population was never a small number and the repair's own enumeration
+   ("11 anchors") is scoped to one directory, which is stated in its
+   own transcript and is not a defect -- but it is not the population
+   this brief asks about, and the difference is printed here rather
+   than left to be inferred.
+
+   AND THE ONE THE REPAIR POINTS AT AND DOES NOT REPAIR.  Its own
+   commit message says code/repair_69d1/p3_reason.py (i-b) anchors
+   its control on HEAD and has been vacuous since mg-69d1's repair
+   landed.  Checked, not quoted: `HEAD` occurs 12 time(s) in that
+   file, and its committed transcript ends TOTAL BAD: 1.
+
+--------------------------------------------------------------------------
+(v) LAST_TOUCHING_G1 -- KEPT, PRINTED, AND USED BY NO ANCHOR?
+--------------------------------------------------------------------------
+   `the quantity that moved is the evidence`.  The claim is that
+   removing it would lose a DETECTOR and not a DEPENDENCY.  Not read
+   off the source: the two names are DELETED in a clone and the suite
+   is re-run, so the difference between a detector and a dependency is
+   observed rather than argued.
+
+   script                 reads
+   k1_prerepair.py        LAST_TOUCHING_G1, NTH_TOUCHING_1
+   selftest_e34a.py       LAST_TOUCHING_G1, NTH_TOUCHING_1
+   scripts reading either name : 2
+
+   and inside libe34a itself, the only statements naming them are
+   their own assignments:
+      LAST_TOUCHING_G1 = last_touching(G1_REL)
+      NTH_TOUCHING_1 = nth_touching(G1_REL, 1)
+
+   THE DELETION PROBE.  In a clone at HEAD, both names are removed from
+   libe34a.py and every line that mentions them is removed from the
+   scripts that read them.  If they are a DEPENDENCY the suite breaks;
+   if they are a DETECTOR the suite still runs and the evidence is
+   gone.  selftest_e34a.py is the cheapest thing that reads both.
+
+   selftest_e34a.py in the untouched clone      : exit 0
+   with both names DELETED from libe34a.py      : exit 1  (AttributeError/NameError raised)
+
+   the selftest assertions that name them, and would go with
+   them (from the BASELINE run, 2):
+      ok   NON-VACUITY: the file-history anchor and the property anchor return DIFFERENT commits on th
+      ok   and the SECOND history anchor had moved too: nth_touching(g1, 1)^ is 3bc2cf76 where `before
+
+   VERDICT ON (v).  Deleting the two names makes the consumers raise
+   rather than merely lose a column -- so `used by no anchor` is true
+   (no anchor is DERIVED from them) while `used by nothing` is not:
+   2 script(s) read them and 2 selftest assertion(s) are stated in
+   terms of them.  What would be lost is a DETECTOR -- the `apart`
+   column and the two assertions that the property anchor and the
+   history anchor still differ -- and the failure mode of removing
+   them is loud, which is the right failure mode for evidence.
+
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, source read, parse and clone this script performs, plus the requirement that each anchor resolve to a 40-character revision that is an ancestor of this HEAD and that the deletion probe in (v) really remove the names it claims to
+FINDINGS: 1, population: the 4 anchors libe34a derives, each RESOLVED and compared against the pair its own prose names and against the subject of the commit it lands on; every consumer of every one of those anchors, scored for whether the drift gate is where the anchor is used; every revision-producing git log call under code/, classified by how the revision is obtained; and the two kept history derivations, scored for whether anything depends on them
+   FINDING: 2 of 4 scripts in code/branching_audit_e34a read a derived anchor WITHOUT gating on ANCHOR_DRIFT: k2_five.py, k4_cancel.py.  The repair makes a drifted anchor loud in selftest_e34a.py and k1_prerepair.py (i) and nowhere else, so a drifted anchor is SILENT in the very scripts whose numbers move -- k4_cancel.py is the script the repair itself identifies as the one `where the count actually moved`, and it does not carry the gate.  Run alone, it would print a number derived from a drifted anchor with nothing to say so
+TOTAL BAD: 1

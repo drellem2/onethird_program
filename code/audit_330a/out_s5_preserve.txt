@@ -1,0 +1,115 @@
+==========================================================================
+S5  WHAT MUST STILL BE THERE -- THE PRESERVED FIVE
+==========================================================================
+
+--------------------------------------------------------------------------
+(v-first) THE ONE FILE THE REPAIR TOUCHED THAT ALL OF THESE REST ON
+--------------------------------------------------------------------------
+   Done FIRST, because if kern5f9a.py's program changed then every
+   row below is about a different subject and the agreement would be
+   the wrong kind of agreement.
+
+   dfa263c's commit message says `The kern5f9a edit is a comment: the
+   parsed modules are compared and are identical.`  Checked here at the
+   PARSED-MODULE grain rather than by reading the diff: a diff says
+   what changed in the TEXT, and the question is what changed in the
+   PROGRAM.
+
+   text sha, before dfa263c vs after : differs
+   PARSED MODULE, before vs after    : IDENTICAL
+   PARSED MODULE, after vs HEAD      : IDENTICAL
+   ast nodes in the module           : 3847 (unchanged)
+
+--------------------------------------------------------------------------
+(i)+(ii) THE FOUR INPUTS -- q1_reason.py, RE-RUN UNMODIFIED
+--------------------------------------------------------------------------
+   `cancelling` and `conspiring` are the two cases the corrected
+   reason NAMES, and two named cases read as a partition.  q1 scores a
+   FOURTH input that is neither -- a kern-alone bend -- precisely
+   because of that, and a SECOND conspiring pair of a different SHAPE,
+   because two instances of one shape are one instance.
+
+   dfa263c touched no file in code/audit_2c77.  So the risk here is not that the
+   probe was edited; it is that the subject moved under it.  q1 is
+   RUN.
+
+   q1_reason.py, re-run at HEAD : exit 0
+   q2_bound_edge.py, re-run at HEAD : exit 0
+
+   THE FOUR INPUTS, EACH LOOKED FOR BY NAME IN q1's OWN OUTPUT:
+   cancelling       present
+   conspiring-A     present
+   conspiring-B     present
+   one-sided        present
+
+   AND THE ROWS EACH INPUT GETS, verbatim from q1's own output.
+   A name being present is not the same as a row being scored:
+     cancelling     MOVED        MOVED        IDENTICAL      2 of 3 rows: c1 half, kern half
+     conspiring-A   IDENTICAL    IDENTICAL    MOVED          1 of 3 rows: both together
+     conspiring-B   IDENTICAL    IDENTICAL    MOVED          1 of 3 rows: both together
+     one-sided      IDENTICAL    MOVED        MOVED          2 of 3 rows: kern half, both together
+
+   AND THE SHAPES ARE DIFFERENT, checked in q1's OWN source rather
+   than in its output -- two inputs with different names and the
+   same construction are one input twice:
+     def conspire_a_kern(src):
+     def conspire_a_c1(src):
+     def conspire_b_kern(src):
+     def conspire_b_c1(src):
+     the two constructions' BODIES, read by ast:
+       def conspire_a_kern(src):
+       if "DIM_SHIFT_69D1" in src:
+       raise ValueError("kern already carries DIM_SHIFT_69D1")
+       return src + "\n\nDIM_SHIFT_69D1 = 1\n"
+       def conspire_b_kern(src):
+       if "EXTRA_VERTEX_2C77" in src:
+       raise ValueError("kern already carries EXTRA_VERTEX_2C77")
+       return src + "\n\nEXTRA_VERTEX_2C77 = True\n"
+     conspiring-A's default is an INTEGER  : yes
+     conspiring-B's default is a BOOLEAN   : yes
+     and the two bodies are different text : yes
+     and conspiring-B's c1 half ADDS a vertex rather than shifting a
+     value : yes
+
+--------------------------------------------------------------------------
+(iii)+(iv) THE EDGE PROBE, AND `AND NOTHING ELSE`
+--------------------------------------------------------------------------
+   One operand moved across each clause of the narrowed bound.  The
+   published rows are: unperturbed 11; INSIDE all three clauses 12;
+   and 11, 11, 11 for the three probes outside.  A bound whose edge
+   was never crossed is a bound nobody measured.
+
+   q2's own row label                         want   got    column
+   the sweep's enumerated rows on the unperturbed tree 11     11     -
+   INSIDE the bound                           12     12     swept
+   outside: not top-level                     11     11     not swept: nested
+   outside: not a deciding condition          11     11     NO COLUMN
+   outside: not a swept file                  11     11     not swept: file
+
+   `AND NOTHING ELSE`, verbatim from q2's own output:
+     (ii) `AND NOTHING ELSE` -- EVERY SWEEP ROW APPLIED, AND DIFFERENCED
+     11 sweep row(s) applied; 0 of them removed an operand from outside the
+     FINDINGS: 0, population: the sweep's enumerated clause population under 4 perturbations, one per cla
+
+--------------------------------------------------------------------------
+(vi) THE PREDICTIONS FILES, AND THE MISSES KEPT AS WRITTEN
+--------------------------------------------------------------------------
+   `PREDICTIONS committed before any script exists, and misses kept
+   as written.`  Two claims, and only the first is checkable by
+   reading: the second is checkable only by finding misses that are
+   still there.
+
+   code/repair_8d5e/PREDICTIONS.md introduced at : e2577e55
+     subject          : predictions: mg-8d5e's predictions, committed BEFORE any script of this inst
+     scripts of this instrument existing at that commit : 0 of 6
+
+   lines of code/repair_8d5e/PREDICTIONS.md naming a miss : 4
+     | `code/repair_69d1/run_all.sh` worst | 0 | **1** — ***MISS***. `p3_reason.py` self-errors: its co
+     | A2.6 | unqualified sites remaining anywhere in the tree | 19 | **20** — ***MISS by one***. I cou
+     | A2.9 | two of the 15 are transcripts. They are repaired by editing the **source that prints them
+     **35 rows.** 31 HIT, **4 MISSES**, kept above with what was wrong beside each:
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every clone, git read, source read, AST parse and subprocess run this script performs, plus the requirement that each foreign script produce a scoreable transcript and that every row this script scores be FOUND in the output it parses -- a row this script could not locate is a fact about this script and is never scored as agreement
+FINDINGS: 0, population: the 4 inputs mg-2c77's q1 scores and the 3-row verdict each gets; the 2 conspiring pairs, scored for whether they are of DIFFERENT shape; the 5 rows of q2's edge probe and the column each falls in; q2's `AND NOTHING ELSE` row count and its outside count; and the parsed module of kern5f9a.py before and after the only edit dfa263c made to it
+TOTAL BAD: 0

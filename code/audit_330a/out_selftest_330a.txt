@@ -1,0 +1,73 @@
+==========================================================================
+SELFTEST-330A  THE INSTRUMENT, BEFORE ANYTHING RESTS ON IT
+==========================================================================
+
+--------------------------------------------------------------------------
+(a) the repo, and the two revisions this audit is about
+--------------------------------------------------------------------------
+   ok   REPO resolves to a git repository
+   ok   the repair under audit dfa263c resolves
+   ok   dfa263c is an ancestor of this HEAD -- the repair is in this tree
+   ok   PRE_8D5E is exactly dfa263c's first parent -- the control revision is derived from the subject, not written down twice
+   ok   d01ff32 -- the repair mg-2c77 audited -- resolves
+
+--------------------------------------------------------------------------
+(b) my derivations against the shipped ones
+--------------------------------------------------------------------------
+   ok   my two-sided first_introducing agrees with libe34a's, written from its sentence rather than by calling it
+   ok   my last_touching agrees with libe34a's
+   ok   my nth_touching agrees with libe34a's
+   ok   and both are about the same path: code/branching_audit_58da/g1_provenance.py
+
+--------------------------------------------------------------------------
+(c) the anchor taxonomy, on constructed calls whose kind is known before the classifier runs
+--------------------------------------------------------------------------
+   ok   classify git("log", "-1", "--format=%H", "--", p)                   -> NEWEST
+   ok   classify git("log", "--format=%H", "--", p)                         -> INDEXED
+   ok   classify git("log", "--reverse", "--format=%H", "--", p)            -> OLDEST
+   ok   classify git("log", "--reverse", "--format=%H", "-S", "def f(", "--", p) -> PICKAXE
+   ok   classify git("log", "--format=%H", "%s..%s" % (a, b), "--", p)      -> RANGE
+   ok   classify git("log", "-1", "--format=%s", "--", p)                   -> None
+   ok   classify git("show", "--name-only", "--format=", r)                 -> None
+   ok   classify git("log", "--format=%H", "--all", "--", p)                -> INDEXED
+   ok   classify git("log", "-G", "pattern", "--format=%H", "--", p)        -> PICKAXE
+   ok   a `-1` with NO pathspec is a different kind and is named separately -- it is an anchor on the branch, not on a file
+
+--------------------------------------------------------------------------
+(d) the operand walks, on a constructed module
+--------------------------------------------------------------------------
+   ok   all_operands finds 8 on the constructed module -- FOUR BoolOps (a and b / c or a / x or y / x and y), two operands each -- got 8
+   ok   deciding_operands finds 4 -- `a and b` guards a return, `c or a` IS a return; the `while` and the assignment are outside -- got 4
+   ok   and the difference is exactly the 4 outside every deciding condition (the `while` test and the assignment), which is the subtraction A-2 is about
+   ok   spans are unique -- the key cannot merge two operands with the same text
+   ok   a module with no BoolOp gives 0 operands -- the walk returns its other answer
+
+--------------------------------------------------------------------------
+(e) the qualifier rule returns BOTH answers, on constructed sites
+--------------------------------------------------------------------------
+   ok   a site with the unhyphenated words within 3 lines scores QUALIFIED
+   ok   a site with no qualifier scores UNQUALIFIED
+   ok   A SITE CARRYING ONLY `deciding-condition` SCORES UNQUALIFIED -- the ruler is mg-2c77's and this audit cannot close a finding by widening it
+   ok   term_sites finds the one line stating the term
+   ok   and none where the term is absent
+
+--------------------------------------------------------------------------
+(f) the sweep parses what it walks
+--------------------------------------------------------------------------
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+   ok   every .py under code/ parses: 0 unparsed
+   ok   the sweep is non-empty: 36 revision-producing git log call(s)
+   ok   and it returns more than one label over the tree it sweeps: INDEXED, NEWEST, OLDEST, PICKAXE, RANGE, UNRESTRICTED
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+   ok   the named-helper sweep finds at least one definition of last_touching / nth_touching -- a helper hides its flags and a flag sweep alone would miss it
+
+--------------------------------------------------------------------------
+(g) a clone can be built and committed in
+--------------------------------------------------------------------------
+   ok   g1_provenance.py is readable in the clone
+   ok   a commit in the clone really moves the file's newest-touching commit -- the mutation reaches git, not only the working tree
+   ok   and does NOT move the property derivation -- the instrument can tell the two apart before any probe rests on it
+
+--------------------------------------------------------------------------
+SELFTEST-330A: 36 assertion(s), 0 failed
+TOTAL BAD: 0
