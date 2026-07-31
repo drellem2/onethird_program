@@ -301,6 +301,28 @@ on an audit that measured its extents in both directions — that, not fatigue, 
   filter I had added an hour earlier to fix a different control: excluding my own roadmap commits
   blinded the detector to my own disposition route.
 
+- **Landed in the 05:00–05:50 window** — four items, and the arc is now closing faster than it opens:
+  - **mg-69d1** (`05:48`) — **the bound is narrowed to the sweep with all 17 operands in a named column,
+    and the row's reason is inverted no longer**: `not determined` is *printed at 0* rather than left as
+    an empty cell, and **both a cancelling and a conspiring pair are BUILT**, so the corrected reason is a
+    measurement rather than a restatement. *Open discrepancy for its audit mg-2c77 to reconcile: the audit
+    reported **4 of 15** operands, the repair reports **all 17**.*
+  - **mg-fccb** (`1b00147`, merged 05:38) — **the §2.3 direction error is struck at the site**, its **two
+    unflagged §5 consumers found**, and 2 overstatements narrowed. The brief's *"trace every consumer — a
+    direction error propagates silently because every consumer type-checks"* produced both finds; worth
+    keeping permanently in the direction-error brief. Audit **mg-8a71** released.
+  - **mg-7522** (`05:02`) — the `| tee` suite re-run on a clean tree, **S1–S5 and the self-test all 0
+    BAD**, with S3's dispositions re-keyed on line **content** instead of line **numbers**, and **the two
+    misses this repair's own prose caused recorded** rather than quietly fixed.
+  - **mg-4adb** (audit mg-d53d) — filed from mg-6ef4's verdict. The repair **subtracted**, but:
+    **`set -e` is the fifth rung, ONE LINE OUTSIDE EVERY DELETION POPULATION, and it turns 3 of 3 runners
+    GREEN while they print e2's finding in full.** The fix is trivial; the finding is not. **A mutation
+    population that excludes a line makes that line invisible to the control it certifies — and the
+    exclusion looks like nothing, because the certificate still reads 100%.**
+  - Worth keeping rather than "fixing": mg-6ef4's census **counts its own commit message** (10/5/43 →
+    11/6/44). **A census that counts commit messages must count its own**; silently excluding itself is
+    the error, and the one that would never have been noticed.
+
 ## Next (gated / queued)
 
 - **mg-6ef4** (audit of the walk-bound repair) — released, awaiting a dispatch slot.
