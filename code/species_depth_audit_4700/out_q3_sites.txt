@@ -1,0 +1,132 @@
+==============================================================================
+Q3a  EACH ANCHOR DELETED AT ITS OWN SITE, EVERY OTHER COPY LEFT STANDING
+==============================================================================
+
+  Each row deletes one anchor from ONE heading region and leaves every
+  other copy in the file untouched.  `copies left` is the number of
+  copies still in the document when the checker runs -- for `mg-a61f`
+  that is eighteen, and the check has to fire anyway or it is a
+  presence test wearing a site's name.
+
+  # Repair of mg-7d75            OneThird-Species removed 1 at site,  0 left elsewhere -> exit 1 FIRES
+  # Repair of mg-7d75            mg-a61f          removed 2 at site, 17 left elsewhere -> exit 1 FIRES
+  # Repair of mg-7d75            code/species_rep removed 1 at site,  1 left elsewhere -> exit 1 FIRES
+  ## 11\. REPRODUCE              code/species_rep removed 1 at site,  1 left elsewhere -> exit 1 FIRES
+  ### 2\.1                       2 of 45          removed 1 at site,  2 left elsewhere -> exit 1 FIRES
+  ## 11\. REPRODUCE              2 of 45          removed 1 at site,  2 left elsewhere -> exit 1 FIRES
+  ## 10\.                        WHAT THIS REPAIR removed 1 at site,  0 left elsewhere -> exit 1 FIRES
+  D4a   predicted 7 of 7 fire                got 7 of 7 fire                as predicted
+
+  7 of 7.  Three of these anchors still have copies elsewhere in the
+  file at the moment the checker runs, and the check fires anyway.
+  That is the difference between a site and a presence.
+
+==============================================================================
+Q3b  THE SAME 7 DELETIONS, AGAINST `check_doc.py` AT af432ee~1
+==============================================================================
+
+  mg-821e reports `2 of 7` for the checker it replaced.  Quoting that
+  number would make this audit's 7 of 7 a comparison with a sentence.
+  The old file is fetched from a PINNED ref -- not HEAD, which BECAME
+  the repair the moment it landed -- and run against the same seven
+  mutations.
+
+  # Repair of mg-7d75            OneThird-Species  0 copies left elsewhere -> exit 1  fires
+  # Repair of mg-7d75            mg-a61f          17 copies left elsewhere -> exit 0  SILENT -- the copy a reader meets is gone and the run is green
+  # Repair of mg-7d75            code/species_rep  1 copies left elsewhere -> exit 0  SILENT -- the copy a reader meets is gone and the run is green
+  ## 11\. REPRODUCE              code/species_rep  1 copies left elsewhere -> exit 0  SILENT -- the copy a reader meets is gone and the run is green
+  ### 2\.1                       2 of 45           2 copies left elsewhere -> exit 0  SILENT -- the copy a reader meets is gone and the run is green
+  ## 11\. REPRODUCE              2 of 45           2 copies left elsewhere -> exit 0  SILENT -- the copy a reader meets is gone and the run is green
+  ## 10\.                        WHAT THIS REPAIR  0 copies left elsewhere -> exit 1  fires
+  D4c   predicted 2 of 7 fire                got 2 of 7 fire                as predicted
+
+  2 of 7 before, 7 of 7 after.  The 5 rows that were silent are
+  the ones mg-6cb9's F3 was about: an anchor with 19 copies is not
+  better covered than one with 1, it is less.
+
+==============================================================================
+Q3c  AND IT IS WRONG IN THE OTHER DIRECTION TOO
+==============================================================================
+
+  D4b   predicted exit 0 (silent)            got exit 0                     as predicted
+  a copy of `mg-a61f` deleted at ## 0. VERDICT                    exit 0  silent -- correct: multiplicity elsewhere has no vote
+  D4d   predicted exit 1                     got exit 1                     as predicted
+  section 10's BODY deleted, heading kept                  exit 1  fires
+        and section 10 is not an empty heading     *** EMPTY ***  (34 chars under the heading)
+
+==============================================================================
+Q3d  A SITE IS A HEADING, AND A HEADING CAN BE RENAMED
+==============================================================================
+
+  D4e   predicted exit 1, NO SUCH SECTION    got exit 1, named yes          as predicted
+  `## 11. REPRODUCE`
+  reworded to `## 11. Reproducing the run`, every anchor left in place:
+      exit 1, and the run says NO SUCH SECTION: yes
+  So the heading text is load-bearing and the failure is LOUD,
+  which is the right way round: a renamed heading is a site that
+  moved, and the checker says so instead of going quiet.
+
+==============================================================================
+Q3e  THE SWEEP -- every heading region carrying an anchor, against the 7
+==============================================================================
+
+  C4 checks the sites mg-821e chose.  F3 was that an anchor can be
+  written at a site nobody checks; the remedy names sites, so the
+  question the remedy raises is WHICH ONES.  Every heading region of
+  the repair document carrying each anchor is listed, and the ones
+  covered by a C4 row are marked.
+
+  2 of 45
+      [x]  1 copy   ### 2.1 Two of the 45 predicted cells missed, and both are
+      [ ]  1 copy   ## 8. THE FINDING THAT OUTLIVES THE TICKET
+      [x]  1 copy   ## 11. REPRODUCE
+
+  OneThird-Species-Hopf-Monoids-Where-This-Lives
+      [x]  1 copy   # Repair of mg-7d75 / `6a22fbc` under mg-a61f's audit — on
+
+  WHAT THIS REPAIR DID NOT DO
+      [x]  1 copy   ## 10. WHAT THIS REPAIR DID NOT DO
+
+  code/species_repair_6f61
+      [x]  1 copy   # Repair of mg-7d75 / `6a22fbc` under mg-a61f's audit — on
+      [x]  1 copy   ## 11. REPRODUCE
+
+  mg-a61f
+      [x]  2 copies  # Repair of mg-7d75 / `6a22fbc` under mg-a61f's audit — on
+      [ ]  3 copies  ## 0. VERDICT
+      [ ]  1 copy   ## 2. X3 — three of the five columns could not fail, and §
+      [ ]  1 copy   ## 3. X6, X7 — the quotations, and which divergence was an
+      [ ]  2 copies  ## 5. The boundary: the `S_n` half is UNVERIFIED
+      [ ]  1 copy   ## 6. X2 — the correction that runs upward, and the search
+      [ ]  2 copies  ## 7. X4 and X5 — two over-claims of evidence, neither tou
+      [ ]  3 copies  ## 8. THE FINDING THAT OUTLIVES THE TICKET
+      [ ]  2 copies  ## 9. WHAT WAS RE-RUN, AND WHAT THE REPAIR'S OWN CHECKER E
+      [ ]  2 copies  ## 10. WHAT THIS REPAIR DID NOT DO
+
+  D4f   predicted more regions than pairs    got 17 regions, 7 covered      as predicted
+  17 heading region(s) carry an anchor; 7 of them are checked.
+  The uncovered ones are NOT a defect on their own -- C4's extent line
+  says a copy elsewhere `neither helps nor is required`, and that is
+  a true and deliberate statement.  What the sweep shows is where the
+  remedy's cost sits: the set of reader-facing sites is a JUDGEMENT
+  written into a table by hand, and nothing checks the table against
+  the document.  Add a section 12 that a reader would meet the
+  instrument's name in, and it joins the unchecked column silently --
+  which is F3's own shape at one remove, and the price the third
+  remedy charges where one copy or a derivation would not.
+
+==============================================================================
+Q3 TOTAL BAD: 0
+Q3 PREDICTIONS MISSED: 0
+==============================================================================
+
+EXTENT OF THOSE NUMBERS.  Q3 covers section C4 of
+code/species_repair_6f61/check_doc.py and the 7 (site, anchor) pairs
+its own table declares, over ONE document,
+docs/OneThird-Species-Hopf-Monoids-Repair.md.  Every mutation is made
+on disk in the real worktree and restored, and the checker is RUN.
+It says nothing about C1, C2 or C3 of that file, nothing about the
+OTHER document check_doc.py enforces over, and nothing about whether
+the seven sites are the RIGHT seven -- Q3e reports that question and
+does not score it, because C4's extent line answers it explicitly and
+in the reader's favour.

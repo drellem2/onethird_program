@@ -1,0 +1,172 @@
+==============================================================================
+Q4a  mg-6cb9's `a1_bothways.py`, RUN UNMODIFIED
+==============================================================================
+
+  D5a   predicted A1 TOTAL BAD 0, exit 0     got A1 TOTAL BAD 0, exit 0     as predicted
+
+  THE FOUR EXTENTS, MEASURED BOTH WAYS, at mg-6cb9's own sites.  These
+  rows are that audit's, printed by that audit's file:
+      A1c  PER CHECKER, BOTH DIRECTIONS, WHICH IS THE DELIVERABLE
+        Q10    w3_scope.py          WIDE X4 in species_7d75/sub/leak.md -- a SUBDIRECTORY     0    1  
+        Q17    s1_extent.py         WIDE X3 in species_7d75/sub/leak.md -- a SUBDIRECTORY     0    1  
+        Q17e   e1_extents.py        WIDE with Q17's subdirectory in place, does E1 say the ex 0    0  
+
+  Q17e prints RED in that battery BY DESIGN and it is not a defect:
+  it runs e1_extents.py, whose exit 1 means AN EXTENT LINE IS FALSE,
+  and mg-6cb9 scores a WIDE row good only at exit 1.  mg-821e said so
+  in the run rather than leaving it to be found; this row is here so
+  that a reader of THIS transcript is told the same thing.
+        Q17e   e1_extents.py        WIDE with Q17's subdirectory in place, does E1 say the ex 0    0  
+        Q17e   e1_extents.py        with Q17's subdirectory in place, does E1 say the extent is true?
+
+==============================================================================
+Q4b  mg-6cb9's `a2_crosssection.py`, RUN UNMODIFIED
+==============================================================================
+
+  D5b   predicted A2 TOTAL BAD 1 (R29), exit 1 got A2 TOTAL BAD 2, exit 1     *** MISSED ***
+
+  THE CROSS-SECTION CHECK FIRES, THREE WAYS IN TWO DOCUMENTS -- again,
+  mg-6cb9's own rows:
+        the census, three ways:
+        the species trees' run_all.sh reach it               3 of 3  ok
+
+  and the TWO F4 ROWS -- the ones b534db7 exists to have turned green:
+        the COMMITTED run's extent line is true at HEAD                *** FALSE, off by 8 ***
+        the committed CENSUS is right for the shipped tree             *** WRONG ***
+  reading ok: 0 of 2
+
+  R29, mg-6cb9's own kept prediction miss, still present and
+  still not a regression:
+        R29   OUT  the restatement, with 'corrected' in the NEXT paragr 0    1    1         *** MISSED
+
+==============================================================================
+Q4b2  A2 TOTAL BAD, AGAINST WHAT THE REPAIR'S OWN COMMIT SAYS IT IS
+==============================================================================
+
+  `41ac5d4`: "Its a2_crosssection.py: A2 TOTAL BAD 1, the one row being
+  R29 ... both F4 rows still read ok against HEAD."  `b534db7`, whose
+  entire subject is PUBLISH THE POST-COMMIT MEASUREMENT: "A2 TOTAL BAD
+  stays 1."  Live, at HEAD, in a clean worktree:
+
+      A2 TOTAL BAD  claimed 1   measured 2
+      F4 rows       claimed ok, ok   measured 0 of 2 ok
+
+  *** FINDING.  The claim is not true of the tree it is committed
+      into.  It was true where it was measured, which is the whole
+      of the matter and is developed in Q4d. ***
+
+==============================================================================
+Q4c  THE PUBLISHED TRANSCRIPTS AGAINST THE RUN THEY CLAIM TO BE
+==============================================================================
+
+  mg-821e committed both of these as its evidence that the instrument
+  which raised the findings now reports them closed.  A transcript is
+  a claim about a run.  These two rows compare it with the run.
+
+  DECLARED FIRST: this instrument's own 3 markdown file(s) -- OUTCOMES.md, PREDICTIONS.md, README.md --
+  are under code/, and e2 reads every *.md under code/.  So the LIVE
+  file count below is 3 higher than the shipped tree's, by me.
+  None of them carries a `~~strike~~`, so the strike census is not
+  perturbed -- and Q4d below counts from `git` alone and is immune to
+  this instrument entirely: it counts *.md from `git` at four named
+  commits and never looks at the worktree.  The two F4 rows and the
+  A2 TOTAL BAD below are decided by `git ls-tree` against a committed
+  transcript, so no file of mine can reach them either.
+
+  out_a1_6cb9_after.txt        178 line(s) stored, 178 live, IDENTICAL
+  out_a2_6cb9_after.txt        129 line(s) stored, 129 live, *** 34 line(s) differ ***
+        -     14 file(s) carry a strike, 33 strike(s) measured, 1 standing.
+        +     15 file(s) carry a strike, 34 strike(s) measured, 1 standing.
+        -     14 file(s) carry a strike, 33 strike(s) measured, 1 standing.
+        +     15 file(s) carry a strike, 34 strike(s) measured, 1 standing.
+        -  `git ls-tree HEAD` -- the tree it shipped in -- 123
+        -  a clean re-run in this worktree says            123
+        -  of which 0 are THIS instrument's own files, which is why the
+        +  `git ls-tree HEAD` -- the tree it shipped in -- 131
+        +  a clean re-run in this worktree says            135
+        +  of which 4 are THIS instrument's own files, which is why the
+        -  the COMMITTED run's extent line is true at HEAD                ok
+        +  the COMMITTED run's extent line is true at HEAD                *** FALSE, off by 8 ***
+        ... and 22 more
+
+  A published transcript that no longer reproduces is the same defect
+  as an extent that is true only today, in a different medium: both
+  are claims resting on a condition nobody re-checks.  These two are
+  re-checked here.
+
+==============================================================================
+Q4d  THE CENSUS IS 8 SHORT, AND THE CONDITION THAT BROKE IS UNNAMED
+==============================================================================
+
+  This is not a re-run that drifted.  `out_e2_crosssection.txt` is a
+  committed artifact, af432ee REGENERATED it, and its extent line is
+  the thing mg-6cb9's F4 measures.  Counting *.md under docs/ and
+  code/ at each commit, from git, so none of it is my worktree:
+
+      commit    what it is                          claimed   actual  short
+      e8fbd4f   mg-d633 wrote the transcript            100      105      5
+      ef38841   af432ee's parent                        100      127     27
+      af432ee   mg-821e REGENERATED it                  123      131      8
+      HEAD      the tree it ships in                    123      131      8
+
+  THE LOAD-BEARING ROW IS `af432ee`, NOT `HEAD`.  That row is a
+  statement about a commit that is fixed in git: the transcript it
+  contains claims 123 and the tree it contains holds 131, and no
+  later commit can move either number.  The HEAD row WILL move --
+  this audit's own commit adds markdown files under docs/ and code/
+  and will make the same extent line staler still.  That is the
+  mechanism, not a fix, and it is why the finding is anchored on a
+  pinned commit.  Anchored on HEAD it would have been a number that
+  changes every time anybody writes a document, which is exactly the
+  error 41ac5d4 came back to correct.
+
+  mg-6cb9 raised this against mg-d633's transcript, which claimed 100
+  where its tree held 105.  af432ee regenerated the file and it now
+  claims 123 where its tree holds 131.  THE GAP DID NOT CLOSE, IT
+  WIDENED -- and mg-821e's own published transcript records the run
+  that produced 123 as having seen `git ls-tree HEAD -- 123`, a tree
+  no commit in this history has.
+
+  WHAT ACTUALLY HAPPENED, and it is worth naming precisely because the
+  repair did the right thing by the rule it was given.  b534db7 exists
+  solely to obey this arc's Appendix A --
+
+      A COMMIT THAT MEASURES SOMETHING IT ALSO MODIFIES MUST PUBLISH
+      THE POST-COMMIT MEASUREMENT
+
+  -- and it did: it re-ran a2 with the repair landed and both F4 rows
+  turned ok.  Then the work was REBASED onto a main that had grown by
+  eight markdown files while the ticket was open, and the artifact
+  regenerated against the pre-rebase HEAD shipped inside a different
+  tree.  POST-COMMIT IS NOT POST-MERGE.  The rule as written names a
+  condition -- `the commit` -- that a merge queue is free to change
+  underneath it, and nothing re-checks it afterwards.
+
+  That is this repair's OWN OPEN 1, one level out and in its evidence
+  rather than its code: a measurement true because of a state of the
+  world nobody had stated -- there `no tree has a subdirectory`, here
+  `main has not moved since I ran this`.  mg-821e removed the first
+  condition by construction.  The second is still stated nowhere, and
+  it has now gone false twice in the same file.
+
+  WHAT IS NOT AFFECTED, stated so the finding is not read as wider
+  than it is: e2's VERDICT.  A live run at HEAD reports 0 standing,
+  Q2a printed that from inside all three runners, and none of the 8
+  unread files carries a strike that could change it.  What is false
+  is the EXTENT LINE on a committed transcript -- which is exactly the
+  kind of claim this arc exists to take seriously.
+
+==============================================================================
+Q4 TOTAL BAD: 2
+Q4 PREDICTIONS MISSED: 1
+==============================================================================
+
+EXTENT OF THOSE NUMBERS.  Q4 runs exactly two files -- mg-6cb9's
+a1_bothways.py and a2_crosssection.py -- with NO modification of any
+kind, and compares their live output with the two transcripts mg-821e
+committed.  It re-implements none of their questions, on purpose: a
+re-implementation can agree with a weakened subject by being weakened
+in the same place.  It says nothing about mg-6cb9's third file
+a3_differ_and_placement.py, which neither of the confirmed findings
+this section is protecting depends on.  Q4d counts markdown files
+from `git` at four named commits and touches no worktree state.
