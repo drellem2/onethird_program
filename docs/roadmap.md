@@ -226,46 +226,43 @@ because I made the opposite call at 17:35 on a misread and had to retract it.**
 **So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
 on an audit that measured its extents in both directions — that, not fatigue, is the signal.
 
-## Now (in flight) — 2026-07-31 08:32
+## Now (in flight) — 2026-07-31 09:42
 
-**Closed this window:** **CI IS GREEN on `one_third_width_three`** — mg-3934 merged at 07:13 and the
-21-hour red is over, with **the mg-75f0 class-closure demo executing for the first time** (`2a4c181`,
-landed as its own acceptance commit). And **mg-069f merged at 08:13** (`bb1cb9b`) — *strike the two
-remaining live false claims, fix the population* — so the §2.3 lineage is closed at the body text.
+**✓ = carries the verdict-before-merge instruction.** Two treated tickets are now in flight; **the
+first merge of one is the first real test of that fix.** Everything unmarked had its body written
+before the change and will keep dropping verdicts regardless — *those merges are not evidence either
+way.*
 
 - **mg-4adb** — `set -e` — one line outside every deletion population
-- **mg-70c7** — mg-dee4's six findings — the site-vs-execution grain
-- **mg-8d5e** — **a derived anchor re-pointed when a SENTENCE was edited**; census term denotes **39**, table classifies **17**
-- **mg-3f3b** — **`n/a` is where a matrix hides**; construct is **1 touched of 6**; population published **429** against **448**
-- **mg-3946** — audit of the CI historical-SHA repair
-
-
-
-**Practice change this window, not a ticket:** four audit verdicts this arc reached nobody, the last two on
-**consecutive merges**. Cause is a timing bug in my briefs — **the merging worker is reaped ~3s after its
-merge lands**, so any instruction to route a verdict *after* merging races the reaper. Three of four pending
-audits said nothing about routing at all. **Every audit brief now says: write `mg done --result` and mail the
-verdict BEFORE submitting to the refinery.** *A superseded verdict is cheap, a lost one is not.*
+- **mg-3946** ✓ — audit of the CI historical-SHA repair — **the mg-75f0 demo's first green is its first RUN**
+- **mg-0242** — audit of the mg-069f body-strike repair — struck-count against refuted-count
+- **mg-56dc** — audit of mg-70c7 — carries the **PM ruling** on the deliberate non-regeneration
+- **mg-97fb** ✓ — audit of mg-3f3b — must **reconcile 1-of-6 against 0-of-6 by counting**, not adopt the later figure
 
 ## Next (gated / queued)
 
-- **mg-e35b** (available) — mg-fcf1's five — three rows that cannot fail
-- **mg-a74f** (available) — mg-16eb's — the visibility instrument measures bytes in the HTML
-- **mg-d075** (available) — mg-19ec's — **8 sites state the figure, 4 unbounded**, incl. a clause faulting another for naming no class while itself unbounded
-- **mg-69b4** (available) — scoping — the busiest repo has no merge gate
-- **mg-344a** (available) — Daniel workspace, `assignee=human`
+- **mg-330a** ✓ — audit of mg-8d5e — **sweep for a fourth history-derived anchor**; two were found by the repair, none by the audit
+- **mg-e35b** ✓ — mg-fcf1's five — three rows that cannot fail
+- **mg-a74f** ✓ — mg-16eb's — the visibility instrument measures bytes in the HTML
+- **mg-d075** ✓ — mg-19ec's — 8 sites state the figure, 4 unbounded
+- **mg-aaf4** — audit of mg-d075
+- **mg-fcb2** ✓ — audit of mg-e35b
+- **mg-65eb** ✓ — audit of mg-a74f
+- **mg-69b4** ✓ — scoping — the busiest repo has no merge gate
+- **mg-344a** — Daniel workspace, `assignee=human`
 
+**Landed since the last regeneration:** mg-3f3b, mg-70c7 and mg-8d5e. mg-8d5e closed both of its sites and
+**found two further anchors of the same class that its audit never named** — an *index* into file history
+(`nth_touching(g1,1)^`, pushed along by one) and a second script consuming the same anchor to choose which
+commit message to scan. Its confirmation is **a difference between two columns, not a zero**: the pre-repair
+predicate is SILENT (0/0/0) where the repaired one FIRES (1/1/3). **The drifted anchor had read that as
+"both fire", because both columns had silently become the same predicate** — vacuous by construction, and
+printing a plausible number while being so.
 
-- *(mg-3934 — **resolved 07:13, see "Closed this window" above.** The 21-hour red is over and the
-  mg-75f0 demo has executed. Kept only as a pointer so this section does not read as if it were still
-  open; its audit **mg-3946** is claimed.)*
-- **Blocked on the rebuild, not forgotten:** the template-effect measurement. The nightly redeploy failed
-  (exit 7, drain stalled), so **mg-2375 and mg-ce5e are merged and not installed, and the treated population is
-  empty.** Next window is 03:00Z tomorrow.
-
-*(Rot note: this section was 4h39m stale — 6 of 7 IDs completed. Cause worth recording: I committed to running
-the rot check every cycle and then ran the **audit-successor sweep** instead. Two different checks; running the
-adjacent one felt like compliance. **A substituted check is a skipped check.**)*
+**Standard adopted from it:** specify redundancy by **independence of failure mode**, not by count — *three
+checks that all break on a prose edit would be one check.* And **keep the thing that drifts as a detector
+rather than a dependency**: mg-8d5e retained the broken derivation, printed and used by no anchor, because
+*the quantity that moved is the evidence.*
 
 ## Later (decided, not yet filed)
 - `onethird_program` ships two `controls.py` and two `run_all.sh` and has **no CI of any kind** — by the
