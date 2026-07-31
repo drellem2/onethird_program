@@ -1,0 +1,85 @@
+==============================================================================
+mg-0b07 p3 -- the grain regress: is `clause` the floor?
+==============================================================================
+
+PREDICTIONS, registered before these runs (PREDICTIONS.md p3):
+   p3.1  absorb_trace has 0 BoolOp of ANY kind
+   p3.2  face_complex.py has BoolOps the subject's enumerator does not reach: at least 1
+   p3.3  no enumerated clause contains a BoolOp anywhere below it
+   p3.4  S1 order half alone   -> CHANGES,        exit 1
+   p3.5  S2 width half alone   -> BYTE-IDENTICAL, exit 0
+   p3.6  S3 condition = False  -> CHANGES,        exit 1
+
+
+==============================================================================
+1.  THE SYNTACTIC FLOOR -- checked, and the subject is right about it
+==============================================================================
+  [HOLDS ] `absorb_trace` contains 0 boolean operator of ANY kind -- not 0 'deciding' ones, 0 full stop.  The subject's claim is exact under the wider reading as well as its own
+        BoolOps in absorb_trace: 0; deciding: 0
+        WOULD DIFFER UNDER: a boolean operator returning anywhere in that function, in a condition that decides a return or in one that does not.  The subject counts only the first kind; this counts both, so a clause hidden in a `while`, a comprehension guard or a non-returning `if` would be caught here and not there
+   the wider population, for scale: 16 BoolOp(s) in face_complex.py, 4 of them
+   in a condition that decides a return.  The 12 others sit in conditions whose
+   body does not return, and no claim of the subject's covers them -- correctly, since
+   its sentence names the deciding ones.
+  [HOLDS ] and the subject's enumerated population is a PROPER SUBSET of the file's boolean operators (4 of 16), which is what its sentence says and is worth printing beside the sentence
+        all 16, deciding 4, outside 12
+        WOULD DIFFER UNDER: the two populations coinciding, at which point 'deciding' is doing no work.  This is not a finding: it is the scope of the subject's claim, measured, so a reader does not take 'every boolean condition' for 'every boolean operator'
+  [HOLDS ] no enumerated clause contains a boolean operator ANYWHERE below it (0 of 4) -- the subject checks only whether a clause IS a BoolOp, which is one rung coarser than this, and on this population the two agree
+        clauses with a nested BoolOp: none
+        WOULD DIFFER UNDER: a condition like `a or f(b and c)`: the subject's check tests `values[i]` for being a BoolOp and would pass, while a clause with a boolean operator inside it is exactly the case its sentence -- 'top-level clause and clause name the same thing' -- denies.  It is latent here and not live
+
+==============================================================================
+2.  THE FLOOR THE SUBJECT DID NOT LOOK FOR
+==============================================================================
+`[len(row) for row in A] != [len(row) for row in B]` is TRUE exactly when the two
+lists have different LENGTHS or differ at a common INDEX.  Two conditions joined
+by a disjunction that Python spells with no operator.  The subject's docstring says
+the two clauses 'were saying one thing'; below, each of the two things is removed
+alone and the whole battery is run for it.
+
+   S0 -- unperturbed baseline                     -                exit 0   23695 bytes  reference
+   S1 -- ORDER half alone (len(A) != len(B))      CHANGES          exit 1   24909 bytes  match
+   S2 -- WIDTH half alone                         BYTE-IDENTICAL   exit 0   23695 bytes  match
+   S3 -- the whole condition -> False             CHANGES          exit 1   24909 bytes  match
+  [HOLDS ] three perturbations of the ONE-CLAUSE condition, each removing one of its two meanings and leaving the other standing, 3 of 3 predictions matched
+        S1 CHANGES/1, S2 IDENTICAL/0, S3 CHANGES/1
+        WOULD DIFFER UNDER: either half ceasing to be separable -- which would need the condition to stop being a comparison of two lists.  These are not deletions of syntax and are not offered as such: they are the finest PERTURBATIONS the site admits, which is the unit the question is about
+
+==============================================================================
+3.  AND THEY ARE mg-c4c8'S TWO CLAUSES, SHOWN AND NOT ASSERTED
+==============================================================================
+The same two meanings at b6bc2ef, where the condition still has an `or` and where
+removing one of them IS deleting a clause.  If the live S1/S2 pair and the pinned
+clause-2/clause-1 pair give the same two answers, the units are the same units.
+
+ONLY `face_complex.py` IS TAKEN FROM THE PIN, and that is deliberate: the rest of
+the battery is this tree's, so the two halves of the comparison differ in the
+condition and in nothing else.  It is not that commit's artifact and is not read as
+one -- M0 below is its own baseline.
+
+   M0 -- b6bc2ef's absorb_trace, this battery     -                exit 0   23695 bytes  reference
+   M1 -- ORDER half alone (= clause 2 deleted)    CHANGES          exit 1   24909 bytes  match
+   M2 -- WIDTH half alone (= clause 1 deleted)    BYTE-IDENTICAL   exit 0   23695 bytes  match
+  [HOLDS ] the live tree's two sub-conditions answer exactly as the pinned tree's two CLAUSES do: order half CHANGES/exit 1 on both, width half BYTE-IDENTICAL/exit 0 on both
+        live: S1 CHANGES/1 S2 IDENTICAL/0 || pinned: M1 CHANGES/1 M2 IDENTICAL/0
+        WOULD DIFFER UNDER: the rewrite having changed what either half does.  It did not -- the subject's 28,900-pair equivalence says so and this says it again from the battery's side.  Which is the point: the rewrite preserved the behaviour AND the inertness, and removed only the syntax that let a deletion test name it
+  [FINDING B1] THE THIRD RUNG WAS RESPELLED, NOT REMOVED.  On the live tree the `shape` condition's ORDER half -- `len(A) != len(B)` -- can be taken out with the width half left standing and the artifact comes back BYTE-IDENTICAL at 23695 bytes, exit 0, every row green.  That is mg-e7bc's sentence with `return` replaced by `clause` replaced by `sub-condition`, on the tree this commit shipped.
+        The subject's claim -- 'no boolean operator, so the smallest deletable unit inside this gate IS the `return`' -- is TRUE and is about DELETION.  A list comparison is a disjunction written without an operator, so what changed is that the inert half stopped being nameable, not that it stopped being inert.  The subject's own docstring says the two clauses 'were saying one thing'; they were saying two, and one of them is still invisible to the battery.  AND THE BATTERY CANNOT TELL THE WIDTH HALF FROM THE WHOLE GATE: S1 and S3 produce the same 24909-byte artifact, so on this population the order half contributes nothing the width half does not already contribute.  In the subject's own units this perturbation is 0 return, 0 statement, 0 clause and a NET -19 syntax node(s) -- nonzero, so its branch 1 check would flag it; the exposure is not in the declaration, it is that no test in the instrument makes this perturbation at all.
+  [FINDING B2] AND THE LINE A READER CONSULTS SAYS THE OPPOSITE.  AFTER-5 prints `FINEST UNIT THIS LINE PERTURBS: one `return` statement, and nothing finer is removed`.  Nothing finer is removed BY THAT PATCH; the sentence is read as 'the evidence reaches all the way down at this site', and it does not.
+        The ticket mg-c4c8 answered asked for the finest unit to be stated BESIDE THE TEST so a reader need not assume the evidence reaches the bottom.  The sentence that was added states the finest unit OF THE PATCH, which is a different quantity, and the two differ at exactly this site.  What would close it: one clause on that line naming the sub-conditions the guard's condition still separates, or the S1/S2 pair above run beside AFTER-5.
+
+==============================================================================
+4.  A CONDITION WHOSE REMOVAL IS MASKED BY ANOTHER
+==============================================================================
+The brief also asks for one of these.  `absorb_trace`'s docstring names it: the
+magnitude test runs over `j == i` too, so on matrices with the diagonals this
+battery builds every `diagonal` violation is also a magnitude violation.  Deleting
+the `diagonal` return should therefore move the TRACE and no DECISION.
+
+  [HOLDS ] the `diagonal` return deleted alone: artifact CHANGES, exit 0, 0 row(s) fail -- the gate is MASKED by the magnitude gate that follows it, and the deletion moves labels rather than answers
+        23695 bytes vs 23695 baseline; failing rows: none
+        WOULD DIFFER UNDER: a battery pair whose diagonal differs and whose magnitudes agree, which no poset in this population produces.  This is DISCLOSED in the subject's docstring and confirmed here rather than found: it is the masking the brief asks about, and it is the one place where a deletion changing the artifact is not evidence that anything depends on the deleted code
+
+==============================================================================
+6 claim(s) scored; 0 BROKEN.  2 finding(s): B1, B2
+==============================================================================

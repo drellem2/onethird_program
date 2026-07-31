@@ -1,0 +1,76 @@
+==============================================================================
+mg-0b07 p4 -- what was confirmed: unchanged, or quietly weaker?
+==============================================================================
+
+PREDICTIONS, registered before these runs (PREDICTIONS.md p4):
+   p4.1  6 returns, 6 of 6 CHANGE; exits 1, 0, 1, 1, 1, 1 in source order
+   p4.2  1 `shape` return; controls.py's constructed pairs unchanged from b6bc2ef
+   p4.3  the negative control run as a process: exit 1
+   p4.4  mg-c4c8's F3 pair: 2 of 2 BYTE-IDENTICAL, exit 0 (disclosed as not closed)
+
+
+==============================================================================
+1.  EVERY `return` OF `absorb_trace`, DELETED ALONE -- THIS TREE
+==============================================================================
+Replaced by `pass` at its own indentation, not deleted as lines: most of these are
+the only statement of their block and removing the lines would remove the enclosing
+`if`, which is a LARGER unit than the one declared.  That is the error this lineage
+is about and an auditor can commit it as easily as a repairer.
+
+   live tree: 6 `return` statement(s) in `absorb_trace`, baseline 23695 bytes exit 0
+   #    return                                                 artifact         exit  bytes
+   1    return Trace(False, "shape", 0)                        CHANGES          1     24909
+   2    return Trace(False, "diagonal", 0)                     CHANGES          0     23695
+   3    return Trace(False, "magnitude", 0)                    CHANGES          1     23545
+   4    return x, p                                            CHANGES          1     4030
+   5    return Trace(False, "parity", signs_read)              CHANGES          1     24782
+   6    return Trace(True, "parity", signs_read)               CHANGES          1     4030
+  [HOLDS ] `absorb_trace` is covered at the granularity of a `return`: 6 of 6 move the artifact under INDIVIDUAL deletion, and 6 of 6 exit codes match the registered prediction
+        line 865 CHANGES exit 1; line 868 CHANGES exit 0; line 871 CHANGES exit 1; line 881 CHANGES exit 1; line 893 CHANGES exit 1; line 897 CHANGES exit 1
+        WOULD DIFFER UNDER: a return whose individual deletion leaves the artifact byte-identical -- which is mg-e7bc's finding, and which this commit could have reintroduced by restructuring the gate.  The population is read from the tree, so a return ADDED by this commit would appear here without anyone listing it
+
+==============================================================================
+2.  THE SAME SWEEP AT b6bc2ef -- so 'unchanged' is a comparison
+==============================================================================
+   b6bc2ef: 6 `return` statement(s) in `absorb_trace`, baseline 23695 bytes exit 0
+   #    return                                                 artifact         exit  bytes
+   1    return Trace(False, "shape", 0)                        CHANGES          1     24909
+   2    return Trace(False, "diagonal", 0)                     CHANGES          0     23695
+   3    return Trace(False, "magnitude", 0)                    CHANGES          1     23545
+   4    return x, p                                            CHANGES          1     4030
+   5    return Trace(False, "parity", signs_read)              CHANGES          1     24782
+   6    return Trace(True, "parity", signs_read)               CHANGES          1     4030
+  [HOLDS ] the tree mg-c4c8 measured and this one give the SAME sweep: 6 returns there and 6 here, and the (artifact, exit) pair agrees on 6 of 6
+        there: C1/C0/C1/C1/C1/C1 || here: C1/C0/C1/C1/C1/C1
+        WOULD DIFFER UNDER: this commit having merged, split, hoisted or short-circuited a return.  It restructured the CONDITION of one of them, which is exactly the edit that can reduce what individual deletion sees without removing anything -- and this is the measurement that would notice
+
+==============================================================================
+3.  THE INERT RETURN: REMOVED, AND NOT REPLACED BY A WATCHER
+==============================================================================
+  [HOLDS ] one `shape` return in `absorb_trace`, counted from the tree; and `controls.py` carries 5 `UNREACHED_GATE_PAIRS` entr(ies) here against 5 at b6bc2ef -- nothing was added to watch the sub-unit this commit removed
+        shape returns: 1; UNREACHED_GATE_PAIRS entries 5 vs 5; scored rows in the battery: 43
+        WOULD DIFFER UNDER: a pair added to `controls.py` for the clause, or a return re-added behind a flag or inside `if False:` -- both counted from the tree here, so neither could be hidden by being unreachable.  'Removal, not detection' is the ticket's own wording and this is it, measured
+
+==============================================================================
+4.  THE NEGATIVE CONTROL, RUN AS A PROCESS
+==============================================================================
+   positive_control_all_fail.txt                        exit 1
+   controls_output.txt (the clean artifact)             exit 0
+  [HOLDS ] the repaired check still goes RED on the committed broken artifact (exit 1) and stays green on the clean one (exit 0)
+          note        : exit 0, and the battery exits 1 exactly when some row FAILs
+        WOULD DIFFER UNDER: the control being regenerated into something the check accepts, or the check being loosened.  This commit regenerated that control file, which is the pair of edits that can stop a control firing while leaving it in the tree -- so it is run as a PROCESS with its status read, not called as a function
+
+==============================================================================
+5.  mg-c4c8's F3 PAIR -- disclosed as NOT closed, and predicted so
+==============================================================================
+   gate_violations shape guard BYTE-IDENTICAL   exit 0  23695 bytes
+   diagonal_moves shape guard BYTE-IDENTICAL   exit 0  23695 bytes
+  [HOLDS ] both are still BYTE-IDENTICAL under individual deletion -- 2 of 2, unchanged, which is what the commit's disclosure says
+        gate_violations IDENTICAL exit 0; diagonal_moves IDENTICAL exit 0
+        WOULD DIFFER UNDER: either of them becoming visible, which would mean this commit closed F3 without saying so, or becoming a crash, which would mean it moved them.  A disclosure that an item is NOT closed is a claim about the tree and is checked here like any other
+  [FINDING B5] mg-c4c8's F3 IS OPEN AND UNCHANGED, and this commit's own sweep names but does not reach it: the two `return`s whose individual deletion moves not one byte are still there, and the CLAUSE sweep this commit added runs over the four clauses of their guards while no mutation deletes either return.
+        Not a regression and disclosed in the commit message.  It is recorded because of the shape: the finer grain (clause) is swept from an ENUMERATED population, and the coarser grain (return) is still a hand-written table of eleven.  A `return` added to the predicate layer tomorrow gets no deletion test and nothing goes red; a CLAUSE added does.  The enumeration went to the rung the ticket named and not to the one above it.
+
+==============================================================================
+5 claim(s) scored; 0 BROKEN.  1 finding(s): B5
+==============================================================================

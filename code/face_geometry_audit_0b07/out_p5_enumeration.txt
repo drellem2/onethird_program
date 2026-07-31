@@ -1,0 +1,121 @@
+==============================================================================
+mg-0b07 p5 -- the enumeration: produced, owned, and checked?
+==============================================================================
+
+PREDICTIONS, registered before these runs (PREDICTIONS.md p5):
+   p5.1  8 branches, 6 CHECKED, 2 with a stated reason
+   p5.2  6 of 6 named claims located in the subject's source
+   p5.3  branch 1's check, fed a patch removing unnamed syntax: goes RED
+   p5.4  branch 1's check, fed a SIZE-PRESERVING substitution: stays GREEN while syntax went
+   p5.5  branch 7's stated reason TRUE; its conclusion FALSE
+   p5.6  no branch covers the enumeration's own completeness
+
+
+==============================================================================
+1.  THE LIST EXISTS, TRAVELS WITH THE RUN, AND IS THE SUBJECT'S OWN
+==============================================================================
+   1. CHECKED   The DERIVED DECLARATION has a grain of its own -- `return`, statement and clause are three CHOSE
+   2. CHECKED   The declaration could be computed from a DIFFERENT TREE than the one the battery runs, which is 
+   3. CHECKED   The CLAUSE SWEEP could be one rung coarser than the tree it reads: `a or (b and c)` has two top-
+   4. CHECKED   The clause sweep could be a check NOBODY HAS SEEN GO RED, since after this commit no clause dele
+   5. CHECKED   The population that says the rewrite changed nothing could be blind to what the rewrite touches,
+   6. NOT CHECKED The `aim` strings beside each mutation are prose and could acquire a size that contradicts the d
+   7. CANNOT ARISE FOR THE DELETION TEST The regress could continue below a clause -- an operand of `!=`, a call, a name
+   8. CHECKED   The four narrowed AFTER patches could have changed what the deletion test measures while making 
+  [HOLDS ] the enumeration is 8 branches, 6 CHECKED and 2 carrying a stated reason, and it is PRINTED WITH THE RUN rather than living in a document beside it
+        checked 6, reasoned 2, printed with the run: True
+        WOULD DIFFER UNDER: the list being trimmed, or moving into the landing document where a transcript would not carry it.  A list that does not travel with the run is a list a re-runner never sees
+  [HOLDS ] each CHECKED branch names a claim that EXISTS in the subject's source: 6 of 6 located by their own text
+        branch 1: found; branch 2: found; branch 3: found; branch 4: found; branch 5: found; branch 8: found
+        WOULD DIFFER UNDER: a branch whose 'CHECKED' points at a claim that is not there -- which is the failure mode of an enumeration written after the checks: it names them from memory.  Located by claim text, not by line number, so a moved claim is still found and a deleted one is not
+
+   THIS AUDIT'S OWN MISS, KEPT.  p5.2 predicted 6 of 6 and the first run scored 5:
+   branch 2's locator was the sentence the check PRINTS, and that sentence is split
+   across two adjacent string literals in the source, so no contiguous substring of
+   the file contains it.  The check was there the whole time.  A locator looking
+   for a printed sentence inside source code is looking for the wrong artifact --
+   a granularity error of exactly this lineage's kind, committed by the auditor.  It
+   now locates the MECHANISM, which is what the branch actually claims.
+
+  [HOLDS ] and branch 2's read-back covers every file every mutation touches: 11 of 11 mutations edit exactly one file, so reading back `edits[0][0]` misses nothing today
+        multi-file mutations: none; reads edits[0][0]: True
+        WOULD DIFFER UNDER: a mutation with edits in two files -- `posets.py` and `face_complex.py`, say.  The read-back would verify the first and the branch's sentence, 'the mutated file is read back OFF DISK', would go on covering both.  Latent, not live, and named here rather than left for the mutation that introduces it
+
+==============================================================================
+2.  BRANCH 1's CHECK, EXERCISED -- the grain-free channel
+==============================================================================
+Branch 1 says the derived declaration has a grain of its own -- `return`, statement
+and clause are three CHOSEN units -- and that `nodes`, 'the count with no grain',
+closes it.  Two mutations are put through the subject's own d2: one that removes
+syntax none of the three names, and one that removes the SAME syntax while putting
+as much back.
+
+   FIRING  (`abs(...)` dropped from both sides): [UNIT REMOVED, DERIVED FROM THE PATCH: 0 `return`, 0 other statement(s), 0 boolean clause(s), 6 syntax node(s) in all, from `absorb_trace`]
+           the 'not coarser' claim reads [BROKEN]
+   BLIND   (`abs(...)` dropped on the left, doubled on the right): [UNIT REMOVED, DERIVED FROM THE PATCH: 0 `return`, 0 other statement(s), 0 boolean clause(s), 0 syntax node(s) in all, from `absorb_trace`]
+           the 'not coarser' claim reads [HOLDS]
+  [HOLDS ] branch 1's check FIRES on a patch that removes syntax none of the three named units names: the claim goes [BROKEN]
+        declaration: [UNIT REMOVED, DERIVED FROM THE PATCH: 0 `return`, 0 other statement(s), 0 boolean clause(s), 6 syntax node(s) in all, from `absorb_trace`]
+        WOULD DIFFER UNDER: the node count being dropped, or being computed only where the three units are nonzero.  This is the subject's own check, run on this audit's mutation rather than on its own -- which is the difference between a check that is present and a check that works
+  [FINDING B4] THE GRAIN-FREE CHANNEL HAS A GRAIN, AND IT IS THE SIZE.  `nodes` is a NET difference of two total node counts, so a patch that removes syntax and adds as much back reports 0 returns, 0 statements, 0 clauses AND 0 nodes.  Run through the subject's own d2: dropping `abs(...)` from the left of the magnitude comparison and doubling it on the right changes what the predicate tests, removes 2 node(s) on one side, and the 'not coarser' claim reads [HOLDS].
+        Branch 1 is the subject's answer to 'the derived declaration has a grain of its own', and its remedy has the defect the branch describes, one level further down: `nodes` is offered as 'the count with no grain' and its grain is that it measures a DIFFERENCE rather than a SET.  What would close it: compare the two trees' node MULTISETS, or report removed and added separately, so a substitution cannot present as a no-op.  Scale: the FIRING case above shows the check works wherever the patch is a net removal, which is every mutation the instrument currently carries -- this is a hole in the guard, not a wrong number in the transcript.
+  [HOLDS ] and the blind case is a real blind spot rather than a construction: the mutated file's total node count equals the original's (5056 vs 5056) while `abs` has left one side of the comparison
+        before 5056 nodes, after 5056 nodes; the three named units all 0
+        WOULD DIFFER UNDER: the two counts differing, which would mean the substitution was not size-preserving and the demonstration proved nothing.  Both counts are computed here from `ast`, not read from the subject
+
+==============================================================================
+3.  BRANCH 7 -- A STATED REASON, CHECKED, AND WHAT IT SUPPORTS
+==============================================================================
+Branch 7: 'The regress could continue below a clause -- an operand of `!=`, a call,
+a name.'  Its answer: 'CANNOT ARISE FOR THE DELETION TEST, and the reason is
+structural: deleting an operand of a comparison does not leave a condition, so there
+is no smaller DELETION at this site.'
+
+  [HOLDS ] THE STATED REASON IS TRUE: the `shape` gate's condition is a comparison with 1 comparator, so neither operand can be removed with a condition left behind -- there is no smaller DELETION at this site
+        test is Compare with 1 comparator(s)
+        WOULD DIFFER UNDER: the condition becoming a chained comparison (`a < b < c`), where dropping one comparator DOES leave a condition.  A stated reason is checkable and an omission is not; this one is checked and it holds
+  [FINDING B3] AND THE CONCLUSION DRAWN FROM IT DOES NOT FOLLOW.  Branch 7's reason is about DELETION and its conclusion is read as 'the regress stops here'.  p3 shows the regress continuing: the condition is a disjunction of two sub-conditions written without an operator, and removing the order half leaves the artifact byte-identical, exit 0.
+        This is the one item in the subject's list where the discipline was applied and the answer is still wrong, and it is scored that way DELIBERATELY: the branch was named, a reason was given, and the reason is true.  It is not a gap.  What it shows is that the reason answers 'can anything smaller be DELETED' and the question the lineage is about is 'can anything smaller be PERTURBED and go unseen' -- and those come apart at exactly this site.  What would close it: state the branch in terms of perturbation, and run the two sub-conditions beside AFTER-5.
+
+==============================================================================
+4.  WHAT THE LIST DOES NOT HAVE
+==============================================================================
+  [HOLDS ] no branch covers the ENUMERATION's own completeness (absent) and none covers the published TRANSCRIPT's provenance (absent) -- the second is where finding A1 sits
+        branches: 8; mentioning the enumeration itself: False; mentioning transcript reproducibility: False
+        WOULD DIFFER UNDER: either being added.  This is scored as an ABSENCE and not as a wrong answer: the brief this audit works to says an unexplained absence is the gap and a stated reason is not, and these two are absences.  The subject's claim beside its list says WOULD DIFFER UNDER: nothing -- which is honest and is also the whole exposure
+
+==============================================================================
+5.  THE SAME QUESTION, ASKED OF THIS AUDIT
+==============================================================================
+This audit is an artifact of the same kind as the thing it audits: an independent
+measurement of a grain, published as a transcript.  Its own branches, printed with
+its own run.
+
+  1. This audit's census could disagree with the subject's, in which case the 8 of 11 is a statement about one implementation and not about the patches.
+     CHECKED, p2 section 3: eleven patches measured by a census written here from `ast` alone, against the subject's, agreeing on all eleven.
+
+  2. The perturbations in p3 are not DELETIONS, so calling their result a granularity finding could be an equivocation on the word.
+     CHECKED by saying so and by cross-running: p3 section 3 applies the same two sub-conditions at `b6bc2ef`, where they ARE two clauses someone else enumerated, and gets the same two answers.  The unit is not this audit's invention.
+
+  3. The instrument copy in p1 could differ from the subject's own tree, in which case the perturbed runs measure the harness.
+     CHECKED, p1 section 1: the UNPERTURBED copy is run first and its eleven declarations compared with the committed transcript's.
+
+  4. This audit's reading of mg-9220's eleven English sentences is a reading, and a reading is a claim.
+     CHECKED as far as the question admits: read independently here and compared with mg-c4c8's, 11 of 11.  It CANNOT be checked further without parsing English, and two independent readings agreeing is not a proof and is not offered as one.
+
+  5. The predictions could have been written after their runs, which is the provenance form of the same defect.
+     CHECKED by disclosure and by ordering: `PREDICTIONS.md` is committed, and the one measurement made BEFORE its prediction was registered (out_d2_deletion.txt) is marked as such in p1 section 5 and scored as a report rather than as a prediction.
+
+  6. The floor item could compare a generated file with itself, which is the `x == x` shape mg-8aae found.
+     CHECKED, p6: each regenerated control is rebuilt from ITS OWN GENERATOR and the result compared with the committed bytes, never file against file.
+
+  7. This enumeration could be incomplete -- the branch the subject's list does not have.
+     NOT CHECKABLE, and the reason is the same one that makes the subject's list incomplete: an enumeration cannot enumerate what its author did not think of.  What is available is to say the list is short and to name what would extend it -- a second auditor, which is what this ticket is to mg-64b6.
+
+  [HOLDS ] this audit's enumeration is 7 branches, 6 checked by a claim in these files and 1 carrying the reason it cannot be
+        checked: 6 of 7
+        WOULD DIFFER UNDER: nothing -- this claim is a pointer, scored so the list travels with the transcript.  The claims that do the work are the ones each branch names.  It is the same self-referential shape the subject's own list has, and it is left visible rather than dressed up
+
+==============================================================================
+8 claim(s) scored; 0 BROKEN.  2 finding(s): B4, B3
+==============================================================================

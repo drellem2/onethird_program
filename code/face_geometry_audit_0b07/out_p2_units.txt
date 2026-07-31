@@ -1,0 +1,101 @@
+==============================================================================
+mg-0b07 p2 -- the eleven written declarations, re-measured here
+==============================================================================
+
+PREDICTIONS, registered before these runs (PREDICTIONS.md p2):
+   p2.1  my reading agrees with mg-c4c8's quoted triples 11 of 11
+   p2.2  8 UNDERSTATE, 3 AGREE, 0 OVERSTATE
+   p2.3  sentences byte-identical to b6bc2ef's on 11 of 11
+   p2.4  patches identical on 10 of 11; R3 differs in FORM, identical in EFFECT
+   p2.5  the subject's verdict expression, fed an OVERSTATING pair, prints UNDERSTATES
+
+
+==============================================================================
+1.  IS THE SPECIMEN THE SPECIMEN?  mg-9220's own file, at b6bc2ef
+==============================================================================
+The subject's argument for deleting `returns_removed` is that two statements of
+one number are two things that can disagree.  It then kept a COPY of mg-9220's
+eleven sentences and of four of its patches.  Same argument, same treatment.
+
+   tag       sentence     patch        note
+   BEFORE-1  identical    identical    
+   BEFORE-2  identical    identical    
+   AFTER-1   identical    identical    
+   AFTER-2   identical    identical    
+   AFTER-3   identical    identical    
+   AFTER-4   identical    identical    
+   AFTER-5   identical    identical    
+   AFTER-6   identical    identical    
+   R1        identical    identical    
+   R2        identical    identical    
+   R3        identical    *** DIFFERS *** 2 edit(s) here vs 1 there
+  [HOLDS ] mg-9220's eleven sentences are kept VERBATIM: 11 of 11 byte-identical to the text at b6bc2ef
+        11 of 11 identical
+        WOULD DIFFER UNDER: a sentence retyped, reflowed or tidied in the copy.  The whole value of a specimen is that it is the thing itself; a paraphrase of a declaration being measured for exactness is worth nothing
+  [HOLDS ] ten of the eleven patches are identical as text; R3 is written as 2 edit(s) here and 1 there, and the two produce a BYTE-IDENTICAL mutated tree
+        identical as text: 10 of 11; R3 same effect: True; differing: R3
+        WOULD DIFFER UNDER: a patch the copy narrowed, widened or moved.  The subject's whole claim is about mg-9220's work, so a copy that measures today's patches would report this commit's improvement as mg-9220's defect.  R3's two forms are checked by APPLYING both, not by comparing their text
+
+==============================================================================
+2.  THE READING -- made here, then compared with the one quoted
+==============================================================================
+The triple beside each sentence is what the sentence would have to remove for the
+declaration to be exact.  It is a reading of English, and the subject QUOTES
+mg-c4c8's rather than making one -- a borrowed premise carrying the conclusion.
+So each sentence is read again here, and the two readings are compared.
+
+   tag       mine       quoted     agree
+   BEFORE-1  0/0/1      0/0/1      yes
+   BEFORE-2  1/0/0      1/0/0      yes
+   AFTER-1   1/0/0      1/0/0      yes
+   AFTER-2   1/0/0      1/0/0      yes
+   AFTER-3   0/0/0      0/0/0      yes
+   AFTER-4   0/1/0      0/1/0      yes
+   AFTER-5   1/0/0      1/0/0      yes
+   AFTER-6   1/0/0      1/0/0      yes
+   R1        1/0/0      1/0/0      yes
+   R2        1/0/0      1/0/0      yes
+   R3        2/0/0      2/0/0      yes
+  [HOLDS ] the reading made here and the reading the subject quotes agree on 11 of 11.  The conclusion below does not rest on mg-c4c8's reading
+        11 of 11 agree
+        WOULD DIFFER UNDER: a sentence whose plain reading is genuinely contested -- at which point the 8 of 11 is a statement about a reading and has to be reported as one.  Two independent readings agreeing is the most this question admits of; it is not a proof and is not offered as one
+
+==============================================================================
+3.  THE MEASUREMENT -- this audit's census, mg-9220's patches
+==============================================================================
+   tag       written    measured   verdict      nodes
+   BEFORE-1  0/0/1      0/0/1      AGREES       24
+   BEFORE-2  1/0/0      1/1/0      UNDERSTATES  30
+   AFTER-1   1/0/0      1/1/0      UNDERSTATES  30
+   AFTER-2   1/0/0      1/1/0      UNDERSTATES  35
+   AFTER-3   0/0/0      0/0/0      AGREES       0
+   AFTER-4   0/1/0      0/1/0      AGREES       4
+   AFTER-5   1/0/0      1/1/1      UNDERSTATES  51
+   AFTER-6   1/0/0      1/1/0      UNDERSTATES  18
+   R1        1/0/0      1/1/0      UNDERSTATES  17
+   R2        1/0/0      1/1/0      UNDERSTATES  28
+   R3        2/0/0      2/2/0      UNDERSTATES  45
+  [HOLDS ] RE-MEASURED FROM mg-9220's OWN PATCHES BY THIS AUDIT'S OWN CENSUS: 8 UNDERSTATE, 3 AGREE, 0 OVERSTATE, 0 MIXED.  Understating: BEFORE-2, AFTER-1, AFTER-2, AFTER-5, AFTER-6, R1, R2, R3.  Agreeing: BEFORE-1, AFTER-3, AFTER-4
+        per tag: AGREES BEFORE-1, AFTER-3, AFTER-4; UNDERSTATES BEFORE-2, AFTER-1, AFTER-2, AFTER-5, AFTER-6, R1, R2, R3
+        WOULD DIFFER UNDER: any of the eleven patches or sentences changing, or this audit's census disagreeing with the subject's.  The subject reports the same 8 of 11 from different code; two censuses agreeing on eleven patches is what makes the figure a measurement rather than a quotation
+
+==============================================================================
+4.  THE VERDICT COLUMN NAMES A DIRECTION IT DOES NOT MEASURE
+==============================================================================
+The subject's column is a binary on equality.  Fed a declaration that OVERSTATES
+its patch -- says it removes more than it does -- it prints the same word.  The
+subject's own expression is lifted out of its source and RUN here on such a pair,
+rather than argued about.
+
+   reading 1/0/0, measured 0/0/0 (OVERSTATES) -> '*** UNDERSTATES ***'
+   reading 1/0/0, measured 1/1/0 (UNDERSTATES) -> '*** UNDERSTATES ***'
+   reading 1/0/0, measured 1/0/0 (AGREES)      -> 'exact'
+  [FINDING A2] THE SUBJECT'S VERDICT COLUMN ASSERTS A DIRECTION IT NEVER MEASURES: its own expression, run here, prints '*** UNDERSTATES ***' for a declaration that OVERSTATES its patch as well as for one that understates it, and the claim beside the table says 'UNDERSTATE THEIR OWN PATCHES ON 8 OF 11' from a set built by `r[1] != r[2]`.
+        It happens to be right about all eight -- re-measured independently above, 8 UNDERSTATE and 0 OVERSTATE -- so the figure stands and this is a defect of the instrument and not of the finding.  It matters because the direction is the whole content of the word: a declaration that OVERSTATES its patch makes the evidence look COARSER than it is, which is harmless, and one that understates makes it look finer, which is what mg-c4c8 found.  A column that cannot tell them apart cannot report the next one.
+  [HOLDS ] the subject's verdict expression is a binary on equality: it prints 'exact' for exact and '*** UNDERSTATES ***' for BOTH directions of inexact -- located in its source by shape and evaluated here, not paraphrased
+        over='*** UNDERSTATES ***' under='*** UNDERSTATES ***' exact='exact'
+        WOULD DIFFER UNDER: the column being computed from the componentwise comparison, which is what would let it name the direction.  This claim goes red the moment the subject distinguishes the two -- which is the repair
+
+==============================================================================
+5 claim(s) scored; 0 BROKEN.  1 finding(s): A2
+==============================================================================

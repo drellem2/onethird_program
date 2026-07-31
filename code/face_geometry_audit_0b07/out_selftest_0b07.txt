@@ -1,0 +1,24 @@
+==============================================================================
+mg-0b07 selftest -- the audit's own primitives
+==============================================================================
+
+  [HOLDS ] census counts 4 returns, 7 other statements, 3 clauses on a source counted by hand -- got 4/7/3
+        WOULD DIFFER UNDER: `pass` being counted as a statement (8 instead of 7), or clauses being counted per BoolOp instead of per droppable operand (2 instead of 3).  Both are the ways this audit could be one rung coarser than the tree it reads
+  [HOLDS ] a `return` substituted by `pass` reads as 1 return and 0 statements removed -- got 1/0/0
+        WOULD DIFFER UNDER: `pass` being counted, which would report -1 statements and make every narrowed patch in the subject look like it removed nothing
+  [HOLDS ] the label of a removed `return` is read from the string constant that left the tree -- got ['gate']
+        WOULD DIFFER UNDER: a docstring or a comment being counted, or a string that occurs twice being reported as removed when one copy remains
+  [HOLDS ] `returns_of` is in SOURCE order: the last return of `f` is line 8, and `[-1]` of an ast.walk gives line 4 -- mg-c4c8's own slip, reproduced here to show this audit does not repeat it
+        WOULD DIFFER UNDER: `ast.walk` order being taken for source order.  It is breadth-first, so `[-1]` is not the last statement -- which is how mg-c4c8 inverted a different return than the one it declared
+  [HOLDS ] `splice` replaces exactly one node's span and leaves the file parseable and one statement shorter
+        WOULD DIFFER UNDER: an off-by-one in the line-start table, which would corrupt the neighbouring statement instead of the target -- a mutation whose declaration and whose patch name different things, which is the defect this audit exists to look for
+  [HOLDS ] an anchor that matches twice is an ERROR, not a silent double mutation
+        WOULD DIFFER UNDER: `str.replace` being used without a count check.  A patch applied twice, or not at all, looks exactly like a patch the battery did not notice
+  [HOLDS ] `deciding_boolops` finds 1 of the 2 BoolOps -- the one that guards a return, and not the one that guards a `pass`
+        WOULD DIFFER UNDER: the two populations being confused, which is how a claim about 'every boolean condition' comes to be read as a claim about the file
+  [HOLDS ] `scored_rows` reads the marker as the row's FIRST token: 3 rows, not 4 -- the prose bullet quoting a marker is not a row
+        WOULD DIFFER UNDER: a substring scan, which is half of the defect mg-d0e2 found in the shipped check and which this audit would inherit by copying it
+
+==============================================================================
+8 claim(s) scored; 0 BROKEN.  0 finding(s): none
+==============================================================================
