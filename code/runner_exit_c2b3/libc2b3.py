@@ -151,6 +151,36 @@ def has_pipefail(src):
     return any(PIPEFAIL_RE.match(code_of(l)) for l in src.split("\n"))
 
 
+# THE CALLER SCAN'S TARGET RULE, AS A PROPERTY.  mg-70c7, on mg-dee4's F5.
+#
+# `k2_consume.py` matched `run_all\.sh`; mg-7522 made it
+# `(?:run_all|run_audit)\.sh`, which is one filename replaced by two.  At HEAD
+# nine executing sites name a `*.sh` whose basename is neither -- four of them
+# reading the exit status -- and nothing at all names the `run_audit.sh` the
+# widening added.  THE PROPERTY IS "a shell script", not "a shell script with
+# one of these names": what a runner is called is a fact about its author's
+# habits, and an exit status is swallowed by whatever executes it.
+#
+# Group 1 is the directory component when the line carries one, group 2 the
+# basename.  A target invoked as `./c0_repro.sh`, or as `"sh", "run_all.sh"`
+# with the directory in a `cwd=` elsewhere, matches with NO group 1 -- the
+# site is real and the tree is simply not on that line.  That is a stated
+# limit of a line-local rule and not a name rule.
+TARGET_RE = re.compile(r"(?:([\w./-]+)/)?(\w[\w-]*\.sh)\b")
+
+
+def targets(line):
+    """[(directory or '', basename)] -- every shell script this line names."""
+    out, seen = [], set()
+    for m in TARGET_RE.finditer(line):
+        d, base = m.group(1) or "", m.group(2)
+        if base in seen:
+            continue
+        seen.add(base)
+        out.append((d, base))
+    return out
+
+
 GUARD_RE = re.compile(r"\|\||&&|\bif\b|;\s*then\b|\$\(")
 
 

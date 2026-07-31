@@ -154,6 +154,27 @@ ck("every step redirects and guards",
 # not quietly fixed: it is the same defect the arc keeps finding, in the
 # instrument built to find it.
 allpy = [f for f in sorted(os.listdir(HERE)) if f.endswith(".py")]
+# mg-70c7, on mg-dee4's F3.  There is ONE marker rule now and both directions
+# use it, so the first thing this file checks is that identity -- a rule this
+# tree applies to its subject and a different one it applies to itself is the
+# finding, and it can only be prevented at the object.
+ck("the marker rule S3a points at the SUBJECT has %d alternatives"
+   % L.alternatives(L.MARK), L.alternatives(L.MARK), 9)
+ck("the rule this tree used on ITSELF had 3, and is kept only for exhibition",
+   L.alternatives(L.MARK_OLD), 3)
+ck("`verified` is IN the rule -- the D4 docstring names it and it was not",
+   bool(L.MARK.search("verified against the pre-repair output")), True)
+ck("...and was not in the old one", bool(L.MARK_OLD.search("verified")), False)
+ck("a marker INSIDE a quoted span is a MENTION, not a USE (mg-70c7)",
+   [k for _i, _l, k in L.strength_lines(
+       "# `verified against the` is the marker here")], ["MENTION"])
+ck("a marker written bare is a USE",
+   [k for _i, _l, k in L.strength_lines(
+       "the eight counts are identical across 8 arms")], ["USE"])
+
+# The verdict itself is S5d's -- population, backing and all -- and duplicating
+# it here would give this tree two answers to one question.  What is pinned
+# here is the RULE; what S5d prints is the measurement.
 uses = []
 mentions = 0
 for f in allpy + ["run_all.sh"]:
@@ -162,13 +183,12 @@ for f in allpy + ["run_all.sh"]:
             uses.append("%s:%d %s" % (f, i, line[:50]))
         else:
             mentions += 1
-ck("no file in this tree USES `confirmed exactly` / `byte-identical`",
-   uses, [])
-print("  ..   %d MENTION(s) of those words -- the regexes that detect them, the"
-      % mentions)
-print("       assertions of their absence, and quotations of mg-c2b3's own")
-print("       wording.  A mention is not an occurrence; counting one as the")
-print("       other is the defect this arc keeps finding.")
+print("  ..   %d MENTION(s) and %d USE(s) of those words in this tree's code."
+      % (mentions, len(uses)))
+print("       A mention is not an occurrence; counting one as the other is the")
+print("       defect this arc keeps finding.  Whether a USE is BACKED by a")
+print("       transcript of this tree is S5d's question and is answered there,")
+print("       over a population that includes the `*.md` this file cannot see.")
 sh_true = [(f, L.shell_true_sites("%s/%s" % (TREE, f), None))
            for f in allpy]
 ck("no file in this tree CALLS with shell=True or os.system",
@@ -240,6 +260,77 @@ print("  So a pipeline inside an assignment is a place where a status is")
 print("  consumed and thrown away at the same time, and treating the")
 print("  assignment as a guard would have removed three real sites from the")
 print("  population.  The rule is measured here and applied in S1.")
+
+# ---------------------------------------------------------------------------
+L.hdr("S10  THE CONSUMPTION CLAUSE -- BOTH ARMS, BOTH SENSES  (mg-70c7)")
+
+print("  mg-dee4's F6: the clause tested ERREXIT and the reason written for it")
+print("  was about the VALUE.  It is a named disjunction now, and a")
+print("  disjunction is only honest if each arm is pinned in both senses --")
+print("  otherwise widening a rule is indistinguishable from breaking it.")
+print()
+_E = "#!/bin/sh\nset -e\n%s\n"
+_U = "#!/bin/sh\nset -u\n%s\n"
+_LINE = "n=$(git diff a..b | wc -c | tr -d ' ')"
+_BARE = "git diff a..b | wc -c"
+ck("errexit arm: `set -e`, unguarded pipeline",
+   L.consumed(_E % _BARE, _BARE, 3)[1], "ERREXIT")
+ck("errexit arm: no `set -e`, output not captured -> NOT consumed",
+   L.consumed(_U % _BARE, _BARE, 3)[0], False)
+ck("value arm: no `set -e`, captured AND read",
+   L.consumed(_U % (_LINE + '\necho "$n"'), _LINE, 3)[1], "VALUE")
+ck("value arm: captured and NEVER read -> NOT consumed",
+   L.consumed(_U % _LINE, _LINE, 3)[0], False)
+ck("both arms at once are reported as both, not as one",
+   L.consumed(_E % (_LINE + '\necho "$n"'), _LINE, 3)[1], "ERREXIT+VALUE")
+ck("a guarded pipeline under `set -e` is not consumed by errexit",
+   L.consumed(_E % (_BARE + " || true"), _BARE + " || true", 3)[0], False)
+
+# ---------------------------------------------------------------------------
+L.hdr("S11  SITE vs EXECUTION -- the grain, pinned in both senses  (mg-70c7)")
+
+print("  mg-dee4's F1: `11 of 11 read directly` counted SOURCE LINES over")
+print("  source that runs in loops.  These rows pin the difference, including")
+print("  the direction that MUST refuse: a loop this parser cannot expand has")
+print("  to say so rather than be counted as one iteration.")
+print()
+_LOOP = ("#!/bin/sh\nset -e\n"
+         'for pair in "a1 dir/one" \\\n            "b2 dir/two"; do\n'
+         "    base=${pair%% *}; dir=${pair#* }\n"
+         "    n=$(git diff \"$base..HEAD\" -- \"$dir\" | wc -c)\n"
+         "done\n")
+_ex = L.pipeline_executions(_LOOP)
+ck("one pipeline SOURCE LINE inside a 2-item loop is 2 EXECUTIONS",
+   len(_ex), 2)
+ck("...and the loop body's own assignments are followed into the argv",
+   [L.argv_of(L.discarded_stages(t)[0], b) for _i, _n, b, t in _ex],
+   [["git", "diff", "a1..HEAD", "--", "dir/one"],
+    ["git", "diff", "b2..HEAD", "--", "dir/two"]])
+_VAR = ("#!/bin/sh\nset -e\nfor d in $DIRS; do\n"
+        "    n=$(git diff x -- \"$d\" | wc -c)\ndone\n")
+_exv = L.pipeline_executions(_VAR)
+ck("a loop over `$DIRS` is NOT statically expandable and says so",
+   [n for _i, n, _b, _t in _exv], [None])
+ck("...and no argv is derived for it",
+   [b for _i, _n, b, _t in _exv], [None])
+ck("a pipeline outside any loop is exactly one execution",
+   len(L.pipeline_executions("#!/bin/sh\nset -e\nn=$(a | b)\n")), 1)
+ck("an unresolvable `$` never survives into a derived argv",
+   L.argv_of('git diff "$nope"', {}), None)
+ck("a quoted pathspec survives as its own word",
+   L.argv_of('git diff "$b..HEAD" -- "$d" \':!*.md\'',
+             {"b": "a1", "d": "dir/one"}),
+   ["git", "diff", "a1..HEAD", "--", "dir/one", ":!*.md"])
+
+# ---------------------------------------------------------------------------
+L.hdr("S12  IS A FIGURE BACKED BY A TRANSCRIPT?  both senses  (mg-70c7)")
+
+ck("a line number is not a figure -- `s3_figure.py:154` does not back 154",
+   L.figures("      s3_figure.py:154  if os.path.basename(p)"), [])
+ck("...and a bare 154 in a transcript does", L.figures("  changed 154 files"),
+   [154])
+ck("0, 1 and 2 are not figures -- they are structural in prose",
+   L.figures("both of the 2 arms exit 0 at 1 site"), [])
 
 # ---------------------------------------------------------------------------
 print()

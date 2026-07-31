@@ -56,9 +56,18 @@ stage can fail**, and `s1_population.py` defines the population that way:
   empty stream, `wc -c` reported `0`, and the proof read `0 bytes`. Repaired
   here, byte counts unchanged.
 
-**The retroactive clearance is re-established over the corrected population.**
-mg-c2b3 read 34 discarded statuses; `s2_status.py` reads the other 11 by the
-same method. 45 of 45, all zero.
+**The retroactive clearance is re-established over the corrected population,
+and at the grain the population executes at.** mg-c2b3 read 34 discarded
+statuses **at the SITE grain**; `s2_status.py` reads the rest by the same method
+at the **EXECUTION** grain — 8 `| tee` invocations plus 8 `git diff`
+invocations, because the three `git diff` source lines sit inside `for` loops.
+**16 of 16, all zero**, every argv derived from the runner's own bytes.
+
+**This paragraph used to read `45 of 45`**, which added 34 sites to 11 lines and
+called the sum a population (`mg-dee4`/F1). The two halves are counted at
+different grains and are no longer added: **34 sites inherited from a transcript
+this repair did not re-run, plus 16 executions run here.** The verdict survived
+the correction; the arithmetic did not.
 
 ## OPEN 2 — the figure, and the habit worth more than the figure
 
@@ -73,9 +82,12 @@ disagreement is exhibited rather than described.
 **The general form.** *"Confirmed exactly", "verified", "byte-identical" mark
 where the author stopped looking, so they are a reason to check FIRST.* Applied:
 `s3_figure.py` derives the sweep's reader-facing artifacts from
-`git show --name-only 52aeaf4`, finds **20** strength-marked numeric claims, and
+`git show --name-only 52aeaf4`, finds **24** strength-marked numeric claims, and
 dispositions every one — with coverage checked in **both** directions, so a hit
-with no rule and a rule with no hit are each an error. **Five were wrong:** the
+with no rule and a rule with no hit are each an error. **It found 20 while the
+rule was line-local** (`mg-dee4`/F4): a marker and its figure separated by a
+hard wrap scored as neither line, and the window is now one line in either
+direction. **Five were wrong:** the
 `pipefail` row in the README, in `OUTCOMES.md`, and in the published document;
 `k1_census.py`'s docstring; and *"the shebang is `#!/bin/sh` on all 64 runners
 (measured)"*, which is **59 of 64**. That last one is the same defect with the
@@ -133,11 +145,25 @@ cannot exhibit them:
    guard**. Every Python subprocess takes a list argv — no shell, no pipeline,
    so `returncode` is the target's own status — and `run_argv` returns `None`
    on timeout, which prints `-` and never `0`.
-4. **D4, a strength marker standing in for a check.** **0 USES** and 19
-   MENTIONs. A marker inside quotes or backticks is the arc naming a form of
-   words; written bare and applied to a figure it is a use. That distinction is
-   the same one as *"a comment quoting `| tee` is not a pipeline"*, and three of
-   this tree's own checks got it wrong first — see `OUTCOMES.md`.
+4. **D4, a strength marker standing in for a check.** A marker inside quotes or
+   backticks is the arc naming a form of words; written bare and applied to a
+   figure it is a use. That distinction is the same one as *"a comment quoting
+   `| tee` is not a pipeline"*, and three of this tree's own checks got it wrong
+   first — see `OUTCOMES.md`.
+
+   **This branch reported `0 USES` under a different instrument from the one it
+   pointed at its subject** (`mg-dee4`/F3): 3 alternatives here against 9 there,
+   with `verified` — named as a marker in `s5_self.py`'s own docstring, in this
+   file and in the published document — in the nine and not in the three; and a
+   population of `*.py` and `*.sh`, so this README, `OUTCOMES.md`,
+   `PREDICTIONS.md` and the published document were all outside it, which is
+   where three of `mg-05eb`'s four wrong artifacts were. There is now **one rule
+   object**, `lib7522.MARK`, used in both directions; the population includes
+   this tree's `*.md` and the document; and a USE is judged **BACKED or
+   UNBACKED** by whether every figure on its line is printed by a transcript
+   this tree commits. `out_s5_self.txt` carries the four classes with the
+   extent, and the extent is in this sentence rather than only in the
+   transcript.
 
 **What cannot be checked here, stated rather than omitted:** that the property
 predicate is the *right* one. It is written out in full in `lib7522.pipelines`,

@@ -46,15 +46,32 @@ ARTIFACTS = sorted(p for p in TOUCHED
                    or (p.startswith("docs/") and p.endswith(".md")))
 ARTIFACTS = [p for p in ARTIFACTS if not os.path.basename(p).startswith("out_")]
 
-MARK = re.compile(r"confirmed exactly|byte-identical|byte for byte|\bverified\b"
-                  r"|\(measured\)|\bidentical\b|\bconfirmed\b"
-                  r"|\ball (?:\d+|of)\b|\bexactly \d+\b", re.I)
+# mg-70c7: ONE marker rule, owned by the library and pointed in both
+# directions.  It used to be defined here, nine alternatives, for the SUBJECT,
+# while `s5_self.py` checked THIS TREE with a three-alternative rule of its own
+# that did not contain the `verified` its own docstring named.  mg-dee4's F3.
+MARK = L.MARK
 NUM = re.compile(r"\b\d+\b")
+# mg-70c7: the window is the line AND the line after it.  mg-dee4's F4: this
+# rule was LINE-LOCAL, and `code/runner_exit_c2b3/OUTCOMES.md:88` carries
+# `verified against the` with its figure `0 / 0 / 0 / 0 / 2111 / 0` on line 89
+# -- so neither line scored and the strongest claim in the file was invisible
+# to the rule built to find strong claims.  A marker and its figure separated
+# by a hard wrap is the ordinary shape of wrapped prose, not an edge case.
+WINDOW = 1
 
 print("  PREDICATE.  A reader-facing artifact of the sweep is a file the")
 print("  sweep's own commit %s touched, under `code/runner_exit_c2b3/` or" % L.SWEEP)
-print("  under `docs/`, that is not a committed transcript.  A CLAIM is a line")
-print("  in one of them carrying BOTH a strength marker and a number.")
+print("  under `docs/`, that is not a committed transcript.  A CLAIM is a")
+print("  strength marker with a number WITHIN %d LINE of it, in EITHER"
+      % WINDOW)
+print("  direction -- a hard wrap puts the figure on the line before as")
+print("  readily as on the line after.  The marker rule is `lib7522.MARK`, same")
+print("  object `s5_self.py` turns on this tree -- %d alternatives, and the"
+      % L.alternatives(L.MARK))
+print("  %d-alternative rule this tree used on ITSELF is kept only as"
+      % L.alternatives(L.MARK_OLD))
+print("  `lib7522.MARK_OLD`, so S5 can exhibit the disagreement.")
 print()
 print("  artifacts: %d" % len(ARTIFACTS))
 for p in ARTIFACTS:
@@ -62,16 +79,32 @@ for p in ARTIFACTS:
 print()
 
 CLAIMS = []
+LINE_LOCAL = []
 for p in ARTIFACTS:
-    for i, line in enumerate(L.read(p, None).splitlines(), 1):
-        if MARK.search(line) and NUM.search(line):
-            CLAIMS.append((p, i, line.strip()))
+    lines = L.read(p, None).splitlines()
+    for i, line in enumerate(lines, 1):
+        if not MARK.search(line):
+            continue
+        near = lines[max(0, i - 1 - WINDOW):i + WINDOW]
+        if not any(NUM.search(x) for x in near):
+            continue
+        CLAIMS.append((p, i, " ".join(x.strip() for x in near)))
+        if NUM.search(line):
+            LINE_LOCAL.append((p, i))
 
 print("  strength-marked numeric claims: %d" % len(CLAIMS))
+print("      ...that a LINE-LOCAL rule would have found: %d" % len(LINE_LOCAL))
+print("      ...that the one-line window ADDS:           %d"
+      % (len(CLAIMS) - len(LINE_LOCAL)))
 print()
 for p, i, line in CLAIMS:
-    print("    %-44s %4d  %s" % (p.replace("code/runner_exit_c2b3/", "…/"),
-                                 i, line[:92]))
+    print("    %-44s %4d %s %s"
+          % (p.replace("code/runner_exit_c2b3/", "…/"), i,
+             " " if (p, i) in LINE_LOCAL else "+", line[:90]))
+print()
+print("  The `+` rows are the four a hard wrap stepped over.  `20")
+print("  strength-marked numeric claims, every one dispositioned` was exact")
+print("  about the 20 the rule saw and silent about these.")
 
 # ---------------------------------------------------------------------------
 L.hdr("S3b  THE FIGURE ITSELF -- `pipefail`, re-derived under both rules")
@@ -224,6 +257,22 @@ DISP = [
      "%d is the tee'd-pipeline count @%s" % (tee34, L.PINNED)),
     ("ArcWideSweep.md", "all 64", "WAS WRONG, NOW FIXED",
      "the shebang sentence: `all 64` is %d of %d; S3c" % (n_pin_sh, n_pin_runs)),
+    # mg-70c7: the four rows the one-line window ADDS (mg-dee4/F4).  Three of
+    # them are markers written inside a comment ABOUT the marker, with the
+    # adjacent number belonging to the sentence next door -- exactly the
+    # mention-for-occurrence distinction this arc keeps re-deriving, arriving
+    # here through the window rather than through the line.  They are
+    # dispositioned rather than excluded by a rule tuned to drop them: a rule
+    # that drops what it does not want is how a population becomes a hand-list.
+    ("k1_census.py", "It was not confirmed", "NOT A CLAIM",
+     "a comment recording that the docstring's old figure was wrong; the "
+     "number on the adjacent line is the correction, not an assertion"),
+    ("libc2b3.py", "reported the number as", "NOT A CLAIM",
+     "a comment naming the marker the repaired `PIPEFAIL_RE` exists because "
+     "of; the adjacent number is the regex's own subject"),
+    ("selftestc2b3.py", "Both senses", "NOT A CLAIM",
+     "a comment above the both-senses fixtures; the adjacent number is a "
+     "fixture's expected count"),
 ]
 
 def short(path):
