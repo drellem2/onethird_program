@@ -124,20 +124,81 @@ EXCLUDE = {"stricken_a4ef.py", "PREDICTIONS.md", "OUTCOMES.md",
 # than imported, so that if either of them widens or narrows it, E1's
 # expectation does NOT move with it and the disagreement shows up as a
 # finding.
+#
+# mg-5040, on mg-4700's OPEN 1.  The paragraph above closed the instance and
+# left the class: E1 walked, the subjects walked, and BOTH declined a
+# SYMLINKED DIRECTORY, so with a forbidden statement planted behind a link
+# `want` did not contain it, `want <= got` held, and E1 CERTIFIED THE EXTENT
+# AS TRUE a second time (mg-4700 F1, D2c).  Making E1's walk wider than the
+# subjects' would be the third widening and would buy one generation.
+#
+# What removes the class is that a walk which NAMES ITS OWN RESIDUE can
+# disagree without out-walking anybody.  `regular()` and `residue()` below
+# come from one traversal that returns what it declined; E1 fires when its own
+# residue carries an entry that is not the stated `__pycache__` rule, and
+# separately when a SUBJECT's printed output does not name an entry E1's
+# independent walk declined.  So E1 no longer needs to reach further than the
+# thing it measures -- it needs the thing it measures to say what it did not
+# reach.
 PYCACHE = "__pycache__"
+STATED_DIR_RULES = (PYCACHE,)
+
+
+def walk_residue(root, stated_dirs=STATED_DIR_RULES):
+    """(files, stated, unstated) -- nothing is dropped without landing in one
+    of the last two.  `stated`/`unstated` are (relpath, reason) pairs.
+
+    Copied into each subject rather than shared, deliberately, for the reason
+    the paragraph above this one gives: an instrument that computes its
+    expectation with the subject's own code cannot disagree with the subject.
+    """
+    files, stated, unstated = [], [], []
+    if not os.path.isdir(root):
+        return files, stated, unstated
+
+    def onerror(err):
+        p = getattr(err, "filename", None) or root
+        unstated.append((os.path.relpath(p, root),
+                         "os.walk raised %s and would otherwise have "
+                         "dropped it in silence" % err.__class__.__name__))
+
+    for dirpath, dirnames, filenames in os.walk(root, onerror=onerror):
+        keep = []
+        for d in sorted(dirnames):
+            p = os.path.join(dirpath, d)
+            rel = os.path.relpath(p, root)
+            if d in stated_dirs:
+                stated.append((rel, "directory rule, STATED: %s/" % d))
+            elif os.path.islink(p):
+                unstated.append((rel, "symlinked directory -- os.walk does "
+                                      "not descend without followlinks"))
+            else:
+                keep.append(d)
+        dirnames[:] = keep
+        for f in sorted(filenames):
+            p = os.path.join(dirpath, f)
+            rel = os.path.relpath(p, root)
+            if os.path.isfile(p):
+                files.append(rel)
+            elif os.path.islink(p):
+                unstated.append((rel, "symlink that does not resolve to a "
+                                      "regular file"))
+            else:
+                unstated.append((rel, "not a regular file"))
+    return sorted(files), sorted(set(stated)), sorted(set(unstated))
 
 
 def regular(tree):
-    """Every regular file of a tree, repo-tree-relative, AT ANY DEPTH."""
-    root = os.path.join(REPO, "code", tree)
-    out = []
-    for dp, dns, fns in os.walk(root):
-        dns[:] = sorted(d for d in dns if d != PYCACHE)
-        for fn in fns:
-            p = os.path.join(dp, fn)
-            if os.path.isfile(p):
-                out.append(os.path.relpath(p, root))
-    return sorted(out)
+    """Every regular file of a tree, repo-tree-relative, AT ANY DEPTH -- that
+    is, at any depth THIS WALK REACHED.  `residue()` is the other half of the
+    sentence and is not optional (mg-5040)."""
+    return walk_residue(os.path.join(REPO, "code", tree))[0]
+
+
+def residue(tree):
+    """(stated, unstated) -- what the walk behind `regular()` declined."""
+    _f, st, unst = walk_residue(os.path.join(REPO, "code", tree))
+    return st, unst
 
 
 def check(label, ok, detail=""):
@@ -227,6 +288,47 @@ print("  condition no sentence stated, and E1 -- listing the same way -- could")
 print("  not disagree.  E1 walks now, so the two computations are independent")
 print("  and a scan that stops at the root is a FINDING here, not a match.")
 print()
+
+# --- the residue, which is the other half of every sentence above -----------
+#
+# mg-5040, on mg-4700's OPEN 1.  Every check above compares what a checker
+# READ against what E1's walk REACHED.  Two walks that decline the same thing
+# agree, and that agreement is what certified a false extent twice: once when
+# neither descended into a subdirectory (mg-6cb9 F1) and once when neither
+# followed a symlinked directory (mg-4700 F1).  `want <= got` cannot see it,
+# by construction, and no amount of widening E1's walk fixes the shape --
+# it only moves the next generation one rule to the side.
+#
+# These rows compare the walk against ITSELF: what did it decline, and does
+# the checker that quantifies over its output SAY SO.  A row here can fail
+# with `want <= got` holding everywhere, which is the whole point.
+print("  the WALK'S RESIDUE -- what the enumeration declined, and whether the")
+print("  sentence that quantifies over it says so (mg-5040)")
+_subject_of = {"species_7d75": ["w3_scope.py", "s1_extent.py"],
+               "species_repair_6f61": ["s1_extent.py"],
+               "species_remainder_f8fa": ["s1_extent.py"],
+               "species_repair_a4ef": ["s1_extent.py"]}
+_unstated_all = []
+for t in TREES:
+    st, unst = residue(t)
+    _unstated_all += [(t, r, why) for r, why in unst]
+    check("%s: declined nothing unstated (%d stated)" % (t, len(st)),
+          not unst,
+          "NOT STATED: %s" % ["%s -- %s" % (r, w) for r, w in unst])
+for t, r, why in _unstated_all:
+    for sub in _subject_of.get(t, []):
+        check("%s names code/%s/%s, which its walk declined" % (sub, t, r),
+              r in OUT.get(sub, ""),
+              "the extent claims every regular file at any depth and this "
+              "entry is not in it: %s" % why)
+if not _unstated_all:
+    print("      nothing was declined outside the stated rules, in %d tree(s)."
+          % len(TREES))
+    print("      That is a MEASUREMENT of this run, not a list of the rules")
+    print("      anybody remembered: plant a symlinked directory and the row")
+    print("      above goes red without one line of this file changing.")
+print()
+
 
 # --- e2_crosssection.py -----------------------------------------------------
 print("  e2_crosssection.py -- claims every *.md under docs/ and code/")

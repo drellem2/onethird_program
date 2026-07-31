@@ -82,21 +82,80 @@ print()
 # walk is now `os.walk`, so the sentence is true BY CONSTRUCTION.  ONE
 # directory rule remains and it is PRINTED: `__pycache__` is not descended
 # into, because it holds bytecode these runs write themselves.
+#
+# mg-5040, on mg-4700's OPEN 1: AND THAT WAS THE SECOND GENERATION OF THE SAME
+# ACCIDENT.  "True BY CONSTRUCTION" held only while no tree contained a
+# SYMLINKED DIRECTORY: os.walk puts one in `dirnames` and does not descend
+# without `followlinks=True`, so a statement planted behind a link left this
+# checker silent again, word for word the paragraph above with one rule
+# substituted.  Each widening buys exactly one generation -- depth, symlinks,
+# then mount points, then a directory this process cannot read.
+#
+# So it is NOT widened a third time.  Of mg-5040's two options this takes the
+# FIRST -- state the walk's actual bound, so the claim and the code describe
+# the same set -- and states it in CODE rather than in prose: the walk returns
+# EVERY ENTRY IT DECLINED with the reason, whether or not the reason was
+# thought of in advance, the residue is printed, and anything in it that is
+# not the stated `__pycache__` rule is a finding.  The silence is what
+# generated the generations, and the silence is what is removed.
 PYCACHE = "__pycache__"
+STATED_DIR_RULES = (PYCACHE,)
+
+
+def walk_residue(root, stated_dirs=STATED_DIR_RULES):
+    """(files, stated, unstated) -- nothing is dropped without landing in one
+    of the last two.  `stated`/`unstated` are (relpath, reason) pairs.
+
+    Written out here rather than imported, for the reason e1_extents.py gives
+    for its own copy: three trees that must agree, computed independently, can
+    disagree, and a shared enumerator cannot disagree with itself.
+    """
+    files, stated, unstated = [], [], []
+    if not os.path.isdir(root):
+        return files, stated, unstated
+
+    def onerror(err):
+        p = getattr(err, "filename", None) or root
+        unstated.append((os.path.relpath(p, root),
+                         "os.walk raised %s and would otherwise have "
+                         "dropped it in silence" % err.__class__.__name__))
+
+    for dirpath, dirnames, filenames in os.walk(root, onerror=onerror):
+        keep = []
+        for d in sorted(dirnames):
+            p = os.path.join(dirpath, d)
+            rel = os.path.relpath(p, root)
+            if d in stated_dirs:
+                stated.append((rel, "directory rule, STATED: %s/" % d))
+            elif os.path.islink(p):
+                unstated.append((rel, "symlinked directory -- os.walk does "
+                                      "not descend without followlinks"))
+            else:
+                keep.append(d)
+        dirnames[:] = keep
+        for f in sorted(filenames):
+            p = os.path.join(dirpath, f)
+            rel = os.path.relpath(p, root)
+            if os.path.isfile(p):
+                files.append(rel)
+            elif os.path.islink(p):
+                unstated.append((rel, "symlink that does not resolve to a "
+                                      "regular file"))
+            else:
+                unstated.append((rel, "not a regular file"))
+    return sorted(files), sorted(set(stated)), sorted(set(unstated))
+
+
 FILES, UNDECODABLE = [], []
-for _dp, _dns, _fns in os.walk(SRC):
-    _dns[:] = sorted(_d for _d in _dns if _d != PYCACHE)
-    for _f in sorted(_fns):
-        _p = os.path.join(_dp, _f)
-        _rel = os.path.relpath(_p, SRC)
-        if not os.path.isfile(_p):
-            continue
-        try:
-            open(_p, encoding="utf-8").read()
-        except (UnicodeDecodeError, OSError):
-            UNDECODABLE.append(_rel)
-            continue
-        FILES.append(_rel)
+_REACHED, DECLINED_STATED, DECLINED_UNSTATED = walk_residue(SRC)
+for _rel in _REACHED:
+    _p = os.path.join(SRC, _rel)
+    try:
+        open(_p, encoding="utf-8").read()
+    except (UnicodeDecodeError, OSError):
+        UNDECODABLE.append(_rel)
+        continue
+    FILES.append(_rel)
 FILES.sort()
 UNDECODABLE.sort()
 NESTED = [f for f in FILES if os.sep in f]
@@ -108,6 +167,21 @@ print("# UTF-8 text: %s; skipped as %s: the whole directory rule)"
 if NESTED:
     for _f in NESTED:
         print("#   below the root: %s" % _f)
+print("# THE BOUND (mg-5040): 'every regular file' means every regular file")
+print("# THIS WALK REACHED.  It is os.walk without followlinks, so it enters")
+print("# no symlinked directory and reads no entry that is not a regular")
+print("# file -- and it now RETURNS what it declined, so that bound is a")
+print("# measurement and not a promise about the tree's shape:")
+for _r, _why in DECLINED_STATED:
+    print("#   declined, STATED:     %s   %s" % (_r, _why))
+for _r, _why in DECLINED_UNSTATED:
+    print("#   declined, NOT STATED: %s   %s" % (_r, _why))
+if not DECLINED_STATED and not DECLINED_UNSTATED:
+    print("#   declined: nothing at all")
+if DECLINED_UNSTATED:
+    print("#   ^ NOT STATED is a FINDING.  The extent line below claims every")
+    print("#     regular file at any depth and those entries are not in it.")
+bad += len(DECLINED_UNSTATED)
 print()
 LINES = {f: TEXT[f].splitlines() for f in FILES}
 
@@ -248,6 +322,16 @@ print("line made the same claim -- true, and true only because the tree had")
 print("no subdirectory (mg-6cb9 F1).  The one directory rule left is %s/,"
       % PYCACHE)
 print("and it is named here rather than left to be inferred from the code.")
+print("AND THE BOUND OF THAT SENTENCE IS STATED (mg-5040, on mg-4700's OPEN")
+print("1): it is every regular file THIS WALK REACHED.  A third rule was in")
+print("force and carried by no sentence -- os.walk does not follow a")
+print("SYMLINKED DIRECTORY -- so the claim was true a SECOND time only")
+print("because of a shape the tree happened to have.  It is not widened a")
+print("third time: the walk returns what it declined (%d stated, %d not"
+      % (len(DECLINED_STATED), len(DECLINED_UNSTATED)))
+print("stated, both listed at the head of this run) and a not-stated entry")
+print("is a finding, so the next rule nobody thought of arrives as RED")
+print("rather than as silence.")
 print("mg-6f61 enumerated ten stricken sentences; eight of")
 print("them are NOT on this list, and X3 and the AM 17.5 quotation were in")
 print("force in code/species_7d75 for the whole time this file reported")

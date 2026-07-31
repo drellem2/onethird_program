@@ -1,0 +1,153 @@
+
+==============================================================================
+R4a  KIND 1 -- THIS INSTRUMENT ENUMERATES BY WALKING, TOO
+==============================================================================
+
+  code/species_bound_repair_5040: 15 regular file(s) reached
+      declined: nothing at all
+  this instrument's own walk declines nothing unstated       ok
+
+  r3 also walks -- it reads every file tracked by git, twice.  That
+  enumeration is `git ls-files`, which has no depth rule, no symlink
+  rule and no extension rule to be silent about, because it is not a
+  filesystem traversal at all.  It has ONE bound and r3 states it in
+  its own output: a file that is not tracked is not in the census.
+  Untracked files in this worktree right now: 16
+      code/species_bound_repair_5040/OUTCOMES.md
+      code/species_bound_repair_5040/PREDICTIONS.md
+      code/species_bound_repair_5040/README.md
+      code/species_bound_repair_5040/kern5040.py
+      code/species_bound_repair_5040/out_r1_bound.txt
+      code/species_bound_repair_5040/out_r2_wiring.txt
+      code/species_bound_repair_5040/out_r3_summaries.txt
+      code/species_bound_repair_5040/out_r4_self.txt
+      code/species_bound_repair_5040/out_selftest.txt
+      code/species_bound_repair_5040/r1_bound.py
+  Named, so the bound of r3's census is visible and not asserted.
+
+
+==============================================================================
+R4b  KIND 2 -- THIS INSTRUMENT'S OWN run_all.sh, SPLIT THE SAME WAY
+==============================================================================
+
+  19 non-comment line(s); 0 of them are part of a multi-part
+  block of the kind mg-4700 F2 found inert:
+      (none -- every step is one statement, and `set -e`
+       carries every verdict)
+  no multi-part block in this runner                         ok
+  no `| tee` swallowing an exit code (mg-c2b3)               ok
+
+
+==============================================================================
+R4c  KIND 3 -- EVERY FIGURE THIS DELIVERABLE STATES, AGAINST ITS RUN
+==============================================================================
+
+  The defect: a number copied out of a run into a summary that nothing
+  compares back.  Two commit messages and a document carried one such
+  number for a whole ticket (OPEN 3).  So every `Rn TOTAL BAD: k`
+  claimed in this instrument's own prose is compared with the
+  transcript of that run, here, in the run itself.
+
+  from the committed transcripts: R1=0, R2=0, R3=0
+  OUTCOMES.md                        says R1 = 0   transcript 0   ok
+  OUTCOMES.md                        says R2 = 0   transcript 0   ok
+  OUTCOMES.md                        says R3 = 0   transcript 0   ok
+  OUTCOMES.md                        says R4 = 0   transcript None   reported, NOT scored: this run's transcript does not exist yet
+
+  R4c CANNOT check the commit message, because the commit does not
+  exist when this runs.  That is a real hole and naming it is the
+  point: the same hole is what let `A2 TOTAL BAD 1` into two commit
+  messages.  What closes it here is that every figure in the commit
+  message is required to appear in one of the files above FIRST, so
+  the message is a copy of something this check does cover.
+
+
+==============================================================================
+R4d  KIND 4 -- IS ANY COMPARISON IN THIS INSTRUMENT ANCHORED ON HEAD?
+==============================================================================
+
+  no comparison is anchored on HEAD (it is 4372fae)          ok
+  e2_crosssection.py DOES ask git for HEAD, and that is the opposite
+  case: it is not comparing against HEAD, it is RECORDING which
+  revision it measured, so that a stale copy reads as stale.
+
+
+==============================================================================
+R4e  BRANCHES THAT CANNOT EXHIBIT THE DEFECT, AND WHY
+==============================================================================
+
+  An omission is not checkable; a stated reason is.  Two branches of
+  the enumeration above are not checked, and here is each with the
+  reason a reader can argue with:
+
+  1. THE MATHEMATICS.  Nothing in this ticket reads, evaluates or
+     restates a mathematical claim.  The four checkers it edits match
+     SENTENCES; the repair changes which files they read and what
+     they say about that set.  A coverage defect cannot reach a
+     theorem through a file list.  Checkable: `git diff` touches no
+     file under a mathematics tree, which R4f measures rather than
+     asserts.
+  2. THE AUDITORS' INSTRUMENTS.  mg-6cb9's a2_crosssection.py and
+     mg-4700's q1..q4 make coverage claims of their own and are NOT
+     checked here -- deliberately, and not because they are safe.  An
+     instrument edited or graded by the thing it audits has stopped
+     being evidence.  They are run unmodified and whatever they say
+     is reported.  The reason this is not a hole: their claims are
+     ABOUT this repair, so an error in them shows up as a
+     disagreement with these rows, not as silence.
+
+
+==============================================================================
+R4f  R4e's FIRST REASON, MEASURED
+==============================================================================
+
+  29 path(s) differ from 4372fae (including untracked):
+      code/species_bound_repair_5040/OUTCOMES.md
+      code/species_bound_repair_5040/PREDICTIONS.md
+      code/species_bound_repair_5040/README.md
+      code/species_bound_repair_5040/kern5040.py
+      code/species_bound_repair_5040/out_r1_bound.txt
+      code/species_bound_repair_5040/out_r2_wiring.txt
+      code/species_bound_repair_5040/out_r3_summaries.txt
+      code/species_bound_repair_5040/out_r4_self.txt
+      code/species_bound_repair_5040/out_selftest.txt
+      code/species_bound_repair_5040/r1_bound.py
+      code/species_bound_repair_5040/r2_wiring.py
+      code/species_bound_repair_5040/r3_summaries.py
+      code/species_bound_repair_5040/r4_self.py
+      code/species_bound_repair_5040/run_all.sh
+      code/species_bound_repair_5040/selftest5040.py
+      code/species_extent_d633/e1_extents.py
+      code/species_extent_d633/e2_crosssection.py
+      code/species_extent_d633/kernd633.py
+      code/species_extent_d633/out_e1_extents.txt
+      code/species_extent_d633/out_e2_crosssection.txt
+      code/species_remainder_f8fa/out_w3_scope.txt
+      code/species_remainder_f8fa/run_all.sh
+      code/species_remainder_f8fa/w3_scope.py
+      code/species_repair_6f61/run_all.sh
+      code/species_repair_a4ef/out_s1_extent.txt
+      code/species_repair_a4ef/run_all.sh
+      code/species_repair_a4ef/s1_extent.py
+      docs/OneThird-Species-Hopf-Monoids-Bound-Repair.md
+      docs/OneThird-Species-Hopf-Monoids-Repair-Sites.md
+
+  Added lines mentioning theorem/lemma/proposition/proof: 0
+  These are reported and not scored: naming a theorem in a comment is
+  not restating one, and a rule that could tell them apart would be a
+  claim this instrument cannot support.  The row that IS scored is
+  that no file under a mathematics tree changed at all.
+  no file under code/species_7d75/ changed                   ok
+
+==============================================================================
+R4 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER.  FOUR kinds of artifact this deliverable
+produces, each checked against the OPEN item that could spoil it, plus
+TWO branches named as unable to exhibit the defect with a reason for
+each and one of those reasons measured.  It says NOTHING about whether
+the repair in r1-r3 is correct -- that is what r1-r3 are for -- and
+nothing about any artifact this ticket does not produce.  It cannot
+check the commit message, which does not exist yet, and says so above
+rather than leaving the reader to notice.

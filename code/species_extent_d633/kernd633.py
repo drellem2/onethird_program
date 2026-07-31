@@ -167,13 +167,54 @@ def strike_findings(text):
 
 def md_files(root):
     """Every .md file under `root`, repo-relative, sorted."""
-    out = []
-    for dp, dns, fns in os.walk(root):
-        dns[:] = [d for d in dns if d != "__pycache__"]
+    return md_files_and_residue(root)[0]
+
+
+def md_files_and_residue(root):
+    """(files, stated, unstated) -- and nothing is dropped without landing in
+    one of the last two.  `stated`/`unstated` are (repo-relative path, reason).
+
+    mg-5040, on mg-4700's OPEN 1.  "Every *.md under docs/ and under code/,
+    recursively" was true twice for reasons no sentence carried: no tree had a
+    subdirectory, and then no tree had a SYMLINKED DIRECTORY, which os.walk
+    puts in `dirnames` and does not descend into.  Rather than widen a third
+    time, the walk states its bound by RETURNING WHAT IT DECLINED -- including
+    the directories os.walk would otherwise swallow an error on -- so the next
+    rule nobody thought of arrives as a printed line instead of as silence.
+    """
+    out, stated, unstated = [], [], []
+
+    def rel(p):
+        return os.path.relpath(p, REPO)
+
+    def onerror(err):
+        p = getattr(err, "filename", None) or root
+        unstated.append((rel(p), "os.walk raised %s and would otherwise have "
+                                 "dropped it in silence"
+                         % err.__class__.__name__))
+
+    for dp, dns, fns in os.walk(root, onerror=onerror):
+        keep = []
+        for d in sorted(dns):
+            p = os.path.join(dp, d)
+            if d == "__pycache__":
+                stated.append((rel(p), "directory rule, STATED: __pycache__/"))
+            elif os.path.islink(p):
+                unstated.append((rel(p), "symlinked directory -- os.walk does "
+                                         "not descend without followlinks"))
+            else:
+                keep.append(d)
+        dns[:] = keep
         for fn in sorted(fns):
-            if fn.endswith(".md"):
-                out.append(os.path.relpath(os.path.join(dp, fn), REPO))
-    return sorted(out)
+            p = os.path.join(dp, fn)
+            if not fn.endswith(".md"):
+                continue
+            if os.path.isfile(p):
+                out.append(rel(p))
+            else:
+                unstated.append((rel(p), "named *.md but is not a regular "
+                                         "file"))
+    return sorted(out), sorted(set(stated)), sorted(set(unstated))
 
 
 # ---------------------------------------------------------------------------

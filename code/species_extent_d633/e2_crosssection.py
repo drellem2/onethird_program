@@ -37,18 +37,60 @@ rather than asserting it.
 
 import os
 import re
+import subprocess
 import sys
 
-from kernd633 import (hdr, REPO, RUN_MIN, RUN_FRAC, md_files, strike_findings,
-                      NEGATES, toks)
+from kernd633 import (hdr, REPO, RUN_MIN, RUN_FRAC, md_files_and_residue,
+                      strike_findings, NEGATES, toks)
 
 bad = 0
 ROOTS = [os.path.join(REPO, "docs"), os.path.join(REPO, "code")]
 
-FILES = []
+FILES, DECLINED_STATED, DECLINED_UNSTATED = [], [], []
 for r in ROOTS:
-    FILES += md_files(r)
+    _f, _st, _un = md_files_and_residue(r)
+    FILES += _f
+    DECLINED_STATED += _st
+    DECLINED_UNSTATED += _un
 FILES = sorted(set(FILES))
+DECLINED_STATED = sorted(set(DECLINED_STATED))
+DECLINED_UNSTATED = sorted(set(DECLINED_UNSTATED))
+
+
+def _anchor():
+    """The revision this run measured, or a stated reason there is none.
+
+    mg-5040, on mg-4700's OPEN 3 / F3.  The census printed at the foot of this
+    run is a property of A TREE, not of this checker, and a committed
+    transcript carrying it goes false the moment any commit adds a markdown
+    file.  Re-running at commit time does not repair that -- mg-821e did
+    exactly that in b534db7 and the work was then rebased onto a main eight
+    markdown files larger, so an artifact measured against the pre-rebase HEAD
+    shipped inside a different tree.  POST-COMMIT IS NOT POST-MERGE.  Naming
+    the revision converts a claim about "now", which nothing can keep true,
+    into a claim about a commit git cannot move -- which stays true, and lets
+    a reader tell STALE from WRONG without re-deriving anything.
+    """
+    try:
+        p = subprocess.run(["git", "-C", REPO, "rev-parse", "--short", "HEAD"],
+                           stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        rev = p.stdout.decode().strip()
+    except OSError:
+        rev = ""
+    if not rev:
+        return "NO REVISION -- git could not be asked, so this census is " \
+               "anchored to nothing and a reader should re-derive it"
+    try:
+        p = subprocess.run(["git", "-C", REPO, "status", "--porcelain"],
+                           stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        dirty = bool(p.stdout.decode().strip())
+    except OSError:
+        dirty = True
+    return "%s%s" % (rev, "\n(PLUS UNCOMMITTED CHANGES IN THE WORKTREE, so "
+                          "the count is not that commit's)" if dirty else "")
+
+
+ANCHOR = _anchor()
 
 
 # ---------------------------------------------------------------------------
@@ -192,6 +234,11 @@ bad += ctl
 print()
 
 
+# mg-5040: an entry the walk declined that is not the ONE stated directory
+# rule is a finding, not a footnote.  This is what stops "every *.md" being
+# true a third time by accident of the tree's shape.
+bad += len(DECLINED_UNSTATED)
+
 print("=" * 78)
 print("E2 TOTAL BAD: %d" % bad)
 print("=" * 78)
@@ -210,4 +257,31 @@ print("that document -- a claim struck here and asserted in ANOTHER file is")
 print("invisible to every checker in this repository, and that is the next")
 print("hole, named rather than closed.  And it matches VERBATIM RUNS: a claim")
 print("restated in different words, at any length, is invisible to it.")
+print()
+print("MEASURED AT %s (mg-5040, on mg-4700's F3)." % ANCHOR)
+print("The file count above is a property of a TREE, not of this checker: it")
+print("goes false the moment any commit adds or removes a markdown file, and")
+print("re-running at commit time does not repair that, because a merge queue")
+print("moves the tree afterwards.  POST-COMMIT IS NOT POST-MERGE -- mg-821e")
+print("re-ran this per Appendix A, was then rebased onto a main eight")
+print("markdown files larger, and shipped the pre-rebase artifact.  Naming")
+print("the revision is what makes a committed copy of this line STALE rather")
+print("than WRONG: git cannot move the revision, so the sentence stays true")
+print("of the tree it names, and a reader can tell the two apart without")
+print("re-deriving anything.  The mechanism is NOT removed by this and the")
+print("next commit that adds a markdown file will make the count stale again.")
+print()
+print("THE WALK'S RESIDUE, which is the other half of 'every *.md' (mg-5040,")
+print("on mg-4700's OPEN 1).  os.walk does not descend into a symlinked")
+print("directory, and it swallows the error on a directory it cannot read.")
+print("Rather than widen the walk a third time, it returns what it declined:")
+for _r, _why in DECLINED_STATED:
+    print("    declined, STATED:     %s" % _r)
+    print("        %s" % _why)
+for _r, _why in DECLINED_UNSTATED:
+    print("    declined, NOT STATED: %s" % _r)
+    print("        %s" % _why)
+if not DECLINED_STATED and not DECLINED_UNSTATED:
+    print("    nothing at all was declined")
+print("A NOT STATED entry is counted into E2 TOTAL BAD above.")
 sys.exit(1 if bad else 0)

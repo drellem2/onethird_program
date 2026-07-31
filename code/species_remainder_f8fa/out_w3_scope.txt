@@ -2,6 +2,12 @@
 
 # files read: 18, 0 of them below the tree root   (skipped as not
 # UTF-8 text: none; skipped as __pycache__: the whole directory rule)
+# THE BOUND (mg-5040): 'every regular file' means every regular file
+# THIS WALK REACHED.  It is os.walk without followlinks, so it enters
+# no symlinked directory and reads no entry that is not a regular
+# file -- and it now RETURNS what it declined, so that bound is a
+# measurement and not a promise about the tree's shape:
+#   declined: nothing at all
 
 ==============================================================================
 W3a  the corrected statements are not still ASSERTED in the instrument
@@ -66,6 +72,15 @@ rule existed until mg-821e and dropped every subdirectory while this
 line made the same claim -- true, and true only because the tree had
 no subdirectory (mg-6cb9 F1).  The one directory rule left is __pycache__/,
 and it is named here rather than left to be inferred from the code.
+AND THE BOUND OF THAT SENTENCE IS STATED (mg-5040, on mg-4700's OPEN
+1): it is every regular file THIS WALK REACHED.  A third rule was in
+force and carried by no sentence -- os.walk does not follow a
+SYMLINKED DIRECTORY -- so the claim was true a SECOND time only
+because of a shape the tree happened to have.  It is not widened a
+third time: the walk returns what it declined (0 stated, 0 not
+stated, both listed at the head of this run) and a not-stated entry
+is a finding, so the next rule nobody thought of arrives as RED
+rather than as silence.
 mg-6f61 enumerated ten stricken sentences; eight of
 them are NOT on this list, and X3 and the AM 17.5 quotation were in
 force in code/species_7d75 for the whole time this file reported

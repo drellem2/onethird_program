@@ -1,0 +1,173 @@
+
+==============================================================================
+R3a  THE ARTIFACT -- mg-6cb9's a2_crosssection.py, AT THE TREE THE SUMMARIES DESCRIBE
+==============================================================================
+
+  A BARE FIGURE NAMES NO TREE, WHICH IS THE WHOLE OF F3, and the first
+  version of this section walked straight into it: it compared the
+  summaries against a LIVE run in this worktree.  But `A2 TOTAL BAD` is
+  a property of a tree, and this ticket CHANGES the tree -- regenerating
+  the census turns one of the two rows green, so the live figure moves
+  under the comparison and a correction would be graded against a
+  number the correction itself caused.  That is F3 one level out, in
+  the file repairing F3.
+
+  So the artifact is run TWICE and the two are never mixed:
+      AT 4372fae -- the tree mg-821e's work shipped in, which is the tree
+      those summaries are ABOUT.  This is what they are graded against.
+      AT THIS WORKTREE -- reported, and not used to grade anything.
+
+  AT 4372fae   exit 1   A2 TOTAL BAD: 2
+      R29   OUT  the restatement, with 'corrected' in the NEXT paragr 0    1    1         *** MISSED ***
+      strike line 486   run  42 of  42 (100%)  restated at line 1257   *** STANDING UN-STRUCK ***
+      strike line 624   run  32 of  33 ( 97%)  restated at line 890    *** STANDING UN-STRUCK ***
+      the COMMITTED run's extent line is true at HEAD                *** FALSE, off by 23 ***
+      the committed CENSUS is right for the shipped tree             *** WRONG ***
+
+  IN THIS WORKTREE   exit 1   A2 TOTAL BAD: 1
+      R29   OUT  the restatement, with 'corrected' in the NEXT paragr 0    1    1         *** MISSED ***
+      strike line 486   run  42 of  42 (100%)  restated at line 1257   *** STANDING UN-STRUCK ***
+      strike line 624   run  32 of  33 ( 97%)  restated at line 890    *** STANDING UN-STRUCK ***
+      the COMMITTED run's extent line is true at HEAD                *** FALSE, off by -4 ***
+
+  THE TWO DIFFER, and the reason is this ticket: §4 of the repair
+  document regenerates code/species_extent_d633/out_e2_crosssection.txt,
+  which is the row mg-4700 raised.  The row that closes is an
+  ARTIFACT being made right for one tree; the MECHANISM is
+  untouched and the anchor line in e2's own output says so.  The
+  figure the summaries are wrong about is still 2: that is what
+  a2 says of the tree those summaries shipped in, and git cannot
+  move that tree.
+
+  the artifact produced a figure at the pin                  ok
+
+  NOT REPAIRED, AND DELIBERATELY: a2_crosssection.py is the auditor's
+  instrument.  An instrument edited by the thing it audits has stopped
+  being evidence, so nothing in this ticket touches it, and the number
+  above is whatever it says today.
+
+
+==============================================================================
+R3b  EVERY COPY OF THE FIGURE IN A COMMIT MESSAGE
+==============================================================================
+
+  Reachable from 4372fae, which git cannot move.  Not from HEAD: a census
+  that grows a row every time somebody commits is the defect F3 is
+  about, one level out.
+
+  5c16f5c  A2 TOTAL BAD 2, A2 TOTAL BAD 2, A2 TOTAL BAD 1   [about this artifact]
+      docs+audit: independent audit of the mg-821e repair (af432ee + b534d
+  41ac5d4  A2 TOTAL BAD 1   [about this artifact]
+      control+repair: PIN THE PRE-REPAIR REF AND STOP `tee` SWALLOWING A R
+  b534db7  A2 TOTAL BAD 1   [about this artifact]
+      evidence: PUBLISH THE POST-COMMIT MEASUREMENT — mg-6cb9's a2 re-run 
+
+  3 message(s) state the figure and are about this artifact.
+  2 of them are UNCORRECTED -- they state a value that is not the
+  artifact's 2 and do not state 2 anywhere:
+      41ac5d4  says [1]
+      b534db7  says [1]
+  1 carry the correction beside the old figure:
+      5c16f5c  says [2, 2, 1]
+
+
+==============================================================================
+R3c  EVERY COPY IN A COMMITTED FILE -- at the pin, and in this worktree
+==============================================================================
+
+  Measured both ways on purpose.  The pin's population is the one
+  mg-4700 measured and is IMMUNE TO THIS INSTRUMENT: no file of mine
+  is in it.  The worktree's population includes my own files, and the
+  difference between the two columns is exactly what I added, which
+  is declared rather than netted out.
+
+  file                                                     at 4372fae worktree
+  code/species_audit_a61f/out_a2_bidigare.txt              [0]        [0]
+  code/species_depth_audit_4700/OUTCOMES.md                [1, 2]     [1, 2]
+  code/species_depth_audit_4700/PREDICTIONS.md             [1]        [1]
+  code/species_depth_audit_4700/out_q4_standing.txt        [1, 2, 1, 1] [1, 2, 1, 1]
+  code/species_depth_audit_4700/q4_standing.py             [1, 1]     [1, 1]
+  code/species_extent_audit_6cb9/out_a2_crosssection.txt   [2]        [2]
+  code/species_sites_821e/out_a2_6cb9_after.txt            [1]        [1]
+  docs/OneThird-Species-Hopf-Monoids-Repair-Sites.md       [1]        [2]
+  /OneThird-Species-Hopf-Monoids-Sites-IndependentAudit.md [2, 2, 1]  [2, 2, 1]
+
+  9 file(s) at the pin, 9 in the worktree; 0 of the worktree's are
+  MINE and are named here rather than excluded by a rule:
+      (none)
+
+
+==============================================================================
+R3d  WHICH COPIES SHARE A SOURCE -- replication is not corroboration
+==============================================================================
+
+  THE PUBLISHED TRANSCRIPT code/species_sites_821e/out_a2_6cb9_after.txt
+  states 1.  It is the run mg-821e committed as its evidence, and it
+  is the SOURCE the summaries were copied from.
+
+  So the agreeing summaries are not 3 confirmations of a figure.
+  They are 3 copies of ONE run, taken in a worktree whose tree is
+  not the tree the work shipped in.  Nothing compared
+  the copy to the artifact until mg-4700 did, one ticket later.
+
+  The transcript is NOT edited.  It records a run that really
+  happened; changing its number to one that run did not produce would
+  be a forgery, and the correction record names it instead.
+
+
+==============================================================================
+R3e  DISPOSITION OF EVERY COPY, AND THE EDIT
+==============================================================================
+
+  The disposition of each copy is DERIVED in this order, and every
+  branch that declines to score a copy states why:
+      1. not about this artifact       -- the tag is not unique
+      2. carries the artifact's figure -- corrected in place
+      3. a record of a run             -- must not be edited
+      4. a scored prediction           -- corrected beside itself
+      5. editable prose                -- EDITED by this ticket
+      6. anything else                 -- UNCLASSIFIED, and a finding
+
+  code/species_audit_a61f/out_a2_bidigare.txt              [0]
+      1. NOT this artifact -- transcript of code/species_audit_a61f/a2_bidigare.py, which prints `A2 TOTAL BAD` as its OWN verdict
+  code/species_depth_audit_4700/OUTCOMES.md                [1, 2]
+      2. carries the artifact's figure 2 beside the old one
+  code/species_depth_audit_4700/PREDICTIONS.md             [1]
+      4. PREDICTION, scored *** MISSED *** in its own tree
+  code/species_depth_audit_4700/out_q4_standing.txt        [1, 2, 1, 1]
+      2. carries the artifact's figure 2 beside the old one
+  code/species_depth_audit_4700/q4_standing.py             [1, 1]
+      3. the INSTRUMENT that raised the discrepancy -- it quotes the old figure in order to compare it
+  code/species_extent_audit_6cb9/out_a2_crosssection.txt   [2]
+      2. carries the artifact's figure 2 beside the old one
+  code/species_sites_821e/out_a2_6cb9_after.txt            [1]
+      3. RECORD of a run -- not edited; in the correction record
+  docs/OneThird-Species-Hopf-Monoids-Repair-Sites.md       [2]
+      2. carries the artifact's figure 2 beside the old one
+  /OneThird-Species-Hopf-Monoids-Sites-IndependentAudit.md [2, 2, 1]
+      2. carries the artifact's figure 2 beside the old one
+
+  every copy has a disposition                               ok
+  1 copy(ies) excluded by rule 1, NAMED so the exclusion cannot grow
+  unseen -- which is the same principle as the extent lines in OPEN 1:
+      code/species_audit_a61f/out_a2_bidigare.txt  [0]
+  the one editable copy now carries the artifact's figure    ok
+  and the correction says WHY, not just what                 ok
+
+  P3d.  The ticket says THREE COMMIT MESSAGES say 1.  Measured: 2
+  commit message(s) state a figure that is not the artifact's, and the
+  third statement of the old figure is in a DOCUMENT, with a fourth in
+  the published transcript both messages were copied from.  The
+  ticket's own count is itself a figure that arrived in a summary; it
+  is reported here against the rows rather than repeated.
+
+==============================================================================
+R3 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER.  ONE figure -- `A2 TOTAL BAD` -- traced through
+every commit message reachable from 4372fae and every file tracked at
+that revision and in this worktree.  It says NOTHING about any other
+figure in any other summary: the general check is r4's business and is
+bounded there too.  It says nothing about whether mg-6cb9's a2 is
+right, only about whether the summaries match it.

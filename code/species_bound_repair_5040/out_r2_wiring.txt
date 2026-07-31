@@ -1,0 +1,141 @@
+
+==============================================================================
+R2a  THE THREE REWIRED RUNNERS, CLEAN
+==============================================================================
+
+  P2a.  Each runner's OWN stdout must carry the check's output.  A
+  call present in a script is not evidence of execution (mg-6cb9 F2),
+  so what is read below is the runner's stdout and not its source.
+
+  species_repair_a4ef        exit 0   prints `E2 TOTAL BAD:`  yes   ok
+  species_remainder_f8fa     exit 0   prints `E2 TOTAL BAD:`  yes   ok
+  species_repair_6f61        exit 0   prints `E2 TOTAL BAD:`  yes   ok
+
+
+==============================================================================
+R2b  B1 RESTORED ON DISK -- the runners must go red, and for this reason
+==============================================================================
+
+  Restoring: a claim struck in one section, restated UN-STRUCK in
+  another.  The restated text is taken from the document's own
+  first strike, so this probe cannot drift from what e2 looks for.
+  there is a multiplicity-free tower whose branching graph and pat...
+
+  species_repair_a4ef        exit 1   names STANDING UN-STRUCK  yes  ok
+  species_remainder_f8fa     exit 1   names STANDING UN-STRUCK  yes  ok
+  species_repair_6f61        exit 1   names STANDING UN-STRUCK  yes  ok
+
+  the document was restored, porcelain AND full diff         ok
+
+
+==============================================================================
+R2c  THE BLOCK, SPLIT AND DELETED ONE PART AT A TIME
+==============================================================================
+
+  The parts are COUNTED BY SPLITTING THE FILE, not asserted.  A part
+  is a non-comment, non-blank line of the wiring block.  Each is
+  deleted ALONE, with B1 restored, and the runner is executed.
+
+  species_repair_a4ef: 2 separable part(s) in the wiring block
+      line 58   echo "cross-section check (mg-821e), its own output, unfilte
+      line 59   python3 ../species_extent_d633/e2_crosssection.py
+  species_remainder_f8fa: 2 separable part(s) in the wiring block
+      line 63   echo "cross-section check (mg-821e), its own output, unfilte
+      line 64   python3 ../species_extent_d633/e2_crosssection.py
+  species_repair_6f61: 2 separable part(s) in the wiring block
+      line 52   echo "cross-section check (mg-821e), its own output, unfilte
+      line 53   python3 ../species_extent_d633/e2_crosssection.py
+
+  species_repair_a4ef    del echo "cross-section check (mg-821e -> exit 1, output yes  ok
+  species_repair_a4ef    del python3 ../species_extent_d633/e2_ -> exit 0, output no   ok
+  species_remainder_f8fa del echo "cross-section check (mg-821e -> exit 1, output yes  ok
+  species_remainder_f8fa del python3 ../species_extent_d633/e2_ -> exit 0, output no   ok
+  species_repair_6f61    del echo "cross-section check (mg-821e -> exit 1, output yes  ok
+  species_repair_6f61    del python3 ../species_extent_d633/e2_ -> exit 0, output no   ok
+
+  P2e.  The count above IS the claim: one part with a return.  R2d
+  runs the same split against the extracted pre-repair tree, so the
+  comparison is a measurement and not a quotation of mg-4700.
+
+
+==============================================================================
+R2d  THE SAME SPLIT AT 4372fae -- how many parts, and what each carried
+==============================================================================
+
+  species_repair_a4ef: 6 separable part(s) at the pin
+  species_remainder_f8fa: 6 separable part(s) at the pin
+  species_repair_6f61: 6 separable part(s) at the pin
+
+  Each part deleted alone at the pin, B1 restored, runner executed.
+  This tree is an extraction, so nothing here can touch the
+  worktree and no restore proof is needed or claimed.
+
+  species_repair_a4ef    del E2OUT=$(python3 ../species_extent_d633/e2_cr -> exit 1
+  species_repair_a4ef    del echo "$E2OUT" | grep 'STANDING UN-STRUCK' || -> exit 1
+  species_repair_a4ef    del exit 1                                       -> exit 0
+  species_repair_a4ef    del }                                            -> exit 2
+  species_repair_a4ef    del echo "cross-section check (mg-821e), its own -> exit 1
+  species_repair_a4ef    del echo "$E2OUT" | grep -E 'strike\(s\) measure -> exit 1
+  species_remainder_f8fa del E2OUT=$(python3 ../species_extent_d633/e2_cr -> exit 1
+  species_remainder_f8fa del echo "$E2OUT" | grep 'STANDING UN-STRUCK' || -> exit 1
+  species_remainder_f8fa del exit 1                                       -> exit 0
+  species_remainder_f8fa del }                                            -> exit 2
+  species_remainder_f8fa del echo "cross-section check (mg-821e), its own -> exit 1
+  species_remainder_f8fa del echo "$E2OUT" | grep -E 'strike\(s\) measure -> exit 1
+  species_repair_6f61    del E2OUT=$(python3 ../species_extent_d633/e2_cr -> exit 1
+  species_repair_6f61    del echo "$E2OUT" | grep 'STANDING UN-STRUCK' || -> exit 1
+  species_repair_6f61    del exit 1                                       -> exit 0
+  species_repair_6f61    del }                                            -> exit 2
+  species_repair_6f61    del echo "cross-section check (mg-821e), its own -> exit 1
+  species_repair_6f61    del echo "$E2OUT" | grep -E 'strike\(s\) measure -> exit 1
+
+  DERIVED FROM THE ROWS ABOVE, in three categories, because
+  "inert" and "the file no longer parses" are not the same thing
+  and a two-way split would hide one inside the other:
+      4 of 6 part(s) INERT -- the runner still exits 1 without
+          E2OUT=$(python3 ../species_extent_d633/e2_cr
+          echo "$E2OUT" | grep 'STANDING UN-STRUCK' ||
+          echo "$E2OUT" | grep -E 'strike\(s\) measure
+          echo "cross-section check (mg-821e), its own
+      1 part(s) LOAD-BEARING -- deleting one loses the verdict
+          exit 1
+      1 part(s) whose deletion leaves a script that does not
+      parse, which is not a deletion test at all and is reported
+      rather than scored as either:
+          }
+
+  mg-821e deletion-tested this block AS ONE UNIT, so none of the
+  distinctions above were visible to it.  mg-4700 split it into
+  three by hand; splitting by line gives 6.  That the two counts
+  differ IS the finding: the number of parts a block has depends on
+  how finely you choose to cut it, which is precisely why the
+  answer here is to leave nothing to cut.
+
+
+==============================================================================
+R2e  A CRASH IN e2 IS NO LONGER REPORTED AS A FINDING e2 DID NOT MAKE
+==============================================================================
+
+  mg-4700 F5: the deleted guard printed `a struck claim stands
+  un-struck elsewhere` for ANY non-zero exit, so with e2 made to raise
+  all three runners announced a specific finding that was never made,
+  and stderr was not captured so the traceback went elsewhere.  With
+  the guard gone there is nothing left to make the claim.  Measured,
+  with e2 made to raise on its first line:
+
+  species_repair_a4ef    exit 1  claims a finding: no   shows the crash: yes  ok
+  species_remainder_f8fa exit 1  claims a finding: no   shows the crash: yes  ok
+  species_repair_6f61    exit 1  claims a finding: no   shows the crash: yes  ok
+
+  e2_crosssection.py was restored                            ok
+
+==============================================================================
+R2 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THIS NUMBER.  Three runners, one wiring block each, split
+into parts BY READING THE FILE and deleted one part at a time with B1
+restored on disk, at HEAD and at 4372fae.  It says NOTHING about the
+other steps in those runners, nothing about the 17 runners mg-c2b3
+swept, and nothing about whether e2 is the right check -- only about
+whether this block has one unit and whether that unit has a return.
