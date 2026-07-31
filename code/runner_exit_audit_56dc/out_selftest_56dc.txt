@@ -1,0 +1,74 @@
+==============================================================================
+SELFTEST mg-56dc -- both senses, every rule
+==============================================================================
+
+==============================================================================
+1  count_rows -- the printed-count SHAPE, and what is NOT one
+==============================================================================
+
+  a label and a trailing integer is a count row              ok
+  two columns give two integers on one row                   ok
+  a SENTENCE is not a count row                              ok
+  a bare number with no label is not a count row             ok
+  a label with no number is not a count row                  ok
+
+==============================================================================
+2  grain_of -- SITE, EXECUTION, BOTH, NONE, and WHERE it was found
+==============================================================================
+
+  `executions` on the label is EXECUTION/label               ok
+  `source lines` on the label is SITE/label                  ok
+  a label naming both grains is BOTH                         ok
+  no grain word anywhere is NONE                             ok
+  a grain word one line up is found, and SAID to be          ok
+  a grain word only in a column header 4 lines up is `header` ok
+  a line with a DIGIT is not a column header                 ok
+
+==============================================================================
+3  the loop expander -- SITES and EXECUTIONS must DIFFER
+==============================================================================
+
+  a 3-item loop header expands to 3 literal items            ok
+  ...over 1 pipeline SOURCE LINE                             ok
+  ...which is 3 EXECUTIONS -- the two grains differ          ok
+  outside any loop, sites and executions coincide            ok
+  a `$VAR` loop is NOT statically expandable                 ok
+  ...and its pipeline is one row with iteration None, never counted as 1 ok
+  a `|` inside quotes is not a pipe                          ok
+  a commented pipeline is not a pipeline                     ok
+
+==============================================================================
+4  exec_site_rows vs exec_sites -- ROWS and SITES must differ
+==============================================================================
+
+  three rows over two distinct sites                         ok
+  one site naming one script is one row and one site         ok
+
+==============================================================================
+5  figures -- the threshold is a PARAMETER, and the two copies differ
+==============================================================================
+
+  `small=2` keeps 3, which is lib7522's rule                 ok
+  `small=3` drops 3, which is lib70c7's rule                 ok
+  both keep 4                                                ok
+  a `:`-prefixed number is a line reference, not a figure    ok
+  `on line 89` is a reference, not a figure                  ok
+  a comma'd figure survives                                  ok
+
+==============================================================================
+6  THIS TREE'S OWN RUNNER -- no pipeline, every step guarded
+==============================================================================
+
+  pipelines of any kind in run_all.sh                        ok
+  steps, each invoked through the `run` helper               ok
+  the helper reads its own status with an explicit guard     ok
+
+==============================================================================
+selftest56dc TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a rule of `lib56dc` that answers
+wrongly in either direction on a fixture written here.  It ranges over
+6 rules and 31 assertions, counted rather than written down.  It does
+NOT establish that the rules are the RIGHT rules for the question --
+that is what the probes' controls against pre-repair commits are for.

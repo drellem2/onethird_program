@@ -1,0 +1,126 @@
+==============================================================================
+T4  DO NOT DISTURB -- THE DISCLOSURES AND THE FIGURES
+==============================================================================
+
+==============================================================================
+T4a  mg-dee4's TREE AND ITS TWO DISCLOSURES
+==============================================================================
+
+      files of code/runner_exit_audit_dee4 changed since ba85387     0
+
+      the A5 reach-from-stdout defect                  4 of 4 phrase(s) present  OK
+      the kept P4 prediction miss                      2 of 2 phrase(s) present  OK
+      the second kept miss, the moving 263 -> 275 figure 1 of 1 phrase(s) present  OK
+
+  AND THE SAME QUESTION PUT TO THE PUBLISHED SIDE, because a
+  disclosure that survives in a transcript and vanishes from the
+  document is a disclosure a reader will not meet:
+
+      repair-mg-70c7-grain-and-population.md                2 disclosure phrase(s)
+      README.md                                             2 disclosure phrase(s)
+      OUTCOMES.md                                           6 disclosure phrase(s)
+
+==============================================================================
+T4b  mg-70c7's OWN KEPT MISSES AND RECORDED DEFECTS
+==============================================================================
+
+      rows in OUTCOMES.md scored MISS                     4
+          R4b    | **R4b** | the 4 new claims include `code/runner_exit_c2b3/OUTC
+          R6c    | **R6c** | widened P2 at `bee07a1` between 21/29 and 28/40 | **
+          R6d    | **R6d** | at least 2 files in the widened P2 at HEAD | **MISS 
+          R6e    | **R6e** | every discarded status of the new member, read direc
+
+      the heading says `Five defects in this instrument`  yes
+      numbered defect paragraphs under it                  5
+
+      the published document names the same five         yes
+      ...and the two prediction misses                   yes
+
+==============================================================================
+T4c  THE POPULATION TABLE AT bee07a1, RE-DERIVED
+==============================================================================
+
+  The predicate is `lib7522`'s, used AT ITS SOURCE and not copied: the
+  question here is whether the PUBLISHED FIGURE still holds under the
+  rule that produced it.  Whether that rule is the right one is T3's
+  question and it is asked with fixtures written from scratch.
+
+      row                                            published    re-derived   
+      P0  tracked `*.sh`, any depth, no name rule    72           72           AGREES
+          ...of which named `run_all.sh`             64           64           AGREES
+      P1  files / pipelines                          (23, 53)     (23, 53)     AGREES
+      P2  ERREXIT arm, files / pipelines             (19, 26)     (19, 26)     AGREES
+      P2  EITHER arm, files / pipelines              (20, 27)     (20, 27)     AGREES
+          shape rule -- a real `| tee`               (19, 42)     (19, 42)     AGREES
+          name rule -- `| tee` in a `run_all.sh`     (17, 34)     (17, 34)     AGREES
+
+      rows of the published population table re-derived   7 of 7
+
+==============================================================================
+T4d  THE PROPERTY POPULATION AT 1ee1f1b^, AND 0 AT HEAD
+==============================================================================
+
+  mg-dee4's C3 says the property population at 1ee1f1b^ is EXACTLY the four
+  files mg-7522 repaired.  That claim is under the ERREXIT clause, so
+  it is checked under the ERREXIT clause; the widened clause is
+  reported beside it rather than substituted for it.
+
+      the ERREXIT population at 1ee1f1b^           4 file(s)
+          code/face_geometry_audit_f1b2/run_audit.sh               as published
+          code/face_geometry_audit_fcf1/run_audit.sh               as published
+          code/state_delegation_audit_16eb/run_all.sh              as published
+          code/state_delegation_repair_0049/run_all.sh             as published
+
+      the WIDENED population at the same ref      5 file(s)
+          code/branching_audit_a218/c0_repro.sh                    the member the VALUE arm adds (F6)
+          code/face_geometry_audit_f1b2/run_audit.sh               
+          code/face_geometry_audit_fcf1/run_audit.sh               
+          code/state_delegation_audit_16eb/run_all.sh              
+          code/state_delegation_repair_0049/run_all.sh             
+
+      the ERREXIT arm at HEAD                   0 file(s), 0 pipeline(s)
+      the WIDENED population at HEAD            1 file(s), 1 pipeline(s)
+
+      `lib7522.PINNED` is a literal revision     bee07a1
+      the COMPARISON, anchored to it            1 call(s)
+      a HEAD-anchored call beside it            1 call(s)
+      ...labelled as the EXHIBITION, not the comparison   yes -- the source says `0 BY CONSTRUCTION`
+      The comparison is still against a fixed pre-repair ref, and
+      the moving one is the 2x2's own exhibit of why it must not be.
+
+==============================================================================
+T4e  THE 8 EXECUTIONS, RUN -- at the execution grain
+==============================================================================
+
+  execution                                      discarded stage                        exit
+  state_delegation_audit_16eb/run_all.sh:38#1    diff a4aeeb9..HEAD -- code/state_layer 0
+  state_delegation_audit_16eb/run_all.sh:38#2    diff 3a80d99..HEAD -- code/state_deleg 0
+  state_delegation_audit_16eb/run_all.sh:38#3    diff 2a29f30..HEAD -- code/state_deleg 0
+  state_delegation_audit_16eb/run_all.sh:39#1    diff a4aeeb9..HEAD -- code/state_layer 0
+  state_delegation_audit_16eb/run_all.sh:39#2    diff 3a80d99..HEAD -- code/state_deleg 0
+  state_delegation_audit_16eb/run_all.sh:39#3    diff 2a29f30..HEAD -- code/state_deleg 0
+  state_delegation_repair_0049/run_all.sh:39#1   diff a4aeeb9..HEAD -- code/state_layer 0
+  state_delegation_repair_0049/run_all.sh:39#2   diff 3a80d99..HEAD -- code/state_deleg 0
+
+      EXECUTIONS run here                         8
+      ...exiting 0                                8
+      SOURCE LINES those executions come from     3
+
+==============================================================================
+T4 TOTAL FINDINGS: 0   TOTAL BAD: 0
+==============================================================================
+
+(nothing disturbed: mg-dee4's tree is byte-unchanged, both of its
+ disclosures and all four of mg-70c7's kept misses are present, the
+ seven published population rows re-derive, the property population
+ is the four repaired files at 1ee1f1b^ and the errexit arm is 0 at
+ HEAD, the comparison anchor is fixed, and 8 of 8 executions exit 0)
+
+EXTENT OF THOSE NUMBERS.  TOTAL BAD counts a changed file in mg-dee4's
+tree, a disclosure phrase that is gone, a kept miss that is no longer
+scored MISS, a published population row that does not re-derive, a
+property-population member that is not one of the four, a non-zero
+errexit arm at HEAD, a moving comparison anchor, and a non-zero
+discarded status among the 8.  It ranges over mg-dee4's tree, mg-70c7's
+OUTCOMES and document, every tracked `*.sh` at bee07a1 / 1ee1f1b^ / HEAD, and the
+8 executions of 3 source lines.  It does NOT re-measure mg-c2b3's 34.

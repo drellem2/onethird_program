@@ -1,0 +1,163 @@
+==============================================================================
+T2  THE STRICTEST RULE, RUN AGAINST THE REPAIR'S OWN ARTIFACTS
+==============================================================================
+
+==============================================================================
+T2a  E1, THE GRAIN RULE -- POINTED AT THE PROSE IT EXEMPTED
+==============================================================================
+
+  THE RULE, and the one line that defines what it ranges over:
+
+      MY_OUTS = M.outs(M.TREE)          <- `out_*.txt` of one directory
+      for out in MY_OUTS:
+
+  `R2c` in the same tree names four artifacts as *my reader-facing
+  artifacts* and censuses them for FIGURES in `R6b`.  E1 -- the rule
+  that repairs F1, the largest finding -- never reaches them.  Its
+  population is a glob over a path, which is the shape of F5.
+
+      the population E1 HAS (7 transcripts)         30 lines checked, 6 quoted, 0 with NO grain word
+      the four artifacts E1 has NOT                 48 lines checked, 6 quoted, 0 with NO grain word
+
+  THE LINES E1 WOULD HAVE FLAGGED IF ITS POPULATION HAD REACHED THEM.
+  Every one is printed with its file and line, not summarised:
+
+      (none -- the prose passes the rule it was not run under)
+
+      count lines inside E1's population        30, 0 flagged
+      count lines outside it                    48, 0 flagged
+
+  NOTE, kept rather than softened: the rule flags nothing in that
+  prose.  The finding is the POPULATION and not a body count -- a
+  rule that is not run cannot be said to have passed, which is
+  mg-dee4's own argument about `0 USES` over `*.py` + `*.sh`.
+
+==============================================================================
+T2b  EVERY MARKER NAMED IN PROSE, PUT TO THE RULE THAT COUNTS
+==============================================================================
+
+  mg-dee4's F3 instance: `verified` was NAMED as a marker in three
+  places and was in no rule.  `R3a` repaired that by putting THE THREE
+  MARKERS THE D4 DOCSTRING NAMES to the merged rule.  Three is not the
+  population.  The population is every marker any artifact in this arc
+  names AS a marker, collected here from the sources:
+
+      marker                 MARK (9)    MARK_OLD(3) mg-dee4(10) in the merged rule?
+      `(measured)`           yes         no          yes         yes
+      `all 8`                yes         no          yes         yes
+      `byte for byte`        yes         no          yes         yes
+      `byte-identical`       yes         yes         yes         yes
+      `confirmed`            yes         no          yes         yes
+      `confirmed exactly`    yes         yes         yes         yes
+      `exactly 8`            yes         no          yes         yes
+      `identical`            yes         no          yes         yes
+      `proven`               no          yes         yes         *** NO ***
+      `verified`             yes         no          yes         yes
+
+      alternatives in the merged `MARK`                  9
+      alternatives in the old self-facing `MARK_OLD`     3
+      alternatives in mg-dee4's own D4 union            10
+      markers in an arc rule and NOT in the merged one   1   `proven`
+
+  AND mg-dee4's OWN TRANSCRIPT NAMES IT, which is what makes this a
+  regression rather than a preference:
+      in SELF and not in SUBJECT        1   proven
+
+      *** a marker the arc's own rules name is not in the rule ***
+      *** that produces the number                             ***
+
+==============================================================================
+T2c  THE MARKER RULE'S SELF-FACING POPULATION -- `.md` again
+==============================================================================
+
+  `r6_self.py` builds `mine_src` from `MINE_PY + MINE_SH` and runs the
+  marker rule over it.  `R3b` in the same tree faults mg-7522 for
+  exactly that population, in these words:
+
+      "A self-check whose population stops at two suffixes has a
+       population defined by a name, which is the finding one
+       directory over."
+
+      mg-70c7's self-facing marker population    9 file(s)  (8 py, 1 sh)
+      its own `*.md`, OUTSIDE it                 3 file(s)
+          code/runner_exit_repair_70c7/OUTCOMES.md
+          code/runner_exit_repair_70c7/PREDICTIONS.md
+          code/runner_exit_repair_70c7/README.md
+      its published document, OUTSIDE it         1 file(s)
+          docs/repair-mg-70c7-grain-and-population.md
+
+  THE MERGED RULE, RUN OVER THE FOUR ARTIFACTS IT DOES NOT REACH,
+  scored under R6b's OWN quoting exclusion so the comparison is fair:
+
+      MENTIONs                                   10
+      USEs                                        6
+      ...BACKED by a transcript of this arc       3
+      ...with no figure in the window             2
+      ...quoted inside a correction or a scored prediction   1
+      ...UNBACKED                                 0
+
+  NOTE, kept rather than softened: nothing UNBACKED escaped.  The
+  finding is that 6 USEs were outside the population, not that a
+  figure got through -- R6b's FIGURE census does reach these files,
+  and that is why the escape is a reach and not a hole.
+
+==============================================================================
+T2d  THE FLOOR ITEM -- two copies of one rule that disagree
+==============================================================================
+
+  NOTHING IN THE BRIEF NAMES THIS, and it is what I chose to audit on
+  my own account.  mg-70c7's answer to F3 is *one rule object*:
+
+      "Two rules cannot be kept in step by intention; they can be kept
+       in step by being one object."
+
+  `MARK` is one object.  `figures()` is not: `lib7522.figures` and
+  `lib70c7.figures` are two copies of the same rule, with the same
+  docstring, the same exclusions -- and a different threshold.
+
+      lib70c7.py   _SMALL = 3
+      lib70c7.py   if v <= _SMALL:
+      lib7522.py   if v > 2:
+
+      integers 0..500 where the two copies DISAGREE     1   [3]
+      ...and where they agree                         500
+
+  WHERE IT BITES, traced rather than asserted.  `r3_strength.py` R3c
+  computes an UNBACKED count with `lib70c7.figures` and then compares
+  it against the number `out_s5_self.txt` printed, which was computed
+  with `lib7522.figures`.  The two derivations are declared equal and
+  a disagreement raises BAD:
+
+      if theirs is not None and theirs != unbacked:
+      print("      *** the two derivations disagree (%d here) ***" % unbacke
+
+      a figure of exactly 3 in a marker's window is a FIGURE to
+      `lib7522` and NOT a figure to `lib70c7`, so the two sides of
+      that equality are not computing the same predicate.  Neither
+      docstring says which threshold it is at; both say `Excludes 0, 1
+      and 2`, and one of them excludes 3 as well.
+
+      lib70c7's docstring says it excludes 0, 1 and 2   1 time(s)
+      ...and its code excludes 0, 1, 2 and             3
+
+      *** two copies of one rule, disagreeing, in the repair of ***
+      *** the finding that two rules cannot be kept in step     ***
+
+==============================================================================
+T2 TOTAL FINDINGS: 4   TOTAL BAD: 0
+==============================================================================
+
+FINDING: T2a the strictest rule mg-70c7 applies to anything -- `r6_self.py`'s E1, *every count over source carries a grain word* -- has a population of `M.outs(M.TREE)`: the `out_*.txt` of one directory.  The README, OUTCOMES.md, PREDICTIONS.md and the published document, which the same tree's R2c names as *my reader-facing artifacts* and censuses for FIGURES in R6b, are outside it.  Run unchanged over those four here, the rule examines 48 count lines it never saw and flags 0.  A self-check whose population is a glob over a path is the shape of F5, in the section that repairs F1
+FINDING: T2b the *one rule object* mg-70c7 merged is the SUBJECT's nine alternatives verbatim, not the union: `proven` was an alternative of the old self-facing `MARK_OLD` and of mg-dee4's own D4 union, and is not in the merged `MARK`.  mg-dee4's transcript names it in a row of its own -- `in SELF and not in SUBJECT 1 proven`.  `R3a` cannot see this because it puts only the THREE markers the D4 docstring names to the rule, and three is not the population of markers this arc names
+FINDING: T2c mg-70c7's own self-facing marker check (`r6_self.py` R6c) runs over `MINE_PY + MINE_SH` -- 9 files -- and its own 3 `*.md` plus the published document are outside it.  That is the population half of F3 reproduced in the section that repairs F3, and the same tree's R3b faults mg-7522 for it in those words.  Run over the four here, the merged rule finds 6 USEs (3 BACKED, 2 with no figure, 1 quoted in a correction, 0 UNBACKED) that its self-check never examined
+FINDING: T2d FLOOR ITEM, chosen by me and named in no list: `lib70c7.figures()` and `lib7522.figures()` are two copies of one rule that disagree on exactly the value(s) 3 -- `v <= _SMALL` with `_SMALL = 3` against `v > 2` -- while both docstrings say they exclude *0, 1 and 2*.  mg-70c7's answer to F3 is that two rules cannot be kept in step by intention and must be ONE OBJECT; it made `MARK` one object and left `figures()` two, and `r3_strength.py` R3c raises BAD when its own `lib70c7`-computed UNBACKED count differs from the `lib7522`-computed one in `out_s5_self.txt`
+
+EXTENT OF THOSE NUMBERS.  TOTAL FINDINGS counts a rule whose population
+cannot reach the artifacts its own tree calls reader-facing, a marker
+named by a rule in this arc and absent from the rule that produces the
+number, a self-facing population that stops at two suffixes, and two
+copies of one rule that disagree.  It ranges over mg-70c7's 8 `*.py`,
+1 `*.sh`, 3 `*.md`, its published document and its 7 transcripts,
+plus the two libraries and mg-dee4's committed A4 transcript.  It does
+NOT judge whether a grain WORD is the right one, and it does not
+re-measure mg-c2b3's 34.
