@@ -96,7 +96,11 @@ necessary and **not sufficient**. `s4_unpin.py` runs the anchor × rule 2×2 —
 | | literal path only | + runtime path |
 |---|---|---|
 | **pinned `bee07a1`** | 1 site | 19 sites |
-| **HEAD, unpinned** | 1 site | 47 sites |
+| **HEAD, unpinned** | 1 site | 48 sites |
+
+(The `HEAD` row grows as the arc does — that is the point of the row, and
+`out_s4_unpin.txt` carries the live count. The load-bearing claim is the cell
+the next paragraph names, not the totals.)
 
 — and `code/species_depth_audit_4700/` appears in **exactly one cell**: HEAD ×
 runtime-path. The pin and a line-local rule demanding a literal
@@ -142,6 +146,8 @@ with it is possible. A predicate nobody can disagree with is not a definition.
 
 `code/runner_exit_c2b3/out_*.txt` are **not regenerated**. A transcript is the
 record of a run at a time; rewriting it would destroy mg-05eb's citations of it
-and would not be reproducible anyway — the arc has grown from 64 runners to 71
-since. The corrected readings are published here, and `k1_census.py`'s docstring
+and would not be reproducible anyway — the arc has grown well past the 64
+runners that census counted. (The current count is deliberately not written
+here: a number that moves belongs in a transcript, and `s3_figure.py` prints
+it.) The corrected readings are published here, and `k1_census.py`'s docstring
 points at them.

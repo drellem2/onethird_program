@@ -12,7 +12,7 @@
 | **Q6** | P2 at `bee07a1`: 19 files / 26 lines | **MEASURED FIRST — not scored** |
 | **Q7** | name-missed and shape-missed sets are disjoint and neither empty | **HIT** — 2 files/8 lines and 2 files/3 lines |
 | **Q8** | P2 at HEAD after this repair: 0 / 0 | **HIT** |
-| **Q9** | `*.sh` at HEAD > 72 | **HIT** — 79 |
+| **Q9** | `*.sh` at HEAD > 72 | **HIT** — see `out_s1_population.txt`; the number moves as the arc grows, which is the point of the row |
 | **Q10** | all 11 discarded statuses exit 0 | **HIT** — 11 of 11 |
 | **Q11** | PRE-repair control: 8 of 8 SWALLOW | **HIT** |
 | **Q12** | repaired control: 8 of 8 CAUGHT | **HIT** |
