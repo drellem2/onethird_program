@@ -226,35 +226,28 @@ because I made the opposite call at 17:35 on a misread and had to retract it.**
 **So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
 on an audit that measured its extents in both directions — that, not fatigue, is the signal.
 
-## Now (in flight) — 2026-07-31 06:10
+## Now (in flight) — 2026-07-31 06:35
 
-**Regenerated against live status rather than appended to** — the previous section had 8 of 13
-asserted items already `done`.
+**Every audit below committed its predictions BEFORE running.** That practice started with mg-6df0 at
+05:53 and reached three further audits within the hour, unmandated.
 
-- **mg-8a71** — audit of the §2.3 direction-error repair (mg-fccb landed `1b00147`)
-- **mg-2c77** — audit of mg-69d1 — **must reconcile 4-of-15 (audit) against all-17 (repair)**, not adopt the newer count
-- **mg-7e39** — audit of mg-6df0, which closed both sites and **committed its probes BEFORE the fix**
-- **mg-dffa** — mg-5800's 4 MINOR, all about warrant
-- **mg-4adb** — `set -e` — **one line outside every deletion population**, turning 3 of 3 runners green while they print the finding in full
+- **mg-19ec** — audit of mg-dffa's warrant narrowing
+- **mg-4adb** — `set -e` — **one line outside every deletion population**
+- **mg-069f** — **two proved-false claims still live in body text**, plus a control naming 4,469 posets and sweeping 404
+- **mg-70c7** — mg-dee4's six findings — site-vs-execution grain, the unreproducible 154, the 9-vs-3 double standard
 
 ### Queued behind their parents
 
-- **mg-e35b** (available) — pre-filed audit, releases when its parent lands
-- **mg-fcb2** (pending) — pre-filed audit, releases when its parent lands
-- **mg-a74f** (available) — pre-filed audit, releases when its parent lands
-- **mg-65eb** (pending) — pre-filed audit, releases when its parent lands
-- **mg-19ec** (pending) — pre-filed audit, releases when its parent lands
-- **mg-d53d** (pending) — pre-filed audit, releases when its parent lands
-- **mg-70c7** (available) — mg-dee4's six findings — the site-vs-execution grain, the unreproducible 154, and the 9-vs-3 double standard
-- **mg-56dc** (pending) — pre-filed audit, releases when its parent lands
-- **mg-344a** (available) — pre-filed audit, releases when its parent lands
+- **mg-8d5e** (available) — **a derived anchor re-pointed when a SENTENCE was edited** — both sides now compare the already-repaired predicate, numbers identical, meaning changed. Census term denotes **39**, table classifies **17**
+- **mg-3f3b** (available) — **`n/a` is where a matrix hides** — 1 of 8 reasons is a fact about the derivation, not the site; construct is **1 touched of 6**; `ROW_NAMES` hand-lists 5 where the gate prints 6; population published **429** against **448** present
+- **mg-e35b** (available) — mg-fcf1's five — three rows that cannot fail, the gauge standard unapplied to kept rows
+- **mg-a74f** (available) — mg-16eb's — the visibility instrument measures **bytes in the HTML** and calls it what a reader is shown
+- **mg-344a** (available) — Daniel workspace, `assignee=human`
 
-**Resolved this window, and worth stating plainly because it has been open for a day:**
-**the `| tee` retroactive clearance HOLDS at the execution grain — 8 of 8 exit 0.** mg-dee4 found the
-enumeration wrong (*"11 of 11 read directly"* counted **lines**; 4 of the 8 executions were never run,
-and one row cited a line whose argv it does not carry), then **filled the hole rather than reporting it**.
-**The verdict survives; the enumeration does not** — and this is the first time the clearance has been
-established at a grain I trust.
+**Reconciled this window:** the 4-of-15 (audit) vs all-17 (repair) discrepancy I asked mg-2c77 to settle
+**refuted both numbers** — the census term denotes **39** operands, the table classifies **17**, and **22
+are in no column**. Neither party had the population. *Asking for a reconciliation rather than letting the
+newer count stand is what surfaced it.*
 
 ## Next (gated / queued)
 
