@@ -1,0 +1,337 @@
+==============================================================================
+A4  THE REPAIR'S OWN STRONGEST WORDING
+==============================================================================
+
+==============================================================================
+A4a  THE RULE IT JUDGES ITSELF BY, AND THE RULE IT JUDGES ITS SUBJECT BY
+==============================================================================
+
+  The three markers mg-7522 NAMES, in `s5_self.py`'s D4 docstring, in
+  its README and in the published document:
+
+      `confirmed exactly`  in the SELF rule: True    in the SUBJECT rule: True
+      `verified`           in the SELF rule: False   in the SUBJECT rule: True
+      `byte-identical`     in the SELF rule: True    in the SUBJECT rule: True
+
+      alternatives in the SELF rule     3   confirmed exactly, byte-identical, proven
+      alternatives in the SUBJECT rule  9   confirmed exactly, byte-identical, byte for byte, verified, (measured), identical, confirmed, all <n> / all of, exactly <n>
+      in SELF and not in SUBJECT        1   proven
+      in SUBJECT and not in SELF        7   byte for byte, verified, (measured), identical, confirmed, all <n> / all of, exactly <n>
+
+  THE DOCSTRING OF THE CHECK, verbatim, next to the regex that runs it:
+      D4  A STRENGTH MARKER STANDING IN FOR A CHECK -- "confirmed exactly",
+      "verified", "byte-identical" used where nothing was re-derived.
+      lib7522.py:559  _STRENGTH = re.compile(r"confirmed exactly|byte-identical|\bproven\b", re.I)
+
+==============================================================================
+A4b  THE TWO POPULATIONS
+==============================================================================
+
+      `MINE_PY + MINE_SH`, the D4 population           9 files
+      `*.md` in the same directory, OUTSIDE it         3 files
+          code/runner_exit_repair_7522/OUTCOMES.md
+          code/runner_exit_repair_7522/PREDICTIONS.md
+          code/runner_exit_repair_7522/README.md
+      the published document, OUTSIDE it               1 file
+          docs/OneThird-RunnerExit-PopulationRepair.md
+
+  WHY THAT MATTERS HERE AND NOT IN GENERAL.  mg-05eb's OPEN 2 -- the
+  defect this section of mg-7522 repairs -- was a figure wrong in FOUR
+  reader-facing artifacts: the README, `OUTCOMES.md`, the published
+  document, and one docstring.  Three of those four are file kinds the
+  D4 population excludes.  The check is aimed away from where its own
+  subject's defect lived.
+
+  MG-7522 STATES THIS EXTENT -- in the transcript, not in the summary:
+      EXTENT OF THAT NUMBER.  It counts, over this tree's 8 `*.py` and 1
+      `*.sh` files only: a pipeline of this tree's own in P2, a step that
+      `shell=True`.  It does not range over the rest of the repository --
+
+      README.md                4. **D4, a strength marker standing in for a check.*
+      the published document   * **A strength marker standing in for a check.** **0
+
+  THAT IS MG-7522'S OWN F3, WITH THE ROLES UNCHANGED: the instrument
+  was right, printed its extent, and the summary dropped it.
+
+==============================================================================
+A4c  MG-7522'S SUBJECT RULE, TURNED ON MG-7522
+==============================================================================
+
+  S3a's predicate, verbatim: a reader-facing artifact is a file the
+  commit touched, under the instrument's directory or under `docs/`,
+  that is not a committed transcript.  A CLAIM is a line carrying BOTH
+  a strength marker and a number.  Here the commit is 1ee1f1b.
+
+      artifacts: 14
+          code/runner_exit_repair_7522/OUTCOMES.md
+          code/runner_exit_repair_7522/PREDICTIONS.md
+          code/runner_exit_repair_7522/README.md
+          code/runner_exit_repair_7522/lib7522.py
+          code/runner_exit_repair_7522/run_all.sh
+          code/runner_exit_repair_7522/s1_population.py
+          code/runner_exit_repair_7522/s2_status.py
+          code/runner_exit_repair_7522/s3_figure.py
+          code/runner_exit_repair_7522/s4_unpin.py
+          code/runner_exit_repair_7522/s5_self.py
+          code/runner_exit_repair_7522/selftest7522.py
+          code/runner_exit_repair_7522/sitecustomize_mg7522.py
+          docs/OneThird-RunnerExit-ArcWideSweep.md
+          docs/OneThird-RunnerExit-PopulationRepair.md
+
+      strength-marked numeric claims in mg-7522's own artifacts: 31
+
+    artifact                       disposition            how it was checked
+    OUTCOMES.md:16                 re-derived             a figure a probe in
+                                                          this tree recomputes
+                                                          in the run that
+                                                          prints it
+    OUTCOMES.md:51                 re-derived             a figure a probe in
+                                                          this tree recomputes
+                                                          in the run that
+                                                          prints it
+    OUTCOMES.md:68                 quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    PREDICTIONS.md:49              quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    README.md:16                   prose about the subject a sentence
+                                                           describing
+                                                           mg-c2b3's result or
+                                                           this tree's own
+                                                           layout; the number
+                                                           in it is mg-c2b3's
+                                                           population, re-
+                                                           derived in S1 and
+                                                           A1a
+    README.md:80                   quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    README.md:81                   re-derived             a figure a probe in
+                                                          this tree recomputes
+                                                          in the run that
+                                                          prints it
+    lib7522.py:546                 quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    run_all.sh:4                   stated runtime         a stated wall-clock,
+                                                          not a measurement of
+                                                          the subject; the
+                                                          same disposition S3b
+                                                          gives mg-c2b3's
+                                                          `About 4 minutes`
+                                                          row
+    s1_population.py:198           prose about the subject a sentence
+                                                           describing
+                                                           mg-c2b3's result or
+                                                           this tree's own
+                                                           layout; the number
+                                                           in it is mg-c2b3's
+                                                           population, re-
+                                                           derived in S1 and
+                                                           A1a
+    s2_status.py:3                 quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:10                quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:136               quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:156               quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:183               own rule               a detecting regex or
+                                                          a disposition
+                                                          verdict; a mention
+    s3_figure.py:185               quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:197               quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:209               quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:211               quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:223               quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:225               quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:226               quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    s3_figure.py:322               quotation              mg-c2b3's OWN
+                                                          wording, being
+                                                          dispositioned by
+                                                          S3b; a mention
+    OneThird-RunnerExit-ArcWideSweep.md:43 quotation              mg-c2b3's
+                                                                  OWN wording,
+                                                                  being dispos
+                                                                  itioned by
+                                                                  S3b; a
+                                                                  mention
+    OneThird-RunnerExit-ArcWideSweep.md:48 quotation              mg-c2b3's
+                                                                  OWN wording,
+                                                                  being dispos
+                                                                  itioned by
+                                                                  S3b; a
+                                                                  mention
+    OneThird-RunnerExit-ArcWideSweep.md:119 quotation              mg-c2b3's
+                                                                   OWN
+                                                                   wording,
+                                                                   being dispo
+                                                                   sitioned by
+                                                                   S3b; a
+                                                                   mention
+    OneThird-RunnerExit-ArcWideSweep.md:251 quotation              mg-c2b3's
+                                                                   OWN
+                                                                   wording,
+                                                                   being dispo
+                                                                   sitioned by
+                                                                   S3b; a
+                                                                   mention
+    OneThird-RunnerExit-PopulationRepair.md:24 prose about the subject a sente
+                                                                       nce des
+                                                                       cribing
+                                                                       mg-
+                                                                       c2b3's
+                                                                       result
+                                                                       or this
+                                                                       tree's
+                                                                       own
+                                                                       layout;
+                                                                       the
+                                                                       number
+                                                                       in it
+                                                                       is mg-
+                                                                       c2b3's
+                                                                       populat
+                                                                       ion,
+                                                                       re-
+                                                                       derived
+                                                                       in S1
+                                                                       and A1a
+    OneThird-RunnerExit-PopulationRepair.md:81 quotation              mg-
+                                                                      c2b3's
+                                                                      OWN
+                                                                      wording,
+                                                                      being di
+                                                                      spositio
+                                                                      ned by
+                                                                      S3b; a
+                                                                      mention
+    OneThird-RunnerExit-PopulationRepair.md:104 quotation              mg-
+                                                                       c2b3's
+                                                                       OWN wor
+                                                                       ding,
+                                                                       being d
+                                                                       isposit
+                                                                       ioned
+                                                                       by S3b;
+                                                                       a
+                                                                       mention
+    OneThird-RunnerExit-PopulationRepair.md:130 quotation              mg-
+                                                                       c2b3's
+                                                                       OWN wor
+                                                                       ding,
+                                                                       being d
+                                                                       isposit
+                                                                       ioned
+                                                                       by S3b;
+                                                                       a
+                                                                       mention
+
+      31 claims: 1 own rule, 3 prose about the subject, 23 quotation, 3 re-derived, 1 stated runtime
+
+  COVERAGE, BOTH DIRECTIONS.  A hit with no rule and a rule with no hit
+  are each an error -- mg-7522's own standard, applied to mg-7522.
+      rule `quotation`            matched 23 line(s)  
+      rule `own rule`             matched 7 line(s)  
+      rule `re-derived`           matched 4 line(s)  
+      rule `prose about the subject` matched 3 line(s)  
+      rule `stated runtime`       matched 1 line(s)  
+
+      claims mg-7522's SELF rule would have caught: 7
+      claims mg-7522's SUBJECT rule catches:        31
+
+  THE POINT IS NOT THAT 31 IS ALARMING.  Almost every one is mg-c2b3's
+  own wording being quoted while it is dispositioned -- which is what
+  a repair of a wording defect looks like.  The point is that the
+  number mg-7522 published about itself is 0, and 0 is what you get
+  when the rule has three alternatives instead of nine and the
+  population excludes every `.md`.
+
+==============================================================================
+A4d  THE CLAIM RULE IS LINE-LOCAL, AND THE STRONGEST CLAIM WRAPPED
+==============================================================================
+
+  S3a scores a CLAIM as a LINE carrying both a marker and a number.
+  In a hard-wrapped markdown paragraph the marker and its figure land
+  on different lines routinely.  The claim this audit most wanted to
+  check is exactly such a case:
+
+      OUTCOMES.md:88  `wc -c < FILE` counts the same bytes the pipeline did, verified against the
+                     ^ marker `verified`, digits on this line: False
+      OUTCOMES.md:89  pre-repair output (`0 / 0 / 0 / 0 / 2111 / 0`, unchanged).
+                     ^ the figure.  A line-local rule sees
+                       neither line as a claim.
+
+  THE SAME RULE WITH A ONE-LINE WINDOW, over both populations:
+
+      mg-c2b3's artifacts (S3a's own subject)    window 0:  20   window 1:  24   (+4)
+          mg-7522 published 20 for this population.
+      mg-7522's own artifacts                    window 0:  31   window 1:  40   (+9)
+
+  DOES ANY PROBE IN MG-7522'S TREE PRODUCE THAT FIGURE?  Asked of the
+  OUTPUT, not of the source.  A grep of the source for `wc -c` scores
+  the comment that explains why `wc -c` is no longer in a pipeline --
+  which is the mention-for-occurrence defect mg-7522 recorded three
+  times in its own OUTCOMES.md.  So the question is put to the
+  committed transcripts instead: does the number appear in any of them?
+
+      committed transcripts in mg-7522's tree             6
+      of those printing the figure `2111`                 0
+
+  SO: the marker is doing the work of an instrument, in the tree
+  whose thesis is that markers should not.  A2d ran both arms on
+  the same inputs and the claim HOLDS -- which is the outcome that
+  makes this reportable rather than damning.  `verified` was
+  checkable, was not checked by its author, and turned out true.
+
+==============================================================================
+A4 TOTAL BAD: 3
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a named marker missing from the rule
+that produces `0 USES`, a summary printing that 0 without the extent
+its own transcript states, an undispositioned strength-marked claim in
+mg-7522's own artifacts, and a disposition rule that matches nothing.
+It ranges over the 14 artifacts of 1ee1f1b and over mg-7522's own two rules.
+It does NOT range over the transcripts, which are records of a run.
+
+FINDING: A4a `verified` is named as one of the three markers in the D4 docstring, in the README and in the published document, and is absent from `lib7522._STRENGTH` -- the rule that produces the `0 USES` those documents print
+FINDING: A4b README.md prints `0 USES` without the extent its own transcript states -- the count ranges over `*.py` and `*.sh` only, and the README, OUTCOMES.md and the published document are outside it
+FINDING: A4b the published document prints `0 USES` without the extent its own transcript states -- the count ranges over `*.py` and `*.sh` only, and the README, OUTCOMES.md and the published document are outside it
+FINDING: A4d S3a's CLAIM rule is LINE-LOCAL: a marker and its figure on adjacent lines is not scored.  Widening the window by one line takes mg-c2b3's own artifacts from 20 to 24 claims, so the published `20 strength-marked numeric claims, every one dispositioned` is a count under a rule that a hard wrap can step over
+FINDING: A4d `verified against the pre-repair output (0 / 0 / 0 / 0 / 2111 / 0, unchanged)` is carried by the word `verified` alone -- no probe in mg-7522's tree computes a byte count.  A2d runs both arms and the claim HOLDS at 8 of 8; the finding is that mg-7522's own general form was not applied to it

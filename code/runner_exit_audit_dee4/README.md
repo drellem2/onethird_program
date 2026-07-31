@@ -103,7 +103,8 @@ Two things the section does not carry: the repaired target regex is **still a
 name rule with two names** (9 executing sites at HEAD outside it, 4 reading the
 status, and **0** sites naming the `run_audit.sh` it added); and the published
 figure **`154 changed files`** matches **no anchor** — the instrument's own
-transcript says **166** and `main` today says **263**.
+transcript says **166**, and the worktree-against-the-pin figure moves as
+the arc grows, so it is left in `out_a3_anchor.txt` rather than written here.
 
 ### 4 — the strongest wording, checked first as the ticket asks
 
