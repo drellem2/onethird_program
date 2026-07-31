@@ -4,7 +4,7 @@ mg-3f3b -- mg-7e39's four findings, repaired and controlled
 
 S0 -- PREFLIGHT
 ---------------
-    HEAD                     : c1a57fdd8d8c
+    HEAD                     : 3d7b32fdd240
     the runner, unmutated    : exit 0
     F1 (pipe-table alignment) : POST -- repaired
     F5 (derived vocabulary)  : POST -- repaired
@@ -141,16 +141,16 @@ carry a number, because prose has no publication step.
 
     .py under code/ at 77306a7 (mg-6df0 landed) : 448
     .py under code/ at 803bd50 (its parent)    : 448
-    .py under code/ at HEAD^  8a07ae0       : 473
-    .py under code/ at HEAD   c1a57fd       : 473
+    .py under code/ at HEAD^  c1a57fd       : 473
+    .py under code/ at HEAD   3d7b32f       : 473
     .py under code/ in the WORKING TREE       : 473
 
        code/hodge_leverage_repair_6df0/out_repair_6df0.txt
         publishes 473, and the tree at c1a57fdd8d8c -- the commit that last wrote it -- holds 473
-    -- code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt
-        NOT YET PUBLISHED at any commit (absent, or modified in the working tree).  This row becomes a measurement at the commit that lands it
+       code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt
+        publishes 473, and the tree at 3d7b32fdd240 -- the commit that last wrote it -- holds 473
 
-  [CONFIRMED] S4a of the 1 committed transcript(s) that publish a `.py` population, 0 disagree with the tree AT THE COMMIT THAT PUBLISHES THEM.  This is the check mg-7e39's F2 is the failure of, and it is keyed on each transcript's OWN publishing commit rather than on HEAD -- so a merge that lands elsewhere cannot make it red, and a transcript committed beside a tree it does not describe cannot make it green.  1 are not yet published at any commit and are named rather than counted as passes
+  [CONFIRMED] S4a of the 2 committed transcript(s) that publish a `.py` population, 0 disagree with the tree AT THE COMMIT THAT PUBLISHES THEM.  This is the check mg-7e39's F2 is the failure of, and it is keyed on each transcript's OWN publishing commit rather than on HEAD -- so a merge that lands elsewhere cannot make it red, and a transcript committed beside a tree it does not describe cannot make it green.  0 are not yet published at any commit and are named rather than counted as passes
   [CONFIRMED] S4b 0 population figure(s) are CARRIED as a number in the 4 prose file(s) this arc publishes for the sweep.  Predicted 0: prose points at the transcript line, because a number in prose has no publication step that recomputes it and goes stale silently at the next merge.  A figure inside a QUOTATION is exempt, and that is ONE rule rather than a skip-list -- it is how a correction note states the figure it corrects
   [MEASURED ] S4c THE HISTORICAL FACT, FROM GIT: the transcript as committed at 77306a7 publishes 429 and the tree at 77306a7 holds 448 `.py` files under `code/` -- 19 in the population and not in the number.  Re-derived here from `git ls-tree` at that commit, not quoted from mg-7e39
 
@@ -164,9 +164,9 @@ S5 -- THIS DELIVERABLE, CHECKED FOR THE FOUR SHAPES IT REPAIRS
 S6 -- THE ORDERING, RE-DERIVED FROM GIT
 ---------------------------------------
     this instrument first committed at : 1d1d5b184eaf
-    commits from there to HEAD          : 4
+    commits from there to HEAD          : 5
     `verify_landing.py` last changed at : 96670ebb08e2
-  [MEASURED ] S6a the predictions and this instrument are committed at 1d1d5b184eaf, 4 commit(s) before HEAD.  'Predict before measuring' is a claim about the repository and is read out of `git log` here rather than asserted in prose
+  [MEASURED ] S6a the predictions and this instrument are committed at 1d1d5b184eaf, 5 commit(s) before HEAD.  'Predict before measuring' is a claim about the repository and is read out of `git log` here rather than asserted in prose
 
 SUMMARY
 -------

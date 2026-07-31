@@ -948,10 +948,16 @@ def py_files_at(rev):
 
 def publishing_commit(rel):
     """The commit that last changed `rel` -- the commit whose tree a figure
-    inside `rel` is a figure ABOUT.  None when the file is modified in the
-    working tree, in which case the working tree is what publishes it."""
-    if git("status", "--porcelain", "--", rel).strip():
-        return None
+    inside `rel` is a figure ABOUT.  None when the file has never been
+    committed.
+
+    ⚠️ THE WORKING TREE IS DELIBERATELY IGNORED.  What a reader meets is what
+    is PUBLISHED, and an uncommitted regeneration is not published.  An earlier
+    version of this returned None whenever the file was dirty, which made this
+    deliverable's own transcript permanently exempt: every run rewrites it (it
+    embeds HEAD), so it was always dirty and the row always read "not yet
+    published".  A check that is structurally unable to fail on its author is
+    the shape this whole deliverable is about."""
     return git("log", "-1", "--format=%H", "--", rel).strip() or None
 
 
@@ -1002,9 +1008,8 @@ carry a number, because prose has no publication step.
         if rev is None:
             unpublished.append(rel)
             print(f"    -- {rel}")
-            print(f"        NOT YET PUBLISHED at any commit (absent, or "
-                  f"modified in the working tree).  This row becomes a "
-                  f"measurement at the commit that lands it")
+            print(f"        NEVER COMMITTED, so nothing is published yet.  "
+                  f"This row becomes a measurement at the commit that lands it")
             continue
         text = git("show", f"{rev}:{rel}")
         m = POP_FIGURE.search(text)
