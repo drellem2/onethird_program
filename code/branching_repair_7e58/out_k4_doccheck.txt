@@ -1,0 +1,67 @@
+==========================================================================
+K4  THE DOCUMENT'S FIGURES, READ AT THE SITE, AGAINST THE RUN
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) EVERY GATED FIGURE, READ AT ITS OWN SITE
+--------------------------------------------------------------------------
+   figure                                   document   run
+     g1 deletion probes, §0                       4        4   agree
+     g1 probe count, §0                           4        4   agree
+     c1's measuring half, §0                    125      125   agree
+     pairs agreeing, §0                          10       10   agree
+     pairs total, §0                             10       10   agree
+     cell comparisons, §0                       240      240   agree
+     members re-run, §0                           5        5   agree
+     c0_repro, §0                                 5        5   agree
+     locality probes, §0                          5        5   agree
+     pairs agreeing, §3 table                    10       10   agree
+     pairs total, §3 table                       10       10   agree
+     cell comparisons, §3 table                 240      240   agree
+     members re-run, §3 table                     5        5   agree
+     members green, §3 table                      4        4   agree
+     c0_repro, §3 table                           5        5   agree
+     locality probes, §3 table                    5        5   agree
+     frozen records, §4 B9                        7        7   agree
+     selftest assertions, §5                     65       65   agree
+     cells compared by c1, §4 B2                198      198   agree
+
+   figures gated : 19 of the 19 gates listed in this script's GATES
+   table, each anchored to one line of OneThird-Bratteli-Path-Algebras-Mg7e58ProvenanceRepair.md
+   disagreements : 0
+
+--------------------------------------------------------------------------
+(ii) THE DELETION TEST -- EVERY GATE MADE TO FIRE AT ITS OWN SITE
+--------------------------------------------------------------------------
+   Each figure is corrupted ALONE, at its own site, in a scratch copy
+   of the document, and the gate must go red naming that figure.  A null probe
+   changes an unrelated word and must stay green.
+
+     g1 deletion probes, §0                   4 -> 11   FIRES
+     g1 probe count, §0                       4 -> 11   FIRES
+     c1's measuring half, §0                  125 -> 132   FIRES
+     pairs agreeing, §0                       10 -> 17   FIRES
+     pairs total, §0                          10 -> 17   FIRES
+     cell comparisons, §0                     240 -> 247   FIRES
+     members re-run, §0                       5 -> 12   FIRES
+     c0_repro, §0                             5 -> 12   FIRES
+     locality probes, §0                      5 -> 12   FIRES
+     pairs agreeing, §3 table                 10 -> 17   FIRES
+     pairs total, §3 table                    10 -> 17   FIRES
+     cell comparisons, §3 table               240 -> 247   FIRES
+     members re-run, §3 table                 5 -> 12   FIRES
+     members green, §3 table                  4 -> 11   FIRES
+     c0_repro, §3 table                       5 -> 12   FIRES
+     locality probes, §3 table                5 -> 12   FIRES
+     frozen records, §4 B9                    7 -> 14   FIRES
+     selftest assertions, §5                  65 -> 72   FIRES
+     cells compared by c1, §4 B2              198 -> 205   FIRES
+
+     NULL PROBE (unrelated word changed)      green
+
+   probes firing : 19 of 19, population: one corruption per gated
+   figure, each mutating that figure alone at its own site.
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone, subprocess run and parse this script performs
+FINDINGS: 0, population: every figure this repair's document publishes that is derived from a committed out_k*.txt, read at its own site, plus one corruption probe per gate and one null probe
+TOTAL BAD: 0

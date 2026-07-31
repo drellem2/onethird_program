@@ -25,6 +25,15 @@ each script **before** it was run, together with the one miss, kept as written.
 
 ## The two answers, up front
 
+> **CORRECTED (`mg-7e58`, on `mg-321d`'s `G-1`).** The sentence below says
+> `c1_branching.py` is byte-identical at `286d5030` and `d1dd84d2`. That was
+> true when written and this ticket's own commit made it false: `673b4c0`
+> widened `c1`. What is **still** true, and is what the sentence was for, is
+> that **the measurement did not move** — run both revisions against the same
+> target, on both target forms, `c1`'s sections (i)+(ii) are byte-identical
+> (125 lines, `a8db5dbd4c758765`) and `kern_a218.py` never moved at all. `g1`
+> now asks it that way; see `g1 (v)`.
+
 **B. THE REPRODUCTION STANDS AT `286d5030902d`, and it is redone at HEAD.**
 `c1_branching.py` and `kern_a218.py` are byte-identical at `286d5030` and at
 `d1dd84d2`; `c1` reads exactly **one** external file
@@ -65,10 +74,10 @@ defect this arc keeps paying for.
 |---|---|
 | `lib58da.py` | the reading and re-running apparatus. `run_c1()` re-runs `c1_branching.py` **at a named revision** against target text the caller supplies, in a scratch tree — which is what lets the same script be run at the old revision, at the new one, and against a target corrupted one character at a time. The parsers share no line with `c1`'s, which is the reason the two can disagree about whether the datum is there |
 | `selftest_58da.py` | the apparatus before it is used: **99 assertions**, including a cell-locality sweep over all 24 vertex cells (corrupting one must move the parse **at** that cell and **nowhere else**), the parsers' behaviour on absent and hostile input, and `replace_once` refusing to corrupt zero sites or two |
-| `g1_provenance.py` | **QUESTION B.** The revision named; `c1`'s read path found in its source rather than assumed; every commit touching each part; `sha256` of the measuring half at both revisions; the re-run at `286d5030` byte-compared against the committed record; and whether the **measurement** moved or only the **comparison** (it did not move — sections (i)+(ii) are byte-identical, 125 lines) |
+| `g1_provenance.py` | **QUESTION B.** The revision named; `c1`'s read path found in its source rather than assumed; every commit touching each part; the re-run at `286d5030` byte-compared against the committed record; and whether the **measurement** moved or only the **comparison** (it did not move — sections (i)+(ii) are byte-identical, 125 lines). **Section (v) added by `mg-7e58`:** the measuring-half question is settled by running **both script revisions against the same target**, on both target forms, and the `sha256` of `c1_branching.py` is now **reported and concluded from by nothing** — it was a file-grain answer to a measurement-grain question, and this ticket's own commit tripped it |
 | `g2_redo.py` | **QUESTION B at HEAD.** The 24 vertex cells recovered from the set block `mg-13b2` installed and compared as sets and as counts; the same 24 on all four kernels in the tree, pairwise; and **24 corruption probes**, one per cell, each required to go red at that cell and nowhere else |
 | `g3_findings.py` | **QUESTION A.** The mechanism measured (4 rows match `c1`'s regex at `286d5030`, 0 at HEAD); the 24 classified **one at a time** into CONFIRMED / PARSER ARTIFACT / UNKNOWN; and the **non-findings** audited — 7 corruption probes on the dimension and edge channels, plus a null probe and a control on the count channel *at the old revision, where it was live* |
-| `g4_fleet.py` | **the property that lives BETWEEN the instruments.** The five named; who touched which member and by which commit; all five run at three revisions; the figures more than one member carries compared across members and across instruments; `c0_repro.sh`; the repair deletion-tested in the direction that matters — the widened `c1`, handed a target it cannot read, must raise **SELF-ERRORS and not FINDINGS**; and **(vii)**, found by making this ticket's own correction: `mg-d330`'s `e4` gate on the exit-code sentence is a **presence test** with no state for *present and marked*, evaluated on three variants |
+| `g4_fleet.py` | **the property that lives BETWEEN the instruments.** The five named; who touched which member and by which commit — **derived from `git log` by `mg-7e58`, and gated against `g4`'s own rows**, because the old expression attributed by *"is it committed yet"* and began naming `ed9cde4` as `c1`'s author the instant `673b4c0` landed; all five run at three revisions; the figures more than one member carries compared across members and across instruments; `c0_repro.sh`; the repair deletion-tested in the direction that matters — the widened `c1`, handed a target it cannot read, must raise **SELF-ERRORS and not FINDINGS**; and **(vii)**, found by making this ticket's own correction: `mg-d330`'s `e4` gate on the exit-code sentence is a **presence test** with no state for *present and marked*, evaluated on three variants |
 
 ## What this ticket changed outside its own directory
 

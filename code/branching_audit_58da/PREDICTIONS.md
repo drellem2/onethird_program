@@ -150,3 +150,37 @@ correction recorded in the source, and all 7 now fire.
 I predicted my own probe labels would be right and they were not, which is the
 third time in this arc that an instrument's *description of what it measured*
 went wrong while the measurement itself was fine.
+
+---
+
+## Addendum, `mg-7e58` (2026-07-31) — `P2` and `P5` were right; the instrument drifted away from them
+
+`mg-321d` audited this ticket and found that **the record above was correct and
+`g1` and `g4` stopped agreeing with it the instant `673b4c0` landed.** Nothing
+in this file is rewritten; what follows is what became of two of its
+predictions.
+
+* **`P2  python3 g1_provenance.py -> 0` … ACTUAL 0 HIT.** True when recorded and
+  false one commit later. `g1` answered *"did the measuring half change?"* with
+  a **file sha**; this ticket's own edit moved `c1_branching.py` and did not
+  move the measurement, so from `673b4c0` onward `g1` exited **1** on a finding
+  its own section (iv) refutes. `P2`'s own sub-prediction — *"c1's own sections
+  (i)+(ii) — the MEASUREMENT — are byte-identical between the two revisions →
+  yes"* — is the fact that refutes it, and it is still true. `mg-7e58` moves the
+  predicate to that grain and shows it firing; `g1` exits `0` again, and `P2`
+  reproduces.
+
+* **`P5 … of mg-a218's five scripts, touched by ed9cde4 -> 1 (c2)`, `of the
+  five, touched by THIS ticket -> 1 (c1)`.** Both right, and `g4` printed
+  **2 and 0** on the tree as committed, because it attributed by *"committed sha
+  vs working-tree sha"* rather than by commit — an expression true for exactly
+  as long as the change was uncommitted. `mg-7e58` derives the attribution from
+  `git log` and gates the summary against `g4`'s own rows, and `g4` now prints
+  the two figures `P5` predicted.
+
+The general point, and it is why this addendum is here rather than an edit
+above: **a prediction can be honestly made, honestly recorded, verified, and
+still stop being true — and the thing that made it stop was this ticket's own
+commit.** Evidence taken before its own commit exists is evidence about a tree
+that will not survive the commit. `mg-7e58`'s `k2` branch `B1` is the check that
+falls out of it: clone the worktree, commit the repair there, re-run.

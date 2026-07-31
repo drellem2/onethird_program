@@ -41,6 +41,37 @@ gates are deletion-tested one figure at a time.
 **What is *not* found:** no defect in the mathematics, none in the 24-cell
 census, none in `B`'s reproduction, and no merged verdict.
 
+> **`mg-7e58` (2026-07-31) — `G-1`, `G-2` and `G-3` are CLOSED; the figures
+> above are left exactly as this audit took them.**
+>
+> Every number in this document is a measurement of the tree at `ef38841` and
+> stays that way — `h5_doccheck.py` gates each one at its site against this
+> audit's own committed `out_h*.txt`, and neither those outputs nor these
+> figures are regenerated. What has changed is the **tree**, so the
+> present-tense claims here about what `g1` and `g4` *do* no longer describe it:
+>
+> * `g1_provenance.py` now settles the measuring-half question by running both
+>   script revisions against the same target, on both target forms, rather than
+>   by comparing a file `sha256`. It **exits `0`**, and it is shown going **red**
+>   on a c1 whose measurement really moved — the disposition is *the section is
+>   right and `g1` should not fire*, and it is not reached by silencing `g1`.
+> * `g4_fleet.py` derives its attribution from `git log` and gates its summary
+>   against its own rows. It reports `ed9cde4` → **1** (`c2_vertexsets.py`) and
+>   `673b4c0` → **1** (`c1_branching.py`), which is what `mg-58da`'s own `P5`
+>   predicted.
+> * `./run_all.sh` in `code/branching_audit_58da/` reproduces its committed
+>   outputs again.
+>
+> `h2_grain.py` — **this audit's own finder for both sites**, unmodified —
+> re-run against the repaired tree books **0 findings** where its committed
+> record has **3**. `h1`, `h3`, `h4` and `h5` are unmoved at `0`, `1`, `2`, `0`.
+>
+> **`M-1` and `M-2` are NOT closed** and nothing in that repair touches them:
+> `g1`'s record check still compares two git blobs and never the file in the
+> tree, and the narrowing still covers absence and not misread. See
+> `code/branching_repair_7e58/` and
+> `docs/OneThird-Bratteli-Path-Algebras-Mg7e58ProvenanceRepair.md`.
+
 ---
 
 ## 1. Were the two questions actually kept separate?

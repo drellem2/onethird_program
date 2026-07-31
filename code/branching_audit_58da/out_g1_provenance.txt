@@ -13,8 +13,8 @@ mathematics being 'untouched': the script is run and its own output is read.
       docs+audit: independent audit of the mg-db09 repair (mg-e8b8 / 2e66d03) — THE WITHDRAWAL IS REAL
    ed9cde49ab81  mg-13b2 -- the repair that widened one script
       docs+repair: THE VERTEX COLUMN REPORTS THE SET AND THE LABELS ARE MEASURED — the column that pri
-   d1dd84d21c5c  HEAD of this branch
-      evidence+control: THE INSTRUMENT THAT RAISED THE FINDINGS NOW REPORTS ZERO — mg-835f's own audit
+   ef38841710ed  HEAD of this branch
+      docs+audit: independent audit of the mg-58da repair (673b4c0) — THE TWO QUESTIONS ARE KEPT SEPAR
 
 --------------------------------------------------------------------------
 (ii) c1'S READ PATH, FOUND IN ITS SOURCE RATHER THAN ASSUMED
@@ -24,13 +24,16 @@ mathematics being 'untouched': the script is run and its own output is read.
 
    the one external file c1 reads:  code/branching_locate_db09/out_t1_tl.txt
 
-   commits touching each part of the reproduction, 286d5030..d1dd84d2:
-      c1_branching.py  (the script)                  NONE
+   commits touching each part of the reproduction, 286d5030..ef388417:
+      c1_branching.py  (the script)                  673b4c00
       kern_a218.py  (its kernel -- the meas)         NONE
       out_t1_tl.txt  (the target it compares)        ed9cde49
 
-   sha256 of the measuring half, at both revisions:
-      c1_branching.py          bddeb6c4f57f70cb ... bddeb6c4f57f70cb   SAME
+   sha256 of c1 and its kernel, at both revisions -- REPORTED, and
+   NOTHING IS CONCLUDED FROM IT (mg-7e58 / mg-321d G-1: a file sha is
+   the wrong grain for the question 'did the measurement move'; that
+   is settled by running both revisions, in (v)):
+      c1_branching.py          bddeb6c4f57f70cb ... 8bacc19be4d85a57   CHANGED
       kern_a218.py             70356cbca847bc20 ... 70356cbca847bc20   SAME
 
    THE CHANGE DID TOUCH THE READ PATH: ed9cde49.
@@ -68,6 +71,55 @@ mathematics being 'untouched': the script is run and its own output is read.
    c1's own 24 vertex sets, both runs, cell by cell: all 24 equal
 
 --------------------------------------------------------------------------
+(v) DID THE MEASURING HALF MOVE?  ASKED OF THE MEASUREMENT, NOT THE FILE
+--------------------------------------------------------------------------
+   REPAIRED HERE (mg-7e58, on mg-321d's finding G-1).  Section (ii) used
+   to book "c1_branching.py's sha changed" as "the measuring half of the
+   reproduction is not the same code" and exit 1 on it.  That is a provenance
+   question answered at the grain of a FILE.  The property is about a
+   MEASUREMENT, and the two grains give opposite answers on this very tree:
+   mg-58da edited c1's COMPARING half, so the file moved and the measurement
+   did not.
+
+   So it is measured.  Both script revisions are run against THE SAME target
+   -- both target forms, because a check run on one form says nothing about
+   the other -- and c1's sections (i)+(ii), which read nothing outside the
+   instrument, are diffed byte for byte, together with its own 24 vertex sets
+   parsed back out of them.
+
+   target form                          c1 @ 286d5030      c1 @ ef388417
+     the 286d5030 target (COUNT form)   a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
+       125 lines, c1's own 24 vertex sets equal
+     the HEAD target (SET form)         a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
+       125 lines, c1's own 24 vertex sets equal
+
+   the file grain, for contrast -- from (ii), and nothing is concluded
+   from it:
+     c1_branching.py          CHANGED
+     kern_a218.py             SAME
+
+   THE FILE MOVED AND THE MEASUREMENT DID NOT.  c1_branching.py's
+   sha differs across the range and its measurement is byte-for-byte
+   the same on both target forms, so mg-58da's edit is confined to
+   the comparing half and the 198 cells stand as re-run in (iii).
+
+   AND THE CHECK IS SHOWN FIRING -- a check that cannot go red certifies
+   nothing, and 'g1 stopped exiting 1' is exactly what silencing it
+   would look like.  Three c1 sources, direction predicted first:
+
+   c1 source                                        predicted  actual
+     c1 @ ef388417 (unmodified -- NULL PROBE)         silent     silent   HIT
+       why: the tree as it stands; must not fire
+     c1 @ HEAD with the vertex DIMENSIONS off by one  FIRES      FIRES    HIT
+       why: the measuring half really moved; must fire
+     c1 @ HEAD with a line added past section (iii)   silent     silent   HIT
+       why: the file moved, the measurement did not; must not fire
+
+   probes whose direction was predicted correctly : 3 of 3
+   population: the 3 c1 sources above, each run against the HEAD target
+   and diffed against c1 @ 286d5030 on the same target.
+
+--------------------------------------------------------------------------
 VERDICT ON QUESTION B, derived from the rows above and not asserted
 --------------------------------------------------------------------------
    THE 198-CELL REPRODUCTION STANDS AT 286d5030902d.
@@ -87,5 +139,5 @@ VERDICT ON QUESTION B, derived from the rows above and not asserted
 
 --------------------------------------------------------------------------
 SELF-ERRORS: 0, population: the 12 git reads and the one read-path enumeration this script needs
-FINDINGS: 0, population: the 3 populations of the re-run, its exit code, its byte-comparison against the committed record, the 2 sha comparisons of the measuring half, and the 2 measurement-invariance checks
+FINDINGS: 0, population: the 3 populations of the re-run, its exit code, its byte-comparison against the committed record, the 2 measurement-invariance checks across targets in (iv), the 2 measurement-invariance checks across script revisions in (v) -- one per target form -- and the 3 direction probes on (v)'s own check.  The 2 file-sha comparisons are REPORTED and are not in this population (mg-7e58 / mg-321d G-1)
 TOTAL BAD: 0

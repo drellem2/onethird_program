@@ -1,0 +1,170 @@
+==========================================================================
+K2  COULD THIS FIX BE WRONG ABOUT ITS OWN PROVENANCE?
+==========================================================================
+
+--------------------------------------------------------------------------
+B1  DOES THE REPAIR SURVIVE BEING COMMITTED?
+--------------------------------------------------------------------------
+   mg-321d's G-3: mg-58da's committed out_g1_provenance.txt said FINDINGS
+   0 and its PREDICTIONS.md said ACTUAL 0 HIT, and both stopped being true the
+   instant 673b4c0 landed -- because both were recorded while the change was
+   still uncommitted.  Every figure in THIS directory is being recorded under
+   exactly the same conditions.
+
+   So it is not argued, it is done: this worktree is cloned, the working tree
+   is COMMITTED in the clone, and g1 and g4 are re-run there.  If any figure
+   moves, the repair has the defect it is repairing.
+
+   clone HEAD : 6354c4a7  (this worktree's HEAD is ef388417)
+   the repair is a COMMIT there, not a working-tree edit.
+
+   script                 uncommitted here        committed there
+     g1_provenance.py       self 0 find 0 exit 0    self 0 find 0 exit 0  SAME
+     g4_fleet.py            self 0 find 2 exit 1    self 0 find 2 exit 1  SAME
+
+   NOT CLAIMED: that no figure anywhere moves.  g1 and g4 both PRINT the
+   HEAD sha, and it necessarily differs.  What is checked is that no
+   FINDING, SELF-ERROR or EXIT CODE moves -- the channels the exit code
+   is derived from, and the ones G-3 was about.
+
+--------------------------------------------------------------------------
+B2  WHAT IS g1'S NEW COMPARISON INVARIANT UNDER?
+--------------------------------------------------------------------------
+   g1 now decides "did the measuring half move" by diffing c1's printed
+   sections (i)+(ii).  So it is blind to a measurement change that prints
+   nothing.  THE REASON THAT CANNOT BITE, and it is a fact about c1 rather than
+   an assurance: every quantity c1 COMPARES in section (iii) is drawn from the
+   two dicts it PRINTS in full in (i)+(ii) -- mine_vertices and mine_edges.
+   Printed is therefore a superset of compared, and a measurement change
+   invisible to (i)+(ii) cannot move any of the 198 cells either.
+
+   Checked two ways: by reading c1's source for what section (iii) reads, and
+   by counting.
+
+   'mine_' names the comparing half BINDS for itself     : mine_c, mine_named, mine_v
+   'mine_' names it inherits from the measuring half     : mine_edges, mine_vertices
+   'mine_' names the measuring half PRINTS               : mine_edges, mine_vertices
+
+   c1's measuring half, as printed : 125 lines
+   cells c1 compares in (iii)      : 198
+
+   RESIDUAL, STATED: a change to c1 that alters neither its printed
+   measurement nor its comparison is invisible to g1.  That is correct
+   and not a gap -- such a change moves no cell of the reproduction,
+   which is the property g1 certifies.
+
+--------------------------------------------------------------------------
+B3  ARE g1'S TWO TARGET FORMS TWO CHECKS OR ONE REPORTED TWICE?
+--------------------------------------------------------------------------
+   the 286d5030 target and the HEAD target are the same text : no
+   and 'different text' is not yet 'different path'.  g1 does not echo
+   c1's stdout, so the form is read by running c1 at HEAD against each target
+   here and taking the form off c1's own line.
+     the 286d5030 target      c1 reports  Form read: COUNT
+     the HEAD target          c1 reports  Form read: SET
+   two distinct forms are read, so the two runs are two checks.
+
+--------------------------------------------------------------------------
+B4  g4'S RANGE IS A WRITTEN BOUNDARY -- WHAT FALLS OUTSIDE IT?
+--------------------------------------------------------------------------
+   `git log 286d5030..HEAD -- <path>` cannot see a commit outside the
+   range, and 286d5030 is written into lib58da.py by hand.  Two things are done
+   about that rather than asserted away: the endpoints are RESOLVED (a range
+   naming a revision that does not exist would silently return nothing), and
+   every commit touching each member across ALL of history is listed, so what
+   the range excludes is visible instead of merely absent.
+
+   REV_A218  resolves : 286d5030902d
+   HEAD      resolves : ef38841710ed
+
+   member                  in 286d5030..HEAD   before 286d5030   after
+     c1_branching.py        673b4c00            3
+     c2_vertexsets.py       ed9cde49            3
+     c3_withdrawal.py       none                2
+     c4_seam.py             none                2
+     c5_record.py           none                2
+
+   the commits before 286d5030 are the ones that CREATED the five.  They
+   are outside the range on purpose -- the question is what moved SINCE
+   the reproduction was taken -- and the boundary is named in the output
+   rather than implied, which is the whole of what this branch asks.
+
+   AND the in-range answer is cross-checked: g4 gates its own summary
+   against its own rows, once per member plus the union.  That gate is
+   what would fire if the range dropped an in-range commit; it is
+   deletion-tested in B6.
+
+--------------------------------------------------------------------------
+B5  THE TICKET -> COMMIT STEP READS PROSE
+--------------------------------------------------------------------------
+   g4 labels its attribution rows with the mg-id in each commit's
+   SUBJECT.  A subject is prose and can be wrong.  What is load-bearing is the
+   member -> commit map, which comes from `git log -- <path>` and never passes
+   through a subject; the id is a label on top of it.  Checked: each in-range
+   commit carries exactly one id, no two share one, and the id g4 resolves for
+   mg-13b2 is the sha lib58da names.
+
+     673b4c00  subject id : mg-58da
+     ed9cde49  subject id : mg-13b2
+
+   ids shared by more than one in-range commit : none
+   mg-13b2 resolves to ed9cde49; lib58da names REV_13B2 = ed9cde49 : agree
+
+--------------------------------------------------------------------------
+B6  DO THE NEW CHECKS FIRE ON A REAL DEFECT'S PATH?
+--------------------------------------------------------------------------
+   g1's: k1 (iii) makes the mutation to c1_branching.py -- the object g1
+   measures -- and never to g1, and runs g1 unmodified and in place.  Its four
+   clones and their directions are k1's; the count is read from k1's committed
+   output below rather than restated here.
+
+   g4's: the path a real defect takes is A COMMIT LANDING, which is exactly how
+   G-2 was born.  So one lands.  A clone gets a real commit that touches
+   c3_withdrawal.py, and g4's attribution -- which named c3 nowhere before --
+   must pick it up, from git log, with no other change.
+
+   k1's g1 deletion probes, from its committed output : 4 of 4
+
+   g4's attribution rows in the probe clone:
+      touches: c3_withdrawal.py
+      touches: c1_branching.py
+      touches: c2_vertexsets.py
+      touches: none
+   c3_withdrawal.py appears in the attribution : YES
+   g4's SUMMARY-vs-ROWS gate reports a disagreement : no
+
+--------------------------------------------------------------------------
+B7 / B8  THE PROPERTY AND THE DOCUMENT -- CHECKED ELSEWHERE, NAMED HERE
+--------------------------------------------------------------------------
+   B7 (did the repair weaken the set-level property?) is k3's whole job:
+   five sources, ten pairs, twenty-four cells, all five members re-run.  B8
+   (does this repair's own document assert figures?) is k4's: every figure
+   gated at its own site against a committed out_k*.txt, each deletion-tested.
+   Neither verdict is restated here -- restating it is how a figure becomes an
+   assertion -- and run_all.sh runs all four.
+   k3_setlevel    committed output : SELF 0  FINDINGS 0
+   k4_doccheck    committed output : SELF 0  FINDINGS 8
+
+--------------------------------------------------------------------------
+B9  DOES THE REPAIR ERASE THE RECORD IT IS ANSWERING?
+--------------------------------------------------------------------------
+   This repair regenerates mg-58da's committed out_g*.txt, because
+   mg-321d's G-3 is precisely that they no longer reproduce.  It must not touch
+   the records that are EVIDENCE: mg-a218's out_c1_branching.txt (the artifact
+   g1 confirms byte for byte) and mg-321d's own out_h*.txt (the audit this
+   repair answers).  Checked against the blobs, not asserted.
+
+     out_c1_branching.txt @ 286d5030                      IDENTICAL
+     out_h1_questions.txt @ ef388417                      IDENTICAL
+     out_h2_grain.txt @ ef388417                          IDENTICAL
+     out_h3_setlevel.txt @ ef388417                       IDENTICAL
+     out_h4_mine.txt @ ef388417                           IDENTICAL
+     out_h5_doccheck.txt @ ef388417                       IDENTICAL
+     out_selftest_321d.txt @ ef388417                     IDENTICAL
+
+   population: the 7 committed records above, each compared against its
+   own blob at the revision that wrote it.
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone, subprocess run and parse this script performs
+FINDINGS: 0, population: the 9 branches on which this repair could carry the defect it removes, each with a measurement or a stated reason it cannot bite
+TOTAL BAD: 0

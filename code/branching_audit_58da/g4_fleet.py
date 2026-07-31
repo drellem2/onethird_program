@@ -80,28 +80,112 @@ if len(FIVE) != 5:
 print("-" * 74)
 print("(ii) WHO TOUCHED WHICH MEMBER, BY SHA AND BY COMMIT")
 print("-" * 74)
-print("   script                 286d5030 -> d1dd84d2       d1dd84d2 -> working")
-touched_13b2, touched_58da = [], []
+print("""   REPAIRED HERE (mg-7e58, on mg-321d's finding G-2).  The attribution
+   below used to be computed as
+
+       if sha@286d5030 != sha@HEAD:      touched by mg-13b2
+       if sha@HEAD     != sha@worktree:  touched by mg-58da
+
+   which attributes by 'is it committed yet' and not by commit.  It is true
+   for exactly as long as mg-58da's change is uncommitted, and the instant
+   673b4c0 landed it began saying that ed9cde4 -- which touched only c2 --
+   had touched c1_branching.py.  A provenance claim that is false about the
+   history, inside the apparatus built to establish provenance.
+
+   IT IS NOW DERIVED FROM THE HISTORY.  Nothing below is written down: every
+   'touched by' comes from `git log <range> -- <path>`, the same call that
+   produces the ROW beside it, and the summary is CHECKED AGAINST THE ROWS
+   rather than asserted next to them.""")
+print()
+print("   script                 %s -> %s       %s -> working"
+      % (L.REV_A218[:8], HEAD[:8], HEAD[:8]))
+by_commit = {}          # commit sha -> [scripts], from git log
+rows_changed = []       # scripts whose sha moved across the committed range
+uncommitted = []        # scripts differing between HEAD and the working tree
+row_commits = {}        # script -> the commits its own ROW names
 for f in FIVE:
     p = L.A218_DIR + "/" + f
     a = L.sha(L.git_show(L.REV_A218, p))
     b = L.sha(L.git_show(HEAD, p))
     with open(os.path.join(L.REPO, p)) as fh:
         c = L.sha(fh.read())
+    cs = L.commits_touching(p, L.REV_A218, HEAD)
+    row_commits[f] = cs
+    for h in cs:
+        by_commit.setdefault(h, []).append(f)
     if a != b:
-        touched_13b2.append(f)
+        rows_changed.append(f)
     if b != c:
-        touched_58da.append(f)
+        uncommitted.append(f)
     print("     %-22s %-26s %s"
-          % (f, "CHANGED (%s)" % ", ".join(
-              x[:8] for x in L.commits_touching(p, L.REV_A218, HEAD))
+          % (f, "CHANGED (%s)" % ", ".join(x[:8] for x in cs)
              if a != b else "same",
-             "CHANGED (this ticket)" if b != c else "same"))
+             "CHANGED (uncommitted)" if b != c else "same"))
 print()
-print("   of the five, touched by ed9cde4 (mg-13b2) : %d -- %s"
-      % (len(touched_13b2), ", ".join(touched_13b2) or "none"))
+
+# --- the attribution, one row per commit, read off git log -------------------
+print("   ATTRIBUTION, INVERTED FROM THE SAME git log CALLS -- one row per")
+print("   commit in %s..%s that touched any of the five:"
+      % (L.REV_A218[:8], HEAD[:8]))
+dir_order = L.commits_touching(L.A218_DIR, L.REV_A218, HEAD)
+order = ([h for h in dir_order if h in by_commit]
+         + [h for h in by_commit if h not in dir_order])
+
+
+def ticket_of(rev):
+    """The mg-id its own subject carries, or '?'.  DERIVED, not written."""
+    m = re.search(r"\(mg-([0-9a-f]{4})\)\s*$", L.subject(rev).strip())
+    return "mg-" + m.group(1) if m else "?"
+
+
+for h in order:
+    print("     %s  %-9s %s" % (h[:8], ticket_of(h), L.subject(h)[:58]))
+    print("        touches: %s" % ", ".join(sorted(by_commit[h])))
+print("     %-8s  %-9s %s" % ("(none)", "uncommitted",
+                              "the working tree, not yet a commit"))
+print("        touches: %s" % (", ".join(sorted(uncommitted)) or "none"))
+print()
+
+# --- SUMMARY vs ROWS: the summary is checked against the rows, not asserted --
+derived_union = sorted({f for fs in by_commit.values() for f in fs})
+if derived_union != sorted(rows_changed):
+    finding("g4's per-commit attribution and its own sha rows disagree about "
+            "WHICH of the five moved: git log names %s, the sha rows name %s"
+            % (derived_union or "none", sorted(rows_changed) or "none"))
+for f in FIVE:
+    mine = sorted({h for h, fs in by_commit.items() if f in fs})
+    if mine != sorted(row_commits[f]):
+        finding("g4's attribution for %s disagrees with the commit list its "
+                "own row prints: %s vs %s"
+                % (f, [x[:8] for x in mine], [x[:8] for x in row_commits[f]]))
+
+
+def touched_by(ticket):
+    """The five that `ticket`'s commit touched, from the inverted git log."""
+    hits = [h for h in by_commit if ticket_of(h) == ticket]
+    if len(hits) > 1:
+        selferr("more than one commit in range carries (%s); attribution by "
+                "ticket id is ambiguous: %s" % (ticket, [h[:8] for h in hits]))
+    if not hits:
+        return None, []
+    return hits[0], sorted(by_commit[hits[0]])
+
+
+rev_13b2, five_13b2 = touched_by("mg-13b2")
+rev_58da, five_58da = touched_by("mg-58da")
+if rev_13b2 and not rev_13b2.startswith(L.REV_13B2[:8]):
+    selferr("the commit carrying (mg-13b2) in this range is %s, but lib58da "
+            "names REV_13B2 = %s" % (rev_13b2[:8], L.REV_13B2[:8]))
+print("   of the five, touched by %s (mg-13b2) : %d -- %s"
+      % (rev_13b2[:7] if rev_13b2 else "no commit", len(five_13b2),
+         ", ".join(five_13b2) or "none"))
 print("   of the five, touched by mg-58da           : %d -- %s"
-      % (len(touched_58da), ", ".join(touched_58da) or "none"))
+      % (len(five_58da), ", ".join(five_58da) or "none"))
+print("   of the five, touched by an uncommitted edit: %d -- %s"
+      % (len(uncommitted), ", ".join(sorted(uncommitted)) or "none"))
+print("   both figures come from `git log -- <path>` and are checked against")
+print("   the rows above; the ticket -> commit step is read out of the commit")
+print("   SUBJECT and cross-checked against lib58da's named REV_13B2.")
 print("   the kernel the five share, kern_a218.py   : %s"
       % ("CHANGED" if L.sha(L.git_show(L.REV_A218, L.A218_DIR + "/kern_a218.py"))
          != L.sha(open(os.path.join(L.REPO, L.A218_DIR, "kern_a218.py")).read())
@@ -442,9 +526,11 @@ print("VERDICT ON THE SET-LEVEL PROPERTY")
 print("-" * 74)
 print("""   THE FIVE ARE: %s.
 
-   ed9cde4 touched %d of them (%s).  This ticket touched %d (%s).  The kernel
-   they share is untouched by both, and c1's own measurement is byte-identical
-   across every revision in this table, so no mathematics moved at any point.
+   %s (mg-13b2) touched %d of them (%s).  %s (mg-58da) touched %d (%s).  Both
+   figures are derived in (ii) from `git log -- <path>` and checked against the
+   rows beside them.  The kernel they share is untouched by both, and c1's own
+   measurement is byte-identical across every revision in this table, so no
+   mathematics moved at any point.
 
    WHAT HOLDS.  The members that measure the vertex cells agree with each
    other and with all %s instruments in the tree, at 24 of 24 cells, after
@@ -460,8 +546,11 @@ print("""   THE FIVE ARE: %s.
    members and the OTHER instruments against the same cells, which is (iv),
    and by making the changed member fail on an input it genuinely cannot
    read, which is (vi).
-""" % (", ".join(FIVE), len(touched_13b2), ", ".join(touched_13b2) or "none",
-       len(touched_58da), ", ".join(touched_58da) or "none", "four",
+""" % (", ".join(FIVE),
+       rev_13b2[:7] if rev_13b2 else "no commit", len(five_13b2),
+       ", ".join(five_13b2) or "none",
+       rev_58da[:7] if rev_58da else "no commit", len(five_58da),
+       ", ".join(five_58da) or "none", "four",
        len(green),
        ("c3_withdrawal.py is red -- mg-d330's second finding, left OPEN here."
         if "c3_withdrawal.py" in red else
@@ -479,9 +568,11 @@ for x in SELF:
     print("   SELF-ERROR: " + x)
 print("FINDINGS: %d, population: the %d exit codes on the working tree, the "
       "cross-member and cross-instrument agreement on the 24 vertex cells, "
-      "c0_repro.sh, the %d deletion-test cases on the widened c1, and the %d "
-      "variants on which mg-d330's exit-code gate is evaluated"
-      % (len(FIND), len(FIVE), len(cases) + 1, len(variants)))
+      "c0_repro.sh, the %d deletion-test cases on the widened c1, the %d "
+      "variants on which mg-d330's exit-code gate is evaluated, and the %d "
+      "SUMMARY-vs-ROWS checks on (ii)'s attribution -- one per member plus the "
+      "union (mg-7e58 / mg-321d G-2)"
+      % (len(FIND), len(FIVE), len(cases) + 1, len(variants), len(FIVE) + 1))
 for x in FIND:
     print("   FINDING: " + x)
 print("TOTAL BAD: %d" % (len(SELF) + len(FIND)))

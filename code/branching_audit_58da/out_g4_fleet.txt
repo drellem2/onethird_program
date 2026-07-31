@@ -19,15 +19,45 @@ G4  THE SET-LEVEL PROPERTY, RE-ESTABLISHED AFTER TWO CHANGES
 --------------------------------------------------------------------------
 (ii) WHO TOUCHED WHICH MEMBER, BY SHA AND BY COMMIT
 --------------------------------------------------------------------------
-   script                 286d5030 -> d1dd84d2       d1dd84d2 -> working
-     c1_branching.py        same                       CHANGED (this ticket)
+   REPAIRED HERE (mg-7e58, on mg-321d's finding G-2).  The attribution
+   below used to be computed as
+
+       if sha@286d5030 != sha@HEAD:      touched by mg-13b2
+       if sha@HEAD     != sha@worktree:  touched by mg-58da
+
+   which attributes by 'is it committed yet' and not by commit.  It is true
+   for exactly as long as mg-58da's change is uncommitted, and the instant
+   673b4c0 landed it began saying that ed9cde4 -- which touched only c2 --
+   had touched c1_branching.py.  A provenance claim that is false about the
+   history, inside the apparatus built to establish provenance.
+
+   IT IS NOW DERIVED FROM THE HISTORY.  Nothing below is written down: every
+   'touched by' comes from `git log <range> -- <path>`, the same call that
+   produces the ROW beside it, and the summary is CHECKED AGAINST THE ROWS
+   rather than asserted next to them.
+
+   script                 286d5030 -> ef388417       ef388417 -> working
+     c1_branching.py        CHANGED (673b4c00)         same
      c2_vertexsets.py       CHANGED (ed9cde49)         same
      c3_withdrawal.py       same                       same
      c4_seam.py             same                       same
      c5_record.py           same                       same
 
+   ATTRIBUTION, INVERTED FROM THE SAME git log CALLS -- one row per
+   commit in 286d5030..ef388417 that touched any of the five:
+     673b4c00  mg-58da   docs+repair: THE REPRODUCTION STANDS AT 286d5030 AND ALL 2
+        touches: c1_branching.py
+     ed9cde49  mg-13b2   docs+repair: THE VERTEX COLUMN REPORTS THE SET AND THE LAB
+        touches: c2_vertexsets.py
+     (none)    uncommitted the working tree, not yet a commit
+        touches: none
+
    of the five, touched by ed9cde4 (mg-13b2) : 1 -- c2_vertexsets.py
    of the five, touched by mg-58da           : 1 -- c1_branching.py
+   of the five, touched by an uncommitted edit: 0 -- none
+   both figures come from `git log -- <path>` and are checked against
+   the rows above; the ticket -> commit step is read out of the commit
+   SUBJECT and cross-checked against lib58da's named REV_13B2.
    the kernel the five share, kern_a218.py   : UNCHANGED at both -- no mathematics moved in either change
 
    THIS IS THE SHAPE OF THE FAILURE.  ed9cde4 widened c2 because a
@@ -165,9 +195,11 @@ VERDICT ON THE SET-LEVEL PROPERTY
 --------------------------------------------------------------------------
    THE FIVE ARE: c1_branching.py, c2_vertexsets.py, c3_withdrawal.py, c4_seam.py, c5_record.py.
 
-   ed9cde4 touched 1 of them (c2_vertexsets.py).  This ticket touched 1 (c1_branching.py).  The kernel
-   they share is untouched by both, and c1's own measurement is byte-identical
-   across every revision in this table, so no mathematics moved at any point.
+   ed9cde4 (mg-13b2) touched 1 of them (c2_vertexsets.py).  673b4c0 (mg-58da) touched 1 (c1_branching.py).  Both
+   figures are derived in (ii) from `git log -- <path>` and checked against the
+   rows beside them.  The kernel they share is untouched by both, and c1's own
+   measurement is byte-identical across every revision in this table, so no
+   mathematics moved at any point.
 
    WHAT HOLDS.  The members that measure the vertex cells agree with each
    other and with all four instruments in the tree, at 24 of 24 cells, after
@@ -188,7 +220,7 @@ VERDICT ON THE SET-LEVEL PROPERTY
 
 --------------------------------------------------------------------------
 SELF-ERRORS: 0, population: the 15 sha reads, the 5 committed-output reads, and the parses of c1's, c2's and e1's live vertex rows
-FINDINGS: 2, population: the 5 exit codes on the working tree, the cross-member and cross-instrument agreement on the 24 vertex cells, c0_repro.sh, the 4 deletion-test cases on the widened c1, and the 3 variants on which mg-d330's exit-code gate is evaluated
+FINDINGS: 2, population: the 5 exit codes on the working tree, the cross-member and cross-instrument agreement on the 24 vertex cells, c0_repro.sh, the 4 deletion-test cases on the widened c1, the 3 variants on which mg-d330's exit-code gate is evaluated, and the 6 SUMMARY-vs-ROWS checks on (ii)'s attribution -- one per member plus the union (mg-7e58 / mg-321d G-2)
    FINDING: the set-level property does NOT hold on the working tree: c3_withdrawal.py exits 1 with 1 finding(s), which is mg-d330's second finding against mg-13b2's t5_labels.py and is left OPEN by this ticket
    FINDING: mg-d330's e4_rerun.py gate on mg-a218's exit-code sentence is a PRESENCE TEST: it fires on the substring alone, so a sentence STRUCK IN PLACE with a correction beside it is indistinguishable from one left standing, and e4's finding text -- which says the sentence was 'left unchanged and unmarked' -- is now false of the tree while its exit code is unchanged. NOT REPAIRED HERE: e4 is mg-d330's committed instrument and rewriting the sentence to dodge the substring would turn the gate green while leaving it blind, which is the defect this arc keeps paying for
 TOTAL BAD: 2
