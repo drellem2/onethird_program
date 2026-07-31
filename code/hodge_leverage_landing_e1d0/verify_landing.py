@@ -1131,6 +1131,48 @@ def site_extents(texts):
     return out
 
 
+# ⚠️ THE GATE'S ROW VOCABULARY, DECLARED ONCE (mg-7e39 F5, landed by mg-3f3b).
+#
+# `repair_ec07.py`'s sweep used to hand-list FIVE of these, against a gate that
+# emits six -- and the sixth, `READ AT THE SITE`, is where the construct the
+# sweep hunts for entered this arc.  A sweep built because a hand-picked SITE
+# is a scope nobody chose picked its VOCABULARY the same way.
+#
+# Deriving the vocabulary by regexing this file's `print`/`record` calls fixes
+# the count and not the shape: it is still a second reader of the gate's
+# grammar that can fall behind it, and it missed `WRITTEN ONCE` because that
+# row used to read `'{label}' is WRITTEN ONCE`.  So the vocabulary is DECLARED
+# here, the gate builds every row heading from it, and `row_headings_declared`
+# makes a row whose heading ends in none of these RED.  A vocabulary a sweep
+# must guess at is a scope nobody chose; a vocabulary the gate declares is one
+# anybody can read.
+ROW_KINDS = (
+    "SITE RECORD",
+    "RECORD PARTITION",
+    "CENSUS ROSTER",
+    "FIGURE CENSUS",
+    "FIGURE ORDER",
+    "READ AT THE SITE",
+    "WRITTEN ONCE",
+)
+
+
+def row_kind_of(detail):
+    """The declared kind a gate row's HEADING ends with, or None.
+
+    ⚠️ `heading()` is `detail.split(" -- ")[0]`, so a row emitted WITHOUT the
+    ` -- ` separator has no heading and every heading-keyed test silently
+    degenerates to a test against the whole row -- which is the construct the
+    heading test exists to replace.  Two of this gate's rows used to be emitted
+    that way, and `heading(d).endswith("READ AT THE SITE")` selected 0 of 34
+    live rows while the substring test selected 12."""
+    h = heading(detail)
+    for k in ROW_KINDS:
+        if h.endswith(k):
+            return k
+    return None
+
+
 def figure_gate(texts, measured):
     """THE FIGURE GATE.  Returns [(ok, detail), ...].
 
@@ -1160,18 +1202,20 @@ def figure_gate(texts, measured):
             said = got.get(key) or []
             if len(said) != 1:
                 out.append((False,
-                            f"GATE @ {name}: '{label}' -- expected exactly 1 "
+                            f"GATE @ {name}: '{label}' READ AT THE SITE -- "
+                            f"expected exactly 1 "
                             f"statement of it at this site, found {len(said)} "
                             f"{said}.  A figure a reader cannot find, or finds "
                             f"twice, is not a figure this gate can stand behind"))
                 continue
             out.append((said[0] == want,
-                        f"GATE @ {name}: '{label}' READ AT THE SITE = "
+                        f"GATE @ {name}: '{label}' READ AT THE SITE -- "
+                        f"READ AT THE SITE = "
                         f"{said[0]}, MEASURED THIS RUN = {want}"))
             if live:
                 n = flat(texts[name]).count(want)
                 out.append((n == 1,
-                            f"GATE @ {name}: '{label}' is WRITTEN ONCE -- {want} "
+                            f"GATE @ {name}: '{label}' WRITTEN ONCE -- {want} "
                             f"occurs {n}x in this site.  A second written copy "
                             f"must instead DERIVE from the first by pointing at "
                             f"it; that is what removes the failure mode"))
@@ -1446,8 +1490,31 @@ whether the enlargement was disclosed anywhere.
                 "cell": doc_num(aH),
                 "hist": doc_num(histlen),
                 "copy": doc_num(bH)}
-    for ok, detail in figure_gate(texts, measured):
+    live_rows = figure_gate(texts, measured)
+    for ok, detail in live_rows:
         record(ok, detail)
+
+    # ⚠️ FAIL-CLOSED ON THE ROW GRAMMAR (mg-7e39 F5, landed by mg-3f3b).  Every
+    # heading-keyed test in this arc is `heading(d).endswith(NAME)`, and
+    # `heading()` is `d.split(" -- ")[0]` -- so a row emitted WITHOUT the ` -- `
+    # separator has no heading, and the test silently degenerates into a test
+    # against the whole row.  That is the construct the heading test exists to
+    # replace, arrived at by accident rather than by writing it.  It was live:
+    # the `READ AT THE SITE` rows carried no separator, so
+    # `heading(d).endswith("READ AT THE SITE")` selected 0 of 34 rows where the
+    # substring test selected 12.  A NEW ROW THAT DOES NOT DECLARE ITS KIND IS
+    # RED, because the alternative is a remedy that reads as applied and is not.
+    unkinded = [d for _ok, d in live_rows if row_kind_of(d) is None]
+    for d in unkinded:
+        print(f"      ⚠️ ROW WITH NO DECLARED KIND: {d[:110]}")
+    record(not unkinded,
+           f"GATE: {len(live_rows) - len(unkinded)} of {len(live_rows)} gate "
+           f"rows have a HEADING ending in one of the {len(ROW_KINDS)} kinds "
+           f"declared in `ROW_KINDS`, and {len(unkinded)} do not.  The "
+           f"vocabulary is DECLARED rather than left for a sweep to guess at, "
+           f"and a row without a ` -- ` separator has no heading at all -- so "
+           f"every heading-keyed test in this arc would degenerate into the "
+           f"substring test it replaced, silently")
 
     record("row history H8" in flat_row_now,
            "GATE: and the row points at H8, so the third site is reachable from "
@@ -1797,7 +1864,8 @@ def k_figure(name, site, live):
 def k_duplicate(name, site, live):
     key, val = _first_live(name, live)
     if not val:
-        return None, "no live figure at this site"
+        return None, (f"0 of the {len(live)} live figure(s) this run measures "
+                      f"is written at this site, so there is none to restate")
     return _add_inline(site, f"(and it is {val}, restated)", live, name), None
 
 
@@ -1809,7 +1877,8 @@ def k_prose(name, site, live):
 def k_prose_roster(name, site, live):
     known = sorted(HISTORICAL[name])
     if not known:
-        return None, "no historical figure is declared for this site"
+        return None, (f"0 historical figures are declared for this site on the "
+                      f"roster, so no wrong prose can reuse one")
     return _add_inline(site, f"The gap is now {known[0]} characters.",
                        live, name), None
 
@@ -1824,7 +1893,8 @@ def k_transpose(name, site, live):
     pair = next(((i, j) for i in range(len(figs))
                  for j in range(i + 1, len(figs)) if figs[i] != figs[j]), None)
     if pair is None:
-        return None, "fewer than two figures of differing value here"
+        return None, (f"this site carries {len(figs)} figure token(s) and no "
+                      f"two of them differ, so an exchange moves nothing")
     figs = list(figs)
     figs[pair[0]], figs[pair[1]] = figs[pair[1]], figs[pair[0]]
     return rejoin(seg, figs), None
@@ -1833,16 +1903,18 @@ def k_transpose(name, site, live):
 def k_label(name, site, live):
     spans = _bold_spans(name, site)
     if len(spans) < 2:
-        return None, "fewer than two uniquely-occurring figure-free labels"
+        return None, (f"{len(spans)} uniquely-occurring figure-free label(s) "
+                      f"at this site, and an exchange needs two")
     return _swap(site, spans[0], spans[1]), None
 
 
 def k_row_label(name, site, live):
     rows = [l for l in _table_lines(site) if FIGURE_TOKEN.search(l)]
     if len(rows) < 2:
-        return None, ("fewer than two table rows carrying figures INSIDE this "
-                      "site (the ledger's other rows are outside it -- "
-                      "mg-ec07's X2, declared open)")
+        return None, (f"{len(rows)} of this site's {len(_table_lines(site))} "
+                      f"table row(s) carry a figure INSIDE the site, and an "
+                      f"exchange needs two (the ledger's other rows are "
+                      f"outside it -- mg-ec07's X2, declared open)")
     # Exchanged WITHIN THE TWO LINES, not across the site: these labels recur
     # (H8's table names the same row at two commits), and a site-wide swap
     # would move text the probe did not choose.
@@ -1851,8 +1923,9 @@ def k_row_label(name, site, live):
                  and _cells(x)[0] != _cells(y)[0]
                  and site.count(x) == 1 and site.count(y) == 1), None)
     if pair is None:
-        return None, ("no two rows here carry distinct labels on lines that "
-                      "each occur once")
+        return None, (f"0 pairs of this site's {len(rows)} figure-carrying "
+                      f"row(s) carry distinct labels on lines that each occur "
+                      f"once")
     x, y = pair
     a, b = _cells(x)[0], _cells(y)[0]
     out = site.replace(x, x.replace(a, b, 1), 1)
@@ -1862,10 +1935,14 @@ def k_row_label(name, site, live):
 def k_col_header(name, site, live):
     line = _header_line(name, site)
     if line is None:
-        return None, "no column header line inside this site"
+        return None, (f"0 of this site's {len(_table_lines(site))} table "
+                      f"line(s) is a column header inside the site")
     cells = [c for c in _cells(line) if c.strip()]
     if len(cells) < 2 or cells[0] == cells[1]:
-        return None, "the header line has fewer than two distinct columns"
+        return None, (f"the header line inside this site has {len(cells)} "
+                      f"non-empty column(s) and its first two are "
+                      f"{'identical' if len(cells) >= 2 else 'absent'}, so an "
+                      f"exchange moves nothing")
     return site.replace(line, _swap(line, cells[0], cells[1]), 1), None
 
 
@@ -1876,10 +1953,26 @@ def k_quoted(name, site, live):
             tok = m.group()
             bad = tok[:-1] + ("8" if tok[-1] != "8" else "7")
             return site[:s] + site[s:e].replace(tok, bad, 1) + site[e:], None
-    return None, "no marked quotation carrying a figure at this site"
+    return None, (f"{len(quoted_spans(site))} marked quotation(s) at this "
+                  f"site and 0 of them carry a figure token")
 
 
 def k_layout(name, site, live):
+    """K11 -- THE TABLE'S ALIGNMENT, SHIFTED, IN EITHER TABLE FORMAT.
+
+    ⚠️ WHY THERE ARE TWO CLAUSES (mg-7e39 F1, landed by mg-3f3b).  This used
+    to be the first clause alone -- runs of two or more spaces, which is how a
+    WHITESPACE-COLUMN table is aligned -- and it declined at the STATE.md site
+    with "no line here has two runs of two or more spaces to shift".  That
+    reads as a fact about the site and is a fact about THIS FUNCTION: the site
+    is a MARKDOWN PIPE TABLE, and a pipe table is aligned by THE PADDING
+    INSIDE ITS CELLS.  A shift of that padding moves no figure and the gate
+    catches it -- so the cell was applicable all along and the matrix printed
+    `n/a` over it.
+
+    THE DELIMITER LINE IS NOT TOUCHED.  `|:---|---:|` carries the column's
+    alignment specifier; moving space there changes what the table MEANS,
+    which is a different kind from "alignment shifted, no figure moved"."""
     for l in site.split("\n"):
         runs = list(re.finditer(r"\S(  +)\S", l))
         if len(runs) >= 2:
@@ -1887,15 +1980,25 @@ def k_layout(name, site, live):
             new = l[:a[0]] + " " * (a[1] - a[0] - 1) + l[a[1]:b[0]] \
                 + " " * (b[1] - b[0] + 1) + l[b[1]:]
             return site.replace(l, new, 1), None
-    return None, "no line here has two runs of two or more spaces to shift"
+    pipe = [l for l in site.split("\n")
+            if l.startswith("| ") and l.count("|") >= 3
+            and not re.fullmatch(r"\|[\s:|-]+\|", l.strip())]
+    once = [l for l in pipe if site.count(l) == 1]
+    for l in once:
+        return site.replace(l, "|  " + l[2:], 1), None
+    return None, (f"of this site's {len(site.split(chr(10)))} line(s), 0 carry "
+                  f"two runs of two or more spaces to shift and {len(once)} of "
+                  f"{len(pipe)} pipe-table row(s) occur once and could have "
+                  f"their cell padding moved")
 
 
 def k_relocate(name, site, live):
     paras = site.split("\n\n")
     body = [p for p in paras[1:] if p.strip() and not FIGURE_TOKEN.search(p)]
     if not body:
-        return None, ("this site has no figure-free paragraph after the "
-                      "first to relocate")
+        return None, (f"this site is {len(paras)} paragraph(s) and 0 after the "
+                      f"first are figure-free, so there is nothing to relocate "
+                      f"out of it")
     return site.replace("\n\n" + body[0], "", 1), None
 
 
@@ -1976,6 +2079,30 @@ def kind_matrix(base_files, live):
     for tag, name, why in reasons:
         print(f"      n/a  {tag} @ {name:<18} {why}")
     print()
+    # ⚠️ `n/a` IS WHERE A MATRIX HIDES (mg-7e39 F1, landed by mg-3f3b).  A
+    # matrix reports FIRE / SILENT / n/a and only the first two are measured;
+    # the third is prose, and prose phrased as a property of the SITE can be a
+    # property of the DERIVATION -- which is how "no line here has two runs of
+    # two or more spaces to shift" came to be printed over a cell that fires.
+    #
+    # There is no mechanical test for "is this sentence about the site".  There
+    # IS one for "does this sentence contain a number measured at the site",
+    # and a reason carrying its own count is one a reader can check against the
+    # site without reading this file.  So a decline with no measurement in it
+    # is a REFUSAL, not a cell.  FAIL-CLOSED, in the same direction as
+    # `site_extents`: the way this defect survives is by reading like an
+    # answer.
+    countless = [(t, n, w) for t, n, w in reasons if not re.search(r"\d", w)]
+    for t, n, w in countless:
+        print(f"      ⚠️ n/a WITHOUT A MEASUREMENT  {t} @ {n}: {w}")
+    record(not countless,
+           f"{len(reasons) - len(countless)} of {len(reasons)} `n/a` reason(s) "
+           f"carry a COUNT MEASURED AT THE SITE and {len(countless)} do not.  "
+           f"A matrix reports FIRE / SILENT / n/a and only the first two are "
+           f"measured -- `n/a` is prose, and a reason with no number in it "
+           f"cannot be checked against the site by a reader, which is exactly "
+           f"what let K11 @ the STATE.md row print a fact about `k_layout` in "
+           f"the grammar of a fact about the site")
     record(silent == 0,
            f"{fires} of {fires + silent} APPLICABLE cells of the "
            f"{len(KINDS)}x{len(names)} KIND x SITE product fire; {silent} are "

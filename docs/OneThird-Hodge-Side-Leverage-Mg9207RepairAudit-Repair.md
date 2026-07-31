@@ -63,10 +63,29 @@ construct was live **forty lines away** in the file it was repairing.
 
 ## 2. The sweep — because the reported line is never the population
 
-The fix is not scored by the line it repaired. `R2` sweeps **429 `.py` files** for the construct,
-under a stated rule (a row heading in double quotes as the operand of `in`/`not in`, not keyed on
-`heading(...)`, not a quotation of the construct), and every hit is either repaired or carries a
-disposition **keyed on its exact line** — so a new occurrence anywhere makes the section red.
+The fix is not scored by the line it repaired. `R2` sweeps **every `.py` file under `code/`** for the
+construct, under a stated rule (a row heading in double quotes as the operand of `in`/`not in`, not
+keyed on a heading parse, not a quotation of the construct, not an argument to `by_substring`), and
+every hit is either repaired or carries a disposition **keyed on its exact line** — so a new
+occurrence anywhere makes the section red.
+
+> ⚠️ **The count is deliberately not written here (CORRECTED 2026-07-31 — mg-7e39 F2, landed by
+> mg-3f3b).** This sentence used to say "**429 `.py` files**", and the tree at `77306a7` — *the commit
+> that ships the transcript stating it* — holds **448**, as did `803bd50` before it. The figure was
+> not drift after the run: **it was wrong when it was written**, with 19 files in the population and
+> not in the number. The instrument was live and re-derived the count every run; what was frozen was
+> the figure in the evidence, which is the one a reader meets. The count now lives in **one place**,
+> the `R2a` line of `code/hodge_leverage_repair_6df0/out_repair_6df0.txt`, where the publication step
+> recomputes it — **and it is printed with the tree it was walked from**, because a count is only a
+> fact about a named tree.
+
+> ⚠️ **And the disposition table is now empty (CORRECTED 2026-07-31 — mg-7e39 F3, landed by
+> mg-3f3b).** The two occurrences below were dispositioned rather than repaired, and mg-7e39 counted
+> what that came to: **6 instances existed at `803bd50`, this repair touched 1, and 5 were live in
+> the commit it landed in** — four of them selecting **6** gate rows where **3** were meant. **A
+> disposition is a reason, not a repair.** All five are repaired: three by `heading()` in the file
+> that held them, and the two that *measure* the construct by routing through `by_substring`, a
+> declared function the sweep's rule recognises **by name** rather than by a line number.
 
 **It found two live occurrences nobody had reported:**
 
@@ -115,10 +134,21 @@ The runner now prints, every run, **12 kinds × 3 sites**:
     K09 two COLUMN HEADERS exchanged (E3 -- X1)       FIRES (rec)         n/a           FIRES (rec)
 ```
 
-**28 of 28 applicable cells fire; 0 silent; 8 `n/a`, each with the reason its derivation failed**
-(no marked quotation carrying a figure at that site; no column header line inside §14; a one-line
-row has no paragraph to relocate). *"It does not apply here"* and *"it fired"* are different
-answers and a reader is entitled to tell them apart.
+**29 of 29 applicable cells fire; 0 silent; 7 `n/a`, each carrying the count it rests on** (12 marked
+quotations at that site and 0 of them carrying a figure; 0 of §14's 0 table lines a column header; a
+one-paragraph site with 0 figure-free paragraphs after the first). *"It does not apply here"* and
+*"it fired"* are different answers and a reader is entitled to tell them apart.
+
+> ⚠️ **This read 28 of 28 with 8 `n/a` (CORRECTED 2026-07-31 — mg-7e39 F1, landed by mg-3f3b).**
+> `K11 @ the STATE.md row` declined with *"no line here has two runs of two or more spaces to
+> shift"* — **a fact about `k_layout`, which shifts whitespace columns**, printed in the grammar of
+> a fact about the site. The site is a **markdown pipe table**, and a pipe table is aligned by the
+> padding inside its cells. An independent shift of that padding **FIRES**, caught by `SITE RECORD`.
+> **A matrix reports FIRE / SILENT / n/a and only the first two are measured; `n/a` is prose, and it
+> is where a matrix hides.** The gate never had this hole — it understates coverage rather than
+> hiding one — but a matrix that reads as complete over a cell it never tried is the same shape as
+> the enumeration this repair exists to widen. **Every `n/a` reason now carries a number measured at
+> the site, and a decline with no measurement in it makes the run red.**
 
 On disk, against the real runner:
 

@@ -134,6 +134,20 @@ FINDINGS = []
 # --------------------------------------------------------------------------
 # plumbing
 # --------------------------------------------------------------------------
+def heading(row):
+    """THE ROW'S HEADING -- everything before the ` -- ` that introduces its
+    explanation.
+
+    ⚠️ ADDED BY mg-3f3b (mg-7e39 F3).  The line below used to identify a gate
+    row by testing a heading against THE WHOLE ROW, and every row of this gate
+    explains itself by NAMING THE OTHER ROWS -- so the test selected rows it
+    was never meant to.  mg-ff3e found that construct in its own scoring code
+    and fixed it there; mg-6df0 found it 6 times in the tree, repaired 1 and
+    gave the other 5 a disposition keyed on their line number.  A DISPOSITION
+    IS A REASON, NOT A REPAIR."""
+    return row.split(" -- ")[0]
+
+
 def record(ok, detail):
     RESULTS.append((detail, ok))
     mark = {True: "[CONFIRMED]", False: "[REFUTED  ]", None: "[MEASURED ]"}[ok]
@@ -323,8 +337,10 @@ moves underneath the gate and a fire is attributable to the site read.
             rc, ref = run_gate()
             mine = [l for l in ref
                     if l.startswith("[REFUTED  ] GATE @ " + site) and f"'{label}'" in l]
-            read_fired += any("READ AT THE SITE" in l for l in mine)
-            once_fired += any("WRITTEN ONCE" in l for l in mine)
+            read_fired += any(heading(l).endswith("READ AT THE SITE")
+                              for l in mine)
+            once_fired += any(heading(l).endswith("WRITTEN ONCE")
+                              for l in mine)
             restore(path)
             quiet_rc, _ = run_gate()
             ok_fire += rc != 0

@@ -103,6 +103,21 @@ def head(title):
     print("-" * len(title))
 
 
+def by_substring(rows, name):
+    """⚠️ THE CONSTRUCT, COMMITTED ON PURPOSE AND IN EXACTLY ONE PLACE.
+
+    A substring test over a whole gate row is the defect this arc repairs, and
+    MEASURING it requires PERFORMING it.  So it is performed here, once, in a
+    function whose name says what it is -- rather than written inline, where a
+    sweep of the tree can only tell it from the defect by a disposition keyed
+    on its line number.  A REASON ON A LINE IS NOT A STRUCTURE: it has to be
+    read, it has to be maintained, and it goes stale the moment the line moves.
+
+    ⚠️ ADDED BY mg-3f3b (mg-7e39 F3): 6 instances of the construct existed
+    when mg-6df0 landed, it repaired 1 and dispositioned 5."""
+    return [r for r in rows if name in r]
+
+
 def heading(name, row):
     """The gate row's HEADING, with the site prefix removed.  A substring test
     over the whole row reports every probe as having broken every check,
@@ -711,7 +726,7 @@ control that has never been run is a sentence.
     # WHY.  The refusal excludes rows by a SUBSTRING TEST over the WHOLE ROW,
     # and every one of these rows explains itself by NAMING the other rows.
     rows = V.figure_gate(texts, measured)
-    excl = [r for _ok, r in rows if "SITE RECORD" in r]
+    excl = by_substring([r for _ok, r in rows], "SITE RECORD")
     unintended = [r for r in excl
                   if not r.split(" -- ")[0].endswith("SITE RECORD")]
     record(len(unintended) == 0,

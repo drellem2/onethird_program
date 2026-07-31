@@ -259,6 +259,21 @@ def gate_rows(out):
     return rows
 
 
+def by_substring(rows, name):
+    """⚠️ THE CONSTRUCT, COMMITTED ON PURPOSE AND IN EXACTLY ONE PLACE.
+
+    A substring test over a whole gate row is the defect this arc repairs, and
+    MEASURING it requires PERFORMING it.  So it is performed here, once, in a
+    function whose name says what it is -- rather than written inline, where a
+    sweep of the tree can only tell it from the defect by a disposition keyed
+    on its line number.  A REASON ON A LINE IS NOT A STRUCTURE: it has to be
+    read, it has to be maintained, and it goes stale the moment the line moves.
+
+    ⚠️ ADDED BY mg-3f3b (mg-7e39 F3): 6 instances of the construct existed
+    when mg-6df0 landed, it repaired 1 and dispositioned 5."""
+    return [r for r in rows if name in r]
+
+
 def row_kind(detail):
     """The row's kind -- SITE RECORD, RECORD PARTITION, FIGURE CENSUS, ... --
     read off the heading.  MY parse of the heading, not the artifact's."""
@@ -797,7 +812,7 @@ def b3(rows_head):
     head("B3 -- THE REFUSAL: all 34 rows, and each of the 3 that the substring "
          "test excluded")
     details = [d for _ok, d in rows_head]
-    by_sub = [d for d in details if "SITE RECORD" in d]
+    by_sub = by_substring(details, "SITE RECORD")
     by_head = [d for d in details
                if d.split(" -- ")[0].endswith("SITE RECORD")]
     diff = [d for d in by_sub if d not in by_head]

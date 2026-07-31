@@ -99,6 +99,20 @@ RESULTS = []
 # --------------------------------------------------------------------------
 # plumbing
 # --------------------------------------------------------------------------
+def heading(row):
+    """THE ROW'S HEADING -- everything before the ` -- ` that introduces its
+    explanation.
+
+    ⚠️ ADDED BY mg-3f3b (mg-7e39 F3).  The line below used to identify a gate
+    row by testing a heading against THE WHOLE ROW, and every row of this gate
+    explains itself by NAMING THE OTHER ROWS -- so the test selected rows it
+    was never meant to.  mg-ff3e found that construct in its own scoring code
+    and fixed it there; mg-6df0 found it 6 times in the tree, repaired 1 and
+    gave the other 5 a disposition keyed on their line number.  A DISPOSITION
+    IS A REASON, NOT A REPAIR."""
+    return row.split(" -- ")[0]
+
+
 def record(ok, detail):
     RESULTS.append((detail, ok))
     mark = {True: "[CONFIRMED]", False: "[REFUTED  ]", None: "[MEASURED ]"}[ok]
@@ -306,7 +320,8 @@ everything is worth no more than one that fires on nothing.
         flag = "" if rc else "   <-- PREDICTION MISSED"
         print(f"    {name:<70}{'GATE FIRES':<13}{obs:<13}{back}{flag}")
         if rc:
-            hit = [l for l in refuted if "FIGURE CENSUS" in l]
+            hit = [l for l in refuted
+                   if heading(l).endswith("FIGURE CENSUS")]
             print(f"        {(hit[0] if hit else refuted[0])[:150]}")
     print()
     record(fired == len(cases),
