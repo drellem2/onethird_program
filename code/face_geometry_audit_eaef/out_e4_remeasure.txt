@@ -1,0 +1,59 @@
+==============================================================================
+mg-eaef e4 -- the eleven written declarations, measured again
+==============================================================================
+
+PREDICTIONS, registered before these runs (PREDICTIONS.md e4):
+   e4.1  the population is still 11
+   e4.2  8 UNDERSTATE / 3 AGREE / 0 OVERSTATE / 0 MIXED
+   e4.3  the three that AGREE are BEFORE-1, AFTER-3 and AFTER-4
+
+
+==============================================================================
+1.  THE POPULATION, AND THE TREE EACH ROW WAS APPLIED TO
+==============================================================================
+   tag       tree        the sentence mg-9220 wrote
+   BEFORE-1  5cae82c^    one CLAUSE of a compound condition (`or A[i][i] != B[i][i]
+   BEFORE-2  5cae82c^    one `return` statement -- the magnitude gate
+   AFTER-1   b6bc2ef     one `return` statement -- gate `diagonal`
+   AFTER-2   b6bc2ef     one `return` statement -- gate `magnitude`
+   AFTER-3   b6bc2ef     NO statement: the ORDER of two gates, both returns kept
+   AFTER-4   b6bc2ef     one statement, and not a `return`: the `signs_read += 1` c
+   AFTER-5   b6bc2ef     one `return` statement -- gate `shape`, which is ONE retur
+   AFTER-6   b6bc2ef     one `return` statement -- the `parity` contradiction branc
+   R1        c7f9673     one `return` statement -- the FIRST of the pinned tree's t
+   R2        c7f9673     one `return` statement -- the SECOND of them
+   R3        c7f9673     TWO `return` statements -- the PAIR, which is what AFTER-5
+  [HOLDS ] THE POPULATION IS THE ELEVEN ROWS OF `UNITS` AT b6bc2ef, read by executing that commit's own assignments: 11 row(s), and this audit has a reading registered for 11 of them
+        WOULD DIFFER UNDER: mg-9220's table changing size, or a tag appearing with no reading beside it -- which is BROKEN here rather than skipped, because a row nobody read is a row nobody measured
+
+==============================================================================
+2.  EACH SENTENCE AGAINST ITS OWN PATCH
+==============================================================================
+`nodes` is the net syntax-node difference and has no grain; the three named units
+are the three the sentences use.  DIRECTION is computed: UNDERSTATES means the
+patch removed MORE than the sentence claims, which makes the deletion evidence
+look finer than it is.
+
+   tag       declared     measured     nodes  direction
+   BEFORE-1  (0, 0, 1)    (0, 0, 1)    24     AGREES
+   BEFORE-2  (1, 0, 0)    (1, 1, 0)    30     UNDERSTATES
+   AFTER-1   (1, 0, 0)    (1, 1, 0)    30     UNDERSTATES
+   AFTER-2   (1, 0, 0)    (1, 1, 0)    35     UNDERSTATES
+   AFTER-3   (0, 0, 0)    (0, 0, 0)    0      AGREES
+   AFTER-4   (0, 1, 0)    (0, 1, 0)    4      AGREES
+   AFTER-5   (1, 0, 0)    (1, 1, 2)    51     UNDERSTATES
+   AFTER-6   (1, 0, 0)    (1, 1, 0)    18     UNDERSTATES
+   R1        (1, 0, 0)    (1, 1, 0)    17     UNDERSTATES
+   R2        (1, 0, 0)    (1, 1, 0)    28     UNDERSTATES
+   R3        (2, 0, 0)    (2, 2, 0)    45     UNDERSTATES
+  [HOLDS ] THE RE-DERIVED FIGURE IS 8 UNDERSTATE / 3 AGREE / 0 OVERSTATE OVER A POPULATION OF 11, which is the figure mg-c4c8 raised, mg-64b6 printed, mg-0b07 re-measured and mg-f7e1 carried forward
+        understate: BEFORE-2, AFTER-1, AFTER-2, AFTER-5, AFTER-6, R1, R2, R3 | agree: BEFORE-1, AFTER-3, AFTER-4 | overstate: none
+        WOULD DIFFER UNDER: any of the eleven patches or sentences changing, or this audit's differ disagreeing with the subject's.  Three instruments now agree on eleven patches from three sets of code, which is what makes the figure a measurement and not a quotation
+  [HOLDS ] AND THE THREE THAT AGREE ARE NAMED, not counted: BEFORE-1, AFTER-3, AFTER-4
+        WOULD DIFFER UNDER: a different three agreeing, which would mean the total is stable and its composition is not -- and the total is what gets quoted
+  [FINDING E7] NOT A FINDING AGAINST THE SUBJECT -- BOOKED AS CONFIRMED. The 8 / 3 / 0 re-derives exactly, over a population that is still 11, from mg-9220's own committed table and this audit's own differ.  mg-f7e1's rewrite of `absorb_trace` did not move it, which is what carrying a figure forward is supposed to mean.
+
+==============================================================================
+3 claim(s) scored; 0 BROKEN.  1 finding(s).
+   FINDING E7  NOT A FINDING AGAINST THE SUBJECT -- BOOKED AS CONFIRMED
+==============================================================================

@@ -1,0 +1,64 @@
+==============================================================================
+mg-eaef e3 -- the derived declaration, under two changes of patch
+==============================================================================
+
+PREDICTIONS, registered before these runs (PREDICTIONS.md e3):
+   e3.1  control: AFTER-6 (1,0,0,7) and AFTER-4 (0,1,0,4) on the unedited copy
+   e3.2  W: AFTER-6 gains one statement and more nodes, keeps `absorb_trace`
+   e3.3  K: AFTER-4 -> 0 statements, >=1 boolean clause, and the function name
+         changes to `gate_violations`
+   e3.4  no OTHER tag's declaration moves in either direction
+
+
+==============================================================================
+1.  THE CONTROL -- the instrument copied and run with nothing edited
+==============================================================================
+A copy that does not reproduce the subject's own numbers is a copy whose later
+runs say nothing, so the harness is scored before it is used.
+
+   tag       ret   stmt  cls   nodes  from
+   BEFORE-1  0     0     1     24     `absorbable_by_diagonal_twist`
+   BEFORE-2  1     1     0     30     `absorbable_by_diagonal_twist`
+   AFTER-1   1     0     0     6      `absorb_trace`; string(s) removed with it: 'diagonal'
+   AFTER-2   1     0     0     6      `absorb_trace`; string(s) removed with it: 'magnitude'
+   AFTER-3   0     0     0     0      `absorb_trace`
+   AFTER-4   0     1     0     4      `absorb_trace`
+   AFTER-5   1     0     0     6      `absorb_trace`; string(s) removed with it: 'shape'
+   AFTER-6   1     0     0     7      `absorb_trace`; string(s) removed with it: 'parity'
+   R1        1     1     0     17     `absorb_trace`; string(s) removed with it: 'shape'
+   R2        1     1     0     28     `absorb_trace`; string(s) removed with it: 'shape'
+   R3        2     2     0     45     `absorb_trace`; string(s) removed with it: 'shape'
+  [HOLDS ] THE COPY RUNS AND PRINTS A DERIVED DECLARATION FOR EVERY ONE OF THE 11 MUTATIONS: 11 of 11 rows parsed out of its own stdout, exit 1
+        AFTER-6 (1, 0, 0, 7); AFTER-4 (0, 1, 0, 4)
+        WOULD DIFFER UNDER: the instrument failing to run outside its own directory, or changing the shape of the line the declaration is printed on -- either of which makes the two runs below unreadable rather than wrong
+
+==============================================================================
+2.  DIRECTION W -- the same unit, widened
+==============================================================================
+   AFTER-6 control : (1, 0, 0, 7)  1 `return`, 0 other statement(s), 0 boolean clause(s), 7 syntax node(s) 
+   AFTER-6 widened : (1, 1, 0, 18)  1 `return`, 1 other statement(s), 0 boolean clause(s), 18 syntax node(s)
+  [HOLDS ] THE DECLARATION FOLLOWED THE PATCH IN DIRECTION W: AFTER-6 moved from (1, 0, 0, 7) to (1, 1, 0, 18) with no declaration edited -- one more statement and +11 syntax nodes
+        WOULD DIFFER UNDER: the declaration being a written value, in which case it would read identically after the patch had grown -- which is the defect mg-c4c8 found in the WRITTEN declarations and the thing mg-64b6's repair claims to have made impossible
+
+==============================================================================
+3.  DIRECTION K -- another kind of unit, in another function
+==============================================================================
+   AFTER-4 control : (0, 1, 0, 4)  0 `return`, 1 other statement(s), 0 boolean clause(s), 4 syntax node(s) 
+   AFTER-4 repointed: (0, 0, 1, 11)  0 `return`, 0 other statement(s), 1 boolean clause(s), 11 syntax node(s)
+  [HOLDS ] THE DECLARATION FOLLOWED THE PATCH IN DIRECTION K: AFTER-4 moved from (0, 1, 0, 4) in `absorb_trace` to (0, 0, 1, 11) in `gate_violations`, so both the UNIT KIND and the FUNCTION are read off the patch
+        WOULD DIFFER UNDER: a declaration that names a function from a table instead of from the patch -- the substitution this whole lineage is a chain of
+
+==============================================================================
+4.  AND NOTHING ELSE MOVED
+==============================================================================
+   direction W changed the declaration of: AFTER-6
+   direction K changed the declaration of: AFTER-4
+  [HOLDS ] EACH EDIT MOVED EXACTLY THE ONE DECLARATION ITS PATCH BELONGS TO -- W moved 1 of 11, K moved 1 of 11, and the tag that moved is the tag that was edited in both cases
+        W: ['AFTER-6']; K: ['AFTER-4']
+        WOULD DIFFER UNDER: a declaration computed from something shared between mutations -- a table, a running total, the previous row -- which would show up as one edit moving several rows
+  [FINDING E6] NOT A FINDING AGAINST THE SUBJECT -- BOOKED AS CONFIRMED. The declaration survives mg-f7e1's restructuring as a DERIVED value: two patches changed in two directions, in a copy where no declaration was touched, and the printed unit followed both times, on exactly the row that was edited and on no other.  mg-0b07's finding that this was real is re-derived here from different anchors than the ones it used.
+
+==============================================================================
+4 claim(s) scored; 0 BROKEN.  1 finding(s).
+   FINDING E6  NOT A FINDING AGAINST THE SUBJECT -- BOOKED AS CONFIRMED
+==============================================================================
