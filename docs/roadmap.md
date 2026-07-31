@@ -226,43 +226,63 @@ because I made the opposite call at 17:35 on a misread and had to retract it.**
 **So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
 on an audit that measured its extents in both directions — that, not fatigue, is the signal.
 
-## Now (in flight) — 2026-07-31 10:32
+## Now (in flight) — 2026-07-31 11:12
 
-**✓ = carries the verdict-before-merge instruction, which is now CONFIRMED WORKING**: mg-3946 and
-mg-97fb each mailed their verdict from the polecat, before submitting, unprompted — the first two
-treated tickets, simultaneously. Five earlier verdicts had to be hand-recovered from commit messages.
+**✓ = carries the verdict-before-merge instruction. SIX OF SIX TREATED TICKETS HAVE ROUTED THEIR
+VERDICTS** — mg-3946, mg-97fb, mg-132a, mg-330a, mg-cd04, mg-a74f, each mailing from the polecat
+before submitting. **Every untreated one dropped.** Five earlier verdicts had to be hand-recovered
+from commit messages.
 
-- **mg-132a** ✓ — **the F2 repair is F2 at HEAD, 2 of 2** — transcripts publish 473, the tree at their publishing commit holds 481. *Right when written; the MERGE rebased them.* **Nothing re-runs the check after one.**
-- **mg-330a** ✓ — audit of mg-8d5e — **sweep for a fourth history-derived anchor**
-- **mg-4adb** — `set -e` — one line outside every deletion population
-- **mg-a74f** ✓ — mg-16eb's — the visibility instrument measures **bytes in the HTML**
+- **mg-a471** ✓ — a `--only/--gates` subset run overwrites the canonical report with an **unmarked partial** one, exiting 0
+- **mg-c067** ✓ — audit of mg-132a — **re-run the staleness check AFTER a rebase**
 - **mg-e35b** ✓ — mg-fcf1's five — three rows that cannot fail
 
 ## Next (gated / queued)
 
-- **mg-cd04** ✓ — **mg-069f reproduced, in text it wrote in the SAME COMMIT, the defect it had just closed in the control** — a block exempting itself by its label, one document over from where the control looks. Plus EXEMPT blocks skipped on a 3-line label with **no length bound**; the longest is **53 lines** and holds mg-069f's own correction
-- **mg-a471** ✓ — a `--only/--gates` subset run **overwrites the canonical report with an unmarked partial one**, ratio halves over different populations, **exit 0**
-- **mg-bf79** ✓ — a count **labelled `executing sites` prints ROWS** (10) where four artifacts publish the SITE count (9); two copies of `figures()` disagree on 3
+- **mg-b2af** ✓ — **the anchor population is SIXTEEN history-derived across 13 directories**, not the two repaired; plus 16 sites with no `--format=%H` that a flag-grep misses
+- **mg-1d03** ✓ — mg-0242 G3+G4 — the named-vs-swept table gets named-vs-swept wrong (537 vs 539); **five remediation instruments, one named as the standard**
+- **mg-bf79** ✓ — a count **labelled `executing sites` prints ROWS**; two copies of `figures()` disagree on 3
 - **mg-d075** ✓ — mg-19ec's — 8 sites state the figure, 4 unbounded
+- **mg-0ba7** ✓ — audit of mg-b2af
+- **mg-5854** ✓ — audit of mg-1d03
 - **mg-9a19** ✓ — audit of mg-cd04
-- **mg-c067** ✓ — audit of mg-132a
+- **mg-65eb** ✓ — audit of mg-a74f
+- **mg-d53d** — audit of mg-4adb
 - **mg-76d0** ✓ — audit of mg-a471
 - **mg-03d1** ✓ — audit of mg-bf79
 - **mg-aaf4** — audit of mg-d075
 - **mg-fcb2** ✓ — audit of mg-e35b
-- **mg-65eb** ✓ — audit of mg-a74f
 - **mg-69b4** ✓ — scoping — the busiest repo has no merge gate
 - **mg-344a** — Daniel workspace, `assignee=human`
 
-**The arc's running pattern, now five consecutive deliverables:** each found its own defect class in its
-own tooling. The tightest is mg-0242's G1 — a repair closed *"a block may no longer exempt itself by its
-label"* in its control **and broke that rule in prose it wrote in the same commit**, one document over
-from where the control looks. **Attention to a defect is concentrated exactly where the author is
-writing, which is exactly where it recurs.**
+## Trajectory read — a convergence SIGNAL, and precisely why it is not yet convergence
 
-**Reconciliation is now settled practice, three for three.** Asking for a count to be *re-derived* rather
-than adopting the newer figure has refuted **both** figures every time: 4-of-15 vs all-17 (real: **39**);
-1-of-6 vs 0-of-6 (**different sixes, and seven existed**). *Neither party had the population.*
+**Open findings per verdict, across the arc:**
+
+    mg-e34a/eaef 2  ·  mg-ec07 3  ·  mg-dee4 6  ·  mg-8a71 3  ·  mg-2c77 2  ·  mg-7e39 4
+    mg-0242 4  ·  mg-330a 2  ·  mg-4adb 0  ·  mg-132a 0  ·  mg-a74f 0  ·  mg-cd04 0
+
+**The last four returned ZERO open findings**, which is the stop condition this document already
+names. **I am recording it as a signal and not acting on it, because the composition is wrong for
+the claim:**
+
+- **Three of the four zeros are REPAIRS reporting their own sites closed** (mg-4adb, mg-132a,
+  mg-cd04). **A repair reporting no open findings is self-assessment.** Only **mg-a74f** is an audit
+  verdict, and it closed three OPENs while *naming* four new surfaces rather than opening them.
+- **The audits of all four are still queued** — mg-d53d, mg-c067, mg-9a19, mg-65eb. The stop
+  condition requires *an audit that measured its extents in both directions* returning 0 BROKEN,
+  and none of these four has run.
+
+**So the falsifiable form: if mg-d53d, mg-c067, mg-9a19 and mg-65eb each return 0 BROKEN, that is
+convergence and the arc should stop. If any returns findings, the zeros were self-assessment.**
+That is checkable, it is four tickets away, and it does not require anyone to decide anything now.
+
+**The own-defect pattern has meanwhile changed character rather than stopped.** It ran eight
+consecutive deliverables carrying their own defect class; the last three carry *disclosures* instead
+— mg-132a kept two defects of its own instrument, mg-a74f found the defect worse in the auditor's
+own replacement and said so, mg-cd04 declined to widen a control and gave the measured reason
+(~94% false positive). **The defect is still there; it is now being reported by the party that has
+it.** That is the difference between a blind spot and a disclosure, and it is the more durable state.
 
 ## Later (decided, not yet filed)
 - `onethird_program` ships two `controls.py` and two `run_all.sh` and has **no CI of any kind** — by the
