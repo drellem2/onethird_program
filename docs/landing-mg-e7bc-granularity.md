@@ -161,3 +161,27 @@ back.
    OUTSTANDING granularity pair and nothing else.
 6. **No mathematics was touched**, no row was added, and no existing row changed its label
    or its condition.
+
+---
+
+## Amendment, mg-64b6: the merge left two clauses, and the declarations were written
+
+**This section is the correction, not a footnote to it.** The repair above replaced two `return`
+statements with **one condition of two clauses**, and mg-c4c8 asked the same question one rung
+lower: **deleting the first clause — `m != len(B)` — alone leaves the artifact byte-identical**,
+exit 0, every row green. The unit moved from a pair of returns to a pair of clauses and the pair
+was still what the deletion test bit on. Section 3 above predicted exactly this exposure in
+`AFTER-5`'s WOULD DIFFER UNDER and did not measure it.
+
+**And the declared unit understated its patch on 8 of the 11 mutations** (mg-c4c8 F2). `BEFORE-2`,
+`AFTER-1`, `-2`, `-5`, `-6`, `R1`, `R2` and `R3` each say "one `return` statement" (`R3`: two) for a
+patch that removes the `return` **together with the `if` that guards it**; `AFTER-5` removes a
+two-clause condition as well. The `ret` column in the table above is right — `returns_removed` was
+honest, 11 of 11 — and the sentence beside it was not.
+
+mg-64b6 closes both: the condition is now `[len(row) for row in A] != [len(row) for row in B]`,
+which has **no clause to delete alone**, and every declaration is **computed from its own patch**
+rather than written, so `returns_removed` and the eleven sentences are both gone. The written
+sentences are kept verbatim in `d2_deletion.py` as the specimen the comparison runs on.
+
+Full record: `docs/landing-mg-c4c8-clause-and-derived-unit.md`.

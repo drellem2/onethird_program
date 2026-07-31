@@ -33,12 +33,16 @@ from face_complex import (                                          # noqa: E402
 from posets import all_posets                                       # noqa: E402
 
 import d2_deletion as d2                                            # noqa: E402
-"""Imported for its MUTATION TABLE only -- `UNITS`, the (tag, patch, unit)
-list -- so the source-level census below can ask whether every rejecting
-`return` in `absorb_trace` has a mutation of its own (mg-9220).  No battery is
-run from here and no result of d2's is read; this is the deletion table checked
-against the source it deletes from, which is the one place the bundling mg-e7bc
-found could have been caught without running anything."""
+"""Imported for its MUTATION TABLE only -- `MUTATIONS`, the (tag, ref, files,
+patches, aim) list -- so the source-level census below can ask whether every
+rejecting `return` in `absorb_trace` has a mutation of its own (mg-9220).  No
+battery is run from here and no result of d2's is read; this is the deletion
+table checked against the source it deletes from, which is the one place the
+bundling mg-e7bc found could have been caught without running anything.
+
+The table carries no declared unit any more (mg-64b6): the unit is computed
+from each patch by `kern5f9a.unit_removed`, so there is nothing here for a
+sentence to be wrong about."""
 
 SCORE = []
 
@@ -166,11 +170,13 @@ def main(nmax=5):
     rejecting = [n for n in returns if isinstance(n.value.args[0], ast.Constant)
                  and n.value.args[0].value is False]
     src_lines = src.split("\n")
-    after = [(t, e) for t, e, _u in d2.UNITS if t.startswith("AFTER")]
+    after = [(t, eds) for t, _r, _f, eds, _a in d2.MUTATIONS
+             if t.startswith("AFTER")]
     cover, uncovered = [], []
     for n in rejecting:
         line = src_lines[n.lineno - 1].strip()
-        hits = [t for t, e in after if line in e[1] and line not in e[2]]
+        hits = [t for t, eds in after
+                if any(line in old and line not in new for _f, old, new in eds)]
         cover.append((line[:46], hits))
         if len(hits) != 1:
             uncovered.append((line, hits))

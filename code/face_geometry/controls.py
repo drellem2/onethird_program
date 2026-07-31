@@ -753,6 +753,14 @@ def absorbable_bruteforce(A, B):
 #                     on each return, and the inert one was REMOVED rather than
 #                     covered by a third pair: this row is not asked to detect
 #                     it, and no row here was added for it.
+#                     AND ITS CONDITION HAS ONE CLAUSE BECAUSE mg-64b6 REWROTE
+#                     THE MERGE.  With two clauses, deleting the first alone
+#                     moved not one byte either (mg-c4c8) -- the same finding a
+#                     rung further down.  The condition is now a single
+#                     comparison of the two row-shape profiles, so there is no
+#                     clause under the return for a fourth rung to bite on, and
+#                     again NO ROW WAS ADDED HERE: the sub-unit was removed,
+#                     not watched.
 #   the parity row -- deleting the `return Trace(False, "parity", signs_read)`
 #                     branch.  The contradictory pair is then reported
 #                     ABSORBABLE against a brute force that enumerated all 8 sign
@@ -772,7 +780,7 @@ UNREACHED_GATE_PAIRS = {
          [[0, 1], [1, 0]],
          [[0, 1, 0], [1, 0, 0], [0, 0, 0]]),
         ("same order, RAGGED -- row 0 has 2 entries on one side and 3 on the "
-         "other, which `m != len(B)` alone does not see", False,
+         "other, which comparing the two ORDERS alone does not see", False,
          [[0, 1], [1, 0]],
          [[0, 1, 0], [1, 0]]),
         ("the accepting side: identical 2x2 matrices, s = (+1,+1)", True,

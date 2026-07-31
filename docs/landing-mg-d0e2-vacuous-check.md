@@ -176,10 +176,11 @@ today; a check pinned to a commit answers the question it was written to ask.
 ## Numbers, re-measured here rather than carried
 
 - Battery: **43 scored rows** (41 + the two added here), 2 [CANNOT FAIL], 0 failures,
-  exit 0, 23,684 bytes. `probe_output_n6.txt` is **byte-identical** — no mathematics moved.
-  (23,680 at mg-04a8; mg-9220 rewrote four characters of one row's text.)
-- Instrument: `run_all.sh`, 112 s, **72 claims, 0 BROKEN**, exit 0 (d1 17, d2 33, d3 6, d4 16).
-  (73 s and 56 claims at mg-04a8, d1 16 / d2 25 / d3 6 / d4 9.)
+  exit 0, 23,695 bytes. `probe_output_n6.txt` is **byte-identical** — no mathematics moved.
+  (23,680 at mg-04a8; mg-9220 rewrote four characters of one row's text, and mg-64b6
+  rewrote the same row's prose again when the code fragment it named stopped existing.)
+- Instrument: `run_all.sh`, 143 s, **83 claims, 0 BROKEN**, exit 0 (d1 17, d2 44, d3 6, d4 16).
+  (73 s and 56 claims at mg-04a8, d1 16 / d2 25 / d3 6 / d4 9; 112 s and 72 at mg-9220.)
 - mg-d0e2's own `e1_deletion.py`, unmodified: **9 of 9 mutations change the artifact** —
   measured at mg-04a8, and **re-run at that pinned commit** by `d4` since mg-9220, because
   against the live tree its first mutation no longer applies. See the amendment.
@@ -191,7 +192,7 @@ today; a check pinned to a commit answers the question it was written to ask.
   them and both correct. Two of its three findings about mg-5f9a are **gone**: F3 (the
   43-versus-41 row count) and F4 (the stale docstring).
 - `code/face_geometry_landing_da45/out_verify.txt` regenerated: **1 line**, the artifact's
-  byte count, 20,738 → 23,680 (→ 23,684 at mg-9220). Its own `run_all.sh` says that file reads the live tree and
+  byte count, 20,738 → 23,680 (→ 23,684 at mg-9220, → 23,695 at mg-64b6). Its own `run_all.sh` says that file reads the live tree and
   "will drift when controls.py's counts next change", which is what happened. Still 25
   claims, 0 BROKEN, exit 0, and `verify_landing.py` itself is not edited.
 
@@ -252,3 +253,28 @@ materialised whole**, where it still says 9 of 9, and scores the live abort besi
 mg-e7bc's own `g2`/`g3` stop in the same place for the same reason and are scored too.
 
 Full record: `docs/landing-mg-e7bc-granularity.md`.
+
+---
+
+## Amendment, mg-64b6: the granularity error had one more rung, and the declared unit had a grain
+
+**The correction above has a correction of its own, and it is the same shape a third time.**
+mg-9220 merged the two `shape` returns into one condition of **two clauses**; mg-c4c8 deleted the
+first clause alone and the artifact was **byte-identical** — mg-e7bc's finding with `return`
+replaced by `clause`. And the mechanism mg-9220 introduced to make grain self-describing, the
+**declared unit**, **understated its own patch on 8 of its 11 mutations**: each said "one `return`
+statement" for a patch that removed the `return` together with the `if` that guards it.
+
+mg-64b6 **removes the rung rather than descending it**: `absorb_trace`'s `shape` condition is now a
+single comparison of the two row-shape profiles, with no boolean operator, so nothing under that
+`return` can be deleted alone — read out of the tree and scored, not asserted. And the declaration
+is **derived from the patch** by parsing the tree before and after it, so a written sentence can no
+longer be smaller than what it describes.
+
+What that moves in the figures above: the artifact is **23,695** bytes (the same row's prose, which
+named a code fragment that no longer exists), and the instrument is **83 claims** in **143 s**
+(d2 33 → 44: a clause-granularity sweep over the enumerated clause population, the same sweep run
+against `b6bc2ef` where it goes red, and the eleven written declarations measured against their own
+patches).
+
+Full record: `docs/landing-mg-c4c8-clause-and-derived-unit.md`.
