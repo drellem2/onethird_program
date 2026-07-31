@@ -1,0 +1,112 @@
+==========================================================================
+S3  BOTH COLUMNS, RE-DERIVED -- IS THE CONFIRMATION A DIFFERENCE?
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) ARE THE TWO COLUMNS TWO PREDICATES?  AT THE SOURCE GRAIN
+--------------------------------------------------------------------------
+   Asked BEFORE either column is run, because a comparison of a
+   predicate with itself will print numbers whatever they are.  The
+   property that IS mg-76cc's repair is the two-source signature
+   `kernel_source=`: before it, the kernel was pinned on both sides of
+   `run_c1` and a kernel that moved reached neither half.
+
+   comparison                               OLD side  NEW side  
+   THE REPAIRED ANCHOR (property-derived)   3bc2cf76  71a1f55b 
+      carries 'kernel_source='? OLD: no        NEW: YES      
+      g1 source sha differs?   yes
+      lib58da source differs?  yes
+      SAME PREDICATE?          no -- two predicates
+   THE DRIFTED ANCHOR (history-derived)     e5787e11  d01ff32d 
+      carries 'kernel_source='? OLD: YES       NEW: YES      
+      g1 source sha differs?   yes
+      lib58da source differs?  *** IDENTICAL
+      SAME PREDICATE?          *** YES -- VACUOUS
+
+   AND THE VACUITY, STATED AS A MEASUREMENT.  The drifted anchor's two
+   sides both DO carry 'kernel_source=', so both were mg-76cc's ALREADY-REPAIRED
+   predicate.  Their sources are different -- which is why nothing looked
+   wrong: it was not a comparison of a file with itself, it was a
+   comparison of a predicate with itself, and only the SECOND of those
+   is visible to a sha.
+
+
+--------------------------------------------------------------------------
+(iii) BOTH COLUMNS, RE-DERIVED -- THE KERNEL BEND, RUN
+--------------------------------------------------------------------------
+   The kernel bend is mg-957f's F-1: `dim L(n,p)` one too big in
+   kern_a218.py -- the measuring half, IN THE KERNEL.  It is committed
+   in a clone, because g1 reads the kernel with `git show` and an edit
+   left in the working tree reaches nothing at all.
+
+   Each pinned g1 travels with ITS OWN lib58da under a module name of
+   its own.  A pre-repair g1 run against the repaired library is a
+   third thing that never existed.
+
+   column                           revision  exit   self   find   listed
+   BEFORE THE REPAIR (property)     3bc2cf76  0      0      0      0
+   THIS REPAIR (HEAD)               HEAD      1      1      3      3
+   before the repair (DRIFTED)      e5787e11  1      1      3      3
+   note: g1 at d01ff32d is BYTE-IDENTICAL to g1 at HEAD -- this column
+         is not a comparison, it is the current file under an old label
+   the repair (DRIFTED)             d01ff32d  1      1      3      3
+
+   THE CONFIRMATION, AS A DIFFERENCE:
+     at 3bc2cf76 the pre-repair predicate is  exit 0 / self 0 / find 0
+     at HEAD     the repaired predicate is  exit 1 / self 1 / find 3
+
+     the OLD column is SILENT (0/0/0) -- as the repair claims
+     the NEW column FIRES (1/1/3) -- as the repair claims
+
+--------------------------------------------------------------------------
+(iv) AND THE SAME BEND UNDER THE DRIFTED ANCHOR, RUN
+--------------------------------------------------------------------------
+   The two revisions the OLD anchor picks, run against the SAME
+   committed kernel bend.  Not argued from the source -- run.
+
+     drifted `before the repair` e5787e11 : exit 1 / self 1 / find 3
+     drifted `the repair`        d01ff32d : exit 1 / self 1 / find 3
+
+     the two drifted columns print THE SAME TRIPLE -- one predicate asked twice
+
+   THAT IS THE VACUITY, MEASURED.  Both sides carry the kernel half,
+   so both FIRE, and the comparison `is the new one ever silent where
+   the old one fires?` answers 0 -- a plausible number produced by
+   asking a question of one predicate twice.  The repaired pair
+   answers the same question with a genuine 0, and the two zeros are
+   not the same zero: one is a fact about coverage and the other is a
+   fact about the anchor.
+
+   AND ONE STEP FURTHER THAN THE PARENT STATES IT.  The drifted
+   `this repair` column resolves to d01ff32d, and g1_provenance.py there is
+   BYTE-IDENTICAL to g1_provenance.py at HEAD.  So the drifted comparison was not
+   only a predicate against itself -- on one side it was THE VERY FILE
+   the run was measuring, under a label reading `the repair`.  The
+   parent's report says the two sides became `mg-76cc's ALREADY-
+   REPAIRED predicate`; the byte identity is the sharper form of the
+   same statement and is measured here rather than inferred.
+
+
+--------------------------------------------------------------------------
+(v) k1_prerepair.py, RE-RUN -- SOMETHING INDEPENDENT TO AGREE WITH
+--------------------------------------------------------------------------
+   (iii) is worth nothing if it is the only measurement of itself.
+   k1 is re-run here, unmodified, in a clone at HEAD, and its
+   kernel-bend row is read out of its own output and put beside the
+   triples above.
+
+   k1_prerepair.py, re-run : exit 1
+   its kernel-bend row, verbatim:
+     kern_a218.py: dim L(n,p) one too big       YES    1    0    2     0    0    0     1    1    3
+
+     k1 says   BEFORE REPAIR : 0/0/0
+     k1 says   this repair   : 1/1/3
+     s3 (iii) says           : 0/0/0  and  1/1/3
+
+   k1's own trailer on this run : SELF-ERRORS 0, FINDINGS 1 (1 listed), exit 1
+   its COMMITTED transcript says: SELF-ERRORS 0, FINDINGS 1 (1 listed)
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every clone, git read and subprocess run this script performs, plus the requirement that the kernel bend really change kern_a218.py, that each pinned g1 really import its OWN lib58da, and that each pinned source really differ from the repaired one
+FINDINGS: 0, population: the two columns of the kernel-half confirmation, each RE-DERIVED here by installing the pinned predicate with its own library and running it against a committed kernel bend -- at the exit grain, the self-error grain and the finding grain; the same two columns under the anchor as it stood BEFORE the repair; and the source-grain question of whether either pair is one predicate twice
+TOTAL BAD: 0

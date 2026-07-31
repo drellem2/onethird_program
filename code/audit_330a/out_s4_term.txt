@@ -1,0 +1,225 @@
+==========================================================================
+S4  THE TERM -- BOTH POPULATIONS, AND THE QUALIFIER AT EVERY SITE
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE POPULATION THE TERM DENOTES, AND THE ONE THE WALK VISITS
+--------------------------------------------------------------------------
+   `explicit boolean operand`, UNQUALIFIED -- i.e. NOT narrowed to a
+   deciding condition -- denotes every operand of every `and`/`or`
+   ANYWHERE in the census's two files: in a `while`, in an assignment,
+   in an `if` whose body assigns and breaks.  The census's four
+   columns classify only the ones inside a deciding condition, which
+   is the narrower population.  Both are walked here, from kern5f9a's
+   sentence for `decides a return`, and both are printed so the
+   subtraction is on the page.
+
+   file                     operands of every and/or, anywhere     of those, deciding     in no column
+   face_complex.py          35                                     15                     20
+   posets.py                4                                      2                      2
+   ALL                      39                                     17                     22
+
+   COUNTED HERE, not read: 39 operands denoted, 17 visited by the
+   census's columns, 22 in no column of it.  mg-69d1's repaired
+   p1_bound.py (ii) prints 39 / 17 / 22.
+
+   READ (not counted) -- the row mg-69d1's repaired p1_bound.py prints:
+     ALL                39                                     17                     22
+
+--------------------------------------------------------------------------
+(ii) AND THE 22, NAMED
+--------------------------------------------------------------------------
+   The 22 are outside every deciding condition, so they are outside
+   the sweep's reach AND outside the census's table.  That is a
+   statement about what the census covers.  Named, because a count of
+   what is uncovered that cannot be pointed at is the same silence as
+   no count at all.
+
+   file               function                   op   operand text
+   face_complex.py    Poset.__init__             and  b == c
+   face_complex.py    Poset.__init__             and  (a, d) not in less
+   face_complex.py    Poset.canonical_key        or   best is None
+   face_complex.py    Poset.canonical_key        or   rel < best
+   face_complex.py    order_ideals               and  (mask >> b) & 1
+   face_complex.py    order_ideals               and  not ((mask >> a) & 1)
+   face_complex.py    sur_iso                    and  (j, i) in P.less
+   face_complex.py    sur_iso                    and  assign[j] > v
+   face_complex.py    sur_iso                    and  (i, j) in P.less
+   face_complex.py    sur_iso                    and  v > assign[j]
+   face_complex.py    chains_of_ideals           and  w != v
+   face_complex.py    chains_of_ideals           and  (w & v) == w
+   face_complex.py    chains_of_ideals           and  w != top
+   face_complex.py    chains_of_ideals           and  (top & w) == top
+   face_complex.py    down_laplacian_from_boundary and  allowed_rows is not None
+   face_complex.py    down_laplacian_from_boundary and  r not in allowed_rows
+   face_complex.py    top_laplacians             and  incidence_mode == "facet_swap01"
+   face_complex.py    top_laplacians             and  len(facets) >= 2
+   face_complex.py    top_laplacians             and  incidence_mode == "split_free_as_interior"
+   face_complex.py    top_laplacians             and  free_rows
+   posets.py          cover_string               and  (a, c) in P.less
+   posets.py          cover_string               and  (c, b) in P.less
+   ALL                22 row(s)
+
+--------------------------------------------------------------------------
+(iii) THE QUALIFIER AT ALL 15 SITES
+--------------------------------------------------------------------------
+   files d01ff32 touched : 31
+   sites stating the term at adcfb1f1        : 57
+   of those, in files d01ff32 touched AND unqualified : 15
+   NON-VACUITY -- distinct labels the rule returned there: 3
+      *** census, UNQUALIFIED
+      census, QUALIFIED
+      quotes the wide BOUND
+
+   THE 15, EACH RE-SCORED AT HEAD.  Scored PER FILE, because a line
+   number is an anchor into a file's TEXT and editing the file moves
+   every site below the edit -- scoring the old line number in the new
+   file would be A-1 in miniature.
+
+   site (line as at adcfb1f1)                           line  kind             at HEAD
+   code/face_geometry_instr_5f9a/kern5f9a.py            507   live claim       census, QUALIFIED
+   code/repair_69d1/PREDICTIONS.md                      26    record, pre-run  census, QUALIFIED
+   code/repair_69d1/PREDICTIONS.md                      29    record, pre-run  census, QUALIFIED
+   code/repair_69d1/README.md                           33    live claim       census, QUALIFIED
+   code/repair_69d1/README.md                           8     live claim       census, QUALIFIED
+   code/repair_69d1/lib69d1.py                          6     live claim       gone
+   code/repair_69d1/out_p1_bound.txt                    154   transcript       census, QUALIFIED
+   code/repair_69d1/out_selftest_69d1.txt               5     transcript       census, QUALIFIED
+   code/repair_69d1/p1_bound.py                         15    live claim       census, QUALIFIED
+   code/repair_69d1/p1_bound.py                         152   live claim       census, QUALIFIED
+   code/repair_69d1/p1_bound.py                         57    live claim       census, QUALIFIED
+   code/repair_69d1/selftest_69d1.py                    59    live claim       census, QUALIFIED
+   docs/landing-mg-0b07-implicit-disjunction.md         153   live claim       census, QUALIFIED
+   docs/landing-mg-0b07-implicit-disjunction.md         29    live claim       census, QUALIFIED
+   docs/repair-mg-69d1-bound-and-reason.md              15    live claim       census, QUALIFIED
+
+   of the 15 sites, files still carrying an unqualified site : 0
+
+--------------------------------------------------------------------------
+(iv) THE RULER WAS NOT MOVED
+--------------------------------------------------------------------------
+   mg-2c77's rule looks for the UNHYPHENATED words.  Its own
+   q3_operands.py lines carrying `deciding-condition` were scored
+   UNQUALIFIED by it.  If the repair had widened the rule to accept the
+   hyphenated form, 15 sites would close without a word being written.
+   Checked on a constructed site whose answer is known before the rule
+   runs, and then on the real tree.
+
+   constructed site carrying `deciding-condition` : *** census, UNQUALIFIED
+   constructed site carrying `deciding condition` : census, QUALIFIED
+
+   and on the REAL tree: 54 line(s) carry the hyphenated form.
+   of those, in a window stating the term but NOT carrying the
+   unhyphenated form (i.e. sites the hyphen alone would have to
+   carry) : 4
+      code/audit_2c77/README.md:69
+      code/audit_2c77/q3_operands.py:55
+      code/repair_8d5e/selftest_8d5e.py:134
+      code/repair_8d5e/selftest_8d5e.py:137
+
+--------------------------------------------------------------------------
+(v) MY OWN CHOICE -- THE SAME RULE, RE-SCOPED TO HEAD
+--------------------------------------------------------------------------
+   NAMED IN ADVANCE IN PREDICTIONS.md, AND ON NO LIST IN THE BRIEF.
+
+   The repair scores the term over `the files d01ff32 touched`.  That
+   is the right population for a finding STATED at d01ff32 -- a
+   population re-derived as `the files the newest repair touched` is
+   A-1 -- but it is a population that stops growing while the tree does
+   not.  Four commits landed after dfa263c:
+
+     71a1f55 predictions: mg-330a's predictions for the independent audit of the mg-8d5e anchor-and-t
+     be06d36 evidence: the committed transcripts of the mg-56dc suite — 6 of 6 exit codes as predicte
+     8c55168 docs+audit: independent audit of the mg-70c7 grain-and-population repair — the SIX HOLD 
+     d3cdc95 audit: the mg-56dc instrument — a sixth instrument that classifies every printed count a
+     abb95b0 predictions: mg-56dc's predictions for the independent audit of the mg-70c7 grain-and-po
+     109725c pm-onethird: regenerate BOTH status sections together; mark the treated population
+   commits since the repair : 6
+
+   So the same rule, unchanged, over EVERY site in the tree at HEAD --
+   untracked files included, which is where this audit's own files are.
+
+   kind               sites    unqualified files
+   live claim         59       15         22
+   transcript         16       3          8
+   record, pre-run    9        2          4
+   ALL                84       20         34
+
+   UNQUALIFIED LIVE CLAIMS AT HEAD, NAMED -- and this audit's OWN
+   files are in the population and marked, not excluded by path:
+
+      THEIRS  code/audit_2c77/README.md:14
+      THEIRS  code/audit_2c77/lib2c77.py:187
+      THEIRS  code/audit_2c77/q3_operands.py:148
+      THEIRS  code/audit_2c77/q3_operands.py:15
+      THEIRS  code/audit_2c77/q3_operands.py:200
+      THEIRS  code/audit_2c77/q3_operands.py:235
+      THEIRS  code/audit_2c77/q3_operands.py:55
+      THEIRS  code/face_geometry_audit_eaef/README.md:45
+      THEIRS  code/face_geometry_audit_eaef/README.md:7
+      THEIRS  code/face_geometry_audit_eaef/README.md:8
+      THEIRS  code/face_geometry_audit_eaef/e1_operand.py:140
+      THEIRS  code/face_geometry_audit_eaef/e2_bound.py:76
+      THEIRS  docs/audit-mg-eaef-the-bound-and-the-exit-code.md:67
+      THEIRS  docs/audit-mg-eaef-the-bound-and-the-exit-code.md:75
+      THEIRS  docs/audit-mg-eaef-the-bound-and-the-exit-code.md:93
+   live claims unqualified, not mine : 15
+   live claims unqualified, MINE     : 0
+
+   AND AGAINST THE REPAIR'S OWN PUBLISHED NUMBER -- which is the point
+   of re-scoping, and the reason it is done by re-measuring rather
+   than by reading.  dfa263c's commit message says:
+
+     `20 sites remain unqualified in the tree, every one a record,
+      named individually in r3 (iv).`
+
+   Re-derived here, at HEAD, excluding this audit's own files:
+     sites stating the term unqualified              : 20
+   The two numbers AGREE.  The population is the same population
+   and this audit found no site the repair did not name.
+
+   BUT THE WORD `record` IS DOING TWO JOBS.  r3 (iii) derives a site's
+   KIND FROM ITS PATH -- `out_*.txt` is a transcript, `PREDICTIONS.md`
+   is a record, ANYTHING ELSE IS A LIVE CLAIM -- and that rule is what
+   decides whether a site gets EDITED.  r3 (iv) then labels the same
+   residue by SCOPE -- whose ticket owns the file -- and the summary
+   sentence reports the scope label as though it were the kind label.
+   Under the repair's OWN path-derived kind rule, of those 20 sites:
+
+     transcripts and prediction files (records by the path rule) : 5
+     LIVE CLAIMS (source and prose by the path rule)             : 15
+
+   Not one of them is a defect: they are other tickets' statements of
+   what those tickets found, and rewriting another ticket's record to
+   make this ticket's count come out is the failure this arc exists to
+   avoid.  The declining is right.  What is not right is the SENTENCE:
+   `every one a record` is true under the scope rule and false under
+   the kind rule the same script uses three sections earlier, and a
+   reader who applies r3 (iii)'s rule to r3 (iv)'s list gets 15 live
+   claims where the summary says 0.
+
+   That is A-2's own shape -- ONE WORD OVER TWO POPULATIONS -- in the
+   summary sentence of the repair that fixed a word over two
+   populations.
+
+   *** FINDING: dfa263c's summary says `20 sites remain unqualified in the tree, EVERY ONE A RECORD`.  Re-derived at HEAD the residue is 20 sites -- the same 20, none missed -- but 15 of them are LIVE CLAIMS under the path-derived kind rule r3 (iii) itself uses to decide treatment (source and prose, not transcripts or prediction files): code/audit_2c77/README.md:14, code/audit_2c77/lib2c77.py:187, code/audit_2c77/q3_operands.py:15, code/audit_2c77/q3_operands.py:55, code/audit_2c77/q3_operands.py:148, code/audit_2c77/q3_operands.py:200, code/audit_2c77/q3_operands.py:235, code/face_geometry_audit_eaef/README.md:7, code/face_geometry_audit_eaef/README.md:8, code/face_geometry_audit_eaef/README.md:45, code/face_geometry_audit_eaef/e1_operand.py:140, code/face_geometry_audit_eaef/e2_bound.py:76, docs/audit-mg-eaef-the-bound-and-the-exit-code.md:67, docs/audit-mg-eaef-the-bound-and-the-exit-code.md:75, docs/audit-mg-eaef-the-bound-and-the-exit-code.md:93.  The sites are correctly declined; the word `record` in the summary is the SCOPE label from r3 (iv) reported as the KIND label from r3 (iii), which is one word over two populations -- A-2's own shape, in the sentence summarising the repair of A-2
+
+   AND THE RESIDUE, WHICH IS NOT A DEFECT.  The unqualified sites that
+   remain are RECORDS -- transcripts of runs that happened, and
+   prediction files committed before their runs.  A transcript is a
+   measurement and editing one falsifies it; a prediction file
+   committed before its run is not a later ticket's to rewrite.  They
+   are counted above and named here so the number is not a bare one:
+
+      record, pre-run  code/audit_2c77/PREDICTIONS.md:178
+      transcript       code/audit_2c77/out_q3_operands.txt:69
+      record, pre-run  code/face_geometry_audit_eaef/PREDICTIONS.md:42
+      transcript       code/face_geometry_audit_eaef/out_e1_operand.txt:125
+      transcript       code/face_geometry_audit_eaef/out_e2_bound.txt:8
+   records stating the term unqualified : 5
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, source read and AST parse this script performs, the requirement that both census files parse at both revisions and that neither operand walk come back empty, and the requirement that the scoring rule return more than one label over the tree it scores
+FINDINGS: 1, population: every operand of every `and`/`or` anywhere in the census's two files, against the operands inside a deciding condition, at HEAD; the 15 unqualified in-d01ff32 sites mg-2c77's finding names, re-derived at adcfb1f by mg-2c77's rule and re-scored at HEAD; the hyphenated-form control on the rule itself; and every site in the WHOLE TREE at HEAD stating the term, scored for the qualifier and classified live / transcript / record
+   FINDING: dfa263c's summary says `20 sites remain unqualified in the tree, EVERY ONE A RECORD`.  Re-derived at HEAD the residue is 20 sites -- the same 20, none missed -- but 15 of them are LIVE CLAIMS under the path-derived kind rule r3 (iii) itself uses to decide treatment (source and prose, not transcripts or prediction files): code/audit_2c77/README.md:14, code/audit_2c77/lib2c77.py:187, code/audit_2c77/q3_operands.py:15, code/audit_2c77/q3_operands.py:55, code/audit_2c77/q3_operands.py:148, code/audit_2c77/q3_operands.py:200, code/audit_2c77/q3_operands.py:235, code/face_geometry_audit_eaef/README.md:7, code/face_geometry_audit_eaef/README.md:8, code/face_geometry_audit_eaef/README.md:45, code/face_geometry_audit_eaef/e1_operand.py:140, code/face_geometry_audit_eaef/e2_bound.py:76, docs/audit-mg-eaef-the-bound-and-the-exit-code.md:67, docs/audit-mg-eaef-the-bound-and-the-exit-code.md:75, docs/audit-mg-eaef-the-bound-and-the-exit-code.md:93.  The sites are correctly declined; the word `record` in the summary is the SCOPE label from r3 (iv) reported as the KIND label from r3 (iii), which is one word over two populations -- A-2's own shape, in the sentence summarising the repair of A-2
+TOTAL BAD: 1

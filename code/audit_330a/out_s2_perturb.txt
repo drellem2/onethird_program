@@ -1,0 +1,139 @@
+==========================================================================
+S2  THE FAILURE, CONSTRUCTED -- NOT RECALLED
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) A COSMETIC COMMIT TO g1_provenance.py, AT HEAD
+--------------------------------------------------------------------------
+   The edit is a comment appended to the end of the file.  It is the
+   same SHAPE as mg-69d1's edit -- that one corrected a sentence -- and
+   the shape is the whole point: an edit with nothing to do with the
+   property must not move an anchor that claims to be about the
+   property.
+
+   The libe34a imported below is the one IN THE CLONE, so the code
+   under test is the code at the revision named, not the code here.
+
+   name                   before     after      
+   REPAIR_REV             4755d029   4755d029   unmoved
+   PRE_REV                3bc2cf76   3bc2cf76   unmoved
+   REV_7E58               4372fae9   4372fae9   unmoved
+   PRE_7E58_REV           52aeaf43   52aeaf43   unmoved
+   LAST_TOUCHING_G1       d01ff32d   ec5f520a   *** MOVED
+
+   the cosmetic commit                            : ec5f520a
+   ANCHOR_DRIFT rows after the edit               : 0
+
+   AND THE HALF THAT MUST MOVE.  If NOTHING moved, this probe would
+   prove only that the edit never reached git.  LAST_TOUCHING_G1 --
+   the derivation the repair KEPT as evidence -- is the control on the
+   probe itself:
+     LAST_TOUCHING_G1  d01ff32d -> ec5f520a   MOVED, so the edit reached git
+
+   SO THE ANCHOR DOES NOT FOLLOW -- and it is not silent either.
+   The derivation that DID follow is still computed and still printed,
+   so the reader is shown the edit happened and shown that the anchor
+   ignored it.  That is `reports a change`, and (iv) asks whether it
+   is also `refuses`.
+
+   mg-e34a's OWN selftest, in the perturbed clone : exit 0
+
+--------------------------------------------------------------------------
+(ii) THE CONTROL -- THE SAME EDIT AT e2577e5, WHERE THE DEFECT LIVES
+--------------------------------------------------------------------------
+   e2577e5 is dfa263c's first parent: mg-8d5e's own predictions
+   commit, the last commit before the repair.  At that revision
+   libe34a.py reads
+
+       REPAIR_REV = last_touching(G1_REL)
+       PRE_REV = resolve(REPAIR_REV + "^")
+
+   and there is no ANCHOR_DRIFT at all.  The same cosmetic commit is
+   applied there.  If the repair is real, the defect reproduces here
+   and does not reproduce above.
+
+   name                   before     after      
+   REPAIR_REV             d01ff32d   ae30cf15   *** MOVED
+   PRE_REV                e5787e11   e2577e55   *** MOVED
+   PRE_7E58_REV           3bc2cf76   e5787e11   *** MOVED
+   LAST_TOUCHING_G1       -          -          unmoved
+
+   the cosmetic commit                            : ae30cf15
+   does libe34a AT e2577e5 have ANCHOR_DRIFT?     : NO
+
+   THE DEFECT REPRODUCES.  At e2577e5 the cosmetic commit becomes
+   `mg-76cc's repair` and its parent becomes `the pre-repair
+   predicate`, with no drift row anywhere, because there is nothing
+   for the derivation to disagree with.  What the run would then print
+   is a table of numbers about a pair of revisions nobody chose.
+
+     at e2577e5, after a comment was appended:
+       REPAIR_REV names ae30cf15 -- the cosmetic commit
+       and its subject is         : probe: a comment appended to g1_provenance.py (mg-330a)
+
+   mg-e34a's selftest AT e2577e5, perturbed       : exit 0  (and it is a DIFFERENT selftest -- the one at HEAD carries assertions e2577e5 does not)
+   AND THE COMPARISON THE WHOLE AUDIT TURNS ON:
+
+     probe                                   REPAIR_REV follows?
+       cosmetic edit at e2577e5 (pre-repair)   YES -- silently
+       cosmetic edit at HEAD    (repaired)     NO
+
+
+--------------------------------------------------------------------------
+(iii) THE REFUSAL -- THREE FAILURES, AND WHETHER THEY DIFFER
+--------------------------------------------------------------------------
+   The claim is that the anchor is THREE things and NO TWO OF THEM
+   FAIL THE SAME WAY: derived from the property, pinned, and compared.
+   Built here rather than read out of r1 (iii).  Each failure is its
+   own clone and its own commit, and each is scored by mg-e34a's OWN
+   selftest -- if one commit could silence all three, the three would
+   be one.
+
+   constructed failure        exit   drift    the selftest line that goes red
+   a wrong pin                1      1        no anchor disagrees with its pin: mg-76cc: derived from
+        FAIL no anchor disagrees with its pin: mg-76cc: derived from the property ('kernel_source=') gives 4
+        FAIL mg-76cc repair, DERIVED from 'kernel_source=' -- derived 4755d029, pinned 00000000
+        FAIL the property anchor is the commit that introduced `kernel_source=`
+        FAILED: no anchor disagrees with its pin: mg-76cc: derived from the property ('kernel_source=') give
+        FAILED: mg-76cc repair, DERIVED from 'kernel_source=' -- derived 4755d029, pinned 00000000
+        FAILED: the property anchor is the commit that introduced `kernel_source=`
+   an unfindable marker       1      1        no anchor disagrees with its pin: mg-76cc: the marker '
+        FAIL no anchor disagrees with its pin: mg-76cc: the marker 'no_such_marker_mg330a=' is in no commit 
+        FAILED: no anchor disagrees with its pin: mg-76cc: the marker 'no_such_marker_mg330a=' is in no comm
+   a non-monotone marker      1      0        the mg-76cc marker is monotone over g1's history: once 
+        FAIL the mg-76cc marker is monotone over g1's history: once present, present in every later commit (
+        FAILED: the mg-76cc marker is monotone over g1's history: once present, present in every later commi
+
+   AND THE CLAIM THAT NO TWO FAIL THE SAME WAY.  Two failures fail
+   the same way iff they make the SAME assertions go red:
+     a wrong pin              vs an unfindable marker     : different
+     a wrong pin              vs a non-monotone marker    : different
+     an unfindable marker     vs a non-monotone marker    : different
+
+--------------------------------------------------------------------------
+(iv) REFUSES, OR REPORTS?  THE ANSWER, MEASURED
+--------------------------------------------------------------------------
+   The brief allows either.  The measurement above says which:
+
+     a COSMETIC edit to g1_provenance.py at HEAD
+       moves the property anchor            : no
+       moves the kept history derivation    : YES, and it is printed
+       makes mg-e34a's selftest red         : no
+       => REPORTS.  The change is on the page and the anchor ignores it.
+
+     a PROPERTY-MOVING edit (the marker removed)
+       makes mg-e34a's selftest red         : yes (iii)
+       => REFUSES.
+
+   So `refuses rather than follows` is satisfied in the strong sense
+   for the edits that move the property, and in the reporting sense
+   for the edits that do not -- which is the correct division, because
+   an instrument that refused to run on every comment could not be run
+   on a live tree at all.  What the repair must not do is FOLLOW, and
+   it does not.
+
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every clone, git read and subprocess run this script performs, plus the requirement that each constructed commit really change the file it names, that the cosmetic edit really leave the property marker where it was, and that mg-e34a's selftest be GREEN in each untouched clone before any probe is read against it
+FINDINGS: 0, population: the 2 derivations libe34a can make of `the revision before mg-76cc's repair`, each re-derived under a cosmetic commit at HEAD and again at e2577e5 where the defect is still present; the 3 constructed failures of the repaired anchor, each scored for whether it is LOUD and for whether it is loud in a DIFFERENT way from the other two; and the question of whether the repaired anchor refuses or reports
+TOTAL BAD: 0
