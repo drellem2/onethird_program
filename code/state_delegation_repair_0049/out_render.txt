@@ -1,10 +1,12 @@
 ============================================================================================
-mg-0049 — WHAT A READER IS SHOWN UNDER THIS REPAIR'S FIVE NEW ROWS
+mg-0049 — WHAT IS IN THE RENDERED PAGE UNDER THIS REPAIR'S FIVE NEW ROWS
 ============================================================================================
   target      docs/state-history/attempt-mg-276d.md
   population  the 5 sections the certified ledger cell cites BY NAME: H1 H2 H3 H4 H5
-  tests       ANY     — the section's heading text appears anywhere a reader looks
-              HEADING — it appears as <h1>..<h6>, i.e. as the document's own prose
+  tests       ANY     — the section's heading text is somewhere in the page
+              HEADING — it is there as <h1>..<h6>, i.e. as the document's own prose
+  NOT MEASURED HERE — whether a reader is SHOWN any of it.  A page can carry the
+              text and show none of it; see visible_a74f.py (mg-a74f, mg-16eb OPEN 1)
   engines     marked, markdown-it, independent implementations
 
   R0  unmutated — the positive control    (delta_control.py: exit 0)
@@ -34,14 +36,22 @@ VERDICT
   0 rows did not match what this repair predicted.
 
   R8 CONFIRMS that the blank page is not about the comment being unclosed: a
-  well-formed comment around the whole document shows a reader nothing either,
-  and this repair exits 1 on it.
+  well-formed comment around the whole document leaves no cited section's text
+  on the page either, and this repair exits 1 on it.
 
-  R5, R6 AND R9 ARE THE HONEST HALF.  In all three, every cited section is still
-  on the page, as the document's own prose, on both renderers — and the control
-  exits 2.  It is right to: R5 puts raw HTML the model does not resolve around
-  the certified surface, and R6 puts every cited section under a heading that
-  says nothing below it is in force, which is what a reader reads.  R9 is a pure
-  cost — a tab a reader cannot see, re-baselined at exit 2 — and it is printed
-  here rather than left for the next auditor to find.
+  R5, R6 AND R9 ARE THE HONEST HALF.  In all three, every cited section's text is
+  still on the page, as the document's own prose, on both renderers — and the
+  control exits 2.  It is right to: R5 puts raw HTML the model does not resolve
+  around the certified surface, and R6 puts every cited section under a heading
+  that says nothing below it is in force, which is what a reader reads.  R9 is a
+  pure cost — a tab that changes no rendered byte, re-baselined at exit 2 — and it
+  is printed here rather than left for the next auditor to find.
+
+  R5 IS NARROWED BY mg-a74f AND THE NARROWING IS THE POINT.  This row read
+  '<details> at the top SUPPRESSES NOTHING'.  Its two numbers are correct and
+  neither is that claim: mg-16eb walked the tag stack on the same mutation and
+  found all five cited sections inside a <details> with no `open` attribute that
+  is never closed, so a reader is shown a closed widget and none of them.  What
+  this file measures is text in the page.  Suppression is measured over a declared
+  set of mechanisms by code/state_delegation_repair_a74f/visible_a74f.py.
 ============================================================================================
