@@ -18,7 +18,7 @@ the raise is that kernel working.
 == E1: the deletion test, every gate the explanation names ==
 
 BASELINE -- the committed artifact, regenerated unmutated
-  [OK    ] controls.py reproduces its committed artifact byte for byte (23695 bytes, exit 0); committed is 23695 bytes
+  [OK    ] controls.py reproduces its committed artifact byte for byte (33924 bytes, exit 0); committed is 33924 bytes
   [OK    ] the unmutated battery exits 0
 
 DELETION TEST -- predictions were registered before the runs
@@ -40,7 +40,7 @@ AssertionError: delete_gate_'shape'/face_complex.py: anchor occurs 0 times, expe
         exit 1; the anchor it names is     if m != len(B):\n        return Trace(False, "shape", 0)
         WOULD DIFFER UNDER: the merged condition being split back into two returns, which is the only thing that would make this anchor apply again.  NOT under this audit being edited -- it is not, and the pinned re-run below is what keeps its measurement alive
   [HOLDS ] and its BASELINE claims ran before it stopped: it regenerated this tree's artifact byte for byte, so the abort is the mutation and not the tree
-        [OK    ] controls.py reproduces its committed artifact byte for byte (23695 bytes, exit 0); committed is 23695 bytes; [OK    ] the unmutated battery exits 0
+        [OK    ] controls.py reproduces its committed artifact byte for byte (33924 bytes, exit 0); committed is 33924 bytes; [OK    ] the unmutated battery exits 0
         WOULD DIFFER UNDER: this tree's controls_output.txt going stale, which would make the abort ambiguous between a missing anchor and a broken tree
 
 ==============================================================================
@@ -135,10 +135,10 @@ by a disjunction that Python spells with no operator.  The subject's docstring s
 the two clauses 'were saying one thing'; below, each of the two things is removed
 alone and the whole battery is run for it.
 
-   S0 -- unperturbed baseline                     -                exit 0   23695 bytes  reference
-   S1 -- ORDER half alone (len(A) != len(B))      CHANGES          exit 1   24909 bytes  match
-   S2 -- WIDTH half alone                         BYTE-IDENTICAL   exit 0   23695 bytes  match
-   S3 -- the whole condition -> False             CHANGES          exit 1   24909 bytes  match
+   S0 -- unperturbed baseline                     -                exit 0   33924 bytes  reference
+   S1 -- ORDER half alone (len(A) != len(B))      CHANGES          exit 1   35138 bytes  match
+   S2 -- WIDTH half alone                         BYTE-IDENTICAL   exit 0   33924 bytes  match
+   S3 -- the whole condition -> False             CHANGES          exit 1   35138 bytes  match
   [HOLDS ] three perturbations of the ONE-CLAUSE condition, each removing one of its two meanings and leaving the other standing, 3 of 3 predictions matched
         S1 CHANGES/1, S2 IDENTICAL/0, S3 CHANGES/1
         WOULD DIFFER UNDER: either half ceasing to be separable -- which would need the condition to stop being a comparison of two lists.  These are not deletions of syntax and are not offered as such: they are the finest PERTURBATIONS the site admits, which is the unit the question is about
@@ -155,14 +155,14 @@ the battery is this tree's, so the two halves of the comparison differ in the
 condition and in nothing else.  It is not that commit's artifact and is not read as
 one -- M0 below is its own baseline.
 
-   M0 -- b6bc2ef's absorb_trace, this battery     -                exit 0   23695 bytes  reference
-   M1 -- ORDER half alone (= clause 2 deleted)    CHANGES          exit 1   24909 bytes  match
-   M2 -- WIDTH half alone (= clause 1 deleted)    BYTE-IDENTICAL   exit 0   23695 bytes  match
+   M0 -- b6bc2ef's absorb_trace, this battery     -                exit 0   33924 bytes  reference
+   M1 -- ORDER half alone (= clause 2 deleted)    CHANGES          exit 1   35138 bytes  match
+   M2 -- WIDTH half alone (= clause 1 deleted)    BYTE-IDENTICAL   exit 0   33924 bytes  match
   [HOLDS ] the live tree's two sub-conditions answer exactly as the pinned tree's two CLAUSES do: order half CHANGES/exit 1 on both, width half BYTE-IDENTICAL/exit 0 on both
         live: S1 CHANGES/1 S2 IDENTICAL/0 || pinned: M1 CHANGES/1 M2 IDENTICAL/0
         WOULD DIFFER UNDER: the rewrite having changed what either half does.  It did not -- the subject's 28,900-pair equivalence says so and this says it again from the battery's side.  Which is the point: the rewrite preserved the behaviour AND the inertness, and removed only the syntax that let a deletion test name it
-  [FINDING B1] THE THIRD RUNG WAS RESPELLED, NOT REMOVED.  On the live tree the `shape` condition's ORDER half -- `len(A) != len(B)` -- can be taken out with the width half left standing and the artifact comes back BYTE-IDENTICAL at 23695 bytes, exit 0, every row green.  That is mg-e7bc's sentence with `return` replaced by `clause` replaced by `sub-condition`, on the tree this commit shipped.
-        The subject's claim -- 'no boolean operator, so the smallest deletable unit inside this gate IS the `return`' -- is TRUE and is about DELETION.  A list comparison is a disjunction written without an operator, so what changed is that the inert half stopped being nameable, not that it stopped being inert.  The subject's own docstring says the two clauses 'were saying one thing'; they were saying two, and one of them is still invisible to the battery.  AND THE BATTERY CANNOT TELL THE WIDTH HALF FROM THE WHOLE GATE: S1 and S3 produce the same 24909-byte artifact, so on this population the order half contributes nothing the width half does not already contribute.  In the subject's own units this perturbation is 0 return, 0 statement, 1 clause and a NET -5 syntax node(s) -- nonzero, so its branch 1 check would flag it; the exposure is not in the declaration, it is that no test in the instrument makes this perturbation at all.
+  [FINDING B1] THE THIRD RUNG WAS RESPELLED, NOT REMOVED.  On the live tree the `shape` condition's ORDER half -- `len(A) != len(B)` -- can be taken out with the width half left standing and the artifact comes back BYTE-IDENTICAL at 33924 bytes, exit 0, every row green.  That is mg-e7bc's sentence with `return` replaced by `clause` replaced by `sub-condition`, on the tree this commit shipped.
+        The subject's claim -- 'no boolean operator, so the smallest deletable unit inside this gate IS the `return`' -- is TRUE and is about DELETION.  A list comparison is a disjunction written without an operator, so what changed is that the inert half stopped being nameable, not that it stopped being inert.  The subject's own docstring says the two clauses 'were saying one thing'; they were saying two, and one of them is still invisible to the battery.  AND THE BATTERY CANNOT TELL THE WIDTH HALF FROM THE WHOLE GATE: S1 and S3 produce the same 35138-byte artifact, so on this population the order half contributes nothing the width half does not already contribute.  In the subject's own units this perturbation is 0 return, 0 statement, 1 clause and a NET -5 syntax node(s) -- nonzero, so its branch 1 check would flag it; the exposure is not in the declaration, it is that no test in the instrument makes this perturbation at all.
   [FINDING B2] AND THE LINE A READER CONSULTS SAYS THE OPPOSITE.  AFTER-5 prints `FINEST UNIT THIS LINE PERTURBS: one `return` statement, and nothing finer is removed`.  Nothing finer is removed BY THAT PATCH; the sentence is read as 'the evidence reaches all the way down at this site', and it does not.
         The ticket mg-c4c8 answered asked for the finest unit to be stated BESIDE THE TEST so a reader need not assume the evidence reaches the bottom.  The sentence that was added states the finest unit OF THE PATCH, which is a different quantity, and the two differ at exactly this site.  What would close it: one clause on that line naming the sub-conditions the guard's condition still separates, or the S1/S2 pair above run beside AFTER-5.
 
@@ -175,7 +175,7 @@ battery builds every `diagonal` violation is also a magnitude violation.  Deleti
 the `diagonal` return should therefore move the TRACE and no DECISION.
 
   [HOLDS ] the `diagonal` return deleted alone: artifact CHANGES, exit 0, 0 row(s) fail -- the gate is MASKED by the magnitude gate that follows it, and the deletion moves labels rather than answers
-        23695 bytes vs 23695 baseline; failing rows: none
+        33924 bytes vs 33924 baseline; failing rows: none
         WOULD DIFFER UNDER: a battery pair whose diagonal differs and whose magnitudes agree, which no poset in this population produces.  This is DISCLOSED in the subject's docstring and confirmed here rather than found: it is the masking the brief asks about, and it is the one place where a deletion changing the artifact is not evidence that anything depends on the deleted code
 
 ==============================================================================
@@ -190,7 +190,7 @@ the `diagonal` return should therefore move the TRACE and no DECISION.
         [BROKEN] `absorb_trace` contains 1 boolean operator of ANY kind -- not 1 'deciding' ones, 1 full stop.  The subject's claim is exact under the wider reading as well as its own
         WOULD DIFFER UNDER: any OTHER claim of that audit going red, which would mean this repair disturbed something it had verified; and equally under that claim HOLDING, which would mean `absorb_trace` still has no operator and the repair did not land
   [HOLDS ] AND ITS THREE PERTURBATION ROWS ARE UNCHANGED BY THE RESPELLING: 3 of 3 still match, so the order half and the width half mean here what they meant when they had no operator.  That is what makes this commit a change of SPELLING and not of units -- and it is measured by the instrument that named them, not by the one that renamed them
-        S1 CHANGES/1 24909 bytes match; S2 BYTE-IDENTICAL/0 23695 bytes match; S3 CHANGES/1 24909 bytes match
+        S1 CHANGES/1 35138 bytes match; S2 BYTE-IDENTICAL/0 33924 bytes match; S3 CHANGES/1 35138 bytes match
         WOULD DIFFER UNDER: either half answering differently after the rewrite -- the exact risk of respelling a comparison as `or` + `zip`.  S2 staying BYTE-IDENTICAL is required as well: if the order half had become covered by accident this would say so, and d2's registered prediction for that clause would MISS
   [HOLDS ] and its cross-check against b6bc2ef still HOLDS -- the two sub-conditions on this tree answer as the two CLAUSES do on the tree that had them, so the units are still the same units under a third spelling
         [HOLDS ] the live tree's two sub-conditions answer exactly as the pinned tree's two CLAUSES do: order half CHANGES/exit 1 on both, width half BYTE-IDE
@@ -212,12 +212,12 @@ Four scripts, and each is stated rather than left to be found.  g4 is
 NOT run here: it re-runs THIS file, and this file running it would not
 terminate.  Its own run_all.sh runs it.
 
-  [HOLDS ] g1_positive_control.py against this tree: exit 0 (expected 0).  its `pc_all_pass.txt` control is REGENERATED by this commit -- it is a derived copy of controls_output.txt and its own claim says a control describing a previous artifact tests nothing about this one.  Its FINDING (the deleted-row corruption) is untouched and does not set its exit status
-        8 claim(s) scored; 0 BROKEN; last line: '=============================================================================='
-        WOULD DIFFER UNDER: g1 going red for any reason other than a stale derived control, or g3 going green -- the second would mean the anchor came back
+  [HOLDS ] g1_positive_control.py against this tree: exit 1 (expected nonzero).  its `pc_all_pass.txt` control is REGENERATED by this commit -- it is a derived copy of controls_output.txt and its own claim says a control describing a previous artifact tests nothing about this one.  Its FINDING (the deleted-row corruption) is untouched and does not set its exit status.  IT WAS EXPECTED 0 UNTIL mg-e35b, which added two scored rows: g1 also freezes the artifact's ROW COUNT at 43 and the artifact now carries 45, so exactly one of its claims is BROKEN and it is that literal -- the same class as e3's two below, and handled the same way.  THE FROZEN AUDIT IS NOT EDITED: a stale count in a document written to record a tree is corrected by saying which tree it recorded, not by rewriting the record
+        8 claim(s) scored; 1 BROKEN; last line: '=============================================================================='
+        WOULD DIFFER UNDER: g1 going red for any reason other than a stale derived control or its stale row-count literal -- a SECOND broken claim there would mean this tree disturbed something that audit verified -- or g3 going green, which would mean the anchor came back
   [HOLDS ] g3_differs_under.py against this tree: exit 1 (expected nonzero).  it aborts on the same absent anchor: its `s1` mutation is the FIRST `shape` return, alone -- the very experiment that produced the finding this commit acts on.  It also freezes '56 claims across four scripts', a figure this commit moves.  Both are stale numbers about a tree that has changed, not retreats
         no claim tally; last line: '\'    m = len(A)\\n    if m != len(B):\\n        return Trace(False, "shape", 0)\\n    for i in range(m):\''
-        WOULD DIFFER UNDER: g1 going red for any reason other than a stale derived control, or g3 going green -- the second would mean the anchor came back
+        WOULD DIFFER UNDER: g1 going red for any reason other than a stale derived control or its stale row-count literal -- a SECOND broken claim there would mean this tree disturbed something that audit verified -- or g3 going green, which would mean the anchor came back
 
 ==============================================================================
 AND WHY IT EXITS 1 AT THE PINNED COMMIT, WHICH IS NOT A FAILURE
@@ -232,10 +232,10 @@ AND WHAT THE REST OF THAT AUDIT SAYS -- did anything retreat?
   [HOLDS ] e2_parity.py: 0 claim(s) broken against this tree (expected 0).  it re-derives where the predicate returns over all four populations, and the 297/306/82/172 split and the 57-of-297 disagreement are untouched by this repair
         exit 0; claims broken: 0
         WOULD DIFFER UNDER: a claim of that audit about the MATHEMATICS or about the predicate's behaviour going broken -- that would be this repair disturbing something already verified, and it is the difference between a stale figure and a retreat
-  [HOLDS ] e3_seams.py: 2 claim(s) broken against this tree (expected 2).  its two remaining BROKEN claims are FROZEN LITERALS of the same kind as its row count -- it asserts the artifact says 'lines scanned: 62' and '40 row names among them', and the artifact now says 64 and 42.  Both are computed live by the row itself and both are correct: there are exactly 64 lines above it and 43 scored rows of which it is one
-        exit 1; claims broken: 2
+  [HOLDS ] e3_seams.py: 4 claim(s) broken against this tree (expected 4).  its four remaining BROKEN claims are FROZEN LITERALS of the same kind as its row count -- it asserts the artifact says 'lines scanned: 62' and '40 row names among them', and the artifact now says 68 and 44.  Both are computed live by the row itself and both are correct: there are exactly 68 lines above it and 45 scored rows of which it is one.  IT WAS 2 UNTIL mg-e35b, which added two scored rows to NEGATIVE CONTROL 4 (the gauge dichotomy and the gauge detector's positive control) and three measured lines: that moved the same two extents again and took two more of that audit's frozen counts with them.  A frozen literal about a tree that has since gained rows is a stale number, not a retreat, and the test that a number is stale rather than wrong is the live re-derivation below
+        exit 1; claims broken: 4
         WOULD DIFFER UNDER: a claim of that audit about the MATHEMATICS or about the predicate's behaviour going broken -- that would be this repair disturbing something already verified, and it is the difference between a stale figure and a retreat
-  [HOLDS ] and the two extents those frozen literals disagree with are printed LIVE by the row that owns them, and are right: 'lines scanned: 64' with 64 lines above it, '42 row names' with 43 scored rows of which it is one
+  [HOLDS ] and the two extents those frozen literals disagree with are printed LIVE by the row that owns them, and are right: 'lines scanned: 68' with 68 lines above it, '44 row names' with 45 scored rows of which it is one
         WOULD DIFFER UNDER: a checker printing an extent it did not measure -- the mg-a4ef/mg-7dd3 defect.  These two move whenever a row is added, which is how this repair moved them
   [HOLDS ] and the number it was frozen against is the one mg-5f9a PUBLISHED as 43 while the artifact carried 41 (mg-d0e2's F3).  The artifact now genuinely carries 43, so the old figure is right for the wrong reason and is corrected at its sites rather than left to be read as confirmation
         WOULD DIFFER UNDER: the row population changing again without the doc sites being re-derived, which is the mg-8e30 defect (a figure measured before the edit that moved it)

@@ -1,0 +1,50 @@
+VERIFY mg-e35b -- independent re-derivation of the repair's numbers
+population: 86 posets up to isomorphism, 2 <= n <= 5
+V1 -- the GAUGE / NON-SIMILAR dichotomy, re-derived
+  [PASS] I1      72 biting = 66 non-similar + 6 gauge + 0 unclassified
+  [PASS] I2      82 biting = 82 non-similar + 0 gauge + 0 unclassified
+  [PASS] I3      82 biting = 82 non-similar + 0 gauge + 0 unclassified
+  [PASS] I4      61 biting = 58 non-similar + 3 gauge + 0 unclassified
+  [PASS] swap01  72 biting = 0 non-similar + 72 gauge + 0 unclassified
+  [PASS] the four scored rows carry 9 gauge (poset,row) pairs in total
+  [PASS] every per-row split matches the value mg-fcf1 reported independently  -- I1 (72, 66, 6, 0); I2 (82, 82, 0, 0); I3 (82, 82, 0, 0); I4 (61, 58, 3, 0); swap01 (72, 0, 72, 0)
+V2 -- the witness search against EXHAUSTIVE search over perms x signs
+  [PASS] the GF(2) witness search agrees with brute force on 86/86 pairs with |L(P)| <= 4
+  [PASS] the GF(2) search and controls.py's BFS agree PAIR BY PAIR on 369/369 biting pairs, not merely in the per-row totals
+V3 -- vacuity: 'did not apply' vs 'applied and unseen'
+    I1      14 vacuous = 14 did-not-apply + 0 applied-but-unseen (facet SET differs on 0, of which 0 have |L(P)| >= 3)
+    I2      4 vacuous = 4 did-not-apply + 0 applied-but-unseen (facet SET differs on 0, of which 0 have |L(P)| >= 3)
+    I3      4 vacuous = 4 did-not-apply + 0 applied-but-unseen (facet SET differs on 0, of which 0 have |L(P)| >= 3)
+    I4      25 vacuous = 0 did-not-apply + 25 applied-but-unseen (facet SET differs on 24, of which 14 have |L(P)| >= 3)
+    swap01  14 vacuous = 4 did-not-apply + 10 applied-but-unseen (facet SET differs on 0, of which 0 have |L(P)| >= 3)
+  [PASS] I1/I2/I3 vacuity is EXACTLY 'the mutation did not apply' -- 0 applied-but-unseen in all three
+  [PASS] I4 vacuity is the OTHER fact -- the mutation applied on all 25 and the pipeline saw none of them; the facet SET differs on 24, 14 with |L(P)| >= 3
+V4 -- the two counts mg-fcf1 called tautologies
+  [PASS] `at_laplacian` takes no incidence argument (['P']) and `claim1_pair` calls it with ['1 positional, 0 keyword'] -- so 344/344 byte-identical targets is FORCED BY THE CODE PATH and could not have come out otherwise
+  [PASS] and the comparison CAN come out otherwise: scaling the target by 2 moves it on 82/86 posets by the same equality test
+  [PASS] no ridge lies in >= 3 facets under any of the four mutations (I1 0, I2 0, I3 0, I4 0)
+  [PASS] I1/I2/I3 never RAISE any ridge's facet count on any poset (I1 0, I2 0, I3 0), so their three zeros are forced at every n and only I4's is a result
+V5 -- the committed artifact states these numbers
+  [PASS] artifact carries the dichotomy total  -- '297 biting (poset, row) pairs = 288 NON-SIMILAR + 9 '
+  [PASS] artifact carries row I1's split  -- 'I1 66/72 non-similar, 6 gauge'
+  [PASS] artifact carries row I4's split  -- 'I4 58/61 non-similar, 3 gauge'
+  [PASS] artifact carries the detector's positive control  -- 'GAUGE on 72/72 of the posets where it bites'
+  [PASS] artifact carries I4's vacuity  -- 'I4 25 vacuous = 0 did-not-apply + 25 applied-but-uns'
+  [PASS] artifact carries the coverage sizing  -- 'coverage at `le_to_facet` is 61/86'
+  [PASS] artifact carries the forced-target disclosure  -- 'COULD NOT HAVE COME OUT OTHERWISE'
+  [PASS] the artifact no longer ASSERTS the hedge (the old wording is absent; the phrase survives only inside the sentence that withdraws it)
+V6 -- EVERY COUNT THIS REPAIR PRINTS, and whether it could have come out differently.  A count that could not is labelled FORCED and is not offered as evidence anywhere in the repair.
+    COULD MOVE       dichotomy: 297 = 288 + 9 + 0  -- an unclassified pair turns the row red; the 9 is a per-poset decision and differs by row (6/0/0/3)
+    FORCED BY MATHEMATICS detector positive control: swap01 GAUGE 72/72  -- exchanging two columns IS a signed-permutation conjugation; the row is an instrument check and says so, and fails only if the detector is wrong
+    COULD MOVE       detector says NOT-GAUGE on 288 of 297  -- a detector that accepted everything would print 297 here
+    COULD MOVE       non-identity witness on 72/72 of swap01  -- a detector answering by diagonal twist alone would print 0
+    COULD MOVE       vacuity split I1/I2/I3 = 14/4/4 did-not-apply, 0 unseen  -- a mutation that applied and left L^rel fixed would land in the other column
+    COULD MOVE       vacuity split I4 = 0 did-not-apply, 25 unseen (24 by facet SET, 14 big)  -- this is a measurement of blindness and is stated, not scored
+    FORCED BY THE CODE PATH target byte-identical 344/344  -- at_laplacian takes no incidence_mode; printed as a property, and the comparison's ability to move is shown by M4/M5 instead
+    FORCED BY CONSTRUCTION no ridge in >= 3 facets, I1/I2/I3 zeros  -- none of the three raises any ridge's facet count; checked in V4b
+    COULD MOVE       no ridge in >= 3 facets, I4 zero  -- I4 rebuilds the facet enumeration outright
+    COULD MOVE       coverage 61/86 at le_to_facet, 58 non-similar  -- derived from the two counts above, both of which could move
+    COULD MOVE       M4 moves the target on 82/86, M5 on 82/86  -- the 4 posets with |L(P)| = 1 have an empty target that scaling cannot move
+  [PASS] every printed count is classified, and the 3 FORCED ones are printed as properties rather than offered as evidence
+
+24 checks, 0 refuted.
