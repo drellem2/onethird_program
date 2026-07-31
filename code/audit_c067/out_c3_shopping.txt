@@ -1,0 +1,85 @@
+==============================================================================
+mg-c067 -- INDEPENDENT AUDIT of the mg-132a publication-anchor repair
+==============================================================================
+    audited as of            : 806533bf4611
+    510 .py files under `code/` in the tree at that rev
+    POPULATION ANCHOR: commit=806533bf46119b018616577ed75402e138d507d6 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
+
+⚠️  THIS TRANSCRIPT IS A MEASUREMENT AT THE COMMIT ABOVE, NOT A LIVE PROPERTY OF
+    THE REPOSITORY.  It was written by a run, and the step that displaces it is
+    A MERGE -- the refinery will rebase this file onto a tree that has grown,
+    and nothing re-runs after one.  The figure above will then be RIGHT WHEN
+    WRITTEN and DISPLACED, which is the parent's word and is used here on
+    purpose.  Re-check with:
+
+        sh code/audit_c067/run_all.sh --at <rev>
+
+    An audit that printed `0 REFUTED` and let you read it as `0 now` would be
+    committing the defect it was filed to examine.
+
+C3a -- DISPLACEMENT: THE CASE (1) CALLS RED AND (2) CALLS GREEN
+------------------------------------------------------------------
+
+Taken from the tree, not constructed.  Both answers are computed for the same
+bytes so the disagreement is exhibited rather than described.
+
+    transcript                 fig   (1) publishing tree   (2) anchor tree   (1) says   (2) says
+    out_anchor_132a.txt        495     1e30484 holds 496 4a06b4c holds 495   RED        DISPLACED
+    out_repair_3f3b.txt        495     cb9f282 holds 496 7dc9180 holds 495   RED        DISPLACED
+  [CONFIRMED] C3a THE TWO ANSWERS DISAGREE ON 2 OF THE 2 DECLARED FIGURES IN THE TREE, AND THE PARENT SAYS SO IN SO MANY WORDS.  Answer (1) calls both red -- the publishing tree holds 496 against a published 495 -- and answer (2) calls both `DISPLACED`, which is green.  ⚠️ THIS IS DISCLOSED RATHER THAN HIDDEN: the README's section `The price, stated rather than hidden` opens 'Under (2) a reader can meet 473 beside a tree of 481 and the check stays green', and `A1c` says NOT RED, AND THAT IS THE DECISION.  A deliverable that has named the case it does not catch has met the ticket's bar for this one
+
+C3b -- SUBSTITUTION: THE CASE (1) CATCHES AND (2) IS ASKED TO TRUST THE FILE ABOUT
+----------------------------------------------------------------------------------
+
+CONSTRUCTED.  A transcript publishing a figure that is NOT the population of
+the tree it was really measured at, carrying a DECLARED anchor naming a commit
+whose tree does hold it.  This is not a forged sha and not a broken digest:
+every field is internally consistent and every one of them resolves.  The only
+false thing is WHICH TREE IS NAMED.
+
+    the transcript publishes            : 481
+    its declared anchor                 : e2577e55202b
+    that commit's tree really holds     : 481   (re-derived independently)
+    the tree it is actually published in: 1e30484 holds 496
+    answer (1) -- `git log -1` -- would say : RED
+    answer (2) -- the parent's rule -- says : DISPLACED
+  [CONFIRMED] C3b ANCHOR SHOPPING READS `DISPLACED` AND IS GREEN.  A figure of 481 published in a tree of 496, declaring an anchor at e2577e5 whose tree genuinely holds 481.  Every check the parent applies passes: the sha resolves, the count re-derives from `git ls-tree`, the digest matches, and the declared count agrees with the published figure so `A2g`'s `INCONSISTENT` does not fire.  ⚠️ ANSWER (1) WOULD HAVE CAUGHT THIS, because `git log -1` picks the examiner and the file cannot argue with it
+  [FINDING  ] C3b' ⚠️ AND THE DELIVERABLE DOES NOT SAY THAT IT DOES NOT CATCH THIS.  The README's `price` section discloses exactly one cost of (2) -- DISPLACEMENT, a true figure that has lost currency -- and answers the objection `an anchor is an unfalsifiable assertion` with three defences, all of which are about the anchor being RESOLVABLE (`A2c` re-derives the count, `A1b` reds an anchor that resolves to nothing, `A2d` recovers a pruned one by digest).  SUBSTITUTION defeats all three by satisfying them: the anchor resolves, the count re-derives, the digest matches.  `A2c` catches a declared anchor whose tree does NOT hold the figure; this is the case where it DOES, and the number is still wrong about the run that produced it.  Under (1) the examiner is fixed by git; under (2) THE PUBLICATION STEP NAMES ITS OWN EXAMINER, and that transfer of authority is the actual price of the decision -- unnamed in a deliverable that is otherwise careful to price itself
+
+C3c -- HOW MUCH ROOM THE SHOPPER HAS, MEASURED
+------------------------------------------------------------------
+
+The finding above is only worth the size of the space it opens.  `A2h` measures
+that a digest is many-to-one; the question here is different and sharper -- for
+a figure a publication step might want to launder, HOW MANY commits in this
+object store would certify it?
+
+    420 commit(s) walked; distinct `code/` populations: 178
+        a figure of 0     would be certified by  29 commit(s)
+        a figure of 495   would be certified by  10 commit(s)
+        a figure of 33    would be certified by  10 commit(s)
+        a figure of 481   would be certified by   9 commit(s)
+        a figure of 472   would be certified by   9 commit(s)
+        a figure of 428   would be certified by   8 commit(s)
+  [MEASURED ] C3c A SHOPPER'S CHOICE, NAMED RATHER THAN TOTALLED: over the 420 commit(s) in this object store there are 178 distinct `code/` populations, and the most common one is held by 29 commit(s).  ⚠️ THE POINT IS NOT THAT THE NUMBER IS LARGE -- it is that ANY commit holding the figure will do, and the publication step is free to pick it.  A figure only has to have been true ONCE, anywhere in the history, for a declared anchor to certify it forever
+
+C3d -- AND THE REPAIR THAT WOULD CLOSE IT ALREADY EXISTS IN THE FILE
+--------------------------------------------------------------------
+
+Not a redesign.  The parent already computes both numbers and prints them side
+by side; what it does not do is ask whether the anchor is one the run could
+have measured at.
+
+    the parent's real anchor 4a06b4c is an ancestor of its publishing commit 1e30484 : NO
+    the shopped anchor      e2577e5 is an ancestor of that same commit                : YES
+  [MEASURED ] C3d ⚠️ THE ANCESTRY TEST DOES NOT SEPARATE THEM EITHER, AND THAT IS WORTH SAYING RATHER THAN PROPOSING A FIX THAT DOES NOT WORK.  The obvious repair -- require the declared anchor to be an ancestor of the publishing commit -- fails on the parent's OWN anchor: 4a06b4c is NOT an ancestor of 1e30484, because the rebase is exactly what took it off that line of descent.  A rule strong enough to reject the shopped anchor would reject every genuinely rebased one.  The two are not distinguishable from inside the repository, which is the honest form of this finding: SUBSTITUTION is not a bug in the lattice, it is the residue of moving the examiner into the file, and it is unnamed
+
+SUMMARY
+------------------------------------------------------------------
+    checks          : 5
+    confirmed       : 2
+    measured        : 2
+    findings        : 1   (defects of the PARENT)
+    refuted         : 0   (controls of THIS instrument that failed)
+
+    measured at     : 806533bf4611  -- re-run after any merge

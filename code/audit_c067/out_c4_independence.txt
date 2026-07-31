@@ -1,0 +1,86 @@
+==============================================================================
+mg-c067 -- INDEPENDENT AUDIT of the mg-132a publication-anchor repair
+==============================================================================
+    audited as of            : 806533bf4611
+    510 .py files under `code/` in the tree at that rev
+    POPULATION ANCHOR: commit=806533bf46119b018616577ed75402e138d507d6 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
+
+⚠️  THIS TRANSCRIPT IS A MEASUREMENT AT THE COMMIT ABOVE, NOT A LIVE PROPERTY OF
+    THE REPOSITORY.  It was written by a run, and the step that displaces it is
+    A MERGE -- the refinery will rebase this file onto a tree that has grown,
+    and nothing re-runs after one.  The figure above will then be RIGHT WHEN
+    WRITTEN and DISPLACED, which is the parent's word and is used here on
+    purpose.  Re-check with:
+
+        sh code/audit_c067/run_all.sh --at <rev>
+
+    An audit that printed `0 REFUTED` and let you read it as `0 now` would be
+    committing the defect it was filed to examine.
+
+C4a -- EACH ROUTE BROKEN IN TURN, ON A REAL TRANSCRIPT
+------------------------------------------------------------------
+
+The subject is the parent's own committed transcript, published at 1e30484.
+Each row below is that file with ONE route disabled; the verdict is the
+parent's own, and what is being read off is WHICH ROUTE PICKED UP THE SLACK.
+
+    construction                                 verdict                route
+    intact -- all three available                DISPLACED              DECLARED
+    DECLARED broken (anchor line deleted)        DISPLACED              INFERRED
+    DECLARED sha mangled, digest intact          DISPLACED              RECOVERED
+    digest mangled, DECLARED sha intact          DISPLACED              DECLARED
+    anchor line deleted AND body hex stripped    UNANCHORED             NONE
+    anchor line deleted, body hex intact         DISPLACED              INFERRED
+  [CONFIRMED] C4a WITH ALL THREE ROUTES BROKEN THE LATTICE FAILS CLOSED: `UNANCHORED`, which is red.  A redundancy scheme whose exhausted state is green would be a blessing rather than a check, and this one is not
+  [CONFIRMED] C4a' AND THE TWO HALVES OF THE ANCHOR LINE ARE GENUINELY INDEPENDENT OF EACH OTHER: mangling the sha leaves `DISPLACED` via RECOVERED, mangling the digest leaves `DISPLACED` via DECLARED.  Each survives the other's corruption, which is the redundancy `A2d` claims and it holds under construction rather than only in the synthetic case
+
+C4b -- BUT THE INPUT THAT BREAKS TWO ROUTES AT ONCE
+------------------------------------------------------------------
+
+The digest is the answer to a lost sha.  It is stored IN THE SAME LINE AS THE
+SHA, written by ONE call to `anchor_line()`, in ONE `print`.  So the failure
+that takes the sha takes the digest with it -- not a corrupted sha, which C4a
+shows is survivable, but a MISSING LINE: a transcript truncated by a crash, a
+transcript from a run whose publication step predates the field, an editor
+touching the header, or the redirect in `run_all.sh` dying mid-write.
+
+    anchor line deleted -> verdict DISPLACED, route INFERRED
+
+  [CONFIRMED] C4b DECLARED AND RECOVERED ARE NOT TWO ROUTES, THEY ARE ONE LINE.  Delete it and both die together; what catches the transcript is INFERRED, giving `DISPLACED`.  ⚠️ THE SURVIVOR IS THE ROUTE THE PARENT ITSELF CALLS STRUCTURALLY WEAKER: `A1e` says inference 'SELECTS FOR AGREEMENT and therefore CANNOT WITNESS `WRONG WHEN WRITTEN`'.  So under the common-mode failure of a dropped anchor line, the remaining redundancy cannot witness the very defect this arc exists to catch
+  [FINDING  ] C4b' ⚠️ AND THAT DEGRADATION IS SILENT AT THE ONE PLACE IT MATTERS.  The verdict for a transcript whose anchor line was dropped is `DISPLACED` -- the same word, with `(anchor INFERRED)` beside it.  `A1e` COUNTS inferred anchors and explains the weakness, so the information is on the page; what is missing is any rung that treats `a transcript that HAD a declared anchor and now does not` differently from `a legacy transcript that never had one`.  The first is evidence of damage and the second is just history, and the lattice gives them the same label
+
+C4c -- THE WORKING TREE IS IGNORED, CONSTRUCTED RATHER THAN TRUSTED
+-------------------------------------------------------------------
+
+`verdict_for()` documents that it reads from git and never from disk.  A
+post-merge audit that read the working tree would not be auditing the merge.
+Asserted here by CORRUPTING THE FILE ON DISK and re-running -- and the on-disk
+bytes are restored and re-verified afterwards.
+
+    verdict before corrupting the working tree : DISPLACED
+    verdict while the file on disk says 999    : DISPLACED
+    on-disk bytes restored byte-identically    : YES
+  [CONFIRMED] C4c THE WORKING TREE IS GENUINELY IGNORED: the verdict is `DISPLACED` whether the file on disk publishes 495 or 999, because the bytes are read from git at the publishing commit.  ⚠️ THIS IS LOAD-BEARING FOR THE WHOLE `--at` REMEDY -- an audit of a past commit that read present-day bytes would answer a question nobody asked.  The probe restored the file byte-identically (verified)
+
+C4d -- THE SAME QUESTION TURNED ON THIS AUDIT'S OWN TOOLING
+------------------------------------------------------------------
+
+`Check your own tooling for the defect you are repairing.`  This instrument
+derives populations by its own `git ls-tree` walk.  If that walk and the
+parent's disagree, one of us is wrong and every count in both transcripts is
+in doubt -- so they are compared across a spread of commits, which is a check
+neither could perform alone.
+
+    commits compared : 45
+    disagreements    : 0  
+  [CONFIRMED] C4d TWO INDEPENDENT DERIVATIONS OF THE POPULATION AGREE ON ALL 45 COMMIT(S) COMPARED -- this module's own `ls-tree -r` walk with a blob-type filter, against the parent's `py_files_at()`.  ⚠️ THIS IS THE ROW THAT LICENSES EVERY OTHER COUNT IN THIS AUDIT.  Had they disagreed, the finding would have been about the two of us and not about the anchor, and this instrument would have had no standing to report a figure at all.  It is also the check the arc's own history says is owed: `8c55168` records two copies of `figures()` disagreeing on 3
+
+SUMMARY
+------------------------------------------------------------------
+    checks          : 6
+    confirmed       : 5
+    measured        : 0
+    findings        : 1   (defects of the PARENT)
+    refuted         : 0   (controls of THIS instrument that failed)
+
+    measured at     : 806533bf4611  -- re-run after any merge

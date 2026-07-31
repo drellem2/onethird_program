@@ -22,11 +22,29 @@ OWN = "code/publication_anchor_132a/out_anchor_132a.txt"
 F3B = "code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt"
 F6D = "code/hodge_leverage_repair_6df0/out_repair_6df0.txt"
 
+def pre_rebase_ref():
+    """The ref that still holds mg-132a's pre-rebase commits.
+
+    ⚠️ TRIED IN ORDER RATHER THAN NAMED, AND THIS IS NOT DEFENSIVE PADDING.
+    The first version of this script said `polecat-132a` and CRASHED MID-AUDIT
+    when that local branch was deleted while the audit was running.  The
+    remote-tracking ref survived.  Any single ref name here is a hard-coded
+    anchor of exactly the kind this audit exists to complain about."""
+    for ref in ("polecat-132a", "origin/polecat-132a",
+                "refs/remotes/origin/polecat-132a"):
+        if L.resolve(ref):
+            return ref
+    return None
+
+
 # The pre-rebase and post-rebase twins, by commit subject.  Derived, not
 # hard-coded: a hard-coded pair would rot the next time anything is rebased.
 def twins():
     pairs = []
-    pre = L.git("log", "--format=%H%x1f%s", "polecat-132a", "-n", "12").splitlines()
+    ref = pre_rebase_ref()
+    if ref is None:
+        return []
+    pre = L.git("log", "--format=%H%x1f%s", ref, "-n", "12").splitlines()
     post = L.git("log", "--format=%H%x1f%s", "main", "-n", "40").splitlines()
     post_by_subject = {}
     for line in post:
@@ -71,10 +89,12 @@ def main(argv):
     # ----------------------------------------------------------------- C1a
     head = L.head
     head("C1a -- THE REBASE IS REAL, AND IT IS THE ONE THAT DISPLACED THE PARENT")
-    print("""
+    print(f"""
 Each of mg-132a's commits exists twice.  The pair is found by matching commit
-SUBJECTS across `polecat-132a` and `main` rather than by a hard-coded table,
-so this row cannot go quietly true by naming commits that no longer exist.
+SUBJECTS across `{pre_rebase_ref()}` and `main` rather than by a hard-coded
+table, so this row cannot go quietly true by naming commits that no longer
+exist -- and the ref itself is RESOLVED rather than named, for the reason
+`C1a''` records.
 """)
     pairs = twins()
     for pre, post, subj in pairs:
@@ -91,12 +111,27 @@ so this row cannot go quietly true by naming commits that no longer exist.
              f"RE-RUNS AFTER, performed on the parent itself, four commits "
              f"after it argued that it would be")
     unreach = [a for a, b, _ in pairs if not L.reachable(a, as_of)]
+    refs = sorted(set(r for a in unreach[:1] for r in L.refs_containing(a)))
     L.record(len(unreach) == len(pairs),
              f"C1a' and all {len(unreach)} of the pre-rebase commit(s) are "
              f"UNREACHABLE from the audited rev -- they survive only on "
-             f"{', '.join(sorted(set(r for a in unreach[:1] for r in L.refs_containing(a)))) or 'no ref'}."
-             f"  The commits the committed transcript names as its own "
-             f"provenance are off the mainline")
+             f"{', '.join(refs) or 'NO REF AT ALL'}.  The commits the "
+             f"committed transcript names as its own provenance are off the "
+             f"mainline")
+    L.finding(
+        f"C1a'' ⚠️ AND THE EXPOSURE NARROWED WHILE THIS AUDIT WAS RUNNING.  "
+        f"The first execution of this script resolved the pre-rebase commits "
+        f"through the LOCAL branch `polecat-132a`; the second CRASHED because "
+        f"that branch had been deleted between the two runs, and the commits "
+        f"now hang off {len(refs)} ref: {', '.join(refs) or 'none'}.  "
+        f"The objects are still present and every anchor still resolves, so "
+        f"nothing is broken yet -- but `A1d` predicted that a rebased "
+        f"measurement commit 'survives on whatever side ref still points at "
+        f"it and dies at the next `git gc`', and the count of such refs for "
+        f"the parent's own anchor went from 2 to 1 inside this audit's "
+        f"runtime.  ⚠️ THIS IS THE PARENT'S FORECAST BEING OBSERVED RATHER "
+        f"THAN REASONED ABOUT, and it is the concrete reason `C2c'` matters: "
+        f"one more deletion and the digest has nothing left to recover to")
 
     # ----------------------------------------------------------------- C1b
     head("C1b -- THE PARENT'S OWN INSTRUMENT, RE-RUN AT FOUR REVS")

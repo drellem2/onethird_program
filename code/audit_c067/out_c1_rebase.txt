@@ -1,0 +1,40 @@
+==============================================================================
+mg-c067 -- INDEPENDENT AUDIT of the mg-132a publication-anchor repair
+==============================================================================
+    audited as of            : 806533bf4611
+    510 .py files under `code/` in the tree at that rev
+    POPULATION ANCHOR: commit=806533bf46119b018616577ed75402e138d507d6 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
+
+⚠️  THIS TRANSCRIPT IS A MEASUREMENT AT THE COMMIT ABOVE, NOT A LIVE PROPERTY OF
+    THE REPOSITORY.  It was written by a run, and the step that displaces it is
+    A MERGE -- the refinery will rebase this file onto a tree that has grown,
+    and nothing re-runs after one.  The figure above will then be RIGHT WHEN
+    WRITTEN and DISPLACED, which is the parent's word and is used here on
+    purpose.  Re-check with:
+
+        sh code/audit_c067/run_all.sh --at <rev>
+
+    An audit that printed `0 REFUTED` and let you read it as `0 now` would be
+    committing the defect it was filed to examine.
+
+C1a -- THE REBASE IS REAL, AND IT IS THE ONE THAT DISPLACED THE PARENT
+----------------------------------------------------------------------
+
+Each of mg-132a's commits exists twice.  The pair is found by matching commit
+SUBJECTS across `polecat-132a` and `main` rather than by a hard-coded table,
+so this row cannot go quietly true by naming commits that no longer exist.
+
+Traceback (most recent call last):
+  File "/Users/daniel/.pogo/polecats/c067/code/audit_c067/c1_rebase.py", line 241, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "/Users/daniel/.pogo/polecats/c067/code/audit_c067/c1_rebase.py", line 79, in main
+    pairs = twins()
+  File "/Users/daniel/.pogo/polecats/c067/code/audit_c067/c1_rebase.py", line 29, in twins
+    pre = L.git("log", "--format=%H%x1f%s", "polecat-132a", "-n", "12").splitlines()
+          ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniel/.pogo/polecats/c067/code/audit_c067/lib_c067.py", line 34, in git
+    raise RuntimeError(f"git {' '.join(args)}: {r.stderr.strip()}")
+RuntimeError: git log --format=%H%x1f%s polecat-132a -n 12: fatal: ambiguous argument 'polecat-132a': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
