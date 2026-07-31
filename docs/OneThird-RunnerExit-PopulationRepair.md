@@ -119,17 +119,25 @@ re-derives **1**, the ticket said **1**.
 Applied, mechanically, to the sweep itself. The population of reader-facing
 artifacts is derived from `git show --name-only 52aeaf4` rather than from the
 four files the audit happened to name — a hand-list is a filename rule, and
-that is the defect one section up. **18 strength-marked numeric claims**, every
-one dispositioned with the reason. **Four were wrong:**
+that is the defect one section up. **20 strength-marked numeric claims**, every
+one dispositioned with the reason — and coverage checked in **both** directions,
+so a hit with no rule and a rule with no hit are each an error. **Five were
+wrong:**
 
-* the two `pipefail` rows (README and the published document);
-* `k1_census.py`'s docstring;
+* the `pipefail` row in the sweep's README, in its `OUTCOMES.md`, and in this
+  document — three artifacts of one figure;
+* `k1_census.py`'s docstring, which is the fourth;
 * *"the shebang is `#!/bin/sh` on all 64 runners (measured)"* — it is **59 of
   64**, and the other five are `#!/bin/bash` or `#!/usr/bin/env bash`.
 
 That last one is the same defect with the roles reversed. `k2_consume.py`
 printed *"on 59 of the 64"*. The **instrument was right and the document rounded
 it up to `all`** — and then wrote `(measured)` beside it.
+
+**I predicted four and measured five, and the miss is itself an instance of the
+finding.** The one I did not predict is `OUTCOMES.md`'s own row, which reads
+`AGREES` for a number its instrument's transcript marks `DIFFERS`. It is kept as
+a miss in `OUTCOMES.md` rather than corrected into a hit.
 
 ---
 
