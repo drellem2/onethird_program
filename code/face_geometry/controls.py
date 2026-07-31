@@ -83,6 +83,7 @@ change that belongs to its own item -- this one corrects a printed reason.
 Run:  python3 controls.py
 """
 
+import itertools
 import sys
 
 from face_complex import (
@@ -91,7 +92,7 @@ from face_complex import (
     coxeter_compression, twist, mat_eq, mat_sub, is_diagonal, reduced_betti,
     rank_mod_p, rank_exact, adjacent_transposition_graph, perm_sign,
     absorbable_by_diagonal_twist, absorb_trace, gate_violations, diagonal_moves,
-    not_isospectral,
+    not_isospectral, le_to_facet_offbyone,
 )
 from posets import all_posets, POSET_COUNTS, cover_string
 
@@ -725,6 +726,122 @@ def absorbable_bruteforce(A, B):
     return False
 
 
+# ---------------------------------------------------------------------------
+# THE GAUGE DETECTOR (mg-e35b), and WHY IT LIVES IN THIS FILE.
+#
+# It belongs beside `absorbable_bruteforce` above and for the same reason: it is
+# a DERIVED expected value, not part of the object under test.  `absorb_trace`
+# lives in face_complex.py because it is the predicate NEGATIVE CONTROL 4 scores;
+# this is a second, independent answer to an overlapping question, and the whole
+# value of it is that the two can disagree.
+#
+# AND THERE IS A SECOND, MEASURED REASON, recorded because the first draft of
+# mg-e35b put both functions in face_complex.py and it cost two instruments.
+# mg-0b07's p3 (re-run at HEAD by code/face_geometry_instr_5f9a/d4) runs THIS
+# tree's controls.py against a PINNED face_complex.py from b6bc2ef.  A new
+# function in face_complex.py that controls.py imports makes that mix an
+# ImportError -- the battery produced 0 bytes and exit 1, both of p3's pinned
+# rows went MISS, and d4 went from 0 BROKEN to 5.  A file two instruments pin
+# is a file whose import surface is load-bearing outside this repository's own
+# runner, and adding to it is not free.
+#
+# WHAT THAT COSTS, said rather than left as a silent gain: d2's clause sweep
+# reads its population from face_complex.py and posets.py, so the two clauses of
+# `signed_permutation_witness`'s shape guard are NOT swept here, exactly as
+# posets.py's two are not.  When they were in face_complex.py the sweep found
+# them, and its verdict was NOT COVERED -- deletion establishes nothing about
+# them, because no call site in this battery passes matrices of different order
+# or a ragged one.  That verdict is the same either way; what is lost is that
+# the sweep would have printed it.
+# ---------------------------------------------------------------------------
+
+def permute_matrix(L, pi):
+    """Relabel the facet indices of L by `pi`:  (Pi^T . L . Pi)[i][j] =
+    L[pi[i]][pi[j]], with Pi the permutation matrix of `pi`.
+
+    Separated from the sign question on purpose.  `absorbable_by_diagonal_twist`
+    decides the DIAGONAL half of the gauge group; this supplies the PERMUTATION
+    half, and the two together are the signed permutations -- the family
+    NEGATIVE CONTROL 4 rejected `facet_swap01` for lying in.
+    """
+    m = len(L)
+    return [[L[pi[i]][pi[j]] for j in range(m)] for i in range(m)]
+
+
+def signed_permutation_witness(A, B, perms):
+    """Exhibit a signed permutation carrying A to B, or return None.
+
+    Searches `perms` for a pi and a sign vector s with
+
+        s_i . s_j . A[pi[i]][pi[j]] == B[i][j]   for all i, j,
+
+    i.e. B = S . (Pi^T . A . Pi) . S -- A and B differ by a relabelling of the
+    facet set composed with a re-orientation.  Returns (pi, s) or None.
+
+    WHAT MAKES THE ANSWER A WITNESS AND NOT AN OPINION.  The sign vector is
+    SOLVED (a BFS over the off-diagonal support, propagating s_j = s_i . t with
+    t = B[i][j] / A[pi[i]][pi[j]]) and then the product S . (Pi^T A Pi) . S is
+    RECONSTRUCTED IN FULL and compared with B by `mat_eq`.  A caller therefore
+    gets a pair it can check itself, and a bug in the propagation cannot return
+    a false positive -- the reconstruction would not match.  That is the same
+    standard mg-fcf1 applied to `absorb_trace` (independent BFS plus explicit
+    reconstruction, agreeing with brute force on 306/306), applied here to the
+    larger family.  A NEGATIVE answer is weaker and is bounded by `perms`: it
+    says no permutation IN THE CANDIDATE LIST works, not that none exists.
+    Callers must state which list they passed -- see `gauge_candidate_perms` in
+    controls.py, which passes every permutation when |L(P)| is small enough to
+    enumerate and named candidates otherwise.
+
+    WHY IT IS NOT `absorbable_by_diagonal_twist(permute_matrix(A, pi), B)`.
+    That composition would answer the same question and is the obvious way to
+    write it, but it would make every gauge classification in this battery
+    depend on the predicate whose own gate labelling has been repaired three
+    times (mg-8a12 -> mg-da45 -> mg-5f9a).  This function shares no line with
+    it, so the dichotomy row in NEGATIVE CONTROL 4 and the absorbability rows
+    above it are two independent measurements of overlapping questions, and
+    they can disagree -- which is what makes the consistency between them worth
+    printing.
+    """
+    m = len(A)
+    if m != len(B) or any(len(A[i]) != len(B[i]) for i in range(m)):
+        return None
+    for pi in perms:
+        M = permute_matrix(A, pi)
+        if any(M[i][i] != B[i][i] for i in range(m)):
+            continue                      # s_i^2 = 1 pins the diagonal
+        if any(abs(M[i][j]) != abs(B[i][j])
+               for i in range(m) for j in range(m)):
+            continue                      # |s_i s_j| = 1 pins the magnitudes
+        s = [0] * m
+        ok = True
+        for root in range(m):
+            if s[root]:
+                continue
+            s[root] = 1
+            stack = [root]
+            while stack and ok:
+                i = stack.pop()
+                for j in range(m):
+                    if j == i or M[i][j] == 0:
+                        continue
+                    t = 1 if B[i][j] == M[i][j] else -1
+                    if s[j] == 0:
+                        s[j] = s[i] * t
+                        stack.append(j)
+                    elif s[j] != s[i] * t:
+                        ok = False
+                        break
+            if not ok:
+                break
+        if not ok:
+            continue
+        # RECONSTRUCT AND COMPARE.  Nothing above is trusted: the returned pair
+        # is only returned if it reproduces B entry for entry.
+        rebuilt = [[s[i] * M[i][j] * s[j] for j in range(m)] for i in range(m)]
+        if mat_eq(rebuilt, B):
+            return (list(pi), s)
+    return None
+
 # THE TWO GATES NOTHING IN THIS BATTERY REACHES (mg-d0e2 OUTSTANDING 1, landed
 # by mg-04a8).
 #
@@ -875,6 +992,97 @@ def predicted_incidence_delta(P, mode):
     return None
 
 
+# The largest |L(P)| at which `gauge_candidate_perms` enumerates EVERY
+# permutation.  Above it the candidate list is the named relabelling the
+# mutation itself induces, and nothing else -- so a NOT-GAUGE answer above this
+# bound is bounded by the list and says so wherever it is printed (mg-e35b).
+PERM_BRUTE_MAX = 6
+
+
+def gauge_candidate_perms(P, mode):
+    """The permutations of the facet index set offered to
+    `signed_permutation_witness` when asking whether `mode` is a GAUGE on P.
+
+    THREE SOURCES, and the bound is the point (mg-e35b, landing mg-fcf1's F2
+    tail).  The question "is the corrupted complex the true one relabelled?" is
+    the same question this section already used to REJECT `facet_swap01` -- *a
+    relabelling of the facet set is a signed-permutation conjugation, hence
+    isospectral*.  mg-fcf1 applied that standard to the rows this section KEPT
+    and found it disqualifies 9 (poset, row) pairs, so the standard has to be
+    asked of every row, by this file, on this file's own population.  Deciding
+    it in general is a graph-isomorphism-shaped search; what is offered instead
+    is an explicitly bounded candidate list:
+
+      1. the IDENTITY.  A pure diagonal twist is a signed permutation with
+         pi = id, so this makes the gauge question a widening of the
+         absorbability question rather than a different one.
+      2. the RELABELLING THE MUTATION INDUCES, when the mutated facet list is a
+         permutation of the true one: facet i of the corrupted complex is then
+         facet pi(i) of the true one and the whole complex is a relabelling.
+         This is the case that catches `facet_swap01` (pi = the transposition)
+         and row I4 on the antichains (pi = cyclic rotation of L(P) = S_n).
+      3. EVERY permutation, when |L(P)| <= PERM_BRUTE_MAX.  This is what settles
+         row I1's six -- there the facet SET is untouched, so source 2 offers
+         only the identity, and the relabelling is a genuine search.
+
+    A GAUGE answer is a witness and needs no bound.  A NOT-GAUGE answer is
+    bounded by this list, and the row that prints it says so.
+    """
+    les = linear_extensions(P)
+    m = len(les)
+    perms = [list(range(m))]
+    true_facets = [le_to_facet(w) for w in les]
+    mut_facets = [le_to_facet_offbyone(w) for w in les] \
+        if mode == "facet_offbyone" else list(true_facets)
+    if mode == "facet_swap01" and m >= 2:
+        mut_facets[0], mut_facets[1] = mut_facets[1], mut_facets[0]
+    if sorted(mut_facets) == sorted(true_facets):
+        idx = {f: i for i, f in enumerate(true_facets)}
+        induced = [idx[f] for f in mut_facets]
+        if induced not in perms:
+            perms.append(induced)
+    if m <= PERM_BRUTE_MAX:
+        perms.extend(list(p) for p in itertools.permutations(range(m)))
+    return perms
+
+
+def mutation_applied_at_site(P, mode):
+    """Did `mode` change the object it names, whatever it then did to L^rel?
+
+    THE TWO MEANINGS OF "VACUOUS", SEPARATED (mg-e35b, landing mg-fcf1's F4).
+    Every row of NEGATIVE CONTROL 4 reports a vacuous count, and until now the
+    label covered two categorically different facts:
+
+      the mutation DID NOT APPLY -- there was no eligible ridge to re-target,
+        drop or re-split, so the corrupted build IS the true build and there is
+        nothing for the pipeline to see.  This is I1, I2 and I3's whole vacuous
+        population.
+      the mutation APPLIED AND THE PIPELINE DID NOT SEE IT -- a different
+        complex was built and claim (1) still holds on it.  That is not vacuity,
+        it is BLINDNESS at the site the row is named after, and it is I4's whole
+        vacuous population.
+
+    Returning "did the site change" separately from "did L^rel change" is what
+    lets a row say which of the two it is reporting.  For the three ridge
+    mutations the site is `mutated_ridge` (None when no eligible ridge exists);
+    for the two facet-enumeration mutations it is the facet list itself.
+    """
+    td_mut = top_laplacians(P, incidence_mode=mode)
+    if mode in ("facet_offbyone", "facet_swap01"):
+        return td_mut["facets"] != top_laplacians(P)["facets"]
+    return td_mut["mutated_ridge"] is not None
+
+
+def mutated_facet_set_differs(P, mode):
+    """Does `mode` build a DIFFERENT SET of facets, not merely a different
+    ordering of the same set?  The stronger half of `mutation_applied_at_site`,
+    and the one that makes I4's vacuous posets a blindness rather than a
+    relabelling: on those the complex under test is genuinely not F(P).
+    """
+    td_mut = top_laplacians(P, incidence_mode=mode)
+    return sorted(td_mut["facets"]) != sorted(top_laplacians(P)["facets"])
+
+
 def negative_control_incidence(nmax):
     """NEGATIVE CONTROL 4 -- corrupt the INCIDENCE STRUCTURE of F(P) (mg-2789,
     repaired by mg-8a12 after the mg-fcf1 audit).
@@ -1016,6 +1224,37 @@ def negative_control_incidence(nmax):
     measuring it.  Agreeing with the auditor was the transmission path; the file
     that acts on a number is the file that has to measure it.
 
+    AND THE GAUGE STANDARD IS NOW ASKED OF THE ROWS KEPT, NOT ONLY OF THE ROW
+    REJECTED (mg-fcf1's F1/F2 tail, landed by mg-e35b).  `facet_swap01` was
+    rejected on one sentence -- *a relabelling of the facet set is a
+    signed-permutation conjugation, hence isospectral* -- and that sentence was
+    never turned on the four rows kept.  Turned on them it disqualifies NINE
+    (poset, row) pairs: row I4's off-by-one is prefixes_true(rot(w)) with rot
+    the cyclic rotation, so on an ANTICHAIN (L(P) = S_n, rot a bijection of it)
+    the mutated facet SET is the true facet set and the mutation is a bare
+    permutation conjugation -- and those three antichains are exactly row I4's
+    "spectrum moved on 58 of 61" remainder.  Row I1's six are the same shape.
+    So the sentence this file used to print about that remainder -- *"no claim
+    is made either way"* -- pointed at precisely the pairs where the answer is
+    known and adverse.  A HEDGE IS NOT AUTOMATICALLY HONEST: check what is IN
+    the remainder before writing one.  There is now no remainder to hedge:
+    `signed_permutation_witness` classifies every biting pair GAUGE (with an
+    exhibited permutation and sign vector, reconstructed and compared) or
+    NON-SIMILAR (spectral proof), the completeness is a scored row, and the
+    detector has a positive control on the corruption whose answer this section
+    committed to by rejecting it.  The classification is computed HERE and not
+    quoted from mg-fcf1, because adopting an auditor's number instead of
+    measuring it is the transmission path mg-8a12 was caught on.
+
+    WHAT THAT DID AND DID NOT CHANGE.  It did NOT change any row's scored
+    condition: the rejections are real on all 297 pairs, and a gauge pair is
+    still a pair where the corrupted matrix differs from the target.  What it
+    changes is what a rejection is EVIDENCE FOR -- on the nine gauge pairs it
+    is not evidence that the battery can tell a construction error from a
+    re-labelling -- and that is carried by the coverage line at the foot of the
+    section rather than by re-scoring.  Rescoping row I4's condition remains
+    deferred, for the reason recorded above it.
+
     WHAT THIS SECTION DOES NOT SHOW.  It tests the four sites above, on the
     posets stated in each row, and nothing wider.  It does not certify the rest
     of the construction: linear_extensions is not corrupted here (it is checked
@@ -1024,7 +1263,8 @@ def negative_control_incidence(nmax):
     do not use.
     """
     print("NEGATIVE CONTROL 4 -- corrupt the INCIDENCE STRUCTURE of F(P), at four "
-          "named sites (mg-2789, scoring repaired by mg-8a12)")
+          "named sites (mg-2789, scoring repaired by mg-8a12, gauge standard "
+          "applied to the rows kept by mg-e35b)")
     ps = [P for n in range(2, nmax + 1) for P in all_posets(n)]
     N = len(ps)
     # The third field says whether the mutation has a SINGLE named site, so that
@@ -1145,6 +1385,11 @@ def negative_control_incidence(nmax):
     # row now has to state.
     gate_rows = []
     tot_app = tot_shape = tot_parity = tot_sign = tot_signs_read = tot_both = 0
+    # mg-e35b: the section-wide dichotomy and the vacuity split, per row, for
+    # the three rows added below and for the coverage sentence.
+    dich_rows = []
+    tot_nonsim = tot_gauge = tot_unclassified = 0
+    vac_rows = []
     for name, mode, localised in muts:
         app = rej = absorb = spec = 0
         caused = shape_ok = diag_preserved = diag_moved = residual_max = 0
@@ -1152,6 +1397,12 @@ def negative_control_incidence(nmax):
         mag_entries = sign_entries = 0
         signs_read = both_gates = only_mag = sign_any = 0
         vac, vac_sizes = 0, set()
+        # THE GAUGE DICHOTOMY (mg-e35b, landing mg-fcf1's F2 tail) and THE TWO
+        # MEANINGS OF VACUOUS (mg-fcf1's F4).  Both are computed here, in the
+        # same sweep as everything else the row prints, so that the row states
+        # them about its own population rather than citing an audit for them.
+        nonsim = gauge = unclassified = 0
+        blind = blind_set = blind_big = 0
         for P in ps:
             L_true, target = claim1_pair(P)
             L_mut, target_mut = claim1_pair(P, incidence_mode=mode)
@@ -1161,14 +1412,33 @@ def negative_control_incidence(nmax):
             if mat_eq(L_mut, L_true):
                 vac += 1
                 vac_sizes.add(len(linear_extensions(P)))
+                # Which KIND of vacuous?  "The mutation did not apply" and "it
+                # applied and the pipeline is blind to it" are different facts
+                # and were printed under one word (mg-fcf1 F4).
+                if mutation_applied_at_site(P, mode):
+                    blind += 1
+                    if mutated_facet_set_differs(P, mode):
+                        blind_set += 1
+                        blind_big += len(linear_extensions(P)) >= 3
                 continue
             app += 1
             if not mat_eq(L_mut, target):
                 rej += 1
             if absorbable_by_diagonal_twist(L_mut, target):
                 absorb += 1
+            # THE DICHOTOMY, classified per poset with no third bucket allowed.
+            # NON-SIMILAR is a spectral PROOF (no similarity transform at all,
+            # so in particular no signed permutation); GAUGE is an EXHIBITED
+            # witness, reconstructed and compared.  Anything neither is
+            # UNCLASSIFIED and turns the dichotomy row below red.
             if not_isospectral(L_mut, L_true):
                 spec += 1
+                nonsim += 1
+            elif signed_permutation_witness(
+                    L_true, L_mut, gauge_candidate_perms(P, mode)) is not None:
+                gauge += 1
+            else:
+                unclassified += 1
             # C4(c): is the comparison even of the same shape, and does the
             # residual match a prediction made from the corrupted site WITHOUT
             # reading L_mut?  I.e. is this a detection or a len() accident of the
@@ -1254,10 +1524,50 @@ def negative_control_incidence(nmax):
                                           # forced gate also catches
         else:
             cond = cond and absorb == 0
+        # WHAT THE VACUOUS COUNT MEANS IN THIS ROW, said in the row (mg-e35b,
+        # landing mg-fcf1's F4).  The word covered two facts; which one it is
+        # here is measured, not assumed, and for I4 it is the adverse one.
+        vac_note = ("" if vac == 0 else
+                    (" All %d vacuous posets are ones where the mutation DID NOT "
+                     "APPLY -- no eligible ridge, so the corrupted build IS the "
+                     "true build and there is nothing here for the pipeline to "
+                     "miss (%d of %d)." % (vac, vac - blind, vac)) if blind == 0 else
+                    (" AND THE VACUOUS COUNT HERE IS NOT 'THE MUTATION DID NOT "
+                     "APPLY': on %d of those %d the mutation DID apply -- a "
+                     "different facet enumeration was built -- and claim (1) still "
+                     "holds on it, so the pipeline is BLIND to the site this row is "
+                     "named after on those posets.  On %d of them the facet SET "
+                     "itself differs (not merely its order), %d of those with "
+                     "|L(P)| >= 3.  That is a categorically different fact from "
+                     "I1/I2/I3's vacuity and was printed under the same word "
+                     "(mg-fcf1 F4, landed by mg-e35b)."
+                     % (blind, vac, blind_set, blind_big)))
+        # WHAT THE ROW COVERS ONCE THE SECTION'S OWN GAUGE STANDARD IS APPLIED
+        # TO IT (mg-e35b, landing mg-fcf1's F2 tail).
+        gauge_note = (
+            " GAUGE DICHOTOMY over the %d biting posets, by the SAME standard "
+            "this section used to reject facet_swap01 -- a relabelling of the "
+            "facet set is a signed-permutation conjugation, hence isospectral: "
+            "%d NON-SIMILAR (spectral proof) + %d GAUGE (an exhibited "
+            "permutation and sign vector, reconstructed and compared) + %d "
+            "unclassified.%s"
+            % (app, nonsim, gauge, unclassified,
+               (" So this row's evidence that the corruption is not a gauge "
+                "covers %d of its %d biting posets, NOT all %d: on the other %d "
+                "the corrupted complex IS the true one with its facets "
+                "relabelled, which is the ground facet_swap01 was rejected on.  "
+                "The rejection count above is unaffected and is not restated "
+                "narrower -- the test does reject there; what is narrower is "
+                "what the rejection is evidence FOR, and that is the coverage "
+                "line at the foot of this section." % (nonsim, app, app, gauge))
+               if gauge else
+               " No poset of this row is a gauge, so its coverage is its whole "
+               "biting population."))
         check("%s -- the claim-(1) test rejects on %d/%d posets where the corruption "
               "changes L^rel (%d vacuous, on |L(P)| in %s); spectrum provably moved on "
-              "%d of those %d.  %s  %s"
+              "%d of those %d.%s%s  %s  %s"
               % (name, rej, app, vac, sorted(vac_sizes), spec, app,
+                 vac_note, gauge_note,
                  ("The residual equals a perturbation predicted from the corrupted "
                   "site alone on %d/%d and has at most %d nonzero entr%s on any poset, "
                   "and the compared matrices have the same shape on %d/%d: the "
@@ -1303,6 +1613,11 @@ def negative_control_incidence(nmax):
         gate_rows.append((name.split(" ")[0], app, gates["diagonal"],
                           gates["magnitude"], gates["parity"], signs_read,
                           both_gates, diag_moved))
+        dich_rows.append((name.split(" ")[0], app, nonsim, gauge, unclassified))
+        vac_rows.append((name.split(" ")[0], vac, blind, blind_set, blind_big))
+        tot_nonsim += nonsim
+        tot_gauge += gauge
+        tot_unclassified += unclassified
         tot_app += app
         tot_shape += shape_ok
         tot_parity += gates["parity"]
@@ -1374,16 +1689,127 @@ def negative_control_incidence(nmax):
              tot_signs_read, tot_parity, tot_app, tot_sign, tot_shape, tot_both),
           0 < len(forced_rows) < len(muts))
 
+    # THE GAUGE STANDARD, APPLIED TO THE ROWS THIS SECTION KEPT (mg-e35b,
+    # landing mg-fcf1's F2 tail).  `facet_swap01` was rejected because a
+    # relabelling of the facet set is a signed-permutation conjugation, hence
+    # isospectral.  That standard was never asked of the four rows kept, and it
+    # disqualifies 9 (poset, row) pairs of them.  It is asked here, of every
+    # biting poset of every row, and the answer is required to be a DICHOTOMY
+    # with no unclassified remainder -- the previous state of this section was
+    # "the spectrum did not separate these and no claim is made either way",
+    # which named a remainder without saying what was in it.
+    check("the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row -- %d biting "
+          "(poset, row) pairs = %d NON-SIMILAR + %d GAUGE + %d unclassified, per row "
+          "%s.  A pair is NON-SIMILAR only on a spectral PROOF (no similarity "
+          "transform of any kind, so in particular no signed permutation) and GAUGE "
+          "only on an EXHIBITED witness -- a permutation and a sign vector, "
+          "reconstructed in full by `signed_permutation_witness` and compared to the "
+          "corrupted matrix entry by entry, so a bug in the search cannot return a "
+          "false gauge.  THIS ROW CAN FAIL: a pair that neither invariant separates "
+          "nor any candidate permutation realises is UNCLASSIFIED and turns it red, "
+          "which is what the sentence it replaces (%s) was hiding -- mg-fcf1 settled "
+          "that remainder adversely, and citing an audit for a number this file acts "
+          "on is the transmission path mg-8a12 was caught by.  THE BOUND ON A "
+          "NOT-GAUGE ANSWER, stated because it is the weak half: the candidate list "
+          "is the identity, the relabelling the mutation itself induces when the "
+          "mutated facet list is a permutation of the true one, and EVERY "
+          "permutation when |L(P)| <= %d.  A GAUGE answer is a witness and needs no "
+          "bound; a NOT-GAUGE answer above that size is bounded by the list -- but "
+          "here every not-gauge pair is settled by the spectral proof instead, so no "
+          "answer in this row rests on the bound"
+          % (tot_app, tot_nonsim, tot_gauge, tot_unclassified,
+             "; ".join("%s %d/%d non-similar, %d gauge" % (t, ns, a, g)
+                       for t, a, ns, g, _ in dich_rows),
+             "'no claim is made either way on the remainder'", PERM_BRUTE_MAX),
+          tot_unclassified == 0 and tot_app > 0)
+
+    # A POSITIVE CONTROL ON THE GAUGE DETECTOR ITSELF, on the corruption whose
+    # answer this section committed to in advance by rejecting it (mg-fcf1).
+    sw_g_app = sw_g_gauge = sw_g_wit = 0
+    for P in ps:
+        L_true, _ = claim1_pair(P)
+        L_sw, _ = claim1_pair(P, incidence_mode="facet_swap01")
+        if mat_eq(L_sw, L_true):
+            continue
+        sw_g_app += 1
+        w = signed_permutation_witness(L_true, L_sw,
+                                       gauge_candidate_perms(P, "facet_swap01"))
+        if w is not None:
+            sw_g_gauge += 1
+            sw_g_wit += w[0] != list(range(len(L_true)))   # a NON-identity pi
+    check("instrument check: the gauge detector says GAUGE on the corruption this "
+          "section REJECTED for being one -- facet_swap01 (facets 0 and 1 exchanged) "
+          "is classified GAUGE on %d/%d of the posets where it bites, and on %d of "
+          "them the exhibited permutation is NOT the identity, so the answer is not "
+          "the diagonal-twist question wearing a new name.  WHAT THIS ROW IS, said "
+          "plainly rather than dressed as a discovery: the answer is KNOWN IN ADVANCE "
+          "-- exchanging two columns conjugates L^rel by a signed permutation matrix, "
+          "so a correct detector MUST say GAUGE here at every n.  It is scored for "
+          "the same reason the three absorbability instrument checks above are: it "
+          "fails if the detector is wrong, and on nothing else.  WHAT IT ADDS OVER "
+          "THE DICHOTOMY ROW, since a row that only repeats another row's coverage is "
+          "the kind of green this section keeps having to remove: a detector that "
+          "NEVER says GAUGE already turns the dichotomy row RED -- those %d pairs "
+          "would be unclassified, not non-similar -- so that end is policed there.  "
+          "The end that is NOT policed there is a detector that says GAUGE too "
+          "readily: one returning a witness for everything would make the dichotomy "
+          "row green with %d gauges and no remainder.  This row pins both ends -- "
+          "GAUGE on every poset of a corruption whose answer this section committed "
+          "to in advance, with a NON-IDENTITY permutation each time, while saying "
+          "NOT-GAUGE on %d of the %d biting pairs of the four scored rows"
+          % (sw_g_gauge, sw_g_app, sw_g_wit, tot_gauge, tot_app,
+             tot_app - tot_gauge, tot_app),
+          sw_g_app > 0 and sw_g_gauge == sw_g_app and sw_g_wit == sw_g_app
+          and tot_gauge < tot_app)
+
     # ---- measurements, deliberately NOT scored as PASS/FAIL rows ----------
     print("  measured, not scored:")
-    print("    * the target D-A is byte-identical to the uncorrupted target on "
-          "%d/%d (poset, mutation) pairs -- all four mutations are "
-          "construction-side only, unlike M4 and M5" % (same_target, 4 * N))
+    m4_moves = sum(1 for P in ps
+                   if not mat_eq(claim1_pair(P)[1], claim1_pair(P, normalise=True)[1]))
+    m5_moves = sum(1 for P in ps
+                   if not mat_eq(claim1_pair(P)[1],
+                                 claim1_pair(P, perturb_edge=True)[1]))
+    print("    * FORCED BY THE CODE PATH, NOT A RESULT (mg-fcf1 F3, landed by "
+          "mg-e35b): the target D-A is byte-identical to the uncorrupted target on "
+          "%d/%d (poset, mutation) pairs, and it COULD NOT HAVE COME OUT OTHERWISE "
+          "-- `claim1_pair` builds the target with `at_laplacian(P)`, which takes no "
+          "`incidence_mode` argument, so no incidence mutation can reach it at any n. "
+          "The property is worth printing (all four mutations are construction-side "
+          "only, unlike M4 and M5); the count is not evidence for it and was printed "
+          "as though it were.  THAT THE COMPARISON ITSELF CAN COME OUT OTHERWISE is "
+          "the part that needed showing, and is shown by the two mutations that DO "
+          "reach the target: the same equality test finds M4 (target scaled by 2) "
+          "moves it on %d/%d posets and M5 (one edge deleted) on %d/%d"
+          % (same_target, 4 * N, m4_moves, N, m5_moves, N))
     print("    * no ridge lies in >= 3 facets under any of the four mutations on "
           "any of the %d posets (%s), so the corrupted complexes still satisfy "
           "the 1-or-2-facets property POSITIVE CONTROL 3 verifies: that check "
-          "would not have caught these either"
+          "would not have caught these either.  READ THE FOUR ZEROS DIFFERENTLY "
+          "(mg-fcf1 F3, landed by mg-e35b): three of them are FORCED and one is a "
+          "measurement.  None of I1, I2, I3 ADDS an incidence -- I1 moves a ridge's "
+          "second incidence from one facet to another and leaves the count at 2, I2 "
+          "changes no incidence at all (only which rows are relative), I3 deletes a "
+          "row -- so no ridge's facet count can rise above 2 under them at any n, and "
+          "their zeros cannot come out otherwise.  I4 rebuilds the facet enumeration "
+          "outright, so a ridge there CAN lie in >= 3 facets; its zero is the only "
+          "one of the four that is a result"
           % (N, ", ".join("%s on %d" % (m, c) for m, c in multi_ridge.items())))
+    print("    * THE TWO MEANINGS OF 'VACUOUS', separated per row and deliberately "
+          "NOT scored (mg-fcf1 F4, landed by mg-e35b): %s.  A row that scored 'the "
+          "split separates' would go RED the day somebody FIXED I4's blindness, "
+          "which is the wrong direction for a control to point; and 'blind + "
+          "did-not-apply == vacuous' is arithmetic.  So this is stated, and the "
+          "adverse half is stated in row I4 itself rather than only here.  For "
+          "I1/I2/I3 vacuity means only that the mutation did not apply; for I4 the "
+          "mutation applies on every poset it is vacuous on, and on %d of those it "
+          "builds a genuinely different FACET SET (%d of them with |L(P)| >= 3) on "
+          "which claim (1) still holds -- the pipeline does not see a corrupted "
+          "`le_to_facet` there at all, and that is the site NEGATIVE CONTROL 4 exists "
+          "to cover"
+          % ("; ".join("%s %d vacuous = %d did-not-apply + %d applied-but-unseen"
+                       % (t, v, v - b, b) for t, v, b, _, _ in vac_rows),
+             sum(bs for _, _, _, bs, _ in vac_rows),
+             sum(bb for _, _, _, _, bb in vac_rows)))
     print("    * WHERE THE PREDICATE RETURNED, per row -- a TRACE, emitted by "
           "`absorb_trace` at the return statement that fired, not a second procedure "
           "run alongside it (mg-1c80 F1, mg-5f9a): %s.  READ THE THIRD COLUMN BEFORE "
@@ -1472,24 +1898,52 @@ def negative_control_incidence(nmax):
           "L^rel by a signed permutation matrix, so it is isospectral, and the "
           "spectrum provably moves on %d/%d. A relabelling of the facet set is a "
           "gauge, so it is not scored above; row I4 replaces it with an off-by-one "
-          "in le_to_facet, whose spectrum moves on 58 of the 61 posets where it "
+          "in le_to_facet, whose spectrum moves on %d of the %d posets where it "
           "bites -- NOT on all of them: mg-2789 wrote 'whose spectrum does move' and "
           "that is false as written (mg-fcf1 F1). On the 3 antichains the off-by-one "
           "is prefixes_true(rot(w)), rot maps L(P) = S_n onto itself, and the "
-          "mutation is a bare permutation conjugation -- the same gauge. Corrected "
-          "here because it is a printed claim wider than the code verifies; RESCOPING "
-          "row I4 for it is NOT done here and needs its own item."
-          % (sw_app, N, sw_absorb, sw_app, sw_spec, sw_app))
-    print("    * where a row reports the spectrum moving on fewer than all of its "
-          "biting posets, THIS FILE makes no claim either way on the remainder: the "
-          "trace, the sum of squared entries and det(. - k.I) mod (2^31-1) for k in "
-          "{3,5,7,11,13} did not separate those. That is a limit of the invariants "
-          "used here and NOT an open question -- mg-fcf1 settled every one of them "
-          "adversely, exhibiting each as a signed-permutation conjugate (I1's 6, all "
-          "|L(P)| = 3 with sigma = (0,2,1); I4's 3, the antichains above). The "
-          "diagonal-twist decision is exact on every one of them, and that is the "
-          "absorbability question; non-isospectrality is the stronger one-sided "
-          "extra.")
+          "mutation is a bare permutation conjugation -- the same gauge, now "
+          "classified as one by THIS FILE'S detector and not on the audit's word "
+          "(mg-e35b). AND THE SAME QUESTION IS NOW ASKED OF EVERY ROW rather than "
+          "only of the candidate rejected: it disqualifies %d (poset, row) pairs of "
+          "the four kept, which is the dichotomy row above."
+          % (sw_app, N, sw_absorb, sw_app, sw_spec, sw_app,
+             dich_rows[3][2], dich_rows[3][1], tot_gauge))
+    print("    * WHERE A ROW REPORTS THE SPECTRUM MOVING ON FEWER THAN ALL OF ITS "
+          "BITING POSETS, WHAT IS IN THE REMAINDER IS NOW STATED (mg-fcf1 F1/F2, "
+          "landed by mg-e35b). This file used to print 'no claim is made either way "
+          "on the remainder' -- honest-looking, and it covered exactly the %d pairs "
+          "where the answer is known and ADVERSE: every one of them is a "
+          "signed-permutation conjugate, i.e. a GAUGE, which is the ground this "
+          "section rejected facet_swap01 on. A hedge is not automatically honest; "
+          "check what is IN the remainder before writing one. The spectral "
+          "invariants used here (the trace, the sum of squared entries and "
+          "det(. - k.I) mod (2^31-1) for k in {3,5,7,11,13}) still do not separate "
+          "those pairs -- that limit is real and unchanged -- but the pairs are no "
+          "longer unclassified: the dichotomy row above settles each of them with an "
+          "exhibited witness. Non-isospectrality remains the stronger one-sided "
+          "extra; the diagonal-twist decision is exact on every pair either way."
+          % tot_gauge)
+    print("    * COVERAGE AT `le_to_facet`, SIZED (mg-fcf1 F5, landed by mg-e35b). "
+          "mg-2789's commit message said this section 'closes the gap mg-5630 "
+          "relocated'; a commit message cannot be edited, so the correct sizing is "
+          "printed HERE. STATE.md already carries the qualitative half of the "
+          "correction ('relocation, not closure') and is pm-onethird's ledger: the "
+          "numbers below are routed to them rather than written into it from this "
+          "file, which is the same choice mg-2789 made about the Probe.md passage it "
+          "flagged and did not edit. The named load-bearing site is "
+          "corrupted on %d/%d posets, the corruption reaches L^rel on %d of them, "
+          "and of those %d are NON-SIMILAR and %d are a GAUGE -- so coverage at "
+          "`le_to_facet` is %d/%d, of which %d carry evidence that a construction "
+          "error is distinguishable from a re-labelling. On the remaining %d the "
+          "pipeline does not see the corruption at all. ACROSS THE SECTION: %d of "
+          "the four rows still SCORES its absorbability answer as a measurement and "
+          "the other %d have it removed to the [CANNOT FAIL] row as a theorem, and "
+          "%d (poset, row) pairs of the four are gauges. That is a relocation of the "
+          "gap, narrower than before and not closed."
+          % (N, N, dich_rows[3][1], dich_rows[3][2], dich_rows[3][3],
+             dich_rows[3][1], N, dich_rows[3][2], N - dich_rows[3][1],
+             len(muts) - len(forced_rows), len(forced_rows), tot_gauge))
     print("    * row scoring, and who owns it: every row above is vacuous on the "
           "sub-population named in it, exactly as NEGATIVE CONTROL 2's M1-M5 are, "
           "and the scoring does not model vacuity -- only the [CANNOT FAIL] label, "

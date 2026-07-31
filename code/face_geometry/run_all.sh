@@ -3,10 +3,18 @@
 # docs/OneThird-Intrinsic-Face-Geometry-Probe.md
 #
 # Pure Python 3, no third-party packages, exact integer arithmetic.
-# Measured runtime on a 2024 laptop, 2026-07-30: 19 s total -- controls.py 1.9 s
-# (of which NEGATIVE CONTROL 4, added by mg-2789, is 1.4 s over the full 86-poset
-# n <= 5 population, so the CI-adjacent battery stays in the order-seconds
-# regime and needs no scoping), run_probe.py at n <= 6 the remaining 17.4 s.
+# Measured runtime on a 2024 laptop, 2026-07-31 (re-measured by mg-e35b on the
+# tree that ships this comment, not carried forward): 19.4 s total -- controls.py
+# 2.2 s (of which NEGATIVE CONTROL 4, added by mg-2789, is 1.7 s over the full
+# 86-poset n <= 5 population), run_probe.py at n <= 6 the remaining 17.2 s.  So
+# this battery stays in the order-seconds regime and needs no scoping.
+#
+# IT IS NOT "CI-ADJACENT", and this comment said it was until mg-e35b (mg-fcf1's
+# minor finding).  There is NO CI in this repository -- no .github/, no
+# .gitlab-ci.yml, no .circleci/, no Makefile -- and the only runners are
+# hand-invoked run_all.sh scripts like this one.  "CI-adjacent" was aspirational
+# and read as a description, which is the same defect this battery exists to
+# catch, one layer out: text that claims more than what is there.
 set -e
 cd "$(dirname "$0")"
 
