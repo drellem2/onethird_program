@@ -735,13 +735,34 @@ def census_gate(name, raw, measured):
                     "the census above IDENTICAL (mg-8aae H-1)"))
 
     # ⚠️ (e) THE OTHER HALF OF THE RECORD (mg-9207 E2/E2b/E3, landed by
-    # mg-ff3e).  (c) and (d) are about the FIGURES.  This is about EVERYTHING
-    # ELSE, and the row above it is the proof that between them they are the
+    # mg-ff3e).  (c) and (d) are about the FIGURES.  (e) is about EVERYTHING
+    # ELSE, and RECORD PARTITION is the proof that between them they are the
     # section -- which is the difference between fixing the set and fixing the
-    # next field.
+    # next field.  It is one call, so a deletion test can remove the whole
+    # comparison as a unit and see what goes back to being silent.
+    out.extend(record_rows(name, raw))
+    return out
+
+
+def record_rows(name, raw):
+    """(e) EVERYTHING IN THE SECTION THAT IS NOT AN ASSERTED FIGURE, byte for
+    byte and in order, against the declared record -- plus the row that proves
+    the two halves are the whole section.
+
+    TWO ROWS, TWO CALLS, so a deletion test can remove either ALONE and see
+    what goes back to being silent.  mg-9207's J-2 is that a repair whose two
+    halves are one expression cannot be tested at the unit that matters: there
+    the ORDER half of a comparison was byte-identical under deleting its
+    partner."""
     segments, seqf = partition(raw)
+    return (partition_row(name, raw, segments, seqf)
+            + site_record_row(name, segments))
+
+
+def partition_row(name, raw, segments, seqf):
+    """THE TWO HALVES ARE THE WHOLE SECTION -- measured, not stated."""
     rebuilt = rejoin(segments, seqf)
-    out.append((rebuilt == raw,
+    return [(rebuilt == raw,
                 f"GATE @ {name}: RECORD PARTITION -- the section is "
                 f"{len(seqf)} asserted figure token(s) and {len(segments)} "
                 f"segment(s) between them, and re-interleaving the two halves "
@@ -750,7 +771,12 @@ def census_gate(name, raw, measured):
                 f"compared': the figures are checked by FIGURE CENSUS and "
                 f"FIGURE ORDER, everything else by SITE RECORD, and nothing "
                 f"is in neither.  No field is named, so none can be left "
-                f"behind because nobody named it"))
+                f"behind because nobody named it")]
+
+
+def site_record_row(name, segments):
+    """EVERYTHING THAT IS NOT AN ASSERTED FIGURE, byte for byte, in order."""
+    out = []
     got = FIGURE_MARK.join(segments)
     want = declared_records().get(name)
     if want is None:
