@@ -1,0 +1,117 @@
+==========================================================================
+J4  DOES G-3 STAY SHUT?  THE DOCUMENTED COMMAND, RUN AND DIFFED
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE CLAIM, QUOTED FROM WHERE IT IS MADE
+--------------------------------------------------------------------------
+   docs/…Mg7e58ProvenanceRepair.md §1, 'G-3 closes with it':
+     '`./run_all.sh` in `code/branching_audit_58da/` now reproduces its committed outputs'
+   present at that site: yes
+
+   The committed outputs were recorded at ef388417.  HEAD is now 2d23d880.
+
+
+--------------------------------------------------------------------------
+(ii) THE DOCUMENTED COMMAND, RUN IN A CLONE, AND DIFFED
+--------------------------------------------------------------------------
+   In a CLONE, because ./run_all.sh redirects into the committed
+   out_*.txt and running it in place would destroy the record this audit is
+   about.  The clone commits this worktree first, so `git diff` afterwards is
+   exactly "what does the documented command do to the committed record".
+
+   clone HEAD eb6a598a -- running ./run_all.sh (this takes a few minutes)
+   run_all.sh exit 1
+     | ----- g1_provenance.py -----
+     | TOTAL BAD: 0
+     | exit 0
+     | ----- g2_redo.py -----
+     | TOTAL BAD: 0
+     | exit 0
+     | ----- g3_findings.py -----
+     | TOTAL BAD: 0
+     | exit 0
+     | ----- g4_fleet.py -----
+     | TOTAL BAD: 2
+     | exit 1
+     | 
+     | worst exit code: 1
+
+   file                          bytes differ   lines differing
+     out_selftest_58da.txt          no             0
+     out_g1_provenance.txt          YES            5
+     out_g2_redo.txt                YES            1
+     out_g3_findings.txt            YES            1
+     out_g4_fleet.txt               YES            2
+
+   committed outputs the documented command reproduces byte for
+   byte: 1 of 5.  Population: the 5 files ./run_all.sh writes.
+
+   the differing lines, in full:
+     --- out_g1_provenance.txt
+       line 16   committed:    ef38841710ed  HEAD of this branch
+                 re-run   :    eb6a598a9c3a  HEAD of this branch
+       line 17   committed:       docs+audit: independent audit of the mg-58da repair (673
+                 re-run   :       mg-957f: reproduce probe (mg-957f)
+       line 27   committed:    commits touching each part of the reproduction, 286d5030..e
+                 re-run   :    commits touching each part of the reproduction, 286d5030..e
+       line 90   committed:    target form                          c1 @ 286d5030      c1 
+                 re-run   :    target form                          c1 @ 286d5030      c1 
+       line 111  committed:      c1 @ ef388417 (unmodified -- NULL PROBE)         silent  
+                 re-run   :      c1 @ eb6a598a (unmodified -- NULL PROBE)         silent  
+     --- out_g2_redo.txt
+       line 100  committed:    The reproduction is REDONE at ef38841710ed and it stands, w
+                 re-run   :    The reproduction is REDONE at eb6a598a9c3a and it stands, w
+     --- out_g3_findings.txt
+       line 6    committed:    286d5030, run against out_t1_tl.txt at ef388417.
+                 re-run   :    286d5030, run against out_t1_tl.txt at eb6a598a.
+     --- out_g4_fleet.txt
+       line 39   committed:    script                 286d5030 -> ef388417       ef388417 
+                 re-run   :    script                 286d5030 -> eb6a598a       eb6a598a 
+       line 47   committed:    commit in 286d5030..ef388417 that touched any of the five:
+                 re-run   :    commit in 286d5030..eb6a598a that touched any of the five:
+
+
+
+--------------------------------------------------------------------------
+(iii) THE MECHANISM, LOCATED IN THE SOURCE
+--------------------------------------------------------------------------
+   Which sites put a revision that moves into a file that is committed,
+   and which of them the repair itself introduced.
+
+   script                 sites printing HEAD    before    after
+     g1_provenance.py       print(... HEAD[:8] ...) 2         3
+     g4_fleet.py            print(... HEAD[:8] ...) 0         4
+
+   g4's (ii) column header was a WRITTEN string before the repair --
+     '   script                 286d5030 -> d1dd84d2 …'
+   and is computed from HEAD after it.  That is the right direction for
+   provenance and the wrong one for a committed transcript, and no
+   branch in the repair's list weighs the two against each other.
+
+
+--------------------------------------------------------------------------
+(iv) WHAT GRAIN DOES B1 COMPARE AT?
+--------------------------------------------------------------------------
+   B1 is the branch that asks "does this repair survive being
+   committed" -- G-3's exact shape.  Read out of k2_selfprov.py's own source:
+
+   B1 compares                     present in k2's B1 block
+     self-errors                    yes
+     findings count                 yes
+     exit code                      yes
+     finding TEXTS                  yes
+     the output BYTES               no
+
+   population: the 5 candidate comparisons above, looked for in the
+   B1 block of code/branching_repair_7e58/k2_selfprov.py.
+
+   B1 compares the things that do not move when HEAD moves, and does
+   not compare the one that does.  That is why a branch aimed exactly
+   at this question came back green.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone, subprocess run and parse this script performs
+FINDINGS: 1, population: the 5 committed outputs of code/branching_audit_58da/ compared byte for byte against a live ./run_all.sh, and the 1 grain claim B1 makes
+   FINDING: G-3 IS NOT SHUT, IT IS SHUT AT ONE REVISION.  mg-321d's G-3 is that mg-58da's committed evidence stopped reproducing the moment its own commit landed.  mg-7e58 closes it by regenerating code/branching_audit_58da/out_*.txt at ef388417 -- but 4 of the 5 files ./run_all.sh writes interpolate the CURRENT HEAD into their own text, so the committed record stopped reproducing again at the very next commit, and 4 of them do not reproduce on this branch right now (out_g1_provenance.txt, out_g2_redo.txt, out_g3_findings.txt, out_g4_fleet.txt). This is G-3's own shape, one iteration on.
+TOTAL BAD: 1

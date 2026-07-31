@@ -1,0 +1,113 @@
+==========================================================================
+SELFTEST-957f  THE APPARATUS, BEFORE IT IS BELIEVED
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE FIVE READERS ON KNOWN INPUT
+--------------------------------------------------------------------------
+   target_cells reads 3 cells and beta=3,n=2 is (1, 1)              ok
+   c1_cells reads 2 cells and beta=3,n=2 is (1, 1)                  ok
+   c2_cells reads 6 cells and beta=3,n=6 is (1, 5, 9, 5)            ok
+   b1_cells reads 2 cells and beta=3,n=6 is (1, 5, 9, 5)            ok
+   e1_cells reads 6 cells and beta=1,n=6 is (1, 4, 9, 1)            ok
+
+--------------------------------------------------------------------------
+(ii) THE FIVE READERS ON ABSENT INPUT -- {} AND NOT A PARTIAL PARSE
+--------------------------------------------------------------------------
+   target_cells on the empty string returns {}                      ok
+   target_cells on another reader's format returns {}               ok
+   c1_cells on the empty string returns {}                          ok
+   c1_cells on another reader's format returns {}                   ok
+   c2_cells on the empty string returns {}                          ok
+   c2_cells on another reader's format returns {}                   ok
+   b1_cells on the empty string returns {}                          ok
+   b1_cells on another reader's format returns {}                   ok
+   e1_cells on the empty string returns {}                          ok
+   e1_cells on another reader's format returns {}                   ok
+
+--------------------------------------------------------------------------
+(iii) THE FIVE READERS ON HOSTILE INPUT -- NO CRASH, NO INVENTION
+--------------------------------------------------------------------------
+   target_cells on hostile input 0 returns a dict, no cell invented ok
+   c1_cells on hostile input 0 returns a dict, no cell invented     ok
+   c2_cells on hostile input 0 returns a dict, no cell invented     ok
+   b1_cells on hostile input 0 returns a dict, no cell invented     ok
+   e1_cells on hostile input 0 returns a dict, no cell invented     ok
+   target_cells on hostile input 1 returns a dict, no cell invented ok
+   c1_cells on hostile input 1 returns a dict, no cell invented     ok
+   c2_cells on hostile input 1 returns a dict, no cell invented     ok
+   b1_cells on hostile input 1 returns a dict, no cell invented     ok
+   e1_cells on hostile input 1 returns a dict, no cell invented     ok
+   target_cells on hostile input 2 returns a dict, no cell invented ok
+   c1_cells on hostile input 2 returns a dict, no cell invented     ok
+   c2_cells on hostile input 2 returns a dict, no cell invented     ok
+   b1_cells on hostile input 2 returns a dict, no cell invented     ok
+   e1_cells on hostile input 2 returns a dict, no cell invented     ok
+   target_cells on hostile input 3 returns a dict, no cell invented ok
+   c1_cells on hostile input 3 returns a dict, no cell invented     ok
+   c2_cells on hostile input 3 returns a dict, no cell invented     ok
+   b1_cells on hostile input 3 returns a dict, no cell invented     ok
+   e1_cells on hostile input 3 returns a dict, no cell invented     ok
+   target_cells on hostile input 4 returns a dict, no cell invented ok
+   c1_cells on hostile input 4 returns a dict, no cell invented     ok
+   c2_cells on hostile input 4 returns a dict, no cell invented     ok
+   b1_cells on hostile input 4 returns a dict, no cell invented     ok
+   e1_cells on hostile input 4 returns a dict, no cell invented     ok
+   target_cells on hostile input 5 returns a dict, no cell invented ok
+   c1_cells on hostile input 5 returns a dict, no cell invented     ok
+   c2_cells on hostile input 5 returns a dict, no cell invented     ok
+   b1_cells on hostile input 5 returns a dict, no cell invented     ok
+   e1_cells on hostile input 5 returns a dict, no cell invented     ok
+   target_cells on hostile input 6 returns a dict, no cell invented ok
+   c1_cells on hostile input 6 returns a dict, no cell invented     ok
+   c2_cells on hostile input 6 returns a dict, no cell invented     ok
+   b1_cells on hostile input 6 returns a dict, no cell invented     ok
+   e1_cells on hostile input 6 returns a dict, no cell invented     ok
+
+--------------------------------------------------------------------------
+(iv) CELL LOCALITY -- A READER MUST MOVE AT ITS OWN CELL AND NOWHERE ELSE
+--------------------------------------------------------------------------
+   bending beta=3,n=2 moves exactly that cell                       ok
+
+--------------------------------------------------------------------------
+(v) replace_once REFUSES ZERO SITES AND REFUSES TWO
+--------------------------------------------------------------------------
+   replace_once refuses zero occurrences                            ok
+   replace_once refuses two occurrences                             ok
+   replace_once replaces exactly one                                ok
+   replace_in_block refuses a string appearing twice in the block   ok
+   replace_in_block hits a unique in-block string                   ok
+
+--------------------------------------------------------------------------
+(vi) THE GIT HELPERS, AGAINST THE FOUR NAMED REVISIONS
+--------------------------------------------------------------------------
+   REV_A218 resolves to a commit (286d5030)                         ok
+   REV_13B2 resolves to a commit (ed9cde49)                         ok
+   REV_58DA resolves to a commit (673b4c00)                         ok
+   REV_321D resolves to a commit (ef388417)                         ok
+   REV_7E58 resolves to a commit (4372fae9)                         ok
+   resolve() raises on a sha that names no commit                   ok
+   log_paths finds 673b4c0 for c1 in the audited range              ok
+   show_names says ed9cde4 touched c2_vertexsets.py                 ok
+   show_names says ed9cde4 did NOT touch c1_branching.py            ok
+   subject(REV_58DA) carries (mg-58da)                              ok
+
+--------------------------------------------------------------------------
+(vii) run_c1 TAKES SCRIPT AND KERNEL INDEPENDENTLY
+--------------------------------------------------------------------------
+   c1 @ REV_A218 with kern @ REV_A218 exits 0                       ok
+   its measuring half reads 24 cells                                ok
+   and it is byte-identical to the committed out_c1_branching.txt   ok
+   a kernel edited under the SAME c1 reaches c1's output            ok
+
+--------------------------------------------------------------------------
+(viii) clone() -- A REAL CLONE WITH THE WORKING TREE COMMITTED
+--------------------------------------------------------------------------
+   the clone's HEAD is a new commit, not this worktree's HEAD       ok
+   the clone's HEAD subject is the one clone() was given            ok
+   the clone carries g1_provenance.py                               ok
+   a mutation handed to clone() lands as part of the new commit     ok
+
+--------------------------------------------------------------------------
+ASSERTIONS: 74, of which FAILED: 0.  Population: the five readers on known, absent and hostile input; cell locality; replace_once and replace_in_block; the git helpers at five named revisions; run_c1's independent script and kernel arguments; and clone() in both modes.
+TOTAL BAD: 0

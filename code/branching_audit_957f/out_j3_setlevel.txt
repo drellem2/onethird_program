@@ -1,0 +1,123 @@
+==========================================================================
+J3  10 PAIRS AT 24 CELLS, AND ALL FIVE MEMBERS -- RE-DERIVED
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE FIVE SOURCES, READ
+--------------------------------------------------------------------------
+   Five sources measure the same 24 cells: the target mg-a218 audited,
+   two of mg-a218's own members run LIVE, and two committed records from
+   instruments outside this arc.  A source whose reader returns nothing is
+   WITHDRAWN, with a SELF-ERROR, rather than counted as agreeing.
+
+   running c1_branching.py in place ...
+   running c2_vertexsets.py in place ...
+
+   source                             cells read   all 24 present
+     target out_t1_tl.txt             24           yes
+     c1_branching.py, live            24           yes
+     c2_vertexsets.py, live           24           yes
+     mg-2060 out_b1_branching.txt     24           yes
+     mg-d330 out_e1_vertexsets.txt    24           yes
+
+   sources read: 5 of 5.
+
+
+--------------------------------------------------------------------------
+(ii) THE PAIRS, CELL BY CELL
+--------------------------------------------------------------------------
+   5 sources -> 10 pairs, 24 cells each, 240 cell comparisons.
+
+   pair                                                     cells agreeing
+     target out_t1_tl.txt         vs c1_branching.py, live    24 of 24
+     target out_t1_tl.txt         vs c2_vertexsets.py, live   24 of 24
+     target out_t1_tl.txt         vs mg-2060 out_b1_branching 24 of 24
+     target out_t1_tl.txt         vs mg-d330 out_e1_vertexset 24 of 24
+     c1_branching.py, live        vs c2_vertexsets.py, live   24 of 24
+     c1_branching.py, live        vs mg-2060 out_b1_branching 24 of 24
+     c1_branching.py, live        vs mg-d330 out_e1_vertexset 24 of 24
+     c2_vertexsets.py, live       vs mg-2060 out_b1_branching 24 of 24
+     c2_vertexsets.py, live       vs mg-d330 out_e1_vertexset 24 of 24
+     mg-2060 out_b1_branching.txt vs mg-d330 out_e1_vertexset 24 of 24
+
+   pairs agreeing at all 24 cells : 10 of 10
+   cell comparisons made          : 240
+   population: every unordered pair of the sources that WERE read,
+   over the 24 (beta, n) cells with beta in {3,2,1,0} and 1 <= n <= 6.
+
+
+--------------------------------------------------------------------------
+(iii) ALL FIVE OF mg-a218'S MEMBERS, RE-RUN IN PLACE
+--------------------------------------------------------------------------
+   Not only the ones this repair touched -- it touched none.  Each is
+   run with its stdout captured HERE and never redirected into its committed
+   output, which is a record and not a live gate.
+
+   member                 exit   self/find
+     c1_branching.py        0      0/0
+     c2_vertexsets.py       0      0/0
+     (running c3_withdrawal.py ...)
+     c3_withdrawal.py       1      0/1
+     (running c4_seam.py ...)
+     c4_seam.py             0      0/0
+     (running c5_record.py ...)
+     c5_record.py           0      0/0
+
+   members re-run : 5 of 5
+   members green  : 4 of 5
+   red            : c3_withdrawal.py
+   c3_withdrawal.py is mg-d330's SECOND FINDING, booked OPEN by
+   mg-58da and untouched by mg-7e58.  It is reported BY NAME here
+   and not counted as a finding of this audit's own.
+
+
+--------------------------------------------------------------------------
+(iv) THE READERS, PROBED -- A BLIND READER AGREES WITH EVERYTHING
+--------------------------------------------------------------------------
+   Each source is corrupted at beta=1, n=6 and its reader must move at
+   that cell and NOWHERE ELSE.  beta=1 is the parameter no other carries
+   identically at n=6: beta=3 and beta=2 are equal to each other there, so a
+   probe aimed at either could not be aimed at all.
+
+   source                             moved at (1,6)  moved elsewhere
+     target out_t1_tl.txt             yes             none
+     c1_branching.py, live            yes             none
+     c2_vertexsets.py, live           yes             none
+     mg-2060 out_b1_branching.txt     yes             none
+     mg-d330 out_e1_vertexsets.txt    yes             none
+
+   readers moving at their own cell and no other : 5 of 5
+   population: the 5 sources read in (i); a source withdrawn there is
+   DROPPED here and named, not counted.
+
+
+--------------------------------------------------------------------------
+(v) mg-321d'S OWN FINDERS, UNMODIFIED, ON THE REPAIRED TREE
+--------------------------------------------------------------------------
+   The instrument that RAISED G-1 and G-2, re-run here at today's HEAD
+   with not a byte changed, against its own committed record.  h2_grain.py is
+   the finder for G-1 and G-2 and is the one that must move; the other four
+   must not, because this repair closes G-1/G-2/G-3 and touches neither M-1
+   nor M-2 nor c3.
+
+   script            committed  re-run  must move  
+     (running h1_questions.py ...)
+     h1_questions.py   0          0       no         HIT
+     (running h2_grain.py ...)
+     h2_grain.py       3          0       yes        HIT
+     (running h3_setlevel.py ...)
+     h3_setlevel.py    1          1       no         HIT
+     (running h4_mine.py ...)
+     h4_mine.py        2          2       no         HIT
+     (running h5_doccheck.py ...)
+     h5_doccheck.py    0          0       no         HIT
+
+   mg-321d finders whose direction was predicted correctly: 5 of 5
+   population: all five of mg-321d's h*.py, run unmodified in place
+   with their stdout captured HERE and never redirected into their
+   committed out_h*.txt.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone, subprocess run and parse this script performs
+FINDINGS: 0, population: the 240 pair-cell comparisons over the sources that were read, the 5 in-place member runs, the 5 reader locality probes, and the 5 re-runs of mg-321d's own finders
+TOTAL BAD: 0

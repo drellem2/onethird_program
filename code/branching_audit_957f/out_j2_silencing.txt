@@ -1,0 +1,145 @@
+==========================================================================
+J2  HOW g1 WAS RECONCILED -- AND IT MUST NOT BE BY SILENCING
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) IS THE DISPOSITION STATED, AT THE SITES A READER MEETS IT?
+--------------------------------------------------------------------------
+   mg-321d demanded one of two answers out loud.  A repair that quietly
+   drops a finding has answered neither.  Three sites, each with the text that
+   must be there, and each check corrupted afterwards to show it can fail.
+
+   site                                     stated  gate goes red when
+                                                    the text is removed
+     g1_provenance.py, module docstring       yes     yes
+     docs/…Mg7e58ProvenanceRepair.md §1       yes     yes
+     g1's own stdout, section (v)             yes     yes
+
+   sites stating the disposition: 3 of 3.  Population: the two files
+   above and g1's live stdout -- source, document, and the run itself.
+
+
+--------------------------------------------------------------------------
+(ii) THE c1 HALF -- g1 UNMODIFIED, IN FOUR CLONES WHOSE c1 IS MUTATED
+--------------------------------------------------------------------------
+   Re-derived here rather than read out of mg-7e58's k1.  The mutation
+   is always made to c1_branching.py -- the thing g1 measures -- and never to
+   g1, and it is COMMITTED, because g1 reads c1 with git_show(HEAD, …) and a
+   working-tree edit would reach nothing.  Exit code alone is not the answer:
+   a probe g1 cannot BUILD raises a SELF-ERROR and also exits 1, so findings
+   and self-errors are printed apart.
+
+   clone                                   pred  exit  self/find
+     unmodified -- NULL PROBE                0     0     0/0   HIT
+       why: the tree as it stands
+     c1's vertex DIMENSIONS off by one       1     1     1/3   HIT
+       why: the measuring half really moved
+       FINDING: c1's own measurement is not the same at 286d5030 and at HEAD (moved on the 286d5030 targ
+       FINDING: g1's measurement-grain check on 'c1 @ 2527c0fe (unmodified -- NULL PROBE)': predicted si
+       FINDING: g1's measurement-grain check on 'c1 @ HEAD with a line added past section (iii)': predic
+     a comment appended to c1                0     0     0/0   HIT
+       why: the file sha moves and the measurement does not
+     a line appended past c1's section (iii) 0     0     0/0   HIT
+       why: an edit in the COMPARING half -- mg-58da's own class
+
+   c1 clones whose direction was predicted correctly: 4 of 4
+   population: the 4 clones above.  In each, g1_provenance.py is
+   byte-identical to the file on this branch; only c1_branching.py
+   differs, and it differs as a COMMIT.
+
+
+--------------------------------------------------------------------------
+(iii) WHAT THE OLD PREDICATE COVERED AND THE NEW ONE DOES NOT
+--------------------------------------------------------------------------
+   The predicate that was removed compared the sha of TWO files:
+
+       for p, _ in paths[:2]:                  # c1_branching.py, kern_a218.py
+           if sha@REV_A218 != sha@HEAD:
+               finding("%s … the measuring half … is not the same code")
+
+   Section (v) replaces it with a comparison of c1's MEASUREMENT -- but both
+   sides of that comparison are taken with
+
+       L.run_c1(target_text, script_rev=L.REV_A218, script_source=script_src)
+
+   and run_c1 loads kern_a218.py from `script_rev`.  So the kernel is pinned at
+   REV_A218 on BOTH sides.  c1's source is varied across revisions; its kernel
+   never is.  Measured, in ONE clone whose kern_a218.py is bent as a commit:
+
+     1. does the bent kernel really move c1's measurement?   (if not, no hole)
+     2. does the PRE-repair g1 fire on it, naming kern_a218.py?
+     3. does the POST-repair g1 fire on it at all?
+
+   1. c1 @ HEAD with kern @ HEAD   : sections (i)+(ii) sha a8db5dbd4c758765
+      c1 @ HEAD with kern BENT     : sections (i)+(ii) sha cb329be9d6265c27
+      the measurement MOVES -- 24 of 24 vertex cells move
+
+   the clone: kern_a218.py bent AS A COMMIT, c1_branching.py and
+   g1_provenance.py both byte-identical to this branch.
+
+   g1 revision                              exit  self/find  names
+                                                            the kernel
+     2. PRE-repair  (ef388417, mg-321d's tree)  1     0/2      YES
+          FINDING: code/branching_audit_a218/kern_a218.py changed between 286d5030 and HEAD; the measur
+     3. POST-repair (this branch)             0     0/0      no
+
+
+
+--------------------------------------------------------------------------
+(iv) WHICH FINDINGS THE PATCH REMOVED -- COUNTED OFF THE PATCH
+--------------------------------------------------------------------------
+   Not "did anything go quiet", but "which returns went away".  The two
+   g1 revisions are read and their finding() call sites enumerated.
+
+   g1 @ ef388417 : 10 return sites   (9 finding, 1 selferr)
+   g1 @ HEAD     : 12 return sites   (10 finding, 2 selferr)
+
+   REMOVED by the repair:
+     -  finding  %s changed between %s and HEAD; the measuring half of the 
+   ADDED by the repair:
+     +  finding  c1's own measurement is not the same at %s and at HEAD (mo
+     +  finding  g1's measurement-grain check on %r: predicted %s, got %s -
+     +  selferr  could not build the probe %r out of c1 at HEAD (%s); it is
+
+   population: every line in either revision of g1_provenance.py whose
+   stripped form begins `finding(` or `selferr(` -- 10 before, 12 after.
+
+
+--------------------------------------------------------------------------
+(v) THE TWO RETURNS SECTION (v) ADDED, DELETED ONE AT A TIME
+--------------------------------------------------------------------------
+   Two checks sharing one return are one check.  Section (v) declares
+   two: the measurement-invariance finding, and the probe-direction finding.
+   Each is deleted ALONE, in a clone whose c1 measuring half is bent, and the
+   run's FINDINGS must drop by exactly that check's own contribution and leave
+   the other one standing.
+
+   In this clone BOTH fire, which is not what I predicted and is recorded as a
+   miss: g1 builds its probe baseline from c1 @ REV_A218 and its probe sources
+   from c1 @ HEAD, and HEAD's c1 is the bent one here, so g1's own null probe
+   fires and is scored MISS -- twice.  The clone therefore carries 3 findings
+   and 1 self-error before anything is deleted, which is exactly what makes it
+   a usable per-return test: each deletion must take away ITS OWN finding and
+   no other.
+
+   deletion                                       exit  self/find
+     nothing deleted -- NULL PROBE                  1     1/3
+       FINDING: c1's own measurement is not the same at 286d5030 and at HEAD (moved on the 286d5030 
+       FINDING: g1's measurement-grain check on 'c1 @ 6333f83f (unmodified -- NULL PROBE)': predicte
+       FINDING: g1's measurement-grain check on 'c1 @ HEAD with a line added past section (iii)': pr
+     (v)'s measurement-invariance finding, alone    1     1/2
+       FINDING: g1's measurement-grain check on 'c1 @ dc365f28 (unmodified -- NULL PROBE)': predicte
+       FINDING: g1's measurement-grain check on 'c1 @ HEAD with a line added past section (iii)': pr
+     (v)'s probe-direction finding, alone           1     1/1
+       FINDING: c1's own measurement is not the same at 286d5030 and at HEAD (moved on the 286d5030 
+
+   population: the 2 return sites section (v) adds, plus a null probe
+   in which both must fire.  g1 also books a SELF-ERROR in this clone --
+   it cannot BUILD its dimensions probe out of an already-bent c1 -- and
+   that is a fact about g1, counted apart from the findings throughout.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone, subprocess run and parse this script performs
+FINDINGS: 1, population: the 3 disposition sites and their 3 deletion probes, the 4 c1 clones, the 3 kernel measurements in (iii), the removed-finding census in (iv), and the 2 per-return deletion probes in (v)
+   FINDING: COVERAGE LOST IN THE REPAIR.  g1's file-sha finding covered TWO files -- c1_branching.py and kern_a218.py, the file g1's own section (ii) labels 'the measuring half'.  Its replacement, section (v), takes both sides of its comparison through run_c1(..., script_rev=L.REV_A218), which pins kern_a218.py at REV_A218 on BOTH sides, so a kernel that moved between REV_A218 and HEAD reaches neither side.  Measured in one clone whose kern_a218.py is bent as a commit: the bend moves 24 of 24 of c1's own vertex cells; the PRE-repair g1 (ef388417) exits 1 with a finding naming kern_a218.py; the POST-repair g1 exits 0 with 0 findings and names it nowhere.  The c1 half of G-1 was re-grained correctly -- (ii) above is 4 of 4 -- but the kernel half of the same predicate was deleted rather than re-grained.
+TOTAL BAD: 1

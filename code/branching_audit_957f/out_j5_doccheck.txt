@@ -1,0 +1,54 @@
+==========================================================================
+J5  EVERY FIGURE IN THIS AUDIT'S DOCUMENT, READ AT ITS OWN SITE
+==========================================================================
+   gate                              figure  at its site  null  bumped
+   --------------------------------------------------------------------
+     self-test assertions              74      yes          green red
+     attributions AGREES               17      yes          green red
+     attributions WRONG COMMIT         0       yes          green red
+     attributions UNVERIFIABLE         0       yes          green red
+     two routes agreeing               5       yes          green red
+     history clones following          3       yes          green red
+     disposition sites                 3       yes          green red
+     c1 clone directions               4       yes          green red
+     cells the bent kernel moves       24      yes          green red
+     the pinned measurement sha        a8db5dbd4c758765 yes          green red
+     the bent measurement sha          cb329be9d6265c27 yes          green red
+     g1 return sites before            10      yes          green red
+     g1 return sites after             12      yes          green red
+     pairs agreeing at all cells       10      yes          green red
+     cell comparisons                  240     yes          green red
+     members re-run                    5       yes          green red
+     members green                     4       yes          green red
+     locality probes                   5       yes          green red
+     mg-321d finder directions         5       yes          green red
+     outputs that reproduce            1       yes          green red
+     g1 HEAD-print sites after         3       yes          green red
+     g4 HEAD-print sites after         4       yes          green red
+
+   gates: 22.  Population: every figure in docs/audit-mg-957f-attribution-and-the-kernel.md that any out_j*.txt reports -- each located by a site string taken from the document and checked inside that site's own window, never file-wide.
+     figures present at their own site : 22 of 22
+     null probes green                 : 22 of 22
+     corruption probes red             : 22 of 22
+
+
+--------------------------------------------------------------------------
+AND THE FINDINGS THEMSELVES, NOT ONLY THE NUMBERS
+--------------------------------------------------------------------------
+   Two findings are claimed.  Each must be the finding an out_j*.txt
+   actually carries, matched on its own opening words rather than on a count.
+
+     F-1   j2_silencing     present
+     F-2   j4_reproduce     present
+
+   committed transcript   self  findings
+     j1_attribution       0     0
+     j2_silencing         0     1
+     j3_setlevel          0     0
+     j4_reproduce         0     1
+   findings across the committed transcripts: 2.  Population: the 4 out_j*.txt read above; out_selftest_957f.txt reports ASSERTIONS and not FINDINGS and is not in it.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone, subprocess run and parse this script performs
+FINDINGS: 0, population: every figure gated below (one finding each), plus one corruption probe and one null probe per gate
+TOTAL BAD: 0
