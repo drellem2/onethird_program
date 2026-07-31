@@ -1,0 +1,255 @@
+==============================================================================
+mg-9207 -- INDEPENDENT AUDIT OF THE mg-8eca REPAIR (d59ecd9 + bee07a1)
+==============================================================================
+mg-9207 -- INDEPENDENT AUDIT OF THE mg-8eca REPAIR OF mg-8aae.
+
+Target: `d59ecd9` + `bee07a1`, and the two items mg-8aae left open on the
+mg-8916 repair.
+
+  H-1  the figure census was a MULTISET, and a multiset is invariant under a
+       transposition, so two DECLARED figures of equal length exchanged in
+       ordinary prose were invisible at 2 of 2 sites at exit 0.  mg-8eca
+       replaced the roster with `ORDER`, an ordered list of slots, and added a
+       `FIGURE ORDER` row per site.
+
+  H-2  `SUMMARY vs ROWS` scored `printed == derived` where
+       `printed = FORCE_SUMMARY or derived` -- `x == x` off the forcing hook.
+       mg-8eca parses the printed verdict AND its count back out of the lines
+       the run will print.
+
+THE STANDARD THIS INSTRUMENT HOLDS THE DEMONSTRATIONS TO, and it is mg-8aae's
+own: the defect was a check that fired ONLY THROUGH A PURPOSE-BUILT HOOK while
+being `x == x` against the artifact.  So a demonstration is evidence here only
+if it runs THE SAME PATH A REAL DEFECT WOULD -- the real file on disk, the real
+runner as a SUBPROCESS, no environment variable, no in-memory call of the gate
+function, no fixture.
+
+  ⚠️ mg-8eca's own negative control N15-N18 calls `figure_gate` on IN-MEMORY
+  copies of the site texts.  That is a FIXTURE.  It is a good fixture and it is
+  not rejected as worthless -- but it is not accepted here as evidence that the
+  gate fires, because "the gate function returns False when called with a
+  mutated string" and "the runner goes red when the document is wrong" are
+  different sentences and the whole of H-1 and H-2 is the difference.  Every
+  exchange below is written TO DISK and scored by
+  `python3 code/hodge_leverage_landing_e1d0/verify_landing.py` run as a
+  subprocess.
+
+  C  THE CENSUS, ON DISK.  Exchanges selected BY A PROCEDURE, not by hand, at
+     all THREE sites -- including §14, which mg-8eca never exchanged on disk.
+     Each must (i) make the runner red, (ii) at the `FIGURE ORDER` row FOR THAT
+     SITE, (iii) as the ONLY row that failed, and (iv) with that site's
+     licensing (multiset) row still green -- which is the ARTIFACT'S OWN
+     evidence that the mutation was a permutation and nothing else.  Then 3-
+     cycles in BOTH cyclic senses, and the involution control.
+
+  E  DID THE FIX MOVE THE INVARIANCE?  The exchange has two halves -- the
+     figures and the statements they are attached to -- and mg-8eca closed one.
+     E2/E3 exchange the LABELS instead of the figures and reproduce mg-8aae's
+     own reader-visible defect from the other side.  NOTHING IN THE ASSIGNMENT
+     NAMES THESE; they are this audit's own item.
+
+  D  `SUMMARY vs ROWS` ON THE REAL ARTIFACT, in the direction the assignment
+     names -- move a ROW, not the sentence -- across every achievable state of
+     the rows.  Then mg-8eca's own text direction, re-taken on disk.  Then THE
+     DELETION TEST AT THE FINEST UNIT THAT HAS A RETURN: the repaired condition
+     is a conjunction of two terms and each is deleted ON ITS OWN.
+
+  S  DO NOT DISTURB WHAT IS CONFIRMED.  mg-8aae's own instrument and mg-8916's
+     own instrument, both UNMODIFIED, re-run here rather than quoted.
+
+IT MUTATES THE TREE AND RESTORES IT.  `STATE.md`, the deliverable, the row
+history and `code/hodge_leverage_audit_8a5c/audit_repair_8e30.py` are written to
+and restored inside a `finally`, every restoration CHECKED BY sha256 against the
+bytes read before the run rather than asserted.  It REFUSES TO RUN if any of
+them is already dirty.  Every site mutation is LENGTH-PRESERVING, because four
+of the five live figures are lengths of the very text being mutated.
+
+GUARD -- THE TREE THIS RUN WILL RESTORE
+---------------------------------------
+  4 mutable files read and sha256-pinned; 5 committed transcripts pinned frozen
+
+C -- THE CENSUS, ON DISK, AGAINST THE REAL RUNNER (mg-8aae H-1)
+---------------------------------------------------------------
+Every mutation below is WRITTEN TO DISK and scored by running
+`verify_landing.py` as a SUBPROCESS.  mg-8eca's N15-N18 call `figure_gate` on
+in-memory strings; that is a fixture and is not evidence here.  The pairs are
+chosen by the procedure in `pick_pairs`, not by hand, and §14 -- a site
+mg-8eca's own battery never exchanged -- is included on the same footing.
+
+  [CONFIRMED] C0 the real runner on the clean tree exits 0 (0 refuted rows)
+
+    live figures this run: ['+2 744', '+23 771', '10 623', '13 367', '21 027']
+    a(cell)=13,367  b(§14 copy)=10,623  h(row history)=21,027
+
+    the STATE.md row     my reader finds  17 asserted figure tokens, the roster declares  17 slots  ok
+    §14                  my reader finds  16 asserted figure tokens, the roster declares  16 slots  ok
+    H8                   my reader finds  36 asserted figure tokens, the roster declares  36 slots  ok
+  [CONFIRMED] C1 my own reader -- which shares no regex with the gate, scans character by character and MASKS quotations in place rather than deleting them -- finds the same number of asserted figure tokens at each site as the roster declares slots, 3 of 3.  A probe built on a reader that disagreed with the roster would be exchanging tokens the gate never looks at
+
+    probe                                               exit   FIG ORDER      CENSUS  gate rows  crash
+    the STATE.md row: 2 928 <-> 6 069                      1     REFUTED   CONFIRMED          1  False
+    the STATE.md row: +755 <-> −875                        1     REFUTED   CONFIRMED          1  False
+    the STATE.md row: 2 928 <-> 6 069                      1     REFUTED   CONFIRMED          1   True
+    the STATE.md row: −875 <-> +755                        1     REFUTED   CONFIRMED          1   True
+    §14: 13 551 <-> 16 692                                 1     REFUTED   CONFIRMED          1  False
+    §14: 2 928 <-> 6 069                                   1     REFUTED   CONFIRMED          1  False
+    §14: 2 928 <-> 6 069                                   1     REFUTED   CONFIRMED          1  False
+    §14: −875 <-> +755                                     1     REFUTED   CONFIRMED          1  False
+    H8: 13 551 <-> 16 692                                  1     REFUTED   CONFIRMED          1   True
+    H8: 2 928 <-> 6 069                                    1     REFUTED   CONFIRMED          1  False
+    H8: +9 608 <-> +1 630                                  1     REFUTED   CONFIRMED          1  False
+    H8: 10 483 <-> 16 268                                  1     REFUTED   CONFIRMED          1   True
+  [CONFIRMED] C2 EVERY EXCHANGE WRITTEN TO DISK MAKES THE REAL RUNNER RED: 12 of 12, at 3 of 3 sites, with no environment variable set and the gate never called in memory.  This is the mutation mg-8aae observed at exit 0
+  [CONFIRMED] C3 and the `FIGURE ORDER` row FOR THAT SITE is the ONLY GATE row that failed: 12 of 12.  A run that went red for some other reason would keep the headline and lose the result
+  [CONFIRMED] C4 and that site's licensing (multiset) row stayed [CONFIRMED]: 12 of 12.  That is THE ARTIFACT'S OWN evidence that each mutation was a permutation and nothing else -- asserted by the thing being audited, not by the prober
+  [CONFIRMED] C5 each exchange applied TWICE returns the site byte-identical: 12 of 12.  A transposition is its own inverse, so 'both orderings' of ONE pair is one text -- which is why C6 asks the question with a 3-cycle instead
+  [REFUTED  ] C7 the runner REPORTED rather than CRASHED on 8 of 12 exchanges -- it raised AssertionError out of its own negative control on 4.  An exit code produced by a traceback is not a gate verdict, and here the two are the same integer
+  [FINDING  ] J-3 -- THE RUNNER'S OWN NEGATIVE CONTROL CRASHES ON EDITS AT ITS OWN PROBE SITES, AND THE CRASH IS INDISTINGUISHABLE FROM A FIRE.  mg-8eca's `transpose` lifts three literals out of the live documents -- `CHAIN`, `H8_TABLE`, `H8_HIST_ROW` -- and `assert`s each occurs exactly once in the site.  An edit at those exact lines, INCLUDING THE VERY EXCHANGE THE CONTROL EXISTS TO MODEL, raises AssertionError: 4 of 12 exchanges here, and E2 below where the gate saw NOTHING and the run still exited 1.  A reader who reads the exit code concludes the gate caught it.  It did not.  The fix is the one the census itself already uses: locate the probe text BY CONTENT and fail with a message, not by a frozen literal and an assert.
+  [REFUTED  ] C7b and the runner's negative-control SELF-TEST row went red on 8 of 12 exchanges, because the battery evaluates its own 18 mutations against the MUTATED site texts.  It is a true report of a tree nobody should ship, not a gate row -- but it is why C3 is scored over GATE rows and not over every refuted line
+
+    the STATE.md row     NO triple of distinct equal-length non-live tokens exists at this site -- reported as an ABSENCE
+    §14: 3-cycle forward ['13 551', '16 692', '+1 630'] -> exit 1, FIGURE ORDER [REFUTED  ]
+    §14: 3-cycle backward ['13 551', '16 692', '+1 630'] -> exit 1, FIGURE ORDER [REFUTED  ]
+    H8: 3-cycle forward ['13 551', '16 692', '+3 141'] -> exit 1, FIGURE ORDER [REFUTED  ]
+    H8: 3-cycle backward ['13 551', '16 692', '+3 141'] -> exit 1, FIGURE ORDER [REFUTED  ]
+  [CONFIRMED] C6 3-CYCLES IN BOTH CYCLIC SENSES fire: 4 of 4.  A 3-cycle is the smallest permutation with two distinct orderings, so this is where 'both orderings' can actually be asked.  Sites with no such triple: ['the STATE.md row']
+
+E -- DID THE FIX MOVE THE INVARIANCE, OR REMOVE IT?
+---------------------------------------------------
+An exchange has two halves: the FIGURES, and the STATEMENTS they are
+attached to.  mg-8eca closed the first.  E2 and E3 exchange the second and
+reproduce mg-8aae's own reader-visible defect from the other side.  NOTHING IN
+THE ASSIGNMENT NAMES THESE -- they are this audit's own item.
+
+E1 first, because it is the one mg-8eca DECLARES uncovered.
+
+  [CONFIRMED] E1 two occurrences of the SAME token exchanged: the exchange is the IDENTITY ON THE BYTES.  `−875` occurs 4x in the row history; exchanging any two of them changes 0 characters, so there is no artifact to detect and mg-8eca's declaration -- 'the identity map on values' -- is true BY CONSTRUCTION, not by luck.  A reader who moved the two STATEMENTS instead would be doing E2
+
+    ⚠️ SCORED AT GATE GRANULARITY.  `exit` is the runner's; `gate rows` is how many
+       GATE rows it refuted.  They are not the same measurement, and E2 is why.
+
+    probe                                                         pred  exit  gate  crash  observed
+    E2 H8: the two LABELS exchanged, the figures left alone     SILENT     1     0   True    SILENT
+  [CONFIRMED] E2 H8: the two LABELS exchanged, the figures left alone -> 0 gate rows refuted (SILENT), predicted SILENT; the runner still exited 1, BY CRASH, not by the gate
+  [FINDING  ] E2 -- THE CENSUS IS POSITION-AWARE OVER FIGURES, NOT OVER THE CLAIMS THEY ARE ATTACHED TO.  the table now says the `STATE.md` row SHRANK across mg-a2bd -- mg-8aae's own H-1 defect, reached by moving the OTHER half of the pair.  The mutation is length-preserving, leaves every figure token in its declared slot, and the gate refutes NOTHING -- the run's exit 1 is an AssertionError out of its own negative control (see J-3), which is a different sentence and the same integer
+    E2b H8: two LABELS exchanged AWAY from the control's own literals  SILENT     0     0  False    SILENT
+  [CONFIRMED] E2b H8: two LABELS exchanged AWAY from the control's own literals -> 0 gate rows refuted (SILENT), predicted SILENT; runner exit 0
+  [FINDING  ] E2b -- THE CENSUS IS POSITION-AWARE OVER FIGURES, NOT OVER THE CLAIMS THEY ARE ATTACHED TO.  the `bbe83b5` table now says the `STATE.md` row cell was 10 483 and the relocated history 9 748 -- the two figures swapped, without either figure moving, at a site mg-8eca's negative control does not hard-code.  The mutation is length-preserving, leaves every figure token in its declared slot, and the gate refutes NOTHING, at exit 0
+    E3 H8: the two historical COLUMN HEADERS exchanged          SILENT     0     0  False    SILENT
+  [CONFIRMED] E3 H8: the two historical COLUMN HEADERS exchanged -> 0 gate rows refuted (SILENT), predicted SILENT; runner exit 0
+  [FINDING  ] E3 -- THE CENSUS IS POSITION-AWARE OVER FIGURES, NOT OVER THE CLAIMS THEY ARE ATTACHED TO.  every historical column of the three-column table is now attributed to the wrong commit, and the figures never moved.  The mutation is length-preserving, leaves every figure token in its declared slot, and the gate refutes NOTHING, at exit 0
+    E4 H8: two ROW LABELS exchanged INSIDE the designated table   FIRES     1     2  False     FIRES
+  [CONFIRMED] E4 the row-label exchange INSIDE the designated table FIRES (2 gate rows refuted), and the rows that failed are READ AT THE SITE rows rather than FIGURE ORDER.  That is the boundary: a label is checked exactly where a designated reader keys on it, and nowhere else
+        refuted: GATE @ H8: 'gap, cell only' READ AT THE SITE = +23 771, MEASURED THIS RUN = +2 744
+        refuted: GATE @ H8: 'gap, cell + relocated history' READ AT THE SITE = +2 744, MEASURED THIS RUN = +23 771
+  [CONFIRMED] E2/E2b/E3 THE INVARIANCE MOVED, IT DID NOT GO AWAY: 3 of 3 label-side exchanges leave the gate silent. An exchange has two halves -- the figures, and the statements they are attached to -- and mg-8eca closed the first.  The reader-visible defect mg-8aae raised (H8's table saying the row SHRANK across mg-a2bd) is reproducible today from the other half
+
+  [CONFIRMED] E5 a figure MOVED TO A DIFFERENT SITE at the same value -- H8's declared `48 846` and §14's declared `44 055` exchanged ACROSS the two sites, length-preserving, no live figure touched -- makes the runner red (exit 1, 5 refuted rows).  A cross-site move changes both sequences AND both multisets, so this one the roster sees twice over
+        refuted: GATE @ §14: FIGURE CENSUS -- 2 unlicensed figure(s) at this site: 48 846 appears 1x, licensed 0x; 44 055 is licensed 1x 
+        refuted: GATE @ §14: FIGURE ORDER -- the section asserts 16 figure token(s) and licenses 16, and they first differ at occurrence 
+        refuted: GATE @ H8: FIGURE CENSUS -- 2 unlicensed figure(s) at this site: 44 055 appears 1x, licensed 0x; 48 846 is licensed 1x a
+        refuted: GATE @ H8: FIGURE ORDER -- the section asserts 36 figure token(s) and licenses 36, and they first differ at occurrence 3
+        refuted: 18 of 18 mutations moved the gate as predicted.  N15-N18 are mg-8aae's H-1 -- two DECLARED figures EXCHANGED with each o
+
+D -- `SUMMARY vs ROWS` ON THE REAL ARTIFACT (mg-8aae H-2)
+---------------------------------------------------------
+Run as a subprocess with MG8916_FORCE_SUMMARY UNSET except where the row
+says otherwise.  There are exactly TWO rows tagged PRIMARY, and their
+expectations are constants frozen in the audited instrument's own source; the
+source says a later commit that legitimately moves them makes these rows
+refuted on a re-run, which is the state this tree is in (a=13,367 h=21,027
+b=10,623 against 12,692 / 18,593 / 10,623).
+
+So the ROW direction is taken by EDITING THE ROW -- on disk, in the real file,
+with no environment variable -- and not by editing `STATE.md`, the deliverable
+and the row history, which the audited instrument's own dirty-tree guard
+`SystemExit(2)`s over before the bottom line is ever reached.
+
+    state of the rows                                           exit   SUMMARY vs ROWS
+    D1 2 of 2 PRIMARY rows refuted (the tree as it stands)         1       [CONFIRMED]
+        the bottom line a reader gets: THE PRIMARY TARGET IS REFUTED IN THIS TREE: 2 of 2 rows tagged
+         SUMMARY vs ROWS: the BOTTOM LINE's primary-target sentence, READ BACK OUT OF THE LINES THIS RUN WILL PRINT, says REFUTED (2 of 2), and its 2 PRIMARY 
+    D2 1 of 2 refuted (row 1's expectation brought up to live)     1       [CONFIRMED]
+        the bottom line a reader gets: THE PRIMARY TARGET IS REFUTED IN THIS TREE: 1 of 2 rows tagged
+         SUMMARY vs ROWS: the BOTTOM LINE's primary-target sentence, READ BACK OUT OF THE LINES THIS RUN WILL PRINT, says REFUTED (1 of 2), and its 2 PRIMARY 
+    D3 0 of 2 refuted (both expectations brought up to live)       1       [CONFIRMED]
+        the bottom line a reader gets: THE PRIMARY TARGET IS CONFIRMED: the repair's three figures are the
+         SUMMARY vs ROWS: the BOTTOM LINE's primary-target sentence, READ BACK OUT OF THE LINES THIS RUN WILL PRINT, says CONFIRMED (2 of 2), and its 2 PRIMAR
+  [CONFIRMED] D4 NO ACHIEVABLE STATE OF THE ROWS MAKES `SUMMARY vs ROWS` FIRE: 0, 1 and 2 of 2 PRIMARY rows refuted, all three green, all three on disk with no environment variable.  The assignment's direction -- edit a row so it disagrees with the summary -- CANNOT BE DONE, and that is the measurement, not a failure of the probe
+
+    direction                                                           exit   SUMMARY vs ROWS
+    D5 the REFUTED headline edited to a literal CONFIRMED (mg-8aae's direction 2)     1       [REFUTED  ]
+    D6 the COUNT edited, the verdict word left correct                     1       [REFUTED  ]
+    D7 a COHERENT false summary -- headline AND count both moved           1       [REFUTED  ]
+    D8 mg-8916's hook, kept: MG8916_FORCE_SUMMARY=CONFIRMED                1       [REFUTED  ]
+  [CONFIRMED] D5-D8 all four directions make the check fire: 4 of 4.  D5-D7 set NO environment variable and edit the REAL FILE ON DISK the way G-2 was actually made -- so mg-8eca's headline claim, that the check no longer fires only through the hook, HOLDS
+
+    THE DELETION TEST, AT THE FINEST UNIT THAT HAS A RETURN.  The repaired
+    condition is `agree = printed == derived and said == owed`.  Two clauses of
+    one condition are not one unit: deleting them together tests neither.  So
+    each is deleted ON ITS OWN and every direction above is re-scored.
+
+    deletion                                                 D5     D6     D7     D8
+    D9  `printed == derived` REMOVED                        RED    RED  green  green
+    D10 `said == owed` REMOVED                              RED  green    RED    RED
+    D11 the defect REINSTATED (printed = FORCE_SUMMARY or derived)  green  green  green    RED
+  [CONFIRMED] D11 THE CONTROL: with the defect reinstated, all three ON-DISK directions go green again (['[CONFIRMED]', '[CONFIRMED]', '[CONFIRMED]']).  Without this row, 'the check fires' and 'the instrument fires' are the same sentence
+  [CONFIRMED] D10 deleting `said == owed` alone MOVES SOMETHING: the directions that go green are ['D6'].  The clause has a return of its own
+  [CONFIRMED] D9 deleting `printed == derived` alone MOVES SOMETHING: the directions that go green are ['D7', 'D8'].  The clause has a return of its own
+  [CONFIRMED] D12 OF THE DIRECTIONS mg-8eca DECLARES (D5, D6 and the hook D8), the ones that isolate `printed == derived` are ['D8']
+  [FINDING  ] J-2 -- HALF THE REPAIRED CONDITION IS STILL DEMONSTRATED ONLY THROUGH THE HOOK.  `agree = printed == derived and said == owed`.  Deleting `printed == derived` alone leaves mg-8eca's own on-disk directions D5 (headline) and D6 (count) STILL RED, because `said == owed` fires on both -- with 2 PRIMARY rows and 2 refuted, an edited headline moves the count's expectation from (2,2) to (0,2) as a side effect.  The only declared probe that isolates the clause is MG8916_FORCE_SUMMARY, the environment variable.  D7 -- a COHERENT false summary, headline and count moved together, which is what a hand-writer producing G-2 would actually write -- does isolate it on disk with no env var, and is this audit's construction, not mg-8eca's.  The clause is NOT inert; mg-8eca's battery just does not show it.
+  [CONFIRMED] D12b and it IS isolable off the hook: ['D7'] does it on disk with no environment variable.  The clause is load-bearing; what is missing is the probe, not the code
+
+D-ind -- ARE THE TWO SIDES INDEPENDENT DERIVATIONS?
+---------------------------------------------------
+    On the CONFIRMED branch the verdict word is a LITERAL, so parsing it
+    back is a genuinely second read of a hand-written string.  On the REFUTED
+    branch it is `{verdict}` -- the same expression `derived` recomputes -- and
+    the count is `{len(bad)}`, the same expression `owed` recomputes.  With
+    exactly two PRIMARY rows, every achievable state agrees by construction,
+    which is what D1-D4 measured on disk.
+
+  [CONFIRMED] D-ind the REFUTED branch interpolates `{verdict}` and `{len(bad)}` into the sentence that the check then parses back out; the CONFIRMED branch writes the verdict as a literal.  Both read from the source, not from a re-run
+  [FINDING  ] J-1 -- THE TWO SIDES ARE INDEPENDENT WITH RESPECT TO THE PRINTED TEXT, NOT WITH RESPECT TO THE ROWS -- and the row's own wording claims the wider one.  It says the sentence is 'READ BACK OUT OF THE LINES THIS RUN WILL PRINT' and that its PRIMARY rows are 'counted again here', which reads as two derivations of the same quantity meeting.  On the REFUTED path they are one: the printed verdict is `{verdict}` and the printed count is `{len(bad)}`, which are the two expressions the other side recomputes, so the round trip is a regex through an f-string.  D1-D4 show it on disk: 0, 1 and 2 of 2 PRIMARY rows refuted, all three green.  WHAT THE CHECK ACTUALLY DISCRIMINATES is an edit to `primary_summary`'s OWN SOURCE TEXT -- which is real, is not a hook, and is exactly how G-2 was made, so H-2 is CLOSED.  The EXTENT is narrower than the sentence printed beside it, which is the same shape as both of mg-8aae's findings.
+
+S -- DO NOT DISTURB WHAT IS CONFIRMED
+-------------------------------------
+mg-8aae's 12 of 12 at ROW granularity and its G-1 closure are re-taken by
+RE-RUNNING mg-8aae's own instrument, unmodified, rather than by quoting its
+verdict or mg-8eca's.  Likewise mg-8916's.  Both are slow; both are run once.
+
+⚠️ THE POPULATION IS NAMED, because a bare total here is wrong twice over.  A
+row is counted only if the instrument printed it AS ITS OWN, at two spaces of
+indent; the deeper-indented `[REFUTED  ]` lines are ECHOES of the sub-runs it
+drives and are its probes WORKING.  And "checks" means confirmed + measured +
+refuted, which is how mg-8916's 16 confirmed and 2 measurements come to 18.
+
+  [CONFIRMED] S1 mg-8aae's own `audit_8916_repair.py`, UNMODIFIED, on this tree: 30 of its own rows (29 confirmed, 0 measured, 1 refuted), 0 FINDINGS, exit 1
+        its one refuted row: 0 of 2 permutation probes leave the real runner at exit 0.  A wrong figure a reader meets, inside the section, in ordinary prose, not quoted, of the f
+  [CONFIRMED] S1b and the single refuted row is A4's OWN permutation row -- the row that RAISED H-1, now false because the gate fires.  Its predictions are left as written and read `PREDICTION MISSED` at 2 of 2 sites.  That is what a landed finding looks like from the raising instrument's side, and it is why exit 1 here is not a regression
+        12 of 12 designated-figure corruptions make the real runner red -- mg-835f's primary target reproduces on this tree after the widening
+        and in 12 of 12 the row that failed is the `READ AT THE SITE` row FOR THAT FIGURE, not merely some other row of the widened gate.  The old check is doing the ol
+        12 of 12 restorations return the runner to exit 0, each verified byte-identical by sha256
+  [CONFIRMED] S2 THE 12 OF 12 SURVIVES THE WIDENING AT ROW GRANULARITY: 3 of mg-8aae's own A2 rows read 12 of 12 -- the runner goes red, the row that failed is the `READ AT THE SITE` row FOR THAT FIGURE, and all 12 restorations return it to exit 0.  Nothing here is quoted from mg-8eca
+        3 of 3 of its U1 rows now read GATE FIRES where it observed exit 0 at 3 of 3 -- measured by re-running it, not by quoting it
+  [CONFIRMED] S3 and G-1 stays closed against the AUDITOR'S OWN wording: 1 of mg-8aae's rows report its own prose probes at 3 of 3, in slots it chose by procedure and controlled green before use
+  [CONFIRMED] S4 mg-8916's own `repair_835f.py`, UNMODIFIED: 18 checks (16 confirmed, 2 measured, 0 refuted), exit 0.  mg-8eca's own claim is '18 checks / 0 refuted at exit 0'; counted here from its own rows, with the population named, it holds -- 18 is 16 + 2 + 0, not 18 confirmations
+
+RESTORATION AND THE FROZEN RECORD
+---------------------------------
+  [CONFIRMED] restoration CHECKED by sha256, not asserted: all 4 mutated files are byte-identical to what this run read
+  [CONFIRMED] all 5 committed transcripts this run's instruments could have regenerated are byte-identical afterwards -- including `out_verify.txt`, which is why this instrument runs `verify_landing.py` directly and never `run_all.sh`
+  [CONFIRMED] git status over the mutated files is clean: ''
+
+BOTTOM LINE
+-----------
+  32 checks: 30 confirmed, 2 refuted.
+  6 findings.
+    J-3: THE RUNNER'S OWN NEGATIVE CONTROL CRASHES ON EDITS AT ITS OWN PROBE SITES, AND THE CRASH IS INDISTINGUISHABLE ...
+    E2: THE CENSUS IS POSITION-AWARE OVER FIGURES, NOT OVER THE CLAIMS THEY ARE ATTACHED TO.  the table now says the `...
+    E2b: THE CENSUS IS POSITION-AWARE OVER FIGURES, NOT OVER THE CLAIMS THEY ARE ATTACHED TO.  the `bbe83b5` table now ...
+    E3: THE CENSUS IS POSITION-AWARE OVER FIGURES, NOT OVER THE CLAIMS THEY ARE ATTACHED TO.  every historical column ...
+    J-2: HALF THE REPAIRED CONDITION IS STILL DEMONSTRATED ONLY THROUGH THE HOOK.  `agree = printed == derived and said...
+    J-1: THE TWO SIDES ARE INDEPENDENT WITH RESPECT TO THE PRINTED TEXT, NOT WITH RESPECT TO THE ROWS -- and the row's ...
+
+  VERDICT: PARTIAL.
