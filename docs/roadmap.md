@@ -231,8 +231,7 @@ on an audit that measured its extents in both directions — that, not fatigue, 
 - **mg-7522** — the `| tee` sweep's population was defined by **filename**; two runners with 8 pipelines still
   swallow at HEAD. Redefine the population by **property**, re-derive the counts, and re-establish the
   retroactive clearance over the corrected population.
-- **mg-ff3e** — the census invariance **moved** (position-aware for figures, not labels). Fix the **set**, not
-  the next field.
+*(mg-ff3e landed — the census-invariance repair; its audit mg-ec07 is running.)*
 - **mg-e34a**, **mg-eaef** — audits of the kernel-half repair and the instrument-bound repair.
 
 ## Next (gated / queued)
