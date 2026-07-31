@@ -1,0 +1,93 @@
+==============================================================================
+E7  mg-19ec: the thing no list in the brief names.
+==============================================================================
+
+==============================================================================
+E7a  mg-dffa's runner with the network removed.  BUILT, not argued.
+==============================================================================
+
+  the shim really disabled the download                      ok ('  committed out_w3_brown.txt records the run that was made.')
+  w3_brown.py exit code with no network                      0
+  w3_brown.py exits NON-ZERO when it verified nothing        BAD  <-- it exits 0
+    ... and it prints no SUMMARY line either                 ok (so a downstream grep finds nothing to read)
+  run_all.sh exit code with no network                       0
+  run_all.sh REFUSES to be green with F4's premise unread    BAD  <-- it exits 0 and prints 'done.'
+
+  the runner's own headline block, with no network:
+      done.  Headline lines:
+      SELF-TEST: 42 assertions, 0 failed
+      SUMMARY w1_ledger: partitions 44, failures 0
+      SUMMARY w2_family: intervals 33, distributive 28, non-distributive 5,
+      SUMMARY w2_family: distinct P 17, of them not skew cell posets 5,
+      SUMMARY w2_family: failures 0
+      SUMMARY w4_control: failures 0
+      SUMMARY w5_doc: checks 41, failures 0
+
+  FINDING E7a.  F4 is the finding whose whole content is that a
+  live claim was resting somewhere it could not rest.  Its
+  repair rests on one probe, and that probe reports success
+  when it has checked nothing.  This is DECLARED -- the
+  docstring says it, run_all.sh says it, and the account
+  document's section 7 says it -- so it is a warrant defect and
+  not a hidden one, and it is the same shape as the F3 this
+  same commit repaired: a control that cannot fire, with the
+  status line staying green over it.
+
+  WHAT FALLS INSIDE IT, ENUMERATED.  With no network the
+  following are unverified while the runner is green:
+      - the section 4.3 heading is 'Distributive lattices'
+      - the section 4.4 heading is 'The kids walk' and follows it
+      - Brown's example sentence lies strictly between them
+      - section 4.3 contains exactly one occurrence of 'example'
+      - the maximal chains are the lattice paths
+      - Brown counts the chains at (p+1)(q+1) - 2
+
+  NOT A DEFECT IN THE DOCUMENT'S SENTENCE.  The committed
+  out_w3_brown.txt records a run that DID reach arXiv, and E3
+  of this audit re-reads the paper and pins it by digest.  The
+  defect is in the exit contract, not in the reading.
+
+==============================================================================
+E7b  mg-dffa's 42-assertion self-test, mutation-tested.
+     A self-test is worth what it REFUSES.
+==============================================================================
+
+  unmutated: selftestdffa.py exits 0                         ok (exit 0)
+    it reports                                               42 assertions, 0 failed
+  M1  canon not minimised over relabellings: self-test FAILS ok (exit 1; 42 assertions, 4 failed)
+  M2  yf_up_covers inserts the 1 only at the FRONT of the 2-run: self-test FAILS ok (exit 1; 42 assertions, 1 failed)
+  M3  contains() always true: self-test FAILS                ok (exit 1)
+  M4  Lattice.distributive() always true: self-test FAILS    ok (exit 1; 42 assertions, 3 failed)
+
+==============================================================================
+E7c  disjointness at the grain of the FIGURE, not the directory.
+==============================================================================
+
+     probe            foreign directory          file read
+     w1_ledger.py     branching_af28             t_young.py
+     w1_ledger.py     branching_af28             out_young.txt
+     w1_ledger.py     branching_audit_6ad0       out_a1_contact.txt
+     w1_ledger.py     branching_audit_6ad0       out_a4_algebra.txt
+     w1_ledger.py     branching_audit_5800       out_a5_b1b5.txt
+     w4_control.py    branching_af28             out_young.txt
+
+  only w1 (located results) and w4 (the control under test) read foreign files ok (['w1_ledger.py', 'w4_control.py'])
+  w2_family.py reads NO foreign file -- its figures are re-derived ok
+  w3_brown.py reads NO foreign file -- its figures are re-derived ok
+
+  READING E7c.  The two probes carrying F2's and F4's figures read
+  nothing from the four earlier instruments, so those figures are
+  reproductions.  The one probe that reads foreign files for
+  EVIDENCE is w1, and its cell says LOCATED rather than MEASURED.
+  The claim holds at a finer grain than the README states it at.
+
+==============================================================================
+E7d  the same question turned on this audit.
+==============================================================================
+
+  mg-19ec's own network probe returns 2, not 0, when it cannot read ok
+  mg-19ec's runner compares each exit code with a COMMITTED prediction ok
+
+==============================================================================
+SUMMARY e7_instrument: findings 2
+==============================================================================

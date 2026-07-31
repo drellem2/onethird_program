@@ -1,0 +1,110 @@
+==============================================================================
+E1  mg-19ec: the two WIDENED ledger cells (B1, B5) as new claims.
+==============================================================================
+
+==============================================================================
+E1a  B1 re-measured.  Meet and join are GREATEST LOWER BOUND and
+     LEAST UPPER BOUND computed by search, on BOTH sides.
+==============================================================================
+
+  partitions with 1 <= n <= 7 number 44                      ok (44)
+  largest interval has 19 elements                           ok (19)
+  ideal -> shape is a bijection on every one                 ok (0 bad)
+  ordered pairs tested = 5 464                               ok (5464)
+    ... and 5 464 = sum of |[0,lam]|^2 over the 44           ok
+  ORDER preserved both directions, every pair                ok (0 bad)
+  MEET preserved, glb by search on both sides                ok (0 bad)
+  JOIN preserved, lub by search on both sides                ok (0 bad)
+
+  VERDICT E1a.  The widened B1 cell is TRUE at the width it is
+  written, on a fifth instrument, with neither side permitted to
+  assume the identification it asserts.
+
+==============================================================================
+E1b  B1's sub-claim about af28's T1, READ instead of counted.
+==============================================================================
+
+  T1's body located in t_young.py                            ok
+  mg-dffa's proxy reproduces: 0 occurrences of 'meet'        ok (0)
+  mg-dffa's proxy reproduces: 0 occurrences of 'join'        ok (0)
+
+  every expression in T1's body that forms a set intersection:
+      sub_ideal = (ids[a] & ids[b] == ids[a])
+  every expression that forms a set union: ['print("  n  lam            |J(D_lam)|  |[0,lam]|  bad  e(D_lam)  |SYT|   HLF  bad", file=OUT)']
+
+  every intersection T1 forms is consumed by a CONTAINMENT TEST ok
+  T1 compares no meet with a meet, and no join with a join   ok
+  T1 nonetheless prints the label 'lattice-iso bad'          ok
+
+  VERDICT E1b.  The DOCUMENT's sentence -- T1 'tests the ORDER
+  isomorphism only' -- survives a reading and not merely a word
+  count.  Recorded for precision: mg-dffa's own probe line reads
+  'T1 computes no meet (0 occurrences)', and T1 does form
+  ids[a] & ids[b].  It forms it only to test containment, so the
+  cell is right and the probe's wording is the loose one.
+
+==============================================================================
+E1c  'measured three times on disjoint instruments' -- checked as a
+     property of the import graph, not read off a README.
+==============================================================================
+
+  mg-6ad0 imports no module of the other three               ok
+  mg-5800 imports no module of the other three               ok
+  mg-dffa imports no module of the other three               ok
+  mg-19ec imports no module of the other three               ok
+
+  and each of the four measures B1's meet/join for itself:
+  mg-6ad0 prints its own meet/join line                      ok (LATTICE-isomorphism bad (meet/join preserved): 0)
+  mg-5800 prints its own meet/join line                      ok (MEET not preserved: 0)
+  mg-dffa prints its own meet/join line                      ok (MEET not preserved                                         ok (0))
+
+  VERDICT E1c.  Disjoint at the level the cell claims.
+
+==============================================================================
+E1d  B5's two attributions, and the word the STEP rests on.
+==============================================================================
+
+  A4a's table has one row per rank n = 1..5                  ok (5 rows)
+  read out of the A4a SECTION ONLY: classes = 87             ok (87)
+    tested = 67                                              ok (67)
+    skipped = 20                                             ok (20)
+    internally consistent: classes == tested + skipped       ok
+  the cap mg-dffa names is the cap the output names          ok
+  every skip is listed there                                 ok (12 listed groups)
+  mg-6ad0's quoted clause is verbatim in its output          ok
+  mg-5800's quoted clause is verbatim in its output          ok
+  mg-5800 covers all 87                                      ok
+
+  THE STEP.  `dim kF(P)/rad = |AC(P)|` alone does NOT give 'all
+  irreducibles are 1-dimensional'.  What gives it is that Phi is a
+  SURJECTIVE ALGEBRA MAP with nilpotent kernel, which forces
+  kF(P)/rad = k^{AC(P)}, a product of |AC(P)| copies of k.  So the
+  widened cell needs the cited outputs to say ALGEBRA, not linear.
+
+  mg-6ad0's output says 'surjective ALGEBRA map'             ok
+    ... with a NILPOTENT kernel                              ok
+    ... and draws kF(P)/rad = k^{AC(P)} itself               ok
+  mg-5800's output checks character MULTIPLICATIVITY         ok
+    ... and surjectivity, and kernel nilpotence, at 0        ok
+
+  VERDICT E1d.  The widened B5 cell asserts a DERIVATION, and the
+  two outputs it names carry a derivation and not a weaker linear
+  statement.  67 / 20 / 87 and 'all 87' are what those outputs
+  print, read out of the A4a section alone.
+
+==============================================================================
+E1e  B5's self-description: LOCATED, not MEASURED.
+==============================================================================
+
+  w1_ledger.py imports no module of the cited directories    ok
+  w1_ledger.py starts no subprocess                          ok
+  w1_ledger.py opens those directories' OUTPUT files only    ok
+  the cell itself says LOCATED and not MEASURED              ok
+
+  VERDICT E1e.  The self-description is accurate: mg-dffa read two
+  committed outputs and re-ran neither.  A located result and a
+  reproduced one carry different warrant and the cell says which.
+
+==============================================================================
+SUMMARY e1_f1_cells: failures 0
+==============================================================================

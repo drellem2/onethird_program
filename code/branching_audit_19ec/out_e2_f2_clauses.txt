@@ -1,0 +1,188 @@
+==============================================================================
+E2  mg-19ec: the two NARROWED clauses (F2a, F2b) as new claims.
+==============================================================================
+
+==============================================================================
+E2a  Every figure under F2, re-derived here.
+==============================================================================
+
+  intervals [0,w] with rank(w) <= 6: 33                      ok (33)
+  every one of them is a lattice                             ok (33 of 33)
+  distributive: 28                                           ok (28)
+  NOT distributive: 5                                        ok (5)
+  smallest non-distributive witness is w = 221               ok (221)
+  the 5, smallest first: 221(rank 5) 1221(rank 6) 2121(rank 6) 2211(rank 6) 222(rank 6)
+  |J(P)| = |interval| on every distributive interval         ok
+  distinct P up to isomorphism: 17                           ok (17)
+  of them NOT skew cell posets: 5                            ok (5)
+
+   |P|   distinct P   of them NOT skew   the non-skew classes, with EVERY w that reaches them
+     0            1                  0   
+     1            1                  0   
+     2            1                  0   
+     3            2                  0   
+     4            3                  0   
+     5            4                  2   {1121} {1211,122}
+     6            5                  3   {11121} {11211,1122} {12111,1212}
+  (mg-dffa's out_w2_family.txt lists ONE witness per class; the
+   class counts agree exactly, the witness lists differ only in
+   that this one is exhaustive.)
+  2 of the 4 at |P| = 5                                      ok ([4, 2])
+  3 of the 5 at |P| = 6                                      ok ([5, 3])
+
+  skew cell poset classes by cells k=0..6 are 1,1,2,5,11,26,62 ok ([1, 1, 2, 5, 11, 26, 62])
+  Young side: 30 intervals [0,lam] with |lam| <= 6           ok (30)
+    all 30 distributive                                      ok (30)
+    0 of the resulting P outside the skew class              ok (30 in)
+  (Young side distinct P up to isomorphism: 18 -- the document
+   reports 17 for Young-Fibonacci and does not report this one.)
+
+==============================================================================
+E2b  The Birkhoff biconditional, BUILT on all 33 rather than cited.
+==============================================================================
+
+  on all 33: distributive <=> isomorphic to J(its join-irreducibles) ok (33 agree, 0 disagree)
+
+  So the document's clause -- "'28 of the 33 are J(P)' says
+  precisely '28 of the 33 are distributive'" -- is TRUE, and it is
+  true here as a measurement on this instrument and not only as a
+  citation of Birkhoff.
+
+==============================================================================
+E2c  THE POPULATION.  'the 33 finite Young-Fibonacci intervals' --
+     is 33 the number of finite Young-Fibonacci intervals?
+==============================================================================
+
+  intervals [0,w] with rank(w) <= 7: 54, not 33              ok (54)
+  at rank <= 7: 54 intervals, 39 distributive, 15 not
+  the Young-Fibonacci lattice has infinitely many elements w, and
+  [0,w] is finite for every one of them, so the set of FINITE
+  Young-Fibonacci intervals is INFINITE.  33 is the count at
+  rank(w) <= 6 and nothing else.
+
+  the F2a replacement sentence located in the document       ok
+  the F2a REPLACEMENT carries a rank bound                   BAD  <-- it does not; it says 'the 33 finite Young-Fibonacci intervals'
+  row 10's mg-41aa clause, the sibling sentence, DOES carry it ok
+  section 2 item 2, which the sentence points at, DOES carry it ok
+
+  FINDING E2c.  The replacement sentence's entire content is now a
+  COUNT, and the count's population is unbounded in the sentence
+  that states it.  The bound exists twice in the same document --
+  in row 10 and in item 2 -- so this is a sentence written narrower
+  in its reading and left wide in its population.  MINOR; the
+  numbers are right and the pointer 'item 2' is present.
+
+==============================================================================
+E2d  THE OTHER POPULATION.  'P EXACTLY the skew cell posets'.
+==============================================================================
+
+  the new mg-dffa paragraph located                          ok
+  it states the Young side as a classification with 'exactly' ok
+  that clause carries a bound                                BAD  <-- it does not
+  row 10's new mg-dffa clause states it the same way         ok
+    ... and it carries no bound either                       ok
+  ledger row B2 exists                                       ok
+  B2 records the 'exactly' as TESTED, bounded, at n <= 6     ok
+  B2 marks the n >= 7 totals as CITED, not computed          ok
+  mg-5800 lists 'the converse of X1 beyond n = 6' as NOT CLAIMED ok
+
+  FINDING E2d.  This is the more serious of the two, because it is
+  a NEW sentence and it widens in the direction the repair was
+  narrowing.  The paragraph's whole rhetorical move is to fault
+  the Young-Fibonacci side for naming no class of P -- and it
+  makes that contrast by stating the Young side's classification
+  UNBOUNDED, in a document whose own ledger cell for that very
+  claim records it as measured to n <= 6 and whose parent audit
+  puts anything beyond n = 6 on the NOT-CLAIMED list.
+
+  WHAT FALLS INSIDE IT.  The claim is not false: it follows from
+  Birkhoff plus the identification of the join-irreducibles of
+  [mu,lam] with the cells of lam/mu.  But the document's whole
+  convention is to separate MEASURED from CITED, and this sentence
+  states as flat fact a thing the document elsewhere books as
+  measured-to-n<=6 and its parent books as not-claimed-beyond-6,
+  and it cites Birkhoff only for the OTHER side of its contrast.
+
+==============================================================================
+E2e  The asymmetry AS STATED, measured on both sides by one
+     procedure.
+==============================================================================
+
+  The paragraph says: the Young headline is a CLASSIFICATION; the
+  Young-Fibonacci sentence is BIRKHOFF PLUS A DISTRIBUTIVITY COUNT.
+  Here is the procedure applied to each side, identically:
+
+    Young       : 30 intervals -> all distributive -> Birkhoff -> 18 distinct P
+    Young-Fib.  : 33 intervals -> 28 distributive  -> Birkhoff -> 17 distinct P
+
+  both sides reach their P by the SAME route (Birkhoff, then read off
+     the join-irreducibles) ok
+  the Young side's P land inside a named closed class        ok
+  the Young-Fibonacci side's do not                          ok (5 out)
+
+  PRECISION NOTE, not a defect.  The contrast the paragraph draws
+  is real, but it is not the contrast its wording names.  BOTH
+  sides are Birkhoff plus a distributivity count; what differs is
+  that on the Young side the resulting family has a name and is
+  closed, and on the Young-Fibonacci side it does not.  The
+  paragraph's own operative clause -- 'names no class of P' --
+  says exactly the right thing; the sentence before it implies the
+  Young side does not go through Birkhoff, and it does.
+
+==============================================================================
+E2f  DID IT NARROW BY VAGUENESS?  The eight new phrasings, scanned.
+==============================================================================
+
+  the phrasings mg-dffa's own w5_doc.py requires to be PRESENT: 15
+
+    definite  **Meet and join preserved on every pair, not the order alone
+    definite  tests the **order** isomorphism only, on every pair in both 
+    definite  cited and not re-derived in `code/branching_af28/`
+    definite  by mg-6ad0 on 67 of the 87 classes
+    definite  **mg-dffa LOCATED both results in those committed outputs; i
+    definite  a contact of the same **kind**
+    definite  **It is a contact of the same kind and it is not the same co
+    definite  **17 distinct `P`** up to isomorphism, of which **5 are not 
+    definite  an index-set contact of the **same kind** as the one this do
+    definite  RE-AFFIRMED OUTSIDE THE STRIKE — AND READ
+    definite  As an example of a distributive lattice, consider the
+    definite  the rest of Brown (2000) remains unread by this arc and B8 r
+    definite  Repaired again 2026-07-31 by mg-dffa
+    definite  code/branching_warrant_dffa
+    definite  OneThird-Warrant-Repair-mg-dffa.md
+
+  every phrasing w5_doc.py requires was located in the document ok (0 not located: [])
+  no new phrasing sits in a hedged sentence                  ok (0 of 15 hedged)
+
+  THE ONE CONSTRUCTION THAT IS LESS SPECIFIC THAN WHAT IT REPLACED.
+  'the SAME index-set contact' became 'a contact of the same KIND'.
+  'of the same kind' asserts less, and asserting less by saying
+  less precisely is exactly what the brief forbids.  So: is it
+  BOUNDED or is it VAGUE?  What falls inside it, enumerated:
+
+      inside 'the same KIND'  : both families are ideal lattices;
+                                each interval is J(P) for some P.
+                                MEASURED here on all 33 (E2b): the
+                                biconditional holds, 0 disagree.
+      OUTSIDE it, and NAMED    : which P.  The Young side's P are a
+                                named closed class; the Young-
+                                Fibonacci side's are 17 distinct P
+                                of which 5 are not skew cell
+                                posets.  MEASURED here (E2a).
+
+  the vaguer predicate is followed IN THE SAME PARAGRAPH by the difference,
+     stated definitely ok
+    ... and the same at row 10                               ok
+
+  VERDICT E2f.  NOT A HEDGE.  'Of the same kind' is a weaker
+  predicate, but at both sites it is immediately BOUNDED by a
+  definite statement of what is and is not shared, and both halves
+  of that statement are measured.  The repair replaced one definite
+  claim with a weaker definite claim plus its complement, which is
+  narrowing to the evidence and not splitting the difference.
+  Where a hedge was actually on offer -- mg-5800's own suggested
+  fix for F4 -- it was refused and Brown section 4.3 was read.
+
+==============================================================================
+SUMMARY e2_f2_clauses: findings 2
+==============================================================================

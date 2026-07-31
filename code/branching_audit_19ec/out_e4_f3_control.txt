@@ -1,0 +1,43 @@
+==============================================================================
+E4  mg-19ec: the F3 control, fired in seven configurations.
+==============================================================================
+
+  the repaired check_doc.py names the new check              ok
+  out_r1b_skew8.txt carries its machine-readable line        ok
+
+  C1  faithful copy: exit 0                                  ok (got 0; unmutated)
+    C1  faithful copy: the failures named are exactly what is expected ok ([])
+  C2  computed 360 -> 361: exit 1                            ok (got 1; SKEW8 361)
+    C2  computed 360 -> 361: the failures named are exactly what is expected ok (['the COMPUTED n=8 skew count equals the one out_young.txt PUBLISHES'])
+  C3  out_r1b_skew8.txt deleted: exit 1                      ok (got 1; deleted)
+    C3  out_r1b_skew8.txt deleted: the failures named are exactly what is expected ok (['out_r1b_skew8.txt carries exactly one SKEW8 line', 'the COMPUTED n=8 skew count equals the one out_young.txt PUBLISHES'])
+  C4  out_r1b_skew8.txt present but EMPTY: exit 1            ok (got 1; emptied)
+    C4  out_r1b_skew8.txt present but EMPTY: the failures named are exactly what is expected ok (['out_r1b_skew8.txt carries exactly one SKEW8 line', 'the COMPUTED n=8 skew count equals the one out_young.txt PUBLISHES'])
+  C5  TWO SKEW8 lines, both 360: exit 1                      ok (got 1; duplicated)
+    C5  TWO SKEW8 lines, both 360: the failures named are exactly what is expected ok (['out_r1b_skew8.txt carries exactly one SKEW8 line', 'the COMPUTED n=8 skew count equals the one out_young.txt PUBLISHES'])
+  C6  SKEW8 line non-numeric: exit 1                         ok (got 1; SKEW8 <word>)
+    C6  SKEW8 line non-numeric: the failures named are exactly what is expected ok (['out_r1b_skew8.txt carries exactly one SKEW8 line', 'the COMPUTED n=8 skew count equals the one out_young.txt PUBLISHES'])
+  C7  BOTH ends moved to 361 together: exit 1                ok (got 1; computed AND published both 361)
+      failures named: ['T2 row n=8 prints straight 12 and skew 360']
+
+  C7: the NEW check does NOT fire when both ends move together ok
+  C7: something else does, so the tree is still caught       ok (['T2 row n=8 prints straight 12 and skew 360'])
+
+  READING E4.  The added check fires in six of the seven
+  configurations, including four mg-dffa did not build, and a
+  missing, empty, duplicated or unparseable input is a FAILURE in
+  every one of them rather than a skip.  That is what F3 asked
+  for and it is what was delivered.
+
+  AND THE ONE IT DOES NOT CATCH, NAMED.  C7 moves BOTH ends of the
+  chain together.  The new check compares the two ends with each
+  OTHER, so it agrees; what catches C7 is check_doc.py's older
+  typed constant, which F3 correctly said was not a provenance
+  control.  The two are complements: neither alone closes the
+  chain, and the account document's sentence -- 'the control was
+  closed instead of the sentence' -- is true of the pair and not
+  of the new line by itself.  No number moves either way.
+
+==============================================================================
+SUMMARY e4_f3_control: findings 0
+==============================================================================

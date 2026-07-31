@@ -1,0 +1,63 @@
+==============================================================================
+SELF-TEST mg-19ec -- kern19ec, both directions
+==============================================================================
+
+-- poset hygiene
+  a 4-chain is a poset                                               ok
+  a 4-antichain is a poset                                           ok
+  an untransitive relation is REFUSED                                ok
+  a relation with a 2-cycle is REFUSED                               ok
+  height of a 5-chain is 4                                           ok
+  height of a 5-antichain is 0                                       ok
+
+-- canon: the plain n! minimum
+  canon separates the 5 posets on 3 elements into exactly 5          ok
+  canon invariant under 6 random relabellings of 4 shapes            ok
+  canon SEPARATES a 3-chain from a 3-antichain                       ok
+
+-- iso: an order isomorphism search, checked against canon
+  the poset classes on 5 elements found by canon: 63                 ok
+  iso agrees with canon on all 3969 ordered pairs at n=5             ok
+  iso REFUSES a 4-chain against a 4-antichain                        ok
+
+-- ideals, glb/lub by search, distributivity
+  J(3-antichain) has 8 elements                                      ok
+  J(3-antichain) is a lattice                                        ok
+  J(3-antichain) is distributive                                     ok
+  glb/lub found BY SEARCH agree with intersection/union on J(A_3)    ok
+  M3 is a lattice and is NOT distributive                            ok
+  N5 is a lattice and is NOT distributive                            ok
+  the 2+2 bowtie is REFUSED as a lattice at all                      ok
+  J(P) is distributive for every poset class to n <= 4               ok
+
+-- partitions, Young intervals, skew shapes
+  p(6) = 11                                                          ok
+  partitions with 0 <= n <= 7 number 45                              ok
+  |[(), (3,1)]| = 7                                                  ok
+  that interval is a distributive lattice                            ok
+  its height is 4 = |lambda|                                         ok
+  skew cells of (3,1)/(1) number 3                                   ok
+  the cell poset of (q+p,q)/(q) with p=q=2 is 2+2 disjoint chains    ok
+  skew cell poset classes with 4 cells: 11                           ok
+  the 3-antichain IS a skew cell poset                               ok
+  three minima under a common top is a genuine 4-element poset       ok
+    ... with 9 order ideals                                          ok
+    ... and it is REFUSED as a skew cell poset                       ok
+  the search box grown from k to k+1 gives the IDENTICAL class SET at k=4 ok
+
+-- Young-Fibonacci: the operator identity is the control
+  rank sizes to 6 are 1,1,2,3,5,8,13                                 ok
+  total words of rank <= 6 is 33                                     ok
+  down-covers invert up-covers on every word of rank <= 5            ok
+  DU - UD = I on every word of rank <= 5 (RIGHT rule)                ok
+  the WRONG rule reproduces the Fibonacci rank sizes 1,1,2,3,5,8,13  ok
+  the WRONG rule FAILS DU - UD = I  (this is the whole control)      ok
+
+-- the Birkhoff-free comparison, in both directions
+  J(C_2 + C_2) IS isomorphic to [(2),(4,2)], by order search alone   ok
+  J(C_2 + C_2) is NOT isomorphic to [(),(2,2)]                       ok
+  J(three-under-one) matches NO Young interval with 4 cells          ok
+
+==============================================================================
+SELF-TEST: 42 assertions, 0 failed
+==============================================================================
