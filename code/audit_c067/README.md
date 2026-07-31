@@ -135,7 +135,7 @@ qualified by a nearby word naming which defect is meant, 175 bare. The new word 
 retrofitted, and that is correct — a deliverable that rewrote 175 sites would have made its own
 transcript unreviewable.
 
-## Two defects of this instrument, kept rather than smoothed away
+## Three defects of this instrument, kept rather than smoothed away
 
 1. **I twice built a checker that could not tell a claim from a mention.** `C2a`'s first draft
    counted `out_audit_7e39.txt`'s `429` as a published figure; it is a **quotation**, inside a
@@ -149,6 +149,14 @@ transcript unreviewable.
    would happen before it passed. The fix is the parent's: read the self-transcript from git at its
    publishing commit. `anchor_132a.py`'s `verdict_for()` documents this exact hazard and I walked
    into it anyway.
+3. **My own figure grammar read the tail of a commit sha as part of the population.** `FIGURE_RE`'s
+   inner class was `[\d,\s]`, which crosses a newline — and this audit's own banner puts the anchor
+   sha on the line directly above the figure, so `…378cf011b463` + newline + `510 .py files` parsed
+   as one figure, `4611510`. **`C2b` refuted on all six of this instrument's own transcripts** and
+   that is how it was found: the row asserting *every declared anchor's tree yields its published
+   figure* is the row that catches an auditor who cannot read his own figures. The parent's
+   `POP_FIGURE` uses literal spaces there and never had the defect. An audit of figure provenance
+   whose own grammar mis-parsed a figure is worth recording rather than quietly fixing.
 
 Three predicted exit codes also missed (`C1b`): `--at HEAD`, `--at 1e30484` and `--at cb9f282` were
 each predicted **1** and are **0**. The reasoning was that `A3a` asserts its own verdict is `AGREES`;
