@@ -207,3 +207,98 @@ here mutates files **on disk** and restores them. If a restore is not byte-ident
 rewritten the artifact in the act of auditing it — the same failure mg-3f3b named for itself.
 Every on-disk probe reports its own `restored byte-identical` flag, and a single False makes the
 run RED.
+
+---
+
+# OBSERVATIONS — appended after the run. Nothing above this line is edited.
+
+Transcript: `out_audit_97fb.txt` — **33 checks, 25 confirmed, 8 measured, 0 refuted, 5 findings,
+exit 0.**
+
+## What was predicted and held
+
+- **P0a/P0b** exit 0 and exit 0.
+- **P1a** 36 cells, **29 FIRES / 0 SILENT / 7 n/a**. **P1b** the cell census and the substring
+  census agree at HEAD — right in value, wrong in construction, which became **G3**.
+- **P2a** **7 of 7 survive, 0 fail.**
+- **P2b** held, including the mechanism. The unrecognised marked spans are **code spans** —
+  4 at H8, 3 at the STATE.md row, each carrying a `FIGURE_TOKEN` — and altering one fires through
+  the **assertion** half (`FIGURE CENSUS` + `FIGURE ORDER`, 0 `SITE RECORD`), exactly as predicted,
+  because a span the gate does not treat as a quotation is a span `partition` treats as an
+  assertion. That is K01, not K10.
+- **P2c** held: `_table_lines` counts the header line and the `|---|` delimiter, so "1 of this
+  site's 3 table rows" is 1 of 3 *lines* where the site holds one data row.
+- **P2d** held: §14 holds **0** table lines by any of my three readers. **P2e** held.
+- **P3a** 1 out, 0 in, 0 to SILENT. **P3c** held — the probe fires at `803bd50` as well, so F1 was
+  a defect of the matrix and not of the gate.
+- **P4a/P4b/P4c** all held, and P4b's demonstration is sharper than predicted: exit **0** unflagged
+  with `(mg-9207 E3)` and exit **1** flagged without it.
+- **P5a** **7 existed at `803bd50`** — predicted 7 against both parties' 6. **P5b** 6 live at
+  `77306a7`, 1 touched. **P5d** 0 at HEAD. **P5e** held: the two sixes are different sixes, both
+  numerators hold, both denominators are short in opposite directions.
+- **P6a/P6b/P6c** held, including the low-confidence half: the three extras are the three
+  `RECORD PARTITION` rows for `FIGURE CENSUS` as well as for `SITE RECORD`.
+- **P7a/P7c/P7d** held. **P8a** held: 448, 448, and the transcript's 429.
+- **P8c/P8d** held, and both files named in advance were among the omitted.
+- **P9a/P9b/P9c** held: 3 of 3 byte-for-byte, 3 of 3 REFUSED / 3 of 3 BLESSED, 29 of 29.
+- **P10a/P10b/P10c** held. **17 of 17** on-disk probes restored byte-identically.
+
+## The misses, kept as written
+
+**1. P8b is the biggest miss and it is the best finding.** I predicted **0 stale of 2** for the
+repair's own `COMPUTED` transcripts. It is **2 of 2**. They were right when written and the *merge
+rebase* moved their publishing commits onto a larger tree. Predicting the check would hold is what
+made the failure legible: I went looking for the hand list (G2) and found the state (**G5**) on the
+way.
+
+**2. P5c said mg-3f3b touched 6 of 6 — right, for a reason I had wrong.** I predicted the seventh
+occurrence (`WRITTEN ONCE`) would still be live when mg-3f3b started, making its population 6 out of
+7-ever. It was live, and the count at `979df72` is 6 rather than 7 because mg-6df0 had already
+repaired `verify_landing.py:1815`. The arithmetic came out right through a wrong path.
+
+**3. P7b predicted "6 where the hand list finds 4" at `803bd50`.** Measured (`C1e`): the declaration
+finds **7 where the hand list finds 5** at `803bd50`, and **6 against 4** at `77306a7`. I had the
+right gap — two occurrences — at the wrong commit.
+
+**4. Two defects of this instrument, both found by its own runs.**
+
+*The sweep rule.* The first version matched `"FIGURE ORDER" in bad` in `audit_ec07.py` and called it
+the construct. `bad` is a set of **headings**, so that test is the remedy spelled as a set lookup.
+The fix was itself short, reporting `"CENSUS ROSTER" not in moved` at `repair_7e39.py:692` as a
+seventh live occurrence, where `moved` is a **vocabulary**. A rule that widens a population by one
+and a vocabulary that narrows one by one are the same mistake, and this audit made the first while
+measuring the second. The first version also matched only `In`, which reported mg-6df0's repair as
+touching **0** — `reseal`'s refusal read `"SITE RECORD" not in d`.
+
+*The K11 construction.* `cell` is `len(state_row(...))`, so the site's own length is a live figure
+and any mutation that changes the row's byte count moves a figure at all three sites. Inserting one
+space gave exit 1 with **six FIGURE rows refuted** — a K01 wearing K11's name, which is precisely
+the confusion `A2` exists to prevent. The shift now *moves* a space: one cell gains what another
+loses, length identical, figure-token multiset identical.
+
+*And the reason mark.* `D2`'s bend was first keyed on the site's **first line**, which at `803bd50`
+is not in the site at all — the STATE.md site was one line from `find_line` there, because
+`framed_row` is what mg-6df0 introduced. The control silently did nothing at 1 of 3 sites and read
+as a real BLESS. It is now keyed on the site's **anchor**, which is in the site's raw at every
+version.
+
+**5. P0c.** The working tree gains this instrument's own `.py` file, so the population it counts
+includes it, and `PREDICTIONS.md` is itself one of the 9 files that publish a `.py` population by
+the repair's own rule — because it quotes the figure it predicts. Both are in the transcript.
+
+## The exit codes, predicted against observed
+
+| probe | predicted | observed |
+|---|---|---|
+| gate at HEAD, unmutated | 0 | **0** |
+| gate under my K11 pipe-padding shift, at HEAD | 1 | **1**, 1 `SITE RECORD`, 0 FIGURE |
+| gate under the same shift, at `803bd50` | 1 | **1**, 1 `SITE RECORD`, 0 FIGURE |
+| my 7 `n/a` constructions | 0 same-kind constructions exist | **0** — 7 of 7 survive |
+| gate with one `ROW_KINDS` name removed | 1 | **1**, declared-vocabulary row refuted |
+| gate with a measurement-free reason **carrying** `mg-9207 E3` | 0 | **0**, unflagged |
+| gate with the same reason **without** the id | 1 | **1**, flagged |
+| `--reseal` after `partition` bent at one site, HEAD | 1, record unchanged | **1**, 3 of 3 |
+| `--reseal` after the same, `803bd50` | 0, record rewritten | **0**, 3 of 3 |
+| `sh run_all.sh` | 0 | **0** |
+
+Ten predicted, ten observed, none revised after the fact.
