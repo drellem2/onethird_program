@@ -1,0 +1,227 @@
+mg-ec07 -- INDEPENDENT AUDIT of mg-ff3e's repair of mg-9207
+==============================================================================
+Target: `code/hodge_leverage_landing_e1d0/verify_landing.py` at HEAD, the
+census made "position-aware over the WHOLE record" by c7f9079 / 11ef9a9 and
+reported by 3bf0cd2.
+
+Three questions, in the assignment's order: did it fix the SET or the next
+field; did the same-kind enumeration HAPPEN; and is what was already confirmed
+still confirmed.  Plus one thing no list in the assignment names -- A7, the
+blessing path.
+
+NOT A REPLICATION.  `repair_9207.py` and `audit_8eca_repair.py` are not run
+and their bottom lines are not quoted.  Every population here is derived from
+the tree by this file.  The one thing imported from the artifact is the GATE
+ITSELF, because an audit that re-implements the gate audits its own
+re-implementation.
+
+A0 -- PREFLIGHT
+---------------
+  [CONFIRMED] A0 the 5 files this instrument mutates and restores are clean at start
+  [CONFIRMED] A0 the real runner on the clean tree exits 0 (predicted 0), 0 refuted rows
+
+A1 -- THE RECORD IS THE SITE, BYTE FOR BYTE (in memory, a FIXTURE)
+------------------------------------------------------------------
+⚠️  A FIXTURE, declared: this calls `census_gate` on strings in memory.  A5
+runs on disk against the real runner, and A5 is the evidence.
+
+The claim under audit is mg-ff3e's own: the projection is LOSSLESS, so no
+field can be left behind because nobody named it.  The strongest statement of
+that claim is a population nobody wrote down: EVERY CHARACTER OF EVERY SITE,
+substituted alone.  If one byte of a site can move in silence, "the whole
+record" is not what is compared.
+
+The population is derived from the tree, not from a list.  No figure, segment
+or field is named anywhere in this section.
+
+  the repair lands at   : c7f9079
+  the control runs at   : eb600f7  (the defect still present)
+
+  [CONFIRMED] A1 the STATE.md row: 13367 of 13367 characters of this site cannot be substituted in silence
+  [MEASURED ] A1-control the STATE.md row: the SAME instrument against the gate at eb600f7 catches 110 of 13367 (0.8%)
+  [CONFIRMED] A1 §14: 16647 of 16647 characters of this site cannot be substituted in silence
+  [MEASURED ] A1-control §14: the SAME instrument against the gate at eb600f7 catches 112 of 16647 (0.7%)
+  [CONFIRMED] A1 H8: 7852 of 7852 characters of this site cannot be substituted in silence
+  [MEASURED ] A1-control H8: the SAME instrument against the gate at eb600f7 catches 240 of 7852 (3.1%)
+  [CONFIRMED] A1 TOTAL 37866 of 37866 characters over the 3 sites (the STATE.md row 13 367 + §14 16 647 + H8 7 852) fire at HEAD
+  [CONFIRMED] A1-control TOTAL 462 of 37866 fire against the pre-repair gate at eb600f7 -- 1.2% against 100.0%.  THIS IS THE CONTROL: an instrument that catches nearly everything at HEAD and almost nothing one commit earlier is measuring the repair, not itself
+
+A2 -- WHICH ROW CATCHES IT
+--------------------------
+    SITE RECORD           37866
+    FIGURE CENSUS           462
+    FIGURE ORDER            462
+  [CONFIRMED] A2 RECORD PARTITION fires on 0 of 37866 single-character mutations.  `rejoin(partition(raw)) == raw` is an identity that holds for EVERY string, so NO EDIT TO ANY DOCUMENT CAN MOVE IT.  That is not a defect -- it is what mg-ff3e said the row is, and why D3 had to bend the CODE to falsify it -- but the row that licenses 'the whole record is compared' is unfalsifiable by any document edit, and this audit puts a number on that
+  [MEASURED ] A2 the row that does the catching is SITE RECORD (37866 of 37866), which is the half of the record mg-9207 found was not being compared.  ⚠️ PREDICTION MISS, kept: A2 predicted a PARTITION -- non-figure characters caught by SITE RECORD, figure characters by the FIGURE rows.  SITE RECORD catches ALL 37866, figure characters included, because destroying a figure token moves its bytes into a SEGMENT.  The figure rows catch 462 of 37866 and add nothing SITE RECORD does not already catch, ON THIS POPULATION
+
+A2b -- DID THE ASSERTED-FIGURE POPULATION ITSELF MOVE? (measurement)
+--------------------------------------------------------------------
+mg-ff3e re-derived `figure_sequence` from `partition` and unified the
+marked-quotation convention into one `quoted_spans`.  A change to WHICH tokens
+count as asserted would silently change what (c)/(d) are about.  Not
+pre-registered; recorded as a measurement.
+
+  [MEASURED ] A2b the STATE.md row: 17 asserted figures at HEAD, 17 at eb600f7 -- IDENTICAL
+  [MEASURED ] A2b §14: 16 asserted figures at HEAD, 16 at eb600f7 -- IDENTICAL
+  [MEASURED ] A2b H8: 36 asserted figures at HEAD, 36 at eb600f7 -- IDENTICAL
+  [CONFIRMED] A2b 3 of 3 sites assert the same figure sequence before and after the repair, so (c)/(d) are about the same population and A3 below compares like with like
+
+A3 -- mg-9207's 12 OF 12, RE-DERIVED AT A POPULATION NOBODY WROTE
+-----------------------------------------------------------------
+mg-9207 confirmed C3 on TWELVE exchanges at 3 sites, and mg-ff3e re-ran
+mg-9207's own instrument to show it still holds.  That is replication with a
+shared source.  This enumerates EVERY unordered pair of asserted figure slots
+whose VALUES DIFFER, derived from `partition` -- and asks the same question of
+all of them: does it fire, and is FIGURE ORDER the only census row that does?
+
+If a repair that added two rows to the gate had weakened the figure case, this
+is where it would show.
+
+  [CONFIRMED] A3 the STATE.md row: 127 of 127 differing-value figure exchanges fire, FIGURE ORDER refuted on 127 of 127
+  [CONFIRMED] A3 the STATE.md row: SITE RECORD green on 127 of 127, RECORD PARTITION green on 127 of 127, FIGURE CENSUS green on 127 of 127 -- the record masks figures with a VALUE-INDEPENDENT marker, so moving figures must not move it
+  [CONFIRMED] A3 §14: 116 of 116 differing-value figure exchanges fire, FIGURE ORDER refuted on 116 of 116
+  [CONFIRMED] A3 §14: SITE RECORD green on 116 of 116, RECORD PARTITION green on 116 of 116, FIGURE CENSUS green on 116 of 116 -- the record masks figures with a VALUE-INDEPENDENT marker, so moving figures must not move it
+  [CONFIRMED] A3 H8: 604 of 604 differing-value figure exchanges fire, FIGURE ORDER refuted on 604 of 604
+  [CONFIRMED] A3 H8: SITE RECORD green on 604 of 604, RECORD PARTITION green on 604 of 604, FIGURE CENSUS green on 604 of 604 -- the record masks figures with a VALUE-INDEPENDENT marker, so moving figures must not move it
+  [CONFIRMED] A3 TOTAL 847 of 847 figure exchanges over the three sites fire with FIGURE ORDER refuted, and FIGURE ORDER is the ONLY census row refuted on 847/847/847 of them.  mg-9207's C3 is not disturbed -- it is re-derived at 70x its population by an instrument that shares no code with it
+
+A2c -- NEITHER ROW IS REDUNDANT (measurement, from A1 and A3)
+-------------------------------------------------------------
+  [MEASURED ] A2c on POINT MUTATIONS, SITE RECORD catches 37 866 of 37 866 and FIGURE ORDER 462 -- SITE RECORD alone would do.  On EXCHANGES (A3), FIGURE ORDER catches 847 of 847 and SITE RECORD 0 -- FIGURE ORDER alone does.  The two halves are not two views of one check: each is the whole of the answer on the population the other is blind to, which is why removing either is a real deletion and why mg-ff3e's D1b/D2 split at that seam was the right unit
+
+A4 -- 'TWO OCCURRENCES OF THE SAME TOKEN' IS AN EMPTY SET, MEASURED
+-------------------------------------------------------------------
+mg-ff3e's second uncovered bullet says this is an EMPTY SET rather than a
+blind spot, and that the difference is checkable.  Nobody checked it.  Here it
+is checked: exchange them and compare the result to the original BYTE FOR BYTE.
+
+  [CONFIRMED] A4 the STATE.md row: 9 of 9 equal-value exchanges are byte-identical to the original
+  [CONFIRMED] A4 §14: 4 of 4 equal-value exchanges are byte-identical to the original
+  [CONFIRMED] A4 H8: 26 of 26 equal-value exchanges are byte-identical to the original
+  [CONFIRMED] A4 TOTAL 39 of 39 equal-value figure exchanges over the three sites are the IDENTITY MAP ON THE BYTES.  The bullet is an empty set and is now a measurement rather than a sentence
+
+A6 -- THE STATED SET AGAINST THE CODE
+-------------------------------------
+mg-ff3e states its residue rather than hiding it, so the assignment's third
+branch applies as well: verify the stated set matches the code.
+
+The sentence, printed beside the gate in `verify_landing.py` and again in R5
+of `repair_9207.py`:
+
+    "text OUTSIDE the site is not read, BECAUSE A SITE IS A SECTION"
+
+  [CONFIRMED] A6 the sentence 'a site is a SECTION' is printed beside the gate in verify_landing.py
+  [CONFIRMED] A6 2 of 3 sites are obtained by `section()` (§14, H8); 1 is obtained by `find_line()` (the STATE.md row) and is ONE LINE, not a section
+  [MEASURED ] A6 the STATE.md row: 1 line(s), 13,367 chars
+  [MEASURED ] A6 §14: 72 line(s), 16,647 chars
+  [MEASURED ] A6 H8: 52 line(s), 7,852 chars
+  [MEASURED ] A6 37,866 of 320,509 characters of the three files are inside a record (11.8%); 282,643 are outside every record (88.2%)
+  [FINDING  ] E-2 -- THE STATED REASON IS NOT TRUE OF THE CODE AT 1 OF 3 SITES.  'text outside the site is not read, BECAUSE A SITE IS A SECTION' is the disclosure a reader meets, and it is the sentence that sizes the residue for them.  Two sites are sections.  The STATE.md site is ONE LINE returned by `find_line`, so what is excluded there is not 'the rest of the file outside this section' but 'the whole ledger table this row is a row of, including its column headers' -- which is exactly what X1 exchanges.  This is the shape mg-ff3e's own R5 opens by naming: a printed extent slightly wider than the code beneath it
+
+A5 -- THE FIELD IT DOES NOT REACH, ON DISK
+------------------------------------------
+The claim is "position-aware over the WHOLE record".  The assignment's first
+branch: find a field it still does not reach, exchange values in it, and see
+whether the census fires.
+
+X3 is the DISCRIMINATION CONTROL and it runs first.  It is mg-9207's E3 --
+two historical COLUMN HEADERS exchanged -- INSIDE a site.  If X3 were silent
+too, X1 and X2 would be my probes failing rather than the gate.
+
+X1 and X2 are the SAME KIND of mutation, at the site whose file is largest.
+No figure is touched by any of the three: only labels move.
+
+  [CONFIRMED] A5-X3 CONTROL: the same kind INSIDE a site -- runner exit 1 (predicted 1), SITE RECORD @ H8 REFUTED, FIGURE CENSUS True, FIGURE ORDER True.  The probe mechanism works and the catch is attributable to the half of the record mg-ff3e added
+
+    probe  exit  refuted  what was exchanged
+    X3     1      3     H8's two historical column headers exchanged (mg-9207's E3), INSIDE the site
+    X1     0      0     STATE.md's ledger table COLUMN HEADERS exchanged -- the verdict column is now la
+    X2     0      0     the VERDICT LABELS of the two ledger rows immediately above the A5 row exchanged
+
+  [MEASURED ] A5-X1 runner exit 0, 0 refuted rows (predicted 0 and 0 -- SILENT)
+  [MEASURED ] A5-X2 runner exit 0, 0 refuted rows (predicted 0 and 0 -- SILENT)
+  [FINDING  ] E-1 -- THE FIELD IT DOES NOT REACH IS THE SITE BOUNDARY, AND THE SAME KIND OF EXCHANGE IS STILL SILENT.  X1 exchanges the two COLUMN HEADERS of the STATE.md ledger table -- the identical mutation mg-9207 raised as E3 and mg-ff3e enumerated, checked at H8 and CAUGHT there (X3, exit 1).  At the STATE.md site the same mutation is exit 0 with 0 refuted rows, because the STATE.md site is ONE LINE and the header of the table that line sits in is outside it.  The record is lossless OVER THE SITE; the projection that remains is the SITE, and it is now the whole of the residue
+  [CONFIRMED] A5 3 of 3 restorations are sha256-identical to the pre-probe file
+
+A5b -- ONE FIGURE EXCHANGE PER SITE, ON DISK (the fixture bridged)
+------------------------------------------------------------------
+A3 is in memory.  This puts one figure exchange per site ON DISK against the
+real runner, so the fixture's result is bridged to the artifact.
+
+  [CONFIRMED] A5b the STATE.md row: figures '48 846' and '+1 630' exchanged on disk -- runner exit 1 (predicted 1), FIGURE ORDER REFUTED, SITE RECORD green, restored True
+  [CONFIRMED] A5b §14: figures '13 551' and '16 692' exchanged on disk -- runner exit 1 (predicted 1), FIGURE ORDER REFUTED, SITE RECORD green, restored True
+  [CONFIRMED] A5b H8: figures '13 551' and '16 692' exchanged on disk -- runner exit 1 (predicted 1), FIGURE ORDER REFUTED, SITE RECORD green, restored True
+  [CONFIRMED] A5b 3 of 3 sites: a figure exchange on disk is caught by FIGURE ORDER with SITE RECORD green -- mg-9207's C3 shape, on the artifact, measured by this instrument and not re-run from mg-9207's
+
+A7 -- THE BLESSING PATH (the floor item)
+----------------------------------------
+AUDITED BECAUSE NO LIST IN THE ASSIGNMENT NAMES IT.  `--reseal` is, in
+mg-ff3e's own words, "the only step in this instrument that can make a wrong
+document green".  R5 names three things that narrow it.  Nothing in the arc
+EXECUTES it -- not `run_all.sh`, not the negative control, not R1-R5.  A
+control that has never been run is a sentence.
+
+  [CONFIRMED] A7-B0 0 invocations of `--reseal` anywhere under code/ outside this instrument's own directory (predicted 0).  ⚠️ The first version of this check counted THIS FILE and read 1: the miss is kept in PREDICTIONS.md.  `--reseal` is NAMED in four places and EXECUTED in none, which is why this audit executes it
+  [CONFIRMED] A7-B1 a LIVE FIGURE corrupted (+2 744 -> +2 745 in §14): the runner exits 1 and `--reseal` exits 1 (predicted 1, REFUSED) with site_records.txt sha256 UNCHANGED.  A section whose figures are wrong cannot be blessed
+  [REFUTED  ] A7-B2 `partition` bent LOSSY (segments lower-cased -- D3's shape): `--reseal` exits 0 -- PREDICTED 1, REFUSED, OBSERVED 0.  The record it wrote DID change
+  [REFUTED  ] A7-B2b of 34 gate rows, 6 contain the string 'SITE RECORD' and are therefore excluded from `reseal`'s refusal.  3 are the SITE RECORD rows themselves, which is intended.  3 are NOT: GATE @ H8: RECORD PARTITION, GATE @ the STATE.md row: RECORD PARTITION, GATE @ §14: RECORD PARTITION
+  [FINDING  ] E-5 -- THE REFUSAL IS HOLED AT THE ROW THAT LICENSES THE WHOLE CLAIM, BY THE EXACT DEFECT mg-ff3e DIAGNOSED IN ITS OWN INSTRUMENT AND DID NOT LOOK FOR IN THE ARTIFACT.  `reseal()` refuses while any gate row other than SITE RECORD is refuted, and it identifies those rows with `"SITE RECORD" not in d` -- a substring test over the WHOLE ROW.  The RECORD PARTITION row's own explanation says '...everything else by SITE RECORD, and nothing is in neither', so all 3 RECORD PARTITION rows are excluded too.  Measured: with `partition` bent lossy, `--reseal` exits 0 and writes a record built from a partition that is not the section.  This is R5 item 3 verbatim -- `"FIGURE CENSUS" in row` matching the SITE RECORD row's own explanation -- which mg-ff3e found in `repair_9207.py`, fixed there with `heading()`, kept in its PREDICTIONS, and did not ask where else the same shape lived.  It lived forty lines away in the file it was repairing.  The one-line fix is the same one: key on the row's HEADING
+  [CONFIRMED] A7-B3 X3's LABEL EXCHANGE, then `--reseal`: the runner is 1 before the reseal, `--reseal` exits 0 (predicted 0, BLESSED), and after it EVERY GATE ROW IS GREEN (0 refuted) with the defect on the page.  ⚠️ PREDICTION MISS, kept: I predicted the runner would exit 0 after the reseal; it exits 1, and the reason is a non-gate row.  That is somebody else's open item, not a gate row catching the label exchange -- the gate rows are green.  The reviewable diff is 1+/1- lines of site_records.txt
+  [CONFIRMED] A7-B3 site_records.txt restored, sha256-identical
+  [FINDING  ] E-3 -- THE BLESSING PATH IS THE WHOLE OF (e)'s STRENGTH AND IT IS UNEXERCISED.  `--reseal` refuses on a wrong FIGURE (B1) but by construction it CANNOT refuse on a wrong LABEL -- SITE RECORD is excluded from the refusal, and SITE RECORD is the only row a label exchange moves.  So the exact mutation mg-ff3e was assigned to catch is one `--reseal` away from green, and the only thing standing between them is a human reading a 1-line diff.  That is mg-ff3e's stated design and this audit does not dispute the DESIGN; what it disputes is that the narrowing was never MEASURED.  Nothing in the arc runs `--reseal` at all (B0 = 0 of 0), so neither half of 'it refuses while any other gate row is refuted' had a control until now -- and B6 below measures what one blessing actually costs
+  [CONFIRMED] A7-B6a a label exchange NOT among the seven frozen probe literals -- H8's first block now asserts the §14 copy is both '10 623 chars (unchanged)' and '2 928 -> 6 069 chars (more than doubled)': runner exit 1 (predicted 1), SITE RECORD @ H8 REFUTED.  THE REPAIR WORKS, which is what makes the next two rows mean anything
+  [CONFIRMED] A7-B6b/c then `--reseal` (exit 0, predicted 0) and the runner again: exit 0 with 0 refuted rows (predicted 0 and 0).  FULLY GREEN with the contradiction on the page -- no gate row, no probe and no aggregate notices
+  [FINDING  ] E-6 -- ONE `--reseal` TURNS A REAL LABEL EXCHANGE FULLY GREEN, AND NOTHING IN THE ARTIFACT NOTICES.  B3's blessing was caught -- not by the gate, whose 34 rows all went green, but by N21 reporting PROBE NOT APPLIED because its own frozen literal had moved.  B6 uses a label exchange outside those seven literals and the run is exit 0 with 0 refuted rows.  So the residual protection after a reseal is exactly the seven strings mg-ff3e enumerated, and it is a side effect of how those probes locate their text rather than a property of the record.  This is the same shape as E-1 and E-4 one level up: what is protected is what was named
+  [CONFIRMED] A7-B4 the refusal DELETED (one statement), the same wrong live figure as B1: `--reseal` exits 0 (predicted 0) and blesses a document whose figures are wrong.  The refusal is LOAD-BEARING, at its finest unit
+  [CONFIRMED] A7-B4 site_records.txt and verify_landing.py restored, sha256-identical
+  [CONFIRMED] A7-B5 `reseal()` computes all 5 measurements itself from the working tree (5 of 5 found), the same source `t1` reads, so a reseal cannot be blessed against a different measurement
+
+A8 -- DID THE SAME-KIND ENUMERATION HAPPEN?
+-------------------------------------------
+A DIFFERENT QUESTION FROM WHETHER THE FIX WORKS.  mg-9207 required the
+same-kind set to be enumerated BEFORE fixing, and fixed as a set.  A correct
+fix that never asked is the failure mode, not a success.
+
+Checked from git and from the runner's own stdout, not from mg-ff3e's summary
+of itself.
+
+  the fix lands at c7f9079
+
+    probe  mg-9207 id  first commit  before the fix?  raised by mg-9207?
+    N19    E2          c7f9079       NO               yes
+    N20    E2b         c7f9079       NO               yes
+    N21    E3          c7f9079       NO               yes
+    N22    --          c7f9079       NO               no -- mg-ff3e's own
+    N23    --          c7f9079       NO               no -- mg-ff3e's own
+    N24    --          c7f9079       NO               no -- mg-ff3e's own
+    N25    --          c7f9079       NO               no -- mg-ff3e's own
+  [CONFIRMED] A8 0 of 7 same-kind probes exist at any commit BEFORE c7f9079, the commit that lands the fix.  The enumeration is CONTEMPORANEOUS WITH the fix, not prior to it -- there is no artifact in this repository, at any earlier commit, that enumerates the set.  'Enumerate BEFORE fixing' is therefore not evidenced, though nothing here shows it did not happen in the author's head
+  [CONFIRMED] A8 7 of 7 same-kind probes carry a verdict WRITTEN BEFORE the run and 7 of 7 carry an OBSERVED verdict, in the runner's OWN stdout on THIS run and not only in a committed transcript.  Every item was CHECKED, not named
+      N19 H8: the two LABELS exchanged, figures left alone (mg-9207 E2)     REFUTED       all green
+      N20 H8: the bbe83b5 table's two ROW LABELS exchanged (E2b)            REFUTED       all green
+      N21 H8: the two historical COLUMN HEADERS exchanged (E3)              REFUTED       all green
+      N22 §14: the two CORRECTION ATTRIBUTIONS exchanged                    REFUTED       all green
+      N23 STATE.md row: two row-history ANCHOR LABELS exchanged             REFUTED       all green
+      N24 §14: a figure inside a MARKED QUOTATION altered                   REFUTED       all green
+      N25 H8: the three-column table's ALIGNMENT shifted, no figure moved   REFUTED       all green
+  [CONFIRMED] A8 4 of 7 probes are mg-ff3e's OWN -- the other 3 carry finding ids mg-9207's own artifact names (E2/E2b/E3).  The enumeration is substantially, not only nominally, the parent's
+  [FINDING  ] E-4 -- THE ENUMERATION IS OVER KINDS, NOT OVER SITES x KINDS, AND THAT IS WHERE E-1 COMES FROM.  Seven kinds of label-side exchange were enumerated and all seven were CHECKED, which is the discipline working.  But each kind was checked at ONE site: N21 (column headers) at H8 only.  The same kind at the STATE.md site is X1, and X1 is silent.  The question 'what else is of the same kind?' was asked of the MUTATION and not of the SITE, so the set that was fixed is the set of exchange kinds at the sites that were already probed.  The enumeration also arrives in the same commit as the fix (A8 above), so 'enumerate BEFORE fixing' is not evidenced by anything in the repository
+
+BOTTOM LINE
+-----------
+  checks recorded : 56
+  measurements    : 14
+  confirmed       : 40
+  refuted         : 2
+    - A7-B2 `partition` bent LOSSY (segments lower-cased -- D3's shape): `--reseal` exits 0 -- PREDICTED 1, REFUSED, OBSERVED 0.  The record it wrote DID ch
+    - A7-B2b of 34 gate rows, 6 contain the string 'SITE RECORD' and are therefore excluded from `reseal`'s refusal.  3 are the SITE RECORD rows themselves,
+
+  6 findings.
+    E-2 -- THE STATED REASON IS NOT TRUE OF THE CODE AT 1 OF 3 SITES.  'text outside the site is not read, BECAUSE A SITE IS A SECTION' is the disclosure a reade
+    E-1 -- THE FIELD IT DOES NOT REACH IS THE SITE BOUNDARY, AND THE SAME KIND OF EXCHANGE IS STILL SILENT.  X1 exchanges the two COLUMN HEADERS of the STATE.md 
+    E-5 -- THE REFUSAL IS HOLED AT THE ROW THAT LICENSES THE WHOLE CLAIM, BY THE EXACT DEFECT mg-ff3e DIAGNOSED IN ITS OWN INSTRUMENT AND DID NOT LOOK FOR IN THE
+    E-3 -- THE BLESSING PATH IS THE WHOLE OF (e)'s STRENGTH AND IT IS UNEXERCISED.  `--reseal` refuses on a wrong FIGURE (B1) but by construction it CANNOT refus
+    E-6 -- ONE `--reseal` TURNS A REAL LABEL EXCHANGE FULLY GREEN, AND NOTHING IN THE ARTIFACT NOTICES.  B3's blessing was caught -- not by the gate, whose 34 ro
+    E-4 -- THE ENUMERATION IS OVER KINDS, NOT OVER SITES x KINDS, AND THAT IS WHERE E-1 COMES FROM.  Seven kinds of label-side exchange were enumerated and all s
+
+  VERDICT: PARTIAL.
