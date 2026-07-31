@@ -1,0 +1,346 @@
+== HAND-RUN, KEPT AS EVIDENCE (mg-3f3b) ==
+
+`sh code/hodge_leverage_audit_835f/run_all.sh`, run once by hand at the tree
+this repair lands in.  It answers the question PREDICTIONS.md named in advance
+as the way this repair could be WORSE than the disposition it replaces: does
+applying `heading()` inside another deliverable's shipped instrument move a
+VERDICT rather than a printed line?
+
+  IT DOES NOT.  The two rows that consume the two repaired lines read
+
+    [CONFIRMED] and the check that fired is the SITE READ in 12 of 12 ...
+    [CONFIRMED] the written-once counter fires additionally on 10 of 12 ...
+
+  and both are IDENTICAL to the committed `out_audit_a318.txt` at HEAD.  12
+  and 10, before the repair and after it.  Those are lines 45 and 46 below.
+
+  ⚠️ AND THE REPAIR WAS NECESSARY TO KEEP THEM THERE.  `heading()` is
+  `row.split(" -- ")[0]`, and the gate's `READ AT THE SITE` rows carried NO
+  ` -- ` separator, so `heading(d).endswith("READ AT THE SITE")` selected 0 of
+  34 live rows where the substring test selected 12.  Applying the remedy
+  without first repairing the gate's row grammar would have turned
+  `read_fired == 12` into 0.
+
+⚠️ `out_audit_a318.txt` IS DELIBERATELY NOT REGENERATED FROM THIS RUN, and the
+rest of this transcript is why.  It differs from the committed one for reasons
+that have nothing to do with this repair:
+
+  * `out_verify.txt` has grown from 15,863 to 32,414 characters across four
+    later deliverables, so that audit's byte-identical-regeneration row is
+    REFUTED at this tree;
+  * mg-835f's widening CLOSED that audit's G-1, so its three U1 probes now
+    fire where it predicted they would not, and its two findings are gone;
+  * two `.md` files added since join its Appendix-A duplicate sweep.
+
+A COMMITTED TRANSCRIPT IS THE RECORD OF WHAT AN INSTRUMENT FOUND AT ITS OWN
+COMMIT.  Overwriting it here would rewrite another deliverable's evidence
+under cover of a one-line repair -- which is the disturbance this file exists
+to DISCLOSE rather than to commit.  The same reasoning is why mg-6df0 kept
+`out_ff3e_rerun.txt` beside its own transcript.
+
+The instrument's exit code for this run: 1 (its own header predicts exit 1 on
+F-3 and F-4, both still open; the extra refutation is the regeneration row
+above).
+
+--------------------------------------------------------------------------
+mg-835f -- INDEPENDENT AUDIT OF THE mg-a318 REPAIR (b80dea0 + 7f66005)
+==============================================================================
+The brief is a measurement, not a reading: mutate the figure AT EACH
+reader-facing site in turn, leave every other occurrence correct, and confirm
+the gate fires every time.  A gate that still passes when one site is wrong and
+another is right has not been fixed, it has been renamed.  So A1 and A2 below
+write to the real documents and run the real runner; nothing concludes from the
+gate's source that the gate reads the site.
+
+0 mathematics is touched and nothing of mg-3c24, mg-e1d0, mg-8e30 or mg-8a5c is
+re-opened.  What is audited is a documentary gate and the documents it gates.
+
+A1 -- THE SITE BATTERY: EVERY READER-FACING FIGURE, MUTATED ON DISK
+-------------------------------------------------------------------
+The brief's primary target, and it is a measurement rather than a reading.
+Every (site, figure) pair a reader can meet is corrupted ON DISK, one at a time,
+leaving every other occurrence of that figure correct, and the REAL runner is
+executed against the mutated tree.  Then the file is restored, the restoration
+is checked by sha256, and the runner is executed AGAIN -- because a gate that
+fires on everything is no better than one that fires on nothing.
+
+Every mutation is LENGTH-PRESERVING (a same-width wrong value), so no figure
+moves underneath the gate and a fire is attributable to the site read.
+
+  population: the (site, figure) pairs `verify_landing.py` presents to a reader
+  and gates -- 5 at the STATE.md row, 2 at §14, 5 at H8.  Verdicts written
+  before the run: FIRES for all of them, silent for all twelve restorations.
+
+    #   site               figure   wrote     predicted   observed    restored
+    1   the STATE.md row   gap      +9 999    FIRES       FIRES       silent
+    2   the STATE.md row   both     +99 999   FIRES       FIRES       silent
+    3   the STATE.md row   cell     99 999    FIRES       FIRES       silent
+    4   the STATE.md row   hist     99 999    FIRES       FIRES       silent
+    5   the STATE.md row   copy     99 999    FIRES       FIRES       silent
+    6   §14                gap      +9 999    FIRES       FIRES       silent
+    7   §14                both     +99 999   FIRES       FIRES       silent
+    8   H8                 gap      +9 999    FIRES       FIRES       silent
+    9   H8                 both     +99 999   FIRES       FIRES       silent
+    10  H8                 cell     99 999    FIRES       FIRES       silent
+    11  H8                 hist     99 999    FIRES       FIRES       silent
+    12  H8                 copy     99 999    FIRES       FIRES       silent
+
+  [CONFIRMED] MUTATED AND FIRED: 12 of 12 reader-facing (site, figure) pairs -- 5 at the STATE.md row, 2 at §14, 5 at H8 -- make the real runner exit non-zero when corrupted ON DISK one at a time
+  [CONFIRMED] UNTOUCHED AND SILENT: 12 of the same 12 restorations return the runner to exit 0, each restoration verified byte-identical by sha256 -- the gate is not merely always-red
+  [CONFIRMED] and the check that fired is the SITE READ in 12 of 12: 'READ AT THE SITE = <what the document says>, MEASURED THIS RUN = <what the run measured>'.  It is not the written-once counter alone
+  [CONFIRMED] the written-once counter fires additionally on 10 of 12 -- the 2 it does not are the frozen §14-copy figure at the STATE.md row and at H8, which is declared non-live and may legitimately recur
+
+A2 -- THE EXACT CONFIGURATION THAT FOOLED THE OLD GATE
+------------------------------------------------------
+F-1 was not "a wrong number".  It was a wrong number AT THE SITE with a right
+one somewhere else in the same file, and a gate that could not tell them apart.
+A1 removed the correct copy along with the wrong one; this does not.
+
+PART A: corrupt the figure at the site AND plant a CORRECT copy elsewhere in the
+same file, outside the site.  A presence test passes every one of these.
+PART B: the converse -- leave the site correct and plant a WRONG copy outside it.
+
+Both parts are length-preserving: the planted value overwrites a word of exactly
+its own length, named in the transcript.  Population: the same 12 pairs as A1.
+
+  PART A -- wrong at the site, right outside it.  Predicted: FIRES, 12 of 12.
+    #   site               figure   observed    planted over
+    1   the STATE.md row   gap      FIRES       'answer'
+    2   the STATE.md row   both     FIRES       'summary'
+    3   the STATE.md row   cell     FIRES       'answer'
+    4   the STATE.md row   hist     FIRES       'answer'
+    5   the STATE.md row   copy     FIRES       'answer'
+    6   §14                gap      FIRES       'bridge'
+    7   §14                both     FIRES       'Pricing'
+    8   H8                 gap      FIRES       'record'
+    9   H8                 both     FIRES       'support'
+    10  H8                 cell     FIRES       'record'
+    11  H8                 hist     FIRES       'record'
+    12  H8                 copy     FIRES       'record'
+
+  [CONFIRMED] 12 of the same 12 pairs FIRE with a correct copy of the very figure standing elsewhere in the same file -- so the gate is reading the site and not searching the file.  This is the configuration `e16e41c`'s gate passed at all three sites
+
+  PART B -- right at the site, wrong outside it.  Predicted: silent, 12 of 12.
+    #   site               figure   observed    planted over
+    1   the STATE.md row   gap      silent      'answer'
+    2   the STATE.md row   both     silent      'summary'
+    3   the STATE.md row   cell     silent      'answer'
+    4   the STATE.md row   hist     silent      'answer'
+    5   the STATE.md row   copy     silent      'answer'
+    6   §14                gap      silent      'bridge'
+    7   §14                both     silent      'Pricing'
+    8   H8                 gap      silent      'record'
+    9   H8                 both     silent      'support'
+    10  H8                 cell     silent      'record'
+    11  H8                 hist     silent      'record'
+    12  H8                 copy     silent      'record'
+
+  [CONFIRMED] and it is silent on 12 of 12 wrong copies planted OUTSIDE the site.  That is the gate's DECLARED scope -- a site is a section, not the file -- and is reported as scope rather than as a pass or a fail
+  [MEASURED ] so the boundary is exactly where the documents say it is: inside the section the gate reads the statement it names, and outside it nothing is checked.  A6 asks what that leaves inside
+
+A3 -- WAS DERIVATION CHOSEN, AND IS WHAT REMAINS DECLARED?
+----------------------------------------------------------
+mg-8a5c preferred one figure DERIVING from the other over a cleverer gate,
+because a duplicated literal is a seam waiting to happen.  The repair's own new
+Appendix A rule adds the fallback: an unavoidable duplicate must be DECLARED
+beside the figure.  Two questions, both measured.
+
+  (1) Is the WITHIN-SITE duplicate gone?  That is what F-1 was about.
+  (2) The same five figures are published at three sites in three files.  How
+      many written literals of each survive ACROSS sites, and does the prose at
+      each site say so?
+
+    (1) within-site multiplicity -- occurrences of each figure inside each site
+    figure                                        value   STATE.md row    §14    H8  live?
+    gap, cell only                               +2 744              1      1     1  live
+    gap, cell + relocated history               +23 771              1      1     1  live
+    STATE.md row cell                            13 367              1      0     1  live
+    relocated history (this row's own file)      21 027              1      0     1  live
+    deliverable §14 copy, frozen since mg-a806   10 623              1      1     5  frozen
+  [CONFIRMED] the maximum within-site count of any LIVE figure is 1, over the population of 4 live figures x 3 sites = 12 cells -- the chain's tail points at the live figure instead of restating it, so F-1's own shape is structurally gone and not merely detected
+
+    (2) cross-site multiplicity -- the SAME literal, written at N of 3 sites
+    gap, cell only                               +2 744   3 of 3: the STATE.md row, §14, H8
+    gap, cell + relocated history               +23 771   3 of 3: the STATE.md row, §14, H8
+    STATE.md row cell                            13 367   2 of 3: the STATE.md row, H8
+    relocated history (this row's own file)      21 027   2 of 3: the STATE.md row, H8
+  [MEASURED ] 10 written literals of the 4 LIVE figures survive across the 3 sites (gap 3, cell+history 3, cell 2, relocated history 2).  The duplication is not gone -- it moved up one level, from two copies in one section to one copy in each of three files, and the gate now REQUIRES exactly that shape
+
+    (3) is it DECLARED beside the figures, as the repair's own rule asks?
+      the STATE.md row    says 'written once per site': True   names the OTHER sites (self excluded): §14, H8
+      §14                 says 'written once per site': True   names the OTHER sites (self excluded): the STATE.md row, H8
+      H8                  says 'written once per site': True   names the OTHER sites (self excluded): the STATE.md row, §14
+  [CONFIRMED] 3 of the 3 sites carry the phrase 'written once PER SITE' in the prose beside the figure, which is the declaration the repair's own Appendix A rule requires for a duplicate somebody must maintain.  3 of the 3 additionally mention BOTH other sites by name, self excluded -- that is a token-presence test and is reported as one: it shows a reader of any site is pointed at the others, not that each says the others carry the same literal.  The phrase 'per site' is what carries that, and it is at all three.  The duplicate is DECLARED
+  [MEASURED ] so the brief's second question resolves in the repair's favour: derivation was chosen where derivation was possible, the residue is the irreducible one -- three documents that must each state the figure to a reader who is reading only one of them -- and it is declared at every site rather than left for the next editor to find
+
+A4 -- THE CLEAN NULL: DID THIS REPAIR'S OWN FIGURES GO STALE?
+-------------------------------------------------------------
+mg-8a5c's primary target was that mg-8e30's figures had not gone stale, and it
+held by three disjoint routes.  This repair edits the very cells it reports on,
+which is the original mechanism, so the same question is asked again -- of the
+repair's own numbers this time, and by tooling chosen to share nothing: Python's
+`len` on decoded text, coreutils `wc -m`, and perl's `length` under -CSD.  Two
+sources each: the working tree, and the git blob at HEAD.
+
+    quantity                             py/tree  wc -m/blob  perl/blob  agree
+    STATE.md A5 cell                      13,367      13,367     13,367    yes
+    relocated row history (file)          21,027      21,027     21,027    yes
+    deliverable §14 copy                  10,623      10,623     10,623    yes
+    gap, cell only                        +2,744      +2,744     +2,744    yes
+    gap, cell + history                  +23,771     +23,771    +23,771    yes
+
+  [CONFIRMED] 5 of the 5 published figures agree across all three routes (Python codepoints on the tree, coreutils `wc -m` on `git show`, perl `length` on `git cat-file`) -- the routes share no code and two of them never touch the working tree
+  [CONFIRMED] and all 12 figures a reader meets -- the population is the 12 (site, figure) pairs of A1 -- equal the measurement, so the repair did NOT reintroduce the staleness it was repairing
+  [CONFIRMED] and no commit between `b80dea0` and HEAD touches any of the three files, so the figures written by the repair are still the figures at HEAD: `git log b80dea0..HEAD -- <the three files>` is empty
+  [CONFIRMED] the repair DID move the cell it was measuring -- `b80dea0` added +675 characters to the STATE.md row -- so the fixed point was real and was solved rather than avoided
+  [REFUTED  ] the audited runner's committed transcript `out_verify.txt` regenerates BYTE-IDENTICALLY at HEAD (32,414 chars, all of it) -- the clean null mg-8a5c established is undisturbed by this repair's own edits to the very cells it reports on
+  [CONFIRMED] and so does the mg-2da3 working-tree control, whose committed output `7f66005` REGENERATED to follow this repair's STATE.md edit: exit 0, 37,233 chars, byte-identical.  That is the discriminator between an evidence file regenerated to FOLLOW a corrected document and one bent to AGREE with a wrong one
+
+A5 -- THE SEAM SWEEP: THREE CORRECTIONS, ONE ARTIFACT
+-----------------------------------------------------
+`bbe83b5` (mg-e1d0), `e16e41c` (mg-8e30) and `b80dea0` (mg-a318) have each
+corrected the same three passages.  A seam defect is a STALE COPY of a passage an
+earlier correction also touched, surviving where the later one did not reach; it
+compounds, because the next edit builds on whichever copy it reaches.
+
+Two sweeps.  Both thresholds are printed.  Where nothing is found, what WOULD
+have counted is stated, so the null is checkable rather than merely asserted.
+
+    SWEEP 1 -- POPULATION: sentences >= 120 chars carrying a figure, in the 4 documents the three corrections touched.
+      OneThird-Hodge-Side-Leverage-Mg8e30Repair-IndependentAudit.md   45
+      OneThird-Hodge-Side-Leverage.md                                152
+      STATE.md                                                       266
+      attempt-mg-a3d4.md                                              27
+      TOTAL sentences 490;  pairs compared 119805
+      similarity: difflib.SequenceMatcher.ratio() on flattened text, threshold 0.80
+      a pair counts as a SEAM HIT only if BOTH members carry figures and the figure sets disagree: one member eliding its figures behind '…' is an abbreviation, not a stale copy, and is named below instead
+
+      ratio 0.955  OneThird-Hodge-Side-Leverage.md :: attempt-mg-a3d4.md  seam hit: False
+        A: `γ_i ≤ 1/2` holds on all 404 posets and is attained by 373, so **this is not about antichains**: removing the braid hexagon does not help (`C_a ⊔ C_a`
+        B: `γ_i ≤ 1/2` on all 404 and attained by 373, so **this is not about antichains**: removing the braid hexagon does not help (`C_a ⊔ C_a` has no 3-antich
+  [CONFIRMED] SWEEP 1: 1 of 119805 pairs reach ratio >= 0.80 and 0 of those carry DIFFERENT figures.  WHAT WOULD HAVE COUNTED: two figure-bearing sentences (mean length 377 chars) sharing >= 80% of their characters while stating different numbers -- a stale copy differing only in a 5-7 char figure scores ~0.98 and would be reported here
+
+    SWEEP 2 -- POPULATION: marked quotations >= 60 chars in the same 4 documents.
+      OneThird-Hodge-Side-Leverage-Mg8e30Repair-IndependentAudit.md    6
+      OneThird-Hodge-Side-Leverage.md                                 12
+      STATE.md                                                        39
+      attempt-mg-a3d4.md                                               5
+      TOTAL quotations 62;  pairs compared 1891
+      similarity: difflib.SequenceMatcher.ratio(), threshold 0.75 (lower than sweep 1 on purpose: a quotation is short, so a one-figure difference costs more of the ratio)
+
+      EVERY pair above the threshold is printed, with why it is or is not a seam hit -- a sweep that shows only its hits cannot be checked.
+
+      ratio 1.000  STATE.md :: STATE.md  -- neither member carries a figure
+        A: `γ_i ≥ 1/2` for **every finite poset** having a dimension-`i` face one of whose blocks induces an antichain of size `≥ 3`
+        B: `γ_i ≥ 1/2` for **every finite poset** having a dimension-`i` face one of whose blocks induces an antichain of size `≥ 3`
+      ratio 1.000  STATE.md :: STATE.md  -- neither member carries a figure
+        A: `γ_i ≥ 1/2` for **every finite poset** having a dimension-`i` face one of whose blocks induces an antichain of size `≥ 3`
+        B: `γ_i ≥ 1/2` for **every finite poset** having a dimension-`i` face one of whose blocks induces an antichain of size `≥ 3`
+      ratio 1.000  STATE.md :: STATE.md  -- neither member carries a figure
+        A: the semigroup technique reaches `Δ_AT` only where `Δ_AT` is already free
+        B: the semigroup technique reaches `Δ_AT` only where `Δ_AT` is already free
+      ratio 1.000  STATE.md :: STATE.md  -- neither member carries a figure
+        A: `γ_i ≥ 1/2` for **every finite poset** having a dimension-`i` face one of whose blocks induces an antichain of size `≥ 3`
+        B: `γ_i ≥ 1/2` for **every finite poset** having a dimension-`i` face one of whose blocks induces an antichain of size `≥ 3`
+      ratio 1.000  STATE.md :: OneThird-Hodge-Side-Leverage.md  -- neither member carries a figure
+        A: proving a property and testing for it are different operations
+        B: proving a property and testing for it are different operations
+      ratio 0.984  STATE.md :: STATE.md  -- neither member carries a figure
+        A: A control battery must cover CONSTRUCTION as well as COMPARISON
+        B: a control battery must cover CONSTRUCTION as well as COMPARISON
+      ratio 0.798  STATE.md :: attempt-mg-a3d4.md  -- neither member carries a figure
+        A: the lazy AT walk is **not** a Brown walk … undecided by this test **exactly where `\|L(P)\| ≤ 4`**
+        B: `Δ_AT` is NOT a Brown walk … undecided by that test exactly where `\|L(P)\| ≤ 4`
+      ratio 0.796  STATE.md :: OneThird-Hodge-Side-Leverage-Mg8e30Repair-IndependentAudit.md  -- neither member carries a figure
+        A: A COMMIT THAT MEASURES SOMETHING IT ALSO MODIFIES MUST PUBLISH THE POST-COMMIT MEASUREMENT
+        B: A COMMIT THAT MEASURES SOMETHING IT ALSO MODIFIES MUST PUBLISH THE POST-COMMIT MEASUREMENT, AND MUST SAY WHICH SIDE OF THE EDIT IT
+      ratio 0.788  OneThird-Hodge-Side-Leverage.md :: attempt-mg-a3d4.md  -- one member ELIDES its figures behind '…'
+        A: `Δ_AT` is NOT a Brown walk — proven on 55 of 63 posets at `n = 5` …; undecided by that test exactly where `|L(P)| ≤ 4`
+        B: `Δ_AT` is NOT a Brown walk … undecided by that test exactly where `\|L(P)\| ≤ 4`
+  [CONFIRMED] SWEEP 2: 9 of 1891 quotation pairs reach ratio >= 0.75 and 0 of those are seam hits.  Of the 9, 8 carry no figure in either member and 1 are one-sided elisions -- an abbreviation of a passage is not a second copy of a number.  WHAT WOULD HAVE COUNTED: the same withdrawn passage quoted in two places with two different numbers in it, which is precisely the shape `−875` had before mg-8e30 and would surface here
+
+    SWEEP 3 -- POPULATION: written copies of the Appendix A rule the repair's own
+    Appendix A entry extends, across every .md file in the repository.
+      short STATE.md
+      LONG  STATE.md
+      short code/species_extent_audit_6cb9/PREDICTIONS.md
+      short code/species_depth_audit_4700/OUTCOMES.md
+      short docs/OneThird-Hodge-Side-Leverage-Mg3c24Repair-IndependentAudit.md
+      LONG  docs/OneThird-Hodge-Side-Leverage-Mg8e30Repair-IndependentAudit.md
+  [MEASURED ] 6 written copies of that rule exist in the 6 places listed above, at TWO lengths: 2 carry the clause 'AND MUST SAY WHICH SIDE OF THE EDIT IT IS ON' and 4 stop before it -- including the copy inside the STATE.md A5 cell, which quotes the rule by a title that is a PREFIX of the title Appendix A gives it.  PRE-EXISTING AND NOT THIS REPAIR'S: `git log -S` puts both lengths in `e16e41c` (mg-8e30), one generation earlier, and mg-a318 neither widened nor narrowed them.  Named because the arc's own rule is that a duplicated literal is a seam whether or not a figure is in it
+  [MEASURED ] NAMED RATHER THAN COUNTED, because a sweep that hides its near misses is a sweep nobody can check: the highest-scoring cross-document pairs are printed above with their ratios, whether or not they crossed the threshold
+
+A6 -- THE FLOOR: WHAT THE GATE READS, AND WHAT A READER READS
+-------------------------------------------------------------
+CHOSEN BECAUSE OF HOW F-1 WAS BORN.  F-1 did not arrive as a corruption of an
+existing figure.  It arrived because mg-8e30's own CORRECTION ADDED a second
+mention of the live gap -- the chain's tail -- and the gate could not tell the
+two apart.  The repair removes that copy and gates against a second one.  But
+the gate reads ONE DESIGNATED STATEMENT per site, located by its exact wording.
+A reader reads the whole section.
+
+So the question no list in the brief asks: if the next correction writes the
+figure into the section in ORDINARY PROSE rather than in the labelled form, does
+anything see it?  Seven probes.  Every one is LENGTH-PRESERVING -- the wrong
+sentence overwrites named ballast prose of exactly its own length -- because an
+INSERTION moves the very lengths the figures are, and a gate that fires because
+the file grew has not read anything.  (That distinction cost a
+prediction: run as insertions, the three U1 probes fired at two of the three
+sites and it meant nothing at all.)
+
+    probe                                                                   predicted    observed
+    U1 the STATE.md row: a WRONG figure restated in ordinary prose at the sitegate passes  GATE FIRES   <-- PREDICTION MISSED
+    U1 §14: a WRONG figure restated in ordinary prose at the site           gate passes  GATE FIRES   <-- PREDICTION MISSED
+    U1 H8: a WRONG figure restated in ordinary prose at the site            gate passes  GATE FIRES   <-- PREDICTION MISSED
+    U2 H8: a FIFTH column added to the three-column table                   GATE FIRES   GATE FIRES
+    U3 STATE.md row: the live figure re-marked as a QUOTATION               GATE FIRES   GATE FIRES
+    U4 STATE.md: the whole row duplicated (the locator's uniqueness)        GATE FIRES   GATE FIRES
+    U5 §14: the statement REWORDED, the figure still correct                gate passes  GATE FIRES   <-- PREDICTION MISSED
+
+  [MEASURED ] 4 of 7 predictions missed, kept as written: U1 the STATE.md row: a WRONG figure restated in ordinary prose at the site; U1 §14: a WRONG figure restated in ordinary prose at the site; U1 H8: a WRONG figure restated in ordinary prose at the site; U5 §14: the statement REWORDED, the figure still correct
+  [CONFIRMED] and the gate is fail-CLOSED on the three ways the designated statement can stop being readable -- a fifth table column, a figure re-marked as a quotation, and a duplicated row all make the run red rather than green, which is the right direction for a locator to fail in (population: the 3 structural probes U2-U4)
+  [CONFIRMED] U5 is the same property and is reported as a COST rather than a defect: rewording 'cell-only gap **+2 744**' to 'cell-only gap OF **+2 744**' -- a copy-edit that changes no figure -- turns the run red.  Fail-closed is right; the transcript should say that an innocent edit to the wording is a red run, and it does not
+
+A7 -- THE AMENDED INSTRUMENT, RE-RUN: DOES ITS SUMMARY MATCH ITS RUN?
+---------------------------------------------------------------------
+`7f66005` exists for exactly this.  Its subject: "make the mg-8a5c audit
+instrument tell the truth on a RE-RUN".  Its body: the closing summary "used to
+assert unconditionally that the GATE was open ... a summary that contradicts the
+run it summarises is the defect this whole arc keeps paying for, inside the
+instrument that found this instance of it.  It now reports what THIS run
+measured."
+
+The summary has two sentences.  One is about the gate and was made conditional.
+The other is about the figures.  This runs the instrument and compares the two
+halves of its own summary against its own transcript.
+
+    exit code                                              1
+    [REFUTED] lines in the transcript, whole run           3
+    of those, in T1 (the declared PRIMARY TARGET)          2
+    summary sentence 1 -- the GATE, made conditional       printed (and true)
+    summary sentence 2 -- the FIGURES, unconditional       not printed
+
+      T1 says: [REFUTED  ] the three published parts reproduce from the tree: cell 13,367, relocated history 21,027, §14 copy 10,623
+      T1 says: [REFUTED  ] and so do the two published gaps: cell-only +2,744, cell + history +23,771 -- THE REPAIR'S FIGURES DID NOT GO STALE, which was this audit's primary target
+
+  [CONFIRMED] the GATE half of the summary is now conditional and is CORRECT at this tree -- it prints 'AND THE GATE HOLDS IN THIS TREE', and A1 confirms it independently, 12 of 12.  `7f66005`'s repair works, on the sentence it was applied to
+  [CONFIRMED] the instrument exits 1, as its own header predicts, on F-3 and F-4 -- both still open, both still named as unlanded in the audit document, neither disturbed by this repair
+  [CONFIRMED] and all 4 of mg-8a5c's findings carry a disposition IN the audit document -- F-1 and F-2 LANDED, F-3 and F-4 NOT LANDED -- annotated in place rather than answered elsewhere.  Nothing retreated: no earlier finding is re-marked
+
+BOTTOM LINE
+-----------
+  checks recorded : 27
+  confirmed       : 20
+  measurements    : 6
+  refuted         : 1
+  findings        : 0
+
+
+  THE PRIMARY TARGET IS CONFIRMED, BY MEASUREMENT AND NOT BY READING:
+  every one of the 12 reader-facing (site, figure) pairs, corrupted on
+  disk one at a time with every other occurrence left correct, makes
+  the real runner exit 1 -- and each restoration returns it to exit 0.
+  The configuration that fooled the old gate (wrong at the site, right
+  elsewhere in the file) fires 12 of 12.  Derivation was chosen where it
+  was available, and the residual cross-site duplication is declared at
+  3 of 3 sites.  The clean null holds by three disjoint routes.

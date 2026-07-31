@@ -139,6 +139,46 @@ def by_substring(rows, name):
     return [r for r in rows if name in r]
 
 
+def my_vocabulary():
+    """THE GATE'S ROW HEADINGS, derived HERE from the rows the runner actually
+    emits -- not read out of the sweep's `ROW_NAMES`, whose scope is the thing
+    under test.  An instrument that takes its vocabulary from the artifact it
+    is measuring cannot report that the artifact's vocabulary is too small."""
+    rows = [d for _ok, d in V.figure_gate(V.site_texts(), measured_now())]
+    out = set()
+    for r in rows:
+        m = re.match(r"GATE @ .+?: (?:'.*?' )?([A-Z][A-Z ]+[A-Z])", heading(r))
+        if m:
+            out.add(m.group(1).strip())
+    return sorted(out)
+
+
+def my_hits(rel, name):
+    """Lines of `rel` that identify the gate row `name` by a substring test
+    over a WHOLE ROW.  My rule, not the sweep's: the sweep's rule is scoped by
+    the sweep's vocabulary, and the vocabulary is F5."""
+    try:
+        src = read(rel)
+    except OSError:
+        return []
+    hv = set()
+    for l in src.split("\n"):
+        if "heading(" in l or "row_kind(" in l or '.split(" -- ")[0]' in l:
+            m = re.match(r"\s*(\w+)\s*(?:=|\+=|\|=)", l)
+            if m:
+                hv.add(m.group(1))
+    out = []
+    for i, l in enumerate(src.split("\n"), 1):
+        t = l.strip()
+        if "heading(" in t or "row_kind(" in t or "by_substring(" in t:
+            continue
+        bare = re.sub(r"'[^']*'|`[^`]*`", "", t)
+        m = re.search(rf'"{name}"\s+(?:not\s+)?in\s+(\w+)', bare)
+        if m and m.group(1) not in hv:
+            out.append((i, t))
+    return out
+
+
 def load_module(path, name):
     spec = importlib.util.spec_from_file_location(name, path)
     mod = importlib.util.module_from_spec(spec)
@@ -260,6 +300,11 @@ CONSTRUCT_SITES = [
     ("code/hodge_leverage_audit_835f/audit_a318_repair.py", "READ AT THE SITE",
      "mg-a318's audit -- the EARLIEST occurrence the sweep finds, and the one "
      "the hand list could not see because `READ AT THE SITE` is not in it"),
+    ("code/hodge_leverage_audit_835f/audit_a318_repair.py", "WRITTEN ONCE",
+     "⚠️ A SEVENTH, in nobody's population: `WRITTEN ONCE` is a gate row kind "
+     "that neither the hand list of 5 nor a regex over the gate's `print` "
+     "calls could see, because the row read `'{label}' is WRITTEN ONCE`.  It "
+     "appeared the moment the vocabulary came from the gate's own declaration"),
     ("code/hodge_leverage_audit_8aae/audit_8916_repair.py", "FIGURE CENSUS",
      "mg-8aae's audit -- selects 6 gate rows where 3 were meant"),
     ("code/hodge_leverage_repair_8916/repair_835f.py", "FIGURE CENSUS",
@@ -364,8 +409,16 @@ def my_k09(site):
     return "\n".join(lines), None
 
 
+# A MARKED QUOTATION is text a reader is told belongs to somebody else.
+# ⚠️ MARKDOWN EMPHASIS IS NOT ONE, and this list carried `*...*` on its first
+# run.  That pattern matched ACROSS `**bold**` markers, so `**+1 630**` read as
+# a quoted figure and this file reported the artifact's K10 declines at H8 and
+# at the STATE.md row as two more instances of F1.  THEY WERE MINE.  Reading
+# an `n/a` as a claim cuts both ways: a sloppy independent derivation
+# manufactures a finding exactly as easily as a narrow one hides a cell.  The
+# miss is kept in PREDICTIONS.md and stated in the report.
 QUOTE = [re.compile(r"\*\"(.+?)\"\*", re.S), re.compile(r"\*'(.+?)'\*", re.S),
-         re.compile(r"“(.+?)”", re.S), re.compile(r"\*(?!\*)(.+?)(?<!\*)\*")]
+         re.compile(r"“(.+?)”", re.S)]
 
 
 def my_k10(site):
@@ -430,11 +483,13 @@ def apply_my_kind(tag, name, base_files):
     base = V.texts_from(base_files)
     new_site, why = fn(base[name])
     if new_site is None or new_site == base[name]:
-        return None, why or "the derivation produced no change"
+        return None, why or (f"the derivation returned the site unchanged at "
+                             f"all {len(base[name])} of its characters")
     files = V.with_site(base_files, name, new_site)
     if files is None:
-        return None, ("the mutation cannot be written back without changing "
-                      "the site's line count")
+        return None, (f"the mutation is {len(new_site.splitlines())} line(s) "
+                      f"where the site is {len(base[name].splitlines())}, so "
+                      f"it cannot be written back into the file")
     return files, None
 
 
@@ -585,10 +640,9 @@ perform it in ONE DECLARED FUNCTION, so a sweep meets a name instead of a line
 number.
 """)
     rows = [d for _ok, d in V.figure_gate(V.site_texts(), measured_now())]
-    hits = SWEEP.substring_hits
     live, repaired = [], []
     for rel, kindname, note in CONSTRUCT_SITES:
-        found = [(ln, s) for ln, s, nm in hits(rel) if nm == kindname]
+        found = my_hits(rel, kindname)
         sub = len(by_substring(rows, kindname))
         hd = len([r for r in rows if heading(r).endswith(kindname)])
         print(f"    {rel}")
@@ -612,6 +666,52 @@ number.
            f"repaired here and {len(live)} remain.  Predicted 0 remaining.  "
            f"The two numbers mg-7e39 asked for were 1 and 6; the two this run "
            f"reports are {len(repaired)} and {len(CONSTRUCT_SITES)}")
+
+    # WHAT THE REPAIR MOVED IN SOMEBODY ELSE'S INSTRUMENT.  Three of the five
+    # sites are other deliverables' shipped instruments under committed
+    # transcripts.  PREDICTIONS.md named the way this repair could be WORSE
+    # than the disposition it replaces: if `heading()` moves a VERDICT rather
+    # than a printed line, it has silently rewritten another deliverable's
+    # evidence.  So the consumer of each repaired binding is classified.
+    print()
+    verdicts = []
+    for rel, kindname, _note in CONSTRUCT_SITES:
+        try:
+            src = read(rel)
+        except OSError:
+            continue
+        lines = src.split("\n")
+        targets = set()
+        for l in lines:
+            if f'"{kindname}"' in l and ("heading(" in l or "by_substring(" in l):
+                m = re.match(r"\s*(\w+)\s*(?:=|\+=)", l)
+                if m:
+                    targets.add(m.group(1))
+        feeds = set()
+        for name in sorted(targets):
+            for l in lines:
+                if re.search(rf"\b{name}\b", l) and not re.match(
+                        rf"\s*{name}\s*(?:=|\+=)", l):
+                    if re.search(r"\brecord\(|\bassert\b|==", l):
+                        feeds.add("A RECORDED VERDICT")
+                    elif "print(" in l or l.strip().startswith("f\""):
+                        feeds.add("a printed line")
+        what = ", ".join(sorted(feeds)) or "nothing this rule can see"
+        print(f"    {rel}")
+        print(f"        the repaired binding{'s' if len(targets) != 1 else ''} "
+              f"{sorted(targets)} feed{'s' if len(targets) == 1 else ''}: {what}")
+        if "A RECORDED VERDICT" in feeds:
+            verdicts.append(rel)
+    record(None,
+           f"S2d {len(verdicts)} of {len(CONSTRUCT_SITES)} repaired site(s) "
+           f"feed a RECORDED VERDICT rather than only a printed line: "
+           f"{verdicts}.  Those are re-run BY HAND at this tree and the "
+           f"verdicts compared to the committed transcript -- "
+           f"`out_a318_rerun.txt`, 12 of 12 and 10 of 12 before and after.  "
+           f"The rest feed a `print` of one example row.  A repair inside "
+           f"another deliverable's instrument that moves its verdict has "
+           f"rewritten its evidence, which is worse than the disposition it "
+           f"replaces")
 
     # The declared measuring sites, found by STRUCTURE rather than by line.
     declared = []
@@ -640,18 +740,22 @@ number.
 
     # And the whole tree, by the parent's own rule with the derived vocabulary.
     files = SWEEP.py_files()
-    allhits = [(rel, ln, s) for rel in files for ln, s, _n in hits(rel)]
-    undisp = [(rel, ln, s) for rel, ln, s in allhits
-              if not SWEEP.DISPOSITIONS.get((rel, s))]
-    for rel, ln, s in allhits:
-        print(f"    still in the tree     {rel}:{ln}  {s[:70]}")
+    vocab = my_vocabulary()
+    allhits = sorted({(rel, ln, t) for rel in files for nm in vocab
+                      for ln, t in my_hits(rel, nm)})
+    undisp = [(rel, ln, t) for rel, ln, t in allhits
+              if not SWEEP.DISPOSITIONS.get((rel, t))]
+    for rel, ln, t in allhits:
+        print(f"    still in the tree     {rel}:{ln}  {t[:70]}")
     record(not allhits,
-           f"S2c the whole tree, swept by the parent's own rule with the "
-           f"DERIVED vocabulary: {len(allhits)} line(s) identify a gate row by "
-           f"a substring test over the whole row, {len(undisp)} of them "
-           f"undispositioned.  Predicted 0 and 0 -- a disposition table with "
-           f"nothing in it is the repair; a disposition table with five rows "
-           f"in it is the finding")
+           f"S2c the whole tree -- {len(files)} `.py` file(s) under `code/` in "
+           f"the working tree -- swept by MY rule over MY vocabulary of "
+           f"{len(vocab)}: {len(allhits)} line(s) identify a gate row by a "
+           f"substring test over the whole row, {len(undisp)} of them without "
+           f"even a disposition.  Predicted 0 and 0.  A disposition table with "
+           f"nothing in it is the repair; a disposition table with four rows "
+           f"in it and a fifth occurrence its vocabulary cannot see is the "
+           f"finding")
 
 
 # --------------------------------------------------------------------------
@@ -667,9 +771,7 @@ was learned on and not to the next one.
     src = read(LANDING_REL)
     hand = ["SITE RECORD", "RECORD PARTITION", "FIGURE CENSUS",
             "FIGURE ORDER", "CENSUS ROSTER"]
-    rows = [d for _ok, d in V.figure_gate(V.site_texts(), measured_now())]
-    printed = sorted({heading(r).split(": ", 1)[1].split("' ")[-1]
-                      for r in rows if ": " in heading(r)})
+    printed = my_vocabulary()
     now = list(SWEEP.ROW_NAMES)
     print(f"    the gate's live rows name : {printed}")
     print(f"    mg-6df0's hand list       : {hand}")
@@ -688,11 +790,13 @@ was learned on and not to the next one.
     if FIX_F5:
         probe = src.replace("GATE @ {name}: CENSUS ROSTER",
                             "GATE @ {name}: CENSUS MANIFEST")
-        moved = SWEEP.row_vocabulary(probe)
-        record("CENSUS MANIFEST" in moved and "CENSUS ROSTER" not in moved,
+        moved = set(SWEEP.row_vocabulary(probe))
+        followed = moved >= {"CENSUS MANIFEST"} and not moved & {"CENSUS ROSTER"}
+        record(followed,
                f"S3b DERIVED RATHER THAN COPIED: one row heading renamed in a "
                f"COPY of the gate's source and the sweep's vocabulary follows "
-               f"it -- `CENSUS ROSTER` -> `CENSUS MANIFEST` gives {moved}.  A "
+               f"it -- `CENSUS ROSTER` -> `CENSUS MANIFEST` gives "
+               f"{sorted(moved)}.  A "
                f"hand list returns the same five whatever the gate prints, "
                f"which is what makes it a scope nobody chose")
         empty_ok = False
@@ -711,13 +815,10 @@ was learned on and not to the next one.
 
     # What the extra name actually finds.
     extra = sorted(set(printed) - set(hand))
-    found = []
-    for rel in SWEEP.py_files():
-        for ln, s, nm in SWEEP.substring_hits(rel):
-            if nm in extra:
-                found.append((rel, ln, s))
-    for rel, ln, s in found:
-        print(f"    the hand list could not see  {rel}:{ln}  {s[:70]}")
+    found = sorted({(rel, ln, t) for rel in SWEEP.py_files() for nm in extra
+                    for ln, t in my_hits(rel, nm)})
+    for rel, ln, t in found:
+        print(f"    the hand list could not see  {rel}:{ln}  {t[:70]}")
     record(None,
            f"S3d with {extra} in the vocabulary the same rule finds "
            f"{len(found)} occurrence(s) the hand list cannot see.  mg-7e39 "
@@ -730,6 +831,14 @@ was learned on and not to the next one.
 # S4 -- F2: THE POPULATION, AT THE COMMIT THAT PUBLISHES IT
 # --------------------------------------------------------------------------
 POP_FIGURE = re.compile(r"(\d[\d,  ]*)\s*`?\.py`?\s+files")
+
+# A figure inside a QUOTATION is being discussed, not asserted -- the same
+# convention `repair_ec07.py` already uses for the scope sentence.  It is what
+# lets a correction note state the wrong figure it is correcting without the
+# rule reading the note as a fresh copy of it.  ⚠️ ONE rule with no exceptions,
+# rather than a skip-list of files or of phrasings: a list of things not to
+# look at is a scope nobody chose, which is the finding.
+QUOTATION = re.compile(r'"[^"]*"|“[^”]*”')
 
 
 def py_files_at(rev):
@@ -757,7 +866,7 @@ COMPUTED = [SWEEP_OUT_REL, "code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt"
 PROSE = ["code/hodge_leverage_repair_6df0/README.md",
          "docs/OneThird-Hodge-Side-Leverage-Mg9207RepairAudit-Repair.md",
          "code/hodge_leverage_repair_3f3b/README.md",
-         "docs/OneThird-Hodge-Side-Leverage-Mg7e39Audit-Repair.md"]
+         "docs/OneThird-Hodge-Side-Leverage-Mg6df0RepairAudit-Repair.md"]
 
 
 def s4():
@@ -827,7 +936,7 @@ carry a number, because prose has no publication step.
         except OSError:
             continue
         for i, l in enumerate(text.split("\n"), 1):
-            for m in POP_FIGURE.finditer(l):
+            for m in POP_FIGURE.finditer(QUOTATION.sub("", l)):
                 carried.append((rel, i, l.strip()[:88]))
     for rel, i, l in carried:
         print(f"    ⚠️ CARRIED IN PROSE  {rel}:{i}  {l}")
@@ -836,7 +945,10 @@ carry a number, because prose has no publication step.
            f"in the {len(PROSE)} prose file(s) this arc publishes for the "
            f"sweep.  Predicted 0: prose points at the transcript line, because "
            f"a number in prose has no publication step that recomputes it and "
-           f"goes stale silently at the next merge")
+           f"goes stale silently at the next merge.  A figure inside a "
+           f"QUOTATION is exempt, and that is ONE rule rather than a "
+           f"skip-list -- it is how a correction note states the figure it "
+           f"corrects")
 
     # The parent's figure, as a historical fact, stated from git rather than
     # quoted from the audit.
@@ -885,11 +997,10 @@ def s5():
 
     # F3's shape: is the construct performed here anywhere but in the declared
     # function?
-    inline = [(i, l.strip()) for i, l in enumerate(src.split("\n"), 1)
-              if re.search(r'"[A-Z][A-Z ]+[A-Z]"\s+(?:not\s+)?in\s+\w', l)
-              and "heading(" not in l]
-    for i, l in inline:
-        print(f"    ⚠️ {MINE}:{i}  {l[:80]}")
+    inline = sorted({(ln, t) for nm in my_vocabulary()
+                     for ln, t in my_hits(MINE, nm)})
+    for i, t in inline:
+        print(f"    ⚠️ {MINE}:{i}  {t[:80]}")
     record(not inline,
            f"S5c F3's shape here: {len(inline)} line(s) of this file identify "
            f"a gate row by a substring of the whole row outside "

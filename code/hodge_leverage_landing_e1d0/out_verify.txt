@@ -125,28 +125,29 @@ whether the enlargement was disclosed anywhere.
   [CONFIRMED] GATE @ H8: FIGURE ORDER -- all 36 figure token(s) are in the declared slot a reader meets them in. The census above is a MULTISET and a multiset is invariant under a permutation, so two declared figures exchanged in ordinary prose passed it (mg-8aae H-1); this compares the SEQUENCE, which a transposition changes
   [CONFIRMED] GATE @ H8: RECORD PARTITION -- the section is 36 asserted figure token(s) and 37 segment(s) between them, and re-interleaving the two halves reproduces it BYTE FOR BYTE (7852 of 7852 chars).  This is what licenses 'the WHOLE record is compared': the figures are checked by FIGURE CENSUS and FIGURE ORDER, everything else by SITE RECORD, and nothing is in neither.  No field is named, so none can be left behind because nobody named it
   [CONFIRMED] GATE @ H8: SITE RECORD -- the 7,652 chars of this section that are NOT asserted figures are byte-identical to the declared record, in order.  A MULTISET is invariant under exchanging two figures (mg-8aae H-1) and a SEQUENCE OF FIGURES is invariant under exchanging the two LABELS they hang on (mg-9207 E2/E2b/E3); this compares the other half, so neither exchange is silent
-  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell only' READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
-  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell only' is WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
-  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell + relocated history' READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
-  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell + relocated history' is WRITTEN ONCE -- +23 771 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
-  [CONFIRMED] GATE @ the STATE.md row: 'STATE.md row cell' READ AT THE SITE = 13 367, MEASURED THIS RUN = 13 367
-  [CONFIRMED] GATE @ the STATE.md row: 'STATE.md row cell' is WRITTEN ONCE -- 13 367 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
-  [CONFIRMED] GATE @ the STATE.md row: 'relocated history (this row's own file)' READ AT THE SITE = 21 027, MEASURED THIS RUN = 21 027
-  [CONFIRMED] GATE @ the STATE.md row: 'relocated history (this row's own file)' is WRITTEN ONCE -- 21 027 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
-  [CONFIRMED] GATE @ the STATE.md row: 'deliverable §14 copy, frozen since mg-a806' READ AT THE SITE = 10 623, MEASURED THIS RUN = 10 623
-  [CONFIRMED] GATE @ §14: 'gap, cell only' READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
-  [CONFIRMED] GATE @ §14: 'gap, cell only' is WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
-  [CONFIRMED] GATE @ §14: 'gap, cell + relocated history' READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
-  [CONFIRMED] GATE @ §14: 'gap, cell + relocated history' is WRITTEN ONCE -- +23 771 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
-  [CONFIRMED] GATE @ H8: 'gap, cell only' READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
-  [CONFIRMED] GATE @ H8: 'gap, cell only' is WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
-  [CONFIRMED] GATE @ H8: 'gap, cell + relocated history' READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
-  [CONFIRMED] GATE @ H8: 'gap, cell + relocated history' is WRITTEN ONCE -- +23 771 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
-  [CONFIRMED] GATE @ H8: 'STATE.md row cell' READ AT THE SITE = 13 367, MEASURED THIS RUN = 13 367
-  [CONFIRMED] GATE @ H8: 'STATE.md row cell' is WRITTEN ONCE -- 13 367 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
-  [CONFIRMED] GATE @ H8: 'relocated history (this row's own file)' READ AT THE SITE = 21 027, MEASURED THIS RUN = 21 027
-  [CONFIRMED] GATE @ H8: 'relocated history (this row's own file)' is WRITTEN ONCE -- 21 027 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
-  [CONFIRMED] GATE @ H8: 'deliverable §14 copy, frozen since mg-a806' READ AT THE SITE = 10 623, MEASURED THIS RUN = 10 623
+  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell only' READ AT THE SITE -- READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
+  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell only' WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell + relocated history' READ AT THE SITE -- READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
+  [CONFIRMED] GATE @ the STATE.md row: 'gap, cell + relocated history' WRITTEN ONCE -- +23 771 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ the STATE.md row: 'STATE.md row cell' READ AT THE SITE -- READ AT THE SITE = 13 367, MEASURED THIS RUN = 13 367
+  [CONFIRMED] GATE @ the STATE.md row: 'STATE.md row cell' WRITTEN ONCE -- 13 367 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ the STATE.md row: 'relocated history (this row's own file)' READ AT THE SITE -- READ AT THE SITE = 21 027, MEASURED THIS RUN = 21 027
+  [CONFIRMED] GATE @ the STATE.md row: 'relocated history (this row's own file)' WRITTEN ONCE -- 21 027 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ the STATE.md row: 'deliverable §14 copy, frozen since mg-a806' READ AT THE SITE -- READ AT THE SITE = 10 623, MEASURED THIS RUN = 10 623
+  [CONFIRMED] GATE @ §14: 'gap, cell only' READ AT THE SITE -- READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
+  [CONFIRMED] GATE @ §14: 'gap, cell only' WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ §14: 'gap, cell + relocated history' READ AT THE SITE -- READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
+  [CONFIRMED] GATE @ §14: 'gap, cell + relocated history' WRITTEN ONCE -- +23 771 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ H8: 'gap, cell only' READ AT THE SITE -- READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
+  [CONFIRMED] GATE @ H8: 'gap, cell only' WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ H8: 'gap, cell + relocated history' READ AT THE SITE -- READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
+  [CONFIRMED] GATE @ H8: 'gap, cell + relocated history' WRITTEN ONCE -- +23 771 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ H8: 'STATE.md row cell' READ AT THE SITE -- READ AT THE SITE = 13 367, MEASURED THIS RUN = 13 367
+  [CONFIRMED] GATE @ H8: 'STATE.md row cell' WRITTEN ONCE -- 13 367 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ H8: 'relocated history (this row's own file)' READ AT THE SITE -- READ AT THE SITE = 21 027, MEASURED THIS RUN = 21 027
+  [CONFIRMED] GATE @ H8: 'relocated history (this row's own file)' WRITTEN ONCE -- 21 027 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
+  [CONFIRMED] GATE @ H8: 'deliverable §14 copy, frozen since mg-a806' READ AT THE SITE -- READ AT THE SITE = 10 623, MEASURED THIS RUN = 10 623
+  [CONFIRMED] GATE: 34 of 34 gate rows have a HEADING ending in one of the 7 kinds declared in `ROW_KINDS`, and 0 do not.  The vocabulary is DECLARED rather than left for a sweep to guess at, and a row without a ` -- ` separator has no heading at all -- so every heading-keyed test in this arc would degenerate into the substring test it replaced, silently
   [CONFIRMED] GATE: and the row points at H8, so the third site is reachable from the first
   [CONFIRMED] GATE: and every site says WHICH SIDE OF THE EDIT its figure is on -- 'measured AFTER this commit's own edit' at all three.  A measurement of something the same commit modifies is only checkable from the post-commit state
   [CONFIRMED] GATE: and the chain's last term DERIVES from the live figure rather than restating it -- 'the live cell-only gap given above' at the row and §14, and a pointer to the AFTER column at H8.  The figure is written once per site; every later mention refers to that occurrence
@@ -268,26 +269,26 @@ left every figure token in its declared slot and the gate refuting NOTHING at
     K08 two table ROW LABELS exchanged (mg-9207 E2b)              n/a                 n/a                 FIRES (rec)         
     K09 two COLUMN HEADERS exchanged (mg-9207 E3 -- mg-ec07's X1  FIRES (rec)         n/a                 FIRES (rec)         
     K10 a figure inside a MARKED QUOTATION altered                n/a                 FIRES (rec)         n/a                 
-    K11 the table's ALIGNMENT shifted, no figure moved            n/a                 n/a                 FIRES (rec)         
+    K11 the table's ALIGNMENT shifted, no figure moved            FIRES (rec)         n/a                 FIRES (rec)         
     K12 a whole PARAGRAPH relocated out of the site (mg-8a5c N7)  n/a                 FIRES (rec)         FIRES (rec)         
 
-      n/a  K08 @ the STATE.md row   fewer than two table rows carrying figures INSIDE this site (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
-      n/a  K08 @ §14                fewer than two table rows carrying figures INSIDE this site (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
-      n/a  K09 @ §14                no column header line inside this site
-      n/a  K10 @ the STATE.md row   no marked quotation carrying a figure at this site
-      n/a  K10 @ H8                 no marked quotation carrying a figure at this site
-      n/a  K11 @ the STATE.md row   no line here has two runs of two or more spaces to shift
-      n/a  K11 @ §14                no line here has two runs of two or more spaces to shift
-      n/a  K12 @ the STATE.md row   this site has no figure-free paragraph after the first to relocate
+      n/a  K08 @ the STATE.md row   1 of this site's 3 table row(s) carry a figure INSIDE the site, and an exchange needs two (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
+      n/a  K08 @ §14                0 of this site's 0 table row(s) carry a figure INSIDE the site, and an exchange needs two (the ledger's other rows are outside it -- mg-ec07's X2, declared open)
+      n/a  K09 @ §14                0 of this site's 0 table line(s) is a column header inside the site
+      n/a  K10 @ the STATE.md row   12 marked quotation(s) at this site and 0 of them carry a figure token
+      n/a  K10 @ H8                 5 marked quotation(s) at this site and 0 of them carry a figure token
+      n/a  K11 @ §14                of this site's 72 line(s), 0 carry two runs of two or more spaces to shift and 0 of 0 pipe-table row(s) occur once and could have their cell padding moved
+      n/a  K12 @ the STATE.md row   this site is 1 paragraph(s) and 0 after the first are figure-free, so there is nothing to relocate out of it
 
-  [CONFIRMED] 28 of 28 APPLICABLE cells of the 12x3 KIND x SITE product fire; 0 are SILENT and 8 do not apply, each with the reason its derivation failed printed above.  THE POPULATION IS THE PRODUCT: mg-ff3e enumerated the kinds and checked each at ONE SITE, which left kinds x (sites-1) untested while reading as complete -- and K09 at the STATE.md row is mg-ec07's X1, the cell that was exit 0 with the same kind CAUGHT at H8
-  [CONFIRMED] 8 of 8 applicable LABEL-SIDE cells (K07 -K11) are caught BY THE SITE RECORD ROW with every FIGURE CENSUS and FIGURE ORDER row green -- mg-ff3e's attribution claim, re-made over the PRODUCT rather than over one cell per kind.  The second half is what makes it evidence: the artifact's own rows say no figure moved, so the fire is the half of the record that was not compared before
+  [CONFIRMED] 7 of 7 `n/a` reason(s) carry a COUNT MEASURED AT THE SITE and 0 do not.  A matrix reports FIRE / SILENT / n/a and only the first two are measured -- `n/a` is prose, and a reason with no number in it cannot be checked against the site by a reader, which is exactly what let K11 @ the STATE.md row print a fact about `k_layout` in the grammar of a fact about the site
+  [CONFIRMED] 29 of 29 APPLICABLE cells of the 12x3 KIND x SITE product fire; 0 are SILENT and 7 do not apply, each with the reason its derivation failed printed above.  THE POPULATION IS THE PRODUCT: mg-ff3e enumerated the kinds and checked each at ONE SITE, which left kinds x (sites-1) untested while reading as complete -- and K09 at the STATE.md row is mg-ec07's X1, the cell that was exit 0 with the same kind CAUGHT at H8
+  [CONFIRMED] 9 of 9 applicable LABEL-SIDE cells (K07 -K11) are caught BY THE SITE RECORD ROW with every FIGURE CENSUS and FIGURE ORDER row green -- mg-ff3e's attribution claim, re-made over the PRODUCT rather than over one cell per kind.  The second half is what makes it evidence: the artifact's own rows say no figure moved, so the fire is the half of the record that was not compared before
 
 BOTTOM LINE
 -----------
-  checks recorded : 72
+  checks recorded : 74
   measurements    : 3
-  confirmed       : 69
+  confirmed       : 71
   refuted         : 0
 
   All four findings are measured and all four stand.  F4 stands as

@@ -47,6 +47,7 @@ from git.
 Pure Python 3 + git.  No third-party packages.
 """
 
+import ast
 import hashlib
 import importlib.util
 import os
@@ -73,10 +74,6 @@ MUTATED = [STATE, DELIV, HIST, LANDING_REL, RECORDS_REL]
 
 RESULTS = []
 
-# The five gate-row headings this artifact has.  Named here because R2 sweeps
-# the tree for tests that key on them.
-ROW_NAMES = ["SITE RECORD", "RECORD PARTITION", "FIGURE CENSUS",
-             "FIGURE ORDER", "CENSUS ROSTER"]
 
 
 # --------------------------------------------------------------------------
@@ -114,12 +111,72 @@ def head(title):
     print("-" * len(title))
 
 
+def by_substring(rows, name):
+    """⚠️ THE CONSTRUCT, COMMITTED ON PURPOSE AND IN EXACTLY ONE PLACE.
+
+    A substring test over a whole gate row is the defect this arc repairs, and
+    MEASURING it requires PERFORMING it.  So it is performed here, once, in a
+    function whose name says what it is -- rather than written inline, where a
+    sweep of the tree can only tell it from the defect by a disposition keyed
+    on its line number.  A REASON ON A LINE IS NOT A STRUCTURE: it has to be
+    read, it has to be maintained, and it goes stale the moment the line moves.
+
+    ⚠️ ADDED BY mg-3f3b (mg-7e39 F3): 6 instances of the construct existed
+    when mg-6df0 landed, it repaired 1 and dispositioned 5."""
+    return [r for r in rows if name in r]
+
+
+def row_vocabulary(src):
+    """THE GATE'S ROW HEADINGS, READ OUT OF THE GATE'S OWN DECLARATION.
+
+    ⚠️ WHY THIS IS NOT A LIST (mg-7e39 F5, landed by mg-3f3b).  This used to
+    be `ROW_NAMES`, FIVE HEADINGS WRITTEN OUT BY HAND -- against a gate that
+    emits SIX.  This sweep exists because a hand-picked SITE is a scope nobody
+    chose; it then picked its VOCABULARY the same way, and the name it missed
+    is `READ AT THE SITE`, which is where the construct entered this arc
+    (`audit_a318_repair.py:326`, the earliest occurrence the sweep finds).
+    The lesson transferred to the axis it was learned on and not to the next.
+
+    ⚠️ AND WHY IT IS NOT A REGEX OVER THE GATE'S `print` CALLS EITHER, which
+    was this repair's first answer.  That fixes the count and not the shape: a
+    regex is still a SECOND READER of the gate's grammar and can fall behind
+    it.  It did -- it returned six and the gate has SEVEN row kinds, because
+    the seventh was emitted as `'{label}' is WRITTEN ONCE` and the pattern
+    wanted capitals straight after the label.  A derived vocabulary that is
+    derived from the wrong thing is a hand list with extra steps.
+
+    So the gate DECLARES `ROW_KINDS`, uses it to fail closed on any row whose
+    heading ends in none of them, and this reads that tuple by AST.
+
+    FAIL-CLOSED.  A derivation that returns nothing sweeps with an empty
+    vocabulary, finds nothing, and reads EXACTLY LIKE A TREE WITH NOTHING IN
+    IT -- which is mg-7e39's F1 on this axis.  So an empty result is a
+    refusal."""
+    for node in ast.walk(ast.parse(src)):
+        if isinstance(node, ast.Assign) and any(
+                getattr(t, "id", "") == "ROW_KINDS" for t in node.targets):
+            names = [e.value for e in getattr(node.value, "elts", [])
+                     if isinstance(e, ast.Constant) and isinstance(e.value, str)]
+            if names:
+                return sorted(names)
+    raise SystemExit(
+        "row_vocabulary: `ROW_KINDS` could not be read out of "
+        f"{LANDING_REL} -- REFUSING to sweep with an empty vocabulary, "
+        "because a sweep that finds nothing and a tree that holds nothing "
+        "read exactly the same")
+
+
 def heading(row):
     """THE ROW'S HEADING -- everything before the ` -- ` that introduces its
     explanation.  This is the whole of the E-5 remedy, and it is used
     everywhere in this file that a row is identified, with ONE declared
     exception (R1a, which measures the substring test itself)."""
     return row.split(" -- ")[0]
+
+
+# The gate-row headings this sweep keys on -- DERIVED, never hand-listed
+# (mg-7e39 F5).  R2 sweeps the tree for tests that key on them.
+ROW_NAMES = row_vocabulary(read(LANDING_REL))
 
 
 def row_kind(row):
@@ -296,26 +353,27 @@ back, the fix is not what is doing the work.
     measured = measured_now()
     rows = [d for _ok, d in V.figure_gate(texts, measured)]
 
-    # ⚠️ THE ONE DELIBERATE USE OF THE DEFECT IN THIS FILE.  `by_substring`
-    # commits the construct on purpose, because it is MEASURING it.  It is
-    # declared here, in R6b, and in R2's disposition table, so that a sweep
-    # which finds it finds the reason beside it.
-    by_substring = [d for d in rows if "SITE RECORD" in d]
+    # ⚠️ THE ONE DELIBERATE USE OF THE DEFECT IN THIS FILE, and since mg-3f3b
+    # it is a CALL TO A DECLARED FUNCTION rather than the construct written
+    # inline under a disposition keyed on this line number.  `by_substring`
+    # commits the construct on purpose, because it is MEASURING it -- and a
+    # sweep now meets a NAME instead of a line it has to look up.
+    by_sub = by_substring(rows, "SITE RECORD")
     by_heading = [d for d in rows if heading(d).endswith("SITE RECORD")]
-    unintended = sorted({row_kind(d) for d in by_substring
+    unintended = sorted({row_kind(d) for d in by_sub
                          if d not in by_heading})
     print(f"    gate rows                                   : {len(rows)}")
     print(f"    contain 'SITE RECORD' ANYWHERE in the row   : "
-          f"{len(by_substring)}")
+          f"{len(by_sub)}")
     print(f"    HEADING ends with 'SITE RECORD'             : "
           f"{len(by_heading)}")
     print(f"    excluded by the substring test and not by   : "
-          f"{len(by_substring) - len(by_heading)}  {unintended}")
+          f"{len(by_sub) - len(by_heading)}  {unintended}")
     print()
     record(None,
-           f"R1a of {len(rows)} gate rows, {len(by_substring)} contain the "
+           f"R1a of {len(rows)} gate rows, {len(by_sub)} contain the "
            f"string 'SITE RECORD' and {len(by_heading)} have a HEADING that "
-           f"ends with it.  The {len(by_substring) - len(by_heading)} that "
+           f"ends with it.  The {len(by_sub) - len(by_heading)} that "
            f"differ are the {', '.join(unintended)} rows -- one per site, and "
            f"they are the rows that license 'the two halves are the whole "
            f"record'.  This is a property of the row TEXTS and is the same in "
@@ -410,27 +468,20 @@ back, the fix is not what is doing the work.
 # of files to skip would be a scope nobody chose -- which is the finding.
 DISPOSITIONS = {
     # (relative path, exact stripped line) -> why this one is not the defect
-    ("code/hodge_leverage_repair_6df0/repair_ec07.py",
-     'by_substring = [d for d in rows if "SITE RECORD" in d]'):
-        "R1a MEASURES the substring test; committing it is how the "
-        "disagreement is counted.  Declared here, in R1a's own comment and "
-        "in R6b",
-    ("code/hodge_leverage_audit_ec07/audit_ec07.py",
-     'excl = [r for _ok, r in rows if "SITE RECORD" in r]'):
-        "the audit that RAISED E-5, measuring the same thing.  Re-running it "
-        "UNMODIFIED is R4, so its source is not this repair's to edit",
-    ("code/hodge_leverage_repair_8916/repair_835f.py",
-     'hit = [l for l in refuted if "FIGURE CENSUS" in l]'):
-        "A THIRD LIVE OCCURRENCE, found by this sweep and NOT fixed here.  "
-        "The selection feeds a `print` of one example row beside a probe "
-        "whose verdict is the real runner's exit code -- no recorded verdict "
-        "depends on it -- and the file is another deliverable's shipped "
-        "instrument under a frozen transcript.  Exposure measured below; "
-        "raised for a ticket rather than repaired in passing",
-    ("code/hodge_leverage_audit_8aae/audit_8916_repair.py",
-     'hit = [l for l in refuted_lines(lines) if "FIGURE CENSUS" in l]'):
-        "A FOURTH LIVE OCCURRENCE, same shape and same disposition as "
-        "repair_835f.py:309 -- it prints an example row and scores nothing",
+    #
+    # ⚠️ EMPTY SINCE mg-3f3b, AND THAT IS THE REPAIR (mg-7e39 F3).  It used to
+    # hold four rows: two occurrences that MEASURE the construct, and two live
+    # in other deliverables' shipped instruments that were raised "for a ticket
+    # rather than repaired in passing".  mg-7e39 counted what that came to --
+    # 6 instances existed when this repair landed, IT TOUCHED 1, and 5 were
+    # live in the commit it landed in, four of them selecting 6 gate rows where
+    # 3 were meant.  A DISPOSITION IS A REASON, NOT A REPAIR.
+    #
+    # All five are now repaired: three by `heading()` in the file that held
+    # them, and the two that measure the construct by routing through
+    # `by_substring`, which `substring_hits` recognises BY NAME.  The table is
+    # kept, empty, because a NEW occurrence anywhere in the tree still has to
+    # land in it or make R2a red.
 }
 
 SENTENCE = "a site is a section"
@@ -463,7 +514,7 @@ SENTENCE_FILES = {
 
 
 def py_files():
-    """Every .py file under `code/`, from the tree."""
+    """Every .py file under `code/`, from the WORKING TREE."""
     out = []
     for root, _d, fs in os.walk(os.path.join(REPO, "code")):
         for f in sorted(fs):
@@ -472,11 +523,58 @@ def py_files():
     return sorted(out)
 
 
+def population_line():
+    """THE POPULATION, STATED WITH THE OBJECT IT WAS DERIVED FROM.
+
+    ⚠️ mg-7e39 F2, landed by mg-3f3b.  This sweep's transcript published
+    "429 .py files swept" beside a tree of 448 -- and 448 was also the count
+    at the commit before it, so the gap was not drift after the run: THE
+    FIGURE WAS WRONG WHEN IT WAS WRITTEN.  19 files were in the population and
+    not in the number a reader was given.
+
+    A count is only a fact about a named tree.  So the line prints WHICH tree:
+    the working directory the run walked, the HEAD it was taken at, and
+    whether that HEAD describes the working directory at all.  A reader who
+    meets this line can check it; a reader who meets a bare number cannot."""
+    rev = git("rev-parse", "HEAD").strip()[:12] or "(no commit)"
+    dirty = bool(git("status", "--porcelain", "--", "code").strip())
+    n = len(py_files())
+    return (f"{n} .py files swept, walked from the WORKING TREE at HEAD "
+            f"{rev}{' WITH UNCOMMITTED CHANGES UNDER code/' if dirty else ''}")
+
+
 QUOTED_SPAN = re.compile(r"'[^']*'|`[^`]*`")
 # The same idea for PROSE: a sentence inside quotes is being discussed, not
 # asserted.  Double quotes are included here and excluded above, because the
 # construct R2a hunts for IS a double-quoted literal and this needle is not.
 PROSE_QUOTE = re.compile(r"'[^']*'|`[^`]*`|\"[^\"]*\"")
+
+
+# The functions that PARSE A HEADING out of a gate row.  A name bound from one
+# of these holds a HEADING, so testing a row name against it is the REMEDY.
+#
+# ⚠️ WIDENED BY mg-3f3b.  The rule used to recognise the remedy only when it
+# was spelled `heading(` and only when the binding was a plain `x = ...`.  An
+# equally correct remedy spelled `row_kind(` inside a set comprehension --
+# `bad = {row_kind(d) for ok, d in rows if not ok}` -- read as the DEFECT, so
+# the sweep reported four false positives in `audit_7e39.py`, the very audit
+# that raised this finding.  A RULE THAT ONLY RECOGNISES ONE SPELLING OF THE
+# REMEDY REPORTS THE OTHER SPELLING AS THE DISEASE, and it does it in the
+# grammar of a finding about the code.
+HEADING_FUNCS = ("heading(", "row_kind(", '.split(" -- ")[0]')
+
+
+def heading_vars(src):
+    """Names in `src` ever bound to something parsed out of a heading -- in an
+    assignment, an augmented assignment, or a comprehension target."""
+    out = set()
+    for l in src.split("\n"):
+        if not any(f in l for f in HEADING_FUNCS):
+            continue
+        m = re.match(r"\s*(\w+)\s*(?:=|\+=|\|=)", l)
+        if m:
+            out.add(m.group(1))
+    return out
 
 
 def substring_hits(rel):
@@ -490,26 +588,27 @@ def substring_hits(rel):
         backticks, i.e. prose or a literal this deliverable moves around
         rather than a test it performs;
       * a membership test over a set of HEADINGS -- the right operand is a
-        variable built with `heading(...)` somewhere in the same file, which
-        is the remedy rather than the defect.
+        variable built by one of `HEADING_FUNCS` somewhere in the same file,
+        which is the remedy rather than the defect;
+      * an argument to `by_substring`, the ONE DECLARED PLACE the construct is
+        performed on purpose in order to be measured.  ⚠️ mg-3f3b: this is
+        what replaces four of the parent's five per-line dispositions.  A
+        reason on a line has to be read, maintained, and re-keyed every time
+        the line moves; a function name is a structure a sweep can see.
 
-    The second rule is why `audit_ec07.py`'s A3 does not appear: its `bad` is
+    The heading rule is why `audit_ec07.py`'s A3 does not appear: its `bad` is
     a set of headings, so `"FIGURE ORDER" in bad` is keyed correctly."""
     src = read(rel)
-    heading_vars = set()
-    for l in src.split("\n"):
-        m = re.match(r"\s*(\w+)\s*=.*heading\(", l)
-        if m:
-            heading_vars.add(m.group(1))
+    hvars = heading_vars(src)
     hits = []
     for i, l in enumerate(src.split("\n"), 1):
         s = l.strip()
-        if "heading(" in s:
+        if any(f in s for f in HEADING_FUNCS) or "by_substring(" in s:
             continue
         bare = QUOTED_SPAN.sub("", s)
         for name in ROW_NAMES:
             m = re.search(rf'"{name}"\s+(?:not\s+)?in\s+(\w+)', bare)
-            if m and m.group(1) not in heading_vars:
+            if m and m.group(1) not in hvars:
                 hits.append((i, s, name))
                 break
     return hits
@@ -560,14 +659,17 @@ undispositioned and makes this section red.
     print()
     where = "NOT among them" if FIXED else "AMONG THEM -- this is E-5, live"
     record(not undispositioned,
-           f"R2a {len(files)} .py files swept; {len(all_hits)} line(s) "
+           f"R2a {population_line()}; {len(all_hits)} line(s) "
            f"identify a gate row by a SUBSTRING TEST over the whole row, "
            f"{len(all_hits) - len(undispositioned)} with a declared reason "
            f"and {len(undispositioned)} without.  Predicted 0 without.  The "
            f"artifact's blessing path is {where}.  ⚠️ THE SWEEP FOUND TWO "
            f"OCCURRENCES NOBODY HAD REPORTED, in `repair_835f.py` and "
            f"`audit_8916_repair.py` -- which is the whole argument for "
-           f"sweeping: the reported line is never the population")
+           f"sweeping: the reported line is never the population.  Both are "
+           f"REPAIRED by mg-3f3b, together with the three the disposition "
+           f"table used to carry, so this count is now the whole answer "
+           f"rather than the undispositioned remainder of one")
 
     # The second construct: the scope SENTENCE.
     print()
@@ -1017,16 +1119,20 @@ ENUMERATION AT THE WRONG GRAIN.  Both are shapes this deliverable can have.
                f"followed")
     me = "code/hodge_leverage_repair_6df0/repair_ec07.py"
     mine = substring_hits(me)
-    declared = [h for h in mine if (me, h[1]) in DISPOSITIONS]
-    record(len(mine) == len(declared),
+    src_me = read(me)
+    calls = [i for i, l in enumerate(src_me.split("\n"), 1)
+             if "by_substring(" in l and not l.lstrip().startswith("def ")]
+    record(not mine,
            f"R6b this instrument identifies gate rows by `heading()` "
-           f"everywhere except {len(mine)} line(s), {len(declared)} of them "
-           f"declared in DISPOSITIONS -- R1a, which measures the substring "
-           f"test.  `exposure()` performs the same test with the needle in a "
-           f"VARIABLE, which the sweep's rule does not see: it is named here "
-           f"rather than left for the audit, and it is a measurement of the "
-           f"defect in both cases.  A file that repairs a construct while "
-           f"committing it silently would be the finding, not the repair")
+           f"everywhere except {len(mine)} line(s).  ⚠️ mg-3f3b: the ONE "
+           f"deliberate performance of the construct -- R1a, which measures "
+           f"it -- is now a call to `by_substring` at line "
+           f"{', '.join(str(c) for c in calls)}, a DECLARED FUNCTION the "
+           f"sweep's rule recognises BY NAME.  It used to be the construct "
+           f"written inline under a disposition keyed on its line number, and "
+           f"a reason on a line is not a structure.  `exposure()` performs the "
+           f"same test with the needle in a VARIABLE, which the sweep's rule "
+           f"does not see: it is named here rather than left for the audit")
     record(True,
            "R6c and every scope sentence this deliverable writes is checked "
            "at ALL THREE SITES (R5a/R5b) rather than at the site it was "
