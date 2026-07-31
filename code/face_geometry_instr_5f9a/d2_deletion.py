@@ -139,9 +139,22 @@ TIME (mg-f7e1).
   operator either.  The section THE BOUND OF THIS INSTRUMENT counts, from the
   tree, the deciding conditions that are compounds this sweep cannot delete out
   of, and carries a total that does not depend on the list of forms it knows
-  about.  DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS AND NO
-  FURTHER.  A green line that a reader takes for more than that is the defect;
-  the number is the remedy.
+  about.  DELETION REACHES THE TOP-LEVEL BOOLEAN OPERANDS OF THE DECIDING
+  CONDITIONS IN THE FILES THIS SWEEP VISITS, AND NOTHING ELSE.  A green line
+  that a reader takes for more than that is the defect; the number is the
+  remedy.
+
+  NARROWED, AND ALL 17 CLASSIFIED (mg-69d1, on mg-eaef's E5 and E4).  That
+  sentence used to end `DOWN TO EXPLICIT BOOLEAN OPERANDS AND NO FURTHER`,
+  which is read as a guarantee about every explicit boolean operand, and it is
+  not one: 4 of face_complex.py's 15 are nested below the top level of their
+  own condition, where this sweep cannot reach, and posets.py's 2 are in a file
+  it does not visit.  All 6 were in NEITHER census column, and `neither column`
+  is not a third state -- it is the absence of an answer, which is exactly the
+  ambiguity a stated bound exists to remove.  The bound section now puts every
+  one of the 17 in exactly one NAMED column, `not determined` among them, and
+  the sweep's file population is the one constant SWEEP_FILES that both the
+  sweep and the table describing it read.
 
 EVERY CLAIM PRINTS WHAT WOULD MAKE IT ANSWER DIFFERENTLY (mg-d0e2's added
 requirement).  "Can this check fire?" is necessary and not sufficient: both
@@ -163,10 +176,11 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from kern5f9a import (                                              # noqa: E402
-    BAR, FG, PRE_REPAIR_REF, TWO_RETURN_REF, apply_edits, condition_census,
-    deciding_clauses, drop_clause, finest_unit, head, implicit_disjunctions,
-    load_module, mutate_tree, run_controls, source_at, tree_with_source,
-    unit_removed, write_ref_tree,
+    BAR, FG, OPERAND_COLUMNS, PRE_REPAIR_REF, TWO_RETURN_REF, apply_edits,
+    boolean_operands, condition_census, deciding_clauses, drop_clause,
+    finest_unit, head, implicit_disjunctions, load_module, mutate_tree,
+    operand_columns, operand_columns_total, run_controls, source_at,
+    tree_with_source, unit_removed, write_ref_tree,
 )
 
 SCORE = []
@@ -176,6 +190,15 @@ POSITIVE_CONTROL = os.path.join(HERE, "positive_control_all_fail.txt")
 
 NEW_FILES = ["face_complex.py", "posets.py", "controls.py", "run_probe.py"]
 PRE_FILES = ["face_complex.py", "posets.py", "controls.py"]
+
+# THE FILES THE CLAUSE SWEEP VISITS -- one place, read by the sweep and by the
+# bound section that describes it (mg-69d1, on mg-eaef's E4).  The `operands`
+# column printed 2 for posets.py under a heading that said `the sweep deletes`,
+# and the sweep deletes 0 there, because the column was computed per file and
+# the sweep's population was written twenty lines away.  Two numbers about the
+# same thing, derived separately, will eventually disagree; this is the one
+# they are both derived from.
+SWEEP_FILES = ("face_complex.py",)
 
 MARKERS = ("[PASS]", "[FAIL]", "[CANNOT FAIL]")
 
@@ -1171,9 +1194,10 @@ def main():
     live_clauses = deciding_clauses(live_src)
     poset_src = source_at(None, "posets.py")
     poset_clauses = deciding_clauses(poset_src)
-    print("  population, read from the tree: %d clause(s) in face_complex.py, "
-          "which is\n  mg-c4c8's H2 population and the file every mutation in "
-          "this instrument patches" % len(live_clauses))
+    print("  population, read from the tree: %d clause(s) in %s, which is\n"
+          "  mg-c4c8's H2 population and the file every mutation in this "
+          "instrument patches"
+          % (len(live_clauses), ", ".join(SWEEP_FILES)))
     for cl in live_clauses:
         print("      %-24s %-6s clause %d of %d   %s"
               % (cl.func, cl.kind, cl.index + 1, cl.total, cl.source))
@@ -1479,22 +1503,77 @@ def main():
     # ------------------------------------------------------------------------
     head("THE BOUND OF THIS INSTRUMENT -- what deletion reaches, and what it "
          "does not")
-    print("DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS AND "
-          "NO FURTHER.\nThat sentence is the whole of mg-0b07's second option "
-          "and it is worth nothing as a\npromise, so it is a count.  Four "
-          "generations of this file each reported a floor and\neach was one "
-          "spelling above the real one; the reason the fifth does not is not "
-          "that\nsomebody looked harder, it is that the limit is now MEASURED "
-          "and printed beside\nthe green rows rather than inferred from them.\n")
+    print("DELETION REACHES THE TOP-LEVEL BOOLEAN OPERANDS OF THE DECIDING "
+          "CONDITIONS IN\nTHE FILES THIS SWEEP VISITS, AND NOTHING ELSE.  That "
+          "sentence is mg-0b07's second\noption and it is worth nothing as a "
+          "promise, so it is a count.  Four generations\nof this file each "
+          "reported a floor and each was one spelling above the real one;\nthe "
+          "reason the fifth does not is not that somebody looked harder, it is "
+          "that the\nlimit is MEASURED and printed beside the green rows rather "
+          "than inferred from them.\n")
+    print("NARROWED HERE (mg-69d1, on mg-eaef's E5 and E4).  It used to read "
+          "DELETION\nESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS AND "
+          "NO FURTHER, and that is\nread as `every explicit boolean operand is "
+          "on the reached side`.  It is not.  4 of\nthe 15 in face_complex.py "
+          "are nested below the top level of their own condition,\nwhere this "
+          "sweep cannot reach them, and the 2 in posets.py are in a file this "
+          "test\ndoes not visit at all.  All 6 were in NEITHER census column -- "
+          "not in `operands`,\nbecause their condition is not a `BoolOp`, and "
+          "not in `compounds`, because the form\nfilter skips `or` and `and` BY "
+          "NAME, on the assumption that anything spelled with\nan operator is "
+          "deletable.  A bound stated wider than its evidence is the "
+          "printed-\nextent defect wearing the remedy for the printed-extent "
+          "defect: the fix for an\nunstated limit is a stated one, and a stated "
+          "limit that over-claims is read as a\nguarantee.\n")
     print("A condition can package several decisions with no operator to "
           "delete: `a < b < c`,\n`[..] != [..]`, `x in S`, `any(...)`.  The "
-          "sweep above reaches the operands of `or`\nand `and` and nothing "
-          "else.  Below, both populations are read out of the tree.\n")
-    print("   %-18s %-6s %-5s %-8s %-9s %s"
-          % ("file", "conds", "bool", "operands", "compounds", "expr nodes"))
+          "sweep above reaches the top-level operands\nof `or` and `and` and "
+          "nothing else.  Below, every population is read out of the tree.\n")
+    # --------------------------------------------------------------- mg-69d1
+    # EVERY EXPLICIT BOOLEAN OPERAND, IN EXACTLY ONE NAMED COLUMN.  The swept
+    # file population is SWEEP_FILES -- the same tuple the sweep above ran over
+    # -- passed in rather than re-decided here, so the table and the sweep
+    # cannot disagree the way the `operands` column and the sweep did.
+    sources = {f: source_at(None, f) for f in ("face_complex.py", "posets.py")}
+    cols = operand_columns(sources, SWEEP_FILES)
+    print("   EVERY EXPLICIT BOOLEAN OPERAND, IN EXACTLY ONE NAMED COLUMN.  "
+          "`not determined` is\n   a column and not an omission: an operand "
+          "this classifier cannot place is PRINTED\n   there rather than "
+          "falling out of the table.  An explicit `not determined` is\n   "
+          "checkable; an empty cell is the absence of an answer, which is the "
+          "ambiguity a\n   stated bound exists to remove.\n")
+    print("   %-18s %-6s %-16s %-18s %-15s %s"
+          % (("file",) + tuple(OPERAND_COLUMNS) + ("all",)))
+    per_file = {}
+    for fname in sorted(sources):
+        row = [len([o for o in cols[c] if o.file == fname])
+               for c in OPERAND_COLUMNS]
+        per_file[fname] = row
+        print("   %-18s %-6d %-16d %-18d %-15d %d"
+              % ((fname,) + tuple(row) + (sum(row),)))
+    allrow = [len(cols[c]) for c in OPERAND_COLUMNS]
+    print("   %-18s %-6d %-16d %-18d %-15d %d"
+          % (("ALL",) + tuple(allrow) + (sum(allrow),)))
+    print("\n   the operands this sweep does NOT delete, named -- because a "
+          "count of what is\n   uncovered that cannot be pointed at is the "
+          "same silence as no count at all:")
+    for col in ("not swept: file", "not swept: nested", "not determined"):
+        for o in cols[col]:
+            print("      %-16s %-24s %-6s %-18s %s"
+                  % (o.file, o.func, o.kind, col,
+                     " ".join((o.source or "").split())[:40]))
+    print()
+    print("   %-18s %-6s %-5s %-10s %-9s %s"
+          % ("file", "conds", "bool", "top-level", "compounds", "expr nodes"))
     for fname in ("face_complex.py", "posets.py"):
         c = condition_census(source_at(None, fname))
-        print("   %-18s %-6d %-5d %-8d %-9d %d" % ((fname,) + c))
+        print("   %-18s %-6d %-5d %-10d %-9d %d" % ((fname,) + c))
+    print("   the third column is `top-level`, not `operands the sweep "
+          "deletes`: it counts what\n   `deciding_clauses` FINDS in that file, "
+          "and whether the sweep VISITS the file is a\n   fact about the "
+          "sweep and not about the file.  It read 2 for posets.py under a\n   "
+          "heading that said `deletes`, where the sweep deletes 0 (mg-eaef "
+          "E4).\n")
     fc_census = condition_census(live_src)
     fc_imp = implicit_disjunctions(live_src)
     ps_imp = implicit_disjunctions(poset_src)
@@ -1506,6 +1585,56 @@ def main():
             print("      %-16s %-24s %-6s %-11s %s"
                   % (fname, c.func, c.kind, c.form,
                      " ".join((c.source or "").split())[:44]))
+    # -------------------------------------------------- mg-69d1: the two new
+    # claims, and they are about the TABLE, not about the tree.  The tree has
+    # not changed: the four nested operands were there before this section
+    # printed a column for them.  What changed is that the answer to "is this
+    # operand covered?" is now printed for all 17 instead of for 13.
+    swept_named = sorted((o.func, o.kind, " ".join((o.source or "").split()))
+                         for o in cols["swept"])
+    sweep_named = sorted((cl.func, cl.kind, " ".join((cl.source or "").split()))
+                         for f in SWEEP_FILES
+                         for cl in deciding_clauses(source_at(None, f)))
+    claim("THE BOUND IS NOT WIDER THAN THE SWEEP: the `swept` column holds %d "
+          "operand(s) and the sweep above ran over %d, and they are the SAME "
+          "operands function-by-function and text-by-text -- not the same "
+          "count.  posets.py is in the census and contributes 0 to `swept`, "
+          "which is the row mg-eaef's E4 was about"
+          % (len(swept_named), len(sweep_named)),
+          swept_named == sweep_named and bool(swept_named),
+          "the sweep visiting a file the classifier does not, or the "
+          "classifier calling an operand swept that the sweep does not "
+          "delete.  BOTH read SWEEP_FILES, so the two cannot drift apart "
+          "without this claim going red; before mg-69d1 they were two "
+          "populations twenty lines apart and they HAD drifted",
+          "the sweep's own rows: %s"
+          % "; ".join("%s %s c%d" % (cl.func, cl.kind, cl.index + 1)
+                      for f in SWEEP_FILES
+                      for cl in deciding_clauses(source_at(None, f))))
+    total = operand_columns_total(sources)
+    claim("AND EVERY EXPLICIT BOOLEAN OPERAND IS IN EXACTLY ONE NAMED COLUMN: "
+          "%d = %s, against a population of %d re-derived by walking the "
+          "sources a second time.  `not determined` reads %d and is PRINTED "
+          "-- it is the column that exists so that an operand this classifier "
+          "cannot place has a name instead of an empty cell"
+          % (sum(allrow),
+             " + ".join("%d %s" % (n, c)
+                        for c, n in zip(OPERAND_COLUMNS, allrow)),
+             total, cols["not determined"] and len(cols["not determined"]) or 0),
+          sum(allrow) == total and total > 0
+          and all(len(boolean_operands(sources[f], f)) == sum(per_file[f])
+                  for f in sources),
+          "an operand falling out of the partition, which is what the two "
+          "columns before this one did to 6 of the 17: `deciding_clauses` "
+          "skips a condition that is not a `BoolOp` and `implicit_disjunctions` "
+          "skips the forms `or` and `and` by name, so a nested `or` was in "
+          "neither.  It would ALSO differ under a fifth column being added "
+          "without the walk being extended -- the total on the right is not "
+          "the sum on the left, it is an independent walk",
+          "per file: %s"
+          % "; ".join("%s %s = %d" % (f, "+".join(str(n) for n in per_file[f]),
+                                      sum(per_file[f]))
+                      for f in sorted(per_file)))
     claim("THE SWEEP DELETES %d OPERAND(S) OUT OF %d DECIDING CONDITION(S) IN "
           "face_complex.py, AND %d COMPOUND(S) IN THOSE CONDITIONS HAVE NO "
           "OPERAND TO DELETE (%s); posets.py adds %d more, which no claim here "

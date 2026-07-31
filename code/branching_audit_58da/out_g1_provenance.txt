@@ -13,8 +13,8 @@ mathematics being 'untouched': the script is run and its own output is read.
       docs+audit: independent audit of the mg-db09 repair (mg-e8b8 / 2e66d03) — THE WITHDRAWAL IS REAL
    ed9cde49ab81  mg-13b2 -- the repair that widened one script
       docs+repair: THE VERTEX COLUMN REPORTS THE SET AND THE LABELS ARE MEASURED — the column that pri
-   e006581c2e11  HEAD of this branch
-      docs+audit: independent audit of the mg-7e58 repair (4372fae) — THE ATTRIBUTION IS RIGHT AT 17 O
+   e494515b499f  HEAD of this branch
+      docs+audit: independent audit of the mg-76cc repair (4755d02) — THE KERNEL HALF IS REALLY BACK A
 
 --------------------------------------------------------------------------
 (ii) c1'S READ PATH, FOUND IN ITS SOURCE RATHER THAN ASSUMED
@@ -24,7 +24,7 @@ mathematics being 'untouched': the script is run and its own output is read.
 
    the one external file c1 reads:  code/branching_locate_db09/out_t1_tl.txt
 
-   commits touching each part of the reproduction, 286d5030..e006581c:
+   commits touching each part of the reproduction, 286d5030..e494515b:
       c1_branching.py  (the script)                  673b4c00
       kern_a218.py  (its kernel -- the meas)         NONE
       out_t1_tl.txt  (the target it compares)        ed9cde49
@@ -90,8 +90,17 @@ mathematics being 'untouched': the script is run and its own output is read.
    AND THE MEASURING HALF IS TWO FILES, so the population here is two and each
    is named (mg-76cc, on mg-957f's F-1).  c1_branching.py and kern_a218.py are
    moved to HEAD ONE AT A TIME with the other held at 286d5030, so a finding says
-   WHICH file moved the measurement; then both are moved together, because two
-   changes that cancel would pass each half on its own.
+   WHICH file moved the measurement; then both are moved together, because a
+   CONSPIRING pair -- each file's change harmless on its own, the two together
+   moving the measurement -- passes each half and is caught only here.
+
+   THAT REASON IS CORRECTED, THE ROW IS NOT (mg-69d1, on mg-e34a's E-1).  It
+   read "because two changes that cancel would pass each half on its own",
+   which names the one input this row does NOT catch.  Built and measured:
+   on a CANCELLING pair both HALF rows MOVE and `both together` prints
+   IDENTICAL; on a CONSPIRING pair both HALF rows print IDENTICAL and `both
+   together` MOVES.  Section (v) as a whole still catches both -- which is
+   why the row is load-bearing and was never the thing that was wrong.
 
    target form / half moved to HEAD              @ 286d5030        @ HEAD
      the 286d5030 target (COUNT form) -- 125 lines at 286d5030
@@ -99,14 +108,14 @@ mathematics being 'untouched': the script is run and its own output is read.
          c1's own 24 vertex sets equal
        kern_a218.py (its kernel) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
          c1's own 24 vertex sets equal
-       both together (cancellation) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
+       both together (conspiracy) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
          c1's own 24 vertex sets equal
      the HEAD target (SET form) -- 125 lines at 286d5030
        c1_branching.py (the script) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
          c1's own 24 vertex sets equal
        kern_a218.py (its kernel) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
          c1's own 24 vertex sets equal
-       both together (cancellation) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
+       both together (conspiracy) a8db5dbd4c758765 a8db5dbd4c758765  IDENTICAL
          c1's own 24 vertex sets equal
 
    the file grain, for contrast -- from (ii), and nothing is concluded
@@ -126,9 +135,9 @@ mathematics being 'untouched': the script is run and its own output is read.
    half, one varied at a time, direction predicted first:
 
    measuring half varied                            predicted  actual
-     c1 @ e006581c (unmodified -- NULL PROBE)         silent     silent   HIT
+     c1 @ e494515b (unmodified -- NULL PROBE)         silent     silent   HIT
        why: the tree as it stands; must not fire
-     kern @ e006581c (unmodified -- NULL PROBE)       silent     silent   HIT
+     kern @ e494515b (unmodified -- NULL PROBE)       silent     silent   HIT
        why: the tree as it stands; must not fire
      c1 @ HEAD with the vertex DIMENSIONS off by one  FIRES      FIRES    HIT
        why: the measuring half really moved, in the script; must fire

@@ -859,11 +859,21 @@ def absorb_trace(A, B):
     AND THE BOUND OF THE INSTRUMENT IS STATED WITH IT, because respelling does
     not terminate: `any(a != b for a, b in zip(...))` is itself a disjunction
     over rows with no operator, and `!=` on two ints is not one only because
-    nothing smaller is being asked.  DELETION ESTABLISHES COVERAGE DOWN TO
-    EXPLICIT BOOLEAN OPERANDS AND NO FURTHER.  d2_deletion.py's section THE
-    BOUND OF THIS INSTRUMENT counts, from the tree, how many deciding conditions
-    are compounds the sweep cannot reach into, so the limit is a measured number
-    beside the test and not a promise that the evidence reaches the bottom.
+    nothing smaller is being asked.  DELETION REACHES THE TOP-LEVEL BOOLEAN
+    OPERANDS OF THE DECIDING CONDITIONS IN THE FILES THE SWEEP VISITS, AND
+    NOTHING ELSE.  NARROWED (mg-69d1, on mg-eaef's E5 and E4): this sentence
+    used to read DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS
+    AND NO FURTHER, which reads as a guarantee about every explicit boolean
+    operand, and 6 of the 17 in the two files the census covers are not on the
+    reached side -- 4 nested below the top level of their own condition in this
+    file, and 2 in posets.py, which the sweep does not visit.  All 6 were in
+    NEITHER census column.  d2_deletion.py's section THE BOUND OF THIS
+    INSTRUMENT now puts every one of the 17 in exactly one NAMED column -- with
+    `not determined` printed as a column so an unplaceable operand has a name
+    instead of an empty cell -- and counts, from the tree, how many deciding
+    conditions are compounds the sweep cannot reach into, so the limit is a
+    measured number beside the test and not a promise that the evidence reaches
+    the bottom.
     `gate_violations` and `diagonal_moves` below carry the two-clause form for
     their own reasons; their `return`s are inert whole (mg-c4c8 F3) and neither
     this commit nor mg-64b6 touched them.

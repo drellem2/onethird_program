@@ -337,7 +337,7 @@ for label, mut, bend, expect, tag in DELETIONS:
                    and f < BENT_FINDINGS,
                    "deleting the both-together row of HALVES moves nothing: "
                    "%s findings with it and %s without, in the same clone.  "
-                   "Then the cancellation case was never a check of its own"
+                   "Then the conspiracy case was never a check of its own"
                    % (BENT_FINDINGS, f))
         elif tag == "kernel-probe":
             R.gate(pop is not None and NULL_PROBES is not None
@@ -374,6 +374,14 @@ print("""   THE KERNEL HALF IS BACK, AND IT IS BACK AT THE MEASUREMENT GRAIN.
    each of the two files to HEAD on its own, with the other held at
    %s, and then moves both together -- so the population is two
    again, each half is named, and a cancelling pair cannot pass.
+
+   THAT LAST CLAUSE IS ABOUT SECTION (v) AS A WHOLE and it is true; the
+   clause mg-76cc wrote about which ROW catches a cancelling pair was
+   backwards and is repaired in mg-69d1.  The two HALF rows are what
+   catch a cancelling pair -- both MOVE on one, while `both together`
+   prints IDENTICAL.  `both together` is what catches a CONSPIRING pair,
+   which passes both halves.  Both are built and measured in
+   code/repair_69d1/p3_reason.py.
 
    It was found by running the pre-repair predicate, and it is confirmed
    by the same means: bend kern_a218.py as a commit, and the repaired

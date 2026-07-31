@@ -34,11 +34,30 @@
 # sweep that already existed, and the one the battery cannot see is printed as
 # NOT COVERED on the row that carries it.  No sixth technique was added.  d2 also
 # counts, from the tree, the compounds no deletion reaches (`any(...)`, `x in S`,
-# chained and sequence comparisons), so DELETION ESTABLISHES COVERAGE DOWN TO
-# EXPLICIT BOOLEAN OPERANDS AND NO FURTHER is a measured number beside the green
-# rows rather than a promise.  d4 runs mg-0b07's own grain probe unmodified: one
-# of its six claims is required to go RED -- the one asserting the operator does
-# not exist -- and its three perturbation rows are required not to move.
+# chained and sequence comparisons), so DELETION REACHES THE TOP-LEVEL BOOLEAN
+# OPERANDS OF THE DECIDING CONDITIONS IN THE FILES THE SWEEP VISITS, AND NOTHING
+# ELSE is a measured number beside the green rows rather than a promise.  d4 runs
+# mg-0b07's own grain probe unmodified: one of its six claims is required to go
+# RED -- the one asserting the operator does not exist -- and its three
+# perturbation rows are required not to move.
+#
+# mg-69d1 NARROWED THAT SENTENCE TO THE SWEEP AND CLASSIFIED ALL 17 (mg-eaef E5,
+# E4).  It read DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS
+# AND NO FURTHER, which is read as a guarantee about every explicit boolean
+# operand, and 6 of the 17 in the census's two files are not on the reached side:
+# 4 nested below the top level of their own condition, where the sweep cannot
+# reach, and 2 in posets.py, which the sweep does not visit -- while the
+# `operands` column printed 2 for posets.py under a heading that said `deletes`.
+# d2's bound section now puts every one of the 17 in exactly one NAMED column,
+# with `not determined` printed as a column so an operand the classifier cannot
+# place has a name instead of an empty cell, and the sweep's file population is
+# ONE constant both the sweep and the table read.
+#
+# d2 EXITS 1 AT HEAD AND HAS SINCE bfd7948 -- mg-eaef's E8, which mg-69d1 does
+# NOT close.  The claim AND THE PIN IS WHAT IT SAYS IT IS reads BROKEN because
+# bfd7948 is itself a commit with a two-clause `shape` guard and is newer than
+# the pin.  That is the one BROKEN claim in d2's transcript; every other claim in
+# this instrument holds, and d1, d3 and d4 exit 0.
 #
 # mg-64b6 made it PER CLAUSE and made the declared unit DERIVED.  mg-c4c8 found
 # that mg-9220's merge left a condition of TWO CLAUSES and that deleting the first

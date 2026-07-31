@@ -1,0 +1,155 @@
+==========================================================================
+P1 -- THE BOUND, NARROWED TO THE SWEEP, AND ALL 17 CLASSIFIED
+==========================================================================
+
+mg-eaef E5 and E4.  A bound stated wider than its evidence is the printed-extent
+defect wearing the remedy for the printed-extent defect: the fix for an unstated
+limit is a stated one, and a stated limit that over-claims is worse than none,
+because it is read as a guarantee.
+
+--------------------------------------------------------------------------
+(i) THE SENTENCE, ENUMERATED FROM THE TREE RATHER THAN QUOTED
+--------------------------------------------------------------------------
+   A bound written in four places is four bounds.  Every copy is found
+   with `git grep` over the WORKING TREE, untracked files included, so a
+   copy this script did not remember is still in the population.  A site
+   that QUOTES the old sentence in order to correct it is not a site
+   that ASSERTS it; the two are told apart by whether a correcting
+   marker stands within 25 lines of the copy, in the same file.
+
+   THE NARROW SENTENCE -- `DELETION REACHES THE TOP-LEVEL BOOLEAN OPERANDS OF THE D ...`:
+     code/face_geometry_instr_5f9a/d2_deletion.py             line 142
+     code/face_geometry_instr_5f9a/d2_deletion.py             line 1506
+     code/face_geometry_instr_5f9a/out_d2_deletion.txt        line 335
+     code/repair_69d1/README.md                               line 30
+     code/repair_69d1/p1_bound.py                             line 65
+     docs/landing-mg-0b07-implicit-disjunction.md             line 33
+     docs/repair-mg-69d1-bound-and-reason.md                  line 33
+
+   THE WIDE SENTENCE -- `DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN O ...`:
+     code/face_geometry_audit_eaef/README.md                  line 82    correction within 25 lines
+     code/face_geometry_audit_eaef/e2_bound.py                line 6     correction within 25 lines
+     code/face_geometry_audit_eaef/out_e2_bound.txt           line 74    correction within 25 lines
+     code/repair_69d1/README.md                               line 25    correction within 25 lines
+     code/repair_69d1/p1_bound.py                             line 5     correction within 25 lines
+     code/repair_69d1/p1_bound.py                             line 64    correction within 25 lines
+     docs/landing-mg-0b07-implicit-disjunction.md             line 24    correction within 25 lines
+     docs/repair-mg-69d1-bound-and-reason.md                  line 28    correction within 25 lines
+
+   8 copy/copies of the wide sentence, 0 of them live assertions; 7 copy/copies
+   of the narrow one.
+
+
+--------------------------------------------------------------------------
+(ii) ALL 17 OPERANDS, IN EXACTLY ONE NAMED COLUMN
+--------------------------------------------------------------------------
+   `boolean_operands` applies NO filter: it walks every deciding
+   condition for `ast.BoolOp` and takes every value of every one.  That
+   is what neither of the two previous columns did -- `deciding_clauses`
+   asks whether the CONDITION IS a `BoolOp`, and `implicit_disjunctions`
+   skips the forms `or` and `and` by name -- and it is why an `or`
+   nested under a comprehension was in neither.
+
+   `not determined` is a COLUMN and not an omission.  Nothing lands
+   there on this tree, and it is printed anyway: a column that only
+   appears when it is non-empty is a column a reader cannot rely on.
+
+   the sweep's file population, read out of d2_deletion.py's own SWEEP_FILES: face_complex.py
+
+   file               swept  not swept: file  not swept: nested  not determined  all
+   face_complex.py    11     0                4                  0               15
+   posets.py          0      2                0                  0               2
+   ALL                11     2                4                  0               17
+
+   the 6 this sweep does NOT delete, named -- a count of what is uncovered that
+   cannot be pointed at is the same silence as no count at all:
+      posets.py        _is_transitively_closed  guard  not swept: file    b == c
+      posets.py        _is_transitively_closed  guard  not swept: file    (a, d) not in rel
+      face_complex.py  proper_ideals            value  not swept: nested  m != 0
+      face_complex.py  proper_ideals            value  not swept: nested  m != full
+      face_complex.py  mat_eq                   value  not swept: nested  len(a) == len(b)
+      face_complex.py  mat_eq                   value  not swept: nested  all(x == y for x, y in zip(a, b))
+
+   population re-derived by an INDEPENDENT walk : 17
+   sum of the four columns                     : 17
+
+--------------------------------------------------------------------------
+(iii) THE `swept` COLUMN AGAINST THE SWEEP'S OWN ROWS
+--------------------------------------------------------------------------
+   Not count against count.  mg-eaef's E4 was a count that matched
+   nothing: `operands` read 2 for posets.py and the sweep deleted 0
+   there, and both numbers were about "operands".  Here the swept
+   column is compared to the sweep's ENUMERATED rows function by
+   function and text by text.
+
+   function                 kind   operand text
+     Poset.comparable       value  (a, b) in self.less
+     Poset.comparable       value  (b, a) in self.less
+     Poset.comparable       value  a == b
+     Poset.leq              value  (a, b) in self.less
+     Poset.leq              value  a == b
+     absorb_trace           guard  any( a != b for a, b in zip(shape_A,
+     absorb_trace           guard  len(shape_A) != len(shape_B)
+     diagonal_moves         guard  any(len(A[i]) != len(B[i]) for i in 
+     diagonal_moves         guard  len(A) != len(B)
+     gate_violations        guard  any(len(A[i]) != len(B[i]) for i in 
+     gate_violations        guard  m != len(B)
+
+   sweep rows 11 / `swept` column 11 / identical as sets of (function, kind, text): yes
+   posets.py: 2 operand(s), 0 in `swept`, 2 in `not swept: file` -- the row E4
+   was about
+
+--------------------------------------------------------------------------
+(iv) THE 4 NESTED OPERANDS, DELETED ONE AT A TIME
+--------------------------------------------------------------------------
+   This is what makes the narrowing necessary rather than cosmetic.
+   mg-eaef's E2 measured it and its own registered prediction was
+   BYTE-IDENTICAL on all four -- on the assumption that what the sweep
+   skips is what the battery cannot see.  Re-derived here from the
+   tree, on this tree, with an EMPTY-BASELINE GUARD: a mutation that
+   produced no artifact at all would otherwise compare `IDENTICAL` to
+   another failure, which is the one reading a deletion test must never
+   make.
+
+   baseline artifact: 23695 bytes, exit 0
+
+   function         operand deleted                          artifact       exit
+     proper_ideals  m != 0                                   CHANGES        1
+     proper_ideals  m != full                                CHANGES        1
+     mat_eq         len(a) == len(b)                         CHANGES        1
+     mat_eq         all(x == y for x, y in zip(a, b))        CHANGES        1
+
+   4 of 4 nested operands CHANGE the artifact when deleted alone.
+
+--------------------------------------------------------------------------
+(v) THE CONTROL, WHERE THE DEFECT IS STILL PRESENT
+--------------------------------------------------------------------------
+   Two directions, because a control demonstrated only against a
+   repaired tree cannot tell `not covered` apart from `not coverable`.
+
+   FIRST: the same classification run on bfd7948's sources -- the commit
+   that STATED the wide bound.  The tree has not changed; what changed
+   is that the answer is now printed for all of them.  The old pair of
+   columns is recomputed there and the operands in NEITHER are counted.
+
+   SECOND: the classifier with one column DELETED.  If removing `not
+   swept: nested` leaves the totality claim green, the column was never
+   what made it true.
+
+   file               rev      operands   in operands in compounds in NEITHER
+   face_complex.py    bfd7948  15         11          11        4
+   posets.py          bfd7948  2          2           1         0
+   face_complex.py    HEAD     15         11          11        4
+   posets.py          HEAD     2          2           1         0
+
+   at bfd7948 the two columns left 4 operand(s) in neither, and the tree at HEAD
+   leaves the same 4 -- the SOURCE did not change.  What changed is that all 17
+   are now printed in a named column.
+
+   with `not swept: nested` deleted from the classifier:
+     columns 3, sum 13, independent walk 17, total: GOES RED
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read and source read this script performs, the requirement that each of the 4 nested deletions really apply, and the requirement that the baseline artifact be non-empty before any comparison is made
+FINDINGS: 0, population: the 2 written forms of the bound sentence over every live site in the tree, the 17 explicit boolean operands of the census's two files against the 4 named columns, the `swept` column against the sweep's own enumerated rows, the 4 nested operands deleted one at a time against the control battery, and the classifier with one column deleted
+TOTAL BAD: 0

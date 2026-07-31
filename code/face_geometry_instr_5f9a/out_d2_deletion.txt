@@ -294,8 +294,8 @@ positive control and mg-c4c8's F1, reproduced rather than quoted.
   [HOLDS ] b6bc2ef (b6bc2ef) -- the two-CLAUSE tree regenerates its own artifact, so the rows below are against a baseline of its own
         23684 bytes regenerated, exit 0; `absorb_trace` has 2 deciding clause(s) there and 2 here
         WOULD DIFFER UNDER: that ref moving, or that tree ceasing to be reproducible
-  [HOLDS ] AND THE PIN IS WHAT IT SAYS IT IS: of the 7 commits that ever touched face_complex.py, 1 has/have a two-CLAUSE `shape` condition in `absorb_trace`, and the NEWEST of them is b6bc2efed7b4 -- which is what b6bc2ef resolves to
-        newest two-clause commit b6bc2efed7b4; pin resolves to b6bc2efed7b4; 1 two-clause commit(s) in all
+  [BROKEN] AND THE PIN IS WHAT IT SAYS IT IS: of the 8 commits that ever touched face_complex.py, 2 has/have a two-CLAUSE `shape` condition in `absorb_trace`, and the NEWEST of them is bfd7948ed878 -- which is what b6bc2ef resolves to
+        newest two-clause commit bfd7948ed878; pin resolves to b6bc2efed7b4; 2 two-clause commit(s) in all
         WOULD DIFFER UNDER: a later commit reintroducing a two-clause condition, or this pin being moved to an ancestor.  Either makes the rows above measurements about a tree the sentence beside them does not describe -- mg-c4c8's floor item, applied to the pin this commit adds rather than only to the one it inherited
    absorb_trace             clause 1 of 2 (m != len(B)): BYTE-IDENTICAL exit 0  23684 bytes
    absorb_trace             clause 2 of 2 (any(len(A[i]) != len(B[i]) for i in range(m))): CHANGES    exit 1  24887 bytes
@@ -332,20 +332,58 @@ on the result.
 ==============================================================================
 THE BOUND OF THIS INSTRUMENT -- what deletion reaches, and what it does not
 ==============================================================================
-DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS AND NO FURTHER.
-That sentence is the whole of mg-0b07's second option and it is worth nothing as a
-promise, so it is a count.  Four generations of this file each reported a floor and
-each was one spelling above the real one; the reason the fifth does not is not that
-somebody looked harder, it is that the limit is now MEASURED and printed beside
-the green rows rather than inferred from them.
+DELETION REACHES THE TOP-LEVEL BOOLEAN OPERANDS OF THE DECIDING CONDITIONS IN
+THE FILES THIS SWEEP VISITS, AND NOTHING ELSE.  That sentence is mg-0b07's second
+option and it is worth nothing as a promise, so it is a count.  Four generations
+of this file each reported a floor and each was one spelling above the real one;
+the reason the fifth does not is not that somebody looked harder, it is that the
+limit is MEASURED and printed beside the green rows rather than inferred from them.
+
+NARROWED HERE (mg-69d1, on mg-eaef's E5 and E4).  It used to read DELETION
+ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS AND NO FURTHER, and that is
+read as `every explicit boolean operand is on the reached side`.  It is not.  4 of
+the 15 in face_complex.py are nested below the top level of their own condition,
+where this sweep cannot reach them, and the 2 in posets.py are in a file this test
+does not visit at all.  All 6 were in NEITHER census column -- not in `operands`,
+because their condition is not a `BoolOp`, and not in `compounds`, because the form
+filter skips `or` and `and` BY NAME, on the assumption that anything spelled with
+an operator is deletable.  A bound stated wider than its evidence is the printed-
+extent defect wearing the remedy for the printed-extent defect: the fix for an
+unstated limit is a stated one, and a stated limit that over-claims is read as a
+guarantee.
 
 A condition can package several decisions with no operator to delete: `a < b < c`,
-`[..] != [..]`, `x in S`, `any(...)`.  The sweep above reaches the operands of `or`
-and `and` and nothing else.  Below, both populations are read out of the tree.
+`[..] != [..]`, `x in S`, `any(...)`.  The sweep above reaches the top-level operands
+of `or` and `and` and nothing else.  Below, every population is read out of the tree.
 
-   file               conds  bool  operands compounds expr nodes
-   face_complex.py    73     5     11       11        1002
-   posets.py          6      1     2        1         55
+   EVERY EXPLICIT BOOLEAN OPERAND, IN EXACTLY ONE NAMED COLUMN.  `not determined` is
+   a column and not an omission: an operand this classifier cannot place is PRINTED
+   there rather than falling out of the table.  An explicit `not determined` is
+   checkable; an empty cell is the absence of an answer, which is the ambiguity a
+   stated bound exists to remove.
+
+   file               swept  not swept: file  not swept: nested  not determined  all
+   face_complex.py    11     0                4                  0               15
+   posets.py          0      2                0                  0               2
+   ALL                11     2                4                  0               17
+
+   the operands this sweep does NOT delete, named -- because a count of what is
+   uncovered that cannot be pointed at is the same silence as no count at all:
+      posets.py        _is_transitively_closed  guard  not swept: file    b == c
+      posets.py        _is_transitively_closed  guard  not swept: file    (a, d) not in rel
+      face_complex.py  proper_ideals            value  not swept: nested  m != 0
+      face_complex.py  proper_ideals            value  not swept: nested  m != full
+      face_complex.py  mat_eq                   value  not swept: nested  len(a) == len(b)
+      face_complex.py  mat_eq                   value  not swept: nested  all(x == y for x, y in zip(a, b))
+
+   file               conds  bool  top-level  compounds expr nodes
+   face_complex.py    73     5     11         11        1002
+   posets.py          6      1     2          1         55
+   the third column is `top-level`, not `operands the sweep deletes`: it counts what
+   `deciding_clauses` FINDS in that file, and whether the sweep VISITS the file is a
+   fact about the sweep and not about the file.  It read 2 for posets.py under a
+   heading that said `deletes`, where the sweep deletes 0 (mg-eaef E4).
+
 
    the compounds, named -- each is a decision this sweep cannot delete out of:
       face_complex.py  _ambient_coxeter_laplacian guard  membership  n in _AMBIENT_CACHE
@@ -360,6 +398,12 @@ and `and` and nothing else.  Below, both populations are read out of the tree.
       face_complex.py  Poset.comparable         value  membership  (a, b) in self.less
       face_complex.py  Poset.comparable         value  membership  (b, a) in self.less
       posets.py        _is_transitively_closed  guard  membership  (a, d) not in rel
+  [HOLDS ] THE BOUND IS NOT WIDER THAN THE SWEEP: the `swept` column holds 11 operand(s) and the sweep above ran over 11, and they are the SAME operands function-by-function and text-by-text -- not the same count.  posets.py is in the census and contributes 0 to `swept`, which is the row mg-eaef's E4 was about
+        the sweep's own rows: absorb_trace guard c1; absorb_trace guard c2; gate_violations guard c1; gate_violations guard c2; diagonal_moves guard c1; diagonal_moves guard c2; Poset.leq value c1; Poset.leq value c2; Poset.comparable value c1; Poset.comparable value c2; Poset.comparable value c3
+        WOULD DIFFER UNDER: the sweep visiting a file the classifier does not, or the classifier calling an operand swept that the sweep does not delete.  BOTH read SWEEP_FILES, so the two cannot drift apart without this claim going red; before mg-69d1 they were two populations twenty lines apart and they HAD drifted
+  [HOLDS ] AND EVERY EXPLICIT BOOLEAN OPERAND IS IN EXACTLY ONE NAMED COLUMN: 17 = 11 swept + 2 not swept: file + 4 not swept: nested + 0 not determined, against a population of 17 re-derived by walking the sources a second time.  `not determined` reads 0 and is PRINTED -- it is the column that exists so that an operand this classifier cannot place has a name instead of an empty cell
+        per file: face_complex.py 11+0+4+0 = 15; posets.py 0+2+0+0 = 2
+        WOULD DIFFER UNDER: an operand falling out of the partition, which is what the two columns before this one did to 6 of the 17: `deciding_clauses` skips a condition that is not a `BoolOp` and `implicit_disjunctions` skips the forms `or` and `and` by name, so a nested `or` was in neither.  It would ALSO differ under a fifth column being added without the walk being extended -- the total on the right is not the sum on the left, it is an independent walk
   [HOLDS ] THE SWEEP DELETES 11 OPERAND(S) OUT OF 73 DECIDING CONDITION(S) IN face_complex.py, AND 11 COMPOUND(S) IN THOSE CONDITIONS HAVE NO OPERAND TO DELETE (4 membership, 7 quantifier); posets.py adds 1 more, which no claim here covers.  This is the instrument's bound, stated beside its results: a green row above covers the clause it names and says nothing about any decision packed inside that clause
         face_complex.py: 73 deciding conditions, 5 of them boolean, 11 deletable operands, 11 unreachable compounds, 1002 expression nodes in all.  THE LAST NUMBER HAS NO GRAIN -- it counts every node in every deciding condition and depends on no classification, so a compound in a form this file does not know about is inside it anyway, which is the treatment `unit_removed` gives its own three chosen units
         WOULD DIFFER UNDER: every deciding condition becoming a plain boolean expression, at which point the bound would be vacuous and this claim would say so by counting 0 compounds.  NOT under the forms being renamed: the population is enumerated from the tree, and the totals beside it do not depend on the names
@@ -469,5 +513,5 @@ elsewhere in this file it is named rather than repeated.
         WOULD DIFFER UNDER: nothing: this claim is a pointer to the branches above, and it is scored so that the list travels with the transcript instead of living in a document beside it.  The claims that do the work are the ones named in each branch.  The two counts are computed from the list rather than written beside it, for the reason every other number in this file is
 
 ==============================================================================
-49 claim(s) scored; 0 BROKEN.
+51 claim(s) scored; 1 BROKEN.
 ==============================================================================

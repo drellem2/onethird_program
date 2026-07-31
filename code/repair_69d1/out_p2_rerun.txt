@@ -1,0 +1,61 @@
+==========================================================================
+P2 -- THE SUBJECTS AND THE AUDITOR, RE-RUN UNMODIFIED
+==========================================================================
+
+Nothing here is edited to stay green.  Each script is run where it lives, its
+stdout captured, and its committed transcript left alone.
+
+--------------------------------------------------------------------------
+(i) d2_deletion.py -- THE NARROWED BOUND, IN ITS OWN RUN
+--------------------------------------------------------------------------
+   exit 1, 51 claim line(s), 1 BROKEN
+     51 claim(s) scored; 1 BROKEN.
+     [BROKEN] AND THE PIN IS WHAT IT SAYS IT IS: of the 8 commits that ever touched face_complex.py, 2 has/have a two-CLAUSE `shape` condition in `absorb_t
+
+   the bound-vs-sweep claim               in d2's own stdout : yes
+   the totality claim                     in d2's own stdout : yes
+   the `not determined` column            in d2's own stdout : yes
+   the narrowed sentence                  in d2's own stdout : yes
+
+--------------------------------------------------------------------------
+(ii) g1_provenance.py -- THE CORRECTED REASON, IN ITS OWN RUN
+--------------------------------------------------------------------------
+   exit 0
+     SELF-ERRORS: 0, population: the 22 git reads this script and the re-runs it makes actually performed -- COUNTE
+     FINDINGS: 0, population: the 3 populations of the re-run, its exit code, its byte-comparison against the commi
+     TOTAL BAD: 0
+
+   the corrected reason         in g1's own stdout : yes
+   the corrected row LABEL      in g1's own stdout : yes
+   the correcting ticket id     in g1's own stdout : yes
+   the INVERTED reason          in g1's own stdout : 1 copy/copies, 0 of them without a correction
+                                  within 25 lines
+
+--------------------------------------------------------------------------
+(iii) k4_cancel.py -- THE AUDITOR'S OWN INSTRUMENT, UNEDITED
+--------------------------------------------------------------------------
+   k4 raised E-1.  It is re-run here against the repaired tree with
+   not one character changed.  It is EXPECTED to still book its finding:
+   it counts every copy of the sentence in the tree, and the copies that
+   remain are in its own transcript and prediction file -- the record of
+   what it found, which a repair does not get to edit.
+
+   WHAT IS SCORED IS ITS MEASUREMENT, not its verdict.  The three rows
+   it takes on a cancelling pair must read exactly as they read before,
+   because this repair did not touch the row.  A repair that moved them
+   would have repaired the row and left the reason, which is the
+   opposite of the finding.
+
+   exit 1
+     c1_branching.py (the script)   a8db5dbd4c758765 0c91a182221d5880 MOVED
+     kern_a218.py (its kernel)      a8db5dbd4c758765 cb329be9d6265c27 MOVED
+     both together (cancellation)   a8db5dbd4c758765 a8db5dbd4c758765 IDENTICAL
+
+   measured by the auditor, on this tree: both together IDENTICAL; c1_branching.py MOVED; kern_a218.py MOVED
+   k4 books 2 finding(s); its rationale finding is EXPECTED and is not scored
+   as this repair's failure -- p3 (i) is where the copies are classified.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the 3 subprocess runs this script makes and the requirement that each produce a scoreable transcript
+FINDINGS: 0, population: d2_deletion.py's claim scoreboard with the ONE claim mg-eaef's E8 is about named and excluded, g1_provenance.py's trailer and the reason its section (v) prints, and k4_cancel.py's three measured rows on a cancelling pair
+TOTAL BAD: 0

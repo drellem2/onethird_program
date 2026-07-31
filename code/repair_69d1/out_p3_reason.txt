@@ -1,0 +1,150 @@
+==========================================================================
+P3 -- THE `both together` ROW, AND THE REASON IT IS THERE
+==========================================================================
+
+The row is correct.  Its reason named the one input it does not catch, and that
+reason reached five artifacts before anybody built the input.  Both directions
+are built here.
+
+--------------------------------------------------------------------------
+(i) THE SENTENCE, ENUMERATED FROM THE WORKING TREE
+--------------------------------------------------------------------------
+   A reason written in five places is five claims.  Every copy is
+   found with `git grep` over the working tree, untracked files
+   included, so a copy this script did not remember is still in the
+   population.  A site that QUOTES the old sentence in order to refute
+   it is not a site that ASSERTS it, and the two are told apart by
+   whether the correcting ticket id stands within the window.
+
+   THE OLD REASON -- `changes that cancel would pass ...`:
+     code/branching_audit_58da/g1_provenance.py               line 276   refuted within 25 lines
+     code/branching_audit_58da/out_g1_provenance.txt          line 98    refuted within 25 lines
+     code/branching_audit_e34a/PREDICTIONS.md                 line 125   refuted within 25 lines
+     code/branching_audit_e34a/k4_cancel.py                   line 58    refuted within 25 lines
+     code/branching_audit_e34a/out_k4_cancel.txt              line 15    refuted within 25 lines
+     code/repair_69d1/README.md                               line 71    refuted within 25 lines
+     code/repair_69d1/p2_rerun.py                             line 134   refuted within 25 lines
+     code/repair_69d1/p2_rerun.py                             line 143   refuted within 25 lines
+     code/repair_69d1/p3_reason.py                            line 6     refuted within 25 lines
+     code/repair_69d1/p3_reason.py                            line 61    refuted within 25 lines
+     docs/audit-mg-e34a-mg76cc-kernel-half-and-five.md        line 181   refuted within 25 lines
+     docs/repair-mg-69d1-bound-and-reason.md                  line 142   refuted within 25 lines
+     docs/repair-mg-76cc-kernel-half-and-five-outputs.md      line 116   refuted within 25 lines
+
+   (i-b) THE SAME DISCRIMINATOR, RUN AGAINST HEAD -- the committed tree, where
+   the defect is still present.  If it reported 0 live assertions there it would be
+   measuring nothing here:
+     code/branching_audit_58da/g1_provenance.py               line 42    *** LIVE ASSERTION
+     code/branching_audit_58da/g1_provenance.py               line 257   *** LIVE ASSERTION
+     code/branching_audit_58da/out_g1_provenance.txt          line 94    *** LIVE ASSERTION
+     code/branching_audit_e34a/PREDICTIONS.md                 line 125   refuted
+     code/branching_audit_e34a/k4_cancel.py                   line 58    refuted
+     code/branching_audit_e34a/out_k4_cancel.txt              line 15    refuted
+     docs/audit-mg-e34a-mg76cc-kernel-half-and-five.md        line 181   refuted
+     docs/repair-mg-76cc-kernel-half-and-five-outputs.md      line 109   *** LIVE ASSERTION
+   8 copy/copies at HEAD, 4 of them live assertions.
+
+   the new reason -- `CONSPIRING pair`: 14 site(s)
+     code/branching_audit_58da/g1_provenance.py               line 52
+     code/branching_audit_58da/g1_provenance.py               line 272
+     code/branching_audit_58da/g1_provenance.py               line 279
+     code/branching_audit_58da/out_g1_provenance.txt          line 94
+     code/branching_audit_58da/out_g1_provenance.txt          line 101
+     code/branching_audit_e34a/k4_cancel.py                   line 192
+     code/branching_audit_e34a/out_k4_cancel.txt              line 68
+     code/branching_repair_76cc/out_r1_kernel.txt             line 130
+     code/branching_repair_76cc/r1_kernel.py                  line 382
+     code/repair_69d1/out_p4_kinds.txt                        line 72
+     code/repair_69d1/p2_rerun.py                             line 117
+     code/repair_69d1/p3_reason.py                            line 26
+     code/repair_69d1/p3_reason.py                            line 62
+     code/repair_69d1/p4_kinds.py                             line 220
+   the row's LABEL -- `conspiracy`: 18 site(s)
+     code/branching_audit_58da/g1_provenance.py               line 311
+     code/branching_audit_58da/g1_provenance.py               line 316
+     code/branching_audit_58da/out_g1_provenance.txt          line 111
+     code/branching_audit_58da/out_g1_provenance.txt          line 118
+     code/branching_repair_76cc/lib76cc.py                    line 538
+     code/branching_repair_76cc/lib76cc.py                    line 544
+     code/branching_repair_76cc/r1_kernel.py                  line 340
+     code/repair_69d1/README.md                               line 84
+     code/repair_69d1/out_p4_kinds.txt                        line 18
+     code/repair_69d1/out_p4_kinds.txt                        line 69
+     code/repair_69d1/p2_rerun.py                             line 118
+     code/repair_69d1/p3_reason.py                            line 63
+     code/repair_69d1/p3_reason.py                            line 222
+     code/repair_69d1/p4_kinds.py                             line 66
+     code/repair_69d1/p4_kinds.py                             line 207
+     docs/repair-mg-69d1-bound-and-reason.md                  line 175
+     docs/repair-mg-69d1-bound-and-reason.md                  line 212
+     docs/repair-mg-76cc-kernel-half-and-five-outputs.md      line 104
+
+   in the COMMIT MESSAGE of 4755d02 : yes -- IMMUTABLE.  A commit message cannot be
+   repaired without rewriting history, so its disposition is a POINTER and not a fix:
+   the corrected reason names 4755d02 as the commit that carries the inverted one.
+
+
+--------------------------------------------------------------------------
+(ii) THE TWO PAIRS, BUILT AND SHOWN TO BE WHAT THEY ARE CALLED
+--------------------------------------------------------------------------
+   Every bend refuses on zero occurrences and on many, so a bend that
+   silently did nothing cannot make a row below say whatever it likes.
+   And each pair is verified to be the KIND of pair it is called before
+   any row rests on it -- otherwise the six rows below are six readings
+   of an input nobody characterised.
+
+   the cancelling pair:
+     c1_branching.py : +25 byte(s) against HEAD
+     kern_a218.py    : +4 byte(s) against HEAD
+   the conspiring pair:
+     c1_branching.py : +120 byte(s) against HEAD
+     kern_a218.py    : +21 byte(s) against HEAD
+
+   the baseline -- c1 and its kernel both at 286d5030 : sha a8db5dbd4c758765, 24 cells
+
+--------------------------------------------------------------------------
+(iii) SECTION (v)'S THREE ROWS, ON EACH PAIR
+--------------------------------------------------------------------------
+   The same three (script, kernel) rows g1's HALVES uses, with HEAD
+   carrying each pair in turn.  Each is diffed against the baseline
+   exactly as g1 diffs it.
+
+   WHAT THE CORRECTED REASON CLAIMS, and it is two claims:
+
+     CANCELLING  both HALF rows MOVE, `both together` IDENTICAL
+     CONSPIRING  both HALF rows IDENTICAL, `both together` MOVES
+
+   The first is why the old reason was inverted.  The second is why the
+   row is load-bearing anyway, and it is the half nobody had built.
+
+   the CANCELLING pair
+     row                              baseline         moved            verdict
+     c1_branching.py (the script)     a8db5dbd4c758765 0c91a182221d5880 MOVED
+     kern_a218.py (its kernel)        a8db5dbd4c758765 cb329be9d6265c27 MOVED
+     both together (conspiracy)       a8db5dbd4c758765 a8db5dbd4c758765 IDENTICAL
+
+   the CONSPIRING pair
+     row                              baseline         moved            verdict
+     c1_branching.py (the script)     a8db5dbd4c758765 a8db5dbd4c758765 IDENTICAL
+     kern_a218.py (its kernel)        a8db5dbd4c758765 a8db5dbd4c758765 IDENTICAL
+     both together (conspiracy)       a8db5dbd4c758765 cb329be9d6265c27 MOVED
+
+   THE CORRECTED REASON, SCORED AGAINST BOTH PAIRS
+     pair           c1 half      kern half    both together  reason says
+     cancelling     MOVED        MOVED        IDENTICAL      halves catch it
+     conspiring     IDENTICAL    IDENTICAL    MOVED          only `both together` catches it
+
+
+   AND SECTION (v) AS A WHOLE CATCHES BOTH, which is why
+   r1_kernel.py's OTHER sentence -- "a cancelling pair cannot pass" --
+   is TRUE and is left standing.  It is a claim about the section; the
+   repaired one is a claim about which ROW.  Scored here rather than
+   taken from mg-e34a, which named it as excluded by hand.
+
+     cancelling   caught by section (v) at 2 of 3 rows: c1_branching.py, kern_a218.py
+     conspiring   caught by section (v) at 1 of 3 rows: both together
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read and c1 run this script performs, the requirement that each of the 4 bends really change the file it names, that the baseline run really produce c1's 24 vertex sets, and that each pair really be the KIND of pair it is called before any row rests on it
+FINDINGS: 0, population: the 3 rows of g1's section (v) evaluated on a cancelling pair and again on a conspiring pair -- 6 rows -- and the corrected reason scored against all 6 wherever it is written
+TOTAL BAD: 0

@@ -1,0 +1,58 @@
+==========================================================================
+selftest_69d1 -- the instrument against constructed inputs
+==========================================================================
+
+-- the classifier: every explicit boolean operand, one named column
+  [ok  ] a top-level `or` yields 2 operands, both top
+  [ok  ] an `and` inside a comprehension yields 2 operands, NEITHER top
+  [ok  ] ...and the sweep's own enumerator finds 0 of them
+  [ok  ] ...and the compound census does not hold them either -- NEITHER column
+  [ok  ] a file with no boolean operator yields 0 operands
+  [ok  ] the partition is TOTAL over two files at three depths
+  [ok  ] an operand in an UNSWEPT file lands in `not swept: file`, whatever its depth
+  [ok  ] a NESTED operand in a swept file lands in `not swept: nested`
+  [ok  ] `not determined` exists as a column even when it is empty
+  [ok  ] every column name is one of OPERAND_COLUMNS
+  [ok  ] no operand appears in two columns
+
+-- drop_boolean_operand: it removes ONE operand and nothing else
+  [ok  ] deleting the nested operand really changes the source
+  [ok  ] ...and the result still parses
+  [ok  ] ...and the operand it named is gone
+  [ok  ] ...and the other operand is kept
+  [ok  ] ...and one operand left means the operator goes too
+  [ok  ] with three operands, deleting one keeps the operator
+
+-- the bends: every one refuses on zero occurrences and on many
+  [ok  ] bend_kern_up refuses on zero occurrence(s)
+  [ok  ] bend_kern_up refuses on two occurrence(s)
+  [ok  ] bend_kern_up applied to exactly one occurrence changes it
+  [ok  ] bend_c1_down refuses on zero occurrence(s)
+  [ok  ] bend_c1_down refuses on two occurrence(s)
+  [ok  ] bend_c1_down applied to exactly one occurrence changes it
+  [ok  ] conspire_c1 refuses on zero occurrence(s)
+  [ok  ] conspire_c1 refuses on two occurrence(s)
+  [ok  ] conspire_c1 applied to exactly one occurrence changes it
+  [ok  ] conspire_kern refuses when the name is already there
+
+-- the conspiring pair is a pair of NO-OPS, by construction
+  [ok  ] the kernel half only APPENDS
+  [ok  ] ...a module-level assignment and nothing else
+  [ok  ] the c1 half reads the name with a DEFAULT
+  [ok  ] ...and the default is 0, so the half alone shifts nothing
+  [ok  ] ...and the shifted value is d + <that>, not d + 1
+
+-- read_literal: the constants this instrument does not copy
+  [ok  ] read_literal finds a string
+  [ok  ] read_literal finds a tuple
+  [ok  ] read_literal raises on an absent name
+  [ok  ] REV_A218 is a 40-character sha read out of lib58da
+  [ok  ] SWEEP_FILES is non-empty and read out of d2_deletion.py
+
+-- the grep parser: two output shapes, one of them with a revision
+  [ok  ] a worktree grep returns readable paths
+  [ok  ] ...and every line number is an integer
+  [ok  ] a revision grep drops the revision and keeps the path
+
+==========================================================================
+40 assertion(s): 40 ok, 0 FAILED

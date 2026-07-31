@@ -535,7 +535,13 @@ def repin_kernel(g1_src):
 # line number stops testing the moment the file is edited above it.
 HALF_KERNEL_ROW = ('          ("kern_a218.py", "its kernel", old_c1, '
                    'head_kern),\n')
-HALF_BOTH_ROW = (',\n          ("both together", "cancellation", head_c1, '
+# mg-69d1: the label in this anchor moved from "cancellation" to "conspiracy"
+# when mg-e34a's E-1 was repaired.  IT IS AN ANCHOR IN A DIFFERENT FILE, and
+# nothing about "fix the reason for the row" said so -- `drop_both_half` would
+# have raised `expected exactly 1 occurrence` and r1's whole section would have
+# gone red on a repair that changed one word of prose.  Enumerating the KINDS
+# of artifact a repair produces is what found it.
+HALF_BOTH_ROW = (',\n          ("both together", "conspiracy", head_c1, '
                  'head_kern)]')
 PROBE_KERNEL_ROW = (',\n        ("kern @ HEAD with dim L(n,p) off by one", '
                     'head_kern,\n'
