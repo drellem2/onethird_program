@@ -132,9 +132,73 @@ anchor verified — not `WRONG WHEN WRITTEN`.**
 `sh code/hodge_leverage_repair_3f3b/run_all.sh` exits **0** after the repair, having exited **1**
 before it (P0), and its S4a reports **2 DISPLACED, 0 wrong when written** rather than **2 stale**.
 
-## What I am NOT predicting
+## What I am NOT predicting (written before the instrument)
 
 I do not predict that adopting (2) makes the two live figures *current*. It does not, and it is not
 supposed to. `473` beside a tree of `481` is still `473` beside a tree of `481`; what changes is
 that the repository can now say **which of the two questions it is answering** and stops reporting
 `0 STALE` for a state that has one answer of each.
+
+---
+
+# OBSERVATIONS — appended after the runs, with the predictions above untouched
+
+Nothing above this line has been edited. Two predictions missed and both misses are kept, because
+each one bought a control that would not otherwise exist.
+
+| | outcome |
+|---|---|
+| **P0** | **HELD.** exit **1**, `S4a` REFUTED, both transcripts named. Measured before the predictions were written and labelled as such |
+| **P1** | **HELD.** `DISPLACED` / `DISPLACED`, **0 `WRONG WHEN WRITTEN`** — anchors `8a07ae0` and `3d7b32f`, each holding the figure, each publishing tree holding more |
+| **P2** | **HELD, and more sharply than predicted.** `77306a7` is `UNANCHORED` — **0** hex tokens in it resolve to commits. It names no tree at all |
+| **P3** | **HELD.** `A2b`: byte-identical file, `AGREES` at `c1a57fd`, `DISPLACED` at `3958b5a` |
+| **P4** | **HELD.** Every anchor count is re-derived by `git ls-tree`; `A2c` is the control that shows a *self-consistent* declared anchor still refuted by its tree |
+| **P5** | **HELD — after the first attempt was refuted.** See *miss 1* |
+| **P6** | **HELD.** `A1e` labels inferred anchors and states the structural weakness |
+| **P7** | **HELD WHEN WRITTEN, AND THE NUMBER MOVED FOR A REASON I DID NOT ANTICIPATE.** See *miss 2* |
+| **P8** | **HELD.** `A3c` reports **0** post-merge hooks and declines to claim the gap closed; `--at` delivered and exercised by `A3d` |
+| **P9** | **HELD.** The false clause is corrected in place and the correction names what refuted it |
+| **P10** | **HELD.** `POP_FIGURE`, `py_files_at` and `publishing_commit` are **bound** to `anchor_132a.py`'s. One definition in the tree |
+| **P11** | **HELD at the publishing commit** (`A3a`: `AGREES`). The post-merge half is checked *after* the merge, not here |
+| **P12** | **HELD.** New suite exit **0**; the mg-3f3b suite **1 → 0**, reporting `2 DISPLACED` where it had reported `2 STALE` |
+
+## Miss 1 — the first `A2d` control was self-contradictory, and the run caught it
+
+I predicted digest recovery would succeed. **It did — but my first control planted `3958b5a`'s
+count beside a transcript publishing a different figure, and the run REFUTED the row.** The forgery
+was wrong, not the lattice.
+
+**What I had not predicted is what that exposed:** a declared anchor can be *true about its tree and
+wrong about its file*, and **no amount of `git ls-tree` can see it** — whichever tree is named, one
+of the two numbers matches it. That is F2's shape inside a single file. **`INCONSISTENT` and `A2g`
+exist because a control of mine failed**, and `A2c` had to be rebuilt so that its forgery agrees
+with itself, leaving the tree as the only thing that can refute it.
+
+I also did not predict that **digest recovery is many-to-one**: many commits share one `code/`
+population, because a commit that adds no `.py` file leaves it untouched. That is enough to verify a
+*count* and not enough to identify provenance uniquely. `A2h` measures it; without it, `RECOVERED`
+would have read as equal in strength to `DECLARED`, which it is not.
+
+## Miss 2 — P7 predicted 2 unreachable anchors; the transcript reports 1
+
+Both were unreachable when P7 was written and the first run confirmed **2**. The committed
+transcript reports **1** — and the reason is the decision itself. Regenerating
+`out_repair_3f3b.txt` through its own publication step, which the repair required anyway,
+**re-anchored it at a reachable commit and upgraded it from `INFERRED` to `DECLARED`.** That is
+answer **(1)** applied to a figure that predates the rule, exactly as the decision says (1) should
+be used.
+
+**So the deliverable demonstrates both answers on real files**: (2) as the rule that keeps
+`out_repair_6df0.txt` honest without touching it, and (1) as the remedy that was available for the
+transcript this arc owns. `A2i` records why (1) is the *only* remedy left for the other one — **no
+reachable commit holds the population `473` was measured against**, so if `origin/polecat-3f3b` is
+deleted that figure becomes permanently uncheckable.
+
+## The prediction that cannot be settled here
+
+**P11's second half.** This deliverable's own figures are `AGREES` at the commits that publish them
+*in this branch*. The refinery rebases before it merges, which is the exact operation that displaced
+the two transcripts this repair is about. **So the post-merge verdict is checked after the merge,
+with `run_all.sh --at <merged-rev>`, and reported — not predicted green and left there.** A
+deliverable about figures displaced by a merge that checked its own figures only before its merge
+would be the defect one level up.
