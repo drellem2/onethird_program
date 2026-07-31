@@ -49,7 +49,7 @@ one level up: `heading()` was applied at the line the defect was found on — **
 | `S2c` | the tree swept by **my** rule over **my** vocabulary — not the sweep's, whose scope is the thing under test |
 | `S3b` | a gate row renamed in a **copy** of the gate's source and the vocabulary **follows it**. A hand list returns the same five whatever the gate emits |
 | `S3c` | a source with no derivable vocabulary is a **refusal**, not an empty sweep |
-| `S4a` | every committed transcript that publishes a population is compared to the tree at **its own publishing commit**, from `git ls-tree` |
+| `S4a` | every committed transcript that publishes a population is read **from git at its own publishing commit** and compared to the tree there, from `git ls-tree`. ⚠️ Reading from git rather than from disk is also the only way the check can reach **this** deliverable's transcript, which the redirect that writes it has truncated — a check that cannot be applied to its author is a check with a scope nobody chose. It reports this file as *not yet published* on the run that creates it and becomes binding at the commit that lands it |
 | `S4b` | **0** population figures carried as numbers in this arc's prose |
 | `S6a` | **the probes precede the repairs in git** — re-derived from `git log`, not asserted |
 
