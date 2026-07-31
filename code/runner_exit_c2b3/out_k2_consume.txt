@@ -1,0 +1,223 @@
+==============================================================================
+K2  IS THE STATUS CONSUMED?  per runner, per line, at bee07a1
+==============================================================================
+
+==============================================================================
+K2a  C2 -- EXTERNAL CALLERS that read a runner's exit status
+==============================================================================
+
+  Only EXECUTABLE sources are searched -- `.py` and `.sh`.  A `.md` or a
+  committed `out_*.txt` that names a runner is prose about a run, not a
+  caller of one, and counting those would inflate the exposure with
+  files that cannot read an exit status at all.  (Prose claims are not
+  dropped, they are K3's subject.)  A line counts as an EXECUTION when
+  it both names a `run_all.sh` and carries an executing construct
+  (`subprocess.`, `sh <path>`, `./run_all.sh`, or a helper that does).
+  It counts as CONSUMING when the status is then read -- `returncode`
+  or `check=True` within the next 25 lines for Python, `set -e` with no
+  guard on the line for sh.
+
+  caller                                             consumes? target tree
+  code/hodge_leverage_audit_835f/audit_a318_repair.py:590 YES       state_landing_control_2da3
+  code/branching_audit_2060/b0_repro.sh:10           YES       branching_locate_db09  <-- AFFECTED
+  code/species_sites_821e/p3_wiring.py:214           YES       species_repair_a4ef / species_remainder_f8fa / species_repair_6f61  <-- AFFECTED
+
+  Read in full, the status-reading callers of an AFFECTED runner are:
+
+  1. code/branching_audit_2060/b0_repro.sh:10
+       ( cd "$T" && ./run_all.sh >/dev/null 2>&1 )   under `set -e`
+       -- runs mg-db09's runner in a scratch copy.  CONSUMES the status.
+  2. code/species_sites_821e/p3_wiring.py:214,247
+       run_runner(t) for three species trees, and the verdict is built
+       from the returned CODE:  `ok = (code == 0 and present and ...)`,
+       `caught = (code_w != 0 and ...)`, `missed = (code_u == 0)`.
+       CONSUMES the status, in BOTH directions.  Two of its three trees
+       -- species_repair_a4ef and species_remainder_f8fa -- were
+       affected.  K3 takes this apart claim by claim; it is the single
+       biggest retroactive exposure in the arc.
+
+  Every other caller found above targets a tree with no `| tee`
+  pipeline (the state_* trees), so no repair of theirs is at issue.
+
+==============================================================================
+K2b  THE PER-LINE VERDICT
+==============================================================================
+
+  C1  something in the runner consumes it (`set -e`)
+  C2  an external caller reads the runner's exit status
+  C3  the tee'd target has an explicit non-zero exit path
+  A line is AFFECTED when (C1 or C2) and C3.
+
+  runner / tee'd target                    line C1  C2  C3  verdict   C3 evidence
+  branching_audit_2060 / b0_repro.sh       8    y   -   y   AFFECTED  `set -e`
+  branching_audit_2060 / selftest2060.py   9    y   -   y   AFFECTED  assert at selftest2060.py:17
+  branching_locate_db09 / selftestdb09.py  7    y   y   y   AFFECTED  raise at selftestdb09.py:27
+  face_geometry / controls.py              14   y   -   y   AFFECTED  sys.exit at controls.py:1574
+  face_geometry / run_probe.py             18   y   -   -   no        NO designed failure route (only a crash)
+  face_geometry_audit_1c80 / a1_gates.py   18   y   -   -   no        NO designed failure route (only a crash)
+  face_geometry_audit_1c80 / a2_antichain.py 19   y   -   -   no        NO designed failure route (only a crash)
+  face_geometry_audit_1c80 / a3_n6_population.py 20   y   -   -   no        NO designed failure route (only a crash)
+  face_geometry_audit_1c80 / a4_witness.py 21   y   -   -   no        NO designed failure route (only a crash)
+  face_geometry_audit_1c80 / a5_claims.py  22   y   -   -   no        NO designed failure route (only a crash)
+  face_geometry_audit_1c80 / a6_mutations.py 23   y   -   -   no        NO designed failure route (only a crash)
+  face_geometry_audit_6653 / verify_claims.py 74   y   -   y   AFFECTED  sys.exit at verify_claims.py:539
+  face_geometry_audit_6653 / attack_banner.py 78   y   -   y   AFFECTED  sys.exit at attack_banner.py:233
+  face_geometry_audit_e720 / verify_landing_claims.py 33   y   -   y   AFFECTED  sys.exit at verify_landing_claims.py:38
+  face_geometry_audit_e720 / attack_artifact_check.py 37   y   -   y   AFFECTED  raise at attack_artifact_check.py:61
+  face_geometry_landing_7d5a / verify_landing.py 39   y   -   y   AFFECTED  sys.exit at verify_landing.py:484
+  face_geometry_landing_7d5a / attack_banner.py 43   y   -   y   AFFECTED  sys.exit at attack_banner.py:233
+  face_geometry_landing_da45 / verify_landing.py 29   y   -   y   AFFECTED  sys.exit at verify_landing.py:328
+  landscape_audit_d673 / audit_populations.py 11   y   -   y   AFFECTED  assert at audit_populations.py:263
+  landscape_audit_d673 / audit_spectrum.py 12   y   -   y   AFFECTED  assert at audit_spectrum.py:258
+  landscape_audit_d673 / audit_e6_e8_m0.py 13   y   -   -   no        NO designed failure route (only a crash)
+  landscape_audit_d673 / audit_identifications.py 14   y   -   -   no        NO designed failure route (only a crash)
+  landscape_audit_d673 / audit_addenda.py  15   y   -   -   no        NO designed failure route (only a crash)
+  species_7d75 / selftest.py               7    y   -   y   AFFECTED  sys.exit at selftest.py:25
+  species_audit_73df / selftest73df.py     14   y   -   y   AFFECTED  sys.exit at selftest73df.py:200
+  species_audit_7dd3 / selftest7dd3.py     13   -   -   y   no        sys.exit at selftest7dd3.py:165
+  species_audit_a61f / selftesta61f.py     9    y   -   y   AFFECTED  sys.exit at selftesta61f.py:29
+  species_extent_audit_6cb9 / selftest6cb9.py 20   y   -   y   AFFECTED  sys.exit at selftest6cb9.py:150
+  species_extent_d633 / selftestd633.py    10   y   -   y   AFFECTED  sys.exit at selftestd633.py:190
+  species_remainder_f8fa / selftestf8fa.py 7    y   y   y   AFFECTED  sys.exit at selftestf8fa.py:174
+  species_remainder_f8fa / w1_opposite.py  8    y   y   -   no        NO designed failure route (only a crash)
+  species_remainder_f8fa / w2_typemismatch.py 9    y   y   -   no        NO designed failure route (only a crash)
+  species_remainder_f8fa / w3_scope.py     10   y   y   y   AFFECTED  sys.exit at w3_scope.py:260
+  species_repair_a4ef / selftesta4ef.py    9    y   y   y   AFFECTED  assert at selftesta4ef.py:29
+
+  21 of 34 pipelines are AFFECTED, across 15 of 17 runners.
+
+==============================================================================
+K2c  THE ONES THAT ARE NOT AFFECTED, AND WHY -- named, not omitted
+==============================================================================
+
+  Thirteen pipelines are NOT affected, and they fail the conjunction in
+  two different places.  The distinction is kept because collapsing it
+  would let `not affected` mean two things at once:
+
+    C3 FALSE  -- the target has no designed failure route, so the
+                 pipeline discarded no VERDICT.  It still discarded a
+                 CRASH: an ImportError or a missing input exits 1 and
+                 the runner would not have seen it.  Repaired anyway,
+                 and counted here so that `all 34 carried a verdict`
+                 is not asserted when it is false.
+    C1+C2 FALSE -- the target CAN fail, but nothing read the runner's
+                 status, so removing the pipeline alone changes
+                 nothing.  There is exactly one of these and it needs
+                 more than a de-pipelining; see K2d.
+
+  pipeline                                       fails at detail
+  face_geometry:18 run_probe.py                  C3       NO designed failure route (only a crash)
+  face_geometry_audit_1c80:18 a1_gates.py        C3       NO designed failure route (only a crash)
+  face_geometry_audit_1c80:19 a2_antichain.py    C3       NO designed failure route (only a crash)
+  face_geometry_audit_1c80:20 a3_n6_population.py C3       NO designed failure route (only a crash)
+  face_geometry_audit_1c80:21 a4_witness.py      C3       NO designed failure route (only a crash)
+  face_geometry_audit_1c80:22 a5_claims.py       C3       NO designed failure route (only a crash)
+  face_geometry_audit_1c80:23 a6_mutations.py    C3       NO designed failure route (only a crash)
+  landscape_audit_d673:13 audit_e6_e8_m0.py      C3       NO designed failure route (only a crash)
+  landscape_audit_d673:14 audit_identifications.py C3       NO designed failure route (only a crash)
+  landscape_audit_d673:15 audit_addenda.py       C3       NO designed failure route (only a crash)
+  species_audit_7dd3:13 selftest7dd3.py          C1+C2    sys.exit at selftest7dd3.py:165
+  species_remainder_f8fa:8 w1_opposite.py        C3       NO designed failure route (only a crash)
+  species_remainder_f8fa:9 w2_typemismatch.py    C3       NO designed failure route (only a crash)
+
+
+==============================================================================
+K2d  THE RUNNER WITHOUT `set -e` -- a different defect, named separately
+==============================================================================
+
+  code/species_audit_7dd3/run_all.sh is the one affected runner with NO `set -e`.
+  Its own header says:
+      # that is what this audit found.  The self-test is the only file whose exit
+      # code is a statement about this instrument rather than about the repair.
+
+  So its self-test's status IS meant to be load-bearing.  It was not,
+  and `| tee` is only half the reason: with no `set -e` and every other
+  step ending in `|| true`, the last command of the script is an
+  `echo`, so THE RUNNER EXITED 0 UNCONDITIONALLY -- with or without the
+  pipeline.  Removing the pipeline alone would not have fixed it.
+  The repair is therefore an explicit `|| { ...; exit 1; }` guard on
+  the self-test, which is what makes the header true; the `|| true` on
+  d1..d6 is deliberate and is left exactly as it was.
+
+  on disk now: guard present = True
+
+==============================================================================
+K2e  THE FIX, AND WHY THIS MECHANISM
+==============================================================================
+
+  MECHANISM USED: redirect the script to its transcript, read the
+  status with an explicit `||` guard, then `cat` the transcript.
+
+      python3 x.py > out_x.txt || {
+          cat out_x.txt; echo "x.py FAILED"; exit 1; }
+      cat out_x.txt
+
+  WHY NOT `set -o pipefail`.  The shebang is `#!/bin/sh` on 59 of the 64
+  runners -- measured, not assumed.  On Linux that is normally dash,
+  which has no `pipefail`:
+  `set -o pipefail` there writes "Illegal option -o pipefail" and
+  returns non-zero, and under `set -e` that aborts the runner at the
+  line that was supposed to make it safer.  It would work on macOS,
+  where /bin/sh is bash in POSIX mode, and fail on the other half of
+  the world -- the worst possible split for a control.
+
+  WHY NOT `${PIPESTATUS[0]}`.  Bash-only, for the same reason, and it
+  needs a separate `if` after every pipeline anyway -- more source than
+  the redirect form, with a portability cliff attached.
+
+  WHY THIS ONE.  It is POSIX; it is what mg-e1d0 and mg-821e already
+  used in this repository, so the arc now has ONE idiom instead of
+  three; and it writes the transcript with the same bytes `tee` wrote,
+  so no committed out_*.txt changes and no byte-comparison anywhere in
+  the arc is disturbed.  K3 checks that claim rather than asserting it.
+
+  WHAT IT COSTS, stated because it is a real regression: `tee` streams,
+  a redirect does not.  On the two long runners (branching_audit_2060,
+  ~20 min; species_audit_7dd3, ~3 min) the transcript now appears at
+  the end of each step instead of live.  Correctness over progress
+  bars; the alternative that keeps streaming is `pipefail`, and it is
+  not available here.
+
+==============================================================================
+K2f  THE GENERAL FORM, ON THIS INSTRUMENT
+==============================================================================
+
+  This file consumes exit statuses too: `can_fail()` shells out to
+  `git show` through `L.read`, and K2a shells out to `git ls-tree`.
+  Enumerated, with the reason each cannot exhibit the defect:
+
+   1. L.read/L.runners use subprocess.run(..., check=True) with NO
+      shell and NO pipe -- there is no last-command status to inherit.
+      A failing `git show` raises CalledProcessError, which is caught
+      exactly once, at can_fail(), and returns the verdict `None` that
+      K2b prints as `-` rather than silently as `no`.
+   2. The `git ls-tree` in K2a is NOT check=True, deliberately: its
+      output is then USED, so a failure shows up as an empty caller
+      table rather than as a pass.  An empty table would be visible
+      here in a way an unread status would not.
+   3. This script has no pipeline of its own and is invoked by
+      run_all.sh through a redirect and an explicit guard, not a pipe.
+      selftestc2b3.py section H measures that on the runner's bytes.
+
+  AND WHAT IS NOT MECHANICAL, said plainly.  Two rows of K2a's table
+  are HAND-ADDED, because a line-local scan cannot resolve either:
+    * b0_repro.sh:10 runs `./run_all.sh` in a directory whose identity
+      comes from a `cp -R` two lines earlier;
+    * p3_wiring.py:214 runs `run_runner(t)`, where `t` is a loop
+      variable over three tree names.
+  Both were read by hand and both are in the AFFECTED column.  A table
+  that silently dropped them would have reported one caller instead of
+  three and made this ticket look smaller than it is.
+
+  targets whose source could not be read at bee07a1: 0
+
+==============================================================================
+K2 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts (a) tee'd targets whose source could
+not be read at bee07a1, and (b) the 7dd3 guard being absent on disk.
+It does NOT count AFFECTED lines -- 21 of 34 lines are affected and
+that is the finding, not a fault.  It also does not range over runners
+outside this arc: the state_* and pogo/macguffin trees were verified
+clean by the mayor and by K1's census, and nothing here re-opens them.

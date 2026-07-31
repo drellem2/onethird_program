@@ -1,0 +1,162 @@
+==============================================================================
+K1  THE CENSUS, RE-DERIVED -- ticket said 63 / 23 / 1
+==============================================================================
+
+==============================================================================
+K1a  ALL run_all.sh at bee07a1 (the revision the ticket cites)
+==============================================================================
+
+  run_all.sh in the tree                         64
+  ...matching the ticket's bare grep `| *tee`    23
+  ...containing a REAL `| tee` PIPELINE          17
+  ...setting `pipefail`                           0
+  ...setting `set -e`                            58
+
+  THE DISAGREEMENT -- 6 runner(s) the bare grep counts and the
+  parser does not.  Every one is a header comment saying the
+  runner does NOT use `| tee`:
+    code/face_geometry_audit_c4c8/run_all.sh       :34   # NOT `python3 x.py | tee out.txt`, and that is deliberate: 
+    code/face_geometry_audit_d0e2/run_all.sh       :20   # NOT `python3 x.py | tee out.txt`.  A pipeline's exit statu
+    code/face_geometry_audit_e7bc/run_all.sh       :31   # NOT `python3 x.py | tee out.txt`, and that is deliberate: 
+    code/face_geometry_instr_5f9a/run_all.sh       :48   # NOT `python3 x.py | tee out.txt`, and that is deliberate. 
+    code/hodge_leverage_audit_f922/run_all.sh      :42   # NOT `python3 audit_repair.py | tee out_audit.txt`.  A pipe
+    code/species_sites_821e/run_all.sh             :28   # NOT `| tee`: in a pipeline `set -e` sees the exit status o
+
+  pipefail:
+
+  TICKET'S NUMBERS, SCORED AT ITS OWN REVISION
+    run_all.sh in the tree             ticket 63   re-derived 64   DIFFERS
+    containing `| tee` (bare grep)     ticket 23   re-derived 23   AGREES
+    setting pipefail                   ticket  1   re-derived  0   DIFFERS
+    containing a `| tee` PIPELINE      ticket  -    re-derived 17   (the ticket did not
+                                                        separate this)
+
+==============================================================================
+K1a  ALL run_all.sh on disk (this worktree, post-repair)
+==============================================================================
+
+  run_all.sh in the tree                         65
+  ...matching the ticket's bare grep `| *tee`     7
+  ...containing a REAL `| tee` PIPELINE           0
+  ...setting `pipefail`                           0
+  ...setting `set -e`                            59
+
+  THE DISAGREEMENT -- 7 runner(s) the bare grep counts and the
+  parser does not.  Every one is a header comment saying the
+  runner does NOT use `| tee`:
+    code/face_geometry_audit_c4c8/run_all.sh       :34   # NOT `python3 x.py | tee out.txt`, and that is deliberate: 
+    code/face_geometry_audit_d0e2/run_all.sh       :20   # NOT `python3 x.py | tee out.txt`.  A pipeline's exit statu
+    code/face_geometry_audit_e7bc/run_all.sh       :31   # NOT `python3 x.py | tee out.txt`, and that is deliberate: 
+    code/face_geometry_instr_5f9a/run_all.sh       :48   # NOT `python3 x.py | tee out.txt`, and that is deliberate. 
+    code/hodge_leverage_audit_f922/run_all.sh      :42   # NOT `python3 audit_repair.py | tee out_audit.txt`.  A pipe
+    code/runner_exit_c2b3/run_all.sh               :2    # mg-c2b3 -- the arc-wide sweep of `| tee` in run_all.sh, an
+    code/species_sites_821e/run_all.sh             :28   # NOT `| tee`: in a pipeline `set -e` sees the exit status o
+
+  pipefail:
+
+==============================================================================
+K1b  THE 17, LINE BY LINE, AS THE TICKET FOUND THEM (bee07a1)
+==============================================================================
+
+  Every `| tee` pipeline in the arc, with the file it writes and
+  whether an EXPLICIT construct catches the left-hand status.
+
+  runner                                       line  guard? command
+  code/branching_audit_2060/run_all.sh         8     NO     sh ./b0_repro.sh | tee out_b0_repro.txt ; tail -1 out_b0_repro.txt
+                                               9     NO     python3 -u selftest2060.py | tee out_selftest.txt
+  code/branching_locate_db09/run_all.sh        7     NO     python3 -u selftestdb09.py | tee out_selftest.txt
+  code/face_geometry/run_all.sh                14    NO     python3 controls.py 5 | tee controls_output.txt
+                                               18    NO     python3 run_probe.py 6 | tee probe_output_n6.txt
+  code/face_geometry_audit_1c80/run_all.sh     18    NO     python3 a1_gates.py | tee out_gates.txt
+                                               19    NO     python3 a2_antichain.py | tee out_antichain.txt
+                                               20    NO     python3 a3_n6_population.py | tee out_n6.txt
+                                               21    NO     python3 a4_witness.py | tee out_witness.txt
+                                               22    NO     python3 a5_claims.py | tee out_claims.txt
+                                               23    NO     python3 a6_mutations.py | tee out_mutations.txt
+  code/face_geometry_audit_6653/run_all.sh     74    NO     python3 verify_claims.py | tee out_verify_claims.txt
+                                               78    NO     python3 attack_banner.py | tee out_attack_banner.txt
+  code/face_geometry_audit_e720/run_all.sh     33    NO     python3 verify_landing_claims.py | tee out_verify.txt
+                                               37    NO     python3 attack_artifact_check.py | tee out_attack.txt
+  code/face_geometry_landing_7d5a/run_all.sh   39    NO     python3 verify_landing.py | tee out_verify.txt
+                                               43    NO     python3 ../face_geometry_audit_6653/attack_banner.py | tee out_attack_
+  code/face_geometry_landing_da45/run_all.sh   29    NO     python3 verify_landing.py | tee out_verify.txt
+  code/landscape_audit_d673/run_all.sh         11    NO     python3 audit_populations.py 6 | tee out_populations.txt
+                                               12    NO     python3 audit_spectrum.py 40 | tee out_spectrum.txt
+                                               13    NO     python3 audit_e6_e8_m0.py 5 | tee out_e6_e8_m0.txt
+                                               14    NO     python3 audit_identifications.py 5 | tee out_identifications.txt
+                                               15    NO     python3 audit_addenda.py | tee out_addenda.txt
+  code/species_7d75/run_all.sh                 7     NO     python3 selftest.py | tee out_selftest.txt
+  code/species_audit_73df/run_all.sh           14    NO     python3 selftest73df.py | tee out_selftest.txt
+  code/species_audit_7dd3/run_all.sh           13    NO     python3 selftest7dd3.py | tee out_selftest.txt
+  code/species_audit_a61f/run_all.sh           9     NO     python3 selftesta61f.py | tee out_selftest.txt
+  code/species_extent_audit_6cb9/run_all.sh    20    NO     python3 -B selftest6cb9.py | tee out_selftest.txt
+  code/species_extent_d633/run_all.sh          10    NO     python3 selftestd633.py | tee out_selftest.txt
+  code/species_remainder_f8fa/run_all.sh       7     NO     python3 selftestf8fa.py | tee out_selftest.txt
+                                               8     NO     python3 w1_opposite.py | tee out_w1_opposite.txt
+                                               9     NO     python3 w2_typemismatch.py | tee out_w2_typemismatch.txt
+                                               10    NO     python3 w3_scope.py | tee out_w3_scope.txt
+  code/species_repair_a4ef/run_all.sh          9     NO     python3 selftesta4ef.py | tee out_selftest.txt
+
+  17 runners, 34 pipelines.  `guard?` is NO on every one: not a single
+  `| tee` line in this arc was wrapped in `||`, `if` or `$( )`.
+
+==============================================================================
+K1c  THE SIX ALREADY-REPAIRED TREES, AND HOW THEY DID IT
+==============================================================================
+
+  These are the bare grep's false positives.  Naming them is not
+  bookkeeping: they are the PRECEDENT, and item 4 of this ticket asks
+  which mechanism was used and why.
+
+    code/face_geometry_audit_c4c8/run_all.sh       (no pipeline at all)
+    code/face_geometry_audit_d0e2/run_all.sh       (no pipeline at all)
+    code/face_geometry_audit_e7bc/run_all.sh       (no pipeline at all)
+    code/face_geometry_instr_5f9a/run_all.sh       (no pipeline at all)
+    code/hodge_leverage_audit_f922/run_all.sh      (no pipeline at all)
+    code/species_sites_821e/run_all.sh             redirect + explicit `||` guard
+
+  Plus one more that the bare grep does NOT reach, because its repair
+  removed the word `tee` from the runner entirely:
+    code/hodge_leverage_landing_e1d0/run_all.sh    redirect + `|| status=$?`
+      its own header: # ⚠️ AND THE RUNNER REPORTS THE VERIFIER'S STATUS.  It used to pipe into `tee`,
+
+  So the defect was FOUND AND FIXED TWICE, one runner at a time, by
+  mg-f922/e1d0 and by mg-821e, before this sweep.  Neither generalised
+  it; both said so.  That is why the arc-wide count was still 17.
+
+==============================================================================
+K1d  THE SAME CENSUS ON DISK -- what this repair left behind
+==============================================================================
+
+  runners containing a `| tee` PIPELINE, on disk:  0
+    (none)
+
+  runners still matching the BARE GREP on disk:     7
+  -- these are comments, and they are supposed to be there.  A sweep
+  that also deleted the comments explaining the sweep would leave the
+  next reader with the same bare grep and no answer.
+
+==============================================================================
+K1e  THIS TREE, BY ITS OWN RULES
+==============================================================================
+
+  `| tee` pipelines                              none
+  `set -e`                                       True
+  commands launched without an explicit guard    none
+
+  THE BRANCH THAT CANNOT EXHIBIT THE DEFECT, AND WHY.  This runner
+  contains no pipeline anywhere -- not one `|` outside a comment on a
+  command line.  A pipeline is the only construct in POSIX sh whose
+  exit status belongs to a command other than the one being scored, so
+  with none present there is nothing for a verdict to hide behind.
+  That reason is checkable by reading the file; `set -e is set` would
+  not have been, since `set -e` is exactly what the 17 also had.
+
+==============================================================================
+K1 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts (a) runners on disk that still
+contain a `| tee` pipeline and (b) this tree's own runner failing its
+own rule.  It does NOT count runners whose status is discarded by some
+OTHER construct -- k2 asks that question, and answers it for all 65.
