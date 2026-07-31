@@ -1,0 +1,164 @@
+==============================================================================
+K4  POSITIVE CONTROL -- the runner's own exit code, both directions
+==============================================================================
+
+==============================================================================
+K4a  THE TWO-BY-TWO, PER PIPELINE
+==============================================================================
+
+  For each `| tee` site: the target stub is made to exit 1 and the
+  RUNNER's exit code is read, on the pre-repair text and on the
+  post-repair text.  `reach` is the number of stubs that printed.
+
+  runner / target                            baseline  PRE-REPAIR fail  POST-REPAIR fail 
+  branching_audit_2060 / b0_repro.sh         exit 0/9  exit 0/9 SWALLOWED exit 1/1 stops here ok
+  branching_audit_2060 / selftest2060.py     exit 0/9  exit 0/9 SWALLOWED exit 1/2 stops here ok
+  branching_locate_db09 / selftestdb09.py    exit 0/5  exit 0/5 SWALLOWED exit 1/1 stops here ok
+  face_geometry / controls.py                exit 0/2  exit 0/2 SWALLOWED exit 1/1 stops here ok
+  face_geometry / run_probe.py               exit 0/2  exit 0/2 SWALLOWED exit 1/2 stops here ok
+  face_geometry_audit_1c80 / a1_gates.py     exit 0/6  exit 0/6 SWALLOWED exit 1/1 stops here ok
+  face_geometry_audit_1c80 / a2_antichain.py exit 0/6  exit 0/6 SWALLOWED exit 1/2 stops here ok
+  face_geometry_audit_1c80 / a3_n6_population.py exit 0/6  exit 0/6 SWALLOWED exit 1/3 stops here ok
+  face_geometry_audit_1c80 / a4_witness.py   exit 0/6  exit 0/6 SWALLOWED exit 1/4 stops here ok
+  face_geometry_audit_1c80 / a5_claims.py    exit 0/6  exit 0/6 SWALLOWED exit 1/5 stops here ok
+  face_geometry_audit_1c80 / a6_mutations.py exit 0/6  exit 0/6 SWALLOWED exit 1/6 stops here ok
+  face_geometry_audit_6653 / verify_claims.py exit 0/2  exit 0/2 SWALLOWED exit 1/1 stops here ok
+  face_geometry_audit_6653 / attack_banner.py exit 0/2  exit 0/2 SWALLOWED exit 1/2 stops here ok
+  face_geometry_audit_e720 / verify_landing_claims.py exit 0/2  exit 0/2 SWALLOWED exit 1/1 stops here ok
+  face_geometry_audit_e720 / attack_artifact_check.py exit 0/2  exit 0/2 SWALLOWED exit 1/2 stops here ok
+  face_geometry_landing_7d5a / verify_landing.py exit 0/2  exit 0/2 SWALLOWED exit 1/1 stops here ok
+  face_geometry_landing_7d5a / attack_banner.py exit 0/2  exit 0/2 SWALLOWED exit 1/2 stops here ok
+  face_geometry_landing_da45 / verify_landing.py exit 0/1  exit 0/1 SWALLOWED exit 1/1 stops here ok
+  landscape_audit_d673 / audit_populations.py exit 0/5  exit 0/5 SWALLOWED exit 1/1 stops here ok
+  landscape_audit_d673 / audit_spectrum.py   exit 0/5  exit 0/5 SWALLOWED exit 1/2 stops here ok
+  landscape_audit_d673 / audit_e6_e8_m0.py   exit 0/5  exit 0/5 SWALLOWED exit 1/3 stops here ok
+  landscape_audit_d673 / audit_identifications.py exit 0/5  exit 0/5 SWALLOWED exit 1/4 stops here ok
+  landscape_audit_d673 / audit_addenda.py    exit 0/5  exit 0/5 SWALLOWED exit 1/5 stops here ok
+  species_7d75 / selftest.py                 exit 1/7  exit 1/7 SWALLOWED exit 1/1 stops here ok
+  species_audit_73df / selftest73df.py       exit 1/6  exit 1/6 SWALLOWED exit 1/1 stops here ok
+  species_audit_7dd3 / selftest7dd3.py       exit 0/7  exit 0/7 SWALLOWED exit 1/1 stops here ok
+  species_audit_a61f / selftesta61f.py       exit 1/7  exit 1/7 SWALLOWED exit 1/1 stops here ok
+  species_extent_audit_6cb9 / selftest6cb9.py exit 0/4  exit 0/4 SWALLOWED exit 1/1 stops here ok
+  species_extent_d633 / selftestd633.py      exit 0/4  exit 0/4 SWALLOWED exit 1/1 stops here ok
+  species_remainder_f8fa / selftestf8fa.py   exit 1/5  exit 1/5 SWALLOWED exit 1/1 stops here ok
+  species_remainder_f8fa / w1_opposite.py    exit 1/5  exit 1/5 SWALLOWED exit 1/2 stops here ok
+  species_remainder_f8fa / w2_typemismatch.py exit 1/5  exit 1/5 SWALLOWED exit 1/3 stops here ok
+  species_remainder_f8fa / w3_scope.py       exit 1/5  exit 1/5 SWALLOWED exit 1/4 stops here ok
+  species_repair_a4ef / selftesta4ef.py      exit 1/4  exit 1/4 SWALLOWED exit 1/1 stops here ok
+
+  columns read `exit <code>/<stubs that printed>`.
+
+  34 of 34 sites show the DEFECT on the pre-repair text: the runner
+  ran to the end with a step exiting 1.
+  34 of 34 sites show the FIX on the post-repair text: the runner
+  exits non-zero AND stops before the steps that follow.
+
+==============================================================================
+K4b  THE PRE-REPAIR EXIT CODES, LOOKED AT DIRECTLY
+==============================================================================
+
+  `SWALLOWED` above is scored on REACH, not on the exit code, and this
+  section says why in numbers.  On the pre-repair text a failing step
+  does not stop the run, so the runner's status is whatever its LAST
+  command happened to return -- usually 0, but some of these runners
+  end in a `grep` that finds nothing in a stubbed transcript and
+  returns 1 for a reason that has nothing to do with the failure.
+  Scoring the defect on the exit code alone would have counted those
+  as working.
+
+  pre-repair, step exits 1:
+    runner exited 0        26 of 34   <- the defect, unambiguously
+    runner exited non-zero  8 of 34   <- for an unrelated downstream
+                                       reason; REACH shows the run did
+                                       not stop at the failure
+      species_7d75 / selftest.py               exit 1, reach 7 of 7
+      species_audit_73df / selftest73df.py     exit 1, reach 6 of 6
+      species_audit_a61f / selftesta61f.py     exit 1, reach 7 of 7
+      species_remainder_f8fa / selftestf8fa.py exit 1, reach 5 of 5
+      species_remainder_f8fa / w1_opposite.py  exit 1, reach 5 of 5
+      species_remainder_f8fa / w2_typemismatch.py exit 1, reach 5 of 5
+      species_remainder_f8fa / w3_scope.py     exit 1, reach 5 of 5
+      species_repair_a4ef / selftesta4ef.py    exit 1, reach 4 of 4
+
+==============================================================================
+K4c  THE STUBS ARE NOT DOING THE WORK -- a control on the control
+==============================================================================
+
+  A stub harness can pass for a reason that has nothing to do with the
+  runner: if the stubs never ran at all, `reach` would be empty
+  everywhere, `q_reach[-1]` would not exist and every row would score
+  BAD -- which is the safe direction, but a baseline that silently
+  reached nothing would make every row unscoreable while still
+  printing a full table.  So:
+
+    sites whose BASELINE reached zero stubs: 0
+    sites whose baseline exited non-zero:    8
+      (allowed, and named: several runners end with a `grep` over
+       out_*.txt that stubs do not populate.  The scoring does not use
+       the baseline's exit code for anything -- only its reach.)
+
+  And the second direction, which is the one a stub harness usually
+  gets wrong: with NO stub failing, does the post-repair runner still
+  reach the end?  If the repair had broken a runner outright, every
+  `fixed` row would still be green while the runner was useless.
+
+    branching_audit_2060                       pre reach  9, post reach  9  identical
+    branching_locate_db09                      pre reach  5, post reach  5  identical
+    face_geometry                              pre reach  2, post reach  2  identical
+    face_geometry_audit_1c80                   pre reach  6, post reach  6  identical
+    face_geometry_audit_6653                   pre reach  2, post reach  2  identical
+    face_geometry_audit_e720                   pre reach  2, post reach  2  identical
+    face_geometry_landing_7d5a                 pre reach  2, post reach  2  identical
+    face_geometry_landing_da45                 pre reach  1, post reach  1  identical
+    landscape_audit_d673                       pre reach  5, post reach  5  identical
+    species_7d75                               pre reach  7, post reach  7  identical
+    species_audit_73df                         pre reach  6, post reach  6  identical
+    species_audit_7dd3                         pre reach  7, post reach  7  identical
+    species_audit_a61f                         pre reach  7, post reach  7  identical
+    species_extent_audit_6cb9                  pre reach  4, post reach  4  identical
+    species_extent_d633                        pre reach  4, post reach  4  identical
+    species_remainder_f8fa                     pre reach  5, post reach  5  identical
+    species_repair_a4ef                        pre reach  4, post reach  4  identical
+
+  Identical reach with nothing failing means the repair changed the
+  runner's behaviour in exactly one circumstance: when a step fails.
+
+==============================================================================
+K4d  THE GENERAL FORM, ON THIS SECTION
+==============================================================================
+
+  K4 is a script that runs scripts and reads their exit codes, so it
+  is the most exposed part of this instrument.  Enumerated:
+
+   1. `run()` uses subprocess.run with a LIST argv, no `shell=True`,
+      no pipe.  `returncode` is the runner's own status.  This is the
+      branch that cannot exhibit the defect and the reason is that
+      there is no pipeline for a status to be taken from.
+   2. Every verdict here is a CONJUNCTION of the exit code and the
+      reach.  That is not belt-and-braces: the defect under repair is
+      precisely the separation of `printed a failure` from `exited
+      non-zero`, so an instrument that scored only one of them would
+      be reproducing the defect while testing for it.
+   3. The pre-repair arm is run from `git show bee07a1:...`, a pinned
+      revision, not from HEAD.  Against HEAD both arms would be the
+      repaired text and every row would pass trivially -- mg-821e's
+      finding (41ac5d4), applied to this file.
+   4. K4c is the control on the control: it checks the baseline
+      actually reached the stubs and that the repair did not change
+      what runs when nothing fails.  Without it, `fixed` could be true
+      because the runner was broken rather than because it was fixed.
+   5. What K4 does NOT establish, stated: that the batteries pass.
+      The stubs replace them.  K3b is where the real targets run.
+
+==============================================================================
+K4 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It ranges over the 34 `| tee` pipelines of the
+17 affected runners -- three runs per site plus two per runner, 136
+runner executions in all -- plus the 17 pre/post reach comparisons
+in K4c.  It counts a site bad when the defect is
+NOT reproducible on the pre-repair text, when the fix does NOT stop the
+run, when a baseline reached no stubs, or when the repair changed what
+runs in the no-failure case.  It does NOT range over the batteries
+themselves -- those are stubbed here on purpose and run for real in K3b.

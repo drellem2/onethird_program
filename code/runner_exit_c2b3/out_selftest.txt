@@ -1,0 +1,87 @@
+==============================================================================
+selftestc2b3 -- the classifier in both senses
+==============================================================================
+
+A.  strip_comment -- a `#` opens a comment only at a word start,
+    outside quotes.  Both sides of each clause.
+
+  ok   bare trailing comment is removed
+  ok   a `#` mid-word is NOT a comment
+  ok   a `#` inside double quotes is NOT a comment
+  ok   a `#` inside single quotes is NOT a comment
+  ok   a whole-line comment becomes empty
+
+B.  strip_quoted blanks quoted CONTENT and keeps the length, so a
+    pipeline named inside a string is not a pipeline.
+
+  ok   quoted content is blanked
+  ok   unquoted content survives
+  ok   length is preserved (column numbers still line up)
+
+C.  tee_pipelines -- the census rule itself.  The BAD sense of this
+    rule is the ticket's own: its bare grep counted six comments.
+
+  ok   a real pipeline is found
+  ok   a comment ABOUT a pipeline is not
+  ok   a trailing comment about a pipeline is not
+  ok   a quoted pipeline is not
+  ok   `| teeny` is not `| tee` (word boundary)
+  ok   a BACKSLASH CONTINUATION is joined before the scan
+  ok   ...and reported at the line the command STARTS on
+
+D.  grep_tee is the ticket's bare pattern, kept deliberately.  It must
+    DISAGREE with tee_pipelines on a comment -- that disagreement is
+    the finding k1 reports, so a self-test that did not check it would
+    let the two silently converge.
+
+  ok   bare grep matches the comment
+  ok   the parser does not
+  ok   they agree on a real pipeline
+
+E.  set -e / pipefail detection, both senses.
+
+  ok   `set -e` is found
+  ok   `set -eu` is found
+  ok   a COMMENTED `set -e` is not
+  ok   prose mentioning set -e is not
+  ok   `set -o pipefail` is found
+  ok   a bare `set -e` is not pipefail
+
+F.  guarded() -- does an explicit construct catch the status?
+
+  ok   `|| { exit 1; }` guards
+  ok   `X=$(cmd) || {...}` guards
+  ok   `if cmd; then` guards
+  ok   a bare redirect does NOT guard
+  ok   a bare pipeline does NOT guard
+
+G.  invocations() -- what a line launches, for k4's stubbing.
+
+  ok   plain python3
+  ok   flags are skipped
+  ok   `sh ./x.sh` is seen
+  ok   a relative sibling path survives
+  ok   an argument is not mistaken for the script
+
+H.  THE GENERAL FORM, ON THIS TREE.  This deliverable is a script that
+    reports on scripts, so it can discard its own verdict exactly as
+    its subjects did.  Its own runner is classified by its own rules.
+
+  ok   this tree's run_all.sh has no `| tee` pipeline
+  ok   ...and `set -e` is set, so an unguarded failure aborts it
+  ok   every command it launches is inside an explicit guard
+    (the branch that cannot exhibit the defect, with its reason: this
+     runner contains NO pipeline at all, so there is no last-command
+     status for a first-command status to hide behind.  That is a
+     stronger statement than `set -e is set`, and it is the one the
+     row above measures.)
+
+==============================================================================
+selftestc2b3 TOTAL BAD: 0   (of 37 rows)
+==============================================================================
+
+EXTENT.  These 37 rows range over libc2b3's five public rules
+(strip_comment, strip_quoted, tee_pipelines, has_set_e/has_pipefail,
+guarded, invocations) and over THIS TREE'S OWN run_all.sh.  They do
+NOT range over the 64 runners in the repository -- that is k1's job,
+and k1's numbers are only as good as these rows.

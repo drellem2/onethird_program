@@ -4,7 +4,19 @@
 set -e
 D=$(dirname "$0")
 cd "$D"
-python3 -u selftestdb09.py | tee out_selftest.txt
+# mg-c2b3: every step in this file that is followed by a bare `cat` of its
+# own transcript used to pipe into `tee` instead of redirecting.  A pipeline's
+# exit status in POSIX sh is its LAST command's, which is tee's and is 0 --
+# so the step could print failures, exit 1, and leave this runner exiting 0.
+# Each now redirects and has its status read by an explicit `||` guard.  The
+# other steps in this file were already guarded and are untouched.
+# `set -o pipefail` is not used: `/bin/sh` is dash on Linux, which rejects the
+# option and would abort the runner at the line meant to make it safer.
+# This note deliberately avoids writing the old pipeline out, so that a plain
+# grep for it over the arc still counts only the sites that still have one.
+python3 -u selftestdb09.py > out_selftest.txt || {
+    cat out_selftest.txt; echo "selftestdb09.py FAILED"; exit 1; }
+cat out_selftest.txt
 python3 -u t1_tl.py        > out_t1_tl.txt     ; tail -1 out_t1_tl.txt
 python3 -u t2_gz.py        > out_t2_gz.txt     ; tail -1 out_t2_gz.txt
 python3 -u t3_ours.py      > out_t3_ours.txt   ; tail -1 out_t3_ours.txt

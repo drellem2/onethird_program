@@ -4,10 +4,28 @@
 set -e
 cd "$(dirname "$0")"
 
-python3 selftestf8fa.py    | tee out_selftest.txt
-python3 w1_opposite.py     | tee out_w1_opposite.txt
-python3 w2_typemismatch.py | tee out_w2_typemismatch.txt
-python3 w3_scope.py        | tee out_w3_scope.txt
+# mg-c2b3: every step in this file that is followed by a bare `cat` of its
+# own transcript used to pipe into `tee` instead of redirecting.  A pipeline's
+# exit status in POSIX sh is its LAST command's, which is tee's and is 0 --
+# so the step could print failures, exit 1, and leave this runner exiting 0.
+# Each now redirects and has its status read by an explicit `||` guard.  The
+# other steps in this file were already guarded and are untouched.
+# `set -o pipefail` is not used: `/bin/sh` is dash on Linux, which rejects the
+# option and would abort the runner at the line meant to make it safer.
+# This note deliberately avoids writing the old pipeline out, so that a plain
+# grep for it over the arc still counts only the sites that still have one.
+python3 selftestf8fa.py > out_selftest.txt || {
+    cat out_selftest.txt; echo "selftestf8fa.py FAILED"; exit 1; }
+cat out_selftest.txt
+python3 w1_opposite.py > out_w1_opposite.txt || {
+    cat out_w1_opposite.txt; echo "w1_opposite.py FAILED"; exit 1; }
+cat out_w1_opposite.txt
+python3 w2_typemismatch.py > out_w2_typemismatch.txt || {
+    cat out_w2_typemismatch.txt; echo "w2_typemismatch.py FAILED"; exit 1; }
+cat out_w2_typemismatch.txt
+python3 w3_scope.py > out_w3_scope.txt || {
+    cat out_w3_scope.txt; echo "w3_scope.py FAILED"; exit 1; }
+cat out_w3_scope.txt
 
 # mg-821e, on mg-6cb9's F2.  THE CROSS-SECTION CHECK, WIRED.
 # `e2_crosssection.py` is what closes mg-7dd3's B1: a claim struck in one

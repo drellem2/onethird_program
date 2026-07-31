@@ -103,8 +103,10 @@ ROW_NAMES = []      # every row's printed name, for the artifact check in main()
 class ArtifactTee:
     """Records every line this run writes to stdout, verbatim, while writing it.
 
-    `run_all.sh` builds `controls_output.txt` as `python3 controls.py 5 | tee
-    controls_output.txt`, so what this object records IS the artifact.  It is
+    `run_all.sh` builds `controls_output.txt` as `python3 controls.py 5 >
+    controls_output.txt` -- it piped into `tee` until mg-c2b3, and the bytes it
+    writes are the same either way; only the exit status differs.  So what this
+    object records IS the artifact.  It is
     installed as `sys.stdout` in `main()` so that the artifact check reads what
     a grep of the file would read, whatever route printed it -- a row name, a
     `detail=` string, a section heading, or a bare `print()` added tomorrow.

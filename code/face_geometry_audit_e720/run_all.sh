@@ -30,8 +30,22 @@ set -e
 cd "$(dirname "$0")"
 
 echo "== mg-e720: mg-7d5a's claims about git, the tree and its own diff =="
-python3 verify_landing_claims.py | tee out_verify.txt
+# mg-c2b3: every step in this file that is followed by a bare `cat` of its
+# own transcript used to pipe into `tee` instead of redirecting.  A pipeline's
+# exit status in POSIX sh is its LAST command's, which is tee's and is 0 --
+# so the step could print failures, exit 1, and leave this runner exiting 0.
+# Each now redirects and has its status read by an explicit `||` guard.  The
+# other steps in this file were already guarded and are untouched.
+# `set -o pipefail` is not used: `/bin/sh` is dash on Linux, which rejects the
+# option and would abort the runner at the line meant to make it safer.
+# This note deliberately avoids writing the old pipeline out, so that a plain
+# grep for it over the arc still counts only the sites that still have one.
+python3 verify_landing_claims.py > out_verify.txt || {
+    cat out_verify.txt; echo "verify_landing_claims.py FAILED"; exit 1; }
+cat out_verify.txt
 
 echo
 echo "== mg-e720: eight attack routes on the repaired artifact_banner_check =="
-python3 attack_artifact_check.py | tee out_attack.txt
+python3 attack_artifact_check.py > out_attack.txt || {
+    cat out_attack.txt; echo "attack_artifact_check.py FAILED"; exit 1; }
+cat out_attack.txt

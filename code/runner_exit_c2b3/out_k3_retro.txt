@@ -1,0 +1,318 @@
+==============================================================================
+K3  THE RETROACTIVE QUESTION -- past claims, and what settles each
+==============================================================================
+
+==============================================================================
+K3a  THE CLAIMS, ENUMERATED AND DISPOSITIONED
+==============================================================================
+
+  id   route  disposition
+  C1   R3     AT RISK -- SETTLED BY K3b
+  C2   R3     SAFE BY MECHANISM -- and measured in K3c
+  C3   R3     AT RISK -- SETTLED BY K3b
+  C4   R1     SAFE -- BY THE BYTE-COMPARISON, EXPLICITLY
+  C5   R2     SAFE -- the verdict is the committed transcript
+  C6   R1     SAFE -- the verdict is `git status`, not the exit code
+  C7   R2     SAFE -- a reproduction claim about output
+  C8   R3     SAFE, AND IT IS THE PRECEDENT, NOT AN EXPOSURE
+  C9   R2     SAFE -- and the claim is TRUE, checked
+
+  C1  [R3]  AT RISK -- SETTLED BY K3b
+      site:  code/species_sites_821e/p3_wiring.py:219  (P3b)
+      claim: `ok = (code == 0 and present and code_u == 0 and gone)` --
+      three species runners are asserted to exit 0 both wired and
+      unwired
+      settled by: Two of the three trees (species_repair_a4ef,
+      species_remainder_f8fa) were affected: their self-tests were piped
+      into tee, so `code == 0` was true whether or not the self-test
+      passed. The SUBSTANTIVE half of the row -- `present` and `gone`,
+      the check's own output appearing and disappearing in stdout -- is
+      R2 and stands untouched. Only the two `code == 0` conjuncts were
+      unsupported. K3b runs both self-tests directly and reads the
+      status the pipeline discarded.
+
+  C2  [R3]  SAFE BY MECHANISM -- and measured in K3c
+      site:  code/species_sites_821e/p3_wiring.py:255  (P3c, `caught`)
+      claim: `caught = (code_w != 0 and 'STANDING UN-STRUCK' in out_w)`
+      -- with B1 restored on disk, each runner is asserted to exit
+      NON-ZERO
+      settled by: This is the one place in the arc where a runner's
+      non-zero exit is the evidence, so a swallowed status would have
+      made it FAIL, not pass. It passed. The non-zero came from the
+      cross-section block at `run_all.sh:25-29`, which is
+      `E2OUT=$(python3 ...) || { ...; exit 1; }` -- a command
+      substitution and an explicit guard, containing NO pipeline. The
+      tee'd self-test sits ABOVE that block and could not have produced
+      the exit. K3c reinstates B1 and re-measures, so this is not left
+      as an argument from reading.
+
+  C3  [R3]  AT RISK -- SETTLED BY K3b
+      site:  code/species_sites_821e/p3_wiring.py:256  (P3c, `missed`)
+      claim: `missed = (code_u == 0)` -- with the wiring removed, the
+      runner is asserted to go green, reproducing the pre-repair state
+      settled by: `code_u == 0` is the historical failure being
+      reproduced, and an affected runner exits 0 for two different
+      reasons: nothing was detected, or something was detected and the
+      pipeline ate it. The row cannot tell them apart. Settled the same
+      way as C1: the self-tests are run directly and their true status
+      read.
+
+  C4  [R1]  SAFE -- BY THE BYTE-COMPARISON, EXPLICITLY
+      site:  code/branching_audit_2060/b0_repro.sh:10-23
+      claim: mg-db09's instrument is re-run in a scratch copy and its
+      five committed outputs are diffed byte for byte; `TOTAL BAD: 0` is
+      the verdict
+      settled by: The runner's exit status IS consumed here (`set -e`
+      over `( cd $T && ./run_all.sh )`), so this is a real consumer. But
+      the VERDICT is the five `diff -q` calls on lines 17-22, and those
+      read files, not statuses. `tee` and `>` write the same bytes, so
+      the comparison is unaffected in both directions: a swallowed
+      failure would still have produced a differing transcript and been
+      caught. This is exactly the class the ticket says to mark safe
+      rather than leave ambiguous.
+
+  C5  [R2]  SAFE -- the verdict is the committed transcript
+      site:  docs/OneThird-Species-Hopf-Monoids-ExtentRepair-IndependentAudit.md:254
+      claim: *'`sh code/species_extent_d633/run_all.sh` re-run
+      unmodified at e8fbd4f, before this audit's probes'*
+      settled by: The claim is about what the re-run PRINTED, and the
+      printed output is committed beside it in out_*.txt. No exit status
+      is quoted.
+
+  C6  [R1]  SAFE -- the verdict is `git status`, not the exit code
+      site:  docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md:314
+      claim: *'bash code/face_geometry/run_all.sh (x2) -> git status
+      --porcelain: empty'*
+      settled by: An idempotence claim measured with `git status
+      --porcelain`. Both outputs are committed and both regenerate; the
+      runner's status is not part of the assertion.
+
+  C7  [R2]  SAFE -- a reproduction claim about output
+      site:  docs/OneThird-Landscape-Where-This-Lives.md:363
+      claim: *'The audit that found the defects reproduces from
+      code/landscape_audit_d673/run_all.sh (~1.5 min)'*
+      settled by: `reproduces` names the five committed out_*.txt, which
+      are diffable by any reader. d673's runner has five affected
+      pipelines and its exit code was never quoted.
+
+  C8  [R3]  SAFE, AND IT IS THE PRECEDENT, NOT AN EXPOSURE
+      site:  code/hodge_leverage_audit_f922/audit_repair.py:500-509
+      claim: mg-f922 RECORDED the defect: *'the runner pipes the
+      instrument into tee, so the pipeline's status is tee's'*, and
+      measured *'verifier exits 1, its runner exits 0'*
+      settled by: This is the arc's own prior sighting, on
+      code/hodge_leverage_landing_e1d0/run_all.sh. That runner was
+      subsequently repaired (`> out_verify.txt || status=$?`), so f922's
+      `record(...)` on line 500 now evaluates FALSE against the tree --
+      a frozen audit whose finding was fixed. Nothing in this sweep
+      touches e1d0 or f922; the row is here because item 3 asks which
+      past claims the defect touched, and this one is the answer to `who
+      knew`.
+
+  C9  [R2]  SAFE -- and the claim is TRUE, checked
+      site:  docs/landing-mg-1c80-instrumented-predicate.md:175
+      claim: *'run_all.sh here does not use `| tee`'*
+      settled by: `here` is code/face_geometry_instr_5f9a/, which is one
+      of the six comment-only matches in the ticket's bare grep and has
+      no pipeline. Worth checking rather than assuming: the SAME ticket
+      id owns code/face_geometry_audit_1c80/run_all.sh, which had SIX
+      pipelines. The two trees are different and the claim names the
+      right one.
+
+  9 claims: 7 SAFE (marked so, with the reason), 2 AT RISK.
+
+  THE SHAPE OF THE ANSWER, which is the honest headline: the arc reads
+  its results from committed transcripts and byte-comparisons almost
+  everywhere, and reads them from an exit status in exactly ONE file --
+  code/species_sites_821e/p3_wiring.py.  That is why the exposure is
+  three claims and not thirty.  It is also why the defect survived so
+  long: nothing depended on the status, so nothing noticed it was gone
+  until mg-821e wrote the one instrument that did depend on it.
+
+==============================================================================
+K3b  SETTLING C1 AND C3 -- the status the pipelines threw away
+==============================================================================
+
+  Every tee'd target, run DIRECTLY with nothing in the way, and its
+  exit status read.  This is the number `tee` replaced with its own.
+  A 0 here means the past green was green for the right reason.
+
+  The worktree is snapshotted before and after: several of these
+  mutate the tree and restore it, and a restore that did not happen
+  would otherwise be invisible.
+
+  tree                                   target                   exit    secs  verdict
+  branching_audit_2060                   b0_repro.sh                 0    62.7  nothing was being swallowed
+  branching_audit_2060                   selftest2060.py             0     3.1  nothing was being swallowed
+  branching_locate_db09                  selftestdb09.py             0     8.1  nothing was being swallowed
+  face_geometry                          controls.py                 0     2.1  nothing was being swallowed
+  face_geometry                          run_probe.py                0    17.7  nothing was being swallowed
+  face_geometry_audit_1c80               a1_gates.py                 0     0.5  nothing was being swallowed
+  face_geometry_audit_1c80               a2_antichain.py             0     1.1  nothing was being swallowed
+  face_geometry_audit_1c80               a3_n6_population.py         0     6.5  nothing was being swallowed
+  face_geometry_audit_1c80               a4_witness.py               0     0.2  nothing was being swallowed
+  face_geometry_audit_1c80               a5_claims.py                0     2.5  nothing was being swallowed
+  face_geometry_audit_1c80               a6_mutations.py             0     6.4  nothing was being swallowed
+  face_geometry_audit_6653               verify_claims.py            0     1.3  nothing was being swallowed
+  face_geometry_audit_6653               attack_banner.py            0    10.5  nothing was being swallowed
+  face_geometry_audit_e720               verify_landing_claims.py      0     3.9  nothing was being swallowed
+  face_geometry_audit_e720               attack_artifact_check.py      0     1.2  nothing was being swallowed
+  face_geometry_landing_7d5a             verify_landing.py           0     0.6  nothing was being swallowed
+  face_geometry_landing_7d5a             attack_banner.py            0    10.5  nothing was being swallowed
+  face_geometry_landing_da45             verify_landing.py           0     8.1  nothing was being swallowed
+  landscape_audit_d673                   audit_populations.py        0    45.6  nothing was being swallowed
+  landscape_audit_d673                   audit_spectrum.py           0    25.5  nothing was being swallowed
+  landscape_audit_d673                   audit_e6_e8_m0.py           0     4.0  nothing was being swallowed
+  landscape_audit_d673                   audit_identifications.py      0     9.7  nothing was being swallowed
+  landscape_audit_d673                   audit_addenda.py            0     0.1  nothing was being swallowed
+  species_7d75                           selftest.py                 0     1.8  nothing was being swallowed
+  species_audit_73df                     selftest73df.py             0     0.9  nothing was being swallowed
+  species_audit_7dd3                     selftest7dd3.py             0     0.0  nothing was being swallowed
+  species_audit_a61f                     selftesta61f.py             0     5.5  nothing was being swallowed
+  species_extent_audit_6cb9              selftest6cb9.py             0    15.3  nothing was being swallowed
+  species_extent_d633                    selftestd633.py             0     0.2  nothing was being swallowed
+  species_remainder_f8fa                 selftestf8fa.py             0     3.1  nothing was being swallowed
+  species_remainder_f8fa                 w1_opposite.py              0     0.4  nothing was being swallowed
+  species_remainder_f8fa                 w2_typemismatch.py          0     0.1  nothing was being swallowed
+  species_remainder_f8fa                 w3_scope.py                 0     0.0  nothing was being swallowed
+  species_repair_a4ef                    selftesta4ef.py             0     0.0  nothing was being swallowed
+
+  worktree unchanged by K3b (git status --porcelain identical)
+
+  Every tee'd target exits 0 on the tree as it stands.  C1 and C3
+  are therefore SETTLED AT HEAD: the runners' past `code == 0` was
+  reporting a real zero, not a hidden one.  What this does not
+  establish is the same fact at every intermediate commit, and no
+  claim to that effect is made.
+
+==============================================================================
+K3c  SETTLING C2 -- the one claim that needed a NON-ZERO exit
+==============================================================================
+
+  C2 asserts a runner exits non-zero when B1 is restored.  A swallowed
+  status would have broken it, so it is the one row the defect could
+  not have flattered.  What has to be true for C2's non-zero to be the
+  REAL one is narrower than `the block contains no pipeline`, and the
+  first draft of this section checked the wider thing and scored 4 of 4
+  BAD against a block that is in fact sound.  The block DOES contain
+  pipelines.  They are inside the failure HANDLER:
+
+      E2OUT=$(python3 ../species_extent_d633/e2_crosssection.py) || {
+          echo "$E2OUT" | grep 'STANDING UN-STRUCK' || true
+          echo "E2 CROSS-SECTION FAILED -- ..."
+          exit 1
+      }
+
+  The three things that actually have to hold, each measured:
+    A  the line whose status is read is an ASSIGNMENT FROM A COMMAND
+       SUBSTITUTION with no pipeline -- so the status is the checker's.
+    B  the handler ends in an UNCONDITIONAL `exit 1`, so nothing inside
+       it can turn a failure back into a success.
+    C  every pipeline inside the handler is `|| true`, so it cannot
+       abort the handler before that `exit 1` is reached.
+
+  tree                     revision  line  A      B      C      
+  species_repair_a4ef      at bee07a1 25    True   True   True(1) ok
+  species_repair_a4ef      on disk   37    True   True   True(1) ok
+  species_remainder_f8fa   at bee07a1 24    True   True   True(1) ok
+  species_remainder_f8fa   on disk   42    True   True   True(1) ok
+
+  A, B and C hold at both revisions.  C2's non-zero was always the
+  checker's own, not tee's.  SAFE.
+
+  ONE MORE THING C2 COULD HAVE COME FROM, and it is worth naming
+  because it is a pipeline `set -e` really does consume.  Two lines
+  below that block both runners have
+
+      echo "$E2OUT" | grep -E 'strike\(s\) measured|^E2 TOTAL BAD:'
+
+  If that grep matched nothing the runner would exit 1 for a reason
+  unrelated to the cross-section verdict.  It is NOT repaired here:
+  the left-hand side is `echo`, which cannot fail, so the pipeline's
+  last-command status IS the only status that exists on that line.
+  That is a branch which cannot exhibit the defect, and the reason is
+  that there is no first-command status being hidden.  C2 is not
+  weakened by it either way, because `caught` also requires
+  'STANDING UN-STRUCK' to appear in the runner's stdout.
+
+==============================================================================
+K3d  THE BYTES DID NOT MOVE -- the R1 claims stay settled
+==============================================================================
+
+  Every claim in the R1 class rests on a committed transcript being
+  byte-reproducible.  This repair rewrites the RUNNERS, so the check
+  it owes is that no committed out_*.txt changed.  `tee out.txt` and
+  `> out.txt` write the same stream, so the prediction is zero; it is
+  measured rather than asserted.
+
+  files changed since bee07a1:            18
+  ...that are committed transcripts:  0
+
+==============================================================================
+K3f  THE SAME BYTES, THROUGH THE REPAIRED RUNNER -- measured, not argued
+==============================================================================
+
+  K3d shows no committed transcript was edited.  It does not show that
+  a REPAIRED RUNNER still produces the committed bytes, and that is the
+  claim the whole R1 class rests on.  So one repaired runner is
+  actually executed and its transcripts compared:
+
+    code/face_geometry/run_all.sh -- chosen because claim C6 is exactly
+    an idempotence claim about this runner, so re-verifying it here
+    re-verifies a row of K3a rather than inventing a new check.
+
+    runner exit code:                 0
+    transcripts that moved:           none
+    `> f` and `| tee f` write the same stream, demonstrated on the
+    real runner rather than deduced from the shell's semantics.
+
+  AND THE OTHER DIRECTION, because `no transcript moved` would be a
+  weak claim if none of them ever moved.  Four transcripts in
+  code/face_geometry_audit_1c80/ do NOT regenerate -- out_n6.txt,
+  out_witness.txt, out_claims.txt, out_mutations.txt.  That drift is
+  NOT this repair's: it reproduces on a pristine `git archive bee07a1`
+  checkout with none of these edits present, because those instruments
+  read the live tree and the live history.  It is the same class the
+  arc already records for mg-6653 and mg-7d5a, and it is named here so
+  that `no transcript moved` above cannot be read as `nothing in the
+  arc ever moves`.
+
+==============================================================================
+K3e  THE GENERAL FORM, ON THIS SECTION
+==============================================================================
+
+  K3 is a script that decides whether other scripts' verdicts were
+  discarded, so the question is whether K3 discards its own.  What was
+  checked, and the branches that cannot exhibit it, with reasons:
+
+   1. Every subprocess in K3b is `subprocess.run(cmd, ...)` with a LIST
+      argv and no `shell=True`.  There is no shell, so there is no
+      pipeline, so `returncode` is the target's own status.  That is
+      the branch that CANNOT exhibit the defect, and the reason is
+      structural rather than a promise about how it is called.
+   2. `returncode` is READ on every path, including the timeout path,
+      where it is None and prints as `-` instead of as 0.  A timeout
+      rendered as 0 would be this defect wearing a different hat.
+   3. K3b's own effect on the tree is measured (git status before and
+      after), because several targets mutate and restore the worktree
+      and a restore that silently failed would corrupt K3d's answer.
+   4. K3d compares against the PINNED bee07a1, not HEAD.  Anchored to
+      HEAD it would compare the repaired tree with itself and report
+      zero changes forever -- mg-821e's finding, in this file.
+   5. The one thing K3 CANNOT do, stated because a stated limit is
+      checkable and an omission is not: it cannot re-run the affected
+      targets at every historical commit.  It settles the R3 claims at
+      HEAD and at the revisions the claims name, and says so in the
+      rows themselves rather than in a footnote.
+
+==============================================================================
+K3 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts (a) K3b leaving the worktree dirty,
+(b) the cross-section block C2 depends on being absent or pipelined at
+either revision, and (c) committed transcripts outside this tree
+changing.  It does NOT count the 2 AT-RISK claims: those are the
+finding, and K3b/K3c settle them.  It ranges over the 9 claims
+enumerated in K3a and over the 34 tee'd targets of the 17 affected
+runners -- not over claims made about trees outside this arc.
