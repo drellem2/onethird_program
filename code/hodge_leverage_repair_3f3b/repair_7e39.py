@@ -153,6 +153,17 @@ def my_vocabulary():
     return sorted(out)
 
 
+def my_declared_vocabulary(src):
+    """The gate's DECLARED row kinds, read here by AST -- my own parse, not a
+    call into the sweep, whose scope is the thing under test."""
+    for node in ast.walk(ast.parse(src)):
+        if isinstance(node, ast.Assign) and any(
+                getattr(t, "id", "") == "ROW_KINDS" for t in node.targets):
+            return sorted(e.value for e in getattr(node.value, "elts", [])
+                          if isinstance(e, ast.Constant))
+    return []
+
+
 def my_hits(rel, name):
     """Lines of `rel` that identify the gate row `name` by a substring test
     over a WHOLE ROW.  My rule, not the sweep's: the sweep's rule is scoped by
@@ -279,7 +290,11 @@ def probe_on_disk(rel, edit, runner=run_runner):
 # repaired files QUOTE the constructs they removed, in docstrings, so an
 # absence test reads a repaired tree as unrepaired (mg-6df0's own note).
 # --------------------------------------------------------------------------
-PIPE_CLAUSE = "the padding inside its cells"
+# ⚠️ KEYED ON THE MUTATION THE CLAUSE PERFORMS, not on a sentence describing
+# it.  The repaired `k_layout` QUOTES its own old decline reason in its
+# docstring, so a detector reading prose says PRE against a repaired artifact
+# -- mg-6df0 met exactly this and wrote it down.
+PIPE_CLAUSE = 'return site.replace(l, "|  " + l[2:], 1), None'
 FIX_F1 = PIPE_CLAUSE in read(LANDING_REL)
 
 
@@ -598,11 +613,30 @@ mutation of the same kind derived from the KIND TITLE, written in this file.
     # --- S1e: the control.  Revert the derivation alone.
     if FIX_F1:
         def strip_pipe_clause(src):
-            m = re.search(r"\n    rows, _d = pipe_rows\(site\)\n"
-                          r"(?:.*\n)*?    return None, \(", src)
-            if not m:
+            """`k_layout` REVERTED TO ITS PRE-REPAIR DERIVATION, and nothing
+            else in the file touched.  Located by AST rather than by matching
+            text, so the control is keyed on the FUNCTION and not on a string
+            that a docstring could also contain.
+
+            ⚠️ The clause and its decline reason go together: the reason
+            COUNTS what the clause looked for (`{len(once)} of {len(pipe)}`),
+            so removing the statements and leaving the sentence is not the
+            pre-repair state -- it is a NameError.  Reverting a derivation
+            means reverting what it says about itself."""
+            tree = ast.parse(src)
+            fn = next((n for n in ast.walk(tree)
+                       if isinstance(n, ast.FunctionDef)
+                       and n.name == "k_layout"), None)
+            if fn is None:
                 return None
-            return src[:m.start()] + "\n    return None, (" + src[m.end():]
+            lines = src.split("\n")
+            cut = next((i for i in range(fn.lineno - 1, fn.end_lineno)
+                        if lines[i].startswith("    pipe = ")), None)
+            if cut is None:
+                return None
+            old = ('    return None, "no line here has two runs of two or '
+                   'more spaces to shift"')
+            return "\n".join(lines[:cut] + [old] + lines[fn.end_lineno:])
 
         rc, out, restored = probe_on_disk(LANDING_REL, strip_pipe_clause)
         if rc is None:
@@ -771,25 +805,34 @@ was learned on and not to the next one.
     src = read(LANDING_REL)
     hand = ["SITE RECORD", "RECORD PARTITION", "FIGURE CENSUS",
             "FIGURE ORDER", "CENSUS ROSTER"]
-    printed = my_vocabulary()
+    printed = my_declared_vocabulary(src)
+    live = my_vocabulary()
     now = list(SWEEP.ROW_NAMES)
-    print(f"    the gate's live rows name : {printed}")
+    stray = sorted(set(live) - set(printed))
+    print(f"    the gate DECLARES         : {printed}")
+    print(f"    its live rows use         : {live}"
+          + (f"   ⚠️ undeclared: {stray}" if stray else ""))
     print(f"    mg-6df0's hand list       : {hand}")
     print(f"    the sweep uses            : {now}")
     print(f"    in the gate and not in the hand list: "
           f"{sorted(set(printed) - set(hand))}")
-    record(sorted(now) == printed,
-           f"S3a the sweep's vocabulary is {len(now)} name(s) and the gate's "
-           f"live rows carry {len(printed)}; they are "
-           f"{'THE SAME SET' if sorted(now) == printed else 'DIFFERENT SETS'}.  "
+    record(sorted(now) == printed and not stray,
+           f"S3a the sweep's vocabulary is {len(now)} name(s) and the gate "
+           f"DECLARES {len(printed)}; they are "
+           f"{'THE SAME SET' if sorted(now) == printed else 'DIFFERENT SETS'}, "
+           f"and {len(stray)} of the kinds its live rows use are undeclared.  "
            f"The hand list is {len(hand)} and misses "
-           f"{sorted(set(printed) - set(hand))}")
+           f"{sorted(set(printed) - set(hand))} -- ⚠️ TWO names, not one: "
+           f"mg-7e39 measured the gap against a vocabulary regexed out of the "
+           f"gate's `print` calls, which could not see `WRITTEN ONCE` because "
+           f"that row read `'{{label}}' is WRITTEN ONCE`.  A derived "
+           f"vocabulary derived from the wrong thing is a hand list with extra "
+           f"steps")
 
     # DERIVED, not copied: rename a row in a COPY of the gate's source and the
     # derivation must follow it.  A hand list cannot.
     if FIX_F5:
-        probe = src.replace("GATE @ {name}: CENSUS ROSTER",
-                            "GATE @ {name}: CENSUS MANIFEST")
+        probe = src.replace('    "CENSUS ROSTER",', '    "CENSUS MANIFEST",')
         moved = set(SWEEP.row_vocabulary(probe))
         followed = moved >= {"CENSUS MANIFEST"} and not moved & {"CENSUS ROSTER"}
         record(followed,
@@ -975,16 +1018,39 @@ def s5():
     src = read(MINE)
 
     # F1's shape: does THIS file decline anywhere without a count?
-    bad = []
-    for m in re.finditer(r'return None, \(?((?:f?"[^"]*"\s*)+)', src):
-        text = m.group(1)
-        if not re.search(r"\d|\{len\(|\{n\b|\{[a-z_]+\}", text):
-            bad.append(text[:70])
+    #
+    # ⚠️ SCOPED BY AST, not by a regex over the whole file.  The first version
+    # of this check searched every `return None, "..."` in the file and
+    # reported two "countless reasons" that were a 3-tuple in `probe_on_disk`
+    # and a runaway match across `strip_pipe_clause`.  A check that reports
+    # the wrong population is the finding it is checking for, one level in.
+    tree = ast.parse(src)
+    bad, reasons = [], 0
+    for fn in [n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef)
+               and (n.name.startswith("my_k") or n.name == "apply_my_kind")]:
+        for node in ast.walk(fn):
+            if not isinstance(node, ast.Return):
+                continue
+            v = node.value
+            if not (isinstance(v, ast.Tuple) and len(v.elts) == 2):
+                continue
+            first, why = v.elts
+            if not (isinstance(first, ast.Constant) and first.value is None):
+                continue
+            reasons += 1
+            measured = any(
+                isinstance(x, ast.FormattedValue)
+                or (isinstance(x, ast.Constant) and isinstance(x.value, str)
+                    and re.search(r"\d", x.value))
+                for x in ast.walk(why))
+            if not measured:
+                bad.append(f"{fn.name}:{node.lineno}")
     record(not bad,
-           f"S5a F1's shape here: {len(bad)} of this file's own decline "
-           f"reason(s) carry no measured count.  Predicted 0 -- an instrument "
-           f"that writes `n/a` reasons while auditing `n/a` reasons is the "
-           f"first place to look")
+           f"S5a F1's shape here: {reasons} decline reason(s) are written by "
+           f"this file's own kind derivations and {len(bad)} carry no measured "
+           f"count -- {bad}.  Predicted 0.  An instrument that writes `n/a` "
+           f"reasons while auditing `n/a` reasons is the first place to look, "
+           f"and this is the same rule the artifact now fails closed on")
 
     # F5's shape: does THIS file hand-list a vocabulary it could derive?
     lits = re.findall(r'^\s*(?:hand|printed|now)\s*=\s*\[', src, re.M)
