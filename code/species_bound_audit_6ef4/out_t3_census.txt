@@ -11,7 +11,7 @@ T3a  THE CENSUS, RE-DERIVED FROM `git ls-tree` AT FOUR REVISIONS
       e8fbd4f  mg-d633 wrote the census                       105 file(s)
       af432ee  mg-821e REGENERATED it                         131 file(s)
       4372fae  the pin -- the tree mg-821e's summaries shipped in 146 file(s)
-      HEAD     the tree this audit runs in                    172 file(s)
+      HEAD     the tree this audit runs in                    174 file(s)
 
   P3a    predicted 131                      got 131                      
   P3b    predicted 105                      got 105                      
@@ -34,10 +34,10 @@ T3b  CLAIMED vs HELD -- the committed transcript at each revision
       4372fae  code/species_extent_d633/out_e2_crosssection.txt     claims 123  holds 146  SHORT BY 23
       4372fae  code/species_sites_821e/out_a2_6cb9_after.txt        claims 123  holds 146  SHORT BY 23
       4372fae  pecies-Hopf-Monoids-ExtentRepair-IndependentAudit.md claims 100  holds 146  SHORT BY 46
-      HEAD     de/species_extent_audit_6cb9/out_a2_crosssection.txt claims 100  holds 172  SHORT BY 72
-      HEAD     code/species_extent_d633/out_e2_crosssection.txt     claims 150  holds 172  SHORT BY 22
-      HEAD     code/species_sites_821e/out_a2_6cb9_after.txt        claims 123  holds 172  SHORT BY 49
-      HEAD     pecies-Hopf-Monoids-ExtentRepair-IndependentAudit.md claims 100  holds 172  SHORT BY 72
+      HEAD     de/species_extent_audit_6cb9/out_a2_crosssection.txt claims 100  holds 174  SHORT BY 74
+      HEAD     code/species_extent_d633/out_e2_crosssection.txt     claims 150  holds 174  SHORT BY 24
+      HEAD     code/species_sites_821e/out_a2_6cb9_after.txt        claims 123  holds 174  SHORT BY 51
+      HEAD     pecies-Hopf-Monoids-ExtentRepair-IndependentAudit.md claims 100  holds 174  SHORT BY 74
 
   mg-821e's regenerated census agrees with the tree it shipped in  *** FINDING ***
         claimed [100, 123, 123, 100], held 131.  mg-4700's F3 re-derived independently: the number
@@ -56,9 +56,9 @@ T3c  STALE vs WRONG -- which committed census figures name a revision
       anchored (say MEASURED AT <rev>):   1
           code/species_extent_d633/out_e2_crosssection.txt           [150]
       UNANCHORED (a bare number):         3
-          code/species_extent_audit_6cb9/out_a2_crosssection.txt     [100]  held at HEAD: 172
-          code/species_sites_821e/out_a2_6cb9_after.txt              [123]  held at HEAD: 172
-          hird-Species-Hopf-Monoids-ExtentRepair-IndependentAudit.md [100]  held at HEAD: 172
+          code/species_extent_audit_6cb9/out_a2_crosssection.txt     [100]  held at HEAD: 174
+          code/species_sites_821e/out_a2_6cb9_after.txt              [123]  held at HEAD: 174
+          hird-Species-Hopf-Monoids-ExtentRepair-IndependentAudit.md [100]  held at HEAD: 174
 
   every committed census figure at HEAD names the revision it coun *** FINDING ***
         3 do not.  For those the sentence is WRONG at HEAD and not STALE, and
@@ -78,9 +78,10 @@ T3d  EVERY COMMIT MESSAGE STATING A FIGURE FOR `A2 TOTAL BAD`
   OBJECTS -- and a count of objects and a count of texts are different
   numbers that a single figure cannot carry.
 
-  commit objects examined                                          301
+  commit objects examined                                          303
       41ac5d4  says 1          control+repair: PIN THE PRE-REPAIR REF AND STOP `tee
       43d437c  says 1          control+repair: PIN THE PRE-REPAIR REF AND STOP `tee
+      09785ec  says 10         docs+audit: independent audit of the mg-5040 repair 
       5c16f5c  says 2,2,1      docs+audit: independent audit of the mg-821e repair 
       0aa5b9a  says 2,2,1      docs+audit: independent audit of the mg-821e repair 
       3c8f535  says 2          docs+repair: THE WALK NOW NAMES WHAT IT DECLINED, so
@@ -90,8 +91,8 @@ T3d  EVERY COMMIT MESSAGE STATING A FIGURE FOR `A2 TOTAL BAD`
       3bc2cf7  says 1          evidence: PUBLISH THE POST-COMMIT MEASUREMENT, WITH 
       fc98142  says 1          evidence: PUBLISH THE POST-COMMIT MEASUREMENT, WITH 
 
-  commit OBJECTS stating a figure                                  10
-  distinct message TEXTS                                           5
+  commit OBJECTS stating a figure                                  11
+  distinct message TEXTS                                           6
   texts existing as more than one object (rebase twins)            5
           3bc2cf7, fc98142   evidence: PUBLISH THE POST-COMMIT MEASUREMENT, W
           3c8f535, 42f48ca   docs+repair: THE WALK NOW NAMES WHAT IT DECLINED
@@ -100,12 +101,12 @@ T3d  EVERY COMMIT MESSAGE STATING A FIGURE FOR `A2 TOTAL BAD`
           b534db7, 87af270   evidence: PUBLISH THE POST-COMMIT MEASUREMENT — 
 
   mg-5040's count of message-side copies is a count of objects     *** FINDING ***
-        10 objects, 5 texts.  mg-5040 reported the figure as 'two commit
+        11 objects, 6 texts.  mg-5040 reported the figure as 'two commit
         messages'.  Neither number is wrong; the sentence does not say which
         one it is, and in a rebased history they are not the same -- which is
         the population question this arc raises against everybody else.
   P3e    predicted True                     got True                     
-  P3f    predicted 3                        got 5                        *** MISSED ***
+  P3f    predicted 3                        got 6                        *** MISSED ***
 
 ==============================================================================
 T3dd  THE FIGURE IS A PROPERTY OF A TREE.  WHICH MESSAGES SAY WHICH?
@@ -119,16 +120,17 @@ T3dd  THE FIGURE IS A PROPERTY OF A TREE.  WHICH MESSAGES SAY WHICH?
   anything.  So each message that states the figure is asked whether
   it names a revision anywhere near it.
 
+      NAMES A TREE  09785ec        says 10       docs+audit: independent audit of the mg-5040
       NAMES A TREE  3bc2cf7,fc98142 says 1        evidence: PUBLISH THE POST-COMMIT MEASUREMEN
       NAMES A TREE  3c8f535,42f48ca says 2        docs+repair: THE WALK NOW NAMES WHAT IT DECL
       NAMES A TREE  5c16f5c,0aa5b9a says 2,2,1    docs+audit: independent audit of the mg-821e
       NAMES A TREE  41ac5d4,43d437c says 1        control+repair: PIN THE PRE-REPAIR REF AND S
       NAMES A TREE  b534db7,87af270 says 1        evidence: PUBLISH THE POST-COMMIT MEASUREMEN
 
-  message texts stating the figure                                 5
-  of those, naming the tree the figure is about                    5
+  message texts stating the figure                                 6
+  of those, naming the tree the figure is about                    6
   every message that states the figure says which tree it is about ok
-        0 of 5 do not.
+        0 of 6 do not.
 
   THIS SECTION WAS BUILT TO CATCH MG-5040'S OWN COMMIT AND IT DOES
   NOT.  The expectation written into it was that `3bc2cf7`/`fc98142`
@@ -185,6 +187,7 @@ T3e  EVERY COMMITTED FILE AT HEAD STATING A FIGURE, AND ITS DISPOSITION
       code/species_depth_audit_4700/q4_standing.py            :133   says 1   marked
       code/species_extent_audit_6cb9/out_a2_crosssection.txt  :132   says 2   *** BARE ***
       code/species_sites_821e/out_a2_6cb9_after.txt           :119   says 1   *** BARE ***
+      /OneThird-Species-Hopf-Monoids-Bound-IndependentAudit.md:163   says 10   marked
       docs/OneThird-Species-Hopf-Monoids-Bound-Repair.md      :150   says 2   marked
       docs/OneThird-Species-Hopf-Monoids-Repair-Sites.md      :256   says 1   marked
       docs/OneThird-Species-Hopf-Monoids-Repair-Sites.md      :259   says 2   marked
@@ -193,22 +196,32 @@ T3e  EVERY COMMITTED FILE AT HEAD STATING A FIGURE, AND ITS DISPOSITION
 
 
   THIS TICKET'S OWN FILES ARE LISTED SEPARATELY AND NOT SCORED, with
-  the reason: 8 occurrence(s) under code/species_bound_audit_6ef4/, of which
+  the reason: 18 occurrence(s) under code/species_bound_audit_6ef4/, of which
   one is this file's own PATTERN LITERAL and the rest are predictions
   ABOUT the enumeration.  They are not copies of the figure and they
   are not filtered in silence either -- mg-5040's r3 gave mg-4700's
   PREDICTIONS.md a printed disposition rather than dropping it, and
   the same rule is applied here to its author's own tree.
+      code/species_bound_audit_6ef4/OUTCOMES.md               :172   says 10   marked
+      code/species_bound_audit_6ef4/OUTCOMES.md               :280   says 1   marked
       code/species_bound_audit_6ef4/PREDICTIONS.md            :76    says 4   marked
+      code/species_bound_audit_6ef4/out_selftest.txt          :25    says 1   marked
+      code/species_bound_audit_6ef4/out_selftest.txt          :26    says 2   marked
+      code/species_bound_audit_6ef4/out_selftest.txt          :27    says 1   marked
+      code/species_bound_audit_6ef4/out_selftest.txt          :28    says 1   marked
+      code/species_bound_audit_6ef4/out_selftest.txt          :29    says 1   marked
+      code/species_bound_audit_6ef4/out_t3_census.txt         :135   says 1   unmarked
+      code/species_bound_audit_6ef4/out_t3_census.txt         :218   says 1   marked
+      code/species_bound_audit_6ef4/out_t3_census.txt         :234   says 61   unmarked
       code/species_bound_audit_6ef4/selftest6ef4.py           :137   says 0   marked
       code/species_bound_audit_6ef4/selftest6ef4.py           :138   says 1   marked
       code/species_bound_audit_6ef4/selftest6ef4.py           :139   says 2   marked
       code/species_bound_audit_6ef4/selftest6ef4.py           :140   says 1   marked
       code/species_bound_audit_6ef4/selftest6ef4.py           :141   says 1   marked
       code/species_bound_audit_6ef4/selftest6ef4.py           :142   says 1   marked
-      code/species_bound_audit_6ef4/t3_census.py              :49    says 0   unmarked
+      code/species_bound_audit_6ef4/t3_census.py              :50    says 0   unmarked
 
-  occurrences of the figure in committed files at HEAD             43
+  occurrences of the figure in committed files at HEAD             44
   of those, stating the OLD figure with nothing beside it          3
           code/species_bound_repair_5040/out_r4_self.txt:49
           code/species_depth_audit_4700/q4_standing.py:91
@@ -249,10 +262,10 @@ T3f  HOW MANY TIMES WAS THE FIGURE ACTUALLY DERIVED?
       DERIVES  code/species_sites_821e/out_a2_6cb9_after.txt        says 1   (59 markers)
       quotes   code/species_bound_repair_5040/out_r4_self.txt       says 1   (5 markers)
       quotes   code/species_depth_audit_4700/out_q4_standing.txt    says 1   (4 markers)
+      quotes   code/species_bound_audit_6ef4/out_t3_census.txt      says 1   (3 markers)
       quotes   code/species_depth_audit_4700/PREDICTIONS.md         says 1   (3 markers)
       quotes   code/species_depth_audit_4700/q4_standing.py         says 1   (3 markers)
       quotes   Third-Species-Hopf-Monoids-Sites-IndependentAudit.md says 2   (3 markers)
-      quotes   code/species_bound_audit_6ef4/selftest6ef4.py        says 0   (2 markers)
       OTHER A2 code/species_audit_a61f/out_a2_bidigare.txt          says 0   (0 markers -- a different checker's verdict)
 
   independent derivations of a2_crosssection's figure              2
@@ -268,8 +281,8 @@ T3f  HOW MANY TIMES WAS THE FIGURE ACTUALLY DERIVED?
         derivation contradicting it was already in the tree, and agreement
         among the copies was never evidence about either.
 
-  REPLICATION IS NOT CORROBORATION.  53 copies of this figure exist
-  in this repository -- 10 commit objects and 43 file occurrences --
+  REPLICATION IS NOT CORROBORATION.  55 copies of this figure exist
+  in this repository -- 11 commit objects and 44 file occurrences --
   and they rest on 2 derivation(s), which do not agree.  Counting the
   copies measures how often the number was TYPED, not how often it was
   MEASURED.

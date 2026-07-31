@@ -163,9 +163,18 @@ not taken from mg-4700.
 `A2 TOTAL BAD` is stated by **10 commit objects** in **5 distinct texts**, and every one of the five
 has a rebase twin. mg-5040 reported "two commit messages". Neither an object count nor a text count
 is wrong; the sentence does not say which one it is, and in a history a merge queue rebases they are
-not the same number. There are **44** occurrences in committed files besides, of which **3** state
+not the same number. There are **43** occurrences in committed files besides, of which **3** state
 the old figure with nothing beside them — including the source itself, at
 `code/species_sites_821e/out_a2_6cb9_after.txt:119`.
+
+**Those figures are measured at `3bf0cd2`, the revision this section grades.** The post-commit
+re-run, published in this ticket's second commit per this arc's Appendix A, reads **11 objects, 6
+texts, 44 file occurrences** — because this audit's own commit message states a figure and joins the
+population it is counting. That is F3 one level out, inside the section about F3, and it is
+mg-5040's own kept defect 7 happening to its auditor. **Post-commit is still not post-merge:** the
+refinery rebases this branch, so the object count is a property of a tree that will be replaced, and
+the only figures here that a merge cannot move are the ones anchored on `e8fbd4f`, `af432ee` and
+`4372fae`, which git cannot move.
 
 **The source, which is what the ticket actually asked for.** An artifact *derives* the figure if it
 is a transcript of a run of `a2_crosssection.py`, identified by markers lifted from that script's own
