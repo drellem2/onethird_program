@@ -1,0 +1,63 @@
+==========================================================================
+Q2 -- THE NARROWED BOUND, PROBED AT ITS EDGE
+==========================================================================
+--------------------------------------------------------------------------
+(i) THE FOUR PERTURBATIONS, EACH ONE OPERAND, EACH APPLIED ONCE
+--------------------------------------------------------------------------
+   Every edit is made with a replace-exactly-once that refuses on 0
+   occurrences and on many, and the result is required to parse.  A
+   perturbation that silently did nothing would make the sweep's count
+   hold for the wrong reason -- which is the reading a boundary probe
+   must never make.
+
+   Nothing is written into code/face_geometry/.  Each perturbed source
+   is held in memory and handed to the sweep's own functions.
+
+   the sweep's file population, read out of d2_deletion.py's own SWEEP_FILES: face_complex.py
+   the sweep's enumerated rows on the unperturbed tree               : 11
+
+   probe                            file       sweep    expected  column the classifier files it in
+   INSIDE the bound                 face_complex.py 12       12        swept
+   outside: not top-level           face_complex.py 11       11        not swept: nested
+   outside: not a deciding condition face_complex.py 11       11        NO COLUMN
+   outside: not a swept file        posets.py  11       11        not swept: file
+
+   READ THE THIRD ROW.  An operand added to an `if` that does not return
+   is invisible to the sweep, which the bound says correctly, AND it is in
+   NO COLUMN of the census beside the bound.  That is the thing the sweep
+   does not cover which the BOUND excludes and the CENSUS does not account
+   for -- q3 counts how many of them the tree already has.
+
+--------------------------------------------------------------------------
+(ii) `AND NOTHING ELSE` -- EVERY SWEEP ROW APPLIED, AND DIFFERENCED
+--------------------------------------------------------------------------
+   The second half of the bound is a claim about what deletion does
+   NOT touch, and no sentence settles it.  Each of the sweep's own rows
+   is applied with `drop_clause` and the resulting operand multiset is
+   differenced against the unperturbed one.  A row that removed an
+   operand from outside the bound would appear here as a second entry.
+
+   The multiset is keyed on (function, operand text) rather than on a
+   source span, because a deletion shifts every span after it and a
+   span key would report the whole tail of the file as changed.
+
+   function                 kind   cls  the operand the row removes                    other operands lost
+   absorb_trace             guard  1    len(shape_A) != len(shape_B)                   none
+   absorb_trace             guard  2    any( a != b for a, b in zip(shape_A, shape_B)) none
+   gate_violations          guard  1    m != len(B)                                    none
+   gate_violations          guard  2    any(len(A[i]) != len(B[i]) for i in range(m))  none
+   diagonal_moves           guard  1    len(A) != len(B)                               none
+   diagonal_moves           guard  2    any(len(A[i]) != len(B[i]) for i in range(len( none
+   Poset.leq                value  1    a == b                                         none
+   Poset.leq                value  2    (a, b) in self.less                            none
+   Poset.comparable         value  1    a == b                                         none
+   Poset.comparable         value  2    (a, b) in self.less                            none
+   Poset.comparable         value  3    (b, a) in self.less                            none
+
+   11 sweep row(s) applied; 0 of them removed an operand from outside the
+   bound.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every source read and parse this script performs, the requirement that each of the 4 perturbations really apply and leave a file that still parses, and the requirement that the unperturbed sweep population not be empty
+FINDINGS: 0, population: the sweep's enumerated clause population under 4 perturbations, one per clause of the narrowed bound plus one inside it, each scored against what the bound says the sweep reaches and against the column the shipped classifier files it in; and the operand multiset difference produced by every one of the sweep's own rows, against the `AND NOTHING ELSE` clause
+TOTAL BAD: 0

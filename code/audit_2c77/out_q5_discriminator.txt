@@ -1,0 +1,81 @@
+==========================================================================
+Q5 -- THE PROXIMITY TEST THAT DECIDES `LIVE ASSERTION`
+==========================================================================
+--------------------------------------------------------------------------
+(i) THE RULE, READ OUT OF THE SUBJECT RATHER THAN COPIED
+--------------------------------------------------------------------------
+   gate           window   markers
+   p1 (i)         25       ('mg-69d1', 'mg-eaef', 'NAMES A FLOOR IT DOES NOT REACH', 'names a floor it does not reach')
+   p3 (i)         25       ('mg-69d1', 'mg-e34a', 'under test', 'inverted', 'INVERTED')
+
+   the sentence p1 hunts : 'DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS '
+   the sentence p3 hunts : 'changes that cancel would pass'
+
+--------------------------------------------------------------------------
+(ii) A LIVE ASSERTION, PLANTED, AND THE RULE ASKED ABOUT IT
+--------------------------------------------------------------------------
+   Into each subject file's real text, at three insertion points --
+   the first line, the middle, and the last -- one fresh line that
+   ASSERTS the sentence with nothing correcting it. The rule is then
+   asked whether that line is a live assertion.
+
+   `refuted` on a planted assertion means the rule cannot go red in
+   that file at that point, whatever the file says.
+
+   gate       file the assertion is planted in                     points     verdict
+   p1 (i)     code/repair_69d1/README.md                           3          blind at 2 of 3, live at 1
+   p1 (i)     code/repair_69d1/p1_bound.py                         3          blind at 1 of 3, live at 2
+   p1 (i)     docs/repair-mg-69d1-bound-and-reason.md              3          blind at 1 of 3, live at 2
+   p1 (i)     code/face_geometry_instr_5f9a/d2_deletion.py         3          blind at 0 of 3, live at 3
+   p1 (i)     code/face_geometry/face_complex.py                   3          blind at 0 of 3, live at 3
+   p3 (i)     code/repair_69d1/p3_reason.py                        3          REFUTED at 3 of 3 -- rule is BLIND here
+   p3 (i)     code/branching_audit_58da/g1_provenance.py           3          blind at 1 of 3, live at 2
+   p3 (i)     code/branching_repair_76cc/lib76cc.py                3          blind at 0 of 3, live at 3
+   p3 (i)     code/face_geometry/face_complex.py                   3          blind at 0 of 3, live at 3
+
+   1 file(s) where the rule reported REFUTED at EVERY point tried; 8 where it
+   reported at least one live assertion.
+
+   MISS #4, KEPT.  I predicted the rule would be blind at every point
+   in every file under code/repair_69d1/.  It is not: the markers are
+   dense but not uniform, and a 25-line window can fall between them.
+   The all-or-nothing gate below therefore fires on ONE file.  The rate
+   is the more informative number and it is printed rather than the
+   gate's number alone:
+
+     insertion points in                blind      tried      rate
+     code/repair_69d1/ -- the fix       6          9          66%
+     everywhere else tried              2          18         11%
+
+
+--------------------------------------------------------------------------
+(iii) WHAT THIS DOES AND DOES NOT IMPLY
+--------------------------------------------------------------------------
+   IT DOES NOT IMPLY THE GATES ARE WRONG NOW.  p1 (i) reports 8 copies
+   of the wide sentence and 0 live; q3's own site walk agrees that none
+   of them is a live assertion of the BOUND. The defect is in what the
+   check could have caught, not in what it reported.
+
+   IT DOES IMPLY THE GATE CANNOT PROTECT THE REPAIR'S OWN OUTPUT.  p3
+   (i-b) demonstrates non-vacuity by running the rule against HEAD and
+   getting live assertions there -- in mg-eaef's files, which is where
+   the OLD defect lived.  Non-vacuity in the directory the defect came
+   from is not non-vacuity in the directory the fix goes to, and those
+   are different directories.
+
+   the four insertion points the repair's own miss #2 was about, as a
+   control -- the rule IS able to go red where the marker is absent:
+     p1 (i)     code/face_geometry/face_complex.py
+     p1 (i)     code/face_geometry_instr_5f9a/d2_deletion.py
+     p1 (i)     code/repair_69d1/README.md
+     p1 (i)     code/repair_69d1/p1_bound.py
+     p1 (i)     docs/repair-mg-69d1-bound-and-reason.md
+     p3 (i)     code/branching_audit_58da/g1_provenance.py
+     p3 (i)     code/branching_repair_76cc/lib76cc.py
+     p3 (i)     code/face_geometry/face_complex.py
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the parse of CORRECTION_MARKERS, CORRECTION_WINDOW, MARKERS and WINDOW out of p1_bound.py and p3_reason.py, and the requirement that each subject file be readable and each splice really insert the sentence it names
+FINDINGS: 1, population: the two shipped discriminators applied to a planted live assertion at every insertion point tried, over the 4 files mg-69d1's own gates run against, plus the same rule applied to the file where the defect was live before the repair
+   FINDING: THE PROXIMITY TEST IS BLIND IN THE DIRECTORY THE REPAIR WROTE.  A fresh, uncorrected assertion of the sentence each gate hunts is reported as `refuted within 25 lines` at every insertion point tried in code/repair_69d1/p3_reason.py -- because every file there says `mg-69d1`, which is a correction marker.  mg-69d1's own miss #2 records that this check began as a PATH LIST exempting the three files the sentence was live in, and was replaced for being vacuous by construction; the marker set exempts, by construction, the directory where a repair writes its NEW prose, which is where a newly-wrong sentence would be written.  Across every insertion point tried, the rule was blind at 6 of 9 in code/repair_69d1/ and at 2 of 18 everywhere else
+TOTAL BAD: 1
