@@ -232,7 +232,20 @@ on an audit that measured its extents in both directions — that, not fatigue, 
   swallow at HEAD. Redefine the population by **property**, re-derive the counts, and re-establish the
   retroactive clearance over the corrected population.
 *(mg-ff3e landed — the census-invariance repair; its audit mg-ec07 is running.)*
-- **mg-e34a**, **mg-eaef** — audits of the kernel-half repair and the instrument-bound repair.
+- **mg-69d1** — carries the **two open sites** from the audits that just returned, both **PARTIAL**:
+  - *mg-eaef* — the instrument's **stated bound is WIDER than the sweep**, with **4 of 15 operands in neither
+    column**. A bound stated wider than its evidence is the printed-extent defect wearing the remedy for the
+    printed-extent defect; **a stated limit that over-claims is worse than none, because it is read as a
+    guarantee.** "Neither column" is not a third state — it is the absence of an answer.
+  - *mg-e34a* — the **row is right and its stated REASON is inverted**: build the cancelling pair the reason
+    names and both halves *move* while "both together" prints *identical*. **Fourth control tonight that is
+    right for a reason it does not have, and the second where the wrong reason came from a repair fixing that
+    very class.** Mechanism: **the repair added a ROW and a REASON, and only the row was checked** — and the
+    rightness of the row is exactly what makes the reason feel checked.
+  - Audit **mg-2c77** pre-filed in the same action, aimed at the *reasons* rather than the rows.
+- **Confirmed, and worth recording as such:** mg-e34a ran the **pre-repair predicate against 7 inputs with 0
+  going backwards at either grain**. That is the first use of that instruction to **confirm** rather than to
+  catch — it is what makes "the kernel half is really back" a measurement instead of a claim.
 
 ## Next (gated / queued)
 
