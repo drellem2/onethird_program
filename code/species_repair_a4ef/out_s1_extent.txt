@@ -42,7 +42,9 @@ S1a  EXTENT DECLARATION -- what is enforced, and over what
   visibly stops matching, rather than quietly stopping being true --
   which is what happened twice, at mg-6cb9 F1 (no subdirectory) and
   again at mg-4700 F1 (no symlinked directory).
-      DECLINED, STATED -- 6 entr(ies):
+      DECLINED, STATED -- 8 entr(ies):
+          code/species_repair_6f61/__pycache__   directory rule, STATED: __pycache__/
+          code/species_remainder_f8fa/__pycache__   directory rule, STATED: __pycache__/
           code/species_repair_a4ef/OUTCOMES.md   file rule, STATED: on the EXCLUDE list
           code/species_repair_a4ef/PREDICTIONS.md   file rule, STATED: on the EXCLUDE list
           code/species_repair_a4ef/__pycache__   directory rule, STATED: __pycache__/
@@ -154,7 +156,7 @@ named as undecodable, and anything under __pycache__/ -- and those three
 lists are the whole of it, which is a claim about the CODE and not
 about the shape the trees happen to have today (mg-821e).
 EVERY REGULAR FILE means every regular file THE WALK REACHED, and the
-walk names what it declined: 6 stated, 0 not stated (mg-5040).  A
+walk names what it declined: 8 stated, 0 not stated (mg-5040).  A
 non-empty second list is a finding here, so this sentence cannot be
 true by accident of the tree the way it was at mg-6cb9 and again at
 mg-4700.
