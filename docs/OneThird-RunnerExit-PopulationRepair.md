@@ -171,6 +171,9 @@ anchor against rule:
 | **pinned `bee07a1`** | not found | not found |
 | **`HEAD`, unpinned** | not found | **FOUND — 8 sites, 5 reading the status** |
 
+(The four cells' *totals* move as the arc grows; `out_s4_unpin.txt` carries the
+live ones. What does not move is which cell finds this site.)
+
 **Exactly one cell.** The other reason is a line-local rule demanding a literal
 `<tree>/run_all.sh` on the executing line, which `run_runner(t)` and
 `subprocess.run(["sh", "run_all.sh"], cwd=d)` do not have. Fixing the anchor
@@ -233,6 +236,8 @@ with it is possible. A predicate nobody can disagree with is not a definition.
 **And the sweep's committed transcripts are not regenerated.** A transcript is
 the record of a run at a time; rewriting `out_k1_census.txt` would destroy
 `mg-05eb`'s citations of it and would not be reproducible in any case — the arc
-has grown from 64 runners to 71 since. The corrected readings are published in
+has grown well past the 64 runners that census counted. That current count is
+deliberately not written into this document — a number that moves belongs in a
+transcript, and `s3_figure.py` prints it. The corrected readings are published in
 `code/runner_exit_repair_7522/out_s3_figure.txt`, and the sweep's own docstring,
 README and `OUTCOMES.md` point at them.

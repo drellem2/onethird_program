@@ -24,7 +24,8 @@ repaired `libc2b3.PIPEFAIL_RE`, added three rows to `selftestc2b3.py`, and
 unpinned `k2_consume.py`'s caller scan — and **did not regenerate these
 transcripts**. A transcript is a record of a run at a time; rewriting one would
 destroy mg-05eb's citations of it and would not be reproducible in any case, the
-arc having grown from 64 runners to 71 since. Where a transcript and this
+arc having grown well past the 64 runners that census counted. Where a
+transcript and this
 directory's prose now disagree, the disagreement is named in the prose and the
 corrected reading is in `code/runner_exit_repair_7522/out_s3_figure.txt`.
 
@@ -52,8 +53,11 @@ where the author stopped looking, so they are a reason to check first.**
 files *named* `run_all.sh`. That is a naming convention, not a property.
 `code/face_geometry_audit_f1b2/run_audit.sh` and
 `code/face_geometry_audit_fcf1/run_audit.sh` carried eight `| tee` pipelines
-between them and were still swallowing at `HEAD` after this sweep. Over every
-tracked `*.sh` the figures are **19 files / 42 pipelines**, not 17 / 34. See
+between them and were still swallowing at `HEAD` after this sweep. Under the
+*same* `| tee` rule but over every tracked `*.sh`, the figures are **19 files /
+42 pipelines**, not 17 / 34. Under the *property* — a pipeline whose status is
+consumed and whose discarded stage can fail — they are **19 files / 26 lines**,
+and that set contains three lines with no `| tee` in them at all. See
 `code/runner_exit_repair_7522/`.
 
 **The 23 and the 17 differ by six, and the six are the repaired trees.** Their
