@@ -1,0 +1,227 @@
+mg-ff3e -- THE CENSUS IS POSITION-AWARE OVER THE WHOLE RECORD
+==============================================================================
+mg-8916 made the figure census a MULTISET.  mg-8aae exchanged two figures and
+the multiset did not move.  mg-8eca made it a SEQUENCE of figures.  mg-9207
+exchanged the two LABELS instead and the gate refuted NOTHING at 3 of 3 label
+sites, with mg-8aae's own reader-visible defect back on the page: H8's table
+saying the `STATE.md` row SHRANK across mg-a2bd.
+
+THE ASSIGNMENT SAYS DO NOT MAKE IT POSITION-AWARE FOR LABELS.  That relocates
+the defect a third time.  So the question this instrument is organised around
+is the SUBTRACTION question -- what GENERATES the instances -- and the answer
+is that the gate compares a PROJECTION of the section and each repair enlarged
+the projection BY ONE NAMED FIELD.  The complement was always everything else,
+and the next exchange moved into it.  The only projection with an empty kernel
+is the identity, so the repair is to compare the WHOLE RECORD.
+
+  4 mutable files read and pinned; 5 committed transcripts pinned frozen
+
+R1 -- THE LABEL HALF OF AN EXCHANGE, ON DISK, AGAINST THE REAL RUNNER
+---------------------------------------------------------------------
+An exchange has TWO HALVES: the figures, and the statements they hang on.
+mg-8eca closed the first and mg-9207 reopened the shape by moving the second.
+Every probe below is written TO DISK into the real document and scored by
+running `verify_landing.py` as a SUBPROCESS with no environment variable set.
+
+⚠️ SCORED AT GATE-ROW GRANULARITY.  `exit` is the runner's; the three columns
+after it are which GATE row said what.  They are not the same measurement, and
+mg-9207's J-3 is why: at its E2 the gate refuted 0 rows and the run still
+exited 1, out of an AssertionError in its own negative control.
+
+  [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
+
+    probe                                                          exit     RECORD     CENSUS      ORDER  gate  crash
+    E2  H8: the two mg-a2bd table LABELS exchanged (mg-9207's own,    1    REFUTED  CONFIRMED  CONFIRMED     1   True
+    E2b H8: the bbe83b5 table's two ROW LABELS exchanged (mg-9207'    1    REFUTED  CONFIRMED  CONFIRMED     1  False
+    E3  H8: the two historical COLUMN HEADERS exchanged (mg-9207's    1    REFUTED  CONFIRMED  CONFIRMED     1  False
+    E6  §14: the two CORRECTION ATTRIBUTIONS exchanged (a site mg-    1    REFUTED  CONFIRMED  CONFIRMED     1  False
+    E7  STATE.md row: two row-history ANCHOR LABELS exchanged (lik    1    REFUTED  CONFIRMED  CONFIRMED     1  False
+    E8  §14: a figure inside a MARKED QUOTATION altered               1    REFUTED  CONFIRMED  CONFIRMED     1  False
+    E9  H8: the three-column table's ALIGNMENT shifted, no figure     1    REFUTED  CONFIRMED  CONFIRMED     1  False
+  [CONFIRMED] R1b EVERY LABEL-SIDE EXCHANGE WRITTEN TO DISK MAKES THE REAL RUNNER RED: 7 of 7, at 3 of 3 sites, with no environment variable set and the gate never called in memory. mg-9207 observed the gate refuting NOTHING on the first three of these
+  [CONFIRMED] R1c and the row that caught it is the SITE RECORD row FOR THAT SITE: 7 of 7.  That is the half of the record that was not being compared -- not a designated reader breaking, which would be re-measuring the check mg-a318 already added
+  [CONFIRMED] R1d and that site's FIGURE CENSUS and FIGURE ORDER rows both stayed [CONFIRMED]: 7 of 7.  This is THE ARTIFACT'S OWN evidence that the mutation moved no figure -- asserted by the thing under test rather than by the prober, which is mg-9207's C4 convention pointed the other way
+  [CONFIRMED] R1e and 7 of 7 restorations return the runner to exit 0, each verified byte-identical by sha256.  The gate does not fire on everything, so the fires above are attributable to the exchange
+  [MEASURED ] R1f 1 of 7 runs exited by TRACEBACK rather than by the gate -- E2, and only E2, because mg-8eca's `transpose` asserts on a literal E2 rewrites.  That is mg-9207's J-3 UNCHANGED and out of this assignment's scope; the verdicts above survive it because they are read from the GATE ROWS, which print before the control runs.  An exit code is not a verdict unless you know which produced it
+
+R2 -- THE DEFECT REINSTATED, AT THREE DIFFERENT UNITS
+-----------------------------------------------------
+'The check fires' and 'the instrument fires' are the same sentence unless
+removing the check makes the same artifact go uncaught (mg-8eca D4).  And WHICH
+UNIT is removed is the whole question mg-9207's J-2 asks: a deletion test that
+can only remove a whole function cannot tell two clauses apart.
+
+D1 removes the SITE RECORD comparison as one unit.  D2 removes only the RECORD
+PARTITION row, which is a different check.  D3 removes NOTHING and instead
+makes the partition LOSSY -- a kernel put back -- which is the only way to find
+out whether the row that certifies 'nothing is left behind' would notice.
+
+
+    deletion                                        predicted  caught  exit   what it shows
+    D1  (e) deleted whole -- both rows                 silent   0/7       1   the seven exchanges go back to being invisible
+  [CONFIRMED] D1  (e) deleted whole -- both rows: 0 of 7 label-side exchanges are caught at the gate, predicted 'silent'.  the seven exchanges go back to being invisible
+    D1b ONLY the SITE RECORD comparison deleted        silent   0/7       1   the finest unit: this row alone is what catches them
+  [CONFIRMED] D1b ONLY the SITE RECORD comparison deleted: 0 of 7 label-side exchanges are caught at the gate, predicted 'silent'.  the finest unit: this row alone is what catches them
+    D2  ONLY the RECORD PARTITION row deleted       still red   7/7       1   a different check -- it is not what catches a label swap, and saying so is what D1b measures
+  [CONFIRMED] D2  ONLY the RECORD PARTITION row deleted: 7 of 7 label-side exchanges are caught at the gate, predicted 'still red'.  a different check -- it is not what catches a label swap, and saying so is what D1b measures
+  [CONFIRMED] D3 A KERNEL PUT BACK IS SEEN: with `partition` comparing the segments CASE-INSENSITIVELY -- a projection, and the shape of every repair before this one: something quietly outside the comparison -- the RECORD PARTITION row goes red at 3 of 3 sites (runner exit 1).  That row is the only thing standing behind 'the two halves are the whole record', and a claim of exhaustiveness that cannot fail is the `x == x` this arc has now met twice
+
+R3 -- EVERY FIELD OF EVERY RECORD, MUTATED ONE AT A TIME (A FIXTURE)
+--------------------------------------------------------------------
+'No field can be left behind because nobody named it' is a claim about a
+POPULATION, so it is measured over the population rather than over the field
+that was reported.  The population is DERIVED from the record's own structure:
+`partition` cuts each site into segments and figures, and every one of them is
+mutated individually here.
+
+⚠️ THIS IS IN MEMORY AND IT IS A FIXTURE, declared as one.  'The gate function
+returns False when called with a mutated string' and 'the runner goes red when
+the document is wrong' are different sentences (mg-9207).  R1 is the evidence;
+this is the map, and its value is COVERAGE -- it is the enumeration that would
+have found the label exchange in the same pass as the figure exchange.
+
+    site                  segments  empty  fired  figures  fired
+    the STATE.md row            18      0     18       17     17
+    §14                         17      0     17       16     16
+    H8                          27     10     27       36     36
+  [CONFIRMED] R3a EVERY FIELD OF THE RECORD IS LOAD-BEARING: 62 of 62 non-blank SEGMENTS and 69 of 69 FIGURES, over 3 sites, each mutated ALONE, each caught.  The population is derived from `partition` and not from a list somebody wrote, so a field added to one of these sections tomorrow is in it without this instrument being edited
+  [MEASURED ] R3b 10 segment(s) over the 3 sites are empty or all whitespace and are reported as an ABSENCE rather than counted: there is no character in them to mutate.  Their bytes are still COMPARED -- an empty segment that acquires content, or loses it, changes the declared record like any other
+
+R4 -- THE INSTRUMENTS THAT RAISED IT, RE-RUN UNMODIFIED
+-------------------------------------------------------
+An instrument that raised a finding must be able to re-run UNMODIFIED against
+the repair answering it.  None of the four below is edited by this repair --
+that is checked from git, not asserted -- and each is re-run as it stands.
+
+What is expected of mg-9207 is NOT a green run.  Its E rows PREDICT SILENCE,
+and silence is what this repair removes: those rows must now disagree with
+their own prediction, and its E-findings must go to zero.  A landed finding
+looks like a refuted prediction from the raising instrument's side.
+
+  [CONFIRMED] R4-mg-9207 `audit_8eca_repair.py` is unmodified in the working tree
+  [CONFIRMED] R4-mg-8eca `repair_8aae.py` is unmodified in the working tree
+  [CONFIRMED] R4-mg-8aae `audit_8916_repair.py` is unmodified in the working tree
+  [CONFIRMED] R4-mg-8916 `repair_835f.py` is unmodified in the working tree
+
+    mg-9207: exit 1, 25 confirmed / 7 refuted / 0 measured rows, 3 findings ['J-3', 'J-2', 'J-1']
+      its OWN refuted rows (7):
+        - C7 the runner REPORTED rather than CRASHED on 8 of 12 exchanges -- it raised AssertionError out of its own negative co
+        - C7b and the runner's negative-control SELF-TEST row went red on 8 of 12 exchanges, because the battery evaluates its o
+        - E2 H8: the two LABELS exchanged, the figures left alone -> 1 gate rows refuted (FIRES), predicted SILENT; the runner s
+        - E2b H8: two LABELS exchanged AWAY from the control's own literals -> 1 gate rows refuted (FIRES), predicted SILENT; ru
+        - E3 H8: the two historical COLUMN HEADERS exchanged -> 1 gate rows refuted (FIRES), predicted SILENT; runner exit 1
+        - E2/E2b/E3 THE INVARIANCE MOVED, IT DID NOT GO AWAY: 0 of 3 label-side exchanges leave the gate silent. An exchange has
+        - S1b and the single refuted row is A4's OWN permutation row -- the row that RAISED H-1, now false because the gate fire
+  [CONFIRMED] R4-mg-9207-frozen 5 of 5 committed transcripts are sha256-identical after its run
+
+    mg-8eca: exit 0, 22 confirmed / 0 refuted / 1 measured rows, 0 findings []
+      its OWN refuted rows (0):
+  [CONFIRMED] R4-mg-8eca-frozen 5 of 5 committed transcripts are sha256-identical after its run
+
+    mg-8aae: exit 1, 26 confirmed / 10 refuted / 0 measured rows, 0 findings []
+      its OWN refuted rows (10):
+        - no unread prose slot of 68+ chars found at the STATE.md row
+        - no unread prose slot of 68+ chars found at §14
+        - no unread prose slot of 68+ chars found at H8
+        - no unread prose slot of 68+ chars found at the STATE.md row
+        - no unread prose slot of 68+ chars found at §14
+        - no unread prose slot of 68+ chars found at H8
+        - 0 of 6 probe slots passed their CONTROL: blanked, the runner stays green, so the slot is prose no check reads and a fi
+        - 0 of 6 wrong-prose probes make the real runner red, at 3 of 3 sites and in both shapes, on wording chosen here.  G-1 i
+        - 0 of 6 restorations return the runner to exit 0, sha256-verified -- the gate does not fire on everything
+        - 0 of 2 permutation probes leave the real runner at exit 0.  A wrong figure a reader meets, inside the section, in ordi
+  [CONFIRMED] R4-mg-8aae-frozen 5 of 5 committed transcripts are sha256-identical after its run
+
+    mg-8916: exit 0, 16 confirmed / 6 refuted / 2 measured rows, 0 findings []
+      its OWN refuted rows (0):
+  [CONFIRMED] R4-mg-8916-frozen 5 of 5 committed transcripts are sha256-identical after its run
+  [CONFIRMED] R4a mg-9207 raises 0 E2/E2b/E3 FINDING against the repaired tree, where it raised 3 (its findings now: ['J-3', 'J-2', 'J-1']).  The defect it found is gone, measured by the instrument that found it
+  [CONFIRMED] R4b and 4 of its rows now REFUTE their own prediction of SILENCE (its 'THE INVARIANCE MOVED' row among them: 1 such row printed).  That is what a landed finding looks like from the raising instrument's side -- its exit is 1 and that is CORRECT, not a regression
+  [CONFIRMED] R4c and its C3 still holds: the FIGURE ORDER row is the ONLY gate row that failed on a FIGURE exchange, 12 of 12, AFTER two rows were added to the gate.  [CONFIRMED] C3 and the `FIGURE ORDER` row FOR THAT SITE is the ONLY GATE row that failed: 12 of 12.  A run tha
+  [MEASURED ] R4d mg-8aae's A3 reports NO UNREAD PROSE SLOT at 6 of its 6 probe slots, where it previously found one per site.  Its slot search requires prose that can be BLANKED with the runner staying green, and after this repair there is none -- the search failing IS the measurement, taken by an instrument that is not this repair's.  It is why 9 of its 10 refuted rows have one cause, and it is a DISTURBANCE, reported rather than counted away
+  [CONFIRMED] R4e and G-1 is NOT reopened by that: mg-8916's own instrument, unmodified, exits 0 with its U1 wrong-prose probes firing -- G-1's closure is re-derived by a second instrument that does not need an unread slot to do it, plus N10-N13 of the runner's own control
+
+R5 -- WHAT IS NOT COVERED, AND THIS ARTIFACT CHECKED FOR ITS OWN DEFECT
+-----------------------------------------------------------------------
+Both of the last two findings were a printed extent slightly wider than the
+code beneath it, so the extent is printed.
+
+NOT COVERED, with the reason, because an omission is not checkable and a stated
+reason is:
+
+  * TEXT OUTSIDE THE SITE.  A site is a SECTION, and this is the one
+    projection that remains.  It is unchanged since mg-8a5c, it is stated
+    where a reader meets the gate, and it is itself gated: `section()` anchors
+    BY CONTENT, and N6 of the negative control relocates a whole disclosure
+    out of §14 to show the gate notices.  Widening it to the file would make
+    every unrelated edit to three documents red, which is a different trade
+    and is pm-onethird's to size, not this repair's.
+
+  * TWO OCCURRENCES OF THE SAME FIGURE TOKEN EXCHANGED.  Still the identity
+    map on the bytes (mg-8eca): there is no artifact to detect.  This is an
+    EMPTY SET rather than a blind spot, and the difference is checkable.
+
+  * WHAT A ROSTER ENTRY MEANS.  `ORDER` says where `10 483` goes and
+    `HISTORICAL` says it is 'this file at bbe83b5^'.  Nothing checks that
+    sentence against git.  Unchanged from mg-8eca and named again here
+    because it is now the widest thing left.
+
+  * THE RESEAL.  `--reseal` is the one step that can make a wrong document
+    green, and it exists because the alternative -- no way to edit these
+    sections -- is not a gate, it is a freeze.  Three things narrow it: it
+    REFUSES while any other gate row is refuted; what it writes is TEXT, so
+    the blessing is a reviewable diff rather than a hash bump; and it is not
+    invoked by `run_all.sh`, so it cannot happen as a side effect of a run.
+
+AND THIS DELIVERABLE IS OF THE SAME KIND AS THE DEFECT IT REPAIRS.  It is a
+comparison, repairing a comparison, and it compares things.  The defect is:
+COMPARING A RECORD BY IDENTITY ON SOME FIELDS AND POSITION ON OTHERS, SO THAT
+WHATEVER IS IN NEITHER IS SILENT.  Every comparison this deliverable performs,
+enumerated -- and where a branch cannot exhibit the defect, the reason, because
+a reason is checkable and an omission is not:
+
+  1. SITE RECORD -- site skeleton against the declared record.  CAN exhibit it
+     and does not: the comparison is `==` on the whole string, so its kernel is
+     empty by construction.  RECORD PARTITION is what shows the string really
+     is the whole non-figure half, and D3 shows that row failing when it is
+     not.
+  2. RECORD PARTITION -- `rejoin(segments, figures) == raw`.  CANNOT exhibit
+     it: it is equality on two whole strings, with no field structure to be
+     partial about.  Its risk is the opposite one -- being unfalsifiable -- and
+     D3 is the answer to that, not to this.
+  3. R1's SCORING -- probe verdicts against predictions.  DID exhibit it, in
+     this instrument's own first version: `"FIGURE CENSUS" in row` matched the
+     SITE RECORD row's own explanation, which names the other rows, and every
+     probe was scored as having broken a figure row.  Fixed by comparing the
+     row's HEADING, and the fix is `heading()`, one function, used everywhere
+     a row is identified.
+  4. R3's POPULATION -- segments and figures enumerated from `partition`.
+     CANNOT exhibit it in the field-by-field sense: nothing is named, the
+     population is derived.  Its real limit is that it is IN MEMORY, and that
+     is declared in its own heading rather than left to be found.
+  5. R4's re-run scoring -- `checks recorded` / `refuted` / findings parsed out
+     of another instrument's transcript.  CAN exhibit it: it reads four named
+     numbers and ignores everything else printed.  Narrowed by also comparing
+     the EXIT CODE and by naming, for mg-9207, the exact rows expected to
+     move -- but this one is real and is stated rather than dressed up.
+  6. THE FROZEN-TRANSCRIPT CHECK -- sha256 before and after.  CANNOT exhibit
+     it: a hash over the whole file has no field structure.
+
+  [MEASURED ] R5 six comparisons in this deliverable, enumerated: 2 can exhibit the defect and are shown not to (1) or narrowed and declared (5), 1 DID exhibit it and was fixed (3), and 3 cannot, each with the reason stated (2, 4, 6)
+
+RESTORATION
+-----------
+  [CONFIRMED] every mutated file is restored and the restoration is CHECKED by sha256, not asserted: 4 of 4 byte-identical
+
+BOTTOM LINE
+-----------
+  checks recorded : 27
+  measurements    : 4
+  confirmed       : 23
+  refuted         : 0
+
+  The census compares the WHOLE RECORD.  The seven label-side
+  exchanges mg-9207 left open fire on disk against the real runner,
+  caught by the half of the record that was not being compared,
+  with the figure half green at every one -- and deleting that
+  comparison puts all seven back to silent.
