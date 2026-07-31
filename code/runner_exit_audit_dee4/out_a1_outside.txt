@@ -36,8 +36,8 @@ A1b  IS `*.sh` ITSELF A NAME RULE?  EVERY TRACKED FILE, BY SHEBANG
   is.  So: every tracked file, whatever its name, read for a shell
   shebang.  A hit would be a shell script the property cannot reach.
 
-      tracked files                              1099
-      distinct extensions                           8   .py 435, .txt 373, .md 189, .sh 87, (none) 7, .gz 6, .js 1, .html 1
+      tracked files                              1105
+      distinct extensions                           8   .py 435, .txt 379, .md 189, .sh 87, (none) 7, .gz 6, .js 1, .html 1
       NON-`.sh` files with a shell shebang          0
 
   HOW THIS IS ESTABLISHED, so a reader can disagree with it: the

@@ -16,8 +16,8 @@ A5a  MG-C2B3'S OWN PROBES, RUN AT HEAD AGAINST THE REPAIRED LIBRARY
       code/runner_exit_c2b3/selftestc2b3.py
 
     probe                            exit   secs     verdict
-    k1_census.py                     0      4.8      runs clean
-    k2_consume.py                    0      5.2      runs clean
+    k1_census.py                     0      1.7      runs clean
+    k2_consume.py                    0      2.3      runs clean
     libc2b3.py                       0      0.0      runs clean
     selftestc2b3.py                  0      0.0      runs clean
 
@@ -55,8 +55,8 @@ A5c  THE TWO REWRITTEN RUNNERS, RUN AT HEAD
   remove a step.  Both are run whole and their exit codes read.
 
     runner                                         exit   secs     steps reached
-    code/face_geometry_audit_f1b2/run_audit.sh     0      85.6     5 of 5
-    code/face_geometry_audit_fcf1/run_audit.sh     0      26.5     3 of 3
+    code/face_geometry_audit_f1b2/run_audit.sh     0      61.8     5 of 5
+    code/face_geometry_audit_fcf1/run_audit.sh     0      19.8     3 of 3
 
   `steps reached` is a CONJUNCTION with the exit code, for the same
   reason mg-7522 gives: an exit-code-only check cannot tell a repair
