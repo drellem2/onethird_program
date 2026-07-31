@@ -226,41 +226,32 @@ because I made the opposite call at 17:35 on a misread and had to retract it.**
 **So: continue, and prefer removal to detection.** Revisit the stop question when a generation returns 0 BROKEN
 on an audit that measured its extents in both directions — that, not fatigue, is the signal.
 
-## Now (in flight) — 2026-07-31 06:35
+## Now (in flight) — 2026-07-31 08:32
 
-**Every audit below committed its predictions BEFORE running.** That practice started with mg-6df0 at
-05:53 and reached three further audits within the hour, unmandated.
+**Closed this window:** **CI IS GREEN on `one_third_width_three`** — mg-3934 merged at 07:13 and the
+21-hour red is over, with **the mg-75f0 class-closure demo executing for the first time** (`2a4c181`,
+landed as its own acceptance commit). And **mg-069f merged at 08:13** (`bb1cb9b`) — *strike the two
+remaining live false claims, fix the population* — so the §2.3 lineage is closed at the body text.
 
-- **mg-19ec** — audit of mg-dffa's warrant narrowing
-- **mg-4adb** — `set -e` — **one line outside every deletion population**
-- **mg-069f** — **two proved-false claims still live in body text**, plus a control naming 4,469 posets and sweeping 404
-- **mg-70c7** — mg-dee4's six findings — site-vs-execution grain, the unreproducible 154, the 9-vs-3 double standard
+- **mg-4adb** — `set -e` — one line outside every deletion population
+- **mg-70c7** — mg-dee4's six findings — the site-vs-execution grain
+- **mg-8d5e** — **a derived anchor re-pointed when a SENTENCE was edited**; census term denotes **39**, table classifies **17**
+- **mg-3f3b** — **`n/a` is where a matrix hides**; construct is **1 touched of 6**; population published **429** against **448**
+- **mg-3946** — audit of the CI historical-SHA repair
 
-### Queued behind their parents
+### Queued
 
-- **mg-8d5e** (available) — **a derived anchor re-pointed when a SENTENCE was edited** — both sides now compare the already-repaired predicate, numbers identical, meaning changed. Census term denotes **39**, table classifies **17**
-- **mg-3f3b** (available) — **`n/a` is where a matrix hides** — 1 of 8 reasons is a fact about the derivation, not the site; construct is **1 touched of 6**; `ROW_NAMES` hand-lists 5 where the gate prints 6; population published **429** against **448** present
-- **mg-e35b** (available) — mg-fcf1's five — three rows that cannot fail, the gauge standard unapplied to kept rows
-- **mg-a74f** (available) — mg-16eb's — the visibility instrument measures **bytes in the HTML** and calls it what a reader is shown
+- **mg-e35b** (available) — mg-fcf1's five — three rows that cannot fail
+- **mg-a74f** (available) — mg-16eb's — the visibility instrument measures bytes in the HTML
+- **mg-d075** (available) — mg-19ec's — **8 sites state the figure, 4 unbounded**, incl. a clause faulting another for naming no class while itself unbounded
+- **mg-69b4** (available) — scoping — the busiest repo has no merge gate
 - **mg-344a** (available) — Daniel workspace, `assignee=human`
 
-**Reconciled this window:** the 4-of-15 (audit) vs all-17 (repair) discrepancy I asked mg-2c77 to settle
-**refuted both numbers** — the census term denotes **39** operands, the table classifies **17**, and **22
-are in no column**. Neither party had the population. *Asking for a reconciliation rather than letting the
-newer count stand is what surfaced it.*
-
-- **mg-69b4** (scoping, no audit — it produces a decision, not an artifact) — **`onethird_program` has
-  208 commits since 2026-06-01 and no merge gate of any kind**: no `.pogo/refinery.toml`, no gate
-  script, no Actions. `one_third_width_three` has **both**. `union_closed` has neither at 86 commits;
-  `one_third` is dormant at 0 commits, so its April build is correct rather than stale.
-  **This is where the entire control apparatus lives** — every gate, mutation demo, deletion population
-  and refusal check repaired tonight — **and nothing runs any of it on merge.** mg-7db4 fixed this in
-  one repo, which makes it **the same defect as mg-069f at the repository level.** The ticket asks for a
-  decision with reasons, **not for a gate**: an ~11-minute gate on an arc merging twenty times a night
-  is a real tax, and *a gate installed to close an asymmetry rather than because it catches something is
-  a cost with no stated benefit.* **If the answer is no, the reason gets recorded in the repo** — an
-  absence with a stated reason is a decision; an absence without one is an oversight that looks
-  identical.
+**Practice change this window, not a ticket:** four audit verdicts this arc reached nobody, the last two on
+**consecutive merges**. Cause is a timing bug in my briefs — **the merging worker is reaped ~3s after its
+merge lands**, so any instruction to route a verdict *after* merging races the reaper. Three of four pending
+audits said nothing about routing at all. **Every audit brief now says: write `mg done --result` and mail the
+verdict BEFORE submitting to the refinery.** *A superseded verdict is cheap, a lost one is not.*
 
 ## Next (gated / queued)
 
