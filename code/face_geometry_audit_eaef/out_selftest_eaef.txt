@@ -1,0 +1,79 @@
+==============================================================================
+mg-eaef selftest -- primitives on hand-counted inputs
+==============================================================================
+
+==============================================================================
+1.  DECIDING CONDITIONS
+==============================================================================
+The toy source has, by hand: `a` -- one guard (`x > 0 and y > 0`) and two return
+values (`1`, `0`); `b` -- one return value; `c` -- one return value, and its `if`
+is NOT a deciding condition because nothing under it returns; `d` -- none.
+That is 1 guard + 4 return values = 5.
+
+   a    guard  BoolOp(op=And(), values=[Compare(left=Name(id='x', ctx=L
+   a    value  Constant(value=0)
+   a    value  Constant(value=1)
+   b    value  ListComp(elt=Name(id='i', ctx=Load()), generators=[compr
+   c    value  Call(func=Name(id='all', ctx=Load()), args=[GeneratorExp
+  [HOLDS ] 5 deciding conditions, 1 of them a guard: got 5 and 1
+        WOULD DIFFER UNDER: the walk counting an `if` with no `return` under it, which would make `c`'s print-guard a deciding condition and every census number above it too large
+
+==============================================================================
+2.  BOOLEAN OPERANDS, NESTED AND TOP-LEVEL
+==============================================================================
+By hand: `a`'s guard is a top-level `and` with 2 operands.  `b`'s return value is a
+list comprehension whose `if` holds an `and` with 2 operands -- NESTED.  `c`'s
+return value is `all(...)` whose generator holds an `and` with 2 -- NESTED.
+So 6 operands in all, 2 top-level and 4 nested.
+
+   a    guard  c1/2 TOP       x > 0
+   a    guard  c2/2 TOP       y > 0
+   b    value  c1/2 nested    i != 0
+   b    value  c2/2 nested    i != 9
+   c    value  c1/2 nested    v > 0
+   c    value  c2/2 nested    v < 9
+  [HOLDS ] 6 operands, 2 top-level and 4 nested: got 6, 2 and 4
+        WOULD DIFFER UNDER: the enumerator asking whether the CONDITION is a `BoolOp` instead of walking for them -- which is exactly the difference this audit measures, so it is scored here on a source where the answer is countable by eye
+  [HOLDS ] AND THE TOP-LEVEL-ONLY MODE MATCHES THE SUBJECT'S SHAPE: asking for top-level operands alone returns the same 2
+        WOULD DIFFER UNDER: the two modes diverging, which would mean the 11-vs-15 comparison in e1 and e2 is between two different questions
+
+==============================================================================
+3.  THE SPLICER
+==============================================================================
+   before: return [i for i in items if i != 0 and i != 9]
+   after : return [i for i in items if i != 9]
+  [HOLDS ] REMOVING ONE OPERAND LEAVES THE OTHER STANDING AND THE STATEMENT INTACT: the patched source parses, and `b`'s comprehension keeps its filter with one comparison instead of two
+        WOULD DIFFER UNDER: a splicer that removes the whole condition, which would make every CHANGES row in e1 a statement about a larger patch than the one it names
+
+==============================================================================
+4.  THE DIFFER
+==============================================================================
+   delete the `return 1` and put `pass` in its place    want (1, 0, 0)  got (1, 0, 0)
+   delete the `if` and the `return` together            want (1, 1, 2)  got (1, 1, 2)
+   delete one operand of the guard                      want (0, 0, 1)  got (0, 0, 1)
+   reorder nothing -- an identical file                 want (0, 0, 0)  got (0, 0, 0)
+  [HOLDS ] THE DIFFER AGREES WITH FOUR HAND-COUNTED PATCHES on (returns, other statements, boolean operands)
+        WOULD DIFFER UNDER: a `pass` inserted where a statement was removed cancelling the removal, or an operand left standing as a bare condition being counted as removed.  Both are ways of understating a patch, which is the defect the whole 8-of-11 measurement is about
+
+==============================================================================
+5.  THE DIRECTION FUNCTION, ON THE TWO ANSWERS A BINARY CANNOT GIVE
+==============================================================================
+   declared (1, 0, 0)  measured (1, 0, 0)  -> AGREES       (want AGREES)
+   declared (1, 0, 0)  measured (1, 1, 0)  -> UNDERSTATES  (want UNDERSTATES)
+   declared (1, 1, 0)  measured (1, 0, 0)  -> OVERSTATES   (want OVERSTATES)
+   declared (1, 1, 0)  measured (0, 2, 0)  -> MIXED        (want MIXED)
+  [HOLDS ] ALL FOUR DIRECTIONS ARE DISTINGUISHED, including OVERSTATES and MIXED -- the two a `exact / not exact` column reports as the same thing (mg-0b07's A2)
+        WOULD DIFFER UNDER: the function reducing to inequality, at which point the word `understate` in e4 would be a label rather than a measurement
+
+==============================================================================
+6.  THE TRANSCRIPT ROW PARSER, AND THE NODE TOTAL
+==============================================================================
+   parsed: (0, 1, 0, 4)
+  [HOLDS ] THE DECLARATION ROW IS READ BY TAG, not by line number: (0, 1, 0, 4) out of a line taken verbatim from the subject's own transcript
+        WOULD DIFFER UNDER: the subject changing the column order, at which point e3 would read the wrong numbers.  It is parsed by the tag it prints so a line moving does not silently change what is read
+  [HOLDS ] AND `expr_nodes` COUNTS ONLY INSIDE DECIDING CONDITIONS: the toy source's 55 node(s) exclude `d`, which has no deciding condition at all
+        WOULD DIFFER UNDER: the total being widened to the whole module, which is the very widening e1's rung-7 finding says has NOT happened in the subject
+
+==============================================================================
+8 claim(s) scored; 0 BROKEN.  0 finding(s).
+==============================================================================

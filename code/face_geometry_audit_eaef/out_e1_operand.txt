@@ -1,0 +1,127 @@
+==============================================================================
+mg-eaef e1 -- each side of the respelled `or`, then rungs 6 and 7
+==============================================================================
+
+PREDICTIONS, registered before these runs (PREDICTIONS.md e1):
+   e1.1  delete the ORDER half alone -> BYTE-IDENTICAL, exit 0
+   e1.2  delete the WIDTH half alone -> CHANGES, exit 1
+   e1.3  every NESTED boolean operand deleted alone -> BYTE-IDENTICAL, exit 0
+   e1.4  the rung-7 assignment patch -> BYTE-IDENTICAL, exit 0, and the
+         predicate's answer on the separator pair FLIPS
+
+  [HOLDS ] THE BASELINE IS REGENERATED IN THIS RUN, not read from controls_output.txt: 23695 bytes, exit 0
+        23695 bytes
+        WOULD DIFFER UNDER: the battery ceasing to be reproducible from its own sources.  Every IDENTICAL/CHANGES below is against THIS text, so a committed artifact that had drifted from its own code could not make a row here read green
+
+==============================================================================
+1.  THE MOVE: each half of the respelled guard, deleted alone
+==============================================================================
+The live guard, read out of the tree:
+
+      if len(shape_A) != len(shape_B) or any(
+                  a != b for a, b in zip(shape_A, shape_B)):
+
+mg-0b07 asked for this and mg-f7e1 did it.  The two halves are now operands, so
+the deletion test HAS A HANDLE on each.  What it reports when it pulls each one
+is the question -- a handle is not coverage.
+
+   delete ORDER half `len(shape_A) != len(shape_B)`    IDENTICAL  exit 0  NOT COVERED by any pair in the battery
+   delete WIDTH half `any(a != b for a, b in zip(...))` CHANGES    exit 1  the battery covers it
+  [HOLDS ] THE OPERATOR IS REALLY THERE AND EACH HALF IS REALLY DELETABLE: 2 of 2 patches applied to a single anchor occurring exactly once, and the two results DIFFER from each other, so the sweep is reading the code and not a constant
+        ORDER half IDENTICAL exit 0; WIDTH half CHANGES exit 1
+        WOULD DIFFER UNDER: the two halves producing the same result, which would mean this section cannot tell them apart and neither could the subject's
+  [FINDING E1] THE MOVE BOUGHT A HANDLE AND NOT A SECOND COVERED HALF: of the 2 operands the respelling created, 1 changes the artifact and 1 does not.  The subject states this on the row that carries it (`NOT COVERED -- deletion establishes nothing about it`) and this run reproduces it independently, so it is booked here as a DISCLOSED limit rather than a hidden one -- the finding is the shape of what option 1 can buy, not a false claim.
+        covered by deletion: WIDTH half; not covered: ORDER half
+
+==============================================================================
+2.  RUNG SIX -- an explicit boolean operand the sweep does not reach
+==============================================================================
+The subject's bound is a sentence AND a count: `DELETION ESTABLISHES COVERAGE DOWN
+TO EXPLICIT BOOLEAN OPERANDS AND NO FURTHER`, with `the sweep above reaches the
+operands of `or` and `and` and nothing else`.  Both sentences describe a population.
+This section enumerates that population from the tree and compares it with the
+one the sweep actually visits.
+
+   every operand of every `or`/`and` inside a deciding condition of face_complex.py:
+
+      proper_ideals          value  c1/2  nested     m != 0
+      proper_ideals          value  c2/2  nested     m != full
+      mat_eq                 value  c1/2  nested     len(a) == len(b)
+      mat_eq                 value  c2/2  nested     all(x == y for x, y in zip(a, b))
+      absorb_trace           guard  c1/2  TOP LEVEL  len(shape_A) != len(shape_B)
+      absorb_trace           guard  c2/2  TOP LEVEL  any( a != b for a, b in zip(shape_A, shape_B
+      gate_violations        guard  c1/2  TOP LEVEL  m != len(B)
+      gate_violations        guard  c2/2  TOP LEVEL  any(len(A[i]) != len(B[i]) for i in range(m)
+      diagonal_moves         guard  c1/2  TOP LEVEL  len(A) != len(B)
+      diagonal_moves         guard  c2/2  TOP LEVEL  any(len(A[i]) != len(B[i]) for i in range(le
+      Poset.leq              value  c1/2  TOP LEVEL  a == b
+      Poset.leq              value  c2/2  TOP LEVEL  (a, b) in self.less
+      Poset.comparable       value  c1/3  TOP LEVEL  a == b
+      Poset.comparable       value  c2/3  TOP LEVEL  (a, b) in self.less
+      Poset.comparable       value  c3/3  TOP LEVEL  (b, a) in self.less
+
+   15 in all: 11 at the top level of their condition -- which is the sweep's
+   population, and the subject's `operands` column -- and 4 NESTED, under a
+   comprehension or a quantifier.
+  [HOLDS ] THE TOP-LEVEL COUNT THIS AUDIT READS AND THE ONE THE SUBJECT PRINTS AGREE: 11, so the disagreement below is about which operands are IN the population and not about how to count one
+        top-level operands here: 11; rows in the subject's PER CLAUSE table: 11
+        WOULD DIFFER UNDER: either enumerator changing, or the predicate layer gaining or losing a top-level clause.  The subject prints 11 in its `operands` column and sweeps 11 rows; this audit walks the tree with different code and gets the same 11
+
+SO THE NESTED ONES ARE DELETED HERE, one at a time, exactly as the sweep deletes
+its eleven.  If they came back IDENTICAL the gap would be a bookkeeping one.
+
+   function               kind   op   artifact   exit  operand
+   proper_ideals          value  c1/2  CHANGES    1     m != 0
+   proper_ideals          value  c2/2  CHANGES    1     m != full
+   mat_eq                 value  c1/2  CHANGES    1     len(a) == len(b)
+   mat_eq                 value  c2/2  CHANGES    1     all(x == y for x, y in zip(a, b))
+  [HOLDS ] EVERY NESTED OPERAND WAS ACTUALLY REMOVED AND THE BATTERY ACTUALLY RAN ON THE RESULT: 4 patch(es), each parsed back and each battery exiting 0 or 1 rather than crashing
+        proper_ideals c1 exit 1; proper_ideals c2 exit 1; mat_eq c1 exit 1; mat_eq c2 exit 1
+        WOULD DIFFER UNDER: a mutated source that does not parse or a battery that dies, either of which would make an IDENTICAL row mean 'the run failed the same way' instead of 'the deletion moved nothing'
+  [FINDING E2] RUNG SIX IS REAL AND IT IS LOAD-BEARING: 4 explicit boolean operands in face_complex.py's deciding conditions are NESTED, so the sweep never deletes one, and 4 of 4 CHANGE the artifact when deleted here.  The bound sentence names `explicit boolean operands` as the level deletion reaches; deletion reaches 11 of the 15 there are, and the 4 it misses are the ones whose deletion the battery would have SEEN.
+        nested and load-bearing: proper_ideals c1 (m != 0); proper_ideals c2 (m != full); mat_eq c1 (len(a) == len(b)); mat_eq c2 (all(x == y for x, y in zip(a, )
+
+==============================================================================
+3.  RUNG SEVEN -- the decision that is not in a condition at all
+==============================================================================
+Naming a rung is cheap.  This one is named AND run, because the point of the
+exercise is that the chasing does not terminate and an unrun seventh rung is
+just a sentence.
+
+The guard compares `shape_A` with `shape_B`.  Neither is computed in the guard:
+
+      shape_A = [len(row) for row in A]
+      shape_B = [len(row) for row in B]
+      if len(shape_A) != len(shape_B) or any(...):
+
+The subject's five census columns all range over DECIDING CONDITIONS -- the test
+of an `if` that returns, and the value of a `return`.  Two assignments are not
+either, so the comprehensions that build the two things being compared are
+outside every column, including the one whose whole purpose is to have no grain.
+
+  [HOLDS ] THE PATCH IS OUTSIDE THE GRAIN-FREE TOTAL, MEASURED RATHER THAN ARGUED: face_complex.py has 73 deciding conditions carrying 1002 expression nodes, and the rung-7 patch moves the module's syntax node count by +8 while moving that total by +0
+        11 deciding condition(s) in `absorb_trace`; the patch touches none of them
+        WOULD DIFFER UNDER: the census being widened to statements, at which point this claim would need rewriting rather than being quietly true.  The number 1002 is the subject's own and is re-derived here by different code
+
+   the rung-7 patch, which removes NO return, NO statement and NO boolean operand:
+      -    shape_B = [len(row) for row in B]
+      +    shape_B = [len(row) for row in B[:len(A)]]
+
+   artifact: BYTE-IDENTICAL exit 0
+
+   and the predicate, asked about the pair the ORDER half exists for:
+      A = [[0, 1], [1, 0]]   B = [[0, 1], [1, 0], [0, 0]]
+      live tree     : absorbable=False at gate 'shape'
+      rung-7 mutant : absorbable=True at gate 'parity'
+      brute force over all 2^m sign vectors: False
+  [HOLDS ] THE RUNG-7 PATCH REALLY CHANGES THE DECISION, so its byte-identical artifact is a statement about the battery and not about the patch: the live predicate answers False at gate 'shape' and the mutant answers True at gate 'parity' on the separator pair, against a brute force that says False
+        WOULD DIFFER UNDER: the separator pair ceasing to separate -- which would need `zip` to stop truncating.  The expected value is the enumerated definition and shares no line with `absorb_trace`
+  [FINDING E3] RUNG SEVEN: A DECISION HOISTED OUT OF THE CONDITION IS OUTSIDE EVERY NUMBER THE SUBJECT PRINTS.  A one-token change to `shape_B = [len(row) for row in B]` reinstates exactly mg-0b07's defect -- the order half stops rejecting -- and leaves the artifact BYTE-IDENTICAL at exit 0 while removing 0 returns, 0 statements and 0 boolean operands.  The `1002 expression nodes` column is offered as the total that depends on no classification; it depends on the classification `deciding condition`, and this patch is outside it.
+        the subject's own SELF_DEFECT_BRANCHES entry 9 says the expression-node total 'bounds how much is there and does not name what'; this is a case where it does not bound how much is there either
+
+==============================================================================
+6 claim(s) scored; 0 BROKEN.  3 finding(s).
+   FINDING E1  THE MOVE BOUGHT A HANDLE AND NOT A SECOND COVERED HALF: of the 2 operands the respelling created, 1 
+   FINDING E2  RUNG SIX IS REAL AND IT IS LOAD-BEARING: 4 explicit boolean operands in face_complex
+   FINDING E3  RUNG SEVEN: A DECISION HOISTED OUT OF THE CONDITION IS OUTSIDE EVERY NUMBER THE SUBJECT PRINTS
+==============================================================================

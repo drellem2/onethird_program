@@ -1,0 +1,81 @@
+==============================================================================
+mg-eaef e2 -- the stated bound against what deletion reaches
+==============================================================================
+
+PREDICTIONS, registered before these runs (PREDICTIONS.md e2):
+   e2.1  the five-column census re-derives exactly: face_complex.py 73/5/11/11/1002, posets.py 6/1/2/1/55
+   e2.2  the `operands` column reads 2 for posets.py and the sweep deletes 0 there
+   e2.3  4 explicit boolean operands are in NEITHER the `operands` column nor
+         the `compounds` column
+
+
+==============================================================================
+1.  THE CENSUS, RE-DERIVED
+==============================================================================
+   file               conds  bool  operands  compounds  expr nodes
+   face_complex.py    73     5     11        11         1002
+   posets.py          6      1     2         1          55
+  [HOLDS ] THE CENSUS RE-DERIVES FROM DIFFERENT CODE: face_complex.py 73/5/11/11/1002 and posets.py 6/1/2/1/55, which is what the subject prints for both files
+        WOULD DIFFER UNDER: either file changing, or the two enumerators disagreeing -- at which point everything below is about a number this audit cannot reproduce and has to say so before using it
+  [HOLDS ] THE SENTENCE THIS SECTION IS ABOUT IS IN THE COMMITTED TRANSCRIPT, exactly once: 'DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS'
+        occurrences: 1
+        WOULD DIFFER UNDER: the transcript being regenerated with that sentence reworded, which would make the comparison below about a document nobody has
+  [HOLDS ] THE SENTENCE THIS SECTION IS ABOUT IS IN THE COMMITTED TRANSCRIPT, exactly once: 'NOT SWEPT, and named rather than left out silently: posets.py ha'
+        occurrences: 1
+        WOULD DIFFER UNDER: the transcript being regenerated with that sentence reworded, which would make the comparison below about a document nobody has
+
+==============================================================================
+2.  THE `operands` COLUMN AGAINST THE OPERANDS THE SWEEP DELETES
+==============================================================================
+The column's own definition, from the subject's kernel docstring, is `operands the
+sweep can delete`; the landing document heads it `operands the sweep deletes`.  It
+is printed on two rows.  Twenty lines earlier the same transcript prints:
+
+      NOT SWEPT, and named rather than left out silently: posets.py has 2 more
+      deciding clause(s) (_is_transitively_closed c1, _is_transitively_closed c2).  They are outside the predicate layer this deletion
+
+So the sweep's population is the clauses of face_complex.py and posets.py's two
+are outside it, said plainly and in the right place.  The census row for
+posets.py is the same fact counted the other way round, and it is the row a
+reader consults for the instrument's reach.
+
+   file               `operands` column says   the sweep deletes       
+   face_complex.py    11                       11                       
+   posets.py          2                        0                          <-- disagree
+  [HOLDS ] THE SWEEP REALLY DOES NOT VISIT posets.py: the line that enumerates what it swept lists 11 clauses and names no posets.py function
+        the enumeration line names: Poset.comparable; Poset.leq; absorb_trace; diagonal_moves; gate_violations
+        WOULD DIFFER UNDER: a row for `_is_transitively_closed` appearing in the sweep, which would close this finding by making the census row true
+  [FINDING E4] THE BOUND IS STATED WIDER THAN THE SWEEP ON ONE OF ITS TWO ROWS: the census prints `2` under `operands` for posets.py -- a column the kernel documents as `operands the sweep can delete` and the landing document heads `operands the sweep deletes` -- and the sweep deletes 0 operands in posets.py.  The transcript says so itself twenty lines above, so the two statements are in one document and disagree; the qualifier that travels with the claim covers only the `compounds` column (`posets.py adds 1 more, which no claim here covers`) and not this one.
+        the population is the 2-row census table printed under THE BOUND OF THIS INSTRUMENT; 1 of its 2 rows is a file the sweep visits
+
+==============================================================================
+3.  THE TWO COLUMNS AGAINST THE OPERANDS THAT EXIST
+==============================================================================
+`operands` and `compounds` are offered as the two sides of one line: what deletion
+reaches, and what it cannot reach into.  An EXPLICIT boolean operand is on the
+reachable side by the bound's own words.  Below, every operand of every `or`/`and`
+anywhere inside a deciding condition is enumerated and assigned to a column.
+
+   face_complex.py: 15 explicit boolean operand(s) in deciding conditions
+      counted by `operands`  : 11
+      counted by `compounds` : 0  -- the form filter skips `or` and `and` by name
+      counted by NEITHER     : 4
+         proper_ideals          value  c1/2  m != 0
+         proper_ideals          value  c2/2  m != full
+         mat_eq                 value  c1/2  len(a) == len(b)
+         mat_eq                 value  c2/2  all(x == y for x, y in zip(a, b))
+   posets.py: 2 explicit boolean operand(s) in deciding conditions
+      counted by `operands`  : 2
+      counted by `compounds` : 0  -- the form filter skips `or` and `and` by name
+      counted by NEITHER     : 0
+  [HOLDS ] THE GAP IS IN THE FILTER AND NOT IN THE WALK: the compound enumerator walks every node of every deciding condition, so it SEES each nested `and`, and then drops it because its form is named `and` -- the same two `BoolOp`s this audit finds are inside the walk it performs
+        proper_ideals c1 spelled with `and`; proper_ideals c2 spelled with `and`; mat_eq c1 spelled with `and`; mat_eq c2 spelled with `and`
+        WOULD DIFFER UNDER: the nested operators being of some other form, which would make this a gap in the form list rather than in the exclusion
+  [FINDING E5] THE BOUND NAMES A FLOOR IT DOES NOT REACH: `DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS AND NO FURTHER` is read as `every explicit boolean operand is on the reached side`, and 4 of the 15 explicit boolean operands in face_complex.py's deciding conditions are on neither side of the census -- not in `operands` (11), not in `compounds` (11).  They are excluded by name: the compound filter skips the forms `or` and `and`, on the assumption that anything spelled with an operator is deletable, and an operator nested under a comprehension or a quantifier is not.  e1 deletes all 4 and all 4 change the artifact.
+        the population is the 15 operands of the 7 `or`/`and` operators inside face_complex.py's 73 deciding conditions
+
+==============================================================================
+5 claim(s) scored; 0 BROKEN.  2 finding(s).
+   FINDING E4  THE BOUND IS STATED WIDER THAN THE SWEEP ON ONE OF ITS TWO ROWS: the census prints `2` under `operan
+   FINDING E5  THE BOUND NAMES A FLOOR IT DOES NOT REACH: `DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN O
+==============================================================================

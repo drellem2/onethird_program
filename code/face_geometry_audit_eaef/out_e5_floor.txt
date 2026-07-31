@@ -1,0 +1,84 @@
+==============================================================================
+mg-eaef e5 -- the floor item: the exit code, and the unrun remedy
+==============================================================================
+
+PREDICTIONS, registered before these runs (PREDICTIONS.md e5):
+   e5.1  `d2_deletion.py` re-run unmodified at HEAD exits 1 with exactly 1 BROKEN
+   e5.2  8 commits have touched face_complex.py and 2 of them have a two-clause
+         `shape` guard; the newer is not the pin
+   e5.3  with the named pair added, deleting the ORDER clause CHANGES the artifact
+         at HEAD -- and at b6bc2ef, where the same defect is still present
+
+
+==============================================================================
+1.  THE INSTRUMENT THAT RAISED THE FINDINGS, RE-RUN UNMODIFIED
+==============================================================================
+   run in place, nothing edited:  exit 1
+   summary line               :  49 claim(s) scored; 1 BROKEN.
+   committed transcript says  :  49 claim(s) scored; 0 BROKEN.
+
+   [BROKEN] AND THE PIN IS WHAT IT SAYS IT IS: of the 8 commits that ever touched face_complex.py, 2 has/have a two-CLAUSE `shape` condition in `absorb_trace`, and the NEWEST of them is bfd7948ed878 -- which is what b6bc2ef resolves to
+
+   lines that differ from the committed transcript: 3
+      committed: [HOLDS ] AND THE PIN IS WHAT IT SAYS IT IS: of the 7 commits that ever touched face_complex.py, 1 has/have a t
+      re-run   : [BROKEN] AND THE PIN IS WHAT IT SAYS IT IS: of the 8 commits that ever touched face_complex.py, 2 has/have a t
+      committed: newest two-clause commit b6bc2efed7b4; pin resolves to b6bc2efed7b4; 1 two-clause commit(s) in all
+      re-run   : newest two-clause commit bfd7948ed878; pin resolves to b6bc2efed7b4; 2 two-clause commit(s) in all
+      committed: 49 claim(s) scored; 0 BROKEN.
+      re-run   : 49 claim(s) scored; 1 BROKEN.
+  [HOLDS ] THE SUBJECT'S OWN `d2_deletion.py`, RUN IN PLACE WITH NOTHING EDITED, EXITS 1 WITH 1 BROKEN CLAIM(S) out of the 49 it scores
+        the broken claim is the two-clause pin
+        WOULD DIFFER UNDER: the pin claim being restated, or the pin being moved to this commit.  This claim is about the tree as committed at HEAD and is the reason the number below is not taken from the transcript
+
+==============================================================================
+2.  WHY IT BROKE -- and it is the repair's own respelling
+==============================================================================
+   commit     clauses  subject
+   bfd7948ed  2        docs+repair: THE DISJUNCTION IS SPELLED WITH AN OPERATOR A
+   0fb0e0035  0        docs+repair: THE THIRD RUNG IS REMOVED AND THE DECLARED UN
+   b6bc2efed  2        docs+repair: THE DELETION TEST IS PER RETURN AND THE INERT
+   c7f967394  0        control+repair: THE DELETION TEST NOW BITES 9 OF 9 AND THE
+   5cae82c07  0        control+docs: NO THIRD REASON — the predicate now RETURNS 
+   104fb11a5  n/a      probe: NEGATIVE CONTROL 4 — a construction-side control on
+   c0cf10479  n/a      STATE: land the mg-276d/mg-e0ce consequences — GREEN uphel
+   83d253f20  n/a      probe: face-complex machinery + positive/negative controls
+
+   commits that have ever touched face_complex.py : 8
+   of those, with a TWO-CLAUSE `shape` guard      : 2 (bfd7948ed, b6bc2efed)
+   the newest of them                             : bfd7948ed
+   what the pin `b6bc2ef` resolves to             : b6bc2efed
+  [HOLDS ] THE COMMIT THAT BROKE THE PIN IS THE REPAIR ITSELF: 2 commit(s) have a two-clause `shape` guard, the newest is bfd7948ed, and the pin resolves to b6bc2efed -- so the claim `the NEWEST of them is b6bc2ef` became false at the moment mg-f7e1 landed
+        history: 8 commit(s); two-clause: bfd7948ed, b6bc2efed
+        WOULD DIFFER UNDER: a later commit merging the guard back into one comparison, which would restore the claim and lose the repair.  The guard is located here by the gate label it RETURNS, not by an anchor of source text, so a respelling does not hide a commit from this count
+  [FINDING E8] THE INSTRUMENT DOES NOT REGENERATE AT HEAD, AND THE DISCLOSURE IS NARROWER THAN THE CONSEQUENCE.  The landing document says `92 claims, 0 BROKEN` and discloses that one transcript line -- `of the 7 commits that ever touched face_complex.py` -- will not regenerate once the commit lands.  What actually happens is that the pin claim's TRUTH CONDITION fails: `the NEWEST two-clause commit is b6bc2ef` is false because the repair reintroduced a two-clause guard, the claim reads [BROKEN], and `d2_deletion.py` exits 1 instead of 0.  The claim's own WOULD DIFFER UNDER names the event exactly -- `a later commit reintroducing a two-clause condition` -- and the commit that did it is the one that printed the sentence.
+        population: the 49 claims d2_deletion.py scores; 1 BROKEN, 3 transcript line(s) different, exit 0 -> 1.  d1, d3 and d4 regenerate byte-identically and exit 0.
+
+==============================================================================
+3.  THE REMEDY THE SUBJECT NAMES, RUN
+==============================================================================
+The subject's own words: one pair `[[0,1],[1,0]]` against `[[0,1],[1,0],[0,0]]`
+would cover the ORDER half in one line, and `adding it makes clause 1 go CHANGES,
+its registered prediction MISS, and the coverage claim go red saying so`.  That is
+an assertion about a run nobody has made.  Here it is, as a row of `UNREACHED_GATE_PAIRS["shape"]`.
+
+  [HOLDS ] THE ROW GOES WHERE THE SUBJECT SAYS IT GOES: the anchor it is spliced before occurs exactly once in controls.py, inside the `shape` list
+        anchor occurrences: 1
+        WOULD DIFFER UNDER: `UNREACHED_GATE_PAIRS` being restructured, at which point this section is patching a table that no longer exists and says so instead of splicing into the wrong list
+   tree                                   new pair?   artifact   exit 
+   HEAD -- the repaired tree              without     IDENTICAL  0       (baseline 23695 bytes, exit 0)
+   HEAD -- the repaired tree              with        CHANGES    1       (baseline 24021 bytes, exit 0)
+   b6bc2ef -- the defect still present    without     IDENTICAL  0       (baseline 23684 bytes, exit 0)
+   b6bc2ef -- the defect still present    with        CHANGES    1       (baseline 24010 bytes, exit 0)
+  [HOLDS ] THE NAMED PAIR IS THE COVERAGE IT IS SAID TO BE: at HEAD, deleting the ORDER clause alone is BYTE-IDENTICAL without it and CHANGES with it, at exit 0 -> 1
+        WOULD DIFFER UNDER: the pair being decided by the WIDTH half as well, which `zip` prevents by truncating at the shorter shape profile
+  [HOLDS ] AND THE CONTROL IS DEMONSTRATED AGAINST A COMMIT WHERE THE DEFECT IS STILL PRESENT: at b6bc2ef -- mg-c4c8's two-clause tree, whose first clause deleted alone was byte-identical -- the same row turns that BYTE-IDENTICAL into CHANGES at exit 1
+        b6bc2ef baseline 23684 bytes without the row, 24010 with it
+        WOULD DIFFER UNDER: the older tree's first clause already being covered, which would mean this row is not the thing that covers it.  A control shown only on a tree that no longer has the defect is a control nobody has seen bite
+  [FINDING E9] THE REMEDY IS ONE LINE, IT WORKS, AND NOTHING RUNS IT.  The subject names the covering pair, states what adding it would do, and declines to add it -- correctly, since its point is that the reader should be able to see the uncovered row.  But the assertion about what would happen is unmeasured in a commit whose whole argument is that unmeasured assertions are how this lineage keeps going wrong.  Run here: it is exactly right at HEAD and at b6bc2ef.  The cost of leaving it unrun is that `NOT COVERED` cannot be told apart from `not coverable`.
+        population: 2 trees x 2 states = 4 baselines and 4 deletions, all 8 batteries regenerated in this run
+
+==============================================================================
+5 claim(s) scored; 0 BROKEN.  2 finding(s).
+   FINDING E8  THE INSTRUMENT DOES NOT REGENERATE AT HEAD, AND THE DISCLOSURE IS NARROWER THAN THE CONSEQUENCE
+   FINDING E9  THE REMEDY IS ONE LINE, IT WORKS, AND NOTHING RUNS IT
+==============================================================================
