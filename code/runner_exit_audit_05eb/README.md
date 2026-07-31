@@ -45,6 +45,18 @@ exactly"**, and the document even names the right file. The ticket was right;
 the option writes `set -euo pipefail`. The same blind spot produced *"The shebang
 is `#!/bin/sh` on all 64 runners (measured)"*, which is false at **5 of 64**.
 
+> **The transcript this finding cites is a HISTORICAL RECORD and it will not
+> reproduce at HEAD.** `libc2b3.PIPEFAIL_RE` was repaired by **mg-7522** at
+> `1ee1f1b`; re-run `k1_census.py` today and the same row re-derives as `1` and
+> the verdict is the opposite of the one quoted above. That is the repair
+> landing, not this finding being wrong. `out_k1_census.txt` was deliberately
+> **not** regenerated — by mg-7522, by mg-70c7 at `d456f58`, and again by
+> mg-56dc — because regenerating it would destroy the record this paragraph
+> cites; the file now carries the same note at its head, and the corrected
+> reading is published in `code/runner_exit_repair_7522/out_s3_figure.txt`.
+> *(Added by mg-56dc: preserving evidence without labelling it converts a
+> citation into a false witness.)*
+
 **F3 — a claim the enumeration did not consider, and it is R3.**
 `code/species_depth_audit_4700/q2_wiring.py` executes three species `run_all.sh`
 twenty-one times and scores them on `rc == 0` / `rc != 0` at **8 sites**, and two

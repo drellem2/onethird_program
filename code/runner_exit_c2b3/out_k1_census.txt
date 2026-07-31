@@ -1,3 +1,40 @@
+# =============================================================================
+# HISTORICAL RECORD OF A DEFECT SINCE REPAIRED.  READ THIS BEFORE RE-RUNNING.
+# =============================================================================
+#
+# This transcript is a FIXTURE, not a file.  It is the committed record of the
+# run that produced `52aeaf4` (mg-c2b3), and `code/runner_exit_audit_05eb/`
+# cites it -- by name, as evidence -- for the census row that reads
+#
+#     ticket 1 / re-derived 0 / DIFFERS
+#
+# THE TICKET WAS RIGHT AND THE INSTRUMENT WAS WRONG.  `libc2b3.PIPEFAIL_RE` was
+# `^\s*set\s+-o\s+pipefail`, which matches one spelling of the option, and the
+# single runner in the arc that sets it writes `set -euo pipefail`.  So this run
+# re-derived 0 where the ticket said 1, and four reader-facing artifacts then
+# said "1, confirmed exactly" about a number their own instrument had disputed.
+#
+# THAT REGEX WAS REPAIRED BY mg-7522 AT `1ee1f1b`.  Therefore:
+#
+#   * THIS TRANSCRIPT WILL NOT REPRODUCE AT HEAD.  Re-run `k1_census.py` today
+#     and the same row re-derives as 1 and the verdict is the opposite of the
+#     one recorded above.  That is the repair landing, not this record being
+#     wrong.
+#   * IT WAS DELIBERATELY NOT REGENERATED -- by mg-7522, again by mg-70c7 at
+#     `d456f58`, and again here.  Regenerating it would not update a record; it
+#     would destroy the one mg-05eb cites.  The decision and its reason are in
+#     `code/runner_exit_repair_70c7/OUTCOMES.md`.
+#   * THE CORRECTED READING is published in
+#     `code/runner_exit_repair_7522/out_s3_figure.txt`, and `k1_census.py`'s own
+#     docstring carries the same pointer.
+#
+# Added by mg-56dc, the independent audit of mg-70c7, on the PM's ruling that
+# preserving evidence without labelling it converts a citation into a false
+# witness.  Nothing below this line has been altered: the bytes from here down
+# are unchanged from the blob at `52aeaf4`, and `t5_fixture.py` checks that on
+# every run rather than promising it.
+#
+# ---- end of mg-56dc note; the transcript as committed follows ----
 ==============================================================================
 K1  THE CENSUS, RE-DERIVED -- ticket said 63 / 23 / 1
 ==============================================================================
