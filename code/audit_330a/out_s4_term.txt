@@ -108,7 +108,7 @@ S4  THE TERM -- BOTH POPULATIONS, AND THE QUALIFIER AT EVERY SITE
    constructed site carrying `deciding-condition` : *** census, UNQUALIFIED
    constructed site carrying `deciding condition` : census, QUALIFIED
 
-   and on the REAL tree: 54 line(s) carry the hyphenated form.
+   and on the REAL tree: 57 line(s) carry the hyphenated form.
    of those, in a window stating the term but NOT carrying the
    unhyphenated form (i.e. sites the hyphen alone would have to
    carry) : 4
@@ -128,13 +128,14 @@ S4  THE TERM -- BOTH POPULATIONS, AND THE QUALIFIER AT EVERY SITE
    A-1 -- but it is a population that stops growing while the tree does
    not.  Four commits landed after dfa263c:
 
+     b94cb1e audit: the mg-330a instrument — every derived anchor RESOLVED rather than reasoned about
      71a1f55 predictions: mg-330a's predictions for the independent audit of the mg-8d5e anchor-and-t
      be06d36 evidence: the committed transcripts of the mg-56dc suite — 6 of 6 exit codes as predicte
      8c55168 docs+audit: independent audit of the mg-70c7 grain-and-population repair — the SIX HOLD 
      d3cdc95 audit: the mg-56dc instrument — a sixth instrument that classifies every printed count a
      abb95b0 predictions: mg-56dc's predictions for the independent audit of the mg-70c7 grain-and-po
      109725c pm-onethird: regenerate BOTH status sections together; mark the treated population
-   commits since the repair : 6
+   commits since the repair : 7
 
    So the same rule, unchanged, over EVERY site in the tree at HEAD --
    untracked files included, which is where this audit's own files are.

@@ -19,16 +19,16 @@ S2  THE FAILURE, CONSTRUCTED -- NOT RECALLED
    PRE_REV                3bc2cf76   3bc2cf76   unmoved
    REV_7E58               4372fae9   4372fae9   unmoved
    PRE_7E58_REV           52aeaf43   52aeaf43   unmoved
-   LAST_TOUCHING_G1       d01ff32d   ec5f520a   *** MOVED
+   LAST_TOUCHING_G1       d01ff32d   525e5372   *** MOVED
 
-   the cosmetic commit                            : ec5f520a
+   the cosmetic commit                            : 525e5372
    ANCHOR_DRIFT rows after the edit               : 0
 
    AND THE HALF THAT MUST MOVE.  If NOTHING moved, this probe would
    prove only that the edit never reached git.  LAST_TOUCHING_G1 --
    the derivation the repair KEPT as evidence -- is the control on the
    probe itself:
-     LAST_TOUCHING_G1  d01ff32d -> ec5f520a   MOVED, so the edit reached git
+     LAST_TOUCHING_G1  d01ff32d -> 525e5372   MOVED, so the edit reached git
 
    SO THE ANCHOR DOES NOT FOLLOW -- and it is not silent either.
    The derivation that DID follow is still computed and still printed,
@@ -53,12 +53,12 @@ S2  THE FAILURE, CONSTRUCTED -- NOT RECALLED
    and does not reproduce above.
 
    name                   before     after      
-   REPAIR_REV             d01ff32d   ae30cf15   *** MOVED
+   REPAIR_REV             d01ff32d   51c33b9c   *** MOVED
    PRE_REV                e5787e11   e2577e55   *** MOVED
    PRE_7E58_REV           3bc2cf76   e5787e11   *** MOVED
    LAST_TOUCHING_G1       -          -          unmoved
 
-   the cosmetic commit                            : ae30cf15
+   the cosmetic commit                            : 51c33b9c
    does libe34a AT e2577e5 have ANCHOR_DRIFT?     : NO
 
    THE DEFECT REPRODUCES.  At e2577e5 the cosmetic commit becomes
@@ -68,7 +68,7 @@ S2  THE FAILURE, CONSTRUCTED -- NOT RECALLED
    is a table of numbers about a pair of revisions nobody chose.
 
      at e2577e5, after a comment was appended:
-       REPAIR_REV names ae30cf15 -- the cosmetic commit
+       REPAIR_REV names 51c33b9c -- the cosmetic commit
        and its subject is         : probe: a comment appended to g1_provenance.py (mg-330a)
 
    mg-e34a's selftest AT e2577e5, perturbed       : exit 0  (and it is a DIFFERENT selftest -- the one at HEAD carries assertions e2577e5 does not)

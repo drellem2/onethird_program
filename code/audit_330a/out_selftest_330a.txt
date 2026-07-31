@@ -56,7 +56,7 @@ SELFTEST-330A  THE INSTRUMENT, BEFORE ANYTHING RESTS ON IT
 --------------------------------------------------------------------------
 <unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
    ok   every .py under code/ parses: 0 unparsed
-   ok   the sweep is non-empty: 36 revision-producing git log call(s)
+   ok   the sweep is non-empty: 37 revision-producing git log call(s)
    ok   and it returns more than one label over the tree it sweeps: INDEXED, NEWEST, OLDEST, PICKAXE, RANGE, UNRESTRICTED
 <unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
    ok   the named-helper sweep finds at least one definition of last_touching / nth_touching -- a helper hides its flags and a flag sweep alone would miss it
