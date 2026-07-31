@@ -164,6 +164,65 @@ def my_declared_vocabulary(src):
     return []
 
 
+def repaired_bindings(src, kindname):
+    """Names bound by a REPAIRED comparison in `src` -- an assignment whose
+    value calls `heading()`/`by_substring` about `kindname`.  Found by AST,
+    because the repaired statements wrap across lines and a line-based finder
+    reported the two that do wrap as having no binding at all."""
+    out = set()
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return out
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.Assign, ast.AugAssign)):
+            continue
+        val = node.value
+        names = {getattr(n.func, "id", "") for n in ast.walk(val)
+                 if isinstance(n, ast.Call)}
+        names |= {getattr(n.func, "attr", "") for n in ast.walk(val)
+                  if isinstance(n, ast.Call)
+                  and isinstance(n.func, ast.Attribute)}
+        if not ({"heading", "by_substring"} & names):
+            continue
+        if not any(isinstance(c, ast.Constant) and c.value == kindname
+                   for c in ast.walk(val)):
+            continue
+        tgts = node.targets if isinstance(node, ast.Assign) else [node.target]
+        for t in tgts:
+            for n in ast.walk(t):
+                if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store):
+                    out.add(n.id)
+    return out
+
+
+def consumers(src, targets):
+    """What reads those names: A RECORDED VERDICT (it reaches `record`,
+    `assert` or an `==`) or a printed line.  The distinction is the whole of
+    PREDICTIONS.md's third way this repair could be worse than what it
+    replaces."""
+    feeds = set()
+    if not targets:
+        return feeds
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return feeds
+    def reads(node):
+        return any(isinstance(n, ast.Name) and n.id in targets
+                   and isinstance(n.ctx, ast.Load) for n in ast.walk(node))
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            fname = getattr(node.func, "id", "")
+            if fname == "print" and reads(node):
+                feeds.add("a printed line")
+            elif fname in ("record", "assert_") and reads(node):
+                feeds.add("A RECORDED VERDICT")
+        elif isinstance(node, (ast.Assert, ast.Compare)) and reads(node):
+            feeds.add("A RECORDED VERDICT")
+    return feeds
+
+
 def my_hits(rel, name):
     """Lines of `rel` that identify the gate row `name` by a substring test
     over a WHOLE ROW.  My rule, not the sweep's: the sweep's rule is scoped by
@@ -694,12 +753,17 @@ number.
                   f"gate row by a substring of the whole row")
             repaired.append(rel)
     print()
+    theirs = [c for c in CONSTRUCT_SITES if not c[2].startswith("⚠️")]
     record(not live,
-           f"S2a of the {len(CONSTRUCT_SITES)} occurrence(s) mg-7e39 measured "
-           f"LIVE in the commit the repair landed in, {len(repaired)} are "
-           f"repaired here and {len(live)} remain.  Predicted 0 remaining.  "
-           f"The two numbers mg-7e39 asked for were 1 and 6; the two this run "
-           f"reports are {len(repaired)} and {len(CONSTRUCT_SITES)}")
+           f"S2a {len(repaired)} of {len(CONSTRUCT_SITES)} occurrence(s) are "
+           f"repaired and {len(live)} remain.  Predicted 0 remaining.  "
+           f"{len(theirs)} of them are the ones mg-7e39 measured live in the "
+           f"commit mg-6df0 landed in; "
+           f"{len(CONSTRUCT_SITES) - len(theirs)} is a SEVENTH that appeared "
+           f"only once the vocabulary came from the gate's own declaration.  "
+           f"The two numbers mg-7e39 asked for were 1 touched of 6; the two "
+           f"this run reports are {len(repaired)} of "
+           f"{len(theirs) + 1} known when it started")
 
     # WHAT THE REPAIR MOVED IN SOMEBODY ELSE'S INSTRUMENT.  Three of the five
     # sites are other deliverables' shipped instruments under committed
@@ -714,28 +778,14 @@ number.
             src = read(rel)
         except OSError:
             continue
-        lines = src.split("\n")
-        targets = set()
-        for l in lines:
-            if f'"{kindname}"' in l and ("heading(" in l or "by_substring(" in l):
-                m = re.match(r"\s*(\w+)\s*(?:=|\+=)", l)
-                if m:
-                    targets.add(m.group(1))
-        feeds = set()
-        for name in sorted(targets):
-            for l in lines:
-                if re.search(rf"\b{name}\b", l) and not re.match(
-                        rf"\s*{name}\s*(?:=|\+=)", l):
-                    if re.search(r"\brecord\(|\bassert\b|==", l):
-                        feeds.add("A RECORDED VERDICT")
-                    elif "print(" in l or l.strip().startswith("f\""):
-                        feeds.add("a printed line")
+        targets = repaired_bindings(src, kindname)
+        feeds = consumers(src, targets)
         what = ", ".join(sorted(feeds)) or "nothing this rule can see"
-        print(f"    {rel}")
-        print(f"        the repaired binding{'s' if len(targets) != 1 else ''} "
-              f"{sorted(targets)} feed{'s' if len(targets) == 1 else ''}: {what}")
+        print(f"    {rel}  ({kindname})")
+        print(f"        the repaired binding(s) {sorted(targets)} feed: {what}")
         if "A RECORDED VERDICT" in feeds:
             verdicts.append(rel)
+    verdicts = sorted(set(verdicts))
     record(None,
            f"S2d {len(verdicts)} of {len(CONSTRUCT_SITES)} repaired site(s) "
            f"feed a RECORDED VERDICT rather than only a printed line: "
@@ -749,8 +799,8 @@ number.
 
     # The declared measuring sites, found by STRUCTURE rather than by line.
     declared = []
-    for rel in {r for r, _k, _n in CONSTRUCT_SITES} | {SWEEP_REL,
-                                                       "code/hodge_leverage_repair_3f3b/repair_7e39.py"}:
+    for rel in {r for r, _k, _n in CONSTRUCT_SITES} | {
+            SWEEP_REL, MINE, "code/hodge_leverage_audit_7e39/audit_7e39.py"}:
         try:
             src = read(rel)
         except OSError:
@@ -774,7 +824,7 @@ number.
 
     # And the whole tree, by the parent's own rule with the derived vocabulary.
     files = SWEEP.py_files()
-    vocab = my_vocabulary()
+    vocab = my_declared_vocabulary(read(LANDING_REL)) or my_vocabulary()
     allhits = sorted({(rel, ln, t) for rel in files for nm in vocab
                       for ln, t in my_hits(rel, nm)})
     undisp = [(rel, ln, t) for rel, ln, t in allhits
@@ -782,7 +832,7 @@ number.
     for rel, ln, t in allhits:
         print(f"    still in the tree     {rel}:{ln}  {t[:70]}")
     record(not allhits,
-           f"S2c the whole tree -- {len(files)} `.py` file(s) under `code/` in "
+           f"S2c the whole tree -- {len(files)} .py files under `code/` in "
            f"the working tree -- swept by MY rule over MY vocabulary of "
            f"{len(vocab)}: {len(allhits)} line(s) identify a gate row by a "
            f"substring test over the whole row, {len(undisp)} of them without "

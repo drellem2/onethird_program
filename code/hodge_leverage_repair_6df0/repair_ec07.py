@@ -537,10 +537,19 @@ def population_line():
     whether that HEAD describes the working directory at all.  A reader who
     meets this line can check it; a reader who meets a bare number cannot."""
     rev = git("rev-parse", "HEAD").strip()[:12] or "(no commit)"
-    dirty = bool(git("status", "--porcelain", "--", "code").strip())
+    # ⚠️ SCOPED TO THE POPULATION THIS FIGURE COUNTS.  A dirty check over all
+    # of `code/` is always true while this instrument is running, because the
+    # first thing `run_all.sh` does is truncate the transcript it is about to
+    # write -- so the warning would fire on every run and mean nothing.  The
+    # question is whether the `.py` files THIS NUMBER COUNTS differ from the
+    # commit it is published against.
+    dirty = [l[3:] for l in git("status", "--porcelain", "--", "code").split("\n")
+             if l.strip().endswith(".py")]
     n = len(py_files())
     return (f"{n} .py files swept, walked from the WORKING TREE at HEAD "
-            f"{rev}{' WITH UNCOMMITTED CHANGES UNDER code/' if dirty else ''}")
+            f"{rev}"
+            + (f" WITH {len(dirty)} UNCOMMITTED .py FILE(S) UNDER code/, SO "
+               f"THIS COUNT IS NOT A FACT ABOUT {rev}" if dirty else ""))
 
 
 QUOTED_SPAN = re.compile(r"'[^']*'|`[^`]*`")
