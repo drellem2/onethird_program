@@ -1,0 +1,39 @@
+
+==============================================================================
+selftest6ef4 -- contracts
+==============================================================================
+
+  the pin 4372fae is an ancestor of HEAD                           ok
+  the pin is a literal revision, not HEAD                          ok
+  the pin is not HEAD                                              ok
+  w3_scope.py at the pin does NOT carry `walk_residue`             ok
+  run_all.sh at the pin still has the OLD wiring block             ok
+  run_all.sh at the pin already has `set -e`                       ok
+  lift() returns a callable without running the checker            ok
+  the lifted walk finds a plain file                               ok
+  the lifted walk carries the SUBJECT's stated directory rule      ok
+  the self-test's victim file is tracked                           ok
+  a probe that leaves a FILE behind reports NOT restored           ok
+  and it says WHY, by name                                         ok
+  a probe that leaves a MODE behind is reported by name            ok
+  and the mode is actually put back                                ok
+  a probe that changes nothing reports RESTORED                    ok
+  and reports no mode differences                                  ok
+  the catch predicate is silent on a legend line                   ok
+  the catch predicate fires on a real hit line                     ok
+  and is silent when the filename is on a DIFFERENT line           ok
+  figures('A2 TOTAL BAD: 1') == ['1']                              ok
+  figures('A2 TOTAL BAD is 2') == ['2']                            ok
+  figures('A2 TOTAL BAD stays 1') == ['1']                         ok
+  figures('(`A2 TOTAL BAD` remains **1**,') == ['1']               ok
+  figures('A2 TOTAL BAD 1, the one row') == ['1']                  ok
+  figures('A2 TOTAL BAD') == []                                    ok
+  a deletion that would delete NOTHING raises instead of passing   ok
+  species_repair_a4ef: `set -e` appears exactly once               ok
+  species_remainder_f8fa: `set -e` appears exactly once            ok
+  species_repair_6f61: `set -e` appears exactly once               ok
+  no before/after comparison here is anchored on HEAD              ok
+
+==============================================================================
+selftest6ef4: 30 assertions, 0 failed
+==============================================================================

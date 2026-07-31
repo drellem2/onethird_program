@@ -43,6 +43,7 @@ REVS = [
 ]
 
 TAG = "A2 TOTAL BAD"
+PIN = "4372fae"          # mg-5040's pin, and the bound of its own enumeration
 # `A2 TOTAL BAD` followed by a number, allowing the words a summary puts
 # between them.  Derived here rather than copied from mg-5040's r3, so that
 # the two counts are two measurements and not one measurement twice.
@@ -257,6 +258,56 @@ score("P3f", 3, len(texts))
 
 
 # ---------------------------------------------------------------------------
+# T3dd  DOES EACH MESSAGE SAY WHICH TREE ITS FIGURE IS ABOUT?
+# ---------------------------------------------------------------------------
+hdr("T3dd  THE FIGURE IS A PROPERTY OF A TREE.  WHICH MESSAGES SAY WHICH?")
+
+print("  mg-5040's whole answer to F3 is that a figure which is a property of")
+print("  a TREE must name the tree: `e2` now prints `MEASURED AT <rev>` so a")
+print("  committed copy goes STALE rather than WRONG.  `%s` is a" % TAG)
+print("  property of a tree in exactly the same way -- mg-5040's own OUTCOMES")
+print("  says so: 2 at the pin, 1 in its worktree, and only the first grades")
+print("  anything.  So each message that states the figure is asked whether")
+print("  it names a revision anywhere near it.")
+print()
+
+REVTOK = re.compile(r"\b[0-9a-f]{7,40}\b|\bHEAD\b|\bthe pin\b")
+named, bare_msgs = [], []
+for text, shas in texts.items():
+    lines = text.splitlines()
+    hits = [i for i, ln in enumerate(lines) if FIG.search(ln)]
+    near = "\n".join(sum([lines[max(0, i - 4):i + 5] for i in hits], []))
+    (named if REVTOK.search(near) else bare_msgs).append(
+        (shas, lines[0][:44], [FIG.search(lines[i]).group(1) for i in hits]))
+
+for shas, subj, figs in named:
+    print("      NAMES A TREE  %-14s says %-8s %s"
+          % (",".join(shas), ",".join(figs), subj))
+for shas, subj, figs in bare_msgs:
+    print("      *** BARE ***  %-14s says %-8s %s"
+          % (",".join(shas), ",".join(figs), subj))
+print()
+note("message texts stating the figure", len(texts))
+note("of those, naming the tree the figure is about", len(named))
+row("every message that states the figure says which tree it is about",
+    not bare_msgs,
+    "%d of %d do not." % (len(bare_msgs), len(texts)))
+print()
+print("  THIS SECTION WAS BUILT TO CATCH MG-5040'S OWN COMMIT AND IT DOES")
+print("  NOT.  The expectation written into it was that `3bc2cf7`/`fc98142`")
+print("  -- mg-5040's own evidence commit -- states `%s 1` bare," % TAG)
+print("  in the ticket whose section 5 exists to correct bare copies of that")
+print("  figure, and outside its own enumeration because that enumeration is")
+print("  PINNED at %s and cannot contain the copies the work is about" % PIN)
+print("  to make.  Measured: the paragraph carrying the figure names")
+print("  `cada54f` twice, which IS the tree the figure is about.  The")
+print("  enumeration bound is real -- a pinned population cannot see forward")
+print("  -- and the copy it could not see turned out to be anchored anyway.")
+print("  The probe is kept because a section that only ever fires is a")
+print("  section nobody can check.")
+
+
+# ---------------------------------------------------------------------------
 # T3e  EVERY COMMITTED FILE STATING A FIGURE, WITH A DISPOSITION
 # ---------------------------------------------------------------------------
 hdr("T3e  EVERY COMMITTED FILE AT HEAD STATING A FIGURE, AND ITS DISPOSITION")
@@ -266,7 +317,8 @@ hdr("T3e  EVERY COMMITTED FILE AT HEAD STATING A FIGURE, AND ITS DISPOSITION")
 # whether or not it is convenient.
 MARK = re.compile(r"CORRECTED|correction|WRONG|MISSED|\*\*\*|is \*\*2\*\*"
                   r"|remains|stays|prediction", re.I)
-files = []
+MINE = "code/species_bound_audit_6ef4/"
+files, own = [], []
 for p in tree_paths("HEAD"):
     text = blob("HEAD", p)
     if not text or TAG not in text:
@@ -277,12 +329,25 @@ for p in tree_paths("HEAD"):
         if not m:
             continue
         near = "\n".join(lines[max(0, i - 6):i + 7])
-        files.append((p, i + 1, int(m.group(1)), bool(MARK.search(near))))
+        rec = (p, i + 1, int(m.group(1)), bool(MARK.search(near)))
+        (own if p.startswith(MINE) else files).append(rec)
 
 for p, ln, n, marked in files:
     print("      %-56s:%-5d says %s   %s"
           % (p[-56:], ln, n,
              "marked" if marked else "*** BARE ***"))
+print()
+print()
+print("  THIS TICKET'S OWN FILES ARE LISTED SEPARATELY AND NOT SCORED, with")
+print("  the reason: %d occurrence(s) under %s, of which" % (len(own), MINE))
+print("  one is this file's own PATTERN LITERAL and the rest are predictions")
+print("  ABOUT the enumeration.  They are not copies of the figure and they")
+print("  are not filtered in silence either -- mg-5040's r3 gave mg-4700's")
+print("  PREDICTIONS.md a printed disposition rather than dropping it, and")
+print("  the same rule is applied here to its author's own tree.")
+for p, ln, n, marked in own:
+    print("      %-56s:%-5d says %s   %s"
+          % (p[-56:], ln, n, "marked" if marked else "unmarked"))
 print()
 bare = [f for f in files if not f[3] and f[2] == 1]
 note("occurrences of the figure in committed files at HEAD", len(files))

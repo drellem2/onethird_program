@@ -1,0 +1,151 @@
+
+==============================================================================
+T4a  `kern5040.Probe` -- a tracked file left at mode 000
+==============================================================================
+
+  The file is code/species_bound_audit_6ef4/PREDICTIONS.md, which this ticket wrote and
+  committed, so no other ticket's artifact is touched.  It is
+  chmod'ed inside the probe and NOT put back by the probe, and then
+  the probe's own verdict is read.  This file puts the mode back
+  itself afterwards, and prints the mode before and after.
+
+  TWO MODES, AND THE SECOND ONE IS HERE BECAUSE THE FIRST MISSED.
+  P4a predicted that `000` would go unnoticed.  It does not, and the
+  reason it does not is worth more than the prediction was: git cannot
+  READ a `000` file, so `git status` calls it MODIFIED even though not
+  one byte of it changed.  Right verdict, wrong reason -- which is
+  mg-4700's D2b in the harness rather than in a subject.  So a second
+  mode is probed: `400`, which git can still read and which changes
+  no executable bit.  That is the case the proof is actually about.
+
+      chmod 000 -- git cannot read it either                     restored: False  rewrote 0
+      chmod 400 -- read-only; git reads it fine, exec bit unchanged restored: True   rewrote 0
+
+  entry mode                                                       0o644
+  the file was in kern5040.Probe's snapshot at entry               True
+  mode left behind after the 000 probe (this file puts it back)    0o0
+
+  kern5040.Probe notices a tracked file left at mode 400           *** FINDING ***
+        It says RESTORED, and the file is not.  `git status --porcelain` and
+        `git diff` carry ONE bit of a file's mode -- the executable bit -- and
+        `Probe` snapshots BYTES and never stats.  So every permission change
+        that leaves the exec bit alone and leaves the file readable is outside
+        the proof entirely.  mg-5040's own R1 probe plants a `chmod 000`
+        directory and restores it from a REMEMBERED undo list, which is the
+        distinction that instrument draws against everybody else: a list of
+        what somebody thought of, where a measurement was needed.
+  when it DOES notice, the reason it gives is the right one        *** FINDING ***
+        For `000` it reports NOT restored -- correctly -- because git cannot
+        read the file and calls it MODIFIED.  Nothing in the run says the mode
+        moved; a reader is told the CONTENT changed, and it did not.  The
+        verdict is right and the diagnosis is wrong, which is exactly what T1
+        found in the subjects.
+  P4a    predicted True                     got False                    *** MISSED ***
+
+==============================================================================
+T4b  THE SAME PERTURBATION UNDER THIS INSTRUMENT'S PROOF
+==============================================================================
+
+  Same file, same chmod, same non-restoration by the probe body.  The
+  only difference is what the proof looks at.  A new control that has
+  never been seen to fire is worth nothing, so this is the control
+  and T4a is the commit where the defect is present.
+
+      chmod 000 -- git cannot read it either                     named by the mode proof: YES
+          code/species_bound_audit_6ef4/PREDICTIONS.md  0o644 -> 0o0
+      chmod 400 -- read-only; git reads it fine, exec bit unchanged named by the mode proof: YES
+          code/species_bound_audit_6ef4/PREDICTIONS.md  0o644 -> 0o400
+
+  the mode-aware proof sees BOTH, including the one the byte proof ok
+        If this row is a finding the control is broken and T4a proves nothing.
+  P4b    predicted True                     got True                     
+
+==============================================================================
+T4c  A TRACKED FILE THAT IS UNREADABLE WHEN THE PROBE STARTS
+==============================================================================
+
+  `Probe.__enter__` reads every tracked file into memory and skips
+  what it cannot read with a bare `except OSError: pass`.  A file
+  skipped there is absent from the snapshot, therefore un-restorable,
+  and the run says nothing.  Measured, not read off the source.
+
+  in kern5040.Probe's snapshot                                     False
+  kern5040.Probe said so anywhere                                  no -- there is no such field
+  Probe6ef4 recorded it by name                                    True
+  a file it could not snapshot is reported by kern5040.Probe       *** FINDING ***
+        Absent from the snapshot and unmentioned.  The probe would then run,
+        the body could rewrite that file, and the restore would put back
+        nothing -- with `restored` still True, because `git diff` cannot read
+        it either.  Same `except OSError` as the checkers' layer 2 in T1, in
+        the harness that measured them.
+  P4c    predicted False                    got False                    
+
+==============================================================================
+T4d  `selftest5040.py` -- the restore contract, in which directions?
+==============================================================================
+
+  assertions mentioning `restored`                                 14
+  anything in the self-test mentioning a MODE                      0
+
+  the restore contract is tested for a left-behind MODE, not only  *** FINDING ***
+        mg-5040 tests the contract IN THE DIRECTION THAT MUST FAIL -- and only
+        for a left-behind FILE, which is the class it had already thought of.
+        A restore proof only ever seen to fail on the one class somebody
+        remembered is worth what a walk that declines in silence is worth.
+        That sentence is mg-5040's, about `os.walk`.
+  P4d    predicted True                     got True                     
+
+==============================================================================
+T4e  THE DEFECT AT cada54f, THE COMMIT THAT PUBLISHED THE HARNESS
+==============================================================================
+
+  `git show cada54f:kern5040.py` succeeded                         True
+  `__enter__` is byte-identical at cada54f and at HEAD             True
+  it stats anything at cada54f                                     False
+  it stats anything at HEAD                                        False
+
+  So the silence in T4a is not something this audit introduced by
+  running the harness in a worktree it was not written for.  It is in
+  the bytes that were published, and it was published with a
+  self-test that asserts the restore contract in the direction that
+  must fail -- for the one class it names.
+
+==============================================================================
+T4f  THE BOUND OF THIS INSTRUMENT'S OWN RESTORE PROOF, DECLARED
+==============================================================================
+
+  Stating it is the only honest move available: a proof that names
+  four things is a proof about four things, and the T1 finding is
+  exactly what happens when a bound is left to be inferred.
+
+      porcelain + full diff + bytes + PERMISSION MODE, for every TRACKED
+      regular file that is not a symlink, under this repository only.
+      
+      NOT covered, and each of these would be a silent non-restore here:
+        * ownership, extended attributes, ACLs, flags
+        * mtime and atime
+        * the mode of a DIRECTORY (only files are stated)
+        * a symlink's target (they are skipped: `git ls-files` lists them,
+          `os.path.islink` drops them)
+        * anything UNTRACKED beyond what `git status` reports
+        * anything outside REPO -- the tempdirs this instrument makes are
+          removed by name, and if a removal fails nothing here notices
+
+  That list is a MEASUREMENT of what the four proofs look at, not a
+  promise that nothing else can go wrong.  A reader who finds a fifth
+  should treat this paragraph the way T1 treats mg-5040's: the class
+  is not closed by naming members of it.
+
+==============================================================================
+T4 TOTAL BAD: 4
+T4 PREDICTIONS MISSED: 1
+==============================================================================
+
+EXTENT OF THESE NUMBERS.  ONE harness -- `kern5040.Probe` -- against
+ONE perturbation, a mode change on ONE tracked file this ticket owns,
+plus a reading of `selftest5040.py` and a comparison of `__enter__`
+at cada54f with HEAD.  It says NOTHING about whether any figure
+mg-5040 published is wrong: no probe in that instrument is shown to
+have left the tree broken, and this section does not claim one did.
+What it measures is that IF ONE HAD, in this class, the proof would
+have said RESTORED.

@@ -1,0 +1,214 @@
+
+==============================================================================
+T1a  THE STATED BOUND AGAINST THE CODE -- on the shipped functions
+==============================================================================
+
+  `walk_residue` is lifted out of each file BY PARSING IT, so what is
+  tested is the code that SHIPS and not a copy of it, and lifting it
+  does not execute the checker (mg-5040's kept defect 5).  The
+  module-level constants come across too, so `stated_dirs=
+  STATED_DIR_RULES` is the SUBJECT's directory rule and not this
+  file's idea of it.
+
+      s1_extent.py           walk_residue(<not a directory>) -> ([], [], [])
+      w3_scope.py            walk_residue(<not a directory>) -> ([], [], [])
+      e1_extents.py          walk_residue(<not a directory>) -> ([], [], [])
+
+  a root that is not a directory lands in the residue (0 of 3 copi *** FINDING ***
+        `if not os.path.isdir(root): return files, stated, unstated` is the
+        FIRST STATEMENT of the function whose whole contract is that nothing is
+        dropped without landing in one of the last two.  A whole root is.
+        Copies affected: s1_extent.py, w3_scope.py, e1_extents.py
+  P1k    predicted ([], [], [])           got ([], [], [])           
+
+  the walk 'reads no entry that is not a regular file', as printed *** FINDING ***
+        files=['slink.txt'] residue=[]
+        The entry is a SYMLINK.  `os.path.isfile` follows it, so it is read, and it
+        is not in the residue either -- the printed sentence is false in the
+        direction nobody checks.
+
+  Both mismatches are between the SENTENCE and the CODE, which is the
+  one thing option 1 exists to make impossible.  Neither is reachable
+  by planting anything in a tree: they are properties of the
+  enumerator, and they are the two places the enumerator stops being a
+  measurement and goes back to being a rule somebody wrote down.
+
+==============================================================================
+T1b  THE NEXT WORLD-CHANGE, PLANTED IN THE REAL WORKTREE
+==============================================================================
+
+  Each plant is its own probe, planted ALONE, so an exit code is
+  attributable to one structure.  The restore proof is printed after
+  every one of them, and it is MODE-AWARE -- which mg-5040's is not,
+  measured rather than asserted in t4_restore.py.
+
+  FOUR COLUMNS AND THEY ARE NOT THE SAME QUESTION.  `names` is whether
+  the run prints the planted FILENAME anywhere.  `CAUGHT` is whether a
+  SINGLE LINE carries `STILL ASSERTED` and that filename -- the one thing
+  a checker prints when it has found a live X4 statement.  `verdict`
+  is whether the checker printed its own `TOTAL BAD` line AT ALL: a
+  checker that exits 1 without one has not made a finding, it has
+  died, and those are the same exit code.  `residue` is the count of
+  `declined, NOT STATED` lines, which is the mechanism under audit.
+
+  BASELINE -- nothing planted.  Without it a green run proves nothing
+  about the plants, and a red one is not attributable.
+  --- BASELINE
+      w3_scope.py            exit 0  names no  CAUGHT no  verdict yes residue 0
+      s1_extent.py           exit 0  names no  CAUGHT no  verdict yes residue 0
+      e1_extents.py          exit 0  names no  CAUGHT no  verdict yes residue 0
+      e2_crosssection.py     exit 0  names no  CAUGHT no  verdict yes residue 0
+
+  --- UNREADABLE: a REGULAR FILE THIS PROCESS CANNOT OPEN, valid UTF-8, live statement
+      w3_scope.py            exit 0  names yes CAUGHT no  verdict yes residue 0
+      s1_extent.py           exit 1  names yes CAUGHT no  verdict NO  residue 0
+      e1_extents.py          exit 1  names no  CAUGHT no  verdict yes residue 0
+      e2_crosssection.py     exit 0  names no  CAUGHT no  verdict yes residue 0
+    RESTORED: yes   (0 tracked file(s) rewritten, 0 mode(s) put back)
+
+  --- READABLE: the SAME statement in a READABLE file -- the attribution control
+      w3_scope.py            exit 1  names yes CAUGHT YES verdict yes residue 0
+      s1_extent.py           exit 1  names yes CAUGHT YES verdict yes residue 0
+      e1_extents.py          exit 0  names no  CAUGHT no  verdict yes residue 0
+      e2_crosssection.py     exit 0  names no  CAUGHT no  verdict yes residue 0
+    RESTORED: yes   (0 tracked file(s) rewritten, 0 mode(s) put back)
+
+  --- UNDECODABLE: a READABLE file whose BYTES are not valid UTF-8 -- the bucket control
+      w3_scope.py            exit 0  names yes CAUGHT no  verdict yes residue 0
+      s1_extent.py           exit 0  names yes CAUGHT no  verdict yes residue 0
+      e1_extents.py          exit 1  names no  CAUGHT no  verdict yes residue 0
+      e2_crosssection.py     exit 0  names no  CAUGHT no  verdict yes residue 0
+    RESTORED: yes   (0 tracked file(s) rewritten, 0 mode(s) put back)
+
+  THE ROWS
+  w3_scope.py CATCHES the statement in an unreadable regular file  *** FINDING ***
+        exit 0, and `STILL ASSERTED` does not appear.  The tree this checker is the
+        WHOLE extent of now holds a live X4 statement and the run is silent
+        about it -- while printing the filename under a sentence that gives
+        the wrong reason.  Baseline exit was 0, so the exit code did not move.
+  the unreadable file appears in SOME checker's residue            *** FINDING ***
+        0 residue entries in 4 of 4 checkers.  The mechanism mg-5040 installed
+        for exactly this class does not fire, because the decline happens at
+        layer 2 and the residue is computed at layer 1.
+  the attribution control fires (else the silence above means noth ok
+        readable plant: exit 1, CAUGHT True
+  s1_extent.py, when loud, is loud ABOUT THE PLANTED STATEMENT     *** FINDING ***
+        exit 1, CAUGHT False, printed its own verdict line: NO.
+        It does not reach `S1 TOTAL BAD` at all: `shutil.copytree` in its own
+        injection control raises `Permission denied` on the planted file, so the
+        diagnosis a reader is handed is that the CONTROL broke.  Nothing in the
+        run says a forbidden statement is live in code/species_7d75.  That is
+        mg-4700's D2b and mg-5040's P1e for a THIRD structure, and neither of
+        them planted this one.
+
+  E1's EXTENT ROW, PER PLANT -- the row whose whole job is deciding
+  whether a printed extent is TRUE:
+      UNREADABLE   reads every non-excluded regular file of all four trees (53)     ok
+      READABLE     reads every non-excluded regular file of all four trees (53)     ok
+      UNDECODABLE  reads every non-excluded regular file of all four trees (53)     ok
+
+  e1_extents.py does not certify the extent over a file never read *** FINDING ***
+        `trace_open.py` records the path BEFORE calling the real `open`, so an
+        attempt that RAISES is recorded as a read and `want <= got` holds.  E1
+        walks independently of the subject -- mg-5040's answer to 'an instrument
+        that computes its expectation the subject's way cannot disagree' -- and
+        the two still agree here, through the TRACER instead of through the walk.
+  e1_extents.py rows that DID fail on the unreadable plant         2
+        the printed file count agrees with what was read                 *** FALSE ***
+        the printed count for code/species_7d75 is 19, and 19 were read  *** FALSE ***
+
+  PREDICTIONS
+  P1a    predicted 0                      got 0                      
+  P1b    predicted 1                      got 1                      
+  P1c    predicted 0                      got 0                      
+  P1e    predicted 0                      got 0                      
+  P1f    predicted (1, False)             got (1, False)             
+  P1g    predicted True                   got True                   
+  P1h    predicted 1                      got 1                      
+
+==============================================================================
+T1bb  THE THREE RUNNERS, WITH THE UNREADABLE PLANT ON DISK
+==============================================================================
+
+  A checker's exit code is not what a reader meets.  `run_all.sh` is.
+  So the same plant is left in place and each of the three runners is
+  EXECUTED, unmodified, and its own exit code read.
+
+      species_repair_a4ef        exit 1   CAUGHT no
+      species_remainder_f8fa     exit 0   CAUGHT no
+      species_repair_6f61        exit 0   CAUGHT no
+    RESTORED: yes   (2 tracked file(s) rewritten, 0 mode(s) put back)
+        rewritten: code/species_remainder_f8fa/out_w3_scope.txt
+        rewritten: code/species_repair_a4ef/out_s1_extent.txt
+
+  no runner is GREEN with a live X4 statement in code/species_7d75 *** FINDING ***
+        green: species_remainder_f8fa, species_repair_6f61
+        `code/species_remainder_f8fa/run_all.sh` is the runner that
+        executes `w3_scope.py`, whose ENTIRE extent is code/species_7d75.  It
+        exits 0.  The one runner that goes red does so through a `copytree`
+        crash in a different tree's checker.
+  the runner that DOES go red names the statement                  *** FINDING ***
+        0 of 1 red runners print `STILL ASSERTED` against the planted file.
+
+==============================================================================
+T1c  THE SAME PLANT AT 4372fae -- context, and NOT scored
+==============================================================================
+
+  Not scored, and the reason is the whole point of the section: this
+  is a generation the subtraction DID NOT REACH, not a regression it
+  introduced.  Counting it into TOTAL BAD would say mg-5040 broke
+  something, and it did not.
+
+  The extraction has NO `.git`.  A checker that asks git for an anchor
+  gets no answer there and says so in its own output; no number taken
+  from this extraction depends on one.
+
+  --- AT 4372fae, UNREADABLE PLANT
+      w3_scope.py            exit 0  names yes CAUGHT no  verdict yes residue 0
+      s1_extent.py           exit 1  names yes CAUGHT no  verdict NO  residue 0
+      e1_extents.py          exit 1  names no  CAUGHT no  verdict yes residue 0
+      e2_crosssection.py     exit 0  names no  CAUGHT no  verdict yes residue 0
+
+  w3_scope.py at the pin: exit / CAUGHT                            0 / False
+  w3_scope.py at HEAD:    exit / CAUGHT                            0 / False
+  the repair moved this checker's answer for this structure        NO
+  P1i    predicted 0                      got 0                      
+
+==============================================================================
+T1d  ONE BUCKET, TWO WORLDS -- the printed sentence, side by side
+==============================================================================
+
+  UNREADABLE  (valid UTF-8, mode 000, live forbidden statement):
+      files read: 18, 0 of them below the tree root   (skipped as not UTF-8 text: leak6ef4.py; skipped as __pycache__: the whole directory rule)
+  UNDECODABLE (readable, invalid UTF-8 bytes):
+      files read: 18, 0 of them below the tree root   (skipped as not UTF-8 text: leak6ef4.py; skipped as __pycache__: the whole directory rule)
+  READABLE    (the control -- what the same line says when nothing
+               was dropped):
+      files read: 19, 0 of them below the tree root   (skipped as not UTF-8 text: none; skipped as __pycache__: the whole directory rule)
+
+  the two are distinguishable in what the run PRINTS               *** FINDING ***
+        Identical up to the file counts.  The sentence a reader is handed says
+        the reason was the file's ENCODING.  For the first it is the file's
+        MODE, the file is valid UTF-8, and the statement inside it is live.
+
+  'A checker silent because nothing is wrong and a checker silent
+  because it cannot see are the same bytes on stdout.'  That sentence
+  is mg-5040's own, from the header of kern5040.py.  It is true of
+  layer 2 of its own four subjects.
+  P1d    predicted True                   got True                   
+
+==============================================================================
+T1 TOTAL BAD: 9
+T1 PREDICTIONS MISSED: 0
+==============================================================================
+
+EXTENT OF THESE NUMBERS.  FOUR checkers -- the four in
+kern6ef4.CHECKERS, which is kern5040.CHECKERS unchanged -- against a
+no-plant BASELINE and THREE plants in ONE tree, code/species_7d75, at
+HEAD, plus one of the three at 4372fae, which is not scored.  It
+says NOTHING about any other walk in this repository, nothing about
+the mathematics, and nothing about whether e2_crosssection.py is the
+right check.  `T1 TOTAL BAD` counts rows that contradict MG-5040'S OWN
+CLAIMS; `T1 PREDICTIONS MISSED` counts predictions in PREDICTIONS.md
+that were wrong.  The two are separate on purpose: a wrong prediction
+about code this ticket did not write is information, not a defect.

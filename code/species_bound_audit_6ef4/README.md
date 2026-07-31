@@ -51,9 +51,13 @@ legend.
 This directory's markdown sits under `code/`, and `e2_crosssection.py` counts every `*.md` under
 `docs/` and `code/`. So a live census run is higher than the shipped tree's by the number of markdown
 files here. `t3_census.py` counts from **tree objects** at four named revisions and is immune;
-nothing here reads the worktree for a census figure. None of these files carries a `~~strike~~`, so
-the cross-section check is not perturbed — except inside `t2_wiring.py`'s probe, which plants one
-markdown file for exactly as long as the probe runs and removes it.
+nothing here reads the worktree for a census figure.
+
+No file in this directory carries a strike span — the two tilde characters `e2_crosssection.py` looks
+for are not written anywhere here, deliberately, because an earlier draft of this paragraph spelled
+one out as an example and put this README into that checker's own report as a file carrying a strike.
+So the cross-section check is not perturbed, except inside `t2_wiring.py`'s probe, which plants one
+markdown file for exactly as long as the probe runs and then removes it.
 
 `t2_wiring.py` executes three `run_all.sh` twelve times. Those runners regenerate the committed
 `out_*.txt` beside them and write `__pycache__` directories; both are restored, and the

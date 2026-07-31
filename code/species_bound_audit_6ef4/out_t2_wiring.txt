@@ -1,0 +1,143 @@
+
+==============================================================================
+T2a  THE REWIRED BLOCK, BY LINE, IN ALL THREE RUNNERS
+==============================================================================
+
+  species_repair_a4ef        2 non-comment line(s)
+      echo "cross-section check (mg-821e), its own output, unfiltered:"
+      python3 ../species_extent_d633/e2_crosssection.py
+  species_remainder_f8fa     2 non-comment line(s)
+      echo "cross-section check (mg-821e), its own output, unfiltered:"
+      python3 ../species_extent_d633/e2_crosssection.py
+  species_repair_6f61        2 non-comment line(s)
+      echo "cross-section check (mg-821e), its own output, unfiltered:"
+      python3 ../species_extent_d633/e2_crosssection.py
+
+  P2a    predicted [2, 2, 2]                got [2, 2, 2]                
+
+  species_repair_a4ef: `set -e` at line 6, the call at line 59     53 lines apart
+  species_remainder_f8fa: `set -e` at line 4, the call at line 64  60 lines apart
+  species_repair_6f61: `set -e` at line 10, the call at line 53    43 lines apart
+
+==============================================================================
+T2b  THE ATTRIBUTION CONTROL -- e2 forced red, runners UNMODIFIED
+==============================================================================
+
+  Nothing below means anything if this is not red, and it means the
+  wrong thing if it is red without e2 saying so.  Both are checked.
+
+      species_repair_a4ef        exit 1   prints STANDING UN-STRUCK: yes
+      species_remainder_f8fa     exit 1   prints STANDING UN-STRUCK: yes
+      species_repair_6f61        exit 1   prints STANDING UN-STRUCK: yes
+    RESTORED: yes   (1 tracked file(s) rewritten, 0 mode(s) put back)
+        rewritten: code/species_repair_a4ef/out_s1_extent.txt
+
+  3 of 3 runners are red, and red BECAUSE of e2                    ok
+        If this row is a finding, every row below it is uninterpretable and
+        should be read as such.
+  P2d    predicted [1, 1, 1]                got [1, 1, 1]                
+
+==============================================================================
+T2c/T2d  EACH LINE OF THE BLOCK, DELETED ALONE, WITH e2 RED
+==============================================================================
+
+      HEADING  species_repair_a4ef        exit 1   e2 output present: yes
+      HEADING  species_remainder_f8fa     exit 1   e2 output present: yes
+      HEADING  species_repair_6f61        exit 1   e2 output present: yes
+    RESTORED: yes   (1 tracked file(s) rewritten, 0 mode(s) put back)
+        rewritten: code/species_repair_a4ef/out_s1_extent.txt
+      CALL     species_repair_a4ef        exit 0   e2 output present: NO
+      CALL     species_remainder_f8fa     exit 0   e2 output present: NO
+      CALL     species_repair_6f61        exit 0   e2 output present: NO
+    RESTORED: yes   (1 tracked file(s) rewritten, 0 mode(s) put back)
+        rewritten: code/species_repair_a4ef/out_s1_extent.txt
+
+  deleting the HEADING alone changes a verdict in some runner      *** FINDING ***
+        3 of 3 stay red with e2's full output present.  The heading is INERT.
+        mg-4700's F2 was 2 of 3 parts with no return; this is 1 of 2.  The
+        unit deletion-tested is still larger than the unit that has a return --
+        smaller, and not a different shape.
+  deleting the CALL alone leaves a trace that the check did not ru ok
+        3 of 3 exit 0, 0, 0 with no e2 output and no heading.
+  P2b    predicted [1, 1, 1]                got [1, 1, 1]                
+
+==============================================================================
+T2e  THE FIFTH RUNG -- `set -e` DELETED ALONE, ONE LINE, OUTSIDE THE BLOCK
+==============================================================================
+
+  Not a finer grain.  A WIDER SCOPE.  The four levels this arc has
+  climbed -- gate, clause, twenty-line block, line -- each made the
+  tested unit smaller, and the population stayed 'the wiring'.  The
+  statement that turns e2's exit code into the runner's exit code is
+  `set -e`, at the top of the file.  No deletion test in this arc has
+  ever included it, and no amount of further subdivision reaches it.
+
+      species_repair_a4ef        exit 0   prints STANDING UN-STRUCK: yes   e2 verdict lines: 2
+      species_remainder_f8fa     exit 0   prints STANDING UN-STRUCK: yes   e2 verdict lines: 2
+      species_repair_6f61        exit 0   prints STANDING UN-STRUCK: yes   e2 verdict lines: 2
+    RESTORED: yes   (1 tracked file(s) rewritten, 0 mode(s) put back)
+        rewritten: code/species_repair_a4ef/out_s1_extent.txt
+
+  deleting `set -e` alone leaves the verdict intact in some runner *** FINDING ***
+        3 of 3 runners exit 0 -- and 3 of 3 print e2's finding IN FULL
+        while doing it.  The check runs.  Its output is printed.  The runner is
+        GREEN.  That is mg-6cb9's F2 exactly, reached by deleting one line that
+        no deletion test in this arc has ever had in its population.
+  P2c    predicted [0, 0, 0]                got [0, 0, 0]                
+
+==============================================================================
+T2f  THE POPULATION OF EVERY DELETION TEST THIS ARC HAS APPLIED HERE
+==============================================================================
+
+      mg-821e  p3_wiring.py                                   mentions 0   deletes it: no
+      mg-4700  q2_wiring.py                                   mentions 4   deletes it: no
+      mg-5040  r2_wiring.py                                   mentions 1   deletes it: no
+
+  `set -e` is in the deletion population of some instrument here   *** FINDING ***
+        0 of 3.  Every one of them enumerates THE BLOCK.  The line that
+        carries the block's return is not in the block, so the population is
+        wrong in a way no refinement of the GRAIN can fix -- which is the
+        cheapest available demonstration that the level-chasing does not
+        terminate by getting finer.
+  P2e    predicted 0                        got 0                        
+
+==============================================================================
+T2g  IS THE INERT LINE GUARDED BY ANYTHING?
+==============================================================================
+
+  .py files under code/ that mention the heading string: 4
+
+  MENTIONING IT AND REQUIRING IT ARE NOT THE SAME THING, and the
+  difference is the whole question.  A file REQUIRES the line if it
+  would fail when the line is absent.  A deletion-test instrument
+  mentions it in order to REMOVE it, and goes right on passing
+  without it -- and this instrument is one of those, so it is
+  classified by the same rule rather than filtered out by name.
+
+      code/species_bound_audit_6ef4/t2_wiring.py               asserts False deletes True  -> does not require
+      code/species_bound_repair_5040/r2_wiring.py              asserts False deletes True  -> does not require
+      code/species_depth_audit_4700/kern4700.py                asserts False deletes True  -> does not require
+      code/species_depth_audit_4700/q2_wiring.py               asserts False deletes True  -> does not require
+
+  some self-test or checker REQUIRES the heading to be present     *** FINDING ***
+        0 of 4 files that mention it require it.  Every one of them is a
+        deletion-test instrument that names the line in order to take it away.
+        Deleting it is invisible to every instrument in this repository --
+        mg-4700's F2 second bullet, one line shorter and otherwise unchanged.
+  P2f    predicted 0                        got 0                        
+
+==============================================================================
+T2 TOTAL BAD: 4
+T2 PREDICTIONS MISSED: 0
+==============================================================================
+
+EXTENT OF THESE NUMBERS.  THREE runners -- the three in
+kern6ef4.RUNNERS, which is kern5040.RUNNERS unchanged -- each EXECUTED
+in four states: unmodified, heading deleted, call deleted, `set -e`
+deleted, all four with e2 forced red by ONE planted markdown file in
+this directory.  Twelve executions plus three controls.  It says
+NOTHING about the other 14 run_all.sh mg-c2b3 swept, nothing about any
+step in these three runners other than the cross-section block, and
+nothing about whether e2_crosssection.py is the right check.
+`T2 TOTAL BAD` counts rows that contradict MG-5040'S OWN CLAIMS;
+`T2 PREDICTIONS MISSED` counts predictions that were wrong.
