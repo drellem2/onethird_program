@@ -132,10 +132,10 @@ A3d  THE COMPARISON'S FIGURE -- `154 changed files`
   `s4_unpin.py` computes that with `git diff --name-only <ref> --`.
   Re-derived at every anchor that could have produced it:
 
-      worktree vs the pin, now (what s4 prints)       275
+      worktree vs the pin, now (what s4 prints)       281
       1ee1f1b vs the pin (the repair commit)          257
       1ee1f1b^ vs the pin (immediately before)        240
-      HEAD vs the pin                                 275
+      HEAD vs the pin                                 281
       mg-7522's own committed transcript              166
       the published document says                     154
 
@@ -168,4 +168,4 @@ a narrower rule than mg-7522's own, not a broken one, and calling it
 BAD would overstate it.
 
 FINDING: A3c the repaired caller scan still enumerates targets by FILENAME -- `(?:run_all|run_audit)\.sh`, two names instead of one.  mg-7522's own library states the property instead.  9 executing sites at HEAD name a `*.sh` whose basename is neither, across 6 distinct target scripts, 4 of them reading the exit status; the `k2_consume.py` STATED-LIMIT comment names the literal-path limit and does not name this one
-FINDING: A3d the published document states the pinned byte-comparison as `154 changed files`; the same measurement is 275, 257, 240, 275 at the anchors above and 166 in mg-7522's own committed transcript.  No anchor reproduces 154.
+FINDING: A3d the published document states the pinned byte-comparison as `154 changed files`; the same measurement is 281, 257, 240, 281 at the anchors above and 166 in mg-7522's own committed transcript.  No anchor reproduces 154.
