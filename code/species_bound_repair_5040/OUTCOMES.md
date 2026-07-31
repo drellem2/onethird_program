@@ -108,6 +108,41 @@ the copies share a source.
 
 ---
 
+## The instrument that raised the findings, re-run unmodified — and what it says
+
+mg-4700's own `q1`–`q4`, run against the repaired tree with **not one line of them edited**:
+
+| probe | exit | what it says |
+|---|---|---|
+| `q3_sites.py` | 0 | `Q3 TOTAL BAD: 0`, 0 predictions missed — nothing it confirmed was disturbed |
+| `q4_standing.py` | 1 | `Q4 TOTAL BAD: 1`, down from 2, 0 predictions missed. Its Q4b2 row now reads **claimed 1 / measured 1** and its two F4 rows **2 of 2 ok** — the census row mg-4700 raised is closed for this tree |
+| `q1_depth.py` | 1 | D1a–D1f all **as predicted** — the depth work is undisturbed — and then it **crashes** at Q1c |
+| `q2_wiring.py` | 1 | Q2a and Q2b's wired half pass, and then it **crashes** at Q2b's `unwire()` |
+
+**Both crashes are the repair, and neither is worked around.** `q1_depth.py` Q1c reverts each walk by
+finding the literal string `os.walk(SRC)` in `w3_scope.py`; that line is now a call to
+`walk_residue`, so the probe raises `expected 1 occurrence, found 0`. `q2_wiring.py`'s `unwire()`
+looks for the line `echo "$E2OUT" | grep -E` to find the end of the wiring block; that block no
+longer exists, which **is** OPEN 2 closed, so it raises `StopIteration`.
+
+That is worth stating plainly rather than smoothing over: **an auditor's probe written against source
+text stops running when the source it was written against is repaired.** Editing `q1`/`q2` to keep
+them green would have been editing the instrument that graded this work, so they are left exactly as
+mg-4700 committed them and their crashes are reported here. What they measured *before* crashing —
+every depth row as predicted, the wired runners red on B1 and naming `STANDING UN-STRUCK` — is the
+part that is evidence.
+
+**And a hazard, found the hard way.** `q1_depth.py` and `q2_wiring.py` restore the files they mutate
+**from a pinned git ref, not from the state at entry**. Run against a worktree carrying uncommitted
+changes, they therefore **discard those changes** — which is what happened here on the first attempt,
+silently, to five files. It is not a defect in what mg-4700 measured; it is a property of its restore
+contract that nothing states, and it is the same species as everything else in this arc: a
+restoration that is right about the tree it was written for and says nothing about the tree it is run
+in. `kern5040.Probe` snapshots the bytes at entry for exactly this reason, and its self-test asserts
+that contract in the direction that must fail.
+
+---
+
 ## Defects in this instrument, kept
 
 1. **The restore proof passed while the tree was dirty.** `git status --porcelain` **collapses an
