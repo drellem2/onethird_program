@@ -12,17 +12,7 @@ R4a  KIND 1 -- THIS INSTRUMENT ENUMERATES BY WALKING, TOO
   rule and no extension rule to be silent about, because it is not a
   filesystem traversal at all.  It has ONE bound and r3 states it in
   its own output: a file that is not tracked is not in the census.
-  Untracked files in this worktree right now: 16
-      code/species_bound_repair_5040/OUTCOMES.md
-      code/species_bound_repair_5040/PREDICTIONS.md
-      code/species_bound_repair_5040/README.md
-      code/species_bound_repair_5040/kern5040.py
-      code/species_bound_repair_5040/out_r1_bound.txt
-      code/species_bound_repair_5040/out_r2_wiring.txt
-      code/species_bound_repair_5040/out_r3_summaries.txt
-      code/species_bound_repair_5040/out_r4_self.txt
-      code/species_bound_repair_5040/out_selftest.txt
-      code/species_bound_repair_5040/r1_bound.py
+  Untracked files in this worktree right now: 0
   Named, so the bound of r3's census is visible and not asserted.
 
 
@@ -132,7 +122,20 @@ R4f  R4e's FIRST REASON, MEASURED
       docs/OneThird-Species-Hopf-Monoids-Bound-Repair.md
       docs/OneThird-Species-Hopf-Monoids-Repair-Sites.md
 
-  Added lines mentioning theorem/lemma/proposition/proof: 0
+  Added lines mentioning theorem/lemma/proposition/proof: 13
+      code/species_bound_repair_5040/OUTCOMES.md: +Four structures, four checkers, planted in the real worktree and rest
+      code/species_bound_repair_5040/OUTCOMES.md: +1. **The restore proof passed while the tree was dirty.** `git status
+      code/species_bound_repair_5040/README.md: +| `selftest5040.py` | the instrument's own contracts, including the *
+      code/species_bound_repair_5040/README.md: +such a directory until it is committed. The self-test caught that by 
+      code/species_bound_repair_5040/kern5040.py: +    # by asserting the restore proof in the direction that must FAIL:
+      code/species_bound_repair_5040/r2_wiring.py: +    print("  worktree and no restore proof is needed or claimed.")
+      code/species_bound_repair_5040/r4_self.py: +print("     theorem through a file list.  Checkable: `git diff` touch
+      code/species_bound_repair_5040/r4_self.py: +MATH_MARKERS = ("theorem", "lemma", "proposition", "proof")
+      code/species_bound_repair_5040/r4_self.py: +print("  These are reported and not scored: naming a theorem in a com
+      code/species_bound_repair_5040/selftest5040.py: +    that does NOT put the tree back must be caught saying so.  A rest
+      code/species_bound_repair_5040/selftest5040.py: +    that only ever passes is not a proof.
+      code/species_bound_repair_5040/selftest5040.py: +    # happy path proves nothing about the proof.
+      docs/OneThird-Species-Hopf-Monoids-Bound-Repair.md: +  it: no file under `code/species_7d75` changed, and every added line
   These are reported and not scored: naming a theorem in a comment is
   not restating one, and a rule that could tell them apart would be a
   claim this instrument cannot support.  The row that IS scored is

@@ -28,7 +28,6 @@ R3a  THE ARTIFACT -- mg-6cb9's a2_crosssection.py, AT THE TREE THE SUMMARIES DES
       R29   OUT  the restatement, with 'corrected' in the NEXT paragr 0    1    1         *** MISSED ***
       strike line 486   run  42 of  42 (100%)  restated at line 1257   *** STANDING UN-STRUCK ***
       strike line 624   run  32 of  33 ( 97%)  restated at line 890    *** STANDING UN-STRUCK ***
-      the COMMITTED run's extent line is true at HEAD                *** FALSE, off by -4 ***
 
   THE TWO DIFFER, and the reason is this ticket: §4 of the repair
   document regenerates code/species_extent_d633/out_e2_crosssection.txt,
@@ -83,18 +82,33 @@ R3c  EVERY COPY IN A COMMITTED FILE -- at the pin, and in this worktree
 
   file                                                     at 4372fae worktree
   code/species_audit_a61f/out_a2_bidigare.txt              [0]        [0]
+  code/species_bound_repair_5040/OUTCOMES.md               --         [2]
+  code/species_bound_repair_5040/PREDICTIONS.md            --         [1]
+  code/species_bound_repair_5040/out_r4_self.txt           --         [1]
+  code/species_bound_repair_5040/out_selftest.txt          --         [1, 2, 1, 1, 1]
+  code/species_bound_repair_5040/r3_summaries.py           --         [2, 1, 2, 1, 1]
+  code/species_bound_repair_5040/r4_self.py                --         [1]
+  code/species_bound_repair_5040/selftest5040.py           --         [1, 2, 1, 1, 1]
   code/species_depth_audit_4700/OUTCOMES.md                [1, 2]     [1, 2]
   code/species_depth_audit_4700/PREDICTIONS.md             [1]        [1]
   code/species_depth_audit_4700/out_q4_standing.txt        [1, 2, 1, 1] [1, 2, 1, 1]
   code/species_depth_audit_4700/q4_standing.py             [1, 1]     [1, 1]
   code/species_extent_audit_6cb9/out_a2_crosssection.txt   [2]        [2]
   code/species_sites_821e/out_a2_6cb9_after.txt            [1]        [1]
+  docs/OneThird-Species-Hopf-Monoids-Bound-Repair.md       --         [2]
   docs/OneThird-Species-Hopf-Monoids-Repair-Sites.md       [1]        [2]
   /OneThird-Species-Hopf-Monoids-Sites-IndependentAudit.md [2, 2, 1]  [2, 2, 1]
 
-  9 file(s) at the pin, 9 in the worktree; 0 of the worktree's are
+  9 file(s) at the pin, 17 in the worktree; 8 of the worktree's are
   MINE and are named here rather than excluded by a rule:
-      (none)
+      code/species_bound_repair_5040/OUTCOMES.md
+      code/species_bound_repair_5040/PREDICTIONS.md
+      code/species_bound_repair_5040/out_r4_self.txt
+      code/species_bound_repair_5040/out_selftest.txt
+      code/species_bound_repair_5040/r3_summaries.py
+      code/species_bound_repair_5040/r4_self.py
+      code/species_bound_repair_5040/selftest5040.py
+      docs/OneThird-Species-Hopf-Monoids-Bound-Repair.md
 
 
 ==============================================================================
@@ -130,6 +144,20 @@ R3e  DISPOSITION OF EVERY COPY, AND THE EDIT
 
   code/species_audit_a61f/out_a2_bidigare.txt              [0]
       1. NOT this artifact -- transcript of code/species_audit_a61f/a2_bidigare.py, which prints `A2 TOTAL BAD` as its OWN verdict
+  code/species_bound_repair_5040/OUTCOMES.md               [2]
+      2. carries the artifact's figure 2 beside the old one
+  code/species_bound_repair_5040/PREDICTIONS.md            [1]
+      5. THIS instrument -- the figure is read from the run, not typed
+  code/species_bound_repair_5040/out_r4_self.txt           [1]
+      3. RECORD of a run -- not edited; in the correction record
+  code/species_bound_repair_5040/out_selftest.txt          [1, 2, 1, 1, 1]
+      1. NOT this artifact -- names neither a2_crosssection nor mg-6cb9, and carries none of its 4 headings
+  code/species_bound_repair_5040/r3_summaries.py           [2, 1, 2, 1, 1]
+      2. carries the artifact's figure 2 beside the old one
+  code/species_bound_repair_5040/r4_self.py                [1]
+      5. THIS instrument -- the figure is read from the run, not typed
+  code/species_bound_repair_5040/selftest5040.py           [1, 2, 1, 1, 1]
+      1. NOT this artifact -- names neither a2_crosssection nor mg-6cb9, and carries none of its 4 headings
   code/species_depth_audit_4700/OUTCOMES.md                [1, 2]
       2. carries the artifact's figure 2 beside the old one
   code/species_depth_audit_4700/PREDICTIONS.md             [1]
@@ -142,15 +170,19 @@ R3e  DISPOSITION OF EVERY COPY, AND THE EDIT
       2. carries the artifact's figure 2 beside the old one
   code/species_sites_821e/out_a2_6cb9_after.txt            [1]
       3. RECORD of a run -- not edited; in the correction record
+  docs/OneThird-Species-Hopf-Monoids-Bound-Repair.md       [2]
+      2. carries the artifact's figure 2 beside the old one
   docs/OneThird-Species-Hopf-Monoids-Repair-Sites.md       [2]
       2. carries the artifact's figure 2 beside the old one
   /OneThird-Species-Hopf-Monoids-Sites-IndependentAudit.md [2, 2, 1]
       2. carries the artifact's figure 2 beside the old one
 
   every copy has a disposition                               ok
-  1 copy(ies) excluded by rule 1, NAMED so the exclusion cannot grow
+  3 copy(ies) excluded by rule 1, NAMED so the exclusion cannot grow
   unseen -- which is the same principle as the extent lines in OPEN 1:
       code/species_audit_a61f/out_a2_bidigare.txt  [0]
+      code/species_bound_repair_5040/out_selftest.txt  [1, 2, 1, 1, 1]
+      code/species_bound_repair_5040/selftest5040.py  [1, 2, 1, 1, 1]
   the one editable copy now carries the artifact's figure    ok
   and the correction says WHY, not just what                 ok
 
