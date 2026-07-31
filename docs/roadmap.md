@@ -249,6 +249,19 @@ on an audit that measured its extents in both directions — that, not fatigue, 
 are in no column**. Neither party had the population. *Asking for a reconciliation rather than letting the
 newer count stand is what surfaced it.*
 
+- **mg-69b4** (scoping, no audit — it produces a decision, not an artifact) — **`onethird_program` has
+  208 commits since 2026-06-01 and no merge gate of any kind**: no `.pogo/refinery.toml`, no gate
+  script, no Actions. `one_third_width_three` has **both**. `union_closed` has neither at 86 commits;
+  `one_third` is dormant at 0 commits, so its April build is correct rather than stale.
+  **This is where the entire control apparatus lives** — every gate, mutation demo, deletion population
+  and refusal check repaired tonight — **and nothing runs any of it on merge.** mg-7db4 fixed this in
+  one repo, which makes it **the same defect as mg-069f at the repository level.** The ticket asks for a
+  decision with reasons, **not for a gate**: an ~11-minute gate on an arc merging twenty times a night
+  is a real tax, and *a gate installed to close an asymmetry rather than because it catches something is
+  a cost with no stated benefit.* **If the answer is no, the reason gets recorded in the repo** — an
+  absence with a stated reason is a decision; an absence without one is an oversight that looks
+  identical.
+
 ## Next (gated / queued)
 
 - **mg-3934** (audit mg-3946) — **CI has been RED on `main` in one_third_width_three for ~21 hours**,
