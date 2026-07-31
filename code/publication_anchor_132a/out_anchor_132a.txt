@@ -1,0 +1,125 @@
+==============================================================================
+mg-132a -- a figure's provenance is WHERE IT WAS COMPUTED, not where it came to rest
+==============================================================================
+    audited as of            : 89d6aa1bf0c7
+    495 .py files under `code/` in the tree at that rev
+    POPULATION ANCHOR: commit=89d6aa1bf0c78408d7fcf97c71e522e4f74b957e count=495 digest=2e41577f5263fbfb scope=code/**/*.py
+
+⚠️  THIS TRANSCRIPT IS A MEASUREMENT AT THE COMMIT ABOVE, NOT A LIVE PROPERTY OF
+    THE REPOSITORY.  A committed `0 REFUTED` says the audit passed WHEN IT RAN.
+    The step that broke the check this file repairs was not a run -- it was A
+    MERGE, which rebased two transcripts onto a tree that had grown, and nothing
+    re-runs after one.  Re-run with `--at <rev>` after any merge; that is what
+    the flag is for.  A deliverable that printed `0 REFUTED` and let you read it
+    as `0 now` would be committing this defect one level up.
+
+
+A1 -- EVERY PUBLISHED FIGURE, AGAINST THE TREE IT WAS MEASURED AT
+-----------------------------------------------------------------
+`publishing_commit()` is `git log -1`, which follows a file to wherever a
+rebase puts it.  So the two questions are asked separately here: WHERE WAS THIS
+MEASURED (the anchor, re-derived) and WHERE DID IT COME TO REST (the publishing
+commit).  They agreed until a merge, and the merge is why one word could not
+carry both.
+
+       code/hodge_leverage_repair_6df0/out_repair_6df0.txt
+        verdict   : DISPLACED  (anchor INFERRED)
+        publishes : 473
+        anchor    : 8a07ae01fc45 holds 473   reachable from the audited rev: NO
+        published : 3958b5a84bf4 holds 481
+        right when written -- 473 at 8a07ae01fc45 -- and rebased onto a tree of 481 at 3958b5a84bf4
+       code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt
+        verdict   : AGREES  (anchor DECLARED)
+        publishes : 495
+        anchor    : 7dc91808eb58 holds 495   reachable from the audited rev: YES
+        published : 89d6aa1bf0c7 holds 495
+        495 at its anchor 7dc91808eb58 and at the commit that publishes it
+       code/publication_anchor_132a/out_anchor_132a.txt
+        verdict   : UNPUBLISHED
+        never committed at or before this rev, so nothing is published yet -- this row becomes a measurement at the commit that lands it
+
+  [CONFIRMED] A1a of the 2 published transcript(s) that carry a `.py` population, 0 are WRONG WHEN WRITTEN -- the tree at the commit each one NAMES AS ITS OWN does not hold the figure it publishes.  This is mg-7e39's F2 proper, and it is the only question `git log -1` was ever able to answer by accident.  1 are not published at this rev and are named rather than counted as passes: ['code/publication_anchor_132a/out_anchor_132a.txt']
+  [CONFIRMED] A1b 0 published figure(s) cannot be checked against ANY tree -- naming no commit that resolves, or naming one that is gone and not recoverable by digest.  ⚠️ THIS IS THE GATE THAT KEEPS (2) HONEST.  Recording the measurement commit is only an improvement on `git log -1` while that record is VERIFIABLE; an anchor nobody can resolve is an unfalsifiable assertion in a file, and is worse than a wrong number because a wrong number can at least be refuted
+  [MEASURED ] A1c 1 figure(s) are DISPLACED: right when written and rebased onto a tree that had grown -- out_repair_6df0.txt 473 at 8a07ae0 now published at 3958b5a which holds 481.  ⚠️ NOT RED, AND THAT IS THE DECISION.  A displaced figure has lost CURRENCY, not TRUTH; it remains a correct statement about a named tree.  The remedy is answer (1) -- re-run at the commit that now publishes it -- and this row is where a reader learns that it is owed
+  [MEASURED ] A1d 1 verified anchor(s) are NOT REACHABLE from the audited rev -- 8a07ae0 for out_repair_6df0.txt.  ⚠️ THIS IS WHAT (2) COSTS, MEASURED RATHER THAN ARGUED.  A rebase leaves the measurement commit off the mainline; it survives on whatever side ref still points at it and dies at the next `git gc`.  The digest in the declared anchor line is the answer to that, and A2d is where it is demonstrated -- but the two legacy transcripts predate the line and have no digest, so for them this row is an unfixed exposure, named
+  [MEASURED ] A1e 1 anchor(s) are INFERRED rather than DECLARED, by resolving the hex tokens in the transcript's own text: out_repair_6df0.txt -> 8a07ae0.  ⚠️ AN INFERRED ANCHOR IS WEAKER THAN A DECLARED ONE AND THE WEAKNESS IS STRUCTURAL: inference keeps the tokens whose tree YIELDS the figure, so it SELECTS FOR AGREEMENT and can never witness `WRONG WHEN WRITTEN` on a legacy transcript.  It can still witness `UNANCHORED`, which is what the original F2 transcript earns at A2a.  A transcript is only fully checkable once its own publication step declares its anchor
+
+A2 -- THE CONTROLS: EACH VERDICT SHOWN FIRING, ON THIS REPOSITORY
+-----------------------------------------------------------------
+A lattice with five rungs is a claim about a lattice.  Each rung below is
+demonstrated on real commits of this repository -- including one where the
+defect is still present -- rather than asserted.
+
+    ⚠️ code/hodge_leverage_repair_6df0/out_repair_6df0.txt @ 77306a7 (mg-7e39's F2, before any repair)
+        verdict   : UNANCHORED  (anchor NONE)
+        publishes : 429
+        anchor    : none that resolves
+        published : 77306a7ff970 holds 448
+        names no commit whose tree yields 429 (0 hex token(s) in it resolve to commits at all)
+  [CONFIRMED] A2a THE ORIGINAL DEFECT, ON THE COMMIT WHERE IT IS STILL PRESENT: the transcript at 77306a7 publishes 429 against a tree of 448, and this rule calls it `UNANCHORED` -- names no commit whose tree yields 429 (0 hex token(s) in it resolve to commits at all).  ⚠️ CAUGHT BY A DIFFERENT ROUTE THAN THE OLD RULE, AND A STRICTER ONE: not `the number disagrees with its tree` but `IT NAMES NO TREE`.  A figure that names none cannot be right or wrong, only unchecked -- which is why 429 survived a publication step at all
+       code/hodge_leverage_repair_6df0/out_repair_6df0.txt @ c1a57fd (pre-rebase)
+        verdict   : AGREES  (anchor INFERRED)
+        publishes : 473
+        anchor    : 8a07ae01fc45 holds 473   reachable from the audited rev: YES
+        published : c1a57fdd8d8c holds 473
+        473 at its anchor 8a07ae01fc45 and at the commit that publishes it
+       code/hodge_leverage_repair_6df0/out_repair_6df0.txt @ 3958b5a (post-rebase)
+        verdict   : DISPLACED  (anchor INFERRED)
+        publishes : 473
+        anchor    : 8a07ae01fc45 holds 473   reachable from the audited rev: NO
+        published : 3958b5a84bf4 holds 481
+        right when written -- 473 at 8a07ae01fc45 -- and rebased onto a tree of 481 at 3958b5a84bf4
+  [CONFIRMED] A2b THE SAME BYTES, TWO COMMITS, TWO VERDICTS: `out_repair_6df0.txt` is byte-identical at c1a57fd and 3958b5a (identical) and this rule reads it `AGREES` at the first and `DISPLACED` at the second.  ⚠️ NOTHING ABOUT THE FILE CHANGED -- THE MERGE MOVED IT.  This is the failure the repair's vocabulary had no word for, in one row, and it is why the publication step cannot be the only thing that recomputes: no run happened between these two commits
+    ⚠️ COPY of out_repair_6df0.txt + a SELF-CONSISTENT DECLARED anchor at 77306a7 (which holds 448)
+        verdict   : WRONG WHEN WRITTEN  (anchor DECLARED)
+        publishes : 473
+        anchor    : 77306a7ff970 holds 448   reachable from the audited rev: YES
+        published : 3958b5a84bf4 holds 481
+        the tree at its own declared anchor 77306a7ff970 holds 448, not 473
+  [CONFIRMED] A2c `WRONG WHEN WRITTEN` FIRES ON A DECLARED ANCHOR: a copy of a real transcript publishing 473, with a declared anchor that AGREES WITH THE TRANSCRIPT (count=473) and names 77306a7, whose tree actually holds 448.  Verdict `WRONG WHEN WRITTEN`.  The declared line is believed about WHICH COMMIT and never about WHAT IT HOLDS -- the count is RE-DERIVED from `git ls-tree`, which is the whole of what makes (2) a check rather than a note.  ⚠️ NOTHING CHEAPER COULD HAVE CAUGHT THIS ONE: the file agrees with itself, so only the tree can refute it
+       SYNTHETIC transcript with a DECLARED anchor whose commit does not exist
+        verdict   : AGREES  (anchor RECOVERED)
+        publishes : 495
+        anchor    : 89d6aa1bf0c7 holds 495   reachable from the audited rev: YES
+        published : 89d6aa1bf0c7 holds 495
+        495 at its anchor 89d6aa1bf0c7 and at the commit that publishes it
+  [CONFIRMED] A2d THE DIGEST BUYS BACK A PRUNED ANCHOR: an anchor sha that names no object recovers to 89d6aa1bf0c7, whose `code/` population re-derives to 495 -- the figure the transcript publishes -- so the verdict is `AGREES` rather than RED.  ⚠️ THIS IS THE ANSWER TO THE STRONGEST OBJECTION AGAINST (2), that a recorded commit becomes an unfalsifiable assertion once it is pruned.  The figure survives its own anchor
+    ⚠️ SYNTHETIC, anchor gone AND a digest no tree holds
+        verdict   : UNRESOLVABLE  (anchor DECLARED)
+        publishes : 495
+        anchor    : none that resolves
+        published : 89d6aa1bf0c7 holds 495
+        declared anchor 000000000000 does not resolve and none of the 395 commit(s) searched holds digest ffffffffffffffff
+  [CONFIRMED] A2e AND RECOVERY FAILS CLOSED: an anchor that does not resolve and a digest no tree in the searched history holds reads `UNRESOLVABLE` and is RED.  A recovery that could only succeed would be a blessing, not a check
+  [CONFIRMED] A2f the declared anchor line is NOT itself readable as a population figure -- `POP_FIGURE` finds nothing in `POPULATION ANCHOR: commit=89d6aa1bf0c78408d7fcf97c71e522e4...`.  Adding provenance to a transcript must not change which number a reader, or this checker, takes as the figure.  Predicted, and asserted rather than left to the phrasing
+    ⚠️ COPY of out_repair_6df0.txt + a TRUE anchor for the WRONG figure
+        verdict   : INCONSISTENT  (anchor DECLARED)
+        publishes : 473
+        anchor    : none that resolves
+        published : 3958b5a84bf4 holds 481
+        its own declared anchor line says count=481 while the transcript publishes 473 -- the file disagrees with itself before any tree is consulted
+  [CONFIRMED] A2g A DECLARED ANCHOR THAT IS TRUE ABOUT ITS TREE AND WRONG ABOUT ITS FILE: the anchor line above names 3958b5a and states count=481, both correct, inside a transcript that publishes 473.  Verdict `INCONSISTENT`.  ⚠️ NO AMOUNT OF `git ls-tree` COULD CATCH THIS -- whichever tree is consulted, one of the two numbers matches it.  A publication step that computes the anchor and the prose figure by two routes can disagree with itself, which is F2's shape inside a single file.  THIS ROW EXISTS BECAUSE THE FIRST VERSION OF A2d BUILT EXACTLY THIS FORGERY BY ACCIDENT AND THE RUN REFUTED IT
+  [MEASURED ] A2h A DIGEST WITNESSES A POPULATION, NOT A COMMIT: 2 of the 395 commit(s) searched share the audited rev's `code/` population digest 2e41577f5263fbfb, because a commit that adds no `.py` file leaves the population untouched.  That is ENOUGH to verify a COUNT -- every one of them has the same file list -- and NOT ENOUGH to identify provenance uniquely.  A recovered anchor answers 'a tree holding exactly this population existed', which is the falsifiable half, and does not answer 'and it was that commit'.  Stated here rather than left for a reader to discover that `RECOVERED` is weaker than `DECLARED`
+  [MEASURED ] A2i AND THE EXPOSURE IS TOTAL FOR THE TWO LEGACY FIGURES: 7 commit(s) in the object store hold the population the 473 figures were measured against, and 0 of them are reachable from the audited rev.  ⚠️ THE PRE-MERGE TREES SURVIVE ONLY ON `origin/polecat-3f3b`.  Delete that branch, run `git gc`, and 473 becomes permanently uncheckable -- no digest to search by and no tree left to find.  This is not an argument against (2); it is the measurement of what (2) inherited, and the only remedy for these two files specifically is answer (1), a re-run
+
+A3 -- THIS DELIVERABLE, CHECKED BY ITS OWN RULE
+-----------------------------------------------
+This deliverable is of the same kind as the defect it repairs: it publishes
+figures with provenance.  So it is put through its own lattice, read FROM GIT at
+its own publishing commit -- and the run that writes this transcript is the run
+that reads the last committed one.
+
+       code/publication_anchor_132a/out_anchor_132a.txt
+        verdict   : UNPUBLISHED
+        never committed at or before this rev, so nothing is published yet -- this row becomes a measurement at the commit that lands it
+  [CONFIRMED] A3a THIS INSTRUMENT'S OWN TRANSCRIPT reads `UNPUBLISHED` under the rule it ships -- never committed at or before this rev, so nothing is published yet -- this row becomes a measurement at the commit that lands it.  ⚠️ A CHECK THAT CANNOT BE APPLIED TO ITS AUTHOR IS A SCOPE NOBODY CHOSE, and this is the row that would go red first if the argument in this file were wrong
+  [CONFIRMED] A3b PREDICTIONS BEFORE INSTRUMENT, FROM `git log`: `PREDICTIONS.md` first appears at d24bbeb and `anchor_132a.py` at 7dc9180, and the first is an ancestor of the second.  'Decided before measuring' is a claim about the repository and is read out of git here rather than asserted in prose.  ⚠️ THIS ROW IS RED ON A RUN FROM AN UNCOMMITTED WORKING TREE, and that is correct rather than inconvenient: before the instrument is committed there is no ordering in git to read, and a row that went green on the absence of evidence would be the defect this deliverable is about
+  [MEASURED ] A3c THE GAP THIS DELIVERABLE DOES NOT CLOSE, NAMED: nothing in this tree re-runs the check after a merge -- 0 post-merge/post-rewrite hook(s) exist ([]).  The rebase that produced this defect is performed by the refinery, OUTSIDE the repository, and no artifact committed inside it can run after one.  ⚠️ WHAT IS DELIVERED INSTEAD IS `--at <rev>`, so the audit is ONE COMMAND against any commit including a post-merge one, and the banner above, which says that a committed `0 REFUTED` is a measurement at the run's commit.  Claiming the gap closed would be this deliverable committing the defect it repairs
+  [CONFIRMED] A3d `--at` IS EXERCISED, NOT MERELY OFFERED: the same lattice run as of 7dc9180 gives out_repair_6df0.txt -> DISPLACED; out_repair_3f3b.txt -> DISPLACED.  A flag that is documented and never run is a plan; this row is the audit answering at a commit that is not HEAD, which is what a post-merge re-check will be
+
+SUMMARY
+-------
+    checks          : 18
+    confirmed       : 12
+    measured        : 6
+    refuted         : 0
