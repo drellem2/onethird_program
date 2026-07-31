@@ -88,6 +88,17 @@ whether the enlargement was disclosed anywhere.
         at 2 of 2 sites (mg-8aae H-1); (d) compares the SEQUENCE.
         NOT covered by (d): two occurrences of the SAME token
         exchanged, which is the identity map on values (mg-8eca).
+    (e) and EVERYTHING ELSE IN THE SECTION -- every byte that is not
+        an asserted figure token -- byte for byte, in order, against
+        the declared record in `site_records.txt`.  (c) and (d) are
+        a projection onto the figures, and a projection is invariant
+        under any permutation of what it drops: exchanging the two
+        LABELS instead of the two figures was silent at 3 of 3 sites
+        (mg-9207 E2/E2b/E3).  (a)-(d) plus (e) are the WHOLE record,
+        and that is MEASURED rather than claimed -- the RECORD
+        PARTITION row re-interleaves the two halves and compares the
+        result to the section byte for byte.  No field is named, so
+        a field added later is covered the moment it is written.
         the STATE.md row      17 licensed figure tokens (6 historical values declared)
                               17 declared SLOTS, in the order a reader meets them (mg-8eca)
         §14                   16 licensed figure tokens (9 historical values declared)
@@ -99,10 +110,16 @@ whether the enlargement was disclosed anywhere.
   [CONFIRMED] GATE: the enlargement 2 928 -> 6 069 is stated at BOTH the §14 section and the place A5 is recorded (the STATE.md row)
   [CONFIRMED] GATE @ the STATE.md row: FIGURE CENSUS -- all 17 figure token(s) a reader meets in this SECTION are licensed (5 live occurrence(s) at the values measured this run, 12 declared historical), and no other figure is asserted here.  Prose is read, not only the designated statements
   [CONFIRMED] GATE @ the STATE.md row: FIGURE ORDER -- all 17 figure token(s) are in the declared slot a reader meets them in. The census above is a MULTISET and a multiset is invariant under a permutation, so two declared figures exchanged in ordinary prose passed it (mg-8aae H-1); this compares the SEQUENCE, which a transposition changes
+  [CONFIRMED] GATE @ the STATE.md row: RECORD PARTITION -- the section is 17 asserted figure token(s) and 18 segment(s) between them, and re-interleaving the two halves reproduces it BYTE FOR BYTE (13367 of 13367 chars).  This is what licenses 'the WHOLE record is compared': the figures are checked by FIGURE CENSUS and FIGURE ORDER, everything else by SITE RECORD, and nothing is in neither.  No field is named, so none can be left behind because nobody named it
+  [CONFIRMED] GATE @ the STATE.md row: SITE RECORD -- the 13,280 chars of this section that are NOT asserted figures are byte-identical to the declared record, in order.  A MULTISET is invariant under exchanging two figures (mg-8aae H-1) and a SEQUENCE OF FIGURES is invariant under exchanging the two LABELS they hang on (mg-9207 E2/E2b/E3); this compares the other half, so neither exchange is silent
   [CONFIRMED] GATE @ §14: FIGURE CENSUS -- all 16 figure token(s) a reader meets in this SECTION are licensed (3 live occurrence(s) at the values measured this run, 13 declared historical), and no other figure is asserted here.  Prose is read, not only the designated statements
   [CONFIRMED] GATE @ §14: FIGURE ORDER -- all 16 figure token(s) are in the declared slot a reader meets them in. The census above is a MULTISET and a multiset is invariant under a permutation, so two declared figures exchanged in ordinary prose passed it (mg-8aae H-1); this compares the SEQUENCE, which a transposition changes
+  [CONFIRMED] GATE @ §14: RECORD PARTITION -- the section is 16 asserted figure token(s) and 17 segment(s) between them, and re-interleaving the two halves reproduces it BYTE FOR BYTE (16647 of 16647 chars).  This is what licenses 'the WHOLE record is compared': the figures are checked by FIGURE CENSUS and FIGURE ORDER, everything else by SITE RECORD, and nothing is in neither.  No field is named, so none can be left behind because nobody named it
+  [CONFIRMED] GATE @ §14: SITE RECORD -- the 16,561 chars of this section that are NOT asserted figures are byte-identical to the declared record, in order.  A MULTISET is invariant under exchanging two figures (mg-8aae H-1) and a SEQUENCE OF FIGURES is invariant under exchanging the two LABELS they hang on (mg-9207 E2/E2b/E3); this compares the other half, so neither exchange is silent
   [CONFIRMED] GATE @ H8: FIGURE CENSUS -- all 36 figure token(s) a reader meets in this SECTION are licensed (9 live occurrence(s) at the values measured this run, 27 declared historical), and no other figure is asserted here.  Prose is read, not only the designated statements
   [CONFIRMED] GATE @ H8: FIGURE ORDER -- all 36 figure token(s) are in the declared slot a reader meets them in. The census above is a MULTISET and a multiset is invariant under a permutation, so two declared figures exchanged in ordinary prose passed it (mg-8aae H-1); this compares the SEQUENCE, which a transposition changes
+  [CONFIRMED] GATE @ H8: RECORD PARTITION -- the section is 36 asserted figure token(s) and 37 segment(s) between them, and re-interleaving the two halves reproduces it BYTE FOR BYTE (7852 of 7852 chars).  This is what licenses 'the WHOLE record is compared': the figures are checked by FIGURE CENSUS and FIGURE ORDER, everything else by SITE RECORD, and nothing is in neither.  No field is named, so none can be left behind because nobody named it
+  [CONFIRMED] GATE @ H8: SITE RECORD -- the 7,652 chars of this section that are NOT asserted figures are byte-identical to the declared record, in order.  A MULTISET is invariant under exchanging two figures (mg-8aae H-1) and a SEQUENCE OF FIGURES is invariant under exchanging the two LABELS they hang on (mg-9207 E2/E2b/E3); this compares the other half, so neither exchange is silent
   [CONFIRMED] GATE @ the STATE.md row: 'gap, cell only' READ AT THE SITE = +2 744, MEASURED THIS RUN = +2 744
   [CONFIRMED] GATE @ the STATE.md row: 'gap, cell only' is WRITTEN ONCE -- +2 744 occurs 1x in this site.  A second written copy must instead DERIVE from the first by pointing at it; that is what removes the failure mode
   [CONFIRMED] GATE @ the STATE.md row: 'gap, cell + relocated history' READ AT THE SITE = +23 771, MEASURED THIS RUN = +23 771
@@ -177,7 +194,7 @@ TARGET 4 (F4) -- A RULE ABOUT ENUMERATING A BRIEF, MIS-ENUMERATING ITS BRIEF
 
 NEGATIVE CONTROL -- THE FIGURE GATE, MUTATED ONE COPY AT A TIME
 ---------------------------------------------------------------
-Eighteen mutations, verdicts written before the run, applied in memory to the
+Twenty-five mutations, verdicts written before the run, applied in memory to the
 three site texts and evaluated by `figure_gate` itself.  Nothing is written to
 disk.  N1/N3/N4 are mg-8a5c's N1/N4/N5 -- the three single-copy corruptions
 that the previous gate observed at exit 0 while predicting exit 1.  N9 is the
@@ -187,7 +204,10 @@ set-membership census would still pass; N14 is the fail-closed cost, stated as
 a cost.  N15-N18 are mg-8aae's H-1: two DECLARED figures EXCHANGED with each
 other, the mutation a MULTISET cannot see because a transposition preserves it
 exactly, which the run stayed GREEN on at 2 of 2 sites until mg-8eca made the
-roster positional.
+roster positional.  N19-N25 are mg-9207's E2/E2b/E3 and the rest of the same
+kind: an exchange has TWO HALVES, and moving the LABELS instead of the figures
+left every figure token in its declared slot and the gate refuting NOTHING at
+3 of 3 label sites until the record was compared WHOLE (mg-ff3e).
 
     mutation                                                              predicted     observed
     N1  STATE.md row: corrupt the LIVE gap figure ONLY                    GATE FIRES    GATE FIRES
@@ -208,14 +228,32 @@ roster positional.
     N16 H8: the row-history line's two historical columns EXCHANGED       GATE FIRES    GATE FIRES
     N17 STATE.md row: the chain's LAST two terms exchanged (mg-8aae)      GATE FIRES    GATE FIRES
     N18 STATE.md row: the chain's FIRST two terms exchanged               GATE FIRES    GATE FIRES
+    N19 H8: the two LABELS exchanged, figures left alone (mg-9207 E2)     GATE FIRES    GATE FIRES
+    N20 H8: the bbe83b5 table's two ROW LABELS exchanged (E2b)            GATE FIRES    GATE FIRES
+    N21 H8: the two historical COLUMN HEADERS exchanged (E3)              GATE FIRES    GATE FIRES
+    N22 §14: the two CORRECTION ATTRIBUTIONS exchanged                    GATE FIRES    GATE FIRES
+    N23 STATE.md row: two row-history ANCHOR LABELS exchanged             GATE FIRES    GATE FIRES
+    N24 §14: a figure inside a MARKED QUOTATION altered                   GATE FIRES    GATE FIRES
+    N25 H8: the three-column table's ALIGNMENT shifted, no figure moved   GATE FIRES    GATE FIRES
 
-  [CONFIRMED] 18 of 18 mutations moved the gate as predicted.  N15-N18 are mg-8aae's H-1 -- two DECLARED figures EXCHANGED with each other, which leaves the census's multiset IDENTICAL and which this gate passed at 2 of 2 sites until the roster was made positional (mg-8eca).  The three that matter are N1-N3: corrupting ONLY the figure a reader meets, at each of the three sites, which the presence-test gate observed at exit 0 (mg-8a5c N1/N4/N5). N5 fires on the duplicate itself, so the structural repair cannot be silently undone.  N10-N12 are mg-835f's G-1 -- a wrong figure in ORDINARY PROSE beside the statement -- which this gate passed at 3 of 3 sites and now fires on at 3 of 3 (mg-8916)
+  [CONFIRMED] 25 of 25 mutations moved the gate as predicted.  N15-N18 are mg-8aae's H-1 -- two DECLARED figures EXCHANGED with each other, which leaves the census's multiset IDENTICAL and which this gate passed at 2 of 2 sites until the roster was made positional (mg-8eca).  The three that matter are N1-N3: corrupting ONLY the figure a reader meets, at each of the three sites, which the presence-test gate observed at exit 0 (mg-8a5c N1/N4/N5). N5 fires on the duplicate itself, so the structural repair cannot be silently undone.  N10-N12 are mg-835f's G-1 -- a wrong figure in ORDINARY PROSE beside the statement -- which this gate passed at 3 of 3 sites and now fires on at 3 of 3 (mg-8916).  N19-N25 are mg-9207's E2/E2b/E3 and the rest of that kind -- the LABELS exchanged instead of the figures -- which this gate passed at 3 of 3 label sites and now fires on (mg-ff3e)
+
+    the LABEL-side probes, by WHICH GATE ROW CAUGHT THEM:
+    probe                                                                 SITE RECORD   CENSUS+ORDER
+    N19 H8: the two LABELS exchanged, figures left alone (mg-9207 E2)     REFUTED       all green
+    N20 H8: the bbe83b5 table's two ROW LABELS exchanged (E2b)            REFUTED       all green
+    N21 H8: the two historical COLUMN HEADERS exchanged (E3)              REFUTED       all green
+    N22 §14: the two CORRECTION ATTRIBUTIONS exchanged                    REFUTED       all green
+    N23 STATE.md row: two row-history ANCHOR LABELS exchanged             REFUTED       all green
+    N24 §14: a figure inside a MARKED QUOTATION altered                   REFUTED       all green
+    N25 H8: the three-column table's ALIGNMENT shifted, no figure moved   REFUTED       all green
+  [CONFIRMED] 7 of 7 label-side mutations are caught BY THE SITE RECORD ROW while every FIGURE CENSUS and FIGURE ORDER row stays green.  That second half is the point: it is the artifact's own evidence that the mutation moved no figure, so the fire is attributable to the half of the record that was not being compared before -- and not to a designated reader breaking, which would be re-measuring (a)
 
 BOTTOM LINE
 -----------
-  checks recorded : 62
+  checks recorded : 69
   measurements    : 3
-  confirmed       : 59
+  confirmed       : 66
   refuted         : 0
 
   All four findings are measured and all four stand.  F4 stands as
