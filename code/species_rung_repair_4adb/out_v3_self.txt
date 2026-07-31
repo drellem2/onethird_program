@@ -1,0 +1,150 @@
+
+==============================================================================
+V3a  EVERY LINE OF THIS INSTRUMENT'S RUNNER, DELETED ALONE
+==============================================================================
+
+  The population is every line of code/species_rung_repair_4adb/run_all.sh,
+  with nothing excluded, for the reason V1a gives.  Each mutant runs
+  with ONE step forced red -- the last one, so that every guard above
+  it has already had to carry a passing step -- and a mutant that
+  exits 0 has lost the verdict.
+
+  the step forced red in every row below                           python3 -B v4_neighbours.py > out_v4_neighbours.txt 
+
+      stand-in, no step red      exit 0
+      stand-in, last step red    exit 1
+
+      line   1  exit 1  gate fired   #!/bin/sh
+      line   2  exit 1  gate fired   # mg-4adb -- the repair of mg-6ef4's two OPE
+      line   3  exit 1  gate fired   # one line outside every deletion population
+      line   4  exit 1  gate fired   # unreadable regular file filed under ENCODI
+      line   5  exit 1  gate fired   # Pure Python 3, no dependencies, NO NETWORK
+      line   6  exit 1  gate fired   # repository, which is local.
+      line   7  exit 1  gate fired   #
+      line   8  exit 1  gate fired   # TWO AND A HALF HOURS, and about two of the
+      line   9  exit 1  gate fired   # accident of implementation, it is the popu
+      line  10  exit 1  gate fired   # three runners, one at a time, and EXECUTES
+      line  11  exit 1  gate fired   # is not written here as a figure -- v1's se
+      line  12  exit 1  gate fired   # `TOTAL RUNNER EXECUTIONS IN V1c`, computed
+      line  13  exit 1  gate fired   # the clock is code/species_repair_6f61/run_
+      line  14  exit 1  gate fired   # run.  A cheaper population would be a smal
+      line  15  exit 1  gate fired   # exactly what mg-6ef4's F3 was.  The transc
+      line  16  exit 1  gate fired   # file so that reading the result does not c
+      line  17  exit 1  gate fired   #
+      line  18  exit 1  gate fired   # THIS FILE DOES NOT RELY ON `set -e` TO CAR
+      line  19  exit 1  gate fired   # its own status with an explicit `||`, and 
+      line  20  exit 1  gate fired   # `exit $RC`.  v3_self.py MEASURES that rath
+      line  21  exit 1  gate fired   # every line of this file, forces each step 
+      line  22  exit 1  gate fired   # `set -e` to show the verdicts do not move.
+      line  23  exit 1  gate fired   # two guards are better than one.
+      line  24  exit 1  gate fired   #
+      line  25  exit 1  gate fired   # Nothing is piped: a pipeline's exit status
+      line  26  exit 1  gate fired   # command's, and `set -o pipefail` is not av
+      line  27  exit 1  gate fired   #
+      line  28  exit 1  gate fired   # DO NOT KILL THIS RUN MID-PROBE.  v1 and v2
+      line  29  exit 1  gate fired   # restore is inside the process.  A killed r
+      line  30  exit 1  gate fired   # line deleted, or a file at mode 000 in cod
+      line  31  exit 1  gate fired   #     git checkout -- code/species_*/run_all
+      line  32  exit 1  gate fired   #     git status --porcelain --untracked-fil
+      line  33  exit 1  gate fired   set -e
+      line  34  exit 1  gate fired   cd "$(dirname "$0")"
+      line  35  exit 1  gate fired   
+      line  36  exit 1  gate fired   RC=0
+      line  37  exit 1  gate fired   
+      line  38  exit 2  BROKE EARLY  python3 -B selftest4adb.py > out_selftest.tx
+      line  39  exit 2  BROKE EARLY  cat out_selftest.txt; echo "selftest4adb.py 
+      line  40  exit 1  gate fired   cat out_selftest.txt
+      line  41  exit 1  gate fired   
+      line  42  exit 1  gate fired   python3 -B v1_population.py > out_v1_populat
+      line  43  exit 1  gate fired   cat out_v1_population.txt
+      line  44  exit 1  gate fired   
+      line  45  exit 1  gate fired   python3 -B v2_layer2.py > out_v2_layer2.txt 
+      line  46  exit 1  gate fired   cat out_v2_layer2.txt
+      line  47  exit 1  gate fired   
+      line  48  exit 1  gate fired   python3 -B v3_self.py > out_v3_self.txt || R
+      line  49  exit 1  gate fired   cat out_v3_self.txt
+      line  50  exit 1  gate fired   
+      line  51  exit 0  GATE LOST    python3 -B v4_neighbours.py > out_v4_neighbo
+      line  52  exit 1  gate fired   cat out_v4_neighbours.txt
+      line  53  exit 1  gate fired   
+      line  54  exit 1  gate fired   echo
+      line  55  exit 1  gate fired   echo "Headline lines:"
+      line  56  exit 1  gate fired   grep -h '^V[1-4] TOTAL BAD:\|^V[1-3] PREDICT
+      line  57  exit 2  gate fired   out_*.txt || true
+      line  58  exit 1  gate fired   echo
+      line  59  exit 1  gate fired   echo "\`Vn TOTAL BAD\` counts outcomes that 
+      line  60  exit 1  gate fired   echo "CLAIMS, so a repair that landed clean 
+      line  61  exit 1  gate fired   echo "\`Vn PREDICTIONS MISSED\` counts predi
+      line  62  exit 1  gate fired   echo "wrong, and PREDICTIONS.md was committe
+      line  63  exit 1  gate fired   echo "are separate on purpose and neither is
+      line  64  exit 1  gate fired   echo
+      line  65  exit 1  gate fired   echo "This run's own exit status is RC, set 
+      line  66  exit 1  gate fired   echo "\`set -e\` -- see the note at the head
+      line  67  exit 1  gate fired   echo "section V3c, which measures it."
+      line  68  exit 0  GATE LOST    exit $RC
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  with no step red the runner is GREEN                             ok
+  with the last step red the runner is RED                         ok
+  lines whose deletion loses the verdict                           2
+        python3 -B v4_neighbours.py > out_v4_neighbours.txt || RC=1
+        exit $RC
+
+  no line outside the declared set turns this runner green         ok
+        undeclared: []
+  `exit $RC` IS in the measured set -- this runner's own fifth run ok
+        If deleting it changed nothing, the verdict would be resting on
+        something else again, and that something would be the next F3.
+  P4a    predicted True                     got True                     
+
+
+==============================================================================
+V3b  EVERY STEP OF THIS RUNNER, FORCED RED ONE AT A TIME
+==============================================================================
+
+  `every runner you touch can go red` is a claim about EVERY step, not
+  about the runner as a whole.  A runner that reddens for its first
+  step and swallows its fourth is a green run away from mg-6cb9's F2.
+
+      python3 -B selftest4adb.py > out_selftest.txt || {   exit 1  
+      python3 -B v1_population.py > out_v1_population.txt  exit 1  
+      python3 -B v2_layer2.py > out_v2_layer2.txt || RC=1  exit 1  
+      python3 -B v3_self.py > out_v3_self.txt || RC=1      exit 1  
+      python3 -B v4_neighbours.py > out_v4_neighbours.txt  exit 1  
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  every step of this runner reddens it when it fails               ok
+  P4b    predicted True                     got True                     
+
+
+==============================================================================
+V3c  THE QUESTION mg-6ef4 ASKED OF THE THREE SUBJECTS, ASKED HERE
+==============================================================================
+
+  `set -e` appears in this runner                                  1 time(s)
+
+      python3 -B selftest4adb.py > out_selftest.txt  without `set -e`: exit 1  
+      python3 -B v1_population.py > out_v1_populatio without `set -e`: exit 1  
+      python3 -B v2_layer2.py > out_v2_layer2.txt || without `set -e`: exit 1  
+      python3 -B v3_self.py > out_v3_self.txt || RC= without `set -e`: exit 1  
+      python3 -B v4_neighbours.py > out_v4_neighbour without `set -e`: exit 1  
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  deleting `set -e` from this runner changes no verdict            ok
+        with:    [1, 1, 1, 1, 1]
+        without: [1, 1, 1, 1, 1]
+  the last statement of this runner is an explicit `exit`          ok
+        last non-blank line: exit $RC
+  P4c    predicted True                     got True                     
+
+==============================================================================
+V3 TOTAL BAD: 0
+V3 PREDICTIONS MISSED: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  68 line deletions and 10 step substitutions
+over ONE file, code/species_rung_repair_4adb/run_all.sh,
+executed as a STAND-IN whose commands are replaced and whose control
+flow is the file's own.  It says NOTHING about whether the checkers
+this runner calls are correct -- that is what V1, V2 and V4 are, and
+this runner executes them.

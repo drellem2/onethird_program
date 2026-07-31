@@ -1,0 +1,492 @@
+
+==============================================================================
+V1a  THE DELETION POPULATION, STATED -- WHAT IS IN IT AND WHAT IS OUT
+==============================================================================
+
+  IN:   every line of the file, 1..N, deleted one at a time.
+  OUT:  nothing.
+
+  That is the whole statement, and it is written this way because the
+  ticket asks for each exclusion to be justified individually and the
+  honest way to meet that is to have none.  Comment lines are in.
+  Blank lines are in.  The shebang is in.  `set -e` is in, which is
+  the line mg-6ef4 found outside all three previous populations.
+
+  code/species_repair_a4ef/run_all.sh                              83 line(s): 63 comment, 3 blank, 17 other
+  code/species_remainder_f8fa/run_all.sh                           85 line(s): 61 comment, 3 blank, 21 other
+  code/species_repair_6f61/run_all.sh                              87 line(s): 68 comment, 3 blank, 16 other
+
+  TOTAL RUNNER EXECUTIONS IN V1c                                   255
+
+  The three earlier populations, for comparison, from mg-6ef4's T2f:
+  mg-821e p3_wiring.py, mg-4700 q2_wiring.py and mg-5040 r2_wiring.py
+  each enumerate THE WIRING BLOCK -- 2 lines after mg-5040, 20 before.
+  None of them contains `set -e`.  This one contains every line that
+  exists, so the question 'is the load-bearing line in the set' cannot
+  be answered wrongly by a judgement call.
+
+
+==============================================================================
+V1b  THE ATTRIBUTION CONTROL -- e2 FORCED RED, RUNNERS UNMODIFIED
+==============================================================================
+
+  Nothing below means anything if this is not red, and it means the
+  wrong thing if it is red without e2 saying so.  Both are checked,
+  and the clean baseline is measured first: a repair that reddens a
+  correct tree has moved the problem rather than removed it.
+
+      CLEAN  species_repair_a4ef        exit 0   prints STANDING UN-STRUCK: no
+      CLEAN  species_remainder_f8fa     exit 0   prints STANDING UN-STRUCK: no
+      CLEAN  species_repair_6f61        exit 0   prints STANDING UN-STRUCK: no
+  3 of 3 runners are GREEN on a clean tree, and e2 is silent       ok
+
+      RED    species_repair_a4ef        exit 1   prints STANDING UN-STRUCK: yes
+      RED    species_remainder_f8fa     exit 1   prints STANDING UN-STRUCK: yes
+      RED    species_repair_6f61        exit 1   prints STANDING UN-STRUCK: yes
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  3 of 3 runners are RED, and red BECAUSE of e2                    ok
+        If this row is a finding, every row below it is uninterpretable
+        and should be read as such.
+
+
+==============================================================================
+V1c  EVERY LINE OF EVERY RUNNER, DELETED ALONE, WITH e2 RED
+==============================================================================
+
+  One row per line of each file.  `gate fired` means the runner was
+  red AND e2's sentence was in its output, so the deletion cost
+  nothing.  `GATE LOST` means the runner exited 0 -- the class this
+  ticket is about, and the column after it says whether the finding
+  was printed anyway.  `BROKE EARLY` means the runner was red without
+  e2 ever speaking: the deletion broke it before the gate.
+
+  code/species_repair_a4ef/run_all.sh
+      line   1  exit 1  gate fired   finding printed: yes  #!/bin/sh
+      line   2  exit 1  gate fired   finding printed: yes  # mg-a4ef -- the repair of mg-73df's MAJ
+      line   3  exit 1  gate fired   finding printed: yes  # of the seam between mg-6f61 and mg-f8f
+      line   4  exit 1  gate fired   finding printed: yes  # Pure Python 3, no dependencies, NO NET
+      line   5  exit 1  gate fired   finding printed: yes  # repository, which is local.  About 5 s
+      line   6  exit 1  gate fired   finding printed: yes  set -e
+      line   7  exit 1  BROKE EARLY  finding printed: no   cd "$(dirname "$0")"
+      line   8  exit 1  gate fired   finding printed: yes  
+      line   9  exit 1  gate fired   finding printed: yes  # mg-c2b3: every step in this file that 
+      line  10  exit 1  gate fired   finding printed: yes  # own transcript used to pipe into `tee`
+      line  11  exit 1  gate fired   finding printed: yes  # exit status in POSIX sh is its LAST co
+      line  12  exit 1  gate fired   finding printed: yes  # so the step could print failures, exit
+      line  13  exit 1  gate fired   finding printed: yes  # Each now redirects and has its status 
+      line  14  exit 1  gate fired   finding printed: yes  # other steps in this file were already 
+      line  15  exit 1  gate fired   finding printed: yes  # `set -o pipefail` is not used: `/bin/s
+      line  16  exit 1  gate fired   finding printed: yes  # option and would abort the runner at t
+      line  17  exit 1  gate fired   finding printed: yes  # This note deliberately avoids writing 
+      line  18  exit 1  gate fired   finding printed: yes  # grep for it over the arc still counts 
+      line  19  exit 2  BROKE EARLY  finding printed: no   python3 selftesta4ef.py > out_selftest.t
+      line  20  exit 2  BROKE EARLY  finding printed: no   cat out_selftest.txt; echo "selftesta4ef
+      line  21  exit 1  gate fired   finding printed: yes  cat out_selftest.txt
+      line  22  exit 1  gate fired   finding printed: yes  python3 s1_extent.py    > out_s1_extent.
+      line  23  exit 1  gate fired   finding printed: yes  python3 s2_seam.py      > out_s2_seam.tx
+      line  24  exit 1  gate fired   finding printed: yes  
+      line  25  exit 1  gate fired   finding printed: yes  echo
+      line  26  exit 1  gate fired   finding printed: yes  echo "Headline lines:"
+      line  27  exit 1  gate fired   finding printed: yes  grep -h '^S[12] TOTAL BAD:\|^selftesta4e
+      line  28  exit 1  gate fired   finding printed: yes  echo
+      line  29  exit 1  gate fired   finding printed: yes  echo "S1's TOTAL BAD is followed IN THE 
+      line  30  exit 1  gate fired   finding printed: yes  echo "That is the whole point of this in
+      line  31  exit 1  gate fired   finding printed: yes  echo "TOTAL BAD: 0 means when nobody say
+      line  32  exit 1  gate fired   finding printed: yes  echo
+      line  33  exit 1  gate fired   finding printed: yes  
+      line  34  exit 1  gate fired   finding printed: yes  # mg-821e, on mg-6cb9's F2.  THE CROSS-S
+      line  35  exit 1  gate fired   finding printed: yes  # `e2_crosssection.py` is what closes mg
+      line  36  exit 1  gate fired   finding printed: yes  # section of a document and standing un-
+      line  37  exit 1  gate fired   finding printed: yes  # per-section checker can see by constru
+      line  38  exit 1  gate fired   finding printed: yes  # TREE checks.  The check existed, was c
+      line  39  exit 1  gate fired   finding printed: yes  # reader meets -- and was called by 0 of
+      line  40  exit 1  gate fired   finding printed: yes  # runner that would catch the next B1 di
+      line  41  exit 1  gate fired   finding printed: yes  # The removal question was asked BEFORE 
+      line  42  exit 1  gate fired   finding printed: yes  # measurements, in code/species_sites_82
+      line  43  exit 1  gate fired   finding printed: yes  # section 2 of docs/OneThird-Species-Hop
+      line  44  exit 1  gate fired   finding printed: yes  # the generator is not removable.  The O
+      line  45  exit 1  gate fired   finding printed: yes  # made: a call present in a script is no
+      line  46  exit 1  gate fired   finding printed: yes  # mg-5040, on mg-4700's OPEN 2.  ONE STA
+      line  47  exit 1  gate fired   finding printed: yes  # RETURN.
+      line  48  exit 1  gate fired   finding printed: yes  # The block this replaces was twenty lin
+      line  49  exit 1  gate fired   finding printed: yes  # the deletion test mg-821e applied to i
+      line  50  exit 1  gate fired   finding printed: yes  # Measured one part at a time (mg-4700 F
+      line  51  exit 1  gate fired   finding printed: yes  # guard alone changed no verdict in 3 of
+      line  52  exit 1  gate fired   finding printed: yes  # aborts on a failed command substitutio
+      line  53  exit 1  gate fired   finding printed: yes  # and not the VERDICT; and deleting the 
+      line  54  exit 1  gate fired   finding printed: yes  # output left 3 of 3 exiting 0 with NO T
+      line  55  exit 1  gate fired   finding printed: yes  # nothing.  The guard also reported ANY 
+      line  56  exit 1  gate fired   finding printed: yes  # stands un-struck elsewhere", so a cras
+      line  57  exit 1  gate fired   finding printed: yes  # finding e2 never made (mg-4700 F5).
+      line  58  exit 1  gate fired   finding printed: yes  # That is the third structure the deleti
+      line  59  exit 1  gate fired   finding printed: yes  # (mg-9220) and the clause (mg-64b6).  T
+      line  60  exit 1  gate fired   finding printed: yes  # granularity: a test whose grain chases
+      line  61  exit 1  gate fired   finding printed: yes  # up.  THE STRUCTURE IS REMOVED.  Runnin
+      line  62  exit 1  gate fired   finding printed: yes  # are now the SAME statement, so neither
+      line  63  exit 1  gate fired   finding printed: yes  # there is exactly one unit here that ha
+      line  64  exit 1  gate fired   finding printed: yes  # a pipeline's status in POSIX sh is its
+      line  65  exit 1  gate fired   finding printed: yes  # is not available in dash (mg-c2b3).
+      line  66  exit 1  gate fired   finding printed: yes  #
+      line  67  exit 1  gate fired   finding printed: yes  # mg-4adb, on mg-6ef4's F3.  THE STATEME
+      line  68  exit 1  gate fired   finding printed: yes  # THIS FILE WAS `set -e`, AT THE TOP.  D
+      line  69  exit 1  gate fired   finding printed: yes  # GREEN while they printed e2's finding 
+      line  70  exit 1  gate fired   finding printed: yes  # population this arc had used -- so the
+      line  71  exit 1  gate fired   finding printed: yes  # the line that made it wrong.  THE FIX 
+      line  72  exit 1  gate fired   finding printed: yes  # guard beside a `set -e` is a line whos
+      line  73  exit 1  gate fired   finding printed: yes  # the other one catches it, which is mg-
+      line  74  exit 1  gate fired   finding printed: yes  # now THE LAST COMMAND OF THIS FILE and 
+      line  75  exit 1  gate fired   finding printed: yes  # last command's, so what turns e2's exi
+      line  76  exit 1  gate fired   finding printed: yes  # ITSELF -- inside every population that
+      line  77  exit 1  gate fired   finding printed: yes  # `set -e` stays, but nothing about this
+      line  78  exit 1  gate fired   finding printed: yes  # code/species_rung_repair_4adb/v1_popul
+      line  79  exit 1  gate fired   finding printed: yes  # in a population that is EVERY LINE OF 
+      line  80  exit 1  gate fired   finding printed: yes  # NOTHING MAY BE APPENDED BELOW THE CALL
+      line  81  exit 1  gate fired   finding printed: yes  # reads this file's source and goes red 
+      line  82  exit 1  gate fired   finding printed: yes  echo "cross-section check (mg-821e), its
+      line  83  exit 0  GATE LOST    finding printed: no   python3 ../species_extent_d633/e2_crosss
+      83 line(s): BROKE EARLY 3, GATE LOST 1, gate fired 79
+
+  code/species_remainder_f8fa/run_all.sh
+      line   1  exit 1  gate fired   finding printed: yes  #!/bin/sh
+      line   2  exit 1  gate fired   finding printed: yes  # mg-f8fa -- the remainder of mg-a61f no
+      line   3  exit 1  gate fired   finding printed: yes  # Pure Python 3, no dependencies, NO NET
+      line   4  exit 1  gate fired   finding printed: yes  set -e
+      line   5  exit 1  BROKE EARLY  finding printed: no   cd "$(dirname "$0")"
+      line   6  exit 1  gate fired   finding printed: yes  
+      line   7  exit 1  gate fired   finding printed: yes  # mg-c2b3: every step in this file that 
+      line   8  exit 1  gate fired   finding printed: yes  # own transcript used to pipe into `tee`
+      line   9  exit 1  gate fired   finding printed: yes  # exit status in POSIX sh is its LAST co
+      line  10  exit 1  gate fired   finding printed: yes  # so the step could print failures, exit
+      line  11  exit 1  gate fired   finding printed: yes  # Each now redirects and has its status 
+      line  12  exit 1  gate fired   finding printed: yes  # other steps in this file were already 
+      line  13  exit 1  gate fired   finding printed: yes  # `set -o pipefail` is not used: `/bin/s
+      line  14  exit 1  gate fired   finding printed: yes  # option and would abort the runner at t
+      line  15  exit 1  gate fired   finding printed: yes  # This note deliberately avoids writing 
+      line  16  exit 1  gate fired   finding printed: yes  # grep for it over the arc still counts 
+      line  17  exit 2  BROKE EARLY  finding printed: no   python3 selftestf8fa.py > out_selftest.t
+      line  18  exit 2  BROKE EARLY  finding printed: no   cat out_selftest.txt; echo "selftestf8fa
+      line  19  exit 1  gate fired   finding printed: yes  cat out_selftest.txt
+      line  20  exit 2  BROKE EARLY  finding printed: no   python3 w1_opposite.py > out_w1_opposite
+      line  21  exit 2  BROKE EARLY  finding printed: no   cat out_w1_opposite.txt; echo "w1_opposi
+      line  22  exit 1  gate fired   finding printed: yes  cat out_w1_opposite.txt
+      line  23  exit 2  BROKE EARLY  finding printed: no   python3 w2_typemismatch.py > out_w2_type
+      line  24  exit 2  BROKE EARLY  finding printed: no   cat out_w2_typemismatch.txt; echo "w2_ty
+      line  25  exit 1  gate fired   finding printed: yes  cat out_w2_typemismatch.txt
+      line  26  exit 2  BROKE EARLY  finding printed: no   python3 w3_scope.py > out_w3_scope.txt |
+      line  27  exit 2  BROKE EARLY  finding printed: no   cat out_w3_scope.txt; echo "w3_scope.py 
+      line  28  exit 1  gate fired   finding printed: yes  cat out_w3_scope.txt
+      line  29  exit 1  gate fired   finding printed: yes  
+      line  30  exit 1  gate fired   finding printed: yes  echo
+      line  31  exit 1  gate fired   finding printed: yes  echo "out_w3_scope_before.txt is the SAM
+      line  32  exit 1  gate fired   finding printed: yes  echo "before this repair: 12 problems.  
+      line  33  exit 1  gate fired   finding printed: yes  echo "checker written after the fix and 
+      line  34  exit 1  gate fired   finding printed: yes  echo
+      line  35  exit 1  gate fired   finding printed: yes  
+      line  36  exit 1  gate fired   finding printed: yes  # mg-821e, on mg-6cb9's F2.  THE CROSS-S
+      line  37  exit 1  gate fired   finding printed: yes  # `e2_crosssection.py` is what closes mg
+      line  38  exit 1  gate fired   finding printed: yes  # section of a document and standing un-
+      line  39  exit 1  gate fired   finding printed: yes  # per-section checker can see by constru
+      line  40  exit 1  gate fired   finding printed: yes  # TREE checks.  The check existed, was c
+      line  41  exit 1  gate fired   finding printed: yes  # reader meets -- and was called by 0 of
+      line  42  exit 1  gate fired   finding printed: yes  # runner that would catch the next B1 di
+      line  43  exit 1  gate fired   finding printed: yes  # The removal question was asked BEFORE 
+      line  44  exit 1  gate fired   finding printed: yes  # measurements, in code/species_sites_82
+      line  45  exit 1  gate fired   finding printed: yes  # section 2 of docs/OneThird-Species-Hop
+      line  46  exit 1  gate fired   finding printed: yes  # the generator is not removable.  The O
+      line  47  exit 1  gate fired   finding printed: yes  # made: a call present in a script is no
+      line  48  exit 1  gate fired   finding printed: yes  # mg-5040, on mg-4700's OPEN 2.  ONE STA
+      line  49  exit 1  gate fired   finding printed: yes  # RETURN.
+      line  50  exit 1  gate fired   finding printed: yes  # The block this replaces was twenty lin
+      line  51  exit 1  gate fired   finding printed: yes  # the deletion test mg-821e applied to i
+      line  52  exit 1  gate fired   finding printed: yes  # Measured one part at a time (mg-4700 F
+      line  53  exit 1  gate fired   finding printed: yes  # guard alone changed no verdict in 3 of
+      line  54  exit 1  gate fired   finding printed: yes  # aborts on a failed command substitutio
+      line  55  exit 1  gate fired   finding printed: yes  # and not the VERDICT; and deleting the 
+      line  56  exit 1  gate fired   finding printed: yes  # output left 3 of 3 exiting 0 with NO T
+      line  57  exit 1  gate fired   finding printed: yes  # nothing.  The guard also reported ANY 
+      line  58  exit 1  gate fired   finding printed: yes  # stands un-struck elsewhere", so a cras
+      line  59  exit 1  gate fired   finding printed: yes  # finding e2 never made (mg-4700 F5).
+      line  60  exit 1  gate fired   finding printed: yes  # That is the third structure the deleti
+      line  61  exit 1  gate fired   finding printed: yes  # (mg-9220) and the clause (mg-64b6).  T
+      line  62  exit 1  gate fired   finding printed: yes  # granularity: a test whose grain chases
+      line  63  exit 1  gate fired   finding printed: yes  # up.  THE STRUCTURE IS REMOVED.  Runnin
+      line  64  exit 1  gate fired   finding printed: yes  # are now the SAME statement, so neither
+      line  65  exit 1  gate fired   finding printed: yes  # there is exactly one unit here that ha
+      line  66  exit 1  gate fired   finding printed: yes  # a pipeline's status in POSIX sh is its
+      line  67  exit 1  gate fired   finding printed: yes  # is not available in dash (mg-c2b3).
+      line  68  exit 1  gate fired   finding printed: yes  #
+      line  69  exit 1  gate fired   finding printed: yes  # mg-4adb, on mg-6ef4's F3.  THE STATEME
+      line  70  exit 1  gate fired   finding printed: yes  # THIS FILE WAS `set -e`, AT THE TOP.  D
+      line  71  exit 1  gate fired   finding printed: yes  # GREEN while they printed e2's finding 
+      line  72  exit 1  gate fired   finding printed: yes  # population this arc had used -- so the
+      line  73  exit 1  gate fired   finding printed: yes  # the line that made it wrong.  THE FIX 
+      line  74  exit 1  gate fired   finding printed: yes  # guard beside a `set -e` is a line whos
+      line  75  exit 1  gate fired   finding printed: yes  # the other one catches it, which is mg-
+      line  76  exit 1  gate fired   finding printed: yes  # now THE LAST COMMAND OF THIS FILE and 
+      line  77  exit 1  gate fired   finding printed: yes  # last command's, so what turns e2's exi
+      line  78  exit 1  gate fired   finding printed: yes  # ITSELF -- inside every population that
+      line  79  exit 1  gate fired   finding printed: yes  # `set -e` stays, but nothing about this
+      line  80  exit 1  gate fired   finding printed: yes  # code/species_rung_repair_4adb/v1_popul
+      line  81  exit 1  gate fired   finding printed: yes  # in a population that is EVERY LINE OF 
+      line  82  exit 1  gate fired   finding printed: yes  # NOTHING MAY BE APPENDED BELOW THE CALL
+      line  83  exit 1  gate fired   finding printed: yes  # reads this file's source and goes red 
+      line  84  exit 1  gate fired   finding printed: yes  echo "cross-section check (mg-821e), its
+      line  85  exit 0  GATE LOST    finding printed: no   python3 ../species_extent_d633/e2_crosss
+      85 line(s): BROKE EARLY 9, GATE LOST 1, gate fired 75
+
+  code/species_repair_6f61/run_all.sh
+      line   1  exit 1  gate fired   finding printed: yes  #!/bin/sh
+      line   2  exit 1  gate fired   finding printed: yes  # mg-6f61 -- the repair of mg-7d75 under
+      line   3  exit 1  gate fired   finding printed: yes  # Pure Python 3, no dependencies, NO NET
+      line   4  exit 1  gate fired   finding printed: yes  # r2_columns.py is 27.
+      line   5  exit 1  gate fired   finding printed: yes  #
+      line   6  exit 1  gate fired   finding printed: yes  # r3_quotes.py reads code/species_audit_
+      line   7  exit 1  gate fired   finding printed: yes  # extraction the audit committed -- rath
+      line   8  exit 1  gate fired   finding printed: yes  # code/species_audit_a61f/fetch_sources.
+      line   9  exit 1  gate fired   finding printed: yes  # and it is the only network script in t
+      line  10  exit 1  gate fired   finding printed: yes  #
+      line  11  exit 1  gate fired   finding printed: yes  # mg-4adb: the three unguarded steps bel
+      line  12  exit 1  gate fired   finding printed: yes  # r3_quotes -- have their status read by
+      line  13  exit 1  gate fired   finding printed: yes  # is stated here rather than left to be 
+      line  14  exit 1  gate fired   finding printed: yes  # V1e of code/species_rung_repair_4adb/v
+      line  15  exit 1  gate fired   finding printed: yes  # forces each step red in turn, so the t
+      line  16  exit 1  gate fired   finding printed: yes  # in a transcript instead of being three
+      line  17  exit 1  gate fired   finding printed: yes  # second guard is added beside it: a `||
+      line  18  exit 1  gate fired   finding printed: yes  # whose deletion changes no verdict, whi
+      line  19  exit 1  gate fired   finding printed: yes  # removed.  One rung, measured, is worth
+      line  20  exit 1  gate fired   finding printed: yes  set -e
+      line  21  exit 1  BROKE EARLY  finding printed: no   cd "$(dirname "$0")"
+      line  22  exit 1  gate fired   finding printed: yes  
+      line  23  exit 1  gate fired   finding printed: yes  python3 selftest6f61.py > out_selftest.t
+      line  24  exit 1  gate fired   finding printed: yes  python3 r1_smallest.py  > out_r1_smalles
+      line  25  exit 1  gate fired   finding printed: yes  python3 r2_columns.py   > out_r2_columns
+      line  26  exit 1  gate fired   finding printed: yes  python3 r3_quotes.py    > out_r3_quotes.
+      line  27  exit 1  gate fired   finding printed: yes  python3 check_doc.py    > out_check_doc.
+      line  28  exit 1  gate fired   finding printed: yes  
+      line  29  exit 1  gate fired   finding printed: yes  echo "done.  Headline lines:"
+      line  30  exit 1  gate fired   finding printed: yes  grep -h '^R[0-9] TOTAL BAD:\|^R2 PREDICT
+      line  31  exit 1  gate fired   finding printed: yes  echo
+      line  32  exit 1  gate fired   finding printed: yes  echo "R2 PREDICTIONS MISSED is NOT expec
+      line  33  exit 1  gate fired   finding printed: yes  echo "explained in out_r2_columns.txt R2
+      line  34  exit 1  gate fired   finding printed: yes  echo "battery whose expectations are wri
+      line  35  exit 1  gate fired   finding printed: yes  echo
+      line  36  exit 1  gate fired   finding printed: yes  
+      line  37  exit 1  gate fired   finding printed: yes  # mg-821e, on mg-6cb9's F2.  THE CROSS-S
+      line  38  exit 1  gate fired   finding printed: yes  # `e2_crosssection.py` is what closes mg
+      line  39  exit 1  gate fired   finding printed: yes  # section of a document and standing un-
+      line  40  exit 1  gate fired   finding printed: yes  # per-section checker can see by constru
+      line  41  exit 1  gate fired   finding printed: yes  # TREE checks.  The check existed, was c
+      line  42  exit 1  gate fired   finding printed: yes  # reader meets -- and was called by 0 of
+      line  43  exit 1  gate fired   finding printed: yes  # runner that would catch the next B1 di
+      line  44  exit 1  gate fired   finding printed: yes  # The removal question was asked BEFORE 
+      line  45  exit 1  gate fired   finding printed: yes  # measurements, in code/species_sites_82
+      line  46  exit 1  gate fired   finding printed: yes  # section 2 of docs/OneThird-Species-Hop
+      line  47  exit 1  gate fired   finding printed: yes  # the generator is not removable.  The O
+      line  48  exit 1  gate fired   finding printed: yes  # made: a call present in a script is no
+      line  49  exit 1  gate fired   finding printed: yes  # mg-5040, on mg-4700's OPEN 2.  ONE STA
+      line  50  exit 1  gate fired   finding printed: yes  # RETURN.
+      line  51  exit 1  gate fired   finding printed: yes  # The block this replaces was twenty lin
+      line  52  exit 1  gate fired   finding printed: yes  # the deletion test mg-821e applied to i
+      line  53  exit 1  gate fired   finding printed: yes  # Measured one part at a time (mg-4700 F
+      line  54  exit 1  gate fired   finding printed: yes  # guard alone changed no verdict in 3 of
+      line  55  exit 1  gate fired   finding printed: yes  # aborts on a failed command substitutio
+      line  56  exit 1  gate fired   finding printed: yes  # and not the VERDICT; and deleting the 
+      line  57  exit 1  gate fired   finding printed: yes  # output left 3 of 3 exiting 0 with NO T
+      line  58  exit 1  gate fired   finding printed: yes  # nothing.  The guard also reported ANY 
+      line  59  exit 1  gate fired   finding printed: yes  # stands un-struck elsewhere", so a cras
+      line  60  exit 1  gate fired   finding printed: yes  # finding e2 never made (mg-4700 F5).
+      line  61  exit 1  gate fired   finding printed: yes  # That is the third structure the deleti
+      line  62  exit 1  gate fired   finding printed: yes  # (mg-9220) and the clause (mg-64b6).  T
+      line  63  exit 1  gate fired   finding printed: yes  # granularity: a test whose grain chases
+      line  64  exit 1  gate fired   finding printed: yes  # up.  THE STRUCTURE IS REMOVED.  Runnin
+      line  65  exit 1  gate fired   finding printed: yes  # are now the SAME statement, so neither
+      line  66  exit 1  gate fired   finding printed: yes  # there is exactly one unit here that ha
+      line  67  exit 1  gate fired   finding printed: yes  # a pipeline's status in POSIX sh is its
+      line  68  exit 1  gate fired   finding printed: yes  # is not available in dash (mg-c2b3).
+      line  69  exit 1  gate fired   finding printed: yes  #
+      line  70  exit 1  gate fired   finding printed: yes  # mg-4adb, on mg-6ef4's F3.  THE STATEME
+      line  71  exit 1  gate fired   finding printed: yes  # THIS FILE WAS `set -e`, AT THE TOP.  D
+      line  72  exit 1  gate fired   finding printed: yes  # GREEN while they printed e2's finding 
+      line  73  exit 1  gate fired   finding printed: yes  # population this arc had used -- so the
+      line  74  exit 1  gate fired   finding printed: yes  # the line that made it wrong.  THE FIX 
+      line  75  exit 1  gate fired   finding printed: yes  # guard beside a `set -e` is a line whos
+      line  76  exit 1  gate fired   finding printed: yes  # the other one catches it, which is mg-
+      line  77  exit 1  gate fired   finding printed: yes  # now THE LAST COMMAND OF THIS FILE and 
+      line  78  exit 1  gate fired   finding printed: yes  # last command's, so what turns e2's exi
+      line  79  exit 1  gate fired   finding printed: yes  # ITSELF -- inside every population that
+      line  80  exit 1  gate fired   finding printed: yes  # `set -e` stays -- in this file it is a
+      line  81  exit 1  gate fired   finding printed: yes  # unguarded steps above have, but nothin
+      line  82  exit 1  gate fired   finding printed: yes  # code/species_rung_repair_4adb/v1_popul
+      line  83  exit 1  gate fired   finding printed: yes  # in a population that is EVERY LINE OF 
+      line  84  exit 1  gate fired   finding printed: yes  # NOTHING MAY BE APPENDED BELOW THE CALL
+      line  85  exit 1  gate fired   finding printed: yes  # reads this file's source and goes red 
+      line  86  exit 1  gate fired   finding printed: yes  echo "cross-section check (mg-821e), its
+      line  87  exit 0  GATE LOST    finding printed: no   python3 ../species_extent_d633/e2_crosss
+      87 line(s): BROKE EARLY 1, GATE LOST 1, gate fired 85
+
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  species_repair_a4ef: lines whose deletion loses the gate         1 -- ['python3 ../species_extent_d633/e2_crosssection.py']
+  species_remainder_f8fa: lines whose deletion loses the gate      1 -- ['python3 ../species_extent_d633/e2_crosssection.py']
+  species_repair_6f61: lines whose deletion loses the gate         1 -- ['python3 ../species_extent_d633/e2_crosssection.py']
+  species_repair_a4ef: of those, printing e2's finding anyway      0
+  species_remainder_f8fa: of those, printing e2's finding anyway   0
+  species_repair_6f61: of those, printing e2's finding anyway      0
+  species_repair_a4ef: lines whose deletion breaks it before the g 3
+  species_remainder_f8fa: lines whose deletion breaks it before th 9
+  species_repair_6f61: lines whose deletion breaks it before the g 1
+
+  P1a    predicted [1, 1, 1]                  got [1, 1, 1]                  
+  P1e    predicted 0                          got 0                          
+  P1f    predicted True                       got True                       
+  P1c    predicted [[1], [1], [1]]            got [[1], [1], [1]]            
+
+
+==============================================================================
+V1d  THE DECLARED LOAD-BEARING SET AGAINST THE MEASURED ONE
+==============================================================================
+
+  DECLARED, by content and never by line number (mg-7522 S3): the one
+  line whose deletion may lose the verdict is the call itself.
+      python3 ../species_extent_d633/e2_crosssection.py
+
+  species_repair_a4ef: measured == declared                        ok
+        declared ['python3 ../species_extent_d633/e2_crosssection.py']
+        measured ['python3 ../species_extent_d633/e2_crosssection.py']
+  species_remainder_f8fa: measured == declared                     ok
+        declared ['python3 ../species_extent_d633/e2_crosssection.py']
+        measured ['python3 ../species_extent_d633/e2_crosssection.py']
+  species_repair_6f61: measured == declared                        ok
+        declared ['python3 ../species_extent_d633/e2_crosssection.py']
+        measured ['python3 ../species_extent_d633/e2_crosssection.py']
+  P1d    predicted True                       got True                       
+
+  AND THE SOURCE RULE.  The gate carries the verdict BECAUSE it is the
+  last command, so 'nothing may be appended below it' is not a
+  convention -- it is the rung, and it is asserted here against the
+  file rather than left in a comment for a reader to honour.
+
+  A COMMENT after the call is not a violation and the rule says so:
+  what carries the status is the last COMMAND, and a comment is not
+  one.  mg-d633's e3_bothways.py appends a commented statement to one
+  of these files as a probe, and a rule that could not tell that from
+  an appended `echo` would be wrong in the direction of noise.
+
+  species_repair_a4ef: the LAST command in the file is the call    ok
+        last non-blank, non-comment line: python3 ../species_extent_d633/e2_crosssection.py
+  species_repair_a4ef: the heading is the line immediately above i ok
+        found: echo "cross-section check (mg-821e), its own output, unfilte
+  species_repair_a4ef: `set -e` appears exactly once               ok
+  species_remainder_f8fa: the LAST command in the file is the call ok
+        last non-blank, non-comment line: python3 ../species_extent_d633/e2_crosssection.py
+  species_remainder_f8fa: the heading is the line immediately abov ok
+        found: echo "cross-section check (mg-821e), its own output, unfilte
+  species_remainder_f8fa: `set -e` appears exactly once            ok
+  species_repair_6f61: the LAST command in the file is the call    ok
+        last non-blank, non-comment line: python3 ../species_extent_d633/e2_crosssection.py
+  species_repair_6f61: the heading is the line immediately above i ok
+        found: echo "cross-section check (mg-821e), its own output, unfilte
+  species_repair_6f61: `set -e` appears exactly once               ok
+
+
+==============================================================================
+V1e  WITH `set -e` GONE, WHICH STEPS GO UNREPORTED?
+==============================================================================
+
+  The gate no longer needs `set -e`.  Other steps may.  A line that is
+  load-bearing is not a defect -- mg-6ef4's finding was a line that
+  was load-bearing AND OUTSIDE THE POPULATION.  So the remaining load
+  is measured and NAMED here instead of being left to a reader to
+  infer from the absence of a `||`.
+
+  Each step is forced red by replacing its command with one that exits
+  1, leaving its redirect and any guard exactly as they are.  Two
+  worlds: `set -e` present, and `set -e` deleted.
+
+  code/species_repair_a4ef/run_all.sh
+      python3 selftesta4ef.py > out_selftest.txt ||  with 1  without 1  
+      python3 s1_extent.py    > out_s1_extent.txt || with 1  without 1  
+      python3 s2_seam.py      > out_s2_seam.txt   || with 1  without 1  
+      python3 ../species_extent_d633/e2_crosssection with 1  without 1  
+
+  code/species_remainder_f8fa/run_all.sh
+      python3 selftestf8fa.py > out_selftest.txt ||  with 1  without 1  
+      python3 w1_opposite.py > out_w1_opposite.txt | with 1  without 1  
+      python3 w2_typemismatch.py > out_w2_typemismat with 1  without 1  
+      python3 w3_scope.py > out_w3_scope.txt || {    with 1  without 1  
+      python3 ../species_extent_d633/e2_crosssection with 1  without 1  
+
+  code/species_repair_6f61/run_all.sh
+      python3 selftest6f61.py > out_selftest.txt ||  with 1  without 1  
+      python3 r1_smallest.py  > out_r1_smallest.txt  with 1  without 0  <- `set -e` IS THE ONLY RUNG
+      python3 r2_columns.py   > out_r2_columns.txt   with 1  without 0  <- `set -e` IS THE ONLY RUNG
+      python3 r3_quotes.py    > out_r3_quotes.txt    with 1  without 0  <- `set -e` IS THE ONLY RUNG
+      python3 check_doc.py    > out_check_doc.txt || with 1  without 1  
+      python3 ../species_extent_d633/e2_crosssection with 1  without 1  
+
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  species_repair_a4ef: steps `set -e` alone reports                0
+  species_remainder_f8fa: steps `set -e` alone reports             0
+  species_repair_6f61: steps `set -e` alone reports                3
+
+  every step is reported when `set -e` is present                  ok
+        A step that fails and is reported by NOTHING is a silent green with no
+        mutation needed at all, and would be a finding against the runner as
+        it ships.
+
+  THE THREE LINES `set -e` CARRIES ARE NAMED, WHICH IS THE POINT:
+      species_repair_6f61        python3 r1_smallest.py  > out_r1_smallest.txt
+      species_repair_6f61        python3 r2_columns.py   > out_r2_columns.txt    
+      species_repair_6f61        python3 r3_quotes.py    > out_r3_quotes.txt
+
+  P2a    predicted 0                          got 0                          
+  P2b    predicted 0                          got 0                          
+  P2c    predicted 3                          got 3                          
+
+
+==============================================================================
+V1f  `set -e` DELETED ALONE AT THE PIN (77306a7) AND AT HEAD
+==============================================================================
+
+  mg-6ef4 measured 0/0/0 with the finding printed in full.  The
+  before-figure is re-derived here rather than quoted: the runners as
+  they were at the pin are written into this worktree, `set -e` is
+  deleted from each, and they are executed against the SAME planted
+  strike the rows above used.  Everything else in the tree is at HEAD,
+  which is stated because it is the one thing this comparison cannot
+  hold fixed -- the checkers are the repaired ones.  What is being
+  compared is the SHELL WIRING, and that is what is swapped.
+
+      species_repair_a4ef        pin: exit 1   pin less `set -e`: exit 0 (finding printed: YES)
+                                 HEAD less `set -e`: exit 1 (finding printed: yes)
+      species_remainder_f8fa     pin: exit 1   pin less `set -e`: exit 0 (finding printed: YES)
+                                 HEAD less `set -e`: exit 1 (finding printed: yes)
+      species_repair_6f61        pin: exit 1   pin less `set -e`: exit 0 (finding printed: YES)
+                                 HEAD less `set -e`: exit 1 (finding printed: yes)
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  at the PIN, deleting `set -e` alone turns 3 of 3 runners GREEN   ok
+        This row being `ok` is mg-6ef4's F3 reproduced independently.  If it
+        is a FINDING the before-state was not what F3 described and the
+        after-state below proves less than it appears to.
+  and 3 of 3 print e2's finding while doing it                     ok
+  at HEAD, deleting `set -e` alone leaves 3 of 3 RED               ok
+        THIS IS THE REPAIR.  The gate's return is the call's, the call is the
+        last command, and `set -e` is no longer between e2 and the reader.
+  and 3 of 3 still print e2's finding                              ok
+  P1b    predicted [1, 1, 1]                  got [1, 1, 1]                  
+
+==============================================================================
+V1 TOTAL BAD: 0
+V1 PREDICTIONS MISSED: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It ranges over 255 runner executions in V1c --
+every line of 3 files, deleted one at a time, with nothing excluded
+-- plus 30 step substitutions in V1e and 9 pinned runs in V1f.  It
+says NOTHING about any runner outside those three, about deletions of
+MORE than one line at a time, or about any failure mode of e2 other
+than the planted B1.  A population is a claim about what was tried,
+and two lines deleted together were not tried.

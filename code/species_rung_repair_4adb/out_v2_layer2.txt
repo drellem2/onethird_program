@@ -1,0 +1,176 @@
+
+==============================================================================
+V2a  BASELINE -- NO PLANT.  A REPAIR THAT REDDENS A CLEAN TREE HAS MOVED THE PROBLEM
+==============================================================================
+
+  w3_scope.py                                                      exit 0
+  s1_extent.py                                                     exit 0
+  e1_extents.py                                                    exit 0
+  e2_crosssection.py                                               exit 0
+  code/species_repair_a4ef/run_all.sh                              exit 0
+  code/species_remainder_f8fa/run_all.sh                           exit 0
+  code/species_repair_6f61/run_all.sh                              exit 0
+
+  4 of 4 checkers and 3 of 3 runners are GREEN with no plant       ok
+  P3h    predicted True                     got True                     
+
+
+==============================================================================
+V2b  A REGULAR FILE AT MODE 000, CARRYING A LIVE X4 STATEMENT
+==============================================================================
+
+  It is a REGULAR FILE: `os.path.isfile` is true and layer 1's residue
+  is empty, so nothing the walk reports mentions it.  It fails at
+  layer 2, where until this ticket the only bucket said ENCODING.
+
+      w3_scope.py        exit 1   lines naming the file: 1
+          #   declined, NOT STATED: mg4adb_plant.txt   REACHED AND NOT READ: open() raised PermissionError.  This 
+      s1_extent.py       exit 1   lines naming the file: 2
+          code/species_7d75/mg4adb_plant.txt   REACHED AND NOT READ: open() raised PermissionError.  This is NOT a
+          shutil.Error: [('/Users/daniel/.pogo/polecats/4adb/code/species_7d75/mg4adb_plant.txt', '/var/folders/4n
+      e1_extents.py      exit 1   lines naming the file: 4
+          w3_scope.py          could NOT open code/species_7d75/mg4adb_plant.txt
+          s1_extent.py         could NOT open code/species_7d75/mg4adb_plant.txt
+          missing: ['code/species_7d75/mg4adb_plant.txt']
+          missing: ['code/species_7d75/mg4adb_plant.txt']
+      code/species_repair_a4ef exit 1
+      code/species_remainder_f8fa exit 1
+      code/species_repair_6f61 exit 0
+      restored: True   (files rewritten: 2, modes rewritten: 0)
+
+  `w3_scope.py` EXITS 1 -- the silent scope check is the ticket's  ok
+  and it NAMES the file                                            ok
+  on a line saying REACHED AND NOT READ and naming PermissionError ok
+        line: #   declined, NOT STATED: mg4adb_plant.txt   REACHED AND NOT READ: open() raised PermissionError.  This is NOT
+  and that line does NOT attribute it to the file's ENCODING       ok
+        A wrong bucket sends the next reader to the wrong hypothesis.  This is
+        the half of F1 that outlives the exit code, which is why the ticket
+        asks for the classification FIRST.
+  `s1_extent.py` exits 1                                           ok
+  `e1_extents.py` exits 1                                          ok
+  `e1_extents.py` names it -- the tracer no longer counts a failed ok
+  the f8fa runner is RED over the live statement                   ok
+  the a4ef runner is RED over the live statement                   ok
+  P3a    predicted 1                        got 1                        
+  P3b    predicted True                     got True                     
+  P3c    predicted 1                        got 1                        
+  P3f    predicted 1                        got 1                        
+  P3g    predicted 1                        got 1                        
+
+
+==============================================================================
+V2c  THE SAME STATEMENT IN A READABLE FILE -- IS THE MODE THE REASON?
+==============================================================================
+
+  Without this row, V2b shows a checker going red with a file planted
+  and nothing more.  This one puts the SAME text in a file the process
+  can read: if the checker reports STILL ASSERTED here, then V2b's
+  silence-before and red-now are about the MODE and not about the
+  statement.  mg-6ef4 ran this control and it is kept.
+
+      w3_scope.py        exit 1   STILL ASSERTED lines naming it: 1
+          STILL ASSERTED AT  mg4adb_readable.txt:1
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  a readable copy of the same statement is caught and NAMED        ok
+        So the checker's extent does cover this text, and what V2b measures is
+        the difference the MODE makes -- not a statement outside the list.
+
+
+==============================================================================
+V2d  A READABLE FILE WHOSE BYTES ARE NOT UTF-8 -- THE STATED DECLINE
+==============================================================================
+
+      w3_scope.py        exit 0   lines naming the file: 1
+          #   declined, STATED:     mg4adb_blob.bin   file rule, STATED: bytes are not valid UTF-8 text (UnicodeDe
+      s1_extent.py       exit 0   lines naming the file: 1
+          code/species_7d75/mg4adb_blob.bin
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  `w3_scope.py` exits 0 -- a STATED decline is not a finding       ok
+        The sentence that carries it has been in the printed extent since
+        mg-d633, and mg-6cb9's a1_bothways.py Q18 asserts this exit code for
+        this exact plant.  Counting it would redden a landed audit's control
+        and would make the two buckets differ only in wording, which is the
+        defect wearing a second coat.
+  and it NAMES the file, so the exclusion cannot grow unseen       ok
+  the line says UTF-8 and does NOT say the file could not be opene ok
+  `s1_extent.py` exits 0 for the same plant                        ok
+  P3d    predicted 0                        got 0                        
+  P3i    predicted 0                        got 0                        
+
+
+==============================================================================
+V2e  THE TWO PRINTED LINES, SIDE BY SIDE -- mg-6ef4's P1d, INVERTED
+==============================================================================
+
+  mg-6ef4 predicted these two would be indistinguishable to a reader:
+  same list, same sentence, and the sentence FALSE for the unreadable
+  one.  That prediction was a hit against the code as it stood.  The
+  same two lines now:
+
+      UNREADABLE: #   declined, NOT STATED: mg4adb_plant.txt   REACHED AND NOT READ: open() raised PermissionError.  This is NOT
+      ENCODING:   #   declined, STATED:     mg4adb_blob.bin   file rule, STATED: bytes are not valid UTF-8 text (UnicodeDecodeEr
+
+  the two lines differ, and each names the exception that produced ok
+  the unreadable one is in the NOT STATED list and the other is no ok
+        STATED / NOT STATED is layer 1's own vocabulary (mg-5040).  Layer 2
+        uses it rather than inventing a second one, so a reader who has read
+        the walk's residue already knows what the second list means.
+  P3e    predicted True                     got True                     
+
+
+==============================================================================
+V2f  THE SAME PLANT AGAINST THE PRE-REPAIR CHECKERS (77306a7)
+==============================================================================
+
+  The before-figure is re-derived rather than quoted.  The three files
+  this ticket changed are written back at the pin, the SAME plant is
+  made, and the same checkers are run.  Everything else is at HEAD,
+  which is stated because it is what this comparison cannot hold
+  fixed.
+
+      w3_scope.py        exit 0   line naming it: # UTF-8 text: mg4adb_plant.txt; skipped as __pycache__: the whole dire
+      s1_extent.py       exit 1   line naming it: code/species_7d75/mg4adb_plant.txt
+      e1_extents.py      exit 1   line naming it: (none)
+      f8fa run_all.sh    exit 0
+      restored: True   (files rewritten: 1, modes rewritten: 0)
+
+  at the PIN, `w3_scope.py` exits 0 over the live statement        ok
+        This row being `ok` is mg-6ef4's F1 reproduced independently.  If it
+        is a FINDING then the before-state was not what F1 described.
+  at the PIN, its runner is GREEN over the live statement          ok
+  at the PIN the file is filed under the ENCODING sentence         ok
+        pin line:  # UTF-8 text: mg4adb_plant.txt; skipped as __pycache__: the whole directory rule)
+  AT HEAD IT IS EXIT 1, NAMED, AND IN THE RIGHT BUCKET             ok
+
+
+==============================================================================
+V2g  `e2_crosssection.py` ON AN UNREADABLE *.md -- MEASURED, NOT FIXED
+==============================================================================
+
+  e2 reads every *.md under code/ and docs/ with an unguarded `open`.
+  This ticket does not change that, and the reason is a distinction
+  the ticket itself draws: OPEN 2 is about a failure filed under the
+  WRONG NAME and a checker going SILENT.  e2 does neither -- it
+  raises, and a traceback is loud.  It is measured here so that the
+  choice is a measurement in a transcript rather than an omission,
+  and it is left for whoever takes the next verdict.
+
+      e2_crosssection.py exit 1   raises: yes   silent: no
+      restored: True   (files rewritten: 0, modes rewritten: 0)
+
+  disposition                                                      NOTED, NOT REPAIRED -- loud, not silent
+  it does not go silently green, which is what OPEN 2 is about     ok
+
+==============================================================================
+V2 TOTAL BAD: 0
+V2 PREDICTIONS MISSED: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  Four checkers and three runners, over ONE
+planted unreadable file, ONE planted non-UTF-8 file and ONE readable
+control, in code/species_7d75 only, at HEAD and at 77306a7.  It says
+NOTHING about a file that becomes unreadable BETWEEN the two layers,
+about a directory this process cannot read (mg-5040 measured that at
+layer 1), or about any tree other than the four these checkers name.
