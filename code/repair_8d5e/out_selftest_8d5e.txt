@@ -1,0 +1,66 @@
+==========================================================================
+SELFTEST  lib8d5e -- the apparatus for mg-8d5e
+==========================================================================
+
+--------------------------------------------------------------------------
+(1) THE TWO OPERAND WALKS, AND THE NARROW ONE AGAINST THE SHIPPED ONE
+--------------------------------------------------------------------------
+   ok   face_complex.py: my deciding-condition walk and the SHIPPED kern5f9a walk agree SPAN FOR SPAN (15 operands)
+   ok   face_complex.py: and they agree on the count too (15)
+   ok   face_complex.py: every deciding-condition operand is also in the unrestricted walk -- the narrow population is a SUBSET and the subtraction is well defined
+   ok   face_complex.py: the unrestricted walk (35) is at least the restricted one (15) and neither is empty
+   ok   posets.py: my deciding-condition walk and the SHIPPED kern5f9a walk agree SPAN FOR SPAN (2 operands)
+   ok   posets.py: and they agree on the count too (2)
+   ok   posets.py: every deciding-condition operand is also in the unrestricted walk -- the narrow population is a SUBSET and the subtraction is well defined
+   ok   posets.py: the unrestricted walk (4) is at least the restricted one (2) and neither is empty
+   ok   on a constructed file the unrestricted walk finds all 8 operands, including the `while` and the assignment
+   ok   and the deciding-condition walk finds 4 -- the `while` and the assignment are outside every deciding condition
+   ok   NON-VACUITY: the shipped walker agrees on that constructed file too, so the two walks differ by the restriction and not by a parsing accident
+
+--------------------------------------------------------------------------
+(2) THE SCORING RULE, ON SITES CONSTRUCTED HERE
+--------------------------------------------------------------------------
+   ok   a site with the bare term and nothing near it scores UNQUALIFIED
+   ok   the qualifier one line away scores QUALIFIED
+   ok   the qualifier exactly 3 lines away is still inside the window
+   ok   and 4 lines away is OUTSIDE it -- the window is the width it says
+   ok   THE RULE IS mg-2c77's: a site carrying only the HYPHENATED `deciding-condition` scores UNQUALIFIED, so this repair cannot close the finding by widening the ruler
+   ok   a site quoting the wide BOUND is not scored as an assertion of the census
+   ok   and the quotation marker WINS over the qualifier, as it does in mg-2c77's rule -- the precedence is the same precedence
+
+--------------------------------------------------------------------------
+(3) THE RULE AGAINST mg-2c77'S OWN COMMITTED TABLE
+--------------------------------------------------------------------------
+   Two rules that agree on constructed inputs can still disagree on a
+   tree.  Scored at the revision where that transcript was committed,
+   because a transcript can only be reproduced at the revision it is
+   about -- which is the whole of A-1 stated as a method.
+
+   ok   Q3_REV_PIN adcfb1f1 is the last commit touching out_q3_operands.txt -- the pin and the derivation agree
+   ok   mg-2c77's finding text names its in-d01ff32 sites and they were parsed out of the committed transcript (15 named)
+   ok   MY RULE REPRODUCES mg-2c77's 15 in-d01ff32 unqualified sites at adcfb1f1, path and line -- 15 matched, 0 only mine, 0 only its
+   ok   NON-VACUITY: the rule returned more than one label over that tree (3 distinct), so it is not stamping every site the same way
+
+--------------------------------------------------------------------------
+(4) THE ANCHORS THIS REPAIR INSTALLED, READ BACK OUT OF libe34a
+--------------------------------------------------------------------------
+   ok   libe34a reports 0 anchor disagreements (derived == pinned, four for four)
+   ok   mg-76cc repair, DERIVED from 'kernel_source=': derived 4755d029 == pinned 4755d029
+   ok   its first parent -- THE PRE-REPAIR PREDICATE: derived 3bc2cf76 == pinned 3bc2cf76
+   ok   mg-7e58 repair, DERIVED from 'def measurement(': derived 4372fae9 == pinned 4372fae9
+   ok   its first parent: derived 52aeaf43 == pinned 52aeaf43
+   ok   NON-VACUITY: on this tree the property anchor (4755d029) and the file-history anchor (d01ff32d) are DIFFERENT commits, so the distinction is one this tree exhibits rather than one that is merely stated
+   ok   first_introducing returns None for a marker in no commit rather than falling back to the file's creation
+
+--------------------------------------------------------------------------
+(5) THE TRANSCRIPT READERS AND THE BENDS
+--------------------------------------------------------------------------
+   ok   the finding reader counts 2 -- the six-space nested quote is NOT one
+   ok   the trailer reader reads (0, 2) off the trailer lines
+   ok   normalise_revs makes two findings that differ only in revisions equal -- a revision that moved is not a finding that changed
+   ok   and it does NOT make two findings that differ in a filename equal
+   ok   replace_once REFUSES on many occurrences
+   ok   replace_once REFUSES on zero occurrences
+
+--------------------------------------------------------------------------
+SELFTEST: 35 assertions, 0 failed

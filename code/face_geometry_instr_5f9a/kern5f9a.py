@@ -504,8 +504,15 @@ def condition_census(src):
 
 
 # ---------------------------------------------------------------------------
-# mg-69d1, on mg-eaef's E5 and E4: EVERY explicit boolean operand, in exactly
-# one NAMED column.
+# mg-69d1, on mg-eaef's E5 and E4: EVERY DECIDING-CONDITION explicit boolean
+# operand, in exactly one NAMED column.
+#
+# THE QUALIFIER IS LOAD-BEARING (mg-8d5e, on mg-2c77's OPEN 2).  Unqualified,
+# `explicit boolean operand` denotes every operand of every `and`/`or`
+# ANYWHERE in a module -- 39 across the census's two files.  What the four
+# columns below classify is the 17 that lie inside a deciding condition, which
+# is what `boolean_operands` walks.  Written without the qualifier the 17 read
+# as complete, and 22 operands sit in no column with nothing saying so.
 # ---------------------------------------------------------------------------
 
 BooleanOperand = collections.namedtuple(

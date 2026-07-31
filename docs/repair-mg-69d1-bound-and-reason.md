@@ -12,7 +12,7 @@ worst exit 0.
 
 | | audit | finding | one sentence |
 |---|---|---|---|
-| **OPEN 1** | mg-eaef | **E5**, **E4** | the instrument's stated bound is **wider than the sweep it describes**, and 4 of `face_complex.py`'s 15 explicit boolean operands are in **neither** census column |
+| **OPEN 1** | mg-eaef | **E5**, **E4** | the instrument's stated bound is **wider than the sweep it describes**, and 4 of `face_complex.py`'s 15 explicit boolean operands *inside a deciding condition* are in **neither** census column (the qualifier added by mg-8d5e, on mg-2c77's OPEN 2 — unqualified the phrase denotes 39 across the two census files, not 17) |
 | **OPEN 2** | mg-e34a | **E-1** | the `both together` row `mg-76cc` added is **right**, and the **reason** given for it is **inverted** |
 
 They look unrelated. They are the same shape, and §4 is about that.

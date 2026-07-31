@@ -8,8 +8,20 @@ SELFTEST  libe34a -- the apparatus for mg-e34a
    ok   REV_A218 read out of lib58da.py's own source is a 40-char sha
    ok   read_literal is stable on a second call
    ok   read_literal RAISES when the name is absent
-   ok   REPAIR_REV -- the last commit touching g1_provenance.py -- resolves
+   ok   REPAIR_REV -- the first commit introducing the kernel half -- resolves
    ok   PRE_REV is exactly the first parent of REPAIR_REV
+   ok   no anchor disagrees with its pin: 0 disagreements
+   ok   mg-76cc repair, DERIVED from 'kernel_source=' -- derived 4755d029, pinned 4755d029
+   ok   its first parent -- THE PRE-REPAIR PREDICATE -- derived 3bc2cf76, pinned 3bc2cf76
+   ok   mg-7e58 repair, DERIVED from 'def measurement(' -- derived 4372fae9, pinned 4372fae9
+   ok   its first parent -- derived 52aeaf43, pinned 52aeaf43
+   ok   the property anchor is the commit that introduced `kernel_source=`
+   ok   first_introducing returns None -- not a revision -- for a marker that is in no commit, so a typo'd marker cannot silently anchor on the file's creation
+   ok   the mg-76cc marker is monotone over g1's history: once present, present in every later commit (no gaps)
+   ok   the mg-7e58 marker is monotone over g1's history (no gaps)
+   ok   NON-VACUITY: the file-history anchor and the property anchor return DIFFERENT commits on this tree (d01ff32d vs 4755d029), so the distinction the repair makes is one this tree can exhibit
+   ok   and the SECOND history anchor had moved too: nth_touching(g1, 1)^ is 3bc2cf76 where `before mg-7e58` is 52aeaf43
+   ok   g1 at PRE_REV is byte-identical to g1 at lib76cc's own pin e006581c -- the two derivations of `g1 BEFORE mg-76cc` agree on the file
    ok   g1 at PRE_REV really differs from g1 here -- there is a predicate to run
    ok   PRE_REV is an ancestor of HEAD
    ok   REV_A218 is an ancestor of HEAD
@@ -81,4 +93,4 @@ SELFTEST  libe34a -- the apparatus for mg-e34a
    ok   and it is the ONLY change to that file
 
 --------------------------------------------------------------------------
-SELFTEST: 54 assertions, 0 failed
+SELFTEST: 66 assertions, 0 failed

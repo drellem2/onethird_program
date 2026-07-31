@@ -24,6 +24,7 @@ repair to close mg-eaef's E8, which is not this ticket.
 | claim | predicted | actual |
 |---|---|---|
 | explicit boolean operands in `face_complex.py` | 15 | 15 — HIT |
+| ↳ *added beside the rows above and below, not in place of them* (mg-8d5e, on mg-2c77's OPEN 2): both counts are over the operands **inside a deciding condition**. Unqualified the phrase denotes every `and`/`or` operand anywhere in those files — **35** and **4**, **39** in all. See the addendum at the foot of this file. | — | — |
 | of those, at the top level of their condition (the sweep's population) | 11 | 11 — HIT |
 | of those, nested under a comprehension or quantifier | 4 | 4 — HIT |
 | explicit boolean operands in `posets.py` | 2 | 2 — HIT |
@@ -122,3 +123,26 @@ without it "the row is load-bearing" is an assertion.
   nodes in all` total is where it is counted.
 * Whether the `both together` row catches **every** conspiring pair. One was
   built. That is a demonstration, not a proof, and `p4 (iii)` states it.
+
+---
+
+## ADDENDUM (mg-8d5e, on mg-2c77's OPEN 2) — the two rows above are counted over a narrower population than their words name
+
+**The rows are not edited.** A prediction file is the record of what was claimed
+before the run, and a later ticket does not get to rewrite what an earlier one
+predicted. The correction is stated beside them instead.
+
+Two rows above — *explicit boolean operands in `face_complex.py`* (15) and
+*explicit boolean operands in `posets.py`* (2) — use the phrase without its
+qualifier. Both figures are **right for what they count** and both are **counted
+over the operands inside a deciding condition**, which is the population
+`kern5f9a.boolean_operands` walks. Read without the qualifier the phrase denotes
+every operand of every `and`/`or` **anywhere** in those files: **35** in
+`face_complex.py` and **4** in `posets.py`, **39** in all, of which **22** lie in
+no column of this repair's table.
+
+Everywhere the phrase is a **live claim** about what this instrument covers it
+now carries the qualifier — `README.md`, `lib69d1.py`, `p1_bound.py`,
+`selftest_69d1.py`, `kern5f9a.py`, and the two documents. `p1_bound.py` (ii)
+prints both populations and the subtraction. The **bound** sentence this ticket
+narrowed was never affected: it names *the deciding conditions* and is correct.

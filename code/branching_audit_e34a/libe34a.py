@@ -12,13 +12,39 @@ else exists to make its answer trustworthy.
 
 WHAT IS WRITTEN FRESH, AND WHY
 
-  * `PRE_REV` is DERIVED, not written down.  lib76cc.py carries
+  * `PRE_REV` is DERIVED FROM THE PROPERTY, PINNED, AND THE TWO ARE COMPARED
+    (mg-8d5e, on mg-2c77's OPEN 1).  lib76cc.py carries
     `REV_957F = "e006581c..."` as a literal beside the comment "g1 BEFORE
     mg-76cc".  A literal is a claim that stops being checked the moment the
-    file moves.  Here the pre-repair revision is computed: the last commit
-    that touched g1_provenance.py, and then its first parent.  If that
-    disagrees with what mg-76cc wrote down, the disagreement is a finding and
-    not a silent difference -- and it is checked in the selftest.
+    file moves, and that is why this file derived instead.  It derived from
+    the FILE'S HISTORY -- the last commit that touched g1_provenance.py, and
+    then its first parent -- and mg-69d1 then touched g1_provenance.py to
+    correct a SENTENCE.  The anchor followed the edit: REPAIR_REV moved
+    4755d02 -> d01ff32, PRE_REV moved 3bc2cf76 -> e5787e11, and both sides of
+    k1's comparison became mg-76cc's ALREADY-REPAIRED predicate.  Every number
+    k1 prints was unchanged and every one of them was about a different pair
+    of revisions.
+
+    A derived anchor follows every edit to the file it derives from, including
+    edits with nothing to do with the property.  That is the opposite of the
+    literal's failure and it is quieter, because the number is identical and
+    means something else.  So the anchor is now THREE things at once, and no
+    two of them can fail the same way:
+
+        DERIVED FROM THE PROPERTY -- `first_introducing(G1_REL, MARK_76CC)`,
+          the first commit at which g1_provenance.py carries `kernel_source=`.
+          That string IS the restored kernel half: the two-source signature
+          mg-76cc added so that "this script with that kernel" could be
+          asked at all.  A commit that edits prose does not move it.
+        PINNED -- REPAIR_REV_PIN / PRE_REV_PIN, written down, with the reason
+          written beside them.
+        COMPARED -- ANCHOR_DRIFT holds one row per disagreement, and the
+          selftest and k1 (i) both go red on a non-empty one.  A pin that
+          rots and a derivation that re-points are both loud.
+
+    The file-history derivation is KEPT and PRINTED, as LAST_TOUCHING_G1.  It
+    is no longer the anchor; it is the quantity that moved, and deleting the
+    evidence of the failure would be the third version of the same mistake.
 
   * `REV_A218` is READ OUT OF lib58da.py's own source rather than copied.
     Copying a pinned constant into a third file is how three files come to
@@ -102,9 +128,78 @@ def subject(rev, repo=REPO):
 
 
 def last_touching(path, rev="HEAD", repo=REPO):
-    """The most recent commit at or before `rev` that touched `path`."""
+    """The most recent commit at or before `rev` that touched `path`.
+
+    NOT the anchor any more (mg-8d5e, on mg-2c77's OPEN 1).  Kept because the
+    quantity that re-pointed is evidence: k1 (i) prints it beside the property
+    anchor and the distance between them.
+    """
     out = git("log", "-1", "--format=%H", rev, "--", path, repo=repo).strip()
     return out or None
+
+
+def show_or_empty(rev, path, repo=REPO):
+    """`path` at `rev`, or "" where it does not exist there.
+
+    "" and not an exception, because `first_introducing` walks back to a
+    commit where the file has not been created yet and "the marker is absent"
+    is the right answer there, not a crash.
+    """
+    p = subprocess.run(["git", "-C", repo, "show", "%s:%s" % (rev, path)],
+                       capture_output=True, text=True)
+    return p.stdout if p.returncode == 0 else ""
+
+
+def parents(rev, repo=REPO):
+    return [h for h in git("rev-parse", rev + "^@", repo=repo).split() if h]
+
+
+def first_introducing(path, marker, rev="HEAD", repo=REPO):
+    """The OLDEST commit at or before `rev` where `marker` enters `path`.
+
+    "Enters" is the two-sided test and both sides are needed: the marker is
+    in `path` at the commit AND not in `path` at its first parent.  A
+    one-sided test ("the oldest commit where it is present") would answer with
+    the file's creation whenever the marker was there from the start, which is
+    a different claim.
+
+    THIS IS THE ANCHOR (mg-8d5e).  `the predicate as it stood before the
+    repair` is a claim about a PROPERTY -- the kernel half being present in
+    the measurement -- and so it is derived from the property, not from the
+    file's edit history.  A commit that corrects a sentence in the same file
+    does not move it; that is exactly what moved the old anchor.
+    """
+    hist = [h for h in git("log", "--format=%H", "--reverse", rev, "--", path,
+                           repo=repo).split() if h]
+    for h in hist:
+        if marker not in show_or_empty(h, path, repo=repo):
+            continue
+        ps = parents(h, repo=repo)
+        if not ps or marker not in show_or_empty(ps[0], path, repo=repo):
+            return h
+    return None
+
+
+def marker_is_monotone(path, marker, rev="HEAD", repo=REPO):
+    """(ok, why) -- once `marker` is in `path`, is it in every later commit?
+
+    A marker that appears, disappears and reappears makes `first_introducing`
+    return the FIRST of two introductions, which is a different revision from
+    the one a reader would mean.  Asserted rather than assumed, because the
+    whole point of this repair is that an anchor should say so when it stops
+    pointing where its own prose says.
+    """
+    hist = [h for h in git("log", "--format=%H", "--reverse", rev, "--", path,
+                           repo=repo).split() if h]
+    seen, bad = False, []
+    for h in hist:
+        here = marker in show_or_empty(h, path, repo=repo)
+        if here:
+            seen = True
+        elif seen:
+            bad.append(h[:8])
+    return (not bad), ("present, then absent again at " + ", ".join(bad)
+                       if bad else "")
 
 
 def commits_touching(path, since, until="HEAD", repo=REPO):
@@ -166,25 +261,115 @@ def read_literal(src, name):
 
 REV_A218 = read_literal(read_worktree(LIB_REL), "REV_A218")
 
-# THE REPAIR, AND THE PREDICATE AS IT STOOD BEFORE IT -- both derived from the
-# log rather than written down.  REPAIR_REV is the last commit that touched
-# g1_provenance.py; PRE_REV is its first parent.  Written this way because
-# mg-76cc's own lib carries the pre-repair revision as a literal, and a
-# literal cannot notice that the file moved again.
-REPAIR_REV = last_touching(G1_REL)
-PRE_REV = resolve(REPAIR_REV + "^") if REPAIR_REV else None
+# THE REPAIR, AND THE PREDICATE AS IT STOOD BEFORE IT.
+#
+# Each anchor is a PROPERTY named by a marker string, a PIN, and a comparison
+# between them (mg-8d5e, on mg-2c77's OPEN 1 -- see the module docstring).
+#
+# The markers are chosen to BE the repair, not to describe it:
+#
+#   MARK_76CC  `kernel_source=` -- mg-76cc's whole patch is that the measuring
+#              half is TWO files and can be asked about separately, and the
+#              signature change is where that becomes expressible.  Before it,
+#              `run_c1(script_rev=REV_A218)` pinned the kernel on both sides
+#              and a kernel that moved reached neither.
+#   MARK_7E58  `def measurement(` -- mg-7e58 replaced a file-sha predicate
+#              with one asked OF THE MEASUREMENT, and this function is that
+#              measurement.
+MARK_76CC = "kernel_source="
+MARK_7E58 = "def measurement("
+
+# The intended pair, written down.  Not instead of the derivation -- beside
+# it, so that a derivation which has quietly started measuring something else
+# has something to disagree with.
+REPAIR_REV_PIN = "4755d0292fc9175815739e9a77fa24dc6b8baf48"   # mg-76cc
+PRE_REV_PIN = "3bc2cf760ea28ddf6e4c3a9b73a89acc42a167a0"      # its parent
+REV_7E58_PIN = "4372fae95881bb421099bc715d1924c37d98b7b3"     # mg-7e58
+PRE_7E58_PIN = "52aeaf43015031e416d84cbc18d72ad2daa06f26"     # its parent
+
+ANCHOR_DRIFT = []       # one human-readable row per disagreement; [] is green
+
+
+def _anchored(name, marker, pin, pre_pin):
+    """(repair rev, pre rev) for one anchor, derived AND pinned AND compared.
+
+    The derived value is what is USED, so the instrument keeps the ability to
+    notice that the file moved -- which is why mg-e34a derived in the first
+    place.  The pin is what is ASSERTED, so the instrument also notices that
+    the derivation has re-pointed -- which is what mg-69d1's sentence edit
+    did.  Any disagreement lands in ANCHOR_DRIFT and is printed and gated; it
+    is never silently resolved in favour of either side.
+
+    When the marker cannot be found at all the pin is used and the fallback is
+    recorded, because a run against a revision nobody chose is worse than a
+    run that says out loud which revision it fell back to.
+    """
+    got = first_introducing(G1_REL, marker)
+    if got is None:
+        ANCHOR_DRIFT.append(
+            "%s: the marker %r is in no commit of %s, so the PROPERTY anchor "
+            "could not be derived at all and the pin %s is being used instead"
+            % (name, marker, G1_REL, pin[:8]))
+        got = pin
+    elif got != pin:
+        ANCHOR_DRIFT.append(
+            "%s: derived from the property (%r) gives %s, the pin says %s.  "
+            "One of the two is wrong and this run does not know which"
+            % (name, marker, got[:8], pin[:8]))
+    pre = resolve(got + "^")
+    if pre != pre_pin:
+        ANCHOR_DRIFT.append(
+            "%s: the first parent of %s is %s, the pinned pre-repair revision "
+            "is %s" % (name, got[:8], pre[:8], pre_pin[:8]))
+    return got, pre
+
+
+REPAIR_REV, PRE_REV = _anchored("mg-76cc", MARK_76CC,
+                                REPAIR_REV_PIN, PRE_REV_PIN)
+REV_7E58, PRE_7E58_REV = _anchored("mg-7e58", MARK_7E58,
+                                   REV_7E58_PIN, PRE_7E58_PIN)
+
+# THE ANCHOR THAT RE-POINTED, KEPT AS EVIDENCE.  This was REPAIR_REV until
+# mg-8d5e.  It is printed beside the property anchor in k1 (i): when the two
+# differ, the difference is the count of commits that touched the file without
+# touching the property, and that number is the finding stated as a quantity.
+LAST_TOUCHING_G1 = last_touching(G1_REL)
+
 
 def nth_touching(path, n, repo=REPO):
-    """The n-th most recent commit touching `path` (0 = most recent)."""
+    """The n-th most recent commit touching `path` (0 = most recent).
+
+    The other half of the same defect (mg-8d5e).  `PRE_7E58_REV` used to be
+    `nth_touching(G1_REL, 1)^`, and mg-69d1's edit pushed every index along by
+    one: the column k1 labels `before mg-7e58` came to hold mg-76cc's parent.
+    An index into a file's history is an anchor derived from the history, and
+    it re-points for exactly the same reason.  Kept, unused by any anchor, and
+    printed in k1 (i) beside the property answer.
+    """
     out = git("log", "--format=%H", "--", path, repo=repo).split()
     return out[n] if n < len(out) else None
 
 
-# g1 as it stood before mg-7e58, for context only: the parent of the commit
-# one further back on the same file.  Derived the same way and for the same
-# reason as PRE_REV.
-_PREV_TOUCH = nth_touching(G1_REL, 1)
-PRE_7E58_REV = resolve(_PREV_TOUCH + "^") if _PREV_TOUCH else None
+NTH_TOUCHING_1 = nth_touching(G1_REL, 1)
+
+
+def anchor_rows():
+    """The anchor table k1 (i) and selftest both print, from one source.
+
+    One source, because two places that build the same table from the same
+    values by different code are two places that can disagree about it.
+    """
+    rows = [
+        ("mg-76cc repair, DERIVED from %r" % MARK_76CC, REPAIR_REV,
+         REPAIR_REV_PIN),
+        ("  its first parent -- THE PRE-REPAIR PREDICATE", PRE_REV,
+         PRE_REV_PIN),
+        ("mg-7e58 repair, DERIVED from %r" % MARK_7E58, REV_7E58,
+         REV_7E58_PIN),
+        ("  its first parent", PRE_7E58_REV, PRE_7E58_PIN),
+    ]
+    return [(label, got, pin, "agrees" if got == pin else "*** DISAGREES")
+            for label, got, pin in rows]
 
 
 # ---------------------------------------------------------------------------

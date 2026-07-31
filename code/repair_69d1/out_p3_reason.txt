@@ -17,12 +17,13 @@ are built here.
    whether the correcting ticket id stands within the window.
 
    THE OLD REASON -- `changes that cancel would pass ...`:
+     code/audit_2c77/out_q5_discriminator.txt                 line 12    refuted within 25 lines
      code/branching_audit_58da/g1_provenance.py               line 276   refuted within 25 lines
      code/branching_audit_58da/out_g1_provenance.txt          line 98    refuted within 25 lines
      code/branching_audit_e34a/PREDICTIONS.md                 line 125   refuted within 25 lines
      code/branching_audit_e34a/k4_cancel.py                   line 58    refuted within 25 lines
      code/branching_audit_e34a/out_k4_cancel.txt              line 15    refuted within 25 lines
-     code/repair_69d1/README.md                               line 71    refuted within 25 lines
+     code/repair_69d1/README.md                               line 80    refuted within 25 lines
      code/repair_69d1/p2_rerun.py                             line 134   refuted within 25 lines
      code/repair_69d1/p2_rerun.py                             line 143   refuted within 25 lines
      code/repair_69d1/p3_reason.py                            line 6     refuted within 25 lines
@@ -34,24 +35,33 @@ are built here.
    (i-b) THE SAME DISCRIMINATOR, RUN AGAINST HEAD -- the committed tree, where
    the defect is still present.  If it reported 0 live assertions there it would be
    measuring nothing here:
-     code/branching_audit_58da/g1_provenance.py               line 42    *** LIVE ASSERTION
-     code/branching_audit_58da/g1_provenance.py               line 257   *** LIVE ASSERTION
-     code/branching_audit_58da/out_g1_provenance.txt          line 94    *** LIVE ASSERTION
+     code/audit_2c77/out_q5_discriminator.txt                 line 12    refuted
+     code/branching_audit_58da/g1_provenance.py               line 276   refuted
+     code/branching_audit_58da/out_g1_provenance.txt          line 98    refuted
      code/branching_audit_e34a/PREDICTIONS.md                 line 125   refuted
      code/branching_audit_e34a/k4_cancel.py                   line 58    refuted
      code/branching_audit_e34a/out_k4_cancel.txt              line 15    refuted
+     code/repair_69d1/README.md                               line 71    refuted
+     code/repair_69d1/out_p3_reason.txt                       line 19    refuted
+     code/repair_69d1/p2_rerun.py                             line 134   refuted
+     code/repair_69d1/p2_rerun.py                             line 143   refuted
+     code/repair_69d1/p3_reason.py                            line 6     refuted
+     code/repair_69d1/p3_reason.py                            line 61    refuted
      docs/audit-mg-e34a-mg76cc-kernel-half-and-five.md        line 181   refuted
-     docs/repair-mg-76cc-kernel-half-and-five-outputs.md      line 109   *** LIVE ASSERTION
-   8 copy/copies at HEAD, 4 of them live assertions.
+     docs/repair-mg-69d1-bound-and-reason.md                  line 142   refuted
+     docs/repair-mg-76cc-kernel-half-and-five-outputs.md      line 116   refuted
+   15 copy/copies at HEAD, 0 of them live assertions.
 
-   the new reason -- `CONSPIRING pair`: 14 site(s)
+   the new reason -- `CONSPIRING pair`: 16 site(s)
+     code/audit_2c77/out_q1_reason.txt                        line 102
+     code/audit_2c77/q1_reason.py                             line 229
      code/branching_audit_58da/g1_provenance.py               line 52
      code/branching_audit_58da/g1_provenance.py               line 272
      code/branching_audit_58da/g1_provenance.py               line 279
      code/branching_audit_58da/out_g1_provenance.txt          line 94
      code/branching_audit_58da/out_g1_provenance.txt          line 101
      code/branching_audit_e34a/k4_cancel.py                   line 192
-     code/branching_audit_e34a/out_k4_cancel.txt              line 68
+     code/branching_audit_e34a/out_k4_cancel.txt              line 84
      code/branching_repair_76cc/out_r1_kernel.txt             line 130
      code/branching_repair_76cc/r1_kernel.py                  line 382
      code/repair_69d1/out_p4_kinds.txt                        line 72
@@ -59,7 +69,17 @@ are built here.
      code/repair_69d1/p3_reason.py                            line 26
      code/repair_69d1/p3_reason.py                            line 62
      code/repair_69d1/p4_kinds.py                             line 220
-   the row's LABEL -- `conspiracy`: 18 site(s)
+   the row's LABEL -- `conspiracy`: 28 site(s)
+     code/audit_2c77/PREDICTIONS.md                           line 52
+     code/audit_2c77/lib2c77.py                               line 354
+     code/audit_2c77/out_q1_reason.txt                        line 22
+     code/audit_2c77/out_q1_reason.txt                        line 25
+     code/audit_2c77/out_q1_reason.txt                        line 138
+     code/audit_2c77/out_q1_reason.txt                        line 141
+     code/audit_2c77/out_q1_reason.txt                        line 145
+     code/audit_2c77/q1_reason.py                             line 88
+     code/audit_2c77/q1_reason.py                             line 94
+     code/audit_2c77/q1_reason.py                             line 408
      code/branching_audit_58da/g1_provenance.py               line 311
      code/branching_audit_58da/g1_provenance.py               line 316
      code/branching_audit_58da/out_g1_provenance.txt          line 111
@@ -67,7 +87,7 @@ are built here.
      code/branching_repair_76cc/lib76cc.py                    line 538
      code/branching_repair_76cc/lib76cc.py                    line 544
      code/branching_repair_76cc/r1_kernel.py                  line 340
-     code/repair_69d1/README.md                               line 84
+     code/repair_69d1/README.md                               line 93
      code/repair_69d1/out_p4_kinds.txt                        line 18
      code/repair_69d1/out_p4_kinds.txt                        line 69
      code/repair_69d1/p2_rerun.py                             line 118
@@ -145,6 +165,7 @@ are built here.
      conspiring   caught by section (v) at 1 of 3 rows: both together
 
 --------------------------------------------------------------------------
-SELF-ERRORS: 0, population: every git read and c1 run this script performs, the requirement that each of the 4 bends really change the file it names, that the baseline run really produce c1's 24 vertex sets, and that each pair really be the KIND of pair it is called before any row rests on it
+SELF-ERRORS: 1, population: every git read and c1 run this script performs, the requirement that each of the 4 bends really change the file it names, that the baseline run really produce c1's 24 vertex sets, and that each pair really be the KIND of pair it is called before any row rests on it
+   SELF-ERROR: the discriminator reports 0 live assertions at HEAD, where mg-e34a booked the finding; it is not distinguishing a quotation from an assertion and the row above says nothing
 FINDINGS: 0, population: the 3 rows of g1's section (v) evaluated on a cancelling pair and again on a conspiring pair -- 6 rows -- and the corrected reason scored against all 6 wherever it is written
-TOTAL BAD: 0
+TOTAL BAD: 1

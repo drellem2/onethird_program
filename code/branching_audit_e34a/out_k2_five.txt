@@ -35,9 +35,9 @@ as it stands on this branch.
    and the fresh transcripts name a revision that exists outside a temp
    directory.
 
-   this branch's HEAD  : 4755d0292fc9
-   the clone's HEAD    : 4755d0292fc9
-     docs+repair: THE KERNEL HALF OF THE PREDICATE IS BACK AND G-3 IS SHUT ON FIVE — bend kern_
+   this branch's HEAD  : f7a30d137b89
+   the clone's HEAD    : f7a30d137b89
+     predictions: mg-8d5e's predictions, committed BEFORE any script of this instrument exists 
 
    run_all.sh exit 1
      (g4_fleet.py is predicted by the runner's own header to exit 1 --
@@ -46,7 +46,7 @@ as it stands on this branch.
    file                        committed  re-run  differing  byte for
                                lines      lines   lines      byte
      out_selftest_58da.txt      7          7       0          YES
-     out_g1_provenance.txt      166        166     5          no
+     out_g1_provenance.txt      175        175     5          no
      out_g2_redo.txt            116        116     1          no
      out_g3_findings.txt        147        147     1          no
      out_g4_fleet.txt           226        226     2          no
@@ -63,20 +63,20 @@ as it stands on this branch.
    RECORD side; the clone's own HEAD and subject are replaced on the
    RE-RUN side.  Nothing else is touched.
 
-   the committed record names : e006581c2e11
-   the fresh run names        : 4755d0292fc9
-   the clone's actual HEAD    : 4755d0292fc9
+   the committed record names : e494515b499f
+   the fresh run names        : f7a30d137b89
+   the clone's actual HEAD    : f7a30d137b89
 
-   record's subject  : docs+audit: independent audit of the mg-7e58 repair (4372fae) — THE ATTRIBUTION 
-   HEAD's subject    : docs+repair: THE KERNEL HALF OF THE PREDICATE IS BACK AND G-3 IS SHUT ON FIVE — 
+   record's subject  : docs+audit: independent audit of the mg-76cc repair (4755d02) — THE KERNEL HALF 
+   HEAD's subject    : predictions: mg-8d5e's predictions, committed BEFORE any script of this instrume
 
    every differing line, and whether the substitution explains it:
 
      out_g1_provenance.txt      line 16   revision substitution
      out_g1_provenance.txt      line 17   revision substitution
      out_g1_provenance.txt      line 27   revision substitution
-     out_g1_provenance.txt      line 129  revision substitution
-     out_g1_provenance.txt      line 131  revision substitution
+     out_g1_provenance.txt      line 138  revision substitution
+     out_g1_provenance.txt      line 140  revision substitution
      out_g2_redo.txt            line 100  revision substitution
      out_g3_findings.txt        line 6    revision substitution
      out_g4_fleet.txt           line 39   revision substitution
@@ -101,18 +101,18 @@ as it stands on this branch.
 --------------------------------------------------------------------------
 (iv) WHERE THE RECORD NOW SITS -- THE ROW mg-76cc MEASURED AS 0
 --------------------------------------------------------------------------
-   the committed record's revision : e006581c2e11
+   the committed record's revision : e494515b499f
      an ancestor of this branch    : yes
-     commits from it to this HEAD  : 6
+     commits from it to this HEAD  : 35
 
    mg-76cc measured this row as 0 and wrote beside it that "1 is
    the freshest a committed record can ever be".  That was true of the
    worktree it ran in, whose HEAD WAS the record's revision.  On the
-   branch the record landed on it is 6: 6 commit(s) from other tickets
+   branch the record landed on it is 35: 35 commit(s) from other tickets
    landed between the run and the commit.  The row is not gated by
    mg-76cc and is not gated here either -- what it bounds is how much
    the tree may have moved under a transcript that still normalises
-   clean, and it is printed because a figure of 0 that is really 6 is
+   clean, and it is printed because a figure of 0 that is really 35 is
    the difference between "written just now" and "written and then
    overtaken".
 
