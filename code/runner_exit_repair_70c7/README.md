@@ -56,8 +56,11 @@ would agree with itself by construction.
 to the 2×2 totals **three paragraphs above** a bare `154 changed files` that no
 anchor reproduces. So the repair is not only to move that figure: `r2_anchor.py`
 runs a **figure census** — every number in a reader-facing artifact against
-every figure its own tree's transcripts print — and `s5_self.py` runs the same
-census on this tree's own artifacts.
+every figure its own tree's transcripts print — `s5_self.py` runs it inside
+mg-7522's tree, and `r6_self.py` runs it on this tree's own artifacts. It is
+in `r6_self.py` and not in `r2_anchor.py` for an ordering reason that is
+stated where it bites: `run_all.sh` truncates each transcript before its probe
+runs, so a probe cannot back a figure with its own output.
 
 **A defect in that census, recorded rather than smoothed away.** Its first draft
 built the corpus by matching every number in the transcript text. Under that

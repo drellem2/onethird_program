@@ -31,7 +31,7 @@ rule could reach.
 | **R1f** | 4 of 4 artifacts need the sentence changed | **HIT** — `s2_status.py`, `README.md`, `OUTCOMES.md`, the published document |
 | **R2a** | no anchor reproduces 154; the live figure exceeds mg-dee4's 275 | **HIT** — 166 / 257 / 240 in prose because they cannot move, and the two that move are in `out_r2_anchor.txt` |
 | **R2b** | `154` is no longer a figure in the document | **HIT** |
-| **R2c** | between 2 and 8 unbacked figures in mg-7522's artifacts | **HIT** — 4: `154` in the document **and again** in `OUTCOMES.md:28`, `2111`, and a quotation of mg-c2b3's `63` |
+| **R2c** | between 2 and 8 unbacked figures in mg-7522's artifacts | **HIT** — 4 at the moment of the finding: `154` in the document **and again** in `OUTCOMES.md:28`, `2111`, and a quotation of mg-c2b3's `63` |
 | **R3a** | 9 alternatives against 3, `verified` in the nine only | **HIT** |
 | **R3b** | at least 5 USEs appear under the widened rule over `*.py` + `*.sh` | **HIT** — 16 |
 | **R3c** | 0 UNBACKED in `*.py` + `*.sh` | **HIT** |
@@ -48,12 +48,12 @@ rule could reach.
 | **R6d** | at least 2 files in the widened P2 at HEAD | **MISS — 1.** Same reasoning error, same direction |
 | **R6e** | every discarded status of the new member, read directly, exits 0 | **MISS — it cannot be read directly at all.** Its discarded stages read `$WORK`, a `mktemp -d` created at run time; there is no argv until the script that builds it is running. R5c stands in its place and is stronger: it makes the stage fail and reads what the script DOES |
 | **R7a** | this tree's runner is outside the widened P2 as well | **HIT** — 0 pipelines of any kind, 7 of 7 steps redirect and guard |
-| **R7b** | my own first draft fails the grain check somewhere | **HIT, three times over** — see below |
+| **R7b** | my own first draft fails the grain check somewhere | **HIT** — R6a's first run named **8** transcript lines of mine reporting a count with no grain word near it, and R6b named **108** figures of mine no transcript backed. Both are recorded below rather than described as tuning |
 | **R7c** | 0 undispositioned figures in my own artifacts | **HIT** |
 
 ---
 
-## Three defects in this instrument, recorded rather than smoothed away
+## Five defects in this instrument, recorded rather than smoothed away
 
 **1. A line number backed a measurement.** The figure census built its corpus by
 matching every number in the transcript text. Under that rule `154` — the exact
@@ -77,6 +77,24 @@ the single character on each side of the marker, so `` `verified against the` ``
 thing it flagged was **this repair's own comment about mg-dee4's F4.** The rule
 tests containment in a delimited span now, which is what the delimiters were
 always standing for.
+
+**4. The figure census's own correction test was LINE-LOCAL.** A figure quoted
+inside a correction of itself is a mention of that figure, not a claim under it
+— and the first draft asked whether **that line** was correcting. A correction
+that wraps (*"…and no anchor reproduces it"* on one line, *"257 … 240"* on the
+next) scored as an assertion of the very figures it was correcting. **That is
+F4's own defect, inside the repair of F4.** The window is one line in either
+direction now, exactly as `s3_figure` uses it on the subject.
+
+**5. The transcript corpus was built from the git index, so it was empty on the
+run that produced it.** A tree's transcripts are untracked when they are first
+written; `git ls-files` returned nothing, every figure came back UNBACKED, and
+R6b reported **108 findings about the prose** which were one fact about the
+index. `outs()` reads the disk now, and the ordering that follows from `>`
+truncating each transcript before its probe runs is stated where the function
+lives: a probe cannot back a figure with its own output, which is why the
+census of this tree's own prose is in `R6b` — the last probe to run — and not
+in `R2c`, which would be writing the transcript it needed to read.
 
 ---
 

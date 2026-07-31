@@ -46,6 +46,14 @@ E.  set -e / pipefail detection, both senses.
   ok   prose mentioning set -e is not
   ok   `set -o pipefail` is found
   ok   a bare `set -e` is not pipefail
+  ok   `set -euo pipefail` is found (mg-7522)
+  ok   a COMMENTED `set -euo pipefail` is not
+  ok   prose mentioning pipefail is not
+  ok   a `run_all.sh` under a tree is a target
+  ok   a target that is NOT run_all/run_audit is still a target (mg-70c7)
+  ok   two targets on one line are two targets
+  ok   a line naming no shell script has no target
+  ok   `.shx` is not a shell script
 
 F.  guarded() -- does an explicit construct catch the status?
 
@@ -77,11 +85,14 @@ H.  THE GENERAL FORM, ON THIS TREE.  This deliverable is a script that
      row above measures.)
 
 ==============================================================================
-selftestc2b3 TOTAL BAD: 0   (of 37 rows)
+selftestc2b3 TOTAL BAD: 0   (of 45 rows)
 ==============================================================================
 
-EXTENT.  These 37 rows range over libc2b3's five public rules
+EXTENT.  These 45 rows range over libc2b3's seven public rules
 (strip_comment, strip_quoted, tee_pipelines, has_set_e/has_pipefail,
-guarded, invocations) and over THIS TREE'S OWN run_all.sh.  They do
+guarded, invocations, targets) and over THIS TREE'S OWN run_all.sh.
+`targets` is mg-70c7's, and the five rows pinning it are themselves
+executing sites naming a `*.sh`, so this file JOINS the population
+k2 counts -- printed there, not folded away.  They do
 NOT range over the 64 runners in the repository -- that is k1's job,
 and k1's numbers are only as good as these rows.

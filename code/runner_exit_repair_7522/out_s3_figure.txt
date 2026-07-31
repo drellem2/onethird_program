@@ -8,8 +8,13 @@ S3a  THE POPULATION OF STRENGTH-MARKED CLAIMS, DERIVED NOT LISTED
 
   PREDICATE.  A reader-facing artifact of the sweep is a file the
   sweep's own commit 52aeaf4 touched, under `code/runner_exit_c2b3/` or
-  under `docs/`, that is not a committed transcript.  A CLAIM is a line
-  in one of them carrying BOTH a strength marker and a number.
+  under `docs/`, that is not a committed transcript.  A CLAIM is a
+  strength marker with a number WITHIN 1 LINE of it, in EITHER
+  direction -- a hard wrap puts the figure on the line before as
+  readily as on the line after.  The marker rule is `lib7522.MARK`, same
+  object `s5_self.py` turns on this tree -- 9 alternatives, and the
+  3-alternative rule this tree used on ITSELF is kept only as
+  `lib7522.MARK_OLD`, so S5 can exhibit the disagreement.
 
   artifacts: 11
       code/runner_exit_c2b3/OUTCOMES.md
@@ -24,28 +29,38 @@ S3a  THE POPULATION OF STRENGTH-MARKED CLAIMS, DERIVED NOT LISTED
       code/runner_exit_c2b3/selftestc2b3.py
       docs/OneThird-RunnerExit-ArcWideSweep.md
 
-  strength-marked numeric claims: 20
+  strength-marked numeric claims: 24
+      ...that a LINE-LOCAL rule would have found: 20
+      ...that the one-line window ADDS:           4
 
-    …/OUTCOMES.md                                   8  | **Q1** | all 34 tee'd targets exit **0** run directly | **HIT** — 34 of 34 |
-    …/OUTCOMES.md                                  13  | **Q6** | pre-repair runner exits non-zero at **exactly 3** sites | **MISS — 8** |
-    …/OUTCOMES.md                                  15  | **Q8** | baseline reach identical pre/post at all 17 runners | **HIT** |
-    …/OUTCOMES.md                                 140  `k1_census.py`'s docstring all reported **1, "confirmed exactly"**. The ticket
-    …/OUTCOMES.md                                 148  **mg-7522 — the population of every number in this section.** All of them are
-    …/PREDICTIONS.md                               23  **Q1.** All 34 tee'd targets exit **0** when run directly on the tree as it
-    …/PREDICTIONS.md                               51  **0 at 31 of 34 sites and 1 at exactly 3**, and the three are
-    …/PREDICTIONS.md                               69  **Q8.** Baseline **reach is identical** pre- and post-repair for all 17
-    …/README.md                                    37  | matching the bare grep `\| *tee` | 23 | **23** — confirmed exactly |
-    …/README.md                                    41  **mg-7522, on the `pipefail` row.** This row used to read *"1 — confirmed
-    …/k1_census.py                                 25  docstring all said 1, "confirmed exactly".  THE TICKET WAS RIGHT.  mg-7522
-    …/k2_consume.py                                 6  fixing all 23 uniformly."*
-    …/k2_consume.py                               266  print("                 and counted here so that `all 34 carried a verdict`")
-    …/k3_retro.py                                  24  0, nothing was being swallowed and the past green is confirmed at the grain the
-    …/k3_retro.py                                 103  "outputs are diffed byte for byte; `TOTAL BAD: 0` is the verdict",
-    …/run_all.sh                                   17  # Pure Python 3, no dependencies, NO NETWORK.  About 4 minutes, almost all of
-    docs/OneThird-RunnerExit-ArcWideSweep.md       43  | matching the bare grep `\| *tee` | 23 | **23** | confirmed exactly |
-    docs/OneThird-RunnerExit-ArcWideSweep.md       48  > read *"1, confirmed exactly"* while `out_k1_census.txt` printed `ticket 1 /
-    docs/OneThird-RunnerExit-ArcWideSweep.md      119  and listed so that "all 34 carried a verdict" is not asserted when it is
-    docs/OneThird-RunnerExit-ArcWideSweep.md      251  *"all 64"* until mg-7522, and the other five are `#!/bin/bash` or
+    …/OUTCOMES.md                                   8   |---|---|---| | **Q1** | all 34 tee'd targets exit **0** run directly | **HIT** — 34 of 34
+    …/OUTCOMES.md                                   9 + | **Q1** | all 34 tee'd targets exit **0** run directly | **HIT** — 34 of 34 | | **Q2** | 
+    …/OUTCOMES.md                                  13   | **Q5** | the fix bites at **34 of 34** sites | **HIT** — *after the scoring rule was cor
+    …/OUTCOMES.md                                  15   | **Q7** | baseline exits non-zero for `a4ef` and `f8fa` | **HIT**, and incomplete | | **Q
+    …/OUTCOMES.md                                 140   re-derived 0 / DIFFERS`; this file, the README, the published document and `k1_census.py`'
+    …/OUTCOMES.md                                 148    **mg-7522 — the population of every number in this section.** All of them are over files 
+    …/PREDICTIONS.md                               23    **Q1.** All 34 tee'd targets exit **0** when run directly on the tree as it stands. *Reas
+    …/PREDICTIONS.md                               51   **Q6 — the interesting one.** On the pre-repair text the runner's exit code is **0 at 31 o
+    …/PREDICTIONS.md                               69    **Q8.** Baseline **reach is identical** pre- and post-repair for all 17 runners: with not
+    …/README.md                                    37   | `run_all.sh` in the tree | 63 | **64** — `code/hodge_leverage_repair_8eca/` landed in `b
+    …/README.md                                    41    **mg-7522, on the `pipefail` row.** This row used to read *"1 — confirmed exactly"*, and 
+    …/k1_census.py                                 20 + * the PIPEFAIL count.  This docstring used to end "the pipefail count (1) is confirmed exa
+    …/k1_census.py                                 25   DIFFERS` while the README, `OUTCOMES.md`, the published document and this docstring all sa
+    …/k2_consume.py                                 6   only as committed output may be unaffected; say which, per runner, rather than fixing all 
+    …/k2_consume.py                               350   print("                 the runner would not have seen it.  Repaired anyway,") print("    
+    …/k3_retro.py                                  24   run each tee'd target directly, with nothing in the way, and read it.  If it is 0, nothing
+    …/k3_retro.py                                 103   "mg-db09's instrument is re-run in a scratch copy and its five committed " "outputs are di
+    …/libc2b3.py                                  141 + # where the ticket said 1, `out_k1_census.txt` printed `DIFFERS`, and four # reader-facing
+    …/run_all.sh                                   17   # # Pure Python 3, no dependencies, NO NETWORK.  About 4 minutes, almost all of # it K3's 
+    …/selftestc2b3.py                             108 + # re-derive 0 where the ticket said 1, and four reader-facing artifacts then # reported th
+    docs/OneThird-RunnerExit-ArcWideSweep.md       43   | `run_all.sh` in the tree | 63 | **64** | `code/hodge_leverage_repair_8eca/` landed in `b
+    docs/OneThird-RunnerExit-ArcWideSweep.md       48   > **mg-7522 — this table's `pipefail` row, and its population.** The row used to > read *"
+    docs/OneThird-RunnerExit-ArcWideSweep.md      119   missing input exits 1 and the runner would not have seen it. Repaired anyway, and listed s
+    docs/OneThird-RunnerExit-ArcWideSweep.md      251   runners (measured — the figure `k2_consume.py` prints; this sentence read *"all 64"* until
+
+  The `+` rows are the four a hard wrap stepped over.  `20
+  strength-marked numeric claims, every one dispositioned` was exact
+  about the 20 the rule saw and silent about these.
 
 ==============================================================================
 S3b  THE FIGURE ITSELF -- `pipefail`, re-derived under both rules
@@ -88,8 +103,8 @@ S3c  THE SAME BLIND SPOT, ONE SENTENCE OVER -- the shebang
           code/hodge_leverage_join/run_all.sh                #!/bin/bash
           code/state_restructure_34bf/run_all.sh             #!/usr/bin/env bash
 
-    run_all.sh at HEAD                           72
-      ...with `#!/bin/sh`                        67
+    run_all.sh at HEAD                           86
+      ...with `#!/bin/sh`                        81
       ...with something else                      5
           code/hodge_leverage/run_all.sh                     #!/bin/bash
           code/hodge_leverage_audit_3c24/run_all.sh          #!/bin/bash
@@ -108,6 +123,11 @@ S3d  EVERY CLAIM IN S3a, DISPOSITIONED -- one at a time, reason each
 
     artifact               verdict                    how it was checked
     OUTCOMES.md:8          HOLDS ABOUT ITS POPULATION 34 tee'd pipelines in 17
+                                                      run_all.sh @bee07a1; S1d
+                                                      states what that
+                                                      population excludes and
+                                                      S2a reads the rest
+    OUTCOMES.md:9          HOLDS ABOUT ITS POPULATION 34 tee'd pipelines in 17
                                                       run_all.sh @bee07a1; S1d
                                                       states what that
                                                       population excludes and
@@ -151,6 +171,12 @@ S3d  EVERY CLAIM IN S3a, DISPOSITIONED -- one at a time, reason each
                                                       figure as 1 and the old
                                                       rule as 0 on the same
                                                       bytes
+    k1_census.py:20        NOT A CLAIM                a comment recording that
+                                                      the docstring's old
+                                                      figure was wrong; the
+                                                      number on the adjacent
+                                                      line is the correction,
+                                                      not an assertion
     k1_census.py:25        WAS WRONG, NOW FIXED       the docstring used to
                                                       assert the figure its
                                                       own transcript marked
@@ -159,7 +185,7 @@ S3d  EVERY CLAIM IN S3a, DISPOSITIONED -- one at a time, reason each
     k2_consume.py:6        NOT A CLAIM                a quotation of the
                                                       ticket's own words,
                                                       inside the docstring
-    k2_consume.py:266      HOLDS                      34 is the tee'd-pipeline
+    k2_consume.py:350      HOLDS                      34 is the tee'd-pipeline
                                                       count @bee07a1
     k3_retro.py:24         NOT A CLAIM                a description of what a
                                                       0 would mean, not an
@@ -167,9 +193,19 @@ S3d  EVERY CLAIM IN S3a, DISPOSITIONED -- one at a time, reason each
     k3_retro.py:103        HOLDS                      a quotation of mg-2060's
                                                       own claim text, being
                                                       dispositioned
+    libc2b3.py:141         NOT A CLAIM                a comment naming the
+                                                      marker the repaired
+                                                      `PIPEFAIL_RE` exists
+                                                      because of; the adjacent
+                                                      number is the regex's
+                                                      own subject
     run_all.sh:17          HOLDS                      a stated runtime, not a
                                                       measurement of the
                                                       subject
+    selftestc2b3.py:108    NOT A CLAIM                a comment above the
+                                                      both-senses fixtures;
+                                                      the adjacent number is a
+                                                      fixture's expected count
     ArcWideSweep.md:43     HOLDS                      the same measurement as
                                                       the README's row
     ArcWideSweep.md:48     WAS WRONG, NOW FIXED       the published document's
@@ -180,7 +216,7 @@ S3d  EVERY CLAIM IN S3a, DISPOSITIONED -- one at a time, reason each
                                                       `all 64` is 59 of 64;
                                                       S3c
 
-  20 claims: 6 HOLDS, 2 HOLDS ABOUT ITS POPULATION, 6 NOT A CLAIM, 1 SCOPE NOTE ADDED, 5 WAS WRONG, NOW FIXED
+  24 claims: 6 HOLDS, 3 HOLDS ABOUT ITS POPULATION, 9 NOT A CLAIM, 1 SCOPE NOTE ADDED, 5 WAS WRONG, NOW FIXED
 
   COVERAGE, BOTH DIRECTIONS.
       mechanical hits with no rule                   0
@@ -200,7 +236,7 @@ S3e  THE PROSE AND THE INSTRUMENT NOW AGREE -- checked, not asserted
   that produced the sweep's commit, at its own revision, and mg-05eb
   cites it.  It is NOT regenerated here: a transcript is a record of a
   run at a time, and rewriting it would both destroy that citation and
-  be unreproducible anyway -- the arc has grown from 64 runners to 72
+  be unreproducible anyway -- the arc has grown from 64 runners to 86
   since.  The corrected reading is published in THIS file's transcript,
   and `k1_census.py`'s docstring points at it.
 
@@ -236,5 +272,5 @@ EXTENT OF THAT NUMBER.  It counts (a) a re-derivation that does not
 behave as the repair predicts, (b) `libc2b3` still disagreeing with the
 ticket, (c) a repaired artifact still asserting a corrected figure, and
 (d) a mechanical hit with no disposition.  It ranges over the 11
-reader-facing artifacts of mg-c2b3 and the 20 strength-marked numeric
+reader-facing artifacts of mg-c2b3 and the 24 strength-marked numeric
 claims in them.  It does NOT range over the arc's other trees.

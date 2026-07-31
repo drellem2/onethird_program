@@ -1,0 +1,125 @@
+==============================================================================
+R1  THE GRAIN -- SITES ARE NOT RUNS
+==============================================================================
+
+==============================================================================
+R1a  THE EXECUTIONS, RE-DERIVED UNDER AN INDEPENDENT PARSER
+==============================================================================
+
+  Read at 1ee1f1b^ -- the bytes mg-7522 repaired -- because that is where
+  the pipelines still exist.  `lib70c7` implements the loop expansion
+  from scratch; `lib7522` now implements it too, and R1b checks that
+  the two agree row for row.
+
+    code/state_delegation_audit_16eb/run_all.sh
+        `for pair in …` at lines 37-41: 3 literal item(s)
+    code/state_delegation_repair_0049/run_all.sh
+        `for pair in …` at lines 38-40: 2 literal item(s)
+
+    source line                                    iter   argv actually run
+    state_delegation_audit_16eb/run_all.sh:38      1      diff a4aeeb9..HEAD -- code/state_layer_audit_218d
+    state_delegation_audit_16eb/run_all.sh:38      2      diff 3a80d99..HEAD -- code/state_delegation_audit_5644
+    state_delegation_audit_16eb/run_all.sh:38      3      diff 2a29f30..HEAD -- code/state_delegation_repair_bee1
+    state_delegation_audit_16eb/run_all.sh:39      1      diff a4aeeb9..HEAD -- code/state_layer_audit_218d :!*.md
+    state_delegation_audit_16eb/run_all.sh:39      2      diff 3a80d99..HEAD -- code/state_delegation_audit_5644 :!*.md
+    state_delegation_audit_16eb/run_all.sh:39      3      diff 2a29f30..HEAD -- code/state_delegation_repair_bee1 :!*.md
+    state_delegation_repair_0049/run_all.sh:39     1      diff a4aeeb9..HEAD -- code/state_layer_audit_218d
+    state_delegation_repair_0049/run_all.sh:39     2      diff 3a80d99..HEAD -- code/state_delegation_audit_5644
+
+      pipeline SOURCE LINES                          3
+      DISCARDED `git diff` EXECUTIONS                8
+      DISTINCT commands among them                   6
+
+==============================================================================
+R1b  `s2_status.py` NO LONGER CARRIES A HAND-LIST
+==============================================================================
+
+  A hand-written argv in the source is the thing that drifted from the
+  line it was labelled with.  Counted structurally, on the bytes:
+
+      literal `["git", "diff", …]` argv in s2_status.py      0
+
+      rows the REPAIRED s2 derivation produces           8
+      rows THIS tree's independent parser produces       8
+      the two parsers agree row for row                 yes
+
+==============================================================================
+R1c  THE FOUR RUNS mg-7522 NEVER EXECUTED, ONE AT A TIME
+==============================================================================
+
+  mg-7522's three hand-written argv, quoted from `1ee1f1b`:
+      git diff a4aeeb9..HEAD -- code/state_layer_audit_218d
+      git diff 3a80d99..HEAD -- code/state_delegation_audit_5644
+      git diff a4aeeb9..HEAD -- code/state_layer_audit_218d
+
+      EXECUTIONS at run time                         8
+      ...covered by one of the three argv            4
+      ...NEVER RUN by mg-7522                        4
+
+      state_delegation_audit_16eb/run_all.sh:38#3    diff 2a29f30..HEAD -- code/state_delegation_repair_bee1
+      state_delegation_audit_16eb/run_all.sh:39#1    diff a4aeeb9..HEAD -- code/state_layer_audit_218d :!*.md
+      state_delegation_audit_16eb/run_all.sh:39#2    diff 3a80d99..HEAD -- code/state_delegation_audit_5644 :!*.md
+      state_delegation_audit_16eb/run_all.sh:39#3    diff 2a29f30..HEAD -- code/state_delegation_repair_bee1 :!*.md
+
+  AND THE ROW THAT WAS LABELLED WITH A LINE IT DID NOT RUN.  Line 39 of
+  state_delegation_audit_16eb carries a `':!*.md'` pathspec and none of
+  the three argv has one, so NO execution of that line's discarded
+  stage was ever read: 3 of the 4 never-run executions are that form.
+
+==============================================================================
+R1d  ALL EIGHT, READ DIRECTLY -- the verdict, which survives
+==============================================================================
+
+  LIST argv, no shell, so `returncode` is the target's own status.
+  This is mg-c2b3's K3b method and mg-7522's own, at the grain the
+  source executes at rather than the grain it is written at.
+
+  execution                                      discarded stage                          exit
+  state_delegation_audit_16eb/run_all.sh:38#1    diff a4aeeb9..HEAD -- code/state_layer_a 0
+  state_delegation_audit_16eb/run_all.sh:38#2    diff 3a80d99..HEAD -- code/state_delegat 0
+  state_delegation_audit_16eb/run_all.sh:38#3    diff 2a29f30..HEAD -- code/state_delegat 0
+  state_delegation_audit_16eb/run_all.sh:39#1    diff a4aeeb9..HEAD -- code/state_layer_a 0
+  state_delegation_audit_16eb/run_all.sh:39#2    diff 3a80d99..HEAD -- code/state_delegat 0
+  state_delegation_audit_16eb/run_all.sh:39#3    diff 2a29f30..HEAD -- code/state_delegat 0
+  state_delegation_repair_0049/run_all.sh:39#1   diff a4aeeb9..HEAD -- code/state_layer_a 0
+  state_delegation_repair_0049/run_all.sh:39#2   diff 3a80d99..HEAD -- code/state_delegat 0
+
+  8 of 8 exit 0.  SO THE VERDICT SURVIVES AND THE ENUMERATION DID
+  NOT.  Nothing was being swallowed; the finding is that a count of
+  SITES was presented as a count of RUNS, and four of the eight
+  runs had not been looked at when the sentence was written.
+
+==============================================================================
+R1e  DO THE READER-FACING ARTIFACTS STATE THE GRAIN?
+==============================================================================
+
+  A repair of a number that leaves the sentence alone has repaired
+  nothing a reader will see.  Four artifacts carried `11 of 11`:
+
+      s2_status.py                       3 quoted   0 asserted   14 grain
+                                                                 word(s) -- OK
+      README.md                          1 quoted   0 asserted   2 grain
+                                                                 word(s) -- OK
+      OUTCOMES.md                        0 quoted   0 asserted   3 grain
+                                                                 word(s) -- OK
+      OneThird-RunnerExit-PopulationRe   1 quoted   0 asserted   4 grain
+                                                                 word(s) -- OK
+
+  QUOTED and ASSERTED are counted separately on purpose.  The first
+  draft of this check forbade the string outright, and every artifact
+  that had correctly described what it repaired went red for saying so
+  -- a check that would have been satisfied by DELETING the record of
+  the defect.  Recorded in OUTCOMES.md rather than quietly fixed.
+
+==============================================================================
+R1 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts an execution this tree's parser could
+not derive, a hand-written argv in `s2_status.py`, a disagreement
+between the two parsers, a non-zero discarded status among the 8, and
+an artifact still carrying the line-grain figure.  It ranges over the 3
+`git diff` source lines of 2 runners at 1ee1f1b^ and the 8 executions they
+run.  It does NOT range over the 8 `| tee` sites, which mg-7522 derived
+correctly and mg-dee4 confirmed, nor over mg-c2b3's own 34, which are
+INHERITED from a transcript neither audit re-ran.

@@ -1,0 +1,91 @@
+==============================================================================
+selftest70c7 -- both senses at every rule
+==============================================================================
+
+==============================================================================
+A.  for_loops -- the literal expansion, and the refusal
+==============================================================================
+
+  ok   a two-item literal loop expands                               
+  ok   a continuation-joined header is ONE loop with all its items   
+  ok   a loop over `$VAR` REFUSES rather than counting one item      
+  ok   a loop over a glob REFUSES too                                
+  ok   a file with no loop has none                                  
+
+==============================================================================
+B.  pipeline_executions -- SITES are not RUNS
+==============================================================================
+
+  ok   one pipeline line in a 3-item loop is 3 executions            
+  ok   ...and they are numbered 1,2,3                                
+  ok   a pipeline outside any loop is exactly one execution          
+  ok   a COMMENTED pipeline is no execution                          
+  ok   a pipeline in an unexpandable loop is one row saying so       
+
+==============================================================================
+C.  expand / argv_of -- and the refusal that matters most
+==============================================================================
+
+  ok   `${p%% *}` takes the head                                     
+  ok   `${p#* }` takes the tail                                      
+  ok   `$p` is the whole                                             
+  ok   an unbound name REFUSES                                       
+  ok   an unimplemented expansion REFUSES                            
+  ok   a quoted pathspec survives as ONE word                        
+  ok   ...and the SAME line without the pathspec is a different argv 
+  ok   an assignment prefix is stripped, not classified              
+  ok   an unresolvable `$` NEVER survives into an argv               
+
+==============================================================================
+D.  the VALUE arm -- captured AND read, both senses
+==============================================================================
+
+  ok   a captured pipeline names its variable                        
+  ok   `local n=$(...)` too                                          
+  ok   a bare pipeline captures nothing                              
+  ok   a redirect captures nothing                                   
+  ok   `$n` elsewhere counts as a read                               
+  ok   `${n}` counts as a read                                       
+  ok   the assignment line itself does NOT count as a read           
+  ok   a mention in a COMMENT does not count                         
+  ok   a different variable does not count                           
+
+==============================================================================
+E.  figures -- what is a measurement and what is a label
+==============================================================================
+
+  ok   a plain count is a figure                                     
+  ok   a LINE REFERENCE is not -- `s3_figure.py:154`                 
+  ok   `on line 89` is not either                                    
+  ok   `lines 37-41` is not                                          
+  ok   0, 1 and 2 are structural, not figures                        
+  ok   several figures on one line are all returned                  
+  ok   a thousands separator is one figure                           
+
+==============================================================================
+F.  alternatives -- 9 against 3 is the whole of F3
+==============================================================================
+
+  ok   a bare pattern is one alternative                             
+  ok   two top-level alternatives                                    
+  ok   a group's inner `|` is NOT a top-level alternative            
+  ok   an ESCAPED pipe is not an alternative                         
+  ok   mg-7522's subject-facing rule has 9                           
+  ok   ...and the self-facing one it replaced had 3                  
+
+==============================================================================
+G.  transcript_numbers -- the corpus, and the defect it had
+==============================================================================
+
+  ok   a real figure enters the corpus                               
+  ok   a LINE NUMBER does not -- this is the defect recorded in OUTCOMES
+
+==============================================================================
+selftest70c7: 43 assertions, 0 failed
+==============================================================================
+
+EXTENT.  These exercise `lib70c7`'s seven rules in both senses.  They do
+NOT exercise the probes' reporting -- R1 through R6 are their own
+controls and each carries a TOTAL BAD with its own extent -- and they
+do not exercise `lib7522`'s copies of the same rules, which
+`selftest7522.py` pins in its own S10, S11 and S12.

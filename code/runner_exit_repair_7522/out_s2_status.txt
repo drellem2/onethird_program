@@ -13,19 +13,19 @@ S2a  EVERY PIPELINE THE SWEEP'S POPULATION DID NOT REACH, RUN DIRECTLY
   the members of the population its filename could not contain.
 
   runner                                     discarded stage            exit    secs  verdict
-  face_geometry_audit_f1b2/run_audit.sh:14   audit_scoring.py              0   146.0  nothing was being swallowed
-  face_geometry_audit_f1b2/run_audit.sh:15   audit_gates.py                0    12.3  nothing was being swallowed
-  face_geometry_audit_f1b2/run_audit.sh:16   audit_theorem_and_content.py      0     1.7  nothing was being swallowed
-  face_geometry_audit_f1b2/run_audit.sh:17   audit_injections.py           0    22.9  nothing was being swallowed
-  face_geometry_audit_f1b2/run_audit.sh:18   audit_nmax2.py                0     7.1  nothing was being swallowed
-  face_geometry_audit_fcf1/run_audit.sh:16   audit_nc4.py                  0    52.8  nothing was being swallowed
-  face_geometry_audit_fcf1/run_audit.sh:20   audit_extra.py                0     3.0  nothing was being swallowed
-  face_geometry_audit_fcf1/run_audit.sh:24   audit_gauge.py                0     6.7  nothing was being swallowed
+  face_geometry_audit_f1b2/run_audit.sh:14   audit_scoring.py              0    46.6  nothing was being swallowed
+  face_geometry_audit_f1b2/run_audit.sh:15   audit_gates.py                0     6.4  nothing was being swallowed
+  face_geometry_audit_f1b2/run_audit.sh:16   audit_theorem_and_content.py      0     0.8  nothing was being swallowed
+  face_geometry_audit_f1b2/run_audit.sh:17   audit_injections.py           0    11.0  nothing was being swallowed
+  face_geometry_audit_f1b2/run_audit.sh:18   audit_nmax2.py                0     3.2  nothing was being swallowed
+  face_geometry_audit_fcf1/run_audit.sh:16   audit_nc4.py                  0    22.6  nothing was being swallowed
+  face_geometry_audit_fcf1/run_audit.sh:20   audit_extra.py                0     1.6  nothing was being swallowed
+  face_geometry_audit_fcf1/run_audit.sh:24   audit_gauge.py                0     3.2  nothing was being swallowed
   state_delegation_audit_16eb/run_all.sh:38#1 git diff a4aeeb9              0     0.0  nothing was being swallowed
-  state_delegation_audit_16eb/run_all.sh:38#2 git diff 3a80d99              0     0.0  nothing was being swallowed
-  state_delegation_audit_16eb/run_all.sh:38#3 git diff 2a29f30              0     0.0  nothing was being swallowed
   state_delegation_audit_16eb/run_all.sh:39#1 git diff a4aeeb9              0     0.0  nothing was being swallowed
+  state_delegation_audit_16eb/run_all.sh:38#2 git diff 3a80d99              0     0.0  nothing was being swallowed
   state_delegation_audit_16eb/run_all.sh:39#2 git diff 3a80d99              0     0.0  nothing was being swallowed
+  state_delegation_audit_16eb/run_all.sh:38#3 git diff 2a29f30              0     0.0  nothing was being swallowed
   state_delegation_audit_16eb/run_all.sh:39#3 git diff 2a29f30              0     0.0  nothing was being swallowed
   state_delegation_repair_0049/run_all.sh:39#1 git diff a4aeeb9              0     0.0  nothing was being swallowed
   state_delegation_repair_0049/run_all.sh:39#2 git diff 3a80d99              0     0.0  nothing was being swallowed
@@ -77,15 +77,15 @@ S2a2  THE WORD `verified` -- THE BYTE COUNTS, COMPUTED ON BOTH ARMS
 
   execution                                       pipeline  redirect  verdict
   state_delegation_audit_16eb/run_all.sh:38#1            0         0  AGREE
-  state_delegation_audit_16eb/run_all.sh:38#2            0         0  AGREE
-  state_delegation_audit_16eb/run_all.sh:38#3         2111      2111  AGREE
   state_delegation_audit_16eb/run_all.sh:39#1            0         0  AGREE
+  state_delegation_audit_16eb/run_all.sh:38#2            0         0  AGREE
   state_delegation_audit_16eb/run_all.sh:39#2            0         0  AGREE
+  state_delegation_audit_16eb/run_all.sh:38#3         2111      2111  AGREE
   state_delegation_audit_16eb/run_all.sh:39#3            0         0  AGREE
   state_delegation_repair_0049/run_all.sh:39#1           0         0  AGREE
   state_delegation_repair_0049/run_all.sh:39#2           0         0  AGREE
 
-      state_delegation_audit_16eb/run_all.sh         0 / 0 / 2111 / 0 / 0 / 0
+      state_delegation_audit_16eb/run_all.sh         0 / 0 / 0 / 0 / 2111 / 0
       state_delegation_repair_0049/run_all.sh        0 / 0
 
   THOSE EIGHT VALUES ARE THIS TRANSCRIPT'S, not a figure in prose.
@@ -157,36 +157,7 @@ S2d  NO COMMITTED TRANSCRIPT MOVED
   deduced: the repaired runners were executed in full in S2b/S2c and
   the worktree is compared with its state before this probe started.
 
-  *** WORKTREE CHANGED BY S2 ***
-  before:
- M code/runner_exit_c2b3/k2_consume.py
- M code/runner_exit_c2b3/libc2b3.py
- M code/runner_exit_c2b3/selftestc2b3.py
-?? code/runner_exit_repair_70c7/lib70c7.py
-?? code/runner_exit_repair_70c7/r1_grain.py
-?? code/runner_exit_repair_70c7/r2_anchor.py
-?? code/runner_exit_repair_70c7/r3_strength.py
-?? code/runner_exit_repair_70c7/r4_property.py
-?? code/runner_exit_repair_70c7/r5_population.py
-?? code/runner_exit_repair_70c7/r6_self.py
-?? code/runner_exit_repair_70c7/run_all.sh
-?? code/runner_exit_repair_70c7/selftest70c7.py
-  after:
- M code/runner_exit_c2b3/k2_consume.py
- M code/runner_exit_c2b3/libc2b3.py
- M code/runner_exit_c2b3/selftestc2b3.py
-?? code/runner_exit_repair_70c7/OUTCOMES.md
-?? code/runner_exit_repair_70c7/README.md
-?? code/runner_exit_repair_70c7/lib70c7.py
-?? code/runner_exit_repair_70c7/r1_grain.py
-?? code/runner_exit_repair_70c7/r2_anchor.py
-?? code/runner_exit_repair_70c7/r3_strength.py
-?? code/runner_exit_repair_70c7/r4_property.py
-?? code/runner_exit_repair_70c7/r5_population.py
-?? code/runner_exit_repair_70c7/r6_self.py
-?? code/runner_exit_repair_70c7/run_all.sh
-?? code/runner_exit_repair_70c7/selftest70c7.py
-?? docs/repair-mg-70c7-grain-and-population.md
+  worktree unchanged by S2 (git status --porcelain identical)
 
 ==============================================================================
 S2e  THE GENERAL FORM, ON THIS SECTION
@@ -216,7 +187,7 @@ S2e  THE GENERAL FORM, ON THIS SECTION
       at HEAD, on this machine.
 
 ==============================================================================
-S2 TOTAL BAD: 1
+S2 TOTAL BAD: 0
 ==============================================================================
 
 EXTENT OF THAT NUMBER.  It counts (a) a discarded status that is

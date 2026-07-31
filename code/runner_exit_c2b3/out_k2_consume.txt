@@ -6,21 +6,92 @@ K2  IS THE STATUS CONSUMED?  per runner, per line, at bee07a1
 K2a  C2 -- EXTERNAL CALLERS that read a runner's exit status
 ==============================================================================
 
+  ANCHORS.  The runner classification above is a COMPARISON and is
+  taken at the pinned bee07a1.  This caller scan is a CENSUS and is taken
+  at HEAD, unpinned: a census must see the current world, and a caller
+  added after the pin is invisible to a pinned scan (mg-7522/OPEN 3).
+
   Only EXECUTABLE sources are searched -- `.py` and `.sh`.  A `.md` or a
   committed `out_*.txt` that names a runner is prose about a run, not a
   caller of one, and counting those would inflate the exposure with
   files that cannot read an exit status at all.  (Prose claims are not
   dropped, they are K3's subject.)  A line counts as an EXECUTION when
-  it both names a `run_all.sh` and carries an executing construct
-  (`subprocess.`, `sh <path>`, `./run_all.sh`, or a helper that does).
+  it carries an executing construct (`subprocess.`, `sh <path>`,
+  `./run_*.sh`, or a helper that does) AND NAMES A SHELL SCRIPT -- any
+  `*.sh`, which is the property; mg-70c7 replaced the two-name list
+  `(?:run_all|run_audit)\.sh` that stood here (mg-dee4/F5).
   It counts as CONSUMING when the status is then read -- `returncode`
   or `check=True` within the next 25 lines for Python, `set -e` with no
   guard on the line for sh.
 
-  caller                                             consumes? target tree
-  code/hodge_leverage_audit_835f/audit_a318_repair.py:590 YES       state_landing_control_2da3
-  code/branching_audit_2060/b0_repro.sh:10           YES       branching_locate_db09  <-- AFFECTED
-  code/species_sites_821e/p3_wiring.py:214           YES       species_repair_a4ef / species_remainder_f8fa / species_repair_6f61  <-- AFFECTED
+  caller                                             consumes? target script    target tree
+  code/branching_audit_2060/b0_repro.sh:10           no        run_all.sh       -
+  code/branching_audit_2060/run_all.sh:18            no        b0_repro.sh      -
+  code/branching_audit_321d/h3_setlevel.py:339       YES       c0_repro.sh      -
+  code/branching_audit_58da/g4_fleet.py:370          YES       c0_repro.sh      -
+  code/branching_audit_957f/j4_reproduce.py:7        no        run_all.sh       -
+  code/branching_audit_957f/j4_reproduce.py:30       no        run_all.sh       -
+  code/branching_audit_957f/j4_reproduce.py:43       no        run_all.sh       -
+  code/branching_audit_957f/j4_reproduce.py:60       YES       run_all.sh       -
+  code/branching_audit_957f/j4_reproduce.py:68       YES       run_all.sh       -
+  code/branching_audit_957f/j4_reproduce.py:70       YES       run_all.sh       -
+  code/branching_audit_957f/j4_reproduce.py:92       no        run_all.sh       -
+  code/branching_audit_957f/j4_reproduce.py:118      no        run_all.sh       -
+  code/branching_audit_957f/run_all.sh:33            no        run_all.sh       -
+  code/branching_audit_a218/c0_repro.sh:23           no        run_all.sh       -
+  code/branching_repair_76cc/r2_reproduce.py:69      no        run_all.sh       -
+  code/branching_repair_76cc/r2_reproduce.py:92      YES       run_all.sh       -
+  code/branching_repair_76cc/r4_doccheck.py:188      no        run_all.sh       -
+  code/branching_repair_76cc/r4_doccheck.py:278      YES       run_all.sh       -
+  code/branching_repair_7e58/k3_setlevel.py:236      YES       c0_repro.sh      -
+  code/hodge_leverage_audit_835f/audit_a318_repair.py:590 YES       run_all.sh       state_landing_control_2da3
+  code/hodge_leverage_audit_f922/audit_repair.py:553 YES       run_all.sh       -
+  code/runner_exit_c2b3/k2_consume.py:204            no        run_all.sh       -
+  code/runner_exit_c2b3/k2_consume.py:208            no        run_all.sh       -
+  code/runner_exit_c2b3/k2_consume.py:213            no        run_all.sh       -
+  code/runner_exit_c2b3/k2_consume.py:223            no        run_all.sh       -
+  code/runner_exit_c2b3/k2_consume.py:275            no        run_all.sh       -
+  code/runner_exit_c2b3/k2_consume.py:456            no        b0_repro.sh      -
+  code/runner_exit_c2b3/k2_consume.py:456            no        run_all.sh       -
+  code/runner_exit_c2b3/k3_retro.py:106              no        run_all.sh       -
+  code/runner_exit_c2b3/k3_retro.py:393              YES       run_all.sh       -
+  code/runner_exit_c2b3/k4_control.py:113            YES       run_all.sh       -
+  code/runner_exit_c2b3/selftestc2b3.py:122          no        run_all.sh       x_audit
+  code/runner_exit_c2b3/selftestc2b3.py:125          no        c0_repro.sh      -
+  code/runner_exit_c2b3/selftestc2b3.py:155          no        x.sh             -
+  code/runner_exit_c2b3/selftestc2b3.py:155          no        b0.sh            -
+  code/runner_exit_repair_7522/s4_unpin.py:19        no        run_all.sh       -
+  code/runner_exit_repair_7522/selftest7522.py:123   no        b.sh             -
+  code/runner_exit_repair_7522/selftest7522.py:250   YES       probe.sh         -
+  code/species_depth_audit_4700/kern4700.py:254      YES       run_all.sh       -
+  code/species_sites_821e/kern821e.py:171            YES       run_all.sh       -
+  code/state_control_audit_2216/claims_audit.py:105  YES       run_all.sh       -
+  code/state_control_audit_2216/claims_audit.py:291  no        run_all.sh       -
+  code/state_control_audit_2216/claims_audit.py:305  no        run_all.sh       -
+  code/branching_audit_2060/b0_repro.sh:10           YES       run_all.sh       branching_locate_db09  <-- AFFECTED
+  code/species_sites_821e/p3_wiring.py:214           YES       run_all.sh       species_repair_a4ef / species_remainder_f8fa / species_repair_6f61  <-- AFFECTED
+
+  BY TARGET BASENAME -- and whether the two-name rule mg-7522 left
+  behind could see it (mg-dee4/F5):
+
+    target basename       sites consuming   visible to `(?:run_all|run_audit)\.sh`?
+    run_all.sh               35        14   yes
+    c0_repro.sh               4         3   NO -- invisible to it
+    b0_repro.sh               2         0   NO -- invisible to it
+    b.sh                      1         0   NO -- invisible to it
+    b0.sh                     1         0   NO -- invisible to it
+    probe.sh                  1         1   NO -- invisible to it
+    x.sh                      1         0   NO -- invisible to it
+
+      executing sites naming a `*.sh`                 45
+      ...whose basename the two-name rule matched     35
+      ...outside it, across 6 distinct basenames      10
+      ...of those, READING the exit status             4
+      executing sites naming `run_audit.sh`            0
+
+  The last row is the name mg-7522 ADDED to the rule.  Widening a name
+  list is not making it a property, and the property is now stated at
+  the rule above rather than in a library one directory over.
 
   Read in full, the status-reading callers of an AFFECTED runner are:
 
@@ -37,7 +108,14 @@ K2a  C2 -- EXTERNAL CALLERS that read a runner's exit status
        biggest retroactive exposure in the arc.
 
   Every other caller found above targets a tree with no `| tee`
-  pipeline (the state_* trees), so no repair of theirs is at issue.
+  pipeline, so no repair of theirs is at issue.  mg-70c7 widened the
+  target rule from two names to the property, which is why that
+  sentence now covers 45 sites rather than the handful the name rule
+  returned; the AFFECTED set it is about did not move.
+
+  CHECKED, not asserted: sites whose target tree is AFFECTED   2
+      code/branching_audit_2060/b0_repro.sh:10  branching_locate_db09
+      code/species_sites_821e/p3_wiring.py:214  species_repair_a4ef / species_remainder_f8fa / species_repair_6f61
 
 ==============================================================================
 K2b  THE PER-LINE VERDICT

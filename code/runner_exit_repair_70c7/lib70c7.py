@@ -334,7 +334,7 @@ def figures(line):
         # anything.  Dropped for the same reason `s3_figure.py:154` is:
         # a census that lets a line number back a figure blesses the figure
         # it exists to catch.
-        if re.search(r"\blines?\s+$", before):
+        if re.search(r"\blines?\s+$", before, re.I):
             continue
         try:
             v = int(m.group(1).replace(",", ""))
@@ -378,9 +378,26 @@ def transcript_numbers(paths):
 
 
 def outs(tree):
-    """The committed `out_*.txt` of one tree, repo-relative and sorted."""
-    return sorted(p for p in git("ls-files", "--", "%s/out_*.txt" % tree)
-                  .splitlines() if p)
+    """The `out_*.txt` of one tree ON DISK, repo-relative and sorted.
+
+    ON DISK and not `git ls-files`, and the difference is a defect this file
+    had.  A tree's transcripts are untracked on the run that first produces
+    them, so a corpus built from the index is EMPTY on that run -- and an empty
+    corpus makes every figure UNBACKED, which reads as 108 findings about the
+    prose rather than one fact about the index.  The disk is what the probes
+    just wrote, and a transcript is a record of a run whether or not it has
+    been committed yet.
+
+    ORDERING NOTE, since it is a real limit: `run_all.sh` truncates each
+    transcript with `>` before its probe runs, so a probe reading the corpus
+    sees the CURRENT run's output for probes that already finished and the
+    PREVIOUS run's for those that have not.  A second consecutive run therefore
+    reads a complete corpus, and the committed transcripts are from such a run.
+    """
+    import glob
+    d = os.path.join(REPO, tree)
+    return sorted("%s/%s" % (tree, os.path.basename(p))
+                  for p in glob.glob(os.path.join(d, "out_*.txt")))
 
 
 # ---------------------------------------------------------------------------

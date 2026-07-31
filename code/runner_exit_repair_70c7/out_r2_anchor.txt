@@ -1,0 +1,94 @@
+==============================================================================
+R2  A NUMBER THAT MOVES BELONGS IN A TRANSCRIPT -- AS A CHECK
+==============================================================================
+
+==============================================================================
+R2a  THE FOUR ANCHORS, COMPUTED
+==============================================================================
+
+  The measurement is `git diff --name-only bee07a1 --`, which is what
+  `s4_unpin.changed_since(PINNED)` runs.  Four anchors, all four read
+  here rather than quoted:
+
+      the worktree, right now              381   MOVES -- grows with the arc
+      1ee1f1b, the repair                  257   fixed
+      1ee1f1b^, the commit before          240   fixed
+      `main` as it stands                  384   MOVES -- grows with the arc
+
+      the figure the document stated                154
+      mg-7522's own transcript printed              166
+
+  NO ANCHOR REPRODUCES IT, re-derived.  And two of the four move,
+  which is the reason the sentence now points at `out_s4_unpin.txt`
+  rather than carrying a number: the transcript records what the
+  tree was when the probe ran, and prose cannot.
+
+==============================================================================
+R2b  THE FIGURE CENSUS -- mg-7522's ARTIFACTS AGAINST ITS TRANSCRIPTS
+==============================================================================
+
+  mg-7522's four reader-facing artifacts:
+      transcripts in the corpus                     13
+      distinct figures they print                   87
+
+      QUOTED-IN-A-CORRECTION README.md:66  45, 45
+          **This paragraph used to read `45 of 45`**, which added 34 sit
+      QUOTED-IN-A-CORRECTION OneThird-RunnerExit-PopulationRepair.md:222  166
+          reproduces it** — `s4_unpin.py`'s own transcript printed 166 a
+      QUOTED-IN-A-CORRECTION OneThird-RunnerExit-PopulationRepair.md:223  257, 240
+          same measurement at `1ee1f1b` against the pin is 257 and at `1
+
+      figures examined                             179
+      quoted inside a correction of themselves       5
+      UNBACKED and undispositioned                   0
+
+  THE ONE THIS CENSUS EXISTS FOR.  Before mg-70c7 the document's line
+  151 read `154 changed files` and no transcript of that tree printed
+  154 as a figure.  It reads as a pointer now, and this census is what
+  keeps it one.
+
+  A DEFECT IN THIS CENSUS, RECORDED RATHER THAN SMOOTHED AWAY.  Its
+  first draft built the corpus by matching every number in the
+  transcript text.  Under that rule `154` came back BACKED -- by the
+  string `s3_figure.py:154` in `out_s5_self.txt`.  A LINE NUMBER was
+  backing a measurement, and the census would have blessed the exact
+  figure it was written to catch.  The corpus is now built with the
+  same `figures()` rule the claim side uses, line by line.
+
+==============================================================================
+R2c  THE SAME CENSUS, ON THIS TREE -- population defined by a path
+==============================================================================
+
+  THE CENSUS OF MY OWN ARTIFACTS IS IN `R6b`, NOT HERE, and the reason
+  is an ordering fact worth stating rather than a preference.
+  `run_all.sh` truncates each transcript with `>` before its probe
+  runs, so THIS probe cannot read `out_r2_anchor.txt` -- it is writing
+  it.  Every figure this section prints, including the four anchors
+  above, would come back UNBACKED for that reason and for no other.
+  `r6_self.py` runs last, when every other transcript of this run is
+  complete, so that is where the census of this tree's own prose
+  belongs.  Running it in both places would give this tree two
+  answers to one question, and the wrong one would be the loud one.
+
+      my reader-facing artifacts, censused in R6b          4
+          code/runner_exit_repair_70c7/README.md
+          code/runner_exit_repair_70c7/OUTCOMES.md
+          code/runner_exit_repair_70c7/PREDICTIONS.md
+          docs/repair-mg-70c7-grain-and-population.md
+
+      `PREDICTIONS.md` is excluded there and the reason is named: a
+      prediction is a figure written BEFORE the run, so a figure a
+      transcript could back would not be a prediction.
+
+==============================================================================
+R2 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts an anchor that reproduces 154, and a
+figure in a reader-facing artifact that no transcript of its own tree
+prints and that carries no disposition.  It ranges over mg-7522's four
+reader-facing artifacts and this tree's own, against the `out_*.txt` of
+each.  It does NOT range over mg-c2b3's artifacts -- `s3_figure.py` is
+their control -- and it does not check that a backed figure is backed
+BY THE RIGHT MEASUREMENT, which is the weak direction and is stated
+above rather than implied.
