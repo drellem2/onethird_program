@@ -1,0 +1,156 @@
+==========================================================================
+K4  THE CANCELLING PAIR -- THE INPUT THE RATIONALE NAMES
+==========================================================================
+
+The floor says: audit at least one thing no list here names, and say what was
+chosen.  Chosen: the sentence mg-76cc uses to justify the row it added.
+
+--------------------------------------------------------------------------
+(i) THE SENTENCE, ENUMERATED FROM THE TREE RATHER THAN QUOTED
+--------------------------------------------------------------------------
+   A claim written in four places is four claims.  Every copy is
+   found with `git grep`, so a copy this script did not remember is
+   still in the population.
+
+   THE CLAIM -- `changes that cancel would pass ...`:
+     code/branching_audit_58da/g1_provenance.py           line 42
+     code/branching_audit_58da/g1_provenance.py           line 257
+     code/branching_audit_58da/out_g1_provenance.txt      line 94
+     docs/repair-mg-76cc-kernel-half-and-five-outputs.md  line 109
+   in the COMMIT MESSAGE of 4755d029 : yes
+
+   4 place(s) in the tree, plus the commit message : 5 in all
+
+   AND WHAT IS NOT SCORED, named so that a reader can see the line
+   was drawn on purpose -- `a cancelling pair cannot pass`:
+     code/branching_repair_76cc/out_r1_kernel.txt         line 124
+     code/branching_repair_76cc/r1_kernel.py              line 376
+   That is a DIFFERENT sentence and it is TRUE: a cancelling pair
+   cannot get through section (v), because the two halves catch it.
+   Only the sentence about which ROW catches it is under test.
+
+
+--------------------------------------------------------------------------
+(ii) THE CANCELLING PAIR, BUILT
+--------------------------------------------------------------------------
+   Both bends refuse on zero occurrences and on many, so a bend that
+   silently did nothing cannot make the rows below say whatever they
+   like.  And the pair is shown to really cancel BEFORE it is used.
+
+   c1_branching.py : vertex dims one too SMALL  (25 byte(s) changed)
+   kern_a218.py    : dim L(n,p) one too BIG     (4 byte(s) changed)
+
+   the baseline -- c1 and its kernel both at 286d5030 : sha a8db5dbd4c758765, 125 lines
+
+--------------------------------------------------------------------------
+(iii) SECTION (v)'S THREE HALVES, ON THAT PAIR
+--------------------------------------------------------------------------
+   The same three (script, kernel) pairs g1's HALVES uses, with
+   HEAD carrying the cancelling pair.  Each is diffed against the
+   baseline exactly as g1 diffs it: sections (i)+(ii) byte for byte,
+   and c1's own 24 vertex sets parsed back out of them.
+
+     half moved to HEAD              baseline         moved            verdict
+     c1_branching.py (the script)   a8db5dbd4c758765 0c91a182221d5880 MOVED
+     kern_a218.py (its kernel)      a8db5dbd4c758765 cb329be9d6265c27 MOVED
+     both together (cancellation)   a8db5dbd4c758765 a8db5dbd4c758765 IDENTICAL
+
+   THE ROW NAMED `cancellation` IS THE ONE ROW A CANCELLING PAIR
+   PASSES.  The two halves it was added to backstop are the two that
+   catch it.
+
+     the sentence says the halves PASS and the together row is
+     what notices    : halves FIRE / together PASSES
+     measured        : c1 half MOVED, kern half MOVED, both together IDENTICAL
+     the sentence holds : NO
+
+   WHAT THE ROW IS ACTUALLY FOR, since the finding is against the
+   sentence and not against the row: a CONSPIRING pair -- each file's
+   change harmless on its own, the two together moving the measurement
+   -- is caught by `both together` and by neither half.  The row is
+   load-bearing.  Its reason is backwards.
+
+   AND WHAT THE HALVES COST.  On this input g1 books a finding per
+   moved half, each saying the 198 cells "have to be re-taken", while
+   its own `both together` row -- the only one that asks what the tree
+   as it stands actually measures -- prints IDENTICAL on the same run.
+   That is the grain error mg-7e58 was repairing, relocated from the
+   FILE to a half-moved tree that exists nowhere.  k1 (v) books it.
+
+   population: the 3 half rows of section (v), each evaluated on the one
+   cancelling pair built in (ii), against the same baseline g1 uses.
+
+--------------------------------------------------------------------------
+(iv) mg-76cc's OWN PREDICTIONS.md, WHICH NOTHING READS
+--------------------------------------------------------------------------
+   A prediction file is prose.  Its `Exit codes` table is read here --
+   the ROWS, not a list written in this script -- and both of its
+   columns are scored against the committed transcript of the script
+   each row names.  TOTAL BAD 0 means that script exited 0.
+
+   The `actual` column matters as much as the `predicted` one: an
+   `actual` that disagrees with the transcript is a record of a run
+   that did not happen the way it is written down.
+
+     script                predicted  written    transcript  agrees
+     selftest_76cc.py      0          0          exit 0 (TOTAL BAD 0) yes
+     r1_kernel.py          0          0          exit 0 (TOTAL BAD 0) yes
+     r2_reproduce.py       0          0          exit 0 (TOTAL BAD 0) yes
+     r3_prerepair.py       0          0          exit 0 (TOTAL BAD 0) yes
+     r4_doccheck.py        0          0          exit 0 (TOTAL BAD 0) yes
+
+   population: the 5 `.py` rows of PREDICTIONS.md's own exit-code
+   table -- read from the table, not listed here -- each against the
+   committed out_<script>.txt in the same directory.  The `run_all.sh
+   (worst)` row is excluded BY NAME: it has no transcript of its own.
+
+--------------------------------------------------------------------------
+(v) mg-76cc'S OWN FINDING READER, RUN UNMODIFIED ON A COMMITTED FILE
+--------------------------------------------------------------------------
+   Found by accident and kept, because a reader is a population and
+   this arc has already paid for two populations inflated by prose.
+
+   lib76cc.findings_of() takes every line containing the substring
+   `   FINDING: ` as one of the script's own findings.  A transcript
+   that QUOTES another script's finding at a deeper indentation
+   contains that substring too.  So the reader is run here UNMODIFIED,
+   against a file committed at HEAD, beside the count that file's own
+   trailer prints.
+
+     file                        trailer says  their reader  mine
+     out_g4_fleet.txt            2             3             2
+     out_g1_provenance.txt       0             0             0
+     out_g3_findings.txt         0             0             0
+     out_r1_kernel.txt           0             0             0
+     out_r3_prerepair.txt        0             0             0
+
+   files where their reader's count differs from the trailer the
+   file itself prints : 1 of 5
+      out_g4_fleet.txt -- trailer 2, reader 3
+
+   population: the 5 committed transcripts above -- 3 from
+   code/branching_audit_58da/ and 2 from
+   code/branching_repair_76cc/ -- each read by mg-76cc's reader
+   unmodified and by this one, against the count the file itself
+   prints.  Demonstrated at HEAD, where the defect is present.
+
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   THE CHOSEN THING: the rationale mg-76cc gives for the row it added.
+
+   It is checkable because it names an input, and the input can be
+   built.  Built, it says the opposite of the sentence: a cancelling
+   pair MOVES both half rows and leaves `both together` IDENTICAL.
+
+   The row survives the finding; the sentence does not.  And the two
+   findings the halves book on that input assert that 198 cells must be
+   re-taken while the row that measures the tree as it stands says they
+   need not be.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, c1 run and source read this script performs, plus the requirement that each bend really change the file it names and that the sentence under test really be in the tree
+FINDINGS: 2, population: the 3 half-rows of section (v) evaluated on a cancelling pair, the rationale sentence scored against them wherever it is written, and every predicted exit code in mg-76cc's PREDICTIONS.md against the transcript it names
+   FINDING: the rationale mg-76cc gives for the `both together` row is INVERTED, in 5 place(s) -- g1's docstring, g1's printed text, the repair's document and the commit message of 4755d029.  A pair of changes that cancel MOVES both half rows and leaves `both together` IDENTICAL: the row named `cancellation` is the only one of the three that a cancelling pair passes, and the two halves it was added to backstop are the two that catch it.  Measured above on a pair built for the purpose, not argued
+   FINDING: mg-76cc's own findings_of() over-counts on 1 of the 5 committed transcripts read here (out_g4_fleet.txt trailer 2 vs reader 3): it matches the substring `   FINDING: `, so a finding QUOTED from a nested run at deeper indentation is counted as the outer script's own.  r3 uses this reader for its `names kern_a218.py` column, which is the column the whole OPEN 1 verdict turns on -- it happens not to bite there because g1 quotes no nested transcript, so this is a live defect with no live consequence rather than a wrong answer
+TOTAL BAD: 2

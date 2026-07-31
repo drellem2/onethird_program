@@ -1,0 +1,155 @@
+==========================================================================
+K2  OPEN 2 -- G-3, COUNTED ON FIVE RATHER THAN READ OFF A TABLE
+==========================================================================
+
+The claim under audit is mg-76cc's: 5 of 5 committed outputs reproduce under
+a named normalisation, with 0 lines unexplained.  Counted here, on the tree
+as it stands on this branch.
+
+--------------------------------------------------------------------------
+(i) THE POPULATION, ENUMERATED FROM run_all.sh's OWN SOURCE
+--------------------------------------------------------------------------
+   Every redirection the runner makes, read out of the runner.  A
+   written list of five cannot notice a sixth.
+
+   the redirection in the runner's `run` function:
+      python3 -u "$1" > "out_${1%.*}.txt" 2>&1
+
+   the scripts it invokes, and the output each writes:
+      selftest_58da.py       -> out_selftest_58da.txt
+      g1_provenance.py       -> out_g1_provenance.txt
+      g2_redo.py             -> out_g2_redo.txt
+      g3_findings.py         -> out_g3_findings.txt
+      g4_fleet.py            -> out_g4_fleet.txt
+
+   5 scripts, 5 outputs
+   against mg-76cc's written list of five: 0 not on it, 0 on it and not written
+
+--------------------------------------------------------------------------
+(ii) run_all.sh IN A CLONE, AND WHAT REPRODUCES BYTE FOR BYTE
+--------------------------------------------------------------------------
+   In a clone, because the runner redirects INTO the very files under
+   test: run it in place and the record and the re-run are the same
+   bytes for the reason that they were written by the same command.
+   Nothing is committed in the clone, so its HEAD is this branch's HEAD
+   and the fresh transcripts name a revision that exists outside a temp
+   directory.
+
+   this branch's HEAD  : 4755d0292fc9
+   the clone's HEAD    : 4755d0292fc9
+     docs+repair: THE KERNEL HALF OF THE PREDICATE IS BACK AND G-3 IS SHUT ON FIVE — bend kern_
+
+   run_all.sh exit 1
+     (g4_fleet.py is predicted by the runner's own header to exit 1 --
+      mg-d330's second finding, booked OPEN by mg-58da and not closed here)
+
+   file                        committed  re-run  differing  byte for
+                               lines      lines   lines      byte
+     out_selftest_58da.txt      7          7       0          YES
+     out_g1_provenance.txt      166        166     5          no
+     out_g2_redo.txt            116        116     1          no
+     out_g3_findings.txt        147        147     1          no
+     out_g4_fleet.txt           226        226     2          no
+
+   1 of 5 reproduce byte for byte, over 9 differing lines in all.
+   Population: the 5 outputs run_all.sh's own source says it writes.
+
+--------------------------------------------------------------------------
+(iii) THE ONE REVISION, AND EVERY LINE IT EXPLAINS
+--------------------------------------------------------------------------
+   The record names its own revision on one line of
+   out_g1_provenance.txt.  That token, its 12- and 8-character forms and
+   the subject g1 prints beside it are replaced by placeholders on the
+   RECORD side; the clone's own HEAD and subject are replaced on the
+   RE-RUN side.  Nothing else is touched.
+
+   the committed record names : e006581c2e11
+   the fresh run names        : 4755d0292fc9
+   the clone's actual HEAD    : 4755d0292fc9
+
+   record's subject  : docs+audit: independent audit of the mg-7e58 repair (4372fae) — THE ATTRIBUTION 
+   HEAD's subject    : docs+repair: THE KERNEL HALF OF THE PREDICATE IS BACK AND G-3 IS SHUT ON FIVE — 
+
+   every differing line, and whether the substitution explains it:
+
+     out_g1_provenance.txt      line 16   revision substitution
+     out_g1_provenance.txt      line 17   revision substitution
+     out_g1_provenance.txt      line 27   revision substitution
+     out_g1_provenance.txt      line 129  revision substitution
+     out_g1_provenance.txt      line 131  revision substitution
+     out_g2_redo.txt            line 100  revision substitution
+     out_g3_findings.txt        line 6    revision substitution
+     out_g4_fleet.txt           line 39   revision substitution
+     out_g4_fleet.txt           line 47   revision substitution
+
+   file                        substitutions  substitutions  lines
+                               (committed)    (re-run)       differing
+     out_selftest_58da.txt      0              0              0
+     out_g1_provenance.txt      5              5              0
+     out_g2_redo.txt            1              1              0
+     out_g3_findings.txt        1              1              0
+     out_g4_fleet.txt           3              3              0
+
+   REPRODUCE UNDER THE NAMED NORMALISATION : 5 of 5, 0 lines unexplained.
+
+   AND THE SUBSTITUTION ACTS AT THE SAME POSITIONS ON BOTH SIDES.
+   A substitution that fires on one side only absorbs a difference
+   instead of explaining it, and a count of surviving lines cannot
+   tell those apart.
+     files where the two sides' substitution positions differ : 0
+
+--------------------------------------------------------------------------
+(iv) WHERE THE RECORD NOW SITS -- THE ROW mg-76cc MEASURED AS 0
+--------------------------------------------------------------------------
+   the committed record's revision : e006581c2e11
+     an ancestor of this branch    : yes
+     commits from it to this HEAD  : 6
+
+   mg-76cc measured this row as 0 and wrote beside it that "1 is
+   the freshest a committed record can ever be".  That was true of the
+   worktree it ran in, whose HEAD WAS the record's revision.  On the
+   branch the record landed on it is 6: 6 commit(s) from other tickets
+   landed between the run and the commit.  The row is not gated by
+   mg-76cc and is not gated here either -- what it bounds is how much
+   the tree may have moved under a transcript that still normalises
+   clean, and it is printed because a figure of 0 that is really 6 is
+   the difference between "written just now" and "written and then
+   overtaken".
+
+--------------------------------------------------------------------------
+(v) THE NORMALISATION IS NOT A BLANKET -- CONTROLS
+--------------------------------------------------------------------------
+   A comparison that forgives everything reproduces everything.  Two
+   perturbations of the COMMITTED side, each of which must still be
+   caught after normalisation -- and one of the REVISION itself, which
+   must NOT be, because that is what the normalisation is for.
+
+   control                                             applied  survives  must
+     a digit changed in out_g3_findings.txt             yes      YES       survive
+     a whole line replaced in out_g4_fleet.txt          yes      YES       survive
+     the record made to name ANOTHER REAL REVISION, sub yes      no        absorb
+
+   population: the 3 controls above -- 2 that must survive the
+   normalisation and 1 that must be absorbed by it.  The third is
+   NOT a defect being certified: it is the residual weakness r2 names
+   in its own verdict, shown rather than asserted.
+
+--------------------------------------------------------------------------
+VERDICT ON OPEN 2
+--------------------------------------------------------------------------
+   COUNTED, NOT READ OFF A TABLE.
+
+     1 of 5 reproduce byte for byte.
+     5 of 5 reproduce under the one-revision normalisation, with 0
+     lines unexplained.
+
+   The population is the 5 outputs run_all.sh's own source says it
+   writes, and it agrees with mg-76cc's written list.  What the gate
+   does NOT establish is unchanged and is not restated as if it did:
+   the revision token itself is not reproduced, and the record now sits
+   behind this HEAD rather than at it.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the clone, the run_all.sh invocation, every transcript read and every normalisation this script performs, plus the requirement that the output population be enumerable from the runner's own source
+FINDINGS: 0, population: for each output run_all.sh writes: that it reproduces byte for byte or that every line it differs on is explained by the one revision substitution, that the normalisation acts at the same positions on both sides, and that the record's revision is an ancestor of this HEAD -- plus the 2 controls in (v)
+TOTAL BAD: 0

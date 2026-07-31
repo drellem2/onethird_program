@@ -1,0 +1,126 @@
+==========================================================================
+K3  THE ATTRIBUTION AND THE PROBES, RE-TAKEN AFTER THE REPAIR
+==========================================================================
+
+A repair that restores one half of a predicate is a way to break the other.
+mg-76cc changed g1 and lib58da; g4 shares lib58da with it.
+
+--------------------------------------------------------------------------
+(i) THE GROUND TRUTH, DERIVED TWICE, OVER 286d5030..HEAD
+--------------------------------------------------------------------------
+   Route one asks the LOG about a path.  Route two asks a COMMIT what
+   it did.  Different questions, same answer, and the answer is used
+   only where both give it.  The range ends at HEAD and not at
+   mg-957f's own HEAD: a pinned scan stops being a measurement the
+   moment anything lands after it.
+
+   range: 286d5030..4755d029
+     left  286d5030  docs+audit: independent audit of the mg-db09 repair (mg-
+     right 4755d029  docs+repair: THE KERNEL HALF OF THE PREDICATE IS BACK AN
+
+   route one -- git log <range> -- <path>:
+     c1_branching.py          673b4c00
+     c2_vertexsets.py         ed9cde49
+     c3_withdrawal.py         NONE
+     c4_seam.py               NONE
+     c5_record.py             NONE
+
+   route two -- git show --name-only, per commit touching the directory:
+     673b4c00   c1_branching.py
+     ed9cde49   c2_vertexsets.py
+
+   THE TWO ROUTES AGREE at 5 of 5 members.
+   and the kernel and the target, for the same range:
+     kern_a218.py             NONE
+     out_t1_tl.txt            ed9cde49
+
+--------------------------------------------------------------------------
+(ii) g4 AND g1, RUN LIVE
+--------------------------------------------------------------------------
+     g4  exit 1  SELF 0  FINDINGS 2
+     g1  exit 0  SELF 0  FINDINGS 0
+
+   mg-957f read g4 at exit 1 with 0/2 and g1 at exit 0 with 0/0.  A
+   repair that moved either without saying so is a weakening whatever
+   else it fixed:
+     g4 unchanged from mg-957f's reading : yes
+     g1 unchanged from mg-957f's reading : yes
+
+--------------------------------------------------------------------------
+(iii) EVERY ATTRIBUTION THEY PRINT, ENUMERATED AND SCORED
+--------------------------------------------------------------------------
+
+   ATTRIBUTION                                        VERDICT  why
+   --------------------------------------------------------------------
+     g4: c1_branching.py <- 673b4c00                  AGREES   git log here: 673b4c00
+     g4: c2_vertexsets.py <- ed9cde49                 AGREES   git log here: ed9cde49
+     g4: c3_withdrawal.py <- nothing                  AGREES   git log here: nothing
+     g4: c4_seam.py <- nothing                        AGREES   git log here: nothing
+     g4: c5_record.py <- nothing                      AGREES   git log here: nothing
+     g4: 673b4c00 -> c1_branching.py                  AGREES   --name-only here: c1_branching.py
+     g4: ed9cde49 -> c2_vertexsets.py                 AGREES   --name-only here: c2_vertexsets.py
+     g4: an uncommitted edit -> none                  AGREES   nothing is uncommitted in a clean tree
+     g4: 673b4c00 is mg-58da                          AGREES   its own subject ends ' (mg-58da)'
+     g4: ed9cde49 is mg-13b2                          AGREES   its own subject ends ' (mg-13b2)'
+     g4: ed9cde4 (mg-13b2) -> 1 (c2_vertexsets.py)    AGREES   derived here: 1 (c2_vertexsets.py)
+     g4: mg-58da -> 1 (c1_branching.py)               AGREES   derived here: 1 (c1_branching.py)
+     g4: an uncommitted edit -> 0 (none)              AGREES   derived here: 0 (none)
+     g1: c1_branching.py <- 673b4c00                  AGREES   git log here: 673b4c00
+     g1: kern_a218.py <- NONE                         AGREES   git log here: NONE
+     g1: out_t1_tl.txt <- ed9cde49                    AGREES   git log here: ed9cde49
+     g1: c1_branching.py is CHANGED                   AGREES   sha256 at both revisions here: CHANGED
+     g1: kern_a218.py is SAME                         AGREES   sha256 at both revisions here: SAME
+
+   ATTRIBUTIONS SCORED: 18 of 18 agree.
+   Population: g4's 5 member rows, 3 commit rows, 2 ticket labels
+   and 3 summary lines; g1's 3 commits-touching rows and 2 file-sha
+   rows -- enumerated from THEIR OWN OUTPUT, not from a list here.
+
+   mg-957f scored 17 and 18 are scored here.  The difference is NAMED
+   rather than reconciled: mg-957f scored g4's `(none) uncommitted`
+   entry once, as a summary line; here it is scored twice, as the
+   ATTRIBUTION block's own `touches: none` row as well.  Both readings
+   are of the same two printed lines and neither is a claim the other
+   does not cover.
+
+--------------------------------------------------------------------------
+(iv) g1's DIRECTION PROBES -- 3 OF 3 MUST STILL BE THERE
+--------------------------------------------------------------------------
+   mg-957f stated g1's disposition at 3 of 3 probes.  mg-76cc grew
+   that population to 5.  A population that grows is not evidence that
+   the original three survived: they are looked for BY NAME.
+
+   5 probe rows in g1's live output:
+     c1 @ 4755d029 (unmodified -- NULL PROBE)         silent     silent   HIT
+     kern @ 4755d029 (unmodified -- NULL PROBE)       silent     silent   HIT
+     c1 @ HEAD with the vertex DIMENSIONS off by one  FIRES      FIRES    HIT
+     c1 @ HEAD with a line added past section (iii)   silent     silent   HIT
+     kern @ HEAD with dim L(n,p) off by one           FIRES      FIRES    HIT
+
+     c1 @ (unmodified -- NULL PROBE)                      present and HIT
+     c1 @ HEAD with the vertex DIMENSIONS off by one      present and HIT
+     c1 @ HEAD with a line added past section (iii)       present and HIT
+
+   the three probes mg-957f scored, still present : 3 of 3
+   the whole probe population at HEAD             : 5 of 5 HIT
+
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   NOTHING mg-957f CONFIRMED IS WEAKER HERE.
+
+     attributions scored          : 18 of 18 agree, over 286d5030..HEAD
+     the two derivation routes    : agree at 5 of 5 members
+     g4                           : exit 1, 0/2 -- as mg-957f read it
+     g1                           : exit 0, 0/0 -- as mg-957f read it
+     mg-957f's 3 probes           : 3 of 3 present, by name
+     g1's probe population at HEAD: 5 of 5 HIT
+
+   The range is 286d5030..HEAD and not mg-957f's own HEAD, so a commit
+   that landed after that audit is inside this population rather than
+   behind it.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read and subprocess run this script performs, plus the requirement that each block it scores be FOUND in the output it parses -- a block this script could not locate is a fact about this script and is never scored as agreement
+FINDINGS: 0, population: every attribution g4 and g1 print, each against a ground truth derived here twice over 286d5030..HEAD; g1's direction probes; and the exit code and totals of both scripts
+TOTAL BAD: 0

@@ -1,0 +1,84 @@
+==========================================================================
+SELFTEST  libe34a -- the apparatus for mg-e34a
+==========================================================================
+
+--------------------------------------------------------------------------
+(1) THE REVISIONS ARE DERIVED, AND THEY RESOLVE
+--------------------------------------------------------------------------
+   ok   REV_A218 read out of lib58da.py's own source is a 40-char sha
+   ok   read_literal is stable on a second call
+   ok   read_literal RAISES when the name is absent
+   ok   REPAIR_REV -- the last commit touching g1_provenance.py -- resolves
+   ok   PRE_REV is exactly the first parent of REPAIR_REV
+   ok   g1 at PRE_REV really differs from g1 here -- there is a predicate to run
+   ok   PRE_REV is an ancestor of HEAD
+   ok   REV_A218 is an ancestor of HEAD
+   ok   is_ancestor is not symmetric -- it is answering the question asked
+   ok   distance(PRE_REV, HEAD) is at least 1
+   ok   distance from a revision to itself is 0
+   ok   PRE_7E58_REV is an ancestor of PRE_REV -- the order is the log's order
+
+--------------------------------------------------------------------------
+(2) THE TRANSCRIPT READER, ON TRANSCRIPTS BUILT HERE
+--------------------------------------------------------------------------
+   ok   trailer reads (1, 2) off the trailer lines
+   ok   the finding reader counts 2 -- the nested six-space quote is NOT one
+   ok   the self-error reader counts 1
+   ok   the trailer's counts agree with the lines it lists
+   ok   a trailer saying 3 over 2 listed lines is caught
+   ok   a transcript with no trailer reads (None, None), which is not (0, 0)
+   ok   a FINDING line BEFORE the trailer is not counted -- position matters too
+   ok   names_files reports the one file a finding names
+   ok   names_files reports nothing when a finding names nothing
+   ok   the leading integer is read and the rest of the line is not
+   ok   a line with no leading integer reads None, not 0
+
+--------------------------------------------------------------------------
+(3) THE BENDS REALLY BEND, AND REFUSE WHEN THEY CANNOT
+--------------------------------------------------------------------------
+   ok   bend_c1_up changes the file it is given
+   ok   bend_c1_down changes the file it is given
+   ok   bend_kern_up changes the file it is given
+   ok   comment_c1 changes the file it is given
+   ok   comment_kern changes the file it is given
+   ok   touch_c1_compare changes the file it is given
+   ok   replace_once REFUSES when the anchor occurs many times
+   ok   replace_once REFUSES when the anchor occurs zero times
+   ok   bending an already-bent kernel REFUSES rather than double-bending
+
+--------------------------------------------------------------------------
+(4) run_c1 TAKES THE SCRIPT AND THE KERNEL AS TWO SOURCES
+--------------------------------------------------------------------------
+   ok   c1's own vertex sets parse back as 24 cells
+   ok   every one of the 24 parsed cells is non-empty
+   ok   the vertex reader returns {} on an absent form, not a partial parse
+   ok   bending ONLY the kernel moves the measurement -- the kernel argument is live
+   ok   bending ONLY the script moves the measurement -- the script argument is live
+   ok   the same two sources twice give the same measurement -- the run is deterministic
+
+--------------------------------------------------------------------------
+(5) THE CANCELLING PAIR REALLY CANCELS -- k4's FINDING RESTS ON IT
+--------------------------------------------------------------------------
+   ok   kern +1 with c1 -1 restores the measurement EXACTLY, against the unbent baseline
+   ok   and c1's own 24 vertex cells come back equal, cell by cell
+   ok   and EACH half of that pair on its own does move it (the c1 half)
+   ok   and EACH half of that pair on its own does move it (the kernel half)
+
+--------------------------------------------------------------------------
+(6) CLONES AND PINNED PREDICATES
+--------------------------------------------------------------------------
+   ok   clone(carry=False, commit=False) has EXACTLY this branch's HEAD
+   ok   the clone carries g1_provenance.py
+   ok   the pinned g1's import is repointed at the pinned library
+   ok   and no unpatched `import lib58da as L` is left in it
+   ok   the substitution happened exactly once
+   ok   the pinned lib58da travels with it, under a name of its own
+   ok   and it is byte-identical to lib58da at that revision
+   ok   g1_provenance.py itself is NEVER modified in the clone
+   ok   destroy() removes the clone
+   ok   a mutating clone COMMITS, so its HEAD is a new revision
+   ok   and the mutation is visible to `git show HEAD:` -- not left in the working tree, where g1 would never see it
+   ok   and it is the ONLY change to that file
+
+--------------------------------------------------------------------------
+SELFTEST: 54 assertions, 0 failed
