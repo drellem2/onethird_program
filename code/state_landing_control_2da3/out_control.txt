@@ -216,10 +216,15 @@ STATE.md in the working tree: 186710 bytes, 183508 characters, 386 lines
   [pass] the delegation surface is exactly what is DECLARED
          cited by certified regions: ['docs/state-history/attempt-mg-276d.md']
          declared in DELEGATED: ['docs/state-history/attempt-mg-276d.md']
+  [pass] the PRESENTATION table declares exactly the DELEGATED target files
+         declared in DELEGATED_PRESENTATION: ['docs/state-history/attempt-mg-276d.md']
+         declared in DELEGATED: ['docs/state-history/attempt-mg-276d.md']
   docs/state-history/attempt-mg-276d.md
          cited by cell.tree; 5 section(s) cited by name: H1, H2, H3, H4, H5
   [pass] docs/state-history/attempt-mg-276d.md: the section names cited are the section names declared
          cited ['H1', 'H2', 'H3', 'H4', 'H5']; declared ['H1', 'H2', 'H3', 'H4', 'H5']
+  [pass] docs/state-history/attempt-mg-276d.md: the sections with a PRESENTATION record are the sections declared
+         records declared ['H1', 'H2', 'H3', 'H4', 'H5']; delegated ['H1', 'H2', 'H3', 'H4', 'H5']
   [pass] docs/state-history/attempt-mg-276d.md H1
          lines 18-37; 3473 characters, 3530 bytes after N
          certified sha256 3c8e966f7412ed8a7d9dd522fce40071283abb555477b3b5071225b8ecffda64
@@ -361,10 +366,15 @@ STATE.md in the working tree: 186710 bytes, 183508 characters, 386 lines
 RESULT: PASS — every check above read the working tree and every one held,
         including 11 content digests and the same number of
         PRESENTATION RECORDS: the certified bytes are the certified bytes,
-        AND a reader is still shown them, in the same place, as prose.
+        and each region's PRESENTATION STATE is still the singleton
+        `rendered` under the same heading, at the same ordinal.
         The same two questions are answered for 5 DELEGATED sections
-        of the file the certified text points at — a reader who follows a
-        citation is shown the section it names (mg-0049).
+        of the file the certified text points at (mg-0049).
+        THAT IS NOT 'A READER IS SHOWN THEM', which is what these three lines
+        said until mg-a74f: mg-16eb's B3 is a page a reader is shown nothing
+        of on which every one of these states is `rendered`.  What a reader
+        is shown is measured, as far as a static instrument can, by
+        code/state_delegation_repair_a74f/visible_a74f.py.
         Coverage is stated in this file's header and in COVERAGE.md: what
         is digested, what is not, and what the presentation model cannot
         see.  This instrument CAN fail; negative_control.py makes it fail.
