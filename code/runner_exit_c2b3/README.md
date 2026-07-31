@@ -18,6 +18,16 @@ therefore reports `tee`'s status, which is 0 whenever tee could write the file.
 | `k3_retro.py` | **which past "clean run" claims depended on an affected runner's exit code**, and what settles each |
 | `k4_control.py` | the positive control: a step is made to fail and the **runner's** exit code is read, on the pre-repair text and on the post-repair text |
 
+**Transcript provenance (mg-7522).** Every `out_*.txt` in this directory is the
+record of the run that produced commit `52aeaf4`, at that revision. mg-7522
+repaired `libc2b3.PIPEFAIL_RE`, added three rows to `selftestc2b3.py`, and
+unpinned `k2_consume.py`'s caller scan — and **did not regenerate these
+transcripts**. A transcript is a record of a run at a time; rewriting one would
+destroy mg-05eb's citations of it and would not be reproducible in any case, the
+arc having grown from 64 runners to 71 since. Where a transcript and this
+directory's prose now disagree, the disagreement is named in the prose and the
+corrected reading is in `code/runner_exit_repair_7522/out_s3_figure.txt`.
+
 ## The numbers
 
 | | ticket | re-derived |
@@ -25,7 +35,26 @@ therefore reports `tee`'s status, which is 0 whenever tee could write the file.
 | `run_all.sh` in the tree | 63 | **64** — `code/hodge_leverage_repair_8eca/` landed in `bee07a1`, after the ticket |
 | matching the bare grep `\| *tee` | 23 | **23** — confirmed exactly |
 | containing a **real `\| tee` pipeline** | — | **17** |
-| setting `pipefail` | 1 | **1** — confirmed exactly |
+| setting `pipefail` | 1 | **1** — re-derived by mg-7522; `code/state_restructure_34bf/` writes `set -euo pipefail` |
+
+**mg-7522, on the `pipefail` row.** This row used to read *"1 — confirmed
+exactly"*, and `out_k1_census.txt` in this directory prints `ticket 1 /
+re-derived 0 / DIFFERS` for the same number. The ticket was right and the
+instrument was wrong: `libc2b3.PIPEFAIL_RE` matched only `set -o pipefail`,
+while the one runner that sets the option writes `set -euo pipefail`. The regex
+is repaired; the transcript is left as the record of the run that produced this
+commit, and the corrected reading is in
+`code/runner_exit_repair_7522/out_s3_figure.txt`. The general form is worth more
+than the figure: **"confirmed exactly", "verified" and "byte-identical" mark
+where the author stopped looking, so they are a reason to check first.**
+
+**mg-7522, on the population of this whole table.** Every count here is over
+files *named* `run_all.sh`. That is a naming convention, not a property.
+`code/face_geometry_audit_f1b2/run_audit.sh` and
+`code/face_geometry_audit_fcf1/run_audit.sh` carried eight `| tee` pipelines
+between them and were still swallowing at `HEAD` after this sweep. Over every
+tracked `*.sh` the figures are **19 files / 42 pipelines**, not 17 / 34. See
+`code/runner_exit_repair_7522/`.
 
 **The 23 and the 17 differ by six, and the six are the repaired trees.** Their
 header comments say *"NOT `| tee`"* and a bare grep counts the sentence.

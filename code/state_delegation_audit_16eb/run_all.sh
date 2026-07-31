@@ -31,12 +31,32 @@ cd "$(git rev-parse --show-toplevel)"
 echo "### 1. THE THREE PREDECESSOR DIRECTORIES ARE UNMODIFIED BY mg-0049 — proof, not"
 echo "###    assertion.  A battery edited by the party under test is not a control, and"
 echo "###    this audit checks it with git rather than by reading the committed outputs."
+# mg-7522: these two counts used to be `git diff ... | wc -c | tr -d ' '`.  A
+# pipeline's exit status in POSIX sh is its LAST command's, so `git diff`'s
+# status was thrown away: a `git diff` that failed (an unreachable base ref in
+# a shallow clone, say) produced an empty stream, `wc -c` reported 0, and this
+# section printed "-> 0 bytes" — the claim "UNMODIFIED — proof, not assertion"
+# read off a command that never ran.  `git diff` now redirects and has its own
+# status read; the byte counts are unchanged because `wc -c < FILE` counts the
+# same bytes the pipeline did.
+#
+# NEITHER OF mg-c2b3'S RULES NAMED THIS LINE.  Its population was files named
+# `run_all.sh` (this one is) and its shape was `| tee` (this one is not), so a
+# sweep keyed on either missed it.  The PROPERTY is "a pipeline whose status is
+# consumed and whose discarded stage can fail", and mg-7522 defines the
+# population that way.
+D7522=$(mktemp)
+trap 'rm -f "$D7522"' EXIT
 for pair in "a4aeeb9 code/state_layer_audit_218d" \
             "3a80d99 code/state_delegation_audit_5644" \
             "2a29f30 code/state_delegation_repair_bee1"; do
     base=${pair%% *}; dir=${pair#* }
-    n=$(git diff "$base..HEAD" -- "$dir" | wc -c | tr -d ' ')
-    nmd=$(git diff "$base..HEAD" -- "$dir" ':!*.md' | wc -c | tr -d ' ')
+    git diff "$base..HEAD" -- "$dir" > "$D7522" || {
+        echo "    git diff $base..HEAD -- $dir/ FAILED"; exit 1; }
+    n=$(( $(wc -c < "$D7522") ))
+    git diff "$base..HEAD" -- "$dir" ':!*.md' > "$D7522" || {
+        echo "    git diff $base..HEAD -- $dir/ ':!*.md' FAILED"; exit 1; }
+    nmd=$(( $(wc -c < "$D7522") ))
     echo "    git diff $base..HEAD -- $dir/            -> $n bytes"
     echo "    git diff $base..HEAD -- $dir/ ':!*.md'   -> $nmd bytes  (executable content)"
 done

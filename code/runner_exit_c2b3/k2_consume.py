@@ -85,6 +85,29 @@ affected = [r for r in runners if L.tee_pipelines(srcs[r])]
 # ---------------------------------------------------------------------------
 hdr("K2a  C2 -- EXTERNAL CALLERS that read a runner's exit status")
 
+# mg-7522 / OPEN 3.  THE ANCHOR OF A CENSUS IS NOT THE ANCHOR OF A COMPARISON.
+#
+#   A PINNED baseline is CORRECT for COMPARING and BLIND for ENUMERATING.
+#
+# Everything else in this file is a COMPARISON -- it classifies the runner text
+# as it stood at REF, because after the repair there is nothing left to
+# classify (mg-821e's own finding, and the pin is the right fix for it).  This
+# block is not a comparison.  It is a CENSUS: it asks "what, in the world,
+# reads a runner's exit status".  Run at REF it could only ever see callers
+# that existed at REF, and `code/species_depth_audit_4700/` -- which executes
+# three affected runners twenty-one times and scores them on `rc == 0` at eight
+# sites -- landed in 5c16f5c, AFTER the pin.  It was therefore outside the
+# enumeration by the choice of anchor, not by any failure of the rule.
+#
+# So the file list and the file bodies below come from HEAD, unpinned, while
+# `affected` above stays at REF.  The two uses are named where they meet.
+CALLER_REF = None          # None == the current world.  Do not pin this.
+
+print("  ANCHORS.  The runner classification above is a COMPARISON and is")
+print("  taken at the pinned %s.  This caller scan is a CENSUS and is taken" % REF)
+print("  at HEAD, unpinned: a census must see the current world, and a caller")
+print("  added after the pin is invisible to a pinned scan (mg-7522/OPEN 3).")
+print()
 print("  Only EXECUTABLE sources are searched -- `.py` and `.sh`.  A `.md` or a")
 print("  committed `out_*.txt` that names a runner is prose about a run, not a")
 print("  caller of one, and counting those would inflate the exposure with")
@@ -101,7 +124,7 @@ print()
 # lookbehind is what stops the string "X3 in species_7d75/run_all.sh " from
 # being read as an invocation.  That false positive was in the first draft of
 # this table and is the reason the rule is written this way.
-EXEC = re.compile(r"subprocess\.|(?<![\w.])sh\s+[\"'./$]|\./run_all\.sh"
+EXEC = re.compile(r"subprocess\.|(?<![\w.])sh\s+[\"'./$]|\./run_\w*\.sh"
                   r"|run_runner\(")
 # `git show <ref>:<path>/run_all.sh` READS a runner; it does not run one.
 NOT_EXEC = re.compile(r"[\"']git[\"']|git show|git -C|ls-tree")
@@ -109,19 +132,26 @@ NOT_EXEC = re.compile(r"[\"']git[\"']|git show|git -C|ls-tree")
 READ = re.compile(r"returncode|check\s*=\s*True")
 
 CALLERS = []
-out = subprocess.run(["git", "-C", L.REPO, "ls-tree", "-r", "--name-only",
-                      REF], capture_output=True, text=True).stdout
-files = [f for f in out.split("\n")
-         if (f.endswith(".py") or f.endswith(".sh"))
-         and not f.endswith("/run_all.sh")]
+# mg-7522: unpinned -- `git ls-files` is the current world.  The former call
+# was `git ls-tree -r --name-only REF`, which is the pinned form and is the
+# defect this block carried.
+out = subprocess.run(["git", "-C", L.REPO, "ls-files", "--", "*.py", "*.sh"],
+                     capture_output=True, text=True).stdout
+# mg-7522: `and not f.endswith("/run_all.sh")` used to be part of this filter.
+# It excluded every runner from being a CALLER by its NAME, and a runner that
+# invokes another runner is a caller like any other.  The exclusion was a
+# second name rule in the same scan as the pin, and mg-05eb reported the hole
+# it opened as EMPTY -- 3 executions invisible to it, none of them targeting an
+# affected runner.  Empty is a measurement, not a licence to keep the rule.
+files = [f for f in out.split("\n") if f.endswith(".py") or f.endswith(".sh")]
 for f in files:
     try:
-        src = L.read(f, REF)
-    except subprocess.CalledProcessError:
+        src = L.read(f, CALLER_REF)
+    except (subprocess.CalledProcessError, OSError):
         continue
     lines = src.split("\n")
     for i, line in enumerate(lines, 1):
-        m = re.search(r"([\w./]*?([\w]+)/run_all\.sh)", line)
+        m = re.search(r"([\w./]*?([\w]+)/(?:run_all|run_audit)\.sh)", line)
         if not m or not EXEC.search(line) or NOT_EXEC.search(line):
             continue
         if "%s" in m.group(1):        # a path built from a variable
@@ -140,6 +170,17 @@ for f in files:
 # in K2f so the table cannot be read as fully mechanical.
 # `( cd "$T" && ./run_all.sh )` names no tree on its own line -- the tree comes
 # from the `cp -R` two lines above -- and a line-local scan cannot resolve it.
+#
+# mg-7522, ON THAT LIMIT.  Unpinning this scan was necessary and is NOT
+# sufficient.  `code/species_depth_audit_4700/` executes three affected runners
+# through `run_runner(t)` and `subprocess.run(["sh", "run_all.sh"], cwd=d)`, so
+# it is invisible to the LITERAL-PATH rule above whatever the anchor.  The pin
+# and the literal-path rule are two independent reasons the same site fell
+# outside the enumeration, and fixing one does not fix the other.  The complete
+# runtime-path census -- every executing site whose runner path is assembled at
+# run time, and whether each reads the status -- is in
+# `code/runner_exit_repair_7522/out_s4_unpin.txt`, and it is stated here rather
+# than left as an absence.
 CALLERS.append(("code/branching_audit_2060/b0_repro.sh", 10,
                 "branching_locate_db09", True,
                 '( cd "$T" && ./run_all.sh >/dev/null 2>&1 )'))

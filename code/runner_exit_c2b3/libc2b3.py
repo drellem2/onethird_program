@@ -134,7 +134,13 @@ def grep_tee(src):
 
 
 SET_E_RE = re.compile(r"^\s*set\s+-[a-zA-Z]*e")
-PIPEFAIL_RE = re.compile(r"^\s*set\s+-o\s+pipefail")
+# mg-7522: was `^\s*set\s+-o\s+pipefail`, which matches ONE spelling of the
+# option.  The single runner in the arc that sets it -- `code/state_restructure_
+# 34bf/run_all.sh` -- writes `set -euo pipefail`, so this rule re-derived 0
+# where the ticket said 1, `out_k1_census.txt` printed `DIFFERS`, and four
+# reader-facing artifacts then reported the number as "confirmed exactly".
+# The rule is now "a `set` builtin that enables the option, however spelled".
+PIPEFAIL_RE = re.compile(r"^\s*set\s+[^#]*\bpipefail\b")
 
 
 def has_set_e(src):
