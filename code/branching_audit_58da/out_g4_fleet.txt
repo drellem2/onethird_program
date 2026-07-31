@@ -36,7 +36,7 @@ G4  THE SET-LEVEL PROPERTY, RE-ESTABLISHED AFTER TWO CHANGES
    produces the ROW beside it, and the summary is CHECKED AGAINST THE ROWS
    rather than asserted next to them.
 
-   script                 286d5030 -> e006581c       e006581c -> working
+   script                 286d5030 -> e494515b       e494515b -> working
      c1_branching.py        CHANGED (673b4c00)         same
      c2_vertexsets.py       CHANGED (ed9cde49)         same
      c3_withdrawal.py       same                       same
@@ -44,7 +44,7 @@ G4  THE SET-LEVEL PROPERTY, RE-ESTABLISHED AFTER TWO CHANGES
      c5_record.py           same                       same
 
    ATTRIBUTION, INVERTED FROM THE SAME git log CALLS -- one row per
-   commit in 286d5030..e006581c that touched any of the five:
+   commit in 286d5030..e494515b that touched any of the five:
      673b4c00  mg-58da   docs+repair: THE REPRODUCTION STANDS AT 286d5030 AND ALL 2
         touches: c1_branching.py
      ed9cde49  mg-13b2   docs+repair: THE VERTEX COLUMN REPORTS THE SET AND THE LAB

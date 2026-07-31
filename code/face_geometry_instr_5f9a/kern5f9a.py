@@ -487,12 +487,123 @@ def condition_census(src):
     every expression node inside every deciding condition and depends on no
     classification at all, so a compound in a form nobody thought of is inside
     it whether or not the fourth number knows about it.
+
+    THE THIRD NUMBER IS PER-FILE AND SAYS NOTHING ABOUT THE SWEEP (mg-69d1, on
+    mg-eaef's E4).  It counts the operands `deciding_clauses` FINDS in `src`.
+    Whether the deletion test VISITS `src` is a fact about the sweep's file
+    population and not about `src`, so a reader who wants "operands the sweep
+    deletes" must ask `operand_columns` below, which takes that population as an
+    argument.  This column read 2 for `posets.py`, which the sweep does not
+    visit, under a heading that said `deletes`.
     """
     conds = deciding_conditions(src)
     boolean = [c for c in conds if isinstance(c[2], ast.BoolOp)]
     nodes = sum(len(list(ast.walk(c))) for _f, _k, c in conds)
     return (len(conds), len(boolean), len(deciding_clauses(src)),
             len(implicit_disjunctions(src)), nodes)
+
+
+# ---------------------------------------------------------------------------
+# mg-69d1, on mg-eaef's E5 and E4: EVERY explicit boolean operand, in exactly
+# one NAMED column.
+# ---------------------------------------------------------------------------
+
+BooleanOperand = collections.namedtuple(
+    "BooleanOperand", "file func kind top source node index")
+
+# The four columns.  `not determined` is a column and not an omission: the
+# classifier below assigns every operand it finds, and anything it cannot place
+# lands there BY NAME.  An explicit "not determined" is checkable; an empty cell
+# is the absence of an answer, which is the ambiguity a stated bound exists to
+# remove.
+OPERAND_COLUMNS = ("swept",
+                   "not swept: file",
+                   "not swept: nested",
+                   "not determined")
+
+
+def boolean_operands(src, fname):
+    """EVERY operand of EVERY `and`/`or` anywhere inside a deciding condition.
+
+    WALKED, NOT FILTERED, and that is the whole point (mg-eaef's E2/E5).
+    `deciding_clauses` asks whether the CONDITION IS a `BoolOp` and takes its
+    top-level operands; `implicit_disjunctions` skips the forms `or` and `and`
+    BY NAME, on the assumption that anything spelled with an operator is
+    deletable.  An `or` nested under a comprehension or a quantifier is spelled
+    with an operator and is NOT deletable by the sweep, so it fell out of both
+    populations and was in neither census column.  This function is the one that
+    cannot miss them, because it applies no filter at all: it walks for
+    `ast.BoolOp` and takes every value of every one it finds.
+
+    `top` is True iff the `BoolOp` IS the deciding condition -- which is exactly
+    `deciding_clauses`' own admission test, so the two populations line up
+    operand for operand rather than by count.
+    """
+    out = []
+    for func, kind, cond in deciding_conditions(src):
+        for node in ast.walk(cond):
+            if not isinstance(node, ast.BoolOp):
+                continue
+            for k, value in enumerate(node.values):
+                out.append(BooleanOperand(
+                    fname, func, kind, node is cond,
+                    ast.get_source_segment(src, value), node, k))
+    return out
+
+
+def drop_boolean_operand(src, op):
+    """`src` with one operand of one `BoolOp` removed and the rest kept.
+
+    `drop_clause` above does this for the sweep's own population, which is
+    always the TOP level of a deciding condition.  This does it for any operand
+    `boolean_operands` finds, including the nested ones the sweep cannot reach
+    -- so "the sweep does not reach them" can be a measurement about what those
+    operands DO rather than an assumption that they do nothing.
+    """
+    kept = [v for k, v in enumerate(op.node.values) if k != op.index]
+    join = " or " if isinstance(op.node.op, ast.Or) else " and "
+    text = join.join("(%s)" % ast.get_source_segment(src, v) for v in kept)
+    if len(kept) == 1:
+        text = ast.get_source_segment(src, kept[0])
+    return splice(src, op.node, text)
+
+
+def operand_columns(sources, swept_files):
+    """{column name: [BooleanOperand]} over `sources` = {filename: text}.
+
+    THE PARTITION IS TOTAL BY CONSTRUCTION.  Every operand `boolean_operands`
+    finds is appended to exactly one list, and the fall-through is a NAMED
+    column rather than a `continue`; `operand_columns_total` below re-derives
+    the population independently and compares, so a column that silently
+    dropped one would be caught by a number and not by reading this code.
+
+    `swept_files` IS THE SWEEP'S OWN FILE POPULATION, passed in.  The caller
+    that prints these columns is the caller that runs the sweep, so the two
+    cannot drift apart the way the `operands` column and the sweep did: a file
+    the deletion test does not mutate puts its operands in `not swept: file`,
+    whatever their shape.
+    """
+    cols = {name: [] for name in OPERAND_COLUMNS}
+    for fname in sorted(sources):
+        for op in boolean_operands(sources[fname], fname):
+            if fname not in swept_files:
+                cols["not swept: file"].append(op)
+            elif not op.top:
+                cols["not swept: nested"].append(op)
+            elif op.top:
+                cols["swept"].append(op)
+            else:                                   # pragma: no cover
+                cols["not determined"].append(op)
+    return cols
+
+
+def operand_columns_total(sources):
+    """The population `operand_columns` must add up to, derived AGAIN.
+
+    Not `sum(len(v) for v in cols.values())` -- that would be the classifier
+    checking its own arithmetic.  This walks the sources a second time.
+    """
+    return sum(len(boolean_operands(sources[f], f)) for f in sources)
 
 
 def drop_clause(src, clause):

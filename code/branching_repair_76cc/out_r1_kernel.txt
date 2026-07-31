@@ -123,6 +123,14 @@ VERDICT ON OPEN 1
    286d5030, and then moves both together -- so the population is two
    again, each half is named, and a cancelling pair cannot pass.
 
+   THAT LAST CLAUSE IS ABOUT SECTION (v) AS A WHOLE and it is true; the
+   clause mg-76cc wrote about which ROW catches a cancelling pair was
+   backwards and is repaired in mg-69d1.  The two HALF rows are what
+   catch a cancelling pair -- both MOVE on one, while `both together`
+   prints IDENTICAL.  `both together` is what catches a CONSPIRING pair,
+   which passes both halves.  Both are built and measured in
+   code/repair_69d1/p3_reason.py.
+
    It was found by running the pre-repair predicate, and it is confirmed
    by the same means: bend kern_a218.py as a commit, and the repaired
    predicate fires NAMING IT where the predicate it replaces was silent.

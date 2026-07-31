@@ -38,9 +38,24 @@ loads the kernel from that same revision, so kern_a218.py was pinned at
 REV_A218 on both sides and a kernel that moved reached neither.  The c1 half
 had been re-grained; the kernel half had been deleted.  Section (v) now moves
 EACH HALF ON ITS OWN, with the other held at REV_A218 -- so a finding names
-the file that moved -- and then moves the two TOGETHER, because a pair of
-changes that cancel would pass both halves separately.  Its direction probes
-run over the same two files for the same reason.
+the file that moved -- and then moves the two TOGETHER, because a CONSPIRING
+pair passes both halves separately.  Its direction probes run over the same two
+files for the same reason.
+
+THE REASON FOR THE `both together` ROW WAS BACKWARDS, AND IS CORRECTED HERE
+(mg-69d1, on mg-e34a's E-1).  It read "because a pair of changes that cancel
+would pass both halves separately", and that is the one input the row does NOT
+catch: build a cancelling pair -- the kernel's dim L(n,p) one too big, c1's
+vertex dims one too small -- and both HALF rows MOVE while `both together`
+prints IDENTICAL, because the two files' errors restore the printed measurement
+exactly.  The halves catch a cancelling pair; this row is the one it passes.
+What this row is for is a CONSPIRING pair: each file's change harmless on its
+own, the two together moving the measurement.  That input passes both halves
+and is caught HERE, by this row and by nothing else.  Both directions are
+BUILT and measured in code/repair_69d1/p3_reason.py rather than argued -- a
+rationale is a claim, this one names an input, and the input can be built.
+The row itself is unchanged and was always right; only its reason was wrong,
+because mg-76cc's repair added a ROW and a REASON and only the row was checked.
 
 Exit 0 iff SELF-ERRORS == 0 and FINDINGS == 0.
 """
@@ -253,8 +268,18 @@ print("""   REPAIRED HERE (mg-7e58, on mg-321d's finding G-1).  Section (ii) use
    AND THE MEASURING HALF IS TWO FILES, so the population here is two and each
    is named (mg-76cc, on mg-957f's F-1).  c1_branching.py and kern_a218.py are
    moved to HEAD ONE AT A TIME with the other held at %s, so a finding says
-   WHICH file moved the measurement; then both are moved together, because two
-   changes that cancel would pass each half on its own.""" % L.REV_A218[:8])
+   WHICH file moved the measurement; then both are moved together, because a
+   CONSPIRING pair -- each file's change harmless on its own, the two together
+   moving the measurement -- passes each half and is caught only here.
+
+   THAT REASON IS CORRECTED, THE ROW IS NOT (mg-69d1, on mg-e34a's E-1).  It
+   read "because two changes that cancel would pass each half on its own",
+   which names the one input this row does NOT catch.  Built and measured:
+   on a CANCELLING pair both HALF rows MOVE and `both together` prints
+   IDENTICAL; on a CONSPIRING pair both HALF rows print IDENTICAL and `both
+   together` MOVES.  Section (v) as a whole still catches both -- which is
+   why the row is load-bearing and was never the thing that was wrong.""" %
+      L.REV_A218[:8])
 print()
 head_c1 = L.git_show(HEAD, L.A218_DIR + "/c1_branching.py")
 old_c1 = L.git_show(L.REV_A218, L.A218_DIR + "/c1_branching.py")
@@ -282,9 +307,13 @@ FORMS = [("the %s target (COUNT form)" % L.REV_A218[:8], old_target),
 # The two files section (ii) enumerates as the measuring half, each moved to
 # HEAD alone, and then together.  paths[:2] is the same population the deleted
 # file-sha predicate ran over -- restored here at the measurement grain.
+# The row's LABEL is part of its reason, and it named the case the row does not
+# catch (mg-69d1, on mg-e34a's E-1).  `conspiracy` is the case it does catch and
+# the only one it catches alone; the (script, kernel) pair the row measures is
+# unchanged.
 HALVES = [("c1_branching.py", "the script", head_c1, old_kern),
           ("kern_a218.py", "its kernel", old_c1, head_kern),
-          ("both together", "cancellation", head_c1, head_kern)]
+          ("both together", "conspiracy", head_c1, head_kern)]
 
 print("   target form / half moved to HEAD              @ %s        @ HEAD"
       % L.REV_A218[:8])

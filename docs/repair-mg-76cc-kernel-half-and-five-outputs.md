@@ -99,16 +99,37 @@ default and is unchanged; §4 shows that by running them, not by reading them.
 each member:
 
 ```python
-HALVES = [("c1_branching.py", "the script",   head_c1, old_kern),
-          ("kern_a218.py",    "its kernel",   old_c1,  head_kern),
-          ("both together",   "cancellation", head_c1, head_kern)]
+HALVES = [("c1_branching.py", "the script",  head_c1, old_kern),
+          ("kern_a218.py",    "its kernel",  old_c1,  head_kern),
+          ("both together",   "conspiracy",  head_c1, head_kern)]
 ```
 
 Each half moved to `HEAD` alone, with the other held at `286d5030`, so a
 finding says **which file** moved the measurement; then both together, because
-two changes that cancel would pass each half separately. Two target forms
-× three halves = **6** measurement-invariance checks where there were 2, and
-the findings population line says so.
+a **conspiring** pair — each file's change harmless on its own, the two together
+moving the measurement — passes each half and is caught only there. Two target
+forms × three halves = **6** measurement-invariance checks where there were 2,
+and the findings population line says so.
+
+> **CORRECTED BY mg-69d1 (mg-e34a's E-1). The row is right; the reason given for
+> it was inverted, and the label said so too.** This paragraph read *"because two
+> changes that cancel would pass each half separately"* and the third row was
+> labelled `cancellation`. That names the one input the row does **not** catch.
+> Built and measured (`code/repair_69d1/p3_reason.py`): on a **cancelling** pair
+> — the kernel's `dim L(n,p)` one too big, `c1`'s vertex dims one too small —
+> both **half** rows MOVE and `both together` prints IDENTICAL; on a
+> **conspiring** pair both half rows print IDENTICAL and `both together` MOVES.
+> The halves catch a cancelling pair. This row catches the pair that passes them.
+>
+> **The mechanism, which is the thing to carry:** this repair produced a **row**
+> and a **reason**, and only the row was checked. A repair's output is more than
+> one artifact, and verification that covers the primary one and not its
+> accompanying explanation leaves the explanation unaudited by construction.
+> The reason survived into `g1`'s docstring, `g1`'s printed text, the committed
+> transcript, this document and the commit message of `4755d02` before anybody
+> built the input it names. Renaming the label also moved a **deletion-test
+> anchor** in `lib76cc.py` — a third kind of artifact that nothing in "fix the
+> reason" named.
 
 The direction probes were restored over the same two files: `c1 @ HEAD`
 unmodified, `kern @ HEAD` unmodified, `c1` with its vertex dimensions off by

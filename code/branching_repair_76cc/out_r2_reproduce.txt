@@ -25,8 +25,8 @@ re-asserted.
    test: run it in place and the record and the re-run are the same
    bytes for the reason that they were written by the same command.
 
-   the committed record names its own revision : e006581c2e11
-     docs+audit: independent audit of the mg-7e58 repair (4372fae) — THE ATTRIBUTION IS RIGHT
+   the committed record names its own revision : e494515b499f
+     docs+audit: independent audit of the mg-76cc repair (4755d02) — THE KERNEL HALF IS REALL
 
    run_all.sh exit 1 (g4 is expected to exit 1 -- mg-d330's second
    finding, booked OPEN by mg-58da and not closed here)
@@ -34,7 +34,7 @@ re-asserted.
    file                        committed  re-run  differing  reproduces
                                lines      lines   lines      byte for byte
      out_selftest_58da.txt      7          7       0          YES
-     out_g1_provenance.txt      166        166     5          no
+     out_g1_provenance.txt      175        175     5          no
      out_g2_redo.txt            116        116     1          no
      out_g3_findings.txt        147        147     1          no
      out_g4_fleet.txt           226        226     2          no
@@ -52,32 +52,32 @@ re-asserted.
    that do NOT are printed in full and counted.
 
      out_g1_provenance.txt      line 16   revision substitution
-       committed:    e006581c2e11  HEAD of this branch
-       re-run   :    a031a7341010  HEAD of this branch
+       committed:    e494515b499f  HEAD of this branch
+       re-run   :    2a2bc0182ff4  HEAD of this branch
      out_g1_provenance.txt      line 17   revision substitution
-       committed:       docs+audit: independent audit of the mg-7e58 repair (4372fae) — THE ATTRIBUTION IS RIG
+       committed:       docs+audit: independent audit of the mg-76cc repair (4755d02) — THE KERNEL HALF IS REA
        re-run   :       mg-76cc: G-3, run_all.sh in a clone (mg-76cc)
      out_g1_provenance.txt      line 27   revision substitution
-       committed:    commits touching each part of the reproduction, 286d5030..e006581c:
-       re-run   :    commits touching each part of the reproduction, 286d5030..a031a734:
-     out_g1_provenance.txt      line 129  revision substitution
-       committed:      c1 @ e006581c (unmodified -- NULL PROBE)         silent     silent   HIT
-       re-run   :      c1 @ a031a734 (unmodified -- NULL PROBE)         silent     silent   HIT
-     out_g1_provenance.txt      line 131  revision substitution
-       committed:      kern @ e006581c (unmodified -- NULL PROBE)       silent     silent   HIT
-       re-run   :      kern @ a031a734 (unmodified -- NULL PROBE)       silent     silent   HIT
+       committed:    commits touching each part of the reproduction, 286d5030..e494515b:
+       re-run   :    commits touching each part of the reproduction, 286d5030..2a2bc018:
+     out_g1_provenance.txt      line 138  revision substitution
+       committed:      c1 @ e494515b (unmodified -- NULL PROBE)         silent     silent   HIT
+       re-run   :      c1 @ 2a2bc018 (unmodified -- NULL PROBE)         silent     silent   HIT
+     out_g1_provenance.txt      line 140  revision substitution
+       committed:      kern @ e494515b (unmodified -- NULL PROBE)       silent     silent   HIT
+       re-run   :      kern @ 2a2bc018 (unmodified -- NULL PROBE)       silent     silent   HIT
      out_g2_redo.txt            line 100  revision substitution
-       committed:    The reproduction is REDONE at e006581c2e11 and it stands, with all
-       re-run   :    The reproduction is REDONE at a031a7341010 and it stands, with all
+       committed:    The reproduction is REDONE at e494515b499f and it stands, with all
+       re-run   :    The reproduction is REDONE at 2a2bc0182ff4 and it stands, with all
      out_g3_findings.txt        line 6    revision substitution
-       committed:    286d5030, run against out_t1_tl.txt at e006581c.
-       re-run   :    286d5030, run against out_t1_tl.txt at a031a734.
+       committed:    286d5030, run against out_t1_tl.txt at e494515b.
+       re-run   :    286d5030, run against out_t1_tl.txt at 2a2bc018.
      out_g4_fleet.txt           line 39   revision substitution
-       committed:    script                 286d5030 -> e006581c       e006581c -> working
-       re-run   :    script                 286d5030 -> a031a734       a031a734 -> working
+       committed:    script                 286d5030 -> e494515b       e494515b -> working
+       re-run   :    script                 286d5030 -> 2a2bc018       2a2bc018 -> working
      out_g4_fleet.txt           line 47   revision substitution
-       committed:    commit in 286d5030..e006581c that touched any of the five:
-       re-run   :    commit in 286d5030..a031a734 that touched any of the five:
+       committed:    commit in 286d5030..e494515b that touched any of the five:
+       re-run   :    commit in 286d5030..2a2bc018 that touched any of the five:
 
    differing lines explained by ONE revision substitution : 9 of 9
 
@@ -102,9 +102,9 @@ re-asserted.
 
    REPRODUCE UNDER THE NAMED NORMALISATION : 5 of 5, 0 lines unexplained.
 
-   the fresh run names its own revision  : a031a7341010
-   the clone's actual HEAD               : a031a7341010
-   the committed record's revision       : e006581c2e11
+   the fresh run names its own revision  : 2a2bc0182ff4
+   the clone's actual HEAD               : 2a2bc0182ff4
+   the committed record's revision       : e494515b499f
      an ancestor of this branch          : yes
      commits from it to this HEAD        : 0
        0 means the record was taken at the tree's current HEAD and
@@ -128,8 +128,8 @@ re-asserted.
    them would come back clean.
 
    revision                 raw differing lines   normalised
-     a031a7341010           9                     0
-     2a2bac4cf4a3           9                     0
+     2a2bc0182ff4           9                     0
+     c223a5417ae9           9                     0
 
    the two revisions differ from the record at THE SAME 9 (file, line)
    positions : yes

@@ -23,6 +23,15 @@ the control still exits 1.
 > establishes nothing about it` on the row that carries it. And the bound is stated as a
 > count: DELETION ESTABLISHES COVERAGE DOWN TO EXPLICIT BOOLEAN OPERANDS AND NO FURTHER, with
 > 11 compounds in `face_complex.py`'s deciding conditions that have no operand to delete.**
+
+> **CORRECTED BY mg-69d1 (mg-eaef's E5 and E4), and the sentence above is left as written so the
+> correction can be read against it.** That bound is **wider than the sweep**. Read as a
+> guarantee about *every* explicit boolean operand it is false: of the **17** in the two files
+> this census covers, **6 are not on the reached side** — 4 nested below the top level of their
+> own condition in `face_complex.py`, where the sweep cannot reach, and 2 in `posets.py`, which
+> the sweep does not visit. All 6 were in **neither** census column. The sentence now reads
+> **DELETION REACHES THE TOP-LEVEL BOOLEAN OPERANDS OF THE DECIDING CONDITIONS IN THE FILES THE
+> SWEEP VISITS, AND NOTHING ELSE**, and §5 below classifies all 17.
 >
 > **No sixth technique was added. Two rows joined a table that was already enumerated from the
 > tree, and one new section counts.**
@@ -130,10 +139,34 @@ third artifact with a provenance of its own to check, and the anchor is checked 
 `any(a != b for ...)` is a disjunction over rows with no operator either, and stopping there is
 a choice that has to be stated or it will be read as a floor for the fifth time.
 
-| file | deciding conditions | boolean | operands the sweep deletes | compounds it cannot reach | expression nodes |
+| file | deciding conditions | boolean | top-level operands | compounds it cannot reach | expression nodes |
 |---|---|---|---|---|---|
 | `face_complex.py` | 73 | 5 | 11 | 11 | 1,002 |
 | `posets.py` | 6 | 1 | 2 | 1 | 55 |
+
+**The third column was headed `operands the sweep deletes` and it read 2 for `posets.py`, where
+the sweep deletes 0 (mg-eaef's E4; corrected by mg-69d1).** It counts what `deciding_clauses`
+*finds* in that file. Whether the sweep *visits* the file is a fact about the sweep, so the two
+are now derived from one constant — `SWEEP_FILES` in `d2_deletion.py`, read by the sweep and by
+the table that describes it — and the column is headed `top-level`.
+
+**And every explicit boolean operand is now in exactly one named column** (mg-69d1, on E5):
+
+| file | swept | not swept: file | not swept: nested | not determined | all |
+|---|---|---|---|---|---|
+| `face_complex.py` | 11 | 0 | 4 | 0 | 15 |
+| `posets.py` | 0 | 2 | 0 | 0 | 2 |
+| **ALL** | **11** | **2** | **4** | **0** | **17** |
+
+`not determined` is a **column, not an omission**: an operand the classifier cannot place is
+printed there rather than falling out of the table. An explicit *not determined* is checkable;
+an empty cell is the absence of an answer, which is the ambiguity a stated bound exists to
+remove. The 6 not-swept operands are named individually in the transcript, because a count of
+what is uncovered that cannot be pointed at is the same silence as no count at all. The four
+nested ones are `proper_ideals`' `m != 0` and `m != full` and `mat_eq`'s `len(a) == len(b)` and
+`all(x == y for x, y in zip(a, b))`; **deleted one at a time, all four CHANGE the artifact**
+(measured by mg-eaef's `e1`, re-derived by mg-69d1's `p1`), which is why they cannot be left
+implicitly on the covered side.
 
 The compounds are named in the transcript, one line each: 7 quantifiers (`any`/`all`) and 4
 memberships (`x in S`) in `face_complex.py`, 1 membership in `posets.py`. Four forms are
