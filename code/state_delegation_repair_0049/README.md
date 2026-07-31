@@ -91,8 +91,9 @@ certified:
 
 ## The cost, printed rather than conceded
 
-`R9` — one tab in an uncited paragraph of the target, which changes **nothing** a reader sees
-on either renderer (measured: `render0049.py`, 5/5 sections still shown as prose on both) —
+`R9` — one tab in an uncited paragraph of the target, which changes **no rendered byte** on
+either renderer (measured: `render0049.py`, 5/5 sections still on the page as prose on both;
+mg-a74f narrowed that measurement's name from "shown" — see `visible_a74f.py`) —
 **exits 2**. That is the price of extending default-deny to a third file, and the two
 certified files have always paid it. A re-baseline nobody expected is how a control stops
 being run, so it is a battery row and a sentence in `COVERAGE.md` rather than a discovery for
@@ -102,13 +103,18 @@ the next auditor.
 
 | claim | measured here |
 |---|---|
-| mg-218d's 16-mutation battery, **unmodified** | `git diff a4aeeb9..HEAD -- code/state_layer_audit_218d/` is **0 bytes**; re-run in section 7 of `run_all.sh` |
-| mg-5644's own battery, **unmodified** | `git diff 3a80d99..HEAD -- code/state_delegation_audit_5644/` is **0 bytes**; re-run in section 7 |
+| mg-218d's 16-mutation battery, **unmodified** | `git diff a4aeeb9..HEAD -- code/state_layer_audit_218d/` is **0 bytes**; re-run inside section 8 of `run_all.sh`, which runs mg-5644's whole suite — mg-218d's sixteen among them |
+| mg-5644's own battery, **unmodified** | `git diff 3a80d99..HEAD -- code/state_delegation_audit_5644/` is **0 bytes**; re-run in section 8 of `run_all.sh` |
 | mg-5644's `Q1` `Q2` | now report **"did not behave as this audit predicted"** — they predicted exit 0 and got exit 1. That is the repair, reported by the auditor's own instrument, unedited |
 | mg-5644's `Q3`–`Q6` | unchanged: 0, 0, 1, 2 |
 | the statement repair, the 141/141 renderer agreement, the 10→6 improvement, the surviving document-global-ordinal negative | **untouched.** Nothing in `globalpos_bee1.py`, `render218d.py` or `l2pop5644.py` is edited or contradicted here |
 | `coverage218d.py` | **40 of 40** claims in `COVERAGE.md` still hold against the code, the tree and a mutation |
 | the eleven certified regions | **no content digest and no presentation digest moved.** `STATE.md` and the state-history README are not edited by this repair at all |
+
+**mg-a74f corrected the first two rows of that table.** Both pointed at the wrong numbered
+section of `run_all.sh` — they said 7, which is `coverage218d.py`. The re-runs themselves
+always happened and mg-16eb reproduced both byte-identically; what was wrong was only the
+pointer, and it is now read as a claim by `prose_a74f.py`'s P2.
 
 **One consequence of leaving mg-5644 unedited, stated so nobody has to work it out.**
 `render5644.py`'s verdict paragraph still reads *"which this control now exits 0 on when it

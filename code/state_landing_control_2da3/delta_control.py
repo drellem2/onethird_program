@@ -230,8 +230,11 @@ so `anomalies()` is silent about it and `html_tokens()` skips fenced lines by co
 Q2 is caught by the presentation record alone, on `state = fenced-code`.  Extending only the
 guards, which is the cheap reading of mg-5644's own recommendation, would have closed one of
 the two and left the other exactly where it was.  This is measured, not argued:
-code/state_delegation_repair_0049/guards_only_0049.py runs the guards-only control against
-all six rows and prints the split.
+code/state_delegation_repair_0049/split_0049.py runs the guards-only control against
+all nine rows and prints the split.  (mg-16eb: this sentence named a script that does not
+exist and a population of six that is mg-5644's, not this one's.  Both corrected by mg-a74f,
+and `prose_a74f.py` P1 and P4 now read them as claims — the path must resolve and the count
+must equal the script's own `ROWS`.)
 
 THE BOUND, STATED IN TERMS OF WHAT A READER IS SHOWN — which is the correction of record
 this lineage keeps needing, because its recurring defect is a true sentence quantified over
@@ -342,14 +345,39 @@ EXIT CODES, both non-zero on failure and distinguishable on purpose:
 
     0   every check passed
     1   FAIL   — a certification check failed.  b68db5d's repair is damaged in the tree, a
-                 certified region can no longer be located at all, a certified region is
-                 NO LONGER PRESENTED TO A READER — inside a code fence, inside an HTML
-                 comment, inside a raw HTML block, or (for the ledger cell) no longer
-                 rendering as a table row — a section a certified region CITES BY NAME is
-                 gone from the file it points at OR IS STILL THERE AND SHOWN TO NOBODY, or
-                 norm() no longer applies the rule this file publishes.  A region nobody is
-                 shown, a citation that leads nowhere, and a citation that lands on a
-                 section a reader is shown nothing of, are all damage rather than drift.
+                 certified region can no longer be located at all, a certified region's
+                 PRESENTATION STATE IS NOT `rendered` (nor, for the ledger cell,
+                 `gfm-table-row`) — the state set `presentation.py` computes over the
+                 region's span contains a fenced-code line, an HTML-comment line, a raw
+                 HTML block, or anything else outside that singleton — a section a
+                 certified region CITES BY NAME is gone from the file it points at OR HAS A
+                 PRESENTATION STATE OUTSIDE THAT SINGLETON, or norm() no longer applies the
+                 rule this file publishes.
+
+                 THAT IS THE PROPERTY THIS INSTRUMENT MEASURES, AND IT IS NOT "WHAT A
+                 READER IS SHOWN".  This bullet said the latter until mg-a74f, and mg-16eb
+                 refuted it BY CONSTRUCTION IN BOTH DIRECTIONS, with both constructions
+                 still live in `code/state_delegation_audit_16eb/mutations16eb.py`:
+
+                   B3  `<details><summary>` at the top of a target, never closed.  Both
+                       GFM renderers put every cited section inside a closed disclosure
+                       widget, so a reader is shown none of them — and every state stays
+                       `rendered`, so this bullet does NOT fire.  Exit 2, from a guard.
+                   C1  an ordinary fenced code example inside a cited section.  Both
+                       renderers show every line of the section, the fence rendering as a
+                       code block — and the state set becomes `fenced-code+rendered`, so
+                       this bullet DOES fire and prints "SHOWN NOTHING OF IT".  Exit 1, and
+                       `--emit-baseline` does not clear it.
+
+                 So the state-set predicate is neither necessary nor sufficient for a reader
+                 being shown nothing, and the wording here is narrowed to the predicate
+                 rather than kept over the property.  What a reader is shown is measured, as
+                 far as any static instrument can measure it, by
+                 `code/state_delegation_repair_a74f/visible_a74f.py`, which reports
+                 SUPPRESSED-BY-A-DECLARED-MECHANISM and never claims `shown`.  Repairing
+                 the predicate itself — so that B3 fires and C1 does not — would move the
+                 classification of every delegated section and is NOT done here; it is
+                 named as open rather than left for the next auditor to find.
     2   MOVED  — the repair's load-bearing sentences are intact, but a certified region's
                  content digest no longer matches, its PRESENTATION RECORD no longer
                  matches (it moved under a different heading, or its position among the
@@ -796,6 +824,23 @@ DELEGATED = {
 # and say in the commit message WHICH COMMIT MOVED IT.  A cited section present in DELEGATED
 # and absent here has no certified record, so its comparison fails and exits non-zero: the
 # two tables cannot drift apart quietly in either direction.
+#
+# THAT SENTENCE WAS FALSE IN ONE OF THE TWO DIRECTIONS UNTIL mg-a74f, and mg-16eb showed it
+# by mutating the instrument: nothing iterated this table, so a row present HERE and in
+# nothing else (its A1), or a whole TARGET FILE present here and delegated by nobody (its
+# A2), was never visited and the control exited 0.  Only the direction its A3 tests was
+# real.  mg-bee1's table one block up does NOT have the hole — its keys are cross-checked
+# against the sections the certified text cites — so the repair that added a second pinned
+# table added it without the cross-check the first one has.  Section 2c now iterates
+# `set(cited) | set(DELEGATED) | set(DELEGATED_PRESENTATION)` and carries two key checks,
+# one per grain: TARGET FILES declared here against DELEGATED, and, per target, SECTION
+# NAMES declared here against DELEGATED's.  A1 and A2 move from exit 0 to exit 2, measured
+# by mg-16eb's own battery imported unmodified (out_battery_a74f.txt).
+#
+# The check is derived from these two tables BY NAME.  `prose_a74f.py` P3 is the guard on
+# that: it parses this file, takes every module-level dict keyed by repo paths as its
+# population, and FAILS on any that no `for` in this file iterates.  A third pinned table
+# joins that population by existing.
 # =========================================================================================
 DELEGATED_PRESENTATION = {
     "docs/state-history/attempt-mg-276d.md": {
@@ -898,11 +943,18 @@ def presentation_record(kind, marker, docs, state_tree, state_base, readme_tree)
 
 
 def is_presented(record):
-    """True iff a reader is shown this region as prose (or as a GFM table row).
+    """True iff the state set `presentation.py` computed over this region's span is the
+    singleton `rendered` (or, for the ledger cell, `gfm-table-row`).
 
-    Anything else — a code fence, an HTML comment, a raw HTML block, pipes that no longer
-    form a table row — means the certified bytes are present and nobody sees them, which is
-    exactly the state mg-babf's B05/B06 put the F1 block into while the control said PASS.
+    NOT "true iff a reader is shown this region", which is what this docstring claimed
+    until mg-a74f.  Anything outside that singleton — a code fence, an HTML comment, a raw
+    HTML block, pipes that no longer form a table row — is a state mg-babf's B05/B06 put the
+    F1 block into while the control said PASS, and catching it is why the predicate exists.
+    But mg-16eb showed the predicate and the property come apart in BOTH directions: its C1
+    is a section a reader is shown every line of on which this returns False, and its B3 is
+    a page a reader is shown nothing of on which this returns True for all five sections.
+    The name of the function is left alone deliberately — renaming it would move nothing and
+    hide the history; the docstring says what it computes.
     """
     return dict(record)["state"] in ("rendered", "gfm-table-row")
 
@@ -1175,8 +1227,17 @@ def main():
           f"cited by certified regions: {sorted(cited) or '(none)'}\n"
           f"         declared in DELEGATED: {sorted(DELEGATED) or '(none)'}",
           kind=MOVED)
-    for target in sorted(set(cited) | set(DELEGATED)):
+    # mg-a74f, repairing mg-16eb's A1/A2: the second pinned table is cross-checked against
+    # the first at BOTH grains — whole target files here, section names below — and the loop
+    # iterates its keys, so a row in it and in nothing else is visited rather than skipped.
+    check("the PRESENTATION table declares exactly the DELEGATED target files",
+          set(DELEGATED_PRESENTATION) == set(DELEGATED),
+          f"declared in DELEGATED_PRESENTATION: {sorted(DELEGATED_PRESENTATION) or '(none)'}"
+          f"\n         declared in DELEGATED: {sorted(DELEGATED) or '(none)'}",
+          kind=MOVED)
+    for target in sorted(set(cited) | set(DELEGATED) | set(DELEGATED_PRESENTATION)):
         want = DELEGATED.get(target, {})
+        want_pres = DELEGATED_PRESENTATION.get(target, {})
         names = cited.get(target, set())
         who = ", ".join(sorted(citers.get(target, ())))
         print(f"  {target}")
@@ -1186,8 +1247,12 @@ def main():
             # An UNDECLARED target is not followed.  This instrument has no baseline for
             # it, so the honest report is that the delegation surface moved — already
             # counted by the check above — and not FAIL "the file is missing", which would
-            # say a certified delegation stopped resolving when there was never one.
-            print("         (not declared; not followed — see the surface check above)")
+            # say a certified delegation stopped resolving when there was never one.  A
+            # target reached ONLY through DELEGATED_PRESENTATION lands here too, and is now
+            # reached at all: before mg-a74f the loop did not range over that table.
+            print("         (not declared in DELEGATED; not followed — see the two surface")
+            print("          checks above; presentation records here: "
+                  f"{sorted(want_pres) or '(none)'})")
             continue
         if target in delegated_unreadable:
             check(f"{target}: the file a certified region points at EXISTS", False,
@@ -1201,6 +1266,14 @@ def main():
         check(f"{target}: the section names cited are the section names declared",
               names == set(want),
               f"cited {sorted(names)}; declared {sorted(want)}", kind=MOVED)
+        # mg-a74f: the second grain of the same cross-check.  A presentation record for a
+        # section nothing delegates is drift in the table, not damage in the target, so it
+        # is MOVED and the section is NOT then looked up in the file — reporting "a
+        # certified region sends a reader to a section that is not there" about a section no
+        # certified region cites would be a false sentence printed by the repair for it.
+        check(f"{target}: the sections with a PRESENTATION record are the sections declared",
+              set(want_pres) == set(want),
+              f"records declared {sorted(want_pres)}; delegated {sorted(want)}", kind=MOVED)
         for name in sorted(names | set(want), key=lambda s: (len(s), s)):
             wc, wsha = want.get(name, (None, None))
             try:
@@ -1239,11 +1312,19 @@ def main():
             pdetail += (f"\n         certified record sha256 {want_rec or '(none declared)'}"
                         f"\n         measured  record sha256 {got_rec}")
             if not is_presented(record):
-                pdetail += ("\n         >>> THE CERTIFIED CELL SENDS A READER TO THIS "
-                            "SECTION AND THE READER IS SHOWN NOTHING OF IT.")
-                check(f"{target} {name}: PRESENTED to a reader", False, pdetail, kind=FAIL)
+                pdetail += (
+                    "\n         >>> THE CERTIFIED CELL SENDS A READER TO THIS SECTION AND "
+                    "ITS PRESENTATION STATE IS NOT THE SINGLETON `rendered`."
+                    "\n         >>> mg-a74f: this line read 'AND THE READER IS SHOWN "
+                    "NOTHING OF IT' until mg-16eb's C1 made it"
+                    "\n         >>> print exactly that about a section both GFM renderers "
+                    "show every line of.  The predicate"
+                    "\n         >>> is the state set, not the reader; see the exit-code "
+                    "table.")
+                check(f"{target} {name}: PRESENTATION STATE is the singleton `rendered`",
+                      False, pdetail, kind=FAIL)
                 _digest_misses.append((target, f"delegated section {name}",
-                                       "cited, and not shown to a reader"))
+                                       "cited, and its presentation state is not `rendered`"))
             else:
                 okp = got_rec == want_rec
                 if not okp:
@@ -1383,10 +1464,15 @@ def main():
         print("RESULT: PASS — every check above read the working tree and every one held,")
         print(f"        including {len(CERTIFIED)} content digests and the same number of")
         print("        PRESENTATION RECORDS: the certified bytes are the certified bytes,")
-        print("        AND a reader is still shown them, in the same place, as prose.")
+        print("        and each region's PRESENTATION STATE is still the singleton")
+        print("        `rendered` under the same heading, at the same ordinal.")
         print(f"        The same two questions are answered for {n_deleg} DELEGATED sections")
-        print("        of the file the certified text points at — a reader who follows a")
-        print("        citation is shown the section it names (mg-0049).")
+        print("        of the file the certified text points at (mg-0049).")
+        print("        THAT IS NOT 'A READER IS SHOWN THEM', which is what these three lines")
+        print("        said until mg-a74f: mg-16eb's B3 is a page a reader is shown nothing")
+        print("        of on which every one of these states is `rendered`.  What a reader")
+        print("        is shown is measured, as far as a static instrument can, by")
+        print("        code/state_delegation_repair_a74f/visible_a74f.py.")
         print("        Coverage is stated in this file's header and in COVERAGE.md: what")
         print("        is digested, what is not, and what the presentation model cannot")
         print("        see.  This instrument CAN fail; negative_control.py makes it fail.")
@@ -1408,7 +1494,10 @@ def main():
         print("        no longer the delta it was written for.")
     else:
         print("RESULT: FAIL (exit 1) — b68db5d's repair is DAMAGED in the working tree,")
-        print("        or a certified region is no longer PRESENTED to a reader at all.")
+        print("        or a certified or cited region's PRESENTATION STATE is no longer the")
+        print("        singleton `rendered`.  That predicate is not 'a reader is shown")
+        print("        nothing of it' — mg-16eb refuted the two being the same in both")
+        print("        directions; the exit-code table names both constructions.")
         if _seen[MOVED]:
             print(f"        ({_seen[FAIL]} FAIL, {_seen[MOVED]} MOVED; FAIL is reported"
                   " because it is the more serious of the two.)")

@@ -3,20 +3,34 @@
 
 mg-5644 measured R1 and R2 (its Q1 and Q2) this way and this repair does not re-litigate
 them; `run_all.sh` re-runs mg-5644's own `render5644.py` unmodified for those.  What is
-measured HERE is the set of claims this repair makes that nobody has measured yet, and every
-one of them is a claim about what a reader is shown:
+measured HERE is the set of claims this repair makes that nobody has measured yet.
 
-    R8  a CLOSED comment around the whole file shows a reader nothing, exactly as R1's
-        unclosed one does — so exiting 1 on it is not an artefact of malformed input
-    R5  `<details>` at the top SUPPRESSES NOTHING: every cited section is still on the page
-        as the document's own prose.  This repair fires on it from the raw-HTML guard alone
-        and says so; if the renderers disagreed, the guard would be a false positive and the
-        row would be reported as one
+WHAT THIS FILE MEASURES, NARROWED BY mg-a74f AFTER mg-16eb's OPEN 1.  Every row below asks
+whether a cited section's heading text is PRESENT IN THE RENDERED PAGE — anywhere (`ANY`)
+or as an `<h1>`..`<h6>` (`HEADING`) — with HTML comments stripped first.  That is a property
+of the artefact.  It is NOT "what a reader is shown", which is what these rows claimed until
+mg-a74f: a page can carry a section's text and show a reader none of it (R5, below), and the
+distinction is measured by `code/state_delegation_repair_a74f/visible_a74f.py` over a
+declared set of suppression mechanisms.  Four of the five rows are unaffected by the
+narrowing; R5 is the one it changes, and it is the one mg-16eb refuted.
+
+    R8  a CLOSED comment around the whole file leaves no cited section's text on the page
+        at all, exactly as R1's unclosed one does — so exiting 1 on it is not an artefact
+        of malformed input
+    R5  `<details>` at the top leaves every cited section's TEXT on the page, as the
+        document's own prose.  It does NOT leave a reader shown them, and this row said
+        "SUPPRESSES NOTHING" until mg-a74f: mg-16eb's B3 is the same shape with a
+        `<summary>`, and on both renderers all five cited sections end up inside a
+        `<details>` that carries no `open` attribute and is never closed, so a browser
+        renders its summary and nothing else.  This repair fires on the row from the
+        raw-HTML guard alone and says so; if the renderers disagreed about the TEXT being
+        on the page, the guard would be a false positive and the row would be reported as
+        one
     R6  the cited sections under an "Appendix Z — nothing below is in force" heading are
-        STILL SHOWN.  The catch is the heading path, not suppression, and the measurement is
-        what separates those two claims
-    R9  one tab in an uncited paragraph changes NOTHING a reader sees.  It exits 2 anyway.
-        That is the running cost of default-deny and it is measured rather than conceded
+        STILL ON THE PAGE.  The catch is the heading path, not suppression, and the
+        measurement is what separates those two claims
+    R9  one tab in an uncited paragraph changes NOTHING in the rendered page.  It exits 2
+        anyway.  That is the running cost of default-deny, measured rather than conceded
 
 A row where the model and the renderers disagree is a defect in the model, and this file
 exits non-zero on one.  The renderers are installed OUTSIDE the repo and are a dependency of
@@ -112,13 +126,15 @@ def main():
     tmp = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".render0049.tmp.md")
 
     print("=" * 92)
-    print("mg-0049 — WHAT A READER IS SHOWN UNDER THIS REPAIR'S FIVE NEW ROWS")
+    print("mg-0049 — WHAT IS IN THE RENDERED PAGE UNDER THIS REPAIR'S FIVE NEW ROWS")
     print("=" * 92)
     print(f"  target      {M.ATTEMPT}")
     print(f"  population  the {len(CITED)} sections the certified ledger cell cites BY NAME: "
           + " ".join(CITED))
-    print("  tests       ANY     — the section's heading text appears anywhere a reader looks")
-    print("              HEADING — it appears as <h1>..<h6>, i.e. as the document's own prose")
+    print("  tests       ANY     — the section's heading text is somewhere in the page")
+    print("              HEADING — it is there as <h1>..<h6>, i.e. as the document's own prose")
+    print("  NOT MEASURED HERE — whether a reader is SHOWN any of it.  A page can carry the")
+    print("              text and show none of it; see visible_a74f.py (mg-a74f, mg-16eb OPEN 1)")
     print(f"  engines     {', '.join(ENGINES)}, independent implementations")
     print()
 
@@ -159,16 +175,24 @@ def main():
           + ("." if not wrong else f": {wrong}"))
     print()
     print("  R8 CONFIRMS that the blank page is not about the comment being unclosed: a")
-    print("  well-formed comment around the whole document shows a reader nothing either,")
-    print("  and this repair exits 1 on it.")
+    print("  well-formed comment around the whole document leaves no cited section's text")
+    print("  on the page either, and this repair exits 1 on it.")
     print()
-    print("  R5, R6 AND R9 ARE THE HONEST HALF.  In all three, every cited section is still")
-    print("  on the page, as the document's own prose, on both renderers — and the control")
-    print("  exits 2.  It is right to: R5 puts raw HTML the model does not resolve around")
-    print("  the certified surface, and R6 puts every cited section under a heading that")
-    print("  says nothing below it is in force, which is what a reader reads.  R9 is a pure")
-    print("  cost — a tab a reader cannot see, re-baselined at exit 2 — and it is printed")
-    print("  here rather than left for the next auditor to find.")
+    print("  R5, R6 AND R9 ARE THE HONEST HALF.  In all three, every cited section's text is")
+    print("  still on the page, as the document's own prose, on both renderers — and the")
+    print("  control exits 2.  It is right to: R5 puts raw HTML the model does not resolve")
+    print("  around the certified surface, and R6 puts every cited section under a heading")
+    print("  that says nothing below it is in force, which is what a reader reads.  R9 is a")
+    print("  pure cost — a tab that changes no rendered byte, re-baselined at exit 2 — and it")
+    print("  is printed here rather than left for the next auditor to find.")
+    print()
+    print("  R5 IS NARROWED BY mg-a74f AND THE NARROWING IS THE POINT.  This row read")
+    print("  '<details> at the top SUPPRESSES NOTHING'.  Its two numbers are correct and")
+    print("  neither is that claim: mg-16eb walked the tag stack on the same mutation and")
+    print("  found all five cited sections inside a <details> with no `open` attribute that")
+    print("  is never closed, so a reader is shown a closed widget and none of them.  What")
+    print("  this file measures is text in the page.  Suppression is measured over a declared")
+    print("  set of mechanisms by code/state_delegation_repair_a74f/visible_a74f.py.")
     print("=" * 92)
     return 0 if (agree and not wrong) else 1
 
