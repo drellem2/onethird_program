@@ -260,6 +260,15 @@ def load_module(path, name):
 V = load_module(LANDING, "verify_landing_3f3b")
 SWEEP = load_module(os.path.join(REPO, SWEEP_REL), "repair_ec07_3f3b")
 
+# ⚠️ LOADED, NOT COPIED (mg-132a).  S4's rule -- what a published figure is
+# checked against -- lives in ONE place in the tree.  This repository has
+# already been bitten by two copies of `figures()` disagreeing on 3 (`8c55168`),
+# and a staleness check with two implementations is that failure aimed at the
+# thing that is supposed to catch it.
+ANCHOR = load_module(
+    os.path.join(REPO, "code", "publication_anchor_132a", "anchor_132a.py"),
+    "anchor_132a_3f3b")
+
 
 def measured_now():
     a = len(V.state_row(V.tree(V.STATE)))
@@ -407,6 +416,14 @@ def s0():
         raise SystemExit(2)
     rc, out = run_runner()
     print(f"    HEAD                     : {git('rev-parse', 'HEAD').strip()[:12]}")
+    # ⚠️ THE ANCHOR, DECLARED RATHER THAN LEFT TO BE INFERRED (mg-132a).  This
+    # transcript's own figure was checkable only because a reader could find
+    # `HEAD : 3d7b32f` in its prose and guess that it was the measurement
+    # commit.  A guess that happens to be right is not provenance, so the
+    # publication step writes the commit, the count and a digest of the
+    # population -- and the digest is what keeps the figure falsifiable after
+    # the commit is pruned.
+    print(f"    {ANCHOR.anchor_line(git('rev-parse', 'HEAD').strip())}")
     print(f"    the runner, unmutated    : exit {rc}")
     for tag, ok in (("F1 (pipe-table alignment)", FIX_F1),
                     ("F5 (derived vocabulary) ", FIX_F5)):
@@ -926,7 +943,10 @@ DECLARES the vocabulary and fails closed on a row that does not use it.
 # --------------------------------------------------------------------------
 # S4 -- F2: THE POPULATION, AT THE COMMIT THAT PUBLISHES IT
 # --------------------------------------------------------------------------
-POP_FIGURE = re.compile(r"(\d[\d,  ]*)\s*`?\.py`?\s+files")
+# ⚠️ ONE DEFINITION IN THE TREE, and it is `anchor_132a.py`'s (mg-132a).  This
+# name is bound rather than re-declared so that a change to what counts as a
+# published figure cannot land in one checker and not the other.
+POP_FIGURE = ANCHOR.POP_FIGURE
 
 # A figure inside a QUOTATION is being discussed, not asserted -- the same
 # convention `repair_ec07.py` already uses for the scope sentence.  It is what
@@ -937,28 +957,34 @@ POP_FIGURE = re.compile(r"(\d[\d,  ]*)\s*`?\.py`?\s+files")
 QUOTATION = re.compile(r'"[^"]*"|“[^”]*”')
 
 
-def py_files_at(rev):
-    """Every `.py` under `code/` IN THE TREE AT `rev` -- from `git ls-tree`,
-    not from the working directory.  The working directory is a different
-    object from the commit that publishes a figure, and confusing the two is
-    exactly how 429 came to be committed beside a tree of 448."""
-    out = git("ls-tree", "-r", "--name-only", rev, "code/")
-    return sorted(p for p in out.split("\n") if p.endswith(".py"))
+py_files_at = ANCHOR.py_files_at   # one definition (mg-132a)
 
 
 def publishing_commit(rel):
-    """The commit that last changed `rel` -- the commit whose tree a figure
-    inside `rel` is a figure ABOUT.  None when the file has never been
-    committed.
+    """The commit that last changed `rel`.  ⚠️ KEPT, AND NO LONGER LOAD-BEARING
+    (mg-132a).
 
-    ⚠️ THE WORKING TREE IS DELIBERATELY IGNORED.  What a reader meets is what
-    is PUBLISHED, and an uncommitted regeneration is not published.  An earlier
-    version of this returned None whenever the file was dirty, which made this
-    deliverable's own transcript permanently exempt: every run rewrites it (it
-    embeds HEAD), so it was always dirty and the row always read "not yet
-    published".  A check that is structurally unable to fail on its author is
-    the shape this whole deliverable is about."""
-    return git("log", "-1", "--format=%H", "--", rel).strip() or None
+    This used to be read as "the commit whose tree a figure inside `rel` is a
+    figure ABOUT", and S4a was keyed on it.  THAT READING IS FALSE ACROSS A
+    REBASE, and it was false about this file's own evidence within four commits
+    of being written: both transcripts in `COMPUTED` publish 473, the tree at
+    each one's publishing commit holds 481, AND BOTH WERE RIGHT WHEN WRITTEN --
+    the pre-merge commits `8a07ae0` and `3d7b32f` hold exactly 473.  The merge
+    rebased them onto a tree that had grown, and `git log -1` followed the file
+    to its new resting place.
+
+    So the question this answers -- WHERE DID THIS COME TO REST -- is now
+    reported BESIDE the anchor rather than in place of it.  A figure's
+    provenance is where it was COMPUTED.
+
+    ⚠️ THE WORKING TREE IS STILL DELIBERATELY IGNORED.  What a reader meets is
+    what is PUBLISHED, and an uncommitted regeneration is not published.  An
+    earlier version returned None whenever the file was dirty, which made this
+    deliverable's own transcript permanently exempt: every run rewrites it, so
+    it was always dirty and the row always read "not yet published".  A check
+    that is structurally unable to fail on its author is the shape this whole
+    deliverable is about."""
+    return ANCHOR.publishing_commit(rel)
 
 
 # Every place in this arc that PUBLISHES a `.py` population for the sweep.
@@ -972,8 +998,14 @@ PROSE = ["code/hodge_leverage_repair_6df0/README.md",
 
 
 def s4():
-    head("S4 -- F2: THE POPULATION, RE-DERIVED AT THE COMMIT THAT PUBLISHES IT")
-    print(""""429 .py files swept" was not a figure that went stale.  The tree at the
+    head("S4 -- F2: THE POPULATION, RE-DERIVED AT THE COMMIT IT WAS MEASURED AT")
+    print("""⚠️ RE-KEYED BY mg-132a.  This section used to ask "does the tree at the commit
+that PUBLISHES this figure hold it", and that question is the wrong one across a
+rebase: `git log -1` follows a file to its new resting place, so the commit that
+publishes a figure stops being the commit it was measured at the moment a merge
+moves it.  It asks both questions now and tells the answers apart.
+
+"429 .py files swept" was not a figure that went stale.  The tree at the
 commit which SHIPS that transcript holds 448, and so did the commit before it:
 19 files were in the population and not in the number on the day it was
 written.  The instrument was live and re-derived the count every run -- what
@@ -1002,40 +1034,41 @@ carry a number, because prose has no publication step.
     # this check can see THIS instrument's own transcript, which is truncated
     # on disk by the redirect that is about to write it.  A check that cannot
     # be applied to its author is a check with a scope nobody chose.
-    stale, unpublished = [], []
-    for rel in COMPUTED:
-        rev = publishing_commit(rel)
-        if rev is None:
-            unpublished.append(rel)
-            print(f"    -- {rel}")
-            print(f"        NEVER COMMITTED, so nothing is published yet.  "
-                  f"This row becomes a measurement at the commit that lands it")
-            continue
-        text = git("show", f"{rev}:{rel}")
-        m = POP_FIGURE.search(text)
-        if not m:
-            print(f"    -- {rel}: publishes no population figure at {rev[:12]}")
-            continue
-        said = int(re.sub(r"\D", "", m.group(1)))
-        have = len(py_files_at(rev))
-        mark = "  " if said == have else "⚠️"
-        print(f"    {mark} {rel}")
-        print(f"        publishes {said}, and the tree at {rev[:12]} -- the "
-              f"commit that last wrote it -- holds {have}")
-        if said != have:
-            stale.append((rel, said, have, rev))
+    # ⚠️ KEYED ON THE ANCHOR, NOT ON `git log -1` (mg-132a).  The lattice is
+    # `anchor_132a.py`'s, loaded rather than copied.
+    head_rev_full = git("rev-parse", "HEAD").strip()
+    verdicts = [ANCHOR.verdict_for(rel, head_rev_full) for rel in COMPUTED]
+    for v in verdicts:
+        ANCHOR.show(v)
     print()
-    record(not stale,
-           f"S4a of the {len(COMPUTED) - len(unpublished)} committed "
-           f"transcript(s) that publish a `.py` population, {len(stale)} "
-           f"disagree with the tree AT THE "
-           f"COMMIT THAT PUBLISHES THEM.  This is the check mg-7e39's F2 is "
-           f"the failure of, and it is keyed on each transcript's OWN "
-           f"publishing commit rather than on HEAD -- so a merge that lands "
-           f"elsewhere cannot make it red, and a transcript committed beside a "
-           f"tree it does not describe cannot make it green.  "
-           f"{len(unpublished)} are not yet published at any commit and are "
-           f"named rather than counted as passes")
+
+    live = [v for v in verdicts if v["verdict"] != "UNPUBLISHED"]
+    unpublished = [v["rel"] for v in verdicts if v["verdict"] == "UNPUBLISHED"]
+    bad = [v for v in live if v["verdict"] in ANCHOR.RED]
+    displaced = [v for v in live if v["verdict"] == "DISPLACED"]
+    record(not bad,
+           f"S4a of the {len(live)} committed transcript(s) that publish a "
+           f"`.py` population, {len(bad)} fail against THE TREE THEY WERE "
+           f"MEASURED AT, and {len(displaced)} are DISPLACED -- right when "
+           f"written and rebased onto a tree that had grown.  ⚠️ THIS ROW USED "
+           f"TO BE KEYED ON `git log -1` AND SAID SO IN A CLAUSE THAT WAS "
+           f"FALSE: 'a merge that lands elsewhere cannot make it red'.  A "
+           f"merge that rebased THIS FILE'S OWN EVIDENCE made it red within "
+           f"four commits -- both transcripts published 473 against a "
+           f"publishing tree of 481, and both were CORRECT, because `git "
+           f"log -1` follows a file to wherever a rebase puts it.  The "
+           f"publishing commit is reported beside the anchor now instead of "
+           f"standing in for it.  {len(unpublished)} are not yet published and "
+           f"are named rather than counted as passes: {unpublished}")
+    record(None,
+           f"S4a' AND THIS IS A MEASUREMENT AT {head_rev_full[:12]}, NOT A "
+           f"LIVE PROPERTY.  Nothing re-runs this check after a merge, and a "
+           f"merge is what broke it: the publication step this section "
+           f"separates from prose is THE RUN, and the step that displaced "
+           f"these two figures was THE REBASE.  Re-run "
+           f"`sh code/publication_anchor_132a/run_all.sh --at <rev>` after "
+           f"one; a committed `0 refuted` says only that the audit passed when "
+           f"it ran")
 
     carried = []
     for rel in PROSE:
