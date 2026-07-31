@@ -113,8 +113,10 @@ print("  committed `out_*.txt` that names a runner is prose about a run, not a")
 print("  caller of one, and counting those would inflate the exposure with")
 print("  files that cannot read an exit status at all.  (Prose claims are not")
 print("  dropped, they are K3's subject.)  A line counts as an EXECUTION when")
-print("  it both names a `run_all.sh` and carries an executing construct")
-print("  (`subprocess.`, `sh <path>`, `./run_all.sh`, or a helper that does).")
+print("  it carries an executing construct (`subprocess.`, `sh <path>`,")
+print("  `./run_*.sh`, or a helper that does) AND NAMES A SHELL SCRIPT -- any")
+print("  `*.sh`, which is the property; mg-70c7 replaced the two-name list")
+print("  `(?:run_all|run_audit)\\.sh` that stood here (mg-dee4/F5).")
 print("  It counts as CONSUMING when the status is then read -- `returncode`")
 print("  or `check=True` within the next 25 lines for Python, `set -e` with no")
 print("  guard on the line for sh.")
@@ -130,6 +132,36 @@ EXEC = re.compile(r"subprocess\.|(?<![\w.])sh\s+[\"'./$]|\./run_\w*\.sh"
 NOT_EXEC = re.compile(r"[\"']git[\"']|git show|git -C|ls-tree")
 # NOT a bare `code`: every path in this repository contains the word.
 READ = re.compile(r"returncode|check\s*=\s*True")
+
+# THE TARGET RULE, AS A PROPERTY.  mg-70c7, on mg-dee4's F5.
+#
+# This was `run_all\.sh`.  mg-7522 made it `(?:run_all|run_audit)\.sh`, which
+# is one filename replaced by two -- and mg-dee4 measured what two names still
+# cannot see: 9 executing sites at HEAD name a `*.sh` whose basename is
+# neither, across 6 distinct target scripts, 4 of them READING the exit status;
+# and 0 sites name the `run_audit.sh` the widening added, so the widening was
+# not exercised by anything in the arc.  mg-7522's own library states the
+# property in a comment that says the name rule "is widened here to the
+# property" -- HERE being the library, not the file that was repaired.  A
+# property stated where the check does not live is a property nothing enforces.
+#
+# THE PROPERTY, STATED WHERE THE CHECK LIVES:
+#
+#     A CALLER IS A LINE THAT EXECUTES SOMETHING AND NAMES A SHELL SCRIPT.
+#
+# Not a line that names a script with a particular NAME.  A runner's exit
+# status can be swallowed by whatever executes it, and what the file is called
+# is a fact about its author's habits.  The rule is `libc2b3.targets` -- this
+# tree's own library, with both-senses fixtures in this tree's own self-test,
+# so the property, the check that uses it and the test that pins it are all
+# in the same directory.
+# THE LIMITS THAT REMAIN, named rather than left as an absence.  (1) The TREE
+# is read from a directory component on the same line, so a target invoked as
+# `./c0_repro.sh` or `"sh", "run_all.sh"` with `cwd=` elsewhere is counted as a
+# site with tree `-`.  (2) A path assembled at run time is invisible to any
+# line-local rule whatever the anchor; the complete runtime-path census is in
+# `code/runner_exit_repair_7522/out_s4_unpin.txt`.  Neither limit is a name
+# rule, and both are checkable.
 
 CALLERS = []
 # mg-7522: unpinned -- `git ls-files` is the current world.  The former call
@@ -151,17 +183,22 @@ for f in files:
         continue
     lines = src.split("\n")
     for i, line in enumerate(lines, 1):
-        m = re.search(r"([\w./]*?([\w]+)/(?:run_all|run_audit)\.sh)", line)
-        if not m or not EXEC.search(line) or NOT_EXEC.search(line):
+        if not EXEC.search(line) or NOT_EXEC.search(line):
             continue
-        if "%s" in m.group(1):        # a path built from a variable
-            continue
-        window = "\n".join(lines[i - 1:i + 25])
-        if f.endswith(".sh"):
-            consumes = L.has_set_e(src) and not L.guarded(line)
-        else:
-            consumes = bool(READ.search(window))
-        CALLERS.append((f, i, m.group(2), consumes, line.strip()))
+        for d, base in L.targets(line):
+            if "%s" in d or d.startswith("/"):   # a path built from a variable
+                continue
+            path = ("%s/%s" % (d, base)) if d else base
+            if d and os.path.normpath(path) == os.path.normpath(f):
+                continue                          # a script naming itself
+            window = "\n".join(lines[i - 1:i + 25])
+            if f.endswith(".sh"):
+                consumes = L.has_set_e(src) and not L.guarded(line)
+            else:
+                consumes = bool(READ.search(window))
+            # `.` and `..` name no tree; the tree is not on this line.
+            tree = d.split("/")[-1] if d and d.strip(".") else "-"
+            CALLERS.append((f, i, tree, consumes, line.strip(), base))
 
 # `run_runner(t)` in p3_wiring.py builds the path from a variable, so the
 # literal `.../run_all.sh` is on a different line from the execution.  That is
@@ -183,18 +220,54 @@ for f in files:
 # than left as an absence.
 CALLERS.append(("code/branching_audit_2060/b0_repro.sh", 10,
                 "branching_locate_db09", True,
-                '( cd "$T" && ./run_all.sh >/dev/null 2>&1 )'))
+                '( cd "$T" && ./run_all.sh >/dev/null 2>&1 )', "run_all.sh"))
 CALLERS.append(("code/species_sites_821e/p3_wiring.py", 214,
                 "species_repair_a4ef / species_remainder_f8fa / "
                 "species_repair_6f61", True,
-                "code, out = guarded(keep, lambda t=t: run_runner(t))"))
+                "code, out = guarded(keep, lambda t=t: run_runner(t))",
+                "run_all.sh"))
 
-print("  %-50s %-9s %s" % ("caller", "consumes?", "target tree"))
-for f, i, tree, consumes, line in CALLERS:
+print("  %-50s %-9s %-16s %s"
+      % ("caller", "consumes?", "target script", "target tree"))
+for f, i, tree, consumes, line, base in CALLERS:
     mark = "  <-- AFFECTED" if any("/%s/" % tree.split()[0] in a
                                    for a in affected) else ""
-    print("  %-50s %-9s %s%s" % ("%s:%d" % (f, i),
-                                 "YES" if consumes else "no", tree, mark))
+    print("  %-50s %-9s %-16s %s%s" % ("%s:%d" % (f, i),
+                                       "YES" if consumes else "no", base,
+                                       tree, mark))
+print()
+# mg-70c7: the table by TARGET BASENAME, so what the old two-name rule could
+# and could not see is a measured row rather than an argument.
+_by = {}
+for f, i, tree, consumes, line, base in CALLERS:
+    n, c = _by.get(base, (0, 0))
+    _by[base] = (n + 1, c + (1 if consumes else 0))
+_TWO_NAMES = ("run_all.sh", "run_audit.sh")
+print("  BY TARGET BASENAME -- and whether the two-name rule mg-7522 left")
+print("  behind could see it (mg-dee4/F5):")
+print()
+print("    %-20s %6s %9s   %s" % ("target basename", "sites", "consuming",
+                                  "visible to `(?:run_all|run_audit)\\.sh`?"))
+for base in sorted(_by, key=lambda b: (-_by[b][0], b)):
+    n, c = _by[base]
+    print("    %-20s %6d %9d   %s"
+          % (base, n, c, "yes" if base in _TWO_NAMES
+             else "NO -- invisible to it"))
+_out = sum(n for b, (n, _c) in _by.items() if b not in _TWO_NAMES)
+_outc = sum(c for b, (_n, c) in _by.items() if b not in _TWO_NAMES)
+print()
+print("      executing sites naming a `*.sh`                %3d" % len(CALLERS))
+print("      ...whose basename the two-name rule matched    %3d"
+      % (len(CALLERS) - _out))
+print("      ...outside it, across %d distinct basenames     %3d"
+      % (len({b for b in _by if b not in _TWO_NAMES}), _out))
+print("      ...of those, READING the exit status           %3d" % _outc)
+print("      executing sites naming `run_audit.sh`          %3d"
+      % _by.get("run_audit.sh", (0, 0))[0])
+print()
+print("  The last row is the name mg-7522 ADDED to the rule.  Widening a name")
+print("  list is not making it a property, and the property is now stated at")
+print("  the rule above rather than in a library one directory over.")
 print()
 print("  Read in full, the status-reading callers of an AFFECTED runner are:")
 print()
@@ -211,7 +284,18 @@ print("       affected.  K3 takes this apart claim by claim; it is the single")
 print("       biggest retroactive exposure in the arc.")
 print()
 print("  Every other caller found above targets a tree with no `| tee`")
-print("  pipeline (the state_* trees), so no repair of theirs is at issue.")
+print("  pipeline, so no repair of theirs is at issue.  mg-70c7 widened the")
+print("  target rule from two names to the property, which is why that")
+print("  sentence now covers %d sites rather than the handful the name rule"
+      % len(CALLERS))
+print("  returned; the AFFECTED set it is about did not move.")
+_aff_sites = [c for c in CALLERS
+              if any("/%s/" % c[2].split()[0] in a for a in affected)]
+print()
+print("  CHECKED, not asserted: sites whose target tree is AFFECTED   %d"
+      % len(_aff_sites))
+for c in _aff_sites:
+    print("      %s:%d  %s" % (c[0], c[1], c[2]))
 
 # ---------------------------------------------------------------------------
 hdr("K2b  THE PER-LINE VERDICT")

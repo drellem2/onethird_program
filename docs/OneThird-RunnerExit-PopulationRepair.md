@@ -45,9 +45,35 @@ Defined that way, over every tracked `*.sh` at the sweep's own revision:
 |---|---|---|
 | P0 tracked `*.sh`, any depth, no name rule | 72 | — |
 | P1 …containing a real pipeline on a command line | 23 | 53 |
-| **P2 …status consumed and discarded stage can fail** | **19** | **26** |
+| **P2 …status consumed and discarded stage can fail** | **20** | **27** |
+| …by the errexit arm alone | 19 | 26 |
 | the sweep's SHAPE rule — a real `\| tee` | 19 | 42 |
 | the sweep's NAME rule — a real `\| tee` in a `run_all.sh` | 17 | 34 |
+
+**Consumed is a disjunction, and both arms are named.** `ERREXIT` — the shell
+reads the status. `VALUE` — the pipeline's output is captured into a variable
+that is **read elsewhere in the file**, so a discarded stage that fails changes
+the value the script goes on to use.
+
+The clause originally tested errexit alone, at file grain, while **the reason
+written for pulling the three `git diff` lines in was about the value** —
+*"a `git diff` that failed produced an empty stream, `wc -c` reported `0`, and
+the proof read `-> 0 bytes`"*. Both arms are true of those three lines, because
+both of those files happen to set `-e`, so **the two readings were
+indistinguishable in the population that produced them.** `mg-dee4` found where
+they come apart: `code/branching_audit_a218/c0_repro.sh:47` sets `-u` and not
+`-e`, its discarded `grep` and `tr` can fail, its value drives `BAD`, its `BAD`
+drives `exit 1`, and nine sites in three files read that exit code. **It was
+outside the population for exactly one reason, and the reason was not the one
+the repair had written down.** All three rules missed it and each for a
+different reason — the name rule because it is `c0_repro.sh`, the shape rule
+because there is no `tee`, the property rule because there is no `set -e`.
+
+That site is **not repaired here and the reason is measured, not asserted**:
+forcing its `grep` to fail makes the script print `DISAGREES` and exit 1. Its
+failure direction is **loud**, which is the opposite of the silent green the
+sweep existed to find — so it is a **hole in a population**, now filled, and not
+a live swallow. `out_r5_population.txt` carries both arms.
 
 **Two sets fall outside the sweep, and they are disjoint.**
 
@@ -81,9 +107,39 @@ only the property covers both.
 The sweep settled its retroactive question by running all 34 tee'd targets
 directly and reading the number the pipeline discarded: 34 of 34 exit 0. That
 result is **sound about its population and silent about the rest.** The same
-method, unchanged, is applied here to the 11 members the sweep's filename never
-reached: **11 of 11 exit 0.** The corrected population is 45 and every member of
-it has now had its discarded status read.
+method, unchanged, is applied here to the members the sweep's filename never
+reached — and **at the grain those members execute at**, which is not the grain
+they are written at:
+
+| | sites | executions |
+|---|---|---|
+| `\| tee` pipelines in the two `run_audit.sh` | 8 | 8 |
+| `git diff … \| wc -c` lines in the two `run_all.sh` | 3 | **8** |
+| | 11 | **16** |
+
+> **A source line inside a loop is N executions, not one.** The three `git diff`
+> lines sit inside `for pair in …` loops and run eight times between them.
+
+**16 of 16 exit 0**, every one of them run from an argv **derived** from the
+runner's own bytes rather than hand-written — `out_s2_status.txt` carries the
+rows. The corrected population is therefore mg-c2b3's **34 sites, inherited from
+a transcript this repair did not re-run**, plus these **16 executions, run
+here**; the two are not added into one number, because they are not counted at
+the same grain.
+
+**This sentence used to read `11 of 11 exit 0`, and 11 was a count of lines.**
+`mg-dee4` found it: three hand-written argv covered four of the eight runs, two
+of the three were the same command, and the row labelled
+`state_delegation_audit_16eb/run_all.sh:39` carried an argv without the
+`':!*.md'` pathspec that line 39 has — so that form was never executed in any
+shape. The verdict survived and the enumeration did not. **An enumeration that
+counts SITES cannot support a claim about RUNS, and the two are
+indistinguishable in a report that does not say which it is at.**
+
+And the byte counts the repair described as *verified* are now **computed**, on
+both mechanisms — the stream length `| wc -c` reported and the file size
+`wc -c < FILE` reports — for all eight executions, in `out_s2_status.txt`. Until
+`mg-70c7` no probe in this tree computed one; the figure stood on the word.
 
 What that does *not* establish, stated rather than omitted: the same fact at
 every intermediate commit. It is read at `HEAD`, on one machine, and the rows
@@ -119,7 +175,7 @@ re-derives **1**, the ticket said **1**.
 Applied, mechanically, to the sweep itself. The population of reader-facing
 artifacts is derived from `git show --name-only 52aeaf4` rather than from the
 four files the audit happened to name — a hand-list is a filename rule, and
-that is the defect one section up. **20 strength-marked numeric claims**, every
+that is the defect one section up. **24 strength-marked numeric claims**, every
 one dispositioned with the reason — and coverage checked in **both** directions,
 so a hit with no rule and a rule with no hit are each an error. **Five were
 wrong:**
@@ -139,6 +195,17 @@ finding.** The one I did not predict is `OUTCOMES.md`'s own row, which reads
 `AGREES` for a number its instrument's transcript marks `DIFFERS`. It is kept as
 a miss in `OUTCOMES.md` rather than corrected into a hit.
 
+**It was 20 claims, and the rule was line-local.** A claim was a *line* carrying
+both a marker and a number — and in hard-wrapped prose a marker and its figure
+land on different lines routinely. Widening the window to **one line in either
+direction** takes the same population from **20 to 24**, and the four it adds
+are four the old rule stepped over rather than dispositioned. `mg-dee4` found
+this the way it would be found: the claim it most wanted to check —
+`OUTCOMES.md:88`, *"…counts the same bytes the pipeline did, **verified**
+against the"*, with its figure on line 89 — **scored as neither line.** The rule
+that produced `20, every one dispositioned` could not see the strongest claim in
+the file it was pointed at.
+
 ---
 
 ## 3 — the anchor of a census is not the anchor of a comparison
@@ -148,8 +215,17 @@ a miss in `OUTCOMES.md` rather than corrected into a hit.
 `mg-821e` found that a comparison anchored to `HEAD` stops comparing the moment
 the repair lands — it compares the repaired tree with itself and reports no
 change forever. Pinning it was right, and it stays pinned: anchored to the pin
-the byte-comparison sees **154 changed files**; anchored to `HEAD` on a
-committed tree it sees **0, by construction**.
+the byte-comparison sees the file count `out_s4_unpin.txt` prints in `S4c`;
+anchored to `HEAD` on a committed tree it sees **0, by construction**.
+
+**That figure used to be written here as `154 changed files`, and no anchor
+reproduces it** — `s4_unpin.py`'s own transcript printed 166 at the time, the
+same measurement at `1ee1f1b` against the pin is 257 and at `1ee1f1b^` is 240,
+and on a worktree it grows with the arc. `mg-dee4` found it, and found it three
+paragraphs below the place where `c252f96` had already applied *a number that
+moves belongs in a transcript* to the 2×2 totals. **The rule is now a check and
+not a habit:** `s5_self.py` reads every figure in this document and in this
+tree's own `*.md`, and goes red on any that no transcript of this tree prints.
 
 `mg-c2b3` inherited that pin and used it for its **caller scan** as well. A
 caller scan is not a comparison. It asks *what, in the world, reads a runner's
@@ -193,6 +269,27 @@ and written into `k2_consume.py` as a **stated limit with a pointer to the
 complete runtime-path census**, because a limit that is written down is
 checkable and an absence is not.
 
+### And the target rule was still a name rule, with two names
+
+The first repair of that scan changed its target regex from `run_all\.sh` to
+`(?:run_all|run_audit)\.sh`. **That is one filename replaced by two.** `mg-dee4`
+measured what two names still cannot see: **9 executing sites at `HEAD` name a
+`*.sh` whose basename is neither**, across 6 distinct target scripts, **4 of
+them reading the exit status** — and **0 sites name the `run_audit.sh` the
+widening added**, so the widening was not exercised by anything in the arc.
+
+The property was stated, correctly, in *this* tree's library — and the check
+lived in *that* one. **A property stated where the check does not live is a
+property nothing enforces.** The rule is now `libc2b3.targets`, in the sweep's
+own library, with both-senses fixtures in the sweep's own self-test:
+
+> **A caller is a line that executes something and names a shell script.**
+
+`out_k2_consume.txt` prints the census by target basename, and the two limits
+that remain — the tree is read from a directory component on the same line, and
+a path assembled at run time is invisible to any line-local rule — are named
+there rather than left as an absence.
+
 ---
 
 ## The deliverable, checked for the defects it repairs
@@ -218,7 +315,19 @@ branches that honestly cannot exhibit them and the reason:
   is read on every path including the timeout, which prints `-` and never `0`.
   `selftest7522.py`'s fixtures are strings that are never executed, so no status
   exists there to discard.
-* **A strength marker standing in for a check.** **0 uses**, 19 mentions.
+* **A strength marker standing in for a check.** This is the branch `mg-dee4`
+  caught, and the finding was not the number but the instrument: **the rule
+  pointed at the sweep had nine alternatives and the rule pointed at this tree
+  had three**, and `verified` — named as one of the three markers in `s5_self`'s
+  own docstring, in the README and in this document — was in the nine and not in
+  the three. The population was `*.py` and `*.sh`, so **the README,
+  `OUTCOMES.md`, `PREDICTIONS.md` and this document were all outside it**, and
+  three of the four artifacts `mg-05eb`'s OPEN 2 found wrong were exactly that
+  kind. There is now **one rule object**, `lib7522.MARK`, used in both
+  directions; the population includes this tree's `*.md` **and this document**;
+  and the verdict is no longer a count of uses but whether each use's figure is
+  **backed by a transcript this tree commits**. `out_s5_self.txt` carries the
+  three classes and the extent.
 
 **And three defects in this instrument are recorded rather than smoothed away**,
 all three the same one and all three caught by the tree's own self-test: a

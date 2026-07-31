@@ -9,11 +9,11 @@
 | **Q3** | real `\| tee`: 19 files / 42 pipelines | **HIT** (inherited) |
 | **Q4** | of those, in `run_all.sh`: 17 / 34 | **HIT** (inherited) |
 | **Q5** | outside the name rule: 2 files / 8 pipelines | **HIT** (inherited) |
-| **Q6** | P2 at `bee07a1`: 19 files / 26 lines | **MEASURED FIRST — not scored** |
+| **Q6** | P2 at `bee07a1`: 19 files / 26 lines | **MEASURED FIRST — not scored.** mg-70c7 widened the consumption clause and the same predicate now reads **20 / 27**; the errexit arm alone still reads 19 / 26 and both rows are printed |
 | **Q7** | name-missed and shape-missed sets are disjoint and neither empty | **HIT** — 2 files/8 lines and 2 files/3 lines |
-| **Q8** | P2 at HEAD after this repair: 0 / 0 | **HIT** |
+| **Q8** | P2 at HEAD after this repair: 0 / 0 | **HIT for the errexit arm.** Under the widened clause it is **1 / 1** — `code/branching_audit_a218/c0_repro.sh:47`, dispositioned in `out_s1_population.txt` with its failure direction measured in `code/runner_exit_repair_70c7/out_r5_population.txt` |
 | **Q9** | `*.sh` at HEAD > 72 | **HIT** — see `out_s1_population.txt`; the number moves as the arc grows, which is the point of the row |
-| **Q10** | all 11 discarded statuses exit 0 | **HIT** — 11 of 11 |
+| **Q10** | all 11 discarded statuses exit 0 | **HIT AT THE WRONG GRAIN, corrected by mg-70c7.** The 11 are SOURCE LINES; three of them sit in `for` loops and are 8 executions, so the population is **16 executions** — 8 `\| tee` + 8 `git diff`. All 16 exit 0. `out_s2_status.txt` |
 | **Q11** | PRE-repair control: 8 of 8 SWALLOW | **HIT** |
 | **Q12** | repaired control: 8 of 8 CAUGHT | **HIT** |
 | **Q13** | 0 committed transcripts move | **HIT** |
@@ -21,15 +21,15 @@
 | **Q15** | `pipefail` under mg-c2b3's regex: 0 | **MEASURED FIRST — not scored** |
 | **Q16** | under the repaired regex: 1 | **MEASURED FIRST — not scored** |
 | **Q17** | `#!/bin/sh` on 59 of 64 | **MEASURED FIRST — not scored** |
-| **Q18** | 10–20 strength-marked numeric claims | **HIT** — 20 |
+| **Q18** | 10–20 strength-marked numeric claims | **HIT under a LINE-LOCAL rule** — 20. With the one-line window mg-70c7 gave it (mg-dee4/F4) the same population is **24**, and the prediction's range would have missed |
 | **Q19** | 4 of them wrong | **MISS — 5** |
 | **Q20** | 4700 appears in exactly one 2×2 cell | **HIT** — (HEAD, runtime-path) |
 | **Q21** | unpinning alone is not sufficient | **HIT** |
-| **Q22** | the pinned comparison sees strictly more | **HIT** — 154 vs 11 |
+| **Q22** | the pinned comparison sees strictly more | **HIT** — the two counts are in `out_s4_unpin.txt`, `S4c`. The figure `154` stood here and no anchor reproduces it (mg-dee4/F2); the pinned side moves as the arc grows and belongs in a transcript |
 | **Q23** | `out_q2_wiring.txt` has 2 `SWALLOWED` rows | **MISS — 3** |
 | **Q24** | this tree's runner: 0 pipelines, every step guarded | **HIT** — 0, 6 of 6 |
 | **Q25** | 0 real `shell=True` / `os.system(` | **HIT** |
-| **Q26** | 0 USES of a strength marker, MENTIONs > 0 | **HIT** — 0 and 19 |
+| **Q26** | 0 USES of a strength marker, MENTIONs > 0 | **HIT UNDER A DIFFERENT INSTRUMENT than the one this tree pointed at its subject** (mg-dee4/F3): 3 alternatives here against 9 there, over a population that excluded every `.md`. Re-run with the one shared rule and the `.md` included, `out_s5_self.txt` carries MENTIONs, BACKED uses, uses with no figure, and UNBACKED |
 
 **Q19, kept as written.** I predicted **4** wrong figures and the probe
 dispositions **5**. The one I did not predict is `OUTCOMES.md`'s own `pipefail`
@@ -86,7 +86,14 @@ shape rule dropped it. Only the property finds it.
 
 The repair reads `git diff`'s own status and keeps the byte counts identical —
 `wc -c < FILE` counts the same bytes the pipeline did, verified against the
-pre-repair output (`0 / 0 / 0 / 0 / 2111 / 0`, unchanged).
+pre-repair output (`0 / 0 / 0 / 0 / 2111 / 0`, unchanged): **that word now
+stands next to a computation.** `S2a2` runs both mechanisms — the stream length
+`| wc -c` reported and the file size `wc -c < FILE` reports — over all **8**
+derived executions and prints every value, including the two of
+`state_delegation_repair_0049` that this parenthesis does not list. Until
+mg-70c7 no probe in this tree computed a byte count and the figure stood on the
+word `verified`; `mg-dee4`'s A2d ran both arms and the claim **held**, which is
+what makes it reportable rather than damning.
 
 ### F4 — the 2×2
 
@@ -165,7 +172,7 @@ prose should not have to run the tree to see it.
 | D3 discarded status | this tree's Python | **cannot** — list argv, no shell, no pipeline; `returncode` read on every path including the timeout, which prints `-` not `0` |
 | D3 | `selftest7522.py`'s fixtures | **cannot** — they are strings parsed by the rules, never executed, so no status exists |
 | D3 | this tree's `run_all.sh` | **checked** — 0 pipelines under S1's own P2 predicate, 6 of 6 steps redirect and guard |
-| D4 strength marker | every figure | **checked** — 0 USES, 19 MENTIONs; every figure is recomputed in the run that prints it |
+| D4 strength marker | every figure | **checked** — one rule (`lib7522.MARK`, 9 alternatives) in both directions, over this tree's `*.py`, `*.sh`, `*.md` and the published document; a USE is BACKED when every figure on its line is printed by a transcript of this tree, and only UNBACKED is counted. `out_s5_self.txt` |
 
 **Not checked, stated rather than omitted.** That the property predicate is the
 *right* one. It is written out in full in `lib7522.pipelines`,

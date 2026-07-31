@@ -32,6 +32,19 @@ BAD = 0
 
 MINE_PY = sorted(f for f in os.listdir(HERE) if f.endswith(".py"))
 MINE_SH = sorted(f for f in os.listdir(HERE) if f.endswith(".sh"))
+# mg-70c7, mg-dee4's F3.  D4's population used to be `MINE_PY + MINE_SH`, so
+# the README, OUTCOMES.md, PREDICTIONS.md and the published document -- every
+# reader-facing artifact this tree has -- were outside the rule this tree
+# applies to its subject's reader-facing artifacts.  mg-05eb's OPEN 2 was one
+# figure wrong in four artifacts and THREE OF THE FOUR WERE THAT EXCLUDED KIND.
+# A self-check whose population stops at `*.py` and `*.sh` has a population
+# defined by a suffix, which is a name rule with one letter changed.
+MINE_MD = sorted(f for f in os.listdir(HERE) if f.endswith(".md"))
+DOC = "docs/OneThird-RunnerExit-PopulationRepair.md"
+MINE_ALL = (["%s/%s" % (TREE, f) for f in MINE_PY + MINE_SH + MINE_MD]
+            + [DOC])
+# The transcripts this tree commits, which is what a figure must be backed by.
+MY_OUTS = L.out_files(TREE)
 
 L.bar("S5  THE GENERAL FORM, APPLIED TO THIS TREE")
 
@@ -205,25 +218,91 @@ print("  the first draft of this check did not make it: it counted its own")
 print("  detecting regex as a violation, which is the arc's recurring defect")
 print("  in the instrument built to find it.  Recorded in OUTCOMES.md.")
 print()
-uses, mentions = [], 0
-for name in MINE_PY + MINE_SH:
-    for i, line, kind in L.strength_lines(L.read("%s/%s" % (TREE, name), None)):
-        if kind == "USE":
-            uses.append((name, i, line))
-        else:
+print("  mg-70c7 REPAIRED TWO THINGS ABOUT THIS CHECK, both mg-dee4's F3.")
+print("  (1) THE RULE.  It ran a %d-alternative regex of its own while S3a"
+      % L.alternatives(L.MARK_OLD))
+print("      pointed a %d-alternative one at the SUBJECT -- and `verified`,"
+      % L.alternatives(L.MARK))
+print("      named as one of the three markers in this file's own docstring,")
+print("      in the README and in the published document, was in the nine and")
+print("      not in the three.  There is now ONE rule, `lib7522.MARK`, and")
+print("      both S3a and this check use the same object.")
+print("  (2) THE VERDICT.  A bare marker beside a figure the tree COMPUTED is")
+print("      not the defect; a bare marker beside a figure nothing here")
+print("      produces is.  So a USE is BACKED when every figure on its line")
+print("      appears in one of this tree's %d committed transcripts, and"
+      % len(MY_OUTS))
+print("      UNBACKED otherwise.  Only UNBACKED is counted.")
+print()
+print("  BOTH RULES, ON THE SAME BYTES -- the disagreement exhibited, not")
+print("  described:")
+old_hits = sum(1 for f in MINE_ALL
+               for _ in L.strength_lines(L.read(f, None), L.MARK_OLD))
+new_hits = sum(1 for f in MINE_ALL
+               for _ in L.strength_lines(L.read(f, None)))
+print("      the %d-alternative rule this tree used on ITSELF   %3d hit(s)"
+      % (L.alternatives(L.MARK_OLD), old_hits))
+print("      the %d-alternative rule it pointed at its SUBJECT  %3d hit(s)"
+      % (L.alternatives(L.MARK), new_hits))
+print()
+print("  POPULATION.  %d `*.py`, %d `*.sh`, %d `*.md` in this tree, plus the"
+      % (len(MINE_PY), len(MINE_SH), len(MINE_MD)))
+print("  published document -- %d artifacts.  The `.md` half is new in"
+      % len(MINE_ALL))
+print("  mg-70c7 and it is the half mg-05eb's OPEN 2 was three-quarters in.")
+print()
+CORPUS = L.transcript_figures(MY_OUTS)
+backed, unbacked, nofig, mentions = [], [], [], 0
+for rel in MINE_ALL:
+    text = L.read(rel, None)
+    lines = text.splitlines()
+    for i, line, kind in L.strength_lines(text):
+        if kind == "MENTION":
             mentions += 1
-print("      MENTIONs in this tree                      %3d" % mentions)
-print("      USEs in this tree                          %3d" % len(uses))
-for name, i, line in uses:
-    print("          *** %s:%d  %s" % (name, i, line[:64]))
-if uses:
-    BAD += len(uses)
-    print("  *** each of those is a place a reader will not check ***")
+            continue
+        # THE SAME ONE-LINE WINDOW S3a USES ON THE SUBJECT.  A hard wrap puts a
+        # figure on the neighbouring line here exactly as it does there, and a
+        # line-local lookup on this side while S3a has a window on that side
+        # would be mg-dee4's F3 rebuilt out of F4's parts.
+        figs = []
+        for _n in lines[max(0, i - 2):i + 1]:
+            figs.extend(L.figures(_n))
+        if not figs:
+            nofig.append((rel, i, line))
+        elif [v for v in figs if v not in CORPUS]:
+            unbacked.append((rel, i, line,
+                             [v for v in figs if v not in CORPUS]))
+        else:
+            backed.append((rel, i, line, figs))
+print("      MENTIONs                                   %3d" % mentions)
+print("      USEs, BACKED by a transcript of this tree  %3d" % len(backed))
+print("      USEs with NO figure on the line            %3d" % len(nofig))
+print("      USEs, UNBACKED                             %3d" % len(unbacked))
+print()
+for rel, i, line, figs in backed:
+    print("      BACKED   %-28s %4d  %-18s %s"
+          % (os.path.basename(rel), i, ",".join(str(v) for v in figs),
+             line[:34]))
+print()
+for rel, i, line in nofig:
+    print("      NO FIG   %-28s %4d  %s" % (os.path.basename(rel), i,
+                                            line[:50]))
+print()
+print("      A USE WITH NO FIGURE is outside D4's reach and is listed rather")
+print("      than folded away: D4 asks whether a NUMBER stood on a word, and")
+print("      a marker with no number attached is a qualitative claim this")
+print("      rule cannot adjudicate.  That is a STATED LIMIT of the check.")
+print()
+for rel, i, line, miss in unbacked:
+    print("      *** UNBACKED %s:%d  %s" % (os.path.basename(rel), i, line[:48]))
+    print("          no transcript of this tree prints: %s"
+          % ", ".join(str(v) for v in miss))
+if unbacked:
+    BAD += len(unbacked)
+    print("  *** each of those is a figure standing on a word ***")
 else:
-    print()
-    print("  Every figure this tree prints is printed next to the predicate")
-    print("  that produced it, in the same run -- which is the thing a")
-    print("  strength marker is usually standing in for.")
+    print("      Every figure a marker is applied to in this tree is printed")
+    print("      by one of its own transcripts, in the run that produced it.")
 
 # ---------------------------------------------------------------------------
 L.hdr("S5e  THE PIPELINE DEFECT CANNOT ARISE IN THE PYTHON -- structurally")

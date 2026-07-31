@@ -114,6 +114,24 @@ ck("a COMMENTED `set -euo pipefail` is not",
 ck("prose mentioning pipefail is not",
    L.has_pipefail("# not `set -o pipefail`: dash rejects it\n"), False)
 
+# mg-70c7: the caller scan's TARGET rule, which was a list of two filenames
+# until mg-dee4 measured what two filenames cannot see.  BOTH SENSES, so the
+# widened rule cannot have been widened into matching everything -- a rule
+# that matches every line is as useless as one that matches two names.
+ck("a `run_all.sh` under a tree is a target",
+   L.targets('p = subprocess.run(["sh", "code/x_audit/run_all.sh"])'),
+   [("code/x_audit", "run_all.sh")])
+ck("a target that is NOT run_all/run_audit is still a target (mg-70c7)",
+   L.targets('p = subprocess.run(["sh", "./c0_repro.sh"], cwd=d)'),
+   [(".", "c0_repro.sh")])
+ck("two targets on one line are two targets",
+   [b for _d, b in L.targets('for s in ("b0.sh", "x.sh"): run(s)')],
+   ["b0.sh", "x.sh"])
+ck("a line naming no shell script has no target",
+   L.targets('p = subprocess.run([sys.executable, "probe.py"])'), [])
+ck("`.shx` is not a shell script",
+   L.targets('run("code/t/thing.shx")'), [])
+
 print()
 print("F.  guarded() -- does an explicit construct catch the status?")
 print()
@@ -167,9 +185,12 @@ print("     row above measures.)")
 print()
 L.bar("selftestc2b3 TOTAL BAD: %d   (of %d rows)" % (BAD, N))
 print()
-print("EXTENT.  These %d rows range over libc2b3's five public rules" % N)
+print("EXTENT.  These %d rows range over libc2b3's seven public rules" % N)
 print("(strip_comment, strip_quoted, tee_pipelines, has_set_e/has_pipefail,")
-print("guarded, invocations) and over THIS TREE'S OWN run_all.sh.  They do")
+print("guarded, invocations, targets) and over THIS TREE'S OWN run_all.sh.")
+print("`targets` is mg-70c7's, and the five rows pinning it are themselves")
+print("executing sites naming a `*.sh`, so this file JOINS the population")
+print("k2 counts -- printed there, not folded away.  They do")
 print("NOT range over the 64 runners in the repository -- that is k1's job,")
 print("and k1's numbers are only as good as these rows.")
 sys.exit(1 if BAD else 0)
