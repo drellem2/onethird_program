@@ -730,7 +730,7 @@ def figures(line):
         # anything.  Dropped for the same reason `s3_figure.py:154` is:
         # a census that lets a line number back a figure blesses the figure
         # it exists to catch.
-        if re.search(r"\blines?\s+$", before):
+        if re.search(r"\blines?\s+$", before, re.I):
             continue
         try:
             v = int(m.group(1).replace(",", ""))

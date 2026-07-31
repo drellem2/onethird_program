@@ -1,0 +1,121 @@
+==============================================================================
+R3  APPLY TO YOURSELF THE RULE YOU APPLY TO YOUR SUBJECT
+==============================================================================
+
+==============================================================================
+R3a  ONE RULE OBJECT, POINTED IN BOTH DIRECTIONS
+==============================================================================
+
+  Read out of the SOURCE, not taken from the prose.  Two rules cannot
+  be kept in step by intention; they can be kept in step by being one
+  object.
+
+      s3_figure.py defines its OWN marker regex            0   OK
+      s3_figure.py uses the library's                      1   OK
+      s5_self.py defines its OWN marker regex              0   OK
+      s5_self.py calls the library's rule                  3   OK
+      lib7522.py defines the one rule                      1   OK
+
+      alternatives in the rule pointed at the SUBJECT    9
+      alternatives in the rule it used on ITSELF         3   (kept as
+                                                             MARK_OLD,
+                                                             for the
+                                                             exhibition
+                                                             below)
+
+  THE THREE MARKERS THE D4 DOCSTRING NAMES, each put to both rules:
+
+      marker                 old rule     the one rule
+      `confirmed exactly`    yes          yes
+      `verified`             NO           yes
+      `byte-identical`       yes          yes
+
+  `verified` is the one the docstring named and the rule did not have.
+
+==============================================================================
+R3b  THE POPULATION -- does the self-check see its own prose?
+==============================================================================
+
+      s5_self.py builds a population including `*.md`     yes
+      ...and the published document                       yes
+      ...and uses it for D4                               yes
+
+      the OLD population  (`*.py` + `*.sh`)                9 file(s)
+      the population now  (+ `*.md` + the document)       13 file(s)
+
+  mg-05eb's OPEN 2 was one figure wrong in FOUR artifacts.  Three of
+  them -- the README, `OUTCOMES.md` and the published document -- are
+  of the kind the old population could not contain.  A self-check
+  whose population stops at two suffixes has a population defined by
+  a name, which is the finding one directory over.
+
+==============================================================================
+R3c  THE VERDICT -- BACKED or UNBACKED, re-derived independently
+==============================================================================
+
+  A bare marker beside a figure the tree COMPUTED is not the defect;
+  a bare marker beside a figure nothing here produces is.  Re-derived
+  under this tree's own `figures()` and `transcript_numbers()`, which
+  share no code with `lib7522`'s:
+
+      MENTIONs                                    69
+      USEs BACKED by a transcript                 12
+      USEs with no figure in the window            7
+      USEs UNBACKED                                0
+
+      Every figure a marker is applied to in that tree is printed
+      by one of its own transcripts.
+
+  AND THE SAME QUESTION PUT TO `out_s5_self.txt`, so this is a check
+  on the repaired probe and not a second opinion about the tree:
+      s5_self.py's own transcript reports UNBACKED   0
+
+==============================================================================
+R3d  F4 -- THE CLAIM WINDOW, both populations, both widths
+==============================================================================
+
+  A CLAIM is a strength marker with a number near it.  `near` was
+  `on the same line`.  Both widths are run over both populations here,
+  so the movement is a measured row and not an assertion:
+
+      mg-c2b3's artifacts (S3a's subject)        window 0:  20   window 1:  24   (+4)
+          + OUTCOMES.md:9  | **Q2** | `git status --porcelain` identical across K3b
+          + k1_census.py:20  confirmed exactly."  It was not confirmed and it was not
+          + libc2b3.py:141  # reader-facing artifacts then reported the number as "c
+          + selftestc2b3.py:108  # reported the number as confirmed.  Both senses, so the
+      mg-7522's own artifacts                    window 0:  31   window 1:  43   (+12)
+          + OUTCOMES.md:88  `wc -c < FILE` counts the same bytes the pipeline did, v
+          + README.md:76  "confirmed exactly"**. The ticket was right; `libc2b3.PI
+          + README.md:156  with `verified` — named as a marker in `s5_self.py`'s ow
+          + lib7522.py:200  # said "confirmed exactly" about the number the instrume
+          + lib7522.py:619  #     the README said "confirmed exactly" about a number
+          + s2_status.py:24  counts `OUTCOMES.md` said were `verified`, on both mecha
+          + s2_status.py:213  print("  the pipeline did, `verified against the pre-rep
+          + s3_figure.py:170  print("  runners (measured)\"*.  `(measured)` is the str
+          + s3_figure.py:246  ("k3_retro.py", "past green is confirmed", "NOT A CLAIM"
+          + s3_figure.py:248  ("k3_retro.py", "byte for byte", "HOLDS",
+          + selftest7522.py:165  ck("`verified` is IN the rule -- the D4 docstring names 
+          + OneThird-RunnerExit-PopulationRepair.md:191  it up to `all`** — and then wrote `(measured)` beside it
+
+  THE ONE THE FINDING IS ABOUT is in the second population:
+      OUTCOMES.md:88  `wc -c < FILE` counts the same bytes the pipeline did, verifie
+      OUTCOMES.md:89  pre-repair output (`0 / 0 / 0 / 0 / 2111 / 0`, unchanged): **t
+          marker on the first line, figure on the second --
+          a line-local rule sees neither as a claim.
+
+      `s3_figure.WINDOW` is now                          1
+      ...and applied in BOTH directions                  yes
+
+==============================================================================
+R3 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a second marker regex in the subject
+tree, a named marker the one rule does not reach, a self-facing
+population that cannot see its own `*.md`, an UNBACKED use, a
+disagreement between this derivation and `out_s5_self.txt`, and a
+claim window that is not one line in both directions.  It ranges over
+mg-7522's 13 artifacts and mg-c2b3's 11.  It does NOT judge whether a
+BACKED figure is backed by the RIGHT measurement -- that is the weak
+direction of the backing test and it is stated in `lib7522` where the
+rule lives.

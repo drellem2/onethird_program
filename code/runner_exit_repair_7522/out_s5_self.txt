@@ -29,52 +29,52 @@ S5b  D1 -- IS ANY POPULATION HERE DEFINED BY A NAME?
       mentions: 51
 
       lines that FILTER a population by that name: 9
-          s1_population.py:70  named = [p for p in p0 if os.path.basename(p) == "run_all.sh"]
-          s1_population.py:98  if os.path.basename(p) == "run_all.sh"}))
-          s1_population.py:147  if os.path.basename(p) != "run_all.sh")
-          s1_population.py:194  swept = [p for p in pin_all if os.path.basename(p) == "run_all.sh"
-          s3_figure.py:81  if os.path.basename(p) == "run_all.sh"}
-          s3_figure.py:143  if os.path.basename(p) == "run_all.sh"}
-          s3_figure.py:152  n_pin_runs = len([p for p in pin_src if os.path.basename(p) == "run_all.
-          s3_figure.py:154  if os.path.basename(p) == "run_all.sh"
-          s3_figure.py:303  % len([p for p in head_src if os.path.basename(p) == "run_all.sh"]))
+          s1_population.py:76  named = [p for p in p0 if os.path.basename(p) == "run_all.sh"]
+          s1_population.py:121  if os.path.basename(p) == "run_all.sh"}))
+          s1_population.py:171  if os.path.basename(p) != "run_all.sh")
+          s1_population.py:249  swept = [p for p in pin_all if os.path.basename(p) == "run_all.sh"
+          s3_figure.py:114  if os.path.basename(p) == "run_all.sh"}
+          s3_figure.py:176  if os.path.basename(p) == "run_all.sh"}
+          s3_figure.py:185  n_pin_runs = len([p for p in pin_src if os.path.basename(p) == "run_all.
+          s3_figure.py:187  if os.path.basename(p) == "run_all.sh"
+          s3_figure.py:352  % len([p for p in head_src if os.path.basename(p) == "run_all.sh"]))
 
   Each of those is checked by hand, because `is this filter the sweep's
   rule under measurement or is it mine` is not a syntactic question:
 
-      s1_population.py:70      ALLOWED      the sweep's NAME rule, being
+      s1_population.py:76      ALLOWED      the sweep's NAME rule, being
                                             counted next to the property rule
                                             -- S1a prints both
-      s1_population.py:98      ALLOWED      the sweep's NAME rule, being
+      s1_population.py:121     ALLOWED      the sweep's NAME rule, being
                                             counted next to the property rule
                                             -- S1a prints both
-      s1_population.py:147     ALLOWED      the sweep's NAME rule, being
+      s1_population.py:171     ALLOWED      the sweep's NAME rule, being
                                             counted next to the property rule
                                             -- S1a prints both
-      s1_population.py:194     ALLOWED      the sweep's NAME rule, being
+      s1_population.py:249     ALLOWED      the sweep's NAME rule, being
                                             counted next to the property rule
                                             -- S1a prints both
-      s3_figure.py:81          ALLOWED      the `run_all.sh` sub-population of
+      s3_figure.py:114         ALLOWED      the `run_all.sh` sub-population of
                                             the census whose figures S3b/S3c
                                             are re-deriving, which is the
                                             sweep's own population by
                                             construction
-      s3_figure.py:143         ALLOWED      the `run_all.sh` sub-population of
+      s3_figure.py:176         ALLOWED      the `run_all.sh` sub-population of
                                             the census whose figures S3b/S3c
                                             are re-deriving, which is the
                                             sweep's own population by
                                             construction
-      s3_figure.py:152         ALLOWED      the `run_all.sh` sub-population of
+      s3_figure.py:185         ALLOWED      the `run_all.sh` sub-population of
                                             the census whose figures S3b/S3c
                                             are re-deriving, which is the
                                             sweep's own population by
                                             construction
-      s3_figure.py:154         ALLOWED      the `run_all.sh` sub-population of
+      s3_figure.py:187         ALLOWED      the `run_all.sh` sub-population of
                                             the census whose figures S3b/S3c
                                             are re-deriving, which is the
                                             sweep's own population by
                                             construction
-      s3_figure.py:303         ALLOWED      the `run_all.sh` sub-population of
+      s3_figure.py:352         ALLOWED      the `run_all.sh` sub-population of
                                             the census whose figures S3b/S3c
                                             are re-deriving, which is the
                                             sweep's own population by
@@ -102,7 +102,7 @@ S5c  D2 -- WHAT IS EVERY ENUMERATION HERE ANCHORED TO?
                                                      by side -- the pinned
                                                      side is one half of a
                                                      comparison
-      s2_status.py             3 pin(s)  COMPARISON  the PRE-repair runner
+      s2_status.py             4 pin(s)  COMPARISON  the PRE-repair runner
                                                      text, which must come
                                                      from a fixed revision or
                                                      there is no `pre`
@@ -147,12 +147,61 @@ S5d  D4 -- DOES THIS TREE USE A STRENGTH MARKER INSTEAD OF A CHECK?
   detecting regex as a violation, which is the arc's recurring defect
   in the instrument built to find it.  Recorded in OUTCOMES.md.
 
-      MENTIONs in this tree                       18
-      USEs in this tree                            0
+  mg-70c7 REPAIRED TWO THINGS ABOUT THIS CHECK, both mg-dee4's F3.
+  (1) THE RULE.  It ran a 3-alternative regex of its own while S3a
+      pointed a 9-alternative one at the SUBJECT -- and `verified`,
+      named as one of the three markers in this file's own docstring,
+      in the README and in the published document, was in the nine and
+      not in the three.  There is now ONE rule, `lib7522.MARK`, and
+      both S3a and this check use the same object.
+  (2) THE VERDICT.  A bare marker beside a figure the tree COMPUTED is
+      not the defect; a bare marker beside a figure nothing here
+      produces is.  So a USE is BACKED when every figure on its line
+      appears in one of this tree's 6 committed transcripts, and
+      UNBACKED otherwise.  Only UNBACKED is counted.
 
-  Every figure this tree prints is printed next to the predicate
-  that produced it, in the same run -- which is the thing a
-  strength marker is usually standing in for.
+  BOTH RULES, ON THE SAME BYTES -- the disagreement exhibited, not
+  described:
+      the 3-alternative rule this tree used on ITSELF    24 hit(s)
+      the 9-alternative rule it pointed at its SUBJECT   88 hit(s)
+
+  POPULATION.  8 `*.py`, 1 `*.sh`, 3 `*.md` in this tree, plus the
+  published document -- 13 artifacts.  The `.md` half is new in
+  mg-70c7 and it is the half mg-05eb's OPEN 2 was three-quarters in.
+
+      MENTIONs                                    69
+      USEs, BACKED by a transcript of this tree   12
+      USEs with NO figure on the line              7
+      USEs, UNBACKED                               0
+
+      BACKED   s2_status.py                    3  34,34,34           mg-c2b3 settled its retroactive qu
+      BACKED   s3_figure.py                  169  64                 print("  The published document sa
+      BACKED   s3_figure.py                  189  64                 print("  \"all 64\" is FALSE: it i
+      BACKED   run_all.sh                      4  3,20               # Pure Python 3, no dependencies, 
+      BACKED   OUTCOMES.md                    16  72,11,11,8,16,8,8,16,8,8 | **Q10** | all 11 discarded statu
+      BACKED   OUTCOMES.md                    16  72,11,11,8,16,8,8,16,8,8 | **Q10** | all 11 discarded statu
+      BACKED   OUTCOMES.md                    51  8                  **Q14, and why it is worth a row.*
+      BACKED   OUTCOMES.md                    88  2111               `wc -c < FILE` counts the same byt
+      BACKED   README.md                      16  8                  | `s2_status.py` | **OPEN 1** — th
+      BACKED   README.md                      92  64,59,64           `k1_census.py`'s docstring; and *"
+      BACKED   README.md                      93  64,59,64,59,64     (measured)"*, which is **59 of 64*
+      BACKED   OneThird-RunnerExit-PopulationRepair.md  107  34,34,34           The sweep settled its retroactive 
+
+      NO FIG   lib7522.py                    688  character on each side, so `` `verified against th
+      NO FIG   s2_status.py                  308  scored a re-run identical step as "did not run".
+      NO FIG   s3_figure.py                    1  """S3 -- THE FIGURE THAT WAS "CONFIRMED EXACTLY", 
+      NO FIG   sitecustomize_mg7522.py         2  failure AFTER it has done all of its real work.
+      NO FIG   OUTCOMES.md                    87  The repair reads `git diff`'s own status and keeps
+      NO FIG   README.md                      25  called confirmed was the one the instrument got wr
+      NO FIG   OneThird-RunnerExit-PopulationRepair.md   24  2. **The one figure the sweep said it had confirme
+
+      A USE WITH NO FIGURE is outside D4's reach and is listed rather
+      than folded away: D4 asks whether a NUMBER stood on a word, and
+      a marker with no number attached is a qualitative claim this
+      rule cannot adjudicate.  That is a STATED LIMIT of the check.
+
+      Every figure a marker is applied to in this tree is printed
+      by one of its own transcripts, in the run that produced it.
 
 ==============================================================================
 S5e  THE PIPELINE DEFECT CANNOT ARISE IN THE PYTHON -- structurally

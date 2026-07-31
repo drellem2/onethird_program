@@ -45,21 +45,39 @@ print("  grain words, in the same line or the one above it.")
 print()
 GRAINY = re.compile(r"\b(?:pipeline|line|execution|site|status|statuses|"
                     r"invocation)s?\b", re.I)
-GRAIN_WORD = re.compile(r"\b(?:SOURCE LINES?|EXECUTIONS?|SITES?|lines?|"
-                        r"executions?|sites?)\b")
+# THE GRAIN WORDS.  A count must say WHAT IT COUNTS -- lines, executions,
+# sites, pipelines, files, statuses, invocations, steps, argv.  Case-
+# insensitive, because this tree writes `EXECUTIONS` in a heading and
+# `executions` in a sentence and the check is about the word, not its case.
+# `pipelines` and `files` are grain words as much as `executions` is: the
+# defect mg-dee4 found is a number with NO grain attached, not a number
+# counted at a grain someone disagrees with.
+GRAIN_WORD = re.compile(r"\b(?:source lines?|executions?|sites?|lines?|"
+                        r"pipelines?|files?|status|statuses|invocations?|"
+                        r"steps?|argv|rows?|assertions?)\b", re.I)
 COUNTED = re.compile(r"\b\d+\b")
+# A line that QUOTES another artifact's line -- `OUTCOMES.md:88  <text>` --
+# is reproducing someone else's words for the reader, not reporting a count of
+# my own.  Excluded, and the exclusion is named: the alternative is a check
+# satisfied by not quoting the evidence, which is the defect R1e's first draft
+# had and is recorded in OUTCOMES.md.
+CITATION = re.compile(r"[\w./-]+\.(?:py|sh|md|txt):\d+")
 missing = []
-checked = 0
+checked = quoted = 0
 for out in MY_OUTS:
     lines = M.read(out, None).splitlines()
     for i, line in enumerate(lines, 1):
         if not (GRAINY.search(line) and COUNTED.search(line)):
+            continue
+        if CITATION.search(line):
+            quoted += 1
             continue
         checked += 1
         window = " ".join(lines[max(0, i - 2):i + 1])
         if not GRAIN_WORD.search(window):
             missing.append((out, i, line.strip()))
 print("      transcript lines reporting a count over source   %3d" % checked)
+print("      ...quoting another artifact's line, excluded     %3d" % quoted)
 print("      ...with no grain word in the window              %3d" % len(missing))
 for o, i, l in missing[:12]:
     print("          *** %s:%d  %s" % (os.path.basename(o), i, l[:56]))
@@ -79,18 +97,36 @@ M.hdr("R6b  E2 -- IS EVERY FIGURE OF MINE IN ONE OF MY TRANSCRIPTS?")
 MY_ART = ["%s/%s" % (M.TREE, f) for f in MINE_MD]
 if os.path.exists(os.path.join(M.REPO, M.MY_DOC)):
     MY_ART.append(M.MY_DOC)
-CORPUS = M.transcript_numbers(MY_OUTS)
-print("      my committed transcripts                         %3d" % len(MY_OUTS))
+# THE CORPUS IS THE TRANSCRIPTS OF THE TREES THESE ARTIFACTS ARE THE RECORD OF
+# -- mine and mg-7522's.  My `OUTCOMES.md` scores predictions against figures
+# both trees measured, and my document is the record of both repairs.  The
+# union is these two and not `the arc`, because a corpus of everything would
+# let any figure anywhere back any claim.
+CORPUS = M.transcript_numbers(MY_OUTS + M.outs(M.SUBJECT))
+# A figure QUOTED inside a correction of itself, or inside a prediction being
+# scored, is a mention of that figure and not a claim under it.  Named as its
+# own class and printed in full -- see R2b, which has the same class for the
+# same reason, and OUTCOMES.md for what a check without it would reward.
+QUOTING = re.compile(r"used to|no longer|mg-dee4|mg-7522|mg-05eb|mg-c2b3|"
+                     r"I predict|predicted|\bMISS\b|\bHIT\b|was a count|"
+                     r"is not|did not|reproduces it|corrected|stood here",
+                     re.I)
+print("      transcripts in the corpus                        %3d"
+      % len(MY_OUTS + M.outs(M.SUBJECT)))
 print("      distinct figures they print                      %3d" % len(CORPUS))
 print("      my reader-facing artifacts                       %3d" % len(MY_ART))
 print()
-un = 0
+un = quoted = 0
 for p in MY_ART:
     if p.endswith("PREDICTIONS.md"):
         continue                    # see the disposition in R2c and below
-    for i, line in enumerate(M.read(p, None).splitlines(), 1):
+    lines = M.read(p, None).splitlines()
+    for i, line in enumerate(lines, 1):
         miss = [v for v in M.figures(line) if v not in CORPUS]
         if not miss:
+            continue
+        if any(QUOTING.search(x) for x in lines[max(0, i - 2):i + 1]):
+            quoted += len(miss)
             continue
         un += len(miss)
         print("      *** UNBACKED %s:%d  %s"
@@ -98,6 +134,7 @@ for p in MY_ART:
         print("          %s" % line.strip()[:64])
 BAD += un
 print()
+print("      figures quoted inside a correction or a prediction %3d" % quoted)
 print("      figures of mine no transcript of mine prints     %3d" % un)
 print()
 print("  `PREDICTIONS.md` IS EXCLUDED AND THE REASON IS THE POINT.  A")

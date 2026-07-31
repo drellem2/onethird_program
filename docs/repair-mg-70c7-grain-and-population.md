@@ -255,16 +255,21 @@ the gap between two rules without checking how much of it the value arm could
 reach, which is the same mistake `mg-dee4` recorded in its own P4. And I
 predicted at least two files in the widened P2 at `HEAD`; there is one.
 
-**Three defects in this instrument are recorded rather than smoothed away.** The
+**Five defects in this instrument are recorded rather than smoothed away.** The
 figure-census corpus that let a line number back a measurement, above. A first
 draft of the grain check that **forbade the string `11 of 11` outright**, so that
 every artifact which had correctly described what it repaired went red for
 saying so — a check that would have been satisfied by deleting the record of the
-defect; quoting and asserting are counted separately now. And a first draft of
+defect; quoting and asserting are counted separately now. A first draft of
 the marker rule that scored `` `verified against the` `` as a **use**, because
 it tested the single character on each side of the marker rather than
 containment in the quoted span — and the first thing it flagged was this
-repair's own comment about the finding.
+repair's own comment about the finding. **A correction test that was itself
+line-local**, so a correction which wrapped scored as an assertion of the very
+figures it was correcting — F4's defect inside the repair of F4. And a
+transcript corpus built from the **git index**, which is empty on the run that
+produces the transcripts, so 108 figures came back unbacked and every one of
+them was one fact about the index.
 
 **What is not established, named rather than folded into a total.** That the
 value arm is the *right* widening — that is a disagreement with a definition,

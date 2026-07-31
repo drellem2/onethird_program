@@ -31,7 +31,7 @@ S4b  THE 2x2 -- anchor x rule, MEASURED
 
                          literal path only        + runtime path          
   PINNED bee07a1         1 sites  [1 read]        19 sites  [14 read]     
-  HEAD (unpinned)        1 sites  [1 read]        48 sites  [26 read]     
+  HEAD (unpinned)        2 sites  [1 read]        72 sites  [39 read]     
 
   WHERE `code/species_depth_audit_4700` APPEARS -- the site mg-05eb found
   outside the enumeration.  One cell of four, and it is the one that
@@ -65,17 +65,17 @@ S4c  THE COMPARISON THAT MUST KEEP ITS PIN -- measured both ways
   mg-c2b3's K3d asks `did any committed transcript move`.  It is a
   COMPARISON.  Run it at the pin and again anchored to HEAD:
 
-      anchored to bee07a1        166 file(s) changed, 42 transcript(s)
-      anchored to HEAD             0 file(s) changed, 0 transcript(s)
+      anchored to bee07a1        381 file(s) changed, 115 transcript(s)
+      anchored to HEAD             2 file(s) changed, 2 transcript(s)
 
   Anchored to HEAD the question is `does the worktree differ from
   itself`.  On a COMMITTED tree the answer is 0 BY CONSTRUCTION -- it
-  would print a clean bill for any repair whatsoever.  The 0 above is
+  would print a clean bill for any repair whatsoever.  The 2 above is
   this probe's own uncommitted edits if it is run mid-repair, and 0
   once they land; either way it is a fact about the worktree and not
   about the repair.  The pin is the whole content of that check.
 
-  MEASURED: the pinned side sees 166 files, the HEAD side sees 0.
+  MEASURED: the pinned side sees 381 files, the HEAD side sees 2.
 
 ==============================================================================
 S4d  THE PAST CLAIM THAT SAT OUTSIDE THE ENUMERATION

@@ -1,0 +1,131 @@
+==============================================================================
+R5  CONSUMPTION IS A DISJUNCTION, AND BOTH ARMS ARE NAMED
+==============================================================================
+
+==============================================================================
+R5a  THE TWO ARMS, COUNTED SEPARATELY, AT BOTH REVISIONS
+==============================================================================
+
+  Re-derived under this tree's own `captured_var` / `var_reads`, which
+  share no code with `lib7522.consumed`.  If the two disagree about
+  which pipelines are in the population, this row says so.
+
+    revision     clause                    files  pipelines
+    bee07a1      ERREXIT                      19         26
+    bee07a1      VALUE                         3          4
+    bee07a1      EITHER                       20         27
+
+    HEAD         ERREXIT                       0          0
+    HEAD         VALUE                         1          1
+    HEAD         EITHER                        1          1
+
+  mg-7522 PUBLISHED 19 files / 26 pipelines for P2 at bee07a1, which is the
+  ERREXIT row above.  The published table now carries both rows, so a
+  reader can disagree with one arm without discarding the other.
+
+  AND THE SAME QUESTION PUT TO THE REPAIRED PROBE:
+      out_s1_population.txt P2 rows          [('20', '27'), ('1', '1')]
+      out_s1_population.txt errexit rows     [('19', '26'), ('0', '0')]
+
+==============================================================================
+R5b  THE MEMBER THE VALUE ARM ADDS -- traced forward, not asserted
+==============================================================================
+
+      code/branching_audit_a218/c0_repro.sh:47
+          COUNT=$(grep -o '[0-9][0-9 ]*' "$WORK/out_selftest.txt" | tr -d ' ' | 
+
+      set -e present in the file        NO -- this is why P2 missed it
+      output captured into              `COUNT`
+      ...and READ at 2 site(s):
+            48  echo "      out_selftest.txt last number (the assertion count)
+            50  if [ "$COUNT" = "699520" ]; then
+
+      DISCARDED stages, and whether each can fail:
+          COUNT=$(grep -o '[0-9][0-9 ]*' "$WORK/ou True  external command `grep` can re
+          tr -d ' '                                True  external command `tr` can retu
+
+  DOES THE VALUE REACH THE SCRIPT'S OWN EXIT STATUS?  Traced, one hop
+  at a time, in the file's own bytes:
+
+        48  echo "      out_selftest.txt last number (the assert reads $COUNT
+        50  if [ "$COUNT" = "699520" ]; then                     reads $COUNT
+        54  BAD=$((BAD + 1))                                     sets BAD
+        71  if [ "$TBOK" -ne "$TB" ]; then BAD=$((BAD + 1)); fi  sets BAD
+        76  BAD=$((BAD + 1))                                     sets BAD
+        83  [ "$BAD" -eq 0 ] || exit 1                           BAD -> exit 1
+
+      external sites naming c0_repro.sh with an execution or a
+      status read:                                   10 in 5 file(s)
+          code/branching_audit_321d/h3_setlevel.py:339
+          code/branching_audit_321d/h3_setlevel.py:346
+          code/branching_audit_58da/g4_fleet.py:370
+          code/branching_audit_58da/g4_fleet.py:375
+          code/branching_audit_58da/g4_fleet.py:380
+          code/branching_repair_7e58/k3_setlevel.py:236
+          code/branching_repair_7e58/k3_setlevel.py:243
+          code/branching_repair_7e58/k3_setlevel.py:245
+          code/runner_exit_c2b3/selftestc2b3.py:125
+          code/runner_exit_repair_70c7/r5_population.py:150
+
+  AND THE THING THAT CANNOT BE DONE HERE, named rather than skipped.
+  mg-c2b3's K3b method -- run the discarded stage directly and read the
+  number the pipeline threw away -- is what S2 does to the 8 `| tee`
+  and 8 `git diff` executions.  It CANNOT be done to this one:
+
+      COUNT=$(grep -o '[0-9][0-9 ]*' "$WORK/out_self argv derivable: NO
+      tr -d ' '                                      argv derivable: yes
+
+      The discarded stages read `$WORK`, a `mktemp -d` created by the
+      script at run time.  There is no argv to run: the path does not
+      exist until the script that builds it is running.  I PREDICTED
+      these could be read directly and they cannot -- kept in
+      PREDICTIONS.md as a miss.  R5c is what stands in its place, and
+      it is the stronger evidence: instead of asking what the discarded
+      stage returns TODAY, it makes the stage fail and reads what the
+      script DOES.
+
+==============================================================================
+R5c  THE DIRECTION, MEASURED -- a forced failure on the real bytes
+==============================================================================
+
+  mg-dee4 called this fail-LOUD and did not run it.  A direction that
+  is argued is a direction that has not been checked, so both arms are
+  run here on a scratch copy of the REAL script: the file's own bytes,
+  with exactly one edit -- the discarded `grep` given an option it
+  rejects, so it exits non-zero and prints nothing.  No tracked file
+  is touched.
+
+      the forced edit applied to exactly one line   yes
+      as committed             exit 0    prints DISAGREES: False  TOTAL BAD: 0
+      `grep` forced to fail    exit 1    prints DISAGREES: True   TOTAL BAD: 1
+
+  SO THE DIRECTION IS LOUD, measured rather than asserted: a failing
+  discarded stage makes this script REPORT a disagreement and exit
+  non-zero, which is the opposite of the silent green mg-c2b3 swept
+  for.  That is why the repair is to the POPULATION and the instance
+  is left as it is, with the reason in `out_s1_population.txt`'s
+  disposition table rather than in a commit message.
+
+==============================================================================
+R5d  ALL THREE RULES, ON THIS ONE FILE
+==============================================================================
+
+      mg-c2b3's NAME rule  (`run_all.sh`)        MISSES -- it is c0_repro.sh
+      mg-c2b3's SHAPE rule (`| tee`)             MISSES -- there is no tee
+      mg-7522's PROPERTY rule (errexit arm)      MISSES -- there is no `set -e`
+
+  Three rules, three different reasons, one file.  That is what makes
+  it a population finding rather than an instance: each rule is sound
+  about what it defines and none of the three defines the defect.
+
+==============================================================================
+R5 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a forced-failure edit that no longer
+applies, an unmodified script that does not pass, and a forced failure
+that is SWALLOWED rather than reported.  It ranges over ONE file --
+`code/branching_audit_a218/c0_repro.sh` -- and over the P2 census at bee07a1 and HEAD.
+It does NOT establish that the value arm is the RIGHT widening; that is
+a disagreement with a definition, and the definition is written out in
+`lib7522.consumed` in full so that disagreeing with it is possible.

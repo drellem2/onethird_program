@@ -187,8 +187,8 @@ S1a  AT HEAD, ON DISK -- the world as it stands
 ==============================================================================
 
   PREDICATE                                              files  pipelines
-  P0  tracked `*.sh`, any depth, NO name rule               93          -
-      ...of which named `run_all.sh` (the sweep's pop.)     85          -
+  P0  tracked `*.sh`, any depth, NO name rule               94          -
+      ...of which named `run_all.sh` (the sweep's pop.)     86          -
       ...of which NOT so named                               8          -
   P1  ...containing a REAL pipeline on a command line        1          2
   P2  ...status CONSUMED and discarded stage CAN FAIL        1          1

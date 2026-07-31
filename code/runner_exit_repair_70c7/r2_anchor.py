@@ -23,6 +23,7 @@ by eye; a weak test that runs beats a strong one that is a promise.
 """
 
 import os
+import re
 import subprocess
 import sys
 
@@ -95,13 +96,23 @@ DISPOSED = {
 }
 
 
+# A figure on a line that is CORRECTING a past figure is a QUOTATION of it,
+# not a claim under it.  Counted as its own class and printed in full, not
+# dropped: the alternative is a census that can only be satisfied by DELETING
+# the record of what was repaired, which is the defect R1e's first draft had
+# and is recorded in OUTCOMES.md.
+FIXING = re.compile(r"used to|no longer|mg-dee4|mg-70c7|was a count|"
+                    r"is not|did not|reproduces it|corrected|stood here|"
+                    r"printed \d+ at the time", re.I)
+
+
 def census(label, artifacts, corpus, outs, disposed):
     global BAD
     print("  %s" % label)
     print("      transcripts in the corpus                    %3d" % len(outs))
     print("      distinct figures they print                  %3d" % len(corpus))
     print()
-    total = un = 0
+    total = un = quoted = 0
     for p in artifacts:
         lines = M.read(p, None).splitlines()
         for i, line in enumerate(lines, 1):
@@ -111,6 +122,19 @@ def census(label, artifacts, corpus, outs, disposed):
             total += len(figs)
             miss = [v for v in figs if v not in corpus]
             if not miss:
+                continue
+            # ONE LINE IN EITHER DIRECTION, which is F4's own rule turned on
+            # this census.  Its first draft asked whether THIS line was
+            # correcting, and a correction that wraps -- "no anchor reproduces
+            # it" on one line, "257 and 240" on the next -- scored as an
+            # assertion of the figures it was correcting.  A line-local test
+            # inside the repair of a line-local test.  Recorded in OUTCOMES.md.
+            if any(FIXING.search(x) for x in lines[max(0, i - 2):i + 1]):
+                quoted += len(miss)
+                print("      QUOTED-IN-A-CORRECTION %s:%d  %s"
+                      % (os.path.basename(p), i,
+                         ", ".join(str(v) for v in miss)))
+                print("          %s" % line.strip()[:62])
                 continue
             why = disposed.get((p, i)) or disposed.get((p, miss[0]))
             if why:
@@ -127,6 +151,7 @@ def census(label, artifacts, corpus, outs, disposed):
             print("          %s" % line.strip()[:66])
     print()
     print("      figures examined                             %3d" % total)
+    print("      quoted inside a correction of themselves     %3d" % quoted)
     print("      UNBACKED and undispositioned                 %3d" % un)
     print()
     return total, un
@@ -167,13 +192,25 @@ for _i in range(1, 4000):
         "a PREDICTION, written and committed before any probe in this tree "
         "ran.  A figure a transcript could back would not be a prediction; "
         "OUTCOMES.md is where each becomes a claim and is scored.")
-if MY_OUTS:
-    census("this tree's own artifacts:", MY_ART,
-           M.transcript_numbers(MY_OUTS), MY_OUTS, MY_DISPOSED)
-else:
-    print("  This tree has no committed transcripts yet -- this is the first")
-    print("  run.  The census runs against the transcripts THIS run produces")
-    print("  on the second pass, which is how `run_all.sh` is ordered.")
+print("  THE CENSUS OF MY OWN ARTIFACTS IS IN `R6b`, NOT HERE, and the reason")
+print("  is an ordering fact worth stating rather than a preference.")
+print("  `run_all.sh` truncates each transcript with `>` before its probe")
+print("  runs, so THIS probe cannot read `out_r2_anchor.txt` -- it is writing")
+print("  it.  Every figure this section prints, including the four anchors")
+print("  above, would come back UNBACKED for that reason and for no other.")
+print("  `r6_self.py` runs last, when every other transcript of this run is")
+print("  complete, so that is where the census of this tree's own prose")
+print("  belongs.  Running it in both places would give this tree two")
+print("  answers to one question, and the wrong one would be the loud one.")
+print()
+print("      my reader-facing artifacts, censused in R6b        %3d"
+      % len(MY_ART))
+for p in MY_ART:
+    print("          %s" % p)
+print()
+print("      `PREDICTIONS.md` is excluded there and the reason is named: a")
+print("      prediction is a figure written BEFORE the run, so a figure a")
+print("      transcript could back would not be a prediction.")
 
 print()
 M.bar("R2 TOTAL BAD: %d" % BAD)

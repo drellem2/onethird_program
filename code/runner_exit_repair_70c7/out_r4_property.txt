@@ -1,0 +1,78 @@
+==============================================================================
+R4  THE CALLER SCAN'S TARGET RULE, AS A PROPERTY
+==============================================================================
+
+==============================================================================
+R4a  THE CENSUS AT HEAD, UNDER THE PROPERTY -- derived here
+==============================================================================
+
+    target basename       sites  consuming   the two-name rule sees it?
+    run_all.sh               33         13   yes
+    c0_repro.sh               4          3   NO
+    b0_repro.sh               2          0   NO
+    b.sh                      1          0   NO
+    b0.sh                     1          0   NO
+    probe.sh                  1          1   NO
+    x.sh                      1          0   NO
+
+      executing sites naming a `*.sh`                43
+      ...the two-name rule matches                   33
+      ...outside it, across 6 distinct basenames     10
+      ...of those, READING the exit status            4
+      ...naming `run_audit.sh`, the name ADDED        0
+
+  THE SITES THEMSELVES, so a reader can disagree with the rule rather
+  than with a total.  Some are fixtures inside a self-test and some
+  are live invocations; both are printed and neither is folded away:
+
+      code/branching_audit_2060/run_all.sh:18            -      b0_repro.sh
+      code/branching_audit_321d/h3_setlevel.py:339       READS  c0_repro.sh
+      code/branching_audit_58da/g4_fleet.py:370          READS  c0_repro.sh
+      code/branching_repair_7e58/k3_setlevel.py:236      READS  c0_repro.sh
+      code/runner_exit_c2b3/k2_consume.py:456            -      b0_repro.sh
+      code/runner_exit_c2b3/selftestc2b3.py:125          -      c0_repro.sh
+      code/runner_exit_c2b3/selftestc2b3.py:155          -      x.sh
+      code/runner_exit_c2b3/selftestc2b3.py:155          -      b0.sh
+      code/runner_exit_repair_7522/selftest7522.py:123   -      b.sh
+      code/runner_exit_repair_7522/selftest7522.py:250   READS  probe.sh
+
+==============================================================================
+R4b  IS THE PROPERTY STATED WHERE THE CHECK LIVES?
+==============================================================================
+
+      k2_consume.py no longer holds a two-name rule (regex calls only)  0   OK
+      ...and calls the property rule                        1   OK
+      libc2b3.py defines it                                 1   OK
+      ...and states the property in its own words           3   OK
+      selftestc2b3.py pins it in BOTH senses                5   OK
+
+  mg-7522's own stated-limit comment named the LITERAL-PATH limit
+  correctly and did not name this one.  Both limits are named at the
+  rule now: the tree is read from a directory component on the same
+  line, and a path assembled at run time is invisible to any
+  line-local rule whatever the anchor.
+
+      k2_consume.py states BOTH remaining limits at the rule   yes
+
+==============================================================================
+R4c  DOES THE WIDENING LOSE ANYTHING?  both directions
+==============================================================================
+
+  A widened rule that drops a row it used to have is not a widening.
+  The old rule's hits are computed here and checked to be a SUBSET:
+
+      sites the two-name rule found                   2
+      ...still found under the property               2
+      ...LOST by the widening                         0
+
+==============================================================================
+R4 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a two-name regex still in
+`k2_consume.py`, a property that is not stated where the check is, a
+missing both-senses fixture, an unstated limit, and a site the old rule
+found that the new one does not.  It ranges over every tracked `*.py`
+and `*.sh` at HEAD.  It does NOT range over targets whose path is
+assembled at run time -- that is the stated limit, and the runtime-path
+census is `code/runner_exit_repair_7522/out_s4_unpin.txt`.

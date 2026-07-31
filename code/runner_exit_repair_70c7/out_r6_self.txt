@@ -1,0 +1,92 @@
+==============================================================================
+R6  THE SAME FOUR QUESTIONS, ASKED OF THIS TREE
+==============================================================================
+
+==============================================================================
+R6a  E1 -- IS EVERY COUNT'S GRAIN STATED?
+==============================================================================
+
+  The defect is a count of SOURCE LINES presented as a count of RUNS.
+  A rule that could decide this in general would be a rule about
+  meaning, so the question asked here is the checkable half: every
+  transcript line that reports a count over source carries one of the
+  grain words, in the same line or the one above it.
+
+      transcript lines reporting a count over source    22
+      ...quoting another artifact's line, excluded       6
+      ...with no grain word in the window                0
+
+  EXTENT OF THIS CHECK, stated rather than implied: it establishes
+  that the WORD is present, not that it is the right one.  A count
+  labelled `executions` that is really sites would pass.  What it
+  prevents is the shape mg-dee4 found -- a number with no grain
+  attached at all, which cannot be argued with because it does not
+  say what it counts.
+
+==============================================================================
+R6b  E2 -- IS EVERY FIGURE OF MINE IN ONE OF MY TRANSCRIPTS?
+==============================================================================
+
+      transcripts in the corpus                         13
+      distinct figures they print                       94
+      my reader-facing artifacts                         4
+
+
+      figures quoted inside a correction or a prediction   3
+      figures of mine no transcript of mine prints       0
+
+  `PREDICTIONS.md` IS EXCLUDED AND THE REASON IS THE POINT.  A
+  prediction is a figure written BEFORE the run; a figure a transcript
+  could back would not be a prediction.  The exclusion is named here
+  rather than left as a quiet filter, which is the difference between
+  a stated limit and a hand-list.
+
+==============================================================================
+R6c  E3 -- EVERY RULE I POINT AT THE SUBJECT, POINTED AT ME
+==============================================================================
+
+  mg-dee4's F3 was a NINE-alternative test for them and a THREE-
+  alternative one for me.  The four rules this tree turns on `lib7522`
+  are turned on `lib70c7` here, on the same terms:
+
+      the marker rule (`lib7522.MARK`, 9 alternatives)        0 UNBACKED use(s) in my own code
+      the WIDENED P2 predicate, on my own `*.sh`              0 pipeline(s) of mine in the population
+      `shell=True` / `os.system(` -- AST, not grep            0 real call site(s)
+      a population of mine FILTERED by a runner filename      0 filter(s)
+
+  BRANCHES THAT HONESTLY CANNOT EXHIBIT THESE, with the reason:
+   1. E4 in `lib70c7.outs()` -- its only argument is a TREE, and the
+      filename pattern is `out_*.txt`, which is this arc's transcript
+      convention and not a rule about which runner is interesting.
+      A name appears; it is not a population filter over content.
+   2. The pipeline defect in this tree's Python -- every subprocess
+      takes a LIST argv, so no shell parses the command, so there is
+      no pipeline.  STRUCTURAL, checked above as an AST walk.
+   3. `r5_population.py` writes a scratch `_mg70c7_arm.sh` and runs it
+      -- that file is UNTRACKED and deleted in a `finally`, so it is
+      never in `ls_sh()`'s population at all.
+
+==============================================================================
+R6d  THIS TREE'S OWN RUNNER, BY THE WIDENED PREDICATE
+==============================================================================
+
+      pipelines of any kind in run_all.sh                0
+      steps                                              7
+      ...that redirect and guard their own status        7
+      Every step redirects, has its status read by an explicit
+      `||` guard, and is `cat` afterwards.  0 pipelines under the
+      WIDENED predicate as well as the errexit one -- the value arm
+      cannot fire on a line that captures nothing.
+
+==============================================================================
+R6 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a transcript line of mine reporting a
+count with no grain word near it, a figure of mine no transcript of
+mine prints, an UNBACKED marker use of mine, a pipeline of mine in the
+widened P2, a real `shell=True`, and a population of mine filtered by a
+runner filename.  It ranges over this tree's 8 `*.py`, 1 `*.sh`, 3
+`*.md` and 7 transcript(s).  It does NOT range over mg-7522's tree or
+mg-c2b3's -- R1 through R5 do that, and this is the section about the
+instrument.
