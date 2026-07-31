@@ -1,0 +1,241 @@
+==============================================================================
+S1  THE POPULATION -- BY PROPERTY, NOT BY NAME
+==============================================================================
+
+==============================================================================
+S1  what this probe measures, and the two rules it replaces
+==============================================================================
+
+  A population is defined by a PREDICATE OVER CONTENT.  Every count
+  below prints its predicate on the same line, so a reader can check
+  the rule and not only the number.  `run_all.sh` appears exactly
+  once, as the sweep's rule being measured -- never as this probe's.
+
+==============================================================================
+S1a  AT THE SWEEP'S PINNED bee07a1 -- the world it repaired
+==============================================================================
+
+  PREDICATE                                              files  pipelines
+  P0  tracked `*.sh`, any depth, NO name rule               72          -
+      ...of which named `run_all.sh` (the sweep's pop.)     64          -
+      ...of which NOT so named                               8          -
+  P1  ...containing a REAL pipeline on a command line       23         53
+  P2  ...status CONSUMED and discarded stage CAN FAIL       19         26
+
+  THE SWEEP'S TWO RULES, over the same files:
+      shape rule  -- a real `| tee` pipeline                19         42
+      name rule   -- a real `| tee` in a `run_all.sh`       17         34
+
+  P2 IN FULL -- every member, with the clause each line satisfies:
+
+    code/branching_audit_2060/run_all.sh   [run_all.sh]
+           8  sh ./b0_repro.sh                          | tee out_b0_repro.txt   ; tail -1 out_b0_repr
+              discards: `set -e`
+           9  python3 -u selftest2060.py                | tee out_selftest.txt
+              discards: assert at selftest2060.py:17
+    code/branching_locate_db09/run_all.sh   [run_all.sh]
+           7  python3 -u selftestdb09.py | tee out_selftest.txt
+              discards: raise at selftestdb09.py:27
+    code/face_geometry/run_all.sh   [run_all.sh]
+          14  python3 controls.py 5 | tee controls_output.txt
+              discards: sys.exit at controls.py:1574
+    code/face_geometry_audit_6653/run_all.sh   [run_all.sh]
+          74  python3 verify_claims.py | tee out_verify_claims.txt
+              discards: sys.exit at verify_claims.py:539
+          78  python3 attack_banner.py | tee out_attack_banner.txt
+              discards: sys.exit at attack_banner.py:233
+    code/face_geometry_audit_e720/run_all.sh   [run_all.sh]
+          33  python3 verify_landing_claims.py | tee out_verify.txt
+              discards: sys.exit at verify_landing_claims.py:38
+          37  python3 attack_artifact_check.py | tee out_attack.txt
+              discards: raise at attack_artifact_check.py:61
+    code/face_geometry_audit_f1b2/run_audit.sh   [NOT named run_all.sh]
+          17  python3 audit_injections.py         | tee out_injections.txt
+              discards: assert at audit_injections.py:95
+    code/face_geometry_audit_fcf1/run_audit.sh   [NOT named run_all.sh]
+          16  python3 audit_nc4.py 5 | tee out_nc4.txt
+              discards: assert at audit_nc4.py:39
+    code/face_geometry_landing_7d5a/run_all.sh   [run_all.sh]
+          39  python3 verify_landing.py | tee out_verify.txt
+              discards: sys.exit at verify_landing.py:484
+          44  | tee out_attack_banner_after_repair.txt
+              discards: pipeline continued from the previous line (not line-local)
+    code/face_geometry_landing_da45/run_all.sh   [run_all.sh]
+          29  python3 verify_landing.py | tee out_verify.txt
+              discards: sys.exit at verify_landing.py:328
+    code/landscape_audit_d673/run_all.sh   [run_all.sh]
+          11  python3 audit_populations.py     6  | tee out_populations.txt
+              discards: assert at audit_populations.py:263
+          12  python3 audit_spectrum.py       40  | tee out_spectrum.txt
+              discards: assert at audit_spectrum.py:258
+    code/species_7d75/run_all.sh   [run_all.sh]
+           7  python3 selftest.py            | tee out_selftest.txt
+              discards: sys.exit at selftest.py:25
+    code/species_audit_73df/run_all.sh   [run_all.sh]
+          14  python3 selftest73df.py   | tee out_selftest.txt
+              discards: sys.exit at selftest73df.py:200
+    code/species_audit_a61f/run_all.sh   [run_all.sh]
+           9  python3 selftesta61f.py   | tee out_selftest.txt
+              discards: sys.exit at selftesta61f.py:29
+    code/species_extent_audit_6cb9/run_all.sh   [run_all.sh]
+          20  python3 -B selftest6cb9.py             | tee out_selftest.txt
+              discards: sys.exit at selftest6cb9.py:150
+    code/species_extent_d633/run_all.sh   [run_all.sh]
+          10  python3 selftestd633.py    | tee out_selftest.txt
+              discards: sys.exit at selftestd633.py:190
+    code/species_remainder_f8fa/run_all.sh   [run_all.sh]
+           7  python3 selftestf8fa.py    | tee out_selftest.txt
+              discards: sys.exit at selftestf8fa.py:174
+          10  python3 w3_scope.py        | tee out_w3_scope.txt
+              discards: sys.exit at w3_scope.py:260
+    code/species_repair_a4ef/run_all.sh   [run_all.sh]
+           9  python3 selftesta4ef.py | tee out_selftest.txt
+              discards: assert at selftesta4ef.py:29
+    code/state_delegation_audit_16eb/run_all.sh   [run_all.sh]
+          38  n=$(git diff "$base..HEAD" -- "$dir" | wc -c | tr -d ' ')
+              discards: external command `git` can return non-zero; external command `wc` can return non-zero
+          39  nmd=$(git diff "$base..HEAD" -- "$dir" ':!*.md' | wc -c | tr -d ' ')
+              discards: external command `git` can return non-zero; external command `wc` can return non-zero
+    code/state_delegation_repair_0049/run_all.sh   [run_all.sh]
+          39  n=$(git diff "$base..HEAD" -- "$dir" | wc -c | tr -d ' ')
+              discards: external command `git` can return non-zero; external command `wc` can return non-zero
+
+  IN P1 BUT NOT IN P2 -- named, with WHICH clause fails, because
+  a population that only lists its positives cannot be checked:
+
+    code/branching_audit_a218/c0_repro.sh
+          36  diff "$SRC/$f" "$WORK/$f" | head -8                       fails C1 (status not consumed)
+          47  COUNT=$(grep -o '[0-9][0-9 ]*' "$WORK/out_selftest.txt"   fails C1 (status not consumed)
+    code/face_geometry/run_all.sh
+          18  python3 run_probe.py 6 | tee probe_output_n6.txt          fails C3 (NO designed failure route (only a crash))
+    code/face_geometry_audit_1c80/run_all.sh
+          18  python3 a1_gates.py         | tee out_gates.txt           fails C3 (NO designed failure route (only a crash))
+          19  python3 a2_antichain.py     | tee out_antichain.txt       fails C3 (NO designed failure route (only a crash))
+          20  python3 a3_n6_population.py | tee out_n6.txt              fails C3 (NO designed failure route (only a crash))
+          21  python3 a4_witness.py       | tee out_witness.txt         fails C3 (NO designed failure route (only a crash))
+          22  python3 a5_claims.py        | tee out_claims.txt          fails C3 (NO designed failure route (only a crash))
+          23  python3 a6_mutations.py     | tee out_mutations.txt       fails C3 (NO designed failure route (only a crash))
+    code/face_geometry_audit_f1b2/run_audit.sh
+          14  python3 audit_scoring.py            | tee out_scoring.tx  fails C3 (NO designed failure route (only a crash))
+          15  python3 audit_gates.py              | tee out_gates.txt   fails C3 (NO designed failure route (only a crash))
+          16  python3 audit_theorem_and_content.py | tee out_theorem.t  fails C3 (NO designed failure route (only a crash))
+          18  python3 audit_nmax2.py              | tee out_nmax.txt    fails C3 (NO designed failure route (only a crash))
+    code/face_geometry_audit_fcf1/run_audit.sh
+          20  python3 audit_extra.py | tee out_extra.txt                fails C3 (NO designed failure route (only a crash))
+          24  python3 audit_gauge.py | tee out_gauge.txt                fails C3 (NO designed failure route (only a crash))
+    code/landscape_audit_d673/run_all.sh
+          13  python3 audit_e6_e8_m0.py        5  | tee out_e6_e8_m0.t  fails C3 (NO designed failure route (only a crash))
+          14  python3 audit_identifications.py 5  | tee out_identifica  fails C3 (NO designed failure route (only a crash))
+          15  python3 audit_addenda.py            | tee out_addenda.tx  fails C3 (NO designed failure route (only a crash))
+    code/species_audit_7dd3/run_all.sh
+          13  python3 selftest7dd3.py  | tee out_selftest.txt           fails C1 (status not consumed)
+    code/species_remainder_f8fa/run_all.sh
+           8  python3 w1_opposite.py     | tee out_w1_opposite.txt      fails C3 (NO designed failure route (only a crash))
+           9  python3 w2_typemismatch.py | tee out_w2_typemismatch.txt  fails C3 (NO designed failure route (only a crash))
+          25  echo "$E2OUT" | grep 'STANDING UN-STRUCK' || true         fails C1 (status not consumed)
+          30  echo "$E2OUT" | grep -E 'strike\(s\) measured|^E2 TOTAL   fails C3 (`echo` has no failure mode as used)
+    code/species_repair_6f61/run_all.sh
+          32  echo "$E2OUT" | grep 'STANDING UN-STRUCK' || true         fails C1 (status not consumed)
+          37  echo "$E2OUT" | grep -E 'strike\(s\) measured|^E2 TOTAL   fails C3 (`echo` has no failure mode as used)
+    code/species_repair_a4ef/run_all.sh
+          26  echo "$E2OUT" | grep 'STANDING UN-STRUCK' || true         fails C1 (status not consumed)
+          31  echo "$E2OUT" | grep -E 'strike\(s\) measured|^E2 TOTAL   fails C3 (`echo` has no failure mode as used)
+
+
+==============================================================================
+S1a  AT HEAD, ON DISK -- the world as it stands
+==============================================================================
+
+  PREDICATE                                              files  pipelines
+  P0  tracked `*.sh`, any depth, NO name rule               80          -
+      ...of which named `run_all.sh` (the sweep's pop.)     72          -
+      ...of which NOT so named                               8          -
+  P1  ...containing a REAL pipeline on a command line        4          8
+  P2  ...status CONSUMED and discarded stage CAN FAIL        0          0
+
+  THE SWEEP'S TWO RULES, over the same files:
+      shape rule  -- a real `| tee` pipeline                 0          0
+      name rule   -- a real `| tee` in a `run_all.sh`        0          0
+
+  P2 IN FULL -- every member, with the clause each line satisfies:
+
+
+  IN P1 BUT NOT IN P2 -- named, with WHICH clause fails, because
+  a population that only lists its positives cannot be checked:
+
+    code/branching_audit_a218/c0_repro.sh
+          36  diff "$SRC/$f" "$WORK/$f" | head -8                       fails C1 (status not consumed)
+          47  COUNT=$(grep -o '[0-9][0-9 ]*' "$WORK/out_selftest.txt"   fails C1 (status not consumed)
+    code/species_remainder_f8fa/run_all.sh
+          43  echo "$E2OUT" | grep 'STANDING UN-STRUCK' || true         fails C1 (status not consumed)
+          48  echo "$E2OUT" | grep -E 'strike\(s\) measured|^E2 TOTAL   fails C3 (`echo` has no failure mode as used)
+    code/species_repair_6f61/run_all.sh
+          32  echo "$E2OUT" | grep 'STANDING UN-STRUCK' || true         fails C1 (status not consumed)
+          37  echo "$E2OUT" | grep -E 'strike\(s\) measured|^E2 TOTAL   fails C3 (`echo` has no failure mode as used)
+    code/species_repair_a4ef/run_all.sh
+          38  echo "$E2OUT" | grep 'STANDING UN-STRUCK' || true         fails C1 (status not consumed)
+          43  echo "$E2OUT" | grep -E 'strike\(s\) measured|^E2 TOTAL   fails C3 (`echo` has no failure mode as used)
+
+
+==============================================================================
+S1b  WHAT THE NAME RULE COULD NOT CONTAIN, AND WHAT THE SHAPE RULE COULD NOT
+==============================================================================
+
+  MISSED BY THE NAME RULE (a real `| tee`, not called run_all.sh),
+  at bee07a1:
+      code/face_geometry_audit_f1b2/run_audit.sh           5 pipeline(s)
+      code/face_geometry_audit_fcf1/run_audit.sh           3 pipeline(s)
+      -> 2 file(s), 8 pipeline(s)
+
+  MISSED BY THE SHAPE RULE (in P2, but no `| tee` on the line), at bee07a1:
+      code/state_delegation_audit_16eb/run_all.sh          2 line(s)
+      code/state_delegation_repair_0049/run_all.sh         1 line(s)
+      -> 2 file(s), 3 pipeline(s)
+
+  These two sets are DISJOINT and neither is empty.  A sweep keyed on
+  the name misses the first; a sweep keyed on the shape misses the
+  second; only the property covers both.
+
+==============================================================================
+S1c  THE STATE OF THE ARC AT HEAD, AFTER THIS REPAIR
+==============================================================================
+
+  P2 at HEAD is the list of pipelines still throwing away a status
+  something reads.  This repair's forward half is that it is EMPTY.
+
+    P2 at HEAD is EMPTY -- 0 files, 0 pipelines.
+
+    EXTENT OF THAT.  It ranges over every tracked `*.sh` in this
+    repository at HEAD, at any depth, under the P2 predicate above.
+    It does NOT range over pipelines built at run time by a Python
+    caller, over `.sh` files that are untracked, or over any commit
+    other than HEAD.  Those limits are stated because a stated
+    limit is checkable and an omission is not.
+
+==============================================================================
+S1d  THE RETROACTIVE CLEARANCE, RESTATED OVER THE CORRECTED POPULATION
+==============================================================================
+
+  mg-c2b3 read the status of every `| tee` target in a `run_all.sh`:
+  34 of 34, all 0.  That result is SOUND ABOUT ITS POPULATION.  Over
+  the property-defined population it covers:
+
+      P2 members inside the sweep's population   15 file(s)
+      P2 members OUTSIDE it                       4 file(s)
+          code/face_geometry_audit_f1b2/run_audit.sh           1 line(s)
+          code/face_geometry_audit_fcf1/run_audit.sh           1 line(s)
+          code/state_delegation_audit_16eb/run_all.sh          2 line(s)
+          code/state_delegation_repair_0049/run_all.sh         1 line(s)
+
+  The clearance is silent about the second group.  S2 reads their
+  exit status directly -- the way the 34 were read -- so that the
+  cleared population and the corrected population are the same set.
+
+==============================================================================
+S1 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts pipelines still in P2 at HEAD, and
+nothing else.  It does not count P1 members that fail a clause -- those
+are listed above with the clause each fails, which is a stronger record
+than a count.  It ranges over tracked `*.sh` at HEAD and at bee07a1.

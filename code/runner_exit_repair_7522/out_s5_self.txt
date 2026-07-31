@@ -1,0 +1,213 @@
+==============================================================================
+S5  THE GENERAL FORM, APPLIED TO THIS TREE
+==============================================================================
+
+==============================================================================
+S5a  D3 -- IS THIS TREE'S OWN RUNNER IN ITS OWN POPULATION?
+==============================================================================
+
+  The strongest form of this check is the instrument turned on itself:
+  run S1's P2 predicate over this tree's own `*.sh`.  If an edit ever
+  puts a pipeline back into `run_all.sh`, this goes red naming the line.
+
+      run_all.sh                         set -e: yes  pipelines: 0   in P2: 0
+
+  And the idiom is present rather than merely the pipeline absent --
+  a runner with no steps at all would also score 0 above:
+      steps in run_all.sh                    6
+      ...that redirect and guard their status 6
+
+==============================================================================
+S5b  D1 -- IS ANY POPULATION HERE DEFINED BY A NAME?
+==============================================================================
+
+  Every mention of a runner FILENAME in this tree's Python, with what
+  it is doing there.  The rule this tree must satisfy: a filename may
+  appear as the SWEEP'S rule being measured, or as a specific file
+  being repaired, and never as this tree's own population filter.
+
+      mentions: 51
+
+      lines that FILTER a population by that name: 9
+          s1_population.py:70  named = [p for p in p0 if os.path.basename(p) == "run_all.sh"]
+          s1_population.py:98  if os.path.basename(p) == "run_all.sh"}))
+          s1_population.py:147  if os.path.basename(p) != "run_all.sh")
+          s1_population.py:194  swept = [p for p in pin_all if os.path.basename(p) == "run_all.sh"
+          s3_figure.py:81  if os.path.basename(p) == "run_all.sh"}
+          s3_figure.py:143  if os.path.basename(p) == "run_all.sh"}
+          s3_figure.py:152  n_pin_runs = len([p for p in pin_src if os.path.basename(p) == "run_all.
+          s3_figure.py:154  if os.path.basename(p) == "run_all.sh"
+          s3_figure.py:303  % len([p for p in head_src if os.path.basename(p) == "run_all.sh"]))
+
+  Each of those is checked by hand, because `is this filter the sweep's
+  rule under measurement or is it mine` is not a syntactic question:
+
+      s1_population.py:70      ALLOWED      the sweep's NAME rule, being
+                                            counted next to the property rule
+                                            -- S1a prints both
+      s1_population.py:98      ALLOWED      the sweep's NAME rule, being
+                                            counted next to the property rule
+                                            -- S1a prints both
+      s1_population.py:147     ALLOWED      the sweep's NAME rule, being
+                                            counted next to the property rule
+                                            -- S1a prints both
+      s1_population.py:194     ALLOWED      the sweep's NAME rule, being
+                                            counted next to the property rule
+                                            -- S1a prints both
+      s3_figure.py:81          ALLOWED      the `run_all.sh` sub-population of
+                                            the census whose figures S3b/S3c
+                                            are re-deriving, which is the
+                                            sweep's own population by
+                                            construction
+      s3_figure.py:143         ALLOWED      the `run_all.sh` sub-population of
+                                            the census whose figures S3b/S3c
+                                            are re-deriving, which is the
+                                            sweep's own population by
+                                            construction
+      s3_figure.py:152         ALLOWED      the `run_all.sh` sub-population of
+                                            the census whose figures S3b/S3c
+                                            are re-deriving, which is the
+                                            sweep's own population by
+                                            construction
+      s3_figure.py:154         ALLOWED      the `run_all.sh` sub-population of
+                                            the census whose figures S3b/S3c
+                                            are re-deriving, which is the
+                                            sweep's own population by
+                                            construction
+      s3_figure.py:303         ALLOWED      the `run_all.sh` sub-population of
+                                            the census whose figures S3b/S3c
+                                            are re-deriving, which is the
+                                            sweep's own population by
+                                            construction
+
+  `lib7522.ls_sh()` -- the only file-listing primitive in this tree --
+  takes NO name argument at all, so a name filter cannot be applied
+  inside it.  That is the STRUCTURAL half: the population primitive
+  cannot exhibit D1, and the reason is its signature and not a promise.
+      def ls_sh(ref=None)
+
+==============================================================================
+S5c  D2 -- WHAT IS EVERY ENUMERATION HERE ANCHORED TO?
+==============================================================================
+
+  Every line in this tree that pins an anchor, and which kind of
+  question it serves.  A CENSUS pinned to a revision is the defect;
+  a COMPARISON not pinned is mg-821e's.
+
+      lib7522.py               3 pin(s)  definition  the constant itself, plus
+                                                     the docstring that states
+                                                     the rule
+      s1_population.py         5 pin(s)  COMPARISON  S1a prints the census at
+                                                     the pin AND at HEAD, side
+                                                     by side -- the pinned
+                                                     side is one half of a
+                                                     comparison
+      s2_status.py             3 pin(s)  COMPARISON  the PRE-repair runner
+                                                     text, which must come
+                                                     from a fixed revision or
+                                                     there is no `pre`
+      s3_figure.py             10 pin(s) COMPARISON  the figures are re-
+                                                     derived at the revision
+                                                     the sweep quoted them at
+      s4_unpin.py              10 pin(s) COMPARISON  the pinned cells of the
+                                                     2x2 and the byte-
+                                                     comparison, both of which
+                                                     are comparisons
+      s5_self.py               1 pin(s)  PATTERN     the one hit is this
+                                                     scanner's own regex
+                                                     literal; the file itself
+                                                     reads only the current
+                                                     world
+      selftest7522.py          1 pin(s)  COMPARISON  the pinned side of the
+                                                     rules' both-senses
+                                                     fixtures
+      sitecustomize_mg7522.py  0 pin(s)  none        an injected hook; it
+                                                     reads no revision at all
+
+  THE CENSUS SIDE, checked structurally: every population primitive in
+  `lib7522.py` defaults to the current world, so a census that forgets
+  to think about its anchor gets the RIGHT one by default and a
+  comparison has to ask for the pin explicitly.  That is the direction
+  the defaults should point and it is checked here, not asserted:
+      ls_sh         (ref=None                    ) default is the current world: yes
+      read          (path, ref=None              ) default is the current world: yes
+      sources       (paths, ref=None             ) default is the current world: yes
+      callers       (ref=None                    ) default is the current world: yes
+      _sources_at   (ref=None                    ) default is the current world: yes
+
+==============================================================================
+S5d  D4 -- DOES THIS TREE USE A STRENGTH MARKER INSTEAD OF A CHECK?
+==============================================================================
+
+  A marker written INSIDE quotes, backticks or emphasis is a MENTION --
+  the arc's way of naming a form of words it is discussing.  Written
+  BARE, applied to a figure, it is a USE.  That distinction is the same
+  one as `a comment quoting | tee is not a pipeline`, one level up, and
+  the first draft of this check did not make it: it counted its own
+  detecting regex as a violation, which is the arc's recurring defect
+  in the instrument built to find it.  Recorded in OUTCOMES.md.
+
+      MENTIONs in this tree                       18
+      USEs in this tree                            0
+
+  Every figure this tree prints is printed next to the predicate
+  that produced it, in the same run -- which is the thing a
+  strength marker is usually standing in for.
+
+==============================================================================
+S5e  THE PIPELINE DEFECT CANNOT ARISE IN THE PYTHON -- structurally
+==============================================================================
+
+  Walked as an AST, not grepped.  A grep for `shell=True` matches the
+  sentence that says `shell=True` is never used -- mg-05eb recorded
+  exactly that defect in its own self-test, and the first draft of this
+  check reproduced it on four of this tree's own files.
+
+      REAL `shell=True` / `os.system(` CALL sites in this tree: 0
+      Every subprocess takes a LIST argv, so no shell parses the
+      command, so there is no pipeline, so `returncode` is the
+      target's own status.  STRUCTURAL: it follows from the call
+      shape, not from a promise about how these are invoked.
+
+      And `returncode` is read on every path: `lib7522.run_argv`
+      returns None on timeout, which prints `-` and never 0.
+      timeout path returns None rather than 0:  yes
+
+==============================================================================
+S5f  BRANCHES THAT HONESTLY CANNOT EXHIBIT THESE DEFECTS, WITH REASONS
+==============================================================================
+
+   1. D1 in `ls_sh()` -- the signature has no name parameter, so no
+      name filter can be applied inside the primitive.  Checked in S5b.
+   2. D2 in `s5_self.py` -- this file reads only the current world; it
+      asks what THIS TREE says right now, and a pinned answer to that
+      question would be about a tree that no longer exists.  0 pins.
+   3. D3 in the Python -- list argv, no shell, no pipeline.  S5e.
+   4. D3 in `selftest7522.py`'s fixtures -- they are STRINGS parsed by
+      the rules, never executed, so no status exists to discard.
+   5. D4 in the figures -- every one is recomputed in the run that
+      prints it, so there is nothing for a strength marker to stand in
+      for.  S5d checks that no marker is USED as well; MENTIONs are
+      counted and allowed, because this tree's whole subject is those
+      words and a rule that banned naming them would ban the finding.
+
+  WHAT IS NOT CHECKED HERE, stated rather than omitted:
+   * That the PROSE in README.md / OUTCOMES.md agrees with these
+     transcripts.  A probe cannot check a sentence it does not know
+     about; S3e does that job for mg-c2b3's artifacts and the same
+     job for this tree's is done by a reader with both files open.
+   * That the property predicate is the RIGHT one.  It is stated in
+     full in `lib7522.pipelines` / `discarded_stages` / `guarded` so
+     that disagreeing with it is possible; a predicate nobody can
+     disagree with is not a definition.
+
+==============================================================================
+S5 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts, over this tree's 8 `*.py` and 1
+`*.sh` files only: a pipeline of this tree's own in P2, a step that
+does not read its status, an unaccounted name filter, a mis-defaulted
+population primitive, an unclassified anchor, a strength marker, and
+`shell=True`.  It does not range over the rest of the repository --
+S1 through S4 do that, and this is the section about the instrument.

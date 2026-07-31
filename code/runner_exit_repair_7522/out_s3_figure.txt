@@ -1,0 +1,240 @@
+==============================================================================
+S3  THE STRONGEST WORDING IS WHERE TO LOOK FIRST
+==============================================================================
+
+==============================================================================
+S3a  THE POPULATION OF STRENGTH-MARKED CLAIMS, DERIVED NOT LISTED
+==============================================================================
+
+  PREDICATE.  A reader-facing artifact of the sweep is a file the
+  sweep's own commit 52aeaf4 touched, under `code/runner_exit_c2b3/` or
+  under `docs/`, that is not a committed transcript.  A CLAIM is a line
+  in one of them carrying BOTH a strength marker and a number.
+
+  artifacts: 11
+      code/runner_exit_c2b3/OUTCOMES.md
+      code/runner_exit_c2b3/PREDICTIONS.md
+      code/runner_exit_c2b3/README.md
+      code/runner_exit_c2b3/k1_census.py
+      code/runner_exit_c2b3/k2_consume.py
+      code/runner_exit_c2b3/k3_retro.py
+      code/runner_exit_c2b3/k4_control.py
+      code/runner_exit_c2b3/libc2b3.py
+      code/runner_exit_c2b3/run_all.sh
+      code/runner_exit_c2b3/selftestc2b3.py
+      docs/OneThird-RunnerExit-ArcWideSweep.md
+
+  strength-marked numeric claims: 20
+
+    …/OUTCOMES.md                                   8  | **Q1** | all 34 tee'd targets exit **0** run directly | **HIT** — 34 of 34 |
+    …/OUTCOMES.md                                  13  | **Q6** | pre-repair runner exits non-zero at **exactly 3** sites | **MISS — 8** |
+    …/OUTCOMES.md                                  15  | **Q8** | baseline reach identical pre/post at all 17 runners | **HIT** |
+    …/OUTCOMES.md                                 140  `k1_census.py`'s docstring all reported **1, "confirmed exactly"**. The ticket
+    …/OUTCOMES.md                                 148  **mg-7522 — the population of every number in this section.** All of them are
+    …/PREDICTIONS.md                               23  **Q1.** All 34 tee'd targets exit **0** when run directly on the tree as it
+    …/PREDICTIONS.md                               51  **0 at 31 of 34 sites and 1 at exactly 3**, and the three are
+    …/PREDICTIONS.md                               69  **Q8.** Baseline **reach is identical** pre- and post-repair for all 17
+    …/README.md                                    37  | matching the bare grep `\| *tee` | 23 | **23** — confirmed exactly |
+    …/README.md                                    41  **mg-7522, on the `pipefail` row.** This row used to read *"1 — confirmed
+    …/k1_census.py                                 25  docstring all said 1, "confirmed exactly".  THE TICKET WAS RIGHT.  mg-7522
+    …/k2_consume.py                                 6  fixing all 23 uniformly."*
+    …/k2_consume.py                               266  print("                 and counted here so that `all 34 carried a verdict`")
+    …/k3_retro.py                                  24  0, nothing was being swallowed and the past green is confirmed at the grain the
+    …/k3_retro.py                                 103  "outputs are diffed byte for byte; `TOTAL BAD: 0` is the verdict",
+    …/run_all.sh                                   17  # Pure Python 3, no dependencies, NO NETWORK.  About 4 minutes, almost all of
+    docs/OneThird-RunnerExit-ArcWideSweep.md       43  | matching the bare grep `\| *tee` | 23 | **23** | confirmed exactly |
+    docs/OneThird-RunnerExit-ArcWideSweep.md       48  > read *"1, confirmed exactly"* while `out_k1_census.txt` printed `ticket 1 /
+    docs/OneThird-RunnerExit-ArcWideSweep.md      119  and listed so that "all 34 carried a verdict" is not asserted when it is
+    docs/OneThird-RunnerExit-ArcWideSweep.md      251  *"all 64"* until mg-7522, and the other five are `#!/bin/bash` or
+
+==============================================================================
+S3b  THE FIGURE ITSELF -- `pipefail`, re-derived under both rules
+==============================================================================
+
+  The defect REPRODUCED and then CAUGHT, on the real bytes:
+
+    rule                                    population         count
+    `^\s*set\s+-o\s+pipefail`  (mg-c2b3)   run_all.sh @bee07a1      0
+    `^\s*set\s+[^#]*\bpipefail\b` (mg-7522) run_all.sh @bee07a1      1
+    ...same rule, over every `*.sh` @bee07a1                  1
+    ...same rule, over every `*.sh` at HEAD                  1
+
+    the ticket said                                           1
+
+    the one runner that sets it: code/state_restructure_34bf/run_all.sh:4
+        set -euo pipefail
+
+  RE-DERIVED 1.  AGREES with the ticket.  The old rule re-derives 0
+  on the same bytes, so the disagreement was the instrument's and
+  the ticket's number was right all along.
+
+  THE INSTRUMENT IS REPAIRED AT ITS SOURCE, not only in prose:
+      `libc2b3.has_pipefail` at HEAD re-derives               1
+
+==============================================================================
+S3c  THE SAME BLIND SPOT, ONE SENTENCE OVER -- the shebang
+==============================================================================
+
+  The published document says: *"the shebang is `#!/bin/sh` on all 64
+  runners (measured)"*.  `(measured)` is the strength marker; the
+  measurement is checked here rather than trusted.
+
+    run_all.sh @bee07a1                          64
+      ...with `#!/bin/sh`                        59
+      ...with something else                      5
+          code/hodge_leverage/run_all.sh                     #!/bin/bash
+          code/hodge_leverage_audit_3c24/run_all.sh          #!/bin/bash
+          code/hodge_leverage_audit_d39d/run_all.sh          #!/bin/bash
+          code/hodge_leverage_join/run_all.sh                #!/bin/bash
+          code/state_restructure_34bf/run_all.sh             #!/usr/bin/env bash
+
+    run_all.sh at HEAD                           72
+      ...with `#!/bin/sh`                        67
+      ...with something else                      5
+          code/hodge_leverage/run_all.sh                     #!/bin/bash
+          code/hodge_leverage_audit_3c24/run_all.sh          #!/bin/bash
+          code/hodge_leverage_audit_d39d/run_all.sh          #!/bin/bash
+          code/hodge_leverage_join/run_all.sh                #!/bin/bash
+          code/state_restructure_34bf/run_all.sh             #!/usr/bin/env bash
+
+  "all 64" is FALSE: it is 59 of 64 at bee07a1.  `k2_consume.py` printed
+  "on 59 of the 64" -- the INSTRUMENT was right and the DOCUMENT
+  rounded it up to `all`.  Same shape as the pipefail figure with the
+  roles reversed, and both were carrying a strength marker.
+
+==============================================================================
+S3d  EVERY CLAIM IN S3a, DISPOSITIONED -- one at a time, reason each
+==============================================================================
+
+    artifact               verdict                    how it was checked
+    OUTCOMES.md:8          HOLDS ABOUT ITS POPULATION 34 tee'd pipelines in 17
+                                                      run_all.sh @bee07a1; S1d
+                                                      states what that
+                                                      population excludes and
+                                                      S2a reads the rest
+    OUTCOMES.md:13         NOT A CLAIM                a PREDICTION with its
+                                                      miss kept as written --
+                                                      3 predicted, 8 measured
+    OUTCOMES.md:15         HOLDS ABOUT ITS POPULATION 17 is the name-defined
+                                                      runner count; over
+                                                      `*.sh` with a real `|
+                                                      tee` it is 19, and the
+                                                      extra 2 are S2's subject
+    OUTCOMES.md:140        WAS WRONG, NOW FIXED       this file's `pipefail`
+                                                      row read AGREES while
+                                                      the instrument's own
+                                                      transcript read DIFFERS;
+                                                      mg-7522's note is the
+                                                      correction
+    OUTCOMES.md:148        SCOPE NOTE ADDED           not a wrong figure:
+                                                      mg-7522's note that
+                                                      every count in that
+                                                      section is defined by a
+                                                      filename, which S1
+                                                      measures
+    PREDICTIONS.md:23      NOT A CLAIM                a PREDICTION written
+                                                      before the instrument
+                                                      existed; OUTCOMES is
+                                                      where it becomes a claim
+                                                      and is dispositioned
+                                                      there
+    PREDICTIONS.md:51      NOT A CLAIM                the Q6 prediction that
+                                                      MISSED, kept as written
+    PREDICTIONS.md:69      NOT A CLAIM                the Q8 prediction;
+                                                      OUTCOMES carries its
+                                                      result
+    README.md:37           HOLDS                      bare grep over
+                                                      run_all.sh @bee07a1 re-
+                                                      derives 23
+    README.md:41           WAS WRONG, NOW FIXED       the README's `pipefail`
+                                                      row; S3b re-derives the
+                                                      figure as 1 and the old
+                                                      rule as 0 on the same
+                                                      bytes
+    k1_census.py:25        WAS WRONG, NOW FIXED       the docstring used to
+                                                      assert the figure its
+                                                      own transcript marked
+                                                      DIFFERS; rewritten by
+                                                      mg-7522
+    k2_consume.py:6        NOT A CLAIM                a quotation of the
+                                                      ticket's own words,
+                                                      inside the docstring
+    k2_consume.py:266      HOLDS                      34 is the tee'd-pipeline
+                                                      count @bee07a1
+    k3_retro.py:24         NOT A CLAIM                a description of what a
+                                                      0 would mean, not an
+                                                      assertion that it was 0
+    k3_retro.py:103        HOLDS                      a quotation of mg-2060's
+                                                      own claim text, being
+                                                      dispositioned
+    run_all.sh:17          HOLDS                      a stated runtime, not a
+                                                      measurement of the
+                                                      subject
+    ArcWideSweep.md:43     HOLDS                      the same measurement as
+                                                      the README's row
+    ArcWideSweep.md:48     WAS WRONG, NOW FIXED       the published document's
+                                                      `pipefail` row
+    ArcWideSweep.md:119    HOLDS                      34 is the tee'd-pipeline
+                                                      count @bee07a1
+    ArcWideSweep.md:251    WAS WRONG, NOW FIXED       the shebang sentence:
+                                                      `all 64` is 59 of 64;
+                                                      S3c
+
+  20 claims: 6 HOLDS, 2 HOLDS ABOUT ITS POPULATION, 6 NOT A CLAIM, 1 SCOPE NOTE ADDED, 5 WAS WRONG, NOW FIXED
+
+  COVERAGE, BOTH DIRECTIONS.
+      mechanical hits with no rule                   0
+      rules matching no hit (rotted)                 0
+      Every hit has a rule and every rule has a hit.
+
+==============================================================================
+S3e  THE PROSE AND THE INSTRUMENT NOW AGREE -- checked, not asserted
+==============================================================================
+
+  The repaired artifacts must not still assert the old figure.
+
+  0 of 11 artifacts still assert either corrected figure.
+
+  TRANSCRIPT PROVENANCE, stated rather than backdated.
+  `code/runner_exit_c2b3/out_k1_census.txt` is the record of the run
+  that produced the sweep's commit, at its own revision, and mg-05eb
+  cites it.  It is NOT regenerated here: a transcript is a record of a
+  run at a time, and rewriting it would both destroy that citation and
+  be unreproducible anyway -- the arc has grown from 64 runners to 72
+  since.  The corrected reading is published in THIS file's transcript,
+  and `k1_census.py`'s docstring points at it.
+
+==============================================================================
+S3f  THE GENERAL FORM, ON THIS SECTION
+==============================================================================
+
+  S3 is a probe that checks other people's strongest wording, so the
+  question it owes is whether its own is checkable.  Enumerated:
+
+   1. Its population is DERIVED from `git show --name-only 52aeaf4`, not
+      hand-listed.  A hand-list is a filename rule.
+   2. Every number it prints comes with the predicate that produced
+      it, on the same line, so the rule is checkable and not only the
+      count.
+   3. It states the count of mechanical hits AND the count of
+      dispositions, and goes RED if the second is smaller -- silent
+      truncation is the failure mode a coverage claim has.
+   4. It contains no sentence of the form `confirmed exactly`.  S6 of
+      `selftest7522.py` measures that over this file's own bytes and
+      fails if an edit adds one.
+   5. The branch that CANNOT exhibit the defect, with the reason:
+      nothing here asserts a figure it did not compute in the same
+      run -- every row in S3b/S3c is a live re-derivation, and the two
+      rules are BOTH run so the disagreement is exhibited rather than
+      described.
+
+==============================================================================
+S3 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts (a) a re-derivation that does not
+behave as the repair predicts, (b) `libc2b3` still disagreeing with the
+ticket, (c) a repaired artifact still asserting a corrected figure, and
+(d) a mechanical hit with no disposition.  It ranges over the 11
+reader-facing artifacts of mg-c2b3 and the 20 strength-marked numeric
+claims in them.  It does NOT range over the arc's other trees.
