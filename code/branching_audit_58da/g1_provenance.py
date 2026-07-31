@@ -30,6 +30,18 @@ genuinely moves must make the check fire, and a c1 whose comparing half moves
 must not.  The finding was not silenced; its predicate was moved to the grain
 of the property, and the new predicate is shown firing.
 
+AND THE POPULATION IS TWO (mg-76cc, on mg-957f's finding F-1).  The predicate
+mg-7e58 removed ran over paths[:2] -- c1_branching.py AND kern_a218.py, the
+file section (ii) itself labels "the measuring half".  Its first replacement
+took both sides of its comparison through run_c1(script_rev=REV_A218), which
+loads the kernel from that same revision, so kern_a218.py was pinned at
+REV_A218 on both sides and a kernel that moved reached neither.  The c1 half
+had been re-grained; the kernel half had been deleted.  Section (v) now moves
+EACH HALF ON ITS OWN, with the other held at REV_A218 -- so a finding names
+the file that moved -- and then moves the two TOGETHER, because a pair of
+changes that cancel would pass both halves separately.  Its direction probes
+run over the same two files for the same reason.
+
 Exit 0 iff SELF-ERRORS == 0 and FINDINGS == 0.
 """
 
@@ -38,6 +50,29 @@ import sys
 import lib58da as L
 
 SELF, FIND = [], []
+
+# The git reads are COUNTED, not written down.  The population line at the
+# bottom used to carry the expression `3 + len(paths) * 3`, which was a figure
+# written beside the code rather than taken from it: it did not move when
+# mg-76cc added the two kernel reads section (v) needs, and it had never
+# counted the reads run_c1 makes on this script's behalf.  A declared unit that
+# cannot move when its own patch moves is not derived from it.
+GITREADS = [0]
+_git, _git_show = L.git, L.git_show
+
+
+def _counted_git(*a, **kw):
+    GITREADS[0] += 1
+    return _git(*a, **kw)
+
+
+def _counted_git_show(*a, **kw):
+    GITREADS[0] += 1
+    return _git_show(*a, **kw)
+
+
+L.git = _counted_git
+L.git_show = _counted_git_show
 
 
 def selferr(m):
@@ -213,37 +248,61 @@ print("""   REPAIRED HERE (mg-7e58, on mg-321d's finding G-1).  Section (ii) use
    -- both target forms, because a check run on one form says nothing about
    the other -- and c1's sections (i)+(ii), which read nothing outside the
    instrument, are diffed byte for byte, together with its own 24 vertex sets
-   parsed back out of them.""")
+   parsed back out of them.
+
+   AND THE MEASURING HALF IS TWO FILES, so the population here is two and each
+   is named (mg-76cc, on mg-957f's F-1).  c1_branching.py and kern_a218.py are
+   moved to HEAD ONE AT A TIME with the other held at %s, so a finding says
+   WHICH file moved the measurement; then both are moved together, because two
+   changes that cancel would pass each half on its own.""" % L.REV_A218[:8])
 print()
 head_c1 = L.git_show(HEAD, L.A218_DIR + "/c1_branching.py")
 old_c1 = L.git_show(L.REV_A218, L.A218_DIR + "/c1_branching.py")
+head_kern = L.git_show(HEAD, L.A218_DIR + "/kern_a218.py")
+old_kern = L.git_show(L.REV_A218, L.A218_DIR + "/kern_a218.py")
 
 
-def measurement(script_src, target_text):
-    """(sections (i)+(ii) verbatim, c1's own 24 vertex sets) for one run."""
-    out, _ = L.run_c1(target_text, script_rev=L.REV_A218,
-                      script_source=script_src)
+def measurement(script_src, kern_src, target_text):
+    """(sections (i)+(ii) verbatim, c1's own 24 vertex sets) for one run.
+
+    BOTH halves of the measuring half are arguments.  They used to be one:
+    run_c1(script_rev=...) took the script and its kernel from the same
+    revision and this section passed REV_A218 for it on both sides, which
+    pinned kern_a218.py at REV_A218 for every run made here.  A signature that
+    cannot express "this script with that kernel" cannot ask the question.
+    """
+    out, _ = L.run_c1(target_text, script_source=script_src,
+                      kernel_source=kern_src)
     return out.split(MARK)[0], L.parse_c1_own_vertices(out)
 
 
 FORMS = [("the %s target (COUNT form)" % L.REV_A218[:8], old_target),
          ("the HEAD target (SET form)", new_target)]
 
-print("   target form                          c1 @ %s      c1 @ %s"
-      % (L.REV_A218[:8], HEAD[:8]))
+# The two files section (ii) enumerates as the measuring half, each moved to
+# HEAD alone, and then together.  paths[:2] is the same population the deleted
+# file-sha predicate ran over -- restored here at the measurement grain.
+HALVES = [("c1_branching.py", "the script", head_c1, old_kern),
+          ("kern_a218.py", "its kernel", old_c1, head_kern),
+          ("both together", "cancellation", head_c1, head_kern)]
+
+print("   target form / half moved to HEAD              @ %s        @ HEAD"
+      % L.REV_A218[:8])
 moved_on = []
 for fname, ftext in FORMS:
-    ma, va = measurement(old_c1, ftext)
-    mb, vb = measurement(head_c1, ftext)
-    same = ma == mb and va == vb and len(va) == 24
-    print("     %-34s %-16s %-16s  %s"
-          % (fname, L.sha(ma)[:16], L.sha(mb)[:16],
-             "IDENTICAL" if same else "MOVED"))
-    print("       %d lines, c1's own 24 vertex sets %s"
-          % (len(ma.splitlines()),
-             "equal" if va == vb and len(va) == 24 else "DIFFER"))
-    if not same:
-        moved_on.append(fname)
+    ref_m, ref_v = measurement(old_c1, old_kern, ftext)
+    print("     %s -- %d lines at %s"
+          % (fname, len(ref_m.splitlines()), L.REV_A218[:8]))
+    for hname, hwhat, c1s, ks in HALVES:
+        m, v = measurement(c1s, ks, ftext)
+        same = m == ref_m and v == ref_v and len(v) == 24
+        print("       %-24s %-16s %-16s  %s"
+              % (hname + " (%s)" % hwhat, L.sha(ref_m)[:16], L.sha(m)[:16],
+                 "IDENTICAL" if same else "MOVED"))
+        print("         c1's own 24 vertex sets %s"
+              % ("equal" if v == ref_v and len(v) == 24 else "DIFFER"))
+        if not same:
+            moved_on.append((fname, hname))
 print()
 print("   the file grain, for contrast -- from (ii), and nothing is concluded")
 print("   from it:")
@@ -251,20 +310,25 @@ for p, _ in paths[:2]:
     print("     %-24s %s" % (p.split("/")[-1],
                              "CHANGED" if file_moved[p] else "SAME"))
 print()
-if moved_on:
-    finding("c1's own measurement is not the same at %s and at HEAD (moved on "
-            "%s); the measuring half of the reproduction really is not the "
-            "same code and the 198 cells have to be re-taken"
-            % (L.REV_A218[:8], ", ".join(moved_on)))
-else:
+for hname, hwhat, _c1s, _ks in HALVES:
+    hit = [f for f, h in moved_on if h == hname]
+    if hit:
+        finding("c1's own measurement is not the same at %s and at HEAD when "
+                "%s is moved and the rest of the measuring half is held at %s "
+                "(on %s); the measuring half of the reproduction really is not "
+                "the same code and the 198 cells have to be re-taken"
+                % (L.REV_A218[:8], hname, L.REV_A218[:8], ", ".join(hit)))
+if not moved_on:
     print("   THE FILE MOVED AND THE MEASUREMENT DID NOT.  c1_branching.py's")
     print("   sha differs across the range and its measurement is byte-for-byte")
-    print("   the same on both target forms, so mg-58da's edit is confined to")
-    print("   the comparing half and the 198 cells stand as re-run in (iii).")
+    print("   the same on both target forms, with kern_a218.py moved alone and")
+    print("   with both moved together, so mg-58da's edit is confined to the")
+    print("   comparing half and the 198 cells stand as re-run in (iii).")
 print()
 print("   AND THE CHECK IS SHOWN FIRING -- a check that cannot go red certifies")
 print("   nothing, and 'g1 stopped exiting 1' is exactly what silencing it")
-print("   would look like.  Three c1 sources, direction predicted first:")
+print("   would look like.  The probes run over BOTH files of the measuring")
+print("   half, one varied at a time, direction predicted first:")
 print()
 
 
@@ -287,31 +351,64 @@ def mutate_compare(src):
     return src + '\nprint("   [mg-7e58 control: comparing half touched]")\n'
 
 
-# The probes are built from c1's SOURCE, so they can fail to be built -- and
-# an anchor this script could not find is a fact about THIS SCRIPT, not a
-# finding against anyone.  It goes to the SELF-ERROR channel and the probe is
-# named as dropped, so a shrinking population stays visible.  (Written this way
-# on mg-7e58's own k1, which ran g1 in a tree whose c1 was already mutated and
-# found it raising ValueError instead.)
-PROBES = [("c1 @ %s (unmodified -- NULL PROBE)" % HEAD[:8], head_c1, False,
-           "the tree as it stands; must not fire")]
-for _label, _mut, _pred, _why in [
-        ("c1 @ HEAD with the vertex DIMENSIONS off by one", mutate_measure,
-         True, "the measuring half really moved; must fire"),
-        ("c1 @ HEAD with a line added past section (iii)", mutate_compare,
-         False, "the file moved, the measurement did not; must not fire")]:
-    try:
-        PROBES.append((_label, _mut(head_c1), _pred, _why))
-    except ValueError as _e:
-        selferr("could not build the probe %r out of c1 at HEAD (%s); it is "
-                "DROPPED from the population below rather than counted as "
-                "passing" % (_label, _e))
+def mutate_kernel(src):
+    """The same regression one file down, in kern_a218.py itself.
 
-ref_m, ref_v = measurement(old_c1, new_target)   # the baseline the check uses
-print("   c1 source                                        predicted  actual")
+    vertices() is where c1's numbers come from, and kern_a218.py is the file
+    section (ii) labels "the measuring half".  Until mg-76cc no probe here
+    touched it, so nothing here could have shown that the kernel was outside
+    the check at all.
+    """
+    return L.replace_once(
+        src,
+        "        return [(p, self.dim_L(p)) for p in self.parts "
+        "if self.dim_L(p) > 0]",
+        "        return [(p, self.dim_L(p) + 1) for p in self.parts "
+        "if self.dim_L(p) > 0]")
+
+
+# The probes are built from c1's and the kernel's SOURCE, so they can fail to
+# be built -- and an anchor this script could not find is a fact about THIS
+# SCRIPT, not a finding against anyone.  It goes to the SELF-ERROR channel and
+# the probe is named as dropped, so a shrinking population stays visible.
+# (Written this way on mg-7e58's own k1, which ran g1 in a tree whose c1 was
+# already mutated and found it raising ValueError instead.)
+#
+# Each probe varies ONE of the two files and holds the other at REV_A218, which
+# is the same shape as the checks above and is what makes a red probe name a
+# file.
+PROBES = [("c1 @ %s (unmodified -- NULL PROBE)" % HEAD[:8],
+           head_c1, old_kern, False, "the tree as it stands; must not fire"),
+          ("kern @ %s (unmodified -- NULL PROBE)" % HEAD[:8],
+           old_c1, head_kern, False, "the tree as it stands; must not fire")]
+for _label, _base, _mut, _which, _pred, _why in [
+        ("c1 @ HEAD with the vertex DIMENSIONS off by one", head_c1,
+         mutate_measure, "c1", True,
+         "the measuring half really moved, in the script; must fire"),
+        ("c1 @ HEAD with a line added past section (iii)", head_c1,
+         mutate_compare, "c1", False,
+         "the file moved, the measurement did not; must not fire"),
+        ("kern @ HEAD with dim L(n,p) off by one", head_kern,
+         mutate_kernel, "kern", True,
+         "the measuring half really moved, in the kernel; must fire")]:
+    try:
+        _bent = _mut(_base)
+    except ValueError as _e:
+        selferr("could not build the probe %r out of %s at HEAD (%s); it is "
+                "DROPPED from the population below rather than counted as "
+                "passing" % (_label, _which, _e))
+        continue
+    if _which == "c1":
+        PROBES.append((_label, _bent, old_kern, _pred, _why))
+    else:
+        PROBES.append((_label, old_c1, _bent, _pred, _why))
+
+# the baseline the check uses: both halves at REV_A218
+ref_m, ref_v = measurement(old_c1, old_kern, new_target)
+print("   measuring half varied                            predicted  actual")
 nprobe_ok = 0
-for pname, psrc, pred_fires, why in PROBES:
-    pm, pv = measurement(psrc, new_target)
+for pname, psrc, pkern, pred_fires, why in PROBES:
+    pm, pv = measurement(psrc, pkern, new_target)
     fires = not (pm == ref_m and pv == ref_v and len(pv) == 24)
     ok = fires == pred_fires
     nprobe_ok += ok
@@ -328,8 +425,12 @@ for pname, psrc, pred_fires, why in PROBES:
 print()
 print("   probes whose direction was predicted correctly : %d of %d"
       % (nprobe_ok, len(PROBES)))
-print("   population: the 3 c1 sources above, each run against the HEAD target")
-print("   and diffed against c1 @ %s on the same target." % L.REV_A218[:8])
+print("   population: the %d (c1, kernel) pairs above -- %d over c1 and %d over"
+      % (len(PROBES), len([p for p in PROBES if p[2] is old_kern]),
+         len([p for p in PROBES if p[2] is not old_kern])))
+print("   kern_a218.py -- each run against the HEAD target and diffed against")
+print("   c1 @ %s WITH ITS OWN KERNEL on the same target."
+      % L.REV_A218[:8])
 print()
 
 # ---------------------------------------------------------------------------
@@ -360,17 +461,23 @@ if not path_touched:
     print("   (the read path was NOT touched, so no redoing is needed)")
 
 print("-" * 74)
-print("SELF-ERRORS: %d, population: the %d git reads and the one read-path "
-      "enumeration this script needs" % (len(SELF), 3 + len(paths) * 3))
+print("SELF-ERRORS: %d, population: the %d git reads this script and the "
+      "re-runs it makes actually performed -- COUNTED, not written -- and the "
+      "one read-path enumeration it needs" % (len(SELF), GITREADS[0]))
 for x in SELF:
     print("   SELF-ERROR: " + x)
 print("FINDINGS: %d, population: the 3 populations of the re-run, its exit "
       "code, its byte-comparison against the committed record, the 2 "
       "measurement-invariance checks across targets in (iv), the %d "
-      "measurement-invariance checks across script revisions in (v) -- one "
-      "per target form -- and the %d direction probes on (v)'s own check.  "
-      "The 2 file-sha comparisons are REPORTED and are not in this population "
-      "(mg-7e58 / mg-321d G-1)" % (len(FIND), len(FORMS), len(PROBES)))
+      "measurement-invariance checks across script revisions in (v) -- %d "
+      "target forms x the %d halves of the measuring half, which are "
+      "c1_branching.py, kern_a218.py and the two together -- and the %d "
+      "direction probes on (v)'s own check.  The 2 file-sha comparisons are "
+      "REPORTED and are not in this population (mg-7e58 / mg-321d G-1); the "
+      "kernel they used to cover is in it at the measurement grain instead "
+      "(mg-76cc / mg-957f F-1)"
+      % (len(FIND), len(FORMS) * len(HALVES), len(FORMS), len(HALVES),
+         len(PROBES)))
 for x in FIND:
     print("   FINDING: " + x)
 print("TOTAL BAD: %d" % (len(SELF) + len(FIND)))

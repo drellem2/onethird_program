@@ -1,0 +1,160 @@
+==========================================================================
+SELFTEST  lib76cc, ASSERTED BEFORE ANY FINDING RESTS ON IT
+==========================================================================
+
+
+--------------------------------------------------------------------------
+1. THE REVISION CONSTANTS RESOLVE, AND ARE FULL SHAS
+--------------------------------------------------------------------------
+   ok   REV_A218 is a full 40-character sha
+   ok   REV_A218 resolves to itself
+   ok   REV_321D is a full 40-character sha
+   ok   REV_321D resolves to itself
+   ok   REV_957F is a full 40-character sha
+   ok   REV_957F resolves to itself
+   ok   REV_A218 is an ancestor of HEAD
+   ok   REV_321D is an ancestor of HEAD
+   ok   REV_957F is an ancestor of HEAD
+   ok   REV_321D is an ancestor of REV_957F -- the three are in the order this instrument assumes
+   ok   and not the other way round
+   ok   the distance between them is positive
+
+--------------------------------------------------------------------------
+2. THE FILES THIS INSTRUMENT NAMES ALL EXIST
+--------------------------------------------------------------------------
+   ok   code/branching_audit_58da/g1_provenance.py is present and non-empty
+   ok   code/branching_audit_58da/lib58da.py is present and non-empty
+   ok   code/branching_audit_a218/kern_a218.py is present and non-empty
+   ok   code/branching_audit_a218/c1_branching.py is present and non-empty
+   ok   code/branching_locate_db09/out_t1_tl.txt is present and non-empty
+   ok   out_selftest_58da.txt is present and non-empty
+   ok   out_g1_provenance.txt is present and non-empty
+   ok   out_g2_redo.txt is present and non-empty
+   ok   out_g3_findings.txt is present and non-empty
+   ok   out_g4_fleet.txt is present and non-empty
+
+--------------------------------------------------------------------------
+3. THE READER IS NOT BLIND -- IT RETURNS CELLS, AND THE RIGHT ONES
+--------------------------------------------------------------------------
+   ok   c1_own_vertices reads 24 cells out of a live c1 run
+   ok   that live c1 run exits 0
+   ok   every cell is a list of (p, dim) pairs
+   ok   beta=3, n=1 is [(0, 1)]
+   ok   beta=3, n=6 has 4 simples
+   ok   the reader returns {} on text that has no section (i), rather than a partial parse
+   ok   and {} on a malformed pair, rather than half a cell
+
+--------------------------------------------------------------------------
+4. THE CORRUPTION PROBES REALLY CORRUPT
+--------------------------------------------------------------------------
+   ok   bend_kernel changes kern_a218.py
+   ok   and the bend REACHES c1's output: 24 of 24 vertex cells move
+   ok   and c1's sections (i)+(ii) differ under it
+   ok   bend_c1_measure reaches c1's measuring half
+   ok   comment_c1 changes the file and NOT the measurement -- the control that must stay silent
+   ok   touch_c1_compare changes the comparing half and NOT the measurement
+   ok   bend_kernel refuses to bend an already-bent kernel
+   ok   replace_once refuses two occurrences
+   ok   replace_once refuses zero occurrences
+
+--------------------------------------------------------------------------
+5. THE SOURCE SURGERY ON g1 IS EXACT, AND EACH PIECE COMPILES
+--------------------------------------------------------------------------
+   ok   drop_kernel_half changes g1_provenance.py
+   ok   drop_kernel_half removes 1 line(s), as declared
+   ok   drop_kernel_half leaves g1_provenance.py compiling
+   ok   drop_both_half changes g1_provenance.py
+   ok   drop_both_half removes 1 line(s), as declared
+   ok   drop_both_half leaves g1_provenance.py compiling
+   ok   drop_kernel_probe changes g1_provenance.py
+   ok   drop_kernel_probe removes 3 line(s), as declared
+   ok   drop_kernel_probe leaves g1_provenance.py compiling
+   ok   repin_kernel changes g1_provenance.py
+   ok   repin_kernel removes 0 line(s), as declared
+   ok   repin_kernel leaves g1_provenance.py compiling
+   ok   the repaired measurement() call is present in g1 -- the anchor repin rests on
+   ok   the kern_a218.py row of HALVES is present in g1
+   ok   repin_kernel is exactly invertible -- it touches that call and nothing else
+
+--------------------------------------------------------------------------
+6. THE PINNED PREDICATES CAN BE BUILT, WITH THEIR OWN LIBRARY
+--------------------------------------------------------------------------
+   ok   g1 at ef388417 has exactly one lib58da import to repoint
+   ok   lib58da at ef388417 is readable
+   ok   g1 at ef388417 compiles
+   ok   g1 at e006581c has exactly one lib58da import to repoint
+   ok   lib58da at e006581c is readable
+   ok   g1 at e006581c compiles
+   ok   g1 at REV_957F differs from g1 here -- there is a patch to test at all
+   ok   lib58da at REV_957F has no kernel_source argument -- the hole is really there in the revision this repair is measured against
+   ok   and it is here
+
+--------------------------------------------------------------------------
+7. THE NORMALISATION IS NEITHER BLIND NOR A BLANKET
+--------------------------------------------------------------------------
+   ok   normalize makes exactly the 4 substitutions present
+   ok   the revision is replaced
+   ok   the subject is replaced
+   ok   a DIFFERENT revision in the same text is left alone -- pinned constants must still reproduce byte for byte
+   ok   no 8-character remnant survives
+   ok   a real, non-revision difference is still caught after normalisation
+   ok   and identical texts come back with no differing lines
+   ok   an empty subject substitutes nothing rather than everything
+
+--------------------------------------------------------------------------
+8. differing_lines COUNTS, INCLUDING PAST THE END
+--------------------------------------------------------------------------
+   ok   identical texts: no rows
+   ok   one changed line: one row
+   ok   one extra line: one row
+   ok   and the absent side is None, not empty string
+   ok   two changed: two rows
+
+--------------------------------------------------------------------------
+9. THE TRANSCRIPT READERS READ THE REAL TRANSCRIPTS
+--------------------------------------------------------------------------
+   ok   recorded_rev finds a 12-character revision in out_g1_provenance.txt
+   ok   and it is hexadecimal
+   ok   and returns None rather than a guess when the line is absent
+   ok   totals_of reads both totals out of a real transcript
+   ok   totals_of reads the numbers and not the populations
+   ok   and returns (None, None) rather than (0, 0) when there is nothing to read
+   ok   findings_of splits on the printed marker
+   ok   and does not mistake the population line for a finding
+
+--------------------------------------------------------------------------
+10. A CLONE IS A REAL CLONE, AND ITS MUTATION IS A COMMIT
+--------------------------------------------------------------------------
+   ok   the clone has a HEAD
+   ok   the clone carries this worktree's g1_provenance.py
+   ok   a mutated clone's change is visible to git_show at HEAD -- it is a COMMIT and not a working-tree edit
+   ok   and it is in the working tree too
+   ok   empty_extra puts the clone exactly two commits ahead of this branch
+
+--------------------------------------------------------------------------
+11. THE REPORT SEPARATES THE TWO CHANNELS AND CAN GO RED
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: s
+FINDINGS: 0, population: f
+TOTAL BAD: 0
+   ok   an empty report exits 0
+   ok   check() books a SELF-ERROR and not a finding
+   ok   gate() books a FINDING
+--------------------------------------------------------------------------
+SELF-ERRORS: 1, population: s
+   SELF-ERROR: x
+FINDINGS: 1, population: f
+   FINDING: y
+TOTAL BAD: 2
+   ok   and the report then exits 1 -- the gate can go red
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: s
+FINDINGS: 0, population: f
+TOTAL BAD: 0
+   ok   and stays green when both hold
+
+--------------------------------------------------------------------------
+ASSERTIONS: 93, population: every helper in lib76cc.py that a finding in r1..r4 rests on
+FAILED: 0
+TOTAL BAD: 0

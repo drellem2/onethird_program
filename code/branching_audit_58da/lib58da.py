@@ -92,12 +92,26 @@ def read_worktree(rel):
         return fh.read()
 
 
-def run_c1(target_text, script_rev=REV_A218, script_source=None):
+def run_c1(target_text, script_rev=REV_A218, script_source=None,
+           kernel_rev=None, kernel_source=None):
     """Run c1_branching.py against `target_text`.
 
-    `script_rev` names the revision the SCRIPT and its kernel are taken from.
-    `script_source` optionally overrides the script text (used to run the
-    repaired c1 out of the working tree).  Returns (stdout, returncode).
+    `script_rev` names the revision the SCRIPT is taken from.  `script_source`
+    optionally overrides the script text (used to run the repaired c1 out of
+    the working tree).  Returns (stdout, returncode).
+
+    `kernel_rev` names the revision kern_a218.py is taken from and DEFAULTS TO
+    `script_rev`, so every call written before it existed behaves exactly as it
+    did.  `kernel_source` overrides the kernel text outright, the way
+    `script_source` overrides the script's.
+
+    THE KERNEL IS A SEPARATE ARGUMENT BECAUSE THE MEASURING HALF IS TWO FILES
+    (mg-76cc, on mg-957f's F-1).  This function used to bind the script and its
+    kernel to one revision, and g1's section (v) passed REV_A218 for it on both
+    sides of its comparison -- which pinned kern_a218.py at REV_A218 for both
+    runs, so a kernel that moved between REV_A218 and HEAD could not reach
+    either side of the check that was supposed to notice.  A signature that
+    cannot express "this script with that kernel" cannot ask the question.
 
     Everything happens in a temporary directory.  c1 resolves its target as
     dirname(__file__)/../branching_locate_db09/out_t1_tl.txt, so the scratch
@@ -112,10 +126,14 @@ def run_c1(target_text, script_rev=REV_A218, script_source=None):
         c1 = script_source
         if c1 is None:
             c1 = git_show(script_rev, A218_DIR + "/c1_branching.py")
+        kern = kernel_source
+        if kern is None:
+            kern = git_show(kernel_rev or script_rev,
+                            A218_DIR + "/kern_a218.py")
         with open(os.path.join(a, "c1_branching.py"), "w") as fh:
             fh.write(c1)
         with open(os.path.join(a, "kern_a218.py"), "w") as fh:
-            fh.write(git_show(script_rev, A218_DIR + "/kern_a218.py"))
+            fh.write(kern)
         with open(os.path.join(d, "out_t1_tl.txt"), "w") as fh:
             fh.write(target_text)
         p = subprocess.run(["python3", "c1_branching.py"], cwd=a,

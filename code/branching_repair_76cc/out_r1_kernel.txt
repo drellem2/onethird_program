@@ -1,0 +1,133 @@
+==========================================================================
+R1  OPEN 1 -- THE KERNEL HALF OF THE PREDICATE
+==========================================================================
+
+The question is not whether the repaired g1 is green.  A predicate that was
+removed is green by construction.  The question is what each revision of the
+predicate CATCHES, run against the same inputs, and that is the only way this
+class is visible at all.
+
+
+--------------------------------------------------------------------------
+(i) THE PROBE REALLY MOVES THE MEASUREMENT -- CHECKED BEFORE IT IS USED
+--------------------------------------------------------------------------
+   A corruption probe that corrupts nothing makes every row below say
+   whatever it likes.  So kern_a218.py is bent here first, with THIS
+   script's own run_c1 -- which takes the script and the kernel as two
+   separate sources -- and c1's own vertex cells are counted both ways.
+
+   c1 @ HEAD with kern @ HEAD : sections (i)+(ii) sha a8db5dbd4c758765
+   c1 @ HEAD with kern BENT   : sections (i)+(ii) sha cb329be9d6265c27
+   c1's own vertex cells that move : 24 of 24
+
+
+--------------------------------------------------------------------------
+(ii) THREE REVISIONS OF g1, ONE CLONE, kern_a218.py BENT AS A COMMIT
+--------------------------------------------------------------------------
+   In this clone c1_branching.py and the target are byte-identical to
+   this branch and only kern_a218.py differs -- and it differs as a
+   COMMIT.  Each g1 revision is placed beside the repaired one under a
+   name of its own, with lib58da AT THE SAME REVISION, so no predicate is
+   run against a library it never saw.  g1_provenance.py itself is never
+   modified.
+
+   g1 revision  what it had                     exit self/find  names kern_a218.py
+     ef388417   before mg-7e58 -- FILE grain   1    0/2     YES
+     e006581c   before mg-76cc -- the hole     0    0/0     no
+     worktree   after mg-76cc -- the repair    1    1/3     YES
+
+     ef388417 FINDING: code/branching_audit_a218/kern_a218.py changed between 286d5030 and HEAD; the measuring half of the 
+        ... reproduction is not the same code
+     worktree FINDING: c1's own measurement is not the same at 286d5030 and at HEAD when kern_a218.py is moved and the rest
+        ...  of the measuring half is held at 286d5030 (on the 286d5030 target (COUNT form), the HEAD target
+
+   the row that matters: g1 before mg-76cc exits 0 and names it NO;
+   g1 after mg-76cc exits 1 and names it YES.
+
+
+--------------------------------------------------------------------------
+(iii) THE NULL CLONE -- THE REPAIR DID NOT SIMPLY MAKE g1 RED
+--------------------------------------------------------------------------
+   A predicate restored by making it fire on everything is not restored.
+   The same clone machinery, no mutation at all.
+
+     unmodified clone, repaired g1        predicted exit 0   actual exit 0   0/0
+     its own direction probes: 5 of 5
+
+
+--------------------------------------------------------------------------
+(iv) THE c1 HALF IS UNDISTURBED -- mg-7e58's OWN 4 DIRECTIONS, RE-RUN
+--------------------------------------------------------------------------
+   Restoring one half of a predicate is a way to break the other.  So
+   mg-7e58's four c1 clones are re-run against the REPAIRED g1, with the
+   mutation always made to c1_branching.py and always as a commit.
+
+   clone                                    predicted  actual  self/find
+     unmodified -- NULL PROBE                 exit 0     exit 0  0/0   HIT
+       why: the tree as it stands
+     c1's vertex DIMENSIONS off by one        exit 1     exit 1  1/4   HIT
+       why: the measuring half really moved
+     a comment appended to c1                 exit 0     exit 0  0/0   HIT
+       why: the file sha moves and nothing else does
+     a line appended past c1's section (iii)  exit 0     exit 0  0/0   HIT
+       why: an edit in the COMPARING half -- mg-58da's own class
+
+   c1 clones whose direction was predicted correctly: 4 of 4
+   population: the 4 clones above.  In each, g1_provenance.py is
+   byte-identical to the file on this branch and only c1_branching.py
+   differs, as a COMMIT.
+
+
+--------------------------------------------------------------------------
+(v) DELETE EACH UNIT mg-76cc ADDED, ONE AT A TIME
+--------------------------------------------------------------------------
+   "The check is there" is a claim about source.  What is measured here
+   is what goes away when each added unit is removed ALONE -- three rows
+   of section (v)'s two populations, and the one-line repair inside
+   measurement() that made either of them able to see the kernel at all.
+
+   The last is the F-1 REINTRODUCTION: put the kernel back on a pin and
+   the repaired g1 must go red on its own probe.  A gate that does not
+   catch the defect being repaired is a claim, not a gate.
+
+   Each unit is deleted in the tree where its effect EXISTS.  A deletion
+   tested in the wrong tree comes back a no-op for a reason that has
+   nothing to do with the unit: the kernel PROBE cannot be seen in a
+   clone whose kernel is already bent, because g1 cannot build that probe
+   there at all and drops it with a self-error either way.
+
+   unit deleted                              kernel exit self/find names probes
+                                             bent                    kern
+     the kern_a218.py row of HALVES           yes    1    1/2        no    3 of 4
+       must change: no finding may name kern_a218.py
+     the both-together row of HALVES          yes    1    1/2        YES   3 of 4
+       must change: fewer findings than the repaired g1 books in the same clone
+     the kernel row of PROBES                 no     0    0/0        no    4 of 4
+       must change: the probe population must shrink
+     mg-76cc's one-line repair inside measure no     1    0/1        no    4 of 5
+       must change: F-1 REINTRODUCED: g1's own kernel probe must MISS
+       g1's own kernel probe MISSED: yes
+
+   population: the 4 units mg-76cc added or changed in section (v)
+   that have a return, a row or a call of their own, each deleted
+   ALONE, each in the tree where its effect exists.
+
+
+--------------------------------------------------------------------------
+VERDICT ON OPEN 1
+--------------------------------------------------------------------------
+   THE KERNEL HALF IS BACK, AND IT IS BACK AT THE MEASUREMENT GRAIN.
+   The predicate mg-7e58 removed compared the SHA of two files; what
+   replaced it compared the measurement of one.  Section (v) now moves
+   each of the two files to HEAD on its own, with the other held at
+   286d5030, and then moves both together -- so the population is two
+   again, each half is named, and a cancelling pair cannot pass.
+
+   It was found by running the pre-repair predicate, and it is confirmed
+   by the same means: bend kern_a218.py as a commit, and the repaired
+   predicate fires NAMING IT where the predicate it replaces was silent.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone, subprocess run and parse this script performs, plus the requirement that each probe really move what it claims to move
+FINDINGS: 0, population: the 3 g1 revisions in the bent-kernel clone (ii), the null clone (iii), the 4 c1 direction clones (iv), and the 4 per-unit deletion probes on the units mg-76cc ADDED (v)
+TOTAL BAD: 0
