@@ -1,0 +1,234 @@
+====================================================================================================
+mg-65eb — THE PROPERTY CLAIMED BESIDE THE QUANTITY COMPUTED, ROW BY ROW
+====================================================================================================
+  Population: the 9 rows mg-a74f publishes in claims_a74f.py under `EVERY
+  INSTRUMENT THIS REPAIR ADDS, AND WHETHER ITS ROW NAME IS ITS MEASUREMENT`.
+  8 of them are published MATCHES and 1 DOES NOT MATCH.
+
+  row   file              row name               PROPERTY CLAIMED  /  QUANTITY COMPUTED
+  R1    visible_a74f.py   bytes-in-html          [MATCHES]
+                          CLAIMED                the section marker is present in the serialised HTML
+                          COMPUTED               the section marker is present in html.unescape(the serialised HTML)
+  R2    visible_a74f.py   not-suppressed         [MATCHES]
+                          CLAIMED                not suppressed by any of the FIVE DECLARED mechanisms, at the marker's position
+                          COMPUTED               no mechanism found by a tag-stack walk to an offset taken in the UNESCAPED string, with `hidden` and `open` matched as words anywhere in an ancestor's attribute text
+  R3    visible_a74f.py   r16 SHOWN              [DOES NOT MATCH, deliberately]
+                          CLAIMED                what a reader is shown (mg-16eb's name, kept on purpose)
+                          COMPUTED               bytes surviving a tag strip, minus closed-<details> ancestors
+  R4    prose_a74f.py     P1 path references     [MATCHES]
+                          CLAIMED                every repo-relative path named in the text exists at the revision being read
+                          COMPUTED               every string matching `(code|docs)/...\.(py|md|sh|js|txt|json)` is in the file set, which on the working tree is every file in the working DIRECTORY
+  R5    prose_a74f.py     P2 section references  [MATCHES]
+                          CLAIMED                every `section N` reference to a run_all.sh resolves and names the tokens on its line
+                          COMPUTED               every `section N` on a line that ALSO contains the literal `run_all.sh` or the literal `re-run in section` resolves and names the tokens on its line
+  R6    prose_a74f.py     P3 pinned tables       [MATCHES]
+                          CLAIMED                every module-level dict of delta_control.py KEYED BY REPO PATHS is iterated
+                          COMPUTED               every module-level dict ALL of whose keys start `code/` or `docs/` AND contain a `.` is iterated
+  R7    prose_a74f.py     P4 `all N rows`        [MATCHES]
+                          CLAIMED                the number equals THAT SCRIPT's own ROWS
+                          COMPUTED               the number equals the ROWS of the nearest .py basename in the preceding 400 characters
+  R8    battery_a74f.py   exit codes             [MATCHES]
+                          CLAIMED                the exit code of the mutated control
+                          COMPUTED               subprocess returncode read by harness16eb.Tree.run_mutated
+  R9    claims_a74f.py    before / after         [MATCHES]
+                          CLAIMED                the defect is present at bd24efc and absent in the tree
+                          COMPUTED               a text or AST predicate over `git show bd24efc:path` and the working-tree file
+
+====================================================================================================
+B.  visible_a74f.py — THREE CONSTRUCTIONS, THROUGH TWO REAL GFM RENDERERS
+====================================================================================================
+  target: 8892 bytes; entity padding for R2c: 3000 `&` = 12000 bytes of unescape shrinkage, against a 10258-byte rendered document.
+
+  R1  every marker written `&mdash;` — a reader is shown `H1 — `; the HTML has no such bytes
+      marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   | marker literally in the HTML: 0/5   | same walk at the TRUE offset: 5/5 free
+      markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   | marker literally in the HTML: 5/5   | same walk at the TRUE offset: 5/5 free
+
+  R2a  <div class="hidden"> — a CLASS, not the attribute; with no stylesheet a reader is shown every section
+      marked       bytes-in-html 5/5   not-suppressed 0/5   by S4          | marker literally in the HTML: 5/5   | same walk at the TRUE offset: 0/5 free
+      markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S4          | marker literally in the HTML: 5/5   | same walk at the TRUE offset: 0/5 free
+
+  R2b  <details title="open me"> — mg-16eb's B3 with one extra attribute; a reader is shown a closed widget
+      marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   | marker literally in the HTML: 5/5   | same walk at the TRUE offset: 5/5 free
+      markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   | marker literally in the HTML: 5/5   | same walk at the TRUE offset: 5/5 free
+
+  R2c  <div hidden> behind a paragraph of `&` — mg-a74f's own V3, a blank page
+      marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   | marker literally in the HTML: 5/5   | same walk at the TRUE offset: 0/5 free
+      markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   | marker literally in the HTML: 5/5   | same walk at the TRUE offset: 0/5 free
+
+    >>> R1  NOT SEPARATED   (this audit predicted SEPARABLE  !! OFF PREDICTION)
+        CLAIMED `the section marker is present in the serialised HTML`; COMPUTED `present in html.unescape(...)`.
+        marked: bytes-in-html 5/5 with the literal marker present 0/5, markdown-it: bytes-in-html 5/5 with the literal marker present 5/5.
+        The row is the one mg-a74f prints as `names bytes; measures bytes.  MATCHES.`
+        ON `marked` THE TWO SETS DIFFER ON ALL FIVE CITED SECTIONS: the reader is shown
+        `H1 — ` and the bytes `H1 — ` are nowhere in the HTML, which is the direction
+        the brief calls `content shown but not a byte in that file`.  markdown-it
+        decodes `&mdash;` itself, so on that engine the two sets agree.
+        THIS AUDIT'S OWN RULE FOR THIS ROW WAS `separates on every engine`, committed
+        in PREDICTIONS.md, and it is kept: the row is scored NOT SEPARATED and the miss
+        is kept as written.  The rule is itself a row-name/measurement mismatch of the
+        kind this file exists to report — it NAMES `is this row separable` and COMPUTES
+        `does it separate on both engines` — and it is reported rather than rewritten.
+
+    >>> R2  SEPARATED   (this audit predicted SEPARABLE)
+        CLAIMED `not suppressed by any of five DECLARED mechanisms`; COMPUTED three different things, none of them that.
+        R2a  `class="hidden"` scores not-suppressed 0/5 and 0/5.  S4 is declared as the `hidden`
+             ATTRIBUTE and NOT_COVERED names class-based hiding as OUTSIDE the set.  A reader IS shown
+             every section of this document — there is no stylesheet in it.  THIS IS A FAILURE IN THE
+             CLOSED DIRECTION, in the instrument whose safety argument is that it fails OPEN ONLY.
+        R2b  `<details title="open me">` scores not-suppressed 5/5 and 5/5.  That element
+             carries no `open` attribute, so DECLARED S1 holds of it; a reader is shown a closed widget
+             and nothing else.  The instrument does not implement its own declared set: `open` is
+             matched as a word ANYWHERE in the attribute text, and `title="open me"` contains it.
+        R2c  `<div hidden>` — mg-a74f's OWN V3 — scores not-suppressed 5/5 and 5/5 when
+             3000 `&` precede it, against 0/5 without them.  The same walk at the TRUE offset scores
+             0/5 and 0/5.  `visible_a74f.main()` takes `html.unescape(out).index(marker)`
+             and spends it as an offset into `out`.  A BYTE OFFSET STANDING IN FOR A POSITION is the
+             defect class this whole arc is about, and it is in the instrument built to repair it.
+
+====================================================================================================
+C.  prose_a74f.py — FOUR CONSTRUCTIONS ON THE REAL TREE, UNDER RESTORE DISCIPLINE
+====================================================================================================
+  BASELINE on the clean tree: exit 0, 0 finding(s).  Every delta below is against this.
+
+  R4 — P1's population.  Claimed: EVERY repo-relative path named in the text.
+    R4a    exit 0   0 finding(s)
+    R4b    exit 1   1 finding(s)
+    R4c    exit 0   0 finding(s)
+    R4d    exit 1   1 finding(s)
+
+    >>> R4  SEPARATED   (this audit predicted SEPARABLE)
+        CLAIMED `every repo-relative path named in the text exists at the revision being read`; COMPUTED `every string with one of six extensions is somewhere in the working DIRECTORY`.
+        R4a  three named paths that do not exist (`…/no_such_dir/`, `…/no-such.yaml`, `…/gone`): 0 finding(s) — none of the three is seen.
+        R4b  one named path that does not exist, spelled `.py`: 1 finding(s).  Same sentence, same tree,
+             opposite verdict, and the only difference is the extension.
+        R4c  a named path that exists ONLY as an UNTRACKED file: 0 finding(s) — it passes.
+        R4d  the same sentence with that file deleted: 1 finding(s).  So `exists at this revision`
+             is decided by the working directory, and an untracked file satisfies a claim about the tree.
+             `claims_a74f.in_tree(None, …)` is `os.path.exists` too and moves with it.
+
+  R5 — P2's population.  Claimed: EVERY `section N` reference to a run_all.sh.
+    R5a    exit 0   0 finding(s)
+    R5b    exit 1   1 finding(s)
+
+    >>> R5  SEPARATED   (this audit predicted SEPARABLE)
+        CLAIMED `every section N reference to a run_all.sh`; COMPUTED `every section N on a line that also contains the literal run_all.sh or the literal `re-run in section``.
+        R5a  a false section reference, no `run_all.sh` on the line: 0 finding(s) — invisible.
+        R5b  the same false claim with `of \`run_all.sh\`` appended: 1 finding(s).
+             The claim is identically false in both.  The checker's population is a property of the
+             LINE'S WORDING, not of the claim.  Live instance of the shape it does not see:
+             code/state_delegation_repair_0049/README.md:165 says `section 7's re-runs mutate tracked
+             files`, unchanged at bd24efc and at HEAD, and P2 has never looked at it.  (This audit
+             checked that line and REFUTES its own candidate: section 7 re-runs coverage218d.py, which
+             does mutate through harness218d.Tree, so the sentence stands.  The population gap does not
+             depend on it.)
+
+  R6 — P3's population.  Claimed: EVERY module-level dict KEYED BY REPO PATHS.
+    R6a    exit 1   1 finding(s)
+    R6b    exit 0   0 finding(s)
+
+    >>> R6  SEPARATED   (this audit predicted SEPARABLE)
+        CLAIMED `every module-level dict keyed by repo paths is iterated`; COMPUTED `every module-level dict ALL of whose keys start code/ or docs/ AND contain a dot`.
+        R6a  a third pinned table, keyed by one repo path, iterated by nothing: 1 finding(s).
+             That is mg-a74f's claim working — `a third table joins the population by existing`.
+        R6b  the same table with ONE extra key, `"note"`: 0 finding(s).  It leaves the
+             population and its being iterated by nothing is no longer checkable by this program.
+             A pinned table nothing visits is exactly broken claim 3, and one annotation key hides it.
+             `claims_a74f.iterated_tables()` computes the SAME population by a DIFFERENT rule (no dot
+             requirement), so the two halves of this repair do not agree on what the population is.
+
+  R7 — P4's attribution.  Claimed: THAT SCRIPT's own ROWS.
+    R7a    exit 1   1 finding(s)
+    R7b    exit 0   0 finding(s)
+
+    >>> R7  SEPARATED   (this audit predicted SEPARABLE)
+        CLAIMED `the number equals THAT SCRIPT's own ROWS`; COMPUTED `the number equals the ROWS of the nearest .py basename in the preceding 400 characters`.
+        R7a  `The battery in \`mutations_0049.py\` runs against all five rows` (ROWS is 9): 1 finding(s).
+        R7b  the same false sentence with `, scored by \`render0049.py\`,` inserted before it: 0 finding(s).
+             render0049.py's ROWS is 5, so the false claim about mutations_0049.py is checked against a
+             different script and passes.  The verdict is decided by a neighbouring token, not by the
+             claim's subject.
+
+====================================================================================================
+D.  THE ROWS THIS AUDIT COULD NOT SEPARATE, AND WHY — stated, not left as absence
+====================================================================================================
+  R3  visible_a74f `r16 SHOWN`.  The row NAMES what a reader is shown and computes
+      bytes-minus-one-mechanism, and those are different sets — but mg-a74f
+      already publishes this row as DOES NOT MATCH and builds V1/V3/V4 to show it.
+      There is nothing here for an independent audit to separate that the repair
+      has not separated itself.  Confirmed, not re-derived: see section B, where
+      the same rule scores 5/5 on documents a reader is shown nothing of.
+    >>> R3  NOT SEPARATED   (this audit predicted NOT SEPARABLE)
+        CLAIMED and COMPUTED differ, and the row says so.
+        mg-a74f keeps mg-16eb's name for mg-16eb's rule on purpose so the mismatch is
+        legible.  This audit agrees with that choice and adds nothing to it.
+
+  R8  battery_a74f `exit codes`.  The row names the exit code of the mutated
+      control and reads `subprocess.returncode`.  Those are the same set: the
+      code is read from the process and never inferred from stdout, which is
+      checkable by reading harness16eb.Tree.run_mutated and is what it does.
+    >>> R8  NOT SEPARATED   (this audit predicted NOT SEPARABLE)
+        CLAIMED = COMPUTED.
+        The one thing that could separate them — reading section 1's PRINTED `6 of 8`
+        instead of re-running — is exactly what battery_a74f.py's section 2 refuses to
+        do, in writing, and section 2 re-runs all eight rows itself.  No construction.
+
+  R9  claims_a74f `before / after`.  The row names a predicate over two revisions
+      and computes a predicate over two revisions.  For claims 4 and 6 it checks
+      THE WORDING and mg-a74f says so in the same row.  Its `the tree` is the
+      working directory, which R4c moves — but the row says `the tree` and the
+      working directory IS the tree; the row is not separated by that.
+    >>> R9  NOT SEPARATED   (this audit predicted NOT SEPARABLE)
+        CLAIMED = COMPUTED, with the caveat mg-a74f already prints.
+        `in_tree(None, path)` is `os.path.exists`, so claim 1's `that path exists`
+        would be satisfied by an untracked file — reported under R4c, where the row
+        name is about a REVISION.  Here the row name is `the tree` and it is honest.
+
+====================================================================================================
+E.  THE NEW SURFACE, AND THE ONE CLAIM NOW VERIFIABLE ONLY THROUGH IT
+====================================================================================================
+  render0049.py points a reader at visible_a74f.py for suppression: True
+  render0049.py's old `WHAT A READER IS SHOWN` header is gone: True
+  POPULATION RULE: every .py under code/ carrying a token that COMPUTES a
+  suppression verdict — closed_details_ancestors, def suppressors, DECLARED = [,
+  or a display:none pattern.  Printed with the token, so the rule is legible.
+  5 file(s):
+      code/face_geometry_audit_c4c8/h3_control.py                    ['DECLARED = \\[']
+      code/species_rung_repair_4adb/v3_self.py                       ['DECLARED = \\[']
+      code/state_delegation_audit_16eb/render16eb.py                 ['closed_details_ancestors']
+      code/state_delegation_repair_a74f/visible_a74f.py              ['closed_details_ancestors', 'def suppressors', 'DECLARED = \\[', 'display\\s*:\\s*none']
+      code/state_landing_control_2da3/presentation.py                ['display\\s*:\\s*none']
+
+  THE SINGLE POINT OF FAILURE, NAMED.  After this repair the question `is this
+  section suppressed?` has exactly one instrument in the repository:
+  visible_a74f.py.  render0049.py's R5 was narrowed off the question and now
+  POINTS AT that file; render16eb.py's SHOWN column is demonstrated wrong by that
+  same file; nothing else measures it.  mg-a74f names this surface itself and
+  predicts its next gap as `a mechanism outside the set`.
+
+  THIS AUDIT'S FINDING IS THAT THE GAP IS NOT WHERE THE PREDICTION PUT IT.  Two
+  of the three separations in section B are INSIDE the declared set — S1 and S4
+  are not implemented as declared — and the third is an offset bug, not a
+  mechanism at all.  A reader who trusts the prediction watches for stylesheets
+  and JavaScript while `class="hidden"` scores SUPPRESSED and `<div hidden>`
+  behind an ampersand scores NOT SUPPRESSED, and no second instrument disagrees.
+
+====================================================================================================
+THE LEDGER, SCORED
+====================================================================================================
+  9 of 9 published rows reached a verdict.
+  SEPARATED: 5 — R2, R4, R5, R6, R7
+  NOT SEPARATED: 4
+  off this audit's committed predictions: 1
+      R1  predicted SEPARABLE, observed NOT SEPARATED
+
+  EVERY SEPARATION, ONE LINE EACH:
+    R2  CLAIMED `not suppressed by any of five DECLARED mechanisms`; COMPUTED three different things, none of them that.
+    R4  CLAIMED `every repo-relative path named in the text exists at the revision being read`; COMPUTED `every string with one of six extensions is somewhere in the working DIRECTORY`.
+    R5  CLAIMED `every section N reference to a run_all.sh`; COMPUTED `every section N on a line that also contains the literal run_all.sh or the literal `re-run in section``.
+    R6  CLAIMED `every module-level dict keyed by repo paths is iterated`; COMPUTED `every module-level dict ALL of whose keys start code/ or docs/ AND contain a dot`.
+    R7  CLAIMED `the number equals THAT SCRIPT's own ROWS`; COMPUTED `the number equals the ROWS of the nearest .py basename in the preceding 400 characters`.
+
+  A separation is NOT a bug report.  Each instrument above is correct about the
+  quantity it computes.  What is reported is that the quantity is not the
+  property the row names, and a document or a tree on which the two differ.
+====================================================================================================
