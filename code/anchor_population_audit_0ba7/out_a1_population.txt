@@ -1,0 +1,227 @@
+==========================================================================
+mg-0ba7 a1  THE POPULATION, RE-DERIVED BY AST
+==========================================================================
+
+   PRE-FILED IN THE SAME ACTION AS ITS PARENT.  mg-0ba7 and mg-b2af were
+   created together by pm-onethird: the audit of the repair was a ticket
+   before the repair had a line of code.
+
+   Nothing below imports mg-330a's `classify_call` to DO the work.  It is
+   imported to be DISAGREED WITH, and every row where the two answers differ
+   is printed.
+
+
+--------------------------------------------------------------------------
+(i) TWO CLASSIFIERS, SAME CALL SITES, ROW BY ROW
+--------------------------------------------------------------------------
+
+   DEFECT #4 OF THIS INSTRUMENT, KEPT AND CORRECTED HERE.  An instrument
+   that walks `code/` and lives in `code/` MEASURES ITSELF.  The constructed
+   calls in `selftest_0ba7.py` (1) are real `ast.Call` nodes carrying a real
+   argv list, so my own test fixtures entered my own census and inflated it.
+   Found because the totals moved between the draft transcript and the
+   shipping one WHILE THE SUBJECT DID NOT CHANGE.
+
+   Every figure below is over `code/` EXCLUDING
+   code/anchor_population_audit_0ba7.
+   The self-count is printed beside it and never added in.
+   call sites in THIS AUDIT'S OWN directory (excluded below)      1   [population: every ast.Call under code/anchor_population_audit_0ba7/; grain: one CALL SITE]
+     of which are this audit's own test fixtures             1   [population: the self-count rows; grain: one CALL SITE]
+   call sites -- MY classifier                              59   [population: every ast.Call in every parseable .py under code/ EXCEPT this audit's own directory; grain: one CALL SITE]
+   call sites -- mg-330a's classifier                       44   [population: the same ast.Call nodes; grain: one CALL SITE]
+   rows the two classifiers agree on                        44   [population: the union of both populations; grain: one CALL SITE]
+   rows they DISAGREE on                                    15   [population: the union of both populations; grain: one CALL SITE]
+     of which MINE SEES and theirs does not                 15   [population: the disagreement rows; grain: one CALL SITE]
+     of which THEIRS SEES and mine does not                  0   [population: the disagreement rows; grain: one CALL SITE]
+
+   site                                                       mg-330a       mine
+   code/branching_audit_a218/c5_record.py:129                 -- NOT SEEN   RANGE
+   code/face_geometry_audit_6653/verify_claims.py:107         -- NOT SEEN   UNRESTRICTED
+   code/face_geometry_audit_6653/verify_claims.py:126         -- NOT SEEN   PICKAXE
+   code/face_geometry_audit_6653/verify_claims.py:128         -- NOT SEEN   PICKAXE
+   code/face_geometry_audit_e720/verify_landing_claims.py:86  -- NOT SEEN   PICKAXE
+   code/face_geometry_audit_e720/verify_landing_claims.py:89  -- NOT SEEN   PICKAXE
+   code/face_geometry_audit_e720/verify_landing_claims.py:372 -- NOT SEEN   RANGE
+   code/face_geometry_audit_e720/verify_landing_claims.py:378 -- NOT SEEN   PICKAXE
+   code/face_geometry_audit_e720/verify_landing_claims.py:459 -- NOT SEEN   UNRESTRICTED
+   code/face_geometry_audit_e720/verify_landing_claims.py:461 -- NOT SEEN   UNRESTRICTED
+   code/hodge_leverage_audit_8a5c/audit_repair_8e30.py:556    -- NOT SEEN   PICKAXE
+   code/hodge_leverage_audit_8a5c/audit_repair_8e30.py:563    -- NOT SEEN   INDEXED
+   code/runner_exit_repair_7522/s4_unpin.py:199               -- NOT SEEN   NEWEST
+   code/state_control_audit_2216/claims_audit.py:198          -- NOT SEEN   PICKAXE
+   code/state_landing_audit_bd41/verify_landing_figures.py:197 -- NOT SEEN   INDEXED
+
+   WHY.  Every disagreement above is one string.  `lib330a._HASH_FORMATS`
+   is
+       ('--format=%H', '--pretty=%H', '--format=format:%H')
+   and the sites above carry `--format=%h`.  The ABBREVIATED hash is a
+   revision by every use made of it in this repository, and it is in
+   no hash-format tuple of this arc.
+
+   `git log -1 --format=%h -- <path>` IS `NEWEST`.  It is A-1's defect
+   spelled with a lowercase letter.  The population of mg-330a's census, of
+   mg-b2af's repair, and of the brief for both, is therefore not
+   `history-derived call sites` -- it is `history-derived call sites THAT
+   SPELL THE HASH WITH A CAPITAL H`.
+
+   mg-b2af's own headline is A SEARCH BY FLAG HAS A POPULATION DEFINED BY A
+   FLAG.  It found that for `--format=%H` versus the named helpers, and then
+   imported the flag tuple unchanged -- `population by mg-330a's classifier,
+   UNCHANGED` -- and refined the 19 `without touching the denominator`.  The
+   denominator was the thing to touch.
+
+   disagreements explained by `%h` alone                    15   [population: the disagreement rows; grain: one CALL SITE]
+   *** FINDING: the two classifiers disagree on 15 of 59 call sites, 15 of them invisible to mg-330a's classifier and therefore absent from every population this arc has published
+
+--------------------------------------------------------------------------
+(ii) THE KIND COUNTS -- MINE, THEIRS, AND EVERY PUBLISHED FIGURE
+--------------------------------------------------------------------------
+   The three published columns are READ out of mg-330a's document,
+   mg-330a's committed transcript, and mg-b2af's README table.  They
+   are not measurements taken here.  The last two columns are.
+
+   kind               doc(R)   tsc(R)  b2af(R) |  330a@me     MINE
+   NEWEST                  7        7        8 |        9       10
+   INDEXED                 8        8       10 |       12       14
+   UNRESTRICTED            1        1        1 |        1        4
+   OLDEST                 10       11       11 |       12       12
+   PICKAXE                 6        6        6 |        6       13
+   RANGE                   4        4        4 |        4        6
+
+   HISTORY-DERIVED -- mg-330a's classifier at my tree       22   [population: call sites classified NEWEST/NEWEST-norestrict/INDEXED/UNRESTRICTED; grain: one CALL SITE]
+   HISTORY-DERIVED -- MY classifier at my tree              28   [population: the same four kinds, `%h` included; grain: one CALL SITE]
+     directories -- theirs                                  14   [population: dirname() of the history-derived rows; grain: one DIRECTORY]
+     directories -- mine                                    19   [population: dirname() of the history-derived rows; grain: one DIRECTORY]
+
+   THE HISTORY-DERIVED SITES NO POPULATION OF THIS ARC CONTAINS:
+     UNRESTRICTED   code/face_geometry_audit_6653/verify_claims.py:107
+     UNRESTRICTED   code/face_geometry_audit_e720/verify_landing_claims.py:459
+     UNRESTRICTED   code/face_geometry_audit_e720/verify_landing_claims.py:461
+     INDEXED        code/hodge_leverage_audit_8a5c/audit_repair_8e30.py:563
+     NEWEST         code/runner_exit_repair_7522/s4_unpin.py:199
+     INDEXED        code/state_landing_audit_bd41/verify_landing_figures.py:197
+   history-derived sites invisible to mg-330a's classifier      6   [population: the sites only my classifier sees; grain: one CALL SITE]
+
+   AND THE LOUDEST CLASS IS THE ONE THAT MOVED MOST.  mg-b2af's own
+   STILL OPEN list names ONE `UNRESTRICTED` site -- p3_reason.py --
+   and calls it `the loudest form of the defect ... the one site in
+   the 19 that no pin can help`.
+   UNRESTRICTED -- mg-330a's classifier at my tree           1   [population: call sites classified UNRESTRICTED; grain: one CALL SITE]
+   UNRESTRICTED -- MINE                                      4   [population: call sites classified UNRESTRICTED; grain: one CALL SITE]
+     code/face_geometry_audit_6653/verify_claims.py:107   last25 = subprocess.run(["git", "-C", REPO, "log", "--format
+     code/face_geometry_audit_e720/verify_landing_claims.py:459   said = [c for c in git("log", "--format=%h", "-60").split()
+     code/face_geometry_audit_e720/verify_landing_claims.py:461   repairer = [c for c in git("log", "--format=%h", "-60").spli
+     code/repair_8d5e/lib8d5e.py:167   for h in git("log", "--format=%H", rev, repo=repo).split():
+   *** FINDING: the STILL-OPEN list names 1 UNRESTRICTED site; 4 exist at this tree and 3 of them are invisible to the classifier the list was drawn from
+
+--------------------------------------------------------------------------
+(iii) THE POPULATION WITH NO `--format=%H` -- A NAME-LIST vs A CLOSURE
+--------------------------------------------------------------------------
+
+   The brief: INCLUDE THE CALL SITES CARRYING NO `--format=%H`.  The parent
+   found 16 such, invisible to a flag-grep.  A SEARCH BY FLAG HAS A
+   POPULATION DEFINED BY A FLAG.
+
+   True, and the same sentence applies one word over.  `sweep_helper_uses`
+   carries the literal tuple ("last_touching", "nth_touching") in its body.
+   A SEARCH BY NAME HAS A POPULATION DEFINED BY A NAME-LIST.
+
+   mg-330a's helper sweep -- ROWS                           16   [population: DEF and CALL nodes of the two named helpers; grain: one AST NODE]
+     of which DEF                                            4   [population: the same rows; grain: one FUNCTION DEFINITION]
+     of which CALL                                          12   [population: the same rows; grain: one CALL SITE]
+   -- mg-b2af's headline, REPRODUCED at my tree: the document's
+      `16 call sites` is the ROW count over TWO populations.  It
+      holds here too, so the finding survives a tree it was not
+      measured at.
+   functions containing a history-derived call              20   [population: every FunctionDef under code/; grain: one DEFINITION]
+     of which RETURN the anchor to their caller             13   [population: the same definitions, taint-tested; grain: one DEFINITION]
+     distinct names among those                              9   [population: the returning definitions; grain: one NAME]
+     base_before_dir, commits_touching, last_lacking, last_touching, log_paths, my_last_touching, my_nth_touching, nth_touching, publishing_commit
+   mg-330a's list has 2 of these 9 names.
+   IMPORT-RESOLVED closure -- anchor-obtaining call sites     48   [population: calls resolving through the calling file's own bindings to a returning seed; grain: one CALL SITE]
+     directories                                             8   [population: dirname() of those rows; grain: one DIRECTORY]
+   NAME COLLISIONS -- bare name matches, binding does not     17   [population: calls whose bare name is a seed name but whose binding reaches a NON-seed definition; grain: one CALL SITE]
+   UNRESOLVED -- binding not statically determinable         1   [population: calls whose bare name is a seed name and whose binding this instrument could not resolve; grain: one CALL SITE]
+     code/hodge_leverage_repair_3f3b/repair_7e39.py:987  return ANCHOR.publishing_commit(rel)
+   -- counted and named rather than dropped.  The one below reaches
+      its helper through importlib.util.spec_from_file_location, so
+      NO static closure can resolve it.  That is a limit of this
+      instrument, stated as a limit.
+   `import *` files (bindings unenumerable): code/branching_locate_db09/selftestdb09.py
+
+   THE COLLISIONS ARE NOT A TECHNICALITY.  All 17 resolve to a
+   `commits_touching` that takes a `%s..%s` RANGE -- a SET, with no
+   single revision to re-point.  A bare-name match counts them as
+   anchor sites; they are not.  The name is shared, the KIND is not.
+       4 call sites -> code/branching_audit_321d/lib321d.py
+       3 call sites -> code/branching_audit_58da/lib58da.py
+       3 call sites -> code/branching_audit_e34a/libe34a.py
+       7 call sites -> code/branching_repair_7e58/lib7e58.py
+   the parent's method, CALL sites only                     12   [population: bare-name matches on the two named helpers; grain: one CALL SITE]
+
+   AND THE SAME DEFECT IN MY OWN INSTRUMENT, KEPT.  The taint test in
+   `_tainted_return` was first written over `ast.Assign` alone.
+   `lib8d5e.last_lacking` and `lib8d5e.base_before_dir` both receive the
+   anchor through a FOR TARGET and return it, so both scored `returns=False`
+   and were dropped.  Reading in that first form:
+
+       returning seeds  11 (not 13)      closure  40 call sites (not 48)
+
+   Two real anchor helpers excluded by a population defined by the syntax I
+   happened to think of first, in an audit of populations defined by what
+   the searcher happened to look for.  Found by reading the seed table's own
+   named rows.  The comment sits at the fix.
+
+
+--------------------------------------------------------------------------
+(iv) CONVERTED-COUNT AGAINST SIXTEEN
+--------------------------------------------------------------------------
+
+   The brief for mg-b2af: convert the history-derived 16 to property-derived,
+   or pin-and-compare each, and report converted-count AGAINST 16.
+
+   mg-b2af answered `0 of 19` and `pinned 4 of 19`, and was right to move
+   the denominator: 16 was a pre-rebase figure.  It moved it once.  Here is
+   every denominator this question has had, each labelled with the tree and
+   the classifier it came from.
+
+   denominator                                              history-derived
+   the brief's, READ                                        16
+   mg-330a's transcript, READ                               16
+   mg-b2af at its tree, READ                                19
+   mg-330a's classifier at MY tree, measured                22
+   MY classifier at MY tree, measured                       28
+
+   CONVERTED TO PROPERTY-DERIVED BY THIS AUDIT : 0 of 28
+   -- written as 0.  This audit converts nothing: every one of these
+      sites is another ticket's, and rewriting another ticket's
+      instrument to make this ticket's number come out is the
+      failure this arc exists to avoid.  mg-b2af declined for the
+      same reason and the reason is still right.
+
+   PINNED AND COMPARED BY mg-b2af : 4, READ from ANCHORS.tsv
+   AGAINST WHICH POPULATION : mg-b2af says `4 of 19`.  Measured
+   here at the tree that carries ANCHORS.tsv, the same four rows
+   are 4 of 28.
+   *** FINDING: the converted-count is reported against a denominator produced by a classifier that cannot see `--format=%h`; at this tree that is 28 history-derived sites, not 22, and 6 of the missing 6 are in the defect classes
+
+--------------------------------------------------------------------------
+(v) PREDICTIONS SCORED
+--------------------------------------------------------------------------
+   P-1    predicted '<=4 disagreements'      measured '15 disagreements'       *** MISS  -- and every one is `%h`; I predicted RANGE and abbreviated formats and got the second half only
+   P-2    predicted '25..45 sites, >=8 dirs' measured '48 sites, 8 dirs'       *** MISS  -- 48 is outside the range I gave
+   P-3a   predicted '>=1 collision'          measured '17 collisions'          HIT
+   P-3b   predicted '>=3 names missing'      measured "7 of 9 names missing from the parent's list" HIT
+
+   P-1 MISS KEPT AS WRITTEN.  I predicted at most 4 disagreements and
+   named RANGE as the likely site of them.  There are 15, none in
+   RANGE's dead branch, and all 15 are one letter.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the assertions a1 makes about its own two classifiers
+FINDINGS: 3, population: the published anchor-population figures of mg-330a and mg-b2af
+   FINDING: the two classifiers disagree on 15 of 59 call sites, 15 of them invisible to mg-330a's classifier and therefore absent from every population this arc has published
+   FINDING: the STILL-OPEN list names 1 UNRESTRICTED site; 4 exist at this tree and 3 of them are invisible to the classifier the list was drawn from
+   FINDING: the converted-count is reported against a denominator produced by a classifier that cannot see `--format=%h`; at this tree that is 28 history-derived sites, not 22, and 6 of the missing 6 are in the defect classes
+NOTES: 0 (not scored)
+TOTAL BAD: 3

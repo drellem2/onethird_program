@@ -1,0 +1,93 @@
+==========================================================================
+mg-0ba7 a5  DISTINCTNESS BY RESOLUTION
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) TWO DISTINCT SHAS, ONE IDENTICAL BLOB -- CONSTRUCTED
+--------------------------------------------------------------------------
+
+   The construction is one commit that does not touch the path under test.
+   `code/branching_audit_58da/lib58da.py`
+   is edited; `code/branching_audit_58da/g1_provenance.py`
+   is not.  HEAD and HEAD~1 are then two REAL, DISTINCT commits whose blob
+   for the untouched path is the same object.
+
+   commit A                                       e5d37a41d10a7e1e49e7c9329957335805b2dea3
+   commit B                                       821e29caf9bb06c25a6d606b0075c38fc205b1be
+   blob of the TARGET at A                        ca90929f1567d09b83c499d9b813ab295d3d87c8
+   blob of the TARGET at B                        ca90929f1567d09b83c499d9b813ab295d3d87c8
+   blob of the EDITED file at A                   c84eee1e9c3f
+   blob of the EDITED file at B                   64b52bc6570c
+
+   DISTINCTNESS BY SHA        : PASS -- they differ
+   DISTINCTNESS BY RESOLUTION : FAIL -- the same object, ca90929f1567
+
+   THE TWO TESTS DISAGREE, ON A PAIR BUILT TO MAKE THEM DISAGREE.  An
+   instrument that asserts `these two anchors must differ` and asks it of
+   the SHAS has asked nothing about the file it is reasoning about.  Every
+   commit to the repository that does not touch the path makes the shas
+   differ.
+
+
+--------------------------------------------------------------------------
+(ii) DOES THE REPAIR NOTICE?  ITS OWN PREDICATE, ON MY PAIR.
+--------------------------------------------------------------------------
+
+   mg-b2af's `t4_preserve.py` runs both tests every time and prints that
+   they disagree.  The predicate is re-implemented here -- `blob_sha(a, rel)
+   != blob_sha(b, rel)` -- and applied to the pair constructed above, which
+   `t4` has never seen.
+
+   the content predicate fires on the constructed pair : YES
+   -- so the repair's lesson is a RUNNING CHECK and it holds on
+      an input chosen by somebody else.  That is what an
+      independent audit can add to `it passed on its own pair`.
+
+--------------------------------------------------------------------------
+(iii) mg-b2af's OWN PAIR, RE-MEASURED AT MY TREE
+--------------------------------------------------------------------------
+   mg-b2af, READ: `on the pair (d01ff32d, HEAD), a distinctness check
+   on commit shas PASSES and one on the blob of g1_provenance.py
+   FAILS -- ca90929f both sides.`
+
+   d01ff32d                                       d01ff32dd4dc
+   HEAD                                           e5d37a41d10a
+   blob of g1_provenance.py at d01ff32d           ca90929f1567
+   blob of g1_provenance.py at HEAD               ca90929f1567
+
+   sha distinctness  : PASS
+   blob distinctness : FAIL -- identical, ca90929f1567
+   -- REPRODUCED.  mg-b2af's pair still exhibits it 94 commits later.
+
+--------------------------------------------------------------------------
+(iv) THE DIRECTION NOBODY IN THIS ARC HAS ASKED
+--------------------------------------------------------------------------
+
+   Every statement of the lesson in this arc is about anchors that MUST
+   DIFFER.  The mirror case is an anchor pair that must be THE SAME, and it
+   is not symmetric: two anchors can resolve to the same commit sha and
+   still be about different content, because a commit is a whole tree.
+
+   mg-b2af's `ANCHORS.tsv` has exactly this shape and it is worth naming.
+   Two of its four rows resolve to the SAME revision, d01ff32d, and they are rows
+   about the SAME path, so they agree.  The third and fourth rows resolve
+   elsewhere.  A `resolved` column with a repeated sha is a column where
+   equality carries no information unless the PATH is carried beside it --
+   and ANCHORS.tsv does carry the path, in its own `path` column.  The file
+   is built right; the point is that the sha column alone could not have
+   been.
+
+   rows in ANCHORS.tsv                                       4   [population: the file mg-b2af ships; grain: one PINNED SITE]
+   distinct resolved revisions among them                    3   [population: the resolved column of those rows; grain: one REVISION]
+     d01ff32dd4dc  shared by 2 rows, paths: code/face_geometry/face_complex.py
+
+--------------------------------------------------------------------------
+(v) PREDICTIONS SCORED
+--------------------------------------------------------------------------
+   P-9    predicted 'sha PASS, blob FAIL, on both pairs' measured "constructed pair: sha PASS blob FAIL; mg-b2af's pair: sha PASS blob FAIL" HIT
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: a5's constructed commit pair
+FINDINGS: 0, population: mg-b2af's content-identity check on the anchors it preserves
+NOTES: 0 (not scored)
+TOTAL BAD: 0

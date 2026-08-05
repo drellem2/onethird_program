@@ -1,0 +1,121 @@
+==========================================================================
+mg-0ba7 a6  THE FLOOR: REVISIONS PRODUCED WITHOUT `log`
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE POPULATION NOBODY HAS ENUMERATED
+--------------------------------------------------------------------------
+   EXCLUDING code/anchor_population_audit_0ba7/ -- see a1 (i), DEFECT #4.
+   call sites using one of ('rev-list', 'rev-parse', 'merge-base', 'describe')    120   [population: every ast.Call under code/ whose direct string arguments name one of those four commands; grain: one CALL SITE]
+     merge-base                                             14   [population: the same call sites; grain: one CALL SITE]
+     rev-list                                               16   [population: the same call sites; grain: one CALL SITE]
+     rev-parse                                              90   [population: the same call sites; grain: one CALL SITE]
+   of those, ALSO in my `git log` census                     0   [population: the rev-command call sites; grain: one CALL SITE]
+   in NO population this arc has published                 120   [population: the rev-command call sites minus the overlap; grain: one CALL SITE]
+
+--------------------------------------------------------------------------
+(ii) WHICH OF THEM ARE ANCHORS, AND WHICH ARE NORMALISATIONS
+--------------------------------------------------------------------------
+
+   Not every one is a defect and saying so would be A-2's mistake in the
+   other direction -- a term denoting more than it covers.  `rev-parse` of a
+   literal 40-character sha NORMALISES a revision somebody already chose; it
+   cannot re-point.  `rev-parse HEAD` DERIVES one, and re-points on every
+   commit to the repository rather than to any one file.
+
+   The split below is by whether the call's own string arguments mention
+   `HEAD` or name no revision at all.  That rule is stated because it is
+   approximate: a call whose revision arrives as a PARAMETER is counted
+   MOVING here and mg-b2af's own refinement would call it a facility.  Both
+   readings are printed.
+
+   MOVING -- mentions HEAD, or names no revision            37   [population: the 120 rev-command call sites; grain: one CALL SITE]
+   otherwise                                                83   [population: the 120 rev-command call sites; grain: one CALL SITE]
+   mentioning HEAD explicitly                               24   [population: the 120 rev-command call sites; grain: one CALL SITE]
+     directories they live in                               15   [population: dirname() of those rows; grain: one DIRECTORY]
+
+   THE `HEAD` ONES, BY DIRECTORY -- the UNRESTRICTED shape, spelled
+   without `log`:
+       5  code/hodge_leverage_repair_3f3b
+       2  code/census_repair_f3ff
+       2  code/face_geometry_audit_6653
+       2  code/species_bound_audit_6ef4
+       2  code/species_extent_audit_6cb9
+       2  code/state_visibility_audit_65eb
+       1  code/audit_2c77
+       1  code/audit_330a
+       1  code/branching_audit_58da
+       1  code/branching_audit_e34a
+       1  code/branching_repair_7e58
+       1  code/hodge_leverage_audit_7e39
+     ... and 3 more directories
+
+   mg-b2af's STILL OPEN list, READ:
+
+       `code/repair_69d1/p3_reason.py (i-b) still anchors its control on
+       HEAD -- UNRESTRICTED, the loudest form of the defect ... the one site
+       in the 19 that no pin can help, because HEAD moves on every commit to
+       the repository rather than to a file.`
+
+   The sentence is right about `HEAD`.  `the one site` is a count over a
+   population that cannot contain any of the 24 above, because none of them
+   says `log`.
+
+   *** FINDING: 24 call sites in 15 directories derive a revision from HEAD through rev-parse/rev-list/merge-base/describe; every population this arc has published requires the word `log` and a hash format, so none of them has ever been counted, and the STILL-OPEN list calls the one site it can see `the one site`
+
+--------------------------------------------------------------------------
+(iii) A SAMPLE, NAMED, SO THE NUMBER IS CHECKABLE
+--------------------------------------------------------------------------
+   site                                                 command     source
+   code/audit_2c77/lib2c77.py:81                        rev-parse   return git("rev-parse", "HEAD").strip()
+   code/audit_330a/lib330a.py:393                       rev-parse   return subprocess.run(["git", "-C", tree, "r
+   code/branching_audit_58da/lib58da.py:79              rev-parse   return git("rev-parse", "HEAD").strip()
+   code/branching_audit_e34a/libe34a.py:119             rev-parse   return git("rev-parse", "HEAD", repo=repo).s
+   code/branching_repair_7e58/lib7e58.py:141            rev-parse   return git("rev-parse", "HEAD", repo=repo).s
+   code/census_repair_f3ff/lib_f3ff.py:165              rev-parse   hp = _run(["git", "-C", path, "rev-parse", "
+   code/census_repair_f3ff/lib_f3ff.py:167              rev-list    cb = _run(["git", "-C", path, "rev-list", "-
+   code/face_geometry_audit_6653/verify_claims.py:103   rev-list    total = int(subprocess.run(["git", "-C", REP
+   code/face_geometry_audit_6653/verify_claims.py:105   rev-list    touching = int(subprocess.run(["git", "-C", 
+   code/hodge_leverage_audit_7e39/audit_7e39.py:1539    rev-parse   print(f"  tree              : {git('rev-pars
+   code/hodge_leverage_repair_3f3b/repair_7e39.py:418   rev-parse   print(f"    HEAD                     : {git(
+   code/hodge_leverage_repair_3f3b/repair_7e39.py:426   rev-parse   print(f"    {ANCHOR.anchor_line(git('rev-par
+   code/hodge_leverage_repair_3f3b/repair_7e39.py:1019  rev-parse   head_rev = git("rev-parse", "HEAD").strip()
+   code/hodge_leverage_repair_3f3b/repair_7e39.py:1020  rev-parse   parent = git("rev-parse", "HEAD^").strip()
+   code/hodge_leverage_repair_3f3b/repair_7e39.py:1039  rev-parse   head_rev_full = git("rev-parse", "HEAD").str
+   code/hodge_leverage_repair_6df0/repair_ec07.py:539   rev-parse   rev = git("rev-parse", "HEAD").strip()[:12] 
+   code/repair_69d1/lib69d1.py:98                       rev-parse   return git("rev-parse", "HEAD", repo=repo).s
+   code/species_bound_audit_6ef4/selftest6ef4.py:44     merge-base  code, _ = git(["merge-base", "--is-ancestor"
+   code/species_bound_audit_6ef4/selftest6ef4.py:49     rev-parse   code2, out2 = git(["rev-parse", "HEAD"])
+   code/species_extent_audit_6cb9/a2_crosssection.py:255 rev-parse   head = sh(["git", "rev-parse", "--short", "H
+   ... and 4 more; the full list is this script's own output under a wider terminal
+
+--------------------------------------------------------------------------
+(iv) AND THE HONEST LIMIT OF MY OWN FLOOR
+--------------------------------------------------------------------------
+
+   `REV_COMMANDS` is a four-entry tuple in `lib_0ba7.py`.  IT IS A
+   NAME-LIST, and a name-list is what this whole audit is about.  Commands
+   that also produce a revision and are not in it include `git show
+   --format=%H`, `git for-each-ref`, `git reflog`, `git name-rev`, `git
+   blame` and `git stash list`, and a call that builds its argv from a
+   variable is invisible to every AST rule here.
+
+   So the number in (i) is A LOWER BOUND, and it is labelled one.  I am not
+   going to close this audit by claiming the enumeration I criticise others
+   for not having is complete in my hands.
+
+   call sites naming one of ('show', 'for-each-ref', 'reflog', 'name-rev', 'blame'), not counted above    164   [population: every ast.Call under code/ naming one of those five commands and none of the four in REV_COMMANDS; grain: one CALL SITE]
+   -- not all of these produce a revision.  The figure is printed to
+      size the gap, not to be added to anything.
+
+--------------------------------------------------------------------------
+(v) PREDICTIONS SCORED
+--------------------------------------------------------------------------
+   P-10   predicted '5..40 sites in no published population' measured 120                      *** MISS  -- I was an order of magnitude low; I predicted the CLASS existed and guessed its size from nothing
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: a6's own command classification
+FINDINGS: 1, population: the revision-producing call sites of this repository that are in no published population of this arc
+   FINDING: 24 call sites in 15 directories derive a revision from HEAD through rev-parse/rev-list/merge-base/describe; every population this arc has published requires the word `log` and a hash format, so none of them has ever been counted, and the STILL-OPEN list calls the one site it can see `the one site`
+NOTES: 0 (not scored)
+TOTAL BAD: 1

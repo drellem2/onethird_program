@@ -1,0 +1,78 @@
+==========================================================================
+mg-0ba7 a4  THE TWO LABELS, RECOUNTED
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE RESIDUE AT THIS TREE, AND WHAT IT IS A POPULATION OF
+--------------------------------------------------------------------------
+   lines stating the term, anywhere in the worktree         88   [population: git grep -F --untracked over the whole worktree; grain: one LINE]
+   of those, UNQUALIFIED                                    29   [population: the lines above; grain: one LINE]
+   UNQUALIFIED, excluding this audit's own directory        29   [population: the unqualified lines not under code/anchor_population_audit_0ba7/; grain: one LINE]
+   -- mg-b2af reported 20, READ from its README, measured at its own
+      tree with its own directory excluded.  The comparable number
+      here is the third row.
+
+--------------------------------------------------------------------------
+(ii) BOTH LABELS, SEPARATELY, BOTH PRINTED
+--------------------------------------------------------------------------
+   BY KIND -- the PATH rule, which decides whether a site gets edited
+     live claim                                             21   [population: the 29 unqualified sites outside my directory; grain: one LINE]
+     record, pre-run                                         2   [population: the 29 unqualified sites outside my directory; grain: one LINE]
+     transcript                                              6   [population: the 29 unqualified sites outside my directory; grain: one LINE]
+
+   BY SCOPE -- whose ticket owns the file.  A DIFFERENT QUESTION.
+     another ticket's                                       29   [population: the same 29 sites; grain: one LINE]
+
+   mg-b2af, READ  : 20 sites; by KIND 5 records (3 transcripts, 2
+                    prediction files) and 15 live claims; by SCOPE
+                    every one another ticket's.
+   measured here  : 29 sites; by KIND 8 records and 21 live claims;
+                    by SCOPE 29 another ticket's.
+
+   BOTH LABELS PRINT, SEPARATELY, WITH SEPARATE COUNTS AND SEPARATE
+   POPULATIONS.  mg-b2af's repair of F-2 was to make two rules into two
+   functions with two columns; the shape survives a re-implementation at a
+   different tree by a different hand, which is what an independent recount
+   can say and a re-run cannot.
+
+
+--------------------------------------------------------------------------
+(iii) IS THE ANSWER A PROPERTY OF THE TREE OR OF THE RULE?
+--------------------------------------------------------------------------
+
+   A recount that applies the subject's own rule can only find that the tree
+   moved.  So the same sites are labelled a SECOND time, by a path rule
+   written here: any `.txt` is a record, because the property that makes a
+   transcript uneditable is that it RECORDS A RUN, not that somebody spelled
+   its name `out_`.
+
+   kind                  mg-b2af's       mine
+   live claim                   21         21
+   record, pre-run               2          2
+   transcript                    6          6
+   sites the two path rules label differently                0   [population: the 29 unqualified sites outside my directory; grain: one LINE]
+     none -- every `.txt` in the residue is also an `out_*.txt`,
+     so at THIS tree the two rules are indistinguishable.  That
+     is a fact about this tree, not a confirmation of the rule:
+     a transcript named `transcript.txt` would part them, and
+     none exists here to try it on.
+
+   AND THE CONSTRUCTED CASE, SO THE ABOVE IS NOT AN ARGUMENT.
+   A hypothetical site in 'code/anchor_population_audit_0ba7/transcript.txt':
+     mg-b2af's rule : live claim
+     mine           : transcript
+   *** FINDING: a record whose filename does not begin `out_` is labelled 'live claim' by mg-b2af's KIND rule -- the rule that decides whether a site gets EDITED -- and 'transcript' by a rule keyed on the property.  No such file is in the residue at this tree, so this is a latent difference, not a miscount
+
+--------------------------------------------------------------------------
+(iv) PREDICTIONS SCORED
+--------------------------------------------------------------------------
+   P-8a   predicted '21..30 sites'           measured 29                       *** MISS
+   P-8b   predicted 'records share grows'    measured 'records 8 of 29 (mg-b2af: 5 of 20)' *** MISS
+   P-8c   predicted 'both labels print'      measured 'both print'             *** MISS
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: a4's re-implementation of mg-2c77's term rule
+FINDINGS: 1, population: mg-b2af's two-label report of the census-term residue
+   FINDING: a record whose filename does not begin `out_` is labelled 'live claim' by mg-b2af's KIND rule -- the rule that decides whether a site gets EDITED -- and 'transcript' by a rule keyed on the property.  No such file is in the residue at this tree, so this is a latent difference, not a miscount
+NOTES: 0 (not scored)
+TOTAL BAD: 1

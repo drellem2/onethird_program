@@ -1,0 +1,150 @@
+==========================================================================
+mg-0ba7 a2  `OLDEST`: THE BOUNDARY, AND THE GATE THAT WATCHES IT
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) THE MEMBERSHIP SET, NOT THE COUNT, AT FIVE TREES
+--------------------------------------------------------------------------
+
+   A site is identified across trees by (FILE, the tuple of its call's own
+   string arguments).  Line numbers move when anything above them moves, so
+   a set keyed on line number would report churn that is not churn.  That is
+   a GRAIN choice and it is stated because the answer depends on it.
+
+   The worktree row EXCLUDES code/anchor_population_audit_0ba7/ --
+   this audit's own files are in the tree it is measuring, and its
+   selftest fixtures are real `git log` argv lists.  See a1 (i),
+   DEFECT #4.  The four cloned trees cannot contain them.
+   TWO GRAINS, PRINTED SIDE BY SIDE, BECAUSE THEY DISAGREE.  a1 counts
+   CALL SITES: 12 OLDEST at this worktree.  The set below is keyed on
+   (file, argument tuple) and collapses call sites that issue the identical
+   command from the same file, so it is smaller.  NEITHER IS WRONG AND THEY
+   ARE NOT THE SAME NUMBER.  The boundary question is a question about
+   MEMBERSHIP, so it is asked at the set grain; the census question is a
+   question about SITES, so a1 asks it at the row grain.  Reporting one
+   under the other's name is the mismatch this lineage keeps finding.
+
+   tree         what                           OLDEST/set   /rows  HIST/set   /rows
+   ea97d0a      mg-330a's pre-repair commit, o         8      11        24      25
+   fba5f63      mg-330a's repair, on main              8      11        24      25
+   14c6c3b      mg-b2af's repair                       9      12        26      28
+   b1c3467      mg-b2af's evidence                     9      12        26      28
+   worktree     this worktree                          9      12        26      28
+
+   ABSORPTION IS A SITE THAT IS `OLDEST` AT ONE TREE AND
+   HISTORY-DERIVED AT ANOTHER.  Every ordered pair, checked:
+     ea97d0a    -> fba5f63     OLDEST-turned-history: 0 ; history-turned-OLDEST: 0
+     ea97d0a    -> 14c6c3b     OLDEST-turned-history: 0 ; history-turned-OLDEST: 0
+     ea97d0a    -> b1c3467     OLDEST-turned-history: 0 ; history-turned-OLDEST: 0
+     ea97d0a    -> worktree    OLDEST-turned-history: 0 ; history-turned-OLDEST: 0
+     fba5f63    -> 14c6c3b     OLDEST-turned-history: 0 ; history-turned-OLDEST: 0
+     fba5f63    -> b1c3467     OLDEST-turned-history: 0 ; history-turned-OLDEST: 0
+     fba5f63    -> worktree    OLDEST-turned-history: 0 ; history-turned-OLDEST: 0
+     14c6c3b    -> b1c3467     OLDEST-turned-history: 0 ; history-turned-OLDEST: 0
+     14c6c3b    -> worktree    OLDEST-turned-history: 0 ; history-turned-OLDEST: 0
+     b1c3467    -> worktree    OLDEST-turned-history: 0 ; history-turned-OLDEST: 0
+   sites that changed side of the OLDEST boundary            0   [population: the 10 ordered tree pairs above; grain: one SITE (file + argument tuple)]
+
+   AND THE SET IS MONOTONE.  The `OLDEST` membership at each tree,
+   against the next:
+     ea97d0a    subset of fba5f63    : True   (0 gained, 0 lost)
+     fba5f63    subset of 14c6c3b    : True   (1 gained, 0 lost)
+     14c6c3b    subset of b1c3467    : True   (0 gained, 0 lost)
+     b1c3467    subset of worktree   : True   (0 gained, 0 lost)
+   OLDEST sets nested along the commit order                 1   [population: the four consecutive tree pairs; grain: a BOOLEAN over the whole chain]
+
+   THE SUBSTANTIVE ANSWER: `OLDEST` WAS NOT ABSORBED.  mg-330a named the
+   class apart deliberately -- a file's creation does not move when the file
+   is edited -- and mg-b2af did not let its population grow by swallowing it.
+   The count moved because the TREE moved, and the membership set grew by
+   exactly the sites the new commits added and lost none.  The repair did
+   not make A-2's mistake.
+
+   ONE PAIR OF NUMBERS EARNS A WORD.  mg-330a's document says `OLDEST 10`
+   and mg-b2af showed the sweep says 11 at every tree it measured, calling
+   the document's 10 unreproducible.  At the SET grain above, mg-330a's own
+   two commits give 8.  That is not a third answer to the same question --
+   it is the answer to a different one, and it is printed here only so that
+   nobody reads the 8 as a correction of the 11.  The row-count column is
+   the one comparable with mg-b2af's, and it agrees with mg-b2af.
+
+
+--------------------------------------------------------------------------
+(ii) COULD THE GATE HAVE SEEN IT?  CONSTRUCTED.
+--------------------------------------------------------------------------
+
+   `t1_population.py:424-432` prints
+
+       OLDEST rows in the treated population : N
+       R.check(not [r for r in pinned if r["kind"] == "OLDEST"], ...)
+
+   `pinned` is `L.read_anchors()` -- the rows of `code/repair_b2af/
+   ANCHORS.tsv`, a four-row file mg-b2af wrote, whose `kind` column mg-b2af
+   filled in.  `HISTORY_KINDS` excludes `OLDEST`, and ANCHORS.tsv is drawn
+   from the history-derived rows, so no `OLDEST` row can reach `pinned`
+   except by mg-b2af typing one.
+
+   THE PREDICATE IS RE-IMPLEMENTED HERE, NOT RUN.  `t1` clones the repo four
+   times; running it inside another clone is minutes of work to learn one
+   boolean.  The three lines below are the predicate as written at
+   `t1_population.py:430`, applied to the same file `read_anchors` reads.
+
+   rows in ANCHORS.tsv                      : 4
+   their kinds                              : ['INDEXED', 'NEWEST']
+   the parent's OLDEST gate, clean clone    : GREEN
+
+   THE CONSTRUCTED ABSORPTION
+     victim site  : code/audit_330a/lib330a.py:200
+     before       : hist = [h for h in git("log", "--format=%H", "--reverse", rev, "
+     after        : hist = [h for h in git("log", "--format=%H", rev, "--", path,
+
+                                                    before  after
+     OLDEST sites (my classifier)                       12     11
+     history-derived sites                              28     29
+     the parent's OLDEST gate                        GREEN  GREEN
+   NOTE: AN OLDEST SITE WAS ABSORBED INTO THE HISTORY-DERIVED POPULATION AND THE GATE THAT WATCHES FOR EXACTLY THAT STAYED GREEN.  `t1`'s check reads ANCHORS.tsv -- mg-b2af's own four-row output -- not the classifier's rows.  It can only go red if mg-b2af writes the word OLDEST into its own file.  The substantive answer in (i) is clean; this is about what the gate is able to say, and the answer is that it is able to say the repair did not mistype its own TSV.
+
+     THE GATE IS NOT WRONG.  It is asked of the TREATED population, and
+     nothing is wrong with checking that.  It is offered under a sentence --
+     `Absorbing it would inflate this repair's population` -- about the
+     MEASURED population, which is a different set, and the check that
+     sentence describes is not made anywhere.  A label/grain mismatch: one
+     predicate, two populations, and the narrower one printed under the
+     wider one's name.
+
+
+--------------------------------------------------------------------------
+(iii) AND THE SAME QUESTION ASKED OF MY OWN CLASSIFIER
+--------------------------------------------------------------------------
+
+   a1 found 15 call sites mg-330a's classifier cannot see, all of them
+   `--format=%h`.  If any of those 15 is an `OLDEST` site, then MY wider
+   population would inflate the OLDEST class rather than the defect class,
+   and I would be making A-2's mistake in the other direction while
+   reporting it.
+
+   sites only MY classifier sees                            15   [population: the 59 rows of my census minus the 44 of theirs; grain: one CALL SITE]
+     INDEXED          2
+     NEWEST           1
+     PICKAXE          7
+     RANGE            2
+     UNRESTRICTED     3
+   of those, OLDEST                                          0   [population: the sites only my classifier sees; grain: one CALL SITE]
+   -- 0.  My widening adds nothing to the STABLE class and 6 to the
+      DEFECT classes.  That is the direction that costs me, not the
+      direction that flatters me, and it is why the widening is
+      reported rather than argued.
+
+--------------------------------------------------------------------------
+(iv) PREDICTIONS SCORED
+--------------------------------------------------------------------------
+   P-4a   predicted '0 OLDEST absorbed, at every tree' measured 0                        HIT  -- the substantive answer, and it CONFIRMS the repair
+   P-4b   predicted "the parent's gate stays GREEN through it" measured 'GREEN'                  HIT
+   P-4c   predicted "mg-b2af's tree 11, mine 12, one new site" measured "mg-b2af's tree 12, mine 12, 0 new" *** MISS  -- the growth 11->12 happened BETWEEN mg-330a's commits and mg-b2af's, not between mg-b2af's and mine; I put the step in the wrong interval and the set is still nested
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: a2's own constructions
+FINDINGS: 0, population: mg-b2af's treatment of the OLDEST class
+NOTES: 1 (not scored)
+   NOTE: AN OLDEST SITE WAS ABSORBED INTO THE HISTORY-DERIVED POPULATION AND THE GATE THAT WATCHES FOR EXACTLY THAT STAYED GREEN.  `t1`'s check reads ANCHORS.tsv -- mg-b2af's own four-row output -- not the classifier's rows.  It can only go red if mg-b2af writes the word OLDEST into its own file.  The substantive answer in (i) is clean; this is about what the gate is able to say, and the answer is that it is able to say the repair did not mistype its own TSV.
+TOTAL BAD: 0
