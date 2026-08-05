@@ -46,23 +46,53 @@ B.hdr("P1a  THE PUBLISHING COMMIT, DERIVED AND NOT NAMED")
 
 print("  A figure from a whole-repository census is a fact about a REVISION.")
 print("  mg-56dc's own first run scored a defect against itself for comparing")
-print("  a HEAD derivation with a transcript produced on another tree, so the")
-print("  commit is read out of the log rather than written down -- and the")
-print("  constant `libbf79.SUBJECT_REV` is CHECKED against it, not trusted.")
+print("  a HEAD derivation with a transcript produced on another tree.")
 print()
-log = B.git("log", "-1", "--format=%h", "--", R4_OUT).strip()
+print("  AND THERE ARE TWO REVISIONS HERE, NOT ONE -- which is a distinction this")
+print("  probe's first draft collapsed and this ticket's own commit exposed.  It")
+print("  read `git log -1 -- <transcript>` and called the answer *the revision")
+print("  the figure is a fact about*.  Those are the same revision only until")
+print("  somebody REGENERATES the transcript -- and regenerating it is what this")
+print("  ticket does, so the moment the repair was committed the derivation")
+print("  returned THIS TICKET'S OWN COMMIT and the probe re-derived a 12/14")
+print("  census against a transcript stating 9/10 and called it a disagreement.")
+print("  A publisher is not a pin.  Both are printed and each is used for the")
+print("  question it answers:")
+print()
+FIG_REV = B.SUBJECT_REV
+pub = B.git("log", "-1", "--format=%h", "--", R4_OUT).strip()
 head = B.git("rev-parse", "--short", "HEAD").strip()
-print("      the commit that last published the transcript      %s" % log)
-print("      `libbf79.SUBJECT_REV`, the constant                %s"
-      % B.SUBJECT_REV)
-print("      HEAD of this run                                   %s" % head)
-agree = log.startswith(B.SUBJECT_REV) or B.SUBJECT_REV.startswith(log)
-print("      derivation and constant agree                      %s"
-      % ("yes" if agree else "*** NO ***"))
-if not agree:
+print("      the FIGURE's revision -- what the four artifacts")
+print("      state their `9` at, and where it must re-derive       %s" % FIG_REV)
+print("      the transcript's CURRENT publishing commit            %s" % pub)
+print("      HEAD of this run                                      %s" % head)
+print()
+same = pub.startswith(FIG_REV) or FIG_REV.startswith(pub)
+print("      the two coincide                                      %s"
+      % ("yes" if same else "no -- expected after this ticket"))
+print()
+print("  A NON-COINCIDENCE IS NOT A DEFECT AND IS NOT SCORED.  What WOULD be a")
+print("  defect is the figure failing to re-derive at the revision the prose")
+print("  pins it to, and that is checked in P1b below and IS scored.  The pin")
+print("  must resolve, though -- a revision named in prose that no longer exists")
+print("  is the staleness this arc keeps recording:")
+resolves = B.git("rev-parse", "--verify", "--quiet", "%s^{commit}" % FIG_REV,
+                 ok=(0, 1)).strip()
+print("      `%s` resolves as a commit                        %s"
+      % (FIG_REV, "yes" if resolves else "*** NO ***"))
+if not resolves:
     BAD += 1
-    print("      *** the constant is stale; the DERIVATION is what is used ***")
-REV = log or B.SUBJECT_REV
+anc = os.system("git -C %s merge-base --is-ancestor %s HEAD 2>/dev/null"
+                % (B.REPO, FIG_REV)) == 0
+print("      ...and is an ancestor of HEAD                         %s"
+      % ("yes" if anc else "no -- see the SHA note below"))
+if not anc:
+    print("      (the refinery REBASES before merging, so a pin's SHA can")
+    print("       stop being an ancestor without anything being rewritten.")
+    print("       `git patch-id --stable` is the check that survives that;")
+    print("       ancestry gives a FALSE NEGATIVE after a rebase.  Not scored")
+    print("       for that reason.)")
+REV = FIG_REV
 
 # ---------------------------------------------------------------------------
 B.hdr("P1b  THE QUANTITY AT TWO GRAINS, RE-DERIVED AT %s AND AT HEAD" % REV)

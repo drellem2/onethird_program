@@ -143,7 +143,7 @@ P3d  WHAT RESTORING `proven` COSTS -- measured, not promised
       EXPECTED to name it and naming it is not contamination.  The
       claim being made is that the control left no residue, and the
       byte comparison above is what establishes it.  For the record,
-      `git diff --name-only` over that tree reports:  lib7522.py, out_s3_figure.txt, out_s5_self.txt, out_selftest_7522.txt, selftest7522.py
+      `git diff --name-only` over that tree reports:  out_s3_figure.txt
 
       probe SCRIPT             exit      ROWS vs    ROWS vs
                                           COMMIT    CONTROL

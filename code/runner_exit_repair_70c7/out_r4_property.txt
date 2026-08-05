@@ -10,28 +10,32 @@ R4a  THE CENSUS AT HEAD, UNDER THE PROPERTY -- derived here
     run_all.sh               41         15   yes
     c0_repro.sh               4          3   NO
     b0_repro.sh               2          0   NO
+    alpha.sh                  1          0   NO
     b.sh                      1          0   NO
     b0.sh                     1          0   NO
+    beta.sh                   1          0   NO
+    gamma.sh                  1          0   NO
     probe.sh                  1          1   NO
     run_audit.sh              1          0   yes
     x.sh                      1          0   NO
     zz_probe_56dc.sh          1          0   NO
 
-  BOTH GRAINS, at `3738079`.  The row grain is what the scan produces; the
+  BOTH GRAINS, at `5533bdb`.  The row grain is what the scan produces; the
   site grain is what the four artifacts publish.  The gap between them
   is exactly the number of source lines naming more than one `*.sh`.
 
-      (site,target) ROWS naming a `*.sh`             53
-      distinct executing SITES behind those rows     51
+      (site,target) ROWS naming a `*.sh`             56
+      distinct executing SITES behind those rows     53
       ...ROWS the two-name rule matches              42
-      ...ROWS outside it, across 7 distinct basenames  11
-      ...distinct SITES outside it                   10
+      ...ROWS outside it, across 10 distinct basenames  14
+      ...distinct SITES outside it                   12
       ...of those SITES, READING the exit status      4
       ...ROWS naming `run_audit.sh`, the name ADDED   1
 
-      source lines naming MORE THAN ONE `*.sh`        2
+      source lines naming MORE THAN ONE `*.sh`        3
           code/runner_exit_c2b3/k2_consume.py:456  ->  b0_repro.sh, run_all.sh
           code/runner_exit_c2b3/selftestc2b3.py:155  ->  b0.sh, x.sh
+          code/runner_exit_repair_bf79/selftestbf79.py:110  ->  beta.sh, gamma.sh
 
   THE ROWS THEMSELVES -- one per (site, target) pair, so a reader can
   disagree with the rule rather than with a total, and can count the
@@ -50,6 +54,9 @@ R4a  THE CENSUS AT HEAD, UNDER THE PROPERTY -- derived here
       code/runner_exit_c2b3/selftestc2b3.py:155          -      b0.sh
       code/runner_exit_repair_7522/selftest7522.py:123   -      b.sh
       code/runner_exit_repair_7522/selftest7522.py:270   READS  probe.sh
+      code/runner_exit_repair_bf79/selftestbf79.py:109   -      alpha.sh
+      code/runner_exit_repair_bf79/selftestbf79.py:110   -      beta.sh
+      code/runner_exit_repair_bf79/selftestbf79.py:110   -      gamma.sh
 
 ==============================================================================
 R4b  IS THE PROPERTY STATED WHERE THE CHECK LIVES?
@@ -88,7 +95,7 @@ EXTENT OF THAT NUMBER.  It counts a two-name regex still in
 `k2_consume.py`, a property that is not stated where the check is, a
 missing both-senses fixture, an unstated limit, and a site the old rule
 found that the new one does not.  It ranges over every tracked `*.py`
-and `*.sh` at `3738079`.  THE TOTALS ABOVE MOVE WITH HEAD -- they are a
+and `*.sh` at `5533bdb`.  THE TOTALS ABOVE MOVE WITH HEAD -- they are a
 whole-repository census, and the figure the four artifacts publish is
 pinned to a NAMED REVISION for that reason and not to `HEAD`, which is
 the half of mg-56dc/T1c that does not reproduce.

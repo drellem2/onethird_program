@@ -103,8 +103,8 @@ S3c  THE SAME BLIND SPOT, ONE SENTENCE OVER -- the shebang
           code/hodge_leverage_join/run_all.sh                #!/bin/bash
           code/state_restructure_34bf/run_all.sh             #!/usr/bin/env bash
 
-    run_all.sh at HEAD                           99
-      ...with `#!/bin/sh`                        94
+    run_all.sh at HEAD                          100
+      ...with `#!/bin/sh`                        95
       ...with something else                      5
           code/hodge_leverage/run_all.sh                     #!/bin/bash
           code/hodge_leverage_audit_3c24/run_all.sh          #!/bin/bash
@@ -236,7 +236,7 @@ S3e  THE PROSE AND THE INSTRUMENT NOW AGREE -- checked, not asserted
   that produced the sweep's commit, at its own revision, and mg-05eb
   cites it.  It is NOT regenerated here: a transcript is a record of a
   run at a time, and rewriting it would both destroy that citation and
-  be unreproducible anyway -- the arc has grown from 64 runners to 99
+  be unreproducible anyway -- the arc has grown from 64 runners to 100
   since.  The corrected reading is published in THIS file's transcript,
   and `k1_census.py`'s docstring points at it.
 

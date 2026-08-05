@@ -197,8 +197,8 @@ want is how a population becomes a hand-list.**
 The caller scan matched `run_all\.sh`. The first repair made it
 `(?:run_all|run_audit)\.sh`. **That is one filename replaced by two.**
 
-At `973ca61`, the commit that published `out_r4_property.txt`: **9 distinct
-executing SITES name a `*.sh` whose basename is neither**, across 6 distinct
+At `973ca61` — the revision this figure is a fact about: **9 distinct executing
+SITES name a `*.sh` whose basename is neither**, across 6 distinct
 target scripts, **4 of them reading the exit status** — and **0 sites name the
 `run_audit.sh` the widening added**, so the widening is not exercised by
 anything in the arc.

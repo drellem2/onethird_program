@@ -52,10 +52,44 @@ print("  classify by looking two lines up -- and if it looks two lines up it is"
 print("  reading a row that is not mine to control.  Putting the word on the")
 print("  label is the only version of this I can guarantee.")
 print()
-led = []
+print("  AND THE ONE ARTIFACT THIS CHECK COULD NOT SEE, closed rather than")
+print("  noted.  `run_all.sh` truncates each transcript with `>` BEFORE its")
+print("  probe runs, so when this probe runs, `out_p5_self.txt` is EMPTY -- and")
+print("  the strictest rule of this tree therefore excluded exactly one")
+print("  artifact: ITS OWN OUTPUT.  That is O2's shape -- a population that")
+print("  excludes the thing it is about -- found in the repair of O2, and found")
+print("  only because the probe was once run OUTSIDE its runner, where the")
+print("  truncation does not happen.  It had NINE offending rows.")
+print()
+print("  THE FIX IS IN THE RUNNER AND IT IS STRUCTURAL.  `run_all.sh` now writes")
+print("  each probe's output to `<transcript>.new` and MOVES it, so the previous")
+print("  run's bytes survive for the duration of the probe and this check reaches")
+print("  its own output like any other.  Reading the COMMITTED copy instead was")
+print("  the first fix and it does not converge: the committed transcript is")
+print("  itself the thing being checked, so a stale one keeps reporting its own")
+print("  staleness forever.  That fallback is KEPT for the genuinely-absent case")
+print("  -- a first ever run, before any transcript exists -- and the source of")
+print("  every row is printed so a reader can see which is which.")
+print()
+led, src_of = [], {}
 for out in MY_OUTS:
-    for row in B.grain_ledger(B.read(out, None)):
+    text = B.read(out, None)
+    where = "disk"
+    if not text.strip():
+        try:
+            text = B.read(out, "HEAD")
+            where = "HEAD (truncated on disk by run_all.sh)"
+        except (RuntimeError, OSError):
+            text, where = "", "EMPTY and not committed yet"
+    src_of[os.path.basename(out)] = where
+    for row in B.grain_ledger(text):
         led.append((os.path.basename(out),) + row)
+print("      %-30s %-6s %s" % ("transcript of mine", "rows", "read from"))
+for out in MY_OUTS:
+    base = os.path.basename(out)
+    print("      %-30s %-6d %s"
+          % (base, len([r for r in led if r[0] == base]), src_of[base]))
+print()
 stages, grains = {}, {}
 for o, _i, _l, _n, g, s in led:
     stages[s] = stages.get(s, 0) + 1
@@ -99,10 +133,9 @@ POP_WORD = re.compile(
     r"|\bstill\b|\bremain\b|\bdropped\b|\badds\b|\bexcluded\b|\bLOST\b", re.I)
 naked = [r for r in led if not POP_WORD.search(r[2])]
 print("      count ROWS of mine                                 %3d" % len(led))
-print("      ...whose label names a POPULATION as well as a")
-print("         grain                                           %3d"
+print("      ...ROWS naming a POPULATION as well as a grain     %3d"
       % (len(led) - len(naked)))
-print("      ...NAKED -- a grain with no population             %3d" % len(naked))
+print("      ...NAKED ROWS -- a grain with no population       %3d" % len(naked))
 for o, i, label, nums, _g, _s in naked[:14]:
     print("          *** %s:%d  %s = %s"
           % (o, i, label[:44], ",".join(map(str, nums))))
@@ -144,9 +177,9 @@ for name, how, why in POPS:
     print("      %-28s %s" % (name, how))
     print("          %s" % why)
 print()
-print("      POPULATIONS of mine, in total                      %3d" % len(POPS))
-print("      ...defined by a PROPERTY                           %3d" % 4)
-print("      ...defined by a PATH or a LIST, dispositioned      %3d" % 2)
+print("      POPULATION ITEMS of mine, in total                 %3d" % len(POPS))
+print("      ...ITEMS defined by a PROPERTY                     %3d" % 4)
+print("      ...ITEMS defined by a PATH or LIST, dispositioned  %3d" % 2)
 print()
 print("  AND S1'S POPULATION BEING A PATH IS NOT THE DEFECT O2 NAMES, which is")
 print("  a claim that has to be argued rather than asserted.  O2 is that the")
@@ -164,7 +197,7 @@ led2 = []
 for p in extra_art:
     for row in B.grain_ledger(B.read(p, None)):
         led2.append((os.path.basename(p),) + row)
-print("      PROSE ARTIFACTS of mine `published_by` finds        %3d"
+print("      PROSE ARTIFACTS of mine `published_by` finds       %3d"
       % len(extra_art))
 for p in extra_art:
     print("          %s" % p)
@@ -193,12 +226,12 @@ others = {
     "lib7522": B.defined_names("%s/lib7522.py" % B.LIB7522),
     "lib70c7": B.defined_names("%s/lib70c7.py" % B.SUBJECT),
 }
-print("      module-level DEFS in libbf79.py                    %3d" % len(mine))
+print("      module-level DEF WORDS in libbf79.py               %3d" % len(mine))
 for k, v in sorted(others.items()):
-    print("      ...also defined in %-10s                     %3d"
+    print("      ...DEF WORDS also defined in %-10s           %3d"
           % (k, len(mine & v)))
 clash = sorted(n for n in mine if any(n in v for v in others.values()))
-print("      NAMES of mine that collide with an imported one    %3d" % len(clash))
+print("      NAME WORDS of mine colliding with an imported one  %3d" % len(clash))
 for n in clash:
     where = [k for k, v in sorted(others.items()) if n in v]
     print("          *** %s  (also in %s)" % (n, ", ".join(where)))
@@ -288,9 +321,22 @@ print(B.finding("P5a", "this tree's own defects of the class it repairs, "
                        "mg-dee4's PROSE RENDERING and reported 3 phantom gains; "
                        "a moved-numbers claim that attributed ARC DRIFT to this "
                        "ticket until a controlled counterfactual separated them; "
-                       "and P1f's own blind-spot test inheriting the blind spot "
-                       "it measures -- SIX, on a tree whose subject is "
-                       "instruments that agree for the wrong reason"))
+                       "P1f's own blind-spot test inheriting the blind spot "
+                       "it measures; a `mkdtemp` fixture INVISIBLE to its own "
+                       "`git ls-files` population; and S1 structurally unable to "
+                       "see ITS OWN TRANSCRIPT, because `run_all.sh` truncates "
+                       "each one before its probe runs -- a population "
+                       "excluding the thing it is about, which is O2's shape "
+                       "found in the repair of O2, with NINE offending rows "
+                       "behind it; and P1a conflating THE REVISION A FIGURE IS A "
+                       "FACT ABOUT with THE TRANSCRIPT'S PUBLISHING COMMIT, "
+                       "which are the same revision only until somebody "
+                       "regenerates the transcript -- so committing this repair "
+                       "made the derivation return this ticket's own commit and "
+                       "the probe re-derived a 12/14 census against a transcript "
+                       "stating 9/10 -- EIGHT, on a tree whose subject is "
+                       "instruments that agree for the wrong reason, and the "
+                       "last two were found only by committing and re-running"))
 print(B.finding("P5b", "count ROWS of mine at stage `label`: %d of %d in "
                        "transcripts and %d of %d in prose, %d at `header` or "
                        "`-`; and %d of my %d labels name a POPULATION as well "

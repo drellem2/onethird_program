@@ -19,13 +19,40 @@ S1  EVERY COUNT OF MINE, WITH ITS GRAIN ON ITS OWN LABEL
   reading a row that is not mine to control.  Putting the word on the
   label is the only version of this I can guarantee.
 
+  AND THE ONE ARTIFACT THIS CHECK COULD NOT SEE, closed rather than
+  noted.  `run_all.sh` truncates each transcript with `>` BEFORE its
+  probe runs, so when this probe runs, `out_p5_self.txt` is EMPTY -- and
+  the strictest rule of this tree therefore excluded exactly one
+  artifact: ITS OWN OUTPUT.  That is O2's shape -- a population that
+  excludes the thing it is about -- found in the repair of O2, and found
+  only because the probe was once run OUTSIDE its runner, where the
+  truncation does not happen.  It had NINE offending rows.
+
+  THE FIX IS IN THE RUNNER AND IT IS STRUCTURAL.  `run_all.sh` now writes
+  each probe's output to `<transcript>.new` and MOVES it, so the previous
+  run's bytes survive for the duration of the probe and this check reaches
+  its own output like any other.  Reading the COMMITTED copy instead was
+  the first fix and it does not converge: the committed transcript is
+  itself the thing being checked, so a stale one keeps reporting its own
+  staleness forever.  That fallback is KEPT for the genuinely-absent case
+  -- a first ever run, before any transcript exists -- and the source of
+  every row is printed so a reader can see which is which.
+
+      transcript of mine             rows   read from
+      out_p1_grain.txt               38     disk
+      out_p2_population.txt          18     disk
+      out_p3_ruleset.txt             22     disk
+      out_p4_figures.txt             23     disk
+      out_p5_self.txt                27     disk
+      out_selftest_bf79.txt          1      disk
+
       TRANSCRIPTS of mine on disk                          6
-      count ROWS they print                              103
-      ...ROWS of mine whose LABEL declares SITE       97
-      ...ROWS of mine whose LABEL declares EXECUTION   2
-      ...ROWS of mine whose LABEL declares BOTH        4
+      count ROWS they print                              129
+      ...ROWS of mine whose LABEL declares SITE      123
+      ...ROWS of mine whose LABEL declares EXECUTION   1
+      ...ROWS of mine whose LABEL declares BOTH        5
       ...ROWS of mine whose LABEL declares NONE        0
-      ...ROWS of mine whose grain is at stage label  103
+      ...ROWS of mine whose grain is at stage label  129
       ...ROWS of mine whose grain is at stage prev     0
       ...ROWS of mine whose grain is at stage header   0
       ...ROWS of mine whose grain is at stage -        0
@@ -43,25 +70,24 @@ S1b  AND THE POPULATION AND GRAIN NAMED IN THE SAME LABEL
   is at.  So the check here is that each of my TOTAL rows names a
   population as well as a grain -- a qualifier, not a bare unit.
 
-      count ROWS of mine                                 103
-      ...whose label names a POPULATION as well as a
-         grain                                            55
-      ...NAKED -- a grain with no population              48
-          *** out_p1_grain.txt:17  HEAD of this run = 3738079
-          *** out_p1_grain.txt:30  (site,target) ROWS, all targets = 49,53
-          *** out_p1_grain.txt:31  distinct SITES, all targets = 47,51
-          *** out_p1_grain.txt:34  ...of those SITES, READING the exit status = 4,4
-          *** out_p1_grain.txt:39  the value FOUR ARTIFACTS publish = 9
-          *** out_p1_grain.txt:57  973ca61 ALL rows       ROWS  49  SITES  47   = 2
-          *** out_p1_grain.txt:62  HEAD   ALL rows       ROWS  53  SITES  51  G = 2
-          *** out_p1_grain.txt:89  exit STATUS of the repaired probe, 1 RUN = 0
-          *** out_p1_grain.txt:110  as published at 973ca61        count ROWS in = 8
-          *** out_p1_grain.txt:111  rows whose LABEL declares SITE = 8
-          *** out_p1_grain.txt:112  rows whose LABEL declares EXECUTION = 0
-          *** out_p1_grain.txt:114  rows whose LABEL declares NONE = 0
-          *** out_p1_grain.txt:120  the repaired output, run now   count ROWS in = 11
-          *** out_p1_grain.txt:121  rows whose LABEL declares SITE = 11
-          ... 34 more
+      count ROWS of mine                                 129
+      ...ROWS naming a POPULATION as well as a grain      72
+      ...NAKED ROWS -- a grain with no population        57
+          *** out_p1_grain.txt:49  (site,target) ROWS, all targets = 49,56
+          *** out_p1_grain.txt:50  distinct SITES, all targets = 47,53
+          *** out_p1_grain.txt:53  ...of those SITES, READING the exit status = 4,4
+          *** out_p1_grain.txt:58  the value FOUR ARTIFACTS publish = 9
+          *** out_p1_grain.txt:76  973ca61 ALL rows       ROWS  49  SITES  47   = 2
+          *** out_p1_grain.txt:81  HEAD   ALL rows       ROWS  56  SITES  53  G = 3
+          *** out_p1_grain.txt:110  exit STATUS of the repaired probe, 1 RUN = 0
+          *** out_p1_grain.txt:131  as published at 973ca61        count ROWS in = 8
+          *** out_p1_grain.txt:132  rows whose LABEL declares SITE = 8
+          *** out_p1_grain.txt:133  rows whose LABEL declares EXECUTION = 0
+          *** out_p1_grain.txt:135  rows whose LABEL declares NONE = 0
+          *** out_p1_grain.txt:141  the repaired output, run now   count ROWS in = 11
+          *** out_p1_grain.txt:142  rows whose LABEL declares SITE = 11
+          *** out_p1_grain.txt:143  rows whose LABEL declares EXECUTION = 0
+          ... 43 more
 
   THIS ROW IS NOT ADDED TO `BAD` and the reason is stated rather than
   quiet: `names a population` is a rule about MEANING approximated by a
@@ -91,9 +117,9 @@ S2  MY OWN POPULATIONS -- properties, or paths?
       S1's population              `lib70c7.outs(TREE)`, my own transcripts
           a PATH, and it is the right one: the question is which counts I PRINT
 
-      POPULATIONS of mine, in total                        6
-      ...defined by a PROPERTY                             4
-      ...defined by a PATH or a LIST, dispositioned        2
+      POPULATION ITEMS of mine, in total                   6
+      ...ITEMS defined by a PROPERTY                       4
+      ...ITEMS defined by a PATH or LIST, dispositioned    2
 
   AND S1'S POPULATION BEING A PATH IS NOT THE DEFECT O2 NAMES, which is
   a claim that has to be argued rather than asserted.  O2 is that the
@@ -105,8 +131,10 @@ S2  MY OWN POPULATIONS -- properties, or paths?
   outside S1 and S1 becomes the defect it is checking.  It does: this
   tree ships a README and an OUTCOMES.  SO S1 IS RUN OVER THOSE TOO:
 
-      PROSE ARTIFACTS of mine `published_by` finds          1
+      PROSE ARTIFACTS of mine `published_by` finds         3
+          code/runner_exit_repair_bf79/OUTCOMES.md
           code/runner_exit_repair_bf79/PREDICTIONS.md
+          code/runner_exit_repair_bf79/README.md
       count ROWS in them                                   0
       ...NOT at stage `label`                              0
 
@@ -118,11 +146,11 @@ S3  DOES `libbf79.py` DEFINE A RULE THE ARC ALREADY HAS?
   `def` in `libbf79.py`, checked against the three libraries it
   imports:
 
-      module-level DEFS in libbf79.py                      7
-      ...also defined in lib56dc                          0
-      ...also defined in lib70c7                          0
-      ...also defined in lib7522                          0
-      NAMES of mine that collide with an imported one      0
+      module-level DEF WORDS in libbf79.py                 7
+      ...DEF WORDS also defined in lib56dc                0
+      ...DEF WORDS also defined in lib70c7                0
+      ...DEF WORDS also defined in lib7522                0
+      NAME WORDS of mine colliding with an imported one    0
 
       RULES of mine that are ALIASES, not copies:
           bar                  -> A.bar
@@ -154,23 +182,14 @@ S4  mg-56dc'S TREE -- READ, NOT WRITTEN
   AND THE TREES THIS TICKET DOES MODIFY, named so the boundary is a
   fact rather than an intention:
 
-      code/runner_exit_repair_70c7        10 file(s) modified
-          code/runner_exit_repair_70c7/OUTCOMES.md
+      code/runner_exit_repair_70c7         5 file(s) modified
           code/runner_exit_repair_70c7/README.md
-          code/runner_exit_repair_70c7/lib70c7.py
           code/runner_exit_repair_70c7/out_r2_anchor.txt
-          code/runner_exit_repair_70c7/out_r3_strength.txt
           code/runner_exit_repair_70c7/out_r4_property.txt
           code/runner_exit_repair_70c7/out_r6_self.txt
-          code/runner_exit_repair_70c7/r3_strength.py
           code/runner_exit_repair_70c7/r4_property.py
-          code/runner_exit_repair_70c7/r6_self.py
-      code/runner_exit_repair_7522         5 file(s) modified
-          code/runner_exit_repair_7522/lib7522.py
+      code/runner_exit_repair_7522         1 file(s) modified
           code/runner_exit_repair_7522/out_s3_figure.txt
-          code/runner_exit_repair_7522/out_s5_self.txt
-          code/runner_exit_repair_7522/out_selftest_7522.txt
-          code/runner_exit_repair_7522/selftest7522.py
       docs                                 1 file(s) modified
           docs/repair-mg-70c7-grain-and-population.md
 
@@ -192,11 +211,11 @@ EXTENT OF THAT NUMBER.  It counts a count row of mine whose grain is not
 on its own label -- in a transcript or in my prose -- a name in
 `libbf79.py` that collides with a rule of a library it imports, and a
 file of mg-56dc's or mg-dee4's tree modified in the worktree.  It ranges
-over the 103 count ROWS of my 6 transcript(s), the 0 count ROWS of my
-1 prose artifact(s), my 7 module-level DEFS and the two audit trees.
+over the 129 count ROWS of my 6 transcript(s), the 0 count ROWS of my
+3 prose artifact(s), my 7 module-level DEFS and the two audit trees.
 It does NOT count S1b's naked-label row, which approximates a rule about
 MEANING with a word list and is printed for disagreement rather than
 scored.
 
-FINDING: P5a this tree's own defects of the class it repairs, recorded rather than smoothed away: a provenance query whose `\(` was a BRE GROUP and silently returned my auditor's artifacts as mine; a revision-and-grain check that was LINE-LOCAL over hard-wrapped prose in two different places, which is mg-dee4's F4 twice; an alternative diff that compared REGEX SOURCE against mg-dee4's PROSE RENDERING and reported 3 phantom gains; a moved-numbers claim that attributed ARC DRIFT to this ticket until a controlled counterfactual separated them; and P1f's own blind-spot test inheriting the blind spot it measures -- SIX, on a tree whose subject is instruments that agree for the wrong reason
-FINDING: P5b count ROWS of mine at stage `label`: 103 of 103 in transcripts and 0 of 0 in prose, 0 at `header` or `-`; and 55 of my 103 labels name a POPULATION as well as a grain, which is printed for disagreement and not scored because a word list approximating a rule about meaning is the hand-list this arc keeps finding
+FINDING: P5a this tree's own defects of the class it repairs, recorded rather than smoothed away: a provenance query whose `\(` was a BRE GROUP and silently returned my auditor's artifacts as mine; a revision-and-grain check that was LINE-LOCAL over hard-wrapped prose in two different places, which is mg-dee4's F4 twice; an alternative diff that compared REGEX SOURCE against mg-dee4's PROSE RENDERING and reported 3 phantom gains; a moved-numbers claim that attributed ARC DRIFT to this ticket until a controlled counterfactual separated them; P1f's own blind-spot test inheriting the blind spot it measures; a `mkdtemp` fixture INVISIBLE to its own `git ls-files` population; and S1 structurally unable to see ITS OWN TRANSCRIPT, because `run_all.sh` truncates each one before its probe runs -- a population excluding the thing it is about, which is O2's shape found in the repair of O2, with NINE offending rows behind it; and P1a conflating THE REVISION A FIGURE IS A FACT ABOUT with THE TRANSCRIPT'S PUBLISHING COMMIT, which are the same revision only until somebody regenerates the transcript -- so committing this repair made the derivation return this ticket's own commit and the probe re-derived a 12/14 census against a transcript stating 9/10 -- EIGHT, on a tree whose subject is instruments that agree for the wrong reason, and the last two were found only by committing and re-running
+FINDING: P5b count ROWS of mine at stage `label`: 129 of 129 in transcripts and 0 of 0 in prose, 0 at `header` or `-`; and 72 of my 129 labels name a POPULATION as well as a grain, which is printed for disagreement and not scored because a word list approximating a rule about meaning is the hand-list this arc keeps finding

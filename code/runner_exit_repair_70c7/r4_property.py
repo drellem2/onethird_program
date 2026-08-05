@@ -4,8 +4,8 @@ THE FINDING.  `k2_consume.py`'s caller scan matched `run_all\\.sh`.  mg-7522
 made it `(?:run_all|run_audit)\\.sh` -- one filename replaced by two -- and
 stated the property in `lib7522`, whose comment says the name rule *"is widened
 here to the property"*, HERE being the library and not the file that was
-repaired.  At `973ca61`, the commit that published this probe's transcript,
-9 distinct executing SITES name a `*.sh` whose basename is neither, 4 of them
+repaired.  At `973ca61` -- the revision this figure is a fact about -- 9
+distinct executing SITES name a `*.sh` whose basename is neither, 4 of them
 reading the status, and 0 sites name the `run_audit.sh` the widening added.
 The same census gives 10 (site, target) ROWS at that revision, and it MOVES
 with the repository, which is why the figure carries a revision here and not
