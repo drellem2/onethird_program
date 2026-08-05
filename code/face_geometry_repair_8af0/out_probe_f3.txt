@@ -1,0 +1,17 @@
+mg-8af0 -- ridge multiplicity under every incidence mode, 2 <= n <= 6
+  builds: 2424 (poset, mode) pairs over 404 posets x 6 modes; facets examined: 76554
+
+  mode           max ridge multiplicity   ridges in >= 3 facets
+  (uncorrupted)  2                        0
+  I1             2                        0
+  I2             2                        0
+  I3             2                        0
+  I4             2                        0
+  swap01         2                        0
+
+  PREMISE (every facet is a chain of masks of sizes 1..n-1): 0 violations over 76554 facets
+  n = 2 DEGENERATE CASE (unique ridge is the empty chain, contained in every facet): 1 poset with 2 facets -- the bound there is |L(P)| <= 2, not the two-re-insertions argument
+  mg-8af0's brief says '810 families over n <= 6': 405 posets with 1 <= n <= 6 x 2 facet maps = 810.  Different population from the two above; reproduced here so the three are not read as one.
+
+  CONCLUSION: the zero is FORCED for I4 exactly as it is for I1/I2/I3, and mg-e35b's 'its zero is the only one of the four that is a result' is REFUTED.  What is NOT shown here: that the bound holds for n > 6.  The argument in the docstring is general and the sweep is not; the sweep is what makes the PREMISE a checked fact rather than a reading of two functions.
+  premise 0 violations, maximum multiplicity 2 on every mode.

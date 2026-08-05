@@ -138,8 +138,15 @@ TABLE = [
     ("no ridge in >= 3 facets, I1/I2/I3 zeros", "FORCED BY CONSTRUCTION",
      "none of the three raises any ridge's facet count; checked in V4b",
      "ridge_facets on 0, split_free_as_interior on 0, ridge_drop on 0"),
-    ("no ridge in >= 3 facets, I4 zero", "COULD MOVE",
-     "I4 rebuilds the facet enumeration outright",
+    # RELABELLED FROM "COULD MOVE" (mg-fcb2's F3, landed by mg-8af0).  mg-e35b
+    # read this zero as the one measurement of the four.  It cannot move at any
+    # n: both facet maps are prefix families, so deleting a level of a facet
+    # leaves exactly two masks that can be re-inserted.
+    ("no ridge in >= 3 facets, I4 zero", "FORCED BY CONSTRUCTION",
+     "both facet maps return a chain of masks of sizes 1..n-1, so a ridge -- "
+     "that chain with one level deleted -- admits exactly two re-insertions; "
+     "premise and bound checked in V4c here and over n <= 6 in "
+     "code/face_geometry_repair_8af0/probe_f3_ridge_multiplicity.py",
      "facet_offbyone on 0"),
     ("coverage 61/86 at le_to_facet, 58 non-similar", "COULD MOVE",
      "derived from the two counts above, both of which could move",
@@ -507,9 +514,46 @@ def main():
             r += any(len(m.get(k, [])) > len(v) for k, v in t.items())
         raised[mode] = r
     check("I1/I2/I3 never RAISE any ridge's facet count on any poset (%s), so "
-          "their three zeros are forced at every n and only I4's is a result"
+          "their three zeros are forced at every n"
           % ", ".join("%s %d" % (TAGS[k], v) for k, v in raised.items()),
           all(v == 0 for v in raised.values()))
+    # -- V4c: I4's zero is forced TOO (mg-fcb2's F3, landed by mg-8af0) ------
+    # The clause "and only I4's is a result" used to close the row above.  It
+    # is false.  The forcing is a property of the FACET FAMILY, not of the
+    # mutation: both maps are prefix families, so every facet is a chain of
+    # masks of sizes 1..n-1, a ridge is that chain with one level deleted, and
+    # a mask of the missing size k must sit between the surviving levels of
+    # sizes k-1 and k+1 -- two sets differing in exactly two elements, so
+    # exactly two candidates.  The PREMISE is what is checkable, and it is
+    # checked here on n <= 5 and in the 8af0 probe on n <= 6.  n = 2 is the
+    # case the argument does not cover and it is counted separately.
+    chain_bad = 0
+    facets_seen = 0
+    max_mult = 0
+    n2_degenerate = 0
+    for mode in MODES:
+        for P in ps:
+            td = top_laplacians(P, incidence_mode=mode)
+            for f in td["facets"]:
+                facets_seen += 1
+                if [bin(m).count("1") for m in f] != list(range(1, P.n)):
+                    chain_bad += 1
+            max_mult = max(max_mult, max((len(v) for v in
+                                          td["ridge_facets"].values()),
+                                         default=0))
+            if P.n == 2 and len(td["facets"]) == 2:
+                n2_degenerate += 1
+    check("I4's zero is FORCED TOO: every facet under every one of the %d modes "
+          "is a chain of masks of sizes 1..n-1 (%d violations over %d facets) "
+          "and no ridge lies in more than %d facets, so the two-re-insertions "
+          "bound holds and mg-e35b's 'its zero is the only one of the four that "
+          "is a result' is refuted"
+          % (len(MODES), chain_bad, facets_seen, max_mult),
+          chain_bad == 0 and max_mult == 2,
+          "the n = 2 posets are NOT covered by that argument -- there the "
+          "unique ridge is the empty chain and lies in every facet; %d "
+          "(poset, mode) build%s hits that case and is bounded by |L(P)| <= 2 "
+          "instead" % (n2_degenerate, "" if n2_degenerate == 1 else "s"))
 
     # -- V5: the committed artifact agrees ---------------------------------
     print("V5 -- the committed artifact states these numbers")

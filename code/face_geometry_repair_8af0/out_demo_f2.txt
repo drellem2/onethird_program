@@ -1,0 +1,15 @@
+mg-8af0 -- can the V6 row go red?  Five constructed inputs, old row and new rows scored on each.
+population: 5 constructions x 4 rows = 20 cells.  grain: one (construction, row) cell, GREEN = the row passed = the input did not move it.
+
+  construction                                                     old row   V6a ANCHORED      V6b CENSUS        V6c REGENERATED 
+  C1 twelfth count added to the ARTIFACT by hand                   GREEN     GREEN             GREEN             RED             
+  C2 twelfth count added to CONTROLS.PY, artifact regenerated      GREEN     GREEN             RED               GREEN           
+  C3 a classified count reworded in the ARTIFACT (61/86 -> 61/87)  GREEN     RED               GREEN             RED             
+  C4 the same count reworded AT THE SOURCE (backticks dropped), ar GREEN     RED               GREEN             GREEN           
+  C5 mg-8af0's OWN edit to the table literal (3/11 -> 4/12), repos RED       GREEN             GREEN             GREEN           
+
+  the old row is GREEN on C1-C4 -- it took no input from either the artifact or the source, so no construction ON THE REPOSITORY could move it.  It is RED on C5, where nothing in the repository changed and the literal beside it did.  That is mg-fcb2's F2 in one line, reproduced here rather than quoted.
+  each replacement row is RED on at least one construction, and C4 is red for V6a alone -- so none of the three is redundant and each has been SHOWN to fire.
+  NOT SHOWN: that the three rows catch every way a count could be added.  V6b is a tripwire on the SET of printed positions, so substituting a different expression into an existing %d -- which is exactly what mg-fcb2's F1 was -- moves none of them.  That is why F1 needed a row of its own (V7) and not just a census.
+
+20/20 cells as predicted in PREDICTIONS.md E5/E6c.
