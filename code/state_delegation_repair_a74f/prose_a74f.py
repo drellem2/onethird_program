@@ -116,30 +116,49 @@ def read_at(rev, path):
 
 
 def worktree_files():
-    got = set()
+    """THE TRACKED files of the working tree, and separately the untracked ones.
+
+    mg-5f7c.  This used to be `os.walk`, so P1 — `every repo-relative path named in the text
+    EXISTS at the revision being read` — resolved a path reference against a set that included
+    UNTRACKED files.  An untracked file is not at any revision.  It exists for exactly one
+    reader, on one machine, until somebody runs `git clean`, and every reader of every commit
+    of this repository gets a dangling reference that P1 has already passed.  A NAME THAT IS
+    NOT ITS MEASUREMENT: the check says `at this revision` and measured `on this disk`.
+
+    The untracked set is not discarded, because `named but only untracked` and `named and
+    absent entirely` are different defects needing different repairs, and collapsing them into
+    one FAIL would hide which one a reader is looking at.  It is returned so P1 can say
+    which."""
+    tracked = set(subprocess.run(["git", "-C", REPO, "ls-files"],
+                                 capture_output=True, text=True, check=True)
+                  .stdout.splitlines())
+    present = set()
     for root, _dirs, files in os.walk(REPO):
         if "/.git" in root:
             continue
         for f in files:
-            got.add(os.path.relpath(os.path.join(root, f), REPO))
-    return got
+            present.add(os.path.relpath(os.path.join(root, f), REPO))
+    return tracked, present - tracked
 
 
 def population(rev):
-    """(the file list, a reader for it, the set of paths that exist).  Computed, printed."""
+    """(the file list, a reader for it, the paths that exist, the paths that are untracked).
+
+    Computed, printed.  The fourth element is empty at a revision, where the question does not
+    arise: `git ls-tree` has no untracked half."""
     if rev:
         tree = ls_tree(rev)
         files = sorted(p for p in tree
                        if any(p.startswith(d + "/") for d in DIRS) and p.endswith(EXTS))
-        return files, (lambda p: read_at(rev, p)), tree
-    tree = worktree_files()
+        return files, (lambda p: read_at(rev, p)), tree, set()
+    tree, untracked = worktree_files()
     files = sorted(p for p in tree
                    if any(p.startswith(d + "/") for d in DIRS) and p.endswith(EXTS))
 
     def rd(p):
         with open(os.path.join(REPO, p), encoding="utf-8") as fh:
             return fh.read()
-    return files, rd, tree
+    return files, rd, tree, untracked
 
 
 _bad = []
@@ -156,9 +175,10 @@ def report(pid, ok, where, what, detail=""):
     return ok
 
 
-def check_paths(files, rd, exists):
+def check_paths(files, rd, exists, untracked=frozenset()):
     print("=" * 100)
-    print("P1.  EVERY REPO-RELATIVE PATH NAMED IN THE TEXT EXISTS AT THIS REVISION")
+    print("P1.  EVERY REPO-RELATIVE PATH NAMED IN THE TEXT EXISTS AT THIS REVISION —")
+    print("     AND `EXISTS` MEANS TRACKED, NOT PRESENT ON SOMEBODY'S DISK (mg-5f7c)")
     print("=" * 100)
     refs = []
     for rel in files:
@@ -172,9 +192,15 @@ def check_paths(files, rd, exists):
     print(f"  population: {len(refs)} path references over {len(files)} files "
           f"({len(set(r[2] for r in refs))} distinct paths).  Computed from the tree, "
           f"not a hand list.")
+    print(f"  `exists` is {len(exists)} TRACKED paths"
+          + (f"; {len(untracked)} further file(s) are present and untracked and DO NOT "
+             f"satisfy a reference." if untracked else "."))
     misses = [r for r in refs if r[2] not in exists]
     for rel, line, path in misses:
-        report("P1", False, f"{rel}:{line}", f"names {path}", "which is not in the tree")
+        report("P1", False, f"{rel}:{line}", f"names {path}",
+               "which is present but UNTRACKED — it is at no revision, and every reader of "
+               "every commit gets a dangling reference" if path in untracked
+               else "which is not in the tree")
     if not misses:
         print(f"  [pass] P1  0 of {len(refs)} path references do not resolve")
     print()
@@ -262,7 +288,23 @@ def check_tables(rd, files):
     tree = ast.parse(rd(rel))
     # The population: module-level dicts every key of which is a repo path.  DERIVED from
     # the file, so a third table added later joins the population by existing.
-    tables = set()
+    #
+    # THE MEMBERSHIP RULE, AND mg-5f7c's REPAIR OF IT.  This used to be `every key is a repo
+    # path`.  ONE EXTRA KEY REMOVED A TABLE FROM THE POPULATION ENTIRELY: adding
+    # `"note": "why this table exists"` to a pinned table makes `all(...)` false, the table
+    # leaves the population, the printed count silently drops by one and the check passes.
+    # A membership rule that a single unrelated key can empty is a rule an editor can turn off
+    # by accident, and P3's whole subject is a table nothing visits — the failure mode is
+    # exactly `this table is not being looked at`, so a population that quietly sheds tables
+    # is the same defect one level up.
+    #
+    # The rule is now `ANY key is a repo path`, which fails toward CHECKING MORE.  What that
+    # costs is named rather than left to be discovered: a dict that merely happens to carry
+    # one repo-path key is now required to be iterated, and if that ever produces a finding on
+    # a dict that is not a pinned table, the finding is real about the rule and should be read
+    # as one.  Every table's key mix is printed, so an over-inclusion is visible in the run
+    # rather than only in the verdict.
+    tables, mixed = set(), {}
     for node in tree.body:
         if not isinstance(node, ast.Assign) or not isinstance(node.value, ast.Dict):
             continue
@@ -271,8 +313,11 @@ def check_tables(rd, files):
             continue
         keys = [k.value for k in node.value.keys
                 if isinstance(k, ast.Constant) and isinstance(k.value, str)]
-        if keys and all(re.match(r"^(code|docs)/", k) and "." in k for k in keys):
+        pathish = [k for k in keys if re.match(r"^(code|docs)/", k) and "." in k]
+        if pathish:
             tables.add(name)
+            if len(pathish) != len(keys):
+                mixed[name] = (len(pathish), len(keys))
     # Iterated: the table's name appears in the ITERABLE EXPRESSION of some `for`.  Derived
     # from the code, not from a hand list — the hand list this check started life as was its
     # own first defect, and is recorded as such in README.md.
@@ -285,8 +330,10 @@ def check_tables(rd, files):
     missed = sorted(tables - iterated)
     ok = not missed
     report("P3", ok, rel,
-           f"pinned tables keyed by repo paths: {sorted(tables) or '(none)'}",
-           f"of those, iterated by some `for` in this file: "
+           f"pinned tables with at least one repo-path key: {sorted(tables) or '(none)'}",
+           (f"of those, MIXED-KEY (repo paths / all keys): "
+            f"{ {k: '%d of %d' % v for k, v in sorted(mixed.items())} }\n" if mixed else "")
+           + f"of those, iterated by some `for` in this file: "
            f"{sorted(tables & iterated) or '(none)'}"
            + ("" if ok else
               f"\nNOT ITERATED BY ANYTHING: {missed}\n"
@@ -374,15 +421,47 @@ def check_counts(files, rd):
             if _quoted(line, m.start() - bol):
                 quoted.append((rel, text[:m.start()].count("\n") + 1, m.group(0)))
                 continue
-            # The script the phrase is about: the nearest .py basename NAMED BEFORE it,
-            # within 400 characters.  The window is printed with every row so a reader can
-            # see what was and was not attributed.
+            # THE SCRIPT THE PHRASE IS ABOUT, AND HOW MUCH OF THAT IS A MEASUREMENT.
+            #
+            # mg-5f7c.  This was `the nearest .py basename in the preceding 400 characters`,
+            # full stop — a VERDICT DECIDED BY PROXIMITY, printed under a heading that says
+            # `EVERY all N rows PHRASE NAMING A SCRIPT`.  A phrase does not name the script
+            # that happens to be closest to it, and where a paragraph mentions three scripts
+            # the rule picks one of them with nothing behind the choice.  A name that is not
+            # its measurement, in the checker written to catch names that are not their
+            # measurements.
+            #
+            # The rule is now in two tiers and each row says WHICH ONE IT USED:
+            #   ON THE LINE     the phrase and the script basename are on the same line.
+            #                   That is a co-occurrence, not a guess, and it is the only
+            #                   attribution this file calls certain.
+            #   BY PROXIMITY    no script on the line; the nearest within the window.  Every
+            #                   candidate in the window is carried so the row can print what
+            #                   it chose BETWEEN, and a row where proximity picked a script
+            #                   whose count disagrees while another candidate's agrees is a
+            #                   FINDING — that is the shape where the old rule returned a
+            #                   verdict it had not earned.
+            bol_ = text.rfind("\n", 0, m.start()) + 1
+            on_line = [s for s in _SCRIPT.findall(text[bol_:m.start()]) if s in scripts]
             window = text[max(0, m.start() - 400):m.start()]
             named = [s for s in _SCRIPT.findall(window) if s in scripts]
-            refs.append((rel, text[:m.start()].count("\n") + 1, said,
-                         named[-1] if named else None))
+            if on_line:
+                how, script, cands = "ON THE LINE", on_line[-1], on_line
+            elif named:
+                how, script, cands = "BY PROXIMITY", named[-1], named
+            else:
+                how, script, cands = "UNATTRIBUTED", None, []
+            refs.append((rel, text[:m.start()].count("\n") + 1, said, script, how,
+                         sorted(set(cands))))
     print(f"  population: {len(refs)} `all N rows` phrases over {len(files)} files.  The "
-          f"script each is about is the nearest .py named in the 400 characters before it.")
+          f"script each is about is")
+    print("  the one named ON ITS OWN LINE where there is one, and otherwise the nearest .py")
+    print("  named in the 400 characters before it — and every row below says WHICH, because")
+    print("  the second is a guess and the first is not (mg-5f7c).")
+    byhow = {}
+    for r in refs:
+        byhow[r[4]] = byhow.get(r[4], 0) + 1
+    print(f"  attribution: {byhow or '(none)'}")
     print(f"  {len(quoted)} further phrase(s) SKIPPED as quotations — inside \"...\" or "
           f"`...` on their own line:")
     for rel, ln, phrase in quoted:
@@ -390,7 +469,7 @@ def check_counts(files, rd):
     if not quoted:
         print("         (none)")
     bad = 0
-    for rel, ln, said, script in refs:
+    for rel, ln, said, script, how, cands in refs:
         if script is None:
             report("P4", False, f"{rel}:{ln}", f"says 'all {said} rows'",
                    "no script named within 400 characters before it — the phrase cannot be "
@@ -400,13 +479,35 @@ def check_counts(files, rd):
         got, where = _rows_in(scripts[script], rd, files)
         if got is None:
             report("P4", False, f"{rel}:{ln}", f"says '{script} … all {said} rows'",
-                   f"could not derive a row count: {where}")
+                   f"could not derive a row count: {where}  [{how}]")
             bad += 1
             continue
         ok = got == said
+        # mg-5f7c.  A proximity attribution that is CONTRADICTED by another candidate in the
+        # same window is the case where the old rule returned a verdict it had not earned:
+        # the phrase disagrees with the script proximity chose and agrees with one it did
+        # not.  There is no rule here that decides which is meant — that is the point — so
+        # the row is a FINDING and says so, rather than passing or failing on a coin toss.
+        rival = []
+        if how == "BY PROXIMITY" and len(cands) > 1:
+            for c in cands:
+                if c == script:
+                    continue
+                n, _w = _rows_in(scripts[c], rd, files)
+                if n == said:
+                    rival.append(c)
+        detail = f"ROWS in {where}: {got}   [attributed {how}"
+        detail += (f", between {cands}]" if how == "BY PROXIMITY" and len(cands) > 1 else "]")
+        if rival and not ok:
+            report("P4", False, f"{rel}:{ln}", f"says '{script} … all {said} rows'",
+                   detail + f"\n>>> ATTRIBUTED BY PROXIMITY ALONE, AND CONTRADICTED: {said} "
+                   f"is not {script}'s count but it IS {rival[0]}'s, which is named in the "
+                   f"same window.\n>>> Nothing in this checker decides which the sentence "
+                   f"means, so it is reported rather than scored.")
+            bad += 1
+            continue
         report("P4", ok, f"{rel}:{ln}", f"says '{script} … all {said} rows'",
-               f"ROWS in {where}: {got}"
-               + ("" if ok else "\n>>> the prose count is not the code's"))
+               detail + ("" if ok else "\n>>> the prose count is not the code's"))
         if not ok:
             bad += 1
     print()
@@ -418,7 +519,7 @@ def main():
     ap.add_argument("--rev", default=None,
                     help="read the population from this revision instead of the tree")
     args = ap.parse_args()
-    files, rd, exists = population(args.rev)
+    files, rd, exists, untracked = population(args.rev)
 
     print("=" * 100)
     print("mg-a74f — PROSE CLAIMS, READ AS CLAIMS")
@@ -431,7 +532,7 @@ def main():
     print("  This checker's own directory is in the population, so it reads its own prose.")
     print()
 
-    n1, b1 = check_paths(files, rd, exists)
+    n1, b1 = check_paths(files, rd, exists, untracked)
     n2, b2 = check_sections(files, rd)
     n3, b3 = check_tables(rd, files)
     n4, b4 = check_counts(files, rd)
@@ -470,7 +571,7 @@ def main():
     print(f"  P1  {n1:>3} path references                  {b1} do not resolve")
     print(f"  P2  {n2:>3} run_all.sh section references    {b2} unresolved, or naming "
           f"something the section does not")
-    print(f"  P3  {n3:>3} pinned tables keyed by repo paths {b3} iterated by nothing")
+    print(f"  P3  {n3:>3} pinned tables with a repo-path key  {b3} iterated by nothing")
     print(f"  P4  {n4:>3} `all N rows` phrases             {b4} disagreeing with the "
           f"script's own ROWS")
     print()
