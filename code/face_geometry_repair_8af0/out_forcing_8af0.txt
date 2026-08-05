@@ -1,0 +1,25 @@
+mg-8af0 -- F3: the >= 3-facets zeros are FORCED, and the bound that forces them is shown capable of failing
+population: 810 (poset, facet map) families -- every poset up to isomorphism with n <= 6, under each of the two maps
+S1 -- THE PREMISE: every facet is a chain of masks of sizes 1..n-1
+  [PASS] every facet under both maps has a CONSECUTIVE level-size profile starting at 1, on 810/810 families; the 6 distinct profiles seen are [[], [1], [1, 2], [1, 2, 3], [1, 2, 3, 4], [1, 2, 3, 4, 5]].  Grain: the facet, aggregated to the family
+S2 -- THE CONCLUSION: no ridge lies in >= 3 facets
+  [PASS] largest number of facets sharing a ridge is 2 over all 810 families, and 0 families have a ridge in >= 3 facets.  Grain: the ridge, maximised over the family  -- families over the bound: []
+S3 -- AND THE ROUTINE CAN SAY 3.  A family that violates S1's premise, built for that purpose, run through the SAME routine S2 used.  Without this row, 'no ridge in >= 3 facets' is the answer of a procedure never seen to report anything else.
+  [PASS] a constructed family of 3 facets with level-size profile [[1, 3]] over a 3-element ground set -- NOT the full profile 1..n-1, so S1's premise fails on it -- has a ridge in 3 facets by the same routine.  So S2's zero is a property of the two maps, and not the fixed output of a routine that cannot report otherwise
+  [PASS] and the premise really is what separates them: the same routine on the FULL profile over the same 3-element ground set ([1, 2], which IS 1..n-1 there) reports 2
+S4 -- SWEPT over every level-size profile on a 5-element ground set, so the separation in S3 is not a property of one construction.
+    THIS ROW WAS RESPECIFIED AFTER FIRING ON ME, and the failing transcript is kept at out_forcing_8af0_FIRSTFORM_exit1.txt.  Its first form predicted the dividing line was CONSECUTIVE profiles.  That is refuted here on its own output: [1, 2] is consecutive and gives 4, [2, 3] is consecutive and gives 3.  The line is not consecutiveness -- it is being the FULL profile 1..n-1.  A ridge that omits the FIRST level is bracketed below by the empty set and above by the level after it, so it has C(p1 - p_-1, ...) completions, and only a profile that starts at 1 and ends at n-1 makes every one of those brackets exactly two elements wide.  I had the argument right in S3 and wrote the generalisation loosely; the sweep caught it.
+    profile [1, 2]         consecutive but partial  max ridge multiplicity 4
+    profile [1, 3]         gapped                   max ridge multiplicity 6
+    profile [1, 4]         gapped                   max ridge multiplicity 4
+    profile [2, 3]         consecutive but partial  max ridge multiplicity 3
+    profile [2, 4]         gapped                   max ridge multiplicity 6
+    profile [3, 4]         consecutive but partial  max ridge multiplicity 4
+    profile [1, 2, 3]      consecutive but partial  max ridge multiplicity 3
+    profile [1, 2, 4]      gapped                   max ridge multiplicity 3
+    profile [1, 3, 4]      gapped                   max ridge multiplicity 3
+    profile [2, 3, 4]      consecutive but partial  max ridge multiplicity 3
+    profile [1, 2, 3, 4]   THE FULL PROFILE 1..n-1  max ridge multiplicity 2
+  [PASS] over 11 profiles on a 5-element ground set, multiplicity <= 2 holds on EXACTLY ONE of them -- the full profile [1, 2, 3, 4], which by S1 is exactly the profile both facet maps produce -- and every other profile, consecutive or not, admits a ridge in >= 3 facets.  So the bound is TIGHT and I4's zero rests on the whole of S1's premise, not on part of it.  Population: level-size profiles of length 2..4 over 5 elements; grain: the profile
+
+5 checks, 0 refuted.
