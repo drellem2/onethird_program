@@ -1,0 +1,91 @@
+==============================================================================
+mg-f3ff s4 -- the chain reader vs mg-e35b's own independent list
+==============================================================================
+FRESHNESS -- fetched, resolved, and stated (ticket addendum 1 and 2)
+  onethird_program       ok       ref=origin/main sha=76b481d8d10b
+                                  checkout HEAD=76b481d8d10b behind origin/main by 0
+  one_third_width_three  ok       ref=origin/main sha=1e996fb486bb
+                                  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derived against origin/main anyway
+  NOTE: 1 checkout(s) were behind origin/main at start: one_third_width_three
+        The derivation below uses origin/main, so the staleness did not
+        reach the answer -- but it is stated because a census whose
+        staleness is unstated is not checkable by the next reader.
+
+  independent list source: 5f542f0f7  2026-07-31T10:22:08+00:00
+    control+repair: THE GAUGE STANDARD IS ASKED OF THE ROWS KEPT AND THE DICHOTOMY IS COMPLETE — mg-fcf1's remaining OPENs landed on NEGATIVE CONTROL 4, a
+
+  EXTRACTED from the message body: 9 resolvable commit sha(s)
+    8fc51112f  2026-07-30T04:31:39+00:00  owner=mg-8a12
+    f024985e5  2026-07-30T19:01:15+00:00  owner=mg-da45
+    de54c3a86  2026-07-30T06:42:43+00:00  owner=mg-f1b2
+    1d922a106  2026-07-30T19:39:24+00:00  owner=mg-1c80
+    5cae82c07  2026-07-30T20:19:06+00:00  owner=mg-5f9a
+    c7f967394  2026-07-30T21:25:47+00:00  owner=mg-04a8
+    b6bc2efed  2026-07-30T22:42:43+00:00  owner=mg-9220
+    0fb0e0035  2026-07-31T00:12:32+00:00  owner=mg-64b6
+    bfd7948ed  2026-07-31T02:17:25+00:00  owner=mg-f7e1
+
+  CROSS-CHECK of the extraction against the hand transcription:
+    hand list: 9 sha(s); extraction: 9
+    in the hand list but NOT extracted: none
+    extracted but NOT in the hand list: none
+    The two agree exactly.
+
+  GROUND TRUTH: 13 commit(s) -- the extracted shas plus the
+  pre-instant commits of the tickets the verdict names by id (mg-8a12, mg-da45, mg-a806).
+
+  STRICT chain: 3 generation(s), 10 commit(s)
+    of the 13 ground-truth commits it finds 5, MISSES 8
+      MISSED  0160cbf96  owner=mg-a806  docs: §9.4's heading carried the falsified universal too — corrected, and pointed at the artifact th
+      MISSED  0fb0e0035  owner=mg-64b6  docs+repair: THE THIRD RUNG IS REMOVED AND THE DECLARED UNIT IS COMPUTED — the `shape` gate's two cl
+      MISSED  5b6303763  owner=mg-a806  probe: the committed lrb_output.txt now says what "undecided by this test" means, and STATE stops im
+      MISSED  5cae82c07  owner=mg-5f9a  control+docs: NO THIRD REASON — the predicate now RETURNS the gate it returned at and the signs it r
+      MISSED  b6bc2efed  owner=mg-9220  docs+repair: THE DELETION TEST IS PER RETURN AND THE INERT RETURN IS GONE — the `shape` gate's two r
+      MISSED  bfd7948ed  owner=mg-f7e1  docs+repair: THE DISJUNCTION IS SPELLED WITH AN OPERATOR AND THE BOUND IS A COUNT — `clause` was not
+      MISSED  c7f967394  owner=mg-04a8  control+repair: THE DELETION TEST NOW BITES 9 OF 9 AND THE LABEL CHECK GOES RED ON THE BROKEN ARTIFA
+      MISSED  f6756c028  owner=mg-a806  docs: land the mg-86a3 audit repairs in the mg-a3d4 deliverable — ledger row B6 is FALSIFIED not cov
+    and adds 5 commit(s) the verdict did not name
+      ADDED   522048f6c  owner=mg-d39d  docs: independent audit of mg-a806 (the mg-86a3 STATE landing) — OVERSTATED with 1 BROKEN, the first
+      ADDED   7f04902cb  owner=mg-e720  docs: independent audit of mg-7d5a / d5a3043 (the strike of the A5 widening's own argument) — OVERST
+      ADDED   a85fb28b5  owner=mg-6653  docs: independent audit of mg-f2e1 / ba3ec79 (the A5 widening) — OVERSTATED with 1 BROKEN, and the B
+      ADDED   ba3ec79d2  owner=mg-f2e1  STATE: widen the A5 trigger to cover STATE.md itself — the hole was in pm-onethird's own wording, an
+      ADDED   bdcb0069e  owner=mg-ae62  STATE+instrument: CLOSE mg-e720's remaining two BROKEN items — both CLOSE, neither relocates — and u
+
+  LOOSE chain: 7 generation(s), 81 commit(s)
+    of the 13 ground-truth commits it finds 10, MISSES 3
+      MISSED  0160cbf96  owner=mg-a806  docs: §9.4's heading carried the falsified universal too — corrected, and pointed at the artifact th
+      MISSED  5b6303763  owner=mg-a806  probe: the committed lrb_output.txt now says what "undecided by this test" means, and STATE stops im
+      MISSED  f6756c028  owner=mg-a806  docs: land the mg-86a3 audit repairs in the mg-a3d4 deliverable — ledger row B6 is FALSIFIED not cov
+    and adds 71 commit(s) the verdict did not name
+      ADDED   0476b8ec6  owner=(none)  pm-onethird: RETRACT the 17:35 stop-loss — I read mg-218d's commit subject, not its body
+      ADDED   1640f6ff2  owner=mg-0b07  docs+audit: independent audit of the mg-c4c8 repair (mg-64b6 / 0fb0e00) — THE DECLARATION IS DERIVED
+      ADDED   1db0be904  owner=mg-aec7  docs+instrument: clear mg-3b51's 4 MINOR — R1d was a RESTATEMENT billed as "the control that must fi
+      ADDED   1e6103185  owner=mg-a2bd  docs: STRIKE ledger row G-double-prime — FALSE as a universal (55 counterexamples at n<=6, smallest 
+      ADDED   1ee1f1b86  owner=mg-7522  repair: THE POPULATION IS A PREDICATE AND THE CENSUS IS UNPINNED — 8 pipelines in 2 runners the file
+      ADDED   253924065  owner=mg-16eb  evidence: the committed outputs of a full run — 8 of 8 rows as predicted, 11 of 17 added claims hold
+      ... and 65 more
+
+------------------------------------------------------------------------------
+WHAT THIS SAYS ABOUT THE CHAIN READER -- AND IT IS NOT FLATTERING
+------------------------------------------------------------------------------
+  The two modes bracket the independent list from OPPOSITE SIDES and
+  NEITHER contains it.  The strict reader misses real successor commits
+  because this arc's convention does not put the ancestor's ticket id in
+  the subject of every descendant; the loose reader contains them but
+  buries them among citations.  So `3 generations` and `7 generations`
+  are both wrong as a count of the chain, and s1's headline for row 1
+  should be read as a BRACKET and not as either endpoint.
+
+  ⚠️ THIS DOES NOT MOVE ANY ROW VERDICT.  REFUTED/UPHELD is decided by
+     the generation-1 successor count, which is a direct grep of the
+     parent id and does not use the chain descent at all.  The defect is
+     in the DEPTH figure, not in the census answer.  Saying so is not a
+     defence of the depth figure; it is the scope of the damage, stated.
+
+  This is blind spot B3 (`a successor whose message names neither P nor
+  any ticket that descends from P`) biting on the population, found by
+  cross-checking against a list this instrument did not produce.  It is
+  recorded as the second defect of this instrument, after s3's weak-rule
+  false positive.
+
+== s4 exit: 0 (a low score is a finding about this reader, not a crash) ==

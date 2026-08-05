@@ -2,7 +2,7 @@
 # mg-f3ff: the dropped-verdict census of 2026-07-31, RE-DERIVED FROM THE TREE,
 # and the METHOD repaired.
 #
-#     sh run_all.sh          # ~4 min; s3 walks the whole work store
+#     sh run_all.sh          # ~50 s; s1's loose chain reader dominates
 #
 # Pure Python 3 + git, no third-party packages.
 #
@@ -28,7 +28,8 @@ cd "$(dirname "$0")"
 
 echo "== mg-f3ff: the dropped-verdict census re-derived from the commit log =="
 status=0
-for s in selftest_f3ff s0_freshness s1_rows s2_controls s3_graph; do
+for s in selftest_f3ff s0_freshness s1_rows s2_controls s3_graph \
+         s4_crosscheck; do
     # stderr goes INTO the transcript: a crash and a fired check are both
     # exit 1, and a transcript keeping only stdout ends mid-section with no
     # reason given.

@@ -115,6 +115,41 @@ def main():
     print(f"  4 of 4 checked, {ref} refuted.  `{ref} of 4 wrong` and `4 of 4 wrong` are")
     print("  different claims and this does not round toward either.")
     print()
+    print("-" * 78)
+    print("SUB-CLAUSES OF P2 AND P5, SCORED SEPARATELY -- a prediction can be right")
+    print("about the verdict and wrong about the detail, and both are recorded.")
+    print("-" * 78)
+    T2 = L.utc("2026-07-31T04:12:41Z")
+    s2 = (L.successors(fm[L.REPOS[0][0]], "mg-d112", T2) or []) + \
+         (L.successors(fm[L.REPOS[1][0]], "mg-d112", T2) or [])
+    per_repo_ok = all(
+        L.successors(fm[lab], "mg-d112", T2) for lab, _ in L.REPOS)
+    days = sorted({c.adate.date().isoformat() for c in s2})
+    all_29 = days == ["2026-07-29"]
+    print("  P2 said row 2 is refuted in BOTH repos.")
+    print(f"    OBSERVED: "
+          + ", ".join(f"{lab}={len(L.successors(fm[lab], 'mg-d112', T2))}"
+                      for lab, _ in L.REPOS)
+          + f"   {'HIT' if per_repo_ok else '*** MISS ***'}")
+    print("  P2 also said those successors were `all authored on 2026-07-29, two days")
+    print("    before the row was filed`.")
+    print(f"    OBSERVED: {len(s2)} successor(s) across {len(days)} distinct author "
+          f"date(s): {', '.join(days)}")
+    print(f"    P2 sub-clause: {'HIT' if all_29 else '*** MISS ***'}"
+          + ("" if all_29 else
+             "  -- the `all` is false; 954c29e (mg-6a2f) is 2026-07-30."))
+    if not all_29:
+        print("    The sub-clause is NOT rewritten to match.  P2's headline (REFUTED in")
+        print("    both repos) stands and its detail does not, and a prediction that is")
+        print("    two-thirds right is recorded as two-thirds right.")
+    print()
+    print("  P5 said: 2 of 4 correct / 2 of 4 refuted on a population of 4, and the")
+    print("    brief's `1-of-1 refuted on a population of 4` SUPERSEDED to 4-of-4")
+    print("    checked, 2 refuted.")
+    p5 = (ref == 2 and up == 2 and unk == 0)
+    print(f"    OBSERVED: {ref} refuted, {up} upheld, {unk} unknown, n=4.   "
+          f"{'HIT' if p5 else '*** MISS ***'}")
+    print()
     print(f"  Predictions scored: {4 - len(misses)} of 4 hit"
           + (f", MISSES on row(s) {', '.join(map(str, misses))}" if misses else ", 0 missed"))
     print("  (P1-P4 were disclosed as not blind; hitting them is a weak claim and is")
