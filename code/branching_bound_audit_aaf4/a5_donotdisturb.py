@@ -36,6 +36,10 @@ PROSE = [os.path.join(L.PARENT, "README.md"),
          os.path.join(L.DOCS, "repair-mg-d075-the-figure-and-its-scope.md")]
 
 
+def read(p):
+    return open(p, encoding="utf-8").read()
+
+
 def git(*a):
     return subprocess.run(["git"] + list(a), cwd=L.ROOT,
                           capture_output=True, text=True)
@@ -208,6 +212,71 @@ def main():
         print("      %s -- never amended, reworded, squashed or rebased away"
               % h[:9], file=OUT)
     print("    count : %d of %d" % (len(preregs), len(landed)), file=OUT)
+    print(file=OUT)
+
+    # ------------------------------------------------------------------ D5
+    L.rule(OUT, "  D5  THE UPSTREAM DO-NOT-DISTURB, DIFFED AGAINST THE RUN\n"
+                "      THAT PUBLISHED IT.  Population: the committed outputs\n"
+                "      mg-19ec's rerun_upstream.sh classifies as moved.\n"
+                "      Grain: one file.")
+    theirs = os.path.join(L.ROOT, "code", "branching_audit_19ec", "out_upstream.txt")
+    mine_up = os.path.join(L.HERE, "out_upstream_rerun_aaf4.txt")
+    if not os.path.exists(mine_up):
+        print("    %s ABSENT -- the upstream suite has not been re-run from"
+              % L.rel(mine_up), file=OUT)
+        print("    this branch yet.  Not scored.", file=OUT)
+    else:
+        def moved(path):
+            out = {}
+            for m in re.finditer(r"^  (\S+\.txt)\s+(CONTENT MOVED|TIMINGS[^\n]*)",
+                                 read(path), re.M):
+                out[m.group(1)] = m.group(2).strip()
+            return out
+
+        def exits(path):
+            return re.findall(r"^  (\S+)\s+predicted (\d+)\s+got (\d+)\s+(\w+)",
+                              read(path), re.M)
+
+        t, m = moved(theirs), moved(mine_up)
+        te, me = exits(theirs), exits(mine_up)
+        print("    exit codes, mg-19ec's published run : %d rows, %d ok"
+              % (len(te), sum(1 for r in te if r[3] == "ok")), file=OUT)
+        print("    exit codes, this branch's re-run    : %d rows, %d ok"
+              % (len(me), sum(1 for r in me if r[3] == "ok")), file=OUT)
+        print(file=OUT)
+        print("    file                                          published"
+              "      this branch", file=OUT)
+        for f in sorted(set(t) | set(m)):
+            print("    %-44s %-16s %s"
+                  % (f[-44:], t.get(f, "-- not listed --"),
+                     m.get(f, "-- not listed --")), file=OUT)
+        new = sorted(set(m) - set(t))
+        gone = sorted(set(t) - set(m))
+        print(file=OUT)
+        print("    outputs that moved in BOTH runs                 : %d"
+              % len(set(t) & set(m)), file=OUT)
+        print("    outputs that moved ONLY in this branch's re-run : %d"
+              % len(new), file=OUT)
+        for f in new:
+            print("      %s" % f, file=OUT)
+        print("    outputs that moved only in the published run    : %d"
+              % len(gone), file=OUT)
+        print(file=OUT)
+        print("""    THE ATTRIBUTION, AND IT MATTERS.  The two flipped verdict rows in
+    `out_a7_doc.txt` -- B2 and B3, True -> False -- are NOT caused by mg-d075.
+    mg-19ec's own committed run reports the same two flips, and both predicates
+    are already False at mg-d075's pre-repair anchor.  They are reproduced here,
+    not discovered.
+
+    WHAT IS NEW IS THE OTHER TWO.  `out_check_doc.txt` and `out_w5_doc.txt` are
+    document-size probes over the living document, and they moved because
+    mg-d075's repair GREW that document -- 46866 bytes / 508 lines / 78 blocks
+    to 48799 / 529 / 79.  Neither gates on it, both suites still exit 0, and the
+    upstream verdict is still 6 of 6 exit codes on prediction.  So: mg-d075
+    moved two committed figures in two suites it does not own, and NO EXIT CODE
+    ANYWHERE SAYS SO, because those figures are printed rather than gated.
+    That is the same finding as D2 one level out, and it is not a break: nothing
+    the repair was asked to leave alone stopped working.""", file=OUT)
     print(file=OUT)
 
     L.rule(OUT)

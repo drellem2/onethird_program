@@ -98,6 +98,46 @@ A5  DO NOT DISTURB, AND THE PROVENANCE OF WHAT LANDED.
     count : 1 of 3
 
 ==============================================================================
+  D5  THE UPSTREAM DO-NOT-DISTURB, DIFFED AGAINST THE RUN
+      THAT PUBLISHED IT.  Population: the committed outputs
+      mg-19ec's rerun_upstream.sh classifies as moved.
+      Grain: one file.
+==============================================================================
+    exit codes, mg-19ec's published run : 6 rows, 6 ok
+    exit codes, this branch's re-run    : 6 rows, 6 ok
+
+    file                                          published      this branch
+    code/branching_audit_5800/out_a1_counts.txt  TIMINGS / LINE NUMBERS ONLY TIMINGS / LINE NUMBERS ONLY
+    code/branching_audit_5800/out_a2_exactly.txt TIMINGS / LINE NUMBERS ONLY TIMINGS / LINE NUMBERS ONLY
+    code/branching_audit_5800/out_a6_grep.txt    CONTENT MOVED    CONTENT MOVED
+    code/branching_audit_5800/out_a7_doc.txt     CONTENT MOVED    CONTENT MOVED
+    code/branching_repair_41aa/out_check_doc.txt -- not listed -- CONTENT MOVED
+    code/branching_repair_41aa/out_r1b_skew8.txt CONTENT MOVED    CONTENT MOVED
+    code/branching_warrant_dffa/out_w5_doc.txt   -- not listed -- CONTENT MOVED
+
+    outputs that moved in BOTH runs                 : 5
+    outputs that moved ONLY in this branch's re-run : 2
+      code/branching_repair_41aa/out_check_doc.txt
+      code/branching_warrant_dffa/out_w5_doc.txt
+    outputs that moved only in the published run    : 0
+
+    THE ATTRIBUTION, AND IT MATTERS.  The two flipped verdict rows in
+    `out_a7_doc.txt` -- B2 and B3, True -> False -- are NOT caused by mg-d075.
+    mg-19ec's own committed run reports the same two flips, and both predicates
+    are already False at mg-d075's pre-repair anchor.  They are reproduced here,
+    not discovered.
+
+    WHAT IS NEW IS THE OTHER TWO.  `out_check_doc.txt` and `out_w5_doc.txt` are
+    document-size probes over the living document, and they moved because
+    mg-d075's repair GREW that document -- 46866 bytes / 508 lines / 78 blocks
+    to 48799 / 529 / 79.  Neither gates on it, both suites still exit 0, and the
+    upstream verdict is still 6 of 6 exit codes on prediction.  So: mg-d075
+    moved two committed figures in two suites it does not own, and NO EXIT CODE
+    ANYWHERE SAYS SO, because those figures are printed rather than gated.
+    That is the same finding as D2 one level out, and it is not a break: nothing
+    the repair was asked to leave alone stopped working.
+
+==============================================================================
 SUMMARY a5_donotdisturb: mg-d075's suite re-run from this branch, 1 script(s) off prediction
 SUMMARY a5_donotdisturb: D3 2 commit token(s) in the parent's prose, 0 unaccounted by ancestry AND patch-id
 SUMMARY a5_donotdisturb: D4 3 commit(s) of mg-d075 on main, 1 of them pre-registration commits

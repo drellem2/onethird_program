@@ -205,9 +205,9 @@ A3  THE REPAIR READ AS A CLAIMANT.  Every sentence in which
       audit's own prose.  PREDICTIONS.md P10 says in advance
       that it fires on me.
 ==============================================================================
-    population : 347 live sentences of mine
-    criticism sentences, MY wider predicate  : 41
-    of those with NO numeric scope of my own : 30
+    population : 363 live sentences of mine
+    criticism sentences, MY wider predicate  : 46
+    of those with NO numeric scope of my own : 34
 
     [01] PREDICTIONS.md                                 line 3    NONE
          NUMERIC scope in sentence : -- NONE --
@@ -350,29 +350,52 @@ A3  THE REPAIR READ AS A CLAIMANT.  Every sentence in which
          **And the population was short by a file.** `s5`'s `MINE` lists two documents; mg-d075 authored thre
          e.
 
-    [25] README.md                                      line 163  NONE
+    [25] README.md                                      line 145  KEYWORD ONLY
+         parent's OWNSCOPE matched : 'POP-3'
+         NUMERIC scope in sentence : -- NONE --
+         The sentence in mg-d075's own account that describes the defect this whole repair exists for reads *
+         "mg-19ec's POP-3 predicate **could** not see it"* — and is therefore not a criticism sentence as far
+          as `s5` is concerned.
+
+    [26] README.md                                      line 173  NONE
          NUMERIC scope in sentence : -- NONE --
          *"that audit's transcript never prints a token count at all"*
 
-    [26] README.md                                      line 165  KEYWORD ONLY
+    [27] README.md                                      line 175  KEYWORD ONLY
          parent's OWNSCOPE matched : 'POP-3'
          NUMERIC scope in sentence : -- NONE --
          *"mg-19ec's POP-3 predicate could not see it"*
 
-    [27] README.md                                      line 172  NONE
+    [28] README.md                                      line 182  NONE
          NUMERIC scope in sentence : -- NONE --
          The arc's defect is a figure without its scope; this is **a scope without its figure**.
 
-    [28] README.md                                      line 181  NONE
+    [29] README.md                                      line 191  NONE
          NUMERIC scope in sentence : -- NONE --
          mg-d075 computes **INSTANCE + REUSABLE ARTEFACT, not the class**, and says plainly that a repo-wide 
          check is what would address the class and that it does not install one.
 
-    [29] README.md                                      line 269  NONE
+    [30] README.md                                      line 211  NONE
+         parent's OWNSCOPE matched : 'out_s6_class.txt'
+         NUMERIC scope in sentence : -- NONE --
+         **But one committed transcript does not regenerate.** `out_s6_class.txt` moves, on the line that cou
+         nts commits naming mg-19ec — it was **11** when mg-d075 shipped it.
+
+    [31] README.md                                      line 248  NONE
+         NUMERIC scope in sentence : -- NONE --
+         **So mg-d075 moved two committed figures in two suites it does not own, and no exit code anywhere sa
+         ys so, because those figures are printed rather than gated.** That is D2's finding one level out.
+
+    [32] README.md                                      line 294  NONE
+         NUMERIC scope in sentence : -- NONE --
+         **A recorded SHA that does not resolve or does not sit on `main` is the expected state of this linea
+         ge, and is not evidence of tampering.**
+
+    [33] README.md                                      line 305  NONE
          NUMERIC scope in sentence : -- NONE --
          the parent's gate cannot see it
 
-    [30] README.md                                      line 301  NONE
+    [34] README.md                                      line 337  NONE
          NUMERIC scope in sentence : -- NONE --
          - **It repaired nothing.** mg-d075's deliverable is merged and dated; editing it would destroy the e
          vidence trail, and editing its `PREDICTIONS.md` would violate the pre-registration invariant.
@@ -414,7 +437,7 @@ A3  THE REPAIR READ AS A CLAIMANT.  Every sentence in which
 SUMMARY a3_criticism: C1 parent population 254 sentences, 10 criticism, 0 unbounded by the parent's own OWNSCOPE
 SUMMARY a3_criticism: C2 3 of 10 parent criticism sentences pass as themselves and FAIL the standard applied to the document
 SUMMARY a3_criticism: C3 omitted file PREDICTIONS.md: 8 criticism sentence(s), 6 with no numeric scope
-SUMMARY a3_criticism: C4 MY OWN prose: 41 criticism sentence(s), 30 with no numeric scope of my own
+SUMMARY a3_criticism: C4 MY OWN prose: 46 criticism sentence(s), 34 with no numeric scope of my own
 SUMMARY a3_criticism: C5 my predicate sees 8 sentence(s) the parent's cannot
 SUMMARY a3_criticism: failures 3
 ==============================================================================

@@ -1,0 +1,79 @@
+==============================================================================
+mg-19ec: the five earlier suites, re-run.  Exit codes predicted BEFORE
+the run, in PREDICTIONS.md section 1b (committed at 170094f).
+==============================================================================
+
+  code/branching_warrant_dffa        predicted 0  got 0  ok
+        SUMMARY w3_brown: failures 0
+        SUMMARY w4_control: failures 0
+        SUMMARY w5_doc: checks 41, failures 0
+
+  code/branching_repair_41aa         predicted 0  got 0  ok
+        ==============================================================================
+        CHECK_DOC: 31 checks, 0 failed
+        ==============================================================================
+
+  code/branching_audit_5800          predicted 0  got 0  ok
+        A7: 27 checks, 0 failed
+        SUMMARY a7_doc: 27 checks, 0 failed
+        SELFTEST 5800: 38 assertions, 0 failures
+
+  code/branching_repair_41aa         predicted 0  got 0  ok
+        SUMMARY r2_grid: grid = J(C_p+C_q) bad 0; C_p+C_q a straight cell
+        SUMMARY r3_rescope: Bergeron-Li strings missing 0; Young-Fibonacci
+        SELF-TEST: 36 assertions, 0 failed
+
+  code/branching_audit_6ad0          predicted 0  got 0  ok
+        SUMMARY a2_intervals: witness constructions bad 0; skew-path check bad 0
+        SUMMARY a3_hypotheses: truncated-passers 1; YF intervals distributive 28 of 33 (non-dist 5), reconstruction bad 0; non-idempotent moves 0; forced non-unital 64 of 64
+        SUMMARY a4_algebra: B5 route bad [0, 0, 0, 0, 0] (20 skipped); Aut counterexamples 0
+
+  code/branching_af28                predicted 0  got 0  ok
+        done: out_selftest.txt out_young.txt out_branching.txt out_lrb_reps.txt out_scan_brown.txt
+
+==============================================================================
+WHICH COMMITTED OUTPUTS MOVED, AND WHY
+==============================================================================
+
+  A regenerated output that differs is not automatically a break.  Each
+  file below is normalised -- elapsed times '(12.3s)' and 'line NNN'
+  replaced by placeholders -- and re-compared.  A file that is identical
+  after that carries no moved FIGURE.
+
+  code/branching_audit_5800/out_a1_counts.txt    TIMINGS / LINE NUMBERS ONLY
+  code/branching_audit_5800/out_a2_exactly.txt   TIMINGS / LINE NUMBERS ONLY
+  code/branching_audit_5800/out_a6_grep.txt      CONTENT MOVED:
+        4a5
+        > Binary file ../branching_repair_41aa/__pycache__/r3_rescope.cpython-314.pyc matches
+  code/branching_audit_5800/out_a7_doc.txt       CONTENT MOVED:
+        43c43
+        <   B2  §2 heading note: 'the index-set contact DOES extend' to YF present:True
+        ---
+        >   B2  §2 heading note: 'the index-set contact DOES extend' to YF present:False
+        45c45
+        <   B3  §3 row 10: 'the SAME index-set contact ... on 28 of 33'    present:True
+        ---
+        >   B3  §3 row 10: 'the SAME index-set contact ... on 28 of 33'    present:False
+  code/branching_repair_41aa/out_check_doc.txt   CONTENT MOVED:
+        3c3
+        <            46866 bytes, 508 lines, 78 blocks
+        ---
+        >            48799 bytes, 529 lines, 79 blocks
+  code/branching_repair_41aa/out_r1b_skew8.txt   CONTENT MOVED:
+        10c10
+        <   wall clock: 173 s.  All 16 999 posets on 8 elements are NOT
+        ---
+        >   wall clock: 302 s.  All 16 999 posets on 8 elements are NOT
+  code/branching_warrant_dffa/out_w5_doc.txt     CONTENT MOVED:
+        3c3
+        <     46866 bytes, 508 lines, 78 blocks
+        ---
+        >     48799 bytes, 529 lines, 79 blocks
+
+  RESTORING those directories now, so this audit's branch carries no
+  regenerated output of a directory it does not own.
+  git status over those five directories after restore: CLEAN
+
+==============================================================================
+SUMMARY upstream: 6 of 6 exit codes matched their prediction.
+==============================================================================

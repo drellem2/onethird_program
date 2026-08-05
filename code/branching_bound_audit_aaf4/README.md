@@ -226,9 +226,29 @@ re-run green while its published transcript moves, and neither `run_all.sh` nor 
 says so.** The parent's directory is restored by `a5` afterwards; this branch carries none of
 the regenerated output.
 
-**The upstream do-not-disturb.** mg-19ec's `rerun_upstream.sh` — six suites, all predicted 0 —
-re-run from this branch: see `out_upstream_rerun_aaf4.txt`. Those directories are restored by
-that script and this branch carries none of their regenerated output either.
+**The upstream do-not-disturb: 6 of 6 exit codes on prediction.** mg-19ec's
+`rerun_upstream.sh` — six suites — re-run once from this branch; the transcript is committed as
+`out_upstream_rerun_aaf4.txt` and `a5`'s D5 diffs it against the run mg-19ec published.
+Those directories are restored by that script and this branch carries none of their
+regenerated output.
+
+**Population: the committed outputs that script classifies as moved. Grain: one file.** Seven,
+of which **5 moved in both runs and 2 moved only in mine**.
+
+- **The two flipped verdict rows are NOT mg-d075's.** `out_a7_doc.txt`'s B2 and B3 go
+  `True → False` — and **mg-19ec's own committed run reports the same two flips**, and both
+  predicates are already false at mg-d075's pre-repair anchor `645b5a4`. Reproduced, not
+  discovered. **A finding attributed to the wrong ticket is not a finding.**
+- **The two that are new are mg-d075's.** `code/branching_repair_41aa/out_check_doc.txt` and
+  `code/branching_warrant_dffa/out_w5_doc.txt` are document-size probes over the living
+  document, and they moved because this repair grew it: **46866 bytes / 508 lines / 78 blocks →
+  48799 / 529 / 79**. Neither gates on it, both suites still exit 0, and the upstream verdict is
+  still 6 of 6.
+
+**So mg-d075 moved two committed figures in two suites it does not own, and no exit code
+anywhere says so, because those figures are printed rather than gated.** That is D2's finding
+one level out. **It is not a break** — nothing the repair was asked to leave alone stopped
+working, and the do-not-disturb the brief asked me to re-run holds.
 
 **PROVENANCE, by patch-id and not by ancestry.** Every commit-shaped token in mg-d075's prose:
 
