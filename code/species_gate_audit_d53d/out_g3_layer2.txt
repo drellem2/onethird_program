@@ -1,0 +1,142 @@
+
+==============================================================================
+G3a  THE LINE w3_scope.py PRINTS FOR AN UNREADABLE REGULAR FILE
+==============================================================================
+
+    planted: probe_d53d_x4.py, mode 000, carrying a live X4 statement
+    it is a REGULAR FILE: os.path.isfile says True, so layer 1 reaches it
+
+      #   declined, NOT STATED: probe_d53d_x4.py   REACHED AND NOT READ: open() raised PermissionError.  This is NOT an encoding problem -- the file's bytes were never seen
+  Q12    *** MISSED ***
+        predicted: the line says UNREADABLE / REACHED AND NOT READ, names PermissionError, and the word ENCODING is not on it
+        measured:  1 line(s); REACHED AND NOT READ/UNREADABLE: True; names PermissionError: True; ENCODING absent: False
+  the file is not silently absent from the output                  ok
+        mg-6ef4's F1 is not that the bucket was wrong.  It is that a reader
+        who met the wrong bucket went looking for a text-encoding problem.
+  the line does not ATTRIBUTE the decline to the file's encoding   ok
+        occurrences of `encoding` on the line: 1
+        every one of them inside an explicit denial: True
+        This is what Q12's third clause was reaching for, and Q12 as written
+        asked for the absence of a word instead.  The bucket names the
+        exception class that produced it (PermissionError), states REACHED
+        AND NOT READ, files it under NOT STATED and counts it -- and then
+        spends a clause ruling out the cause mg-6ef4's reader was sent to.
+        The word is there BECAUSE of the repair, not in spite of it.
+
+==============================================================================
+G3b  w3_scope.py's EXIT CODE, ASKED SEPARATELY
+==============================================================================
+
+    A bucket is a sentence.  An exit code is a control.  The ticket's
+    warning is that the first can be repaired while the second stays
+    silent, so this is its own row with its own prediction.
+
+      w3_scope.py exit 1
+  Q13    HELD
+        predicted: 1
+        measured:  1
+
+==============================================================================
+G3c  THE f8fa RUNNER's EXIT CODE, ASKED SEPARATELY AGAIN
+==============================================================================
+
+    And a checker's exit code is not a runner's.  That distance is
+    exactly where mg-6ef4's F3 lived, so it is measured and not
+    inferred from G3b.
+
+      sh code/species_remainder_f8fa/run_all.sh -> exit 1
+      the runner's own words: w3_scope.py FAILED
+  Q14    HELD
+        predicted: exit 1
+        measured:  1
+
+==============================================================================
+G3d  THE STATED BUCKET MUST SURVIVE THE REPAIR
+==============================================================================
+
+    A repair that reddens on every decline has not separated two
+    buckets, it has deleted one.  A readable file whose bytes are not
+    valid UTF-8 is a STATED decline -- a sentence has carried it since
+    mg-d633 -- and must still be printed and NOT counted.
+
+      #   declined, STATED:     probe_d53d_badbytes.py   file rule, STATED: bytes are not valid UTF-8 text (UnicodeDecodeError)
+  Q15    HELD
+        predicted: w3_scope.py exit 0, and the bucket says ENCODING
+        measured:  exit 0; the line says: ENCODING/UnicodeDecodeError
+  the two declines are told apart by the exception, not by a guess ok
+        Same walk, same layer, two files: one unreadable (counted, red) and
+        one undecodable (stated, green).  Either alone proves nothing about
+        the split.
+
+==============================================================================
+G3e  THE COUNTERFACTUAL -- THE SAME FILE, READABLE
+==============================================================================
+
+    mg-6ef4's sentence is `contents never scanned, exit 0 WITH A LIVE X4
+    STATEMENT INSIDE IT`.  That only means something if the same file,
+    readable, IS a finding.  Otherwise the plant was never a hazard and
+    G3a..G3c measured a bucket around nothing.
+
+      STILL ASSERTED AT  probe_d53d_x4.py:2
+  readable, the same file is a live X4 finding and w3_scope.py is  ok
+        exit 1
+  
+    So the unreadable case in G3a was hiding a real finding, and before
+    mg-4adb it was hiding it under a sentence about text encoding.
+
+==============================================================================
+G3f  THE FOURTH CHECKER -- THE SAME INPUT AGAINST e2_crosssection.py
+==============================================================================
+
+    mg-4adb measured this checker and did not repair it, which its own
+    README says.  An audit that only re-measures what was repaired
+    cannot report what was left, so it is measured here.
+
+      e2 exit 1; Traceback in output: True; prints STANDING UN-STRUCK: False
+      last line: PermissionError: [Errno 13] Permission denied: '/private/var/folders/4
+  Q16    HELD
+        predicted: exit 1 by uncaught traceback, and `STANDING UN-STRUCK` not printed
+        measured:  exit 1, traceback True, `STANDING UN-STRUCK` printed False
+  e2 does not file an unreadable markdown file under any bucket    ok
+        It has no bucket for it: `md_files_and_residue` decides REACHED and
+        e2's own loop does the open().  The two-layer shape mg-6ef4 found in
+        w3_scope.py is the same shape here, and only one of the two layers
+        has a residue.  It exits 1, which is why this is a REPORT and not a
+        second F1: the reader is not told the wrong thing, only nothing.
+
+==============================================================================
+G3g  AN UNREADABLE DIRECTORY -- A CASE NO LIST IN EITHER TICKET NAMES
+==============================================================================
+
+    Floor, not scope.  Layer 1's residue exists because os.walk
+    SWALLOWS the error on a directory it cannot read.  So: a directory
+    at mode 000, under code/, with a *.md inside it.
+
+      declined, NOT STATED: code/probe_d53d_dir
+          os.walk raised PermissionError and would otherwise have dropped it in silence
+  Q17    HELD
+        predicted: os.walk's onerror fires, the entry lands in NOT STATED, and e2 exits 1
+        measured:  e2 exit 1; 1 row(s) mention it; NOT STATED: True
+  the file INSIDE it is invisible, and that is what the residue is ok
+        `hidden.md` carries a claim struck and restated, which is exactly what
+        e2 exists to find, and no checker in this repository will ever read
+        it.  The residue does not make it visible -- it makes the SILENCE
+        visible, which is the whole of mg-5040's OPEN 1 and is why this case
+        arrives as red rather than as nothing.
+
+==============================================================================
+G3 TOTAL BAD: 0
+G3 PREDICTIONS SCORED: 6, MISSED: 1
+==============================================================================
+
+EXTENT OF THAT NUMBER.  Six constructed inputs: one unreadable regular
+file (G3a-c, and G3e the same file readable), one undecodable regular
+file (G3d), one unreadable *.md (G3f) and one unreadable directory
+(G3g).  Each is planted in a git clone of this worktree and removed by
+the same probe.  IT RANGES OVER NOTHING ELSE: two checkers are asked
+(w3_scope.py and e2_crosssection.py) and two are not -- s1_extent.py
+and check_doc.py have their own walks and are outside this number.
+Mode 000 is the only way a file is made unreadable here; a file inside
+an unreadable PARENT, a file on a full disk and a file removed between
+the walk and the open are three more routes into the same bucket and
+this number says nothing about any of them.

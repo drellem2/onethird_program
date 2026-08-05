@@ -1,0 +1,87 @@
+
+==============================================================================
+S1  THE SANDBOX IS A GIT CLONE OF THIS WORKTREE
+==============================================================================
+
+  the clone's HEAD is this worktree's HEAD                         ok
+        9043b008b5ed vs 9043b008b5ed
+  the clone is clean, so `git status` in a probe means what it say ok
+  `git archive` resolves in the clone -- s1_extent.py's two histor ok
+        Without this they print `git unavailable -- SKIPPED` and the deletion
+        sweep certifies a runner with two of its controls silently off.
+  and they DID run in this clone, not merely could                 ok
+        s1_extent.py exit 0; `git unavailable -- SKIPPED` in its output: False
+        (the bare word SKIPPED appears 1 time(s), all of them the file-level
+        exclusion this checker states on purpose)
+  and the two historical controls printed a MEASUREMENT, not a ski ok
+        (a) at ebecd89, the state mg-73df audited       4 asserted (now 0), catches X3,X7,Y2  ok
+        (b) at 83ac472, before mg-f8fa                  9 asserted (now 0), catches X3,X4,X5,X7,Y2  ok
+  the clone carries docs                                           ok
+  the clone carries code/species_extent_d633                       ok
+  the clone carries code/species_7d75                              ok
+
+==============================================================================
+S2  DELETION -- IT REMOVES ONE LINE AND PUTS IT BACK EXACTLY
+==============================================================================
+
+  the runner is 83 lines by the rule the population uses           ok
+        a trailing newline does not make a final empty line
+  line 6 is the one removed                                        ok
+        'set -e'
+  exactly one line fewer while deleted                             ok
+  and it is the RIGHT line that is gone                            ok
+  the file is byte-identical afterwards                            ok
+        5155 bytes before, 5155 after
+  restored after a second, unrelated deletion too                  ok
+
+==============================================================================
+S3  THE PLANT -- IT ARMS, AND IT CAN BE DISARMED
+==============================================================================
+
+  e2 is GREEN on the clean clone                                   ok
+        exit 0
+  e2 is RED with the plant, and says why                           ok
+        exit 1, 1 occurrence(s) STANDING
+  the SAME sentence in a paragraph that retracts it does NOT fire  ok
+        exit 0 -- so the plant in G1/G2 arms the RULE and not the `~~`
+  and the tree is green again once the plant is removed            ok
+        exit 0
+
+==============================================================================
+S4  DISPOSITION -- THE THREE CLASSES, AND THE ONE THAT MATTERS
+==============================================================================
+
+  exit 0 is GATE LOST even when the finding was printed in full    ok
+        This is mg-6ef4's F3 exactly: printed and green.  If this row were
+        written the other way the audit could not see its own subject.
+  non-zero with the sentence is GATE HELD                          ok
+  non-zero without it is DIED BEFORE THE GATE                      ok
+  a timeout is its own class and never a pass                      ok
+
+==============================================================================
+S5  STEP SUBSTITUTION KEEPS THE WIRING IT IS MEASURING
+==============================================================================
+
+  a4ef has 4 python3 steps                                         ok
+        line 19: python3 selftesta4ef.py > out_selftest.txt || {
+        line 22: python3 s1_extent.py    > out_s1_extent.txt || { echo "S
+        line 23: python3 s2_seam.py      > out_s2_seam.txt   || { echo "S
+        line 83: python3 ../species_extent_d633/e2_crosssection.py
+  the redirect and the guard survive the substitution              ok
+        was:  python3 selftesta4ef.py > out_selftest.txt || {
+        now:  python3 -c "import sys; sys.stderr.write('FORCED RED by mg-d53d\n'); sys.exit(1)" > out_selftest.txt || {
+  and the runner file is restored                                  ok
+
+==============================================================================
+S6  THE PARALLEL POOL HANDS EACH TASK A WHOLE TREE
+==============================================================================
+
+  3 distinct sandbox roots                                         ok
+  every task ran and none was dropped                              ok
+  a task that raises is reported, never dropped silently           ok
+        A sweep that loses a row reports `the gate held` for a line it never
+        measured, which is the failure this whole audit is about.
+
+==============================================================================
+selftest_d53d.py: 0 check(s) failed
+==============================================================================
