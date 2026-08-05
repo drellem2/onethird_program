@@ -1,0 +1,158 @@
+==========================================================================
+T3 -- OPEN 2 (F-2) -- ONE WORD OVER TWO POPULATIONS
+==========================================================================
+--------------------------------------------------------------------------
+(i) THE RULER WAS NOT MOVED, AND THE RESIDUE RE-DERIVED
+--------------------------------------------------------------------------
+   The term and the qualifier are mg-2c77's, character for
+   character, by way of mg-330a's lib330a.py.  A repair that widens the
+   rule closes sites without writing a word, so the rule is checked on
+   two constructed inputs whose answers are known before it runs.
+
+   constructed site carrying the HYPHENATED form   : *** census, UNQUALIFIED
+   constructed site carrying the UNHYPHENATED form : census, QUALIFIED
+
+   sites in the tree stating the term (untracked included) : 85
+   NON-VACUITY -- distinct labels the rule returned : 3
+      *** census, UNQUALIFIED      20
+      census, QUALIFIED            49
+      quotes the wide BOUND        16
+
+   THE RESIDUE -- sites stating the term UNQUALIFIED,
+   excluding this ticket's own files : 20
+   mg-330a re-derived 20 at fba5f63.
+--------------------------------------------------------------------------
+(ii) BOTH LABELS, IN TWO COLUMNS.  THIS IS THE REPAIR.
+--------------------------------------------------------------------------
+   The two rules are two functions in lib_b2af.py -- `kind_of` reads
+   the PATH, `scope_of` reads whose ticket owns the file -- because two
+   rules that are one function are two rules that can be confused for
+   one another again.
+
+   site                                                    KIND (r3 iii)      SCOPE (r3 iv)
+   code/audit_2c77/PREDICTIONS.md:178                      record, pre-run    another ticket's
+   code/audit_2c77/README.md:14                            live claim         another ticket's
+   code/audit_2c77/lib2c77.py:187                          live claim         another ticket's
+   code/audit_2c77/out_q3_operands.txt:69                  transcript         another ticket's
+   code/audit_2c77/q3_operands.py:148                      live claim         another ticket's
+   code/audit_2c77/q3_operands.py:15                       live claim         another ticket's
+   code/audit_2c77/q3_operands.py:200                      live claim         another ticket's
+   code/audit_2c77/q3_operands.py:235                      live claim         another ticket's
+   code/audit_2c77/q3_operands.py:55                       live claim         another ticket's
+   code/face_geometry_audit_eaef/PREDICTIONS.md:42         record, pre-run    another ticket's
+   code/face_geometry_audit_eaef/README.md:45              live claim         another ticket's
+   code/face_geometry_audit_eaef/README.md:7               live claim         another ticket's
+   code/face_geometry_audit_eaef/README.md:8               live claim         another ticket's
+   code/face_geometry_audit_eaef/e1_operand.py:140         live claim         another ticket's
+   code/face_geometry_audit_eaef/e2_bound.py:76            live claim         another ticket's
+   code/face_geometry_audit_eaef/out_e1_operand.txt:125    transcript         another ticket's
+   code/face_geometry_audit_eaef/out_e2_bound.txt:8        transcript         another ticket's
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md:67    live claim         another ticket's
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md:75    live claim         another ticket's
+   docs/audit-mg-eaef-the-bound-and-the-exit-code.md:93    live claim         another ticket's
+
+   BY KIND -- the path rule, which decides TREATMENT:
+      live claim               15
+      transcript               3
+      record, pre-run          2
+      records (both kinds)     5
+
+   BY SCOPE -- whose ticket owns the file:
+      another ticket's         20
+
+   THE TWO COLUMNS DO NOT AGREE, AND THAT IS THE WHOLE FINDING.
+   Under SCOPE every one of the 20 is another ticket's -- so
+   `every one a record` is TRUE if `record` means `somebody
+   else's record of what they found`.  Under KIND, 15 of the 20
+   are LIVE CLAIMS -- source and prose -- and the sentence is
+   FALSE.  One word, two populations.
+--------------------------------------------------------------------------
+(iii) THIS INSTRUMENT'S OWN FILES, BY THE SAME RULE
+--------------------------------------------------------------------------
+   A rule that exempts its author is not a rule.  Every file this
+   ticket adds is scored by the same rule as everybody else's.
+
+   sites in code/repair_b2af stating the term          : 1
+      code/repair_b2af/lib_b2af.py:105                        quotes the wide BOUND
+   of those, UNQUALIFIED (i.e. added to the residue) : 0
+
+   residue excluding this ticket's files : 20
+   residue including them                : 20
+--------------------------------------------------------------------------
+(iv) THE CORRECTED SENTENCE -- BOTH LABELS, REPORTED AS TWO
+--------------------------------------------------------------------------
+   THE SENTENCE AS WRITTEN, in dfa263c's summary:
+
+     `20 sites remain unqualified in the tree, every one a record,
+      named individually in r3 (iv).`
+
+   THE SENTENCE WITH THE TWO LABELS SEPARATED:
+
+     20 sites remain unqualified in the tree.
+     By SCOPE -- r3 (iv) -- every one is another ticket's.
+     By KIND -- r3 (iii), the path rule that decides treatment -- 5 are records (3 transcripts, 2 prediction files) and 15 are LIVE CLAIMS.
+
+   the corrected sentence names the KIND rule  : True
+   the corrected sentence names the SCOPE rule : True
+   its counts are the ones measured in (ii)    : True
+
+   and the same two-label statement in this ticket's README : yes
+--------------------------------------------------------------------------
+(v) WHAT CANNOT BE REPAIRED, AND WHY THAT IS A FINDING
+--------------------------------------------------------------------------
+   The sentence is in the COMMIT MESSAGE of dfa263cc.  A commit
+   message is immutable without rewriting history, and rewriting a
+   merged commit to make this ticket's summary come out is a far worse
+   act than the defect it would hide.
+
+   So the finding STANDS, and it is named rather than closed.  Every
+   copy of the sentence is enumerated from the tree, so a copy this
+   script did not remember is still in the population.
+
+   copies of `every one a record` in the tree : 13
+      code/audit_330a/README.md:261                           live claim
+      code/audit_330a/README.md:45                            live claim
+      code/audit_330a/README.md:46                            live claim
+      code/audit_330a/out_s4_term.txt:174                     transcript
+      code/audit_330a/out_s4_term.txt:197                     transcript
+      code/audit_330a/s4_term.py:383                          live claim
+      code/audit_330a/s4_term.py:406                          live claim
+      code/repair_b2af/README.md:114                          live claim
+      code/repair_b2af/lib_b2af.py:17                         live claim
+      code/repair_b2af/t3_term.py:127                         live claim
+      code/repair_b2af/t3_term.py:177                         live claim
+      code/repair_b2af/t3_term.py:230                         live claim
+      docs/audit-mg-330a-the-anchor-and-the-term.md:101       live claim
+   in the commit message of dfa263cc : yes
+--------------------------------------------------------------------------
+PREDICTIONS SCORED
+--------------------------------------------------------------------------
+   P-6a   predicted 20                           measured 20               HIT
+          -- PREDICTIONS.md calls this `the one I am least sure of`.
+   P-6b   predicted (5, 15)                      measured (5, 15)          HIT
+   P-6c   predicted between 2 and 8 more, including my own files measured 0                *** MISS  <- kept as written
+          -- the row reasoned that THIS ticket's prose would state the
+             census unqualified.  It does not, for a reason the row did not
+             see: the residue is scored on `explicit boolean operand`, and
+             the word THIS ticket argues about is `record`.  The
+             prediction ran two different `words under test` together
+             -- one word over two populations, in the prediction for the
+             repair of one word over two populations.  Kept as written.
+   P-6d   predicted (True, True)                 measured (True, True)     HIT
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   F-2 IS ANSWERED BUT NOT CLOSED, and the difference is the point.
+
+   The two labels are now two functions, two columns and two counts,
+   and the corrected sentence reports both.  What cannot be done is
+   edit a merged commit message, so the finding against dfa263c's
+   summary stands -- named, quantified and left standing.  A repair
+   that reported this as closed would be claiming to have changed a
+   sentence it cannot reach.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every grep, file read and scoring this script performs, plus the requirement that the scoring rule be the one mg-2c77 wrote and that it still distinguish more than one label
+FINDINGS: 1, population: every site in the tree stating the term, scored for the qualifier, labelled by KIND and by SCOPE, and the summary sentence of dfa263c scored against both labels wherever that sentence is written
+   FINDING: dfa263c's summary sentence `20 sites remain unqualified in the tree, EVERY ONE A RECORD` reports r3 (iv)'s SCOPE label as r3 (iii)'s KIND label.  Re-derived at this tree the residue is 20 sites -- the same 20, none missed -- and under the repair's OWN path rule 15 of them are LIVE CLAIMS where the sentence says 0.  The sentence is in a COMMIT MESSAGE and cannot be edited; the corrected two-label statement is published in code/repair_b2af/README.md instead, and this finding is left standing rather than closed
+TOTAL BAD: 1
