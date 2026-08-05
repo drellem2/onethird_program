@@ -1,0 +1,100 @@
+==========================================================================
+mg-0ba7 a3  THE GATE AT THE POINT OF SPEND
+==========================================================================
+
+--------------------------------------------------------------------------
+(i) WHO SPENDS A `libe34a` ANCHOR -- REPO-WIDE, BY AST
+--------------------------------------------------------------------------
+   anchors `libe34a` DERIVES (from its own source)           6   [population: module-level assignments whose value calls one of ('first_introducing', 'last_touching', 'nth_touching', '_anchored'); grain: one EXPORTED NAME]
+     LAST_TOUCHING_G1, NTH_TOUCHING_1, PRE_7E58_REV, PRE_REV, REPAIR_REV, REV_7E58
+   keys of `ANCHOR_OF` -- what `gate_spent` will accept      4   [population: the ANCHOR_OF literal in libe34a.py; grain: one NAME]
+     PRE_7E58_REV, PRE_REV, REPAIR_REV, REV_7E58
+   derived anchors `gate_spent` CANNOT gate                  2   [population: the derived names above minus the ANCHOR_OF keys; grain: one NAME]
+     LAST_TOUCHING_G1, NTH_TOUCHING_1
+   files that SPEND a libe34a anchor                         8   [population: every parseable .py under code/ that resolves an anchor name through a libe34a import; grain: one FILE]
+
+   file                                           spends  gated   verdict
+   code/audit_2c77/q4_prerepair.py                2       0       *** UNGATED
+   code/branching_audit_e34a/k1_prerepair.py      5       0       covered (whole ANCHOR_DRIFT)
+   code/branching_audit_e34a/k2_five.py           1       1       covered (gate_spent)
+   code/branching_audit_e34a/k4_cancel.py         1       1       covered (gate_spent)
+   code/branching_audit_e34a/selftest_e34a.py     5       0       covered (whole ANCHOR_DRIFT)
+   code/repair_8d5e/r1_anchor.py                  6       0       covered (whole ANCHOR_DRIFT)
+   code/repair_8d5e/r2_kernel_half.py             2       0       *** UNGATED
+   code/repair_8d5e/r4_self.py                    6       0       *** UNGATED
+
+   UNGATED spenders INSIDE code/branching_audit_e34a/        0   [population: the spender files above; grain: one FILE]
+   UNGATED spenders OUTSIDE it                               3   [population: the spender files above; grain: one FILE]
+     code/audit_2c77/q4_prerepair.py   spends PRE_REV, REPAIR_REV
+     code/repair_8d5e/r2_kernel_half.py   spends PRE_REV, REPAIR_REV
+     code/repair_8d5e/r4_self.py   spends LAST_TOUCHING_G1, NTH_TOUCHING_1, PRE_7E58_REV, PRE_REV, REPAIR_REV, REV_7E58
+
+   `t2_gate.py` walks `code/branching_audit_e34a/` and requires each script
+   there to gate every anchor it names.  Applied to that directory the rule
+   is satisfied.  It is a rule whose POPULATION IS A DIRECTORY, and the
+   scripts above are outside it, spend the same four anchors from the same
+   module, and would run to a clean exit on a re-pointed anchor -- which is
+   the sentence F-1 was written to retire.
+
+   *** FINDING: 3 script(s) in 2 directories outside code/branching_audit_e34a/ spend a libe34a anchor with no gate; t2's structural rule does not look at them because its population is a directory
+
+--------------------------------------------------------------------------
+(ii) THE TWO ANCHORS THAT CANNOT BE GATED BY NAME
+--------------------------------------------------------------------------
+
+   `gate_spent` treats an unknown name as a SELF-ERROR rather than a pass.
+   That is right, and mg-b2af built it deliberately.  It also means the set
+   of gateable anchors is exactly `ANCHOR_OF`'s keys -- and `libe34a` derives
+   two more, both spent in `k1_prerepair.py`.
+
+   name asked of gate_spent result     note
+   LAST_TOUCHING_G1       SELF-ERROR not a key of ANCHOR_OF
+   NTH_TOUCHING_1         SELF-ERROR not a key of ANCHOR_OF
+   PRE_7E58_REV           pass       
+   PRE_REV                pass       
+   REPAIR_REV             pass       
+   REV_7E58               pass       
+   *** FINDING: LAST_TOUCHING_G1 and NTH_TOUCHING_1 are anchors libe34a derives and spends, and asking gate_spent about either produces a SELF-ERROR: the safety feature is right about the name-list and wrong about the anchor.  A consumer of LAST_TOUCHING_G1 has no way to gate it at the point of spend
+
+   AND THE ASYMMETRY IS THE POINT.  `LAST_TOUCHING_G1` is the anchor that
+   ALREADY RE-POINTED ONCE -- libe34a's own docstring records mg-69d1's
+   sentence edit moving it 4755d02 -> d01ff32.  The one anchor in this
+   module with a demonstrated history of drifting is the one the drift gate
+   will not accept the name of.
+
+
+--------------------------------------------------------------------------
+(iii) THE DRIFT, CONSTRUCTED INDEPENDENTLY, EACH CONSUMER RUN
+--------------------------------------------------------------------------
+
+   mg-b2af constructed its drift by editing a pin to name a different real
+   revision.  So does this, with revisions chosen here: `REPAIR_REV_PIN` and
+   `REV_7E58_PIN` are both re-pointed at mg-330a's own two commits, which
+   exist, are ancestors of HEAD, and are not the revisions mg-b2af used.
+   The DERIVATIONS are untouched, so only the pin-versus-derivation
+   comparison moves.
+
+   script           anchor spent   clean clone              under drift              spend-gate rows
+   k2_five.py       PRE_7E58_REV   exit 0, TOTAL BAD: 0   exit 1, TOTAL BAD: 1   1
+   k4_cancel.py     REPAIR_REV     exit 1, TOTAL BAD: 2   exit 1, TOTAL BAD: 3   1
+
+   BOTH CONSUMERS GO RED AT THE POINT OF SPEND, AND THE ROWS THEY PRINT NAME
+   THE ANCHOR THEY SPEND.  F-1's repair holds, under a drift it did not
+   choose, at a tree it was not measured at.  That is the part of this
+   ticket that CONFIRMS.
+
+
+--------------------------------------------------------------------------
+(iv) PREDICTIONS SCORED
+--------------------------------------------------------------------------
+   P-5    predicted '1..6 external ungated spenders' measured 3                        HIT
+   P-6    predicted 'LAST_TOUCHING_G1 -> SELF-ERROR' measured 'SELF-ERROR'             HIT
+   P-7    predicted 'k4 2->3 and k2 0->1'    measured 'k2_five.py 0 -> 1; k4_cancel.py 2 -> 3' HIT
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: a3's own AST resolution and its constructed drift
+FINDINGS: 2, population: every script in the repository that spends a libe34a anchor
+   FINDING: 3 script(s) in 2 directories outside code/branching_audit_e34a/ spend a libe34a anchor with no gate; t2's structural rule does not look at them because its population is a directory
+   FINDING: LAST_TOUCHING_G1 and NTH_TOUCHING_1 are anchors libe34a derives and spends, and asking gate_spent about either produces a SELF-ERROR: the safety feature is right about the name-list and wrong about the anchor.  A consumer of LAST_TOUCHING_G1 has no way to gate it at the point of spend
+NOTES: 0 (not scored)
+TOTAL BAD: 2

@@ -1,0 +1,113 @@
+==========================================================================
+mg-0ba7 selftest  ASSERTIONS ON CONSTRUCTED INPUTS
+==========================================================================
+
+--------------------------------------------------------------------------
+(1) THE TAXONOMY, ONE CONSTRUCTED CALL PER CLASS
+--------------------------------------------------------------------------
+   ok    kind_of(['log', '-1', '--format=%H', '--', 'a.py']) == NEWEST (got NEWEST)
+   ok    kind_of(['log', '-1', '--format=%H']) == NEWEST-norestrict (got NEWEST-norestrict)
+   ok    kind_of(['log', '--format=%H', '--', 'a.py']) == INDEXED (got INDEXED)
+   ok    kind_of(['log', '--format=%H']) == UNRESTRICTED (got UNRESTRICTED)
+   ok    kind_of(['log', '--reverse', '--format=%H', '--', 'a.py']) == OLDEST (got OLDEST)
+   ok    kind_of(['log', '-S', 'marker', '--format=%H', '--', 'a.py']) == PICKAXE (got PICKAXE)
+   ok    kind_of(['log', '-G', 're', '--format=%H', '--', 'a.py']) == PICKAXE (got PICKAXE)
+   ok    kind_of(['log', '--format=%H', 'a..b', '--', 'a.py']) == RANGE (got RANGE)
+   ok    a call with no `log` argument produces no revision row
+   ok    a `log` with no hash format produces no revision row
+   ok    a helper named `mylog` is matched by the endswith rule, as mg-330a's is
+
+--------------------------------------------------------------------------
+(2) THE ONE LETTER, DEMONSTRATED ON A CONSTRUCTED CALL
+--------------------------------------------------------------------------
+   ok    mg-330a's classifier sees the CAPITAL form and calls it NEWEST
+   ok    mg-330a's classifier does NOT see the LOWERCASE form at all (got None)
+   ok    mine sees the capital form as NEWEST
+   ok    mine sees the lowercase form as NEWEST too
+   ok    the copy of mg-330a's format tuple in lib_0ba7 still matches its source
+   ok    and it matches character for character AT RUN TIME, so a1's `why` cannot go stale silently
+   ok    mg-330a's format set is a PROPER SUBSET of mine; the widening is one-way
+
+--------------------------------------------------------------------------
+(3) STRING EXTRACTION -- NESTED CALLS ARE NOT ATTRIBUTED OUTWARD
+--------------------------------------------------------------------------
+   ok    a string inside a NESTED call is not a direct argument of the outer one
+   ok    so the nested `--reverse` does not turn the outer call into OLDEST (got INDEXED)
+   ok    a LIST argument is flattened -- subprocess-style argv is seen
+   ok    a TUPLE argument is flattened too
+
+--------------------------------------------------------------------------
+(4) THE TAINT TEST -- THE DEFECT THIS INSTRUMENT HAD
+--------------------------------------------------------------------------
+   ok    a function that ASSIGNS the anchor and returns it is a wrapper
+   ok    a function that receives it through a FOR TARGET is a wrapper too -- this is the assertion the first form of _tainted_return failed
+   ok    a function that PRINTS it and returns 0 is not a wrapper: its callers obtain no anchor
+   ok    a function with no history call at all is not a seed
+   ok    a walrus binding is propagated as well
+
+--------------------------------------------------------------------------
+(5) IMPORT RESOLUTION -- THE NAME COLLISION IS THE POINT
+--------------------------------------------------------------------------
+   ok    `from libA import last_touching` binds to libA, not to libB
+   ok    `import libB as B` binds the alias to libB
+   ok    a BARE NAME match would have conflated the two; the binding does not
+   ok    neither constructed file uses `import *`
+   ok    `import *` is REPORTED, so a file whose bindings cannot be enumerated is named rather than silently resolved
+   ok    a module basename that is ambiguous across directories resolves to None rather than to whichever came first
+
+--------------------------------------------------------------------------
+(6) THE TWO LABELS
+--------------------------------------------------------------------------
+   ok    a transcript is a RECORD by KIND
+   ok    a prediction file is a RECORD by KIND
+   ok    a script is a LIVE CLAIM by KIND
+   ok    SCOPE is MINE inside my own directory
+   ok    SCOPE is another ticket's outside it
+   ok    one path, two labels, two different answers -- which is F-2
+
+--------------------------------------------------------------------------
+(7) `gate_spent`: AN UNKNOWN NAME IS A SELF-ERROR
+--------------------------------------------------------------------------
+   ok    an unknown name is a SELF-ERROR and returns False, not a silent pass
+   ok    a known, undrifted anchor gates silently and returns True
+   ok    `LAST_TOUCHING_G1` -- an anchor libe34a DERIVES -- is a self-error too, which is a3 (ii)'s finding reproduced on a call written here
+
+--------------------------------------------------------------------------
+(8) PATCH-ID: THE IDENTITY THAT SURVIVES A REBASE
+--------------------------------------------------------------------------
+   Ancestry gives a FALSE NEGATIVE after a rebase.  These two
+   assertions are the reason every content claim in this deliverable is
+   made with `git patch-id --stable` and not with `merge-base --is-ancestor`.
+
+   ok    patch_id(HEAD) returns a 40-character id (got 40 chars)
+   ok    a commit has the same content as itself
+   ok    and not the same content as its parent
+   ok    a cherry-pick produces a DIFFERENT sha
+   ok    and the SAME patch-id -- which is how a rebased commit is recognised on main
+
+--------------------------------------------------------------------------
+(9) THE REPORT REFUSES A BARE TOTAL
+--------------------------------------------------------------------------
+   labelled                                                  1   [population: a population; grain: a grain]
+   ok    a labelled total books no self-error
+   *** SELF-ERROR: a count was printed without a population or a grain: 'bare'
+   bare                                                      1   [population: ; grain: ]
+   ok    a total with no population and no grain books a SELF-ERROR
+
+--------------------------------------------------------------------------
+(10) THE SCORER -- THE SECOND DEFECT THIS INSTRUMENT HAD
+--------------------------------------------------------------------------
+   T      predicted 5                        measured 5                        HIT
+   ok    an equality row scores HIT
+   T      predicted '1..9'                   measured 5                        *** MISS
+   ok    a RANGE row with no `hit=` scores MISS -- this is the defect, kept visible: `==` cannot express `1..9`
+   T      predicted '1..9'                   measured 5                        HIT
+   ok    and the caller stating the comparison scores it correctly
+
+--------------------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------------------
+   assertions run    : 52
+   assertions failed : 0
+   population        : the constructed inputs written in this file
+   grain             : one ASSERTION
