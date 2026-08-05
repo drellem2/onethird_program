@@ -1,0 +1,11 @@
+== mg-fcb2 SELFTEST: this audit's instruments, before they are used ==
+  [PASS] S1a exact charpoly agrees with a Leibniz cofactor expansion over polynomials on 240/240 random symmetric integer matrices with m <= 5, entries in [-4, 4]
+  [PASS] S1b ... and on 42/42 of THIS BATTERY'S OWN L^rel matrices with |L(P)| <= 6, not just random ones
+  [PASS] S1c the Hadamard coefficient bound really bounds every coefficient of the true polynomial on 60/60 matrices (a lift under a modulus smaller than 2*bound is how this instrument would fail SILENTLY)
+  [PASS] S2a the pruned search over S_m agrees with BRUTE FORCE over all m! permutations x 2^m sign vectors on 300/300 random pairs with m <= 4 (179 of them built to be conjugates)
+  [PASS] S2b every witness it returned reconstructs to the target ENTRY BY ENTRY (187/187), so a bug in the search cannot return a false gauge
+  [PASS] S2c positive control on the search: a genuine signed-permutation conjugate is found on 120/120; negative control: A with one DIAGONAL entry moved by 1 is rejected on 120/120
+  [PASS] S3 a conjugate pair has EQUAL exact characteristic polynomials on 200/200 constructed pairs (0 violations) -- the identity that makes 'spectrally separated' and 'gauge' mutually exclusive, and the reason a contradiction between them would be a BUG REPORT and not a finding about the repair
+  [PASS] S4 with the node budget set to 3 the search returns the sentinel 'BUDGET' rather than None, so an exhausted search can never be read as a proof that no witness exists (got 'BUDGET')
+
+selftest_fcb2: 8 checks, 0 refuted; 0 predictions scored, 0 off prediction.
