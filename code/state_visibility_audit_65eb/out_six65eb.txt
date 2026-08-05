@@ -1,0 +1,221 @@
+====================================================================================================
+mg-65eb — THE SIX, RE-CLASSIFIED FROM SCRATCH
+====================================================================================================
+  before revision   bd24efc   (where the defect must still be present)
+  renderers         marked + markdown-it present
+  constructions     applied in THROWAWAY WORKTREES; the working tree is never
+                    opened for writing by this program
+
+====================================================================================================
+A.  THE ENUMERATION — IS THIS THE SAME SIX?  BY SITE, NOT BY COUNT
+====================================================================================================
+  mg-a74f's SIX, read out of claims_a74f.py with `ast` (not transcribed): 6 rows
+      claim 1   code/state_landing_control_2da3/delta_control.py:233     FALSE
+                  the guards-only decomposition lives in `code/state_delegation_repair_0049/guards_only_00
+      claim 2   code/state_landing_control_2da3/delta_control.py:234     FALSE
+                  that decomposition runs against "all six rows"
+      claim 3   code/state_landing_control_2da3/delta_control.py:798     FALSE
+                  "the two tables cannot drift apart quietly in EITHER direction"
+      claim 4   code/state_landing_control_2da3/delta_control.py:346     FALSE
+                  exit 1 is "a region ... NO LONGER PRESENTED TO A READER"
+      claim 5   code/state_delegation_repair_0049/README.md:105-106      FALSE
+                  mg-218d's and mg-5644's batteries are "re-run in section 7 of run_all.sh"
+      claim 6   code/state_delegation_repair_0049/render0049.py:11       TRUE OF A DIFFERENT PROPERTY
+                  R5: "`<details>` at the top SUPPRESSES NOTHING: every cited section is still on the page
+
+  mg-16eb's claims16eb.py, run UNMODIFIED at bd24efc: 6 BROKEN of 17 rows (exit 0)
+      parse rule: '^  \\[BROKEN\\] (.+)\\n {11}(.+)$'
+      delta_control.py:233
+          the guards-only decomposition lives in `code/state_delegation_repair_0049/guards_only_00
+      delta_control.py:233
+          that decomposition runs against "all six rows"
+      delta_control.py:757 (the DELEGATED_PRESENTATION comment)
+          "the two tables cannot drift apart quietly in EITHER direction"
+      delta_control.py:346 (the EXIT CODES table)
+          exit 1 is "a region ... NO LONGER PRESENTED TO A READER"; exit 2 is drift, "re-baseline 
+      code/state_delegation_repair_0049/README.md:105-106
+          mg-218d's and mg-5644's batteries are "re-run in section 7 of run_all.sh"
+      code/state_delegation_repair_0049/render0049.py:11 and out_render.txt
+          R5: "`<details>` at the top SUPPRESSES NOTHING: every cited section is still on the page
+
+  THE JOIN IS ON THE CLAIM'S OWN WORDS, NOT ON ITS SITE.  mg-16eb cites
+  `delta_control.py:757` and mg-a74f cites `delta_control.py:798` for the same
+  sentence: the file grew by 41 lines between the two revisions.  A line number
+  is a fact about a revision and these two enumerations are written at
+  different ones, so joining on the site reports six mismatches where there
+  are none.  This audit's first draft did exactly that and is corrected here,
+  not quietly — it is the same defect class the whole arc is about.
+
+      claim 1  code/state_landing_control_2da3/delta_control.py:233 -> mg-16eb delta_control.py:233
+      claim 2  code/state_landing_control_2da3/delta_control.py:234 -> mg-16eb delta_control.py:233
+      claim 3  code/state_landing_control_2da3/delta_control.py:798 -> mg-16eb delta_control.py:757 (the DELEGATED_PR
+      claim 4  code/state_landing_control_2da3/delta_control.py:346 -> mg-16eb delta_control.py:346 (the EXIT CODES t
+      claim 5  code/state_delegation_repair_0049/README.md:105-106  -> mg-16eb code/state_delegation_repair_0049/READ
+      claim 6  code/state_delegation_repair_0049/render0049.py:11   -> mg-16eb code/state_delegation_repair_0049/rend
+
+  in mg-16eb's six and NOT enumerated by mg-a74f : none
+  enumerated by mg-a74f and NOT in mg-16eb's six : none
+  >>> ENUMERATION COMPLETE — 6 declared, 6 reported, 6 joined
+
+====================================================================================================
+B.  THE ENUMERATOR'S OWN VERDICTS ARE PINNED — AND THAT IS WHY THE REPAIR
+    CANNOT BE SCORED BY THE INSTRUMENT THAT FILED THE CHARGE
+====================================================================================================
+  claims16eb.py has 16 claim() call SITES and printed 17 rows
+  on the repaired tree — the difference is guard branches that run only when
+  an anchor has rotted.  For each site, is the `ok` argument a COMPUTED
+  EXPRESSION or a LITERAL?  Read with `ast`:
+      claims16eb.py:72    delta_control.py                                     LITERAL False   (GUARD BRANCH — runs only if an anchor rotted)
+      claims16eb.py:77    delta_control.py:233                                 computed: exists   (GUARD BRANCH — runs only if an anchor rotted)
+      claims16eb.py:86    delta_control.py:233                                 computed: count == {6: 'six', 9: 'nine'}.get(pop, str(pop)   (GUARD BRANCH — runs only if an anchor rotted)
+      claims16eb.py:94    delta_control.py:757 (the DELEGATED_PRESENTATION com LITERAL False
+      claims16eb.py:113   delta_control.py:748 (the DELEGATED_PRESENTATION com computed: all((p.startswith('no block (the span opens on a
+      claims16eb.py:138   delta_control.py:753                                 computed: ok
+      claims16eb.py:142   delta_control.py:346 (the EXIT CODES table)          LITERAL False
+      claims16eb.py:156   presentation.py:24                                   LITERAL True
+      claims16eb.py:171   COVERAGE.md:276                                      computed: 'all nine rows' in cov and pop == 9
+      claims16eb.py:174   COVERAGE.md:276-278                                  computed: figure in split_out
+      claims16eb.py:178   COVERAGE.md:243-244                                  LITERAL True
+      claims16eb.py:194   code/state_delegation_repair_0049/README.md:105-106  LITERAL False
+      claims16eb.py:203   code/state_delegation_repair_0049/README.md:152      computed: '100 comparisons' in rnd
+      claims16eb.py:206   code/state_delegation_repair_0049/README.md:110      computed: '40 of 40' in covout
+      claims16eb.py:208   code/state_delegation_repair_0049/README.md:23       computed: '60 comparisons' in read('code/state_delegation_
+      claims16eb.py:217   code/state_delegation_repair_0049/render0049.py:11 a LITERAL False
+
+  7 of 16 sites carry a constant verdict.  Excluding guard branches, 4 are the constant False ON THE MAIN PATH — a verdict that cannot change.
+  claims16eb.py run UNMODIFIED on the REPAIRED tree: 4 BROKEN of 17 rows (exit 0)
+      delta_control.py:757 (the DELEGATED_PRESENTATION comment)
+      delta_control.py:346 (the EXIT CODES table)
+      code/state_delegation_repair_0049/README.md:105-106
+      code/state_delegation_repair_0049/render0049.py:11 and out_render.txt
+
+  of those, rows whose verdict is the LITERAL False: 4 of 4   ['delta_control.py:757 (the DELEGATED_PRESENTATION comment)', 'delta_control.py:346 (the EXIT CODES table)', 'code/state_delegation_repair_0049/README.md:105-106', 'code/state_delegation_repair_0049/render0049.py:11 and out_render.txt']
+  >>> THE FINDING.  Four of the six were filed by rows that report BROKEN on
+  every tree, repaired or not.  mg-a74f repaired all four and mg-16eb's own
+  claim-checker still calls them broken — not because the repair failed, but
+  because those rows do not measure anything.  `claims16eb.py` is named
+  `THE CLAIMS mg-0049 ADDED, CHECKED` and for 4 of its 17 rows the quantity
+  computed is a constant.  THAT IS THIS AUDIT'S PRIMARY QUESTION, one level
+  up: a row name that is not its measurement, in the auditor rather than in
+  the auditee.
+
+  AND NOTHING RUNS IT.  Files in mg-a74f's directory naming claims16eb.py:
+      (none)
+  mg-a74f re-runs battery16eb.py (its section 5) and reports 6 of 8.  It does
+  not re-run the program that produced the six it is repairing, and if it did
+  it would have to explain a transcript that says four are still broken.
+
+====================================================================================================
+C.  THE SIX, PROBED INDEPENDENTLY, AND THEN CLASSIFIED BY A STATED RULE
+====================================================================================================
+  RULE:  refuted as named AND true of the measured quantity -> TRUE OF A
+         DIFFERENT PROPERTY;  refuted as named alone -> FALSE;  not probeable
+         -> UNSUPPORTED;  otherwise -> TRUE-BUT-UNEVIDENCED.
+  The rule is applied to all six identically and nothing else assigns a bucket.
+
+  CLAIM 1   code/state_landing_control_2da3/delta_control.py:233
+    probe          RESOLVE the reference
+      the sentence names 'code/state_delegation_repair_0049/guards_only_0049.py'; that path at bd24efc: DOES NOT EXIST; the file(s) at bd24efc that actually carry the guards-only decomposition: ['code/state_delegation_repair_0049/mutations_0049.py', 'code/state_delegation_repair_0049/split_0049.py']
+    refuted as named True   true of the measured quantity False   probeable True
+    THIS AUDIT      FALSE
+    mg-a74f         FALSE
+    >>> AGREE
+
+  CLAIM 2   code/state_landing_control_2da3/delta_control.py:234
+    probe          RESOLVE the reference
+      the sentence says 'six'; the population it is about — mutations_0049.ROWS at bd24efc — has 9 rows, which is 'nine'
+    refuted as named True   true of the measured quantity False   probeable True
+    THIS AUDIT      FALSE
+    mg-a74f         FALSE
+    >>> AGREE
+
+  CLAIM 3   code/state_landing_control_2da3/delta_control.py:798
+    probe          CONSTRUCTION at bd24efc
+        D1  a PRESENTATION RECORD for a section nothing delegates or cites       bd24efc  exit 0   QUIET — the control says nothing
+        D1  a PRESENTATION RECORD for a section nothing delegates or cites       HEAD     exit 2   caught
+        D2  a whole TARGET FILE certified here and delegated by nobody           bd24efc  exit 0   QUIET — the control says nothing
+        D2  a whole TARGET FILE certified here and delegated by nobody           HEAD     exit 2   caught
+        D3  a delegated section's record DELETED  (the direction the sentence gets right) bd24efc  exit 2   caught
+        D3  a delegated section's record DELETED  (the direction the sentence gets right) HEAD     exit 2   caught
+        2 of the 2 forbidden drifts are QUIET at bd24efc; the sentence says NEITHER direction can be.
+    refuted as named True   true of the measured quantity False   probeable True
+    THIS AUDIT      FALSE
+    mg-a74f         FALSE
+    >>> AGREE
+
+  CLAIM 4   code/state_landing_control_2da3/delta_control.py:346
+    probe          CONSTRUCTION at bd24efc
+        E1  a fenced code example inside cited section H3      exit 1
+        E2  <details><summary> over the whole document         exit 2
+            marked       E1: 5/5 cited sections SHOWN to a reader     E2: 0/5 SHOWN
+                         E2's reason, from a stdlib HTML parse: a <details> carrying no `open` attribute — a closed disclosure widget
+            markdown-it  E1: 5/5 cited sections SHOWN to a reader     E2: 0/5 SHOWN
+                         E2's reason, from a stdlib HTML parse: a <details> carrying no `open` attribute — a closed disclosure widget
+        direction 1 refuted (exit 1, and every region SHOWN):      True
+        direction 2 refuted (nothing shown, and the exit is not 1): True
+    refuted as named True   true of the measured quantity False   probeable True
+    THIS AUDIT      FALSE
+    mg-a74f         FALSE
+    >>> AGREE
+
+  CLAIM 5   code/state_delegation_repair_0049/README.md:105-106
+    probe          RESOLVE the reference
+          section 0  THE TWO PREDECESSOR AUDIT DIRECTORIES ARE UNMODIFIED — pro ['D7522=$(mktemp)', 'trap \'rm -f "$D7522"\' EXIT', 'for pair in "a4aeeb9 code/state_layer_audit_218d" "3a80d99 code/state_delegation_audit_5644"; do', 'base=${pair%% *}; dir=${pair#* }', 'git diff "$base..HEAD" -- "$dir" > "$D7522" || {', 'echo "    git diff $base..HEAD -- $dir/ FAILED"; exit 1; }', 'n=$(( $(wc -c < "$D7522") ))', 'echo "    git diff $base..HEAD -- $dir/   ->   $n bytes of diff"', 'done']
+          section 1  delta_control.py — the repaired control on the clean worki ['python3 code/state_landing_control_2da3/delta_control.py']
+          section 2  presentation.py — the model's own declared subset, incl. t ['python3 code/state_landing_control_2da3/presentation.py']
+          section 3  negative_control.py — the control can still fail, on all t ['python3 code/state_landing_control_2da3/negative_control.py']
+          section 4  battery_0049.py — NINE mutations on the delegated surface, ['python3 code/state_delegation_repair_0049/battery_0049.py']
+          section 5  split_0049.py — WHICH MECHANISM catches which row: the gua ['python3 code/state_delegation_repair_0049/split_0049.py']
+          section 6  render0049.py — this repair's five NEW claims against two  ['python3 code/state_delegation_repair_0049/render0049.py || echo "(section 6 exited $?)"']
+          section 7  coverage218d.py — COVERAGE.md checked against the code, no ['python3 code/state_layer_audit_218d/coverage218d.py']
+          section 8  mg-5644's OWN battery, re-run UNMODIFIED — the audit that  ['sh code/state_delegation_audit_5644/run_all.sh']
+          2 README rows make the claim; the section number(s) they assert: [7]
+          section(s) whose COMMAND re-runs mg-5644's own battery: [8]
+          mg-5644's run_all.sh section(s) that run mg-218d's battery (not its coverage checker): [5]
+          so both are re-run in section 8, and section 7 is 'coverage218d.py — COVERAGE.md checked against the co'
+    refuted as named True   true of the measured quantity False   probeable True
+    THIS AUDIT      FALSE
+    mg-a74f         FALSE
+    >>> AGREE
+
+  CLAIM 6   code/state_delegation_repair_0049/render0049.py:11
+    probe          CONSTRUCTION, two renderers
+        marked       bytes in the rendered page 5/5    SHOWN to a reader 0/5
+                     because: a <details> carrying no `open` attribute — a closed disclosure widget
+        markdown-it  bytes in the rendered page 5/5    SHOWN to a reader 0/5
+                     because: a <details> carrying no `open` attribute — a closed disclosure widget
+        `SUPPRESSES NOTHING` (about a reader):     REFUTED on both engines
+        `still on the page` (about the bytes):     TRUE on both engines
+    refuted as named True   true of the measured quantity True   probeable True
+    THIS AUDIT      TRUE OF A DIFFERENT PROPERTY
+    mg-a74f         TRUE OF A DIFFERENT PROPERTY
+    >>> AGREE
+
+====================================================================================================
+D.  THE CLASSIFICATION, TALLIED, AND THE DOWNGRADE QUESTION ANSWERED
+====================================================================================================
+    5  FALSE
+    1  TRUE OF A DIFFERENT PROPERTY
+    0  UNSUPPORTED
+    0  TRUE-BUT-UNEVIDENCED
+
+  population: the 6 claims mg-a74f enumerates, each probed above.
+  disagreements with mg-a74f's classification : 0 
+  DOWNGRADES (softer bucket than the evidence) : 0 
+
+  The specific hazard the brief names — a FALSE claim parked in
+  'unsupported' — is ABSENT, and the reason is worth stating rather than
+  leaving as an absence: BOTH SOFT BUCKETS ARE EMPTY.  There is nowhere
+  to downgrade to.  Every one of the six was refutable by resolving a
+  reference or by building a tree, and this audit did one or the other
+  for all six rather than reading mg-a74f's label.
+
+  The one row where the classification could have gone wrong is claim 6,
+  and it is the row that carries a different label from the other five.
+  Its two conjuncts come apart under section C's construction exactly as
+  mg-a74f says: the bytes are on the page and the reader is shown none of
+  them.  TRUE OF A DIFFERENT PROPERTY is the right bucket, and claim 4 —
+  refuted in BOTH directions, so no reading of it survives — is correctly
+  NOT in that bucket.  That distinction is the whole of what this section
+  was asked to check.
+====================================================================================================
