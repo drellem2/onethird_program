@@ -1,0 +1,948 @@
+### 0. THE AUDITOR'S DIRECTORY IS UNMODIFIED — proof, not assertion
+###    (mg-16eb wrote the battery this repair is scored on; if this repair had
+###     edited it, section 5 would be worthless)
+    (empty above = 0 bytes of diff)
+
+### 1. delta_control.py — the repaired control on the clean working tree (expect 0)
+mg-2da3 — working-tree control for b68db5d's delta
+           (mg-7870: certified by CONTENT DIGEST — are these the certified bytes?)
+           (mg-4acd: and by PRESENTATION RECORD — is a reader shown them?)
+certified side  : the WORKING TREE (STATE.md, docs/state-history/README.md)
+baseline side   : b68db5d^  — used ONLY as the BEFORE of a measured delta
+
+STATE.md in the working tree: 186710 bytes, 183508 characters, 386 lines
+                             62 table rows, 210 cells (the population every whole-file tally below is over)
+
+0. THE NORMALISATION N, CHECKED AGAINST THE RULE THIS FILE PUBLISHES
+   Every digest below is taken under N.  mg-218d widened N from .strip(EDGE) to
+   .strip() and this control exited 0, because on this material the two agree —
+   so the rule was published in three documents and read by nothing.  These are
+   the published sentences as behavioural probes.  They do NOT certify this
+   instrument; nothing inside a file can.  They stop the code from drifting
+   away from its own stated rule for free.
+  [pass] N: space/tab/CR/LF are stripped from the two ends
+  [pass] N: U+00A0 at an end is NOT whitespace to this rule (str.strip() eats it)
+  [pass] N: U+2028 at an end is NOT whitespace to this rule (str.strip() eats it)
+  [pass] N: nothing INTERIOR is touched
+
+1. THE ROW b68db5d EDITED, located by attempt id (not by line number)
+  [pass] exactly one ledger row keys to mg-276d in the working tree
+         found 1
+  [pass] it is a three-column row
+         columns: 3
+         at line :135 in this tree (observed, not asserted — the check above is key-based)
+
+  [pass] the same key locates exactly one row at b68db5d^
+         found 1
+2. CERTIFIED REGION DIGESTS — sha256 of N(region), N = strip ASCII space/tab/
+   CR/LF from the two ends and nothing else.  This is what certifies the delta;
+   11 regions, all located by content, all printed in full.
+  [pass] cell.tree — row :135's content cell, WORKING TREE
+         STATE.md:135; 7876 characters, 8010 bytes after N
+         certified sha256 b53ad402349d531fb8d18893ca55c380517ed3b809bfc0d4aeb0c41b795ccf87
+         measured  sha256 b53ad402349d531fb8d18893ca55c380517ed3b809bfc0d4aeb0c41b795ccf87
+  [pass] cell.base — row :135's content cell at b68db5d^
+         b68db5d^:STATE.md:135; 7703 characters, 7835 bytes after N
+         certified sha256 8316d1b578e497c80c34820e9ae25057edb75faf2ec1bcf8fe67dd667f341fcc
+         measured  sha256 8316d1b578e497c80c34820e9ae25057edb75faf2ec1bcf8fe67dd667f341fcc
+  [pass] readme.F2 — the F2 correction block
+         docs/state-history/README.md:15-44; 2306 characters, 2337 bytes after N
+         certified sha256 ad9143cc402c797a600166968d7fbc4d1dc9423f03f00d373dfc026004020b06
+         measured  sha256 ad9143cc402c797a600166968d7fbc4d1dc9423f03f00d373dfc026004020b06
+  [pass] readme.F1 — the F1 correction block
+         docs/state-history/README.md:406-425; 1643 characters, 1671 bytes after N
+         certified sha256 f81e2cdc63bd0fbcc2790f2878959ac4aab35c54ce9690fdec84ab7e0dc51908
+         measured  sha256 f81e2cdc63bd0fbcc2790f2878959ac4aab35c54ce9690fdec84ab7e0dc51908
+  [pass] readme.B1 — the B1 attribution correction
+         docs/state-history/README.md:96-102; 565 characters, 570 bytes after N
+         certified sha256 0a82cf6e268e3c14feed39dd9b0526f30a48bec0dec092c2ed25a1eb62564991
+         measured  sha256 0a82cf6e268e3c14feed39dd9b0526f30a48bec0dec092c2ed25a1eb62564991
+  [pass] readme.B1.A3 — the B1 bullet's A3 ancestry correction
+         docs/state-history/README.md:104-111; 719 characters, 723 bytes after N
+         certified sha256 3105129a342e1b68b6d229e6adb223f2a33044dd612d18b72490dfb19dcedb51
+         measured  sha256 3105129a342e1b68b6d229e6adb223f2a33044dd612d18b72490dfb19dcedb51
+  [pass] readme.index — the index note carrying the moved cell figure
+         docs/state-history/README.md:138-141; 310 characters, 310 bytes after N
+         certified sha256 a1e051c6f2bfa83f3be63870b5a6b80c41bce10e96069695a2999b3681570acc
+         measured  sha256 a1e051c6f2bfa83f3be63870b5a6b80c41bce10e96069695a2999b3681570acc
+  [pass] readme.A1 — the A1 correction block (b68db5d's headline sentence)
+         docs/state-history/README.md:187-227; 3060 characters, 3080 bytes after N
+         certified sha256 edd94cc24bf1b6f0a78b1c311a974e986f84875c54a102b8c9cae9452f9b8468
+         measured  sha256 edd94cc24bf1b6f0a78b1c311a974e986f84875c54a102b8c9cae9452f9b8468
+  [pass] readme.A1.7870 — the mg-2216 / mg-7870 correction to the A1 block
+         docs/state-history/README.md:229-264; 2736 characters, 2754 bytes after N
+         certified sha256 59ab8f5068742edb7e67ae0efd060d0eeb09f3174d8789df29ac529304620bd2
+         measured  sha256 59ab8f5068742edb7e67ae0efd060d0eeb09f3174d8789df29ac529304620bd2
+  [pass] readme.A1.4acd — the mg-babf / mg-4acd correction to the A1 block
+         docs/state-history/README.md:266-313; 3695 characters, 3711 bytes after N
+         certified sha256 779702c03697be89bfd9c40ffc483e78aec834a6d3eb58989ac60399aef45c11
+         measured  sha256 779702c03697be89bfd9c40ffc483e78aec834a6d3eb58989ac60399aef45c11
+  [pass] readme.A1.bee1 — the mg-218d / mg-bee1 correction to the A1 block
+         docs/state-history/README.md:315-378; 5040 characters, 5072 bytes after N
+         certified sha256 30f205b22f3a4cbf0121a98e20c9817d5f3bcad51d1ca6f8f0c3dc2739a72be4
+         measured  sha256 30f205b22f3a4cbf0121a98e20c9817d5f3bcad51d1ca6f8f0c3dc2739a72be4
+
+2b. CERTIFIED PRESENTATION RECORDS — the content digest above says these are the
+    certified BYTES; these say a reader is still SHOWN them, in the same place.
+    Four fields, printed in full, hashed in the order printed.  A region that is
+    no longer presented at all is a FAIL; one that moved is a MOVED.
+  [pass] cell.tree — row :135's content cell, WORKING TREE: presentation
+         state      gfm-table-row
+         heading    1/3–2/3 Program — State of the Wall > Attempt index (so nothing is re-walked)
+         position   block 1 of 3 in its section
+         columns    3 presented
+         presented  a7278bf8ee72a53e4fd582942a1157bc04f6788663e7d2d3c017bd24b93c224b
+         certified record sha256 a621c910868ba3bc254216e983fb8cb84da6007d94a01f24e2f71c2a60ecba0e
+         measured  record sha256 a621c910868ba3bc254216e983fb8cb84da6007d94a01f24e2f71c2a60ecba0e
+  [pass] cell.base — row :135's content cell at b68db5d^: presentation
+         state      gfm-table-row
+         heading    1/3–2/3 Program — State of the Wall > Attempt index (so nothing is re-walked)
+         position   block 1 of 3 in its section
+         columns    3 presented
+         presented  5c55f1feab6d8d967a966bd655fe906755fc21ca648347969629eeffdd200bd2
+         certified record sha256 14e4171a94061a951b0e4b653d11f42857ee328b6fd6e13d870727faf4fe7b77
+         measured  record sha256 14e4171a94061a951b0e4b653d11f42857ee328b6fd6e13d870727faf4fe7b77
+  [pass] readme.F2 — the F2 correction block: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger
+         position   block 3 of 3 in its section
+         presented  d824eb5ba7ef062dd935dfd5f24f8d0798681f2f71e9def5b2e913394b55ac84
+         certified record sha256 dbe341f97e051849c23746029854c43dcac35812f5332f8f5fb39b3e36e6565d
+         measured  record sha256 dbe341f97e051849c23746029854c43dcac35812f5332f8f5fb39b3e36e6565d
+  [pass] readme.F1 — the F1 correction block: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > The three A3 sites (`a3_reading_path.py`)
+         position   block 2 of 2 in its section
+         presented  ffa3d1b6b56d182c59fbc28ecc0c36b4b5d2e9f0afb05e870ad832585c7721b5
+         certified record sha256 52edb2c400a888536146c716dabb14837fa14f75dad026b80f797ff1c708c63b
+         measured  record sha256 52edb2c400a888536146c716dabb14837fa14f75dad026b80f797ff1c708c63b
+  [pass] readme.B1 — the B1 attribution correction: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What was NOT touched
+         position   block 2 of 3 in its section
+         presented  0a82cf6e268e3c14feed39dd9b0526f30a48bec0dec092c2ed25a1eb62564991
+         certified record sha256 7d1a3e1daaee38e0622e4133a2c475828d4928d2a42b30cde51e58cfc6f3fa5d
+         measured  record sha256 7d1a3e1daaee38e0622e4133a2c475828d4928d2a42b30cde51e58cfc6f3fa5d
+  [pass] readme.B1.A3 — the B1 bullet's A3 ancestry correction: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What was NOT touched
+         position   block 3 of 3 in its section
+         presented  436636ae9cd726ad367c2f1f24026ef5c40c86bb771268b6217f02e85f5f5ca2
+         certified record sha256 245cc23b4b24a718a7fe220dff71937878496f5546c6e11dce99481dc3ac95b9
+         measured  record sha256 245cc23b4b24a718a7fe220dff71937878496f5546c6e11dce99481dc3ac95b9
+  [pass] readme.index — the index note carrying the moved cell figure: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > The index
+         position   block 2 of 4 in its section
+         presented  a1e051c6f2bfa83f3be63870b5a6b80c41bce10e96069695a2999b3681570acc
+         certified record sha256 5a73c86c64b2ec773e73dff12ee0f49f8477f7397ebe901f5049d364c907d4df
+         measured  record sha256 5a73c86c64b2ec773e73dff12ee0f49f8477f7397ebe901f5049d364c907d4df
+  [pass] readme.A1 — the A1 correction block (b68db5d's headline sentence): presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
+         position   block 2 of 7 in its section
+         presented  11ce5d7edaeab027da84ea31161f235637a686dd4c1ca46ca4b3ab30796596c0
+         certified record sha256 4a39b45770b65b16e454c815a1122fbe5f256f3ee1bb891ed3aeeda0841575b1
+         measured  record sha256 4a39b45770b65b16e454c815a1122fbe5f256f3ee1bb891ed3aeeda0841575b1
+  [pass] readme.A1.7870 — the mg-2216 / mg-7870 correction to the A1 block: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
+         position   block 3 of 7 in its section
+         presented  37d7cc33fe4e75edcac714fd7f89b6e251008ee450f308303911c193a22b6750
+         certified record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+         measured  record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+  [pass] readme.A1.4acd — the mg-babf / mg-4acd correction to the A1 block: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
+         position   block 4 of 7 in its section
+         presented  101d333d0dc1fc8d7c2c7e6d6405049e0e07f5bb6b78bcf70e201480b7c755cd
+         certified record sha256 5cab7f6bc3c786be33d8745744fd0c3361b5a2af2ca3a3666b0e67c844002350
+         measured  record sha256 5cab7f6bc3c786be33d8745744fd0c3361b5a2af2ca3a3666b0e67c844002350
+  [pass] readme.A1.bee1 — the mg-218d / mg-bee1 correction to the A1 block: presentation
+         state      rendered
+         heading    Per-row histories for `STATE.md`'s ledger > What certifies a change to these files, and what does not
+         position   block 5 of 7 in its section
+         presented  731c0cf0b908f6ddc53ce069031dd73fa58c8f38f30aa89fcfe15603ab1d97a0
+         certified record sha256 df248b6b754bde6f76529d7b925006a3d3494cb63bf2394351bd95f5502275be
+         measured  record sha256 df248b6b754bde6f76529d7b925006a3d3494cb63bf2394351bd95f5502275be
+
+2c. DELEGATED CONTENT — the sections a certified region CITES BY NAME in a file
+    outside the two this instrument reads.  The certified ledger cell is not
+    self-contained: it links into the attempt file and cites its sections by
+    name, so a reader who follows the certified text reads them.  WHAT IS
+    DELEGATED IS WHAT IS CITED — the rule and its bound are in this file's
+    header.  A cited section that is gone is a FAIL; one whose bytes moved is a
+    MOVED; a target cited and not declared, or declared and not cited, is a
+    MOVED, so the delegation surface cannot grow or rot silently.
+         10 certified regions followed (every kind but the b68db5d^ baseline cell, which is a historical pointer)
+  [pass] the delegation surface is exactly what is DECLARED
+         cited by certified regions: ['docs/state-history/attempt-mg-276d.md']
+         declared in DELEGATED: ['docs/state-history/attempt-mg-276d.md']
+  [pass] the PRESENTATION table declares exactly the DELEGATED target files
+         declared in DELEGATED_PRESENTATION: ['docs/state-history/attempt-mg-276d.md']
+         declared in DELEGATED: ['docs/state-history/attempt-mg-276d.md']
+  docs/state-history/attempt-mg-276d.md
+         cited by cell.tree; 5 section(s) cited by name: H1, H2, H3, H4, H5
+  [pass] docs/state-history/attempt-mg-276d.md: the section names cited are the section names declared
+         cited ['H1', 'H2', 'H3', 'H4', 'H5']; declared ['H1', 'H2', 'H3', 'H4', 'H5']
+  [pass] docs/state-history/attempt-mg-276d.md: the sections with a PRESENTATION record are the sections declared
+         records declared ['H1', 'H2', 'H3', 'H4', 'H5']; delegated ['H1', 'H2', 'H3', 'H4', 'H5']
+  [pass] docs/state-history/attempt-mg-276d.md H1
+         lines 18-37; 3473 characters, 3530 bytes after N
+         certified sha256 3c8e966f7412ed8a7d9dd522fce40071283abb555477b3b5071225b8ecffda64
+         measured  sha256 3c8e966f7412ed8a7d9dd522fce40071283abb555477b3b5071225b8ecffda64
+  [pass] docs/state-history/attempt-mg-276d.md H1: presentation
+         state      rendered
+         heading    Attempt index — GREEN · PROVEN, all finite posets (mg-276d): the foundation claims (1)–(3) supply > Corrections, retractions, supersessions and mechanism notes > H1 — the step-4d clause — first of the three A3 sites
+         position   no block (the span opens on an ATX heading, which is a section delimiter and not a block)
+         presented  3c8e966f7412ed8a7d9dd522fce40071283abb555477b3b5071225b8ecffda64
+         certified record sha256 63321891836147afbdd11c9fb3c917693381a3f1c8752411f07d5b29759165f2
+         measured  record sha256 63321891836147afbdd11c9fb3c917693381a3f1c8752411f07d5b29759165f2
+  [pass] docs/state-history/attempt-mg-276d.md H2
+         lines 38-41; 383 characters, 390 bytes after N
+         certified sha256 4413b9e81ea4f590762a36ba0253032a365ee180bd9f98a42ebd73b3bc53b670
+         measured  sha256 4413b9e81ea4f590762a36ba0253032a365ee180bd9f98a42ebd73b3bc53b670
+  [pass] docs/state-history/attempt-mg-276d.md H2: presentation
+         state      rendered
+         heading    Attempt index — GREEN · PROVEN, all finite posets (mg-276d): the foundation claims (1)–(3) supply > Corrections, retractions, supersessions and mechanism notes > H2 — F1, the one over-labelled universal, repaired by an upgrade
+         position   no block (the span opens on an ATX heading, which is a section delimiter and not a block)
+         presented  4413b9e81ea4f590762a36ba0253032a365ee180bd9f98a42ebd73b3bc53b670
+         certified record sha256 b7dffa489a7ca562892e75c51e4e2506cde52dd314b39d6469be3100923b3fcc
+         measured  record sha256 b7dffa489a7ca562892e75c51e4e2506cde52dd314b39d6469be3100923b3fcc
+  [pass] docs/state-history/attempt-mg-276d.md H3
+         lines 42-45; 544 characters, 555 bytes after N
+         certified sha256 cea7a8207b7dedb11eae2d3b7ea9bc75a22e4cd07e9536eb90e35de1d432fc60
+         measured  sha256 cea7a8207b7dedb11eae2d3b7ea9bc75a22e4cd07e9536eb90e35de1d432fc60
+  [pass] docs/state-history/attempt-mg-276d.md H3: presentation
+         state      rendered
+         heading    Attempt index — GREEN · PROVEN, all finite posets (mg-276d): the foundation claims (1)–(3) supply > Corrections, retractions, supersessions and mechanism notes > H3 — the all-+1 invariance theorem, and the repair of its citation
+         position   no block (the span opens on an ATX heading, which is a section delimiter and not a block)
+         presented  cea7a8207b7dedb11eae2d3b7ea9bc75a22e4cd07e9536eb90e35de1d432fc60
+         certified record sha256 2fae29f7da64900f5ec7bd10ffd2199666feb11b65a50279c9adaef5e908747e
+         measured  record sha256 2fae29f7da64900f5ec7bd10ffd2199666feb11b65a50279c9adaef5e908747e
+  [pass] docs/state-history/attempt-mg-276d.md H4
+         lines 46-53; 779 characters, 799 bytes after N
+         certified sha256 14ffec4dd742c4f2867a3079b51166c8f1d40804e64f7ad38f2368310489cd8f
+         measured  sha256 14ffec4dd742c4f2867a3079b51166c8f1d40804e64f7ad38f2368310489cd8f
+  [pass] docs/state-history/attempt-mg-276d.md H4: presentation
+         state      rendered
+         heading    Attempt index — GREEN · PROVEN, all finite posets (mg-276d): the foundation claims (1)–(3) supply > Corrections, retractions, supersessions and mechanism notes > H4 — the relocated coverage gap, the gauge-conjugation mechanism, and the positive control on the control
+         position   no block (the span opens on an ATX heading, which is a section delimiter and not a block)
+         presented  14ffec4dd742c4f2867a3079b51166c8f1d40804e64f7ad38f2368310489cd8f
+         certified record sha256 b57d0a4a3ddf28fad92ceb06885abde591bb86d3309b4f9a7351e015d8b61277
+         measured  record sha256 b57d0a4a3ddf28fad92ceb06885abde591bb86d3309b4f9a7351e015d8b61277
+  [pass] docs/state-history/attempt-mg-276d.md H5
+         lines 54-59; 864 characters, 884 bytes after N
+         certified sha256 4e192bc8bde4fca17021e507e7308fd86a844ae7d54109eb5811e1aeebb4aa6e
+         measured  sha256 4e192bc8bde4fca17021e507e7308fd86a844ae7d54109eb5811e1aeebb4aa6e
+  [pass] docs/state-history/attempt-mg-276d.md H5: presentation
+         state      rendered
+         heading    Attempt index — GREEN · PROVEN, all finite posets (mg-276d): the foundation claims (1)–(3) supply > Corrections, retractions, supersessions and mechanism notes > H5 — the recommended next probe, and the answer that discharged it
+         position   no block (the span opens on an ATX heading, which is a section delimiter and not a block)
+         presented  4e192bc8bde4fca17021e507e7308fd86a844ae7d54109eb5811e1aeebb4aa6e
+         certified record sha256 f6ae6325c5307d5a6c088990ad5f49b7b2f9f8347e73458b55c66f072fcbe406
+         measured  record sha256 f6ae6325c5307d5a6c088990ad5f49b7b2f9f8347e73458b55c66f072fcbe406
+
+3. THE F1 REPAIR — present in the tree, absent at the baseline
+   (these separate 'damaged' from 'changed'; section 2 is what certifies)
+  [pass] tree row states the NARROW claim
+         "This row states no 4d *tally* of its own"
+  [pass] tree row QUOTES the false absolute it replaced
+  [pass] tree row ATTRIBUTES the correction
+  [pass] baseline row carried the bare absolute
+  [pass] baseline row did NOT carry the narrow claim
+
+4. THE COUNTEREXAMPLE THAT MADE THE ABSOLUTE FALSE — still in the cell,
+   and still EARLIER in it than the sentence that used to deny it
+  [pass] the cell still opens on "five previous rows"
+  [pass] it precedes the F1 sentence
+         counterexample at char 49, F1 sentence at char 448
+  [pass] the gap is 399 characters
+         measured 399 characters (from the start of the phrase to the start of the sentence)
+  [pass] the gap is 72 words
+         measured 72 whitespace-separated words
+
+5. THE MEASURED DELTA — tree against baseline, both conventions printed
+         stripped: 7703 -> 7876 characters
+         raw     : 7705 -> 7878 characters (raw = including the space either side of the boundary pipe)
+         bytes   : 7835 -> 8010 (stripped convention)
+  [pass] baseline cell is 7703 characters (stripped)
+         measured 7703
+  [pass] tree cell is 7876 characters (stripped)
+         measured 7876
+  [pass] the delta is +173 characters
+         measured +173
+
+6. WHOLE-FILE INVARIANTS, measured on the working tree
+   (invariants, NOT digests — the rest of the ledger is outside coverage)
+  [pass] ** parity is even in every cell
+         over all 210 cells; 0 odd
+  [pass] exactly one ledger row keys to mg-a3d4
+         found 1
+  [pass] the mg-a3d4 row still holds the largest cell in the file
+         largest cell is 12059 characters (stripped), over all 210 cells
+  [pass] and it is still 12059 characters (stripped)
+         measured 12059
+  [pass] the edited row is still smaller than it
+         7876 < 12059
+
+7. docs/state-history/README.md — the correction blocks b68db5d and this repair added
+         31546 bytes, 31307 characters, 435 lines
+         (their CONTENT is certified in section 2; these lines report where
+          each one was found and how much of it the digest spans)
+  readme.F2      docs/state-history/README.md:15-44     header 87 chars, body 2218 chars
+  readme.F1      docs/state-history/README.md:406-425   header 87 chars, body 1555 chars
+  readme.B1      docs/state-history/README.md:96-102    header 84 chars, body 478 chars
+  readme.B1.A3   docs/state-history/README.md:104-111   header 88 chars, body 628 chars
+  readme.index   docs/state-history/README.md:138-141   header 90 chars, body 219 chars
+  readme.A1      docs/state-history/README.md:187-227   header 84 chars, body 2975 chars
+  readme.A1.7870 docs/state-history/README.md:229-264   header 89 chars, body 2646 chars
+  readme.A1.4acd docs/state-history/README.md:266-313   header 89 chars, body 3605 chars
+  readme.A1.bee1 docs/state-history/README.md:315-378   header 87 chars, body 4952 chars
+
+8. PRESENTATION GUARDS, over both certified files AND every DECLARED DELEGATED
+   TARGET, each in full (mg-0049: the targets were not read here before, and one
+   `<!--` line at the top of one of them showed a reader a blank page at exit 0).
+   presentation.py models a declared subset of CommonMark + GFM block structure.
+   These two guards are how that subset is BOUNDED rather than assumed: a
+   construct it does not model, or raw HTML in text presented as prose, is
+   reported and exits non-zero instead of passing.  Both are 0 as things stand.
+         3 files guarded: STATE.md, docs/state-history/README.md, docs/state-history/attempt-mg-276d.md
+  [pass] STATE.md: 0 block constructs outside the modelled subset
+         over all 387 lines; 0 found
+  [pass] STATE.md: 0 raw-HTML tokens in text presented as prose
+         over all 387 lines, code fences and inline code spans masked; 0 found
+         116 rendered blocks in 11 sections (the population section 2b's positions are ordinals within)
+  [pass] docs/state-history/README.md: 0 block constructs outside the modelled subset
+         over all 435 lines; 0 found
+  [pass] docs/state-history/README.md: 0 raw-HTML tokens in text presented as prose
+         over all 435 lines, code fences and inline code spans masked; 0 found
+         30 rendered blocks in 9 sections (the population section 2b's positions are ordinals within)
+  [pass] docs/state-history/attempt-mg-276d.md: 0 block constructs outside the modelled subset
+         over all 81 lines; 0 found
+  [pass] docs/state-history/attempt-mg-276d.md: 0 raw-HTML tokens in text presented as prose
+         over all 81 lines, code fences and inline code spans masked; 0 found
+         28 rendered blocks in 8 sections (the population section 2b's positions are ordinals within)
+
+==============================================================================
+RESULT: PASS — every check above read the working tree and every one held,
+        including 11 content digests and the same number of
+        PRESENTATION RECORDS: the certified bytes are the certified bytes,
+        and each region's PRESENTATION STATE is still the singleton
+        `rendered` under the same heading, at the same ordinal.
+        The same two questions are answered for 5 DELEGATED sections
+        of the file the certified text points at (mg-0049).
+        THAT IS NOT 'A READER IS SHOWN THEM', which is what these three lines
+        said until mg-a74f: mg-16eb's B3 is a page a reader is shown nothing
+        of on which every one of these states is `rendered`.  What a reader
+        is shown is measured, as far as a static instrument can, by
+        code/state_delegation_repair_a74f/visible_a74f.py.
+        Coverage is stated in this file's header and in COVERAGE.md: what
+        is digested, what is not, and what the presentation model cannot
+        see.  This instrument CAN fail; negative_control.py makes it fail.
+==============================================================================
+
+### 2. prose_a74f.py at bd24efc — the checker against a commit where the defects
+###    are STILL PRESENT (expect 4 findings, exit 1)
+====================================================================================================
+mg-a74f — PROSE CLAIMS, READ AS CLAIMS
+====================================================================================================
+  revision    bd24efc
+  population  11 files: every .py, .md and .sh under
+                  code/state_landing_control_2da3/  (5 files)
+                  code/state_delegation_repair_0049/  (6 files)
+                  code/state_delegation_repair_a74f/  (0 files)
+  This checker's own directory is in the population, so it reads its own prose.
+
+====================================================================================================
+P1.  EVERY REPO-RELATIVE PATH NAMED IN THE TEXT EXISTS AT THIS REVISION
+====================================================================================================
+  population: 63 path references over 11 files (25 distinct paths).  Computed from the tree, not a hand list.
+  [FAIL] P1  code/state_landing_control_2da3/delta_control.py:233
+         names code/state_delegation_repair_0049/guards_only_0049.py
+         which is not in the tree
+
+====================================================================================================
+P2.  EVERY `section N` REFERENCE TO A run_all.sh RESOLVES, AND EVERY mg-ID AND
+     SCRIPT NAMED ON THE REFERENCING LINE OCCURS IN THAT SECTION
+====================================================================================================
+  2 run_all.sh in the population; sections per file: state_delegation_repair_0049=9, state_landing_control_2da3=3
+  population: 2 `section N` references to a run_all.sh, over the 9 non-run_all.sh files of the declared set.
+  0 further reference(s) SKIPPED as quotations:
+         (none)
+  [pass] P2  code/state_delegation_repair_0049/README.md:105
+         names section 7 — "coverage218d.py — COVERAGE.md checked against the code, not agai"
+         tokens on the line: ['mg-218d']
+  [FAIL] P2  code/state_delegation_repair_0049/README.md:106
+         names section 7 — "coverage218d.py — COVERAGE.md checked against the code, not agai"
+         tokens on the line: ['mg-5644']
+         NOT NAMED ANYWHERE IN SECTION 7: ['mg-5644']
+
+====================================================================================================
+P3.  EVERY PINNED TABLE OF delta_control.py KEYED BY REPO PATHS IS ITERATED BY
+     THE INSTRUMENT.  A TABLE NOTHING VISITS IS A FAIL, NOT A SILENT PASS.
+====================================================================================================
+  [FAIL] P3  code/state_landing_control_2da3/delta_control.py
+         pinned tables keyed by repo paths: ['DELEGATED', 'DELEGATED_PRESENTATION']
+         of those, iterated by some `for` in this file: ['DELEGATED']
+         NOT ITERATED BY ANYTHING: ['DELEGATED_PRESENTATION']
+         >>> a pinned table nothing visits cannot fail in the direction that would need visiting
+
+====================================================================================================
+P4.  EVERY `all N rows` PHRASE NAMING A SCRIPT MATCHES THAT SCRIPT'S OWN ROWS
+====================================================================================================
+  population: 3 `all N rows` phrases over 11 files.  The script each is about is the nearest .py named in the 400 characters before it.
+  0 further phrase(s) SKIPPED as quotations — inside "..." or `...` on their own line:
+         (none)
+  [pass] P4  code/state_delegation_repair_0049/README.md:48
+         says 'split_0049.py … all 9 rows'
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9
+  [pass] P4  code/state_landing_control_2da3/COVERAGE.md:276
+         says 'split_0049.py … all 9 rows'
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9
+  [FAIL] P4  code/state_landing_control_2da3/delta_control.py:234
+         says 'all 6 rows'
+         no script named within 400 characters before it — the phrase cannot be attributed, so it is reported rather than passed
+
+====================================================================================================
+THE EXEMPTION LIST, PRINTED — FILES WHOSE PROSE REPORTS ANOTHER FILE'S CLAIMS
+====================================================================================================
+  A checker that reads a REPORT of a defect as a fresh instance of it is
+  measuring the wrong thing.  These files are excluded from P1, P2 and P4.  The
+  list is fail-closed both ways: an entry naming a file outside the population is
+  a FAIL, and an entry that suppresses nothing is a FAIL.
+  NOT EVALUATED AT bd24efc, with the reason rather than a bare `n/a`:
+  these two files are this deliverable's own and did not exist at that
+  revision, so 'the entry suppresses nothing' would be true of every entry
+  and would say nothing about whether the list has rotted.  The list is
+  fail-closed ON THE WORKING TREE, which is the tree it is a statement about;
+  run this file with no --rev to see it evaluated.
+    (not evaluated) code/state_delegation_repair_a74f/PREDICTIONS.md  — the predictions, which quote each of the six broken claims verbatim
+    (not evaluated) code/state_delegation_repair_a74f/claims_a74f.py  — the report of the six, which names each broken path and count to report it
+
+====================================================================================================
+WHAT THIS RUN CHECKED, AND WHAT IT LEFT UNCHECKED
+====================================================================================================
+  P1   63 path references                  1 do not resolve
+  P2    2 run_all.sh section references    1 unresolved, or naming something the section does not
+  P3    2 pinned tables keyed by repo paths 1 iterated by nothing
+  P4    3 `all N rows` phrases             1 disagreeing with the script's own ROWS
+
+  UNCHECKED, in the same files, by this program: every count that is not an
+  `all N rows` phrase or a section number, every claim about what a reader is
+  shown, every 'cannot', every 'measured over N', and every cross-reference
+  that is not a path or a run_all.sh section number.  Those sentences are
+  adjacent to checked ones and are not covered by this checker.  Naming that
+  is the whole of what this program can honestly say about them.
+
+  4 finding(s).
+    P1  code/state_landing_control_2da3/delta_control.py:233  — names code/state_delegation_repair_0049/guards_only_0049.py
+    P2  code/state_delegation_repair_0049/README.md:106  — names section 7 — "coverage218d.py — COVERAGE.md checked against the code, not agai"
+    P3  code/state_landing_control_2da3/delta_control.py  — pinned tables keyed by repo paths: ['DELEGATED', 'DELEGATED_PRESENTATION']
+    P4  code/state_landing_control_2da3/delta_control.py:234  — says 'all 6 rows'
+====================================================================================================
+(section 2 exited 1 — non-zero is the point)
+
+### 3. prose_a74f.py on the working tree — the same checker, repaired (expect 0)
+====================================================================================================
+mg-a74f — PROSE CLAIMS, READ AS CLAIMS
+====================================================================================================
+  revision    the working tree
+  population  18 files: every .py, .md and .sh under
+                  code/state_landing_control_2da3/  (5 files)
+                  code/state_delegation_repair_0049/  (6 files)
+                  code/state_delegation_repair_a74f/  (7 files)
+  This checker's own directory is in the population, so it reads its own prose.
+
+====================================================================================================
+P1.  EVERY REPO-RELATIVE PATH NAMED IN THE TEXT EXISTS AT THIS REVISION
+====================================================================================================
+  population: 85 path references over 18 files (32 distinct paths).  Computed from the tree, not a hand list.
+  [pass] P1  0 of 85 path references do not resolve
+
+====================================================================================================
+P2.  EVERY `section N` REFERENCE TO A run_all.sh RESOLVES, AND EVERY mg-ID AND
+     SCRIPT NAMED ON THE REFERENCING LINE OCCURS IN THAT SECTION
+====================================================================================================
+  3 run_all.sh in the population; sections per file: state_delegation_repair_0049=9, state_delegation_repair_a74f=9, state_landing_control_2da3=3
+  population: 3 `section N` references to a run_all.sh, over the 15 non-run_all.sh files of the declared set.
+  1 further reference(s) SKIPPED as quotations:
+         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:80  'section 7'
+  [pass] P2  code/state_delegation_repair_0049/README.md:106
+         names section 8 — "mg-5644's OWN battery, re-run UNMODIFIED — the audit that found "
+         tokens on the line: ['mg-218d', 'mg-5644']
+  [pass] P2  code/state_delegation_repair_0049/README.md:107
+         names section 8 — "mg-5644's OWN battery, re-run UNMODIFIED — the audit that found "
+         tokens on the line: ['mg-5644']
+  [pass] P2  code/state_delegation_repair_a74f/prose_a74f.py:39
+         names section 7 — "reproduce16eb.py, RE-RUN UNMODIFIED — which of mg-0049's seven c"
+         tokens on the line: ['mg-0049']
+
+====================================================================================================
+P3.  EVERY PINNED TABLE OF delta_control.py KEYED BY REPO PATHS IS ITERATED BY
+     THE INSTRUMENT.  A TABLE NOTHING VISITS IS A FAIL, NOT A SILENT PASS.
+====================================================================================================
+  [pass] P3  code/state_landing_control_2da3/delta_control.py
+         pinned tables keyed by repo paths: ['DELEGATED', 'DELEGATED_PRESENTATION']
+         of those, iterated by some `for` in this file: ['DELEGATED', 'DELEGATED_PRESENTATION']
+
+====================================================================================================
+P4.  EVERY `all N rows` PHRASE NAMING A SCRIPT MATCHES THAT SCRIPT'S OWN ROWS
+====================================================================================================
+  population: 3 `all N rows` phrases over 18 files.  The script each is about is the nearest .py named in the 400 characters before it.
+  3 further phrase(s) SKIPPED as quotations — inside "..." or `...` on their own line:
+         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:77  'all six rows'
+         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:106  'all nine rows'
+         (quoted, not asserted) code/state_delegation_repair_a74f/prose_a74f.py:338  'all six rows'
+  [pass] P4  code/state_delegation_repair_0049/README.md:48
+         says 'split_0049.py … all 9 rows'
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9
+  [pass] P4  code/state_landing_control_2da3/COVERAGE.md:276
+         says 'split_0049.py … all 9 rows'
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9
+  [pass] P4  code/state_landing_control_2da3/delta_control.py:234
+         says 'split_0049.py … all 9 rows'
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9
+
+====================================================================================================
+THE EXEMPTION LIST, PRINTED — FILES WHOSE PROSE REPORTS ANOTHER FILE'S CLAIMS
+====================================================================================================
+  A checker that reads a REPORT of a defect as a fresh instance of it is
+  measuring the wrong thing.  These files are excluded from P1, P2 and P4.  The
+  list is fail-closed both ways: an entry naming a file outside the population is
+  a FAIL, and an entry that suppresses nothing is a FAIL.
+  [pass] EX  code/state_delegation_repair_a74f/PREDICTIONS.md
+         the predictions, which quote each of the six broken claims verbatim
+         in the population: True; matches suppressed: 3
+  [pass] EX  code/state_delegation_repair_a74f/claims_a74f.py
+         the report of the six, which names each broken path and count to report it
+         in the population: True; matches suppressed: 13
+
+====================================================================================================
+WHAT THIS RUN CHECKED, AND WHAT IT LEFT UNCHECKED
+====================================================================================================
+  P1   85 path references                  0 do not resolve
+  P2    3 run_all.sh section references    0 unresolved, or naming something the section does not
+  P3    2 pinned tables keyed by repo paths 0 iterated by nothing
+  P4    3 `all N rows` phrases             0 disagreeing with the script's own ROWS
+
+  UNCHECKED, in the same files, by this program: every count that is not an
+  `all N rows` phrase or a section number, every claim about what a reader is
+  shown, every 'cannot', every 'measured over N', and every cross-reference
+  that is not a path or a run_all.sh section number.  Those sentences are
+  adjacent to checked ones and are not covered by this checker.  Naming that
+  is the whole of what this program can honestly say about them.
+
+  0 finding(s).
+====================================================================================================
+
+### 4. visible_a74f.py — OPEN 1: suppression over a DECLARED set, and mg-16eb's own
+###    rule imported unmodified beside it (expect 0)
+====================================================================================================
+mg-a74f — SUPPRESSION, MEASURED; VISIBILITY, NOT CLAIMED
+====================================================================================================
+Population: 5 documents x 2 renderers x 5 cited sections = 50 section observations.
+
+THE DECLARED SET — a section is SUPPRESSED iff one of these holds, and NOT
+SUPPRESSED otherwise.  This is the whole of what this instrument measures:
+    S1   inside a <details> element carrying no `open` attribute
+    S2   inside an HTML comment (terminated or running to the end of the document)
+    S3   inside the content of a <script>, <style>, <template> or <textarea>
+    S4   inside an element carrying the `hidden` attribute
+    S5   inside an element whose inline style sets display:none or visibility:hidden
+
+WHAT THE DECLARED SET DOES NOT COVER.  Each of these suppresses content in a real
+browser and each is scored NOT SUPPRESSED here.  THIS INSTRUMENT FAILS OPEN:
+    -   any rule from an external or embedded stylesheet, including `display:none` on a class
+    -   `aria-hidden`, `inert`, and anything else that hides from a subset of readers
+    -   off-screen positioning, zero size, `clip`, `overflow:hidden`, `opacity:0`
+    -   `color: transparent` and any other paint the text in the page's own background
+    -   anything JavaScript does to the DOM after load, including `<noscript>` branches
+    -   media queries, print stylesheets, and anything conditional on the reader's device
+    -   the difference between shown and shown YET — scrolling, clicking, a second tab
+
+COLUMNS.  `bytes-in-html` is the section marker present in the serialised HTML —
+the property `render0049.py` and `render16eb.py` both actually measure.
+`not-suppressed` is the marker present AND suppressed by no mechanism above.
+`r16 SHOWN` is mg-16eb's own rule, computed by importing render16eb.py unmodified
+and calling its own two functions.  No column here is named `shown to a reader`.
+
+V0  unmutated — the positive control
+    marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+
+V1  the whole file inside a CLOSED HTML comment (mg-0049's own R8)
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S2          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S2          r16 SHOWN 5/5
+
+V2  <details><summary> at the top, never closed (mg-16eb's own B3)
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 0/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 0/5
+
+V3  <div hidden> at the top, never closed
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+
+V4  <div style="display:none"> at the top, never closed
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S5          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S5          r16 SHOWN 5/5
+
+====================================================================================================
+WHERE THE TWO INSTRUMENTS DISAGREE, AND WHICH ONE IS WRONG
+====================================================================================================
+  V1 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V1 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V3 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V3 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V4 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V4 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+
+  V1 IS THE ROW THAT SETTLES IT.  It is mg-0049's own R8, unedited: the whole
+  target inside a CLOSED HTML comment.  mg-0049's render0049.py scores it ANY 0/5
+  and HEADING 0/5 on both renderers; delta_control.py exits 1 on it and calls it
+  damage; mg-16eb's own audit calls it 'R1's and R8's blank page'.  Every party in
+  this arc agrees a reader is shown nothing.  mg-16eb's SHOWN TO A READER rule
+  scores it 5 of 5, because its tag-stripping regex requires a letter after `<`
+  and `<!--` has a `!`, so the comment's contents survive the strip and its one
+  suppression mechanism is <details>, which a comment is not.
+
+  V3 AND V4 ARE THE SAME DEFECT ON MECHANISMS NOBODY IN THIS ARC HAS USED.  A
+  `hidden` attribute and an inline `display:none` each produce the same blank
+  page and each is scored 5 of 5 SHOWN by that rule.
+
+  V2 IS THE ROW IT GETS RIGHT, and it is the only shape it was written against.
+
+====================================================================================================
+DOES EACH ROW OF THIS FILE MEASURE THE PROPERTY ITS NAME CLAIMS?  (mg-16eb OPEN 3)
+====================================================================================================
+  bytes-in-html    names bytes; measures bytes.  MATCHES.
+  not-suppressed   names 'suppressed by no mechanism in the declared set';
+                   measures exactly that, over the set printed above.  MATCHES,
+                   and it is weaker than 'shown to a reader' BY CONSTRUCTION —
+                   the NOT COVERED list above is the size of the gap.
+  r16 SHOWN        names what a reader is shown; measures bytes-in-html minus one
+                   mechanism.  DOES NOT MATCH.  That is this file's finding, and
+                   the column keeps mg-16eb's own name for it so the mismatch is
+                   legible rather than laundered.
+
+  50 section observations; 0 renderer rows where this file and its own
+  committed prediction disagree; 6 of 10 renderer rows where this file and mg-16eb's rule
+  disagree.
+====================================================================================================
+
+### 5. battery_a74f.py — mg-16eb's OWN eight rows, on mg-16eb's OWN harness,
+###    unmodified.  Section 1 of it is that battery re-run verbatim (expect 0)
+================================================================================================
+mg-a74f — THE AUDITOR'S BATTERY, UNMODIFIED, ON THE REPAIRED TREE
+================================================================================================
+
+================================================================================================
+1.  mg-16eb's OWN BATTERY, RE-RUN AS A SUBPROCESS, VERBATIM
+================================================================================================
+    git diff over code/state_delegation_audit_16eb/: 0 bytes — the auditor's files are not edited by this repair
+
+1.  EIGHT MUTATIONS mg-0049's AUTHOR NEVER SAW
+================================================================================================
+mg-16eb — EIGHT NEW ROWS ON THE SURFACE mg-0049's REPAIR CREATED
+'expected' is what THIS AUDIT PREDICTED BEFORE THE RUN, written into
+mutations16eb.py and committed before battery16eb.py was executed once.
+A1 A2 A3 A5 mutate the INSTRUMENT (delta_control.py); B1 B2 B3 C1 mutate
+docs/state-history/attempt-mg-276d.md, the file the certified cell points at.
+Nothing here mutates STATE.md or the state-history README.
+================================================================================================
+  !!  A1    the table mg-0049 ADDED  a presentation record for a section nothing delegates or cites expected exit 0    got exit 2 (MOVED)
+  !!  A2    the table mg-0049 ADDED  a whole TARGET FILE certified here and delegated by nobody     expected exit 0    got exit 2 (MOVED)
+  OK  A3    the table mg-0049 ADDED  a delegated section's presentation record DELETED              expected exit 2    got exit 2 (MOVED)
+  OK  A5    mg-bee1's table (control) a delegated section's CONTENT digest deleted (the same shape)  expected exit 2    got exit 2 (MOVED)
+  OK  B1    reader order, cited      two cited sections EXCHANGED; no byte of either changes        expected exit 0    got exit 0 (PASS)
+  OK  B2    heading path (control)   one cited section moved verbatim under a different parent      expected exit 2    got exit 2 (MOVED)
+  OK  B3    blank page, classified   <details><summary> at the top: a CLOSED widget over the whole page expected exit 2    got exit 2 (MOVED)
+  OK  C1    the whole-section span   an ordinary CODE EXAMPLE inside a cited section, fully shown   expected exit 1    got exit 1 (FAIL)
+
+  8 of 8 rows run; 6 behaved as this audit predicted; 2 did not.
+
+  MUTATIONS THAT SURPRISED THIS AUDIT (predicted != observed):
+    A1  predicted exit 0, got exit 2
+    A2  predicted exit 0, got exit 2
+
+================================================================================================
+2.  THE DOCUMENTED RECOVERY PATH, FOLLOWED TO THE LETTER, ON C1
+================================================================================================
+  delta_control.py's header: exit 2 means 'Re-baseline this instrument, record
+  the new figure, and say which commit moved it'; exit 1 means a region is NO
+  LONGER PRESENTED TO A READER.  C1 adds a closed, fully visible code example to
+  cited section H3.  What follows is the repo's own recovery command applied to
+  it, with no hand edits, and the control re-run on the result.
+
+  before re-baselining        exit 1
+  after  re-baselining        exit 1   (PREDICTED BEFORE THE RUN: exit 1)
+
+     state      fenced-code+rendered
+     >>> mg-a74f: this line read 'AND THE READER IS SHOWN NOTHING OF IT' until mg-16eb's C1 made it
+
+  THE RECOVERY PATH DOES NOT RECOVER.  Every digest the instrument asked
+  for has been regenerated by the instrument itself and pasted back, and
+  the control still reports the section as one a reader is shown nothing
+  of — while both renderers show every line of it (render16eb.py).
+
+================================================================================================
+WHAT THESE ROWS SAY
+================================================================================================
+  6 of 8 behaved as predicted; 2 did not.  Recovery demonstration: exit 1.
+
+  A1 exit 2, A2 exit 2, against A3 exit 2 and A5 exit 2.
+     delta_control.py's comment over DELEGATED_PRESENTATION says the two tables
+     'cannot drift apart quietly in EITHER direction'.  One direction is real
+     (A3).  The other is not: nothing iterates the new table, so a row in it and
+     in nothing else — or a whole target file — is never visited.  A5 shows the
+     table mg-bee1 added does NOT have this hole: its keys are cross-checked
+     against the sections the certified text actually cites.  The repair added a
+     second pinned table without the cross-check the first one has.
+
+  B1 exit 0, against B2 exit 2.
+     Two cited sections exchanged, no byte of either changed, both still prose,
+     both under the certified heading path — and a reader is shown them in the
+     other order.  On the two files the instrument READS, a certified region's
+     ordinal among the blocks of its section IS certified.  On the file it POINTS
+     AT, `position` is inert by construction.  B2 is the control: the record is
+     read, and it is `position` specifically that carries nothing here.
+
+  B3 exit 2.
+     Exit 2 is DRIFT — 're-baseline and record the new figure'.  Both renderers
+     put all five cited sections inside an unclosed <details> with no `open`
+     attribute, so a reader is shown a closed widget and no cited section at all.
+     That is R1's and R8's outcome, which the repair classifies exit 1 as damage.
+
+  C1 exit 1, recovery exit 1.
+     A code example inside a cited section is reported as a section the reader is
+     SHOWN NOTHING OF, and the instrument's own re-baseline does not clear it.
+================================================================================================
+    (battery16eb.py exited 0)
+
+================================================================================================
+2.  THE SAME EIGHT ROWS, SCORED AGAINST THIS REPAIR'S OWN COMMITTED PREDICTIONS
+================================================================================================
+    Exit codes read from the process by harness16eb.Tree, not from section 1's
+    stdout.  mutations16eb.py is imported unmodified; only the scoring column is
+    this repair's.
+
+  OK  A1   the table mg-0049 ADDED  a presentation record for a section nothing delegates or cites mg-16eb predicted 0   mg-a74f predicted 2   got exit 2 (MOVED)
+  OK  A2   the table mg-0049 ADDED  a whole TARGET FILE certified here and delegated by nobody     mg-16eb predicted 0   mg-a74f predicted 2   got exit 2 (MOVED)
+  OK  A3   the table mg-0049 ADDED  a delegated section's presentation record DELETED              mg-16eb predicted 2   mg-a74f predicted 2   got exit 2 (MOVED)
+  OK  A5   mg-bee1's table (control) a delegated section's CONTENT digest deleted (the same shape)  mg-16eb predicted 2   mg-a74f predicted 2   got exit 2 (MOVED)
+  OK  B1   reader order, cited      two cited sections EXCHANGED; no byte of either changes        mg-16eb predicted 0   mg-a74f predicted 0   got exit 0 (PASS)
+  OK  B2   heading path (control)   one cited section moved verbatim under a different parent      mg-16eb predicted 2   mg-a74f predicted 2   got exit 2 (MOVED)
+  OK  B3   blank page, classified   <details><summary> at the top: a CLOSED widget over the whole page mg-16eb predicted 2   mg-a74f predicted 2   got exit 2 (MOVED)
+  OK  C1   the whole-section span   an ordinary CODE EXAMPLE inside a cited section, fully shown   mg-16eb predicted 1   mg-a74f predicted 1   got exit 1 (FAIL)
+
+  8 rows run; 8 behaved as THIS REPAIR predicted; 0 did not.
+
+  ROWS THIS REPAIR MOVED, against mg-16eb's observations at bd24efc: ['A1', 'A2']
+    A1  a presentation record for a section nothing delegates or cites
+         exit 0 -> exit 2: the second pinned table is now iterated and cross-checked at both grains
+    A2  a whole TARGET FILE certified here and delegated by nobody
+         exit 0 -> exit 2: the second pinned table is now iterated and cross-checked at both grains
+
+  ROWS THIS REPAIR DELIBERATELY DID NOT MOVE:
+    B3  exit 2, unchanged.  under-fires: a page a reader is shown nothing of, at exit 2 (drift).  The exit-code table is narrowed to the state-set predicate and names this row; the predicate itself is not changed here.
+    C1  exit 1, unchanged.  over-fires: a section a reader is shown every line of, at exit 1 printing 'SHOWN NOTHING OF IT'.  Same narrowing, same reason.
+
+================================================================================================
+WHAT THESE TWO SECTIONS SAY TOGETHER
+================================================================================================
+  Section 1 is the auditor's own instrument reporting on the party it audited,
+  with not a byte of it edited.  Section 2 is this repair's prediction column
+  over the same eight processes.  A1 and A2 are the two rows that move, from
+  exit 0 to exit 2, and they are the two rows mg-16eb built to show that the
+  sentence 'the two tables cannot drift apart quietly in either direction' was
+  true in one direction only.
+
+  B3 and C1 do not move, and that is stated in advance rather than discovered:
+  they refute what the exit-code TABLE said, in opposite directions, and this
+  repair narrows the table to the predicate the code applies instead of changing
+  the predicate.  Changing it would move the classification of every delegated
+  section; it is named as open, here and in delta_control.py's own header.
+
+  battery16eb.py exited 0; 8 of 8 rows behaved as this repair predicted.
+================================================================================================
+
+### 6. claims_a74f.py — OPEN 2: the six, one row each, classified, and probed at
+###    BOTH bd24efc and the tree (expect 0)
+====================================================================================================
+mg-a74f — THE SIX CLAIMS mg-16eb REFUTED, ONE ROW EACH, MEASURED AT BOTH ENDS
+====================================================================================================
+  before  bd24efc   (the defect must still be present)
+  after   the working tree
+
+CLAIM 1   code/state_landing_control_2da3/delta_control.py:233
+  says       the guards-only decomposition lives in `code/state_delegation_repair_0049/guards_only_0049.py`
+  CLASS      FALSE
+  REPAIR     CORRECT the fact — the path is wrong and a path is checkable
+  [pass] present at bd24efc: delta_control.py names guards_only_0049.py: True; that path in the tree at bd24efc: False
+  [pass] repaired in the tree: guards_only_0049.py gone: True; split_0049.py named: True; that path exists: True
+
+CLAIM 2   code/state_landing_control_2da3/delta_control.py:234
+  says       that decomposition runs against "all six rows"
+  CLASS      FALSE
+  REPAIR     CORRECT the fact — six is mg-5644's population, the script's is nine
+  [pass] present at bd24efc: 'all six rows' asserted at line(s) [234]; mutations_0049.ROWS at bd24efc: 9
+  [pass] repaired in the tree: 'all six rows' asserted at nowhere; 'all nine rows' at [234]; mutations_0049.ROWS: 9
+
+CLAIM 3   code/state_landing_control_2da3/delta_control.py:798
+  says       "the two tables cannot drift apart quietly in EITHER direction"
+  CLASS      FALSE
+  REPAIR     IMPLEMENT the missing behaviour — the sentence is worth keeping, so the code is changed to make it true rather than the sentence weakened
+  [pass] present at bd24efc: path-keyed tables ['DELEGATED', 'DELEGATED_PRESENTATION']; iterated by some `for` ['DELEGATED']
+  [pass] repaired in the tree: path-keyed tables ['DELEGATED', 'DELEGATED_PRESENTATION']; iterated ['DELEGATED', 'DELEGATED_PRESENTATION']; both key checks present: True  (the CONSTRUCTION is battery_a74f.py's A1 and A2, 0 -> 2)
+
+CLAIM 4   code/state_landing_control_2da3/delta_control.py:346
+  says       exit 1 is "a region ... NO LONGER PRESENTED TO A READER"
+  CLASS      FALSE
+  REPAIR     NARROW to the measured property — refuted in BOTH directions, so there is no wording of it that survives; the predicate is named instead and both counterexamples are printed beside it
+  [pass] present at bd24efc: the exit-1 bullet asserts 'NO LONGER PRESENTED TO A READER' at line(s) [346]
+  [pass] repaired in the tree: asserted at nowhere; narrowed sentence present: True; both counterexamples named in the table: True; is_presented() docstring narrowed: True
+
+CLAIM 5   code/state_delegation_repair_0049/README.md:105-106
+  says       mg-218d's and mg-5644's batteries are "re-run in section 7 of run_all.sh"
+  CLASS      FALSE
+  REPAIR     CORRECT the fact — the re-runs happen; the pointer named the wrong section
+  [pass] present at bd24efc: 2 rows found; 2 of them say 'section 7'
+  [pass] repaired in the tree: 2 rows found; 2 say section 8 and not section 7; run_all.sh section 8 is mg-5644's battery: True
+
+CLAIM 6   code/state_delegation_repair_0049/render0049.py:11
+  says       R5: "`<details>` at the top SUPPRESSES NOTHING: every cited section is still on the page as the document's own prose"
+  CLASS      TRUE OF A DIFFERENT PROPERTY
+  REPAIR     NARROW to the measured property — the two numbers are correct and neither is the claim; the row now says 'in the page' and points at visible_a74f.py
+  [pass] present at bd24efc: 'SUPPRESSES NOTHING' asserted at line(s) [11]; the printed header claims 'WHAT A READER IS SHOWN': True
+  [pass] repaired in the tree: asserted at nowhere (it survives only inside quotation marks, where it is a report of what the row used to say); header narrowed: True; old header gone: True; points at the instrument that does measure suppression: True
+
+====================================================================================================
+THE CLASSIFICATION, TALLIED — mg-16eb ASKED FOR THREE BUCKETS AND TWO ARE EMPTY
+====================================================================================================
+  5  FALSE
+  1  TRUE OF A DIFFERENT PROPERTY
+  0  UNSUPPORTED
+  0  TRUE-BUT-UNEVIDENCED
+
+  UNSUPPORTED and TRUE-BUT-UNEVIDENCED are both 0, and that is worth saying
+  rather than leaving as an absence: not one of the six was a claim nobody could
+  check.  Every one was checkable by a program, and none of the six was checked
+  by one.
+
+====================================================================================================
+THE CLAIM-GENERATION PROBLEM — WHERE THE SIX SIT
+====================================================================================================
+  mg-16eb: 'a deliverable that adds 17 claims and lands 11 has a claim-generation
+  problem, not six unrelated slips'.  The population says what the problem is.
+
+  file                                                 read as claims at bd24efc?                       of the 6
+  code/state_landing_control_2da3/delta_control.py     no — every checker in this repo reads this file as the ground truth box 4
+  code/state_delegation_repair_0049/README.md          no — nothing reads this README                   1
+  code/state_delegation_repair_0049/render0049.py      no — nothing reads this docstring                1
+  code/state_landing_control_2da3/COVERAGE.md          YES — coverage218d.py, 40 of 40                  0
+
+  THREE OF THE SIX ARE PURE CROSS-REFERENCE ROT — a path, a count, a section
+  number.  Each is mechanically checkable and none was mechanically checked.
+  prose_a74f.py's P1, P4 and P2 now check exactly those three shapes, over a
+  computed population of three directories, and P3 checks the fourth (claim 3's
+  code half).  Claims 4 and 6 are the SAME defect twice — a name for a measured
+  property that claims more than the measurement — and no checker of this kind
+  can catch that; it is caught by putting the instrument to a CONSTRUCTION, which
+  is what mg-16eb did and what visible_a74f.py does.
+
+====================================================================================================
+EVERY INSTRUMENT THIS REPAIR ADDS, AND WHETHER ITS ROW NAME IS ITS MEASUREMENT
+====================================================================================================
+  visible_a74f.py   bytes-in-html                              measures: the section marker is in the serialised HTML
+                                                               MATCHES
+  visible_a74f.py   not-suppressed                             measures: not suppressed by any of five DECLARED mechanisms
+                                                               MATCHES — and is weaker than 'shown', by construction; the uncovered list prints on every run
+  visible_a74f.py   r16 SHOWN                                  measures: mg-16eb's rule, kept under mg-16eb's name
+                                                               DOES NOT MATCH, deliberately: the mismatch is the finding
+  prose_a74f.py     P1 path references                         measures: the path is in the tree at that revision
+                                                               MATCHES
+  prose_a74f.py     P2 section references                      measures: the section exists and names the tokens on the referencing line
+                                                               MATCHES — and it caught 1 of the 2 rows of claim 5; see README.md
+  prose_a74f.py     P3 pinned tables                           measures: the table's name is in some `for`'s iterable
+                                                               MATCHES — it does not check that the iteration CHECKS anything; battery_a74f.py A1/A2 does
+  prose_a74f.py     P4 `all N rows`                            measures: the number equals len(that script's ROWS)
+                                                               MATCHES
+  battery_a74f.py   exit codes                                 measures: read from the process by harness16eb.Tree
+                                                               MATCHES
+  claims_a74f.py    present at bd24efc / repaired in the tree  measures: a text or AST predicate over the two revisions
+                                                               MATCHES for claims 1, 2, 3 and 5; for 4 and 6 it checks THE WORDING, and the property those two rows are about is measured by visible_a74f.py, not here
+
+  9 rows checked; the one that does not match its name is the one
+  imported from the instrument under test, under its own name, on purpose.
+
+====================================================================================================
+6 claims reported individually; 0 probe(s) did not hold.
+====================================================================================================
+
+### 7. reproduce16eb.py, RE-RUN UNMODIFIED — which of mg-0049's seven committed
+###    out_*.txt still reproduce, and which do not.  ~10 min.  EXPECT 5 of 7:
+###    the two that do not are out_coverage218d.txt and out_selftest_negative.txt,
+###    and section 8 shows they were ALREADY stale at bd24efc
+================================================================================================
+mg-16eb — mg-0049's COMMITTED EVIDENCE, REGENERATED AND DIFFED BYTE FOR BYTE
+================================================================================================
+population: all 7 out_*.txt files mg-0049's two commits added or changed.
+
+  [IDENTICAL] code/state_delegation_repair_0049/out_battery_0049.txt
+              committed sha256 27f39b837856c4317d7974a2fcc171ca2c7154ed934e535ac9276b3e230c1858     3178 bytes
+              produced  sha256 27f39b837856c4317d7974a2fcc171ca2c7154ed934e535ac9276b3e230c1858     3178 bytes
+  [IDENTICAL] code/state_delegation_repair_0049/out_split.txt
+              committed sha256 abd384dd668ef22b2740885006ae487e732ca4e6a41fcc54ca95a3dc2b0ebaa8     3218 bytes
+              produced  sha256 abd384dd668ef22b2740885006ae487e732ca4e6a41fcc54ca95a3dc2b0ebaa8     3218 bytes
+  [DIFFERS  ] code/state_delegation_repair_0049/out_coverage218d.txt
+              committed sha256 afa2b0ac542086171ec1b16642254cdefbbfadaa5047cb422fa8e4045163a2ea     9031 bytes
+              produced  sha256 d7248973e325eb1c61b93730eb15f860d66970887e474f00661f4c89be2be755     9031 bytes
+              131 committed lines vs 131 produced; first differing line:
+                58  committed:             over 383 lines; found 0
+                58  produced :             over 387 lines; found 0
+  [DIFFERS  ] code/state_delegation_repair_0049/out_selftest_negative.txt
+              committed sha256 f883651509b6a9224c276ad1cc8971c49f0fa9cab163656fecc3f973ccf06ff8    13321 bytes
+              produced  sha256 adb279c40fa6cf8217b6dd6247919f71056ed7c7e63726ef81a773031c6ceb49    13321 bytes
+              204 committed lines vs 204 produced; first differing line:
+                43  committed: STATE.md  at rest: 177464 bytes, sha 54a41150fd75f97e
+                43  produced : STATE.md  at rest: 186710 bytes, sha a1a66c29b627b94e
+  [IDENTICAL] code/state_delegation_repair_0049/out_render.txt
+              committed sha256 0cadb0be18aaaa8156566c6fcca41e7c1ef885c1a086dda60490214be0fc1f81     3713 bytes
+              produced  sha256 0cadb0be18aaaa8156566c6fcca41e7c1ef885c1a086dda60490214be0fc1f81     3713 bytes
+  [IDENTICAL] code/state_delegation_repair_0049/out_5644_rerun.txt
+              committed sha256 10df38095c9e2f063d8b47f4c49e8a346cbb3dc54f85d214003d3822a3e29d82    19724 bytes
+              produced  sha256 10df38095c9e2f063d8b47f4c49e8a346cbb3dc54f85d214003d3822a3e29d82    19724 bytes
+  [IDENTICAL] code/state_landing_control_2da3/out_control.txt
+              committed sha256 3f1a2e52d97ed2d4c6c6998c16cc6c0f9232fabcc4cdbba826e86add27bb76c3    38273 bytes
+              produced  sha256 3f1a2e52d97ed2d4c6c6998c16cc6c0f9232fabcc4cdbba826e86add27bb76c3    38273 bytes
+
+================================================================================================
+5 of 7 of mg-0049's committed evidence files reproduce BYTE-IDENTICALLY
+from this audit's own runs.
+2 did NOT reproduce; read the rows above, not this line.
+================================================================================================
+(section 7 exited 1 — read the rows, not the exit code)
+
+### 8. THE SAME CHECK AT bd24efc, IN A THROWAWAY WORKTREE — the measurement that
+###    separates 'this repair broke two transcripts' from 'two were already stale'
+              committed sha256 f883651509b6a9224c276ad1cc8971c49f0fa9cab163656fecc3f973ccf06ff8    13321 bytes
+              produced  sha256 adb279c40fa6cf8217b6dd6247919f71056ed7c7e63726ef81a773031c6ceb49    13321 bytes
+              204 committed lines vs 204 produced; first differing line:
+                43  committed: STATE.md  at rest: 177464 bytes, sha 54a41150fd75f97e
+                43  produced : STATE.md  at rest: 186710 bytes, sha a1a66c29b627b94e
+  [IDENTICAL] code/state_delegation_repair_0049/out_render.txt
+              committed sha256 c7e4848c2112399f2127bc9b2ec8e597e7daf2cfbe0240fd22739a3b8a04621b     2956 bytes
+              produced  sha256 c7e4848c2112399f2127bc9b2ec8e597e7daf2cfbe0240fd22739a3b8a04621b     2956 bytes
+  [IDENTICAL] code/state_delegation_repair_0049/out_5644_rerun.txt
+              committed sha256 10df38095c9e2f063d8b47f4c49e8a346cbb3dc54f85d214003d3822a3e29d82    19724 bytes
+              produced  sha256 10df38095c9e2f063d8b47f4c49e8a346cbb3dc54f85d214003d3822a3e29d82    19724 bytes
+  [IDENTICAL] code/state_landing_control_2da3/out_control.txt
+              committed sha256 4a91a065cbc18fa9fc46ab6eec3ebf222d85101042f4d05878bc0878214035a9    37478 bytes
+              produced  sha256 4a91a065cbc18fa9fc46ab6eec3ebf222d85101042f4d05878bc0878214035a9    37478 bytes
+
+================================================================================================
+5 of 7 of mg-0049's committed evidence files reproduce BYTE-IDENTICALLY
+from this audit's own runs.
+2 did NOT reproduce; read the rows above, not this line.
+================================================================================================
+
