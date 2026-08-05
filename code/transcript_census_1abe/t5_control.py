@@ -125,6 +125,55 @@ an empty population is not green about anything.
                "with the code-digest recomputed at their carrying commit and "
                "%d do not" % (len(declaring), len(agree), len(disagree)))
 
+    # -------------------------------------------------- the first adopter
+    led.head("T5a-ii -- THE CONVENTION APPLIED TO THIS CENSUS'S OWN "
+             "TRANSCRIPTS, ON DISK, AS THEY ARE BEING WRITTEN")
+    print("""
+T5a's coverage is 0 because it reads the PUBLISHED population and nothing
+published predates this proposal.  So the convention is checked here where it
+can be checked: against this suite's own transcripts in the working tree, whose
+producers emit the declaration.
+
+The transcripts of scripts that run AFTER this one do not exist yet and are
+absent rather than failing -- an absence this row prints rather than rounds.
+""")
+    own_dir = os.path.dirname(os.path.abspath(__file__))
+    truth_here = L.code_digest("code/" + L.SELF_DIR, "HEAD")
+    print("    code-digest of %s at HEAD : %s" % (L.SELF_DIR, truth_here))
+    print()
+    mine_ok, mine_bad, mine_none = [], [], []
+    for fn in sorted(os.listdir(own_dir)):
+        if not (fn.startswith("out_") and fn.endswith(".txt")):
+            continue
+        with open(os.path.join(own_dir, fn), "rb") as fh:
+            dec = L.declared_digest(fh.read().decode("utf-8", "replace"))
+        if dec is None:
+            mine_none.append(fn)
+            state = "DECLARES NOTHING"
+        elif dec == truth_here:
+            mine_ok.append(fn)
+            state = "agrees"
+        else:
+            mine_bad.append(fn)
+            state = "*** DISAGREES: %s ***" % dec
+        print("    %-34s %s" % (fn, state))
+    led.record(not mine_bad and not mine_none,
+               "T5a-ii of this census's %d transcripts already on disk, %d "
+               "declare a code-digest agreeing with the tree at HEAD, %d "
+               "disagree and %d declare nothing.  The convention is obeyed by "
+               "the instrument that proposes it, which is the least it can do "
+               "before asking anything else to"
+               % (len(mine_ok) + len(mine_bad) + len(mine_none), len(mine_ok),
+                  len(mine_bad), len(mine_none)))
+    led.record(None,
+               "T5a-ii' AND THE CATCH, NAMED: this row reads HEAD, and HEAD "
+               "must already carry the final code when the suite runs.  Commit "
+               "the code, run, then commit the transcripts -- in that order, "
+               "the declaration is true at the carrying commit because "
+               "committing a transcript cannot move a digest over `.py`/`.sh`.  "
+               "Run it the other way round and the instrument proposing the "
+               "convention breaks it")
+
     # ----------------------------------------------- the control can fire
     led.head("T5b -- THE CONTROL, SHOWN GOING RED BY CONSTRUCTION")
     print("""

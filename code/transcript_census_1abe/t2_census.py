@@ -48,6 +48,7 @@ a cause the ticket does not name and it is separated out here.
 """
 
 import os
+import re
 import shutil
 import signal
 import subprocess
@@ -59,8 +60,15 @@ import time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib_1abe as L                                          # noqa: E402
 
-DEFAULT_JOBS = 8
-DEFAULT_TIMEOUT = 600
+# `--jobs` is NOT printed into the transcript and DEFAULTS TO 4 rather than to
+# the core count.  Both choices are deliberate.  The job count is a fact about
+# the machine, not about the subject, so printing it would make this
+# transcript fail to reproduce on a differently-sized box for a reason that has
+# nothing to do with the arc -- the exact defect being measured, committed by
+# the instrument measuring it.  Four rather than eight because eight put this
+# ten-core machine at a load average of 90 and starved the other agents on it.
+DEFAULT_JOBS = 4
+DEFAULT_TIMEOUT = 900
 
 
 def arg(name, default, cast=str):
@@ -149,8 +157,7 @@ REVISION     the figures in this transcript are facts about the commit printed
              move with it, and saying so is the whole subject of mg-1abe.
 """)
     print("    as-of      %s  (%s)" % (head, rev))
-    print("    budget     %d s per suite run, %d parallel worktrees"
-          % (timeout, jobs))
+    print("    budget     %d s per suite run" % timeout)
 
     population = L.transcripts(rev)
     groups = {}
@@ -354,11 +361,80 @@ same defect as a decision that changed.
                   "Neither rebase nor regeneration explains these"
                   % len(nondet))
 
+    ledger.head("T2e -- CAUSE: WHERE THE TICKET'S FRAMING NEEDS CORRECTING")
+    print("""
+The ticket names two mechanisms -- the refinery's REBASE, and REGENERATION
+(mg-bf79's "a publisher is not a pin") -- and asks for others if there are any.
+There is a third and this census expects it to be the largest: A PRODUCER THAT
+READS REPOSITORY-GLOBAL STATE.  Such a transcript is displaced by the NEXT
+commit anyone makes, on any branch, with no rebase and no regeneration
+anywhere near it.  Nothing was done to it; the repository moved underneath it.
+
+The split below is STATIC and it is a proxy, stated as one: a producing
+directory counts as a REPO-READER if any `.py`/`.sh` in it, at the carrying
+commit, invokes git.  It does not prove that the git call is what moved -- it
+establishes which transcripts CAN be moved that way and which cannot.
+""")
+    git_call = re.compile(
+        rb"""['"]git['"]|\bgit\s+(log|rev-list|rev-parse|ls-tree|show|"""
+        rb"""cat-file|merge-base|diff|ls-files|describe)\b""")
+
+    def reads_repo(directory, commit):
+        for line in L.git("ls-tree", "-r", "--name-only",
+                          "%s:%s" % (commit, directory)).split("\n"):
+            if line.endswith(L.CODE_SUFFIXES):
+                blob = L.blob_at(commit, "%s/%s" % (directory, line))
+                if blob and git_call.search(blob):
+                    return True
+        return False
+
+    cache = {}
+    reader, pure = [], []
+    for p in population:
+        if verdict.get(p) != "DIFFERS":
+            continue
+        c = L.carrying_commit(p, rev)
+        key = (os.path.dirname(p), c)
+        if key not in cache:
+            cache[key] = reads_repo(key[0], key[1])
+        (reader if cache[key] else pure).append(p)
+    tot = len(reader) + len(pure)
+    print("    of the %d DIFFERS:" % tot)
+    print("      producer READS THE REPOSITORY  %4d  (%.0f%%)"
+          % (len(reader), 100.0 * len(reader) / tot if tot else 0))
+    print("      producer does not              %4d  (%.0f%%)"
+          % (len(pure), 100.0 * len(pure) / tot if tot else 0))
+    print()
+    print("    every DIFFERS whose producer NEVER TOUCHES GIT -- these cannot "
+          "be explained by rebase, by regeneration, or by the repository "
+          "moving, and are the ones worth reading one at a time:")
+    for p in pure:
+        print("      %-56s %s" % (p[len("code/"):][:56], detail[p][:70]))
+    if not pure:
+        print("      (none)")
+
+    ledger.record(None,
+                  "T2e %d of %d non-reproducing transcripts have a producer "
+                  "that reads repository-global state and %d do not.  If the "
+                  "first number dominates, the ticket's two mechanisms are "
+                  "not the main cause of the blast radius -- the repository "
+                  "moving is, and no rebase policy addresses that"
+                  % (len(reader), tot, len(pure)))
+
     ledger.head("T2d -- WHAT THIS ROW DOES NOT MEASURE")
     print("""
 TIMED-OUT is a budget, not a verdict.  A suite that needs longer than the
 budget has not been shown to fail; it has not been measured.  Re-run with
 `--timeout N` to move the line and the bucket will move with it.
+
+AND THAT MAKES THIS TRANSCRIPT MACHINE-DEPENDENT, WHICH IS DISCLOSED HERE
+RATHER THAN DISCOVERED LATER.  A slower box, or a busier one, pushes suites
+over the same budget and moves rows out of REPRODUCES/DIFFERS into TIMED-OUT.
+`--jobs` is deliberately not printed above -- it is a fact about the machine
+and not about the arc -- but it changes how much wall clock each suite gets in
+contention, so it can move the same rows.  Every other bucket in this census is
+a fact about the repository; TIMED-OUT is a fact about the repository AND the
+machine, and the two should not be read the same way.
 
 NOT-REGENERATED is not a defect by itself.  Some of this arc's transcripts are
 deliberately kept artefacts -- a FIRSTFORM run, a PRE-repair capture -- that

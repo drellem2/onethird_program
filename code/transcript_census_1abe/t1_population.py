@@ -75,36 +75,51 @@ MISSES      code/counterexample_audit_a7b4/ is one, named here rather than
 The ticket's widened question, asked of the record rather than of a re-run.
 GRAIN one verdict per transcript.
 """)
-    named, unnamed = 0, 0
-    mismatch = 0
+    import re
+    tok = re.compile(r"(?<![0-9A-Za-z])([0-9a-f]{7,40})(?![0-9A-Za-z])")
+    named, unnamed, first_mismatch, never_names_carrier = 0, 0, 0, 0
     for p in population:
         blob = L.blob_at(carry[p], p)
         text = blob.decode("utf-8", "replace") if blob else ""
-        import re
-        found = None
-        for m in re.finditer(r"(?<![0-9A-Za-z])([0-9a-f]{7,40})(?![0-9A-Za-z])",
-                             text):
-            if L.resolve(m.group(1)):
-                found = L.resolve(m.group(1))
-                break
-        if found is None:
+        all_named, first = set(), None
+        for m in tok.finditer(text):
+            full = L.resolve(m.group(1))
+            if full:
+                all_named.add(full)
+                if first is None:
+                    first = full
+        if first is None:
             unnamed += 1
-        else:
-            named += 1
-            if found != carry[p]:
-                mismatch += 1
-    print("    name at least one resolvable commit   %d of %d" % (named,
-                                                                  len(population)))
-    print("    name none                             %d of %d" % (unnamed,
-                                                                  len(population)))
-    print("    name a commit OTHER than the one carrying them   %d of %d named"
-          % (mismatch, named))
+            continue
+        named += 1
+        if first != carry[p]:
+            first_mismatch += 1
+        if carry[p] not in all_named:
+            never_names_carrier += 1
+    print("    name at least one resolvable commit   %d of %d"
+          % (named, len(population)))
+    print("    name none                             %d of %d"
+          % (unnamed, len(population)))
+    print()
+    print("    of the %d that name something:" % named)
+    print("      the FIRST commit named is not the carrying commit   %d"
+          % first_mismatch)
+    print("      the carrying commit is named NOWHERE in the file    %d"
+          % never_names_carrier)
     led.record(None,
                "T1b %d of %d transcripts name no commit at all, so for those "
                "the question `is it the revision it names` HAS NO ANSWER -- "
                "not a good one and not a bad one.  That is the largest single "
                "obstacle to the ticket's framing and it is a property of the "
                "record, not of the rebase" % (unnamed, len(population)))
+    led.record(never_names_carrier == 0,
+               "T1b' and of the %d that DO name a commit, %d never name the "
+               "commit carrying them anywhere in their own bytes.  The FIRST "
+               "commit named differs from the carrier in %d of them.  The two "
+               "rows are given apart because the first is a crude grain -- the "
+               "first hex token in a file need not be its anchor -- and the "
+               "second is not"
+               % (named, never_names_carrier, first_mismatch))
 
     led.head("T1c -- LINEAGE: WHOSE NUMBERS THIS CENSUS REPEATS")
     print("""
