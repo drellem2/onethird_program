@@ -1785,14 +1785,28 @@ def negative_control_incidence(nmax):
           "any of the %d posets (%s), so the corrupted complexes still satisfy "
           "the 1-or-2-facets property POSITIVE CONTROL 3 verifies: that check "
           "would not have caught these either.  READ THE FOUR ZEROS DIFFERENTLY "
-          "(mg-fcf1 F3, landed by mg-e35b): three of them are FORCED and one is a "
-          "measurement.  None of I1, I2, I3 ADDS an incidence -- I1 moves a ridge's "
+          "(mg-fcf1 F3, landed by mg-e35b; CORRECTED FROM THREE TO FOUR by mg-fcb2's "
+          "F3, landed by mg-8af0): ALL FOUR ARE FORCED, and this line used to say "
+          "three.  None of I1, I2, I3 ADDS an incidence -- I1 moves a ridge's "
           "second incidence from one facet to another and leaves the count at 2, I2 "
           "changes no incidence at all (only which rows are relative), I3 deletes a "
           "row -- so no ridge's facet count can rise above 2 under them at any n, and "
-          "their zeros cannot come out otherwise.  I4 rebuilds the facet enumeration "
-          "outright, so a ridge there CAN lie in >= 3 facets; its zero is the only "
-          "one of the four that is a result"
+          "their zeros cannot come out otherwise.  AND NEITHER CAN I4'S, though this "
+          "line printed that I4 'rebuilds the facet enumeration outright, so a ridge "
+          "there CAN lie in >= 3 facets; its zero is the only one of the four that is "
+          "a result'.  THAT IS WITHDRAWN.  Both `le_to_facet` and "
+          "`le_to_facet_offbyone` return a chain of masks of sizes 1, 2, ..., n-1, so "
+          "a ridge omits the level-k mask and the two masks bracketing it differ in "
+          "exactly two elements: exactly two candidates to re-insert, hence at most "
+          "two facets on any ridge, at every n, under either map.  It is forced by "
+          "the same counting as the other three, and by a property of the MAPS rather "
+          "than of the mutation.  Measured over every poset with n <= 6 under both "
+          "maps -- 810 (poset, facet map) families, largest number of facets sharing "
+          "a ridge 2, families with a ridge in >= 3 facets 0; grain: the ridge -- in "
+          "code/face_geometry_repair_e35b/verify_e35b.py's V4b, with the bound shown "
+          "NOT to be vacuous on a constructed family that violates it, in "
+          "code/face_geometry_repair_8af0/forcing_8af0.py.  So none of the four zeros "
+          "is evidence and this line prints them as a property"
           % (N, ", ".join("%s on %d" % (m, c) for m, c in multi_ridge.items())))
     print("    * THE TWO MEANINGS OF 'VACUOUS', separated per row and deliberately "
           "NOT scored (mg-fcf1 F4, landed by mg-e35b): %s.  A row that scored 'the "
@@ -1945,6 +1959,8 @@ def negative_control_incidence(nmax):
     # 0/86).  A count nobody has seen move is not evidence either.
     site_corrupted = sum(1 for P in ps
                          if mutation_applied_at_site(P, "facet_offbyone"))
+    site_set_differs = sum(1 for P in ps
+                           if mutated_facet_set_differs(P, "facet_offbyone"))
     print("    * COVERAGE AT `le_to_facet`, SIZED (mg-fcf1 F5, landed by mg-e35b). "
           "mg-2789's commit message said this section 'closes the gap mg-5630 "
           "relocated'; a commit message cannot be edited, so the correct sizing is "
@@ -1953,7 +1969,11 @@ def negative_control_incidence(nmax):
           "numbers below are routed to them rather than written into it from this "
           "file, which is the same choice mg-2789 made about the Probe.md passage it "
           "flagged and did not edit. The named load-bearing site is "
-          "corrupted on %d/%d posets, the corruption reaches L^rel on %d of them, "
+          "corrupted on %d/%d posets -- POPULATION: the %d posets above; GRAIN: the "
+          "poset, counted corrupted when the ORDERED facet list built by "
+          "`le_to_facet` differs, and at the facet-SET grain the answer is %d and not "
+          "%d, four posets differing only in the ORDER of the same facets (mg-8af0) "
+          "-- the corruption reaches L^rel on %d of them, "
           "and of those %d are NON-SIMILAR and %d are a GAUGE -- so coverage at "
           "`le_to_facet` is %d/%d, of which %d carry evidence that a construction "
           "error is distinguishable from a re-labelling. On the remaining %d the "
@@ -1962,7 +1982,8 @@ def negative_control_incidence(nmax):
           "the other %d have it removed to the [CANNOT FAIL] row as a theorem, and "
           "%d (poset, row) pairs of the four are gauges. That is a relocation of the "
           "gap, narrower than before and not closed."
-          % (site_corrupted, N, dich_rows[3][1], dich_rows[3][2], dich_rows[3][3],
+          % (site_corrupted, N, N, site_set_differs, site_corrupted,
+             dich_rows[3][1], dich_rows[3][2], dich_rows[3][3],
              dich_rows[3][1], N, dich_rows[3][2], N - dich_rows[3][1],
              len(muts) - len(forced_rows), len(forced_rows), tot_gauge))
     print("    * row scoring, and who owns it: every row above is vacuous on the "

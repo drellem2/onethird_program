@@ -520,7 +520,7 @@ V6_ROWS = [
      "COULD MOVE",
      "`tot_gauge`, the size of the remainder the withdrawn hedge used to cover; "
      "it is 9 and would be 0 if no biting pair were a gauge."),
-    ("COVERAGE AT `le_to_facet`, SIZED", 12, "COULD MOVE",
+    ("COVERAGE AT `le_to_facet`, SIZED", 15, "COULD MOVE",
      "mg-fcb2's F1, repaired.  The first figure was filled `(N, N)` -- the same "
      "expression twice -- so `the named load-bearing site is corrupted on 86/86 "
      "posets` could not come out otherwise, and one poset outside the shipped "
@@ -529,7 +529,12 @@ V6_ROWS = [
      "The numerator is now `site_corrupted`, a sum over the population, and it "
      "is shown taking THREE different values on three inputs in V7's FLIP 4 "
      "where the expression it replaced takes one.  The remaining figures were "
-     "already measurements."),
+     "already measurements.  THIS ROW'S KEY WENT FROM 12 FIGURES TO 15 AND THE "
+     "MECHANISM CAUGHT IT: naming the population and the grain in the sentence "
+     "added three figures to it, the key stopped matching, and the coverage row "
+     "REFUTED on my own edit -- which is the hole a sentence-only key would "
+     "have left open.  That transcript is kept at "
+     "code/face_geometry_repair_8af0/out_verify_e35b_F3GRAIN_exit1.txt."),
 ]
 
 
@@ -690,9 +695,46 @@ def main():
             r += any(len(m.get(k, [])) > len(v) for k, v in t.items())
         raised[mode] = r
     check("I1/I2/I3 never RAISE any ridge's facet count on any poset (%s), so "
-          "their three zeros are forced at every n and only I4's is a result"
+          "their three zeros are forced at every n"
           % ", ".join("%s %d" % (TAGS[k], v) for k, v in raised.items()),
           all(v == 0 for v in raised.values()))
+    # AND I4'S IS FORCED TOO (mg-fcb2's F3, landed by mg-8af0).  mg-e35b landed
+    # "only I4's is a result" here and in the artifact.  It is not a result: the
+    # forcing is a property of the two facet MAPS, not of the mutation.  Both
+    # return a chain of masks of sizes 1, 2, ..., n-1, so a ridge omits the
+    # level-k mask and the two masks bracketing it differ in exactly two
+    # elements -- exactly two candidates to re-insert.  Both halves are
+    # measured: the premise (every family has that level-size profile) and the
+    # conclusion (no ridge in >= 3 facets), over a WIDER population than the
+    # section runs on, because a claim made "at every n" should not be checked
+    # only at the n the artifact happens to use.
+    fams = worst = profile_ok = multi = 0
+    for n in range(1, 7):
+        for P in all_posets(n):
+            les = linear_extensions(P)
+            for mp in (le_to_facet, le_to_facet_offbyone):
+                fams += 1
+                facets = {mp(w) for w in les}
+                profile_ok += all(
+                    tuple(bin(m).count("1") for m in f) == tuple(range(1, len(f) + 1))
+                    for f in facets)
+                mult = {}
+                for f in facets:
+                    for i in range(len(f)):
+                        key = (i, f[:i] + f[i + 1:])
+                        mult[key] = mult.get(key, 0) + 1
+                worst = max([worst] + list(mult.values()))
+                multi += any(v >= 3 for v in mult.values())
+    check("and SO IS I4'S, which mg-e35b called 'the only one of the four that "
+          "is a result' (mg-fcb2 F3): every facet under BOTH maps is a chain of "
+          "masks of sizes 1..n-1 (%d/%d families), so a ridge leaves exactly two "
+          "candidates to re-insert -- largest number of facets sharing a ridge "
+          "%d, families with a ridge in >= 3 facets %d.  Population: every poset "
+          "up to isomorphism with n <= 6 under each of the two maps, %d "
+          "families; grain: the ridge.  Forced at every n, by a property of the "
+          "MAPS and not of the mutation"
+          % (profile_ok, fams, worst, multi, fams),
+          profile_ok == fams and worst == 2 and multi == 0 and fams == 810)
 
     # -- V5: the committed artifact agrees ---------------------------------
     print("V5 -- the committed artifact states these numbers")

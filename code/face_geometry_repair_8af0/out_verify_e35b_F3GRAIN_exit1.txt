@@ -1,0 +1,119 @@
+VERIFY mg-e35b -- independent re-derivation of the repair's numbers
+population: 86 posets up to isomorphism, 2 <= n <= 5
+V1 -- the GAUGE / NON-SIMILAR dichotomy, re-derived
+  [PASS] I1      72 biting = 66 non-similar + 6 gauge + 0 unclassified
+  [PASS] I2      82 biting = 82 non-similar + 0 gauge + 0 unclassified
+  [PASS] I3      82 biting = 82 non-similar + 0 gauge + 0 unclassified
+  [PASS] I4      61 biting = 58 non-similar + 3 gauge + 0 unclassified
+  [PASS] swap01  72 biting = 0 non-similar + 72 gauge + 0 unclassified
+  [PASS] the four scored rows carry 9 gauge (poset,row) pairs in total
+  [PASS] every per-row split matches the value mg-fcf1 reported independently  -- I1 (72, 66, 6, 0); I2 (82, 82, 0, 0); I3 (82, 82, 0, 0); I4 (61, 58, 3, 0); swap01 (72, 0, 72, 0)
+V2 -- the witness search against EXHAUSTIVE search over perms x signs
+  [PASS] the GF(2) witness search agrees with brute force on 86/86 pairs with |L(P)| <= 4
+  [PASS] the GF(2) search and controls.py's BFS agree PAIR BY PAIR on 369/369 biting pairs, not merely in the per-row totals
+V3 -- vacuity: 'did not apply' vs 'applied and unseen'
+    I1      14 vacuous = 14 did-not-apply + 0 applied-but-unseen (facet SET differs on 0, of which 0 have |L(P)| >= 3)
+    I2      4 vacuous = 4 did-not-apply + 0 applied-but-unseen (facet SET differs on 0, of which 0 have |L(P)| >= 3)
+    I3      4 vacuous = 4 did-not-apply + 0 applied-but-unseen (facet SET differs on 0, of which 0 have |L(P)| >= 3)
+    I4      25 vacuous = 0 did-not-apply + 25 applied-but-unseen (facet SET differs on 24, of which 14 have |L(P)| >= 3)
+    swap01  14 vacuous = 4 did-not-apply + 10 applied-but-unseen (facet SET differs on 0, of which 0 have |L(P)| >= 3)
+  [PASS] I1/I2/I3 vacuity is EXACTLY 'the mutation did not apply' -- 0 applied-but-unseen in all three
+  [PASS] I4 vacuity is the OTHER fact -- the mutation applied on all 25 and the pipeline saw none of them; the facet SET differs on 24, 14 with |L(P)| >= 3
+V4 -- the two counts mg-fcf1 called tautologies
+  [PASS] `at_laplacian` takes no incidence argument (['P']) and `claim1_pair` calls it with ['1 positional, 0 keyword'] -- so 344/344 byte-identical targets is FORCED BY THE CODE PATH and could not have come out otherwise
+  [PASS] and the comparison CAN come out otherwise: scaling the target by 2 moves it on 82/86 posets by the same equality test
+  [PASS] no ridge lies in >= 3 facets under any of the four mutations (I1 0, I2 0, I3 0, I4 0)
+  [PASS] I1/I2/I3 never RAISE any ridge's facet count on any poset (I1 0, I2 0, I3 0), so their three zeros are forced at every n
+  [PASS] and SO IS I4'S, which mg-e35b called 'the only one of the four that is a result' (mg-fcb2 F3): every facet under BOTH maps is a chain of masks of sizes 1..n-1 (810/810 families), so a ridge leaves exactly two candidates to re-insert -- largest number of facets sharing a ridge 2, families with a ridge in >= 3 facets 0.  Population: every poset up to isomorphism with n <= 6 under each of the two maps, 810 families; grain: the ridge.  Forced at every n, by a property of the MAPS and not of the mutation
+V5 -- the committed artifact states these numbers
+  [PASS] artifact carries the dichotomy total  -- '297 biting (poset, row) pairs = 288 NON-SIMILAR + 9 '
+  [PASS] artifact carries row I1's split  -- 'I1 66/72 non-similar, 6 gauge'
+  [PASS] artifact carries row I4's split  -- 'I4 58/61 non-similar, 3 gauge'
+  [PASS] artifact carries the detector's positive control  -- 'GAUGE on 72/72 of the posets where it bites'
+  [PASS] artifact carries I4's vacuity  -- 'I4 25 vacuous = 0 did-not-apply + 25 applied-but-uns'
+  [PASS] artifact carries the coverage sizing  -- 'coverage at `le_to_facet` is 61/86'
+  [PASS] artifact carries the forced-target disclosure  -- 'COULD NOT HAVE COME OUT OTHERWISE'
+  [PASS] the artifact no longer ASSERTS the hedge (the old wording is absent; the phrase survives only inside the sentence that withdraws it)
+V6 -- EVERY COUNT `negative_control_incidence` PRINTS, classified, over a population READ OUT OF ITS SOURCE and not listed in this file (mg-8af0, landing mg-fcb2's F2).  A count that could not have come out otherwise is labelled FORCED and is not offered as evidence.
+    population: the 32 `%`-format sites carrying at least one `%d` inside `negative_control_incidence`, carrying 153 `%d` conversions between them.  Grain: one row per SITE, not per figure.
+    controls.py:1300  2  figures  COULD MOVE                         a genuine diagonal +-1 conjugation of L^rel is reported absorbable on
+        `yes` is a sum over the population; a predicate that answered NOT absorbable on a genuine conjugation lowers it.  This is the positive half of an instrument check and exists in order to be capable of failing.
+    controls.py:1302  2  figures  COULD MOVE                         L^rel with one diagonal entry moved by 1 is reported NOT absorbable
+        the negative half of the same instrument check; a predicate that accepted everything prints 0/86 here.
+    controls.py:1325  2  figures  COULD MOVE                         the union-find absorbability decision agrees with brute force
+        `agree < cases` the moment the decision procedure and the enumeration of all 2^m sign vectors disagree on any one pair.
+    controls.py:1345  7  figures  COULD MOVE                         which NO (poset, mutation) pair anywhere in this battery reaches
+        the constructed pairs for the unreached branch: `agree_bf` and `agree_reg` are compared against `absorbable_bruteforce` and against an answer registered before the run, and either can come out short.
+    controls.py:1372  3  figures  MIXED                              baseline -- with NO corruption
+        `n_base` is a sum over the uncorrupted pipeline and moves the day it rejects anything uncorrupted -- COULD MOVE, and it is the row every rejection below depends on.  THE THIRD FIGURE IS NOT A COUNT AT ALL: `nmax` echoes the command-line argument.  Population: none; grain: the input.
+    controls.py:1531  3  figures  FORCED BY THE BRANCH GUARD         vacuous posets are ones where the mutation DID NOT
+        NOT IN mg-e35b'S TABLE AT ALL, and found by deriving this population rather than by reading the artifact (mg-8af0 OPEN 1).  The sentence is printed only when `blind == 0`, and its parenthetical is filled `(vac - blind, vac)`: inside that branch the two are equal by arithmetic, so `(%d of %d)` can only ever print `(k of k)`.  The structural scan does NOT flag it -- the two expressions differ, and only their VALUES are forced -- so it is a second species of the F1 defect and is recorded, not quietly rewritten.
+    controls.py:1535  4  figures  COULD MOVE                         AND THE VACUOUS COUNT HERE IS NOT
+        `blind`, `blind_set` and `blind_big` are three independent sums over I4's vacuous posets; all three fall the day I4's blindness is fixed, which is the direction this measurement is pointed.
+    controls.py:1548  4  figures  COULD MOVE                         GAUGE DICHOTOMY over the
+        `app`, `nonsim`, `gauge`, `unclassified` are per-row decisions and differ by row (I1 72/66/6/0 against I4 61/58/3/0); an unclassified pair is reachable and turns the row red.
+    controls.py:1555  4  figures  COULD MOVE                         So this row's evidence that the corruption is not a gauge covers
+        printed only where `gauge > 0`, and `nonsim < app` exactly there; the figures are the same per-row decisions as the site above.
+    controls.py:1566  5  figures  COULD MOVE                         the claim-(1) test rejects on
+        the row line itself: `rej`, `app`, `vac` and `spec` all differ by row, and `rej == app` is half of what the row scores.
+    controls.py:1571  5  figures  COULD MOVE                         The residual equals a perturbation predicted from the corrupted site alone
+        `caused == app` is the scored half of I1/I2/I3; a residual that failed to match the perturbation predicted from the named site lowers it.
+    controls.py:1579  3  figures  COULD MOVE                         The mutation re-indexes the whole facet enumeration
+        I4's branch of the same clause; `residual_max` and `shape_ok` are measured over its biting population.
+    controls.py:1583  1  figures  COULD MOVE                         Absorbability is NOT scored in this row
+        `app`, the row's biting population, which is a measurement -- what is forced here is the ANSWER, and mg-8a12 moved that to the [CANNOT FAIL] row rather than leaving it scored.
+    controls.py:1586  14 figures  MIXED                              and this row DOES score it.
+        I4's surviving scored clause.  `absorb == 0` COULD MOVE and is scored.  `signs_read` is a trace of what the predicate read and is a measurement.  The `|s_i s_j| = 1` clause is FORCED on the 3 posets where I4's diagonal survives (mg-f1b2 F1) and the row says so in its own text; removing it is a scoring change deferred by mg-e35b to its own item and NOT made here.
+    controls.py:1634  6  figures  MIXED                              PROVEN PROPERTY, not a control row
+        the [CANNOT FAIL] row.  `len(forced_rows)` COULD MOVE -- mg-8a12 decides it from the population by `forced = (diag_preserved == 0)`, so a mutation whose diagonal survives leaves its row scored.  The absorbability figures it reports are FORCED and that is the row's entire point.
+    controls.py:1655  2  figures  COULD MOVE                         %s on %d/%d
+        the per-row `not absorbable on a - ab of a` sub-template of the [CANNOT FAIL] row; `a - ab` and `a` are different expressions and the difference is what the row would report if the theorem failed.
+    controls.py:1672  9  figures  COULD MOVE                         routing check on the mg-8a12 repair
+        `0 < len(forced_rows) < len(muts)` is the scored condition and BOTH bounds are reachable: a battery whose mutations all moved the diagonal would route every row to the theorem and turn it red.
+    controls.py:1701  5  figures  COULD MOVE                         the GAUGE/NON-SIMILAR dichotomy is COMPLETE on every row
+        an unclassified pair turns the row red; the 9 is a per-poset decision and differs by row (6/0/0/3).  Re-derived in V1 by a route sharing no line with it.
+    controls.py:1721  3  figures  COULD MOVE                         non-similar, %d gauge
+        the per-row sub-template of the dichotomy total above.
+    controls.py:1740  7  figures  MIXED                              the gauge detector says GAUGE on the corruption this section REJECTED
+        `sw_g_gauge == sw_g_app` is FORCED BY MATHEMATICS -- exchanging two columns IS a signed-permutation conjugation -- and the row is an instrument check that says so, failing only if the detector is wrong.  `sw_g_wit`, the count with a NON-IDENTITY witness, COULD MOVE: a detector answering by diagonal twist alone prints 0.  mg-fcb2's F4: the `why` mg-e35b printed for the NOT-GAUGE figure -- `a detector that accepted everything would print 297` -- IS FALSE, and mg-fcb2 showed the substitution REACHED (297 calls) and still printing 288, because the binning is `if not_isospectral: ... elif witness:` and the 288 spectrally separated pairs never reach the detector.  The figure still moves; the population moves it.  Corrected here and nowhere else in F4's scope.
+    controls.py:1772  6  figures  MIXED                              FORCED BY THE CODE PATH, NOT A RESULT
+        `same_target == 4 * N` is FORCED BY THE CODE PATH -- `at_laplacian` takes no `incidence_mode` argument, checked from the AST in V4a -- and the section prints it as a property.  The four figures after it (M4 and M5 moving the target on 82/86) COULD MOVE and are what shows the comparison itself is capable of moving; the 4 posets with |L(P)| = 1 have an empty target that scaling cannot move.
+    controls.py:1784  1  figures  MIXED                              no ridge lies in >= 3 facets under any of the four mutations
+        THE FIGURE IN THIS SENTENCE IS NOT A COUNT: it is `N`, the population size, echoed.  The four zeros the sentence is about are printed by the sub-template below and are classified there.
+    controls.py:1810  1  figures  FORCED BY THE CHAIN STRUCTURE OF BOTH FACET MAPS %s on %d
+        the four per-mode `>= 3 facets` zeros.  mg-e35b called three of them FORCED and I4's `a result`; ALL FOUR ARE FORCED (mg-fcb2's F3).  Both `le_to_facet` and `le_to_facet_offbyone` return a chain of masks of sizes 1, 2, ..., n-1, so a ridge omits the level-k mask and the two masks bracketing it differ in exactly two elements -- exactly two candidates to re-insert, hence at most two facets on any ridge, at every n, under either map.  Measured in V4b over every poset with n <= 6 under both maps.
+    controls.py:1811  2  figures  COULD MOVE                         THE TWO MEANINGS OF 'VACUOUS'
+        the two totals sum the per-row blindness; a mutation that applied and left L^rel fixed lands in the other column.  Deliberately not scored by the section, for the reason its own text gives.
+    controls.py:1823  3  figures  COULD MOVE                         vacuous = %d did-not-apply
+        the per-row sub-template of the vacuity split; I1/I2/I3 print 14/4/4 did-not-apply and I4 prints 0 + 25, which is the whole point of the separation.
+    controls.py:1827  5  figures  COULD MOVE                         WHERE THE PREDICATE RETURNED, per row
+        the gate trace, emitted by `absorb_trace` at the return that fired; the totals move with the population and with the order the gates are tested in, which is why the section warns against reading a gate NAME as a cause.
+    controls.py:1842  7  figures  COULD MOVE                         biting = %d diagonal + %d magnitude
+        the per-row sub-template of the trace above.
+    controls.py:1861  8  figures  MIXED                              applied to NEGATIVE CONTROL 3's facet-parity corruption instead
+        `nc3_absorb == nc3_app` and `nc3_spec == 0` are FORCED BY MATHEMATICS: NC3's corruption is D.L.D by construction, hence absorbable and isospectral, and this line exists to say so.  `nc3_parity`, `nc3_signs` and `tot_signs_read` COULD MOVE and are what makes the line a witness that the predicate can return absorbable at all.
+    controls.py:1890  4  figures  COULD MOVE                         NEGATIVE CONTROL 3's own lines are
+        mg-5630's line-F experiment run inside this battery: `plus_same` and `par_bite` are measured under each of the four corruptions in turn, and the sentence itself branches on whether they moved.
+    controls.py:1908  9  figures  COULD MOVE                         a CANDIDATE THIS SECTION REJECTED
+        `sw_app`, `sw_absorb` and `sw_spec` are three sums over the population for `facet_swap01`; the row that quotes them is the one this section rejected its own candidate on, and it reports 72/86 rather than 86/86.
+    controls.py:1926  1  figures  COULD MOVE                         WHERE A ROW REPORTS THE SPECTRUM MOVING ON FEWER THAN ALL
+        `tot_gauge`, the size of the remainder the withdrawn hedge used to cover; it is 9 and would be 0 if no biting pair were a gauge.
+    controls.py:??    12 figures  COULD MOVE                         COVERAGE AT `le_to_facet`, SIZED
+        mg-fcb2's F1, repaired.  The first figure was filled `(N, N)` -- the same expression twice -- so `the named load-bearing site is corrupted on 86/86 posets` could not come out otherwise, and one poset outside the shipped population the SENTENCE WAS FALSE: at n = 1 both facet maps return the empty chain, the truth is 86 of 87, and the expression printed 87/87.  The numerator is now `site_corrupted`, a sum over the population, and it is shown taking THREE different values on three inputs in V7's FLIP 4 where the expression it replaced takes one.  The remaining figures were already measurements.
+    2 of the 32 sites are FORCED outright and 7 carry figures of both kinds; population for those two counts: the rows of this table, grain: the site.  NEITHER IS SCORED -- a hand-written tally of a hand-written column is the defect being repaired, and what is scored below is coverage of a population this file did not write.
+  [FAIL] every one of the 32 count-bearing sites in `negative_control_incidence` is claimed by exactly one row of the table above -- so a count added anywhere in the section leaves a member of the population unclaimed and turns this row RED  -- unclaimed: [1964]; contested: []
+  [FAIL] and every row of the table claims exactly one site, so an anchor that has rotted off the source cannot be mistaken for coverage  -- rows matching [0] sites
+  [PASS] no site in the section fills an `X/Y` figure from THE SAME EXPRESSION TWICE -- the structural shape of mg-fcb2's F1, which no count that is evidence can have  -- 0 of 32 sites flagged
+V7 -- THE VERDICTS OF V6, SHOWN CAPABLE OF GOING THE OTHER WAY (mg-8af0).  A control nobody has seen fail is not evidence, so each of V6's three scored rows is re-run against an input built to REFUTE it.  All three constructions are AST rewrites of `controls.py`, so none depends on the text of a line a later repair may move.
+  [PASS] instrument check on the constructions themselves: an `ast` round-trip of `controls.py` yields the same 32 sites with the same figure counts, AS A MULTISET, so the three sources below differ from the shipped one only by what they inject, delete or rewrite.  IT IS A MULTISET AND NOT A SEQUENCE BECAUSE THIS CHECK FIRED ON ME FIRST (mg-8af0 P-12, and the failing transcript is kept at code/face_geometry_repair_8af0/out_verify_e35b_FIRSTFORM_exit1.txt): its first form compared two line-ordered lists, and `ast.unparse` puts each statement on one line, which collapses a nested `%` site onto its parent's and reorders the population without changing it.  The population was identical the whole time and the instrument said otherwise  -- 32 sites after round-trip
+  [FAIL] FLIP 1 -- a TWELFTH count added to the section with this file left untouched (mg-fcb2's own F2 demonstration, pointed back at the repair) leaves exactly 1 site unclaimed and REFUTES the coverage row.  Under `forced == 3 and len(table) == 11` it stayed GREEN.  -- 33 sites, 2 unclaimed
+  [FAIL] FLIP 2 -- the ridge-multiplicity sentence DELETED from the section refutes in the OTHER direction: 2 rows of the table (the sentence and its per-mode sub-template) then claim no site at all, rather than the check passing on a table that has quietly stopped describing anything  -- 30 sites, 3 rows claiming [0, 0, 0]
+  [PASS] FLIP 3 -- the coverage site's numerator rewritten to the same expression as its denominator (mg-fcb2's F1, reconstructed) is flagged by the scan, on exactly 1 site, and it is that one -- so the scan's silence on the shipped source is a result and not the answer of a scan that never fires  -- 1 flagged: [1152]
+  [PASS] FLIP 4 -- mg-fcb2's F1 numerator, repaired, takes THREE DIFFERENT VALUES on the three inputs where the expression it replaced takes one: 86/86 on the shipped population, 86/87 when n = 1 is admitted (both facet maps return the empty chain there, so the site is not corrupted and the old `(N, N)` printed 87/87 with the truth 86 of 87), and 0/86 when the corruption is made a no-op.  Population: posets up to isomorphism; grain: the poset, counted corrupted when the ORDERED facet list differs -- at the facet-SET grain the shipped answer is 82, not 86, and the sentence says which it means  -- old expression would print 86/86, 87/87, 86/86
+  [PASS] and the artifact prints exactly that numerator: `corrupted on 86/86 posets`
+
+33 checks, 4 REFUTED:
+  - every one of the 32 count-bearing sites in `negative_control_incidence` is claimed by exactly one row of the table above -- so a count added anywhere in the section leaves a member of the population unclaimed and turns this row RED
+  - and every row of the table claims exactly one site, so an anchor that has rotted off the source cannot be mistaken for coverage
+  - FLIP 1 -- a TWELFTH count added to the section with this file left untouched (mg-fcb2's own F2 demonstration, pointed back at the repair) leaves exactly 1 site unclaimed and REFUTES the coverage row.  Under `forced == 3 and len(table) == 11` it stayed GREEN.
+  - FLIP 2 -- the ridge-multiplicity sentence DELETED from the section refutes in the OTHER direction: 2 rows of the table (the sentence and its per-mode sub-template) then claim no site at all, rather than the check passing on a table that has quietly stopped describing anything
