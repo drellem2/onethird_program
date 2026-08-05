@@ -520,15 +520,16 @@ V6_ROWS = [
      "COULD MOVE",
      "`tot_gauge`, the size of the remainder the withdrawn hedge used to cover; "
      "it is 9 and would be 0 if no biting pair were a gauge."),
-    ("COVERAGE AT `le_to_facet`, SIZED", 12, "FORCED -- mg-fcb2's F1, UNREPAIRED",
-     "THE SITE UNDER REPAIR.  Its first figure is filled `(N, N)` -- the same "
+    ("COVERAGE AT `le_to_facet`, SIZED", 12, "COULD MOVE",
+     "mg-fcb2's F1, repaired.  The first figure was filled `(N, N)` -- the same "
      "expression twice -- so `the named load-bearing site is corrupted on 86/86 "
-     "posets` cannot come out otherwise, and one poset outside the shipped "
-     "population the SENTENCE IS FALSE: at n = 1 both facet maps return the "
-     "empty chain, the truth is 86 of 87, and the expression prints 87/87.  "
-     "The remaining figures COULD MOVE.  Classified honestly here rather than "
-     "repaired in the same commit: F2 is landed FIRST, on its own, so that the "
-     "mechanism which hid F1 is gone before F1 is touched."),
+     "posets` could not come out otherwise, and one poset outside the shipped "
+     "population the SENTENCE WAS FALSE: at n = 1 both facet maps return the "
+     "empty chain, the truth is 86 of 87, and the expression printed 87/87.  "
+     "The numerator is now `site_corrupted`, a sum over the population, and it "
+     "is shown taking THREE different values on three inputs in V7's FLIP 4 "
+     "where the expression it replaced takes one.  The remaining figures were "
+     "already measurements."),
 ]
 
 
@@ -820,6 +821,41 @@ def main():
           len(taut_hits) == 1 and COVERAGE in taut_hits[0][0]["fmt"],
           "%d flagged: %s" % (len(taut_hits),
                               [s["line"] for s, _ in taut_hits]))
+
+    # -- FLIP 4: the repaired F1 numerator, run on three populations ---------
+    # Route disjointness: `mutation_applied_at_site` is one of the five things
+    # mg-e35b added and this file does not import, so "is the named site
+    # corrupted" is asked here of the facet MAPS directly, without building a
+    # Laplacian at all.
+    def site_corrupted(pop, mut_map):
+        n = 0
+        for P in pop:
+            les = linear_extensions(P)
+            n += [le_to_facet(w) for w in les] != [mut_map(w) for w in les]
+        return n
+
+    wide = [P for n in range(1, NMAX + 1) for P in all_posets(n)]
+    shipped = site_corrupted(ps, le_to_facet_offbyone)
+    widened = site_corrupted(wide, le_to_facet_offbyone)
+    noop = site_corrupted(ps, le_to_facet)
+    check("FLIP 4 -- mg-fcb2's F1 numerator, repaired, takes THREE DIFFERENT "
+          "VALUES on the three inputs where the expression it replaced takes "
+          "one: %d/%d on the shipped population, %d/%d when n = 1 is admitted "
+          "(both facet maps return the empty chain there, so the site is not "
+          "corrupted and the old `(N, N)` printed 87/87 with the truth 86 of "
+          "87), and %d/%d when the corruption is made a no-op.  Population: "
+          "posets up to isomorphism; grain: the poset, counted corrupted when "
+          "the ORDERED facet list differs -- at the facet-SET grain the shipped "
+          "answer is 82, not 86, and the sentence says which it means"
+          % (shipped, len(ps), widened, len(wide), noop, len(ps)),
+          (shipped, widened, noop) == (86, 86, 0)
+          and len({shipped, widened, noop}) > 1,
+          "old expression would print %d/%d, %d/%d, %d/%d"
+          % (len(ps), len(ps), len(wide), len(wide), len(ps), len(ps)))
+    art_now = open(os.path.join(PROBE, "controls_output.txt")).read()
+    check("and the artifact prints exactly that numerator: `corrupted on "
+          "%d/%d posets`" % (shipped, len(ps)),
+          "corrupted on %d/%d posets" % (shipped, len(ps)) in art_now)
 
     print()
     if FAILED:

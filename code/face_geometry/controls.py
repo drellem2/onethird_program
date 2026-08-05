@@ -1924,6 +1924,27 @@ def negative_control_incidence(nmax):
           "exhibited witness. Non-isospectrality remains the stronger one-sided "
           "extra; the diagonal-twist decision is exact on every pair either way."
           % tot_gauge)
+    # THE NUMERATOR OF THE NEXT SENTENCE IS MEASURED (mg-8af0, landing
+    # mg-fcb2's F1).  It used to be `N` -- the same expression as its own
+    # denominator, so "corrupted on %d/%d posets" could not come out otherwise
+    # at any input, which is the very defect the paragraph above this one
+    # exists to land (mg-fcf1 F3).  And unlike the 344/344 case, which is a
+    # theorem at every n, this one's SENTENCE IS FALSE one poset outside the
+    # population it has been run on: at n = 1 both facet maps return the empty
+    # chain, so the site is not corrupted there and the truth is 86 of 87 while
+    # `(N, N)` prints 87/87.
+    #
+    # THE POPULATION IS NOT WIDENED TO ADMIT n = 1 (mg-fcb2's OPEN 4, decided
+    # here).  Widening moves every other count in this section and every figure
+    # in the committed artifact, to fix a defect that is not about the range --
+    # the defect is that the numerator was not computed.  The widened
+    # population is instead the CONSTRUCTED INPUT that shows the repaired
+    # figure is capable of moving, and it is run as such in
+    # code/face_geometry_repair_e35b/verify_e35b.py's V7 alongside the other
+    # construction (`le_to_facet_offbyone := le_to_facet`, which takes it to
+    # 0/86).  A count nobody has seen move is not evidence either.
+    site_corrupted = sum(1 for P in ps
+                         if mutation_applied_at_site(P, "facet_offbyone"))
     print("    * COVERAGE AT `le_to_facet`, SIZED (mg-fcf1 F5, landed by mg-e35b). "
           "mg-2789's commit message said this section 'closes the gap mg-5630 "
           "relocated'; a commit message cannot be edited, so the correct sizing is "
@@ -1941,7 +1962,7 @@ def negative_control_incidence(nmax):
           "the other %d have it removed to the [CANNOT FAIL] row as a theorem, and "
           "%d (poset, row) pairs of the four are gauges. That is a relocation of the "
           "gap, narrower than before and not closed."
-          % (N, N, dich_rows[3][1], dich_rows[3][2], dich_rows[3][3],
+          % (site_corrupted, N, dich_rows[3][1], dich_rows[3][2], dich_rows[3][3],
              dich_rows[3][1], N, dich_rows[3][2], N - dich_rows[3][1],
              len(muts) - len(forced_rows), len(forced_rows), tot_gauge))
     print("    * row scoring, and who owns it: every row above is vacuous on the "
