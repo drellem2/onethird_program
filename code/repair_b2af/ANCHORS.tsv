@@ -1,0 +1,14 @@
+# mg-b2af -- THE PIN-AND-COMPARE FILE.
+# One row per history-derived site whose answer can be
+# re-resolved from outside the script that owns it.  t1
+# re-resolves every row and compares.  Drift in any of the
+# directories below becomes loud HERE, in one place.
+# A site is absent from this file when its path or its
+# revision comes from a parameter -- see t1 (iii), where
+# the absent ones are counted and named rather than
+# quietly dropped.
+file	line	kind	path	rev	resolved	subject
+code/audit_2c77/q4_prerepair.py	193	NEWEST	code/branching_audit_58da/g1_provenance.py	e5787e1	4755d0292fc9175815739e9a77fa24dc6b8baf48	docs+repair: THE KERNEL HALF OF THE PREDICATE IS BACK AND G-3 IS SHUT 
+code/face_geometry_audit_c4c8/h4_declared_unit.py	271	INDEXED	code/face_geometry/face_complex.py	(none -- defaults to HEAD)	d01ff32dd4dce31b98cb8aca9f4ae6e3a8aaebc3	docs+repair: THE BOUND IS NARROWED TO THE SWEEP WITH ALL 17 OPERANDS I
+code/face_geometry_instr_5f9a/d2_deletion.py	1349	INDEXED	code/face_geometry/face_complex.py	(none -- defaults to HEAD)	d01ff32dd4dce31b98cb8aca9f4ae6e3a8aaebc3	docs+repair: THE BOUND IS NARROWED TO THE SWEEP WITH ALL 17 OPERANDS I
+code/runner_exit_audit_56dc/t1_grain.py	186	NEWEST	code/runner_exit_repair_70c7/out_r4_property.txt	(none -- defaults to HEAD)	973ca612d528739d6c4e94625e6d261b8b060d8c	evidence: the committed transcripts of the mg-70c7 suite, run on a cle

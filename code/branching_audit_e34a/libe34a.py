@@ -289,6 +289,14 @@ PRE_7E58_PIN = "52aeaf43015031e416d84cbc18d72ad2daa06f26"     # its parent
 
 ANCHOR_DRIFT = []       # one human-readable row per disagreement; [] is green
 
+# THE SAME ROWS, KEYED BY WHICH ANCHOR RAISED THEM (mg-b2af, F-1).
+# `ANCHOR_DRIFT` answers "did any anchor drift"; this answers "did the anchor
+# THIS SCRIPT SPENDS drift", which is the question a consumer can actually
+# act on.  Every derived name is a key whether or not it drifted, so a script
+# naming an anchor that does not exist gets a SELF-ERROR rather than a silent
+# green -- see `gate_spent`.
+ANCHOR_DRIFT_BY = {}
+
 
 def _anchored(name, marker, pin, pre_pin):
     """(repair rev, pre rev) for one anchor, derived AND pinned AND compared.
@@ -304,6 +312,7 @@ def _anchored(name, marker, pin, pre_pin):
     recorded, because a run against a revision nobody chose is worse than a
     run that says out loud which revision it fell back to.
     """
+    before = len(ANCHOR_DRIFT)
     got = first_introducing(G1_REL, marker)
     if got is None:
         ANCHOR_DRIFT.append(
@@ -321,6 +330,7 @@ def _anchored(name, marker, pin, pre_pin):
         ANCHOR_DRIFT.append(
             "%s: the first parent of %s is %s, the pinned pre-repair revision "
             "is %s" % (name, got[:8], pre[:8], pre_pin[:8]))
+    ANCHOR_DRIFT_BY[name] = ANCHOR_DRIFT[before:]
     return got, pre
 
 
@@ -328,6 +338,71 @@ REPAIR_REV, PRE_REV = _anchored("mg-76cc", MARK_76CC,
                                 REPAIR_REV_PIN, PRE_REV_PIN)
 REV_7E58, PRE_7E58_REV = _anchored("mg-7e58", MARK_7E58,
                                    REV_7E58_PIN, PRE_7E58_PIN)
+
+# WHICH DERIVATION EACH EXPORTED NAME CAME OUT OF (mg-b2af, F-1).  Written
+# here, immediately beside the two calls above, because that is the only place
+# where the association is visible without inference: a script that spends
+# `PRE_7E58_REV` has no way to know it was the `mg-7e58` call that produced
+# it, and asking every consumer to know would put the association in four
+# places instead of one.
+ANCHOR_OF = {
+    "REPAIR_REV": "mg-76cc",
+    "PRE_REV": "mg-76cc",
+    "REV_7E58": "mg-7e58",
+    "PRE_7E58_REV": "mg-7e58",
+}
+
+
+def gate_spent(report, *names):
+    """GATE THE DRIFT WHERE THE ANCHOR IS SPENT (mg-b2af, F-1 on mg-330a).
+
+    mg-330a's finding: `ANCHOR_DRIFT` was gated in `k1_prerepair.py` and in
+    `selftest_e34a.py` -- the two places that CHECK the anchor -- and in
+    neither of the two that SPEND it.  `k4_cancel.py` reads `REPAIR_REV` and
+    `k2_five.py` reads `PRE_7E58_REV`, and both would have run to a clean
+    exit on a re-pointed anchor, printing numbers about a revision nobody
+    chose.  Drift was loud where the anchor was checked and silent where it
+    was spent, and a guard on the declaration protects nothing that reads it
+    somewhere else.
+
+    So the gate is offered AT THE POINT OF USE.  A consumer names the anchors
+    it actually spends, and gets a FINDING for each disagreement raised by
+    those anchors and nothing at all when there are none -- a gate has to be
+    silent when it is green or it is a banner.
+
+    NAMED, NOT PASSED BY VALUE.  `gate_spent(R, REPAIR_REV)` could not work:
+    the value is a sha, two anchors can resolve to the same sha, and a sha
+    carries no record of which derivation produced it.  The name is the only
+    thing that survives the assignment.
+
+    AN UNKNOWN NAME IS A SELF-ERROR, NOT A PASS.  A typo'd anchor name would
+    otherwise gate on an empty list and report green, which is the failure
+    this whole arc is about -- a check that cannot fail, reported as a check
+    that passed.
+
+    Returns True iff no drift was booked, so a caller can branch on it.
+    """
+    ok = True
+    for name in names:
+        group = ANCHOR_OF.get(name)
+        if group is None:
+            report.selferr(
+                "gate_spent was asked about %r, which is not a name this "
+                "module derives; the anchors it knows are %s.  Nothing was "
+                "gated for that name and this is reported rather than "
+                "treated as green"
+                % (name, ", ".join(sorted(ANCHOR_OF))))
+            ok = False
+            continue
+        for row in ANCHOR_DRIFT_BY.get(group, []):
+            report.finding(
+                "ANCHOR DRIFT AT THE POINT OF SPEND: this script spends %s, "
+                "which is derived by the %s anchor, and that anchor "
+                "disagrees with its pin -- %s.  Every revision-dependent "
+                "number below is about whichever of the two is wrong"
+                % (name, group, row))
+            ok = False
+    return ok
 
 # THE ANCHOR THAT RE-POINTED, KEPT AS EVIDENCE.  This was REPAIR_REV until
 # mg-8d5e.  It is printed beside the property anchor in k1 (i): when the two
