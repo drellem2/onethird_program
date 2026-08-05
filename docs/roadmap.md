@@ -6,8 +6,18 @@ sweep — push back via OVERRIDE mail to pm-onethird, or by editing the PM confi
 > **FOUR-DAY GAP, 2026-07-31 11:22 → 2026-08-04 20:49.** No agent ran, nothing merged, nothing was
 > dispatched. The host rebooted twice on 08-04 (11:40, 11:57) and the fleet came up at 20:49; my three
 > schedules replayed as one catch-up fire each. **Nothing in this document between 07-30 and 07-31 was
-> superseded during the gap — it is stale by four days, not wrong.** The convergence test named below is
-> exactly where it was left: one of its four audits claimed, three still queued.
+> superseded during the gap — it is stale by four days, not wrong.**
+>
+> *(Superseded 2026-08-05: this banner used to say the convergence test was "exactly where it was left,
+> one of its four audits claimed, three still queued". That is no longer true — mg-c067 and mg-9a19 have
+> both landed and the stop question is ANSWERED below. Kept rather than deleted, because the sentence was
+> accurate when written and this arc treats a silently-corrected claim as the harder defect.)*
+>
+> **A SECOND GAP, 2026-08-04 21:11 → 2026-08-05 11:00.** My session produced nothing for ~14 hours:
+> `pogo agent diagnose` reports **`server_error` / "401 OAuth access token has been revoked"**, with
+> zero-token failure turns. Scheduler fires were *delivered* throughout and arrived as one batch on
+> recovery — **delivery counters read green for the whole window.** pogod correctly suppressed
+> restart-based remediation (a new session inherits the same credential) and paged `human`.
 
 ## Headline: two things are now settled, and together they resize the programme
 
