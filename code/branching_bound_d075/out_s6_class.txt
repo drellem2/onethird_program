@@ -1,0 +1,84 @@
+==============================================================================
+S6  THE INSTANCE OR THE CLASS?  Measured, and answered against
+    this repair itself.
+==============================================================================
+
+==============================================================================
+  C1  DO THE THREE PRIOR INSTANCES EXIST AS ARTEFACTS?
+      Population: the 3 ticket ids the brief names.
+      Grain: one ticket -> present / absent, with a path.
+==============================================================================
+    mg-2c77   PRESENT   a term denoting 39 while the table classified 17
+              path   : code/audit_2c77
+              path   : docs/audit-mg-2c77-the-reason-and-the-moved-subject.md
+              commits: 4 naming this ticket
+
+    mg-7e39   PRESENT   ROW_NAMES hand-listing 5 where the gate prints 6
+              path   : code/hodge_leverage_audit_7e39
+              commits: 6 naming this ticket
+
+    mg-19ec   PRESENT   the 33-interval figure at 8 sites, bounded at 4
+              path   : code/branching_audit_19ec
+              commits: 11 naming this ticket
+
+    located: 3 of 3
+
+==============================================================================
+  C2  WHAT FRACTION OF THE FIGURE'S CORPUS DOES MY GATE COVER?
+      Population: docs/*.md with >= 1 site under RELAXED.
+      Grain: one file -> gated / not gated.
+==============================================================================
+    file                                                     sites   bnd   unb   gated
+    OneThird-Audit-mg-41aa-Repair.md                             2     1     1      no
+    OneThird-Audit-mg-af28-Branching-Graphs.md                   5     1     4      no
+    OneThird-Branching-Graphs-Repair.md                          3     1     2      no
+    OneThird-Branching-Graphs-Where-This-Lives.md               10    10     0     YES
+    OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md          8     4     4      no
+    OneThird-Warrant-Repair-mg-dffa.md                           2     1     1      no
+    repair-mg-d075-the-figure-and-its-scope.md                   6     6     0     YES
+
+    files in the corpus population : 7
+    files my gate covers           : 2
+    sites in the corpus            : 36
+    UNBOUNDED sites remaining      : 12, all 12 of them in files this
+                                     repair does not touch
+
+==============================================================================
+  C3  IS THE ARTEFACT REUSABLE WITHOUT EDITING IT?
+      Demonstrated by running the same predicate, unmodified,
+      over every file of C2.
+==============================================================================
+    lib_d075.relaxed_sites(path) takes the document as an argument;
+    the C2 table above IS the demonstration -- 7 files, one call each,
+    zero edits to the predicate.  A per-document instrument could not
+    have produced that table.
+
+==============================================================================
+  VERDICT.  Rule, stated before the answer:
+    CLASS                        if the gate covers every file
+                                 of the corpus population;
+    INSTANCE + REUSABLE ARTEFACT if it covers some and the
+                                 predicate is path-parameterised;
+    INSTANCE                     otherwise.
+==============================================================================
+    gate covers 2 of 7 files; predicate is path-parameterised: yes
+
+    VERDICT: INSTANCE + REUSABLE ARTEFACT
+
+    AND THE PART NO ARTEFACT FIXES.  The three prior instances are
+    not three occurrences of one bug in one file; they are one
+    HABIT -- writing a figure and its scope in different places, or
+    the scope nowhere -- committed by three different authors in
+    three different subsystems.  A path-parameterised predicate can
+    be pointed at a fourth document; it cannot be pointed at the
+    habit.  What would address the class is a check that runs on
+    every document of this repo on every commit, and this repair
+    does not install one.  That is the honest answer and it is the
+    answer PREDICTIONS.md P10 committed to in advance.
+
+==============================================================================
+SUMMARY s6_class: 3 of 3 prior instances located as artefacts
+SUMMARY s6_class: corpus 7 files, 36 sites, 12 unbounded remaining
+SUMMARY s6_class: gate covers 2 of 7 files
+SUMMARY s6_class: VERDICT INSTANCE + REUSABLE ARTEFACT
+==============================================================================

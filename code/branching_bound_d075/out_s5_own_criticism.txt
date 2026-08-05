@@ -1,0 +1,111 @@
+==============================================================================
+S5  THE SENTENCES IN WHICH I FAULT SOMEONE ELSE'S SCOPE,
+    CHECKED FOR MY OWN.  Pointed at this repair and nothing else.
+==============================================================================
+
+  THE POPULATION, NAMED
+    code/branching_bound_d075/README.md                        125 live sentences
+    docs/repair-mg-d075-the-figure-and-its-scope.md            115 live sentences
+    docs/OneThird-Branching-Graphs-Where-This-Lives.md         14 sentence(s) added by this repair
+    TOTAL population                                           254
+    grain: one sentence
+
+==============================================================================
+  MY CRITICISM SENTENCES -- fault marker AND a target that is
+  not this work item.  Each checked for ITS OWN scope.
+==============================================================================
+    criticism sentences : 10 of 254 in the population
+
+    [01] README.md                                  line 53   CARRIES ITS OWN SCOPE
+         fault : not the population,unbounded
+         target: mg-19ec
+         scope : POPULATION
+         **EIGHT IS NOT THE POPULATION EITHER.** The ninth is the row-10 sentence of §3, which said *"on 28 of 33
+          intervals"* of the 33 intervals `[0̂, w]` with `rank(w) ≤ 6` and never spelled *"Young–Fibonacci"* — an
+         d which **mg-19ec's own POP-1 block already printed and scored unbounded.** One audit, two instruments, 
+         and only the smaller number reached the verdict.
+
+    [02] README.md                                  line 67   CARRIES ITS OWN SCOPE
+         fault : unbounded
+         target: the parent
+         scope : 36 sites
+         Post-repair A 10 / B 10 / ceiling 11 / corpus 36 sites in 7 files, 12 unbounded. - **s2** — the parent's
+          transcript parsed to 8 rows; my independent STRICT re-implementation returns the same 8 line numbers an
+         d the same 8 verdicts;
+
+    [03] README.md                                  line 86   CARRIES ITS OWN SCOPE
+         fault : defect
+         target: the instrument
+         scope : 3 rows
+         Adjudicated over those 3 rows as a property of the instrument, not scored as a defect: a row recording a
+          withdrawn reading *should* contribute the replacement as a live claim. 2.
+
+    [04] README.md                                  line 152  CARRIES ITS OWN SCOPE
+         fault : unbounded
+         target: the parent
+         scope : 4 of the 8
+         my 5 unbounded of the 9 = the parent's 4 of the 8 plus line 307, none moving the other way
+
+    [05] README.md                                  line 158  CARRIES ITS OWN SCOPE
+         fault : no bound,unbounded
+         target: mg-dffa
+         scope : 1 of 5
+         **HELD.** 1 of 5 of my criticism sentences was unbounded, and it was the one faulting mg-dffa's clause f
+         or having no bound.
+
+    [06] repair-mg-d075-the-figure-and-its-scope.md line 29   CARRIES ITS OWN SCOPE
+         fault : unbounded
+         target: mg-19ec
+         scope : POP-1
+         **And mg-19ec already had it.** The POP-1 block of the same transcript (`code/branching_audit_19ec/out_e
+         5_population.txt`) prints this exact sentence as its `[09]` and scores it unbounded.
+
+    [07] repair-mg-d075-the-figure-and-its-scope.md line 62   CARRIES ITS OWN SCOPE
+         fault : not the population
+         target: mg-aaf4
+         scope : population
+         **FOUR was not the population, and EIGHT is not either.** The brief for this repair told me not to inher
+         it 8; mg-aaf4 is told not to inherit 9.
+
+    [08] repair-mg-d075-the-figure-and-its-scope.md line 92   CARRIES ITS OWN SCOPE
+         fault : no bound
+         target: mg-dffa
+         scope : 30 intervals
+         The brief singled this out and it deserves the space. §2's mg-dffa note faults Young–Fibonacci for **nam
+         ing no class of `P`** — and stated the **Young** classification it was contrasting against with no bound
+          at all, over a family this repo has measured at exactly **30 intervals `[∅, λ]` with `|λ| ≤ 6`** and no
+         where beyond:
+
+    [09] repair-mg-d075-the-figure-and-its-scope.md line 210  CARRIES ITS OWN SCOPE
+         fault : no instrument computes
+         target: the published audit
+         scope : code/branching_audit_19ec
+         The `HEDGES` list in `code/branching_audit_19ec/e2_f2_clauses.py` has **25** entries, and that audit's t
+         ranscript never prints a token count at all — so **26** is a hand-written literal no instrument computes
+         . - The phrasing population is **15** in the transcript and in the published audit, and **13** in the re
+         covered verdict that reached mg-d075's brief.
+
+    [10] OneThird-Branching-Graphs-Where-This-Lives line 30   CARRIES ITS OWN SCOPE
+         fault : not the population
+         target: mg-19ec
+         scope : population
+         **Eight is not the population either.** Counted over the live sentences of this file at the grain mg-19e
+         c itself used, the sites stating that figure were **9**, of which **5** carried no scope in their own se
+         ntence; the ninth is the row-10 sentence in §3, which mg-19ec's own POP-1 block printed and whose POP-3 
+         block could not see, because that sentence says *"for Young's"* and never spells *"Young–Fibonacci"*.
+
+==============================================================================
+  VERDICT ON MYSELF
+==============================================================================
+    criticism sentences carrying their own scope : 10 of 10
+    criticism sentences UNBOUNDED                : 0 of 10
+
+    No criticism sentence of mine is unbounded at this grain.
+    That is not proof of innocence -- it is one predicate over one
+    population, and a defect outside the predicate is invisible to
+    it.  mg-aaf4 is asked to pick a different one.
+
+==============================================================================
+SUMMARY s5_own_criticism: population 254 live sentences of my own
+SUMMARY s5_own_criticism: 10 criticism sentence(s); 0 unbounded
+==============================================================================

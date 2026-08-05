@@ -1,0 +1,211 @@
+==============================================================================
+S1  mg-d075: I count the sites myself.  Is EIGHT the population?
+==============================================================================
+
+==============================================================================
+  PRE-REPAIR AND AS-IT-STANDS, side by side.  The counts that
+  answer the brief are the PRE-REPAIR ones: mg-19ec's 8 is a
+  measurement of a commit, and so is the number that refutes it.
+==============================================================================
+    anchor commit : 645b5a4a1a254ac3945a90ddd4462b22a9385723
+    anchor subject: docs+repair: mg-5800's four WARRANT findings landed — TWO CELLS WIDENED, TWO CLAUSES NARROWED, O
+
+  PRE-REPAIR  (living document rolled back to the anchor; the other
+               corpus files read as they stand; this repair's own 1
+               new docs/*.md excluded.  102 docs/*.md exist now, 91 at
+               the anchor, so 11 post-date it -- among them mg-19ec's
+               own audit document.)
+    population     sites     bounded    unbnd       note
+    A STRICT       8               4        4    one doc
+    B RELAXED      9               4        5    one doc
+    C ceiling      10              5        5 incl struck
+    D corpus       29             12       17    6 files
+
+  AS IT STANDS
+    population     sites     bounded    unbnd       note
+    A STRICT       10             10        0    one doc
+    B RELAXED      10             10        0    one doc
+    C ceiling      11             11        0 incl struck
+    D corpus       36             24       12    7 files
+
+  THE PRE-REPAIR SITES OF POPULATION B, ALL 9, IN FULL:
+
+  <01> line 166  cell  BOUNDED   **5 of the 33 intervals `[∅̂, w]`, `rank(w) ≤ 6`, of the Young–Fibonacci lattice are not**, smallest witness `w 
+                                       = 221`
+
+  <02> line 166  cell  BOUNDED   At the level where the contact actually lives — finite intervals — **28 of the 33** Young–Fibonacci intervals to
+                                        rank 6 **are** distributive (mg-41aa, landing mg-6ad0's X4; §2 item 2)
+
+  <03> line 175  para  UNBOUNDED At the level of finite **intervals** a contact of the same **kind** extends: **28 of the 33** finite Young–Fibon
+                                       acci intervals are distributive, so each is `J(P)` for some `P`, item 2.
+
+  <04> line 181  para  UNBOUNDED The Young–Fibonacci sentence is **Birkhoff plus a distributivity count**: every finite distributive lattice is `
+                                       J` of its join-irreducibles, so "28 of the 33 are `J(P)`" says precisely "28 of the 33 are distributive", and **
+                                       names no class of `P`**.
+
+  <05> line 202  para  BOUNDED   T8 measures the illustrative case: Young–Fibonacci, the other known 1-differential lattice, is not distributive 
+                                       as a whole (5 of its 33 intervals to rank 6 fail, smallest witness `w = 221`).
+
+  <06> line 307  cell  BOUNDED   That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Bro
+                                       wn §4.3 consumes them and each is a `J(P)`.
+
+  <07> line 307  cell  UNBOUNDED Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, o
+                                       n 28 of 33 intervals; what keeps it ADJACENT is that it is a different monoid, which is the reason above and not
+                                        the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: it is not the SAME contact.
+
+  <08> line 413  cell  UNBOUNDED 30 Young intervals, 0 non-distributive; 33 Young–Fibonacci intervals, 5 non-distributive, witness `w = 221` — al
+                                       l reproduced by mg-6ad0 and by mg-41aa.
+
+  <09> line 414  cell  UNBOUNDED At interval level, **28 of 33** Young–Fibonacci intervals are distributive and each is `J(P)` for an explicitly 
+                                       constructed `P`, **0 bad**
+
+  PRE-REPAIR B \ A -- the site(s) mg-19ec's predicate cannot see: 1
+
+  <01> line 307  cell  UNBOUNDED Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, o
+                                       n 28 of 33 intervals; what keeps it ADJACENT is that it is a different monoid, which is the reason above and not
+                                        the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: it is not the SAME contact.
+
+  THE UNIVERSE, NAMED
+    document              : OneThird-Branching-Graphs-Where-This-Lives.md
+    claim sites parsed    : 157
+    LIVE sites            : 99
+    LIVE sentences        : 322
+
+==============================================================================
+  A  STRICT predicate, one document -- the parent's population.
+     grain: sentences.  value: a count of sentences.
+==============================================================================
+    population : 10 live sentences state the figure 33 about
+                 Young-Fibonacci intervals, NAMING IT IN THE SENTENCE
+    bounded    : 10 carry a rank scope in the same sentence
+    unbounded  : 0 do not
+
+  <01> line 30   para  BOUNDED   **No number moves, no measurement is withdrawn or added to, and no sentence of this document is deleted.** mg-19
+                                       ec found that this document states the 33-interval Young–Fibonacci figure — the 33 intervals `[0̂, w]` with `ran
+                                       k(w) ≤ 6` — at **8** live sentences and bounds it at 4.
+
+  <02> line 184  cell  BOUNDED   **5 of the 33 intervals `[∅̂, w]`, `rank(w) ≤ 6`, of the Young–Fibonacci lattice are not**, smallest witness `w 
+                                       = 221`
+
+  <03> line 184  cell  BOUNDED   At the level where the contact actually lives — finite intervals — **28 of the 33** Young–Fibonacci intervals to
+                                        rank 6 **are** distributive (mg-41aa, landing mg-6ad0's X4; §2 item 2)
+
+  <04> line 193  para  BOUNDED   At the level of finite **intervals** a contact of the same **kind** extends: **28 of the 33** intervals `[0̂, w]
+                                       ` of Young–Fibonacci with `rank(w) ≤ 6` are distributive, so each is `J(P)` for some `P`, item 2.
+
+  <05> line 199  para  BOUNDED   The Young–Fibonacci sentence is **Birkhoff plus a distributivity count**: every finite distributive lattice is `
+                                       J` of its join-irreducibles, so, of the **33** intervals `[0̂, w]` with `rank(w) ≤ 6`, *"28 are `J(P)`"* says pr
+                                       ecisely *"28 are distributive"*, and **names no class of `P`**.
+
+  <06> line 223  para  BOUNDED   T8 measures the illustrative case: Young–Fibonacci, the other known 1-differential lattice, is not distributive 
+                                       as a whole (5 of its 33 intervals to rank 6 fail, smallest witness `w = 221`).
+
+  <07> line 328  cell  BOUNDED   That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Bro
+                                       wn §4.3 consumes them and each is a `J(P)`.
+
+  <08> line 328  cell  BOUNDED   Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, o
+                                       n 28 of the 33 Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6`; what keeps it ADJACENT is that it is a di
+                                       fferent monoid, which is the reason above and not the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: 
+                                       it is not the SAME contact.
+
+  <09> line 434  cell  BOUNDED   30 Young intervals `[∅, λ]` with `λ` of size ≤ 6, 0 non-distributive; 33 Young–Fibonacci intervals `[0̂, w]` wit
+                                       h `rank(w) ≤ 6`, 5 non-distributive, witness `w = 221` — all reproduced by mg-6ad0 and by mg-41aa.
+
+  <10> line 435  cell  BOUNDED   At interval level, **28 of the 33** Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6` are distributive and 
+                                       each is `J(P)` for an explicitly constructed `P`, **0 bad**
+
+==============================================================================
+  B  RELAXED predicate, one document -- attribution may come from
+     the CELL or PARAGRAPH.  grain: sentences.
+==============================================================================
+    population : 10 live sentences state the figure 33 about
+                 Young-Fibonacci intervals
+    bounded    : 10 carry a rank scope in the same sentence
+    unbounded  : 0 do not
+
+  <01> line 30   para  BOUNDED   **No number moves, no measurement is withdrawn or added to, and no sentence of this document is deleted.** mg-19
+                                       ec found that this document states the 33-interval Young–Fibonacci figure — the 33 intervals `[0̂, w]` with `ran
+                                       k(w) ≤ 6` — at **8** live sentences and bounds it at 4.
+
+  <02> line 184  cell  BOUNDED   **5 of the 33 intervals `[∅̂, w]`, `rank(w) ≤ 6`, of the Young–Fibonacci lattice are not**, smallest witness `w 
+                                       = 221`
+
+  <03> line 184  cell  BOUNDED   At the level where the contact actually lives — finite intervals — **28 of the 33** Young–Fibonacci intervals to
+                                        rank 6 **are** distributive (mg-41aa, landing mg-6ad0's X4; §2 item 2)
+
+  <04> line 193  para  BOUNDED   At the level of finite **intervals** a contact of the same **kind** extends: **28 of the 33** intervals `[0̂, w]
+                                       ` of Young–Fibonacci with `rank(w) ≤ 6` are distributive, so each is `J(P)` for some `P`, item 2.
+
+  <05> line 199  para  BOUNDED   The Young–Fibonacci sentence is **Birkhoff plus a distributivity count**: every finite distributive lattice is `
+                                       J` of its join-irreducibles, so, of the **33** intervals `[0̂, w]` with `rank(w) ≤ 6`, *"28 are `J(P)`"* says pr
+                                       ecisely *"28 are distributive"*, and **names no class of `P`**.
+
+  <06> line 223  para  BOUNDED   T8 measures the illustrative case: Young–Fibonacci, the other known 1-differential lattice, is not distributive 
+                                       as a whole (5 of its 33 intervals to rank 6 fail, smallest witness `w = 221`).
+
+  <07> line 328  cell  BOUNDED   That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Bro
+                                       wn §4.3 consumes them and each is a `J(P)`.
+
+  <08> line 328  cell  BOUNDED   Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, o
+                                       n 28 of the 33 Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6`; what keeps it ADJACENT is that it is a di
+                                       fferent monoid, which is the reason above and not the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: 
+                                       it is not the SAME contact.
+
+  <09> line 434  cell  BOUNDED   30 Young intervals `[∅, λ]` with `λ` of size ≤ 6, 0 non-distributive; 33 Young–Fibonacci intervals `[0̂, w]` wit
+                                       h `rank(w) ≤ 6`, 5 non-distributive, witness `w = 221` — all reproduced by mg-6ad0 and by mg-41aa.
+
+  <10> line 435  cell  BOUNDED   At interval level, **28 of the 33** Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6` are distributive and 
+                                       each is `J(P)` for an explicitly constructed `P`, **0 bad**
+
+==============================================================================
+  B \ A  -- THE SITES THE PARENT'S PREDICATE CANNOT SEE
+==============================================================================
+    count : 0 live sentence(s) state the figure about Young-Fibonacci
+            intervals WITHOUT spelling the name in the same sentence
+
+==============================================================================
+  C  RELAXED predicate, LIVENESS DROPPED -- the ceiling
+==============================================================================
+    population : 11 sentences (live + struck + block-quoted) state the
+                 figure about Young-Fibonacci intervals
+    bounded    : 11
+    unbounded  : 0
+    live       : 10 of 11 -- the liveness rule removes 1
+
+==============================================================================
+  D  RELAXED predicate, THE WHOLE docs/ CORPUS -- reported, and
+     NOT repaired.  Historical audit documents are dated records.
+==============================================================================
+    files scanned         : 102 markdown files in docs/
+    files stating figure  : 7
+    population            : 36 live sentences state the 33-interval
+                            figure about Young-Fibonacci intervals
+    bounded               : 24
+    unbounded             : 12  (33% of the corpus population)
+
+    file                                                           sites   bnd   unb
+    OneThird-Audit-mg-41aa-Repair.md                                   2     1     1
+    OneThird-Audit-mg-af28-Branching-Graphs.md                         5     1     4
+    OneThird-Branching-Graphs-Repair.md                                3     1     2
+    OneThird-Branching-Graphs-Where-This-Lives.md                     10    10     0
+    OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md                8     4     4
+    OneThird-Warrant-Repair-mg-dffa.md                                 2     1     1
+    repair-mg-d075-the-figure-and-its-scope.md                         6     6     0
+
+    THE REPAIR POPULATION IS ONE FILE OF THESE 7.  The other 6 are
+    audit and repair records written by earlier tickets and dated by
+    their commits; editing them would destroy the evidence trail this
+    arc runs on.  The number above is a REPORT, not a backlog I am
+    silently declining -- see README section 'what I did not repair'.
+
+==============================================================================
+SUMMARY s1_census: universe 322 live sentences in 99 live sites of OneThird-Branching-Graphs-Where-This-Lives.md
+SUMMARY s1_census: A strict/one-doc 10 sites, 10 bounded, 0 unbounded
+SUMMARY s1_census: B relaxed/one-doc 10 sites, 10 bounded, 0 unbounded
+SUMMARY s1_census: B\A 0 site(s) the parent's predicate cannot see
+SUMMARY s1_census: C ceiling/one-doc 11 sentences incl. struck
+SUMMARY s1_census: D corpus 36 sites in 7 files, 12 unbounded
+SUMMARY s1_census: PRE-REPAIR A 8 sites, 4 unbounded; B 9 sites, 5 unbounded
+SUMMARY s1_census: PRE-REPAIR D corpus 29 sites, 17 unbounded
+SUMMARY s1_census: EIGHT IS NOT THE POPULATION of B (pre-repair B = 9)
+==============================================================================

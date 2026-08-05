@@ -1,0 +1,72 @@
+==============================================================================
+SELFTEST mg-d075 -- nine deliberate breakages of the repaired
+         document, each checked to be a real breakage first.
+==============================================================================
+
+  baseline: 10 sites, 10 bounded, 0 unbounded
+
+==============================================================================
+  M1  REMOVE THE BOUND, site by site.  9 mutations.
+==============================================================================
+    site <01> line 30   mutation is a real change                  ok
+    site <01> line 30   removing `rank(w) ≤ 6` makes 1 site unbounded ok   (1 unbounded, 10 sites)
+    site <02> line 184  mutation is a real change                  ok
+    site <02> line 184  removing `rank(w) ≤ 6` makes 1 site unbounded ok   (1 unbounded, 10 sites)
+    site <03> line 184  mutation is a real change                  ok
+    site <03> line 184  removing `to rank 6` makes 1 site unbounded ok   (1 unbounded, 10 sites)
+    site <04> line 193  mutation is a real change                  ok
+    site <04> line 193  removing `rank(w) ≤ 6` makes 1 site unbounded ok   (1 unbounded, 10 sites)
+    site <05> line 199  mutation is a real change                  ok
+    site <05> line 199  removing `rank(w) ≤ 6` makes 1 site unbounded ok   (1 unbounded, 10 sites)
+    site <06> line 223  mutation is a real change                  ok
+    site <06> line 223  removing `to rank 6` makes 1 site unbounded ok   (1 unbounded, 10 sites)
+    site <07> line 328  mutation is a real change                  ok
+    site <07> line 328  removing `to rank 6` makes 1 site unbounded ok   (1 unbounded, 10 sites)
+    site <08> line 328  mutation is a real change                  ok
+    site <08> line 328  removing `rank(w) ≤ 6` makes 1 site unbounded ok   (1 unbounded, 10 sites)
+    site <09> line 434  mutation is a real change                  ok
+    site <09> line 434  removing `rank(w) ≤ 6` makes 1 site unbounded ok   (1 unbounded, 10 sites)
+    site <10> line 435  mutation is a real change                  ok
+    site <10> line 435  removing `rank(w) ≤ 6` makes 1 site unbounded ok   (1 unbounded, 10 sites)
+
+==============================================================================
+  M2  REPLACE THE BOUND WITH A HEDGE.  A softening word must NOT
+      score as a bound.  This is the case the arc turns on.
+==============================================================================
+    hedge 'roughly' is a real change                               ok
+    hedge 'roughly' does NOT score as a bound                      ok   (1 unbounded)
+    hedge 'essentially' is a real change                           ok
+    hedge 'essentially' does NOT score as a bound                  ok   (1 unbounded)
+    hedge 'broadly the same range' is a real change                ok
+    hedge 'broadly the same range' does NOT score as a bound       ok   (1 unbounded)
+
+==============================================================================
+  M3  DELETE A SITE SENTENCE.  Population must fall by 1.
+==============================================================================
+    victim sentence located verbatim                               ok
+    deletion is a real change                                      ok
+    deleting one site drops the population by 1                    ok   (10 -> 9)
+
+==============================================================================
+  M4  BLOCK-QUOTE A SITE.  Liveness must drop it.
+==============================================================================
+    block-quoting is a real change                                 ok
+    block-quoting a paragraph site removes it from the population  ok   (10 -> 9)
+
+==============================================================================
+  M5  MARK A SITE'S UNIT STRUCK.  Same.
+==============================================================================
+    strike marker is a real change                                 ok
+    a struck unit leaves the population                            ok   (10 -> 9)
+
+==============================================================================
+  M6  ADD A NEW UNBOUNDED SITE.  The regression case.
+==============================================================================
+    injection is a real change                                     ok
+    a new unbounded site raises the population by 1                ok   (10 -> 11)
+    a new unbounded site is scored unbounded                       ok   (1 unbounded)
+
+==============================================================================
+SUMMARY selftest_d075: baseline 10 sites, 10 bounded
+SUMMARY selftest_d075: failures 0
+==============================================================================
