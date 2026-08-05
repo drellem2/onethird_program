@@ -1,0 +1,184 @@
+    this audit runs at HEAD = 9043b008b5edafdd03910aedd4d47ff2a7decca6
+    the pin it compares against is 77306a7
+
+==============================================================================
+G4a  THE DIFF OVER mg-6ef4's OWN TREE
+==============================================================================
+
+    git diff 77306a7..HEAD -- code/species_bound_audit_6ef4/
+    exit 0, 0 byte(s) of diff
+
+==============================================================================
+G4b  EVERY ADDED LINE OF THE REPAIR, SEARCHED FOR A SELF-EXCLUSION
+==============================================================================
+
+    The first half of Q18 is one `git diff`.  The second half is not:
+    a self-excluding predicate added in ANY file would be the same
+    regression, so the whole diff is read and not one directory of it.
+  
+    THE RULE, IN TWO STAGES, AND THE SECOND ONE IS WHY.
+  
+    Stage 1, the CANDIDATE rule.  An added line is a candidate if it
+    carries both a filtering token and a self-naming token:
+        filtering   if / != / not in / continue / startswith /
+                    endswith / exclude / skip / ignore / drop / filter
+        self-naming __file__ / a code/species_* directory / 'own
+                    commit' / 'own file' / 'itself' / 'self-refer'
+    Every candidate is PRINTED, whatever stage 2 decides about it.
+  
+    Stage 2, the DISPOSITION, and it is where the first version of this
+    section was wrong.  A DEFECT OF THIS INSTRUMENT, kept: run with
+    stage 1 alone, it flagged a docstring sentence in
+    code/runner_exit_audit_56dc/t2_strictest.py and a bare `continue`
+    whose self-naming words were in the COMMENT beside it, and it
+    flagged TWO LINES OF ITS OWN SOURCE -- one of them the line that
+    defines the rule.  A detector that reads its own definition as an
+    instance of what it detects is measuring its own text.
+  
+    The repair is NOT to exclude this file from the scan -- that is the
+    regression this whole section exists to report.  It is to stop
+    treating PROSE as a predicate: each file is tokenized, every
+    COMMENT and every STRING is blanked out, and the disposition is
+    read off what is left.  A sentence in a docstring can then say
+    anything it likes, and a `continue` with an explanatory comment is
+    a `continue`.  Both the raw line and the code-only rendering are
+    printed for every candidate, so the classification is checkable.
+
+    added lines in 77306a7..HEAD                     49206
+    of them in *.py / *.sh                          31515
+    CANDIDATES (filtering token AND self-naming)        7
+
+        code/audit_2c77/lib2c77.py
+            raw : an `if` whose body returns, or the value of a `return` itself.  Implemented
+            code: (nothing -- all of it was comment or string)
+            -> PROSE -- the whole line is a comment or a string literal
+        code/audit_330a/s3_kernel_half.py
+            raw : print("""   (iii) is worth nothing if it is the only measurement of itself.
+            code: print(
+            -> PROSE -- the filtering token was inside a comment or string
+        code/repair_8d5e/lib8d5e.py
+            raw : an `if` whose body returns, or the value of a `return` itself.  Written
+            code: (nothing -- all of it was comment or string)
+            -> PROSE -- the whole line is a comment or a string literal
+        code/runner_exit_audit_56dc/t2_strictest.py
+            raw : itself by a three-alternative one, over a population that excluded every `.md`.
+            code: (nothing -- all of it was comment or string)
+            -> PROSE -- the whole line is a comment or a string literal
+        code/runner_exit_c2b3/k2_consume.py
+            raw : continue                          # a script naming itself
+            code: continue
+            -> NOT A SELF-EXCLUSION -- the code names no `__file__` and no own-directory literal
+        code/species_extent_d633/e3_bothways.py
+            raw : property should locate itself by that property.  It raises if the marker
+            code: (nothing -- all of it was comment or string)
+            -> PROSE -- the whole line is a comment or a string literal
+        code/species_gate_audit_d53d/g4_self.py
+            raw : "This row is a FINDING if the repair removed it.  mg-6ef4's own commit\n"
+            code: (nothing -- all of it was comment or string)
+            -> PROSE -- the whole line is a comment or a string literal
+  Q18    HELD
+        predicted: the diff over code/species_bound_audit_6ef4/ is empty, and 0 predicates anywhere exclude an instrument's own files or commits from a population it counts
+        measured:  diff is EMPTY (0 bytes); 7 candidate line(s), 0 of them a self-exclusion
+        Scored with the stage-2 rule.  With stage 1 alone this scored MISSED at
+        2, and both of those two are printed above with the reason they are
+        not self-exclusions.  The first run's score is recorded in OUTCOMES.md
+        rather than quietly replaced.
+
+==============================================================================
+G4c  mg-4adb's OWN *.md FILES AGAINST THE CENSUS THAT COUNTS THEM
+==============================================================================
+
+    The census is e2_crosssection.py's: every *.md under docs/ and under
+    code/, recursively.  It is RE-DERIVED here from `git ls-tree` at the
+    named revision rather than read out of any transcript, and then the
+    question is asked of the result.
+
+    census(9043b00) = 238 markdown file(s)
+        IN THE CENSUS: code/species_rung_repair_4adb/OUTCOMES.md
+        IN THE CENSUS: code/species_rung_repair_4adb/PREDICTIONS.md
+        IN THE CENSUS: code/species_rung_repair_4adb/README.md
+  Q19a   HELD
+        predicted: mg-4adb's own three *.md files are 3 of 3 present in census(HEAD)
+        measured:  3 of 3 present: OUTCOMES.md, PREDICTIONS.md, README.md
+
+==============================================================================
+G4d  t3_census.py's `git log --all` POPULATION AGAINST ITS OWN COMMITS
+==============================================================================
+
+    mg-6ef4's T3d enumerates every commit-message object reachable from
+    every ref.  Its own commits are in that population and its own
+    message is one of the objects it counts.  Two things are asked:
+    does its SOURCE carry a predicate that drops them, and are they
+    actually in the population `git log --all` returns.
+
+    candidate line(s) in t3_census.py: 0, of them self-exclusions: 0
+    `git log --all` population: 473 commit object(s)
+    of them mg-4adb's or mg-6ef4's own: 15
+        1729f69b evidence: the committed transcripts of the mg-4adb suite, run on a clean t
+        4bb4384e docs+repair: THE GATE IS THE LAST COMMAND AND THE POPULATION IS EVERY LINE
+        9584cd1e predictions: mg-4adb's predictions, committed BEFORE any probe runs (mg-4a
+        6c90534e evidence: the committed transcripts of the mg-4adb suite, run on a clean t
+        c031b9b8 docs+repair: THE GATE IS THE LAST COMMAND AND THE POPULATION IS EVERY LINE
+        2e48b678 predictions: mg-4adb's predictions, committed BEFORE any probe runs (mg-4a
+        6a06c912 pm-onethird: four landed 05:00-05:50; set -e outside every deletion popula
+        e5787e11 evidence: PUBLISH THE POST-COMMIT MEASUREMENT, AND THE AUDIT'S OWN MESSAGE
+  Q19b   HELD
+        predicted: no self-exclusion in t3_census.py's `git log --all` population
+        measured:  0 candidate line(s), 0 self-excluding predicate(s) in its source; its own 15 commit(s) are in the population
+  the self-reference is INTACT, and that is the correct state      ok
+        This row is a FINDING if the repair removed it.  mg-6ef4's own commit
+        message joining the census it counts is disclosed in its own
+        transcript; a repair that dropped it would have made the census wrong
+        in order to make it look tidy.
+
+==============================================================================
+G4e  THIS INSTRUMENT'S OWN FILES, BY THE SAME RULE
+==============================================================================
+
+    The same disclosure, made by this audit about itself.  What is
+    measured is THE WORKTREE, and the revision is named: a committed
+    transcript of this section is a measurement AT ITS RUN'S COMMIT and
+    not a live property -- mg-c067 found exactly that shape of claim
+    going stale under a rebase, and naming the revision is what makes a
+    stale line tell a reader STALE rather than WRONG.
+
+        OUTCOMES.md            on disk: yes   tracked at 9043b00: no   in the census rule: yes
+        PREDICTIONS.md         on disk: yes   tracked at 9043b00: yes   in the census rule: yes
+        README.md              on disk: yes   tracked at 9043b00: no   in the census rule: yes
+  
+    And the same two-stage rule turned on this instrument's own source.
+    THE SCAN INCLUDES g4_self.py, which is the file the rule is written
+    in.  It is not excluded, because excluding it would be the very
+    regression this section reports -- and stage 1 alone did flag two
+    of its lines, one of them the rule's own definition.  Stage 2
+    disposes of both by reading code rather than prose.
+
+        candidate in g4_self.py
+            raw : "This row is a FINDING if the repair removed it.  mg-6ef4's own commit\n"
+            code: (all comment or string)
+  Q20    HELD
+        predicted: this instrument's own *.md files join the census too and are not excluded -- the same disclosure, made rather than repaired
+        measured:  3 *.md on disk in code/species_gate_audit_d53d, 1 of them tracked at 9043b00; 1 candidate line(s) in this instrument's own source, 0 of them self-exclusions
+        Scored with the stage-2 rule; with stage 1 alone this scored MISSED at
+        2, both of them lines of g4_self.py itself.
+  
+    AND THE SAME IS TRUE OF THIS RUN.  `probe_strike_d53d.md` is planted
+    by G1 in a clone, is a *.md under code/, and is counted by e2's
+    census while it is there -- which is why e2's census line inside
+    those runs reads one file higher than a clean tree's.  It is
+    removed with the clone and no committed figure rests on it.
+
+==============================================================================
+G4 TOTAL BAD: 0
+G4 PREDICTIONS SCORED: 4, MISSED: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It ranges over the 49206 added lines of
+`git diff 77306a7..HEAD`, the 238 markdown files `git ls-tree` returns at
+9043b00, the 473 commit objects `git log --all` returns, and the source of
+t3_census.py and of this instrument.  IT RANGES OVER NOTHING ELSE: a
+self-exclusion written as a data table rather than as a predicate, or
+one added BEFORE 77306a7, is outside every one of those populations and
+this number says nothing about either.  The candidate rule is printed
+above with every line it matched, so a reader can see what a zero here
+was a zero OF.

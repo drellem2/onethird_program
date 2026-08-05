@@ -1,0 +1,115 @@
+
+==============================================================================
+G2a  EVERY STEP OF EVERY RUNNER, FORCED RED ONE AT A TIME
+==============================================================================
+
+  The step's COMMAND is replaced by one that exits 1 on stderr.  Its
+  redirect and any `||` guard around it are left exactly as they were,
+  so what is measured is the runner's wiring and not a runner this
+  audit rewrote into one it liked better.
+
+  species_repair_a4ef -- 4 step(s)
+      step 1  line 19   exit 1    runner reported it: yes  python3 selftesta4ef.py > out_self
+      step 2  line 22   exit 1    runner reported it: yes  python3 s1_extent.py    > out_s1_e
+      step 3  line 23   exit 1    runner reported it: yes  python3 s2_seam.py      > out_s2_s
+      step 4  line 83   exit 1    runner reported it: yes  python3 ../species_extent_d633/e2_
+
+  species_remainder_f8fa -- 5 step(s)
+      step 1  line 17   exit 1    runner reported it: yes  python3 selftestf8fa.py > out_self
+      step 2  line 20   exit 1    runner reported it: yes  python3 w1_opposite.py > out_w1_op
+      step 3  line 23   exit 1    runner reported it: yes  python3 w2_typemismatch.py > out_w
+      step 4  line 26   exit 1    runner reported it: yes  python3 w3_scope.py > out_w3_scope
+      step 5  line 85   exit 1    runner reported it: yes  python3 ../species_extent_d633/e2_
+
+  species_repair_6f61 -- 6 step(s)
+      step 1  line 23   exit 1    runner reported it: yes  python3 selftest6f61.py > out_self
+      step 2  line 24   exit 1    runner reported it: yes  python3 r1_smallest.py  > out_r1_s
+      step 3  line 25   exit 1    runner reported it: yes  python3 r2_columns.py   > out_r2_c
+      step 4  line 26   exit 1    runner reported it: yes  python3 r3_quotes.py    > out_r3_q
+      step 5  line 27   exit 1    runner reported it: yes  python3 check_doc.py    > out_chec
+      step 6  line 87   exit 1    runner reported it: yes  python3 ../species_extent_d633/e2_
+
+  Q8     HELD
+        predicted: 15 of 15 leave the runner non-zero
+        measured:  15 of 15 non-zero (15 step(s): 4 + 5 + 6)
+  
+    of the 15 red runs, 0 did not carry the forced step's own words
+  every step that CAN be made red IS made red                      ok
+
+==============================================================================
+G2b  A NATURAL INPUT PER RUNNER
+==============================================================================
+
+  G2a substitutes a command.  This does not: each runner is given an
+  input of the kind its own checkers exist to find, and nothing in any
+  runner or checker is modified.
+
+      species_repair_a4ef        exit 1     a struck claim standing un-struck
+          caught by, read out of the run:  E2 (TOTAL BAD 1)
+          non-zero totals in that run:     E2 TOTAL BAD: 1
+      species_remainder_f8fa     exit 1     a regular file that cannot be read
+          caught by, read out of the run:  w3_scope.py
+          non-zero totals in that run:     (none printed)
+      species_repair_6f61        exit 1     a stricken sentence asserted un-struck
+          caught by, read out of the run:  CHECK_DOC
+          non-zero totals in that run:     (none printed)
+  Q9     HELD
+        predicted: exit 1, 1, 1
+        measured:  1, 1, 1
+        Three different KINDS of input.  The checker each one reaches is read
+        out of the run and not asserted: E2 (TOTAL BAD 1), w3_scope.py, CHECK_DOC.
+        A runner shown red by one substituted command has been shown to
+        propagate an exit code; this is the other half.
+  each of the three names a catcher, and the three are distinct    ok
+        A row that passes because `(cannot be told from the output)` is a
+        distinct string from the other two would be this audit's own subject:
+        an instrument reporting something other than what happened.  So both
+        conditions are required and the names are printed above either way.
+
+==============================================================================
+G2c  `set -e` DELETED ALONE, AT HEAD AND AT THE PIN (77306a7)
+==============================================================================
+
+  The line is found by reading the source and matching it exactly, not
+  by a line number: at the pin it sits 53, 60 and 43 lines above the
+  cross-section call and at HEAD it does not.  Its line number is
+  printed so a reader can see which line was removed.
+
+      HEAD   species_repair_a4ef        `set -e` at line 6    exit 1    prints the finding: yes  (1 occurrence(s))
+      HEAD   species_remainder_f8fa     `set -e` at line 4    exit 1    prints the finding: yes  (1 occurrence(s))
+      HEAD   species_repair_6f61        `set -e` at line 20   exit 1    prints the finding: yes  (1 occurrence(s))
+
+      77306a7 species_repair_a4ef        `set -e` at line 6    exit 0    prints the finding: yes  (1 occurrence(s))
+      77306a7 species_remainder_f8fa     `set -e` at line 4    exit 0    prints the finding: yes  (1 occurrence(s))
+      77306a7 species_repair_6f61        `set -e` at line 10   exit 0    prints the finding: yes  (1 occurrence(s))
+
+  Q10    HELD
+        predicted: HEAD 1, 1, 1 with the finding printed 3 of 3 -- status and printed content AGREE; pin 77306a7 0, 0, 0 with the finding printed 3 of 3 -- they DISAGREE
+        measured:  HEAD 1, 1, 1, finding printed 3 of 3; pin 0, 0, 0, finding printed 3 of 3
+  at HEAD, exit status and printed content agree                   ok
+  at the pin they disagree -- mg-6ef4's F3, reproduced by this ins ok
+        This row is a FINDING if it does NOT reproduce: a repair whose
+        before-state cannot be constructed is a repair to nothing, and every
+        after-figure in mg-4adb would then prove less than it appears to.
+  
+    THE DIFFERENCE, in one sentence.  At the pin `set -e` is the statement
+    that carries e2's exit code out of the file and it sits tens of
+    lines away from the call; at HEAD the CALL IS THE LAST COMMAND and a
+    POSIX script's status is its last command's, so deleting `set -e`
+    moves the message and not the verdict.  G1c measured that from the
+    other side: at HEAD the only runner line whose deletion loses the
+    gate is the call itself.
+
+==============================================================================
+G2 TOTAL BAD: 0
+G2 PREDICTIONS SCORED: 3, MISSED: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  15 step substitutions in G2a, 3 natural inputs
+in G2b and 6 `set -e` deletions in G2c -- 3 at HEAD and 3 at 77306a7.
+Every run is a whole runner executed in a git clone of this worktree.
+IT RANGES OVER NOTHING ELSE: G2a forces the steps a runner CALLS, so a
+checker that is never called cannot appear here, and G2b's three
+inputs are three, not a sample of a space.  `can this runner go red`
+is answered YES or NO for each; `does it go red for every finding its
+own battery can make` is a different question and is G5's.

@@ -1,0 +1,128 @@
+
+==============================================================================
+G5a  EVERY SCRIPT THE RUNNER CALLS, AND HOW IT ENDS
+==============================================================================
+
+    Asked of the PARSED SOURCE, not of a sample of runs: `ast` finds
+    every call to sys.exit / exit / os._exit in the file, and the last
+    top-level statement is read directly.  A checker that ends in an
+    unconditional `sys.exit(0)` returns 0 whatever it computed, so its
+    own TOTAL BAD cannot reach the runner.
+
+    scripts the runner calls, in order: selftest.py, t1_grading.py, t2_operation.py, t3_bidigare.py, t4_one_operation.py, t5_hopf_monoid.py, t6_fock_and_record.py
+
+      selftest.py              1 exit call(s) (line 25 -> 1)         last top-level statement is `sys.exit(0)`: no    UNCONDITIONAL EXIT 0: no
+      t1_grading.py            1 exit call(s) (line 214 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+      t2_operation.py          1 exit call(s) (line 201 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+      t3_bidigare.py           1 exit call(s) (line 327 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+      t4_one_operation.py      1 exit call(s) (line 279 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+      t5_hopf_monoid.py        1 exit call(s) (line 286 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+      t6_fock_and_record.py    1 exit call(s) (line 229 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+  Q21    HELD
+        predicted: 6 of the 7 (t1..t6) end in an unconditional sys.exit(0) and contain no other exit; selftest.py is the one that does not
+        measured:  6 of 7; the exception(s): selftest.py
+
+==============================================================================
+G5b  THOSE SCRIPTS RUN STANDALONE
+==============================================================================
+
+    The source says what they return.  This runs them and reads it.
+
+      t1_grading.py            exit 0    T1 TOTAL BAD: 0
+      t2_operation.py          exit 0    T2 TOTAL BAD: 0
+      t3_bidigare.py           exit 0    T3 TOTAL BAD: 0
+      t4_one_operation.py      exit 0    T4 TOTAL BAD: 0
+      t5_hopf_monoid.py        exit 0    T5 TOTAL BAD: 0
+      t6_fock_and_record.py    exit 0    T6 TOTAL BAD: 0
+  Q22    HELD
+        predicted: exit 0, 6 of 6, whatever TOTAL BAD they print
+        measured:  6 of 6 exit 0
+
+==============================================================================
+G5c  THE RUNNER's LAST COMMAND
+==============================================================================
+
+    A POSIX script's exit status is its LAST COMMAND's.  That sentence
+    is the whole of mg-4adb's repair: it moved the gate to the end of
+    the three runners so the CALL carries e2's status out of the file.
+    So the question for a fourth runner is simply: what is its last
+    command?
+
+      line 28, the last line of code/species_7d75/run_all.sh:
+          grep -h "TOTAL BAD" out_t*.txt
+  Q23    HELD
+        predicted: `grep -h "TOTAL BAD" out_t*.txt` -- not a checker call, so the rung mg-4adb installed in three runners is absent from the fourth
+        measured:  `grep -h "TOTAL BAD" out_t*.txt` -- a grep, not a checker call
+  
+    And `grep` exits 0 when it MATCHES.  It matches `TOTAL BAD` whatever
+    number follows, so the higher the battery's findings the more
+    certainly this runner exits 0.  G5d constructs that.
+
+==============================================================================
+G5d  A STEP THAT REPORTS A FINDING AND EXITS 0
+==============================================================================
+
+    The stand-in prints exactly what the real script prints for a
+    non-zero count and returns exactly what the real script returns for
+    ANY count -- because the real script's last statement is an
+    unconditional `sys.exit(0)`, which G5a read out of its source.  So
+    this is not a weakened checker: it is the checker's own contract.
+
+      the runner exits 0
+      and its own output says: T1 TOTAL BAD: 7
+  Q24    HELD
+        predicted: the runner exits 0 while its own output prints `TOTAL BAD: 7`
+        measured:  exit 0; `TOTAL BAD: 7` printed 1 time(s)
+  code/species_7d75/run_all.sh cannot go red over a finding its ow *** FINDING ***
+        This is mg-6ef4's F3 in the one runner mg-4adb did not repair, and
+        it is a WIDER failure than F3 was: there the finding reached the
+        runner and the runner dropped it, here no checker in the battery
+        can return anything but 0 by construction.  This arc has already
+        found and repaired exactly this defect once -- `w3_scope.py`'s own
+        comment records it: 'mg-a4ef: this was `sys.exit(0)`
+        unconditionally' -- in a tree three directories away.
+
+==============================================================================
+G5e  A STEP FORCED TO EXIT 1
+==============================================================================
+
+    The distinction that matters: this runner CAN go red.  It goes red
+    for a CRASH.  `set -e` is at its top and every step is a bare
+    command, so a step that dies aborts the file.  What it cannot do is
+    go red for a FINDING, because no step ever returns one.
+
+      the runner exits 1
+  Q25    HELD
+        predicted: the runner exits 1 -- it can go red for a crash, and that is the distinction
+        measured:  exit 1
+
+==============================================================================
+G5f  THE SAME QUESTION ASKED OF THE THREE REPAIRED RUNNERS
+==============================================================================
+
+    A finding about the fourth runner is worth what the contrast is
+    worth, so the same two properties are read off the other three.
+
+      species_repair_a4ef        last command: python3 ../species_extent_d633/e2_crosssection.py    (a checker call)
+      species_remainder_f8fa     last command: python3 ../species_extent_d633/e2_crosssection.py    (a checker call)
+      species_repair_6f61        last command: python3 ../species_extent_d633/e2_crosssection.py    (a checker call)
+      species_7d75               last command: grep -h "TOTAL BAD" out_t*.txt                       (a grep)
+  
+    Three of the four end in the call whose exit code is the finding.
+    The fourth ends in a `grep` that matches the finding's own text.
+
+==============================================================================
+G5 TOTAL BAD: 1
+G5 PREDICTIONS SCORED: 5, MISSED: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It ranges over the 7 scripts
+code/species_7d75/run_all.sh calls, parsed with `ast`; 6 of them run
+standalone; 2 step substitutions in that runner; and the last line of
+4 runner files.  IT RANGES OVER NOTHING ELSE.  In particular G5a asks
+`does this file end in an unconditional sys.exit(0) and contain no
+other exit` and NOT `can this file ever return non-zero`: an uncaught
+exception returns 1 from any of them, which is precisely what G5e
+measures and is why the finding is stated as `cannot go red over a
+FINDING` and not as `cannot go red`.  The other 100 directories under
+code/ have runners too and none of them is in this number.

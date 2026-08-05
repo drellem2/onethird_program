@@ -1,0 +1,1760 @@
+
+==============================================================================
+S1  THE SANDBOX IS A GIT CLONE OF THIS WORKTREE
+==============================================================================
+
+  the clone's HEAD is this worktree's HEAD                         ok
+        9043b008b5ed vs 9043b008b5ed
+  the clone is clean, so `git status` in a probe means what it say ok
+  `git archive` resolves in the clone -- s1_extent.py's two histor ok
+        Without this they print `git unavailable -- SKIPPED` and the deletion
+        sweep certifies a runner with two of its controls silently off.
+  and they DID run in this clone, not merely could                 ok
+        s1_extent.py exit 0; `git unavailable -- SKIPPED` in its output: False
+        (the bare word SKIPPED appears 1 time(s), all of them the file-level
+        exclusion this checker states on purpose)
+  and the two historical controls printed a MEASUREMENT, not a ski ok
+        (a) at ebecd89, the state mg-73df audited       4 asserted (now 0), catches X3,X7,Y2  ok
+        (b) at 83ac472, before mg-f8fa                  9 asserted (now 0), catches X3,X4,X5,X7,Y2  ok
+  the clone carries docs                                           ok
+  the clone carries code/species_extent_d633                       ok
+  the clone carries code/species_7d75                              ok
+
+==============================================================================
+S2  DELETION -- IT REMOVES ONE LINE AND PUTS IT BACK EXACTLY
+==============================================================================
+
+  the runner is 83 lines by the rule the population uses           ok
+        a trailing newline does not make a final empty line
+  line 6 is the one removed                                        ok
+        'set -e'
+  exactly one line fewer while deleted                             ok
+  and it is the RIGHT line that is gone                            ok
+  the file is byte-identical afterwards                            ok
+        5155 bytes before, 5155 after
+  restored after a second, unrelated deletion too                  ok
+
+==============================================================================
+S3  THE PLANT -- IT ARMS, AND IT CAN BE DISARMED
+==============================================================================
+
+  e2 is GREEN on the clean clone                                   ok
+        exit 0
+  e2 is RED with the plant, and says why                           ok
+        exit 1, 1 occurrence(s) STANDING
+  the SAME sentence in a paragraph that retracts it does NOT fire  ok
+        exit 0 -- so the plant in G1/G2 arms the RULE and not the `~~`
+  and the tree is green again once the plant is removed            ok
+        exit 0
+
+==============================================================================
+S4  DISPOSITION -- THE THREE CLASSES, AND THE ONE THAT MATTERS
+==============================================================================
+
+  exit 0 is GATE LOST even when the finding was printed in full    ok
+        This is mg-6ef4's F3 exactly: printed and green.  If this row were
+        written the other way the audit could not see its own subject.
+  non-zero with the sentence is GATE HELD                          ok
+  non-zero without it is DIED BEFORE THE GATE                      ok
+  a timeout is its own class and never a pass                      ok
+
+==============================================================================
+S5  STEP SUBSTITUTION KEEPS THE WIRING IT IS MEASURING
+==============================================================================
+
+  a4ef has 4 python3 steps                                         ok
+        line 19: python3 selftesta4ef.py > out_selftest.txt || {
+        line 22: python3 s1_extent.py    > out_s1_extent.txt || { echo "S
+        line 23: python3 s2_seam.py      > out_s2_seam.txt   || { echo "S
+        line 83: python3 ../species_extent_d633/e2_crosssection.py
+  the redirect and the guard survive the substitution              ok
+        was:  python3 selftesta4ef.py > out_selftest.txt || {
+        now:  python3 -c "import sys; sys.stderr.write('FORCED RED by mg-d53d\n'); sys.exit(1)" > out_selftest.txt || {
+  and the runner file is restored                                  ok
+
+==============================================================================
+S6  THE PARALLEL POOL HANDS EACH TASK A WHOLE TREE
+==============================================================================
+
+  3 distinct sandbox roots                                         ok
+  every task ran and none was dropped                              ok
+  a task that raises is reported, never dropped silently           ok
+        A sweep that loses a row reports `the gate held` for a line it never
+        measured, which is the failure this whole audit is about.
+
+==============================================================================
+selftest_d53d.py: 0 check(s) failed
+==============================================================================
+    this audit runs at HEAD = 9043b008b5edafdd03910aedd4d47ff2a7decca6
+    the pin it compares against is 77306a7
+
+==============================================================================
+G4a  THE DIFF OVER mg-6ef4's OWN TREE
+==============================================================================
+
+    git diff 77306a7..HEAD -- code/species_bound_audit_6ef4/
+    exit 0, 0 byte(s) of diff
+
+==============================================================================
+G4b  EVERY ADDED LINE OF THE REPAIR, SEARCHED FOR A SELF-EXCLUSION
+==============================================================================
+
+    The first half of Q18 is one `git diff`.  The second half is not:
+    a self-excluding predicate added in ANY file would be the same
+    regression, so the whole diff is read and not one directory of it.
+  
+    THE RULE, IN TWO STAGES, AND THE SECOND ONE IS WHY.
+  
+    Stage 1, the CANDIDATE rule.  An added line is a candidate if it
+    carries both a filtering token and a self-naming token:
+        filtering   if / != / not in / continue / startswith /
+                    endswith / exclude / skip / ignore / drop / filter
+        self-naming __file__ / a code/species_* directory / 'own
+                    commit' / 'own file' / 'itself' / 'self-refer'
+    Every candidate is PRINTED, whatever stage 2 decides about it.
+  
+    Stage 2, the DISPOSITION, and it is where the first version of this
+    section was wrong.  A DEFECT OF THIS INSTRUMENT, kept: run with
+    stage 1 alone, it flagged a docstring sentence in
+    code/runner_exit_audit_56dc/t2_strictest.py and a bare `continue`
+    whose self-naming words were in the COMMENT beside it, and it
+    flagged TWO LINES OF ITS OWN SOURCE -- one of them the line that
+    defines the rule.  A detector that reads its own definition as an
+    instance of what it detects is measuring its own text.
+  
+    The repair is NOT to exclude this file from the scan -- that is the
+    regression this whole section exists to report.  It is to stop
+    treating PROSE as a predicate: each file is tokenized, every
+    COMMENT and every STRING is blanked out, and the disposition is
+    read off what is left.  A sentence in a docstring can then say
+    anything it likes, and a `continue` with an explanatory comment is
+    a `continue`.  Both the raw line and the code-only rendering are
+    printed for every candidate, so the classification is checkable.
+
+    added lines in 77306a7..HEAD                     49206
+    of them in *.py / *.sh                          31515
+    CANDIDATES (filtering token AND self-naming)        7
+
+        code/audit_2c77/lib2c77.py
+            raw : an `if` whose body returns, or the value of a `return` itself.  Implemented
+            code: (nothing -- all of it was comment or string)
+            -> PROSE -- the whole line is a comment or a string literal
+        code/audit_330a/s3_kernel_half.py
+            raw : print("""   (iii) is worth nothing if it is the only measurement of itself.
+            code: print(
+            -> PROSE -- the filtering token was inside a comment or string
+        code/repair_8d5e/lib8d5e.py
+            raw : an `if` whose body returns, or the value of a `return` itself.  Written
+            code: (nothing -- all of it was comment or string)
+            -> PROSE -- the whole line is a comment or a string literal
+        code/runner_exit_audit_56dc/t2_strictest.py
+            raw : itself by a three-alternative one, over a population that excluded every `.md`.
+            code: (nothing -- all of it was comment or string)
+            -> PROSE -- the whole line is a comment or a string literal
+        code/runner_exit_c2b3/k2_consume.py
+            raw : continue                          # a script naming itself
+            code: continue
+            -> NOT A SELF-EXCLUSION -- the code names no `__file__` and no own-directory literal
+        code/species_extent_d633/e3_bothways.py
+            raw : property should locate itself by that property.  It raises if the marker
+            code: (nothing -- all of it was comment or string)
+            -> PROSE -- the whole line is a comment or a string literal
+        code/species_gate_audit_d53d/g4_self.py
+            raw : "This row is a FINDING if the repair removed it.  mg-6ef4's own commit\n"
+            code: (nothing -- all of it was comment or string)
+            -> PROSE -- the whole line is a comment or a string literal
+  Q18    HELD
+        predicted: the diff over code/species_bound_audit_6ef4/ is empty, and 0 predicates anywhere exclude an instrument's own files or commits from a population it counts
+        measured:  diff is EMPTY (0 bytes); 7 candidate line(s), 0 of them a self-exclusion
+        Scored with the stage-2 rule.  With stage 1 alone this scored MISSED at
+        2, and both of those two are printed above with the reason they are
+        not self-exclusions.  The first run's score is recorded in OUTCOMES.md
+        rather than quietly replaced.
+
+==============================================================================
+G4c  mg-4adb's OWN *.md FILES AGAINST THE CENSUS THAT COUNTS THEM
+==============================================================================
+
+    The census is e2_crosssection.py's: every *.md under docs/ and under
+    code/, recursively.  It is RE-DERIVED here from `git ls-tree` at the
+    named revision rather than read out of any transcript, and then the
+    question is asked of the result.
+
+    census(9043b00) = 238 markdown file(s)
+        IN THE CENSUS: code/species_rung_repair_4adb/OUTCOMES.md
+        IN THE CENSUS: code/species_rung_repair_4adb/PREDICTIONS.md
+        IN THE CENSUS: code/species_rung_repair_4adb/README.md
+  Q19a   HELD
+        predicted: mg-4adb's own three *.md files are 3 of 3 present in census(HEAD)
+        measured:  3 of 3 present: OUTCOMES.md, PREDICTIONS.md, README.md
+
+==============================================================================
+G4d  t3_census.py's `git log --all` POPULATION AGAINST ITS OWN COMMITS
+==============================================================================
+
+    mg-6ef4's T3d enumerates every commit-message object reachable from
+    every ref.  Its own commits are in that population and its own
+    message is one of the objects it counts.  Two things are asked:
+    does its SOURCE carry a predicate that drops them, and are they
+    actually in the population `git log --all` returns.
+
+    candidate line(s) in t3_census.py: 0, of them self-exclusions: 0
+    `git log --all` population: 473 commit object(s)
+    of them mg-4adb's or mg-6ef4's own: 15
+        1729f69b evidence: the committed transcripts of the mg-4adb suite, run on a clean t
+        4bb4384e docs+repair: THE GATE IS THE LAST COMMAND AND THE POPULATION IS EVERY LINE
+        9584cd1e predictions: mg-4adb's predictions, committed BEFORE any probe runs (mg-4a
+        6c90534e evidence: the committed transcripts of the mg-4adb suite, run on a clean t
+        c031b9b8 docs+repair: THE GATE IS THE LAST COMMAND AND THE POPULATION IS EVERY LINE
+        2e48b678 predictions: mg-4adb's predictions, committed BEFORE any probe runs (mg-4a
+        6a06c912 pm-onethird: four landed 05:00-05:50; set -e outside every deletion popula
+        e5787e11 evidence: PUBLISH THE POST-COMMIT MEASUREMENT, AND THE AUDIT'S OWN MESSAGE
+  Q19b   HELD
+        predicted: no self-exclusion in t3_census.py's `git log --all` population
+        measured:  0 candidate line(s), 0 self-excluding predicate(s) in its source; its own 15 commit(s) are in the population
+  the self-reference is INTACT, and that is the correct state      ok
+        This row is a FINDING if the repair removed it.  mg-6ef4's own commit
+        message joining the census it counts is disclosed in its own
+        transcript; a repair that dropped it would have made the census wrong
+        in order to make it look tidy.
+
+==============================================================================
+G4e  THIS INSTRUMENT'S OWN FILES, BY THE SAME RULE
+==============================================================================
+
+    The same disclosure, made by this audit about itself.  What is
+    measured is THE WORKTREE, and the revision is named: a committed
+    transcript of this section is a measurement AT ITS RUN'S COMMIT and
+    not a live property -- mg-c067 found exactly that shape of claim
+    going stale under a rebase, and naming the revision is what makes a
+    stale line tell a reader STALE rather than WRONG.
+
+        OUTCOMES.md            on disk: yes   tracked at 9043b00: no   in the census rule: yes
+        PREDICTIONS.md         on disk: yes   tracked at 9043b00: yes   in the census rule: yes
+        README.md              on disk: yes   tracked at 9043b00: no   in the census rule: yes
+  
+    And the same two-stage rule turned on this instrument's own source.
+    THE SCAN INCLUDES g4_self.py, which is the file the rule is written
+    in.  It is not excluded, because excluding it would be the very
+    regression this section reports -- and stage 1 alone did flag two
+    of its lines, one of them the rule's own definition.  Stage 2
+    disposes of both by reading code rather than prose.
+
+        candidate in g4_self.py
+            raw : "This row is a FINDING if the repair removed it.  mg-6ef4's own commit\n"
+            code: (all comment or string)
+  Q20    HELD
+        predicted: this instrument's own *.md files join the census too and are not excluded -- the same disclosure, made rather than repaired
+        measured:  3 *.md on disk in code/species_gate_audit_d53d, 1 of them tracked at 9043b00; 1 candidate line(s) in this instrument's own source, 0 of them self-exclusions
+        Scored with the stage-2 rule; with stage 1 alone this scored MISSED at
+        2, both of them lines of g4_self.py itself.
+  
+    AND THE SAME IS TRUE OF THIS RUN.  `probe_strike_d53d.md` is planted
+    by G1 in a clone, is a *.md under code/, and is counted by e2's
+    census while it is there -- which is why e2's census line inside
+    those runs reads one file higher than a clean tree's.  It is
+    removed with the clone and no committed figure rests on it.
+
+==============================================================================
+G4 TOTAL BAD: 0
+G4 PREDICTIONS SCORED: 4, MISSED: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It ranges over the 49206 added lines of
+`git diff 77306a7..HEAD`, the 238 markdown files `git ls-tree` returns at
+9043b00, the 473 commit objects `git log --all` returns, and the source of
+t3_census.py and of this instrument.  IT RANGES OVER NOTHING ELSE: a
+self-exclusion written as a data table rather than as a predicate, or
+one added BEFORE 77306a7, is outside every one of those populations and
+this number says nothing about either.  The candidate rule is printed
+above with every line it matched, so a reader can see what a zero here
+was a zero OF.
+
+==============================================================================
+G5a  EVERY SCRIPT THE RUNNER CALLS, AND HOW IT ENDS
+==============================================================================
+
+    Asked of the PARSED SOURCE, not of a sample of runs: `ast` finds
+    every call to sys.exit / exit / os._exit in the file, and the last
+    top-level statement is read directly.  A checker that ends in an
+    unconditional `sys.exit(0)` returns 0 whatever it computed, so its
+    own TOTAL BAD cannot reach the runner.
+
+    scripts the runner calls, in order: selftest.py, t1_grading.py, t2_operation.py, t3_bidigare.py, t4_one_operation.py, t5_hopf_monoid.py, t6_fock_and_record.py
+
+      selftest.py              1 exit call(s) (line 25 -> 1)         last top-level statement is `sys.exit(0)`: no    UNCONDITIONAL EXIT 0: no
+      t1_grading.py            1 exit call(s) (line 214 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+      t2_operation.py          1 exit call(s) (line 201 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+      t3_bidigare.py           1 exit call(s) (line 327 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+      t4_one_operation.py      1 exit call(s) (line 279 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+      t5_hopf_monoid.py        1 exit call(s) (line 286 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+      t6_fock_and_record.py    1 exit call(s) (line 229 -> 0)        last top-level statement is `sys.exit(0)`: yes   UNCONDITIONAL EXIT 0: YES
+  Q21    HELD
+        predicted: 6 of the 7 (t1..t6) end in an unconditional sys.exit(0) and contain no other exit; selftest.py is the one that does not
+        measured:  6 of 7; the exception(s): selftest.py
+
+==============================================================================
+G5b  THOSE SCRIPTS RUN STANDALONE
+==============================================================================
+
+    The source says what they return.  This runs them and reads it.
+
+      t1_grading.py            exit 0    T1 TOTAL BAD: 0
+      t2_operation.py          exit 0    T2 TOTAL BAD: 0
+      t3_bidigare.py           exit 0    T3 TOTAL BAD: 0
+      t4_one_operation.py      exit 0    T4 TOTAL BAD: 0
+      t5_hopf_monoid.py        exit 0    T5 TOTAL BAD: 0
+      t6_fock_and_record.py    exit 0    T6 TOTAL BAD: 0
+  Q22    HELD
+        predicted: exit 0, 6 of 6, whatever TOTAL BAD they print
+        measured:  6 of 6 exit 0
+
+==============================================================================
+G5c  THE RUNNER's LAST COMMAND
+==============================================================================
+
+    A POSIX script's exit status is its LAST COMMAND's.  That sentence
+    is the whole of mg-4adb's repair: it moved the gate to the end of
+    the three runners so the CALL carries e2's status out of the file.
+    So the question for a fourth runner is simply: what is its last
+    command?
+
+      line 28, the last line of code/species_7d75/run_all.sh:
+          grep -h "TOTAL BAD" out_t*.txt
+  Q23    HELD
+        predicted: `grep -h "TOTAL BAD" out_t*.txt` -- not a checker call, so the rung mg-4adb installed in three runners is absent from the fourth
+        measured:  `grep -h "TOTAL BAD" out_t*.txt` -- a grep, not a checker call
+  
+    And `grep` exits 0 when it MATCHES.  It matches `TOTAL BAD` whatever
+    number follows, so the higher the battery's findings the more
+    certainly this runner exits 0.  G5d constructs that.
+
+==============================================================================
+G5d  A STEP THAT REPORTS A FINDING AND EXITS 0
+==============================================================================
+
+    The stand-in prints exactly what the real script prints for a
+    non-zero count and returns exactly what the real script returns for
+    ANY count -- because the real script's last statement is an
+    unconditional `sys.exit(0)`, which G5a read out of its source.  So
+    this is not a weakened checker: it is the checker's own contract.
+
+      the runner exits 0
+      and its own output says: T1 TOTAL BAD: 7
+  Q24    HELD
+        predicted: the runner exits 0 while its own output prints `TOTAL BAD: 7`
+        measured:  exit 0; `TOTAL BAD: 7` printed 1 time(s)
+  code/species_7d75/run_all.sh cannot go red over a finding its ow *** FINDING ***
+        This is mg-6ef4's F3 in the one runner mg-4adb did not repair, and
+        it is a WIDER failure than F3 was: there the finding reached the
+        runner and the runner dropped it, here no checker in the battery
+        can return anything but 0 by construction.  This arc has already
+        found and repaired exactly this defect once -- `w3_scope.py`'s own
+        comment records it: 'mg-a4ef: this was `sys.exit(0)`
+        unconditionally' -- in a tree three directories away.
+
+==============================================================================
+G5e  A STEP FORCED TO EXIT 1
+==============================================================================
+
+    The distinction that matters: this runner CAN go red.  It goes red
+    for a CRASH.  `set -e` is at its top and every step is a bare
+    command, so a step that dies aborts the file.  What it cannot do is
+    go red for a FINDING, because no step ever returns one.
+
+      the runner exits 1
+  Q25    HELD
+        predicted: the runner exits 1 -- it can go red for a crash, and that is the distinction
+        measured:  exit 1
+
+==============================================================================
+G5f  THE SAME QUESTION ASKED OF THE THREE REPAIRED RUNNERS
+==============================================================================
+
+    A finding about the fourth runner is worth what the contrast is
+    worth, so the same two properties are read off the other three.
+
+      species_repair_a4ef        last command: python3 ../species_extent_d633/e2_crosssection.py    (a checker call)
+      species_remainder_f8fa     last command: python3 ../species_extent_d633/e2_crosssection.py    (a checker call)
+      species_repair_6f61        last command: python3 ../species_extent_d633/e2_crosssection.py    (a checker call)
+      species_7d75               last command: grep -h "TOTAL BAD" out_t*.txt                       (a grep)
+  
+    Three of the four end in the call whose exit code is the finding.
+    The fourth ends in a `grep` that matches the finding's own text.
+
+==============================================================================
+G5 TOTAL BAD: 1
+G5 PREDICTIONS SCORED: 5, MISSED: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It ranges over the 7 scripts
+code/species_7d75/run_all.sh calls, parsed with `ast`; 6 of them run
+standalone; 2 step substitutions in that runner; and the last line of
+4 runner files.  IT RANGES OVER NOTHING ELSE.  In particular G5a asks
+`does this file end in an unconditional sys.exit(0) and contain no
+other exit` and NOT `can this file ever return non-zero`: an uncaught
+exception returns 1 from any of them, which is precisely what G5e
+measures and is why the finding is stated as `cannot go red over a
+FINDING` and not as `cannot go red`.  The other 100 directories under
+code/ have runners too and none of them is in this number.
+
+==============================================================================
+G3a  THE LINE w3_scope.py PRINTS FOR AN UNREADABLE REGULAR FILE
+==============================================================================
+
+    planted: probe_d53d_x4.py, mode 000, carrying a live X4 statement
+    it is a REGULAR FILE: os.path.isfile says True, so layer 1 reaches it
+
+      #   declined, NOT STATED: probe_d53d_x4.py   REACHED AND NOT READ: open() raised PermissionError.  This is NOT an encoding problem -- the file's bytes were never seen
+  Q12    *** MISSED ***
+        predicted: the line says UNREADABLE / REACHED AND NOT READ, names PermissionError, and the word ENCODING is not on it
+        measured:  1 line(s); REACHED AND NOT READ/UNREADABLE: True; names PermissionError: True; ENCODING absent: False
+  the file is not silently absent from the output                  ok
+        mg-6ef4's F1 is not that the bucket was wrong.  It is that a reader
+        who met the wrong bucket went looking for a text-encoding problem.
+  the line does not ATTRIBUTE the decline to the file's encoding   ok
+        occurrences of `encoding` on the line: 1
+        every one of them inside an explicit denial: True
+        This is what Q12's third clause was reaching for, and Q12 as written
+        asked for the absence of a word instead.  The bucket names the
+        exception class that produced it (PermissionError), states REACHED
+        AND NOT READ, files it under NOT STATED and counts it -- and then
+        spends a clause ruling out the cause mg-6ef4's reader was sent to.
+        The word is there BECAUSE of the repair, not in spite of it.
+
+==============================================================================
+G3b  w3_scope.py's EXIT CODE, ASKED SEPARATELY
+==============================================================================
+
+    A bucket is a sentence.  An exit code is a control.  The ticket's
+    warning is that the first can be repaired while the second stays
+    silent, so this is its own row with its own prediction.
+
+      w3_scope.py exit 1
+  Q13    HELD
+        predicted: 1
+        measured:  1
+
+==============================================================================
+G3c  THE f8fa RUNNER's EXIT CODE, ASKED SEPARATELY AGAIN
+==============================================================================
+
+    And a checker's exit code is not a runner's.  That distance is
+    exactly where mg-6ef4's F3 lived, so it is measured and not
+    inferred from G3b.
+
+      sh code/species_remainder_f8fa/run_all.sh -> exit 1
+      the runner's own words: w3_scope.py FAILED
+  Q14    HELD
+        predicted: exit 1
+        measured:  1
+
+==============================================================================
+G3d  THE STATED BUCKET MUST SURVIVE THE REPAIR
+==============================================================================
+
+    A repair that reddens on every decline has not separated two
+    buckets, it has deleted one.  A readable file whose bytes are not
+    valid UTF-8 is a STATED decline -- a sentence has carried it since
+    mg-d633 -- and must still be printed and NOT counted.
+
+      #   declined, STATED:     probe_d53d_badbytes.py   file rule, STATED: bytes are not valid UTF-8 text (UnicodeDecodeError)
+  Q15    HELD
+        predicted: w3_scope.py exit 0, and the bucket says ENCODING
+        measured:  exit 0; the line says: ENCODING/UnicodeDecodeError
+  the two declines are told apart by the exception, not by a guess ok
+        Same walk, same layer, two files: one unreadable (counted, red) and
+        one undecodable (stated, green).  Either alone proves nothing about
+        the split.
+
+==============================================================================
+G3e  THE COUNTERFACTUAL -- THE SAME FILE, READABLE
+==============================================================================
+
+    mg-6ef4's sentence is `contents never scanned, exit 0 WITH A LIVE X4
+    STATEMENT INSIDE IT`.  That only means something if the same file,
+    readable, IS a finding.  Otherwise the plant was never a hazard and
+    G3a..G3c measured a bucket around nothing.
+
+      STILL ASSERTED AT  probe_d53d_x4.py:2
+  readable, the same file is a live X4 finding and w3_scope.py is  ok
+        exit 1
+  
+    So the unreadable case in G3a was hiding a real finding, and before
+    mg-4adb it was hiding it under a sentence about text encoding.
+
+==============================================================================
+G3f  THE FOURTH CHECKER -- THE SAME INPUT AGAINST e2_crosssection.py
+==============================================================================
+
+    mg-4adb measured this checker and did not repair it, which its own
+    README says.  An audit that only re-measures what was repaired
+    cannot report what was left, so it is measured here.
+
+      e2 exit 1; Traceback in output: True; prints STANDING UN-STRUCK: False
+      last line: PermissionError: [Errno 13] Permission denied: '/private/var/folders/4
+  Q16    HELD
+        predicted: exit 1 by uncaught traceback, and `STANDING UN-STRUCK` not printed
+        measured:  exit 1, traceback True, `STANDING UN-STRUCK` printed False
+  e2 does not file an unreadable markdown file under any bucket    ok
+        It has no bucket for it: `md_files_and_residue` decides REACHED and
+        e2's own loop does the open().  The two-layer shape mg-6ef4 found in
+        w3_scope.py is the same shape here, and only one of the two layers
+        has a residue.  It exits 1, which is why this is a REPORT and not a
+        second F1: the reader is not told the wrong thing, only nothing.
+
+==============================================================================
+G3g  AN UNREADABLE DIRECTORY -- A CASE NO LIST IN EITHER TICKET NAMES
+==============================================================================
+
+    Floor, not scope.  Layer 1's residue exists because os.walk
+    SWALLOWS the error on a directory it cannot read.  So: a directory
+    at mode 000, under code/, with a *.md inside it.
+
+      declined, NOT STATED: code/probe_d53d_dir
+          os.walk raised PermissionError and would otherwise have dropped it in silence
+  Q17    HELD
+        predicted: os.walk's onerror fires, the entry lands in NOT STATED, and e2 exits 1
+        measured:  e2 exit 1; 1 row(s) mention it; NOT STATED: True
+  the file INSIDE it is invisible, and that is what the residue is ok
+        `hidden.md` carries a claim struck and restated, which is exactly what
+        e2 exists to find, and no checker in this repository will ever read
+        it.  The residue does not make it visible -- it makes the SILENCE
+        visible, which is the whole of mg-5040's OPEN 1 and is why this case
+        arrives as red rather than as nothing.
+
+==============================================================================
+G3 TOTAL BAD: 0
+G3 PREDICTIONS SCORED: 6, MISSED: 1
+==============================================================================
+
+EXTENT OF THAT NUMBER.  Six constructed inputs: one unreadable regular
+file (G3a-c, and G3e the same file readable), one undecodable regular
+file (G3d), one unreadable *.md (G3f) and one unreadable directory
+(G3g).  Each is planted in a git clone of this worktree and removed by
+the same probe.  IT RANGES OVER NOTHING ELSE: two checkers are asked
+(w3_scope.py and e2_crosssection.py) and two are not -- s1_extent.py
+and check_doc.py have their own walks and are outside this number.
+Mode 000 is the only way a file is made unreadable here; a file inside
+an unreadable PARENT, a file on a full disk and a file removed between
+the walk and the open are three more routes into the same bucket and
+this number says nothing about any of them.
+
+==============================================================================
+G2a  EVERY STEP OF EVERY RUNNER, FORCED RED ONE AT A TIME
+==============================================================================
+
+  The step's COMMAND is replaced by one that exits 1 on stderr.  Its
+  redirect and any `||` guard around it are left exactly as they were,
+  so what is measured is the runner's wiring and not a runner this
+  audit rewrote into one it liked better.
+
+  species_repair_a4ef -- 4 step(s)
+      step 1  line 19   exit 1    runner reported it: yes  python3 selftesta4ef.py > out_self
+      step 2  line 22   exit 1    runner reported it: yes  python3 s1_extent.py    > out_s1_e
+      step 3  line 23   exit 1    runner reported it: yes  python3 s2_seam.py      > out_s2_s
+      step 4  line 83   exit 1    runner reported it: yes  python3 ../species_extent_d633/e2_
+
+  species_remainder_f8fa -- 5 step(s)
+      step 1  line 17   exit 1    runner reported it: yes  python3 selftestf8fa.py > out_self
+      step 2  line 20   exit 1    runner reported it: yes  python3 w1_opposite.py > out_w1_op
+      step 3  line 23   exit 1    runner reported it: yes  python3 w2_typemismatch.py > out_w
+      step 4  line 26   exit 1    runner reported it: yes  python3 w3_scope.py > out_w3_scope
+      step 5  line 85   exit 1    runner reported it: yes  python3 ../species_extent_d633/e2_
+
+  species_repair_6f61 -- 6 step(s)
+      step 1  line 23   exit 1    runner reported it: yes  python3 selftest6f61.py > out_self
+      step 2  line 24   exit 1    runner reported it: yes  python3 r1_smallest.py  > out_r1_s
+      step 3  line 25   exit 1    runner reported it: yes  python3 r2_columns.py   > out_r2_c
+      step 4  line 26   exit 1    runner reported it: yes  python3 r3_quotes.py    > out_r3_q
+      step 5  line 27   exit 1    runner reported it: yes  python3 check_doc.py    > out_chec
+      step 6  line 87   exit 1    runner reported it: yes  python3 ../species_extent_d633/e2_
+
+  Q8     HELD
+        predicted: 15 of 15 leave the runner non-zero
+        measured:  15 of 15 non-zero (15 step(s): 4 + 5 + 6)
+  
+    of the 15 red runs, 0 did not carry the forced step's own words
+  every step that CAN be made red IS made red                      ok
+
+==============================================================================
+G2b  A NATURAL INPUT PER RUNNER
+==============================================================================
+
+  G2a substitutes a command.  This does not: each runner is given an
+  input of the kind its own checkers exist to find, and nothing in any
+  runner or checker is modified.
+
+      species_repair_a4ef        exit 1     a struck claim standing un-struck
+          caught by, read out of the run:  E2 (TOTAL BAD 1)
+          non-zero totals in that run:     E2 TOTAL BAD: 1
+      species_remainder_f8fa     exit 1     a regular file that cannot be read
+          caught by, read out of the run:  w3_scope.py
+          non-zero totals in that run:     (none printed)
+      species_repair_6f61        exit 1     a stricken sentence asserted un-struck
+          caught by, read out of the run:  CHECK_DOC
+          non-zero totals in that run:     (none printed)
+  Q9     HELD
+        predicted: exit 1, 1, 1
+        measured:  1, 1, 1
+        Three different KINDS of input.  The checker each one reaches is read
+        out of the run and not asserted: E2 (TOTAL BAD 1), w3_scope.py, CHECK_DOC.
+        A runner shown red by one substituted command has been shown to
+        propagate an exit code; this is the other half.
+  each of the three names a catcher, and the three are distinct    ok
+        A row that passes because `(cannot be told from the output)` is a
+        distinct string from the other two would be this audit's own subject:
+        an instrument reporting something other than what happened.  So both
+        conditions are required and the names are printed above either way.
+
+==============================================================================
+G2c  `set -e` DELETED ALONE, AT HEAD AND AT THE PIN (77306a7)
+==============================================================================
+
+  The line is found by reading the source and matching it exactly, not
+  by a line number: at the pin it sits 53, 60 and 43 lines above the
+  cross-section call and at HEAD it does not.  Its line number is
+  printed so a reader can see which line was removed.
+
+      HEAD   species_repair_a4ef        `set -e` at line 6    exit 1    prints the finding: yes  (1 occurrence(s))
+      HEAD   species_remainder_f8fa     `set -e` at line 4    exit 1    prints the finding: yes  (1 occurrence(s))
+      HEAD   species_repair_6f61        `set -e` at line 20   exit 1    prints the finding: yes  (1 occurrence(s))
+
+      77306a7 species_repair_a4ef        `set -e` at line 6    exit 0    prints the finding: yes  (1 occurrence(s))
+      77306a7 species_remainder_f8fa     `set -e` at line 4    exit 0    prints the finding: yes  (1 occurrence(s))
+      77306a7 species_repair_6f61        `set -e` at line 10   exit 0    prints the finding: yes  (1 occurrence(s))
+
+  Q10    HELD
+        predicted: HEAD 1, 1, 1 with the finding printed 3 of 3 -- status and printed content AGREE; pin 77306a7 0, 0, 0 with the finding printed 3 of 3 -- they DISAGREE
+        measured:  HEAD 1, 1, 1, finding printed 3 of 3; pin 0, 0, 0, finding printed 3 of 3
+  at HEAD, exit status and printed content agree                   ok
+  at the pin they disagree -- mg-6ef4's F3, reproduced by this ins ok
+        This row is a FINDING if it does NOT reproduce: a repair whose
+        before-state cannot be constructed is a repair to nothing, and every
+        after-figure in mg-4adb would then prove less than it appears to.
+  
+    THE DIFFERENCE, in one sentence.  At the pin `set -e` is the statement
+    that carries e2's exit code out of the file and it sits tens of
+    lines away from the call; at HEAD the CALL IS THE LAST COMMAND and a
+    POSIX script's status is its last command's, so deleting `set -e`
+    moves the message and not the verdict.  G1c measured that from the
+    other side: at HEAD the only runner line whose deletion loses the
+    gate is the call itself.
+
+==============================================================================
+G2 TOTAL BAD: 0
+G2 PREDICTIONS SCORED: 3, MISSED: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  15 step substitutions in G2a, 3 natural inputs
+in G2b and 6 `set -e` deletions in G2c -- 3 at HEAD and 3 at 77306a7.
+Every run is a whole runner executed in a git clone of this worktree.
+IT RANGES OVER NOTHING ELSE: G2a forces the steps a runner CALLS, so a
+checker that is never called cannot appear here, and G2b's three
+inputs are three, not a sample of a space.  `can this runner go red`
+is answered YES or NO for each; `does it go red for every finding its
+own battery can make` is a different question and is G5's.
+
+Headline lines, for the sections that have run.  G1's own two lines
+are printed by G1 itself, below, because it is the last command and
+nothing may be appended after it:
+G2 TOTAL BAD: 0
+G2 PREDICTIONS SCORED: 3, MISSED: 0
+G3 TOTAL BAD: 0
+G3 PREDICTIONS SCORED: 6, MISSED: 1
+G4 TOTAL BAD: 0
+G4 PREDICTIONS SCORED: 4, MISSED: 0
+G5 TOTAL BAD: 1
+G5 PREDICTIONS SCORED: 5, MISSED: 0
+selftest_d53d.py: 0 check(s) failed
+
+A non-zero TOTAL BAD in this suite is a FINDING REPORTED, not a broken
+instrument, and PREDICTIONS MISSED is neither -- a prediction that
+missed is a result and is kept as written.  OUTCOMES.md scores all 25.
+
+G1 -- the deletion population, its own output, unfiltered:
+  G1c: 255 runner executions on 6 sandboxes
+    ... 25/255
+    ... 50/255
+    ... 75/255
+    ... 100/255
+    ... 125/255
+    ... 150/255
+    ... 175/255
+    ... 200/255
+    ... 225/255
+    ... 250/255
+  G1f: 299 e2 executions
+    ... 50/299
+    ... 100/299
+    ... 150/299
+    ... 200/299
+    ... 250/299
+  G1h: 252 e2 executions
+    ... 50/252
+    ... 100/252
+    ... 150/252
+    ... 200/252
+    ... 250/252
+
+==============================================================================
+G1a  THE POPULATION, STATED -- AND EVERY COUNT RE-DERIVED
+==============================================================================
+
+  Counted from the source in the sandbox, not quoted from any document:
+      code/species_repair_a4ef/run_all.sh             83 lines
+      code/species_remainder_f8fa/run_all.sh          85 lines
+      code/species_repair_6f61/run_all.sh             87 lines
+      (the three runners)                            255 lines
+      code/species_extent_d633/e2_crosssection.py    299 lines
+      code/species_extent_d633/kernd633.py           252 lines
+      THE VERDICT PATH                               806 lines
+
+  disc.4 HELD
+        predicted: 83, 85 and 87 (255); e2 299; kernd633 252 -- counted from the source before any probe existed
+        measured:  83, 85, 87 (255); e2 299; kernd633 252
+        PREDICTIONS.md discloses this count as already made.  It is scored so
+        that a reader can see the disclosure was true, not so that it counts
+        as a hit.
+  
+  NO EXCLUSION LIST.  Every line of every one of the five files above is
+  deleted below, one at a time, with the file restored afterwards --
+  blank lines, comments, the shebang and the docstrings included.  There
+  is no line here whose exclusion has to be justified, which is the only
+  answer to mg-6ef4's F3 that does not rest on somebody having guessed
+  correctly which lines matter.
+  
+  TOTAL PROCESS EXECUTIONS IN G1c/G1f/G1h: 255 runner runs + 551 e2 runs
+
+==============================================================================
+G1b  THE ATTRIBUTION CONTROL -- BOTH DIRECTIONS
+==============================================================================
+
+  Nothing below means anything if the planted strike does not make the
+  runners red, and it means the WRONG thing if they are red for any
+  other reason.  Both are measured, and the clean tree first: an
+  instrument that reddens a correct tree is measuring itself.
+
+      CLEAN  species_repair_a4ef        exit 0    prints STANDING UN-STRUCK: no
+      CLEAN  species_remainder_f8fa     exit 0    prints STANDING UN-STRUCK: no
+      CLEAN  species_repair_6f61        exit 0    prints STANDING UN-STRUCK: no
+  3 of 3 runners GREEN on a clean tree and e2 silent               ok
+
+      e2 alone, strike planted: exit 1, 1 occurrence(s) STANDING
+  the plant arms exactly one finding and e2 exits non-zero         ok
+        kernd633.NEGATES exonerates on refut/struck/misquot/corrected/
+        retract and eleven more.  A plant whose restating paragraph trips one
+        of them is silently exonerated and every sweep below would then be
+        measuring a green tree.  That is why this row exists.
+      RED    species_repair_a4ef        exit 1    prints STANDING UN-STRUCK: yes
+             every OTHER total in that run: S1 TOTAL BAD 0, S2 TOTAL BAD 0
+      RED    species_remainder_f8fa     exit 1    prints STANDING UN-STRUCK: yes
+             every OTHER total in that run: W1 TOTAL BAD 0, W2 TOTAL BAD 0
+      RED    species_repair_6f61        exit 1    prints STANDING UN-STRUCK: yes
+             every OTHER total in that run: R1 TOTAL BAD 0, R2 TOTAL BAD 0, R3 TOTAL BAD 0
+  3 of 3 runners RED, and red BECAUSE of e2 and nothing else       ok
+        The third column is the attribution: if any other checker in the run
+        also went non-zero, a deletion sweep below could be reading its
+        verdict and calling it the gate's.
+
+==============================================================================
+G1c  EVERY LINE OF EVERY RUNNER, DELETED ALONE, WITH THE STRIKE LIVE
+==============================================================================
+
+  One row per line.  The three dispositions, defined once and applied
+  everywhere in this instrument:
+  
+    GATE HELD            runner non-zero AND e2's sentence in its output
+    GATE LOST            runner exited 0.  THE CLASS THIS ARC IS ABOUT.
+    DIED BEFORE THE GATE runner non-zero, e2 never spoke
+  
+  GATE LOST is decided on the exit code alone: that is what a reader's
+  `&&` sees.  Whether the finding was printed anyway is the next column
+  and is never a mitigation -- mg-6ef4's whole finding is a case where
+  it WAS printed.
+
+  code/species_repair_a4ef/run_all.sh
+      line   1  exit 1    GATE HELD            finding printed: yes  #!/bin/sh
+      line   2  exit 1    GATE HELD            finding printed: yes  # mg-a4ef -- the repair of mg-73df's M
+      line   3  exit 1    GATE HELD            finding printed: yes  # of the seam between mg-6f61 and mg-f
+      line   4  exit 1    GATE HELD            finding printed: yes  # Pure Python 3, no dependencies, NO N
+      line   5  exit 1    GATE HELD            finding printed: yes  # repository, which is local.  About 5
+      line   6  exit 1    GATE HELD            finding printed: yes  set -e
+      line   7  exit 1    DIED BEFORE THE GATE finding printed: no   cd "$(dirname "$0")"
+      line   8  exit 1    GATE HELD            finding printed: yes  
+      line   9  exit 1    GATE HELD            finding printed: yes  # mg-c2b3: every step in this file tha
+      line  10  exit 1    GATE HELD            finding printed: yes  # own transcript used to pipe into `te
+      line  11  exit 1    GATE HELD            finding printed: yes  # exit status in POSIX sh is its LAST 
+      line  12  exit 1    GATE HELD            finding printed: yes  # so the step could print failures, ex
+      line  13  exit 1    GATE HELD            finding printed: yes  # Each now redirects and has its statu
+      line  14  exit 1    GATE HELD            finding printed: yes  # other steps in this file were alread
+      line  15  exit 1    GATE HELD            finding printed: yes  # `set -o pipefail` is not used: `/bin
+      line  16  exit 1    GATE HELD            finding printed: yes  # option and would abort the runner at
+      line  17  exit 1    GATE HELD            finding printed: yes  # This note deliberately avoids writin
+      line  18  exit 1    GATE HELD            finding printed: yes  # grep for it over the arc still count
+      line  19  exit 2    DIED BEFORE THE GATE finding printed: no   python3 selftesta4ef.py > out_selftest
+      line  20  exit 2    DIED BEFORE THE GATE finding printed: no       cat out_selftest.txt; echo "selfte
+      line  21  exit 1    GATE HELD            finding printed: yes  cat out_selftest.txt
+      line  22  exit 1    GATE HELD            finding printed: yes  python3 s1_extent.py    > out_s1_exten
+      line  23  exit 1    GATE HELD            finding printed: yes  python3 s2_seam.py      > out_s2_seam.
+      line  24  exit 1    GATE HELD            finding printed: yes  
+      line  25  exit 1    GATE HELD            finding printed: yes  echo
+      line  26  exit 1    GATE HELD            finding printed: yes  echo "Headline lines:"
+      line  27  exit 1    GATE HELD            finding printed: yes  grep -h '^S[12] TOTAL BAD:\|^selftesta
+      line  28  exit 1    GATE HELD            finding printed: yes  echo
+      line  29  exit 1    GATE HELD            finding printed: yes  echo "S1's TOTAL BAD is followed IN TH
+      line  30  exit 1    GATE HELD            finding printed: yes  echo "That is the whole point of this 
+      line  31  exit 1    GATE HELD            finding printed: yes  echo "TOTAL BAD: 0 means when nobody s
+      line  32  exit 1    GATE HELD            finding printed: yes  echo
+      line  33  exit 1    GATE HELD            finding printed: yes  
+      line  34  exit 1    GATE HELD            finding printed: yes  # mg-821e, on mg-6cb9's F2.  THE CROSS
+      line  35  exit 1    GATE HELD            finding printed: yes  # `e2_crosssection.py` is what closes 
+      line  36  exit 1    GATE HELD            finding printed: yes  # section of a document and standing u
+      line  37  exit 1    GATE HELD            finding printed: yes  # per-section checker can see by const
+      line  38  exit 1    GATE HELD            finding printed: yes  # TREE checks.  The check existed, was
+      line  39  exit 1    GATE HELD            finding printed: yes  # reader meets -- and was called by 0 
+      line  40  exit 1    GATE HELD            finding printed: yes  # runner that would catch the next B1 
+      line  41  exit 1    GATE HELD            finding printed: yes  # The removal question was asked BEFOR
+      line  42  exit 1    GATE HELD            finding printed: yes  # measurements, in code/species_sites_
+      line  43  exit 1    GATE HELD            finding printed: yes  # section 2 of docs/OneThird-Species-H
+      line  44  exit 1    GATE HELD            finding printed: yes  # the generator is not removable.  The
+      line  45  exit 1    GATE HELD            finding printed: yes  # made: a call present in a script is 
+      line  46  exit 1    GATE HELD            finding printed: yes  # mg-5040, on mg-4700's OPEN 2.  ONE S
+      line  47  exit 1    GATE HELD            finding printed: yes  # RETURN.
+      line  48  exit 1    GATE HELD            finding printed: yes  # The block this replaces was twenty l
+      line  49  exit 1    GATE HELD            finding printed: yes  # the deletion test mg-821e applied to
+      line  50  exit 1    GATE HELD            finding printed: yes  # Measured one part at a time (mg-4700
+      line  51  exit 1    GATE HELD            finding printed: yes  # guard alone changed no verdict in 3 
+      line  52  exit 1    GATE HELD            finding printed: yes  # aborts on a failed command substitut
+      line  53  exit 1    GATE HELD            finding printed: yes  # and not the VERDICT; and deleting th
+      line  54  exit 1    GATE HELD            finding printed: yes  # output left 3 of 3 exiting 0 with NO
+      line  55  exit 1    GATE HELD            finding printed: yes  # nothing.  The guard also reported AN
+      line  56  exit 1    GATE HELD            finding printed: yes  # stands un-struck elsewhere", so a cr
+      line  57  exit 1    GATE HELD            finding printed: yes  # finding e2 never made (mg-4700 F5).
+      line  58  exit 1    GATE HELD            finding printed: yes  # That is the third structure the dele
+      line  59  exit 1    GATE HELD            finding printed: yes  # (mg-9220) and the clause (mg-64b6). 
+      line  60  exit 1    GATE HELD            finding printed: yes  # granularity: a test whose grain chas
+      line  61  exit 1    GATE HELD            finding printed: yes  # up.  THE STRUCTURE IS REMOVED.  Runn
+      line  62  exit 1    GATE HELD            finding printed: yes  # are now the SAME statement, so neith
+      line  63  exit 1    GATE HELD            finding printed: yes  # there is exactly one unit here that 
+      line  64  exit 1    GATE HELD            finding printed: yes  # a pipeline's status in POSIX sh is i
+      line  65  exit 1    GATE HELD            finding printed: yes  # is not available in dash (mg-c2b3).
+      line  66  exit 1    GATE HELD            finding printed: yes  #
+      line  67  exit 1    GATE HELD            finding printed: yes  # mg-4adb, on mg-6ef4's F3.  THE STATE
+      line  68  exit 1    GATE HELD            finding printed: yes  # THIS FILE WAS `set -e`, AT THE TOP. 
+      line  69  exit 1    GATE HELD            finding printed: yes  # GREEN while they printed e2's findin
+      line  70  exit 1    GATE HELD            finding printed: yes  # population this arc had used -- so t
+      line  71  exit 1    GATE HELD            finding printed: yes  # the line that made it wrong.  THE FI
+      line  72  exit 1    GATE HELD            finding printed: yes  # guard beside a `set -e` is a line wh
+      line  73  exit 1    GATE HELD            finding printed: yes  # the other one catches it, which is m
+      line  74  exit 1    GATE HELD            finding printed: yes  # now THE LAST COMMAND OF THIS FILE an
+      line  75  exit 1    GATE HELD            finding printed: yes  # last command's, so what turns e2's e
+      line  76  exit 1    GATE HELD            finding printed: yes  # ITSELF -- inside every population th
+      line  77  exit 1    GATE HELD            finding printed: yes  # `set -e` stays, but nothing about th
+      line  78  exit 1    GATE HELD            finding printed: yes  # code/species_rung_repair_4adb/v1_pop
+      line  79  exit 1    GATE HELD            finding printed: yes  # in a population that is EVERY LINE O
+      line  80  exit 1    GATE HELD            finding printed: yes  # NOTHING MAY BE APPENDED BELOW THE CA
+      line  81  exit 1    GATE HELD            finding printed: yes  # reads this file's source and goes re
+      line  82  exit 1    GATE HELD            finding printed: yes  echo "cross-section check (mg-821e), i
+      line  83  exit 0    GATE LOST            finding printed: no   python3 ../species_extent_d633/e2_cros
+
+  code/species_remainder_f8fa/run_all.sh
+      line   1  exit 1    GATE HELD            finding printed: yes  #!/bin/sh
+      line   2  exit 1    GATE HELD            finding printed: yes  # mg-f8fa -- the remainder of mg-a61f 
+      line   3  exit 1    GATE HELD            finding printed: yes  # Pure Python 3, no dependencies, NO N
+      line   4  exit 1    GATE HELD            finding printed: yes  set -e
+      line   5  exit 1    DIED BEFORE THE GATE finding printed: no   cd "$(dirname "$0")"
+      line   6  exit 1    GATE HELD            finding printed: yes  
+      line   7  exit 1    GATE HELD            finding printed: yes  # mg-c2b3: every step in this file tha
+      line   8  exit 1    GATE HELD            finding printed: yes  # own transcript used to pipe into `te
+      line   9  exit 1    GATE HELD            finding printed: yes  # exit status in POSIX sh is its LAST 
+      line  10  exit 1    GATE HELD            finding printed: yes  # so the step could print failures, ex
+      line  11  exit 1    GATE HELD            finding printed: yes  # Each now redirects and has its statu
+      line  12  exit 1    GATE HELD            finding printed: yes  # other steps in this file were alread
+      line  13  exit 1    GATE HELD            finding printed: yes  # `set -o pipefail` is not used: `/bin
+      line  14  exit 1    GATE HELD            finding printed: yes  # option and would abort the runner at
+      line  15  exit 1    GATE HELD            finding printed: yes  # This note deliberately avoids writin
+      line  16  exit 1    GATE HELD            finding printed: yes  # grep for it over the arc still count
+      line  17  exit 2    DIED BEFORE THE GATE finding printed: no   python3 selftestf8fa.py > out_selftest
+      line  18  exit 2    DIED BEFORE THE GATE finding printed: no       cat out_selftest.txt; echo "selfte
+      line  19  exit 1    GATE HELD            finding printed: yes  cat out_selftest.txt
+      line  20  exit 2    DIED BEFORE THE GATE finding printed: no   python3 w1_opposite.py > out_w1_opposi
+      line  21  exit 2    DIED BEFORE THE GATE finding printed: no       cat out_w1_opposite.txt; echo "w1_
+      line  22  exit 1    GATE HELD            finding printed: yes  cat out_w1_opposite.txt
+      line  23  exit 2    DIED BEFORE THE GATE finding printed: no   python3 w2_typemismatch.py > out_w2_ty
+      line  24  exit 2    DIED BEFORE THE GATE finding printed: no       cat out_w2_typemismatch.txt; echo 
+      line  25  exit 1    GATE HELD            finding printed: yes  cat out_w2_typemismatch.txt
+      line  26  exit 2    DIED BEFORE THE GATE finding printed: no   python3 w3_scope.py > out_w3_scope.txt
+      line  27  exit 2    DIED BEFORE THE GATE finding printed: no       cat out_w3_scope.txt; echo "w3_sco
+      line  28  exit 1    GATE HELD            finding printed: yes  cat out_w3_scope.txt
+      line  29  exit 1    GATE HELD            finding printed: yes  
+      line  30  exit 1    GATE HELD            finding printed: yes  echo
+      line  31  exit 1    GATE HELD            finding printed: yes  echo "out_w3_scope_before.txt is the S
+      line  32  exit 1    GATE HELD            finding printed: yes  echo "before this repair: 12 problems.
+      line  33  exit 1    GATE HELD            finding printed: yes  echo "checker written after the fix an
+      line  34  exit 1    GATE HELD            finding printed: yes  echo
+      line  35  exit 1    GATE HELD            finding printed: yes  
+      line  36  exit 1    GATE HELD            finding printed: yes  # mg-821e, on mg-6cb9's F2.  THE CROSS
+      line  37  exit 1    GATE HELD            finding printed: yes  # `e2_crosssection.py` is what closes 
+      line  38  exit 1    GATE HELD            finding printed: yes  # section of a document and standing u
+      line  39  exit 1    GATE HELD            finding printed: yes  # per-section checker can see by const
+      line  40  exit 1    GATE HELD            finding printed: yes  # TREE checks.  The check existed, was
+      line  41  exit 1    GATE HELD            finding printed: yes  # reader meets -- and was called by 0 
+      line  42  exit 1    GATE HELD            finding printed: yes  # runner that would catch the next B1 
+      line  43  exit 1    GATE HELD            finding printed: yes  # The removal question was asked BEFOR
+      line  44  exit 1    GATE HELD            finding printed: yes  # measurements, in code/species_sites_
+      line  45  exit 1    GATE HELD            finding printed: yes  # section 2 of docs/OneThird-Species-H
+      line  46  exit 1    GATE HELD            finding printed: yes  # the generator is not removable.  The
+      line  47  exit 1    GATE HELD            finding printed: yes  # made: a call present in a script is 
+      line  48  exit 1    GATE HELD            finding printed: yes  # mg-5040, on mg-4700's OPEN 2.  ONE S
+      line  49  exit 1    GATE HELD            finding printed: yes  # RETURN.
+      line  50  exit 1    GATE HELD            finding printed: yes  # The block this replaces was twenty l
+      line  51  exit 1    GATE HELD            finding printed: yes  # the deletion test mg-821e applied to
+      line  52  exit 1    GATE HELD            finding printed: yes  # Measured one part at a time (mg-4700
+      line  53  exit 1    GATE HELD            finding printed: yes  # guard alone changed no verdict in 3 
+      line  54  exit 1    GATE HELD            finding printed: yes  # aborts on a failed command substitut
+      line  55  exit 1    GATE HELD            finding printed: yes  # and not the VERDICT; and deleting th
+      line  56  exit 1    GATE HELD            finding printed: yes  # output left 3 of 3 exiting 0 with NO
+      line  57  exit 1    GATE HELD            finding printed: yes  # nothing.  The guard also reported AN
+      line  58  exit 1    GATE HELD            finding printed: yes  # stands un-struck elsewhere", so a cr
+      line  59  exit 1    GATE HELD            finding printed: yes  # finding e2 never made (mg-4700 F5).
+      line  60  exit 1    GATE HELD            finding printed: yes  # That is the third structure the dele
+      line  61  exit 1    GATE HELD            finding printed: yes  # (mg-9220) and the clause (mg-64b6). 
+      line  62  exit 1    GATE HELD            finding printed: yes  # granularity: a test whose grain chas
+      line  63  exit 1    GATE HELD            finding printed: yes  # up.  THE STRUCTURE IS REMOVED.  Runn
+      line  64  exit 1    GATE HELD            finding printed: yes  # are now the SAME statement, so neith
+      line  65  exit 1    GATE HELD            finding printed: yes  # there is exactly one unit here that 
+      line  66  exit 1    GATE HELD            finding printed: yes  # a pipeline's status in POSIX sh is i
+      line  67  exit 1    GATE HELD            finding printed: yes  # is not available in dash (mg-c2b3).
+      line  68  exit 1    GATE HELD            finding printed: yes  #
+      line  69  exit 1    GATE HELD            finding printed: yes  # mg-4adb, on mg-6ef4's F3.  THE STATE
+      line  70  exit 1    GATE HELD            finding printed: yes  # THIS FILE WAS `set -e`, AT THE TOP. 
+      line  71  exit 1    GATE HELD            finding printed: yes  # GREEN while they printed e2's findin
+      line  72  exit 1    GATE HELD            finding printed: yes  # population this arc had used -- so t
+      line  73  exit 1    GATE HELD            finding printed: yes  # the line that made it wrong.  THE FI
+      line  74  exit 1    GATE HELD            finding printed: yes  # guard beside a `set -e` is a line wh
+      line  75  exit 1    GATE HELD            finding printed: yes  # the other one catches it, which is m
+      line  76  exit 1    GATE HELD            finding printed: yes  # now THE LAST COMMAND OF THIS FILE an
+      line  77  exit 1    GATE HELD            finding printed: yes  # last command's, so what turns e2's e
+      line  78  exit 1    GATE HELD            finding printed: yes  # ITSELF -- inside every population th
+      line  79  exit 1    GATE HELD            finding printed: yes  # `set -e` stays, but nothing about th
+      line  80  exit 1    GATE HELD            finding printed: yes  # code/species_rung_repair_4adb/v1_pop
+      line  81  exit 1    GATE HELD            finding printed: yes  # in a population that is EVERY LINE O
+      line  82  exit 1    GATE HELD            finding printed: yes  # NOTHING MAY BE APPENDED BELOW THE CA
+      line  83  exit 1    GATE HELD            finding printed: yes  # reads this file's source and goes re
+      line  84  exit 1    GATE HELD            finding printed: yes  echo "cross-section check (mg-821e), i
+      line  85  exit 0    GATE LOST            finding printed: no   python3 ../species_extent_d633/e2_cros
+
+  code/species_repair_6f61/run_all.sh
+      line   1  exit 1    GATE HELD            finding printed: yes  #!/bin/sh
+      line   2  exit 1    GATE HELD            finding printed: yes  # mg-6f61 -- the repair of mg-7d75 und
+      line   3  exit 1    GATE HELD            finding printed: yes  # Pure Python 3, no dependencies, NO N
+      line   4  exit 1    GATE HELD            finding printed: yes  # r2_columns.py is 27.
+      line   5  exit 1    GATE HELD            finding printed: yes  #
+      line   6  exit 1    GATE HELD            finding printed: yes  # r3_quotes.py reads code/species_audi
+      line   7  exit 1    GATE HELD            finding printed: yes  # extraction the audit committed -- ra
+      line   8  exit 1    GATE HELD            finding printed: yes  # code/species_audit_a61f/fetch_source
+      line   9  exit 1    GATE HELD            finding printed: yes  # and it is the only network script in
+      line  10  exit 1    GATE HELD            finding printed: yes  #
+      line  11  exit 1    GATE HELD            finding printed: yes  # mg-4adb: the three unguarded steps b
+      line  12  exit 1    GATE HELD            finding printed: yes  # r3_quotes -- have their status read 
+      line  13  exit 1    GATE HELD            finding printed: yes  # is stated here rather than left to b
+      line  14  exit 1    GATE HELD            finding printed: yes  # V1e of code/species_rung_repair_4adb
+      line  15  exit 1    GATE HELD            finding printed: yes  # forces each step red in turn, so the
+      line  16  exit 1    GATE HELD            finding printed: yes  # in a transcript instead of being thr
+      line  17  exit 1    GATE HELD            finding printed: yes  # second guard is added beside it: a `
+      line  18  exit 1    GATE HELD            finding printed: yes  # whose deletion changes no verdict, w
+      line  19  exit 1    GATE HELD            finding printed: yes  # removed.  One rung, measured, is wor
+      line  20  exit 1    GATE HELD            finding printed: yes  set -e
+      line  21  exit 1    DIED BEFORE THE GATE finding printed: no   cd "$(dirname "$0")"
+      line  22  exit 1    GATE HELD            finding printed: yes  
+      line  23  exit 1    GATE HELD            finding printed: yes  python3 selftest6f61.py > out_selftest
+      line  24  exit 1    GATE HELD            finding printed: yes  python3 r1_smallest.py  > out_r1_small
+      line  25  exit 1    GATE HELD            finding printed: yes  python3 r2_columns.py   > out_r2_colum
+      line  26  exit 1    GATE HELD            finding printed: yes  python3 r3_quotes.py    > out_r3_quote
+      line  27  exit 1    GATE HELD            finding printed: yes  python3 check_doc.py    > out_check_do
+      line  28  exit 1    GATE HELD            finding printed: yes  
+      line  29  exit 1    GATE HELD            finding printed: yes  echo "done.  Headline lines:"
+      line  30  exit 1    GATE HELD            finding printed: yes  grep -h '^R[0-9] TOTAL BAD:\|^R2 PREDI
+      line  31  exit 1    GATE HELD            finding printed: yes  echo
+      line  32  exit 1    GATE HELD            finding printed: yes  echo "R2 PREDICTIONS MISSED is NOT exp
+      line  33  exit 1    GATE HELD            finding printed: yes  echo "explained in out_r2_columns.txt 
+      line  34  exit 1    GATE HELD            finding printed: yes  echo "battery whose expectations are w
+      line  35  exit 1    GATE HELD            finding printed: yes  echo
+      line  36  exit 1    GATE HELD            finding printed: yes  
+      line  37  exit 1    GATE HELD            finding printed: yes  # mg-821e, on mg-6cb9's F2.  THE CROSS
+      line  38  exit 1    GATE HELD            finding printed: yes  # `e2_crosssection.py` is what closes 
+      line  39  exit 1    GATE HELD            finding printed: yes  # section of a document and standing u
+      line  40  exit 1    GATE HELD            finding printed: yes  # per-section checker can see by const
+      line  41  exit 1    GATE HELD            finding printed: yes  # TREE checks.  The check existed, was
+      line  42  exit 1    GATE HELD            finding printed: yes  # reader meets -- and was called by 0 
+      line  43  exit 1    GATE HELD            finding printed: yes  # runner that would catch the next B1 
+      line  44  exit 1    GATE HELD            finding printed: yes  # The removal question was asked BEFOR
+      line  45  exit 1    GATE HELD            finding printed: yes  # measurements, in code/species_sites_
+      line  46  exit 1    GATE HELD            finding printed: yes  # section 2 of docs/OneThird-Species-H
+      line  47  exit 1    GATE HELD            finding printed: yes  # the generator is not removable.  The
+      line  48  exit 1    GATE HELD            finding printed: yes  # made: a call present in a script is 
+      line  49  exit 1    GATE HELD            finding printed: yes  # mg-5040, on mg-4700's OPEN 2.  ONE S
+      line  50  exit 1    GATE HELD            finding printed: yes  # RETURN.
+      line  51  exit 1    GATE HELD            finding printed: yes  # The block this replaces was twenty l
+      line  52  exit 1    GATE HELD            finding printed: yes  # the deletion test mg-821e applied to
+      line  53  exit 1    GATE HELD            finding printed: yes  # Measured one part at a time (mg-4700
+      line  54  exit 1    GATE HELD            finding printed: yes  # guard alone changed no verdict in 3 
+      line  55  exit 1    GATE HELD            finding printed: yes  # aborts on a failed command substitut
+      line  56  exit 1    GATE HELD            finding printed: yes  # and not the VERDICT; and deleting th
+      line  57  exit 1    GATE HELD            finding printed: yes  # output left 3 of 3 exiting 0 with NO
+      line  58  exit 1    GATE HELD            finding printed: yes  # nothing.  The guard also reported AN
+      line  59  exit 1    GATE HELD            finding printed: yes  # stands un-struck elsewhere", so a cr
+      line  60  exit 1    GATE HELD            finding printed: yes  # finding e2 never made (mg-4700 F5).
+      line  61  exit 1    GATE HELD            finding printed: yes  # That is the third structure the dele
+      line  62  exit 1    GATE HELD            finding printed: yes  # (mg-9220) and the clause (mg-64b6). 
+      line  63  exit 1    GATE HELD            finding printed: yes  # granularity: a test whose grain chas
+      line  64  exit 1    GATE HELD            finding printed: yes  # up.  THE STRUCTURE IS REMOVED.  Runn
+      line  65  exit 1    GATE HELD            finding printed: yes  # are now the SAME statement, so neith
+      line  66  exit 1    GATE HELD            finding printed: yes  # there is exactly one unit here that 
+      line  67  exit 1    GATE HELD            finding printed: yes  # a pipeline's status in POSIX sh is i
+      line  68  exit 1    GATE HELD            finding printed: yes  # is not available in dash (mg-c2b3).
+      line  69  exit 1    GATE HELD            finding printed: yes  #
+      line  70  exit 1    GATE HELD            finding printed: yes  # mg-4adb, on mg-6ef4's F3.  THE STATE
+      line  71  exit 1    GATE HELD            finding printed: yes  # THIS FILE WAS `set -e`, AT THE TOP. 
+      line  72  exit 1    GATE HELD            finding printed: yes  # GREEN while they printed e2's findin
+      line  73  exit 1    GATE HELD            finding printed: yes  # population this arc had used -- so t
+      line  74  exit 1    GATE HELD            finding printed: yes  # the line that made it wrong.  THE FI
+      line  75  exit 1    GATE HELD            finding printed: yes  # guard beside a `set -e` is a line wh
+      line  76  exit 1    GATE HELD            finding printed: yes  # the other one catches it, which is m
+      line  77  exit 1    GATE HELD            finding printed: yes  # now THE LAST COMMAND OF THIS FILE an
+      line  78  exit 1    GATE HELD            finding printed: yes  # last command's, so what turns e2's e
+      line  79  exit 1    GATE HELD            finding printed: yes  # ITSELF -- inside every population th
+      line  80  exit 1    GATE HELD            finding printed: yes  # `set -e` stays -- in this file it is
+      line  81  exit 1    GATE HELD            finding printed: yes  # unguarded steps above have, but noth
+      line  82  exit 1    GATE HELD            finding printed: yes  # code/species_rung_repair_4adb/v1_pop
+      line  83  exit 1    GATE HELD            finding printed: yes  # in a population that is EVERY LINE O
+      line  84  exit 1    GATE HELD            finding printed: yes  # NOTHING MAY BE APPENDED BELOW THE CA
+      line  85  exit 1    GATE HELD            finding printed: yes  # reads this file's source and goes re
+      line  86  exit 1    GATE HELD            finding printed: yes  echo "cross-section check (mg-821e), i
+      line  87  exit 0    GATE LOST            finding printed: no   python3 ../species_extent_d633/e2_cros
+
+    code/species_repair_a4ef/run_all.sh            GATE LOST at line(s) 83
+          python3 ../species_extent_d633/e2_crosssection.py
+    code/species_remainder_f8fa/run_all.sh         GATE LOST at line(s) 85
+          python3 ../species_extent_d633/e2_crosssection.py
+    code/species_repair_6f61/run_all.sh            GATE LOST at line(s) 87
+          python3 ../species_extent_d633/e2_crosssection.py
+  Q1     HELD
+        predicted: 1, 1, 1 -- and in each case the line is `python3 ../species_extent_d633/e2_crosssection.py`
+        measured:  1, 1, 1 -- every one of them is that call
+        This is mg-4adb's own headline figure, re-derived by an instrument that
+        shares no code with it.  If it had not reproduced, that would have been
+        a larger finding than anything else in this audit.
+  
+    dispositions over the 255: DIED BEFORE THE GATE 13, GATE HELD 239, GATE LOST 3
+    of the GATE LOST rows, 0 printed e2's finding anyway
+
+==============================================================================
+G1d  MY 255 DISPOSITIONS AGAINST mg-4adb's OWN 255 ROWS
+==============================================================================
+
+  mg-4adb's transcript is read here as the OBJECT of a measurement.  Its
+  vocabulary is `gate fired` / `GATE LOST` / `BROKE EARLY`; mine is the
+  three above.  The mapping is stated, and then every row is compared:
+      gate fired  <-> GATE HELD      BROKE EARLY <-> DIED BEFORE THE GATE
+
+    rows parsed out of mg-4adb's out_v1_population.txt: 255
+  Q2     HELD
+        predicted: 255 of 255 agree, row for row
+        measured:  255 of 255 agree; 0 differ; 0 of mine have no row there
+        Exit code, disposition and finding-printed all three, per row.
+
+==============================================================================
+G1e  WHAT THE CERTIFIED POPULATION CONTAINS
+==============================================================================
+
+    files enumerated by the certified population:
+        code/species_remainder_f8fa/run_all.sh                85 row(s)
+        code/species_repair_6f61/run_all.sh                   87 row(s)
+        code/species_repair_a4ef/run_all.sh                   83 row(s)
+  Q3     HELD
+        predicted: 255 rows, and 0 of them a line of a file other than the three runners
+        measured:  255 rows, 0 of them outside the three runners
+  
+    So `e2_crosssection.py` (299 lines) and `kernd633.py` (252) -- which
+    BETWEEN THEM DECIDE THE EXIT CODE THE RUNNER RETURNS -- are outside
+    it, exactly as `set -e` was outside the three populations that
+    preceded mg-4adb's.  G1f and G1h ask what that costs.
+
+==============================================================================
+G1f  EVERY LINE OF e2_crosssection.py, DELETED ALONE, STRIKE LIVE
+==============================================================================
+
+  Same rule, same three dispositions, and the same no-exclusion-list.
+  EVERY ROW IS PRINTED, here and in G1h, as mg-4adb prints all 255 of
+  its own.  A section that shows only the rows that fired reports its
+  population as a number, and a number standing in for a population is
+  the thing this audit is about.
+  Here `GATE LOST` means: e2 exited 0 with the strike live -- so the
+  runner whose last command it is exits 0 too, and the reader is told
+  nothing.  The column after it says whether the finding was printed
+  while that happened.
+
+  code/species_extent_d633/e2_crosssection.py
+      line   1  exit 1      DIED BEFORE THE GATE finding printed: no   """E2 -- A STRUCK CLAIM MUST NOT STA
+      line   2  exit 1      GATE HELD            finding printed: yes  DOCUMENT.
+      line   3  exit 1      GATE HELD            finding printed: yes  
+      line   4  exit 1      GATE HELD            finding printed: yes  mg-7dd3's B1.  `docs/OneThird-Specie
+      line   5  exit 1      GATE HELD            finding printed: yes  struck the Aguiar-Mahajan §17.5 quot
+      line   6  exit 1      GATE HELD            finding printed: yes  book's species is Pi* in both slots"
+      line   7  exit 1      GATE HELD            finding printed: yes  a direct quotation with a section ci
+      line   8  exit 1      GATE HELD            finding printed: yes  the file since `83ac472`.  Four pass
+      line   9  exit 1      GATE HELD            finding printed: yes  AND EVERY EXTENT LINE WAS TRUE: the 
+      line  10  exit 1      GATE HELD            finding printed: yes  list, `S1 TOTAL BAD` is 0.
+      line  11  exit 1      GATE HELD            finding printed: yes  
+      line  12  exit 1      GATE HELD            finding printed: yes    * `check_doc.py` requires the STRI
+      line  13  exit 1      GATE HELD            finding printed: yes      It does.  The stored string begi
+      line  14  exit 1      GATE HELD            finding printed: yes      §0's copy began differently.
+      line  15  exit 1      GATE HELD            finding printed: yes    * `stricken_a4ef.py`'s X7 row is a
+      line  16  exit 1      GATE HELD            finding printed: yes    * A LIST OF SENTENCES IS NOT A LIS
+      line  17  exit 1      GATE HELD            finding printed: yes      see this by construction -- whic
+      line  18  exit 1      GATE HELD            finding printed: yes  
+      line  19  exit 1      GATE HELD            finding printed: yes  THE RULE, AND IT IS NOT A LIST.  For
+      line  20  exit 1      GATE HELD            finding printed: yes  of consecutive tokens it shares with
+      line  21  exit 1      GATE HELD            finding printed: yes  A run of at least RUN_MIN tokens tha
+      line  22  exit 1      GATE HELD            finding printed: yes  the claim itself said again.  Nothin
+      line  23  exit 1      GATE HELD            finding printed: yes  so it does not go stale when a new o
+      line  24  exit 1      GATE HELD            finding printed: yes  sentence writes the `~~`, and that i
+      line  25  exit 1      GATE HELD            finding printed: yes  
+      line  26  exit 1      GATE HELD            finding printed: yes  EXONERATION, and it is narrower than
+      line  27  exit 1      GATE HELD            finding printed: yes  occurrence stands only if THE PARAGR
+      line  28  exit 1      GATE HELD            finding printed: yes  HOLD, or if it sits in a fenced bloc
+      line  29  exit 1      GATE HELD            finding printed: yes  stricken strings.  A ticket id nearb
+      line  30  exit 1      GATE HELD            finding printed: yes  on `mg-[0-9a-f]{4}` within six lines
+      line  31  exit 1      GATE HELD            finding printed: yes  misquotation contains an unrelated `
+      line  32  exit 1      GATE HELD            finding printed: yes  occurrence in this repository that h
+      line  33  exit 1      GATE HELD            finding printed: yes  rather than asserting it.
+      line  34  exit 1      GATE HELD            finding printed: yes  
+      line  35  exit 1      GATE HELD            finding printed: yes      python3 code/species_extent_d633
+      line  36  exit 1      DIED BEFORE THE GATE finding printed: no   """
+      line  37  exit 1      GATE HELD            finding printed: yes  
+      line  38  exit 1      DIED BEFORE THE GATE finding printed: no   import os
+      line  39  exit 1      GATE HELD            finding printed: yes  import re
+      line  40  exit 1      DIED BEFORE THE GATE finding printed: no   import subprocess
+      line  41  exit 1      GATE HELD            finding printed: yes  import sys
+      line  42  exit 1      GATE HELD            finding printed: yes  
+      line  43  exit 1      DIED BEFORE THE GATE finding printed: no   from kernd633 import (hdr, REPO, RUN
+      line  44  exit 1      DIED BEFORE THE GATE finding printed: no                         strike_finding
+      line  45  exit 1      GATE HELD            finding printed: yes  
+      line  46  exit 1      DIED BEFORE THE GATE finding printed: no   bad = 0
+      line  47  exit 1      DIED BEFORE THE GATE finding printed: no   ROOTS = [os.path.join(REPO, "docs"),
+      line  48  exit 1      GATE HELD            finding printed: yes  
+      line  49  exit 1      DIED BEFORE THE GATE finding printed: no   FILES, DECLINED_STATED, DECLINED_UNS
+      line  50  exit 1      DIED BEFORE THE GATE finding printed: no   for r in ROOTS:
+      line  51  exit 1      DIED BEFORE THE GATE finding printed: no       _f, _st, _un = md_files_and_resi
+      line  52  exit 0      GATE LOST            finding printed: no       FILES += _f
+      line  53  exit 1      GATE HELD            finding printed: yes      DECLINED_STATED += _st
+      line  54  exit 1      GATE HELD            finding printed: yes      DECLINED_UNSTATED += _un
+      line  55  exit 1      GATE HELD            finding printed: yes  FILES = sorted(set(FILES))
+      line  56  exit 1      GATE HELD            finding printed: yes  DECLINED_STATED = sorted(set(DECLINE
+      line  57  exit 1      GATE HELD            finding printed: yes  DECLINED_UNSTATED = sorted(set(DECLI
+      line  58  exit 1      GATE HELD            finding printed: yes  
+      line  59  exit 1      GATE HELD            finding printed: yes  
+      line  60  exit 1      DIED BEFORE THE GATE finding printed: no   def _anchor():
+      line  61  exit 1      DIED BEFORE THE GATE finding printed: no       """The revision this run measure
+      line  62  exit 1      GATE HELD            finding printed: yes  
+      line  63  exit 1      GATE HELD            finding printed: yes      mg-5040, on mg-4700's OPEN 3 / F
+      line  64  exit 1      GATE HELD            finding printed: yes      run is a property of A TREE, not
+      line  65  exit 1      GATE HELD            finding printed: yes      transcript carrying it goes fals
+      line  66  exit 1      GATE HELD            finding printed: yes      file.  Re-running at commit time
+      line  67  exit 1      GATE HELD            finding printed: yes      exactly that in b534db7 and the 
+      line  68  exit 1      GATE HELD            finding printed: yes      markdown files larger, so an art
+      line  69  exit 1      GATE HELD            finding printed: yes      shipped inside a different tree.
+      line  70  exit 1      GATE HELD            finding printed: yes      the revision converts a claim ab
+      line  71  exit 1      GATE HELD            finding printed: yes      into a claim about a commit git 
+      line  72  exit 1      GATE HELD            finding printed: yes      a reader tell STALE from WRONG w
+      line  73  exit 1      DIED BEFORE THE GATE finding printed: no       """
+      line  74  exit 1      DIED BEFORE THE GATE finding printed: no       try:
+      line  75  exit 1      DIED BEFORE THE GATE finding printed: no           p = subprocess.run(["git", "
+      line  76  exit 1      DIED BEFORE THE GATE finding printed: no                              stdout=su
+      line  77  exit 1      DIED BEFORE THE GATE finding printed: no           rev = p.stdout.decode().stri
+      line  78  exit 1      DIED BEFORE THE GATE finding printed: no       except OSError:
+      line  79  exit 1      DIED BEFORE THE GATE finding printed: no           rev = ""
+      line  80  exit 1      GATE HELD            finding printed: yes      if not rev:
+      line  81  exit 1      GATE HELD            finding printed: yes          return "NO REVISION -- git c
+      line  82  exit 1      GATE HELD            finding printed: yes                 "anchored to nothing 
+      line  83  exit 1      GATE HELD            finding printed: yes      # THE DIRTY CHECK IS ABOUT THE P
+      line  84  exit 1      GATE HELD            finding printed: yes      # else.  A blanket `git status` 
+      line  85  exit 1      GATE HELD            finding printed: yes      # its own transcript, so every c
+      line  86  exit 1      GATE HELD            finding printed: yes      # "PLUS UNCOMMITTED CHANGES" for
+      line  87  exit 1      GATE HELD            finding printed: yes      # a qualifier that says nothing.
+      line  88  exit 1      GATE HELD            finding printed: yes      # code/, so that is what is aske
+      line  89  exit 1      GATE HELD            finding printed: yes      # revision named, the count IS t
+      line  90  exit 1      GATE HELD            finding printed: yes      # worktree has moved.
+      line  91  exit 1      DIED BEFORE THE GATE finding printed: no       try:
+      line  92  exit 1      DIED BEFORE THE GATE finding printed: no           p = subprocess.run(["git", "
+      line  93  exit 1      DIED BEFORE THE GATE finding printed: no                               "--untra
+      line  94  exit 1      DIED BEFORE THE GATE finding printed: no                              stdout=su
+      line  95  exit 1      DIED BEFORE THE GATE finding printed: no           rows = [ln for ln in p.stdou
+      line  96  exit 1      DIED BEFORE THE GATE finding printed: no                   if ln.strip().endswi
+      line  97  exit 1      DIED BEFORE THE GATE finding printed: no       except OSError:
+      line  98  exit 1      DIED BEFORE THE GATE finding printed: no           rows = ["git could not be as
+      line  99  exit 1      DIED BEFORE THE GATE finding printed: no       return "%s%s" % (rev, "\n(PLUS %
+      line 100  exit 1      DIED BEFORE THE GATE finding printed: no                             "count is 
+      line 101  exit 1      GATE HELD            finding printed: yes                       % (len(rows), "
+      line 102  exit 1      DIED BEFORE THE GATE finding printed: no                        if rows else ""
+      line 103  exit 1      GATE HELD            finding printed: yes  
+      line 104  exit 1      GATE HELD            finding printed: yes  
+      line 105  exit 1      GATE HELD            finding printed: yes  ANCHOR = _anchor()
+      line 106  exit 1      GATE HELD            finding printed: yes  
+      line 107  exit 1      GATE HELD            finding printed: yes  
+      line 108  exit 1      GATE HELD            finding printed: yes  # ----------------------------------
+      line 109  exit 1      GATE HELD            finding printed: yes  # E2a  the sweep
+      line 110  exit 1      GATE HELD            finding printed: yes  # ----------------------------------
+      line 111  exit 1      GATE HELD            finding printed: yes  hdr("E2a  EVERY STRIKE AGAINST ITS O
+      line 112  exit 1      GATE HELD            finding printed: yes  
+      line 113  exit 1      DIED BEFORE THE GATE finding printed: no   print("  Rule: a run of >= %d shared
+      line 114  exit 1      DIED BEFORE THE GATE finding printed: no         % (RUN_MIN, 100 * RUN_FRAC))
+      line 115  exit 1      GATE HELD            finding printed: yes  print("  the CLAIM said again, not a
+      line 116  exit 1      GATE HELD            finding printed: yes  print("  with its measurement whethe
+      line 117  exit 1      GATE HELD            finding printed: yes  print("  visible instead of a verdic
+      line 118  exit 1      GATE HELD            finding printed: yes  print()
+      line 119  exit 1      GATE HELD            finding printed: yes  
+      line 120  exit 1      DIED BEFORE THE GATE finding printed: no   nstrikes = 0
+      line 121  exit 1      DIED BEFORE THE GATE finding printed: no   withstrikes = 0
+      line 122  exit 1      DIED BEFORE THE GATE finding printed: no   rows = []
+      line 123  exit 1      DIED BEFORE THE GATE finding printed: no   for rel in FILES:
+      line 124  exit 1      DIED BEFORE THE GATE finding printed: no       text = open(os.path.join(REPO, r
+      line 125  exit 1      DIED BEFORE THE GATE finding printed: no       found = strike_findings(text)
+      line 126  exit 1      DIED BEFORE THE GATE finding printed: no       if not found:
+      line 127  exit 1      DIED BEFORE THE GATE finding printed: no           continue
+      line 128  exit 1      GATE HELD            finding printed: yes      withstrikes += 1
+      line 129  exit 1      GATE HELD            finding printed: yes      nstrikes += len(found)
+      line 130  exit 1      DIED BEFORE THE GATE finding printed: no       fires = [f for f in found if f[4
+      line 131  exit 1      DIED BEFORE THE GATE finding printed: no       exon = [f for f in found if f[4]
+      line 132  exit 1      DIED BEFORE THE GATE finding printed: no       quiet = [f for f in found if f[4
+      line 133  exit 1      GATE HELD            finding printed: yes      print("  %-58s %2d strike(s)" % 
+      line 134  exit 1      DIED BEFORE THE GATE finding printed: no       print("      %2d below the rule,
+      line 135  exit 1      DIED BEFORE THE GATE finding printed: no             % (len(quiet), len(exon), 
+      line 136  exit 1      GATE HELD            finding printed: yes      for sl, rl, run, tot, ex, why in
+      line 137  exit 1      DIED BEFORE THE GATE finding printed: no           mark = ("*** STANDING UN-STR
+      line 138  exit 1      GATE HELD            finding printed: yes                  ("exonerated: " + wh
+      line 139  exit 1      DIED BEFORE THE GATE finding printed: no           print("        strike line %
+      line 140  exit 1      DIED BEFORE THE GATE finding printed: no                 "restated at line %-5s
+      line 141  exit 1      DIED BEFORE THE GATE finding printed: no                 % (sl, run, tot, 100 *
+      line 142  exit 1      DIED BEFORE THE GATE finding printed: no                    rl if rl is not Non
+      line 143  exit 1      GATE HELD            finding printed: yes          rows.append((rel, sl, rl, ru
+      line 144  exit 0      GATE LOST            finding printed: yes      bad += len(fires)
+      line 145  exit 1      GATE HELD            finding printed: yes      print()
+      line 146  exit 1      GATE HELD            finding printed: yes  
+      line 147  exit 1      DIED BEFORE THE GATE finding printed: no   print("  %d file(s) carry a strike, 
+      line 148  exit 1      DIED BEFORE THE GATE finding printed: no         % (withstrikes, nstrikes, bad)
+      line 149  exit 1      GATE HELD            finding printed: yes  print()
+      line 150  exit 1      GATE HELD            finding printed: yes  
+      line 151  exit 1      GATE HELD            finding printed: yes  
+      line 152  exit 1      GATE HELD            finding printed: yes  # ----------------------------------
+      line 153  exit 1      GATE HELD            finding printed: yes  # E2b  CONTROLS -- the detector is s
+      line 154  exit 1      GATE HELD            finding printed: yes  # ----------------------------------
+      line 155  exit 1      GATE HELD            finding printed: yes  hdr("E2b  CONTROLS -- a detector onl
+      line 156  exit 1      GATE HELD            finding printed: yes  
+      line 157  exit 1      GATE HELD            finding printed: yes  ctl = 0
+      line 158  exit 1      DIED BEFORE THE GATE finding printed: no   DOC = os.path.join(REPO, "docs",
+      line 159  exit 1      DIED BEFORE THE GATE finding printed: no                      "OneThird-Species
+      line 160  exit 1      GATE HELD            finding printed: yes  doc = open(DOC, encoding="utf-8").re
+      line 161  exit 1      GATE HELD            finding printed: yes  
+      line 162  exit 1      GATE HELD            finding printed: yes  # (a) B1 itself, restored.  This is 
+      line 163  exit 1      GATE HELD            finding printed: yes  #     mg-d633: §0's paragraph carryi
+      line 164  exit 1      DIED BEFORE THE GATE finding printed: no   B1 = ('Aguiar–Mahajan §17.5, quoting
+      line 165  exit 1      GATE HELD            finding printed: yes        '*"`K̄(Π)` is the algebra of\n
+      line 166  exit 1      GATE HELD            finding printed: yes        'noncommuting variables and `K
+      line 167  exit 1      DIED BEFORE THE GATE finding printed: no         'of\nsymmetric functions."*')
+      line 168  exit 1      GATE HELD            finding printed: yes  # The repair is REVERSED, not splice
+      line 169  exit 1      GATE HELD            finding printed: yes  # control were themselves the defect
+      line 170  exit 1      GATE HELD            finding printed: yes  #   1. it truncated the document at 
+      line 171  exit 1      GATE HELD            finding printed: yes  #      along with everything after i
+      line 172  exit 1      GATE HELD            finding printed: yes  #      compare and the control read 
+      line 173  exit 1      GATE HELD            finding printed: yes  #      deletes the strike it is test
+      line 174  exit 1      GATE HELD            finding printed: yes  #   2. it inserted B1 INTO the corre
+      line 175  exit 1      GATE HELD            finding printed: yes  #      quotation is a misquotation -
+      line 176  exit 1      GATE HELD            finding printed: yes  #      correctly.  Restoring a false
+      line 177  exit 1      GATE HELD            finding printed: yes  #      restore the false belief.
+      line 178  exit 1      DIED BEFORE THE GATE finding printed: no   CORRECTION = re.compile(r"(?s)Aguiar
+      line 179  exit 1      GATE HELD            finding printed: yes                          r"§17\.4, re
+      line 180  exit 1      DIED BEFORE THE GATE finding printed: no                           r"rest of it
+      line 181  exit 1      DIED BEFORE THE GATE finding printed: no   if not CORRECTION.search(doc):
+      line 182  exit 1      GATE HELD            finding printed: yes      print("  *** §0's corrected para
+      line 183  exit 1      GATE HELD            finding printed: yes      print("      it: the control can
+      line 184  exit 1      GATE HELD            finding printed: yes  restored = CORRECTION.sub(lambda _m:
+      line 185  exit 1      GATE HELD            finding printed: yes  hits = [f for f in strike_findings(r
+      line 186  exit 1      GATE HELD            finding printed: yes  ok = len(hits) == 1
+      line 187  exit 1      GATE HELD            finding printed: yes  ctl += (not ok)
+      line 188  exit 1      DIED BEFORE THE GATE finding printed: no   print("  (a) B1 restored -- §0 carri
+      line 189  exit 1      DIED BEFORE THE GATE finding printed: no         % ("fires, 1 finding -- ok" if
+      line 190  exit 1      DIED BEFORE THE GATE finding printed: no            else "*** %d finding(s), ex
+      line 191  exit 1      DIED BEFORE THE GATE finding printed: no   for sl, rl, run, tot, _e, _w in hits
+      line 192  exit 1      DIED BEFORE THE GATE finding printed: no       print("        strike line %d re
+      line 193  exit 1      DIED BEFORE THE GATE finding printed: no             % (sl, rl, run, tot))
+      line 194  exit 1      GATE HELD            finding printed: yes  
+      line 195  exit 1      GATE HELD            finding printed: yes  # (b) the same sentence, in a paragr
+      line 196  exit 1      DIED BEFORE THE GATE finding printed: no   retracted = restored.replace(B1, "Th
+      line 197  exit 1      DIED BEFORE THE GATE finding printed: no                                "§4: " 
+      line 198  exit 1      GATE HELD            finding printed: yes  hits_b = [f for f in strike_findings
+      line 199  exit 1      GATE HELD            finding printed: yes  ok = not hits_b
+      line 200  exit 1      GATE HELD            finding printed: yes  ctl += (not ok)
+      line 201  exit 1      DIED BEFORE THE GATE finding printed: no   print("  (b) the same sentence in a 
+      line 202  exit 1      DIED BEFORE THE GATE finding printed: no         % ("silent -- ok" if ok else "
+      line 203  exit 1      GATE HELD            finding printed: yes  
+      line 204  exit 1      GATE HELD            finding printed: yes  # (c) THE NARROWING, MEASURED.  mg-a
+      line 205  exit 1      GATE HELD            finding printed: yes  #     within six lines -- applied to
+      line 206  exit 1      GATE HELD            finding printed: yes  #     does not use it.  If this cont
+      line 207  exit 1      GATE HELD            finding printed: yes  #     stopped being load-bearing and
+      line 208  exit 1      GATE HELD            finding printed: yes  NAMES_A_REPAIR = re.compile(r"mg-(?:
+      line 209  exit 1      GATE HELD            finding printed: yes  WINDOW = 6                      # ke
+      line 210  exit 1      GATE HELD            finding printed: yes  lines = restored.splitlines()
+      line 211  exit 1      GATE HELD            finding printed: yes  # The line control (a) actually repo
+      line 212  exit 1      GATE HELD            finding printed: yes  # a fragment: an earlier version of 
+      line 213  exit 1      GATE HELD            finding printed: yes  # and matched AM §10.10's "`A/J` is 
+      line 214  exit 1      GATE HELD            finding printed: yes  # reported the ±6-line rule as NOT d
+      line 215  exit 1      GATE HELD            finding printed: yes  target = (hits[0][1] - 1) if hits el
+      line 216  exit 1      DIED BEFORE THE GATE finding printed: no   window = ("\n".join(lines[max(0, tar
+      line 217  exit 1      DIED BEFORE THE GATE finding printed: no             if target is not None else
+      line 218  exit 1      GATE HELD            finding printed: yes  m = NAMES_A_REPAIR.search(window)
+      line 219  exit 1      GATE HELD            finding printed: yes  disarmed = bool(m)
+      line 220  exit 1      GATE HELD            finding printed: yes  ctl += (not disarmed)
+      line 221  exit 1      DIED BEFORE THE GATE finding printed: no   print("  (c) mg-a4ef's ±%d-line tick
+      line 222  exit 1      DIED BEFORE THE GATE finding printed: no         % (WINDOW, "DISARMED -- ok, th
+      line 223  exit 1      DIED BEFORE THE GATE finding printed: no            else "*** not disarmed: thi
+      line 224  exit 1      DIED BEFORE THE GATE finding printed: no   if disarmed:
+      line 225  exit 1      GATE HELD            finding printed: yes      off = window[:m.start()].count("
+      line 226  exit 1      DIED BEFORE THE GATE finding printed: no       print("        `%s` sits %d line
+      line 227  exit 1      DIED BEFORE THE GATE finding printed: no             % (m.group(0), abs(off - m
+      line 228  exit 1      GATE HELD            finding printed: yes      print("        UNRELATED correct
+      line 229  exit 1      GATE HELD            finding printed: yes      print("        the paragraph to 
+      line 230  exit 1      GATE HELD            finding printed: yes  
+      line 231  exit 1      GATE HELD            finding printed: yes  # (d) an unrelated long quotation mu
+      line 232  exit 1      GATE HELD            finding printed: yes  #     repetition of a STRUCK claim, 
+      line 233  exit 1      GATE HELD            finding printed: yes  noise = doc + "\n\n" + " ".join(toks
+      line 234  exit 1      GATE HELD            finding printed: yes  hits_d = [f for f in strike_findings
+      line 235  exit 1      GATE HELD            finding printed: yes  ok = not hits_d
+      line 236  exit 1      GATE HELD            finding printed: yes  ctl += (not ok)
+      line 237  exit 1      DIED BEFORE THE GATE finding printed: no   print("  (d) 400 tokens of this docu
+      line 238  exit 1      DIED BEFORE THE GATE finding printed: no         % ("silent -- ok" if ok else "
+      line 239  exit 1      GATE HELD            finding printed: yes  
+      line 240  exit 1      GATE HELD            finding printed: yes  # (e) the rule must not fire on a do
+      line 241  exit 1      GATE HELD            finding printed: yes  ok = not strike_findings("# a docume
+      line 242  exit 1      GATE HELD            finding printed: yes  ctl += (not ok)
+      line 243  exit 1      DIED BEFORE THE GATE finding printed: no   print("  (e) a document with no stri
+      line 244  exit 1      DIED BEFORE THE GATE finding printed: no         % ("silent -- ok" if ok else "
+      line 245  exit 1      GATE HELD            finding printed: yes  bad += ctl
+      line 246  exit 1      GATE HELD            finding printed: yes  print()
+      line 247  exit 1      GATE HELD            finding printed: yes  
+      line 248  exit 1      GATE HELD            finding printed: yes  
+      line 249  exit 1      GATE HELD            finding printed: yes  # mg-5040: an entry the walk decline
+      line 250  exit 1      GATE HELD            finding printed: yes  # rule is a finding, not a footnote.
+      line 251  exit 1      GATE HELD            finding printed: yes  # true a third time by accident of t
+      line 252  exit 1      GATE HELD            finding printed: yes  bad += len(DECLINED_UNSTATED)
+      line 253  exit 1      GATE HELD            finding printed: yes  
+      line 254  exit 1      GATE HELD            finding printed: yes  print("=" * 78)
+      line 255  exit 1      GATE HELD            finding printed: yes  print("E2 TOTAL BAD: %d" % bad)
+      line 256  exit 1      GATE HELD            finding printed: yes  print("=" * 78)
+      line 257  exit 1      GATE HELD            finding printed: yes  print()
+      line 258  exit 1      DIED BEFORE THE GATE finding printed: no   print("EXTENT OF THIS NUMBER.  %d ma
+      line 259  exit 1      DIED BEFORE THE GATE finding printed: no         % len(FILES))
+      line 260  exit 1      DIED BEFORE THE GATE finding printed: no   print("and under code/, recursively.
+      line 261  exit 1      DIED BEFORE THE GATE finding printed: no         % withstrikes)
+      line 262  exit 1      DIED BEFORE THE GATE finding printed: no   print("%d strike(s) were measured; a
+      line 263  exit 1      DIED BEFORE THE GATE finding printed: no         % nstrikes)
+      line 264  exit 1      GATE HELD            finding printed: yes  print("is not evidence of anything. 
+      line 265  exit 1      GATE HELD            finding printed: yes  print("claim struck in a document an
+      line 266  exit 1      GATE HELD            finding printed: yes  print("extent, not this one, and tha
+      line 267  exit 1      GATE HELD            finding printed: yes  print("said once more.  WITHIN a doc
+      line 268  exit 1      GATE HELD            finding printed: yes  print("that document -- a claim stru
+      line 269  exit 1      GATE HELD            finding printed: yes  print("invisible to every checker in
+      line 270  exit 1      GATE HELD            finding printed: yes  print("hole, named rather than close
+      line 271  exit 1      GATE HELD            finding printed: yes  print("restated in different words, 
+      line 272  exit 1      GATE HELD            finding printed: yes  print()
+      line 273  exit 1      GATE HELD            finding printed: yes  print("MEASURED AT %s (mg-5040, on m
+      line 274  exit 1      GATE HELD            finding printed: yes  print("The file count above is a pro
+      line 275  exit 1      GATE HELD            finding printed: yes  print("goes false the moment any com
+      line 276  exit 1      GATE HELD            finding printed: yes  print("re-running at commit time doe
+      line 277  exit 1      GATE HELD            finding printed: yes  print("moves the tree afterwards.  P
+      line 278  exit 1      GATE HELD            finding printed: yes  print("re-ran this per Appendix A, w
+      line 279  exit 1      GATE HELD            finding printed: yes  print("markdown files larger, and sh
+      line 280  exit 1      GATE HELD            finding printed: yes  print("the revision is what makes a 
+      line 281  exit 1      GATE HELD            finding printed: yes  print("than WRONG: git cannot move t
+      line 282  exit 1      GATE HELD            finding printed: yes  print("of the tree it names, and a r
+      line 283  exit 1      GATE HELD            finding printed: yes  print("re-deriving anything.  The me
+      line 284  exit 1      GATE HELD            finding printed: yes  print("next commit that adds a markd
+      line 285  exit 1      GATE HELD            finding printed: yes  print()
+      line 286  exit 1      GATE HELD            finding printed: yes  print("THE WALK'S RESIDUE, which is 
+      line 287  exit 1      GATE HELD            finding printed: yes  print("on mg-4700's OPEN 1).  os.wal
+      line 288  exit 1      GATE HELD            finding printed: yes  print("directory, and it swallows th
+      line 289  exit 1      GATE HELD            finding printed: yes  print("Rather than widen the walk a 
+      line 290  exit 1      DIED BEFORE THE GATE finding printed: no   for _r, _why in DECLINED_STATED:
+      line 291  exit 1      GATE HELD            finding printed: yes      print("    declined, STATED:    
+      line 292  exit 1      GATE HELD            finding printed: yes      print("        %s" % _why)
+      line 293  exit 1      GATE HELD            finding printed: yes  for _r, _why in DECLINED_UNSTATED:
+      line 294  exit 1      GATE HELD            finding printed: yes      print("    declined, NOT STATED:
+      line 295  exit 1      GATE HELD            finding printed: yes      print("        %s" % _why)
+      line 296  exit 1      GATE HELD            finding printed: yes  if not DECLINED_STATED and not DECLI
+      line 297  exit 1      DIED BEFORE THE GATE finding printed: no       print("    nothing at all was de
+      line 298  exit 1      GATE HELD            finding printed: yes  print("A NOT STATED entry is counted
+      line 299  exit 0      GATE LOST            finding printed: yes  sys.exit(1 if bad else 0)
+
+    dispositions over the 299: DIED BEFORE THE GATE 90, GATE HELD 206, GATE LOST 3
+
+    GATE LOST  line  52  finding printed: no    FILES += _f
+    GATE LOST  line 144  finding printed: yes   bad += len(fires)
+    GATE LOST  line 299  finding printed: yes   sys.exit(1 if bad else 0)
+  Q4     *** MISSED ***
+        predicted: 2 -- `bad += len(fires)` and `sys.exit(1 if bad else 0)` -- and both print the finding
+        measured:  3: FILES += _f; bad += len(fires); sys.exit(1 if bad else 0); finding printed on 2 of them
+        THE PRIMARY CLAIM OF THIS AUDIT, first half.
+
+==============================================================================
+G1g  EACH OF THOSE LINES, WITH THE THREE RUNNERS EXECUTED
+==============================================================================
+
+  e2's own exit code is not the finding.  The finding is what a READER
+  of the runner sees, so each line above is deleted again and all three
+  runners are run over it.
+
+      e2 line 52   species_repair_a4ef        exit 0    prints STANDING UN-STRUCK: no
+      e2 line 52   species_remainder_f8fa     exit 0    prints STANDING UN-STRUCK: no
+      e2 line 52   species_repair_6f61        exit 0    prints STANDING UN-STRUCK: no
+      e2 line 144  species_repair_a4ef        exit 0    prints STANDING UN-STRUCK: yes
+      e2 line 144  species_remainder_f8fa     exit 0    prints STANDING UN-STRUCK: yes
+      e2 line 144  species_repair_6f61        exit 0    prints STANDING UN-STRUCK: yes
+      e2 line 299  species_repair_a4ef        exit 0    prints STANDING UN-STRUCK: yes
+      e2 line 299  species_remainder_f8fa     exit 0    prints STANDING UN-STRUCK: yes
+      e2 line 299  species_repair_6f61        exit 0    prints STANDING UN-STRUCK: yes
+  Q5     *** MISSED ***
+        predicted: 6 of 6 exit 0, and 6 of 6 print `STANDING UN-STRUCK` while doing it
+        measured:  9 of 9 exit 0; 6 of 9 print it
+        THE PRIMARY CLAIM OF THIS AUDIT, second half: a green runner printing
+        the finding in full.  That is mg-6ef4's F3 word for word, one level
+        down the same verdict path, after the repair that closed it.
+  the class mg-6ef4 found is still reachable on this path          *** FINDING ***
+        Recorded as a finding of THIS instrument, not of mg-4adb's: the
+        repair did what its ticket asked and its own certificate is
+        honest.  What is wrong is the SCOPE of the population, which is
+        the same shape of error the repair was written to answer.
+
+==============================================================================
+G1h  EVERY LINE OF kernd633.py, DELETED ALONE, STRIKE LIVE
+==============================================================================
+
+  code/species_extent_d633/kernd633.py
+      line   1  exit 1      DIED BEFORE THE GATE finding printed: no   """KERNEL for mg-d633 -- verbatim ru
+      line   2  exit 1      GATE HELD            finding printed: yes  
+      line   3  exit 1      GATE HELD            finding printed: yes  WHAT THIS SHARES WITH NOTHING IT MEA
+      line   4  exit 1      GATE HELD            finding printed: yes  LIST OF SENTENCES against a text.  T
+      line   5  exit 1      GATE HELD            finding printed: yes  sentence still asserted" and it is t
+      line   6  exit 1      GATE HELD            finding printed: yes  somewhere else", which is mg-7dd3's 
+      line   7  exit 1      GATE HELD            finding printed: yes  a different lead-in, and every list-
+      line   8  exit 1      GATE HELD            finding printed: yes  
+      line   9  exit 1      GATE HELD            finding printed: yes  So the unit here is the VERBATIM RUN
+      line  10  exit 1      GATE HELD            finding printed: yes  document with every strike removed, 
+      line  11  exit 1      GATE HELD            finding printed: yes  share, as a fraction of S, separates
+      line  12  exit 1      GATE HELD            finding printed: yes  before the thresholds were set (see 
+      line  13  exit 1      GATE HELD            finding printed: yes  
+      line  14  exit 1      GATE HELD            finding printed: yes      ten strikes in the target docume
+      line  15  exit 1      GATE HELD            finding printed: yes                                      
+      line  16  exit 1      GATE HELD            finding printed: yes      the eleventh -- the claim said a
+      line  17  exit 1      GATE HELD            finding printed: yes  
+      line  18  exit 1      GATE HELD            finding printed: yes  The 62% one is 8 tokens: §2.2's cont
+      line  19  exit 1      GATE HELD            finding printed: yes  IN ORDER TO CORRECT IT.  That is wha
+      line  20  exit 1      GATE HELD            finding printed: yes  why the rule is not a length thresho
+      line  21  exit 1      DIED BEFORE THE GATE finding printed: no   """
+      line  22  exit 1      GATE HELD            finding printed: yes  
+      line  23  exit 1      DIED BEFORE THE GATE finding printed: no   import os
+      line  24  exit 1      DIED BEFORE THE GATE finding printed: no   import re
+      line  25  exit 1      GATE HELD            finding printed: yes  import shutil
+      line  26  exit 1      GATE HELD            finding printed: yes  import subprocess
+      line  27  exit 1      GATE HELD            finding printed: yes  import sys
+      line  28  exit 1      GATE HELD            finding printed: yes  
+      line  29  exit 1      DIED BEFORE THE GATE finding printed: no   __all__ = ["hdr", "toks", "paragraph
+      line  30  exit 1      GATE HELD            finding printed: yes             "REPO", "DOCS", "sandbox"
+      line  31  exit 1      DIED BEFORE THE GATE finding printed: no              "RUN_MIN", "RUN_FRAC", "N
+      line  32  exit 1      GATE HELD            finding printed: yes  
+      line  33  exit 1      DIED BEFORE THE GATE finding printed: no   HERE = os.path.dirname(os.path.abspa
+      line  34  exit 1      DIED BEFORE THE GATE finding printed: no   REPO = os.path.normpath(os.path.join
+      line  35  exit 1      GATE HELD            finding printed: yes  DOCS = os.path.join(REPO, "docs")
+      line  36  exit 1      GATE HELD            finding printed: yes  
+      line  37  exit 1      GATE HELD            finding printed: yes  # A run of this many tokens, AND thi
+      line  38  exit 1      GATE HELD            finding printed: yes  # itself said again rather than a sh
+      line  39  exit 1      GATE HELD            finding printed: yes  # either alone misfires: 17 tokens o
+      line  40  exit 1      GATE HELD            finding printed: yes  # and 3 of 7 is "about the term".
+      line  41  exit 1      DIED BEFORE THE GATE finding printed: no   RUN_MIN = 8
+      line  42  exit 1      DIED BEFORE THE GATE finding printed: no   RUN_FRAC = 0.50
+      line  43  exit 1      GATE HELD            finding printed: yes  
+      line  44  exit 1      GATE HELD            finding printed: yes  # The occurrence is exonerated only 
+      line  45  exit 1      GATE HELD            finding printed: yes  # does not hold.  Deliberately NOT "
+      line  46  exit 1      GATE HELD            finding printed: yes  # exonerates on `mg-[0-9a-f]{4}` wit
+      line  47  exit 1      GATE HELD            finding printed: yes  # below §0's misquotation contains a
+      line  48  exit 1      GATE HELD            finding printed: yes  # exonerates B1 -- the one occurrenc
+      line  49  exit 1      GATE HELD            finding printed: yes  # is measured in e2's own controls, 
+      line  50  exit 1      GATE HELD            finding printed: yes  # exoneration rule in this arc, and 
+      line  51  exit 1      DIED BEFORE THE GATE finding printed: no   NEGATES = re.compile(
+      line  52  exit 1      DIED BEFORE THE GATE finding printed: no       r"refut|STRICKEN|struck|strikes|
+      line  53  exit 1      GATE HELD            finding printed: yes      r"|printed\s+it\s+wrong|is\s+FAL
+      line  54  exit 1      GATE HELD            finding printed: yes      r"|used\s+to\s+(?:say|read|asser
+      line  55  exit 1      DIED BEFORE THE GATE finding printed: no       r"|corrected|correction|retract"
+      line  56  exit 1      GATE HELD            finding printed: yes  
+      line  57  exit 1      GATE HELD            finding printed: yes  # ...or if it sits inside a fenced c
+      line  58  exit 1      GATE HELD            finding printed: yes  # table of stricken strings.  An aud
+      line  59  exit 1      GATE HELD            finding printed: yes  # `check_doc.py`'s STRICKEN table is
+      line  60  exit 1      GATE HELD            finding printed: yes  # docs/OneThird-Audit-mg-73df-Specie
+      line  61  exit 1      GATE HELD            finding printed: yes  # or the paragraph introducing it mu
+      line  62  exit 1      DIED BEFORE THE GATE finding printed: no   DECLARED_TABLE = re.compile(
+      line  63  exit 1      DIED BEFORE THE GATE finding printed: no       r"\b(STRICKEN|FORBIDDEN|CORRECTI
+      line  64  exit 1      DIED BEFORE THE GATE finding printed: no       r"|PATTERNS|DISARMERS)\b")
+      line  65  exit 1      GATE HELD            finding printed: yes  
+      line  66  exit 1      GATE HELD            finding printed: yes  
+      line  67  exit 1      DIED BEFORE THE GATE finding printed: no   def hdr(t):
+      line  68  exit 1      GATE HELD            finding printed: yes      print("=" * 78)
+      line  69  exit 1      GATE HELD            finding printed: yes      print(t)
+      line  70  exit 1      GATE HELD            finding printed: yes      print("=" * 78)
+      line  71  exit 1      GATE HELD            finding printed: yes      print()
+      line  72  exit 1      GATE HELD            finding printed: yes  
+      line  73  exit 1      GATE HELD            finding printed: yes  
+      line  74  exit 1      DIED BEFORE THE GATE finding printed: no   def toks(s):
+      line  75  exit 1      DIED BEFORE THE GATE finding printed: no       """Words and single punctuation 
+      line  76  exit 1      DIED BEFORE THE GATE finding printed: no       stripped so a sentence tokenises
+      line  77  exit 1      GATE HELD            finding printed: yes      s = re.sub(r"(?m)^(?:\s*>)+\s?",
+      line  78  exit 1      DIED BEFORE THE GATE finding printed: no       return re.findall(r"[a-z0-9]+|[^
+      line  79  exit 1      GATE HELD            finding printed: yes  
+      line  80  exit 1      GATE HELD            finding printed: yes  
+      line  81  exit 1      DIED BEFORE THE GATE finding printed: no   def paragraphs(text):
+      line  82  exit 1      GATE HELD            finding printed: yes      """(start, end) offsets of blank
+      line  83  exit 1      DIED BEFORE THE GATE finding printed: no       out, start = [], 0
+      line  84  exit 1      DIED BEFORE THE GATE finding printed: no       for m in re.finditer(r"\n[ \t]*\
+      line  85  exit 1      GATE HELD            finding printed: yes          out.append((start, m.start()
+      line  86  exit 1      GATE HELD            finding printed: yes          start = m.end()
+      line  87  exit 1      GATE HELD            finding printed: yes      out.append((start, len(text)))
+      line  88  exit 1      DIED BEFORE THE GATE finding printed: no       return out
+      line  89  exit 1      GATE HELD            finding printed: yes  
+      line  90  exit 1      GATE HELD            finding printed: yes  
+      line  91  exit 1      DIED BEFORE THE GATE finding printed: no   def fences(text):
+      line  92  exit 1      GATE HELD            finding printed: yes      """(start, end) offsets of ``` f
+      line  93  exit 1      DIED BEFORE THE GATE finding printed: no       marks = [m.start() for m in re.f
+      line  94  exit 1      DIED BEFORE THE GATE finding printed: no       return [(marks[i], marks[i + 1])
+      line  95  exit 1      GATE HELD            finding printed: yes  
+      line  96  exit 1      GATE HELD            finding printed: yes  
+      line  97  exit 1      DIED BEFORE THE GATE finding printed: no   def longest_run(a, b, bindex):
+      line  98  exit 1      GATE HELD            finding printed: yes      """Longest common run of consecu
+      line  99  exit 1      DIED BEFORE THE GATE finding printed: no       best, at = 0, None
+      line 100  exit 1      DIED BEFORE THE GATE finding printed: no       for i in range(len(a)):
+      line 101  exit 1      DIED BEFORE THE GATE finding printed: no           for j in bindex.get(a[i], ()
+      line 102  exit 1      DIED BEFORE THE GATE finding printed: no               k = 0
+      line 103  exit 1      DIED BEFORE THE GATE finding printed: no               while i + k < len(a) and
+      line 104  exit 1      DIED BEFORE THE GATE finding printed: no                   k += 1
+      line 105  exit 1      DIED BEFORE THE GATE finding printed: no               if k > best:
+      line 106  exit 1      DIED BEFORE THE GATE finding printed: no                   best, at = k, j
+      line 107  exit 1      DIED BEFORE THE GATE finding printed: no       return best, at
+      line 108  exit 1      GATE HELD            finding printed: yes  
+      line 109  exit 1      GATE HELD            finding printed: yes  
+      line 110  exit 1      DIED BEFORE THE GATE finding printed: no   def strike_findings(text):
+      line 111  exit 1      DIED BEFORE THE GATE finding printed: no       """[(strike_line, restated_line,
+      line 112  exit 1      GATE HELD            finding printed: yes      every `~~struck~~` span whose cl
+      line 113  exit 1      GATE HELD            finding printed: yes  
+      line 114  exit 1      GATE HELD            finding printed: yes      Every strike is returned with it
+      line 115  exit 1      GATE HELD            finding printed: yes      sees the margins instead of a ve
+      line 116  exit 1      GATE HELD            finding printed: yes      is too short or too small a frac
+      line 117  exit 1      DIED BEFORE THE GATE finding printed: no       """
+      line 118  exit 1      DIED BEFORE THE GATE finding printed: no       strikes = [(m.start(), m.group(1
+      line 119  exit 1      DIED BEFORE THE GATE finding printed: no                  for m in re.finditer(
+      line 120  exit 1      DIED BEFORE THE GATE finding printed: no       if not strikes:
+      line 121  exit 1      DIED BEFORE THE GATE finding printed: no           return []
+      line 122  exit 1      GATE HELD            finding printed: yes      # tokens of the text OUTSIDE eve
+      line 123  exit 1      DIED BEFORE THE GATE finding printed: no       spans, prev = [], 0
+      line 124  exit 1      DIED BEFORE THE GATE finding printed: no       for m in re.finditer(r"~~(.+?)~~
+      line 125  exit 1      GATE HELD            finding printed: yes          spans.append((prev, m.start(
+      line 126  exit 1      GATE HELD            finding printed: yes          prev = m.end()
+      line 127  exit 0      GATE LOST            finding printed: no       spans.append((prev, len(text)))
+      line 128  exit 1      DIED BEFORE THE GATE finding printed: no       outside = []
+      line 129  exit 1      DIED BEFORE THE GATE finding printed: no       for a, b in spans:
+      line 130  exit 1      DIED BEFORE THE GATE finding printed: no           seg = text[a:b]
+      line 131  exit 1      DIED BEFORE THE GATE finding printed: no           for mm in re.finditer(r"[a-z
+      line 132  exit 1      DIED BEFORE THE GATE finding printed: no               outside.append((mm.group
+      line 133  exit 1      DIED BEFORE THE GATE finding printed: no       otoks = [t for t, _ in outside]
+      line 134  exit 1      DIED BEFORE THE GATE finding printed: no       index = {}
+      line 135  exit 1      DIED BEFORE THE GATE finding printed: no       for i, t in enumerate(otoks):
+      line 136  exit 1      DIED BEFORE THE GATE finding printed: no           index.setdefault(t, []).appe
+      line 137  exit 1      DIED BEFORE THE GATE finding printed: no       paras, fncs = paragraphs(text), 
+      line 138  exit 1      GATE HELD            finding printed: yes  
+      line 139  exit 1      DIED BEFORE THE GATE finding printed: no       out = []
+      line 140  exit 1      DIED BEFORE THE GATE finding printed: no       for pos, s in strikes:
+      line 141  exit 1      DIED BEFORE THE GATE finding printed: no           a = toks(s)
+      line 142  exit 1      DIED BEFORE THE GATE finding printed: no           run, at = longest_run(a, oto
+      line 143  exit 1      DIED BEFORE THE GATE finding printed: no           sl = text[:pos].count("\n") 
+      line 144  exit 1      DIED BEFORE THE GATE finding printed: no           if not a or at is None:
+      line 145  exit 1      GATE HELD            finding printed: yes              out.append((sl, None, ru
+      line 146  exit 1      DIED BEFORE THE GATE finding printed: no               continue
+      line 147  exit 1      DIED BEFORE THE GATE finding printed: no           off = outside[at][1]
+      line 148  exit 1      DIED BEFORE THE GATE finding printed: no           rl = text[:off].count("\n") 
+      line 149  exit 1      DIED BEFORE THE GATE finding printed: no           if run < RUN_MIN or run < RU
+      line 150  exit 1      GATE HELD            finding printed: yes              out.append((sl, rl, run,
+      line 151  exit 1      DIED BEFORE THE GATE finding printed: no               continue
+      line 152  exit 1      DIED BEFORE THE GATE finding printed: no           para = next((p for p in para
+      line 153  exit 1      DIED BEFORE THE GATE finding printed: no           ptext = text[para[0]:para[1]
+      line 154  exit 1      DIED BEFORE THE GATE finding printed: no           why = ""
+      line 155  exit 1      DIED BEFORE THE GATE finding printed: no           if NEGATES.search(ptext):
+      line 156  exit 1      DIED BEFORE THE GATE finding printed: no               why = "the paragraph say
+      line 157  exit 1      GATE HELD            finding printed: yes          else:
+      line 158  exit 1      DIED BEFORE THE GATE finding printed: no               fence = next((f for f in
+      line 159  exit 1      DIED BEFORE THE GATE finding printed: no               if fence is not None:
+      line 160  exit 1      GATE HELD            finding printed: yes                  lead = text[max(0, f
+      line 161  exit 1      DIED BEFORE THE GATE finding printed: no                   if DECLARED_TABLE.se
+      line 162  exit 1      DIED BEFORE THE GATE finding printed: no                           or DECLARED_
+      line 163  exit 1      DIED BEFORE THE GATE finding printed: no                       why = "quoted in
+      line 164  exit 1      DIED BEFORE THE GATE finding printed: no           out.append((sl, rl, run, len
+      line 165  exit 1      DIED BEFORE THE GATE finding printed: no       return out
+      line 166  exit 1      GATE HELD            finding printed: yes  
+      line 167  exit 1      GATE HELD            finding printed: yes  
+      line 168  exit 1      GATE HELD            finding printed: yes  def md_files(root):
+      line 169  exit 1      GATE HELD            finding printed: yes      """Every .md file under `root`, 
+      line 170  exit 1      GATE HELD            finding printed: yes      return md_files_and_residue(root
+      line 171  exit 1      GATE HELD            finding printed: yes  
+      line 172  exit 1      GATE HELD            finding printed: yes  
+      line 173  exit 1      DIED BEFORE THE GATE finding printed: no   def md_files_and_residue(root):
+      line 174  exit 1      DIED BEFORE THE GATE finding printed: no       """(files, stated, unstated) -- 
+      line 175  exit 1      GATE HELD            finding printed: yes      one of the last two.  `stated`/`
+      line 176  exit 1      GATE HELD            finding printed: yes  
+      line 177  exit 1      GATE HELD            finding printed: yes      mg-5040, on mg-4700's OPEN 1.  "
+      line 178  exit 1      GATE HELD            finding printed: yes      recursively" was true twice for 
+      line 179  exit 1      GATE HELD            finding printed: yes      subdirectory, and then no tree h
+      line 180  exit 1      GATE HELD            finding printed: yes      puts in `dirnames` and does not 
+      line 181  exit 1      GATE HELD            finding printed: yes      time, the walk states its bound 
+      line 182  exit 1      GATE HELD            finding printed: yes      the directories os.walk would ot
+      line 183  exit 1      GATE HELD            finding printed: yes      rule nobody thought of arrives a
+      line 184  exit 1      DIED BEFORE THE GATE finding printed: no       """
+      line 185  exit 1      DIED BEFORE THE GATE finding printed: no       out, stated, unstated = [], [], 
+      line 186  exit 1      GATE HELD            finding printed: yes  
+      line 187  exit 1      DIED BEFORE THE GATE finding printed: no       def rel(p):
+      line 188  exit 1      DIED BEFORE THE GATE finding printed: no           return os.path.relpath(p, RE
+      line 189  exit 1      GATE HELD            finding printed: yes  
+      line 190  exit 1      DIED BEFORE THE GATE finding printed: no       def onerror(err):
+      line 191  exit 1      GATE HELD            finding printed: yes          p = getattr(err, "filename",
+      line 192  exit 1      GATE HELD            finding printed: yes          unstated.append((rel(p), "os
+      line 193  exit 1      GATE HELD            finding printed: yes                                   "dr
+      line 194  exit 1      DIED BEFORE THE GATE finding printed: no                            % err.__cla
+      line 195  exit 1      GATE HELD            finding printed: yes  
+      line 196  exit 0      GATE LOST            finding printed: no       for dp, dns, fns in os.walk(root
+      line 197  exit 1      DIED BEFORE THE GATE finding printed: no           keep = []
+      line 198  exit 1      DIED BEFORE THE GATE finding printed: no           for d in sorted(dns):
+      line 199  exit 1      DIED BEFORE THE GATE finding printed: no               p = os.path.join(dp, d)
+      line 200  exit 1      DIED BEFORE THE GATE finding printed: no               if d == "__pycache__":
+      line 201  exit 1      DIED BEFORE THE GATE finding printed: no                   stated.append((rel(p
+      line 202  exit 1      GATE HELD            finding printed: yes              elif os.path.islink(p):
+      line 203  exit 1      DIED BEFORE THE GATE finding printed: no                   unstated.append((rel
+      line 204  exit 1      DIED BEFORE THE GATE finding printed: no                                       
+      line 205  exit 0      GATE LOST            finding printed: no               else:
+      line 206  exit 1      DIED BEFORE THE GATE finding printed: no                   keep.append(d)
+      line 207  exit 1      GATE HELD            finding printed: yes          dns[:] = keep
+      line 208  exit 1      DIED BEFORE THE GATE finding printed: no           for fn in sorted(fns):
+      line 209  exit 1      DIED BEFORE THE GATE finding printed: no               p = os.path.join(dp, fn)
+      line 210  exit 1      DIED BEFORE THE GATE finding printed: no               if not fn.endswith(".md"
+      line 211  exit 1      DIED BEFORE THE GATE finding printed: no                   continue
+      line 212  exit 1      DIED BEFORE THE GATE finding printed: no               if os.path.isfile(p):
+      line 213  exit 1      DIED BEFORE THE GATE finding printed: no                   out.append(rel(p))
+      line 214  exit 1      GATE HELD            finding printed: yes              else:
+      line 215  exit 1      DIED BEFORE THE GATE finding printed: no                   unstated.append((rel
+      line 216  exit 1      DIED BEFORE THE GATE finding printed: no                                       
+      line 217  exit 1      DIED BEFORE THE GATE finding printed: no       return sorted(out), sorted(set(s
+      line 218  exit 1      GATE HELD            finding printed: yes  
+      line 219  exit 1      GATE HELD            finding printed: yes  
+      line 220  exit 1      GATE HELD            finding printed: yes  # ----------------------------------
+      line 221  exit 1      GATE HELD            finding printed: yes  # The sandbox.  Every mutation probe
+      line 222  exit 1      GATE HELD            finding printed: yes  # leave the repository changed -- wh
+      line 223  exit 1      GATE HELD            finding printed: yes  # the probes deliberately plant forb
+      line 224  exit 1      GATE HELD            finding printed: yes  # ----------------------------------
+      line 225  exit 1      DIED BEFORE THE GATE finding printed: no   SANDBOX_TREES = [
+      line 226  exit 1      GATE HELD            finding printed: yes      "species_7d75",
+      line 227  exit 1      GATE HELD            finding printed: yes      "species_repair_6f61",
+      line 228  exit 1      GATE HELD            finding printed: yes      "species_remainder_f8fa",
+      line 229  exit 1      GATE HELD            finding printed: yes      "species_repair_a4ef",
+      line 230  exit 1      GATE HELD            finding printed: yes      "species_audit_73df",
+      line 231  exit 1      GATE HELD            finding printed: yes      "species_extent_d633",
+      line 232  exit 1      DIED BEFORE THE GATE finding printed: no   ]
+      line 233  exit 1      GATE HELD            finding printed: yes  
+      line 234  exit 1      GATE HELD            finding printed: yes  
+      line 235  exit 1      DIED BEFORE THE GATE finding printed: no   def sandbox(dest):
+      line 236  exit 1      GATE HELD            finding printed: yes      """Copy docs/ and the trees the 
+      line 237  exit 1      GATE HELD            finding printed: yes      shutil.copytree(os.path.join(REP
+      line 238  exit 1      DIED BEFORE THE GATE finding printed: no       for t in SANDBOX_TREES:
+      line 239  exit 1      GATE HELD            finding printed: yes          src = os.path.join(REPO, "co
+      line 240  exit 1      DIED BEFORE THE GATE finding printed: no           if os.path.isdir(src):
+      line 241  exit 1      DIED BEFORE THE GATE finding printed: no               shutil.copytree(src, os.
+      line 242  exit 1      DIED BEFORE THE GATE finding printed: no                               ignore=s
+      line 243  exit 1      GATE HELD            finding printed: yes      return dest
+      line 244  exit 1      GATE HELD            finding printed: yes  
+      line 245  exit 1      GATE HELD            finding printed: yes  
+      line 246  exit 1      GATE HELD            finding printed: yes  def run_checker(root, rel, args=()):
+      line 247  exit 1      GATE HELD            finding printed: yes      """Run a checker inside a sandbo
+      line 248  exit 1      GATE HELD            finding printed: yes      path = os.path.join(root, rel)
+      line 249  exit 1      DIED BEFORE THE GATE finding printed: no       p = subprocess.run([sys.executab
+      line 250  exit 1      GATE HELD            finding printed: yes                         cwd=os.path.d
+      line 251  exit 1      DIED BEFORE THE GATE finding printed: no                          text=True)
+      line 252  exit 1      GATE HELD            finding printed: yes      return p.returncode, p.stdout + 
+
+    dispositions over the 252: DIED BEFORE THE GATE 114, GATE HELD 135, GATE LOST 3
+    GATE LOST  line 127  finding printed: no    spans.append((prev, len(text)))
+    GATE LOST  line 196  finding printed: no    for dp, dns, fns in os.walk(root, onerror=onerror):
+    GATE LOST  line 205  finding printed: no    else:
+  Q6     *** MISSED ***
+        predicted: 0 -- Python's indentation turns most of them into a raise, and E2b's controls catch the ones that quietly disable the detector
+        measured:  3
+        E2b is e2's own control block: five constructed documents it must fire
+        on or stay silent for.  A deletion that disables the detector without
+        raising is caught there and counted into `bad`, so the gate holds.
+  kernd633.py line 127 loses the gate                              *** FINDING ***
+        spans.append((prev, len(text)))
+        finding printed: False
+  kernd633.py line 196 loses the gate                              *** FINDING ***
+        for dp, dns, fns in os.walk(root, onerror=onerror):
+        finding printed: False
+  kernd633.py line 205 loses the gate                              *** FINDING ***
+        else:
+        finding printed: False
+  
+    Each of these is run through all three runners, because e2's
+    exit code is not what a reader sees:
+      kernd633 line 127  species_repair_a4ef        exit 0    prints STANDING UN-STRUCK: no
+      kernd633 line 127  species_remainder_f8fa     exit 0    prints STANDING UN-STRUCK: no
+      kernd633 line 127  species_repair_6f61        exit 0    prints STANDING UN-STRUCK: no
+      kernd633 line 196  species_repair_a4ef        exit 0    prints STANDING UN-STRUCK: no
+      kernd633 line 196  species_remainder_f8fa     exit 0    prints STANDING UN-STRUCK: no
+      kernd633 line 196  species_repair_6f61        exit 0    prints STANDING UN-STRUCK: no
+      kernd633 line 205  species_repair_a4ef        exit 0    prints STANDING UN-STRUCK: no
+      kernd633 line 205  species_remainder_f8fa     exit 0    prints STANDING UN-STRUCK: no
+      kernd633 line 205  species_repair_6f61        exit 0    prints STANDING UN-STRUCK: no
+
+==============================================================================
+G1i  THE ARITHMETIC
+==============================================================================
+
+    verdict path                                        806 lines
+    covered by mg-4adb's certified population           255 lines
+    NOT covered                                         551 lines
+  
+    deletions that lose the gate, INSIDE that population   3
+    deletions that lose the gate, OUTSIDE it               6
+  
+    and the certificate over the covered 255 reads 100% -- correctly.
+  Q7     *** MISSED ***
+        predicted: 2, against a verdict path of 806 lines of which the certificate covers 255
+        measured:  6, against a verdict path of 806 lines of which the certificate covers 255
+
+==============================================================================
+G1 TOTAL BAD: 4
+G1 PREDICTIONS SCORED: 8, MISSED: 4
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It ranges over 255 runner executions in G1c,
+299 e2 executions in G1f, 252 in G1h, 9 runner executions in G1g and
+6 in G1b -- every one of them this instrument's own, in a git clone of
+this worktree, none of them read from any transcript.  IT RANGES OVER
+NOTHING ELSE: the population is the three runner files, e2 and its
+kernel, and a deletion is one line of one of those five.  Two lines
+deleted together, a line EDITED rather than removed, and every other
+file the runners call -- s1_extent.py, w3_scope.py, r2_columns.py and
+the rest -- are outside it and this number says nothing about them.
+mg-4adb's population is a strict subset of this one and G1d compares
+the overlap row for row rather than trusting either.
