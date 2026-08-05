@@ -191,6 +191,12 @@ is informative and is kept.
   number. The evidence that it is a measurement is the pair of inputs that move it.
 - **STATE.md was not edited.** The coverage numbers are routed to pm-onethird, which is the
   choice mg-2789 and mg-e35b both made at this site.
+- **mg-fcb2's own transcript was not re-run and will not go green.** Its check `A1.4a` scores
+  `worst >= 3` — the *mathematical* claim the artifact used to make, not the artifact's wording —
+  so it stays `[REFUTED]` after this repair and should. `code/face_geometry_audit_fcb2/` is
+  untouched; an audit's transcript is a record of what it found, not a status board.
+- **mg-e35b's README was annotated, not rewritten.** The false sentence stays visible with the
+  correction under it.
 
 ## Running it
 
