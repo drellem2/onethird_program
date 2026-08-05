@@ -8,6 +8,39 @@ and committed before any script in this directory existed**: `PREDICTIONS.md` (`
 ancestor of `806533b` which adds the first script — `T4` reads that ordering out of git rather than
 asserting it).
 
+> ### ⚠️ Provenance of this file and of the six transcripts beside it (mg-c3a2)
+>
+> The polecat that ran this audit **died on 2026-07-31 with `README.md`, `c2_anchors.py` and all six
+> `out_*.txt` uncommitted.** mg-c3a2 recovered that work. What landed and what did not:
+>
+> - **`c2_anchors.py` and this `README.md` are the dead polecat's, kept** — they carry the `C2a`
+>   de-rating below, they run, and their figures re-derive. What its author *meant* is not
+>   recoverable and was not guessed at; they are kept because they are **right**, not because they
+>   were found.
+> - **The six rescued transcripts were dropped, and re-run rather than trusted.** They were measured
+>   at `6e15a1a`, the pre-rebase branch tip, which is **not an ancestor of `main`** — and they were
+>   written *before* the `c2_anchors.py` edit rescued alongside them, so they were already a record
+>   of a run of a different script. **Every `out_*.txt` here was produced by mg-c3a2's own
+>   `sh run_all.sh` at `a053d74`**, aggregate exit `0`.
+> - **Re-running moved real numbers**, which is why the rescued ones could not simply be committed
+>   either: the population is **528** `.py` files at `a053d74` against 510 at `6e15a1a`, and `C2b'`
+>   reads **8 of 8 anchors unreachable** against 2 of 8, because the merge displaced this audit's own
+>   six anchors along with the parent's.
+>
+> **And the transcripts this replaces did not reproduce from the code they were committed with.**
+> The six `out_*.txt` merged to `main` are measured at `378cf01` and read `C2b` **`REFUTED`** on all
+> six of this instrument's own transcripts, with the population parsed as `4611510` — that is defect
+> #3 below. But `4ad011a`, the commit that carries those transcripts, is the commit that **fixed**
+> `FIGURE_RE`: running the merged `c2_anchors.py` with `--at 378cf01` today reads `C2b`
+> **`CONFIRMED`, 8 of 8**. They are the pre-fix run, committed beside the fix. The rescued
+> transcripts were the dead polecat's re-run correcting exactly that, and it died before committing
+> them. **Defect #3 is therefore recorded here in prose and is no longer visible in any transcript in
+> this directory** — the row it refuted on now confirms, which is what a repaired grammar is supposed
+> to do.
+>
+> The re-run also surfaced defect **#5**, which had been invisible at every commit the original run
+> measured.
+
 ## Verdict: **the repair holds.** Its own transcript is stale in its predecessor's exact shape, 2 of 2 — and that is the decision working, not the defect recurring.
 
 The ticket's second demand was to run the repaired check against the repair's own published figures
@@ -54,9 +87,9 @@ it **does**.
 > Under (2) **the publication step names its own examiner.**
 
 **That transfer of authority is the real price of the decision, and it is unnamed** in a deliverable
-otherwise careful to price itself. `C3c` measures the room: 177 distinct populations over 418
-commits, and a figure only has to have been true **once, anywhere** for a declared anchor to certify
-it forever.
+otherwise careful to price itself. `C3c` measures the room: **191 distinct populations over the 460
+commits in this object store at `a053d74`**, and a figure only has to have been true **once,
+anywhere** for a declared anchor to certify it forever.
 
 **And the obvious repair does not work** (`C3d`) — requiring the anchor to be an ancestor of the
 publishing commit **accepts the shopped anchor and rejects the parent's genuine one**, because the
@@ -66,9 +99,10 @@ not a bug in the lattice, it is the residue of moving the examiner into the file
 
 ## Every anchor asserted, not believed (`C2b`)
 
-*"If it records a measuring commit, assert that commit's tree actually yields the figure."* — 2 of 2
-declared anchors resolve and their trees yield the published figure, **re-derived by this module's
-own `git ls-tree` walk**, its own blob filter and its own sha256 digest. The declared `count=` field
+*"If it records a measuring commit, assert that commit's tree actually yields the figure."* — **8 of
+8** declared anchors resolve and their trees yield the published figure (the parent's 2 and this
+audit's own 6), **re-derived by this module's own `git ls-tree` walk**, its own blob filter and its
+own sha256 digest. The declared `count=` field
 was used as the thing to be refuted, never as the answer. `C4d` compares the two derivations across
 45 commits: 0 disagreements. That row licenses every count in this audit — and the arc has already
 recorded two copies of `figures()` disagreeing on 3 (`8c55168`).
@@ -130,12 +164,27 @@ nothing but which tree is named — `DISPLACED` (green) against `WRONG WHEN WRIT
 repaired file carries the vocabulary 5 of 5 (`C5c`), including the rule **imported** from
 `anchor_132a` rather than copied.
 
-`C5d` sweeps the old word: **189 occurrences of `stale` across 623 committed `.py`/`.md` files**, 14
-qualified by a nearby word naming which defect is meant, 175 bare. The new word was **not**
-retrofitted, and that is correct — a deliverable that rewrote 175 sites would have made its own
-transcript unreviewable.
+`C5d` sweeps the old word: **233 occurrences of `stale` across 657 committed `.py`/`.md` files at
+`a053d74`**, 20 qualified by a nearby word naming which defect is meant, 213 bare. The new word was
+**not** retrofitted, and that is correct — a deliverable that rewrote 213 sites would have made its
+own transcript unreviewable.
 
-## Three defects of this instrument, kept rather than smoothed away
+## The one finding that had to be de-rated
+
+`C2a` reports that the parent's `COMPUTED` is a **hand list of 3 against a tree of 4** — the omitted
+file is `out_audit_97fb.txt`, and the source comment scopes the list honestly (*"every place in this
+arc … for the sweep"*) while the row it feeds drops both qualifiers.
+
+**Its first version said 3 against 10, and that would have been a false finding.** By the time this
+audit runs, six of the ten matches are **this audit's own transcripts** — a population inflated by
+the instrument's output landing in the set it sweeps, charged against a deliverable written before
+any of them existed. The row now cuts at the parent's own last commit (`1e30484`) and charges only
+what existed then. **The real gap is one file**, and `C2a''` is why even that is the symptom rather
+than the defect: `out_audit_97fb.txt` publishes **7 population figures at 5 distinct commits**, one
+anchor per *row* — all 7 re-derive correctly — and `read_anchor()` returns one anchor per *file*.
+Adding it to `COMPUTED` would not check it; it would check one seventh of it.
+
+## Five defects of this instrument, kept rather than smoothed away
 
 1. **I twice built a checker that could not tell a claim from a mention.** `C2a`'s first draft
    counted `out_audit_7e39.txt`'s `429` as a published figure; it is a **quotation**, inside a
@@ -156,7 +205,22 @@ transcript unreviewable.
    that is how it was found: the row asserting *every declared anchor's tree yields its published
    figure* is the row that catches an auditor who cannot read his own figures. The parent's
    `POP_FIGURE` uses literal spaces there and never had the defect. An audit of figure provenance
-   whose own grammar mis-parsed a figure is worth recording rather than quietly fixing.
+   whose own grammar mis-parsed a figure is worth recording rather than quietly fixing. ⚠️ **Do not
+   go looking for that refutation in `out_c2_anchors.txt`** — the transcripts here are a post-fix run
+   and the row confirms; see the provenance box at the top for where the refuting run went.
+4. **`C2a`'s first version charged the parent for this instrument's own output.** It read *3 against
+   10* where 6 of the 10 were transcripts this audit had just written, against a deliverable
+   finished before any of them existed — a finding manufactured by the sweep including the sweeper.
+   The section above is the de-rating; it is listed here too because a finding that had to be
+   withdrawn is a defect of the instrument and not only a smaller number.
+5. **`C2b'` capped its own list at three and did not say so.** The row reads *"each survives only on
+   a side ref"* and then printed `unreachable[:3]`. That was written when 2 anchors were unreachable
+   and 3 was therefore the whole list; on `main` all 8 are unreachable and the row showed three
+   entries, **the same commit repeated**, with nothing marking the cut. **A silent cap under the
+   word `each` is the exact defect this arc keeps finding**, and it was invisible until the
+   instrument was re-run somewhere its own numbers had moved — which is the audit's own thesis
+   turned on itself. Repaired by mg-c3a2: the row now names every distinct commit and states how
+   many there are. Found by re-running, not by reading.
 
 Three predicted exit codes also missed (`C1b`): `--at HEAD`, `--at 1e30484` and `--at cb9f282` were
 each predicted **1** and are **0**. The reasoning was that `A3a` asserts its own verdict is `AGREES`;
