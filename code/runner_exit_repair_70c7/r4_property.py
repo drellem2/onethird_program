@@ -4,9 +4,15 @@ THE FINDING.  `k2_consume.py`'s caller scan matched `run_all\\.sh`.  mg-7522
 made it `(?:run_all|run_audit)\\.sh` -- one filename replaced by two -- and
 stated the property in `lib7522`, whose comment says the name rule *"is widened
 here to the property"*, HERE being the library and not the file that was
-repaired.  At HEAD, 9 executing sites name a `*.sh` whose basename is neither,
-4 of them reading the status, and 0 sites name the `run_audit.sh` the widening
-added.
+repaired.  At `973ca61`, the commit that published this probe's transcript,
+9 distinct executing SITES name a `*.sh` whose basename is neither, 4 of them
+reading the status, and 0 sites name the `run_audit.sh` the widening added.
+The same census gives 10 (site, target) ROWS at that revision, and it MOVES
+with the repository, which is why the figure carries a revision here and not
+the word `HEAD`.  The value at the HEAD of any given run is printed by the
+probe itself, in the section below, and is not written into this docstring --
+a number in prose cannot be re-measured, which is how `At HEAD` became false
+without anyone editing it.
 
 > A property stated where the check does not live is a property nothing
 > enforces.
@@ -16,6 +22,18 @@ own scan, pinned by the sweep's own self-test.  The property, the check and the
 test in one directory.  This probe re-derives the census under a parser written
 here, so `9 outside, 4 consuming, 0 run_audit` is a measurement and not a
 citation of mg-dee4.
+
+TWO GRAINS, EACH UNDER ITS OWN GRAIN WORD.  mg-56dc/T1c, repaired by mg-bf79.
+The scan below produces one row per (SITE, TARGET) pair, because a single source
+line that executes something and names two different `*.sh` is two targets --
+and its totals were printed under the label `executing sites`.  THE LABEL WAS
+RIGHT AND THE COUNT WAS WRONG: `9` is the distinct-SITE count and is what this
+tree's README, its `OUTCOMES.md`, this docstring and the published document all
+state; `10` is the ROW count and is what the transcript printed under the site
+word.  Both numbers are legitimate and both are now printed, each with its own
+grain in its own label, at a NAMED REVISION -- because this census ranges over
+the whole repository and therefore moves while the arc is landing, which is the
+half of T1c that does not reproduce and is said here rather than discovered.
 """
 
 import os
@@ -72,6 +90,11 @@ by = {}
 for _f, _i, base, c in sites:
     n, k = by.get(base, (0, 0))
     by[base] = (n + 1, k + (1 if c else 0))
+# THE COLUMN IS `sites` AND IS CORRECT PER ROW, which is worth saying because
+# it is not where the defect was: within one source line the `seen` set above
+# admits each basename once, so a basename's own count cannot double-count a
+# line.  Only the TOTALS below can, and only across basenames -- one line
+# naming two different scripts lands in two of these rows.
 print("    %-20s %6s %10s   %s" % ("target basename", "sites", "consuming",
                                    "the two-name rule sees it?"))
 for base in sorted(by, key=lambda b: (-by[b][0], b)):
@@ -79,20 +102,51 @@ for base in sorted(by, key=lambda b: (-by[b][0], b)):
     print("    %-20s %6d %10d   %s"
           % (base, n, c, "yes" if base in TWO_NAMES else "NO"))
 out = [s for s in sites if s[2] not in TWO_NAMES]
+
+
+def _sites(rowset):
+    """{(file, line)} -- the DISTINCT SITES behind a list of (site, target) rows.
+
+    One source line is one site however many scripts it names.  Written here
+    rather than imported for the reason the module docstring gives: this probe's
+    job is to be able to disagree with the rule it checks.
+    """
+    return {(f, i) for f, i, _b, _c in rowset}
+
+
+HEAD_REV = M.git("rev-parse", "--short", "HEAD").strip()
 print()
-print("      executing sites naming a `*.sh`               %3d" % len(sites))
-print("      ...the two-name rule matches                  %3d"
+print("  BOTH GRAINS, at `%s`.  The row grain is what the scan produces; the"
+      % HEAD_REV)
+print("  site grain is what the four artifacts publish.  The gap between them")
+print("  is exactly the number of source lines naming more than one `*.sh`.")
+print()
+print("      (site,target) ROWS naming a `*.sh`            %3d" % len(sites))
+print("      distinct executing SITES behind those rows    %3d"
+      % len(_sites(sites)))
+print("      ...ROWS the two-name rule matches             %3d"
       % (len(sites) - len(out)))
-print("      ...outside it, across %d distinct basenames    %3d"
+print("      ...ROWS outside it, across %d distinct basenames %3d"
       % (len({s[2] for s in out}), len(out)))
-print("      ...of those, READING the exit status          %3d"
-      % sum(1 for s in out if s[3]))
-print("      ...naming `run_audit.sh`, the name ADDED      %3d"
+print("      ...distinct SITES outside it                  %3d"
+      % len(_sites(out)))
+print("      ...of those SITES, READING the exit status    %3d"
+      % len(_sites([s for s in out if s[3]])))
+print("      ...ROWS naming `run_audit.sh`, the name ADDED %3d"
       % by.get("run_audit.sh", (0, 0))[0])
 print()
-print("  THE SITES THEMSELVES, so a reader can disagree with the rule rather")
-print("  than with a total.  Some are fixtures inside a self-test and some")
-print("  are live invocations; both are printed and neither is folded away:")
+multi = sorted(k for k in _sites(sites)
+               if len([s for s in sites if (s[0], s[1]) == k]) > 1)
+print("      source lines naming MORE THAN ONE `*.sh`      %3d" % len(multi))
+for f, i in multi:
+    names = sorted(s[2] for s in sites if (s[0], s[1]) == (f, i))
+    print("          %s:%d  ->  %s" % (f, i, ", ".join(names)))
+print()
+print("  THE ROWS THEMSELVES -- one per (site, target) pair, so a reader can")
+print("  disagree with the rule rather than with a total, and can count the")
+print("  sites by eye.  A `file:line` appearing twice is ONE site with two")
+print("  targets.  Some are fixtures inside a self-test and some are live")
+print("  invocations; both are printed and neither is folded away:")
 print()
 for f, i, base, c in out:
     print("      %-50s %-6s %s" % ("%s:%d" % (f, i), "READS" if c else "-",
@@ -165,10 +219,10 @@ for f in files:
         old.append((f, i))
 new_keys = {(f, i) for f, i, _b, _c in sites}
 lost = [k for k in old if k not in new_keys]
-print("      sites the two-name rule found                 %3d" % len(old))
-print("      ...still found under the property             %3d"
+print("      SITES the two-name rule found                 %3d" % len(old))
+print("      ...SITES still found under the property       %3d"
       % (len(old) - len(lost)))
-print("      ...LOST by the widening                       %3d" % len(lost))
+print("      ...SITES LOST by the widening                 %3d" % len(lost))
 for f, i in lost:
     print("          *** %s:%d" % (f, i))
 if lost:
@@ -181,7 +235,12 @@ print("EXTENT OF THAT NUMBER.  It counts a two-name regex still in")
 print("`k2_consume.py`, a property that is not stated where the check is, a")
 print("missing both-senses fixture, an unstated limit, and a site the old rule")
 print("found that the new one does not.  It ranges over every tracked `*.py`")
-print("and `*.sh` at HEAD.  It does NOT range over targets whose path is")
+print("and `*.sh` at `%s`.  THE TOTALS ABOVE MOVE WITH HEAD -- they are a"
+      % HEAD_REV)
+print("whole-repository census, and the figure the four artifacts publish is")
+print("pinned to a NAMED REVISION for that reason and not to `HEAD`, which is")
+print("the half of mg-56dc/T1c that does not reproduce.")
+print("It does NOT range over targets whose path is")
 print("assembled at run time -- that is the stated limit, and the runtime-path")
 print("census is `%s/out_s4_unpin.txt`." % M.SUBJECT)
 sys.exit(1 if BAD else 0)

@@ -9,11 +9,40 @@ R6a  E1 -- IS EVERY COUNT'S GRAIN STATED?
   The defect is a count of SOURCE LINES presented as a count of RUNS.
   A rule that could decide this in general would be a rule about
   meaning, so the question asked here is the checkable half: every
-  transcript line that reports a count over source carries one of the
-  grain words, in the same line or the one above it.
+  line of an artifact of mine that reports a count over source carries
+  one of the grain words, in the same line or the one above it.
 
-      transcript lines reporting a count over source    22
-      ...quoting another artifact's line, excluded       6
+  THE POPULATION IS A PROPERTY, NOT A DIRECTORY.  mg-56dc/T2a was that
+  the strictest rule this tree applies to anything ranged over the
+  `out_*.txt` of ONE DIRECTORY -- a population defined by a path, which
+  is the finding this tree exists to repair, committed by its own
+  self-check.  It is now `lib70c7.published_by`: every artifact a
+  commit of this deliverable ADDED, that still exists, and that a
+  reader reads as its record.  Asked of the whole repository, so it
+  reaches the published document four directories away -- and the
+  prose is where THREE OF THE FOUR artifacts mg-05eb found wrong were.
+
+      the tag searched, over `git log --all`         (mg-70c7)
+      commits whose subject carries it                6
+      artifacts of mine it published                 11
+      ...of those, transcripts                        7
+      ...of those, prose files                        4
+      the OLD population, one directory's `out_*.txt`   7
+      ...members of it the property LOST              0
+          code/runner_exit_repair_70c7/OUTCOMES.md                   *** NEW ***
+          code/runner_exit_repair_70c7/PREDICTIONS.md                *** NEW ***
+          code/runner_exit_repair_70c7/README.md                     *** NEW ***
+          code/runner_exit_repair_70c7/out_r1_grain.txt              was in the old population
+          code/runner_exit_repair_70c7/out_r2_anchor.txt             was in the old population
+          code/runner_exit_repair_70c7/out_r3_strength.txt           was in the old population
+          code/runner_exit_repair_70c7/out_r4_property.txt           was in the old population
+          code/runner_exit_repair_70c7/out_r5_population.txt         was in the old population
+          code/runner_exit_repair_70c7/out_r6_self.txt               was in the old population
+          code/runner_exit_repair_70c7/out_selftest_70c7.txt         was in the old population
+          docs/repair-mg-70c7-grain-and-population.md                *** NEW ***
+
+      artifact lines reporting a count over source      78
+      ...quoting another artifact's line, excluded      13
       ...with no grain word in the window                0
 
   EXTENT OF THIS CHECK, stated rather than implied: it establishes
@@ -23,16 +52,31 @@ R6a  E1 -- IS EVERY COUNT'S GRAIN STATED?
   attached at all, which cannot be argued with because it does not
   say what it counts.
 
+  AND THAT EXTENT IS NOT HYPOTHETICAL -- IT IS mg-56dc/T1c.  The count
+  labelled `executing sites` in `out_r4_property.txt` passed this check
+  at every run and printed the ROW count while four artifacts of mine
+  published the SITE count.  A rule that reads the LABEL cannot catch a
+  label that is the false statement; only re-deriving the quantity can,
+  and `r4_property.py` now prints BOTH GRAINS so there is nothing left
+  for the label to be wrong about.  This check is widened to the
+  artifacts the rule is about; it is not thereby made sufficient, and
+  saying which of those two it is, is the point of this paragraph.
+
+  THE LIMIT OF THE POPULATION, at the rule: provenance is read from
+  COMMIT SUBJECTS, so an artifact published by a commit whose subject
+  omits `(mg-70c7)` is invisible to it.  The tag and the commit count are
+  printed above so a reader can put the query itself in doubt.
+
 ==============================================================================
 R6b  E2 -- IS EVERY FIGURE OF MINE IN ONE OF MY TRANSCRIPTS?
 ==============================================================================
 
       transcripts in the corpus                         13
-      distinct figures they print                       94
+      distinct figures they print                       99
       my reader-facing artifacts                         4
 
 
-      figures quoted inside a correction or a prediction   3
+      figures quoted inside a correction or a prediction   1
       figures of mine no transcript of mine prints       0
 
   `PREDICTIONS.md` IS EXCLUDED AND THE REASON IS THE POINT.  A
@@ -49,7 +93,7 @@ R6c  E3 -- EVERY RULE I POINT AT THE SUBJECT, POINTED AT ME
   alternative one for me.  The four rules this tree turns on `lib7522`
   are turned on `lib70c7` here, on the same terms:
 
-      the marker rule (`lib7522.MARK`, 9 alternatives)        0 UNBACKED use(s) in my own code
+      the marker rule (`lib7522.MARK`, 10 alternatives)       0 UNBACKED use(s) in my own code
       the WIDENED P2 predicate, on my own `*.sh`              0 pipeline(s) of mine in the population
       `shell=True` / `os.system(` -- AST, not grep            0 real call site(s)
       a population of mine FILTERED by a runner filename      0 filter(s)
@@ -82,11 +126,13 @@ R6d  THIS TREE'S OWN RUNNER, BY THE WIDENED PREDICATE
 R6 TOTAL BAD: 0
 ==============================================================================
 
-EXTENT OF THAT NUMBER.  It counts a transcript line of mine reporting a
-count with no grain word near it, a figure of mine no transcript of
-mine prints, an UNBACKED marker use of mine, a pipeline of mine in the
-widened P2, a real `shell=True`, and a population of mine filtered by a
-runner filename.  It ranges over this tree's 8 `*.py`, 1 `*.sh`, 3
-`*.md` and 7 transcript(s).  It does NOT range over mg-7522's tree or
-mg-c2b3's -- R1 through R5 do that, and this is the section about the
-instrument.
+EXTENT OF THAT NUMBER.  It counts an artifact line of mine reporting a
+count with no grain word near it, an artifact of mine the widening
+LOST, a figure of mine no transcript of mine prints, an UNBACKED marker
+use of mine, a pipeline of mine in the widened P2, a real `shell=True`,
+and a population of mine filtered by a runner filename.  E1 ranges over
+the 11 ARTIFACT(S) `published_by` returns -- 7 transcript(s) and 4
+prose file(s), one of them outside this directory; E2 through E4 range
+over this tree's 8 `*.py`, 1 `*.sh` and 3 `*.md`.  It does NOT range
+over mg-7522's tree or mg-c2b3's -- R1 through R5 do that, and this is
+the section about the instrument.

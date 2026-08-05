@@ -1,0 +1,192 @@
+==============================================================================
+P3  THE RULE SET, DIFFED BY NAME
+==============================================================================
+
+==============================================================================
+P3a  THE ALTERNATIVES, SPLIT AT DEPTH 0 AND NAMED
+==============================================================================
+
+  Split with `alternatives()`'s own rule -- top-level `|` at depth 0 --
+  because mg-56dc records that a naive split on every `|` reports `of`
+  as a marker this arc names, it being the second branch of
+  `\ball (?:\d+|of)\b`.  A different splitting rule in the audit of a
+  rule-splitting finding would be this probe's own F3.
+
+      ALTERNATIVES in the one rule (`MARK`), counted     10
+      ...ALTERNATIVES named by the splitter here         10
+      the counter and the splitter agree                 yes
+      ALTERNATIVES in the old SELF rule (`MARK_OLD`)      3
+
+      the one rule, by name:
+          confirmed exactly
+          byte-identical
+          byte for byte
+          verified
+          \(measured\)
+          identical
+          confirmed
+          all (?:\d+|of)
+          exactly \d+
+          proven
+
+      the old self-facing rule, by name:
+          confirmed exactly
+          byte-identical
+          proven
+
+==============================================================================
+P3b  THE DIFF BY NAME, IN BOTH DIRECTIONS
+==============================================================================
+
+  mg-dee4's D4 union is the SELF rule's alternatives together with the
+  SUBJECT rule's.  Read out of mg-dee4's own committed transcript rather
+  than recomputed from its source, because the transcript is what the
+  finding was published as:
+
+      mg-dee4's SELF rule                 3   confirmed exactly, byte-identical,
+      mg-dee4's SUBJECT rule              9   confirmed exactly, byte-identical,
+      in SELF and NOT in SUBJECT          1   proven
+
+      ALTERNATIVES in mg-dee4's D4 UNION                 10
+      ALTERNATIVES in the one rule NOW                   10
+      ...ALTERNATIVES the consolidation had DROPPED       1
+          `proven`  in the one rule now: yes
+
+      the one rule equals mg-dee4's D4 union             yes
+
+  AND THE DIFF IN THE OTHER DIRECTION, which is the half a `restore the
+  missing one` fix does not ask: does the ONE RULE reach anything
+  NEITHER of mg-dee4's two rules reached?  A merge can gain as silently
+  as it loses, and a gain is a rule nobody agreed to.
+
+  COMPARED BY BEHAVIOUR AND NOT BY SOURCE, and the first draft of this
+  section is why.  It matched my alternative SOURCES against mg-dee4's
+  PROSE RENDERING of them -- `all (?:\d+|of)` against `all <n> / all
+  of` -- and reported 3 gained alternatives that mg-dee4's rule has had
+  all along.  A check that compares a FORM OF CHARACTERS rather than a
+  fact about the rule agrees with you for the wrong reason, which is the
+  sentence `transcript_numbers()` already carries.  So mg-dee4's union is
+  reconstructed FROM ITS OWN SOURCE and the two regexes are put to the
+  same strings:
+
+      mg-dee4's union rule, reconstructed from its source yes
+      ...its alternatives, counted at depth 0             10
+      PROBE WORDS put to both rules                      20
+      ...WORDS matched by the one rule, not by mg-dee4's   0
+      ...WORDS matched by mg-dee4's, not by the one rule   0
+
+  THE PREDICTION THIS TESTS.  `PREDICTIONS` P3b says the by-name diff
+  finds 0 rule OBJECTS dropped and EXACTLY 1 alternative dropped --
+  `proven` -- i.e. mg-56dc found the whole of it, and says it is the
+  prediction I most expect to be refuted, *because "one silent drop"
+  implies the diff was never taken*.  Measured: 1 alternative(s)
+  dropped, 0 rule object(s) dropped (P3c below), so it stands.
+
+==============================================================================
+P3c  RULE OBJECTS, diffed by name -- what else did the merge drop?
+==============================================================================
+
+  An alternative is one grain of the rule set; a whole RULE OBJECT is
+  another.  `s3_figure.py` had its own `MARK` and `lib7522` had
+  `_STRENGTH`; the merge left one `MARK` plus `MARK_OLD` kept as an
+  exhibit.  Asked of the sources at the merge commit and at HEAD:
+
+      file                                     before mg-70c7 (1ee1f1b)     at HEAD
+      lib7522.py                               _STRENGTH                    MARK,MARK_OLD
+      s3_figure.py                             MARK                         -
+      s5_self.py                               -                            -
+
+      MARKER RULE OBJECTS before, across those files       2
+      MARKER RULE OBJECTS at HEAD                          2
+      ...and they are                                   MARK, MARK_OLD
+
+      MARKER rule objects the consolidation dropped        0
+      (`_STRENGTH` and `s3_figure.MARK` are gone BY NAME in mg-70c7's
+       own R3a rows, which assert they are absent and print the count --
+       a drop that a check asserts is not a silent one.)
+
+==============================================================================
+P3d  WHAT RESTORING `proven` COSTS -- measured, not promised
+==============================================================================
+
+  A restored alternative widens a rule that other probes run.  So:
+  does it turn anything GREEN into RED, and does it move a committed
+  number?  Both asked, and they have different answers.
+
+      OCCURRENCES of `proven` in the rule's population
+      classified MENTION                                  6
+      ...classified USE                                   0
+
+      NEW VIOLATIONS, as marker USES, from restoring it   0
+
+  AND THE COMMITTED NUMBERS THAT DO MOVE, which my own P3c predicted
+  would be zero.  TWO COMPARISONS, NOT ONE, and the difference between
+  them is mg-56dc's own recorded defect #1: *the row-grain census was
+  written against HEAD and compared with a transcript produced on
+  another tree*.  A live run diffed against a committed transcript mixes
+  MY CHANGE with EVERY COMMIT SINCE, and attributing the sum to my
+  change is the error that audit scored against itself.  So:
+
+    A. live-at-HEAD against the COMMITTED transcript -- my change PLUS
+       whatever the arc has landed since the transcript was published;
+    B. live-at-HEAD against live-at-HEAD-WITH-`proven`-REMOVED -- the
+       CONTROLLED counterfactual, which is my change and nothing else.
+
+  B is done by writing the pre-repair `MARK` line back into `lib7522.py`,
+  running, and restoring the exact bytes in a `finally` -- the idiom
+  mg-7522's own S2 uses, with the byte-identity of the restore asserted
+  below rather than assumed.
+
+      `lib7522.py` restored BYTE-IDENTICALLY after the control  yes
+      ...restored to the bytes AT PROBE START, not to the index: the
+      file is legitimately modified by this ticket, so `git diff` is
+      EXPECTED to name it and naming it is not contamination.  The
+      claim being made is that the control left no residue, and the
+      byte comparison above is what establishes it.  For the record,
+      `git diff --name-only` over that tree reports:  lib7522.py, out_s3_figure.txt, out_s5_self.txt, out_selftest_7522.txt, selftest7522.py
+
+      probe SCRIPT             exit      ROWS vs    ROWS vs
+                                          COMMIT    CONTROL
+      s3_figure.py ROWS        0               0          0
+      s5_self.py ROWS          0               0          1
+      r3_strength.py ROWS      0               0          2
+
+      A. count ROWS moved vs the COMMITTED transcripts     0
+
+      B. count ROWS moved vs the CONTROLLED counterfactual   3
+          out_s5_self.txt  `MENTIONs`  69 -> 73
+          out_r3_strength.txt  `alternatives in the rule pointed at `  9 -> 10
+          out_r3_strength.txt  `MENTIONs`  69 -> 73
+
+      ...ROWS in A and NOT in B -- arc drift, not mine     0
+
+  SO P3C IS PART HIT AND PART MISS, and both halves are kept as
+  written.  *Restoring it adds 0 new violations* -- HIT, 0 USEs.
+  *0 committed transcript numbers of mg-7522 or mg-70c7 change* -- MISS,
+  and the number to hold me to is B, 3, not A: -3 of A's rows move
+  with the arc whether or not this ticket exists.  The reasoning behind
+  the prediction was that every occurrence of `proven` classifies as a
+  MENTION -- true, 6 of 6 -- which I then treated as implying nothing
+  moves.  IT DOES NOT IMPLY THAT: a MENTION is still COUNTED, and
+  `MENTIONs` is a printed row.  A rule that reaches one more string
+  reaches it in the mention column too.  The transcripts affected are
+  regenerated by this ticket and the list is in `README.md` beside the
+  ones that are NOT, with the reason each is in its list.
+
+==============================================================================
+P3 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a disagreement between the
+alternative COUNTER and the alternative SPLITTER, an alternative
+mg-dee4 recorded as self-only that the one rule still does not reach, a
+one-rule size that is not mg-dee4's D4 union, an unreadable row in
+mg-dee4's transcript, and a `proven` USE the restoration turns red.
+It ranges over the 10 ALTERNATIVES of the one rule, the 3 of the old
+self rule, 2 marker RULE OBJECTS at HEAD, and 22 ARTIFACTS in the
+`proven` population.  It does NOT ask whether the TEN alternatives are the
+right ten -- that is a question about which words are strength claims,
+and mg-dee4 answered it; this asks only that the merge lost none of it.
+
+FINDING: P3a the merged `one rule object` was the SUBJECT's nine VERBATIM and dropped `proven`, the one alternative mg-dee4's own transcript records as `in SELF and not in SUBJECT`; restored, the rule is 10 = mg-dee4's D4 union, with 1 alternative(s) dropped and 0 gained that neither of mg-dee4's rules had
+FINDING: P3b restoring it adds 0 new violations (all 6 occurrences classify MENTION) but moves 3 committed count row(s) under a CONTROLLED counterfactual, against 0 under a naive live-vs-committed diff whose extra -3 are arc drift -- refuting my own P3c, which inferred `nothing moves` from `every occurrence is a MENTION`: a MENTION IS STILL COUNTED, and `MENTIONs` is a printed row

@@ -1,0 +1,168 @@
+==============================================================================
+P2  THE POPULATION OF THE STRICTEST SELF-RULE
+==============================================================================
+
+==============================================================================
+P2a  THE OLD POPULATION AND THE NEW ONE, BOTH DERIVED
+==============================================================================
+
+  The old rule's population, re-derived by calling the function it
+  called; the new one by calling the property.  Both here, so the
+  movement is a measured pair of numbers and not a claim about an edit.
+
+      the tag the property searches for                  (mg-70c7)
+      COMMITS carrying that tag, as log ITEMS             6
+      ARTIFACTS in the OLD population (one dir's out_*)   7
+      ARTIFACTS in the NEW population (the property)     11
+      ...of those, TRANSCRIPTS                            7
+      ...of those, PROSE FILES                            4
+      ...ARTIFACTS outside the subject's own directory     1
+
+  THE COMMITS THE PROPERTY READ, so the query is visible rather than
+  trusted -- a population whose derivation is invisible is a hand-list
+  with a plumbing accent:
+
+      973ca61  evidence: the committed transcripts of the mg-70c7 suite, run on
+      d456f58  repair: THE GRAIN, THE ANCHOR, THE RULE AND THE POPULATION — the
+      1f2e30d  predictions: mg-70c7's predictions for the six mg-dee4 findings,
+      b4c341c  evidence: the committed transcripts of the mg-70c7 suite, run on
+      e1eb5c8  repair: THE GRAIN, THE ANCHOR, THE RULE AND THE POPULATION — the
+      93bd689  predictions: mg-70c7's predictions for the six mg-dee4 findings,
+
+  AND THE MEMBERS, each marked with whether the old rule had it:
+
+      code/runner_exit_repair_70c7/OUTCOMES.md                 *** NEW ***
+      code/runner_exit_repair_70c7/PREDICTIONS.md              *** NEW ***
+      code/runner_exit_repair_70c7/README.md                   *** NEW ***
+      code/runner_exit_repair_70c7/out_r1_grain.txt            old
+      code/runner_exit_repair_70c7/out_r2_anchor.txt           old
+      code/runner_exit_repair_70c7/out_r3_strength.txt         old
+      code/runner_exit_repair_70c7/out_r4_property.txt         old
+      code/runner_exit_repair_70c7/out_r5_population.txt       old
+      code/runner_exit_repair_70c7/out_r6_self.txt             old
+      code/runner_exit_repair_70c7/out_selftest_70c7.txt       old
+      docs/repair-mg-70c7-grain-and-population.md              *** NEW ***
+
+==============================================================================
+P2b  DOES THE WIDENING LOSE ANYTHING?  the direction that matters
+==============================================================================
+
+  A widened rule that drops a member it used to have is not a widening.
+  R4c asks this of the target property; it is asked of the population
+  property here on the same terms.
+
+      ARTIFACTS the old rule had                          7
+      ...ARTIFACTS still in the population                7
+      ...ARTIFACTS LOST by the widening                   0
+
+      the old population is a strict SUBSET of the new    yes
+
+==============================================================================
+P2c  THE ARTIFACT NO PATH IN THAT TREE COULD HAVE REACHED
+==============================================================================
+
+  The test of a property is whether it reaches something a path could
+  not.  mg-05eb's OPEN 2 was ONE FIGURE WRONG IN FOUR ARTIFACTS and
+  THREE of them were prose; mg-dee4's F3 was a self-facing population
+  that excluded every `.md`.  So the member that matters is the one
+  outside the directory:
+
+      docs/repair-mg-70c7-grain-and-population.md              in `docs`
+
+      ARTIFACTS the property reaches outside that tree     1
+
+==============================================================================
+P2d  WHAT THE WIDENING FOUND -- and the prediction it refutes
+==============================================================================
+
+  `r6_self.py` is run live and its E1 rows are read out of its output.
+  Both runs are reported: this is the FIRST run in which the widened
+  population exists, and the final committed one is `out_r6_self.txt`.
+
+      exit STATUS of the repaired self-check, 1 RUN        0
+      artifacts of mine it published                      11
+      members of it the property LOST                      0
+      artifact lines reporting a count over source        86
+      quoting another artifact's line, excluded           13
+      with NO GRAIN WORD in the window                     0
+
+      E1 population members (ARTIFACTS)                  11
+      the OLD population, for the same rule (ARTIFACTS)   7
+
+  THE PREDICTIONS THIS REFUTES, kept as written.  `PREDICTIONS` P2d
+  says widening will find AT LEAST ONE count row in mg-70c7's own
+  reader-facing prose with no grain word in the window, and puts the
+  number between 1 and 12.  Measured: 0.  P2e says `r6_self.py` will
+  exit 1 on the FIRST run after the widening and 0 on the final one.
+  Measured: it exits 0.  BOTH MISS.
+
+  AND THE ONE TIME IT DID EXIT 1, THE CAUSE WAS NOT THE WIDENING.  The
+  full sequence, because the middle of it is a finding: the first run
+  after the widening exited 0.  It then exited 1 for one run, on
+  `UNBACKED README.md 3738079` -- because the repaired README named a
+  REVISION and E2's `figures()` read the seven-digit revision as a
+  MEASUREMENT no transcript backs.  It exits 0 again now, because the
+  prose no longer names an unstable revision.  Neither of those runs is
+  the `1` P2e predicted; P2e predicted the widened rule would find
+  something, and what it found was my own citation format.
+
+  AND THE MISS IS NOT NEW -- IT IS MY AUDITOR'S, REPEATED.  mg-56dc's
+  own T2a is scored *MISS -- 0 flagged*, with the reason kept: *I
+  reasoned that prose unchecked by a rule would fail it.  It does not.*
+  I read that sentence, filed it under `what was already run before this
+  file was written`, and then predicted the same number for the same
+  wrong reason.  The prose passes because the prose was written by
+  people who name their grains, not because a rule made them.  A rule
+  that is not run has not passed -- that is a statement about REACH --
+  and predicting a DEFECT COUNT from it is a different claim, which is
+  the one that keeps being wrong.
+
+  WHAT THE WIDENING DID ESTABLISH, then, stated plainly so the zero is
+  not read as nothing: the rule now REACHES 11 artifacts instead of 7,
+  including 1 outside its own directory, and the reach is what O2 asked
+  for.  `Widen it to the artifacts the rule is about, and state what it
+  covers` -- the coverage is stated above and it is 11 of 11.
+
+  AND THE COVERAGE SENTENCE IS NOT A TAUTOLOGY, which mg-fcb2 recorded
+  as its own headline defect -- a coverage line whose 86/86 was true of
+  the code path and false as a sentence.  `11 of 11` here is the
+  population against ITSELF and would be 100%% however wrong the rule
+  was, so it is NOT offered as evidence: the evidence is the OLD count
+  beside it (7), the LOST count (0), and the member list above.
+
+==============================================================================
+P2e  IS THE POPULATION STILL DEFINED BY A PATH?  asked of the source
+==============================================================================
+
+      r6_self.py's E1 loop no longer iterates `M.outs(M.TREE)`  0   OK
+      ...it iterates the property's result                    1   OK
+      r6_self.py calls the property                           1   OK
+      lib70c7.py DEFINES the property                         1   OK
+      ...and states it in its own words at the rule           1   OK
+      ...and names its LIMIT at the rule                      1   OK
+      r6_self.py PRINTS the tag and the commit count          2   OK
+
+  AND THE PROPERTY IS NOT PATH-FREE BY MAGIC.  `published_by` names no
+  directory, but it does select on the FORM of a basename -- `out_*.txt`
+  or `*.md`.  That is this arc's transcript-and-prose convention, and it
+  is the same disposition `r6_self.py` already gives for `outs()`: a
+  name appears; it is not a population filter over CONTENT.  The
+  distinction is that the set of DIRECTORIES is not written down
+  anywhere, which is what made the old rule a path.
+
+==============================================================================
+P2 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts an artifact the widening LOST, a new
+population that is not a strict superset, a property that reaches
+nothing outside its own tree, an unreadable E1 row in the repaired
+output, an E1 loop still iterating the directory, and a property that
+is not defined or not stated or not limit-stated at the rule.  It ranges
+over the 11 ARTIFACTS the property returns and the 7 the old rule had.
+It does NOT establish that the rule is SUFFICIENT -- `r6_self.py` says
+in its own transcript that a count labelled `executions` that is really
+sites would pass it, and P1f is the measurement of that.
+
+FINDING: P2a E1, the strictest rule mg-70c7 applies to anything, ranged over ONE DIRECTORY'S 7 transcripts and now ranges over 11 ARTIFACTS derived by provenance from the whole repository -- 4 of them prose and 1 outside that directory, 0 members lost
+FINDING: P2b the widening found 0 count row(s) with no grain word against my prediction of 1-12, and the repaired self-check exits 0 against my predicted first-run 1 -- BOTH MISSES, and they are mg-56dc's own T2a miss repeated by the ticket repairing it: REACH IS NOT A DEFECT COUNT, and the one run that did exit 1 did so because a seven-digit git REVISION in my own repaired prose was read as a FIGURE, not because the widening found anything

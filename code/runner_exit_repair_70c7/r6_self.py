@@ -6,6 +6,11 @@ subject's rule to yourself, and put your moving numbers in transcripts."*  So:
 
   E1  A COUNT WHOSE GRAIN IS UNSTATED.  F1.  Every count this tree prints that
       ranges over source lines must say whether it is SITES or EXECUTIONS.
+      ITS POPULATION IS A PROPERTY -- `lib70c7.published_by`, the artifacts a
+      commit of this deliverable ADDED, asked of the whole repository.  It was
+      one directory's `out_*.txt` until mg-bf79; mg-56dc/T2a is that a
+      population defined by a path, inside the tree that repaired two of them,
+      is the finding with the instrument's name on it.
   E2  A FIGURE THAT NO TRANSCRIPT PRINTS.  F2.  R2c runs the figure census on
       this tree's own artifacts, and this section checks it ran.
   E3  A RULE APPLIED TO THE SUBJECT AND NOT TO ME.  F3.  Every rule this tree
@@ -40,8 +45,38 @@ M.hdr("R6a  E1 -- IS EVERY COUNT'S GRAIN STATED?")
 print("  The defect is a count of SOURCE LINES presented as a count of RUNS.")
 print("  A rule that could decide this in general would be a rule about")
 print("  meaning, so the question asked here is the checkable half: every")
-print("  transcript line that reports a count over source carries one of the")
-print("  grain words, in the same line or the one above it.")
+print("  line of an artifact of mine that reports a count over source carries")
+print("  one of the grain words, in the same line or the one above it.")
+print()
+print("  THE POPULATION IS A PROPERTY, NOT A DIRECTORY.  mg-56dc/T2a was that")
+print("  the strictest rule this tree applies to anything ranged over the")
+print("  `out_*.txt` of ONE DIRECTORY -- a population defined by a path, which")
+print("  is the finding this tree exists to repair, committed by its own")
+print("  self-check.  It is now `lib70c7.published_by`: every artifact a")
+print("  commit of this deliverable ADDED, that still exists, and that a")
+print("  reader reads as its record.  Asked of the whole repository, so it")
+print("  reaches the published document four directories away -- and the")
+print("  prose is where THREE OF THE FOUR artifacts mg-05eb found wrong were.")
+print()
+E1_POP = M.published_by(M.MY_TAG)
+E1_COMMITS = M.provenance_commits(M.MY_TAG)
+print("      the tag searched, over `git log --all`         %s" % M.MY_TAG)
+print("      commits whose subject carries it              %3d" % len(E1_COMMITS))
+print("      artifacts of mine it published                %3d" % len(E1_POP))
+print("      ...of those, transcripts                      %3d"
+      % sum(1 for p in E1_POP if os.path.basename(p).startswith("out_")))
+print("      ...of those, prose files                      %3d"
+      % sum(1 for p in E1_POP if p.endswith(".md")))
+print("      the OLD population, one directory's `out_*.txt` %3d" % len(MY_OUTS))
+print("      ...members of it the property LOST            %3d"
+      % len([p for p in MY_OUTS if p not in E1_POP]))
+for p in E1_POP:
+    print("          %-58s %s" % (p, "was in the old population"
+                                  if p in MY_OUTS else "*** NEW ***"))
+for p in MY_OUTS:
+    if p not in E1_POP:
+        print("          *** LOST BY THE WIDENING: %s" % p)
+        BAD += 1
 print()
 GRAINY = re.compile(r"\b(?:pipeline|line|execution|site|status|statuses|"
                     r"invocation)s?\b", re.I)
@@ -64,7 +99,7 @@ COUNTED = re.compile(r"\b\d+\b")
 CITATION = re.compile(r"[\w./-]+\.(?:py|sh|md|txt):\d+")
 missing = []
 checked = quoted = 0
-for out in MY_OUTS:
+for out in E1_POP:
     lines = M.read(out, None).splitlines()
     for i, line in enumerate(lines, 1):
         if not (GRAINY.search(line) and COUNTED.search(line)):
@@ -76,11 +111,11 @@ for out in MY_OUTS:
         window = " ".join(lines[max(0, i - 2):i + 1])
         if not GRAIN_WORD.search(window):
             missing.append((out, i, line.strip()))
-print("      transcript lines reporting a count over source   %3d" % checked)
+print("      artifact lines reporting a count over source     %3d" % checked)
 print("      ...quoting another artifact's line, excluded     %3d" % quoted)
 print("      ...with no grain word in the window              %3d" % len(missing))
 for o, i, l in missing[:12]:
-    print("          *** %s:%d  %s" % (os.path.basename(o), i, l[:56]))
+    print("          *** %s:%d  %s" % (o, i, l[:56]))
 if missing:
     BAD += len(missing)
 print()
@@ -90,6 +125,21 @@ print("  labelled `executions` that is really sites would pass.  What it")
 print("  prevents is the shape mg-dee4 found -- a number with no grain")
 print("  attached at all, which cannot be argued with because it does not")
 print("  say what it counts.")
+print()
+print("  AND THAT EXTENT IS NOT HYPOTHETICAL -- IT IS mg-56dc/T1c.  The count")
+print("  labelled `executing sites` in `out_r4_property.txt` passed this check")
+print("  at every run and printed the ROW count while four artifacts of mine")
+print("  published the SITE count.  A rule that reads the LABEL cannot catch a")
+print("  label that is the false statement; only re-deriving the quantity can,")
+print("  and `r4_property.py` now prints BOTH GRAINS so there is nothing left")
+print("  for the label to be wrong about.  This check is widened to the")
+print("  artifacts the rule is about; it is not thereby made sufficient, and")
+print("  saying which of those two it is, is the point of this paragraph.")
+print()
+print("  THE LIMIT OF THE POPULATION, at the rule: provenance is read from")
+print("  COMMIT SUBJECTS, so an artifact published by a commit whose subject")
+print("  omits `%s` is invisible to it.  The tag and the commit count are" % M.MY_TAG)
+print("  printed above so a reader can put the query itself in doubt.")
 
 # ---------------------------------------------------------------------------
 M.hdr("R6b  E2 -- IS EVERY FIGURE OF MINE IN ONE OF MY TRANSCRIPTS?")
@@ -256,14 +306,18 @@ else:
 print()
 M.bar("R6 TOTAL BAD: %d" % BAD)
 print()
-print("EXTENT OF THAT NUMBER.  It counts a transcript line of mine reporting a")
-print("count with no grain word near it, a figure of mine no transcript of")
-print("mine prints, an UNBACKED marker use of mine, a pipeline of mine in the")
-print("widened P2, a real `shell=True`, and a population of mine filtered by a")
-print("runner filename.  It ranges over this tree's %d `*.py`, %d `*.sh`, %d"
+print("EXTENT OF THAT NUMBER.  It counts an artifact line of mine reporting a")
+print("count with no grain word near it, an artifact of mine the widening")
+print("LOST, a figure of mine no transcript of mine prints, an UNBACKED marker")
+print("use of mine, a pipeline of mine in the widened P2, a real `shell=True`,")
+print("and a population of mine filtered by a runner filename.  E1 ranges over")
+print("the %d ARTIFACT(S) `published_by` returns -- %d transcript(s) and %d"
+      % (len(E1_POP), sum(1 for p in E1_POP
+                          if os.path.basename(p).startswith("out_")),
+         sum(1 for p in E1_POP if p.endswith(".md"))))
+print("prose file(s), one of them outside this directory; E2 through E4 range")
+print("over this tree's %d `*.py`, %d `*.sh` and %d `*.md`.  It does NOT range"
       % (len(MINE_PY), len(MINE_SH), len(MINE_MD)))
-print("`*.md` and %d transcript(s).  It does NOT range over mg-7522's tree or"
-      % len(MY_OUTS))
-print("mg-c2b3's -- R1 through R5 do that, and this is the section about the")
-print("instrument.")
+print("over mg-7522's tree or mg-c2b3's -- R1 through R5 do that, and this is")
+print("the section about the instrument.")
 sys.exit(1 if BAD else 0)
