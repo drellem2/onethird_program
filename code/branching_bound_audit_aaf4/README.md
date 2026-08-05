@@ -271,6 +271,12 @@ is scored dead by the rule it is quoting.
 `PREDICTIONS.md` was committed at `f714b4c` before any script here existed. **Nothing below was
 revised after a run.**
 
+**That SHA will not be an ancestor of `main`.** The refinery rebases before merging, so
+`f714b4c` is displaced by construction — exactly as `ec98300` was for mg-d075 (§6). Check it
+with `git show f714b4c | git patch-id --stable` against the `predictions:` commit that landed,
+not with `git merge-base --is-ancestor`. **A recorded SHA that does not resolve or does not
+sit on `main` is the expected state of this lineage, and is not evidence of tampering.**
+
 | # | prediction | outcome |
 |---|---|---|
 | P-0 | *not a prediction* — `ec98300` non-ancestor, content intact by patch-id | disclosed in advance as already measured; re-taken by `a5` and confirmed |
