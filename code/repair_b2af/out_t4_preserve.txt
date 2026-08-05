@@ -1,0 +1,113 @@
+==========================================================================
+T4 -- DO NOT DISTURB -- AND THE SHARPER FORM OF THE SAME LESSON
+==========================================================================
+--------------------------------------------------------------------------
+(i) THE FOUR ANCHORS, RE-DERIVED -- WITH SUBJECTS
+--------------------------------------------------------------------------
+   Re-derived HERE, with this file's own `first_introducing`, and
+   compared against the pins READ OUT OF libe34a.py's source rather
+   than by importing it.  An instrument that checks a derivation by
+   calling that derivation has checked nothing.
+
+   AND THE SUBJECT IS PRINTED BESIDE EACH SHA.  `4755d029 agrees with
+   4755d029` is true of any derivation that has drifted onto its own
+   pin; the subject is what makes the row readable as a claim about a
+   particular commit.
+
+   mg-76cc repair, derived from 'kernel_source='  4755d029  agrees
+                                                            docs+repair: THE KERNEL HALF OF THE PREDICATE IS BACK AND G-
+     its first parent -- THE PRE-REPAIR PREDICATE 3bc2cf76  agrees
+                                                            evidence: PUBLISH THE POST-COMMIT MEASUREMENT, WITH THE ANCH
+   mg-7e58 repair, derived from 'def measurement(' 4372fae9  agrees
+                                                            docs+repair: THE PROVENANCE APPARATUS IS NOW RIGHT ABOUT ITS
+     its first parent                             52aeaf43  agrees
+                                                            control+repair: THE ARC-WIDE `| tee` SWEEP, AND WHICH PAST G
+--------------------------------------------------------------------------
+(ii) CONTENT IDENTITY, WHERE SHA DISTINCTNESS SAYS NOTHING
+--------------------------------------------------------------------------
+   mg-330a's sharpest observation: the drifted column labelled `the
+   repair` resolved to d01ff32d, and g1_provenance.py THERE is
+   byte-identical to g1_provenance.py at HEAD.  The two drifted
+   sources differ by sha, which is precisely why nothing complained.
+
+   Both checks are run on the same pair, and both answers printed --
+   because the point is that they disagree.
+
+   the pair : d01ff32d and 1d2a8a19 (HEAD)
+
+   a distinctness check on the COMMIT SHAS
+      d01ff32d vs 1d2a8a19 : distinct -- PASSES
+   a distinctness check on WHAT THEY RESOLVE TO (the blob of code/branching_audit_58da/g1_provenance.py)
+      ca90929f vs ca90929f : IDENTICAL -- FAILS
+
+   The two checks disagree on the same pair.  Where two anchors
+   must differ, compare what they RESOLVE TO, not what they are
+   called.
+--------------------------------------------------------------------------
+(iii) THE KERNEL-HALF TRIPLES -- READ, AND LABELLED READ
+--------------------------------------------------------------------------
+   These four triples are READ out of mg-330a's committed transcript
+   and are LABELLED READ.  They are not re-derived here.
+
+   The reason is stated rather than left as an omission: re-deriving
+   them costs about ten minutes of k1_prerepair.py, mg-330a already
+   re-derived them from scratch with each pinned g1 travelling with its
+   own lib58da, and a second re-derivation buys nothing this ticket
+   needs.  SAYING `READ` is the point.  A number whose provenance is
+   not stated is the defect this whole arc is about.
+
+   column                             revision   exit/self/find   provenance
+   BEFORE THE REPAIR (property)       3bc2cf76   0/0/0            READ from code/audit_330a/out_s3_kernel_half.txt
+   THIS REPAIR (HEAD)                 HEAD       1/1/3            READ from code/audit_330a/out_s3_kernel_half.txt
+   before the repair (DRIFTED)        e5787e11   1/1/3            READ from code/audit_330a/out_s3_kernel_half.txt
+   the repair (DRIFTED)               d01ff32d   1/1/3            READ from code/audit_330a/out_s3_kernel_half.txt
+
+   THE CONFIRMATION IS A DIFFERENCE : 0/0/0 at 3bc2cf76 against
+   1/1/3 at HEAD.  THE DRIFTED PAIR BOTH PRINT 1/1/3 -- one
+   predicate asked twice, which is why its `0` was a plausible
+   number produced by asking one predicate the same question.
+--------------------------------------------------------------------------
+(iv) REFUSES, OR REPORTS?  CONSTRUCTED, NOT RESTATED
+--------------------------------------------------------------------------
+   The division mg-330a measured: a PROPERTY-MOVING edit makes the
+   instrument REFUSE, a COSMETIC edit makes it REPORT.  That division
+   is the reason the instrument can be run on a live tree at all -- one
+   that refused on every comment could not be.
+
+   Constructed here in two clones, with THIS repair's edits carried in,
+   so the answer is about the tree as this ticket leaves it.
+
+   the tree, unperturbed              exit 0   SELFTEST: 66 assertions, 0 failed
+   a COSMETIC edit to g1              exit 0   SELFTEST: 66 assertions, 0 failed
+   a PROPERTY-MOVING edit             exit 1   SELFTEST: 66 assertions, 1 failed
+
+   the cosmetic edit  => REPORTS -- the change is on the page and the anchor ignores it
+   the property edit  => REFUSES
+
+   NON-VACUITY -- the two edits produced different answers : True
+--------------------------------------------------------------------------
+PREDICTIONS SCORED
+--------------------------------------------------------------------------
+   P-7a   predicted 0                            measured 0                HIT
+   P-7b   predicted True                         measured True             HIT
+   P-7c   predicted (True, True)                 measured (True, True)     HIT
+   P-7d   predicted 0                            measured 0                HIT
+   P-7e   predicted (0, True)                    measured (0, True)        HIT
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   NOTHING WAS DISTURBED.  The four anchors resolve where they did,
+   with subjects beside them; the byte identity mg-330a found still
+   holds and is re-derived here by blob sha rather than quoted; the
+   two kinds of edit still produce the two different answers that make
+   the instrument usable.
+
+   AND THE SHARPENED LESSON IS KEPT AS A RUNNING CHECK rather than a
+   sentence: (ii) runs both a sha distinctness check and a content
+   distinctness check on the same pair every time this script runs, and
+   prints that they disagree.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every git read, clone, parse and foreign-script run this script performs, plus the requirement that each constructed edit really change the file it names
+FINDINGS: 0, population: the 4 anchors libe34a derives, each re-derived here and compared with the pin read from libe34a's source; the blob identity of g1_provenance.py at the two revisions the drifted anchor picks; the 4 kernel-half triples; and the 2 edits the refuse/report division is stated over
+TOTAL BAD: 0

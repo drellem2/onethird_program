@@ -1,0 +1,128 @@
+==========================================================================
+T2 -- OPEN 1 (F-1) -- THE GATE WHERE THE ANCHOR IS SPENT
+==========================================================================
+--------------------------------------------------------------------------
+(i) WHO SPENDS AN ANCHOR, AND WHO GATES -- FROM THE PARSE TREE
+--------------------------------------------------------------------------
+   Not from mg-330a's table.  A finding read out of the document
+   that reports it is the document agreeing with itself.  Every `.py`
+   in code/branching_audit_e34a/ is parsed, every `L.<NAME>` load of a
+   derived anchor is collected, and every gate is collected the same
+   way -- a reference to `ANCHOR_DRIFT`, or a call to `gate_spent`.
+
+   the commit that introduces `def gate_spent(` in code/branching_audit_e34a/libe34a.py :
+      derived from the property : 1d2a8a19
+      the commit before it      : 7bd0056b
+
+   BEFORE (7bd0056b)
+      script                 anchors it spends          gated?
+      k1_prerepair.py        PRE_7E58_REV,PRE_REV,REPAIR_REV yes -- whole ANCHOR_DRIFT
+      k2_five.py             PRE_7E58_REV               *** NO
+      k4_cancel.py           REPAIR_REV                 *** NO
+      selftest_e34a.py       PRE_7E58_REV,PRE_REV,REPAIR_REV yes -- whole ANCHOR_DRIFT
+      consumers that gate : 2 of 4
+
+   AFTER (the tree)
+      script                 anchors it spends          gated?
+      k1_prerepair.py        PRE_7E58_REV,PRE_REV,REPAIR_REV yes -- whole ANCHOR_DRIFT
+      k2_five.py             PRE_7E58_REV               yes -- gate_spent(PRE_7E58_REV)
+      k4_cancel.py           REPAIR_REV                 yes -- gate_spent(REPAIR_REV)
+      selftest_e34a.py       PRE_7E58_REV,PRE_REV,REPAIR_REV yes -- whole ANCHOR_DRIFT
+      consumers that gate : 4 of 4
+
+   BEFORE : 2 of 4    AFTER : 4 of 4
+--------------------------------------------------------------------------
+(ii) THE RULE, MADE STRUCTURAL
+--------------------------------------------------------------------------
+   The rule is not `k2 and k4 have been fixed`.  A list of two
+   filenames does not notice a third script being added, which is the
+   same defect as a written list of five outputs -- mg-957f's OPEN 2,
+   in this very directory.
+
+   THE RULE: every script in code/branching_audit_e34a/ that names a
+   derived anchor either references the whole of ANCHOR_DRIFT or calls
+   gate_spent for EVERY anchor it names.  Applied above, at both
+   states.  It goes red at 7bd0056b and green at the tree, and both
+   readings are printed rather than one.
+
+   scripts that name an anchor and do not cover it:
+      BEFORE (7bd0056b)        k2_five.py, k4_cancel.py
+      AFTER (the tree)         none
+
+   AND THE PARTIAL CASE, which a boolean `calls gate_spent` would
+   miss: a script that gates ONE of the two anchors it spends is
+   NOT covered.  The rule is a subset test, not a call count.
+      k2_five.py             spends PRE_7E58_REV           gates PRE_7E58_REV
+      k4_cancel.py           spends REPAIR_REV             gates REPAIR_REV
+--------------------------------------------------------------------------
+(iii) DRIFT CONSTRUCTED, AND THE TWO SCRIPTS RE-RUN UNDER IT
+--------------------------------------------------------------------------
+   The gate is asserted to fire.  So it is made to fire.
+
+   In a clone: one of libe34a's pinned revisions is edited to name a
+   DIFFERENT REAL revision.  The derivation is untouched, so every
+   other number each script prints is unchanged -- only the
+   pin-vs-derivation comparison moves.  Then k4 and k2 are run there.
+
+   the substitute revision : dfa263cc -- docs+repair: THE ANCHOR IS DERIVED FROM THE 
+
+   script           anchor spent   clean tree             under constructed drift
+   k4_cancel.py     REPAIR_REV     exit 1, TOTAL BAD: 2   exit 1, TOTAL BAD: 3
+   k2_five.py       PRE_7E58_REV   exit 0, TOTAL BAD: 0   exit 1, TOTAL BAD: 1
+
+   THE DIFFERENCE IS F-1.  Before this repair both scripts printed
+   the left-hand column under BOTH conditions: a re-pointed anchor
+   changed nothing they said.  That is what `silent where it is
+   spent` meant, and it is measured here rather than argued.
+--------------------------------------------------------------------------
+(iv) THE GATE IS SILENT WHEN GREEN
+--------------------------------------------------------------------------
+   A gate that prints on a clean tree is a banner.  The two
+   scripts are run on the unperturbed tree and their output compared
+   with what their COMMITTED transcripts say -- so the check is against
+   what they said before this repair existed, not against this run.
+
+   script           committed transcript     this tree                unchanged?
+   k4_cancel.py     TOTAL BAD: 2             TOTAL BAD: 2             yes
+   k2_five.py       TOTAL BAD: 0             TOTAL BAD: 0             yes
+--------------------------------------------------------------------------
+(v) THE TWO THAT ALREADY GATED ARE NOT TOUCHED
+--------------------------------------------------------------------------
+   k1_prerepair.py and selftest_e34a.py gate on the WHOLE of
+   ANCHOR_DRIFT, which is a superset of what gate_spent asks.
+   Rewriting them would move two transcripts for no property gained --
+   and k1 takes about ten minutes to regenerate.  Checked, not
+   promised: their bytes at 7bd0056b against their bytes here.
+
+   k1_prerepair.py        byte-identical
+   selftest_e34a.py       byte-identical
+   k3_undisturbed.py      byte-identical
+--------------------------------------------------------------------------
+PREDICTIONS SCORED
+--------------------------------------------------------------------------
+   P-5a   predicted 2                            measured 2                HIT
+   P-5b   predicted 4                            measured 4                HIT
+   P-5c   predicted [('k4_cancel.py', 2, 3), ('k2_five.py', 0, 1)] measured [('k4_cancel.py', 2, 3), ('k2_five.py', 0, 1)] HIT
+   P-5d   predicted [(1, 'TOTAL BAD: 2'), (0, 'TOTAL BAD: 0')] measured [(1, 'TOTAL BAD: 2'), (0, 'TOTAL BAD: 0')] HIT
+   P-5e   predicted (True, True)                 measured (True, True)     HIT
+   P-5f   predicted 0                            measured 0                HIT
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   F-1 IS CLOSED, AND CLOSED BY CONSTRUCTION.  The gate is offered
+   at the point of use, both scripts that spend an anchor now take it,
+   the rule that says so is an AST check rather than a list of two
+   filenames, and the difference it makes was measured by making the
+   anchor drift rather than by describing what would happen if it did.
+
+   WHAT THIS REPAIR DID NOT DO: it did not gate the 19 sites t1
+   enumerates.  Those live in other tickets' directories and 11 of them
+   take their path from a parameter, which means there is nothing at
+   the site to gate -- the anchor is at the call site.  That is the
+   same lesson as F-1 one level down, and it is named in t1 (iii)
+   rather than quietly treated as done.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every parse, clone, and foreign-script run this script performs, plus the requirement that the constructed drift really reach the scripts under test
+FINDINGS: 0, population: each of the scripts in code/branching_audit_e34a/ that names a derived anchor, checked for a drift gate at the commit before this repair and at the tree; and k4 and k2 re-run under constructed drift and under none
+TOTAL BAD: 0

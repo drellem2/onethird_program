@@ -1,0 +1,94 @@
+==========================================================================
+SELFTEST -- THE APPARATUS OF mg-b2af, ON KNOWN INPUTS
+==========================================================================
+--------------------------------------------------------------------------
+(a) THE HEX TEST THAT DECIDES `FROZEN`
+--------------------------------------------------------------------------
+   ok   a 7-character hex string is a written revision
+   ok   a full 40-character sha is one too
+   ok   `HEAD` is NOT counted as pinned -- it moves on every commit to the repo, which is the loudest form of the defect being classified
+   ok   a flag is not a revision
+   ok   a 3-character string is too short to be a sha
+   ok   non-hex characters are not a sha
+--------------------------------------------------------------------------
+(b) CONSTANT FOLDING, ON A CONSTRUCTED MODULE
+--------------------------------------------------------------------------
+   ok   a plain string constant resolves
+   ok   `a + b` folds
+   ok   `"%s/.." % OTHER.NAME` folds across ONE module boundary
+   ok   a non-string constant is not offered as a path
+   ok   a name this resolver cannot fold is ABSENT, not guessed -- a guessed path would silently pin the wrong site
+--------------------------------------------------------------------------
+(c) THE REFINEMENT, ON CONSTRUCTED CALL SITES
+--------------------------------------------------------------------------
+   ok   a call taking BOTH revision and path from parameters is VARIABLE/PARAMETER -- a facility, not an anchor
+   ok   a call with a written-down revision is PINNED and FROZEN
+   ok   a call with a literal path and no revision is LITERAL and MOVING
+   ok   a call restricting no path at all has no path to resolve
+   ok   both resolvable shapes are spendable -- they can go in ANCHORS.tsv
+   ok   neither unresolvable shape is spendable, and t1 names them rather than dropping them
+--------------------------------------------------------------------------
+(d) `first_introducing`, AGAINST libe34a's OWN IMPLEMENTATION
+--------------------------------------------------------------------------
+   ok   this file's own `first_introducing` lands on libe34a's pin for mg-76cc -- two implementations written from the same sentence, compared rather than shared
+   ok   an unfindable marker returns None rather than a plausible revision
+--------------------------------------------------------------------------
+(e) THE TWO LABELS F-2 IS ABOUT ARE TWO FUNCTIONS
+--------------------------------------------------------------------------
+   ok   r3 (iii): an out_*.txt path is a transcript
+   ok   r3 (iii): a PREDICTIONS.md path is a record
+   ok   r3 (iii): anything else is a live claim
+   ok   r3 (iii): a doc is a live claim
+   ok   r3 (iv): SCOPE is whose ticket owns the file
+   ok   r3 (iv): this ticket's own files are labelled, not exempted
+   ok   THE TWO RULES RETURN DIFFERENT ANSWERS FOR THE SAME PATH -- which is the whole of F-2, and why they are two functions
+--------------------------------------------------------------------------
+(f) THE QUALIFIER RULE WAS NOT WIDENED
+--------------------------------------------------------------------------
+   ok   the HYPHENATED form does not qualify -- accepting it would close 15 sites without a word being written
+   ok   the unhyphenated form does qualify
+   ok   a window quoting the wide bound is a third label, not an unqualified census
+   ok   the rule returns THREE distinct labels, so it distinguishes something
+--------------------------------------------------------------------------
+(g) THE PRE-REBASE SEARCH
+--------------------------------------------------------------------------
+   ok   exactly one pre-rebase twin of ea97d0a survives in the object store
+   ok   it is NOT reachable from HEAD -- which is what makes it a pre-rebase original rather than an ancestor
+   ok   it carries the same subject line, which is how it was found
+   ok   it is a different commit from the one on main
+   ok   the search never returns a commit reachable from the one it was asked about
+--------------------------------------------------------------------------
+(h) ANCHORS.tsv ROUND-TRIPS
+--------------------------------------------------------------------------
+   ok   one row written, one row read
+   ok   the resolved revision survives the round trip
+   ok   a subject containing spaces survives -- the file is TAB separated
+   ok   a missing pin file reads as no rows rather than raising
+--------------------------------------------------------------------------
+(i) `gate_spent` -- THE F-1 REPAIR ITSELF
+--------------------------------------------------------------------------
+   ok   on a tree with no drift, gate_spent books NOTHING and returns True -- a gate that prints when green is a banner
+   ok   an UNKNOWN anchor name is a SELF-ERROR, not a silent pass -- a typo'd name would otherwise gate on an empty list and report green
+   ok   with drift present, gate_spent books one finding NAMING the anchor the script spends
+   ok   and a script spending the OTHER anchor is unaffected -- the gate is per anchor, not a global banner
+   ok   every anchor libe34a exports is in ANCHOR_OF, so no consumer can name one that silently maps to nothing
+   ok   every derivation registered its rows, including the ones with none
+   ok   the per-anchor rows and the whole-list rows are the SAME rows -- the point-of-use gate and the point-of-definition gate cannot disagree
+--------------------------------------------------------------------------
+(j) THE CENSUS IS mg-330a's, AND IT STILL RUNS
+--------------------------------------------------------------------------
+   ok   every .py under code/ parses
+   ok   the kind counts partition the call sites -- no site is in two classes and none is missing
+   ok   HISTORY-DERIVED is exactly NEWEST + INDEXED + UNRESTRICTED, and OLDEST is NOT absorbed into it
+   ok   the helper rows are CALL plus DEF -- the two populations the document's `16 call sites` runs together
+--------------------------------------------------------------------------
+(k) THE PROBE MUTATES A CLONE, NEVER THIS REPOSITORY
+--------------------------------------------------------------------------
+   ok   a commit in the clone left this repository's HEAD where it was
+   ok   and it really did commit in the clone -- the probe is not vacuous
+   ok   this repository's own tracked state is untouched by the probe
+--------------------------------------------------------------------------
+SELFTEST
+--------------------------------------------------------------------------
+   53 assertions, 0 failed
+SELFTEST: 53 assertions, 0 failed

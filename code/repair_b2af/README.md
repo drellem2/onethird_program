@@ -245,6 +245,29 @@ swallowing a class that does not have the defect is A-2's mistake.
 
 ---
 
+## A FORECAST THIS TICKET MAKES ABOUT ITSELF
+
+`t2` needs a tree where F-1 is still present. It does **not** pin one. It
+derives it: *the commit that introduces `def gate_spent(` into
+`libe34a.py`*, and takes that commit's first parent — a property-derived
+anchor, in a ticket about anchors.
+
+The committed transcript therefore names `1d2a8a19` and `7bd0056b`. **Those
+two shas will not survive the merge.** The refinery rebases, and this branch's
+commits will be rewritten exactly as mg-330a's were — which is the whole
+finding at the top of this document, and it will happen to this deliverable
+too.
+
+**The derivation will still resolve; only the printed shas will move.** That
+is the difference between a pin and a property, and it is why this ticket
+declined to pin a sha it could see was about to be rewritten. A reader who
+re-runs `t2` after the merge should expect two different shas in that row and
+the same `BEFORE : 2 of 4 AFTER : 4 of 4` beneath it. **If the transcript's
+shas and a fresh run's shas disagree, that is this forecast being confirmed,
+not a defect.**
+
+---
+
 ## WHAT IS STILL OPEN
 
 - **The 11 parameterised sites are not gated.** There is nothing at the site

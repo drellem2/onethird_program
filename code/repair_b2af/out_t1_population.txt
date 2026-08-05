@@ -1,0 +1,295 @@
+==========================================================================
+T1 -- THE POPULATION -- STATED THREE TIMES, MEASURED AT FOUR COMMITS
+==========================================================================
+--------------------------------------------------------------------------
+(i) THE THREE STATEMENTS OF ONE CENSUS
+--------------------------------------------------------------------------
+   mg-330a swept the repo once and the answer is written down in
+   three places: the brief for THIS ticket, the document
+   docs/audit-mg-330a-the-anchor-and-the-term.md, and the transcript
+   code/audit_330a/out_s1_anchors.txt.  The document and the transcript
+   landed in the SAME COMMIT, fba5f63.
+
+   Every figure below is READ, and the reading is checked: the selftest
+   requires each `evidence` string to be present in the file it is
+   attributed to.  A figure quoted from a source that does not contain
+   it is the failure this whole arc is about.
+
+   figure                 the doc    the transcript agree?
+   ALL call sites         36         37           *** NO
+   NEWEST                 7          7            yes
+   INDEXED                8          8            yes
+   UNRESTRICTED           1          1            yes
+   OLDEST                 10         11           *** NO
+   PICKAXE                6          6            yes
+   RANGE                  4          4            yes
+   HISTORY-DERIVED        16         16           yes
+   directories            13         12           *** NO
+   helper CALL sites      16         12           *** NO
+
+   figures where the document and its own transcript disagree : 4 of 10
+   they are: ALL call sites, OLDEST, directories, helper CALL sites
+
+   Both landed in fba5f63.  So the disagreement is not two measurements
+   taken at different times -- it is one sweep, written down twice.
+--------------------------------------------------------------------------
+(ii) DO THEY REPRODUCE AT THE COMMITS THEY WERE PUBLISHED AT?
+--------------------------------------------------------------------------
+   The refinery REBASES a branch before merging it.  Every commit
+   gets a new sha and a new base, and a transcript committed on the
+   pre-rebase branch then sits inside a commit whose tree it was never
+   run against.  mg-132a named that state DISPLACED.
+
+   So the sweep is re-run at FOUR commits: mg-330a's two as they now
+   sit on main, and their PRE-REBASE TWINS -- found in the object store
+   by matching the subject line, not assumed.
+
+   ea97d0a audit: the mg-330a instrument — every derived anchor RESOL
+      pre-rebase twin(s) found by subject : b94cb1e
+   fba5f63 docs+audit: independent audit of the mg-8d5e anchor-and-te
+      pre-rebase twin(s) found by subject : 0ef9af9
+
+   figure                 ea97d0a (on main)     fba5f63 (on main)     b94cb1e (pre-rebase)  0ef9af9 (pre-rebase)  the worktree          
+   ALL call sites         40                    40                    37                    37                    41                    
+   NEWEST                 8                     8                     7                     7                     8                     
+   INDEXED                10                    10                    8                     8                     10                    
+   UNRESTRICTED           1                     1                     1                     1                     1                     
+   OLDEST                 11                    11                    11                    11                    12                    
+   PICKAXE                6                     6                     6                     6                     6                     
+   RANGE                  4                     4                     4                     4                     4                     
+   HISTORY-DERIVED        19                    19                    16                    16                    19                    
+   directories            13                    13                    12                    12                    13                    
+   helper CALL sites      12                    12                    12                    12                    12                    
+
+   AND EVERY PUBLISHED FIGURE, AGAINST EVERY COMMIT.  A figure
+   reproduces if SOME commit in the table above gives it.
+
+   figure                 stated   reproduces at                  source
+   ALL call sites         36       *** NOWHERE                    the doc
+   ALL call sites         37       b94cb1e, 0ef9af9               the transcript
+   NEWEST                 7        b94cb1e, 0ef9af9               the doc
+   NEWEST                 7        b94cb1e, 0ef9af9               the transcript
+   INDEXED                8        b94cb1e, 0ef9af9               the doc
+   INDEXED                8        b94cb1e, 0ef9af9               the transcript
+   UNRESTRICTED           1        ea97d0a, fba5f63, b94cb1e, 0ef9af9, the the doc
+   UNRESTRICTED           1        ea97d0a, fba5f63, b94cb1e, 0ef9af9, the the transcript
+   OLDEST                 10       *** NOWHERE                    the doc
+   OLDEST                 11       ea97d0a, fba5f63, b94cb1e, 0ef9af9 the transcript
+   PICKAXE                6        ea97d0a, fba5f63, b94cb1e, 0ef9af9, the the doc
+   PICKAXE                6        ea97d0a, fba5f63, b94cb1e, 0ef9af9, the the transcript
+   RANGE                  4        ea97d0a, fba5f63, b94cb1e, 0ef9af9, the the doc
+   RANGE                  4        ea97d0a, fba5f63, b94cb1e, 0ef9af9, the the transcript
+   HISTORY-DERIVED        16       b94cb1e, 0ef9af9               the doc
+   HISTORY-DERIVED        16       b94cb1e, 0ef9af9               the transcript
+   directories            13       ea97d0a, fba5f63, the          the doc
+   directories            12       b94cb1e, 0ef9af9               the transcript
+   helper CALL sites      16       *** NOWHERE                    the doc
+   helper CALL sites      12       ea97d0a, fba5f63, b94cb1e, 0ef9af9, the the transcript
+
+   published figures that reproduce at NO commit measured : 3
+      the doc: ALL call sites = 36
+      the doc: OLDEST = 10
+      the doc: helper CALL sites = 16
+
+   THE TRANSCRIPT'S SEVEN FIGURES, AS ONE SET:
+      reproduce at ea97d0a, where the commit now sits on main : *** NO
+      reproduce at b94cb1e, its pre-rebase twin                : yes
+
+   AND WHAT THE TWO UNREPRODUCIBLE DOCUMENT FIGURES ACTUALLY ARE.
+   Named, because a figure said to be wrong without saying what it is
+   instead is half an answer:
+
+     `16 call sites of the two named helpers`: the sweep found
+     4 DEF and 12 CALL rows there, 16 in all.  16 is the ROW count
+     reported as a CALL-SITE count -- one number over two
+     populations, which is F-2's shape in the census that names it.
+
+     `OLDEST 10`: the sweep found 11.  The document's own table
+     sums to its own ALL -- 7+8+1+10+6+4 = 36 -- so the 36 is
+     arithmetic over the rows, not a measurement, and it inherits
+     the row that is off by one.
+
+     `16 history-derived across 13 directories`: 16 and 12 at the
+     pre-rebase commit, 19 and 13 at the worktree.  NO commit
+     measured here gives 16 AND 13 together: the two halves of one
+     sentence reproduce at DIFFERENT commits.
+--------------------------------------------------------------------------
+(iii) THE REFINEMENT `classify_call` CANNOT MAKE
+--------------------------------------------------------------------------
+   `classify_call` reads the flags of one call.  It cannot see that
+
+       log -1 --format=%H e5787e1 -- <path>     CANNOT move
+       log -1 --format=%H          -- <path>    moves on ANY edit
+
+   are different, and it calls both NEWEST.  Nor can it see that a
+   site whose <path> is a PARAMETER is not an anchor at all -- it is a
+   facility, and the anchor is at its call sites.  That is F-1's lesson
+   one level down: the property is where the value is SPENT.
+
+   THE DENOMINATOR DOES NOT MOVE.  The population below is whatever
+   mg-330a's classifier says it is.  Both numbers are printed.
+
+   kind (theirs) site                                                  revision  path       moves?
+   NEWEST        code/audit_2c77/q4_prerepair.py:193                   PINNED    LITERAL    no -- PINNED
+   NEWEST        code/audit_330a/lib330a.py:180                        VARIABLE  PARAMETER  yes
+   INDEXED       code/audit_330a/lib330a.py:188                        VARIABLE  PARAMETER  yes
+   INDEXED       code/branching_audit_957f/lib957f.py:141              VARIABLE  PARAMETER  yes
+   NEWEST        code/branching_audit_e34a/libe34a.py:137              VARIABLE  PARAMETER  yes
+   INDEXED       code/branching_audit_e34a/libe34a.py:424              NONE      PARAMETER  yes
+   NEWEST        code/branching_repair_76cc/lib76cc.py:177             NONE      PARAMETER  yes
+   INDEXED       code/branching_repair_7e58/k2_selfprov.py:222         NONE      UNRESOLVED yes
+   INDEXED       code/face_geometry_audit_c4c8/h4_declared_unit.py:271 NONE      LITERAL    yes
+   INDEXED       code/face_geometry_audit_eaef/e5_floor.py:73          NONE      PARAMETER  yes
+   INDEXED       code/face_geometry_instr_5f9a/d2_deletion.py:1349     NONE      LITERAL    yes
+   NEWEST        code/hodge_leverage_audit_97fb/audit_97fb.py:1080     NONE      PARAMETER  yes
+   NEWEST        code/publication_anchor_132a/anchor_132a.py:344       VARIABLE  PARAMETER  yes
+   INDEXED       code/publication_anchor_132a/anchor_132a.py:749       VARIABLE  LITERAL    yes
+   INDEXED       code/publication_anchor_132a/anchor_132a.py:751       VARIABLE  LITERAL    yes
+   NEWEST        code/repair_8d5e/lib8d5e.py:139                       VARIABLE  PARAMETER  yes
+   INDEXED       code/repair_8d5e/lib8d5e.py:153                       VARIABLE  PARAMETER  yes
+   UNRESTRICTED  code/repair_8d5e/lib8d5e.py:167                       VARIABLE  NONE       yes
+   NEWEST        code/runner_exit_audit_56dc/t1_grain.py:186           NONE      LITERAL    yes
+
+   POPULATION BY mg-330a's CLASSIFIER, UNCHANGED       : 19
+     of which the revision is PINNED, so frozen        : 1
+     of which the path is a PARAMETER, so the site is
+     a facility and the anchor is at its call sites    : 11
+     of which a literal path and no pinned revision
+     meet -- an actual, moving, file-anchored anchor   : 5
+     remainder (no path at all, or a path this
+     instrument could not resolve)                     : 2
+--------------------------------------------------------------------------
+(iv) THE REFINEMENT, DEMONSTRATED BY CONSTRUCTION
+--------------------------------------------------------------------------
+   Asserted twice is still asserted once.  A clone, a COSMETIC
+   commit -- a comment line -- to each path a spendable site derives
+   from, and every such site's answer re-resolved before and after.
+
+   A site called FROZEN must give the same revision across that commit.
+   A site called MOVING must give a different one.  A site that
+   contradicts its label is a defect in THIS instrument and is reported
+   as one.
+
+   sites that can be re-resolved from outside : 4 of 19
+
+   site                                                  label    moved?   verdict
+   code/audit_2c77/q4_prerepair.py:193                   FROZEN   no       agrees
+   code/face_geometry_audit_c4c8/h4_declared_unit.py:271 moving   yes      agrees
+   code/face_geometry_instr_5f9a/d2_deletion.py:1349     moving   yes      agrees
+   code/runner_exit_audit_56dc/t1_grain.py:186           moving   yes      agrees
+
+   sites contradicting their label : 0
+   NON-VACUITY -- distinct outcomes observed : 2
+--------------------------------------------------------------------------
+(v) PIN-AND-COMPARE -- ANCHORS.tsv, RE-RESOLVED
+--------------------------------------------------------------------------
+   The brief: convert the history-derived sites to property-derived,
+   or pin-and-compare each, and report converted-count against the
+   population.
+
+   CONVERTED TO PROPERTY-DERIVED: 0, and that is written as 0 rather
+   than replaced by a count of some other treatment.  Every one of
+   these sites lives in another ticket's directory, most of them carry
+   committed transcripts that a signature change would invalidate, and
+   rewriting another ticket's instrument to make this ticket's number
+   come out is the failure this arc exists to avoid.
+
+   So: PINNED AND COMPARED, in ONE file.  Drift in any of the
+   directories below becomes loud HERE.  A site whose path or revision
+   comes from a parameter has no revision to pin and is NOT in the
+   file -- it is counted and named below instead, because a population
+   that quietly drops what it cannot handle is the shape this whole
+   arc is about.
+
+   rows in ANCHORS.tsv : 4
+
+   site                                                  pinned     re-resolved
+   code/audit_2c77/q4_prerepair.py:193                   4755d029   4755d029
+   code/face_geometry_audit_c4c8/h4_declared_unit.py:271 d01ff32d   d01ff32d
+   code/face_geometry_instr_5f9a/d2_deletion.py:1349     d01ff32d   d01ff32d
+   code/runner_exit_audit_56dc/t1_grain.py:186           973ca612   973ca612
+
+   OLDEST rows in the treated population : 0
+   -- OLDEST is stable against later edits and is NOT the defect.
+   Absorbing it would inflate this repair's population, which is
+   the mistake mg-330a named and declined to make.
+
+   CONVERTED TO PROPERTY-DERIVED : 0 of 19
+   PINNED AND COMPARED           : 4 of 19
+   NOT PINNABLE, AND WHY -- named, not dropped:
+      code/audit_330a/lib330a.py:180                        its path is a parameter
+      code/audit_330a/lib330a.py:188                        its path is a parameter
+      code/branching_audit_957f/lib957f.py:141              its path is a parameter
+      code/branching_audit_e34a/libe34a.py:137              its path is a parameter
+      code/branching_audit_e34a/libe34a.py:424              its path is a parameter
+      code/branching_repair_76cc/lib76cc.py:177             its path is a parameter
+      code/branching_repair_7e58/k2_selfprov.py:222         this instrument could not resolve its path
+      code/face_geometry_audit_eaef/e5_floor.py:73          its path is a parameter
+      code/hodge_leverage_audit_97fb/audit_97fb.py:1080     its path is a parameter
+      code/publication_anchor_132a/anchor_132a.py:344       its path is a parameter
+      code/publication_anchor_132a/anchor_132a.py:749       its revision comes from a parameter
+      code/publication_anchor_132a/anchor_132a.py:751       its revision comes from a parameter
+      code/repair_8d5e/lib8d5e.py:139                       its path is a parameter
+      code/repair_8d5e/lib8d5e.py:153                       its path is a parameter
+      code/repair_8d5e/lib8d5e.py:167                       it restricts no path at all
+--------------------------------------------------------------------------
+PREDICTIONS SCORED
+--------------------------------------------------------------------------
+   Every row scored against PREDICTIONS.md, committed before any
+   script of this instrument existed.  Misses are printed and kept.
+
+   P-2a   predicted True                         measured False            *** MISS  <- kept as written
+          -- the row says `reproduces EXACTLY at ea97d0a`.  It does not.
+             It reproduces exactly at b94cb1e, that commit's PRE-REBASE twin.
+             So the figures are DISPLACED and not wrong, which is the
+             sentence P-2 reserved for this outcome -- but the row as
+             WRITTEN named the wrong commit and is scored a MISS.
+   P-2b   predicted True                         measured False            *** MISS  <- kept as written
+          -- also a miss, and for the same reason.  The REASON given for it
+             holds: no revision-anchor call site was added between the
+             two commits.  b94cb1e and 0ef9af9 measure identically, ea97d0a and fba5f63
+             measure identically.  The prediction was right about the
+             repo and wrong about which tree the commits carry.
+   P-2c   predicted True                         measured True             HIT
+          -- the two named in advance were `OLDEST 10` and the 16 helper CALL
+             sites.  Both are in the list above, and `ALL 36` is a third.
+   P-2d   predicted True                         measured False            *** MISS  <- kept as written
+          -- the row's FIRST half holds: the doc's 13 does reproduce
+             somewhere.  Its MECHANISM is refuted.  At the pre-rebase
+             commit history-derived-alone and history-union-helpers are
+             BOTH 12; at the worktree both are 13.  The two readings never
+             differ, so they cannot be what separates 12 from 13.  The 13
+             is the POST-rebase directory count printed beside a PRE-rebase
+             site count -- which is the same displacement again, inside one
+             sentence.  Scored on the mechanism: MISS.
+   P-3a   predicted 2 to 4                       measured 1                *** MISS  <- kept as written
+   P-3b   predicted 8 to 12                      measured 11               HIT
+   P-3c   predicted fewer than 6                 measured 5                HIT
+   P-3d   predicted 0                            measured 0                HIT
+   P-4a   predicted 0                            measured 0                HIT
+   P-4b   predicted 6 to 10                      measured 4                *** MISS  <- kept as written
+   P-4c   predicted 1                            measured 1                HIT
+   P-4d   predicted 0                            measured 0                HIT
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+   THE POPULATION IS NOT 16 AND IT IS NOT 19.  It is 16 at the tree
+   mg-330a swept and 19 at the tree their commit now sits in, and the
+   difference is a rebase rather than a mistake.  The number that IS
+   wrong is the document's, in three places, and one of those three --
+   `16 call sites of the two named helpers` -- is a DEF count and a
+   CALL count added together and reported under the CALL label.
+
+   That is F-2's defect, one word over two populations, committed
+   inside the census that names F-2.  Seventh consecutive deliverable
+   to carry its own defect class.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: every clone, sweep, parse and git read this script performs, plus the requirement that each figure attributed to a published source really appear in that source
+FINDINGS: 5, population: the 7 figures the mg-330a document states and the 7 its transcript states, each checked for reproduction at four commits, plus every history-derived site's refinement checked by construction and every ANCHORS.tsv row re-resolved
+   FINDING: mg-330a's transcript code/audit_330a/out_s1_anchors.txt reproduces EXACTLY at b94cb1e -- its pre-rebase twin -- and at neither of the commits it now sits behind on main.  The figures are not wrong: they are DISPLACED, in mg-132a's word.  The refinery rebased the branch, and the tree the sweep ran against is not the tree inside the commit that carries its output.  Between the two, mg-132a's own publication_anchor_132a/ landed -- three history-derived sites in one file -- and hodge_leverage_repair_3f3b/repair_7e39.py lost the one it had, which is why the census moves by four sites and the named list moves by five
+   FINDING: the doc states ALL call sites = 36, and that figure reproduces at NO commit measured here -- not at either of the two it was published at, not at their pre-rebase twins, and not at the worktree.  It is not displaced; it does not correspond to a sweep of this repository at any of those trees
+   FINDING: the doc states OLDEST = 10, and that figure reproduces at NO commit measured here -- not at either of the two it was published at, not at their pre-rebase twins, and not at the worktree.  It is not displaced; it does not correspond to a sweep of this repository at any of those trees
+   FINDING: the doc states helper CALL sites = 16, and that figure reproduces at NO commit measured here -- not at either of the two it was published at, not at their pre-rebase twins, and not at the worktree.  It is not displaced; it does not correspond to a sweep of this repository at any of those trees
+   FINDING: the document's sentence `16 history-derived call sites across 13 directories` has no single tree behind it: 16 is the pre-rebase figure (12 directories there) and 13 is the post-rebase figure (19 history-derived sites there).  Each half is right about a different tree, which is why neither reading catches it
+TOTAL BAD: 5
