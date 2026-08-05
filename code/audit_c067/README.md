@@ -21,9 +21,9 @@ asserting it).
 >   at `6e15a1a`, the pre-rebase branch tip, which is **not an ancestor of `main`** — and they were
 >   written *before* the `c2_anchors.py` edit rescued alongside them, so they were already a record
 >   of a run of a different script. **Every `out_*.txt` here was produced by mg-c3a2's own
->   `sh run_all.sh` at `a053d74`**, aggregate exit `0`.
+>   `sh run_all.sh` at `de39eb6`**, aggregate exit `0`.
 > - **Re-running moved real numbers**, which is why the rescued ones could not simply be committed
->   either: the population is **528** `.py` files at `a053d74` against 510 at `6e15a1a`, and `C2b'`
+>   either: the population is **528** `.py` files at `de39eb6` against 510 at `6e15a1a`, and `C2b'`
 >   reads **8 of 8 anchors unreachable** against 2 of 8, because the merge displaced this audit's own
 >   six anchors along with the parent's.
 >
@@ -40,6 +40,12 @@ asserting it).
 >
 > The re-run also surfaced defect **#5**, which had been invisible at every commit the original run
 > measured.
+>
+> **Reproducing them:** `sh run_all.sh --at de39eb6`. The six transcripts are measured at `de39eb6`,
+> the commit that lands the two rescued files; this README was finalised in the commit that lands the
+> transcripts, one later — so where `C5d` quotes this file it quotes the line as it stood at
+> `de39eb6`, and the figures in this box and in `C3c`/`C5d` below are labelled with the commit they
+> were measured at rather than with the commit that carries them.
 
 ## Verdict: **the repair holds.** Its own transcript is stale in its predecessor's exact shape, 2 of 2 — and that is the decision working, not the defect recurring.
 
@@ -87,8 +93,8 @@ it **does**.
 > Under (2) **the publication step names its own examiner.**
 
 **That transfer of authority is the real price of the decision, and it is unnamed** in a deliverable
-otherwise careful to price itself. `C3c` measures the room: **191 distinct populations over the 460
-commits in this object store at `a053d74`**, and a figure only has to have been true **once,
+otherwise careful to price itself. `C3c` measures the room: **191 distinct populations over the 463
+commits in this object store at `de39eb6`**, and a figure only has to have been true **once,
 anywhere** for a declared anchor to certify it forever.
 
 **And the obvious repair does not work** (`C3d`) — requiring the anchor to be an ancestor of the
@@ -165,7 +171,7 @@ repaired file carries the vocabulary 5 of 5 (`C5c`), including the rule **import
 `anchor_132a` rather than copied.
 
 `C5d` sweeps the old word: **233 occurrences of `stale` across 657 committed `.py`/`.md` files at
-`a053d74`**, 20 qualified by a nearby word naming which defect is meant, 213 bare. The new word was
+`de39eb6`**, 20 qualified by a nearby word naming which defect is meant, 213 bare. The new word was
 **not** retrofitted, and that is correct — a deliverable that rewrote 213 sites would have made its
 own transcript unreviewable.
 

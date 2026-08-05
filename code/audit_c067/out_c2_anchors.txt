@@ -1,9 +1,9 @@
 ==============================================================================
 mg-c067 -- INDEPENDENT AUDIT of the mg-132a publication-anchor repair
 ==============================================================================
-    audited as of            : 378cf011b463
-    510 .py files under `code/` in the tree at that rev
-    POPULATION ANCHOR: commit=378cf011b46399fc5b15883704e96478e2392da5 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
+    audited as of            : de39eb6d7301
+    528 .py files under `code/` in the tree at that rev
+    POPULATION ANCHOR: commit=de39eb6d730154b98d1fd5cf73229a09ad2bfd2e count=528 digest=cc4552964fdc96c3 scope=code/**/*.py
 
 ⚠️  THIS TRANSCRIPT IS A MEASUREMENT AT THE COMMIT ABOVE, NOT A LIVE PROPERTY OF
     THE REPOSITORY.  It was written by a run, and the step that displaces it is
@@ -33,12 +33,12 @@ another transcript's figure inside a finding that says that figure is stale.
 Counting it would have been the same error -- a bare total whose membership
 nobody checked -- committed by the audit that came to report it.
 
-    4611510  LIVE       code/audit_c067/out_c1_rebase.txt
-    4611510  LIVE       code/audit_c067/out_c2_anchors.txt
-    4611510  LIVE       code/audit_c067/out_c3_shopping.txt
-    4611510  LIVE       code/audit_c067/out_c4_independence.txt
-    4611510  LIVE       code/audit_c067/out_c5_vocab.txt
-    4611510  LIVE       code/audit_c067/out_selftest_c067.txt
+      510  LIVE       code/audit_c067/out_c1_rebase.txt
+      510  LIVE       code/audit_c067/out_c2_anchors.txt
+      510  LIVE       code/audit_c067/out_c3_shopping.txt
+      510  LIVE       code/audit_c067/out_c4_independence.txt
+      510  LIVE       code/audit_c067/out_c5_vocab.txt
+      510  LIVE       code/audit_c067/out_selftest_c067.txt
       429  QUOTED     code/hodge_leverage_audit_7e39/out_audit_7e39.txt
       448  LIVE       code/hodge_leverage_audit_97fb/out_audit_97fb.txt
       495  LIVE       code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt  [in parent's COMPUTED]
@@ -48,10 +48,12 @@ nobody checked -- committed by the audit that came to report it.
     matched              : 11
     of those, QUOTED (exempt under this arc's own S4b) : 1  (out_audit_7e39.txt)
     LIVE published figures : 10
+    of those, POSTDATING the parent (1e30484) and so NOT chargeable : 6  (out_c1_rebase.txt, out_c2_anchors.txt, out_c3_shopping.txt, out_c4_independence.txt, out_c5_vocab.txt, out_selftest_c067.txt)
+    CHARGEABLE live publishers : 4
     parent's COMPUTED      : 3
-    live but NOT in COMPUTED : 7  (out_c1_rebase.txt, out_c2_anchors.txt, out_c3_shopping.txt, out_c4_independence.txt, out_c5_vocab.txt, out_selftest_c067.txt, out_audit_97fb.txt)
-  [MEASURED ] C2a THE PARENT'S `COMPUTED` IS A HAND LIST OF 3 AGAINST A TREE OF 10 LIVE PUBLISHERS: 11 committed file(s) under `code/` match the figure grammar at 378cf01, 1 of them inside a QUOTATION and exempt, leaving 10 that publish a `.py` population as a claim about a tree -- out_c1_rebase.txt, out_c2_anchors.txt, out_c3_shopping.txt, out_c4_independence.txt, out_c5_vocab.txt, out_selftest_c067.txt, out_audit_97fb.txt, out_repair_3f3b.txt, out_repair_6df0.txt, out_anchor_132a.txt.  7 of those are not in `COMPUTED`: out_c1_rebase.txt, out_c2_anchors.txt, out_c3_shopping.txt, out_c4_independence.txt, out_c5_vocab.txt, out_selftest_c067.txt, out_audit_97fb.txt
-  [FINDING  ] C2a' AND `A1a` REPORTS THE SCOPE LABEL AS THE KIND LABEL.  The source comment scopes `COMPUTED` honestly -- 'every place IN THIS ARC that publishes a `.py` population FOR THE SWEEP' -- but the row it feeds drops both qualifiers and reads 'of the 3 published transcript(s) that carry a `.py` population'.  ⚠️ A READER IS TOLD THE POPULATION IS 3 WHEN THE LIVE POPULATION IS 10.  The gap is small and the omitted file is real: out_c1_rebase.txt, out_c2_anchors.txt, out_c3_shopping.txt, out_c4_independence.txt, out_c5_vocab.txt, out_selftest_c067.txt, out_audit_97fb.txt.  This is the same shape mg-97fb found in the file this deliverable repairs (a hand list of 2 against a tree of 9) and the same shape fba5f63 recorded ('the scope label reported as the kind label')
+    chargeable but NOT in COMPUTED : 1  (out_audit_97fb.txt)
+  [MEASURED ] C2a THE PARENT'S `COMPUTED` IS A HAND LIST OF 3 AGAINST A TREE OF 4 CHARGEABLE LIVE PUBLISHERS: 11 committed file(s) under `code/` match the figure grammar at de39eb6, 1 inside a QUOTATION and exempt, 6 POSTDATING the parent's own last commit 1e30484 and therefore not chargeable to it -- ⚠️ ALL 6 OF THOSE ARE THIS AUDIT'S OWN TRANSCRIPTS, and counting them would have been a finding manufactured by the instrument's output landing in the population it sweeps.  That leaves 4 chargeable: out_audit_97fb.txt, out_repair_3f3b.txt, out_repair_6df0.txt, out_anchor_132a.txt.  1 of those are not in `COMPUTED`: out_audit_97fb.txt
+  [FINDING  ] C2a' AND `A1a` REPORTS THE SCOPE LABEL AS THE KIND LABEL.  The source comment scopes `COMPUTED` honestly -- 'every place IN THIS ARC that publishes a `.py` population FOR THE SWEEP' -- but the row it feeds drops both qualifiers and reads 'of the 3 published transcript(s) that carry a `.py` population'.  ⚠️ A READER IS TOLD THE POPULATION IS 3 WHEN THE CHARGEABLE LIVE POPULATION AT THE PARENT'S OWN COMMIT IS 4.  The gap is one file and it is real: out_audit_97fb.txt.  This is the same shape mg-97fb found in the file this deliverable repairs (a hand list of 2 against a tree of 9) and the same shape fba5f63 recorded ('the scope label reported as the kind label')
 
 C2a'' -- AND THE OMITTED FILE IS OMITTED FOR A REASON THE LATTICE CANNOT STATE
 ------------------------------------------------------------------------------
@@ -61,19 +63,6 @@ FIRST figure in it.  That is a model of a transcript as `one population, one
 tree` -- which is true of every file in `COMPUTED` and false of the file left
 out of it.
 
-    code/audit_c067/out_c1_rebase.txt
-        -> 0 population figure(s) at 0 distinct commit(s); the parent's model would check the first and only the first
-    code/audit_c067/out_c2_anchors.txt
-        803bd50  publishes 448   re-derives   [FINDING  ] C2a'' ⚠️ THE LATTICE IS ONE-FIGU
-        -> 1 population figure(s) at 1 distinct commit(s); the parent's model would check the first and only the first
-    code/audit_c067/out_c3_shopping.txt
-        -> 0 population figure(s) at 0 distinct commit(s); the parent's model would check the first and only the first
-    code/audit_c067/out_c4_independence.txt
-        -> 0 population figure(s) at 0 distinct commit(s); the parent's model would check the first and only the first
-    code/audit_c067/out_c5_vocab.txt
-        -> 0 population figure(s) at 0 distinct commit(s); the parent's model would check the first and only the first
-    code/audit_c067/out_selftest_c067.txt
-        -> 0 population figure(s) at 0 distinct commit(s); the parent's model would check the first and only the first
     code/hodge_leverage_audit_97fb/out_audit_97fb.txt
         803bd50  publishes 448   re-derives   803bd50  mg-6df0's parent :  7 live occurren
         77306a7  publishes 448   re-derives   77306a7  mg-6df0 landed   :  6 live occurren
@@ -83,7 +72,7 @@ out of it.
         803bd50  publishes 448   re-derives   [MEASURED ] C1e DERIVED vs HAND AS A COUNT O
         77306a7  publishes 448   re-derives   [MEASURED ] C1e DERIVED vs HAND AS A COUNT O
         -> 7 population figure(s) at 5 distinct commit(s); the parent's model would check the first and only the first
-  [FINDING  ] C2a'' ⚠️ THE LATTICE IS ONE-FIGURE-PER-FILE, AND THE OMITTED TRANSCRIPT PUBLISHES 7 AT 5 DIFFERENT COMMITS.  `out_audit_97fb.txt` states its populations INLINE -- '803bd50 mg-6df0's parent : ... over 448 `.py` files under `code/`' -- one anchor per ROW.  All 8 of 7 re-derive correctly against the commit named beside them, so the figures are SOUND; what is missing is any way for the parent's rule to say so.  `read_anchor()` returns a single anchor for a file and `POP_FIGURE.search()` takes the first figure, so under the parent's rule at most 1 of the 7 could ever be checked.  ⚠️ THIS IS WHY THE HAND LIST IS THE SYMPTOM AND NOT THE DEFECT: adding this file to `COMPUTED` would not check it, it would check one 7th of it.  The declared-anchor form is a FILE-level field for a claim this repository also makes at ROW level, and nothing in the deliverable says so
+  [FINDING  ] C2a'' ⚠️ THE LATTICE IS ONE-FIGURE-PER-FILE, AND THE OMITTED TRANSCRIPT PUBLISHES 7 AT 5 DIFFERENT COMMITS.  `out_audit_97fb.txt` states its populations INLINE -- '803bd50 mg-6df0's parent : ... over 448 `.py` files under `code/`' -- one anchor per ROW.  All 7 of 7 re-derive correctly against the commit named beside them, so the figures are SOUND; what is missing is any way for the parent's rule to say so.  `read_anchor()` returns a single anchor for a file and `POP_FIGURE.search()` takes the first figure, so under the parent's rule at most 1 of the 7 could ever be checked.  ⚠️ THIS IS WHY THE HAND LIST IS THE SYMPTOM AND NOT THE DEFECT: adding this file to `COMPUTED` would not check it, it would check one 7th of it.  The declared-anchor form is a FILE-level field for a claim this repository also makes at ROW level, and nothing in the deliverable says so
 
 C2b -- EVERY ANCHOR RESOLVED, AND ITS COUNT RE-DERIVED INDEPENDENTLY
 --------------------------------------------------------------------
@@ -94,19 +83,19 @@ never by asking the parent's `py_files_at()`.  A declared `count=` field is
 BELIEVED ABOUT NOTHING -- it is data to be refuted.
 
     transcript                         pub        fig anchor     decl  mine  reach verdict
-    out_c1_rebase.txt                  378cf01  4611510 806533b     510   510  YES   *** DISAGREES ***
-    out_c2_anchors.txt                 378cf01  4611510 806533b     510   510  YES   *** DISAGREES ***
-    out_c3_shopping.txt                378cf01  4611510 806533b     510   510  YES   *** DISAGREES ***
-    out_c4_independence.txt            378cf01  4611510 806533b     510   510  YES   *** DISAGREES ***
-    out_c5_vocab.txt                   378cf01  4611510 806533b     510   510  YES   *** DISAGREES ***
-    out_selftest_c067.txt              378cf01  4611510 806533b     510   510  YES   *** DISAGREES ***
+    out_c1_rebase.txt                  4ad011a    510 378cf01     510   510  NO    tree yields the figure
+    out_c2_anchors.txt                 4ad011a    510 378cf01     510   510  NO    tree yields the figure
+    out_c3_shopping.txt                4ad011a    510 378cf01     510   510  NO    tree yields the figure
+    out_c4_independence.txt            4ad011a    510 378cf01     510   510  NO    tree yields the figure
+    out_c5_vocab.txt                   4ad011a    510 378cf01     510   510  NO    tree yields the figure
+    out_selftest_c067.txt              4ad011a    510 378cf01     510   510  NO    tree yields the figure
     out_audit_7e39.txt                 dde93c5    429 (none declared)
     out_audit_97fb.txt                 120ff66    448 (none declared)
     out_repair_3f3b.txt                cb9f282    495 7dc9180     495   495  NO    tree yields the figure
     out_repair_6df0.txt                3958b5a    473 (none declared)
     out_anchor_132a.txt                1e30484    495 4a06b4c     495   495  NO    tree yields the figure
-  [REFUTED  ] C2b of the 8 DECLARED anchor(s) in the tree at 378cf01 (out_c1_rebase.txt, out_c2_anchors.txt, out_c3_shopping.txt, out_c4_independence.txt, out_c5_vocab.txt, out_selftest_c067.txt, out_repair_3f3b.txt, out_anchor_132a.txt), 2 name a commit whose tree ACTUALLY YIELDS the figure the transcript publishes, re-derived here by an independent walk.  ⚠️ THIS IS THE ROW THAT DECIDES WHETHER ANSWER (2) IS A CHECK OR A NOTE.  A recorded provenance nobody re-derives is an unfalsifiable assertion in a file; every one of these was resolved and counted, and the declared `count=` field was used as the thing to be refuted rather than as the answer
-  [MEASURED ] C2b' and 2 of the 8 anchor(s) are UNREACHABLE from 378cf01: out_repair_3f3b.txt -> 7dc9180; out_anchor_132a.txt -> 4a06b4c.  Each survives only on a side ref -- 7dc9180: origin/polecat-132a; 4a06b4c: origin/polecat-132a
+  [CONFIRMED] C2b of the 8 DECLARED anchor(s) in the tree at de39eb6 (out_c1_rebase.txt, out_c2_anchors.txt, out_c3_shopping.txt, out_c4_independence.txt, out_c5_vocab.txt, out_selftest_c067.txt, out_repair_3f3b.txt, out_anchor_132a.txt), 8 name a commit whose tree ACTUALLY YIELDS the figure the transcript publishes, re-derived here by an independent walk.  ⚠️ THIS IS THE ROW THAT DECIDES WHETHER ANSWER (2) IS A CHECK OR A NOTE.  A recorded provenance nobody re-derives is an unfalsifiable assertion in a file; every one of these was resolved and counted, and the declared `count=` field was used as the thing to be refuted rather than as the answer
+  [MEASURED ] C2b' and 8 of the 8 anchor(s) are UNREACHABLE from de39eb6: out_c1_rebase.txt -> 378cf01; out_c2_anchors.txt -> 378cf01; out_c3_shopping.txt -> 378cf01; out_c4_independence.txt -> 378cf01; out_c5_vocab.txt -> 378cf01; out_selftest_c067.txt -> 378cf01; out_repair_3f3b.txt -> 7dc9180; out_anchor_132a.txt -> 4a06b4c.  Each survives only on a side ref -- 3 distinct commit(s), all named: 378cf01: polecat-c067,origin/polecat-c067; 7dc9180: origin/polecat-132a; 4a06b4c: origin/polecat-132a
 
 C2c -- MY CHOSEN TARGET: DOES THE ADVERTISED REMEDY WORK ON THE REPAIR'S OWN FIGURE?
 ------------------------------------------------------------------------------------
@@ -133,16 +122,16 @@ disagree would be a finding; one digest compared with itself is a tautology.
         4a06b4c  refs: origin/polecat-132a
         89d6aa1  refs: origin/polecat-132a
         7dc9180  refs: origin/polecat-132a
-    of those, REACHABLE from 378cf01            : 0
-  [MEASURED ] C2c THE DIGEST RECOVERS THE PARENT'S OWN ANCHOR, AND RECOVERS IT ONLY TO COMMITS THAT ARE THEMSELVES OFF THE MAINLINE: 4 commit(s) in the object store hold the 495-file population that 4a06b4c was measured against, and 0 of them are reachable from 378cf01.  Every one is an mg-132a-era commit that the rebase moved aside
+    of those, REACHABLE from de39eb6            : 0
+  [MEASURED ] C2c THE DIGEST RECOVERS THE PARENT'S OWN ANCHOR, AND RECOVERS IT ONLY TO COMMITS THAT ARE THEMSELVES OFF THE MAINLINE: 4 commit(s) in the object store hold the 495-file population that 4a06b4c was measured against, and 0 of them are reachable from de39eb6.  Every one is an mg-132a-era commit that the rebase moved aside
   [FINDING  ] C2c' ⚠️ SO `A2d`'s CLAIM THAT `THE FIGURE SURVIVES ITS OWN ANCHOR` IS TRUE OF THE SYNTHETIC CASE AND NOT YET TRUE OF THE PARENT'S OWN.  Digest recovery searches `--all`, so it finds these 4 commits only while a ref still points at them -- and all 4 sit behind the same one, `polecat-132a`.  ⚠️ THE DIGEST AND THE DECLARED SHA THEREFORE SHARE A FAILURE MODE NOBODY NAMED: they are not two independent routes to the tree, they are two names for commits that one branch deletion removes together.  `A2i` measures exactly this exposure FOR THE LEGACY FIGURES and calls the digest the answer to it; the parent's own figure now has the digest AND the same exposure.  Delete `polecat-132a`, run `git gc`, and 495 becomes as uncheckable as 473 -- which is the outcome `A2d` is offered as preventing
 
 SUMMARY
 ------------------------------------------------------------------
     checks          : 7
-    confirmed       : 0
+    confirmed       : 1
     measured        : 3
     findings        : 3   (defects of the PARENT)
-    refuted         : 1   (controls of THIS instrument that failed)
+    refuted         : 0   (controls of THIS instrument that failed)
 
-    measured at     : 378cf011b463  -- re-run after any merge
+    measured at     : de39eb6d7301  -- re-run after any merge

@@ -1,9 +1,9 @@
 ==============================================================================
 mg-c067 -- INDEPENDENT AUDIT of the mg-132a publication-anchor repair
 ==============================================================================
-    audited as of            : 378cf011b463
-    510 .py files under `code/` in the tree at that rev
-    POPULATION ANCHOR: commit=378cf011b46399fc5b15883704e96478e2392da5 count=510 digest=e4a2b67e384fd20d scope=code/**/*.py
+    audited as of            : de39eb6d7301
+    528 .py files under `code/` in the tree at that rev
+    POPULATION ANCHOR: commit=de39eb6d730154b98d1fd5cf73229a09ad2bfd2e count=528 digest=cc4552964fdc96c3 scope=code/**/*.py
 
 ⚠️  THIS TRANSCRIPT IS A MEASUREMENT AT THE COMMIT ABOVE, NOT A LIVE PROPERTY OF
     THE REPOSITORY.  It was written by a run, and the step that displaces it is
@@ -43,13 +43,13 @@ predictions are WRONG and are kept as written.
 
     --at 4a06b4c  predicted exit 0   observed exit 0   as predicted
         the rev the transcript was committed at (pre-rebase)
-    --at 378cf01  predicted exit 1   observed exit 0   *** MISS ***
+    --at de39eb6  predicted exit 1   observed exit 0   *** MISS ***
         the audited rev, AFTER the rebase
     --at 1e30484  predicted exit 1   observed exit 0   *** MISS ***
         the commit that publishes its own transcript AFTER the merge
     --at cb9f282  predicted exit 1   observed exit 0   *** MISS ***
         the post-merge publishing commit of out_repair_3f3b.txt
-  [MEASURED ] C1b 3 of the 4 predicted exit code(s) MISSED: 378cf01, 1e30484, cb9f282.  ⚠️ THE PREDICTION WAS THAT `A3a` WOULD GO RED, on the reasoning that the committed transcript asserts its own verdict is `AGREES` in so many words.  It does not: `A3a` reports WHICHEVER verdict fires and is green while that verdict is green, and `DISPLACED` is green by the parent's own decision.  The row was built to survive exactly this and it did.  Kept as written because a prediction quietly corrected after the fact is not a prediction
+  [MEASURED ] C1b 3 of the 4 predicted exit code(s) MISSED: de39eb6, 1e30484, cb9f282.  ⚠️ THE PREDICTION WAS THAT `A3a` WOULD GO RED, on the reasoning that the committed transcript asserts its own verdict is `AGREES` in so many words.  It does not: `A3a` reports WHICHEVER verdict fires and is green while that verdict is green, and `DISPLACED` is green by the parent's own decision.  The row was built to survive exactly this and it did.  Kept as written because a prediction quietly corrected after the fact is not a prediction
 
 C1c -- THE SECOND QUESTION: DOES THE REPAIR'S OWN TRANSCRIPT SURVIVE ITS OWN RULE?
 ----------------------------------------------------------------------------------
@@ -62,19 +62,19 @@ INSTRUMENT says when re-run at the audited rev.
     its own verdict (A3a)          committed: AGREES  (anchor DECLARED) re-run: DISPLACED  (anchor DECLARED)  <-- MOVED
     figures DISPLACED (A1c)        committed: A1c 1          re-run: A1c 3           <-- MOVED
     anchors NOT REACHABLE (A1d)    committed: A1d 1          re-run: A1d 3           <-- MOVED
-  [MEASURED ] C1c THE COMMITTED TRANSCRIPT IS STALE IN ITS PREDECESSOR'S EXACT SHAPE, 2 OF 2: of the 2 transcript(s) it records as `AGREES` (out_anchor_132a.txt, out_repair_3f3b.txt), 2 read `DISPLACED` when the same instrument is re-run at 378cf01.  Its A1c says 1 displaced where the live answer is 3, and its A1d says 1 unreachable anchor where the live answer is 3
-  [CONFIRMED] C1c' ⚠️ AND THE DIFFERENCE THAT MATTERS: NO GATE FLIPPED.  The re-run at 378cf01 exits 0 with 0 refuted.  The predecessor's `0 STALE` was stale AND WRONG -- the figures it blessed were red under its own rule once the tree moved.  This transcript's rows are stale AND STILL CORRECT: every claim it makes is true of the commit it names, and the verdict the live run returns is green.  STALE-AND-RED and STALE-AND-GREEN are different failures and the second is the one answer (2) was chosen to produce.  Reporting them as one would be the same conflation the parent was filed to fix
+  [MEASURED ] C1c THE COMMITTED TRANSCRIPT IS STALE IN ITS PREDECESSOR'S EXACT SHAPE, 2 OF 2: of the 2 transcript(s) it records as `AGREES` (out_anchor_132a.txt, out_repair_3f3b.txt), 2 read `DISPLACED` when the same instrument is re-run at de39eb6.  Its A1c says 1 displaced where the live answer is 3, and its A1d says 1 unreachable anchor where the live answer is 3
+  [CONFIRMED] C1c' ⚠️ AND THE DIFFERENCE THAT MATTERS: NO GATE FLIPPED.  The re-run at de39eb6 exits 0 with 0 refuted.  The predecessor's `0 STALE` was stale AND WRONG -- the figures it blessed were red under its own rule once the tree moved.  This transcript's rows are stale AND STILL CORRECT: every claim it makes is true of the commit it names, and the verdict the live run returns is green.  STALE-AND-RED and STALE-AND-GREEN are different failures and the second is the one answer (2) was chosen to produce.  Reporting them as one would be the same conflation the parent was filed to fix
 
 C1d -- BUT NOBODY RAN IT
 ------------------------------------------------------------------
 
     the committed transcript declares its anchor as : 4a06b4cd000e
-    that commit is reachable from 378cf01          : NO
+    that commit is reachable from de39eb6          : NO
     the commit that publishes it now                : 1e304840524b
     `code/` .py population there                    : 496
     the figure it publishes                         : 495
 
-  [CONFIRMED] C1d THE PARENT'S `--at <rev>` IS THE WHOLE REMEDY IT OFFERS FOR THE MERGE, AND IT HAS NOT BEEN RUN ONCE SINCE THE MERGE THAT MADE IT NECESSARY.  The transcript at 378cf01 was written by a run at 4a06b4c, a commit that is not reachable from 378cf01.  ⚠️ THIS IS NOT A DEFECT OF THE INSTRUMENT -- the instrument returns the right answer the moment it is asked -- IT IS THE GAP `A3c` NAMES, OBSERVED HOLDING OPEN.  A remedy whose trigger is a human remembering is the same class of control as the one that failed
+  [CONFIRMED] C1d THE PARENT'S `--at <rev>` IS THE WHOLE REMEDY IT OFFERS FOR THE MERGE, AND IT HAS NOT BEEN RUN ONCE SINCE THE MERGE THAT MADE IT NECESSARY.  The transcript at de39eb6 was written by a run at 4a06b4c, a commit that is not reachable from de39eb6.  ⚠️ THIS IS NOT A DEFECT OF THE INSTRUMENT -- the instrument returns the right answer the moment it is asked -- IT IS THE GAP `A3c` NAMES, OBSERVED HOLDING OPEN.  A remedy whose trigger is a human remembering is the same class of control as the one that failed
 
 C1e -- AND `--at` IS EXERCISED HERE AT A REV THE PARENT NEVER CHOSE
 -------------------------------------------------------------------
@@ -96,4 +96,4 @@ SUMMARY
     findings        : 1   (defects of the PARENT)
     refuted         : 0   (controls of THIS instrument that failed)
 
-    measured at     : 378cf011b463  -- re-run after any merge
+    measured at     : de39eb6d7301  -- re-run after any merge
