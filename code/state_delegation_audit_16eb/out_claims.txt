@@ -1,0 +1,145 @@
+================================================================================================
+mg-16eb — THE CLAIMS mg-0049 ADDED, CHECKED.  Scope: the 9ca11c4 + 5594c69 diff.
+================================================================================================
+  six verdicts REPAIRED by mg-0120 (they were literals); renderers present
+  constructions run in a throwaway git worktree; this checkout is never written to
+================================================================================================
+
+1. delta_control.py's HEADER AND TABLE COMMENTS — the file no checker in this
+   repository can check, because every checker reads it as the ground truth.
+
+  [holds] delta_control.py:233
+           the guards-only decomposition lives in `code/state_delegation_repair_0049/split_0049.py`
+           os.path.exists -> True.  The script that does this is code/state_delegation_repair_0049/split_0049.py.
+           COVERAGE.md, code/state_delegation_repair_0049/README.md and code/state_landing_control_2da3/run_all.sh all name it
+           correctly; delta_control.py is the one document of the four that does not,
+           and it is the one no checker reads as a claim.
+  [holds] delta_control.py:233
+           that decomposition runs against "all nine rows"
+           mutations_0049.ROWS has 9 rows and split_0049.py runs all of them; COVERAGE.md says
+           "all nine rows" and README.md's table says 9.  delta_control.py says "nine", which is mg-5644's population, not this one's.
+  [holds] delta_control.py:757 (the DELEGATED_PRESENTATION comment)
+           "the two tables cannot drift apart quietly in EITHER direction"
+               D0  NO-OP — the same bytes, rewritten by the same code path        exit 0  QUIET — the control says nothing   ((this repair's own control))
+               D1  a PRESENTATION RECORD for a section nothing delegates or cites exit 2  caught   (here and in nothing else)
+               D2  a whole TARGET FILE certified here and delegated by nobody     exit 2  caught   (here and in nothing else)
+               D3  a delegated section's record DELETED (the direction it gets right) exit 2  caught   (in DELEGATED and absent here)
+               population: 3 constructed drifts (plus the no-op control), 2 of them in the direction the sentence is doubted on.
+               0 of 3 are QUIET.  The sentence says none of them can be.
+           (computed by mg-0120; at bd24efc the same code says BROKEN, which is what
+           battery16eb.py's A1/A2 reported and what this row used to state as a constant.)
+  [holds] delta_control.py:748 (the DELEGATED_PRESENTATION comment)
+           `position` "reads 'no block (the span opens on an ATX heading ...)' on every row"
+           population: all 5 delegated sections; 5 of 5 read that way.
+  [holds] delta_control.py:753
+           "Baselined by mg-0049 against the working tree at 8ce78fb"
+           all 5 records recomputed from 8ce78fb:docs/state-history/attempt-mg-276d.md and compared to the pinned table.
+           (8ce78fb is two commits before mg-0049's parent db2b77d; the target file is byte-identical
+           at 8ce78fb, db2b77d and HEAD, so the sentence is imprecise about the base and true about the bytes.)
+  [respec] delta_control.py:346 (the EXIT CODES table)
+           exit 1 is "a region ... NO LONGER PRESENTED TO A READER"; exit 2 is drift, "re-baseline this instrument"
+               the sentence this row is about is NOT IN THE FILE at this revision.
+               exit 1's bullet asserts the presentation property: False
+               exit 1's bullet DISCLAIMS it in as many words:    True
+               mg-a74f narrowed the bullet to the state-set predicate, so this row is
+               RESPECIFIED.  It has not become true; the claim it checked is gone, and
+               the successor sentence is a different claim needing a different check.
+
+2. presentation.py's HEADER — same file class, same absence of a checker.
+
+  [BROKEN] presentation.py:24
+           "NOTHING IN THIS FILE CHANGED EXCEPT ONE MESSAGE AND FOUR SELF-TEST CASES"
+               population: EXECUTABLE lines of presentation.py changed between db2b77d and 5594c69; every docstring removed from both sides first.
+               grain: one unparsed statement line.
+               changed lines: 25   message 2   self-test 21   OTHER 2
+                 + region_record          _d, _content = strip_quotes(doc.lines[first])
+                 + region_record          opens_on_heading = doc.state[first] == RENDERED and _d == 0 and (_ATX.match(_c
+               2 changed executable line(s) are NEITHER a message NOR a self-test case.  The sentence says there are none.
+           (the 11 certified presentation digests ARE byte-identical to db2b77d's and
+           delta_control.py does exit 0 on the clean tree — that is what this row used to
+           offer as its evidence, and it is a different claim from the one the row quotes.)
+
+3. COVERAGE.md — the ONE added document that has an external checker (coverage218d.py).
+
+  [holds] COVERAGE.md:276
+           "split_0049.py measures this over all nine rows"
+           mutations_0049.ROWS has 9 rows.
+  [holds] COVERAGE.md:276-278
+           the regime figure "8 of 9"
+           found in out_split.txt, which this audit reproduced byte-identically from its own run.
+  [holds] COVERAGE.md:276-278
+           the regime figure "4 of 9"
+           found in out_split.txt, which this audit reproduced byte-identically from its own run.
+  [holds] COVERAGE.md:276-278
+           the regime figure "2 of 9"
+           found in out_split.txt, which this audit reproduced byte-identically from its own run.
+  [holds] COVERAGE.md:243-244
+           the R1/R2 table: exit 0 against mg-bee1, exit 1 against mg-0049
+               population: the 2 rows of COVERAGE.md's Q/R table; grain: an (against-mg-bee1, against-mg-0049) exit-code pair.
+               the observed pairs come from code/state_delegation_audit_16eb/out_5644_rerun.txt — mg-5644's OWN battery, re-run unmodified.
+                 Q1  COVERAGE.md says (0, 1)   the transcript says (0, 1)   agree
+                 Q2  COVERAGE.md says (0, 1)   the transcript says (0, 1)   agree
+           (the re-run is byte-identical to the committed out_5644_rerun.txt; reproduce16eb.py
+           is what checks that, and this row joins on the transcript rather than re-running it.)
+
+4. THE mg-0049 README's 'What is NOT undone' TABLE — the table that answers the
+   over-correction question, so a wrong cross-reference in it is load-bearing.
+
+  [holds] code/state_delegation_repair_0049/README.md:105-106
+           mg-218d's and mg-5644's batteries are re-run in the section of run_all.sh the table names
+               population: the 2 README rows that assert a section number; grain: a section ordinal of code/state_delegation_repair_0049/run_all.sh.
+               the rows assert section(s): [8]
+               the section whose COMMAND re-runs mg-5644's battery: [8]
+               section 7 is in fact 'coverage218d.py — COVERAGE.md checked against the code, '
+               every asserted number is a section that really runs it: True
+           (at bd24efc the same code says BROKEN: both rows said 7 there.  mg-a74f corrected
+           them to 8, so what this row used to pin as a constant now moves with the tree.)
+  [holds] code/state_delegation_repair_0049/README.md:152
+           render0049.py: "100 comparisons"
+           found in out_render.txt, reproduced by this audit.
+  [holds] code/state_delegation_repair_0049/README.md:110
+           coverage218d.py: "40 of 40"
+           found in out_coverage218d.txt, reproduced by this audit.
+  [holds] code/state_delegation_repair_0049/README.md:23
+           mg-5644's renderers agreed "over 60 comparisons"
+           found in mg-5644's own committed out_render.txt, which this audit reproduced.
+
+5. render0049.py's OWN VERDICT — the repair's instrument for 'what a reader is
+   shown', on the one row where it is asked about a container.
+
+  [respec] code/state_delegation_repair_0049/render0049.py:11 and out_render.txt
+           R5: "`<details>` at the top SUPPRESSES NOTHING: every cited section is still on the page as the document's own prose" — 5/5 ANY, 5/5 HEADING, both renderers
+               the sentence this row is about is NOT ASSERTED at this revision.
+               R5 still contains the phrase `SUPPRESSES NOTHING`: True
+               R5 disclaims it (`until mg-a74f`):                 True
+               RESPECIFIED — the row was narrowed to the bytes-on-the-page property and
+               now says in as many words that a reader is shown none of them.
+
+================================================================================================
+POPULATION: the 17 rows printed above, one per checkable claim mg-0049
+ADDED.  GRAIN: one row.  THREE STATES, and they sum to the population:
+    14  hold against the tree
+     1  do not
+     2  RESPECIFIED — the sentence the row checks is no longer in the file
+
+BROKEN:
+    presentation.py:24
+        "NOTHING IN THIS FILE CHANGED EXCEPT ONE MESSAGE AND FOUR SELF-TEST CASES"
+
+RESPECIFIED — NOT a pass.  These rows checked a sentence that has since been
+rewritten; the successor sentence is a different claim and needs its own check:
+    delta_control.py:346 (the EXIT CODES table)
+        exit 1 is "a region ... NO LONGER PRESENTED TO A READER"; exit 2 is drift, "re-baseline this instrument"
+    code/state_delegation_repair_0049/render0049.py:11 and out_render.txt
+        R5: "`<details>` at the top SUPPRESSES NOTHING: every cited section is still on the page as the document's own prose" — 5/5 ANY, 5/5 HEADING, both renderers
+
+WHERE THE BROKEN ONES ARE.  0 of the 1 are in
+delta_control.py, the file coverage218d.py reads as the ground truth box and
+therefore cannot check.
+
+HOW MANY OF THESE VERDICTS ARE COMPUTED.  All 17.  Six were literals until
+mg-0120 (four `False`, two `True`); each of the six is now computed and each has
+been shown returning BOTH answers by code/state_claims_repair_0120/flip_0120.py.
+A seventh literal remains at line 72 and is meant to: it is a guard branch that
+fires only when the sentence its row is about has been deleted.
+================================================================================================

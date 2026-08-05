@@ -296,10 +296,18 @@ Four, all found by controls written for the purpose, all kept on the record.
    were pinned `True` and sat among the rows that held. It reported **5** where the answer is
    **7**. The repair is not a corrected formula; it is **running the program**.
 
-A fifth, in the prose rather than the code: `run_all.sh`'s section-5 banner asserted that the
-anchor would come out LIVE against `HEAD`. It does not — this branch descends from `main`, not
-from `polecat-a74f`. The banner now states what the run actually shows and says why it was
-wrong.
+Two more, in the prose rather than the code:
+
+5. **`run_all.sh`'s section-5 banner asserted that the anchor would come out LIVE against
+   `HEAD`.** It does not — this branch descends from `main`, not from `polecat-a74f`, so
+   `739f7bd` is displaced against both. The banner now states what the run actually shows.
+6. **The same banner then quoted exact HEAD figures, which the act of shipping them refutes.**
+   This repair's own transcripts contain hex tokens, so committing them *changes* the `HEAD`
+   population — the figures moved from 377/258 to 383/260 between drafting the sentence and
+   committing the file. The `main` figures are stable and are quoted; **no figure is quoted
+   for the `HEAD` run**, and `out_anchors0120_HEAD.txt` is named as the place to read it. A
+   number that is falsified by being published is the same defect as an anchor that is
+   falsified by being merged, one layer up.
 
 ---
 

@@ -1,0 +1,103 @@
+====================================================================================================
+mg-0120 — WHAT RESTS ON THE FOUR PINNED ROWS
+====================================================================================================
+
+1.  THE FIGURE, AND WHERE IT IS PUBLISHED.
+
+    POPULATION: every tracked .py/.md/.sh at main.
+    GRAIN of the first count: a FILE, counted once however many times it says it.
+    GRAIN of the second: one MATCHING LINE.
+    The patterns, printed so the parse can be checked:
+      \b(six|6)\b[^.\n]{0,40}\b(broken|BROKEN)\b[^.\n]{0,30}\bclaims?\b
+      \bclaims?\b[^.\n]{0,30}\b(six|6)\b[^.\n]{0,30}\b(broken|BROKEN)\b
+      \bthe\s+six\b[^.\n]{0,60}\b(claims?|rows?)\b
+      \b(six|6)\s+(of\s+(seventeen|17)|BROKEN)\b
+
+    files searched 917    files publishing the figure 15    matching lines 27
+
+    DEPENDS (an instrument or account of this arc): 8
+      code/state_delegation_repair_a74f/README.md:14
+        classify each, repair each by its class, and treat the six as a claim-generation problem
+      code/state_delegation_repair_a74f/claims_a74f.py:276
+        print("mg-a74f — THE SIX CLAIMS mg-16eb REFUTED, ONE ROW EACH, MEASURED AT BOTH ENDS")
+      code/state_delegation_repair_a74f/prose_a74f.py:5
+        PROBLEM, not six unrelated slips.  The population says where the problem is: 4 of the 6 brok
+      code/state_delegation_repair_a74f/run_all.sh:56
+        echo "### 6. claims_a74f.py — OPEN 2: the six, one row each, classified, and probed at"
+      code/state_visibility_audit_65eb/PREDICTIONS.md:82
+        ## 3. The six claims, re-classified from scratch
+      code/state_visibility_audit_65eb/README.md:89
+        ## 3. THE SIX CLAIMS — re-classified from scratch
+      code/state_visibility_audit_65eb/run_all.sh:62
+        echo "### 3. six65eb.py — the six claims re-classified FROM SCRATCH, each probed by resolvin
+      code/state_visibility_audit_65eb/six65eb.py:4
+        mg-16eb asked for the six broken claims to be enumerated INDIVIDUALLY and each classified
+
+    CITES (names the figure, outside the arc's own files): 7
+      code/branching_audit_321d/h4_mine.py:191
+        """Remove the six SET rows for beta = 2 from subsection (i) only."""
+      code/repair_69d1/p3_reason.py:154
+        any row rests on it -- otherwise the six rows below are six readings
+      code/semigroup_note_audit_66a6/audit_worked_example.py:350
+        check("the six-row eigenvalue table under w1/w2/w3", got_eigs, want_eigs)
+      code/species_extent_d633/README.md:31
+        | **A2** | `s2_seam.py` | two limits named, `MIN_CHARS = 300` omitted; it removed 6 of 17 bl
+      code/species_repair_a4ef/s2_seam.py:55
+        # comparison ALTOGETHER, and it removed 6 of 17 block quotes and 65 of 124
+      docs/OneThird-Audit-mg-7dd3-Extent-Repair.md:35
+        | **A2** | **BROKEN** *(same rule)* | `s2_seam.py`'s EXTENT paragraph names two limits — cro
+      docs/OneThird-Species-Hopf-Monoids-Repair-Extent-Measured.md:23
+        | **A2** | two limits named, `MIN_CHARS = 300` omitted — 6 of 17 block quotes and 65 of 124 
+
+2.  THE FIGURE RE-DERIVED AT mg-16eb's OWN REVISION, WITH THE SIX COMPUTED.
+
+    METHOD: a throwaway worktree at bd24efc, with the REPAIRED claims16eb.py and
+    verdicts0120.py copied in and every other row left exactly as mg-16eb wrote
+    it.  The program is RUN.  No figure here is arithmetic over another figure.
+
+    PUBLISHED, from mg-16eb's own committed out_claims.txt at bd24efc:
+      6 BROKEN of 17.  The rows:
+        delta_control.py:233
+        delta_control.py:233
+        delta_control.py:757 (the DELEGATED_PRESENTATION comment)
+        delta_control.py:346 (the EXIT CODES table)
+        code/state_delegation_repair_0049/README.md:105-106
+        code/state_delegation_repair_0049/render0049.py:11 and out_render.txt
+
+    RE-DERIVED, every verdict computed (exit 0):
+      10 hold, 7 BROKEN, 0 RESPECIFIED  (sum 17).  The rows:
+        delta_control.py:233
+        delta_control.py:233
+        delta_control.py:757 (the DELEGATED_PRESENTATION comment)
+        delta_control.py:346 (the EXIT CODES table)
+        presentation.py:24
+        code/state_delegation_repair_0049/README.md:105-106
+        code/state_delegation_repair_0049/render0049.py:11 and out_render.txt
+
+    PUBLISHED figure   6
+    RE-DERIVED figure  7   DISAGREE
+    BROKEN here and not there (1):
+      presentation.py:24
+
+3.  THE ANSWER.
+
+    YES — a conclusion rests on those rows, and it is the CARDINALITY SIX.
+
+    AND IT DOES NOT SURVIVE.  Run at bd24efc with every verdict computed,
+    mg-16eb's own program reports 7 BROKEN of 17, not 6.
+
+    THE MISSING ROW IS ONE OF THE TWO THAT WERE PINNED `True`, WHICH IS THE
+    SHAPE THE TICKET DOES NOT NAME.  Four literal `False`s cost this arc
+    nothing: they were pinned to the answer a measurement would have given.
+    A literal `True` is a row that CANNOT REPORT A PROBLEM, and it sits in the
+    numerator of the file's own headline count.  That is where the lost
+    finding went.
+
+    8 instrument(s) and account(s) of this arc publish the
+    figure, and every conclusion drawn from 'the six' is drawn from a
+    population that is missing a member.  What is NOT established here: that
+    any of those conclusions is wrong.  A repair classified by six rows is
+    not refuted by a seventh; it is INCOMPLETE, and the seventh row's claim
+    (presentation.py's header) has never been repaired by anyone.
+
+====================================================================================================

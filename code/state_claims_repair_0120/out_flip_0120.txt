@@ -1,0 +1,71 @@
+====================================================================================================
+mg-0120 — THE FLIP HARNESS.  Every repaired verdict shown returning the other answer.
+====================================================================================================
+  before revision   bd24efc  (mg-16eb's; the defect must still be present)
+  after revision    the working tree
+  renderers         marked + markdown-it present
+  constructions     applied in throwaway worktrees; the working tree is never
+                    opened for writing by this program
+
+1.  TIER 1 — HISTORY.  The same function at two real revisions.
+
+  claims16eb.py:94     bd24efc -> BROKEN       working tree -> holds        MOVED
+                       the two tables cannot drift apart quietly in EITHER direction
+  claims16eb.py:142    bd24efc -> BROKEN       working tree -> RESPECIFIED  MOVED
+                       exit 1 is "a region ... NO LONGER PRESENTED TO A READER"
+  claims16eb.py:156    bd24efc -> BROKEN       working tree -> BROKEN       same at both
+                       presentation.py: nothing changed except one message and four self-test cas
+  claims16eb.py:178    bd24efc -> holds        working tree -> holds        same at both
+                       COVERAGE.md's R1/R2 table: exit 0 against mg-bee1, exit 1 against mg-0049
+  claims16eb.py:194    bd24efc -> BROKEN       working tree -> holds        MOVED
+                       both batteries "re-run in section 7 of run_all.sh"
+  claims16eb.py:217    bd24efc -> BROKEN       working tree -> RESPECIFIED  MOVED
+                       R5: `<details>` at the top SUPPRESSES NOTHING
+
+2.  TIER 2 — CONSTRUCTION.  An input built here to reach a value the two
+    revisions above do not produce.
+
+  claims16eb.py:94     C3  both reverse-direction cross-checks made tautologies (`set(X) == set(X)`)
+                       reaching for BROKEN       got BROKEN       REACHED
+      two substitutions in delta_control.py, in a throwaway worktree; the checks still run
+    and still print — they can no longer fail
+  claims16eb.py:142    C4  at bd24efc with E1 neutralised and E2 opened (`<details open>`)
+                       reaching for holds        got holds        REACHED
+      the sentence is asserted at this revision and neither direction refutes it
+  claims16eb.py:156    C5  a constructed tip 369dd32: one message + four cases and nothing else
+                       reaching for holds        got holds        REACHED
+      the same function, the same base, a range built to satisfy the sentence
+  claims16eb.py:178    C6  one `got exit 1` -> `got exit 2` in mg-5644's re-run transcript
+                       reaching for BROKEN       got BROKEN       REACHED
+      the document is handed to the function as text; the file is not touched
+  claims16eb.py:194    C7  the README's asserted section moved 8 -> 7
+                       reaching for BROKEN       got BROKEN       REACHED
+      the document is handed to the function as text; the file is not touched
+  claims16eb.py:217    C8  at bd24efc with `<details open>` at the top of the target
+                       reaching for holds        got holds        REACHED
+      the sentence is asserted at this revision and the container suppresses nothing
+
+  6 of 6 constructions reached the value they were built to reach.
+
+3.  THE HARNESS'S OWN CONTROL.  Two stand-ins of the exact shape this repair
+    removed, put through the identical Tier-1 code path.
+
+  a verdict pinned to the literal False  bd24efc -> BROKEN       working tree -> BROKEN        reported NOT PROVEN CAPABLE OF BOTH ANSWERS
+  a verdict pinned to the literal True   bd24efc -> holds        working tree -> holds         reported NOT PROVEN CAPABLE OF BOTH ANSWERS
+  the harness rejects a pinned verdict: True
+
+====================================================================================================
+VERDICT.  A row is PROVEN only if both `holds` and `BROKEN` have been observed
+from it.  `RESPECIFIED` is a third value and does not substitute for either.
+====================================================================================================
+  [PROVEN] claims16eb.py:94     values observed: BROKEN, holds
+  [PROVEN] claims16eb.py:142    values observed: BROKEN, RESPECIFIED, holds
+  [PROVEN] claims16eb.py:156    values observed: BROKEN, holds
+  [PROVEN] claims16eb.py:178    values observed: BROKEN, holds
+  [PROVEN] claims16eb.py:194    values observed: BROKEN, holds
+  [PROVEN] claims16eb.py:217    values observed: BROKEN, RESPECIFIED, holds
+
+  6 of 6 repaired verdicts are proven capable of both answers.
+  population: the 6 `claim()` rows of claims16eb.py that carried a literal on the printed path.
+  grain: a verdict value returned by one function.
+====================================================================================================

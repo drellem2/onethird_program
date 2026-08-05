@@ -1,0 +1,192 @@
+====================================================================================================
+mg-0120 — THE ANCHORS, DIAGNOSED BY CONTENT.  Reference: main
+====================================================================================================
+  main is b1c3467
+  EXISTENCE IS NOT ANCESTRY, and ANCESTRY IS NOT INTEGRITY: a rebased branch
+  loses every sha it wrote while changing none of its content.
+====================================================================================================
+
+A.  patch-id index built over 287 commits reachable from main.
+
+B.  THE ANCHOR THAT CARRIES mg-a74f's OWN INTEGRITY CLAIM, DIAGNOSED.
+
+  the token as written in code/state_delegation_repair_a74f/README.md:  739f7bd
+  subject                                 predictions: mg-a74f's predictions for the repair of mg-16eb's three OPENs, COMMITTED BEFORE ANY
+
+  THE THREE IDIOMS, side by side.  The first two are the ones mg-a74f's own code
+  is written in (claims_a74f.py:57, prose_a74f.py:114).
+    git cat-file -e 739f7bd^{commit}                     exit 0   PASSES — and the property it tests is not the one claimed
+    git rev-parse --verify 739f7bd                       exit 0   PASSES — and the property it tests is not the one claimed
+    git merge-base --is-ancestor 739f7bd main            exit 1   FAILS — ancestry is the property, and it does not hold
+
+  LOST, OR DISPLACED?  Told apart by the DIFF, not by the label.
+    git patch-id --stable  of 739f7bd   17a7bca3c7be2fc4f9ab736294b06230a11c5cc0
+    git patch-id --stable  of cfd2af5   17a7bca3c7be2fc4f9ab736294b06230a11c5cc0   IDENTICAL
+    is cfd2af5 an ancestor of main?          yes
+    trees                  fd6b2f46e401  vs  1dbf04714ec2   (differ — a rebase rewrites the tree's parentage)
+    parents                bd24efc9fdb3  vs  b469d6791aaf   (differ — which is what a rebase IS)
+
+  VERDICT: ANCHOR-DISPLACED.  The change is on main as cfd2af5.  The property was
+  never violated and the pointer rotted, so the repair is to re-point the
+  anchor, NOT to re-derive the claim.  These two look identical to
+  `--is-ancestor` and they are not the same defect.
+
+C.  WHY THE TWIN IS IDENTIFIED BY patch-id AND NOT BY SUBJECT — CONSTRUCTED.
+
+    the REAL predictions commit, on its branch   bed30b8
+    the SAME change, landed on main              4b3d5bd   (the displacement the refinery performs)
+    an IMPOSTOR: same subject, different content f7045b1  landed as 303337a
+
+    patch-id  real     1c0128ce3f130cb0aebe5c01f5d4ca4159bb6cc6
+    patch-id  rebased  1c0128ce3f130cb0aebe5c01f5d4ca4159bb6cc6   IDENTICAL to real
+    patch-id  impostor caa2282236bca743576deec5eceb73255cf95219   DIFFERS from real
+
+    the SUBJECT rule (anchor65eb.py:twin_of) picks   303337a   THE IMPOSTOR — the wrong commit
+    the PATCH-ID rule (this file) picks              4b3d5bd   the rebased twin
+
+    The impostor lands on main AFTER the twin, so it is nearer the tip and the
+    subject search reaches it first.  Nothing here is exotic: two commits in
+    this repository's own idiom, sharing a formulaic subject.  57 tokens in
+    section D are displaced by exactly the mechanism modelled here.
+    subject rule correct: False    patch-id rule correct: True
+
+    THE CONTROL PASSES ONLY IF patch-id IS RIGHT AND SUBJECT IS WRONG.  If
+    both were right this section would show nothing, and this file exits
+    non-zero rather than printing a green line it has not earned.
+
+D.  EVERY ANCHOR IN THE REPOSITORY, CLASSIFIED AGAINST main.
+
+    POPULATION: 1404 tracked .py/.md/.sh/.txt files at main.
+    GRAIN of the first count: a DISTINCT hex token.  GRAIN of the second: one
+    OCCURRENCE of a token in a line of a file.  They are different numbers and
+    both are printed, because a token named 60 times and a token named once are
+    one row each in the first and 61 in the second.
+    distinct tokens 373    occurrences 5740
+
+    ANCHOR-LIVE        256 tokens   5212 occurrences
+    ANCHOR-DISPLACED    57 tokens    390 occurrences
+    ANCHOR-STALE         0 tokens      0 occurrences
+    ANCHOR-DEAD          0 tokens      0 occurrences
+    NOT-A-REVISION      60 tokens    138 occurrences
+
+    ANCHOR-DISPLACED:
+      064c79c        1x  twin 7a35eac   first named at code/face_geometry_audit_fcb2/README.md:18
+                        predictions: mg-fcb2's predictions for the independent audit of the mg-e35b control-batt
+      07d80ee        1x  twin af432ee   first named at code/species_sites_821e/out_a2_6cb9_after.txt:70
+                        docs+repair: ALL THREE OPEN ITEMS CLOSED AT THEIR OWN GRAIN — the walks recurse so "ever
+      09785ec        2x  twin 4ede6ef   first named at code/species_bound_audit_6ef4/out_t3_census.txt:84
+                        docs+audit: independent audit of the mg-5040 repair (3c8f535) — IT SUBTRACTED, AND THE S
+      0aa5b9a        3x  twin 5c16f5c   first named at code/species_bound_audit_6ef4/out_t3_census.txt:86
+                        docs+audit: independent audit of the mg-821e repair (af432ee + b534db7 + 41ac5d4) — ALL 
+      0df8ec7        1x  twin 1f54bf9   first named at code/audit_c067/README.md:7
+                        predictions: mg-c067's predictions for the independent audit of the mg-132a publishing-c
+      0ef9af9       22x  twin fba5f63   first named at code/repair_b2af/README.md:30
+                        docs+audit: independent audit of the mg-8d5e anchor-and-term repair — THE TWO SITES ARE 
+      170094f        6x  twin 410ae05   first named at code/branching_audit_19ec/README.md:26
+                        predictions: mg-19ec's predictions, committed BEFORE any probe runs — nine exit codes, t
+      1d1d5b1        1x  twin 979df72   first named at code/hodge_leverage_repair_3f3b/PREDICTIONS.md:145
+                        probe: mg-3f3b's instrument and its predictions, COMMITTED BEFORE ANY REPAIR (mg-3f3b)
+      1d2a8a19       4x  twin 14c6c3b   first named at code/repair_b2af/README.md:255
+                        repair+instrument: mg-330a's CENSUS IS DISPLACED BY A REBASE AND ITS DOCUMENT IS NOT — t
+      20a0e17        2x  twin fb74013   first named at code/audit_2c77/README.md:202
+                        predictions: mg-2c77's predictions, committed BEFORE any probe runs (mg-2c77)
+      20a0e17a       3x  twin fb74013   first named at code/audit_2c77/out_q4_prerepair.txt:5
+                        predictions: mg-2c77's predictions, committed BEFORE any probe runs (mg-2c77)
+      2cfd226        5x  twin 1e30484   first named at code/audit_c067/PREDICTIONS.md:15
+                        evidence+observations: mg-132a's transcript regenerated by its own publication step at t
+      2e48b67        3x  twin 9584cd1   first named at code/species_extent_d633/out_e2_crosssection.txt:125
+                        predictions: mg-4adb's predictions, committed BEFORE any probe runs (mg-4adb)
+      378cf01       23x  twin 2e6487c   first named at code/audit_c067/README.md:31
+                        docs+fix: mg-c067's README and the ref-resolution fix — the pre-rebase branch was DELETE
+      378cf011b463   2x  twin 2e6487c   first named at code/audit_c067/README.md:209
+                        docs+fix: mg-c067's README and the ref-resolution fix — the pre-rebase branch was DELETE
+      3d7b32f       10x  twin bd6eaec   first named at code/audit_c067/PREDICTIONS.md:16
+                        evidence: the committed transcript of the mg-3f3b suite — 22 checks, 0 refuted, exit 0, 
+      3d7b32fdd240   5x  twin bd6eaec   first named at code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt:164
+                        evidence: the committed transcript of the mg-3f3b suite — 22 checks, 0 refuted, exit 0, 
+      42f48ca        4x  twin 3c8f535   first named at code/species_bound_audit_6ef4/PREDICTIONS.md:76
+                        docs+repair: THE WALK NOW NAMES WHAT IT DECLINED, so 'every regular file' stops being tr
+      43d437c        3x  twin 41ac5d4   first named at code/species_bound_audit_6ef4/out_t3_census.txt:83
+                        control+repair: PIN THE PRE-REPAIR REF AND STOP `tee` SWALLOWING A RED SELF-TEST — two c
+      4a06b4c       20x  twin a91cf9e   first named at code/audit_c067/PREDICTIONS.md:15
+                        evidence: mg-132a's transcript — 18 checks, 0 refuted, exit 0; each rung of the lattice 
+      4a06b4cd000e  10x  twin a91cf9e   first named at code/audit_c067/out_c1_rebase.txt:71
+                        evidence: mg-132a's transcript — 18 checks, 0 refuted, exit 0; each rung of the lattice 
+      53091324651d   2x  twin 9237de0   first named at code/hodge_leverage_audit_97fb/out_audit_97fb.txt:33
+                        predictions: mg-97fb's predictions for the independent audit of the mg-3f3b n/a-and-voca
+      53d86a0        1x  twin 5f542f0   first named at docs/roadmap.md:311
+                        control+repair: THE GAUGE STANDARD IS ASKED OF THE ROWS KEPT AND THE DICHOTOMY IS COMPLE
+      5a4a745        1x  twin 4b5891d   first named at code/face_geometry_audit_6653/out_verify_claims.txt:31
+                        docs: independent audit of mg-a2bd (the G-double-prime strike) — OVERSTATED; 0 BROKEN ma
+      5e84e2f        1x  twin f6756c0   first named at code/face_geometry_audit_6653/out_verify_claims.txt:31
+                        docs: land the mg-86a3 audit repairs in the mg-a3d4 deliverable — ledger row B6 is FALSI
+      6aa043a        2x  twin abb95b0   first named at code/runner_exit_audit_56dc/OUTCOMES.md:21
+                        predictions: mg-56dc's predictions for the independent audit of the mg-70c7 grain-and-po
+      6e15a1a        2x  twin 4ad011a   first named at code/audit_c067/README.md:21
+                        fix: mg-c067's own figure grammar crossed a newline and read the tail of a commit sha as
+      71a1f55        3x  twin 07b65e2   first named at code/audit_330a/README.md:4
+                        predictions: mg-330a's predictions for the independent audit of the mg-8d5e anchor-and-t
+      72e36cb       13x  twin 9c54a99   first named at code/census_repair_f3ff/README.md:11
+                        predictions: mg-f3ff's predictions for the re-derivation of the dropped-verdict census, 
+      739f7bd       29x  twin cfd2af5   first named at code/state_delegation_repair_a74f/README.md:20
+                        predictions: mg-a74f's predictions for the repair of mg-16eb's three OPENs, COMMITTED BE
+      7bd0056        2x  twin 06c9271   first named at code/repair_b2af/README.md:6
+                        predictions: mg-b2af's predictions for the repair of mg-330a's population and its two OP
+      7bd0056b       6x  twin 06c9271   first named at code/repair_b2af/README.md:255
+                        predictions: mg-b2af's predictions for the repair of mg-330a's population and its two OP
+      7cee1a1        4x  twin 8c76d42   first named at code/hodge_leverage_audit_7e39/out_audit_7e39.txt:28
+                        probe: mg-7e39's instrument and its predictions, COMMITTED BEFORE ANY TRANSCRIPT (mg-7e3
+      7dc9180       13x  twin aa8309d   first named at code/audit_c067/PREDICTIONS.md:15
+                        instrument: mg-132a takes answer (2) — the anchor is the commit a figure was MEASURED at
+      7dc91808eb58   4x  twin aa8309d   first named at code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt:7
+                        instrument: mg-132a takes answer (2) — the anchor is the commit a figure was MEASURED at
+      806533b        1x  twin 3b73ccc   first named at code/audit_c067/README.md:8
+                        audit: the mg-c067 instrument — the staleness check RE-RUN AFTER THE REBASE that already
+      87af270        4x  twin b534db7   first named at code/species_bound_audit_6ef4/out_t3_census.txt:90
+                        evidence: PUBLISH THE POST-COMMIT MEASUREMENT — mg-6cb9's a2 re-run against the tree as 
+      880fc15        6x  twin 99ee542   first named at code/state_visibility_audit_65eb/README.md:3
+                        predictions: mg-65eb's predictions for the INDEPENDENT AUDIT of the mg-16eb visibility-i
+      89d6aa1       10x  twin cb9f282   first named at code/audit_c067/PREDICTIONS.md:15
+                        repair+docs: S4a re-keyed onto THE COMMIT THE FIGURE WAS MEASURED AT — the mg-3f3b suite
+      89d6aa1bf0c7   6x  twin cb9f282   first named at code/publication_anchor_132a/out_anchor_132a.txt:35
+                        repair+docs: S4a re-keyed onto THE COMMIT THE FIGURE WAS MEASURED AT — the mg-3f3b suite
+      8a07ae0       13x  twin 657565e   first named at code/audit_c067/PREDICTIONS.md:16
+                        repair+docs: the population line scoped to the population it counts, this deliverable's 
+      8a07ae01fc45  12x  twin 657565e   first named at code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt:158
+                        repair+docs: the population line scoped to the population it counts, this deliverable's 
+      93bd689        2x  twin 1f2e30d   first named at code/runner_exit_repair_70c7/OUTCOMES.md:19
+                        predictions: mg-70c7's predictions for the six mg-dee4 findings, committed BEFORE any pr
+      b2a849b        2x  twin cd08be1   first named at code/species_bound_audit_6ef4/OUTCOMES.md:3
+                        predictions: mg-6ef4's predictions, committed BEFORE any probe runs (mg-6ef4)
+      b94cb1e       27x  twin ea97d0a   first named at code/audit_330a/out_s4_term.txt:131
+                        audit: the mg-330a instrument — every derived anchor RESOLVED rather than reasoned about
+      b94cb1ed       1x  twin ea97d0a   first named at code/audit_330a/out_s3_kernel_half.txt:15
+                        audit: the mg-330a instrument — every derived anchor RESOLVED rather than reasoned about
+      c1a57fd       11x  twin 3958b5a   first named at code/audit_c067/PREDICTIONS.md:16
+                        evidence: mg-6df0's transcript REGENERATED BY ITS OWN PUBLICATION STEP at the commit tha
+      c1a57fdd8d8c   1x  twin 3958b5a   first named at code/publication_anchor_132a/out_anchor_132a.txt:67
+                        evidence: mg-6df0's transcript REGENERATED BY ITS OWN PUBLICATION STEP at the commit tha
+      cada54f       15x  twin f93e41f   first named at code/species_bound_audit_6ef4/OUTCOMES.md:209
+                        evidence: THE INSTRUMENT THAT RAISED THE FINDINGS, RE-RUN UNMODIFIED — Q4 TOTAL BAD 2 ->
+      d24bbeb        6x  twin 53f6ca3   first named at code/audit_c067/PREDICTIONS.md:15
+                        predictions: mg-132a's decision and predictions, committed BEFORE any instrument in this
+      de39eb6       28x  twin 5bd0d71   first named at code/audit_c067/README.md:24
+                        rescue: mg-c067's uncommitted c2_anchors.py and README — the CHARGEABLE CUT that de-rate
+      de39eb6d7301  12x  twin 5bd0d71   first named at code/audit_c067/out_c1_rebase.txt:4
+                        rescue: mg-c067's uncommitted c2_anchors.py and README — the CHARGEABLE CUT that de-rate
+      ec98300        4x  twin 424f606   first named at code/branching_bound_d075/README.md:28
+                        predictions: mg-d075's predictions for the bounding repair of the 33-interval figure, CO
+      f7a30d1        1x  twin e2577e5   first named at docs/repair-mg-8d5e-derived-anchor-and-the-term.md:5
+                        predictions: mg-8d5e's predictions, committed BEFORE any script of this instrument exist
+      f7a30d13       4x  twin e2577e5   first named at code/branching_audit_e34a/out_k3_undisturbed.txt:17
+                        predictions: mg-8d5e's predictions, committed BEFORE any script of this instrument exist
+      f7a30d137b89   4x  twin e2577e5   first named at code/branching_audit_e34a/out_k2_five.txt:38
+                        predictions: mg-8d5e's predictions, committed BEFORE any script of this instrument exist
+      fc98142        6x  twin 3bc2cf7   first named at code/species_bound_audit_6ef4/PREDICTIONS.md:76
+                        evidence: PUBLISH THE POST-COMMIT MEASUREMENT, WITH THE ANCHOR QUALIFIED BY THE POPULATI
+
+====================================================================================================
+  the anchor under repair       739f7bd  ->  ANCHOR-DISPLACED (twin cfd2af5)
+  the twin rule's own control   patch-id right and subject WRONG on a constructed collision: True
+  repository-wide               57 DISPLACED, 0 STALE, 0 DEAD
+====================================================================================================
