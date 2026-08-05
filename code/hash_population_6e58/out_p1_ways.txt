@@ -1,0 +1,118 @@
+==========================================================================
+p1 -- THE WAYS, READ FROM `man git-log`
+==========================================================================
+
+   git             : git version 2.50.1 (Apple Git-155)
+   documentation   : `man git-log`, 124220 bytes after overstrike removal
+   NOT a population: the flags I remember.  Nothing below is typed
+                     from memory; every row names the line it is on.
+
+-- (i) PLACEHOLDERS.  Population: every `%<x>` in the placeholder
+       list of `man git-log`.  Grain: one placeholder.
+
+   placeholders parsed from the man page : 58
+   of those, whose description says HASH : 6
+      %H   commit hash
+      %h   abbreviated commit hash
+      %T   tree hash
+      %t   abbreviated tree hash
+      %P   parent hashes
+      %p   abbreviated parent hashes
+
+   OF THOSE, A **COMMIT** HASH           : 2
+      %H   FULL    
+      %h   ABBREV  
+
+   The exclusions are made by READING the description, not by my
+   knowing which ones are trees and parents:
+      %T   EXCLUDED -- tree hash
+      %t   EXCLUDED -- abbreviated tree hash
+      %P   EXCLUDED -- parent hashes
+      %p   EXCLUDED -- abbreviated parent hashes
+
+   THE TWO ARE THE SAME LETTER IN TWO CASES.  That is the whole
+   ticket: `_HASH_FORMATS` lists three spellings of the upper-case
+   one and none of the lower-case one, so the population every count
+   in this lineage was taken over is defined by a CAPITAL LETTER.
+
+-- (ii) BUILT-IN FORMATS.  Population: the bulleted `--pretty=<name>`
+        list of `man git-log`.  Grain: one format name.
+
+      email        FULL     (documented sample shows a commit identifier)
+      full         FULL     (documented sample shows a commit identifier)
+      fuller       FULL     (documented sample shows a commit identifier)
+      medium       FULL     (documented sample shows a commit identifier)
+      oneline      FULL     (documented sample shows a commit identifier)
+      reference    ABBREV   (documented sample shows a commit identifier)
+      short        FULL     (documented sample shows a commit identifier)
+
+   FOUND BY THE EXTRACTOR : 7
+   DECLARED BLIND SPOTS   : 2 -- handled by this instrument, NOT
+                            found by the extractor, each with the
+                            documentation sentence that exempts it:
+      mboxrd       documented only by reference to another format: "Like email, but lines in the commit message starting with 'From ' ... are quoted"
+      raw          documented in prose with no sample block: "the hashes are displayed in full, regardless of whether --abbrev or --no-abbrev are used"
+
+   The blind spots are DECLARED rather than silent.  The closure test
+   in selftest_6e58.py requires handled == found + declared, so this
+   list cannot grow by neglect: a format that stops being found and
+   is not declared turns the selftest red.
+
+-- (iii) OPTIONS.  Population: the option list of `man git-log`.
+         Grain: one option.
+
+      --abbrev-commit      Instead of showing the full 40-byte hexadecimal commit object name, show a prefi
+      --no-abbrev-commit   Show the full 40-byte hexadecimal commit object name. This negates --abbrev-comm
+      --oneline            This is a shorthand for --pretty=oneline --abbrev-commit used together.
+
+   `--oneline` is `--pretty=oneline --abbrev-commit` by git's own
+   words, so it is a spelling of a hash and this instrument counts it.
+   `--abbrev-commit` does not by itself make a hash appear -- it
+   changes the GRAIN of one that already does -- so it demotes FULL
+   to ABBREV within the same call and is never an emitter alone.
+
+-- (iv) THE DEFAULT.  A `git log` with NO format argument.
+
+      =<format> part is omitted, it defaults to medium.
+      (i.e.  medium, which is the default, full, and fuller).
+      Default for the --format option. (See Pretty Formats above.) Defaults to medium.
+
+   git's documented default is `medium`, whose sample is
+   `commit <hash>`.  So a bare `git log ... ` PRINTS A FULL COMMIT
+   HASH AND IS REVISION-PRODUCING, and mg-330a's classifier returns
+   None for it.  This instrument keeps that call OUT of its headline
+   denominator (POP-C) and measures it separately as POP-D, because
+   whether an unformatted `git log` is an ANCHOR is a judgement and
+   not a reading -- so it is published as its own number rather than
+   folded into somebody else's.
+
+-- (v) WHAT IS OUTSIDE THIS POPULATION, NAMED RATHER THAN DROPPED
+
+   The population above is `git log` calls.  These also address a
+   commit and are NOT counted anywhere in this instrument, because
+   mg-330a's taxonomy is about `git log` and changing the subcommand
+   set would make the before/after incomparable:
+      git rev-parse --short <rev>      an abbreviated object name
+      git rev-parse <rev>              a full object name
+      git show -s --format=%H          the same placeholders, elsewhere
+      git describe                     a name relative to a tag
+      git rev-list                     the same placeholders again
+      git for-each-ref --format=%(objectname)
+   Each is a real way to address a commit.  Naming them is what this
+   ticket does; absorbing them into a count whose label says `git log`
+   would be the same defect with the sign flipped.
+
+-- SCORING PREDICTIONS.md
+
+   P1-a   predicted 2                              measured 2                  HIT
+   P1-b   predicted True                           measured True               HIT
+   P1-c   predicted >= 7 built-in formats          measured 7                  HIT
+   P1-c*  predicted True                           measured True               HIT
+   P1-d   predicted True                           measured True               HIT
+   P1-e   predicted True                           measured True               HIT
+   P1-f   predicted True                           measured True               HIT
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: this script's own reading of `man git-log`
+FINDINGS: 0, population: the ways git documents for printing a commit identifier from `git log`
+TOTAL BAD: 0

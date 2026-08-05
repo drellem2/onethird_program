@@ -1,0 +1,152 @@
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+==========================================================================
+p3 -- `THE ONE SITE`, AND WHETHER IT IS A SITE
+==========================================================================
+
+-- (i) THE CLAIM, READ FROM THE FILE RATHER THAN TYPED HERE
+
+      - **The 11 parameterised sites are not gated.** There is nothing at the site
+      to gate; the anchor is at the call site, and those call sites are in eleven
+      other tickets' directories. Naming them is what this ticket does; treating
+      them is not.
+      - **`code/repair_69d1/p3_reason.py` (i-b) still anchors its control on
+      `HEAD`** — `UNRESTRICTED`, the loudest form of the defect. mg-330a pointed
+      at it and did not repair it; neither does this ticket, and it is the one
+      site in the 19 that no pin can help, because `HEAD` moves on every commit to
+      the repository rather than to a file.
+
+
+-- (ii) THE COUNT, AT FOUR COMMITS, UNDER TWO DENOMINATORS
+
+   Population: every `*.py` under `code/` in the tree of that commit.
+   Grain: one `ast.Call` node classified `UNRESTRICTED`.
+
+   commit    POP-A    POP-C    69d1?    what it is
+   fba5f63   1        9        0        mg-330a's audit, as it sits on `main`
+   b94cb1e   1        8        0        its PRE-REBASE twin, where mg-b2af showed the ten figures reproduce
+   b1c3467   1        14       0        the commit that ships mg-b2af's transcripts, i.e. the claim's own tree
+   HEAD      2        19       0        this branch
+
+   The `69d1?` column is the number of `git log` call sites of ANY
+   spelling anywhere under `code/repair_69d1/`.
+
+-- (iii) THE REFERENT.  WHICH FILE IS `THE ONE SITE`?
+
+   fba5f63   POP-A `UNRESTRICTED` sites: code/repair_8d5e/lib8d5e.py:167
+   b94cb1e   POP-A `UNRESTRICTED` sites: code/repair_8d5e/lib8d5e.py:167
+   b1c3467   POP-A `UNRESTRICTED` sites: code/repair_8d5e/lib8d5e.py:167
+   HEAD      POP-A `UNRESTRICTED` sites: code/branching_bound_audit_aaf4/a5_donotdisturb.py:180, code/repair_8d5e/lib8d5e.py:167
+
+   `code/repair_69d1/p3_reason.py` CONTRIBUTES ZERO SITES
+   at every commit measured -- under the NARROW denominator and under
+   the CORRECTED one alike.  There is no `git log` call anywhere in
+   `code/repair_69d1/`; its control anchors on HEAD through
+   `git grep`, `git show` and `rev-parse`, none of which this census
+   can see.
+
+   SO THE SENTENCE IS NOT MERELY OFF BY A COUNT.  It attaches a
+   FILE NAME drawn from one population to a COUNT taken over
+   another, and the file has never been a member of the counted one.
+   The one `UNRESTRICTED` site under mg-330a's own classifier, at
+   the claim's own tree, is `code/repair_8d5e/lib8d5e.py:167`.
+
+-- (iv) THE MECHANISM.  HOW A NON-MEMBER GOT INTO THE SENTENCE
+
+   kinds NAMED in mg-330a's taxonomy docstring : HEAD, INDEXED, NEWEST, OLDEST, PICKAXE, RANGE, TWO-SIDED
+   kinds RETURNED by `classify_call`           : INDEXED, NEWEST, NEWEST-norestrict, OLDEST, PICKAXE, RANGE, UNRESTRICTED
+
+   documented but NEVER RETURNED : HEAD, TWO-SIDED
+   returned but NEVER DOCUMENTED : NEWEST-norestrict, UNRESTRICTED
+
+   `HEAD` is a row in the taxonomy PROSE, and the prose row is where
+   `p3_reason.py` is named -- mg-330a wrote `the one mg-8d5e's own
+   commit message points at in p3_reason.py without repairing`.
+   `classify_call` never returns `HEAD`; it returns `UNRESTRICTED`,
+   which the prose never mentions.  So the STILL-OPEN sentence took
+   a NAME from the docstring's `HEAD` row and a COUNT from the
+   code's `UNRESTRICTED` row and joined them with `i.e.`.
+
+   THAT IS mg-b2af's OWN F-2 -- one number over two populations --
+   committed inside mg-b2af's list of what it left open.
+
+-- (v) THE 19, ADJUDICATED BY HAND
+
+   The corrected count is not a repair on its own.  `UNRESTRICTED`
+   is defined by what a call does NOT have -- no `-1`, no `--`, no
+   `--reverse` -- so it collects two very different constructs.  Each
+   of the 19 is read here and marked:
+
+      SET-READ   the call's output is split into a LIST and searched
+                 or counted.  mg-330a's own words for that shape are
+                 `a set, not an anchor; it has no single revision to
+                 re-point`.
+      ANCHOR     a single revision is taken out and used.
+
+   SET-READ  code/audit_c067/c1_rebase.py:47                          pre = L.git("log", "--format=%H%x1f%s", ref, "-n", "12").spl
+   SET-READ  code/audit_c067/c1_rebase.py:48                          post = L.git("log", "--format=%H%x1f%s", "main", "-n", "40")
+   SET-READ  code/branching_bound_audit_aaf4/a5_donotdisturb.py:111   allc = [x for x in gout("log", "--oneline", "--all").split("
+   SET-READ  code/branching_bound_audit_aaf4/a5_donotdisturb.py:113   for ref, n in (("main", len([x for x in gout(
+   SET-READ  code/branching_bound_audit_aaf4/a5_donotdisturb.py:116   ("HEAD", len([x for x in gout(
+   SET-READ  code/branching_bound_audit_aaf4/a5_donotdisturb.py:158   landed = [l.split()[0] for l in gout(
+   SET-READ  code/branching_bound_audit_aaf4/a5_donotdisturb.py:180   samepid = gout("log", "main", "--format=%H", "-40")
+   SET-READ  code/branching_bound_d075/s6_class.py:75                 commits = [l for l in git("log", "--oneline", "--all").split
+   SET-READ  code/face_geometry_audit_6653/verify_claims.py:107       last25 = subprocess.run(["git", "-C", REPO, "log", "--format
+   SET-READ  code/face_geometry_audit_6653/verify_claims.py:128       allhist = subprocess.run(["git", "-C", REPO, "log", "--forma
+   SET-READ  code/face_geometry_audit_e720/verify_landing_claims.py:459 said = [c for c in git("log", "--format=%h", "-60").split()
+   SET-READ  code/face_geometry_audit_e720/verify_landing_claims.py:461 repairer = [c for c in git("log", "--format=%h", "-60").spli
+   SET-READ  code/hodge_leverage_audit_97fb/audit_97fb.py:1508        heads = git("log", "--format=%H %s", "-40").split("\n")
+   SET-READ  code/repair_8d5e/lib8d5e.py:167                          for h in git("log", "--format=%H", rev, repo=repo).split():
+   SET-READ  code/repair_b2af/lib_b2af.py:274                         out = git_quiet("log", "--all", "--reflog", "--format=%H %s"
+   SET-READ  code/species_bound_audit_6ef4/t3_census.py:225           code, out = git(["log", "--all", "--format=%H%x1e%B%x1f"])
+   SET-READ  code/species_bound_repair_5040/kern5040.py:273           rc, out = git(["log", "--format=%H%x1f%s%x1f%B%x1e", PRE])
+   SET-READ  code/species_extent_audit_6cb9/a2_crosssection.py:242    rc, log, _ = sh(["git", "log", "--format=%h %s", "-8"])
+   SET-READ  code/state_visibility_audit_65eb/anchor65eb.py:116       out = git("log", "--format=%H %s", "HEAD").stdout.split("\n"
+
+   SET-READ : 19
+   ANCHOR   : 0
+   NEW SINCE THIS ADJUDICATION WAS WRITTEN : 0
+
+   NOT ONE OF THE 19 TAKES A SINGLE REVISION.
+   Every one reads a list and searches it.  So `the loudest form of
+   the defect` is not what this class contains: by mg-330a's own
+   RANGE reasoning these have no single revision to re-point.  The
+   count went from 1 to 19 and the number of unrestricted single
+   anchors went from 0 to 0.
+
+   I am naming that rather than reporting `19 sites of the defect`,
+   which would be the same error in the other direction -- a term
+   denoting more than it covers is mg-2c77's A-2, and this arc has
+   made it once already.
+
+-- (vi) THE CORRECTED SENTENCE, AND HOW ITS NUMBER WAS DERIVED
+
+   `UNRESTRICTED` at this tree:
+       2  under mg-330a's `_HASH_FORMATS` (3 literals, exact match)
+      19  under the spellings git documents (p1, p2 POP-C)
+       0  of those 19 take a single revision as an anchor
+       0  of them are in `code/repair_69d1/`, which has no `git log`
+          call of any spelling
+
+   DERIVATION: one `ast` walk of every `*.py` under `code/`, the
+   kind rules of mg-330a's taxonomy applied unchanged, and the
+   format test replaced by a parse of the format string against the
+   two placeholders `man git-log` documents as commit hashes.  Both
+   halves measured at THIS tree; the published `1` was measured at
+   another.  See `out_p2_population.txt` for the same walk under all
+   four denominators.
+
+-- SCORING PREDICTIONS.md
+
+   P3-a   predicted 2                              measured 2                  HIT
+   P3-b   predicted >= 4 under POP-C               measured 19                 HIT
+   P3-c   predicted True                           measured False              *** MISS  <- kept as written
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: this script's reading of `code/repair_b2af/README.md`
+FINDINGS: 2, population: the `UNRESTRICTED` claim in mg-b2af's STILL-OPEN list
+   FINDING: THE STILL-OPEN LIST NAMES A FILE THAT IS IN NO CENSUS IT CITES: `code/repair_69d1/p3_reason.py` has 0 `git log` call sites at all four commits measured, so `the one site in the 19` names a non-member.  The single `UNRESTRICTED` site under mg-330a's classifier is code/repair_8d5e/lib8d5e.py:167.
+   FINDING: mg-330a's taxonomy DOCSTRING and its `classify_call` do not name the same kinds: documented-never-returned ['HEAD', 'TWO-SIDED'], returned-never-documented ['NEWEST-norestrict', 'UNRESTRICTED'].  A reader who takes a name from the prose and a count from the code is joining two taxonomies.
+TOTAL BAD: 2
