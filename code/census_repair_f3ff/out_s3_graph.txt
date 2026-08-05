@@ -1,0 +1,204 @@
+==============================================================================
+mg-f3ff s3 -- the ticket-reference graph and the duplicate-work question
+==============================================================================
+FRESHNESS -- fetched, resolved, and stated (ticket addendum 1 and 2)
+  onethird_program       ok       ref=origin/main sha=76b481d8d10b
+                                  checkout HEAD=76b481d8d10b behind origin/main by 0
+  one_third_width_three  ok       ref=origin/main sha=1e996fb486bb
+                                  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derived against origin/main anyway
+  NOTE: 1 checkout(s) were behind origin/main at start: one_third_width_three
+        The derivation below uses origin/main, so the staleness did not
+        reach the answer -- but it is stated because a census whose
+        staleness is unstated is not checkable by the next reader.
+
+  work store: /Users/daniel/.macguffin/work, 2228 ticket file(s) readable.
+  ⚠️ This is a THIRD channel with its own silence (blind spot B8): a
+     deleted ticket is absent here though its commits remain in the tree.
+
+------------------------------------------------------------------------------
+ROW 1: mg-e35b / parent mg-fcf1
+------------------------------------------------------------------------------
+  (a) tickets whose body names mg-fcf1: 3
+      mg-8a12, mg-d385, mg-e35b
+
+      commits owned by those tickets, authored <= 2026-07-31T04:13:24Z: 1
+      of which the direct parent-id grep already had: 1
+      NEW, found only via the ticket graph: 0
+
+  (b) commits owned by those tickets authored AFTER 2026-07-31T04:13:24Z: 1
+        5f542f0f7  2026-07-31T10:22:08+00:00  onethird_program  owner=mg-e35b
+          control+repair: THE GAUGE STANDARD IS ASKED OF THE ROWS KEPT AND THE DICHOTOMY IS COMPLETE — mg-fcf1's remaining OPENs landed on NEGATIVE CO
+
+  (c) what mg-e35b's own polecat committed, and whether it was duplicate:
+      1 commit(s) owned by mg-e35b.
+      7 successor commit(s) ALREADY EXISTED when mg-e35b was filed.
+      So its polecat was dispatched on a premise the tree already
+      contradicted.  Whether its 1 commit(s) DUPLICATE that
+      work is not decidable from commit metadata -- see the verdict
+      note below; this section reports the overlap, not a judgement.
+      WEAK flag (premise vocabulary anywhere): 1 commit(s)
+        5f542f0f7  control+repair: THE GAUGE STANDARD IS ASKED OF THE ROWS KEPT AND THE DICHOTOMY IS COMPLETE — mg-fcf1's remaining OPENs landed on NEGATIVE CO
+      STRONG flag (names a successor the tree found): 1 commit(s)
+        5f542f0f7  control+repair: THE GAUGE STANDARD IS ASKED OF THE ROWS KEPT AND THE DICHOTOMY IS COMPLETE — mg-fcf1's remaining OPENs landed on NEGATIVE CO
+          | control+repair: THE GAUGE STANDARD IS ASKED OF THE ROWS KEPT AND THE DICHOTOMY IS COMPLETE — mg-fcf1's remaining OPENs landed on N
+          | FIRST, THE TICKET'S OWN PREMISE.  mg-e35b was filed as "DROPPED VERDICT mg-fcf1,
+          | rather than assumed: 8fc5111 (mg-8a12) landed mg-fcf1's F2 — the [CANNOT FAIL]
+          | row and the contradicted self-report — f024985 (mg-da45) landed row I4's printed
+          | reason, both were audited (de54c3a, 1d922a1) and repaired again (5cae82c,
+          | c7f9673, b6bc2ef, 0fb0e00, bfd7948), and mg-a806 landed F5's qualitative half
+          | the transmission path mg-8a12 was caught on.
+
+------------------------------------------------------------------------------
+ROW 2: mg-fccb / parent mg-d112
+------------------------------------------------------------------------------
+  (a) tickets whose body names mg-d112: 11
+      mg-069f, mg-1fdb, mg-23f5, mg-7abf, mg-859d, mg-8a71, mg-c7b7, mg-c8c6, mg-cd04, mg-f825, mg-fccb
+
+      commits owned by those tickets, authored <= 2026-07-31T04:12:41Z: 8
+      of which the direct parent-id grep already had: 4
+      NEW, found only via the ticket graph: 4
+        f63b47b26  2026-07-29T10:23:28+00:00  onethird_program  owner=mg-859d
+          STATE: Appendix A — pre-file the audit ticket alongside the research ticket (the stage has no trigger, only mayor's polling cycle; mg-88bd m
+        d6b8f86e4  2026-07-29T11:26:37+00:00  onethird_program  owner=mg-f825
+          docs: independent audit of mg-63e3 (L4 branch (ii) consumability) — OVERSTATED; witness fully CONFIRMED (all rationals rebuilt by hand), 1 B
+        7c3f770a3  2026-07-29T12:13:28+00:00  onethird_program  owner=mg-c8c6
+          docs: independent audit of mg-3af9 (sub-linear modulus, branch (ii)) — OVERSTATED; witness W* fully CONFIRMED (rebuilt from the poset axioms
+        eefd47f3f  2026-07-29T12:28:36+00:00  onethird_program  owner=mg-7abf
+          STATE: land the mg-3af9/mg-c8c6 consequences — the RED goes UNCONDITIONAL (row 11's Omega(eps) condition DISCHARGED at all five sites: no st
+
+  (b) commits owned by those tickets authored AFTER 2026-07-31T04:12:41Z: 4
+        1b001475c  2026-07-31T04:38:35+00:00  one_third_width_three  owner=mg-fccb
+          docs+scripts+ci: close the mg-d112 verdict — strike the §2.3 direction error at the site, find its two unflagged §5 consumers, narrow 2 over
+        2697c074c  2026-07-31T05:07:15+00:00  one_third_width_three  owner=mg-8a71
+          docs+scripts+ci: INDEPENDENT AUDIT of the mg-fccb §2.3 direction repair — GREEN on the mathematics, AMBER on the remediation; 2 unflagged de
+        bb1cb9bef  2026-07-31T05:45:50+00:00  one_third_width_three  owner=mg-069f
+          docs+scripts+ci: close the mg-8a71 verdict — strike the two remaining live false claims, fix the population every control NAMES, restore the
+        f6e329c53  2026-07-31T09:52:36+00:00  one_third_width_three  owner=mg-cd04
+          docs+scripts+ci: close mg-0242 G1 + G2 — back the declared strike with markup, bound the EXEMPT label, and take the population corpus-wide (
+
+  (c) what mg-fccb's own polecat committed, and whether it was duplicate:
+      1 commit(s) owned by mg-fccb.
+      5 successor commit(s) ALREADY EXISTED when mg-fccb was filed.
+      So its polecat was dispatched on a premise the tree already
+      contradicted.  Whether its 1 commit(s) DUPLICATE that
+      work is not decidable from commit metadata -- see the verdict
+      note below; this section reports the overlap, not a judgement.
+      WEAK flag (premise vocabulary anywhere): 1 commit(s)
+        1b001475c  docs+scripts+ci: close the mg-d112 verdict — strike the §2.3 direction error at the site, find its two unflagged §5 consumers, narrow 2 over
+      STRONG flag (names a successor the tree found): 1 commit(s)
+        1b001475c  docs+scripts+ci: close the mg-d112 verdict — strike the §2.3 direction error at the site, find its two unflagged §5 consumers, narrow 2 over
+          | reverse. mg-d112 is RIGHT; the sentence is now STRUCK at the site (mg-1fdb
+          | PREMISE CORRECTION: the ticket's "no landing commit, no successor, nothing
+          | as cd261b9; mg-1fdb (b169561) discharged findings §6.2 and §3.1 25 minutes
+          | Closeout §1. The detector likely missed it because b169561's subject names
+          | mg-dbd1 and mg-1fdb but not the verdict id mg-d112.
+
+------------------------------------------------------------------------------
+ROW 3: mg-a74f / parent mg-16eb
+------------------------------------------------------------------------------
+  (a) tickets whose body names mg-16eb: 2
+      mg-0d85, mg-a74f
+
+      commits owned by those tickets, authored <= 2026-07-31T04:22:15Z: 0
+      of which the direct parent-id grep already had: 0
+      NEW, found only via the ticket graph: 0
+
+  (b) commits owned by those tickets authored AFTER 2026-07-31T04:22:15Z: 6
+        cfd2af58a  2026-07-31T09:29:04+00:00  onethird_program  owner=mg-a74f
+          predictions: mg-a74f's predictions for the repair of mg-16eb's three OPENs, COMMITTED BEFORE ANY SCRIPT OF THIS REPAIR EXISTS — mg-16eb's ow
+        e76c26f1f  2026-07-31T09:41:45+00:00  onethird_program  owner=mg-a74f
+          repair+probe: mg-16eb's SIX BROKEN CLAIMS REPAIRED BY CLASS — 5 false and 1 true-of-a-different-property — with the missing direction of the
+        f1270d3f6  2026-07-31T09:45:26+00:00  onethird_program  owner=mg-a74f
+          probe: mg-16eb's OWN battery on the repaired tree (6 of 8 as that audit predicted, A1 and A2 moved 0->2) and the six claims reported one row
+        2d7710687  2026-07-31T09:46:58+00:00  onethird_program  owner=mg-a74f
+          wip: regenerate the two transcripts this repair moves, and run_all.sh (mg-a74f)
+        3f0bd4067  2026-07-31T09:51:43+00:00  onethird_program  owner=mg-a74f
+          docs: mg-a74f's README — the three OPENs answered, four new surfaces named, two defects of this repair's own instruments and three misses ag
+        cd0391613  2026-07-31T09:54:18+00:00  onethird_program  owner=mg-a74f
+          evidence: the committed transcript of the mg-a74f suite — 8 sections, exit 0, 12 of 12 claim probes hold, 50 section observations 0 off pred
+
+      >>> 2 successor TICKET(S) EXIST for mg-16eb, and every
+          one of their commits is authored AFTER the filing instant.
+          So this row is UPHELD ON COMMITS while a ticket-only census
+          would have reported it REFUTED.  THE COMMIT DATE, NOT THE
+          TICKET'S EXISTENCE, IS WHAT MAKES THIS ROW TRUE.
+
+  (c) what mg-a74f's own polecat committed, and whether it was duplicate:
+      6 commit(s) owned by mg-a74f.
+      0 successor commits existed at filing: nothing to duplicate.
+      WEAK flag (premise vocabulary anywhere): 0 commit(s)
+      STRONG flag (names a successor the tree found): 0 commit(s)
+
+------------------------------------------------------------------------------
+ROW 4: mg-dffa / parent mg-5800
+------------------------------------------------------------------------------
+  (a) tickets whose body names mg-5800: 4
+      mg-19ec, mg-56dc, mg-c742, mg-dffa
+
+      commits owned by those tickets, authored <= 2026-07-31T04:22:50Z: 0
+      of which the direct parent-id grep already had: 0
+      NEW, found only via the ticket graph: 0
+
+  (b) commits owned by those tickets authored AFTER 2026-07-31T04:22:50Z: 10
+        645b5a4a1  2026-07-31T05:06:06+00:00  onethird_program  owner=mg-dffa
+          docs+repair: mg-5800's four WARRANT findings landed — TWO CELLS WIDENED, TWO CLAUSES NARROWED, ONE CONTROL CLOSED, AND ONE PREMISE READ RATH
+        410ae0574  2026-07-31T05:13:06+00:00  onethird_program  owner=mg-19ec
+          predictions: mg-19ec's predictions, committed BEFORE any probe runs — nine exit codes, two populations predicted unbounded, and the runner-g
+        3ba46c3a0  2026-07-31T06:05:28+00:00  onethird_program  owner=mg-19ec
+          audit: the mg-19ec instrument — a fifth instrument that measures meets and joins as glb/lub IN THE ORDER on both sides, compares lattices by
+        ebad4199c  2026-07-31T06:10:45+00:00  onethird_program  owner=mg-19ec
+          audit: add the vagueness check the brief asks for — the 13 new phrasings scanned against 26 hedge tokens in their OWN sentence, and 'of the 
+        abd34e17e  2026-07-31T06:19:34+00:00  onethird_program  owner=mg-19ec
+          docs+audit: independent audit of the mg-dffa warrant narrowing (645b5a4) — ALL FOUR REPLACEMENTS HOLD and no hedge was introduced, but FOUR 
+        3fbf6f686  2026-07-31T06:52:48+00:00  onethird_program  owner=mg-19ec
+          evidence: the committed transcripts of the mg-19ec suite, run on a restored tree — 8 of 8 exit codes matched the predictions committed at 17
+        abb95b08a  2026-07-31T08:18:32+00:00  onethird_program  owner=mg-56dc
+          predictions: mg-56dc's predictions for the independent audit of the mg-70c7 grain-and-population repair, committed BEFORE any probe in this 
+        d3cdc953f  2026-07-31T08:48:41+00:00  onethird_program  owner=mg-56dc
+          audit: the mg-56dc instrument — a sixth instrument that classifies every printed count as SITES or EXECUTIONS by its own label, counts one l
+        ... and 2 more
+
+      >>> 4 successor TICKET(S) EXIST for mg-5800, and every
+          one of their commits is authored AFTER the filing instant.
+          So this row is UPHELD ON COMMITS while a ticket-only census
+          would have reported it REFUTED.  THE COMMIT DATE, NOT THE
+          TICKET'S EXISTENCE, IS WHAT MAKES THIS ROW TRUE.
+
+  (c) what mg-dffa's own polecat committed, and whether it was duplicate:
+      1 commit(s) owned by mg-dffa.
+      0 successor commits existed at filing: nothing to duplicate.
+      WEAK flag (premise vocabulary anywhere): 1 commit(s)
+        645b5a4a1  docs+repair: mg-5800's four WARRANT findings landed — TWO CELLS WIDENED, TWO CLAUSES NARROWED, ONE CONTROL CLOSED, AND ONE PREMISE READ RATH
+      STRONG flag (names a successor the tree found): 0 commit(s)
+
+==============================================================================
+SCORING s3 AGAINST PREDICTIONS.md (72e36cb)
+==============================================================================
+  P8  predicted: the ticket graph finds >= 1 successor commit on ROW 1
+      that the direct parent-id grep does not.   OBSERVED: 0
+      P8: *** MISS ***
+      (per-row graph-only gain: row 1=0, row 2=4, row 3=0, row 4=0)
+
+  P9  predicted: on rows 3 and 4 the graph names successor TICKETS whose
+      commits are ALL authored after the filing instant, so those rows are
+      upheld on commits and a ticket-only census would report them refuted.
+      OBSERVED: row 3 yes, row 4 yes
+      P9: HIT
+
+  P10 predicted: at least one row was already refuted BY THE POLECAT SENT TO
+      WORK IT, in that polecat's own commit message, before mg-f3ff existed --
+      row 1 is known to be, and a SECOND was predicted.
+      OBSERVED (STRONG rule -- the polecat's own commit names a successor
+      the tree independently found): rows [1, 2]
+      P10: HIT  -- 2 row(s), predicted >= 2 (row 1 known, a second predicted)
+      ⚠️ A DEFECT OF THIS SECTION, KEPT: the WEAK keyword rule I wrote first
+         fires on row 4, where `premise` is about the mathematics and there
+         are 0 successor commits for it to be about -- a false positive on 1
+         of the 3 rows it flags.  Both rules are printed above; the STRONG
+         one is what P10 is scored on, and the weak one is kept rather than
+         deleted because a discarded rule that was wrong is evidence too.
+      ⚠️ STILL NOT A READING.  The STRONG rule proves a citation, not an
+         intent.  The quoted lines are printed so the reader scores the
+         meaning; s3 claims only that the citation is there.
+
+== s3 exit: 0 (findings do not set this instrument's exit) ==
