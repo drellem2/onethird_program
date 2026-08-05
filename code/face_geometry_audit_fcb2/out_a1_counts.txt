@@ -1,0 +1,120 @@
+== mg-fcb2 A1: every count the repair prints, and an input that moves it ==
+
+  counts read back from NEGATIVE CONTROL 4 at HEAD:
+    coverage           ('61', '86', '58')
+    dichotomy          ('297', '288', '9', '0')
+    m4m5               ('82', '86', '82', '86')
+    multi_ridge        ('86', 'ridge_facets on 0, split_free_as_interior on 0, ridge_drop on 0, facet_offbyone on 0')
+    not_gauge          ('288', '297')
+    site_corrupted     ('86', '86')
+    swap01_gauge       ('72', '72', '72')
+    target_identical   ('344', '344')
+    vacuity            (('I1', ('14', '14', '0')), ('I2', ('4', '4', '0')), ('I3', ('4', '4', '0')), ('I4', ('25', '0', '25')))
+
+A1.1 -- THE COVERAGE LINE'S FIRST FIGURE
+    prediction P1a   AS PREDICTED -- the printed figure at HEAD is 86/86 (predicted 86/86)
+    the two arguments supplied for `%d/%d`: 'N' and 'N' -- same expression: True
+  [REFUTED] A1.1a the coverage line's numerator and denominator are DIFFERENT expressions, so the printed ratio is a measurement
+    prediction P1b   AS PREDICTED -- numerator and denominator are the same expression (N)
+    INPUT 1 -- `le_to_facet_offbyone := le_to_facet`, i.e. the named site is not corrupted on ANY poset.  True count 0/86.  The line prints 86/86.
+  [REFUTED] A1.1b with the corruption replaced by a no-op the coverage line's first figure moves (it should read 0/86, since the site is then corrupted on no poset at all)
+    INPUT 2 -- the population WIDENED to admit n = 1 (the section builds `range(2, nmax + 1)`; n = 1 is the nearest legal poset it has never been run on).  The line prints 87/87; the true count is 86/87, because `le_to_facet` and `le_to_facet_offbyone` BOTH return the empty chain on the one-element poset, so the site is not corrupted there.  Row I4 is still [PASS].
+  [REFUTED] A1.1c the coverage line's sentence -- 'the named load-bearing site is corrupted on N/N posets' -- is TRUE on every population the section can be given
+    prediction P1c   AS PREDICTED -- with n = 1 admitted the print reads 87/87 while the truth is 86 of 87 (predicted: prints 87/87, truth 86 of 87)
+  [REFUTED] A1.1d V6's table -- headed 'EVERY COUNT THIS REPAIR PRINTS' -- contains the coverage line's first figure
+    prediction P1d   AS PREDICTED -- the 86/86 figure is absent from V6's eleven rows, which carry the 61/86 coverage figure from the same sentence instead
+
+A1.2 -- V6'S OWN COMPLETENESS ROW
+    the scored condition is: forced == 3 and len(table) == 11
+    the names it reads: ['forced', 'table']
+  [REFUTED] A1.2a the condition scoring V6's completeness reads the ARTIFACT, not the literal standing beside it
+    prediction P2a   AS PREDICTED -- the condition's only free names are ['forced', 'table'], and `table` is a list of string literals 11 rows long; nothing in it touches controls_output.txt
+    the artifact in the copy carries the twelfth count: True
+    V6's completeness row there: [PASS] every printed count is classified, and the 3 FORCED ones are printed as properties rather than offered as evidence
+  [REFUTED] A1.2b V6's completeness row goes RED when a twelfth count is added to the artifact it claims to have enumerated
+    prediction P2b   AS PREDICTED -- with a twelfth printed count in controls.py, V6's completeness row is GREEN -- it cannot fail on an omission, which is why the 86/86 survived it
+
+A1.3 -- V6'S ELEVEN ROWS: AN INPUT CONSTRUCTED FOR EACH
+    Each row is asked TWO questions, because they are different questions and V6 answers only the first:
+      (1) does the count move at all, under any input constructed here?
+      (2) does it move under the SPECIFIC mechanism V6's own `why` column names?  A reason that does not move the count is not a reason.
+
+    dichotomy: 297 = 288 + 9 + 0
+      V6 says: COULD MOVE                under the inputs tried: MOVES
+        MOVED  the population restricted to n <= 4
+               ('297', '288', '9', '0') -> ('68', '63', '5', '0')
+    detector positive control: swap01 GAUGE 72/72
+      V6 says: FORCED BY MATHEMATICS     under the inputs tried: MOVES
+        MOVED  [V6's own why] the gauge detector replaced by one that never returns a witness (this row's own why: 'fails only if the detector is wrong')
+               ('72', '72', '72') -> ('0', '72', '0')
+    detector says NOT-GAUGE on 288 of 297
+      V6 says: COULD MOVE                under the inputs tried: MOVES
+        STUCK  [V6's own why] a CREDULOUS detector returning a witness for every pair (this row's own why: 'a detector that accepted everything would print 297 here')
+               ('288', '297') -> ('288', '297')
+        MOVED  the population restricted to n <= 4
+               ('288', '297') -> ('63', '68')
+    non-identity witness on 72/72 of swap01
+      V6 says: COULD MOVE                under the inputs tried: MOVES
+        MOVED  [V6's own why] the candidate list narrowed to the identity alone (this row's own why: 'a detector answering by diagonal twist alone would print 0')
+               ('72', '72', '72') -> ('0', '72', '0')
+    vacuity split I1/I2/I3 = 14/4/4
+      V6 says: COULD MOVE                under the inputs tried: MOVES
+        MOVED  the population restricted to n <= 4
+               (('I1', ('14', '14', '0')), ('I2', ('4', '4', '0')), ('I3', ('4', '4', '0')), ('I4', ('25', '0', '25'))) -> (('I1', ('9', '9', '0')), ('I2', ('3', '3', '0')), ('I3', ('3', '3', '0')), ('I4', ('9', '0', '9')))
+    vacuity split I4 = 0 + 25
+      V6 says: COULD MOVE                under the inputs tried: MOVES
+        MOVED  the population restricted to n <= 4
+               (('I1', ('14', '14', '0')), ('I2', ('4', '4', '0')), ('I3', ('4', '4', '0')), ('I4', ('25', '0', '25'))) -> (('I1', ('9', '9', '0')), ('I2', ('3', '3', '0')), ('I3', ('3', '3', '0')), ('I4', ('9', '0', '9')))
+    target byte-identical 344/344
+      V6 says: FORCED BY THE CODE PATH   under the inputs tried: DOES NOT MOVE
+        STUCK  the population restricted to n <= 4
+               True -> True
+        STUCK  `le_to_facet_offbyone := le_to_facet`
+               True -> True
+    no ridge in >= 3 facets, I1/I2/I3 zeros
+      V6 says: FORCED BY CONSTRUCTION    under the inputs tried: DOES NOT MOVE
+        STUCK  the population restricted to n <= 4
+               ridge_facets on 0, split_free_as_interior on 0, ridge_drop on 0, facet_offbyone on 0 -> ridge_facets on 0, split_free_as_interior on 0, ridge_drop on 0, facet_offbyone on 0
+    no ridge in >= 3 facets, I4 zero
+      V6 says: COULD MOVE                under the inputs tried: DOES NOT MOVE
+        STUCK  the population restricted to n <= 4
+               ridge_facets on 0, split_free_as_interior on 0, ridge_drop on 0, facet_offbyone on 0 -> ridge_facets on 0, split_free_as_interior on 0, ridge_drop on 0, facet_offbyone on 0
+    coverage 61/86 at le_to_facet
+      V6 says: COULD MOVE                under the inputs tried: MOVES
+        MOVED  the population restricted to n <= 4
+               ('61', '86', '58') -> ('14', '23', '12')
+    M4 moves the target on 82/86, M5 on 82/86
+      V6 says: COULD MOVE                under the inputs tried: MOVES
+        MOVED  the population restricted to n <= 4
+               ('82', '86', '82', '86') -> ('20', '23', '20', '23')
+
+    the substituted detectors were REACHED, so a count that did not move did not fail to move because the patch was never called: the blind detector was called 81 times and the credulous one 81 times.
+  [PASS] A1.3z this audit's own substitutions actually ran (a null result from a patch that was never reached is worth nothing)
+
+  [REFUTED] A1.3a every V6 row labelled COULD MOVE is moved by an input constructed here (7 of 8)
+      -> `no ridge in >= 3 facets, I4 zero` is labelled COULD MOVE and no input tried moves it
+  [REFUTED] A1.3b of the 3 rows whose `why` names a MECHANISM, that mechanism actually moves the count (2 of 3)
+      -> `detector says NOT-GAUGE on 288 of 297`: V6's stated reason does not move it -- a CREDULOUS detector returning a witness for every pair (this row's own why: 'a detector that accepted everything would print 297 here')
+         the binning is `if not_isospectral: ... elif witness: ...`, so the 288 spectrally separated pairs never reach the detector at all.  A detector that accepted everything would still print 288.
+    the 3 FORCED rows, one at a time:
+      detector positive control: swap01 GAUGE 72 moves under the input its own `why` names, which is what that `why` says it does
+      target byte-identical 344/344              LOCKED under every input tried
+      no ridge in >= 3 facets, I1/I2/I3 zeros    LOCKED under every input tried
+    -- so 2 of the 3 are locked outright, and the third (FORCED BY MATHEMATICS) is falsifiable exactly where its own text says it is: by a wrong detector.  That is a correctly labelled row and this audit says so.
+
+A1.4 -- THE I4 MULTI-RIDGE ZERO: A COUNT LABELLED `COULD MOVE` THAT CANNOT (unpredicted -- PREDICTIONS.md does not mention this row)
+    over every poset with n <= 6 and BOTH facet maps (810 families), the largest number of facets sharing a ridge is 2
+    the reason, in one line: both maps return a chain of masks of sizes 1, 2, ..., n-1, so deleting the level-i mask leaves exactly two candidates to re-insert (|next \ prev| = 2 at an interior level, and 2 supersets/subsets at the ends) -- at most 2 facets share any ridge, at EVERY n, for either map.
+  [REFUTED] A1.4a the artifact's claim that I4 'rebuilds the facet enumeration outright, so a ridge there CAN lie in >= 3 facets; its zero is the only one of the four that is a result'
+
+
+a1_counts: 10 checks, 9 refuted; 6 predictions scored, 0 off prediction.
+  REFUTED: A1.1a the coverage line's numerator and denominator are DIFFERENT expressions, so the printed ratio is a measurement
+  REFUTED: A1.1b with the corruption replaced by a no-op the coverage line's first figure moves (it should read 0/86, since the site is then corrupted on no poset at all)
+  REFUTED: A1.1c the coverage line's sentence -- 'the named load-bearing site is corrupted on N/N posets' -- is TRUE on every population the section can be given
+  REFUTED: A1.1d V6's table -- headed 'EVERY COUNT THIS REPAIR PRINTS' -- contains the coverage line's first figure
+  REFUTED: A1.2a the condition scoring V6's completeness reads the ARTIFACT, not the literal standing beside it
+  REFUTED: A1.2b V6's completeness row goes RED when a twelfth count is added to the artifact it claims to have enumerated
+  REFUTED: A1.3a every V6 row labelled COULD MOVE is moved by an input constructed here (7 of 8)
+  REFUTED: A1.3b of the 3 rows whose `why` names a MECHANISM, that mechanism actually moves the count (2 of 3)
+  REFUTED: A1.4a the artifact's claim that I4 'rebuilds the facet enumeration outright, so a ridge there CAN lie in >= 3 facets; its zero is the only one of the four that is a result'
