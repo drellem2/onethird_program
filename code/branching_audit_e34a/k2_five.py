@@ -48,6 +48,15 @@ R = L.Report(
             "positions on both sides, and that the record's revision is an "
             "ancestor of this HEAD -- plus the 2 controls in (v)")
 
+# THE ANCHOR THIS SCRIPT SPENDS, GATED HERE (mg-b2af, F-1 on mg-330a).
+# `PRE_7E58_REV` is spent in (v) as `ALT`, the OTHER real revision a mutated
+# transcript is made to name.  A control whose "other revision" has silently
+# become the one under test is a control that passes by being vacuous, which
+# is precisely the failure `PRE_7E58_REV` already had once: mg-69d1's edit
+# pushed the index along and the column labelled `before mg-7e58` came to
+# hold mg-76cc's parent.  Silent when green.
+L.gate_spent(R, "PRE_7E58_REV")
+
 L.banner("K2", "OPEN 2 -- G-3, COUNTED ON FIVE RATHER THAN READ OFF A TABLE")
 print("""
 The claim under audit is mg-76cc's: 5 of 5 committed outputs reproduce under

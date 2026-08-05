@@ -43,6 +43,14 @@ R = L.Report(
             "written, and every predicted exit code in mg-76cc's "
             "PREDICTIONS.md against the transcript it names")
 
+# THE ANCHOR THIS SCRIPT SPENDS, GATED HERE (mg-b2af, F-1 on mg-330a).
+# `REPAIR_REV` is read below for the commit message of the repair and for the
+# count of places the rationale is written.  Before this line the drift check
+# lived only in k1 and the selftest -- the two scripts that CHECK the anchor
+# -- so this script would have run to a clean exit on a re-pointed one and
+# printed its count about a revision nobody chose.  Silent when green.
+L.gate_spent(R, "REPAIR_REV")
+
 L.banner("K4", "THE CANCELLING PAIR -- THE INPUT THE RATIONALE NAMES")
 print("""
 The floor says: audit at least one thing no list here names, and say what was
