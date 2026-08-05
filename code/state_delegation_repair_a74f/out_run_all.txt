@@ -355,9 +355,11 @@ mg-a74f — PROSE CLAIMS, READ AS CLAIMS
   This checker's own directory is in the population, so it reads its own prose.
 
 ====================================================================================================
-P1.  EVERY REPO-RELATIVE PATH NAMED IN THE TEXT EXISTS AT THIS REVISION
+P1.  EVERY REPO-RELATIVE PATH NAMED IN THE TEXT EXISTS AT THIS REVISION —
+     AND `EXISTS` MEANS TRACKED, NOT PRESENT ON SOMEBODY'S DISK (mg-5f7c)
 ====================================================================================================
   population: 63 path references over 11 files (25 distinct paths).  Computed from the tree, not a hand list.
+  `exists` is 1271 TRACKED paths.
   [FAIL] P1  code/state_landing_control_2da3/delta_control.py:233
          names code/state_delegation_repair_0049/guards_only_0049.py
          which is not in the tree
@@ -383,7 +385,7 @@ P3.  EVERY PINNED TABLE OF delta_control.py KEYED BY REPO PATHS IS ITERATED BY
      THE INSTRUMENT.  A TABLE NOTHING VISITS IS A FAIL, NOT A SILENT PASS.
 ====================================================================================================
   [FAIL] P3  code/state_landing_control_2da3/delta_control.py
-         pinned tables keyed by repo paths: ['DELEGATED', 'DELEGATED_PRESENTATION']
+         pinned tables with at least one repo-path key: ['DELEGATED', 'DELEGATED_PRESENTATION']
          of those, iterated by some `for` in this file: ['DELEGATED']
          NOT ITERATED BY ANYTHING: ['DELEGATED_PRESENTATION']
          >>> a pinned table nothing visits cannot fail in the direction that would need visiting
@@ -391,15 +393,19 @@ P3.  EVERY PINNED TABLE OF delta_control.py KEYED BY REPO PATHS IS ITERATED BY
 ====================================================================================================
 P4.  EVERY `all N rows` PHRASE NAMING A SCRIPT MATCHES THAT SCRIPT'S OWN ROWS
 ====================================================================================================
-  population: 3 `all N rows` phrases over 11 files.  The script each is about is the nearest .py named in the 400 characters before it.
+  population: 3 `all N rows` phrases over 11 files.  The script each is about is
+  the one named ON ITS OWN LINE where there is one, and otherwise the nearest .py
+  named in the 400 characters before it — and every row below says WHICH, because
+  the second is a guess and the first is not (mg-5f7c).
+  attribution: {'ON THE LINE': 2, 'UNATTRIBUTED': 1}
   0 further phrase(s) SKIPPED as quotations — inside "..." or `...` on their own line:
          (none)
   [pass] P4  code/state_delegation_repair_0049/README.md:48
          says 'split_0049.py … all 9 rows'
-         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9   [attributed ON THE LINE]
   [pass] P4  code/state_landing_control_2da3/COVERAGE.md:276
          says 'split_0049.py … all 9 rows'
-         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9   [attributed ON THE LINE]
   [FAIL] P4  code/state_landing_control_2da3/delta_control.py:234
          says 'all 6 rows'
          no script named within 400 characters before it — the phrase cannot be attributed, so it is reported rather than passed
@@ -425,7 +431,7 @@ WHAT THIS RUN CHECKED, AND WHAT IT LEFT UNCHECKED
 ====================================================================================================
   P1   63 path references                  1 do not resolve
   P2    2 run_all.sh section references    1 unresolved, or naming something the section does not
-  P3    2 pinned tables keyed by repo paths 1 iterated by nothing
+  P3    2 pinned tables with a repo-path key  1 iterated by nothing
   P4    3 `all N rows` phrases             1 disagreeing with the script's own ROWS
 
   UNCHECKED, in the same files, by this program: every count that is not an
@@ -438,7 +444,7 @@ WHAT THIS RUN CHECKED, AND WHAT IT LEFT UNCHECKED
   4 finding(s).
     P1  code/state_landing_control_2da3/delta_control.py:233  — names code/state_delegation_repair_0049/guards_only_0049.py
     P2  code/state_delegation_repair_0049/README.md:106  — names section 7 — "coverage218d.py — COVERAGE.md checked against the code, not agai"
-    P3  code/state_landing_control_2da3/delta_control.py  — pinned tables keyed by repo paths: ['DELEGATED', 'DELEGATED_PRESENTATION']
+    P3  code/state_landing_control_2da3/delta_control.py  — pinned tables with at least one repo-path key: ['DELEGATED', 'DELEGATED_PRESENTATION']
     P4  code/state_landing_control_2da3/delta_control.py:234  — says 'all 6 rows'
 ====================================================================================================
 (section 2 exited 1 — non-zero is the point)
@@ -455,10 +461,12 @@ mg-a74f — PROSE CLAIMS, READ AS CLAIMS
   This checker's own directory is in the population, so it reads its own prose.
 
 ====================================================================================================
-P1.  EVERY REPO-RELATIVE PATH NAMED IN THE TEXT EXISTS AT THIS REVISION
+P1.  EVERY REPO-RELATIVE PATH NAMED IN THE TEXT EXISTS AT THIS REVISION —
+     AND `EXISTS` MEANS TRACKED, NOT PRESENT ON SOMEBODY'S DISK (mg-5f7c)
 ====================================================================================================
-  population: 85 path references over 18 files (32 distinct paths).  Computed from the tree, not a hand list.
-  [pass] P1  0 of 85 path references do not resolve
+  population: 87 path references over 18 files (34 distinct paths).  Computed from the tree, not a hand list.
+  `exists` is 1505 TRACKED paths; 12 further file(s) are present and untracked and DO NOT satisfy a reference.
+  [pass] P1  0 of 87 path references do not resolve
 
 ====================================================================================================
 P2.  EVERY `section N` REFERENCE TO A run_all.sh RESOLVES, AND EVERY mg-ID AND
@@ -467,7 +475,7 @@ P2.  EVERY `section N` REFERENCE TO A run_all.sh RESOLVES, AND EVERY mg-ID AND
   3 run_all.sh in the population; sections per file: state_delegation_repair_0049=9, state_delegation_repair_a74f=9, state_landing_control_2da3=3
   population: 3 `section N` references to a run_all.sh, over the 15 non-run_all.sh files of the declared set.
   1 further reference(s) SKIPPED as quotations:
-         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:80  'section 7'
+         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:131  'section 7'
   [pass] P2  code/state_delegation_repair_0049/README.md:106
          names section 8 — "mg-5644's OWN battery, re-run UNMODIFIED — the audit that found "
          tokens on the line: ['mg-218d', 'mg-5644']
@@ -483,26 +491,30 @@ P3.  EVERY PINNED TABLE OF delta_control.py KEYED BY REPO PATHS IS ITERATED BY
      THE INSTRUMENT.  A TABLE NOTHING VISITS IS A FAIL, NOT A SILENT PASS.
 ====================================================================================================
   [pass] P3  code/state_landing_control_2da3/delta_control.py
-         pinned tables keyed by repo paths: ['DELEGATED', 'DELEGATED_PRESENTATION']
+         pinned tables with at least one repo-path key: ['DELEGATED', 'DELEGATED_PRESENTATION']
          of those, iterated by some `for` in this file: ['DELEGATED', 'DELEGATED_PRESENTATION']
 
 ====================================================================================================
 P4.  EVERY `all N rows` PHRASE NAMING A SCRIPT MATCHES THAT SCRIPT'S OWN ROWS
 ====================================================================================================
-  population: 3 `all N rows` phrases over 18 files.  The script each is about is the nearest .py named in the 400 characters before it.
+  population: 3 `all N rows` phrases over 18 files.  The script each is about is
+  the one named ON ITS OWN LINE where there is one, and otherwise the nearest .py
+  named in the 400 characters before it — and every row below says WHICH, because
+  the second is a guess and the first is not (mg-5f7c).
+  attribution: {'ON THE LINE': 2, 'BY PROXIMITY': 1}
   3 further phrase(s) SKIPPED as quotations — inside "..." or `...` on their own line:
-         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:77  'all six rows'
-         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:106  'all nine rows'
-         (quoted, not asserted) code/state_delegation_repair_a74f/prose_a74f.py:338  'all six rows'
+         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:128  'all six rows'
+         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:157  'all nine rows'
+         (quoted, not asserted) code/state_delegation_repair_a74f/prose_a74f.py:385  'all six rows'
   [pass] P4  code/state_delegation_repair_0049/README.md:48
          says 'split_0049.py … all 9 rows'
-         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9   [attributed ON THE LINE]
   [pass] P4  code/state_landing_control_2da3/COVERAGE.md:276
          says 'split_0049.py … all 9 rows'
-         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9   [attributed ON THE LINE]
   [pass] P4  code/state_landing_control_2da3/delta_control.py:234
          says 'split_0049.py … all 9 rows'
-         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9   [attributed BY PROXIMITY]
 
 ====================================================================================================
 THE EXEMPTION LIST, PRINTED — FILES WHOSE PROSE REPORTS ANOTHER FILE'S CLAIMS
@@ -521,9 +533,9 @@ THE EXEMPTION LIST, PRINTED — FILES WHOSE PROSE REPORTS ANOTHER FILE'S CLAIMS
 ====================================================================================================
 WHAT THIS RUN CHECKED, AND WHAT IT LEFT UNCHECKED
 ====================================================================================================
-  P1   85 path references                  0 do not resolve
+  P1   87 path references                  0 do not resolve
   P2    3 run_all.sh section references    0 unresolved, or naming something the section does not
-  P3    2 pinned tables keyed by repo paths 0 iterated by nothing
+  P3    2 pinned tables with a repo-path key  0 iterated by nothing
   P4    3 `all N rows` phrases             0 disagreeing with the script's own ROWS
 
   UNCHECKED, in the same files, by this program: every count that is not an
@@ -541,7 +553,7 @@ WHAT THIS RUN CHECKED, AND WHAT IT LEFT UNCHECKED
 ====================================================================================================
 mg-a74f — SUPPRESSION, MEASURED; VISIBILITY, NOT CLAIMED
 ====================================================================================================
-Population: 5 documents x 2 renderers x 5 cited sections = 50 section observations.
+Population: 9 documents x 2 renderers x 5 cited sections = 90 section observations.
 
 THE DECLARED SET — a section is SUPPRESSED iff one of these holds, and NOT
 SUPPRESSED otherwise.  This is the whole of what this instrument measures:
@@ -560,6 +572,15 @@ browser and each is scored NOT SUPPRESSED here.  THIS INSTRUMENT FAILS OPEN:
     -   anything JavaScript does to the DOM after load, including `<noscript>` branches
     -   media queries, print stylesheets, and anything conditional on the reader's device
     -   the difference between shown and shown YET — scrolling, clicking, a second tab
+
+THAT SENTENCE WAS FALSE UNTIL mg-5f7c AND IS NOW EXECUTED RATHER THAN CLAIMED.
+At 6fb424f `<div class="hidden">` — the first NOT COVERED entry, in a document
+with no stylesheet — scored 0/5, SUPPRESSED, on both engines: a failure in the
+CLOSED direction under a docstring and a README that both said this instrument
+fails open.  V8 below is that posture made into a standing row: an embedded
+stylesheet that really does blank the page, which this file must and does report
+NOT SUPPRESSED.  V5 is the repaired case and V6 and V7 are the two rows in the
+other direction — a suppression this file must and does find.
 
 COLUMNS.  `bytes-in-html` is the section marker present in the serialised HTML —
 the property `render0049.py` and `render16eb.py` both actually measure.
@@ -587,6 +608,22 @@ V4  <div style="display:none"> at the top, never closed
     marked       bytes-in-html 5/5   not-suppressed 0/5   by S5          r16 SHOWN 5/5
     markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S5          r16 SHOWN 5/5
 
+V5  <div class="hidden"> at the top — a CLASS, no stylesheet in the document
+    marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+
+V6  <details title="open me"> — DECLARED S1 holds of it
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 5/5
+
+V7  V3's blank page behind 3000 `&` — the same suppression, padded
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+
+V8  <style> hiding a class that every section is inside — NOT COVERED, on purpose
+    marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+
 ====================================================================================================
 WHERE THE TWO INSTRUMENTS DISAGREE, AND WHICH ONE IS WRONG
 ====================================================================================================
@@ -596,6 +633,10 @@ WHERE THE TWO INSTRUMENTS DISAGREE, AND WHICH ONE IS WRONG
   V3 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
   V4 / marked       not-suppressed 0/5   r16 SHOWN 5/5
   V4 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V6 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V6 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V7 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V7 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
 
   V1 IS THE ROW THAT SETTLES IT.  It is mg-0049's own R8, unedited: the whole
   target inside a CLOSED HTML comment.  mg-0049's render0049.py scores it ANY 0/5
@@ -625,8 +666,19 @@ DOES EACH ROW OF THIS FILE MEASURE THE PROPERTY ITS NAME CLAIMS?  (mg-16eb OPEN 
                    the column keeps mg-16eb's own name for it so the mismatch is
                    legible rather than laundered.
 
-  50 section observations; 0 renderer rows where this file and its own
-  committed prediction disagree; 6 of 10 renderer rows where this file and mg-16eb's rule
+  THE POLARITY, SHOWN IN BOTH DIRECTIONS (mg-5f7c).  V5 and V8 are documents a
+  reader is shown IN FULL and this file DECLINES TO SUPPRESS them; V6 and V7 are
+  documents a reader is shown NOTHING of and this file SUPPRESSES them.  V8's
+  stylesheet really does blank the page and is reported NOT SUPPRESSED anyway —
+  that is the fail-open posture executed, and the row goes red the moment an
+  out-of-set mechanism starts scoring as suppression.
+
+  unescape_with_map reproduced html.unescape on 18 of 18 documents; a single disagreement raises rather than
+  prints, because an offset map that is wrong makes every row above it not
+  evidence.
+
+  90 section observations; 0 renderer rows where this file and its own
+  committed prediction disagree; 10 of 18 renderer rows where this file and mg-16eb's rule
   disagree.
 ====================================================================================================
 

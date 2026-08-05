@@ -1,0 +1,131 @@
+====================================================================================================
+mg-a74f — SUPPRESSION, MEASURED; VISIBILITY, NOT CLAIMED
+====================================================================================================
+Population: 9 documents x 2 renderers x 5 cited sections = 90 section observations.
+
+THE DECLARED SET — a section is SUPPRESSED iff one of these holds, and NOT
+SUPPRESSED otherwise.  This is the whole of what this instrument measures:
+    S1   inside a <details> element carrying no `open` attribute
+    S2   inside an HTML comment (terminated or running to the end of the document)
+    S3   inside the content of a <script>, <style>, <template> or <textarea>
+    S4   inside an element carrying the `hidden` attribute
+    S5   inside an element whose inline style sets display:none or visibility:hidden
+
+WHAT THE DECLARED SET DOES NOT COVER.  Each of these suppresses content in a real
+browser and each is scored NOT SUPPRESSED here.  THIS INSTRUMENT FAILS OPEN:
+    -   any rule from an external or embedded stylesheet, including `display:none` on a class
+    -   `aria-hidden`, `inert`, and anything else that hides from a subset of readers
+    -   off-screen positioning, zero size, `clip`, `overflow:hidden`, `opacity:0`
+    -   `color: transparent` and any other paint the text in the page's own background
+    -   anything JavaScript does to the DOM after load, including `<noscript>` branches
+    -   media queries, print stylesheets, and anything conditional on the reader's device
+    -   the difference between shown and shown YET — scrolling, clicking, a second tab
+
+THAT SENTENCE WAS FALSE UNTIL mg-5f7c AND IS NOW EXECUTED RATHER THAN CLAIMED.
+At 6fb424f `<div class="hidden">` — the first NOT COVERED entry, in a document
+with no stylesheet — scored 0/5, SUPPRESSED, on both engines: a failure in the
+CLOSED direction under a docstring and a README that both said this instrument
+fails open.  V8 below is that posture made into a standing row: an embedded
+stylesheet that really does blank the page, which this file must and does report
+NOT SUPPRESSED.  V5 is the repaired case and V6 and V7 are the two rows in the
+other direction — a suppression this file must and does find.
+
+COLUMNS.  `bytes-in-html` is the section marker present in the serialised HTML —
+the property `render0049.py` and `render16eb.py` both actually measure.
+`not-suppressed` is the marker present AND suppressed by no mechanism above.
+`r16 SHOWN` is mg-16eb's own rule, computed by importing render16eb.py unmodified
+and calling its own two functions.  No column here is named `shown to a reader`.
+
+V0  unmutated — the positive control
+    marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+
+V1  the whole file inside a CLOSED HTML comment (mg-0049's own R8)
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S2          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S2          r16 SHOWN 5/5
+
+V2  <details><summary> at the top, never closed (mg-16eb's own B3)
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 0/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 0/5
+
+V3  <div hidden> at the top, never closed
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+
+V4  <div style="display:none"> at the top, never closed
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S5          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S5          r16 SHOWN 5/5
+
+V5  <div class="hidden"> at the top — a CLASS, no stylesheet in the document
+    marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+
+V6  <details title="open me"> — DECLARED S1 holds of it
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 5/5
+
+V7  V3's blank page behind 3000 `&` — the same suppression, padded
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+
+V8  <style> hiding a class that every section is inside — NOT COVERED, on purpose
+    marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+
+====================================================================================================
+WHERE THE TWO INSTRUMENTS DISAGREE, AND WHICH ONE IS WRONG
+====================================================================================================
+  V1 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V1 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V3 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V3 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V4 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V4 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V6 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V6 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V7 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V7 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+
+  V1 IS THE ROW THAT SETTLES IT.  It is mg-0049's own R8, unedited: the whole
+  target inside a CLOSED HTML comment.  mg-0049's render0049.py scores it ANY 0/5
+  and HEADING 0/5 on both renderers; delta_control.py exits 1 on it and calls it
+  damage; mg-16eb's own audit calls it 'R1's and R8's blank page'.  Every party in
+  this arc agrees a reader is shown nothing.  mg-16eb's SHOWN TO A READER rule
+  scores it 5 of 5, because its tag-stripping regex requires a letter after `<`
+  and `<!--` has a `!`, so the comment's contents survive the strip and its one
+  suppression mechanism is <details>, which a comment is not.
+
+  V3 AND V4 ARE THE SAME DEFECT ON MECHANISMS NOBODY IN THIS ARC HAS USED.  A
+  `hidden` attribute and an inline `display:none` each produce the same blank
+  page and each is scored 5 of 5 SHOWN by that rule.
+
+  V2 IS THE ROW IT GETS RIGHT, and it is the only shape it was written against.
+
+====================================================================================================
+DOES EACH ROW OF THIS FILE MEASURE THE PROPERTY ITS NAME CLAIMS?  (mg-16eb OPEN 3)
+====================================================================================================
+  bytes-in-html    names bytes; measures bytes.  MATCHES.
+  not-suppressed   names 'suppressed by no mechanism in the declared set';
+                   measures exactly that, over the set printed above.  MATCHES,
+                   and it is weaker than 'shown to a reader' BY CONSTRUCTION —
+                   the NOT COVERED list above is the size of the gap.
+  r16 SHOWN        names what a reader is shown; measures bytes-in-html minus one
+                   mechanism.  DOES NOT MATCH.  That is this file's finding, and
+                   the column keeps mg-16eb's own name for it so the mismatch is
+                   legible rather than laundered.
+
+  THE POLARITY, SHOWN IN BOTH DIRECTIONS (mg-5f7c).  V5 and V8 are documents a
+  reader is shown IN FULL and this file DECLINES TO SUPPRESS them; V6 and V7 are
+  documents a reader is shown NOTHING of and this file SUPPRESSES them.  V8's
+  stylesheet really does blank the page and is reported NOT SUPPRESSED anyway —
+  that is the fail-open posture executed, and the row goes red the moment an
+  out-of-set mechanism starts scoring as suppression.
+
+  unescape_with_map reproduced html.unescape on 18 of 18 documents; a single disagreement raises rather than
+  prints, because an offset map that is wrong makes every row above it not
+  evidence.
+
+  90 section observations; 0 renderer rows where this file and its own
+  committed prediction disagree; 10 of 18 renderer rows where this file and mg-16eb's rule
+  disagree.
+====================================================================================================

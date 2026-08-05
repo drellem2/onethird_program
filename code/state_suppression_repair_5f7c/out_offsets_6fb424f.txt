@@ -1,0 +1,76 @@
+====================================================================================================
+mg-5f7c — AN OFFSET TAKEN IN html.unescape(out), SPENT AS AN INDEX INTO out
+====================================================================================================
+  under test   code/state_delegation_repair_a74f/visible_a74f.py at 6fb424f
+
+====================================================================================================
+A.  THE CONSTRUCTION — visible_a74f.main() RUN OVER A DOCUMENT IT CANNOT GET RIGHT
+    AT THE ANCHOR, WITH ITS OWN MEASUREMENT EXPRESSION AND ITS OWN EXIT CODE
+====================================================================================================
+  the document          15214 characters; unescaped 3184; shrinkage 12030
+  `<div hidden>` at     15001 in the document
+  H1's marker at        15018 in the document, 3018 in the unescaped string — displaced by 12000
+  so an offset taken in the unescaped string is spent at 3018, which is BEFORE the
+  tag that suppresses every section, and the walk finds nothing open.
+
+  THE ROW'S COMMITTED PREDICTION IS THE CORRECT ANSWER — bytes-in-html 5/5,
+  not-suppressed 0/5 — so a wrong offset is reported by the file under test as its
+  OWN prediction miss, in its own words, and carried out in its own exit code.
+
+  code/state_delegation_repair_a74f/visible_a74f.py at 6fb424f, over that one row:
+      X1  3000 `&amp;` then <div hidden>, never closed — a blank page
+          marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+                       !! not-suppressed predicted 0
+          markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+                       !! not-suppressed predicted 0
+
+  main() returned 1 — THE OFFSET IS SPENT IN A STRING IT WAS NOT TAKEN IN
+
+====================================================================================================
+B.  THE 50 PUBLISHED SECTION OBSERVATIONS, RE-DERIVED AT BOTH OFFSETS
+====================================================================================================
+  POPULATION: the 5 documents x 2 renderers x 5 cited sections =
+  50 section observations mg-a74f PUBLISHED at 6fb424f, taken from that revision's
+  own ROWS rather than retyped.  GRAIN: one marker lookup — the position the
+  tag-stack walk was started from, and the position the marker is actually at.
+
+  V0 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 5/5; at the true offset 5/5  — unchanged
+  V0 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 5/5; at the true offset 5/5  — unchanged
+  V1 marked       markers walked at a position that is not the marker's: 0/5  (none)
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V1 markdown-it  markers walked at a position that is not the marker's: 0/5  (none)
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V2 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V2 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V3 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V3 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V4 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V4 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+
+  32 OF 50 PUBLISHED SECTION OBSERVATIONS were walked from a position
+  that is not the marker's position in the string being walked.  The other
+  18 are V1's ten — inside an HTML comment a renderer escapes nothing —
+  and the eight H1s, which sit ahead of the first entity in the document.
+
+  AND YET 0 OF 10 PUBLISHED ROW FIGURES CHANGE: (none).
+  NO PUBLISHED FIGURE OF mg-a74f IS WRONG, AND THAT IS LUCK OF ROW DESIGN RATHER
+  THAN INSTRUMENT CORRECTNESS.  Every one of those five documents applies its
+  mechanism to the WHOLE document — a comment around all of it, a `<div hidden>`
+  never closed — so a displaced position is still inside the same suppression and
+  returns the same verdict.  Section A is the same defect on a document where the
+  displacement crosses the tag, and there it returns the opposite answer.  A
+  correct number computed by a wrong method is not a correct method, and the next
+  document put to this instrument would not have been protected by the shape of
+  the last five.
+
+====================================================================================================
+  A.  the construction, at 6fb424f: THE OFFSET DOES NOT LAND ON THE MARKER
+====================================================================================================

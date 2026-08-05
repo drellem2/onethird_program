@@ -1,0 +1,101 @@
+====================================================================================================
+mg-5f7c — THE SUPPRESSION POLARITY, PUT TO SIXTEEN CONSTRUCTIONS
+====================================================================================================
+  under test   code/state_delegation_repair_a74f/visible_a74f.py at 6fb424f
+  beside it    the same file at 6fb424f, read with `git show` and executed unmodified
+  population   16 hand-written HTML documents.  NO RENDERER IS USED, so this
+               file runs anywhere and the polarity does not rest on two npm
+               packages being installed.
+
+  THE DECISION THIS REPAIR MADE: the CODE was wrong and BOTH DOCUMENTS were right;
+  the instrument must FAIL OPEN.  The argument is in this file's docstring, and
+  the part of it that is checkable rather than arguable is that DECLARED S4 says
+  the `hidden` ATTRIBUTE and NOT_COVERED says a class is outside the set — so the
+  docstring, the README and the printed declared set all agreed already.
+
+  A CORRECT ANSWER IS A FUNCTION OF THE DECLARED SET, NOT OF THE BROWSER.  P13,
+  P14 are documents a browser blanks or hides which this instrument MUST report
+  NOT SUPPRESSED.  That is the fail-open posture executed rather than claimed.
+
+  id    browser   declared  correct   at 6fb424f   verdict@anchor               now       verdict
+  -----------------------------------------------------------------------------------------------
+  P01   SHOWN     —         (none)    (none)       correct                      (none)    correct
+  P02   SHOWN     —         (none)    S4           FAILS CLOSED                 S4        FAILS CLOSED
+  P03   SHOWN     —         (none)    S4           FAILS CLOSED                 S4        FAILS CLOSED
+  P04   SHOWN     —         (none)    S4           FAILS CLOSED                 S4        FAILS CLOSED
+  P05   SHOWN     —         (none)    S4           FAILS CLOSED                 S4        FAILS CLOSED
+  P06   SHOWN     —         (none)    S5           FAILS CLOSED                 S5        FAILS CLOSED
+  P07   BLANK     S4        S4        S4           correct                      S4        correct
+  P08   BLANK     S4        S4        S4           correct                      S4        correct
+  P09   BLANK     S1        S1        S1           correct                      S1        correct
+  P10   SHOWN     —         (none)    (none)       correct                      (none)    correct
+  P11   BLANK     S1        S1        (none)       MISSES ITS OWN DECLARED SET  (none)    MISSES ITS OWN DECLARED SET
+  P12   BLANK     S5        S5        S5           correct                      S5        correct
+  P13   BLANK     —         (none)    (none)       correct                      (none)    correct
+  P14   SUBSET    —         (none)    (none)       correct                      (none)    correct
+  P15   BLANK     S2        S2        S2           correct                      S2        correct
+  P16   BLANK     S3        S3        S3           correct                      S3        correct
+
+====================================================================================================
+WHAT EACH CONSTRUCTION IS FOR
+====================================================================================================
+  P01  none — a reader is shown: SHOWN
+        the positive control: nothing at all is suppressing it
+  P02  a CLASS named hidden, no stylesheet in the document — a reader is shown: SHOWN
+        D1. S4 is the `hidden` ATTRIBUTE; a class needs a stylesheet and there is none here
+  P03  an ID named hidden — a reader is shown: SHOWN
+        the same shape on a different attribute
+  P04  the word `hidden` inside a title — a reader is shown: SHOWN
+        the same shape inside prose a reader is shown on hover
+  P05  an UNQUOTED class value named hidden — a reader is shown: SHOWN
+        the same shape with no quotes, which the attribute parser must also get right
+  P06  a data- attribute whose NAME ends in `style` — a reader is shown: SHOWN
+        FOUND BY THIS REPAIR, not by mg-65eb: the pre-repair S5 regex `style\s*=\s*"..."` matches
+        inside `data-style=`, so this is a THIRD fail-closed shape in the same bug
+  P07  the `hidden` ATTRIBUTE — a reader is shown: BLANK
+        the mechanism S4 actually names
+  P08  `hidden` with the value `false` — a reader is shown: BLANK
+        a boolean attribute: present is present, and the value is not consulted
+  P09  a <details> with no `open` — a reader is shown: BLANK
+        mg-16eb's B3 shape, the one this instrument was written against
+  P10  a <details> carrying `open` — a reader is shown: SHOWN
+        S1 does not hold; the widget is open
+  P11  a <details> whose TITLE contains the word open — a reader is shown: BLANK
+        D2. No `open` ATTRIBUTE, so S1 holds — the declared set the instrument did not implement
+  P12  an inline style setting display:none — a reader is shown: BLANK
+        the mechanism S5 names
+  P13  an EMBEDDED STYLESHEET hiding the class — a reader is shown: BLANK
+        THE FAIL-OPEN POSTURE ITSELF. A browser paints nothing; deciding that needs the cascade; the
+        cascade is outside the declared set BY CONSTRUCTION, and NOT_COVERED says so in its first
+        line. NOT SUPPRESSED is the only answer this instrument may give, and this row goes red the
+        moment it gives another
+  P14  aria-hidden — a reader is shown: SUBSET
+        NOT_COVERED's second line, made into a document: hidden from a SUBSET of readers — assistive
+        technology skips it and a sighted reader is shown it
+  P15  inside a closed HTML comment — a reader is shown: BLANK
+        mg-0049's R8 shape, reduced
+  P16  inside a raw-text element — a reader is shown: BLANK
+        the mechanism S3 names
+
+====================================================================================================
+THE COUNT, AND THE POPULATION IT IS OVER
+====================================================================================================
+  population: 16 hand-written documents; grain: one document, one
+  marker position, the set of DECLARED mechanisms reported at that position.
+  at 6fb424f          6 of 16 wrong
+  at 6fb424f           6 of 16 wrong
+
+  AT THE ANCHOR, BY KIND:  fails CLOSED on ['P02', 'P03', 'P04', 'P05', 'P06']; misses its own
+  declared set on ['P11'].  BOTH DIRECTIONS, ONE BUG — an attribute
+  NAME matched by regex over the attribute TEXT.
+
+  P06 IS THIS REPAIR'S OWN FINDING AND NOT mg-65eb's.  mg-65eb reported the
+  `hidden` and `open` shapes; `data-style="display:none"` is the same defect on
+  S5, found by writing the parser rather than by reading the report, and it was
+  live at the anchor with nothing pointing at it.
+
+  THE FAIL-OPEN POSTURE, EXECUTED: ['P13', 'P14'] are documents a browser
+  blanks or hides by a mechanism OUTSIDE the declared set, and the instrument
+  reports NOT SUPPRESSED on every one of them.  A suppression instrument nobody
+  has seen DECLINE to suppress is not evidence of a fail-open posture.
+====================================================================================================

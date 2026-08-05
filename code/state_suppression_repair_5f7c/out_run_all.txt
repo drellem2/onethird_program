@@ -1,0 +1,797 @@
+
+################################################################################
+### 1. polarity_5f7c.py — sixteen constructions, renderer-free   (PREDICTIONS.md: exit 0)
+################################################################################
+====================================================================================================
+mg-5f7c — THE SUPPRESSION POLARITY, PUT TO SIXTEEN CONSTRUCTIONS
+====================================================================================================
+  under test   code/state_delegation_repair_a74f/visible_a74f.py at the working tree
+  beside it    the same file at 6fb424f, read with `git show` and executed unmodified
+  population   16 hand-written HTML documents.  NO RENDERER IS USED, so this
+               file runs anywhere and the polarity does not rest on two npm
+               packages being installed.
+
+  THE DECISION THIS REPAIR MADE: the CODE was wrong and BOTH DOCUMENTS were right;
+  the instrument must FAIL OPEN.  The argument is in this file's docstring, and
+  the part of it that is checkable rather than arguable is that DECLARED S4 says
+  the `hidden` ATTRIBUTE and NOT_COVERED says a class is outside the set — so the
+  docstring, the README and the printed declared set all agreed already.
+
+  A CORRECT ANSWER IS A FUNCTION OF THE DECLARED SET, NOT OF THE BROWSER.  P13,
+  P14 are documents a browser blanks or hides which this instrument MUST report
+  NOT SUPPRESSED.  That is the fail-open posture executed rather than claimed.
+
+  id    browser   declared  correct   at 6fb424f   verdict@anchor               now       verdict
+  -----------------------------------------------------------------------------------------------
+  P01   SHOWN     —         (none)    (none)       correct                      (none)    correct
+  P02   SHOWN     —         (none)    S4           FAILS CLOSED                 (none)    correct
+  P03   SHOWN     —         (none)    S4           FAILS CLOSED                 (none)    correct
+  P04   SHOWN     —         (none)    S4           FAILS CLOSED                 (none)    correct
+  P05   SHOWN     —         (none)    S4           FAILS CLOSED                 (none)    correct
+  P06   SHOWN     —         (none)    S5           FAILS CLOSED                 (none)    correct
+  P07   BLANK     S4        S4        S4           correct                      S4        correct
+  P08   BLANK     S4        S4        S4           correct                      S4        correct
+  P09   BLANK     S1        S1        S1           correct                      S1        correct
+  P10   SHOWN     —         (none)    (none)       correct                      (none)    correct
+  P11   BLANK     S1        S1        (none)       MISSES ITS OWN DECLARED SET  S1        correct
+  P12   BLANK     S5        S5        S5           correct                      S5        correct
+  P13   BLANK     —         (none)    (none)       correct                      (none)    correct
+  P14   SUBSET    —         (none)    (none)       correct                      (none)    correct
+  P15   BLANK     S2        S2        S2           correct                      S2        correct
+  P16   BLANK     S3        S3        S3           correct                      S3        correct
+
+====================================================================================================
+WHAT EACH CONSTRUCTION IS FOR
+====================================================================================================
+  P01  none — a reader is shown: SHOWN
+        the positive control: nothing at all is suppressing it
+  P02  a CLASS named hidden, no stylesheet in the document — a reader is shown: SHOWN
+        D1. S4 is the `hidden` ATTRIBUTE; a class needs a stylesheet and there is none here
+  P03  an ID named hidden — a reader is shown: SHOWN
+        the same shape on a different attribute
+  P04  the word `hidden` inside a title — a reader is shown: SHOWN
+        the same shape inside prose a reader is shown on hover
+  P05  an UNQUOTED class value named hidden — a reader is shown: SHOWN
+        the same shape with no quotes, which the attribute parser must also get right
+  P06  a data- attribute whose NAME ends in `style` — a reader is shown: SHOWN
+        FOUND BY THIS REPAIR, not by mg-65eb: the pre-repair S5 regex `style\s*=\s*"..."` matches
+        inside `data-style=`, so this is a THIRD fail-closed shape in the same bug
+  P07  the `hidden` ATTRIBUTE — a reader is shown: BLANK
+        the mechanism S4 actually names
+  P08  `hidden` with the value `false` — a reader is shown: BLANK
+        a boolean attribute: present is present, and the value is not consulted
+  P09  a <details> with no `open` — a reader is shown: BLANK
+        mg-16eb's B3 shape, the one this instrument was written against
+  P10  a <details> carrying `open` — a reader is shown: SHOWN
+        S1 does not hold; the widget is open
+  P11  a <details> whose TITLE contains the word open — a reader is shown: BLANK
+        D2. No `open` ATTRIBUTE, so S1 holds — the declared set the instrument did not implement
+  P12  an inline style setting display:none — a reader is shown: BLANK
+        the mechanism S5 names
+  P13  an EMBEDDED STYLESHEET hiding the class — a reader is shown: BLANK
+        THE FAIL-OPEN POSTURE ITSELF. A browser paints nothing; deciding that needs the cascade; the
+        cascade is outside the declared set BY CONSTRUCTION, and NOT_COVERED says so in its first
+        line. NOT SUPPRESSED is the only answer this instrument may give, and this row goes red the
+        moment it gives another
+  P14  aria-hidden — a reader is shown: SUBSET
+        NOT_COVERED's second line, made into a document: hidden from a SUBSET of readers — assistive
+        technology skips it and a sighted reader is shown it
+  P15  inside a closed HTML comment — a reader is shown: BLANK
+        mg-0049's R8 shape, reduced
+  P16  inside a raw-text element — a reader is shown: BLANK
+        the mechanism S3 names
+
+====================================================================================================
+THE COUNT, AND THE POPULATION IT IS OVER
+====================================================================================================
+  population: 16 hand-written documents; grain: one document, one
+  marker position, the set of DECLARED mechanisms reported at that position.
+  at 6fb424f          6 of 16 wrong
+  at the working tree  0 of 16 wrong
+
+  AT THE ANCHOR, BY KIND:  fails CLOSED on ['P02', 'P03', 'P04', 'P05', 'P06']; misses its own
+  declared set on ['P11'].  BOTH DIRECTIONS, ONE BUG — an attribute
+  NAME matched by regex over the attribute TEXT.
+
+  P06 IS THIS REPAIR'S OWN FINDING AND NOT mg-65eb's.  mg-65eb reported the
+  `hidden` and `open` shapes; `data-style="display:none"` is the same defect on
+  S5, found by writing the parser rather than by reading the report, and it was
+  live at the anchor with nothing pointing at it.
+
+  THE FAIL-OPEN POSTURE, EXECUTED: ['P13', 'P14'] are documents a browser
+  blanks or hides by a mechanism OUTSIDE the declared set, and the instrument
+  reports NOT SUPPRESSED on every one of them.  A suppression instrument nobody
+  has seen DECLINE to suppress is not evidence of a fail-open posture.
+====================================================================================================
+--- exit 0, as pre-registered
+
+################################################################################
+### 2. offsets_5f7c.py --rev 6fb424f — the defect at the anchor   (PREDICTIONS.md: exit 1)
+################################################################################
+====================================================================================================
+mg-5f7c — AN OFFSET TAKEN IN html.unescape(out), SPENT AS AN INDEX INTO out
+====================================================================================================
+  under test   code/state_delegation_repair_a74f/visible_a74f.py at 6fb424f
+
+====================================================================================================
+A.  THE CONSTRUCTION — visible_a74f.main() RUN OVER A DOCUMENT IT CANNOT GET RIGHT
+    AT THE ANCHOR, WITH ITS OWN MEASUREMENT EXPRESSION AND ITS OWN EXIT CODE
+====================================================================================================
+  the document          15214 characters; unescaped 3184; shrinkage 12030
+  `<div hidden>` at     15001 in the document
+  H1's marker at        15018 in the document, 3018 in the unescaped string — displaced by 12000
+  so an offset taken in the unescaped string is spent at 3018, which is BEFORE the
+  tag that suppresses every section, and the walk finds nothing open.
+
+  THE ROW'S COMMITTED PREDICTION IS THE CORRECT ANSWER — bytes-in-html 5/5,
+  not-suppressed 0/5 — so a wrong offset is reported by the file under test as its
+  OWN prediction miss, in its own words, and carried out in its own exit code.
+
+  code/state_delegation_repair_a74f/visible_a74f.py at 6fb424f, over that one row:
+      X1  3000 `&amp;` then <div hidden>, never closed — a blank page
+          marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+                       !! not-suppressed predicted 0
+          markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+                       !! not-suppressed predicted 0
+
+  main() returned 1 — THE OFFSET IS SPENT IN A STRING IT WAS NOT TAKEN IN
+
+====================================================================================================
+B.  THE 50 PUBLISHED SECTION OBSERVATIONS, RE-DERIVED AT BOTH OFFSETS
+====================================================================================================
+  POPULATION: the 5 documents x 2 renderers x 5 cited sections =
+  50 section observations mg-a74f PUBLISHED at 6fb424f, taken from that revision's
+  own ROWS rather than retyped.  GRAIN: one marker lookup — the position the
+  tag-stack walk was started from, and the position the marker is actually at.
+
+  V0 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 5/5; at the true offset 5/5  — unchanged
+  V0 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 5/5; at the true offset 5/5  — unchanged
+  V1 marked       markers walked at a position that is not the marker's: 0/5  (none)
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V1 markdown-it  markers walked at a position that is not the marker's: 0/5  (none)
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V2 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V2 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V3 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V3 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V4 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V4 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+
+  32 OF 50 PUBLISHED SECTION OBSERVATIONS were walked from a position
+  that is not the marker's position in the string being walked.  The other
+  18 are V1's ten — inside an HTML comment a renderer escapes nothing —
+  and the eight H1s, which sit ahead of the first entity in the document.
+
+  AND YET 0 OF 10 PUBLISHED ROW FIGURES CHANGE: (none).
+  NO PUBLISHED FIGURE OF mg-a74f IS WRONG, AND THAT IS LUCK OF ROW DESIGN RATHER
+  THAN INSTRUMENT CORRECTNESS.  Every one of those five documents applies its
+  mechanism to the WHOLE document — a comment around all of it, a `<div hidden>`
+  never closed — so a displaced position is still inside the same suppression and
+  returns the same verdict.  Section A is the same defect on a document where the
+  displacement crosses the tag, and there it returns the opposite answer.  A
+  correct number computed by a wrong method is not a correct method, and the next
+  document put to this instrument would not have been protected by the shape of
+  the last five.
+
+====================================================================================================
+  A.  the construction, at 6fb424f: THE OFFSET DOES NOT LAND ON THE MARKER
+====================================================================================================
+--- exit 1, as pre-registered
+
+################################################################################
+### 3. offsets_5f7c.py — the tree   (PREDICTIONS.md: exit 0)
+################################################################################
+====================================================================================================
+mg-5f7c — AN OFFSET TAKEN IN html.unescape(out), SPENT AS AN INDEX INTO out
+====================================================================================================
+  under test   code/state_delegation_repair_a74f/visible_a74f.py at the working tree
+
+====================================================================================================
+A.  THE CONSTRUCTION — visible_a74f.main() RUN OVER A DOCUMENT IT CANNOT GET RIGHT
+    AT THE ANCHOR, WITH ITS OWN MEASUREMENT EXPRESSION AND ITS OWN EXIT CODE
+====================================================================================================
+  the document          15214 characters; unescaped 3184; shrinkage 12030
+  `<div hidden>` at     15001 in the document
+  H1's marker at        15018 in the document, 3018 in the unescaped string — displaced by 12000
+  so an offset taken in the unescaped string is spent at 3018, which is BEFORE the
+  tag that suppresses every section, and the walk finds nothing open.
+
+  THE ROW'S COMMITTED PREDICTION IS THE CORRECT ANSWER — bytes-in-html 5/5,
+  not-suppressed 0/5 — so a wrong offset is reported by the file under test as its
+  OWN prediction miss, in its own words, and carried out in its own exit code.
+
+  code/state_delegation_repair_a74f/visible_a74f.py at the working tree, over that one row:
+      X1  3000 `&amp;` then <div hidden>, never closed — a blank page
+          marked       bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+          markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+
+  main() returned 0 — the offset is spent in the string it was taken from
+
+====================================================================================================
+B.  THE 50 PUBLISHED SECTION OBSERVATIONS, RE-DERIVED AT BOTH OFFSETS
+====================================================================================================
+  POPULATION: the 5 documents x 2 renderers x 5 cited sections =
+  50 section observations mg-a74f PUBLISHED at 6fb424f, taken from that revision's
+  own ROWS rather than retyped.  GRAIN: one marker lookup — the position the
+  tag-stack walk was started from, and the position the marker is actually at.
+
+  V0 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 5/5; at the true offset 5/5  — unchanged
+  V0 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 5/5; at the true offset 5/5  — unchanged
+  V1 marked       markers walked at a position that is not the marker's: 0/5  (none)
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V1 markdown-it  markers walked at a position that is not the marker's: 0/5  (none)
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V2 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V2 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V3 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V3 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V4 marked       markers walked at a position that is not the marker's: 4/5  ['H2-112', 'H3-120', 'H4-120', 'H5-128']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+  V4 markdown-it  markers walked at a position that is not the marker's: 4/5  ['H2-100', 'H3-100', 'H4-100', 'H5-100']
+      published not-suppressed 0/5; at the true offset 0/5  — unchanged
+
+  32 OF 50 PUBLISHED SECTION OBSERVATIONS were walked from a position
+  that is not the marker's position in the string being walked.  The other
+  18 are V1's ten — inside an HTML comment a renderer escapes nothing —
+  and the eight H1s, which sit ahead of the first entity in the document.
+
+  AND YET 0 OF 10 PUBLISHED ROW FIGURES CHANGE: (none).
+  NO PUBLISHED FIGURE OF mg-a74f IS WRONG, AND THAT IS LUCK OF ROW DESIGN RATHER
+  THAN INSTRUMENT CORRECTNESS.  Every one of those five documents applies its
+  mechanism to the WHOLE document — a comment around all of it, a `<div hidden>`
+  never closed — so a displaced position is still inside the same suppression and
+  returns the same verdict.  Section A is the same defect on a document where the
+  displacement crosses the tag, and there it returns the opposite answer.  A
+  correct number computed by a wrong method is not a correct method, and the next
+  document put to this instrument would not have been protected by the shape of
+  the last five.
+
+====================================================================================================
+  A.  the construction, at the working tree: the offset lands on the marker
+====================================================================================================
+--- exit 0, as pre-registered
+
+################################################################################
+### 4. prose_5f7c.py — C1 and C2 under restore discipline   (PREDICTIONS.md: exit 0)
+################################################################################
+====================================================================================================
+mg-5f7c — prose_a74f.py's THREE FINDINGS, TWO OF THEM PUT TO CONSTRUCTIONS
+====================================================================================================
+  under test   code/state_delegation_repair_a74f/prose_a74f.py at the working tree
+  beside it    the same file at 6fb424f, read with `git show` and executed
+               unmodified — the repair's evidence is the OLD code disagreeing
+               with it, not the new code agreeing with itself.
+
+====================================================================================================
+C1.  AN UNTRACKED FILE SATISFYING A CLAIM ABOUT A REVISION
+====================================================================================================
+  the construction: create code/state_landing_control_2da3/mg5f7c_untracked_probe.py — present on this disk, in no commit —
+  and add one line to code/state_delegation_repair_0049/mutations_0049.py that names it.  P1 reads
+  `every repo-relative path named in the text EXISTS AT THE REVISION BEING READ`.
+
+  at 6fb424f   exit 0   the untracked path is reported: False
+      population: 88 path references over 19 files (35 distinct paths).  Computed from the tree, not a hand list.
+  at the tree   exit 1   the untracked path is reported: True
+      population: 88 path references over 18 files (35 distinct paths).  Computed from the tree, not a hand list.
+      `exists` is 1505 TRACKED paths; 13 further file(s) are present and untracked and DO NOT satisfy a reference.
+      names code/state_landing_control_2da3/mg5f7c_untracked_probe.py
+      which is present but UNTRACKED — it is at no revision, and every reader of every commit gets a dangling reference
+      P1  code/state_delegation_repair_0049/mutations_0049.py:144  — names code/state_landing_control_2da3/mg5f7c_untracked_probe.py
+  >>> C1 REPAIRED: the construction passed at 6fb424f and fails on the tree.
+
+====================================================================================================
+C2.  ONE EXTRA KEY NAMED `note`, AND A PINNED TABLE LEAVES THE POPULATION
+====================================================================================================
+  BEFORE the construction:
+      at 6fb424f   pinned tables keyed by repo paths: ['DELEGATED', 'DELEGATED_PRESENTATION']
+      at the tree   pinned tables with at least one repo-path key: ['DELEGATED', 'DELEGATED_PRESENTATION']
+
+  AFTER adding one key `"note": "..."` to DELEGATED_PRESENTATION:
+      at 6fb424f   pinned tables keyed by repo paths: ['DELEGATED']
+      at the tree   pinned tables with at least one repo-path key: ['DELEGATED', 'DELEGATED_PRESENTATION']
+      of those, MIXED-KEY (repo paths / all keys): {'DELEGATED_PRESENTATION': '1 of 2'}
+
+  >>> at 6fb424f  DELEGATED_PRESENTATION LEFT the population: True
+  >>> at the tree  DELEGATED_PRESENTATION STAYED in the population: True
+  >>> C2 REPAIRED
+
+====================================================================================================
+C3.  ATTRIBUTION BY PROXIMITY — MEASURED, NOT CONSTRUCTED, AND WHY
+====================================================================================================
+  NO CONSTRUCTION IS OFFERED FOR C3 AND THAT IS A DECISION, NOT AN OMISSION.  A
+  construction here would be a sentence written to be ambiguous; it would prove
+  the rule can be fooled by prose designed to fool it, which is true of every
+  attribution rule and says nothing about the prose in this repository.
+
+  WHAT IS OFFERED INSTEAD is a measurement over the real population, printed by
+  prose_a74f.py itself on every run:
+      attribution: {'ON THE LINE': 2, 'BY PROXIMITY': 1}
+      population: 3 `all N rows` phrases over 18 files.  The script each is about is
+  POPULATION: the `all N rows` phrases of the three declared directories.
+  GRAIN: one phrase, and how its script was decided.
+
+  ON THE LINE is a co-occurrence and BY PROXIMITY is a guess, and the run now says
+  which of the two each row used.  A row attributed by proximity whose count
+  disagrees with the chosen script and AGREES with another candidate in the same
+  window is now a FINDING rather than a pass or a fail, because nothing in this
+  checker decides which the sentence means.
+
+====================================================================================================
+RESTORE
+====================================================================================================
+  git status --porcelain: (clean)
+
+====================================================================================================
+  0 finding(s): (none)
+====================================================================================================
+--- exit 0, as pre-registered
+
+################################################################################
+### 5. visible_a74f.py — nine rows, two renderers, mg-16eb's rule beside them   (PREDICTIONS.md: exit 0)
+################################################################################
+====================================================================================================
+mg-a74f — SUPPRESSION, MEASURED; VISIBILITY, NOT CLAIMED
+====================================================================================================
+Population: 9 documents x 2 renderers x 5 cited sections = 90 section observations.
+
+THE DECLARED SET — a section is SUPPRESSED iff one of these holds, and NOT
+SUPPRESSED otherwise.  This is the whole of what this instrument measures:
+    S1   inside a <details> element carrying no `open` attribute
+    S2   inside an HTML comment (terminated or running to the end of the document)
+    S3   inside the content of a <script>, <style>, <template> or <textarea>
+    S4   inside an element carrying the `hidden` attribute
+    S5   inside an element whose inline style sets display:none or visibility:hidden
+
+WHAT THE DECLARED SET DOES NOT COVER.  Each of these suppresses content in a real
+browser and each is scored NOT SUPPRESSED here.  THIS INSTRUMENT FAILS OPEN:
+    -   any rule from an external or embedded stylesheet, including `display:none` on a class
+    -   `aria-hidden`, `inert`, and anything else that hides from a subset of readers
+    -   off-screen positioning, zero size, `clip`, `overflow:hidden`, `opacity:0`
+    -   `color: transparent` and any other paint the text in the page's own background
+    -   anything JavaScript does to the DOM after load, including `<noscript>` branches
+    -   media queries, print stylesheets, and anything conditional on the reader's device
+    -   the difference between shown and shown YET — scrolling, clicking, a second tab
+
+THAT SENTENCE WAS FALSE UNTIL mg-5f7c AND IS NOW EXECUTED RATHER THAN CLAIMED.
+At 6fb424f `<div class="hidden">` — the first NOT COVERED entry, in a document
+with no stylesheet — scored 0/5, SUPPRESSED, on both engines: a failure in the
+CLOSED direction under a docstring and a README that both said this instrument
+fails open.  V8 below is that posture made into a standing row: an embedded
+stylesheet that really does blank the page, which this file must and does report
+NOT SUPPRESSED.  V5 is the repaired case and V6 and V7 are the two rows in the
+other direction — a suppression this file must and does find.
+
+COLUMNS.  `bytes-in-html` is the section marker present in the serialised HTML —
+the property `render0049.py` and `render16eb.py` both actually measure.
+`not-suppressed` is the marker present AND suppressed by no mechanism above.
+`r16 SHOWN` is mg-16eb's own rule, computed by importing render16eb.py unmodified
+and calling its own two functions.  No column here is named `shown to a reader`.
+
+V0  unmutated — the positive control
+    marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+
+V1  the whole file inside a CLOSED HTML comment (mg-0049's own R8)
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S2          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S2          r16 SHOWN 5/5
+
+V2  <details><summary> at the top, never closed (mg-16eb's own B3)
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 0/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 0/5
+
+V3  <div hidden> at the top, never closed
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+
+V4  <div style="display:none"> at the top, never closed
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S5          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S5          r16 SHOWN 5/5
+
+V5  <div class="hidden"> at the top — a CLASS, no stylesheet in the document
+    marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+
+V6  <details title="open me"> — DECLARED S1 holds of it
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S1          r16 SHOWN 5/5
+
+V7  V3's blank page behind 3000 `&` — the same suppression, padded
+    marked       bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 0/5   by S4          r16 SHOWN 5/5
+
+V8  <style> hiding a class that every section is inside — NOT COVERED, on purpose
+    marked       bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+    markdown-it  bytes-in-html 5/5   not-suppressed 5/5   by (nothing)   r16 SHOWN 5/5
+
+====================================================================================================
+WHERE THE TWO INSTRUMENTS DISAGREE, AND WHICH ONE IS WRONG
+====================================================================================================
+  V1 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V1 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V3 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V3 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V4 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V4 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V6 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V6 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+  V7 / marked       not-suppressed 0/5   r16 SHOWN 5/5
+  V7 / markdown-it  not-suppressed 0/5   r16 SHOWN 5/5
+
+  V1 IS THE ROW THAT SETTLES IT.  It is mg-0049's own R8, unedited: the whole
+  target inside a CLOSED HTML comment.  mg-0049's render0049.py scores it ANY 0/5
+  and HEADING 0/5 on both renderers; delta_control.py exits 1 on it and calls it
+  damage; mg-16eb's own audit calls it 'R1's and R8's blank page'.  Every party in
+  this arc agrees a reader is shown nothing.  mg-16eb's SHOWN TO A READER rule
+  scores it 5 of 5, because its tag-stripping regex requires a letter after `<`
+  and `<!--` has a `!`, so the comment's contents survive the strip and its one
+  suppression mechanism is <details>, which a comment is not.
+
+  V3 AND V4 ARE THE SAME DEFECT ON MECHANISMS NOBODY IN THIS ARC HAS USED.  A
+  `hidden` attribute and an inline `display:none` each produce the same blank
+  page and each is scored 5 of 5 SHOWN by that rule.
+
+  V2 IS THE ROW IT GETS RIGHT, and it is the only shape it was written against.
+
+====================================================================================================
+DOES EACH ROW OF THIS FILE MEASURE THE PROPERTY ITS NAME CLAIMS?  (mg-16eb OPEN 3)
+====================================================================================================
+  bytes-in-html    names bytes; measures bytes.  MATCHES.
+  not-suppressed   names 'suppressed by no mechanism in the declared set';
+                   measures exactly that, over the set printed above.  MATCHES,
+                   and it is weaker than 'shown to a reader' BY CONSTRUCTION —
+                   the NOT COVERED list above is the size of the gap.
+  r16 SHOWN        names what a reader is shown; measures bytes-in-html minus one
+                   mechanism.  DOES NOT MATCH.  That is this file's finding, and
+                   the column keeps mg-16eb's own name for it so the mismatch is
+                   legible rather than laundered.
+
+  THE POLARITY, SHOWN IN BOTH DIRECTIONS (mg-5f7c).  V5 and V8 are documents a
+  reader is shown IN FULL and this file DECLINES TO SUPPRESS them; V6 and V7 are
+  documents a reader is shown NOTHING of and this file SUPPRESSES them.  V8's
+  stylesheet really does blank the page and is reported NOT SUPPRESSED anyway —
+  that is the fail-open posture executed, and the row goes red the moment an
+  out-of-set mechanism starts scoring as suppression.
+
+  unescape_with_map reproduced html.unescape on 18 of 18 documents; a single disagreement raises rather than
+  prints, because an offset map that is wrong makes every row above it not
+  evidence.
+
+  90 section observations; 0 renderer rows where this file and its own
+  committed prediction disagree; 10 of 18 renderer rows where this file and mg-16eb's rule
+  disagree.
+====================================================================================================
+--- exit 0, as pre-registered
+
+################################################################################
+### 6. prose_a74f.py — the tree   (PREDICTIONS.md: exit 0)
+################################################################################
+====================================================================================================
+mg-a74f — PROSE CLAIMS, READ AS CLAIMS
+====================================================================================================
+  revision    the working tree
+  population  18 files: every .py, .md and .sh under
+                  code/state_landing_control_2da3/  (5 files)
+                  code/state_delegation_repair_0049/  (6 files)
+                  code/state_delegation_repair_a74f/  (7 files)
+  This checker's own directory is in the population, so it reads its own prose.
+
+====================================================================================================
+P1.  EVERY REPO-RELATIVE PATH NAMED IN THE TEXT EXISTS AT THIS REVISION —
+     AND `EXISTS` MEANS TRACKED, NOT PRESENT ON SOMEBODY'S DISK (mg-5f7c)
+====================================================================================================
+  population: 87 path references over 18 files (34 distinct paths).  Computed from the tree, not a hand list.
+  `exists` is 1505 TRACKED paths; 12 further file(s) are present and untracked and DO NOT satisfy a reference.
+  [pass] P1  0 of 87 path references do not resolve
+
+====================================================================================================
+P2.  EVERY `section N` REFERENCE TO A run_all.sh RESOLVES, AND EVERY mg-ID AND
+     SCRIPT NAMED ON THE REFERENCING LINE OCCURS IN THAT SECTION
+====================================================================================================
+  3 run_all.sh in the population; sections per file: state_delegation_repair_0049=9, state_delegation_repair_a74f=9, state_landing_control_2da3=3
+  population: 3 `section N` references to a run_all.sh, over the 15 non-run_all.sh files of the declared set.
+  1 further reference(s) SKIPPED as quotations:
+         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:131  'section 7'
+  [pass] P2  code/state_delegation_repair_0049/README.md:106
+         names section 8 — "mg-5644's OWN battery, re-run UNMODIFIED — the audit that found "
+         tokens on the line: ['mg-218d', 'mg-5644']
+  [pass] P2  code/state_delegation_repair_0049/README.md:107
+         names section 8 — "mg-5644's OWN battery, re-run UNMODIFIED — the audit that found "
+         tokens on the line: ['mg-5644']
+  [pass] P2  code/state_delegation_repair_a74f/prose_a74f.py:39
+         names section 7 — "reproduce16eb.py, RE-RUN UNMODIFIED — which of mg-0049's seven c"
+         tokens on the line: ['mg-0049']
+
+====================================================================================================
+P3.  EVERY PINNED TABLE OF delta_control.py KEYED BY REPO PATHS IS ITERATED BY
+     THE INSTRUMENT.  A TABLE NOTHING VISITS IS A FAIL, NOT A SILENT PASS.
+====================================================================================================
+  [pass] P3  code/state_landing_control_2da3/delta_control.py
+         pinned tables with at least one repo-path key: ['DELEGATED', 'DELEGATED_PRESENTATION']
+         of those, iterated by some `for` in this file: ['DELEGATED', 'DELEGATED_PRESENTATION']
+
+====================================================================================================
+P4.  EVERY `all N rows` PHRASE NAMING A SCRIPT MATCHES THAT SCRIPT'S OWN ROWS
+====================================================================================================
+  population: 3 `all N rows` phrases over 18 files.  The script each is about is
+  the one named ON ITS OWN LINE where there is one, and otherwise the nearest .py
+  named in the 400 characters before it — and every row below says WHICH, because
+  the second is a guess and the first is not (mg-5f7c).
+  attribution: {'ON THE LINE': 2, 'BY PROXIMITY': 1}
+  3 further phrase(s) SKIPPED as quotations — inside "..." or `...` on their own line:
+         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:128  'all six rows'
+         (quoted, not asserted) code/state_delegation_repair_a74f/README.md:157  'all nine rows'
+         (quoted, not asserted) code/state_delegation_repair_a74f/prose_a74f.py:385  'all six rows'
+  [pass] P4  code/state_delegation_repair_0049/README.md:48
+         says 'split_0049.py … all 9 rows'
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9   [attributed ON THE LINE]
+  [pass] P4  code/state_landing_control_2da3/COVERAGE.md:276
+         says 'split_0049.py … all 9 rows'
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9   [attributed ON THE LINE]
+  [pass] P4  code/state_landing_control_2da3/delta_control.py:234
+         says 'split_0049.py … all 9 rows'
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9   [attributed BY PROXIMITY]
+
+====================================================================================================
+THE EXEMPTION LIST, PRINTED — FILES WHOSE PROSE REPORTS ANOTHER FILE'S CLAIMS
+====================================================================================================
+  A checker that reads a REPORT of a defect as a fresh instance of it is
+  measuring the wrong thing.  These files are excluded from P1, P2 and P4.  The
+  list is fail-closed both ways: an entry naming a file outside the population is
+  a FAIL, and an entry that suppresses nothing is a FAIL.
+  [pass] EX  code/state_delegation_repair_a74f/PREDICTIONS.md
+         the predictions, which quote each of the six broken claims verbatim
+         in the population: True; matches suppressed: 3
+  [pass] EX  code/state_delegation_repair_a74f/claims_a74f.py
+         the report of the six, which names each broken path and count to report it
+         in the population: True; matches suppressed: 13
+
+====================================================================================================
+WHAT THIS RUN CHECKED, AND WHAT IT LEFT UNCHECKED
+====================================================================================================
+  P1   87 path references                  0 do not resolve
+  P2    3 run_all.sh section references    0 unresolved, or naming something the section does not
+  P3    2 pinned tables with a repo-path key  0 iterated by nothing
+  P4    3 `all N rows` phrases             0 disagreeing with the script's own ROWS
+
+  UNCHECKED, in the same files, by this program: every count that is not an
+  `all N rows` phrase or a section number, every claim about what a reader is
+  shown, every 'cannot', every 'measured over N', and every cross-reference
+  that is not a path or a run_all.sh section number.  Those sentences are
+  adjacent to checked ones and are not covered by this checker.  Naming that
+  is the whole of what this program can honestly say about them.
+
+  0 finding(s).
+====================================================================================================
+--- exit 0, as pre-registered
+
+################################################################################
+### 7. prose_a74f.py --rev bd24efc — the four findings mg-a74f was written against   (PREDICTIONS.md: exit 1)
+################################################################################
+====================================================================================================
+mg-a74f — PROSE CLAIMS, READ AS CLAIMS
+====================================================================================================
+  revision    bd24efc
+  population  11 files: every .py, .md and .sh under
+                  code/state_landing_control_2da3/  (5 files)
+                  code/state_delegation_repair_0049/  (6 files)
+                  code/state_delegation_repair_a74f/  (0 files)
+  This checker's own directory is in the population, so it reads its own prose.
+
+====================================================================================================
+P1.  EVERY REPO-RELATIVE PATH NAMED IN THE TEXT EXISTS AT THIS REVISION —
+     AND `EXISTS` MEANS TRACKED, NOT PRESENT ON SOMEBODY'S DISK (mg-5f7c)
+====================================================================================================
+  population: 63 path references over 11 files (25 distinct paths).  Computed from the tree, not a hand list.
+  `exists` is 1271 TRACKED paths.
+  [FAIL] P1  code/state_landing_control_2da3/delta_control.py:233
+         names code/state_delegation_repair_0049/guards_only_0049.py
+         which is not in the tree
+
+====================================================================================================
+P2.  EVERY `section N` REFERENCE TO A run_all.sh RESOLVES, AND EVERY mg-ID AND
+     SCRIPT NAMED ON THE REFERENCING LINE OCCURS IN THAT SECTION
+====================================================================================================
+  2 run_all.sh in the population; sections per file: state_delegation_repair_0049=9, state_landing_control_2da3=3
+  population: 2 `section N` references to a run_all.sh, over the 9 non-run_all.sh files of the declared set.
+  0 further reference(s) SKIPPED as quotations:
+         (none)
+  [pass] P2  code/state_delegation_repair_0049/README.md:105
+         names section 7 — "coverage218d.py — COVERAGE.md checked against the code, not agai"
+         tokens on the line: ['mg-218d']
+  [FAIL] P2  code/state_delegation_repair_0049/README.md:106
+         names section 7 — "coverage218d.py — COVERAGE.md checked against the code, not agai"
+         tokens on the line: ['mg-5644']
+         NOT NAMED ANYWHERE IN SECTION 7: ['mg-5644']
+
+====================================================================================================
+P3.  EVERY PINNED TABLE OF delta_control.py KEYED BY REPO PATHS IS ITERATED BY
+     THE INSTRUMENT.  A TABLE NOTHING VISITS IS A FAIL, NOT A SILENT PASS.
+====================================================================================================
+  [FAIL] P3  code/state_landing_control_2da3/delta_control.py
+         pinned tables with at least one repo-path key: ['DELEGATED', 'DELEGATED_PRESENTATION']
+         of those, iterated by some `for` in this file: ['DELEGATED']
+         NOT ITERATED BY ANYTHING: ['DELEGATED_PRESENTATION']
+         >>> a pinned table nothing visits cannot fail in the direction that would need visiting
+
+====================================================================================================
+P4.  EVERY `all N rows` PHRASE NAMING A SCRIPT MATCHES THAT SCRIPT'S OWN ROWS
+====================================================================================================
+  population: 3 `all N rows` phrases over 11 files.  The script each is about is
+  the one named ON ITS OWN LINE where there is one, and otherwise the nearest .py
+  named in the 400 characters before it — and every row below says WHICH, because
+  the second is a guess and the first is not (mg-5f7c).
+  attribution: {'ON THE LINE': 2, 'UNATTRIBUTED': 1}
+  0 further phrase(s) SKIPPED as quotations — inside "..." or `...` on their own line:
+         (none)
+  [pass] P4  code/state_delegation_repair_0049/README.md:48
+         says 'split_0049.py … all 9 rows'
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9   [attributed ON THE LINE]
+  [pass] P4  code/state_landing_control_2da3/COVERAGE.md:276
+         says 'split_0049.py … all 9 rows'
+         ROWS in code/state_delegation_repair_0049/mutations_0049.py: 9   [attributed ON THE LINE]
+  [FAIL] P4  code/state_landing_control_2da3/delta_control.py:234
+         says 'all 6 rows'
+         no script named within 400 characters before it — the phrase cannot be attributed, so it is reported rather than passed
+
+====================================================================================================
+THE EXEMPTION LIST, PRINTED — FILES WHOSE PROSE REPORTS ANOTHER FILE'S CLAIMS
+====================================================================================================
+  A checker that reads a REPORT of a defect as a fresh instance of it is
+  measuring the wrong thing.  These files are excluded from P1, P2 and P4.  The
+  list is fail-closed both ways: an entry naming a file outside the population is
+  a FAIL, and an entry that suppresses nothing is a FAIL.
+  NOT EVALUATED AT bd24efc, with the reason rather than a bare `n/a`:
+  these two files are this deliverable's own and did not exist at that
+  revision, so 'the entry suppresses nothing' would be true of every entry
+  and would say nothing about whether the list has rotted.  The list is
+  fail-closed ON THE WORKING TREE, which is the tree it is a statement about;
+  run this file with no --rev to see it evaluated.
+    (not evaluated) code/state_delegation_repair_a74f/PREDICTIONS.md  — the predictions, which quote each of the six broken claims verbatim
+    (not evaluated) code/state_delegation_repair_a74f/claims_a74f.py  — the report of the six, which names each broken path and count to report it
+
+====================================================================================================
+WHAT THIS RUN CHECKED, AND WHAT IT LEFT UNCHECKED
+====================================================================================================
+  P1   63 path references                  1 do not resolve
+  P2    2 run_all.sh section references    1 unresolved, or naming something the section does not
+  P3    2 pinned tables with a repo-path key  1 iterated by nothing
+  P4    3 `all N rows` phrases             1 disagreeing with the script's own ROWS
+
+  UNCHECKED, in the same files, by this program: every count that is not an
+  `all N rows` phrase or a section number, every claim about what a reader is
+  shown, every 'cannot', every 'measured over N', and every cross-reference
+  that is not a path or a run_all.sh section number.  Those sentences are
+  adjacent to checked ones and are not covered by this checker.  Naming that
+  is the whole of what this program can honestly say about them.
+
+  4 finding(s).
+    P1  code/state_landing_control_2da3/delta_control.py:233  — names code/state_delegation_repair_0049/guards_only_0049.py
+    P2  code/state_delegation_repair_0049/README.md:106  — names section 7 — "coverage218d.py — COVERAGE.md checked against the code, not agai"
+    P3  code/state_landing_control_2da3/delta_control.py  — pinned tables with at least one repo-path key: ['DELEGATED', 'DELEGATED_PRESENTATION']
+    P4  code/state_landing_control_2da3/delta_control.py:234  — says 'all 6 rows'
+====================================================================================================
+--- exit 1, as pre-registered
+
+################################################################################
+### 8. polarity_5f7c.py --rev 6fb424f — the suite proving it can go red   (PREDICTIONS.md: exit 1)
+################################################################################
+====================================================================================================
+mg-5f7c — THE SUPPRESSION POLARITY, PUT TO SIXTEEN CONSTRUCTIONS
+====================================================================================================
+  under test   code/state_delegation_repair_a74f/visible_a74f.py at 6fb424f
+  beside it    the same file at 6fb424f, read with `git show` and executed unmodified
+  population   16 hand-written HTML documents.  NO RENDERER IS USED, so this
+               file runs anywhere and the polarity does not rest on two npm
+               packages being installed.
+
+  THE DECISION THIS REPAIR MADE: the CODE was wrong and BOTH DOCUMENTS were right;
+  the instrument must FAIL OPEN.  The argument is in this file's docstring, and
+  the part of it that is checkable rather than arguable is that DECLARED S4 says
+  the `hidden` ATTRIBUTE and NOT_COVERED says a class is outside the set — so the
+  docstring, the README and the printed declared set all agreed already.
+
+  A CORRECT ANSWER IS A FUNCTION OF THE DECLARED SET, NOT OF THE BROWSER.  P13,
+  P14 are documents a browser blanks or hides which this instrument MUST report
+  NOT SUPPRESSED.  That is the fail-open posture executed rather than claimed.
+
+  id    browser   declared  correct   at 6fb424f   verdict@anchor               now       verdict
+  -----------------------------------------------------------------------------------------------
+  P01   SHOWN     —         (none)    (none)       correct                      (none)    correct
+  P02   SHOWN     —         (none)    S4           FAILS CLOSED                 S4        FAILS CLOSED
+  P03   SHOWN     —         (none)    S4           FAILS CLOSED                 S4        FAILS CLOSED
+  P04   SHOWN     —         (none)    S4           FAILS CLOSED                 S4        FAILS CLOSED
+  P05   SHOWN     —         (none)    S4           FAILS CLOSED                 S4        FAILS CLOSED
+  P06   SHOWN     —         (none)    S5           FAILS CLOSED                 S5        FAILS CLOSED
+  P07   BLANK     S4        S4        S4           correct                      S4        correct
+  P08   BLANK     S4        S4        S4           correct                      S4        correct
+  P09   BLANK     S1        S1        S1           correct                      S1        correct
+  P10   SHOWN     —         (none)    (none)       correct                      (none)    correct
+  P11   BLANK     S1        S1        (none)       MISSES ITS OWN DECLARED SET  (none)    MISSES ITS OWN DECLARED SET
+  P12   BLANK     S5        S5        S5           correct                      S5        correct
+  P13   BLANK     —         (none)    (none)       correct                      (none)    correct
+  P14   SUBSET    —         (none)    (none)       correct                      (none)    correct
+  P15   BLANK     S2        S2        S2           correct                      S2        correct
+  P16   BLANK     S3        S3        S3           correct                      S3        correct
+
+====================================================================================================
+WHAT EACH CONSTRUCTION IS FOR
+====================================================================================================
+  P01  none — a reader is shown: SHOWN
+        the positive control: nothing at all is suppressing it
+  P02  a CLASS named hidden, no stylesheet in the document — a reader is shown: SHOWN
+        D1. S4 is the `hidden` ATTRIBUTE; a class needs a stylesheet and there is none here
+  P03  an ID named hidden — a reader is shown: SHOWN
+        the same shape on a different attribute
+  P04  the word `hidden` inside a title — a reader is shown: SHOWN
+        the same shape inside prose a reader is shown on hover
+  P05  an UNQUOTED class value named hidden — a reader is shown: SHOWN
+        the same shape with no quotes, which the attribute parser must also get right
+  P06  a data- attribute whose NAME ends in `style` — a reader is shown: SHOWN
+        FOUND BY THIS REPAIR, not by mg-65eb: the pre-repair S5 regex `style\s*=\s*"..."` matches
+        inside `data-style=`, so this is a THIRD fail-closed shape in the same bug
+  P07  the `hidden` ATTRIBUTE — a reader is shown: BLANK
+        the mechanism S4 actually names
+  P08  `hidden` with the value `false` — a reader is shown: BLANK
+        a boolean attribute: present is present, and the value is not consulted
+  P09  a <details> with no `open` — a reader is shown: BLANK
+        mg-16eb's B3 shape, the one this instrument was written against
+  P10  a <details> carrying `open` — a reader is shown: SHOWN
+        S1 does not hold; the widget is open
+  P11  a <details> whose TITLE contains the word open — a reader is shown: BLANK
+        D2. No `open` ATTRIBUTE, so S1 holds — the declared set the instrument did not implement
+  P12  an inline style setting display:none — a reader is shown: BLANK
+        the mechanism S5 names
+  P13  an EMBEDDED STYLESHEET hiding the class — a reader is shown: BLANK
+        THE FAIL-OPEN POSTURE ITSELF. A browser paints nothing; deciding that needs the cascade; the
+        cascade is outside the declared set BY CONSTRUCTION, and NOT_COVERED says so in its first
+        line. NOT SUPPRESSED is the only answer this instrument may give, and this row goes red the
+        moment it gives another
+  P14  aria-hidden — a reader is shown: SUBSET
+        NOT_COVERED's second line, made into a document: hidden from a SUBSET of readers — assistive
+        technology skips it and a sighted reader is shown it
+  P15  inside a closed HTML comment — a reader is shown: BLANK
+        mg-0049's R8 shape, reduced
+  P16  inside a raw-text element — a reader is shown: BLANK
+        the mechanism S3 names
+
+====================================================================================================
+THE COUNT, AND THE POPULATION IT IS OVER
+====================================================================================================
+  population: 16 hand-written documents; grain: one document, one
+  marker position, the set of DECLARED mechanisms reported at that position.
+  at 6fb424f          6 of 16 wrong
+  at 6fb424f           6 of 16 wrong
+
+  AT THE ANCHOR, BY KIND:  fails CLOSED on ['P02', 'P03', 'P04', 'P05', 'P06']; misses its own
+  declared set on ['P11'].  BOTH DIRECTIONS, ONE BUG — an attribute
+  NAME matched by regex over the attribute TEXT.
+
+  P06 IS THIS REPAIR'S OWN FINDING AND NOT mg-65eb's.  mg-65eb reported the
+  `hidden` and `open` shapes; `data-style="display:none"` is the same defect on
+  S5, found by writing the parser rather than by reading the report, and it was
+  live at the anchor with nothing pointing at it.
+
+  THE FAIL-OPEN POSTURE, EXECUTED: ['P13', 'P14'] are documents a browser
+  blanks or hides by a mechanism OUTSIDE the declared set, and the instrument
+  reports NOT SUPPRESSED on every one of them.  A suppression instrument nobody
+  has seen DECLINE to suppress is not evidence of a fail-open posture.
+====================================================================================================
+--- exit 1, as pre-registered
+
+################################################################################
+### every section exited as PREDICTIONS.md said it would
+################################################################################
