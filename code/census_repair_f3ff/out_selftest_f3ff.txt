@@ -1,0 +1,45 @@
+==============================================================================
+mg-f3ff selftest
+==============================================================================
+  [PASS] owner: trailing (mg-xxxx) is the owner
+  [PASS] owner: trailing id wins over ids earlier in the subject
+  [PASS] owner: no trailing parens -> None -- unowned commits are still eligible successors; they are not dropped
+  [PASS] owner: trailing text after the parens is not an owner
+  [PASS] owner: uppercase id normalises
+  [PASS] names(): body hit counts
+  [PASS] names_subject_only(): body hit does NOT count -- if this ever passed, NC1 would be comparing a reader with itself
+  [PASS] names_subject_only(): subject hit counts
+  [PASS] names(): case-insensitive
+  [PASS] utc(): Z suffix parses to UTC
+  [PASS] parse_iso(): +01:00 offset is converted, not truncated -- a naive reader would call this 05:31 and put pre-filing commits after the cut
+  [PASS] parse_iso(): junk -> None
+  [PASS] successors(): UNKNOWN repo returns None, not [] -- None and [] must not be interchangeable -- this is the ticket's subject
+  [PASS] census_row(): one UNKNOWN repo -> row UNKNOWN
+  [PASS] census_row(): UNKNOWN is STICKY across a readable repo -- a count over part of the population is not a count
+  [PASS] generations(): UNKNOWN repo -> None
+  [PASS] Fetched(force_fail): unknown is True
+  [PASS] Fetched(force_fail): sha is None, not a stale leftover
+  [PASS] Fetched(force_fail): line() says UNKNOWN
+  [PASS] Fetched(force_fail): line() does NOT say 'no successor'
+  [PASS] Fetched(missing repo): unknown is True
+  [PASS] git_log(): parses this repo's own last 5 commits -- got 5
+  [PASS] git_log(): no subject contains a newline -- a body newline read as a record boundary is how mg-c067's figure grammar died
+  [PASS] git_log(): every record has a parsed author date
+  [PASS] git_log(): bodies are non-empty for these commits
+  [PASS] POPULATION text names origin/main
+  [PASS] POPULATION text names the UNKNOWN case
+  [PASS] BLIND_SPOTS lists 8 numbered spots
+  [PASS] row 1: mg-e35b exists in the work store
+  [PASS] row 1: its ticket names its parent mg-fcf1
+  [PASS] row 1: its `created:` matches the filing instant in ROWS -- the filing instant is the cut; a wrong one silently moves every count
+  [PASS] row 2: mg-fccb exists in the work store
+  [PASS] row 2: its ticket names its parent mg-d112
+  [PASS] row 2: its `created:` matches the filing instant in ROWS -- the filing instant is the cut; a wrong one silently moves every count
+  [PASS] row 3: mg-a74f exists in the work store
+  [PASS] row 3: its ticket names its parent mg-16eb
+  [PASS] row 3: its `created:` matches the filing instant in ROWS -- the filing instant is the cut; a wrong one silently moves every count
+  [PASS] row 4: mg-dffa exists in the work store
+  [PASS] row 4: its ticket names its parent mg-5800
+  [PASS] row 4: its `created:` matches the filing instant in ROWS -- the filing instant is the cut; a wrong one silently moves every count
+
+== selftest: 0 FAIL ==

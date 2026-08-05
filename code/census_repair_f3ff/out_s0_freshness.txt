@@ -1,0 +1,61 @@
+==============================================================================
+mg-f3ff s0 -- WHICH TREE: fetch, resolve, and state the staleness
+==============================================================================
+FRESHNESS -- fetched, resolved, and stated (ticket addendum 1 and 2)
+  onethird_program       ok       ref=origin/main sha=76b481d8d10b
+                                  checkout HEAD=76b481d8d10b behind origin/main by 0
+  one_third_width_three  ok       ref=origin/main sha=1e996fb486bb
+                                  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derived against origin/main anyway
+  NOTE: 1 checkout(s) were behind origin/main at start: one_third_width_three
+        The derivation below uses origin/main, so the staleness did not
+        reach the answer -- but it is stated because a census whose
+        staleness is unstated is not checkable by the next reader.
+
+POPULATION OF THE REPAIRED METHOD
+  For a row (parent ticket P, filing instant T) the method ranges over:
+    every commit reachable from `origin/main` in each repo of a NAMED repo
+    list, as origin/main stands at the moment of the run, after a fetch whose
+    exit status was checked.
+  A commit is a SUCCESSOR of P when all three hold:
+    (a) its full message -- subject AND body AND trailers -- contains P,
+        case-insensitively;
+    (b) its owning ticket (the trailing `(mg-xxxx)` of the subject) is not P;
+    (c) its date is <= T.  Both clocks are computed: author date (when the
+        work was written) and committer date (when it entered this history).
+        They differ under rebase and the difference is reported, not hidden.
+  The row's premise `no successor` is REFUTED if >= 1 successor exists, UPHELD
+  if 0 exist, and UNKNOWN if any repo it ranges over could not be read.
+
+WHAT THE REPAIRED METHOD CANNOT SEE
+  B1  Work on a branch never merged into origin/main.  Unreachable is
+      indistinguishable from non-existent.
+  B2  Work in a repo not on the repo list.  The list is SUPPLIED, not
+      discovered; a successor in a third repo is invisible.  This is the mail
+      census's defect in a new place: a bounded channel taken for the world.
+  B3  A successor commit whose message names neither P nor any ticket that
+      descends from P.  The ticket-reference graph (s3) widens this but does
+      not close it.
+  B4  History rewritten after the fact.  The census reads origin/main as it
+      stands NOW, not as it stood at T.  A successor that was squashed or
+      force-pushed away is read as never having existed.
+  B5  Rebase moves committer dates and not author dates, so a commit written
+      before T can carry a committer date after it.  Both are reported; the
+      method does not decide for the reader which clock is the truth.
+  B6  Landings that are not commits: a verdict acted on inside a ticket body,
+      a decision recorded only in mail, a change made outside git.
+  B7  Mention is not descent.  A commit saying `unlike mg-fcf1` scores exactly
+      as one repairing mg-fcf1.  The reader gets the subject line and decides.
+  B8  Tickets deleted from the work store are absent from the graph, though
+      their commits remain in the tree.
+
+THE FOUR ROWS OF THE CENSUS UNDER REPAIR
+  row  dropped-verdict  filed (UTC)           parent    parent's `repo:` field
+   1   mg-e35b         2026-07-31T04:13:24Z  mg-fcf1  onethird_program
+   2   mg-fccb         2026-07-31T04:12:41Z  mg-d112  one_third_width_three
+   3   mg-a74f         2026-07-31T04:22:15Z  mg-16eb  onethird_program
+   4   mg-dffa         2026-07-31T04:22:50Z  mg-5800  onethird_program
+
+  Each row's TITLE asserts of its parent some form of `no landing commit`
+  / `no successor`.  s1 re-derives all four from the tree.
+
+== s0 exit: 0 ==

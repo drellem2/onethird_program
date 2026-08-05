@@ -1,0 +1,166 @@
+==============================================================================
+mg-f3ff s2 -- negative controls on the repaired instrument
+==============================================================================
+FRESHNESS -- fetched, resolved, and stated (ticket addendum 1 and 2)
+  onethird_program       ok       ref=origin/main sha=76b481d8d10b
+                                  checkout HEAD=76b481d8d10b behind origin/main by 0
+  one_third_width_three  ok       ref=origin/main sha=1e996fb486bb
+                                  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derived against origin/main anyway
+  NOTE: 1 checkout(s) were behind origin/main at start: one_third_width_three
+        The derivation below uses origin/main, so the staleness did not
+        reach the answer -- but it is stated because a census whose
+        staleness is unstated is not checkable by the next reader.
+
+------------------------------------------------------------------------------
+NC1  SUBJECT-ONLY READER -- does reading %s instead of %B reproduce
+     the census's wrong answer?   (PREDICTIONS.md P6)
+------------------------------------------------------------------------------
+  row 1 mg-fcf1:  full-message REFUTED (7)   subject-only UPHELD (0)   DEGRADES
+  row 2 mg-d112:  full-message REFUTED (5)   subject-only UPHELD (0)   DEGRADES
+  row 3 mg-16eb:  full-message UPHELD (0)   subject-only UPHELD (0)   same
+  row 4 mg-5800:  full-message UPHELD (0)   subject-only UPHELD (0)   same
+
+  The subject-only reader loses the finding on 2 of 4 rows (row 1, row 2).
+  P6 predicted this on rows 1 AND 2 -- 0 successors found where the
+  full-message reader finds >= 1.
+  P6: HIT  -- degraded on rows [1, 2], predicted [1, 2]
+
+  ⚠️ CONTROL SENSE: this control is RED only if the subject-only reader
+     matched the full reader on EVERY row, which would mean the harness
+     cannot tell the two readers apart at all.
+  NC1 GREEN: the harness detects the degradation it was built to detect.
+
+------------------------------------------------------------------------------
+NC2  THE MAIL READER ITSELF, re-implemented against pm-onethird's own
+     maildir -- the census's answer REPRODUCED, not described.  (P7)
+------------------------------------------------------------------------------
+  Population: 938 messages in /Users/daniel/.macguffin/mail/pm-onethird
+  0 of them carry no parsable Date header and are excluded -- stated, not dropped silently.
+
+  row 1 mg-fcf1: 9 message(s) name it, 7 before the filing instant,
+           2 of those name any successor ticket the tree found (7 such tickets).
+           MAIL says REFUTED;  TREE says REFUTED;  agree
+  row 2 mg-d112: 6 message(s) name it, 6 before the filing instant,
+           1 of those name any successor ticket the tree found (4 such tickets).
+           MAIL says REFUTED;  TREE says REFUTED;  agree
+  row 3 mg-16eb: 3 message(s) name it, 2 before the filing instant,
+           0 of those name any successor ticket the tree found (0 such tickets).
+           MAIL says UPHELD;  TREE says UPHELD;  agree
+  row 4 mg-5800: 3 message(s) name it, 2 before the filing instant,
+           0 of those name any successor ticket the tree found (0 such tickets).
+           MAIL says UPHELD;  TREE says UPHELD;  agree
+
+  P7 predicted 0 messages naming any successor ticket on row 1, with
+  lower confidence on the others.  OBSERVED: 2.
+  P7: *** MISS ***  -- and the miss is the most load-bearing result in this run.
+
+  ⚠️ THE RECONSTRUCTED MAIL READER DOES NOT REPRODUCE THE CENSUS'S ERROR.
+     It agrees with the tree on 4 of 4 rows, including both rows
+     the census got WRONG.  The successor information WAS in pm-onethird's
+     own inbox, before the filing instant, naming the successor tickets by
+     id.  So `mail dropped the verdict, therefore the census saw nothing`
+     is NOT a sufficient account of what went wrong -- the mail was not
+     silent, and a reader of that mail would not have made this error.
+
+     What this leaves standing, and what it does not:
+       STANDS  -- the census was built on mail rather than the tree, and
+                  is wrong on 2 of 4 rows.  s1 measures that directly and
+                  it does not depend on this control.
+       STANDS  -- a channel-based census cannot distinguish silence from
+                  absence, whatever this particular inbox happened to hold.
+       FALLS   -- `the mail store contained no successor, so the census
+                  could not have known`.  It did contain one.  The census
+                  looked for a VERDICT MESSAGE ADDRESSED TO IT and read the
+                  absence of that specific shape as absence of the work;
+                  mentions of the successor sitting in the same inbox did
+                  not count because they were not the shape it queried.
+       OPEN    -- this reconstruction is MINE, not pm-onethird's code.  I
+                  did not find the census's implementation and do not claim
+                  to have run it.  What is measured is that the INFORMATION
+                  was present, not that the original query would have found
+                  it.  Stated as OPEN rather than resolved either way.
+  NC2 GREEN by construction: this control cannot be RED -- it is a
+  measurement of the OLD method, not a check on the new one.
+
+------------------------------------------------------------------------------
+NC3  FORCED FETCH FAILURE -- UNKNOWN must propagate.  (ticket addendum 3)
+------------------------------------------------------------------------------
+  with onethird_program forced to fail fetch:
+  onethird_program       UNKNOWN  fetch failed (forced control)
+                                  -> every row ranging over this repo is UNKNOWN
+  one_third_width_three  ok       ref=origin/main sha=1e996fb486bb
+                                  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derived against origin/main anyway
+    row 1 mg-fcf1: UNKNOWN
+    row 2 mg-d112: UNKNOWN
+    row 3 mg-16eb: UNKNOWN
+    row 4 mg-5800: UNKNOWN
+    generations() under the same failure: None (UNKNOWN)
+  NC3 GREEN: every row that ranges over the unreadable repo is
+             UNKNOWN, and UNKNOWN is what is printed.
+
+  with one_third_width_three forced to fail fetch:
+  onethird_program       ok       ref=origin/main sha=76b481d8d10b
+                                  checkout HEAD=76b481d8d10b behind origin/main by 0
+  one_third_width_three  UNKNOWN  fetch failed (forced control)
+                                  -> every row ranging over this repo is UNKNOWN
+    row 1 mg-fcf1: UNKNOWN
+    row 2 mg-d112: UNKNOWN
+    row 3 mg-16eb: UNKNOWN
+    row 4 mg-5800: UNKNOWN
+    generations() under the same failure: None (UNKNOWN)
+  NC3 GREEN: every row that ranges over the unreadable repo is
+             UNKNOWN, and UNKNOWN is what is printed.
+
+------------------------------------------------------------------------------
+NC4  THE STALE CHECKOUT, CONSTRUCTED -- does staleness alone move the
+     answer?  (the addendum's own hazard, measured rather than warned about)
+------------------------------------------------------------------------------
+  == every repo pinned 10 commits back (origin/main~10) ==
+    row 1 mg-fcf1: origin/main REFUTED (7)   stale REFUTED (7)
+    row 2 mg-d112: origin/main REFUTED (5)   stale REFUTED (5)
+    row 3 mg-16eb: origin/main UPHELD (0)   stale UPHELD (0)
+    row 4 mg-5800: origin/main UPHELD (0)   stale UPHELD (0)
+    0 of 4 row verdicts flipped at depth 10.
+
+  == every repo pinned 25 commits back (origin/main~25) ==
+    row 1 mg-fcf1: origin/main REFUTED (7)   stale REFUTED (7)
+    row 2 mg-d112: origin/main REFUTED (5)   stale REFUTED (5)
+    row 3 mg-16eb: origin/main UPHELD (0)   stale UPHELD (0)
+    row 4 mg-5800: origin/main UPHELD (0)   stale UPHELD (0)
+    0 of 4 row verdicts flipped at depth 25.
+
+  == every repo pinned 60 commits back (origin/main~60) ==
+    row 1 mg-fcf1: origin/main REFUTED (7)   stale REFUTED (7)
+    row 2 mg-d112: origin/main REFUTED (5)   stale REFUTED (4)   <-- same verdict, count moved
+    row 3 mg-16eb: origin/main UPHELD (0)   stale UPHELD (0)
+    row 4 mg-5800: origin/main UPHELD (0)   stale UPHELD (0)
+    0 of 4 row verdicts flipped at depth 60.
+
+  The stale checkout of one_third_width_three this run started against
+  (45 behind) is measured directly:
+    row 1 mg-fcf1: origin/main 0   local HEAD (45 behind) 0
+    row 2 mg-d112: origin/main 1   local HEAD (45 behind) 0   <-- MOVED
+    row 3 mg-16eb: origin/main 0   local HEAD (45 behind) 0
+    row 4 mg-5800: origin/main 0   local HEAD (45 behind) 0
+
+  == NC4b  THE COMPOUND CONSTRUCTION: the census's own repo scoping, on
+     the stale checkout.  This is the wrong answer produced FROM THE TREE. ==
+     The census scoped each row's search to the repo named in its parent's
+     `repo:` field.  Row 2's parent mg-d112 carries repo:one_third_width_three.
+     Take that scope, and take the 45-behind checkout this run actually found
+     on disk, and run the identical successor derivation:
+       both repos, origin/main   -> 5 successors -> REFUTED   (what s1 reports)
+       scoped repo, origin/main  -> 1 successors -> REFUTED
+       scoped repo, local HEAD   -> 0 successors -> UPHELD   <-- THE CENSUS'S WRONG ANSWER, REPRODUCED FROM THE TREE
+     So blind spot B2 -- a BOUNDED CHANNEL TAKEN FOR THE WORLD -- bites on
+     this very population, and it composes with staleness: two defects
+     neither of which is `reading mail`, either of which alone leaves the
+     verdict standing, and which together reproduce the census's error
+     with the authority of having read the commit log.  This is why the
+     repo list is NOT taken from the ticket's own metadata.
+
+  NC4 GREEN by construction: it is a measurement of the hazard, not a
+  check on the new method.  Its number is the finding.
+
+==============================================================================
+== s2 exit: 0 (0 control(s) of THIS instrument refuted) ==

@@ -1,0 +1,157 @@
+==============================================================================
+mg-f3ff s1 -- the four rows re-derived from the commit log
+==============================================================================
+FRESHNESS -- fetched, resolved, and stated (ticket addendum 1 and 2)
+  onethird_program       ok       ref=origin/main sha=76b481d8d10b
+                                  checkout HEAD=76b481d8d10b behind origin/main by 0
+  one_third_width_three  ok       ref=origin/main sha=1e996fb486bb
+                                  checkout HEAD=912f1b1498f2 behind origin/main by 46   <-- checkout was STALE; derived against origin/main anyway
+  NOTE: 1 checkout(s) were behind origin/main at start: one_third_width_three
+        The derivation below uses origin/main, so the staleness did not
+        reach the answer -- but it is stated because a census whose
+        staleness is unstated is not checkable by the next reader.
+
+------------------------------------------------------------------------------
+ROW 1: mg-e35b filed 2026-07-31T04:13:24Z -- asserts of mg-fcf1: no successor
+------------------------------------------------------------------------------
+  author    clock: REFUTED  7 successor commit(s)   [onethird_program=7  one_third_width_three=0]
+  committer clock: REFUTED  7 successor commit(s)   [onethird_program=7  one_third_width_three=0]
+
+  CHAIN (strict -- ancestor named in the SUBJECT from gen 2 on):
+    3 generation(s), 10 commit(s), all authored before 2026-07-31T04:13:24Z:
+    generation 1  (7 commit(s))
+      16bee7981  2026-07-30T04:29:38+00:00  onethird_program
+        owner=mg-a806  names=mg-fcf1
+        STATE: land the mg-86a3 consequences — ledger row B6 FALSIFIED not coverage-gapped, the replacement scope clause is STRONGER, Theorem G recorded as pr
+      8fc51112f  2026-07-30T04:31:39+00:00  onethird_program
+        owner=mg-8a12  names=mg-fcf1
+        probe: repair NEGATIVE CONTROL 4's scoring — three of its four rows were a THEOREM scored as passing controls, and the output said they were not (mg-8
+      522048f6c  2026-07-30T05:23:02+00:00  onethird_program
+        owner=mg-d39d  names=mg-fcf1
+        docs: independent audit of mg-a806 (the mg-86a3 STATE landing) — OVERSTATED with 1 BROKEN, the first in this arc, and it is a row the ticket did not a
+      de54c3a86  2026-07-30T06:42:43+00:00  onethird_program
+        owner=mg-f1b2  names=mg-fcf1
+        docs: independent audit of mg-8a12 / 8fc5111 (the NEGATIVE CONTROL 4 scoring repair) — OVERSTATED; the defect recurs INSIDE the repair, at a FIFTH gen
+      ba3ec79d2  2026-07-30T07:17:40+00:00  onethird_program
+        owner=mg-f2e1  names=mg-fcf1
+        STATE: widen the A5 trigger to cover STATE.md itself — the hole was in pm-onethird's own wording, and the arc's ONLY BROKEN item was a ledger row (mg-
+      f024985e5  2026-07-30T19:01:15+00:00  onethird_program
+        owner=mg-da45  names=mg-fcf1
+        control+docs: THE CONDITION IS RIGHT AND THE PRINTED REASON WAS FALSE — row I4's absorbability answer is FORCED at the ABSOLUTE-VALUE gate on all 61, 
+      1d922a106  2026-07-30T19:39:24+00:00  onethird_program
+        owner=mg-1c80  names=mg-fcf1
+        docs+audit: independent audit of mg-da45 / f024985 (row I4's printed reason) — THE SUBSTANCE IS CONFIRMED AND EXTENDED TO n=8, but `deciding_gate` is 
+    generation 2  (2 commit(s))
+      a85fb28b5  2026-07-30T07:42:31+00:00  onethird_program
+        owner=mg-6653  names=mg-f2e1
+        docs: independent audit of mg-f2e1 / ba3ec79 (the A5 widening) — OVERSTATED with 1 BROKEN, and the BROKEN item is the sentence the commit nominates as
+      7f04902cb  2026-07-30T11:02:10+00:00  onethird_program
+        owner=mg-e720  names=mg-f2e1
+        docs: independent audit of mg-7d5a / d5a3043 (the strike of the A5 widening's own argument) — OVERSTATED with 3 BROKEN, and ALL THREE are in material 
+    generation 3  (1 commit(s))
+      bdcb0069e  2026-07-30T12:20:26+00:00  onethird_program
+        owner=mg-ae62  names=mg-e720
+        STATE+instrument: CLOSE mg-e720's remaining two BROKEN items — both CLOSE, neither relocates — and upgrade the beyond-brief rule to TARGET ZERO, whose
+
+  CHAIN (loose -- ancestor named anywhere in the message): 7 generation(s), 81 commit(s).
+    The gap between the two is blind spot B7 -- MENTION IS NOT DESCENT --
+    measured on this very population rather than merely listed.  The loose
+    reader compounds citations into 'generations' and reports the
+    neighbourhood as a chain.  The strict figure is the one this row
+    reports; the loose figure is its upper bound.
+
+  PREDICTED (72e36cb, before any script existed): REFUTED    OBSERVED: REFUTED    HIT
+  (P1 was disclosed as NOT BLIND: a hand grep had already shown this.)
+
+------------------------------------------------------------------------------
+ROW 2: mg-fccb filed 2026-07-31T04:12:41Z -- asserts of mg-d112: no successor
+------------------------------------------------------------------------------
+  author    clock: REFUTED  5 successor commit(s)   [onethird_program=4  one_third_width_three=1]
+  committer clock: REFUTED  5 successor commit(s)   [onethird_program=4  one_third_width_three=1]
+
+  CHAIN (strict -- ancestor named in the SUBJECT from gen 2 on):
+    2 generation(s), 7 commit(s), all authored before 2026-07-31T04:12:41Z:
+    generation 1  (5 commit(s))
+      ea46754e4  2026-07-29T09:22:09+00:00  onethird_program
+        owner=mg-1fdb  names=mg-d112
+        STATE: reconcile row 8 with the 'logically independent' line — (B) => LIB => lambda_std->1 is ONE-WAY, reverse UNPROVEN; add mg-a58f row with the fals
+      b16956159  2026-07-29T09:22:24+00:00  one_third_width_three
+        owner=mg-1fdb  names=mg-d112
+        docs: annotate mg-dbd1 sec 2.3/3.2 — a SECOND unflagged inequality-direction error (b vs m), refuted by mg-a58f's own witness; downgrade sec 7.3 insuf
+      e139da38d  2026-07-29T10:39:26+00:00  onethird_program
+        owner=mg-23f5  names=mg-d112
+        STATE: land the mg-88bd/mg-e35c consequences — operative lambda_std form recorded CONDITIONALLY (source's THIRD form, both asymptotic renderings stron
+      bc7527425  2026-07-29T11:39:19+00:00  onethird_program
+        owner=mg-c7b7  names=mg-d112
+        STATE: land the mg-63e3/mg-f825 consequences — STRIKE the 'no modulus exists' universal (RED survives only at F=Omega(eps)), n-dependence clause delib
+      954c29e2c  2026-07-30T12:44:55+00:00  onethird_program
+        owner=mg-6a2f  names=mg-d112
+        docs: independent audit of mg-34bf / 57f962f (the STATE.md ledger restructure) — NOTHING WAS LOST, established twice with my own instruments, and my i
+    generation 2  (2 commit(s))
+      b68db5d42  2026-07-30T13:14:02+00:00  onethird_program
+        owner=mg-7735  names=mg-6a2f
+        STATE+docs: LAND mg-6a2f — the restructure LOST NOTHING, and both BROKEN items are the commit's arithmetic ABOUT ITSELF; F1 CLOSES, F2 CLOSES where it
+      6193e70d8  2026-07-30T13:41:32+00:00  onethird_program
+        owner=mg-bd41  names=mg-6a2f
+        docs: independent audit of mg-7735 / b68db5d (the landing of the mg-6a2f audit) — OVERSTATED with 3 BROKEN, and the first is that the commit's HEADLIN
+
+  CHAIN (loose -- ancestor named anywhere in the message): 7 generation(s), 103 commit(s).
+    The gap between the two is blind spot B7 -- MENTION IS NOT DESCENT --
+    measured on this very population rather than merely listed.  The loose
+    reader compounds citations into 'generations' and reports the
+    neighbourhood as a chain.  The strict figure is the one this row
+    reports; the loose figure is its upper bound.
+
+  PREDICTED (72e36cb, before any script existed): REFUTED    OBSERVED: REFUTED    HIT
+  (P2 was disclosed as NOT BLIND: a hand grep had already shown this.)
+
+------------------------------------------------------------------------------
+ROW 3: mg-a74f filed 2026-07-31T04:22:15Z -- asserts of mg-16eb: no successor
+------------------------------------------------------------------------------
+  author    clock: UPHELD   0 successor commit(s)   [onethird_program=0  one_third_width_three=0]
+  committer clock: UPHELD   0 successor commit(s)   [onethird_program=0  one_third_width_three=0]
+
+  CHAIN: none.  0 generations, 0 successor commits before the filing
+         instant.  The row's premise is TRUE AS WRITTEN.
+
+  PREDICTED (72e36cb, before any script existed): UPHELD    OBSERVED: UPHELD    HIT
+  (P3 was disclosed as NOT BLIND: a hand grep had already shown this.)
+
+------------------------------------------------------------------------------
+ROW 4: mg-dffa filed 2026-07-31T04:22:50Z -- asserts of mg-5800: no successor
+------------------------------------------------------------------------------
+  author    clock: UPHELD   0 successor commit(s)   [onethird_program=0  one_third_width_three=0]
+  committer clock: UPHELD   0 successor commit(s)   [onethird_program=0  one_third_width_three=0]
+
+  CHAIN: none.  0 generations, 0 successor commits before the filing
+         instant.  The row's premise is TRUE AS WRITTEN.
+
+  PREDICTED (72e36cb, before any script existed): UPHELD    OBSERVED: UPHELD    HIT
+  (P4 was disclosed as NOT BLIND: a hand grep had already shown this.)
+
+==============================================================================
+THE CENSUS'S ACCURACY, WITH THE DENOMINATOR NAMED
+==============================================================================
+  Population: the FOUR DROPPED VERDICT tickets pm-onethird filed between
+  2026-07-31T04:12:41Z and 04:22:50Z.  Not a sample of a larger set -- the
+  whole census.  n = 4, and all 4 are now checked against the tree.
+
+  row  ticket    parent    premise `no successor` is   strict gens/commits   loose gens/commits   predicted
+   1   mg-e35b   mg-fcf1   REFUTED                         3 / 10              7 / 81         REFUTED
+   2   mg-fccb   mg-d112   REFUTED                         2 / 7               7 / 103        REFUTED
+   3   mg-a74f   mg-16eb   UPHELD                          0 / 0               0 / 0          UPHELD
+   4   mg-dffa   mg-5800   UPHELD                          0 / 0               0 / 0          UPHELD
+
+  REFUTED 2 of 4.  UPHELD 2 of 4.  UNKNOWN 0 of 4.
+  The census was WRONG on 2 of its 4 rows and RIGHT on 2.
+
+  The brief's own figure was `1-of-1 refuted so far on a population of 4`,
+  with 3 rows unchecked.  That figure is now SUPERSEDED, not contradicted:
+  4 of 4 checked, 2 refuted.  `2 of 4 wrong` and `4 of 4 wrong` are
+  different claims and this does not round toward either.
+
+  Predictions scored: 4 of 4 hit, 0 missed
+  (P1-P4 were disclosed as not blind; hitting them is a weak claim and is
+   stated as such in PREDICTIONS.md.)
+
+== s1 exit: 0 (findings about the census do not set this instrument's exit) ==
