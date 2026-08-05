@@ -1,0 +1,14 @@
+==============================================================================
+mg-aaf4 run_all -- exit codes scored against PREDICTIONS.md (committed first)
+==============================================================================
+  a1_population          exit 1  predicted 1  SUMMARY lines 8   ok
+  a2_reproduce           exit 0  predicted 0  SUMMARY lines 3   ok
+  a3_criticism           exit 1  predicted 1  SUMMARY lines 6   ok
+  a4_selfapply           exit 1  predicted 1  SUMMARY lines 2   ok
+  a5_donotdisturb        exit 1  predicted 0  OFF PREDICTION
+  selftest_aaf4          exit 0  predicted 0  SUMMARY lines 1   ok
+==============================================================================
+SUMMARY run_all: 6 scripts, 1 off prediction
+SUMMARY run_all: a miss here is a REFUTED PREDICTION kept as written,
+SUMMARY run_all: not a prediction rewritten to match the run.
+==============================================================================

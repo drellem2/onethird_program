@@ -1,0 +1,168 @@
+==============================================================================
+A4  THE SELF-APPLICATION LEDGER.  Every property mg-d075
+    faults somebody else for, measured on mg-d075.
+    Population: 9 charges.  Grain: one charge.
+==============================================================================
+
+==============================================================================
+  F1  A figure stated in prose that the author's own instrument does not compute, or computes differently.
+==============================================================================
+    THE CHARGE, located in docs/repair-mg-d075-the-figure-and-its-scope.md:
+      The `HEDGES` list in `code/branching_audit_19ec/e2_f2_clauses.py` has **25** entries, and that audit
+      's transcript never prints a token count at all — so **26** is a hand-written literal no instrument 
+      computes. - The phrasing population is **15** in the transcript and in the published audit, and **13
+      ** in the recovered verdict that reached mg-d075's brief.
+
+    THE MEASURE, on mg-d075's own deliverable:
+      times `253` is written in the parent's README   : 2
+      population its own committed transcript prints  : 254
+      the same figure, printed a second time by it    : 254
+
+    VERDICT: FAILS
+
+==============================================================================
+  F2  The instrument does not print the figure the prose quotes.  (Second clause of the same sentence as F1: one charge, two distinct properties.)
+==============================================================================
+    THE CHARGE, located in docs/repair-mg-d075-the-figure-and-its-scope.md:
+      The `HEDGES` list in `code/branching_audit_19ec/e2_f2_clauses.py` has **25** entries, and that audit
+      's transcript never prints a token count at all — so **26** is a hand-written literal no instrument 
+      computes. - The phrasing population is **15** in the transcript and in the published audit, and **13
+      ** in the recovered verdict that reached mg-d075's brief.
+
+    THE MEASURE, on mg-d075's own deliverable:
+      times the parent's prose states `33 hedge tokens` : 2
+      times its own transcript prints that count        : 2
+      (the charge against mg-19ec was that ITS transcript
+       prints the count 0 times -- measured by s4's H4)
+
+    VERDICT: SELF-APPLIES
+
+==============================================================================
+  F3  Two of the author's own instruments give different figures for one population, and only one of them reaches the verdict.
+==============================================================================
+    THE CHARGE, located in code/branching_bound_d075/README.md:
+      **EIGHT IS NOT THE POPULATION EITHER.** The ninth is the row-10 sentence of §3, which said *"on 28 o
+      f 33 intervals"* of the 33 intervals `[0̂, w]` with `rank(w) ≤ 6` and never spelled *"Young–Fibonacc
+      i"* — and which **mg-19ec's own POP-1 block already printed and scored unbounded.** One audit, two i
+      nstruments, and only the smaller number reached the verdict.
+
+    THE MEASURE, on mg-d075's own deliverable:
+      H3's banner names a population of              : 9
+      rows H3 actually prints                        : 10
+      H3's own SUMMARY line                          : 10 of 10
+      the banner is a hardcoded literal in s4_hedge.py: True
+      so the SMALLER of the two numbers is the one in the header,
+      which is the charge README line 53 lays against mg-19ec.
+
+    VERDICT: FAILS
+
+==============================================================================
+  F4  A predicate whose scope silently excludes sites of the very thing it counts.
+==============================================================================
+    THE CHARGE, located in docs/repair-mg-d075-the-figure-and-its-scope.md:
+      It carries no rank bound. mg-19ec's POP-3 predicate could not see it, because that predicate require
+      s the string *"Young–Fibonacci"* to appear **in the same sentence as the numeral**, and this sentenc
+      e says *"for Young's"* instead.
+
+    THE MEASURE, on mg-d075's own deliverable:
+      the parent's published corpus unbounded count  : 12
+      unbounded sites in tracked *.md INSIDE docs/   : 12
+      unbounded sites in tracked *.md OUTSIDE docs/  : 12
+      the glob `docs/*.md` is the whole of the reason the
+      second number is not in any transcript of this arc.
+
+    VERDICT: FAILS
+
+==============================================================================
+  F5  A check respecified after it fired, with the failing transcript discarded.
+==============================================================================
+    THE CHARGE, located in docs/repair-mg-d075-the-figure-and-its-scope.md:
+      **Two checks respecified after they fired on me**, recorded because silently loosening a check that 
+      fires is exactly what these audits exist to catch.
+
+    THE MEASURE, on mg-d075's own deliverable:
+      first-form transcripts the parent committed    : 2  (out_s3_bound_FIRSTFORM_exit1.txt, out_s5_own_criticism_FIRSTRUN_exit1.txt)
+      first-form transcripts THIS AUDIT commits      : 2  (out_a3_criticism_FIRSTFORM_exit1.txt, out_selftest_aaf4_FIRSTFORM_exit1.txt)
+
+    VERDICT: SELF-APPLIES
+
+==============================================================================
+  F6  A figure asserted with no population and no grain in its own sentence.
+==============================================================================
+    THE CHARGE, located in docs/repair-mg-d075-the-figure-and-its-scope.md:
+      **FOUR was not the population, and EIGHT is not either.** The brief for this repair told me not to i
+      nherit 8; mg-aaf4 is told not to inherit 9.
+
+    THE MEASURE, on mg-d075's own deliverable:
+      the sentence                                   : **FOUR was not the population, and EIGHT is not either.** The brief for this repair told m
+      its own scope, classified                      : KEYWORD ONLY
+      numeric scope found in it                      : ''
+      adjudicated by hand in a3's C2b                : NO SCOPE
+
+    VERDICT: FAILS
+
+==============================================================================
+  F7  A universal claim made about the author's own document.
+==============================================================================
+    THE CHARGE, located in docs/repair-mg-d075-the-figure-and-its-scope.md:
+      Every number in this document is stated with the population it is over and the grain of the value, b
+      ecause the defect being repaired is figures stated without either.
+
+    THE MEASURE, on mg-d075's own deliverable:
+      the claim   : Every number in this document is stated with the population it is over and the grain of 
+      a counterexample from the same document:
+        **FOUR was not the population, and EIGHT is not either.** The brief for this repair told
+      its scope class                                : KEYWORD ONLY
+      FOUR and EIGHT are numbers; the sentence names no population.
+
+    VERDICT: FAILS
+
+==============================================================================
+  F8  A count in prose larger than the count the instrument checks.
+==============================================================================
+    THE CHARGE, located in code/branching_bound_d075/README.md:
+      **12 predictions: 10 held, 2 refuted in one clause each. 9 of 9 exit values matched.**
+
+    THE MEASURE, on mg-d075's own deliverable:
+      exit values `run_all.sh` actually scores       : 7
+      exit values the README scores in prose         : 9 of 9
+      the difference is the runner's OWN exit code and s5's
+      predicted first-run 1, neither of which run_all.sh checks.
+      PREDICTIONS.md discloses the arithmetic (7 scripts + the
+      runner, s5 contributing two), so this is a GRAIN gap and
+      not a false figure -- recorded, and not scored FAILS.
+
+    VERDICT: SELF-APPLIES
+
+==============================================================================
+  F9  Claiming to have fixed the class when only the instance was fixed.
+==============================================================================
+    THE CHARGE, located in docs/repair-mg-d075-the-figure-and-its-scope.md:
+      **This repair does not install one.**
+
+    THE MEASURE, on mg-d075's own deliverable:
+      explicit statements that the class is NOT fixed: 4
+      statements claiming the class IS fixed          : 0
+
+    VERDICT: SELF-APPLIES
+
+==============================================================================
+  THE LEDGER
+==============================================================================
+    charges laid by mg-d075 and measured on it : 9
+    SELF-APPLIES                               : 4
+    FAILS                                      : 5
+    charges whose sentence could not be located: 0
+
+    WHAT THIS IS NOT.  It is not a claim that mg-d075 is careless.
+    Four of the nine charges it lays, it meets -- including the two hardest
+    (keeping the transcripts of checks that fired on it, and refusing to claim
+    the class).  What the failures share is a single shape: the repair drew each
+    of its populations at a boundary that put its own instrument outside, and
+    then measured honestly inside the boundary.  That is the arc's defect at one
+    remove -- not a figure without its scope, but a SCOPE without its figure.
+
+==============================================================================
+SUMMARY a4_selfapply: 9 charges measured on the repair that laid them; 4 SELF-APPLIES, 5 FAILS, 0 sentences not located
+SUMMARY a4_selfapply: failures 5
+==============================================================================

@@ -1,0 +1,412 @@
+==============================================================================
+A3  THE REPAIR READ AS A CLAIMANT.  Every sentence in which
+    mg-d075 faults someone else's scope, checked for its own
+    -- against the standard mg-d075 applied to the DOCUMENT,
+    not the one it applied to itself.
+==============================================================================
+
+==============================================================================
+  C0  THE TRANSCRIPTION, CHECKED.  Every alternative of the
+      parent's three regexes is asserted present in the
+      parent's own source before it is used against it.
+==============================================================================
+    alternatives transcribed : 52
+    not found in the source  : 0
+
+==============================================================================
+  C1  THE PARENT'S OWN RESULT, REPRODUCED FIRST.
+      Population: `MINE` (2 files) + the sentences mg-d075
+      added to the living document.  Grain: one sentence.
+==============================================================================
+    population, my reader                    : 254 live sentences
+    sentences mg-d075 added to the living doc: 14
+    criticism sentences (parent's predicate) : 10
+    unbounded by the PARENT'S OWN OWNSCOPE   : 0
+    mg-d075 published                        : 10 of 254, 0 unbounded
+
+==============================================================================
+  C2  THE SAME SENTENCES, SCORED BY THE STANDARD mg-d075
+      APPLIED TO THE DOCUMENT.  H3's separation: a NUMERIC
+      SCOPE passes, a keyword does not.
+==============================================================================
+    [01] README.md                                      line 53   NUMERIC SCOPE
+         parent's OWNSCOPE matched : 'POPULATION'
+         NUMERIC scope in sentence : 28 of 33
+         **EIGHT IS NOT THE POPULATION EITHER.** The ninth is the row-10 sentence of §3, which said *"on 28 o
+         f 33 intervals"* of the 33 intervals `[0̂, w]` with `rank(w) ≤ 6` and never spelled *"Young–Fibonacc
+         i"* — and which **mg-19ec's own POP-1 block already printed and scored unbounded.** One audit, two i
+         nstruments, and only the smaller number reached the verdict.
+
+    [02] README.md                                      line 67   NUMERIC SCOPE
+         parent's OWNSCOPE matched : '36 sites'
+         NUMERIC scope in sentence : 36 sites
+         Post-repair A 10 / B 10 / ceiling 11 / corpus 36 sites in 7 files, 12 unbounded. - **s2** — the pare
+         nt's transcript parsed to 8 rows; my independent STRICT re-implementation returns the same 8 line nu
+         mbers and the same 8 verdicts;
+
+    [03] README.md                                      line 86   NUMERIC SCOPE
+         parent's OWNSCOPE matched : '3 rows'
+         NUMERIC scope in sentence : 3 rows
+         Adjudicated over those 3 rows as a property of the instrument, not scored as a defect: a row recordi
+         ng a withdrawn reading *should* contribute the replacement as a live claim. 2.
+
+    [04] README.md                                      line 152  NUMERIC SCOPE
+         parent's OWNSCOPE matched : '4 of the 8'
+         NUMERIC scope in sentence : 4 of the 8
+         my 5 unbounded of the 9 = the parent's 4 of the 8 plus line 307, none moving the other way
+
+    [05] README.md                                      line 158  NUMERIC SCOPE
+         parent's OWNSCOPE matched : '1 of 5'
+         NUMERIC scope in sentence : 1 of 5
+         **HELD.** 1 of 5 of my criticism sentences was unbounded, and it was the one faulting mg-dffa's clau
+         se for having no bound.
+
+    [06] repair-mg-d075-the-figure-and-its-scope.md     line 29   KEYWORD ONLY
+         parent's OWNSCOPE matched : 'POP-1'
+         NUMERIC scope in sentence : -- NONE --
+         **And mg-19ec already had it.** The POP-1 block of the same transcript (`code/branching_audit_19ec/o
+         ut_e5_population.txt`) prints this exact sentence as its `[09]` and scores it unbounded.
+
+    [07] repair-mg-d075-the-figure-and-its-scope.md     line 62   KEYWORD ONLY
+         parent's OWNSCOPE matched : 'population'
+         NUMERIC scope in sentence : -- NONE --
+         **FOUR was not the population, and EIGHT is not either.** The brief for this repair told me not to i
+         nherit 8; mg-aaf4 is told not to inherit 9.
+
+    [08] repair-mg-d075-the-figure-and-its-scope.md     line 92   NUMERIC SCOPE
+         parent's OWNSCOPE matched : '30 intervals'
+         NUMERIC scope in sentence : 30 intervals
+         The brief singled this out and it deserves the space. §2's mg-dffa note faults Young–Fibonacci for *
+         *naming no class of `P`** — and stated the **Young** classification it was contrasting against with 
+         no bound at all, over a family this repo has measured at exactly **30 intervals `[∅, λ]` with `|λ| ≤
+          6`** and nowhere beyond:
+
+    [09] repair-mg-d075-the-figure-and-its-scope.md     line 210  NUMERIC SCOPE
+         parent's OWNSCOPE matched : 'code/branching_audit_19ec'
+         NUMERIC scope in sentence : 25 entries
+         The `HEDGES` list in `code/branching_audit_19ec/e2_f2_clauses.py` has **25** entries, and that audit
+         's transcript never prints a token count at all — so **26** is a hand-written literal no instrument 
+         computes. - The phrasing population is **15** in the transcript and in the published audit, and **13
+         ** in the recovered verdict that reached mg-d075's brief.
+
+    [10] OneThird-Branching-Graphs-Where-This-Lives.md  line 30   KEYWORD ONLY
+         parent's OWNSCOPE matched : 'population'
+         NUMERIC scope in sentence : -- NONE --
+         **Eight is not the population either.** Counted over the live sentences of this file at the grain mg
+         -19ec itself used, the sites stating that figure were **9**, of which **5** carried no scope in thei
+         r own sentence; the ninth is the row-10 sentence in §3, which mg-19ec's own POP-1 block printed and 
+         whose POP-3 block could not see, because that sentence says *"for Young's"* and never spells *"Young
+         –Fibonacci"*.
+
+    criticism sentences                              : 10
+    pass the parent's OWNSCOPE (keywords allowed)    : 10
+    pass H3's standard (a NUMERIC scope in sentence) : 7
+    THE GAP -- pass as itself, fail as the document  : 3
+
+==============================================================================
+  C2b  THE ADJUDICATION.  A classifier over prose is not a
+       verdict.  Every KEYWORD-ONLY row above is adjudicated
+       BY HAND here, with the reason, and both numbers are
+       published -- the machine's and the adjudicated one.
+==============================================================================
+    repair-mg-d075-the-figure-and-its-scope.md     line 29   machine=KEYWORD ONLY  hand=SCOPE
+      FALSE NEGATIVE OF MY CLASSIFIER. The sentence names the transcript file AND the row index [09] insid
+      e it. That is a fully determinate scope -- narrower than a count -- and it is not numeric only becau
+      se it identifies one object rather than counting a population.
+
+    repair-mg-d075-the-figure-and-its-scope.md     line 62   machine=KEYWORD ONLY  hand=NO SCOPE
+      STANDS. 'FOUR was not the population, and EIGHT is not either' asserts of two published figures that
+       they are not the population, and names in its own sentence neither the population, nor the file, no
+      r the grain. The table two lines above it carries all three. This is the same shape as the defect it
+       is announcing: the figure here, the scope over there.
+
+    OneThird-Branching-Graphs-Where-This-Lives.md  line 30   machine=KEYWORD ONLY  hand=SCOPE
+      FALSE NEGATIVE OF MY CLASSIFIER. The sentence names the file, names the grain, and states 9 and 5 --
+       it carries more scope than most sentences my regex passes. It fails only because the numerals appea
+      r as 'were 9' and 'of which 5' rather than as '9 sites'.
+
+    machine: 3 of 10 criticism sentences carry no NUMERIC scope
+    hand   : 1 of 10 carry no scope of ANY determinate kind
+
+    THE FINDING.  `s5`'s docstring states that applying a weaker
+    standard to itself "would be the defect a second time".  The standard it
+    applies to itself accepts the bare word `population` where the standard it
+    applies to the document requires `rank(w) <= 6`.  The sentences above marked
+    KEYWORD ONLY are the ones that separate the two.  This is not an arithmetic
+    error in mg-d075 -- its 10 of 10 is correct FOR ITS OWN REGEX.  It is the
+    regex that is weaker than the sentence describing it says it is.
+
+==============================================================================
+  C3  THE OMITTED FILE.  mg-d075 authored 3 prose documents;
+      `s5`'s MINE lists 2.  This is the third, run through
+      the parent's OWN criticism predicate.
+==============================================================================
+    file                                     : code/branching_bound_d075/PREDICTIONS.md
+    live sentences, my reader                : 80
+    criticism sentences, PARENT'S predicate  : 8
+    of those, unbounded by PARENT'S OWNSCOPE : 2
+    of those, no NUMERIC scope (H3 standard) : 6
+
+    [01] PREDICTIONS.md                                 line 15   NUMERIC SCOPE
+         parent's OWNSCOPE matched : 'code/branching_audit_19ec'
+         NUMERIC scope in sentence : 8 sites
+         `cat code/branching_audit_19ec/out_e5_population.txt` — **the parent's POP-3 block, which states 8 s
+         ites / 4 bounded / 4 unbounded and prints all eight.** I have read it. 7.
+
+    [02] PREDICTIONS.md                                 line 55   KEYWORD ONLY
+         parent's OWNSCOPE matched : 'POP-3'
+         NUMERIC scope in sentence : -- NONE --
+         It states the figure, it is about Young–Fibonacci intervals, it carries **no** rank bound, and the p
+         arent's POP-3 misses it because the sentence says *"for Young's"* and never spells "Young–Fibonacci"
+         .
+
+    [03] PREDICTIONS.md                                 line 61   KEYWORD ONLY
+         parent's OWNSCOPE matched : 'POP-1'
+         NUMERIC scope in sentence : -- NONE --
+         **P1b — the parent's own POP-1 already printed this sentence** (POP-1 `[09]`, line 307) and scored i
+         t unbounded.
+
+    [04] PREDICTIONS.md                                 line 61   NONE
+         NUMERIC scope in sentence : -- NONE --
+         So the ninth site is not new evidence; it is the parent's own two instruments disagreeing with each 
+         other, and only the smaller number reaching the verdict.
+
+    [05] PREDICTIONS.md                                 line 65   NUMERIC SCOPE
+         parent's OWNSCOPE matched : '8/4'
+         NUMERIC scope in sentence : 8/4
+         **P2 — the parent's 8/4/4 reproduces exactly under its own predicate.** Re-implemented independently
+          and run against the same file at this commit, the parent's POP-3 predicate returns population 8, bo
+         unded 4, unbounded 4, and the same eight line numbers (166, 166, 175, 181, 202, 307, 413, 414).
+
+    [06] PREDICTIONS.md                                 line 65   NONE
+         NUMERIC scope in sentence : -- NONE --
+         *If this fails, the disagreement is mine to explain, not the parent's.*
+
+    [07] PREDICTIONS.md                                 line 71   NONE
+         parent's OWNSCOPE matched : '307 sentence'
+         NUMERIC scope in sentence : -- NONE --
+         **P3 — the four the parent called unbounded are the four I will find unbounded**, i.e. my five-eleme
+         nt unbounded set is the parent's four plus the line-307 sentence, with no site moving in the other d
+         irection.
+
+    [08] PREDICTIONS.md                                 line 88   KEYWORD ONLY
+         parent's OWNSCOPE matched : 'population'
+         NUMERIC scope in sentence : -- NONE --
+         **P6 — after the repair, unbounded = 0** on my repair population under my own relaxed predicate, **a
+         nd** 0 under the parent's stricter one.
+
+    The parent's self-check population was short by one authored
+    document, and the omitted document is not empty of the thing being counted.
+    Whether any of these is a defect is an adjudication; that they were never
+    looked at is not.
+
+==============================================================================
+  C4  MYSELF.  The same predicate, widened, turned on this
+      audit's own prose.  PREDICTIONS.md P10 says in advance
+      that it fires on me.
+==============================================================================
+    population : 339 live sentences of mine
+    criticism sentences, MY wider predicate  : 41
+    of those with NO numeric scope of my own : 30
+
+    [01] PREDICTIONS.md                                 line 3    NONE
+         NUMERIC scope in sentence : -- NONE --
+         I did not choose my own scope and mg-d075 could not choose it for me.
+
+    [02] PREDICTIONS.md                                 line 48   NONE
+         NUMERIC scope in sentence : -- NONE --
+         **This is the expected false-negative of ancestry after a rebase and it is not evidence of tampering
+         .** I will re-take it in the instrument over all four of the parent's commits; the value above is al
+         ready known for one of them and is disclosed rather than scored.
+
+    [03] PREDICTIONS.md                                 line 59   NONE
+         NUMERIC scope in sentence : -- NONE --
+         The brief tells me to count the sites myself and to **say what instrument I used, because the instru
+         ment is what decides whether I could have found a different answer.**
+
+    [04] PREDICTIONS.md                                 line 77   KEYWORD ONLY
+         parent's OWNSCOPE matched : 'POPULATION'
+         NUMERIC scope in sentence : -- NONE --
+         **P1 — THE PARENT'S OWN DELIVERABLE CONTAINS AT LEAST ONE UNBOUNDED SITE OF THE FIGURE, AND IT IS OU
+         TSIDE EVERY POPULATION THE PARENT MEASURES.** Population: live sentences of the four files mg-d075 a
+         uthors or edits that state the 33-interval figure — the living document, `docs/repair-mg-d075-the-fi
+         gure-and-its-scope.md`, `code/branching_bound_d075/README.md`, `code/branching_bound_d075/PREDICTION
+         S.md`.
+
+    [05] PREDICTIONS.md                                 line 98   NONE
+         NUMERIC scope in sentence : -- NONE --
+         *If this fails the disagreement is mine to explain, not the parent's — a disagreement with a publish
+         ed figure is worth nothing until the published figure has been reproduced.* This is the parent's own
+          standard and I adopt it.
+
+    [06] PREDICTIONS.md                                 line 121  KEYWORD ONLY
+         parent's OWNSCOPE matched : 'population'
+         NUMERIC scope in sentence : -- NONE --
+         **P6 — THE PARENT APPLIES A WEAKER STANDARD TO ITSELF THAN TO THE DOCUMENT, AND SAYS IN THE SAME BRE
+         ATH THAT IT DOES NOT.** `s5_own_criticism.py`'s docstring states: *"A neighbouring sentence does not
+          rescue it — that is precisely the standard this repair applied to the document, and applying a weak
+         er one to myself would be the defect a second time."* Its `OWNSCOPE` regex accepts the bare words `p
+         opulation`, `grain`, `live sentences`, the tokens `STRICT`, `RELAXED`, `POP-\d`, and a bare path `co
+         de/…`.
+
+    [07] PREDICTIONS.md                                 line 135  NONE
+         parent's OWNSCOPE matched : 'POPULATION'
+         NUMERIC scope in sentence : -- NONE --
+         **P7 — THE PARENT'S SELF-CRITICISM POPULATION OMITS ONE OF ITS OWN THREE PROSE DOCUMENTS.** `MINE` i
+         s README + account doc;
+
+    [08] PREDICTIONS.md                                 line 142  KEYWORD ONLY
+         parent's OWNSCOPE matched : 'docs/OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md'
+         NUMERIC scope in sentence : -- NONE --
+         **P8 — A PROSE FIGURE OF THE PARENT'S DISAGREES WITH THE PARENT'S OWN TRANSCRIPT, IN THE SAME COMMIT
+         , AND IT IS THE FIGURE OF THE VERY CHECK THAT FAULTS A PREDECESSOR FOR EXACTLY THAT.** The parent's 
+         §6 and `s4`'s H4 fault `docs/OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md` because it *"says 
+         twice"* it scanned against **26** hedge tokens while the code carries **25** — *"a hand-written lite
+         ral no instrument computes."* Predicted: the parent's `README.md` says **253** live sentences of its
+          own prose **twice**, and its own committed `out_s5_own_criticism.txt` says **254**.
+
+    [09] PREDICTIONS.md                                 line 152  KEYWORD ONLY
+         parent's OWNSCOPE matched : 'population'
+         NUMERIC scope in sentence : -- NONE --
+         Predicted: the banner is a hardcoded literal, changing the site count does not change it, and **the 
+         parent's population defect survives inside the parent's own repair of population defects.**
+
+    [10] PREDICTIONS.md                                 line 158  NONE
+         NUMERIC scope in sentence : -- NONE --
+         **P10 — I WILL DO IT TOO.** The brief that commissioned the parent said whoever repairs this should 
+         expect to commit the same defect in the repair; the parent predicted that of itself and was right.
+
+    [11] PREDICTIONS.md                                 line 183  NONE
+         NUMERIC scope in sentence : -- NONE --
+         **P13 — the parent addressed the instance, and I will confirm its own verdict rather than overturn i
+         t.** The parent computes `INSTANCE + REUSABLE ARTEFACT` and states plainly that it does not install 
+         a repo-wide check.
+
+    [12] PREDICTIONS.md                                 line 183  KEYWORD ONLY
+         NUMERIC scope in sentence : -- NONE --
+         Predicted: **I agree**, and I predict the sharper version — that the artefact is not merely un-insta
+         lled but **mis-scoped**: it globs `docs/*.md`, and the parent's own defects (P1, P7) live outside th
+         at glob.
+
+    [13] PREDICTIONS.md                                 line 212  KEYWORD ONLY
+         parent's OWNSCOPE matched : 'code/branching_bound_d075'
+         NUMERIC scope in sentence : -- NONE --
+         **P16 — THE NUMERAL `33` DENOTES TWO DIFFERENT POPULATIONS INSIDE THE PARENT'S OWN DELIVERABLE, AND 
+         ITS DETECTOR CANNOT TELL THEM APART.** `code/branching_bound_d075/README.md` line 33 says *"33 hedge
+          tokens"*; the same file's line 50 says *"the figure `33`, the interval count"*.
+
+    [14] PREDICTIONS.md                                 line 228  NONE
+         NUMERIC scope in sentence : -- NONE --
+         1 if the parent's own deliverable holds an unbounded site of the figure
+
+    [15] PREDICTIONS.md                                 line 231  NONE
+         NUMERIC scope in sentence : -- NONE --
+         1 if any prose figure of the parent disagrees with its own instrument
+
+    [16] README.md                                      line 3    NONE
+         NUMERIC scope in sentence : -- NONE --
+         It should not."* I did not choose my scope and mg-d075 could not choose it for me.
+
+    [17] README.md                                      line 11   NONE
+         NUMERIC scope in sentence : -- NONE --
+         **The floor**: the liveness rule of this whole arc cannot tell a struck claim from a quotation of th
+         e strike marker, and no transcript in the arc prints what that removes.
+
+    [18] README.md                                      line 33   NONE
+         NUMERIC scope in sentence : -- NONE --
+         Two grains, a file-list universe, and the NUMERIC-SCOPE/KEYWORD separation the parent has and does n
+         ot turn on itself
+
+    [19] README.md                                      line 46   NONE
+         NUMERIC scope in sentence : -- NONE --
+         THE HEADLINE — the count, and the instrument that made it possible to disagree
+
+    [20] README.md                                      line 90   NONE
+         NUMERIC scope in sentence : -- NONE --
+         **AND THE PART THAT IS NOT A CRITICISM.** Those four sites are in a **pre-registration commit**, and
+          this lineage does not amend, reword, squash or rebase one away.
+
+    [21] README.md                                      line 90   KEYWORD ONLY
+         parent's OWNSCOPE matched : 'population'
+         NUMERIC scope in sentence : -- NONE --
+         **So the bounding standard and the pre-registration standard are in conflict on exactly this populat
+         ion, and mg-d075 could not have repaired those sites without breaking a different invariant.** What 
+         it could have done, and did not, is *name* the population as excluded by that invariant instead of d
+         rawing the glob so that it never appeared.
+
+    [22] README.md                                      line 99   NONE
+         NUMERIC scope in sentence : -- NONE --
+         Neither number is wrong; they answer different questions, and mg-d075 publishes one of them.
+
+    [23] README.md                                      line 134  NONE
+         NUMERIC scope in sentence : -- NONE --
+         **A sentence faulting two predecessors for stating a figure away from its scope, stating a figure aw
+         ay from its scope.** That is the same shape as the §2.1 defect mg-d075 found in mg-dffa, one level u
+         p.
+
+    [24] README.md                                      line 140  KEYWORD ONLY
+         parent's OWNSCOPE matched : 'population'
+         NUMERIC scope in sentence : -- NONE --
+         **And the population was short by a file.** `s5`'s `MINE` lists two documents; mg-d075 authored thre
+         e.
+
+    [25] README.md                                      line 163  NONE
+         NUMERIC scope in sentence : -- NONE --
+         *"that audit's transcript never prints a token count at all"*
+
+    [26] README.md                                      line 165  KEYWORD ONLY
+         parent's OWNSCOPE matched : 'POP-3'
+         NUMERIC scope in sentence : -- NONE --
+         *"mg-19ec's POP-3 predicate could not see it"*
+
+    [27] README.md                                      line 172  NONE
+         NUMERIC scope in sentence : -- NONE --
+         The arc's defect is a figure without its scope; this is **a scope without its figure**.
+
+    [28] README.md                                      line 181  NONE
+         NUMERIC scope in sentence : -- NONE --
+         mg-d075 computes **INSTANCE + REUSABLE ARTEFACT, not the class**, and says plainly that a repo-wide 
+         check is what would address the class and that it does not install one.
+
+    [29] README.md                                      line 269  NONE
+         NUMERIC scope in sentence : -- NONE --
+         the parent's gate cannot see it
+
+    [30] README.md                                      line 301  NONE
+         NUMERIC scope in sentence : -- NONE --
+         - **It repaired nothing.** mg-d075's deliverable is merged and dated; editing it would destroy the e
+         vidence trail, and editing its `PREDICTIONS.md` would violate the pre-registration invariant.
+
+    I DO NOT REPAIR THE ONES IN `PREDICTIONS.md`.  It is a
+    pre-registration commit and this lineage does not reword those.  Ones in my
+    README are mine to fix and are fixed where fixing them does not turn a
+    finding into a slogan; the residue is printed above rather than deleted.
+
+==============================================================================
+  C5  THE WIDER PREDICATE OVER THE PARENT'S SENTENCES.
+      What the parent's own FAULT regex cannot see.
+==============================================================================
+    criticism sentences, PARENT'S predicate  : 18
+    criticism sentences, MY predicate        : 25
+    seen only by mine                        : 8
+    of those, no NUMERIC scope               : 6
+
+    A worked example the parent's own regex misses by ONE TENSE:
+    [01] repair-mg-d075-the-figure-and-its-scope.md     line 24   KEYWORD ONLY
+         parent's OWNSCOPE matched : 'POP-3'
+         NUMERIC scope in sentence : -- NONE --
+         It carries no rank bound. mg-19ec's POP-3 predicate could not see it, because that predicate require
+         s the string *"Young–Fibonacci"* to appear **in the same sentence as the numeral**, and this sentenc
+         e says *"for Young's"* instead.
+
+      `FAULT` in `s5_own_criticism.py` contains `cannot see`; the
+      parent's own account says `could not see`.  Present : True
+
+==============================================================================
+SUMMARY a3_criticism: C1 parent population 254 sentences, 10 criticism, 0 unbounded by the parent's own OWNSCOPE
+SUMMARY a3_criticism: C2 3 of 10 parent criticism sentences pass as themselves and FAIL the standard applied to the document
+SUMMARY a3_criticism: C3 omitted file PREDICTIONS.md: 8 criticism sentence(s), 6 with no numeric scope
+SUMMARY a3_criticism: C4 MY OWN prose: 41 criticism sentence(s), 30 with no numeric scope of my own
+SUMMARY a3_criticism: C5 my predicate sees 8 sentence(s) the parent's cannot
+SUMMARY a3_criticism: failures 3
+==============================================================================

@@ -1,0 +1,80 @@
+==============================================================================
+A2  REPRODUCE BEFORE DISAGREEING.  Three published row-sets
+    parsed out of the committed transcripts and matched
+    against my own reader, row by row and text by text.
+==============================================================================
+
+    pre-repair anchor, derived from the log : 645b5a4a1a254ac3945a90ddd4462b22a9385723
+    transcripts read (not prose):
+      code/branching_audit_19ec/out_e5_population.txt
+      code/branching_bound_d075/out_s1_census.txt
+
+==============================================================================
+  R1  mg-19ec's POP-3, pre-repair.  Population: live
+      sentences of the living document naming the figure AND
+      Young-Fibonacci in the same sentence.  Grain: sentence.
+==============================================================================
+  R1  8 / 4 / 4
+    published rows : 8      computed rows : 8
+      <01> line 166  cell BOUNDED    reproduced
+      <02> line 166  cell BOUNDED    reproduced
+      <03> line 175  para UNBOUNDED  reproduced
+      <04> line 181  para UNBOUNDED  reproduced
+      <05> line 202  para BOUNDED    reproduced
+      <06> line 307  cell BOUNDED    reproduced
+      <07> line 413  cell UNBOUNDED  reproduced
+      <08> line 414  cell UNBOUNDED  reproduced
+    published 4/8 bounded    computed 4/8 bounded    reproduction failures: 0
+
+==============================================================================
+  R2  mg-d075's population B, pre-repair.  Population: the
+      same file, attribution allowed from the unit.
+      Grain: sentence.
+==============================================================================
+  R2  9 / 4 / 5
+    published rows : 9      computed rows : 9
+      <01> line 166  cell BOUNDED    reproduced
+      <02> line 166  cell BOUNDED    reproduced
+      <03> line 175  para UNBOUNDED  reproduced
+      <04> line 181  para UNBOUNDED  reproduced
+      <05> line 202  para BOUNDED    reproduced
+      <06> line 307  cell BOUNDED    reproduced
+      <07> line 307  cell UNBOUNDED  reproduced
+      <08> line 413  cell UNBOUNDED  reproduced
+      <09> line 414  cell UNBOUNDED  reproduced
+    published 4/9 bounded    computed 4/9 bounded    reproduction failures: 0
+
+==============================================================================
+  R3  mg-d075's population B, AS IT STANDS.  Same file at
+      HEAD.  Grain: sentence.
+==============================================================================
+  R3  10 / 10 / 0
+    published rows : 10      computed rows : 10
+      <01> line 30   para BOUNDED    reproduced
+      <02> line 184  cell BOUNDED    reproduced
+      <03> line 184  cell BOUNDED    reproduced
+      <04> line 193  para BOUNDED    reproduced
+      <05> line 199  para BOUNDED    reproduced
+      <06> line 223  para BOUNDED    reproduced
+      <07> line 328  cell BOUNDED    reproduced
+      <08> line 328  cell BOUNDED    reproduced
+      <09> line 434  cell BOUNDED    reproduced
+      <10> line 435  cell BOUNDED    reproduced
+    published 10/10 bounded    computed 10/10 bounded    reproduction failures: 0
+
+==============================================================================
+  R4  THE PROSE FIGURES OF THE SAME THREE ROW-SETS, read
+      out of the documents rather than the transcripts.
+==============================================================================
+    code/branching_bound_d075/README.md                  8 | 4 | 4    present
+    code/branching_bound_d075/README.md                  9 | 4 | 5    present
+    docs/repair-mg-d075-the-figure-and-its-scope.md      9 and 5      present
+
+    The prose and the transcripts agree on ALL THREE published
+    row-sets.  Where they do NOT agree is measured by `a4`.
+
+==============================================================================
+SUMMARY a2_reproduce: R1 mg-19ec POP-3 8/4/4 reproduced, 0 failure(s)
+SUMMARY a2_reproduce: R2 mg-d075 B pre-repair 9/4/5, R3 B as it stands 10/10/0
+SUMMARY a2_reproduce: reproduction failures 0
+==============================================================================
