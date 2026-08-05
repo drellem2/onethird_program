@@ -27,6 +27,24 @@ could not fire was closed in `code/branching_repair_41aa/check_doc.py` (F3). Evi
 sentence-by-sentence account — as written, evidence, as narrowed — is
 `docs/OneThird-Warrant-Repair-mg-dffa.md`.***
 
+***Bounded 2026-08-05 by mg-d075**, landing the OPEN of mg-19ec's audit
+(`docs/OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md`). **No number moves, no
+measurement is withdrawn or added to, and no sentence of this document is deleted.** mg-19ec
+found that this document states the 33-interval Young–Fibonacci figure — the 33 intervals
+`[0̂, w]` with `rank(w) ≤ 6` — at **8** live sentences and bounds it at 4. **Eight is not
+the population either.** Counted over the live sentences of this file at the grain mg-19ec
+itself used, the sites stating that figure were **9**, of which **5** carried no scope in
+their own sentence; the ninth is the row-10 sentence in §3, which mg-19ec's own POP-1 block
+printed and whose POP-3 block could not see, because that sentence says *"for Young's"* and
+never spells *"Young–Fibonacci"*. All nine now carry `rank(w) ≤ 6` in their own sentence,
+this note is itself in that population and carries it too, and the current count is printed
+in `code/branching_bound_d075/out_s3_bound.txt` rather than asserted here. The criticism
+clause in §2 that faults Young–Fibonacci for naming no class of `P` now states the **Young**
+classification with the `|λ| ≤ 6`, 30-of-30 measurement that carries it. Evidence and the
+counter-instrument: `code/branching_bound_d075/`; the account, including the two defects this
+repair's own instruments found in this repair, is
+`docs/repair-mg-d075-the-figure-and-its-scope.md`.***
+
 **What this document is.** mg-d673's MAJOR finding was that row Q of
 `docs/OneThird-Landscape-Where-This-Lives.md` licensed a *"no"* about the literature over a
 candidate space of **two** — FI-modules and Deligne — omitting **towers of algebras /
@@ -174,23 +192,26 @@ named, with the measurement or the citation that carries it.
 
 *(**mg-41aa**: items 2 and 5 are re-scoped below, and the re-scoping makes this heading too
 strong in one respect. At the level of finite **intervals** a contact of the same **kind**
-extends: **28 of the 33** finite Young–Fibonacci intervals are distributive, so each is
-`J(P)` for some `P`, item 2. What does not extend is the **representation theory**, which is
-items 3, 4, 6 and 7, and those are untouched.)*
+extends: **28 of the 33** intervals `[0̂, w]` of Young–Fibonacci with `rank(w) ≤ 6` are
+distributive, so each is `J(P)` for some `P`, item 2. What does not extend is the
+**representation theory**, which is items 3, 4, 6 and 7, and those are untouched.)*
 
 *(**mg-dffa**, landing mg-5800's F2, narrowing the sentence above and not the measurement
 under it. **It is a contact of the same kind and it is not the same contact.** The Young
-headline is a **classification** — the intervals of Young's lattice are `J(P)` for `P`
-**exactly** the skew cell posets, a named closed class, which is the whole content of §0
-consequence 1. The Young–Fibonacci sentence is **Birkhoff plus a distributivity count**:
-every finite distributive lattice is `J` of its join-irreducibles, so "28 of the 33 are
-`J(P)`" says precisely "28 of the 33 are distributive", and **names no class of `P`**. The
-families also differ. Measured on a fourth instrument: the 28 distributive Young–Fibonacci
-intervals yield **17 distinct `P`** up to isomorphism, of which **5 are not skew cell
-posets** — 2 of the 4 at `|P| = 5`, 3 of the 5 at `|P| = 6`
-(`code/branching_warrant_dffa/out_w2_family.txt`). On the Young side the same measurement
-returns **30 of 30** intervals distributive and **0** of the resulting `P` outside the skew
-class.)*
+headline is a **classification** — the intervals `[∅, λ]` of Young's lattice are `J(P)` for
+`P` **exactly** the skew cell posets, a named closed class, which is the whole content of §0
+consequence 1, **measured over the 30 intervals with `|λ| ≤ 6`** — 30 of 30 distributive, 30
+of 30 with `P` a skew cell poset, 0 outside the class — with the isomorphism it rests on
+checked over all **44 partitions to `n ≤ 7`**. The Young–Fibonacci sentence is **Birkhoff
+plus a distributivity count**: every finite distributive lattice is `J` of its
+join-irreducibles, so, of the **33** intervals `[0̂, w]` with `rank(w) ≤ 6`, *"28 are
+`J(P)`"* says precisely *"28 are distributive"*, and **names no class of `P`**. The families
+also differ. Measured on a fourth instrument: the 28 distributive Young–Fibonacci intervals
+with `rank(w) ≤ 6` yield **17 distinct `P`** up to isomorphism, of which **5 are not skew
+cell posets** — 2 of the 4 at `|P| = 5`, 3 of the 5 at `|P| = 6`
+(`code/branching_warrant_dffa/out_w2_family.txt`). On the Young side the same measurement,
+over the 30 intervals with `|λ| ≤ 6`, returns **30 of 30** intervals distributive and **0**
+of the resulting `P` outside the skew class.)*
 
 1. **Finiteness.** Differential posets and dual graded graphs are locally finite with a
    `0̂` and infinitely many ranks; `J(P)` for finite `P` is finite with a `1̂`. The
@@ -304,7 +325,7 @@ this table is the finding, not the headline.
 | **7** | **Diagram algebras via Schur–Weyl** (partition, Brauer, Temperley–Lieb, rook) | **yes** | **NOT LOCATED** | these are centraliser algebras with diagram bases and multiplicity-carrying Bratteli diagrams; I located no order-cone, order-congruence or `P`-compatible-partition object among them. A search report, not a claim about the literature |
 | **8** | **Bratteli diagrams / AF algebras** in general | **yes** | **VACUOUS INSTANCE** | true and contentless; §2.7 |
 | **9** | **Fulman, *Commutation relations and Markov chains*** (`arXiv:0712.1375`), down-up chains on the Young, Schur and Kingman graphs | **yes** | **ADJACENT — different state space** | his chains move on the **vertices** of a branching graph, driven by the `U`/`D` operators; ours moves on the **maximal chains**. The Plancherel growth process is likewise a measure on paths, not a Markov chain on the set of paths |
-| **10** | **Okada algebras and the Okada monoid** (`arXiv:2404.16733`) | **yes** | **ADJACENT — the closest structural analogue found** | a *monoid* whose algebra tower has a differential poset (Young–Fibonacci) as its Bratteli diagram: the shape of the thing Daniel's question asks for. It is a different monoid (aperiodic, a labelled Temperley–Lieb arc-diagram model). **Located from abstracts; not read.** *Re-scoped by mg-41aa under mg-6ad0's X4: this row previously added "and the lattice it realises is the one Brown §4.3 provably cannot consume (T8)". That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Brown §4.3 consumes them and each is a `J(P)`. Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, on 28 of 33 intervals; what keeps it ADJACENT is that it is a different monoid, which is the reason above and not the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: it is not the SAME contact. The Young headline classifies its index sets — `P` exactly the skew cell posets — whereas here no class of `P` is named, and the 28 intervals yield 17 distinct `P` of which 5 are not skew cell posets (§2 item 2; `code/branching_warrant_dffa/out_w2_family.txt`).** |
+| **10** | **Okada algebras and the Okada monoid** (`arXiv:2404.16733`) | **yes** | **ADJACENT — the closest structural analogue found** | a *monoid* whose algebra tower has a differential poset (Young–Fibonacci) as its Bratteli diagram: the shape of the thing Daniel's question asks for. It is a different monoid (aperiodic, a labelled Temperley–Lieb arc-diagram model). **Located from abstracts; not read.** *Re-scoped by mg-41aa under mg-6ad0's X4: this row previously added "and the lattice it realises is the one Brown §4.3 provably cannot consume (T8)". That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Brown §4.3 consumes them and each is a `J(P)`. Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, on 28 of the 33 Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6`; what keeps it ADJACENT is that it is a different monoid, which is the reason above and not the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: it is not the SAME contact. The Young headline classifies its index sets — `P` exactly the skew cell posets — whereas here no class of `P` is named, and the 28 intervals yield 17 distinct `P` of which 5 are not skew cell posets (§2 item 2; `code/branching_warrant_dffa/out_w2_family.txt`).** |
 | **11** | **Gaetz, dual towers of groups** (`arXiv:1803.11168`) | **yes** | **CONTEXT, not contact** | rigidity of the dual-graded-graph structure; see row 5 |
 | **12** | **Bidigare–Solomon → `NSym`/`QSym` → the `0`-Hecke tower** | **yes** | **the one documented bridge, and it needs the symmetry we lose** | §2.6. This is the honest answer to *"is there a route from this family into the tower programme"*: yes, at the antichain end, and it dates from the 1990s (Bidigare's thesis; GKLLRT; Krob–Thibon) — *decades stated from the secondary literature, since I read none of the three* |
 
@@ -410,8 +431,8 @@ Ordered by how much I expect them to yield.
 | **B2** | the posets `P` for which `J(P)` is an interval `[μ, λ]` of Young's lattice are exactly the **SKEW** cell posets `λ/μ`, a vanishing fraction: **62/318** (`n=6`), **149/2 045** (`n=7`), **360/16 999** (`n=8`); those with `J(P) = [∅, λ]` are exactly the straight cell posets `D_λ`, 6/318, 8/2 045, 12/16 999 | **MEASURED both columns; the "exactly" now TESTED** | straight and skew classes by canonical form (T2, `n ≤ 6` here; `n = 7, 8` skew from `code/branching_repair_41aa`, agreeing with mg-6ad0). The "exactly" is tested **in both directions** in `r1_exactly.py`: for all **405** poset classes to `n ≤ 6` an isomorphism `J(P) → [μ, λ]` is **constructed and checked on every pair**, and no poset outside the skew class matches any interval of the right size (exhaustive to `n ≤ 5`). `n ≥ 7` totals are **A000112, cited not computed** |
 | **B2′** | *(the version this replaces, mg-6ad0's X1)* — B2 formerly read *"the posets `P` for which `J(P)` is an interval of Young's lattice are **exactly** the cell posets, … 6/318, 8/2 045, 12/16 999"* | **BROKEN — the "exactly" was FALSE and was never tested** | the 2-element antichain is not a `D_λ` and `J(it) = [(1), (2,1)]`; T2 measured `{canon(D_λ) : λ ⊢ n}` and nothing else. The three numbers were right about the straight class and understated the named class by 10× to 30× |
 | **B3** | no finite `J(P)` is a differential poset, and none is one even with the top rank exempted (bar the one-element poset) | **MEASURED, with positive controls** | 405 classes to `n ≤ 6`. Controls: Young's lattice and Young–Fibonacci both return `r = 1` in the same code path |
-| **B4** | **as whole lattices**: every interval `[∅, λ]` of Young's lattice is distributive and the Young–Fibonacci lattice is not, and Young's is the only *distributive* 1-differential lattice | **MEASURED + CITED** | 30 Young intervals, 0 non-distributive; 33 Young–Fibonacci intervals, 5 non-distributive, witness `w = 221` — all reproduced by mg-6ad0 and by mg-41aa. Stanley's and Byrnes's classification statements are **cited from a secondary source and not read** |
-| **B4′** | *(the reading this replaces, mg-6ad0's X4)* — B4 formerly concluded *"so Brown §4.3 reaches the Young graph and no other differential poset"* | **RE-SCOPED — true and empty at the level stated, false at the level that matters** | Brown §4.3 needs a **finite** distributive lattice and no differential poset is finite, so at whole-poset level it consumes none, Young's included. At interval level, **28 of 33** Young–Fibonacci intervals are distributive and each is `J(P)` for an explicitly constructed `P`, **0 bad** |
+| **B4** | **as whole lattices**: every interval `[∅, λ]` of Young's lattice is distributive and the Young–Fibonacci lattice is not, and Young's is the only *distributive* 1-differential lattice | **MEASURED + CITED** | 30 Young intervals `[∅, λ]` with `λ` of size ≤ 6, 0 non-distributive; 33 Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6`, 5 non-distributive, witness `w = 221` — all reproduced by mg-6ad0 and by mg-41aa. Stanley's and Byrnes's classification statements are **cited from a secondary source and not read** |
+| **B4′** | *(the reading this replaces, mg-6ad0's X4)* — B4 formerly concluded *"so Brown §4.3 reaches the Young graph and no other differential poset"* | **RE-SCOPED — true and empty at the level stated, false at the level that matters** | Brown §4.3 needs a **finite** distributive lattice and no differential poset is finite, so at whole-poset level it consumes none, Young's included. At interval level, **28 of the 33** Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6` are distributive and each is `J(P)` for an explicitly constructed `P`, **0 bad** |
 | **B5** | `dim kF(P)/rad = |AC(P)|`, consistent with Brown's *"they are all 1-dimensional"* | **MEASURED — and the step to Brown's theorem has since been DERIVED, twice** *(widened by mg-dffa, landing mg-5800's F1)* | trace-form rank in exact rational arithmetic; all 87 classes to `n ≤ 5` and 308 of 318 at `n = 6`, 0 bad. **The step from this to "all irreducibles are 1-dimensional" is Brown's theorem, cited and not re-derived in `code/branching_af28/`** — but it has since been derived without it: `Φ : kF(P) → k^{AC(P)}` built from the product alone, surjective, `ker Φ` a nilpotent ideal, 0 bad — by mg-6ad0 on 67 of the 87 classes to `n ≤ 5` (20 over its cap of 90 on the size of `F(P)`, each listed) *"by a route that uses no theorem of Dickson and no trace form"*, and by mg-5800 on all 87 *"with NO trace form and NO cited theorem"* (`code/branching_audit_6ad0/out_a4_algebra.txt`, `code/branching_audit_5800/out_a5_b1b5.txt`). **mg-dffa LOCATED both results in those committed outputs; it did not re-run them and does not re-derive the step itself** |
 | **B6** | no move acts on `L(P)` bijectively without acting as the identity map | **MEASURED** | 6 197 moves over 87 classes to `n ≤ 5`, 0 |
 | **B7** | block concatenation `F(P) × F(Q) → F(P ⊔ Q)` is an injective semigroup homomorphism and is **not** unital, so it fails Bergeron–Li axiom (2) **of §3.1, *"Tower of Algebras (Preserving unities)"*** | **MEASURED + QUOTED** | 64 pairs, `|P|,|Q| ≤ 3`; axiom quoted verbatim from `arXiv:math/0612170` §3.1, quotation re-verified by mg-6ad0 and by mg-41aa |
