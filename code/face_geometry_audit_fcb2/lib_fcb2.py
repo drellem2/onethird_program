@@ -337,6 +337,15 @@ def signed_perm_witness(A, B, node_budget=400000):
     m = len(A)
     if m != len(B):
         return None
+    # The identity is tried first, and only as a SHORTCUT: a pure diagonal sign
+    # conjugation is the commonest gauge in this battery (M1, M3 and NEGATIVE
+    # CONTROL 3's parity are all pi = id), and the general search would find it
+    # eventually at a cost that grows with m.  Nothing rests on the shortcut --
+    # what it returns is reconstructed and compared like any other witness.
+    ident = list(range(m))
+    s0 = _solve_signs(A, B, ident)
+    if s0 is not None and reconstruct(A, ident, s0) == B:
+        return (ident, s0)
     ca, cb = _wl_colours(A), _wl_colours(B)
     if sorted(ca) != sorted(cb):
         return None

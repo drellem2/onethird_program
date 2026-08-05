@@ -1,0 +1,46 @@
+== mg-fcb2 A4: every remainder the repair writes, opened ==
+
+A4.1 -- 'here every not-gauge pair is settled by the spectral proof instead, so no answer in this row rests on the bound'
+    The bound is real: `signed_permutation_witness`'s NEGATIVE answer says no permutation IN THE CANDIDATE LIST works, not that none exists.  The row's claim is that no answer it prints depends on that. Every not-gauge pair is opened and asked which route settled it.
+    288 not-gauge pairs; 288 settled by a spectral PROOF, 0 resting on the candidate list
+  [PASS] A4.1a no not-gauge answer in the dichotomy row rests on the candidate-list bound (0 of 288 rest on it)
+    prediction P5a   AS PREDICTED -- 0 of the 288 not-gauge answers rest on the bound (predicted 0 of 288)
+
+A4.2 -- the two clauses of the witness's shape guard, disclosed as NOT COVERED
+    The repair's own words: 'deletion establishes nothing about them, because no call site in this battery passes matrices of different order or a ragged one'.  That is a claim about what deleting them does, and it is run here rather than taken.
+    clause 1 -- `m != len(B)` deleted            artifact byte-identical: True  (exit 0 vs baseline 0)
+    clause 2 -- the ragged-row check deleted     artifact byte-identical: True  (exit 0 vs baseline 0)
+    both clauses -- the whole guard deleted      artifact byte-identical: True  (exit 0 vs baseline 0)
+  [PASS] A4.2a deleting either clause of the shape guard leaves controls_output.txt byte-identical, i.e. the NOT COVERED disclosure is accurate
+    prediction P5b   AS PREDICTED -- both deletions leave the artifact byte-identical (3 of 3 variants identical)
+    (the freshly regenerated baseline is byte-identical to the COMMITTED controls_output.txt: True -- reported because a committed transcript is a measurement at its own commit, not a live property)
+
+A4.3 -- 'on the remaining 25 the pipeline does not see the corruption at all': what is IN those 25
+    25 vacuous-but-applied posets; on 24 the facet SET itself differs, leaving 1 where the mutation applied, PRESERVED the facet multiset, and left L^rel fixed
+      |L(P)| = 2, n = 2, covers (antichain) -- true facets [(1,), (2,)], mutated facets [(2,), (1,)] (same multiset, different order)
+  [PASS] A4.3a the remainder is fully enumerated: blind = facet-set-differs + relabelling-only (25 = 24 + 1)
+    prediction P5c   AS PREDICTED -- exactly 1 poset where the mutation applied, preserved the facet multiset and left L^rel fixed, with |L(P)| <= 2 (found 1, |L(P)| <= 2: True)
+    THIS IS A RELABELLING-SHAPED BLINDNESS AND NO LINE NAMES IT.  The artifact splits the 25 into 'facet SET differs' (24) and the rest, and prints the 24; the 1 left over is a poset where the corrupted enumeration is the true one PERMUTED -- the same gauge the whole section is about, occurring inside the vacuity remainder rather than inside the biting population.  It is not adverse to any sentence the repair writes, and it is not written down either.
+
+A4.4 -- the withdrawn hedge
+    the old sentence AS AN ASSERTION: False
+    the old wording surviving as a QUOTATION inside its own withdrawal: True
+    the replacement present: True
+  [PASS] A4.4a 'no claim is made either way' no longer appears as an assertion anywhere in the artifact
+    prediction P5d   AS PREDICTED -- the hedge is gone as an assertion and survives only inside the sentence that withdraws it
+
+A4.5 -- 'the spectral invariants used here still do not separate those pairs -- that limit is real and unchanged'
+    A limit claimed about the nine gauge pairs.  It is not merely that these five shifts miss them: they are PROVABLY isospectral, because each is an exhibited signed-permutation conjugate, and this audit's exact integer characteristic polynomials agree on every one.
+      I1  |L(P)| = 3    modular shifts separate: False   exact charpolys equal: True
+      I1  |L(P)| = 3    modular shifts separate: False   exact charpolys equal: True
+      I1  |L(P)| = 3    modular shifts separate: False   exact charpolys equal: True
+      I1  |L(P)| = 3    modular shifts separate: False   exact charpolys equal: True
+      I1  |L(P)| = 3    modular shifts separate: False   exact charpolys equal: True
+      I1  |L(P)| = 3    modular shifts separate: False   exact charpolys equal: True
+      I4  |L(P)| = 6    modular shifts separate: False   exact charpolys equal: True
+      I4  |L(P)| = 24   modular shifts separate: False   exact charpolys equal: True
+      I4  |L(P)| = 120  modular shifts separate: False   exact charpolys equal: True
+  [PASS] A4.5a the nine gauge pairs are not merely unseparated by five modular shifts, they are EXACTLY isospectral -- so the stated limit is a property of the pairs and not of the instrument
+
+
+a4_hedges: 5 checks, 0 refuted; 4 predictions scored, 0 off prediction.

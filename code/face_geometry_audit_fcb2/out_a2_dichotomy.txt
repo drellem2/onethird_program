@@ -1,0 +1,115 @@
+== mg-fcb2 A2: the dichotomy, re-derived by exact charpolys and a search over all of S_m ==
+
+A2.1 -- every biting pair classified independently
+    I1       72 biting =  66 NON-SIMILAR +  6 GAUGE + 0 unclassified   (artifact: 72 = 66 + 6)
+    I2       82 biting =  82 NON-SIMILAR +  0 GAUGE + 0 unclassified   (artifact: 82 = 82 + 0)
+    I3       82 biting =  82 NON-SIMILAR +  0 GAUGE + 0 unclassified   (artifact: 82 = 82 + 0)
+    I4       61 biting =  58 NON-SIMILAR +  3 GAUGE + 0 unclassified   (artifact: 61 = 58 + 3)
+    swap01   72 biting =   0 NON-SIMILAR + 72 GAUGE + 0 unclassified   (artifact: 72 = 0 + 72)
+    TOTAL   297 biting = 288 NON-SIMILAR +  9 GAUGE + 0 unclassified   (artifact: 297 = 288 + 9 + 0)
+
+  [PASS] A2.1a every row of the dichotomy is reproduced exactly by an instrument that shares no line with the shipped one
+    prediction P3a   AS PREDICTED -- 297 = 288 + 9 + 0, per row I1 66/6, I2 82/0, I3 82/0, I4 58/3, swap01 0/72 -- got 297 = 288 + 9 + 0, per row I1 66/6, I2 82/0, I3 82/0, I4 58/3, swap01 0/72
+  [PASS] A2.1b the search never ran out of node budget, so no NOT-GAUGE answer here is 'searched and gave up' (0 exhausted)
+A2.2 -- THE CHECK THE REPAIR DOES NOT CONTAIN: is any pair BOTH spectrally separated AND a gauge?
+    The shipped bin is `if not_isospectral: ... elif witness: ...`, so a pair that is both is filed NON-SIMILAR and the contradiction has no row to land in.  Both questions are asked of all 369 pairs here.
+  [PASS] A2.2a no pair is both spectrally separated and a gauge (0 found) -- a signed-permutation conjugation is a similarity, so one would mean an instrument is broken, not that the repair is wrong
+    prediction P3b   AS PREDICTED -- 0 contradictions between the two instruments (found 0)
+
+A2.3 -- the GAUGE witnesses, reconstructed entry by entry
+    I1      |L(P)| = 3   pi is NOT the identity, 1 sign flips -- reconstruction EQUALS the corrupted matrix
+    I1      |L(P)| = 3   pi is NOT the identity, 1 sign flips -- reconstruction EQUALS the corrupted matrix
+    I1      |L(P)| = 3   pi is NOT the identity, 1 sign flips -- reconstruction EQUALS the corrupted matrix
+    I1      |L(P)| = 3   pi is NOT the identity, 1 sign flips -- reconstruction EQUALS the corrupted matrix
+    I1      |L(P)| = 3   pi is NOT the identity, 1 sign flips -- reconstruction EQUALS the corrupted matrix
+    I1      |L(P)| = 3   pi is NOT the identity, 1 sign flips -- reconstruction EQUALS the corrupted matrix
+    I4      |L(P)| = 6   pi is NOT the identity, 0 sign flips -- reconstruction EQUALS the corrupted matrix
+    I4      |L(P)| = 24  pi is NOT the identity, 0 sign flips -- reconstruction EQUALS the corrupted matrix
+    I4      |L(P)| = 120 pi is NOT the identity, 0 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 3   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 24  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 12  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 8   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 3   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 4   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 3   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 5   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 4   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 8   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 120 pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 60  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 40  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 30  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 24  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 12  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 8   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 3   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 4   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 3   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 5   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 4   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 8   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 15  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 10  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 5   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 3   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 4   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 4   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 7   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 10  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 5   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 4   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 8   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 7   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 11  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 8   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 9   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 18  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 14  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 12  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 20  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 10  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 8   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 15  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 9   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 6   pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 12  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 10  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 25  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 20  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 14  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 12  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 16  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 18  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 16  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 20  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 40  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 30  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 24  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 20  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+    swap01  |L(P)| = 30  pi is NOT the identity, 2 sign flips -- reconstruction EQUALS the corrupted matrix
+  [PASS] A2.3a all 9 GAUGE witnesses over the four scored rows reconstruct to the corrupted matrix entry by entry
+    prediction P3c   AS PREDICTED -- 9 of 9 gauge witnesses reconstruct (got 81 of 81, over 9 gauge pairs in the four scored rows)
+
+A2.4 -- exhaustive m! x 2^m agreement on every biting pair with |L(P)| <= 6
+  [PASS] A2.4a brute force over all m! permutations x 2^m sign vectors agrees with the SHIPPED classification on 155/155 biting pairs with |L(P)| <= 6 -- and this is where the shipped row's own disclosure that a NOT-GAUGE answer is 'bounded by the candidate list' is actually discharged
+    prediction P3d   AS PREDICTED -- full agreement between exhaustive search and the shipped classification on the |L(P)| <= 6 pairs (155/155)
+  [PASS] A2.4b ... and on the 214 pairs ABOVE that size, where the shipped answer is bounded by a three-source candidate list, a search over all of S_m agrees on 214.  So no NOT-GAUGE answer in this section rests on the bound at any size.
+
+A2.5 -- the exact spectral verdict against the shipped modular one
+    `not_isospectral` is ONE-SIDED: it evaluates det(A - k.I) mod 2^31-1 at k in {3,5,7,11,13} and says True only on a difference.  A disagreement can therefore only be 'exact separates, modular did not'.  Over 369 pairs there are 0.
+  [PASS] A2.5a the exact integer characteristic polynomial agrees with the shipped five-shift modular verdict on every biting pair (0 disagreements)
+    prediction P3e   AS PREDICTED -- full agreement between exact charpolys and the modular verdict on all 369 pairs (found 0 disagreements)
+
+
+a2_dichotomy: 7 checks, 0 refuted; 5 predictions scored, 0 off prediction.
