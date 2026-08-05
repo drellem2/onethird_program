@@ -295,6 +295,7 @@ things probed by hand *before* it was written (rows R2a/R2b/R2c, row A1, row S5b
 | § | prediction | observed | |
 |---|---|---|---|
 | 1 | 6 separations over the 9 rows | **5** | **MISS — R1** |
+| 7 | "this audit expects to be wrong somewhere" on the twelve exit codes | 12 of 12 landed | **MISS** |
 | 1 | R2, R4, R5, R6, R7 separable | all five separated | ✔ |
 | 1 | R3, R8, R9 not separable | not separated | ✔ |
 | 2 | R2a refutes *fails open*, in the CLOSED direction | refuted | ✔ |
@@ -332,6 +333,40 @@ it NAMES *"is this row separable"* and COMPUTES *"does it separate on both engin
 reported rather than rewritten. On `marked` alone, the two sets differ on all five cited
 sections, which is the direction the brief calls *"content shown but not a byte in that
 file"*.
+
+### The twelve pre-registered exit codes — **12 of 12 landed**
+
+`PREDICTIONS.md` §7 pins an exit code for every command in `run_all.sh`, and `run_all.sh` is
+section-numbered to that table row for row. Transcript: `out_run_all.txt`.
+
+| § | command | predicted | observed |
+|---|---|---|---|
+| 0 | `git diff HEAD --stat` over the audited directories | empty | **0 bytes ×4** ✔ |
+| 1 | `rows65eb.py` | 1 | **1** ✔ |
+| 2 | `anchor65eb.py` | 1 | **1** ✔ |
+| 2b | `anchor65eb.py --rev bd24efc` *(negative control)* | 0 | **0** ✔ |
+| 3 | `six65eb.py` | 0 | **0** ✔ |
+| 4 | `rerun65eb.py` | 0 | **0** ✔ |
+| 5 | `delta_control.py` | 0 | **0** ✔ |
+| 6 | `prose_a74f.py` (tree) | 0 | **0**, `P1 0 of 85` ✔ |
+| 7 | `prose_a74f.py --rev bd24efc` | 1 (4 findings) | **1**, 4 findings ✔ |
+| 8 | `visible_a74f.py` | 0 | **0** ✔ |
+| 9 | `claims_a74f.py` | 0 | **0** ✔ |
+| 10 | `battery_a74f.py` | 0 | **0** ✔ |
+| 11 | `battery16eb.py` (inside §10) | 0 — returns 0 even with 2 surprises | **0** ✔ |
+| 12 | `reproduce16eb.py` | non-zero (5 of 7) | **1**, 5 of 7 ✔ |
+| 13 | the audited directories, again, after everything ran | 0 bytes | **0 bytes ×4** ✔ |
+
+**`PREDICTIONS.md` §7 closes with:** *"A prediction this audit expects to be wrong somewhere.
+If every one of the twelve lands, that is itself worth saying, because four consecutive
+zero-finding verdicts in this arc were read as a signal and not as convergence."*
+
+**Every one of the twelve landed, so it is said.** That expectation is itself scored a miss —
+the second of this audit's two. It is worth exactly as much as it costs to say: the exit codes
+of a suite are the coarsest thing about it, they were forecast from reading the code rather
+than from running it, and **the audit's substantive headline (5 separations, a stale integrity
+anchor, four pinned verdicts) is carried by none of them.** A suite whose exit codes all land
+is not a suite that found nothing.
 
 ### PREDICTIONS.md's own miscount, kept
 
