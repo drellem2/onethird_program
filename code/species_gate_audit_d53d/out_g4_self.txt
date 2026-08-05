@@ -1,4 +1,4 @@
-    this audit runs at HEAD = 9043b008b5edafdd03910aedd4d47ff2a7decca6
+    this audit runs at HEAD = acc8b74ffe450b97a2cd1caef4c5d22731f1c671
     the pin it compares against is 77306a7
 
 ==============================================================================
@@ -44,7 +44,7 @@ G4b  EVERY ADDED LINE OF THE REPAIR, SEARCHED FOR A SELF-EXCLUSION
     a `continue`.  Both the raw line and the code-only rendering are
     printed for every candidate, so the classification is checkable.
 
-    added lines in 77306a7..HEAD                     49206
+    added lines in 77306a7..HEAD                     51948
     of them in *.py / *.sh                          31515
     CANDIDATES (filtering token AND self-naming)        7
 
@@ -93,7 +93,7 @@ G4c  mg-4adb's OWN *.md FILES AGAINST THE CENSUS THAT COUNTS THEM
     named revision rather than read out of any transcript, and then the
     question is asked of the result.
 
-    census(9043b00) = 238 markdown file(s)
+    census(acc8b74) = 240 markdown file(s)
         IN THE CENSUS: code/species_rung_repair_4adb/OUTCOMES.md
         IN THE CENSUS: code/species_rung_repair_4adb/PREDICTIONS.md
         IN THE CENSUS: code/species_rung_repair_4adb/README.md
@@ -112,7 +112,7 @@ G4d  t3_census.py's `git log --all` POPULATION AGAINST ITS OWN COMMITS
     actually in the population `git log --all` returns.
 
     candidate line(s) in t3_census.py: 0, of them self-exclusions: 0
-    `git log --all` population: 473 commit object(s)
+    `git log --all` population: 479 commit object(s)
     of them mg-4adb's or mg-6ef4's own: 15
         1729f69b evidence: the committed transcripts of the mg-4adb suite, run on a clean t
         4bb4384e docs+repair: THE GATE IS THE LAST COMMAND AND THE POPULATION IS EVERY LINE
@@ -142,9 +142,9 @@ G4e  THIS INSTRUMENT'S OWN FILES, BY THE SAME RULE
     going stale under a rebase, and naming the revision is what makes a
     stale line tell a reader STALE rather than WRONG.
 
-        OUTCOMES.md            on disk: yes   tracked at 9043b00: no   in the census rule: yes
-        PREDICTIONS.md         on disk: yes   tracked at 9043b00: yes   in the census rule: yes
-        README.md              on disk: yes   tracked at 9043b00: no   in the census rule: yes
+        OUTCOMES.md            on disk: yes   tracked at acc8b74: yes   in the census rule: yes
+        PREDICTIONS.md         on disk: yes   tracked at acc8b74: yes   in the census rule: yes
+        README.md              on disk: yes   tracked at acc8b74: yes   in the census rule: yes
   
     And the same two-stage rule turned on this instrument's own source.
     THE SCAN INCLUDES g4_self.py, which is the file the rule is written
@@ -158,7 +158,7 @@ G4e  THIS INSTRUMENT'S OWN FILES, BY THE SAME RULE
             code: (all comment or string)
   Q20    HELD
         predicted: this instrument's own *.md files join the census too and are not excluded -- the same disclosure, made rather than repaired
-        measured:  3 *.md on disk in code/species_gate_audit_d53d, 1 of them tracked at 9043b00; 1 candidate line(s) in this instrument's own source, 0 of them self-exclusions
+        measured:  3 *.md on disk in code/species_gate_audit_d53d, 3 of them tracked at acc8b74; 1 candidate line(s) in this instrument's own source, 0 of them self-exclusions
         Scored with the stage-2 rule; with stage 1 alone this scored MISSED at
         2, both of them lines of g4_self.py itself.
   
@@ -173,9 +173,9 @@ G4 TOTAL BAD: 0
 G4 PREDICTIONS SCORED: 4, MISSED: 0
 ==============================================================================
 
-EXTENT OF THAT NUMBER.  It ranges over the 49206 added lines of
-`git diff 77306a7..HEAD`, the 238 markdown files `git ls-tree` returns at
-9043b00, the 473 commit objects `git log --all` returns, and the source of
+EXTENT OF THAT NUMBER.  It ranges over the 51948 added lines of
+`git diff 77306a7..HEAD`, the 240 markdown files `git ls-tree` returns at
+acc8b74, the 479 commit objects `git log --all` returns, and the source of
 t3_census.py and of this instrument.  IT RANGES OVER NOTHING ELSE: a
 self-exclusion written as a data table rather than as a predicate, or
 one added BEFORE 77306a7, is outside every one of those populations and
