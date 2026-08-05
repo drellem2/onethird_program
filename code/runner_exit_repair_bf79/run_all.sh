@@ -32,13 +32,38 @@
 set -u
 cd "$(dirname "$0")"
 
+# WRITE TO A TEMP AND MOVE, rather than redirecting onto the transcript.  This
+# is not tidiness -- it closes a hole `p5_self.py` found in itself.  A plain
+# `> out_p5_self.txt` TRUNCATES the file before the probe starts, so `p5_self.py`
+# -- whose whole job is to check every count THIS TREE prints -- could not see
+# its own transcript, and its own output was the one artifact its strictest rule
+# excluded.  That is O2's shape (a population that excludes the thing it is
+# about) inside the repair of O2, and it hid NINE offending rows of mine until
+# the probe was run once outside this runner.
+#
+# With the move, the previous run's bytes survive for the duration of the probe,
+# so two consecutive runs converge and the committed transcripts are from such a
+# pair.
+#
+# AND THE LIMIT OF THAT, because the first version of this comment overclaimed it
+# and an overclaiming comment is this ticket's own subject.  The `mv` runs on the
+# non-zero path as well as the zero one, so a probe that merely REPORTS FINDINGS
+# leaves no `.new`.  A probe KILLED mid-write does -- the `mv` never runs -- and
+# one did survive a `timeout` during this ticket's own development.  It is
+# harmless rather than harmless-by-design: `lib70c7.outs()` globs `out_*.txt`,
+# and `out_p1_grain.txt.new` does not end in `.txt`, so no corpus picks it up.
+# The stale temp is overwritten by the next run. That is the whole guarantee, and
+# it is smaller than "cannot leave a `.new` behind", which is what this said
+# before it was measured.
+rm -f ./out_*.txt.new
 run() {
     _p=$1
     _o=$2
     echo "### $_p"
-    python3 -B "$_p" > "$_o" 2>&1 || {
+    python3 -B "$_p" > "$_o.new" 2>&1 || {
         echo "    (exit $? -- see $_o; a non-zero exit is how a probe reports"
         echo "     findings, and the predicted codes are in PREDICTIONS.md)"; }
+    mv -f "$_o.new" "$_o"
     cat "$_o"
     echo
 }

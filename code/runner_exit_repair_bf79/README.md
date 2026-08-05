@@ -115,10 +115,13 @@ decoration; updating it to match the finding the code was changed to satisfy is
 what a pin is for, and the two are told apart by whether an independent artifact
 publishes the new number.
 
-## Six defects of this instrument, recorded rather than smoothed away
+## Eight defects of this instrument, recorded rather than smoothed away
 
 Five consecutive deliverables in this lineage have found their own defect class
-in their own tooling. This is the sixth, and it found six.
+in their own tooling. This is the sixth, and it found **eight** — the last two
+only after the repair was committed and re-run, which is the point of re-running
+after the state you are measuring has changed. Full text in `out_p5_self.txt` and
+`OUTCOMES.md`; defects 7 and 8 are summarised there.
 
 1. **The provenance query's `\(` was a BRE group.** `--grep='\(mg-70c7\)'` — in
    git's basic regex `\(` opens a **group**, so the pattern reduced to the bare

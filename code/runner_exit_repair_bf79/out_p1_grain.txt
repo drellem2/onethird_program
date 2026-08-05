@@ -8,14 +8,33 @@ P1a  THE PUBLISHING COMMIT, DERIVED AND NOT NAMED
 
   A figure from a whole-repository census is a fact about a REVISION.
   mg-56dc's own first run scored a defect against itself for comparing
-  a HEAD derivation with a transcript produced on another tree, so the
-  commit is read out of the log rather than written down -- and the
-  constant `libbf79.SUBJECT_REV` is CHECKED against it, not trusted.
+  a HEAD derivation with a transcript produced on another tree.
 
-      the commit that last published the transcript      973ca61
-      `libbf79.SUBJECT_REV`, the constant                973ca61
-      HEAD of this run                                   3738079
-      derivation and constant agree                      yes
+  AND THERE ARE TWO REVISIONS HERE, NOT ONE -- which is a distinction this
+  probe's first draft collapsed and this ticket's own commit exposed.  It
+  read `git log -1 -- <transcript>` and called the answer *the revision
+  the figure is a fact about*.  Those are the same revision only until
+  somebody REGENERATES the transcript -- and regenerating it is what this
+  ticket does, so the moment the repair was committed the derivation
+  returned THIS TICKET'S OWN COMMIT and the probe re-derived a 12/14
+  census against a transcript stating 9/10 and called it a disagreement.
+  A publisher is not a pin.  Both are printed and each is used for the
+  question it answers:
+
+      the FIGURE's revision -- what the four artifacts
+      state their `9` at, and where it must re-derive       973ca61
+      the transcript's CURRENT publishing commit            5533bdb
+      HEAD of this run                                      5533bdb
+
+      the two coincide                                      no -- expected after this ticket
+
+  A NON-COINCIDENCE IS NOT A DEFECT AND IS NOT SCORED.  What WOULD be a
+  defect is the figure failing to re-derive at the revision the prose
+  pins it to, and that is checked in P1b below and IS scored.  The pin
+  must resolve, though -- a revision named in prose that no longer exists
+  is the staleness this arc keeps recording:
+      `973ca61` resolves as a commit                        yes
+      ...and is an ancestor of HEAD                         yes
 
 ==============================================================================
 P1b  THE QUANTITY AT TWO GRAINS, RE-DERIVED AT 973ca61 AND AT HEAD
@@ -27,10 +46,10 @@ P1b  THE QUANTITY AT TWO GRAINS, RE-DERIVED AT 973ca61 AND AT HEAD
   caller scan matched; it is the column the four artifacts publish.
 
       grain and population                           973ca61      HEAD
-      (site,target) ROWS, all targets                     49        53
-      distinct SITES, all targets                         47        51
-      (site,target) ROWS outside the two names            10        11
-      distinct SITES outside the two names                 9        10
+      (site,target) ROWS, all targets                     49        56
+      distinct SITES, all targets                         47        53
+      (site,target) ROWS outside the two names            10        14
+      distinct SITES outside the two names                 9        12
       ...of those SITES, READING the exit status           4         4
 
       at 973ca61, the OUTSIDE column as ROWS                10
@@ -59,11 +78,13 @@ P1c  THE GAP BETWEEN THE GRAINS, AND THE LINES RESPONSIBLE
           code/runner_exit_c2b3/selftestc2b3.py:155  ->  b0.sh, x.sh
       973ca61 OUTSIDE rows   ROWS  10  SITES   9  GAP  1
           code/runner_exit_c2b3/selftestc2b3.py:155  ->  b0.sh, x.sh
-      HEAD   ALL rows       ROWS  53  SITES  51  GAP  2
+      HEAD   ALL rows       ROWS  56  SITES  53  GAP  3
           code/runner_exit_c2b3/k2_consume.py:456  ->  b0_repro.sh, run_all.sh
           code/runner_exit_c2b3/selftestc2b3.py:155  ->  b0.sh, x.sh
-      HEAD   OUTSIDE rows   ROWS  11  SITES  10  GAP  1
+          code/runner_exit_repair_bf79/selftestbf79.py:110  ->  beta.sh, gamma.sh
+      HEAD   OUTSIDE rows   ROWS  14  SITES  12  GAP  2
           code/runner_exit_c2b3/selftestc2b3.py:155  ->  b0.sh, x.sh
+          code/runner_exit_repair_bf79/selftestbf79.py:110  ->  beta.sh, gamma.sh
 
   THE PREDICTION THIS REFUTES IN PART, kept as written.  `PREDICTIONS`
   P1c says the gap is *exactly 1 at every revision this probe reads*,
@@ -135,17 +156,17 @@ P1e  THE CLASSIFIER OVER THE WHOLE REPAIRED OUTPUT, not one row
   against my summary of them:
 
       line   grain     stage  value(s)   label
-      24     SITE      label  53         (site,target) ROWS naming a `*.sh`
-      25     SITE      label  51         distinct executing SITES behind those rows
-      26     SITE      label  42         ...ROWS the two-name rule matches
-      27     SITE      label  11         ...ROWS outside it, across 7 distinct basena
-      28     SITE      label  10         ...distinct SITES outside it
-      29     SITE      label  4          ...of those SITES, READING the exit status
-      30     SITE      label  1          ...ROWS naming `run_audit.sh`, the name ADDE
-      32     SITE      label  2          source lines naming MORE THAN ONE `*.sh`
-      79     SITE      label  4          SITES the two-name rule found
-      80     SITE      label  4          ...SITES still found under the property
-      81     SITE      label  0          ...SITES LOST by the widening
+      27     SITE      label  56         (site,target) ROWS naming a `*.sh`
+      28     SITE      label  53         distinct executing SITES behind those rows
+      29     SITE      label  42         ...ROWS the two-name rule matches
+      30     SITE      label  14         ...ROWS outside it, across 10 distinct basen
+      31     SITE      label  12         ...distinct SITES outside it
+      32     SITE      label  4          ...of those SITES, READING the exit status
+      33     SITE      label  1          ...ROWS naming `run_audit.sh`, the name ADDE
+      35     SITE      label  3          source lines naming MORE THAN ONE `*.sh`
+      86     SITE      label  4          SITES the two-name rule found
+      87     SITE      label  4          ...SITES still found under the property
+      88     SITE      label  0          ...SITES LOST by the widening
 
 ==============================================================================
 P1f  THE CLASSIFIER CANNOT SEE O1 AT ALL -- its axis is the other one
@@ -190,7 +211,7 @@ P1f  THE CLASSIFIER CANNOT SEE O1 AT ALL -- its axis is the other one
           *** IN THE BLIND SPOT: stage `label`, so the grain word
               is on the label itself and the classifier ACCEPTS
               it, while the value is the ROWS count
-      repaired, run now            label declares SITE   value  11  -> is the ROWS count
+      repaired, run now            label declares SITE   value  14  -> is the ROWS count
           *** IN THE BLIND SPOT: stage `label`, so the grain word
               is on the label itself and the classifier ACCEPTS
               it, while the value is the ROWS count
@@ -237,11 +258,11 @@ P1g  THE FOUR ARTIFACTS -- grain word AND revision
   document is not wrong, the check was.
 
       code/runner_exit_repair_70c7/README.md               OK
-          [grain yes / rev yes] this figure is a fact about — **9 distin
+          [grain yes / rev yes] published the transcript it was first re
       code/runner_exit_repair_70c7/OUTCOMES.md             OK
           [grain yes / rev yes] | **R5a** | 9 sites outside the two name
       code/runner_exit_repair_70c7/r4_property.py          OK
-          [grain yes / rev yes] 9 distinct executing SITES name a `*.sh`
+          [grain yes / rev yes] repaired.  At `973ca61` -- the revision 
           [grain yes / rev NO] RIGHT AND THE COUNT WAS WRONG: `9` is th
       docs/repair-mg-70c7-grain-and-population.md          OK
           [grain yes / rev NO] > * **The `9` in the F5 section was righ

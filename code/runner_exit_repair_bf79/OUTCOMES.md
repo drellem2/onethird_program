@@ -57,7 +57,7 @@ attack.
 
 ---
 
-## Six defects of this instrument, recorded rather than smoothed away
+## Eight defects of this instrument, recorded rather than smoothed away
 
 Summarised in `README.md` and printed in full in `out_p5_self.txt`. In one line
 each:
@@ -74,9 +74,34 @@ each:
 6. the T2 fixture was **invisible to its own `git ls-files` population**, which is
    `lib70c7.outs()`'s recorded defect from the other side.
 
+**And two more that only the act of committing could expose**, which is why they
+are last and why the list is eight rather than six:
+
+7. **S1 could not see its own transcript.** `run_all.sh` redirected each probe's
+   output with `>`, which **truncates before the probe runs** — so `p5_self.py`,
+   whose whole job is to check every count this tree prints, had its own output as
+   the one artifact its strictest rule excluded. **That is O2's shape inside the
+   repair of O2**, and it hid **nine** offending labels of mine until the probe
+   was run once outside its runner. Fixed structurally: the runner writes
+   `<transcript>.new` and moves it, so the previous run's bytes survive the probe
+   and two consecutive runs converge. Reading the *committed* copy instead was the
+   first fix and **does not converge** — the committed transcript is the thing
+   being checked, so a stale one reports its own staleness forever.
+8. **P1a conflated *the revision a figure is a fact about* with *the transcript's
+   publishing commit*.** They are the same revision only until somebody
+   regenerates the transcript — and regenerating it is what this ticket does. The
+   moment the repair was committed, `git log -1 -- out_r4_property.txt` returned
+   **this ticket's own commit**, and the probe re-derived a 12/14 census against a
+   transcript stating 9/10 and called it a disagreement. **A publisher is not a
+   pin.** Both revisions are printed now and each is used for the question it
+   answers; the four artifacts say *the revision this figure is a fact about* and
+   no longer claim to name a publishing commit.
+
 **Five consecutive deliverables in this lineage had found their own defect class
-in their own tooling. This is the sixth, and the count went up.** That is a
-property of writing the disclosure section before you are sure it will be short.
+in their own tooling. This is the sixth, and the count went to eight — two of them
+found by committing the repair and running it again.** That is a property of
+writing the disclosure section before you are sure it will be short, and of
+re-running after the state you are measuring has changed.
 
 ---
 

@@ -54,14 +54,14 @@ P4c  WHAT UNIFYING `figures()` COSTS -- controlled, not asserted
   do not get the same verdict.
 
       TRANSCRIPTS in R2b's figure corpus                  13
-      DISTINCT FIGURES under the unified rule             99
-      ...under mg-70c7's OLD rule, same transcripts       98
+      DISTINCT FIGURES under the unified rule            100
+      ...under mg-70c7's OLD rule, same transcripts       99
       ...FIGURES the unification adds                      1
           3
       ...FIGURES it removes                                0
 
   THAT IS THE COMMITTED NUMBER THAT MOVES: `out_r2_anchor.txt`'s row
-  *distinct figures they print*, at a FIXED corpus, goes 98 -> 99.
+  *distinct figures they print*, at a FIXED corpus, goes 99 -> 100.
   So P4c's CLAIM is a HIT.
 
   AND ITS REASON IS A MISS.  R3c's four counts are re-derived here under
@@ -178,11 +178,11 @@ P4e  AND A CLAIM `figures()` MAKES THAT IT DOES NOT KEEP
 
       IS THIS REPAIRED HERE?  NO -- and the reason is measured, not an
       excuse.  Both candidate rules are wrong:
-          DISTINCT FIGURES in every committed transcript  1287
-          ...FIGURES of magnitude >= 1e6                   32
+          DISTINCT FIGURES in every committed transcript  1291
+          ...FIGURES of magnitude >= 1e6                   34
           ...FIGURES resolvable as a git object             7
 
-      A MAGNITUDE rule (`drop >= 1e6`) would drop 25 genuine figures,
+      A MAGNITUDE rule (`drop >= 1e6`) would drop 27 genuine figures,
       among them `2147483647`, which is INT_MAX in a fixture and a real
       measurement.  A RESOLVES-AS-AN-OBJECT rule would drop 7, and it
       would drop them for a reason that is an accident of this
@@ -208,4 +208,4 @@ in a rule this ticket did not write and does not fix; that is a FINDING.
 
 FINDING: P4a the two `figures()` disagreed on exactly 1 integer(s) in 0..500 -- the value 3 -- and mg-70c7's copy was the wrong one because BOTH docstrings claimed `0, 1 and 2` and only mg-7522's did it; there is now 1 implementation of each of the 2 unified rules, and 0 disagreement(s) remain
 FINDING: P4b the floor item nothing named: 15 names are defined in BOTH libraries, 6 of them IDENTICAL code; `alternatives()` was a RULE kept in two identical copies and produced the published figure `nine alternatives against three`, and 1 rule(s) remain in two identical copies after this ticket -- `captured_var`, which is mg-dee4's F6 VALUE arm -- named rather than left to be rediscovered
-FINDING: P4c `lib70c7.figures`'s comment claimed to exclude `a git revision` and never did -- an all-decimal short revision is read as a FIGURE, which `r6_self.py`'s E2 reported against this ticket's own repaired README; REPORTED AND NOT FIXED because a magnitude rule would drop 25 genuine figures and a resolves-as-an-object rule would drop 7 for an accident of the object database
+FINDING: P4c `lib70c7.figures`'s comment claimed to exclude `a git revision` and never did -- an all-decimal short revision is read as a FIGURE, which `r6_self.py`'s E2 reported against this ticket's own repaired README; REPORTED AND NOT FIXED because a magnitude rule would drop 27 genuine figures and a resolves-as-an-object rule would drop 7 for an accident of the object database
