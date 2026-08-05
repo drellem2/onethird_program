@@ -54,11 +54,16 @@ echo "###    in the repository re-measured against main rather than against HEAD
 python3 code/state_claims_repair_0120/anchors0120.py || echo "(section 4 exited $?)"
 echo
 
-echo "### 5. anchors0120.py --ref HEAD — the NEGATIVE CONTROL for section 4.  Measured"
-echo "###    against this branch's own HEAD, the anchor under repair is LIVE and the"
-echo "###    displaced population shrinks.  Same program, same rule, different reference —"
-echo "###    which is the whole point: an anchor is reachable RELATIVE TO SOMETHING, and"
-echo "###    measuring against a reference no reader has is how 739f7bd looked fine."
+echo "### 5. anchors0120.py --ref HEAD — the SAME RULE AGAINST A DIFFERENT REFERENCE."
+echo "###    An anchor is reachable RELATIVE TO SOMETHING, so the reference is part of the"
+echo "###    measurement.  This run is committed because the first draft of this line"
+echo "###    PREDICTED the anchor under repair would come out LIVE here, and it does NOT:"
+echo "###    this branch descends from main, not from polecat-a74f, so 739f7bd is displaced"
+echo "###    against both.  What DOES move between the two references is the population"
+echo "###    (373 -> 377 distinct tokens) and the LIVE count (256 -> 258), because HEAD"
+echo "###    reaches this repair's own unmerged commits and main does not.  THAT is the"
+echo "###    hazard: an anchor measured against HEAD on a polecat branch is measured against"
+echo "###    a tree no reader of main has."
 python3 code/state_claims_repair_0120/anchors0120.py --ref HEAD || echo "(section 5 exited $?)"
 echo
 
