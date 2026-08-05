@@ -1,0 +1,92 @@
+====================================================================================================
+mg-65eb — THE CONFIRMED FIGURES, RE-MEASURED AT BOTH REVISIONS
+====================================================================================================
+  before   bd24efc   (mg-a74f's own pinned pre-repair revision)
+  after    HEAD
+  renderers marked + markdown-it present
+  every run below is in a THROWAWAY WORKTREE, deleted afterwards
+
+====================================================================================================
+A.  mg-16eb's '7 OF 7 COMMITTED OUTPUTS BYTE-IDENTICAL', AT BOTH REVISIONS
+====================================================================================================
+  population: the 7 out_*.txt files mg-0049's two commits added or changed —
+  reproduce16eb.py's own ROWS, run UNMODIFIED at each revision.
+
+  transcript                                                    bd24efc         HEAD
+  code/state_delegation_repair_0049/out_5644_rerun.txt       reproduces   reproduces
+  code/state_delegation_repair_0049/out_battery_0049.txt     reproduces   reproduces
+  code/state_delegation_repair_0049/out_coverage218d.txt        DIFFERS      DIFFERS
+  code/state_delegation_repair_0049/out_render.txt           reproduces   reproduces
+  code/state_delegation_repair_0049/out_selftest_negative.txt    DIFFERS      DIFFERS
+  code/state_delegation_repair_0049/out_split.txt            reproduces   reproduces
+  code/state_landing_control_2da3/out_control.txt            reproduces   reproduces
+
+  at bd24efc: 5 of 7 reproduce   (exit 1)
+  at HEAD   : 5 of 7 reproduce   (exit 1)
+
+  THE SET DIFFERENCE, WHICH IS THE FIGURE THAT ANSWERS THE BRIEF:
+    reproduced at bd24efc and NOT at HEAD (a regression) : NONE
+    reproduced at HEAD and NOT at bd24efc                : none
+
+  mg-16eb's 7 of 7 is a measurement taken at mg-16eb's own revision, and it
+  is not this repair's number to keep.  Both transcripts that fail here fail
+  at bd24efc TOO, so nothing this repair did moved them.
+
+====================================================================================================
+B.  WHY THOSE TWO — THE FIGURE READ OUT OF THE TRANSCRIPT, NOT TYPED HERE
+====================================================================================================
+  out_selftest_negative.txt records, in its own bytes:  STATE.md at rest: 177464 bytes
+      (read with 'STATE\\.md\\s+at rest:\\s+(\\d+) bytes' — the parse, so it can be checked)
+  STATE.md at 8ce78fb    177464 bytes   == the recorded figure
+  STATE.md at bd24efc    186710 bytes   != the recorded figure
+  STATE.md at HEAD       186710 bytes   != the recorded figure
+
+  >>> the recorded size is ALREADY WRONG at bd24efc: True
+  The figure matches 8ce78fb — mg-0049's own baseline revision — and
+  STATE.md grew before mg-a74f existed.  So the two transcripts were stale
+  ON ARRIVAL at this repair, and 'this repair broke two transcripts' and 'two
+  were already stale' are separated by a measurement rather than by an
+  argument.  THIS IS THE ONLY THING IN SECTION A THAT COULD HAVE BEEN A
+  REGRESSION, AND IT IS NOT ONE.
+
+====================================================================================================
+C.  mg-16eb's '8 OF 8 ROWS AS PREDICTED' — ITS OWN BATTERY, UNMODIFIED, AT HEAD
+====================================================================================================
+  battery16eb.py at HEAD: 8 of 8 rows run; 6 behaved as mg-16eb predicted; 2 did not.  (exit 0)
+  the per-row exit codes it read from the process: {'A1': 2, 'A2': 2, 'A3': 2, 'A5': 2, 'B1': 0, 'B2': 2, 'B3': 2, 'C1': 1}
+
+  mg-16eb's 8 of 8 was a statement about mg-16eb's tree.  The rows that moved
+  are A1 and A2 — the two DRIFT constructions that exited 0 there and are
+  caught here.  THAT MOVEMENT IS THE REPAIR: mg-16eb predicted PASS for them
+  because the hole was open, and a battery whose predictions all still hold
+  after a repair would be a battery that measured nothing the repair touched.
+  A1 and A2 at 2 rather than 0 is claim 3 closed, and six65eb.py section C
+  builds the same two drifts independently and gets the same two codes.
+
+====================================================================================================
+D.  mg-a74f's OWN BATTERY, RE-RUN AT HEAD
+====================================================================================================
+  battery_a74f.py at HEAD: exit 0
+      'expected' is what THIS AUDIT PREDICTED BEFORE THE RUN, written into
+      8 of 8 rows run; 6 behaved as this audit predicted; 2 did not.
+      after  re-baselining        exit 1   (PREDICTED BEFORE THE RUN: exit 1)
+      6 of 8 behaved as predicted; 2 did not.  Recovery demonstration: exit 1.
+      8 rows run; 8 behaved as THIS REPAIR predicted; 0 did not.
+      battery16eb.py exited 0; 8 of 8 rows behaved as this repair predicted.
+
+====================================================================================================
+WHAT THIS RUN FOUND
+====================================================================================================
+  transcripts reproducing at bd24efc : 5 of 7
+  transcripts reproducing at HEAD    : 5 of 7
+  REGRESSIONS ATTRIBUTABLE TO mg-a74f: 0  
+  mg-16eb's own battery at HEAD      : 6 of 8 as it predicted
+  mg-a74f's own battery at HEAD      : exit 0
+
+  NO REGRESSION.  Both confirmed figures moved and neither move is damage:
+  the two transcripts were stale before this repair was written, and the
+  two battery rows that changed changed because the hole they probed was
+  closed.  A figure that moves is not automatically a regression, and the
+  difference is the set above, not the totals either side of it.
+====================================================================================================
+exit=0
