@@ -303,11 +303,21 @@ changing under my own hand.* **Three tickets in a row have now done it.**
   invariant. Every finding here is a report.
 - **It did not repair its own four unbounded sites** either, for the second of those reasons,
   and the count is printed rather than omitted (`a1` U5).
-- **It did not install a repo-wide check.** Neither did its parent, and this audit adds a
-  second reason why one would be hard: `a1`'s U4 shows the population such a check must cover
-  is **13 files and 51 sites**, of which 6 files and 12 unbounded sites are pre-registration
-  and instrument documents that must not be edited. A gate over that population would be
-  permanently red, correctly. **What is missing is not a gate; it is a declared exemption.**
+- **It did not install a repo-wide check**, and `a1`'s U4 now says why one on its own would
+  not help. **Population: the 24 unbounded sites of the tracked-markdown universe. Grain: one
+  site.**
+
+  | | sites | why |
+  |---|---|---|
+  | in `docs/` | **12** | dated audit records; editing destroys the evidence trail |
+  | outside `docs/`, in a `PREDICTIONS.md` | **10** | pre-registration; never reworded |
+  | outside `docs/`, in an ordinary instrument README | **2** | **genuinely repairable** — `code/branching_audit_5800/README.md`, `code/branching_repair_41aa/README.md` |
+
+  A repo-wide gate over this figure would be permanently red on **22 of 24** sites for reasons
+  that are correct, and would close **2**. **What is missing is not a gate; it is a declared
+  exemption** — and until there is one, every ticket that widens the population inherits a
+  number it cannot act on. Those 2 are noted and **not** repaired here: they belong to other
+  tickets' instruments and this audit repairs nothing.
 
 ## 10. FOR WHOEVER AUDITS ME
 
