@@ -17,9 +17,29 @@ What is repaired here is what it left open.
   laid. Ask not "did I close the gap" but "what surface does this fix create, and what is
   now measurable only through it?"
 
-**`PREDICTIONS.md` was committed before any script in this directory existed** (`739f7bd`),
+**`PREDICTIONS.md` was committed before any script in this directory existed** (`cfd2af5`),
 and every figure below is scored against it, misses included. The pre-repair revision is
-pinned at **`bd24efc`** — a sha, not `HEAD~n`, so a rebase cannot quietly move it.
+pinned at **`bd24efc`**.
+
+> **RE-ANCHORED BY mg-0120, and the sentence that carried it was wrong about itself.** This
+> line used to name `739f7bd` and to justify it with *"a sha, not `HEAD~n`, so a rebase
+> cannot quietly move it."* A rebase moved it. `739f7bd` was written on the branch
+> `polecat-a74f`; the refinery rebases before merging, so what landed on `main` is
+> `cfd2af5` — **the same change under a different sha**, and `739f7bd` is reachable only
+> from a branch a reader of `main` does not have.
+>
+> A sha is immune to *renumbering*, which is what `HEAD~n` suffers, and not to
+> *displacement*, which is what a rebase does; the sentence claimed the second immunity and
+> had earned only the first. mg-65eb found the pointer broken and re-derived the property at
+> `cfd2af5`. mg-0120 established that the two commits are the **same change** rather than
+> two commits that happen to look alike: `git patch-id --stable` gives
+> `17a7bca3c7be2fc4f9ab736294b06230a11c5cc0` for both, while their trees and their parents
+> differ — which is what a rebase is. **So the property was never violated and only the
+> pointer rotted.** Those are different defects needing different repairs and
+> `git merge-base --is-ancestor` cannot tell them apart; `code/state_claims_repair_0120/`
+> holds the diagnosis, the repository-wide re-measurement (57 more anchors displaced the
+> same way) and a constructed case where identifying the twin by commit SUBJECT picks the
+> wrong commit and `patch-id` does not.
 
 ---
 
