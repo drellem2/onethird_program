@@ -1,0 +1,71 @@
+==============================================================================
+S5  THE SENTENCES IN WHICH I FAULT SOMEONE ELSE'S SCOPE,
+    CHECKED FOR MY OWN.  Pointed at this repair and nothing else.
+==============================================================================
+
+  THE POPULATION, NAMED
+    code/branching_bound_d075/README.md                        ABSENT
+    docs/repair-mg-d075-the-figure-and-its-scope.md            116 live sentences
+    docs/OneThird-Branching-Graphs-Where-This-Lives.md         14 sentence(s) added by this repair
+    TOTAL population                                           130
+    grain: one sentence
+
+==============================================================================
+  MY CRITICISM SENTENCES -- fault marker AND a target that is
+  not this work item.  Each checked for ITS OWN scope.
+==============================================================================
+    criticism sentences : 5 of 130 in the population
+
+    [01] repair-mg-d075-the-figure-and-its-scope.md line 28   CARRIES ITS OWN SCOPE
+         fault : unbounded
+         target: mg-19ec
+         scope : POP-1
+         **And mg-19ec already had it.** The POP-1 block of the same transcript (`code/branching_audit_19ec/out_e
+         5_population.txt`) prints this exact sentence as its `[09]` and scores it unbounded.
+
+    [02] repair-mg-d075-the-figure-and-its-scope.md line 59   CARRIES ITS OWN SCOPE
+         fault : not the population
+         target: mg-aaf4
+         scope : population
+         **FOUR was not the population, and EIGHT is not either.** The brief for this repair told me not to inher
+         it 8; mg-aaf4 is told not to inherit 9.
+
+    [03] repair-mg-d075-the-figure-and-its-scope.md line 87   *** UNBOUNDED ***
+         fault : no bound
+         target: mg-dffa
+         The brief singled this out and it deserves the space. §2's mg-dffa note faults Young–Fibonacci for **nam
+         ing no class of `P`** — and stated the **Young** classification it was contrasting against with no bound
+          at all:
+
+    [04] repair-mg-d075-the-figure-and-its-scope.md line 200  CARRIES ITS OWN SCOPE
+         fault : no instrument computes
+         target: the published audit
+         scope : code/branching_audit_19ec
+         The `HEDGES` list in `code/branching_audit_19ec/e2_f2_clauses.py` has **25** entries, and that audit's t
+         ranscript never prints a token count at all — so **26** is a hand-written literal no instrument computes
+         . - The phrasing population is **15** in the transcript and in the published audit, and **13** in the re
+         covered verdict that reached mg-d075's brief.
+
+    [05] OneThird-Branching-Graphs-Where-This-Lives line 30   CARRIES ITS OWN SCOPE
+         fault : not the population
+         target: mg-19ec
+         scope : population
+         **Eight is not the population either.** Counted over the live sentences of this file at the grain mg-19e
+         c itself used, the sites stating that figure were **9**, of which **5** carried no scope in their own se
+         ntence; the ninth is the row-10 sentence in §3, which mg-19ec's own POP-1 block printed and whose POP-3 
+         block could not see, because that sentence says *"for Young's"* and never spells *"Young–Fibonacci"*.
+
+==============================================================================
+  VERDICT ON MYSELF
+==============================================================================
+    criticism sentences carrying their own scope : 4 of 5
+    criticism sentences UNBOUNDED                : 1 of 5
+
+    THE DEFECT IS IN MY HANDS, at the grain the brief predicted:
+      repair-mg-d075-the-figure-and-its-scope.md line 87
+        The brief singled this out and it deserves the space. §2's mg-dffa note faults Young–Fibonacci for *
+
+==============================================================================
+SUMMARY s5_own_criticism: population 130 live sentences of my own
+SUMMARY s5_own_criticism: 5 criticism sentence(s); 1 unbounded
+==============================================================================

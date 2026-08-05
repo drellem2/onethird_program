@@ -1,0 +1,98 @@
+==============================================================================
+S3  THE GATE.  bounded / population unchanged / no number moved.
+==============================================================================
+
+  THE PRE-REPAIR ANCHOR, DERIVED
+    document : docs/OneThird-Branching-Graphs-Where-This-Lives.md
+    commit   : 645b5a4a1a254ac3945a90ddd4462b22a9385723
+    subject  : docs+repair: mg-5800's four WARRANT findings landed — TWO CELLS WIDENED, TWO CLAUSES NARROWED, ONE C
+
+==============================================================================
+  G1  BOUNDED, under both predicates.  Population: live sentences
+      of the document stating the figure.  Grain: one sentence.
+==============================================================================
+    STRICT (the parent's)    9 of 9 sites carry a scope in their own sentence
+    RELAXED (this repair's)  9 of 9 sites carry a scope in their own sentence
+
+  <01> line 166  cell  BOUNDED   **5 of the 33 intervals `[∅̂, w]`, `rank(w) ≤ 6`, of the Young–Fibonacci lattice are not**, smallest witness `w 
+                                       = 221`
+
+  <02> line 166  cell  BOUNDED   At the level where the contact actually lives — finite intervals — **28 of the 33** Young–Fibonacci intervals to
+                                        rank 6 **are** distributive (mg-41aa, landing mg-6ad0's X4; §2 item 2)
+
+  <03> line 175  para  BOUNDED   At the level of finite **intervals** a contact of the same **kind** extends: **28 of the 33** intervals `[0̂, w]
+                                       ` of Young–Fibonacci with `rank(w) ≤ 6` are distributive, so each is `J(P)` for some `P`, item 2.
+
+  <04> line 181  para  BOUNDED   The Young–Fibonacci sentence is **Birkhoff plus a distributivity count**: every finite distributive lattice is `
+                                       J` of its join-irreducibles, so, of the **33** intervals `[0̂, w]` with `rank(w) ≤ 6`, *"28 are `J(P)`"* says pr
+                                       ecisely *"28 are distributive"*, and **names no class of `P`**.
+
+  <05> line 205  para  BOUNDED   T8 measures the illustrative case: Young–Fibonacci, the other known 1-differential lattice, is not distributive 
+                                       as a whole (5 of its 33 intervals to rank 6 fail, smallest witness `w = 221`).
+
+  <06> line 310  cell  BOUNDED   That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Bro
+                                       wn §4.3 consumes them and each is a `J(P)`.
+
+  <07> line 310  cell  BOUNDED   Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, o
+                                       n 28 of the 33 Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6`; what keeps it ADJACENT is that it is a di
+                                       fferent monoid, which is the reason above and not the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: 
+                                       it is not the SAME contact.
+
+  <08> line 416  cell  BOUNDED   30 Young intervals `[∅, λ]` with `λ` of size ≤ 6, 0 non-distributive; 33 Young–Fibonacci intervals `[0̂, w]` wit
+                                       h `rank(w) ≤ 6`, 5 non-distributive, witness `w = 221` — all reproduced by mg-6ad0 and by mg-41aa.
+
+  <09> line 417  cell  BOUNDED   At interval level, **28 of the 33** Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6` are distributive and 
+                                       each is `J(P)` for an explicitly constructed `P`, **0 bad**
+
+    RELAXED: unbounded is 0 of 9                               ok   (0 unbounded)
+    STRICT: unbounded is 0 of 9                                ok   (0 unbounded)
+
+==============================================================================
+  G2  POPULATION UNCHANGED.  Same predicate, pre-repair doc read
+      out of git at the anchor above.
+==============================================================================
+    pre-repair  RELAXED : 9 sites, 4 bounded, 5 unbounded
+    post-repair RELAXED : 9 sites, 9 bounded, 0 unbounded
+    pre-repair  STRICT  : 8 sites, 4 bounded
+    post-repair STRICT  : 9 sites, 9 bounded
+
+    RELAXED population is the same size before and after       ok   (9 -> 9)
+    every pre-repair line number still carries a site          ok   (lines [166, 175, 181, 202, 307, 413, 414] -> [166, 175, 181, 205, 310, 416, 417])
+
+    NOTE, and it is a RESULT not a tidy-up: STRICT moved from 8 to 9.
+    Bounding the row-10 sentence required naming Young-Fibonacci in it,
+    which is the very string the parent's same-sentence clause wanted.
+    So the repair closes the blind spot as a side effect of the bound.
+
+==============================================================================
+  G3  NO NUMBER MOVED.  Population: integer occurrences inside the
+      site sentences.  Grain: one integer occurrence.
+==============================================================================
+    integer    before    after
+    0               2        7
+    1               1        1
+    2               3        3
+    3               1        1
+    4               1        1
+    5               3        3
+    6               4       10
+    10              1        1
+    28              7        7
+    30              1        1
+    33             10        9   <-- DROPPED
+    221             3        3
+    5800            1        1
+
+    no measured integer occurs fewer times after the repair    BAD   (dropped: 33)
+    the figure 33 survives in the site sentences               ok   (9 occurrence(s))
+    the figure 28 survives in the site sentences               ok   (7 occurrence(s))
+    the figure 5 survives in the site sentences                ok   (3 occurrence(s))
+    the figure 30 survives in the site sentences               ok   (1 occurrence(s))
+
+==============================================================================
+SUMMARY s3_bound: anchor 645b5a4a1a25
+SUMMARY s3_bound: RELAXED 9 sites, 9 bounded, 0 unbounded
+SUMMARY s3_bound: STRICT  9 sites, 9 bounded, 0 unbounded
+SUMMARY s3_bound: population 9 -> 9; integers dropped 1
+SUMMARY s3_bound: failures 1
+==============================================================================

@@ -1,0 +1,139 @@
+==============================================================================
+S3  THE GATE.  bounded / no site lost / no number moved.
+==============================================================================
+
+  THE PRE-REPAIR ANCHOR, DERIVED
+    document : docs/OneThird-Branching-Graphs-Where-This-Lives.md
+    commit   : 645b5a4a1a254ac3945a90ddd4462b22a9385723
+    subject  : docs+repair: mg-5800's four WARRANT findings landed — TWO CELLS WIDENED, TWO CLAUSES NARROWED, ONE C
+
+==============================================================================
+  G1  BOUNDED, under both predicates.  Population: live sentences
+      of the document stating the figure.  Grain: one sentence.
+==============================================================================
+    STRICT (the parent's)    10 of 10 sites carry a scope in their own sentence
+    RELAXED (this repair's)  10 of 10 sites carry a scope in their own sentence
+
+  <01> line 30   para  BOUNDED   **No number moves, no measurement is withdrawn or added to, and no sentence of this document is deleted.** mg-19
+                                       ec found that this document states the 33-interval Young–Fibonacci figure — the 33 intervals `[0̂, w]` with `ran
+                                       k(w) ≤ 6` — at **8** live sentences and bounds it at 4.
+
+  <02> line 184  cell  BOUNDED   **5 of the 33 intervals `[∅̂, w]`, `rank(w) ≤ 6`, of the Young–Fibonacci lattice are not**, smallest witness `w 
+                                       = 221`
+
+  <03> line 184  cell  BOUNDED   At the level where the contact actually lives — finite intervals — **28 of the 33** Young–Fibonacci intervals to
+                                        rank 6 **are** distributive (mg-41aa, landing mg-6ad0's X4; §2 item 2)
+
+  <04> line 193  para  BOUNDED   At the level of finite **intervals** a contact of the same **kind** extends: **28 of the 33** intervals `[0̂, w]
+                                       ` of Young–Fibonacci with `rank(w) ≤ 6` are distributive, so each is `J(P)` for some `P`, item 2.
+
+  <05> line 199  para  BOUNDED   The Young–Fibonacci sentence is **Birkhoff plus a distributivity count**: every finite distributive lattice is `
+                                       J` of its join-irreducibles, so, of the **33** intervals `[0̂, w]` with `rank(w) ≤ 6`, *"28 are `J(P)`"* says pr
+                                       ecisely *"28 are distributive"*, and **names no class of `P`**.
+
+  <06> line 223  para  BOUNDED   T8 measures the illustrative case: Young–Fibonacci, the other known 1-differential lattice, is not distributive 
+                                       as a whole (5 of its 33 intervals to rank 6 fail, smallest witness `w = 221`).
+
+  <07> line 328  cell  BOUNDED   That reason does not hold — **28 of the 33** finite Young–Fibonacci intervals to rank 6 are distributive, so Bro
+                                       wn §4.3 consumes them and each is a `J(P)`.
+
+  <08> line 328  cell  BOUNDED   Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, o
+                                       n 28 of the 33 Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6`; what keeps it ADJACENT is that it is a di
+                                       fferent monoid, which is the reason above and not the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: 
+                                       it is not the SAME contact.
+
+  <09> line 434  cell  BOUNDED   30 Young intervals `[∅, λ]` with `λ` of size ≤ 6, 0 non-distributive; 33 Young–Fibonacci intervals `[0̂, w]` wit
+                                       h `rank(w) ≤ 6`, 5 non-distributive, witness `w = 221` — all reproduced by mg-6ad0 and by mg-41aa.
+
+  <10> line 435  cell  BOUNDED   At interval level, **28 of the 33** Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6` are distributive and 
+                                       each is `J(P)` for an explicitly constructed `P`, **0 bad**
+
+    RELAXED: unbounded is 0 of 10                              ok   (0 unbounded)
+    STRICT: unbounded is 0 of 10                               ok   (0 unbounded)
+
+==============================================================================
+  G2  NO SITE LOST, AND ANYTHING ADDED IS BOUNDED.  Same
+      predicate, pre-repair doc read out of git at the anchor.
+==============================================================================
+    pre-repair  RELAXED : 9 sites, 4 bounded, 5 unbounded
+    post-repair RELAXED : 10 sites, 10 bounded, 0 unbounded
+    pre-repair  STRICT  : 8 sites, 4 bounded
+    post-repair STRICT  : 10 sites, 10 bounded
+
+    population delta : +1
+    RELAXED population did not SHRINK                          ok   (9 -> 10)
+
+    NOTE, and it is a RESULT not a tidy-up: STRICT moved from 8 to 10.
+    Bounding the row-10 sentence required naming Young-Fibonacci in it,
+    which is the very string the parent's same-sentence clause wanted.
+    So the repair closes the blind spot as a side effect of the bound.
+
+==============================================================================
+  G3  NO NUMBER MOVED.  Population: integer occurrences inside the
+      site sentences.  Grain: one integer occurrence.
+==============================================================================
+    integer    before    after
+    0               2        8
+    1               1        1
+    2               3        3
+    3               1        1
+    4               1        2
+    5               3        3
+    6               4       11
+    8               0        1
+    10              1        1
+    28              7        7
+    30              1        1
+    33             10       11
+    221             3        3
+    5800            1        1
+
+    THE PAIRING, by shared vocabulary.  Each pre-repair site matched
+    to the post-repair site sharing the most words of length >= 5:
+
+      <01> old line 166   -> new line 184    shared words  6
+      <02> old line 166   -> new line 184    shared words 13
+      <03> old line 175   -> new line 193    shared words  8
+      <04> old line 181   -> new line 199    shared words 14
+      <05> old line 202   -> new line 223    shared words 13
+      <06> old line 307   -> new line 328    shared words  8
+      <07> old line 307   -> new line 328    shared words 19
+      <08> old line 413   -> new line 434    shared words  8
+      <09> old line 414   -> new line 435    shared words  8
+
+    SITES ADDED BY THIS REPAIR (unmatched, printed in full): 1
+
+  <01> line 30   para  BOUNDED   **No number moves, no measurement is withdrawn or added to, and no sentence of this document is deleted.** mg-19
+                                       ec found that this document states the 33-interval Young–Fibonacci figure — the 33 intervals `[0̂, w]` with `ran
+                                       k(w) ≤ 6` — at **8** live sentences and bounds it at 4.
+
+    every pre-repair site is matched (none lost)               ok   (9 of 9)
+    every match shares >= 3 words with its pre-repair self     ok   (0 weak)
+    every site ADDED by this repair is itself bounded          ok   (1 of 1 bounded)
+    no measured figure disappears from the population          ok   (gone: none)
+    every reduced occurrence is at a site that still states the figure ok   (0 site(s) lost a figure)
+    the figure 33 survives in the site sentences               ok   (11 occurrence(s))
+    the figure 28 survives in the site sentences               ok   (7 occurrence(s))
+    the figure 5 survives in the site sentences                ok   (3 occurrence(s))
+    the figure 30 survives in the site sentences               ok   (1 occurrence(s))
+
+==============================================================================
+  G4  THIS REPAIR'S OWN PROSE, HELD TO THE STANDARD IT IMPOSES.
+      Population: live sentences of the documents THIS repair
+      authors that state the figure.  Grain: one sentence.
+      A repair that gates a document and exempts its own account
+      of that document has not imposed a standard, it has moved
+      the unbounded sentences into a file nobody checks.
+==============================================================================
+    docs/repair-mg-d075-the-figure-and-its-scope.md            6 sites, 6 bounded
+    repair-mg-d075-the-figure-and-: unbounded is 0 of 6        ok   (0 unbounded)
+    code/branching_bound_d075/README.md                        3 sites, 3 bounded
+    README.md: unbounded is 0 of 3                             ok   (0 unbounded)
+
+==============================================================================
+SUMMARY s3_bound: anchor 645b5a4a1a25
+SUMMARY s3_bound: RELAXED 10 sites, 10 bounded, 0 unbounded
+SUMMARY s3_bound: STRICT  10 sites, 10 bounded, 0 unbounded
+SUMMARY s3_bound: population 9 -> 10; integers dropped 0
+SUMMARY s3_bound: failures 0
+==============================================================================

@@ -1,0 +1,101 @@
+==============================================================================
+S2  the parent's 8/4/4 reproduced against its own transcript,
+    and the ONE CLAUSE that turns 8 into 9.
+==============================================================================
+
+  THE DOCUMENT IS READ AT THE PRE-REPAIR ANCHOR, DERIVED
+    document : docs/OneThird-Branching-Graphs-Where-This-Lives.md
+    commit   : 645b5a4a1a254ac3945a90ddd4462b22a9385723
+    subject  : docs+repair: mg-5800's four WARRANT findings landed — TWO CELLS WIDENED, TWO CLAUSES NARROWED, ONE C
+    mg-19ec's 8/4/4 is a measurement OF THIS COMMIT.  Reproducing it
+    against the repaired working tree would measure the repair.
+
+==============================================================================
+  R1  REPRODUCTION.  Population: the 8 <NN> rows of the POP-3
+      block of code/branching_audit_19ec/out_e5_population.txt.
+      Grain: (line number, BOUNDED verdict) per row.
+==============================================================================
+    parent transcript rows parsed : 8
+    parent printed population     : 8
+    parent printed bounded        : 4
+    parent printed unbounded      : 4
+    my STRICT re-implementation   : 8 sites, 4 bounded, 4 unbounded
+
+    parent's transcript prints 8 rows                        ok   (8)
+    parent's printed population is its own row count         ok   (8 vs 8)
+    my strict count equals the parent's population           ok   (8 vs 8)
+    my strict bounded equals the parent's bounded            ok
+    my strict unbounded equals the parent's unbounded        ok
+
+    ROW BY ROW  (parent line/verdict  vs  mine)
+      <01>   166 BOUNDED      166 BOUNDED     ok
+      <02>   166 BOUNDED      166 BOUNDED     ok
+      <03>   175 UNBOUNDED    175 UNBOUNDED   ok
+      <04>   181 UNBOUNDED    181 UNBOUNDED   ok
+      <05>   202 BOUNDED      202 BOUNDED     ok
+      <06>   307 BOUNDED      307 BOUNDED     ok
+      <07>   413 UNBOUNDED    413 UNBOUNDED   ok
+      <08>   414 UNBOUNDED    414 UNBOUNDED   ok
+
+==============================================================================
+  R2  THE ONE CLAUSE.  STRICT demands the naming string in the
+      SAME SENTENCE as the numeral.  Turn that conjunct off and
+      change nothing else.
+==============================================================================
+    STRICT  : 8 sites, 4 bounded, 4 unbounded
+    RELAXED : 9 sites, 4 bounded, 5 unbounded
+    admitted by dropping the same-sentence clause: 1
+
+  <01> line 307  cell  UNBOUNDED Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Young's, o
+                                       n 28 of 33 intervals; what keeps it ADJACENT is that it is a different monoid, which is the reason above and not
+                                        the withdrawn one.* **Narrowed by mg-dffa under mg-5800's F2: it is not the SAME contact.
+
+    every site STRICT found is still found by RELAXED        ok
+    RELAXED admits sites and retracts none                   ok   (9 = 8 + 1)
+
+    AND THE PARENT'S OWN OTHER INSTRUMENT ALREADY HAD IT.  The
+    POP-1 block of the same transcript prints the line-307 sentence
+    as its [09] and scores it unbounded.  Checked here by grep of
+    the transcript, not by memory:
+    POP-1 of the parent's transcript contains the line-307 sentence ok
+
+    So the ninth site is not new evidence.  It is the parent's two
+    instruments disagreeing with each other, and only the smaller
+    number reaching the verdict.
+
+==============================================================================
+  R3  THE FLOOR -- liveness is applied PER CELL, so ONE ledger
+      row can yield both struck cells and live cells.
+      Population: every markdown table row of the document whose
+      cells (>30 chars) are not all on the same side.
+      Grain: one row.
+==============================================================================
+    rows that split : 3
+
+    line   row label                   cells  struck   live
+    411    B2′                             3       1      2
+    414    B4′                             3       2      1
+    418    B7′                             3       1      2
+
+    row B4' at line 414 splits struck/live                   ok
+    at least 2 cells of row B4' are struck                   ok   (2 struck, 1 live)
+    at least 1 cell of row B4' is live                       ok
+    at least one OTHER row splits the same way               ok   (2 others)
+
+    ADJUDICATION.  This is not scored as a defect of the parent's
+    census.  A ledger row that records a withdrawn reading and then
+    states the reading that replaced it SHOULD contribute a live
+    cell -- the replacement is a live claim.  What the per-cell rule
+    cannot do is notice that the live cell inherits its SUBJECT from
+    a struck cell beside it, and that is exactly the site whose
+    figure this repair must bound.  Reported as a property of the
+    instrument, with the count above, and not as a finding against
+    a number.
+
+==============================================================================
+SUMMARY s2_reproduce: anchor 645b5a4a1a25
+SUMMARY s2_reproduce: parent transcript rows 8; my strict 8 sites, 4 bounded
+SUMMARY s2_reproduce: reproduction checks failed 0
+SUMMARY s2_reproduce: dropping the same-sentence clause admits 1 site(s)
+SUMMARY s2_reproduce: 3 ledger row(s) of the document split struck/live
+==============================================================================

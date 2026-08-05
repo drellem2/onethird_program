@@ -1,0 +1,148 @@
+==============================================================================
+S4  BOUNDED, NOT MERELY HEDGED -- and the predecessor's own
+    hedge figure counted rather than quoted.
+==============================================================================
+
+==============================================================================
+  H1  THE NEW PHRASINGS.  Population: live sentences of the
+      document present after this repair and absent before it.
+      Grain: one sentence.  Anchor: 645b5a4a1a25
+==============================================================================
+    live sentence OCCURRENCES  before : 316   after : 322
+    DISTINCT live sentences    before : 297   after : 303
+    NEW distinct sentences            : 14
+
+    [01] line 30   para  ***Bounded 2026-08-05 by mg-d075**, landing the OPEN of mg-19ec's audit (`docs/OneThird-Warrant-Repair-m
+                            g-dffa-IndependentAudit.md`).
+
+    [02] line 30   para  **No number moves, no measurement is withdrawn or added to, and no sentence of this document is deleted.
+                            ** mg-19ec found that this document states the 33-interval Young–Fibonacci figure — the 33 intervals `[0
+                            ̂, w]` with `rank(w) ≤ 6` — at **8** live sentences and bounds it at 4.
+
+    [03] line 30   para  **Eight is not the population either.** Counted over the live sentences of this file at the grain mg-19e
+                            c itself used, the sites stating that figure were **9**, of which **5** carried no scope in their own se
+                            ntence; the ninth is the row-10 sentence in §3, which mg-19ec's own POP-1 block printed and whose POP-3 
+                            block could not see, because that sentence says *"for Young's"* and never spells *"Young–Fibonacci"*.
+
+    [04] line 30   para  All nine now carry `rank(w) ≤ 6` in their own sentence, this note is itself in that population and carri
+                            es it too, and the current count is printed in `code/branching_bound_d075/out_s3_bound.txt` rather than 
+                            asserted here.
+
+    [05] line 30   para  The criticism clause in §2 that faults Young–Fibonacci for naming no class of `P` now states the **Young
+                            ** classification with the `|λ| ≤ 6`, 30-of-30 measurement that carries it.
+
+    [06] line 30   para  Evidence and the counter-instrument: `code/branching_bound_d075/`; the account, including the two defect
+                            s this repair's own instruments found in this repair, is `docs/repair-mg-d075-the-figure-and-its-scope.m
+                            d`.***
+
+    [07] line 193  para  At the level of finite **intervals** a contact of the same **kind** extends: **28 of the 33** intervals 
+                            `[0̂, w]` of Young–Fibonacci with `rank(w) ≤ 6` are distributive, so each is `J(P)` for some `P`, item 2
+                            .
+
+    [08] line 199  para  **It is a contact of the same kind and it is not the same contact.** The Young headline is a **classific
+                            ation** — the intervals `[∅, λ]` of Young's lattice are `J(P)` for `P` **exactly** the skew cell posets,
+                             a named closed class, which is the whole content of §0 consequence 1, **measured over the 30 intervals 
+                            with `|λ| ≤ 6`** — 30 of 30 distributive, 30 of 30 with `P` a skew cell poset, 0 outside the class — wit
+                            h the isomorphism it rests on checked over all **44 partitions to `n ≤ 7`**.
+
+    [09] line 199  para  The Young–Fibonacci sentence is **Birkhoff plus a distributivity count**: every finite distributive latt
+                            ice is `J` of its join-irreducibles, so, of the **33** intervals `[0̂, w]` with `rank(w) ≤ 6`, *"28 are 
+                            `J(P)`"* says precisely *"28 are distributive"*, and **names no class of `P`**.
+
+    [10] line 199  para  Measured on a fourth instrument: the 28 distributive Young–Fibonacci intervals with `rank(w) ≤ 6` yield 
+                            **17 distinct `P`** up to isomorphism, of which **5 are not skew cell posets** — 2 of the 4 at `|P| = 5`
+                            , 3 of the 5 at `|P| = 6` (`code/branching_warrant_dffa/out_w2_family.txt`).
+
+    [11] line 199  para  On the Young side the same measurement, over the 30 intervals with `|λ| ≤ 6`, returns **30 of 30** inter
+                            vals distributive and **0** of the resulting `P` outside the skew class.)*
+
+    [12] line 328  cell  Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines for Yo
+                            ung's, on 28 of the 33 Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6`; what keeps it ADJACENT is
+                             that it is a different monoid, which is the reason above and not the withdrawn one.* **Narrowed by mg-d
+                            ffa under mg-5800's F2: it is not the SAME contact.
+
+    [13] line 434  cell  30 Young intervals `[∅, λ]` with `λ` of size ≤ 6, 0 non-distributive; 33 Young–Fibonacci intervals `[0̂,
+                             w]` with `rank(w) ≤ 6`, 5 non-distributive, witness `w = 221` — all reproduced by mg-6ad0 and by mg-41a
+                            a.
+
+    [14] line 435  cell  At interval level, **28 of the 33** Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6` are distribut
+                            ive and each is `J(P)` for an explicitly constructed `P`, **0 bad**
+
+    the repair introduced at least one new sentence            ok   (14)
+
+==============================================================================
+  H2  THE SCAN.  33 hedge tokens -- mg-19ec's 25 verbatim plus 8
+      added by this repair -- against EACH new sentence's OWN text.
+==============================================================================
+    inherited : may, might, could be, appears, seems, arguably, roughly, broadly, essentially, in some sense, more or less, largely, generally
+                tends to, presumably, plausibly, believed, on mg-af28's reading, which nobody, has not re-read, to a degree, something like, in effect, effectively, for the most part
+    added     : kind, some, several, various, approximately, about, nearly, almost
+
+    [01] line 30   definite -- no hedge token
+    [02] line 30   definite -- no hedge token
+    [03] line 30   definite -- no hedge token
+    [04] line 30   definite -- no hedge token
+    [05] line 30   definite -- no hedge token
+    [06] line 30   definite -- no hedge token
+    [07] line 193  HEDGE kind,some              ENUMERATED -> admissible
+         what falls inside it, stated: rank(w) ≤ 6
+    [08] line 199  HEDGE kind                   ENUMERATED -> admissible
+         what falls inside it, stated: |λ| ≤ 6
+    [09] line 199  definite -- no hedge token
+    [10] line 199  definite -- no hedge token
+    [11] line 199  definite -- no hedge token
+    [12] line 328  HEDGE kind                   ENUMERATED -> admissible
+         what falls inside it, stated: rank(w) ≤ 6
+    [13] line 434  definite -- no hedge token
+    [14] line 435  definite -- no hedge token
+
+    new sentences carrying a hedge token : 3 of 14
+    of those, NOT rescued by enumeration : 0
+    no new phrasing hedges without enumerating what is inside it ok   (0)
+
+==============================================================================
+  H3  IS THE BOUND AN ENUMERATION OR A SOFTENING?  Population:
+      the 9 sites.  Grain: the exact substring carrying the bound.
+==============================================================================
+    <01> line 30   bound=`rank(w) ≤ 6`  class=NUMERIC SCOPE  enumeration in sentence: yes
+    <02> line 184  bound=`rank(w) ≤ 6`  class=NUMERIC SCOPE  enumeration in sentence: yes
+    <03> line 184  bound=`to rank 6`    class=NUMERIC SCOPE  enumeration in sentence: yes
+    <04> line 193  bound=`rank(w) ≤ 6`  class=NUMERIC SCOPE  enumeration in sentence: yes
+    <05> line 199  bound=`rank(w) ≤ 6`  class=NUMERIC SCOPE  enumeration in sentence: no
+    <06> line 223  bound=`to rank 6`    class=NUMERIC SCOPE  enumeration in sentence: yes
+    <07> line 328  bound=`to rank 6`    class=NUMERIC SCOPE  enumeration in sentence: yes
+    <08> line 328  bound=`rank(w) ≤ 6`  class=NUMERIC SCOPE  enumeration in sentence: yes
+    <09> line 434  bound=`rank(w) ≤ 6`  class=NUMERIC SCOPE  enumeration in sentence: no
+    <10> line 435  bound=`rank(w) ≤ 6`  class=NUMERIC SCOPE  enumeration in sentence: yes
+
+    every site's bound is a numeric scope, not a softening word ok   (0 softening)
+    every site is bounded                                      ok   (10 of 10)
+
+==============================================================================
+  H4  THE PREDECESSOR'S OWN FIGURE, COUNTED.  Not gated on.
+      Population: the hedge-token and phrasing figures stated in
+      mg-19ec's published audit vs. the values its own code and
+      transcript carry.  Grain: one figure.
+==============================================================================
+    figure stated in the published audit prose : 26, 26
+    tokens actually in the instrument's HEDGES : 25
+    times the transcript prints a token count  : 0
+    phrasing population in the transcript      : 15
+    phrasing population in the recovered verdict: 13  (mg-d075's brief, quoting mg-19ec's commit message)
+
+    FINDING, and it is of THIS ARC'S OWN CLASS.
+      the token figure DISAGREES: prose says 26/26, code carries 25
+      the phrasing figure DISAGREES: transcript 15, verdict 13
+
+    Both are the same shape as the defect this repair lands: a figure
+    stated in prose that no instrument computes.  Neither is scored
+    against this repair and neither is repaired here -- mg-19ec's
+    audit document is a dated record.  They are handed to mg-aaf4.
+
+==============================================================================
+SUMMARY s4_hedge: 14 new sentence(s); 3 carry a hedge token; 0 unrescued
+SUMMARY s4_hedge: 33 hedge tokens (25 inherited + 8 added)
+SUMMARY s4_hedge: 10 of 10 site bounds are numeric scopes
+SUMMARY s4_hedge: predecessor prose says 26/26 hedge tokens, its code carries 25
+SUMMARY s4_hedge: failures 0
+==============================================================================
