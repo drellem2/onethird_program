@@ -1,0 +1,59 @@
+==============================================================================
+SELFTEST mg-aaf4 -- every mutation asserted a real change
+before its verdict is checked.
+==============================================================================
+
+==============================================================================
+  THE BASELINE.  Population: the living document as it
+  stands.  Grain: sentences (S) and occurrences (O).
+==============================================================================
+    STRICT sites 10, unbounded 0 | RELAXED sites 10, unbounded 0 | occurrences 11
+
+==============================================================================
+  DOC CASES.  The document, broken one site at a time.
+==============================================================================
+    M1 removing a rank bound makes that site UNBOUNDED       got 1         want 1         ok
+      RELAXED unbounded 0 -> 1
+    M2 a HEDGE is not a bound: the site stays UNBOUNDED      got 1         want 1         ok
+      `roughly` must not score as a scope
+    M3 block-quoting a unit removes its site(s)              got True      want True      ok
+      RELAXED sites 10 -> 9
+    M4 a STRUCK marker removes its site(s)                   got False     want True      FAIL
+      RELAXED sites 10 -> 10
+    M5 GRAIN O counts a second occurrence in one sentence    got (1, 0)    want (1, 0)    ok
+      occurrences +1, sentence-grain sites +0 -- the two grains separate
+    M6 STRICT loses a site the unit still attributes; RELAXE got (1, 1)    want (1, 0)    FAIL
+      this is the exact 8-vs-9 difference mg-d075 found in mg-19ec
+    M7 a bound in the NEXT sentence does not bound this one  got True      want True      ok
+      the s2.1 defect, reconstructed: 0 -> 1 unbounded
+
+==============================================================================
+  UNIT CASES.  The classifiers, handed strings.
+==============================================================================
+    U1 a bare `population` is KEYWORD ONLY, not a scope      got 'KEYWORD  want 'KEYWORD  ok
+    U2 a count with its denominator is a NUMERIC SCOPE       got 'NUMERIC  want 'NUMERIC  ok
+    U3 `row-10 sentence` is a LABEL, not a count             got 'NONE'    want 'NONE'    ok
+      the respecification recorded in lib_aaf4; first form scored this NUMERIC
+    U4 markdown bold between numeral and unit does not hide  got 'NUMERIC  want 'NUMERIC  ok
+      the respecification that moved the count AGAINST my own finding
+    U5 an inequality is a scope                              got 'NUMERIC  want 'NUMERIC  ok
+    U6 a sentence with neither is NONE                       got 'NONE'    want 'NONE'    ok
+    U7 a QUOTED strike marker is a MENTION                   got ['MENTION want ['MENTION ok
+    U8 an APPLIED strike marker is a USE                     got ['USE']   want ['USE']   ok
+    U9 the figure in words is detected                       got True      want True      ok
+    U10 `16733` is not the figure                            got False     want False     ok
+      a word-boundary test, so an arXiv id is not a site
+
+==============================================================================
+  THE MUTATIONS WERE REAL.  Every DOC case above raised
+  AssertionError if its target string was absent or if the
+  replacement left the text unchanged.  A no-op corruption
+  cannot reach a verdict here.
+==============================================================================
+    doc cases : 7      unit cases : 10
+
+==============================================================================
+SUMMARY selftest_aaf4: 17 case(s), 2 failure(s)
+SUMMARY selftest_aaf4: FAILED M4 a STRUCK marker removes its site(s)
+SUMMARY selftest_aaf4: FAILED M6 STRICT loses a site the unit still attributes; RELAXED keeps it
+==============================================================================

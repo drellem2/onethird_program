@@ -1,0 +1,282 @@
+==============================================================================
+A1  mg-aaf4: I COUNT THE SITES MYSELF.  Not 4, not 8, not 9,
+    not 10 -- counted again, at two grains, over a universe
+    that is not `docs/*.md`.
+==============================================================================
+
+==============================================================================
+  U0  THE INSTRUMENT, NAMED.  Four choices; each could have
+      gone the other way and changed the answer.
+==============================================================================
+    1. UNIT     paragraph, or table cell > 30 chars, fenced code excluded.
+                THE PARENT'S UNIT, KEPT ON PURPOSE, so that a disagreement in a
+                count cannot hide inside a disagreement about a parser.
+    2. LIVENESS outside block quotes, no STRUCK/CORRECTED/RE-SCOPED marker and
+                none of the three "the version this replaces" phrases.  Kept.
+    3. GRAIN    TWO of them.  S = one sentence (the parent's).  O = one
+                OCCURRENCE of the numeral.  These are different questions.
+    4. UNIVERSE MINE IS A FILE LIST, NOT THE GLOB `docs/*.md`.  This is the
+                choice that makes disagreement possible, and it is the one that
+                produced the finding below.
+
+    pre-repair anchor : 645b5a4a1a254ac3945a90ddd4462b22a9385723
+    anchor subject    : docs+repair: mg-5800's four WARRANT findings landed — TWO CELLS WIDENED, TWO CLAUSES NAR
+
+==============================================================================
+  U1  THE LIVING DOCUMENT AT GRAIN S (one sentence).
+      Population: live sentences of that ONE file.
+==============================================================================
+    predicate       state          sites  bounded  unbounded
+    STRICT          PRE-REPAIR         8        4          4
+    RELAXED         PRE-REPAIR         9        4          5
+    STRICT          AS IT STANDS      10       10          0
+    RELAXED         AS IT STANDS      10       10          0
+
+    mg-19ec published 8 / 4 / 4 (STRICT, pre-repair).
+    mg-d075 published 9 / 4 / 5 (RELAXED, pre-repair) and
+    10 / 10 / 0 both predicates as it stands.  `a2` reproduces
+    those row-by-row before this audit disagrees with anything.
+
+==============================================================================
+  U2  THE SAME FILE AT GRAIN O (one occurrence of the
+      numeral).  Population: identical.  Grain: different.
+==============================================================================
+    state          sentences(S)  occurrences(O)  O-S
+    PRE-REPAIR                9              10    1
+    AS IT STANDS             10              11    1
+
+    sentences stating the figure MORE THAN ONCE, as it stands : 1
+      line 30   para  occurrence #2  BOUNDED
+
+    A count of SENTENCES and a count of OCCURRENCES are different
+    numbers about the same text.  The parent publishes one grain and
+    says so; this is the other, and neither is wrong.
+
+==============================================================================
+  U3  THE PARENT'S OWN DELIVERABLE.  Population: every file
+      mg-d075 AUTHORS OR EDITS that states the figure.
+      Grain: one sentence.  Predicate: the parent's STRICT.
+==============================================================================
+    file                                                 STRICT unb  RELAXED unb  gate
+    docs/OneThird-Branching-Graphs-Where-This-Lives.md   10     0     10     0  yes
+    docs/repair-mg-d075-the-figure-and-its-scope.md       6     0      6     0  yes
+    code/branching_bound_d075/README.md                   3     0      3     0  NO
+    code/branching_bound_d075/PREDICTIONS.md              0     0      4     4  NO
+
+    FILES stating the figure in the parent's deliverable : 4
+    of those, INSIDE the parent's gate                   : 2  (OneThird-Branching-Graphs-Where-This-Lives.md, repair-mg-d075-the-figure-and-its-scope.md)
+    of those, OUTSIDE every population the parent counts : 2  (README.md, PREDICTIONS.md)
+    UNBOUNDED sites in the parent's own deliverable      : 4
+      of which outside the gate                          : 4
+
+    THE SITES, IN FULL:
+
+    code/branching_bound_d075/PREDICTIONS.md
+  <01> line 15   para  UNBOUNDED `grep -rn "33" --include=*.md --include=*.py --include=*.txt . | grep -i interval | head -40`. 6.
+
+  <02> line 15   para  UNBOUNDED `grep -n "33" docs/OneThird-Branching-Graphs-Where-This-Lives.md` — 10 hit lines: 166, 177, 186, 187, 20
+                                       9, 220, 225, 307, 413, 414. 9.
+
+  <03> line 15   para  UNBOUNDED `grep -rln "33" docs/*.md` and a per-file `grep -c "33"` loop over `docs/*.md`. 10.
+
+  <04> line 55   para  UNBOUNDED **P1a — I name the ninth site in advance.** It is the second 33-sentence of the row-10 cell at **line 30
+                                       7**: *"Row 10 therefore has an index-set contact of the **same kind** as the one this document headlines
+                                        for Young's, on 28 of 33 intervals; …"*.
+
+==============================================================================
+  U4  THE WIDER UNIVERSE.  Population: every markdown file
+      TRACKED BY GIT, not the glob `docs/*.md`.
+      Grain: one sentence, RELAXED predicate.
+==============================================================================
+    markdown files tracked : 254
+    in docs/               : 113
+    OUTSIDE docs/          : 141
+
+    file                                                     S-sites  bnd  unb   O
+    code/branching_bound_audit_aaf4/PREDICTIONS.md               4     0    4    7
+    code/branching_bound_d075/PREDICTIONS.md                     4     0    4    6
+    docs/OneThird-Audit-mg-af28-Branching-Graphs.md              5     1    4    5
+    docs/OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md     8     4    4    8
+    code/branching_audit_19ec/PREDICTIONS.md                     2     0    2    2
+    docs/OneThird-Branching-Graphs-Repair.md                     3     1    2    3
+    code/branching_audit_5800/README.md                          1     0    1    1
+    code/branching_repair_41aa/README.md                         1     0    1    1
+    docs/OneThird-Audit-mg-41aa-Repair.md                        2     1    1    3
+    docs/OneThird-Warrant-Repair-mg-dffa.md                      2     1    1    2
+    code/branching_bound_d075/README.md                          3     3    0    4
+    docs/OneThird-Branching-Graphs-Where-This-Lives.md          10    10    0   11
+    docs/repair-mg-d075-the-figure-and-its-scope.md              6     6    0    7
+
+    files stating the figure          : 13  (7 in docs/, 6 outside)
+    sites, GRAIN S                    : 51, of which 24 unbounded
+    occurrences, GRAIN O              : 60
+    the parent's published corpus (D) : 36 sites in 7 files of docs/
+
+    THE FIGURE IN WORDS.  `thirty-three` occurrences, all tracked
+    markdown: 4
+
+==============================================================================
+  U5  MY OWN DELIVERABLE, HELD TO THE SAME STANDARD.
+      Population: the files mg-aaf4 authors.  Grain: sentence.
+==============================================================================
+    code/branching_bound_audit_aaf4/PREDICTIONS.md        4 sites   0 bounded   4 UNBOUNDED
+    code/branching_bound_audit_aaf4/README.md             0 sites   0 bounded   0 UNBOUNDED
+
+    code/branching_bound_audit_aaf4/PREDICTIONS.md -- the unbounded sites, printed rather than omitted:
+  <01> line 77   para  UNBOUNDED **P1 — THE PARENT'S OWN DELIVERABLE CONTAINS AT LEAST ONE UNBOUNDED SITE OF THE FIGURE, AND IT IS OUTSID
+                                       E EVERY POPULATION THE PARENT MEASURES.** Population: live sentences of the four files mg-d075 authors o
+                                       r edits that state the 33-interval figure — the living document, `docs/repair-mg-d075-the-figure-and-its
+                                       -scope.md`, `code/branching_bound_d075/README.md`, `code/branching_bound_d075/PREDICTIONS.md`.
+
+  <02> line 85   para  UNBOUNDED - **Predicted: ≥ 1 unbounded, and ≥ 1 of them in `code/branching_bound_d075/PREDICTIONS.md`.** - **P1a —
+                                        I name a site in advance.** `PREDICTIONS.md` line 49: *"**Predicate:** the sentence states the 33-inter
+                                       val figure **about Young–Fibonacci intervals**, where the attribution may come from the sentence *or fro
+                                       m the table cell / paragraph the sentence sits in*."* It states the figure, it names Young–Fibonacci, an
+                                       d it carries no rank bound. - **P1b — the parent's gate cannot see it**, because `s1`'s population D glo
+                                       bs `docs/*.md` and `s5`'s `MINE` lists two files, neither of them `PREDICTIONS.md`.
+
+  <03> line 212  para  UNBOUNDED **P16 — THE NUMERAL `33` DENOTES TWO DIFFERENT POPULATIONS INSIDE THE PARENT'S OWN DELIVERABLE, AND ITS 
+                                       DETECTOR CANNOT TELL THEM APART.** `code/branching_bound_d075/README.md` line 33 says *"33 hedge tokens"
+                                       *; the same file's line 50 says *"the figure `33`, the interval count"*.
+
+  <04> line 212  para  UNBOUNDED Predicted: **≥ 2 distinct referents of the numeral `33`** in the parent's deliverable, and predicted tha
+                                       t a naive re-use of the parent's own STRICT predicate on the parent's own README **would score a hedge-t
+                                       oken count as an interval figure** unless the name `Young–Fibonacci` happens to save it.
+
+    THESE ARE NOT REPAIRED, AND THE REASON IS A FINDING, NOT AN EXCUSE.
+    `PREDICTIONS.md` is a PRE-REGISTRATION commit.  The lineage discipline for
+    this arc is that such a commit is never amended, reworded, squashed or
+    rebased away.  Adding a bound to a sentence of it is a rewording.  So the
+    bounding standard and the pre-registration standard CONFLICT on exactly this
+    population, and the conflict is not mine -- it applies identically to
+    `code/branching_bound_d075/PREDICTIONS.md`, which is why U3's uncovered
+    sites could not have been repaired by the parent either.  What the parent
+    could have done, and did not, is NAME the population as excluded by that
+    invariant instead of drawing the glob so that it never appeared.
+
+==============================================================================
+  U7  BOUNDED, NOT MERELY HEDGED -- re-derived, with my own
+      hedge list.  Population: the 10 post-repair sites of
+      the living document.  Grain: the exact substring
+      carrying the bound.
+==============================================================================
+    <01> line 30   bound=`rank(w) ≤ 6`  NUMERIC SCOPE hedge=-            enumerates=yes
+    <02> line 184  bound=`rank(w) ≤ 6`  NUMERIC SCOPE hedge=-            enumerates=yes
+    <03> line 184  bound=`to rank 6`    NUMERIC SCOPE hedge=-            enumerates=yes
+    <04> line 193  bound=`rank(w) ≤ 6`  NUMERIC SCOPE hedge=kind,some    enumerates=yes
+    <05> line 199  bound=`rank(w) ≤ 6`  NUMERIC SCOPE hedge=-            enumerates=yes
+    <06> line 223  bound=`to rank 6`    NUMERIC SCOPE hedge=-            enumerates=yes
+    <07> line 328  bound=`to rank 6`    NUMERIC SCOPE hedge=-            enumerates=yes
+    <08> line 328  bound=`rank(w) ≤ 6`  NUMERIC SCOPE hedge=kind         enumerates=yes
+    <09> line 434  bound=`rank(w) ≤ 6`  NUMERIC SCOPE hedge=-            enumerates=yes
+    <10> line 435  bound=`rank(w) ≤ 6`  NUMERIC SCOPE hedge=-            enumerates=yes
+
+    site bounds that are SOFTENING WORDS rather than scopes : 0
+    my hedge list is 38 tokens, and it is MINE: kind, some, sort of, roughly, broadly, essentially, largely, mostly, generally, typically, usually, often, many, several, various, about, around, nearly, almost, approximately, may, might, could, appears, seems, arguably, presumably, plausibly, in effect, effectively, more or less, in practice, basically, fairly, quite, relatively, significant, substantial
+
+    THE NEW PHRASINGS, scanned against my list in their OWN sentence.
+    Population: sentences live at HEAD and not at the anchor.  Grain: one sentence.
+      new sentences                        : 14
+      carrying a hedge token of MY list    : 4
+      of those, NOT rescued by enumeration : 1
+        [could] **Eight is not the population either.** Counted over the live sentences of this file at the grai
+        n mg-19ec itself used, the sites stating that figure were **9**, of which **5** carried no scope
+         in their own sentence; the ninth is the row-10 sentence in §3, which mg-19ec's own POP-1 block 
+        printed and whose POP-3 block could not see, because that sentence says *"for Young's"* and neve
+        r spells *"Young–Fibonacci"*.
+        [kind,some] At the level of finite **intervals** a contact of the same **kind** extends: **28 of the 33** in
+        tervals `[0̂, w]` of Young–Fibonacci with `rank(w) ≤ 6` are distributive, so each is `J(P)` for 
+        some `P`, item 2.
+        [kind] **It is a contact of the same kind and it is not the same contact.** The Young headline is a **c
+        lassification** — the intervals `[∅, λ]` of Young's lattice are `J(P)` for `P` **exactly** the s
+        kew cell posets, a named closed class, which is the whole content of §0 consequence 1, **measure
+        d over the 30 intervals with `|λ| ≤ 6`** — 30 of 30 distributive, 30 of 30 with `P` a skew cell 
+        poset, 0 outside the class — with the isomorphism it rests on checked over all **44 partitions t
+        o `n ≤ 7`**.
+        [kind] Row 10 therefore has an index-set contact of the **same kind** as the one this document headline
+        s for Young's, on 28 of the 33 Young–Fibonacci intervals `[0̂, w]` with `rank(w) ≤ 6`; what keep
+        s it ADJACENT is that it is a different monoid, which is the reason above and not the withdrawn 
+        one.* **Narrowed by mg-dffa under mg-5800's F2: it is not the SAME contact.
+
+    ADJUDICATION.  My list over-collects and I say so rather than
+    trimming it after seeing the result.  The 1 unrescued row(s)
+      `could` in *could not see* is a past-tense modal inside a
+      NEGATED FACTUAL CLAIM about what a predicate did.  It
+      softens no quantity, and the sentence states 9 and 5.
+      HAND VERDICT: not a hedge.
+      machine: 1 unrescued        adjudicated: 0
+    mg-d075's own H4 measured 3 of 14 with a 33-token list.  My list
+    is different and so is the arithmetic -- 4 of 14, not 3 -- and
+    the verdict that matters, 0 phrasings hedged without enumerating,
+    survives being measured with somebody else's list.
+
+    THE NUMERAL `33`, AND WHAT IT DENOTES.  Population: occurrences
+    of `\b33\b` in the parent's own README.  Grain: one occurrence.
+      occurrences of `33` in live sentences  : 6
+      of those, in a sentence naming the family: 4
+      occurrences denoting something else      : 2
+        NOT the interval figure: **bounded, not merely hedged** — 33 hedge tokens, and the predecessor's own hedge figure
+           counted rather than quoted
+        NOT the interval figure: **Two checks respecified after they fired on me** — G3's first form forbade any integer 
+          occurring fewer times (it fired on the deliberate factoring of two unbounded *"of the 33
+          "* restatements into one bounded statement);
+      So the numeral denotes at least two populations in one file,
+      and the family name is the whole of what separates them.
+
+==============================================================================
+  U6  THE SILENT EXCLUSIONS -- what the LIVENESS RULE takes
+      out of every population above, and whether the marker
+      that took it out is a USE or a MENTION.
+==============================================================================
+    The liveness rule is a text match for `**STRUCK` / `**CORRECTED` /
+    `**RE-SCOPED` and three phrases.  It cannot distinguish a unit that IS
+    struck from a unit that QUOTES the marker while describing the rule.  So a
+    document that documents the rule is scored dead BY the rule.  This block is
+    the population that leaves silently, and it is not counted anywhere in
+    mg-19ec, mg-d075, or in U1-U5 above.
+
+    file                                              line  unit   marker    hits  figures
+    code/branching_bound_d075/PREDICTIONS.md            44  para   MENTION      4      1
+    docs/OneThird-Audit-mg-41aa-Repair.md              197  para   BLOCKQUOTE    0      2
+    cs/OneThird-Branching-Graphs-Where-This-Lives.md   233  para   USE          1      2
+    Third-Warrant-Repair-mg-dffa-IndependentAudit.md   189  para   BLOCKQUOTE    0      1
+    docs/OneThird-Warrant-Repair-mg-dffa.md            158  para   BLOCKQUOTE    0      1
+    docs/OneThird-Warrant-Repair-mg-dffa.md            163  para   BLOCKQUOTE    0      1
+    docs/repair-mg-d075-the-figure-and-its-scope.md     74  cell   USE          1      1
+    docs/repair-mg-d075-the-figure-and-its-scope.md     77  cell   USE          1      1
+    docs/repair-mg-d075-the-figure-and-its-scope.md     78  cell   USE          1      1
+
+    dead units stating the figure                  : 9
+    of those, killed by a MENTION of the marker    : 1
+    FIGURE OCCURRENCES removed by a MENTION        : 1
+
+    code/branching_bound_d075/PREDICTIONS.md line 44 -- killed by a marker it only QUOTES:
+      markers: **STRUCK [MENTION], **CORRECTED [MENTION], **RE-SCOPED [MENTION], the scope this adds [MENTION]
+      - **Population:** live sentences in `docs/OneThird-Branching-Graphs-Where-This-Lives.md` — *live* ex
+      actly as the parent defined it (outside fenced code, outside block quotes, outside units carrying a 
+      `**STRUCK` / `**CORRECTED` / `**RE-SCOPED` marker or one of the three "the version/reading this repl
+      aces" / "the scope this adds" phrases). - **Grain:** one sentence, split by the parent's own splitte
+      r. - **Predicate:** the sentence states the 33-interval figure **about Young–Fibonacci intervals**, 
+      where the attribution may come from the sentence *or from the table cell / paragraph the sentence si
+      ts in*. This is the parent's predicate with exactly one clause relaxed: the demand that the naming s
+      tring sit in the same sentence as the numeral. - **Predicted value: 9 sites — 4 bounded, 5 unbounded
+      .**
+
+    THE ADJUDICATION.  A unit that quotes the strike markers in order
+    to define them is not a withdrawn claim, and treating it as one is a
+    use/mention conflation in the shared reader every ticket of this arc
+    inherits.  I do NOT re-score the parent's numbers on this basis -- the
+    parent's numbers are correct for the rule as written, and mg-19ec's,
+    mg-d075's and MY OWN counts all use it.  What is wrong is that the exclusion
+    is silent: no transcript in this arc prints it.  This block prints it.
+
+==============================================================================
+SUMMARY a1_population: U6 9 dead unit(s) state the figure, 1 killed by a MENTION of the marker, 1 figure occurrence(s) removed silently
+SUMMARY a1_population: U1 living doc GRAIN S, pre-repair STRICT 8/4 unb, RELAXED 9/5 unb
+SUMMARY a1_population: U1 living doc GRAIN S, as it stands STRICT 10/0 unb, RELAXED 10/0 unb
+SUMMARY a1_population: U2 living doc GRAIN O, as it stands 11 occurrences
+SUMMARY a1_population: U3 parent deliverable 4 files state the figure, gate covers 2, 4 unbounded site(s) and 4 of them outside the gate
+SUMMARY a1_population: U4 wider universe 13 files, 51 sites GRAIN S, 24 unbounded, 60 occurrences GRAIN O
+SUMMARY a1_population: U5 my own deliverable 4 unbounded, NOT repaired -- a pre-registration is never reworded
+SUMMARY a1_population: failures 1
+==============================================================================

@@ -1,0 +1,104 @@
+==============================================================================
+A5  DO NOT DISTURB, AND THE PROVENANCE OF WHAT LANDED.
+==============================================================================
+
+==============================================================================
+  D1  mg-d075's SUITE, RE-RUN FROM THIS BRANCH.
+      Population: the 7 scripts run_all.sh scores.
+      Grain: one script's exit code.
+==============================================================================
+    parent directory dirty before the run : no
+    ==============================================================================
+    mg-d075 run_all -- exit codes scored against PREDICTIONS.md (committed first)
+    ==============================================================================
+      s1_census              exit 1  predicted 1  SUMMARY lines 9   ok
+      s2_reproduce           exit 0  predicted 0  SUMMARY lines 5   ok
+      s3_bound               exit 0  predicted 0  SUMMARY lines 5   ok
+      s4_hedge               exit 0  predicted 0  SUMMARY lines 5   ok
+      s5_own_criticism       exit 0  predicted 0  SUMMARY lines 2   ok
+      s6_class               exit 0  predicted 0  SUMMARY lines 4   ok
+      selftest_d075          exit 0  predicted 0  SUMMARY lines 2   ok
+    ==============================================================================
+    SUMMARY run_all: 7 scripts, 0 off prediction
+    ==============================================================================
+    run_all.sh exit                       : 0
+    scripts off their committed prediction: 0
+
+==============================================================================
+  D2  DID THE COMMITTED TRANSCRIPTS MOVE?  Population:
+      the files of code/branching_bound_d075.  Grain: one file.
+==============================================================================
+    files changed by the re-run           : 1
+      code/branching_bound_d075/out_s6_class.txt                 1	1	code/branching_bound_d075/out_s6_class.txt
+
+    THE DIFF, in full:
+      diff --git a/code/branching_bound_d075/out_s6_class.txt b/code/branching_bound_d075/out_s6_class.txt
+      index e10e534..4e1fffa 100644
+      --- a/code/branching_bound_d075/out_s6_class.txt
+      +++ b/code/branching_bound_d075/out_s6_class.txt
+      @@ -19,7 +19,7 @@ S6  THE INSTANCE OR THE CLASS?  Measured, and answered against
+       
+           mg-19ec   PRESENT   the 33-interval figure at 8 sites, bounded at 4
+                     path   : code/branching_audit_19ec
+      -              commits: 11 naming this ticket
+      +              commits: 13 naming this ticket
+       
+           located: 3 of 3
+
+    WHY IT MOVED, AND WHO MOVED IT.  The figure is a count of
+    commits whose subject names a ticket -- a population that
+    grows every time anybody writes that ticket id in a commit
+    message.  The population is `s6_class.py`'s own:
+    `git log --oneline --all` filtered on the ticket id --
+    so it spans EVERY REF IN THE REPOSITORY, not one branch.
+    Grain: one commit.
+      main               : 6
+      HEAD               : 7
+      --all (s6's own)   : 13
+      commits of THIS AUDIT inside that population : 1
+        f714b4c predictions: mg-aaf4's predictions for the INDEPENDENT AUDIT of the mg-19ec bounding rep
+    So this audit changed a figure in the parent's committed
+    transcript by naming the parent's parent in a commit
+    subject.  The transcript is not reproducible; the property
+    it measures is a function of the whole log.
+
+    RESTORING code/branching_bound_d075.
+    git status over it after restore      : CLEAN
+
+==============================================================================
+  D3  PROVENANCE.  Every commit-shaped token in mg-d075's
+      prose, resolved and matched by patch-id.
+      Population: the tokens found.  Grain: one commit.
+==============================================================================
+    commits of mg-d075 on main            : 3
+    commit-shaped tokens in its prose     : 2
+
+    token      resolves  ancestor-of-main  patch-id matches a commit on main
+    ec98300    yes       no                YES -> 424f6061f  REBASED, CONTENT INTACT
+    645b5a4    yes       yes               (on main directly)
+
+    A RECORDED SHA THAT IS NOT AN ANCESTOR OF main IS THE EXPECTED
+    STATE, not a discrepancy.  The refinery rebases before merging; ancestry is
+    a false negative by construction and patch-id is the check that survives it.
+    Tokens unaccounted for by BOTH tests : 0
+
+==============================================================================
+  D4  THE FOUR COMMITS THAT LANDED, WITH THEIR PATCH-IDS.
+==============================================================================
+    4203bc866  3d88bf036909465a
+      instrument+docs: mg-d075's counter-instrument and its account — the parent's 8/4/4 REPRODUCED ro
+    39423190a  06f364ffbbfdc1a6
+      repair: EIGHT IS NOT THE POPULATION EITHER — the 33-interval figure counted again at the grain m
+    424f6061f  9f8adc69e222366c
+      predictions: mg-d075's predictions for the bounding repair of the 33-interval figure, COMMITTED 
+
+    PRE-REGISTRATION COMMITS IN THIS POPULATION:
+      424f6061f -- never amended, reworded, squashed or rebased away
+    count : 1 of 3
+
+==============================================================================
+SUMMARY a5_donotdisturb: mg-d075's suite re-run from this branch, 1 script(s) off prediction
+SUMMARY a5_donotdisturb: D3 2 commit token(s) in the parent's prose, 0 unaccounted by ancestry AND patch-id
+SUMMARY a5_donotdisturb: D4 3 commit(s) of mg-d075 on main, 1 of them pre-registration commits
+SUMMARY a5_donotdisturb: failures 1
+==============================================================================
