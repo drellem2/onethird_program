@@ -269,5 +269,16 @@ claim does not depend on them**, which is why section 1 is renderer-free and com
 | `offsets_5f7c.py` | the offset defect, and an audit of the 50 observations already published with it |
 | `prose_5f7c.py` | C1 and C2 under restore discipline; C3 measured and the reason it is not constructed |
 | `run_all.sh` | all of it, with every exit code checked against `PREDICTIONS.md` |
-| `out_*.txt` | the committed transcripts of one full run |
+| `out_run_all.txt` | the committed transcript of one full run — **8 of 8 sections on their pre-registered exit codes** |
+| `out_polarity.txt`, `out_polarity_6fb424f.txt` | the suite on this tree (0 of 16 wrong) and on the anchor (6 of 16), so it is shown going red |
+| `out_offsets.txt`, `out_offsets_6fb424f.txt` | the construction at both revisions, and the 50-observation audit |
+| `out_visible_a74f.txt` | `visible_a74f.py` alone — 9 rows, 2 renderers, 90 section observations |
 | `out_run_all_a74f_PRE5f7c.txt` | mg-a74f's transcript as it stood before this repair |
+
+`prose_5f7c.py` has no transcript of its own: it refuses to run on a dirty tree, so it cannot
+be run again once the other transcripts are written. **Section 4 of `out_run_all.txt` is its
+transcript**, generated on the clean tree in the same run as everything else.
+
+**This repair's `predictions:` commit is `e3fb80e` on `polecat-z5f7c` with
+`git patch-id --stable` = `9af08bc5d909054ae89a4ad8565e7531d60e2602`.** The sha will differ on
+`main` after the refinery rebases; the patch-id will not, and it is the identity to check.
