@@ -279,6 +279,64 @@ not a defect.**
   at it and did not repair it; neither does this ticket, and it is the one
   site in the 19 that no pin can help, because `HEAD` moves on every commit to
   the repository rather than to a file.
+
+  > **CORRECTED BY mg-6e58 (from mg-0ba7's audit). The bullet above is left
+  > as written; this is what is wrong with it.**
+  >
+  > **The count.** `UNRESTRICTED` was counted over `lib330a._HASH_FORMATS`,
+  > which lists three spellings of `--format=%H` and none of `--format=%h`.
+  > Counted over the spellings `man git-log` documents, `UNRESTRICTED` at the
+  > tree of mg-6e58's branch is **19**, not one; at `b1c3467` — the tree that
+  > shipped this file — it is **14**. Under mg-330a's own classifier it is
+  > **2** at that later tree, so the sentence's `one` is not even stable
+  > under the narrow denominator. Derivation: one `ast` walk of every
+  > `*.py` under `code/`, mg-330a's kind rules unchanged, the format test
+  > replaced by a parse of the format string. See
+  > `code/hash_population_6e58/out_p3_unrestricted.txt`.
+  >
+  > The `19` is a measurement at a branch tip and will move as the repo
+  > grows; the `14` at `b1c3467` and the `2` are pinned to commits and will
+  > not. The live figure is whatever `p3_unrestricted.py` prints, not
+  > whatever this sentence says — which is why the sentence says where each
+  > number was taken.
+  >
+  > **The referent, which is the worse half.**
+  > `code/repair_69d1/p3_reason.py` contributes **zero** `git log` call sites
+  > — of any spelling — at all four commits measured (`fba5f63`, `b94cb1e`,
+  > `b1c3467`, and mg-6e58's branch). It anchors on `HEAD` through
+  > `git grep`, `git show` and `rev-parse`, none of which this census can
+  > see. So it is not *the one site in the 19*; it has never been a member
+  > of the population the 19 is counted over. The single `UNRESTRICTED` site
+  > under mg-330a's own classifier at this file's own tree is
+  > `code/repair_8d5e/lib8d5e.py:167`.
+  >
+  > **How the two got joined.** mg-330a's taxonomy *docstring* names a kind
+  > `HEAD`, and that prose row is where `p3_reason.py` is named.
+  > `classify_call` never returns `HEAD`; it returns `UNRESTRICTED`, which
+  > the prose never mentions. The bullet took a **name** from one taxonomy
+  > and a **count** from another — one number over two populations, which is
+  > this ticket's own F-2.
+  >
+  > **Not one of the 19 takes a single revision.** All 19 split the output
+  > into a list and search it, which is mg-330a's own `RANGE` reasoning: *a
+  > set, not an anchor*. The count went 1 → 19 and the number of unrestricted
+  > single anchors went 0 → 0. Saying *19 sites of the defect* would be the
+  > opposite error, and mg-2c77's A-2 already covers it.
+
+- **The `OLDEST` gate at `t1_population.py:430` cannot fire.** *(Added by
+  mg-6e58, from mg-0ba7's F-A.)* It tests `not [r for r in pinned if
+  r["kind"] == "OLDEST"]`, and `pinned` is `ANCHORS.tsv`, whose rows `t1`
+  draws from `_hist` — filtered to `HISTORY_KINDS`, which excludes `OLDEST`
+  by construction. The tested set is empty for every input the script can
+  produce. Constructed in a clone: delete `--reverse` from one `OLDEST` site
+  and `OLDEST` goes 12 → 11, the site re-enters as `INDEXED`, and the gate
+  still evaluates `True`. A gate keyed on the tree's own classification does
+  fire on that construction and stays silent on the unmutated control. This
+  script is **not** edited — its committed transcripts are evidence of a run
+  — so the working gate lives in
+  `code/hash_population_6e58/p4_gate.py` and its transcript is
+  `out_p4_gate.txt`.
+
 - **The document's three unreproducible figures are in a merged commit**
   (`fba5f63`) and in `docs/`. This ticket measures them and publishes the
   correction here; it does not rewrite another ticket's document.
