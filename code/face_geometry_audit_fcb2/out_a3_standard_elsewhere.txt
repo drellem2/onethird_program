@@ -1,0 +1,46 @@
+== mg-fcb2 A3: the gauge standard, asked of the rows kept OUTSIDE NEGATIVE CONTROL 4 ==
+
+A3.1 -- NEGATIVE CONTROL 2's M1-M5 and NEGATIVE CONTROL 3's parity row
+    The question asked of each: on the posets where the mutation BITES, is the object it corrupts a signed-permutation conjugate of the true one?  Where the mutation moves the LHS the question is asked of L^rel; where it moves the TARGET it is asked of the target, because that is the object that was corrupted.
+
+    M1 no sign twist         (LHS)  bites on  82  ->   82 GAUGE (100.0%),   0 NON-SIMILAR, 0 unclassified
+    M2 absolute Laplacian    (LHS)  bites on  82  ->    0 GAUGE (  0.0%),  82 NON-SIMILAR, 0 unclassified
+    M3 wrong twist           (LHS)  bites on  72  ->   72 GAUGE (100.0%),   0 NON-SIMILAR, 0 unclassified
+    M4 target scaled by 2    (RHS)  bites on  82  ->    0 GAUGE (  0.0%),  82 NON-SIMILAR, 0 unclassified
+    M5 one edge deleted      (RHS)  bites on  82  ->    0 GAUGE (  0.0%),  82 NON-SIMILAR, 0 unclassified
+    NC3 facet-parity signs   (LHS)  bites on  82  ->   82 GAUGE (100.0%),   0 NON-SIMILAR, 0 unclassified
+
+  [PASS] A3.1z no pair anywhere in this section exhausted the search budget or came out unclassified, so every count above is a proof either way
+    prediction P4a   AS PREDICTED -- M1 no sign twist is 100% GAUGE on its 82 biting posets (predicted 100% GAUGE)
+    prediction P4b   AS PREDICTED -- M3 wrong twist is 100% GAUGE on its 72 biting posets (predicted 100% GAUGE)
+    prediction P4c   AS PREDICTED -- M2 absolute Laplacian is 0% GAUGE on its 82 biting posets (predicted 0% GAUGE)
+    prediction P4d   AS PREDICTED -- M4 target scaled by 2 is 0% GAUGE on its 82 biting posets (predicted 0% GAUGE)
+    prediction P4e   AS PREDICTED -- M5 one edge deleted is 0% GAUGE on its 82 biting posets (predicted 0% GAUGE)
+    prediction P4f   AS PREDICTED -- NC3 facet-parity signs is 100% GAUGE on its 82 biting posets (predicted 100% GAUGE)
+
+A3.2 -- THE COUNT THE STANDARD DISQUALIFIES, AND WHOSE ROW SAYS SO
+    fully disqualified by the standard: M1 no sign twist, M3 wrong twist, NC3 facet-parity signs
+    NEGATIVE CONTROL 3's parity row discloses it in its own text: True
+    of the 2 printed M1/M3 rows, 0 mention the gauge question at all
+      [PASS] M1 no sign twist (L^rel compared to D-A directly) -- rejected on 82/82 posets where the mutation bites (4 vacuous, on |L(P)| in [1])
+      [PASS] M3 wrong twist (sgn replaced by -1 on one facet, +1 elsewhere) -- rejected on 72/72 posets where the mutation bites (14 vacuous, on |L(P)| in [
+  [REFUTED] A3.2a every row the standard disqualifies says so in its own text
+    prediction P4g   AS PREDICTED -- the standard disqualifies TWO rows nobody has asked (M1, M3) and their text says nothing about it -- 0 of 2 M1/M3 rows mention it
+    ... and the standard is not a rubber stamp: it REJECTS M2 absolute Laplacian, M4 target scaled by 2, M5 one edge deleted, on a spectral proof each time.  So the 3 it disqualifies are a decision about those rows and not a property of the detector.
+  [PASS] A3.2b the standard separates on this population -- it disqualifies 3 of the 6 rows asked and clears 3
+
+A3.3 -- ROW I4, THE ONE STILL SCORED AS A MEASUREMENT
+    mg-8a12 routed I1, I2 and I3's absorbability answers to a [CANNOT FAIL] row because their diagonal moves on every biting poset. Row I4 keeps `absorb == 0` inside its scored condition.  The ticket: a repair that relabels three and leaves a fourth unexamined has reproduced the defect at the surviving row.  So: on the posets where I4's diagonal SURVIVES -- the only ones where the predicate is not already forced by s_i^2 = 1 -- could it have answered `absorbable`?
+    the diagonal survives on 3 of row I4's biting posets:
+      |L(P)| = 6    12 off-diagonal MAGNITUDES differ, 0 entries differ in SIGN ALONE, predicate says absorbable = False
+      |L(P)| = 24   48 off-diagonal MAGNITUDES differ, 0 entries differ in SIGN ALONE, predicate says absorbable = False
+      |L(P)| = 120  240 off-diagonal MAGNITUDES differ, 0 entries differ in SIGN ALONE, predicate says absorbable = False
+    on every one of them at least one off-diagonal MAGNITUDE differs and nothing differs in sign alone, so |s_i s_j| = 1 rejects before any sign is read: the surviving clause is forced too.
+  [REFUTED] A3.3a row I4's `absorb == 0` is a DECISION on the posets where its diagonal survives -- i.e. the predicate could have said absorbable there
+    does the repair DISCLOSE that its surviving scored clause is forced?  True
+  [PASS] A3.3b ... and where it is forced, the repair says so in the artifact rather than leaving the fourth row unexamined -- this is the ticket's 'reproduced the defect at the surviving row', and it is NOT reproduced here
+
+
+a3_standard_elsewhere: 5 checks, 2 refuted; 7 predictions scored, 0 off prediction.
+  REFUTED: A3.2a every row the standard disqualifies says so in its own text
+  REFUTED: A3.3a row I4's `absorb == 0` is a DECISION on the posets where its diagonal survives -- i.e. the predicate could have said absorbable there

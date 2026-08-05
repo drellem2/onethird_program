@@ -1,0 +1,35 @@
+== mg-fcb2 A5: do not disturb what stands ==
+
+A5.1 -- L_parity = D . L_true . D with D = diag((-1)^j)
+    Built explicitly and compared entry by entry, on every poset -- not inferred from 'it is absorbable'.
+  [PASS] A5.1a L_parity equals D . L_true . D on 86/86 posets
+    prediction P6a   AS PREDICTED -- L_parity = D.L_true.D on 86/86 (predicted 86/86)
+
+A5.2 -- the absorbability predicate against brute force over all 2^m sign vectors
+    The population is the one the battery's own instrument row uses: every (poset, mutation) pair with |L(P)| <= 8, over the six incidence modes the section builds.  The brute force here is this audit's, written from the definition.
+  [PASS] A5.2a the union-find absorbability decision agrees with brute force on 306/306 (poset, mutation) pairs with |L(P)| <= 8
+    prediction P6b   AS PREDICTED -- 306/306 agreement (got 306/306)
+
+A5.3 -- facet_swap01, the candidate this section rejected
+    bites on 72/86, absorbable into a diagonal twist on 0/72, spectrum provably moves on 0/72, GAUGE on 72/72 (72 with a NON-identity permutation)
+  [PASS] A5.3a facet_swap01 bites on 72/86, is absorbable on 0/72, its spectrum provably moves on 0/72, and it is GAUGE on 72/72
+    prediction P6c   AS PREDICTED -- 72/86 biting, 0/72 absorbable, 0/72 spectrum moves, 72/72 gauge (got 72/86, 0/72, 0/72, 72/72)
+
+A5.4 -- NEGATIVE CONTROL 3 could not have caught any of the four
+    mg-5630's line-F experiment, re-run here on this battery's own mutations: with each incidence corruption in place, do NEGATIVE CONTROL 3's own scored lines still come out green?  If they do, NC3 would have passed on a corrupted build -- which is why NEGATIVE CONTROL 4 exists.
+    I1  line 2 all-+1-unchanged 86/86 (SILENT); line 3 parity bites on 82 (vs 82 uncorrupted) and is rejected on 82 of them -- scored condition n_rej == n_app: True  -> NC3 GREEN
+    I2  line 2 all-+1-unchanged 86/86 (SILENT); line 3 parity bites on 82 (vs 82 uncorrupted) and is rejected on 82 of them -- scored condition n_rej == n_app: True  -> NC3 GREEN
+    I3  line 2 all-+1-unchanged 86/86 (SILENT); line 3 parity bites on 72 (vs 82 uncorrupted) and is rejected on 72 of them -- scored condition n_rej == n_app: True  -> NC3 GREEN
+    I4  line 2 all-+1-unchanged 86/86 (SILENT); line 3 parity bites on 79 (vs 82 uncorrupted) and is rejected on 79 of them -- scored condition n_rej == n_app: True  -> NC3 GREEN
+  [PASS] A5.4a with each of I1-I4 in place NEGATIVE CONTROL 3's lines stay green, so NC3 could not have caught any of the four
+    prediction P6d   AS PREDICTED -- all four NC3 rows stay green, line 2 SILENT on 86/86, bite counts against 82 uncorrupted (predicted 82)
+
+A5.5 -- the probe's own runner, unmodified by this audit
+    `code/face_geometry/run_all.sh` exit 0
+    working tree under code/face_geometry after the run: clean -- it regenerated its own artifacts byte-identically
+  [PASS] A5.5a face_geometry/run_all.sh still exits 0 on this worktree
+  [PASS] A5.5b ... and regenerating its artifacts leaves the tree clean, so nothing this audit did moved the battery's own output
+    prediction P6e   AS PREDICTED -- run_all.sh exits 0 (got 0)
+
+
+a5_standing: 6 checks, 0 refuted; 5 predictions scored, 0 off prediction.

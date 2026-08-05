@@ -1,0 +1,52 @@
+== mg-fcb2 A6: the structural-tautology scanner, demonstrated at three trees ==
+
+A6.1 -- HEAD (the merged mg-e35b repair, defect present)
+    34 `X/Y` format sites examined; 1 flagged
+      code/face_geometry/controls.py:1927  both arguments are `N`
+        ...flagged and did not edit. The named load-bearing site is corrupted on %d/%d posets, t...
+  [PASS] A6.1a the control fires at HEAD, on exactly one site
+    prediction P7a   AS PREDICTED -- 1 finding at HEAD, the coverage line's `(N, N)` (got 1: ['N'])
+
+A6.2 -- 5f542f0^ (the commit BEFORE the repair)
+    28 `X/Y` format sites examined; 0 flagged
+    the coverage sentence exists at that commit: False
+  [PASS] A6.2a the control is SILENT before the repair, so it is not a pre-existing complaint being re-pointed at a new commit
+  [PASS] A6.2b ... and it is silent because the LINE IS ABSENT there, not because the scanner failed to parse (28 sites examined)
+    prediction P7b   AS PREDICTED -- 0 findings at 5f542f0^, the coverage line absent there (got 0 findings, line present: False)
+
+A6.3 -- HEAD with the count REPAIRED (replaced by a measured one)
+    34 `X/Y` format sites examined; 0 flagged
+  [PASS] A6.3a the control is silent once the count is measured
+    prediction P7c   AS PREDICTED -- 0 findings against the patched copy (got 0)
+    the patch is run, on two populations, to show the repaired figure is one that moves:
+      n>=2      : 86/86
+      n>=1      : 86/87
+  [PASS] A6.3b the repaired figure MOVES between the two populations (86/86 then 86/87), where HEAD's prints 86/86 and 87/87 -- so the control's remedy produces a count that is evidence
+
+A6.4 -- THE POPULATION THIS CONTROL WAS RUN OVER (no bare totals)
+    522 Python files under code/, 275 `X/Y` format sites, 2 flagged
+      code/face_geometry_audit_fcf1/audit_nc4.py:41  both arguments are `N`
+        ...claim (1) on the uncorrupted rebuild: holds on %d/%d (ideal-la...
+      code/face_geometry/controls.py:1927  both arguments are `N`
+        ...flagged and did not edit. The named load-bearing site is corrupted on %d/%d posets, t...
+  [PASS] A6.4a the control is SELECTIVE: it flags a small minority of the `X/Y` sites it examines (2 of 275), so it is not a pattern that fires everywhere and calls it a finding
+  [PASS] A6.4b every site it flags is EXAMINED in this report rather than left as a count (2 flagged, 2 examined below)
+
+A6.5 -- THE SECOND SITE, UNPREDICTED: mg-fcf1's OWN audit instrument
+    code/face_geometry_audit_fcf1/audit_nc4.py:41
+        33 |     print("population: all posets on 2..%d elements up to isomorphism, N = %d"
+        34 |           % (nmax, N))
+        35 |     base = {}
+        36 |     for P in ps:
+        37 |         b = R.build(P)
+        38 |         t = R.target_DA(P)
+        39 |         assert R.eq(b["L"], t), "claim (1) failed on the uncorrupted rebuild"
+        40 |         base[id(P)] = (b, t)
+        41 |     print("claim (1) on the uncorrupted rebuild: holds on %d/%d "
+        42 |           "(ideal-lattice route, le_to_facet not used)" % (N, N))
+    WHAT THIS IS.  mg-fcf1 is the audit whose F3 finding was 'two printed measurements were tautologies', and mg-e35b is the repair that landed it.  mg-fcf1's own instrument prints `holds on %d/%d` with N supplied twice.  It cannot come out otherwise for a stronger reason than the one it found: the loop above it ASSERTS the equality on every poset, so a failure crashes the script rather than lowering the printed count.  There is no input on which that line prints anything but N/N.
+    THIS IS NOT SCORED AS A DEFECT OF mg-e35b.  It is in a different file, by a different item, and it is reported because the sweep found it and a control that hides its own second finding is worth nothing. PREDICTIONS.md does not mention it.
+  [PASS] A6.5a the second site is reported here rather than dropped for being outside this audit's target
+
+
+a6_control_at_commit: 8 checks, 0 refuted; 3 predictions scored, 0 off prediction.
