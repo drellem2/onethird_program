@@ -330,7 +330,15 @@ def main():
     show(mkw, OUT, "NUMERIC scope in sentence")
     if mkw:
         fails += 1
-    print("""    I DO NOT REPAIR THE ONES IN `PREDICTIONS.md`.  It is a
+    print("""    READ THIS NUMBER WITH ITS PREDICATE.  MY_FAULT is deliberately
+    wider than the parent's -- it admits `does not`, `did not`, `could have`,
+    `silently`, `nobody` -- and MY_TARGET admits `the repair` and `the arc`.  Over
+    my own prose it OVER-COLLECTS: rows whose fault marker is an ordinary negation
+    rather than a charge are in the count above.  I do not trim the predicate after
+    seeing the result, and the count is therefore NOT comparable with the parent's
+    0 of 10 under a narrower one.  What is comparable is the direction.
+
+    I DO NOT REPAIR THE ONES IN `PREDICTIONS.md`.  It is a
     pre-registration commit and this lineage does not reword those.  Ones in my
     README are mine to fix and are fixed where fixing them does not turn a
     finding into a slogan; the residue is printed above rather than deleted.""",

@@ -254,6 +254,29 @@ def main():
     print("    the parent's published corpus (D) : 36 sites in 7 files of docs/",
           file=OUT)
     print(file=OUT)
+    print("    THE 24 UNBOUNDED SITES, BY WHAT COULD BE DONE ABOUT THEM.", file=OUT)
+    print("    Population: the unbounded sites of U4.  Grain: one site.", file=OUT)
+    cls_docs = sum(r[3] for r in rows if r[0].startswith("docs/"))
+    cls_pre = sum(r[3] for r in rows if not r[0].startswith("docs/")
+                  and os.path.basename(r[0]) == "PREDICTIONS.md")
+    cls_free = tot_u - cls_docs - cls_pre
+    print("      in docs/ -- dated audit records, editing destroys the trail : %d"
+          % cls_docs, file=OUT)
+    print("      outside docs/, in a PRE-REGISTRATION file -- never reworded : %d"
+          % cls_pre, file=OUT)
+    print("      outside docs/, in an ordinary instrument README -- REPAIRABLE: %d"
+          % cls_free, file=OUT)
+    for p, n, b, u, o in rows:
+        if u and not p.startswith("docs/") and \
+                os.path.basename(p) != "PREDICTIONS.md":
+            print("        %s  (%d unbounded)" % (p, u), file=OUT)
+    print("      So a repo-wide gate over this figure would be permanently red", file=OUT)
+    print("      on %d of %d sites for reasons that are correct, and would find"
+          % (cls_docs + cls_pre, tot_u), file=OUT)
+    print("      %d it could actually close.  What is missing is not a gate; it"
+          % cls_free, file=OUT)
+    print("      is a DECLARED EXEMPTION.", file=OUT)
+    print(file=OUT)
     print("    THE FIGURE IN WORDS.  `thirty-three` occurrences, all tracked", file=OUT)
     print("    markdown: %d" % sum(len(L.FIG_WORD.findall(open(
         os.path.join(L.ROOT, p), encoding="utf-8").read())) for p in tracked

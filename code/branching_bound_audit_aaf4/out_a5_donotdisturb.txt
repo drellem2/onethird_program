@@ -33,7 +33,7 @@ A5  DO NOT DISTURB, AND THE PROVENANCE OF WHAT LANDED.
 
     THE DIFF, in full:
       diff --git a/code/branching_bound_d075/out_s6_class.txt b/code/branching_bound_d075/out_s6_class.txt
-      index e10e534..4e1fffa 100644
+      index e10e534..c5ad3ef 100644
       --- a/code/branching_bound_d075/out_s6_class.txt
       +++ b/code/branching_bound_d075/out_s6_class.txt
       @@ -19,7 +19,7 @@ S6  THE INSTANCE OR THE CLASS?  Measured, and answered against
@@ -41,7 +41,7 @@ A5  DO NOT DISTURB, AND THE PROVENANCE OF WHAT LANDED.
            mg-19ec   PRESENT   the 33-interval figure at 8 sites, bounded at 4
                      path   : code/branching_audit_19ec
       -              commits: 11 naming this ticket
-      +              commits: 13 naming this ticket
+      +              commits: 14 naming this ticket
        
            located: 3 of 3
 
@@ -53,9 +53,10 @@ A5  DO NOT DISTURB, AND THE PROVENANCE OF WHAT LANDED.
     so it spans EVERY REF IN THE REPOSITORY, not one branch.
     Grain: one commit.
       main               : 6
-      HEAD               : 7
-      --all (s6's own)   : 13
-      commits of THIS AUDIT inside that population : 1
+      HEAD               : 8
+      --all (s6's own)   : 14
+      commits of THIS AUDIT inside that population : 2
+        557b78b audit+instrument: mg-aaf4's INDEPENDENT AUDIT of the mg-19ec bounding repair as mg-d075 
         f714b4c predictions: mg-aaf4's predictions for the INDEPENDENT AUDIT of the mg-19ec bounding rep
     So this audit changed a figure in the parent's committed
     transcript by naming the parent's parent in a commit
