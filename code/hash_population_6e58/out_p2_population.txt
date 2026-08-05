@@ -1,0 +1,299 @@
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+==========================================================================
+p2 -- THE DENOMINATOR, BEFORE AND AFTER
+==========================================================================
+
+   tree            : the worktree of branch polecat-z6e58
+   file population : every `*.py` under `code/`, walked with `ast`
+   ast.Call nodes  : 88486
+   unparsed files  : 0
+
+-- (i) THE CONTROL: MY CLASSIFIER IS mg-330a's UNDER POP-A
+
+   `classify_call` here was written from mg-330a's DOCSTRING, not
+   imported.  If the two disagree under POP-A, then a difference in
+   any count below could be a re-taxonomy rather than a denominator,
+   and this whole script would be measuring the wrong thing.
+
+   nodes compared               : 88486
+   kind disagreements under POP-A: 0
+
+-- (ii) THE FOUR POPULATIONS
+
+   POP-A  mg-330a's `_HASH_FORMATS`, verbatim: 3 literals, exact match
+   POP-B  POP-A + the literal `--format=%h` -- the one-line repair, measured to price it
+   POP-C  doc-derived: any `%H`/`%h` placeholder in any `--format=`/`--pretty=` value, any built-in format documented to print a commit identifier, and `--oneline`
+   POP-D  POP-C + `git log` with NO format argument, whose documented default `medium` prints `commit <hash>`
+
+   figure                  POP-A    POP-B    POP-C    POP-D
+                        (mg-330a)    (+%h)    (doc)  (+dflt)
+   ALL                        45       60       86       92
+   HISTORY                    23       31       55       61
+   NEWEST                      9       10       11       11
+   NEWEST-norestrict           0        0        0        0
+   INDEXED                    12       15       25       25
+   UNRESTRICTED                2        6       19       25
+   OLDEST                     12       12       12       12
+   PICKAXE                     6       11       12       12
+   RANGE                       4        6        7        7
+
+   GRAIN: one `ast.Call` node = one site.  POPULATION: every `*.py`
+   under `code/` at this tree.  These are NOT mg-330a's published
+   figures and are not comparable to them -- see (vi).
+
+-- (iii) POP-B MINUS POP-A: WHAT THE CAPITAL LETTER HID
+
+   sites recovered by adding the ONE literal `--format=%h` : 15
+
+   site                                                       kind
+   code/branching_audit_a218/c5_record.py:129                 RANGE
+   code/face_geometry_audit_6653/verify_claims.py:107         UNRESTRICTED
+   code/face_geometry_audit_6653/verify_claims.py:126         INDEXED
+   code/face_geometry_audit_6653/verify_claims.py:128         UNRESTRICTED
+   code/face_geometry_audit_e720/verify_landing_claims.py:372 RANGE
+   code/face_geometry_audit_e720/verify_landing_claims.py:378 PICKAXE
+   code/face_geometry_audit_e720/verify_landing_claims.py:459 UNRESTRICTED
+   code/face_geometry_audit_e720/verify_landing_claims.py:461 UNRESTRICTED
+   code/face_geometry_audit_e720/verify_landing_claims.py:86  PICKAXE
+   code/face_geometry_audit_e720/verify_landing_claims.py:89  PICKAXE
+   code/hodge_leverage_audit_8a5c/audit_repair_8e30.py:556    PICKAXE
+   code/hodge_leverage_audit_8a5c/audit_repair_8e30.py:563    INDEXED
+   code/runner_exit_repair_7522/s4_unpin.py:199               NEWEST
+   code/state_control_audit_2216/claims_audit.py:198          PICKAXE
+   code/state_landing_audit_bd41/verify_landing_figures.py:197 INDEXED
+
+   of those, in A-1's DEFECT CLASSES (NEWEST/INDEXED)       : 4
+   `git log -1 --format=%h -- <path>` IS `NEWEST`.  It is A-1's
+   defect spelled with a lower-case letter, and the classifier that
+   named A-1 cannot see it.
+
+-- (iv) POP-C MINUS POP-B: WHY `+%h` IS NOT THE REPAIR
+
+   sites STILL hidden after the one-line `+%h` repair      : 26
+
+   OF THOSE, HOW MANY EMIT A **FULL** `%H` HASH            : 16
+
+   THIS IS THE FINDING.  Those sites contain `%H` -- the very
+   placeholder `_HASH_FORMATS` is built out of -- and are invisible
+   to it anyway, because `f in strs` is EQUALITY and the format
+   string is longer than the literal.  `--format=%H %s` is a full
+   commit hash with a subject stapled to it and there is no lower
+   case anywhere in it.
+
+   SO THE OMISSION WAS NEVER ONLY ABOUT CASE.  A repair that adds a
+   fourth literal to the tuple fixes THIS INSTANCE of a class with
+   at least two members, and the arc has now done that eight times.
+
+   site                                                       kind   how it emits a commit
+   code/audit_330a/s4_term.py:337                             RANGE  option: --oneline [ABBREV]; placeholder: %h [ABBREV]
+   code/audit_c067/c1_rebase.py:47                            UNRESTRICTED placeholder: %H [FULL]
+   code/audit_c067/c1_rebase.py:48                            UNRESTRICTED placeholder: %H [FULL]
+   code/branching_audit_a218/c5_record.py:126                 INDEXED placeholder: %h [ABBREV]
+   code/branching_bound_audit_aaf4/a1_population.py:81        INDEXED placeholder: %H [FULL]
+   code/branching_bound_audit_aaf4/a2_reproduce.py:70         INDEXED placeholder: %H [FULL]
+   code/branching_bound_audit_aaf4/a3_criticism.py:145        INDEXED placeholder: %H [FULL]
+   code/branching_bound_audit_aaf4/a5_donotdisturb.py:111     UNRESTRICTED option: --oneline [ABBREV]
+   code/branching_bound_audit_aaf4/a5_donotdisturb.py:113     UNRESTRICTED option: --oneline [ABBREV]
+   code/branching_bound_audit_aaf4/a5_donotdisturb.py:116     UNRESTRICTED option: --oneline [ABBREV]
+   code/branching_bound_audit_aaf4/a5_donotdisturb.py:158     UNRESTRICTED placeholder: %H [FULL]
+   code/branching_bound_d075/s1_census.py:60                  INDEXED placeholder: %H [FULL]
+   code/branching_bound_d075/s2_reproduce.py:64               INDEXED placeholder: %H [FULL]
+   code/branching_bound_d075/s3_bound.py:59                   INDEXED placeholder: %H [FULL]
+   code/branching_bound_d075/s4_hedge.py:86                   INDEXED placeholder: %H [FULL]
+   code/branching_bound_d075/s5_own_criticism.py:80           INDEXED placeholder: %H [FULL]
+   code/branching_bound_d075/s6_class.py:75                   UNRESTRICTED option: --oneline [ABBREV]
+   code/face_geometry_landing_7d5a/verify_landing.py:98       PICKAXE option: --oneline [ABBREV]
+   code/hodge_leverage_audit_835f/audit_a318_repair.py:580    INDEXED option: --oneline [ABBREV]
+   code/hodge_leverage_audit_97fb/audit_97fb.py:1508          UNRESTRICTED placeholder: %H [FULL]
+   code/repair_b2af/lib_b2af.py:274                           UNRESTRICTED placeholder: %H [FULL]
+   code/runner_exit_audit_05eb/j2_retro.py:291                NEWEST placeholder: %h [ABBREV]
+   code/species_bound_audit_6ef4/t3_census.py:225             UNRESTRICTED placeholder: %H [FULL]
+   code/species_bound_repair_5040/kern5040.py:273             UNRESTRICTED placeholder: %H [FULL]
+   code/species_extent_audit_6cb9/a2_crosssection.py:242      UNRESTRICTED placeholder: %h [ABBREV]
+   code/state_visibility_audit_65eb/anchor65eb.py:116         UNRESTRICTED placeholder: %H [FULL]
+
+   EVERY SPELLING PRESENT AT THIS TREE, and whether mg-330a's tuple
+   matches it:
+
+   spelling                         sites grain   why                    in _HASH_FORMATS?
+   --format=%H                         45 FULL    placeholder: %H        YES
+   --format=%H\t%s                      8 FULL    placeholder: %H        no
+   --format=%H %s                       4 FULL    placeholder: %H        no
+   --format=%H%x1e%B%x1f                1 FULL    placeholder: %H        no
+   --format=%H%x1f%s                    2 FULL    placeholder: %H        no
+   --format=%H%x1f%s%x1f%B%x1e          1 FULL    placeholder: %H        no
+   --format=%h                         15 ABBREV  placeholder: %h        no
+   --format=%h %ad %s                   2 ABBREV  placeholder: %h        no
+   --format=%h %s                       2 ABBREV  placeholder: %h        no
+   --oneline                            7 ABBREV  option: --oneline      no
+
+   The three `YES` rows are the whole of mg-330a's denominator.
+   `--format=format:%H` is in the tuple and is at NO site here, so
+   the tuple's effective width at this tree is TWO spellings.
+
+-- (v) POP-D MINUS POP-C: THE UNFORMATTED `git log`
+
+   `git log` calls with NO format argument at all           : 6
+      code/audit_330a/lib330a.py:252                             UNRESTRICTED if not any(s == "log" or s.endswith("log
+      code/census_repair_f3ff/s1_rows.py:31                      UNRESTRICTED L.banner("mg-f3ff s1 -- the four rows re
+      code/hash_population_6e58/lib6e58.py:363                   UNRESTRICTED if not any(s == "log" or s.endswith("log
+      code/hash_population_6e58/selftest_6e58.py:312             UNRESTRICTED if not any(s == "log" or s.endswith("log
+      code/repair_b2af/lib_b2af.py:424                           UNRESTRICTED and (a.value == "log" or a.value.endswit
+      code/runner_exit_c2b3/k4_control.py:92                     UNRESTRICTED log = os.path.join(tmp, "reach.log")
+
+   git's documented default is `medium` and it prints
+   `commit <hash>`, so an unformatted `git log` IS revision-producing
+   by the same rule that admits every row above.
+
+   NOW ADJUDICATE THEM BY HAND, because a count nobody looked at is
+   how this arc got here.
+
+   THE ADJUDICATION IS KEYED ON THE SOURCE TEXT, NOT ON `file:line`.
+   Its first form keyed on `file:line`, and the line for my own
+   `lib6e58.py` moved from 353 to 363 when I edited the file above
+   it -- so the verdict for a site I had already read came back
+   `NOT ADJUDICATED` because an unrelated edit shifted a number.
+   That is A-1, mg-2c77's original defect, committed inside its own
+   arc's repair by me, and the fix is the one this lineage keeps
+   arriving at: key on a PROPERTY, not on a position.
+
+      code/audit_330a/lib330a.py:252                             NOT A GIT CALL.  It is `s.endswith("log")` -- the string 'log' is an argument to endswith, inside mg-330a's OWN detector.
+      code/census_repair_f3ff/s1_rows.py:31                      NOT A GIT CALL.  A banner string that ends in 'log'.
+      code/hash_population_6e58/lib6e58.py:363                   NOT A GIT CALL.  MY OWN detector, matching itself.  Disclosed rather than excluded.
+      code/hash_population_6e58/selftest_6e58.py:312             NOT A GIT CALL.  My selftest's residual check, likewise.
+      code/repair_b2af/lib_b2af.py:424                           NOT A GIT CALL.  mg-b2af's copy of the same detector.
+      code/runner_exit_c2b3/k4_control.py:92                     NOT A GIT CALL.  `os.path.join(tmp, "reach.log")` -- a FILENAME.
+
+   ALL 6 ARE FALSE POSITIVES, and none is a `git log` call.
+   NOT ADJUDICATED: 0
+   So the honest POP-D increment at this tree is ZERO, and the number
+   printed above is a property of the DETECTOR, not of the tree.
+
+   THE DETECTOR IS mg-330a's, AND THIS IS ITS OTHER HALF.  The `log`
+   test is `s == "log" or s.endswith("log")` -- it matches a
+   filename, a banner, and the word inside its own source.  It is
+   sound only because the FORMAT half throws those away first.  The
+   two halves of that rule have very different error rates, and only
+   the format half was ever audited.  I am not repairing the `log`
+   half: it is out of this ticket's scope, and every count above
+   holds it fixed so the delta is attributable to the denominator.
+   Recorded here so it is not found for a tenth time.
+
+
+-- (vi) THE CONSUMERS.  WHICH PUBLISHED FIGURES INHERIT THE OMISSION
+
+   Not `which constant is wrong` -- WHICH NUMBERS CHANGE.  Every
+   figure below was computed over `_HASH_FORMATS`, by
+   `lib330a.sweep_anchor_calls` directly or through
+   `lib_b2af.census`, which imports it.
+
+   consumer                                       what it states / what happens to it
+   code/audit_330a/lib330a.py:218                 the constant itself
+                                                    states: 3 literals
+                                                    here  : unchanged by this ticket -- see README
+   code/audit_330a/s1_anchors.py                  the census that produced mg-330a's table
+                                                    states: 37 sites
+                                                    here  : re-derived below
+   code/audit_330a/out_s1_anchors.txt             its committed transcript
+                                                    states: 37/16/12
+                                                    here  : evidence of a run; left as it is
+   code/audit_330a/README.md                      the audit's own table
+                                                    states: 36/16/13
+                                                    here  : annotated, not rewritten
+   docs/audit-mg-330a-the-anchor-and-the-term.md  **MERGED DOCUMENT**
+                                                    states: 36 sites; 16 across 13 dirs
+                                                    here  : MERGED -- named, not rewritten
+   code/repair_b2af/lib_b2af.py:295               `census()` imports the sweep
+                                                    states: all ten figures
+                                                    here  : re-derived below
+   code/repair_b2af/t1_population.py              the four-commit reproduction
+                                                    states: the PUBLISHED table
+                                                    here  : its rows inherit the denominator
+   code/repair_b2af/ANCHORS.tsv                   the pin-and-compare file
+                                                    states: 4 rows
+                                                    here  : drawn from the narrow population
+   code/repair_b2af/README.md                     the census table + STILL-OPEN list
+                                                    states: 36/7/8/1/10/6/4/16/13/16
+                                                    here  : STILL-OPEN corrected by p3
+   code/repair_b2af/selftest_b2af.py:272          the ALL == sum(kinds) identity
+                                                    states: structural
+                                                    here  : still true; it is a sum, not a denominator
+   code/repair_b2af/PREDICTIONS.md                37 pre-registered rows
+                                                    states: several over the census
+                                                    here  : pre-registration; never reworded
+
+   ELEVEN consumers, and ONE of them is a MERGED document in
+   `docs/`.  That answers the ticket's question directly: yes, a
+   figure computed over the narrow denominator is asserted in a
+   merged commit.
+
+-- (vii) BEFORE AND AFTER, FOR THE FIGURES THIS LINEAGE PUBLISHES
+
+   Column 1 is what somebody published and AT WHICH TREE.  Columns 2
+   and 3 are BOTH measured here, at my tree, because a before/after
+   across two trees measures the trees.
+
+   figure             published (tree)              POP-A    POP-C    delta
+   ALL call sites     36 doc / 37 transcript (mg-330a)       45       86      +41
+   NEWEST             7 (mg-330a)                       9       11       +2
+   INDEXED            8 (mg-330a)                      12       25      +13
+   UNRESTRICTED       1 (mg-330a)                       2       19      +17
+   OLDEST             10 doc / 11 transcript           12       12       +0
+   PICKAXE            6 (mg-330a)                       6       12       +6
+   RANGE              4 (mg-330a)                       4        7       +3
+   HISTORY-DERIVED    16 (mg-330a)                     23       55      +32
+
+   directories        13 doc / 12 transcript           15       29      +14
+
+   POP-A  including my own directory :  45   excluding it :  45
+   POP-C  including my own directory :  86   excluding it :  86
+   This instrument is INSIDE the population it counts.  Both numbers
+   are printed so that neither reading is the one you have to take.
+   They are equal: my own directory contributes ZERO sites to POP-A
+   and POP-C -- and exactly ONE false positive to POP-D, adjudicated
+   in (v).  I am not outside my own population; I am empty in it.
+
+   NONE of the published figures in column 1 was measured at this
+   tree, and mg-b2af showed that mg-330a's ten reproduce exactly at
+   its PRE-REBASE twin and at neither commit on `main`.  So the
+   right reading of this table is the DELTA column: that is what the
+   denominator was worth, held at one tree.
+
+-- SCORING PREDICTIONS.md
+
+   D-1    predicted 45                             measured 45                 HIT
+   D-2    predicted 15                             measured 15                 HIT
+   P2-a   predicted 60                             measured 60                 HIT
+   P2-b   predicted 87                             measured 86                 *** MISS  <- kept as written
+   P2-c   predicted POP-C - POP-B >= 20            measured 26                 HIT
+   P2-c*  predicted >= 15 of the increment are FULL-hash sites measured 16                 HIT
+   P2-d   predicted 4                              measured 6                  *** MISS  <- kept as written
+   P2-e   predicted True                           measured False              *** MISS  <- kept as written
+   P2-f   predicted True                           measured True               HIT
+
+   THE MISSES, KEPT AS WRITTEN AND EXPLAINED RATHER THAN CORRECTED:
+
+   P2-b  I predicted 87 by adding up the occurrence counts of each
+         spelling.  Occurrences are not sites: 87 spelling
+         occurrences sit in 86 calls, because one call can carry two
+         spellings.  I predicted a sum over the WRONG GRAIN -- in a
+         ticket about naming the grain.  Off by one.
+   P2-d  I predicted 4 and there are 6, and ALL of them are FALSE
+         POSITIVES of mg-330a's `log` half (see (v)).  The prediction
+         and the measurement are both about a number that should be
+         zero.  The figure is not quoted anywhere in this ticket's
+         prose and is printed from the run instead, because it MOVED
+         WHILE I WAS WRITING: two of the rows are my own scripts,
+         which entered the population as I added them.  A sentence
+         with the number in it would have been stale by the commit
+         that shipped it.
+   P2-e  `every kind except RANGE grows` is false in BOTH directions:
+         RANGE grew (+3) and OLDEST did not (+0).  I had assumed a
+         range never carries a short format and that OLDEST would
+         pick up a `--reverse --format=%h`.  Neither held.
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: this script's own classification, checked against mg-330a's over the same ast.Call nodes
+FINDINGS: 1, population: `git log` call sites in `code/**/*.py` at this tree
+   FINDING: THE DENOMINATOR IS WRONG BY 41 SITES AT THIS TREE: mg-330a's `_HASH_FORMATS` admits 45 `git log` call sites and git's own documented spellings admit 86.  15 of the hidden sites are in the defect classes NEWEST/INDEXED, and 16 of them emit a FULL `%H` hash -- so the omission is not only the lower-case `%h`.
+TOTAL BAD: 1

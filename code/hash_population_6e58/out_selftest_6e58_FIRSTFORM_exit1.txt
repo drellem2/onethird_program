@@ -1,0 +1,97 @@
+<unknown>:104: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+==========================================================================
+selftest_6e58 -- THE RULES, ON CONSTRUCTED LINES
+==========================================================================
+
+-- (a) THE POSITIVE CONTROL -- BOTH CASES, SIDE BY SIDE
+
+   the two constructed lines:
+      upper  git("log", "-1", "--format=%H", "--", path)
+      lower  git("log", "-1", "--format=%h", "--", path)
+
+   ok   the `%H` line yields exactly one emitter, grain FULL
+   ok   the `%h` line yields exactly one emitter, grain ABBREV
+   ok   the two lines are told apart -- the detector is not case-blind
+   ok   a CASE-BLIND search matches BOTH lines -- it would report `found them all` while being unable to say which is which
+   ok   this instrument matches both lines too, but by GRAIN and not by coincidence: FULL vs ABBREV above
+   ok   mg-330a's `_HASH_FORMATS` SEES the upper-case line
+   ok   mg-330a's `_HASH_FORMATS` DOES NOT SEE the lower-case line -- the defect, reproduced on a constructed line rather than recalled from a tree
+
+-- (b) THE EQUIVALENCE THAT MAKES IT A DEFECT AND NOT A COUNT
+
+   ok   `git log -1 --format=%H -- <path>` is NEWEST
+   ok   `git log -1 --format=%h -- <path>` is NEWEST TOO -- A-1's defect spelled with a lower-case letter
+   ok   the two spellings classify IDENTICALLY, so the difference between them is the DENOMINATOR and nothing else
+   ok   and under mg-330a's population the same line classifies as nothing at all -- it is not counted as safe, it is not counted
+
+-- (c) THE FORMAT-STRING RULES, EACH ON ITS OWN CONSTRUCTED LINE
+
+   ok   a COMPOSITE full-hash format -- `%H` with a subject stapled to it  [FULL x1]
+   ok   the same with a tab separator  [FULL x1]
+   ok   the same with a hex byte separator  [FULL x1]
+   ok   a composite ABBREV format  [ABBREV x1]
+   ok   the `format:` prefix, which IS in mg-330a's tuple  [FULL x1]
+   ok   the `tformat:` prefix, which is in nobody's tuple  [ABBREV x1]
+   ok   `--pretty=` as well as `--format=`  [FULL x1]
+   ok   `--oneline`, documented as `--pretty=oneline --abbrev-commit`  [ABBREV x1]
+   ok   `--pretty=oneline` WITHOUT `--abbrev-commit` prints the full hash  [FULL x1]
+   ok   and `--abbrev-commit` demotes it, in the SAME call  [ABBREV x1]
+   ok   `--pretty=reference`, documented as `<abbrev-hash> (<title>, <date>)`  [ABBREV x1]
+   ok   `%%h` is a LITERAL PERCENT followed by `h` -- git's own escape rule, and NOT an abbreviated hash  [None x0]
+   ok   `%x68` is the hex byte for `h`, not a placeholder  [None x0]
+   ok   `%T` is the TREE hash -- a hash, and not a commit  [None x0]
+   ok   `%p` is the abbreviated PARENT hashes -- excluded for the same reason  [None x0]
+   ok   a subject-only format produces no revision at all  [None x0]
+   ok   `git show` is not `git log`; the subcommand half of the rule is mg-330a's and is unchanged here
+
+-- (d) THE POPULATIONS ARE NESTED, ON CONSTRUCTED LINES
+
+   ok   %H: in all four  [1, 1, 1, 1]
+   ok   and the four populations are NESTED for it
+   ok   %h: hidden from POP-A only  [0, 1, 1, 1]
+   ok   and the four populations are NESTED for it
+   ok   a COMPOSITE %H: hidden from POP-A AND from the one-line `+%h` repair  [0, 0, 1, 1]
+   ok   and the four populations are NESTED for it
+   ok   --oneline: the same  [0, 0, 1, 1]
+   ok   and the four populations are NESTED for it
+   ok   no format at all: only POP-D, whose increment p2 adjudicates to zero  [0, 0, 0, 1]
+   ok   and the four populations are NESTED for it
+
+-- (e) MY CLASSIFIER IS mg-330a's, ON CONSTRUCTED LINES
+
+   ok   same kind as mg-330a for: git("log", "-1", "--format=%H", "--", p)
+   ok   same kind as mg-330a for: git("log", "--format=%H", "--", p)
+   ok   same kind as mg-330a for: git("log", "--format=%H", "--reverse", "--", p)
+   ok   same kind as mg-330a for: git("log", "-S", "marker", "--format=%H", "--", p)
+   ok   same kind as mg-330a for: git("log", "-G", "regex", "--format=%H", "--", p)
+   ok   same kind as mg-330a for: git("log", "--format=%H", "a..b")
+   ok   same kind as mg-330a for: git("log", "--format=%H")
+   ok   same kind as mg-330a for: git("log", "-1", "--format=%H")
+
+-- (f) THE CLOSURE -- WHAT MAKES THIS FILE FAIL ON A FIFTH SPELLING
+
+   ok   every commit-hash placeholder git DOCUMENTS is handled, and no more: documented ['%H', '%h'], handled ['%H', '%h']
+   ok   and each is handled at the GRAIN git documents for it
+   ok   every built-in format git documents as printing a commit identifier is handled
+   ok   and every handled format the extractor cannot find is DECLARED in EXTRACTOR_BLIND with the sentence that exempts it: ['mboxrd', 'raw']
+
+   THE DRILL.  A fifth spelling, injected into a CONSTRUCTED man page
+   rather than into git, and the closure check required to go red:
+
+   ok   the constructed page's fifth spelling `%Q` IS read out of it -- the drill is a real input and not a stubbed answer
+   ok   and the closure comparison GOES RED against it: documented ['%H', '%Q', '%h'] vs handled ['%H', '%h'].  If git ever documents a third commit-hash placeholder, this file fails until someone handles it.
+   ok   a fifth built-in FORMAT is read out of a constructed page too
+   ok   and the format-side closure goes red against it as well
+
+   THE OTHER SIDE OF THE CLOSURE.  The drill above catches a spelling
+   git documents.  This catches one that appears IN THE TREE: every
+   placeholder used in any `git log` format anywhere under `code/`
+   must be one `man git-log` documents.  A format nobody has
+   documented is a format nobody has classified.
+
+   FAIL every placeholder used in a `git log` format in this tree is documented on `man git-log`: ['%a', '%c']
+
+==========================================================================
+PASS: 54   FAIL: 1
+   FAIL: every placeholder used in a `git log` format in this tree is documented on `man git-log`: ['%a', '%c']
+TOTAL BAD: 1

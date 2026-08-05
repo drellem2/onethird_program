@@ -1,0 +1,105 @@
+==========================================================================
+p4 -- F-A: A GATE WHOSE INPUT CANNOT CONTAIN THE THING IT GATES ON
+==========================================================================
+
+-- (i) THE GATE, READ FROM THE FILE
+
+   code/repair_b2af/t1_population.py:430  R.check(not [r for r in pinned if r["kind"] == "OLDEST"],
+   code/repair_b2af/t1_population.py:431          "an OLDEST row is in the treated population; the count has grown by "
+   code/repair_b2af/t1_population.py:432          "absorbing a class that does not have the defect")
+
+-- (ii) THE PROOF.  WHERE `pinned` COMES FROM
+
+   `pinned` is `L.read_anchors()`, i.e. `ANCHORS.tsv`, and t1 writes
+   that file from `spendable`:
+
+      hist = sorted(wt["_hist"], ...)                                 the history-derived rows
+      refined = [(r, L.refine(r)) for r in hist]                      refined from hist
+      spendable = [(r, ref) for r, ref in refined if ref["spendable"  a subset of refined
+      hist = [r for r in rows if r["kind"] in HISTORY_KINDS]          and HISTORY_KINDS is where the domain is fixed
+
+   HISTORY_KINDS = ('NEWEST', 'NEWEST-norestrict', 'INDEXED', 'UNRESTRICTED')
+   `OLDEST` in HISTORY_KINDS : False
+
+   rows in ANCHORS.tsv          : 4
+   kinds present in ANCHORS.tsv : INDEXED, NEWEST
+   kinds it CAN contain         : NEWEST, NEWEST-norestrict, INDEXED, UNRESTRICTED
+
+   SO THE GATE IS A TAUTOLOGY.  `[r for r in pinned if r["kind"] ==
+   "OLDEST"]` is empty for every possible content of ANCHORS.tsv
+   that t1 itself can write.  It is green because its question
+   cannot be asked of its input, not because the answer is no.
+
+-- (iii) THE CONSTRUCTION.  ABSORPTION, IN A CLONE
+
+   An absorption is: a site that WAS `OLDEST` -- the class mg-330a
+   named as safe and mg-b2af declined to treat -- becomes one of the
+   history-derived kinds, so the treated population grows by
+   swallowing a class that does not have the defect.  Constructed by
+   deleting `--reverse` from ONE `OLDEST` site in a copy of `code/`.
+
+   victim site : code/audit_330a/lib330a.py:200
+   its line    : hist = [h for h in git("log", "--format=%H", "--reverse", rev, "--", p
+   after       : hist = [h for h in git("log", "--format=%H", rev, "--", path,
+
+   kind                     before    after
+   OLDEST                       12       11
+   NEWEST                       11       11
+   NEWEST-norestrict             0        0
+   INDEXED                      25       26
+   UNRESTRICTED                 19       19
+   ALL                          86       86
+   HISTORY                      55       56
+
+   the victim is now classified : INDEXED
+   it is a HISTORY-DERIVED kind : True
+
+-- (iv) THE GATE, EVALUATED ON THAT TREE
+
+   the gate's own expression, on the mutated tree:
+      not [r for r in pinned if r["kind"] == "OLDEST"]  ->  True
+   OLDEST went 12 -> 11 and the gate is SILENT.
+
+-- (v) A GATE THAT CAN SEE IT
+
+   The repair is not a bigger ANCHORS.tsv.  It is to gate on the
+   TREE, where OLDEST lives, instead of on the pinned file, where
+   it cannot.  `gate_absorption` below takes the site-set of the
+   OLDEST class at two trees and fires when a member leaves it
+   for a treated kind.  It is stated as a set difference so that
+   it cannot be satisfied by a count that happens to match.
+
+   on the MUTATED clone   : 1 row(s)
+      code/audit_330a/lib330a.py:200                           OLDEST -> INDEXED
+   on the UNMUTATED clone : 0 row(s)   <- the negative control
+
+   A gate that has never been seen to go red is a gate whose red
+   is unmeasured.  That sentence is mg-330a's, and it is the one
+   its own successor's gate does not satisfy.
+
+-- (vi) WHAT THIS TICKET DOES ABOUT IT, AND WHAT IT DOES NOT
+
+   NOT DONE: `t1_population.py:430` is not edited.
+   mg-b2af's transcripts are committed evidence of a run of that
+   script.  Changing the script without regenerating them makes
+   the pair inconsistent, and regenerating them re-runs another
+   ticket's suite from inside mine -- which is how a repair ends
+   up owning a figure it did not measure.  The working gate is
+   HERE, run against the same population, shown red on a
+   construction and green on a control.
+   DONE: `code/repair_b2af/README.md` gains a note that the
+   OLDEST gate cannot fire, pointing at this transcript.
+
+-- SCORING PREDICTIONS.md
+
+   P4-a   predicted True                           measured True               HIT
+   P4-b   predicted -1                             measured -1                 HIT
+   P4-c   predicted True                           measured True               HIT
+   P4-d   predicted 1                              measured 1                  HIT
+
+--------------------------------------------------------------------------
+SELF-ERRORS: 0, population: the construction in a clone under /tmp
+FINDINGS: 2, population: the OLDEST gate at code/repair_b2af/t1_population.py:430
+   FINDING: THE GATE AT code/repair_b2af/t1_population.py:430 CANNOT FIRE: `pinned` is ANCHORS.tsv, whose rows t1 draws from `_hist`, which `lib_b2af` filters to HISTORY_KINDS = ('NEWEST', 'NEWEST-norestrict', 'INDEXED', 'UNRESTRICTED').  `OLDEST` is not in that tuple, so the tested set is empty by construction and the check is green for every input it can receive.
+   FINDING: AND IT IS SILENT: OLDEST went 12 -> 11 in the clone, the absorbed site is now INDEXED -- a history-derived kind -- and the gate at code/repair_b2af/t1_population.py:430 still evaluates True.  A gate whose input cannot contain the thing it gates on.
+TOTAL BAD: 2

@@ -1,0 +1,14 @@
+FIRST FORM of documented_builtin_formats() -- the rule was:
+   a sample block containing "commit <hash>" or "From <hash>" -> FULL,
+   "<abbrev-hash>" -> ABBREV.
+
+   found: {'short': 'FULL', 'medium': 'FULL', 'full': 'FULL', 'fuller': 'FULL', 'reference': 'ABBREV', 'email': 'FULL'}
+
+MISSED: oneline (its documented sample is "<hash> <title-line>" --
+        there is no "commit " prefix), and raw (documented in PROSE
+        only: "the hashes are displayed in full", no sample block).
+
+PREDICTIONS.md P1-c named oneline and raw among the formats this rule
+was supposed to find.  This transcript is P1-c firing on me BEFORE the
+rule was widened to a bare <hash> token.  Kept, not deleted: a check
+respecified after it fired keeps the run that made it fire.
