@@ -147,6 +147,15 @@ TABLE = [
     ("M4 moves the target on 82/86, M5 on 82/86", "COULD MOVE",
      "the 4 posets with |L(P)| = 1 have an empty target that scaling cannot move",
      "moves it on 82/86 posets and M5 (one edge deleted) on 82/86"),
+    # THE TWELFTH ENTRY, and the reason the eleven above are not the population
+    # the old heading claimed (mg-fcb2's F1, landed by mg-8af0).  This count was
+    # printed by the repair, was a tautology, and was NOT IN THE TABLE.
+    ("le_to_facet corrupted at the SITE on 86/86", "COULD MOVE",
+     "`% (N, N, ...)` -- the same expression twice -- until mg-8af0; measured "
+     "now, and it reads 86/87 with n = 1 admitted and 0/86 with the corruption "
+     "made a no-op, both constructed in "
+     "code/face_geometry_repair_8af0/probe_f1_count_moves.py and re-derived in V7",
+     "The named load-bearing site is corrupted on 86/86 posets"),
 ]
 
 # The census, DECLARED.  Measured by `census()` from the source of
@@ -561,6 +570,29 @@ def main():
           "them" % (CENSUS_DECLARED["specifiers"], len(TABLE)),
           got == CENSUS_DECLARED,
           "measured %s; declared %s" % (got, CENSUS_DECLARED))
+
+    # -- V7: the count mg-fcb2's F1 was about, re-derived ------------------
+    # The site count is asked here of `top_laplacians` directly, not of
+    # `mutation_applied_at_site`, so a change to that helper cannot make this
+    # file agree with controls.py by construction.  What this row CANNOT do is
+    # tell whether 86/86 is the right answer for the right reason -- it is one
+    # more route to one number.  The evidence that the number is a MEASUREMENT
+    # and not a property is the pair of constructed inputs that move it, and
+    # that lives in probe_f1_count_moves.py, not here.
+    print("V7 -- the site count mg-fcb2's F1 was about (mg-8af0)")
+    site = sum(1 for P in ps
+               if top_laplacians(P, incidence_mode="facet_offbyone")["facets"]
+               != top_laplacians(P)["facets"])
+    check("`le_to_facet` is corrupted at the SITE on %d/%d posets (population: "
+          "the 86 posets 2 <= n <= 5; grain: one poset), re-derived from "
+          "top_laplacians, and the artifact prints the SAME numerator -- which "
+          "it did before the repair too, because the tautology `%% (N, N, ...)` "
+          "had the right digits and the wrong sentence" % (site, N),
+          site == 86 and "corrupted on %d/%d posets" % (site, N) in art,
+          "the two inputs that separate the measurement from the tautology are "
+          "run in code/face_geometry_repair_8af0/probe_f1_count_moves.py, not "
+          "here: n = 1 admitted gives 86/87 and a no-op corruption gives 0/86, "
+          "against 87/87 and 86/86 from the expression this replaces")
 
     fresh = regenerate(PROBE)
     check("V6c REGENERATED -- controls_output.txt is byte-identical to a fresh "

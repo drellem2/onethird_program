@@ -1390,6 +1390,7 @@ def negative_control_incidence(nmax):
     dich_rows = []
     tot_nonsim = tot_gauge = tot_unclassified = 0
     vac_rows = []
+    site_rows = []
     for name, mode, localised in muts:
         app = rej = absorb = spec = 0
         caused = shape_ok = diag_preserved = diag_moved = residual_max = 0
@@ -1397,6 +1398,13 @@ def negative_control_incidence(nmax):
         mag_entries = sign_entries = 0
         signs_read = both_gates = only_mag = sign_any = 0
         vac, vac_sizes = 0, set()
+        # THE SITE COUNT, MEASURED (mg-fcb2's F1, landed by mg-8af0).  Asked of
+        # EVERY poset, not only the vacuous ones: the coverage sentence at the
+        # foot of this section reports how often the corruption reaches the
+        # named site, and it used to report it by printing the population size
+        # twice.  `mutation_applied_at_site` is the same question the vacuity
+        # split already asks, over the whole sweep instead of over one column.
+        site_applied = 0
         # THE GAUGE DICHOTOMY (mg-e35b, landing mg-fcf1's F2 tail) and THE TWO
         # MEANINGS OF VACUOUS (mg-fcf1's F4).  Both are computed here, in the
         # same sweep as everything else the row prints, so that the row states
@@ -1409,6 +1417,7 @@ def negative_control_incidence(nmax):
             same_target += mat_eq(target, target_mut)
             multi_ridge[mode] = multi_ridge.get(mode, 0) + (
                 top_laplacians(P, incidence_mode=mode)["n_multi_ridges"] > 0)
+            site_applied += mutation_applied_at_site(P, mode)
             if mat_eq(L_mut, L_true):
                 vac += 1
                 vac_sizes.add(len(linear_extensions(P)))
@@ -1615,6 +1624,7 @@ def negative_control_incidence(nmax):
                           both_gates, diag_moved))
         dich_rows.append((name.split(" ")[0], app, nonsim, gauge, unclassified))
         vac_rows.append((name.split(" ")[0], vac, blind, blind_set, blind_big))
+        site_rows.append((name.split(" ")[0], site_applied))
         tot_nonsim += nonsim
         tot_gauge += gauge
         tot_unclassified += unclassified
@@ -1931,8 +1941,19 @@ def negative_control_incidence(nmax):
           "correction ('relocation, not closure') and is pm-onethird's ledger: the "
           "numbers below are routed to them rather than written into it from this "
           "file, which is the same choice mg-2789 made about the Probe.md passage it "
-          "flagged and did not edit. The named load-bearing site is "
-          "corrupted on %d/%d posets, the corruption reaches L^rel on %d of them, "
+          "flagged and did not edit. THE FIRST NUMBER BELOW WAS THE SAME "
+          "EXPRESSION AS ITS DENOMINATOR until mg-8af0 (mg-fcb2's F1): this "
+          "sentence supplied the population size twice, so it read N/N whatever "
+          "`le_to_facet_offbyone` did to the facet list -- a count that cannot "
+          "move, in the sentence that lands mg-fcf1's F3 ABOUT COUNTS THAT "
+          "CANNOT MOVE, and absent from the table in the mg-e35b verifier that "
+          "was headed with exactly that population. It is now MEASURED, by "
+          "asking `mutation_applied_at_site` of every poset in the sweep rather "
+          "than of the vacuous column alone. The named load-bearing site is "
+          "corrupted on %d/%d posets (population: the posets this section "
+          "sweeps, 2 <= n <= 5; grain: one poset -- the site is corrupted on a "
+          "poset iff the facet LIST built for it differs), the corruption "
+          "reaches L^rel on %d of them, "
           "and of those %d are NON-SIMILAR and %d are a GAUGE -- so coverage at "
           "`le_to_facet` is %d/%d, of which %d carry evidence that a construction "
           "error is distinguishable from a re-labelling. On the remaining %d the "
@@ -1940,8 +1961,17 @@ def negative_control_incidence(nmax):
           "the four rows still SCORES its absorbability answer as a measurement and "
           "the other %d have it removed to the [CANNOT FAIL] row as a theorem, and "
           "%d (poset, row) pairs of the four are gauges. That is a relocation of the "
-          "gap, narrower than before and not closed."
-          % (N, N, dich_rows[3][1], dich_rows[3][2], dich_rows[3][3],
+          "gap, narrower than before and not closed. AND THE FIRST NUMBER CAN NOW "
+          "COME OUT OTHERWISE, which is the whole difference between a measurement "
+          "and the tautology it replaces: admit n = 1 and it drops below the "
+          "population size, because at n = 1 both `le_to_facet` and "
+          "`le_to_facet_offbyone` return the EMPTY chain and there is nothing at "
+          "the site to corrupt; make the off-by-one a no-op and it reads 0. Both "
+          "inputs are constructed and run in "
+          "code/face_geometry_repair_8af0/probe_f1_count_moves.py -- this file "
+          "does not sweep them, and quoting their values here would put two "
+          "numbers into the artifact that nothing in this run computes."
+          % (site_rows[3][1], N, dich_rows[3][1], dich_rows[3][2], dich_rows[3][3],
              dich_rows[3][1], N, dich_rows[3][2], N - dich_rows[3][1],
              len(muts) - len(forced_rows), len(forced_rows), tot_gauge))
     print("    * row scoring, and who owns it: every row above is vacuous on the "
