@@ -33,18 +33,21 @@ V5 -- the committed artifact states these numbers
   [PASS] artifact carries the coverage sizing  -- 'coverage at `le_to_facet` is 61/86'
   [PASS] artifact carries the forced-target disclosure  -- 'COULD NOT HAVE COME OUT OTHERWISE'
   [PASS] the artifact no longer ASSERTS the hedge (the old wording is absent; the phrase survives only inside the sentence that withdraws it)
-V6 -- EVERY COUNT THIS REPAIR PRINTS, and whether it could have come out differently.  A count that could not is labelled FORCED and is not offered as evidence anywhere in the repair.
-    COULD MOVE       dichotomy: 297 = 288 + 9 + 0  -- an unclassified pair turns the row red; the 9 is a per-poset decision and differs by row (6/0/0/3)
-    FORCED BY MATHEMATICS detector positive control: swap01 GAUGE 72/72  -- exchanging two columns IS a signed-permutation conjugation; the row is an instrument check and says so, and fails only if the detector is wrong
-    COULD MOVE       detector says NOT-GAUGE on 288 of 297  -- a detector that accepted everything would print 297 here
-    COULD MOVE       non-identity witness on 72/72 of swap01  -- a detector answering by diagonal twist alone would print 0
-    COULD MOVE       vacuity split I1/I2/I3 = 14/4/4 did-not-apply, 0 unseen  -- a mutation that applied and left L^rel fixed would land in the other column
-    COULD MOVE       vacuity split I4 = 0 did-not-apply, 25 unseen (24 by facet SET, 14 big)  -- this is a measurement of blindness and is stated, not scored
+V6 -- the counts this repair OFFERS AS EVIDENCE, each classified and each ANCHORED in the artifact.  A count that could not have come out otherwise is labelled FORCED and is not offered as evidence anywhere in the repair.  This table is NOT every value the section prints -- that population is V6b's, and it is 184.
+    COULD MOVE             dichotomy: 297 = 288 + 9 + 0  -- an unclassified pair turns the row red; the 9 is a per-poset decision and differs by row (6/0/0/3)
+    FORCED BY MATHEMATICS  detector positive control: swap01 GAUGE 72/72  -- exchanging two columns IS a signed-permutation conjugation; the row is an instrument check and says so, and fails only if the detector is wrong
+    COULD MOVE             detector says NOT-GAUGE on 288 of 297  -- a detector that accepted everything would print 297 here
+    COULD MOVE             non-identity witness on 72/72 of swap01  -- a detector answering by diagonal twist alone would print 0
+    COULD MOVE             vacuity split I1/I2/I3 = 14/4/4 did-not-apply, 0 unseen  -- a mutation that applied and left L^rel fixed would land in the other column
+    COULD MOVE             vacuity split I4 = 0 did-not-apply, 25 unseen (24 by facet SET, 14 big)  -- this is a measurement of blindness and is stated, not scored
     FORCED BY THE CODE PATH target byte-identical 344/344  -- at_laplacian takes no incidence_mode; printed as a property, and the comparison's ability to move is shown by M4/M5 instead
     FORCED BY CONSTRUCTION no ridge in >= 3 facets, I1/I2/I3 zeros  -- none of the three raises any ridge's facet count; checked in V4b
-    COULD MOVE       no ridge in >= 3 facets, I4 zero  -- I4 rebuilds the facet enumeration outright
-    COULD MOVE       coverage 61/86 at le_to_facet, 58 non-similar  -- derived from the two counts above, both of which could move
-    COULD MOVE       M4 moves the target on 82/86, M5 on 82/86  -- the 4 posets with |L(P)| = 1 have an empty target that scaling cannot move
-  [PASS] every printed count is classified, and the 3 FORCED ones are printed as properties rather than offered as evidence
+    COULD MOVE             no ridge in >= 3 facets, I4 zero  -- I4 rebuilds the facet enumeration outright
+    COULD MOVE             coverage 61/86 at le_to_facet, 58 non-similar  -- derived from the two counts above, both of which could move
+    COULD MOVE             M4 moves the target on 82/86, M5 on 82/86  -- the 4 posets with |L(P)| = 1 have an empty target that scaling cannot move
+    (3 of the 11 entries are FORCED.  PRINTED, NOT SCORED: it is a count of this file's own rows, and scoring it is what mg-fcb2's F2 was about.)
+  [PASS] V6a ANCHORED -- every one of the 11 classified counts is still printed in the artifact, matched verbatim (population: the entries of TABLE; grain: one entry)  -- unanchored: none
+  [PASS] V6b CENSUS -- NEGATIVE CONTROL 4 prints 184 formatted values and no count has been added or removed since this table was written (population: the %-format expressions lexically inside `negative_control_incidence`; grain: one conversion specifier).  A TRIPWIRE: it does not check that the 11 entries above are the right ones, only that the set of printed values has not moved underneath them  -- measured {'specifiers': 184, 'd': 150, 's': 34, 'fstrings': 0, 'format_calls': 0, 'str_calls': 0, 'nonliteral_mod': 1}; declared {'specifiers': 184, 'd': 150, 's': 34, 'fstrings': 0, 'format_calls': 0, 'str_calls': 0, 'nonliteral_mod': 1}
+  [PASS] V6c REGENERATED -- controls_output.txt is byte-identical to a fresh `controls.py 5`, so a count cannot be added to the artifact without moving V6b (this closes the one channel V6b cannot see: a hand-edited or stale artifact)  -- fresh 33924 bytes / 74 lines, committed 33924 bytes / 74 lines
 
-24 checks, 0 refuted.
+26 checks, 0 refuted.
