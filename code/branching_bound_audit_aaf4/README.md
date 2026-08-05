@@ -198,18 +198,18 @@ wrong grain* but **a boundary drawn so that the counter is outside it**.
 **mg-d075's suite re-runs green from this branch: 7 of 7 scripts on their committed
 predictions, `run_all.sh` exit 0.**
 
-**But one committed transcript does not regenerate.** `out_s6_class.txt` moves:
+**But one committed transcript does not regenerate.** `out_s6_class.txt` moves, on the line
+that counts commits naming mg-19ec — it was **11** when mg-d075 shipped it.
 
-```
--              commits: 11 naming this ticket
-+              commits: 13 naming this ticket
-```
+`s6_class.py` counts with `git log --oneline --all` filtered on a ticket id — a population
+spanning **every ref in the repository**, so it counts pre-rebase twins and unmerged branches
+alongside what landed, and `--all` runs several times the count on `main`. **The commits that
+moved it include this audit's own**, which moved it by naming mg-19ec in a commit subject.
 
-`s6_class.py` counts commits with `git log --oneline --all` filtered on a ticket id — a
-population spanning **every ref in the repository**, so it counts pre-rebase twins and
-unmerged branches alongside what landed. Population `mg-19ec`, grain one commit: **main 6,
-HEAD 7, `--all` 13.** **One of the commits that moved that figure is this audit's own
-pre-registration commit**, which moved it by naming mg-19ec in its subject line.
+**The current value is printed by `a5` rather than quoted here, and the reason is the finding
+itself: any number I write in this sentence is stale by the commit that ships it.** `a5`'s D2
+prints the diff, the three populations (`main`, `HEAD`, `--all`) side by side, and the list of
+this audit's own commits inside the population.
 
 That is the refutation of P14, and it is the finding `a5`'s D2 exists to catch: **a suite can
 re-run green while its published transcript moves, and neither `run_all.sh` nor `git status`
