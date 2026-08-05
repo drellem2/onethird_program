@@ -15,6 +15,39 @@ are NO -- a count that cannot come out otherwise is not evidence, and this
 instrument's job is to say which of the repair's counts are which rather than
 to let a green row imply they all are.
 
+V6 WAS ITSELF THE DEFECT IT WAS BUILT TO CATCH, and mg-fcb2's F2 is the finding
+(repaired by mg-8af0).  The row read
+
+    check("every printed count is classified ...", forced == 3 and len(table) == 11)
+
+-- a condition on the LITERAL LIST BESIDE IT.  Add a twelfth count to the
+artifact and leave this file alone and the row stays green; the only input that
+could ever move it was an edit to its own table.  That is a control that cannot
+fail, under a heading that claimed the population "EVERY COUNT THIS REPAIR
+PRINTS", and it is exactly why mg-fcb2's F1 survived: the tautological
+"corrupted on 86/86" is simply not in the table.  What replaces it is three
+rows, each scored against something OUTSIDE this file, each with its population
+and grain written into its own name:
+
+  V6a ANCHORED   -- every classified count is still printed in the artifact,
+                    matched as a verbatim substring.  Population: the entries of
+                    `TABLE`.  Grain: one entry.  RED when a classified count is
+                    removed or reworded.
+  V6b CENSUS     -- the set of formatted values NEGATIVE CONTROL 4 prints is
+                    unchanged since this table was written.  Population: the
+                    `%`-format expressions lexically inside
+                    `negative_control_incidence` in controls.py.  Grain: one
+                    conversion specifier.  RED when a count is added or removed
+                    at the source.  It is a TRIPWIRE and says so: it does not
+                    check that the entries of `TABLE` are the right ones.
+  V6c REGENERATED-- controls_output.txt is byte-identical to a fresh run.  RED
+                    when the artifact is hand-edited or goes stale, which is the
+                    one channel V6b cannot see.
+
+`forced` is still computed and printed.  It is no longer scored: "3 of my own 12
+rows say FORCED" is a fact about this file and nothing else, and scoring it is
+the move that produced the defect.
+
 Route disjointness, stated exactly.  This file imports the FACE COMPLEX
 (`top_laplacians`, `linear_extensions`, `le_to_facet`, `le_to_facet_offbyone`,
 `at_laplacian`, `not_isospectral`) because re-implementing the object under
@@ -31,6 +64,8 @@ Exit 0 iff every check passes.
 import ast
 import itertools
 import os
+import re
+import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -61,6 +96,134 @@ def check(label, ok, detail=""):
     if not ok:
         FAILED.append(label)
     return ok
+
+
+# ---------------------------------------------------------------------------
+# V6's machinery (mg-8af0, landing mg-fcb2's F2).  At module scope, not inside
+# `main`, for one reason: the demonstration in
+# code/face_geometry_repair_8af0/demo_f2_row_can_go_red.py drives these three
+# functions over MUTATED copies of the artifact and of controls.py, and shows
+# each row going red.  A control nobody has watched fire is not evidence that it
+# can.
+# ---------------------------------------------------------------------------
+
+# Each entry: (count, verdict, why, anchor).  The ANCHOR is the verbatim text
+# the artifact prints for that count.  It is what turns a claim about the
+# repair's output into something checkable against the output.
+TABLE = [
+    ("dichotomy: 297 = 288 + 9 + 0", "COULD MOVE",
+     "an unclassified pair turns the row red; the 9 is a per-poset decision "
+     "and differs by row (6/0/0/3)",
+     "297 biting (poset, row) pairs = 288 NON-SIMILAR + 9 GAUGE + 0 unclassified"),
+    ("detector positive control: swap01 GAUGE 72/72", "FORCED BY MATHEMATICS",
+     "exchanging two columns IS a signed-permutation conjugation; the row is "
+     "an instrument check and says so, and fails only if the detector is wrong",
+     "classified GAUGE on 72/72 of the posets where it bites"),
+    ("detector says NOT-GAUGE on 288 of 297", "COULD MOVE",
+     "a detector that accepted everything would print 297 here",
+     "saying NOT-GAUGE on 288 of the 297 biting pairs"),
+    ("non-identity witness on 72/72 of swap01", "COULD MOVE",
+     "a detector answering by diagonal twist alone would print 0",
+     "on 72 of them the exhibited permutation is NOT the identity"),
+    ("vacuity split I1/I2/I3 = 14/4/4 did-not-apply, 0 unseen", "COULD MOVE",
+     "a mutation that applied and left L^rel fixed would land in the other column",
+     "I1 14 vacuous = 14 did-not-apply + 0 applied-but-unseen"),
+    ("vacuity split I4 = 0 did-not-apply, 25 unseen (24 by facet SET, 14 big)",
+     "COULD MOVE", "this is a measurement of blindness and is stated, not scored",
+     "I4 25 vacuous = 0 did-not-apply + 25 applied-but-unseen"),
+    ("target byte-identical 344/344", "FORCED BY THE CODE PATH",
+     "at_laplacian takes no incidence_mode; printed as a property, and the "
+     "comparison's ability to move is shown by M4/M5 instead",
+     "byte-identical to the uncorrupted target on 344/344 (poset, mutation) pairs"),
+    ("no ridge in >= 3 facets, I1/I2/I3 zeros", "FORCED BY CONSTRUCTION",
+     "none of the three raises any ridge's facet count; checked in V4b",
+     "ridge_facets on 0, split_free_as_interior on 0, ridge_drop on 0"),
+    ("no ridge in >= 3 facets, I4 zero", "COULD MOVE",
+     "I4 rebuilds the facet enumeration outright",
+     "facet_offbyone on 0"),
+    ("coverage 61/86 at le_to_facet, 58 non-similar", "COULD MOVE",
+     "derived from the two counts above, both of which could move",
+     "coverage at `le_to_facet` is 61/86"),
+    ("M4 moves the target on 82/86, M5 on 82/86", "COULD MOVE",
+     "the 4 posets with |L(P)| = 1 have an empty target that scaling cannot move",
+     "moves it on 82/86 posets and M5 (one edge deleted) on 82/86"),
+]
+
+# The census, DECLARED.  Measured by `census()` from the source of
+# `negative_control_incidence`; see that function for the population and the
+# grain.  This is a literal, and unlike the one it replaces it is a literal on
+# the WRONG SIDE of the comparison: the measured side comes from another file.
+# Any count added to or removed from the section moves it.
+CENSUS_DECLARED = {
+    "specifiers": 184,          # conversion specifiers, all types
+    "d": 150,                   # of which integer conversions
+    "s": 34,                    # of which string conversions
+    "fstrings": 0,              # channel bound: an f-string is invisible here
+    "format_calls": 0,          # channel bound: so is "...".format(...)
+    "str_calls": 0,             # channel bound: so is str()/repr()/format()
+    "nonliteral_mod": 1,        # `%` sites whose left operand is not a literal
+}
+
+_SPEC = re.compile(r"%[-#0 +]*[0-9*]*(?:\.[0-9*]+)?([diouxXeEfFgGcrsa%])")
+
+
+def census(controls_src, fn_name="negative_control_incidence"):
+    """Every formatted value NEGATIVE CONTROL 4 prints, counted from the source.
+
+    POPULATION: the `%`-format expressions lexically inside `fn_name` in
+    controls.py.  GRAIN: one conversion specifier -- not one distinct value and
+    not one printed line, so a count printed twice counts twice and two counts
+    on one line count twice.
+
+    WHAT IT DOES NOT SEE, enumerated rather than hoped about.  A value can reach
+    the artifact through four other channels: an f-string, a `.format` call, a
+    `str()`/`repr()`/`format()` call, and a `%` whose left operand is not a
+    string literal (which `ast` cannot tell from arithmetic).  Each is counted
+    and each is part of the declared census, so a channel OPENING is itself a
+    red row.  The one non-literal `%` site in the section today is `i % 3`
+    inside a sign vector -- arithmetic, not formatting -- and it is declared as
+    1 rather than exempted, because an exemption nobody counts is how the
+    channel this file exists to police got there.
+    """
+    tree = ast.parse(controls_src)
+    fn = next((f for f in ast.walk(tree)
+               if isinstance(f, ast.FunctionDef) and f.name == fn_name), None)
+    if fn is None:
+        raise ValueError("no function %r in the source given" % (fn_name,))
+    out = {"specifiers": 0, "d": 0, "s": 0, "fstrings": 0,
+           "format_calls": 0, "str_calls": 0, "nonliteral_mod": 0}
+    for node in ast.walk(fn):
+        if isinstance(node, ast.JoinedStr):
+            out["fstrings"] += 1
+        elif isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Attribute) and node.func.attr == "format":
+                out["format_calls"] += 1
+            elif getattr(node.func, "id", None) in ("str", "repr", "format"):
+                out["str_calls"] += 1
+        elif isinstance(node, ast.BinOp) and isinstance(node.op, ast.Mod):
+            left = node.left
+            if isinstance(left, ast.Constant) and isinstance(left.value, str):
+                for conv in _SPEC.findall(left.value):
+                    if conv == "%":
+                        continue                 # a literal per cent, not a value
+                    out["specifiers"] += 1
+                    if conv in out:
+                        out[conv] += 1
+            else:
+                out["nonliteral_mod"] += 1
+    return out
+
+
+def unanchored(artifact, table=TABLE):
+    """The entries of `table` whose count is no longer printed in `artifact`."""
+    return [what for what, _, _, anchor in table if anchor not in artifact]
+
+
+def regenerate(probe_dir, nmax=5):
+    """A fresh `controls.py <nmax>` run, as text.  Nothing is written to disk."""
+    proc = subprocess.run([sys.executable, "controls.py", str(nmax)],
+                          cwd=probe_dir, capture_output=True, text=True)
+    return proc.stdout
 
 
 # ---------------------------------------------------------------------------
@@ -364,42 +527,49 @@ def main():
           and "WHAT IS IN THE REMAINDER IS NOW STATED" in art)
 
     # -- V6: this repair's own counts, and whether each could have moved ----
-    print("V6 -- EVERY COUNT THIS REPAIR PRINTS, and whether it could have come "
-          "out differently.  A count that could not is labelled FORCED and is "
-          "not offered as evidence anywhere in the repair.")
-    table = [
-        ("dichotomy: 297 = 288 + 9 + 0", "COULD MOVE",
-         "an unclassified pair turns the row red; the 9 is a per-poset decision "
-         "and differs by row (6/0/0/3)"),
-        ("detector positive control: swap01 GAUGE 72/72", "FORCED BY MATHEMATICS",
-         "exchanging two columns IS a signed-permutation conjugation; the row is "
-         "an instrument check and says so, and fails only if the detector is wrong"),
-        ("detector says NOT-GAUGE on 288 of 297", "COULD MOVE",
-         "a detector that accepted everything would print 297 here"),
-        ("non-identity witness on 72/72 of swap01", "COULD MOVE",
-         "a detector answering by diagonal twist alone would print 0"),
-        ("vacuity split I1/I2/I3 = 14/4/4 did-not-apply, 0 unseen", "COULD MOVE",
-         "a mutation that applied and left L^rel fixed would land in the other column"),
-        ("vacuity split I4 = 0 did-not-apply, 25 unseen (24 by facet SET, 14 big)",
-         "COULD MOVE", "this is a measurement of blindness and is stated, not scored"),
-        ("target byte-identical 344/344", "FORCED BY THE CODE PATH",
-         "at_laplacian takes no incidence_mode; printed as a property, and the "
-         "comparison's ability to move is shown by M4/M5 instead"),
-        ("no ridge in >= 3 facets, I1/I2/I3 zeros", "FORCED BY CONSTRUCTION",
-         "none of the three raises any ridge's facet count; checked in V4b"),
-        ("no ridge in >= 3 facets, I4 zero", "COULD MOVE",
-         "I4 rebuilds the facet enumeration outright"),
-        ("coverage 61/86 at le_to_facet, 58 non-similar", "COULD MOVE",
-         "derived from the two counts above, both of which could move"),
-        ("M4 moves the target on 82/86, M5 on 82/86", "COULD MOVE",
-         "the 4 posets with |L(P)| = 1 have an empty target that scaling cannot move"),
-    ]
-    for what, verdict, why in table:
-        print("    %-16s %s  -- %s" % (verdict, what, why))
-    forced = sum(1 for _, v, _ in table if v.startswith("FORCED"))
-    check("every printed count is classified, and the %d FORCED ones are "
-          "printed as properties rather than offered as evidence"
-          % forced, forced == 3 and len(table) == 11)
+    # THE HEADING IS NARROWER THAN IT WAS, AND THAT IS THE REPAIR (mg-fcb2's
+    # F2, landed by mg-8af0).  It used to read "EVERY COUNT THIS REPAIR PRINTS"
+    # while the row beneath it measured the length of the list below.  The
+    # section prints 184 formatted values; this table classifies the ones the
+    # repair OFFERS AS EVIDENCE.  Those are two populations and they are now
+    # two rows -- V6a over this table, V6b over the 184.
+    print("V6 -- the counts this repair OFFERS AS EVIDENCE, each classified and "
+          "each ANCHORED in the artifact.  A count that could not have come out "
+          "otherwise is labelled FORCED and is not offered as evidence anywhere "
+          "in the repair.  This table is NOT every value the section prints -- "
+          "that population is V6b's, and it is 184.")
+    for what, verdict, why, _ in TABLE:
+        print("    %-22s %s  -- %s" % (verdict, what, why))
+    forced = sum(1 for _, v, _, _ in TABLE if v.startswith("FORCED"))
+    print("    (%d of the %d entries are FORCED.  PRINTED, NOT SCORED: it is a "
+          "count of this file's own rows, and scoring it is what mg-fcb2's F2 "
+          "was about.)" % (forced, len(TABLE)))
+
+    missing = unanchored(art)
+    check("V6a ANCHORED -- every one of the %d classified counts is still "
+          "printed in the artifact, matched verbatim (population: the entries "
+          "of TABLE; grain: one entry)" % len(TABLE),
+          not missing, "unanchored: %s" % (missing if missing else "none"))
+
+    got = census(open(os.path.join(PROBE, "controls.py")).read())
+    check("V6b CENSUS -- NEGATIVE CONTROL 4 prints %d formatted values and no "
+          "count has been added or removed since this table was written "
+          "(population: the %%-format expressions lexically inside "
+          "`negative_control_incidence`; grain: one conversion specifier).  A "
+          "TRIPWIRE: it does not check that the %d entries above are the right "
+          "ones, only that the set of printed values has not moved underneath "
+          "them" % (CENSUS_DECLARED["specifiers"], len(TABLE)),
+          got == CENSUS_DECLARED,
+          "measured %s; declared %s" % (got, CENSUS_DECLARED))
+
+    fresh = regenerate(PROBE)
+    check("V6c REGENERATED -- controls_output.txt is byte-identical to a fresh "
+          "`controls.py 5`, so a count cannot be added to the artifact without "
+          "moving V6b (this closes the one channel V6b cannot see: a "
+          "hand-edited or stale artifact)",
+          fresh == art,
+          "fresh %d bytes / %d lines, committed %d bytes / %d lines"
+          % (len(fresh), fresh.count("\n"), len(art), art.count("\n")))
 
     print()
     if FAILED:
