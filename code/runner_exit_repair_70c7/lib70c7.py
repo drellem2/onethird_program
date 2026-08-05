@@ -41,6 +41,30 @@ REPAIR_REV = "1ee1f1b"        # mg-7522's repair, the subject of mg-dee4
 PINNED = "bee07a1"            # the sweep's pin
 
 
+_LIB7522 = None
+
+
+def _L():
+    """`lib7522`, imported on first use.  THE ONE COPY of the shared rules.
+
+    LAZY AND NOT AT MODULE SCOPE, on purpose.  This file's own docstring says
+    `lib7522` is imported BY THE PROBES, and the probes insert its directory on
+    `sys.path` only after importing this module -- so a top-level `import
+    lib7522` here would either fail or force every probe to reorder its imports.
+    The path is inserted here instead, so `figures()` and `alternatives()` can
+    delegate to the single definition of each without changing how anything is
+    called.  See those two functions for what mg-56dc/T2d found and what
+    delegating costs.
+    """
+    global _LIB7522
+    if _LIB7522 is None:
+        import sys
+        sys.path.insert(0, os.path.join(REPO, SUBJECT))
+        import lib7522
+        _LIB7522 = lib7522
+    return _LIB7522
+
+
 def bar(t):
     print("=" * 78)
     print(t)
@@ -309,41 +333,31 @@ def var_reads(text, var, exclude_line):
 # F2 / F3.  IS A FIGURE BACKED BY A TRANSCRIPT?
 # ---------------------------------------------------------------------------
 
-_NUMBER = re.compile(r"(?<![\w.])(\d[\d,]*)(?![\w.])")
-# Numbers that are not figures: a section number, a year, a line reference of
-# the form `file.py:214`, a git revision.  Listed rather than tuned, because a
-# generous exclusion list here turns an unbacked figure into a non-figure.
-_SMALL = 3
-
-
 def figures(line):
-    """[int] -- the numbers on one line that could be a FIGURE.
+    """[int] -- the numbers on one line that could be a FIGURE.  ONE RULE.
 
-    Excludes `0`, `1` and `2`, which are structural in prose ("both", "one at a
-    time", "2x2") far more often than they are measurements, and excludes a
-    number immediately preceded by `:` (a line reference) or by `#` (a heading
-    or an issue).  The exclusion is stated so a reader can disagree with it;
-    every figure it drops is still visible in the line it came from.
+    THIS IS `lib7522.figures`, CALLED AND NOT RESTATED.  mg-56dc/T2d, repaired
+    by mg-bf79: this file used to carry its own copy, and the two DISAGREED --
+    on exactly one integer in 0..500, the value `3`, because the copy here
+    dropped `v <= _SMALL` with `_SMALL = 3` while its own docstring said it
+    excluded "`0`, `1` and `2`".  So the code and its own label disagreed too,
+    which is O1's defect class inside O4's.
+
+    WHICH COPY WAS WRONG, said rather than merged away: THIS ONE.  Both
+    docstrings claimed 0/1/2; only `lib7522`'s did it.  Deleting this body
+    therefore makes the surviving rule the one both docstrings always described,
+    and `3` is a figure again in this tree as it always was in mg-7522's.
+
+    WHAT IS LOST, said too, because it is not nothing.  `r3_strength.py`'s R3c
+    used to describe its re-derivation as sharing "no code with `lib7522`'s",
+    and after this it shares this rule.  That sentence is corrected there.  The
+    independence that mattered -- the population, the window, the corpus -- is
+    still written in this tree; what is gone is an independence that existed
+    only as a duplicate, and a duplicate that disagrees with its twin on a real
+    input was never independence.  Two copies that agree today are a future
+    disagreement; these two did not even agree today.
     """
-    out = []
-    for m in _NUMBER.finditer(line):
-        before = line[:m.start()]
-        if before.endswith(":") or before.endswith("#") or before.endswith("-"):
-            continue
-        # `on line 89` is a REFERENCE to a line, not a measurement of
-        # anything.  Dropped for the same reason `s3_figure.py:154` is:
-        # a census that lets a line number back a figure blesses the figure
-        # it exists to catch.
-        if re.search(r"\blines?\s+$", before, re.I):
-            continue
-        try:
-            v = int(m.group(1).replace(",", ""))
-        except ValueError:
-            continue
-        if v <= _SMALL:
-            continue
-        out.append(v)
-    return out
+    return _L().figures(line)
 
 
 def transcript_numbers(paths):
@@ -375,6 +389,106 @@ def transcript_numbers(paths):
         for line in text.splitlines():
             seen.update(figures(line))
     return seen
+
+
+# mg-70c7's own work item id, as its own commits spell it.  A parameter of the
+# provenance query below rather than a literal buried inside it.
+MY_TAG = "(mg-70c7)"
+
+
+def published_by(tag, added_only=True):
+    """[repo-relative path] -- the ARTIFACTS a deliverable AUTHORED, sorted.
+
+    THE PROPERTY, STATED WHERE THE CHECK LIVES.  mg-56dc/T2a, repaired by
+    mg-bf79: *the strictest rule this tree applies to anything ranged over the
+    `out_*.txt` of one directory* -- a population defined by a path, which is
+    the finding this tree exists to repair, committed by its own self-check.
+    E1 asks whether every count this deliverable PRINTS states its grain, and
+    the counts it prints are not only in its transcripts: mg-05eb's OPEN 2 was
+    one figure wrong in four artifacts and THREE of them were prose.  So the
+    population is:
+
+        a tracked file that a commit of this deliverable ADDED, that still
+        exists, and that a reader reads as its record -- a transcript
+        (`out_*.txt`) or prose (`*.md`).
+
+    Each clause is mechanical and each earns its place:
+
+      ADDED     `--diff-filter=A`.  This tree MODIFIED `lib7522.py` and
+                republished mg-c2b3's and mg-7522's transcripts; those are
+                artifacts it changed, not artifacts it authored, and a count in
+                one of them is not a count it printed.  Without this clause the
+                population is 22 and E1 becomes a check on somebody else's
+                grain discipline, which is R1's job and not R6's.
+      EXISTS    a path deleted since is not an artifact a reader can read.
+      A RECORD  the sources are excluded because E1 ranges over PRINTED
+                COUNTS, and a `%3d` in a format string is not one.
+
+    WHY THIS IS NOT ANOTHER PATH.  The query is put to the WHOLE repository --
+    `git log --all` over every commit -- and no directory is named anywhere in
+    this function.  The answer contains
+    `docs/repair-mg-70c7-grain-and-population.md`, four directories away, which
+    is exactly the member a path could not have reached and exactly the kind of
+    artifact mg-05eb found wrong.
+
+    THE LIMIT, stated at the rule rather than left to be found: provenance is
+    read from COMMIT SUBJECTS.  An artifact published by a commit whose subject
+    omits the tag is invisible here, and a commit naming two work items counts
+    for both.  `r6_self.py` prints the tag it searched and the number of commits
+    it matched, so a reader sees the query rather than trusting it.
+
+    AND A DEFECT OF THIS FUNCTION, RECORDED RATHER THAN SMOOTHED AWAY.  Its
+    first draft selected commits with `--grep='\\(mg-70c7\\)'`, escaping the
+    parentheses -- and `git log --grep` is BASIC regex, in which `\\(` opens a
+    GROUP rather than matching a paren.  The pattern therefore reduced to the
+    bare string `mg-70c7`, matched every commit whose BODY mentions this tree,
+    and returned 15 artifacts including mg-56dc's own README, OUTCOMES,
+    PREDICTIONS and published document.  A population meant to be *the
+    artifacts I authored* silently became *the artifacts of everyone who has
+    written about me* -- including my auditor's, which E1 would then have been
+    grading.  An escape that means the opposite in the dialect it lands in is
+    the same failure as a label that names the wrong grain: the notation says
+    one thing and the machine does another.  The subject is now matched in
+    Python, where the string is a string.
+    """
+    subjects = provenance_commits(tag)
+    if not subjects:
+        return []
+    args = ["show", "--format=", "--name-only"]
+    if added_only:
+        args.append("--diff-filter=A")
+    seen, out = set(), []
+    for sha, _subj in subjects:
+        for path in git(*args, sha).splitlines():
+            path = path.strip()
+            if not path or path in seen:
+                continue
+            seen.add(path)
+            if not os.path.exists(os.path.join(REPO, path)):
+                continue
+            base = os.path.basename(path)
+            if (base.startswith("out_") and base.endswith(".txt")) \
+                    or base.endswith(".md"):
+                out.append(path)
+    return sorted(out)
+
+
+def provenance_commits(tag):
+    """[(short sha, subject)] -- commits whose SUBJECT carries `tag`, newest first.
+
+    The tag is tested with `in` on the subject line, in Python.  NOT with
+    `git log --grep`, and the reason is the defect recorded in `published_by`:
+    `--grep` is basic regex, so an escaped `\\(` is a group and the parentheses
+    this repository's convention puts around a work-item id cannot be matched
+    literally without a dialect argument nobody wants to have.  Reading `%s`
+    and testing it here makes the query a fact about the subject line.
+    """
+    out = []
+    for line in git("log", "--all", "--format=%h%x1f%s").splitlines():
+        sha, _, subj = line.partition("\x1f")
+        if tag in subj:
+            out.append((sha.strip(), subj))
+    return out
 
 
 def outs(tree):
@@ -421,24 +535,21 @@ def run_argv(argv, cwd, timeout=1800):
 
 
 def alternatives(pattern):
-    """How many top-level `|` alternatives a regex source has.
+    """How many top-level `|` alternatives a regex source has.  ONE RULE.
 
-    F3 is a comparison of two rules by their reach, and `9 alternatives against
-    3` is the shortest true statement of it.  Counted on the pattern SOURCE at
-    depth 0 so a `(?:a|b)` group inside one alternative is not counted twice.
+    THIS IS `lib7522.alternatives`, CALLED AND NOT RESTATED.  The floor item
+    mg-bf79 adds, which neither mg-56dc's brief nor mg-70c7's names: `figures()`
+    was not the only rule this file kept in two copies.  `alternatives()` is a
+    RULE and not a helper -- it produces the published figure *"nine
+    alternatives against three"*, which is the shortest true statement of
+    mg-dee4's F3.
+
+    AND THESE TWO AGREED.  Their bodies were byte-identical after unparsing, so
+    unifying them changes no number anywhere.  That is the point rather than an
+    excuse for having left them: two identical copies provide no independence at
+    all, only the appearance of it, and they are one edit away from being the
+    pair that `figures()` already was.  The census of every name defined in both
+    libraries, with a disposition for each, is
+    `code/runner_exit_repair_bf79/out_p4_figures.txt`.
     """
-    src = pattern.pattern if hasattr(pattern, "pattern") else pattern
-    depth, n, i = 0, 1, 0
-    while i < len(src):
-        c = src[i]
-        if c == "\\":
-            i += 2
-            continue
-        if c == "(":
-            depth += 1
-        elif c == ")":
-            depth -= 1
-        elif c == "|" and depth == 0:
-            n += 1
-        i += 1
-    return n
+    return _L().alternatives(pattern)

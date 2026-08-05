@@ -1,0 +1,202 @@
+==============================================================================
+P5  THE SAME FOUR QUESTIONS, ASKED OF THIS TREE
+==============================================================================
+
+==============================================================================
+S1  EVERY COUNT OF MINE, WITH ITS GRAIN ON ITS OWN LABEL
+==============================================================================
+
+  The ledger this repair asks of its subject, asked of itself, with the
+  same instrument: `lib56dc.count_rows` for the population and
+  `lib56dc.grain_of` for the grain and the STAGE.  The bar is higher
+  here than the one `r6_self.py`'s E1 sets -- E1 accepts a grain word
+  anywhere in a two-line window, and this requires stage `label`.
+
+  WHY HIGHER, since a self-imposed harder test is the shape mg-dee4's F3
+  is about in reverse: `mg-03d1` reads LABELS, so a grain word of mine
+  that is only reachable from a header is a count my auditor will
+  classify by looking two lines up -- and if it looks two lines up it is
+  reading a row that is not mine to control.  Putting the word on the
+  label is the only version of this I can guarantee.
+
+      TRANSCRIPTS of mine on disk                          6
+      count ROWS they print                              103
+      ...ROWS of mine whose LABEL declares SITE       97
+      ...ROWS of mine whose LABEL declares EXECUTION   2
+      ...ROWS of mine whose LABEL declares BOTH        4
+      ...ROWS of mine whose LABEL declares NONE        0
+      ...ROWS of mine whose grain is at stage label  103
+      ...ROWS of mine whose grain is at stage prev     0
+      ...ROWS of mine whose grain is at stage header   0
+      ...ROWS of mine whose grain is at stage -        0
+
+      count ROWS of mine NOT at stage `label`              0
+
+==============================================================================
+S1b  AND THE POPULATION AND GRAIN NAMED IN THE SAME LABEL
+==============================================================================
+
+  A grain word is half of it.  `10 sites` does not say WHICH sites, and
+  mg-56dc/T1e is exactly that defect: one quantity published as `10
+  sites in 5 files / nine sites in four files / nine sites in three
+  files / 9 sites in - files`, with no artifact saying which reading it
+  is at.  So the check here is that each of my TOTAL rows names a
+  population as well as a grain -- a qualifier, not a bare unit.
+
+      count ROWS of mine                                 103
+      ...whose label names a POPULATION as well as a
+         grain                                            55
+      ...NAKED -- a grain with no population              48
+          *** out_p1_grain.txt:17  HEAD of this run = 3738079
+          *** out_p1_grain.txt:30  (site,target) ROWS, all targets = 49,53
+          *** out_p1_grain.txt:31  distinct SITES, all targets = 47,51
+          *** out_p1_grain.txt:34  ...of those SITES, READING the exit status = 4,4
+          *** out_p1_grain.txt:39  the value FOUR ARTIFACTS publish = 9
+          *** out_p1_grain.txt:57  973ca61 ALL rows       ROWS  49  SITES  47   = 2
+          *** out_p1_grain.txt:62  HEAD   ALL rows       ROWS  53  SITES  51  G = 2
+          *** out_p1_grain.txt:89  exit STATUS of the repaired probe, 1 RUN = 0
+          *** out_p1_grain.txt:110  as published at 973ca61        count ROWS in = 8
+          *** out_p1_grain.txt:111  rows whose LABEL declares SITE = 8
+          *** out_p1_grain.txt:112  rows whose LABEL declares EXECUTION = 0
+          *** out_p1_grain.txt:114  rows whose LABEL declares NONE = 0
+          *** out_p1_grain.txt:120  the repaired output, run now   count ROWS in = 11
+          *** out_p1_grain.txt:121  rows whose LABEL declares SITE = 11
+          ... 34 more
+
+  THIS ROW IS NOT ADDED TO `BAD` and the reason is stated rather than
+  quiet: `names a population` is a rule about MEANING approximated by a
+  word list, and a word list is exactly the hand-list this arc keeps
+  finding.  It is printed as a measurement a reader can disagree with,
+  and the naked rows are named in full so the disagreement can be about
+  specific rows rather than about a total.  Counting it would let me
+  tune a regex until my own number was zero, which is the mg-fcb2
+  tautology one step removed.
+
+==============================================================================
+S2  MY OWN POPULATIONS -- properties, or paths?
+==============================================================================
+
+  Every population this tree ranges over, with how it is defined:
+
+      P1's four artifacts          a HAND LIST of four paths
+          DISPOSITIONED: it is mg-56dc/T1d's finding VERBATIM -- *4 artifacts state 9* -- and the list IS the finding. Widening it would be auditing a different claim.
+      P1/P2's E1 population        `lib70c7.published_by`, a PROPERTY
+          provenance over the whole repository; no directory named
+      P3's `proven` population     `published_by` + a suffix rule
+          the artifacts of the deliverable plus the library's own sources
+      P4's duplicate census        every module-level `def` in both libraries
+          a PROPERTY of the source, not a list of interesting names
+      P4e's figure census          `git ls-files` + the `out_*.txt` convention
+          the whole repository; the name pattern is this arc's transcript convention, the same disposition `r6_self.py` gives `outs()`
+      S1's population              `lib70c7.outs(TREE)`, my own transcripts
+          a PATH, and it is the right one: the question is which counts I PRINT
+
+      POPULATIONS of mine, in total                        6
+      ...defined by a PROPERTY                             4
+      ...defined by a PATH or a LIST, dispositioned        2
+
+  AND S1'S POPULATION BEING A PATH IS NOT THE DEFECT O2 NAMES, which is
+  a claim that has to be argued rather than asserted.  O2 is that the
+  STRICTEST SELF-RULE ranged over one directory while the artifacts it
+  was about lay outside it.  S1 asks *which counts does this tree
+  print*, and a count this tree prints is in a transcript this tree
+  wrote -- the population and the question have the same boundary.  If
+  this tree ever publishes prose carrying its own counts, that prose is
+  outside S1 and S1 becomes the defect it is checking.  It does: this
+  tree ships a README and an OUTCOMES.  SO S1 IS RUN OVER THOSE TOO:
+
+      PROSE ARTIFACTS of mine `published_by` finds          1
+          code/runner_exit_repair_bf79/PREDICTIONS.md
+      count ROWS in them                                   0
+      ...NOT at stage `label`                              0
+
+==============================================================================
+S3  DOES `libbf79.py` DEFINE A RULE THE ARC ALREADY HAS?
+==============================================================================
+
+  The floor item turned on the tree that found it.  Every module-level
+  `def` in `libbf79.py`, checked against the three libraries it
+  imports:
+
+      module-level DEFS in libbf79.py                      7
+      ...also defined in lib56dc                          0
+      ...also defined in lib70c7                          0
+      ...also defined in lib7522                          0
+      NAMES of mine that collide with an imported one      0
+
+      RULES of mine that are ALIASES, not copies:
+          bar                  -> A.bar
+          hdr                  -> A.hdr
+          git                  -> A.git
+          read                 -> A.read
+          run_argv             -> A.run_argv
+          finding              -> A.finding
+          published_by         -> M.published_by
+          provenance_commits   -> M.provenance_commits
+
+  AND `grain_ledger` IS THE ONE THING WRITTEN HERE.  It is a JOIN of two
+  imported predicates and computes no grain and no population of its
+  own; if `lib56dc.grain_of` is wrong, this is wrong the same way, which
+  is the property a delegation is supposed to have.
+
+==============================================================================
+S4  mg-56dc'S TREE -- READ, NOT WRITTEN
+==============================================================================
+
+  An audit's tree is its evidence.  This repair IMPORTS mg-56dc's
+  library to close what mg-56dc found, which is not the same as editing
+  its findings -- and the difference is checkable:
+
+      files of mg-56dc's tree modified in the worktree      0
+
+      files of mg-dee4's tree modified in the worktree      0
+
+  AND THE TREES THIS TICKET DOES MODIFY, named so the boundary is a
+  fact rather than an intention:
+
+      code/runner_exit_repair_70c7        10 file(s) modified
+          code/runner_exit_repair_70c7/OUTCOMES.md
+          code/runner_exit_repair_70c7/README.md
+          code/runner_exit_repair_70c7/lib70c7.py
+          code/runner_exit_repair_70c7/out_r2_anchor.txt
+          code/runner_exit_repair_70c7/out_r3_strength.txt
+          code/runner_exit_repair_70c7/out_r4_property.txt
+          code/runner_exit_repair_70c7/out_r6_self.txt
+          code/runner_exit_repair_70c7/r3_strength.py
+          code/runner_exit_repair_70c7/r4_property.py
+          code/runner_exit_repair_70c7/r6_self.py
+      code/runner_exit_repair_7522         5 file(s) modified
+          code/runner_exit_repair_7522/lib7522.py
+          code/runner_exit_repair_7522/out_s3_figure.txt
+          code/runner_exit_repair_7522/out_s5_self.txt
+          code/runner_exit_repair_7522/out_selftest_7522.txt
+          code/runner_exit_repair_7522/selftest7522.py
+      docs                                 1 file(s) modified
+          docs/repair-mg-70c7-grain-and-population.md
+
+  mg-56dc's README cites `6aa043a` for its predictions commit and that
+  commit is NOT reachable from HEAD -- the reachable counterpart is
+  `abb95b0`.  OBSERVED AND NOT REPAIRED, for the reason above.  It is
+  recorded here rather than fixed because fixing it would mean editing
+  the evidence of the audit that found four of the five things this
+  ticket closes.
+
+      `6aa043a`  resolves: yes  ancestor of HEAD: NO
+      `abb95b0`  resolves: yes  ancestor of HEAD: yes
+
+==============================================================================
+P5 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a count row of mine whose grain is not
+on its own label -- in a transcript or in my prose -- a name in
+`libbf79.py` that collides with a rule of a library it imports, and a
+file of mg-56dc's or mg-dee4's tree modified in the worktree.  It ranges
+over the 103 count ROWS of my 6 transcript(s), the 0 count ROWS of my
+1 prose artifact(s), my 7 module-level DEFS and the two audit trees.
+It does NOT count S1b's naked-label row, which approximates a rule about
+MEANING with a word list and is printed for disagreement rather than
+scored.
+
+FINDING: P5a this tree's own defects of the class it repairs, recorded rather than smoothed away: a provenance query whose `\(` was a BRE GROUP and silently returned my auditor's artifacts as mine; a revision-and-grain check that was LINE-LOCAL over hard-wrapped prose in two different places, which is mg-dee4's F4 twice; an alternative diff that compared REGEX SOURCE against mg-dee4's PROSE RENDERING and reported 3 phantom gains; a moved-numbers claim that attributed ARC DRIFT to this ticket until a controlled counterfactual separated them; and P1f's own blind-spot test inheriting the blind spot it measures -- SIX, on a tree whose subject is instruments that agree for the wrong reason
+FINDING: P5b count ROWS of mine at stage `label`: 103 of 103 in transcripts and 0 of 0 in prose, 0 at `header` or `-`; and 55 of my 103 labels name a POPULATION as well as a grain, which is printed for disagreement and not scored because a word list approximating a rule about meaning is the hand-list this arc keeps finding

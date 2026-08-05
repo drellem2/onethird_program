@@ -639,9 +639,21 @@ _MENTION_SIGNALS = ("re.compile", "ck(", "_STRENGTH", "strength_lines",
 # INSTRUMENT, and it cannot find what theirs finds.  So there is now exactly
 # one marker rule in this tree; `s3_figure` imports it and `s5_self` imports
 # it, and a marker added for one is added for both by construction.
+#
+# AND THE CONSOLIDATION DROPPED ONE.  mg-56dc/T2b, repaired by mg-bf79: the
+# merged rule was the SUBJECT-facing nine verbatim, and `proven` -- the one
+# alternative mg-dee4's own transcript records as being `in SELF and not in
+# SUBJECT` -- was in neither.  "One rule pointed in both directions" was
+# implemented as *the subject's rule, pointed at me too*, which is the same
+# instrument for both and therefore satisfies the letter of F3 while quietly
+# LOSING reach.  A union is the only merge of two rules that cannot lose a
+# member, and `proven` restores it to mg-dee4's D4 union of TEN.  This is the
+# shape the brief names: a refactor that unifies rules into one object is
+# exactly where a rule goes missing silently, so the set is diffed BY NAME in
+# `code/runner_exit_repair_bf79/p3_ruleset.py` and the diff is a transcript.
 MARK = re.compile(r"confirmed exactly|byte-identical|byte for byte|\bverified\b"
                   r"|\(measured\)|\bidentical\b|\bconfirmed\b"
-                  r"|\ball (?:\d+|of)\b|\bexactly \d+\b", re.I)
+                  r"|\ball (?:\d+|of)\b|\bexactly \d+\b|\bproven\b", re.I)
 # Kept so S5 can exhibit the disagreement rather than describe it: the old
 # self-facing rule, three alternatives, run on the same bytes beside the new.
 MARK_OLD = re.compile(r"confirmed exactly|byte-identical|\bproven\b", re.I)

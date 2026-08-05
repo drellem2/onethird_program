@@ -39,7 +39,7 @@ rule could reach.
 | **R4a** | the one-line window takes mg-c2b3's artifacts from 20 to 24 | **HIT** |
 | **R4b** | the 4 new claims include `code/runner_exit_c2b3/OUTCOMES.md:88` | **MISS — the wrong population.** Line 88 is in **mg-7522's** `OUTCOMES.md`, not mg-c2b3's. The four the window adds to mg-c2b3's population are `OUTCOMES.md:9`, `k1_census.py:20`, `libc2b3.py:141` and `selftestc2b3.py:108` |
 | **R4c** | 0 of the 4 new claims is WRONG | **HIT** — all four disposition as NOT A CLAIM |
-| **R5a** | 9 sites outside the two names, 4 consuming | **HIT** |
+| **R5a** | 9 sites outside the two names, 4 consuming | **HIT** — and it stays HIT after mg-56dc/T1c. At `973ca61` the census gives **9 distinct SITES** outside the two names and **10 (site, target) ROWS**; the prediction said *sites* and the site count is 9. What was wrong was the transcript this row cited, which printed the 10 under the site word — not the score. mg-bf79 prints both grains; **no prediction verdict in this repository is changed by that repair** |
 | **R5b** | 0 sites name `run_audit.sh` | **HIT** |
 | **R5c** | the widening loses nothing | **HIT** — every site the two-name rule found is still found |
 | **R6a** | the value arm pulls `c0_repro.sh:47` in | **HIT** |

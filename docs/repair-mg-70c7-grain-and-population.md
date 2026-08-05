@@ -9,6 +9,30 @@ minutes, pure Python 3, no dependencies, no network. Every figure below is
 printed by a probe in that directory next to the predicate that produced it.
 `PREDICTIONS.md` was committed **before any probe in that directory existed**.
 
+> **AMENDED BY `mg-bf79`, after `mg-56dc` audited this repair.** Four things in
+> this document's own instrument were wrong and are now repaired; three of them
+> touch figures stated below and the fourth is the reason one of them was
+> unreadable.
+>
+> * **The `9` in the F5 section was right and the transcript backing it was
+>   wrong.** The probe printed the **(site, target) ROW** count under the label
+>   `executing sites`. `9` is the distinct-SITE count. Both grains are now
+>   printed under their own grain words **at a named revision**, because the
+>   census ranges over the whole repository and therefore moves.
+> * **The strictest self-rule ranged over one directory's transcripts** and now
+>   ranges over the **11 artifacts this deliverable authored**, derived by
+>   provenance from the whole repository — including this document.
+> * **The "one marker rule" had dropped `proven`.** Restored: **9 → 10**, which
+>   is `mg-dee4`'s D4 union.
+> * **Two copies of `figures()` disagreed on the integer 3.** There is one now.
+>
+> The record is `code/runner_exit_repair_bf79/` — `README.md`, `OUTCOMES.md` and
+> six transcripts. **And the finding that outranks all four: the classifier
+> `mg-56dc` built to catch label/grain mismatches cannot see this one.** `rows`
+> and `sites` are the same grain word to it, because its axis is
+> SITE-vs-EXECUTION and this was ROW-vs-SITE. A label-reading check is necessary
+> and is not sufficient.
+
 ---
 
 ## The short version
@@ -173,10 +197,23 @@ want is how a population becomes a hand-list.**
 The caller scan matched `run_all\.sh`. The first repair made it
 `(?:run_all|run_audit)\.sh`. **That is one filename replaced by two.**
 
-At `HEAD`: **9 executing sites name a `*.sh` whose basename is neither**, across
-6 distinct target scripts, **4 of them reading the exit status** — and **0 sites
-name the `run_audit.sh` the widening added**, so the widening is not exercised
-by anything in the arc.
+At `973ca61`, the commit that published `out_r4_property.txt`: **9 distinct
+executing SITES name a `*.sh` whose basename is neither**, across 6 distinct
+target scripts, **4 of them reading the exit status** — and **0 sites name the
+`run_audit.sh` the widening added**, so the widening is not exercised by
+anything in the arc.
+
+**The same census gives 10 (site, target) ROWS** at that revision, because
+`code/runner_exit_c2b3/selftestc2b3.py:155` names two scripts on one line. This
+paragraph used to read `At HEAD` and the transcript it cited printed the **10**
+under the word *sites* — mg-56dc/T1c, repaired in mg-bf79, which prints both
+grains each under its own grain word. **The count was wrong and the label was
+right.** And the census ranges over the whole repository, so it moves. A figure
+from a moving census belongs to a revision, which is why one is named here and
+`HEAD` no longer is; the value at any later revision is printed by
+`code/runner_exit_repair_bf79/out_p1_grain.txt`, which re-derives it at both
+grains, rather than written into this paragraph where it could not be
+re-measured.
 
 The property *was* stated — in `mg-7522`'s library, whose comment says the name
 rule *"is widened here to the property"*, **here** being the library and not the

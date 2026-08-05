@@ -149,7 +149,7 @@ S5d  D4 -- DOES THIS TREE USE A STRENGTH MARKER INSTEAD OF A CHECK?
 
   mg-70c7 REPAIRED TWO THINGS ABOUT THIS CHECK, both mg-dee4's F3.
   (1) THE RULE.  It ran a 3-alternative regex of its own while S3a
-      pointed a 9-alternative one at the SUBJECT -- and `verified`,
+      pointed a 10-alternative one at the SUBJECT -- and `verified`,
       named as one of the three markers in this file's own docstring,
       in the README and in the published document, was in the nine and
       not in the three.  There is now ONE rule, `lib7522.MARK`, and
@@ -162,14 +162,14 @@ S5d  D4 -- DOES THIS TREE USE A STRENGTH MARKER INSTEAD OF A CHECK?
 
   BOTH RULES, ON THE SAME BYTES -- the disagreement exhibited, not
   described:
-      the 3-alternative rule this tree used on ITSELF    24 hit(s)
-      the 9-alternative rule it pointed at its SUBJECT   88 hit(s)
+      the 3-alternative rule this tree used on ITSELF    28 hit(s)
+      the 10-alternative rule it pointed at its SUBJECT   92 hit(s)
 
   POPULATION.  8 `*.py`, 1 `*.sh`, 3 `*.md` in this tree, plus the
   published document -- 13 artifacts.  The `.md` half is new in
   mg-70c7 and it is the half mg-05eb's OPEN 2 was three-quarters in.
 
-      MENTIONs                                    69
+      MENTIONs                                    73
       USEs, BACKED by a transcript of this tree   12
       USEs with NO figure on the line              7
       USEs, UNBACKED                               0
@@ -187,7 +187,7 @@ S5d  D4 -- DOES THIS TREE USE A STRENGTH MARKER INSTEAD OF A CHECK?
       BACKED   README.md                      93  64,59,64,59,64     (measured)"*, which is **59 of 64*
       BACKED   OneThird-RunnerExit-PopulationRepair.md  107  34,34,34           The sweep settled its retroactive 
 
-      NO FIG   lib7522.py                    688  character on each side, so `` `verified against th
+      NO FIG   lib7522.py                    700  character on each side, so `` `verified against th
       NO FIG   s2_status.py                  308  scored a re-run identical step as "did not run".
       NO FIG   s3_figure.py                    1  """S3 -- THE FIGURE THAT WAS "CONFIRMED EXACTLY", 
       NO FIG   sitecustomize_mg7522.py         2  failure AFTER it has done all of its real work.

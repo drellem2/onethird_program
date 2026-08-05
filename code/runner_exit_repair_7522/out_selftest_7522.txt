@@ -82,13 +82,14 @@ S6  THIS TREE'S OWN RUNNER, BY THIS TREE'S OWN RULES
   ok   this runner sets -e                                            
   ok   this runner is #!/bin/sh                                       
   ok   every step redirects and guards                                
-  ok   the marker rule S3a points at the SUBJECT has 9 alternatives   
+  ok   the marker rule S3a points at the SUBJECT has 10 alternatives  
+  ok   ...and that is mg-dee4's D4 UNION, not the subject's nine verbatim 
   ok   the rule this tree used on ITSELF had 3, and is kept only for exhibition 
   ok   `verified` is IN the rule -- the D4 docstring names it and it was not 
   ok   ...and was not in the old one                                  
   ok   a marker INSIDE a quoted span is a MENTION, not a USE (mg-70c7) 
   ok   a marker written bare is a USE                                 
-  ..   47 MENTION(s) and 8 USE(s) of those words in this tree's code.
+  ..   51 MENTION(s) and 8 USE(s) of those words in this tree's code.
        A mention is not an occurrence; counting one as the other is the
        defect this arc keeps finding.  Whether a USE is BACKED by a
        transcript of this tree is S5d's question and is answered there,
@@ -179,7 +180,7 @@ S12  IS A FIGURE BACKED BY A TRANSCRIPT?  both senses  (mg-70c7)
   ok   0, 1 and 2 are not figures -- they are structural in prose     
 
 ==============================================================================
-selftest: 92 assertions, 0 failed
+selftest: 93 assertions, 0 failed
 ==============================================================================
 
 EXTENT.  These exercise the CLASSIFIER, in both senses at every rule,

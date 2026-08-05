@@ -16,7 +16,7 @@ R3a  ONE RULE OBJECT, POINTED IN BOTH DIRECTIONS
       s5_self.py calls the library's rule                  3   OK
       lib7522.py defines the one rule                      1   OK
 
-      alternatives in the rule pointed at the SUBJECT    9
+      alternatives in the rule pointed at the SUBJECT   10
       alternatives in the rule it used on ITSELF         3   (kept as
                                                              MARK_OLD,
                                                              for the
@@ -55,10 +55,23 @@ R3c  THE VERDICT -- BACKED or UNBACKED, re-derived independently
 
   A bare marker beside a figure the tree COMPUTED is not the defect;
   a bare marker beside a figure nothing here produces is.  Re-derived
-  under this tree's own `figures()` and `transcript_numbers()`, which
-  share no code with `lib7522`'s:
+  under this tree's own POPULATION, WINDOW and CORPUS -- all three
+  written here -- but NO LONGER under its own `figures()`.
 
-      MENTIONs                                    69
+  THAT SENTENCE USED TO SAY `share no code with lib7522's` AND IT WAS
+  WITHDRAWN BY mg-bf79, not weakened by accident.  mg-56dc/T2d found
+  the two `figures()` copies DISAGREEING on the integer 3, so the
+  independence this row claimed was the kind a duplicate provides:
+  two rules that can differ, one of them wrong, with nothing measuring
+  which.  `lib70c7.figures` now calls `lib7522.figures`.  What that
+  costs is stated exactly -- the comparison against `out_s5_self.txt`
+  below now shares ONE predicate with the derivation it checks, and
+  therefore cannot catch a disagreement that lives in `figures()`
+  itself.  What it keeps is the rest: the population, the window and
+  the corpus are still this tree's, and a wrong figure rule would move
+  BOTH numbers rather than hiding in the gap between them.
+
+      MENTIONs                                    73
       USEs BACKED by a transcript                 12
       USEs with no figure in the window            7
       USEs UNBACKED                                0
@@ -83,7 +96,7 @@ R3d  F4 -- THE CLAIM WINDOW, both populations, both widths
           + k1_census.py:20  confirmed exactly."  It was not confirmed and it was not
           + libc2b3.py:141  # reader-facing artifacts then reported the number as "c
           + selftestc2b3.py:108  # reported the number as confirmed.  Both senses, so the
-      mg-7522's own artifacts                    window 0:  31   window 1:  43   (+12)
+      mg-7522's own artifacts                    window 0:  31   window 1:  44   (+13)
           + OUTCOMES.md:88  `wc -c < FILE` counts the same bytes the pipeline did, v
           + README.md:76  "confirmed exactly"**. The ticket was right; `libc2b3.PI
           + README.md:156  with `verified` — named as a marker in `s5_self.py`'s ow
@@ -94,7 +107,8 @@ R3d  F4 -- THE CLAIM WINDOW, both populations, both widths
           + s3_figure.py:170  print("  runners (measured)\"*.  `(measured)` is the str
           + s3_figure.py:246  ("k3_retro.py", "past green is confirmed", "NOT A CLAIM"
           + s3_figure.py:248  ("k3_retro.py", "byte for byte", "HOLDS",
-          + selftest7522.py:165  ck("`verified` is IN the rule -- the D4 docstring names 
+          + selftest7522.py:182  bool(L.MARK.search("proven")), True)
+          + selftest7522.py:185  ck("`verified` is IN the rule -- the D4 docstring names 
           + OneThird-RunnerExit-PopulationRepair.md:191  it up to `all`** — and then wrote `(measured)` beside it
 
   THE ONE THE FINDING IS ABOUT is in the second population:
@@ -113,7 +127,8 @@ R3 TOTAL BAD: 0
 EXTENT OF THAT NUMBER.  It counts a second marker regex in the subject
 tree, a named marker the one rule does not reach, a self-facing
 population that cannot see its own `*.md`, an UNBACKED use, a
-disagreement between this derivation and `out_s5_self.txt`, and a
+disagreement between this derivation and `out_s5_self.txt` -- weakened
+by mg-bf79 to share `figures()` with it, which is said at R3c -- and a
 claim window that is not one line in both directions.  It ranges over
 mg-7522's 13 artifacts and mg-c2b3's 11.  It does NOT judge whether a
 BACKED figure is backed by the RIGHT measurement -- that is the weak

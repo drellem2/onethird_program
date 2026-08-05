@@ -1,0 +1,278 @@
+==============================================================================
+P1  THE LABEL, THE GRAIN, AND WHICH OF THEM WAS WRONG
+==============================================================================
+
+==============================================================================
+P1a  THE PUBLISHING COMMIT, DERIVED AND NOT NAMED
+==============================================================================
+
+  A figure from a whole-repository census is a fact about a REVISION.
+  mg-56dc's own first run scored a defect against itself for comparing
+  a HEAD derivation with a transcript produced on another tree, so the
+  commit is read out of the log rather than written down -- and the
+  constant `libbf79.SUBJECT_REV` is CHECKED against it, not trusted.
+
+      the commit that last published the transcript      973ca61
+      `libbf79.SUBJECT_REV`, the constant                973ca61
+      HEAD of this run                                   3738079
+      derivation and constant agree                      yes
+
+==============================================================================
+P1b  THE QUANTITY AT TWO GRAINS, RE-DERIVED AT 973ca61 AND AT HEAD
+==============================================================================
+
+  Under `lib56dc.exec_site_rows` / `exec_sites` -- the AUDIT's
+  enumerator, which shares no code with the probe being repaired.
+  `outside` means the target basename is neither of the two names the
+  caller scan matched; it is the column the four artifacts publish.
+
+      grain and population                           973ca61      HEAD
+      (site,target) ROWS, all targets                     49        53
+      distinct SITES, all targets                         47        51
+      (site,target) ROWS outside the two names            10        11
+      distinct SITES outside the two names                 9        10
+      ...of those SITES, READING the exit status           4         4
+
+      at 973ca61, the OUTSIDE column as ROWS                10
+      at 973ca61, the OUTSIDE column as distinct SITES       9
+      the transcript's printed value under a SITE label   10
+      the value FOUR ARTIFACTS publish                     9
+
+  THE VERDICT: THE COUNT WAS WRONG AND THE LABEL WAS RIGHT.  `9` is
+  the distinct-SITE count and is what the four artifacts state; `10` is
+  the (site, target) ROW count and is what the transcript printed under
+  the word `sites`.  Both are legitimate quantities.  The repair prints
+  BOTH, each under its own grain word, and leaves every `9` in prose
+  standing -- because the prose was never the thing that was wrong.
+
+==============================================================================
+P1c  THE GAP BETWEEN THE GRAINS, AND THE LINES RESPONSIBLE
+==============================================================================
+
+  The gap is exactly the number of source lines naming more than one
+  `*.sh`.  Not a residue: a countable set, printed per revision, with
+  the lines named -- so a reader can check the arithmetic rather than
+  the claim.
+
+      973ca61 ALL rows       ROWS  49  SITES  47  GAP  2
+          code/runner_exit_c2b3/k2_consume.py:456  ->  b0_repro.sh, run_all.sh
+          code/runner_exit_c2b3/selftestc2b3.py:155  ->  b0.sh, x.sh
+      973ca61 OUTSIDE rows   ROWS  10  SITES   9  GAP  1
+          code/runner_exit_c2b3/selftestc2b3.py:155  ->  b0.sh, x.sh
+      HEAD   ALL rows       ROWS  53  SITES  51  GAP  2
+          code/runner_exit_c2b3/k2_consume.py:456  ->  b0_repro.sh, run_all.sh
+          code/runner_exit_c2b3/selftestc2b3.py:155  ->  b0.sh, x.sh
+      HEAD   OUTSIDE rows   ROWS  11  SITES  10  GAP  1
+          code/runner_exit_c2b3/selftestc2b3.py:155  ->  b0.sh, x.sh
+
+  THE PREDICTION THIS REFUTES IN PART, kept as written.  `PREDICTIONS`
+  P1c says the gap is *exactly 1 at every revision this probe reads*,
+  *not 0, not 2*, and names ONE line as responsible.  Measured: that is
+  true of the OUTSIDE column at both revisions -- the column the four
+  artifacts publish and the one mg-56dc/T1c reproduced -- and FALSE of
+  the ALL column, where the gap is 2 at BOTH revisions and a second
+  line, `k2_consume.py:456`, is equally responsible.  It was already
+  there at the publishing commit; I simply had not looked at the column
+  I was not quoting.  I predicted a property of one column as a property
+  of the census, which is mg-56dc/T1c's own recorded mistake -- *I
+  predicted a number for a column that has no stable value* -- made
+  again, in the repair of it, by the person repairing it.
+
+==============================================================================
+P1d  THE REPAIRED PROBE, RUN LIVE -- BOTH GRAINS PRINTED?
+==============================================================================
+
+  `r4_property.py` is run here as `run_all.sh` runs it and its output
+  is read.  A repair whose evidence is the repaired source rather than
+  the repaired OUTPUT is a claim about an intention.
+
+      exit STATUS of the repaired probe, 1 RUN              0
+      a ROW-grain total, labelled ROWS                    1  OK
+      a SITE-grain total, labelled SITES                  1  OK
+      the OUTSIDE column as ROWS                          1  OK
+      the OUTSIDE column as SITES                         1  OK
+      the multi-target lines, enumerated                  1  OK
+      the revision the census was taken at                1  OK
+
+      the OLD mislabelled line, still printed              0
+
+==============================================================================
+P1e  THE CLASSIFIER OVER THE WHOLE REPAIRED OUTPUT, not one row
+==============================================================================
+
+  The brief: *check every other count in the same artifact carries a
+  label that matches its grain -- run the sixth instrument over the
+  WHOLE artifact rather than this one row.*  `lib56dc.count_rows` gives
+  the population by a shape rule over the printed line;
+  `lib56dc.grain_of` gives the grain its LABEL declares and the STAGE
+  at which it was found.  Both are the audit's, unmodified.
+
+      as published at 973ca61        count ROWS in it              8
+          rows whose LABEL declares SITE              8
+          rows whose LABEL declares EXECUTION         0
+          rows whose LABEL declares BOTH              0
+          rows whose LABEL declares NONE              0
+          rows whose grain was found at label       3
+          rows whose grain was found at prev        5
+          rows whose grain was found at header      0
+          rows whose grain was found at -           0
+
+      the repaired output, run now   count ROWS in it             11
+          rows whose LABEL declares SITE             11
+          rows whose LABEL declares EXECUTION         0
+          rows whose LABEL declares BOTH              0
+          rows whose LABEL declares NONE              0
+          rows whose grain was found at label      11
+          rows whose grain was found at prev        0
+          rows whose grain was found at header      0
+          rows whose grain was found at -           0
+
+      repaired: count rows classified NONE                 0
+      repaired: count rows whose grain is HEADER-only      0
+
+  THE FULL LEDGER of the repaired output, so the audit waiting on this
+  repair can check the classifier against the values rather than
+  against my summary of them:
+
+      line   grain     stage  value(s)   label
+      24     SITE      label  53         (site,target) ROWS naming a `*.sh`
+      25     SITE      label  51         distinct executing SITES behind those rows
+      26     SITE      label  42         ...ROWS the two-name rule matches
+      27     SITE      label  11         ...ROWS outside it, across 7 distinct basena
+      28     SITE      label  10         ...distinct SITES outside it
+      29     SITE      label  4          ...of those SITES, READING the exit status
+      30     SITE      label  1          ...ROWS naming `run_audit.sh`, the name ADDE
+      32     SITE      label  2          source lines naming MORE THAN ONE `*.sh`
+      79     SITE      label  4          SITES the two-name rule found
+      80     SITE      label  4          ...SITES still found under the property
+      81     SITE      label  0          ...SITES LOST by the widening
+
+==============================================================================
+P1f  THE CLASSIFIER CANNOT SEE O1 AT ALL -- its axis is the other one
+==============================================================================
+
+  THE HEADLINE OF THIS PROBE, and it refutes my own P1g prediction.  I
+  predicted the label-reading classifier would disagree with the value's
+  true grain on at least one row BEFORE the repair and on zero after.
+  It disagrees on the same row before AND after, and the reason is not
+  that the repair failed -- the reason is that the classifier's grain
+  axis is SITE vs EXECUTION and O1's defect is ROW vs SITE, which is a
+  distinction BELOW ITS RESOLUTION.  Read out of `lib56dc.SITE_WORDS`:
+
+      `sites         `  classifies as  SITE
+      `rows          `  classifies as  SITE
+      `basenames     `  classifies as  SITE
+      `source lines  `  classifies as  SITE
+      `executions    `  classifies as  EXECUTION
+      `runs          `  classifies as  EXECUTION
+
+  `rows` and `sites` are THE SAME GRAIN WORD to this instrument, and
+  correctly so on its own terms: both range over source rather than over
+  runs, which is the F1 distinction it was built for.  So a count
+  labelled `sites` holding a ROW value is, to the sixth instrument,
+  a row with the right grain word on it.  IT PASSES.
+
+  THIS IS THE ANSWER TO THE BRIEF'S INSTRUCTION TO CHECK THE CLASSIFIER.
+  mg-56dc did not find T1c with this classifier and could not have; it
+  found it by re-deriving the quantity at two grains, which is what
+  `exec_site_rows`/`exec_sites` are for.  A label-reading check is
+  necessary and is not sufficient, and the gap between those two is
+  exactly one defect wide -- the one it was pointed at.
+
+  What the test below therefore measures is NOT the classifier's error
+  rate.  It is the size of the blind spot: rows where the label declares
+  a grain the classifier accepts AND the value is independently
+  re-derivable as the OTHER source-side grain.  There is exactly one
+  such row in this artifact -- the outside column -- and it is the row
+  O1 is about.  Put to both versions:
+
+      as published at 973ca61      label declares SITE   value  10  -> is the ROWS count
+          *** IN THE BLIND SPOT: stage `label`, so the grain word
+              is on the label itself and the classifier ACCEPTS
+              it, while the value is the ROWS count
+      repaired, run now            label declares SITE   value  11  -> is the ROWS count
+          *** IN THE BLIND SPOT: stage `label`, so the grain word
+              is on the label itself and the classifier ACCEPTS
+              it, while the value is the ROWS count
+
+      blind-spot ROWS, PUBLISHED version                   1
+      blind-spot ROWS, REPAIRED version                    1
+      blind-spot ROWS, both versions summed                2
+
+  IT IS STILL 1 AFTER THE REPAIR, AND THAT IS NOT A FAILED REPAIR.  The
+  row the test picks is whichever row matches `outside`, and after the
+  repair the FIRST such row is `...ROWS outside it, across 7 distinct
+  basenames` -- a row whose label says ROWS, holds the row value, and is
+  correct.  The classifier calls it SITE because `rows` and `basenames`
+  are both SITE_WORDS, so this test cannot tell that row from the one it
+  was built to catch.  THE TEST INHERITS THE BLIND SPOT IT IS MEASURING.
+  That is a defect of THIS probe, recorded rather than tuned away: the
+  honest instrument for O1 is the two-grain re-derivation in P1b, which
+  needs no labels at all, and P1e's ledger, which reports what the label
+  SAYS without claiming it is true.  A label-reading test cannot audit a
+  label -- and that sentence is the whole of why `mg-03d1` exists and is
+  told to check the classifier rather than to run it.
+
+==============================================================================
+P1g  THE FOUR ARTIFACTS -- grain word AND revision
+==============================================================================
+
+  A figure from a moving census pinned to `HEAD` is a figure that
+  becomes false without anyone editing it.  All four artifacts said
+  `At HEAD`.  Each must now state the SITE grain and a REVISION:
+
+  THE WINDOW IS ONE LINE IN BOTH DIRECTIONS AND IT APPLIES TO BOTH
+  CONJUNCTS -- and it took two goes, both recorded.  The first draft
+  required the figure, the grain word and the revision on ONE LINE and
+  reported 1 of 4 against prose that states all four.  The second
+  windowed the REVISION and left `9`-near-`sites` line-local, and
+  reported 3 of 4 -- failing the published document, whose sentence
+  wraps between the figure and the grain word.  That is mg-dee4's F4
+  twice: a LINE-LOCAL rule over hard-wrapped prose, where the two halves
+  of a claim land on different lines routinely.  mg-70c7's own R3d
+  repaired `s3_figure.WINDOW` to 1 in both directions for exactly this,
+  and I reproduced the defect it repaired while checking that it had --
+  and then reproduced it again in the narrower place.  Fixing the rule
+  rather than reflowing the prose is the choice being made here: the
+  document is not wrong, the check was.
+
+      code/runner_exit_repair_70c7/README.md               OK
+          [grain yes / rev yes] this figure is a fact about — **9 distin
+      code/runner_exit_repair_70c7/OUTCOMES.md             OK
+          [grain yes / rev yes] | **R5a** | 9 sites outside the two name
+      code/runner_exit_repair_70c7/r4_property.py          OK
+          [grain yes / rev yes] 9 distinct executing SITES name a `*.sh`
+          [grain yes / rev NO] RIGHT AND THE COUNT WAS WRONG: `9` is th
+      docs/repair-mg-70c7-grain-and-population.md          OK
+          [grain yes / rev NO] > * **The `9` in the F5 section was righ
+          [grain yes / rev NO] >   `executing sites`. `9` is the distin
+
+      artifacts stating `9`, the word SITES and a revision 4 of 4
+
+  AND NO PREDICTION VERDICT ANYWHERE IS CHANGED BY THIS.  mg-70c7's
+  `OUTCOMES.md` row R5a predicted *9 sites outside the two names, 4
+  consuming* and scored HIT.  It said SITES and the site count is 9;
+  what was wrong was the transcript it cited, not the score.  The row
+  stands:
+      | **R5a** | 9 sites outside the two names, 4 consuming | **HIT** — and it 
+
+      R5a is still scored HIT                            yes
+
+==============================================================================
+P1 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a stale `SUBJECT_REV` constant, a
+non-zero exit from the repaired probe, a missing both-grain total, the
+old mislabelled line surviving, a count row of the repaired output the
+classifier cannot place or can place only from a column header, an
+artifact that states the site figure without a revision, and R5a losing
+its HIT.  It ranges over the 4 ARTIFACTS listed above, the 11 count
+ROWS of the repaired output and the 8 count ROWS of the published one.
+IT DOES NOT COUNT THE BLIND SPOT IN P1f, and deliberately: that is a
+property of the classifier, not a defect of this repair, and inflating
+my own BAD with someone else's instrument limit would make the number
+mean two things.  It is reported as a FINDING instead.
+
+FINDING: P1a the count labelled `executing sites` printed the (site,target) ROW count (10) where four artifacts publish the distinct-SITE count (9); THE COUNT WAS WRONG AND THE LABEL WAS RIGHT, and both grains are now printed under their own grain words at a named revision
+FINDING: P1b the sixth instrument's classifier CANNOT SEE O1: `rows`, `basenames` and `sites` are all SITE_WORDS because its axis is SITE-vs-EXECUTION, so a count labelled `sites` holding a ROW value PASSES it -- mg-56dc found T1c by re-deriving the quantity at two grains and could not have found it with the classifier, and this probe's own P1f test inherits the same blind spot, which is recorded rather than tuned away

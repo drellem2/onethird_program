@@ -1,0 +1,148 @@
+==============================================================================
+selftestbf79  EVERY PREDICATE, BOTH DIRECTIONS, KNOWN ANSWERS
+==============================================================================
+
+==============================================================================
+T1  count_rows and grain_of -- the CLASSIFIER, both directions
+==============================================================================
+
+  The population rule first: a count row is a SHAPE over the printed
+  line, so a sentence with a number in it must NOT be one.
+
+      a `label   <spaces>   N` row is a count row              1              OK
+      ...a prose sentence containing a number is NOT           0              OK
+      ...a row with no letters in its label is NOT             0              OK
+      ...a row with no digits is NOT                           0              OK
+
+  AND THE CLASSIFIER, on the distinction O1 turns on.  These two rows
+  MUST come back the same, and that is the FINDING, not a bug: the
+  classifier's axis is SITE-vs-EXECUTION, so it cannot separate a row
+  count from a site count.  A self-test that asserted they differ would
+  be asserting a property the instrument does not have.
+
+      `sites` classifies as SITE                               'SITE'         OK
+      `rows` ALSO classifies as SITE -- the blind spot         'SITE'         OK
+      `executions` classifies as EXECUTION                     'EXECUTION'    OK
+      a label with no grain word classifies as NONE            'NONE'         OK
+      a label with both classifies as BOTH                     'BOTH'         OK
+
+  AND THE STAGE, which is what S1 holds this tree to:
+      grain on the label itself -> stage `label`               'label'        OK
+      grain one line above -> stage `prev`                     'prev'         OK
+      grain only in a header 4 lines up -> stage `header`      'header'       OK
+      no grain anywhere -> stage `-`                           '-'            OK
+
+==============================================================================
+T2  exec_site_rows / exec_sites -- the TWO GRAINS, by construction
+==============================================================================
+
+  A fixture with a KNOWN answer: one file, two executing lines, one of
+  which names two scripts.  So the answer is 3 ROWS and 2 SITES by
+  construction, and any parser that returns 3 and 3 or 2 and 2 is wrong
+  in a way this fixture can see.
+
+  THE FIXTURE IS INTENT-TO-ADDED, and the first draft of this section is
+  why.  `exec_site_rows` builds its population from `git ls-files`, so a
+  fixture written only to DISK is invisible to it and the four rows below
+  came back 0 -- which reads as a broken parser and is actually an
+  untracked file.  That is `lib70c7.outs()`'s own recorded defect,
+  reproduced from the other side: *a tree's transcripts are untracked on
+  the run that first produces them, so a corpus built from the index is
+  EMPTY on that run*.  `git add -N` puts the path in the index without
+  its content, and it is removed in the `finally`; T6 below is what
+  establishes that the index came back.
+
+      the fixture is in the population `ls-files` returns      True           OK
+      (site,target) ROWS in the fixture                        3              OK
+      ...distinct SITES behind them                            2              OK
+      ...the gap is the multi-target line                      1              OK
+      ...the targets, sorted                                   ['alpha.sh', ' OK
+
+      fixture directory removed                          yes
+      fixture removed from the index                     yes
+
+==============================================================================
+T3  published_by -- a PROPERTY, and the escaping defect it had
+==============================================================================
+
+  The direction that matters: a tag that matches NOTHING must return an
+  EMPTY population, not everything.  This is the exact test the first
+  draft would have failed -- `--grep='\(nonexistent\)'` in BASIC regex
+  reduces to the bare string and matches whatever it happens to contain.
+
+      a tag no commit subject carries -> empty population      []             OK
+      ...and no commits                                        []             OK
+
+  AND THE PARENTHESES ARE LITERAL, which is the whole of the fix.  The
+  bare id must NOT select the same commits as the parenthesised one,
+  because a body mentioning `mg-70c7` is not a commit that published it:
+
+      commits whose subject carries `(mg-70c7)`                6              OK
+      COMMIT ITEMS merely containing `mg-70c7`            10
+      ...strictly more than the parenthesised ones             True           OK
+
+  AND THE POPULATION'S CLAUSES, each with a case that must be EXCLUDED:
+      the population contains a transcript of the subject      True           OK
+      ...and the published document, 4 directories away        True           OK
+      ...and NOT `lib7522.py`, which it MODIFIED not added     False          OK
+      ...and NOT a `*.py` of its own, which is not a printed count False          OK
+      ...and NOT mg-56dc's README, whose BODY names mg-70c7    False          OK
+      the population size                                      11             OK
+
+==============================================================================
+T4  figures / alternatives -- ONE rule each, and the 3
+==============================================================================
+
+  The unification, put to the value it turned on:
+
+      `3` is a figure under the one rule                       [3]            OK
+      ...and under `lib70c7.figures`, which now calls it       [3]            OK
+      ...and was NOT under the old `lib70c7` rule              []             OK
+      `2` is a figure under neither                            []             OK
+      a `:`-prefixed number is not a figure                    []             OK
+      `on line 89` is not a figure                             []             OK
+
+  AND THE FALSE EXCLUSION, asserted as FALSE so the finding cannot
+  silently become true and go unnoticed -- if a later ticket fixes
+  `figures()` this row goes red and names itself:
+      an all-digit short revision IS read as a figure (P4e)    [3738079]      OK
+
+      the two `alternatives()` agree on `MARK`                 True           OK
+      `MARK` has mg-dee4's D4 union of ten                     10             OK
+      ...and `proven` is one of them                           True           OK
+      ...and was NOT before the restoration                    False          OK
+      a `(?:a|b)` group is one alternative                     2              OK
+      an escaped `\|` is not an alternative                    1              OK
+
+==============================================================================
+T5  same_body / defined_names -- the duplicate census
+==============================================================================
+
+      `bar` is IDENTICAL in both libraries                     True           OK
+      `for_loops` DIFFERS                                      False          OK
+      `figures` is now a delegation, so it differs             False          OK
+      `defined_names` finds a module-level def                 True           OK
+      ...and does NOT find a nested one                        False          OK
+
+==============================================================================
+T6  NO TRACKED BYTE MOVED
+==============================================================================
+
+      `git status --porcelain` unchanged across this run  yes
+
+  P3d DOES write `lib7522.py` and restore it, which is why that probe
+  asserts byte-identity itself rather than relying on this row: this
+  file's run and that one's are different processes.
+
+==============================================================================
+selftestbf79 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  Every row above is a predicate put to an input
+whose answer is fixed by construction or by another tree's committed
+transcript, in BOTH directions -- mg-56dc/T3d found 0 direction tests in
+either membership predicate and this file is the answer to that.  It
+does NOT establish that the predicates are the RIGHT ones; it establishes
+that they compute what their docstrings say.  T1's `rows`-is-SITE row is
+the clearest case of the difference: the assertion is that the
+classifier has the blind spot, not that the blind spot is correct.

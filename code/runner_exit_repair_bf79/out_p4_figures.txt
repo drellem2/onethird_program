@@ -1,0 +1,211 @@
+==============================================================================
+P4  TWO COPIES OF A RULE, AND EVERY OTHER PAIR LIKE THEM
+==============================================================================
+
+==============================================================================
+P4a  IS THERE ONE IMPLEMENTATION NOW?  asked of the source
+==============================================================================
+
+  `lib70c7.figures` must be a CALL and not a body.  Read out of the
+  source with `lib7522.function_code`, which strips the docstring -- so
+  a rule restated in prose and delegated in code reads as delegated,
+  which is what it is.
+
+      lib70c7.figures        body lines  1   delegates: yes
+      lib70c7.alternatives   body lines  1   delegates: yes
+
+      IMPLEMENTATIONS of those 2 rules, as function ITEMS   2
+      ...ITEMS expected, one per unified rule               2
+
+==============================================================================
+P4b  DO THEY AGREE NOW?  over 0..500, before and after
+==============================================================================
+
+  The two rules put to the same inputs.  BEFORE is reconstructed from
+  the pre-repair predicate -- `v <= 3` against `v > 2` -- rather than
+  read from a commit, so the row is a property of the two RULES and not
+  of a revision.  AFTER calls both names as they now stand.
+
+      INTEGER ITEMS tested, 0..500                       501
+      ...INTEGER ITEMS the two rules DISAGREED on, before   1
+          3
+      ...INTEGER ITEMS they disagree on, AFTER             0
+          (none)
+
+      the third copy agrees with mg-7522's at small=2     yes
+      ...and with mg-70c7's OLD rule at small=3           yes
+
+  WHICH COPY WAS WRONG, and it is decidable rather than a preference:
+  BOTH DOCSTRINGS SAID `0, 1 and 2`.  Only mg-7522's did it.  So the
+  surviving rule is the one both labels always described, and deleting
+  the other body makes two labels true instead of one.
+
+      mg-70c7's OLD body dropped the value 3              yes
+      its docstring claimed it excluded `0`, `1` and `2`  yes
+
+==============================================================================
+P4c  WHAT UNIFYING `figures()` COSTS -- controlled, not asserted
+==============================================================================
+
+  My own P4c predicted this changes at least one number in a committed
+  transcript of mg-70c7, *because r3_strength.py R3c compares a
+  lib70c7-computed count against a lib7522-computed one*.  The
+  prediction and its REASON are scored separately below, because they
+  do not get the same verdict.
+
+      TRANSCRIPTS in R2b's figure corpus                  13
+      DISTINCT FIGURES under the unified rule             99
+      ...under mg-70c7's OLD rule, same transcripts       98
+      ...FIGURES the unification adds                      1
+          3
+      ...FIGURES it removes                                0
+
+  THAT IS THE COMMITTED NUMBER THAT MOVES: `out_r2_anchor.txt`'s row
+  *distinct figures they print*, at a FIXED corpus, goes 98 -> 99.
+  So P4c's CLAIM is a HIT.
+
+  AND ITS REASON IS A MISS.  R3c's four counts are re-derived here under
+  both rules, holding everything else fixed:
+
+      R3c row                            OLD rule  unified
+      MENTIONs                                 73       73   same
+      USEs BACKED                              12       12   same
+      USEs with no figure                       7        7   same
+      USEs UNBACKED                             0        0   same
+
+      R3c ROWS the unification moves                       0
+
+  ZERO.  The mechanism I named is the one place it does NOT bite: the
+  value `3` never lands in a claim window in that population, so the
+  comparison R3c makes is unaffected.  The number that moves is R2b's
+  corpus SIZE, one section over, which I did not name.  Right answer,
+  wrong reason -- and a prediction whose reason is wrong is a prediction
+  that would have been wrong on a different repository, so it is scored
+  PART HIT, PART MISS rather than HIT.
+
+==============================================================================
+P4d  THE FLOOR ITEM -- every name defined in BOTH libraries
+==============================================================================
+
+  `figures()` was not the only rule kept in two copies.  A by-name
+  census of every module-level `def` in both libraries, with a
+  DISPOSITION for each -- because `unify all of them` is the wrong
+  answer and the reason is written in `lib70c7`'s own docstring: its F1
+  parsers exist so a probe can DISAGREE with the rule it checks.  That
+  reason is real where the two implementations DIFFER and empty where
+  they are the same code.
+
+      module-level DEF WORDS in lib70c7.py                21
+      module-level DEF WORDS in lib7522.py               44
+      NAME WORDS defined in BOTH libraries                15
+
+      name                   same code?  disposition
+      alternatives           delegated   UNIFIED by this ticket
+      argv_of                differs     F1 parser, written from scratch ON PURPOSE (differs)
+      bar                    IDENTICAL   output/plumbing -- not a rule; no figure rests on it
+      captured_var           IDENTICAL   A RULE IN TWO IDENTICAL COPIES -- the next `figures()`
+      expand                 differs     F1 parser, written from scratch ON PURPOSE (differs)
+      figures                delegated   UNIFIED by this ticket
+      for_loops              differs     F1 parser, written from scratch ON PURPOSE (differs)
+      git                    IDENTICAL   output/plumbing -- not a rule; no figure rests on it
+      hdr                    IDENTICAL   output/plumbing -- not a rule; no figure rests on it
+      loop_bindings          differs     F1 parser, written from scratch ON PURPOSE (differs)
+      pipeline_executions    differs     F1 parser, written from scratch ON PURPOSE (differs)
+      read                   IDENTICAL   output/plumbing -- not a rule; no figure rests on it
+      rows                   IDENTICAL   output/plumbing -- not a rule; no figure rests on it
+      run_argv               differs     plumbing, but DIVERGED -- see below
+      var_reads              differs     F1 parser, written from scratch ON PURPOSE (differs)
+
+      NAME WORDS in both, IDENTICAL code                   6
+      NAME WORDS in both, code DIFFERS                     7
+      NAME WORDS this ticket UNIFIED                       2
+
+      RULE WORDS still kept in two IDENTICAL copies        1
+          captured_var
+
+  AND THE SURVIVOR IS NAMED BY THE MEASUREMENT, NOT BY ME.  I expected
+  `run_argv` to be the one to flag; the census says otherwise.
+  `run_argv`'s two copies DIFFER -- mg-7522's takes an `env` argument --
+  so it is a divergence that is at least visible, and no published
+  figure rests on it.  The one that matches `figures()`'s shape exactly
+  is `captured_var`: TWO IDENTICAL COPIES OF A RULE, and not a small
+  one -- it is mg-dee4's F6, *the variable a pipeline's OUTPUT is
+  captured into*, the VALUE arm of the consumption clause that F6 is
+  entirely about.  It agrees today.  So did `alternatives()`.
+
+  IT IS NOT UNIFIED HERE, and the reason is scope rather than judgement:
+  mg-56dc's O4 names `figures()`, and `captured_var` is reached by
+  `s2_status.py` and `k2_consume.py`, whose transcripts this ticket does
+  not regenerate and whose runner takes twenty minutes.  Changing a rule
+  I cannot re-measure would be the defect this whole arc is about.  It
+  is NAMED so the next ticket in this lineage has it written down rather
+  than rediscovered, which is the only honest thing to do with a finding
+  you are not going to act on.
+
+  WHAT I PREDICTED AND WHAT IS TRUE.  `PREDICTIONS` PFa says a by-name
+  census finds AT LEAST 6 names defined in both libraries; measured 15.
+  PFb says the two `alternatives()` agree on every input tested;
+  measured: their bodies are IDENTICAL after unparsing, so they agree by
+  construction and the behavioural test below is a formality rather than
+  evidence -- which is a stronger result than the one predicted and is
+  also the reason unifying them changes nothing.
+
+      REGEX sources put to both `alternatives()`           9
+      ...REGEX sources on which they agree                 9
+
+==============================================================================
+P4e  AND A CLAIM `figures()` MAKES THAT IT DOES NOT KEEP
+==============================================================================
+
+  Found by this repair rather than looked for, which is why it is here
+  and not in the brief.  mg-70c7's `figures()` carried this comment
+  above it, deleted with the body it described:
+
+      # Numbers that are not figures: a section number, a year, a line
+      # reference of the form `file.py:214`, a git revision.
+
+  A GIT REVISION IS NOT EXCLUDED AND NEVER WAS.  A short revision that
+  happens to be all decimal digits is matched by `_NUMBER` and passes
+  every exclusion.  This is not hypothetical: repairing O1 required
+  naming a revision in mg-70c7's README, and `r6_self.py`'s E2 promptly
+  reported it as a FIGURE NO TRANSCRIPT BACKS.  The check was right by
+  its own rule and the rule's stated exclusion list was false.
+
+      `3738079 `  all digits: yes  read as a FIGURE: yes  resolves: yes
+      `973ca61 `  all digits: no   read as a FIGURE: no   resolves: yes
+      `1234567 `  all digits: yes  read as a FIGURE: yes  resolves: no
+      `9715841 `  all digits: yes  read as a FIGURE: yes  resolves: no
+
+      IS THIS REPAIRED HERE?  NO -- and the reason is measured, not an
+      excuse.  Both candidate rules are wrong:
+          DISTINCT FIGURES in every committed transcript  1287
+          ...FIGURES of magnitude >= 1e6                   32
+          ...FIGURES resolvable as a git object             7
+
+      A MAGNITUDE rule (`drop >= 1e6`) would drop 25 genuine figures,
+      among them `2147483647`, which is INT_MAX in a fixture and a real
+      measurement.  A RESOLVES-AS-AN-OBJECT rule would drop 7, and it
+      would drop them for a reason that is an accident of this
+      repository's object database rather than a property of the number.
+      Neither is right, so the finding is REPORTED AND NOT FIXED, and
+      the prose this ticket writes names revisions in a form that is not
+      all digits or does not name them at all.  A generous exclusion
+      list turns an unbacked figure into a non-figure -- `lib70c7`'s own
+      sentence, which is why the wrong fix is worse than the finding.
+
+==============================================================================
+P4 TOTAL BAD: 0
+==============================================================================
+
+EXTENT OF THAT NUMBER.  It counts a `figures()` or `alternatives()` in
+`lib70c7` that is still a body rather than a call, more than one
+implementation of either across the two libraries, an integer in 0..500
+on which the two names still disagree, and a regex source on which the
+two `alternatives()` disagree.  It ranges over 501 integers, 9 regex
+sources, the 15 names defined in both libraries and the 13 transcripts of
+R2b's corpus.  IT DOES NOT COUNT P4e, which is a false exclusion claim
+in a rule this ticket did not write and does not fix; that is a FINDING.
+
+FINDING: P4a the two `figures()` disagreed on exactly 1 integer(s) in 0..500 -- the value 3 -- and mg-70c7's copy was the wrong one because BOTH docstrings claimed `0, 1 and 2` and only mg-7522's did it; there is now 1 implementation of each of the 2 unified rules, and 0 disagreement(s) remain
+FINDING: P4b the floor item nothing named: 15 names are defined in BOTH libraries, 6 of them IDENTICAL code; `alternatives()` was a RULE kept in two identical copies and produced the published figure `nine alternatives against three`, and 1 rule(s) remain in two identical copies after this ticket -- `captured_var`, which is mg-dee4's F6 VALUE arm -- named rather than left to be rediscovered
+FINDING: P4c `lib70c7.figures`'s comment claimed to exclude `a git revision` and never did -- an all-decimal short revision is read as a FIGURE, which `r6_self.py`'s E2 reported against this ticket's own repaired README; REPORTED AND NOT FIXED because a magnitude rule would drop 25 genuine figures and a resolves-as-an-object rule would drop 7 for an accident of the object database

@@ -94,8 +94,17 @@ neither line.
 ## F5 — the property, stated where the check lives
 
 `run_all\.sh` → `(?:run_all|run_audit)\.sh` is **one filename replaced by two**.
-At HEAD, **9 executing sites name a `*.sh` whose basename is neither**, 4 of them
-reading the status, and **0 name the `run_audit.sh` the widening added**. The
+At `973ca61` — the commit that published `out_r4_property.txt`, and the revision
+this figure is a fact about — **9 distinct executing SITES name a `*.sh` whose
+basename is neither**, 4 of them reading the status, and **0 name the
+`run_audit.sh` the widening added**. The same census gives **10 (site, target)
+ROWS**, because one source line names two scripts; mg-56dc/T1c is that this
+transcript printed the row count under the site word, and mg-bf79 prints both.
+The census ranges over the whole repository, so it MOVES — which is why the
+figure is pinned to a revision here and no longer to `HEAD`, and why the figure
+at whatever `HEAD` is when you read this is printed by
+`out_p1_grain.txt` rather than written down in prose that cannot be
+re-measured. The
 property was stated in `lib7522` — one directory over from the check. It is
 `libc2b3.targets` now, in the sweep's own library, used by the sweep's own scan,
 pinned by five both-senses rows in the sweep's own self-test.

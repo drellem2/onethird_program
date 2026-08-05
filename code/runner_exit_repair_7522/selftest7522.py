@@ -158,8 +158,28 @@ allpy = [f for f in sorted(os.listdir(HERE)) if f.endswith(".py")]
 # use it, so the first thing this file checks is that identity -- a rule this
 # tree applies to its subject and a different one it applies to itself is the
 # finding, and it can only be prevented at the object.
+#
+# THE PINNED NUMBER WAS 9 AND IS NOW 10, and this comment is the whole reason
+# rather than a note about an edit.  mg-56dc/T2b found that the merged rule was
+# the SUBJECT-facing nine VERBATIM and had therefore DROPPED `proven`, the one
+# alternative mg-dee4's own transcript records as `in SELF and not in SUBJECT`.
+# mg-bf79 restored it.  This pin went RED on that restoration, WHICH IS THE PIN
+# WORKING -- a hardcoded expectation that stays green through a rule change is
+# not a pin.
+#
+# THE AUTHORITY FOR 10 IS NOT THAT THE CODE NOW SAYS 10.  It is mg-dee4's D4
+# union, which its `out_a4_superlatives.txt` publishes as
+# `9 subject + 1 self-only = 10`, and which
+# `code/runner_exit_repair_bf79/out_p3_ruleset.txt` re-derives from mg-dee4's
+# own source and checks BEHAVIOURALLY against this rule on 20 probe words: 0
+# reached by one and not the other.  Updating a pin to match the code is how a
+# pin becomes decoration; updating it to match the finding the code was changed
+# to satisfy is what a pin is for, and the two are told apart by whether an
+# independent artifact publishes the new number.  One does.
 ck("the marker rule S3a points at the SUBJECT has %d alternatives"
-   % L.alternatives(L.MARK), L.alternatives(L.MARK), 9)
+   % L.alternatives(L.MARK), L.alternatives(L.MARK), 10)
+ck("...and that is mg-dee4's D4 UNION, not the subject's nine verbatim",
+   bool(L.MARK.search("proven")), True)
 ck("the rule this tree used on ITSELF had 3, and is kept only for exhibition",
    L.alternatives(L.MARK_OLD), 3)
 ck("`verified` is IN the rule -- the D4 docstring names it and it was not",
