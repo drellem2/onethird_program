@@ -150,6 +150,25 @@ THE CENSUS'S ACCURACY, WITH THE DENOMINATOR NAMED
   4 of 4 checked, 2 refuted.  `2 of 4 wrong` and `4 of 4 wrong` are
   different claims and this does not round toward either.
 
+------------------------------------------------------------------------------
+SUB-CLAUSES OF P2 AND P5, SCORED SEPARATELY -- a prediction can be right
+about the verdict and wrong about the detail, and both are recorded.
+------------------------------------------------------------------------------
+  P2 said row 2 is refuted in BOTH repos.
+    OBSERVED: onethird_program=4, one_third_width_three=1   HIT
+  P2 also said those successors were `all authored on 2026-07-29, two days
+    before the row was filed`.
+    OBSERVED: 5 successor(s) across 2 distinct author date(s): 2026-07-29, 2026-07-30
+    P2 sub-clause: *** MISS ***  -- the `all` is false; 954c29e (mg-6a2f) is 2026-07-30.
+    The sub-clause is NOT rewritten to match.  P2's headline (REFUTED in
+    both repos) stands and its detail does not, and a prediction that is
+    two-thirds right is recorded as two-thirds right.
+
+  P5 said: 2 of 4 correct / 2 of 4 refuted on a population of 4, and the
+    brief's `1-of-1 refuted on a population of 4` SUPERSEDED to 4-of-4
+    checked, 2 refuted.
+    OBSERVED: 2 refuted, 2 upheld, 0 unknown, n=4.   HIT
+
   Predictions scored: 4 of 4 hit, 0 missed
   (P1-P4 were disclosed as not blind; hitting them is a weak claim and is
    stated as such in PREDICTIONS.md.)
