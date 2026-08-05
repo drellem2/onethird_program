@@ -1,0 +1,156 @@
+====================================================================================================
+mg-65eb — THE ANCHORS THIS REPAIR SPENDS, RESOLVED
+====================================================================================================
+  revision read   bd24efc
+  population      19 files: every .py, .md and .sh under
+                      code/state_delegation_repair_a74f/  (0 files)
+                      code/state_delegation_repair_0049/  (6 files)
+                      code/state_landing_control_2da3/  (5 files)
+                      code/state_delegation_audit_16eb/  (8 files)
+  rule            every 7-to-12-character hex token that is neither all-letters
+                  nor all-digits, computed from the text — no stop list
+
+  22 distinct hex token(s) over 107 occurrence(s).
+
+  [pass] 1db0be9      ANCHOR-LIVE
+         docs+instrument: clear mg-3b51's 4 MINOR — R1d was a RESTATEMENT billed as "the control that must fire" and is relabelled as the one-line set identity it is, and the self-test that claimed to catch document drift NOW READS THE DOCUMENT (mg-aec7)
+         named at: code/state_landing_control_2da3/delta_control.py:710
+
+  [pass] 2a29f30      ANCHOR-LIVE
+         evidence: mg-218d's 16 re-run UNMODIFIED (10 silent -> 6), 7 new predicted-first rows 7 of 7, and the document-global ordinal MEASURED and rejected (mg-bee1)
+         named at: code/state_delegation_repair_0049/README.md:5, code/state_landing_control_2da3/COVERAGE.md:14, code/state_delegation_audit_16eb/README.md:4, code/state_delegation_audit_16eb/run_all.sh:52
+
+  [pass] 3a80d99      ANCHOR-LIVE
+         docs+audit: independent audit of mg-bee1 / a2d5a81+2a29f30 (the statement repair and the delegation) — THE STATEMENT REPAIR IS REAL AND 141 of 141 STANDS, but the repair CREATED a region set with a content digest and NO presentation record, and mg-babf's HTML-comment works verbatim on it: a reader following the certified cell sees a BLANK PAGE on both renderers and the control exits 0 (mg-5644)
+         named at: code/state_delegation_repair_0049/README.md:4, code/state_delegation_repair_0049/README.md:106, code/state_delegation_repair_0049/run_all.sh:49, code/state_delegation_audit_16eb/README.md:262, code/state_delegation_audit_16eb/run_all.sh:51
+
+  [pass] 5594c69      ANCHOR-LIVE
+         evidence: the committed outputs of a full run, plus the correction of record on mg-bee1's own L1 row (mg-0049)
+         named at: code/state_delegation_audit_16eb/README.md:1, code/state_delegation_audit_16eb/claims16eb.py:11, code/state_delegation_audit_16eb/claims16eb.py:56, code/state_delegation_audit_16eb/run_all.sh:3
+
+  [pass] 57f962f      ANCHOR-LIVE
+         STATE: restructure the ledger so rows assert CURRENT STATE and every retraction, correction, supersession and mechanism note RELOCATES to a per-row history — 36,188 bytes moved VERBATIM, 0 words lost, largest cell 15,386 -> 8,442, and Appendix A byte-identical (mg-34bf)
+         named at: code/state_landing_control_2da3/delta_control.py:35, code/state_landing_control_2da3/delta_control.py:36, code/state_landing_control_2da3/delta_control.py:413, code/state_landing_control_2da3/delta_control.py:675, code/state_landing_control_2da3/negative_control.py:96, code/state_landing_control_2da3/negative_control.py:260 (+1 more)
+
+  [pass] 60f4dac      ANCHOR-LIVE
+         STATE: REPAIR B1 — strike the evidence the relocated-hole finding was filed on, and the FINDING SURVIVES on its abstract form with NO existence proof (mg-3f21)
+         named at: code/state_landing_control_2da3/delta_control.py:35, code/state_landing_control_2da3/negative_control.py:260, code/state_landing_control_2da3/run_all.sh:5
+
+  [pass] 6b1eacf      ANCHOR-LIVE
+         docs+instrument: REPAIR mg-ebd8's DERIVATIONS, not its locating — the closed form was FALSE off AC(P) (455 spurious flats at n=6), E8's submonoid claim was impossible, and the commit subject's "STRICTLY SHARPER" is REFUTED: Brown's answer is the SAME answer at all 39,616 levels to n<=6 (mg-1953)
+         named at: code/state_landing_control_2da3/delta_control.py:656
+
+  [pass] 8ce78fb      ANCHOR-LIVE
+         docs+audit: independent audit of mg-41aa / 504ab6c (the repair of two negatives refuted by construction) — THE REPAIR HOLDS, 0 BROKEN, every figure reproduces from a disjoint instrument, and the CONVERSE OF X1 IS NOW MEASURED AT n=6 WITHOUT BIRKHOFF, closing the repair's own weakest link; 4 MINOR, all about WARRANT (mg-5800)
+         named at: code/state_landing_control_2da3/delta_control.py:794, code/state_delegation_audit_16eb/README.md:250, code/state_delegation_audit_16eb/README.md:251, code/state_delegation_audit_16eb/README.md:252, code/state_delegation_audit_16eb/README.md:253, code/state_delegation_audit_16eb/claims16eb.py:136
+
+  [pass] 97cb533      ANCHOR-LIVE
+         docs: GATE the unified-framework question — L1 rules out ONE ROUTE not the leg, and L2 is WORLD ONE by a THEOREM: S_n-stability of the quotient lattice happens EXACTLY where the lattice degenerates to Pi_n (mg-8fd1)
+         named at: code/state_landing_control_2da3/delta_control.py:35, code/state_landing_control_2da3/negative_control.py:260, code/state_landing_control_2da3/run_all.sh:5
+
+  [pass] 9ca11c4      ANCHOR-LIVE
+         control+docs: THE REPAIR CREATED THE SURFACE IT WAS BLIND ON — the delegated sections now carry a PRESENTATION RECORD and the section-8 guards, so a reader shown a blank page is exit 1 and not exit 0 (mg-0049)
+         named at: code/state_delegation_audit_16eb/README.md:1, code/state_delegation_audit_16eb/claims16eb.py:10, code/state_delegation_audit_16eb/claims16eb.py:56, code/state_delegation_audit_16eb/run_all.sh:3
+
+  [pass] a13b4a9      ANCHOR-LIVE
+         docs+repair: THE REPAIR FIXED THE PROSE AND LEFT THREE CORRECTIONS IN THE CODE — mg-6f61's checker reads one file, so T3d still printed "three are controls", the instrument README still read control (ii) as a near miss, and ledger S4 was unmarked inside runs ending TOTAL BAD: 0 (mg-f8fa)
+         named at: code/state_landing_control_2da3/delta_control.py:413
+
+  [pass] a2d5a81      ANCHOR-LIVE
+         control+docs: REPAIR THE STATEMENT FIRST — the certified property was FALSE AS STATED, and a certified cell's meaning lived in an UNCERTIFIED file (mg-bee1)
+         named at: code/state_delegation_repair_0049/README.md:5, code/state_landing_control_2da3/COVERAGE.md:14, code/state_delegation_audit_16eb/README.md:4
+
+  [pass] a4aeeb9      ANCHOR-LIVE
+         docs+audit: independent audit of mg-4acd / e4426c9 (the presentation record) — THE LAYER IT CLAIMS IS CLOSED, verified against two real GFM renderers 140 of 140 including the reversal COVERAGE.md calls unverified, but the BLIND SPOT MOVED and mg-babf's B07 is caught by an ACCIDENT OF PLACEMENT: the same paragraph one line earlier exits 0 (mg-218d)
+         named at: code/state_delegation_repair_0049/README.md:105, code/state_delegation_repair_0049/run_all.sh:49, code/state_delegation_audit_16eb/README.md:262, code/state_delegation_audit_16eb/run_all.sh:50
+
+  [pass] b68db5d      ANCHOR-LIVE
+         STATE+docs: LAND mg-6a2f — the restructure LOST NOTHING, and both BROKEN items are the commit's arithmetic ABOUT ITSELF; F1 CLOSES, F2 CLOSES where it can be closed and RELOCATES to a frozen commit message (mg-7735)
+         named at: code/state_landing_control_2da3/COVERAGE.md:158, code/state_landing_control_2da3/COVERAGE.md:164, code/state_landing_control_2da3/COVERAGE.md:301, code/state_landing_control_2da3/COVERAGE.md:319, code/state_landing_control_2da3/COVERAGE.md:333, code/state_landing_control_2da3/delta_control.py:2 (+35 more)
+
+  [pass] bbe83b5      ANCHOR-LIVE
+         docs+landing: CLOSE mg-3c24, dropped and recovered by the successor detector — a commit ENLARGED an open finding 2,928 -> 6,069 while inserting "the row below is UNCHANGED", and only the not-landing was disclosed (mg-e1d0)
+         named at: code/state_landing_control_2da3/delta_control.py:425, code/state_landing_control_2da3/delta_control.py:427, code/state_landing_control_2da3/delta_control.py:427
+
+  [pass] bf17716      ANCHOR-LIVE
+         control+docs: REPAIR THE CERTIFICATION, NOT THE BATTERY — b68db5d's headline re-run is evidence about 57f962f and cannot be evidence about b68db5d; the missing working-tree instrument now exists and its negative control FIRES (mg-2da3)
+         named at: code/state_landing_control_2da3/COVERAGE.md:9
+
+  [pass] db2b77d      ANCHOR-LIVE
+         docs+audit: independent audit of mg-a893 / 90db267 (the dependence repair) — THE COMPUTATION REPRODUCES ENTIRELY and the separation extends two sizes further, but "NOTHING ENTERS THE FAMILY AFTER n=6" IS FALSE (a cut-free sixth core enters at n=9, contradicting the repair's own cited figure) and the dependence is NOT exhausted by cut elements: ORDER DUALITY collapses the five cores to three, so the honest p is 1/4 and not 1/5 (mg-c6bc)
+         named at: code/state_delegation_audit_16eb/README.md:251, code/state_delegation_audit_16eb/README.md:252, code/state_delegation_audit_16eb/claims16eb.py:135, code/state_delegation_audit_16eb/claims16eb.py:136, code/state_delegation_audit_16eb/claims16eb.py:160
+
+  [pass] e1bacd2      ANCHOR-LIVE
+         pm-onethird: CORRECT the separation's evidential strength — 1/5, not 1/38,760 (mg-0a11)
+         named at: code/state_landing_control_2da3/delta_control.py:754
+
+  [pass] e4426c9      ANCHOR-LIVE
+         control: CERTIFY WHAT A READER SEES, NOT WHICH BYTES EXIST — each region now carries a SECOND digest, of its PRESENTATION RECORD; mg-babf's 6 silent misses go to 0, verified by re-running its own battery unmodified (mg-4acd)
+         named at: code/state_landing_control_2da3/COVERAGE.md:11, code/state_landing_control_2da3/COVERAGE.md:54, code/state_landing_control_2da3/COVERAGE.md:64, code/state_landing_control_2da3/COVERAGE.md:72, code/state_landing_control_2da3/delta_control.py:127, code/state_landing_control_2da3/presentation.py:44 (+1 more)
+
+  [pass] e924590      ANCHOR-LIVE
+         control: REPLACE THE MECHANISM, NOT THE LIST — the certified regions are now CONTENT DIGESTS with a stated normalisation and a stated coverage boundary; mg-2216's 8 silent misses go to 0, verified by re-running its own battery unmodified (mg-7870)
+         named at: code/state_landing_control_2da3/COVERAGE.md:10
+
+  [pass] f4eaea6      ANCHOR-LIVE
+         pm-onethird: RETRACT the quasi-hereditary headline (mg-2060) — D10 is unverified, and the separating example does not hold its hypothesis fixed
+         named at: code/state_landing_control_2da3/delta_control.py:425
+
+  [pass] f58f7fd      ANCHOR-LIVE
+         docs+audit: independent audit of the mg-8e30 repair (e16e41c + 61de121) — THE FIGURES DID NOT GO STALE, all five reproduce from the post-commit tree by three disjoint routes; but the new figure gate PASSES WHEN THE FIGURE A READER READS IS WRONG, at all three sites, because the correction prints the live gap TWICE and the gate is a presence test (mg-8a5c)
+         named at: code/state_landing_control_2da3/delta_control.py:440
+
+====================================================================================================
+C.  IS ANY OF THIS CHECKED BY A PROGRAM?  SPENT vs CHECKED, AND THEY ARE DIFFERENT
+====================================================================================================
+  SPENT — a sha held as a NON-DOCSTRING string literal in a program, so that rot in
+  it shows up as that program FAILING.  Not a check of the sha; a dependency on it.
+      5594c69      code/state_delegation_audit_16eb/claims16eb.py:56
+      57f962f      code/state_landing_control_2da3/delta_control.py:675, code/state_landing_control_2da3/negative_control.py:260, code/state_landing_control_2da3/negative_control.py:96
+      60f4dac      code/state_landing_control_2da3/negative_control.py:260
+      8ce78fb      code/state_delegation_audit_16eb/claims16eb.py:135
+      97cb533      code/state_landing_control_2da3/negative_control.py:260
+      9ca11c4      code/state_delegation_audit_16eb/claims16eb.py:56
+      b68db5d      code/state_landing_control_2da3/delta_control.py:1005, code/state_landing_control_2da3/delta_control.py:1062, code/state_landing_control_2da3/delta_control.py:1068, code/state_landing_control_2da3/delta_control.py:1328, code/state_landing_control_2da3/delta_control.py:1410, code/state_landing_control_2da3/delta_control.py:401, code/state_landing_control_2da3/delta_control.py:402, code/state_landing_control_2da3/delta_control.py:689, code/state_landing_control_2da3/delta_control.py:690, code/state_landing_control_2da3/negative_control.py:268, code/state_landing_control_2da3/negative_control.py:277, code/state_landing_control_2da3/negative_control.py:472
+      db2b77d      code/state_delegation_audit_16eb/claims16eb.py:135, code/state_delegation_audit_16eb/claims16eb.py:159
+      of these, SPENT AND NOT LIVE: none
+      — so no program in this population would fail today because of the rot.
+      The stale anchor is spent by nothing and checked by nothing: it is carried
+      by prose alone, which is why it could rot silently.
+
+  CHECKED — a program that reads sha tokens OUT OF THIS PROSE and resolves them.
+  PROXY, and it is labelled one: a program doing that needs a hex-token pattern in
+  its own source.  Every hex class found in the population's sources is printed
+  with the width it accepts, and the verdict is read off THAT, not off prose:
+      0 hex classes in any source in the population.
+      SHA-SHAPED patterns: 0  (none)
+
+  So the count of sha references in this prose that any program VERIFIES is 0.
+  `prose_a74f.py` — the checker this repair added for exactly this class of rot —
+  checks four shapes: repo-relative paths, `section N` references, pinned tables,
+  and `all N rows` phrases.  A REVISION IS NOT ONE OF THEM.  Every sha above is an
+  unchecked claim, and the one that has rotted is the one carrying this repair's
+  own integrity statement.
+
+====================================================================================================
+D.  THE WRONG INSTRUMENT, DEMONSTRATED ON THE LIVE DEFECT — EXISTENCE vs ANCESTRY
+====================================================================================================
+  The brief asks that a new control be demonstrated against a commit where the
+  defect is STILL PRESENT.  For this control that commit is HEAD: the anchor is
+  stale right now, so the demonstration needs no reconstruction.
+
+  No stale anchor in this population — at this revision there is nothing to
+  demonstrate against, which is what a negative control looks like.
+
+====================================================================================================
+WHAT THIS RUN FOUND
+====================================================================================================
+   22  ANCHOR-LIVE      ['1db0be9', '2a29f30', '3a80d99', '5594c69', '57f962f', '60f4dac', '6b1eacf', '8ce78fb', '97cb533', '9ca11c4', 'a13b4a9', 'a2d5a81', 'a4aeeb9', 'b68db5d', 'bbe83b5', 'bf17716', 'db2b77d', 'e1bacd2', 'e4426c9', 'e924590', 'f4eaea6', 'f58f7fd']
+    0  ANCHOR-STALE     []
+    0  ANCHOR-DEAD      []
+    0  NOT-A-REVISION   []
+
+  0 findings: every anchor in this population resolves and is an ancestor of
+  HEAD.  At a revision where this repair's own directory does not yet exist,
+  that is the NEGATIVE CONTROL — the same program, the same rule, exit 0.
+====================================================================================================
