@@ -57,6 +57,30 @@ an instrument of this kind and **the second repair is the honest one**.
 The instrument **fails open** — a suppression mechanism outside the set is scored NOT
 SUPPRESSED — and saying so on every run is why the column is not called `shown`.
 
+> **THAT SENTENCE WAS FALSE WHEN IT WAS WRITTEN, AND mg-5f7c IS THE REPAIR THAT MADE IT
+> TRUE.** mg-65eb put `<div class="hidden">` — a CLASS named hidden, in a document with **no
+> stylesheet**, every section of which a reader is shown in full — to this instrument and got
+> `not-suppressed 0/5` on both engines. **A failure in the CLOSED direction, in the only
+> instrument in this repository that measures suppression, under this paragraph and under a
+> docstring that both said it fails open.** The same audit found `<details title="open me">`
+> scoring 5/5 when the declared S1 holds of it, and mg-a74f's own V3 blank page scoring 5/5
+> with 3000 `&` in front of it.
+>
+> **The code was wrong and this paragraph was right**, and mg-5f7c decided that explicitly
+> rather than by reflex: `DECLARED` S4 already said the `hidden` **attribute** and
+> `NOT_COVERED` already put `display:none` on a class **outside** the set, so this README, the
+> docstring and the instrument's own printed set all agreed and only the implementation
+> disagreed — and there was no single posture to document in any case, because the one bug
+> (an attribute *name* matched by regex over the attribute *text*) failed **closed** on
+> `class="hidden"` and **open** on `title="open me"`. Attributes are now parsed by name, the
+> offset is spent in the string it was taken from, and the table below has **four more rows**:
+> V5 and V8 are documents a reader is shown in full which this instrument declines to
+> suppress, V6 and V7 are documents a reader is shown nothing of which it does.
+> `code/state_suppression_repair_5f7c/` holds the argument, sixteen renderer-free
+> constructions run against the code at `6fb424f` **executed unmodified**, and the audit of
+> the 50 published observations: **32 were walked at a wrong offset and 0 published figures
+> change**, which is luck of row design rather than instrument correctness.
+
 **The instrument it replaces scores the blank page 5 of 5.** `render16eb.py`'s `SHOWN TO A
 READER` column is bytes-that-survive-tag-stripping minus one mechanism (a `<details>` with no
 `open`). Its tag regex requires a letter after `<`, and `<!--` has a `!`. Applied — by
@@ -70,9 +94,16 @@ importing `render16eb.py` **unmodified** and calling its own two functions — t
 | V2 `<details><summary>` at the top (mg-16eb's B3) | 5/5 | 0/5 | S1 | 0/5 |
 | **V3 `<div hidden>` at the top** | 5/5 | **0/5** | S4 | **5/5** |
 | **V4 `<div style="display:none">` at the top** | 5/5 | **0/5** | S5 | **5/5** |
+| V5 `<div class="hidden">` — a CLASS, no stylesheet *(mg-5f7c)* | 5/5 | **5/5** | — | 5/5 |
+| V6 `<details title="open me">` *(mg-5f7c)* | 5/5 | 0/5 | S1 | 5/5 |
+| V7 V3's blank page behind 3000 `&` *(mg-5f7c)* | 5/5 | 0/5 | S4 | 5/5 |
+| V8 `<style>` hiding a class every section is inside *(mg-5f7c)* | 5/5 | **5/5** | — | 5/5 |
 
-Both renderers, 50 section observations, **0 rows off this repair's committed predictions**,
-**6 of 10 renderer rows where the two instruments disagree**.
+Both renderers, **90 section observations**, **0 rows off this repair's committed
+predictions**, **10 of 18 renderer rows where the two instruments disagree**. V0–V4 report the
+same figures they always did; the four figures in bold are the polarity shown in both
+directions, which mg-5f7c added because **a suppression instrument nobody has seen decline to
+suppress is not evidence of a fail-open posture.**
 
 **V1 settles it.** Every party in this arc agrees a reader is shown nothing of that document:
 `render0049.py` scores it `ANY 0/5`, `delta_control.py` exits 1 on it and calls it damage, and
@@ -129,13 +160,19 @@ where `delta_control.py` gets both wrong. The difference is not care.
 `prose_a74f.py` is the missing program, over a **computed** population of three directories
 (its own included, so it reads its own prose):
 
-* **P1** every repo-relative path named in the text exists at the revision being read
+* **P1** every repo-relative path named in the text exists at the revision being read — and
+  since mg-5f7c, *exists* means **tracked**, not present on somebody's disk: an untracked file
+  is at no revision, and one used to satisfy a reference here
 * **P2** every `section N` reference to a `run_all.sh` resolves, and every mg-id and script
   basename on the referencing line occurs in that section
-* **P4** every "all *N* rows" phrase equals that script's own `ROWS`, derived from its AST
+* **P4** every "all *N* rows" phrase equals that script's own `ROWS`, derived from its AST.
+  Since mg-5f7c each row says **how** it decided which script the phrase is about — `ON THE
+  LINE` (a co-occurrence) or `BY PROXIMITY` (a guess, and it used to be the only rule)
 * **P3** every module-level dict of `delta_control.py` keyed by repo paths is iterated by
   some `for` in that file — a pinned table nothing visits cannot fail in the direction that
-  would need visiting
+  would need visiting. Since mg-5f7c the population rule is ***any*** key is a repo path, not
+  ***every***: one extra key named `"note"` used to remove a table from the population
+  entirely, dropping the printed count by one and passing because nothing was left to fail
 
 **4 findings at `bd24efc`, 0 on the tree.** What it covers of the six: claim 1 (P1), claim 2
 (P4), claim 3's code half (P3), and **one of the two rows** of claim 5 (P2). **Three and a
@@ -174,6 +211,17 @@ property now measurable only through it and the way it fails:
    `aria-hidden`, off-screen positioning, `color: transparent`, JavaScript, the difference
    between shown and shown *yet*. The instrument **fails open** on every one of them, which
    is exactly why its column is named `not-suppressed`.
+
+   > **THIS PREDICTION WAS WRONG, AND mg-5f7c'S JUDGEMENT IS THAT IT DID MORE DAMAGE THAN THE
+   > DEFECTS IT MISSED.** The next three gaps were: `class="hidden"` scored SUPPRESSED
+   > (**inside** the declared set — S4 is an attribute), `<details title="open me">` scored
+   > NOT SUPPRESSED (**inside** the set — S1 is the mechanism it declares), and an offset
+   > taken in one string and spent in another (**not a mechanism at all**). A reader
+   > following this prediction watches for stylesheets while `class="hidden"` quietly scores
+   > SUPPRESSED. **mg-5f7c issues no replacement prediction**, because it can say nothing
+   > falsifiable about a gap whose shape is unknown by definition; what it adds instead is
+   > **V8**, a standing row that goes red the moment an out-of-set mechanism starts scoring as
+   > suppression. See `code/state_suppression_repair_5f7c/README.md`.
 
 ### Every instrument this repair adds, and whether its row name is its measurement
 
@@ -266,4 +314,4 @@ repair still stands on sections 2, 3 and 5. Section 7 takes about ten minutes.
 | `battery_a74f.py` | mg-16eb's eight rows, on mg-16eb's harness, unmodified, twice |
 | `claims_a74f.py` | OPEN 2 — the six, one row each, classified, probed at both revisions |
 | `run_all.sh` | all of it, in order, including the `bd24efc` control |
-| `out_*.txt` | the committed transcripts of one full run |
+| `out_*.txt` | the committed transcripts of one full run — **regenerated by mg-5f7c**, which changed `visible_a74f.py` and `prose_a74f.py`; the pre-repair copy is kept at `code/state_suppression_repair_5f7c/out_run_all_a74f_PRE5f7c.txt` |
