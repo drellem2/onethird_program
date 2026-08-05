@@ -55,25 +55,53 @@ nobody checked -- committed by the audit that came to report it.
 
     live = [(p, f) for p, f, k in rows if k != "QUOTED"]
     quoted = [(p, f) for p, f, k in rows if k == "QUOTED"]
-    outside = [p for p, _ in live if p not in PARENT_COMPUTED]
+
+    # ⚠️ CHARGEABLE ONLY.  `COMPUTED` cannot be faulted for omitting a file
+    # that did not exist when it was written, and by the time this audit runs
+    # SIX OF THE MATCHES ARE THIS AUDIT'S OWN TRANSCRIPTS.  The first version
+    # of this row counted them and reported `3 against 10`, which would have
+    # been a false finding manufactured by the instrument's own output landing
+    # in the population it sweeps.  The cut is made at the parent's last
+    # commit: a transcript is chargeable only if it was committed at or before
+    # the commit that publishes the parent's own transcript.
+    parent_at = L.publishing_commit(
+        "code/publication_anchor_132a/out_anchor_132a.txt", as_of)
+    existed = set((L.git("ls-tree", "-r", "--name-only", "--full-tree",
+                         parent_at, "--", "code/", ok=True) or "").splitlines())
+    outside = [p for p, _ in live
+               if p not in PARENT_COMPUTED and p in existed]
+    postdating = [p for p, _ in live
+                  if p not in PARENT_COMPUTED and p not in existed]
+
     print(f"\n    matched              : {len(rows)}")
     print(f"    of those, QUOTED (exempt under this arc's own S4b) : "
           f"{len(quoted)}  "
           f"({', '.join(p.split('/')[-1] for p, _ in quoted) or '-'})")
     print(f"    LIVE published figures : {len(live)}")
+    print(f"    of those, POSTDATING the parent ({parent_at[:7]}) and so NOT "
+          f"chargeable : {len(postdating)}  "
+          f"({', '.join(p.split('/')[-1] for p in postdating) or '-'})")
+    print(f"    CHARGEABLE live publishers : "
+          f"{len(live) - len(postdating)}")
     print(f"    parent's COMPUTED      : {len(PARENT_COMPUTED)}")
-    print(f"    live but NOT in COMPUTED : {len(outside)}  "
+    print(f"    chargeable but NOT in COMPUTED : {len(outside)}  "
           f"({', '.join(p.split('/')[-1] for p in outside) or '-'})")
 
     L.record(None,
              f"C2a THE PARENT'S `COMPUTED` IS A HAND LIST OF "
-             f"{len(PARENT_COMPUTED)} AGAINST A TREE OF {len(live)} LIVE "
-             f"PUBLISHERS: {len(rows)} committed file(s) under `code/` match "
-             f"the figure grammar at {as_of[:7]}, {len(quoted)} of them inside "
-             f"a QUOTATION and exempt, leaving {len(live)} that publish a `.py` "
-             f"population as a claim about a tree -- "
-             f"{', '.join(p.split('/')[-1] for p, _ in live)}.  "
-             f"{len(outside)} of those are not in `COMPUTED`: "
+             f"{len(PARENT_COMPUTED)} AGAINST A TREE OF "
+             f"{len(live) - len(postdating)} CHARGEABLE LIVE PUBLISHERS: "
+             f"{len(rows)} committed file(s) under `code/` match the figure "
+             f"grammar at {as_of[:7]}, {len(quoted)} inside a QUOTATION and "
+             f"exempt, {len(postdating)} POSTDATING the parent's own last "
+             f"commit {parent_at[:7]} and therefore not chargeable to it -- "
+             f"⚠️ ALL {len(postdating)} OF THOSE ARE THIS AUDIT'S OWN "
+             f"TRANSCRIPTS, and counting them would have been a finding "
+             f"manufactured by the instrument's output landing in the "
+             f"population it sweeps.  That leaves "
+             f"{len(live) - len(postdating)} chargeable: "
+             f"{', '.join(p.split('/')[-1] for p, _ in live if p in existed)}."
+             f"  {len(outside)} of those are not in `COMPUTED`: "
              f"{', '.join(p.split('/')[-1] for p in outside) or 'none'}")
     if outside:
         L.finding(
@@ -83,8 +111,9 @@ nobody checked -- committed by the audit that came to report it.
             f"row it feeds drops both qualifiers and reads 'of the "
             f"{len(PARENT_COMPUTED)} published transcript(s) that carry a `.py` "
             f"population'.  ⚠️ A READER IS TOLD THE POPULATION IS "
-            f"{len(PARENT_COMPUTED)} WHEN THE LIVE POPULATION IS {len(live)}.  "
-            f"The gap is small and the omitted file is real: "
+            f"{len(PARENT_COMPUTED)} WHEN THE CHARGEABLE LIVE POPULATION AT "
+            f"THE PARENT'S OWN COMMIT IS {len(live) - len(postdating)}.  "
+            f"The gap is one file and it is real: "
             f"{', '.join(p.split('/')[-1] for p in outside)}.  This is the same "
             f"shape mg-97fb found in the file this deliverable repairs (a hand "
             f"list of 2 against a tree of 9) and the same shape fba5f63 "
@@ -177,14 +206,26 @@ BELIEVED ABOUT NOTHING -- it is data to be refuted.
              f"these was resolved and counted, and the declared `count=` field "
              f"was used as the thing to be refuted rather than as the answer")
 
+    # ⚠️ EVERY DISTINCT COMMIT, NOT THE FIRST THREE.  This row used to print
+    # `unreachable[:3]` -- a silent cap, written when only 2 anchors were
+    # unreachable and so invisible until mg-c3a2 re-ran the instrument on
+    # `main`, where all 8 are unreachable and the row showed 3 of them, the
+    # same commit repeated, with nothing saying it had stopped.  A truncated
+    # list under a sentence that says `each` is the exact defect this arc
+    # keeps finding, committed by the instrument that reports it.
+    side = []
+    for _, c in unreachable:
+        if c not in side:
+            side.append(c)
     L.record(None,
              f"C2b' and {len(unreachable)} of the {len(checked)} anchor(s) are "
              f"UNREACHABLE from {as_of[:7]}: "
              + "; ".join(f"{p.split('/')[-1]} -> {c[:7]}"
                          for p, c in unreachable)
              + f".  Each survives only on a side ref -- "
+             + f"{len(side)} distinct commit(s), all named: "
              + "; ".join(f"{c[:7]}: {','.join(L.refs_containing(c)) or 'NO REF'}"
-                         for _, c in unreachable[:3]))
+                         for c in side))
 
     # ----------------------------------------------------------------- C2c
     L.head("C2c -- MY CHOSEN TARGET: DOES THE ADVERTISED REMEDY WORK ON THE "
