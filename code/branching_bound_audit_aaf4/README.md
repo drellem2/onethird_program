@@ -142,6 +142,16 @@ authored three. `code/branching_bound_d075/PREDICTIONS.md` contains **8 criticis
 under mg-d075's own FAULT ∧ TARGET predicate**, 6 of them with no numeric scope, and none of
 them was ever looked at (`a3` C3).
 
+**AND THE DETECTOR MISSES THE SENTENCE IT WAS WRITTEN FOR, BY ONE TENSE.** `s5`'s `FAULT`
+regex lists `cannot see`. The sentence in mg-d075's own account that describes the defect this
+whole repair exists for reads *"mg-19ec's POP-3 predicate **could** not see it"* — and is
+therefore not a criticism sentence as far as `s5` is concerned. Under my wider predicate the
+parent's prose yields **25** criticism sentences against its own **18**, and **8** are visible
+only to mine, 6 of them with no numeric scope (`a3` C5). The gap is not a scandal; it is the
+ordinary fate of a regex over prose, and it is the reason `s5`'s own transcript ends by saying
+*"a defect outside the predicate is invisible to it. mg-aaf4 is asked to pick a different
+one."* This is that different one.
+
 **MYSELF.** `PREDICTIONS.md` P10 said in advance this check would fire on me. It does, hard.
 **The count is printed in `out_a3_criticism.txt` and is deliberately not asserted here: this
 README is inside the population C4 measures, so a figure quoted in this sentence changes the
