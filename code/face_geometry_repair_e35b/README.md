@@ -36,6 +36,18 @@ facets` zeros are forced because I1/I2/I3 never *raise* a ridge's facet count. T
 can move at all is shown separately — by M4/M5 for the target, and by I4's zero being the one
 measurement of the four.
 
+> **CORRECTED by mg-8af0 (mg-fcb2's F3), 2026-08-05.** ~~*and by I4's zero being the one
+> measurement of the four*~~ — **that sentence is false and so is the "three of the four" above
+> it.** All four zeros are forced, and so are `facet_swap01`'s and the uncorrupted build's. The
+> forcing is a property of the **facet family**, not of the mutation: both maps are prefix
+> families, so every facet is a chain of masks of sizes 1..n−1, a ridge is that chain with one
+> level deleted, and re-inserting a mask of the missing size admits **exactly two** candidates.
+> Checked over five modes and every poset 2 ≤ n ≤ 6 — 2424 builds, 76554 facets, maximum ridge
+> multiplicity **2** — in `code/face_geometry_repair_8af0/probe_f3_ridge_multiplicity.py`. The
+> n = 2 case needs a separate argument (|L(P)| ≤ 2) and is counted separately there. **What this
+> ticket got right and mg-8af0 keeps: the target's byte-identity on 344/344 is forced, and the
+> AST check of it stands.** See `code/face_geometry_repair_8af0/README.md`.
+
 **F4 — `vacuous` was one word for two facts.** For I1/I2/I3 it means the mutation did not apply (14,
 4, 4 — and **0** for any other reason). For I4 it means the opposite: the mutation applied on **all
 25**, built a genuinely different facet set on **24** of them (**14** with `|L(P)| ≥ 3`), and claim
