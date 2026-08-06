@@ -1,0 +1,137 @@
+mg-03d1 / A2 -- THE BLIND-SPOT TEST
+Subject: `code/runner_exit_repair_bf79/p1_grain.py`, section P1f.  HEAD: 9f1ecaa
+
+==========================================================================
+A2a  REPRODUCED FROM THE PARENT'S OWN PREDICATES, NOT FROM ITS PROSE
+==========================================================================
+
+  The P1f test, re-executed here against `lib56dc` directly rather than
+  by reading the parent's transcript.  For each version it takes the
+  first count row whose label matches /outside/i, reads the label's
+  grain with `grain_of`, re-derives the census at BOTH grains, and asks
+  whether the value the row holds is the SITE count.
+
+      as published at 973ca61   
+          label   : ...outside it, across 6 distinct basenames
+          declares: SITE   at stage `label`
+          holds   : 10    which is the ROWS count (ROWS=10 SITES=9)
+          flagged : YES -- in the blind spot
+      repaired, on disk now     
+          label   : ...ROWS outside it, across 10 distinct basenames
+          declares: SITE   at stage `label`
+          holds   : 14    which is the ROWS count (ROWS=14 SITES=12)
+          flagged : YES -- in the blind spot
+
+  population: the 2 VERSIONS of `out_r4_property.txt` above, one count
+  row each
+      ...ROWS this test flags, re-derived here                  2
+      ^ one unit of that number is one flagged count row
+
+  PRE-REGISTERED in A2a: summed 2, printed as 1 and 1.
+      A2a as pre-registered                              HIT
+
+==========================================================================
+A2c  IS THE SURVIVOR THE INHERITED ONE, OR A SECOND DEFECT?
+==========================================================================
+
+  The addendum asks exactly this, and it is the difference between `the
+  repair left a known limitation` and `the repair did not work`.  The
+  test: the post-repair flagged row is the INHERITED one if and only if
+  its own label states the ROW grain and the value it holds IS the row
+  count.  Then the row is CORRECT and only the classifier is confused.
+
+      the flagged post-repair row:
+          ...ROWS outside it, across 10 distinct basenames
+      its own label states the ROW grain              yes
+      the value it holds IS the ROW count             yes
+      the classifier calls it                         SITE (because
+          `rows` and `basenames` are both SITE_WORDS -- see A1)
+
+      verdict: INHERITED: the row is CORRECT and the test cannot tell it from the row it was built to catch
+
+  So the surviving 1 is NOT a failed repair and NOT a second defect.  It
+  is the test measuring its own resolution.  The parent's own words for
+  this -- `THE TEST INHERITS THE BLIND SPOT IT IS MEASURING` -- are
+  confirmed here by re-derivation and not by quotation.
+
+==========================================================================
+A2d  RECORDED RATHER THAN TUNED -- CHECKED IN THE HISTORY, NOT THE PROSE
+==========================================================================
+
+  `PREDICTIONS.md` is a PRE-REGISTRATION.  The claim `recorded rather
+  than tuned` is a claim about its history, so it is checked there.
+
+  population: every COMMIT in `git log -- code/runner_exit_repair_bf79/PREDICTIONS.md`
+      ...COMMITS touching that pre-registration FILE            1
+      ^ one unit of that number is one commit
+          bba2a3c predictions: mg-bf79's predictions for the repair of mg-56dc's four — COMMITTED BEFORE A
+
+      exactly one commit touches it                      yes
+      and its subject begins `predictions:`               yes
+
+      P1g survives verbatim in the pre-registration       yes
+      OUTCOMES scores P1g a MISS                          yes
+
+  AND THE SHA NOTE, because this arc keeps needing it: the parent's
+  pre-registration commit was REBASED by the refinery, so any SHA it
+  recorded for itself differs on `main`.  Ancestry is a FALSE NEGATIVE
+  after a rebase; content is checked with `git patch-id --stable`:
+
+      `bba2a3c` patch-id  8509359e14dcce93b57735535b80ed80e321b058
+      (recorded so a later reader can match this commit by CONTENT
+       after the rebase that will displace its SHA)
+
+==========================================================================
+A2b  THE FLOOR OF THIS SECTION: A COUNT UNDER A LABEL THAT DID NOT MEASURE IT
+==========================================================================
+
+  Nothing in the brief names this.  `p1_grain.py` prints its three
+  blind-spot figures like this -- quoted from the source, lines 343-346:
+
+      print("      blind-spot ROWS, PUBLISHED version   %3d" % 1)
+      print("      blind-spot ROWS, REPAIRED version    %3d"
+            % (disagree - 1 if disagree else 0))
+      print("      blind-spot ROWS, both versions summed %3d" % disagree)
+
+  population: the 3 blind-spot count ROWS `p1_grain.py` prints
+      ...ROWS whose value is a literal, not a measurement       1
+      ^ one unit of that number is one printed count row
+      ...ROWS derived by arithmetic on that literal             1
+      ^ one unit of that number is one printed count row
+      ...ROWS actually measured by the loop above them          1
+      ^ one unit of that number is one printed count row
+
+  `PUBLISHED version` is the constant 1.  The loop that computes
+  `disagree` iterates over BOTH versions and cannot say which of them
+  contributed -- so the split into published and repaired is ASSUMED,
+  and the label `PUBLISHED version` names a measurement that was never
+  taken.  That is O1's defect class exactly: a label that says what the
+  number is ABOUT, over a value that is about something else.
+
+  PUT TO THE INPUTS IT WAS NOT GIVEN.  The probe's own printing
+  arithmetic, re-executed here over `disagree` in 0..3.  I do not edit
+  the subject to do this -- editing it would make the finding a fact
+  about my edit:
+
+      disagree   prints PUBLISHED   REPAIRED   SUMMED   consistent?
+             0              1          0        0   *** NO: 1 + 0 != 0
+             1              1          0        1   yes
+             2              1          1        2   yes
+             3              1          2        3   yes
+
+  population: the 4 INPUTS 0..3 put to the probe's printing arithmetic
+      ...INPUTS on which the three printed rows contradict      1
+      ^ one unit of that number is one input value
+
+  PRE-REGISTERED in A2b: exactly 1 of the 4.
+      A2b as pre-registered                              HIT
+
+  THE INPUT THAT BREAKS IT IS `disagree == 0` -- WHICH IS THE INPUT A
+  SUCCESSFUL REPAIR WOULD PRODUCE.  Had the repair closed the blind spot
+  entirely, the probe would have printed `PUBLISHED 1, REPAIRED 0,
+  SUMMED 0` and reported a published defect it had just measured as
+  absent.  The probe is correct on the value it got and wrong on the
+  value it was hoping for.  NOT REPAIRED HERE: this is an audit, and
+  the parent's transcripts are its evidence, not my worksheet.
+
+A2 TOTAL BAD: 0

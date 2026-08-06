@@ -1,0 +1,109 @@
+mg-03d1 / A5 -- THE PIN, AND WHAT MUST NOT HAVE MOVED
+HEAD: 9f1ecaa
+
+==========================================================================
+A5a  TWO REVISIONS, OR ONE RE-SYNCED ONE?
+==========================================================================
+
+  Read out of the repaired probe's source, because `distinguishes` is a
+  property of the code and not of the number it printed that day:
+
+  population: the 4 STRUCTURAL CHECKS below, over `code/runner_exit_repair_bf79/p1_grain.py`
+      ...CHECKS: it derives a publishing commit from the file      1
+      ^ one unit of each of these numbers is one structural check
+      ...CHECKS: it carries a separate pinned revision          1
+      ...CHECKS: it prints both, under different labels         1
+      ...CHECKS: a mismatch between them is explicitly NOT scored      1
+
+  THE LAST ONE IS THE ONE THAT SETTLES IT.  A RE-SYNC would make the two
+  revisions equal and then check that they are equal -- and would go red
+  the next time anything republished the transcript.  This probe
+  declares a mismatch EXPECTED and scores something else instead: that
+  the figure still RE-DERIVES at the revision the prose pins it to.
+  That check survives republication.  IT DISTINGUISHES THEM.
+
+==========================================================================
+A5b  AND THE DISTINCTION IS LOAD-BEARING AT HEAD, NOT MERELY STATED
+==========================================================================
+
+  population: the 1 ARTIFACT `code/runner_exit_repair_70c7/out_r4_property.txt`
+
+      the revision the figure is a FACT ABOUT (pinned)      973ca61
+      the transcript's CURRENT publishing commit            eab14bc
+      HEAD of this run                                      9f1ecaa
+
+      the two revisions DIFFER at HEAD                      yes
+
+  THEY DIFFER, so the distinction is doing work right now rather than
+  waiting to.  A fix that had merely re-synced them would be
+  indistinguishable from this one on the day it landed and wrong today.
+
+  AND THE PIN MUST STILL RESOLVE, which is the other half:
+      `973ca61` resolves as a commit                        yes
+      ...and is an ancestor of HEAD                         yes
+
+==========================================================================
+A5c  THE FOUR ARTIFACTS -- WHAT REVISION DO THEY CLAIM TO NAME?
+==========================================================================
+
+  The parent's fix says the four artifacts now state `the revision this
+  figure is a fact about` and no longer claim to name a publishing
+  commit.  Checked as a claim about their words, since that is what the
+  claim is about:
+
+      code/runner_exit_repair_70c7/README.md               fact-about: yes  claims-publisher: no
+      code/runner_exit_repair_70c7/OUTCOMES.md             fact-about: yes  claims-publisher: no
+      code/runner_exit_repair_70c7/r4_property.py          fact-about: yes  claims-publisher: no
+      docs/repair-mg-70c7-grain-and-population.md          fact-about: yes  claims-publisher: no
+
+  population: the 4 ARTIFACTS that publish the figure
+      ...ARTIFACTS pinning a revision and not claiming a publisher      4
+      ^ one unit of that number is one artifact
+
+==========================================================================
+A5d  THE FIFTH -- PRESERVED, CHECKED BY BLOB AND NOT BY EYE
+==========================================================================
+
+  `If the transcript has been regenerated, that is a regression and
+  outranks everything above.`  So it is checked first among equals here
+  and weighted 10 in the exit code.
+
+  population: the FIXTURE `code/runner_exit_c2b3/out_k1_census.txt`
+      ...COMMITS in that FILE's whole history                   4
+      ^ one unit of that number is one commit
+
+      the prepended staleness note survives                 yes
+      the row still reads DIFFERS (the historical answer)   yes
+
+      ...COMMITS of mg-bf79 or mg-03d1 touching that FIXTURE      0
+      ^ one unit of that number is one commit
+
+  AND THE OTHER TWO SITES OF THE SAME NOTE -- T5c's `3 of 3`:
+
+      code/runner_exit_c2b3/out_k1_census.txt        the transcript itself  carries it
+      code/runner_exit_c2b3/k1_census.py             the producing code     carries it
+      code/runner_exit_audit_05eb/README.md          mg-05eb's citation     carries it
+
+  population: the 3 SITES mg-56dc/T5c names
+      ...SITES carrying the staleness note                      3
+      ^ one unit of that number is one site
+
+  AND mg-56dc'S KEPT MISSES, which the brief also says to preserve:
+
+  population: the scored prediction ROWS of mg-56dc's OUTCOMES.md
+      ...ROWS still scored MISS in whole or in part             4
+      ^ one unit of that number is one scored prediction row
+          T1a, T1c, T2a, T5d
+
+      T5d's kept miss survives verbatim (`38 members`)      yes
+
+  AND mg-56dc'S OWN TRANSCRIPTS -- were they regenerated by the repair?
+
+  population: the TRANSCRIPTS of `code/runner_exit_audit_56dc/`
+      ...TRANSCRIPTS republished by mg-bf79 or by me            0
+      ^ one unit of that number is one file
+
+  ZERO IS THE ONLY PASSING VALUE HERE.  An audit's evidence is the thing
+  its repair is not allowed to move, and the parent did not move it.
+
+A5 TOTAL BAD: 0

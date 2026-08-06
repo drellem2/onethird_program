@@ -1,0 +1,249 @@
+mg-03d1 / A1 -- THE CLASSIFIER'S AXES
+Subject: `lib56dc._classify`, the sixth instrument the brief sent me to
+run.  Repository HEAD: 9f1ecaa
+
+==========================================================================
+A1a  THE RESOLUTION GAP, CONFIRMED BY RUNNING IT AND NOT BY READING IT
+==========================================================================
+
+  The addendum asks me to put `rows` and `basenames` to `_classify`
+  myself rather than take the parent's word.  Done here.  PREDICTED in
+  PREDICTIONS.md/A1a before this file existed: 12 of 12 as listed.
+
+      `rows        `  ->  SITE        pre-registered SITE       
+      `basenames   `  ->  SITE        pre-registered SITE       
+      `sites       `  ->  SITE        pre-registered SITE       
+      `lines       `  ->  SITE        pre-registered SITE       
+      `files       `  ->  SITE        pre-registered SITE       
+      `items       `  ->  SITE        pre-registered SITE       
+      `members     `  ->  SITE        pre-registered SITE       
+      `columns     `  ->  SITE        pre-registered SITE       
+      `executions  `  ->  EXECUTION   pre-registered EXECUTION  
+      `runs        `  ->  EXECUTION   pre-registered EXECUTION  
+      `invocations `  ->  EXECUTION   pre-registered EXECUTION  
+      `iterations  `  ->  EXECUTION   pre-registered EXECUTION  
+
+  population: the 12 probe WORDS listed in PREDICTIONS.md/A1a
+      ...probe WORDS classifying as pre-registered             12
+      ^ one unit of that number is one probe word
+
+  SO: `rows`, `basenames` and `sites` are ONE SYMBOL to this instrument.
+  A count labelled `sites` holding a ROW value is, to it, a row with the
+  right grain word on it.  IT PASSES.  Confirmed by running it.
+
+==========================================================================
+A1b  AND THE LIMIT IS THE ARITY, NOT THE VOCABULARY
+==========================================================================
+
+  `_classify` is four lines long and its whole body is:
+
+      e = bool(EXEC_WORDS.search(text));  s = bool(SITE_WORDS.search(text))
+      BOTH if e and s;  EXECUTION if e;  SITE if s;  else NONE
+
+  TWO independent boolean tests, so the function's image has at most
+  four members and it partitions every possible label into at most four
+  cells.  A partition into four cells can express exactly ONE binary
+  distinction plus the two degenerate cells (`BOTH`, `NONE`).
+
+  population: probe STRINGS chosen to reach every arm of the function
+      distinct output WORDS `_classify` can return              4
+      ^ one unit of that number is one output symbol
+      ...boolean CHECKS the body performs                       2
+      ^ one unit of that number is one regex membership test
+
+  THIS IS THE FINDING.  The gap is not that `rows` is missing from some
+  list -- `rows` is PRESENT, and that is the problem.  No addition to
+  either word list can make `rows` and `sites` different, because the
+  function has nowhere to put the difference.  A fix that adds a third
+  vocabulary buys exactly one more axis and is the same shape of repair
+  that produced this defect: one defect's width.
+
+==========================================================================
+A1c  THE COLLAPSE, COUNTED OVER THE CLASSIFIER'S OWN VOCABULARY
+==========================================================================
+
+  Every alternative of both vocabularies, rendered as a probe string and
+  put back through the classifier.  Printed in full so that the ratio
+  below is checkable rather than assertable:
+
+      `sites`=SITE            `source lines`=SITE     `lines`=SITE          
+      `pipelines`=SITE        `files`=SITE            `rows`=SITE           
+      `argv`=SITE             `steps`=SITE            `artifacts`=SITE      
+      `transcripts`=SITE      `figures`=SITE          `alternatives`=SITE   
+      `claims`=SITE           `uses`=SITE             `mentions`=SITE       
+      `filters`=SITE          `fixtures`=SITE         `anchors`=SITE        
+      `basenames`=SITE        `call sites`=SITE       `path`=SITE           
+      `stages`=SITE           `markers`=SITE          `commands`=SITE       
+      `runners`=SITE          `scripts`=SITE          `items`=SITE          
+      `checks`=SITE           `predicates`=SITE       `assertions`=SITE     
+      `members`=SITE          `columns`=SITE          `words`=SITE          
+      `string`=SITE           `regex`=SITE          
+
+      `executions      ` = EXECUTION
+      `invocations     ` = EXECUTION
+      `runs            ` = EXECUTION
+      `iterations      ` = EXECUTION
+      `read directly   ` = EXECUTION
+      `at run time     ` = EXECUTION
+      `executed        ` = EXECUTION
+      `statuses read   ` = EXECUTION
+
+  population: the 43 vocabulary WORDS of the classifier itself, taken
+  as unordered pairs
+      ...vocabulary WORDS in SITE_WORDS                        35
+      ^ one unit of that number is one regex alternative
+      ...vocabulary WORDS in EXEC_WORDS                         8
+      ^ one unit of that number is one regex alternative
+      ...unordered PAIRS over those words                     903
+      ^ one unit of that number is one pair of vocabulary words
+      ...PAIRS of those WORDS it tells apart (cross-list)     280
+      ^ one unit of that number is one pair of vocabulary words
+      ...PAIRS of those WORDS it collapses (within-list)      623
+      ^ one unit of that number is one pair of vocabulary words
+
+  `rows`/`sites` is one of those 623 collapsed pairs.  O1 is one member
+  of a class with 623 members, and a fix aimed at the member is aimed at
+  the wrong thing.
+
+==========================================================================
+A1d  AND THE COLLAPSE OVER THE GRAIN WORDS THAT ACTUALLY OCCUR
+==========================================================================
+
+  The vocabulary is the classifier's own.  This is the corpus's.  Every
+  count row of every `code/*/out_*.txt` on disk, its label's grain word
+  extracted by SHAPE (last content word, plus the word before an
+  `of`/`in`/`per`) rather than from a hand list -- a hand list of
+  interesting nouns is how this check would become what it audits.
+
+  population: every count ROW of every `code/*/out_*.txt` on disk
+      ...ARTIFACTS in that corpus                             517
+      ^ one unit of that number is one transcript file
+      ...count ROWS in them                                  1191
+      ^ one unit of that number is one printed line
+      ...distinct grain WORDS extracted from their labels     400
+      ^ one unit of that number is one de-pluralised noun
+
+      ...of those grain WORDS classifying SITE                 26
+      ...of those grain WORDS classifying EXECUTION             4
+      ...of those grain WORDS classifying BOTH                  0
+      ...of those grain WORDS classifying NONE                370
+      ^ one unit of each of those numbers is one de-pluralised noun
+      ...unordered PAIRS of grain words in the corpus       79800
+      ^ one unit of that number is one pair of corpus grain words
+      ...PAIRS of grain WORDS it can tell apart             11204
+      ^ one unit of that number is one pair of corpus grain words
+      ...PAIRS of grain WORDS it collapses                  68596
+      ^ one unit of that number is one pair of corpus grain words
+
+      collapse rate over the corpus's own grain words:   86.0%
+
+  AND THE STRICTER READING, printed because the pre-registered metric
+  above is the GENEROUS one and saying so is cheaper than defending it.
+  `NONE` is not a grain -- it is `I have no word for this label`.  A
+  SITE/NONE pair is not a distinction the classifier DREW, it is one
+  side of it going unanswered.  Counting only pairs where BOTH poles got
+  a grain symbol:
+
+  population: the 30 corpus grain WORDS the classifier has an entry for
+      ...unordered PAIRS over those grain words               435
+      ^ one unit of that number is one pair of corpus grain words
+      ...PAIRS of grain WORDS it genuinely tells apart        104
+      ^ one unit of that number is one pair of corpus grain words
+      collapse rate on the words it can speak about:     76.1%
+
+  AND THE CELL THAT MATTERS MOST IS `NONE`: 370 of the 400 grain words
+  this corpus actually uses are words the classifier HAS NO ENTRY FOR.
+  For those, `grain_of` walks to `prev` and then to `header` looking for
+  a word it does know -- so a label with an unknown grain noun is
+  answered by a DIFFERENT LINE's grain word, and reported at a stage
+  that says so.  The stage is the honest part of that design.
+
+  A sample of 40 of the `NONE` grain words, alphabetically, so the
+  number above is checkable:
+
+      aa-repair    aaf          about        actual       add          added      
+      affected     after        agree        algebra      alone        antichain  
+      anything     anyway       apart        appended     arc          attempt-mg-a
+      attribution  audit        axe          bad          bare         baseline   
+      bee          before       began        behind       beside       bfd        
+      bin          block        blockquote   bothway      bound        branching  
+      branching-graph  bratteli     broken       brown        byte         byte-identical
+
+==========================================================================
+A1e  THE SIX AXES THIS CORPUS ACTUALLY DISTINGUISHES
+==========================================================================
+
+  Pre-registered in PREDICTIONS.md/A1e.  For each axis: both poles put
+  to `_classify`, and the verdict is whether the two symbols DIFFER.
+  Where they do not, the classifier cannot express that axis at all.
+
+      row / site         `rows      `=SITE       `sites     `=SITE       -> *** COLLAPSED
+          occurs as: O1 itself: 14 (site,target) rows behind 12 source lines
+      file / line        `files     `=SITE       `lines     `=SITE       -> *** COLLAPSED
+          occurs as: `806 deletion rows` vs the files they fall in -- mg-d53d's arc
+      item / class       `items     `=SITE       `species   `=NONE       -> EXPRESSIBLE
+          occurs as: mg-4adb's species vs its rungs
+      pair / poset       `pairs     `=NONE       `poset     `=NONE       -> *** COLLAPSED
+          occurs as: mg-0ba7's `0 crossings over 10 ordered tree pairs`
+      occurrence / name  `mentions  `=SITE       `names     `=NONE       -> EXPRESSIBLE
+          occurs as: mg-bf79's own P3c: a MENTION is still COUNTED
+      site / execution   `sites     `=SITE       `executions`=EXECUTION  -> EXPRESSIBLE
+          occurs as: F1, the one axis the instrument was built for
+
+  population: the 6 named grain AXES of PREDICTIONS.md/A1e
+      ...AXES of grain WORDS it can express                     3
+      ^ one unit of that number is one axis
+      ...AXES of grain WORDS it collapses                       3
+      ^ one unit of that number is one axis
+
+  I PRE-REGISTERED 1 OF 6 AND THE PROBE SAYS 3.  That is a MISS and it
+  stays a miss.  The reason is worth more than the row: two of the three
+  `EXPRESSIBLE` axes are expressible only because ONE POLE CLASSIFIES
+  `NONE` -- `species` and `names` are not words the instrument knows.
+  What it distinguished there was HAS-A-GRAIN-WORD from HAS-NONE, which
+  is not the axis I named.  Counted that way:
+
+      ...AXES separated by two known grain WORDS                1
+      ^ one unit of that number is one axis
+
+  THAT REFINEMENT IS POST HOC AND DOES NOT RESCUE A1e.  The figure I
+  pre-registered was 1 against the metric I pre-registered, and that
+  metric gives 3.  Both numbers are printed above.
+
+  THE THREE IT COLLAPSES ALL COLLAPSE THE SAME WAY: both poles land in
+  SITE_WORDS, or both land in NONE, and every one of them is a
+  same-cell distinction of exactly O1's kind.  O1 was not a gap in a
+  word list; it was a sample from a class.
+
+==========================================================================
+A1f  AND ONE AXIS IT REPORTS THAT IS NOT THERE
+==========================================================================
+
+  The blind spot has a mirror, and it is the prediction I most expected
+  to be refuted: a pair of words at the SAME grain, split across the two
+  vocabularies, so the classifier asserts a distinction the words do not
+  carry.  ADJUDICATED BY HAND, with the reasoning printed so a reader
+  can reject any row -- there is no mechanical test for `same grain`,
+  and pretending there is would be this arc's own defect.
+
+      `steps     `=SITE      vs `iterations  `=EXECUTION  same grain: yes  *** FALSE DISTINCTION
+          a loop's steps ARE its iterations; `6 steps` and `6 iterations` of the same loop are one number
+      `commands  `=SITE      vs `invocations `=EXECUTION  same grain: yes  *** FALSE DISTINCTION
+          `3 commands issued` and `3 invocations` count the same events
+      `runners   `=SITE      vs `runs        `=EXECUTION  same grain: no   
+          a runner is a FILE and a run is an EVENT -- correctly split
+      `scripts   `=SITE      vs `executions  `=EXECUTION  same grain: no   
+          a script is a file; an execution is an event -- correctly split
+      `checks    `=SITE      vs `iterations  `=EXECUTION  same grain: no   
+          a check is written once and may iterate -- correctly split
+
+  population: the 5 candidate WORD pairs adjudicated above
+      ...PAIRS asserting a distinction not in the words         2
+      ^ one unit of that number is one adjudicated word pair
+
+  So the instrument is not merely coarse in one direction.  It collapses
+  623 of the 903 pairs its own vocabulary can form AND splits at least 2
+  pairs that are one grain.  Both errors are invisible to a check that
+  only asks `does the label carry a grain word`.
+
+A1 TOTAL BAD: 0
