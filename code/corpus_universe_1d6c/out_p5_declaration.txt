@@ -1,0 +1,135 @@
+==============================================================================
+P5  THE GATE THAT DECLARES WHAT IT CANNOT REPAIR.
+    Population first, exclusions by name, sizes on every line.
+==============================================================================
+
+==============================================================================
+  G1  THE POPULATION.  git ls-files '*.md', never os.listdir.
+==============================================================================
+    tracked .md                 : 295 files
+    files stating the figure    : 14
+    sites            GRAIN S    : 52
+    bounded                     : 28
+    UNBOUNDED                   : 24
+
+    THE SAME COUNT THROUGH THE GLOB docs/*.md : 12
+    the difference is the universe and nothing else: same predicate,
+    same parser, same grain, 12 sites the pattern cannot reach.
+
+==============================================================================
+  G2  THE PARTITION.  One class per site, by a rule on the path.
+==============================================================================
+    class                 sites   what the gate does with it
+    PRE-REGISTRATION         10   never reworded -- a pre-registration is a dated promise
+    DATED RECORD             12   never edited -- editing destroys the evidence trail
+    LIVING DOCUMENT           0   REPAIRABLE -- this file is reworded freely
+    INSTRUMENT README         2   REPAIRABLE -- ordinary prose about an instrument
+    UNCLASSIFIED              0   *** the gate FAILS on any of these ***
+    TOTAL                    24
+
+    partition is total : YES   (24 classified + 0 unclassified = 24)
+
+    PRE-REGISTRATION -- every site:
+      code/branching_audit_19ec/PREDICTIONS.md                   :51
+      code/branching_audit_19ec/PREDICTIONS.md                   :51
+      code/branching_bound_audit_aaf4/PREDICTIONS.md             :77
+      code/branching_bound_audit_aaf4/PREDICTIONS.md             :85
+      code/branching_bound_audit_aaf4/PREDICTIONS.md             :212
+      code/branching_bound_audit_aaf4/PREDICTIONS.md             :212
+      code/branching_bound_d075/PREDICTIONS.md                   :15
+      code/branching_bound_d075/PREDICTIONS.md                   :15
+      code/branching_bound_d075/PREDICTIONS.md                   :15
+      code/branching_bound_d075/PREDICTIONS.md                   :55
+
+    DATED RECORD -- every site:
+      docs/OneThird-Audit-mg-41aa-Repair.md                      :208
+      docs/OneThird-Audit-mg-af28-Branching-Graphs.md            :183
+      docs/OneThird-Audit-mg-af28-Branching-Graphs.md            :303
+      docs/OneThird-Audit-mg-af28-Branching-Graphs.md            :334
+      docs/OneThird-Audit-mg-af28-Branching-Graphs.md            :406
+      docs/OneThird-Branching-Graphs-Repair.md                   :362
+      docs/OneThird-Branching-Graphs-Repair.md                   :362
+      docs/OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md   :271
+      docs/OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md   :279
+      docs/OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md   :283
+      docs/OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md   :284
+      docs/OneThird-Warrant-Repair-mg-dffa.md                    :288
+
+    INSTRUMENT README -- every site:
+      code/branching_audit_5800/README.md                        :19
+      code/branching_repair_41aa/README.md                       :33
+
+==============================================================================
+  G3  THE ACTIONABLE SET.  What a reader is being asked to do.
+==============================================================================
+    unbounded sites in the whole population : 24
+    of them ACTIONABLE                      : 2
+
+      code/branching_audit_5800/README.md:19
+        Young–Fibonacci 33 / 5 / 28, the witness, the 28 reconstructions, and the **new claim** the re
+      code/branching_repair_41aa/README.md:33
+        **X4** Young–Fibonacci rebuilt, T8's 33/5 reproduced, and the 28 distributive intervals each r
+
+    THESE 2 ARE NOT REPAIRED HERE.  They belong to other tickets'
+    instruments, and this ticket repairs a UNIVERSE, not a sentence.
+    They are named so that the backlog is a list and not a number.
+
+==============================================================================
+  G4  THE DECLARATION.  This block is the deliverable: what a
+      reader sees instead of a clean sweep.
+==============================================================================
+
+    +---------------------------------------------------------------+
+    | DECLARED SCOPE OF THIS GATE                                   |
+    |                                                               |
+    | POPULATION   every .md tracked by git       295 files          |
+    | GRAIN        one live sentence                                |
+    | SITES         52, of which  24 are unbounded                   |
+    |                                                               |
+    | ENFORCED ON                                                   |
+    |   INSTRUMENT README          2 unbounded site(s)              |
+    |   LIVING DOCUMENT            0 unbounded site(s)              |
+    |                                                               |
+    | DECLARED EXCLUSIONS -- counted, named, and NOT enforced        |
+    |   PRE-REGISTRATION          10 unbounded site(s)              |
+    |   DATED RECORD              12 unbounded site(s)              |
+    |   tracked .txt and .py      50 unbounded site(s) in  36 files    |
+    |                                                               |
+    | NOT A CLEAN SWEEP.   22 of  24 unbounded sites are excluded    |
+    | by a stated invariant, not by the shape of a pattern.         |
+    +---------------------------------------------------------------+
+
+==============================================================================
+  G5  THE CONTROLS.  A gate nobody has seen fail has not been
+      seen to pass.  Three constructed trees.
+==============================================================================
+    a site in an unruled path is UNCLASSIFIED                FIRES
+    the same sentence in a README is ACTIONABLE              FIRES
+    the same sentence in a PREDICTIONS.md is EXCLUDED        FIRES
+    a BOUNDED sentence produces 0 unbounded sites            FIRES
+    a docs/ file that is NOT an audit record is UNCLASSIFIED FIRES
+
+    5 of 5 controls fire.
+    C5 IS THE ONE THAT MATTERS: a file cannot buy an exemption by
+    living in docs/.  The exemption is for AUDIT RECORDS, and a
+    docs/ file that is not one falls through to UNCLASSIFIED and
+    fails this gate.
+
+==============================================================================
+  VERDICT
+==============================================================================
+    population 24 unbounded; 2 enforced; 22 declared and excluded;
+    0 unclassified.
+
+==============================================================================
+SUMMARY p5_declaration: G1 population 295 tracked .md, 52 sites, 24 unbounded
+SUMMARY p5_declaration: G1 the glob would report 12 of the same 24
+SUMMARY p5_declaration: G2 PRE-REGISTRATION   10 site(s)
+SUMMARY p5_declaration: G2 DATED RECORD       12 site(s)
+SUMMARY p5_declaration: G2 LIVING DOCUMENT    0 site(s)
+SUMMARY p5_declaration: G2 INSTRUMENT README  2 site(s)
+SUMMARY p5_declaration: G2 UNCLASSIFIED 0; partition total YES
+SUMMARY p5_declaration: G3 actionable 2 of 24
+SUMMARY p5_declaration: G4 declared exclusions 22 .md site(s) plus 50 site(s) in tracked .txt/.py
+SUMMARY p5_declaration: G5 controls 5 of 5 fire
+==============================================================================

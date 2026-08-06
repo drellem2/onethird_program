@@ -35,7 +35,7 @@ about the instrument: what it chose, what it got wrong, and where to attack it.
 | `p3_consumers.py` | **who inherits the undercount** — call sites, transcript figures, prose figures with a control column and a hand adjudication, and the consumer nobody had named |
 | `p4_selfcheck.py` | **the self-check repaired** — three fixes, three classifiers side by side, and six controls |
 | `p5_declaration.py` | **the gate that declares what it cannot reach** — a total partition of the population and five constructed trees it must fail on |
-| `selftest1d6c.py` | 39 cases. U1/U2 are the important ones: they prove the instrument that reported **0** could have reported a positive |
+| `selftest1d6c.py` | 40 cases. U1/U2 are the important ones: they prove the instrument that reported **0** could have reported a positive |
 | `out_*.txt` | the committed transcripts of the run in this commit |
 | `out_p4_selfcheck_FIRSTFORM_exit1.txt` | `p4`'s **first form**, kept because respecifying its classifier moved a number **towards** my own finding |
 | `out_donotdisturb_d075.txt` | mg-d075's suite re-run from this branch, hand-run and restored — green, and two transcripts that do not regenerate |

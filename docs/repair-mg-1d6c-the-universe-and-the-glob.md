@@ -21,11 +21,11 @@ are enumerated by `p1` and diffed in both directions; nothing here is a reading 
 
 | universe | mechanism | files |
 |---|---|---|
-| `G_IMPL` | `os.listdir(docs)` — the universe **as implemented** | **105** |
-| `G_SHELL` | `sh -c 'ls -1 docs/*.md'` — the universe **as written** | **105** |
-| `D_TRACK` | `git ls-files`, `.md` under `docs/` **at any depth** | **117** |
-| `M_TRACK` | `git ls-files`, `.md` anywhere | **293** |
-| `M_DISK` | `os.walk`, `.md` anywhere outside `.git/` | **293** |
+| `G_IMPL` | `os.listdir(docs)` — the universe **as implemented** | **106** |
+| `G_SHELL` | `sh -c 'ls -1 docs/*.md'` — the universe **as written** | **106** |
+| `D_TRACK` | `git ls-files`, `.md` under `docs/` **at any depth** | **118** |
+| `M_TRACK` | `git ls-files`, `.md` anywhere | **295** |
+| `M_DISK` | `os.walk`, `.md` anywhere outside `.git/` | **295** |
 
 **THE IMPLEMENTED UNIVERSE DIFFERS FROM THE DESCRIBED ONE IN TWO MECHANICAL WAYS**, and both
 are printed whether or not they bite:
@@ -119,8 +119,8 @@ value, 18 in the control column.** Machine, then hand-adjudicated per row with a
 **C3c — THE CONSUMER NOBODY HAD NAMED.** `docs/repair-mg-d075-the-figure-and-its-scope.md:51`
 publishes the universe's *own size*: *"the **101 `docs/*.md`** that are not this repair's own"*.
 It is not a site count, so no audit of the site counts ever looked at it, and it carries the
-same boundary. Re-derived at this commit: **the glob 105, tracked `.md` under `docs/` 117, the
-repository 293.**
+same boundary. Re-derived at this commit: **the glob 106, tracked `.md` under `docs/` 118, the
+repository 295.**
 
 **C4 — the second-order consumers.** **5 files carry an inheriting figure; 3 of them quote it
 rather than compute it.** Each is a dated record and none is edited here.
@@ -129,7 +129,9 @@ rather than compute it.** Each is a dated record and none is edited here.
 this branch — 7 of 7 scripts on their committed predictions, `run_all.sh` exit 0 — and **two of
 its transcripts do not regenerate**: `out_s6_class.txt` on its commit count (mg-aaf4's finding,
 `git log --all`), and `out_s1_census.txt` on **`102 docs/*.md exist now` → `105`, twice**. That
-is C3c's quantity moving in a published record with no exit code anywhere saying so. Evidence:
+is C3c's quantity moving in a published record with no exit code anywhere saying so — and it
+moved again while this ticket was being written: **105 at that hand run, 106 once this account
+document itself landed in `docs/`.** Evidence:
 `code/corpus_universe_1d6c/out_donotdisturb_d075.txt`. The directory is restored; this branch
 carries no regenerated output of it.
 
@@ -184,7 +186,7 @@ own regex **does** miss the tense.
 with a number, which parts of it it will not act on.** A gate reporting 12 because 12 is all it
 can see is indistinguishable from a gate reporting 12 because 12 is all there is.
 
-**Population: every `.md` tracked by git — 293 files. Grain: one live sentence.**
+**Population: every `.md` tracked by git — 295 files. Grain: one live sentence.**
 
 | class | unbounded sites | what the gate does |
 |---|---|---|
