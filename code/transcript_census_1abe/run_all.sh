@@ -39,11 +39,29 @@
 
 cd "$(dirname "$0")" || exit 2
 
+# ⚠️ THE REVISION IS RESOLVED ONCE, HERE, AND PASSED TO EVERY SCRIPT.
+#
+# Without this each script resolves `main` at its own start time, and on a
+# repository with other agents merging into it `main` MOVES BETWEEN THEM.  It
+# did, in this suite's own first full run: t1 measured a population of 537 as
+# of `eacc5e1` and by the time t2 started `main` was `81214a9`.  A census whose
+# own scripts disagree about their denominator is not a census, and it would
+# have been committing the defect it was filed to measure.
+#
+# Pass `--at <rev>` yourself to override -- and passing the `as-of` printed in
+# a committed transcript is how you re-run this suite against the revision that
+# transcript is a fact about.
+case " $* " in
+    *" --at "*) AT="" ;;
+    *)          AT="--at $(git rev-parse main)" ;;
+esac
+
 WORST=0
 for s in selftest_1abe t1_population t2_census t3_shas t4_rebase t7_sightings \
          t5_control t6_caps; do
     printf '===> %s\n' "$s"
-    python3 -W ignore "$s.py" "$@" > "out_$s.txt" 2>&1
+    # shellcheck disable=SC2086  # $AT is two words on purpose
+    python3 -W ignore "$s.py" $AT "$@" > "out_$s.txt" 2>&1
     RC=$?
     printf '     exit %d   %s\n' "$RC" \
         "$(grep '^TOTAL BAD:' "out_$s.txt" 2>/dev/null | tail -1)"
