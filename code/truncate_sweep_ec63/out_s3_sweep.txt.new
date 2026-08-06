@@ -1,0 +1,236 @@
+mg-ec63 / S3 -- THE SWEEP: WHAT THE PROBE FAILED TO SEE
+HEAD: 29f1ba5
+
+==========================================================================
+S3a  RUNNING EVERY EMPTIED STEP AGAINST THE DEFECT
+==========================================================================
+  population: the 32 EMPTIED STEPS of S2b
+
+      ...EMPTIED STEPS swept                                         32
+          ^ one unit of that number is one step
+      ...of those, DIFFERENT                                          7
+          ^ one unit of that number is one step
+      ...of those, NEVER EXERCISED                                    0
+          ^ one unit of that number is one step
+      ...of those, NONDETERMINISTIC                                  11
+          ^ one unit of that number is one step
+      ...of those, A TIMED OUT                                        0
+          ^ one unit of that number is one step
+      ...of those, BOTH TIMED OUT                                     3
+          ^ one unit of that number is one step
+      ...of those, SAME                                              11
+          ^ one unit of that number is one step
+
+      ...RUNNERS with at least one DIFFERENT or NEVER-EXERCISED step      7
+          ^ one unit of that number is one `run_all.sh`
+
+  A SAME row is a real result and is reported as one: for those steps
+  the ordering bug cost the arc nothing, and saying so is the only way
+  the DIFFERENT rows mean anything.
+
+==========================================================================
+S3b  THE DRIFT CONTROL -- DOES THE DEFECT RUN STILL MATCH WHAT SHIPPED?
+==========================================================================
+  `diff(A, B)` isolates the shape.  It does NOT by itself tell you a
+  published figure is wrong: if the tree has moved since the transcript
+  was committed, A no longer matches what shipped either, and the
+  published-claim question has to be asked against the COMMITTED bytes.
+
+  population: the 32 EMPTIED STEPS of S3a
+      ...STEPS where A reproduces the committed transcript           11
+          ^ one unit of that number is one step
+      ...STEPS where the tree has DRIFTED since publication          21
+          ^ one unit of that number is one step
+
+  Only the reproducing rows license the sentence 'the published figure
+  was computed under the defect'.  For the drifted rows S4 goes to the
+  committed bytes directly.
+
+==========================================================================
+S3c  EVERY DIFFERENT AND NEVER-EXERCISED ROW, WITH ITS DELTA
+==========================================================================
+
+  ----------------------------------------------------------------
+  audit_2c77  ::  q3_operands.py
+  verdict: DIFFERENT        A exits 1 / B exits 1 / A reproduces committed: NO -- tree drifted
+  lines: A=249  B=252
+      --- A(empty)
+      +++ B(populated)
+      @@ -103,2 +103,5 @@
+          code/audit_2c77/lib2c77.py                               187   THIS AUDIT *** census, UNQUALIFIED
+      +   code/audit_2c77/out_q3_operands.txt                      69    THIS AUDIT *** census, UNQUALIFIED
+      +   code/audit_2c77/out_q3_operands.txt                      214   THIS AUDIT census, QUALIFIED
+      +   code/audit_2c77/out_q3_operands.txt                      215   THIS AUDIT census, QUALIFIED
+          code/audit_2c77/q3_operands.py                           15    THIS AUDIT *** census, UNQUALIFIED
+      @@ -181,3 +184,3 @@
+       
+      -   84 site(s) in all; 20 state the census without the deciding-condition
+      +   87 site(s) in all; 21 state the census without the deciding-condition
+          qualifier; 0 of those are in files d01ff32 touched.
+
+  ----------------------------------------------------------------
+  audit_330a  ::  s4_term.py
+  verdict: DIFFERENT        A exits 1 / B exits 1 / A reproduces committed: NO -- tree drifted
+  lines: A=317  B=317
+      --- A(empty)
+      +++ B(populated)
+      @@ -110,3 +110,3 @@
+       
+      -   and on the REAL tree: 55 line(s) carry the hyphenated form.
+      +   and on the REAL tree: 57 line(s) carry the hyphenated form.
+          of those, in a window stating the term but NOT carrying the
+      @@ -234,5 +234,5 @@
+          live claim         61       15         24
+      -   transcript         16       4          8
+      +   transcript         17       4          9
+          record, pre-run    9        2          4
+      -   ALL                86       21         36
+      +   ALL                87       21         37
+       
+
+  ----------------------------------------------------------------
+  branching_audit_d330  ::  e3_dispositions.py
+  verdict: DIFFERENT        A exits 0 / B exits 0 / A reproduces committed: NO -- tree drifted
+  lines: A=122  B=122
+      --- A(empty)
+      +++ B(populated)
+      @@ -108,6 +108,6 @@
+          swept population: 1530 tracked .md/.py/.txt/.sh files
+      -   occurrences of an X2-shaped claim : 72
+      +   occurrences of an X2-shaped claim : 73
+          marker window                     : 8 lines either side
+          of those, UNMARKED                : 0
+      -   -> NO FIFTH SITE.  Every one of the 72 occurrences sits inside a
+      +   -> NO FIFTH SITE.  Every one of the 73 occurrences sits inside a
+             withdrawal, a correction, a refutation or a checker's needle.
+
+  ----------------------------------------------------------------
+  repair_69d1  ::  p3_reason.py
+  verdict: DIFFERENT        A exits 1 / B exits 1 / A reproduces committed: NO -- tree drifted
+  lines: A=171  B=177
+      --- A(empty)
+      +++ B(populated)
+      @@ -26,2 +26,3 @@
+            code/repair_69d1/README.md                               line 80    refuted within 25 lines
+      +     code/repair_69d1/out_p3_reason.txt                       line 19    refuted within 25 lines
+            code/repair_69d1/p2_rerun.py                             line 134   refuted within 25 lines
+      @@ -54,3 +55,3 @@
+       
+      -   the new reason -- `CONSPIRING pair`: 16 site(s)
+      +   the new reason -- `CONSPIRING pair`: 18 site(s)
+            code/audit_2c77/out_q1_reason.txt                        line 102
+      @@ -66,2 +67,4 @@
+            code/branching_repair_76cc/r1_kernel.py                  line 382
+      +     code/repair_69d1/out_p3_reason.txt                       line 55
+      +     code/repair_69d1/out_p3_reason.txt                       line 146
+            code/repair_69d1/out_p4_kinds.txt                        line 72
+      @@ -71,3 +74,3 @@
+            code/repair_69d1/p4_kinds.py                             line 220
+      -   the row's LABEL -- `conspiracy`: 28 site(s)
+      +   the row's LABEL -- `conspiracy`: 31 site(s)
+            code/audit_2c77/PREDICTIONS.md                           line 52
+      @@ -90,2 +93,5 @@
+            code/repair_69d1/README.md                               line 93
+      +     code/repair_69d1/out_p3_reason.txt                       line 72
+      +     code/repair_69d1/out_p3_reason.txt                       line 144
+      +     code/repair_69d1/out_p3_reason.txt                       line 150
+            code/repair_69d1/out_p4_kinds.txt                        line 18
+
+  ----------------------------------------------------------------
+  repair_b2af  ::  t3_term.py
+  verdict: DIFFERENT        A exits 1 / B exits 1 / A reproduces committed: NO -- tree drifted
+  lines: A=158  B=163
+      --- A(empty)
+      +++ B(populated)
+      @@ -14,5 +14,5 @@
+       
+      -   sites in the tree stating the term (untracked included) : 86
+      +   sites in the tree stating the term (untracked included) : 87
+          NON-VACUITY -- distinct labels the rule returned : 3
+      -      *** census, UNQUALIFIED      20
+      +      *** census, UNQUALIFIED      21
+             census, QUALIFIED            50
+      @@ -74,8 +74,9 @@
+       
+      -   sites in code/repair_b2af stating the term          : 1
+      +   sites in code/repair_b2af stating the term          : 2
+             code/repair_b2af/lib_b2af.py:105                        quotes the wide BOUND
+      -   of those, UNQUALIFIED (i.e. added to the residue) : 0
+      +      code/repair_b2af/out_t3_term.txt:136                    *** census, UNQUALIFIED
+      +   of those, UNQUALIFIED (i.e. added to the residue) : 1
+       
+          residue excluding this ticket's files : 20
+      -   residue including them                : 20
+      +   residue including them                : 21
+       --------------------------------------------------------------------------
+      @@ -111,3 +112,3 @@
+       
+      -   copies of `every one a record` in the tree : 13
+      +   copies of `every one a record` in the tree : 16
+             code/audit_330a/README.md:261                           live claim
+      @@ -121,2 +122,5 @@
+             code/repair_b2af/lib_b2af.py:17                         live claim
+      +      code/repair_b2af/out_t3_term.txt:112                    transcript
+      +      code/repair_b2af/out_t3_term.txt:65                     transcript
+      +      code/repair_b2af/out_t3_term.txt:86                     transcript
+             code/repair_b2af/t3_term.py:127                         live claim
+      @@ -132,3 +136,3 @@
+          P-6b   predicted (5, 15)                      measured (5, 15)          HIT
+      -   P-6c   predicted between 2 and 8 more, including my own files measured 0                *** MISS  <- kept as written
+      +   P-6c   predicted between 2 and 8 more, including my own files measured 1                *** MISS  <- kept as written
+                 -- the row reasoned that THIS ticket's prose would state the
+      @@ -155,4 +159,5 @@
+       SELF-ERRORS: 0, population: every grep, file read and scoring this script performs, plus the requirement that the scoring rule be the one mg-2c77 wro
+      ... (6 further diff lines)
+
+  ----------------------------------------------------------------
+  runner_exit_audit_56dc  ::  t5_fixture.py
+  verdict: DIFFERENT        A exits 2 / B exits 2 / A reproduces committed: NO -- tree drifted
+  lines: A=221  B=221
+      --- A(empty)
+      +++ B(populated)
+      @@ -89,3 +89,3 @@
+             ...cited by name from outside their directory    339 file(s)
+      -      ...that RECORD A DEFECT by the rule above        100 file(s)
+      +      ...that RECORD A DEFECT by the rule above        101 file(s)
+             ...whose producing code has changed since         45 file(s)
+
+  ----------------------------------------------------------------
+  runner_exit_repair_70c7  ::  r6_self.py
+  verdict: DIFFERENT        A exits 0 / B exits 0 / A reproduces committed: yes
+  lines: A=138  B=138
+      --- A(empty)
+      +++ B(populated)
+      @@ -43,3 +43,3 @@
+       
+      -      artifact lines reporting a count over source      78
+      +      artifact lines reporting a count over source      86
+             ...quoting another artifact's line, excluded      13
+
+==========================================================================
+S3d  AND THE SAME ROWS, LISTED, BECAUSE A NULL RESULT IS A RESULT
+==========================================================================
+      SAME  counterexample_audit_c6bc                a5_battery.py
+      SAME  counterexample_audit_c6bc                check_locator.py
+      SAME  hash_population_6e58                     p4_gate.py
+      SAME  runner_exit_audit_dee4                   a1_outside.py
+      SAME  runner_exit_repair_70c7                  r3_strength.py
+      SAME  runner_exit_repair_7522                  s5_self.py
+      SAME  species_bound_audit_6ef4                 selftest6ef4.py
+      SAME  species_bound_audit_6ef4                 t4_restore.py
+      SAME  species_extent_d633                      selftestd633.py
+      SAME  species_extent_d633                      e3_bothways.py
+      SAME  species_rung_repair_4adb                 v3_self.py
+      NDET  face_geometry_audit_6653                 verify_claims.py   (excluded from DIFFERENT by the control)
+      NDET  hodge_leverage_audit_97fb                audit_97fb.py   (excluded from DIFFERENT by the control)
+      NDET  repair_8d5e                              r4_self.py   (excluded from DIFFERENT by the control)
+      NDET  runner_exit_repair_70c7                  r2_anchor.py   (excluded from DIFFERENT by the control)
+      NDET  species_bound_audit_6ef4                 t1_bound.py   (excluded from DIFFERENT by the control)
+      NDET  species_bound_repair_5040                selftest5040.py   (excluded from DIFFERENT by the control)
+      NDET  species_bound_repair_5040                r1_bound.py   (excluded from DIFFERENT by the control)
+      NDET  species_bound_repair_5040                r3_summaries.py   (excluded from DIFFERENT by the control)
+      NDET  species_bound_repair_5040                r4_self.py   (excluded from DIFFERENT by the control)
+      NDET  species_repair_a4ef                      s1_extent.py   (excluded from DIFFERENT by the control)
+      NDET  species_rung_repair_4adb                 v2_layer2.py   (excluded from DIFFERENT by the control)
+
+S3 TOTAL DIFFERENT + NEVER-EXERCISED: 7
