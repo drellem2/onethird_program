@@ -10,7 +10,7 @@ Rich rendered version: `docs/state-of-the-wall.html`. Generated 2026-07-19.
 
 Both **endpoints** of a single spectral axis are proven, along with all the machinery that reduces the whole conjecture to **one implication**. Almost every quantity we track — `λ_std`, inversion count, squared displacement, interface thinness, entropy — is the *same axis* ("near-ordinal-sumness") in different units. The balance constant `δ` is a **separate axis** (the counterexample condition). The entire remaining gap is the one **bridge** between them:
 
-> **L1b (the wall):** `δ(P) < 1/3` ⟹ `λ_std → 1`  — for which `E[inv_e] = O(n/γ)` (LIB) and `E[Σ disp²] = O(E[inv_e])` (B) are *sufficient*, in that strength order: **(B) ⟹ LIB ⟹ `λ_std → 1`**, one-way (see § *The single lemma to prove*; these were previously written as equivalent).
+> **L1b (the wall):** `δ(P) < 1/3` ⟹ **`1 − λ_std ≤ ε_spec`** for an *explicit absolute constant, uniform in `n`* — in inversion terms **(LIB-const)** `E[inv_e] ≤ (ε_spec/6)(n²−1)`. **That constant, not a limit, is what the architecture consumes** (mg-88bd, audited mg-e35c — row below), and it is **CONFIRMED CONDITIONALLY, not settled**: L4-as-stated is the thing whose provability at an `n`-free modulus is in doubt, and **if L4 needs an `n`-dependent modulus the answer flips**. The limit `λ_std → 1` and mg-7ae7's rate `1 − λ_std ≤ C/(γn)` are **stronger renderings that happen to be available**, not the requirement. *Sufficient* conditions, in strength order and each arrow one-way: **(B) ⟹ LIB ⟹ (LIB-weak) ⟹ (LIB-const)**, where `E[Σ disp²] = O(E[inv_e])` is (B), `E[inv_e] = O(n/γ)` is LIB, and `E[inv_e] = o(n²)` is **(LIB-weak)** — the weakest of the three that still forces the limit, and *not* blocked by the arc's named obstruction (mg-c3ca, [`docs/OneThird-LIBweak-mg-c3ca.md`](docs/OneThird-LIBweak-mg-c3ca.md)) (see § *The single lemma to prove*; these were previously written as equivalent). **Finite `n` is why the distinction matters:** `ε_spec ≲ 2×10⁻²` under the repaired calibration (unpinned by ~2 orders of magnitude), putting the crossover at which (LIB-const) stops being numerically harder than (LIB) at **`n ≈ 900`** — inside the range an unknown minimal counterexample could live.
 
 It is hard because it must use that `σ` ranges over a **real poset's** linear extensions — it is *false* for abstract frozen distributions.
 
@@ -18,7 +18,7 @@ It is hard because it must use that `σ` ranges over a **real poset's** linear e
 
 ## Two axes, one bridge
 
-- **Axis 1 — near-ordinal-sumness** (how close to an ordinal sum): `λ_std → 1`, `inv_e = O(n)` (LIB), `Σ disp² = O(inv)` (B), interface `Δ₁ → 0`, cross-cut entropy → 0. Tied together by the exact identities below — but **not all mutually equivalent**: `(B) ⟹ LIB ⟹ λ_std → 1` is one-way (row 8, § *The single lemma to prove*).
+- **Axis 1 — near-ordinal-sumness** (how close to an ordinal sum): `1 − λ_std ≤ ε_spec`, a constant uniform in `n` — **the form the architecture consumes**, with `λ_std → 1` a stronger rendering that happens to be available; `inv_e = o(n²)` (LIB-weak), `inv_e = O(n)` (LIB), `Σ disp² = O(inv)` (B), interface `Δ₁ → 0`, cross-cut entropy → 0. Tied together by the exact identities below — but **not all mutually equivalent**: `(B) ⟹ LIB ⟹ (LIB-weak) ⟹ (LIB-const)` is one-way (row 8, § *The single lemma to prove*).
 - **Axis 2 — balance / frozenness** (the counterexample condition): `δ(P) < 1/3` = frozen = no balanced pair = every incomparable pair is `>2/3`-decided toward `e`.
 
 **Equivalence dictionary** (why "many things tried" is one gap wearing many faces):
@@ -54,12 +54,12 @@ It is hard because it must use that `σ` ranges over a **real poset's** linear e
 flowchart TD
     A["Assume a minimal counterexample P<br/><i>primitive · frozen (δ &lt; 1/3)</i>"]:::assume
     B["The BK walk mixes badly<br/><i>low-conductance bottleneck cut</i>"]
-    C["λ_std → 1<br/><i>near-ordinal-sum</i>"]
+    C["1 − λ_std ≤ ε_spec<br/><i>near-ordinal-sum — a constant, uniform in n</i>"]
     D["Thin, low-conductance prefix interface"]
     E["A balanced pair exists in P"]
     F["Contradiction ⟹ no counterexample ⟹ 1/3–2/3 holds"]:::concl
     A -->|"PROVEN — Theorem E: frozen pair ⟹ low-conductance BK cut"| B
-    B -->|"OPEN ★ THE WALL — L1b: bad mixing ⟹ λ_std→1 (= LIB / B)"| C
+    B -->|"OPEN ★ THE WALL — L1b: bad mixing ⟹ 1−λ_std ≤ ε_spec (⟸ LIB-weak ⟸ LIB ⟸ B)"| C
     C -->|"PROVEN+emp — easy/Buser bounds the gap by any cut; + L3 best-cut-is-a-prefix (125/126)"| D
     D -->|"OPEN (2ndary) — L4: thin interface ⟹ balanced pair survives (beat N-poset)"| E
     E -->|"PROVEN — by minimality: a balanced pair contradicts δ&lt;1/3"| F
@@ -83,7 +83,7 @@ Two links are open (**L1b** primary, **L4** secondary); the rest are proven or e
 | 5 | easy/Buser `1−λ_std ≤ n·leak(A)/(|A||Aᶜ|)`, every cut | **proven** | any |
 | 6 | Theorem E: minimal counterexample ⟹ low-conductance BK cut | **proven** | any |
 | 7 | identities GID & DG | **proven** | any |
-| 8 | **L1b — the wall**: frozen ⟹ `λ_std→1`. Sufficient conditions, **one-way**: **(B) ⟹ LIB ⟹ `λ_std→1`**. The reverse arrows are **UNPROVEN — not merely absent** (see § *The single lemma to prove*) | **OPEN** | any |
+| 8 | **L1b — the wall**: frozen ⟹ **`1 − λ_std ≤ ε_spec`**, a constant uniform in `n` — in inversion terms **(LIB-const)** `E[inv_e] ≤ (ε_spec/6)(n²−1)`. That is what the architecture consumes, and **CONDITIONALLY** (mg-88bd, audited mg-e35c — the condition is L4-as-stated, row 11); `λ_std→1` is a stronger rendering that happens to be available, not the requirement. Sufficient conditions, **one-way**: **(B) ⟹ LIB ⟹ (LIB-weak) `E[inv_e] = o(n²)` ⟹ (LIB-const)**. The reverse arrows are **UNPROVEN — not merely absent** (see § *The single lemma to prove*) | **OPEN** | any |
 | 9 | L2 standard-eigenvector monotonicity | false as stated (2/126) | n=6 data |
 | 10 | L3 best-cut-is-a-prefix | empirical (125/126) | n ≤ 6 data |
 | 11 | L4 near-ordinal-sum stability ⟹ balanced pair survives. **As literally stated it closes Step 6 only through its trivial branch (i)**: branch (iii) needs restating as *exact* preservation in `[1/3,2/3]` (the source's own `:476–479` and `:567–569` already read that way — an internal drafting inconsistency, not an architectural defect), and **branch (ii) is unconsumed by Step 6's stated transfer for *every strictly positive* modulus — UNCONDITIONAL, and the `Ω(ε)` condition is DISCHARGED** (mg-3af9, audited mg-c8c6 — see that row): `F(ε) = ε/4` and every `F(ε) = o(ε)` are included, via the witness **`W*`**, which lives arbitrarily far **outside** the `Δ₁·n < 2` regime the earlier witness `W` provably could not leave. The only escape is `F ≡ 0`, which reads (ii) as *exact* ordinal sum — that makes L4 a **strictly stronger** conjecture, it does not repair Step 6.  **The conditional form this clause used to carry is SUPERSEDED and the earlier *"with no repair available"* is STRUCK at this site; the candidate repair **(IB)** is recorded in repaired form at the mg-63e3 row of the attempt index** — [row history H1](docs/state-history/ledger-row-11-L4.md). Separately and **modulus-free**: branch **(iii) as a *standalone universal* is refuted at every `ε > 0`, for every modulus** — (iii) is a disjunct and was never asserted standalone, so this kills the standalone reading and every `ε`-calibration of it, not L4 *(Full per-row record — every passage relocated from this cell, verbatim: [`docs/state-history/ledger-row-11-L4.md`](docs/state-history/ledger-row-11-L4.md).)* | **OPEN** (AMBER) | any |
