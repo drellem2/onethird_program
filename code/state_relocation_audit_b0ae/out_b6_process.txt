@@ -1,0 +1,186 @@
+
+==============================================================================
+B6.1  EVERY REMOVED LINE, CHARGED TO ONE OF THE THREE MOVES
+==============================================================================
+  lines no longer present verbatim in STATE.md              154
+      population: the 259 non-blank lines of old STATE.md
+      grain:      whole lines, exact string
+    charged to MOVE 1 Appendix A :180-381                   126
+      population: the 259 non-blank lines of old STATE.md
+      grain:      removed lines whose old line number is in that range
+    charged to MOVE 2 threads :142-177                       21
+      population: the 259 non-blank lines of old STATE.md
+      grain:      removed lines whose old line number is in that range
+    charged to MOVE 3 seven rows :130-136                     7
+      population: the 259 non-blank lines of old STATE.md
+      grain:      removed lines whose old line number is in that range
+  REMOVED FROM OUTSIDE ALL THREE MOVES                        0
+      population: the 259 non-blank lines of old STATE.md
+      grain:      removed lines with no mandate in the brief — each is editorial judgement
+  lines in new STATE.md with no old antecedent               27
+      population: the 131 non-blank lines of new STATE.md
+      grain:      whole lines, exact string — composed prose, which the brief allows only for links, provenance headers and one current-position paragraph
+      new:130  LINK  | **SOUND negative · actionable (mg-210d)** | best *constant* lower bound on `λ_std`, primitive/frozen — ISOLATED elemen
+      new:131  ROW   | **RED-for-lever · AMBER-redirect · CORRECTS MERGED WORK (mg-a58f; audited mg-d112 — CONFIRMED, 40 ledger rows re-deriv
+      new:132  ROW   | **OVERSTATED · core CONFIRMED-conditionally · RE-SHAPES (R) (mg-88bd, no computation; audited mg-e35c — 0 BROKEN mathe
+      new:133  ROW   | **RED-conditional · witness fully CONFIRMED · CORRECTS MERGED WORK (mg-63e3, no computation; audited mg-f825 — OVERSTA
+      new:134  ROW   | **RED · UNCONDITIONAL · witness `W*` fully CONFIRMED · DISCHARGES row 11's condition (mg-3af9, no computation; audited
+      new:135  ROW   | **GREEN · PROVEN, all finite posets · first proof-carried generalisation in the arc (mg-276d; computation permitted an
+      new:136  ROW   | **AMBER-POSITIVE · THE BET IS PRICED, AND THE PRICING IS CARRIED BY A THEOREM THAT SURVIVED AN INDEPENDENT REBUILD (mg
+      new:144  PROSE **Current position (2026-08-06).** Three residuals stand, correctly ordered (mg-a58f,
+      new:145  PROSE audited mg-d112): **(B-cov)** — *"break the wrong-signed same-side covariance"* (FKG/XYZ
+      new:146  PROSE force it `≥ 0`), *"the sharp edge"*, and the object three separate routes converge on;
+      new:147  PROSE **(R)** — *"do frozen posets have a density ceiling `d(P) ≤ D < 1`?"* (mg-210d),
+      new:148  PROSE elementary, and reopened *quantitatively* by mg-88bd as `D ≤ ε_spec`: *"a door recorded as
+      new:149  PROSE the wrong shape is now the right shape with the wrong size"*; and **(EQ)** —
+      new:150  PROSE `max_x |E[pos_σ x] − rank_e x| = O(1)`, elementary, *"the only one of the three that is a
+      new:151  PROSE cancellation statement rather than a decay statement"*. **Retired or dead:** the *"external
+      new:152  PROSE k=1 stability tool"* for Stanley's inequality (refuted, mg-dcae — the reduction to it was
+      new:153  PROSE circular, so any usable statement *"must consume the frozen hypothesis directly"*);
+      new:154  PROSE mg-0ed7's `Φ→Var` reduction (**REFUTED**, mg-8f56); and the tempering/deformation route to
+      new:155  PROSE the BK gap (dead *"for method reasons, not because the conjecture is false"*, mg-4a86).
+      new:156  PROSE **Also open, beside the three:** **(RD)** — which reading branch (ii) carries (mg-3af9) —
+      new:157  PROSE and the hole mg-3af9 opened at **Step 6** of the architecture, *"independent of L1b"*.
+      new:159  PROSE *Every paragraph of the chronology this replaces, verbatim and in order — mg-a1ec, mg-48ab,
+      new:160  PROSE mg-dcae, mg-210d, mg-0ed7, mg-4a86, mg-8f56, mg-a58f, mg-88bd, mg-63e3, mg-3af9:*
+      new:161  LINK  [`docs/state-history/threads-chronology.md`](docs/state-history/threads-chronology.md).
+      new:167  LINK  Audit-stage process: see [`docs/audit-stage-process.md`](docs/audit-stage-process.md)
+      new:168  PROSE (standing process, Daniel directive 2026-07-19). Relocated whole and unedited by mg-ea0e,
+      new:169  PROSE 2026-08-06 — it is durable process documentation, not state of the programme.
+
+==============================================================================
+B6.2  THE TWO SELF-REPORTED DEPARTURES, CHECKED
+==============================================================================
+  old :382-386 ('Why 1/3') still in STATE.md               True
+      population: the 5 lines old:382-386 that departure 1 says were kept
+      grain:      boolean — all non-blank lines present verbatim
+  row :133 sentence-markers in new STATE.md                   7
+      population: the single line new STATE.md:133
+      grain:      bold-delimiter pairs — departure 2 says it kept TWO sentences
+  row :133 mentions DISCHARGED                             True
+      population: the same line
+      grain:      boolean — the reason departure 2 gives for keeping the second sentence
+
+==============================================================================
+B6.2b  THE ONE COMPOSED PARAGRAPH — is it quoted, as mg-ea0e says, or written?
+==============================================================================
+  # MOVE 2 permits 'a short current-position paragraph'.  That paragraph is the ONLY place
+  # in this change where a human sentence about the mathematics was composed rather than
+  # moved, so it is the only place a claim could have been invented.  mg-ea0e says it is
+  # 'built from the chronology's own quoted clauses'.  Every quoted span is checked.
+  quoted clauses in the current-position paragraph              9
+      population: the 1222 characters of new STATE.md:144-157
+      grain:      spans delimited by *"..."* — the paragraph's own quotation marks
+    found EXACTLY (line breaks and all)                       5
+      population: the 9 quoted clauses above
+      grain:      spans, exact string — fails on any clause the paragraph hard-wrapped
+    found after whitespace normalisation                      7
+      population: the 9 quoted clauses above
+      grain:      spans, whitespace-collapsed on BOTH sides — the honest grain for wrapped prose
+    found after markup is stripped too                        9
+      population: the 9 quoted clauses above
+      grain:      spans with * and ` removed on both sides — the WORDS, ignoring emphasis
+      WORDS MATCH, MARKUP DROPPED  'the only one of the three that is a cancellation statement rather than a decay statement'
+      WORDS MATCH, MARKUP DROPPED  'must consume the frozen hypothesis directly'
+  # A clause in the WORDS-MATCH row is not an invented claim and not a verbatim quotation
+  # either: the summary set it inside quotation marks having dropped the source's own
+  # emphasis (`*cancellation*` -> cancellation).  mg-ea0e's 'NO MATHEMATICAL CLAIM IS
+  # REWORDED' survives at the word grain, which is the grain that claim is about.
+  paragraph length                                         1222
+      population: the same paragraph
+      grain:      characters — 'short' is the brief's word
+  mg-ids cited inside the paragraph                           9
+      population: the same paragraph
+      grain:      distinct ids
+      mg-0ed7, mg-210d, mg-3af9, mg-4a86, mg-88bd, mg-8f56, mg-a58f, mg-d112, mg-dcae
+
+==============================================================================
+B6.3  THE BLAST RADIUS NOBODY SIZED — STATE.md:<n> citations elsewhere in the repo
+==============================================================================
+  STATE.md line citations found                             196
+      population: every `STATE.md:<n>` citation in the 1602 tracked md/txt/py/sh/html files of the repo other than STATE.md itself, at cc4c663
+      grain:      citations, one per regex match
+    distinct citing files                                    38
+      population: every `STATE.md:<n>` citation in the 1602 tracked md/txt/py/sh/html files of the repo other than STATE.md itself, at cc4c663
+      grain:      files
+  citations pointing PAST the new end of file                67
+      population: every `STATE.md:<n>` citation in the 1602 tracked md/txt/py/sh/html files of the repo other than STATE.md itself, at cc4c663
+      grain:      citations with a line number > 176 — these now resolve to nothing
+  citations into :130-176 (the rewritten zone)               96
+      population: every `STATE.md:<n>` citation in the 1602 tracked md/txt/py/sh/html files of the repo other than STATE.md itself, at cc4c663
+      grain:      citations whose target line still exists but whose CONTENT may have changed
+  citations into :1-129 (the untouched prefix)               33
+      population: every `STATE.md:<n>` citation in the 1602 tracked md/txt/py/sh/html files of the repo other than STATE.md itself, at cc4c663
+      grain:      citations whose target is byte-identical — these are safe by construction
+
+  FILES CITING A LINE THAT NO LONGER EXISTS (top 25 by count):
+      docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md  12 citations, max :355
+      docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md  11 citations, max :313
+      code/face_geometry_audit_e720/out_verify.txt                       8 citations, max :355
+      code/hodge_leverage_audit_8a5c/out_audit_8e30.txt                  7 citations, max :385
+      docs/OneThird-Hodge-Side-Leverage-Mg8e30Repair-IndependentAudit.md   6 citations, max :385
+      docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md   6 citations, max :289
+      code/hodge_leverage_audit_8a5c/audit_repair_8e30.py                2 citations, max :385
+      code/state_audit_6a2f/out_audit.txt                                2 citations, max :343
+      docs/OneThird-STATE-Landing-mg7735-IndependentAudit.md             2 citations, max :268
+      docs/state-history/README.md                                       2 citations, max :343
+      code/face_geometry_audit_e720/verify_landing_claims.py             1 citations, max :343
+      code/state_layer_audit_218d/render218d.py                          1 citations, max :382
+      code/state_restructure_ea0e/README.md                              1 citations, max :180
+      docs/OneThird-Hodge-Side-Leverage-GppStrike-IndependentAudit.md    1 citations, max :241
+      docs/OneThird-LIBweak-mg-c3ca.md                                   1 citations, max :384
+      docs/OneThird-STATE-Control-Presentation-mg4acd-IndependentAudit.md   1 citations, max :382
+      docs/OneThird-STATE-Restructure-IndependentAudit.md                1 citations, max :343
+      docs/audit-mg-da45-nc4-gate-repair.md                              1 citations, max :314
+      docs/audit-stage-process.md                                        1 citations, max :319
+
+==============================================================================
+B6.3b  ARE THE DEAD CITATIONS LIVE REFERENCES OR HISTORICAL RECORD?
+==============================================================================
+  # A committed transcript that says STATE.md:355 is recording what it read at the commit
+  # it ran on; it is archaeology and is SUPPOSED to be frozen.  A live script or a live
+  # document that says STATE.md:355 is now wrong.  Splitting them is the difference
+  # between a scary number and a true one.
+  LIVE DOCUMENT                                  45 citations in 12 files
+      population: every `STATE.md:<n>` citation in the 1602 tracked md/txt/py/sh/html files of the repo other than STATE.md itself, at cc4c663
+      grain:      citations past :176, split by whether the citing artifact is still consulted
+      docs/OneThird-Hodge-Side-Leverage-GppStrike-IndependentAudit.md
+      docs/OneThird-Hodge-Side-Leverage-Mg8e30Repair-IndependentAudit.md
+      docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md
+      docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md
+      docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md
+      docs/OneThird-LIBweak-mg-c3ca.md
+      docs/OneThird-STATE-Control-Presentation-mg4acd-IndependentAudit.md
+      docs/OneThird-STATE-Landing-mg7735-IndependentAudit.md
+      docs/OneThird-STATE-Restructure-IndependentAudit.md
+      docs/audit-mg-da45-nc4-gate-repair.md
+      docs/audit-stage-process.md
+      docs/state-history/README.md
+  LIVE SCRIPT                                    5 citations in 4 files
+      population: every `STATE.md:<n>` citation in the 1602 tracked md/txt/py/sh/html files of the repo other than STATE.md itself, at cc4c663
+      grain:      citations past :176, split by whether the citing artifact is still consulted
+      code/face_geometry_audit_e720/verify_landing_claims.py
+      code/hodge_leverage_audit_8a5c/audit_repair_8e30.py
+      code/state_layer_audit_218d/render218d.py
+      code/state_restructure_ea0e/README.md
+  transcript (frozen record)                     17 citations in 3 files
+      population: every `STATE.md:<n>` citation in the 1602 tracked md/txt/py/sh/html files of the repo other than STATE.md itself, at cc4c663
+      grain:      citations past :176, split by whether the citing artifact is still consulted
+  CONTROL citations past end measured at 78ae4d9              0
+      population: every `STATE.md:<n>` citation in the 1602 tracked md/txt/py/sh/html files of the repo other than STATE.md itself, at cc4c663
+      grain:      citations — the SAME citation set scored against the OLD file, which must be far smaller: that difference is exactly what this commit created
+
+==============================================================================
+B6.4  LINK INTEGRITY OF THE NEW FILE
+==============================================================================
+  markdown links in new STATE.md                             18
+      population: every ](...) target in new STATE.md
+      grain:      link occurrences
+    local (non-http) targets                                 15
+      population: the same
+      grain:      link occurrences
+  DEAD local links                                            0
+      population: the 12 distinct local targets
+      grain:      targets that are not tracked paths at cc4c663
+
+B6 DONE

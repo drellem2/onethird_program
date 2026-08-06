@@ -1,0 +1,134 @@
+
+==============================================================================
+B3  MARKERS — over four named populations, then at occurrence grain
+==============================================================================
+  # POPULATION 1  old STATE.md alone .................. 1 file, 186,710 B
+  # POPULATION 2  new STATE.md alone .................. 1 file, 32,772 B
+  # POPULATION 3  new STATE.md + ONLY text this commit added to linked files
+  #               ................................... 13 files, 202,870 B  <-- LIKE-FOR-LIKE
+  # POPULATION 4  new STATE.md + linked files ENTIRE at cc4c663
+  #               ................................... 13 files, 265,696 B  <-- WIDER THAN 1
+  linked files this commit did NOT touch                      3
+      population: the 12 files new STATE.md links to
+      grain:      files with 0 added lines in cc4c663 — their markers are free additions to POPULATION 4
+      docs/state-history/attempt-mg-48ab.md
+      docs/state-history/attempt-mg-c47a-drop.md
+      docs/state-history/ledger-row-11-L4.md
+  # POPULATION 5  new STATE.md + the TRANSITIVE link closure ............ 14 files, 300,130 B
+  files by LINK DISTANCE from new STATE.md       [(1, 12), (2, 1)]
+      population: the 13 files in the transitive closure
+      grain:      (hops, files) — hop 1 is 'one link away'; hop >= 2 is not
+      hop 1  docs/audit-stage-process.md
+      hop 1  docs/state-history/attempt-mg-210d.md
+      hop 1  docs/state-history/attempt-mg-276d.md
+      hop 1  docs/state-history/attempt-mg-3af9.md
+      hop 1  docs/state-history/attempt-mg-48ab.md
+      hop 1  docs/state-history/attempt-mg-63e3.md
+      hop 1  docs/state-history/attempt-mg-88bd.md
+      hop 1  docs/state-history/attempt-mg-a3d4.md
+      hop 1  docs/state-history/attempt-mg-a58f.md
+      hop 1  docs/state-history/attempt-mg-c47a-drop.md
+      hop 1  docs/state-history/ledger-row-11-L4.md
+      hop 1  docs/state-history/threads-chronology.md
+      hop 2  docs/state-history/README.md
+
+==============================================================================
+B3.1  COUNTS — the same ten markers over each population
+==============================================================================
+  marker        P1 old  P2 new P3 like P4 1hop P5 clos   | mg-ea0e says    
+  ------------------------------------------------------------------------------------
+  STRUCK             8       2       9      13      13   | 8->13     P4=parent P5=parent
+  RETRACTED          0       0       0       0       2   | 0->2      P5=parent
+  RETIRED            2       0       2       3       3   | 2->3      P4=parent P5=parent
+  CORRECTED          5       0       5       7       7   | 5->7      P4=parent P5=parent
+  SUPERSEDED         1       1       1       1       1   | 1->1      P4=parent P3=parent P5=parent
+  REFUTED            6       3       8      10      10   | 6->10     P4=parent P5=parent
+  DISCHARGED         5       2       6       7       7   | 5->7      P4=parent P5=parent
+  BROKEN            43      11      54      61      71   | 43->71     P5=parent
+  withdrawn          4       1       4       4       4   | 4->4      P4=parent P3=parent P5=parent
+  void               5       2       5       7       9   | 5->9      P5=parent
+  markers whose parent pair == POPULATION 5                  10
+      population: the 10 markers mg-ea0e reports
+      grain:      markers — identifies WHICH population its published figures are over
+  markers whose parent pair == POPULATION 4                   7
+      population: the 10 markers mg-ea0e reports
+      grain:      markers, one-hop corpus
+  markers whose parent pair == POPULATION 3                   2
+      population: the 10 markers mg-ea0e reports
+      grain:      markers, like-for-like population
+  markers not falling under like-for-like                     0
+      population: the 10 markers mg-ea0e reports
+      grain:      markers whose POPULATION-3 count is BELOW its POPULATION-1 count
+
+==============================================================================
+B3.1b  WHERE THE INCREASES COME FROM — per file, per marker
+==============================================================================
+  file                                           hop  markers it contributes
+  audit-stage-process.md                           1  {'STRUCK': 2, 'CORRECTED': 2, 'BROKEN': 24, 'void': 1}
+  state-history/attempt-mg-210d.md                 1  {'RETIRED': 2}
+                                                        of which arrived in THIS commit: {'RETIRED': 1}
+  state-history/attempt-mg-276d.md                 1  {'CORRECTED': 1, 'DISCHARGED': 2, 'BROKEN': 2}
+                                                        of which arrived in THIS commit: {'DISCHARGED': 1, 'BROKEN': 2}
+  state-history/attempt-mg-3af9.md                 1  {'REFUTED': 3, 'DISCHARGED': 1, 'BROKEN': 4, 'void': 1}
+                                                        of which arrived in THIS commit: {'REFUTED': 3, 'DISCHARGED': 1, 'BROKEN': 4}
+  state-history/attempt-mg-48ab.md                 1  -
+  state-history/attempt-mg-63e3.md                 1  {'STRUCK': 2, 'REFUTED': 2, 'DISCHARGED': 1, 'BROKEN': 8}
+                                                        of which arrived in THIS commit: {'STRUCK': 1, 'REFUTED': 1, 'DISCHARGED': 1, 'BROKEN': 4}
+  state-history/attempt-mg-88bd.md                 1  {'STRUCK': 2, 'BROKEN': 7}
+                                                        of which arrived in THIS commit: {'STRUCK': 1, 'BROKEN': 4}
+  state-history/attempt-mg-a3d4.md                 1  {'STRUCK': 3, 'CORRECTED': 4, 'BROKEN': 3, 'withdrawn': 1, 'void': 1}
+                                                        of which arrived in THIS commit: {'STRUCK': 2, 'CORRECTED': 3, 'BROKEN': 3, 'withdrawn': 1}
+  state-history/attempt-mg-a58f.md                 1  {'REFUTED': 1, 'BROKEN': 1}
+                                                        of which arrived in THIS commit: {'BROKEN': 1}
+  state-history/attempt-mg-c47a-drop.md            1  -
+  state-history/ledger-row-11-L4.md                1  {'STRUCK': 1}
+                                                        of which arrived in THIS commit: NONE — every one of these pre-dates mg-ea0e
+  state-history/threads-chronology.md              1  {'STRUCK': 1, 'RETIRED': 1, 'REFUTED': 1, 'DISCHARGED': 1, 'BROKEN': 1, 'withdrawn': 2, 'void': 2}
+  state-history/README.md                          2  {'RETRACTED': 2, 'BROKEN': 10, 'void': 2}
+                                                        of which arrived in THIS commit: NONE — every one of these pre-dates mg-ea0e
+  # Read the P2 column, not the P4 column, to see what the SUMMARY now carries: that is
+  # the file a reader opens.  P4 rises partly because eight linked files were never
+  # touched by this commit and bring their own markers with them.
+
+==============================================================================
+B3.2  OCCURRENCE GRAIN — each marker matched by its own surrounding text
+==============================================================================
+  marker occurrences in old STATE.md                         79
+      population: every occurrence of the 10 markers inside the 441 atoms of old STATE.md
+      grain:      one occurrence = one (marker, position) pair, case-sensitive
+  occurrences whose +/-60-char context survives              79
+      population: every occurrence of the 10 markers inside the 441 atoms of old STATE.md
+      grain:      occurrences matched in new STATE.md or in text THIS COMMIT ADDED (POPULATION 3)
+  occurrences LOST                                            0
+      population: every occurrence of the 10 markers inside the 441 atoms of old STATE.md
+      grain:      occurrences with no surviving context
+  occurrences LOST against POPULATION 4                       0
+      population: every occurrence of the 10 markers inside the 441 atoms of old STATE.md
+      grain:      occurrences — printed so the two populations can be compared on the SAME grain
+  CONTROL occurrences lost after 1-char corruption             79
+      population: every occurrence of the 10 markers inside the 441 atoms of old STATE.md
+      grain:      occurrences — MUST be ~= the population, else context matching proves nothing
+
+  marker         occ old      lost
+  STRUCK               8         0
+  RETRACTED            0         0
+  RETIRED              2         0
+  CORRECTED            5         0
+  SUPERSEDED           1         0
+  REFUTED              6         0
+  DISCHARGED           5         0
+  BROKEN              43         0
+  withdrawn            4         0
+  void                 5         0
+
+==============================================================================
+B3.3  DID THE SUMMARY KEEP ITS CORRECTIONS?  Markers in new STATE.md by provenance
+==============================================================================
+  marker occurrences in new STATE.md carried verbatim             20
+      population: the 248 atoms of new STATE.md
+      grain:      occurrences inside an atom that appears verbatim in old STATE.md
+  marker occurrences in new STATE.md inside REWRITTEN atoms              2
+      population: the 248 atoms of new STATE.md
+      grain:      occurrences inside an atom with no verbatim antecedent — each needs reading by hand
+
+B3 DONE

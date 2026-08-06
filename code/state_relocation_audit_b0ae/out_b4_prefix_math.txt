@@ -1,0 +1,87 @@
+
+==============================================================================
+B4.1  THE UNTOUCHED PREFIX — located, not assumed
+==============================================================================
+  longest byte-identical line prefix                        129
+      population: the 176 line-positions the two files have in common
+      grain:      lines, counted from :1 — the FIRST position where the two files differ is :130
+  mg-ea0e claims byte-identical through                     129
+      population: mg-ea0e's commit message, quoted
+      grain:      lines — its claim, not my measurement
+  claim is inside the true prefix                          True
+      population: the 176 line-positions the two files have in common
+      grain:      boolean
+  SHA-256 of old :1-129                          d43538d39d1615770bbdbc751d0c22b8
+      population: the first 129 lines of STATE.md at 78ae4d9
+      grain:      hex digest (first 32 of 64 chars), over exact bytes including inner newlines
+  SHA-256 of new :1-129                          d43538d39d1615770bbdbc751d0c22b8
+      population: the first 129 lines of STATE.md at cc4c663
+      grain:      hex digest, same construction
+  digests equal                                            True
+      population: the two byte ranges above
+      grain:      boolean — a retyped line changes this and survives a word-diff
+  bytes in the identical prefix                          20,432
+      population: lines :1-129 of both files
+      grain:      utf-8 bytes
+  CONTROL digest after one 1/3 -> 1/4                      True
+      population: the same byte range with a single mathematical substitution
+      grain:      boolean — MUST be True, else the digest is not an instrument
+  first differing line number                               130
+      population: the 176 line-positions the two files have in common
+      grain:      1-based line number
+      old:130  | **SOUND negative · actionable (mg-210d)** | best *constant* lower bound on `λ_std`, primitive/frozen — ISOLATED elementary probe (doc: `probe-lambda
+      new:130  | **SOUND negative · actionable (mg-210d)** | best *constant* lower bound on `λ_std`, primitive/frozen — ISOLATED elementary probe (doc: `probe-lambda
+
+==============================================================================
+B4.2  THE MATHEMATICS — a census, not a sample
+==============================================================================
+  mathematical atoms in old STATE.md                        251
+      population: the 251 atoms of old STATE.md matching this script's math-token regex (fractions, relation/operator glyphs, ^, O(/Theta(/Omega(, sqrt, log, the greek names this corpus uses, Var/E[/Pr[, and the words bound/lemma/theorem)
+      grain:      atoms
+    as a share of all atoms                               56.9%
+      population: the 441 atoms of old STATE.md
+      grain:      percent
+  mathematical atoms NOT present verbatim                     0
+      population: the 251 atoms of old STATE.md matching this script's math-token regex (fractions, relation/operator glyphs, ^, O(/Theta(/Omega(, sqrt, log, the greek names this corpus uses, Var/E[/Pr[, and the words bound/lemma/theorem)
+      grain:      atoms, exact-substring presence in new STATE.md or in text THIS COMMIT ADDED
+  CONTROL math atoms lost under 1-char edit                 251
+      population: the 251 atoms of old STATE.md matching this script's math-token regex (fractions, relation/operator glyphs, ^, O(/Theta(/Omega(, sqrt, log, the greek names this corpus uses, Var/E[/Pr[, and the words bound/lemma/theorem)
+      grain:      atoms, each mutated at its midpoint — MUST equal the population, else 'verbatim' is not tested
+
+==============================================================================
+B4.3  THE 8-ROW PROOF LEDGER AND L1b — located by content, then compared
+==============================================================================
+      ledger         old:74    new:74     header line identical: True
+      L1b            old:13    new:13     header line identical: True
+      proof chain    old:None  new:None   header line identical: False
+      Why 1/3        old:382   new:171    header line identical: True
+  ledger-style rows naming an L-lemma                         5
+      population: the table rows of old STATE.md whose text contains 'L1'
+      grain:      rows
+    byte-identical at the same line number                    2
+      population: the 5 rows above
+      grain:      rows, exact string at the SAME 1-based line
+
+==============================================================================
+B4.4  FIVE RELOCATED MATHEMATICAL SENTENCES, PRINTED IN FULL (the ticket's §4)
+==============================================================================
+
+  (1) old STATE.md:130, 2050 chars — now in docs/state-history/attempt-mg-210d.md
+      **Best constant this route proves = `0`.** Master bound (re-derived from scratch, sharp): `1−λ_std ≤ 3·E[footrule]/(n²−1) ≤ 6·E[inv]/(n²−1)`, equality at the antichain. Frozen ⟹ `λ_std > 1 − d·n/(n+1)` (`d = m/C(n,2)` = incomparability density), but `d ≤ 1` degenerates it to `1/(n+1)` — positive, **not constant**. **Connectivity is wrong-signed:** primitivity gives `m ≥ n−1` — a *lower* bound on the pair count — which *degrades* the bound `O(1/n)`; a non-degeneracy hypothesis, not a quantitative lever. **Sole missing ingredient = Residual (R): is there a constant `D < 1` with density `d(P) ≤ D
+
+  (2) old STATE.md:131, 1838 chars — now in docs/state-history/attempt-mg-a58f.md
+      ] ≤ √(n·E[Σdisp²])` by the lower half of Diaconis–Graham + Cauchy–Schwarz, so (B) with constant `C` forces `E[inv_e] ≤ Cn`. (The audit verified this holds under **either** statement of (B) — the inversion form used in mg-dbd1/mg-8201 *and* the footrule form this document uses.) **Four corrections landed against prior text; the fourth is current state and stays here** — [row history H1](docs/state-history/attempt-mg-a58f.md). (4) Given (B), the mg-210d master bound alone yields `1−λ_std = O(1/n)`, so **(A) SPREAD and `Λ = O(1)` are off the critical path** (both still true; (F2) simply postdates
+
+  (3) old STATE.md:131, 22 chars — now in docs/state-history/attempt-mg-a58f.md
+      E[pos_σ x] − rank_e x\
+
+  (4) old STATE.md:131, 290 chars — now in docs/state-history/attempt-mg-a58f.md
+      ` by the per-element **inversion mass** `m_x` *before* taking the max, discarding the cancellation between `e`-above and `e`-below inversion mass — worth a factor `n` (witness `C_m ⊔ C_1`: `max b_x ≤ 1`, `max m_x = Θ(n)`, `E[inv_e] = Θ(n)`, all exact by hand). **Redirect — (EQ):** `max_x \
+
+  (5) old STATE.md:131, 24 chars — now in docs/state-history/attempt-mg-a58f.md
+      E[pos_σ(x)] − rank_e(x)\
+  of the five, present verbatim in a destination              5
+      population: the five relocated mathematical atoms printed above
+      grain:      atoms, exact string
+
+B4 DONE
