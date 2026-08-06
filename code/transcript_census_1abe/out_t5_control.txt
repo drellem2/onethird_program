@@ -1,0 +1,806 @@
+==============================================================================
+t5 -- THE CONVENTION AND THE CONTROL THAT CHECKS IT
+==============================================================================
+    code-digest: 29ab59a4f1f51e3d   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/transcript_census_1abe;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of      81214a9c02ee624dc1261c69db50d47ed659728f  (81214a9c02ee624dc1261c69db50d47ed659728f)
+
+------------------------------------------------------------------------------
+T5a -- R3: THE CONTROL, RUN OVER EVERY COMMITTED TRANSCRIPT
+------------------------------------------------------------------------------
+
+COVERAGE is reported before CORRECTNESS, because a control that is green over
+an empty population is not green about anything.
+
+    declaring a code-digest : 0 of 541
+    declaring nothing       : 541 of 541  (every transcript written before this convention)
+
+[MEASURED ] T5a COVERAGE: the control can say anything at all about 0 of 541 transcripts.  The other 541 predate the convention and no control can check them; that is the honest size of what R1-R3 fixes going forward and it fixes nothing retroactively
+[OK       ] T5a' CORRECTNESS: of the 0 transcripts that declare, 0 agree with the code-digest recomputed at their carrying commit and 0 do not
+
+------------------------------------------------------------------------------
+T5a-ii -- THE CONVENTION APPLIED TO THIS CENSUS'S OWN TRANSCRIPTS, ON DISK, AS THEY ARE BEING WRITTEN
+------------------------------------------------------------------------------
+
+T5a's coverage is 0 because it reads the PUBLISHED population and nothing
+published predates this proposal.  So the convention is checked here where it
+can be checked: against this suite's own transcripts in the working tree, whose
+producers emit the declaration.
+
+The transcripts of scripts that run AFTER this one do not exist yet and are
+absent rather than failing -- an absence this row prints rather than rounds.
+
+    code-digest of transcript_census_1abe at HEAD : 29ab59a4f1f51e3d
+
+    out_selftest_1abe.txt              agrees
+    out_t1_population.txt              agrees
+    out_t2_census.txt                  agrees
+    out_t3_shas.txt                    agrees
+    out_t4_rebase.txt                  agrees
+    out_t5_control.txt                 DECLARES NOTHING
+    out_t7_sightings.txt               agrees
+[FINDING  ] T5a-ii of this census's 7 transcripts already on disk, 6 declare a code-digest agreeing with the tree at HEAD, 0 disagree and 1 declare nothing.  The convention is obeyed by the instrument that proposes it, which is the least it can do before asking anything else to
+[MEASURED ] T5a-ii' AND THE CATCH, NAMED: this row reads HEAD, and HEAD must already carry the final code when the suite runs.  Commit the code, run, then commit the transcripts -- in that order, the declaration is true at the carrying commit because committing a transcript cannot move a digest over `.py`/`.sh`.  Run it the other way round and the instrument proposing the convention breaks it
+
+------------------------------------------------------------------------------
+T5b -- THE CONTROL, SHOWN GOING RED BY CONSTRUCTION
+------------------------------------------------------------------------------
+
+A control that has only ever been green has not been shown able to fire.  The
+demonstration mutates a DECLARED digest in memory -- nothing on disk is touched
+-- and asserts the comparison flips.  If this arc's own transcripts had carried
+such a declaration, this is the row that would have caught mg-c3a2's sighting
+on the day it landed instead of five days later.
+
+    subject   code/audit_c067 at 47e56b3
+    true code-digest there : cbaad7665535446d
+    corrupted declaration  : cbaad76655350000
+[OK       ] T5b GREEN ANSWER: a transcript declaring cbaad7665535446d is ACCEPTED against the tree at 47e56b3
+[OK       ] T5b' RED ANSWER: the same control REFUSES a transcript declaring cbaad76655350000.  The control is capable of both answers against the same real tree, which is the only thing that makes T5a' worth reading
+
+------------------------------------------------------------------------------
+T5c -- THE RETROACTIVE SCREEN: A RUN COMMITTED BESIDE THE CHANGE IT DOES NOT CONTAIN
+------------------------------------------------------------------------------
+
+NOW: over the 541 transcripts as they stand, the carrying commit of each is
+asked whether it ALSO changed a `.py`/`.sh` file in that transcript's own
+directory.  Needs no declaration, no re-running and no cooperation from
+anything already committed.
+
+    454 of 541 transcripts are carried by a commit that also changed producing code in their own directory
+
+    every one, named (transcript, carrying commit, the code files that moved in the same commit):
+      anchor_population_audit_0ba7/out_a1_population.txt   8490669  a1_population.py, a2_oldest.py, a3_gate.py, a4_labels.py, a5
+      anchor_population_audit_0ba7/out_a2_oldest.txt       8490669  a1_population.py, a2_oldest.py, a3_gate.py, a4_labels.py, a5
+      anchor_population_audit_0ba7/out_a3_gate.txt         8490669  a1_population.py, a2_oldest.py, a3_gate.py, a4_labels.py, a5
+      anchor_population_audit_0ba7/out_a4_labels.txt       8490669  a1_population.py, a2_oldest.py, a3_gate.py, a4_labels.py, a5
+      anchor_population_audit_0ba7/out_a4_labels_FIRSTFORM 8490669  a1_population.py, a2_oldest.py, a3_gate.py, a4_labels.py, a5
+      anchor_population_audit_0ba7/out_a5_resolution.txt   8490669  a1_population.py, a2_oldest.py, a3_gate.py, a4_labels.py, a5
+      anchor_population_audit_0ba7/out_a6_floor.txt        8490669  a1_population.py, a2_oldest.py, a3_gate.py, a4_labels.py, a5
+      anchor_population_audit_0ba7/out_selftest_0ba7.txt   8490669  a1_population.py, a2_oldest.py, a3_gate.py, a4_labels.py, a5
+      audit_2c77/out_q1_reason.txt                         adcfb1f  lib2c77.py, q1_reason.py, q2_bound_edge.py, q3_operands.py, 
+      audit_2c77/out_q2_bound_edge.txt                     adcfb1f  lib2c77.py, q1_reason.py, q2_bound_edge.py, q3_operands.py, 
+      audit_2c77/out_q3_operands.txt                       adcfb1f  lib2c77.py, q1_reason.py, q2_bound_edge.py, q3_operands.py, 
+      audit_2c77/out_q4_prerepair.txt                      adcfb1f  lib2c77.py, q1_reason.py, q2_bound_edge.py, q3_operands.py, 
+      audit_2c77/out_q5_discriminator.txt                  adcfb1f  lib2c77.py, q1_reason.py, q2_bound_edge.py, q3_operands.py, 
+      audit_2c77/out_selftest_2c77.txt                     adcfb1f  lib2c77.py, q1_reason.py, q2_bound_edge.py, q3_operands.py, 
+      audit_330a/out_s5_preserve.txt                       ea97d0a  lib330a.py, run_all.sh, s1_anchors.py, s2_perturb.py, s3_ker
+      branching_af28/out_branching.txt                     358beff  core_af28.py, run_all.sh, scan_brown.py, selftest.py, t_bran
+      branching_af28/out_lrb_reps.txt                      358beff  core_af28.py, run_all.sh, scan_brown.py, selftest.py, t_bran
+      branching_af28/out_scan_brown.txt                    358beff  core_af28.py, run_all.sh, scan_brown.py, selftest.py, t_bran
+      branching_af28/out_selftest.txt                      504ab6c  core_af28.py, selftest.py, t_young.py
+      branching_af28/out_young.txt                         504ab6c  core_af28.py, selftest.py, t_young.py
+      branching_audit_2060/out_b0_repro.txt                5dbe4f6  b0_repro.sh, b1_branching.py, b2_pathbasis.py, b3_quotes.py,
+      branching_audit_2060/out_b1_branching.txt            5dbe4f6  b0_repro.sh, b1_branching.py, b2_pathbasis.py, b3_quotes.py,
+      branching_audit_2060/out_b2_pathbasis.txt            5dbe4f6  b0_repro.sh, b1_branching.py, b2_pathbasis.py, b3_quotes.py,
+      branching_audit_2060/out_b3_quotes.txt               5dbe4f6  b0_repro.sh, b1_branching.py, b2_pathbasis.py, b3_quotes.py,
+      branching_audit_2060/out_b4_ours.txt                 5dbe4f6  b0_repro.sh, b1_branching.py, b2_pathbasis.py, b3_quotes.py,
+      branching_audit_2060/out_b5_successor.txt            5dbe4f6  b0_repro.sh, b1_branching.py, b2_pathbasis.py, b3_quotes.py,
+      branching_audit_2060/out_b6_ledger.txt               5dbe4f6  b0_repro.sh, b1_branching.py, b2_pathbasis.py, b3_quotes.py,
+      branching_audit_2060/out_b7_gz.txt                   5dbe4f6  b0_repro.sh, b1_branching.py, b2_pathbasis.py, b3_quotes.py,
+      branching_audit_2060/out_selftest.txt                5dbe4f6  b0_repro.sh, b1_branching.py, b2_pathbasis.py, b3_quotes.py,
+      branching_audit_321d/out_h1_questions.txt            ef38841  h1_questions.py, h2_grain.py, h3_setlevel.py, h4_mine.py, h5
+      branching_audit_321d/out_h2_grain.txt                ef38841  h1_questions.py, h2_grain.py, h3_setlevel.py, h4_mine.py, h5
+      branching_audit_321d/out_h3_setlevel.txt             ef38841  h1_questions.py, h2_grain.py, h3_setlevel.py, h4_mine.py, h5
+      branching_audit_321d/out_h4_mine.txt                 ef38841  h1_questions.py, h2_grain.py, h3_setlevel.py, h4_mine.py, h5
+      branching_audit_321d/out_h5_doccheck.txt             ef38841  h1_questions.py, h2_grain.py, h3_setlevel.py, h4_mine.py, h5
+      branching_audit_321d/out_selftest_321d.txt           ef38841  h1_questions.py, h2_grain.py, h3_setlevel.py, h4_mine.py, h5
+      branching_audit_5800/out_a1_counts.txt               8ce78fb  a1_counts.py, a2_exactly.py, a3_grid.py, a4_yf.py, a5_b1b5.p
+      branching_audit_5800/out_a2_exactly.txt              8ce78fb  a1_counts.py, a2_exactly.py, a3_grid.py, a4_yf.py, a5_b1b5.p
+      branching_audit_5800/out_a3_grid.txt                 8ce78fb  a1_counts.py, a2_exactly.py, a3_grid.py, a4_yf.py, a5_b1b5.p
+      branching_audit_5800/out_a4_yf.txt                   8ce78fb  a1_counts.py, a2_exactly.py, a3_grid.py, a4_yf.py, a5_b1b5.p
+      branching_audit_5800/out_a5_b1b5.txt                 8ce78fb  a1_counts.py, a2_exactly.py, a3_grid.py, a4_yf.py, a5_b1b5.p
+      branching_audit_5800/out_a6_grep.txt                 8ce78fb  a1_counts.py, a2_exactly.py, a3_grid.py, a4_yf.py, a5_b1b5.p
+      branching_audit_5800/out_a6_quotes.txt               8ce78fb  a1_counts.py, a2_exactly.py, a3_grid.py, a4_yf.py, a5_b1b5.p
+      branching_audit_5800/out_a7_doc.txt                  8ce78fb  a1_counts.py, a2_exactly.py, a3_grid.py, a4_yf.py, a5_b1b5.p
+      branching_audit_5800/out_selftest.txt                8ce78fb  a1_counts.py, a2_exactly.py, a3_grid.py, a4_yf.py, a5_b1b5.p
+      branching_audit_58da/out_g1_provenance.txt           d01ff32  g1_provenance.py
+      branching_audit_58da/out_g2_redo.txt                 d01ff32  g1_provenance.py
+      branching_audit_58da/out_g3_findings.txt             d01ff32  g1_provenance.py
+      branching_audit_58da/out_g4_fleet.txt                d01ff32  g1_provenance.py
+      branching_audit_58da/out_selftest_58da.txt           673b4c0  g1_provenance.py, g2_redo.py, g3_findings.py, g4_fleet.py, l
+      branching_audit_6ad0/out_a1_contact.txt              ae21569  a1_contact.py, a2_intervals.py, a3_hypotheses.py, a4_algebra
+      branching_audit_6ad0/out_a2_intervals.txt            ae21569  a1_contact.py, a2_intervals.py, a3_hypotheses.py, a4_algebra
+      branching_audit_6ad0/out_a3_hypotheses.txt           ae21569  a1_contact.py, a2_intervals.py, a3_hypotheses.py, a4_algebra
+      branching_audit_6ad0/out_a4_algebra.txt              ae21569  a1_contact.py, a2_intervals.py, a3_hypotheses.py, a4_algebra
+      branching_audit_6ad0/out_a5_scan.txt                 ae21569  a1_contact.py, a2_intervals.py, a3_hypotheses.py, a4_algebra
+      branching_audit_6ad0/out_a6_quotes.txt               ae21569  a1_contact.py, a2_intervals.py, a3_hypotheses.py, a4_algebra
+      branching_audit_6ad0/out_selftest.txt                ae21569  a1_contact.py, a2_intervals.py, a3_hypotheses.py, a4_algebra
+      branching_audit_957f/out_j1_attribution.txt          e006581  j1_attribution.py, j2_silencing.py, j3_setlevel.py, j4_repro
+      branching_audit_957f/out_j2_silencing.txt            e006581  j1_attribution.py, j2_silencing.py, j3_setlevel.py, j4_repro
+      branching_audit_957f/out_j3_setlevel.txt             e006581  j1_attribution.py, j2_silencing.py, j3_setlevel.py, j4_repro
+      branching_audit_957f/out_j4_reproduce.txt            e006581  j1_attribution.py, j2_silencing.py, j3_setlevel.py, j4_repro
+      branching_audit_957f/out_j5_doccheck.txt             e006581  j1_attribution.py, j2_silencing.py, j3_setlevel.py, j4_repro
+      branching_audit_957f/out_selftest_957f.txt           e006581  j1_attribution.py, j2_silencing.py, j3_setlevel.py, j4_repro
+      branching_audit_a218/out_c0_repro.txt                286d503  c0_repro.sh, c1_branching.py, c2_vertexsets.py, c3_withdrawa
+      branching_audit_a218/out_c1_branching.txt            286d503  c0_repro.sh, c1_branching.py, c2_vertexsets.py, c3_withdrawa
+      branching_audit_a218/out_c2_vertexsets.txt           286d503  c0_repro.sh, c1_branching.py, c2_vertexsets.py, c3_withdrawa
+      branching_audit_a218/out_c3_withdrawal.txt           286d503  c0_repro.sh, c1_branching.py, c2_vertexsets.py, c3_withdrawa
+      branching_audit_a218/out_c4_seam.txt                 286d503  c0_repro.sh, c1_branching.py, c2_vertexsets.py, c3_withdrawa
+      branching_audit_a218/out_c5_record.txt               286d503  c0_repro.sh, c1_branching.py, c2_vertexsets.py, c3_withdrawa
+      branching_audit_a218/out_selftest_a218.txt           286d503  c0_repro.sh, c1_branching.py, c2_vertexsets.py, c3_withdrawa
+      branching_audit_d330/out_e1_vertexsets.txt           f9f8220  e1_vertexsets.py, e2_labels.py, e3_dispositions.py, e4_rerun
+      branching_audit_d330/out_e2_labels.txt               f9f8220  e1_vertexsets.py, e2_labels.py, e3_dispositions.py, e4_rerun
+      branching_audit_d330/out_e3_dispositions.txt         f9f8220  e1_vertexsets.py, e2_labels.py, e3_dispositions.py, e4_rerun
+      branching_audit_d330/out_e4_rerun.txt                f9f8220  e1_vertexsets.py, e2_labels.py, e3_dispositions.py, e4_rerun
+      branching_audit_d330/out_e5_seam.txt                 f9f8220  e1_vertexsets.py, e2_labels.py, e3_dispositions.py, e4_rerun
+      branching_audit_d330/out_selftest_d330.txt           f9f8220  e1_vertexsets.py, e2_labels.py, e3_dispositions.py, e4_rerun
+      branching_audit_e34a/out_k1_prerepair.txt            dfa263c  k1_prerepair.py, libe34a.py, selftest_e34a.py
+      branching_audit_e34a/out_k2_five.txt                 dfa263c  k1_prerepair.py, libe34a.py, selftest_e34a.py
+      branching_audit_e34a/out_k3_undisturbed.txt          dfa263c  k1_prerepair.py, libe34a.py, selftest_e34a.py
+      branching_audit_e34a/out_k4_cancel.txt               dfa263c  k1_prerepair.py, libe34a.py, selftest_e34a.py
+      branching_audit_e34a/out_selftest_e34a.txt           dfa263c  k1_prerepair.py, libe34a.py, selftest_e34a.py
+      branching_bound_audit_aaf4/out_a1_population.txt     8132d75  a1_population.py, a3_criticism.py
+      branching_bound_audit_aaf4/out_a2_reproduce.txt      f2ca4f9  a1_population.py, a2_reproduce.py, a3_criticism.py, a4_selfa
+      branching_bound_audit_aaf4/out_a3_criticism.txt      9643a5e  a5_donotdisturb.py
+      branching_bound_audit_aaf4/out_a3_criticism_FIRSTFOR f2ca4f9  a1_population.py, a2_reproduce.py, a3_criticism.py, a4_selfa
+      branching_bound_audit_aaf4/out_a4_selfapply.txt      f2ca4f9  a1_population.py, a2_reproduce.py, a3_criticism.py, a4_selfa
+      branching_bound_audit_aaf4/out_a5_donotdisturb.txt   9643a5e  a5_donotdisturb.py
+      branching_bound_audit_aaf4/out_run_all.txt           f2ca4f9  a1_population.py, a2_reproduce.py, a3_criticism.py, a4_selfa
+      branching_bound_audit_aaf4/out_selftest_aaf4.txt     f2ca4f9  a1_population.py, a2_reproduce.py, a3_criticism.py, a4_selfa
+      branching_bound_audit_aaf4/out_selftest_aaf4_FIRSTFO f2ca4f9  a1_population.py, a2_reproduce.py, a3_criticism.py, a4_selfa
+      branching_bound_audit_aaf4/out_upstream_rerun_aaf4.t 9643a5e  a5_donotdisturb.py
+      branching_bound_d075/out_s1_census.txt               4203bc8  lib_d075.py, run_all.sh, s1_census.py, s2_reproduce.py, s3_b
+      branching_bound_d075/out_s2_reproduce.txt            4203bc8  lib_d075.py, run_all.sh, s1_census.py, s2_reproduce.py, s3_b
+      branching_bound_d075/out_s3_bound.txt                4203bc8  lib_d075.py, run_all.sh, s1_census.py, s2_reproduce.py, s3_b
+      branching_bound_d075/out_s3_bound_FIRSTFORM_exit1.tx 4203bc8  lib_d075.py, run_all.sh, s1_census.py, s2_reproduce.py, s3_b
+      branching_bound_d075/out_s4_hedge.txt                4203bc8  lib_d075.py, run_all.sh, s1_census.py, s2_reproduce.py, s3_b
+      branching_bound_d075/out_s5_own_criticism.txt        4203bc8  lib_d075.py, run_all.sh, s1_census.py, s2_reproduce.py, s3_b
+      branching_bound_d075/out_s5_own_criticism_FIRSTRUN_e 4203bc8  lib_d075.py, run_all.sh, s1_census.py, s2_reproduce.py, s3_b
+      branching_bound_d075/out_s6_class.txt                4203bc8  lib_d075.py, run_all.sh, s1_census.py, s2_reproduce.py, s3_b
+      branching_bound_d075/out_selftest_d075.txt           4203bc8  lib_d075.py, run_all.sh, s1_census.py, s2_reproduce.py, s3_b
+      branching_locate_db09/out_selftest.txt               2e66d03  kerndb09.py, selftestdb09.py, t1_tl.py
+      branching_locate_db09/out_t1_tl.txt                  ed9cde4  run_all.sh, t1_tl.py, t5_labels.py
+      branching_locate_db09/out_t2_gz.txt                  03d7f91  fetch_sources.sh, kerndb09.py, run_all.sh, selftestdb09.py, 
+      branching_locate_db09/out_t3_ours.txt                03d7f91  fetch_sources.sh, kerndb09.py, run_all.sh, selftestdb09.py, 
+      branching_locate_db09/out_t4_quotes.txt              03d7f91  fetch_sources.sh, kerndb09.py, run_all.sh, selftestdb09.py, 
+      branching_locate_db09/out_t5_labels.txt              ed9cde4  run_all.sh, t1_tl.py, t5_labels.py
+      branching_repair_41aa/out_check_doc.txt              645b5a4  check_doc.py
+      branching_repair_41aa/out_r1_exactly.txt             504ab6c  check_doc.py, kern41aa.py, r1_exactly.py, r1b_skew8.py, r2_g
+      branching_repair_41aa/out_r1b_skew8.txt              504ab6c  check_doc.py, kern41aa.py, r1_exactly.py, r1b_skew8.py, r2_g
+      branching_repair_41aa/out_r2_grid.txt                504ab6c  check_doc.py, kern41aa.py, r1_exactly.py, r1b_skew8.py, r2_g
+      branching_repair_41aa/out_r3_rescope.txt             504ab6c  check_doc.py, kern41aa.py, r1_exactly.py, r1b_skew8.py, r2_g
+      branching_repair_41aa/out_selftest.txt               504ab6c  check_doc.py, kern41aa.py, r1_exactly.py, r1b_skew8.py, r2_g
+      branching_repair_76cc/out_r1_kernel.txt              d01ff32  lib76cc.py, r1_kernel.py
+      branching_repair_76cc/out_r2_reproduce.txt           d01ff32  lib76cc.py, r1_kernel.py
+      branching_repair_76cc/out_r3_prerepair.txt           4755d02  lib76cc.py, r1_kernel.py, r2_reproduce.py, r3_prerepair.py, 
+      branching_repair_76cc/out_r4_doccheck.txt            4755d02  lib76cc.py, r1_kernel.py, r2_reproduce.py, r3_prerepair.py, 
+      branching_repair_76cc/out_selftest_76cc.txt          4755d02  lib76cc.py, r1_kernel.py, r2_reproduce.py, r3_prerepair.py, 
+      branching_repair_7e58/out_k1_grain.txt               4372fae  k1_grain.py, k2_selfprov.py, k3_setlevel.py, k4_doccheck.py,
+      branching_repair_7e58/out_k2_selfprov.txt            4372fae  k1_grain.py, k2_selfprov.py, k3_setlevel.py, k4_doccheck.py,
+      branching_repair_7e58/out_k3_setlevel.txt            4372fae  k1_grain.py, k2_selfprov.py, k3_setlevel.py, k4_doccheck.py,
+      branching_repair_7e58/out_k4_doccheck.txt            4372fae  k1_grain.py, k2_selfprov.py, k3_setlevel.py, k4_doccheck.py,
+      branching_repair_7e58/out_selftest_7e58.txt          4372fae  k1_grain.py, k2_selfprov.py, k3_setlevel.py, k4_doccheck.py,
+      branching_warrant_dffa/out_selftest.txt              645b5a4  kerndffa.py, run_all.sh, selftestdffa.py, w1_ledger.py, w2_f
+      branching_warrant_dffa/out_w1_ledger.txt             645b5a4  kerndffa.py, run_all.sh, selftestdffa.py, w1_ledger.py, w2_f
+      branching_warrant_dffa/out_w2_family.txt             645b5a4  kerndffa.py, run_all.sh, selftestdffa.py, w1_ledger.py, w2_f
+      branching_warrant_dffa/out_w3_brown.txt              645b5a4  kerndffa.py, run_all.sh, selftestdffa.py, w1_ledger.py, w2_f
+      branching_warrant_dffa/out_w4_control.txt            645b5a4  kerndffa.py, run_all.sh, selftestdffa.py, w1_ledger.py, w2_f
+      branching_warrant_dffa/out_w5_doc.txt                645b5a4  kerndffa.py, run_all.sh, selftestdffa.py, w1_ledger.py, w2_f
+      census_repair_f3ff/out_s0_freshness.txt              10cda77  lib_f3ff.py, run_all.sh, s0_freshness.py, s1_rows.py, s2_con
+      census_repair_f3ff/out_s1_rows.txt                   aea066d  run_all.sh, s1_rows.py, s4_crosscheck.py
+      census_repair_f3ff/out_s2_controls.txt               aea066d  run_all.sh, s1_rows.py, s4_crosscheck.py
+      census_repair_f3ff/out_s3_graph.txt                  aea066d  run_all.sh, s1_rows.py, s4_crosscheck.py
+      census_repair_f3ff/out_s4_crosscheck.txt             aea066d  run_all.sh, s1_rows.py, s4_crosscheck.py
+      census_repair_f3ff/out_selftest_f3ff.txt             10cda77  lib_f3ff.py, run_all.sh, s0_freshness.py, s1_rows.py, s2_con
+      counterexample_audit_0a11/out_check_doc.txt          20fab09  check_cycles.py, check_deflation.py, check_doc_audit.py, che
+      counterexample_audit_0a11/out_cycles.txt             20fab09  check_cycles.py, check_deflation.py, check_doc_audit.py, che
+      counterexample_audit_0a11/out_deflation.txt          20fab09  check_cycles.py, check_deflation.py, check_doc_audit.py, che
+      counterexample_audit_0a11/out_independence.txt       20fab09  check_cycles.py, check_deflation.py, check_doc_audit.py, che
+      counterexample_audit_0a11/out_locator.txt            20fab09  check_cycles.py, check_deflation.py, check_doc_audit.py, che
+      counterexample_audit_0a11/out_population.txt         20fab09  check_cycles.py, check_deflation.py, check_doc_audit.py, che
+      counterexample_audit_0a11/out_powered.txt            20fab09  check_cycles.py, check_deflation.py, check_doc_audit.py, che
+      counterexample_audit_a7b4/out_bridge.txt             c8c60a8  check_bridge.py, check_egroups.py, check_leftovers.py, check
+      counterexample_audit_a7b4/out_egroups.txt            c8c60a8  check_bridge.py, check_egroups.py, check_leftovers.py, check
+      counterexample_audit_a7b4/out_leftovers.txt          c8c60a8  check_bridge.py, check_egroups.py, check_leftovers.py, check
+      counterexample_audit_a7b4/out_main.txt               c8c60a8  check_bridge.py, check_egroups.py, check_leftovers.py, check
+      counterexample_audit_a7b4/out_prop5.txt              c8c60a8  check_bridge.py, check_egroups.py, check_leftovers.py, check
+      counterexample_audit_a7b4/out_sections.txt           c8c60a8  check_bridge.py, check_egroups.py, check_leftovers.py, check
+      counterexample_audit_a7b4/out_shrink.txt             c8c60a8  check_bridge.py, check_egroups.py, check_leftovers.py, check
+      counterexample_audit_a7b4/out_spectral.txt           c8c60a8  check_bridge.py, check_egroups.py, check_leftovers.py, check
+      counterexample_audit_a7b4/out_witness9.txt           c8c60a8  check_bridge.py, check_egroups.py, check_leftovers.py, check
+      counterexample_audit_c6bc/out_a1_recount.txt         db2b77d  a1_recount.py, a2_theorem.py, a3_duality.py, a4_extend.py, a
+      counterexample_audit_c6bc/out_a2_theorem.txt         db2b77d  a1_recount.py, a2_theorem.py, a3_duality.py, a4_extend.py, a
+      counterexample_audit_c6bc/out_a3_duality.txt         db2b77d  a1_recount.py, a2_theorem.py, a3_duality.py, a4_extend.py, a
+      counterexample_audit_c6bc/out_a4_extend.txt          db2b77d  a1_recount.py, a2_theorem.py, a3_duality.py, a4_extend.py, a
+      counterexample_audit_c6bc/out_a5_battery.txt         db2b77d  a1_recount.py, a2_theorem.py, a3_duality.py, a4_extend.py, a
+      counterexample_audit_c6bc/out_battery_0a11_recheck.t db2b77d  a1_recount.py, a2_theorem.py, a3_duality.py, a4_extend.py, a
+      counterexample_audit_c6bc/out_selftest.txt           db2b77d  a1_recount.py, a2_theorem.py, a3_duality.py, a4_extend.py, a
+      counterexample_repair_dea5/out_battery_0a11_rerun.tx 90db267  check_doc_repair.py, cores.py, run_all.sh, section4.py
+      counterexample_repair_dea5/out_check_doc.txt         90db267  check_doc_repair.py, cores.py, run_all.sh, section4.py
+      counterexample_repair_dea5/out_controls.txt          522c1f3  check_doc_repair.py, controls.py, cycles.py, levels.py, pose
+      counterexample_repair_dea5/out_cores.txt             90db267  check_doc_repair.py, cores.py, run_all.sh, section4.py
+      counterexample_repair_dea5/out_cycles.txt            522c1f3  check_doc_repair.py, controls.py, cycles.py, levels.py, pose
+      counterexample_repair_dea5/out_section4.txt          90db267  check_doc_repair.py, cores.py, run_all.sh, section4.py
+      counterexample_repair_dea5/out_theorem4.txt          522c1f3  check_doc_repair.py, controls.py, cycles.py, levels.py, pose
+      face_geometry_audit_0b07/out_p1_derived.txt          1640f6f  kern0b07.py, p1_derived.py, p2_units.py, p3_grain.py, p4_con
+      face_geometry_audit_0b07/out_p2_units.txt            1640f6f  kern0b07.py, p1_derived.py, p2_units.py, p3_grain.py, p4_con
+      face_geometry_audit_0b07/out_p3_grain.txt            1640f6f  kern0b07.py, p1_derived.py, p2_units.py, p3_grain.py, p4_con
+      face_geometry_audit_0b07/out_p4_confirmed.txt        1640f6f  kern0b07.py, p1_derived.py, p2_units.py, p3_grain.py, p4_con
+      face_geometry_audit_0b07/out_p5_enumeration.txt      1640f6f  kern0b07.py, p1_derived.py, p2_units.py, p3_grain.py, p4_con
+      face_geometry_audit_0b07/out_p6_floor.txt            1640f6f  kern0b07.py, p1_derived.py, p2_units.py, p3_grain.py, p4_con
+      face_geometry_audit_0b07/out_selftest_0b07.txt       1640f6f  kern0b07.py, p1_derived.py, p2_units.py, p3_grain.py, p4_con
+      face_geometry_audit_1c80/out_antichain.txt           1d922a1  a1_gates.py, a2_antichain.py, a3_n6_population.py, a4_witnes
+      face_geometry_audit_1c80/out_claims.txt              1d922a1  a1_gates.py, a2_antichain.py, a3_n6_population.py, a4_witnes
+      face_geometry_audit_1c80/out_gates.txt               1d922a1  a1_gates.py, a2_antichain.py, a3_n6_population.py, a4_witnes
+      face_geometry_audit_1c80/out_mutations.txt           1d922a1  a1_gates.py, a2_antichain.py, a3_n6_population.py, a4_witnes
+      face_geometry_audit_1c80/out_n6.txt                  1d922a1  a1_gates.py, a2_antichain.py, a3_n6_population.py, a4_witnes
+      face_geometry_audit_1c80/out_witness.txt             1d922a1  a1_gates.py, a2_antichain.py, a3_n6_population.py, a4_witnes
+      face_geometry_audit_5630/out_nc3.txt                 fcc8a11  audit_nc3.py, audit_x3_equivalence.py
+      face_geometry_audit_5630/out_x3_equivalence.txt      fcc8a11  audit_nc3.py, audit_x3_equivalence.py
+      face_geometry_audit_6653/out_attack_banner.txt       a85fb28  attack_banner.py, run_all.sh, verify_claims.py
+      face_geometry_audit_6653/out_verify_claims.txt       a85fb28  attack_banner.py, run_all.sh, verify_claims.py
+      face_geometry_audit_c4c8/out_h1_per_return.txt       63b6d27  h1_per_return.py, h2_the_nine_and_the_clause.py, h3_control.
+      face_geometry_audit_c4c8/out_h2_the_nine_and_the_cla 63b6d27  h1_per_return.py, h2_the_nine_and_the_clause.py, h3_control.
+      face_geometry_audit_c4c8/out_h3_control.txt          63b6d27  h1_per_return.py, h2_the_nine_and_the_clause.py, h3_control.
+      face_geometry_audit_c4c8/out_h4_declared_unit.txt    63b6d27  h1_per_return.py, h2_the_nine_and_the_clause.py, h3_control.
+      face_geometry_audit_d0e2/out_e1_deletion.txt         5988134  e1_deletion.py, e2_parity.py, e3_seams.py, kernd0e2.py, run_
+      face_geometry_audit_d0e2/out_e2_parity.txt           5988134  e1_deletion.py, e2_parity.py, e3_seams.py, kernd0e2.py, run_
+      face_geometry_audit_d0e2/out_e3_seams.txt            5988134  e1_deletion.py, e2_parity.py, e3_seams.py, kernd0e2.py, run_
+      face_geometry_audit_e0ce/out_extra.txt               d3a2586  audit_extra.py, audit_rebuild.py
+      face_geometry_audit_e0ce/out_n5.txt                  d368c96  audit_rebuild.py
+      face_geometry_audit_e0ce/out_n6.txt                  d3a2586  audit_extra.py, audit_rebuild.py
+      face_geometry_audit_e720/out_attack.txt              7f04902  attack_artifact_check.py, run_all.sh, verify_landing_claims.
+      face_geometry_audit_e720/out_verify.txt              7f04902  attack_artifact_check.py, run_all.sh, verify_landing_claims.
+      face_geometry_audit_e7bc/out_g1_positive_control.txt 9d712be  checkrun.py, g1_positive_control.py, g2_deletion.py, g3_diff
+      face_geometry_audit_e7bc/out_g2_deletion.txt         9d712be  checkrun.py, g1_positive_control.py, g2_deletion.py, g3_diff
+      face_geometry_audit_e7bc/out_g3_differs_under.txt    9d712be  checkrun.py, g1_positive_control.py, g2_deletion.py, g3_diff
+      face_geometry_audit_e7bc/out_g4_seams.txt            9d712be  checkrun.py, g1_positive_control.py, g2_deletion.py, g3_diff
+      face_geometry_audit_eaef/out_e1_operand.txt          b71401c  e1_operand.py, e2_bound.py, e3_derived.py, e4_remeasure.py, 
+      face_geometry_audit_eaef/out_e2_bound.txt            b71401c  e1_operand.py, e2_bound.py, e3_derived.py, e4_remeasure.py, 
+      face_geometry_audit_eaef/out_e3_derived.txt          b71401c  e1_operand.py, e2_bound.py, e3_derived.py, e4_remeasure.py, 
+      face_geometry_audit_eaef/out_e4_remeasure.txt        b71401c  e1_operand.py, e2_bound.py, e3_derived.py, e4_remeasure.py, 
+      face_geometry_audit_eaef/out_e5_floor.txt            b71401c  e1_operand.py, e2_bound.py, e3_derived.py, e4_remeasure.py, 
+      face_geometry_audit_eaef/out_selftest_eaef.txt       b71401c  e1_operand.py, e2_bound.py, e3_derived.py, e4_remeasure.py, 
+      face_geometry_audit_f1b2/out_gates.txt               de54c3a  audit_gates.py, audit_injections.py, audit_nmax2.py, audit_s
+      face_geometry_audit_f1b2/out_injections.txt          de54c3a  audit_gates.py, audit_injections.py, audit_nmax2.py, audit_s
+      face_geometry_audit_f1b2/out_nmax.txt                de54c3a  audit_gates.py, audit_injections.py, audit_nmax2.py, audit_s
+      face_geometry_audit_f1b2/out_scoring.txt             de54c3a  audit_gates.py, audit_injections.py, audit_nmax2.py, audit_s
+      face_geometry_audit_f1b2/out_theorem.txt             de54c3a  audit_gates.py, audit_injections.py, audit_nmax2.py, audit_s
+      face_geometry_audit_f7bc/out_attack_scoring.txt      321509f  attack_scoring.py, verify_a6.py
+      face_geometry_audit_f7bc/out_verify_a6.txt           321509f  attack_scoring.py, verify_a6.py
+      face_geometry_audit_fcb2/out_a1_counts.txt           44aa686  a1_counts.py, lib_fcb2.py, selftest_fcb2.py
+      face_geometry_audit_fcb2/out_a2_dichotomy.txt        d057c2b  a2_dichotomy.py, a3_standard_elsewhere.py, a4_hedges.py, a5_
+      face_geometry_audit_fcb2/out_a3_standard_elsewhere.t d057c2b  a2_dichotomy.py, a3_standard_elsewhere.py, a4_hedges.py, a5_
+      face_geometry_audit_fcb2/out_a4_hedges.txt           d057c2b  a2_dichotomy.py, a3_standard_elsewhere.py, a4_hedges.py, a5_
+      face_geometry_audit_fcb2/out_a5_standing.txt         d057c2b  a2_dichotomy.py, a3_standard_elsewhere.py, a4_hedges.py, a5_
+      face_geometry_audit_fcb2/out_a6_control_at_commit.tx d057c2b  a2_dichotomy.py, a3_standard_elsewhere.py, a4_hedges.py, a5_
+      face_geometry_audit_fcb2/out_selftest_fcb2.txt       44aa686  a1_counts.py, lib_fcb2.py, selftest_fcb2.py
+      face_geometry_audit_fcf1/out_extra.txt               34c151f  audit_extra.py, audit_gauge.py, audit_nc4.py, rebuild.py, ru
+      face_geometry_audit_fcf1/out_gauge.txt               34c151f  audit_extra.py, audit_gauge.py, audit_nc4.py, rebuild.py, ru
+      face_geometry_audit_fcf1/out_nc4.txt                 34c151f  audit_extra.py, audit_gauge.py, audit_nc4.py, rebuild.py, ru
+      face_geometry_instr_5f9a/out_d1_trace.txt            b6bc2ef  d1_trace.py, d2_deletion.py, d4_auditor_rerun.py, kern5f9a.p
+      face_geometry_instr_5f9a/out_d2_deletion.txt         5f542f0  d4_auditor_rerun.py
+      face_geometry_instr_5f9a/out_d3_reintroduction.txt   5cae82c  d1_trace.py, d2_deletion.py, d3_reintroduction.py, kern5f9a.
+      face_geometry_instr_5f9a/out_d4_auditor_rerun.txt    5f542f0  d4_auditor_rerun.py
+      face_geometry_landing_7d5a/out_attack_banner_after_r d5a3043  run_all.sh, verify_landing.py
+      face_geometry_landing_7d5a/out_verify.txt            d5a3043  run_all.sh, verify_landing.py
+      face_geometry_repair_8af0/out_demo_f2.txt            66130f8  demo_f2_row_can_go_red.py, probe_f3_ridge_multiplicity.py, r
+      face_geometry_repair_8af0/out_probe_f1.txt           66130f8  demo_f2_row_can_go_red.py, probe_f3_ridge_multiplicity.py, r
+      face_geometry_repair_8af0/out_probe_f3.txt           66130f8  demo_f2_row_can_go_red.py, probe_f3_ridge_multiplicity.py, r
+      face_geometry_repair_e35b/out_verify_e35b.txt        66130f8  verify_e35b.py
+      grain_axis_audit_03d1/out_a1_axes.txt                eacc5e1  a1_axes.py, a2_blindspot.py, a3_ledger.py, a4_sweep.py, a5_p
+      grain_axis_audit_03d1/out_a2_blindspot.txt           eacc5e1  a1_axes.py, a2_blindspot.py, a3_ledger.py, a4_sweep.py, a5_p
+      grain_axis_audit_03d1/out_a3_ledger.txt              eacc5e1  a1_axes.py, a2_blindspot.py, a3_ledger.py, a4_sweep.py, a5_p
+      grain_axis_audit_03d1/out_a4_sweep.txt               eacc5e1  a1_axes.py, a2_blindspot.py, a3_ledger.py, a4_sweep.py, a5_p
+      grain_axis_audit_03d1/out_a5_pin.txt                 eacc5e1  a1_axes.py, a2_blindspot.py, a3_ledger.py, a4_sweep.py, a5_p
+      grain_axis_audit_03d1/out_a6_self.txt                eacc5e1  a1_axes.py, a2_blindspot.py, a3_ledger.py, a4_sweep.py, a5_p
+      grain_axis_audit_03d1/out_selftest_03d1.txt          eacc5e1  a1_axes.py, a2_blindspot.py, a3_ledger.py, a4_sweep.py, a5_p
+      hodge_leverage_audit_3c24/out_audit_join.txt         4b5891d  audit_join.py, rebuild.py, run_all.sh
+      hodge_leverage_audit_7e39/out_audit_7e39.txt         dde93c5  audit_7e39.py
+      hodge_leverage_audit_835f/out_audit_a318.txt         a97ad17  audit_a318_repair.py, run_all.sh
+      hodge_leverage_audit_86a3/out_brown.txt              2cc8d57  audit_brown.py, audit_brown_family.py, audit_controls.py, au
+      hodge_leverage_audit_86a3/out_brown_family.txt       2cc8d57  audit_brown.py, audit_brown_family.py, audit_controls.py, au
+      hodge_leverage_audit_86a3/out_controls.txt           2cc8d57  audit_brown.py, audit_brown_family.py, audit_controls.py, au
+      hodge_leverage_audit_86a3/out_families.txt           2cc8d57  audit_brown.py, audit_brown_family.py, audit_controls.py, au
+      hodge_leverage_audit_86a3/out_identities.txt         2cc8d57  audit_brown.py, audit_brown_family.py, audit_controls.py, au
+      hodge_leverage_audit_86a3/out_n6_brown.txt           2cc8d57  audit_brown.py, audit_brown_family.py, audit_controls.py, au
+      hodge_leverage_audit_86a3/out_robustness.txt         2cc8d57  audit_brown.py, audit_brown_family.py, audit_controls.py, au
+      hodge_leverage_audit_86a3/out_sweep.txt              2cc8d57  audit_brown.py, audit_brown_family.py, audit_controls.py, au
+      hodge_leverage_audit_86a3/out_theoremG.txt           2cc8d57  audit_brown.py, audit_brown_family.py, audit_controls.py, au
+      hodge_leverage_audit_8a5c/out_audit_8e30.txt         f58f7fd  audit_repair_8e30.py, run_all.sh
+      hodge_leverage_audit_8aae/out_audit_8916.txt         e6935dc  audit_8916_repair.py, run_all.sh
+      hodge_leverage_audit_9207/out_audit_9207.txt         2d23d88  audit_8eca_repair.py, run_all.sh
+      hodge_leverage_audit_d39d/out_antichain_scope.txt    522048f  audit_antichain_scope.py, audit_gpp.py, audit_n6_complete.py
+      hodge_leverage_audit_d39d/out_gpp.txt                522048f  audit_antichain_scope.py, audit_gpp.py, audit_n6_complete.py
+      hodge_leverage_audit_d39d/out_n6_complete.txt        522048f  audit_antichain_scope.py, audit_gpp.py, audit_n6_complete.py
+      hodge_leverage_audit_d39d/out_vk_infinite.txt        522048f  audit_antichain_scope.py, audit_gpp.py, audit_n6_complete.py
+      hodge_leverage_audit_ec07/out_audit_ec07.txt         8cdda32  audit_ec07.py, run_all.sh
+      hodge_leverage_audit_f922/out_audit.txt              553033a  audit_repair.py, run_all.sh
+      hodge_leverage_join/out_verify_join.txt              1e61031  run_all.sh, verify_join.py
+      hodge_leverage_landing_e1d0/out_verify.txt           4785086  verify_landing.py
+      hodge_leverage_repair_3f3b/out_a318_rerun.txt        4785086  repair_7e39.py
+      hodge_leverage_repair_3f3b/out_repair_3f3b.txt       cb9f282  repair_7e39.py
+      hodge_leverage_repair_6df0/out_ff3e_rerun.txt        77306a7  repair_ec07.py
+      hodge_leverage_repair_8916/out_repair_8916.txt       d1dd84d  repair_835f.py
+      hodge_leverage_repair_8eca/out_repair_8eca.txt       bee07a1  repair_8aae.py, run_all.sh
+      hodge_leverage_repair_ff3e/out_repair_ff3e.txt       3bf0cd2  repair_9207.py, run_all.sh
+      landscape_audit_d673/out_addenda.txt                 924e2ee  audit_addenda.py, audit_e6_e8_m0.py, audit_identifications.p
+      landscape_audit_d673/out_e6_e8_m0.txt                924e2ee  audit_addenda.py, audit_e6_e8_m0.py, audit_identifications.p
+      landscape_audit_d673/out_identifications.txt         924e2ee  audit_addenda.py, audit_e6_e8_m0.py, audit_identifications.p
+      landscape_audit_d673/out_populations.txt             924e2ee  audit_addenda.py, audit_e6_e8_m0.py, audit_identifications.p
+      landscape_audit_d673/out_spectrum.txt                924e2ee  audit_addenda.py, audit_e6_e8_m0.py, audit_identifications.p
+      landscape_ebd8/out_brown_theorem2.txt                714aceb  brown_theorem2.py, chains_in_JP.py, identify_lattice.py, run
+      landscape_ebd8/out_chains_in_JP.txt                  714aceb  brown_theorem2.py, chains_in_JP.py, identify_lattice.py, run
+      landscape_ebd8/out_identify_lattice.txt              714aceb  brown_theorem2.py, chains_in_JP.py, identify_lattice.py, run
+      landscape_repair_1953/out_closed_form_outside_AC.txt 1db0be9  closed_form_outside_AC.py, document_figures.py, negative_con
+      landscape_repair_1953/out_negative_control_document. 1db0be9  closed_form_outside_AC.py, document_figures.py, negative_con
+      landscape_repair_1953/out_repaired_claims.txt        6b1eacf  closed_form_outside_AC.py, core1953.py, repaired_claims.py, 
+      landscape_repair_1953/out_scope_text_3b51_rerun.txt  1db0be9  closed_form_outside_AC.py, document_figures.py, negative_con
+      landscape_repair_1953/out_selftest.txt               1db0be9  closed_form_outside_AC.py, document_figures.py, negative_con
+      landscape_repair_audit_3b51/out_r1_n7.txt            806e149  audit_r1_n7.py, audit_r1_offAC.py, audit_r2_e8.py, audit_r3_
+      landscape_repair_audit_3b51/out_r1_offAC.txt         806e149  audit_r1_n7.py, audit_r1_offAC.py, audit_r2_e8.py, audit_r3_
+      landscape_repair_audit_3b51/out_r2_e8.txt            806e149  audit_r1_n7.py, audit_r1_offAC.py, audit_r2_e8.py, audit_r3_
+      landscape_repair_audit_3b51/out_r3_r4.txt            806e149  audit_r1_n7.py, audit_r1_offAC.py, audit_r2_e8.py, audit_r3_
+      landscape_repair_audit_3b51/out_scope_text.txt       806e149  audit_r1_n7.py, audit_r1_offAC.py, audit_r2_e8.py, audit_r3_
+      landscape_repair_audit_3b51/out_selftest.txt         806e149  audit_r1_n7.py, audit_r1_offAC.py, audit_r2_e8.py, audit_r3_
+      libweak_c3ca/out_p1_census.txt                       81214a9  lib_c3ca.py, p1_census.py, p2_primitive.py, p3_window.py, se
+      libweak_c3ca/out_p2_primitive.txt                    81214a9  lib_c3ca.py, p1_census.py, p2_primitive.py, p3_window.py, se
+      libweak_c3ca/out_p3_window.txt                       81214a9  lib_c3ca.py, p1_census.py, p2_primitive.py, p3_window.py, se
+      libweak_c3ca/out_selftest_c3ca.txt                   81214a9  lib_c3ca.py, p1_census.py, p2_primitive.py, p3_window.py, se
+      repair_69d1/out_p1_bound.txt                         dfa263c  lib69d1.py, p1_bound.py, selftest_69d1.py
+      repair_69d1/out_p2_rerun.txt                         dfa263c  lib69d1.py, p1_bound.py, selftest_69d1.py
+      repair_69d1/out_p3_reason.txt                        dfa263c  lib69d1.py, p1_bound.py, selftest_69d1.py
+      repair_69d1/out_p4_kinds.txt                         dfa263c  lib69d1.py, p1_bound.py, selftest_69d1.py
+      repair_69d1/out_selftest_69d1.txt                    dfa263c  lib69d1.py, p1_bound.py, selftest_69d1.py
+      repair_8d5e/out_r1_anchor.txt                        dfa263c  lib8d5e.py, r1_anchor.py, r2_kernel_half.py, r3_term.py, r4_
+      repair_8d5e/out_r2_kernel_half.txt                   dfa263c  lib8d5e.py, r1_anchor.py, r2_kernel_half.py, r3_term.py, r4_
+      repair_8d5e/out_r3_term.txt                          dfa263c  lib8d5e.py, r1_anchor.py, r2_kernel_half.py, r3_term.py, r4_
+      repair_8d5e/out_r4_self.txt                          dfa263c  lib8d5e.py, r1_anchor.py, r2_kernel_half.py, r3_term.py, r4_
+      repair_8d5e/out_selftest_8d5e.txt                    dfa263c  lib8d5e.py, r1_anchor.py, r2_kernel_half.py, r3_term.py, r4_
+      runner_exit_audit_05eb/out_j1_census.txt             682db2c  j1_census.py, j2_retro.py, j3_control.py, j4_scope.py, lib05
+      runner_exit_audit_05eb/out_j2_retro.txt              682db2c  j1_census.py, j2_retro.py, j3_control.py, j4_scope.py, lib05
+      runner_exit_audit_05eb/out_j3_control.txt            682db2c  j1_census.py, j2_retro.py, j3_control.py, j4_scope.py, lib05
+      runner_exit_audit_05eb/out_j4_scope.txt              682db2c  j1_census.py, j2_retro.py, j3_control.py, j4_scope.py, lib05
+      runner_exit_audit_05eb/out_selftest_05eb.txt         682db2c  j1_census.py, j2_retro.py, j3_control.py, j4_scope.py, lib05
+      runner_exit_c2b3/out_k3_retro.txt                    52aeaf4  k1_census.py, k2_consume.py, k3_retro.py, k4_control.py, lib
+      runner_exit_c2b3/out_k4_control.txt                  52aeaf4  k1_census.py, k2_consume.py, k3_retro.py, k4_control.py, lib
+      runner_exit_repair_70c7/out_r1_grain.txt             973ca61  lib70c7.py, r2_anchor.py, r6_self.py
+      runner_exit_repair_70c7/out_r2_anchor.txt            eab14bc  r4_property.py
+      runner_exit_repair_70c7/out_r3_strength.txt          675c2ba  lib70c7.py, r3_strength.py, r4_property.py, r6_self.py
+      runner_exit_repair_70c7/out_r4_property.txt          eab14bc  r4_property.py
+      runner_exit_repair_70c7/out_r5_population.txt        973ca61  lib70c7.py, r2_anchor.py, r6_self.py
+      runner_exit_repair_70c7/out_r6_self.txt              eab14bc  r4_property.py
+      runner_exit_repair_70c7/out_selftest_70c7.txt        973ca61  lib70c7.py, r2_anchor.py, r6_self.py
+      runner_exit_repair_7522/out_s1_population.txt        973ca61  lib7522.py
+      runner_exit_repair_7522/out_s2_status.txt            973ca61  lib7522.py
+      runner_exit_repair_7522/out_s4_unpin.txt             973ca61  lib7522.py
+      runner_exit_repair_7522/out_s5_self.txt              675c2ba  lib7522.py, selftest7522.py
+      runner_exit_repair_7522/out_selftest_7522.txt        675c2ba  lib7522.py, selftest7522.py
+      runner_exit_repair_bf79/out_p1_grain.txt             eab14bc  p1_grain.py, p5_self.py, run_all.sh
+      runner_exit_repair_bf79/out_p2_population.txt        675c2ba  libbf79.py, p1_grain.py, p2_population.py, p3_ruleset.py, p4
+      runner_exit_repair_bf79/out_p3_ruleset.txt           eab14bc  p1_grain.py, p5_self.py, run_all.sh
+      runner_exit_repair_bf79/out_p4_figures.txt           eab14bc  p1_grain.py, p5_self.py, run_all.sh
+      runner_exit_repair_bf79/out_p5_self.txt              eab14bc  p1_grain.py, p5_self.py, run_all.sh
+      runner_exit_repair_bf79/out_selftest_bf79.txt        675c2ba  libbf79.py, p1_grain.py, p2_population.py, p3_ruleset.py, p4
+      semigroup_note_audit_66a6/out_antichain.txt          6e9e02e  audit_antichain.py, audit_lib.py, audit_sweeps.py, audit_the
+      semigroup_note_audit_66a6/out_sweeps.txt             6e9e02e  audit_antichain.py, audit_lib.py, audit_sweeps.py, audit_the
+      semigroup_note_audit_66a6/out_theorem.txt            6e9e02e  audit_antichain.py, audit_lib.py, audit_sweeps.py, audit_the
+      semigroup_note_audit_66a6/out_worked_example.txt     6e9e02e  audit_antichain.py, audit_lib.py, audit_sweeps.py, audit_the
+      species_7d75/out_selftest.txt                        6a22fbc  hopf7d75.py, kern7d75.py, run_all.sh, selftest.py, t1_gradin
+      species_7d75/out_t1_grading.txt                      83ac472  t1_grading.py
+      species_7d75/out_t2_operation.txt                    6a22fbc  hopf7d75.py, kern7d75.py, run_all.sh, selftest.py, t1_gradin
+      species_7d75/out_t3_bidigare.txt                     a13b4a9  t3_bidigare.py, t4_one_operation.py, t5_hopf_monoid.py, t6_f
+      species_7d75/out_t4_one_operation.txt                a13b4a9  t3_bidigare.py, t4_one_operation.py, t5_hopf_monoid.py, t6_f
+      species_7d75/out_t5_hopf_monoid.txt                  a13b4a9  t3_bidigare.py, t4_one_operation.py, t5_hopf_monoid.py, t6_f
+      species_7d75/out_t6_fock_and_record.txt              106e121  t4_one_operation.py, t6_fock_and_record.py
+      species_audit_73df/out_c1_columns.txt                ebecd89  c1_columns.py, c2_pinned.py, c3_bidigare.py, c4_scope.py, c5
+      species_audit_73df/out_c2_pinned.txt                 ebecd89  c1_columns.py, c2_pinned.py, c3_bidigare.py, c4_scope.py, c5
+      species_audit_73df/out_c3_bidigare.txt               ebecd89  c1_columns.py, c2_pinned.py, c3_bidigare.py, c4_scope.py, c5
+      species_audit_73df/out_c4_scope.txt                  ebecd89  c1_columns.py, c2_pinned.py, c3_bidigare.py, c4_scope.py, c5
+      species_audit_73df/out_c5_doc.txt                    ebecd89  c1_columns.py, c2_pinned.py, c3_bidigare.py, c4_scope.py, c5
+      species_audit_73df/out_selftest.txt                  ebecd89  c1_columns.py, c2_pinned.py, c3_bidigare.py, c4_scope.py, c5
+      species_audit_7dd3/out_d1_source.txt                 798afb7  d1_source.py, d2_extent.py, d3_seam.py, d4_survivals.py, d5_
+      species_audit_7dd3/out_d2_extent.txt                 798afb7  d1_source.py, d2_extent.py, d3_seam.py, d4_survivals.py, d5_
+      species_audit_7dd3/out_d3_seam.txt                   798afb7  d1_source.py, d2_extent.py, d3_seam.py, d4_survivals.py, d5_
+      species_audit_7dd3/out_d4_survivals.txt              798afb7  d1_source.py, d2_extent.py, d3_seam.py, d4_survivals.py, d5_
+      species_audit_7dd3/out_d5_mutations.txt              798afb7  d1_source.py, d2_extent.py, d3_seam.py, d4_survivals.py, d5_
+      species_audit_7dd3/out_d6_exitcodes.txt              798afb7  d1_source.py, d2_extent.py, d3_seam.py, d4_survivals.py, d5_
+      species_audit_7dd3/out_selftest.txt                  798afb7  d1_source.py, d2_extent.py, d3_seam.py, d4_survivals.py, d5_
+      species_audit_a61f/out_a1_headline.txt               8e61d1a  a1_headline.py, a2_bidigare.py, a3_hopf.py, a4_counts.py, a5
+      species_audit_a61f/out_a2_bidigare.txt               8e61d1a  a1_headline.py, a2_bidigare.py, a3_hopf.py, a4_counts.py, a5
+      species_audit_a61f/out_a3_hopf.txt                   8e61d1a  a1_headline.py, a2_bidigare.py, a3_hopf.py, a4_counts.py, a5
+      species_audit_a61f/out_a4_counts.txt                 8e61d1a  a1_headline.py, a2_bidigare.py, a3_hopf.py, a4_counts.py, a5
+      species_audit_a61f/out_a5_quotes.txt                 8e61d1a  a1_headline.py, a2_bidigare.py, a3_hopf.py, a4_counts.py, a5
+      species_audit_a61f/out_a6_boundary.txt               8e61d1a  a1_headline.py, a2_bidigare.py, a3_hopf.py, a4_counts.py, a5
+      species_audit_a61f/out_selftest.txt                  8e61d1a  a1_headline.py, a2_bidigare.py, a3_hopf.py, a4_counts.py, a5
+      species_bound_audit_6ef4/out_selftest.txt            4ede6ef  t3_census.py
+      species_bound_audit_6ef4/out_t1_bound.txt            4ede6ef  t3_census.py
+      species_bound_audit_6ef4/out_t2_wiring.txt           4ede6ef  t3_census.py
+      species_bound_audit_6ef4/out_t4_restore.txt          4ede6ef  t3_census.py
+      species_bound_repair_5040/out_r1_bound.txt           3c8f535  kern5040.py, r1_bound.py, r2_wiring.py, r3_summaries.py, r4_
+      species_bound_repair_5040/out_r2_wiring.txt          3c8f535  kern5040.py, r1_bound.py, r2_wiring.py, r3_summaries.py, r4_
+      species_bound_repair_5040/out_selftest.txt           3c8f535  kern5040.py, r1_bound.py, r2_wiring.py, r3_summaries.py, r4_
+      species_depth_audit_4700/out_q1_depth.txt            5c16f5c  kern4700.py, q1_depth.py, q2_wiring.py, q3_sites.py, q4_stan
+      species_depth_audit_4700/out_q2_wiring.txt           5c16f5c  kern4700.py, q1_depth.py, q2_wiring.py, q3_sites.py, q4_stan
+      species_depth_audit_4700/out_q3_sites.txt            5c16f5c  kern4700.py, q1_depth.py, q2_wiring.py, q3_sites.py, q4_stan
+      species_depth_audit_4700/out_q4_standing.txt         5c16f5c  kern4700.py, q1_depth.py, q2_wiring.py, q3_sites.py, q4_stan
+      species_depth_audit_4700/out_selftest.txt            5c16f5c  kern4700.py, q1_depth.py, q2_wiring.py, q3_sites.py, q4_stan
+      species_extent_audit_6cb9/out_a1_bothways.txt        26c8d5c  a1_bothways.py, a2_crosssection.py, a3_differ_and_placement.
+      species_extent_audit_6cb9/out_a2_crosssection.txt    26c8d5c  a1_bothways.py, a2_crosssection.py, a3_differ_and_placement.
+      species_extent_audit_6cb9/out_a3_differ.txt          26c8d5c  a1_bothways.py, a2_crosssection.py, a3_differ_and_placement.
+      species_extent_audit_6cb9/out_selftest.txt           26c8d5c  a1_bothways.py, a2_crosssection.py, a3_differ_and_placement.
+      species_extent_d633/out_d1_7dd3_after.txt            e8fbd4f  e1_extents.py, e2_crosssection.py, e3_bothways.py, kernd633.
+      species_extent_d633/out_d2_7dd3_after.txt            e8fbd4f  e1_extents.py, e2_crosssection.py, e3_bothways.py, kernd633.
+      species_extent_d633/out_d3_7dd3_after.txt            e8fbd4f  e1_extents.py, e2_crosssection.py, e3_bothways.py, kernd633.
+      species_extent_d633/out_d5_7dd3_after.txt            e8fbd4f  e1_extents.py, e2_crosssection.py, e3_bothways.py, kernd633.
+      species_extent_d633/out_e1_extents.txt               4bb4384  e1_extents.py, e3_bothways.py, trace_open.py
+      species_extent_d633/out_e3_bothways.txt              e8fbd4f  e1_extents.py, e2_crosssection.py, e3_bothways.py, kernd633.
+      species_extent_d633/out_selftest.txt                 e8fbd4f  e1_extents.py, e2_crosssection.py, e3_bothways.py, kernd633.
+      species_remainder_f8fa/out_selftest.txt              a13b4a9  kernf8fa.py, run_all.sh, selftestf8fa.py, w1_opposite.py, w2
+      species_remainder_f8fa/out_w1_opposite.txt           a13b4a9  kernf8fa.py, run_all.sh, selftestf8fa.py, w1_opposite.py, w2
+      species_remainder_f8fa/out_w2_typemismatch.txt       a13b4a9  kernf8fa.py, run_all.sh, selftestf8fa.py, w1_opposite.py, w2
+      species_remainder_f8fa/out_w3_scope.txt              4bb4384  run_all.sh, w3_scope.py
+      species_remainder_f8fa/out_w3_scope_before.txt       e8fbd4f  w3_scope.py
+      species_repair_6f61/out_check_doc.txt                af432ee  check_doc.py, run_all.sh
+      species_repair_6f61/out_r1_smallest.txt              83ac472  check_doc.py, kern6f61.py, r1_smallest.py, r2_columns.py, r3
+      species_repair_6f61/out_r2_columns.txt               83ac472  check_doc.py, kern6f61.py, r1_smallest.py, r2_columns.py, r3
+      species_repair_6f61/out_r3_quotes.txt                83ac472  check_doc.py, kern6f61.py, r1_smallest.py, r2_columns.py, r3
+      species_repair_6f61/out_selftest.txt                 83ac472  check_doc.py, kern6f61.py, r1_smallest.py, r2_columns.py, r3
+      species_repair_a4ef/out_c4_scope_73df_after.txt      106e121  kerna4ef.py, run_all.sh, s1_extent.py, s2_seam.py, selftesta
+      species_repair_a4ef/out_c5_doc_73df_after.txt        106e121  kerna4ef.py, run_all.sh, s1_extent.py, s2_seam.py, selftesta
+      species_repair_a4ef/out_s1_extent.txt                4bb4384  run_all.sh, s1_extent.py
+      species_repair_a4ef/out_s2_seam.txt                  e8fbd4f  s1_extent.py, s2_seam.py, stricken_a4ef.py
+      species_repair_a4ef/out_selftest.txt                 106e121  kerna4ef.py, run_all.sh, s1_extent.py, s2_seam.py, selftesta
+      species_sites_821e/out_a1_6cb9_after.txt             af432ee  kern821e.py, p1_depth.py, p2_sites.py, p3_wiring.py, run_all
+      species_sites_821e/out_a2_6cb9_after.txt             41ac5d4  kern821e.py, p2_sites.py, run_all.sh, selftest821e.py
+      species_sites_821e/out_p1_depth.txt                  af432ee  kern821e.py, p1_depth.py, p2_sites.py, p3_wiring.py, run_all
+      species_sites_821e/out_p2_sites.txt                  41ac5d4  kern821e.py, p2_sites.py, run_all.sh, selftest821e.py
+      species_sites_821e/out_p3_wiring.txt                 af432ee  kern821e.py, p1_depth.py, p2_sites.py, p3_wiring.py, run_all
+      species_sites_821e/out_selftest.txt                  41ac5d4  kern821e.py, p2_sites.py, run_all.sh, selftest821e.py
+      state_audit_6a2f/out_audit.txt                       954c29e  additions_and_drift.py, cut_points.py, deictic_refs.py, inse
+      state_claims_repair_0120/out_anchors0120.txt         6fb424f  run_all.sh
+      state_claims_repair_0120/out_anchors0120_HEAD.txt    6fb424f  run_all.sh
+      state_claims_repair_0120/out_flip_0120.txt           6fb424f  run_all.sh
+      state_claims_repair_0120/out_rests0120.txt           6fb424f  run_all.sh
+      state_control_audit_2216/out_claims.txt              3d44145  claims_audit.py, mutation_battery.py, run_all.sh
+      state_control_audit_2216/out_mutations.txt           3d44145  claims_audit.py, mutation_battery.py, run_all.sh
+      state_control_audit_babf/out_all.txt                 e03d96d  claims_audit.py, harness.py, mutations_babf.py, preservation
+      state_control_audit_babf/out_claims.txt              e03d96d  claims_audit.py, harness.py, mutations_babf.py, preservation
+      state_control_audit_babf/out_mutations.txt           e03d96d  claims_audit.py, harness.py, mutations_babf.py, preservation
+      state_control_audit_babf/out_preservation.txt        e03d96d  claims_audit.py, harness.py, mutations_babf.py, preservation
+      state_control_audit_babf/out_regression.txt          e03d96d  claims_audit.py, harness.py, mutations_babf.py, preservation
+      state_control_audit_babf/out_statements.txt          e03d96d  claims_audit.py, harness.py, mutations_babf.py, preservation
+      state_delegation_audit_16eb/out_5644_rerun.txt       2539240  mutations16eb.py, reproduce16eb.py, run_all.sh
+      state_delegation_audit_16eb/out_battery16eb.txt      2539240  mutations16eb.py, reproduce16eb.py, run_all.sh
+      state_delegation_audit_16eb/out_render.txt           2539240  mutations16eb.py, reproduce16eb.py, run_all.sh
+      state_delegation_audit_16eb/out_reproduce.txt        2539240  mutations16eb.py, reproduce16eb.py, run_all.sh
+      state_delegation_audit_5644/out_delegated.txt        3a80d99  delegated5644.py, harness5644.py, l2pop5644.py, norm5644.py,
+      state_delegation_audit_5644/out_l2pop.txt            3a80d99  delegated5644.py, harness5644.py, l2pop5644.py, norm5644.py,
+      state_delegation_audit_5644/out_layers_5644.txt      3a80d99  delegated5644.py, harness5644.py, l2pop5644.py, norm5644.py,
+      state_delegation_audit_5644/out_norm.txt             3a80d99  delegated5644.py, harness5644.py, l2pop5644.py, norm5644.py,
+      state_delegation_audit_5644/out_render.txt           3a80d99  delegated5644.py, harness5644.py, l2pop5644.py, norm5644.py,
+      state_delegation_repair_bee1/out_battery_2216_bee1.t 2a29f30  run_all.sh
+      state_delegation_repair_bee1/out_battery_babf_bee1.t 2a29f30  run_all.sh
+      state_delegation_repair_bee1/out_battery_bee1.txt    2a29f30  run_all.sh
+      state_delegation_repair_bee1/out_coverage_bee1.txt   2a29f30  run_all.sh
+      state_delegation_repair_bee1/out_globalpos.txt       2a29f30  run_all.sh
+      state_delegation_repair_bee1/out_layers_bee1.txt     2a29f30  run_all.sh
+      state_landing_audit_bd41/out_audit.txt               6193e70  cellmeasure.py, instrument_sensitivity.py, multiset_whole.py
+      state_landing_control_2da3/out_battery_2216_rerun.tx e924590  delta_control.py, negative_control.py, run_all.sh
+      state_landing_control_2da3/out_battery_2216_rerun_4a e4426c9  delta_control.py, negative_control.py, presentation.py, run_
+      state_landing_control_2da3/out_battery_babf_rerun.tx e4426c9  delta_control.py, negative_control.py, presentation.py, run_
+      state_layer_audit_218d/out_battery_2216_218d.txt     a4aeeb9  coverage218d.py, harness218d.py, layers218d.py, render218d.p
+      state_layer_audit_218d/out_battery_babf_218d.txt     a4aeeb9  coverage218d.py, harness218d.py, layers218d.py, render218d.p
+      state_layer_audit_218d/out_coverage.txt              a4aeeb9  coverage218d.py, harness218d.py, layers218d.py, render218d.p
+      state_layer_audit_218d/out_layers.txt                a4aeeb9  coverage218d.py, harness218d.py, layers218d.py, render218d.p
+      state_layer_audit_218d/out_render.txt                a4aeeb9  coverage218d.py, harness218d.py, layers218d.py, render218d.p
+      state_visibility_audit_65eb/out_anchor65eb.txt       9715af1  anchor65eb.py, six65eb.py
+      state_visibility_audit_65eb/out_anchor65eb_bd24efc.t 9715af1  anchor65eb.py, six65eb.py
+      state_visibility_audit_65eb/out_rerun65eb.txt        158892e  rerun65eb.py, run_all.sh
+      state_visibility_audit_65eb/out_rows65eb.txt         7911ba1  rows65eb.py
+      state_visibility_audit_65eb/out_six65eb.txt          9715af1  anchor65eb.py, six65eb.py
+      unified_gate_8fd1/out_characterise.txt               97cb533  characterise.py, quotient_symmetry.py
+      unified_gate_8fd1/out_quotient_symmetry.txt          97cb533  characterise.py, quotient_symmetry.py
+      unified_gate_audit_446b/out_beyond.txt               0e25835  audit_beyond.py, audit_crosscheck.py, audit_l1.py, audit_l2.
+      unified_gate_audit_446b/out_crosscheck.txt           0e25835  audit_beyond.py, audit_crosscheck.py, audit_l1.py, audit_l2.
+      unified_gate_audit_446b/out_l1.txt                   0e25835  audit_beyond.py, audit_crosscheck.py, audit_l1.py, audit_l2.
+      unified_gate_audit_446b/out_l2.txt                   0e25835  audit_beyond.py, audit_crosscheck.py, audit_l1.py, audit_l2.
+      unified_gate_audit_446b/out_proof.txt                0e25835  audit_beyond.py, audit_crosscheck.py, audit_l1.py, audit_l2.
+      unified_gate_audit_446b/out_quotes.txt               0e25835  audit_beyond.py, audit_crosscheck.py, audit_l1.py, audit_l2.
+      unified_gate_audit_446b/out_scope.txt                0e25835  audit_beyond.py, audit_crosscheck.py, audit_l1.py, audit_l2.
+      verdict_path_repair_1d26/out_p1_population.txt       d073b5d  kern1d26.py, p1_population.py, p2_widened.py, p3_vacuous.py,
+      verdict_path_repair_1d26/out_p2_FIRSTRUN_one_lost.tx d073b5d  kern1d26.py, p1_population.py, p2_widened.py, p3_vacuous.py,
+      verdict_path_repair_1d26/out_p3_vacuous.txt          d073b5d  kern1d26.py, p1_population.py, p2_widened.py, p3_vacuous.py,
+      verdict_path_repair_1d26/out_run_all_1d26.txt        d073b5d  kern1d26.py, p1_population.py, p2_widened.py, p3_vacuous.py,
+      verdict_path_repair_1d26/out_selftest_1d26.txt       d073b5d  kern1d26.py, p1_population.py, p2_widened.py, p3_vacuous.py,
+[MEASURED ] T5c 454 of 541 committed transcripts (84%) sit in the same commit as a change to their own producing code
+[FINDING  ] T5c' AND THAT MAKES THIS SCREEN USELESS, WHICH IS A RESULT AND NOT A SETBACK.  It flags 84% of the population, because committing the code and its transcripts together IS THIS ARC'S NORMAL PRACTICE.  A screen that fires on five transcripts in six discriminates nothing.  It is kept, red, rather than quietly dropped, because the next person to think of it should find the measurement instead of the idea
+
+------------------------------------------------------------------------------
+T5c-ii -- THE SCREEN THAT DOES DISCRIMINATE: A TRANSCRIPT THAT NAMES ITS OWN REVISION, AND NAMES A DIFFERENT ONE
+------------------------------------------------------------------------------
+
+The ticket's own question, asked literally: FOR EACH COMMITTED FIGURE, WHICH
+REVISION IS IT A FACT ABOUT, AND IS THAT THE REVISION IT NAMES?  Many of this
+arc's transcripts already print the commit they were run against.  Where one
+does, the comparison is free and it is exact.
+
+POPULATION  transcripts whose bytes contain at least one hex token that
+            RESOLVES to a commit in this object store.  GRAIN one verdict per
+            transcript, using the FIRST resolvable commit it names.
+
+    231 of 541 transcripts name a resolvable commit
+    0 name their own carrying commit
+    231 NAME A DIFFERENT COMMIT -- self-declared displacement, readable with no re-running at all
+
+    every transcript that names a commit other than the one carrying it:
+      anchor_population_audit_0ba7/out_a2_oldest.txt names ea97d0a  carried by 8490669  (ancestor)
+      anchor_population_audit_0ba7/out_a3_gate.txt   names 4755d02  carried by 8490669  (ancestor)
+      anchor_population_audit_0ba7/out_a5_resolution names e5d37a4  carried by 8490669  (off-main)
+      audit_2c77/out_q1_reason.txt                   names d01ff32  carried by adcfb1f  (ancestor)
+      audit_2c77/out_q3_operands.txt                 names d01ff32  carried by adcfb1f  (ancestor)
+      audit_2c77/out_q4_prerepair.txt                names 20a0e17  carried by adcfb1f  (off-main)
+      audit_2c77/out_selftest_2c77.txt               names 286d503  carried by adcfb1f  (ancestor)
+      audit_330a/out_s1_anchors.txt                  names 4755d02  carried by fba5f63  (ancestor)
+      audit_330a/out_s2_perturb.txt                  names 4755d02  carried by fba5f63  (ancestor)
+      audit_330a/out_s3_kernel_half.txt              names 3bc2cf7  carried by fba5f63  (ancestor)
+      audit_330a/out_s4_term.txt                     names d01ff32  carried by fba5f63  (ancestor)
+      audit_330a/out_s5_preserve.txt                 names dfa263c  carried by ea97d0a  (ancestor)
+      audit_330a/out_selftest_330a.txt               names dfa263c  carried by fba5f63  (ancestor)
+      audit_c067/out_c1_rebase.txt                   names de39eb6  carried by 47e56b3  (off-main)
+      audit_c067/out_c2_anchors.txt                  names de39eb6  carried by 47e56b3  (off-main)
+      audit_c067/out_c3_shopping.txt                 names de39eb6  carried by 47e56b3  (off-main)
+      audit_c067/out_c4_independence.txt             names de39eb6  carried by 47e56b3  (off-main)
+      audit_c067/out_c5_vocab.txt                    names de39eb6  carried by 47e56b3  (off-main)
+      audit_c067/out_selftest_c067.txt               names de39eb6  carried by 47e56b3  (off-main)
+      branching_audit_19ec/out_upstream.txt          names 170094f  carried by 3fbf6f6  (off-main)
+      branching_audit_321d/out_h1_questions.txt      names 286d503  carried by ef38841  (ancestor)
+      branching_audit_321d/out_h2_grain.txt          names 673b4c0  carried by ef38841  (ancestor)
+      branching_audit_321d/out_h3_setlevel.txt       names 286d503  carried by ef38841  (ancestor)
+      branching_audit_321d/out_h4_mine.txt           names 286d503  carried by ef38841  (ancestor)
+      branching_audit_58da/out_g1_provenance.txt     names 286d503  carried by d01ff32  (ancestor)
+      branching_audit_58da/out_g2_redo.txt           names 286d503  carried by d01ff32  (ancestor)
+      branching_audit_58da/out_g3_findings.txt       names 286d503  carried by d01ff32  (ancestor)
+      branching_audit_58da/out_g4_fleet.txt          names 286d503  carried by d01ff32  (ancestor)
+      branching_audit_957f/out_j1_attribution.txt    names 286d503  carried by e006581  (ancestor)
+      branching_audit_957f/out_j2_silencing.txt      names 286d503  carried by e006581  (ancestor)
+      branching_audit_957f/out_j4_reproduce.txt      names ef38841  carried by e006581  (ancestor)
+      branching_audit_957f/out_selftest_957f.txt     names 286d503  carried by e006581  (ancestor)
+      branching_audit_a218/out_c3_withdrawal.txt     names f4eaea6  carried by 286d503  (ancestor)
+      branching_audit_a218/out_c4_seam.txt           names 2e66d03  carried by 286d503  (ancestor)
+      branching_audit_a218/out_c5_record.txt         names 6c0f0da  carried by 286d503  (ancestor)
+      branching_audit_d330/out_e2_labels.txt         names 2e66d03  carried by f9f8220  (ancestor)
+      branching_audit_d330/out_e3_dispositions.txt   names 03d7f91  carried by f9f8220  (ancestor)
+      branching_audit_d330/out_e5_seam.txt           names ed9cde4  carried by f9f8220  (ancestor)
+      branching_audit_e34a/out_k1_prerepair.txt      names 4755d02  carried by dfa263c  (ancestor)
+      branching_audit_e34a/out_k2_five.txt           names f7a30d1  carried by dfa263c  (off-main)
+      branching_audit_e34a/out_k3_undisturbed.txt    names 286d503  carried by dfa263c  (ancestor)
+      branching_audit_e34a/out_k4_cancel.txt         names 4755d02  carried by dfa263c  (ancestor)
+      branching_audit_e34a/out_selftest_e34a.txt     names 4755d02  carried by dfa263c  (ancestor)
+      branching_bound_audit_aaf4/out_a1_population.t names 645b5a4  carried by 8132d75  (ancestor)
+      branching_bound_audit_aaf4/out_a2_reproduce.tx names 645b5a4  carried by f2ca4f9  (ancestor)
+      branching_bound_audit_aaf4/out_a5_donotdisturb names 557b78b  carried by 9643a5e  (off-main)
+      branching_bound_audit_aaf4/out_upstream_rerun_ names 170094f  carried by 9643a5e  (off-main)
+      branching_bound_d075/out_s1_census.txt         names 645b5a4  carried by 4203bc8  (ancestor)
+      branching_bound_d075/out_s2_reproduce.txt      names 645b5a4  carried by 4203bc8  (ancestor)
+      branching_bound_d075/out_s3_bound.txt          names 645b5a4  carried by 4203bc8  (ancestor)
+      branching_bound_d075/out_s3_bound_FIRSTFORM_ex names 645b5a4  carried by 4203bc8  (ancestor)
+      branching_bound_d075/out_s4_hedge.txt          names 645b5a4  carried by 4203bc8  (ancestor)
+      branching_locate_db09/out_t1_tl.txt            names 2e66d03  carried by ed9cde4  (ancestor)
+      branching_locate_db09/out_t5_labels.txt        names 03d7f91  carried by ed9cde4  (ancestor)
+      branching_repair_76cc/out_r1_kernel.txt        names ef38841  carried by d01ff32  (ancestor)
+      branching_repair_76cc/out_r2_reproduce.txt     names e494515  carried by d01ff32  (ancestor)
+      branching_repair_76cc/out_r3_prerepair.txt     names e006581  carried by 4755d02  (ancestor)
+      branching_repair_76cc/out_selftest_76cc.txt    names ef38841  carried by 4755d02  (ancestor)
+      branching_repair_7e58/out_k1_grain.txt         names ef38841  carried by 4372fae  (ancestor)
+      branching_repair_7e58/out_k2_selfprov.txt      names 673b4c0  carried by 4372fae  (ancestor)
+      census_repair_f3ff/out_s0_freshness.txt        names 76b481d  carried by 10cda77  (ancestor)
+      census_repair_f3ff/out_s1_rows.txt             names 76b481d  carried by aea066d  (ancestor)
+      census_repair_f3ff/out_s2_controls.txt         names 76b481d  carried by aea066d  (ancestor)
+      census_repair_f3ff/out_s3_graph.txt            names 76b481d  carried by aea066d  (ancestor)
+      census_repair_f3ff/out_s4_crosscheck.txt       names 76b481d  carried by aea066d  (ancestor)
+      counterexample_audit_c6bc/out_a1_recount.txt   names 90db267  carried by db2b77d  (ancestor)
+      face_geometry_audit_0b07/out_p1_derived.txt    names b534db7  carried by 1640f6f  (ancestor)
+      face_geometry_audit_0b07/out_p2_units.txt      names b6bc2ef  carried by 1640f6f  (ancestor)
+      face_geometry_audit_0b07/out_p3_grain.txt      names b6bc2ef  carried by 1640f6f  (ancestor)
+      face_geometry_audit_0b07/out_p4_confirmed.txt  names b6bc2ef  carried by 1640f6f  (ancestor)
+      face_geometry_audit_0b07/out_p5_enumeration.tx names b6bc2ef  carried by 1640f6f  (ancestor)
+      face_geometry_audit_6653/out_verify_claims.txt names ba3ec79  carried by a85fb28  (ancestor)
+      face_geometry_audit_c4c8/out_h2_the_nine_and_t names c7f9673  carried by 63b6d27  (ancestor)
+      face_geometry_audit_c4c8/out_h4_declared_unit. names 5cae82c  carried by 63b6d27  (ancestor)
+      face_geometry_audit_d0e2/out_e3_seams.txt      names f024985  carried by 5988134  (ancestor)
+      face_geometry_audit_e720/out_attack.txt        names d5a3043  carried by 7f04902  (ancestor)
+      face_geometry_audit_e720/out_verify.txt        names d5a3043  carried by 7f04902  (ancestor)
+      face_geometry_audit_eaef/out_e4_remeasure.txt  names 5cae82c  carried by b71401c  (ancestor)
+      face_geometry_audit_eaef/out_e5_floor.txt      names b6bc2ef  carried by b71401c  (ancestor)
+      face_geometry_audit_fcb2/out_a6_control_at_com names 5f542f0  carried by d057c2b  (ancestor)
+      face_geometry_instr_5f9a/out_d1_trace.txt      names 5cae82c  carried by b6bc2ef  (ancestor)
+      face_geometry_instr_5f9a/out_d2_deletion.txt   names 5cae82c  carried by 5f542f0  (ancestor)
+      face_geometry_instr_5f9a/out_d4_auditor_rerun. names c7f9673  carried by 5f542f0  (ancestor)
+      face_geometry_landing_7d5a/out_verify.txt      names c50ce32  carried by d5a3043  (ancestor)
+      grain_axis_audit_03d1/out_a1_axes.txt          names 9f1ecaa  carried by eacc5e1  (off-main)
+      grain_axis_audit_03d1/out_a2_blindspot.txt     names 9f1ecaa  carried by eacc5e1  (off-main)
+      grain_axis_audit_03d1/out_a3_ledger.txt        names 9f1ecaa  carried by eacc5e1  (off-main)
+      grain_axis_audit_03d1/out_a4_sweep.txt         names 9f1ecaa  carried by eacc5e1  (off-main)
+      grain_axis_audit_03d1/out_a5_pin.txt           names 9f1ecaa  carried by eacc5e1  (off-main)
+      grain_axis_audit_03d1/out_a6_self.txt          names 9f1ecaa  carried by eacc5e1  (off-main)
+      hash_population_6e58/out_p3_unrestricted.txt   names fba5f63  carried by fe6a495  (ancestor)
+      hash_population_6e58/out_p3_unrestricted_FIRST names fba5f63  carried by fe6a495  (ancestor)
+      hodge_leverage_audit_7e39/out_audit_7e39.txt   names 77306a7  carried by dde93c5  (ancestor)
+      hodge_leverage_audit_835f/out_audit_a318.txt   names b80dea0  carried by a97ad17  (ancestor)
+      hodge_leverage_audit_8a5c/out_audit_8e30.txt   names bbe83b5  carried by f58f7fd  (ancestor)
+      hodge_leverage_audit_8aae/out_audit_8916.txt   names b055ae5  carried by e6935dc  (ancestor)
+      hodge_leverage_audit_9207/out_audit_9207.txt   names d59ecd9  carried by 2d23d88  (ancestor)
+      hodge_leverage_audit_97fb/out_audit_97fb.txt   names 4785086  carried by 120ff66  (ancestor)
+      hodge_leverage_audit_ec07/out_audit_ec07.txt   names c7f9079  carried by 8cdda32  (ancestor)
+      hodge_leverage_audit_f922/out_audit.txt        names bbe83b5  carried by 553033a  (ancestor)
+      hodge_leverage_landing_e1d0/out_verify.txt     names 522048f  carried by 4785086  (ancestor)
+      hodge_leverage_repair_3f3b/out_a318_rerun.txt  names b80dea0  carried by 4785086  (ancestor)
+      hodge_leverage_repair_3f3b/out_repair_3f3b.txt names 7dc9180  carried by cb9f282  (off-main)
+      hodge_leverage_repair_6df0/out_ff3e_rerun.txt  names bbe83b5  carried by 77306a7  (ancestor)
+      hodge_leverage_repair_6df0/out_repair_6df0.txt names 8a07ae0  carried by 3958b5a  (off-main)
+      hodge_leverage_repair_8916/out_repair_8916.txt names bbe83b5  carried by d1dd84d  (ancestor)
+      hodge_leverage_repair_8eca/out_repair_8eca.txt names bbe83b5  carried by bee07a1  (ancestor)
+      hodge_leverage_repair_ff3e/out_repair_ff3e.txt names bbe83b5  carried by 3bf0cd2  (ancestor)
+      landscape_repair_1953/out_scope_text_3b51_reru names 714aceb  carried by 1db0be9  (ancestor)
+      landscape_repair_audit_3b51/out_scope_text.txt names 714aceb  carried by 806e149  (ancestor)
+      publication_anchor_132a/out_anchor_132a.txt    names 4a06b4c  carried by 1e30484  (off-main)
+      repair_69d1/out_p1_bound.txt                   names bfd7948  carried by dfa263c  (ancestor)
+      repair_69d1/out_p3_reason.txt                  names 4755d02  carried by dfa263c  (ancestor)
+      repair_69d1/out_p4_kinds.txt                   names bfd7948  carried by dfa263c  (ancestor)
+      repair_8d5e/out_r1_anchor.txt                  names 4755d02  carried by dfa263c  (ancestor)
+      repair_8d5e/out_r2_kernel_half.txt             names 4755d02  carried by dfa263c  (ancestor)
+      repair_8d5e/out_r3_term.txt                    names adcfb1f  carried by dfa263c  (ancestor)
+      repair_8d5e/out_r4_self.txt                    names 4755d02  carried by dfa263c  (ancestor)
+      repair_8d5e/out_selftest_8d5e.txt              names adcfb1f  carried by dfa263c  (ancestor)
+      repair_b2af/out_selftest_b2af.txt              names ea97d0a  carried by b1c3467  (ancestor)
+      repair_b2af/out_t1_population.txt              names fba5f63  carried by b1c3467  (ancestor)
+      repair_b2af/out_t2_gate.txt                    names 1d2a8a1  carried by b1c3467  (off-main)
+      repair_b2af/out_t3_term.txt                    names fba5f63  carried by b1c3467  (ancestor)
+      repair_b2af/out_t4_preserve.txt                names 4755d02  carried by b1c3467  (ancestor)
+      runner_exit_audit_05eb/out_j1_census.txt       names bee07a1  carried by 682db2c  (ancestor)
+      runner_exit_audit_05eb/out_j2_retro.txt        names bee07a1  carried by 682db2c  (ancestor)
+      runner_exit_audit_05eb/out_j3_control.txt      names bee07a1  carried by 682db2c  (ancestor)
+      runner_exit_audit_05eb/out_j4_scope.txt        names bee07a1  carried by 682db2c  (ancestor)
+      runner_exit_audit_56dc/out_t1_grain.txt        names bee07a1  carried by be06d36  (ancestor)
+      runner_exit_audit_56dc/out_t3_population.txt   names 1ee1f1b  carried by be06d36  (ancestor)
+      runner_exit_audit_56dc/out_t4_standing.txt     names ba85387  carried by be06d36  (ancestor)
+      runner_exit_audit_56dc/out_t5_fixture.txt      names 52aeaf4  carried by be06d36  (ancestor)
+      runner_exit_audit_dee4/out_a1_outside.txt      names bee07a1  carried by ba85387  (ancestor)
+      runner_exit_audit_dee4/out_a2_direct.txt       names bee07a1  carried by b3fabc6  (ancestor)
+      runner_exit_audit_dee4/out_a3_anchor.txt       names bee07a1  carried by ba85387  (ancestor)
+      runner_exit_audit_dee4/out_a4_superlatives.txt names 1ee1f1b  carried by b3fabc6  (ancestor)
+      runner_exit_audit_dee4/out_a5_floor.txt        names 1ee1f1b  carried by ba85387  (ancestor)
+      runner_exit_c2b3/out_k1_census.txt             names 52aeaf4  carried by 8c55168  (ancestor)
+      runner_exit_c2b3/out_k2_consume.txt            names bee07a1  carried by 973ca61  (ancestor)
+      runner_exit_c2b3/out_k3_retro.txt              names e8fbd4f  carried by 52aeaf4  (ancestor)
+      runner_exit_c2b3/out_k4_control.txt            names bee07a1  carried by 52aeaf4  (ancestor)
+      runner_exit_repair_70c7/out_r1_grain.txt       names 1ee1f1b  carried by 973ca61  (ancestor)
+      runner_exit_repair_70c7/out_r2_anchor.txt      names bee07a1  carried by eab14bc  (ancestor)
+      runner_exit_repair_70c7/out_r4_property.txt    names 5533bdb  carried by eab14bc  (off-main)
+      runner_exit_repair_70c7/out_r5_population.txt  names bee07a1  carried by 973ca61  (ancestor)
+      runner_exit_repair_7522/out_s1_population.txt  names bee07a1  carried by 973ca61  (ancestor)
+      runner_exit_repair_7522/out_s2_status.txt      names a4aeeb9  carried by 973ca61  (ancestor)
+      runner_exit_repair_7522/out_s3_figure.txt      names 52aeaf4  carried by eab14bc  (ancestor)
+      runner_exit_repair_7522/out_s4_unpin.txt       names bee07a1  carried by 973ca61  (ancestor)
+      runner_exit_repair_bf79/out_p1_grain.txt       names 973ca61  carried by eab14bc  (ancestor)
+      runner_exit_repair_bf79/out_p2_population.txt  names 973ca61  carried by 675c2ba  (ancestor)
+      runner_exit_repair_bf79/out_p3_ruleset.txt     names 1ee1f1b  carried by eab14bc  (ancestor)
+      runner_exit_repair_bf79/out_p4_figures.txt     names 3738079  carried by eab14bc  (off-main)
+      runner_exit_repair_bf79/out_p5_self.txt        names 973ca61  carried by eab14bc  (ancestor)
+      runner_exit_repair_bf79/out_selftest_bf79.txt  names 3738079  carried by 675c2ba  (off-main)
+      species_audit_73df/out_c4_scope.txt            names 83ac472  carried by ebecd89  (ancestor)
+      species_audit_7dd3/out_d3_seam.txt             names ebecd89  carried by 798afb7  (ancestor)
+      species_audit_7dd3/out_d5_mutations.txt        names ebecd89  carried by 798afb7  (ancestor)
+      species_bound_audit_6ef4/out_selftest.txt      names 4372fae  carried by 4ede6ef  (ancestor)
+      species_bound_audit_6ef4/out_t1_bound.txt      names 4372fae  carried by 4ede6ef  (ancestor)
+      species_bound_audit_6ef4/out_t3_census.txt     names e8fbd4f  carried by e5787e1  (ancestor)
+      species_bound_audit_6ef4/out_t4_restore.txt    names cada54f  carried by 4ede6ef  (off-main)
+      species_bound_repair_5040/out_r1_bound.txt     names 4372fae  carried by 3c8f535  (ancestor)
+      species_bound_repair_5040/out_r2_wiring.txt    names 4372fae  carried by 3c8f535  (ancestor)
+      species_bound_repair_5040/out_r3_summaries.txt names 4372fae  carried by f93e41f  (ancestor)
+      species_bound_repair_5040/out_r4_self.txt      names 4372fae  carried by f93e41f  (ancestor)
+      species_depth_audit_4700/out_q2_wiring.txt     names af432ee  carried by 5c16f5c  (ancestor)
+      species_depth_audit_4700/out_q3_sites.txt      names af432ee  carried by 5c16f5c  (ancestor)
+      species_depth_audit_4700/out_q4_standing.txt   names b534db7  carried by 5c16f5c  (ancestor)
+      species_extent_audit_6cb9/out_a2_crosssection. names 83ac472  carried by 26c8d5c  (ancestor)
+      species_extent_audit_6cb9/out_selftest.txt     names ebecd89  carried by 26c8d5c  (ancestor)
+      species_extent_d633/out_d3_7dd3_after.txt      names ebecd89  carried by e8fbd4f  (ancestor)
+      species_extent_d633/out_d5_7dd3_after.txt      names ebecd89  carried by e8fbd4f  (ancestor)
+      species_extent_d633/out_e2_crosssection.txt    names 351269c  carried by 7209911  (off-main)
+      species_gate_audit_d53d/out_g2_red.txt         names 77306a7  carried by 3f7db82  (ancestor)
+      species_gate_audit_d53d/out_g4_self.txt        names acc8b74  carried by cfa917e  (off-main)
+      species_gate_audit_d53d/out_run_all_d53d.txt   names 9043b00  carried by 3f7db82  (off-main)
+      species_gate_audit_d53d/out_selftest_d53d.txt  names 9043b00  carried by 3f7db82  (off-main)
+      species_repair_a4ef/out_c4_scope_73df_after.tx names 83ac472  carried by 106e121  (ancestor)
+      species_repair_a4ef/out_s1_extent.txt          names ebecd89  carried by 4bb4384  (ancestor)
+      species_rung_repair_4adb/out_selftest.txt      names 77306a7  carried by 1729f69  (ancestor)
+      species_rung_repair_4adb/out_v1_population.txt names 77306a7  carried by 1729f69  (ancestor)
+      species_rung_repair_4adb/out_v2_layer2.txt     names 77306a7  carried by 1729f69  (ancestor)
+      species_rung_repair_4adb/out_v4_neighbours.txt names 77306a7  carried by 1729f69  (ancestor)
+      species_sites_821e/out_a2_6cb9_after.txt       names 83ac472  carried by 41ac5d4  (ancestor)
+      species_sites_821e/out_p2_sites.txt            names b6bc2ef  carried by 41ac5d4  (ancestor)
+      species_sites_821e/out_p3_wiring.txt           names 83ac472  carried by af432ee  (ancestor)
+      state_audit_6a2f/out_audit.txt                 names 97cb533  carried by 954c29e  (ancestor)
+      state_claims_repair_0120/out_anchors0120.txt   names b1c3467  carried by 6fb424f  (ancestor)
+      state_claims_repair_0120/out_anchors0120_HEAD. names c4a60d8  carried by 6fb424f  (off-main)
+      state_claims_repair_0120/out_flip_0120.txt     names bd24efc  carried by 6fb424f  (ancestor)
+      state_claims_repair_0120/out_rests0120.txt     names bd24efc  carried by 6fb424f  (ancestor)
+      state_control_audit_2216/out_claims.txt        names bf17716  carried by 3d44145  (ancestor)
+      state_control_audit_2216/out_mutations.txt     names 97cb533  carried by 3d44145  (ancestor)
+      state_control_audit_babf/out_all.txt           names e924590  carried by e03d96d  (ancestor)
+      state_control_audit_babf/out_claims.txt        names e924590  carried by e03d96d  (ancestor)
+      state_control_audit_babf/out_preservation.txt  names 6b1eacf  carried by e03d96d  (ancestor)
+      state_control_audit_babf/out_statements.txt    names 6b1eacf  carried by e03d96d  (ancestor)
+      state_delegation_audit_16eb/out_5644_rerun.txt names 57f962f  carried by 2539240  (ancestor)
+      state_delegation_audit_16eb/out_claims.txt     names 9ca11c4  carried by 6fb424f  (ancestor)
+      state_delegation_audit_16eb/out_claims_PRE0120 names 9ca11c4  carried by f08a4ab  (ancestor)
+      state_delegation_audit_5644/out_l2pop.txt      names 57f962f  carried by 3a80d99  (ancestor)
+      state_delegation_repair_0049/out_5644_rerun.tx names 57f962f  carried by 5594c69  (ancestor)
+      state_delegation_repair_0049/out_selftest_nega names b68db5d  carried by 5594c69  (ancestor)
+      state_delegation_repair_a74f/out_run_all.txt   names b68db5d  carried by 7f0546b  (ancestor)
+      state_delegation_repair_bee1/out_battery_2216_ names b68db5d  carried by 2a29f30  (ancestor)
+      state_delegation_repair_bee1/out_battery_babf_ names b68db5d  carried by 2a29f30  (ancestor)
+      state_landing_audit_bd41/out_audit.txt         names b68db5d  carried by 6193e70  (ancestor)
+      state_landing_control_2da3/out_battery_2216_re names b68db5d  carried by e924590  (ancestor)
+      state_landing_control_2da3/out_battery_2216_re names b68db5d  carried by e4426c9  (ancestor)
+      state_landing_control_2da3/out_battery_babf_re names b68db5d  carried by e4426c9  (ancestor)
+      state_landing_control_2da3/out_control.txt     names b68db5d  carried by 2d77106  (ancestor)
+      state_layer_audit_218d/out_battery_2216_218d.t names b68db5d  carried by a4aeeb9  (ancestor)
+      state_layer_audit_218d/out_battery_babf_218d.t names b68db5d  carried by a4aeeb9  (ancestor)
+      state_layer_audit_218d/out_render.txt          names b68db5d  carried by a4aeeb9  (ancestor)
+      state_suppression_repair_5f7c/out_offsets.txt  names 6fb424f  carried by 7f0546b  (ancestor)
+      state_suppression_repair_5f7c/out_offsets_6fb4 names 6fb424f  carried by 7f0546b  (ancestor)
+      state_suppression_repair_5f7c/out_polarity.txt names 6fb424f  carried by 7f0546b  (ancestor)
+      state_suppression_repair_5f7c/out_polarity_6fb names 6fb424f  carried by 7f0546b  (ancestor)
+      state_suppression_repair_5f7c/out_run_all.txt  names 6fb424f  carried by 7f0546b  (ancestor)
+      state_suppression_repair_5f7c/out_run_all_a74f names b68db5d  carried by 0498b2b  (ancestor)
+      state_suppression_repair_5f7c/out_visible_a74f names 6fb424f  carried by 7f0546b  (ancestor)
+      state_visibility_audit_65eb/out_anchor65eb.txt names 1db0be9  carried by 9715af1  (ancestor)
+      state_visibility_audit_65eb/out_anchor65eb_bd2 names bd24efc  carried by 9715af1  (ancestor)
+      state_visibility_audit_65eb/out_rerun65eb.txt  names bd24efc  carried by 158892e  (ancestor)
+      state_visibility_audit_65eb/out_rows65eb.txt   names bd24efc  carried by 7911ba1  (ancestor)
+      state_visibility_audit_65eb/out_run_all.txt    names bd24efc  carried by bf208bc  (ancestor)
+      state_visibility_audit_65eb/out_six65eb.txt    names bd24efc  carried by 9715af1  (ancestor)
+      verdict_path_repair_1d26/out_p2_FIRSTRUN_one_l names 83ac472  carried by d073b5d  (ancestor)
+      verdict_path_repair_1d26/out_run_all_1d26.txt  names 28c8029  carried by d073b5d  (off-main)
+      verdict_path_repair_1d26/out_selftest_1d26.txt names 28c8029  carried by d073b5d  (off-main)
+[FINDING  ] T5c-ii 231 of the 231 transcripts that name a resolvable commit name one that is NOT the commit carrying them.  This screen needs no declaration, no convention and no re-running, and unlike T5c it discriminates: it fires on 100% of its population rather than 84%
+
+------------------------------------------------------------------------------
+T5d -- WHAT THIS CONVENTION DOES NOT DO
+------------------------------------------------------------------------------
+
+It does not make an unreproducible transcript reproduce.  R2 exists precisely
+because most of this arc's transcripts CANNOT be pinned to a tree, and the
+convention's answer to those is to make them SAY so rather than to pretend.
+
+It does not check anything already committed.  T5a's coverage row is 0 of 541
+and will stay at whatever the arc adopts.
+
+It does not detect a producer that reads repository-global state.  R2 is a
+DECLARATION BY THE AUTHOR, and nothing here verifies it.  A checkable version
+would need the producer run under a harness that intercepts `git` -- worth
+building, not built here, and named so that nobody reads R2 as enforced.
+
+[MEASURED ] T5d R2 is declared by the author and NOT verified by this control.  Stated here rather than in a footnote, because an unverified declaration presented as a check is the shape this whole ticket is about
+
+SELF-ERRORS 0
+FINDINGS 3
+TOTAL BAD: 3

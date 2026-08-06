@@ -1,0 +1,124 @@
+==============================================================================
+t3 -- CLASS 1: every recorded SHA, chased by PATCH-ID
+==============================================================================
+    code-digest: 29ab59a4f1f51e3d   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/transcript_census_1abe;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+
+POPULATION   P_A, defined in the module docstring: (file, token) sites whose
+             token RESOLVES to a commit.  GRAIN one verdict per site; the
+             commit-level counts are stated separately because one commit can
+             be recorded at many sites and the two numbers are not the same
+             number.
+
+    as-of      81214a9c02ee624dc1261c69db50d47ed659728f  (81214a9c02ee624dc1261c69db50d47ed659728f)
+    P_A        6516 resolvable SHA sites over 284 distinct commits
+    P_B        749 unresolvable hex tokens (a BOUND, not a count of dead commits)
+
+------------------------------------------------------------------------------
+T3a -- WHICH RECORDED COMMITS ARE ON `main` AT ALL (reachability, and reachability only)
+------------------------------------------------------------------------------
+    218 of 284 distinct recorded commits are ancestors of 81214a9
+    66 are NOT.  Ancestry stops here; it cannot tell a rebased commit from a deleted one.
+[MEASURED ] T3a 66 of 284 distinct recorded commits are not reachable from 81214a9.  Reported as a REACHABILITY fact and nothing more -- read as a survival fact it would be a false negative on every one of them
+
+------------------------------------------------------------------------------
+T3b -- AND NOW THE RIGHT QUESTION: DID THE CONTENT SURVIVE?
+------------------------------------------------------------------------------
+
+For every recorded commit that is NOT an ancestor of `main`, its stable
+patch-id is compared against the patch-id of every commit on `main`.  An
+identical patch-id means the diff survived the rebase byte-for-byte and the
+recording is STALE, not WRONG.  No identical patch-id means the content is not
+on `main` in that form, and THAT is the verdict worth acting on.
+
+    indexed 329 patch-ids over 330 commits reachable from 81214a9
+
+    recorded   verdict        twin       subject
+    064c79c1   STALE          7a35eacd   predictions: mg-fcb2's predictions for the i
+    07d80ee9   STALE          af432eed   docs+repair: ALL THREE OPEN ITEMS CLOSED AT 
+    09785ec6   STALE          4ede6efd   docs+audit: independent audit of the mg-5040
+    0aa5b9ae   STALE          5c16f5cd   docs+audit: independent audit of the mg-821e
+    0df8ec7d   STALE          1f54bf9b   predictions: mg-c067's predictions for the i
+    0ef9af94   STALE          fba5f635   docs+audit: independent audit of the mg-8d5e
+    170094f3   STALE          410ae057   predictions: mg-19ec's predictions, committe
+    1d1d5b18   STALE          979df724   probe: mg-3f3b's instrument and its predicti
+    1d2a8a19   STALE          14c6c3b3   repair+instrument: mg-330a's CENSUS IS DISPL
+    20a0e17a   STALE          fb740136   predictions: mg-2c77's predictions, committe
+    28c8029f   STALE          d41ed851   predictions: mg-1d26's predictions for the r
+    2cfd2261   STALE          1e304840   evidence+observations: mg-132a's transcript 
+    2e48b678   STALE          9584cd1e   predictions: mg-4adb's predictions, committe
+    351269c3   STALE          d073b5d6   repair: THE HOLE IS CLOSED AND EVERY ONE OF 
+    369dd32c   NO-TWIN        -          mg-0120 flip construction: one message and f
+    37380799   STALE          bba2a3ce   predictions: mg-bf79's predictions for the r
+    378cf011   STALE          2e6487ca   docs+fix: mg-c067's README and the ref-resol
+    3d7b32fd   STALE          bd6eaec9   evidence: the committed transcript of the mg
+    41bdbfa1   STALE          c4203035   predictions: mg-8af0's predictions for the F
+    42f48ca6   STALE          3c8f5359   docs+repair: THE WALK NOW NAMES WHAT IT DECL
+    43d437cd   STALE          41ac5d4a   control+repair: PIN THE PRE-REPAIR REF AND S
+    4a06b4cd   STALE          a91cf9ea   evidence: mg-132a's transcript — 18 checks, 
+    53091324   STALE          9237de01   predictions: mg-97fb's predictions for the i
+    53d86a0e   STALE          5f542f0f   control+repair: THE GAUGE STANDARD IS ASKED 
+    5533bdb7   STALE          675c2bae   repair: mg-56dc's FOUR closed and the floor 
+    557b78bc   STALE          f2ca4f9f   audit+instrument: mg-aaf4's INDEPENDENT AUDI
+    5a4a7452   STALE          4b5891d7   docs: independent audit of mg-a2bd (the G-do
+    5e84e2fc   STALE          f6756c02   docs: land the mg-86a3 audit repairs in the 
+    6aa043a8   STALE          abb95b08   predictions: mg-56dc's predictions for the i
+    6c90534e   STALE          1729f69b   evidence: the committed transcripts of the m
+    6e15a1a4   STALE          4ad011a2   fix: mg-c067's own figure grammar crossed a 
+    71a1f55b   STALE          07b65e27   predictions: mg-330a's predictions for the i
+    72e36cb1   STALE          9c54a99d   predictions: mg-f3ff's predictions for the r
+    739f7bd9   STALE          cfd2af58   predictions: mg-a74f's predictions for the r
+    79e23c89   STALE          5c4c641d   predictions: mg-d53d's predictions for the i
+    7bd0056b   STALE          06c9271e   predictions: mg-b2af's predictions for the r
+    7cee1a1c   STALE          8c76d424   probe: mg-7e39's instrument and its predicti
+    7dc91808   STALE          aa8309df   instrument: mg-132a takes answer (2) — the a
+    806533bf   STALE          3b73ccca   audit: the mg-c067 instrument — the stalenes
+    87af2706   STALE          b534db77   evidence: PUBLISH THE POST-COMMIT MEASUREMEN
+    880fc154   STALE          99ee542d   predictions: mg-65eb's predictions for the I
+    89d6aa1b   STALE          cb9f2829   repair+docs: S4a re-keyed onto THE COMMIT TH
+    8a07ae01   STALE          657565eb   repair+docs: the population line scoped to t
+    903a2e9e   STALE          0c3a2ba0   repair: F2 FIRST — the V6 row no longer scor
+    9043b008   STALE          7782b391   audit: the mg-d53d instrument — EVERY LINE O
+    90e0ceea   STALE          a9132783   predictions: mg-6e58's predictions for the r
+    93bd6892   STALE          1f2e30d3   predictions: mg-70c7's predictions for the s
+    9f1ecaac   STALE          6fda370d   predictions: mg-03d1's predictions for the I
+    a8d1723d   STALE          534c06bd   repair: F1 — the site count is MEASURED, not
+    acc8b74f   STALE          3f7db821   evidence+docs: the committed transcripts of 
+    b2a849be   STALE          cd08be1a   predictions: mg-6ef4's predictions, committe
+    b4c341c6   STALE          973ca612   evidence: the committed transcripts of the m
+    b94cb1ed   STALE          ea97d0a7   audit: the mg-330a instrument — every derive
+    c031b9b8   STALE          4bb4384e   docs+repair: THE GATE IS THE LAST COMMAND AN
+    c1a57fdd   STALE          3958b5a8   evidence: mg-6df0's transcript REGENERATED B
+    c4a60d8e   STALE          f08a4ab8   docs: mg-0120's README — the population is 6
+    cada54fe   STALE          f93e41f3   evidence: THE INSTRUMENT THAT RAISED THE FIN
+    d24bbeb5   STALE          53f6ca39   predictions: mg-132a's decision and predicti
+    de39eb6d   STALE          5bd0d71e   rescue: mg-c067's uncommitted c2_anchors.py 
+    e1eb5c8a   STALE          d456f583   repair: THE GRAIN, THE ANCHOR, THE RULE AND 
+    e3fb80e3   STALE          bdeab768   predictions: mg-5f7c's predictions for the s
+    e5d37a41   STALE          d7d84790   predictions: mg-0ba7's predictions for the I
+    ec983004   STALE          424f6061   predictions: mg-d075's predictions for the b
+    f714b4ce   STALE          002b0e9b   predictions: mg-aaf4's predictions for the I
+    f7a30d13   STALE          e2577e55   predictions: mg-8d5e's predictions, committe
+    fc981420   STALE          3bc2cf76   evidence: PUBLISH THE POST-COMMIT MEASUREMEN
+[MEASURED ] T3b of the 66 recorded commits that ancestry calls missing, 65 (98%) have a patch-id-IDENTICAL twin on 81214a9 and are STALE rather than lost; 1 have no twin
+[FINDING  ] T3b' 1 recorded commits have NO patch-id twin on 81214a9.  These are the only CLASS 1 recordings whose content is not demonstrably on main, and they are named above
+
+------------------------------------------------------------------------------
+T3c -- THE SITE COUNT, WHICH IS THE ONE THAT SIZES THE CLEANUP
+------------------------------------------------------------------------------
+    649 of 6516 SITES record a commit that is not on main
+      648 record a STALE identifier whose content IS on main
+      1 record a commit with no twin
+
+    every site recording a commit with NO TWIN, named:
+      code/state_claims_repair_0120/out_flip_0120.txt          369dd32
+[MEASURED ] T3c CLASS 1 is 649 sites of 6516.  It is reported apart from CLASS 2 on purpose: a single number merging a stale identifier whose content is intact with a transcript that cannot be reproduced would overstate the damage and make the remedy look bigger than it is
+
+SELF-ERRORS 0
+FINDINGS 1
+TOTAL BAD: 1

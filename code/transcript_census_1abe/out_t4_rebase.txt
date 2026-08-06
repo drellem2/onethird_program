@@ -1,0 +1,328 @@
+==============================================================================
+t4 -- DID ANY REBASE IN THIS ARC ALTER CONTENT?
+==============================================================================
+    code-digest: 29ab59a4f1f51e3d   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/transcript_census_1abe;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of      81214a9c02ee624dc1261c69db50d47ed659728f  (81214a9c02ee624dc1261c69db50d47ed659728f)
+
+------------------------------------------------------------------------------
+T4a -- THE PAIRING RULE, TESTED BEFORE IT IS USED
+------------------------------------------------------------------------------
+    330 commits on 81214a9 over 330 distinct subjects
+[OK       ] T4a subject lines are unique on 81214a9 (0 duplicated), so matching a side commit to main BY SUBJECT identifies at most one candidate.  An instrument whose pairing rule is ambiguous cannot report ALTERED against anything
+
+------------------------------------------------------------------------------
+T4b -- EVERY PRE-REBASE TWIN STILL IN THE OBJECT STORE
+------------------------------------------------------------------------------
+    259 commits are reachable from some ref or reflog and are NOT ancestors of 81214a9
+    234 of them have a subject that also occurs on 81214a9 -- these are the PRE-REBASE TWINS
+    25 do not, and are outside this measurement: work that never landed, or landed reworded
+
+------------------------------------------------------------------------------
+T4c -- PATCH-ID ON EVERY PAIR
+------------------------------------------------------------------------------
+
+    pre-rebase on-main    verdict     subject
+    b0c19f40   bdcb0069   IDENTICAL   STATE+instrument: CLOSE mg-e720's remaining two BROK
+    a2d9340a   d5a3043a   IDENTICAL   STATE: STRIKE the A5 widening's own argument — it wa
+    b932dce2   db08b4c9   IDENTICAL   STATE: land the mg-5630 consequences — the control-c
+    1ab794a0   16bee798   IDENTICAL   STATE: land the mg-86a3 consequences — ledger row B6
+    ebe10ec9   57f962f1   IDENTICAL   STATE: restructure the ledger so rows assert CURRENT
+    f3f29bdd   81214a9c   IDENTICAL   analysis: (LIB-weak) IS NOT BLOCKED BY THE ARC'S NAM
+    b25d5892   d057c2b6   IDENTICAL   audit+docs: THE GAUGE STANDARD ASKED OF THE ROWS THE
+    8da1d790   8490669c   IDENTICAL   audit+instrument: THE POPULATION OF THIS WHOLE ARC I
+    557b78bc   f2ca4f9f   IDENTICAL   audit+instrument: mg-aaf4's INDEPENDENT AUDIT of the
+    345e7e55   f9edc414   IDENTICAL   audit+repair: THE ARC'S CARDINALITY IS SEVEN, NOT SI
+    e05f9f10   f2b438b8   IDENTICAL   audit: THE OMISSION WAS NEVER ONLY ABOUT CASE — addi
+    a39531f6   ebad4199   IDENTICAL   audit: add the vagueness check the brief asks for — 
+    d33970be   eacc5e1d   IDENTICAL   audit: mg-03d1's INDEPENDENT AUDIT of the mg-56dc la
+    eff227c7   9715af1b   IDENTICAL   audit: mg-65eb's ANCHOR probe and the SIX re-classif
+    cb974864   7911ba1c   IDENTICAL   audit: mg-65eb's ROW LEDGER — the property CLAIMED b
+    96b77ee5   8132d75c   IDENTICAL   audit: mg-aaf4's 24 unbounded sites SORTED BY WHAT C
+    fea9a279   44aa6867   IDENTICAL   audit: mg-fcb2's own instruments and A1 -- THE COVER
+    836dfb05   3ba46c3a   IDENTICAL   audit: the mg-19ec instrument — a fifth instrument t
+    b94cb1ed   ea97d0a7   IDENTICAL   audit: the mg-330a instrument — every derived anchor
+    82649abc   d3cdc953   IDENTICAL   audit: the mg-56dc instrument — a sixth instrument t
+    a8a6b644   91485e13   IDENTICAL   audit: the mg-6ef4 instrument — four probes, a mode-
+    2081186e   7c4f6d66   IDENTICAL   audit: the mg-97fb instrument — every `n/a` read as 
+    806533bf   3b73ccca   IDENTICAL   audit: the mg-c067 instrument — the staleness check 
+    9043b008   7782b391   IDENTICAL   audit: the mg-d53d instrument — EVERY LINE OF THE 80
+    064c4246   10cda771   IDENTICAL   census+repair: THE FOUR ROWS RE-DERIVED FROM THE TRE
+    38bf0ec2   5cae82c0   IDENTICAL   control+docs: NO THIRD REASON — the predicate now RE
+    a2f2a034   a2d5a81f   IDENTICAL   control+docs: REPAIR THE STATEMENT FIRST — the certi
+    452532c1   f024985e   IDENTICAL   control+docs: THE CONDITION IS RIGHT AND THE PRINTED
+    e22bb22e   9ca11c4b   IDENTICAL   control+docs: THE REPAIR CREATED THE SURFACE IT WAS 
+    43d437cd   41ac5d4a   IDENTICAL   control+repair: PIN THE PRE-REPAIR REF AND STOP `tee
+    1fa6df6f   52aeaf43   IDENTICAL   control+repair: THE ARC-WIDE `| tee` SWEEP, AND WHIC
+    d4d1543c   c7f96739   IDENTICAL   control+repair: THE DELETION TEST NOW BITES 9 OF 9 A
+    53d86a0e   5f542f0f   IDENTICAL   control+repair: THE GAUGE STANDARD IS ASKED OF THE R
+    91e61a87   e4426c94   IDENTICAL   control: CERTIFY WHAT A READER SEES, NOT WHICH BYTES
+    4d094294   672915e4   IDENTICAL   docs+STATE: REPAIR THE PROOF, NOT THE THEOREM — Step
+    ad1d0983   e34a3c54   IDENTICAL   docs+audit: independent audit of mg-0049 / 9ca11c4+5
+    0b7c12dc   806e1493   IDENTICAL   docs+audit: independent audit of mg-1953 / 6b1eacf (
+    f75b7130   c8c60a8c   IDENTICAL   docs+audit: independent audit of mg-24a3 / f5d3485 (
+    74b68e0d   3d44145b   IDENTICAL   docs+audit: independent audit of mg-2da3 / bf17716 (
+    ea01fe94   553033ae   IDENTICAL   docs+audit: independent audit of mg-3c24's repair (m
+    48787d83   8ce78fb5   IDENTICAL   docs+audit: independent audit of mg-41aa / 504ab6c (
+    0bbb91c1   a4aeeb9e   IDENTICAL   docs+audit: independent audit of mg-4acd / e4426c9 (
+    e7d3f411   5988134f   IDENTICAL   docs+audit: independent audit of mg-5f9a / 5cae82c (
+    bf4d4a80   e03d96da   IDENTICAL   docs+audit: independent audit of mg-7870 / e924590 (
+    a6e4e42a   8e61d1ab   IDENTICAL   docs+audit: independent audit of mg-7d75 / 6a22fbc (
+    bad164e3   db2b77df   IDENTICAL   docs+audit: independent audit of mg-a893 / 90db267 (
+    f8361e5d   ae215699   IDENTICAL   docs+audit: independent audit of mg-af28 / 358beff (
+    5f0ff127   1d922a10   IDENTICAL   docs+audit: independent audit of mg-da45 / f024985 (
+    68f81aa8   5dbe4f6d   IDENTICAL   docs+audit: independent audit of mg-db09 / 03d7f91 (
+    ac548502   20fab090   IDENTICAL   docs+audit: independent audit of mg-dea5 / 522c1f3 (
+    972b60fd   ebecd898   IDENTICAL   docs+audit: independent audit of the FINAL document 
+    76129f63   682db2cb   IDENTICAL   docs+audit: independent audit of the arc-wide `| tee
+    d1919cc6   b71401cc   IDENTICAL   docs+audit: independent audit of the mg-0b07 repair 
+    89626288   bd24efc9   IDENTICAL   docs+audit: independent audit of the mg-3f3b n/a-and
+    09785ec6   4ede6efd   IDENTICAL   docs+audit: independent audit of the mg-5040 repair 
+    15d84592   ef388417   IDENTICAL   docs+audit: independent audit of the mg-58da repair 
+    24254e84   adcfb1f1   IDENTICAL   docs+audit: independent audit of the mg-69d1 repair 
+    4b01736b   dde93c50   IDENTICAL   docs+audit: independent audit of the mg-6df0 repair 
+    d330ff46   8c551689   IDENTICAL   docs+audit: independent audit of the mg-70c7 grain-a
+    b770ac52   c4a7b1ab   IDENTICAL   docs+audit: independent audit of the mg-7522 repair 
+    b60066ad   e494515b   IDENTICAL   docs+audit: independent audit of the mg-76cc repair 
+    0aa5b9ae   5c16f5cd   IDENTICAL   docs+audit: independent audit of the mg-821e repair 
+    fbccfef2   e6935dc6   IDENTICAL   docs+audit: independent audit of the mg-8916 repair 
+    0ef9af94   fba5f635   IDENTICAL   docs+audit: independent audit of the mg-8d5e anchor-
+    81957bfc   f58f7fdf   IDENTICAL   docs+audit: independent audit of the mg-8e30 repair 
+    99a82410   2d23d880   IDENTICAL   docs+audit: independent audit of the mg-8eca repair 
+    6d6903f9   8cdda322   IDENTICAL   docs+audit: independent audit of the mg-9207 repair 
+    78a756b6   f9f82203   IDENTICAL   docs+audit: independent audit of the mg-a218 repair 
+    2ce8e965   a97ad171   IDENTICAL   docs+audit: independent audit of the mg-a318 repair 
+    3887be2c   798afb73   IDENTICAL   docs+audit: independent audit of the mg-a4ef extent 
+    bb30ec3f   1640f6ff   IDENTICAL   docs+audit: independent audit of the mg-c4c8 repair 
+    a497336d   9d712be8   IDENTICAL   docs+audit: independent audit of the mg-d0e2 repair 
+    d8fc4b73   26c8d5cf   IDENTICAL   docs+audit: independent audit of the mg-d633 extent 
+    f4e00c89   286d5030   IDENTICAL   docs+audit: independent audit of the mg-db09 repair 
+    3ec3d53a   abd34e17   IDENTICAL   docs+audit: independent audit of the mg-dffa warrant
+    65dc14fb   63b6d277   IDENTICAL   docs+audit: independent audit of the mg-e7bc repair 
+    09009a3e   158892e5   IDENTICAL   docs+audit: mg-65eb's README and the DO-NOT-DISTURB 
+    9c5388c4   aea066d0   IDENTICAL   docs+crosscheck: the mg-f3ff README and s4 — THE CHA
+    378cf011   2e6487ca   IDENTICAL   docs+fix: mg-c067's README and the ref-resolution fi
+    b5331946   6a22fbc0   IDENTICAL   docs+instrument: DANIEL'S ACTUAL QUESTION ANSWERED Y
+    3de0d072   03d7f912   IDENTICAL   docs+instrument: DANIEL'S STATEMENT LOCATED AT HIS O
+    51517ca0   6b1eacfc   IDENTICAL   docs+instrument: REPAIR mg-ebd8's DERIVATIONS, not i
+    33433d5e   358beffd   IDENTICAL   docs+instrument: RUN the search row Q's "no" omitted
+    838079d4   1db0be90   IDENTICAL   docs+instrument: clear mg-3b51's 4 MINOR — R1d was a
+    1436a11c   bbe83b5b   IDENTICAL   docs+landing: CLOSE mg-3c24, dropped and recovered b
+    59795c5a   f5d34855   IDENTICAL   docs+probe: how a 1/3-2/3 COUNTEREXAMPLE behaves und
+    07d80ee9   af432eed   IDENTICAL   docs+repair: ALL THREE OPEN ITEMS CLOSED AT THEIR OW
+    170e2637   504ab6cc   IDENTICAL   docs+repair: BOTH BROKEN NEGATIVES ARE FIXED AT SOUR
+    a171c54c   e8fbd4f4   IDENTICAL   docs+repair: BOTH WIDE EXTENTS ARE CLOSED BY WIDENIN
+    e3feba09   dfa263cc   IDENTICAL   docs+repair: THE ANCHOR IS DERIVED FROM THE PROPERTY
+    19dceced   d01ff32d   IDENTICAL   docs+repair: THE BOUND IS NARROWED TO THE SWEEP WITH
+    eaa7317e   3bf0cd20   IDENTICAL   docs+repair: THE CENSUS COMPARES THE WHOLE RECORD — 
+    dc2473dd   bee07a15   IDENTICAL   docs+repair: THE CENSUS IS POSITION-AWARE AND SUMMAR
+    257acd33   bee07a15   *** ALTERED *** docs+repair: THE CENSUS IS POSITION-AWARE AND SUMMAR
+    9d548b6a   b6bc2efe   IDENTICAL   docs+repair: THE DELETION TEST IS PER RETURN AND THE
+    ccfdf372   bfd7948e   IDENTICAL   docs+repair: THE DISJUNCTION IS SPELLED WITH AN OPER
+    d60f097c   e16e41cd   IDENTICAL   docs+repair: THE FIGURE WAS ITS OWN PARENT'S — −875 
+    c031b9b8   4bb4384e   IDENTICAL   docs+repair: THE GATE IS THE LAST COMMAND AND THE PO
+    ea964b4e   b80dea0e   IDENTICAL   docs+repair: THE GATE NOW READS THE FIGURE AT THE SI
+    ece8b385   b055ae53   IDENTICAL   docs+repair: THE GATE READS THE PROSE BESIDE THE FIG
+    c9fa300c   4755d029   IDENTICAL   docs+repair: THE KERNEL HALF OF THE PREDICATE IS BAC
+    8ad3c0c9   4372fae9   IDENTICAL   docs+repair: THE PROVENANCE APPARATUS IS NOW RIGHT A
+    85865714   77306a7f   IDENTICAL   docs+repair: THE REFUSAL IS KEYED ON THE ROW'S HEADI
+    8b0c2346   a13b4a99   IDENTICAL   docs+repair: THE REPAIR FIXED THE PROSE AND LEFT THR
+    21f99685   90db2679   IDENTICAL   docs+repair: THE REPLICATION IS DETERMINISTIC — the 
+    42a5ef7b   673b4c00   IDENTICAL   docs+repair: THE REPRODUCTION STANDS AT 286d5030 AND
+    0eeb1381   2e66d037   IDENTICAL   docs+repair: THE SEPARATING EXAMPLE IS WITHDRAWN AND
+    53efe180   83ac472e   IDENTICAL   docs+repair: THE SMALLEST WITNESS IS THE 3-CHAIN, no
+    ff354543   0fb0e003   IDENTICAL   docs+repair: THE THIRD RUNG IS REMOVED AND THE DECLA
+    7a0076e4   ed9cde49   IDENTICAL   docs+repair: THE VERTEX COLUMN REPORTS THE SET AND T
+    42f48ca6   3c8f5359   IDENTICAL   docs+repair: THE WALK NOW NAMES WHAT IT DECLINED, so
+    a8fafdbf   522c1f3b   IDENTICAL   docs+repair: THE §4 NULL IS FALSE AND THE SIGNAL UND
+    23060750   106e1211   IDENTICAL   docs+repair: X3 IS CORRECTED AT SOURCE and there is 
+    59f2cb48   645b5a4a   IDENTICAL   docs+repair: mg-5800's four WARRANT findings landed 
+    96670ebb   47850862   IDENTICAL   docs+repair: mg-7e39's FOUR FINDINGS LANDED — `n/a` 
+    e3eb5687   97cb533b   IDENTICAL   docs: GATE the unified-framework question — L1 rules
+    39fe0501   714acebf   IDENTICAL   docs: LOCATE the construction — it is Brown 2000 §4.
+    569789ab   2657490a   IDENTICAL   docs: annotate mg-e35b's README where it repeats the
+    1598242d   321509fb   IDENTICAL   docs: independent audit of mg-1319 / db08b4c (the mg
+    6934ddd4   34c151f2   IDENTICAL   docs: independent audit of mg-2789 (NEGATIVE CONTROL
+    51f52cc2   6193e70d   IDENTICAL   docs: independent audit of mg-7735 / b68db5d (the la
+    b34fc597   7f04902c   IDENTICAL   docs: independent audit of mg-7d5a / d5a3043 (the st
+    999ebc7c   de54c3a8   IDENTICAL   docs: independent audit of mg-8a12 / 8fc5111 (the NE
+    78b7b212   0e258358   IDENTICAL   docs: independent audit of mg-8fd1 / 97cb533 (the un
+    5a4a7452   4b5891d7   IDENTICAL   docs: independent audit of mg-a2bd (the G-double-pri
+    074e190f   2cc8d572   IDENTICAL   docs: independent audit of mg-a3d4 (the Hodge-side l
+    0882d286   924e2ee8   IDENTICAL   docs: independent audit of mg-ebd8 / 714aceb (the lo
+    64dd959b   a85fb28b   IDENTICAL   docs: independent audit of mg-f2e1 / ba3ec79 (the A5
+    5e84e2fc   f6756c02   IDENTICAL   docs: land the mg-86a3 audit repairs in the mg-a3d4 
+    c4a60d8e   f08a4ab8   IDENTICAL   docs: mg-0120's README — the population is 6 of 17 a
+    98478d49   5ad75a88   IDENTICAL   docs: mg-5f7c's README and the corrections to mg-a74
+    b848f67e   3f0bd406   IDENTICAL   docs: mg-a74f's README — the three OPENs answered, f
+    a2921733   de06ff0d   IDENTICAL   docs: mg-aaf4 records IN ADVANCE that its own predic
+    0591b757   e4600bf1   IDENTICAL   docs: mg-aaf4's account of the s6 drift made DRIFT-P
+    5b620ae9   5bd532d3   IDENTICAL   docs: mg-b2af's STILL-OPEN list CORRECTED IN PLACE b
+    7e4107d0   c252f965   IDENTICAL   docs: state the moving counts as pointers to transcr
+    7714468a   b3fabc6b   IDENTICAL   docs: state the moving worktree-against-the-pin figu
+    12a7383f   4ef4947d   IDENTICAL   docs: the parent's criticism detector MISSES THE SEN
+    7534e13e   0160cbf9   IDENTICAL   docs: §9.4's heading carried the falsified universal
+    19172d4a   9643a5e4   IDENTICAL   evidence+audit: the UPSTREAM DO-NOT-DISTURB re-run f
+    1723d2de   d1dd84d2   IDENTICAL   evidence+control: THE INSTRUMENT THAT RAISED THE FIN
+    f0014fdb   7f660053   IDENTICAL   evidence+control: regenerate the mg-2da3 control's c
+    acc8b74f   3f7db821   IDENTICAL   evidence+docs: the committed transcripts of the mg-d
+    2cfd2261   1e304840   IDENTICAL   evidence+observations: mg-132a's transcript regenera
+    d22779f3   cfa917ec   IDENTICAL   evidence: G4 REGENERATED BY ITS OWN PUBLICATION STEP
+    87af2706   b534db77   IDENTICAL   evidence: PUBLISH THE POST-COMMIT MEASUREMENT — mg-6
+    cca52f71   e5787e11   IDENTICAL   evidence: PUBLISH THE POST-COMMIT MEASUREMENT, AND T
+    fc981420   3bc2cf76   IDENTICAL   evidence: PUBLISH THE POST-COMMIT MEASUREMENT, WITH 
+    982fb94d   75333b24   IDENTICAL   evidence: S4a reads what is PUBLISHED rather than wh
+    cada54fe   f93e41f3   IDENTICAL   evidence: THE INSTRUMENT THAT RAISED THE FINDINGS, R
+    fa36794f   72099115   IDENTICAL   evidence: e2's own transcript regenerated with the r
+    4a06b4cd   a91cf9ea   IDENTICAL   evidence: mg-132a's transcript — 18 checks, 0 refute
+    434020c7   2a29f30e   IDENTICAL   evidence: mg-218d's 16 re-run UNMODIFIED (10 silent 
+    c1a57fdd   3958b5a8   IDENTICAL   evidence: mg-6df0's transcript REGENERATED BY ITS OW
+    e545a2cc   0498b2b7   IDENTICAL   evidence: mg-a74f's out_run_all.txt as it stood BEFO
+    72dd6bb7   61de1213   IDENTICAL   evidence: regenerate the mg-2da3 control's committed
+    85553b0b   3756553d   IDENTICAL   evidence: regenerate the mg-2da3 control's committed
+    c5359e3a   f5360bfc   IDENTICAL   evidence: regenerate the mg-8916 repair instrument's
+    4daa1fc7   25392406   IDENTICAL   evidence: the committed outputs of a full run — 8 of
+    5e845024   5594c69a   IDENTICAL   evidence: the committed outputs of a full run, plus 
+    3d7b32fd   bd6eaec9   IDENTICAL   evidence: the committed transcript of the mg-3f3b su
+    afafa501   bf208bca   IDENTICAL   evidence: the committed transcript of the mg-65eb su
+    525f7c96   120ff668   IDENTICAL   evidence: the committed transcript of the mg-97fb su
+    912777c6   cd039161   IDENTICAL   evidence: the committed transcript of the mg-a74f su
+    6229e18a   6fb424fc   IDENTICAL   evidence: the committed transcripts of the mg-0120 s
+    b369193b   3fbf6f68   IDENTICAL   evidence: the committed transcripts of the mg-19ec s
+    6c90534e   1729f69b   IDENTICAL   evidence: the committed transcripts of the mg-4adb s
+    6b2a7c09   be06d367   IDENTICAL   evidence: the committed transcripts of the mg-56dc s
+    e84ab662   7f0546b2   IDENTICAL   evidence: the committed transcripts of the mg-5f7c s
+    c6699752   fe6a4952   IDENTICAL   evidence: the committed transcripts of the mg-6e58 s
+    b4c341c6   973ca612   IDENTICAL   evidence: the committed transcripts of the mg-70c7 s
+    e9da6f28   83bdf986   IDENTICAL   evidence: the committed transcripts of the mg-7522 s
+    56d9da35   b1c34670   IDENTICAL   evidence: the committed transcripts of the mg-b2af s
+    6fc8da3f   ba853873   IDENTICAL   evidence: the committed transcripts of the mg-dee4 s
+    d8c887f8   47e56b3b   IDENTICAL   evidence: the six mg-c067 transcripts RE-RUN rather 
+    e0910acd   eab14bc4   IDENTICAL   fix: TWO MORE DEFECTS OF THIS INSTRUMENT, found only
+    6e15a1a4   4ad011a2   IDENTICAL   fix: mg-c067's own figure grammar crossed a newline 
+    b0066975   4203bc86   IDENTICAL   instrument+docs: mg-d075's counter-instrument and it
+    91202e1c   eaeedb8b   IDENTICAL   instrument: THE WAYS READ OUT OF `man git-log` RATHE
+    7dc91808   aa8309df   IDENTICAL   instrument: mg-132a takes answer (2) — the anchor is
+    f3094927   3edd19dc   IDENTICAL   predictions: mg-0120's predictions for the repair of
+    9f1ecaac   6fda370d   IDENTICAL   predictions: mg-03d1's predictions for the INDEPENDE
+    e5d37a41   d7d84790   IDENTICAL   predictions: mg-0ba7's predictions for the INDEPENDE
+    d24bbeb5   53f6ca39   IDENTICAL   predictions: mg-132a's decision and predictions, com
+    170094f3   410ae057   IDENTICAL   predictions: mg-19ec's predictions, committed BEFORE
+    28c8029f   d41ed851   IDENTICAL   predictions: mg-1d26's predictions for the repair of
+    20a0e17a   fb740136   IDENTICAL   predictions: mg-2c77's predictions, committed BEFORE
+    71a1f55b   07b65e27   IDENTICAL   predictions: mg-330a's predictions for the independe
+    2e48b678   9584cd1e   IDENTICAL   predictions: mg-4adb's predictions, committed BEFORE
+    6aa043a8   abb95b08   IDENTICAL   predictions: mg-56dc's predictions for the independe
+    e3fb80e3   bdeab768   IDENTICAL   predictions: mg-5f7c's predictions for the suppressi
+    880fc154   99ee542d   IDENTICAL   predictions: mg-65eb's predictions for the INDEPENDE
+    90e0ceea   a9132783   IDENTICAL   predictions: mg-6e58's predictions for the repair of
+    b2a849be   cd08be1a   IDENTICAL   predictions: mg-6ef4's predictions, committed BEFORE
+    93bd6892   1f2e30d3   IDENTICAL   predictions: mg-70c7's predictions for the six mg-de
+    41bdbfa1   c4203035   IDENTICAL   predictions: mg-8af0's predictions for the F1/F2/F3 
+    f7a30d13   e2577e55   IDENTICAL   predictions: mg-8d5e's predictions, committed BEFORE
+    53091324   9237de01   IDENTICAL   predictions: mg-97fb's predictions for the independe
+    739f7bd9   cfd2af58   IDENTICAL   predictions: mg-a74f's predictions for the repair of
+    f714b4ce   002b0e9b   IDENTICAL   predictions: mg-aaf4's predictions for the INDEPENDE
+    7bd0056b   06c9271e   IDENTICAL   predictions: mg-b2af's predictions for the repair of
+    37380799   bba2a3ce   IDENTICAL   predictions: mg-bf79's predictions for the repair of
+    0df8ec7d   1f54bf9b   IDENTICAL   predictions: mg-c067's predictions for the independe
+    ec983004   424f6061   IDENTICAL   predictions: mg-d075's predictions for the bounding 
+    79e23c89   5c4c641d   IDENTICAL   predictions: mg-d53d's predictions for the independe
+    72e36cb1   9c54a99d   IDENTICAL   predictions: mg-f3ff's predictions for the re-deriva
+    064c79c1   7a35eacd   IDENTICAL   predictions: mg-fcb2's predictions for the independe
+    d1b29e5b   c338e5ee   IDENTICAL   probe: key S3's dispositions on line CONTENT instead
+    e0e89e88   f1270d3f   IDENTICAL   probe: mg-16eb's OWN battery on the repaired tree (6
+    033dd838   fe386263   IDENTICAL   probe: mg-3f3b instrument fixes found by its own PRE
+    1d1d5b18   979df724   IDENTICAL   probe: mg-3f3b's instrument and its predictions, COM
+    7cee1a1c   8c76d424   IDENTICAL   probe: mg-7e39's instrument and its predictions, COM
+    c2f1854c   2919d28a   *** ALTERED *** probe: price the Hodge-side bet — the top two dimens
+    621b0a60   5b630376   IDENTICAL   probe: the committed lrb_output.txt now says what "u
+    3145e879   803bd50a   IDENTICAL   probe: the probes and the predictions, COMMITTED BEF
+    89d6aa1b   cb9f2829   IDENTICAL   repair+docs: S4a re-keyed onto THE COMMIT THE FIGURE
+    8a07ae01   657565eb   IDENTICAL   repair+docs: the population line scoped to the popul
+    c787f290   842a06c2   IDENTICAL   repair+instrument: THE AUDITOR'S SIX CONSTANT VERDIC
+    4fd4f326   4564bdd0   IDENTICAL   repair+instrument: THE SUPPRESSION INSTRUMENT NOW FA
+    1d2a8a19   14c6c3b3   IDENTICAL   repair+instrument: mg-330a's CENSUS IS DISPLACED BY 
+    f2f285ef   e76c26f1   IDENTICAL   repair+probe: mg-16eb's SIX BROKEN CLAIMS REPAIRED B
+    83f218c2   39423190   IDENTICAL   repair: EIGHT IS NOT THE POPULATION EITHER — the 33-
+    a8d1723d   534c06bd   IDENTICAL   repair: F1 — the site count is MEASURED, not the den
+    903a2e9e   0c3a2ba0   IDENTICAL   repair: F2 FIRST — the V6 row no longer scores again
+    12a1553c   66130f8f   IDENTICAL   repair: F3 — ALL FOUR >=3-facet zeros are FORCED, no
+    e1eb5c8a   d456f583   IDENTICAL   repair: THE GRAIN, THE ANCHOR, THE RULE AND THE POPU
+    351269c3   d073b5d6   IDENTICAL   repair: THE HOLE IS CLOSED AND EVERY ONE OF THE SIX 
+    6b44c001   1ee1f1b8   IDENTICAL   repair: THE POPULATION IS A PREDICATE AND THE CENSUS
+    897d0d20   c7f9079f   IDENTICAL   repair: make the census position-aware over the WHOL
+    b096dce4   d59ecd99   IDENTICAL   repair: make the figure census POSITION-AWARE and ma
+    5533bdb7   675c2bae   IDENTICAL   repair: mg-56dc's FOUR closed and the floor item not
+    5b3f3ecc   11ef9a9c   IDENTICAL   repair: split (e) into two rows so the deletion test
+    de39eb6d   5bd0d71e   IDENTICAL   rescue: mg-c067's uncommitted c2_anchors.py and READ
+    36a860d8   2d771068   IDENTICAL   wip: regenerate the two transcripts this repair move
+[MEASURED ] T4c of 234 pre-rebase/on-main pairs visible in this object store, 232 are patch-id IDENTICAL and 2 are not.  A non-identical patch-id is a CANDIDATE and not yet a verdict: T4c' adjudicates each one, because `the content differs` and `a rebase altered the content` are different claims
+
+------------------------------------------------------------------------------
+T4c' -- EVERY CANDIDATE ADJUDICATED, BECAUSE PATCH-ID ALONE CANNOT NAME THE CAUSE
+------------------------------------------------------------------------------
+
+A patch-id compares DIFFS.  Two commits can carry identical content and still
+disagree on patch-id, because a diff is a fact about a base as well as about a
+tree.  So every candidate is put through a ladder of pure-git discriminators
+and only what survives all of them is reported as content alteration.
+
+  1  DOES ANY SHARED FILE ACTUALLY DIFFER?  If the two commits produce
+     byte-identical blobs at every path they both touch, nothing this commit
+     authored was altered.  The patch-ids differ because the path SETS differ:
+     hunks the new base had already absorbed drop out of the replay.  This is
+     a rebase working correctly and it is NOT damage.
+
+  2  COULD A CONFLICT EVEN HAVE OCCURRED?  A path the commit CREATES did not
+     exist on the base being replayed onto, so a rebase cannot have conflicted
+     in it.  If every differing path is created by the commit itself, the
+     difference was AUTHORED -- the branch was reworked and resubmitted.
+
+  3  Anything else -- a pre-existing file whose content differs between the two
+     -- is what the addendum asked to be counted, and it is named in full.
+
+    257acd33 -> bee07a15
+        docs+repair: THE CENSUS IS POSITION-AWARE AND SUMMARY vs ROWS READS TH
+        paths 9 vs 9, shared 9, differing 2, of which CREATED BY THIS COMMIT 2
+        VERDICT  AUTHORED -- every differing path is created by the commit, so no rebase could have conflicted in it.  The branch was reworked and resubmitted
+                 code/hodge_leverage_repair_8eca/out_repair_8eca.txt
+                 code/hodge_leverage_repair_8eca/repair_8aae.py
+    c2f1854c -> 2919d28a
+        probe: price the Hodge-side bet — the top two dimensions are graph the
+        paths 20 vs 14, shared 14, differing 0, of which CREATED BY THIS COMMIT 0
+        VERDICT  CONTENT SURVIVED -- every one of the 14 shared paths is byte-identical in both.  The patch-ids differ only because the path sets do: 6 hunk(s) the new base had already absorbed dropped out of the replay
+                 only in the pre-rebase commit: .gitignore
+                 only in the pre-rebase commit: code/face_geometry/__pycache__/controls.cpython-314.pyc
+                 only in the pre-rebase commit: code/face_geometry/__pycache__/face_complex.cpython-314.pyc
+                 only in the pre-rebase commit: code/face_geometry/__pycache__/posets.cpython-314.pyc
+                 only in the pre-rebase commit: code/face_geometry_audit_e0ce/__pycache__/audit_extra.cpython-314.pyc
+                 only in the pre-rebase commit: code/face_geometry_audit_e0ce/__pycache__/audit_rebuild.cpython-314.pyc
+[OK       ] T4c'' THE THIRD BUCKET, AFTER ADJUDICATION: 0 pair(s) show a rebase altering the content of a pre-existing file.  Patch-id ALONE flagged 2; of those, 1 survived with byte-identical content and only an absorbed hunk, and 1 were branch reworks in files the commit itself creates
+[MEASURED ] T4c''' AND THAT IS THE CATCH IN PATCH-ID, MEASURED RATHER THAN WARNED ABOUT: 1 of 234 pairs in this arc carry identical content under DIFFERENT patch-ids.  Patch-id is the right instrument against ancestry's false negative, and it has a false negative of its own whenever the replay absorbs a hunk.  A census built on patch-id alone would have reported these as damage
+[MEASURED ] T4c' COVERAGE: this answer is over the 234 pairs still visible, not over every rebase the refinery has ever performed.  A twin whose reflog entry has expired is invisible here and its absence is NOT evidence that its rebase was clean
+
+------------------------------------------------------------------------------
+T4d -- THE THREE SAMPLES IN THE BRIEF, RE-DERIVED RATHER THAN REPEATED
+------------------------------------------------------------------------------
+
+PROVENANCE: these three pairs are the MAYOR'S measurements, quoted in the
+mg-1abe brief.  They are re-derived here from the object store rather than
+carried forward as numbers, because a figure repeated without re-derivation
+cannot be chased back to anything.
+
+    ticket    recorded   on-main    ancestry    patch-id
+    mg-f3ff   72e36cb    9c54a99    NOT an ancestor IDENTICAL
+    mg-fcb2   064c79c    7a35eac    NOT an ancestor IDENTICAL
+    mg-65eb   880fc15    99ee542    NOT an ancestor IDENTICAL
+[OK       ] T4d 3 of the 3 samples in the brief re-derive to patch-id-IDENTICAL here.  Re-derived, not repeated
+[MEASURED ] T4d' every one of those three is ALSO reported by ancestry as not on main.  That is the false negative the brief warns about, reproduced here on purpose so the two instruments can be seen disagreeing on the same three commits
+
+SELF-ERRORS 0
+FINDINGS 0
+TOTAL BAD: 0

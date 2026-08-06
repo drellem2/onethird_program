@@ -1,0 +1,80 @@
+==============================================================================
+t7 -- THE TICKET'S THREE SIGHTINGS, RE-DERIVED
+==============================================================================
+    code-digest: 29ab59a4f1f51e3d   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/transcript_census_1abe;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of      81214a9c02ee624dc1261c69db50d47ed659728f  (81214a9c02ee624dc1261c69db50d47ed659728f)
+
+------------------------------------------------------------------------------
+T7a -- SIGHTING 1: DO mg-b2af'S TRANSCRIPTS REPRODUCE AT THE PRE-REBASE TWIN?
+------------------------------------------------------------------------------
+    the twin                    b94cb1ed  audit: the mg-330a instrument — every derive
+    reachable from 81214a9c02ee624dc1261c69db50d47ed659728f?        NO
+    the carrying commit today   b1c34670  evidence: the committed transcripts of the m
+    the twin's tree holds code/repair_b2af?   NO
+
+    suite exit at the twin b94cb1e : 1
+    suite exit at the carrier b1c3467 : 1
+
+    transcript                         at twin        at carrier
+    out_selftest_b2af.txt              DIFFERS        REPRODUCES
+    out_t1_population.txt              DIFFERS        DIFFERS
+    out_t2_gate.txt                    DIFFERS        DIFFERS
+    out_t3_term.txt                    DIFFERS        REPRODUCES
+    out_t4_preserve.txt                DIFFERS        DIFFERS
+[MEASURED ] T7a 0 of 5 mg-b2af transcripts reproduce BYTE-FOR-BYTE with HEAD at the pre-rebase twin b94cb1e, and 2 of 5 at the commit carrying them
+[FINDING  ] T7a' THE SECOND HALF OF SIGHTING 1 IS CONFIRMED: the ticket says these do not reproduce at the commit they now sit behind on main, and 3 of 5 do not
+
+    T7a'' AND THE FIRST HALF IS NOT CONFIRMED AT THIS GRAIN -- WHICH IS A
+    STATEMENT ABOUT MY TEST BEFORE IT IS A STATEMENT ABOUT THE TICKET.
+
+      THE TICKET'S CLAIM  ten FIGURES reproduce at the twin.
+      MY TEST             whole TRANSCRIPTS reproduce byte-for-byte.
+      Mine is strictly stronger, so failing it does not refute the ticket's.
+      A transcript can carry ten correct figures and still differ in an
+      eleventh, in a column width, or in a list that got longer.
+
+      TWO FURTHER REASONS NOT TO READ THIS AS A REFUTATION.  First, the twin's
+      tree does not contain code/repair_b2af at all, so the twin run is a
+      SYNTHETIC STATE -- the carrier's code with the twin's HEAD -- that never
+      existed and that nobody ever committed.  Second, the suite reads history
+      as well as HEAD, and history at the twin is not the history the run saw.
+
+      WHAT IS SOLID: at the twin the figure `HISTORY-DERIVED` reads 16 and the
+      committed transcript says 19.  The ticket itself dates the 16 -> 19
+      change to BETWEEN the twin and the carrier.  So on that one figure the
+      committed transcript matches the LATER state, not the twin's.  That is
+      one figure, re-derived, and it does not settle the other nine.
+    
+
+------------------------------------------------------------------------------
+T7b -- SIGHTING 2: WHAT HAPPENED TO THE REPAIR
+------------------------------------------------------------------------------
+
+The ticket describes mg-c067's six transcripts as the pre-fix run committed
+beside the fix at 4ad011a, and says nothing caught it for five days.  mg-c3a2
+then RE-RAN them.  This row follows the re-run, with no execution at all --
+every step is a git lookup a reader can repeat.
+
+    the transcript on 81214a9c02ee624dc1261c69db50d47ed659728f      code/audit_c067/out_c2_anchors.txt
+    its carrying commit       47e56b3b  evidence: the six mg-c067 transcripts RE-RUN rathe
+    the commit it DECLARES    de39eb6d  rescue: mg-c067's uncommitted c2_anchors.py and RE
+    declared commit on 81214a9c02ee624dc1261c69db50d47ed659728f?    NO
+    its patch-id twin on 81214a9c02ee624dc1261c69db50d47ed659728f   5bd0d71e  rescue: mg-c067's uncommitted c2_anchors.py and RE
+[FINDING  ] T7b THE REPAIR WAS ITSELF DISPLACED, IN THE SAME MERGE THAT LANDED IT.  mg-c3a2 re-ran these six transcripts to fix a displacement; the re-run measured de39eb6, which is its own pre-rebase commit; the refinery rebased it to 5bd0d71; and the transcripts now sit at 47e56b3 declaring a commit that is not on 81214a9c02ee624dc1261c69db50d47ed659728f.  The remedy and the defect are the same shape
+
+------------------------------------------------------------------------------
+T7c -- SIGHTING 3, AND WHAT IS NOT RE-DERIVED HERE
+------------------------------------------------------------------------------
+    mg-132a coined the word DISPLACED.  Its 1 transcript(s) are in the t2 population and are re-run there like any other member; nothing additional is derived in this script.
+      code/publication_anchor_132a/out_anchor_132a.txt
+[MEASURED ] T7c mg-132a's sighting is NOT independently re-derived here.  It is measured only insofar as t2 measures its transcripts, and a reader who wants the sighting itself checked should read that as an outstanding item rather than as done
+
+SELF-ERRORS 0
+FINDINGS 2
+TOTAL BAD: 2
