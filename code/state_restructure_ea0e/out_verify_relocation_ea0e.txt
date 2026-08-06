@@ -1,0 +1,89 @@
+==============================================================================
+mg-ea0e RELOCATION VERIFICATION -- STATE.md at 78ae4d9 vs the working tree
+==============================================================================
+
+Reachable corpus from the new STATE.md: 13 linked markdown files
+
+[C0] VERBATIM COVERAGE -- every old line, or every column of every rewritten row, still present character for character
+  PASS  every old line/column is present verbatim in STATE.md or a linked file  --  108 lines in place, 167 relocated verbatim, 17 rewritten rows decomposed, 0 missing
+
+[A1] BYTE ACCOUNTING -- a relocation that loses bytes lost content
+      (1) old STATE.md                                    186,710 bytes
+      (2) new STATE.md                                     32,772 bytes
+          of which composed link boilerplate                2,796 bytes
+          of which old text, still in place                29,976 bytes
+      (3) old text relocated, found VERBATIM elsewhere    157,996 bytes
+      ------------------------------------------------------------------
+          (2)-composed + (3) = 29,976 + 157,996 = 187,972  vs old 186,710   surplus +1,262
+  PASS  kept + relocated >= old  (no byte of STATE.md was dropped)  --  surplus is text carried in BOTH places: each row's retained sentence is also in its history file
+
+      destination files, before -> after:
+        docs/audit-stage-process.md                                 0 ->   91,937  (+91,937)
+        docs/state-history/README.md                           31,546 ->   34,433  (+2,887)
+        docs/state-history/attempt-mg-210d.md                   2,128 ->    5,270  (+3,142)
+        docs/state-history/attempt-mg-276d.md                   9,049 ->   19,076  (+10,027)
+        docs/state-history/attempt-mg-3af9.md                   5,752 ->   13,596  (+7,844)
+        docs/state-history/attempt-mg-63e3.md                   9,808 ->   18,167  (+8,359)
+        docs/state-history/attempt-mg-88bd.md                   6,913 ->   13,050  (+6,137)
+        docs/state-history/attempt-mg-a3d4.md                  21,375 ->   35,827  (+14,452)
+        docs/state-history/attempt-mg-a58f.md                   3,426 ->    8,307  (+4,881)
+        docs/state-history/threads-chronology.md                    0 ->   23,316  (+23,316)
+        TOTAL                                                  89,997 ->  262,979  (+172,982)
+      corpus total, old: 276,707   new: 295,751   (+19,044)
+  PASS  the corpus as a whole did not shrink
+
+[A2] THE NEW FILE'S SHAPE
+      words          4,658   (target < 6,000)
+      lines            176
+      longest line   1,772 chars at :124   (target < 2,000)
+      was           29,094 words / 387 lines / longest 13,367 chars
+  PASS  word count under target
+  PASS  longest line under target
+
+[A3/A4] mg-id REACHABILITY -- the population enumerated, not assumed
+      mg-ids in the OLD STATE.md: 68
+      mg-ids in the NEW STATE.md: 35  (34 of the old population)
+      first reachable in:
+        STATE.md                                               34
+        docs/audit-stage-process.md                            14
+        docs/state-history/README.md                            7
+        docs/state-history/attempt-mg-a3d4.md                   6
+        docs/state-history/threads-chronology.md                3
+        docs/state-history/attempt-mg-276d.md                   2
+        docs/state-history/ledger-row-11-L4.md                  1
+        docs/state-history/attempt-mg-a58f.md                   1
+      mg-ids that left STATE.md but remain reachable: 34
+        mg-09ea, mg-2789, mg-2c34, mg-34bf, mg-3c24, mg-3ce3, mg-3f21, mg-446b, mg-4ad1, mg-6016, mg-60d3, mg-6653, mg-66a6, mg-6a2f, mg-7735, mg-7ae7, mg-7d5a, mg-8201, mg-8a12, mg-8a5c, mg-8e30, mg-8fd1, mg-a053, mg-a318, mg-ae62, mg-bd41, mg-dbd1, mg-e1d0, mg-e720, mg-f1b2, mg-f2e1, mg-f7bc, mg-f922, mg-fcf1
+  PASS  every mg-id of the old file is still reachable  --  0 unreachable
+      per-file mg-id counts (A4):
+        STATE.md                                               35 distinct
+        docs/audit-stage-process.md                            52 distinct
+        docs/state-history/README.md                           26 distinct
+        docs/state-history/attempt-mg-210d.md                   5 distinct
+        docs/state-history/attempt-mg-276d.md                  19 distinct
+        docs/state-history/attempt-mg-3af9.md                   7 distinct
+        docs/state-history/attempt-mg-48ab.md                   3 distinct
+        docs/state-history/attempt-mg-63e3.md                   9 distinct
+        docs/state-history/attempt-mg-88bd.md                  11 distinct
+        docs/state-history/attempt-mg-a3d4.md                  17 distinct
+        docs/state-history/attempt-mg-a58f.md                  14 distinct
+        docs/state-history/attempt-mg-c47a-drop.md              2 distinct
+        docs/state-history/ledger-row-11-L4.md                  4 distinct
+        docs/state-history/threads-chronology.md               19 distinct
+
+[A5] CORRECTION MARKERS -- none may vanish silently
+      STRUCK       old    8   new STATE.md    2   reachable corpus    13
+      RETRACTED    old    0   new STATE.md    0   reachable corpus     2
+      RETIRED      old    2   new STATE.md    0   reachable corpus     3
+      CORRECTED    old    5   new STATE.md    0   reachable corpus     7
+      SUPERSEDED   old    1   new STATE.md    1   reachable corpus     1
+      REFUTED      old    6   new STATE.md    3   reachable corpus    10
+      DISCHARGED   old    5   new STATE.md    2   reachable corpus     7
+      BROKEN       old   43   new STATE.md   11   reachable corpus    71
+      withdrawn    old    4   new STATE.md    1   reachable corpus     4
+      void         old    5   new STATE.md    2   reachable corpus     9
+  PASS  every correction/retraction marker survives in the reachable corpus  --  0 lost
+
+==============================================================================
+RESULT: PASS -- every check green
+exit 0

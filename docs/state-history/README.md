@@ -43,6 +43,46 @@ three-way contradiction survive is now stronger, not weaker.*
 > never the repair of it. `57f962f`'s commit message is frozen and still carries its list, so
 > this is where the correction lives.
 
+## The convention was finished, not changed — mg-ea0e, 2026-08-06
+
+**mg-34bf left this convention half-applied and mg-ea0e finished it**, on pm-onethird's
+relocation spec (mg-ea0e), which is Daniel's *"it should be an executive summary"* directive
+of 2026-08-06 turned into three mechanical moves. `STATE.md` went **186,710 → 32,772 bytes**
+and **29,094 → 4,658 words**, and its longest line went **13,367 → 1,772 characters**.
+Nothing was deleted; three things moved.
+
+1. **The seven oversize attempt-index cells now carry their status label, their own opening
+   sentence verbatim, and a link** — and each file below gained a
+   `## Full cell text before the mg-ea0e relocation (2026-08-06)` section holding **that
+   cell's entire text, all three columns, character for character**:
+   [`attempt-mg-210d.md`](attempt-mg-210d.md), [`attempt-mg-a58f.md`](attempt-mg-a58f.md),
+   [`attempt-mg-88bd.md`](attempt-mg-88bd.md), [`attempt-mg-63e3.md`](attempt-mg-63e3.md),
+   [`attempt-mg-3af9.md`](attempt-mg-3af9.md), [`attempt-mg-276d.md`](attempt-mg-276d.md),
+   [`attempt-mg-a3d4.md`](attempt-mg-a3d4.md). The `H1`… sections above them are untouched;
+   passages mg-34bf had already relocated recur inside the appended section only because it
+   is the whole cell. Rows `:114` and `:124`, under the 2,000-character acceptance
+   threshold, were **not** touched.
+2. **The prose narrative this file records as out of scope** — *"`STATE.md:138–176`"*, the
+   § *Where the threads converge* chronology — is now
+   [`threads-chronology.md`](threads-chronology.md), whole and unedited. `STATE.md` keeps a
+   short current-position paragraph and the link. That bullet's observation was right: those
+   paragraphs *"carry the same claim-beside-its-own-retraction shape."*
+3. **Appendix A** — recorded below as *"byte-identical to the base commit `60f4dac`"*, which
+   remains true of mg-34bf's change — is now
+   [`../audit-stage-process.md`](../audit-stage-process.md), whole and unedited. **So the two
+   Appendix-A line references below, `STATE.md:343` and `:356`, resolve into that file now,
+   not into `STATE.md`.**
+
+**The index table below is still correct and was re-checked, not assumed.** `STATE.md` lines
+`1–129` are **byte-identical** to the base commit `78ae4d9`, so `:89`, `:114`, `:124` and
+`:130`–`:136` still name the rows this file says they do; the mg-ea0e edits inside that range
+are confined to the interiors of rows `:130`–`:136` and inserted or deleted no line. What
+mg-ea0e did break is the *line-count* invariant recorded below: `STATE.md` is now 176 lines,
+not 387, and every line reference **after** `:141` is stale. Re-derived by
+`code/state_restructure_ea0e/verify_relocation_ea0e.py`, whose transcript is committed beside
+it: **0 of the old file's 68 mg-ids unreachable, 0 correction markers lost, 0 lines or ledger
+columns missing.**
+
 ## The rule
 
 1. **A row asserts current state only.** What is true now, at what status, over what
