@@ -1,0 +1,62 @@
+mg-ec63 / SELFTEST
+
+
+==========================================================================
+T1  THE SIX RUNNER IDIOMS, AND THE TWO ARGUMENT ORDERS
+==========================================================================
+  ok   direct redirect                                            got [('code/t_fixture/p1.py', 'code/t_fixture/out_p1.txt', 'TRUNC')]
+  ok   helper, PROBE first                                        got [('code/t_fixture/p1.py', 'code/t_fixture/out_p1.txt', 'TRUNC')]
+  ok   helper, OUT first (the order that flips the answer)        got [('code/t_fixture/d1_trace.py', 'code/t_fixture/out_d1_trace.txt', 'TRUNC')]
+  ok   helper, out name DERIVED from the probe stem               got [('code/t_fixture/p2.py', 'code/t_fixture/out_p2.txt', 'TRUNC')]
+  ok   helper, no extension, opaque directory prefix              got [('code/t_fixture/s1_census.py', 'code/t_fixture/out_s1_census.txt', 'TRUNC')]
+  ok   a LOOP is N steps, not one                                 got ['code/t_fixture/p1.py', 'code/t_fixture/p2.py', 'code/t_fixture/p3.py']
+
+==========================================================================
+T2  THE OPERATORS TOLD APART
+==========================================================================
+  ok   `.new` + `mv` is STRUCT, and the target loses `.new`       got [('code/t_fixture/p1.py', 'code/t_fixture/out_p1.txt', 'STRUCT')]
+  ok   `>>` is APPEND, not TRUNC                                  got ['APPEND']
+  ok   no redirect is STREAM                                      got [('code/t_fixture/p1.py', None, 'STREAM')]
+
+==========================================================================
+T3  WHAT IT REFUSES TO GUESS AT, AND WHAT IT REFUSES TO INVENT
+==========================================================================
+  ok   a `cd` into another tree is UNRESOLVED, not mis-attributed got []
+  ok   ...and is reported                                         got 1
+  ok   a QUOTED argument with spaces is ONE argument              got [('code/t_fixture/p1.py', None, 'STREAM')]
+       ^ split on whitespace this reads a probe called `can` writing a
+         transcript called `the`, which is what it did before shlex.
+  ok   prose that TALKS about a step is not a step                got []
+  ok   a commented-out step is not a step                         got ['code/t_fixture/p2.py']
+
+==========================================================================
+T4  THE OPEN TRACE, ON A CONSTRUCTED PROBE
+==========================================================================
+  ok   trace sees a probe open its own transcript                 got True
+  ok   ...and B reads the real bytes                              got 'LEN 9'
+  ok   A reads NOTHING -- the shape reproduced                    got 'LEN 0'
+  ok   the tree is restored: the transcript is back               got 'SEVENTEEN'
+  ok   a probe that only MENTIONS a transcript does not open one  got False
+  ok   reading ANOTHER transcript is not the EMPTIED class        got False
+  ok   ...it is the STALE class, and is reported apart            got ['out_other.txt']
+
+==========================================================================
+T5  THE CLASSIFIER, ON CONSTRUCTED RECORDS
+==========================================================================
+  ok   identical output is SAME                                   got 'SAME'
+  ok   different output is DIFFERENT                              got 'DIFFERENT'
+  ok   B crashing where A did not is NEVER EXERCISED              got 'NEVER EXERCISED'
+  ok   B timing out where A did not is NEVER EXERCISED            got 'NEVER EXERCISED'
+  ok   a nondeterministic probe is NOT counted as DIFFERENT       got 'NONDETERMINISTIC'
+  ok   A crashing too is not NEVER EXERCISED -- the probe is just broken got 'DIFFERENT'
+  ok   A timing out is NOT a difference -- A never finished       got 'A TIMED OUT'
+  ok   ...and if both time out, neither run answered anything     got 'BOTH TIMED OUT'
+  ok   the classifier tested here is the one s3 uses (checked by reading it) got True
+
+==========================================================================
+T6  THE POPULATION RULE'S OWN EDGE
+==========================================================================
+  ok   a step whose transcript does not exist yields a path, not a crash got True
+  ok   locate finds a CROSS-TREE probe by its repo-relative path  got 'code/truncate_sweep_ec63/lib_ec63.py'
+
+selftest_ec63 TOTAL: 32 assertions, 0 BAD

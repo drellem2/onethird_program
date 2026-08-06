@@ -1,0 +1,50 @@
+mg-ec63 / S5 -- THE POSITIVE CONTROL (mg-bf79's NINE HIDDEN LABELS)
+HEAD: e60c3c9
+
+==========================================================================
+S5a  THE TREE, AND WHY IT IS NOT IN THE SWEPT POPULATION
+==========================================================================
+  code/runner_exit_repair_bf79
+  resolved steps: 6, operators: STRUCT
+
+  Its runner writes `X.new` and `mv`s it, so nothing is empty when the
+  probe reads it.  That is the fix this ticket is NOT about applying.
+  Here the tree is used the other way round: as the one case where the
+  answer is on the record before I measure it.
+
+==========================================================================
+S5b  A AND B, AND THE DELTA
+==========================================================================
+  A (own transcript emptied first, the OLD runner's behaviour)
+      exit 0, 214 lines
+  B (own transcript holding its committed bytes)
+      exit 0, 214 lines
+
+  population: the labelled counts `p5_self.py` prints
+      ...COUNTS printed under A                                      16
+          ^ one unit of that number is one labelled count
+      ...COUNTS printed under B                                      16
+          ^ one unit of that number is one labelled count
+      ...COUNTS that DIFFER between A and B                           0
+          ^ one unit of that number is one labelled count
+
+
+  THE RECORDED ANSWER IS 9 HIDDEN LABELS.
+      a delta of 9 appears in the table above:  NO
+
+  IT DOES NOT.  The record stands and this instrument is suspect.
+  The deltas it did find are printed above rather than suppressed,
+  and S6 carries this as a defect of THIS suite.
+
+==========================================================================
+S5c  THE DIFF ITSELF, SO THE NUMBER IS NOT TAKEN ON TRUST
+==========================================================================
+      --- A(empty)
+      +++ B(populated)
+      @@ -45,3 +45,3 @@
+             out_p4_figures.txt             23     disk
+      -      out_p5_self.txt                27     HEAD (truncated on disk by run_all.sh)
+      +      out_p5_self.txt                27     disk
+             out_selftest_bf79.txt          1      disk
+
+S5 CONTROL: NOT RECOVERED

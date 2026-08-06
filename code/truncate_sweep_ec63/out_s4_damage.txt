@@ -1,0 +1,87 @@
+mg-ec63 / S4 -- WHAT WAS PUBLISHED ON THE STRENGTH OF THE EMPTY FILE
+HEAD: e60c3c9
+
+==========================================================================
+S4a  THE FIGURES THAT MOVED
+==========================================================================
+  population: the 6 DIFFERENT STEPS of S3a
+
+
+  ----------------------------------------------------------------
+  audit_2c77  ::  q3_operands.py
+  lines only in A (the defect): 1      only in B (real file): 4
+  integers on the A side that are NOT on the B side: 20, 84
+  PUBLISHED CLAIMS CARRYING ONE OF THOSE FIGURES:
+      20     README.md                    | `face_complex.py` | 35 | 15 | **20** |
+
+  ----------------------------------------------------------------
+  audit_330a  ::  s4_term.py
+  lines only in A (the defect): 3      only in B (real file): 3
+  integers on the A side that are NOT on the B side: 16, 36, 55, 86, 8
+  PUBLISHED CLAIMS CARRYING ONE OF THOSE FIGURES:
+      16     README.md                    Plus **16 call sites of the two named helpers** (`last_touching`,
+      36     README.md                    Pre-filed in the same action as its parent. Six scripts, 36 self-test
+
+  ----------------------------------------------------------------
+  branching_audit_d330  ::  e3_dispositions.py
+  lines only in A (the defect): 2      only in B (real file): 2
+  integers on the A side that are NOT on the B side: 72
+  NO PUBLISHED CLAIM carries any of those figures.  The delta is
+  confined to the transcript.  A REAL RESULT, recorded as one.
+
+  ----------------------------------------------------------------
+  repair_69d1  ::  p3_reason.py
+  lines only in A (the defect): 2      only in B (real file): 8
+  integers on the A side that are NOT on the B side: 16, 28
+  NO PUBLISHED CLAIM carries any of those figures.  The delta is
+  confined to the transcript.  A REAL RESULT, recorded as one.
+
+  ----------------------------------------------------------------
+  repair_b2af  ::  t3_term.py
+  lines only in A (the defect): 9      only in B (real file): 14
+  integers on the A side that are NOT on the B side: 13, 20, 0
+  PUBLISHED CLAIMS CARRYING ONE OF THOSE FIGURES:
+      13     PREDICTIONS.md               13 directories (of 36 sites) … plus 16 call sites with no `--format=%H`"*.
+      13     README.md                    across 13 directories, of 36 sites*. mg-330a's own committed transcript says
+      20     PREDICTIONS.md               | **P-6a** | the residue re-derived at HEAD, excluding this ticket's own files: **exactly 20**, same as mg-330a found |
+      20     README.md                    silently — the residue is **20 sites, the same 20, none missed**:
+
+  ----------------------------------------------------------------
+  runner_exit_repair_70c7  ::  r6_self.py
+  lines only in A (the defect): 1      only in B (real file): 1
+  integers on the A side that are NOT on the B side: 78
+  NO PUBLISHED CLAIM carries any of those figures.  The delta is
+  confined to the transcript.  A REAL RESULT, recorded as one.
+
+==========================================================================
+S4b  THE NEVER-EXERCISED PROBES -- A DIFFERENT KIND OF DAMAGE
+==========================================================================
+  population: the 0 NEVER-EXERCISED STEPS of S3a
+
+  These published no wrong figure.  They published a GREEN CONTROL that
+  has never been shown to work on real input, which is the shape this
+  arc has now hit five times in one night: an exit 0 over zero gate runs,
+  four verdicts pinned to the literal False, a row scoring a string
+  literal, a checker returning 0 for an absent document, and this.
+
+      (none.  Stated rather than left to silence: NO probe in the
+      emptied population fails against a populated transcript.)
+
+==========================================================================
+S4c  THE TALLY
+==========================================================================
+  population: the 6 DIFFERENT STEPS of S3a
+      ...STEPS whose changed figure REACHED PROSE (damage)            3
+          ^ one unit of that number is one step
+      ...STEPS whose delta never left the transcript                  3
+          ^ one unit of that number is one step
+
+  population: the 37 EMPTIED STEPS swept in S3a
+      ...STEPS costing the arc a published figure                     3
+          ^ one unit of that number is one step
+      ...STEPS costing the arc an unexercised control                 0
+          ^ one unit of that number is one step
+      ...STEPS costing the arc nothing                               34
+          ^ one unit of that number is one step
+
+S4 TOTAL PUBLISHED CLAIMS RESTING ON AN EMPTY FILE: 3
