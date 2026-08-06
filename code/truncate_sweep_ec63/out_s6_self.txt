@@ -1,5 +1,5 @@
 mg-ec63 / S6 -- THE DEFECTS OF THIS INSTRUMENT
-HEAD: a869ac3
+HEAD: 3fc870a
 
 ==========================================================================
 S6a  THE POPULATION SWALLOWS ME, AND BOTH NUMBERS ARE PRINTED
@@ -15,10 +15,9 @@ S6a  THE POPULATION SWALLOWS ME, AND BOTH NUMBERS ARE PRINTED
       ...RUNNERS of the arc this sweep is ABOUT                     109
           ^ one unit of that number is one `run_all.sh`
 
-      my own runner's operators: STRUCT
-      -- it uses the structural fix, so this suite is not an
-         instance of its own subject.  Which is the ONLY reason
-         S3's numbers are not partly about itself.
+      my own runner's operators: TRUNC
+
+  SD1b  AND MY OWN RUNNER CARRIES THE DEFECT I AM SWEEPING FOR
 
 ==========================================================================
 S6b  THE TRACE HOOK CANNOT SEE OUTSIDE ITS OWN PROCESS
@@ -135,13 +134,13 @@ S6e  DID THE SWEEP LEAVE THE ARC AS IT FOUND IT?
 S6f  THE ONE THIS SUITE CANNOT ANSWER ABOUT ITSELF
 ==========================================================================
 
-  SD6b  48 of 422 steps were KILLED before they could answer
+  SD6b  40 of 422 steps were KILLED before they could answer
         A probe killed at the timeout may never have reached the
         line that opens its own transcript.  S2 records it as
         not-reading, and the truth is not-known.  Every count in
         S2b is a LOWER BOUND, and S2a says so where the number is
         printed rather than in a footnote.  The population that is
-        exact is the 374 steps that finished.
+        exact is the 382 steps that finished.
 
   SD6d  the first pass ATTRIBUTED A CHILD'S READ TO ITS PARENT, and the two numbers it produced disagreed inside one run
         Before the pid went into the trace, a subprocess's opens were
@@ -154,8 +153,25 @@ S6f  THE ONE THIS SUITE CANNOT ANSWER ABOUT ITSELF
         A suite whose own two sections disagree by one is the shape
         this whole ticket is about, committed by the sweep for it.
 
-      ...STEPS now attributed to a CHILD rather than the probe        1
+      ...STEPS now attributed to a CHILD rather than the probe        5
           ^ one unit of that number is one step
+
+  SD6f  the sweep's own transcript was DESTROYED BY THE ARC IT WAS SWEEPING, twice
+        Two full passes produced a ZERO-BYTE `out_s2_bite.txt` beside
+        an exit code of 32 -- the probe ran, found 32 emptied steps,
+        and its transcript was gone.  The summary that reads every
+        `S[0-9] TOTAL` line out of the transcripts simply had no S2
+        row: A VACUOUS PASS OF EXACTLY THE SHAPE THIS TICKET IS ABOUT,
+        produced by the sweep for it.  A 40-step subset of the same
+        probe writes its transcript perfectly, so the destroyer is one
+        of the arc's own probes and not this code -- and I did not
+        identify WHICH.  That is in README.md under WHAT I DID NOT DO.
+        The repair is structural rather than another guard: a suite
+        that runs 422 of the arc's probes cannot keep its in-flight
+        output inside the arc.  Every transcript, the ledger, the shim
+        and the trace files now live under `$EC63_WORK` outside the
+        repository, and land in the tree only after the last probe has
+        exited -- the only moment nothing else is running.
 
   SD7   A and B are two runs, not one run observed twice
         `diff(A, B)` is attributed to the shape.  The determinism
@@ -166,4 +182,4 @@ S6f  THE ONE THIS SUITE CANNOT ANSWER ABOUT ITSELF
         between A and B.  No row is currently attributed to that, and
         no row is currently ruled out of it either.
 
-S6 TOTAL DEFECTS OF THIS INSTRUMENT: 10
+S6 TOTAL DEFECTS OF THIS INSTRUMENT: 12
