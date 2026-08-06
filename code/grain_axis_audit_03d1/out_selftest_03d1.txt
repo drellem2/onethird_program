@@ -1,0 +1,44 @@
+mg-03d1 -- SELF-TEST
+
+  population: the 25 CASES below, each an input whose answer is known
+  by construction
+
+      label_grain: CAPITALISED noun wins over a later lowercase one    ok
+      label_grain: ...and reports the stage it used                    ok
+      label_grain: THE FIRST-DRAFT ANSWER IS NOT PRODUCED any more     ok
+      label_grain: a noun claimed by an embedded count is skipped, and ok
+      label_grain: header fallback offers the header's nouns           ok
+      label_grain: no noun anywhere is `-`, not a guess                ok
+      label_grain: lowercase head noun when nothing is capitalised     ok
+      embedded_counts: finds the count inside a label                  ok
+      embedded_counts: a bare label has none                           ok
+      embedded_counts: a line reference `:214` is not a count          ok
+      embedded_counts: two counts inside one label are both found      ok
+      top_alts: splits at depth 0 only                                 ok
+      top_alts: an escaped pipe is not a separator                     ok
+      top_alts: a pipe in a character class is not a separator         ok
+      top_alts: `proven` is one of lib7522.MARK's alternatives         ok
+      singular: rows -> row                                            ok
+      singular: `species` -> `specy` -- THE CRUDE RULE, KEPT VISIBLE   ok
+      grain_nouns: takes the last content word                         ok
+      grain_nouns: drops stop words                                    ok
+      my_rows: returns (file, line, basename) triples                  ok
+      my_rows: SITES are never more than ROWS                          ok
+      my_rows: at least one site names two different scripts           ok
+      figures() STILL reads an all-decimal short revision as a figure  ok
+      a label with a wrong grain IS caught by label_grain              ok
+      ...and the pre-repair label is NOT reported as stating a grain   ok
+
+      ...CASES that pass, one CHECK each                       25
+      ^ one unit of that number is one self-test case
+      ...CASES that fail, one CHECK each                        0
+      ^ one unit of that number is one self-test case
+
+  RECORDED, NOT REPAIRED: `singular('species') == 'specy'`.  The
+  de-pluraliser is crude and this case proves it, which is why the case
+  asserts the WRONG answer rather than being deleted.  A1d prints the
+  full extracted vocabulary so a reader can see every merge it made;
+  trimming the list would make its collapse ratio a fact about my
+  trimming.  See `a6_self.py`/AS5.
+
+selftest03d1 TOTAL BAD: 0

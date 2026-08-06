@@ -1,0 +1,166 @@
+mg-03d1 / A4 -- THE TRUNCATE-BEFORE-PROBE SWEEP
+HEAD: 9f1ecaa
+
+==========================================================================
+A4a  THE POPULATION, AND HOW EACH RUNNER REDIRECTS
+==========================================================================
+
+  population: every directory under `code/` holding a `run_all.sh`,
+  found by a glob over the whole of `code/` -- a PROPERTY, not a list
+      ...RUNNERS in the arc                                   109
+      ^ one unit of that number is one `run_all.sh`
+
+  population: the 109 RUNNERS above, by how each writes its transcripts
+      ...RUNNERS that redirect with a plain `>`                86
+      ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS that write `.new` and `mv` it                  2
+      ^ one unit of that number is one `run_all.sh`
+          code/grain_axis_audit_03d1   <- THIS AUDIT'S OWN
+          code/runner_exit_repair_bf79
+      ...of those, RUNNERS of the arc this audit is about       1
+      ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS doing neither (no transcript redirect)        21
+      ^ one unit of that number is one `run_all.sh`
+
+  BOTH NUMBERS ARE PRINTED BECAUSE THE AUDITOR JOINED THE POPULATION.
+  A4b was pre-registered as `exactly 1 -- the parent's` and the arc
+  had exactly 1 when that was written.  It has 2 now, because adopting
+  the parent's fix in this tree's own runner ADDED A MEMBER TO THE SET
+  I AM COUNTING.  Excluding myself to protect the prediction would be
+  the population defect this arc keeps recording, so the total stands
+  at 2 and the sub-count is printed beside it.
+
+==========================================================================
+A4b  AND WHERE THE SHAPE ACTUALLY BITES
+==========================================================================
+
+  A truncating runner is harmless unless a probe of the SAME RUN reads
+  a transcript that run has already emptied.  The test, per tree:
+
+    (i)  the runner truncates `out_X.txt` before running probe X, AND
+    (ii) some probe of that tree reads `out_*.txt` of its OWN tree --
+         by `outs(...)`, by a glob, or by naming an `out_` path.
+
+  Then, on every run, at least one member of the census is empty at the
+  moment it is censused, and the census cannot see it.
+
+  population: the 86 TRUNCATING RUNNERS of A4a
+      ...RUNNERS whose own probes read `out_*.txt`             43
+      ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS where the shape is inert                      43
+      ^ one unit of that number is one `run_all.sh`
+
+  THE TREES WHERE IT BITES, with the reading probes named so each row
+  can be checked:
+
+      code/anchor_population_audit_0ba7            a4_labels.py
+      code/audit_2c77                              lib2c77.py
+      code/audit_330a                              s4_term.py
+      code/audit_c067                              selftest_c067.py
+      code/branching_audit_19ec                    e1_f1_cells.py, e4_f3_control.py, e6_standing.py
+      code/branching_audit_321d                    h1_questions.py, h3_setlevel.py, h4_mine.py +1
+      code/branching_audit_5800                    a7_doc.py
+      code/branching_audit_58da                    g1_provenance.py, lib58da.py
+      code/branching_audit_957f                    j1_attribution.py, j4_reproduce.py, lib957f.py
+      code/branching_audit_a218                    c1_branching.py, c2_vertexsets.py
+      code/branching_audit_d330                    e1_vertexsets.py, e2_labels.py, e4_rerun.py
+      code/branching_audit_e34a                    k2_five.py, k3_undisturbed.py, libe34a.py
+      code/branching_repair_41aa                   check_doc.py
+      code/branching_repair_76cc                   lib76cc.py, r2_reproduce.py, r4_doccheck.py
+      code/branching_repair_7e58                   k1_grain.py, k2_selfprov.py, k3_setlevel.py
+      code/branching_warrant_dffa                  w1_ledger.py, w4_control.py
+      code/counterexample_audit_0a11               check_doc_audit.py
+      code/counterexample_repair_dea5              check_doc_repair.py
+      code/face_geometry_audit_0b07                p1_derived.py, p6_floor.py
+      code/face_geometry_audit_d0e2                e3_seams.py
+      code/face_geometry_audit_e7bc                g3_differs_under.py, g4_seams.py
+      code/face_geometry_audit_eaef                e2_bound.py, e5_floor.py
+      code/face_geometry_landing_da45              verify_landing.py
+      code/landscape_audit_d673                    audit_addenda.py
+      code/repair_69d1                             lib69d1.py
+      code/repair_8d5e                             r3_term.py
+      code/repair_b2af                             selftest_b2af.py, t3_term.py
+      code/runner_exit_audit_05eb                  selftest05eb.py
+      code/runner_exit_audit_56dc                  lib56dc.py, t1_grain.py, t2_strictest.py +1
+      code/runner_exit_audit_dee4                  a5_floor.py
+      code/runner_exit_c2b3                        k2_consume.py, k3_retro.py, k4_control.py
+      code/runner_exit_repair_70c7                 lib70c7.py, r2_anchor.py, r3_strength.py +1
+      code/runner_exit_repair_7522                 lib7522.py, s2_status.py, s4_unpin.py
+      code/species_audit_73df                      c4_scope.py, c5_doc.py
+      code/species_audit_7dd3                      d3_seam.py, statements7dd3.py
+      code/species_bound_repair_5040               kern5040.py, r3_summaries.py, r4_self.py
+      code/species_depth_audit_4700                kern4700.py, q4_standing.py
+      code/species_extent_audit_6cb9               a1_bothways.py, a2_crosssection.py
+      code/species_extent_d633                     e1_extents.py
+      code/species_gate_audit_d53d                 g1_population.py
+      code/species_repair_a4ef                     s1_extent.py, selftesta4ef.py, stricken_a4ef.py
+      code/species_rung_repair_4adb                kern4adb.py, v4_neighbours.py
+      code/species_sites_821e                      kern821e.py, selftest821e.py
+
+  THIS IS A FINDING AND NOT A REPAIR.  Fixing 43 runners would rewrite
+  43 trees' committed transcripts, every one of them another ticket's
+  evidence, and this is an audit.  What the sweep establishes is that
+  the parent's defect #7 is a PROPERTY OF THE ARC'S RUNNER IDIOM and not
+  of one script: 86 of 109 runners carry the shape and 43 of them have a
+  probe that reads what the runner just emptied.  2 of the 109 have the
+  structural fix: the one that found the defect, and this audit.
+
+==========================================================================
+A4c  AND THE FIX'S OWN LIMIT, RE-DERIVED RATHER THAN QUOTED
+==========================================================================
+
+  The parent states the limit of its own `mv`: a probe KILLED mid-write
+  leaves an `out_X.txt.new`, which no corpus picks up because it does
+  not end in `.txt`.  Checked here against the corpus rule that would
+  have to pick it up:
+
+  population: the files on disk in `code/runner_exit_repair_bf79`
+      ...FILES ending `.new` left behind                        0
+      ^ one unit of that number is one file
+      ...ARTIFACTS `lib56dc.outs()` picks up there              6
+      ^ one unit of that number is one file
+
+  The claim `no corpus picks up a .new` is a claim about the GLOB, so
+  it is checked against the glob: `out_*.txt` cannot match a name ending
+  `.new`, and 6 of 6 files there are picked up.  The guarantee is that
+  small, and the parent says so in the runner itself.
+
+==========================================================================
+A4d  DOES THE FIX CONVERGE?  RUN IT TWICE AND DIFF -- THEN RESTORE
+==========================================================================
+
+  The parent's claim is that with the `mv`, the previous run's bytes
+  survive the probe, so TWO CONSECUTIVE RUNS CONVERGE.  That is a claim
+  about running it twice and is checked by running it twice.
+
+  THIS PROBE WRITES.  It regenerates another ticket's committed
+  transcripts and then RESTORES THE EXACT BYTES with `git checkout --`,
+  asserting cleanliness afterwards and going red if the restore fails.
+  That is mg-7522's S2 idiom.  The brief forbids LEAVING another
+  ticket's evidence regenerated; it does not forbid running it.
+
+  AND THE SUBJECT OF THIS SECTION IS NAMED, NOT TAKEN BY POSITION.
+  Its first version took `newmv[0]` -- the first tree with the fix --
+  which was the parent's until this tree adopted the fix, and then it
+  was THIS ONE, alphabetically first.  The probe ran its own runner,
+  which ran this probe, which ran its own runner.  See a6_self.py/AS7:
+  a population that silently includes the auditor, which is O2's shape
+  a third time, in the sweep that measures O2's runner defect.
+
+  population: the TRANSCRIPTS `code/runner_exit_repair_bf79` writes
+      ...TRANSCRIPTS written by each run                        6
+      ^ one unit of that number is one file
+      ...TRANSCRIPTS byte-identical across two runs             6
+      ^ one unit of that number is one file
+      ...TRANSCRIPTS that still differ on the second run        0
+      ^ one unit of that number is one file
+
+  A transcript that differs between two consecutive runs at a
+  FIXED tree is a probe reading something the run itself moved.
+  Under the old `>` idiom the self-census could never converge,
+  because its own transcript was empty when it read it and full
+  when it was compared.
+
+      the tree is restored to its committed bytes    yes
+
+A4 TOTAL FINDINGS: 43

@@ -1,0 +1,305 @@
+mg-03d1 / A3 -- LABEL vs GRAIN, AND THE FOUR OPENINGS
+HEAD: 9f1ecaa
+
+==========================================================================
+A3a  ONE LOOP COUNTED BOTH WAYS, BY A SECOND ENUMERATOR
+==========================================================================
+
+  The brief says `count one loop both ways yourself`.  `lib03d1.my_rows`
+  is a second (site, target) enumerator written in this directory from
+  the STATED rule.  DISCLOSED: I had read `lib56dc`'s regexes first, so
+  this is a second derivation and not a blind one.  Its value is that
+  the two can be DIFFERENCED, and every disagreeing row is printed.
+
+  population: every (site, target) PAIR in `*.py`/`*.sh` at the pinned revision 973ca61
+      ...ROWS by `lib56dc.exec_site_rows`                      49
+      ^ one unit of that number is one (site, target) pair
+      ...ROWS by this directory's own enumerator               49
+      ^ one unit of that number is one (site, target) pair
+      ...ROWS the two enumerators disagree on                   0
+      ^ one unit of that number is one (site, target) pair
+
+  population: the same pairs, restricted to basenames OUTSIDE `run_all.sh`/`run_audit.sh`
+      ...ROWS outside the two names, theirs                    10
+      ^ one unit of that number is one (site, target) pair
+      ...ROWS outside the two names, mine                      10
+      ^ one unit of that number is one (site, target) pair
+      ...SITES behind those rows, theirs                        9
+      ^ one unit of that number is one SOURCE LINE
+      ...SITES behind those rows, mine                          9
+      ^ one unit of that number is one SOURCE LINE
+      ...the ROWS-minus-SITES gap, by my own enumerator         1
+      ^ one unit of that number is one (site, target) pair with no site of its own
+
+  population: every (site, target) PAIR in `*.py`/`*.sh` at HEAD 9f1ecaa
+      ...ROWS by `lib56dc.exec_site_rows`                      56
+      ^ one unit of that number is one (site, target) pair
+      ...ROWS by this directory's own enumerator               56
+      ^ one unit of that number is one (site, target) pair
+      ...ROWS the two enumerators disagree on                   0
+      ^ one unit of that number is one (site, target) pair
+
+  population: the same pairs, restricted to basenames OUTSIDE `run_all.sh`/`run_audit.sh`
+      ...ROWS outside the two names, theirs                    14
+      ^ one unit of that number is one (site, target) pair
+      ...ROWS outside the two names, mine                      14
+      ^ one unit of that number is one (site, target) pair
+      ...SITES behind those rows, theirs                       12
+      ^ one unit of that number is one SOURCE LINE
+      ...SITES behind those rows, mine                         12
+      ^ one unit of that number is one SOURCE LINE
+      ...the ROWS-minus-SITES gap, by my own enumerator         2
+      ^ one unit of that number is one (site, target) pair with no site of its own
+
+
+==========================================================================
+A3b  THE LEDGER -- LABEL, GRAIN OF THE VALUE, AGREE?
+==========================================================================
+
+  Every quantity `out_r4_property.txt` could be reporting, re-derived at
+  HEAD by this directory's own enumerator, each with the grain of ONE
+  UNIT of it.  A printed number is assigned the grain of whatever it
+  equals -- not the grain its label claims:
+
+      all (site,target) rows                   56   grain: one row
+      all distinct sites                       53   grain: one site
+      rows matching the two-name rule          42   grain: one row
+      rows outside the two names               14   grain: one row
+      sites outside the two names              12   grain: one site
+      outside sites reading the status          4   grain: one site
+      distinct basenames outside               10   grain: one basename
+
+  population: every count ROW of `code/runner_exit_repair_70c7/out_r4_property.txt`
+      ...count ROWS in that artifact                           11
+      ^ one unit of that number is one printed line
+
+  The LABEL-GRAIN column is the grain THE LABEL CLAIMS, taken by
+  `lib03d1.label_grain`: the CAPITALISED grain noun if the line has one
+  -- this arc's own post-repair convention -- else the first noun not
+  claimed by an embedded count, else the column HEADER, with the stage
+  printed so a reader can see which rule answered.
+
+  LN  LABEL                                     VALUE  LABEL-GRAIN(stage)   VALUE-GRAIN  AGREE?
+  --------------------------------------------------------------------------------------------------------
+   27  (site,target) ROWS naming a `*.sh`           56  row       (caps  )  row          yes
+   28  distinct executing SITES behind those row    53  site      (caps  )  site         yes
+   29  ...ROWS the two-name rule matches            42  row       (caps  )  row          yes
+   30  ...ROWS outside it, across 10 distinct ba    14  row       (caps  )  row          yes
+   31  ...distinct SITES outside it                 12  site      (caps  )  site         yes
+   32  ...of those SITES, READING the exit statu     4  site      (caps  )  site         yes
+   33  ...ROWS naming `run_audit.sh`, the name A     1  row       (caps  )  -            -- not re-derivable here
+   35  source lines naming MORE THAN ONE `*.sh`      3  site      (first )  -            -- not re-derivable here
+   86  SITES the two-name rule found                 4  site      (caps  )  site         yes
+   87  ...SITES still found under the property       4  site      (caps  )  site         yes
+   88  ...SITES LOST by the widening                 0  site      (caps  )  -            -- not re-derivable here
+
+  population: the count ROWS above whose label names a grain noun AND
+  whose value equals a quantity re-derived in this probe
+      ...count ROWS decidable at the ROW/SITE grain             8
+      ^ one unit of that number is one printed line
+      ...ROWS where label and value's grain AGREE               8
+      ^ one unit of that number is one printed line
+      ...ROWS where they DISAGREE                               0
+      ^ one unit of that number is one printed line
+      ...ROWS not decidable by this probe                       3
+      ^ one unit of that number is one printed line
+
+  AND THE SAME TABLE AT THE PINNED REVISION, which is the point of the
+  exercise: the defect O1 names must be VISIBLE in this ledger at
+  973ca61 and ABSENT at HEAD, or the ledger is not measuring it.
+
+      rows outside the two names               10   grain: one row
+      sites outside the two names               9   grain: one site
+
+      *** line 20  `...outside it, across 6 distinct basenames`
+          the label itself names NO grain; the reader takes
+          it from the column header at stage `header`, which
+          offers site -- and the value 10 is the row count
+
+  population: the count ROWS of `code/runner_exit_repair_70c7/out_r4_property.txt` at 973ca61
+      ...ROWS where label and value's grain DISAGREE            1
+      ^ one unit of that number is one printed line
+
+  THE DEFECT IS VISIBLE AT THE PINNED REVISION AND GONE AT HEAD, in
+  a ledger that never reads a label to decide what a value is.  This
+  is the check `lib56dc._classify` CANNOT perform, for A1's reason:
+  its finest distinction is source-vs-run and this one is row-vs-
+  site.  The label-reading instrument passes BOTH versions.
+
+==========================================================================
+A3c  O2 -- WHAT THE STRICTEST SELF-RULE RANGES OVER, AND WHAT IT IS ABOUT
+==========================================================================
+
+  A population defined by a PATH is the defect; a wider path is not the
+  fix.  So the check is not `how many members` -- it is `is there a
+  directory literal in the function that computes the population`.
+
+  population: the EXECUTABLE lines of `lib70c7.published_by`, the
+  function that computes the repaired self-rule's population
+      ...SOURCE LINES in that function, docstring excluded     68
+      ^ one unit of that number is one line of Python
+      ...directory PATH literals inside it                      0
+      ^ one unit of that number is one `code/<tree>` string
+
+  AND THE TAG IS PART OF THE POPULATION'S NAME.  `published_by` takes a
+  tag, so `the E1 population` is not one set -- it is one set PER TAG,
+  and naming the wrong one produces a number that is about somebody
+  else.  Both are printed here.  (This is the defect my own self-check
+  caught in this probe -- see `a6_self.py`/AS2.)
+
+  population: every tracked file a `(mg-70c7)` commit ADDED, that still
+  exists, and that a reader reads as a record -- E1's own -- the rule's subject
+      ...ARTIFACTS the property returns for that tag           11
+      ^ one unit of that number is one file
+      ...of those, TRANSCRIPTS (`out_*.txt`)                    7
+      ^ one unit of that number is one file
+      ...of those, PROSE ARTIFACTS (`*.md`)                     4
+      ^ one unit of that number is one file
+      ...ARTIFACTS outside the tree the tag names               1
+      ^ one unit of that number is one file
+
+  population: every tracked file a `(mg-bf79)` commit ADDED, that still
+  exists, and that a reader reads as a record -- the repairing tree's, for S1
+      ...ARTIFACTS the property returns for that tag            9
+      ^ one unit of that number is one file
+      ...of those, TRANSCRIPTS (`out_*.txt`)                    6
+      ^ one unit of that number is one file
+      ...of those, PROSE ARTIFACTS (`*.md`)                     3
+      ^ one unit of that number is one file
+      ...ARTIFACTS outside the tree the tag names               0
+      ^ one unit of that number is one file
+
+  population: `lib70c7.outs('code/runner_exit_repair_70c7')` -- the OLD rule, one directory
+      ...ARTIFACTS the old path-defined rule ranged over        7
+      ^ one unit of that number is one file
+      ...members of it LOST by the widening                     0
+      ^ one unit of that number is one file
+
+  THE PARENT'S HEADLINE `E1 GOES 7 -> 11 WITH 0 LOST` RE-DERIVES AT HEAD:
+  7 -> 11, 0 lost.  Re-derived here, not quoted from its transcript.
+
+  What it RANGES OVER, and what it is ABOUT -- the two the brief asks me
+  to compare:
+
+      ranges over : every file a commit of this deliverable ADDED,
+                    by `git log --all --diff-filter=A` provenance,
+                    with NO directory named in the function
+      is about    : every count this TREE prints
+
+  THOSE TWO ARE STILL NOT THE SAME SET, and saying so is the point of
+  the question.  A file this ticket added that prints no count is in the
+  population and contributes nothing; a count this tree prints into a
+  file it did not ADD -- an edit to an older transcript -- is ABOUT the
+  tree and OUTSIDE the population.  The repaired rule is defined by a
+  git property rather than a path, which is the shape the brief asks
+  for, and it is a property about AUTHORSHIP where the rule is about
+  OUTPUT.  Closer, and not the same.
+
+==========================================================================
+A3d  O3 -- THE RULE SET DIFFED BY NAME, RE-DERIVED
+==========================================================================
+
+  Re-deriving the parent's P3b rather than repeating it: the two rule
+  sets compared by NAME, before and after the `one rule object` change.
+
+  population: every top-level NAME defined in each library
+      ...NAMES defined in the lib70c7 FILE                     36
+      ^ one unit of that number is one top-level definition
+      ...NAMES defined in the lib7522 FILE                     78
+      ^ one unit of that number is one top-level definition
+      ...NAMES defined in BOTH FILES                           22
+      ^ one unit of that number is one top-level definition
+
+  And the specific claim the brief makes: `proven`, which mg-dee4 named,
+  restored -- plus anything ELSE dropped, which is the part one silent
+  drop would hide.  BY NAME, not by count: `lib7522.alternatives`
+  returns HOW MANY, and `9 against 3` cannot say WHICH.
+
+  population: the ALTERNATIVES of `MARK` and of `MARK_OLD`
+      ...ALTERNATIVES in the current MARK                      10
+      ^ one unit of that number is one regex alternative
+      ...ALTERNATIVES in MARK_OLD                               3
+      ^ one unit of that number is one regex alternative
+      ...ALTERNATIVES dropped by the consolidation              0
+      ^ one unit of that number is one regex alternative
+      ...ALTERNATIVES gained                                    7
+      ^ one unit of that number is one regex alternative
+          gained : `\(measured\)`
+          gained : `\ball (?:\d+|of)\b`
+          gained : `\bconfirmed\b`
+          gained : `\bexactly \d+\b`
+          gained : `\bidentical\b`
+          gained : `\bverified\b`
+          gained : `byte for byte`
+
+      `proven` is present in the current MARK             yes
+
+  AND THE OTHER HALF OF `ANYTHING ELSE DROPPED`: the RULE OBJECTS
+  themselves, by name.  A regex constant that vanished from one library
+  without appearing in the other is a rule the consolidation lost.
+
+  population: every top-level `re.compile(...)` NAME in each library
+      ...rule-object NAMES in the lib70c7 FILE                  5
+      ^ one unit of that number is one top-level regex constant
+      ...rule-object NAMES in the lib7522 FILE                 25
+      ^ one unit of that number is one top-level regex constant
+      ...NAMES only in lib70c7, absent from the other FILE      0
+      ^ one unit of that number is one top-level regex constant
+
+  `_STRENGTH` and `MARK` being absent from lib70c7 is the drop the
+  parent's P3b asserts, and a drop a check asserts is not a silent one.
+  Re-derived here: the surviving rule object for both is `lib7522.MARK`,
+  and `proven` is one of its 10 alternatives.
+
+==========================================================================
+A3e  O4 -- IS THE DUPLICATION REMOVED, OR THE TWO COPIES RECONCILED?
+==========================================================================
+
+  The brief's question, and it is the right one: two copies of a
+  function that agree TODAY are still two copies.  A reconciliation
+  survives until the next edit; a delegation cannot diverge at all.
+
+  population: every `def figures` in `code/*/lib*.py`
+      lib70c7   def figures  statements after the docstring: 1   delegates to: _L().figures
+      lib7522   def figures  statements after the docstring: 3   delegates to: nothing -- own body
+      lib56dc   def figures  statements after the docstring: 3   delegates to: nothing -- own body
+      ...DEFINITIONS of `figures` in the arc                    3
+      ^ one unit of that number is one function definition
+
+  population: the 1001 INPUT LINES `the census gives <v> rows outside it`
+      ...INPUT LINES on which the two copies agree           1001
+      ^ one unit of that number is one input line
+      ...INPUT LINES on which they disagree                     0
+      ^ one unit of that number is one input line
+
+  AND THE VERDICT THE BRIEF ASKS FOR: `lib70c7.figures` has ONE
+  statement after its docstring and it is `return lib7522.figures(line)`.
+  THE DUPLICATION IS REMOVED, NOT RECONCILED -- there is one
+  implementation body and the second name is a forwarder, so the two
+  cannot drift apart on a later edit.  The third copy, `lib56dc.figures
+  (line, small=)`, is deliberately independent: it is the INSTRUMENT
+  that measured the disagreement, and merging it into the subject would
+  destroy the only rule able to check the other two.
+
+==========================================================================
+A3f  O4's LIVE DEFECT -- `figures()` STILL DOES NOT EXCLUDE A REVISION
+==========================================================================
+
+  Reported and NOT fixed by the parent, so it is live.  Confirmed here
+  rather than repeated:
+
+      `1234567   `  all decimal: yes   read as a FIGURE: YES
+      `9715841   `  all decimal: yes   read as a FIGURE: YES
+      `973ca61   `  all decimal: no    read as a FIGURE: no
+      `0123456789`  all decimal: yes   read as a FIGURE: YES
+
+  population: the 4 candidate short REVISIONS above
+      ...REVISIONS `figures()` reads as a figure                3
+      ^ one unit of that number is one candidate revision string
+
+  The comment deleted with mg-70c7's old body claimed to exclude `a git
+  revision`.  It never did and still does not: an all-decimal short
+  revision passes every exclusion.  LIVE, and correctly reported by the
+  parent as reported-and-not-fixed.
+
+A3 TOTAL BAD: 0

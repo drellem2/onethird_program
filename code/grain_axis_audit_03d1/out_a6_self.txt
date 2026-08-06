@@ -1,0 +1,201 @@
+mg-03d1 / A6 -- THE FLOOR, AND MY OWN DEFECTS
+HEAD: 9f1ecaa
+
+==========================================================================
+AF1  HOW BIG IS THE UNCOUNTED POPULATION?
+==========================================================================
+
+  population: every count ROW of every `code/*/out_*.txt` on disk
+      ...ARTIFACTS in that corpus                             517
+      ^ one unit of that number is one transcript file
+      ...count ROWS `lib56dc.count_rows` returns             1191
+      ^ one unit of that number is one printed line
+      ...ROWS carrying a count INSIDE the label               246
+      ^ one unit of that number is one printed line
+      ...integer ITEMS inside labels, never classified        626
+      ^ one unit of that number is one integer printed in a label
+
+  So `every printed count` is short by 626.  The rule that defines the
+  population is a SHAPE RULE OVER THE LINE -- label, whitespace, number
+  at the end -- and a number that is not at the end of the line is not
+  a count to it.  That rule is deliberate and its docstring defends it
+  well (`a sentence is not a count row`), and the cost of it is this
+  number, which nothing in the arc has printed before.
+
+  The 8 TREES with the most such rows, so the total is checkable:
+      ROWS in species_audit_73df                         50
+      ROWS in branching_af28                             26
+      ROWS in face_geometry_audit_0b07                   23
+      ROWS in runner_exit_audit_56dc                     17
+      ROWS in hodge_leverage_audit_86a3                  12
+      ROWS in face_geometry_audit_1c80                   11
+      ROWS in state_audit_6a2f                           10
+      ROWS in branching_bound_audit_aaf4                  9
+
+==========================================================================
+AF2  AND WHERE THE TWO COUNTS ON ONE LINE ARE AT DIFFERENT GRAINS
+==========================================================================
+
+  An uncounted number is only a defect if it means something else than
+  the number that WAS counted.  So: rows where the embedded count's own
+  grain noun classifies differently from the row's, under the same
+  `label_grain` used in A3.  Those are lines where the ONE grain the
+  instrument reports is wrong for ONE of the two numbers on the line.
+
+  population: the 246 ROWS of AF1 carrying a count inside the label
+      ...ROWS whose two counts are at DIFFERENT grains          5
+      ^ one unit of that number is one printed line
+
+      code/runner_exit_repair_70c7/out_r4_property.txt:30
+          ...ROWS outside it, across 10 distinct basenames
+          the row is reported at grain row;      the embedded `10 basenames`
+          is at grain basename -- and is in no population
+      code/runner_exit_repair_bf79/out_p1_grain.txt:76
+          973ca61 ALL rows       ROWS  49  SITES  47  GAP
+          the row is reported at grain row;      the embedded `49 sites`
+          is at grain site -- and is in no population
+      code/runner_exit_repair_bf79/out_p1_grain.txt:79
+          973ca61 OUTSIDE rows   ROWS  10  SITES   9  GAP
+          the row is reported at grain row;      the embedded `10 sites`
+          is at grain site -- and is in no population
+      code/runner_exit_repair_bf79/out_p1_grain.txt:81
+          HEAD   ALL rows       ROWS  56  SITES  53  GAP
+          the row is reported at grain row;      the embedded `56 sites`
+          is at grain site -- and is in no population
+      code/runner_exit_repair_bf79/out_p1_grain.txt:85
+          HEAD   OUTSIDE rows   ROWS  14  SITES  12  GAP
+          the row is reported at grain row;      the embedded `14 sites`
+          is at grain site -- and is in no population
+
+  EVERY ONE OF THOSE IS A ROW/SITE-CLASS COLLAPSE ON A SINGLE LINE, and
+  the instrument has no place to put the second grain even if it had a
+  word for it: `count_rows` returns ONE label per line.  A1 said the
+  limit was the classifier's arity.  THIS IS THE SAME LIMIT ONE LAYER
+  DOWN, in the population rule -- one grain per line, because one row
+  per line.  Fixing the classifier would not reach these.
+
+  population: the count ROWS of `code/runner_exit_repair_bf79`'s own transcripts
+      ...ROWS of the parent's own carrying an uncounted count      8
+      ^ one unit of that number is one printed line
+
+  AND THE PARENT'S `p5_self.py` REPORTS 0 OF THESE, because its
+  population is `count_rows` too.  A self-check inherits the population
+  rule of the check it is applying, so the one thing it cannot find is a
+  defect OF that rule.  That is the general form of the parent's #7 and
+  of A1 at once, and it is why the floor item is here rather than in the
+  brief: a list of things to check is written in the vocabulary of the
+  instrument that will check them.
+
+==========================================================================
+AS  THE DEFECTS OF THIS INSTRUMENT, RECORDED RATHER THAN SMOOTHED AWAY
+==========================================================================
+
+  population: the DEFECTS of this tree's own instrument, found by this
+  probe and by the runs that preceded it
+      ...DEFECT ITEMS of this instrument recorded               7
+      ^ one unit of that number is one defect
+
+  AS1
+      `label_grain` took the LAST grain noun of a label, so on `...ROWS
+      outside it, across 10 distinct basenames` it read `basenames` -- the
+      EMBEDDED count's noun -- and reported the repaired artifact as
+      DEFECTIVE ON 2 OF 8 ROWS where the artifact is right. THE AUDITED
+      DEFECT RUN BACKWARDS BY THE AUDITOR: a value attributed to the wrong
+      noun on the same line. Repaired by preferring the CAPITALISED grain
+      noun -- this arc's own post-repair convention -- and the stage is
+      now returned rather than folded away.
+
+  AS2
+      A3c put MY PARENT'S tag `(mg-bf79)` to `published_by` and printed 9
+      under a label saying `the E1 population`. E1's population is
+      `published_by('(mg-70c7)')` and is 11. I was two minutes from
+      reporting `the parent's headline 7 -> 11 does not reproduce; it is
+      9`. A POPULATION FUNCTION TAKING A TAG RETURNS ONE SET PER TAG, and
+      the tag is part of the population's NAME -- so a count under the
+      wrong tag is a value under a label that is about somebody else,
+      which is O1 at the population layer. Both tags are printed now.
+
+  AS3
+      THE SELF-RULE FORCES MY LABELS INTO THE VOCABULARY OF THE INSTRUMENT
+      I AM AUDITING. `lib03d1.row()` requires every label to classify at
+      stage `label` under `lib56dc.grain_of`, whose vocabulary is 35 SITE
+      words and 8 EXEC words. My subject is grain distinctions it has NO
+      WORD FOR -- and to pass my own check I must describe them using only
+      words it does. Every `...PAIRS`, `...AXES` and `...DISTINCTIONS` row
+      in A1 had to be re-worded to carry `WORDS`, `ROWS` or `ITEMS`. NOT
+      REPAIRED, because the alternative is to exempt myself from the rule
+      I am auditing compliance with. It is A1's finding happening to me.
+
+  AS4
+      A5d's preservation check for mg-56dc's T5d kept miss was written as
+      `MISS -- 38 members` and the text says `MISS — 38 members` with an
+      EM DASH. It reported a PRESERVED artifact as `*** LOST ***`, which
+      under the brief's own weighting is the highest-severity verdict this
+      audit can return. Written from my QUOTATION of the text rather than
+      from the text, and wrong by one character. mg-aaf4 recorded the same
+      shape -- a detector missing the sentence it was written for, by one
+      tense. Repaired by matching the FIGURE and the NOUN with the
+      punctuation loose.
+
+  AS5
+      `grain_nouns` OVER-COLLECTS and is not trimmed after the fact. A1d's
+      400 distinct grain words include `about`, `actual`, `anyway` and
+      `bfd`. Trimming them would make the collapse ratio a fact about my
+      trimming, so the full extracted vocabulary is printed and A1d also
+      prints the stricter ratio over only the words the classifier has an
+      entry for. The generous metric is the PRE-REGISTERED one and it
+      MISSED; the strict one is printed beside it and does not rescue it.
+
+  AS7
+      A4d TOOK ITS SUBJECT BY POSITION AND RAN ITSELF. It picked
+      `newmv[0]` -- the first tree whose runner writes `.new` and moves it
+      -- which was the parent's until THIS TREE ADOPTED THE SAME FIX, at
+      which point it was mine, alphabetically first. The probe ran its own
+      runner, which ran the probe, which ran its own runner. Found by the
+      suite's first full run wedging, not by reading. THE POPULATION
+      SILENTLY INCLUDED THE AUDITOR the instant the auditor started
+      complying with the thing being audited -- which is O2's shape a
+      third time, in the sweep that measures O2's runner defect. Repaired
+      by naming the subject rather than indexing it; and A4a now prints
+      BOTH totals, because excluding myself from the count to protect
+      prediction A4b would be the same defect wearing the other face.
+
+  AS6
+      A4b's `bites` test is a STATIC approximation: it asks whether any
+      probe of a tree mentions `out_*.txt`, not whether THAT probe reads
+      THE TRANSCRIPT THAT RUN TRUNCATED FIRST. It will over-report a tree
+      whose probe reads another tree's transcripts and under-report one
+      that reaches a transcript through a variable. 43 is an upper bound
+      on a lower-bound question, stated here rather than defended as
+      exact.
+
+
+==========================================================================
+AS7  MY OWN P5b -- EVERY COUNT ROW I PRINT, AT STAGE `label`
+==========================================================================
+
+  population: every `out_*.txt` of THIS tree on disk -- including this
+  probe's own, which the runner preserves by writing `.new` and moving
+  it (the parent's #7 fix, adopted here rather than re-discovered)
+      ...ARTIFACTS of mine on disk                              7
+      ^ one unit of that number is one transcript file
+      ...count ROWS in them                                   123
+      ^ one unit of that number is one printed line
+      ...ROWS NOT carrying a grain word on their own label      0
+      ^ one unit of that number is one printed line
+
+  AND THE POPULATION IS THIS TREE'S TRANSCRIPTS, WHICH IS A PATH, and
+  that is not the O2 defect for the reason the parent gives: the
+  question is *which counts do I PRINT*, and a count I print is in a
+  transcript I wrote.  The prose I ship carries counts too, so it is
+  checked as well:
+
+  population: the PROSE ARTIFACTS of this tree on disk
+      ...PROSE ARTIFACTS of mine                                3
+      ^ one unit of that number is one file
+      ...count ROWS in them                                     0
+      ^ one unit of that number is one printed line
+      ...ROWS NOT at stage `label`                              0
+      ^ one unit of that number is one printed line
+
+A6 TOTAL BAD: 0
