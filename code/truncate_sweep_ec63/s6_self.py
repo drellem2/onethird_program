@@ -160,6 +160,11 @@ porc = [ln for ln in B.git("status", "--porcelain", "--", "code",
                            "docs").splitlines()
         if ln.strip() and B.MINE not in ln]
 print("  population: `git status --porcelain -- code/ docs/`, less this tree")
+print("  and `restore_arc()` walks EVERY DIRECTORY under `code/`, not every")
+print("  RUNNER: 7 directories have no runner, and one of them is where a")
+print("  killed probe kept leaving an armed shell script.  A restore scoped to")
+print("  the population being MEASURED misses exactly the places the")
+print("  measurement spills into.")
 print("  `docs/` is in the population because two probes of this arc APPEND A")
 print("  SECTION to the prose and undo it in a `finally` -- which a killed")
 print("  probe never reaches.  A sweep that checks only `code/` reports itself")
