@@ -1,0 +1,61 @@
+==============================================================================
+SELFTEST mg-1d6c -- every check shown to fire
+==============================================================================
+
+U  THE UNIVERSE CHECKS -- the ones p1's zero depends on
+  U0 the constructed tree really holds 2 markdown files            ok
+  U1 THE GLOB MISSES A SUBDIRECTORY FILE (the positive p1's 0 need ok   glob 1, disk 2
+  U2 and it misses the SITE in it, not merely the file             ok   glob 1 site(s), disk 2
+  U3 the shell glob agrees with the implemented one on the same tr ok
+  U4 the tracked/worktree hole shows a POSITIVE when one exists    ok   tracked 1, disk 2
+
+P  THE PREDICATE AND THE PREFILTER
+  P1 an unbounded site is found and scored unbounded               ok
+  P2 a bounded site is found and scored bounded                    ok
+  P3 a sentence not naming the family is NOT a site                ok
+  P4 the liveness rule removes a struck unit                       ok
+  P5 GRAIN O counts occurrences, not sentences                     ok   1 site, 2 occurrences
+  P6 the prefilter drops exactly the files with no site and no oth ok
+  P7 prefiltered and unfiltered counts agree                       ok
+
+S  THE SCOPE CLASSIFIER (p4 FIX 1)
+  S1 a bare 'population' is not a numeric scope                    ok
+  S2 a count with its denominator is                               ok
+  S3 a count with a named unit is                                  ok
+  S4 a rank bound is                                               ok
+  S5 an ordinal LABEL is not (the defect the first form had)       ok
+  S6 a PATH with a hex ticket id is not (the other first-form defe ok
+  S7 markdown emphasis does not hide a count                       ok
+  S8 s5's own OWNSCOPE DOES accept what S1 rejects -- the fix has  ok
+
+F  THE FAULT DETECTOR (p4 FIX 3)
+  F: mg-19ec's predicate could not see it                          ok
+  F: mg-19ec's predicate cannot see it                             ok
+  F: mg-19ec's predicate can't see it                              ok
+  F: the census never counted them                                 ok
+  F: the gate fails to cover them                                  ok
+  F: the parent's blind spot                                       ok
+  F: the census counted every site                                 ok
+  F8 the tense the parent's own regex misses IS missed by it       ok
+
+G  THE GATE'S PARTITION (p5)
+  G: code/x/PREDICTIONS.md                      -> PRE-REGISTRATIO ok
+  G: docs/audit-mg-1234-thing.md                -> DATED RECORD    ok
+  G: Third-Branching-Graphs-Where-This-Lives.md -> LIVING DOCUMENT ok
+  G: code/x/README.md                           -> INSTRUMENT READ ok
+  G: docs/notes.md                              -> UNCLASSIFIED    ok
+  G: scratch/thing.md                           -> UNCLASSIFIED    ok
+
+M  READING A COMMIT WITHOUT TOUCHING THE TREE
+  M1 a blob is materialised at the path it has in the commit       ok
+  M2 an absent path is skipped and not invented                    ok
+  M3 materialising changes NOTHING in the working tree (before==af ok
+  M4 and the blob really landed OUTSIDE the repository             ok
+
+D  THE DIFF MACHINERY (p1)
+  D1 a difference is reported in both directions                   ok
+  D2 no difference is reported where there is none                 ok
+
+==============================================================================
+SUMMARY selftest1d6c: 40 case(s), 0 failing
+==============================================================================

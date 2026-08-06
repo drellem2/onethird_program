@@ -1,0 +1,244 @@
+==============================================================================
+P3  WHICH PUBLISHED FIGURES INHERIT THE UNDERCOUNT.
+    Enumerated three ways: call sites, transcripts, prose.
+==============================================================================
+
+==============================================================================
+  3.0  THE VALUES THE GLOB PRODUCES, computed here so that the
+       classifier below matches against derived numbers and not
+       against a hand-typed list.
+==============================================================================
+    7      corpus files
+    12     corpus unbounded
+    24     corpus bounded
+    36     corpus sites
+    106    files in the glob
+
+    the same five over the FULL population (tracked .md):
+      52     sites   24     unbounded   14     files stating   295    files
+
+==============================================================================
+  C1  THE CALL SITES.  Population: tracked .py.  Grain: one
+      occurrence of a universe-building idiom.
+==============================================================================
+    idiom                      hits   what it enumerates
+    os.listdir(<docs>)            4   working tree, ONE LEVEL, docs/ only
+    glob('docs/*.md')             1   working tree, ONE LEVEL, docs/ only
+    shell ls docs/*.md            3   working tree, ONE LEVEL, docs/ only
+    os.walk(<docs>)              44   working tree, RECURSIVE
+    glob('**/*.md')               1   working tree, RECURSIVE
+    git ls-files                 63   the index, RECURSIVE
+    git ls-tree -r               50   a commit, RECURSIVE
+
+    THE NARROW IDIOMS, EVERY OCCURRENCE, mine excluded (4):
+      code/branching_bound_d075/s1_census.py:96
+          names = sorted(x for x in os.listdir(L.DOCS) if x.endswith(".md"))
+      code/branching_bound_d075/s1_census.py:143
+          ndocs_now = [x for x in os.listdir(L.DOCS) if x.endswith(".md")]
+      code/branching_bound_d075/s1_census.py:242
+          files = sorted(f for f in os.listdir(L.DOCS) if f.endswith(".md"))
+      code/branching_bound_d075/s6_class.py:95
+          for f in sorted(os.listdir(L.DOCS)):
+
+    CONTROL: the same scan finds 158 recursive/git-derived occurrence(s)
+    in the same corpus, so the scan is not simply blind to breadth.
+
+==============================================================================
+  C2  THE TRANSCRIPT FIGURES.  Population: SUMMARY lines of
+      mg-d075's committed transcripts naming the corpus.
+      Grain: one published figure.
+==============================================================================
+    out_s1_census.txt:207
+        SUMMARY s1_census: D corpus 36 sites in 7 files, 12 unbounded
+    out_s1_census.txt:209
+        SUMMARY s1_census: PRE-REPAIR D corpus 29 sites, 17 unbounded
+    out_s6_class.txt:81
+        SUMMARY s6_class: corpus 7 files, 36 sites, 12 unbounded remaining
+    figures found : 3
+
+    EACH OF THESE IS CORRECT OVER THE POPULATION ITS INSTRUMENT COULD
+    SEE.  Re-derived over the full population the same three values are
+      sites          36 ->     52
+      unbounded      12 ->     24
+      files           7 ->     14
+
+==============================================================================
+  C3  THE PROSE FIGURES.  Population: live sentences of tracked
+      .md naming the corpus universe and carrying a number.
+      Grain: one sentence.
+==============================================================================
+    sentences naming the corpus and carrying a number : 38
+    of them INHERITING a glob-derived value           : 13
+    of them carrying only other numbers (the CONTROL) : 25
+
+    [01] code/branching_bound_audit_aaf4/PREDICTIONS.md:20   inherits 24
+         `for f in docs/*.md; do grep -c '\b33\b' …` — 24 files of `docs/` carry a `33` line. 8.
+
+    [02] code/branching_bound_audit_aaf4/PREDICTIONS.md:93   inherits 7, 36
+         **P2 — the figure-stating file count of the parent's own deliverable is 4, not 2.** The parent's
+          §5 says *"the corpus of this figure is now 7 files of `docs/`, 36 sites … my gate covers 2 of t
+         he 7"*.
+
+    [03] code/branching_bound_audit_aaf4/README.md:85   inherits 7
+         **FOUR FILES, TWO GATED, AND ALL FOUR UNBOUNDED SITES IN THE UNGATED HALF.** mg-d075's §5 says *
+         "the corpus of this figure is now 7 files of `docs/` … my gate covers 2 of the 7"*.
+
+    [04] code/branching_bound_audit_aaf4/README.md:175   inherits 12
+         the glob `docs/*.md` cannot see **12** unbounded sites, against the **12** it reports
+
+    [05] code/branching_bound_audit_aaf4/README.md:191   inherits 12, 24
+         It is parameterised by path and globbed over `docs/*.md`, and 12 of the 24 unbounded sites — inc
+         luding all 4 in the parent's own hand — live outside that glob.
+
+    [06] code/branching_bound_d075/README.md:67   inherits 7, 12, 36
+         Post-repair A 10 / B 10 / ceiling 11 / corpus 36 sites in 7 files, 12 unbounded. - **s2** — the 
+         parent's transcript parsed to 8 rows; my independent STRICT re-implementation returns the same 8
+          line numbers and the same 8 verdicts;
+
+    [07] code/branching_bound_d075/README.md:67   inherits 7
+         **1 of 5 was unbounded on the first run** (before the README existed), 0 of 10 now. - **s6** — 3
+          of 3 prior instances located; gate covers 2 of 7 corpus files;
+
+    [08] code/branching_bound_d075/README.md:130   inherits 12
+         - **It did not repair the corpus.** 12 sites remain unbounded in 5 `docs/*.md` this repair does 
+         not touch.
+
+    [09] code/corpus_universe_1d6c/PREDICTIONS.md:7   inherits 12, 24
+         **What this ticket is.** `mg-aaf4` reported that `mg-d075`'s published corpus figure — 12 unboun
+         ded sites — is **exactly half** of the 24 it counts over every markdown file tracked by git, and
+          that the glob `docs/*.md` is the whole of the reason.
+
+    [10] code/corpus_universe_1d6c/PREDICTIONS.md:35   inherits 7, 12, 36
+         mg-d075's published corpus: pre-repair **29** sites in 6 files, 17 unbounded; post-repair **36**
+          sites in 7 files, **12** unbounded; the universe named as *"the 101 `docs/*.md` that are not th
+         is repair's own"*
+
+    [11] code/corpus_universe_1d6c/PREDICTIONS.md:80   inherits 7
+         `s6_class.py`'s *"gate covers 2 of 7 corpus files"* is one of them — its denominator **7** is th
+         e glob's file count and inherits the undercount even though the numerator is about something els
+         e.
+
+    [12] docs/repair-mg-1d6c-the-universe-and-the-glob.md:128   inherits 7
+         **AND IT HAS ALREADY DRIFTED IN A COMMITTED TRANSCRIPT.** mg-d075's suite re-runs green from thi
+         s branch — 7 of 7 scripts on their committed predictions, `run_all.sh` exit 0 — and **two of its
+          transcripts do not regenerate**: `out_s6_class.txt` on its commit count (mg-aaf4's finding, `gi
+         t log --all`), and `out_s1_census.txt` on **`102 docs/*.md exist now` → `105`, twice**.
+
+    [13] docs/repair-mg-d075-the-figure-and-its-scope.md:177   inherits 7, 36
+         - **All 3 prior instances the brief names are present as artefacts in this tree** — mg-2c77 (4 c
+         ommits, `code/audit_2c77`), mg-7e39 (6 commits, `code/hodge_leverage_audit_7e39`), mg-19ec (10 c
+         ommits, `code/branching_audit_19ec`). - **The corpus of this figure is now 7 files of `docs/`, 3
+         6 sites** (7 rather than 6 because this repair's own account document states the figure and ther
+         efore joins the population it describes).
+
+    THE CONTROL COLUMN, in full -- sentences the classifier did NOT
+    mark, from the same files:
+      code/branching_bound_audit_aaf4/PREDICTIONS.md:66  The parent's own §1 insists a number be stated with its grain; a count of sent
+      code/branching_bound_audit_aaf4/PREDICTIONS.md:85  - **Predicted: ≥ 1 unbounded, and ≥ 1 of them in `code/branching_bound_d075/PR
+      code/branching_bound_audit_aaf4/PREDICTIONS.md:109  Predicted **0 occurrences**, corpus-wide.
+      code/branching_bound_audit_aaf4/PREDICTIONS.md:183  Predicted: **I agree**, and I predict the sharper version — that the artefact 
+      code/branching_bound_audit_aaf4/PREDICTIONS.md:233  0 if every mutation of the corpus is caught by my detector
+      code/branching_bound_audit_aaf4/README.md:11  **The sites, counted by me** — not 4, not 8, not 9, not 10 — at two grains and
+      code/branching_bound_audit_aaf4/README.md:69  mg-d075's published corpus D (`docs/*.md`)
+      code/branching_bound_d075/PREDICTIONS.md:15  `grep -rln "33" docs/*.md` and a per-file `grep -c "33"` loop over `docs/*.md`
+      code/branching_bound_d075/PREDICTIONS.md:75  **P4 — widened to the whole `docs/` corpus** (same liveness rule, same relaxed
+      code/branching_bound_d075/PREDICTIONS.md:80  **P5 — the corpus number will NOT be repaired, and that is a scope decision, n
+      code/branching_bound_d075/README.md:67  - **s1** — pre-repair A 8 / B 9 / ceiling 10 / corpus **29 sites in 6 files, 1
+      code/branching_bound_d075/README.md:130  The decision was taken in `PREDICTIONS.md` P5 **before** the corpus was counte
+      ... and 13 more
+
+==============================================================================
+  C3b  WHICH OF THOSE INHERIT THE UNDERCOUNT, AND WHICH MERELY
+       CITE IT.  Machine rule first, then hand adjudication with
+       a reason on every overridden row.  BOTH NUMBERS PUBLISHED.
+==============================================================================
+    [01] NOT A CONSUMER code/branching_bound_audit_aaf4/PREDICTIONS.md:20  (24)
+         ADJUDICATED: its 24 counts FILES CONTAINING A 33 LINE, a different quantity that collides with t
+    [02] DIAGNOSES      code/branching_bound_audit_aaf4/PREDICTIONS.md:93  (7, 36)
+         ADJUDICATED: quotes the parent's sentence as the object of a prediction
+    [03] DIAGNOSES      code/branching_bound_audit_aaf4/README.md:85  (7)
+         ADJUDICATED: quotes the parent's sentence as the object of a finding
+    [04] DIAGNOSES      code/branching_bound_audit_aaf4/README.md:175  (12)
+         ADJUDICATED: mg-aaf4 states the glob's figure in order to fault it
+    [05] DIAGNOSES      code/branching_bound_audit_aaf4/README.md:191  (12, 24)
+         ADJUDICATED: the same, and it carries the wider 24 in the same sentence
+    [06] INHERITS       code/branching_bound_d075/README.md:67  (7, 12, 36)
+         states a glob-derived value as the population
+    [07] INHERITS       code/branching_bound_d075/README.md:67  (7)
+         states a glob-derived value as the population
+    [08] INHERITS       code/branching_bound_d075/README.md:130  (12)
+         states a glob-derived value as the population
+    [09] MINE           code/corpus_universe_1d6c/PREDICTIONS.md:7  (12, 24)
+         this ticket's own prose, quoting with attribution
+    [10] MINE           code/corpus_universe_1d6c/PREDICTIONS.md:35  (7, 12, 36)
+         this ticket's own prose, quoting with attribution
+    [11] MINE           code/corpus_universe_1d6c/PREDICTIONS.md:80  (7)
+         this ticket's own prose, quoting with attribution
+    [12] INHERITS       cs/repair-mg-1d6c-the-universe-and-the-glob.md:128  (7)
+         states a glob-derived value as the population
+    [13] INHERITS       ocs/repair-mg-d075-the-figure-and-its-scope.md:177  (7, 36)
+         states a glob-derived value as the population
+
+    machine: 13 sentence(s) carry a glob-derived value
+      DIAGNOSES        4
+      INHERITS         5
+      MINE             3
+      NOT A CONSUMER   1
+    ADJUDICATED CONSUMERS OF THE UNDERCOUNT: 5
+
+==============================================================================
+  C3c THE CONSUMER NOBODY HAS NAMED: THE UNIVERSE'S OWN SIZE.
+       PREDICTIONS.md P8b said at least one consumer would not be
+       36, 12, 29, 17 or 7.  This is it.
+==============================================================================
+    docs/repair-mg-d075-...:51  publishes 101
+        | **D** corpus | B over the **101 `docs/*.md`** that are not this repair's own | one sentence | 
+
+    THE SAME QUANTITY, RE-DERIVED AT THIS COMMIT:
+      the glob docs/*.md            : 106
+      tracked .md under docs/       : 118
+      tracked .md, the repository   : 295
+
+    A PUBLISHED FIGURE WHOSE POPULATION IS THE GLOB ITSELF.  It is not
+    a site count, so no audit of the site counts has ever looked at it,
+    and it inherits the same boundary: it is the size of the universe
+    the glob can see and it is presented as the size of the corpus.
+
+==============================================================================
+  C4  THE SECOND-ORDER CONSUMERS.  Population: tracked .md that
+      QUOTE an inheriting figure without computing it.
+      Grain: one file.
+==============================================================================
+    files carrying an inheriting figure : 6
+      code/branching_bound_audit_aaf4/PREDICTIONS.md                   quotes it
+      code/branching_bound_audit_aaf4/README.md                        quotes it
+      code/branching_bound_d075/README.md                              COMPUTED IT
+      code/corpus_universe_1d6c/PREDICTIONS.md                         quotes it
+      docs/repair-mg-1d6c-the-universe-and-the-glob.md                 quotes it
+      docs/repair-mg-d075-the-figure-and-its-scope.md                  COMPUTED IT
+
+    THE UNDERCOUNT HAS TRAVELLED 4 FILE(S) BEYOND THE INSTRUMENT THAT
+    PRODUCED IT.  Each is a dated record and none is edited here.
+
+==============================================================================
+  VERDICT
+==============================================================================
+    consumers of the glob, by kind:
+      narrow call sites outside my own instrument : 4
+      transcript figures over the corpus          : 3
+      prose sentences carrying a glob value       : 13
+      of them INHERITING after adjudication       : 5
+      files carrying one                          : 6
+      published figures whose value IS the glob   : 1
+
+==============================================================================
+SUMMARY p3_consumers: narrow idiom occurrences 4 in tracked .py (mine excluded)
+SUMMARY p3_consumers: recursive/git idiom occurrences 158 -- the scan's control
+SUMMARY p3_consumers: transcript SUMMARY figures over the corpus 3
+SUMMARY p3_consumers: prose sentences naming the corpus 38, carrying a glob value 13, control 25
+SUMMARY p3_consumers: machine 13 rows -> DIAGNOSES 4, INHERITS 5, MINE 3, NOT A CONSUMER 1 after adjudication
+SUMMARY p3_consumers: ADJUDICATED consumers of the undercount 5
+SUMMARY p3_consumers: C3c the universe's own size published as 101, re-derived glob 106 / docs tracked 118 / repo 295
+SUMMARY p3_consumers: files carrying an inheriting figure 6, of which 4 quote rather than compute
+SUMMARY p3_consumers: glob 36 sites/12 unbounded vs population 52/24
+==============================================================================

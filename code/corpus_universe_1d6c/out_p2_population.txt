@@ -1,0 +1,155 @@
+==============================================================================
+P2  THE FULL POPULATION, by a method that does not share the
+    glob's blind spot.  Three states, two parsers, two grains.
+==============================================================================
+
+==============================================================================
+  2.1  STATE A -- 8132d75, the commit carrying mg-aaf4's census.
+       Population: every .md tracked AT THAT COMMIT.  Grain S
+       and O.  Predicate: the parent's RELAXED, executed.
+==============================================================================
+    tracked .md at 8132d75   : 256  (materialised 256; the working tree
+                              is never touched)
+    files stating the figure : 13
+    sites          GRAIN S   : 51
+    bounded                  : 27
+    UNBOUNDED                : 24
+    occurrences    GRAIN O   : 60
+    unbounded INSIDE  docs/  : 12
+    unbounded OUTSIDE docs/  : 12
+    the split                : 12 / 12  (EXACTLY HALF)
+
+    file                                                                sites    bnd    unb
+    code/branching_audit_19ec/PREDICTIONS.md                                2      0      2
+    code/branching_audit_5800/README.md                                     1      0      1
+    code/branching_bound_audit_aaf4/PREDICTIONS.md                          4      0      4
+    code/branching_bound_d075/PREDICTIONS.md                                4      0      4
+    code/branching_bound_d075/README.md                                     3      3      0
+    code/branching_repair_41aa/README.md                                    1      0      1
+    docs/OneThird-Audit-mg-41aa-Repair.md                                   2      1      1
+    docs/OneThird-Audit-mg-af28-Branching-Graphs.md                         5      1      4
+    docs/OneThird-Branching-Graphs-Repair.md                                3      1      2
+    docs/OneThird-Branching-Graphs-Where-This-Lives.md                     10     10      0
+    docs/OneThird-Warrant-Repair-mg-dffa-IndependentAudit.md                8      4      4
+    docs/OneThird-Warrant-Repair-mg-dffa.md                                 2      1      1
+    docs/repair-mg-d075-the-figure-and-its-scope.md                         6      6      0
+
+    mg-aaf4 PUBLISHED, at this commit, over this universe:
+      13 files, 51 sites GRAIN S, 24 unbounded, 60 occurrences
+      (quoted from out_a1_population.txt SUMMARY U4 -- ITS number,
+       re-derived here through the OTHER parser, not copied.)
+      re-derived : 13 files, 51 sites, 24 unbounded, 60 occurrences
+      ALL FOUR REPRODUCE.
+
+==============================================================================
+  2.2  THE CROSS-PARSER CONTROL.  The same file list at the
+       same commit, counted through mg-aaf4's reader, which
+       shares no line with the parent's.
+==============================================================================
+    lib_d075  : 13 files, 51 sites, 24 unbounded
+    lib_aaf4  : 13 files, 51 sites, 24 unbounded
+    rows only lib_d075 sees : 0
+    rows only lib_aaf4 sees : 0
+    THE PARSERS AGREE ROW FOR ROW.  A count that differs from
+    mg-aaf4's below is a UNIVERSE difference and cannot be a parser
+    difference.
+
+==============================================================================
+  2.3  STATE B -- 20614ef, main's tip when this ticket started.
+       Did anything move between mg-aaf4's census and me?
+==============================================================================
+    tracked .md at 20614ef   : 292
+    files stating the figure : 13
+    sites          GRAIN S   : 51
+    bounded                  : 27
+    UNBOUNDED                : 24
+    occurrences    GRAIN O   : 60
+    unbounded INSIDE  docs/  : 12
+    unbounded OUTSIDE docs/  : 12
+    the split                : 12 / 12  (EXACTLY HALF)
+
+    against STATE A: unchanged
+
+==============================================================================
+  2.4  STATE C -- the working tree, INCLUDING MY OWN FILES.
+       PREDICTIONS.md P6 said in advance that this ticket's own
+       prose enters the population it measures.  Here is the bill.
+==============================================================================
+    files stating the figure : 14
+    sites          GRAIN S   : 52
+    bounded                  : 28
+    UNBOUNDED                : 24
+    occurrences    GRAIN O   : 61
+    unbounded INSIDE  docs/  : 12
+    unbounded OUTSIDE docs/  : 12
+    the split                : 12 / 12  (EXACTLY HALF)
+
+    OF WHICH MINE (population: files this ticket authors; grain: one
+    sentence):
+      sites contributed by mg-1d6c    : 1
+      UNBOUNDED contributed by mg-1d6c: 0
+        code/corpus_universe_1d6c/PREDICTIONS.md:72 BOUNDED
+          **THE POPULATION CHANGES UNDER MY OWN HAND, and I say in advance what I will do about it.** This
+
+      P6 HOLDS: this ticket entered the population it measures and
+      entered it bounded.  Entering with 0 sites would have been a
+      dodge, not a pass.
+
+==============================================================================
+  2.5  THE PUBLISHED FIGURE AGAINST THE POPULATION.
+       Same predicate, same parser, same grain.  ONLY THE
+       UNIVERSE DIFFERS -- which is the whole claim.
+==============================================================================
+    universe                                        files  sites    unb
+    mg-d075's D, the glob docs/*.md (working tree)      7     36     12
+    every tracked .md (working tree)                   14     52     24
+
+    mg-d075 PUBLISHED 7 files / 36 sites / 12 unbounded for the first
+    row (README bullet s1 and docs/repair-...:180).  Reproduced here: 
+    7 / 36 / 12.
+
+    THE UNDERCOUNT, at the grain the figure is published in:
+      published unbounded    : 12
+      population unbounded   : 24
+      invisible to the glob  : 12
+
+==============================================================================
+  2.6  THE DECLARED EXCLUSION, WITH ITS SIZE.  Population:
+       every tracked .txt and .py.  Grain: one sentence.
+       REPORTED AND NOT REPAIRED -- and named, not globbed away.
+==============================================================================
+    tracked .txt and .py         : 1253 files
+    of them stating the figure   : 36
+    sites            GRAIN S     : 127
+    unbounded                    : 50
+
+    WHY THIS IS EXCLUDED, stated rather than arranged: a transcript
+    PRINTS a site and an instrument MATCHES one; neither ASSERTS the
+    figure in its own voice.  Bounding a transcript would mean editing
+    a record of a run.  THE EXCLUSION IS THE SAME DECISION mg-d075
+    MADE; the difference is that its size is printed here.
+
+==============================================================================
+  VERDICT
+==============================================================================
+    24 IS the count at 8132d75, re-derived through the other parser.
+    At the working tree the population is 24 unbounded sites in 14
+    files, and the published figure sees 12 of them.
+    The docs/ split at the working tree is 12 inside / 12 outside.
+    IT IS STILL EXACTLY HALF -- and it is a coincidence of this
+    corpus, not a law.  Nothing forces the two sides to be equal;
+    the ratio moves the moment any ticket writes one more sentence
+    on either side of the boundary.
+
+==============================================================================
+SUMMARY p2_population: STATE A 8132d75 13 files, 51 sites S, 24 unbounded, 60 occurrences O
+SUMMARY p2_population: STATE A vs mg-aaf4's 13/51/24/60 REPRODUCES
+SUMMARY p2_population: cross-parser control AGREE (0 rows only d075, 0 only aaf4)
+SUMMARY p2_population: STATE B 20614ef 13 files, 51 sites, 24 unbounded
+SUMMARY p2_population: STATE C worktree 14 files, 52 sites, 24 unbounded, 61 occurrences
+SUMMARY p2_population: mg-1d6c's own contribution 1 sites, 0 unbounded
+SUMMARY p2_population: glob universe 7 files, 36 sites, 12 unbounded
+SUMMARY p2_population: UNDERCOUNT 12 unbounded sites invisible to the glob
+SUMMARY p2_population: split at worktree 12 inside docs/ / 12 outside
+SUMMARY p2_population: declared exclusion .txt/.py 36 files, 127 sites, 50 unbounded -- reported, not repaired
+==============================================================================

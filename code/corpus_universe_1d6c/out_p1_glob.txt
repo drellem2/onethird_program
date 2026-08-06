@@ -1,0 +1,139 @@
+==============================================================================
+P1  WHAT THE GLOB ACTUALLY MATCHES, AGAINST WHAT IT IS
+    DESCRIBED AS MATCHING.  Enumerated, not reasoned about.
+==============================================================================
+
+==============================================================================
+  1.1  THE DESCRIPTIONS, located in the parent's own files
+==============================================================================
+    code/branching_bound_d075/s1_census.py:27
+        D  RELAXED / the whole docs corpus.  Live sentences of every docs/*.md.  Reported,
+    code/branching_bound_d075/s1_census.py:42
+        # The docs/*.md this repair itself authors.  Excluded from the PRE-REPAIR corpus.
+    code/branching_bound_d075/s1_census.py:74
+        docs/*.md that did NOT exist at that commit, i.e. the documents THIS repair
+    code/branching_bound_d075/s1_census.py:84
+        and would answer a question nobody asked.  The count of docs/*.md that
+    code/branching_bound_d075/s1_census.py:147
+        print("               new docs/*.md excluded.  %d docs/*.md exist now, %d at"
+    docs/repair-mg-d075-the-figure-and-its-scope.md:51
+        | **D** corpus | B over the **101 `docs/*.md`** that are not this repair's own | one sentence | **29** i
+
+==============================================================================
+  1.2  THE FIVE UNIVERSES, EACH BY ITS OWN MECHANISM.
+       Population: files.  Grain: one file.
+==============================================================================
+    G_IMPL   os.listdir(docs) + .endswith('.md')           106   the universe AS IMPLEMENTED
+    G_SHELL  sh -c 'ls -1 docs/*.md'                       106   the universe AS WRITTEN
+    D_TRACK  git ls-files, .md under docs/, any depth      118   'the whole docs corpus'
+    M_TRACK  git ls-files, .md anywhere                    295   mg-aaf4's universe
+    M_DISK   os.walk, .md anywhere outside .git            295   the tracked/worktree control
+
+==============================================================================
+  1.3  THE CONTROL FIRST.  G_IMPL vs G_SHELL must be EMPTY.
+       A diff that is non-empty everywhere proves nothing.
+==============================================================================
+    G_IMPL                                         106
+    G_SHELL                                        106
+    in G_IMPL and not in G_SHELL                     0
+    in G_SHELL and not in G_IMPL                     0
+
+    CONTROL HOLDS -- the diff machinery reports no difference where
+    there is none, so the differences below are differences.
+
+==============================================================================
+  1.4  BLIND SPOT ONE: THE PATTERN IS NOT RECURSIVE.
+       G_IMPL against D_TRACK -- 'the whole docs corpus'.
+==============================================================================
+    G_IMPL                                         106
+    D_TRACK                                        118
+    in G_IMPL and not in D_TRACK                     0
+    in D_TRACK and not in G_IMPL                    12
+        - docs/state-history/README.md
+        - docs/state-history/attempt-mg-210d.md
+        - docs/state-history/attempt-mg-276d.md
+        - docs/state-history/attempt-mg-3af9.md
+        - docs/state-history/attempt-mg-48ab.md
+        - docs/state-history/attempt-mg-63e3.md
+        - docs/state-history/attempt-mg-88bd.md
+        - docs/state-history/attempt-mg-a3d4.md
+        - docs/state-history/attempt-mg-a58f.md
+        - docs/state-history/attempt-mg-c47a-drop.md
+        - docs/state-history/ledger-row-11-L4.md
+        - docs/state-history/threads-chronology.md
+
+    THE GLOB IS DESCRIBED AS COVERING docs/ AND COVERS ITS TOP LEVEL.
+    12 tracked markdown file(s) under docs/ are invisible to it.
+
+==============================================================================
+  1.5  BLIND SPOT TWO: IT READS THE WORKING TREE, NOT THE INDEX.
+       Printed even if empty -- see this script's docstring.
+==============================================================================
+    .md on disk and not tracked        : 0
+    .md tracked and not on disk        : 0
+
+    THIS HOLE IS REAL AND, AT THIS COMMIT, EMPTY.  It costs 0 files
+    today.  It is printed because an unstated hole that happens to be
+    empty is indistinguishable from one nobody looked for.
+
+==============================================================================
+  1.6  THE BOUNDARY ITSELF: docs/ vs THE REPOSITORY.
+       G_IMPL against M_TRACK.
+==============================================================================
+    G_IMPL                                         106
+    M_TRACK                                        295
+    in G_IMPL and not in M_TRACK                     0
+    in M_TRACK and not in G_IMPL                   189
+        - README.md
+        - STATE.md
+        - code/anchor_population_audit_0ba7/PREDICTIONS.md
+        - code/anchor_population_audit_0ba7/README.md
+        - code/audit_2c77/PREDICTIONS.md
+        - code/audit_2c77/README.md
+        - code/audit_330a/PREDICTIONS.md
+        - code/audit_330a/README.md
+        - code/audit_c067/PREDICTIONS.md
+        - code/audit_c067/README.md
+        - ... and 179 more
+
+    189 tracked markdown file(s) sit outside the glob entirely.
+
+==============================================================================
+  1.7  WHAT BLIND SPOT ONE COSTS, IN SITES.  Population: live
+       sentences of the 12 file(s) only D_TRACK can see.
+       Grain: one sentence.  Predicate: the parent's RELAXED.
+==============================================================================
+    files                 : 12
+    sites                 : 0
+    unbounded             : 0
+
+    ZERO.  THE MISSING `**` COSTS NOTHING.  The whole of the gap
+    this ticket is about is the docs/ BOUNDARY, and none of it is
+    the non-recursion -- which is a separate latent hole, not the
+    one that produced the published figure.
+
+==============================================================================
+  1.8  THE PREFILTER, CHECKED.  The same universe counted with
+       and without the two-substring prefilter.  If they differ,
+       every count in this suite is suspect.
+==============================================================================
+    G_IMPL sites, prefiltered  : 36
+    G_IMPL sites, every file   : 36
+    identical                  : YES
+
+==============================================================================
+  VERDICT
+==============================================================================
+    the universe AS IMPLEMENTED  : 106 files
+    the universe AS DESCRIBED    : 118 files
+    they are DIFFERENT
+
+==============================================================================
+SUMMARY p1_glob: G_IMPL 106, G_SHELL 106, D_TRACK 118, M_TRACK 295, M_DISK 295 files
+SUMMARY p1_glob: control G_IMPL==G_SHELL HOLDS
+SUMMARY p1_glob: blind spot 1 (non-recursive) 12 file(s), 0 site(s), 0 unbounded
+SUMMARY p1_glob: blind spot 2 (worktree not index) 0 untracked, 0 tracked-absent
+SUMMARY p1_glob: boundary docs/ vs repo 189 tracked .md outside the glob
+SUMMARY p1_glob: prefilter control identical
+SUMMARY p1_glob: implemented universe DIFFERS FROM described universe
+==============================================================================
