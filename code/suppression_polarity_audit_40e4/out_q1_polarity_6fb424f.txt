@@ -1,0 +1,190 @@
+====================================================================================================
+mg-40e4 Q1 — THE SUPPRESSION POLARITY, ON TWO AXES, WITH A SECOND INSTRUMENT
+====================================================================================================
+  under test     code/state_delegation_repair_a74f/visible_a74f.py at 6fb424f
+  third column   code/state_visibility_audit_65eb/six65eb.py `class Shown` at HEAD, executed unmodified
+  population     28 HTML documents written for this audit.  NO ROW IS
+                 IMPORTED FROM polarity_5f7c.py; the shapes mg-65eb and mg-5f7c
+                 named are RECONSTRUCTED from their descriptions so that a row
+                 agreeing is a re-derivation and not a copy.
+  grain          one document, one marker position, the set of DECLARED
+                 mechanisms reported at that position.
+  no browser     the `reader` column is a reading of the HTML/CSS specs and every
+                 row prints the rule it rests on below the table.
+
+  AXES.  `vs SET` is mg-5f7c's question: does the code implement the set it
+  prints?  `vs POSTURE` is this audit's: does it ever report SUPPRESSED for a
+  marker A READER IS SHOWN?  One FAILS CLOSED row falsifies the sentence
+  `THIS INSTRUMENT FAILS OPEN` that the file prints on every run, whatever the
+  declared set says, because the posture is what the sentence promises.
+
+  id    reader  declared correct  reported  vs SET              vs POSTURE      Shown (2nd instr)
+  -----------------------------------------------------------------------------------------------------
+  Q01   SHOWN   —        (none)   (none)    correct             ok (fails open) SHOWN
+  Q02   BLANK   S4       S4       S4        correct             ok (fails open) SUPPRESSED
+  Q03   BLANK   S5       S5       S5        correct             ok (fails open) SUPPRESSED
+  Q04   BLANK   S1       S1       S1        correct             ok (fails open) SUPPRESSED
+  Q05   BLANK   S2       S2       S2        correct             ok (fails open) SUPPRESSED
+  Q06   BLANK   S3       S3       S3        correct             ok (fails open) SUPPRESSED
+  Q07   BLANK   S4       S4       (none)    MISSES ITS OWN SET  ok (fails open) SUPPRESSED
+  Q08   BLANK   S5       S5       S5        correct             ok (fails open) SUPPRESSED
+  Q09   BLANK   —        (none)   (none)    correct             ok (fails open) SHOWN
+  Q10   BLANK   —        (none)   (none)    correct             ok (fails open) SHOWN
+  Q11   SUBSET  —        (none)   (none)    correct             ok (fails open) SHOWN
+  Q12   BLANK   —        (none)   (none)    correct             ok (fails open) SHOWN
+  Q13   BLANK   —        (none)   (none)    correct             ok (fails open) SHOWN
+  Q14   SHOWN   —        (none)   S4        REPORTS OUT-OF-SET  FAILS CLOSED    SHOWN
+  Q15   SHOWN   —        (none)   S4        REPORTS OUT-OF-SET  FAILS CLOSED    SHOWN
+  Q16   SHOWN   —        (none)   S4        REPORTS OUT-OF-SET  FAILS CLOSED    SHOWN
+  Q17   SHOWN   —        (none)   S5        REPORTS OUT-OF-SET  FAILS CLOSED    SHOWN
+  Q18   BLANK   S1       S1       (none)    MISSES ITS OWN SET  ok (fails open) SUPPRESSED
+  Q19   SHOWN   —        (none)   S5        REPORTS OUT-OF-SET  FAILS CLOSED    SUPPRESSED
+  Q20   SHOWN   —        (none)   S5        REPORTS OUT-OF-SET  FAILS CLOSED    SUPPRESSED
+  Q21   SHOWN   —        (none)   S5        REPORTS OUT-OF-SET  FAILS CLOSED    SUPPRESSED
+  Q22   SHOWN   —        (none)   S5        REPORTS OUT-OF-SET  FAILS CLOSED    SUPPRESSED
+  Q23   SHOWN   —        (none)   (none)    correct             ok (fails open) SHOWN
+  Q24   SHOWN   S1       S1       S1        correct             FAILS CLOSED    SUPPRESSED
+  Q25   SHOWN   S3       S3       S3        correct             FAILS CLOSED    SHOWN
+  Q26   SHOWN   S4       S4       S4        correct             FAILS CLOSED    SUPPRESSED
+  Q27   BLANK   S4       S4       (none)    MISSES ITS OWN SET  ok (fails open) SUPPRESSED
+  Q28   BLANK   S4       S4       (none)    MISSES ITS OWN SET  ok (fails open) SHOWN
+
+====================================================================================================
+WHAT EACH CONSTRUCTION IS FOR, AND THE SPEC RULE ITS `reader` COLUMN RESTS ON
+====================================================================================================
+  Q01  nothing — a reader is shown: SHOWN
+        spec: no suppressing construct is present
+        the positive control: if this reports a mechanism nothing below is evidence
+  Q02  the `hidden` attribute — a reader is shown: BLANK
+        spec: HTML s3.2.6.5: the UA stylesheet gives [hidden] display:none
+        the mechanism S4 names, and the row that must not be lost to a fail-open repair
+  Q03  an inline display:none — a reader is shown: BLANK
+        spec: CSS Display 3 s2.5: display:none generates no boxes
+        the mechanism S5 names
+  Q04  a <details> with no `open` — a reader is shown: BLANK
+        spec: HTML s4.11.1: contents other than the summary are hidden while open is absent
+        the mechanism S1 names
+  Q05  a closed HTML comment — a reader is shown: BLANK
+        spec: HTML s13.2: comment tokens are not inserted into the DOM as element content
+        the mechanism S2 names
+  Q06  inside a <script> — a reader is shown: BLANK
+        spec: HTML s4.12.1: script content is script, not text flow
+        the mechanism S3 names, on the member of S3's list that is least arguable
+  Q07  the `hidden` attribute, UPPERCASE — a reader is shown: BLANK
+        spec: HTML s13.2.5: attribute names are ASCII case-insensitive
+        a repair that parses attributes by name must lowercase the name
+  Q08  display:none, spaced and uppercased — a reader is shown: BLANK
+        spec: CSS Syntax 3 s4: property names and keywords are ASCII case-insensitive
+        S5 must survive the whitespace and case a real stylesheet contains
+  Q09  AN EMBEDDED STYLESHEET hiding the class — a reader is shown: BLANK
+        spec: CSS Cascade 5 s6: an author rule applies; deciding it needs the cascade
+        THE FAIL-OPEN POSTURE ITSELF, with a stylesheet. A browser paints nothing and the
+        instrument must still say NOT SUPPRESSED, because NOT_COVERED's first line puts the
+        cascade outside the set
+  Q10  an EXTERNAL stylesheet — a reader is shown: BLANK
+        spec: NOT_COVERED line 1 names external stylesheets; the bytes are not even in the
+        document
+        the same posture where the deciding bytes are not in the document at all
+  Q11  aria-hidden — a reader is shown: SUBSET
+        spec: WAI-ARIA 1.2 s6.7: removed from the accessibility tree, still painted
+        NOT_COVERED line 2: hidden from a SUBSET of readers
+  Q12  opacity:0 — a reader is shown: BLANK
+        spec: CSS Color 4 s4: fully transparent, and still generates boxes
+        NOT_COVERED line 3. IN THE STYLE ATTRIBUTE, so it is the row that shows S5 is a list of
+        two properties and not `the style attribute hides things`
+  Q13  off-screen positioning — a reader is shown: BLANK
+        spec: CSS Position 3: painted outside the viewport
+        NOT_COVERED line 3 again, and the second S5-adjacent row that must not fire
+  Q14  a CLASS named hidden, NO STYLESHEET in the document — a reader is shown: SHOWN
+        spec: HTML s3.2.6: class has no presentational effect without a rule to select on it
+        mg-65eb's D1, reconstructed rather than imported. It scored SUPPRESSED at the anchor
+  Q15  an ID named hidden — a reader is shown: SHOWN
+        spec: HTML s3.2.6: id has no presentational effect
+        the same shape on a different attribute
+  Q16  the word `hidden` inside a title — a reader is shown: SHOWN
+        spec: HTML s3.2.6: title is advisory text, shown on hover
+        the same shape inside prose the reader is additionally shown
+  Q17  a data- attribute whose NAME ends in `style` — a reader is shown: SHOWN
+        spec: HTML s3.2.6.6: data-* is author data and has no presentational effect
+        mg-5f7c's own P06, reconstructed. The repair's NAME parse is what fixes it
+  Q18  `open` in two attribute VALUES and not as an attribute — a reader is shown: BLANK
+        spec: HTML s4.11.1: the open ATTRIBUTE is what opens the widget
+        mg-65eb's D2, doubled: if the repair reads names, two decoy values change nothing
+  Q19  AN UNKNOWN PROPERTY whose name ends in `display` — a reader is shown: SHOWN
+        spec: CSS Syntax 3 s5.4.4 + CSS Cascade 5 s4.1: a declaration with an unrecognised
+        property name is INVALID AT PARSE TIME and is dropped
+        THIS IS mg-5f7c's OWN P06 ONE LEVEL DOWN. P06 was a NAME matched inside a longer name;
+        this is a PROPERTY matched inside a longer property, in the attribute VALUE, by the same
+        kind of unanchored regex, on the line the repair rewrote
+  Q20  a CUSTOM PROPERTY named --display — a reader is shown: SHOWN
+        spec: CSS Variables 1 s2: a custom property sets no CSS property; --display is not display
+        a declaration that is VALID, that a browser keeps, and that hides nothing
+  Q21  display:none INSIDE A CSS COMMENT — a reader is shown: SHOWN
+        spec: CSS Syntax 3 s4.3.2: comments are consumed by the tokenizer and produce no tokens
+        the declaration is not merely invalid, it does not exist
+  Q22  display:none INSIDE A QUOTED STRING — a reader is shown: SHOWN
+        spec: CSS Syntax 3 s4.3.5: a string token's contents are not declarations
+        the same defect class the whole arc is about: a value read as a name
+  Q23  display:none in an attribute that is not `style` — a reader is shown: SHOWN
+        spec: HTML s3.2.6: alt is not a presentational attribute
+        the control for E: if THIS fires, the repair's name parse is broken too and E says nothing
+        about style values in particular
+  Q24  a marker inside the SUMMARY of a closed <details> — a reader is shown: SHOWN
+        spec: HTML s4.11.1: the FIRST SUMMARY CHILD IS THE WIDGET'S OWN LABEL and is always
+        rendered; only the other children are hidden while open is absent
+        S1 says `inside a <details> carrying no open attribute`, and a summary is inside one. The
+        code implements the set exactly and reports SUPPRESSED for a heading a reader is shown in
+        full. A DECLARED-SET DEFECT, not a code defect, and the fail-open sentence is printed
+        without that qualification
+  Q25  a marker inside a <textarea> — a reader is shown: SHOWN
+        spec: HTML s4.10.11: the textarea's child text is its DEFAULT VALUE and is rendered in the
+        control
+        S3 lists textarea beside script, style and template. The other three are not painted and
+        textarea IS. `polarity_5f7c.py`'s P16 is this document and its browser column says BLANK —
+        A ROW NAME THAT IS NOT ITS MEASUREMENT, in the suite written to prove the polarity
+  Q26  A STYLESHEET THAT UN-HIDES AN IN-SET MECHANISM — a reader is shown: SHOWN
+        spec: CSS Cascade 5 s6.2: an important author declaration beats the UA stylesheet rule
+        [hidden]{display:none}
+        THE ROW THE TICKET ASKS FOR BY NAME — the polarity claim on a document WITH a stylesheet.
+        NOT_COVERED is written as though a stylesheet can only ADD suppression the instrument
+        misses. A stylesheet can equally REMOVE one the instrument reports, and then the
+        instrument is manufacturing exactly the evidence mg-5f7c's own argument says must never be
+        manufactured
+  Q27  an in-set `hidden`, behind a `>` inside an earlier attribute VALUE — a reader is shown: BLANK
+        spec: HTML s13.2.5.34: a `>` inside a quoted attribute value does not end the tag
+        `_TAG`'s `[^>]*` stops at the first `>`, so the tag is never seen and `hidden` is never
+        parsed. A MISS PRODUCED BY AN IN-SET MECHANISM AND A PARSER. mg-5f7c's README says `the
+        whole of what it can miss is enumerated under NOT_COVERED` and `under-detection here is
+        bounded and declared`. It is not in those seven lines
+  Q28  an in-set `hidden` on a tag written with a trailing slash — a reader is shown: BLANK
+        spec: HTML s13.2.5.6: a solidus on a non-void HTML element is ignored; the div stays open
+        `suppressors` treats any tag whose attribute text ends in `/` as self-closing and never
+        stacks it. A second miss of the same kind, and also not in NOT_COVERED
+
+====================================================================================================
+THE COUNTS, AND THE POPULATION AND GRAIN OF EACH
+====================================================================================================
+  POPULATION: 28 documents written by this audit.  GRAIN: one document,
+  one marker position, the reported mechanism set.
+
+  vs SET      12 of 28 wrong ['Q07', 'Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20', 'Q21', 'Q22', 'Q27', 'Q28']
+  vs POSTURE  11 of 28 FAIL CLOSED ['Q14', 'Q15', 'Q16', 'Q17', 'Q19', 'Q20', 'Q21', 'Q22', 'Q24', 'Q25', 'Q26']
+              — i.e. 11 documents a reader is shown IN FULL that this
+              instrument reports SUPPRESSED, while printing THIS INSTRUMENT
+              FAILS OPEN above the table it prints them in.
+  in-set miss 4 of 28 ['Q07', 'Q18', 'Q27', 'Q28'] — under-detection by a mechanism that
+              IS in the declared set, so NOT_COVERED does not enumerate it and
+              `under-detection here is bounded and declared` is false.
+  opposed     8 of 28 ['Q07', 'Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q25', 'Q27'] — rows where `six65eb.Shown`, a second
+              suppression instrument ALREADY IN THIS REPOSITORY, gives the
+              opposite answer.  mg-5f7c's README says no second instrument
+              contradicts this one.
+
+  THE FAIL-OPEN POSTURE, EXECUTED IN THE DIRECTION IT IS SUPPOSED TO GO:
+  ['Q09', 'Q10', 'Q11', 'Q12', 'Q13'] are documents a browser blanks or hides by a mechanism OUTSIDE
+  the declared set, and the instrument declines to report one on every one of
+  them.  Q09 and Q10 carry a stylesheet and Q12/Q13 put the out-of-set mechanism
+  INSIDE the style attribute S5 reads.  A suppression instrument nobody has seen
+  DECLINE to suppress is not evidence of a fail-open posture, so these rows are
+  the half of the claim that does hold.
+====================================================================================================
