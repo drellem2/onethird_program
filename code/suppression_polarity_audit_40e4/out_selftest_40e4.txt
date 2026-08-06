@@ -1,0 +1,34 @@
+====================================================================================================
+mg-40e4 — CONTROLS ON THIS AUDIT'S OWN INSTRUMENTS
+====================================================================================================
+
+T1  `true_offset` — the definition Q2 rests on, on strings with known answers
+  ok    marker with no entity before it        got 5                            want 5
+  ok    marker behind 3 `&amp;`                got 15                           want 15
+  ok    that unescaped position is NOT 15      got 3                            want 3
+  ok    marker written as an entity            got 0                            want 0
+  ok    absent marker                          got None                         want None
+
+T2  `by_posture` — both branches, so the verdict is not a constant
+  ok    shown + reported = FAILS CLOSED        got 'FAILS CLOSED'               want 'FAILS CLOSED'
+  ok    shown + nothing = ok                   got 'ok (fails open)'            want 'ok (fails open)'
+  ok    blank + reported = ok                  got 'ok (fails open)'            want 'ok (fails open)'
+  ok    blank + nothing = ok                   got 'ok (fails open)'            want 'ok (fails open)'
+
+T3  Q1's population can MOVE — the same 28 documents at the pre-repair anchor
+      at tree         FAILS CLOSED 7/28   vs SET wrong 6/28
+      at 6fb424f      FAILS CLOSED 11/28   vs SET wrong 12/28
+  ok    the two revisions differ               got True                         want True
+  ok    the repair strictly improved `vs SET`  got True                         want True
+
+T4  every Q1 document contains its marker exactly once
+  ok    markers unique                         got []                           want []
+
+T5  Q3's instrument rule can return FALSE
+  ok    a file that is not an instrument       got False                        want False
+  ok    visible_a74f is one                    got True                         want True
+
+====================================================================================================
+  14 of 14 controls fire.
+  POPULATION: this audit's own functions.  GRAIN: one control.
+====================================================================================================
