@@ -87,6 +87,17 @@ def sandbox(rev, tag=None):
                    check=True, capture_output=True)
     subprocess.run(["git", "checkout", "--quiet", "--detach", rev], cwd=d,
                    check=True, capture_output=True)
+    # SD14 of this instrument, and it nearly cost this audit its headline.
+    # `git clone` creates ONE local branch -- the source's current branch, which
+    # in a polecat worktree is the polecat's own -- so the clone HAS NO `main`.
+    # This arc's probes resolve `main` constantly (`git diff main..HEAD`,
+    # `M.PINNED` against `main`), and every one of them raised a traceback in
+    # BOTH arms of V4 for that reason alone.  Read as a measurement that would
+    # have been: SIX STEPS THAT CANNOT RUN AT ALL, a finding manufactured
+    # entirely by the harness.  Caught by reading the traceback instead of
+    # counting it.
+    subprocess.run(["git", "branch", "-f", "main", "origin/main"], cwd=d,
+                   capture_output=True)
     open(stamp, "w").write(rev + "\n")
     return d
 
@@ -197,6 +208,7 @@ def stub_run(sbx, tree, timeout=120):
     env["PATH"] = stubdir + os.pathsep + env.get("PATH", "")
     env["V18_LEDGER"] = led
     env.pop("PYTHONPATH", None)
+    env.pop("V18_RUNNING", None)     # SD13 -- see v7_self.py / V7c
     env["V18_WORK"] = child_work(tree)
     committed = {}
     for f in os.listdir(d):
@@ -326,6 +338,7 @@ def real_run(sbx, tree, timeout=300):
     env = dict(os.environ)
     env["PYTHONPATH"] = make_shim()
     env["V18_READS"] = led
+    env.pop("V18_RUNNING", None)                # SD13 -- see v7_self.py / V7c
     env["V18_WORK"] = child_work(tree)          # SD12 -- see child_work()
     rec = {"tree": tree, "timeout": False, "exit": None, "opens": []}
     try:

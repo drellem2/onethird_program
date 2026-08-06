@@ -67,6 +67,29 @@ d("SD6", "V3 RUNS THE ARC FOR REAL AND THE ARC'S PROBES RUN EACH OTHER.  A "
   "mg-ec63's SD6d, read before this instrument was written",
   "unmeasured; it is a mechanism by which the %d-second timeout kills more "
   "trees than the tree's own work would")
+d("SD14", "THE DISPOSABLE CLONE HAD NO `main`, AND IT MANUFACTURED THIS "
+         "AUDIT'S HEADLINE.  `git clone` creates one local branch -- the "
+         "source's current branch, which in a polecat worktree is the "
+         "polecat's own -- so `main` does not exist in the sandbox.  This "
+         "arc's probes resolve `main` constantly, and every one that did "
+         "raised a traceback in BOTH arms of V4 for that reason alone.  Read "
+         "as a measurement it said SIX STEPS CANNOT RUN AT ALL, which is "
+         "exactly the finding this audit was sent to look for, and it was "
+         "entirely the harness",
+  "reading the traceback instead of counting it -- the count was consistent, "
+  "reproducible, and about my clone",
+  "the sandbox now creates `main` from `origin/main`, which is the condition a "
+  "run in the worktree has.  Every V4 verdict was re-derived after the fix")
+d("SD13", "A CLEAN BILL OF HEALTH OVER AN EMPTY POPULATION, IN THE SECTION "
+         "ABOUT MY OWN DEFECTS.  V7c printed `0 invocations observed / 0 "
+         "starting on an empty transcript` and then `no probe of mine ever "
+         "starts on an empty transcript of this tree`.  My runner had refused "
+         "to start: `V18_RUNNING` is exported by `run_all.sh` and inherited by "
+         "everything it executes, so the re-entrancy guard fired on the very "
+         "measurement of myself",
+  "the invocation count being 0 when the runner has eight probes",
+  "the guard variable is now stripped from every runner this suite executes, "
+  "and V7c refuses to draw a conclusion from zero invocations")
 d("SD12", "THIS SUITE'S OWN V4 TRANSCRIPT WAS DESTROYED BY THIS SUITE, and "
          "what was left was a 19-BYTE FILE CONTAINING THE STUB'S MARKER -- a "
          "vacuous pass of exactly this ticket's shape, produced by the audit "
@@ -172,7 +195,18 @@ if os.path.isdir(os.path.join(sbx, B.MINE)):
         B.plain("...INVOCATIONS starting on an EMPTY transcript of this tree",
                 len(st), "one invocation")
         print()
-        if st:
+        if not res["rows"]:
+            # SD13: this row shipped once with BOTH numbers 0 and the verdict
+            # "no probe of mine ever starts on an empty transcript" under it --
+            # a clean bill of health over an empty population.  The runner had
+            # refused to start, because `V18_RUNNING` was inherited from the
+            # outer run_all.sh and the re-entrancy guard fired.  A guard that
+            # makes a tree unmeasurable makes the measurement of it vacuous.
+            print("      *** NOT A RESULT: MY RUNNER PRODUCED ZERO INVOCATIONS.")
+            print("      Nothing was measured, so nothing above is a finding.")
+            print("      The usual cause is the re-entrancy guard firing on an")
+            print("      inherited V18_RUNNING -- see SD13. ***")
+        elif st:
             print("      *** MY OWN RUNNER CARRIES THE DEFECT I AM SWEEPING FOR ***")
             for s in st:
                 print("          %s" % ", ".join(s["zero"]))

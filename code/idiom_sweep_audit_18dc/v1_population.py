@@ -147,6 +147,77 @@ print("  The first of those is `code/grain_axis_audit_03d1`.  mg-ec63's S1a")
 print("  prints `code/grain_axis_audit_03d1 present here:  NO` and reasons from")
 print("  its absence.  It is present in the commit that ships that sentence.")
 
+# ---------------------------------------------------------------------------
+B.hdr("V1e  THE ORDERING -- DID THE SWEEP RUN BEFORE THE FIX?")
+
+print("  The brief's first item, and it is not answerable from the report's")
+print("  narrative.  If a runner was repaired between the count and the sweep,")
+print("  the sweep is about a partly-repaired tree and the ticket's central")
+print("  question is unanswered however green the output is.")
+print()
+print("  The test is a MODIFICATION and not an addition: a `run_all.sh` ADDED")
+print("  in the window is a new tree, not a repaired one.  `--diff-filter=M`")
+print("  over the window from mg-03d1's carrier to mg-ec63's carrier:")
+print()
+WINDOW = "eacc5e1..7fccb4e"
+mods = B.git("log", "--format=%h\t%s", "--diff-filter=M", WINDOW,
+             "--", "code/*/run_all.sh").splitlines()
+raw = B.git("log", "--format=COMMIT\t%h", "--name-status", WINDOW,
+            "--", "code/*/run_all.sh").splitlines()
+touched = []
+cur = None
+for line in raw:
+    if line.startswith("COMMIT\t"):
+        cur = line.split("\t")[1]
+    elif line[:1] in ("A", "M") and cur:
+        touched.append((cur, line[0], line.split("\t")[-1]))
+adds = [x for x in touched if x[1] == "A"]
+modl = [x for x in touched if x[1] == "M"]
+own = [x for x in modl if "truncate_sweep_ec63" in x[2]]
+foreign = [x for x in modl if "truncate_sweep_ec63" not in x[2]]
+
+print("  population: every commit in %s touching a `code/*/run_all.sh`" % WINDOW)
+B.plain("...RUNNERS ADDED in the window", len(adds), "one file-change")
+B.plain("...RUNNERS MODIFIED in the window", len(modl), "one file-change")
+B.plain("...of those, in the SWEEP'S OWN tree", len(own), "one file-change")
+B.plain("...of those, in ANY OTHER tree of the arc", len(foreign), "one file-change")
+print()
+for h, st, p in touched:
+    print("      %s  %s  %s" % (h, st, p))
+print()
+# existed at eacc5e1 == `git ls-tree` at eacc5e1 lists the path.  ONE
+# condition, so it can fail; an `and` whose first half is always true would be
+# a green clause that measures nothing, which is this ticket's own shape.
+pre_existing = [x for x in foreign
+                if B.git("ls-tree", "eacc5e1", "--", x[2]).strip()]
+B.plain("...MODIFICATIONS of a runner that EXISTED at eacc5e1, outside the "
+        "sweep's own tree", len(pre_existing), "one file-change")
+print()
+if not pre_existing:
+    print("  ZERO.  No runner of the arc that existed when the 43 was counted")
+    print("  was edited before the sweep ran.  THE SWEEP RAN AGAINST AN")
+    print("  UNREPAIRED ARC and the ordering the ticket demands was kept.")
+else:
+    print("  *** A PRE-EXISTING RUNNER WAS MODIFIED BEFORE THE SWEEP RAN ***")
+print()
+print("  Two qualifications, because the clean answer is the one nobody")
+print("  double-checks:")
+print()
+print("  (1) The modifications that DID happen are each a ticket editing ITS")
+print("      OWN runner -- mg-ec63's structural repair of its own transcript")
+print("      writing, and mg-1abe's revision-resolution fix.  Neither is a")
+print("      member of the population being swept for the defect.")
+print("  (2) ONE TREE WAS ALREADY REPAIRED BEFORE EITHER MEASUREMENT.")
+print("      `runner_exit_repair_bf79` carried the `.new`+`mv` fix before")
+print("      mg-03d1 counted 43 and before mg-ec63 swept.  It is the ONLY")
+print("      instance in the arc with a known positive on the record -- nine")
+print("      hidden labels -- and neither measurement could observe it in its")
+print("      defective state.  The sweep-then-fix ordering was kept for the")
+print("      other %d; for the one that matters most it was already inverted,"
+      % (len(sets["3fc870a"]) - 1))
+print("      by a different ticket, before this arc began.  mg-ec63 saw this")
+print("      and re-ran the control at 675c2ba rather than at HEAD.")
+
 print()
 print("V1 TOTAL REVISIONS WHERE THE SHIPPED FIGURE IS NOT REPRODUCIBLE: %d"
       % mismatch)

@@ -194,7 +194,15 @@ def broke(r):
 
 
 def mine(r):
+    """A TIMEOUT IS NOT A VERDICT, and folding it into one is this ticket's
+    own defect.  An earlier draft of this rule returned CANNOT RUN AT ALL for
+    both-arms-timed-out as well as both-arms-traceback, and printed 6 where the
+    traceback count was 1.  `not known` is now its own row."""
     a, b = r["A"], r["B"]
+    if a["to"] and b["to"]:
+        return "BOTH TIMED OUT (unmeasured)"
+    if a["to"] or b["to"]:
+        return "ONE ARM TIMED OUT (unmeasured)"
     if broke(a) and broke(b):
         return "CANNOT RUN AT ALL"
     if broke(a) and not broke(b):
@@ -224,7 +232,8 @@ def ec63_classify(r):
 
 order = ["CANNOT RUN AT ALL", "BREAKS ONLY UNDER THE DEFECT",
          "NEVER EXERCISED (ec63 sense)", "DIFFERENT", "INERT READ",
-         "SAME (no read observed)"]
+         "SAME (no read observed)", "BOTH TIMED OUT (unmeasured)",
+         "ONE ARM TIMED OUT (unmeasured)"]
 counts = {k: 0 for k in order}
 for r in rows.values():
     counts[mine(r)] += 1
@@ -252,6 +261,20 @@ for (t, p), r in sorted(rows.items()):
     print("      %-36s %-22s %-10s %-10s %s%s"
           % (("%s::%s" % (t.replace("code/", ""), p))[:36], v, astat, bstat,
              e, flag))
+
+print()
+print("  AND THE SAME ROWS SPLIT BY THE VERDICT mg-ec63 RECORDED FOR THEM,")
+print("  because its 11 SAME and its 14 NONDETERMINISTIC are different claims:")
+print()
+for grp in ("SAME", "NDET"):
+    sub = [r for r in rows.values() if r["ec63"] == grp]
+    print("  population: mg-ec63's %d steps recorded %s"
+          % (len(sub), "SAME" if grp == "SAME" else "NONDETERMINISTIC"))
+    for k in order:
+        n = sum(1 for r in sub if mine(r) == k)
+        if n:
+            B.plain("...of those, %s" % k, n, "one step")
+    print()
 
 # ---------------------------------------------------------------------------
 B.hdr("V4c  THE COLLAPSE, SHOWN ON A ROW CONSTRUCTED TO HAVE THE THIRD OUTCOME")
