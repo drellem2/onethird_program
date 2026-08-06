@@ -755,7 +755,16 @@ def restore_arc():
     # `finally` that a killed probe never reaches.  A sweep scoped to `code/`
     # leaves the arc's PROSE edited, which is the one place nobody would think
     # to look for damage done by a measurement.
-    for t in trees() + ["docs"]:
+    every = ["code/%s" % d
+             for d in sorted(os.listdir(os.path.join(REPO, "code")))
+             if os.path.isdir(os.path.join(REPO, "code", d))]
+    # EVERY directory under `code/`, not every RUNNER.  `trees()` is the
+    # population of runners, and 7 directories have no runner -- one of which
+    # (`face_geometry_audit_f1b2`) is where a killed probe kept leaving an
+    # armed shell script and a modified transcript.  A restore scoped to the
+    # population being measured misses exactly the places the measurement
+    # spills into, which is the same defect one level up.
+    for t in every + ["docs"]:
         if t == MINE:
             continue
         with _GITLOCK:

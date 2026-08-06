@@ -37,6 +37,8 @@ T4  THE OPEN TRACE, ON A CONSTRUCTED PROBE
   ok   A reads NOTHING -- the shape reproduced                    got 'LEN 0'
   ok   the tree is restored: the transcript is back               got 'SEVENTEEN'
   ok   a probe that only MENTIONS a transcript does not open one  got False
+  ok   a CHILD's read is not the PROBE's read                     got False
+  ok   ...and it is recorded as the child's                       got True
   ok   reading ANOTHER transcript is not the EMPTIED class        got False
   ok   ...it is the STALE class, and is reported apart            got ['out_other.txt']
 
@@ -59,4 +61,4 @@ T6  THE POPULATION RULE'S OWN EDGE
   ok   a step whose transcript does not exist yields a path, not a crash got True
   ok   locate finds a CROSS-TREE probe by its repo-relative path  got 'code/truncate_sweep_ec63/lib_ec63.py'
 
-selftest_ec63 TOTAL: 32 assertions, 0 BAD
+selftest_ec63 TOTAL: 34 assertions, 0 BAD
