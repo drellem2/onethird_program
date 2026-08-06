@@ -66,11 +66,13 @@ for r in recs:
     if re.search(r"\bsubprocess\.|os\.system|os\.popen", src):
         subp += 1
 
-defect("SD2", "an `open` audit hook sees only the PROBE's own process")
-print("        A probe that reads a transcript by spawning `cat`, `grep`, or a")
-print("        second `python3` opens nothing in the traced process, so this")
-print("        sweep records it as not reading its own transcript.  It is a")
-print("        FALSE NEGATIVE of the same kind as the text rule's, one layer")
+defect("SD2", "the audit hook cannot see a NON-PYTHON child")
+print("        `EC63_TRACE` and `PYTHONPATH` are inherited, so a probe that")
+print("        spawns another PYTHON process IS traced -- and the pid tells")
+print("        the child's opens from the parent's, which S2b now counts")
+print("        apart.  A probe that reads a transcript by spawning `cat` or")
+print("        `grep` is still invisible: no Python, no audit hook.  That is")
+print("        a FALSE NEGATIVE of the same kind as the text rule's, one layer")
 print("        further in, and the number of probes it could apply to is:")
 print()
 B.plain("...STEPS run in S2 whose probe spawns a subprocess at all", subp,
@@ -188,6 +190,22 @@ if nto:
     print("        S2b is a LOWER BOUND, and S2a says so where the number is")
     print("        printed rather than in a footnote.  The population that is")
     print("        exact is the %d steps that finished." % (len(recs) - nto))
+
+ch = sum(1 for r in recs if r.get("own_child") and not r.get("own"))
+defect("SD6d", "the first pass ATTRIBUTED A CHILD'S READ TO ITS PARENT, and "
+               "the two numbers it produced disagreed inside one run")
+print("        Before the pid went into the trace, a subprocess's opens were")
+print("        recorded against the probe that spawned it.  That is not merely")
+print("        wrong, it is UNSTABLE: whether a child reaches the read depends")
+print("        on load, so `face_geometry_instr_5f9a/d3_reintroduction.py` came")
+print("        out reading its own transcript under the parallel pass and not")
+print("        reading it when run alone.  The tell was arithmetic: S2 printed")
+print("        37 EMPTIED steps and S3, reading the same ledger, swept 36.")
+print("        A suite whose own two sections disagree by one is the shape")
+print("        this whole ticket is about, committed by the sweep for it.")
+print()
+B.plain("...STEPS now attributed to a CHILD rather than the probe", ch,
+        "one step")
 
 defect("SD7", "A and B are two runs, not one run observed twice")
 print("        `diff(A, B)` is attributed to the shape.  The determinism")

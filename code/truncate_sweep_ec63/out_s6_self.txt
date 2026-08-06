@@ -1,5 +1,5 @@
 mg-ec63 / S6 -- THE DEFECTS OF THIS INSTRUMENT
-HEAD: e60c3c9
+HEAD: 4d19ea9
 
 ==========================================================================
 S6a  THE POPULATION SWALLOWS ME, AND BOTH NUMBERS ARE PRINTED
@@ -121,13 +121,13 @@ S6e  DID THE SWEEP LEAVE THE ARC AS IT FOUND IT?
 S6f  THE ONE THIS SUITE CANNOT ANSWER ABOUT ITSELF
 ==========================================================================
 
-  SD6b  46 of 422 steps were KILLED before they could answer
+  SD6b  42 of 422 steps were KILLED before they could answer
         A probe killed at the timeout may never have reached the
         line that opens its own transcript.  S2 records it as
         not-reading, and the truth is not-known.  Every count in
         S2b is a LOWER BOUND, and S2a says so where the number is
         printed rather than in a footnote.  The population that is
-        exact is the 376 steps that finished.
+        exact is the 380 steps that finished.
 
   SD7   A and B are two runs, not one run observed twice
         `diff(A, B)` is attributed to the shape.  The determinism

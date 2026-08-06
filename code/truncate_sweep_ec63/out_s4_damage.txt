@@ -1,26 +1,20 @@
 mg-ec63 / S4 -- WHAT WAS PUBLISHED ON THE STRENGTH OF THE EMPTY FILE
-HEAD: e60c3c9
+HEAD: 4d19ea9
 
 ==========================================================================
 S4a  THE FIGURES THAT MOVED
 ==========================================================================
-  population: the 6 DIFFERENT STEPS of S3a
+  population: the 4 DIFFERENT STEPS of S3a
 
 
   ----------------------------------------------------------------
   audit_2c77  ::  q3_operands.py
   lines only in A (the defect): 1      only in B (real file): 4
   integers on the A side that are NOT on the B side: 20, 84
-  PUBLISHED CLAIMS CARRYING ONE OF THOSE FIGURES:
+  PROSE CARRYING ONE OF THOSE INTEGERS -- A CANDIDATE, NOT A
+  PROOF.  An integer match is a coincidence until the sentence
+  is read; S4a2 is the row that does not need reading:
       20     README.md                    | `face_complex.py` | 35 | 15 | **20** |
-
-  ----------------------------------------------------------------
-  audit_330a  ::  s4_term.py
-  lines only in A (the defect): 3      only in B (real file): 3
-  integers on the A side that are NOT on the B side: 16, 36, 55, 86, 8
-  PUBLISHED CLAIMS CARRYING ONE OF THOSE FIGURES:
-      16     README.md                    Plus **16 call sites of the two named helpers** (`last_touching`,
-      36     README.md                    Pre-filed in the same action as its parent. Six scripts, 36 self-test
 
   ----------------------------------------------------------------
   branching_audit_d330  ::  e3_dispositions.py
@@ -30,21 +24,11 @@ S4a  THE FIGURES THAT MOVED
   confined to the transcript.  A REAL RESULT, recorded as one.
 
   ----------------------------------------------------------------
-  repair_69d1  ::  p3_reason.py
-  lines only in A (the defect): 2      only in B (real file): 8
-  integers on the A side that are NOT on the B side: 16, 28
+  runner_exit_audit_56dc  ::  t5_fixture.py
+  lines only in A (the defect): 1      only in B (real file): 1
+  integers on the A side that are NOT on the B side: 100
   NO PUBLISHED CLAIM carries any of those figures.  The delta is
   confined to the transcript.  A REAL RESULT, recorded as one.
-
-  ----------------------------------------------------------------
-  repair_b2af  ::  t3_term.py
-  lines only in A (the defect): 9      only in B (real file): 14
-  integers on the A side that are NOT on the B side: 13, 20, 0
-  PUBLISHED CLAIMS CARRYING ONE OF THOSE FIGURES:
-      13     PREDICTIONS.md               13 directories (of 36 sites) … plus 16 call sites with no `--format=%H`"*.
-      13     README.md                    across 13 directories, of 36 sites*. mg-330a's own committed transcript says
-      20     PREDICTIONS.md               | **P-6a** | the residue re-derived at HEAD, excluding this ticket's own files: **exactly 20**, same as mg-330a found |
-      20     README.md                    silently — the residue is **20 sites, the same 20, none missed**:
 
   ----------------------------------------------------------------
   runner_exit_repair_70c7  ::  r6_self.py
@@ -52,6 +36,43 @@ S4a  THE FIGURES THAT MOVED
   integers on the A side that are NOT on the B side: 78
   NO PUBLISHED CLAIM carries any of those figures.  The delta is
   confined to the transcript.  A REAL RESULT, recorded as one.
+
+==========================================================================
+S4a2  THE ROWS WHERE PUBLICATION CAN ACTUALLY BE ATTRIBUTED
+==========================================================================
+  `diff(A, B)` proves the SHAPE changes the answer TODAY.  It does not
+  by itself prove a PUBLISHED figure is wrong, and conflating the two
+  would be this arc's own recurring error.  The bridge is one check:
+
+      does run A -- the defect, reproduced -- come out BYTE-IDENTICAL
+      to the transcript that is committed in the tree?
+
+  Where it does, the committed transcript IS a run under the defect and
+  the attribution is arithmetic.  Where it does not, the tree has moved
+  since publication and the published figure cannot be recomputed
+  without checking out the publishing revision -- which this ticket did
+  NOT do, and says so rather than reaching for the integer match.
+
+  population: the 4 DIFFERENT STEPS of S3a
+      ...STEPS whose committed transcript IS the defect run           1
+          ^ one unit of that number is one step
+      ...STEPS whose tree has drifted since publication               3
+          ^ one unit of that number is one step
+
+      ATTRIBUTED  runner_exit_repair_70c7                r6_self.py
+          the bytes in code/runner_exit_repair_70c7/out_r6_self.txt were produced by a run that could not
+          see that file.  What a run that CAN see it reports is the
+          B side of S3c, and the difference is the damage.
+      DRIFTED     audit_2c77                             q3_operands.py
+      DRIFTED     branching_audit_d330                   e3_dispositions.py
+      DRIFTED     runner_exit_audit_56dc                 t5_fixture.py
+
+  FOR THE DRIFTED ROWS THE HONEST STATEMENT IS THE WEAKER ONE: this
+  probe's answer is sensitive to the shape, so any figure it
+  published while the shape was live is SUSPECT.  `suspect` is not
+  `wrong`, and the work that would turn one into the other -- run
+  each probe at its own publishing revision -- is named in
+  README.md under WHAT I DID NOT DO.
 
 ==========================================================================
 S4b  THE NEVER-EXERCISED PROBES -- A DIFFERENT KIND OF DAMAGE
@@ -70,18 +91,21 @@ S4b  THE NEVER-EXERCISED PROBES -- A DIFFERENT KIND OF DAMAGE
 ==========================================================================
 S4c  THE TALLY
 ==========================================================================
-  population: the 6 DIFFERENT STEPS of S3a
-      ...STEPS whose changed figure REACHED PROSE (damage)            3
+  population: the 4 DIFFERENT STEPS of S3a
+      ...STEPS whose changed figure has an INTEGER MATCH in prose      1
           ^ one unit of that number is one step
       ...STEPS whose delta never left the transcript                  3
           ^ one unit of that number is one step
 
-  population: the 37 EMPTIED STEPS swept in S3a
-      ...STEPS costing the arc a published figure                     3
+  population: the 36 EMPTIED STEPS swept in S3a
+      ...STEPS with an integer match in prose (candidate)             1
+          ^ one unit of that number is one step
+      ...STEPS where the committed transcript IS the defect run (proven)      1
           ^ one unit of that number is one step
       ...STEPS costing the arc an unexercised control                 0
           ^ one unit of that number is one step
-      ...STEPS costing the arc nothing                               34
+      ...STEPS costing the arc nothing                               35
           ^ one unit of that number is one step
 
-S4 TOTAL PUBLISHED CLAIMS RESTING ON AN EMPTY FILE: 3
+S4 TOTAL PUBLISHED TRANSCRIPTS PROVEN TO BE DEFECT RUNS: 1
+S4 TOTAL CANDIDATE PROSE CLAIMS BY INTEGER MATCH: 1
