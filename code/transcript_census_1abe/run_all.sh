@@ -40,8 +40,8 @@
 cd "$(dirname "$0")" || exit 2
 
 WORST=0
-for s in selftest_1abe t1_population t2_census t3_shas t4_rebase t5_control \
-         t6_caps; do
+for s in selftest_1abe t1_population t2_census t3_shas t4_rebase t7_sightings \
+         t5_control t6_caps; do
     printf '===> %s\n' "$s"
     python3 -W ignore "$s.py" "$@" > "out_$s.txt" 2>&1
     RC=$?
