@@ -545,7 +545,7 @@ sys.addaudithook(_hook)
 
 
 def shim_dir():
-    d = os.path.join(HERE, ".ec63_shim")
+    d = os.path.join(os.environ.get("EC63_WORK") or HERE, ".ec63_shim")
     if not os.path.isdir(d):
         os.makedirs(d)
     p = os.path.join(d, "sitecustomize.py")
@@ -626,7 +626,8 @@ def run_probe(tree, probe, out_name, empty_first, timeout=90, trace=False,
     if trace:
         # one trace file PER SLOT: workers run concurrently and a shared path
         # would attribute one probe's opens to another
-        tracefile = os.path.join(HERE, ".ec63_trace_%d.txt" % slot)
+        tracefile = os.path.join(os.environ.get("EC63_WORK") or HERE,
+                                 ".ec63_trace_%d.txt" % slot)
         if os.path.exists(tracefile):
             os.remove(tracefile)
         open(tracefile, "w").close()
@@ -777,7 +778,12 @@ def restore_arc():
     return left
 
 
-LEDGER = os.path.join(HERE, "ledger_ec63.json")
+# The ledger and the trace files live OUTSIDE the repository too, for the same
+# reason the transcripts do: this suite runs the arc's own probes, and they
+# write.  `EC63_WORK` is set by run_all.sh; running a probe by hand falls back
+# to this directory, which is fine because nothing else is running then.
+WORK = os.environ.get("EC63_WORK") or HERE
+LEDGER = os.path.join(WORK, "ledger_ec63.json")
 
 
 def save(name, obj):

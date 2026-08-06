@@ -1,5 +1,5 @@
 mg-ec63 / S3 -- THE SWEEP: WHAT THE PROBE FAILED TO SEE
-HEAD: 29f1ba5
+HEAD: a869ac3
 
 ==========================================================================
 S3a  RUNNING EVERY EMPTIED STEP AGAINST THE DEFECT
@@ -12,13 +12,13 @@ S3a  RUNNING EVERY EMPTIED STEP AGAINST THE DEFECT
           ^ one unit of that number is one step
       ...of those, NEVER EXERCISED                                    0
           ^ one unit of that number is one step
-      ...of those, NONDETERMINISTIC                                  11
+      ...of those, NONDETERMINISTIC                                  13
           ^ one unit of that number is one step
       ...of those, A TIMED OUT                                        0
           ^ one unit of that number is one step
       ...of those, BOTH TIMED OUT                                     3
           ^ one unit of that number is one step
-      ...of those, SAME                                              11
+      ...of those, SAME                                               9
           ^ one unit of that number is one step
 
       ...RUNNERS with at least one DIFFERENT or NEVER-EXERCISED step      7
@@ -71,7 +71,7 @@ S3c  EVERY DIFFERENT AND NEVER-EXERCISED ROW, WITH ITS DELTA
   ----------------------------------------------------------------
   audit_330a  ::  s4_term.py
   verdict: DIFFERENT        A exits 1 / B exits 1 / A reproduces committed: NO -- tree drifted
-  lines: A=317  B=317
+  lines: A=318  B=318
       --- A(empty)
       +++ B(populated)
       @@ -110,3 +110,3 @@
@@ -79,7 +79,7 @@ S3c  EVERY DIFFERENT AND NEVER-EXERCISED ROW, WITH ITS DELTA
       -   and on the REAL tree: 55 line(s) carry the hyphenated form.
       +   and on the REAL tree: 57 line(s) carry the hyphenated form.
           of those, in a window stating the term but NOT carrying the
-      @@ -234,5 +234,5 @@
+      @@ -235,5 +235,5 @@
           live claim         61       15         24
       -   transcript         16       4          8
       +   transcript         17       4          9
@@ -95,7 +95,7 @@ S3c  EVERY DIFFERENT AND NEVER-EXERCISED ROW, WITH ITS DELTA
       --- A(empty)
       +++ B(populated)
       @@ -108,6 +108,6 @@
-          swept population: 1530 tracked .md/.py/.txt/.sh files
+          swept population: 1531 tracked .md/.py/.txt/.sh files
       -   occurrences of an X2-shaped claim : 72
       +   occurrences of an X2-shaped claim : 73
           marker window                     : 8 lines either side
@@ -219,8 +219,6 @@ S3d  AND THE SAME ROWS, LISTED, BECAUSE A NULL RESULT IS A RESULT
       SAME  species_bound_audit_6ef4                 selftest6ef4.py
       SAME  species_bound_audit_6ef4                 t4_restore.py
       SAME  species_extent_d633                      selftestd633.py
-      SAME  species_extent_d633                      e3_bothways.py
-      SAME  species_rung_repair_4adb                 v3_self.py
       NDET  face_geometry_audit_6653                 verify_claims.py   (excluded from DIFFERENT by the control)
       NDET  hodge_leverage_audit_97fb                audit_97fb.py   (excluded from DIFFERENT by the control)
       NDET  repair_8d5e                              r4_self.py   (excluded from DIFFERENT by the control)
@@ -230,7 +228,9 @@ S3d  AND THE SAME ROWS, LISTED, BECAUSE A NULL RESULT IS A RESULT
       NDET  species_bound_repair_5040                r1_bound.py   (excluded from DIFFERENT by the control)
       NDET  species_bound_repair_5040                r3_summaries.py   (excluded from DIFFERENT by the control)
       NDET  species_bound_repair_5040                r4_self.py   (excluded from DIFFERENT by the control)
+      NDET  species_extent_d633                      e3_bothways.py   (excluded from DIFFERENT by the control)
       NDET  species_repair_a4ef                      s1_extent.py   (excluded from DIFFERENT by the control)
       NDET  species_rung_repair_4adb                 v2_layer2.py   (excluded from DIFFERENT by the control)
+      NDET  species_rung_repair_4adb                 v3_self.py   (excluded from DIFFERENT by the control)
 
 S3 TOTAL DIFFERENT + NEVER-EXERCISED: 7

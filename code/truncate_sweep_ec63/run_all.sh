@@ -48,15 +48,33 @@ export EC63_TIMEOUT EC63_WORKERS
 
 rm -f ./out_*.txt.new
 
+# THE TRANSCRIPTS ARE WRITTEN OUTSIDE THE REPOSITORY AND COPIED IN AT THE END.
+#
+# mg-bf79's `.new`+`mv` closes the hole where a runner truncates its OWN
+# probe's transcript.  It does NOT close the hole this suite hits, which is one
+# level up: THIS SUITE EXECUTES 422 OF THE ARC'S OWN PROBES, and the arc's
+# probes write.  Twice, a full pass produced a ZERO-BYTE `out_s2_bite.txt`
+# beside a `S2 TOTAL EMPTIED STEPS: 32` exit code -- the probe ran, found 32,
+# and its transcript was destroyed by something running inside the tree while
+# it wrote.  A 40-step subset of the same probe writes its transcript
+# perfectly, so the destroyer is one of the arc's own probes and not this code.
+#
+# The fix is not another guard.  It is that a suite which runs the whole arc
+# CANNOT KEEP ITS IN-FLIGHT OUTPUT INSIDE THE ARC.  `$WORK` is outside the
+# repository entirely; the transcripts land in the tree only after the last
+# probe has exited, which is the only moment nothing else is running.
+WORK=$(mktemp -d "${TMPDIR:-/tmp}/ec63_work.XXXXXX")
+export EC63_WORK="$WORK"
+trap 'rm -rf "$WORK"' EXIT INT TERM
+
 run() {
     _p=$1
     _o=$2
     echo "### $_p"
-    python3 -B "$_p" > "$_o.new" 2>&1 || {
+    python3 -B "$_p" > "$WORK/$_o" 2>&1 || {
         echo "    (exit $? -- see $_o; a non-zero exit is how a probe reports"
         echo "     findings, and the predicted codes are in PREDICTIONS.md)"; }
-    mv -f "$_o.new" "$_o"
-    cat "$_o"
+    cat "$WORK/$_o"
     echo
 }
 
@@ -67,6 +85,11 @@ run s3_sweep.py       out_s3_sweep.txt
 run s4_damage.py      out_s4_damage.txt
 run s5_control.py     out_s5_control.txt
 run s6_self.py        out_s6_self.txt
+
+# NOW, and not before: nothing of the arc is running any more.
+for _f in "$WORK"/out_*.txt; do
+    [ -e "$_f" ] && cp -f "$_f" "./$(basename "$_f")"
+done
 
 echo "=========================================================================="
 echo "SUMMARY -- every TOTAL line and every FINDING, from the transcripts"

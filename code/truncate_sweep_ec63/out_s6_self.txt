@@ -1,0 +1,169 @@
+mg-ec63 / S6 -- THE DEFECTS OF THIS INSTRUMENT
+HEAD: a869ac3
+
+==========================================================================
+S6a  THE POPULATION SWALLOWS ME, AND BOTH NUMBERS ARE PRINTED
+==========================================================================
+
+  SD1   this tree is a member of the population it counts
+        `code/*/run_all.sh` is a property, and the moment this suite
+        has a runner it satisfies it.  mg-03d1 recorded exactly this
+        and its A4b prediction went from right to wrong because of it.
+
+      ...RUNNERS in the arc, including mine                         110
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS of the arc this sweep is ABOUT                     109
+          ^ one unit of that number is one `run_all.sh`
+
+      my own runner's operators: STRUCT
+      -- it uses the structural fix, so this suite is not an
+         instance of its own subject.  Which is the ONLY reason
+         S3's numbers are not partly about itself.
+
+==========================================================================
+S6b  THE TRACE HOOK CANNOT SEE OUTSIDE ITS OWN PROCESS
+==========================================================================
+
+  SD2   the audit hook cannot see a NON-PYTHON child
+        `EC63_TRACE` and `PYTHONPATH` are inherited, so a probe that
+        spawns another PYTHON process IS traced -- and the pid tells
+        the child's opens from the parent's, which S2b now counts
+        apart.  A probe that reads a transcript by spawning `cat` or
+        `grep` is still invisible: no Python, no audit hook.  That is
+        a FALSE NEGATIVE of the same kind as the text rule's, one layer
+        further in, and the number of probes it could apply to is:
+
+      ...STEPS run in S2 whose probe spawns a subprocess at all     120
+          ^ one unit of that number is one step
+      ...STEPS run in S2 in total                                   422
+          ^ one unit of that number is one step
+
+      Most of those `subprocess` calls are `git`, not `cat`.  The bound
+      is stated as a BOUND -- 120 is the most this could have cost --
+      rather than as a measurement of what it did cost, because
+      measuring that needs a second instrument this ticket did not
+      build.
+
+==========================================================================
+S6c  TWO DEFECTS FOUND IN THIS RESOLVER BY ITS OWN SELFTEST
+==========================================================================
+
+  SD3   the resolver invented probes called `can`, `the` and `ridge`
+        `step "F2: can the V6 row go red?" f2.py` was split on
+        whitespace, so argument 2 was the word `can`.  Three trees'
+        steps were wrong and every one of them looked like a filename.
+        Found by validating each parsed path against the disk, not by
+        reading the output.  Fixed with `shlex`; T3 holds the line.
+
+  SD3a  the trace counted a WRITE as a READ, and then I MISATTRIBUTED the evidence for it
+        `sys.addaudithook`'s `open` event fires for both, and the first
+        version of this hook logged only the path.  A probe that WROTE
+        its own transcript would have been recorded as READING the file
+        its run had emptied -- the exact false positive this suite was
+        built to remove from the text rule, one layer further in.
+        The hook now records the mode.  MEASURED EFFECT: 0 steps of the
+        422 write their own transcript, so the fix changed no count.
+
+        AND THAT IS THE HALF WORTH KEEPING.  What sent me looking was
+        two transcripts left MODIFIED by an early pass, and I wrote
+        into the instrument that their own probes had written them.
+        They had not: probes of OTHER trees wrote them, having been
+        killed by this suite's timeout before their cleanup could run.
+        A rigorous fix, a confident mechanism, and the mechanism was
+        wrong -- which is this arc's own recurring failure, committed
+        here inside the sweep for it.  The real defect is SD6c.
+
+  SD3b  the restore rested on the files happening to be TRACKED
+        `run_probe` emptied a transcript and put it back with
+        `git checkout --`.  Git cannot restore a file it does not
+        track, so on T4's untracked fixture the transcript stayed
+        empty -- and the assertion that CHECKS the restore is the
+        thing that caught it.  Every tree in the sweep is tracked, so
+        no number here was ever affected; the guarantee was resting on
+        a coincidence, which is this ticket's own subject.  `run_probe`
+        now keeps the bytes itself and writes them back.
+
+  SD4   a `shift` on the same line as an assignment was invisible
+        `want="$1"; shift` is two statements and was read as one, so
+        every positional parameter after it was off by one and the
+        `expect` trees resolved to a probe named `0`.  Fixed by
+        splitting on `;`; T1 carries both argument orders side by side
+        because that is the error that does not look like an error.
+
+==========================================================================
+S6d  WHAT THE COMMENT STRIPPER THROWS AWAY
+==========================================================================
+
+  SD5   a `#` inside an unbalanced quote is treated as a comment
+      ...RUNNER LINES where that could bite                           1
+          ^ one unit of that number is one line
+      Bounded rather than fixed.  A shell parser that gets quoting
+      exactly right is a different program; this one reports the lines
+      it could be wrong about and reports 3 UNRESOLVED besides.
+
+==========================================================================
+S6d2  THE ARC RAN THIS SUITE'S OWN RUNNER, MID-RUN
+==========================================================================
+      ...RECURSIVE INVOCATIONS of this runner, refused                0
+          ^ one unit of that number is one attempted run
+
+      None this run.  The guard is in `run_all.sh` and fires on an
+      inherited `EC63_RUNNING`, so a zero here means no probe this
+      suite started tried to run this suite -- not that the guard
+      is untested: it is what this transcript exists to record.
+
+==========================================================================
+S6e  DID THE SWEEP LEAVE THE ARC AS IT FOUND IT?
+==========================================================================
+  population: `git status --porcelain -- code/ docs/`, less this tree
+  and `restore_arc()` walks EVERY DIRECTORY under `code/`, not every
+  RUNNER: 7 directories have no runner, and one of them is where a
+  killed probe kept leaving an armed shell script.  A restore scoped to
+  the population being MEASURED misses exactly the places the
+  measurement spills into.
+  `docs/` is in the population because two probes of this arc APPEND A
+  SECTION to the prose and undo it in a `finally` -- which a killed
+  probe never reaches.  A sweep that checks only `code/` reports itself
+  clean with the arc's documentation edited.
+      ...LINES of change outside this tree                            0
+          ^ one unit of that number is one status line
+
+      Clean.  Every one of the probes run by S2/S3/S5 was restored,
+      including the ones that write.
+
+==========================================================================
+S6f  THE ONE THIS SUITE CANNOT ANSWER ABOUT ITSELF
+==========================================================================
+
+  SD6b  48 of 422 steps were KILLED before they could answer
+        A probe killed at the timeout may never have reached the
+        line that opens its own transcript.  S2 records it as
+        not-reading, and the truth is not-known.  Every count in
+        S2b is a LOWER BOUND, and S2a says so where the number is
+        printed rather than in a footnote.  The population that is
+        exact is the 374 steps that finished.
+
+  SD6d  the first pass ATTRIBUTED A CHILD'S READ TO ITS PARENT, and the two numbers it produced disagreed inside one run
+        Before the pid went into the trace, a subprocess's opens were
+        recorded against the probe that spawned it.  That is not merely
+        wrong, it is UNSTABLE: whether a child reaches the read depends
+        on load, so `face_geometry_instr_5f9a/d3_reintroduction.py` came
+        out reading its own transcript under the parallel pass and not
+        reading it when run alone.  The tell was arithmetic: S2 printed
+        37 EMPTIED steps and S3, reading the same ledger, swept 36.
+        A suite whose own two sections disagree by one is the shape
+        this whole ticket is about, committed by the sweep for it.
+
+      ...STEPS now attributed to a CHILD rather than the probe        1
+          ^ one unit of that number is one step
+
+  SD7   A and B are two runs, not one run observed twice
+        `diff(A, B)` is attributed to the shape.  The determinism
+        control in S3 re-runs B and drops any step where B != B', which
+        catches a probe that varies BETWEEN RUNS.  It does not catch a
+        probe that varies WITH THE CLOCK in a way that happens to be
+        stable across two adjacent runs and not across the minutes
+        between A and B.  No row is currently attributed to that, and
+        no row is currently ruled out of it either.
+
+S6 TOTAL DEFECTS OF THIS INSTRUMENT: 10

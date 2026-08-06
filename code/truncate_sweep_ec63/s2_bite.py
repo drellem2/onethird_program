@@ -40,6 +40,9 @@ if not pop:
     print("  (run s1_population.py first -- it writes the ledger this reads)")
     sys.exit(1)
 CAND = [tuple(x) for x in pop["candidates"]]
+_lim = int(os.environ.get("EC63_LIMIT", "0"))
+if _lim:
+    CAND = CAND[:_lim]
 TIMEOUT = int(os.environ.get("EC63_TIMEOUT", "45"))
 
 # ---------------------------------------------------------------------------
