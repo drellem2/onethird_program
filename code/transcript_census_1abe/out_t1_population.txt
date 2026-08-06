@@ -1,0 +1,105 @@
+==============================================================================
+t1 -- THE POPULATIONS OF THIS CENSUS, AND THEIR LINEAGE
+==============================================================================
+    code-digest: 29ab59a4f1f51e3d   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/transcript_census_1abe;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of      81214a9c02ee624dc1261c69db50d47ed659728f  (81214a9c02ee624dc1261c69db50d47ed659728f)
+
+------------------------------------------------------------------------------
+T1a -- THE CLASS 2 POPULATION: COMMITTED TRANSCRIPTS
+------------------------------------------------------------------------------
+
+DEFINITION  every tracked path matching `code/<dir>/out_*.txt` at the revision
+            above.  One level of directory, `out_` prefix, `.txt` suffix.
+WHY THIS    it is the arc's own naming convention for a committed run: every
+            `run_all.sh` in this repository redirects into exactly this shape.
+            The definition is mechanical, so a reader can recompute the
+            denominator with one `git ls-tree` and no reference to this script.
+WHAT IT     a transcript kept under another name.  `selfcheck_output.txt` in
+MISSES      code/counterexample_audit_a7b4/ is one, named here rather than
+            silently absorbed or silently dropped.
+
+    transcripts                       541
+    directories holding one           115
+    distinct carrying commits         140
+    distinct (directory, commit) pairs 164
+    commits on 81214a9c02ee624dc1261c69db50d47ed659728f in all              330
+[MEASURED ] T1a the CLASS 2 denominator is 541 transcripts over 115 directories and 140 carrying commits.  Every CLASS 2 count in this census is over this population and no other
+
+    tracked `.txt` under code/ that this definition EXCLUDES: 16
+      code/branching_audit_2060/sources2060/SHA256SUMS.txt
+      code/branching_locate_db09/sources_db09.txt
+      code/counterexample_audit_a7b4/selfcheck_output.txt
+      code/counterexample_probe_24a3/probe_output.txt
+      code/counterexample_probe_24a3/selftest_output.txt
+      code/face_geometry/controls_output.txt
+      code/face_geometry/probe_output_n6.txt
+      code/face_geometry_audit_e7bc/pc_all_pass.txt
+      code/face_geometry_instr_5f9a/positive_control_all_fail.txt
+      code/hodge_leverage/controls_output.txt
+      code/hodge_leverage/lrb_output.txt
+      code/hodge_leverage/sweep_output.txt
+      code/hodge_leverage/theorems_output.txt
+      code/hodge_leverage_landing_e1d0/site_records.txt
+      code/semigroup_note/note_check_output.txt
+      code/species_audit_a61f/quotes_a61f.txt
+[MEASURED ] T1a' 16 tracked `.txt` files under code/ are outside the population, named above.  A denominator whose exclusions are not printed is a denominator nobody can argue with
+
+------------------------------------------------------------------------------
+T1b -- WHAT THE TRANSCRIPTS THEMSELVES NAME
+------------------------------------------------------------------------------
+
+The ticket's widened question, asked of the record rather than of a re-run.
+GRAIN one verdict per transcript.
+
+    name at least one resolvable commit   231 of 541
+    name none                             310 of 541
+
+    of the 231 that name something:
+      the FIRST commit named is not the carrying commit   231
+      the carrying commit is named NOWHERE in the file    231
+[MEASURED ] T1b 310 of 541 transcripts name no commit at all, so for those the question `is it the revision it names` HAS NO ANSWER -- not a good one and not a bad one.  That is the largest single obstacle to the ticket's framing and it is a property of the record, not of the rebase
+[FINDING  ] T1b' and of the 231 that DO name a commit, 231 never name the commit carrying them anywhere in their own bytes.  The FIRST commit named differs from the carrier in 231 of them.  The two rows are given apart because the first is a crude grain -- the first hex token in a file need not be its anchor -- and the second is not
+
+------------------------------------------------------------------------------
+T1c -- LINEAGE: WHOSE NUMBERS THIS CENSUS REPEATS
+------------------------------------------------------------------------------
+
+Every figure this census takes from somebody else, named, with whether it was
+re-derived here.  A number carried forward without this line cannot be chased.
+
+  mg-f3ff / mg-fcb2 / mg-65eb pre-registration displacements
+        WHOSE   the mayor's, quoted in the mg-1abe brief.
+        HERE    RE-DERIVED in t4d from the object store, not repeated.
+
+  "the ten figures of mg-b2af's transcript reproduce at b94cb1e"
+        WHOSE   mg-b2af, via the ticket.
+        HERE    NOT re-derived.  b94cb1e is checked for existence in this
+                object store and nothing more; the ten figures are not re-run.
+
+  "the six c067 transcripts do not reproduce from the code committed with them"
+        WHOSE   mg-c3a2, via the ticket.
+        HERE    RE-DERIVED in t2: those six are in the CLASS 2 population and
+                were re-run at their carrying commit like every other member.
+
+  "unreachable[:3] is a silent cap in c2_anchors.py"
+        WHOSE   mg-c3a2, via the ticket.
+        HERE    RE-DERIVED in t6a, and found ALREADY FIXED on main by mg-c3a2
+                itself in 5bd0d71.  Disclosed as D3 in PREDICTIONS.md.
+
+  "a publisher is not a pin"
+        WHOSE   mg-bf79.  Its finding is not re-derived here; its LESSON is
+                built into the convention in t5, where the code-digest excludes
+                the transcripts precisely so that publishing cannot invalidate
+                the declaration.
+
+[MEASURED ] T1c b94cb1e resolves in this object store.  That is the ONLY claim this census makes about mg-b2af's sighting; its ten figures are not re-derived here and any reader treating this row as confirmation of them is reading more than is written
+
+SELF-ERRORS 0
+FINDINGS 1
+TOTAL BAD: 1

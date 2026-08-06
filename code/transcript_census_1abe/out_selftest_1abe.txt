@@ -1,0 +1,49 @@
+==============================================================================
+selftest_1abe -- the controls on this census's own instruments
+==============================================================================
+    code-digest: 29ab59a4f1f51e3d   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/transcript_census_1abe;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+
+------------------------------------------------------------------------------
+S1 -- parse_producers ON ALL FOUR RUNNER FORMS IN THIS REPO
+------------------------------------------------------------------------------
+[OK       ] S1 straight-line redirection: 2 of 2 expected transcripts resolved to their script
+[OK       ] S1 `for s in ...` loop: 3 of 3 expected transcripts resolved to their script
+[OK       ] S1 run() helper with ${1%.*}: 2 of 2 expected transcripts resolved to their script
+[OK       ] S1 run() helper via name="$1" and ${name%.py}: 1 of 1 expected transcripts resolved to their script
+[OK       ] S1' no unexpanded `$` survives into a transcript NAME; an unexpanded template would silently match no file and read as CANNOT-BE-RUN
+
+------------------------------------------------------------------------------
+S2 -- conclusion_verdict TELLS A CHANGED DECISION FROM A CHANGED FIGURE
+------------------------------------------------------------------------------
+[OK       ] S2 identical transcripts read HELD
+[OK       ] S2' a changed line that is NOT a decision reads HELD: prose moving is not a conclusion changing
+[OK       ] S2'' a count moving INSIDE an `[OK]` reads HELD-DRIFTED -- the verdict stands and a stated number does not.  THIS IS THE ROW THE FIRST VERSION OF THIS CENSUS GOT WRONG: it compared whole lines and called this a flip, which would have reported five of mg-c067's six transcripts as false records
+[OK       ] S2''' `[OK]` becoming `[FINDING]` reads FLIPS
+[OK       ] S2'''' a transcript with no decision rows reads NO-VERDICT rather than HELD; `I cannot tell` must not be spelled the same way as `it is fine`
+
+------------------------------------------------------------------------------
+S3 -- THE CONVENTION'S DIGEST: BLIND TO PUBLISHING, ALIVE TO CODE
+------------------------------------------------------------------------------
+[OK       ] S3 a commit that changes ONLY transcripts in code/audit_c067 (47e56b3) leaves the code-digest unchanged.  Without this the declaration would be stale the instant it was committed, which is mg-bf79's `a publisher is not a pin`
+[OK       ] S3' and a commit that DOES change code in code/audit_c067 (5bd0d71) moves the digest.  Both answers, so the digest is a check rather than a constant
+
+------------------------------------------------------------------------------
+S4 -- THE CENSUS'S CENTRAL METHODOLOGICAL CLAIM, ON A REAL PAIR
+------------------------------------------------------------------------------
+[OK       ] S4 ancestry says 72e36cb is NOT on 81214a9c02ee624dc1261c69db50d47ed659728f
+[OK       ] S4' patch-id says its content IS on 81214a9c02ee624dc1261c69db50d47ed659728f, identically, as 9c54a99.  The two instruments disagree on the same commit and this census is built on the second
+
+------------------------------------------------------------------------------
+S5 -- THE POPULATION REGEX DOES NOT WANDER
+------------------------------------------------------------------------------
+[OK       ] S5 all 541 members of the CLASS 2 population are exactly `code/<one-dir>/out_*.txt`; 0 are not
+
+SELF-ERRORS 0
+FINDINGS 0
+TOTAL BAD: 0

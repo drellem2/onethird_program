@@ -1,0 +1,67 @@
+==============================================================================
+t6 -- A CAP UNDER A SENTENCE THAT CLAIMS COMPLETENESS
+==============================================================================
+    code-digest: 29ab59a4f1f51e3d   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/transcript_census_1abe;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of      81214a9c02ee624dc1261c69db50d47ed659728f  (81214a9c02ee624dc1261c69db50d47ed659728f)
+    completeness vocabulary: \b(each|every|all \d|all of|in full|nothing truncated|the full list|every one|no cap|complete list)\b
+
+------------------------------------------------------------------------------
+T6a -- THE DETECTOR CONTROLLED ON THE ONE INSTANCE EVERYBODY AGREES ABOUT
+------------------------------------------------------------------------------
+
+`git log -S` cannot find mg-c3a2's fix: the commit REMOVED the code
+`unreachable[:3]` and ADDED a comment quoting it, so the occurrence count is
+unchanged and the pickaxe is silent.  The two blobs are therefore located by
+asking every historical version of the file whether it contains the CODE form
+`in unreachable[:3]`, which the explanatory comment does not.
+
+    newest blob WITH the defect : 3b73ccc
+    the blob that replaced it   : 5bd0d71
+    LIVE sites with the defect  : [(187, 3, 'Each')]
+    LIVE sites after the fix    : []
+[OK       ] T6a RED ANSWER: the detector finds 1 LIVE site(s) in c2_anchors.py at 3b73ccc, where mg-c3a2 says the defect was
+[OK       ] T6a' GREEN ANSWER: and finds 0 at 5bd0d71, after the fix.  Both answers on the same file, so the sweep below is evidence rather than an assertion
+
+------------------------------------------------------------------------------
+T6b -- THE SWEEP: EVERY `.py` UNDER `code/`
+------------------------------------------------------------------------------
+    619 `.py` files, 133 capped-slice sites in all, 0 files this instrument could not parse
+
+    LIVE SITES -- a capped slice, printed, under a completeness claim.  Every one, no cap of my own:
+    file                                                     line   bound  the claim
+    species_sites_821e/p2_sites.py                           186    [:5    every
+[FINDING  ] T6b 1 LIVE sites over 619 `.py` files: a constant-capped slice reaching output in a statement whose own words claim completeness.  The ticket asked for ONE instance in ONE file and that instance was already fixed; this is the shape it belongs to, measured
+[MEASURED ] T6b' the denominator matters: 133 capped-slice sites exist in all, so 1 LIVE is a claim about 0.8% of them.  Most caps in this arc are legitimate -- a preview, a column width, a first-N-of-a-sorted-list under a sentence that says so
+
+------------------------------------------------------------------------------
+T6c -- EACH LIVE SITE WITH ITS SOURCE, SO THE READER CAN DISAGREE WITH ME
+------------------------------------------------------------------------------
+
+A detector's hit is a candidate.  The surrounding source is printed for every
+one, because the question `does the completeness word refer to the sliced list
+or to something else in the same sentence?` is a judgement, and a judgement
+made behind a count cannot be checked.
+
+    --- code/species_sites_821e/p2_sites.py:186   cap [:5   claim 'every'
+        180             % (pid, what[:58], code, "silent -- ok" if ok else "*** FIRES ***"))
+        181   print()
+        182   
+        183   print("  And the case the presence test DID catch -- every copy deleted.  Both")
+        184   print("  checkers must fire; this is the only mutation the old one could see.")
+        185   print()
+        186 >>for sid, label, needle, repl, _sp, _sn in SITES[:5]:
+        187       if sid in ("S4", "S6"):
+        188           continue
+        189       edit = (REPAIR_DOC, replace_everywhere(needle, repl))
+
+[MEASURED ] T6b'' WHAT THIS DOES NOT SEE: a cap whose completeness claim lives in a DIFFERENT statement -- a heading printed three lines earlier, or prose in a README.  The detector is statement-scoped, so its 1 is a LOWER BOUND and reading it as the population would repeat the ticket's own defect
+
+SELF-ERRORS 0
+FINDINGS 1
+TOTAL BAD: 1
