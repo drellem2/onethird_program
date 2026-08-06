@@ -1,0 +1,57 @@
+
+==============================================================================
+B7  THE ORPHANED CORPUS FIGURE — parsed from both artifacts, then chased
+==============================================================================
+  corpus pair in README.md                       245,161 -> 261,318
+      population: code/state_restructure_ea0e/README.md at cc4c663, its A1 acceptance row
+      grain:      utf-8 bytes, as published
+  corpus pair in the COMMIT MESSAGE              245,161 -> 261,318
+      population: the commit message of cc4c663
+      grain:      utf-8 bytes, as published
+  corpus pair in ITS OWN TRANSCRIPT              276,707 -> 295,751
+      population: code/state_restructure_ea0e/out_verify_relocation_ea0e.txt at cc4c663
+      grain:      utf-8 bytes, as printed by the instrument
+  published == transcript                                 False
+      population: the two pairs above
+      grain:      boolean
+  gap on the OLD side                                    31,546
+      population: the two pairs above
+      grain:      utf-8 bytes
+  gap on the NEW side                                    34,433
+      population: the two pairs above
+      grain:      utf-8 bytes
+  # Two different gaps rule out a typo and a units error.  A POPULATION difference — one
+  # file present in one total and absent from the other — predicts exactly this: the gap
+  # on each side equals that file's size on that side.  So look for such a file.
+
+==============================================================================
+B7.1  WHICH FILE IS MISSING FROM THE PUBLISHED PAIR
+==============================================================================
+  destination files listed in the transcript                 10
+      population: the 'destination files, before -> after' block of the transcript
+      grain:      file rows
+  files whose BOTH sizes equal BOTH gaps                      1
+      population: the 10 destination files above
+      grain:      files — a unique hit identifies the population difference exactly
+      docs/state-history/README.md   31,546 -> 34,433
+    reproduces the published pair when removed             True
+      population: the transcript pair minus that file's two sizes
+      grain:      boolean
+
+==============================================================================
+B7.2  WHAT IT MEANS, AND WHAT IT DOES NOT
+==============================================================================
+  # mg-ea0e's verifier builds its corpus total from the files whose size CHANGED.
+  # docs/state-history/README.md changed only because mg-ea0e itself edited it.  A run
+  # taken BEFORE that edit would find the file unchanged, exclude it from the block, and
+  # print exactly the published pair.  So the published figure is a REAL measurement of
+  # an EARLIER state of the same tree, carried into the final commit message and README
+  # beside nine figures that were re-derived at the end.
+  other A1 figures that DO match the transcript               6
+      population: the six other numbers in mg-ea0e's A1 acceptance row
+      grain:      figures appearing in both README.md and the transcript
+  acceptance decisions that change                            0
+      population: mg-ea0e's six acceptance checks A1-A5, C0
+      grain:      checks — the corpus row feeds only 'the corpus as a whole did not shrink', which passes under BOTH pairs (261,318 > 245,161 and 295,751 > 276,707)
+
+B7 DONE

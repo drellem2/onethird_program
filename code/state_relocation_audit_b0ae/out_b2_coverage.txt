@@ -1,0 +1,145 @@
+
+==============================================================================
+B2  COVERAGE AT ATOM GRAIN — every cell and every line of old STATE.md
+==============================================================================
+  atoms in old STATE.md                                     441
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      one atom = one table cell, or one non-table line
+    of which table cells                                    244
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      cells, after splitting rows on '|'
+    of which whole lines                                    197
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      non-blank non-table lines, stripped
+  table rows by cell count                       [(3, 37), (4, 12), (5, 1), (7, 3), (9, 3), (11, 1), (21, 1)]
+      population: the 58 table rows of old STATE.md
+      grain:      (cells-in-row, number-of-rows) — a stray '|' inside a cell would show here
+  linked files forming the corpus                            12
+      population: markdown link targets in new STATE.md that are tracked paths
+      grain:      files
+  bytes of ADDED text in linked files                   170,097
+      population: the 12 linked files
+      grain:      utf-8 bytes of lines this commit added
+  bytes of PRE-EXISTING text in linked files             62,828
+      population: the 12 linked files
+      grain:      utf-8 bytes of those files at 78ae4d9
+
+==============================================================================
+B2.1  VERDICT — where each atom of old STATE.md is now
+==============================================================================
+  in-place                                                  228
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      atoms, exact-substring presence
+  arrived                                                   213
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      atoms, exact-substring presence
+  pre-existing-only                                           0
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      atoms, exact-substring presence
+  MISSING                                                     0
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      atoms, exact-substring presence
+  # 0 MISSING.  That verdict is only worth the controls below.
+
+==============================================================================
+B2.2  IS THE PASS COINCIDENCE?  Short atoms measured separately
+==============================================================================
+  atoms shorter than 24 chars                               143
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      atoms, by character length
+  atoms >= 24 chars                                         298
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      atoms, by character length
+  long atoms MISSING                                          0
+      population: the 298 atoms of old STATE.md at least 24 characters long
+      grain:      atoms, exact-substring presence
+  short atoms found in an UNRELATED file                     39
+      population: the 143 short atoms, searched in code/state_restructure_ea0e/build.py
+      grain:      atoms — this is the coincidence rate of the `in` test at short grain
+  long atoms found in an UNRELATED file                       2
+      population: the 298 long atoms, same foreign haystack
+      grain:      atoms
+
+==============================================================================
+B2.3  NEGATIVE CONTROLS — the instrument shown reporting a positive
+==============================================================================
+  CONTROL 1 missing with audit-stage-process.md withheld            142
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      atoms — MUST be > 0, else the checker cannot see an absence
+  CONTROL 2 missing after 1-char corruption                 441
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      atoms, each mutated at its midpoint — MUST be ~= the population size
+  CONTROL 2 survivors (false passes)                          0
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      corrupted atoms still 'found' — each is a place the test is too loose
+  CONTROL 3 old atoms absent from old file                    0
+      population: the 441 atoms of old STATE.md (197 whole lines + 244 table cells)
+      grain:      atoms — MUST be 0, else atomisation itself invents text
+
+==============================================================================
+B2.4  THE SEVEN RELOCATED ROWS — every column, against ADDED text only
+==============================================================================
+      :130 col0     41 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :130 col1    124 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :130 col2   2050 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :131 col0    133 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :131 col1    132 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :131 col2     98 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :131 col3      5 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :131 col4   1838 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :131 col5     22 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :131 col6    290 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :131 col7     24 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :131 col8    455 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :131 col9     13 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :131 col10    895 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :132 col0    167 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :132 col1    174 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :132 col2   1718 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :132 col3      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :132 col4     13 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :132 col5      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :132 col6   3061 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :133 col0    278 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :133 col1    188 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :133 col2   3822 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :133 col3      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :133 col4   3047 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col0    373 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :134 col1    195 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :134 col2   2486 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col3      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col4      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col5      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col6    263 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col7      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col8     10 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col9      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col10      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col11      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col12   1941 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col13      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col14    129 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col15      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col16     31 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col17      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col18      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col19      2 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :134 col20   1341 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :135 col0    840 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :135 col1    302 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :135 col2   2161 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :135 col3      5 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :135 col4   1217 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :135 col5      5 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :135 col6    522 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :135 col7      5 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :135 col8   3952 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+      :136 col0    966 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :136 col1    332 chars  in-its-own-dest=True   in-any-added=True   in-STATE=True 
+      :136 col2  12059 chars  in-its-own-dest=True   in-any-added=True   in-STATE=False
+  moved columns not in this commit's additions                0
+      population: the 59 columns of the 7 relocated ledger rows
+      grain:      columns, exact-substring presence in ADDED text only
+
+B2 DONE

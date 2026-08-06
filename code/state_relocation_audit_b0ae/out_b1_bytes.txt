@@ -1,0 +1,145 @@
+
+==============================================================================
+B1  BYTE ACCOUNTING, RE-DERIVED (not checked against mg-ea0e's arithmetic)
+==============================================================================
+  # audited object: cc4c663 (mg-ea0e); its parent: 78ae4d9
+  old STATE.md size                                     186,710
+      population: the single file STATE.md at 78ae4d9
+      grain:      bytes (utf-8, as stored)
+  new STATE.md size                                      32,772
+      population: the single file STATE.md at cc4c663
+      grain:      bytes (utf-8, as stored)
+  reduction                                               82.4%
+      population: the two files above
+      grain:      percent of old bytes
+
+==============================================================================
+B1.1  SHAPE — every count under TWO instruments, because the parent's do not agree
+==============================================================================
+  old words, whitespace-split                            29,094
+      population: STATE.md at 78ae4d9
+      grain:      maximal runs of non-whitespace (== `wc -w`)
+  old lines, wc -l grain                                    386
+      population: same file
+      grain:      newline characters (== `wc -l`)
+  old lines, split grain                                    387
+      population: same file
+      grain:      elements of text.split('\n') (one MORE on a newline-terminated file)
+  new words, whitespace-split                             4,658
+      population: STATE.md at cc4c663
+      grain:      maximal runs of non-whitespace (== `wc -w`)
+  new lines, wc -l grain                                    175
+      population: same file
+      grain:      newline characters (== `wc -l`)
+  new lines, split grain                                    176
+      population: same file
+      grain:      elements of text.split('\n') (one MORE on a newline-terminated file)
+  new longest line                                        1,772
+      population: the 176 lines of new STATE.md
+      grain:      characters (not bytes)
+  new longest line, bytes                                 1,816
+      population: the same single line
+      grain:      utf-8 bytes — DIFFERENT from the character count above
+    at line                                                 124
+      population: same
+      grain:      1-based line number, split grain
+  old longest line                                       13,367
+      population: the 387 lines of old STATE.md
+      grain:      characters (not bytes)
+  old longest line, bytes                                13,601
+      population: the same single line
+      grain:      utf-8 bytes — the brief's '13,601 -> 1,772' is this figure against the NEW file's CHARACTER count, one grain each side
+    at line                                                 136
+      population: same
+      grain:      1-based line number
+
+==============================================================================
+B1.2  THE REACHABLE CORPUS, parsed out of new STATE.md
+==============================================================================
+  distinct tracked files linked                              12
+      population: every markdown link target in new STATE.md that is a tracked path at cc4c663
+      grain:      distinct repo-relative file paths
+      docs/audit-stage-process.md                             91,937 B  (        0 B at 78ae4d9, created here)
+      docs/state-history/attempt-mg-210d.md                    5,270 B  (    2,128 B at 78ae4d9, PRE-EXISTED)
+      docs/state-history/attempt-mg-276d.md                   19,076 B  (    9,049 B at 78ae4d9, PRE-EXISTED)
+      docs/state-history/attempt-mg-3af9.md                   13,596 B  (    5,752 B at 78ae4d9, PRE-EXISTED)
+      docs/state-history/attempt-mg-48ab.md                    1,265 B  (    1,265 B at 78ae4d9, PRE-EXISTED)
+      docs/state-history/attempt-mg-63e3.md                   18,167 B  (    9,808 B at 78ae4d9, PRE-EXISTED)
+      docs/state-history/attempt-mg-88bd.md                   13,050 B  (    6,913 B at 78ae4d9, PRE-EXISTED)
+      docs/state-history/attempt-mg-a3d4.md                   35,827 B  (   21,375 B at 78ae4d9, PRE-EXISTED)
+      docs/state-history/attempt-mg-a58f.md                    8,307 B  (    3,426 B at 78ae4d9, PRE-EXISTED)
+      docs/state-history/attempt-mg-c47a-drop.md               1,652 B  (    1,652 B at 78ae4d9, PRE-EXISTED)
+      docs/state-history/ledger-row-11-L4.md                   1,449 B  (    1,449 B at 78ae4d9, PRE-EXISTED)
+      docs/state-history/threads-chronology.md                23,316 B  (        0 B at 78ae4d9, created here)
+
+==============================================================================
+B1.3  WHERE EACH OLD LINE'S BYTES ARE NOW — three-way split
+==============================================================================
+  old lines still in new STATE.md                           105
+      population: the 259 non-blank lines of old STATE.md
+      grain:      whole lines, exact string
+    their bytes                                          23,958
+      population: the 259 non-blank lines of old STATE.md
+      grain:      utf-8 bytes, newline excluded
+  old lines ADDED to a linked file here                     147
+      population: the 259 non-blank lines of old STATE.md
+      grain:      whole lines, exact string
+    their bytes                                         113,481
+      population: the 259 non-blank lines of old STATE.md
+      grain:      utf-8 bytes, newline excluded
+  old lines matched ONLY by PRE-EXISTING text                 0
+      population: the 259 non-blank lines of old STATE.md
+      grain:      whole lines, exact string
+    their bytes                                               0
+      population: the 259 non-blank lines of old STATE.md
+      grain:      utf-8 bytes, newline excluded
+  old lines matched NOWHERE at line grain                     7
+      population: the 259 non-blank lines of old STATE.md
+      grain:      whole lines, exact string
+    their bytes                                          48,885
+      population: the 259 non-blank lines of old STATE.md
+      grain:      utf-8 bytes, newline excluded
+  # A line-grain miss is NOT yet a loss: mg-ea0e rewrote the THIRD COLUMN of seven table
+  # rows, so those seven lines cannot match as whole lines by construction.  B2 resolves
+  # these at CELL grain.  The lines that miss here are listed by line number:
+      old line numbers missing at LINE grain: [130, 131, 132, 133, 134, 135, 136]
+  bytes credited to PRE-EXISTING text                         0
+      population: the 259 non-blank lines of old STATE.md
+      grain:      utf-8 bytes of old STATE.md lines whose only match is text present at 78ae4d9
+  # P3 in PREDICTIONS.md: a NON-ZERO figure here is the mechanism by which a byte total
+  # can balance while content is lost — the corpus at HEAD contains matching text that
+  # this commit did not put there.
+
+==============================================================================
+B1.4  THE +1,262 SURPLUS — decomposed rather than accepted
+==============================================================================
+  old lines present in BOTH places                           13
+      population: the 259 non-blank lines of old STATE.md
+      grain:      whole lines found in new STATE.md AND in a linked file
+    their bytes (double-counted)                            157
+      population: the 259 non-blank lines of old STATE.md
+      grain:      utf-8 bytes
+  # mg-ea0e's own surplus is +1,262 by ITS definition of the two addends.  Mine is
+  # computed over a different, stated decomposition, so the two are not required to
+  # agree; what matters is whether the double-counting mg-ea0e names as the cause is
+  # LARGE ENOUGH to be the cause.  The seven relocated rows retain an OPENING SENTENCE
+  # that also appears in the destination file.  Those sentences are measured next.
+
+      :130  retained    42 B  also-in-destination=True   **Best constant this route proves = `0`.**
+      :131  retained   107 B  also-in-destination=True   **⚠️ Largest item first — (B) IMPLIES LIB (Thm 3.3, elementary, uncond
+      :132  retained    80 B  also-in-destination=True   **The form, and it is CONDITIONAL — record the condition, not just the
+      :133  retained   506 B  also-in-destination=True   **The result, at the strength that survives audit:** **Step 6's stated
+      :134  retained   236 B  also-in-destination=True   **⭐ THE RED, AT FULL STRENGTH AND UNCONDITIONAL — this is the item tha
+      :135  retained   213 B  also-in-destination=True   **⭐ THE METHOD FINDING FIRST, because it is what five previous rows we
+      :136  retained   162 B  also-in-destination=True   **⭐ THE CONFIRMATION FIRST, because it is the load-bearing result and 
+  retained-sentence bytes in BOTH places                  1,346
+      population: the 7 ledger rows mg-ea0e relocated (:130-:136 of old STATE.md)
+      grain:      utf-8 bytes of the result-column sentence the row kept AND the destination file carries
+  mg-ea0e's stated surplus (ITS number)                  +1,262
+      population: mg-ea0e's own two addends, quoted not re-derived
+      grain:      utf-8 bytes
+  shortfall of the stated explanation                       -84
+      population: the difference of the two rows above
+      grain:      utf-8 bytes left unexplained by retained sentences
+
+B1 DONE

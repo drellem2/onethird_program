@@ -1,0 +1,60 @@
+
+==============================================================================
+B8  WHERE THE ANSWER SITS — the same content, two denominators
+==============================================================================
+  span                             old:     new:   moved?
+  the one-paragraph state             9        9   NO
+  L1b stated as the wall             13       13   NO
+  the proof chain diagram            53       53   NO
+  'Two links are open'               70       70   NO
+  the full ledger header             74       74   NO
+  Cheeger/Buser row (row 5)          63       63   NO
+  the single lemma section           95       95   NO
+  spans that changed line number                              0
+      population: the 7 line-anchored spans a reader needs in order to answer 'is there a Cheeger/spectral route, and what is proven'
+      grain:      spans — a non-zero value would mean the relocation repositioned the answer
+  last line the answer needs                                 95
+      population: the 7 line-anchored spans a reader needs in order to answer 'is there a Cheeger/spectral route, and what is proven'
+      grain:      1-based line number, identical in both files
+  answer-bearing prefix                                   7,981
+      population: lines :1-95 of either file
+      grain:      utf-8 bytes — the SAME bytes in both, since :1-129 are byte-identical
+
+==============================================================================
+B8.1  THE DENOMINATOR IS THE WHOLE CHANGE
+==============================================================================
+  answer as a share of OLD file, by lines                   25%
+      population: the 387 lines of old STATE.md
+      grain:      percent of lines a reader must survive
+  answer as a share of NEW file, by lines                   54%
+      population: the 176 lines of new STATE.md
+      grain:      percent
+  answer as a share of OLD file, by bytes                    4%
+      population: the 186,710 bytes of old STATE.md
+      grain:      percent
+  answer as a share of NEW file, by bytes                   24%
+      population: the 32,772 bytes of new STATE.md
+      grain:      percent
+  bytes a reader passes AFTER the answer, old           178,729
+      population: old STATE.md
+      grain:      utf-8 bytes
+  bytes a reader passes AFTER the answer, new            24,791
+      population: new STATE.md
+      grain:      utf-8 bytes
+
+==============================================================================
+B8.2  IS THE SUMMARY CURRENT?  (a corpus question, not mg-ea0e's)
+==============================================================================
+  STATE.md unchanged since the audited commit              True
+      population: STATE.md at HEAD vs at cc4c663
+      grain:      boolean — if False every figure in this suite is about a superseded file
+      mg-2de0   named in STATE.md: False   landed at: 0c9125e
+      mg-00b9   named in STATE.md: False   landed at: 0c9125e
+      mg-c3ca   named in STATE.md: False   landed at: 81214a9
+      mg-1abe   named in STATE.md: False   landed at: 52daa5c
+      mg-ea0e   named in STATE.md: True    landed at: 9daa0f2
+  work items landed on main and NOT named in STATE.md              4
+      population: the 5 most recent work-item ids visible in `git log` on main
+      grain:      ids — a staleness measure of the SUMMARY, caused by later commits, not by mg-ea0e
+
+B8 DONE
