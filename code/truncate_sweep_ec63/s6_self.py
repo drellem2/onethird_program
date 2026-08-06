@@ -154,6 +154,44 @@ print("      exactly right is a different program; this one reports the lines")
 print("      it could be wrong about and reports 3 UNRESOLVED besides.")
 
 # ---------------------------------------------------------------------------
+B.hdr("S6d2  THE ARC RAN THIS SUITE'S OWN RUNNER, MID-RUN")
+
+log = os.path.join(B.HERE, "recursion_ec63.log")
+lines = []
+if os.path.exists(log):
+    with open(log, errors="replace") as f:
+        lines = [ln.rstrip("\n") for ln in f if ln.strip()]
+n_ref = sum(1 for ln in lines if ln.startswith("REFUSED"))
+B.plain("...RECURSIVE INVOCATIONS of this runner, refused", n_ref,
+        "one attempted run")
+print()
+if n_ref:
+    defect("SD6e", "a probe of the arc EXECUTED THIS SUITE'S RUNNER while it "
+                   "was running")
+    print("        Several of the arc's probes execute runners they find on")
+    print("        disk.  Once this directory had a `run_all.sh`, it became")
+    print("        one of them.  A second run in this directory shares the")
+    print("        `out_*.txt.new` paths with the first, so it TRUNCATES THE")
+    print("        TRANSCRIPT THE OUTER RUN IS STILL WRITING -- which is the")
+    print("        defect this whole ticket is about, arriving from OUTSIDE")
+    print("        the tree rather than from its own runner.  It destroyed")
+    print("        this suite's S2 transcript twice before the cause was")
+    print("        found, and what it left behind was a ZERO-BYTE transcript")
+    print("        beside a summary with the S2 line simply missing.  A")
+    print("        vacuous pass of exactly the shape being swept for.")
+    print()
+    print("        WHO ASKED, as recorded at the moment the guard fired:")
+    for ln in lines[:24]:
+        print("          %s" % ln[:130])
+    if len(lines) > 24:
+        print("          ... and %d further lines" % (len(lines) - 24))
+else:
+    print("      None this run.  The guard is in `run_all.sh` and fires on an")
+    print("      inherited `EC63_RUNNING`, so a zero here means no probe this")
+    print("      suite started tried to run this suite -- not that the guard")
+    print("      is untested: it is what this transcript exists to record.")
+
+# ---------------------------------------------------------------------------
 B.hdr("S6e  DID THE SWEEP LEAVE THE ARC AS IT FOUND IT?")
 
 porc = [ln for ln in B.git("status", "--porcelain", "--", "code",
