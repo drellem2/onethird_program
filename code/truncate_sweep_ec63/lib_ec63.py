@@ -732,7 +732,12 @@ def restore_arc():
     output of the probe that called this.
     """
     left = []
-    for t in trees():
+    # `docs/` too, and not as an afterthought: two of the arc's probes append a
+    # section to `docs/OneThird-*-Where-This-Lives.md` and remove it in a
+    # `finally` that a killed probe never reaches.  A sweep scoped to `code/`
+    # leaves the arc's PROSE edited, which is the one place nobody would think
+    # to look for damage done by a measurement.
+    for t in trees() + ["docs"]:
         if t == MINE:
             continue
         with _GITLOCK:

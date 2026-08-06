@@ -143,9 +143,14 @@ print("      it could be wrong about and reports 3 UNRESOLVED besides.")
 # ---------------------------------------------------------------------------
 B.hdr("S6e  DID THE SWEEP LEAVE THE ARC AS IT FOUND IT?")
 
-porc = [ln for ln in B.git("status", "--porcelain", "--", "code").splitlines()
+porc = [ln for ln in B.git("status", "--porcelain", "--", "code",
+                           "docs").splitlines()
         if ln.strip() and B.MINE not in ln]
-print("  population: `git status --porcelain -- code/`, excluding this tree")
+print("  population: `git status --porcelain -- code/ docs/`, less this tree")
+print("  `docs/` is in the population because two probes of this arc APPEND A")
+print("  SECTION to the prose and undo it in a `finally` -- which a killed")
+print("  probe never reaches.  A sweep that checks only `code/` reports itself")
+print("  clean with the arc's documentation edited.")
 B.plain("...LINES of change outside this tree", len(porc), "one status line")
 for ln in porc[:20]:
     print("      %s" % ln)
