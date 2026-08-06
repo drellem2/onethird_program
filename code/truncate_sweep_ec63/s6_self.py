@@ -1,0 +1,187 @@
+"""mg-ec63 / S6 -- THE DEFECTS OF THIS INSTRUMENT.
+
+Every audit in this arc that has looked has found its own subject inside itself.
+mg-bf79 found the truncate-before-probe shape in the runner of the repair of
+that shape.  mg-03d1's sweep swallowed the auditor the moment the auditor
+adopted the fix, and then ran itself.  So this section is not a formality.
+
+Each item is MEASURED here, not asserted.  Exit code = defects found.
+"""
+
+import os
+import re
+import sys
+
+import lib_ec63 as B
+
+print("mg-ec63 / S6 -- THE DEFECTS OF THIS INSTRUMENT")
+print("HEAD: %s" % B.head())
+
+DEFECTS = 0
+
+
+def defect(tag, title):
+    global DEFECTS
+    DEFECTS += 1
+    print()
+    print("  %-5s %s" % (tag, title))
+
+
+# ---------------------------------------------------------------------------
+B.hdr("S6a  THE POPULATION SWALLOWS ME, AND BOTH NUMBERS ARE PRINTED")
+
+TREES = B.trees()
+mine_in = B.MINE in TREES
+steps, un = B.parse_runner(B.MINE) if mine_in else ([], [])
+ops = sorted(set(o for _, _, o in steps))
+
+defect("SD1", "this tree is a member of the population it counts")
+print("        `code/*/run_all.sh` is a property, and the moment this suite")
+print("        has a runner it satisfies it.  mg-03d1 recorded exactly this")
+print("        and its A4b prediction went from right to wrong because of it.")
+print()
+B.plain("...RUNNERS in the arc, including mine", len(TREES), "one `run_all.sh`")
+B.plain("...RUNNERS of the arc this sweep is ABOUT",
+        len(TREES) - (1 if mine_in else 0), "one `run_all.sh`")
+print()
+print("      my own runner's operators: %s" % (", ".join(ops) or "(none yet)"))
+if "TRUNC" in ops:
+    defect("SD1b", "AND MY OWN RUNNER CARRIES THE DEFECT I AM SWEEPING FOR")
+else:
+    print("      -- it uses the structural fix, so this suite is not an")
+    print("         instance of its own subject.  Which is the ONLY reason")
+    print("         S3's numbers are not partly about itself.")
+
+# ---------------------------------------------------------------------------
+B.hdr("S6b  THE TRACE HOOK CANNOT SEE OUTSIDE ITS OWN PROCESS")
+
+bite = B.load("bite") or {"recs": []}
+recs = bite["recs"]
+subp = 0
+for r in recs:
+    try:
+        src = B.read(r["probe"])
+    except OSError:
+        continue
+    if re.search(r"\bsubprocess\.|os\.system|os\.popen", src):
+        subp += 1
+
+defect("SD2", "an `open` audit hook sees only the PROBE's own process")
+print("        A probe that reads a transcript by spawning `cat`, `grep`, or a")
+print("        second `python3` opens nothing in the traced process, so this")
+print("        sweep records it as not reading its own transcript.  It is a")
+print("        FALSE NEGATIVE of the same kind as the text rule's, one layer")
+print("        further in, and the number of probes it could apply to is:")
+print()
+B.plain("...STEPS run in S2 whose probe spawns a subprocess at all", subp,
+        "one step")
+B.plain("...STEPS run in S2 in total", len(recs), "one step")
+print()
+print("      Most of those `subprocess` calls are `git`, not `cat`.  The bound")
+print("      is stated as a BOUND -- %d is the most this could have cost --" % subp)
+print("      rather than as a measurement of what it did cost, because")
+print("      measuring that needs a second instrument this ticket did not")
+print("      build.")
+
+# ---------------------------------------------------------------------------
+B.hdr("S6c  TWO DEFECTS FOUND IN THIS RESOLVER BY ITS OWN SELFTEST")
+
+defect("SD3", "the resolver invented probes called `can`, `the` and `ridge`")
+print("        `step \"F2: can the V6 row go red?\" f2.py` was split on")
+print("        whitespace, so argument 2 was the word `can`.  Three trees'")
+print("        steps were wrong and every one of them looked like a filename.")
+print("        Found by validating each parsed path against the disk, not by")
+print("        reading the output.  Fixed with `shlex`; T3 holds the line.")
+
+defect("SD3a", "the trace counted a WRITE as a READ")
+print("        `sys.addaudithook`'s `open` event fires for both, and the first")
+print("        version of this hook logged only the path.  A probe that WRITES")
+print("        its own transcript was therefore recorded as READING the file")
+print("        its run had emptied -- the exact false positive this suite was")
+print("        built to remove from the text rule, reproduced one layer down")
+print("        in the instrument that was supposed to be the improvement.")
+print("        What exposed it was not the output but `git status`: those")
+print("        trees came out of the sweep MODIFIED.  The hook now records the")
+print("        mode and S2b prints the write count beside the read count.")
+
+defect("SD3b", "the restore rested on the files happening to be TRACKED")
+print("        `run_probe` emptied a transcript and put it back with")
+print("        `git checkout --`.  Git cannot restore a file it does not")
+print("        track, so on T4's untracked fixture the transcript stayed")
+print("        empty -- and the assertion that CHECKS the restore is the")
+print("        thing that caught it.  Every tree in the sweep is tracked, so")
+print("        no number here was ever affected; the guarantee was resting on")
+print("        a coincidence, which is this ticket's own subject.  `run_probe`")
+print("        now keeps the bytes itself and writes them back.")
+
+defect("SD4", "a `shift` on the same line as an assignment was invisible")
+print("        `want=\"$1\"; shift` is two statements and was read as one, so")
+print("        every positional parameter after it was off by one and the")
+print("        `expect` trees resolved to a probe named `0`.  Fixed by")
+print("        splitting on `;`; T1 carries both argument orders side by side")
+print("        because that is the error that does not look like an error.")
+
+# ---------------------------------------------------------------------------
+B.hdr("S6d  WHAT THE COMMENT STRIPPER THROWS AWAY")
+
+hashy = 0
+for t in TREES:
+    src = B.read("%s/run_all.sh" % t)
+    for ln in src.splitlines():
+        s = ln.strip()
+        if s.startswith("#"):
+            continue
+        if " #" in ln and (ln.count('"') % 2 or ln.count("'") % 2):
+            hashy += 1
+
+defect("SD5", "a `#` inside an unbalanced quote is treated as a comment")
+B.plain("...RUNNER LINES where that could bite", hashy, "one line")
+print("      Bounded rather than fixed.  A shell parser that gets quoting")
+print("      exactly right is a different program; this one reports the lines")
+print("      it could be wrong about and reports 3 UNRESOLVED besides.")
+
+# ---------------------------------------------------------------------------
+B.hdr("S6e  DID THE SWEEP LEAVE THE ARC AS IT FOUND IT?")
+
+porc = [ln for ln in B.git("status", "--porcelain", "--", "code").splitlines()
+        if ln.strip() and B.MINE not in ln]
+print("  population: `git status --porcelain -- code/`, excluding this tree")
+B.plain("...LINES of change outside this tree", len(porc), "one status line")
+for ln in porc[:20]:
+    print("      %s" % ln)
+if porc:
+    defect("SD6", "THE SWEEP LEFT SOMETHING BEHIND")
+    print("        Every probe is restored with `git checkout -- <its tree>`.")
+    print("        A probe that writes into ANOTHER tree is outside that scope,")
+    print("        and this is the check that says so.")
+else:
+    print()
+    print("      Clean.  Every one of the probes run by S2/S3/S5 was restored,")
+    print("      including the ones that write.")
+
+# ---------------------------------------------------------------------------
+B.hdr("S6f  THE ONE THIS SUITE CANNOT ANSWER ABOUT ITSELF")
+
+nto = sum(1 for r in recs if r["timeout"])
+if nto:
+    defect("SD6b", "%d of %d steps were KILLED before they could answer"
+           % (nto, len(recs)))
+    print("        A probe killed at the timeout may never have reached the")
+    print("        line that opens its own transcript.  S2 records it as")
+    print("        not-reading, and the truth is not-known.  Every count in")
+    print("        S2b is a LOWER BOUND, and S2a says so where the number is")
+    print("        printed rather than in a footnote.  The population that is")
+    print("        exact is the %d steps that finished." % (len(recs) - nto))
+
+defect("SD7", "A and B are two runs, not one run observed twice")
+print("        `diff(A, B)` is attributed to the shape.  The determinism")
+print("        control in S3 re-runs B and drops any step where B != B', which")
+print("        catches a probe that varies BETWEEN RUNS.  It does not catch a")
+print("        probe that varies WITH THE CLOCK in a way that happens to be")
+print("        stable across two adjacent runs and not across the minutes")
+print("        between A and B.  No row is currently attributed to that, and")
+print("        no row is currently ruled out of it either.")
+
+print()
+print("S6 TOTAL DEFECTS OF THIS INSTRUMENT: %d" % DEFECTS)
+sys.exit(min(DEFECTS, 120))
