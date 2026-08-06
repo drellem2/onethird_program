@@ -1,0 +1,64 @@
+P3 — testing (MW) on the marginal position laws.
+POPULATION: all naturally labelled non-chain posets, n = 3..6;
+GRAIN: one incomparable pair of one such poset.
+
+n = 3: 11 incomparable pairs (GRAIN: pair x poset)
+  min of min(p,1-p) over pairs with 1-TV >= 0.50 : 0.333333
+  min of min(p,1-p) over pairs with 1-TV >= 0.70 : 0.500000
+  min of min(p,1-p) over pairs with 1-TV >= 0.75 : 0.500000
+  min of min(p,1-p) over pairs with 1-TV >= 0.80 : 0.500000
+  min of min(p,1-p) over pairs with 1-TV >= 0.85 : 0.500000
+  min of min(p,1-p) over pairs with 1-TV >= 0.90 : 0.500000
+  min of min(p,1-p) over pairs with 1-TV >= 0.99 : 0.500000
+  pairs with 1-TV >= 0.5 AND min(p,1-p) < 1/3 (refutes (MW) at c=1/3): 0
+  s* = sup{1-TV : NOT balanced} = -1.000000   (so '1-TV > -1.000000 => balanced' holds on this whole population)
+
+n = 4: 130 incomparable pairs (GRAIN: pair x poset)
+  min of min(p,1-p) over pairs with 1-TV >= 0.50 : 0.250000
+  min of min(p,1-p) over pairs with 1-TV >= 0.70 : 0.375000
+  min of min(p,1-p) over pairs with 1-TV >= 0.75 : 0.375000
+  min of min(p,1-p) over pairs with 1-TV >= 0.80 : 0.400000
+  min of min(p,1-p) over pairs with 1-TV >= 0.85 : 0.500000
+  min of min(p,1-p) over pairs with 1-TV >= 0.90 : 0.500000
+  min of min(p,1-p) over pairs with 1-TV >= 0.99 : 0.500000
+  pairs with 1-TV >= 0.5 AND min(p,1-p) < 1/3 (refutes (MW) at c=1/3): 16
+  s* = sup{1-TV : NOT balanced} = 0.500000   (so '1-TV > 0.500000 => balanced' holds on this whole population)
+    s* witness: pair (0,3), min(p,1-p) = 0.250000, relation [(0, 1), (0, 2)]
+    REFUTER: 1-TV = 0.500000, min(p,1-p) = 0.250000, pair (0,3), relation [(0, 1), (0, 2)]
+    REFUTER: 1-TV = 0.500000, min(p,1-p) = 0.250000, pair (0,2), relation [(0, 1), (0, 3)]
+    REFUTER: 1-TV = 0.500000, min(p,1-p) = 0.250000, pair (0,1), relation [(0, 2), (0, 3)]
+
+n = 5: 1984 incomparable pairs (GRAIN: pair x poset)
+  min of min(p,1-p) over pairs with 1-TV >= 0.50 : 0.222222
+  min of min(p,1-p) over pairs with 1-TV >= 0.70 : 0.333333
+  min of min(p,1-p) over pairs with 1-TV >= 0.75 : 0.375000
+  min of min(p,1-p) over pairs with 1-TV >= 0.80 : 0.400000
+  min of min(p,1-p) over pairs with 1-TV >= 0.85 : 0.428571
+  min of min(p,1-p) over pairs with 1-TV >= 0.90 : 0.450000
+  min of min(p,1-p) over pairs with 1-TV >= 0.99 : 0.500000
+  pairs with 1-TV >= 0.5 AND min(p,1-p) < 1/3 (refutes (MW) at c=1/3): 351
+  s* = sup{1-TV : NOT balanced} = 0.636364   (so '1-TV > 0.636364 => balanced' holds on this whole population)
+    s* witness: pair (2,4), min(p,1-p) = 0.272727, relation [(0, 1), (0, 3), (0, 4), (1, 3), (2, 3)]
+    REFUTER: 1-TV = 0.500000, min(p,1-p) = 0.222222, pair (1,3), relation [(0, 2), (0, 3), (0, 4), (1, 2)]
+    REFUTER: 1-TV = 0.500000, min(p,1-p) = 0.222222, pair (1,4), relation [(0, 2), (0, 3), (0, 4), (1, 2)]
+    REFUTER: 1-TV = 0.500000, min(p,1-p) = 0.222222, pair (1,2), relation [(0, 2), (0, 3), (0, 4), (1, 3)]
+
+n = 6: 41044 incomparable pairs (GRAIN: pair x poset)
+  min of min(p,1-p) over pairs with 1-TV >= 0.50 : 0.212121
+  min of min(p,1-p) over pairs with 1-TV >= 0.70 : 0.315789
+  min of min(p,1-p) over pairs with 1-TV >= 0.75 : 0.364583
+  min of min(p,1-p) over pairs with 1-TV >= 0.80 : 0.393939
+  min of min(p,1-p) over pairs with 1-TV >= 0.85 : 0.426230
+  min of min(p,1-p) over pairs with 1-TV >= 0.90 : 0.450000
+  min of min(p,1-p) over pairs with 1-TV >= 0.99 : 0.500000
+  pairs with 1-TV >= 0.5 AND min(p,1-p) < 1/3 (refutes (MW) at c=1/3): 8088
+  s* = sup{1-TV : NOT balanced} = 0.736842   (so '1-TV > 0.736842 => balanced' holds on this whole population)
+    s* witness: pair (3,5), min(p,1-p) = 0.315789, relation [(0, 1), (0, 2), (0, 4), (0, 5), (1, 4), (2, 4), (3, 4)]
+    REFUTER: 1-TV = 0.500000, min(p,1-p) = 0.212121, pair (1,5), relation [(0, 3), (0, 4), (0, 5), (1, 4), (2, 3)]
+    REFUTER: 1-TV = 0.500000, min(p,1-p) = 0.212121, pair (2,5), relation [(0, 3), (0, 4), (0, 5), (1, 4), (2, 3)]
+    REFUTER: 1-TV = 0.500000, min(p,1-p) = 0.212121, pair (2,4), relation [(0, 3), (0, 5), (1, 3), (1, 4), (2, 3)]
+
+Reading: (MW) at c = 1/3 is what the forward vector would need from the
+MARGINAL laws.  Any refuter above means the marginal form is false and the
+vector must be run on the CONDITIONAL windows I_x(tau) instead — which is
+where mg-a1ec Prop. 4.1 lives anyway.
