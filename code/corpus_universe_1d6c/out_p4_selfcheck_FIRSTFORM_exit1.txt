@@ -1,0 +1,196 @@
+==============================================================================
+P4  THE SELF-CHECK, REPAIRED TO THE STANDARD IT ENFORCES.
+    Three fixes, each proved able to fire.
+==============================================================================
+
+==============================================================================
+  S1  REPRODUCE BEFORE DISAGREEING.  mg-d075's own regexes and
+      its own MINE list, IMPORTED FROM ITS SOURCE and executed.
+      Population: 254 live sentences.  Grain: one sentence.
+==============================================================================
+    criticism sentences            : 10
+    passing s5's own OWNSCOPE      : 10 of 10
+    mg-d075 PUBLISHED              : 10 of 10, 0 unbounded
+    REPRODUCES EXACTLY.
+
+==============================================================================
+  S2  FIX 1 -- THE STANDARD.  The same 10 sentences, scored by
+      H3's rule: the accepted scope must be a count or a bound.
+      Every accepted substring is printed.
+==============================================================================
+    PER ROW:
+      [01] code/branching_bound_d075/README.md            :53   SCOPED (10 sentence)
+           **EIGHT IS NOT THE POPULATION EITHER.** The ninth is the row-10 sentence of §3, which said *"on 
+           28 of 33 intervals"* of the 33 intervals `[0̂, w]` with `rank(w) ≤ 6` and never spelled *"Young–
+           Fibonacci"* — and which **mg-19ec's own POP-1 block already printed and scored unbounded.** One 
+           audit, two instruments, and only the smaller number reached the verdict.
+      [02] code/branching_bound_d075/README.md            :67   SCOPED (36 sites)
+           Post-repair A 10 / B 10 / ceiling 11 / corpus 36 sites in 7 files, 12 unbounded. - **s2** — the 
+           parent's transcript parsed to 8 rows; my independent STRICT re-implementation returns the same 8
+            line numbers and the same 8 verdicts;
+      [03] code/branching_bound_d075/README.md            :86   SCOPED (3 rows)
+           Adjudicated over those 3 rows as a property of the instrument, not scored as a defect: a row rec
+           ording a withdrawn reading *should* contribute the replacement as a live claim. 2.
+      [04] code/branching_bound_d075/README.md            :152  SCOPED (4 of the 8)
+           my 5 unbounded of the 9 = the parent's 4 of the 8 plus line 307, none moving the other way
+      [05] code/branching_bound_d075/README.md            :158  SCOPED (1 of 5)
+           **HELD.** 1 of 5 of my criticism sentences was unbounded, and it was the one faulting mg-dffa's 
+           clause for having no bound.
+      [06] ocs/repair-mg-d075-the-figure-and-its-scope.md :29   SCOPED (code/branching_audit_19ec)
+           **And mg-19ec already had it.** The POP-1 block of the same transcript (`code/branching_audit_19
+           ec/out_e5_population.txt`) prints this exact sentence as its `[09]` and scores it unbounded.
+      [07] ocs/repair-mg-d075-the-figure-and-its-scope.md :62   *** NO NUMERIC SCOPE ***
+           **FOUR was not the population, and EIGHT is not either.** The brief for this repair told me not 
+           to inherit 8; mg-aaf4 is told not to inherit 9.
+      [08] ocs/repair-mg-d075-the-figure-and-its-scope.md :92   SCOPED (30 intervals)
+           The brief singled this out and it deserves the space. §2's mg-dffa note faults Young–Fibonacci f
+           or **naming no class of `P`** — and stated the **Young** classification it was contrasting again
+           st with no bound at all, over a family this repo has measured at exactly **30 intervals `[∅, λ]`
+            with `|λ| ≤ 6`** and nowhere beyond:
+      [09] ocs/repair-mg-d075-the-figure-and-its-scope.md :210  SCOPED (code/branching_audit_19ec)
+           The `HEDGES` list in `code/branching_audit_19ec/e2_f2_clauses.py` has **25** entries, and that a
+           udit's transcript never prints a token count at all — so **26** is a hand-written literal no ins
+           trument computes. - The phrasing population is **15** in the transcript and in the published aud
+           it, and **13** in the recovered verdict that reached mg-d075's brief.
+      [10] /OneThird-Branching-Graphs-Where-This-Lives.md :30   SCOPED (10 sentence)
+           **Eight is not the population either.** Counted over the live sentences of this file at the grai
+           n mg-19ec itself used, the sites stating that figure were **9**, of which **5** carried no scope
+            in their own sentence; the ninth is the row-10 sentence in §3, which mg-19ec's own POP-1 block 
+           printed and whose POP-3 block could not see, because that sentence says *"for Young's"* and neve
+           r spells *"Young–Fibonacci"*.
+
+    pass s5's own test         : 10 of 10
+    pass the document's H3     : 9 of 10
+    THE GAP                    : 1
+
+    THE 1 THAT FALL, WITH WHAT THEY PASSED ON BEFORE:
+      docs/repair-mg-d075-the-figure-and-its-scope.md:62
+        passed s5 on : population
+        **FOUR was not the population, and EIGHT is not either.** The brief for this repair told me not 
+
+==============================================================================
+  S3  FIX 2 -- THE POPULATION.  mg-d075 authored THREE prose
+      files; MINE lists two.  The third added here.
+==============================================================================
+    s5's population   : 254 live sentences in 2 file(s) + 14 added
+    repaired          : 334 live sentences in 3 file(s) + 14 added
+    criticism sentences: 10 -> 18  (+8, all from the file s5 never
+                        looked at)
+    THE SENTENCES THE MISSING FILE CONTRIBUTES:
+      [01] code/branching_bound_d075/PREDICTIONS.md       :15   SCOPED (code/branching_audit_19ec)
+           `cat code/branching_audit_19ec/out_e5_population.txt` — **the parent's POP-3 block, which states
+            8 sites / 4 bounded / 4 unbounded and prints all eight.** I have read it. 7.
+      [02] code/branching_bound_d075/PREDICTIONS.md       :55   *** NO NUMERIC SCOPE ***
+           It states the figure, it is about Young–Fibonacci intervals, it carries **no** rank bound, and t
+           he parent's POP-3 misses it because the sentence says *"for Young's"* and never spells "Young–Fi
+           bonacci".
+      [03] code/branching_bound_d075/PREDICTIONS.md       :61   *** NO NUMERIC SCOPE ***
+           **P1b — the parent's own POP-1 already printed this sentence** (POP-1 `[09]`, line 307) and scor
+           ed it unbounded.
+      [04] code/branching_bound_d075/PREDICTIONS.md       :61   *** NO NUMERIC SCOPE ***
+           So the ninth site is not new evidence; it is the parent's own two instruments disagreeing with e
+           ach other, and only the smaller number reaching the verdict.
+      [05] code/branching_bound_d075/PREDICTIONS.md       :65   SCOPED (8/4)
+           **P2 — the parent's 8/4/4 reproduces exactly under its own predicate.** Re-implemented independe
+           ntly and run against the same file at this commit, the parent's POP-3 predicate returns populati
+           on 8, bounded 4, unbounded 4, and the same eight line numbers (166, 166, 175, 181, 202, 307, 413
+           , 414).
+      [06] code/branching_bound_d075/PREDICTIONS.md       :65   *** NO NUMERIC SCOPE ***
+           *If this fails, the disagreement is mine to explain, not the parent's.*
+      [07] code/branching_bound_d075/PREDICTIONS.md       :71   SCOPED (307 sentence)
+           **P3 — the four the parent called unbounded are the four I will find unbounded**, i.e. my five-e
+           lement unbounded set is the parent's four plus the line-307 sentence, with no site moving in the
+            other direction.
+      [08] code/branching_bound_d075/PREDICTIONS.md       :88   *** NO NUMERIC SCOPE ***
+           **P6 — after the repair, unbounded = 0** on my repair population under my own relaxed predicate,
+            **and** 0 under the parent's stricter one.
+
+    of the 8 new, WITHOUT a numeric scope : 5
+
+==============================================================================
+  S4  FIX 3 -- THE DETECTOR.  A property match instead of a
+      tense.  Population: the repaired 334-sentence population.
+==============================================================================
+    criticism sentences, s5's FAULT      : 18
+    criticism sentences, property match  : 19
+    visible ONLY to the property match   : 1
+
+    THE SENTENCES ONE TENSE HID:
+      [01] ocs/repair-mg-d075-the-figure-and-its-scope.md :24   *** NO NUMERIC SCOPE ***
+           It carries no rank bound. mg-19ec's POP-3 predicate could not see it, because that predicate req
+           uires the string *"Young–Fibonacci"* to appear **in the same sentence as the numeral**, and this
+            sentence says *"for Young's"* instead.
+
+    THE SENTENCE THE DETECTOR WAS WRITTEN FOR:
+      docs/repair-mg-d075-the-figure-and-its-scope.md:24  NO NUMERIC SCOPE
+        It carries no rank bound. mg-19ec's POP-3 predicate could not see it, because that predicate req
+
+==============================================================================
+  S5  ALL THREE FIXES AT ONCE.  Population: mg-d075's three
+      authored documents plus the sentences it added to the
+      living document.  Grain: one sentence.
+==============================================================================
+    population              : 334 live sentences
+    criticism sentences     : 19
+    carrying a numeric scope: 12
+    WITHOUT ONE            : 7
+
+    EVERY SENTENCE THAT FAILS THE REPAIRED STANDARD:
+      [01] ocs/repair-mg-d075-the-figure-and-its-scope.md :24   *** NO NUMERIC SCOPE ***
+           It carries no rank bound. mg-19ec's POP-3 predicate could not see it, because that predicate req
+           uires the string *"Young–Fibonacci"* to appear **in the same sentence as the numeral**, and this
+            sentence says *"for Young's"* instead.
+      [02] ocs/repair-mg-d075-the-figure-and-its-scope.md :62   *** NO NUMERIC SCOPE ***
+           **FOUR was not the population, and EIGHT is not either.** The brief for this repair told me not 
+           to inherit 8; mg-aaf4 is told not to inherit 9.
+      [03] code/branching_bound_d075/PREDICTIONS.md       :55   *** NO NUMERIC SCOPE ***
+           It states the figure, it is about Young–Fibonacci intervals, it carries **no** rank bound, and t
+           he parent's POP-3 misses it because the sentence says *"for Young's"* and never spells "Young–Fi
+           bonacci".
+      [04] code/branching_bound_d075/PREDICTIONS.md       :61   *** NO NUMERIC SCOPE ***
+           **P1b — the parent's own POP-1 already printed this sentence** (POP-1 `[09]`, line 307) and scor
+           ed it unbounded.
+      [05] code/branching_bound_d075/PREDICTIONS.md       :61   *** NO NUMERIC SCOPE ***
+           So the ninth site is not new evidence; it is the parent's own two instruments disagreeing with e
+           ach other, and only the smaller number reaching the verdict.
+      [06] code/branching_bound_d075/PREDICTIONS.md       :65   *** NO NUMERIC SCOPE ***
+           *If this fails, the disagreement is mine to explain, not the parent's.*
+      [07] code/branching_bound_d075/PREDICTIONS.md       :88   *** NO NUMERIC SCOPE ***
+           **P6 — after the repair, unbounded = 0** on my repair population under my own relaxed predicate,
+            **and** 0 under the parent's stricter one.
+
+==============================================================================
+  S6  THE CONTROLS.  Each fix run against an input on which the
+      OLD form passes and the NEW form must fail.  A check that
+      has not been shown to fire has not been shown to pass.
+==============================================================================
+    FIX 1 standard                   old-form yes    new-form yes    FIRES
+    FIX 1 label is not a count       old-form yes    new-form yes    FIRES
+    FIX 3 tense                      old-form yes    new-form yes    FIRES
+    FIX 3 keeps the old form         old-form yes    new-form yes    FIRES
+    FIX 2 population                 old-form yes    new-form yes    FIRES
+    FIX 1 admits a real count        old-form yes    new-form yes    FIRES
+
+    6 of 6 controls fire.  The results above are trusted only because of this block.
+
+==============================================================================
+  VERDICT
+==============================================================================
+    s5, as published : 10 criticism sentences, 0 unbounded
+    s5, repaired     : 19 criticism sentences, 7 without a numeric
+                       scope
+
+    THE CHECK BITES.  It was not wrong about its population; it was
+    weaker than the standard it enforced, short by a file, and blind
+    to one tense.
+
+==============================================================================
+SUMMARY p4_selfcheck: S1 reproduce s5 10 criticism, 10 pass its own OWNSCOPE -- REPRODUCES
+SUMMARY p4_selfcheck: S2 FIX 1 pass H3's numeric standard 9 of 10, gap 1
+SUMMARY p4_selfcheck: S3 FIX 2 population 254 -> 334 sentences, criticism 10 -> 18
+SUMMARY p4_selfcheck: S3 of the 8 added criticism sentences 5 carry no numeric scope
+SUMMARY p4_selfcheck: S4 FIX 3 criticism 18 -> 19, 1 visible only to the property match
+SUMMARY p4_selfcheck: S4 the could-not-see sentence FOUND and unscoped
+SUMMARY p4_selfcheck: S5 all three fixes 19 criticism sentences, 7 without a numeric scope
+SUMMARY p4_selfcheck: S6 controls 6 of 6 fire
+==============================================================================

@@ -1,0 +1,65 @@
+==============================================================================
+DO NOT DISTURB -- mg-d075's suite re-run from the mg-1d6c branch
+==============================================================================
+
+HAND-RUN, NOT A STEP OF run_all.sh.  It is deliberately not wired into this
+suite's runner: mg-ec63 found that a probe which executes another ticket's
+runner can destroy the transcript that runner is writing, and a do-not-disturb
+check that damages what it is checking is worse than none.  Run by hand as:
+
+    sh code/branching_bound_d075/run_all.sh    # from the repository root
+    git diff --stat code/branching_bound_d075/
+    git checkout -- code/branching_bound_d075/ # restore, printed below
+
+------------------------------------------------------------------ THE RUN
+==============================================================================
+mg-d075 run_all -- exit codes scored against PREDICTIONS.md (committed first)
+==============================================================================
+  s1_census              exit 1  predicted 1  SUMMARY lines 9   ok
+  s2_reproduce           exit 0  predicted 0  SUMMARY lines 5   ok
+  s3_bound               exit 0  predicted 0  SUMMARY lines 5   ok
+  s4_hedge               exit 0  predicted 0  SUMMARY lines 5   ok
+  s5_own_criticism       exit 0  predicted 0  SUMMARY lines 2   ok
+  s6_class               exit 0  predicted 0  SUMMARY lines 4   ok
+  selftest_d075          exit 0  predicted 0  SUMMARY lines 2   ok
+==============================================================================
+SUMMARY run_all: 7 scripts, 0 off prediction
+==============================================================================
+--------------------------------------------- WHAT MOVED IN THE WORKING TREE
+ code/branching_bound_d075/out_s1_census.txt | 6 +++---
+ code/branching_bound_d075/out_s6_class.txt  | 2 +-
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+-               new docs/*.md excluded.  102 docs/*.md exist now, 91 at
+-               the anchor, so 11 post-date it -- among them mg-19ec's
++               new docs/*.md excluded.  105 docs/*.md exist now, 91 at
++               the anchor, so 14 post-date it -- among them mg-19ec's
+-    files scanned         : 102 markdown files in docs/
++    files scanned         : 105 markdown files in docs/
+-              commits: 11 naming this ticket
++              commits: 18 naming this ticket
+
+--------------------------------------------------------------- WHAT IT MEANS
+THE SUITE IS GREEN: 7 of 7 scripts on their committed predictions, run_all
+exit 0.  P15 holds.
+
+AND TWO COMMITTED TRANSCRIPTS DO NOT REGENERATE, on three figures:
+
+  out_s1_census.txt   '102 docs/*.md exist now'   ->  105   (twice)
+  out_s1_census.txt   'files scanned : 102'       ->  105
+  out_s6_class.txt    'commits: 11 naming this'   ->   18
+
+mg-aaf4 reported out_s6_class.txt moving and named the cause: it counts with
+`git log --all`, so every branch in the repository is in its population.
+THE s1_census MOVEMENT IS NEW AND IT IS THIS TICKET'S OWN SUBJECT: the figure
+that moved is the SIZE OF THE GLOB.  p3's C3c calls that quantity a consumer
+of the glob nobody had named; here it is, drifting in a committed transcript,
+102 -> 105, with no exit code anywhere saying so.  Population: mg-d075's 7
+committed transcripts.  Grain: one file.  Two moved.
+
+NOTHING IS REPAIRED AND NOTHING IS KEPT: the directory is restored below and
+this branch carries no regenerated output of it.
+
+------------------------------------------------------------- THE RESTORE
+modified files under code/branching_bound_d075 after restore:        0
+clean
