@@ -146,7 +146,7 @@ B.hdr("V2c  AND THE `.new`+`mv` TREES, CHECKED THE SAME WAY")
 newmv = []
 for t in TREES:
     src = open(os.path.join(sbx, t, "run_all.sh")).read()
-    if re.search(r"\.new", src) and re.search(r"\bmv\b", src):
+    if B.carries_newmv(src):
         newmv.append(t)
 print("  population: the %d runners at %s" % (len(TREES), REV))
 B.plain("...RUNNERS whose source carries the `.new`+`mv` fix", len(newmv),

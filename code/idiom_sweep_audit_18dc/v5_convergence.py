@@ -30,20 +30,26 @@ import sys
 
 import lib18dc as B
 
-REV = "3fc870a"
+# HEAD, not 3fc870a: at 3fc870a the ONLY `.new`+`mv` tree is
+# `runner_exit_repair_bf79`, which is precisely the tree mg-03d1 DID use, and
+# the brief asks for one it did not.  `code/grain_axis_audit_03d1` -- mg-03d1's
+# own, which its A4d excluded from `subjects` by name -- is on the branch at
+# HEAD and is not at 3fc870a.  Measuring at HEAD is what makes V5b answerable.
+REV = None  # set below, after lib18dc is imported
 FAIL = 0
 
 print("mg-18dc / V5 -- CONVERGENCE AND RESTORE")
 print("HEAD: %s" % B.head())
-print("MEASURED AT: %s" % REV)
 
-sbx = B.sandbox(REV, tag="%s-v5" % REV)
+REV = B.git("rev-parse", "HEAD").strip()
+sbx = B.sandbox(REV, tag="head-v5")
+print("MEASURED AT: %s  (HEAD)" % REV[:7])
 TREES = B.runners_at(REV)
 
 newmv = []
 for t in TREES:
     src = open(os.path.join(sbx, t, "run_all.sh")).read()
-    if re.search(r"\.new", src) and re.search(r"\bmv\b", src):
+    if B.carries_newmv(src):
         newmv.append(t)
 
 # ---------------------------------------------------------------------------
@@ -94,7 +100,7 @@ for tree in targets:
     for k in (1, 2):
         try:
             subprocess.run(["sh", "./run_all.sh"], cwd=d, capture_output=True,
-                           timeout=1200)
+                           timeout=1500)
         except subprocess.TimeoutExpired:
             to = True
         snaps.append(hashes(d))
@@ -148,7 +154,7 @@ subject = "code/runner_exit_repair_bf79"
 B.sandbox_reset(sbx)
 d = os.path.join(sbx, subject)
 try:
-    subprocess.run(["sh", "./run_all.sh"], cwd=d, capture_output=True, timeout=1200)
+    subprocess.run(["sh", "./run_all.sh"], cwd=d, capture_output=True, timeout=1500)
 except subprocess.TimeoutExpired:
     pass
 allpaths = B.dirty(sbx)

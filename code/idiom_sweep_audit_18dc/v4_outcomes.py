@@ -137,6 +137,7 @@ def arm(sbx, tree, probe, out, empty):
         open(os.path.join(d, out), "w").close()
     env = dict(os.environ)
     env["PYTHONPATH"] = B.make_shim()
+    env["V18_WORK"] = B.child_work(tree)        # SD12 -- see lib18dc.child_work
     led = os.path.join(B.WORK, "v4-%s-%s-%s.tsv"
                        % (tree.replace("/", "_"), probe, "A" if empty else "B"))
     if os.path.exists(led):

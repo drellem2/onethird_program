@@ -67,6 +67,50 @@ d("SD6", "V3 RUNS THE ARC FOR REAL AND THE ARC'S PROBES RUN EACH OTHER.  A "
   "mg-ec63's SD6d, read before this instrument was written",
   "unmeasured; it is a mechanism by which the %d-second timeout kills more "
   "trees than the tree's own work would")
+d("SD12", "THIS SUITE'S OWN V4 TRANSCRIPT WAS DESTROYED BY THIS SUITE, and "
+         "what was left was a 19-BYTE FILE CONTAINING THE STUB'S MARKER -- a "
+         "vacuous pass of exactly this ticket's shape, produced by the audit "
+         "for it.  `run_all.sh` exports `V18_WORK`; the arc's runners inherit "
+         "the environment; this directory became a `code/*/run_all.sh` the "
+         "moment it had a runner, so V6's sweep of HEAD RAN MY OWN RUNNER, "
+         "which redirected `$V18_WORK/out_v4_outcomes.txt` while V4 was "
+         "writing it.  THE RE-ENTRANCY GUARD DID NOT FIRE: `V18_RUNNING` is "
+         "set by `run_all.sh`, and the collision came from a probe invoked "
+         "DIRECTLY.  A GUARD ON THE RUNNER DOES NOT PROTECT A PROBE",
+  "the transcript being 19 bytes long -- not by any check in this suite",
+  "V4 was re-run from nothing.  Repaired STRUCTURALLY rather than with a "
+  "second guard, the way mg-ec63 repaired its own (c1bb466): everything this "
+  "suite executes now gets its own throwaway `$V18_WORK` under `$WORK/child/`, "
+  "so the collision path no longer exists.  See `lib18dc.child_work`")
+d("SD9", "A COMMENT READ AS CODE, TWICE.  My `pipefail` rule matched the "
+        "string anywhere in a runner and reported 31 of 117 setting it; 29 of "
+        "those are COMMENTS saying `set -o pipefail` is NOT used because "
+        "/bin/sh is dash on Linux -- the most repeated line in this arc's "
+        "runners.  The same rule read `.new`+`mv` out of a comment and turned "
+        "a 2 into a 4, including THIS runner, which uses neither",
+  "grepping the arc by hand after the number looked too big",
+  "31 -> 2 and 23 -> 1 on `tee`; 4 -> 2 on the fix.  P6 goes from a hit to a "
+  "MISS as a direct result, and is kept as written.  All of MY rules over "
+  "runner source now go through `lib18dc.code_of`; the rules I REPRODUCE from "
+  "mg-03d1 deliberately do not, because re-deriving its 86 means running its "
+  "rule as written")
+d("SD10", "A ROW NAME THAT WAS NOT ITS MEASUREMENT: V6b printed `RUNNERS in "
+         "BOTH populations` while intersecting ALL `tee` users with the "
+         "truncating set, directly under a row that had just defined the "
+         "population of interest as `tee` WITHOUT `pipefail`",
+  "reading the two rows next to each other",
+  "no count moved at the time -- the two sets happened to coincide -- and "
+  "both intersections are now printed separately")
+d("SD8", "AN `ALL` OVER AN EMPTY SET, IN MY OWN OUTPUT.  V3b's false-positive "
+        "rows shipped for one draft as `%d own-tree reads, all of populated "
+        "files`, which over n == 0 reads `all 0 of them were fine` -- a "
+        "universal asserted over nothing.  That is ALL_PASS over an empty set, "
+        "which is one of the SIX SIBLING DEFECTS this brief lists, committed by "
+        "the audit sent to look for it",
+  "reading my own V3 transcript after the first full pass, not the code",
+  "no count moved -- the classification was right and the SENTENCE was empty. "
+  "The n == 0 case is now a differently-named row, because `never read one at "
+  "all` and `read them and they were fine` are different findings")
 d("SD7", "A TIMEOUT IS RECORDED AS NOT-BITING.  V3 kills a runner at 240 s and "
         "counts no empty read for it.  That is `not known`, printed as though "
         "it were `not found`",
