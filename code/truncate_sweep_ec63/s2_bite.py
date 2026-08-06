@@ -138,12 +138,23 @@ wr = [r for r in recs if r["own_write"]]
 B.plain("...STEPS whose probe WRITES its own transcript itself", len(wr),
         "one step")
 print()
-print("  THAT ROW IS NOT A ROUNDING DETAIL.  A probe that writes its own")
+print("  THAT ROW IS PRINTED EVEN THOUGH IT IS %d.  A probe that writes its own"
+      % len(wr))
 print("  transcript opens EXACTLY THE SAME PATH as one that reads it, and an")
 print("  `open`-event hook that ignores the mode counts both.  The first")
-print("  version of this pass did, and reported two trees as biting whose")
-print("  probes were writing.  What gave it away was not the output: it was")
-print("  that the sweep left those two transcripts MODIFIED afterwards.")
+print("  version of this pass did.  So the distinction is a REAL correctness")
+print("  fix whose MEASURED EFFECT HERE IS %d, and both halves of that sentence"
+      % len(wr))
+print("  are load-bearing: the fix is right, and it changed nothing, and")
+print("  reporting it as though it had rescued a count would be attributing a")
+print("  repair to evidence that does not support it.")
+print()
+print("  AND WHAT PROMPTED THE FIX WAS A DIFFERENT DEFECT.  Two transcripts")
+print("  came out of an early pass MODIFIED, and the first explanation reached")
+print("  for was `their own probes write them`.  It was not: they were written")
+print("  by probes of OTHER trees, which this suite's timeout had killed before")
+print("  their cleanup `finally` could run.  A rigorous fix, a confident")
+print("  mechanism, and the mechanism was wrong.  S6/SD3a and SD6c keep both.")
 for r in wr:
     print("      writes: %-38s %s" % (r["tree"].replace("code/", ""),
                                       os.path.basename(r["probe"])))

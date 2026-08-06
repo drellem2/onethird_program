@@ -1,0 +1,108 @@
+mg-ec63 / S1 -- THE POPULATION OF THE TRUNCATE-BEFORE-PROBE SHAPE
+HEAD: e60c3c9
+
+==========================================================================
+S1a  THE RUNNERS
+==========================================================================
+  population: directories under `code/` holding a `run_all.sh`,
+  enumerated by the glob `code/*/run_all.sh` -- a PROPERTY, not a list.
+
+      ...RUNNERS in the arc                                         110
+          ^ one unit of that number is one `run_all.sh`
+      ...DIRECTORIES under `code/`                                  117
+          ^ one unit of that number is one directory
+      ...of those, holding NO runner                                  7
+          ^ one unit of that number is one directory
+
+  mg-03d1's sweep also says 109.  THE TOTALS AGREE AND THE POPULATIONS
+  DO NOT: its count includes `code/grain_axis_audit_03d1`, its own tree,
+  which is not on this branch --
+      code/grain_axis_audit_03d1 present here:  NO
+  -- so at least one member of its 109 is not a member of mine, and the
+  two 109s cannot both be over the same set.  A number that matches is
+  not a population that matches.
+
+==========================================================================
+S1b  HOW EACH RUNNER WRITES ITS TRANSCRIPTS
+==========================================================================
+  Resolved by walking the shell, not by matching its text.  The arc has
+  at least SIX runner idioms and they disagree about ARGUMENT ORDER:
+
+      python3 X.py > out_X.txt                    direct
+      run <probe> <out>                           helper, probe first
+      run <out> <probe>                           helper, OUT first
+      expect <code> <probe>, out from the stem    helper, derived name
+      run <name> ; python3 "$HERE/$name.py"       helper, no extension
+      for s in a b c ; python3 "$s.py" > out_$s   a LOOP, N steps not 1
+
+  A regex keyed on `python3 ... > out_` gets the second wrong (it reads
+  the transcript as the probe), cannot see the third or fourth at all,
+  and counts the sixth once.
+
+      ...STEPS resolved across all 110 runners                      518
+          ^ one unit of that number is one (probe, transcript, operator) triple
+
+  population: the 110 RUNNERS of S1a, classified by the STRONGEST
+  operator any one of their steps uses (a runner with one `>` step is a
+  truncating runner, whatever else it does):
+
+      ...RUNNERS that truncate a transcript with a plain `>`         95
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS with the `.new`+`mv` structural fix                  2
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS that only append with `>>`                           0
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS that write NO transcript (stdout only)              13
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS with no python step this resolver found              0
+          ^ one unit of that number is one `run_all.sh`
+
+      STRUCTURAL FIX: code/runner_exit_repair_bf79
+      STRUCTURAL FIX: code/truncate_sweep_ec63
+
+  I MAKE IT 95 TRUNCATING, NOT 86, over a population of 110.
+  The gap is not a disagreement about the arc; it is a disagreement
+  about the RULE.  13 runners here write no transcript at all and are
+  in no truncation population -- `code/state_claims_repair_0120` streams
+  every section to stdout, and its transcript is captured outside the
+  runner.  Those are not fixed and are not broken; they are not members.
+
+==========================================================================
+S1c  WHAT THE RESOLVER REFUSED TO GUESS AT
+==========================================================================
+  population: the 110 RUNNERS of S1a
+      ...RUNNERS with at least one UNRESOLVED line                    3
+          ^ one unit of that number is one `run_all.sh`
+      ...UNRESOLVED lines in total                                    3
+          ^ one unit of that number is one shell statement
+
+  Printed rather than binned.  A resolver that reports zero unresolved
+  lines over 109 hand-written shell scripts is guessing somewhere.
+
+      counterexample_audit_a7b4                python3 -u -c "import records; [records.build_all(n) for n in range(3, 8)]" > /dev/null
+      landscape_repair_1953                    ( cd ../landscape_repair_audit_3b51    && python3 audit_scope_text.py ) > out_scope_text_3b51_rerun.txt
+      state_delegation_repair_a74f             (cd "$W" && python3 code/state_delegation_audit_16eb/reproduce16eb.py | tail -20)
+
+  Each is a `cd` into another directory or a `python3 -c`, so the probe
+  it names is NOT resolvable against this tree.  They are excluded from
+  the step population and counted here instead of guessed at.
+
+==========================================================================
+S1d  THE STEPS THAT CAN ACTUALLY BITE, AND WHY THE FILTER IS THIS ONE
+==========================================================================
+  A `>` empties a file that HAD BYTES.  A step whose transcript is not
+  committed empties nothing on a clean checkout -- there was no content
+  for the probe to miss.  So the population S2 sweeps is:
+
+      a step with operator TRUNC whose transcript EXISTS in the tree.
+
+      ...TRUNC steps in total                                       424
+          ^ one unit of that number is one step
+      ...of those, whose transcript is COMMITTED                    422
+          ^ one unit of that number is one step
+      ...of those, whose transcript is NOT in the tree                2
+          ^ one unit of that number is one step
+      ...RUNNERS contributing at least one such step                 94
+          ^ one unit of that number is one `run_all.sh`
+
+S1 TOTAL UNRESOLVED RUNNERS: 3

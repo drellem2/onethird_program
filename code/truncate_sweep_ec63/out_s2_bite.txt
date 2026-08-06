@@ -1,0 +1,165 @@
+  ... 25/422  136s
+  ... 50/422  267s
+  ... 75/422  410s
+  ... 100/422  544s
+  ... 125/422  668s
+  ... 150/422  1005s
+  ... 175/422  1313s
+  ... 200/422  1517s
+  ... 225/422  1638s
+  ... 250/422  1855s
+  ... 275/422  1888s
+  ... 300/422  2044s
+  ... 325/422  2136s
+  ... 350/422  2212s
+  ... 375/422  2411s
+  ... 400/422  2519s
+mg-ec63 / S2 -- WHERE THE SHAPE BITES, BY OBSERVED FILE OPENS
+HEAD: e60c3c9
+
+==========================================================================
+S2a  THE RUN
+==========================================================================
+  population: the 422 CANDIDATE STEPS of S1d
+  Each is run ONCE, from its own tree, with its transcript holding the
+  committed bytes, under an `open` audit hook.  Output goes to memory --
+  NOTHING in the subject tree is rewritten by this sweep -- and the tree
+  is `git checkout`-restored after every single probe.
+
+  timeout per probe: 120 s.  A probe that does not finish is recorded as
+  TIMEOUT and is neither counted as biting nor as clean, because a probe
+  that did not run has not answered the question.
+
+  workers: 4.  THIS PASS TRUNCATES NOTHING -- every run here has its
+  transcript populated -- so concurrent workers cannot empty a file out
+  from under each other.  S3, which does truncate, runs SERIALLY.
+
+      ...STEPS run                                                  422
+          ^ one unit of that number is one step
+      ...STEPS that TIMED OUT at 120s                                46
+          ^ one unit of that number is one step
+      ...STEPS that exited non-zero                                 103
+          ^ one unit of that number is one step
+
+  THE TIMEOUTS ARE A CEILING ON WHAT THIS PASS COULD SEE, AND THEY ARE
+  STATED HERE RATHER THAN AT THE BOTTOM.  A probe killed at 120s may not
+  have reached the line that opens its own transcript, so it is recorded
+  as not-reading when the truth is not-known.  Every count below is
+  therefore a LOWER BOUND over the 422 steps, exact only over the 376 that
+  finished.  The arc's own runners take ten minutes in places; this
+  suite runs 422 probes and cannot give each of them ten.
+
+==========================================================================
+S2b  THE EMPTIED CLASS -- THE ONE THIS TICKET IS ABOUT
+==========================================================================
+  population: the 422 STEPS run in S2a
+      ...STEPS whose probe OPENS ITS OWN emptied transcript          37
+          ^ one unit of that number is one step
+      ...STEPS whose probe opens ANOTHER transcript (STALE, not empty)     13
+          ^ one unit of that number is one step
+      ...STEPS whose probe opens no transcript of its tree          372
+          ^ one unit of that number is one step
+
+      ...STEPS whose probe WRITES its own transcript itself           0
+          ^ one unit of that number is one step
+
+  THAT ROW IS NOT A ROUNDING DETAIL.  A probe that writes its own
+  transcript opens EXACTLY THE SAME PATH as one that reads it, and an
+  `open`-event hook that ignores the mode counts both.  The first
+  version of this pass did, and reported two trees as biting whose
+  probes were writing.  What gave it away was not the output: it was
+  that the sweep left those two transcripts MODIFIED afterwards.
+
+      ...RUNNERS with at least one EMPTIED step                      21
+          ^ one unit of that number is one `run_all.sh`
+      ...further RUNNERS with only STALE steps                       11
+          ^ one unit of that number is one `run_all.sh`
+
+  mg-03d1 reports 43 trees where 'a probe of the same run reads a
+  transcript that run HAS ALREADY EMPTIED'.  Under its own rule the
+  reading probe need not be the one whose transcript was emptied, so
+  its 43 covers BOTH classes above.  Mine at the tree grain, and by
+  observed opens rather than source text:
+
+      EMPTIED trees   21
+      + STALE-only    11
+      = both classes  32      (mg-03d1's rule, my measurement)
+
+  I DO NOT GET 43 EITHER WAY, and the reason is the rule and not the
+  arc.  The number that answers the ticket's own sentence -- a probe
+  reading a file THE SAME RUN EMPTIED -- is 21 trees / 37 steps.
+
+==========================================================================
+S2c  THE TREES, NAMED, SO EVERY ROW CAN BE CHECKED
+==========================================================================
+      audit_2c77                                 q3_operands.py
+      audit_330a                                 s4_term.py
+      branching_audit_d330                       e3_dispositions.py
+      counterexample_audit_c6bc                  a5_battery.py, check_locator.py
+      face_geometry_audit_6653                   verify_claims.py
+      face_geometry_instr_5f9a                   d3_reintroduction.py, d4_auditor_rerun.py
+      hash_population_6e58                       p4_gate.py
+      hodge_leverage_audit_97fb                  audit_97fb.py
+      repair_69d1                                p3_reason.py
+      repair_8d5e                                r4_self.py
+      repair_b2af                                t3_term.py
+      runner_exit_audit_56dc                     t5_fixture.py
+      runner_exit_audit_dee4                     a1_outside.py
+      runner_exit_c2b3                           k3_retro.py
+      runner_exit_repair_70c7                    r2_anchor.py, r3_strength.py, r6_self.py
+      runner_exit_repair_7522                    s5_self.py
+      species_bound_audit_6ef4                   selftest6ef4.py, t1_bound.py, t2_wiring.py, t4_restore.py
+      species_bound_repair_5040                  selftest5040.py, r1_bound.py, r2_wiring.py, r3_summaries.py, r4_self.py
+      species_extent_d633                        selftestd633.py, e3_bothways.py
+      species_repair_a4ef                        s1_extent.py
+      species_rung_repair_4adb                   selftest4adb.py, v1_population.py, v2_layer2.py, v3_self.py, v4_neighbours.py
+
+==========================================================================
+S2d  THE TEXT RULE, SCORED AGAINST THE OBSERVED OPENS
+==========================================================================
+  mg-03d1's `READS_OWN` regex, run over the SAME probes, and compared
+  with what those probes were then observed to open.
+
+  population: the 422 STEPS run in S2a
+      ...STEPS where text rule and observed opens AGREE             334
+          ^ one unit of that number is one step
+      ...STEPS the text rule flags that open NOTHING (false positive)     56
+          ^ one unit of that number is one step
+      ...STEPS that DO open a transcript with no match (false negative)     32
+          ^ one unit of that number is one step
+
+  FALSE POSITIVES -- source mentions a transcript, process never opens
+  one (a docstring, a dead branch, a `--flag` guard):
+      anchor_population_audit_0ba7               a4_labels.py
+      branching_audit_19ec                       e1_f1_cells.py
+      branching_audit_19ec                       e4_f3_control.py
+      branching_audit_19ec                       e6_standing.py
+      branching_audit_321d                       h1_questions.py
+      branching_audit_321d                       h3_setlevel.py
+      branching_audit_321d                       h4_mine.py
+      branching_audit_5800                       a7_doc.py
+      branching_audit_58da                       g1_provenance.py
+      branching_audit_957f                       j1_attribution.py
+      branching_audit_957f                       j4_reproduce.py
+      branching_audit_a218                       c0_repro.sh
+      ... and 44 more
+
+  FALSE NEGATIVES -- the process opens a transcript the source never
+  spells (a path built from a variable, an `os.path.join`, a `Path`):
+      audit_2c77                                 q3_operands.py   own=True others=0
+      branching_audit_321d                       h5_doccheck.py   own=False others=5
+      branching_audit_957f                       j5_doccheck.py   own=False others=5
+      branching_audit_d330                       e3_dispositions.py   own=True others=5
+      branching_locate_db09                      t5_labels.py   own=False others=4
+      branching_repair_7e58                      k4_doccheck.py   own=False others=4
+      counterexample_audit_c6bc                  a5_battery.py   own=True others=6
+      counterexample_audit_c6bc                  check_locator.py   own=True others=6
+      face_geometry_audit_6653                   verify_claims.py   own=True others=1
+      face_geometry_instr_5f9a                   d3_reintroduction.py   own=True others=3
+      face_geometry_instr_5f9a                   d4_auditor_rerun.py   own=True others=3
+      face_geometry_landing_7d5a                 verify_landing.py   own=False others=1
+      ... and 20 more
+
+  every tree but this one restored, tracked and untracked: clean
+
+S2 TOTAL EMPTIED STEPS: 37
