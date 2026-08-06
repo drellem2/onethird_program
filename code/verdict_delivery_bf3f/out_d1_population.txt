@@ -1,0 +1,76 @@
+==============================================================================
+D1.1  pm-onethird's population under the declared predicate
+==============================================================================
+  landed items          : 149
+  DELIVERED             : 25
+  DROPPED               : 122
+  UNDECIDABLE           : 2
+
+  THE TICKET SAYS ELEVEN. The predicate says 122. Eleven is what was NOTICED.
+
+==============================================================================
+D1.2  FALSE-POSITIVE CONTROL (P2) -- 21 items hand-verified as delivered
+==============================================================================
+  hand-verified delivered : 21
+  of those reported DROPPED: 0   []
+  of those not in scope    : 0  []
+  -> P2 HOLDS
+
+==============================================================================
+D1.3  THE SEVEN THE TICKET NAMES -- are they all in the report?
+==============================================================================
+  four in one evening  mg-ec63  -> DROPPED
+  four in one evening  mg-6e58  -> DROPPED
+  four in one evening  mg-0120  -> DROPPED
+  four in one evening  mg-5f7c  -> DROPPED
+  earlier              mg-d53d  -> DROPPED
+  earlier              mg-ba2a  -> DROPPED
+  earlier              mg-1abe  -> DROPPED
+
+==============================================================================
+D1.4  THE CRUDE DETECTOR IS WRONG IN BOTH DIRECTIONS
+==============================================================================
+  Crude rule: 'no message in the filer's mailbox mentions the item id'.
+  crude reports  : 22
+  strict reports : 122
+  crude MISSES (dropped, but the id is mentioned by somebody else): 100
+  crude INVENTS  (id unmentioned, but the worker did mail the filer): 0
+  examples of the miss: ['mg-0120', 'mg-0242', 'mg-04a8', 'mg-05eb', 'mg-069f', 'mg-0a11']
+  The mention is usually mayor's dispatch note or a LATER ticket citing the id.
+  A mention is not a verdict. This is why the predicate keys on the WORKER.
+
+==============================================================================
+D1.5  WHAT THIS DETECTOR CANNOT REACH, SIZED
+==============================================================================
+  UNDECIDABLE (no polecat-* branch in the sidecar): 2
+     2026-08-04T20:12:18Z  mg-a471  mg-3946 F5+F4: a --only/--gates SUBSET RUN overwrites the canoni
+     2026-08-04T20:12:18Z  mg-c067  INDEPENDENT AUDIT of the mg-132a publishing-commit repair (filed
+  filers with no mailbox at all: 0 []
+  A verdict delivered by commit subject, docs/ file or out-of-band relay is
+  invisible here and is counted DROPPED. That polarity is deliberate: the
+  ticket's complaint is precisely that a commit subject is not delivery.
+
+==============================================================================
+D1.6  EVERY FILER, not only pm-onethird (P3)
+==============================================================================
+  filer             landed  delivered  dropped   undec
+  daniel              1216          0      999     217
+  pm-onethird          149         25      122       2
+  mayor                 57         19       30       8
+  pm-pogo               13          4        9       0
+  doctor                 5          2        3       0
+  -> filers other than pm-onethird with at least one dropped verdict: 11
+  -> P3 HOLDS
+
+  DEFECT-3 OF THIS INSTRUMENT, CORRECTED IN PLACE RATHER THAN PUBLISHED:
+  `mg new --help` says the creator field is per-agent only since mg-ddf4;
+  items filed before that record the UNIX USER, which was `daniel` for every
+  agent on this box. So the `daniel` row above is not Daniel's dropped
+  verdicts -- it is mostly CREATOR UNKNOWN, and reporting it as Daniel's
+  would be this arc's own defect: a number that is true of a population
+  nobody meant.
+  items whose creator reads `daniel`, filed BEFORE 2026-07-30T05:00:00Z (identity unknown): 1216
+  ... filed after it (genuinely Daniel)                                    : 0
+  -> raw daniel dropped count: 999. P3 predicted >= 20: HOLDS -- but it HOLDS ON A POPULATION I
+     cannot attribute, so the honest reading of P3 is that it holds on mayor
+     (30 dropped) and pm-pogo (9), which ARE attributable.

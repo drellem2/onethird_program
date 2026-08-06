@@ -1,0 +1,146 @@
+==============================================================================
+D2.1  THE REAP IS REAL AND IT IS FAST -- measured, not taken from mayor
+==============================================================================
+  DELIVERED  n= 25  stop-minus-landing seconds: median=1  within [0,1]s: 16/25
+  DROPPED    n=122  stop-minus-landing seconds: median=0  within [0,1]s: 122/122
+  stop reasons seen: {'requested': 156}
+  -> mayor's account of the reap CHECKS OUT: the polecat is stopped within a
+     second of its item landing, and the distribution is THE SAME in both groups.
+     Identical in both groups means the reap does not discriminate them.
+
+==============================================================================
+D2.2  THE DISCRIMINATOR -- when do verdicts that DID arrive actually arrive?
+==============================================================================
+  lead = minutes the verdict mail PRECEDED the landing (negative = arrived after)
+       839.0  mg-9a19  VERDICT mg-9a19 — mg-cd04 repair SOUND; 5 findings, 
+       167.4  mg-76d0  VERDICT mg-76d0: mg-a471's three F5 repairs all CLOS
+       125.2  mg-5854  mg-5854 VERDICT: mg-1d03 G3+G4 repair STANDS — 3 fin
+       113.7  mg-1d03  VERDICT mg-1d03: mg-0242 G3+G4 closed — both figures
+       106.9  mg-8af0  mg-8af0 VERDICT: F2/F1/F3 landed in that order; 2 pr
+        83.1  mg-65eb  VERDICT mg-65eb — the mg-a74f repair HOLDS; 5 of 9 r
+        77.8  mg-9d7b  mg-9d7b verdict: 15 channels enumerated, both bounde
+        76.2  mg-d075  mg-d075 VERDICT: EIGHT IS NOT THE POPULATION EITHER 
+        75.3  mg-b2af  mg-b2af VERDICT: mg-330a's census is DISPLACED by a 
+        43.3  mg-bf79  mg-bf79 VERDICT: mg-56dc's four closed — but THE CLA
+        30.6  mg-34bf  mg-34bf: receipt confirmed — STATE.md:343 is untouch
+        23.9  mg-6016  mg-6016 note landed — two places it goes BEYOND your
+        21.3  mg-0ba7  VERDICT mg-0ba7: the mg-b2af repair CONFIRMS on OLDE
+        19.7  mg-03d1  VERDICT mg-03d1: the classifier is coarse by ARITY n
+        14.9  mg-e35b  mg-e35b VERDICT: mg-fcf1's remaining OPENs landed on
+        14.1  mg-56be  mg-56be: INDEPENDENT AUDIT of mg-4f9b — RED (the neg
+         5.4  mg-aaf4  VERDICT mg-aaf4 — independent audit of the mg-19ec b
+         5.2  mg-6a2f  mg-6a2f raw verdict: mg-34bf / 57f962f STATE restruc
+         0.5  mg-97fb  mg-97fb VERDICT: mg-3f3b's four repairs hold; 7 of 7
+         0.4  mg-a74f  mg-a74f VERDICT (routed BEFORE merge): mg-16eb's thr
+         0.2  mg-fcb2  VERDICT mg-fcb2: independent audit of the mg-e35b co
+         0.1  mg-132a  mg-132a VERDICT: answer (2) taken — the anchor is th
+        -0.5  mg-cd04  mg-cd04 VERDICT: mg-0242 G1 and G2 CLOSED — and LIVE
+        -0.6  mg-330a  mg-330a VERDICT: the mg-8d5e anchor-and-term repair 
+        -0.7  mg-3946  mg-3946 VERDICT — mg-3934 CI SHA repair audit: GREEN
+
+  arrived MORE THAN A MINUTE BEFORE the landing : 18 of 25
+  arrived within a minute either side           : 7 of 25
+  the LATEST any verdict ever arrived           : -0.7 minutes relative to landing
+
+  THIS IS THE DISCRIMINATION. The reap window is [landing, landing+1s].
+  Every verdict that has ever been delivered was already sent before that
+  window opened, or inside the same minute the worker itself closed the item.
+  A stop at landing+0.5s cannot suppress a mail sent 167 minutes earlier.
+  -> H-REAP does not explain the drops in the MAIL channel.
+
+==============================================================================
+D2.3  LIVENESS -- dropped workers that were demonstrably alive and mailing
+==============================================================================
+  A reaped process cannot send mail. These workers dropped the filer's verdict
+  and went on mailing somebody else, or had already mailed somebody else and
+  then lived on for many minutes:
+    mg-4f9b  worker 4f9b      sent 2 mail(s), last to 'mayor' at 2026-07-30T08:42:29Z
+              its own stop was 53 minutes LATER -- it was alive and mailing.
+    mg-48dd  worker 48dd      sent 4 mail(s), last to 'mayor' at 2026-07-30T11:20:55Z
+              its own stop was 1 minutes LATER -- it was alive and mailing.
+    mg-fccb  worker fccb      sent 1 mail(s), last to 'mayor' at 2026-07-31T04:18:22Z
+              its own stop was 30 minutes LATER -- it was alive and mailing.
+    mg-069f  worker 069f      sent 3 mail(s), last to 'mayor' at 2026-07-31T07:10:50Z
+              its own stop was 14 minutes LATER -- it was alive and mailing.
+    mg-d53d  worker d53d      sent 3 mail(s), last to 'mayor' at 2026-08-05T21:45:26Z
+              its own stop was 10 minutes LATER -- it was alive and mailing.
+    mg-0120  worker y0120     sent 1 mail(s), last to 'mayor' at 2026-08-05T21:45:20Z
+              its own stop was 11 minutes LATER -- it was alive and mailing.
+    mg-77e6  worker x77e6     sent 5 mail(s), last to 'mayor' at 2026-08-05T23:27:10Z
+              its own stop was 52 minutes LATER -- it was alive and mailing.
+    mg-9a59  worker z9a59     sent 1 mail(s), last to 'mayor' at 2026-08-05T23:12:31Z
+              its own stop was 73 minutes LATER -- it was alive and mailing.
+    mg-1d6c  worker c1d6c     sent 1 mail(s), last to 'mayor' at 2026-08-06T21:33:44Z
+              its own stop was 21 minutes LATER -- it was alive and mailing.
+  -> 9 dropped items have positive proof the worker was not reaped before it
+     could mail. For those, H-REAP is refuted outright, not merely unsupported.
+
+==============================================================================
+D2.4  THE INSTRUCTION -- was the worker ever ASKED?
+==============================================================================
+  pm-onethird has filed 191 items; 16 carry the instruction
+  "mail the verdict to pm-onethird BEFORE submitting to the refinery".
+  FIRST appearance : 2026-07-31T04:13:24Z  mg-fcb2
+  LAST  appearance : 2026-07-31T10:02:11Z  mg-5854
+  items filed AFTER that last appearance : 61
+  of those, carrying the instruction     : 0
+
+  Contingency over pm-onethird items that LANDED on/after the instruction's
+  first appearance (before that date nobody was asked, so the comparison is void):
+                      delivered   dropped
+    instruction  YES        14         0
+    instruction  NO          7        38
+    delivery rate      100%       16%
+    Fisher exact two-tailed p = 8.74e-09
+
+  -> THE DRIFT IS IN THE FILER'S TEMPLATE, NOT THE WORKER'S COMPLIANCE.
+     The instruction stopped being WRITTEN. No worker after that date was
+     ever asked for a verdict, so none of them 'failed to comply'.
+
+  P11 control -- of the instruction-absent items that were delivered ANYWAY,
+  how many were worked by an agent that never worked an instruction-carrying
+  ticket? (If most were, ticket text is not the whole mechanism.)
+     mg-e35b  worker e35b never saw the instruction and mailed anyway
+     mg-a74f  worker a74f never saw the instruction and mailed anyway
+     mg-330a  worker 330a never saw the instruction and mailed anyway
+     mg-97fb  worker 97fb never saw the instruction and mailed anyway
+     mg-d075  worker wd075 never saw the instruction and mailed anyway
+     mg-9d7b  worker o9d7b never saw the instruction and mailed anyway
+     mg-8af0  worker x8af0 never saw the instruction and mailed anyway
+  -> 7 of 7 instruction-absent deliveries came from a worker that was
+     never asked. Ticket text is a strong predictor, not the whole mechanism.
+
+==============================================================================
+D2.5  THE SECOND CHANNEL IS REAP-SHAPED AND IT IS MAYOR'S (P9)
+==============================================================================
+  pm-onethird's instruction has two halves: mail the verdict, AND write
+  `mg done --result` with it. The second half is structurally unavailable.
+  landed items with a result sidecar        : 149
+  written by the refinery, not by the worker : 139  (93%)
+  carrying ANY field beyond branch/mr/target : 10
+  actor on the work.done event              : {'daniel': 139, '3946': 1, '97fb': 1, '330a': 1, 'cd04': 1, 'a74f': 1, 'mayor': 4, 'fcb2': 1}
+
+  pogod closes the item ON MERGE, before the worker's own `mg done` can run;
+  the polecat protocol's step 7 then hands the worker a result template that
+  contains only {"branch": ...} and tells it 'already done' is success.
+  A worker that obeyed 'write mg done --result with your verdict' would have
+  been beaten to the item and told it had succeeded.
+  -> THIS half IS reap-shaped, it is real, and it is MAYOR'S END. Routed.
+
+==============================================================================
+D2.6  VERDICT ON THE CAUSE
+==============================================================================
+  MAIL CHANNEL   H-REAP        REFUTED. Every delivered verdict predates the
+                               reap window; several dropped workers are proven
+                               alive and mailing others long past it.
+                 H-INSTRUCTION CONFIRMED BUT MIS-STATED. Compliance did not
+                               drift: the INSTRUCTION did. It vanished from
+                               pm-onethird's own ticket template and has not
+                               appeared in any ticket filed since.
+
+  RESULT CHANNEL H-REAP        CONFIRMED, and it belongs to mayor: pogod's
+                               close-on-merge plus the protocol's own step-7
+                               template make `mg done --result` unreachable.
+
+  REPAIRING ONE WITHOUT THE OTHER LEAVES THE OTHER ALIVE AND LOOKING FIXED --
+  which is exactly what the ticket warned about, and both are live.
