@@ -218,6 +218,29 @@ try:
     ck("a probe that only MENTIONS a transcript does not open one",
        B.opened_own(r, tname, "out_blind.txt"), False)
 
+    # a probe that reads its transcript ONLY THROUGH A CHILD PROCESS.  The
+    # trace env is inherited, so the child's read lands in the same file; only
+    # the pid tells them apart, and getting that wrong made this suite's own
+    # S2 and S3 disagree by one step.
+    with open(os.path.join(d, "out_proxy.txt"), "w") as f:
+        f.write("PARENT NEVER READS THIS\n")
+    with open(os.path.join(d, "proxy.py"), "w") as f:
+        f.write("import os, subprocess, sys\n"
+                "here = os.path.dirname(os.path.abspath(__file__))\n"
+                "kid = os.path.join(here, '_kid.py')\n"
+                "open(kid, 'w').write("
+                "\"import os,sys\\n\""
+                "\"p=os.path.join(os.path.dirname(os.path.abspath(__file__)),"
+                "'out_proxy.txt')\\n\""
+                "\"print('KID', len(open(p).read()))\\n\")\n"
+                "subprocess.run([sys.executable, kid])\n")
+    r = B.run_probe(tname, "proxy.py", "out_proxy.txt", empty_first=False,
+                    timeout=30, trace=True)
+    ck("a CHILD's read is not the PROBE's read",
+       B.opened_own(r, tname, "out_proxy.txt"), False)
+    ck("...and it is recorded as the child's",
+       B.opened_own(r, tname, "out_proxy.txt", key="child_read"), True)
+
     r = B.run_probe(tname, "nosy.py", "out_nosy.txt", empty_first=False,
                     timeout=30, trace=True)
     ck("reading ANOTHER transcript is not the EMPTIED class",

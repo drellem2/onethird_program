@@ -525,7 +525,14 @@ def _hook(event, args):
                     rd = (flags & 3) in (0, 2)      # O_RDONLY / O_RDWR
                 else:
                     rd = True                       # unknown: counted as read
-                os.write(_fd, ("%s\t%s\n" % ("R" if rd else "W", p))
+                # THE PID IS RECORDED, NOT JUST THE PATH.  `EC63_TRACE` and
+                # `PYTHONPATH` are inherited by every child process, and the
+                # arc's probes re-run other probes as subprocesses -- so a
+                # child's opens land in the parent's trace file and were being
+                # attributed to the parent.  With the pid the two can be told
+                # apart, and they are counted apart.
+                os.write(_fd, ("%s\t%d\t%s\n"
+                               % ("R" if rd else "W", os.getpid(), p))
                          .encode("utf-8", "replace"))
         elif event in ("subprocess.Popen", "os.system"):
             os.write(_fd, ("X\t%s\n" % (args,)).encode("utf-8", "replace")[:400])
@@ -646,28 +653,39 @@ def run_probe(tree, probe, out_name, empty_first, timeout=90, trace=False,
         if empty_first and out_name:
             with open(os.path.join(d, out_name), "w"):
                 pass
+        proc = subprocess.Popen([sys.executable, "-B", probe], cwd=d, env=env,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.STDOUT, text=True,
+                                errors="replace")
+        pid = proc.pid
+        rec["pid"] = pid
         try:
-            r = subprocess.run([sys.executable, "-B", probe], cwd=d, env=env,
-                               capture_output=True, text=True, timeout=timeout,
-                               errors="replace")
-            rec["exit"] = r.returncode
-            rec["text"] = (r.stdout or "") + (r.stderr or "")
+            out, _ = proc.communicate(timeout=timeout)
+            rec["exit"] = proc.returncode
+            rec["text"] = out or ""
             rec["timeout"] = False
-        except subprocess.TimeoutExpired as e:
+        except subprocess.TimeoutExpired:
+            proc.kill()
+            out, _ = proc.communicate()
             rec["exit"] = None
-            rec["text"] = (e.stdout or b"").decode("utf-8", "replace") \
-                if isinstance(e.stdout, bytes) else (e.stdout or "")
+            rec["text"] = out or ""
             rec["timeout"] = True
         if trace:
-            opened, written = [], []
+            opened, written, child = [], [], []
             with open(tracefile, errors="replace") as f:
                 for ln in f:
-                    if ln.startswith("R\t"):
-                        opened.append(ln[2:].rstrip("\n"))
-                    elif ln.startswith("W\t"):
-                        written.append(ln[2:].rstrip("\n"))
+                    parts = ln.rstrip("\n").split("\t", 2)
+                    if len(parts) != 3:
+                        continue
+                    kind, spid, path = parts
+                    mine = (spid == str(pid))
+                    if kind == "R":
+                        (opened if mine else child).append(path)
+                    elif kind == "W" and mine:
+                        written.append(path)
             rec["opened"] = opened
             rec["written"] = written
+            rec["child_read"] = child
     finally:
         if saved is not None:
             p = os.path.join(d, out_name)

@@ -83,6 +83,7 @@ def one(job):
         "tree": tree, "probe": probe, "out": out,
         "exit": r["exit"], "timeout": r["timeout"],
         "own": B.opened_own(r, tree, ob),
+        "own_child": B.opened_own(r, tree, ob, key="child_read"),
         "own_write": B.opened_own(r, tree, ob, key="written"),
         "others": B.opened_other_outs(r, tree, ob),
         "nopen": len(r.get("opened", [])),
@@ -133,6 +134,21 @@ B.plain("...STEPS whose probe opens ANOTHER transcript (STALE, not empty)",
         len(stale), "one step")
 B.plain("...STEPS whose probe opens no transcript of its tree", len(clean),
         "one step")
+print()
+ch = [r for r in recs if r["own_child"] and not r["own"]]
+B.plain("...STEPS where a CHILD PROCESS read it, not the probe itself",
+        len(ch), "one step")
+print()
+print("  THE PID IS WHY THAT ROW EXISTS.  `EC63_TRACE` and `PYTHONPATH` are")
+print("  inherited by every process the probe spawns, and this arc's probes")
+print("  routinely RE-RUN OTHER PROBES as subprocesses.  Without the pid in")
+print("  the trace, a child's read of a transcript is recorded against the")
+print("  parent -- and it is not stable, because whether the child gets that")
+print("  far depends on load.  An earlier pass of this suite had exactly that:")
+print("  `d3_reintroduction.py` came out reading its own transcript in a")
+print("  parallel pass and not reading it when run alone, and the two numbers")
+print("  it produced disagreed with each other inside one run's transcripts.")
+print("  The EMPTIED class above is the STRICT one: the probe's own process.")
 print()
 wr = [r for r in recs if r["own_write"]]
 B.plain("...STEPS whose probe WRITES its own transcript itself", len(wr),
