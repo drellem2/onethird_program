@@ -1,0 +1,129 @@
+mg-18dc / V4 -- THE THIRD OUTCOME
+HEAD: 32da9b7
+MEASURED AT: 3fc870a  (the revision mg-ec63's own transcripts declare)
+
+==========================================================================
+V4a  WHICH TRANSCRIPT EACH STEP WRITES, DERIVED AND NOT GUESSED
+==========================================================================
+  `a5_battery.py` -> `out_a5_battery.txt` is a convention, not a rule,
+  and this arc has six runner idioms that disagree about it.  So the
+  mapping is taken from a stubbed run of each tree: the transcript that
+  is ZERO BYTES at the instant that probe is invoked is the one that
+  probe writes.  Steps whose transcript cannot be derived are dropped
+  and named, rather than guessed at.
+
+  population: mg-ec63's 25 SAME and NONDETERMINISTIC steps
+      ...STEPS whose transcript this derives                        25
+          ^ one unit of that number is one step
+      ...STEPS DROPPED, transcript not derivable                     0
+          ^ one unit of that number is one step
+
+==========================================================================
+V4b  RUNNING BOTH ARMS, AND RECORDING WHAT EACH ARM DID
+==========================================================================
+  A = the transcript emptied first (the defect, as shipped).
+  B = the committed bytes in place (the probe as it should have run).
+  Both arms capture stdout+stderr TO MEMORY and are never redirected
+  onto a transcript.  Every arm runs in a disposable clone.
+
+  population: the 25 steps of V4a whose transcript was derived
+      ...STEPS CANNOT RUN AT ALL                                     0
+          ^ one unit of that number is one step
+      ...STEPS BREAKS ONLY UNDER THE DEFECT                          0
+          ^ one unit of that number is one step
+      ...STEPS NEVER EXERCISED (ec63 sense)                          0
+          ^ one unit of that number is one step
+      ...STEPS DIFFERENT                                             9
+          ^ one unit of that number is one step
+      ...STEPS INERT READ                                           13
+          ^ one unit of that number is one step
+      ...STEPS SAME (no read observed)                               1
+          ^ one unit of that number is one step
+      ...STEPS BOTH TIMED OUT (unmeasured)                           0
+          ^ one unit of that number is one step
+      ...STEPS ONE ARM TIMED OUT (unmeasured)                        2
+          ^ one unit of that number is one step
+
+  THE SAME ROWS, ONE PER LINE, WITH BOTH ARMS' EXIT STATUS:
+
+      TREE :: PROBE                        MY VERDICT             A          B          ec63
+      audit_2c77::q3_operands.py           DIFFERENT              exit 1     exit 1     DIFFERENT
+      audit_330a::s4_term.py               DIFFERENT              exit 1     exit 1     DIFFERENT
+      counterexample_audit_c6bc::a5_batter INERT READ             exit 0     exit 0     SAME
+      counterexample_audit_c6bc::check_loc SAME (no read observed) exit 2     exit 2     SAME
+      hash_population_6e58::p4_gate.py     INERT READ             exit 1     exit 1     SAME
+      hodge_leverage_audit_97fb::audit_97f DIFFERENT              exit 0     exit 0     DIFFERENT
+      repair_69d1::p3_reason.py            DIFFERENT              exit 1     exit 1     DIFFERENT
+      repair_8d5e::r4_self.py              DIFFERENT              exit 1     exit 1     DIFFERENT
+      repair_b2af::t3_term.py              DIFFERENT              exit 1     exit 1     DIFFERENT
+      runner_exit_audit_dee4::a1_outside.p INERT READ             exit 1     exit 1     SAME
+      runner_exit_repair_70c7::r2_anchor.p DIFFERENT              exit 0     exit 0     DIFFERENT
+      runner_exit_repair_70c7::r3_strength INERT READ             exit 0     exit 0     SAME
+      runner_exit_repair_7522::s5_self.py  INERT READ             exit 0     exit 0     SAME
+      species_bound_audit_6ef4::selftest6e INERT READ             exit 0     exit 0     SAME
+      species_bound_audit_6ef4::t1_bound.p ONE ARM TIMED OUT (unmeasured) TO         exit 1     A TIMED OUT
+      species_bound_audit_6ef4::t4_restore INERT READ             exit 1     exit 1     SAME
+      species_bound_repair_5040::r1_bound. INERT READ             exit 1     exit 1     SAME
+      species_bound_repair_5040::r3_summar DIFFERENT              exit 1     exit 1     DIFFERENT
+      species_bound_repair_5040::r4_self.p DIFFERENT              exit 0     exit 0     DIFFERENT
+      species_bound_repair_5040::selftest5 INERT READ             exit 0     exit 0     SAME
+      species_extent_d633::e3_bothways.py  INERT READ             exit 0     exit 0     SAME
+      species_extent_d633::selftestd633.py INERT READ             exit 0     exit 0     SAME
+      species_repair_a4ef::s1_extent.py    INERT READ             exit 0     exit 0     SAME
+      species_rung_repair_4adb::v2_layer2. ONE ARM TIMED OUT (unmeasured) TO         TRACEBACK  A TIMED OUT
+      species_rung_repair_4adb::v3_self.py INERT READ             exit 0     exit 0     SAME
+
+  AND THE SAME ROWS SPLIT BY THE VERDICT mg-ec63 RECORDED FOR THEM,
+  because its 11 SAME and its 14 NONDETERMINISTIC are different claims:
+
+  population: mg-ec63's 11 steps recorded SAME
+      ...of those, INERT READ                                       10
+          ^ one unit of that number is one step
+      ...of those, SAME (no read observed)                           1
+          ^ one unit of that number is one step
+
+  population: mg-ec63's 14 steps recorded NONDETERMINISTIC
+      ...of those, DIFFERENT                                         9
+          ^ one unit of that number is one step
+      ...of those, INERT READ                                        3
+          ^ one unit of that number is one step
+      ...of those, ONE ARM TIMED OUT (unmeasured)                    2
+          ^ one unit of that number is one step
+
+
+==========================================================================
+V4c  THE COLLAPSE, SHOWN ON A ROW CONSTRUCTED TO HAVE THE THIRD OUTCOME
+==========================================================================
+  A negative result needs an instrument that could have shown the
+  positive.  Here is a row whose probe CANNOT RUN AT ALL -- it raises
+  the same traceback in both arms -- fed to both rules:
+
+      mg-ec63's classify()   ->  SAME
+      mg-18dc's rule         ->  CANNOT RUN AT ALL
+
+  mg-ec63's `NEVER EXERCISED = 0` is therefore a PROPERTY OF ITS RULE
+  before it is a fact about the arc.  The verdict requires the healthy
+  arm to break while the defect arm works; the outcome the ticket names
+  requires the probe to fail against real input, which fails BOTH arms.
+  The two are not the same class, and only one of them was measured.
+
+  THIS DOES NOT MAKE THE 0 FALSE.  It makes it unsupported.  What V4b
+  measures is whether the class is empty in fact as well as by rule.
+
+==========================================================================
+V4d  AND THE NONDETERMINISTIC ROWS, WHICH NOBODY FOLLOWED UP
+==========================================================================
+  mg-ec63 excluded 14 steps from DIFFERENT with a determinism control
+  and says in its own WHAT I DID NOT DO that it did not investigate
+  them.  14 of them are re-run here.  A probe that gives two answers to
+  the same question in one minute is its own finding:
+
+  population: the 14 NONDETERMINISTIC steps re-run
+      ...of those, DIFFERENT                                         9
+          ^ one unit of that number is one step
+      ...of those, INERT READ                                        3
+          ^ one unit of that number is one step
+      ...of those, ONE ARM TIMED OUT (unmeasured)                    2
+          ^ one unit of that number is one step
+
+V4 TOTAL STEPS WHOSE TRUE OUTCOME IS NOT THE ONE RECORDED: 0

@@ -1,0 +1,150 @@
+mg-18dc / V1 -- THE POPULATION, RE-DERIVED AS A PROPERTY OF A COMMIT
+HEAD: 32da9b7
+
+==========================================================================
+V1a  THE SAME RULE AT EVERY REVISION OF THE LINEAGE
+==========================================================================
+  My rule: `git ls-tree -r <rev> -- code/` and keep every path of the
+  form `code/<dir>/run_all.sh`.  A PROPERTY OF THE COMMIT.  mg-03d1 and
+  mg-ec63 both globbed the working directory instead, which counts what
+  was on disk -- tracked or not -- at one moment that no longer exists.
+
+  population: the revisions of this lineage
+
+      REV       WHAT IT IS                                      MINE  SHIPPED
+      9f1ecaa   mg-03d1 predictions   (pre-rebase)               108      109  <- DIFFERS
+      6fda370   mg-03d1 predictions   (on main)                  111        -
+      d33970b   mg-03d1 audit         (pre-rebase)               109      109  <- agrees
+      eacc5e1   mg-03d1 audit         (on main, CARRIES the 109)   112      109  <- DIFFERS
+      454f565   mg-ec63 predictions   (pre-rebase)               109        -
+      f98ef34   mg-ec63 predictions   (on main)                  115        -
+      3fc870a   mg-ec63 instrument    (pre-rebase, DECLARED by S1)   110      110  <- agrees
+      41972fb   mg-ec63 evidence      (pre-rebase)               110      110  <- agrees
+      7fccb4e   mg-ec63 evidence      (on main, CARRIES the 110)   116      110  <- DIFFERS
+
+      ^ one unit of the MINE column is one `run_all.sh` tracked at that
+        revision; one unit of SHIPPED is the total that revision's own
+        transcript printed.
+
+==========================================================================
+V1b  109 IS TRUE AT ONE REVISION, AND IT IS NOT THE ONE ON `main`
+==========================================================================
+  population: the 9 revisions of V1a
+      ...REVISIONS where my rule gives exactly 109                   2
+          ^ one unit of that number is one revision
+          d33970b
+          454f565
+
+  mg-03d1's transcript declares `HEAD: 9f1ecaa` and prints 109.  At
+  9f1ecaa my rule gives 108.
+  The difference between 9f1ecaa and its own audit commit d33970b is
+  exactly 1 tree(s):
+          code/grain_axis_audit_03d1   <- mg-03d1'S OWN
+
+  So the 109 IS reproducible -- but only by counting a runner that was
+  UNTRACKED when the count was taken.  The counter was in the count and
+  not yet in the repository.  mg-03d1 recorded that its own tree joined
+  the population; what it did not record is that at the revision its own
+  transcript names, the member does not exist.
+
+==========================================================================
+V1c  AND ON `main` THE SAME RULE GIVES A DIFFERENT NUMBER ENTIRELY
+==========================================================================
+  A rebase preserves the DIFF and moves the BASE.  Every count in this
+  arc is a fact about the base.  The four pre/post-rebase twins:
+
+      9f1ecaa -> 6fda370   patch-id SAME   tree DIFF   runners 108 -> 111
+      d33970b -> eacc5e1   patch-id SAME   tree DIFF   runners 109 -> 112
+      454f565 -> f98ef34   patch-id SAME   tree DIFF   runners 109 -> 115
+      41972fb -> 7fccb4e   patch-id SAME   tree DIFF   runners 110 -> 116
+
+  PATCH-ID IS NOT AN ORACLE and here is the reason in one table: all
+  four pairs are patch-id IDENTICAL and tree DIFFERENT, and the runner
+  population moves by up to 6 across a pair that patch-id calls the same
+  change.  The diff is identical; the tree the diff LANDS IN is not.
+
+  CONSEQUENCE, and it is the finding of this section:
+
+      eacc5e1 carries mg-03d1's `109 RUNNERS IN THE ARC` into a tree
+      holding 112.
+      7fccb4e carries mg-ec63's `110 RUNNERS IN THE ARC` into a tree
+      holding 116.
+
+  Neither number was wrong when it was measured.  Both are wrong in the
+  commit that publishes them, and nothing in either tree says so.
+
+==========================================================================
+V1d  THE POPULATION mg-ec63 NEVER SWEPT
+==========================================================================
+  mg-ec63 ran at 3fc870a and landed at 7fccb4e.  Runners present in the
+  landing tree and ABSENT from the tree that was swept:
+
+  population: the 116 runners at 7fccb4e
+      ...RUNNERS never in the sweep's population                     6
+          ^ one unit of that number is one `run_all.sh`
+          code/direct_prefix_audit_2de0
+          code/grain_axis_audit_03d1   <- THE TREE WHOSE THREE NUMBERS THE SWEEP RE-DERIVED
+          code/state_restructure_ea0e
+          code/state_suppression_repair_5f7c
+          code/transcript_census_1abe
+          code/verdict_path_repair_1d26
+
+  The first of those is `code/grain_axis_audit_03d1`.  mg-ec63's S1a
+  prints `code/grain_axis_audit_03d1 present here:  NO` and reasons from
+  its absence.  It is present in the commit that ships that sentence.
+
+==========================================================================
+V1e  THE ORDERING -- DID THE SWEEP RUN BEFORE THE FIX?
+==========================================================================
+  The brief's first item, and it is not answerable from the report's
+  narrative.  If a runner was repaired between the count and the sweep,
+  the sweep is about a partly-repaired tree and the ticket's central
+  question is unanswered however green the output is.
+
+  The test is a MODIFICATION and not an addition: a `run_all.sh` ADDED
+  in the window is a new tree, not a repaired one.  `--diff-filter=M`
+  over the window from mg-03d1's carrier to mg-ec63's carrier:
+
+  population: every commit in eacc5e1..7fccb4e touching a `code/*/run_all.sh`
+      ...RUNNERS ADDED in the window                                 4
+          ^ one unit of that number is one file-change
+      ...RUNNERS MODIFIED in the window                              3
+          ^ one unit of that number is one file-change
+      ...of those, in the SWEEP'S OWN tree                           1
+          ^ one unit of that number is one file-change
+      ...of those, in ANY OTHER tree of the arc                      2
+          ^ one unit of that number is one file-change
+
+      c1bb466  M  code/truncate_sweep_ec63/run_all.sh
+      8313882  A  code/truncate_sweep_ec63/run_all.sh
+      0c9125e  A  code/direct_prefix_audit_2de0/run_all.sh
+      cc4c663  A  code/state_restructure_ea0e/run_all.sh
+      a7d7fb9  M  code/transcript_census_1abe/run_all.sh
+      ae4c962  M  code/transcript_census_1abe/run_all.sh
+      e2b08cf  A  code/transcript_census_1abe/run_all.sh
+
+      ...MODIFICATIONS of a runner that EXISTED at eacc5e1, outside the sweep's own tree     0
+          ^ one unit of that number is one file-change
+
+  ZERO.  No runner of the arc that existed when the 43 was counted
+  was edited before the sweep ran.  THE SWEEP RAN AGAINST AN
+  UNREPAIRED ARC and the ordering the ticket demands was kept.
+
+  Two qualifications, because the clean answer is the one nobody
+  double-checks:
+
+  (1) The modifications that DID happen are each a ticket editing ITS
+      OWN runner -- mg-ec63's structural repair of its own transcript
+      writing, and mg-1abe's revision-resolution fix.  Neither is a
+      member of the population being swept for the defect.
+  (2) ONE TREE WAS ALREADY REPAIRED BEFORE EITHER MEASUREMENT.
+      `runner_exit_repair_bf79` carried the `.new`+`mv` fix before
+      mg-03d1 counted 43 and before mg-ec63 swept.  It is the ONLY
+      instance in the arc with a known positive on the record -- nine
+      hidden labels -- and neither measurement could observe it in its
+      defective state.  The sweep-then-fix ordering was kept for the
+      other 109; for the one that matters most it was already inverted,
+      by a different ticket, before this arc began.  mg-ec63 saw this
+      and re-ran the control at 675c2ba rather than at HEAD.
+
+V1 TOTAL REVISIONS WHERE THE SHIPPED FIGURE IS NOT REPRODUCIBLE: 3

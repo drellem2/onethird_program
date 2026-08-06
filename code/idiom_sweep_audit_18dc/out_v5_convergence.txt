@@ -1,0 +1,58 @@
+mg-18dc / V5 -- CONVERGENCE AND RESTORE
+HEAD: 32da9b7
+MEASURED AT: 32da9b7  (HEAD)
+
+==========================================================================
+V5a  WHICH TREES CARRY THE FIX AT ALL
+==========================================================================
+  population: the 117 runners tracked at 32da9b7a380b96ae9da4e523c6f2651ab136cf0c
+      ...RUNNERS carrying the `.new`+`mv` structural fix             2
+          ^ one unit of that number is one `run_all.sh`
+          grain_axis_audit_03d1
+          runner_exit_repair_bf79
+      ...RUNNERS NOT carrying it                                   115
+          ^ one unit of that number is one `run_all.sh`
+
+  mg-03d1's A4d took `subjects[0]` -- the first `.new`+`mv` tree that is
+  not its own -- which was and is `runner_exit_repair_bf79`.  A tree it
+  did NOT use is therefore any other member of this set.
+
+==========================================================================
+V5b  CONVERGENCE ON A TREE mg-03d1 DID NOT USE
+==========================================================================
+  SUBJECT: code/grain_axis_audit_03d1
+  population: the transcripts `grain_axis_audit_03d1` writes
+      ...TRANSCRIPTS written by each run                             7
+          ^ one unit of that number is one file
+      ...TRANSCRIPTS byte-identical across two consecutive runs      6
+          ^ one unit of that number is one file
+      ...TRANSCRIPTS that still differ on the second run             1
+          ^ one unit of that number is one file
+          differs: out_a1_axes.txt
+
+  THE RESTORE, CHECKED BY CONTENT AND NOT BY STATUS:
+      ...TRANSCRIPTS differing from committed BEFORE the restore     6
+          ^ one unit of that number is one file
+      ...TRANSCRIPTS differing from committed AFTER the restore      0
+          ^ one unit of that number is one file
+
+  A run that leaves 0 files differing before the restore would make
+  the restore untestable -- there would be nothing to restore.  The
+  BEFORE row is printed for exactly that reason.
+
+
+==========================================================================
+V5c  THE RESTORE IS SCOPED TO ONE DIRECTORY.  THE RUN IS NOT.
+==========================================================================
+  mg-03d1's A4d asserts `git status --porcelain -- <tree>` and goes red
+  if that one directory is dirty.  Here is the same run measured over
+  THE WHOLE WORKING TREE, which is the scope the run actually has.
+
+  population: every path in the clone differing from 32da9b7a380b96ae9da4e523c6f2651ab136cf0c after ONE run
+              of `runner_exit_repair_bf79/run_all.sh`
+      ...PATHS dirty inside the subject directory                    6
+          ^ one unit of that number is one path
+      ...PATHS dirty OUTSIDE it -- invisible to A4d's assertion      0
+          ^ one unit of that number is one path
+
+V5 TOTAL FAILURES OF THE FIX OR THE RESTORE: 1

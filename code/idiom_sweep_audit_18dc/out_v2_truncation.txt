@@ -1,0 +1,76 @@
+mg-18dc / V2 -- TRUNCATION, MEASURED BY RUNNING THE SHELL
+HEAD: 32da9b7
+MEASURED AT: d33970b  (mg-03d1's own audit commit)
+
+==========================================================================
+V2a  RUNNING ALL 109 RUNNERS WITH `python3` STUBBED
+==========================================================================
+  Each runner is executed once.  Nothing it calls does any work: every
+  `python3` is a stub that writes 'MG18DC-STUB-OUTPUT' and exits 0.
+  What is recorded is the SHELL's behaviour -- which files it truncates,
+  in what order, relative to the probe invocations.
+
+  population: the 109 runners tracked at d33970b
+      ...RUNNERS that ran to completion under the stub             109
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS killed at the 120 s timeout                         0
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS that invoked no `python3` at all                    0
+          ^ one unit of that number is one `run_all.sh`
+
+      ...RUNNERS OBSERVED to start a probe on an EMPTY transcript    88
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS where no probe ever started on an empty one        21
+          ^ one unit of that number is one `run_all.sh`
+
+  EVERY COUNT HERE IS A LOWER BOUND, and the two reasons are printed
+  above rather than footnoted: a runner killed at the timeout may
+  truncate after the kill, and a runner that invokes no `python3` is
+  invisible to an instrument that measures at `python3`.
+
+==========================================================================
+V2b  MY NUMBER, mg-03d1'S 86, AND mg-ec63'S 96
+==========================================================================
+  mg-03d1's rule, applied by me to the same 109 runners, from its own
+  source at d33970b.  A regex over the runner text:
+
+      mg-03d1  regex over source             86   (it printed 86)
+      mg-ec63  shell parser over source       -   (it printed 96 over 110)
+      mg-18dc  execution of the shell        88
+
+  ^ one unit of each of those is one `run_all.sh`.  The first two are
+    over the 109 runners at d33970b; mg-ec63's 96 is over a DIFFERENT
+    population of 110 at 3fc870a and is not comparable by subtraction.
+
+  population: the 109 runners at d33970b, by whether the two rules agree
+      ...RUNNERS both rules call truncating                         85
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS the REGEX calls truncating and execution does NOT     1
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS EXECUTION calls truncating and the regex does NOT     3
+          ^ one unit of that number is one `run_all.sh`
+
+  THE REGEX'S FALSE POSITIVES -- source says `>`, no probe ever starts
+  on an empty transcript:
+      state_landing_control_2da3                     3 probes, none on an empty file
+
+  THE REGEX'S FALSE NEGATIVES -- source does not match, and a probe
+  demonstrably starts on an empty transcript anyway:
+      branching_bound_audit_aaf4                     step 0 starts with out_a1_population.txt empty
+      branching_bound_d075                           step 0 starts with out_s1_census.txt empty
+      face_geometry_audit_fcb2                       step 0 starts with out_selftest_fcb2.txt empty
+
+==========================================================================
+V2c  AND THE `.new`+`mv` TREES, CHECKED THE SAME WAY
+==========================================================================
+  population: the 109 runners at d33970b
+      ...RUNNERS whose source carries the `.new`+`mv` fix            2
+          ^ one unit of that number is one `run_all.sh`
+          grain_axis_audit_03d1                        NO probe starts on an empty transcript
+          runner_exit_repair_bf79                      NO probe starts on an empty transcript
+
+  This is the control that makes V2a mean anything.  If my instrument
+  called the fixed trees truncating too, it would be measuring `does a
+  runner write files` and not `does the fix work`.
+
+V2 TOTAL RUNNERS WHERE THE RULES DISAGREE: 4

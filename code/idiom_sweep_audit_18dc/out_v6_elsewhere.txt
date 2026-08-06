@@ -1,0 +1,102 @@
+mg-18dc / V6 -- THE SHAPE ELSEWHERE
+HEAD: 32da9b7
+
+==========================================================================
+V6a  `| tee` AND `pipefail`, RE-DERIVED AT HEAD
+==========================================================================
+  My brief says mg-c2b3 found 23 of 63 runners using `| tee` with only
+  1 setting `pipefail`.  mg-c2b3's OWN transcript re-derives that 1 as
+  0 and prints `ticket 1  re-derived 0  DIFFERS`.  So the figure handed
+  to me is already contradicted inside the tree it cites, and both are
+  over a 63-runner population that no longer exists.  Re-derived here
+  over the 117 runners at HEAD:
+
+  population: the 117 runners tracked at HEAD
+      ...RUNNERS piping a probe through `| tee`                      1
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS setting `pipefail` in any spelling                  2
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS doing BOTH -- the exit status survives the pipe     1
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS using `tee` WITHOUT `pipefail` -- exit status lost     0
+          ^ one unit of that number is one `run_all.sh`
+
+  A `| tee` without `pipefail` reports the exit status of `tee`, which
+  is 0 whenever `tee` could write.  That is the same shape one layer
+  over: THE RUN'S OWN VERDICT IS TAKEN FROM THE ARTIFACT-WRITER RATHER
+  THAN FROM THE THING BEING MEASURED.
+
+==========================================================================
+V6b  DO THE TWO POPULATIONS OVERLAP?
+==========================================================================
+  Truncation is re-measured at HEAD by execution, the V2 way -- stubbed
+  `python3`, and a transcript that is zero bytes when its probe starts.
+
+  population: the 117 runners tracked at HEAD
+      ...RUNNERS starting a probe on an EMPTY transcript            92
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS using `tee` without `pipefail`                      0
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS in BOTH populations -- `tee` without `pipefail` AND an emptied transcript     0
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS using `tee` AT ALL and also emptying a transcript     0
+          ^ one unit of that number is one `run_all.sh`
+
+  These are two different defects of one habit, and a runner in both is
+  a runner whose transcript is empty when read AND whose exit status is
+  the writer's rather than the probe's.
+
+==========================================================================
+V6c  DOES THE REPAIR ADDRESS THE SHAPE, OR ONLY THE 43?
+==========================================================================
+  population: the 117 runners tracked at HEAD, AFTER the sweep merged
+      ...RUNNERS carrying the `.new`+`mv` structural fix             2
+          ^ one unit of that number is one `run_all.sh`
+          grain_axis_audit_03d1
+          runner_exit_repair_bf79
+      ...RUNNERS writing transcripts outside the repo (`mktemp -d`)     4
+          ^ one unit of that number is one `run_all.sh`
+          idiom_sweep_audit_18dc
+          state_delegation_repair_a74f
+          state_restructure_34bf
+          truncate_sweep_ec63
+      ...RUNNERS still starting a probe on an EMPTY transcript      92
+          ^ one unit of that number is one `run_all.sh`
+
+  mg-ec63 says so itself, in WHAT I DID NOT DO: `I did not apply the fix
+  to the other 95 runners`, because the ticket orders sweep-then-fix and
+  inverting it destroys the evidence.  THAT IS THE RIGHT CALL AND IT IS
+  ALSO THE ANSWER TO THIS SECTION: the shape is measured and unrepaired.
+  92 of 117 runners carry it at the commit the sweep landed in.
+
+==========================================================================
+V6d  AND WHERE THE FOUR NAMED TREES ARE RECORDED
+==========================================================================
+  mg-ec63 names four trees whose probe changes its answer once it can
+  see its transcript, and says `I did not open a ticket per finding.
+  The four DIFFERENT trees are named here and nowhere else.`  Checked:
+
+  population: the 4 trees mg-ec63 named as DIFFERENT
+      runner_exit_repair_70c7            named in 6 .md file(s) outside the sweep's own tree
+          ./code/grain_axis_audit_03d1/PREDICTIONS.md
+          ./code/runner_exit_audit_56dc/OUTCOMES.md
+          ./code/runner_exit_audit_56dc/PREDICTIONS.md
+      branching_audit_d330               named in 2 .md file(s) outside the sweep's own tree
+          ./code/branching_audit_d330/README.md
+          ./docs/OneThird-Bratteli-Path-Algebras-Mg13b2Repair-IndependentAudit.md
+      face_geometry_audit_6653           named in 7 .md file(s) outside the sweep's own tree
+          ./code/face_geometry_repair_e35b/README.md
+          ./code/runner_exit_audit_05eb/OUTCOMES.md
+          ./code/runner_exit_c2b3/OUTCOMES.md
+      runner_exit_audit_56dc             named in 3 .md file(s) outside the sweep's own tree
+          ./code/runner_exit_repair_bf79/PREDICTIONS.md
+          ./code/species_gate_audit_d53d/README.md
+          ./docs/audit-mg-56dc-grain-and-population.md
+      ...TREES whose DIFFERENT verdict is recorded outside the sweep's tree     4
+          ^ one unit of that number is one tree
+
+  A finding that lives in exactly one README is a finding that is one
+  `git rm` from being unrecorded.  This is not a defect of the sweep --
+  it disclosed it -- it is the state of the repair.
+
+V6 TOTAL RUNNERS AT HEAD STILL CARRYING THE SHAPE: 92

@@ -1,0 +1,55 @@
+mg-18dc / SELFTEST
+HEAD: 32da9b7
+
+==========================================================================
+A.  THE STUB DISTINGUISHES `>` FROM `.new`+`mv`
+==========================================================================
+      pass  A1  a `>` runner starts its probe on an empty transcript
+      pass  A2  and the empty file is the one that probe writes
+      pass  A3  a `.new`+`mv` runner starts its probe on the PREVIOUS bytes
+      pass  A4  and the SECOND step of a `.new`+`mv` runner is clean too -- the control that a silent stub would have destroyed
+      pass  A5  `>>` is not truncation
+      pass  A6  the OUT-FIRST helper idiom is measured without being parsed
+      pass  A7  a LOOP is N steps and not one
+
+==========================================================================
+B.  THE READ SHIM RECORDS THE SIZE THE OPENER SAW
+==========================================================================
+      pass  B1  a transcript an EARLIER step of the same run rewrote is populated, not empty, when a later probe reads it (the STALE case, and NOT a bite)
+      pass  B2  a probe reading its OWN emptied transcript IS caught, at size 0
+      pass  B3  a WRITE of an empty transcript is not counted as a READ
+      pass  B4  an empty `out_` file OUTSIDE the tree is not attributed to it
+      pass  B5  a CHILD's read of an emptied transcript is recorded at all
+      pass  B5a  and it is attributed to the CHILD's pid, not the parent's
+
+==========================================================================
+C.  THE POPULATION RULE IS A PROPERTY OF A COMMIT
+==========================================================================
+      pass  C1  runners_at differs between two revisions
+      pass  C2  and it does not read the working directory: the answer for a revision is stable across two calls
+      pass  C3  every returned path is `code/<one dir>`
+
+==========================================================================
+D.  THE SANDBOX CANNOT REACH THE WORKTREE
+==========================================================================
+      pass  D1  WORK is outside the repository
+      pass  D2  the sandbox is outside the repository
+      pass  D3  destroying a transcript in the sandbox leaves the worktree's alone
+      pass  D4  and the sandbox restore puts it back
+
+==========================================================================
+E.  THE SANDBOX LOOKS LIKE THE WORKTREE TO A PROBE THAT RESOLVES `main`
+==========================================================================
+      pass  E1  the clone has a resolvable local `main` (SD14: `git clone` creates only the source's CURRENT branch, and in a polecat worktree that is not `main`; every arc probe doing `git diff main..HEAD` crashed without it)
+      pass  E2  and it is the SAME commit `main` names in the worktree
+      pass  E3  an inherited V18_RUNNING does not silence a measured runner (SD13: it silenced THIS suite's own and the empty result was printed as a clean bill of health)
+
+population: the assertions in this file
+      ...ASSERTIONS run                                             23
+          ^ one unit of that number is one assertion
+      ...ASSERTIONS passed                                          23
+          ^ one unit of that number is one assertion
+      ...ASSERTIONS FAILED                                           0
+          ^ one unit of that number is one assertion
+
+SELFTEST FAILURES: 0

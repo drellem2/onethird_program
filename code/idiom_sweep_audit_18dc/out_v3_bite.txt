@@ -1,0 +1,142 @@
+mg-18dc / V3 -- THE BITE, OBSERVED AT THE OPEN CALL
+HEAD: 0163b68
+MEASURED AT: d33970b  (mg-03d1's own audit commit)
+
+==========================================================================
+V3a  RUNNING ALL 109 RUNNERS FOR REAL, UNDER AN OPEN-AUDIT HOOK
+==========================================================================
+  Six clones of the repository at d33970b, one per worker, each reset to
+  its committed bytes between trees.  `sys.addaudithook` records every
+  `open` of a path containing `out_`, with the pid, the MODE, and THE
+  SIZE THE OPENER SAW.  Timeout 420 s per runner.
+
+  population: the 109 runners tracked at d33970b
+      ...RUNNERS run to completion                                  82
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS killed at the 420 s timeout                        27
+          ^ one unit of that number is one `run_all.sh`
+
+      ...RUNNERS where a probe READ A TRANSCRIPT OF ZERO BYTES      11
+          ^ one unit of that number is one `run_all.sh`
+      ...TRANSCRIPTS so read, across those runners                  16
+          ^ one unit of that number is one (tree, transcript) pair
+
+  EVERY COUNT IS A LOWER BOUND.  A runner killed at 420 s may bite after
+  the kill; 27 were killed and are UNMEASURED, not clean.
+          killed: anchor_population_audit_0ba7
+          killed: branching_af28
+          killed: branching_audit_2060
+          killed: branching_audit_321d
+          killed: branching_audit_5800
+          killed: branching_audit_957f
+          killed: branching_audit_e34a
+          killed: branching_repair_41aa
+          killed: branching_repair_76cc
+          killed: branching_repair_7e58
+          killed: counterexample_audit_0a11
+          killed: counterexample_audit_a7b4
+          killed: counterexample_repair_dea5
+          killed: face_geometry_audit_0b07
+          killed: face_geometry_audit_c4c8
+          killed: hodge_leverage
+          killed: hodge_leverage_audit_86a3
+          killed: hodge_leverage_audit_8aae
+          killed: hodge_leverage_audit_9207
+          killed: repair_8d5e
+          killed: repair_b2af
+          killed: runner_exit_audit_05eb
+          killed: runner_exit_audit_dee4
+          killed: runner_exit_c2b3
+          killed: species_audit_a61f
+          killed: species_bound_audit_6ef4
+          killed: species_rung_repair_4adb
+
+==========================================================================
+V3b  MY NUMBER AND mg-03d1'S 43
+==========================================================================
+      mg-03d1  two regexes, conjoined         43   (it printed 43)
+      mg-ec63  audit hook, own transcript      -   (it printed 19 trees
+                                                    / 32 steps over 110)
+      mg-18dc  size==0 at the open call       11
+
+  ^ one unit of each is one `run_all.sh`.  mg-ec63's 19 is over the 110
+    runners at 3fc870a and is NOT this population; it is printed here to
+    be named, not to be subtracted.
+
+  population: the 109 runners at d33970b, by whether the rules agree
+      ...RUNNERS both rules call biting                              7
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS the REGEX PAIR calls biting and execution does NOT    36
+          ^ one unit of that number is one `run_all.sh`
+      ...RUNNERS EXECUTION calls biting and the regex pair does NOT     4
+          ^ one unit of that number is one `run_all.sh`
+
+  THE REGEX PAIR'S FALSE POSITIVES.  The source mentions `out_` and the
+  runner uses `>`; no process ever reads an empty transcript of its own
+  tree.  A count of trees that COULD bite is not a count of trees that DO:
+      anchor_population_audit_0ba7                   killed at 420 s -- UNMEASURED
+      audit_330a                                     2 own-tree reads, none of them of an empty file
+      audit_c067                                     5 own-tree reads, none of them of an empty file
+      branching_audit_19ec                           NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      branching_audit_321d                           killed at 420 s -- UNMEASURED
+      branching_audit_5800                           killed at 420 s -- UNMEASURED
+      branching_audit_58da                           NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      branching_audit_957f                           killed at 420 s -- UNMEASURED
+      branching_audit_a218                           NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      branching_audit_d330                           6 own-tree reads, none of them of an empty file
+      branching_audit_e34a                           killed at 420 s -- UNMEASURED
+      branching_repair_41aa                          killed at 420 s -- UNMEASURED
+      branching_repair_76cc                          killed at 420 s -- UNMEASURED
+      branching_repair_7e58                          killed at 420 s -- UNMEASURED
+      branching_warrant_dffa                         NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      counterexample_audit_0a11                      killed at 420 s -- UNMEASURED
+      counterexample_repair_dea5                     killed at 420 s -- UNMEASURED
+      face_geometry_audit_0b07                       killed at 420 s -- UNMEASURED
+      face_geometry_audit_d0e2                       NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      face_geometry_audit_e7bc                       NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      face_geometry_audit_eaef                       NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      face_geometry_landing_da45                     NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      landscape_audit_d673                           NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      repair_69d1                                    NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      repair_8d5e                                    killed at 420 s -- UNMEASURED
+      repair_b2af                                    killed at 420 s -- UNMEASURED
+      runner_exit_audit_05eb                         killed at 420 s -- UNMEASURED
+      runner_exit_c2b3                               killed at 420 s -- UNMEASURED
+      runner_exit_repair_70c7                        NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      runner_exit_repair_7522                        NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      species_audit_73df                             NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      species_audit_7dd3                             NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      species_depth_audit_4700                       NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      species_extent_audit_6cb9                      NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      species_gate_audit_d53d                        NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+      species_sites_821e                             NO own-tree transcript read AT ALL -- the regex pair's second half is false here
+
+  THE REGEX PAIR'S FALSE NEGATIVES -- observed biting, not matched:
+      counterexample_audit_c6bc                      out_a5_battery.txt, out_battery_0a11_recheck
+      face_geometry_audit_6653                       out_verify_claims.txt
+      hodge_leverage_audit_97fb                      out_audit_97fb.txt
+      species_bound_audit_6ef4                       out_selftest.txt, out_t1_bound.txt, out_t2_w
+
+==========================================================================
+V3c  THE NEGATIVE CONTROL -- WHAT WOULD HAVE SHOWN A POSITIVE
+==========================================================================
+  An instrument that finds nothing is worthless unless it can be shown
+  to fire.  Two directions, both printed:
+
+  population: the 2 runners with the `.new`+`mv` fix
+      grain_axis_audit_03d1                          empty-reads 0   own-tree reads 42
+      runner_exit_repair_bf79                        empty-reads 0   own-tree reads 12
+      ^ the fixed trees are read by their own probes and NEVER at size 0.
+        The instrument sees the reads; it declines to call them empty.
+
+  population: every own-tree transcript READ observed in the whole pass
+      ...READS of a transcript with bytes in it                    788
+          ^ one unit of that number is one open() call
+      ...READS of a transcript with ZERO bytes                     107
+          ^ one unit of that number is one open() call
+
+  If the hook were broken, both numbers would be 0.  If the size were
+  read after the fact rather than at the call, the second would be 0
+  and the first would absorb it.  Neither is 0.
+
+V3 TOTAL TREES WHERE THE SHAPE BITES: 11

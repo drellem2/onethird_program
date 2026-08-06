@@ -199,6 +199,38 @@ if os.path.exists(p):
     ok("D4  and the sandbox restore puts it back",
        B.sandbox_reset(sb) == [] and open(p).read() != "DESTROYED BY THE SELFTEST\n")
 
+# ---------------------------------------------------------------------------
+B.hdr("E.  THE SANDBOX LOOKS LIKE THE WORKTREE TO A PROBE THAT RESOLVES `main`")
+
+r = subprocess.run(["git", "rev-parse", "--verify", "main"], cwd=sb,
+                   capture_output=True, text=True)
+ok("E1  the clone has a resolvable local `main` (SD14: `git clone` creates "
+   "only the source's CURRENT branch, and in a polecat worktree that is not "
+   "`main`; every arc probe doing `git diff main..HEAD` crashed without it)",
+   r.returncode == 0, "rev-parse main -> %s" % r.returncode)
+r2 = subprocess.run(["git", "rev-parse", "--verify", "main"], cwd=B.REPO,
+                    capture_output=True, text=True)
+ok("E2  and it is the SAME commit `main` names in the worktree",
+   r.stdout.strip() == r2.stdout.strip() and r.returncode == 0,
+   "clone %s vs worktree %s" % (r.stdout.strip()[:8], r2.stdout.strip()[:8]))
+
+env = dict(os.environ)
+env["V18_RUNNING"] = "a-caller-that-should-not-stop-a-measurement"
+r3, t3 = mktree("guarded", "python3 p1.py > out_p1.txt\n",
+                {"p1.py": "print('hi')\n"}, {"out_p1.txt": "OLD\n"})
+saved = os.environ.get("V18_RUNNING")
+os.environ["V18_RUNNING"] = "outer"
+resg, _ = B.stub_run(r3, t3, timeout=30)
+if saved is None:
+    os.environ.pop("V18_RUNNING", None)
+else:
+    os.environ["V18_RUNNING"] = saved
+ok("E3  an inherited V18_RUNNING does not silence a measured runner "
+   "(SD13: it silenced THIS suite's own and the empty result was printed as a "
+   "clean bill of health)",
+   resg is not None and len(resg["rows"]) == 1,
+   "got %r invocations" % (len(resg["rows"]) if resg else None))
+
 shutil.rmtree(ROOT, ignore_errors=True)
 
 print()
