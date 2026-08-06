@@ -1,0 +1,58 @@
+==============================================================================
+A5 — item (e): 'both sides chains => width <= 2 => Linial => delta >= 1/3'
+==============================================================================
+
+A5.1  the ELEMENTARY step: a union of two chains has width <= 2.
+      (An antichain meets each chain at most once, so it has at most 2 elements.)
+  OK   union of two chains has width <= 2: 0 / 508
+       population: every bipartition of {0..n-1} into two increasing chains, n=2..8 (sum of 2^n = 508 posets)
+       grain:      per-(n, bipartition), width computed by brute-force largest antichain
+
+A5.2  the CITATION AS USED: over every poset of width <= 2, is delta >= 1/3?
+      delta(P) = max over incomparable pairs {x,y} of min(pr(x<y), pr(y<x)).
+      A CHAIN HAS NO INCOMPARABLE PAIR and therefore NO delta -- that is the rider
+      item (e) needs and does not carry. Chains are reported separately below, not
+      silently dropped.
+  OK   width <= 2 and has an incomparable pair => delta >= 1/3: 0 / 3210
+       population: all LABELLED posets on n=2..7 with e=identity a linear extension, filtered to width <= 2 and at least one incomparable pair: 3210 posets (out of 101658 total, of which 3216 have width <= 2)
+       grain:      per-poset, exact Fraction comparison against 1/3
+       tightest cell: delta = 1/3 at P1 n=3
+       and the 6 width-<=2 posets with NO incomparable pair (the chains)
+       have delta UNDEFINED -- delta() returns None for them, and they are
+       excluded from the population above rather than counted as passing:
+  OK   chains have delta undefined: 0 / 6
+       population: the 6 width-<=2 posets on n=2..7 with no incomparable pair
+       grain:      per-poset, delta() is None
+
+A5.3  NEGATIVE CONTROL — the same sweep at width >= 3, where the citation says
+      nothing. If delta >= 1/3 held vacuously everywhere, A5.2 would be evidence
+      of nothing. The conjecture is verified to n <= 11, so no counterexample
+      should appear here either -- but the DISTRIBUTIONS must differ, or the
+      width-<=2 restriction in A5.2 is doing no work.
+  OK   width >= 3 => delta >= 1/3 (conjecture, n<=7): 0 / 98442
+       population: all LABELLED posets on n=2..7 of width >= 3 with an incomparable pair: 98442
+       grain:      per-poset, exact Fraction comparison against 1/3
+       tightest cell at width >= 3: delta = 14/39 at P40855 n=7
+       tightest cell at width <= 2: delta = 1/3
+       => the two families have DIFFERENT tightest cells, so the width-<=2
+          restriction is not vacuous on this population: A5.2 is a real check
+          and an instrument that could have shown the negative.
+
+A5.4  the WHOLE of item (e), assembled: if both sides of the interface are chains,
+      then P is a union of two chains, so width(P) <= 2 (A5.1), so by Linial
+      delta(P) >= 1/3 (A5.2, checked as used to n=7), which contradicts frozen
+      (delta < 1/3). Scored end to end on the two-chain population:
+  OK   item (e) end to end on unions of two chains: 0 / 240
+       population: every bipartition into two increasing chains, n=2..7; 240 with an incomparable pair, 12 SKIPPED as chains (delta undefined)
+       grain:      per-poset, width <= 2 AND delta >= 1/3, both exact
+       => the 12 skipped posets are the RIDER: item (e) as worded
+          ('both sides chains => width <= 2 => Linial => delta >= 1/3') is
+          MALFORMED on them, because delta does not exist. It closes the caveat
+          for free only after adding 'and P is not itself a chain'. That rider is
+          harmless in context -- a minimal counterexample is not a chain -- but it
+          is a rider mg-00b9's statement does not carry, and it is exactly one of
+          the two hypotheses Linial's theorem needs.
+
+==============================================================================
+A5 TOTAL BAD: 0
+==============================================================================

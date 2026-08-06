@@ -1,0 +1,143 @@
+==============================================================================
+A4 — PRIORITY 3: the 3/eps_leak requirement comparison
+==============================================================================
+
+A4.1  Q1 — SAME eps_leak? Traced symbol by symbol.
+      DIRECT:   deliver min_k Delta_1(A_k) <= eps_leak.
+                Lemma B bound <= eps_leak  <=>  E[D] <= 2 eps_leak * denom;
+                DG lower half E[inv] >= E[D]/2 is the WRONG direction, so the
+                sufficient inv-form uses DG UPPER half E[D] <= 2E[inv]:
+                E[inv] <= eps_leak * denom  ==>  bound <= eps_leak.
+      SPECTRAL: deliver Phi* <= eps_leak. Sweep half forces 1-lambda_std <=
+                eps_leak^2/2 =: eps_spec, then the master bound gives
+                E[inv] <= (eps_spec/6)(n^2-1) = eps_leak^2 (n^2-1)/12.
+      => BOTH sides are the requirement for the SAME conclusion, `leak parameter
+         <= eps_leak`, at the same eps_leak. Q1: YES, SAME eps_leak. The comparison
+         is well-posed.
+      => BUT the two CONCLUSIONS are not the same strength: direct delivers it for
+         a PREFIX, spectral for the minimising ARBITRARY cut. A3.4 measured that
+         Phi* <= min over prefixes always, so the direct conclusion is the
+         STRONGER one. The comparison understates the direct route.
+
+A4.2  Q2/Q3 — the exact ratio. Direct budget / spectral budget, as a multiple of
+      1/eps_leak. Claimed: 3/eps_leak (mg-00b9's headline), or 3(1-4beta^2)/eps_leak
+      if the (1-4beta^2) in its own direct requirement is carried through.
+
+      ratio = [eps_leak * denom(n,beta)] / [eps_leak^2 (n^2-1)/12]
+            = (1/eps_leak) * 12 denom(n,beta) / (n^2-1)
+      so the eps_leak-free multiplier is  M(n,beta) = 12 denom(n,beta)/(n^2-1).
+
+         n   beta   M exact (repaired)   M claimed 3(1-4b^2)  M headline 3
+         3      0                    3                     3             3
+         3    1/4                    3                   9/4             3
+         3    1/3                    3                   5/3             3
+         4      0                 16/5                     3             3
+         4    1/4                 16/5                   9/4             3
+         4    1/3                  8/5                   5/3             3
+         5      0                    3                     3             3
+         5    1/4                    2                   9/4             3
+         5    1/3                    2                   5/3             3
+         8      0                64/21                     3             3
+         8    1/4                  8/3                   9/4             3
+         8    1/3                40/21                   5/3             3
+         9      0                    3                     3             3
+         9    1/4                21/10                   9/4             3
+         9    1/3                21/10                   5/3             3
+        12      0              432/143                     3             3
+        12    1/4              360/143                   9/4             3
+        12    1/3              288/143                   5/3             3
+        16      0               256/85                     3             3
+        16    1/4               208/85                   9/4             3
+        16    1/3                  8/5                   5/3             3
+        20      0              400/133                     3             3
+        20    1/4              320/133                   9/4             3
+        20    1/3              232/133                   5/3             3
+
+A4.2a is the HEADLINE 3 right? Only at beta=0. Scored:
+  OK   M(n,0) >= 3  (headline 3/eps_leak is ATTAINED at beta=0): 0 / 37
+       population: n=3..39 at beta=0
+       grain:      per-n, exact Fraction comparison against 3
+       M(n,0) = 12*floor(n^2/4)/(n^2-1) = 3 exactly for ODD n, 3n^2/(n^2-1) > 3
+       for EVEN n. So at beta=0 the headline 3/eps_leak is exact (odd n) or
+       slightly conservative (even n). CONFIRMED at beta=0.
+
+A4.2b is the headline 3 right at the beta the route's own selling point needs?
+      mg-2de0 item (d): the balanced-prefix guarantee min(k,n-k) >= beta_0 n is
+      what discharges the GEOMETRIC half of F-bal, 'at a cost of (1-4beta^2) --
+      25% at beta=1/4'. At beta=0 there is NO balance guarantee at all: the
+      k-range is all of [1,n-1] and the selected k may be 1.
+  MEAS M(n,1/4) >= 3 (headline 3 still available): 1 / 36
+       population: n=4..39 at beta=1/4
+       grain:      per-n, EXACT Fraction comparison against 3 (no float in this verdict)
+       EXCEPTION n=4: k-range [1,3] -- IDENTICAL to the beta=0 range
+                 [1,3], so the beta=1/4 balance restriction is VACUOUS
+                 at this n and M = 16/5 >= 3 for that reason, not because the
+                 headline survives a real balance constraint.
+       and the same measurement for n >= 5, where the window actually binds:
+  OK   M(n,1/4) >= 3 for n >= 5 (window binds): 0 / 35
+       population: n=5..39 at beta=1/4
+       grain:      per-n, exact Fraction comparison against 3
+       => THE HEADLINE FACTOR AND THE BALANCE GUARANTEE CANNOT BOTH BE CLAIMED.
+          At beta=1/4 the honest multiplier is 3*(3/4) = 9/4 = 2.25, so:
+          eps_leak=0.20 (mg-e35c F5 calibration): headline 15.0x  vs  beta=1/4 honest 11.25x
+          eps_leak=0.02: headline 150.0x  vs  beta=1/4 honest 112.50x
+       => mg-00b9's own (a) writes (1-4beta^2) INTO the direct requirement and then
+          reports the ratio WITHOUT it. That is the one place the comparison is
+          across different parameter settings -- not in eps_leak (Q1: same), but
+          in beta.
+
+A4.2c Q3 — the n^2 vs (n^2-1) rendering. mg-00b9 writes the SPECTRAL requirement
+      as (eps_spec/6) n^2; the corpus has (eps_spec/6)(n^2-1).
+  OK   (n^2-1) < n^2, so the corpus form is STRICTER: 0 / 37
+       population: n=3..39
+       grain:      per-n, exact
+       => mg-00b9's rendering gives the spectral route a LARGER budget than the
+          corpus does, i.e. it UNDERSTATES the spectral requirement and therefore
+          understates its own advantage. An error AGAINST mg-00b9's conclusion.
+          Direction confirmed; magnitude O(1/n^2).
+
+A4.3  Q4 — item (b). mu = E[D]/n^2 <= 1/3. direct 2mu vs Cheeger sqrt(6mu).
+      Ratio sqrt(6mu)/(2mu) = sqrt(6)/(2 sqrt(mu)) = 1.224745/sqrt(mu).
+
+             mu  direct 2mu  Cheeger sqrt(6mu)  ratio b=0  ratio b=1/4
+            1/3     0.66667            1.41421     2.1213       1.5910
+            1/4     0.50000            1.22474     2.4495       1.8371
+            1/6     0.33333            1.00000     3.0000       2.2500
+           1/10     0.20000            0.77460     3.8730       2.9047
+          1/100     0.02000            0.24495    12.2474       9.1856
+         1/1000     0.00200            0.07746    38.7298      29.0474
+
+       => at beta=0 the ratio is 1.2247/sqrt(mu), = 2.1213 at mu=1/3, growing
+          without bound as mu -> 0. NO CROSSOVER in mu <= 1/3. (b) CONFIRMED
+          AT beta=0, including its '>= 2.1' and 'no crossover'.
+       => at beta=1/4 it degrades to 0.9186/sqrt(mu) = 1.5910 at mu=1/3. Still no
+          crossover (that would need mu > 0.8438 > 1/3), but the '>= 2.1' figure is
+          a beta=0 figure and does not survive the balance guarantee. Same defect
+          as A4.2b, same cause.
+  OK   no crossover at beta=1/4 for mu <= 0.33: 0 / 33
+       population: mu = 1/100 .. 33/100 in steps of 1/100
+       grain:      per-mu (exact, comparing squares to avoid floats in the verdict)
+
+A4.4  the residual (R) re-pricing of item (f), arithmetic only.
+      mg-2de0 (f): direct needs incomparability density D <= 1.5*eps_leak where
+      STATE.md:130 records D <= eps_spec. Ratio 1.5 eps_leak / eps_spec with
+      eps_spec = eps_leak^2/2 is 3/eps_leak -- the SAME factor as A4.2, as it must
+      be, since it is the same square. Checked:
+  OK   (f)'s ratio == A4.2's ratio: 0 / 5
+       population: eps_leak in {1/5, 1/10, 1/20, 1/50, 1/100}
+       grain:      per-eps_leak, exact Fraction identity
+       => (f) is NOT an independent second win. It is A4.2's factor re-expressed
+          on the density axis. Reporting both as separate gains double-counts one
+          Cheeger square.
+       => and the n >= 2/eps_spec -> n >= 2/(1.5 eps_leak) claim compares a
+          2/eps_spec artifact against a 2/(1.5 eps_leak) artifact -- two DIFFERENT
+          formulas. 2/0.02 = 100 and 2/(1.5*0.2) = 6.667 are both correct
+          arithmetic, but the '100 -> 6.7' drop mixes eps_spec=0.02 with
+          eps_leak=0.20, which are not the same calibration (eps_spec = eps_leak^2/2
+          would be 0.02 at eps_leak=0.2). NOT AUDITED FURTHER: item (f) is outside
+          this ticket's Priority 1-3 and I did not re-derive the n>=2/eps_spec
+          artifact itself.
+
+==============================================================================
+A4 TOTAL BAD: 0
+==============================================================================

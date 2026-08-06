@@ -1,0 +1,24 @@
+### running selftest2de0.py -> out_selftest_2de0.txt
+###   exit 0 (expected 0), 101 lines written
+### running a1_lemma_a.py -> out_a1_lemma_a.txt
+###   exit 0 (expected 0), 98 lines written
+### running a2_lemma_b.py -> out_a2_lemma_b.txt
+###   exit 1 (expected 1), 151 lines written
+### running a3_nonvacuity.py -> out_a3_nonvacuity.txt
+###   exit 0 (expected 0), 107 lines written
+### running a4_requirements.py -> out_a4_requirements.txt
+###   exit 0 (expected 0), 143 lines written
+### running a5_linial.py -> out_a5_linial.txt
+###   exit 0 (expected 0), 58 lines written
+
+==============================================================================
+EXIT CODES vs PRE-REGISTERED EXPECTATIONS
+==============================================================================
+  ok   selftest: exit 0 == expected 0 (101 lines)
+  ok   a1: exit 0 == expected 0 (98 lines)
+  ok   a2: exit 1 == expected 1 (151 lines)
+  ok   a3: exit 0 == expected 0 (107 lines)
+  ok   a4: exit 0 == expected 0 (143 lines)
+  ok   a5: exit 0 == expected 0 (58 lines)
+
+ALL 6 SECTIONS ON THEIR PRE-REGISTERED EXIT CODES, ALL NON-EMPTY.
