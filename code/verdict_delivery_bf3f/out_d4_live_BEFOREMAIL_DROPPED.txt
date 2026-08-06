@@ -1,0 +1,100 @@
+==============================================================================
+D4.1  THE QUIET CONTROL -- the live store as it stands right now
+==============================================================================
+  mg-bf3f in the live report: 0 row(s)
+  It has not landed, so the predicate does not apply to it and the detector
+  is correctly SILENT about it. A detector that flagged in-flight work would
+  be an alarm on every open ticket.
+
+==============================================================================
+D4.2  THE LIVE FIRE -- mg-bf3f's own verdict, dropped on purpose
+==============================================================================
+  The landing is SIMULATED. The mail is NOT: the mailbox half of the
+  predicate is read from pm-onethird's real mailbox exactly as it stands at
+  this instant. So this answers a real question -- if mg-bf3f landed now,
+  would its verdict be lost? -- rather than a constructed one.
+  worker taken from this worktree's own branch `polecat-dbf3f` -> `dbf3f`
+
+    item        : mg-bf3f
+    filer       : pm-onethird
+    worker      : dbf3f  (resolver: supplied, supplied=True)
+    landing     : 2026-08-06T23:59:59Z   SIMULATED=True
+    verdict mail: None
+    STATUS      : DROPPED
+
+  IT FIRES. On the live store, with real mail, my own verdict is a drop.
+  P16 was filed before this code existed and it is CONFIRMED by the
+  instrument built to test it: the ticket that repairs the dropped-verdict
+  mechanism was itself set up to have its verdict dropped.
+
+==============================================================================
+D4.3  THE SAME PREDICATE, AFTER THE VERDICT IS SENT
+==============================================================================
+  This is the half that makes D4.2 mean something. A detector that reports
+  DROPPED unconditionally is not measuring anything. Re-read now:
+    STATUS now  : DROPPED
+  Still no verdict mail from this worker. If this transcript is the
+  FINAL one, the drop shown in D4.2 is real and unrepaired; the run that
+  follows the verdict mail is the one that shows the flip.
+
+==============================================================================
+D4.4  THE BACKLOG, ORDERED BY LANDING -- the ticket's first deliverable
+==============================================================================
+  122 dropped verdicts for pm-onethird. The most recent 30, newest last,
+  are the recoverable end of the backlog -- their branches are still on main:
+    2026-07-31T05:28:32Z  mg-7e39  worker=7e39      INDEPENDENT AUDIT of the mg-ec07 verdict repairs (pre-filed SAME A
+    2026-07-31T06:59:15Z  mg-19ec  worker=19ec      INDEPENDENT AUDIT of the mg-5800 warrant narrowing (pre-filed SAME
+    2026-07-31T07:13:43Z  mg-3934  worker=3934      CI RED ON MAIN 21 HOURS: Gate mutation demo dies at the mg-75f0 st
+    2026-07-31T07:24:23Z  mg-069f  worker=069f      mg-8a71 verdict repairs: the repair STATED the wrong-claim-must-no
+    2026-07-31T08:05:22Z  mg-70c7  worker=70c7      mg-dee4 verdict repairs: '11 of 11 read directly' is ELEVEN LINES 
+    2026-07-31T08:09:10Z  mg-3f3b  worker=3f3b      mg-7e39 verdict repairs: n/a IS WHERE A MATRIX HIDES (1 of 8 n/a r
+    2026-07-31T08:20:07Z  mg-8d5e  worker=8d5e      mg-2c77 verdict repairs: A DERIVED ANCHOR RE-POINTED WHEN A SENTEN
+    2026-07-31T09:08:25Z  mg-0242  worker=0242      INDEPENDENT AUDIT of the mg-8a71 body-strike and population repair
+    2026-07-31T09:08:30Z  mg-56dc  worker=56dc      INDEPENDENT AUDIT of the mg-dee4 grain-and-population repair (pre-
+    2026-07-31T09:41:10Z  mg-4adb  worker=4adb      mg-6ef4 verdict repairs: set -e is THE FIFTH RUNG AND ONE LINE OUT
+    2026-08-05T17:33:37Z  mg-f3ff  worker=f3ff      THE DROPPED-VERDICT CENSUS WAS BUILT FROM MAIL ROUTING, NOT THE TR
+    2026-08-05T21:55:49Z  mg-d53d  worker=d53d      INDEPENDENT AUDIT of the mg-6ef4 deletion-population repair (pre-f
+    2026-08-05T21:55:53Z  mg-0120  worker=y0120     THE AUDITOR'S OWN RECORD IS PARTLY A CONSTANT — claims16eb.py carr
+    2026-08-06T00:10:23Z  mg-6e58  worker=z6e58     THE POPULATION OF THIS ARC IS DEFINED BY A CAPITAL LETTER — _HASH_
+    2026-08-06T00:19:08Z  mg-77e6  worker=x77e6     INDEPENDENT AUDIT of mg-9d7b (filed LATE) — the 15-channel enumera
+    2026-08-06T00:25:20Z  mg-9a59  worker=z9a59     mg-a471's remainder: a vacuous exit 0 over ZERO gate runs, a fallb
+    2026-08-06T00:37:17Z  mg-5f7c  worker=z5f7c     The repo's ONLY suppression instrument fails CLOSED while its docs
+    2026-08-06T00:37:28Z  mg-1d26  worker=z1d26     THE HOLE IS 3x WIDER THAN CERTIFIED AND MOSTLY SILENT — 6 deletion
+    2026-08-06T00:48:36Z  mg-c3ca  worker=zc3ca     L1b IS THE WHOLE REMAINING GAP: frozen => lambda_std -> 1. The Che
+    2026-08-06T02:50:16Z  mg-a266  worker=za266     INDEPENDENT AUDIT of the mg-a471 remainder (pre-filed SAME ACTION)
+    2026-08-06T05:24:00Z  mg-1abe  worker=z1abe     COMMITTED FIGURES DO NOT REPRODUCE FROM THE REVISIONS THEY NAME — 
+    2026-08-06T11:48:19Z  mg-ba2a  worker=aba2a     RESOLVED — main was red 11h on a 22-char literal that was never a 
+    2026-08-06T16:09:35Z  mg-ec63  worker=zec63     ARC-WIDE RUNNER IDIOM: 86 of 109 runners truncate their transcript
+    2026-08-06T16:24:32Z  mg-a84b  worker=ba84b     INDEPENDENT AUDIT of the rotted-pin fix (pre-filed SAME ACTION) — 
+    2026-08-06T17:54:01Z  mg-2860  worker=c2860     STATE.md LEADS WITH THE OVER-STRONG FORM: the wall and the axis su
+    2026-08-06T17:55:37Z  mg-b0ae  worker=bb0ae     INDEPENDENT AUDIT of the STATE.md relocation (pre-filed SAME ACTIO
+    2026-08-06T18:18:05Z  mg-40e4  worker=c40e4     INDEPENDENT AUDIT of mg-5f7c (pre-filed SAME ACTION) — the suppres
+    2026-08-06T18:48:35Z  mg-e12a  worker=ce12a     INDEPENDENT AUDIT of the gate-watchlist repair (pre-filed SAME ACT
+    2026-08-06T20:19:00Z  mg-5035  worker=c5035     figures() claims in its own comment to exclude a git revision and 
+    2026-08-06T21:54:58Z  mg-1d6c  worker=c1d6c     The published corpus figure is EXACTLY HALF the population and the
+
+==============================================================================
+D4.5  RECOVERY OF mg-ec63, THE ONE pm-onethird ASKED FOR FIRST (P13)
+==============================================================================
+  'If that verdict exists only in commit subjects, THE FINDING MOST LIKELY TO
+  CHANGE WHAT WE BELIEVE IS THE ONE LEAST LIKELY TO BE READ.'
+  commits on main naming mg-ec63: 10
+  by commit type: {'evidence+docs': 1, 'instrument': 8, 'predictions': 1}
+  VERDICT-BEARING commits (type `evidence*`, which is where this arc puts the
+  finished account): 1
+
+    7fccb4e
+      evidence+docs: the committed transcripts of the mg-ec63 suite and its README — THE ARC-WIDE IDIO
+      M BITES IN 19 TREES AND 32 STEPS, NOT 43, because the ticket's own sentence is narrower than the
+       rule that produced 43: only the probe's OWN transcript is empty, every other is stale-but-popul
+      ated (12 steps, 11 further trees, reported apart).  4 of the 32 change their answer, 0 are NEVER
+       EXERCISED, 14 are excluded by a determinism control, and ZERO published prose claims rest on an
+       empty-file reading — one transcript is PROVEN to be a defect run and three trees have drifted p
+      ast attribution.  16 predictions scored with 2 missed and kept as written, including P5a, whose 
+      control could not fire because mg-bf79 closed the hole TWICE and recorded once; and S6a/SD1b COR
+      RECTED IN PROSE beneath the line it leaves as written, because re-running to agree with it would
+       erase the record of my own resolver getting it wrong (mg-ec63)
+
+  -> P13 declared rule: the verdict is recoverable from the `evidence*` commits
+     alone. That is 1 commit(s); the full trail is 10.
+     RECOVERED. It was never lost from the repository -- only from its reader.

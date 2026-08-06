@@ -1,0 +1,130 @@
+verdictwatch -- store /Users/daniel/.macguffin -- filer pm-onethird
+  landed items scanned : 149
+  DELIVERED            : 25
+  DROPPED              : 122
+  UNDECIDABLE          : 2   (no polecat-* branch in the result sidecar)
+
+DROPPED VERDICTS, oldest landing first (elsewhere = mails this worker sent to somebody who was not the filer):
+  landed                item      filer         worker   kind      elsewhere  title
+  2026-07-30T06:19:08Z  mg-a2bd   pm-onethird   a2bd     done              0  STATE.md asserts a FALSE UNIVERSAL: ledger row G-double-prime has 55 counterexamples — s
+  2026-07-30T07:17:54Z  mg-f2e1   pm-onethird   f2e1     done              0  Land mg-f7bc: the A5 trigger I wrote has a HOLE at STATE.md — plus a false coverage clai
+  2026-07-30T07:21:18Z  mg-3c24   pm-onethird   3c24     done              0  INDEPENDENT AUDIT of whatever mg-a2bd produces (pre-filed) — striking a FALSE universal 
+  2026-07-30T07:48:10Z  mg-6653   pm-onethird   6653     done              0  INDEPENDENT AUDIT of whatever mg-f2e1 produces (pre-filed) — it widens the A5 trigger an
+  2026-07-30T09:35:11Z  mg-4f9b   pm-onethird   4f9b     done              2  LIVE REGRESSION: the widened gate is blind to a mutation it used to catch — widening the
+  2026-07-30T10:12:05Z  mg-66a6   pm-onethird   66a6     done              0  INDEPENDENT AUDIT of whatever mg-6016 produces (pre-filed) — an expository note going to
+  2026-07-30T10:33:12Z  mg-7d5a   pm-onethird   7d5a     done              0  STATE.md carries a FALSE argument for its own A5 widening — strike it; the widening SURV
+  2026-07-30T10:41:08Z  mg-7f38   pm-onethird   7f38     done              0  Fix the Daniel-facing note: UPGRADE the status (both claims are elementary theorems for 
+  2026-07-30T11:17:34Z  mg-e720   pm-onethird   e720     done              0  INDEPENDENT AUDIT of whatever mg-7d5a produces (pre-filed) — sixth generation; the prima
+  2026-07-30T11:21:55Z  mg-48dd   pm-onethird   48dd     done              4  CLOSE the four-generation class: mg-56be exhibited corpus-independent references that FI
+  2026-07-30T11:48:29Z  mg-8fd1   pm-onethird   8fd1     done              0  GATE the unified-framework question before researching it: settle what the rep-theory ne
+  2026-07-30T12:24:59Z  mg-446b   pm-onethird   446b     done              0  INDEPENDENT AUDIT of whatever mg-8fd1 produces (pre-filed) — it reports on a document ra
+  2026-07-30T12:25:04Z  mg-ae62   pm-onethird   ae62     done              0  Land mg-e720's REMAINING two BROKEN items (B2 and B3) — B1 is done by mg-3f21, do not to
+  2026-07-30T12:51:00Z  mg-a053   pm-onethird   a053     done              0  Repair the proof, not the theorem: mg-446b found a FALSE SENTENCE inside the Sn-stabilit
+  2026-07-30T13:14:15Z  mg-7735   pm-onethird   7735     done              0  Land mg-6a2f: the restructure LOST NOTHING (verified twice, independently) — fix the two
+  2026-07-30T13:22:41Z  mg-ebd8   pm-onethird   ebd8     done              0  Daniel priority 2: LOCATE the construction in the existing literature — does it generali
+  2026-07-30T13:38:41Z  mg-24a3   pm-onethird   24a3     done              0  Daniel priority 1: how would a 1/3-2/3 COUNTEREXAMPLE behave under this action — derive 
+  2026-07-30T13:41:42Z  mg-bd41   pm-onethird   bd41     done              0  INDEPENDENT AUDIT of whatever mg-7735 produces (pre-filed) — primary target is the NEW s
+  2026-07-30T13:50:21Z  mg-d673   pm-onethird   d673     done              0  INDEPENDENT AUDIT of whatever mg-ebd8 produces (pre-filed) — a locating exercise, so the
+  2026-07-30T14:06:41Z  mg-2da3   pm-onethird   2da3     done              0  REPAIR the blind certification in b68db5d (NOT the conclusion): a revision-pinned batter
+  2026-07-30T14:18:44Z  mg-a7b4   pm-onethird   a7b4     done              0  INDEPENDENT AUDIT of whatever mg-24a3 produces (pre-filed) — a NULL result must be quant
+  2026-07-30T14:35:42Z  mg-2216   pm-onethird   2216     done              0  INDEPENDENT AUDIT of whatever mg-2da3 produces (pre-filed) — build your OWN mutation; a 
+  2026-07-30T14:37:05Z  mg-1953   pm-onethird   1953     done              0  REPAIR mg-ebd8's DERIVATIONS, not its locating: closed form drops acyclicity (455 spurio
+  2026-07-30T14:58:53Z  mg-7870   pm-onethird   7870     done              0  The repaired control is STILL blind: 8 of 14 mutations pass silently (38% of the certifi
+  2026-07-30T15:02:19Z  mg-3b51   pm-onethird   3b51     done              0  INDEPENDENT AUDIT of whatever mg-1953 produces (pre-filed) — check the acyclicity fix OU
+  2026-07-30T15:21:04Z  mg-babf   pm-onethird   babf     done              0  INDEPENDENT AUDIT of whatever mg-7870 produces (pre-filed) — THIRD control in this linea
+  2026-07-30T15:23:58Z  mg-dea5   pm-onethird   dea5     done              0  mg-24a3's NULL IS FALSE and there is a signal under it: the e=3 control group is VACUOUS
+  2026-07-30T15:25:14Z  mg-af28   pm-onethird   af28     done              0  Daniel's generalisation question is NOT settled: run the search that row Q's no omitted 
+  2026-07-30T15:32:13Z  mg-aec7   pm-onethird   aec7     done              0  Clear mg-3b51's 4 MINOR: R1d is a RESTATEMENT labelled as a control (restricted to AC(P)
+  2026-07-30T15:56:58Z  mg-6ad0   pm-onethird   6ad0     done              0  INDEPENDENT AUDIT of whatever mg-af28 produces (pre-filed) — the ticket exists because a
+  2026-07-30T15:59:52Z  mg-4acd   pm-onethird   4acd     done              0  The digest works; the blind spot moved UP into the LOCATOR — 4 mutations change no certi
+  2026-07-30T16:09:15Z  mg-0a11   pm-onethird   0a11     done              0  INDEPENDENT AUDIT of whatever mg-dea5 produces (pre-filed) — verify the NEW control grou
+  2026-07-30T16:21:59Z  mg-218d   pm-onethird   218d     done              0  INDEPENDENT AUDIT of whatever mg-4acd produces (pre-filed) — FIFTH control in the lineag
+  2026-07-30T16:52:36Z  mg-7d75   pm-onethird   7d75     done              0  Daniel's ACTUAL question, not the one we answered twice: is there ONE categorical operat
+  2026-07-30T17:25:48Z  mg-a61f   pm-onethird   a61f     done              0  INDEPENDENT AUDIT of whatever mg-7d75 produces (pre-filed) — PRIMARY TARGET is its own p
+  2026-07-30T17:30:12Z  mg-5800   pm-onethird   5800     done              0  INDEPENDENT AUDIT of whatever mg-41aa produces (pre-filed) — a repair of two negatives r
+  2026-07-30T18:09:45Z  mg-6f61   pm-onethird   6f61     done              0  Repair mg-7d75 from mg-a61f: a FALSE extremal claim refuted by the document's own table 
+  2026-07-30T18:43:50Z  mg-db09   pm-onethird   db09     done              0  Daniel's proposed generalisation: category + rank function + multiplicity-free branching
+  2026-07-30T19:05:45Z  mg-e1d0   pm-onethird   e1d0     done              0  Close mg-3c24 (dropped, recovered by the successor detector): a commit ENLARGED mg-d39d'
+  2026-07-30T19:05:49Z  mg-da45   pm-onethird   da45     done              0  Close mg-f1b2 (dropped, recovered by the successor detector): row I4's condition is righ
+  2026-07-30T19:18:45Z  mg-73df   pm-onethird   73df     done              0  INDEPENDENT AUDIT of the mg-7d75 repair — scope widened to the FINAL document state (mg-
+  2026-07-30T19:24:32Z  mg-2060   pm-onethird   2060     done              0  INDEPENDENT AUDIT of the Bratteli locating ticket (pre-filed in the SAME ACTION) — verif
+  2026-07-30T19:34:45Z  mg-f922   pm-onethird   f922     done              0  INDEPENDENT AUDIT of the mg-3c24 repair (pre-filed in the SAME ACTION) — verify the ENLA
+  2026-07-30T19:39:49Z  mg-1c80   pm-onethird   1c80     done              0  INDEPENDENT AUDIT of the mg-f1b2 repair (pre-filed in the SAME ACTION) — the failure mod
+  2026-07-30T20:01:16Z  mg-a4ef   pm-onethird   a4ef     done              0  mg-73df MAJOR: X3 — the repair's OWN central correction — is still in force AT SOURCE in
+  2026-07-30T20:08:53Z  mg-8e30   pm-onethird   8e30     done              0  mg-f922: the enlargement IS recorded, but the gap disclosed as CURRENT is pre-edit — the
+  2026-07-30T20:21:08Z  mg-5f9a   pm-onethird   5f9a     done              0  mg-1c80: the replacement reason is STILL not a trace — deciding_gate is a priority relab
+  2026-07-30T20:24:01Z  mg-e8b8   pm-onethird   e8b8     done              0  Repair mg-db09 from mg-2060: the document asserts TWICE that the TL tower is multiplicit
+  2026-07-30T20:29:17Z  mg-8a5c   pm-onethird   8a5c     done              0  INDEPENDENT AUDIT of the mg-f922 repair (pre-filed SAME ACTION) — re-measure from the PO
+  2026-07-30T20:38:58Z  mg-d0e2   pm-onethird   d0e2     done              0  INDEPENDENT AUDIT of the mg-1c80 repair (pre-filed SAME ACTION) — apply the DELETION TES
+  2026-07-30T20:47:18Z  mg-7dd3   pm-onethird   7dd3     done              0  INDEPENDENT AUDIT of the mg-73df repair (pre-filed in the SAME ACTION) — third generatio
+  2026-07-30T20:49:52Z  mg-a318   pm-onethird   a318     done              0  mg-8a5c: the new figure gate is a PRESENCE TEST and passes while the figure a reader rea
+  2026-07-30T20:55:40Z  mg-a218   pm-onethird   a218     done              0  INDEPENDENT AUDIT of the mg-db09 repair (pre-filed SAME ACTION) — if the example is re-e
+  2026-07-30T21:26:02Z  mg-04a8   pm-onethird   04a8     done              0  mg-d0e2: deletion test now bites 7 of 9 but 2 still move nothing, and the repair's OWN c
+  2026-07-30T21:31:06Z  mg-835f   pm-onethird   835f     done              0  INDEPENDENT AUDIT of the mg-8a5c repair (pre-filed SAME ACTION) — mutate the figure AT E
+  2026-07-30T21:32:48Z  mg-13b2   pm-onethird   13b2     done              0  mg-a218: the vertex column is still a COUNT where the hypothesis is about a SET — the se
+  2026-07-30T21:42:31Z  mg-d633   pm-onethird   d633     done              0  mg-7dd3: TWO OF FOUR printed extents are WIDER than the code reads (the concentrated-tru
+  2026-07-30T21:57:56Z  mg-e7bc   pm-onethird   e7bc     done              0  INDEPENDENT AUDIT of the mg-d0e2 repair (pre-filed SAME ACTION) — run the repaired check
+  2026-07-30T22:03:19Z  mg-d330   pm-onethird   d330     done              0  INDEPENDENT AUDIT of the mg-a218 repair (pre-filed SAME ACTION) — every disposition labe
+  2026-07-30T22:10:13Z  mg-8916   pm-onethird   8916     done              0  mg-835f PARTIAL: the gate reads the figure at the site (12 of 12 both ways) but a wrong 
+  2026-07-30T22:26:56Z  mg-6cb9   pm-onethird   6cb9     done              0  INDEPENDENT AUDIT of the mg-7dd3 repair (pre-filed SAME ACTION) — re-measure ALL FOUR ex
+  2026-07-30T22:41:25Z  mg-8aae   pm-onethird   8aae     done              0  INDEPENDENT AUDIT of the mg-835f repair (pre-filed SAME ACTION) — a derivation that is r
+  2026-07-30T22:42:55Z  mg-9220   pm-onethird   9220     done              0  mg-e7bc: the deletion test was applied at the GATE level but the shape gate has TWO retu
+  2026-07-30T22:49:19Z  mg-58da   pm-onethird   58da     done              0  mg-d330 PARTIAL: c1_branching.py produced the 198-cell reproduction AND now reports 24 f
+  2026-07-30T23:23:09Z  mg-c4c8   pm-onethird   c4c8     done              0  INDEPENDENT AUDIT of the mg-e7bc repair (pre-filed SAME ACTION) — verify deletion runs p
+  2026-07-30T23:27:23Z  mg-321d   pm-onethird   321d     done              0  INDEPENDENT AUDIT of the mg-d330 repair (pre-filed SAME ACTION) — verify the two questio
+  2026-07-30T23:50:00Z  mg-821e   pm-onethird   821e     done              0  mg-6cb9: extents verified both ways and the cross-section check FIRES — but 'every regul
+  2026-07-31T00:07:26Z  mg-8eca   pm-onethird   8eca     done              0  mg-8aae: the census is a MULTISET so exchanging two declared figures is silent (2 of 2),
+  2026-07-31T00:19:48Z  mg-64b6   pm-onethird   64b6     done              0  mg-c4c8: the grain error recurred at CLAUSE level (two returns became two clauses of one
+  2026-07-31T00:35:11Z  mg-4700   pm-onethird   4700     done              0  INDEPENDENT AUDIT of the mg-6cb9 repair (pre-filed SAME ACTION) — a contingent extent lo
+  2026-07-31T00:55:41Z  mg-c2b3   pm-onethird   c2b3     done              0  ARC-WIDE: 23 of 63 run_all.sh use '| tee' and only 1 sets pipefail — any of them can pri
+  2026-07-31T00:55:55Z  mg-7e58   pm-onethird   7e58     done              0  mg-321d: set-level corroboration RESTORED (10 of 10 pairs at 24 of 24 cells, all five re
+  2026-07-31T01:05:39Z  mg-0b07   pm-onethird   0b07     done              0  INDEPENDENT AUDIT of the mg-c4c8 repair (pre-filed SAME ACTION) — if the declaration is 
+  2026-07-31T01:05:44Z  mg-9207   pm-onethird   9207     done              0  INDEPENDENT AUDIT of the mg-8aae repair (pre-filed SAME ACTION) — demonstrate both check
+  2026-07-31T01:45:39Z  mg-957f   pm-onethird   957f     done              0  INDEPENDENT AUDIT of the mg-321d repair (pre-filed SAME ACTION) — re-derive every attrib
+  2026-07-31T02:01:22Z  mg-05eb   pm-onethird   05eb     done              0  INDEPENDENT AUDIT of the tee sweep (pre-filed SAME ACTION) — the RETROACTIVE half is the
+  2026-07-31T02:17:38Z  mg-f7e1   pm-onethird   f7e1     done              0  mg-0b07: CLAUSE IS NOT THE FLOOR — the shape comparison is a disjunction spelled WITHOUT
+  2026-07-31T03:00:44Z  mg-5040   pm-onethird   5040     done              0  mg-4700: 'every regular file' is TRUE BY ACCIDENT for a SECOND generation (no subdirecto
+  2026-07-31T03:03:36Z  mg-76cc   pm-onethird   76cc     done              0  mg-957f, TWO sites: (1) THE KERNEL HALF OF THE PREDICATE IS GONE — first repair in this 
+  2026-07-31T03:25:52Z  mg-ff3e   pm-onethird   ff3e     done              0  mg-9207: the census invariance MOVED rather than went away — position-aware for FIGURES 
+  2026-07-31T03:37:51Z  mg-eaef   pm-onethird   eaef     done              0  INDEPENDENT AUDIT of the mg-0b07 repair (pre-filed SAME ACTION) — if it stated a bound, 
+  2026-07-31T03:41:41Z  mg-e34a   pm-onethird   e34a     done              0  INDEPENDENT AUDIT of the mg-957f repair (pre-filed SAME ACTION) — run the PRE-REPAIR pre
+  2026-07-31T04:00:34Z  mg-ec07   pm-onethird   ec07     done              0  INDEPENDENT AUDIT of the mg-9207 repair (pre-filed SAME ACTION) — did it fix the SET or 
+  2026-07-31T04:02:57Z  mg-7522   pm-onethird   7522     done              0  mg-05eb, THREE sites: (1) the sweep population was a FILENAME and 2 runners with 8 pipel
+  2026-07-31T04:31:54Z  mg-6ef4   pm-onethird   6ef4     done              0  INDEPENDENT AUDIT of the mg-4700 repair (pre-filed SAME ACTION) — did it SUBTRACT or wid
+  2026-07-31T04:48:37Z  mg-fccb   pm-onethird   fccb     done              1  DROPPED VERDICT mg-d112 (2026-07-29, no landing commit, no successor): an UNFLAGGED DIRE
+  2026-07-31T04:48:42Z  mg-69d1   pm-onethird   69d1     done              0  TWO sites: (1) mg-eaef — the stated bound is WIDER than the sweep with 4 of 15 operands 
+  2026-07-31T04:52:27Z  mg-dee4   pm-onethird   dee4     done              0  INDEPENDENT AUDIT of the mg-05eb repair (pre-filed SAME ACTION) — do not check the popul
+  2026-07-31T04:53:27Z  mg-6df0   pm-onethird   6df0     done              0  mg-ec07 verdict repairs (merged 8cdda32, NEVER ROUTED TO ME): reseal's refusal excludes 
+  2026-07-31T05:06:21Z  mg-dffa   pm-onethird   dffa     done              0  DROPPED VERDICT mg-5800 (2026-07-30, no successor): repair HOLDS with 0 BROKEN and the c
+  2026-07-31T05:13:35Z  mg-8a71   pm-onethird   8a71     done              0  INDEPENDENT AUDIT of the mg-d112 direction-error repair (pre-filed SAME ACTION) — RE-DER
+  2026-07-31T05:25:40Z  mg-2c77   pm-onethird   2c77     done              0  INDEPENDENT AUDIT of the bound-and-reason repair (pre-filed SAME ACTION) — target the RE
+  2026-07-31T05:28:32Z  mg-7e39   pm-onethird   7e39     done              0  INDEPENDENT AUDIT of the mg-ec07 verdict repairs (pre-filed SAME ACTION) — build the ful
+  2026-07-31T06:59:15Z  mg-19ec   pm-onethird   19ec     done              0  INDEPENDENT AUDIT of the mg-5800 warrant narrowing (pre-filed SAME ACTION) — audit the R
+  2026-07-31T07:13:43Z  mg-3934   pm-onethird   3934     done              0  CI RED ON MAIN 21 HOURS: Gate mutation demo dies at the mg-75f0 step reading a file at h
+  2026-07-31T07:24:23Z  mg-069f   pm-onethird   069f     done              3  mg-8a71 verdict repairs: the repair STATED the wrong-claim-must-not-stay-in-the-body sta
+  2026-07-31T08:05:22Z  mg-70c7   pm-onethird   70c7     done              0  mg-dee4 verdict repairs: '11 of 11 read directly' is ELEVEN LINES and 4 of 8 EXECUTIONS 
+  2026-07-31T08:09:10Z  mg-3f3b   pm-onethird   3f3b     done              0  mg-7e39 verdict repairs: n/a IS WHERE A MATRIX HIDES (1 of 8 n/a reasons is a fact about
+  2026-07-31T08:20:07Z  mg-8d5e   pm-onethird   8d5e     done              0  mg-2c77 verdict repairs: A DERIVED ANCHOR RE-POINTED WHEN A SENTENCE WAS EDITED - both s
+  2026-07-31T09:08:25Z  mg-0242   pm-onethird   0242     done              0  INDEPENDENT AUDIT of the mg-8a71 body-strike and population repair (pre-filed SAME ACTIO
+  2026-07-31T09:08:30Z  mg-56dc   pm-onethird   56dc     done              0  INDEPENDENT AUDIT of the mg-dee4 grain-and-population repair (pre-filed SAME ACTION) — f
+  2026-07-31T09:41:10Z  mg-4adb   pm-onethird   4adb     done              0  mg-6ef4 verdict repairs: set -e is THE FIFTH RUNG AND ONE LINE OUTSIDE EVERY DELETION PO
+  2026-08-05T17:33:37Z  mg-f3ff   pm-onethird   f3ff     done              0  THE DROPPED-VERDICT CENSUS WAS BUILT FROM MAIL ROUTING, NOT THE TREE, AND IS PROVEN WRON
+  2026-08-05T21:55:49Z  mg-d53d   pm-onethird   d53d     done              3  INDEPENDENT AUDIT of the mg-6ef4 deletion-population repair (pre-filed SAME ACTION) — de
+  2026-08-05T21:55:53Z  mg-0120   pm-onethird   y0120    done              1  THE AUDITOR'S OWN RECORD IS PARTLY A CONSTANT — claims16eb.py carries 4 of its 17 verdic
+  2026-08-06T00:10:23Z  mg-6e58   pm-onethird   z6e58    done              0  THE POPULATION OF THIS ARC IS DEFINED BY A CAPITAL LETTER — _HASH_FORMATS omits --format
+  2026-08-06T00:19:08Z  mg-77e6   pm-onethird   x77e6    done              5  INDEPENDENT AUDIT of mg-9d7b (filed LATE) — the 15-channel enumeration: the verdict says
+  2026-08-06T00:25:20Z  mg-9a59   pm-onethird   z9a59    done              1  mg-a471's remainder: a vacuous exit 0 over ZERO gate runs, a fallback sentence whose con
+  2026-08-06T00:37:17Z  mg-5f7c   pm-onethird   z5f7c    done              0  The repo's ONLY suppression instrument fails CLOSED while its docstring and README both 
+  2026-08-06T00:37:28Z  mg-1d26   pm-onethird   z1d26    done              0  THE HOLE IS 3x WIDER THAN CERTIFIED AND MOSTLY SILENT — 6 deletions outside the certifie
+  2026-08-06T00:48:36Z  mg-c3ca   pm-onethird   zc3ca    done              0  L1b IS THE WHOLE REMAINING GAP: frozen => lambda_std -> 1. The Cheeger chain is PROVEN e
+  2026-08-06T02:50:16Z  mg-a266   pm-onethird   za266    done              0  INDEPENDENT AUDIT of the mg-a471 remainder (pre-filed SAME ACTION) — prove ALL_PASS cann
+  2026-08-06T05:24:00Z  mg-1abe   pm-onethird   z1abe    done              0  COMMITTED FIGURES DO NOT REPRODUCE FROM THE REVISIONS THEY NAME — four independent sight
+  2026-08-06T11:48:19Z  mg-ba2a   pm-onethird   aba2a    done              0  RESOLVED — main was red 11h on a 22-char literal that was never a revision at all: the T
+  2026-08-06T16:09:35Z  mg-ec63   pm-onethird   zec63    done              0  ARC-WIDE RUNNER IDIOM: 86 of 109 runners truncate their transcript BEFORE the probe read
+  2026-08-06T16:24:32Z  mg-a84b   pm-onethird   ba84b    done              0  INDEPENDENT AUDIT of the rotted-pin fix (pre-filed SAME ACTION) — confirm main is GREEN,
+  2026-08-06T17:54:01Z  mg-2860   pm-onethird   c2860    done              0  STATE.md LEADS WITH THE OVER-STRONG FORM: the wall and the axis summary both state lambd
+  2026-08-06T17:55:37Z  mg-b0ae   pm-onethird   bb0ae    done              0  INDEPENDENT AUDIT of the STATE.md relocation (pre-filed SAME ACTION) — byte-account the 
+  2026-08-06T18:18:05Z  mg-40e4   pm-onethird   c40e4    done              0  INDEPENDENT AUDIT of mg-5f7c (pre-filed SAME ACTION) — the suppression instrument: check
+  2026-08-06T18:48:35Z  mg-e12a   pm-onethird   ce12a    done              0  INDEPENDENT AUDIT of the gate-watchlist repair (pre-filed SAME ACTION) — if the watchlis
+  2026-08-06T20:19:00Z  mg-5035   pm-onethird   c5035    done              0  figures() claims in its own comment to exclude a git revision and NEVER DID — an all-dec
+  2026-08-06T21:54:58Z  mg-1d6c   pm-onethird   c1d6c    done              1  The published corpus figure is EXACTLY HALF the population and the glob is the whole rea

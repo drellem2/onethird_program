@@ -1,0 +1,42 @@
+==============================================================================
+S1  parsing and resolution
+==============================================================================
+  [PASS] parse_ts on a normal stamp: got '2026-08-06 21:54:58', expected '2026-08-06 21:54:58'
+  [PASS] parse_ts on junk returns None: got None, expected None
+  [PASS] parse_ts on empty returns None: got None, expected None
+  [PASS] shape resolver on a bare id: got True, expected True
+  [PASS] shape resolver on a generation prefix: got True, expected True
+  [PASS] shape resolver refuses a two-character prefix: got False, expected False
+  [PASS] shape resolver refuses an unrelated agent: got False, expected False
+  [PASS] shape resolver refuses a name that merely CONTAINS the id: got False, expected False
+  [PASS] shape resolver declines a non-hex id: got set(), expected set()
+
+==============================================================================
+S2  Fisher exact, against values computable by hand
+==============================================================================
+  [PASS] 2x2 of all ones is p=1: got 1.0, expected 1.0
+  [PASS] perfect 3/3 separation: got 0.1, expected 0.1
+
+==============================================================================
+S3  regressions for defects found while building this
+==============================================================================
+  [PASS] DEFECT-5: a pid-suffixed claimed item is loaded: got True, expected True
+  [PASS] DEFECT-5: its id has no pid in it: got 'mg-aaaa', expected 'mg-aaaa'
+  [PASS] DEFECT-5: a .md.bak sidecar file is NOT loaded as an item: got False, expected False
+  [PASS] DEFECT-1: worker is displayed as the branch spells it: got 'y0120', expected 'y0120'
+  [PASS] DEFECT-1: matching still accepts the mg- spelling: got True, expected True
+
+==============================================================================
+S4  THE MUTATION TEST -- can D3's matched pair actually fail?
+==============================================================================
+  D3 asserts 1 dropped on arm A and 0 on arm B. That is only evidence if a
+  detector that answered the same thing regardless would be CAUGHT. Two
+  mutants are built and the pair must reject both.
+  [PASS] mutant always-DELIVERED is CAUGHT by the matched pair: got True, expected True
+        (mutant failed 8 construction(s): ['dropped verdicts reported', 'the reported drop is arm A', 'delivered verdicts reported', 'the delivery is arm B'])
+  [PASS] mutant always-DROPPED is CAUGHT by the matched pair: got True, expected True
+        (mutant failed 5 construction(s): ['dropped verdicts reported', 'the reported drop is arm A', 'delivered verdicts reported', 'the delivery is arm B'])
+
+==============================================================================
+SELF-TEST RESULT: 0 failure(s) []
+==============================================================================
