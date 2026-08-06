@@ -336,11 +336,19 @@ it accepts a transcript declaring `code/audit_c067`'s true digest at `47e56b3`
 and refuses one declaring a corrupted value. A control that has only ever been
 green has not been shown able to fire.
 
-**This census is the first adopter.** 6 of its own 7 transcripts declare a
-`code-digest` agreeing with the tree at HEAD. The seventh is
-`out_t5_control.txt` — the control's own transcript, which is still being
-written when it reads its directory, so it sees itself declaring nothing. That
-is a real defect of this instrument and it is kept rather than special-cased.
+**This census is the first adopter, and R3 was then run against it.** All
+**8 of its transcripts declare a `code-digest` of `29ab59a4f1f51e3d`, and that
+is the digest recomputed from the tree at `974ffcb`, the commit carrying
+them — 0 disagreeing.** The convention survives its own publishing step, which
+is the property it was designed for and the one mg-bf79's *a publisher is not a
+pin* says is easy to lose.
+
+The row inside `out_t5_control.txt` says 6 of 7 rather than 8 of 8, and the
+difference is a defect of the instrument rather than of the convention: t5
+reads its own directory while its own transcript is still being written, so it
+sees itself declaring nothing and t6's does not exist yet. The declaration is
+in the shipped bytes; the self-check just cannot see it at the moment it
+looks.
 
 **Coverage over the existing arc is 0 of 541** and will stay there until
 something adopts it. R1–R3 fix nothing retroactively, and that is the honest
@@ -474,10 +482,12 @@ Nine, all kept rather than tuned away.
 5. **The `run()` / `name="$1"` runner form was unparsed** until the self-test
    caught it, which would have mislabelled six transcripts' producers.
 
-6. **This control's own transcript declares nothing.** `out_t5_control.txt`
-   is still being written when t5 reads its own directory, so the first
-   adopter's coverage is 6 of 7 rather than 7 of 7 — by construction, in the
-   script that proposes the convention.
+6. **The first-adopter row under-reports itself.** t5 reads its own directory
+   while its own transcript is still being written and before t6's exists, so
+   it prints 6 of 7. Checked after the fact against the carrying commit, all
+   **8 of 8** agree. The convention is fine; the row that reports on it cannot
+   see the end of its own output, and a check that measures its subject
+   mid-write is a defect worth keeping visible.
 
 7. **31 transcripts have no runner and this census says nothing about them.**
    Not *they are fine* — nothing.
