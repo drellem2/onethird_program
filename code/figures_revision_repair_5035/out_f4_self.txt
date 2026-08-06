@@ -1,0 +1,113 @@
+==========================================================================
+F4  THIS TREE HELD TO ITS OWN STANDARD
+==========================================================================
+
+--------------------------------------------------------------------------
+F4a  DID THE TRIPWIRES FIRE?  proved, not asserted
+--------------------------------------------------------------------------
+
+  Two selftests in the arc carried the false exclusion ASSERTED AS
+  FALSE, each with a comment saying a later fix would turn it red and
+  name itself.  A ticket that edits them and says `they fired` has
+  proved nothing.  So the OLD assertions are re-run here against the
+  REPAIRED rule; each must now be false.
+
+      selftestbf79.py  (mg-bf79/P4e)     old assertion holds: False  FIRED
+      selftest03d1.py  (mg-03d1)         old assertion holds: False  FIRED
+
+  population: the 2 TRIPWIRES in the arc that assert this exclusion
+  as false
+      ...TRIPWIRES that went red on this repair                           2
+      ^ one unit of that number is one selftest case
+
+  AND THEY ARE RE-POINTED, NOT DELETED.  Both files now assert the new
+  truth AND keep a sentence recording that the claim was false for the
+  whole life of the rule.  Checked by reading the source:
+      code/runner_exit_repair_bf79/selftestbf79.py         records that it fired: yes
+      code/grain_axis_audit_03d1/selftest03d1.py           records that it fired: yes
+--------------------------------------------------------------------------
+F4b  IS THERE STILL ONE IMPLEMENTATION OF `figures`?
+--------------------------------------------------------------------------
+
+  mg-bf79's O4 was *two copies of this rule disagree*.  Repairing the
+  rule by adding a fourth copy would be the same defect wearing this
+  ticket's name.  population: every `def figures` in `code/*/lib*.py`
+  plus every file in this tree.
+
+      code/runner_exit_audit_56dc/lib56dc.py               own body   3 stmt(s)
+      code/runner_exit_repair_70c7/lib70c7.py              delegates  1 stmt(s)
+      code/runner_exit_repair_7522/lib7522.py              own body   3 stmt(s)
+
+      ...DEFINITIONS of `figures` in the arc                              3
+      ^ one unit of that number is one function definition
+      ...of those that carry their OWN BODY                               2
+      ^ one unit of that number is one function definition
+
+  EXPECTED: 3 definitions, 2 with own bodies -- `lib7522` (the repaired
+  implementation) and `lib56dc` (the untouched control) -- and
+  `lib70c7` delegating.  THIS TREE DEFINES NONE.
+      ...DEFINITIONS of `figures` in mg-5035's own tree                   0
+      ^ one unit of that number is one function definition
+--------------------------------------------------------------------------
+F4c  IS THE POSITIVE CONTROL STILL UNREPAIRED?
+--------------------------------------------------------------------------
+
+      `lib56dc.py` carries none of mg-5035's rule: yes
+      lib56dc still reads `at 1234567 ...` as a figure:      yes
+
+  A negative needs an instrument that could have shown the positive.
+  This is that instrument, and it is checked every run rather than
+  assumed to have stayed put.
+--------------------------------------------------------------------------
+F4d  DOES EVERY COUNT ROW HERE NAME ITS POPULATION AND ITS GRAIN?
+--------------------------------------------------------------------------
+
+  mg-bf79's standard, adopted: the grain lives in the row, not in a
+  column header.  Measured over this tree's OWN committed transcripts.
+
+  population: the 6 committed transcripts of this tree
+      ...COUNT ROWS printed by this tree                                 35
+      ^ one unit of that number is one printed count row
+      ...COUNT ROWS whose next line names the grain of the value         35
+      ^ one unit of that number is one printed count row
+--------------------------------------------------------------------------
+F4e  WHAT THIS TREE CANNOT SEE ABOUT ITSELF
+--------------------------------------------------------------------------
+
+  (1) THIS TREE IS INSIDE THE CORPUS IT CENSUSES.  `F2a` ranges over
+      every tracked `.md`/`.txt`/`.py`, and that now includes this
+      directory.  Two of the excluded tokens F1c prints are in
+      `PREDICTIONS.md` and in `lib7522.py`'s own new comment: the rule
+      excludes the counter-example its documentation writes down,
+      because a sentence explaining `at HEAD is 431723379` is itself a
+      line declaring a revision.  That is not a bug and it is not
+      hidden; it is the reason F1c prints every non-resolving exclusion
+      by file and line instead of only counting them.
+
+  (2) F4d CANNOT SEE ITS OWN TRANSCRIPT ON A FIRST RUN.  `run_all.sh`
+      writes to `out_*.txt.new` and moves at the end, so this probe
+      reads the PREVIOUS run's `out_f4_self.txt`.  On a clean tree that
+      file does not exist and its rows are simply absent from the
+      count above.  mg-bf79's defect #7 and mg-03d1's A4 are about
+      exactly this; the `.new`+`mv` idiom is inherited from them and
+      the residue is stated rather than claimed away.
+
+  (3) THE ORACLE IS NOT TRUTH.  F1c scores against `git rev-parse`.
+      Its 4 disagreements are all lines that NAME a revision which
+      simply does not exist in this repository -- a `REVS = [...]`
+      fixture and two sentences about the defect.  Read as revisions
+      by a human, the rule is right and the oracle is wrong on all
+      four.  I did not adjust either; both readings are printed.
+
+==========================================================================
+F4 TOTAL BAD: 0
+==========================================================================
+
+
+EXTENT OF THAT NUMBER.  It counts a tripwire that did not fire, a
+tripwire edited without recording that it had, a `figures` definition
+in this tree, a population of definitions that is not 3-with-2-bodies,
+a repaired positive control, and a count row of this tree with no
+grain line under it.
+
+FINDING: F4a 2 of 2 arc tripwires asserting this exclusion as false went RED on the repair and both are re-pointed rather than deleted; `figures` has 3 definition(s) in the arc with 2 own body(ies) and 0 in this tree; 35 of 35 count rows here name their grain

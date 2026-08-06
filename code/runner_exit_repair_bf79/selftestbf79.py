@@ -184,11 +184,19 @@ ck("a `:`-prefixed number is not a figure",
    B.L.figures("s3_figure.py:154"), [])
 ck("`on line 89` is not a figure", B.L.figures("on line 89"), [])
 print()
-print("  AND THE FALSE EXCLUSION, asserted as FALSE so the finding cannot")
-print("  silently become true and go unnoticed -- if a later ticket fixes")
-print("  `figures()` this row goes red and names itself:")
-ck("an all-digit short revision IS read as a figure (P4e)",
-   B.L.figures("at 3738079 the census"), [3738079])
+print("  THE FALSE EXCLUSION WAS ASSERTED AS FALSE HERE, so that a later")
+print("  ticket fixing `figures()` would turn this row red and name itself.")
+print("  IT FIRED.  mg-5035 repaired the rule and this row went red, which is")
+print("  the only reason it is being edited now -- the tripwire worked and is")
+print("  re-pointed at the new truth rather than deleted, because a deleted")
+print("  tripwire leaves nothing to say the claim was ever false:")
+ck("an all-digit DECLARED revision is NOT a figure (P4e closed by mg-5035)",
+   B.L.figures("at 3738079 the census"), [])
+print("      ^ was `[3738079]` from mg-70c7 until mg-5035.  The claim")
+print("        `figures() excludes a git revision` was FALSE for the whole")
+print("        life of the rule and is true from `mg-5035` on.")
+ck("...and a revision-shaped number with NO declaration is still a figure",
+   B.L.figures("brute force over all 33554432 relations"), [33554432])
 print()
 ck("the two `alternatives()` agree on `MARK`",
    B.M.alternatives(B.L.MARK) == B.L.alternatives(B.L.MARK), True)

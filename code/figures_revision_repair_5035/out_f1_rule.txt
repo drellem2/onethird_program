@@ -1,0 +1,184 @@
+==========================================================================
+F1  THE REPAIRED RULE, SCORED IN BOTH DIRECTIONS
+==========================================================================
+
+--------------------------------------------------------------------------
+F1a  CONSTRUCTED ALL-DECIMAL SHORT REVISIONS -- are they excluded now?
+--------------------------------------------------------------------------
+
+  Every token below is ALL DECIMAL DIGITS.  A hex-containing revision
+  was never the defect: `_NUMBER` cannot match one, so it was already
+  excluded and proves nothing.  The last three rows are constructed --
+  they name no object in this repository -- which is the point: the
+  repaired rule reads the TEXT and never asks the object database, so a
+  revision that does not exist yet is excluded exactly as one that does.
+
+      token          alldec    resolves  BEFORE   AFTER   
+      1234567        yes       no        FIGURE   -         EXCLUDED
+      3738079        yes       yes       FIGURE   -         EXCLUDED
+      4785086        yes       yes       FIGURE   -         EXCLUDED
+      8490669        yes       yes       FIGURE   -         EXCLUDED
+      3756553        yes       yes       FIGURE   -         EXCLUDED
+      5988134        yes       yes       FIGURE   -         EXCLUDED
+      3942319        yes       yes       FIGURE   -         EXCLUDED
+      9999999        yes       no        FIGURE   -         EXCLUDED
+      0123456789     yes       no        FIGURE   -         EXCLUDED
+      12345678901234567890123456789012345678 yes       no        FIGURE   -         EXCLUDED
+
+  population: the 10 CONSTRUCTED all-decimal declared-revision lines
+      ...LINES on which the repair excludes the revision                 10
+      ^ one unit of that number is one constructed line
+
+  AND THE ONE THE TICKET NAMES.  `3738079` is the revision mg-bf79's
+  own `r6_self.py` E2 reported as A FIGURE NO TRANSCRIPT BACKS.  It is
+  row 2 above and it is excluded.
+--------------------------------------------------------------------------
+F1b  NEGATIVE CONTROL -- genuine figures that carry the revision SHAPE
+--------------------------------------------------------------------------
+
+  These are real measurements of this corpus, all revision-shaped.  A
+  magnitude rule drops every one of them; that is why the repair is not
+  a magnitude rule.  Each MUST survive.
+
+      431723379        kept      (16999 classes, 431723379 labelled posets)
+      2147483647       kept      figures including `2147483647`, an INT_MAX i
+      1103515245       kept      st = (1103515245 * st + 12345) % (1 << 31)
+      33554432         kept      n = 5   route: brute force over all 33554432
+      20260730         kept      rng = random.Random(20260730)
+      92369333         kept      6       318    117169     37029       923693
+      4770003          kept      flat evaluations               : 4770003
+      67327446062800   kept      11 | 50 |         21 | inherit | inherit | 1
+
+  population: the 8 GENUINE FIGURES above, each revision-shaped
+      ...GENUINE FIGURES the repair still reports                         8
+      ^ one unit of that number is one figure
+--------------------------------------------------------------------------
+F1c  PRECISION AND RECALL over every tracked .md/.txt/.py
+--------------------------------------------------------------------------
+
+  Scored against `git rev-parse`, used AS AN ORACLE TO LABEL TOKENS and
+  never as a rule -- `lib7522.figures` does not call git.  The oracle is
+  itself imperfect and is not treated as truth: F1d reads the rows.
+
+  population: every tracked .md/.txt/.py at HEAD
+      ...OCCURRENCES of a revision-SHAPED token                         290
+      ^ one unit of that number is one token on one line
+      ...DISTINCT revision-shaped TOKENS                                 50
+      ^ one unit of that number is one distinct token
+      ...DISTINCT TOKENS that resolve as a git object (oracle)           20
+      ^ one unit of that number is one distinct token
+
+      ...OCCURRENCES the repair now excludes                             49
+      ^ one unit of that number is one token on one line
+      ...DISTINCT TOKENS excluded on at least one line                   14
+      ^ one unit of that number is one distinct token
+
+  AT THE GRAIN OF ONE DISTINCT TOKEN, against the oracle:
+      ...EXCLUDED TOKENS that resolve   (agreeing exclusions)            10
+      ^ one unit of that number is one distinct token
+      ...EXCLUDED TOKENS that do NOT resolve  (the risk direction)        4
+      ^ one unit of that number is one distinct token
+      ...RESOLVING TOKENS never excluded anywhere  (the gap)             10
+      ^ one unit of that number is one distinct token
+
+  precision 10/14   recall 10/20
+
+  THE NON-RESOLVING EXCLUSIONS, EVERY ONE PRINTED -- because this is
+  the direction `lib70c7`'s own sentence warns about and a count
+  without the rows is a count nobody can chase:
+      1234567        6 line(s); first: code/grain_axis_audit_03d1/a3_ledger.py:458
+          print("  NAMES it a revision, so `at `1234567`` is not a figure and `431723379")
+      2147483647     1 line(s); first: code/runner_exit_repair_7522/lib7522.py:840
+          revision.  `2147483647` on a line that does not say `commit` is still a
+      431723379      1 line(s); first: code/runner_exit_repair_7522/lib7522.py:784
+          # copula on this list, `at HEAD is 431723379` would lose a genuine figure.
+      9715841        2 line(s); first: code/grain_axis_audit_03d1/a3_ledger.py:465
+          REVS = ["1234567", "9715841", "973ca61", "0123456789"]
+--------------------------------------------------------------------------
+F1d  THE GAP, COUNTED RATHER THAN DISCOVERED LATER
+--------------------------------------------------------------------------
+
+  A resolving token the rule does NOT exclude is a MISS.  PREDICTIONS
+  P1b/P1c say the misses are dominated by fixed-width transcript table
+  columns, where the token has no words to its left at all.  Scored:
+
+      23060750       bare code/transcript_census_1abe/out_t4_rebase.txt
+          23060750   106e1211   IDENTICAL   docs+repair: X3 IS CORRECTED AT SOURCE and there is
+      25392406       cued code/transcript_census_1abe/out_t4_rebase.txt
+          4daa1fc7   25392406   IDENTICAL   evidence: the committed outputs of a full run — 8 of
+      253924065      cued code/census_repair_f3ff/out_s4_crosscheck.txt
+          ADDED   253924065  owner=mg-16eb  evidence: the committed outputs of a full run — 8 of 8
+      37380799       bare code/transcript_census_1abe/out_t3_shas.txt
+          37380799   STALE          bba2a3ce   predictions: mg-bf79's predictions for the r
+      39423190       cued code/transcript_census_1abe/out_t4_rebase.txt
+          83f218c2   39423190   IDENTICAL   repair: EIGHT IS NOT THE POPULATION EITHER — the 33-
+      47850862       cued code/transcript_census_1abe/out_t4_rebase.txt
+          96670ebb   47850862   IDENTICAL   docs+repair: mg-7e39's FOUR FINDINGS LANDED — `n/a`
+      53091324       bare code/transcript_census_1abe/out_t3_shas.txt
+          53091324   STALE          9237de01   predictions: mg-97fb's predictions for the i
+      72099115       cued code/transcript_census_1abe/out_t4_rebase.txt
+          fa36794f   72099115   IDENTICAL   evidence: e2's own transcript regenerated with the r
+      85865714       bare code/transcript_census_1abe/out_t4_rebase.txt
+          85865714   77306a7f   IDENTICAL   docs+repair: THE REFUSAL IS KEYED ON THE ROW'S HEADI
+      89626288       bare code/transcript_census_1abe/out_t4_rebase.txt
+          89626288   bd24efc9   IDENTICAL   docs+audit: independent audit of the mg-3f3b n/a-and
+
+  population: the 10 RESOLVING TOKENS the repair does not exclude
+      ...MISSES whose first occurrence has NO word to its left            5
+      ^ one unit of that number is one distinct token
+--------------------------------------------------------------------------
+F1f  THE RESIDUAL RISK THE COPULA FILLERS CREATE, MEASURED
+--------------------------------------------------------------------------
+
+  `HEAD is 3738079` did not read as a declaration until F1a went red on
+  it, so `is/was/are/were` joined the filler list.  That admits one
+  construction where a GENUINE figure could be lost -- a cue word,
+  a copula, then a measurement.  It is not asserted rare; it is counted.
+
+      at HEAD is 431723379 labelled posets           dropped: [431723379]
+      the count at HEAD was 2147483647               dropped: [2147483647]
+      the commit is 3738079                          dropped: [3738079]
+
+  Now the corpus, which is the number that matters.  A line is AT RISK
+  when the repair drops a token from it AND the token is followed by a
+  GRAIN NOUN -- a word, on the same line, right after the number.  A
+  revision is not counted in units of anything; a figure is.
+
+  population: the 49 OCCURRENCES the repair excludes
+      ...EXCLUDED OCCURRENCES followed by a candidate GRAIN NOUN          0
+      ^ one unit of that number is one token on one line
+      No excluded occurrence in the corpus is followed by a noun.
+      The risk is real and its realised count at HEAD is 0.
+--------------------------------------------------------------------------
+F1e  THE POSITIVE CONTROL -- can this instrument show the defect?
+--------------------------------------------------------------------------
+
+  A negative needs an instrument that could have shown the positive.
+  mg-56dc's `figures(line, small=)` is left UNREPAIRED on purpose
+  (PREDICTIONS/P2b).  Put the F1a lines to it: if it excluded them too,
+  F1a would be measuring nothing.
+
+  population: the 10 CONSTRUCTED lines of F1a
+      ...LINES where the UNREPAIRED copy still reads a FIGURE            10
+      ^ one unit of that number is one constructed line
+      The control fires on every row.  F1a is a difference.
+
+  AND THE FORWARDER.  `lib70c7.figures` is one statement returning
+  `lib7522.figures`, so it inherits the repair without being edited:
+      lib70c7.figures agrees with lib7522.figures on the F1a line: yes
+
+==========================================================================
+F1 TOTAL BAD: 0
+==========================================================================
+
+
+EXTENT OF THAT NUMBER.  It counts a constructed declared revision the
+repair still reads as a figure, a genuine revision-shaped figure the
+repair drops, a control row that stopped firing, and a disagreement
+between the forwarder and the implementation.  It ranges over the 10
+constructed lines, the 8 negative-control figures and the 290 shaped
+occurrences in the corpus.  IT DOES NOT COUNT F1d's misses: an
+under-exclusion is the error this rule chooses to make and is a
+MEASUREMENT, not a fault.
+
+FINDING: F1a the repaired rule excludes 10 of 10 CONSTRUCTED all-decimal declared revisions and drops 0 of 8 genuine revision-shaped figures; over the corpus it excludes 14 of 50 distinct shaped tokens, 10 of which resolve and 4 of which do not, leaving 10 resolving tokens unreached (5 of them bare table columns)

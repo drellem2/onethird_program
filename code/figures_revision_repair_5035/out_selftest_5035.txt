@@ -1,0 +1,37 @@
+mg-5035 -- SELF-TEST
+
+  population: the 27 CASES below, each an input whose answer is known
+  by construction
+
+      shape alone is not enough: no cue -> not a revision                  ok
+      cue alone is not enough: too short -> not a revision                 ok
+      41 digits is past a sha and is not revision-shaped                   ok
+      40 digits is exactly a full sha and IS revision-shaped               ok
+      7 digits is the shortest shape accepted                              ok
+      `at ` declares                                                       ok
+      backtick after the cue does not break it                             ok
+      `carried by ` declares through one filler                            ok
+      `HEAD is ` declares through a copula (the F1a defect)                ok
+      a sibling revision between cue and token is skipped                  ok
+      a GRAIN NOUN between cue and token BREAKS the declaration            ok
+      `rows` is not a filler, so it breaks it                              ok
+      nothing at all to the left is NOT a declaration (the table-column ga ok
+      a bare filename to the left is not a declaration                     ok
+      a declared all-decimal revision is not a figure                      ok
+      ...and the OTHER number on that line survives                        ok
+      INT_MAX in prose is still a figure                                   ok
+      a big measurement with a grain noun is still a figure                ok
+      the three OLD exclusions still hold: `:`-prefix                      ok
+      ...`on line 89`                                                      ok
+      ...and `2` is still not a figure                                     ok
+      `3` is a figure, as mg-bf79 settled                                  ok
+      a line naming the same revision twice loses it twice                 ok
+      dropped() is empty when nothing is declared                          ok
+      the UNREPAIRED control still reads the declared revision as a figure ok
+      ...and the forwarder does NOT, because it delegates                  ok
+      a deliberately wrong expectation is caught                           ok
+
+      ...CASES that pass, one CHECK each                                 27
+      ^ one unit of that number is one case
+
+selftest5035 TOTAL BAD: 0
