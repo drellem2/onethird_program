@@ -1,0 +1,137 @@
+
+==============================================================================
+S1  locate() -- BY CONTENT, AND IT REFUSES WHEN IT CANNOT BE SURE
+==============================================================================
+
+  finds a line that occurs once                                    ok
+  finds the right one of two identical lines, by its successor     ok
+  REFUSES a line that is not there                                 ok
+        The row that must say no.  A lookup that silently resolves to nothing
+        is a probe that measures nothing while printing a row.
+  REFUSES an ambiguous line with no successor given                ok
+  REFUSES a successor that does not follow it                      ok
+
+==============================================================================
+S2  Deletion -- REMOVES EXACTLY ONE LINE AND PUTS THE FILE BACK
+==============================================================================
+
+  the deleted line is reported verbatim                            ok
+  exactly that line is gone                                        ok
+  the file is byte-identical afterwards                            ok
+        Not `looks the same`: the bytes.
+  a file with no trailing newline keeps having none                ok
+  and its line count is what wc -l would say                       ok
+
+==============================================================================
+S3  disposition() -- FOUR STATES, EACH GIVEN AN INPUT THAT IS IT
+==============================================================================
+
+  exit 0    + anything at all                    -> GATE LOST      ok
+        got GATE LOST
+  exit 0    + *** STANDING UN-STRUCK ***         -> GATE LOST      ok
+        got GATE LOST
+  exit 1    + *** STANDING UN-STRUCK ***         -> GATE HELD, ATT ok
+        got GATE HELD, ATTRIBUTED
+  exit 2    + E2 FOUND NOTHING TO CHECK -- THIS  -> GATE HELD, ATT ok
+        got GATE HELD, ATTRIBUTED
+  exit 9    + *** NO VERDICT WAS DELIVERED.      -> GATE HELD, ATT ok
+        got GATE HELD, ATTRIBUTED
+  exit 1    + Traceback (most recent call last): -> GATE HELD, UNA ok
+        got GATE HELD, UNATTRIBUTED
+  exit None + half a run                         -> TIMED OUT      ok
+        got TIMED OUT
+  a GREEN run PRINTING the finding is still GATE LOST              ok
+        mg-6ef4's F3 is exactly this case.  Printing the finding while exiting
+        0 is never a mitigation: a reader's `&&` sees the code.
+
+==============================================================================
+S4  attribution() -- IT NAMES WHAT FIRED, AND SAYS SO WHEN NOTHING DOES
+==============================================================================
+
+  recognises `STANDING UN-STRUCK`                                  ok
+  recognises `FOUND NOTHING TO CHECK`                              ok
+  recognises `NO VERDICT WAS DELIVERED`                            ok
+  recognises `THE TWO ENUMERATIONS OF THIS POPULATION DISAGREE`    ok
+  recognises `THE VERDICT AND THE ROWS DISAGREE`                   ok
+  recognises `finding(s), expected 1`                              ok
+  recognises `FIRES,`                                              ok
+  recognises `*** FIRES ***`                                       ok
+  recognises `declined, NOT STATED`                                ok
+  returns nothing for output that names nothing                    ok
+        The row that must say no.  If this predicate matched anything, every
+        traceback would be counted as a control naming itself, and `loud` and
+        `mute` would stop being different columns.
+
+==============================================================================
+S5  THE SANDBOX IS GIT-BACKED, MEASURED BY RUNNING A CONTROL THAT NEEDS IT
+==============================================================================
+
+  A plain file copy has no `.git`, and in one the checker's census
+  anchor prints `NO REVISION` while every verdict still looks right.  A
+  sweep in such a sandbox would be certifying a checker with a control
+  silently switched off.  This is not asserted; the control is run and
+  its output is read.
+
+  the checker's census anchor resolves to a revision in the sandbo ok
+        MEASURED AT 28c8029 (mg-5040, on mg-4700's F3).
+
+==============================================================================
+S6  neutralise() -- AND WHAT IT DOES THE SECOND TIME
+==============================================================================
+
+  it removes at least one strike marker the first time             ok
+        code/face_geometry_repair_e35b/README.md carried 2 `~~` marker(s)
+  and none the second time                                         ok
+        The row that must say no.  If this said `2` again the count would be
+        of markers in a file it had already rewritten.
+  the neutralised sandbox is GREEN                                 ok
+        exit 0
+
+==============================================================================
+S7  THE PRE-REPAIR COPIES ARE THE PRE-REPAIR FILES
+==============================================================================
+
+  Their identity is established by WHAT THEY CONTAIN and by WHAT THEY
+  DO, never by a revision: the refinery rebases before merging, so a
+  recorded SHA is displaced on main and `git merge-base --is-ancestor`
+  gives a FALSE NEGATIVE (mg-c067, mg-a74f).  P2b's reproduction of
+  mg-d53d's six is the other half of this evidence and is the stronger
+  half.
+
+  the pre copy of e2 carries `sys.exit(1 if bad else 0)`           ok
+  and does not know about the dead man's switch                    ok
+  the pre copy of the kernel has no deliver() and no arm_verdict() ok
+  the repaired e2 has both, and no bare sys.exit of its own        ok
+  the repaired kernel has both                                     ok
+  the two pairs differ                                             ok
+        The row that must say no: if the copies matched the repaired files,
+        P2b would be sweeping the repair and calling the result a before-state.
+  every PRE entry naming e2 is present in that copy of e2          ok
+  every POST entry naming e2 is present in that copy of e2         ok
+
+==============================================================================
+S8  verdict_path() -- ON A TOY TREE WHOSE ANSWER IS KNOWN
+==============================================================================
+
+  a COMMENT after the gate is not the last command                 ok
+        got: python3 ../toy_checker/gate.py
+  the closure is transitive -- gate, helper AND deeper             ok
+        got: code/toy_checker/deeper.py, code/toy_checker/gate.py, code/toy_checker/helper.py, code/toy_runner/run_all.sh
+  standard-library imports are not in it                           ok
+  an import it cannot resolve is REPORTED and not dropped          ok
+        got: ['nowhere']
+  a runner whose last command is not a python3 call is reported    ok
+        The row that must say no.  A rule that quietly returned only the
+        runner file would report a one-file verdict path as a complete one.
+
+==============================================================================
+SELFTEST1D26 TOTAL BAD: 0
+SELFTEST1D26 PREDICTIONS SCORED: 0, MISSED: 0
+==============================================================================
+
+EXTENT.  These rows are about THIS INSTRUMENT's own helpers -- the
+lookup, the deletion operator, the two classifiers, the sandbox, the
+neutralisation, the pre-repair copies and the population rule.  They
+say NOTHING about the repair itself; P1, P2 and P3 do that, and this
+file exists so that a reader knows whether their machinery works before
+reading what it measured.

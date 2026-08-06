@@ -38,16 +38,10 @@ rather than asserting it.
 import os
 import re
 import subprocess
+import sys
 
 from kernd633 import (hdr, REPO, RUN_MIN, RUN_FRAC, md_files_and_residue,
-                      strike_findings, NEGATES, toks,
-                      arm_verdict, deliver, md_files_independently)
-
-# mg-1d26.  THE DEAD MAN'S SWITCH, ARMED BEFORE ANYTHING ELSE RUNS.  From here
-# to the `deliver()` at the foot of this file there is no line whose deletion
-# can leave this process exiting 0 without a verdict: falling off the end of
-# the module now exits 9 and says so.  See kernd633.arm_verdict.
-arm_verdict()
+                      strike_findings, NEGATES, toks)
 
 bad = 0
 ROOTS = [os.path.join(REPO, "docs"), os.path.join(REPO, "code")]
@@ -61,20 +55,6 @@ for r in ROOTS:
 FILES = sorted(set(FILES))
 DECLINED_STATED = sorted(set(DECLINED_STATED))
 DECLINED_UNSTATED = sorted(set(DECLINED_UNSTATED))
-
-# mg-1d26, on mg-d53d's finding 2.  `FILES += _f` above was the single most
-# valuable line in that audit's verdict: deleted alone, this checker read no
-# document, printed no row, said nothing and RETURNED 0.  Two of its
-# neighbours in `kernd633.md_files_and_residue` -- the `os.walk` header and an
-# `else:` -- did the same thing by shrinking the walk instead of emptying it.
-# A population is counted TWICE here, by two enumerations sharing no line, and
-# a disagreement is a finding with both deltas named.  It is not possible to
-# delete one line and leave the two agreeing on a population that is wrong.
-INDEPENDENT = md_files_independently(*ROOTS)
-POPULATION_SAYS = ("every *.md under docs/ and under code/, recursively, "
-                   "counted twice: os.walk with a stated residue, and glob")
-MISSING_FROM_WALK = [p for p in INDEPENDENT if p not in set(FILES)]
-MISSING_FROM_GLOB = [p for p in FILES if p not in set(INDEPENDENT)]
 
 
 def _anchor():
@@ -130,27 +110,6 @@ ANCHOR = _anchor()
 # ---------------------------------------------------------------------------
 hdr("E2a  EVERY STRIKE AGAINST ITS OWN DOCUMENT")
 
-# mg-1d26.  THE POPULATION, PRINTED FIRST AND NOT ONLY AT THE FOOT.  A reader
-# who sees no rows below must be able to tell "no document carries a strike"
-# from "no document was read", and until this ticket those two printed the
-# same thing: nothing.
-print("  POPULATION: %d markdown file(s) -- %s." % (len(FILES),
-                                                    POPULATION_SAYS))
-print("  The second enumeration found %d.  Grain: FILE." % len(INDEPENDENT))
-if MISSING_FROM_WALK or MISSING_FROM_GLOB:
-    bad += 1
-    print("  *** THE TWO ENUMERATIONS OF THIS POPULATION DISAGREE ***")
-    for p in MISSING_FROM_WALK:
-        print("      seen by glob and NOT by the walk: %s" % p)
-    for p in MISSING_FROM_GLOB:
-        print("      seen by the walk and NOT by glob: %s" % p)
-    print("      Counted into E2 TOTAL BAD.  Every count below is over the")
-    print("      walk's list, and one of the two lists is wrong.")
-else:
-    print("  The two enumerations agree file for file, so the count below is")
-    print("  over a population two independent walks arrived at.")
-print()
-
 print("  Rule: a run of >= %d shared tokens that is >= %.0f%% of the strike is"
       % (RUN_MIN, 100 * RUN_FRAC))
 print("  the CLAIM said again, not a shared lead-in.  Every strike is listed")
@@ -161,7 +120,6 @@ print()
 nstrikes = 0
 withstrikes = 0
 rows = []
-BAD_BEFORE_SWEEP = bad
 for rel in FILES:
     text = open(os.path.join(REPO, rel), encoding="utf-8").read()
     found = strike_findings(text)
@@ -188,26 +146,6 @@ for rel in FILES:
 
 print("  %d file(s) carry a strike, %d strike(s) measured, %d standing."
       % (withstrikes, nstrikes, bad))
-
-# mg-1d26, on mg-d53d's `e2_crosssection.py:144` -- `bad += len(fires)`.
-# Deleted alone, every STANDING row above was still printed IN FULL and this
-# checker exited 0: mg-6ef4's F3 word for word, one file down the same verdict
-# path.  THE VERDICT IS NOW COMPUTED TWICE, by two paths that share no line:
-# the running counter, and a recount off the rows that were actually printed.
-# Deleting either the counter or the row makes the two disagree, and the
-# disagreement is itself counted.  A verdict a reader can see contradicted by
-# the rows above it is not a verdict.
-STANDING_IN_ROWS = len([r for r in rows if r[5] is False])
-COUNTED_BY_SWEEP = bad - BAD_BEFORE_SWEEP
-if STANDING_IN_ROWS != COUNTED_BY_SWEEP:
-    print("  *** THE VERDICT AND THE ROWS DISAGREE: %d row(s) printed above"
-          % STANDING_IN_ROWS)
-    print("      say STANDING UN-STRUCK and the sweep counted %d.  One of the"
-          % COUNTED_BY_SWEEP)
-    print("      two is not being kept, and a verdict a reader can see")
-    print("      contradicted by the rows above it is not a verdict.")
-    print("      Counted into E2 TOTAL BAD. ***")
-    bad = max(bad, BAD_BEFORE_SWEEP + STANDING_IN_ROWS) + 1
 print()
 
 
@@ -304,40 +242,6 @@ ok = not strike_findings("# a document\n\nwith no strikes in it at all.\n")
 ctl += (not ok)
 print("  (e) a document with no strike                               %s"
       % ("silent -- ok" if ok else "*** FIRES ***"))
-
-# (f) mg-1d26, on mg-d53d's third silent line: `kernd633.py:127`,
-#     `spans.append((prev, len(text)))`.  That line is the span AFTER THE LAST
-#     STRIKE.  Deleted alone, every restatement that FOLLOWS its own strike
-#     becomes invisible -- and controls (a) to (e) all stay green, because
-#     every one of them restates the claim BEFORE the strike.  Five controls,
-#     one direction, and the detector half blind with all five passing.
-#     THE CONTROL BATTERY HAD A DIRECTION, WHICH IS ITSELF A POPULATION.  Both
-#     directions are exercised from here on, and each is its own row: a single
-#     row over "either direction" would pass on the strength of the one that
-#     still works.
-AFTER_CLAIM = ("The twenty-third species of the twenty-third kind arrives in "
-               "the twenty-third order at the twenty-third hour on every "
-               "twenty-third day of the twenty-third month.")
-after_doc = "# a constructed document\n\n~~%s~~\n\n%s\n" % (AFTER_CLAIM,
-                                                            AFTER_CLAIM)
-hits_f = [f for f in strike_findings(after_doc) if f[4] is False]
-ok = len(hits_f) == 1
-ctl += (not ok)
-print("  (f) the claim restated AFTER its own strike                  %s"
-      % ("fires, 1 finding -- ok" if ok
-         else "*** %d finding(s), expected 1 -- every restatement that "
-              "follows its strike is invisible ***" % len(hits_f)))
-
-# (g) and the same document with the two the other way round, so that (f) is
-#     shown to be measuring the DIRECTION and not merely the constructed text.
-before_doc = "# a constructed document\n\n%s\n\n~~%s~~\n" % (AFTER_CLAIM,
-                                                             AFTER_CLAIM)
-hits_g = [f for f in strike_findings(before_doc) if f[4] is False]
-ok = len(hits_g) == 1
-ctl += (not ok)
-print("  (g) the same claim restated BEFORE its own strike            %s"
-      % ("fires, 1 finding -- ok" if ok
-         else "*** %d finding(s), expected 1 ***" % len(hits_g)))
 bad += ctl
 print()
 
@@ -348,6 +252,9 @@ print()
 bad += len(DECLINED_UNSTATED)
 
 print("=" * 78)
+print("E2 TOTAL BAD: %d" % bad)
+print("=" * 78)
+print()
 print("EXTENT OF THIS NUMBER.  %d markdown file(s) -- every *.md under docs/"
       % len(FILES))
 print("and under code/, recursively.  %d of them carry at least one strike and"
@@ -389,13 +296,4 @@ for _r, _why in DECLINED_UNSTATED:
 if not DECLINED_STATED and not DECLINED_UNSTATED:
     print("    nothing at all was declined")
 print("A NOT STATED entry is counted into E2 TOTAL BAD above.")
-print("=" * 78)
-
-# mg-1d26.  THE VERDICT, AND THE ONLY LINE IN THIS FILE THAT CAN DELIVER ONE.
-# `sys.exit(1 if bad else 0)` used to stand here, and its DELETION exited 0:
-# CPython gives status 0 to a process that runs off the end of its own module,
-# so losing the verdict WAS a pass.  `deliver` prints the population size on
-# every run -- passes included -- gives an empty population its own exit code
-# and its own sentence, and is watched by the dead man's switch `arm_verdict()`
-# armed at the top of this file.  Delete this line and the process exits 9.
-deliver("E2", bad, len(FILES), POPULATION_SAYS)
+sys.exit(1 if bad else 0)

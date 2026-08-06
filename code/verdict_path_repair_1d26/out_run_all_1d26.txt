@@ -1,0 +1,2007 @@
+
+==============================================================================
+S1  locate() -- BY CONTENT, AND IT REFUSES WHEN IT CANNOT BE SURE
+==============================================================================
+
+  finds a line that occurs once                                    ok
+  finds the right one of two identical lines, by its successor     ok
+  REFUSES a line that is not there                                 ok
+        The row that must say no.  A lookup that silently resolves to nothing
+        is a probe that measures nothing while printing a row.
+  REFUSES an ambiguous line with no successor given                ok
+  REFUSES a successor that does not follow it                      ok
+
+==============================================================================
+S2  Deletion -- REMOVES EXACTLY ONE LINE AND PUTS THE FILE BACK
+==============================================================================
+
+  the deleted line is reported verbatim                            ok
+  exactly that line is gone                                        ok
+  the file is byte-identical afterwards                            ok
+        Not `looks the same`: the bytes.
+  a file with no trailing newline keeps having none                ok
+  and its line count is what wc -l would say                       ok
+
+==============================================================================
+S3  disposition() -- FOUR STATES, EACH GIVEN AN INPUT THAT IS IT
+==============================================================================
+
+  exit 0    + anything at all                    -> GATE LOST      ok
+        got GATE LOST
+  exit 0    + *** STANDING UN-STRUCK ***         -> GATE LOST      ok
+        got GATE LOST
+  exit 1    + *** STANDING UN-STRUCK ***         -> GATE HELD, ATT ok
+        got GATE HELD, ATTRIBUTED
+  exit 2    + E2 FOUND NOTHING TO CHECK -- THIS  -> GATE HELD, ATT ok
+        got GATE HELD, ATTRIBUTED
+  exit 9    + *** NO VERDICT WAS DELIVERED.      -> GATE HELD, ATT ok
+        got GATE HELD, ATTRIBUTED
+  exit 1    + Traceback (most recent call last): -> GATE HELD, UNA ok
+        got GATE HELD, UNATTRIBUTED
+  exit None + half a run                         -> TIMED OUT      ok
+        got TIMED OUT
+  a GREEN run PRINTING the finding is still GATE LOST              ok
+        mg-6ef4's F3 is exactly this case.  Printing the finding while exiting
+        0 is never a mitigation: a reader's `&&` sees the code.
+
+==============================================================================
+S4  attribution() -- IT NAMES WHAT FIRED, AND SAYS SO WHEN NOTHING DOES
+==============================================================================
+
+  recognises `STANDING UN-STRUCK`                                  ok
+  recognises `FOUND NOTHING TO CHECK`                              ok
+  recognises `NO VERDICT WAS DELIVERED`                            ok
+  recognises `THE TWO ENUMERATIONS OF THIS POPULATION DISAGREE`    ok
+  recognises `THE VERDICT AND THE ROWS DISAGREE`                   ok
+  recognises `finding(s), expected 1`                              ok
+  recognises `FIRES,`                                              ok
+  recognises `*** FIRES ***`                                       ok
+  recognises `declined, NOT STATED`                                ok
+  returns nothing for output that names nothing                    ok
+        The row that must say no.  If this predicate matched anything, every
+        traceback would be counted as a control naming itself, and `loud` and
+        `mute` would stop being different columns.
+
+==============================================================================
+S5  THE SANDBOX IS GIT-BACKED, MEASURED BY RUNNING A CONTROL THAT NEEDS IT
+==============================================================================
+
+  A plain file copy has no `.git`, and in one the checker's census
+  anchor prints `NO REVISION` while every verdict still looks right.  A
+  sweep in such a sandbox would be certifying a checker with a control
+  silently switched off.  This is not asserted; the control is run and
+  its output is read.
+
+  the checker's census anchor resolves to a revision in the sandbo ok
+        MEASURED AT 28c8029 (mg-5040, on mg-4700's F3).
+
+==============================================================================
+S6  neutralise() -- AND WHAT IT DOES THE SECOND TIME
+==============================================================================
+
+  it removes at least one strike marker the first time             ok
+        code/face_geometry_repair_e35b/README.md carried 2 `~~` marker(s)
+  and none the second time                                         ok
+        The row that must say no.  If this said `2` again the count would be
+        of markers in a file it had already rewritten.
+  the neutralised sandbox is GREEN                                 ok
+        exit 0
+
+==============================================================================
+S7  THE PRE-REPAIR COPIES ARE THE PRE-REPAIR FILES
+==============================================================================
+
+  Their identity is established by WHAT THEY CONTAIN and by WHAT THEY
+  DO, never by a revision: the refinery rebases before merging, so a
+  recorded SHA is displaced on main and `git merge-base --is-ancestor`
+  gives a FALSE NEGATIVE (mg-c067, mg-a74f).  P2b's reproduction of
+  mg-d53d's six is the other half of this evidence and is the stronger
+  half.
+
+  the pre copy of e2 carries `sys.exit(1 if bad else 0)`           ok
+  and does not know about the dead man's switch                    ok
+  the pre copy of the kernel has no deliver() and no arm_verdict() ok
+  the repaired e2 has both, and no bare sys.exit of its own        ok
+  the repaired kernel has both                                     ok
+  the two pairs differ                                             ok
+        The row that must say no: if the copies matched the repaired files,
+        P2b would be sweeping the repair and calling the result a before-state.
+  every PRE entry naming e2 is present in that copy of e2          ok
+  every POST entry naming e2 is present in that copy of e2         ok
+
+==============================================================================
+S8  verdict_path() -- ON A TOY TREE WHOSE ANSWER IS KNOWN
+==============================================================================
+
+  a COMMENT after the gate is not the last command                 ok
+        got: python3 ../toy_checker/gate.py
+  the closure is transitive -- gate, helper AND deeper             ok
+        got: code/toy_checker/deeper.py, code/toy_checker/gate.py, code/toy_checker/helper.py, code/toy_runner/run_all.sh
+  standard-library imports are not in it                           ok
+  an import it cannot resolve is REPORTED and not dropped          ok
+        got: ['nowhere']
+  a runner whose last command is not a python3 call is reported    ok
+        The row that must say no.  A rule that quietly returned only the
+        runner file would report a one-file verdict path as a complete one.
+
+==============================================================================
+SELFTEST1D26 TOTAL BAD: 0
+SELFTEST1D26 PREDICTIONS SCORED: 0, MISSED: 0
+==============================================================================
+
+EXTENT.  These rows are about THIS INSTRUMENT's own helpers -- the
+lookup, the deletion operator, the two classifiers, the sandbox, the
+neutralisation, the pre-repair copies and the population rule.  They
+say NOTHING about the repair itself; P1, P2 and P3 do that, and this
+file exists so that a reader knows whether their machinery works before
+reading what it measured.
+
+==============================================================================
+P1a  THE VERDICT PATH, DERIVED FROM THE RUNNER OUTWARD
+==============================================================================
+
+  The rule is stated once and applied three times.  Nothing below is
+  read from mg-d53d's list of five files; the list is COMPARED against
+  what the rule returns, in P1a's last row, and if the rule returns more
+  then the hole is wider than mg-d53d's number too.
+
+    species_repair_a4ef
+        last command: python3 ../species_extent_d633/e2_crosssection.py
+        code/species_repair_a4ef/run_all.sh                   83 line(s)
+        code/species_extent_d633/e2_crosssection.py          401 line(s)
+        code/species_extent_d633/kernd633.py                 402 line(s)
+    species_remainder_f8fa
+        last command: python3 ../species_extent_d633/e2_crosssection.py
+        code/species_remainder_f8fa/run_all.sh                85 line(s)
+        code/species_extent_d633/e2_crosssection.py          401 line(s)
+        code/species_extent_d633/kernd633.py                 402 line(s)
+    species_repair_6f61
+        last command: python3 ../species_extent_d633/e2_crosssection.py
+        code/species_repair_6f61/run_all.sh                   87 line(s)
+        code/species_extent_d633/e2_crosssection.py          401 line(s)
+        code/species_extent_d633/kernd633.py                 402 line(s)
+
+  THE UNION OVER THE THREE RUNNERS -- the population of this repair:
+      code/species_repair_a4ef/run_all.sh                       83 line(s)
+      code/species_extent_d633/e2_crosssection.py              401 line(s)
+      code/species_extent_d633/kernd633.py                     402 line(s)
+      code/species_remainder_f8fa/run_all.sh                    85 line(s)
+      code/species_repair_6f61/run_all.sh                       87 line(s)
+      TOTAL                                                    1058 line(s)
+  
+  GRAIN.  1058 is the LINE grain over 5 FILES.  The file grain is 5 and
+  they are not interchangeable: mg-d53d's 806 is the line grain over the
+  same five files at the commit it ran, and this repair has since added
+  lines to two of them, so the two numbers are over the same POPULATION
+  and different TREES.
+
+  P1a    HELD
+        predicted: exactly five files -- the same five mg-d53d names
+        measured:  5 file(s): code/species_extent_d633/e2_crosssection.py, code/species_extent_d633/kernd633.py, code/species_remainder_f8fa/run_all.sh, code/species_repair_6f61/run_all.sh, code/species_repair_a4ef/run_all.sh
+        mg-d53d's five are named here ONLY as the object of this comparison.
+        Every line count above was taken from the source in the sandbox.
+  the derived closure contains no file mg-d53d's list omits        ok
+        (none)
+    files in mg-d53d's list that the rule does NOT reach: (none)
+
+==============================================================================
+P1b  WHAT THE CLOSURE RESOLVED, AND WHAT IT COULD NOT
+==============================================================================
+
+  An import this rule cannot resolve is a piece of the verdict path it
+  cannot certify, so it is RETURNED and printed rather than dropped.
+
+    code/species_extent_d633/e2_crosssection.py imports, repository-local: code/species_extent_d633/kernd633.py
+        unresolved: (none)
+    code/species_extent_d633/kernd633.py imports, repository-local: (none)
+        unresolved: (none)
+
+  P1b    HELD
+        predicted: the closure adds nothing beyond kernd633.py, nothing is unresolved, and trace_open/e1_extents/e3_bothways are NOT on it
+        measured:  closure beyond e2: code/species_extent_d633/kernd633.py; unresolved: (none); of the four siblings, 4 are off the path
+        Those three run in `code/species_extent_d633/run_all.sh` and not in any
+        of the three species runners, and none of them is imported by e2.  A
+        line of theirs cannot change the verdict this gate carries.
+
+==============================================================================
+P1c  THE CERTIFIED POPULATION, AND WHAT IT DOES NOT COVER
+==============================================================================
+
+  mg-4adb's `out_v1_population.txt` is read HERE and only here, as the
+  OBJECT of a measurement: how many lines of which files its certificate
+  ranges over.  No figure this instrument reports as its own comes from
+  it.
+
+    rows parsed out of mg-4adb's transcript: 255
+        code/species_remainder_f8fa/run_all.sh                85 row(s)
+        code/species_repair_6f61/run_all.sh                   87 row(s)
+        code/species_repair_a4ef/run_all.sh                   83 row(s)
+  
+    files of the verdict path with NO row in that certificate:
+        code/species_extent_d633/e2_crosssection.py          401 line(s)
+        code/species_extent_d633/kernd633.py                 402 line(s)
+  
+    verdict path, LINE grain, at this tree            1058
+    covered by the certified population                255
+    NOT covered                                        803
+    and the certificate over the covered 255 reads 100% -- correctly.
+  P1c    HELD
+        predicted: 255 rows over 3 files, so 551 lines of the verdict path have no certificate
+        measured:  255 rows over 3 file(s); 803 lines uncovered AT THIS TREE
+        The uncovered figure is scored on the ROW COUNT and the FILE COUNT only.
+        551 was the line grain at mg-d53d's tree; this repair adds lines to two
+        of the five files, so the uncovered LINE count moves with the repair and
+        a prediction pinned to it would be scoring the size of the patch.
+
+==============================================================================
+P1d  THE SOURCE RULE THAT MAKES THE LAST COMMAND THE VERDICT-CARRIER
+==============================================================================
+
+  The derivation above rests on one fact about POSIX sh -- a script's
+  exit status is its last command's -- and on one fact about these three
+  files, which is asserted against their source rather than against the
+  comment in them that says it.
+
+      species_repair_a4ef            python3 ../species_extent_d633/e2_crosssection.py
+      species_remainder_f8fa         python3 ../species_extent_d633/e2_crosssection.py
+      species_repair_6f61            python3 ../species_extent_d633/e2_crosssection.py
+  P1d    HELD
+        predicted: the last command of all three runners is `python3 ../species_extent_d633/e2_crosssection.py`
+        measured:  3 of 3 are
+        A comment in each of these files says the same thing.  A comment is not
+        a measurement, and mg-4adb's V1d already reads the source for it; this
+        row exists because the DERIVATION above would be wrong if it stopped
+        being true, not to re-audit mg-4adb.
+
+==============================================================================
+P1 TOTAL BAD: 0
+P1 PREDICTIONS SCORED: 4, MISSED: 0
+==============================================================================
+
+EXTENT OF THESE NUMBERS.  They are read from the SOURCE of 5 files in
+a `git clone --shared` sandbox at this worktree's HEAD, with the two
+repaired files written in from the worktree.  NOTHING WAS EXECUTED IN
+THIS SECTION: P1 measures what the population IS, and P2 measures what
+deleting each member of it does.  The certified-population figures are
+parsed out of mg-4adb's committed transcript and are ITS measurements,
+re-counted here but not re-run.
+
+==============================================================================
+P3a  THREE STATES, THREE EXIT CODES, THREE SENTENCES
+==============================================================================
+
+  A reader with an `&&` sees an exit code and nothing else.  Until this
+  ticket, `checked 264 documents and found nothing wrong`, `read no
+  document at all` and `never reached its own verdict` were all 0.
+
+      checked, and found nothing wrong       exit 0    says `CHECKED 264`                yes
+      found nothing to check                 exit 2    says `FOUND NOTHING TO CHECK`     yes
+      never delivered a verdict at all       exit 9    says `NO VERDICT WAS DELIVERED`   yes
+
+  each of the three has its own exit code                          ok
+        measured: 0, 2, 9
+  each of the three names itself in the output                     ok
+  P3c.1  HELD
+        predicted: the three states are distinguishable by exit code AND by a printed sentence
+        measured:  exit codes 0/2/9; 3 of 3 print their own sentence
+
+==============================================================================
+P3b  THE EMPTY-POPULATION FLOOR, CALLED DIRECTLY, BOTH WAYS ROUND
+==============================================================================
+
+  `deliver` must refuse to exit 0 over an empty population WHATEVER the
+  finding count is -- including the case where nothing was found,
+  because that is precisely the case an empty population produces.  And
+  it must still exit 0 when a real population found nothing, or the
+  floor has replaced one control that cannot fail with another.
+
+      empty population, no findings      bad=0   examined=0    exit 2    expected 2  ok
+      empty population, three findings   bad=3   examined=0    exit 2    expected 2  ok
+      one document, no findings          bad=0   examined=1    exit 0    expected 0  ok
+      a real population, no findings     bad=0   examined=264  exit 0    expected 0  ok
+      a real population, one finding     bad=1   examined=264  exit 1    expected 1  ok
+
+  5 of 5 floor cases return the exit code they must                ok
+        The last two are the rows that must say NO: a floor that reddened a
+        real clean run would have made the gate unable to be green, which is
+        not a repair -- it is the same defect with the sign flipped.
+
+==============================================================================
+P3c  THE DEAD MAN'S SWITCH
+==============================================================================
+
+  `sys.exit(1 if bad else 0)` as the last line of a checker is a line
+  whose DELETION exits 0: CPython gives status 0 to a process that runs
+  off the end of its own module, so losing the verdict WAS a pass.  The
+  switch is armed at the top of the checker and fires at interpreter
+  shutdown if nothing was ever delivered.
+
+      armed, and a verdict delivered (clean)         exit 0    expected 0    ok
+      armed, and a verdict delivered (red)           exit 1    expected 1    ok
+      armed, and abandoned                           exit 9    expected 9    ok
+      armed, and abandoned after a sys.exit(0)       exit 9    expected 9    ok
+      NOT armed, and abandoned -- must stay 0        exit 0    expected 0    ok
+      delivered with `sys.exit` neutralised -- the switch carries the code exit 1    expected 1    ok
+      the same, with nothing wrong to report -- must be 0 and not 9 exit 0    expected 0    ok
+
+  7 of 7 switch cases return the exit code they must               ok
+        The fourth is the one that matters most: a deletion that leaves a
+        `sys.exit(0)` reachable ahead of the verdict is still caught.
+        The fifth is the row that must say NO -- `e1_extents.py`,
+        `e3_bothways.py` and `selftestd633.py` import this kernel and do not
+        deliver through it, and arming them would redden three runs that are
+        not lying about anything.
+
+==============================================================================
+P3d  THE POPULATION SIZE IS PRINTED ON A RUN THAT PASSES
+==============================================================================
+
+  A vacuous pass hides in a PASSING run, so the population size has to
+  be in the output of the runs that exit 0 -- not only in the runs that
+  fire.  The sandbox here is neutralised (see kern1d26) and carries no
+  plant, so this is a genuinely green run of the repaired checker.
+
+      the repaired checker on a clean tree: exit 0, population line present: yes, population 265
+  a GREEN run prints the size of the population it examined        ok
+  P3d    HELD
+        predicted: the repaired checker prints its population size on every run, passes included
+        measured:  green run: exit 0, population line present, 265 document(s)
+        This row is also the clean-tree control mg-4adb's V1b and mg-d53d's G1b
+        each assert.  It is true here ONLY because the sandbox was neutralised:
+        on the untouched tree the repaired checker exits 1 over a live finding
+        in code/face_geometry_repair_e35b/README.md, which is P2's first row.
+
+==============================================================================
+P3e  THE SAME QUESTIONS, ASKED OF THE PRE-REPAIR CHECKER
+==============================================================================
+
+  The difference is measured, not asserted.  The pre-repair content of
+  both files is written into a second sandbox from the byte-identical
+  copies committed in this directory -- content, never a revision, since
+  the refinery rebases and a recorded SHA is displaced on main.
+
+      pre-repair, clean neutralised tree:      exit 0
+      pre-repair, `FILES += _f` deleted:       exit 0, 61 line(s) of output, says nothing about a population
+      repaired,   `FILES += _f` deleted:       exit 2, says `FOUND NOTHING TO CHECK`: yes
+
+  P3c.2  HELD
+        predicted: the repaired checker exits non-zero over an empty population and the pre-repair one exits 0 on the same tree
+        measured:  pre-repair exit 0; repaired exit 2
+        This is mg-d53d's finding 2, reproduced by an instrument that shares no
+        code with mg-d53d, and then closed -- in the same section, against the
+        same tree, one paragraph apart.
+  the pre-repair checker was silent about it, and the repaired one ok
+        mg-1d26's third instruction: a deletion that changes the verdict must
+        not be able to do so WITHOUT PRINTING.  Loud before impossible.
+
+==============================================================================
+P3 TOTAL BAD: 0
+P3 PREDICTIONS SCORED: 3, MISSED: 0
+==============================================================================
+
+EXTENT OF THESE NUMBERS.  15 one-off programs run against the repaired
+kernel, plus 2 whole runs of `e2_crosssection.py` and 2 deletions, in
+two `git clone --shared` sandboxes.  IT SAYS NOTHING about any other
+checker in this repository, about any exit code other than the ones
+printed above, or about a deletion of more than one line at a time.
+The floor `deliver` enforces is `examined > 0` and NOT `examined is
+right`: it distinguishes CHECKED NOTHING from FOUND NOTHING, and a
+population that is merely too SMALL is caught by the second
+enumeration in E2a, which is P2's subject and not this section's.
+
+P2 -- the widened sweep, before and after.  Its output is NOT redirected
+and its exit status is this file's:
+  P2b: 551 checker executions on 6 sandboxes
+    ... 50/551
+    ... 100/551
+    ... 150/551
+    ... 200/551
+    ... 250/551
+    ... 300/551
+    ... 350/551
+    ... 400/551
+    ... 450/551
+    ... 500/551
+    ... 550/551
+  P2c: 803 checker executions on 6 sandboxes
+    ... 50/803
+    ... 100/803
+    ... 150/803
+    ... 200/803
+    ... 250/803
+    ... 300/803
+    ... 350/803
+    ... 400/803
+    ... 450/803
+    ... 500/803
+    ... 550/803
+    ... 600/803
+    ... 650/803
+    ... 700/803
+    ... 750/803
+    ... 800/803
+
+==============================================================================
+P2a  THE TREE THIS SWEEP RUNS AGAINST, AND THE ATTRIBUTION CONTROL
+==============================================================================
+
+  Nothing below means anything if the plant does not make the checker
+  red, and it means the WRONG thing if the checker is red for any other
+  reason -- which on this tree it IS, before anything is planted.
+
+      the untouched tree, nothing planted:   exit 1, 1 occurrence(s) STANDING
+  D2     DISCLOSED (not a prediction, not scored)
+        disclosed: the tree is ALREADY RED and both parent instruments' clean-tree rows are false of it
+        measured:  exit 1 with 1 standing occurrence(s)
+        Named: code/face_geometry_repair_e35b/README.md -- struck in one paragraph and asserted live in another, by
+        nobody's probe.  mg-4adb's V1b row `3 of 3 runners are GREEN on a clean
+        tree` and mg-d53d's G1b row `3 of 3 runners GREEN on a clean tree and e2
+        silent` were both true when they ran and are false of this tree.  It is
+        a live cross-section finding doing what e2 exists to do and this ticket
+        does NOT repair it.
+  
+      NEUTRALISED IN THE SANDBOX: 2 strike marker(s) removed from code/face_geometry_repair_e35b/README.md
+      the neutralised tree, nothing planted: exit 0, 0 occurrence(s) STANDING
+  the sandbox is GREEN before any deletion is made                 ok
+        Without this, a deletion that blinds the checker to the PLANT still
+        measures GATE HELD because an unrelated occurrence is still firing.
+        That is not a hypothetical: on the untouched tree, deleting
+        `spans.append((prev, len(text)))` from kernd633 leaves the run red for
+        exactly that reason, and mg-d53d recorded it as GATE LOST because at
+        ITS tree there was no second finding to mask it.
+  
+      the neutralised tree, plant live:      exit 1, 1 occurrence(s) STANDING
+  the plant arms EXACTLY ONE finding and the checker exits non-zer ok
+        `kernd633.NEGATES` exonerates on refut/struck/misquot/corrected and
+        twelve more.  A plant whose restating paragraph trips one of them is
+        silently exonerated, and every sweep below would then be measuring a
+        tree with no finding in it at all.
+      species_repair_a4ef        exit 1    prints STANDING UN-STRUCK: yes
+      species_remainder_f8fa     exit 1    prints STANDING UN-STRUCK: yes
+      species_repair_6f61        exit 1    prints STANDING UN-STRUCK: yes
+  3 of 3 runners are RED, and red BECAUSE of the plant             ok
+
+==============================================================================
+P2b  EVERY LINE OF BOTH FILES, AT THEIR PRE-REPAIR CONTENT
+==============================================================================
+
+  The population is EVERY LINE of both files.  No exclusion list, so no
+  exclusion to justify: comments, blanks, docstring lines and imports
+  are all in it.  The four dispositions are defined once in kern1d26:
+  
+    GATE LOST               exit 0.  The reader is told success.
+    GATE HELD, ATTRIBUTED   non-zero, and the output NAMES what fired.
+    GATE HELD, UNATTRIBUTED non-zero, and nothing says why.
+    TIMED OUT               its own row, never a pass.
+  
+  mg-d53d's vocabulary had one red disposition for the gate and one for
+  `died before the gate`.  This repair adds five controls whose whole
+  purpose is to fire INSTEAD of the finding, so the question asked here
+  is not `did e2 speak` but `does the output name what produced the red`.
+
+  code/species_extent_d633/e2_crosssection.py (PRE-REPAIR, 299 lines)
+      line   1  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   """E2 -- A STRUCK CLAIM MUST NOT S
+      line   2  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  DOCUMENT.
+      line   3  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line   4  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  mg-7dd3's B1.  `docs/OneThird-Spec
+      line   5  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  struck the Aguiar-Mahajan §17.5 qu
+      line   6  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  book's species is Pi* in both slot
+      line   7  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  a direct quotation with a section 
+      line   8  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  the file since `83ac472`.  Four pa
+      line   9  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  AND EVERY EXTENT LINE WAS TRUE: th
+      line  10  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  list, `S1 TOTAL BAD` is 0.
+      line  11  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  12  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes    * `check_doc.py` requires the ST
+      line  13  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      It does.  The stored string be
+      line  14  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      §0's copy began differently.
+      line  15  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes    * `stricken_a4ef.py`'s X7 row is
+      line  16  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes    * A LIST OF SENTENCES IS NOT A L
+      line  17  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      see this by construction -- wh
+      line  18  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  19  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  THE RULE, AND IT IS NOT A LIST.  F
+      line  20  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  of consecutive tokens it shares wi
+      line  21  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  A run of at least RUN_MIN tokens t
+      line  22  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  the claim itself said again.  Noth
+      line  23  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  so it does not go stale when a new
+      line  24  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  sentence writes the `~~`, and that
+      line  25  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  26  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  EXONERATION, and it is narrower th
+      line  27  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  occurrence stands only if THE PARA
+      line  28  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  HOLD, or if it sits in a fenced bl
+      line  29  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  stricken strings.  A ticket id nea
+      line  30  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  on `mg-[0-9a-f]{4}` within six lin
+      line  31  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  misquotation contains an unrelated
+      line  32  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  occurrence in this repository that
+      line  33  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  rather than asserting it.
+      line  34  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  35  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      python3 code/species_extent_d6
+      line  36  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   """
+      line  37  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  38  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   import os
+      line  39  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  import re
+      line  40  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   import subprocess
+      line  41  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  import sys
+      line  42  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  43  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   from kernd633 import (hdr, REPO, R
+      line  44  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                         strike_findi
+      line  45  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  46  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   bad = 0
+      line  47  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   ROOTS = [os.path.join(REPO, "docs"
+      line  48  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  49  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   FILES, DECLINED_STATED, DECLINED_U
+      line  50  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   for r in ROOTS:
+      line  51  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       _f, _st, _un = md_files_and_re
+      line  52  exit 0    GATE LOST                finding printed: no       FILES += _f
+      line  53  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      DECLINED_STATED += _st
+      line  54  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      DECLINED_UNSTATED += _un
+      line  55  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  FILES = sorted(set(FILES))
+      line  56  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  DECLINED_STATED = sorted(set(DECLI
+      line  57  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  DECLINED_UNSTATED = sorted(set(DEC
+      line  58  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  59  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  60  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def _anchor():
+      line  61  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """The revision this run measu
+      line  62  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  63  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      mg-5040, on mg-4700's OPEN 3 /
+      line  64  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      run is a property of A TREE, n
+      line  65  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      transcript carrying it goes fa
+      line  66  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      file.  Re-running at commit ti
+      line  67  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      exactly that in b534db7 and th
+      line  68  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      markdown files larger, so an a
+      line  69  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      shipped inside a different tre
+      line  70  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      the revision converts a claim 
+      line  71  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      into a claim about a commit gi
+      line  72  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      a reader tell STALE from WRONG
+      line  73  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """
+      line  74  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       try:
+      line  75  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           p = subprocess.run(["git",
+      line  76  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                              stdout=
+      line  77  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           rev = p.stdout.decode().st
+      line  78  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       except OSError:
+      line  79  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           rev = ""
+      line  80  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      if not rev:
+      line  81  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          return "NO REVISION -- git
+      line  82  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                 "anchored to nothin
+      line  83  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # THE DIRTY CHECK IS ABOUT THE
+      line  84  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # else.  A blanket `git status
+      line  85  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # its own transcript, so every
+      line  86  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # "PLUS UNCOMMITTED CHANGES" f
+      line  87  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # a qualifier that says nothin
+      line  88  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # code/, so that is what is as
+      line  89  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # revision named, the count IS
+      line  90  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # worktree has moved.
+      line  91  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       try:
+      line  92  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           p = subprocess.run(["git",
+      line  93  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                               "--unt
+      line  94  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                              stdout=
+      line  95  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           rows = [ln for ln in p.std
+      line  96  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   if ln.strip().ends
+      line  97  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       except OSError:
+      line  98  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           rows = ["git could not be 
+      line  99  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       return "%s%s" % (rev, "\n(PLUS
+      line 100  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                             "count i
+      line 101  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                       % (len(rows),
+      line 102  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                        if rows else 
+      line 103  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 104  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 105  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ANCHOR = _anchor()
+      line 106  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 107  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 108  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 109  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # E2a  the sweep
+      line 110  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 111  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  hdr("E2a  EVERY STRIKE AGAINST ITS
+      line 112  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 113  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  Rule: a run of >= %d shar
+      line 114  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % (RUN_MIN, 100 * RUN_FRAC))
+      line 115  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("  the CLAIM said again, not
+      line 116  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("  with its measurement whet
+      line 117  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("  visible instead of a verd
+      line 118  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 119  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 120  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   nstrikes = 0
+      line 121  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   withstrikes = 0
+      line 122  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   rows = []
+      line 123  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   for rel in FILES:
+      line 124  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       text = open(os.path.join(REPO,
+      line 125  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       found = strike_findings(text)
+      line 126  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       if not found:
+      line 127  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           continue
+      line 128  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      withstrikes += 1
+      line 129  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      nstrikes += len(found)
+      line 130  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       fires = [f for f in found if f
+      line 131  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       exon = [f for f in found if f[
+      line 132  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       quiet = [f for f in found if f
+      line 133  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("  %-58s %2d strike(s)" 
+      line 134  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       print("      %2d below the rul
+      line 135  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no             % (len(quiet), len(exon)
+      line 136  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      for sl, rl, run, tot, ex, why 
+      line 137  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           mark = ("*** STANDING UN-S
+      line 138  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                  ("exonerated: " + 
+      line 139  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           print("        strike line
+      line 140  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                 "restated at line %-
+      line 141  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                 % (sl, run, tot, 100
+      line 142  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                    rl if rl is not N
+      line 143  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          rows.append((rel, sl, rl, 
+      line 144  exit 0    GATE LOST                finding printed: yes      bad += len(fires)
+      line 145  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print()
+      line 146  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 147  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  %d file(s) carry a strike
+      line 148  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % (withstrikes, nstrikes, ba
+      line 149  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 150  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 151  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 152  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 153  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # E2b  CONTROLS -- the detector is
+      line 154  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 155  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  hdr("E2b  CONTROLS -- a detector o
+      line 156  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 157  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl = 0
+      line 158  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   DOC = os.path.join(REPO, "docs",
+      line 159  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                      "OneThird-Speci
+      line 160  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  doc = open(DOC, encoding="utf-8").
+      line 161  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 162  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (a) B1 itself, restored.  This i
+      line 163  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     mg-d633: §0's paragraph carr
+      line 164  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   B1 = ('Aguiar–Mahajan §17.5, quoti
+      line 165  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes        '*"`K̄(Π)` is the algebra of
+      line 166  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes        'noncommuting variables and 
+      line 167  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         'of\nsymmetric functions."*'
+      line 168  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # The repair is REVERSED, not spli
+      line 169  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # control were themselves the defe
+      line 170  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #   1. it truncated the document a
+      line 171  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      along with everything after
+      line 172  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      compare and the control rea
+      line 173  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      deletes the strike it is te
+      line 174  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #   2. it inserted B1 INTO the cor
+      line 175  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      quotation is a misquotation
+      line 176  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      correctly.  Restoring a fal
+      line 177  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      restore the false belief.
+      line 178  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   CORRECTION = re.compile(r"(?s)Agui
+      line 179  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                          r"§17\.4, 
+      line 180  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                           r"rest of 
+      line 181  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   if not CORRECTION.search(doc):
+      line 182  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("  *** §0's corrected pa
+      line 183  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("      it: the control c
+      line 184  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  restored = CORRECTION.sub(lambda _
+      line 185  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  hits = [f for f in strike_findings
+      line 186  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ok = len(hits) == 1
+      line 187  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not ok)
+      line 188  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  (a) B1 restored -- §0 car
+      line 189  exit 1    GATE HELD, ATTRIBUTED    finding printed: no         % ("fires, 1 finding -- ok" 
+      line 190  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no            else "*** %d finding(s), 
+      line 191  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   for sl, rl, run, tot, _e, _w in hi
+      line 192  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       print("        strike line %d 
+      line 193  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no             % (sl, rl, run, tot))
+      line 194  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 195  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (b) the same sentence, in a para
+      line 196  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   retracted = restored.replace(B1, "
+      line 197  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                                "§4: 
+      line 198  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  hits_b = [f for f in strike_findin
+      line 199  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ok = not hits_b
+      line 200  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not ok)
+      line 201  exit 1    GATE HELD, ATTRIBUTED    finding printed: no   print("  (b) the same sentence in 
+      line 202  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % ("silent -- ok" if ok else
+      line 203  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 204  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (c) THE NARROWING, MEASURED.  mg
+      line 205  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     within six lines -- applied 
+      line 206  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     does not use it.  If this co
+      line 207  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     stopped being load-bearing a
+      line 208  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  NAMES_A_REPAIR = re.compile(r"mg-(
+      line 209  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  WINDOW = 6                      # 
+      line 210  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  lines = restored.splitlines()
+      line 211  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # The line control (a) actually re
+      line 212  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # a fragment: an earlier version o
+      line 213  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # and matched AM §10.10's "`A/J` i
+      line 214  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # reported the ±6-line rule as NOT
+      line 215  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  target = (hits[0][1] - 1) if hits 
+      line 216  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   window = ("\n".join(lines[max(0, t
+      line 217  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no             if target is not None el
+      line 218  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  m = NAMES_A_REPAIR.search(window)
+      line 219  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  disarmed = bool(m)
+      line 220  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not disarmed)
+      line 221  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  (c) mg-a4ef's ±%d-line ti
+      line 222  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % (WINDOW, "DISARMED -- ok, 
+      line 223  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no            else "*** not disarmed: t
+      line 224  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   if disarmed:
+      line 225  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      off = window[:m.start()].count
+      line 226  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       print("        `%s` sits %d li
+      line 227  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no             % (m.group(0), abs(off -
+      line 228  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("        UNRELATED corre
+      line 229  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("        the paragraph t
+      line 230  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 231  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (d) an unrelated long quotation 
+      line 232  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     repetition of a STRUCK claim
+      line 233  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  noise = doc + "\n\n" + " ".join(to
+      line 234  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  hits_d = [f for f in strike_findin
+      line 235  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ok = not hits_d
+      line 236  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not ok)
+      line 237  exit 1    GATE HELD, ATTRIBUTED    finding printed: no   print("  (d) 400 tokens of this do
+      line 238  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % ("silent -- ok" if ok else
+      line 239  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 240  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (e) the rule must not fire on a 
+      line 241  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ok = not strike_findings("# a docu
+      line 242  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not ok)
+      line 243  exit 1    GATE HELD, ATTRIBUTED    finding printed: no   print("  (e) a document with no st
+      line 244  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % ("silent -- ok" if ok else
+      line 245  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  bad += ctl
+      line 246  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 247  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 248  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 249  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # mg-5040: an entry the walk decli
+      line 250  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # rule is a finding, not a footnot
+      line 251  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # true a third time by accident of
+      line 252  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  bad += len(DECLINED_UNSTATED)
+      line 253  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 254  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("=" * 78)
+      line 255  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("E2 TOTAL BAD: %d" % bad)
+      line 256  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("=" * 78)
+      line 257  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 258  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("EXTENT OF THIS NUMBER.  %d 
+      line 259  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % len(FILES))
+      line 260  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("and under code/, recursivel
+      line 261  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % withstrikes)
+      line 262  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("%d strike(s) were measured;
+      line 263  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % nstrikes)
+      line 264  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("is not evidence of anything
+      line 265  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("claim struck in a document 
+      line 266  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("extent, not this one, and t
+      line 267  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("said once more.  WITHIN a d
+      line 268  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("that document -- a claim st
+      line 269  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("invisible to every checker 
+      line 270  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("hole, named rather than clo
+      line 271  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("restated in different words
+      line 272  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 273  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("MEASURED AT %s (mg-5040, on
+      line 274  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("The file count above is a p
+      line 275  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("goes false the moment any c
+      line 276  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("re-running at commit time d
+      line 277  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("moves the tree afterwards. 
+      line 278  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("re-ran this per Appendix A,
+      line 279  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("markdown files larger, and 
+      line 280  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("the revision is what makes 
+      line 281  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("than WRONG: git cannot move
+      line 282  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("of the tree it names, and a
+      line 283  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("re-deriving anything.  The 
+      line 284  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("next commit that adds a mar
+      line 285  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 286  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("THE WALK'S RESIDUE, which i
+      line 287  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("on mg-4700's OPEN 1).  os.w
+      line 288  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("directory, and it swallows 
+      line 289  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("Rather than widen the walk 
+      line 290  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   for _r, _why in DECLINED_STATED:
+      line 291  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("    declined, STATED:  
+      line 292  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("        %s" % _why)
+      line 293  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  for _r, _why in DECLINED_UNSTATED:
+      line 294  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("    declined, NOT STATE
+      line 295  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("        %s" % _why)
+      line 296  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  if not DECLINED_STATED and not DEC
+      line 297  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       print("    nothing at all was 
+      line 298  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("A NOT STATED entry is count
+      line 299  exit 0    GATE LOST                finding printed: yes  sys.exit(1 if bad else 0)
+
+  code/species_extent_d633/kernd633.py (PRE-REPAIR, 252 lines)
+      line   1  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   """KERNEL for mg-d633 -- verbatim 
+      line   2  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line   3  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  WHAT THIS SHARES WITH NOTHING IT M
+      line   4  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  LIST OF SENTENCES against a text. 
+      line   5  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  sentence still asserted" and it is
+      line   6  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  somewhere else", which is mg-7dd3'
+      line   7  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  a different lead-in, and every lis
+      line   8  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line   9  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  So the unit here is the VERBATIM R
+      line  10  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  document with every strike removed
+      line  11  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  share, as a fraction of S, separat
+      line  12  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  before the thresholds were set (se
+      line  13  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  14  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      ten strikes in the target docu
+      line  15  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                                    
+      line  16  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      the eleventh -- the claim said
+      line  17  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  18  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  The 62% one is 8 tokens: §2.2's co
+      line  19  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  IN ORDER TO CORRECT IT.  That is w
+      line  20  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  why the rule is not a length thres
+      line  21  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   """
+      line  22  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  23  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   import os
+      line  24  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   import re
+      line  25  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  import shutil
+      line  26  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  import subprocess
+      line  27  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  import sys
+      line  28  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  29  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   __all__ = ["hdr", "toks", "paragra
+      line  30  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes             "REPO", "DOCS", "sandbo
+      line  31  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no              "RUN_MIN", "RUN_FRAC", 
+      line  32  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  33  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   HERE = os.path.dirname(os.path.abs
+      line  34  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   REPO = os.path.normpath(os.path.jo
+      line  35  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  DOCS = os.path.join(REPO, "docs")
+      line  36  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  37  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # A run of this many tokens, AND t
+      line  38  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # itself said again rather than a 
+      line  39  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # either alone misfires: 17 tokens
+      line  40  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # and 3 of 7 is "about the term".
+      line  41  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   RUN_MIN = 8
+      line  42  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   RUN_FRAC = 0.50
+      line  43  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  44  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # The occurrence is exonerated onl
+      line  45  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # does not hold.  Deliberately NOT
+      line  46  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # exonerates on `mg-[0-9a-f]{4}` w
+      line  47  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # below §0's misquotation contains
+      line  48  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # exonerates B1 -- the one occurre
+      line  49  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # is measured in e2's own controls
+      line  50  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # exoneration rule in this arc, an
+      line  51  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   NEGATES = re.compile(
+      line  52  exit 1    GATE HELD, ATTRIBUTED    finding printed: no       r"refut|STRICKEN|struck|strike
+      line  53  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      r"|printed\s+it\s+wrong|is\s+F
+      line  54  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      r"|used\s+to\s+(?:say|read|ass
+      line  55  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       r"|corrected|correction|retrac
+      line  56  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  57  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # ...or if it sits inside a fenced
+      line  58  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # table of stricken strings.  An a
+      line  59  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # `check_doc.py`'s STRICKEN table 
+      line  60  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # docs/OneThird-Audit-mg-73df-Spec
+      line  61  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # or the paragraph introducing it 
+      line  62  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   DECLARED_TABLE = re.compile(
+      line  63  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       r"\b(STRICKEN|FORBIDDEN|CORREC
+      line  64  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       r"|PATTERNS|DISARMERS)\b")
+      line  65  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  66  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  67  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def hdr(t):
+      line  68  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("=" * 78)
+      line  69  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print(t)
+      line  70  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("=" * 78)
+      line  71  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print()
+      line  72  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  73  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  74  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def toks(s):
+      line  75  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """Words and single punctuatio
+      line  76  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       stripped so a sentence tokenis
+      line  77  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      s = re.sub(r"(?m)^(?:\s*>)+\s?
+      line  78  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       return re.findall(r"[a-z0-9]+|
+      line  79  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  80  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  81  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def paragraphs(text):
+      line  82  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """(start, end) offsets of bla
+      line  83  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       out, start = [], 0
+      line  84  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for m in re.finditer(r"\n[ \t]
+      line  85  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          out.append((start, m.start
+      line  86  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          start = m.end()
+      line  87  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      out.append((start, len(text)))
+      line  88  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       return out
+      line  89  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  90  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  91  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def fences(text):
+      line  92  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """(start, end) offsets of ```
+      line  93  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       marks = [m.start() for m in re
+      line  94  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       return [(marks[i], marks[i + 1
+      line  95  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  96  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  97  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def longest_run(a, b, bindex):
+      line  98  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """Longest common run of conse
+      line  99  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       best, at = 0, None
+      line 100  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for i in range(len(a)):
+      line 101  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           for j in bindex.get(a[i], 
+      line 102  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               k = 0
+      line 103  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               while i + k < len(a) a
+      line 104  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   k += 1
+      line 105  exit 1    GATE HELD, ATTRIBUTED    finding printed: no               if k > best:
+      line 106  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   best, at = k, j
+      line 107  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       return best, at
+      line 108  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 109  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 110  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def strike_findings(text):
+      line 111  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """[(strike_line, restated_lin
+      line 112  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      every `~~struck~~` span whose 
+      line 113  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 114  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      Every strike is returned with 
+      line 115  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      sees the margins instead of a 
+      line 116  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      is too short or too small a fr
+      line 117  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """
+      line 118  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       strikes = [(m.start(), m.group
+      line 119  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                  for m in re.findite
+      line 120  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       if not strikes:
+      line 121  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           return []
+      line 122  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # tokens of the text OUTSIDE e
+      line 123  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       spans, prev = [], 0
+      line 124  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for m in re.finditer(r"~~(.+?)
+      line 125  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          spans.append((prev, m.star
+      line 126  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          prev = m.end()
+      line 127  exit 0    GATE LOST                finding printed: no       spans.append((prev, len(text))
+      line 128  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       outside = []
+      line 129  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for a, b in spans:
+      line 130  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           seg = text[a:b]
+      line 131  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           for mm in re.finditer(r"[a
+      line 132  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               outside.append((mm.gro
+      line 133  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       otoks = [t for t, _ in outside
+      line 134  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       index = {}
+      line 135  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for i, t in enumerate(otoks):
+      line 136  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           index.setdefault(t, []).ap
+      line 137  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       paras, fncs = paragraphs(text)
+      line 138  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 139  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       out = []
+      line 140  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for pos, s in strikes:
+      line 141  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           a = toks(s)
+      line 142  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           run, at = longest_run(a, o
+      line 143  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           sl = text[:pos].count("\n"
+      line 144  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           if not a or at is None:
+      line 145  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              out.append((sl, None, 
+      line 146  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               continue
+      line 147  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           off = outside[at][1]
+      line 148  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           rl = text[:off].count("\n"
+      line 149  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           if run < RUN_MIN or run < 
+      line 150  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              out.append((sl, rl, ru
+      line 151  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              continue
+      line 152  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           para = next((p for p in pa
+      line 153  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           ptext = text[para[0]:para[
+      line 154  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           why = ""
+      line 155  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           if NEGATES.search(ptext):
+      line 156  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               why = "the paragraph s
+      line 157  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          else:
+      line 158  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               fence = next((f for f 
+      line 159  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               if fence is not None:
+      line 160  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                  lead = text[max(0,
+      line 161  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   if DECLARED_TABLE.
+      line 162  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                           or DECLARE
+      line 163  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                       why = "quoted 
+      line 164  exit 1    GATE HELD, ATTRIBUTED    finding printed: no           out.append((sl, rl, run, l
+      line 165  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       return out
+      line 166  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 167  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 168  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  def md_files(root):
+      line 169  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """Every .md file under `root`
+      line 170  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      return md_files_and_residue(ro
+      line 171  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 172  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 173  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def md_files_and_residue(root):
+      line 174  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """(files, stated, unstated) -
+      line 175  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      one of the last two.  `stated`
+      line 176  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 177  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      mg-5040, on mg-4700's OPEN 1. 
+      line 178  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      recursively" was true twice fo
+      line 179  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      subdirectory, and then no tree
+      line 180  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      puts in `dirnames` and does no
+      line 181  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      time, the walk states its boun
+      line 182  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      the directories os.walk would 
+      line 183  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      rule nobody thought of arrives
+      line 184  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """
+      line 185  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       out, stated, unstated = [], []
+      line 186  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 187  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       def rel(p):
+      line 188  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           return os.path.relpath(p, 
+      line 189  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 190  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       def onerror(err):
+      line 191  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          p = getattr(err, "filename
+      line 192  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           unstated.append((rel(p), "
+      line 193  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                                   "
+      line 194  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                            % err.__c
+      line 195  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 196  exit 0    GATE LOST                finding printed: no       for dp, dns, fns in os.walk(ro
+      line 197  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           keep = []
+      line 198  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           for d in sorted(dns):
+      line 199  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               p = os.path.join(dp, d
+      line 200  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               if d == "__pycache__":
+      line 201  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   stated.append((rel
+      line 202  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              elif os.path.islink(p)
+      line 203  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   unstated.append((r
+      line 204  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                                     
+      line 205  exit 0    GATE LOST                finding printed: no               else:
+      line 206  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   keep.append(d)
+      line 207  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          dns[:] = keep
+      line 208  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           for fn in sorted(fns):
+      line 209  exit 1    GATE HELD, ATTRIBUTED    finding printed: no               p = os.path.join(dp, f
+      line 210  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               if not fn.endswith(".m
+      line 211  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   continue
+      line 212  exit 1    GATE HELD, ATTRIBUTED    finding printed: no               if os.path.isfile(p):
+      line 213  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   out.append(rel(p))
+      line 214  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              else:
+      line 215  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   unstated.append((r
+      line 216  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                                     
+      line 217  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       return sorted(out), sorted(set
+      line 218  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 219  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 220  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 221  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # The sandbox.  Every mutation pro
+      line 222  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # leave the repository changed -- 
+      line 223  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # the probes deliberately plant fo
+      line 224  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 225  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   SANDBOX_TREES = [
+      line 226  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_7d75",
+      line 227  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_repair_6f61",
+      line 228  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_remainder_f8fa",
+      line 229  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_repair_a4ef",
+      line 230  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_audit_73df",
+      line 231  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_extent_d633",
+      line 232  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   ]
+      line 233  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 234  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 235  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def sandbox(dest):
+      line 236  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """Copy docs/ and the trees th
+      line 237  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      shutil.copytree(os.path.join(R
+      line 238  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for t in SANDBOX_TREES:
+      line 239  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          src = os.path.join(REPO, "
+      line 240  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           if os.path.isdir(src):
+      line 241  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               shutil.copytree(src, o
+      line 242  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                               ignore
+      line 243  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      return dest
+      line 244  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 245  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 246  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  def run_checker(root, rel, args=()
+      line 247  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """Run a checker inside a sand
+      line 248  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      path = os.path.join(root, rel)
+      line 249  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       p = subprocess.run([sys.execut
+      line 250  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                         cwd=os.path
+      line 251  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                          text=True)
+      line 252  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      return p.returncode, p.stdout 
+
+  dispositions over the 551 pre-repair lines: GATE HELD, ATTRIBUTED 350, GATE HELD, UNATTRIBUTED 195, GATE LOST 6
+  
+    GATE LOST  code/species_extent_d633/e2_crosssection.py    line  52  finding printed: NO -- SILENT  FILES += _f
+    GATE LOST  code/species_extent_d633/e2_crosssection.py    line 144  finding printed: yes   bad += len(fires)
+    GATE LOST  code/species_extent_d633/e2_crosssection.py    line 299  finding printed: yes   sys.exit(1 if bad else 0)
+    GATE LOST  code/species_extent_d633/kernd633.py           line 127  finding printed: NO -- SILENT  spans.append((prev, len(text)))
+    GATE LOST  code/species_extent_d633/kernd633.py           line 196  finding printed: NO -- SILENT  for dp, dns, fns in os.walk(root, onerror=on
+    GATE LOST  code/species_extent_d633/kernd633.py           line 205  finding printed: NO -- SILENT  else:
+  P2a    HELD
+        predicted: exactly 6, and they are the six mg-d53d names
+        measured:  6: e2_crosssection.py:52 FILES += _f; kernd633.py:127 spans.append((prev, len(te; e2_crosssection.py:144 bad += len(fires); kernd633.py:196 for dp, dns, fns in os.wal; kernd633.py:205 else:; e2_crosssection.py:299 sys.exit(1 if bad else 0)
+        Re-derived by an instrument that does not read mg-d53d's transcripts for
+        it.  The tree has moved by many commits since mg-d53d ran, so this is a
+        re-measurement and not a replay.
+  P2b    HELD
+        predicted: 4 of the 6 are silent -- FILES += _f, spans.append, the os.walk header and the else:
+        measured:  4 of 6 silent: FILES += _f; spans.append((prev, len(te; for dp, dns, fns in os.wal; else:
+
+==============================================================================
+P2c  EVERY LINE OF BOTH FILES, AS REPAIRED
+==============================================================================
+
+  The same operator, the same tree, the same plant, over the repaired
+  content of both files -- INCLUDING every line the repair itself adds.
+  A repair certified over the population it inherited would be this
+  ticket's own defect, committed by its author.
+
+  code/species_extent_d633/e2_crosssection.py (REPAIRED, 401 lines)
+      line   1  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   """E2 -- A STRUCK CLAIM MUST NOT S
+      line   2  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  DOCUMENT.
+      line   3  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line   4  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  mg-7dd3's B1.  `docs/OneThird-Spec
+      line   5  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  struck the Aguiar-Mahajan §17.5 qu
+      line   6  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  book's species is Pi* in both slot
+      line   7  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  a direct quotation with a section 
+      line   8  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  the file since `83ac472`.  Four pa
+      line   9  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  AND EVERY EXTENT LINE WAS TRUE: th
+      line  10  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  list, `S1 TOTAL BAD` is 0.
+      line  11  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  12  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes    * `check_doc.py` requires the ST
+      line  13  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      It does.  The stored string be
+      line  14  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      §0's copy began differently.
+      line  15  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes    * `stricken_a4ef.py`'s X7 row is
+      line  16  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes    * A LIST OF SENTENCES IS NOT A L
+      line  17  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      see this by construction -- wh
+      line  18  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  19  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  THE RULE, AND IT IS NOT A LIST.  F
+      line  20  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  of consecutive tokens it shares wi
+      line  21  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  A run of at least RUN_MIN tokens t
+      line  22  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  the claim itself said again.  Noth
+      line  23  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  so it does not go stale when a new
+      line  24  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  sentence writes the `~~`, and that
+      line  25  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  26  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  EXONERATION, and it is narrower th
+      line  27  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  occurrence stands only if THE PARA
+      line  28  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  HOLD, or if it sits in a fenced bl
+      line  29  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  stricken strings.  A ticket id nea
+      line  30  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  on `mg-[0-9a-f]{4}` within six lin
+      line  31  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  misquotation contains an unrelated
+      line  32  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  occurrence in this repository that
+      line  33  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  rather than asserting it.
+      line  34  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  35  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      python3 code/species_extent_d6
+      line  36  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   """
+      line  37  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  38  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   import os
+      line  39  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  import re
+      line  40  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   import subprocess
+      line  41  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  42  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   from kernd633 import (hdr, REPO, R
+      line  43  exit 9    GATE HELD, ATTRIBUTED    finding printed: no                         strike_findi
+      line  44  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                         arm_verdict,
+      line  45  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  46  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # mg-1d26.  THE DEAD MAN'S SWITCH,
+      line  47  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # to the `deliver()` at the foot o
+      line  48  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # can leave this process exiting 0
+      line  49  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # the module now exits 9 and says 
+      line  50  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  arm_verdict()
+      line  51  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  52  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   bad = 0
+      line  53  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   ROOTS = [os.path.join(REPO, "docs"
+      line  54  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  55  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   FILES, DECLINED_STATED, DECLINED_U
+      line  56  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   for r in ROOTS:
+      line  57  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       _f, _st, _un = md_files_and_re
+      line  58  exit 2    GATE HELD, ATTRIBUTED    finding printed: no       FILES += _f
+      line  59  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      DECLINED_STATED += _st
+      line  60  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      DECLINED_UNSTATED += _un
+      line  61  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  FILES = sorted(set(FILES))
+      line  62  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  DECLINED_STATED = sorted(set(DECLI
+      line  63  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  DECLINED_UNSTATED = sorted(set(DEC
+      line  64  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  65  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # mg-1d26, on mg-d53d's finding 2.
+      line  66  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # valuable line in that audit's ve
+      line  67  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # document, printed no row, said n
+      line  68  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # neighbours in `kernd633.md_files
+      line  69  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # `else:` -- did the same thing by
+      line  70  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # A population is counted TWICE he
+      line  71  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # a disagreement is a finding with
+      line  72  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # delete one line and leave the tw
+      line  73  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   INDEPENDENT = md_files_independent
+      line  74  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   POPULATION_SAYS = ("every *.md und
+      line  75  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                      "counted twice:
+      line  76  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   MISSING_FROM_WALK = [p for p in IN
+      line  77  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   MISSING_FROM_GLOB = [p for p in FI
+      line  78  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  79  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  80  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def _anchor():
+      line  81  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """The revision this run measu
+      line  82  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  83  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      mg-5040, on mg-4700's OPEN 3 /
+      line  84  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      run is a property of A TREE, n
+      line  85  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      transcript carrying it goes fa
+      line  86  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      file.  Re-running at commit ti
+      line  87  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      exactly that in b534db7 and th
+      line  88  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      markdown files larger, so an a
+      line  89  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      shipped inside a different tre
+      line  90  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      the revision converts a claim 
+      line  91  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      into a claim about a commit gi
+      line  92  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      a reader tell STALE from WRONG
+      line  93  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """
+      line  94  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       try:
+      line  95  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           p = subprocess.run(["git",
+      line  96  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                              stdout=
+      line  97  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           rev = p.stdout.decode().st
+      line  98  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       except OSError:
+      line  99  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           rev = ""
+      line 100  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      if not rev:
+      line 101  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          return "NO REVISION -- git
+      line 102  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                 "anchored to nothin
+      line 103  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # THE DIRTY CHECK IS ABOUT THE
+      line 104  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # else.  A blanket `git status
+      line 105  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # its own transcript, so every
+      line 106  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # "PLUS UNCOMMITTED CHANGES" f
+      line 107  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # a qualifier that says nothin
+      line 108  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # code/, so that is what is as
+      line 109  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # revision named, the count IS
+      line 110  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # worktree has moved.
+      line 111  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       try:
+      line 112  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           p = subprocess.run(["git",
+      line 113  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                               "--unt
+      line 114  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                              stdout=
+      line 115  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           rows = [ln for ln in p.std
+      line 116  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   if ln.strip().ends
+      line 117  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       except OSError:
+      line 118  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           rows = ["git could not be 
+      line 119  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       return "%s%s" % (rev, "\n(PLUS
+      line 120  exit 9    GATE HELD, ATTRIBUTED    finding printed: no                             "count i
+      line 121  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                       % (len(rows),
+      line 122  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                        if rows else 
+      line 123  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 124  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 125  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  ANCHOR = _anchor()
+      line 126  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 127  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 128  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 129  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # E2a  the sweep
+      line 130  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 131  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  hdr("E2a  EVERY STRIKE AGAINST ITS
+      line 132  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 133  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # mg-1d26.  THE POPULATION, PRINTE
+      line 134  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # who sees no rows below must be a
+      line 135  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # from "no document was read", and
+      line 136  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # same thing: nothing.
+      line 137  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  POPULATION: %d markdown f
+      line 138  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                                     
+      line 139  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("  The second enumeration fo
+      line 140  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   if MISSING_FROM_WALK or MISSING_FR
+      line 141  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      bad += 1
+      line 142  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("  *** THE TWO ENUMERATI
+      line 143  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for p in MISSING_FROM_WALK:
+      line 144  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           print("      seen by glob 
+      line 145  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      for p in MISSING_FROM_GLOB:
+      line 146  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           print("      seen by the w
+      line 147  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("      Counted into E2 T
+      line 148  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("      walk's list, and 
+      line 149  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  else:
+      line 150  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("  The two enumerations 
+      line 151  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("  over a population two
+      line 152  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 153  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 154  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  Rule: a run of >= %d shar
+      line 155  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % (RUN_MIN, 100 * RUN_FRAC))
+      line 156  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("  the CLAIM said again, not
+      line 157  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("  with its measurement whet
+      line 158  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("  visible instead of a verd
+      line 159  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 160  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 161  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   nstrikes = 0
+      line 162  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   withstrikes = 0
+      line 163  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   rows = []
+      line 164  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  BAD_BEFORE_SWEEP = bad
+      line 165  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   for rel in FILES:
+      line 166  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       text = open(os.path.join(REPO,
+      line 167  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       found = strike_findings(text)
+      line 168  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       if not found:
+      line 169  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           continue
+      line 170  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      withstrikes += 1
+      line 171  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      nstrikes += len(found)
+      line 172  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       fires = [f for f in found if f
+      line 173  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       exon = [f for f in found if f[
+      line 174  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       quiet = [f for f in found if f
+      line 175  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("  %-58s %2d strike(s)" 
+      line 176  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       print("      %2d below the rul
+      line 177  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no             % (len(quiet), len(exon)
+      line 178  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      for sl, rl, run, tot, ex, why 
+      line 179  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           mark = ("*** STANDING UN-S
+      line 180  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                  ("exonerated: " + 
+      line 181  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           print("        strike line
+      line 182  exit 9    GATE HELD, ATTRIBUTED    finding printed: no                 "restated at line %-
+      line 183  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                 % (sl, run, tot, 100
+      line 184  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                    rl if rl is not N
+      line 185  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          rows.append((rel, sl, rl, 
+      line 186  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      bad += len(fires)
+      line 187  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print()
+      line 188  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 189  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  %d file(s) carry a strike
+      line 190  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % (withstrikes, nstrikes, ba
+      line 191  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 192  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # mg-1d26, on mg-d53d's `e2_crosss
+      line 193  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # Deleted alone, every STANDING ro
+      line 194  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # checker exited 0: mg-6ef4's F3 w
+      line 195  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # path.  THE VERDICT IS NOW COMPUT
+      line 196  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # the running counter, and a recou
+      line 197  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # Deleting either the counter or t
+      line 198  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # disagreement is itself counted. 
+      line 199  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # the rows above it is not a verdi
+      line 200  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  STANDING_IN_ROWS = len([r for r in
+      line 201  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  COUNTED_BY_SWEEP = bad - BAD_BEFOR
+      line 202  exit 1    GATE HELD, ATTRIBUTED    finding printed: no   if STANDING_IN_ROWS != COUNTED_BY_
+      line 203  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       print("  *** THE VERDICT AND T
+      line 204  exit 1    GATE HELD, ATTRIBUTED    finding printed: no             % STANDING_IN_ROWS)
+      line 205  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       print("      say STANDING UN-S
+      line 206  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes            % COUNTED_BY_SWEEP)
+      line 207  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("      two is not being 
+      line 208  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("      contradicted by t
+      line 209  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("      Counted into E2 T
+      line 210  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      bad = max(bad, BAD_BEFORE_SWEE
+      line 211  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 212  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 213  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 214  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 215  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # E2b  CONTROLS -- the detector is
+      line 216  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 217  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  hdr("E2b  CONTROLS -- a detector o
+      line 218  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 219  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  ctl = 0
+      line 220  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   DOC = os.path.join(REPO, "docs",
+      line 221  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                      "OneThird-Speci
+      line 222  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  doc = open(DOC, encoding="utf-8").
+      line 223  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 224  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (a) B1 itself, restored.  This i
+      line 225  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     mg-d633: §0's paragraph carr
+      line 226  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   B1 = ('Aguiar–Mahajan §17.5, quoti
+      line 227  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes        '*"`K̄(Π)` is the algebra of
+      line 228  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes        'noncommuting variables and 
+      line 229  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         'of\nsymmetric functions."*'
+      line 230  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # The repair is REVERSED, not spli
+      line 231  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # control were themselves the defe
+      line 232  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #   1. it truncated the document a
+      line 233  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      along with everything after
+      line 234  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      compare and the control rea
+      line 235  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      deletes the strike it is te
+      line 236  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #   2. it inserted B1 INTO the cor
+      line 237  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      quotation is a misquotation
+      line 238  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      correctly.  Restoring a fal
+      line 239  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #      restore the false belief.
+      line 240  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   CORRECTION = re.compile(r"(?s)Agui
+      line 241  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                          r"§17\.4, 
+      line 242  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                           r"rest of 
+      line 243  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   if not CORRECTION.search(doc):
+      line 244  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("  *** §0's corrected pa
+      line 245  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("      it: the control c
+      line 246  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  restored = CORRECTION.sub(lambda _
+      line 247  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  hits = [f for f in strike_findings
+      line 248  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  ok = len(hits) == 1
+      line 249  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not ok)
+      line 250  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  (a) B1 restored -- §0 car
+      line 251  exit 1    GATE HELD, ATTRIBUTED    finding printed: no         % ("fires, 1 finding -- ok" 
+      line 252  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no            else "*** %d finding(s), 
+      line 253  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   for sl, rl, run, tot, _e, _w in hi
+      line 254  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       print("        strike line %d 
+      line 255  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no             % (sl, rl, run, tot))
+      line 256  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 257  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (b) the same sentence, in a para
+      line 258  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   retracted = restored.replace(B1, "
+      line 259  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                                "§4: 
+      line 260  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  hits_b = [f for f in strike_findin
+      line 261  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ok = not hits_b
+      line 262  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not ok)
+      line 263  exit 1    GATE HELD, ATTRIBUTED    finding printed: no   print("  (b) the same sentence in 
+      line 264  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % ("silent -- ok" if ok else
+      line 265  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 266  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (c) THE NARROWING, MEASURED.  mg
+      line 267  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     within six lines -- applied 
+      line 268  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     does not use it.  If this co
+      line 269  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     stopped being load-bearing a
+      line 270  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  NAMES_A_REPAIR = re.compile(r"mg-(
+      line 271  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  WINDOW = 6                      # 
+      line 272  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  lines = restored.splitlines()
+      line 273  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # The line control (a) actually re
+      line 274  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # a fragment: an earlier version o
+      line 275  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # and matched AM §10.10's "`A/J` i
+      line 276  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # reported the ±6-line rule as NOT
+      line 277  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  target = (hits[0][1] - 1) if hits 
+      line 278  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   window = ("\n".join(lines[max(0, t
+      line 279  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no             if target is not None el
+      line 280  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  m = NAMES_A_REPAIR.search(window)
+      line 281  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  disarmed = bool(m)
+      line 282  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not disarmed)
+      line 283  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  (c) mg-a4ef's ±%d-line ti
+      line 284  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % (WINDOW, "DISARMED -- ok, 
+      line 285  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no            else "*** not disarmed: t
+      line 286  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   if disarmed:
+      line 287  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes      off = window[:m.start()].count
+      line 288  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       print("        `%s` sits %d li
+      line 289  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no             % (m.group(0), abs(off -
+      line 290  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("        UNRELATED corre
+      line 291  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("        the paragraph t
+      line 292  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 293  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (d) an unrelated long quotation 
+      line 294  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     repetition of a STRUCK claim
+      line 295  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  noise = doc + "\n\n" + " ".join(to
+      line 296  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  hits_d = [f for f in strike_findin
+      line 297  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ok = not hits_d
+      line 298  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not ok)
+      line 299  exit 1    GATE HELD, ATTRIBUTED    finding printed: no   print("  (d) 400 tokens of this do
+      line 300  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % ("silent -- ok" if ok else
+      line 301  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 302  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (e) the rule must not fire on a 
+      line 303  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ok = not strike_findings("# a docu
+      line 304  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not ok)
+      line 305  exit 1    GATE HELD, ATTRIBUTED    finding printed: no   print("  (e) a document with no st
+      line 306  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % ("silent -- ok" if ok else
+      line 307  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 308  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (f) mg-1d26, on mg-d53d's third 
+      line 309  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     `spans.append((prev, len(tex
+      line 310  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     STRIKE.  Deleted alone, ever
+      line 311  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     becomes invisible -- and con
+      line 312  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     every one of them restates t
+      line 313  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     one direction, and the detec
+      line 314  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     THE CONTROL BATTERY HAD A DI
+      line 315  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     directions are exercised fro
+      line 316  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     row over "either direction" 
+      line 317  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     still works.
+      line 318  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   AFTER_CLAIM = ("The twenty-third s
+      line 319  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                 "the twenty-third o
+      line 320  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                  "twenty-third day o
+      line 321  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   after_doc = "# a constructed docum
+      line 322  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                                     
+      line 323  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  hits_f = [f for f in strike_findin
+      line 324  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ok = len(hits_f) == 1
+      line 325  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not ok)
+      line 326  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  (f) the claim restated AF
+      line 327  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % ("fires, 1 finding -- ok" 
+      line 328  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no            else "*** %d finding(s), 
+      line 329  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                 "follows its strike 
+      line 330  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 331  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # (g) and the same document with t
+      line 332  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     shown to be measuring the DI
+      line 333  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   before_doc = "# a constructed docu
+      line 334  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                                     
+      line 335  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  hits_g = [f for f in strike_findin
+      line 336  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ok = len(hits_g) == 1
+      line 337  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  ctl += (not ok)
+      line 338  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("  (g) the same claim restat
+      line 339  exit 1    GATE HELD, ATTRIBUTED    finding printed: no         % ("fires, 1 finding -- ok" 
+      line 340  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no            else "*** %d finding(s), 
+      line 341  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  bad += ctl
+      line 342  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 343  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 344  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 345  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # mg-5040: an entry the walk decli
+      line 346  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # rule is a finding, not a footnot
+      line 347  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # true a third time by accident of
+      line 348  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  bad += len(DECLINED_UNSTATED)
+      line 349  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 350  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("=" * 78)
+      line 351  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("EXTENT OF THIS NUMBER.  %d 
+      line 352  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % len(FILES))
+      line 353  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("and under code/, recursivel
+      line 354  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % withstrikes)
+      line 355  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   print("%d strike(s) were measured;
+      line 356  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no         % nstrikes)
+      line 357  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("is not evidence of anything
+      line 358  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("claim struck in a document 
+      line 359  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("extent, not this one, and t
+      line 360  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("said once more.  WITHIN a d
+      line 361  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("that document -- a claim st
+      line 362  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("invisible to every checker 
+      line 363  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("hole, named rather than clo
+      line 364  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("restated in different words
+      line 365  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 366  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("MEASURED AT %s (mg-5040, on
+      line 367  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("The file count above is a p
+      line 368  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("goes false the moment any c
+      line 369  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("re-running at commit time d
+      line 370  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("moves the tree afterwards. 
+      line 371  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("re-ran this per Appendix A,
+      line 372  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("markdown files larger, and 
+      line 373  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("the revision is what makes 
+      line 374  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("than WRONG: git cannot move
+      line 375  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("of the tree it names, and a
+      line 376  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("re-deriving anything.  The 
+      line 377  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("next commit that adds a mar
+      line 378  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print()
+      line 379  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("THE WALK'S RESIDUE, which i
+      line 380  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("on mg-4700's OPEN 1).  os.w
+      line 381  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("directory, and it swallows 
+      line 382  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("Rather than widen the walk 
+      line 383  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   for _r, _why in DECLINED_STATED:
+      line 384  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("    declined, STATED:  
+      line 385  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("        %s" % _why)
+      line 386  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  for _r, _why in DECLINED_UNSTATED:
+      line 387  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("    declined, NOT STATE
+      line 388  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("        %s" % _why)
+      line 389  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  if not DECLINED_STATED and not DEC
+      line 390  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       print("    nothing at all was 
+      line 391  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("A NOT STATED entry is count
+      line 392  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  print("=" * 78)
+      line 393  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 394  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # mg-1d26.  THE VERDICT, AND THE O
+      line 395  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # `sys.exit(1 if bad else 0)` used
+      line 396  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # CPython gives status 0 to a proc
+      line 397  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # so losing the verdict WAS a pass
+      line 398  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # every run -- passes included -- 
+      line 399  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # and its own sentence, and is wat
+      line 400  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # armed at the top of this file.  
+      line 401  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes  deliver("E2", bad, len(FILES), POP
+
+  code/species_extent_d633/kernd633.py (REPAIRED, 402 lines)
+      line   1  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   """KERNEL for mg-d633 -- verbatim 
+      line   2  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line   3  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  WHAT THIS SHARES WITH NOTHING IT M
+      line   4  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  LIST OF SENTENCES against a text. 
+      line   5  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  sentence still asserted" and it is
+      line   6  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  somewhere else", which is mg-7dd3'
+      line   7  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  a different lead-in, and every lis
+      line   8  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line   9  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  So the unit here is the VERBATIM R
+      line  10  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  document with every strike removed
+      line  11  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  share, as a fraction of S, separat
+      line  12  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  before the thresholds were set (se
+      line  13  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  14  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      ten strikes in the target docu
+      line  15  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                                    
+      line  16  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      the eleventh -- the claim said
+      line  17  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  18  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  The 62% one is 8 tokens: §2.2's co
+      line  19  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  IN ORDER TO CORRECT IT.  That is w
+      line  20  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  why the rule is not a length thres
+      line  21  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   """
+      line  22  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  23  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   import atexit
+      line  24  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   import glob
+      line  25  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   import os
+      line  26  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   import re
+      line  27  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  import shutil
+      line  28  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  import subprocess
+      line  29  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  import sys
+      line  30  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  31  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   __all__ = ["hdr", "toks", "paragra
+      line  32  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes             "REPO", "DOCS", "sandbo
+      line  33  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes             "RUN_MIN", "RUN_FRAC", 
+      line  34  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes             "arm_verdict", "deliver
+      line  35  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no              "VACUOUS_EXIT"]
+      line  36  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  37  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   HERE = os.path.dirname(os.path.abs
+      line  38  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   REPO = os.path.normpath(os.path.jo
+      line  39  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  DOCS = os.path.join(REPO, "docs")
+      line  40  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  41  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # A run of this many tokens, AND t
+      line  42  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # itself said again rather than a 
+      line  43  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # either alone misfires: 17 tokens
+      line  44  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # and 3 of 7 is "about the term".
+      line  45  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   RUN_MIN = 8
+      line  46  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   RUN_FRAC = 0.50
+      line  47  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  48  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # The occurrence is exonerated onl
+      line  49  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # does not hold.  Deliberately NOT
+      line  50  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # exonerates on `mg-[0-9a-f]{4}` w
+      line  51  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # below §0's misquotation contains
+      line  52  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # exonerates B1 -- the one occurre
+      line  53  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # is measured in e2's own controls
+      line  54  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # exoneration rule in this arc, an
+      line  55  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   NEGATES = re.compile(
+      line  56  exit 1    GATE HELD, ATTRIBUTED    finding printed: no       r"refut|STRICKEN|struck|strike
+      line  57  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      r"|printed\s+it\s+wrong|is\s+F
+      line  58  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      r"|used\s+to\s+(?:say|read|ass
+      line  59  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       r"|corrected|correction|retrac
+      line  60  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  61  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # ...or if it sits inside a fenced
+      line  62  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # table of stricken strings.  An a
+      line  63  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # `check_doc.py`'s STRICKEN table 
+      line  64  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # docs/OneThird-Audit-mg-73df-Spec
+      line  65  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # or the paragraph introducing it 
+      line  66  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   DECLARED_TABLE = re.compile(
+      line  67  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       r"\b(STRICKEN|FORBIDDEN|CORREC
+      line  68  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       r"|PATTERNS|DISARMERS)\b")
+      line  69  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  70  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  71  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def hdr(t):
+      line  72  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("=" * 78)
+      line  73  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print(t)
+      line  74  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("=" * 78)
+      line  75  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print()
+      line  76  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  77  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line  78  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line  79  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # THE VERDICT.  mg-1d26, on mg-d53
+      line  80  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #
+      line  81  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # `e2_crosssection.py:52` was `FIL
+      line  82  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # NO DOCUMENT, printed no row, sai
+      line  83  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # species runners whose last comma
+      line  84  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # weakened check.  It is an empty 
+      line  85  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # an `&&` cannot tell it from a cl
+      line  86  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #
+      line  87  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # TWO STATES THAT MUST NEVER SHARE
+      line  88  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #
+      line  89  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     CHECKED AND FOUND NOTHING WR
+      line  90  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #                                 
+      line  91  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     FOUND NOTHING TO CHECK      
+      line  92  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #                                 
+      line  93  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #
+      line  94  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # and a third that used to be indi
+      line  95  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #
+      line  96  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #     NO VERDICT WAS DELIVERED AT 
+      line  97  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #                                 
+      line  98  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #
+      line  99  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # THE DEAD MAN'S SWITCH is what ma
+      line 100  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # bad else 0)` as the last line of
+      line 101  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # CPython leaves a process that fa
+      line 102  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # status 0, so the deletion of the
+      line 103  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # registers a handler that fires w
+      line 104  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # verdict was never delivered.  It
+      line 105  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # that raises or returns cannot ch
+      line 106  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  #
+      line 107  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # WHAT THIS DELIBERATELY DOES NOT 
+      line 108  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # RIGHT.  It checks that one was D
+      line 109  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # PRINTED.  Those are the two thin
+      line 110  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 111  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  VACUOUS_EXIT = 2
+      line 112  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  UNDELIVERED_EXIT = 9
+      line 113  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 114  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  _DELIVERED = []
+      line 115  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 116  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 117  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def _dead_man():
+      line 118  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """The interpreter is shutting
+      line 119  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 120  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      IT ALSO DELIVERS ONE.  The fir
+      line 121  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      `p2_widened.py`'s own sweep fo
+      line 122  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      `sys.exit(...)` INSIDE `delive
+      line 123  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      and exited 0 -- the defect thi
+      line 124  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      own repair, and it was found b
+      line 125  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      So the recorded value is an EX
+      line 126  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      the code is carried by two lin
+      line 127  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      delivering it.
+      line 128  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """
+      line 129  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      sys.stdout.flush()
+      line 130  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       if not _DELIVERED:
+      line 131  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           sys.stderr.write(
+      line 132  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              "*** NO VERDICT WAS DE
+      line 133  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              "    its own source wi
+      line 134  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              "    it was about to r
+      line 135  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              "    mg-1d26: 'returne
+      line 136  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              "    states and this i
+      line 137  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               "    Exiting %d. ***\n
+      line 138  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          sys.stderr.flush()
+      line 139  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          os._exit(UNDELIVERED_EXIT)
+      line 140  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      os._exit(_DELIVERED[-1])
+      line 141  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 142  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 143  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def arm_verdict():
+      line 144  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """Arm the dead man's switch. 
+      line 145  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      losing its own `deliver` call,
+      line 146  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      between here and it.
+      line 147  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 148  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      It is a CALL and not an import
+      line 149  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      `e3_bothways.py` and `selftest
+      line 150  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      deliver a verdict through it, 
+      line 151  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      are not lying about anything.
+      line 152  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """
+      line 153  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      atexit.register(_dead_man)
+      line 154  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 155  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 156  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def deliver(label, bad, examined, 
+      line 157  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """The ONLY way a checker arme
+      line 158  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 159  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      `examined` is the size of the 
+      line 160  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      it is PRINTED on every run -- 
+      line 161  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      pass is visible in the output 
+      line 162  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      `population` says in words WHA
+      line 163  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      without its population is a nu
+      line 164  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """
+      line 165  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print()
+      line 166  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("%s POPULATION EXAMINED:
+      line 167  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("      the population is
+      line 168  exit 1    GATE HELD, ATTRIBUTED    finding printed: no       if examined <= 0:
+      line 169  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          print("%s FOUND NOTHING TO
+      line 170  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          print("      An empty popu
+      line 171  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          print("      checker looke
+      line 172  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           print("      exiting %d so
+      line 173  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                 % VACUOUS_EXIT)
+      line 174  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          print("      run as eviden
+      line 175  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          code = VACUOUS_EXIT
+      line 176  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes      else:
+      line 177  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           print("%s CHECKED %d %s AN
+      line 178  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                 % (label, examined, 
+      line 179  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                    "FOUND %d THING(S
+      line 180  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                    else "FOUND NOTHI
+      line 181  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes          code = 1 if bad else 0
+      line 182  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      print("%s TOTAL BAD: %d" % (la
+      line 183  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # THE VERDICT IS RECORDED BEFO
+      line 184  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # returns it if this line is n
+      line 185  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # fact is what closes the hole
+      line 186  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # this function.
+      line 187  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes      _DELIVERED.append(code)
+      line 188  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      sys.exit(code)
+      line 189  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 190  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 191  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def md_files_independently(*roots)
+      line 192  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """THE SAME POPULATION, ENUMER
+      line 193  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      `md_files_and_residue`.
+      line 194  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 195  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      mg-d53d's finding 2 and its tw
+      line 196  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      (the `os.walk` header) and `ke
+      line 197  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      shape: a single deleted line m
+      line 198  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      and every count downstream is 
+      line 199  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      population.  No amount of care
+      line 200  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      walk is the thing that was cut
+      line 201  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 202  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      So the population is counted t
+      line 203  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      common: `os.walk` with a resid
+      line 204  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      deletion can break either one.
+      line 205  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      are wrong, and disagreement is
+      line 206  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 207  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      THE TWO ARE NOT THE SAME RULE 
+      line 208  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      follows a symlinked directory 
+      line 209  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      states `__pycache__` as a decl
+      line 210  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      Neither difference can produce
+      line 211  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      line says nothing at all is be
+      line 212  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      delta is NAMED in e2's output,
+      line 213  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      count.  A cross-check that agr
+      line 214  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      cannot fail, which is the shap
+      line 215  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """
+      line 216  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       out = []
+      line 217  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for root in roots:
+      line 218  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           for p in glob.glob(os.path
+      line 219  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              if os.path.isfile(p):
+      line 220  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   out.append(os.path
+      line 221  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       return sorted(set(out))
+      line 222  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 223  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes    P2d: 18 runner executions
+    ... 3/18
+    ... 6/18
+    ... 9/18
+    ... 12/18
+    ... 15/18
+    ... 18/18
+
+      line 224  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def toks(s):
+      line 225  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """Words and single punctuatio
+      line 226  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       stripped so a sentence tokenis
+      line 227  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      s = re.sub(r"(?m)^(?:\s*>)+\s?
+      line 228  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       return re.findall(r"[a-z0-9]+|
+      line 229  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 230  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 231  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   def paragraphs(text):
+      line 232  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """(start, end) offsets of bla
+      line 233  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       out, start = [], 0
+      line 234  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for m in re.finditer(r"\n[ \t]
+      line 235  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          out.append((start, m.start
+      line 236  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          start = m.end()
+      line 237  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      out.append((start, len(text)))
+      line 238  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       return out
+      line 239  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 240  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 241  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   def fences(text):
+      line 242  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """(start, end) offsets of ```
+      line 243  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       marks = [m.start() for m in re
+      line 244  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       return [(marks[i], marks[i + 1
+      line 245  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 246  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 247  exit 9    GATE HELD, ATTRIBUTED    finding printed: no   def longest_run(a, b, bindex):
+      line 248  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """Longest common run of conse
+      line 249  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       best, at = 0, None
+      line 250  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for i in range(len(a)):
+      line 251  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           for j in bindex.get(a[i], 
+      line 252  exit 9    GATE HELD, ATTRIBUTED    finding printed: no               k = 0
+      line 253  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               while i + k < len(a) a
+      line 254  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   k += 1
+      line 255  exit 1    GATE HELD, ATTRIBUTED    finding printed: no               if k > best:
+      line 256  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   best, at = k, j
+      line 257  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       return best, at
+      line 258  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 259  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 260  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def strike_findings(text):
+      line 261  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """[(strike_line, restated_lin
+      line 262  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      every `~~struck~~` span whose 
+      line 263  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 264  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      Every strike is returned with 
+      line 265  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      sees the margins instead of a 
+      line 266  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      is too short or too small a fr
+      line 267  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """
+      line 268  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       strikes = [(m.start(), m.group
+      line 269  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                  for m in re.findite
+      line 270  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       if not strikes:
+      line 271  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           return []
+      line 272  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      # tokens of the text OUTSIDE e
+      line 273  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       spans, prev = [], 0
+      line 274  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for m in re.finditer(r"~~(.+?)
+      line 275  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          spans.append((prev, m.star
+      line 276  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          prev = m.end()
+      line 277  exit 1    GATE HELD, ATTRIBUTED    finding printed: no       spans.append((prev, len(text))
+      line 278  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       outside = []
+      line 279  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for a, b in spans:
+      line 280  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           seg = text[a:b]
+      line 281  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           for mm in re.finditer(r"[a
+      line 282  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               outside.append((mm.gro
+      line 283  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       otoks = [t for t, _ in outside
+      line 284  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       index = {}
+      line 285  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for i, t in enumerate(otoks):
+      line 286  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           index.setdefault(t, []).ap
+      line 287  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       paras, fncs = paragraphs(text)
+      line 288  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 289  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       out = []
+      line 290  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for pos, s in strikes:
+      line 291  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           a = toks(s)
+      line 292  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           run, at = longest_run(a, o
+      line 293  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           sl = text[:pos].count("\n"
+      line 294  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           if not a or at is None:
+      line 295  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              out.append((sl, None, 
+      line 296  exit 9    GATE HELD, ATTRIBUTED    finding printed: no               continue
+      line 297  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           off = outside[at][1]
+      line 298  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           rl = text[:off].count("\n"
+      line 299  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           if run < RUN_MIN or run < 
+      line 300  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              out.append((sl, rl, ru
+      line 301  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              continue
+      line 302  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           para = next((p for p in pa
+      line 303  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           ptext = text[para[0]:para[
+      line 304  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           why = ""
+      line 305  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           if NEGATES.search(ptext):
+      line 306  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               why = "the paragraph s
+      line 307  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          else:
+      line 308  exit 9    GATE HELD, ATTRIBUTED    finding printed: no               fence = next((f for f 
+      line 309  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               if fence is not None:
+      line 310  exit 9    GATE HELD, ATTRIBUTED    finding printed: yes                  lead = text[max(0,
+      line 311  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   if DECLARED_TABLE.
+      line 312  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                           or DECLARE
+      line 313  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                       why = "quoted 
+      line 314  exit 1    GATE HELD, ATTRIBUTED    finding printed: no           out.append((sl, rl, run, l
+      line 315  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       return out
+      line 316  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 317  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 318  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  def md_files(root):
+      line 319  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """Every .md file under `root`
+      line 320  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      return md_files_and_residue(ro
+      line 321  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 322  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 323  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def md_files_and_residue(root):
+      line 324  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """(files, stated, unstated) -
+      line 325  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      one of the last two.  `stated`
+      line 326  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 327  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      mg-5040, on mg-4700's OPEN 1. 
+      line 328  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      recursively" was true twice fo
+      line 329  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      subdirectory, and then no tree
+      line 330  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      puts in `dirnames` and does no
+      line 331  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      time, the walk states its boun
+      line 332  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      the directories os.walk would 
+      line 333  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      rule nobody thought of arrives
+      line 334  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       """
+      line 335  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       out, stated, unstated = [], []
+      line 336  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 337  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       def rel(p):
+      line 338  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           return os.path.relpath(p, 
+      line 339  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 340  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       def onerror(err):
+      line 341  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          p = getattr(err, "filename
+      line 342  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           unstated.append((rel(p), "
+      line 343  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                                   "
+      line 344  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                            % err.__c
+      line 345  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 346  exit 2    GATE HELD, ATTRIBUTED    finding printed: no       for dp, dns, fns in os.walk(ro
+      line 347  exit 9    GATE HELD, ATTRIBUTED    finding printed: no           keep = []
+      line 348  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           for d in sorted(dns):
+      line 349  exit 9    GATE HELD, ATTRIBUTED    finding printed: no               p = os.path.join(dp, d
+      line 350  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               if d == "__pycache__":
+      line 351  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   stated.append((rel
+      line 352  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              elif os.path.islink(p)
+      line 353  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   unstated.append((r
+      line 354  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                                     
+      line 355  exit 1    GATE HELD, ATTRIBUTED    finding printed: no               else:
+      line 356  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   keep.append(d)
+      line 357  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          dns[:] = keep
+      line 358  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           for fn in sorted(fns):
+      line 359  exit 2    GATE HELD, ATTRIBUTED    finding printed: no               p = os.path.join(dp, f
+      line 360  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               if not fn.endswith(".m
+      line 361  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   continue
+      line 362  exit 2    GATE HELD, ATTRIBUTED    finding printed: no               if os.path.isfile(p):
+      line 363  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   out.append(rel(p))
+      line 364  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes              else:
+      line 365  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                   unstated.append((r
+      line 366  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                                     
+      line 367  exit 9    GATE HELD, ATTRIBUTED    finding printed: no       return sorted(out), sorted(set
+      line 368  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 369  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 370  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 371  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # The sandbox.  Every mutation pro
+      line 372  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # leave the repository changed -- 
+      line 373  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # the probes deliberately plant fo
+      line 374  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  # --------------------------------
+      line 375  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   SANDBOX_TREES = [
+      line 376  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_7d75",
+      line 377  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_repair_6f61",
+      line 378  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_remainder_f8fa",
+      line 379  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_repair_a4ef",
+      line 380  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_audit_73df",
+      line 381  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      "species_extent_d633",
+      line 382  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   ]
+      line 383  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 384  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 385  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no   def sandbox(dest):
+      line 386  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """Copy docs/ and the trees th
+      line 387  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      shutil.copytree(os.path.join(R
+      line 388  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       for t in SANDBOX_TREES:
+      line 389  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes          src = os.path.join(REPO, "
+      line 390  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no           if os.path.isdir(src):
+      line 391  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no               shutil.copytree(src, o
+      line 392  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                               ignore
+      line 393  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      return dest
+      line 394  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 395  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  
+      line 396  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes  def run_checker(root, rel, args=()
+      line 397  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      """Run a checker inside a sand
+      line 398  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      path = os.path.join(root, rel)
+      line 399  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no       p = subprocess.run([sys.execut
+      line 400  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes                         cwd=os.path
+      line 401  exit 1    GATE HELD, UNATTRIBUTED  finding printed: no                          text=True)
+      line 402  exit 1    GATE HELD, ATTRIBUTED    finding printed: yes      return p.returncode, p.stdout 
+
+  dispositions over the 803 repaired lines: GATE HELD, ATTRIBUTED 614, GATE HELD, UNATTRIBUTED 189
+  P3a WAS MISSED ON THE FIRST RUN OF THIS SECTION AND THE TRANSCRIPT OF
+  THAT RUN IS COMMITTED AS `out_p2_FIRSTRUN_one_lost.txt`.  It reported
+  one GATE LOST -- `kernd633.py:172`, the `sys.exit(1 if bad else 0)`
+  INSIDE `deliver` itself: the dead man's switch recorded the FACT of a
+  verdict, so deleting the exit recorded it, returned normally and
+  exited 0.  This ticket's own defect, one function inside its own
+  repair, found by RUNNING the repair and not by reading it.  PREDICTION
+  P4c said the first run would go red for exactly that reason and it is
+  scored as a HIT in OUTCOMES.md; P3a is scored as MISSED ON THE FIRST
+  RUN and whatever this run says.  The switch now records the CODE and
+  returns it, so the verdict is carried by two lines.
+
+  P3a    HELD
+        predicted: 0 deletions leave the checker exiting 0 with the plant live, over the WHOLE repaired population
+        measured:  0 over 803 lines
+  no deletion of the repaired files leaves the gate green          ok
+  
+    of the 803 red rows, 189 are UNATTRIBUTED -- red, and the output does
+    not name what fired.  These are tracebacks and are NOT findings:
+    mg-1d26's instruction is that a deletion must not change the VERDICT
+    silently, and a traceback on stderr changes nothing silently.  They
+    are counted and printed so the figure is not left to be inferred.
+  P3e    *** MISSED ***
+        predicted: the repaired verdict path is more than 806 and fewer than 950 lines
+        measured:  803 lines over the two repaired files alone (401 + 402), and 1058 over all five files of the path
+        Scored against the whole verdict path, which is what P1a derives and
+        what `806` was the size of.  A miss here is a miss about the SIZE OF
+        THE PATCH and about nothing else, and it is kept as written.
+
+==============================================================================
+P2d  mg-d53d's SIX, AT THE REPAIRED TREE, THROUGH ALL THREE RUNNERS
+==============================================================================
+
+  e2's own exit code is not the finding.  The finding is what a READER
+  of the runner sees, so each of the six is deleted again and all three
+  runners are executed over it.  Eighteen rows, one per (line, runner),
+  printed individually: a claim that the hole is closed with no
+  per-case demonstration is what this arc's audits keep refuting.
+
+    e2  FILES += _f
+        FILES += _f, deleted alone
+        species_repair_a4ef        line  58  exit 2    GATE HELD, ATTRIBUTED    the empty-population floor (mg-1d26)
+        species_remainder_f8fa     line  58  exit 2    GATE HELD, ATTRIBUTED    the empty-population floor (mg-1d26)
+        species_repair_6f61        line  58  exit 2    GATE HELD, ATTRIBUTED    the empty-population floor (mg-1d26)
+    e2  bad += len(fires)
+        bad += len(fires), deleted alone
+        species_repair_a4ef        line 186  exit 1    GATE HELD, ATTRIBUTED    the cross-section finding itself
+        species_remainder_f8fa     line 186  exit 1    GATE HELD, ATTRIBUTED    the cross-section finding itself
+        species_repair_6f61        line 186  exit 1    GATE HELD, ATTRIBUTED    the cross-section finding itself
+    e2  the line that delivers the verdict
+        deliver("E2", bad, len(FILES), POPULATION_SAYS), deleted alone
+        species_repair_a4ef        line 401  exit 9    GATE HELD, ATTRIBUTED    the cross-section finding itself
+        species_remainder_f8fa     line 401  exit 9    GATE HELD, ATTRIBUTED    the cross-section finding itself
+        species_repair_6f61        line 401  exit 9    GATE HELD, ATTRIBUTED    the cross-section finding itself
+    kernd633  spans.append((prev, len(text)))
+        spans.append((prev, len(text))), deleted alone
+        species_repair_a4ef        line 277  exit 1    GATE HELD, ATTRIBUTED    one of E2b's controls
+        species_remainder_f8fa     line 277  exit 1    GATE HELD, ATTRIBUTED    one of E2b's controls
+        species_repair_6f61        line 277  exit 1    GATE HELD, ATTRIBUTED    one of E2b's controls
+    kernd633  the os.walk header
+        for dp, dns, fns in os.walk(root, onerror=onerror):, deleted alone
+        species_repair_a4ef        line 346  exit 2    GATE HELD, ATTRIBUTED    the empty-population floor (mg-1d26)
+        species_remainder_f8fa     line 346  exit 2    GATE HELD, ATTRIBUTED    the empty-population floor (mg-1d26)
+        species_repair_6f61        line 346  exit 2    GATE HELD, ATTRIBUTED    the empty-population floor (mg-1d26)
+    kernd633  the else: that keeps a subdirectory
+        else:, deleted alone
+        species_repair_a4ef        line 355  exit 1    GATE HELD, ATTRIBUTED    the second enumeration of the population (mg-1d26)
+        species_remainder_f8fa     line 355  exit 1    GATE HELD, ATTRIBUTED    the second enumeration of the population (mg-1d26)
+        species_repair_6f61        line 355  exit 1    GATE HELD, ATTRIBUTED    the second enumeration of the population (mg-1d26)
+
+  18 of 18 runner executions over the six go RED                   ok
+  P3b    HELD
+        predicted: 18 of 18 exit non-zero
+        measured:  18 of 18 exit non-zero
+
+==============================================================================
+P2e  LOUDNESS -- WHAT EACH OF THE SIX PRINTS WHILE GOING RED
+==============================================================================
+
+  mg-1d26's third instruction: make them loud BEFORE making them
+  impossible.  A deletion that changes the verdict must not be able to
+  do so without printing.  Four of the six were silent before this
+  ticket; this row asks what each of the six says now.
+
+      e2  FILES += _f                              exit 2    attributed to: the empty-population floor (mg-1d26)
+      e2  bad += len(fires)                        exit 1    attributed to: the cross-section finding itself
+      e2  the line that delivers the verdict       exit 9    attributed to: the cross-section finding itself
+      kernd633  spans.append((prev, len(text)))    exit 1    attributed to: one of E2b's controls
+      kernd633  the os.walk header                 exit 2    attributed to: the empty-population floor (mg-1d26)
+      kernd633  the else: that keeps a subdirector exit 1    attributed to: the second enumeration of the population (mg-1d26)
+
+  6 of 6 name, in their own output, the control that produced the  ok
+    and the exit codes are 2, 1, 9, 1, 2, 1 -- three distinct kinds of red over six
+    lines, which is the point of giving the vacuous case its own code.
+
+==============================================================================
+P2f  THE ARITHMETIC
+==============================================================================
+
+    verdict path, derived in P1a, at this tree      1058 line(s)
+    covered by mg-4adb's certified population        255 line(s)
+    swept here, outside that certificate             803 line(s)
+    
+    deletions outside the certificate that lost the gate
+        before this repair                             6
+        of those, SILENT                               4
+        after this repair                              0
+        of those, SILENT                               0
+    
+    runner executions over the six, at the repaired tree: 18, of which
+    0 exited 0.
+
+==============================================================================
+P2 TOTAL BAD: 0
+P2 PREDICTIONS SCORED: 5, MISSED: 1
+==============================================================================
+
+EXTENT OF THESE NUMBERS.  551 checker executions in P2b, 803 in P2c, 6
+in P2e, 18 runner executions in P2d and 3 in P2a -- every one of them
+this instrument's own, in `git clone --shared` sandboxes, none of them
+read from any transcript.  THE POPULATION IS EVERY LINE OF
+`e2_crosssection.py` AND `kernd633.py`, and a deletion is one line of
+one of the two.  IT SAYS NOTHING about: two lines deleted together; a
+line EDITED rather than removed; the 255 runner lines, which mg-4adb's
+certificate covers and this instrument does not re-sweep; any failure
+mode of the checker other than the planted occurrence; or
+`code/species_7d75/run_all.sh`, which mg-d53d's G5 leaves open and this
+ticket does not name.  THE SANDBOX IS NEUTRALISED in one named file
+(P2a) and every figure here is a figure about that tree.
