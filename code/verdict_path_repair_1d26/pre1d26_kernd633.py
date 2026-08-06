@@ -20,8 +20,6 @@ IN ORDER TO CORRECT IT.  That is what the exoneration rule is for, and it is
 why the rule is not a length threshold alone.
 """
 
-import atexit
-import glob
 import os
 import re
 import shutil
@@ -30,9 +28,7 @@ import sys
 
 __all__ = ["hdr", "toks", "paragraphs", "longest_run", "strike_findings",
            "REPO", "DOCS", "sandbox", "run_checker", "md_files",
-           "RUN_MIN", "RUN_FRAC", "NEGATES",
-           "arm_verdict", "deliver", "md_files_independently",
-           "VACUOUS_EXIT"]
+           "RUN_MIN", "RUN_FRAC", "NEGATES"]
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.normpath(os.path.join(HERE, "..", ".."))
@@ -73,152 +69,6 @@ def hdr(t):
     print(t)
     print("=" * 78)
     print()
-
-
-# ---------------------------------------------------------------------------
-# THE VERDICT.  mg-1d26, on mg-d53d's finding 2.
-#
-# `e2_crosssection.py:52` was `FILES += _f`.  Deleted alone, the checker read
-# NO DOCUMENT, printed no row, said nothing, AND RETURNED 0 -- and the three
-# species runners whose last command it is returned 0 with it.  That is not a
-# weakened check.  It is an empty one that reports success, and a reader with
-# an `&&` cannot tell it from a clean tree.
-#
-# TWO STATES THAT MUST NEVER SHARE AN EXIT CODE OR A SENTENCE:
-#
-#     CHECKED AND FOUND NOTHING WRONG   a population was examined, its size is
-#                                       printed, and nothing in it fired  -> 0
-#     FOUND NOTHING TO CHECK            the population was empty.  Not a pass.
-#                                       Its own exit code, its own sentence -> 2
-#
-# and a third that used to be indistinguishable from the first:
-#
-#     NO VERDICT WAS DELIVERED AT ALL   the process ran off its own end without
-#                                       ever reaching `deliver`               -> 9
-#
-# THE DEAD MAN'S SWITCH is what makes the third one visible.  `sys.exit(1 if
-# bad else 0)` as the last line of a checker is a line whose DELETION exits 0:
-# CPython leaves a process that falls off the end of its own module with
-# status 0, so the deletion of the verdict IS a pass.  `arm_verdict()`
-# registers a handler that fires when the interpreter shuts down and the
-# verdict was never delivered.  It calls `os._exit`, because an atexit handler
-# that raises or returns cannot change the status the process already has.
-#
-# WHAT THIS DELIBERATELY DOES NOT DO: it does not check that the verdict is
-# RIGHT.  It checks that one was DELIVERED, over a population whose size was
-# PRINTED.  Those are the two things a reader cannot recover from an exit code.
-# ---------------------------------------------------------------------------
-VACUOUS_EXIT = 2
-UNDELIVERED_EXIT = 9
-
-_DELIVERED = []
-
-
-def _dead_man():
-    """The interpreter is shutting down.  Was a verdict ever delivered?
-
-    IT ALSO DELIVERS ONE.  The first version of this handler only checked, and
-    `p2_widened.py`'s own sweep found the hole THAT left: deleting the
-    `sys.exit(...)` INSIDE `deliver` recorded the verdict, returned normally
-    and exited 0 -- the defect this ticket is about, one function inside its
-    own repair, and it was found by running the repair and not by reading it.
-    So the recorded value is an EXIT CODE and this handler returns it.  Now
-    the code is carried by two lines, and deleting either one leaves the other
-    delivering it.
-    """
-    sys.stdout.flush()
-    if not _DELIVERED:
-        sys.stderr.write(
-            "*** NO VERDICT WAS DELIVERED.  This process reached the end of\n"
-            "    its own source without calling deliver(), so the exit status\n"
-            "    it was about to return says nothing about any document.\n"
-            "    mg-1d26: 'returned 0' and 'examined nothing' are different\n"
-            "    states and this is neither of them -- it is 'never spoke'.\n"
-            "    Exiting %d. ***\n" % UNDELIVERED_EXIT)
-        sys.stderr.flush()
-        os._exit(UNDELIVERED_EXIT)
-    os._exit(_DELIVERED[-1])
-
-
-def arm_verdict():
-    """Arm the dead man's switch.  A checker that calls this cannot exit 0 by
-    losing its own `deliver` call, and cannot exit 0 by losing any line
-    between here and it.
-
-    It is a CALL and not an import side effect on purpose: `e1_extents.py`,
-    `e3_bothways.py` and `selftestd633.py` import this module and do not
-    deliver a verdict through it, and arming them would redden three runs that
-    are not lying about anything.
-    """
-    atexit.register(_dead_man)
-
-
-def deliver(label, bad, examined, population, grain="markdown file(s)"):
-    """The ONLY way a checker armed by `arm_verdict()` exits 0.
-
-    `examined` is the size of the population the run actually looked at, and
-    it is PRINTED on every run -- including the runs that pass -- so a vacuous
-    pass is visible in the output instead of inferable only by reading code.
-    `population` says in words WHAT that number ranges over, because a count
-    without its population is a number nobody can chase (mg-bf79).
-    """
-    print()
-    print("%s POPULATION EXAMINED: %d %s" % (label, examined, grain))
-    print("      the population is: %s" % population)
-    if examined <= 0:
-        print("%s FOUND NOTHING TO CHECK -- THIS IS NOT A PASS." % label)
-        print("      An empty population cannot exonerate anything.  The")
-        print("      checker looked, found no document at all, and is")
-        print("      exiting %d so that no reader and no `&&` can read this"
-              % VACUOUS_EXIT)
-        print("      run as evidence about a tree.  mg-d53d's finding 2.")
-        code = VACUOUS_EXIT
-    else:
-        print("%s CHECKED %d %s AND %s"
-              % (label, examined, grain,
-                 "FOUND %d THING(S) WRONG" % bad if bad
-                 else "FOUND NOTHING WRONG"))
-        code = 1 if bad else 0
-    print("%s TOTAL BAD: %d" % (label, bad))
-    # THE VERDICT IS RECORDED BEFORE IT IS RETURNED, and the dead man's switch
-    # returns it if this line is not here.  Recording the CODE rather than the
-    # fact is what closes the hole p2_widened.py found in the first version of
-    # this function.
-    _DELIVERED.append(code)
-    sys.exit(code)
-
-
-def md_files_independently(*roots):
-    """THE SAME POPULATION, ENUMERATED A SECOND TIME, SHARING NO CODE WITH
-    `md_files_and_residue`.
-
-    mg-d53d's finding 2 and its two silent neighbours -- `kernd633.py:196`
-    (the `os.walk` header) and `kernd633.py:205` (an `else:`) -- are all one
-    shape: a single deleted line makes the walk return FEWER FILES, or none,
-    and every count downstream is then honestly reported over the wrong
-    population.  No amount of care inside the walk can catch that, because the
-    walk is the thing that was cut.
-
-    So the population is counted twice, by two enumerations with no line in
-    common: `os.walk` with a residue (above) and `glob` with `**` (here).  A
-    deletion can break either one.  It cannot make the two AGREE while both
-    are wrong, and disagreement is a printed finding.
-
-    THE TWO ARE NOT THE SAME RULE AND THAT IS THE POINT.  `glob`'s `**`
-    follows a symlinked directory and `os.walk` does not; `os.walk` here
-    states `__pycache__` as a declined directory and `glob` has no such rule.
-    Neither difference can produce a `*.md` today -- the walk's own residue
-    line says nothing at all is being declined -- but if one ever does, the
-    delta is NAMED in e2's output, both ways round, and never summarised as a
-    count.  A cross-check that agreed by construction would be a control that
-    cannot fail, which is the shape this ticket is about.
-    """
-    out = []
-    for root in roots:
-        for p in glob.glob(os.path.join(root, "**", "*.md"), recursive=True):
-            if os.path.isfile(p):
-                out.append(os.path.relpath(p, REPO))
-    return sorted(set(out))
 
 
 def toks(s):

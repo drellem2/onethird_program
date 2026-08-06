@@ -1,0 +1,130 @@
+
+==============================================================================
+P1a  THE VERDICT PATH, DERIVED FROM THE RUNNER OUTWARD
+==============================================================================
+
+  The rule is stated once and applied three times.  Nothing below is
+  read from mg-d53d's list of five files; the list is COMPARED against
+  what the rule returns, in P1a's last row, and if the rule returns more
+  then the hole is wider than mg-d53d's number too.
+
+    species_repair_a4ef
+        last command: python3 ../species_extent_d633/e2_crosssection.py
+        code/species_repair_a4ef/run_all.sh                   83 line(s)
+        code/species_extent_d633/e2_crosssection.py          401 line(s)
+        code/species_extent_d633/kernd633.py                 402 line(s)
+    species_remainder_f8fa
+        last command: python3 ../species_extent_d633/e2_crosssection.py
+        code/species_remainder_f8fa/run_all.sh                85 line(s)
+        code/species_extent_d633/e2_crosssection.py          401 line(s)
+        code/species_extent_d633/kernd633.py                 402 line(s)
+    species_repair_6f61
+        last command: python3 ../species_extent_d633/e2_crosssection.py
+        code/species_repair_6f61/run_all.sh                   87 line(s)
+        code/species_extent_d633/e2_crosssection.py          401 line(s)
+        code/species_extent_d633/kernd633.py                 402 line(s)
+
+  THE UNION OVER THE THREE RUNNERS -- the population of this repair:
+      code/species_repair_a4ef/run_all.sh                       83 line(s)
+      code/species_extent_d633/e2_crosssection.py              401 line(s)
+      code/species_extent_d633/kernd633.py                     402 line(s)
+      code/species_remainder_f8fa/run_all.sh                    85 line(s)
+      code/species_repair_6f61/run_all.sh                       87 line(s)
+      TOTAL                                                    1058 line(s)
+  
+  GRAIN.  1058 is the LINE grain over 5 FILES.  The file grain is 5 and
+  they are not interchangeable: mg-d53d's 806 is the line grain over the
+  same five files at the commit it ran, and this repair has since added
+  lines to two of them, so the two numbers are over the same POPULATION
+  and different TREES.
+
+  P1a    HELD
+        predicted: exactly five files -- the same five mg-d53d names
+        measured:  5 file(s): code/species_extent_d633/e2_crosssection.py, code/species_extent_d633/kernd633.py, code/species_remainder_f8fa/run_all.sh, code/species_repair_6f61/run_all.sh, code/species_repair_a4ef/run_all.sh
+        mg-d53d's five are named here ONLY as the object of this comparison.
+        Every line count above was taken from the source in the sandbox.
+  the derived closure contains no file mg-d53d's list omits        ok
+        (none)
+    files in mg-d53d's list that the rule does NOT reach: (none)
+
+==============================================================================
+P1b  WHAT THE CLOSURE RESOLVED, AND WHAT IT COULD NOT
+==============================================================================
+
+  An import this rule cannot resolve is a piece of the verdict path it
+  cannot certify, so it is RETURNED and printed rather than dropped.
+
+    code/species_extent_d633/e2_crosssection.py imports, repository-local: code/species_extent_d633/kernd633.py
+        unresolved: (none)
+    code/species_extent_d633/kernd633.py imports, repository-local: (none)
+        unresolved: (none)
+
+  P1b    HELD
+        predicted: the closure adds nothing beyond kernd633.py, nothing is unresolved, and trace_open/e1_extents/e3_bothways are NOT on it
+        measured:  closure beyond e2: code/species_extent_d633/kernd633.py; unresolved: (none); of the four siblings, 4 are off the path
+        Those three run in `code/species_extent_d633/run_all.sh` and not in any
+        of the three species runners, and none of them is imported by e2.  A
+        line of theirs cannot change the verdict this gate carries.
+
+==============================================================================
+P1c  THE CERTIFIED POPULATION, AND WHAT IT DOES NOT COVER
+==============================================================================
+
+  mg-4adb's `out_v1_population.txt` is read HERE and only here, as the
+  OBJECT of a measurement: how many lines of which files its certificate
+  ranges over.  No figure this instrument reports as its own comes from
+  it.
+
+    rows parsed out of mg-4adb's transcript: 255
+        code/species_remainder_f8fa/run_all.sh                85 row(s)
+        code/species_repair_6f61/run_all.sh                   87 row(s)
+        code/species_repair_a4ef/run_all.sh                   83 row(s)
+  
+    files of the verdict path with NO row in that certificate:
+        code/species_extent_d633/e2_crosssection.py          401 line(s)
+        code/species_extent_d633/kernd633.py                 402 line(s)
+  
+    verdict path, LINE grain, at this tree            1058
+    covered by the certified population                255
+    NOT covered                                        803
+    and the certificate over the covered 255 reads 100% -- correctly.
+  P1c    HELD
+        predicted: 255 rows over 3 files, so 551 lines of the verdict path have no certificate
+        measured:  255 rows over 3 file(s); 803 lines uncovered AT THIS TREE
+        The uncovered figure is scored on the ROW COUNT and the FILE COUNT only.
+        551 was the line grain at mg-d53d's tree; this repair adds lines to two
+        of the five files, so the uncovered LINE count moves with the repair and
+        a prediction pinned to it would be scoring the size of the patch.
+
+==============================================================================
+P1d  THE SOURCE RULE THAT MAKES THE LAST COMMAND THE VERDICT-CARRIER
+==============================================================================
+
+  The derivation above rests on one fact about POSIX sh -- a script's
+  exit status is its last command's -- and on one fact about these three
+  files, which is asserted against their source rather than against the
+  comment in them that says it.
+
+      species_repair_a4ef            python3 ../species_extent_d633/e2_crosssection.py
+      species_remainder_f8fa         python3 ../species_extent_d633/e2_crosssection.py
+      species_repair_6f61            python3 ../species_extent_d633/e2_crosssection.py
+  P1d    HELD
+        predicted: the last command of all three runners is `python3 ../species_extent_d633/e2_crosssection.py`
+        measured:  3 of 3 are
+        A comment in each of these files says the same thing.  A comment is not
+        a measurement, and mg-4adb's V1d already reads the source for it; this
+        row exists because the DERIVATION above would be wrong if it stopped
+        being true, not to re-audit mg-4adb.
+
+==============================================================================
+P1 TOTAL BAD: 0
+P1 PREDICTIONS SCORED: 4, MISSED: 0
+==============================================================================
+
+EXTENT OF THESE NUMBERS.  They are read from the SOURCE of 5 files in
+a `git clone --shared` sandbox at this worktree's HEAD, with the two
+repaired files written in from the worktree.  NOTHING WAS EXECUTED IN
+THIS SECTION: P1 measures what the population IS, and P2 measures what
+deleting each member of it does.  The certified-population figures are
+parsed out of mg-4adb's committed transcript and are ITS measurements,
+re-counted here but not re-run.

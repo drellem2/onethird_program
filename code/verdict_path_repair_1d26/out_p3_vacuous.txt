@@ -1,0 +1,123 @@
+
+==============================================================================
+P3a  THREE STATES, THREE EXIT CODES, THREE SENTENCES
+==============================================================================
+
+  A reader with an `&&` sees an exit code and nothing else.  Until this
+  ticket, `checked 264 documents and found nothing wrong`, `read no
+  document at all` and `never reached its own verdict` were all 0.
+
+      checked, and found nothing wrong       exit 0    says `CHECKED 264`                yes
+      found nothing to check                 exit 2    says `FOUND NOTHING TO CHECK`     yes
+      never delivered a verdict at all       exit 9    says `NO VERDICT WAS DELIVERED`   yes
+
+  each of the three has its own exit code                          ok
+        measured: 0, 2, 9
+  each of the three names itself in the output                     ok
+  P3c.1  HELD
+        predicted: the three states are distinguishable by exit code AND by a printed sentence
+        measured:  exit codes 0/2/9; 3 of 3 print their own sentence
+
+==============================================================================
+P3b  THE EMPTY-POPULATION FLOOR, CALLED DIRECTLY, BOTH WAYS ROUND
+==============================================================================
+
+  `deliver` must refuse to exit 0 over an empty population WHATEVER the
+  finding count is -- including the case where nothing was found,
+  because that is precisely the case an empty population produces.  And
+  it must still exit 0 when a real population found nothing, or the
+  floor has replaced one control that cannot fail with another.
+
+      empty population, no findings      bad=0   examined=0    exit 2    expected 2  ok
+      empty population, three findings   bad=3   examined=0    exit 2    expected 2  ok
+      one document, no findings          bad=0   examined=1    exit 0    expected 0  ok
+      a real population, no findings     bad=0   examined=264  exit 0    expected 0  ok
+      a real population, one finding     bad=1   examined=264  exit 1    expected 1  ok
+
+  5 of 5 floor cases return the exit code they must                ok
+        The last two are the rows that must say NO: a floor that reddened a
+        real clean run would have made the gate unable to be green, which is
+        not a repair -- it is the same defect with the sign flipped.
+
+==============================================================================
+P3c  THE DEAD MAN'S SWITCH
+==============================================================================
+
+  `sys.exit(1 if bad else 0)` as the last line of a checker is a line
+  whose DELETION exits 0: CPython gives status 0 to a process that runs
+  off the end of its own module, so losing the verdict WAS a pass.  The
+  switch is armed at the top of the checker and fires at interpreter
+  shutdown if nothing was ever delivered.
+
+      armed, and a verdict delivered (clean)         exit 0    expected 0    ok
+      armed, and a verdict delivered (red)           exit 1    expected 1    ok
+      armed, and abandoned                           exit 9    expected 9    ok
+      armed, and abandoned after a sys.exit(0)       exit 9    expected 9    ok
+      NOT armed, and abandoned -- must stay 0        exit 0    expected 0    ok
+      delivered with `sys.exit` neutralised -- the switch carries the code exit 1    expected 1    ok
+      the same, with nothing wrong to report -- must be 0 and not 9 exit 0    expected 0    ok
+
+  7 of 7 switch cases return the exit code they must               ok
+        The fourth is the one that matters most: a deletion that leaves a
+        `sys.exit(0)` reachable ahead of the verdict is still caught.
+        The fifth is the row that must say NO -- `e1_extents.py`,
+        `e3_bothways.py` and `selftestd633.py` import this kernel and do not
+        deliver through it, and arming them would redden three runs that are
+        not lying about anything.
+
+==============================================================================
+P3d  THE POPULATION SIZE IS PRINTED ON A RUN THAT PASSES
+==============================================================================
+
+  A vacuous pass hides in a PASSING run, so the population size has to
+  be in the output of the runs that exit 0 -- not only in the runs that
+  fire.  The sandbox here is neutralised (see kern1d26) and carries no
+  plant, so this is a genuinely green run of the repaired checker.
+
+      the repaired checker on a clean tree: exit 0, population line present: yes, population 265
+  a GREEN run prints the size of the population it examined        ok
+  P3d    HELD
+        predicted: the repaired checker prints its population size on every run, passes included
+        measured:  green run: exit 0, population line present, 265 document(s)
+        This row is also the clean-tree control mg-4adb's V1b and mg-d53d's G1b
+        each assert.  It is true here ONLY because the sandbox was neutralised:
+        on the untouched tree the repaired checker exits 1 over a live finding
+        in code/face_geometry_repair_e35b/README.md, which is P2's first row.
+
+==============================================================================
+P3e  THE SAME QUESTIONS, ASKED OF THE PRE-REPAIR CHECKER
+==============================================================================
+
+  The difference is measured, not asserted.  The pre-repair content of
+  both files is written into a second sandbox from the byte-identical
+  copies committed in this directory -- content, never a revision, since
+  the refinery rebases and a recorded SHA is displaced on main.
+
+      pre-repair, clean neutralised tree:      exit 0
+      pre-repair, `FILES += _f` deleted:       exit 0, 61 line(s) of output, says nothing about a population
+      repaired,   `FILES += _f` deleted:       exit 2, says `FOUND NOTHING TO CHECK`: yes
+
+  P3c.2  HELD
+        predicted: the repaired checker exits non-zero over an empty population and the pre-repair one exits 0 on the same tree
+        measured:  pre-repair exit 0; repaired exit 2
+        This is mg-d53d's finding 2, reproduced by an instrument that shares no
+        code with mg-d53d, and then closed -- in the same section, against the
+        same tree, one paragraph apart.
+  the pre-repair checker was silent about it, and the repaired one ok
+        mg-1d26's third instruction: a deletion that changes the verdict must
+        not be able to do so WITHOUT PRINTING.  Loud before impossible.
+
+==============================================================================
+P3 TOTAL BAD: 0
+P3 PREDICTIONS SCORED: 3, MISSED: 0
+==============================================================================
+
+EXTENT OF THESE NUMBERS.  15 one-off programs run against the repaired
+kernel, plus 2 whole runs of `e2_crosssection.py` and 2 deletions, in
+two `git clone --shared` sandboxes.  IT SAYS NOTHING about any other
+checker in this repository, about any exit code other than the ones
+printed above, or about a deletion of more than one line at a time.
+The floor `deliver` enforces is `examined > 0` and NOT `examined is
+right`: it distinguishes CHECKED NOTHING from FOUND NOTHING, and a
+population that is merely too SMALL is caught by the second
+enumeration in E2a, which is P2's subject and not this section's.
