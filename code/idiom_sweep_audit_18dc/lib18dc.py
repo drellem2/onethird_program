@@ -22,6 +22,7 @@ every truncation and every leftover `.new` happens there.
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -152,6 +153,31 @@ def make_stub(dirpath, real_python):
     return dirpath
 
 
+def child_work(tree):
+    """A throwaway $V18_WORK for anything this suite EXECUTES.
+
+    SD12 of this instrument, and it is this ticket's own defect committed by
+    the audit sent to find it.  `run_all.sh` exports `V18_WORK`; the arc's
+    runners inherit the whole environment; `code/idiom_sweep_audit_18dc` is a
+    `code/*/run_all.sh` the moment this directory has a runner, so V6's sweep
+    of HEAD RAN MY OWN RUNNER, which wrote `$V18_WORK/out_v4_outcomes.txt` --
+    the file V4 was writing at that moment.  What was left was a 19-byte
+    transcript containing the stub's marker and nothing else.
+
+    THE RE-ENTRANCY GUARD DID NOT FIRE, and that is the finding rather than the
+    accident: `V18_RUNNING` is set by `run_all.sh`, and the collision came from
+    a probe invoked DIRECTLY.  A guard on the runner does not protect a probe.
+
+    Repaired the way mg-ec63 repaired its own (c1bb466): structurally, by
+    moving the artifact out of the collision path rather than by adding a
+    second guard.  Everything this suite executes gets its own `V18_WORK`,
+    under `$WORK/child/`, which no probe of mine ever writes a transcript to.
+    """
+    d = os.path.join(WORK, "child", tree.replace("/", "_"))
+    os.makedirs(d, exist_ok=True)
+    return d
+
+
 def stub_run(sbx, tree, timeout=120):
     """Run one runner with python3 stubbed.  Returns the ledger of invocations.
 
@@ -171,6 +197,7 @@ def stub_run(sbx, tree, timeout=120):
     env["PATH"] = stubdir + os.pathsep + env.get("PATH", "")
     env["V18_LEDGER"] = led
     env.pop("PYTHONPATH", None)
+    env["V18_WORK"] = child_work(tree)
     committed = {}
     for f in os.listdir(d):
         if f.startswith("out_") and f.endswith(".txt"):
@@ -212,6 +239,31 @@ def emptied_steps(res):
         if zero:
             out.append({"i": i, "argv": r["argv"], "zero": zero})
     return out
+
+
+# ---------------------------------------------------------------------------
+# source classification, WITH THE COMMENTS TAKEN OUT
+
+def code_of(src):
+    """`run_all.sh` with its comment lines removed.
+
+    SD9/SD11 of this instrument: the arc's single most repeated runner line is
+    a COMMENT saying `set -o pipefail` is not used, and several runners carry a
+    comment explaining why they do or do not need `.new`+`mv`.  A rule that
+    matches the file matches those sentences and calls them code -- it turned a
+    2 into a 31 once and a 2 into a 4 once.  Every rule of MINE that reads
+    runner source goes through here.  (Rules I am REPRODUCING from mg-03d1 do
+    not: to re-derive its 86 and its 43 I must apply its rule as written,
+    comments included, and I do.)
+    """
+    return "\n".join(ln for ln in src.splitlines()
+                      if not ln.lstrip().startswith("#"))
+
+
+def carries_newmv(src):
+    """The `.new`+`mv` structural fix, in CODE rather than in prose."""
+    c = code_of(src)
+    return re.search(r"\.new", c) is not None and re.search(r"\bmv\b", c) is not None
 
 
 # ---------------------------------------------------------------------------
@@ -274,6 +326,7 @@ def real_run(sbx, tree, timeout=300):
     env = dict(os.environ)
     env["PYTHONPATH"] = make_shim()
     env["V18_READS"] = led
+    env["V18_WORK"] = child_work(tree)          # SD12 -- see child_work()
     rec = {"tree": tree, "timeout": False, "exit": None, "opens": []}
     try:
         r = subprocess.run(["sh", "./run_all.sh"], cwd=d, capture_output=True,

@@ -42,9 +42,18 @@ print()
 tee, pf, teepf = [], [], []
 for t in TREES:
     src = open(os.path.join(sbx, t, "run_all.sh")).read()
-    has_tee = re.search(r"\|\s*tee\b", src) is not None
-    has_pf = re.search(r"set\s+-[a-z]*o?\s*[a-z]*\bpipefail\b|set\s+-o\s+pipefail",
-                       src) is not None
+    # SD9 of this instrument: the first draft matched `pipefail` anywhere in
+    # the file and reported 31 of 117 runners setting it.  29 of those 31 are
+    # COMMENTS explaining why `pipefail` is NOT used ("`set -o pipefail` is not
+    # used: /bin/sh is dash on Linux, which rejects the option") -- the single
+    # most repeated line in this arc's runners.  A rule that reads a comment as
+    # code is mg-ec63's SD6b, and it turned a 2 into a 31.  Comment lines are
+    # now dropped before matching, and `code_lines` is used for BOTH halves so
+    # the tee count cannot drift from the pipefail count.
+    code = B.code_of(src)
+    has_tee = re.search(r"\|\s*tee\b", code) is not None
+    has_pf = re.search(r"\bset\s+-[a-zA-Z]*o[a-zA-Z]*\b.*\bpipefail\b"
+                       r"|\bset\s+-o\s+pipefail\b", code) is not None
     if has_tee:
         tee.append(t)
     if has_pf:
@@ -78,14 +87,24 @@ for t in TREES:
     if B.emptied_steps(res):
         trunc.append(t)
     B.sandbox_reset(sbx)
-both = sorted(set(tee) & set(trunc))
+# SD10 of this instrument: the row below was labelled "RUNNERS in BOTH
+# populations" while intersecting `tee` (all of it) with `trunc`, under a row
+# that had just defined the population of interest as `tee` WITHOUT `pipefail`.
+# A row name that is not its measurement.  Both intersections are now printed.
+both = sorted((set(tee) - set(teepf)) & set(trunc))
+both_anytee = sorted(set(tee) & set(trunc))
 print("  population: the %d runners tracked at HEAD" % len(TREES))
 B.plain("...RUNNERS starting a probe on an EMPTY transcript", len(trunc),
         "one `run_all.sh`")
 B.plain("...RUNNERS using `tee` without `pipefail`", len(tee) - len(teepf),
         "one `run_all.sh`")
-B.plain("...RUNNERS in BOTH populations", len(both), "one `run_all.sh`")
+B.plain("...RUNNERS in BOTH populations -- `tee` without `pipefail` AND "
+        "an emptied transcript", len(both), "one `run_all.sh`")
 for t in both[:30]:
+    print("          %s" % t.replace("code/", ""))
+B.plain("...RUNNERS using `tee` AT ALL and also emptying a transcript",
+        len(both_anytee), "one `run_all.sh`")
+for t in both_anytee[:30]:
     print("          %s" % t.replace("code/", ""))
 print()
 print("  These are two different defects of one habit, and a runner in both is")
@@ -98,12 +117,12 @@ B.hdr("V6c  DOES THE REPAIR ADDRESS THE SHAPE, OR ONLY THE 43?")
 newmv = []
 for t in TREES:
     src = open(os.path.join(sbx, t, "run_all.sh")).read()
-    if re.search(r"\.new", src) and re.search(r"\bmv\b", src):
+    if B.carries_newmv(src):
         newmv.append(t)
 work = []
 for t in TREES:
     src = open(os.path.join(sbx, t, "run_all.sh")).read()
-    if re.search(r"mktemp\s+-d", src) and t not in newmv:
+    if re.search(r"mktemp\s+-d", B.code_of(src)) and t not in newmv:
         work.append(t)
 print("  population: the %d runners tracked at HEAD, AFTER the sweep merged" % len(TREES))
 B.plain("...RUNNERS carrying the `.new`+`mv` structural fix", len(newmv),

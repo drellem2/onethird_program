@@ -31,7 +31,7 @@ import lib18dc as B
 
 REV = "d33970b"
 WORKERS = 6
-TIMEOUT = 240
+TIMEOUT = 420
 
 print("mg-18dc / V3 -- THE BITE, OBSERVED AT THE OPEN CALL")
 print("HEAD: %s" % B.head())
@@ -158,14 +158,23 @@ print("  runner uses `>`; no process ever reads an empty transcript of its own")
 print("  tree.  A count of trees that COULD bite is not a count of trees that DO:")
 for t in sorted(fp):
     r = results[t]
-    why = "killed at %d s -- UNMEASURED" % TIMEOUT if r["timeout"] else \
-        "%d own-tree reads, all of populated files" % r["n_pop_reads"]
+    # SD8 of this instrument: this line shipped for one draft as
+    # "%d own-tree reads, all of populated files", which over n == 0 asserts a
+    # universal over an empty set -- ALL_PASS with nothing in the population,
+    # which is one of the six sibling defects this brief names.  The n == 0
+    # case is a DIFFERENT finding from the n > 0 case and now says so.
+    if r["timeout"]:
+        why = "killed at %d s -- UNMEASURED" % TIMEOUT
+    elif r["n_pop_reads"] == 0:
+        why = "NO own-tree transcript read AT ALL -- the regex pair's second half is false here"
+    else:
+        why = "%d own-tree reads, none of them of an empty file" % r["n_pop_reads"]
     print("      %-46s %s" % (t.replace("code/", ""), why))
 print()
 print("  THE REGEX PAIR'S FALSE NEGATIVES -- observed biting, not matched:")
 for t in sorted(fn):
     print("      %-46s %s" % (t.replace("code/", ""),
-                              ", ".join(r["f"] for r in results[t]["empty_reads"])[:44]))
+                              ", ".join(sorted({r["f"] for r in results[t]["empty_reads"]}))[:44]))
 
 # ---------------------------------------------------------------------------
 B.hdr("V3c  THE NEGATIVE CONTROL -- WHAT WOULD HAVE SHOWN A POSITIVE")
