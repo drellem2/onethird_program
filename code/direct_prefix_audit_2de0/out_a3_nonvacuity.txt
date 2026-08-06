@@ -1,0 +1,107 @@
+==============================================================================
+A3 — PRIORITY 2: the non-vacuity claim (2/3 vs 1/2 vs sqrt(2))
+==============================================================================
+
+A3.1  Q1 — the direct number at the antichain, and the 'truth of 1/2'.
+      Closed forms verified in A2.5b: E[K_k]=k(n-k)/n, Delta_1(A_k)=max(k,n-k)/n,
+      E[D]=(n^2-1)/3. So min_k Delta_1(A_k) = ceil(n/2)/n exactly.
+
+         n   truth  repaired bnd   mg-00b9 bnd  factor(rep)
+         2     1/2           2/3           1/2       1.3333
+         3     2/3           2/3         16/27       1.0000
+         4     1/2           2/3           5/8       1.3333
+         5     3/5           2/3         16/25       1.1111
+         6     1/2           2/3         35/54       1.3333
+         7     4/7           2/3         32/49       1.1667
+         8     1/2           2/3         21/32       1.3333
+         9     5/9           2/3       160/243       1.2000
+        10     1/2           2/3         33/50       1.3333
+        11    6/11           2/3        80/121       1.2222
+        12     1/2           2/3       143/216       1.3333
+        13    7/13           2/3       112/169       1.2381
+        14     1/2           2/3         65/98       1.3333
+
+       => 2/3 is CONFIRMED, but only as the REPAIRED bound 2E[D]/(n^2-1).
+          mg-00b9's own stated form 2E[D]/n^2 gives 16/27 at n=3, which is BELOW
+          the truth 2/3 -- it is not a looser 2/3, it is a FALSE bound (A2.3).
+       => 'a truth of 1/2' is an EVEN-n statement. At odd n the truth is
+          (n+1)/(2n) > 1/2, and at n=3 it is 2/3 = the bound exactly, so the
+          'factor 4/3' is 1.0000 at n=3 and reaches 4/3 only at even n / large n.
+          The factor column above is the grain the 4/3 figure needs.
+
+A3.2  Q2 — sqrt(2), and whether it is vacuous. First: Phi_P(A) <= 1 for EVERY
+      cut of every poset, which is what makes any bound >= 1 vacuous.
+  OK   Phi_P(A) <= 1 for every cut: 0 / 12702
+       population: 431 posets (34 named n=2..7 + all 40 labelled n=4 + all 357 labelled n=5), all 2^n-2 proper cuts each = 12702 (poset, cut) pairs
+       grain:      per-(poset, cut), exact Fraction comparison
+       => any upper bound on Phi* that is >= 1 carries no information.
+          sqrt(2) = 1.41421... >= 1, so it is VACUOUS. CONFIRMED.
+
+A3.3  WHERE the sqrt(2) vacuity actually comes from. mg-00b9 attributes the gap
+      to the Cheeger SQUARE. Measured at the antichain, the master bound alone:
+         n  3E[D]/(n^2-1)  => 1-lam_std <=  sqrt(6E[D]/(n^2-1))
+         2              1                1 sqrt(2) = 1.41421
+         3              1                1 sqrt(2) = 1.41421
+         4              1                1 sqrt(2) = 1.41421
+         5              1                1 sqrt(2) = 1.41421
+         6              1                1 sqrt(2) = 1.41421
+         7              1                1 sqrt(2) = 1.41421
+         8              1                1 sqrt(2) = 1.41421
+         9              1                1 sqrt(2) = 1.41421
+        10              1                1 sqrt(2) = 1.41421
+        11              1                1 sqrt(2) = 1.41421
+        12              1                1 sqrt(2) = 1.41421
+        13              1                1 sqrt(2) = 1.41421
+        14              1                1 sqrt(2) = 1.41421
+  OK   master bound == 1 at the antichain, every n: 0 / 13
+       population: antichains n=2..14, closed form E[D]=(n^2-1)/3 (verified vs enumeration in A2.5b)
+       grain:      per-n, exact Fraction equality against 1
+       => THE SPECTRAL CHAIN IS ALREADY VACUOUS AT ITS FIRST STEP. The master
+          bound gives 1-lambda_std <= 1, which every lambda_std in [-1,1] already
+          satisfies. sqrt(2) is vacuous because its INPUT is vacuous, not because
+          the Cheeger square is lossy. This is the corpus's own observation
+          (STATE.md:130 'equality at the antichain'; Op-Form:328), re-derived here.
+       => mg-00b9's attribution of the antichain gap to 'the Cheeger SQUARE
+          (tex:318-324), paid only for the detour' is therefore NOT SUPPORTED AT
+          THAT INPUT. The square's price is real and is measured correctly in the
+          REQUIREMENT comparison (A4) -- but the antichain cannot show it, because
+          the antichain kills the chain one step earlier than the square.
+          The conclusion (direct is non-vacuous where spectral is vacuous) SURVIVES;
+          the stated REASON does not.
+
+A3.4  Q3 — IS IT LIKE-FOR-LIKE? min over PREFIXES vs min over ALL CUTS.
+      Direct route bounds  m_pre = min_k Delta_1(A_k).
+      Cheeger bounds       Phi*  = min over ALL cuts A of Phi_P(A).
+      Phi* <= m_pre always (prefixes are a subfamily), so the direct route bounds
+      the LARGER, HARDER number. Checked, not assumed:
+  OK   Phi* <= min over prefixes: 0 / 431
+       population: 431 posets as in A3.2
+       grain:      per-poset, exact Fraction comparison
+       strictly smaller on 65 of 431 posets; EQUAL on 366
+       => the comparison is CONSERVATIVE IN THE DIRECT ROUTE'S FAVOUR: direct gets
+          the better number for the harder quantity. It is not an inflated
+          comparison, it is an understated one.
+
+A3.5  and at the ANTICHAIN specifically, Phi* EQUALS min over prefixes, so at the
+      one input where mg-00b9 evaluates both, the two routes bound the SAME number
+      and the comparison is EXACTLY like-for-like:
+  OK   Phi* == min over prefixes at the antichain: 0 / 6
+       population: antichains n=2..7 (n=7 is 5040 linear extensions x 126 cuts)
+       grain:      per-n, exact Fraction equality
+       => at the antichain the prefix family already attains the global cut
+          minimum, so 'prefix vs arbitrary cut' costs NOTHING there. The 2/3 vs
+          sqrt(2) comparison is like-for-like AT THE ANTICHAIN, and conservative
+          in the direct route's favour everywhere else (A3.4).
+
+A3.6  the SUMMARY table of Priority 2, all three numbers with their status:
+       quantity                          value    status
+       truth  min_k Delta_1 (even n)      1/2      re-derived here (A3.1)
+       truth  min_k Delta_1 (n=3)         2/3      re-derived; NOT 1/2
+       direct bound, REPAIRED             2/3      CONFIRMED (A2.5b, A3.1)
+       direct bound, mg-00b9 AS WRITTEN   16/27    FALSE at n=3 (A2.3)
+       Cheeger bound                      sqrt(2)  CONFIRMED and VACUOUS (A3.2)
+       factor direct/truth                4/3      even n only; 1 at n=3 (A3.1)
+
+==============================================================================
+A3 TOTAL BAD: 0
+==============================================================================

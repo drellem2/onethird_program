@@ -1,0 +1,151 @@
+==============================================================================
+A2 — LEMMA B, the three inequalities scored SEPARATELY
+     Lemma B depends on Lemma A. A1 confirmed Lemma A: 0 exceptions over 5912
+     permutations and 13815 (poset, linear extension) pairs. B is not dead at
+     the root. Everything below is therefore a live question about I2 and I3.
+==============================================================================
+
+A2.0  inv_e = ordinary Kendall inversions, on L(P).  mg-00b9's chain applies
+      Diaconis-Graham to inv_e, which the corpus defines as INCOMPARABLE pairs
+      flipped. DG is about ALL inverted pairs. These coincide on L(P) only
+      because comparable pairs cannot flip in a linear extension. Checked, not
+      assumed:
+  OK   inv_e == Kendall inv on L(P): 0 / 13815
+       population: 431 posets (34 named n=2..7 + all 40 labelled on n=4 + all 357 labelled on n=5), 13815 (poset, linear extension) pairs
+       grain:      per-(poset, linear extension), integer equality
+
+A2.1  I1 — the mediant step. min_{k in K_beta} Delta_1(A_k) <= (E[D]/2)/denom_exact
+  OK   I1 (mediant + Lemma A): 0 / 3443
+       population: 431 posets x 8 betas with a nonempty k-range = 3443 cells
+       grain:      per-(poset, beta) cell, exact Fraction comparison
+
+A2.1b I1 with the numerator RESTRICTED to K_beta (the sharp mediant, before the
+      enlargement to E[D]/2). Measures how much I1 gives away by using Lemma A:
+       most-given-away cell: sharp/loose = 0 (0.0000) at ordsum A2<A2 n=4 beta=1/3
+       => at beta=0 the enlargement is free (ratio 1); the loss is entirely the
+          E[K_k] mass in the two tails k < beta n and k > (1-beta) n.
+
+A2.2  I2 — the step  sum_{k in K_beta} min(k,n-k) >= (1-4 beta^2) n^2/4
+      This is the step I could not derive. Measured as an (n, beta) grid fact,
+      independent of any poset:
+         n   beta      k-range  exact sum      claimed  holds
+         3      0        [1,2]          2          9/4  False
+         3    1/4        [1,2]          2        27/16   True
+         3    1/3        [1,2]          2          5/4   True
+         4      0        [1,3]          4            4   True
+         4    1/4        [1,3]          4            3   True
+         4    1/3        [2,2]          2         20/9  False
+         5      0        [1,4]          6         25/4  False
+         5    1/4        [2,3]          4        75/16  False
+         5    1/3        [2,3]          4       125/36   True
+         8      0        [1,7]         16           16   True
+         8    1/4        [2,6]         14           12   True
+         8    1/3        [3,5]         10         80/9   True
+         9      0        [1,8]         20         81/4  False
+         9    1/4        [3,6]         14       243/16  False
+         9    1/3        [3,6]         14         45/4   True
+  BAD  I2 (the sum_k lower bound): 62 / 183
+       population: n=2..24 x 8 betas with a nonempty k-range = 183 cells
+       grain:      per-(n, beta) grid cell, exact Fraction comparison
+       at beta=0 the failures are exactly the ODD n: [3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23]
+       (deficit is exactly 1/4 there: floor(n^2/4) = (n^2-1)/4 for odd n)
+       => I2 IS FALSE AS STATED. It is an O(1/n^2)-to-O(beta/n) overclaim, not a
+          typo: the discrete sum is compared against the integral it replaces and
+          the ceil/floor of the range endpoints is not paid for.
+
+A2.2b the SHARP replacement for I2 at beta=0, which I propose and verify:
+         sum_{k=1}^{n-1} min(k,n-k) = floor(n^2/4) >= (n^2-1)/4, with equality odd n
+  OK   floor(n^2/4) identity and (n^2-1)/4 floor: 0 / 58
+       population: n=2..59
+       grain:      per-n, exact
+
+A2.3  I2 as a COMPOSITE BOUND on a real poset — does the false step propagate?
+      claim:  min_k Delta_1(A_k) <= 2 E[D] / ((1-4 beta^2) n^2)
+       FALSIFIED antichain n=3              beta=    0: truth 2/3 (0.6667) > bound 16/27 (0.5926)
+       FALSIFIED antichain n=3              beta= 1/16: truth 2/3 (0.6667) > bound 1024/1701 (0.6020)
+       FALSIFIED antichain n=3              beta=  1/8: truth 2/3 (0.6667) > bound 256/405 (0.6321)
+       FALSIFIED two_chains(interleaved) n=3 beta=    0: truth 1/3 (0.3333) > bound 8/27 (0.2963)
+       FALSIFIED two_chains(interleaved) n=3 beta= 1/16: truth 1/3 (0.3333) > bound 512/1701 (0.3010)
+       FALSIFIED two_chains(interleaved) n=3 beta=  1/8: truth 1/3 (0.3333) > bound 128/405 (0.3160)
+       FALSIFIED P35 n=4                    beta=  1/3: truth 1/4 (0.2500) > bound 9/40 (0.2250)
+       FALSIFIED P239 n=5                   beta=    0: truth 3/5 (0.6000) > bound 72/125 (0.5760)
+       FALSIFIED P239 n=5                   beta= 1/16: truth 3/5 (0.6000) > bound 512/875 (0.5851)
+       FALSIFIED P243 n=5                   beta=    0: truth 13/25 (0.5200) > bound 312/625 (0.4992)
+       FALSIFIED P243 n=5                   beta= 1/16: truth 13/25 (0.5200) > bound 6656/13125 (0.5071)
+       FALSIFIED P282 n=5                   beta=    0: truth 1/5 (0.2000) > bound 24/125 (0.1920)
+       FALSIFIED P282 n=5                   beta= 1/16: truth 1/5 (0.2000) > bound 512/2625 (0.1950)
+       FALSIFIED P301 n=5                   beta=  1/4: truth 3/8 (0.3750) > bound 28/75 (0.3733)
+       FALSIFIED P306 n=5                   beta=  1/4: truth 3/8 (0.3750) > bound 28/75 (0.3733)
+       FALSIFIED P310 n=5                   beta=  1/4: truth 1/3 (0.3333) > bound 64/225 (0.2844)
+       FALSIFIED P324 n=5                   beta=  1/4: truth 1/6 (0.1667) > bound 32/225 (0.1422)
+  MEAS I2 composite bound FALSIFIED on real posets: 17 / 3443
+       population: 3443 cells as in A2.1
+       grain:      per-(poset, beta) cell, exact Fraction comparison
+       falsifying n values: [3, 4, 5]
+         n=3: betas ['0', '1/16', '1/8']
+         n=4: betas ['1/3']
+         n=5: betas ['0', '1/16', '1/4']
+
+A2.4  I3 — the OUTER bound, the one the falsifier line in mg-2de0 names:
+      claim:  min_k Delta_1(A_k) <= 4 E[inv_e] / ((1-4 beta^2) n^2)
+       FALSIFIED two_chains(interleaved) n=3 beta=    0: truth 1/3 (0.3333) > bound 8/27 (0.2963)
+       FALSIFIED two_chains(interleaved) n=3 beta= 1/16: truth 1/3 (0.3333) > bound 512/1701 (0.3010)
+       FALSIFIED two_chains(interleaved) n=3 beta=  1/8: truth 1/3 (0.3333) > bound 128/405 (0.3160)
+       FALSIFIED P35 n=4                    beta=  1/3: truth 1/4 (0.2500) > bound 9/40 (0.2250)
+       FALSIFIED P282 n=5                   beta=    0: truth 1/5 (0.2000) > bound 24/125 (0.1920)
+       FALSIFIED P282 n=5                   beta= 1/16: truth 1/5 (0.2000) > bound 512/2625 (0.1950)
+       FALSIFIED P310 n=5                   beta=  1/4: truth 1/3 (0.3333) > bound 8/25 (0.3200)
+       FALSIFIED P324 n=5                   beta=  1/4: truth 1/6 (0.1667) > bound 32/225 (0.1422)
+  MEAS I3 outer bound FALSIFIED on real posets: 8 / 3443
+       population: 3443 cells as in A2.1
+       grain:      per-(poset, beta) cell, exact Fraction comparison
+       of which at beta=0: 2
+         n=3: betas ['0', '1/16', '1/8']
+         n=4: betas ['1/3']
+         n=5: betas ['0', '1/16', '1/4']
+
+A2.5  THE REPAIRED FORM I propose, verified on the same population:
+        beta=0:  min_k Delta_1(A_k) <= (E[D]/2)/floor(n^2/4) <= 2E[D]/(n^2-1)
+        general: min_k Delta_1(A_k) <= (E[D]/2)/denom_exact(n,beta)
+      Note the beta=0 repaired denominator (n^2-1) is the SAME denominator the
+      corpus already uses for the master bound (STATE.md:130) -- the repair puts
+      the direct route on the corpus's own normalisation.
+  OK   repaired beta=0 chain: 0 / 431
+       population: 431 posets as in A2.0
+       grain:      per-poset, exact Fraction chain truth <= b1 <= b2
+  OK   repaired general-beta form: 0 / 3443
+       population: 3443 cells as in A2.1
+       grain:      per-(poset, beta) cell, exact Fraction comparison
+
+A2.5b the repaired beta=0 form at the ANTICHAIN gives EXACTLY 2/3 for every n,
+      which mg-00b9's own stated n^2 form does NOT attain.
+
+      Enumerating L(antichain n) is n! and dies at n=11, so the table below uses
+      closed forms I derived BY HAND and then VERIFIED against enumeration:
+        E[K_k] = k(n-k)/n,  Delta_1(A_k) = max(k,n-k)/n,  E[D] = (n^2-1)/3.
+      The verification is the first block; the extrapolation is the second, and
+      it is labelled as an extrapolation from verified closed forms, not as an
+      enumeration.
+  OK   antichain closed forms vs enumeration: 0 / 7
+       population: antichains n=2..8, enumerated (n=8 is 40320 linear extensions)
+       grain:      per-n, exact Fraction equality of E[D], all E[K_k], all Delta_1(A_k)
+
+         n    truth   repaired 2E[D]/(n^2-1)    mg-00b9 2E[D]/n^2
+         2      1/2                      2/3                  1/2
+         3      2/3                      2/3                16/27   <-- stated form BELOW truth
+         4      1/2                      2/3                  5/8
+         5      3/5                      2/3                16/25
+         6      1/2                      2/3                35/54
+         7      4/7                      2/3                32/49
+         8      1/2                      2/3                21/32
+         9      5/9                      2/3              160/243
+        10      1/2                      2/3                33/50
+        11     6/11                      2/3               80/121
+        12      1/2                      2/3              143/216
+        13     7/13                      2/3              112/169
+       (rows n>=9 are the closed-form extrapolation just verified, NOT enumerated)
+
+==============================================================================
+A2 TOTAL BAD (fatal): 62
+A2 MEASURED FALSIFICATIONS: I2 composite 17, I3 outer 8
+==============================================================================
