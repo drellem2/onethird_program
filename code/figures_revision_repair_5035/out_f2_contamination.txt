@@ -1,0 +1,149 @@
+==========================================================================
+F2  THE CONTAMINATION, WITH ITS DENOMINATOR
+==========================================================================
+
+--------------------------------------------------------------------------
+F2a  THE CLAIM SIDE -- every tracked file, before and after
+--------------------------------------------------------------------------
+
+  population: the 1535 tracked .md/.txt/.py files at HEAD EXCLUDING this
+  tree -- the SUBJECT is the arc as it stood before this repair.  The
+  whole-repository figure over 1549 files is printed beneath, and the gap
+  between them is this instrument measuring itself (see `lib5035.corpus`).
+      ...FILES with at least one number that stops being a figure        18
+      ^ one unit of that number is one file
+      ...NUMBERS that stop being figures, counted with multiplicity      48
+      ^ one unit of that number is one number on one line
+
+  DENOMINATOR, so the number above means something.  Over the same 1535
+  files, counted the same way:
+      ...NUMBERS the PRE-REPAIR rule read as figures                  86750
+      ^ one unit of that number is one number on one line
+      so the repair changes 48 of them -- 0.0553%
+
+      ...NUMBERS that stop being figures INSIDE THIS TREE'S OWN FILES     55
+      ^ one unit of that number is one number on one line
+      The instrument prints declared revisions AS EVIDENCE, so it
+      contaminates its own census.  Excluded from the headline and
+      counted here rather than silently dropped.
+
+  EVERY AFFECTED FILE, listed rather than summarised:
+      code/runner_exit_repair_7522/lib7522.py                              8
+      code/transcript_census_1abe/out_t5_control.txt                       8
+      code/hodge_leverage_audit_97fb/out_audit_97fb.txt                    5
+      code/grain_axis_audit_03d1/a3_ledger.py                              4
+      code/runner_exit_repair_bf79/p4_figures.py                           3
+      code/transcript_census_1abe/PREDICTIONS.md                           3
+      docs/OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md              3
+      code/hodge_leverage_audit_97fb/PREDICTIONS.md                        2
+      code/hodge_leverage_audit_97fb/README.md                             2
+      code/hodge_leverage_audit_f922/out_audit.txt                         2
+      code/branching_bound_audit_aaf4/PREDICTIONS.md                       1
+      code/grain_axis_audit_03d1/selftest03d1.py                           1
+      code/hodge_leverage_audit_97fb/audit_97fb.py                         1
+      code/hodge_leverage_audit_f922/audit_repair.py                       1
+      code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt                  1
+      code/runner_exit_repair_bf79/selftestbf79.py                         1
+      code/state_claims_repair_0120/anchors0120.py                         1
+      docs/landing-mg-d0e2-vacuous-check.md                                1
+--------------------------------------------------------------------------
+F2b  THE BACKING SIDE -- was any figure BACKED ONLY BY A REVISION?
+--------------------------------------------------------------------------
+
+  This is the dangerous direction.  `transcript_figures` is the set of
+  numbers a claim may be backed by; a revision in it can acquit an
+  unbacked figure.  Re-derived over mg-70c7's own population.
+
+  population: the 573 committed `out_*.txt` under `code/`
+      ...DISTINCT FIGURES in the backing corpus, PRE-repair            1494
+      ^ one unit of that number is one distinct integer
+      ...DISTINCT FIGURES in the backing corpus, POST-repair           1493
+      ^ one unit of that number is one distinct integer
+      ...DISTINCT INTEGERS that leave the backing corpus                  1
+      ^ one unit of that number is one distinct integer
+
+  THE INTEGERS THEMSELVES, because a count without them is unchaseable:
+      478508621408     resolves as a git object: yes
+
+  AND THE VERDICT THAT DEPENDS ON IT.  A claim was WRONGLY ACQUITTED if
+  it names a figure that was in the backing corpus ONLY because a
+  revision put it there.  Those are exactly the 1 integers above, and
+  the question is whether any prose line in the arc CLAIMS one:
+
+  population: every tracked non-transcript file at HEAD
+      ...CLAIM LINES naming an integer that leaves the backing corpus      0
+      ^ one unit of that number is one line
+      NONE.  No claim in the arc was acquitted by a revision.  The
+      false-acquittal direction is real, is reachable, and its
+      realised count at HEAD is 0.
+--------------------------------------------------------------------------
+F2c  `docs/` -- the human-facing prose (PREDICTIONS/P3c)
+--------------------------------------------------------------------------
+
+  population: the 117 tracked files under `docs/`
+      ...`docs/` FILES with a number that stops being a figure            2
+      ^ one unit of that number is one file
+      docs/OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md              3
+          OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md:3  **Object.** mg-3f3b's repair of mg-7e39's four findings — landed at `47850
+          OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md:6  Predictions, committed before any script of this instrument existed: `PRED
+          OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md:18  | **F3** 1 of 6 touched | the construct repaired at every occurrence, `DIS
+      docs/landing-mg-d0e2-vacuous-check.md                                1
+          landing-mg-d0e2-vacuous-check.md:205  — it asserts 41, the number it measured at `5988134`, and this tree has 43
+
+  WHAT THIS DOES AND DOES NOT SAY.  `figures()` never RAN over `docs/`
+  -- no probe in the arc censuses it.  So a `docs/` row here is not a
+  published count that was wrong; it is a count that WOULD have been
+  wrong had anybody censused the prose the humans read.  That is a
+  smaller claim and it is the one the evidence supports.
+--------------------------------------------------------------------------
+F2d  THE PUBLISHED COUNTS THEMSELVES, re-derived before and after
+--------------------------------------------------------------------------
+
+  mg-bf79's `p4_figures.py` published three counts over the transcript
+  corpus.  ITS NUMBERS, over ITS population, at ITS commit: 1284
+  distinct figures, 31 of magnitude >= 1e6, 6 resolving.  I did not
+  re-run it -- I RE-DERIVE the same three at HEAD, both ways, and the
+  populations differ (the arc has grown), so the pre-repair column is
+  NOT expected to reproduce 1284 and is not evidence of anything if it
+  does not.  The column that carries the ticket's answer is the DELTA.
+
+      PRE-repair    distinct figures  1494   >= 1e6   46   resolving  19
+      POST-repair   distinct figures  1493   >= 1e6   45   resolving  18
+
+  population: the committed transcript corpus at HEAD, 573 files
+      ...RESOLVING large integers the repair removes from it              1
+      ^ one unit of that number is one distinct integer
+
+  THE SURVIVORS, NAMED -- a resolving integer still in the backing
+  corpus is a revision this rule did not reach, and F1d says why:
+      2539240          still a figure
+      3738079          still a figure
+      3756553          still a figure
+      4785086          still a figure
+      5309132          still a figure
+      5988134          still a figure
+      7209911          still a figure
+      8490669          still a figure
+      23060750         still a figure
+      25392406         still a figure
+      37380799         still a figure
+      39423190         still a figure
+      47850862         still a figure
+      53091324         still a figure
+      72099115         still a figure
+      85865714         still a figure
+      89626288         still a figure
+      253924065        still a figure
+
+==========================================================================
+F2 TOTAL BAD: 0
+==========================================================================
+
+
+EXTENT OF THAT NUMBER.  It counts one thing only: a claim line in the
+arc that names an integer which was in the backing corpus solely
+because a revision put it there -- a FALSE ACQUITTAL.  It does not
+count the false accusations of F2a, which are the reported defect and
+are a measurement here rather than a fault of this tree.
+
+FINDING: F2a the repair moves 48 of 86750 numbers read as figures across 18 of 1535 tracked files (0.0553%); the backing corpus over 573 committed transcripts loses 1 of 1494 distinct integers, and 0 claim line(s) in the arc were acquitted by one

@@ -446,10 +446,21 @@ if N - same:
     BAD += 1
 
 # ---------------------------------------------------------------------------
-B.hdr("A3f  O4's LIVE DEFECT -- `figures()` STILL DOES NOT EXCLUDE A REVISION")
+B.hdr("A3f  O4's DEFECT -- CLOSED BY mg-5035, and this section says so")
 
-print("  Reported and NOT fixed by the parent, so it is live.  Confirmed here")
-print("  rather than repeated:")
+print("  WHAT THIS SECTION SAID WHEN IT WAS WRITTEN, LEFT AS WRITTEN: reported")
+print("  and NOT fixed by the parent, so it is live.  The committed transcript")
+print("  `out_a3_ledger.txt` still carries that reading and is NOT regenerated")
+print("  here -- it is the record of a true measurement at its own commit.")
+print()
+print("  WHAT IS TRUE NOW.  mg-5035 repaired `lib7522.figures` with a DECLARED-")
+print("  revision rule: a revision-SHAPED token is excluded only where the line")
+print("  NAMES it a revision, so `at `1234567`` is not a figure and `431723379")
+print("  labelled posets` still is.  The rows below are re-derived live and")
+print("  will now show the exclusion working; the count beneath them is this")
+print("  audit's original count and its new value side by side.")
+print()
+print("  Confirmed here rather than repeated:")
 print()
 REVS = ["1234567", "9715841", "973ca61", "0123456789"]
 seen_as_fig = 0
@@ -466,9 +477,13 @@ B.plain("...REVISIONS `figures()` reads as a figure", seen_as_fig)
 print("      ^ one unit of that number is one candidate revision string")
 print()
 print("  The comment deleted with mg-70c7's old body claimed to exclude `a git")
-print("  revision`.  It never did and still does not: an all-decimal short")
-print("  revision passes every exclusion.  LIVE, and correctly reported by the")
-print("  parent as reported-and-not-fixed.")
+print("  revision`.  IT NEVER DID -- and when this audit ran, an all-decimal")
+print("  short revision passed every exclusion and this count was 3 of 4.")
+print("  mg-5035 closed it.  The count above is re-derived live, so a reader")
+print("  comparing it with `out_a3_ledger.txt` is seeing the repair, not a")
+print("  contradiction; the transcript is the earlier state and is left alone.")
+print("  `selftest03d1.py`'s tripwire for this defect FIRED on mg-5035's fix,")
+print("  which is what it was built to do.")
 
 print()
 print("A3 TOTAL BAD: %d" % BAD)

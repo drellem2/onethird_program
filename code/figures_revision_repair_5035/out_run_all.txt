@@ -1,0 +1,639 @@
+### selftest5035.py
+mg-5035 -- SELF-TEST
+
+  population: the 27 CASES below, each an input whose answer is known
+  by construction
+
+      shape alone is not enough: no cue -> not a revision                  ok
+      cue alone is not enough: too short -> not a revision                 ok
+      41 digits is past a sha and is not revision-shaped                   ok
+      40 digits is exactly a full sha and IS revision-shaped               ok
+      7 digits is the shortest shape accepted                              ok
+      `at ` declares                                                       ok
+      backtick after the cue does not break it                             ok
+      `carried by ` declares through one filler                            ok
+      `HEAD is ` declares through a copula (the F1a defect)                ok
+      a sibling revision between cue and token is skipped                  ok
+      a GRAIN NOUN between cue and token BREAKS the declaration            ok
+      `rows` is not a filler, so it breaks it                              ok
+      nothing at all to the left is NOT a declaration (the table-column ga ok
+      a bare filename to the left is not a declaration                     ok
+      a declared all-decimal revision is not a figure                      ok
+      ...and the OTHER number on that line survives                        ok
+      INT_MAX in prose is still a figure                                   ok
+      a big measurement with a grain noun is still a figure                ok
+      the three OLD exclusions still hold: `:`-prefix                      ok
+      ...`on line 89`                                                      ok
+      ...and `2` is still not a figure                                     ok
+      `3` is a figure, as mg-bf79 settled                                  ok
+      a line naming the same revision twice loses it twice                 ok
+      dropped() is empty when nothing is declared                          ok
+      the UNREPAIRED control still reads the declared revision as a figure ok
+      ...and the forwarder does NOT, because it delegates                  ok
+      a deliberately wrong expectation is caught                           ok
+
+      ...CASES that pass, one CHECK each                                 27
+      ^ one unit of that number is one case
+
+selftest5035 TOTAL BAD: 0
+
+### f1_rule.py
+==========================================================================
+F1  THE REPAIRED RULE, SCORED IN BOTH DIRECTIONS
+==========================================================================
+
+--------------------------------------------------------------------------
+F1a  CONSTRUCTED ALL-DECIMAL SHORT REVISIONS -- are they excluded now?
+--------------------------------------------------------------------------
+
+  Every token below is ALL DECIMAL DIGITS.  A hex-containing revision
+  was never the defect: `_NUMBER` cannot match one, so it was already
+  excluded and proves nothing.  The last three rows are constructed --
+  they name no object in this repository -- which is the point: the
+  repaired rule reads the TEXT and never asks the object database, so a
+  revision that does not exist yet is excluded exactly as one that does.
+
+      token          alldec    resolves  BEFORE   AFTER   
+      1234567        yes       no        FIGURE   -         EXCLUDED
+      3738079        yes       yes       FIGURE   -         EXCLUDED
+      4785086        yes       yes       FIGURE   -         EXCLUDED
+      8490669        yes       yes       FIGURE   -         EXCLUDED
+      3756553        yes       yes       FIGURE   -         EXCLUDED
+      5988134        yes       yes       FIGURE   -         EXCLUDED
+      3942319        yes       yes       FIGURE   -         EXCLUDED
+      9999999        yes       no        FIGURE   -         EXCLUDED
+      0123456789     yes       no        FIGURE   -         EXCLUDED
+      12345678901234567890123456789012345678 yes       no        FIGURE   -         EXCLUDED
+
+  population: the 10 CONSTRUCTED all-decimal declared-revision lines
+      ...LINES on which the repair excludes the revision                 10
+      ^ one unit of that number is one constructed line
+
+  AND THE ONE THE TICKET NAMES.  `3738079` is the revision mg-bf79's
+  own `r6_self.py` E2 reported as A FIGURE NO TRANSCRIPT BACKS.  It is
+  row 2 above and it is excluded.
+--------------------------------------------------------------------------
+F1b  NEGATIVE CONTROL -- genuine figures that carry the revision SHAPE
+--------------------------------------------------------------------------
+
+  These are real measurements of this corpus, all revision-shaped.  A
+  magnitude rule drops every one of them; that is why the repair is not
+  a magnitude rule.  Each MUST survive.
+
+      431723379        kept      (16999 classes, 431723379 labelled posets)
+      2147483647       kept      figures including `2147483647`, an INT_MAX i
+      1103515245       kept      st = (1103515245 * st + 12345) % (1 << 31)
+      33554432         kept      n = 5   route: brute force over all 33554432
+      20260730         kept      rng = random.Random(20260730)
+      92369333         kept      6       318    117169     37029       923693
+      4770003          kept      flat evaluations               : 4770003
+      67327446062800   kept      11 | 50 |         21 | inherit | inherit | 1
+
+  population: the 8 GENUINE FIGURES above, each revision-shaped
+      ...GENUINE FIGURES the repair still reports                         8
+      ^ one unit of that number is one figure
+--------------------------------------------------------------------------
+F1c  PRECISION AND RECALL over every tracked .md/.txt/.py
+--------------------------------------------------------------------------
+
+  Scored against `git rev-parse`, used AS AN ORACLE TO LABEL TOKENS and
+  never as a rule -- `lib7522.figures` does not call git.  The oracle is
+  itself imperfect and is not treated as truth: F1d reads the rows.
+
+  population: every tracked .md/.txt/.py at HEAD
+      ...OCCURRENCES of a revision-SHAPED token                         290
+      ^ one unit of that number is one token on one line
+      ...DISTINCT revision-shaped TOKENS                                 50
+      ^ one unit of that number is one distinct token
+      ...DISTINCT TOKENS that resolve as a git object (oracle)           20
+      ^ one unit of that number is one distinct token
+
+      ...OCCURRENCES the repair now excludes                             49
+      ^ one unit of that number is one token on one line
+      ...DISTINCT TOKENS excluded on at least one line                   14
+      ^ one unit of that number is one distinct token
+
+  AT THE GRAIN OF ONE DISTINCT TOKEN, against the oracle:
+      ...EXCLUDED TOKENS that resolve   (agreeing exclusions)            10
+      ^ one unit of that number is one distinct token
+      ...EXCLUDED TOKENS that do NOT resolve  (the risk direction)        4
+      ^ one unit of that number is one distinct token
+      ...RESOLVING TOKENS never excluded anywhere  (the gap)             10
+      ^ one unit of that number is one distinct token
+
+  precision 10/14   recall 10/20
+
+  THE NON-RESOLVING EXCLUSIONS, EVERY ONE PRINTED -- because this is
+  the direction `lib70c7`'s own sentence warns about and a count
+  without the rows is a count nobody can chase:
+      1234567        6 line(s); first: code/grain_axis_audit_03d1/a3_ledger.py:458
+          print("  NAMES it a revision, so `at `1234567`` is not a figure and `431723379")
+      2147483647     1 line(s); first: code/runner_exit_repair_7522/lib7522.py:840
+          revision.  `2147483647` on a line that does not say `commit` is still a
+      431723379      1 line(s); first: code/runner_exit_repair_7522/lib7522.py:784
+          # copula on this list, `at HEAD is 431723379` would lose a genuine figure.
+      9715841        2 line(s); first: code/grain_axis_audit_03d1/a3_ledger.py:465
+          REVS = ["1234567", "9715841", "973ca61", "0123456789"]
+--------------------------------------------------------------------------
+F1d  THE GAP, COUNTED RATHER THAN DISCOVERED LATER
+--------------------------------------------------------------------------
+
+  A resolving token the rule does NOT exclude is a MISS.  PREDICTIONS
+  P1b/P1c say the misses are dominated by fixed-width transcript table
+  columns, where the token has no words to its left at all.  Scored:
+
+      23060750       bare code/transcript_census_1abe/out_t4_rebase.txt
+          23060750   106e1211   IDENTICAL   docs+repair: X3 IS CORRECTED AT SOURCE and there is
+      25392406       cued code/transcript_census_1abe/out_t4_rebase.txt
+          4daa1fc7   25392406   IDENTICAL   evidence: the committed outputs of a full run — 8 of
+      253924065      cued code/census_repair_f3ff/out_s4_crosscheck.txt
+          ADDED   253924065  owner=mg-16eb  evidence: the committed outputs of a full run — 8 of 8
+      37380799       bare code/transcript_census_1abe/out_t3_shas.txt
+          37380799   STALE          bba2a3ce   predictions: mg-bf79's predictions for the r
+      39423190       cued code/transcript_census_1abe/out_t4_rebase.txt
+          83f218c2   39423190   IDENTICAL   repair: EIGHT IS NOT THE POPULATION EITHER — the 33-
+      47850862       cued code/transcript_census_1abe/out_t4_rebase.txt
+          96670ebb   47850862   IDENTICAL   docs+repair: mg-7e39's FOUR FINDINGS LANDED — `n/a`
+      53091324       bare code/transcript_census_1abe/out_t3_shas.txt
+          53091324   STALE          9237de01   predictions: mg-97fb's predictions for the i
+      72099115       cued code/transcript_census_1abe/out_t4_rebase.txt
+          fa36794f   72099115   IDENTICAL   evidence: e2's own transcript regenerated with the r
+      85865714       bare code/transcript_census_1abe/out_t4_rebase.txt
+          85865714   77306a7f   IDENTICAL   docs+repair: THE REFUSAL IS KEYED ON THE ROW'S HEADI
+      89626288       bare code/transcript_census_1abe/out_t4_rebase.txt
+          89626288   bd24efc9   IDENTICAL   docs+audit: independent audit of the mg-3f3b n/a-and
+
+  population: the 10 RESOLVING TOKENS the repair does not exclude
+      ...MISSES whose first occurrence has NO word to its left            5
+      ^ one unit of that number is one distinct token
+--------------------------------------------------------------------------
+F1f  THE RESIDUAL RISK THE COPULA FILLERS CREATE, MEASURED
+--------------------------------------------------------------------------
+
+  `HEAD is 3738079` did not read as a declaration until F1a went red on
+  it, so `is/was/are/were` joined the filler list.  That admits one
+  construction where a GENUINE figure could be lost -- a cue word,
+  a copula, then a measurement.  It is not asserted rare; it is counted.
+
+      at HEAD is 431723379 labelled posets           dropped: [431723379]
+      the count at HEAD was 2147483647               dropped: [2147483647]
+      the commit is 3738079                          dropped: [3738079]
+
+  Now the corpus, which is the number that matters.  A line is AT RISK
+  when the repair drops a token from it AND the token is followed by a
+  GRAIN NOUN -- a word, on the same line, right after the number.  A
+  revision is not counted in units of anything; a figure is.
+
+  population: the 49 OCCURRENCES the repair excludes
+      ...EXCLUDED OCCURRENCES followed by a candidate GRAIN NOUN          0
+      ^ one unit of that number is one token on one line
+      No excluded occurrence in the corpus is followed by a noun.
+      The risk is real and its realised count at HEAD is 0.
+--------------------------------------------------------------------------
+F1e  THE POSITIVE CONTROL -- can this instrument show the defect?
+--------------------------------------------------------------------------
+
+  A negative needs an instrument that could have shown the positive.
+  mg-56dc's `figures(line, small=)` is left UNREPAIRED on purpose
+  (PREDICTIONS/P2b).  Put the F1a lines to it: if it excluded them too,
+  F1a would be measuring nothing.
+
+  population: the 10 CONSTRUCTED lines of F1a
+      ...LINES where the UNREPAIRED copy still reads a FIGURE            10
+      ^ one unit of that number is one constructed line
+      The control fires on every row.  F1a is a difference.
+
+  AND THE FORWARDER.  `lib70c7.figures` is one statement returning
+  `lib7522.figures`, so it inherits the repair without being edited:
+      lib70c7.figures agrees with lib7522.figures on the F1a line: yes
+
+==========================================================================
+F1 TOTAL BAD: 0
+==========================================================================
+
+
+EXTENT OF THAT NUMBER.  It counts a constructed declared revision the
+repair still reads as a figure, a genuine revision-shaped figure the
+repair drops, a control row that stopped firing, and a disagreement
+between the forwarder and the implementation.  It ranges over the 10
+constructed lines, the 8 negative-control figures and the 290 shaped
+occurrences in the corpus.  IT DOES NOT COUNT F1d's misses: an
+under-exclusion is the error this rule chooses to make and is a
+MEASUREMENT, not a fault.
+
+FINDING: F1a the repaired rule excludes 10 of 10 CONSTRUCTED all-decimal declared revisions and drops 0 of 8 genuine revision-shaped figures; over the corpus it excludes 14 of 50 distinct shaped tokens, 10 of which resolve and 4 of which do not, leaving 10 resolving tokens unreached (5 of them bare table columns)
+
+### f2_contamination.py
+==========================================================================
+F2  THE CONTAMINATION, WITH ITS DENOMINATOR
+==========================================================================
+
+--------------------------------------------------------------------------
+F2a  THE CLAIM SIDE -- every tracked file, before and after
+--------------------------------------------------------------------------
+
+  population: the 1535 tracked .md/.txt/.py files at HEAD EXCLUDING this
+  tree -- the SUBJECT is the arc as it stood before this repair.  The
+  whole-repository figure over 1549 files is printed beneath, and the gap
+  between them is this instrument measuring itself (see `lib5035.corpus`).
+      ...FILES with at least one number that stops being a figure        18
+      ^ one unit of that number is one file
+      ...NUMBERS that stop being figures, counted with multiplicity      48
+      ^ one unit of that number is one number on one line
+
+  DENOMINATOR, so the number above means something.  Over the same 1535
+  files, counted the same way:
+      ...NUMBERS the PRE-REPAIR rule read as figures                  86750
+      ^ one unit of that number is one number on one line
+      so the repair changes 48 of them -- 0.0553%
+
+      ...NUMBERS that stop being figures INSIDE THIS TREE'S OWN FILES     55
+      ^ one unit of that number is one number on one line
+      The instrument prints declared revisions AS EVIDENCE, so it
+      contaminates its own census.  Excluded from the headline and
+      counted here rather than silently dropped.
+
+  EVERY AFFECTED FILE, listed rather than summarised:
+      code/runner_exit_repair_7522/lib7522.py                              8
+      code/transcript_census_1abe/out_t5_control.txt                       8
+      code/hodge_leverage_audit_97fb/out_audit_97fb.txt                    5
+      code/grain_axis_audit_03d1/a3_ledger.py                              4
+      code/runner_exit_repair_bf79/p4_figures.py                           3
+      code/transcript_census_1abe/PREDICTIONS.md                           3
+      docs/OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md              3
+      code/hodge_leverage_audit_97fb/PREDICTIONS.md                        2
+      code/hodge_leverage_audit_97fb/README.md                             2
+      code/hodge_leverage_audit_f922/out_audit.txt                         2
+      code/branching_bound_audit_aaf4/PREDICTIONS.md                       1
+      code/grain_axis_audit_03d1/selftest03d1.py                           1
+      code/hodge_leverage_audit_97fb/audit_97fb.py                         1
+      code/hodge_leverage_audit_f922/audit_repair.py                       1
+      code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt                  1
+      code/runner_exit_repair_bf79/selftestbf79.py                         1
+      code/state_claims_repair_0120/anchors0120.py                         1
+      docs/landing-mg-d0e2-vacuous-check.md                                1
+--------------------------------------------------------------------------
+F2b  THE BACKING SIDE -- was any figure BACKED ONLY BY A REVISION?
+--------------------------------------------------------------------------
+
+  This is the dangerous direction.  `transcript_figures` is the set of
+  numbers a claim may be backed by; a revision in it can acquit an
+  unbacked figure.  Re-derived over mg-70c7's own population.
+
+  population: the 573 committed `out_*.txt` under `code/`
+      ...DISTINCT FIGURES in the backing corpus, PRE-repair            1494
+      ^ one unit of that number is one distinct integer
+      ...DISTINCT FIGURES in the backing corpus, POST-repair           1493
+      ^ one unit of that number is one distinct integer
+      ...DISTINCT INTEGERS that leave the backing corpus                  1
+      ^ one unit of that number is one distinct integer
+
+  THE INTEGERS THEMSELVES, because a count without them is unchaseable:
+      478508621408     resolves as a git object: yes
+
+  AND THE VERDICT THAT DEPENDS ON IT.  A claim was WRONGLY ACQUITTED if
+  it names a figure that was in the backing corpus ONLY because a
+  revision put it there.  Those are exactly the 1 integers above, and
+  the question is whether any prose line in the arc CLAIMS one:
+
+  population: every tracked non-transcript file at HEAD
+      ...CLAIM LINES naming an integer that leaves the backing corpus      0
+      ^ one unit of that number is one line
+      NONE.  No claim in the arc was acquitted by a revision.  The
+      false-acquittal direction is real, is reachable, and its
+      realised count at HEAD is 0.
+--------------------------------------------------------------------------
+F2c  `docs/` -- the human-facing prose (PREDICTIONS/P3c)
+--------------------------------------------------------------------------
+
+  population: the 117 tracked files under `docs/`
+      ...`docs/` FILES with a number that stops being a figure            2
+      ^ one unit of that number is one file
+      docs/OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md              3
+          OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md:3  **Object.** mg-3f3b's repair of mg-7e39's four findings — landed at `47850
+          OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md:6  Predictions, committed before any script of this instrument existed: `PRED
+          OneThird-Hodge-Side-Leverage-Mg3f3bRepair-Audit.md:18  | **F3** 1 of 6 touched | the construct repaired at every occurrence, `DIS
+      docs/landing-mg-d0e2-vacuous-check.md                                1
+          landing-mg-d0e2-vacuous-check.md:205  — it asserts 41, the number it measured at `5988134`, and this tree has 43
+
+  WHAT THIS DOES AND DOES NOT SAY.  `figures()` never RAN over `docs/`
+  -- no probe in the arc censuses it.  So a `docs/` row here is not a
+  published count that was wrong; it is a count that WOULD have been
+  wrong had anybody censused the prose the humans read.  That is a
+  smaller claim and it is the one the evidence supports.
+--------------------------------------------------------------------------
+F2d  THE PUBLISHED COUNTS THEMSELVES, re-derived before and after
+--------------------------------------------------------------------------
+
+  mg-bf79's `p4_figures.py` published three counts over the transcript
+  corpus.  ITS NUMBERS, over ITS population, at ITS commit: 1284
+  distinct figures, 31 of magnitude >= 1e6, 6 resolving.  I did not
+  re-run it -- I RE-DERIVE the same three at HEAD, both ways, and the
+  populations differ (the arc has grown), so the pre-repair column is
+  NOT expected to reproduce 1284 and is not evidence of anything if it
+  does not.  The column that carries the ticket's answer is the DELTA.
+
+      PRE-repair    distinct figures  1494   >= 1e6   46   resolving  19
+      POST-repair   distinct figures  1493   >= 1e6   45   resolving  18
+
+  population: the committed transcript corpus at HEAD, 573 files
+      ...RESOLVING large integers the repair removes from it              1
+      ^ one unit of that number is one distinct integer
+
+  THE SURVIVORS, NAMED -- a resolving integer still in the backing
+  corpus is a revision this rule did not reach, and F1d says why:
+      2539240          still a figure
+      3738079          still a figure
+      3756553          still a figure
+      4785086          still a figure
+      5309132          still a figure
+      5988134          still a figure
+      7209911          still a figure
+      8490669          still a figure
+      23060750         still a figure
+      25392406         still a figure
+      37380799         still a figure
+      39423190         still a figure
+      47850862         still a figure
+      53091324         still a figure
+      72099115         still a figure
+      85865714         still a figure
+      89626288         still a figure
+      253924065        still a figure
+
+==========================================================================
+F2 TOTAL BAD: 0
+==========================================================================
+
+
+EXTENT OF THAT NUMBER.  It counts one thing only: a claim line in the
+arc that names an integer which was in the backing corpus solely
+because a revision put it there -- a FALSE ACQUITTAL.  It does not
+count the false accusations of F2a, which are the reported defect and
+are a measurement here rather than a fault of this tree.
+
+FINDING: F2a the repair moves 48 of 86750 numbers read as figures across 18 of 1535 tracked files (0.0553%); the backing corpus over 573 committed transcripts loses 1 of 1494 distinct integers, and 0 claim line(s) in the arc were acquitted by one
+
+### f3_published.py
+==========================================================================
+F3  ALREADY-CORRUPTED PUBLISHED OUTPUT
+==========================================================================
+
+--------------------------------------------------------------------------
+F3a  THE NAMED WITNESS -- `UNBACKED README.md 3738079`, retroactively
+--------------------------------------------------------------------------
+
+  mg-bf79's `out_p2_population.txt:99-106` records the whole sequence:
+  `r6_self.py` exited 1 for exactly one run, on `UNBACKED README.md
+  3738079`, *because the repaired README named a REVISION and E2's
+  `figures()` read the seven-digit revision as a MEASUREMENT no
+  transcript backs*.  THAT IS mg-bf79's TEXT, quoted, not re-derived.
+
+  The README line itself is not in any commit -- I searched every
+  revision of `code/runner_exit_repair_70c7/README.md` and none
+  contains `3738079`.  So the witness must be RECONSTRUCTED in the form
+  mg-bf79 describes, and the reconstruction is labelled as mine:
+
+      BEFORE [3738079]                AFTER []                       EXCLUDED
+          the population is re-derived at `3738079`, the revision this repair landed
+      BEFORE [3738079, 9]             AFTER [9]                      EXCLUDED
+          at `3738079` -- the revision this figure is a fact about -- 9 sites
+      BEFORE [3738079]                AFTER []                       EXCLUDED
+          this figure is a fact about the tree at commit 3738079
+
+  population: the 3 RECONSTRUCTED README lines above, each in the form
+  mg-bf79 says the original took
+      ...RECONSTRUCTIONS on which the repair prevents the accusation      3
+      ^ one unit of that number is one reconstructed line
+
+  SO THE FIX IS RETROACTIVELY CORRECT AT THE SITE THAT PRODUCED THE
+  ONE RECORDED FAILURE.  It is a reconstruction and not the original
+  bytes, and that limit is the reason this row is not stronger.
+--------------------------------------------------------------------------
+F3b  THE HUNT -- a revision printed under a label that calls it a FIGURE
+--------------------------------------------------------------------------
+
+  population: the 573 committed `out_*.txt` under `code/`
+      ...LINES printing a revision-shaped token beside a figure word      5
+      ^ one unit of that number is one (file, line, token) sighting
+
+      3756553      DECLARED  code/hodge_leverage_audit_f922/out_audit.txt:123
+          [FINDING  ] F-E -- the landing's committed evidence does not reproduce at the commit it 
+      3756553      DECLARED  code/hodge_leverage_audit_f922/out_audit.txt:183
+          FINDING  F-E: the landing's committed evidence does not reproduce at the commit it was c
+      3738079      bare      code/runner_exit_repair_bf79/out_p2_population.txt:102
+          `UNBACKED README.md 3738079` -- because the repaired README named a
+      3738079      bare      code/runner_exit_repair_bf79/out_p4_figures.txt:174
+          `3738079 `  all digits: yes  read as a FIGURE: yes  resolves: yes
+      3738079      bare      code/runner_exit_repair_bf79/out_selftest_bf79.txt:108
+          an all-digit short revision IS read as a figure (P4e)    [3738079]      OK
+
+  ADJUDICATION, one sighting at a time -- a count of sightings is not a
+  count of corrupted figures, and conflating them is this arc's own
+  recurring error:
+
+    A sighting is CORRUPTION only if the number was COUNTED AS A
+    MEASUREMENT in a published total.  A transcript line that PRINTS a
+    revision while DESCRIBING the defect is a record of the defect, not
+    an instance of it.  Every sighting above is in mg-bf79's own
+    tree or in a census table whose column IS a revision by design.
+      ...SIGHTINGS that are a DECLARED revision counted as a figure       2
+      ^ one unit of that number is one sighting
+--------------------------------------------------------------------------
+F3c  WHAT IS RETRACTED AND WHAT IS NOT
+--------------------------------------------------------------------------
+
+  THE ARITHMETIC FIX RETRACTS NOTHING BY ITSELF.  The ticket is right
+  about that, and here is the list it asks for.
+
+  (1) THE ONE RECORDED FAILURE WAS NEVER PUBLISHED AS A COUNT.  The run
+      that exited 1 on `UNBACKED README.md 3738079` is described in
+      mg-bf79's transcript; the FAILING RUN'S OWN TRANSCRIPT was never
+      committed, and `r6_self.py` exits 0 at HEAD.  Nothing to retract.
+
+  (2) THE INFLATION WAS REMOVED BY EDITING THE PROSE, NOT THE RULE.
+      mg-bf79: *it exits 0 again now, because the prose no longer names
+      an unstable revision.*  I confirmed the README at HEAD names no
+      all-decimal revision:
+      ...revision-SHAPED tokens in mg-70c7's README at HEAD               0
+      ^ one unit of that number is one token occurrence
+      So the defect was WORKED AROUND IN THE PROSE and left in the
+      rule.  The workaround is what a reader would have had to notice
+      to know the rule was still wrong, and nothing said so.
+
+  (3) THE COUNTS THAT WOULD MOVE IF RE-RUN TODAY.  These are not
+      retracted by this ticket and are not corrected in place: I do
+      not regenerate another tree's committed evidence.  Listed so the
+      next reader has them:
+
+  population: the 573 committed transcripts
+      ...TRANSCRIPTS whose figure reading changes under the repair        4
+      ^ one unit of that number is one transcript file
+      code/hodge_leverage_audit_97fb/out_audit_97fb.txt                  5
+      code/hodge_leverage_audit_f922/out_audit.txt                       2
+      code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt                1
+      code/transcript_census_1abe/out_t5_control.txt                     8
+
+      NONE OF THESE IS A PUBLISHED FIGURE COUNT.  Each is a line that
+      NAMES a revision inside a transcript; no total printed in any of
+      them was computed by `figures()` over its own text.  That is why
+      the honest headline is that the defect was real and its published
+      damage is smaller than the ticket assumes -- said plainly rather
+      than buried, because overstating it would be the same failure as
+      the comment that started this.
+--------------------------------------------------------------------------
+F3d  THE LINE THE REPAIR DOES NOT REACH, said before a reader finds it
+--------------------------------------------------------------------------
+
+      code/runner_exit_repair_bf79/out_p2_population.txt:102
+          `UNBACKED README.md 3738079` -- because the repaired README named a
+          dropped by the repair: nothing
+
+  `UNBACKED README.md 3738079` has a FILENAME to the left of the token
+  and no cue word, so the declared-revision rule does not fire on it.
+  THAT IS CORRECT HERE AND IT IS WORTH SAYING WHY.  That line is
+  mg-bf79 QUOTING the defect, inside a transcript.  A rule that
+  rewrote the record of a defect while repairing the defect would be
+  destroying the evidence -- which is the thing this arc keeps
+  catching.  The gap and the correct behaviour coincide here; F1d
+  counts the cases where they do not.
+
+==========================================================================
+F3 TOTAL BAD: 0
+==========================================================================
+
+
+EXTENT OF THAT NUMBER.  It counts a reconstructed witness line the
+repair fails to fix.  It does NOT count sightings, transcripts that
+would move, or the lines F1d says the rule cannot reach: those are
+measurements of the arc, not faults of this tree.
+
+FINDING: F3a the one recorded instance of this defect corrupting output was never committed as a count -- it was a single non-zero exit of `r6_self.py`, removed by EDITING THE PROSE and not the rule; 3 of 3 reconstructed witness lines are now excluded; 5 committed transcript(s) print a revision beside a figure word and 2 of those is a DECLARED revision counted as a figure; 4 transcript(s) would read differently if re-run and none of them publishes a figure COUNT
+
+### f4_self.py
+==========================================================================
+F4  THIS TREE HELD TO ITS OWN STANDARD
+==========================================================================
+
+--------------------------------------------------------------------------
+F4a  DID THE TRIPWIRES FIRE?  proved, not asserted
+--------------------------------------------------------------------------
+
+  Two selftests in the arc carried the false exclusion ASSERTED AS
+  FALSE, each with a comment saying a later fix would turn it red and
+  name itself.  A ticket that edits them and says `they fired` has
+  proved nothing.  So the OLD assertions are re-run here against the
+  REPAIRED rule; each must now be false.
+
+      selftestbf79.py  (mg-bf79/P4e)     old assertion holds: False  FIRED
+      selftest03d1.py  (mg-03d1)         old assertion holds: False  FIRED
+
+  population: the 2 TRIPWIRES in the arc that assert this exclusion
+  as false
+      ...TRIPWIRES that went red on this repair                           2
+      ^ one unit of that number is one selftest case
+
+  AND THEY ARE RE-POINTED, NOT DELETED.  Both files now assert the new
+  truth AND keep a sentence recording that the claim was false for the
+  whole life of the rule.  Checked by reading the source:
+      code/runner_exit_repair_bf79/selftestbf79.py         records that it fired: yes
+      code/grain_axis_audit_03d1/selftest03d1.py           records that it fired: yes
+--------------------------------------------------------------------------
+F4b  IS THERE STILL ONE IMPLEMENTATION OF `figures`?
+--------------------------------------------------------------------------
+
+  mg-bf79's O4 was *two copies of this rule disagree*.  Repairing the
+  rule by adding a fourth copy would be the same defect wearing this
+  ticket's name.  population: every `def figures` in `code/*/lib*.py`
+  plus every file in this tree.
+
+      code/runner_exit_audit_56dc/lib56dc.py               own body   3 stmt(s)
+      code/runner_exit_repair_70c7/lib70c7.py              delegates  1 stmt(s)
+      code/runner_exit_repair_7522/lib7522.py              own body   3 stmt(s)
+
+      ...DEFINITIONS of `figures` in the arc                              3
+      ^ one unit of that number is one function definition
+      ...of those that carry their OWN BODY                               2
+      ^ one unit of that number is one function definition
+
+  EXPECTED: 3 definitions, 2 with own bodies -- `lib7522` (the repaired
+  implementation) and `lib56dc` (the untouched control) -- and
+  `lib70c7` delegating.  THIS TREE DEFINES NONE.
+      ...DEFINITIONS of `figures` in mg-5035's own tree                   0
+      ^ one unit of that number is one function definition
+--------------------------------------------------------------------------
+F4c  IS THE POSITIVE CONTROL STILL UNREPAIRED?
+--------------------------------------------------------------------------
+
+      `lib56dc.py` carries none of mg-5035's rule: yes
+      lib56dc still reads `at 1234567 ...` as a figure:      yes
+
+  A negative needs an instrument that could have shown the positive.
+  This is that instrument, and it is checked every run rather than
+  assumed to have stayed put.
+--------------------------------------------------------------------------
+F4d  DOES EVERY COUNT ROW HERE NAME ITS POPULATION AND ITS GRAIN?
+--------------------------------------------------------------------------
+
+  mg-bf79's standard, adopted: the grain lives in the row, not in a
+  column header.  Measured over this tree's OWN committed transcripts.
+
+  population: the 6 committed transcripts of this tree
+      ...COUNT ROWS printed by this tree                                 35
+      ^ one unit of that number is one printed count row
+      ...COUNT ROWS whose next line names the grain of the value         35
+      ^ one unit of that number is one printed count row
+--------------------------------------------------------------------------
+F4e  WHAT THIS TREE CANNOT SEE ABOUT ITSELF
+--------------------------------------------------------------------------
+
+  (1) THIS TREE IS INSIDE THE CORPUS IT CENSUSES.  `F2a` ranges over
+      every tracked `.md`/`.txt`/`.py`, and that now includes this
+      directory.  Two of the excluded tokens F1c prints are in
+      `PREDICTIONS.md` and in `lib7522.py`'s own new comment: the rule
+      excludes the counter-example its documentation writes down,
+      because a sentence explaining `at HEAD is 431723379` is itself a
+      line declaring a revision.  That is not a bug and it is not
+      hidden; it is the reason F1c prints every non-resolving exclusion
+      by file and line instead of only counting them.
+
+  (2) F4d CANNOT SEE ITS OWN TRANSCRIPT ON A FIRST RUN.  `run_all.sh`
+      writes to `out_*.txt.new` and moves at the end, so this probe
+      reads the PREVIOUS run's `out_f4_self.txt`.  On a clean tree that
+      file does not exist and its rows are simply absent from the
+      count above.  mg-bf79's defect #7 and mg-03d1's A4 are about
+      exactly this; the `.new`+`mv` idiom is inherited from them and
+      the residue is stated rather than claimed away.
+
+  (3) THE ORACLE IS NOT TRUTH.  F1c scores against `git rev-parse`.
+      Its 4 disagreements are all lines that NAME a revision which
+      simply does not exist in this repository -- a `REVS = [...]`
+      fixture and two sentences about the defect.  Read as revisions
+      by a human, the rule is right and the oracle is wrong on all
+      four.  I did not adjust either; both readings are printed.
+
+==========================================================================
+F4 TOTAL BAD: 0
+==========================================================================
+
+
+EXTENT OF THAT NUMBER.  It counts a tripwire that did not fire, a
+tripwire edited without recording that it had, a `figures` definition
+in this tree, a population of definitions that is not 3-with-2-bodies,
+a repaired positive control, and a count row of this tree with no
+grain line under it.
+
+FINDING: F4a 2 of 2 arc tripwires asserting this exclusion as false went RED on the repair and both are re-pointed rather than deleted; `figures` has 3 definition(s) in the arc with 2 own body(ies) and 0 in this tree; 35 of 35 count rows here name their grain
+
+==========================================================================
+SUMMARY -- every TOTAL line and every FINDING, from the transcripts
+==========================================================================
+F1 TOTAL BAD: 0
+FINDING: F1a the repaired rule excludes 10 of 10 CONSTRUCTED all-decimal declared revisions and drops 0 of 8 genuine revision-shaped figures; over the corpus it excludes 14 of 50 distinct shaped tokens, 10 of which resolve and 4 of which do not, leaving 10 resolving tokens unreached (5 of them bare table columns)
+F2 TOTAL BAD: 0
+FINDING: F2a the repair moves 48 of 86750 numbers read as figures across 18 of 1535 tracked files (0.0553%); the backing corpus over 573 committed transcripts loses 1 of 1494 distinct integers, and 0 claim line(s) in the arc were acquitted by one
+F3 TOTAL BAD: 0
+FINDING: F3a the one recorded instance of this defect corrupting output was never committed as a count -- it was a single non-zero exit of `r6_self.py`, removed by EDITING THE PROSE and not the rule; 3 of 3 reconstructed witness lines are now excluded; 5 committed transcript(s) print a revision beside a figure word and 2 of those is a DECLARED revision counted as a figure; 4 transcript(s) would read differently if re-run and none of them publishes a figure COUNT
+F4 TOTAL BAD: 0
+FINDING: F4a 2 of 2 arc tripwires asserting this exclusion as false went RED on the repair and both are re-pointed rather than deleted; `figures` has 3 definition(s) in the arc with 2 own body(ies) and 0 in this tree; 35 of 35 count rows here name their grain
+selftest5035 TOTAL BAD: 0

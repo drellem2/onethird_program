@@ -1,0 +1,134 @@
+==========================================================================
+F3  ALREADY-CORRUPTED PUBLISHED OUTPUT
+==========================================================================
+
+--------------------------------------------------------------------------
+F3a  THE NAMED WITNESS -- `UNBACKED README.md 3738079`, retroactively
+--------------------------------------------------------------------------
+
+  mg-bf79's `out_p2_population.txt:99-106` records the whole sequence:
+  `r6_self.py` exited 1 for exactly one run, on `UNBACKED README.md
+  3738079`, *because the repaired README named a REVISION and E2's
+  `figures()` read the seven-digit revision as a MEASUREMENT no
+  transcript backs*.  THAT IS mg-bf79's TEXT, quoted, not re-derived.
+
+  The README line itself is not in any commit -- I searched every
+  revision of `code/runner_exit_repair_70c7/README.md` and none
+  contains `3738079`.  So the witness must be RECONSTRUCTED in the form
+  mg-bf79 describes, and the reconstruction is labelled as mine:
+
+      BEFORE [3738079]                AFTER []                       EXCLUDED
+          the population is re-derived at `3738079`, the revision this repair landed
+      BEFORE [3738079, 9]             AFTER [9]                      EXCLUDED
+          at `3738079` -- the revision this figure is a fact about -- 9 sites
+      BEFORE [3738079]                AFTER []                       EXCLUDED
+          this figure is a fact about the tree at commit 3738079
+
+  population: the 3 RECONSTRUCTED README lines above, each in the form
+  mg-bf79 says the original took
+      ...RECONSTRUCTIONS on which the repair prevents the accusation      3
+      ^ one unit of that number is one reconstructed line
+
+  SO THE FIX IS RETROACTIVELY CORRECT AT THE SITE THAT PRODUCED THE
+  ONE RECORDED FAILURE.  It is a reconstruction and not the original
+  bytes, and that limit is the reason this row is not stronger.
+--------------------------------------------------------------------------
+F3b  THE HUNT -- a revision printed under a label that calls it a FIGURE
+--------------------------------------------------------------------------
+
+  population: the 573 committed `out_*.txt` under `code/`
+      ...LINES printing a revision-shaped token beside a figure word      5
+      ^ one unit of that number is one (file, line, token) sighting
+
+      3756553      DECLARED  code/hodge_leverage_audit_f922/out_audit.txt:123
+          [FINDING  ] F-E -- the landing's committed evidence does not reproduce at the commit it 
+      3756553      DECLARED  code/hodge_leverage_audit_f922/out_audit.txt:183
+          FINDING  F-E: the landing's committed evidence does not reproduce at the commit it was c
+      3738079      bare      code/runner_exit_repair_bf79/out_p2_population.txt:102
+          `UNBACKED README.md 3738079` -- because the repaired README named a
+      3738079      bare      code/runner_exit_repair_bf79/out_p4_figures.txt:174
+          `3738079 `  all digits: yes  read as a FIGURE: yes  resolves: yes
+      3738079      bare      code/runner_exit_repair_bf79/out_selftest_bf79.txt:108
+          an all-digit short revision IS read as a figure (P4e)    [3738079]      OK
+
+  ADJUDICATION, one sighting at a time -- a count of sightings is not a
+  count of corrupted figures, and conflating them is this arc's own
+  recurring error:
+
+    A sighting is CORRUPTION only if the number was COUNTED AS A
+    MEASUREMENT in a published total.  A transcript line that PRINTS a
+    revision while DESCRIBING the defect is a record of the defect, not
+    an instance of it.  Every sighting above is in mg-bf79's own
+    tree or in a census table whose column IS a revision by design.
+      ...SIGHTINGS that are a DECLARED revision counted as a figure       2
+      ^ one unit of that number is one sighting
+--------------------------------------------------------------------------
+F3c  WHAT IS RETRACTED AND WHAT IS NOT
+--------------------------------------------------------------------------
+
+  THE ARITHMETIC FIX RETRACTS NOTHING BY ITSELF.  The ticket is right
+  about that, and here is the list it asks for.
+
+  (1) THE ONE RECORDED FAILURE WAS NEVER PUBLISHED AS A COUNT.  The run
+      that exited 1 on `UNBACKED README.md 3738079` is described in
+      mg-bf79's transcript; the FAILING RUN'S OWN TRANSCRIPT was never
+      committed, and `r6_self.py` exits 0 at HEAD.  Nothing to retract.
+
+  (2) THE INFLATION WAS REMOVED BY EDITING THE PROSE, NOT THE RULE.
+      mg-bf79: *it exits 0 again now, because the prose no longer names
+      an unstable revision.*  I confirmed the README at HEAD names no
+      all-decimal revision:
+      ...revision-SHAPED tokens in mg-70c7's README at HEAD               0
+      ^ one unit of that number is one token occurrence
+      So the defect was WORKED AROUND IN THE PROSE and left in the
+      rule.  The workaround is what a reader would have had to notice
+      to know the rule was still wrong, and nothing said so.
+
+  (3) THE COUNTS THAT WOULD MOVE IF RE-RUN TODAY.  These are not
+      retracted by this ticket and are not corrected in place: I do
+      not regenerate another tree's committed evidence.  Listed so the
+      next reader has them:
+
+  population: the 573 committed transcripts
+      ...TRANSCRIPTS whose figure reading changes under the repair        4
+      ^ one unit of that number is one transcript file
+      code/hodge_leverage_audit_97fb/out_audit_97fb.txt                  5
+      code/hodge_leverage_audit_f922/out_audit.txt                       2
+      code/hodge_leverage_repair_3f3b/out_repair_3f3b.txt                1
+      code/transcript_census_1abe/out_t5_control.txt                     8
+
+      NONE OF THESE IS A PUBLISHED FIGURE COUNT.  Each is a line that
+      NAMES a revision inside a transcript; no total printed in any of
+      them was computed by `figures()` over its own text.  That is why
+      the honest headline is that the defect was real and its published
+      damage is smaller than the ticket assumes -- said plainly rather
+      than buried, because overstating it would be the same failure as
+      the comment that started this.
+--------------------------------------------------------------------------
+F3d  THE LINE THE REPAIR DOES NOT REACH, said before a reader finds it
+--------------------------------------------------------------------------
+
+      code/runner_exit_repair_bf79/out_p2_population.txt:102
+          `UNBACKED README.md 3738079` -- because the repaired README named a
+          dropped by the repair: nothing
+
+  `UNBACKED README.md 3738079` has a FILENAME to the left of the token
+  and no cue word, so the declared-revision rule does not fire on it.
+  THAT IS CORRECT HERE AND IT IS WORTH SAYING WHY.  That line is
+  mg-bf79 QUOTING the defect, inside a transcript.  A rule that
+  rewrote the record of a defect while repairing the defect would be
+  destroying the evidence -- which is the thing this arc keeps
+  catching.  The gap and the correct behaviour coincide here; F1d
+  counts the cases where they do not.
+
+==========================================================================
+F3 TOTAL BAD: 0
+==========================================================================
+
+
+EXTENT OF THAT NUMBER.  It counts a reconstructed witness line the
+repair fails to fix.  It does NOT count sightings, transcripts that
+would move, or the lines F1d says the rule cannot reach: those are
+measurements of the arc, not faults of this tree.
+
+FINDING: F3a the one recorded instance of this defect corrupting output was never committed as a count -- it was a single non-zero exit of `r6_self.py`, removed by EDITING THE PROSE and not the rule; 3 of 3 reconstructed witness lines are now excluded; 5 committed transcript(s) print a revision beside a figure word and 2 of those is a DECLARED revision counted as a figure; 4 transcript(s) would read differently if re-run and none of them publishes a figure COUNT

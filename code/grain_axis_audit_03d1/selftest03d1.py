@@ -89,14 +89,24 @@ case("my_rows: SITES are never more than ROWS",
 case("my_rows: at least one site names two different scripts",
      len(rows) > len(B.my_sites(rows)), True)
 
-# --- THE KNOWN-FALSE CLAIM, ASSERTED AS FALSE ------------------------------
-# `figures()`'s deleted comment claimed to exclude `a git revision`.  It does
-# not.  Asserting the exclusion AS FALSE means a later real fix turns this row
-# red and NAMES ITSELF, instead of the claim quietly becoming true and nobody
-# learning that it had been false for the whole arc.  This is the parent's own
-# idiom and it is adopted rather than re-invented.
-case("figures() STILL reads an all-decimal short revision as a figure",
-     1234567 in B.L.figures("at `1234567` the census gives 9 sites"), True)
+# --- THE KNOWN-FALSE CLAIM.  IT FIRED. -------------------------------------
+# `figures()`'s deleted comment claimed to exclude `a git revision`.  It did
+# not.  This row asserted the exclusion AS FALSE so that a later real fix would
+# turn it red and NAME ITSELF, instead of the claim quietly becoming true and
+# nobody learning it had been false for the whole arc.
+#
+# THAT IS EXACTLY WHAT HAPPENED.  mg-5035 repaired `lib7522.figures` with a
+# DECLARED-revision rule and this row went red.  The tripwire is re-pointed at
+# the new truth rather than deleted: deleting it would remove the only evidence
+# in this tree that the claim was ever false, which is the failure mode the row
+# was built against.  A3f of `a3_ledger.py` is corrected in the same commit.
+case("figures() NO LONGER reads an all-decimal declared revision as a figure",
+     1234567 in B.L.figures("at `1234567` the census gives 9 sites"), False)
+# And the other half, because a rule that excluded every large number would
+# pass the row above while being far worse than the defect it replaced.
+case("...but a revision-SHAPED number with no declaration is still a figure",
+     431723379 in B.L.figures("(16999 classes, 431723379 labelled posets)"),
+     True)
 
 # --- CAN THIS TREE GO RED?  A probe that cannot is not evidence. ------------
 case("a label with a wrong grain IS caught by label_grain",

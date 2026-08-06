@@ -724,14 +724,128 @@ def strength_lines(text, rx=None):
 
 _NUMBER = re.compile(r"(?<![\w.])(\d[\d,]*)(?![\w.])")
 
+# A GIT REVISION.  mg-5035, repairing the one claim this rule made and did not
+# keep.  mg-70c7's `figures()` carried a comment listing "a git revision" among
+# the things it excluded; it NEVER DID, mg-bf79 found that against its own
+# output (`UNBACKED README.md 3738079`), reported it, and deliberately left it.
+# The comment was deleted with the body it described, so at `20614ef` the arc
+# carried the DEFECT without the false claim -- which is worse, not better: a
+# reader had nothing left to disagree with.
+#
+# TWO SHAPES OF A REVISION-SHAPED TOKEN, AND ONLY ONE IS EXCLUDED.
+#
+#   `_REV_SHAPE`   what a short revision LOOKS like: 7 to 40 decimal digits,
+#                  no thousands separator.  This is NECESSARY AND NOT
+#                  SUFFICIENT, and the arc already owns the counter-examples:
+#                  `431723379 labelled posets` and `2147483647` (an INT_MAX in
+#                  a fixture) are both this shape and both real measurements.
+#                  A rule that stopped here would drop them, which is
+#                  `lib70c7`'s own warning -- *a generous exclusion list turns
+#                  an unbacked figure into a non-figure*.
+#
+#   `_REV_CUE`     what the LINE says the token is.  A revision is excluded
+#                  only where the prose DECLARES one: `at 3738079`, `commit
+#                  3738079`, `carried by 3738079`, `git rev-parse 3738079`.
+#
+# WHY NOT THE TWO RULES mg-bf79 WEIGHED AND REJECTED.  A magnitude rule drops
+# the genuine figures above.  A resolves-as-a-git-object rule asks the object
+# database, so the same document censuses differently as the database grows --
+# in an arc built on re-derivation that is disqualifying, and it is a stronger
+# objection than the "accident of the object database" mg-bf79 gave.  This rule
+# reads only the text and gives the same answer for ever.
+#
+# WHAT IT DOES NOT REACH, SAID HERE RATHER THAN DISCOVERED LATER.  A revision
+# printed as a bare column in a fixed-width transcript table has no cue on its
+# line and is NOT excluded.  That is a real gap, it is measured in
+# `code/figures_revision_repair_5035/out_f1_rule.txt`, and it is the deliberate
+# direction of the error: this rule under-excludes rather than over-excludes.
+_REV_SHAPE = re.compile(r"\A\d{7,40}\Z")
+
+# THE CUE WORDS, LISTED SO A READER CAN DISAGREE WITH THEM -- the same standard
+# the other three exclusions in this rule are held to.  A word here means "the
+# token after me is a revision".
+_REV_CUE_WORDS = frozenset("""
+    at commit commits committed revision revisions rev revs rev-parse sha shas
+    parent parents ancestor descendant merge-base rebase cherry-pick reflog
+    landed lands landing carried carries carrying pinned pins pin anchored
+    anchor checkout checked head git predecessor successor
+""".split())
+
+# Words that may sit BETWEEN the cue and the token without breaking it, and
+# nothing else may.  `carried by 8490669` is a declaration; `carried 8490669
+# rows` is not, and `rows` is not on this list, so it is not one.
+#
+# THE COPULAS ARE HERE BECAUSE A PROBE CAUGHT THEIR ABSENCE.  `HEAD is
+# 3738079` read as NOT a declaration until `f1_rule.py`'s F1a went red on it --
+# recorded in mg-5035's OUTCOMES as a defect of this repair found by its own
+# instrument rather than quietly added.
+#
+# AND THE RESIDUAL RISK THEY CREATE, SAID RATHER THAN LEFT TO BE FOUND: with a
+# copula on this list, `at HEAD is 431723379` would lose a genuine figure.
+# `f1_rule.py`/F1f prints that construction and counts how often it occurs in
+# the corpus, because a limit you can measure is not the same as one you assert
+# is small.
+_REV_FILLER = frozenset("""
+    by to from of the a an as on it its and or that this here there
+    is was are were
+""".split())
+
+_REV_TOKEN = re.compile(r"[0-9A-Za-z-]+")
+_REV_HEXISH = re.compile(r"\A(?=[0-9a-f-]*[a-f])(?=[0-9a-f-]*[0-9])"
+                         r"[0-9a-f]{4,40}\Z", re.I)
+_REV_LOOKBACK = 6
+
+
+def _is_declared_revision(token, before):
+    """True when `token` is revision-SHAPED and the line DECLARES it one.
+
+    BOTH HALVES ARE REQUIRED AND EACH IS USELESS ALONE.  The shape half is
+    necessary and not sufficient -- see the block comment above for the two
+    genuine figures of this very corpus that carry it.  `before` is the text of
+    the line to the left of the token.
+
+    HOW THE DECLARATION IS READ.  Walk left from the token over at most %d
+    words.  Skip fillers, and skip SIBLING REVISIONS -- a hexish token, or
+    another all-decimal token of revision shape -- because `git rev-parse on
+    973ca61, 645b5a4, 3942319` declares all three and the cue sits before the
+    first.  The first word that is neither decides: a cue word means yes,
+    anything else means no.  A line with no words at all to the left of the
+    token -- a bare column in a fixed-width table -- means NO, which is this
+    rule's largest known gap and is measured rather than hidden.
+    """ % _REV_LOOKBACK
+    if not _REV_SHAPE.match(token):
+        return False
+    toks = _REV_TOKEN.findall(before)
+    for w in reversed(toks[-_REV_LOOKBACK:]):
+        lw = w.lower()
+        if lw in _REV_FILLER:
+            continue
+        if _REV_HEXISH.match(w) or _REV_SHAPE.match(w):
+            continue          # a sibling revision in the same list
+        return lw in _REV_CUE_WORDS
+    return False
+
 
 def figures(line):
     """[int] -- the numbers on one line that could be a FIGURE, not a label.
 
-    Excludes 0, 1, 2 (structural in prose far more often than measured), and a
+    Excludes 0, 1, 2 (structural in prose far more often than measured), a
     number immediately preceded by `:`, `#` or `-` (a line reference, a
-    heading, a range).  The exclusions are listed so a reader can disagree with
-    them, and every dropped number is still visible in the line it came from.
+    heading, a range), and A GIT REVISION THE LINE DECLARES TO BE ONE.  The
+    exclusions are listed so a reader can disagree with them, and every dropped
+    number is still visible in the line it came from.
+
+    THE REVISION EXCLUSION IS NARROW AND THAT IS THE POINT.  It fires only on
+    an all-decimal 7-to-40-digit token that the surrounding text NAMES as a
+    revision.  `2147483647` on a line that does not say `commit` is still a
+    figure; `at 3738079` is not.  Between the two errors available this rule
+    makes the one where an unbacked figure stays visible.
+
+    HISTORY, because the comment that used to sit here was a false claim about
+    behaviour for the whole life of the rule: mg-70c7 said this excluded "a git
+    revision", it did not, mg-bf79 measured that it did not, and mg-5035 made
+    it true.  A docstring that describes what the code does is the whole
+    deliverable of that lineage.
     """
     out = []
     for m in _NUMBER.finditer(line):
@@ -743,6 +857,8 @@ def figures(line):
         # a census that lets a line number back a figure blesses the figure
         # it exists to catch.
         if re.search(r"\blines?\s+$", before, re.I):
+            continue
+        if _is_declared_revision(m.group(1), before):
             continue
         try:
             v = int(m.group(1).replace(",", ""))
