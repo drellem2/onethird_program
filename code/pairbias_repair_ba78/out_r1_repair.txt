@@ -1,0 +1,131 @@
+==============================================================================
+R1  mg-6bc2 SECTION 5, REPRODUCED THEN REPAIRED
+    defect 1: the LP normalises with `sum mu <= 1`, so it returns a
+              SUB-probability measure and the diagnostics ran on it
+    defect 2: the aggregate predicate iterated ORDERED adjacency keys,
+              the per-slot one iterated x < y -- two units, one table
+==============================================================================
+
+------------------------------------------------------------------------------
+n = 3
+
+  max E[inv_e] = 1
+    mass returned by the LP      = 2/3   (SUB-PROBABILITY)
+    mass after completion        = 1   support 2 -> 3 permutations
+    E[inv]  before -> after      = 1 -> 1   UNCHANGED
+    E[F]    before -> after      = 2 -> 2   UNCHANGED
+    max flip prob after          = 1/3   <= 1/3, still feasible
+    PUBLISHED  aggregate =   0 ordered keys      per-slot =   4 (pair,slot)s   <- two units
+    REPAIRED   aggregate =   2 / 3 unordered pairs   per-slot =   3 / 3 unordered pairs
+               per-slot (finer) = 4 / 6 (pair,slot)s
+    nesting aggregate ⊆ per-slot : OK
+
+  max E[footrule] = 2
+    mass returned by the LP      = 2/3   (SUB-PROBABILITY)
+    mass after completion        = 1   support 2 -> 3 permutations
+    E[inv]  before -> after      = 1 -> 1   UNCHANGED
+    E[F]    before -> after      = 2 -> 2   UNCHANGED
+    max flip prob after          = 1/3   <= 1/3, still feasible
+    PUBLISHED  aggregate =   0 ordered keys      per-slot =   4 (pair,slot)s   <- two units
+    REPAIRED   aggregate =   2 / 3 unordered pairs   per-slot =   3 / 3 unordered pairs
+               per-slot (finer) = 4 / 6 (pair,slot)s
+    nesting aggregate ⊆ per-slot : OK
+
+------------------------------------------------------------------------------
+n = 4
+
+  max E[inv_e] = 2
+    mass returned by the LP      = 1   (already a probability measure)
+    mass after completion        = 1   support 3 -> 3 permutations
+    E[inv]  before -> after      = 2 -> 2   UNCHANGED
+    E[F]    before -> after      = 4 -> 4   UNCHANGED
+    max flip prob after          = 1/3   <= 1/3, still feasible
+    PUBLISHED  aggregate =   6 ordered keys      per-slot =   8 (pair,slot)s   <- two units
+    REPAIRED   aggregate =   5 / 6 unordered pairs   per-slot =   6 / 6 unordered pairs
+               per-slot (finer) = 8 / 18 (pair,slot)s
+    nesting aggregate ⊆ per-slot : OK
+
+  max E[footrule] = 4
+    mass returned by the LP      = 1   (already a probability measure)
+    mass after completion        = 1   support 3 -> 3 permutations
+    E[inv]  before -> after      = 2 -> 2   UNCHANGED
+    E[F]    before -> after      = 4 -> 4   UNCHANGED
+    max flip prob after          = 1/3   <= 1/3, still feasible
+    PUBLISHED  aggregate =   6 ordered keys      per-slot =   8 (pair,slot)s   <- two units
+    REPAIRED   aggregate =   5 / 6 unordered pairs   per-slot =   6 / 6 unordered pairs
+               per-slot (finer) = 8 / 18 (pair,slot)s
+    nesting aggregate ⊆ per-slot : OK
+
+------------------------------------------------------------------------------
+n = 5
+
+  max E[inv_e] = 10/3
+    mass returned by the LP      = 1   (already a probability measure)
+    mass after completion        = 1   support 3 -> 3 permutations
+    E[inv]  before -> after      = 10/3 -> 10/3   UNCHANGED
+    E[F]    before -> after      = 6 -> 6   UNCHANGED
+    max flip prob after          = 1/3   <= 1/3, still feasible
+    PUBLISHED  aggregate =   8 ordered keys      per-slot =   9 (pair,slot)s   <- two units
+    REPAIRED   aggregate =   6 / 10 unordered pairs   per-slot =   7 / 10 unordered pairs
+               per-slot (finer) = 9 / 40 (pair,slot)s
+    nesting aggregate ⊆ per-slot : OK
+
+  max E[footrule] = 20/3
+    mass returned by the LP      = 1   (already a probability measure)
+    mass after completion        = 1   support 3 -> 3 permutations
+    E[inv]  before -> after      = 10/3 -> 10/3   UNCHANGED
+    E[F]    before -> after      = 20/3 -> 20/3   UNCHANGED
+    max flip prob after          = 1/3   <= 1/3, still feasible
+    PUBLISHED  aggregate =   8 ordered keys      per-slot =  10 (pair,slot)s   <- two units
+    REPAIRED   aggregate =   6 / 10 unordered pairs   per-slot =   6 / 10 unordered pairs
+               per-slot (finer) = 10 / 40 (pair,slot)s
+    nesting aggregate ⊆ per-slot : OK
+
+------------------------------------------------------------------------------
+n = 6
+
+  max E[inv_e] = 5
+    mass returned by the LP      = 1   (already a probability measure)
+    mass after completion        = 1   support 3 -> 3 permutations
+    E[inv]  before -> after      = 5 -> 5   UNCHANGED
+    E[F]    before -> after      = 26/3 -> 26/3   UNCHANGED
+    max flip prob after          = 1/3   <= 1/3, still feasible
+    PUBLISHED  aggregate =  10 ordered keys      per-slot =  12 (pair,slot)s   <- two units
+    REPAIRED   aggregate =   7 / 15 unordered pairs   per-slot =   8 / 15 unordered pairs
+               per-slot (finer) = 12 / 75 (pair,slot)s
+    nesting aggregate ⊆ per-slot : OK
+
+  max E[footrule] = 10
+    mass returned by the LP      = 1   (already a probability measure)
+    mass after completion        = 1   support 6 -> 6 permutations
+    E[inv]  before -> after      = 5 -> 5   UNCHANGED
+    E[F]    before -> after      = 10 -> 10   UNCHANGED
+    max flip prob after          = 1/3   <= 1/3, still feasible
+    PUBLISHED  aggregate =  17 ordered keys      per-slot =  25 (pair,slot)s   <- two units
+    REPAIRED   aggregate =  13 / 15 unordered pairs   per-slot =  14 / 15 unordered pairs
+               per-slot (finer) = 25 / 75 (pair,slot)s
+    nesting aggregate ⊆ per-slot : OK
+
+==============================================================================
+REPAIRED SECTION 5 TABLE -- every count is UNORDERED PAIRS of a
+PROBABILITY measure; the (pair,slot) column is a different unit and says so
+==============================================================================
+  n | pairs | inv agg inv p-s |   F agg   F p-s | inv p-s (pair,slot) F p-s (pair,slot)
+---------------------------------------------------------------------------------------
+  3 |     3 |       2       3 |       2       3 |                   4                 4
+  4 |     6 |       5       6 |       5       6 |                   8                 8
+  5 |    10 |       6       7 |       6       6 |                   9                10
+  6 |    15 |       7       8 |      13      14 |                  12                25
+
+==============================================================================
+WHAT MOVED AGAINST WHAT mg-6bc2 PUBLISHED
+==============================================================================
+  n | published agg (ordered keys, sub-prob) | repaired agg (unordered pairs, prob)
+  3 |                                      0 |                                    2
+  4 |                                      6 |                                    5
+  5 |                                      8 |                                    6
+  6 |                                     10 |                                    7
+
+R1 OK -- completion moved no objective value and broke no feasibility,
+         and the two repaired columns nest at every (n, objective).
+EXIT=0

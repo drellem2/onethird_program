@@ -110,7 +110,22 @@ def relaxation_lp(n, objective, cap=F(1, 3)):
     """Max E[objective] over measures on S_n with every pair-flip prob <= cap.
 
     objective: a function S_n -> int (inv_count or footrule).
-    Returns (optimum, optimiser as {perm: mass}).
+    Returns (optimum, optimiser as {perm: mass}), the optimiser COMPLETED to a
+    probability measure.
+
+    ⚠️ REPAIRED BY mg-ba78.  The normalisation below is `sum mu <= 1`, an
+    INEQUALITY, because this simplex needs the origin to be feasible (Ax <= b,
+    x >= 0, b >= 0) so that phase 1 can be skipped.  Both objectives vanish at
+    the identity, so the simplex has no reason to place the leftover mass and
+    used to return a SUB-PROBABILITY measure -- total mass 2/3 at n = 3.  The
+    OPTIMUM VALUE was never affected, and neither was the theorem: the identity
+    contributes 0 to inv, 0 to footrule and 0 to every pair's flip probability,
+    so completing on it is feasible with the same objective.  But the adjacency
+    diagnostics of v1/v2 are EQUALITY TESTS BETWEEN MASSES, not linear
+    functionals, and they were being computed on the incomplete measure -- which
+    is why `aggregate adjacency symmetry violated at 0 ordered pairs` was
+    printed at n = 3 for a measure missing a third of its mass.  The completion
+    is done here rather than at the call sites so that no caller can omit it.
     """
     perms = list(permutations(range(n)))
     pairs = [(i, j) for i in range(n) for j in range(i + 1, n)]
@@ -130,6 +145,12 @@ def relaxation_lp(n, objective, cap=F(1, 3)):
     c = [F(objective(p)) for p in perms]
     val, x = simplex_max(A, b, c)
     support = {perms[k]: x[k] for k in range(len(perms)) if x[k] != 0}
+
+    # mg-ba78: complete to a probability measure.  See the docstring.
+    deficit = F(1) - sum(support.values(), F(0))
+    if deficit > 0:
+        ident = tuple(range(n))
+        support[ident] = support.get(ident, F(0)) + deficit
     return val, support
 
 
@@ -165,7 +186,18 @@ def hierarchical(n, levels=3, mass=F(1, 3)):
 
 
 def measure_stats(n, mu):
-    """(E[inv], E[footrule], max pair-flip prob, adjacency-symmetry violated?)."""
+    """(E[inv], E[footrule], max pair-flip prob, aggregate-asymmetric pairs).
+
+    ⚠️ UNIT REPAIRED BY mg-ba78.  The fourth return value is a list of UNORDERED
+    pairs `(x, y)` with `x < y` whose aggregate adjacency masses differ.  It used
+    to iterate the ORDERED keys of `adj`, which counts a violated unordered pair
+    twice when both directions carry mass and once when only one does -- while
+    `v2_optimiser.per_slot_violations` has always iterated `x < y`.  The two
+    columns of the section 5 table were therefore in different units, and
+    "6 vs 8" at n = 4 was not a comparison.  Both are now per unordered pair;
+    the (pair, slot) count is a strictly finer unit and is labelled as such
+    wherever it is printed.
+    """
     pairs = [(i, j) for i in range(n) for j in range(i + 1, n)]
     q = {pr: F(0) for pr in pairs}
     ei = ef = F(0)
@@ -177,5 +209,6 @@ def measure_stats(n, mu):
             q[pr] += w
         for op in adjacent_ordered_pairs(p):
             adj[op] = adj.get(op, F(0)) + w
-    asym = [(x, y) for (x, y) in adj if adj.get((x, y), F(0)) != adj.get((y, x), F(0))]
+    asym = [(x, y) for (x, y) in pairs
+            if adj.get((x, y), F(0)) != adj.get((y, x), F(0))]
     return ei, ef, max(q.values()), asym

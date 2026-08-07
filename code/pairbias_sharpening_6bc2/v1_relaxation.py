@@ -51,7 +51,7 @@ for n in NS:
           f"  E[F]={ef}  eps_F={show(3*ef/(n*n-1))}")
     print(f"    attains inv optimum? {'YES' if ei == vi else 'no'}"
           f"   attains footrule optimum? {'YES' if ef == vf else 'no'}")
-    print(f"    adjacency symmetry violated at {len(asym)} ordered pairs")
+    print(f"    adjacency symmetry violated at {len(asym)} unordered pairs")
 
     if n % 4 == 0:
         h = hierarchical(n, levels=3)
@@ -62,6 +62,6 @@ for n in NS:
     _, _, _, asym_i = measure_stats(n, si)
     _, _, _, asym_f = measure_stats(n, sf)
     print(f"  P6: inv-optimiser violates adjacency symmetry: "
-          f"{'YES' if asym_i else 'NO'} ({len(asym_i)} ordered pairs)")
+          f"{'YES' if asym_i else 'NO'} ({len(asym_i)} unordered pairs)")
     print(f"      F-optimiser   violates adjacency symmetry: "
-          f"{'YES' if asym_f else 'NO'} ({len(asym_f)} ordered pairs)")
+          f"{'YES' if asym_f else 'NO'} ({len(asym_f)} unordered pairs)")
