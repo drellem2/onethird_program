@@ -1,0 +1,99 @@
+==============================================================================
+A2.1  POPULATION -- naturally labelled posets, my own enumerator (P9)
+==============================================================================
+   n | naturally labelled posets
+  ---+--------------------------
+    1 | 1
+    2 | 2
+    3 | 7
+    4 | 40
+    5 | 357
+    6 | 4824
+
+  STATE.md:42 attributes '4,824 posets at n=6' to mg-c4f5.  My n=6 count: 4824 -- MATCHES
+  (These are naturally labelled posets = posets carrying a distinguished linear
+   extension, which is the right population here: `e` is part of the data.)
+
+==============================================================================
+A2.2  IS THE FROZEN CLASS EMPTY?  (P12 -- and a MISS here would refute 1/3-2/3)
+==============================================================================
+   n | posets | chains | delta <= 1/3 (non-chain) | delta < 1/3 STRICT | min delta>0
+  ---+--------+--------+--------------------------+--------------------+------------
+    2 |      2 |      1 |                        0 |                  0 | None
+    3 |      7 |      1 |                        3 |                  0 | 1/3
+    4 |     40 |      1 |                        6 |                  0 | 1/3
+    5 |    357 |      1 |                        9 |                  0 | 1/3
+    6 |   4824 |      1 |                       21 |                  0 | 1/3
+
+  ZERO posets with delta < 1/3 at every n <= 6.  That is the 1/3-2/3 conjecture
+  holding, and it is why both parents refused this sweep.  The class delta <= 1/3
+  is NOT empty: every member has delta = 1/3 EXACTLY.  It is the boundary.
+
+==============================================================================
+A2.3  P15's GUARD -- does the distinguished order `e` EXIST on the boundary?
+==============================================================================
+  `e` is the >=2/3-majority order.  At delta = 1/3 exactly, every pair is
+  >=2/3-decided, so the tournament is COMPLETE -- but the 3-cycle count of
+  STATE.md:205 gives Pr+Pr+Pr <= 2, which a cycle at exactly 2/3 each SATURATES
+  rather than violates.  So transitivity is NOT forced by that argument at the
+  boundary, and it has to be measured.  majority_order() returns None rather
+  than falling back to the natural labelling.
+
+   n | delta<=1/3 non-chains | `e` EXISTS | `e` ABSENT (incomplete or 3-cycle)
+  ---+-----------------------+------------+-----------------------------------
+    3 |                     3 |          3 | 0
+    4 |                     6 |          6 | 0
+    5 |                     9 |          9 | 0
+    6 |                    21 |         21 | 0
+
+==============================================================================
+A2.4  THE NUMBER -- max eps_spec over REALIZABLE measures in the class (P10/P11)
+==============================================================================
+  eps_spec(P) = 6 E[inv_e] / (n^2-1), sigma uniform on L(P), e the majority order.
+
+   n | realizable max | attaining poset  | LP relaxation max | realizable/relax
+  ---+----------------+------------------+-------------------+-----------------
+    3 |            1/2 | [(0, 2)]         |               3/4 | 2/3
+    4 |           4/15 | [(0, 2), (0, 3), (1, 3), (2, 3)] |               4/5 | 1/3
+    5 |            1/6 | [(0, 2), (0, 3), (0, 4), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)] |               5/6 | 1/5
+    6 |           8/35 | [(0, 2), (0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5), (3, 5)] |               6/7 | 4/15
+
+  DETAIL of each attaining poset, with mg-6bc2 sec.3.1's two levers separated:
+     n | E[inv_e] | m  | C(n,2) | d = m/C(n,2) | qbar = E/m | 3*d*qbar*n/(n+1)
+    ---+----------+----+--------+--------------+------------+-----------------
+     3 |      2/3 |  2 |      3 |          2/3 |        1/3 | 1/2 OK
+     4 |      2/3 |  2 |      6 |          1/3 |        1/3 | 4/15 OK
+     5 |      2/3 |  2 |     10 |          1/5 |        1/3 | 1/6 OK
+     6 |      4/3 |  4 |     15 |         4/15 |        1/3 | 8/35 OK
+
+  READ THE qbar COLUMN, NOT THE ONE YOU EXPECTED: qbar = 1/3 EXACTLY at every
+  attaining poset, at every n.  So of mg-6bc2 sec.3.1's TWO levers, only ONE is
+  moving on the boundary -- the DENSITY d.  The mean flip probability is pinned
+  at the cap; the maximiser spends its whole budget on every incomparable pair
+  it has, and has few of them.  That says the lever that matters is residual (R),
+  and NOT the qbar half of sec.3.1's `either lever alone` sentence.
+
+==============================================================================
+A2.5  RESIDUAL (R) MEASURED ON THE BOUNDARY -- 'do frozen posets have a density
+      ceiling d(P) <= D < 1?' (STATE.md:179; mg-345e's grep returns 0 upper bounds)
+==============================================================================
+  I cannot answer (R), because (R) is about the EMPTY class delta < 1/3.  What I
+  can do is measure d on the class that touches it.  Every figure below is FP and
+  is about delta = 1/3 EXACTLY.
+
+   n | max m | C(n,2) | MAX d over the class | max E[inv_e] | max eps_spec
+  ---+-------+--------+----------------------+--------------+-------------
+    3 |     2 |      3 |                  2/3 |          2/3 | 1/2
+    4 |     2 |      6 |                  1/3 |          2/3 | 4/15
+    5 |     2 |     10 |                  1/5 |          2/3 | 1/6
+    6 |     4 |     15 |                 4/15 |          4/3 | 8/35
+
+  Read the E[inv_e] column: on the boundary it is 2/3, 2/3, 2/3, 4/3 -- O(1), not
+  Theta(n^2) and not even Theta(n).  The two-atom law's Theta(n^2) is not merely
+  unrealisable, it is nowhere near anything realisable at delta = 1/3.
+
+  DIRECTION CHECK, because this is where an audit of this arc must not slip: a
+  SMALL realizable maximum is GOOD NEWS for the programme (eps_spec must be small)
+  and BAD NEWS for the relaxation as a proof route (the relaxation is loose by the
+  ratio above).  These are the same fact and neither is evidence FOR L1b: the
+  class measured is delta = 1/3, the class needed is delta < 1/3, and it is empty.

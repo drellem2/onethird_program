@@ -1,0 +1,90 @@
+==============================================================================
+A3.1  mg-131e's BRANCH AT n = 6, RE-SOLVED (P13)
+==============================================================================
+  incomparable set I (from STATE.md:167): [(0, 1), (1, 2), (1, 4), (2, 3), (3, 4), (4, 5)]
+  comparable set (complement, 9 pairs): [(0, 2), (0, 3), (0, 4), (0, 5), (1, 3), (1, 5), (2, 4), (2, 5), (3, 5)]
+  comparable set transitive (so it IS a genuine poset): True
+  |L(P)| for that poset = 14
+
+  max E[inv] on this branch, with per-slot symmetry imposed and mass == 1:
+     value = 11/6
+     (n-1)/3 = 5/3   -- mg-200d's Conjecture 4.3
+     EXCEEDS (n-1)/3 ?  True   excess = 1/6
+     eps_spec = 6*value/(n^2-1) = 11/35 ;  2/(n+1) = 2/7
+     optimiser: 6 atoms
+        (0, 1, 2, 3, 4, 5)  mass 1/6   inv_e = 0
+        (0, 1, 3, 2, 5, 4)  mass 1/6   inv_e = 2
+        (0, 2, 1, 4, 3, 5)  mass 1/6   inv_e = 2
+        (0, 2, 4, 1, 3, 5)  mass 1/6   inv_e = 3
+        (1, 0, 2, 3, 5, 4)  mass 1/6   inv_e = 2
+        (1, 0, 3, 2, 4, 5)  mass 1/6   inv_e = 2
+
+  INDEPENDENT VERIFICATION of that optimiser, from the atoms alone:
+     total mass                 = 1
+     E[inv_e]                   = 11/6
+     flip prob per pair of I    = {'(0, 1)': '1/3', '(1, 2)': '1/3', '(1, 4)': '1/6', '(2, 3)': '1/3', '(3, 4)': '1/3', '(4, 5)': '1/3'}
+     max flip prob              = 1/3  (cap 1/3: OK)
+     any COMPARABLE pair flipped= False
+     per-slot symmetry violations = 0
+
+  CONTROL: the SAME LP without per-slot symmetry (marginals only) on this branch
+     value = 2   = |I|/3 = 2 ?  True
+     so per-slot symmetry DOES cut this branch, and by 1/6
+
+==============================================================================
+A3.2  THE SAME BRANCH SHAPE AT n = 5 -- is n = 6 really the first excess?
+==============================================================================
+  mg-131e's mechanism claim is that at n <= 5 the optimum flips only CONSECUTIVE
+  pairs, and the excess at n = 6 is carried by the non-consecutive pair (1,4).
+  Consecutive-only branch, every n: value should be exactly (n-1)/3 (mg-131e's
+  own theorem, which SURVIVES the refutation).
+
+   n | consecutive-only branch: max E[inv] | (n-1)/3 | equal?
+  ---+-------------------------------------+---------+-------
+    3 |                                 2/3 |     2/3 | YES
+    4 |                                   1 |       1 | YES
+    5 |                                 4/3 |     4/3 | YES
+    6 |                                 5/3 |     5/3 | YES
+    7 |                                   2 |       2 | YES
+
+==============================================================================
+A3.3  TRYING TO BUILD WHAT THE NEGATIVE FORBIDS (brief point 3)
+==============================================================================
+  The negative: mg-6bc2 Claim 3.1 -- no argument using ONLY per-pair flip
+  probabilities can prove eps_spec < n/(n+1).  Three attempts to break it.
+
+  ATTEMPT 1 -- exceed the maximum.  Search for mu in M_n with
+  6E[inv]/(n^2-1) > n/(n+1), at n = 3,4,5,6.  (A1.2's LP already answers this;
+  restated here as an attempt rather than a check.)
+     IMPOSSIBLE, and provably: E[inv] = sum over pairs of q_ij, each q_ij <= 1/3,
+     C(n,2) summands.  Any counterexample would need a pair over the cap.
+     The LP maximum equals C(n,2)/3 at every n tested. ATTEMPT FAILS.
+
+  ATTEMPT 2 -- break it with the CYCLIC identity, the one elementary joint fact
+  that is free.  STATE.md:205: Pr[x<y]+Pr[y<z]+Pr[z<x] <= 2 for any triple.
+  Impose it on M_n as a linear constraint and re-solve.
+     n=3  +2 cyclic constraints -> max E[inv] = 1       (unconstrained 1)  NO GAIN
+     n=4  +8 cyclic constraints -> max E[inv] = 2       (unconstrained 2)  NO GAIN
+     n=5  +20 cyclic constraints -> max E[inv] = 10/3    (unconstrained 10/3)  NO GAIN
+     n=6  +40 cyclic constraints -> max E[inv] = 5       (unconstrained 5)  NO GAIN
+     ATTEMPT FAILS -- and mg-6bc2 sec.5 predicts exactly this by hand (on a frozen
+     triple the identity reduces to subadditivity of the q's, satisfied with room
+     to spare at q = 1/3).  Confirmed by machine here, independently.
+
+  ATTEMPT 3 -- the one that WORKS, and it is not a per-pair fact.  Impose
+  per-slot adjacency symmetry on the FULL (branch-free) relaxation and re-solve.
+     n=3  ALL pairs per-slot-symmetric -> INFEASIBLE
+     n=4  ALL pairs per-slot-symmetric -> INFEASIBLE
+     n=5  ALL pairs per-slot-symmetric -> INFEASIBLE
+     INFEASIBLE at every n -- exactly mg-200d's recorded negative (STATE.md:167:
+     the literal reading 'holds for uniform L(P) iff P is an ANTICHAIN', so it
+     excludes every realisable measure and the LP returns INFEASIBLE).
+     REPRODUCED INDEPENDENTLY.  A bound from an infeasible program bounds nothing,
+     which is why the branch decomposition of A3.1 is the only sound form.
+
+  CONCLUSION OF A3.3: I could not build the forbidden object, and the reason is
+  structural rather than a failure of search.  E[inv] is a SUM over pairs and the
+  hypothesis caps each summand; linearity of expectation is an EQUALITY, so the
+  only levers are (a) the NUMBER of summands -- residual (R) -- and (b) a
+  constraint no product of per-pair caps can express, i.e. realizability.  The
+  negative is not a gap in the argument; it is the argument being exact.
