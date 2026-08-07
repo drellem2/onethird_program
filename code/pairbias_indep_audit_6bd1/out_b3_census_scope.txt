@@ -1,0 +1,89 @@
+==============================================================================
+B3 — the 1/6 census and the scope-conflation reading
+==============================================================================
+
+tree pinned at mg-345e's own commit 550a7f105c30 so the census is scored
+against what mg-345e could actually have seen, not against tonight's tree.
+
+(a) 1/6 CENSUS — occurrences OUTSIDE mg-345e's own document, at its own commit
+    total occurrences : 34
+    distinct files    : 14
+    mg-345e §6 says   : 'occurs twice in this corpus'
+    -> the claim is REFUTED on the literal count by a factor of 17x
+
+    per file:
+         2  STATE.md
+         5  docs/OneThird-Counterexample-Under-The-Action-IndependentAudit-mg0a11.md
+         1  docs/OneThird-Hodge-Side-Leverage-GppStrike-IndependentAudit.md
+         1  docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md
+         4  docs/OneThird-Hodge-Side-Leverage.md
+         2  docs/OneThird-L4-Branch-ii-Sublinear-Modulus-IndependentAudit.md
+         1  docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md
+         5  docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md
+         6  docs/OneThird-lambda-std-Operative-Form.md
+         2  docs/audit-mg-2789-negative-control-4.md
+         1  docs/audit-mg-5f9a-deletion-test.md
+         1  docs/landing-mg-1c80-instrumented-predicate.md
+         2  docs/roadmap.md
+         1  docs/state-history/attempt-mg-88bd.md
+
+    THE ONE THAT MATTERS — the supply-side occurrence mg-345e says does not
+    exist, quoted verbatim from the tree mg-345e itself was standing on:
+
+       docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:415
+       > 1 and the bound reads `e(P)/n! ≤ 2`. **Freezing unconditionally gives only `ε < 1/6 ≈ 0.167`.**
+
+    HAND CLASSIFICATION — the raw 34 is NOT the number to quote against mg-345e,
+    and saying so is the point. It is inflated two ways, both disclosed:
+      * REGEX FALSE POSITIVES: `61/61`, `6197/6197` contain the substring `1/6`.
+        audit-mg-2789 (2), audit-mg-5f9a (1), landing-mg-1c80 (1),
+        Hodge-IndependentAudit (1)  ->  5 hits are not the number 1/6 at all.
+      * DIFFERENT SUBJECT MATTER: Hodge gamma-weights (4), mg0a11's
+        1/C(6,1) extremal-core probability (5), L4-branch-(ii) cut arithmetic (2),
+        roadmap prose naming Daniel's ask (2)  ->  13 are unrelated to eps_spec.
+
+    In the eps_spec / pair-bias subject matter, the DISTINCT occurrences are:
+      1. Op-Form 6.4 'slack <= 1/6 for a centred pair'  [DEMAND; BROKEN as
+         labelled by mg-e35c F5]  — restated in its audit and in attempt-mg-88bd
+      2. mg-e2de's 1/6, the collapse of a local delta LOWER bound at co-degree 2
+         (STATE.md:158)  [neither supply nor demand: a lower bound]
+      3. mg-c4f5:415 'Freezing unconditionally gives only eps < 1/6'  [SUPPLY]
+
+    mg-345e names 1 and 2 and says there are two. THERE ARE AT LEAST THREE, and
+    the third is the one its sentence rules out by kind.
+
+    This is SUPPLY-side — it says what FREEZING GIVES, not what the
+    architecture needs — and B2/C4 shows it is mg-345e's OWN `eps_sup < 1`
+    under a different division. So mg-345e's §6 sentence is wrong on BOTH of
+    its two counts: the number, and the 'neither is supply-side'.
+
+(b) SCOPE CONFLATION — every mg-3af9 sentence, verbatim, for hand reading.
+    (no keyword classifier decides this; a classifier tuned until it returns
+     the answer I want is unfalsifiable)
+
+    docs/OneThird-PairBias-Independence-mg-345e.md:34
+      | >    **every strictly positive** `F` (`mg-3af9`, UNCONDITIONAL, audited `mg-c8c6`);
+
+    docs/OneThird-PairBias-Independence-mg-345e.md:209
+      | | (ii) remove/modify `≤ F(ε)n` interface elements | **moot** — unconsumable by Step 6's stated transfer for **every strictly positive** `F`, `o(ε)` included | `mg-3af9`, UNCONDITIONAL, audited `mg-c8c6` |
+
+    and the paragraph mg-345e wrote to guard exactly this, verbatim:
+     216 | **SCOPE DISCIPLINE — read this before citing the row above.** Every entry is a statement about
+     217 | what Step 6 **consumes**. **None of it says L4-as-stated is or is not provable at an `n`-free
+     218 | modulus.** That question is untouched here and stays open. `mg-345e`'s own body warns that
+     219 | `pm-onethird` conflated consumption with provability on 2026-08-07 and had to reverse; the claim
+     220 | made here is the consumption one only, and it is *narrower* than the provability question rather
+     221 | than a substitute for it. The `n`-freeness of `F` remains exactly as open as it was — this
+     222 | document's point is that **Step 6 does not consume its answer**, so answering it would not, by
+     223 | itself, pin `ε_dem`.
+     224 | 
+
+    THREE COLUMNS (mg-6bd1 P13's binding guard — a defect present only in the
+    compression is a LABELLING finding, not BROKEN):
+      document body   : scope guard present at line(s) [216]  -> True
+      STATE.md rows   : rows carrying an explicit SCOPE clause: [164]  -> True
+      commit body     : carries the guard: True
+      commit SUBJECT  : carries the guard: False
+      subject text    : finding+instrument+docs: (A) INDEPENDENT — AND FORCED, NOT INCIDENTAL. mg-6bc2 UNBLOCKS ON ITS OWN S
+
+==============================================================================
