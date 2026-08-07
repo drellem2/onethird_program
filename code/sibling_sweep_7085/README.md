@@ -47,10 +47,21 @@ fetch. This is mg-4d3b's shape, and it is the incident's own shape: no network
 at boot, every checkout holding yesterday's refs.
 
 A `git` shim on `PATH` logs every argv and every exit status, so each failing arm
-**proves `git fetch origin` was actually spawned and actually exited 128**.
-Without it a run that never fetched is indistinguishable from one whose fetch
-failed, and both arms are the same run reported twice. The original defect
-shipped because its control returned *before* `git fetch` was ever spawned.
+**proves `git fetch origin` was actually spawned and actually exited 128** — and
+the healthy arm proves its own fetch was spawned and exited **0**, because a
+healthy arm whose fetch silently failed is just a second broken arm. Without the
+shim, a run that never fetched is indistinguishable from one whose fetch failed,
+and both arms are the same run reported twice. The original defect shipped
+because its control returned *before* `git fetch` was ever spawned.
+
+**Every arm fetches from a frozen bare mirror taken once at startup.** This is
+methodology, not plumbing. The healthy arm's fetch really runs and really
+succeeds — that is what makes it the mutation control — so if it fetched from
+the *live* repos, a commit landing on `main` between the BEFORE run and the
+AFTER run would change the subject's output and be scored as an effect of the
+repair. `main` moved twice during this ticket's own session. With mirrors, both
+versions see byte-identical history and **the only variable is the code**, which
+is what lets the healthy-arm outputs be compared byte-for-byte at all.
 
 | arm | repo 1 | repo 2 | what it is for |
 |---|---|---|---|
@@ -63,6 +74,25 @@ Each arm runs **all six scripts and `run_all.sh`**, in **both** the before state
 the worktree state. Every "repaired" claim is therefore a **difference between
 two runs of the same harness**, not an absence observed once — an absence
 observed once is also what a script that never ran looks like.
+
+## A defect of this instrument, kept — and it is the audited class, committed by the auditor
+
+CHECK 7's first form grepped the bare phrase `row verdicts flipped` out of s2's
+stdout. **It fired twice against correct code** — on `s2_controls.py`'s own
+UNMEASURED branch, whose prose *quotes* the sentence it is refusing to print.
+
+A detector that reads the subject's **prose** as the subject's **output** is
+mg-4d3b's own §6 defect (*"a source census that READ MY OWN PROSE AS CODE,
+inside the section about rules that read one thing as another"*), and I
+committed it about two hours after quoting that section. The failing run is
+committed at `57fd381` rather than only described here, because a defect
+described after it was fixed is a claim and a defect in the history is a record.
+
+The patterns now match the **assertion** — a figure in its sentence,
+`\d+ of \d+ row verdicts flipped at depth` — and not the vocabulary. The same
+correction found a second instance in my own repair: `s4_crosscheck.py`'s
+UNMEASURED branch had a hard-coded `misses 13` in its explanation, which is rule
+2 broken by the sentence explaining rule 2.
 
 ## Two ways this harness could have lied, and the guards against them
 
@@ -103,4 +133,6 @@ those need different responses. A failed check **of this harness** does set it.
 | file | what |
 |---|---|
 | `r1_sweep.py` | the sweep: three arms × two versions × seven runs, all as subprocesses |
+| `run_all.sh` | the runner; reports the instrument's status, not `tee`'s |
 | `out_r1_sweep.txt` | the committed transcript |
+| `out_r1_sweep_FIRSTRUN_2FAIL.txt` | the **first** run, kept: two checks of this harness failing against correct code. See the defect section above. A discarded detector that was wrong is evidence too. |
