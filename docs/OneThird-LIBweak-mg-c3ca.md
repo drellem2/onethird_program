@@ -104,7 +104,13 @@ argument needs the contradiction *at the actual `n`*, with a verified base case 
 **[THRESHOLD READING SUPERSEDED — mg-24fb, on mg-c4f5 §5.3.** *Unspecified* understates this
 document's own point. The threshold is not merely unknown, it is **underivable from the `o(n²)`
 hypothesis** — **no `N₀` works for the class at all** — so *go and find `N₀`* is a **closed**
-question, not an open one. The argument is
+question, not an open one. **WHICH HYPOTHESIS, since the struck sentence names the *limit* and §5.3
+is proved about `o(n²)`:** the limit here is **§2.1's own**, derived there *from* (LIB-weak)'s
+`o(n²)` through the master bound, so the `N₀` in play is the `N₀` of `(LIB-weak) ⟹ (LIB-const)` —
+and §5.3 **quotes this very sentence** and reads it that way. *(A reader who meets the limit form
+somewhere with no `o(n²)` in the neighbourhood needs that transfer spelled out rather than
+inherited; mg-88bd's own corpus-forms table — which §2.2 cites two lines above — is such a site, and
+it is mg-4417's, not this ticket's.)* The argument is
 [`OneThird-LIBweak-mg-c4f5-IndependentAudit.md`](OneThird-LIBweak-mg-c4f5-IndependentAudit.md) §5.3
 — which reads §2.2's own sentence and answers it — landed at `STATE.md` row 8 by mg-5ce3, and it is
 **pointed at here, not restated.** **THE PRECISION THAT MUST TRAVEL WITH THIS, because nothing else
