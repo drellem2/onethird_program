@@ -12,8 +12,23 @@ matters.** A minimal counterexample has **n ≥ 12** by a refereed result (Pecza
 **n ≥ 15** by an unrefereed preprint ten days old (Gupta 2026). The programme's two explicit
 thresholds are **n ≥ 100** (master-bound route, primitive posets) and **n ≈ 900C** (the (LIB) /
 (LIB-const) crossover). **Neither bound reaches either threshold**, and neither can ever reach the
-third — the `N₀` in `(LIB-weak) ⟹ (LIB-const)` — because that one is *unspecified*, which is not a
-size a number can exceed.
+third — the `N₀` in `(LIB-weak) ⟹ (LIB-const)` — ~~because that one is *unspecified*, which is not a
+size a number can exceed~~ **because for that one there is no threshold to reach at all.**
+
+**[SUPERSEDED — mg-24fb, on mg-c4f5 §5.3.** *Unspecified* understates the gap. The threshold is not
+merely unknown, it is **underivable from the `o(n²)` hypothesis** — **no `N₀` works for the class at
+all** — so *go and find `N₀`* is a **closed** question, not an open one. The argument is
+[`OneThird-LIBweak-mg-c4f5-IndependentAudit.md`](OneThird-LIBweak-mg-c4f5-IndependentAudit.md) §5.3,
+landed at `STATE.md` row 8 by mg-5ce3, and it is **pointed at here, not restated.**
+**THE PRECISION THAT MUST TRAVEL WITH THIS, because nothing else in this file carries it:** what is
+false is the **PER-CLASS** statement — *there is an `N₀` such that every `f = o(n²)` satisfies
+(LIB-const) beyond it*. The **PER-FAMILY** statement is **TRUE and untouched** — any *given*
+`f = o(n²)` has some threshold of its own, by the definition of `o()`; it is simply not a function
+of the hypothesis, so it cannot be extracted from it. **"No `N₀` exists" full stop is an OVERCLAIM
+and is not what is written here.** **This document's verdict does not move:** a literature bound
+still discharges nothing against T4. §5.3 changes only the *reason* — from *the comparison is
+undefined* to *there is no threshold to compare against* — which is the stronger form of the same
+negative.**]**
 
 So: the ticket's hoped-for payoff — *"an afternoon of reading that could make every `for n ≥ N₀`
 statement applicable"* — **does not land**. What the afternoon does buy is real but small, and it is
@@ -134,7 +149,14 @@ The two explicit thresholds, re-derived by mg-b6fa and traced here to their live
 | T1 | master-bound route, **non-chain** (`m ≥ 1`) | needs `n ≥ 11` | audit F5, `OneThird-lambda-std-Operative-Form-IndependentAudit.md:506` |
 | T2 | master-bound route, **primitive** (`m ≥ n−1`, so `d ≥ 2/n`) | needs `n ≥ 2/ε_spec = 100` | audit A1 §7.2 + F5, same file `:414`, `:506` |
 | T3 | (LIB) vs (LIB-const) numerical crossover | `n ≈ 900C` | `STATE.md:13`; audit `:476` |
-| T4 | `(LIB-weak) ⟹ (LIB-const)` | `N₀` **UNSPECIFIED** | `STATE.md:13`, ledger row 8 |
+| T4 | `(LIB-weak) ⟹ (LIB-const)` | ~~`N₀` **UNSPECIFIED**~~ **NO `N₀` FOR THE CLASS** | `STATE.md:13`, ledger row 8 |
+
+**[SUPERSEDED — mg-24fb, on mg-c4f5 §5.3.** T4's *live value* cell only. No `N₀` works **for the
+class**; the threshold is underivable from the hypothesis, not unknown. **Per-family thresholds are
+untouched, and "no `N₀` exists" full stop would be an overclaim** — full marker in *Answer, in one
+line*. T4's own status as a threshold this document's bounds cannot reach is **unchanged**, and the
+`site` cell is left exactly as filed: re-addressing a stale citation is a different repair and is
+not this ticket's.**]**
 
 All at the repaired calibration `ε_spec ≲ 2×10⁻²` (audit F5). Arithmetic re-checked here and
 agreeing with the audit's: `n(n−1) ≥ 1/ε_spec · 2 = 100` gives `n ≥ 11` (at `n = 10`, `90 < 100`);
@@ -145,7 +167,13 @@ agreeing with the audit's: `n(n−1) ≥ 1/ε_spec · 2 = 100` gives `n ≥ 11` 
 | T1 non-chain, `n ≥ 11` | **CLEARS** | **CLEARS** |
 | T2 primitive, `n ≥ 100` | **NO** — short by 88 | **NO** — short by 85 |
 | T3 crossover, `n ≈ 900C` | **NO** — short by ≥ 888 | **NO** — short by ≥ 885 |
-| T4 unspecified `N₀` | **UNREACHABLE IN PRINCIPLE** | **UNREACHABLE IN PRINCIPLE** |
+| T4 ~~unspecified~~ **class-underivable** `N₀` | **UNREACHABLE IN PRINCIPLE** | **UNREACHABLE IN PRINCIPLE** |
+
+**[SUPERSEDED — mg-24fb, on mg-c4f5 §5.3.** The row *label* only. No `N₀` works **for the class**;
+the threshold is underivable from the hypothesis, not unknown. **Per-family thresholds are untouched
+— "no `N₀` exists" full stop would be an overclaim** — full marker in *Answer, in one line*. **Both
+verdict cells stand as written**: `UNREACHABLE IN PRINCIPLE` was right and §5.3 makes it more so,
+because there is now not even an unknown number for a bound to fall short of.**]**
 
 **The one it clears is the one that does not matter.** T1 is the `m ≥ 1` form. Minimal
 counterexamples are **primitive** (`STATE.md` glossary; ledger row 2), so T2 is the operative
@@ -162,9 +190,19 @@ Against T3 at the most favourable reading `C = 1`: `9…899 = 891` becomes `15�
 **6 of 891, 0.67%**. And `C` is unspecified with `C ≥ 1`, so **0.67% is an upper bound on that
 gain**, not an estimate.
 
-**T4 is the important row and it is not a matter of size.** `N₀` in `(LIB-weak) ⟹ (LIB-const)` is
+**T4 is the important row and it is not a matter of size.** ~~`N₀` in `(LIB-weak) ⟹ (LIB-const)` is
 *unspecified*. No finite lower bound, however large, clears an unspecified threshold — the
-comparison is not unfavourable, it is **undefined**. `STATE.md`'s own sentence — *"the gap is a
+comparison is not unfavourable, it is **undefined**.~~ **`N₀` in `(LIB-weak) ⟹ (LIB-const)` does not
+exist for the class. No finite lower bound clears it, and not because the comparison is undefined —
+because there is no threshold on the other side of the comparison.**
+
+**[SUPERSEDED — mg-24fb, on mg-c4f5 §5.3.** No `N₀` works **for the class**; the threshold is
+underivable from the hypothesis, not unknown. **Per-family thresholds are untouched, and "no `N₀`
+exists" full stop would be an overclaim** — full marker in *Answer, in one line*. The struck
+sentences reached the right verdict by the weaker of the two available reasons; the paragraph's
+conclusion is **unchanged**.**]**
+
+`STATE.md`'s own sentence — *"the gap is a
 QUANTIFIER, not a constant"* — is exactly right, and it means this ticket's route was never
 available against T4 even in principle. **A literature lower bound can only ever help against
 thresholds that are EXPLICIT.** T2 and T3 are explicit; the bound falls three orders short of them.
@@ -252,13 +290,30 @@ Suggested `STATE.md` wording (for pm-onethird, whose file it is):
 > order 14 over all 1,338,193,159,771 unlabeled posets, with the author's caveat that no
 > independent per-poset check is made above order 9. **These are verification ranges, not
 > structural bounds, and they clear neither `n ≥ 100` (master-bound, primitive) nor `n ≈ 900C`
-> (the (LIB) crossover); against the unspecified `N₀` of `(LIB-weak) ⟹ (LIB-const)` no finite
-> bound can help at all.** They remove 6 of the 91 orders in the master-bound dead zone (6.6%).
+> (the (LIB) crossover); against the ~~unspecified~~ class-underivable `N₀` of
+> `(LIB-weak) ⟹ (LIB-const)` no finite bound can help at all.** They remove 6 of the 91 orders in
+> the master-bound dead zone (6.6%).
+
+**[SUPERSEDED — mg-24fb, on mg-c4f5 §5.3.** This blockquote is this document's *proposed* `STATE.md`
+wording, and the proposal was consumed: it is **landed at `STATE.md`** under *Literature status*
+(mg-d1a2), where the same clause now travels with a §5.3 rider. No `N₀` works **for the class**; the
+threshold is underivable from the hypothesis, not unknown. **Per-family thresholds are untouched,
+and "no `N₀` exists" full stop would be an overclaim** — full marker in *Answer, in one line*. **The
+proposed wording's conclusion — that no finite bound can help against T4 — is unchanged**; only its
+reason is. The landed `STATE.md` text is **not edited by this ticket** and is not this file's to
+edit.**]**
 
 **Cost of the negative half: nothing further.** There is no structural lower bound to find, the
 class exclusions top out at `n ≥ 8`, and the route by which a literature bound could have
-discharged the quantifier gap is closed — not for want of a large enough `N`, but because `N₀` is
-unspecified. **This item does not have a successor.** The one thing in §2 that might: nobody in
+discharged the quantifier gap is closed — not for want of a large enough `N`, but ~~because `N₀` is
+unspecified~~ **because no `N₀` exists for the class to reach**.
+
+**[SUPERSEDED — mg-24fb, on mg-c4f5 §5.3.** No `N₀` works **for the class**; the threshold is
+underivable from the hypothesis, not unknown. **Per-family thresholds are untouched, and "no `N₀`
+exists" full stop would be an overclaim** — full marker in *Answer, in one line*. **"The route is
+closed" is unchanged**, and is now closed for the stronger reason.**]**
+
+**This item does not have a successor.** The one thing in §2 that might: nobody in
 this corpus has written down that a minimal counterexample must be rigid, of width ≥ 3, and carry
 an element incomparable to ≥ 7 others. That is a *shape* item, not a *size* item, and it is not
 this ticket.
