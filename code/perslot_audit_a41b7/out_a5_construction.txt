@@ -1,0 +1,48 @@
+==============================================================================
+>= DIRECTION: the (n-1)/3 construction, checked by SUBSTITUTION at n = 3..20
+   (no LP is used here, so no solver can be hiding anything)
+==============================================================================
+  n=3   atoms=3  E[inv]=2/3      (n-1)/3=2/3       mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=2=n-1:Y C-transitive:Y  eps_spec=1/2   OK
+  n=4   atoms=3  E[inv]=1        (n-1)/3=1         mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=3=n-1:Y C-transitive:Y  eps_spec=2/5   OK
+  n=5   atoms=3  E[inv]=4/3      (n-1)/3=4/3       mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=4=n-1:Y C-transitive:Y  eps_spec=1/3   OK
+  n=6   atoms=3  E[inv]=5/3      (n-1)/3=5/3       mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=5=n-1:Y C-transitive:Y  eps_spec=2/7   OK
+  n=7   atoms=3  E[inv]=2        (n-1)/3=2         mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=6=n-1:Y C-transitive:Y  eps_spec=1/4   OK
+  n=8   atoms=3  E[inv]=7/3      (n-1)/3=7/3       mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=7=n-1:Y C-transitive:Y  eps_spec=2/9   OK
+  n=9   atoms=3  E[inv]=8/3      (n-1)/3=8/3       mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=8=n-1:Y C-transitive:Y  eps_spec=1/5   OK
+  n=10  atoms=3  E[inv]=3        (n-1)/3=3         mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=9=n-1:Y C-transitive:Y  eps_spec=2/11   OK
+  n=11  atoms=3  E[inv]=10/3     (n-1)/3=10/3      mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=10=n-1:Y C-transitive:Y  eps_spec=1/6   OK
+  n=12  atoms=3  E[inv]=11/3     (n-1)/3=11/3      mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=11=n-1:Y C-transitive:Y  eps_spec=2/13   OK
+  n=13  atoms=3  E[inv]=4        (n-1)/3=4         mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=12=n-1:Y C-transitive:Y  eps_spec=1/7   OK
+  n=14  atoms=3  E[inv]=13/3     (n-1)/3=13/3      mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=13=n-1:Y C-transitive:Y  eps_spec=2/15   OK
+  n=15  atoms=3  E[inv]=14/3     (n-1)/3=14/3      mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=14=n-1:Y C-transitive:Y  eps_spec=1/8   OK
+  n=16  atoms=3  E[inv]=5        (n-1)/3=5         mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=15=n-1:Y C-transitive:Y  eps_spec=2/17   OK
+  n=17  atoms=3  E[inv]=16/3     (n-1)/3=16/3      mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=16=n-1:Y C-transitive:Y  eps_spec=1/9   OK
+  n=18  atoms=3  E[inv]=17/3     (n-1)/3=17/3      mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=17=n-1:Y C-transitive:Y  eps_spec=2/19   OK
+  n=19  atoms=3  E[inv]=6        (n-1)/3=6         mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=18=n-1:Y C-transitive:Y  eps_spec=1/10   OK
+  n=20  atoms=3  E[inv]=19/3     (n-1)/3=19/3      mass:Y cap:Y comp-q0:Y per-slot-sym:Y |I|=19=n-1:Y C-transitive:Y  eps_spec=2/21   OK
+  failures: 0 / 18
+  => the >= direction IS backed by a theorem-shaped construction: it is a 3-atom measure
+     whose feasibility is checked by substitution at every n tested, so (n-1)/3
+     is a LOWER bound on the disjunctive value at every n in 3..20.
+
+==============================================================================
+NEGATIVE CONTROL: the mod-3 colouring mg-200d recorded as its own defect 1
+==============================================================================
+  n=3  E[inv]=2/3    max flip=1/3     per-slot violations on incomparable pairs: 0 
+  n=4  E[inv]=1      max flip=1/3     per-slot violations on incomparable pairs: 1 <- breaks symmetry, as mg-200d recorded
+  n=5  E[inv]=4/3    max flip=1/3     per-slot violations on incomparable pairs: 2 <- breaks symmetry, as mg-200d recorded
+  n=6  E[inv]=5/3    max flip=1/3     per-slot violations on incomparable pairs: 3 <- breaks symmetry, as mg-200d recorded
+
+==============================================================================
+The SOUND BRANCH-FREE surrogate  J_k(y,x) <= J_k(x,y)  -- does it buy anything?
+==============================================================================
+  n=3  surrogate value = 1          baseline C(n,2)/3 = 1          BUYS NOTHING
+  n=4  surrogate value = 2          baseline C(n,2)/3 = 2          BUYS NOTHING
+  n=5  surrogate value = 10/3       baseline C(n,2)/3 = 10/3       BUYS NOTHING
+
+==============================================================================
+The sound DISJUNCTIVE AGGREGATE value (mg-200d publishes 2/3, 5/3, 7/3)
+==============================================================================
+  n=3  disjunctive AGGREGATE = 2/3        mg-200d publishes 2/3        MATCH
+  n=4  disjunctive AGGREGATE = 5/3        mg-200d publishes 5/3        MATCH
+  n=5  disjunctive AGGREGATE = 7/3        mg-200d publishes 7/3        MATCH

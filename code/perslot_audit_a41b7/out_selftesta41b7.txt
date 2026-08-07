@@ -1,0 +1,70 @@
+== combinatorics ==
+  PASS  |S_3| = 6
+  PASS  |S_5| = 120
+  PASS  |S_6| = 720
+  PASS  perms distinct
+  PASS  inv(e) = 0
+  PASS  inv(rev e) = C(4,2)
+  PASS  inv(1,0,2) = 1
+  PASS  S_4 inversion distribution 1,3,5,6,5,3,1
+  PASS  mean inv over S_5 = C(5,2)/2
+== simplex, textbook cases ==
+  PASS  textbook LP optimum 36
+  PASS  textbook LP witness (2,6)
+  PASS  textbook LP primal verifies
+  PASS  textbook LP dual verifies
+  PASS  equality LP optimum 1
+  PASS  equality LP witness (1/2,1/2)
+  PASS  equality LP dual verifies
+  PASS  >= row optimum 17 at (3,7)
+  PASS  >= row dual verifies
+== NC1: infeasible vs feasible-with-optimum-0 (guard for P14) ==
+  PASS  NC1a infeasible reported as infeasible
+  PASS  NC1a phase-1 residual is strictly positive
+  PASS  NC1b feasible-with-value-0 reported as OPTIMAL, value 0
+  PASS  NC1b phase-1 residual is exactly 0
+  PASS  NC1 the two are DISTINGUISHED
+  PASS  NC1c feasible with nonzero optimum 7
+  PASS  NC1d infeasible equality system reported infeasible
+== NC2: the dual verifier must REJECT a wrong dual ==
+  PASS  NC2 tampered dual is rejected
+  PASS  NC2 negated dual is rejected
+== NC3: the primal verifier must REJECT an infeasible point ==
+  PASS  NC3 x out of the polytope is rejected
+  PASS  NC3 right point, wrong claimed value is rejected
+== row builders ==
+  PASS  pairbias rows: 3 at n=3
+  PASS  perslot rows: (n-1)*C(n,2) = 6 at n=3
+  PASS  aggregate rows: C(n,2) = 3 at n=3
+  PASS  perslot rows: 4*10 = 40 at n=5
+  PASS  uniform has no per-slot violation at n=3
+  PASS  uniform has no aggregate violation at n=3
+  PASS  uniform flips are all 1/2 at n=3
+  PASS  uniform has no per-slot violation at n=4
+  PASS  uniform has no aggregate violation at n=4
+  PASS  uniform flips are all 1/2 at n=4
+  PASS  uniform has no per-slot violation at n=5
+  PASS  uniform has no aggregate violation at n=5
+  PASS  uniform flips are all 1/2 at n=5
+  PASS  two-atom law: mass 1 at n=3
+  PASS  two-atom law: E[inv] = C(n,2)/3 at n=3
+  PASS  two-atom law: every flip is exactly 1/3 at n=3
+  PASS  two-atom law: eps_spec = n/(n+1) at n=3
+  PASS  two-atom law: mass 1 at n=4
+  PASS  two-atom law: E[inv] = C(n,2)/3 at n=4
+  PASS  two-atom law: every flip is exactly 1/3 at n=4
+  PASS  two-atom law: eps_spec = n/(n+1) at n=4
+  PASS  two-atom law: mass 1 at n=5
+  PASS  two-atom law: E[inv] = C(n,2)/3 at n=5
+  PASS  two-atom law: every flip is exactly 1/3 at n=5
+  PASS  two-atom law: eps_spec = n/(n+1) at n=5
+  PASS  two-atom law: mass 1 at n=6
+  PASS  two-atom law: E[inv] = C(n,2)/3 at n=6
+  PASS  two-atom law: every flip is exactly 1/3 at n=6
+  PASS  two-atom law: eps_spec = n/(n+1) at n=6
+  PASS  two-atom law: mass 1 at n=7
+  PASS  two-atom law: E[inv] = C(n,2)/3 at n=7
+  PASS  two-atom law: every flip is exactly 1/3 at n=7
+  PASS  two-atom law: eps_spec = n/(n+1) at n=7
+
+PASS 62   FAIL 0

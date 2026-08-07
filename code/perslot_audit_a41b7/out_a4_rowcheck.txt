@@ -1,0 +1,11 @@
+==============================================================================
+P13 GUARD -- my per-slot rows vs lp200d.build(..., 'slot_eq', comparable=C)
+==============================================================================
+  branches compared: 219    row-systems that DIFFER: 0
+  => MY ROWS ARE ITS ROWS. A numeric disagreement would be mathematics.
+
+==============================================================================
+Negative control: the guard must REJECT a system that is genuinely different
+==============================================================================
+  aggregate rows vs their per-slot rows at n=4: rejected, as required  (must be REJECTED)
+  cap 1/4 instead of 1/3 at n=4: rejected, as required  (must be REJECTED)

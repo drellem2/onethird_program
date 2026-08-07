@@ -1,0 +1,18 @@
+==============================================================================
+CONTROLS for the two reductions, run BEFORE they are used at n = 6
+==============================================================================
+  R1 (E[inv] = sum of flip probabilities) at n=3: 0 mismatches
+  R1 (E[inv] = sum of flip probabilities) at n=4: 0 mismatches
+  R1 (E[inv] = sum of flip probabilities) at n=5: 0 mismatches
+  R2 (non-transitive branch never exceeds its closure) at n=3: 0 violations
+  R2 (non-transitive branch never exceeds its closure) at n=4: 0 violations
+
+==============================================================================
+n = 6: EVERY transitively closed branch with |I| >= 6
+  by (R1) a branch with |I| <= 5 has value <= 5/3, so it cannot BEAT 5/3;
+  by (R2) a non-transitive branch never exceeds its transitive closure.
+  Together: the scan below is a COMPLETE test of  V_6 > 5/3.
+==============================================================================
+  transitively closed branches with |I| >= 6: 4387
+    new max 5/3      at |I|= 6  |support|=19    C=[(0, 2), (0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 5), (3, 5)]
+    new max 11/6     at |I|= 6  |support|=14    C=[(0, 2), (0, 3), (0, 4), (0, 5), (1, 3), (1, 5), (2, 4), (2, 5), (3, 5)]
