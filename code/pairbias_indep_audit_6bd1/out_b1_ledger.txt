@@ -1,0 +1,52 @@
+==============================================================================
+B1 — Op-Form §9 claim ledger, read by mg-6bd1's own parser
+==============================================================================
+
+LIMIT OF THIS INSTRUMENT, stated before its output: this graph scores a claim
+by its recorded LABEL, not by its mathematics. A claim whose label understates
+its dependencies is scored independent here. mg-345e says the same of its own
+parser and it is true of mine. The graph CORROBORATES; it does not decide.
+
+rows parsed                 : 36
+recorded dependency edges   : 11
+
+every edge, exhibited (so a disagreement is locatable, not just a count):
+    claim 12 <- [4]      [**CONDITIONAL** on claim 4]
+    claim 17 <- [1, 4, 13, 16]      [**CONDITIONAL** on 1, 4, 13, 16]
+    claim 18 <- [17]      [**CONDITIONAL** on 17]
+    claim 23 <- [18, 21]      [**CONDITIONAL** on 18, 21]
+    claim 32 <- [28]      [**PROVEN** given 28 — but 28 is BROKEN; **and weaker than ]
+    claim 33 <- [28, 32]      [**CONDITIONAL** on 28, 32]
+
+claim 4 statement      : L4's $F$ is $n$-free; $\varepsilon$ must be an absolute constant below
+transitive dependents of 4: [12, 17, 18, 23]
+
+supply-path claims and whether each reaches claim 4:
+    claim 21  ancestors=[]                 reaches 4: False   label: **CONDITIONAL** — cited from mg-210d (audite
+    claim 22  ancestors=[]                 reaches 4: False   label: **PROVEN**, by hand
+    claim 25  ancestors=[]                 reaches 4: False   label: **PROVEN**
+    claim 26  ancestors=[]                 reaches 4: False   label: **PROVEN**
+    claim 27  ancestors=[]                 reaches 4: False   label: **PROVEN** (cross-check against an audited r
+  -> 0 of 5 supply-path claims reach claim 4
+
+claim 28 (the constant budget) — mg-345e's §4 'machine observation':
+    ancestors           : []
+    reaches claim 4     : False
+    label mentions L4   : True
+    label mentions C_3  : True
+
+------------------------------------------------------------------------------
+NEGATIVE CONTROLS — a graph that agrees with mg-345e is only worth something
+if it could have disagreed. Each control mutates the INPUT and must flip a
+printed answer.
+------------------------------------------------------------------------------
+NC1  sever edge 17<-4        -> dependents(4) = [12]
+     FIRES (18 and 23 must leave): True
+NC2  add fake edge 26<-18    -> supply claims reaching 4 = 1
+     FIRES (must be >= 1): True
+NC3  truncate 17's clause    -> edges = 9 (was 11), dependents(4) = [12, 17, 18, 23]
+     mg-345e's Defect 1 is NOT verdict-bearing: True
+NC4  keyword 'on' only       -> edges = 10  (the difference is the '32 PROVEN given 28' clause)
+     the 11th edge is 32<-28: True
+
+done.

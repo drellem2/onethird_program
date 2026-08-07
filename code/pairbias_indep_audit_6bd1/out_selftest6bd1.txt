@@ -1,0 +1,227 @@
+==============================================================================
+selftest6bd1
+==============================================================================
+  [ok  ] S1a synthetic ledger row count
+  [ok  ] S1b synthetic edge count (1<-none, 2<-1, 3<-2, 4<-3, 5<-none)
+  [ok  ] S1c transitive dependents of claim 1
+  [ok  ] S1d claim 5 is isolated
+  [ok  ] S2a pipe-in-math row is NOT dropped
+  [ok  ] S2b and its dependency edge survives
+==============================================================================
+B5 — mg-345e's dependency list, walked ONE LEVEL DOWN
+==============================================================================
+
+SCREEN (machine) + ADJUDICATION (hand). The screen cannot see an unrecorded
+dependence; the adjudication is what decides, and it is bound by mg-6bd1's P14:
+naming a document is not enough — the failing step must be exhibited.
+
+  INPUT 1. inv_e(sigma), the count of incomparable pairs flipped against e
+     recorded at : STATE.md glossary
+     rows matched: 1
+     screen      : L4-indicator tokens in the recorded statement: NONE
+                   | 43: | `inv_e(σ)` | Kendall distance: incomparable pairs flipped vs the distinguished order `e`. | Axis 1 |
+     ADJUDICATION: NOT L4-dependent. A DEFINITION. It names the distinguished order `e`, which is
+       supplied by input 3, and nothing else. Withdrawing L4 changes no symbol in it.
+
+  INPUT 2. the frozen hypothesis delta(P) < 1/3
+     recorded at : the minimal-counterexample condition — a HYPOTHESIS, not a lemma
+     screen      : n/a — not a corpus artefact (see adjudication)
+     ADJUDICATION: NOT L4-dependent. It is the HYPOTHESIS of the statement being proved — the
+       minimal-counterexample condition of the 1/3-2/3 programme. It is upstream of
+       the entire architecture including L4, not downstream of anything.
+
+  INPUT 3. coherence: the >2/3 majorities cohere into a single linear order e (mg-61bb)
+     recorded at : STATE.md row 'INERT · proven (probe A, mg-61bb)'
+     rows matched: 1   (a naive mg-id grep would have matched 2 rows, including STATE.md's L1b blockquote — CONFOUND AVOIDED)
+     screen      : L4-indicator tokens in the recorded statement: NONE
+                   | 155: | **INERT · proven (probe A, mg-61bb)** | can the frozen/coherence fact improve the Kahn–Saks 0.2764 bound? — ISOLATED elementary probe | **No, p
+     ADJUDICATION: NOT L4-dependent, AND IT IS PROVED TWICE INDEPENDENTLY. STATE.md's mg-61bb row
+       records it as 'a logical consequence of delta<1/3 (same poset class - shrinks
+       it by zero)', whose only residual is subadditivity of balances
+       beta(u,w) <= beta(u,v)+beta(v,w). mg-210d's own record re-derives the same
+       fact from the other side as a 'free by-product': 'frozen => the majority
+       relation is automatically a linear extension, and 1/3 is exactly the
+       threshold'. Neither derivation mentions a cut, a prefix, or a modulus.
+       WITHDRAW L4 AND NOTHING IN EITHER ARGUMENT CHANGES.
+
+  INPUT 4. linearity of expectation
+     recorded at : not in this corpus — it is measure theory
+     screen      : n/a — not a corpus artefact (see adjudication)
+     ADJUDICATION: NOT L4-dependent. ZFC.
+
+  INPUT 5. mg-210d's master bound 1-lambda_std <= 6E[inv]/(n^2-1)
+     recorded at : docs/state-history/attempt-mg-210d.md, 'Master bound (re-derived from scratch)'
+     rows matched: 1
+     screen      : L4-indicator tokens in the recorded statement: NONE
+                   | 54: **Best constant this route proves = `0`.** Master bound (re-derived from scratch, sharp): `1−λ_std ≤ 3·E[footrule]/(n²−1) ≤ 6·E[inv]/(n²−1)`, equa
+     ADJUDICATION: NOT L4-dependent. The bound is 1-lambda_std <= 3E[footrule]/(n^2-1) <=
+       6E[inv]/(n^2-1). Its two steps are (a) a spectral estimate on lambda_std
+       against expected displacement, and (b) Diaconis-Graham's D <= 2I, a finite
+       combinatorial identity about permutations. Op-Form 6.1 hand-checks (b) and
+       the antichain equality separately; mg-c4f5 re-derived the whole bound by
+       hand at 0 violations over 101,658 posets n <= 7. NO STEP TAKES A CUT, A
+       PREFIX, A MODULUS OR A THRESHOLD AS INPUT. Note also that mg-345e marks this
+       input '(only for the lambda_std rendering)': the ticket's own (LIB-const)
+       form E[inv_e] <= (eps/6)(n^2-1) does not need it at all.
+
+------------------------------------------------------------------------------
+THE CHAIN I WALKED, END TO END, WITH NOTHING ELIDED:
+------------------------------------------------------------------------------
+
+    delta(P) < 1/3                                        [HYPOTHESIS]
+        |
+        +--(mg-61bb, and independently mg-210d's by-product)--> e exists and is canonical
+        |       inputs: subadditivity of balances. No cut. No modulus.        [L4-FREE]
+        |
+        +--> for each incomparable pair {i<j}: Pr[j <_sigma i] < 1/3          [HYPOTHESIS]
+                |
+                +--(linearity of expectation)--> E[inv_e] = sum Pr[...] < m/3 [L4-FREE]
+                        |
+                        +--(m <= C(n,2), arithmetic)--> E[inv_e] < n(n-1)/6   [L4-FREE]
+                                |
+                                +--( / (n^2-1)/6 )--> eps_spec < n/(n+1) -> 1 [L4-FREE]
+                                +--( / n^2       )--> eps_c3ca < (n-1)/(6n)
+                                                                     -> 1/6   [L4-FREE]
+
+    NOT ON THIS CHAIN, ANYWHERE: Delta_1, a cut, a prefix, Cheeger, C_3, Step 6,
+    L4's F, L4's threshold, mg-3ce3's calibration, mg-3af9's branch-(ii) result.
+
+  The last two lines of the chain are the SAME division applied twice. That is
+  the whole of B2/C4, and it is why mg-345e's own headline number IS the 1/6 its
+  §6 says it has not attempted.
+
+------------------------------------------------------------------------------
+THE ONE PLACE L4 IS GENUINELY ONE LEVEL DOWN — AND IT IS ON THE OTHER SIDE
+------------------------------------------------------------------------------
+
+  Op-Form's ledger records:  23 <- 18 <- 17 <- 4 = "L4's F is n-free".
+  Claim 23 IS (LIB-const) — but as the ARCHITECTURE'S REQUIREMENT, i.e. the claim that
+  a constant UNIFORM IN n is the right thing to want. That is a DEMAND statement.
+
+  So the honest one-level-down finding is:
+    * the INEQUALITY E[inv_e] <= (c/6)(n^2-1) with c uniform in n : L4-FREE (chain above)
+    * the claim that a uniform-in-n c is what the architecture NEEDS : L4-CONDITIONAL,
+      via ledger 23 <- 18 <- 17 <- 4, and claim 4 literally names F's n-freeness.
+
+  mg-345e's supply/demand split puts exactly this cut in exactly this place (its §1
+  table, and its own P1 predicted 'claim 23 in dependents-of-4'). THE SPLIT SURVIVES
+  THE WALK.
+
+  BUT ONE STEP OF ITS §5.1 REFINEMENT NEEDED CHECKING AND IT HOLDS: mg-345e says the
+  demand needs L4's THRESHOLD, not its MODULUS - while Op-Form derives the threshold's
+  n-freeness FROM the modulus reading (§3.2 support 1). If that were the only support,
+  mg-345e's refinement would be circular. It is not: Op-Form §3.2 support 2 is
+  F-FREE - 'nothing downstream of L4 contains an n ... the window [1/3,2/3] has width
+  1/3 at every n ... the entire downstream of Step 5 is dimensionless'. That argument
+  never mentions F. SO THE THRESHOLD'S n-FREENESS HAS AN F-FREE SUPPORT AND mg-345e'S
+  NARROWER READING IS AVAILABLE. mg-345e does not exhibit this; it is exhibited here.
+
+==============================================================================
+RESULT: 0 of 5 named inputs is L4-dependent at depth 2. VERDICT (A) SURVIVES.
+==============================================================================
+  [ok  ] S3 nonexistent evidence path raises rather than reporting clean
+  [ok  ] S4a E_unif[footrule] at n=3 is 8/3 (all 6 permutations by hand)
+  [ok  ] S4b closed form agrees at n=3
+  [ok  ] S4c direct double sum agrees at n=3
+  [ok  ] S4d eps_spec ceiling at n=3, m=3
+  [ok  ] S4e eps_c3ca ceiling at n=3, m=3 is (n-1)/(6n) = 1/9
+  [ok  ] S4f their ratio is 6n^2/(n^2-1) = 27/4 at n=3
+  [ok  ] S4g E_unif[inv] at n=4 is C(4,2)/2 = 3
+  [ok  ] S4h claim 26's 2/3 at n=4: (m/3)/E_unif[inv] with m=6
+  [ok  ] S5a eps_spec is NOT 6E/n^2 at n=3
+  [ok  ] S5b 1/6 is NOT attained at any finite n
+==============================================================================
+B3 — the 1/6 census and the scope-conflation reading
+==============================================================================
+
+tree pinned at mg-345e's own commit 550a7f105c30 so the census is scored
+against what mg-345e could actually have seen, not against tonight's tree.
+
+(a) 1/6 CENSUS — occurrences OUTSIDE mg-345e's own document, at its own commit
+    total occurrences : 34
+    distinct files    : 14
+    mg-345e §6 says   : 'occurs twice in this corpus'
+    -> the claim is REFUTED on the literal count by a factor of 17x
+
+    per file:
+         2  STATE.md
+         5  docs/OneThird-Counterexample-Under-The-Action-IndependentAudit-mg0a11.md
+         1  docs/OneThird-Hodge-Side-Leverage-GppStrike-IndependentAudit.md
+         1  docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md
+         4  docs/OneThird-Hodge-Side-Leverage.md
+         2  docs/OneThird-L4-Branch-ii-Sublinear-Modulus-IndependentAudit.md
+         1  docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md
+         5  docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md
+         6  docs/OneThird-lambda-std-Operative-Form.md
+         2  docs/audit-mg-2789-negative-control-4.md
+         1  docs/audit-mg-5f9a-deletion-test.md
+         1  docs/landing-mg-1c80-instrumented-predicate.md
+         2  docs/roadmap.md
+         1  docs/state-history/attempt-mg-88bd.md
+
+    THE ONE THAT MATTERS — the supply-side occurrence mg-345e says does not
+    exist, quoted verbatim from the tree mg-345e itself was standing on:
+
+       docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:415
+       > 1 and the bound reads `e(P)/n! ≤ 2`. **Freezing unconditionally gives only `ε < 1/6 ≈ 0.167`.**
+
+    HAND CLASSIFICATION — the raw 34 is NOT the number to quote against mg-345e,
+    and saying so is the point. It is inflated two ways, both disclosed:
+      * REGEX FALSE POSITIVES: `61/61`, `6197/6197` contain the substring `1/6`.
+        audit-mg-2789 (2), audit-mg-5f9a (1), landing-mg-1c80 (1),
+        Hodge-IndependentAudit (1)  ->  5 hits are not the number 1/6 at all.
+      * DIFFERENT SUBJECT MATTER: Hodge gamma-weights (4), mg0a11's
+        1/C(6,1) extremal-core probability (5), L4-branch-(ii) cut arithmetic (2),
+        roadmap prose naming Daniel's ask (2)  ->  13 are unrelated to eps_spec.
+
+    In the eps_spec / pair-bias subject matter, the DISTINCT occurrences are:
+      1. Op-Form 6.4 'slack <= 1/6 for a centred pair'  [DEMAND; BROKEN as
+         labelled by mg-e35c F5]  — restated in its audit and in attempt-mg-88bd
+      2. mg-e2de's 1/6, the collapse of a local delta LOWER bound at co-degree 2
+         (STATE.md:158)  [neither supply nor demand: a lower bound]
+      3. mg-c4f5:415 'Freezing unconditionally gives only eps < 1/6'  [SUPPLY]
+
+    mg-345e names 1 and 2 and says there are two. THERE ARE AT LEAST THREE, and
+    the third is the one its sentence rules out by kind.
+
+    This is SUPPLY-side — it says what FREEZING GIVES, not what the
+    architecture needs — and B2/C4 shows it is mg-345e's OWN `eps_sup < 1`
+    under a different division. So mg-345e's §6 sentence is wrong on BOTH of
+    its two counts: the number, and the 'neither is supply-side'.
+
+(b) SCOPE CONFLATION — every mg-3af9 sentence, verbatim, for hand reading.
+    (no keyword classifier decides this; a classifier tuned until it returns
+     the answer I want is unfalsifiable)
+
+    docs/OneThird-PairBias-Independence-mg-345e.md:34
+      | >    **every strictly positive** `F` (`mg-3af9`, UNCONDITIONAL, audited `mg-c8c6`);
+
+    docs/OneThird-PairBias-Independence-mg-345e.md:209
+      | | (ii) remove/modify `≤ F(ε)n` interface elements | **moot** — unconsumable by Step 6's stated transfer for **every strictly positive** `F`, `o(ε)` included | `mg-3af9`, UNCONDITIONAL, audited `mg-c8c6` |
+
+    and the paragraph mg-345e wrote to guard exactly this, verbatim:
+     216 | **SCOPE DISCIPLINE — read this before citing the row above.** Every entry is a statement about
+     217 | what Step 6 **consumes**. **None of it says L4-as-stated is or is not provable at an `n`-free
+     218 | modulus.** That question is untouched here and stays open. `mg-345e`'s own body warns that
+     219 | `pm-onethird` conflated consumption with provability on 2026-08-07 and had to reverse; the claim
+     220 | made here is the consumption one only, and it is *narrower* than the provability question rather
+     221 | than a substitute for it. The `n`-freeness of `F` remains exactly as open as it was — this
+     222 | document's point is that **Step 6 does not consume its answer**, so answering it would not, by
+     223 | itself, pin `ε_dem`.
+     224 | 
+
+    THREE COLUMNS (mg-6bd1 P13's binding guard — a defect present only in the
+    compression is a LABELLING finding, not BROKEN):
+      document body   : scope guard present at line(s) [216]  -> True
+      STATE.md rows   : rows carrying an explicit SCOPE clause: [164]  -> True
+      commit body     : carries the guard: True
+      commit SUBJECT  : carries the guard: False
+      subject text    : finding+instrument+docs: (A) INDEPENDENT — AND FORCED, NOT INCIDENTAL. mg-6bc2 UNBLOCKS ON ITS OWN S
+
+==============================================================================
+  [ok  ] S6 census sees docs/ when run from this subdirectory (>=100 files)
+  [ok  ] S7 line-number references are NOT read as claim ids
+
+==============================================================================
+ALL SELFTESTS PASS
+==============================================================================
