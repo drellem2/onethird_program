@@ -324,7 +324,7 @@ quantifier over $n$ unstated, and that quantifier is the content:
 
 | corpus form | where | status against the derivation |
 |---|---|---|
-| **limit** $\lambda_{\mathrm{std}}\to1$ | `STATE.md:13`, `:86` row 8 | **stronger than needed**, and asymptotic: gives the threshold only for $n\ge N_0$, with $N_0$ *unspecified* |
+| **limit** $\lambda_{\mathrm{std}}\to1$ | `STATE.md:13`, `:86` row 8 | **stronger than needed**, and asymptotic: gives the threshold only for $n\ge N_0$, with ~~$N_0$ *unspecified*~~ **no $N_0$ that works for the class at all — rider below** |
 | **rate** $1-\lambda_{\mathrm{std}}\le C/(\gamma n)$ | mg-7ae7 | **much stronger than needed**; also asymptotic, but with an *explicit* threshold $n\ge C/(\gamma\varepsilon_{\mathrm{spec}})$ |
 | **fixed constant** $\lambda_{\mathrm{std}}\ge1-\varepsilon$ | tex Step 2 `:494–497`, L1 `:557–558` | **right shape, quantifier missing** |
 | **operative (this document)** | — | $1-\lambda_{\mathrm{std}}\le\varepsilon_{\mathrm{spec}}$, $\varepsilon_{\mathrm{spec}}$ an **explicit absolute constant**, at **every** $n$ (equivalently: with an explicit finite exceptional set) |
@@ -333,6 +333,45 @@ The ordering as *asymptotic statements* is rate $\Rightarrow$ limit $\Rightarrow
 (for large $n$). The ordering as *usable hypotheses* is not a chain: neither asymptotic form delivers
 uniformity, and the constant form demands it. The rate form's one genuine practical advantage over
 the limit form is that its exceptional set is **explicit**. **[PROVEN]**
+
+**[THRESHOLD READING SUPERSEDED — mg-4417, on mg-c4f5 §5.3 (landed `STATE.md` by mg-5ce3).**
+*Unspecified* understates the limit row above, and it understates it in the direction that invites
+work. The threshold is not merely unknown-but-there: **no $N_0$ works for the class at all**, so
+*go and find $N_0$* is a **closed** question rather than an open one. The argument is
+[`OneThird-LIBweak-mg-c4f5-IndependentAudit.md`](OneThird-LIBweak-mg-c4f5-IndependentAudit.md) §5.3
+and it is **pointed at here, not restated**.
+
+**THE TRANSFER IS THE PART TO READ, because §5.3 is not about this row's hypothesis.** §5.3 proves
+its statement for **(LIB-weak) $\Rightarrow$ (LIB-const)** — the *inversion*-side hypothesis
+$\mathbb E[\mathrm{inv}_e]=o(n^2)$. This row's hypothesis is the **limit** $\lambda_{\mathrm{std}}\to1$.
+Those are different implications and §5.3 must not be quoted as though it ruled on this one
+directly. It reaches this row **a fortiori**, in one step, and the step is this document's own
+Claim 21: the master bound $1-\lambda_{\mathrm{std}}\le6\mathbb E[\mathrm{inv}_e]/(n^2-1)$ makes
+every $o(n^2)$ family a $\lambda_{\mathrm{std}}\to1$ family, so the class §5.3 exhibits its
+counterexample in is a **subclass** of this row's, and a counterexample in a subclass is a
+counterexample in the class. **Kind, marked at the step:** that route runs through Claim 21, which
+this ledger labels **CONDITIONAL** (cited from mg-210d), so the a-fortiori transfer inherits that
+label and nothing stronger. **The conclusion does not depend on it.** For the limit form alone it
+needs no construction and no master bound at all — $\lambda_{\mathrm{std}}\to1$ is *by definition*
+a per-family $\exists N$, carrying no uniformity over the class, so the per-class threshold fails
+outright. §5.3 is cited because it is the corpus's **landed** statement, not because this row
+requires its machinery.
+
+**THE PRECISION THAT MUST TRAVEL:** what is false is the **PER-CLASS** claim — *that there is an
+$N_0$ beyond which every family in the class satisfies the constant form*. The **PER-FAMILY**
+statement is **TRUE and is left standing**: a single family with $\lambda_{\mathrm{std}}\to1$ does
+have a threshold of its own, it is simply not a function of the hypothesis and so cannot be
+extracted from it. Anyone needing $N_0$ must first prove something strictly stronger than the
+limit — a **rate**, which is the row below, and whose explicit exceptional set is exactly the
+advantage §5.1 already credits it with.
+
+**WHAT THIS DOES NOT STRIKE.** Claim 19 and the paragraph above it are **untouched and correct**:
+rate $\Rightarrow$ limit $\Rightarrow$ constant-for-large-$n$ holds per family, and *"neither
+asymptotic form delivers uniformity"* is precisely what §5.3 sharpens rather than contradicts.
+The defect is the single word *unspecified*, and it is the same word struck at
+[`OneThird-LIBweak-mg-c3ca.md`](OneThird-LIBweak-mg-c3ca.md) `:100` — **which cites this table for
+that sentence** (*"this is not new mathematics — it is mg-88bd's result"*), making this row the
+**upstream** of that strike. **]**
 
 ### 5.2 Where mg-7ae7's rate came from — it is an artifact of the input, not a demand of the consumer
 

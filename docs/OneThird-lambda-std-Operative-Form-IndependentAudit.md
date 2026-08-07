@@ -658,7 +658,7 @@ re-derived it independently or verified the quotation against the primary file m
 | 16 | Under either repair, L3's loss is a constant `C_3` (4.3) | CONDITIONAL | **CONFIRMED** conditional | correctly labelled |
 | 17 | L3 is the last candidate site; chain is `n`-free end to end (4.3) | CONDITIONAL on 1,4,13,16 | **CONFIRMED** conditional | I walked the chain independently and found no further site |
 | 18 | Operative form: `1−λ_std ≤ ε_spec`, absolute constant, uniform in `n` (5.1) | CONDITIONAL on 17 | **CONFIRMED** conditional | substance right; **"a FOURTH form" OVERSTATED** (F4) |
-| 19 | rate ⟹ limit ⟹ constant-for-large-`n`; neither supplies uniformity (5.1) | PROVEN | **CONFIRMED** | and the `N_0`-unspecified point is the real content |
+| 19 | rate ⟹ limit ⟹ constant-for-large-`n`; neither supplies uniformity (5.1) | PROVEN | **CONFIRMED** | and the ~~`N_0`-unspecified~~ **`N_0`-underivable** point is the real content — **the verdict stands; only the word moves.** *Unspecified* understates it: **no `N_0` works for the class at all** (mg-c4f5 §5.3, landed `STATE.md` by mg-5ce3; struck at the target `§5.1` table by mg-4417, which records the a-fortiori step, since §5.3's own hypothesis is `o(n²)` and this row's is the limit). Per-family thresholds are **TRUE and untouched** |
 | 20 | mg-7ae7's `1/(γn)` is inherited from Theorem E's output shape (5.2) | PROVEN | **CONFIRMED** | `step8.tex:68–72` and `:290–305` verbatim ✓; **rider: Theorem E is width-3** (F12) |
 | 21 | Master bound `≤ 3E[D]/(n²−1) ≤ 6E[I]/(n²−1)` (6.1) | CONDITIONAL (mg-210d) | **CONFIRMED** | second inequality = DG upper half ✓; antichain equality recomputed ✓ |
 | 22 | `E_unif[footrule] = (n²−1)/3` (6.1) | PROVEN | **CONFIRMED** | `Σ\|j−i\| = n(n²−1)/3`, recomputed |
