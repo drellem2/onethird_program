@@ -334,8 +334,21 @@ def measure_report(n, mu):
 
 
 def eps_spec(n, e_inv):
-    """The architecture's normalisation:  E[inv_e] <= (eps_spec/6)(n^2-1)."""
-    return 6 * e_inv / (n * n - 1)
+    """The architecture's normalisation:  E[inv_e] <= (eps_spec/6)(n^2-1).
+
+    The `F()` is LOAD-BEARING, not decoration.  Written as `6 * e_inv / (n*n - 1)` this
+    returns a FLOAT whenever `e_inv` is a plain Python int -- and this corpus compares
+    exact rationals for EQUALITY, so a float here does not announce itself: it produces a
+    plausible number wrong in the last bits.  Every current caller happens to pass a
+    Fraction (`measure_report` accumulates `E_inv` from `F(0)`, so it is exact on every
+    input), but that is a CONVENTION HELD BY THE CALLERS, not a property of this function.
+    Hardened per `mg-a1fe` on `mg-41b7`'s audit note; guarded by `S9` in `selftest200d.py`.
+
+    NOT claimed: this does not launder a float ARGUMENT back into exactness.  `F(0.1)` is
+    the exact value of the double `0.1`, not `1/10`.  The conversion makes the RETURN TYPE
+    a property of the function; keeping floats out of `e_inv` remains the caller's job.
+    """
+    return 6 * F(e_inv) / (n * n - 1)
 
 
 def uniform_le_measure(n, relation):

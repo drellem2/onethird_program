@@ -231,6 +231,56 @@ for n, comp, expect in CASES:
 
 print()
 print("=" * 74)
+print("S9  EXACTNESS OF eps_spec -- the check that would have caught the float path")
+print("    (mg-41b7's audit note, repaired under mg-a1fe)")
+print("=" * 74)
+# Before the repair, eps_spec computed 6*e_inv/(n^2-1) with no conversion, so a plain
+# Python int for e_inv returned a FLOAT.  It did not bite: measure_report accumulates
+# E_inv from F(0), and every live call site passed a Fraction.  That is a CONVENTION HELD
+# BY THE CALLERS, not a property of the function -- which is what these checks make it.
+for e_int in (1, 2, 3):
+    v = eps_spec(5, e_int)
+    check(f"S9a  eps_spec(5, {e_int}) with a PYTHON INT returns a Fraction, not a float",
+          isinstance(v, F), f"returned {v!r} of type {type(v).__name__}")
+
+# The type is the symptom; this is the bite.  6/15 = 2/5 is NOT a dyadic rational, so the
+# float path is not merely differently-typed here, it is a DIFFERENT NUMBER -- and this
+# corpus compares exact rationals for EQUALITY.
+check("S9b  eps_spec(4, 1) == 2/5 EXACTLY (a non-dyadic value, where float != rational)",
+      eps_spec(4, 1) == F(2, 5), f"got {eps_spec(4, 1)!r}")
+check("S9c  eps_spec(5, 1) == 1/4 and eps_spec(5, 2) == 1/2",
+      eps_spec(5, 1) == F(1, 4) and eps_spec(5, 2) == F(1, 2),
+      f"got {eps_spec(5, 1)!r}, {eps_spec(5, 2)!r}")
+
+# MUTATION -- the pre-repair expression, run inline.  If this stops being a float that
+# misses 2/5, S9a-S9c are testing nothing and the hazard they guard has ceased to exist.
+pre_repair = 6 * 1 / (4 * 4 - 1)
+check("S9d  MUTATION: the unconverted 6*e_inv/(n^2-1) IS a float and MISSES 2/5 -- so "
+      "S9a-S9c are not vacuous",
+      isinstance(pre_repair, float) and F(pre_repair) != F(2, 5),
+      f"{pre_repair!r} -> {F(pre_repair)}")
+
+# The Fraction path is unchanged, and the old convention still holds where it always did.
+check("S9e  the Fraction path is untouched: eps_spec(n, C(n,2)/3) == n/(n+1) at n=3,4,5",
+      all(eps_spec(n, F(n * (n - 1), 6)) == F(n, n + 1) for n in (3, 4, 5)))
+check("S9f  measure_report's E_inv is a Fraction on int weights, zero weights and the "
+      "empty measure -- the convention that USED to be the only guard",
+      {type(measure_report(3, dict(a))["E_inv"]).__name__
+       for a in ({}, {(0, 1, 2): 1, (2, 1, 0): 2}, {(0, 1, 2): 0},
+                 {(0, 1, 2): F(1, 2), (2, 1, 0): F(1, 2)})} == {"Fraction"})
+
+# NOT CLAIMED, and asserted so nobody reads more into the F() than it gives: converting
+# the argument makes the RETURN TYPE a property of the function.  It does not launder a
+# float ARGUMENT back into the rational the caller meant -- F(0.4) is the exact value of
+# the double 0.4, which is not 2/5.  Keeping floats out of e_inv is still the caller's job.
+v_float = eps_spec(4, 0.4)
+check("S9g  a FLOAT argument still returns a Fraction but NOT the exact rational -- the "
+      "conversion is a type guarantee, not a laundering",
+      isinstance(v_float, F) and v_float != F(4, 25) and eps_spec(4, F(2, 5)) == F(4, 25),
+      f"got {v_float}")
+
+print()
+print("=" * 74)
 print(f"selftest: {'ALL PASS' if not fails else str(len(fails)) + ' FAILURES'}")
 for f_ in fails:
     print(f"   FAILED: {f_}")

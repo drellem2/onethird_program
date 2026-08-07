@@ -15,7 +15,7 @@ one of the controls (`S1`).
 | file | what it is |
 |---|---|
 | `lp200d.py` | exact-rational two-phase simplex (Bland), the five constraint forms, diagnostics |
-| `selftest200d.py` | 60+ controls incl. real-poset checks (`S3`,`S5`,`S6`), a mutation (`S7`) and solver-invariance (`S8`). **Exits 1 on any failure.** |
+| `selftest200d.py` | 60+ controls incl. real-poset checks (`S3`,`S5`,`S6`), a mutation (`S7`), solver-invariance (`S8`) and `eps_spec` exactness (`S9`). **Exits 1 on any failure.** |
 | `v1_forms.py` | the branch-free forms: baseline, both literal, both surrogate |
 | `v2_disjunctive.py` | the disjunctive value: exhaustive over `2^C(n,2)` branches, plus the no-symmetry control |
 | `v3_families.py` | lower-bound search past the brute-force horizon, and the `(n−1)/3` construction checked directly at `n = 3..20` |
@@ -31,6 +31,37 @@ python3 v3_families.py 4 5 6           # lower-bound search + the construction
 
 Committed transcripts: `out_selftest200d.txt`, `out_v1_n5.txt`, `out_v1_n6.txt`,
 `out_v2_n34.txt`, `out_v2_n5.txt`, `out_v3_families.txt`.
+
+## `eps_spec` exactness — a HARDENING, not a defect repair (`mg-a1fe`)
+
+`mg-41b7`'s differential audit of `measure_report` passed it 111 of 113 and classified the
+remaining 2 as a **hardening note, not a defect**: `eps_spec` computed `6*e_inv/(n^2-1)`
+with no conversion, so **a plain Python `int` for `e_inv` returned a `float`**. It did not
+bite — `measure_report` accumulates `E_inv` from `F(0)`, so it is a `Fraction` on integer
+weights, zero weights and the empty measure, and all three live call sites
+(`v1_forms`/`v2_disjunctive` here, `dual_certificate_131e`, `dual_certificate_audit_eaa1`)
+pass a `Fraction`. That made the guard a **convention held by every caller, not a property
+of the function** — and in a corpus whose results are exact rationals compared for
+**equality**, a float does not announce itself.
+
+Repaired with one `F()` on the argument, and guarded by **`S9`** in `selftest200d.py`.
+`S9` is a real control, verified in both directions: it **fails 5 of its 9 checks against
+the pre-repair `lp200d.py`** (the three int-type checks, plus `eps_spec(4, 1) == 2/5`,
+where the float path is a genuinely *different number* because `2/5` is not dyadic) and
+passes all 9 after. `S9d` is a mutation that runs the pre-repair expression inline, so the
+control cannot go vacuous. `S9g` records what the `F()` does **not** buy: it makes the
+return *type* a property of the function; it does not launder a float **argument** back
+into the rational the caller meant.
+
+Scope, stated so it is not over-read: `mg-200d`'s conclusions are **unchanged and remain
+refuted** (`mg-00a1`, `mg-131e`) — this touches the instrument only, and no published
+figure moves. `mg-41b7`'s two checks in `a6_instrument.py` now pass **for the right
+reason** (its full run: 113 PASS / 0 FAIL against the repaired file), rather than by being
+tuned away. One neighbour checked and found **clean**, reported rather than swept: the
+only other arithmetic in `lp200d.py` that could import a float is the simplex, and
+`solve_max` already coerces every coefficient (`F(v)`), every rhs (`F(rhs)`) and every
+objective entry (`-F(v)`) before they reach the tableau — `eps_spec` was the single
+unconverted boundary in the file.
 
 ## The one thing to read before using any number here
 

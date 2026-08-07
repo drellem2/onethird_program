@@ -119,5 +119,19 @@ S8  SOLVER INVARIANCE -- the headline values must not depend on pivot order
   [ok ] S8  n=5 branch value 4/3 under all 4 row/column orderings  -- ['4/3']
 
 ==========================================================================
+S9  EXACTNESS OF eps_spec -- the check that would have caught the float path
+    (mg-41b7's audit note, repaired under mg-a1fe)
+==========================================================================
+  [ok ] S9a  eps_spec(5, 1) with a PYTHON INT returns a Fraction, not a float  -- returned Fraction(1, 4) of type Fraction
+  [ok ] S9a  eps_spec(5, 2) with a PYTHON INT returns a Fraction, not a float  -- returned Fraction(1, 2) of type Fraction
+  [ok ] S9a  eps_spec(5, 3) with a PYTHON INT returns a Fraction, not a float  -- returned Fraction(3, 4) of type Fraction
+  [ok ] S9b  eps_spec(4, 1) == 2/5 EXACTLY (a non-dyadic value, where float != rational)  -- got Fraction(2, 5)
+  [ok ] S9c  eps_spec(5, 1) == 1/4 and eps_spec(5, 2) == 1/2  -- got Fraction(1, 4), Fraction(1, 2)
+  [ok ] S9d  MUTATION: the unconverted 6*e_inv/(n^2-1) IS a float and MISSES 2/5 -- so S9a-S9c are not vacuous  -- 0.4 -> 3602879701896397/9007199254740992
+  [ok ] S9e  the Fraction path is untouched: eps_spec(n, C(n,2)/3) == n/(n+1) at n=3,4,5
+  [ok ] S9f  measure_report's E_inv is a Fraction on int weights, zero weights and the empty measure -- the convention that USED to be the only guard
+  [ok ] S9g  a FLOAT argument still returns a Fraction but NOT the exact rational -- the conversion is a type guarantee, not a laundering  -- got 3602879701896397/22517998136852480
+
+==========================================================================
 selftest: ALL PASS
 ==========================================================================
