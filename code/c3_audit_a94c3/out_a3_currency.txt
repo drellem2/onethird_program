@@ -1,0 +1,127 @@
+==============================================================================
+C0. STRATIFY -- where is 1 - lambda_std = 0?  (mg-76b2 claim 18, re-derived)
+==============================================================================
+  Three predicates, computed independently of each other:
+    (a) 1 - lambda_std = 0            (Jacobi, FLOAT, tol 1e-12)
+    (b) P is ordinal-sum decomposable (combinatorial, EXACT)
+    (c) Phi* = 0                      (EXACT rational over all cuts)
+
+  n   posets   gap=0  decomp  Phi*=0  disagree
+  3        7       3       3       3         0
+  4       40      13      13      13         0
+  5      357      82      82      82         0
+  6     4824     754     754     754         0
+
+  0 disagreements over 5228 posets.
+  CLAIM 18 REPRODUCED on three predicates that share no code.  Note what
+  this costs the population: every C_3 ratio below is 0/0 on the
+  decomposable posets and is therefore measured only on the primitive ones.
+==============================================================================
+C1. IS ANY POSET HERE INSIDE THE BUDGET?  (mg-76b2 claim 19, re-derived)
+==============================================================================
+  Budget: 1 - lambda_std <= eps_spec = 1/50 = 0.02
+
+  n  primitive  inside budget   smallest gap
+  3          4              0         0.3333
+  4         27              0         0.1528
+  5        275              0         0.0957
+  6       4070              0         0.0562
+
+  0 of 4376 primitive
+  posets are inside the budget.  EVERY C_3 FIGURE BELOW IS THEREFORE
+  MEASURED OUTSIDE THE REGIME IT WOULD BE USED IN -- exactly as mg-76b2
+  says of its own, and the same caveat binds this audit's numbers.
+==============================================================================
+C2/C3. THE THREE CURRENCIES OVER THE PRIMITIVE POPULATION -- P5
+==============================================================================
+  c threshold (Op-Form/mg-76b2 H3) = (1-eps_leak)/(1-eps_spec) = 40/49 = 0.816327
+
+  n  max C_3^cut  max C_3^gap     min c   c below thresh
+  3            1        1.500     0.750              1/3   [4 primitive, 1 dropped as 0/0]
+  4          3/2        1.473     0.618             5/26   [27 primitive, 1 dropped as 0/0]
+  5          6/5        1.990     0.536           39/274   [275 primitive, 1 dropped as 0/0]
+  6         15/8        2.386     0.453         523/4069   [4070 primitive, 1 dropped as 0/0]
+
+  mg-76b2 sec.7 reports, on the same population:
+      max C_3^cut  1, 3/2, 6/5, 15/8
+      max C_3^gap  1.500, 1.473, 1.990, 2.386
+      min c        0.750, 0.618, 0.536, 0.453
+      c below      1/3, 5/26, 39/274, 523/4069
+  n = 3: cut True   gap True   c True   below True
+  n = 4: cut True   gap True   c True   below True
+  n = 5: cut True   gap True   c True   below True
+  n = 6: cut True   gap True   c True   below True
+
+  16/16 of mg-76b2's sec.7 figures reproduce on independent code.
+  P5 (I predicted at least one would NOT reproduce): MISSED
+
+  DIRECTION.  max C_3^cut and max C_3^gap RISE with n; min c FALLS.  A finite
+  population can refute a uniform-in-n bound and can never establish one, so
+  this is a direction and not a bound -- which is how mg-76b2 reports it too.
+==============================================================================
+C4. P4 -- THE ADVERSARIAL PROBE.  Restrict to posets where L2 HOLDS.
+==============================================================================
+  mg-76b2's theorem is CONDITIONAL on L2.  So the honest question is not
+  'is C_3^gap > 1 somewhere', it is 'is C_3^gap > 1 WHERE L2's own hypothesis
+  is satisfied'.  Restrict to primitive posets with a NON-DEGENERATE top
+  standard eigenspace whose eigenvector IS monotone along e -- i.e. posets that
+  exhibit L2's first disjunct -- and re-measure.
+
+  n  prim & L2  max C_3^cut  max C_3^gap  C_3^cut>1  C_3^gap>1
+  3          3            1        1.500          0          1
+  4         16            1        1.473          0         13
+  5        108        13/12        1.990          1        106
+  6        905         10/9        2.386          9        903
+
+  Over 1032 primitive posets that EXHIBIT L2's first disjunct:
+      C_3^cut > 1 at 10 of them, worst 10/9
+      C_3^gap > 1 at 1023 of them, worst 2.386
+
+  P4: HELD.
+
+  WHAT THIS DOES AND DOES NOT SHOW -- and this is exactly the distinction I
+  filed against myself as P9 before running anything.
+
+  It does NOT refute mg-76b2's theorem.  The theorem does not say the best
+  prefix is the best cut, and it does not say the gap-form C_3 is 1.  It says
+  the CHEEGER SWEEP BOUND is delivered AT a prefix, which is a statement about
+  sqrt(2(1-lambda_std)) and not about Phi* or about 1-rho.  C_3^cut > 1 and
+  C_3^gap > 1 under L2 are both COMPATIBLE with it.
+
+  It DOES show that 'C_3 = 1' is true only in the chain-(III) currency, and
+  that in the two currencies Op-Form sec.4.3 actually uses to DEFINE the
+  prefix-capture readings, the constant is > 1 and rising even where L2 holds.
+==============================================================================
+C5. THE THEOREM ITSELF, MEASURED -- chain (III) at C_3 = 1, under L2
+==============================================================================
+  For every primitive poset exhibiting L2's first disjunct: is there a
+  PREFIX A_k with Phi_P(A_k) <= sqrt(2(1-lambda_std))?  That -- and only that --
+  is what 'C_3 = 1' means in the currency the ticket's relation uses.
+
+  posets checked                   : 1032
+  Phi*_pref <= sqrt(2(1-lambda_std)): 1032
+  violations                       : 0
+  worst Phi*_pref^2/(2(1-lambda_std)): 0.2603
+
+  P8: mg-76b2's constant in the chain-(III) currency comes out at
+  1 -- CONFIRMED on this population, under L2's hypothesis.
+
+  AND THE SAME CHECK WITHOUT L2, as a red drill -- if it passes there too, the
+  hypothesis is not doing work and the theorem is weaker than it looks:
+  non-monotone primitive posets    : 3340
+  satisfying the same inequality   : 3340
+  violating it                     : 0
+
+  READ THIS CAREFULLY.  The inequality holds on the non-monotone posets too, on
+  THIS population.  That does NOT make the hypothesis idle: sqrt(2 eps) is a
+  weak bound at eps ~ 0.3, which is where this whole population lives, and no
+  poset here is inside the budget (C1).  It DOES mean the population supplies
+  no separating evidence for the theorem, and mg-76b2 should not be read as
+  having any -- its support is the PROOF, and the proof is what this audit
+  re-derived in a2 sections C-F.  A reader who took sec.7's monotonicity
+  correlation as evidence FOR the theorem would be reading it wrongly, and
+  mg-76b2 labels that table HEURISTIC for this reason.
+==============================================================================
+EXIT
+==============================================================================
+rc = 0

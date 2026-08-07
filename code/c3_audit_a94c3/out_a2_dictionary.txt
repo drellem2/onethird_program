@@ -1,0 +1,87 @@
+==============================================================================
+A. POPULATION -- enumerated independently, then compared to mg-76b2's count
+==============================================================================
+  n = 2:     2 posets,       3 linear extensions in total,     1 primitive
+  n = 3:     7 posets,      20 linear extensions in total,     4 primitive
+  n = 4:    40 posets,     260 linear extensions in total,    27 primitive
+  n = 5:   357 posets,    6105 linear extensions in total,   275 primitive
+  n = 6:  4824 posets,  245877 linear extensions in total,  4070 primitive
+
+  TOTAL 5230 posets (4377 primitive).  mg-76b2 reports 5230 / 4377.
+  agree: True / True
+==============================================================================
+B. THE SOURCE'S OWN IDENTITY (tex:220-227), MATRIX vs DEFINITION
+==============================================================================
+  <1_A,(I-S_P)1_A> = E|A \ sigma(A)|, over EVERY cut of EVERY poset.
+
+  n = 2: cumulative       4 (poset, cut) pairs, 0 disagreements
+  n = 3: cumulative      46 (poset, cut) pairs, 0 disagreements
+  n = 4: cumulative     606 (poset, cut) pairs, 0 disagreements
+  n = 5: cumulative   11316 (poset, cut) pairs, 0 disagreements
+  n = 6: cumulative  310404 (poset, cut) pairs, 0 disagreements
+
+  310404 (poset, cut) pairs, 0 disagreements.  mg-76b2 reports 310404.  agree: True
+==============================================================================
+C. LEMMA 2.1 (the dictionary) -- P1
+==============================================================================
+  Derived here, independently:  f = 1_{A_k} - (k/n)1 is centred, and
+  (I-S_P)1 = 0, so <f,(I-S_P)f> = <1_A,(I-S_P)1_A> = E|A_k \ sigma(A_k)|;
+  ||f||^2 = k(1-k/n)^2 + (n-k)(k/n)^2 = k(n-k)/n.  Hence
+
+      1 - rho(A_k) = n E|A_k \ sigma(A_k)| / (k(n-k))
+                   = n Phi_P(A_k) / max(k, n-k)
+
+  with Phi_P(A_k) = Delta_1 = E|.| / min(k,n-k).  Since 1 <= n/max(k,n-k) <= 2,
+
+      Phi <= 1 - rho <= 2 Phi        for EVERY k.
+
+  (poset, prefix) pairs        : 25684   (mg-76b2 reports 25684: True)
+  1-rho = n Phi / max(k,n-k)   : 0 exceptions
+  Phi <= 1-rho                 : 0 exceptions
+  1-rho <= 2 Phi               : 0 exceptions
+  upper factor 2 attained      : 4812 times (k = n/2, Phi != 0)
+
+  P1: HELD
+==============================================================================
+D. LEMMA 3.2 -- Phi_P is a function of the CUT, not the side
+==============================================================================
+  |A \ sigma(A)| = |A^c \ sigma(A^c)| for every permutation and cut.
+
+  872 permutations, 48616 (permutation, cut) pairs, 0 exceptions
+  mg-76b2 reports 872 permutations / 48616 pairs: True / True
+==============================================================================
+E. LEMMA 3.1's CONCLUSION (the Cheeger sweep) -- P2
+==============================================================================
+  Not the proof -- the CONCLUSION, measured: does SOME level set S of a
+  minimiser v, with 0 < |S| <= n/2, satisfy Phi_P(S) <= sqrt(2(1-lambda_std))?
+
+  NOTE ON TIES.  Level sets are grouped by VALUE.  An order-slice of the sorted
+  labels is NOT a level set, and the antichain (whose eigenvector ties
+  everywhere) is where that distinction bites -- mg-76b2 records exactly this
+  as a defect of its first sweep routine, and this routine avoids it by
+  construction rather than by having been corrected.
+
+  posets with a positive gap swept : 4377
+  posets with 1-lambda_std = 0     : 853
+  sweeps failing Phi <= sqrt(2 gap): 0
+  worst Phi^2/(2(1-lambda_std))    : 0.2813
+
+  P2: HELD
+==============================================================================
+F. LEMMA 3.3 -- monotone v ==> every level set is a prefix or a suffix -- P3
+==============================================================================
+  monotone dominant eigenvector    : 1727
+  non-monotone                     : 3340
+  UNDECIDED (degenerate top space) : 163   [declared as B3]
+  level sets of monotone v         : 6132
+  ... not a prefix or a suffix     : 0
+  RED DRILL -- non-monotone posets whose level sets DO leave the
+  prefix family                    : 3340 of 3340
+
+  P3: HELD
+  The red drill is what makes P3 non-vacuous: the hypothesis is doing
+  work, because without it the level sets genuinely do escape.
+==============================================================================
+EXIT
+==============================================================================
+rc = 0

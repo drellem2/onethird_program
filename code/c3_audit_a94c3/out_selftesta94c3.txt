@@ -1,0 +1,78 @@
+==============================================================================
+NC1. THE THRESHOLD DETECTOR MUST REJECT A WRONG CLOSED FORM
+==============================================================================
+  a1 compares a brute-force search against the closed form.  If that
+  comparison were vacuous -- e.g. because the search silently used the closed
+  form -- a1 could not catch a dropped factor.  Feed it three WRONG forms.
+
+  [PASS] control: the correct threshold is still 99 -- got 99
+  [PASS] rejects 4C_3/L^2  (the -1 dropped) -- wrong form gives 100
+  [PASS] rejects 2C_3/L^2  (the 4 halved) -- wrong form gives 49
+  [PASS] rejects 4C_3/(6 L^2) - 1  (the factor 6 WRONGLY inserted) -- wrong form gives 16
+
+  NC1b -- and the MIXED-UNIT arm must be caught by the same comparison:
+  [PASS] mixed-unit solve differs from the correct one -- 16 vs 99, ratio 6.188
+  [PASS] and it differs by ~6, not by some other factor
+==============================================================================
+NC2. THE SWEEP DETECTOR MUST NOTICE AN ORDER-SLICE MASQUERADING AS A LEVEL SET
+==============================================================================
+  mg-76b2 records a real defect: its first sweep returned SLICES of the
+  sorted order rather than LEVEL sets, and where v ties -- the antichain ties
+  everywhere -- a slice splits the tie and returns sets no threshold produces.
+  If my threshold_sets() were accidentally slice-shaped, a2's Lemma 3.3 check
+  would be vacuous.  Build both and compare on the antichain.
+
+  antichain n=4: 1-lambda_std = 1.000000; S_P|_H = 0, so every vector
+  in H is dominant.  Using the source's tied vector v = [1.0, 1.0, 1.0, -3.0]
+  (Jacobi's arbitrary pick was [0.7071, -0.7071, 0.0, 0.0] -- not monotone,
+   which is why asserting Lemma 3.3 about IT was my error, not the code's.)
+  level sets      : [[3]]   non-prefix/suffix: 0
+  order slices    : [[0, 3], [1, 2], [2], [3]]   non-prefix/suffix: 3
+  [PASS] level sets of the MONOTONE tied vector stay in the prefix family
+  [PASS] order slices DO leave it -- so the check is not vacuous -- 3 spurious sets
+==============================================================================
+NC3. THE MATRIX-vs-DEFINITION CHECK MUST CATCH THE lib2de0 CONVENTION
+==============================================================================
+  mg-76b2 sec.8 reports that lib2de0 computes |A| - |A cap set(p[:|A|])| --
+  the first |A| POSITIONS rather than the positions indexed by A.  If a2's
+  section B were computing both sides the same way, it would pass under that
+  bug too.  Run the bug through it.
+
+  8178 of 11316 (poset, cut) pairs at n <= 5 disagree under the bug.
+  (A DEFECT OF MINE, KEPT: the first version of this loop ran n = 3,4,5 and
+   reported 8177/11312.  mg-76b2's 'n <= 5' INCLUDES n = 2, and the single
+   missing disagreement is the 2-chain witness the document itself names.)
+  mg-76b2 sec.8 reports 8178 of 11316 at n <= 5: True
+  [PASS] the check is not vacuous -- the bug IS detected
+  [PASS] and mg-76b2's sec.8 figure reproduces exactly -- 8178/11316
+
+  The smallest witness mg-76b2 names is the 2-chain 0 < 1 with A = {1}:
+    L(P) = [(0, 1)];  definition gives 0;  the buggy convention gives 1
+  [PASS] witness reproduces (0 vs 1)
+==============================================================================
+NC4. THE L4 CENSUS MUST FIRE ON A FILE THAT REALLY DOES READ F
+==============================================================================
+  [PASS] does not fire on an F-free calibration line
+  [PASS] DOES fire on a line that reads F(0.02)
+  [PASS] predicate scanner is quiet on mg-3ce3's actual survives line
+  [PASS] and DOES fire on a survives line that consults the modulus
+==============================================================================
+NC5. THE mg-200d CENSUS MUST DISTINGUISH LABELLED FROM BARE
+==============================================================================
+  [PASS] labels a CONDITIONAL row as labelled
+  [PASS] flags an unqualified 'n <= 98' sentence as BARE
+==============================================================================
+NC6. C_3^gap >= 1 IDENTICALLY -- the hand claim H7, tested rather than asserted
+==============================================================================
+  H7 says C_3^gap = min_k(1-rho(A_k))/(1-lambda_std) >= 1 for EVERY poset,
+  because 1-lambda_std is the minimum of the Rayleigh quotient over all of H and
+  a centred prefix indicator lives in H.  If that were false somewhere, my
+  reading of P4 would be wrong in the other direction.
+
+  4376 posets with a positive gap; 0 with C_3^gap < 1; smallest ratio seen 1.000000000
+  [PASS] H7 holds -- C_3^gap is never below 1
+  [PASS] and 1 IS attained, so the bound is tight and not slack
+==============================================================================
+SELFTEST SUMMARY
+==============================================================================
+  0 failing control(s)
