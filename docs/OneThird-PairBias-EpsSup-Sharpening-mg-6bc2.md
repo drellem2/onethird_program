@@ -447,8 +447,24 @@ that **H3 was a witness-specific artefact read as a structural fact** — precis
 exists to name, committed by the author of §3.
 
 **Defect 2 — the LP is `n ≤ 6`.** `S_n` is enumerated, so the tableau is `C(n,2)+1` by `n!`. Claim
-3.1's `≤` and Claim 4.1's `≤` are theorems for all `n`; **every attainment statement is finite
-population** and is marked as such. Nothing here is evidence at unbounded `n` about attainment.
+3.1's `≤` and Claim 4.1's `≤` are theorems for all `n`; **every attainment statement THIS LP
+SUPPLIES is finite population** and is marked as such. Nothing here is evidence at unbounded `n`
+about attainment.
+
+> **Scoped to the LP by `mg-8257`; the over-reach was found by `mg-9f91`'s audit, F1.** As first
+> written the middle sentence read *"every attainment statement"* and so contradicted Claim 3.1's
+> own header at `:175` — *"[PROVEN, all `n`, by hand]"* — inside a section whose heading and closing
+> sentence are both about the LP. **Claim 3.1's attainment is all-`n` and does not come from the
+> LP:** the `≥` witness is the two-atom law `μ = (2/3+η)δ_e + (1/3−η)δ_{rev e}` — two permutations,
+> no tableau — checked `192/192` in exact rationals over
+> `n ∈ {2,3,4,5,6,7,8,9,11,20,50,137} × η ∈ {0, 1/100, 1/12, 1/6}`
+> ([`code/unitmap_audit_9f91/m3_attainment.py`](../code/unitmap_audit_9f91/m3_attainment.py)),
+> seven of those `n` outside `{3,4,5,6,8}`. **A two-permutation construction is not a
+> finite-population result.** The finite population `{3,4,5,6,8}` is **Claim 4.1**'s — the
+> *footrule* statement — and is marked there at `:228–230`. `mg-9adf` (`21ee93f`) and `STATE.md`
+> row 8 resolved this in that direction **deliberately** and did not record that they had resolved
+> anything; the silence is a decision already taken, not an oversight to be undone. **A reader
+> arriving from `STATE.md` row 8 does not have to re-adjudicate this.**
 
 **Defect 3 — the adjudication in §7 is by hand.** The grep is mechanical; the assignment of 39
 lines to five meanings is my reading, and a different reader could split the Hodge weights or the
