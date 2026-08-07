@@ -1,0 +1,60 @@
+
+=== 1. THE CONDITION travelled, and where it sits ===
+  [PASS] pre-edit: condition present: False
+  [PASS] (A) parent: condition line: 13
+  [PASS] (A) parent: inside declared 4000-char screen: True
+        char offset 1321 of 33638 total
+  [PASS] (B) current: condition line: 15
+  [PASS] (B) current: inside declared 4000-char screen: True
+        char offset 3654 of 82559 total
+
+=== 2. (LIB-weak), and the word the parent REFUSED to write ===
+  [PASS] pre-edit: '(LIB-weak)' occurrences: 0
+  [PASS] pre-edit: 'never attacked' occurrences: 0
+  [PASS] (A) parent: '(LIB-weak)' occurrences: 5
+  [PASS] (A) parent: 'never attacked' occurrences: 0
+  [PASS] mg-c4f5: '(LIB-weak)' occurrences: 15
+  [PASS] mg-c4f5: 'never attacked' occurrences: 1
+  [PASS] (B) current: '(LIB-weak)' occurrences: 18
+  [PASS] (B) current: 'never attacked' occurrences: 1
+
+=== 3a. FOUR SITES, FIVE LINES, NOTHING ELSE (recomputed, not read) ===
+  [PASS] lines differing inside ea0e's 1..129 invariant: [13, 21, 57, 62, 86]
+  [PASS] lines differing outside 1..129: []
+
+=== 3a. every marker survives, counted independently ===
+  [PASS] pre-edit: marker census: {'STRUCK': 2, 'SUPERSEDED': 1, 'REFUTED': 3, 'DISCHARGED': 2, 'BROKEN': 11, 'withdrawn': 1, 'void': 2, 'UNPROVEN': 2}
+  [PASS] (A) parent: marker census: {'STRUCK': 2, 'SUPERSEDED': 1, 'REFUTED': 3, 'DISCHARGED': 2, 'BROKEN': 11, 'withdrawn': 1, 'void': 2, 'UNPROVEN': 2}
+
+=== 3b. THE FALSE IMPLICATION introduced at four sites ===
+  [PASS] pre-edit: literal chain occurrences: 0
+  [PASS] (A) parent: literal chain occurrences: 2
+
+=== 3c. the row-8 contradiction is mg-325c's, NOT mg-2860's ===
+  [PASS] (A) parent: 'closes **this row as phrased**': 0
+  [PASS] (A) parent: 'does not supply the constant form…': 0
+  [PASS] mg-325c: 'closes **this row as phrased**': 1
+  [PASS] mg-325c: 'does not supply the constant form…': 1
+  [PASS] mg-c4f5: 'closes **this row as phrased**': 0
+  [PASS] mg-c4f5: 'does not supply the constant form…': 1
+
+=== 4. the finite-n numbers, from the file's OWN formulas ===
+  [PASS] eps_dem = eps_leak^2/(2*C_3) at 0.20, C_3=1: Fraction(1, 50)
+  [PASS] crossover 18/eps_dem at the repaired constant: Fraction(900, 1)
+  [PASS] crossover 18/eps at the SUPERSEDED 2e-4 (corpus prints ~1e5): Fraction(90000, 1)
+  [PASS] mg-d1a2's anonymous C is C_3: 18/eps_dem == 900*C_3: Fraction(2700, 1)
+  [PASS] (A) parent prints a BARE 900 (no '900C'): 0
+  [PASS] (B) current carries mg-d1a2's reconciliation: 2
+  [PASS] 'repaired calibration' labelled at (A): True
+  [PASS] 'repaired calibration' labelled at (B): True
+
+=== 4. the currency defect is mg-345e's, not the parent's ===
+  [PASS] (A) parent: 'ε_sup' occurrences: 0
+  [PASS] mg-c4f5: 'ε_sup' occurrences: 0
+  [PASS] mg-345e: 'ε_sup' occurrences: 9
+
+=== 4. 2/(n+1) in STATE.md is REFUTED, not live ===
+  [PASS] (B) current: '2/(n+1)' occurrences: 4
+  [PASS] (B) current: carries the refutation: True
+
+ALL CHECKS PASS
