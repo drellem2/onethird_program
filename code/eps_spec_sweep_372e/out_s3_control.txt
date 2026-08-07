@@ -1,0 +1,25 @@
+mg-372e NEGATIVE CONTROL — does the s2 detector fire when the repair is undone?
+==============================================================================
+
+M0  strip only the `~~` glyphs from mg-6bc2 (PRE-DECLARED: NO FIRE)
+    unmutated: 0   mutated: 0   -> DID NOT FIRE   (pre-declared NO FIRE: ok)
+
+M1  undo the repair in mg-6bc2 (glyphs AND marker words)
+    unmutated: 0   mutated: 7   -> FIRED   (pre-declared FIRE: ok)
+      e.g. docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md:35  > `ε_spec = 2/(n+1)` **[ at `n = 6` — `` §0, §4; see the banner below]** and
+      e.g. docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md:40  > ## ⚠️ `ε_spec = 2/(n+1)` IS , AND THIS DOCUMENT PRINTED IT AS LIVE AT FIVE SIT
+
+M2  undo the repair in mg-200d (glyphs AND marker words)
+    unmutated: 0   mutated: 20   -> FIRED   (pre-declared FIRE: ok)
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:23  > satisfies every constraint this document imposes and reaches `E[inv] = 11/6 > 
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:30  > `≈ 2×10⁻²` at `n ≥ 99`"* was read off `2/(n+1)`. With the formula refuted **th
+
+M3  plant a LIVE site in an UNNAMED spelling
+    unmutated: 0   mutated: 1   -> FIRED   (pre-declared FIRE: ok)
+      e.g. docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md:584  The per-slot form buys `eps_spec = 2/(n + 1)` today.
+
+M3 is the hazard the ticket names: a live site written `2/(n + 1)` with spaces.
+The EPS pattern is whitespace-tolerant, so the plant is caught.  A sweep that
+grepped the literal string `2/(n+1)` would have returned a clean zero.
+
+CONTROL PASSED — every mutation behaved as pre-declared
