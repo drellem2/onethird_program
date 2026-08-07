@@ -1,0 +1,73 @@
+mg-910c R1 -- CENSUS OF THE RATE CLAIM, BY SPELLING
+==============================================================================
+
+  spelling   line-hits   what it is
+  ARROW            58   the rate itself, `Theta(n^2) -> Theta(n)`
+  PROSE             1   the same claim in words
+  GROWS            18   mg-200d's headline wording
+  RATEQ            35   the rate asserted as UNKNOWN/OPEN -- also now false
+  THETA2          127   bare Theta(n^2)  -- OVER-WIDE, the collision net
+  THETA1          183   bare Theta(n)    -- OVER-WIDE, the collision net
+
+  distinct lines carrying at least one spelling: 295
+  files: 47
+
+------------------------------------------------------------------------------
+docs/ -- 20 file(s)
+  * docs/OneThird-DualCertificate-mg-131e.md                         10 lines  ARROW,RATEQ,THETA1,THETA2
+    docs/OneThird-Hodge-Side-Leverage-GppStrike-IndependentAudit.md   2 lines  THETA1
+    docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md             8 lines  THETA1
+    docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md  3 lines  THETA1
+    docs/OneThird-Hodge-Side-Leverage.md                             14 lines  THETA1
+    docs/OneThird-LIBweak-mg-c3ca.md                                 14 lines  THETA1
+    docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md                 8 lines  THETA1,THETA2
+  * docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md              16 lines  ARROW,RATEQ,THETA1,THETA2
+  * docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md               30 lines  ARROW,GROWS,RATEQ,THETA1,THETA2
+  * docs/OneThird-RateSweep-mg-910c.md                               17 lines  ARROW,GROWS,THETA1,THETA2
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md       2 lines  THETA1
+    docs/OneThird-lambda-std-Operative-Form.md                        1 lines  THETA2
+    docs/audit-stage-process.md                                       1 lines  THETA1
+    docs/state-history/attempt-mg-276d.md                             1 lines  THETA1
+    docs/state-history/attempt-mg-88bd.md                             1 lines  THETA1
+    docs/state-history/attempt-mg-a3d4.md                             3 lines  THETA1
+    docs/state-history/attempt-mg-a58f.md                             1 lines  THETA1,THETA2
+  * docs/state-history/audit-mg-2eed-of-mg-b488.md                    1 lines  ARROW,THETA1,THETA2
+    docs/state-history/threads-chronology.md                          2 lines  THETA1
+    docs/state-of-the-wall.html                                       1 lines  THETA2
+------------------------------------------------------------------------------
+code/ -- 26 file(s)
+  * code/dual_certificate_131e/d3_refutation.py                       2 lines  ARROW,THETA1,THETA2
+  * code/eps_spec_sweep_372e/README.md                                1 lines  GROWS,THETA2
+    code/hodge_leverage_landing_e1d0/site_records.txt                 2 lines  THETA1
+    code/libweak_audit_c4f5/OUTCOMES.md                               2 lines  THETA1
+    code/libweak_audit_c4f5/PREDICTIONS.md                            6 lines  THETA1,THETA2
+    code/libweak_audit_c4f5/README.md                                 2 lines  THETA1
+    code/libweak_audit_c4f5/a3_construct.py                           6 lines  THETA1
+    code/libweak_audit_c4f5/a4_census.py                              3 lines  THETA1
+    code/libweak_audit_c4f5/a5_window.py                              1 lines  THETA1
+    code/libweak_audit_c4f5/lib_c4f5.py                               2 lines  THETA1
+    code/libweak_audit_c4f5/out_a3_construct.txt                      4 lines  THETA1
+    code/libweak_audit_c4f5/out_a4_census.txt                         3 lines  THETA1
+    code/libweak_c3ca/README.md                                       2 lines  THETA1
+    code/libweak_c3ca/out_p2_primitive.txt                            1 lines  THETA1
+    code/libweak_c3ca/p2_primitive.py                                 1 lines  THETA1
+    code/libweak_c3ca/p3_window.py                                    2 lines  THETA1
+  * code/rate_sweep_910c/README.md                                   10 lines  ARROW,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/out_r2_classify.txt                         19 lines  ARROW,GROWS,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/out_r3_control.txt                           6 lines  ARROW,GROWS,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/out_run_all.txt                             28 lines  ARROW,GROWS,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/r1_census.py                                14 lines  ARROW,GROWS,PROSE,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/r2_classify.py                              26 lines  ARROW,GROWS,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/r3_control.py                                5 lines  ARROW,THETA1,THETA2
+    code/state_audit_6a2f/out_audit.txt                               3 lines  THETA1
+    code/state_relocation_audit_b0ae/out_b4_prefix_math.txt           1 lines  THETA1
+    code/state_restructure_ea0e/build.py                              1 lines  THETA1
+------------------------------------------------------------------------------
+top level -- 1 file(s)
+  * STATE.md                                                          6 lines  ARROW,RATEQ,THETA1,THETA2
+
+------------------------------------------------------------------------------
+`*` marks a file hit by a NARROW spelling (ARROW/PROSE/GROWS/RATEQ), i.e. a
+candidate site for the rate claim itself.  An unmarked file was reached only by
+the deliberately over-wide collision nets and is almost certainly a different
+quantity.  R2 carries the hand classification; this script does not classify.

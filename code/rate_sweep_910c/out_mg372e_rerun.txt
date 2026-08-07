@@ -1,0 +1,167 @@
+mg-372e CENSUS — occurrences of the refuted per-slot constant, by spelling
+==============================================================================
+
+What this is a count of: TEXTUAL OCCURRENCES of one of six spellings,
+one row per (file, line, form).  A line matching two forms counts twice,
+once per form.  It is NOT a count of defects.
+
+-- by spelling --
+   EPS     171
+   EINV    241
+   DQ        4
+   PROSE     7
+   TOTAL   423
+
+-- flagged COLLISION (different quantity, same expression): 16 --
+   STATE.md:167  [EPS]
+   STATE.md:167  [EINV]
+   code/counterexample_probe_24a3/probe.py:1465  [EINV]
+   code/counterexample_probe_24a3/probe_output.txt:997  [EINV]
+   code/eps_spec_sweep_372e/README.md:44  [EPS]
+   code/eps_spec_sweep_372e/README.md:46  [EINV]
+   code/eps_spec_sweep_372e/out_s2_classify.txt:19  [EPS]
+   code/eps_spec_sweep_372e/out_s2_classify.txt:23  [EINV]
+   code/eps_spec_sweep_372e/s1_census.py:17  [EPS]
+   code/eps_spec_sweep_372e/s2_classify.py:59  [EPS]
+   code/eps_spec_sweep_372e/s2_classify.py:63  [EINV]
+   code/counterexample_audit_a7b4/check_spectral.py:378  [EINV]
+   code/counterexample_audit_a7b4/out_spectral.txt:110  [EINV]
+   docs/OneThird-Counterexample-Under-The-Action.md:624  [EINV]
+   docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:268  [EPS]
+   docs/state-history/attempt-mg-88bd.md:64  [EPS]
+
+-- by file (docs/ and STATE.md first; code/ is instrument evidence) --
+      3  STATE.md   (EINV+EPS)
+      2  docs/OneThird-C3-PrefixCapture-mg-76b2.md   (EPS)
+     10  docs/OneThird-C3-PrefixCapture-mg-94c3-IndependentAudit.md   (EPS)
+      1  docs/OneThird-Counterexample-Under-The-Action.md   (EINV)
+     12  docs/OneThird-DualCertificate-Audit-mg-eaa1.md   (EINV+EPS)
+     16  docs/OneThird-DualCertificate-mg-131e.md   (EINV+EPS)
+     10  docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md   (EPS)
+     34  docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md   (DQ+EINV+EPS)
+      2  docs/OneThird-RateSweep-mg-910c.md   (EINV+EPS)
+      1  docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md   (EPS)
+      1  docs/state-history/attempt-mg-88bd.md   (EPS)
+     18  docs/state-history/audit-mg-2eed-of-mg-b488.md   (EINV+EPS)
+      4  code/c3_audit_a94c3/PREDICTIONS.md   (EPS)
+     11  code/c3_audit_a94c3/a1_algebra.py   (EPS)
+      2  code/c3_audit_a94c3/a4_census.py   (EPS)
+     10  code/c3_audit_a94c3/out_a1_algebra.txt   (EPS)
+      8  code/c3_audit_a94c3/out_a4_census.txt   (EPS)
+      2  code/c3_prefix_capture_76b2/PREDICTIONS.md   (EPS)
+      2  code/c3_prefix_capture_76b2/s4_budget.py   (EPS)
+      1  code/counterexample_audit_a7b4/check_spectral.py   (EINV)
+      1  code/counterexample_audit_a7b4/out_spectral.txt   (EINV)
+      1  code/counterexample_probe_24a3/probe.py   (EINV)
+      1  code/counterexample_probe_24a3/probe_output.txt   (EINV)
+      2  code/dual_certificate_131e/OUTCOMES.md   (EINV)
+      5  code/dual_certificate_131e/PREDICTIONS.md   (EINV)
+      2  code/dual_certificate_131e/README.md   (EINV)
+      5  code/dual_certificate_131e/d1_certificates.py   (EINV)
+      4  code/dual_certificate_131e/d2_pattern.py   (EINV)
+     10  code/dual_certificate_131e/d3_refutation.py   (EINV+EPS)
+      1  code/dual_certificate_131e/lib131e.py   (EINV)
+      4  code/dual_certificate_131e/out_d1_certificates.txt   (EINV)
+      2  code/dual_certificate_131e/out_d2_pattern.txt   (EINV)
+     14  code/dual_certificate_131e/out_d3_refutation.txt   (EINV+EPS)
+      5  code/dual_certificate_131e/out_selftest131e.txt   (EINV)
+      1  code/dual_certificate_131e/selftest131e.py   (EINV)
+      3  code/dual_certificate_audit_eaa1/OUTCOMES.md   (EINV+EPS)
+     12  code/dual_certificate_audit_eaa1/PREDICTIONS.md   (EINV+EPS)
+      1  code/dual_certificate_audit_eaa1/README.md   (EINV)
+      5  code/dual_certificate_audit_eaa1/a1_program.py   (EINV+EPS)
+      2  code/dual_certificate_audit_eaa1/a2_certificates.py   (EINV)
+      8  code/dual_certificate_audit_eaa1/a3_n6.py   (EINV+EPS)
+     19  code/dual_certificate_audit_eaa1/out_a1_program.txt   (EINV+EPS)
+      3  code/dual_certificate_audit_eaa1/out_a2_certificates.txt   (EINV)
+     26  code/dual_certificate_audit_eaa1/out_a3_n6.txt   (EINV+EPS)
+     26  code/dual_certificate_audit_eaa1/out_a3_n6_deep.txt   (EINV+EPS)
+     12  code/eps_spec_sweep_372e/README.md   (DQ+EINV+EPS+PROSE)
+      1  code/eps_spec_sweep_372e/out_s1_census.txt   (PROSE)
+      2  code/eps_spec_sweep_372e/out_s2_classify.txt   (EINV+EPS)
+      6  code/eps_spec_sweep_372e/out_s3_control.txt   (EPS)
+      9  code/eps_spec_sweep_372e/s1_census.py   (DQ+EINV+EPS+PROSE)
+      9  code/eps_spec_sweep_372e/s2_classify.py   (EINV+EPS+PROSE)
+      4  code/eps_spec_sweep_372e/s3_control.py   (EPS)
+      2  code/perslot_symmetry_200d/OUTCOMES.md   (EINV+EPS)
+      2  code/perslot_symmetry_200d/README.md   (EINV)
+     12  code/perslot_symmetry_200d/out_v2_n34.txt   (EINV+EPS)
+      6  code/perslot_symmetry_200d/out_v2_n5.txt   (EINV+EPS)
+     11  code/perslot_symmetry_200d/out_v3_families.txt   (EINV)
+      2  code/perslot_symmetry_200d/v2_disjunctive.py   (EINV+EPS)
+     13  code/perslot_symmetry_200d/v3_families.py   (EINV)
+      2  code/rate_sweep_910c/README.md   (EINV+EPS)
+      1  code/rate_sweep_910c/out_r2_classify.txt   (EINV)
+      1  code/rate_sweep_910c/out_run_all.txt   (EINV)
+      1  code/rate_sweep_910c/r1_census.py   (EPS)
+      2  code/rate_sweep_910c/r2_classify.py   (EINV)
+      2  code/state_audit_2eed/a1_n6_witness.py   (EINV+EPS)
+      3  code/state_audit_2eed/a2_fence.py   (EINV)
+      2  code/state_audit_2eed/out_a1_n6_witness.txt   (EINV+EPS)
+      5  code/state_audit_2eed/out_a2_fence.txt   (EINV)
+
+files carrying at least one spelling: 68
+  of which docs/: 11
+  of which code/: 56
+
+-- the HTML twin, checked by name --
+   docs/state-of-the-wall.html: 0 occurrences of any swept spelling
+   -> NOT a site.  It is a 2026-07-19 rendering that predates mg-200d
+      entirely and never carried the formula; it says so in its own banner.
+
+mg-372e CLASSIFICATION — every occurrence in docs/, with its class
+==============================================================================
+
+[REPAIRED ] docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md
+             10 lines / 10 form-hits — 5 LIVE struck in place + 1 left (`:320`, scoped to n=3,4,5 and TRUE)
+             allowlist: 3 site(s) left deliberately, true as written
+[REPAIRED ] docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md
+             32 lines / 34 form-hits — 8 LIVE struck in place; THEOREM 4.2, the n<=5 table and the headline left
+             allowlist: 8 site(s) left deliberately, true as written
+[CITED    ] docs/OneThird-C3-PrefixCapture-mg-76b2.md
+             2 lines / 2 form-hits — both sites read 'if the mg-200d route survives mg-131e' -- already correct
+[DERIVED  ] docs/OneThird-C3-PrefixCapture-mg-94c3-IndependentAudit.md
+             10 lines / 10 form-hits — an audit whose subject IS the supply/demand relation; labelled at every site
+[DERIVED  ] docs/OneThird-DualCertificate-mg-131e.md
+             15 lines / 16 form-hits — the refutation itself -- correcting it would make it disagree with its subject
+[CITED    ] docs/state-history/audit-mg-2eed-of-mg-b488.md
+             18 lines / 18 form-hits — an audit OF the STATE.md landing; quotes it. Archival state-history.
+[COLLISION] docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md
+             1 lines / 1 form-hits — `1 - lambda_std(W_n) <= 2/(n+1)` is the Cheeger bound on the poset W_n
+[COLLISION] docs/state-history/attempt-mg-88bd.md
+             1 lines / 1 form-hits — same W_n spectral-gap bound; archival state-history
+[COLLISION] docs/OneThird-Counterexample-Under-The-Action.md
+             1 lines / 1 form-hits — `n(n-1)/3` is an inversion RADIUS -- the regex matched a substring
+
+docs/ total: 90 lines carrying a spelling, 93 form-hits across 9 documents
+
+HTML twin docs/state-of-the-wall.html: 0 occurrences -> NOT a site
+
+PASS — every occurrence in the two repaired documents is either marked with the
+       refutation or on the explicit leave-alone allowlist, and the twin is clean.
+
+mg-372e NEGATIVE CONTROL — does the s2 detector fire when the repair is undone?
+==============================================================================
+
+M0  strip only the `~~` glyphs from mg-6bc2 (PRE-DECLARED: NO FIRE)
+    unmutated: 0   mutated: 0   -> DID NOT FIRE   (pre-declared NO FIRE: ok)
+
+M1  undo the repair in mg-6bc2 (glyphs AND marker words)
+    unmutated: 0   mutated: 7   -> FIRED   (pre-declared FIRE: ok)
+      e.g. docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md:35  > `ε_spec = 2/(n+1)` **[ at `n = 6` — `` §0, §4; see the banner below]** and
+      e.g. docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md:40  > ## ⚠️ `ε_spec = 2/(n+1)` IS , AND THIS DOCUMENT PRINTED IT AS LIVE AT FIVE SIT
+
+M2  undo the repair in mg-200d (glyphs AND marker words)
+    unmutated: 0   mutated: 24   -> FIRED   (pre-declared FIRE: ok)
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:34  > swept the FORMULA `ε_spec = 2/(n+1)` and swept it correctly, and it ran **befo
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:47  > **WHAT SURVIVES THIS SECOND REFUTATION, and it is not nothing.** THEOREM 4.2 (
+
+M3  plant a LIVE site in an UNNAMED spelling
+    unmutated: 0   mutated: 1   -> FIRED   (pre-declared FIRE: ok)
+      e.g. docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md:608  The per-slot form buys `eps_spec = 2/(n + 1)` today.
+
+M3 is the hazard the ticket names: a live site written `2/(n + 1)` with spaces.
+The EPS pattern is whitespace-tolerant, so the plant is caught.  A sweep that
+grepped the literal string `2/(n+1)` would have returned a clean zero.
+
+CONTROL PASSED — every mutation behaved as pre-declared

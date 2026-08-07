@@ -106,7 +106,9 @@ enumeration** — `mg-345e`'s refusal is kept and §8 says why.
 > *witness* test does not separate them. What separates them is the **value**: `mg-200d` computes
 > that the per-slot form buys ~~`ε_spec = 2/(n+1)`, i.e. `Θ(n²) → Θ(n)`~~ **[the constant is
 > REFUTED at `n = 6` — `mg-131e` §0, §4. What survives is the separation at `n = 4,5`, which is
-> exact; the ASYMPTOTIC rendering rests on the same three points and no proof]**, and the
+> exact; ~~the ASYMPTOTIC rendering rests on the same three points and no proof~~ — the
+> ASYMPTOTIC rendering is REFUTED too: `mg-00a1` proved the maximum over branches is `Θ(n²)`, so
+> the per-slot form buys a constant factor of at most `6` and NOT an order (`mg-910c`)]**, and the
 > aggregate form buys **no decay at all**. Same conclusion, better reason, and it now lives at
 > the asymptotics rather than at `n = 3`.
 >
@@ -338,8 +340,11 @@ named next ticket — computed it:
 > `n`; the formula is **FALSE, not conjectural**, and there is **no replacement constant to print
 > — do not carry the old one and do not invent a new one** (`STATE.md:167(a)`). The **three
 > tabulated values `2/3, 1, 4/3` are `n ≤ 5` exhaustive LP optima and are UNTOUCHED and correct**
-> — the strike is on the all-`n` reading of them, not on the numbers. `mg-00a1` is the open
-> question that replaces the formula: what *is* the true growth of the disjunctive per-slot value?
+> — the strike is on the all-`n` reading of them, not on the numbers. ~~`mg-00a1` is the open
+> question that replaces the formula: what *is* the true growth of the disjunctive per-slot value?~~
+> **[ANSWERED — `mg-00a1`: the growth is `Θ(n²)`, superlinear. So the *"what it buys"* cell is
+> struck a second time, and this time there IS a replacement to print: a constant factor of at
+> most `6`, never an order. (`mg-910c`)]**
 > The aggregate row's *"no decay at all"* is unaffected, so **the recommendation to reach for the
 > per-slot form still stands** — on the exact separation at `n = 4,5`, not on an asymptotic rate.
 
@@ -348,7 +353,18 @@ see the bound at the end of §9). **The two AGREE at `n = 3` and separate from `
 original conclusion holds with a better warrant: recommending the aggregate form would have
 recommended a lemma that is **inert asymptotically** — it does not move `E[inv_e]` out of `Θ(n²)`
 — rather than one that is inert at `n = 3`, which it is not. **"Excludes nothing at `n = 3`" was
-false; "buys no decay, ever" is both true and stronger.**
+false; "buys no decay, ever" is both true and stronger.** ⛔ **The implied contrast is REFUTED:
+the per-slot form does not move `E[inv_e]` out of `Θ(n²)` either (`mg-00a1`; struck `mg-910c`) —
+see the note immediately below. The clause about the AGGREGATE form is true and is untouched.**
+
+> ⚠️ **The contrast in that paragraph is now SMALLER than it reads, and the reader must be told
+> (`mg-00a1`; `mg-910c`).** *"Inert asymptotically — does not move `E[inv_e]` out of `Θ(n²)`"* is
+> true of the aggregate form and is **untouched**. What is struck is the implied contrast: the
+> **per-slot** form does not move `E[inv_e]` out of `Θ(n²)` either. `mg-00a1` proved the
+> disjunctive per-slot value — the maximum over branches — is `Θ(n²)`. The separation between the
+> two forms is real and is exact at `n = 4,5`; it is a bounded factor (at most `6`), not a change
+> of order. **The recommendation to prefer per-slot survives; the asymptotic reason for it does
+> not.**
 
 *The one check `mg-ba78` made on `mg-200d`'s figures, and the only one:* its per-slot triple
 satisfies `6E/(n²−1) = 2/(n+1)` **exactly** at `n = 3,4,5` (`2/3 → 1/2`, `1 → 2/5`, `4/3 → 1/3`),
@@ -378,13 +394,21 @@ units in it. The guard was written for the *reader* and not applied to the *auth
 So the ordering of the route is:
 
 1. **pair marginals alone → exactly `1`** (`= 1/6` in `ε_c3ca` units). Closed, both directions.
-2. **+ per-slot adjacency symmetry → ~~`ε_spec = 2/(n+1)` (`mg-200d`)~~ an UNKNOWN rate
-   (`mg-200d`, then `mg-131e`).** ~~It was open when this document landed; it is not any more~~
-   **It was open when this document landed; `mg-200d` answered it and `mg-131e` then REFUTED that
+2. **+ per-slot adjacency symmetry → ~~`ε_spec = 2/(n+1)` (`mg-200d`)~~ ~~an UNKNOWN rate
+   (`mg-200d`, then `mg-131e`)~~ a `Θ(n²)` rate — i.e. NO asymptotic decay in `ε_spec` at all
+   (`mg-200d`, then `mg-131e`, then `mg-00a1`).** ~~It was open when this document landed; it is not any more~~
+   ~~**It was open when this document landed; `mg-200d` answered it and `mg-131e` then REFUTED that
    answer at `n = 6` (§0, §4), so it is open again — with the `n ≤ 5` values `2/3, 1, 4/3` and
-   `Θ(n²) → Θ(n)` on ONE named sub-family as all that is established** (`mg-372e`). The aggregate
-   form is still the inert one. `mg-200d`'s landing is where that result was established and
-   `mg-131e`'s is where it was killed — this section cites them and restates neither.
+   `Θ(n²) → Θ(n)` on ONE named sub-family as all that is established** (`mg-372e`).~~
+   **[STRUCK — it is not open any more. `mg-200d` answered it, `mg-131e` REFUTED that answer at
+   `n = 6`, and `mg-00a1` then settled the RATE: the maximum over branches is `Θ(n²)`, so the
+   step buys a constant factor of at most `6` and never an order. The `n ≤ 5` values
+   `2/3, 1, 4/3` stand, and `Θ(n²) → Θ(n)` *on ONE named sub-family* stands — it is a correct
+   statement about one branch, and the maximum is the quantity that decides the route.
+   (`mg-910c`)]** The aggregate
+   form is still the inert one. `mg-200d`'s landing is where that result was established,
+   `mg-131e`'s is where it was killed and `mg-00a1`'s is where the rate was settled — this
+   section cites them and restates none.
 3. **+ the rest of realizability →** the open residual `(R)`, `STATE.md:179`.
 
 **A negative worth recording so nobody re-walks it.** The 3-element cyclic identity

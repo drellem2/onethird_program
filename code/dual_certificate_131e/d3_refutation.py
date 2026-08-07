@@ -22,9 +22,17 @@ WHAT IS *NOT* REFUTED, AND MUST NOT BE READ INTO THIS.
  1. Nothing here touches the frozen-poset conjecture.  The disjunctive value is an UPPER bound
     on it; showing the upper bound is larger than believed weakens the bound, it does not make
     the underlying statement false.
- 2. Nothing here refutes mg-200d's `Theta(n^2) -> Theta(n)` headline.  Every value below is
-    still linear in n.  What dies is the CONSTANT, i.e. the exact formula, and with it the
-    conjecture that would have been the LIB residual.
+ 2. [STRUCK 2026-08-07 by mg-910c -- mg-00a1 REFUTED the headline.]  This item read: "Nothing
+    here refutes mg-200d's `Theta(n^2) -> Theta(n)` headline.  Every value below is still
+    linear in n.  What dies is the CONSTANT, i.e. the exact formula, and with it the
+    conjecture that would have been the LIB residual."  The first sentence is now FALSE: the
+    headline IS refuted.  mg-00a1 proved the disjunctive per-slot value -- the MAXIMUM over
+    branches -- is Theta(n^2), by an explicit closed-form measure with E[inv] = n(n+5)/36 at
+    every even n >= 4, bracketed above by this instrument's own trivial dual n(n-1)/6.  So
+    per-slot symmetry buys a constant factor of AT MOST 6, not an order.  The rest of the item
+    stands: every value computed in THIS file is still linear in n, because each is a lower
+    bound on a NAMED branch and not the maximum -- which is precisely why they could not decide
+    the rate.  Nothing in this file's computation changes; see docs/OneThird-GrowthRate-mg-00a1.md.
  3. Nothing here is an upper bound at n >= 6.  Each number is a lower bound found on a NAMED
     branch, so the true n = 6 maximum may be larger still.  The exhaustive n = 6 value is not
     computed and is not claimed (the ticket forbids extending the brute force, and 32768

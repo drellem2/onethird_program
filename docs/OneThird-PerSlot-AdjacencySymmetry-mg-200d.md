@@ -15,6 +15,47 @@ rebase changed the hash and **not the content** — `lp6bc2.py`, `v2_optimiser.p
 after it landed. **So §8's two corrections apply to what is on `main`, not only to what was on a
 branch.**
 
+> ## ⛔ THE **RATE** IS REFUTED TOO, NOT MERELY THIN — `§0`'s HEADLINE IS FALSE (`mg-00a1`, swept by `mg-910c`)
+>
+> **`mg-00a1` proved the disjunctive per-slot value is `Θ(n²)` — SUPERLINEAR.** For every even
+> `n = 2m ≥ 4` it exhibits an explicit closed-form measure, feasible on an explicit
+> **transitively closed** branch and checked in `Fraction` arithmetic with no simplex in the
+> verification path, with `E[inv] = n(n+5)/36`; against `mg-131e`'s trivial dual
+> `val ≤ n(n−1)/6` (a theorem at every `n`) that pins `n(n+5)/36 ≤ max over branches ≤ n(n−1)/6`.
+> Both ends are quadratic. The construction is at
+> [`OneThird-GrowthRate-mg-00a1.md`](OneThird-GrowthRate-mg-00a1.md) and is **not restated here**.
+>
+> **So this document's `§0` HEADLINE — *"per-slot adjacency symmetry buys a factor that grows
+> with `n`, not a constant"* — is REFUTED, and so is the `Θ(n²) → Θ(n)` rate underneath it.**
+> What per-slot symmetry buys is a **CONSTANT FACTOR OF AT MOST `6`** (`n²/6` down to at least
+> `n²/36`), **not an order**. It is not "unknown" either: the class is settled.
+>
+> **Why the banner below left the headline standing, and why that is no longer right.** `mg-372e`
+> swept the FORMULA `ε_spec = 2/(n+1)` and swept it correctly, and it ran **before `mg-00a1`
+> returned** — at that moment the rate genuinely was "three points and no proof", which is
+> thin but not false. It is now false. This banner is that correction, and the strikes below it
+> are marked `mg-910c`.
+>
+> **Sites struck by this banner — NINE, counted so the sweep is checkable:** the *"`§0`'s HEADLINE
+> is deliberately NOT struck"* sentence of the `mg-372e` banner (1), the `mg-372e` banner's
+> *"the question that replaces it … is `mg-00a1`"* sentence (2), `§0`'s HEADLINE (3), `§0`'s
+> table `n → ∞` cell on the **per-slot** row (4) and on the **ratio** row (5), `§0`'s
+> *"the gain is not a constant factor"* paragraph (6), `§5`'s *"not the `Θ(n²) → Θ(n)` drop"*
+> sentence (7), `§6`'s replacement-factor strike-note (8), `§6`'s closing *"honest one-line
+> form"* (9).
+>
+> **WHAT SURVIVES THIS SECOND REFUTATION, and it is not nothing.** THEOREM 4.2 (`≥ (n−1)/3`,
+> every `n`) **stands**. `mg-131e` §2's **consecutive-pairs branch theorem** — value `(n−1)/3`
+> exactly, every `n`, both directions, no solver — **stands and is correctly linear**: it is
+> about ONE branch, and a max-over-all-branches result does not touch it. The `n = 3,4,5`
+> exhaustive values `2/3, 1, 4/3` are **exact and untouched**. `§2`'s and `§3`'s two negatives,
+> `§5`'s control, `§7` and `§8` are untouched. **The frozen-poset conjecture is untouched** — the
+> disjunctive value is an *upper bound* on it, and this is that upper bound getting worse.
+>
+> `STATE.md` is **not** edited here: `mg-bb87` owns those three sites.
+
+---
+
 > ## ⚠️ CONJECTURE 4.3 IS **REFUTED**, NOT OPEN — AND THIS DOCUMENT NEVER SAID SO (`mg-372e`)
 >
 > `mg-131e` was sent to CERTIFY the `≤` direction and killed it instead. On the branch
@@ -28,8 +69,10 @@ branch.**
 >
 > **`§6`'s THRESHOLD ARITHMETIC IS VOID, NOT UPDATED.** *"Daniel's `1/6` at `n ≥ 11`, the wall's
 > `≈ 2×10⁻²` at `n ≥ 99`"* was read off `2/(n+1)`. With the formula refuted **there is no
-> threshold to quote: do not carry the old numbers and do not print a new one.** The question that
-> replaces it — what *is* the true growth of the disjunctive per-slot value? — is `mg-00a1`.
+> threshold to quote: do not carry the old numbers and do not print a new one.** ~~The question that
+> replaces it — what *is* the true growth of the disjunctive per-slot value? — is `mg-00a1`.~~
+> **[ANSWERED — `mg-00a1`: the growth is `Θ(n²)`, superlinear, so there is no `ε_spec → 0` and no
+> threshold at any `n`. The question is closed, not open. (`mg-910c`)]**
 >
 > **WHAT SURVIVES, AND IT IS NOT NOTHING — do not read the strikes as a retraction of the
 > document.** THEOREM 4.2 (`≥ (n−1)/3`, every `n`) **stands**, and `mg-131e` §2 upgraded it: on
@@ -45,42 +88,57 @@ branch.**
 > verdict sentence and its `n → ∞` column (1), `§0`'s sizing paragraph (2), `§0`'s condition
 > paragraph (3), CONJECTURE 4.3 (4), `§6`'s replacement-factor paragraph (5), `§6`'s target
 > table (6), `§6`'s *"under Conjecture 4.3"* bullet (7), `§6`'s closing instruction (8).
-> **`§0`'s HEADLINE is deliberately NOT struck** — *"buys a factor that grows with `n`, not a
+> ~~**`§0`'s HEADLINE is deliberately NOT struck** — *"buys a factor that grows with `n`, not a
 > constant"* is what `STATE.md:167(c)` records as STANDING; what died is the exact constant, not
-> the shape. `§4.2`'s `n = 3,4,5` table, THEOREM 4.2 and its construction, `§4.2`'s evidence
+> the shape.~~ **[STRUCK — the SHAPE died too. `mg-00a1` proved the value is `Θ(n²)`, so what
+> per-slot buys is a constant factor of at most `6`, not a growing one, and `§0`'s HEADLINE is
+> REFUTED. This sentence was correct when written: `mg-372e` ran before `mg-00a1` returned.
+> (`mg-910c`)]** `§4.2`'s `n = 3,4,5` table, THEOREM 4.2 and its construction, `§4.2`'s evidence
 > bullets, `§5`'s control, `§7` and `§8` are NOT struck either: they are true as written.
 
 ---
 
 ## 0. Verdict
 
-> ## **PER-SLOT ADJACENCY SYMMETRY BUYS A FACTOR THAT GROWS WITH `n`, NOT A CONSTANT — AND THE TICKET'S OWN SIZING PARAGRAPH IS WRONG BECAUSE OF IT.**
+> ## ~~**PER-SLOT ADJACENCY SYMMETRY BUYS A FACTOR THAT GROWS WITH `n`, NOT A CONSTANT — AND THE TICKET'S OWN SIZING PARAGRAPH IS WRONG BECAUSE OF IT.**~~
+>
+> ## ⛔ **THE HEADLINE ABOVE IS REFUTED (`mg-00a1`, struck `mg-910c`). PER-SLOT ADJACENCY SYMMETRY BUYS A CONSTANT FACTOR OF AT MOST `6`, NOT A FACTOR THAT GROWS WITH `n` — AND THE TICKET'S SIZING INSTRUCTION IS THEREFORE OBEYABLE AFTER ALL, WITH THE ANSWER "MILESTONE".**
 >
 > Imposed **soundly**, per-slot adjacency symmetry takes the relaxation value from
-> `C(n,2)/3` down to ~~**`(n−1)/3`** — from `Θ(n²)` to `Θ(n)`:~~ **`(n−1)/3` AT `n = 3,4,5`, and
+> `C(n,2)/3` down to ~~**`(n−1)/3`** — from `Θ(n²)` to `Θ(n)`:~~ ~~**`(n−1)/3` AT `n = 3,4,5`, and
 > `mg-131e` REFUTED the all-`n` equality at `n = 6` (§0, §4) — so the `n → ∞` column below is
-> STRUCK and the rate is UNKNOWN (`mg-372e`):**
+> STRUCK and the rate is UNKNOWN (`mg-372e`):**~~ **`(n−1)/3` AT `n = 3,4,5` only. `mg-131e`
+> REFUTED the all-`n` equality at `n = 6`, and `mg-00a1` then settled the RATE: the value is
+> `Θ(n²)`, between `n(n+5)/36` and `n(n−1)/6`. It is not `Θ(n)` and it is not unknown — the drop
+> is by a bounded factor (`≤ 6`) and never by an order (`mg-910c`):**
 >
 > | | `n = 3` | `n = 4` | `n = 5` | as `n → ∞` — **⛔ STRUCK ON THE LOWER TWO ROWS** |
 > |---|---|---|---|---|
 > | **baseline** `M_n` alone (`mg-6bc2`) | `1` | `2` | `10/3` | `ε_spec = n/(n+1) → 1` |
-> | **+ per-slot adjacency symmetry** | **`2/3`** | **`1`** | **`4/3`** | ~~**`ε_spec = 2/(n+1) → 0`**~~ **REFUTED at `n = 6` — UNKNOWN (`mg-00a1`)** |
-> | ratio | `2/3` | `1/2` | `2/5` | ~~`→ 0`~~ **unknown** |
+> | **+ per-slot adjacency symmetry** | **`2/3`** | **`1`** | **`4/3`** | ~~**`ε_spec = 2/(n+1) → 0`**~~ ~~**REFUTED at `n = 6` — UNKNOWN (`mg-00a1`)**~~ **`E[inv] = Θ(n²)`, so `ε_spec` does NOT → 0 (`mg-00a1`; `mg-910c`)** |
+> | ratio | `2/3` | `1/2` | `2/5` | ~~`→ 0`~~ ~~**unknown**~~ **bounded away from `0` — `mg-00a1`'s bracket is a constant factor of at most `6` (`mg-910c`)** |
 >
 > *(The three `n = 3,4,5` columns are exhaustive LP optima and are exact and UNTOUCHED. Struck:
-> the `n → ∞` cells of the **per-slot** and **ratio** rows only. The **baseline** row's
-> `ε_spec = n/(n+1) → 1` is `mg-6bc2`'s theorem, is not this document's claim, and stands.)*
+> the `n → ∞` cells of the **per-slot** and **ratio** rows only — struck TWICE, first to "unknown"
+> by `mg-372e` and then to the settled `Θ(n²)` answer by `mg-910c` once `mg-00a1` returned. The
+> **baseline** row's `ε_spec = n/(n+1) → 1` is `mg-6bc2`'s theorem, is not this document's claim,
+> and stands.)*
 >
-> **The gain is not a constant factor.** The ticket sized this ticket in advance as *"a
+> ~~**The gain is not a constant factor.**~~ **⛔ [STRUCK — THE GAIN *IS* A CONSTANT FACTOR, AND IT
+> IS AT MOST `6` (`mg-00a1`; `mg-910c`).]** The ticket sized this ticket in advance as *"a
 > milestone, not a wall-breaker, and the writeup must say which"*, on the assumption that a
-> result here would move `d·q̄` by a constant. **It does not, and that instruction cannot be
-> obeyed as written:** ~~at `ε_spec = 2/(n+1)`, Daniel's `1/6` is reached at `n ≥ 11` and the
+> result here would move `d·q̄` by a constant. ~~**It does not, and that instruction cannot be
+> obeyed as written:**~~ **It does, and the instruction CAN be obeyed: the answer is
+> "milestone".** ~~at `ε_spec = 2/(n+1)`, Daniel's `1/6` is reached at `n ≥ 11` and the
 > wall's `≈ 2×10⁻²` at `n ≥ 99`.~~ **[VOID — those two thresholds were read off `2/(n+1)`, which
 > `mg-131e` refuted at `n = 6`. There is no threshold to quote: the old numbers are not carried
 > and no new one is printed (`mg-372e`).]** §6 states both sizings and the condition they hang
-> on. **The sizing instruction still cannot be obeyed as written** — the measured gain is not a
+> on. ~~**The sizing instruction still cannot be obeyed as written** — the measured gain is not a
 > constant factor at `n ≤ 5` either — but the reason is now *"the rate is unknown"*, not
-> *"the rate is `2/(n+1)`"*.
+> *"the rate is `2/(n+1)`"*.~~ **[STRUCK — the rate is not unknown. `mg-00a1` settled it at
+> `Θ(n²)`, so per-slot symmetry moves `d·q̄` by a bounded factor and by no more, at every `n`.
+> There is still no threshold to quote, because a bounded factor never reaches `1/50`; but the
+> reason is now *"the rate is `Θ(n²)`"*, not *"the rate is unknown"*. (`mg-910c`)]**
 >
 > ### The condition, stated at the same volume as the result
 >
@@ -335,7 +393,12 @@ Evidence and its limits, stated together:
 measurement was that the aggregate form *excludes nothing* at `n = 3`; on the sound program the
 two forms **agree** at `n = 3` and separate from `n = 4` on, with the per-slot form worth a
 further factor of `5/3` and then `7/4`. And the aggregate form's `ε_spec` — `1/2, 2/3, 7/12` —
-**shows no decay at all**: whatever the aggregate form buys, it is not the `Θ(n²) → Θ(n)` drop.
+**shows no decay at all**: ~~whatever the aggregate form buys, it is not the `Θ(n²) → Θ(n)` drop.~~
+**[STRUCK on the SECOND clause only — there is no `Θ(n²) → Θ(n)` drop for it to fail to be:
+`mg-00a1` proved the *per-slot* value is `Θ(n²)` as well. The measurement that the aggregate
+form shows no decay in `ε_spec` at `n = 3,4,5` is UNTOUCHED and correct; what is struck is the
+implied contrast with a per-slot form that drops an order. The real contrast is smaller and is
+still real: per-slot buys a constant factor of at most `6`, aggregate buys none. (`mg-910c`)]**
 `mg-6bc2`'s recommendation to reach for the per-slot form rather than the aggregate one is
 **confirmed, for a reason different from the one it gave.**
 
@@ -359,9 +422,12 @@ instructs: *"A result here is a milestone, not a wall-breaker, and the writeup m
 measured gain replaces the factor `n/(n+1)` by `2/(n+1)` — equivalently `d·q̄ = 2/(3n)`, which
 is not a constant:~~ **[STRUCK — `mg-131e` refuted `ε_spec = 2/(n+1)` at `n = 6` (§0, §4), so
 `d·q̄ = 2/(3n)` is refuted with it, being the same statement in another currency. The measured
-gain at `n = 3,4,5` is `ε_spec = 1/2, 2/5, 1/3` against the baseline `3/4, 4/5, 5/6`, and what it
+gain at `n = 3,4,5` is `ε_spec = 1/2, 2/5, 1/3` against the baseline `3/4, 4/5, 5/6`, and ~~what it
 becomes past `n = 5` is UNKNOWN — `mg-00a1`. The instruction still cannot be obeyed, now because
-the shape is unknown rather than because it is `2/(n+1)`. (`mg-372e`)]**
+the shape is unknown rather than because it is `2/(n+1)`.~~ — what it becomes past `n = 5` is now
+KNOWN and is not unknown: `mg-00a1` proved `E[inv] = Θ(n²)`, so there is no `ε_spec → 0` here at
+all. The instruction CAN be obeyed and the answer is "milestone": the gain is a constant factor
+of at most `6`. (`mg-910c`) (`mg-372e`)]**
 
 | ~~target~~ | ~~needs `ε_spec ≤`~~ | ~~reached at~~ |
 |---|---|---|
@@ -386,9 +452,14 @@ So, stated at the strength it actually has and no more:
 **Do not carry `ε_spec = 2/(n+1)` as an established figure.** ~~It is exact at three values of `n`
 and conjectural elsewhere, and the honest one-line form is: *per-slot adjacency symmetry is
 worth `Θ(n²) → Θ(n)` at `n ≤ 5` and the all-`n` statement is open.*~~ **Do not carry it at all:
-it is exact at three values of `n` and FALSE from `n = 6` (`mg-131e` §0, §4). The honest one-line
+it is exact at three values of `n` and FALSE from `n = 6` (`mg-131e` §0, §4).** ~~The honest one-line
 form is now: *per-slot adjacency symmetry is worth `Θ(n²) → Θ(n)` at `n ≤ 5` and on one named
-`n`-indexed sub-family, and the all-`n` rate is UNKNOWN* (`mg-00a1`). (`mg-372e`)**
+`n`-indexed sub-family, and the all-`n` rate is UNKNOWN* (`mg-00a1`). (`mg-372e`)~~ **[STRUCK —
+the rate is no longer unknown. The honest one-line form is now: *per-slot adjacency symmetry is
+worth `Θ(n²) → Θ(n)` on the consecutive-pairs branch and on one named `n`-indexed sub-family —
+both `Θ(n)` statements about ONE branch and both correct — but the MAXIMUM over branches, which
+is the quantity the route needs, is `Θ(n²)`, so over all branches per-slot symmetry buys a
+constant factor of at most `6` and never an order* (`mg-00a1`). (`mg-910c`)]**
 
 ---
 
