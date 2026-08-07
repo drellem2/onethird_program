@@ -1,0 +1,97 @@
+==============================================================================
+a2_maths -- the parent's Sec.1 IFF and Sec.4 Prop 4.1, re-derived numerically
+POPULATION: every naturally labelled poset on n elements.  GRAIN: one poset.
+EXACT: everything here is Fraction/int arithmetic.  No tolerance.
+==============================================================================
+
+------------------------------------------------------------------------------
+A. Sec.1 -- the identity the IFF runs on: sum_x m_x = 2 E[inv]
+------------------------------------------------------------------------------
+  posets checked: 101658      max |sum m_x - 2E[inv]| = 0
+  (already in the selftest at n<=6; repeated here at the audit's own NMAX)
+
+------------------------------------------------------------------------------
+B. Sec.1 -- BOTH DIRECTIONS OF THE IFF, as finite-n inequalities
+------------------------------------------------------------------------------
+The proof is two Markov steps.  At finite n they are these two inequalities,
+and if either failed the iff would be wrong:
+   (=>)  #{x : m_x >= alpha n}  <=  2 E[inv] / (alpha n)
+   (<=)  sum_x m_x  <=  #{x : m_x >= alpha n} * n  +  alpha n * n
+  406632 (poset, alpha) instances;  (=>) violations 0 ;  (<=) violations 0
+  P4 predicted 0 and 0.
+
+------------------------------------------------------------------------------
+C. Sec.1 -- THE QUANTIFIER IN THE Sec.3 TABLE (P4's predicted defect)
+------------------------------------------------------------------------------
+Sec.1 states the iff correctly:
+    (LIB-weak) <=> for every alpha>0, #{x : m_x >= alpha n} = o(n).
+Sec.3's table states its NEGATION as:
+    "#{x : m_x >= alpha n} = Omega(n) for some alpha > 0"
+The correct negation of `= o(n)` is `is NOT o(n)`, i.e. limsup count/n > 0,
+which permits a SUBSEQUENCE.  Omega(n) as normally read demands it at EVERY n.
+This is strictly stronger than the negation, so the table's row is a slightly
+stronger claim than the section it cites.  Consequence: NONE for the verdict --
+a (LIB-weak) violator along a subsequence is still a violator.
+  VERDICT: substance CONFIRMED, one quantifier written too strongly. NO CONSEQUENCE.
+
+------------------------------------------------------------------------------
+D. Sec.4 Prop 4.1 -- the entropy price, instantiated
+------------------------------------------------------------------------------
+Claim: E[inv_e] <= eps n^2  ==>  e(P) <= 2 * C(2 eps n^2 + n, n).
+Instantiated at eps = E[inv]/n^2, i.e. e(P) <= 2 * C(floor(2E[inv]) + n, n).
+NOTE the reference order: Prop 4.1's coding counts inversions of sigma against e
+OVER ALL PAIRS, and inv_e counts only INCOMPARABLE pairs.  They coincide only
+because e is a linear extension (P6).  Tested with L = the natural labelling,
+which IS a linear extension, so the identification is legitimate here.
+
+  n   posets     viol   median ratio      min ratio
+  2        2        0              3              2
+  3        7        0          6.667              2
+  4       40        0          11.67              2
+  5      357        0             36              2
+  6     4824        0            104              2
+  7    96428        0          316.4              2
+
+  P5 predicted 0 violations and a median ratio > 1e3 at n=7.
+  Read the ratio column as the honest statement of what this check is: the bound
+  is a CONSISTENCY check at this size, not a sharpness check.  A bound loose by
+  three orders of magnitude cannot be falsified by a population this small, and
+  saying `0 violations` without the ratio would overstate what was tested.
+
+------------------------------------------------------------------------------
+E. Sec.4 -- WHERE Prop 4.1 IS TIGHT, i.e. is it ever within a factor 10?
+------------------------------------------------------------------------------
+  n=2 tightest ratio 2 at up=(2, 0) (e(P)=1, E[inv]=0)
+  n=3 tightest ratio 2 at up=(6, 4, 0) (e(P)=1, E[inv]=0)
+  n=4 tightest ratio 2 at up=(14, 12, 8, 0) (e(P)=1, E[inv]=0)
+  n=5 tightest ratio 2 at up=(30, 28, 24, 16, 0) (e(P)=1, E[inv]=0)
+  n=6 tightest ratio 2 at up=(62, 60, 56, 48, 32, 0) (e(P)=1, E[inv]=0)
+  n=7 tightest ratio 2 at up=(126, 124, 120, 112, 96, 64, 0) (e(P)=1, E[inv]=0)
+  (the chain is the tightest case: E[inv]=0, e(P)=1, rhs=2 -> ratio 2)
+
+------------------------------------------------------------------------------
+F. Sec.4's ASYMPTOTIC FORM, checked as arithmetic rather than instantiated
+------------------------------------------------------------------------------
+e(P)/n! <= 2 (2 e^2 eps + e^2/n)^n.  Derivation re-done here:
+  C(a,n) <= (ea/n)^n with a = 2 eps n^2 + n  gives  (2 e eps n + e)^n
+  n! >= (n/e)^n
+  ratio <= 2 (2 e eps n + e)^n / (n/e)^n = 2 (2 e^2 eps + e^2/n)^n     [matches]
+    n=   10 eps=0.1      base 2e^2*eps + e^2/n = 2.21672   (<1 iff the bound bites)
+    n=   10 eps=0.01     base 2e^2*eps + e^2/n = 0.886687   (<1 iff the bound bites)
+    n=   10 eps=0.001    base 2e^2*eps + e^2/n = 0.753684   (<1 iff the bound bites)
+    n=  100 eps=0.1      base 2e^2*eps + e^2/n = 1.5517   (<1 iff the bound bites)
+    n=  100 eps=0.01     base 2e^2*eps + e^2/n = 0.221672   (<1 iff the bound bites)
+    n=  100 eps=0.001    base 2e^2*eps + e^2/n = 0.0886687   (<1 iff the bound bites)
+    n= 1000 eps=0.1      base 2e^2*eps + e^2/n = 1.4852   (<1 iff the bound bites)
+    n= 1000 eps=0.01     base 2e^2*eps + e^2/n = 0.15517   (<1 iff the bound bites)
+    n= 1000 eps=0.001    base 2e^2*eps + e^2/n = 0.0221672   (<1 iff the bound bites)
+  The bound bites (base < 1) only once 2e^2 eps < 1, i.e. eps < 0.067668.
+  So Prop 4.1 is VACUOUS for eps >= 0.067668 -- true but empty.
+  mg-c3ca does not state this threshold.  It does not need to (its claim is the
+  eps->0 contrapositive), but a reader could take `the entropy price` as a bound
+  that bites at the frozen value, and freezing gives only eps < 1/6 = 0.1667.
+  1/6 = 0.1667 > 0.067668, so AT THE UNCONDITIONAL FROZEN VALUE PROP 4.1 SAYS NOTHING.
+
+==============================================================================
+a2_maths done.
+==============================================================================

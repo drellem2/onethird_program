@@ -1,0 +1,102 @@
+==============================================================================
+a6_calibration -- target 4 and the standing targets
+==============================================================================
+
+------------------------------------------------------------------------------
+C1. THE (LIB-weak) vs (LIB-const) GAP, PRICED AT BOTH CALIBRATIONS
+------------------------------------------------------------------------------
+(LIB-const) is   E[inv_e] <= (eps_spec/6)(n^2-1).
+E_unif[inv]  is  C(n,2)/2 = n(n-1)/4.
+Freezing gives unconditionally (mg-88bd Claim 6.1)  E[inv_e] < m/3 <= n(n-1)/6,
+i.e. (2/3) of the uniform value, i.e. eps_spec = n/(n+1) -> 1.
+
+  eps_spec  as frac of unif  held (frac of unif)         gap factor         source
+   2.0e-04      0.000133333             0.666667               5000               
+                                                                       mg-88bd Sec.6.4 / mg-c3ca Sec.2.3
+   2.0e-02        0.0133333             0.666667                 50               
+                                                                       mg-e35c F5 (audited) / STATE.md
+
+  So the SAME arithmetic gives ~5x10^3 at 2e-4 and ~50 at 2e-2, and the gap
+  factor is exactly 1/eps_spec (times n/(n+1)):  1/2e-4 = 5000, 1/2e-2 = 50.
+  mg-c3ca Sec.2.3 prints the 2e-4 branch. STATE.md, at the commit mg-c3ca was
+  written against, says in bold: `do not carry 2x10^-4 or the n = 10^5 crossover
+  as flat text`.  Both appear in Sec.2.3 as flat text.
+
+------------------------------------------------------------------------------
+C2. THE CLASS CHAIN, FALSIFIED BY CONSTRUCTION
+------------------------------------------------------------------------------
+mg-c3ca Sec.2.3 bullet 1 (quoting mg-88bd Sec.6.2):
+    `(LIB) O(n) c (LIB-weak) o(n^2) c (LIB-const) <= c n^2`
+An inclusion of classes IS an implication.  Bullet 2 then says `neither implies
+the other outright`.  Both cannot be read literally.  Which is right:
+
+Construction: f(n) = n^2 / log2(n)  for n >= 2, f(n) = 10^6 for n < 2.
+f is o(n^2).  Is f <= c n^2 at EVERY n for the architecture's c = eps_spec/6?
+  c = eps_spec/6 = 0.00333333   (at the repaired eps_spec = 2e-2)
+  f(n) <= c n^2  <=>  log2(n) >= 1/c = 300  <=>  n >= 2^300 ~ 10^90
+  So f is o(n^2) and VIOLATES (LIB-const) at EVERY n below about 10^90.
+  (At the SUPERSEDED eps_spec = 2e-4 the same construction runs to 10^9031.)
+
+  AND THE THRESHOLD IS UNBOUNDED, not merely large: for ANY N0 whatsoever,
+  g(n) := n^2 for n < N0 and n^2/log2(n) for n >= N0 is o(n^2) and violates
+  (LIB-const) below N0.  So `N0 unspecified` is not a technicality about an
+  unknown constant -- NO N0 EXISTS that works for all of (LIB-weak).
+
+  VERDICT C2: as a statement about GROWTH-RATE CLASSES with (LIB-const) read as
+  O(n^2), the chain is correct.  As a statement about the OBJECTS satisfying the
+  three conditions at the architecture's own constant, `(LIB-weak) c (LIB-const)`
+  IS FALSE, and the failure interval is unbounded over the class.
+  Bullet 2 is right and bullet 1 needs the rider AT ITS OWN SITE.  This is the
+  same defect mg-325c repaired in STATE.md at four sites, surviving in the doc.
+
+  AND THE TWO GAPS ARE NOT COMPETITORS.  C1's factor (50) and C2's quantifier
+  are different objects:
+    C1 = (what freezing gives free) vs (what the architecture needs) : a CONSTANT
+    C2 = (LIB-weak) vs (LIB-const)                                  : a QUANTIFIER
+  A relay that says `the residual is a constant (~50) RATHER THAN a quantifier`
+  has set two true statements about different pairs against each other.
+
+------------------------------------------------------------------------------
+C3. DELTA_AT / THEOREM G DRIFT CHECK (P15) -- REPORTED EVEN THOUGH IT DOES NOT FIRE
+------------------------------------------------------------------------------
+  terms searched: Delta_AT, Δ_AT, Hodge, Theorem G, Garland, Kaufman, ALOV, Alev, link bound, Coxeter
+  total occurrences: 1
+    line 229  [Theorem G]  the Cheeger sandwich, or Theorem G. Read, cited, not retested.
+
+  NON-VACUITY CONTROL: the same term list over STATE.md hits 4 times.
+  If that were 0 the `0 hits` above would be a broken search, not a clean doc.
+  VERDICT: occurrences present; adjudicate each line above by hand.
+
+------------------------------------------------------------------------------
+C4. BOUND WORDS AND SUPERSEDED FIGURES IN THE PARENT DOC
+------------------------------------------------------------------------------
+  superseded-calibration figures (STATE.md says do not carry as flat text):
+    2×10⁻⁴   : 1 occurrence(s) at line(s) [88]
+    5×10³    : 1 occurrence(s) at line(s) [88]
+    10⁵      : 1 occurrence(s) at line(s) [90]
+
+  bound words:
+    closes       :  5 occurrence(s) at line(s) [16, 63, 74, 77, 251]
+    cannot       :  3 occurrence(s) at line(s) [169, 188, 220]
+    suffices     :  1 occurrence(s) at line(s) [108]
+    strictly     :  1 occurrence(s) at line(s) [208]
+    never        :  1 occurrence(s) at line(s) [14]
+    not blocked  :  1 occurrence(s) at line(s) [11]
+    is FALSE     :  0 occurrence(s) at line(s) []
+    IN KIND      :  1 occurrence(s) at line(s) [19]
+
+------------------------------------------------------------------------------
+C5. THE PREMISE'S SECOND HALF -- `NEVER ATTACKED BY ANY ARC` (P3)
+------------------------------------------------------------------------------
+This is a claim about the corpus's history and it is checkable.  Two searches:
+  (a) which mg items mention (LIB-weak) or `o(n^2)` as a target at all
+  (b) which merged docs do
+  mg items visible to `mg list --all`: 2347
+
+  (the substantive search is done in a7_history.sh, which greps the item store
+   and the merged docs; this section only records that the claim is checkable
+   and where it is checked.)
+
+==============================================================================
+a6_calibration done.
+==============================================================================

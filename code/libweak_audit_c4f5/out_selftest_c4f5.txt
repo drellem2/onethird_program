@@ -1,0 +1,111 @@
+==============================================================================
+A. POPULATION — the naturally labelled poset counts must be A006455
+==============================================================================
+  ok   |naturally labelled posets on 0|                           1 (expected 1)
+  ok   |naturally labelled posets on 1|                           1 (expected 1)
+  ok   |naturally labelled posets on 2|                           2 (expected 2)
+  ok   |naturally labelled posets on 3|                           7 (expected 7)
+  ok   |naturally labelled posets on 4|                           40 (expected 40)
+  ok   |naturally labelled posets on 5|                           357 (expected 357)
+  ok   |naturally labelled posets on 6|                           4824 (expected 4824)
+  ok   A2 every n=5 poset transitively closed & naturally labelled 0 bad
+  ok   A2-NONVACUITY the n=5 loop ran                             357 posets walked
+  ok   A3 no duplicates at n=5                                    357 distinct up-vectors
+
+==============================================================================
+B. LINEAR EXTENSION COUNT — the ideal DP against brute-force enumeration
+==============================================================================
+  ok   B1 ideal-DP e(P) == brute force, all posets n<=5           407 posets, 0 mismatches
+  ok   B1-NONVACUITY the comparison ran                           407 comparisons
+  ok   B2 e(antichain 6) = 720                                    
+  ok   B2 e(chain 6) = 1                                          
+  ok   B2 e(W_4 = C_4 + pt) = 5                                   one free point in a 4-chain has 5 slots
+
+==============================================================================
+C. PAIR PROBABILITIES AND FOOTRULE — DP against brute force
+==============================================================================
+  ok   C1 q_{xy} exact vs brute force, all posets n<=5            max abs error 0 over 406 posets
+  ok   C2 E[footrule] exact vs brute force, all posets n<=5       max abs error 0
+  ok   C-NONVACUITY the brute force ran on a poset with incomparable pairs 
+
+==============================================================================
+D. NAMED VALUES BY HAND — positive controls with answers known in advance
+==============================================================================
+  ok   D1 V = {0<1,0<2} has delta = 1/2, NOT 1/3 (my first assertion was wrong) 1/2
+  ok   D1b the delta=1/3 3-element object is W_2 = C_2 (+) C_1    1/3
+  ok   D1b W_2 E_maj = 2/3 (mg-c3ca's 'V-gadget' value)           2/3
+  ok   D1c-NONVACUITY exactly 3 of the 7 naturally labelled n=3 posets have delta=1/3 
+  ok   D2 antichain(5) delta = 1/2                                1/2
+  ok   D2 antichain(5) E[inv] = C(5,2)/2 = 5                      5
+  ok   D2 antichain(5) E[F] = (n^2-1)/3 = 8                       8
+  ok   D3 chain(5) delta is None (undefined, NOT 0)               None
+  ok   D3 chain(5) E[inv] = 0                                     
+  ok   D4 W_4 delta = floor((m+1)/2)/(m+1)                        2/5 == 2/5
+  ok   D4 W_4 E_maj = sum min(i,m+1-i)/(m+1)  [= E[inv_e]]        6/5 == 6/5
+  ok   D4 W_4 E[inv_L] = sum i/(m+1)  [natural labelling, a DIFFERENT number] 2 == 2
+  ok   D4 W_4 E_maj < E[inv_L] strictly (E_maj is the min over reference orders) 
+  ok   D4 W_5 delta = floor((m+1)/2)/(m+1)                        1/2 == 1/2
+  ok   D4 W_5 E_maj = sum min(i,m+1-i)/(m+1)  [= E[inv_e]]        3/2 == 3/2
+  ok   D4 W_5 E[inv_L] = sum i/(m+1)  [natural labelling, a DIFFERENT number] 5/2 == 5/2
+  ok   D4 W_5 E_maj < E[inv_L] strictly (E_maj is the min over reference orders) 
+  ok   D4 W_6 delta = floor((m+1)/2)/(m+1)                        3/7 == 3/7
+  ok   D4 W_6 E_maj = sum min(i,m+1-i)/(m+1)  [= E[inv_e]]        12/7 == 12/7
+  ok   D4 W_6 E[inv_L] = sum i/(m+1)  [natural labelling, a DIFFERENT number] 3 == 3
+  ok   D4 W_6 E_maj < E[inv_L] strictly (E_maj is the min over reference orders) 
+  ok   D4 W_8 delta = floor((m+1)/2)/(m+1)                        4/9 == 4/9
+  ok   D4 W_8 E_maj = sum min(i,m+1-i)/(m+1)  [= E[inv_e]]        20/9 == 20/9
+  ok   D4 W_8 E[inv_L] = sum i/(m+1)  [natural labelling, a DIFFERENT number] 4 == 4
+  ok   D4 W_8 E_maj < E[inv_L] strictly (E_maj is the min over reference orders) 
+  ok   D4-CONTRADICTS-STATE.md:102 delta(W_4) != 1/2              2/5, not 1/2 — mg-c3ca's lineage correction reproduces
+  ok   D5 E[inv_L] MOVES across labellings of one iso class; E_maj does not E[inv_L] in ['2/3', '1'] ; E_maj constant
+
+==============================================================================
+E. THE EIGENSOLVER — written here, so it is drilled here
+==============================================================================
+  ok   E1 diag(2,3)                                               [2.0, 3.0]
+  ok   E2 [[0,1],[1,0]] -> {-1,1}                                 [-0.9999999999999998, 0.9999999999999998]
+  ok   E3 J_5/5 -> {0,0,0,0,1}                                    [-0.0, -0.0, 0.0, 0.0, 1.0]
+  ok   E4 known 3x3 -> {-1,3,5}                                   [-1.0, 3.0, 5.0]
+
+==============================================================================
+F. lambda_std — the two ends of ledger row 1, which are the only fixed points
+==============================================================================
+  ok   F1 antichain(6): lambda_std = 0 exactly (T = J/n)          0.000000000000
+  ok   F2 chain(6): lambda_std = 1 (T = I, an ordinal sum)        1.000000000000
+  ok   F3 lambda_std==1 <=> NOT primitive, every poset n=4,5 (ledger row 1 as a control) 397 posets, 0 mismatches
+  ok   F3-NONVACUITY both answers occur in the population         
+
+==============================================================================
+G. THE DETECTOR CAN REPORT THE OTHER ANSWER
+==============================================================================
+  ok   G1 delta rule reports a constructed frozen table           delta = 3/10 < 1/3
+  ok   G2 the same rule reports NOT frozen when one pair is balanced 
+  ok   G3 census uses the same rule (same expression, on a real poset) 
+  ok   G4 census predicate on a synthetic FROZEN record reports frozen delta = 3/10
+
+==============================================================================
+J. MAJORITY ORDER — the object `inv_e` is defined against
+==============================================================================
+  ok   J1 W_4 majority order exists                               [0, 1, 4, 2, 3]
+  ok   J2 W_4 majority order is a linear extension of W_4         
+  ok   J3 E[inv_e] == E_maj on W_4                                6/5 == 6/5
+  ok   J4 the majority order FAILS to exist somewhere at n=5 (so `inv_e` is not always defined) 216 of 357 posets have no strict majority total order
+  ok   J5 where it exists, the majority order is a linear extension (n=5) 141/141, 0 bad
+
+==============================================================================
+H. MASTER-BOUND ARITHMETIC IDENTITIES (Lemmas 2.1 and 2.3, re-derived)
+==============================================================================
+  ok   H1 Lemma 2.3  sum k(n-k)/n = (n^2-1)/6  for n=2..11        
+  ok   H2 Lemma 2.1  sum_k leak_k = E[F]/2, every poset n<=5      max error 0 over 406 posets
+  ok   H3 Lemma 2.2  E[F] <= 2E[inv], every poset n<=6            5230 posets, 0 violations
+  ok   H3-NONVACUITY E[F] < 2E[inv] strictly somewhere (the bound is not an identity) 
+
+==============================================================================
+I. sum_x m_x = 2 E[inv]  (the identity the parent's Sec.1 iff runs on)
+==============================================================================
+  ok   I1 sum_x m_x == 2 E[inv], every poset n<=6                 max error 0 over 5230 posets
+  ok   I1-NONVACUITY sum_x m_x is not identically 0               
+
+==============================================================================
+SELFTEST: 68 checks, 0 failures
+==============================================================================

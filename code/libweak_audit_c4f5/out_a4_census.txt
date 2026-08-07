@@ -1,0 +1,107 @@
+==============================================================================
+a4_census -- mg-c3ca Sec.6 reproduced and extended to n = 7
+POPULATION: every naturally labelled poset on n elements (A006455 counts).
+GRAIN: one naturally labelled poset.  EXACT Fractions, no tolerance.
+==============================================================================
+  gathered n=3 : 6 posets with at least one incomparable pair
+  gathered n=4 : 39 posets with at least one incomparable pair
+  gathered n=5 : 356 posets with at least one incomparable pair
+  gathered n=6 : 4823 posets with at least one incomparable pair
+  gathered n=7 : 96427 posets with at least one incomparable pair
+
+------------------------------------------------------------------------------
+R1. min delta, ALL posets   [Sec.6: `min delta = 1/3 exactly at every n=3..6`]
+------------------------------------------------------------------------------
+   n      min delta       as float   == 1/3 ?
+   3            1/3       0.333333       True
+   4            1/3       0.333333       True
+   5            1/3       0.333333       True
+   6            1/3       0.333333       True
+   7            1/3       0.333333       True
+
+------------------------------------------------------------------------------
+R2. FROZEN COUNT   [Sec.6: `0 frozen posets found, as the conjecture requires`]
+------------------------------------------------------------------------------
+  n=3 : delta < 1/3 -> 0      delta == 1/3 -> 3   (population 6)
+  n=4 : delta < 1/3 -> 0      delta == 1/3 -> 6   (population 39)
+  n=5 : delta < 1/3 -> 0      delta == 1/3 -> 9   (population 356)
+  n=6 : delta < 1/3 -> 0      delta == 1/3 -> 21   (population 4823)
+  n=7 : delta < 1/3 -> 0      delta == 1/3 -> 42   (population 96427)
+  NON-VACUITY: the detector is drilled on a constructed frozen table in
+  selftest_c4f5.py sections G1/G4, so `0` here is a measurement and not silence.
+
+------------------------------------------------------------------------------
+R3. min delta, PRIMITIVE ONLY   [Sec.6: `0.400, 0.364, 0.357` at n=4,5,6]
+------------------------------------------------------------------------------
+   n min delta prim     as float    mg-c3ca        match
+   3            1/3     0.333333      (new)            -
+   4            2/5     0.400000      0.400          YES
+   5           4/11     0.363636      0.364          YES
+   6           5/14     0.357143      0.357          YES
+   7          14/39     0.358974      (new)            -
+
+------------------------------------------------------------------------------
+R4. max E_maj ON THE PRIMITIVE CRITICAL FAMILY
+    [Sec.6: `0.67, 1.00, 1.55, 1.64` at n=3..6, read as Theta(n)-shaped]
+------------------------------------------------------------------------------
+`critical family` is prose.  BOTH readings printed:
+  (a) delta == the primitive minimum exactly
+  (b) delta <= the primitive minimum + 1/100  (a tolerance band)
+
+   n   min d prim max E_maj(a)     #(a) max E_maj(b)     #(b)    mg-c3ca     match(a)
+   3          1/3       0.6667        3       0.6667        3       0.67          YES
+   4          2/5       1.0000        5       1.0000        5       1.00          YES
+   5         4/11       1.5455       11       1.5455       11       1.55          YES
+   6         5/14       1.6429       14       1.6429       14       1.64          YES
+   7        14/39       2.3590       39       2.3590       64      (new)            -
+
+------------------------------------------------------------------------------
+R5. IS `0.67, 1.00, 1.55, 1.64` Theta(n)-SHAPED?  (P11)
+------------------------------------------------------------------------------
+Sec.6 reads four points as `growing like Theta(n), i.e. LIB-scale`.  A fifth
+point is the test.  Least-squares line through the FOUR PUBLISHED points only,
+then the n=7 value measured against it:
+  fit through n=3..6 published: E_maj ~ 0.34600 n -0.34200
+    n=3  fitted  0.6960   measured  0.6667   miss   -4.21%
+    n=4  fitted  1.0420   measured  1.0000   miss   -4.03%
+    n=5  fitted  1.3880   measured  1.5455   miss  +11.34%
+    n=6  fitted  1.7340   measured  1.6429   miss   -5.26%
+    n=7  fitted  2.0800   measured  2.3590   miss  +13.41%
+
+  successive ratios of the published four: ['1.493', '1.550', '1.058']
+  P11 predicted the n=7 point misses the fit by more than 15%%.
+
+------------------------------------------------------------------------------
+R6. max E_maj/n^2 over the WHOLE critical family (delta == global min)
+    [README: `falls 0.074 -> 0.037`;  doc Sec.6: `0.074 -> 0.046`]
+------------------------------------------------------------------------------
+  DEFECT 3 OF THIS INSTRUMENT, kept: I wrote this header as `THESE TWO PUBLISHED
+  PAIRS DISAGREE WITH EACH OTHER` BEFORE measuring, and they do not.  They are
+  the same quantity over two populations and each is correctly scoped where it
+  is printed -- the README's 0.037 belongs to its p1_census row (all posets) and
+  the doc's 0.046 to its primitive paragraph.  RESOLVED, NOT A FINDING.
+  What DOES survive: the all-poset sequence is NOT MONOTONE (see the column),
+  so `falls 0.074 -> 0.037` is an endpoint statement about a sequence that rises
+  in its last step.  DEFECT 4 OF THIS INSTRUMENT: I then wrote `the primitive
+  sequence is monotone and -> 0.046 is fair` -- and at n=7 IT RISES TOO (0.0456
+  -> 0.0481).  Written at n<=6, refuted by this file's own next row. Kept.
+   n  max E_maj/n^2 (all critical) (primitive crit)
+   3        0.07407        0.07407        0.07407
+   4        0.04167        0.04167        0.06250
+   5        0.02667        0.02667        0.06182
+   6        0.03704        0.03704        0.04563
+   7        0.02721        0.02721        0.04814
+
+------------------------------------------------------------------------------
+R7. THE k-V-GADGET ORDINAL SUM   [Sec.6: `E_maj = (2/9)n exactly at every k`]
+------------------------------------------------------------------------------
+The `V-gadget` is C_2 (+) C_1 (delta = 1/3, E_maj = 2/3), NOT {0<1, 0<2}
+(which has delta = 1/2).  See selftest defect 1.  Ordinal sum of k copies:
+  k=1 n= 3  delta=1/3  E_maj=2/3   (2/9)n = 2/3   match True
+  k=2 n= 6  delta=1/3  E_maj=4/3   (2/9)n = 4/3   match True
+  k=3 n= 9  delta=1/3  E_maj=2   (2/9)n = 2   match True
+  k=4 n=12  delta=1/3  E_maj=8/3   (2/9)n = 8/3   match True
+
+==============================================================================
+a4_census done.
+==============================================================================

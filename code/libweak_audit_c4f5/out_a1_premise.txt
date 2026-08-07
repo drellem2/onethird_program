@@ -1,0 +1,80 @@
+==============================================================================
+a1_premise -- AUDIT TARGET 1: does (LIB-weak) close L1b as stated?
+POPULATION: every naturally labelled poset on n elements (A006455).
+GRAIN: one naturally labelled poset.  TOLERANCE: 1e-09, eigenvalues only.
+==============================================================================
+
+------------------------------------------------------------------------------
+A. THE MASTER BOUND, TESTED  --  1-lambda_std <= 3E[F]/(n^2-1) <= 6E[inv_L]/(n^2-1)
+------------------------------------------------------------------------------
+  n   posets     viol_F   viol_inv worst_slack_F   n_equality equality cases
+  2        2          0          0     0.00e+00            2 [(0, 0), (2, 0)]
+  3        7          0          0     0.00e+00            2 [(0, 0, 0), (6, 4, 0)]
+  4       40          0          0     0.00e+00            2 [(0, 0, 0, 0), (14, 12, 8, 0)]
+  5      357          0          0     0.00e+00            2 [(0, 0, 0, 0, 0), (30, 28, 24, 16, 0)]
+  6     4824          0          0     0.00e+00            2 [(0, 0, 0, 0, 0, 0), (62, 60, 56, 48, 32, 0)]
+  7    96428          0          0     0.00e+00            2 [(0, 0, 0, 0, 0, 0, 0), (126, 124, 120, 112, 96, 64, 0)]
+
+TOTAL VIOLATIONS: footrule form 0, inversion form 0
+P1 predicted 0 and 0.
+
+------------------------------------------------------------------------------
+A2. WHICH posets achieve equality in the footrule form?
+------------------------------------------------------------------------------
+mg-210d Sec.2.4 claims equality AT THE ANTICHAIN.  Checked here as an `only if`,
+which mg-210d does not claim and which I predicted (P1) would hold:
+  n=2 : 2 equality cases, 1 of them the antichain, others: [(2, 0)]
+  n=3 : 2 equality cases, 1 of them the antichain, others: [(6, 4, 0)]
+  n=4 : 2 equality cases, 1 of them the antichain, others: [(14, 12, 8, 0)]
+  n=5 : 2 equality cases, 1 of them the antichain, others: [(30, 28, 24, 16, 0)]
+  n=6 : 2 equality cases, 1 of them the antichain, others: [(62, 60, 56, 48, 32, 0)]
+
+------------------------------------------------------------------------------
+A3. THE IMPLICATION ITSELF, made quantitative rather than asserted
+------------------------------------------------------------------------------
+(LIB-weak) says E[inv_e]/n^2 -> 0.  Through the master bound that is
+1-lambda_std <= 6(E[inv_e]/n^2)(n^2/(n^2-1)) -> 0.  The map is monotone and
+explicit, so the implication is arithmetic.  Tabulated so the constant is visible:
+  if E[inv_e]/n^2 <=           then 1-lambda_std <= (n large)
+  0.1                          0.6                         
+  0.01                         0.06                        
+  0.00333333                   0.02                        
+  0.001                        0.006                       
+  0.0001                       0.0006                      
+
+So (LIB-weak) => lambda_std -> 1 : CONFIRMED, and it is ONE division.
+The content is entirely in the master bound, which mg-c3ca did not re-derive.
+
+------------------------------------------------------------------------------
+B. IS lambda_std A FUNCTION OF THE POSET?  (P2)
+------------------------------------------------------------------------------
+The master bound is proved for a poset RELABELLED by a chosen reference linear
+extension L.  Sweep every linear extension of every poset and ask whether the
+value moves.  STATE.md:40 defines lambda_std with no reference order in it.
+
+  n   posets      L-dep     max spread witness
+  3        -          3       0.166667 ((4, 0, 0), 0.5, 0.666667)
+  4        -         26       0.250000 ((12, 0, 0, 0), 0.5, 0.75)
+  5        -        274       0.300000 ((28, 0, 0, 0, 0), 0.5, 0.8)
+  6        -       4069       0.333333 ((32, 32, 32, 32, 0, 0), 0.5, 0.833333)
+
+P2 predicted L-dependence is REAL with a witness at n<=6.
+
+------------------------------------------------------------------------------
+B2. AND WHAT THE MASTER BOUND LOOKS LIKE AT THE MAJORITY ORDER e
+------------------------------------------------------------------------------
+For a frozen poset e exists and is a linear extension, so the right reading of
+the bound is 1-lambda_std(e) <= 6E[inv_e]/(n^2-1).  E_maj = E[inv_e] is the
+MINIMUM of E[inv_L] over reference orders -- but lambda_std(e) is not the
+minimum of lambda_std(L), so the two minima are not taken together.  Checked:
+  n=5, posets with a majority linear extension:
+  lambda_std(e) is the MAXIMUM over reference orders : 97
+  lambda_std(e) is strictly BELOW the maximum        : 44
+
+  (If e were not the maximiser, `lambda_std -> 1` at e would be a WEAKER
+   conclusion than at the best reference order -- worth knowing which way it
+   points, since the architecture wants lambda_std LARGE.)
+
+==============================================================================
+a1_premise done.
+==============================================================================

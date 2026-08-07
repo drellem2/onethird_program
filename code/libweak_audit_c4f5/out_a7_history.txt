@@ -1,0 +1,132 @@
+==============================================================================
+a7_history -- is (LIB-weak) really NEVER ATTACKED?  (audit target 1, half 2)
+==============================================================================
+
+------------------------------------------------------------------------------
+H1. THE POPULATION SEARCHED (printed first, so the negative is not silence)
+------------------------------------------------------------------------------
+  mg store root        : /Users/daniel/.macguffin
+  mg item files        : 2360
+  merged docs (docs/)  : 115
+  merged code dirs     : 1473
+  commits before 81214a9  : 329
+
+------------------------------------------------------------------------------
+H2. mg ITEMS MENTIONING (LIB-weak) OR ITS STATEMENT, ANYWHERE
+------------------------------------------------------------------------------
+  files containing the literal string 'LIB-weak':
+archive/2026-07/mg-1fdb.md
+archive/2026-07/mg-88bd.md
+archive/2026-07/mg-d112.md
+archive/2026-08/mg-00b9.md
+archive/2026-08/mg-2860.md
+archive/2026-08/mg-c3ca.md
+archive/2026-08/mg-ea0e.md
+available/mg-1df8.md
+available/mg-40d8.md
+available/mg-4f88.md
+claimed/mg-c4f5.md.57939
+done/mg-325c.md
+done/mg-b6fa.md
+done/mg-b6fa.result.json
+done/mg-e768.md
+done/mg-e768.result.json
+  count: 16
+
+  of those, how many have (LIB-weak) as their TITLE subject (a deliverable
+  aimed at it) rather than a mention in passing:
+    TITLE HIT: mg-c3ca.md :: # L1b IS THE WHOLE REMAINING GAP: frozen => lambda_std -> 1. The Cheeger chain is PROVEN end to end except this one implication — and (LIB-weak) E[inv_e]=o(n^2) suffices and has NEVER BEEN ATTACKED
+    TITLE HIT: mg-4f88.md :: # INDEPENDENT AUDIT of the STATE.md leading-form correction (pre-filed, LATE for its parent) — confirm the CONDITION travelled with the constant form, and that (LIB-weak) is stated as unattacked
+    TITLE HIT: mg-325c.md :: # STATE.md CARRIES MY INVERTED STRENGTH ORDERING — mg-c3ca proves (LIB) < (LIB-weak) < (LIB-const) as asymptotic classes, so (LIB-weak) is NOT the weakest and does NOT close the wall the architecture consumes
+    TITLE HIT: mg-c4f5.md.57939 :: # INDEPENDENT AUDIT of the L1b/(LIB-weak) attack (pre-filed SAME ACTION) — VERIFY THE PREMISE FIRST: does (LIB-weak) really close L1b, and has no arc really attacked it?
+  (a blank list here means: 0 items were FILED against (LIB-weak))
+
+  SPLIT BY DATE AGAINST mg-c3ca's OWN FILING (2026-08-05 23:49Z) -- the only
+  split that can test "never attacked", since everything after is a consequence:
+    after   mg-00b9  2026-08-06 00:45:16Z  REPORT (Daniel): L1b is very strict - what is the WEAKEST spectral state
+    after   mg-1df8  2026-08-06 22:23:39Z  INDEPENDENT AUDIT of the strength-ordering correction (pre-filed SAME AC
+    after   mg-2860  2026-08-06 17:13:23Z  STATE.md LEADS WITH THE OVER-STRONG FORM: the wall and the axis summary 
+    after   mg-325c  2026-08-06 22:23:39Z  STATE.md CARRIES MY INVERTED STRENGTH ORDERING — mg-c3ca proves (LIB) < 
+    after   mg-40d8  2026-08-06 23:03:45Z  INDEPENDENT AUDIT of the quantifier-gap analysis (pre-filed SAME ACTION)
+    after   mg-4f88  2026-08-06 17:15:28Z  INDEPENDENT AUDIT of the STATE.md leading-form correction (pre-filed, LA
+    after   mg-b6fa  2026-08-06 23:03:45Z  THE QUANTIFIER GAP IS THE DEEPER PROBLEM AND IT HAS ONLY EVER BEEN A CAV
+    after   mg-c3ca  2026-08-05 23:49:12Z  L1b IS THE WHOLE REMAINING GAP: frozen => lambda_std -> 1. The Cheeger c
+    after   mg-c4f5  2026-08-05 23:49:12Z  INDEPENDENT AUDIT of the L1b/(LIB-weak) attack (pre-filed SAME ACTION) —
+    after   mg-ea0e  2026-08-06 00:29:21Z  STATE.md overhaul to an EXECUTIVE SUMMARY (Daniel): 29,125 words with a 
+    BEFORE  mg-1fdb  2026-07-29 09:13:38Z  Reconcile STATE.md + mg-dbd1 after the mg-a58f audit (mg-d112 CONFIRMED)
+    BEFORE  mg-88bd  2026-07-29 09:32:06Z  Pin the operative lambda_std form: the corpus holds THREE (limit / rate 
+    BEFORE  mg-d112  2026-07-29 08:43:30Z  INDEPENDENT AUDIT of the (B-bias) locality lemma deliverable (mg-a58f) -
+    BEFORE  mg-e768  2026-08-05 23:39:29Z  CAPTURE (Daniel, asked twice - May and August): is there a Cheeger/spect
+
+  Only the BEFORE rows can bear on the claim.  A BEFORE row is an ATTACK only
+  if (LIB-weak) is its deliverable, which the TITLE HIT list above tests.
+
+------------------------------------------------------------------------------
+H3. MERGED DOCS AT 81214a9^ (i.e. BEFORE mg-c3ca) MENTIONING IT
+------------------------------------------------------------------------------
+  pattern: LIB-weak
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md
+    docs/OneThird-lambda-std-Operative-Form.md
+    STATE.md
+    -> 3 file(s)
+  pattern: o(n^2)
+    docs/OneThird-lambda-std-Operative-Form.md
+    -> 1 file(s)
+  pattern: o(n²)
+    docs/OneThird-lambda-std-Operative-Form.md
+    STATE.md
+    -> 2 file(s)
+
+------------------------------------------------------------------------------
+H4. WHERE THE SENTENCE ITSELF COMES FROM, AND WHETHER ITS AUDIT TOUCHED IT
+------------------------------------------------------------------------------
+  the sentence, at 81214a9^ :
+    81214a9^:STATE.md:131:| **RED-for-lever · AMBER-redirect · CORRECTS MERGED WORK (mg-a58f; audited mg-d112 — CONFIRMED, 40 ledger rows re-derived, 0 BROKEN)** | (B-bias) `O(1)` locality lemma (doc: `On
+
+  it belongs to the mg-a58f row.  mg-d112 is its audit.  Does the audit document
+  mention the claim at all?
+    STATE.md names it: docs/OneThird-Bbias-Locality-Lemma-IndependentAudit.md
+    present in this repo at 81214a9^ : NO -- NOT PRESENT
+    present in this repo at HEAD  : 0 file(s)
+    present in one_third_width_three: 0 file(s)
+    (so the audit that STATE.md credits for this row is NOT LOCATABLE, and
+     therefore whether mg-d112 checked the `never attacked` half is UNVERIFIABLE
+     from the record.  That is a measured absence, not an accusation.)
+
+------------------------------------------------------------------------------
+H5. THE ATTEMPT INDEX -- what the corpus records as having been TRIED
+------------------------------------------------------------------------------
+  rows of STATE.md's attempt index at 81214a9^ (verdict column only):
+    [verdict ] attempt 
+    [---] ---
+    [**DROP (tractability only)** ] width ≥ 4, n ≥ 10 residual gap (mg-c47a, audited mg-7d24) 
+    [**PROVEN (keep)** ] low-δ ⟺ bounded-width equivalence (mg-c47a Obs 3.1(a)/(b)) 
+    [**CORRECTION to merged work** ] C.md sec.9.5 "all-width min δ" row 
+    [dead end ] Bruhat-convexity "prefix ⟹ O(n) inversions" 
+    [avoid this aim ] balance → `log e(P)` aimed at `δ` directly 
+    [**untried · open** ] entropy / order-polytope aimed at the *conditional* inversion sum 
+    [**untried · convergent target** ] convexity / order-polytope forbids the **flat slot law** 
+    [dead ≠ AF ] slot-law log-concavity of `e(P_m)` 
+    [**untried · new object** ] incomparability-graph conductance → `δ` / inv-sum 
+    [**AMBER · diagnostic (mg-a1ec)** ] entropy-discontinuity mechanism (doc: `OneThird-EntropyDiscontinuity-Mechanism.md`) 
+    [**GREEN-partial · diagnostic (mg-48ab)** ] AF equality-case (Ma–Shenfeld) vs the frozen hypothesis (doc: `OneThird-AF-EqualityCase-MaSh
+    [**RED-for-residual · AMBER-redirect (mg-dcae, verified sound)** ] k=1 Stanley-stability scoping (doc: `OneThird-k1-Stanley-Stability-Sc
+    [**INERT · proven (probe A, mg-61bb)** ] can the frozen/coherence fact improve the Kahn–Saks 0.2764 bound? — ISOLATED elementary probe 
+    [**PROVEN bounds (probe B, mg-92e6)** ] doubly-stochastic position-matrix / majorization — ISOLATED elementary probe 
+    [**PROVEN · modest, correctly scoped (probe C, mg-f82f)** ] a new direct entropy count on the coherent order — ISOLATED elementary probe
+    [**SOUND negative (probe D, mg-e2de)** ] incomparability-graph local geometry — ISOLATED elementary probe 
+    [**SOUND negative · actionable (mg-210d)** ] best *constant* lower bound on `λ_std`, primitive/frozen — ISOLATED elementary probe (doc: 
+    [**RED-for-lever · AMBER-redirect · CORRECTS MERGED WORK (mg-a58f; audited mg-d112 — CONFIRMED, 40 ledger rows re-derived, 0 BROKEN)** ]
+    [**OVERSTATED · core CONFIRMED-conditionally · RE-SHAPES (R) (mg-88bd, no computation; audited mg-e35c — 0 BROKEN mathematics, 2 BROKEN 
+    [**RED-conditional · witness fully CONFIRMED · CORRECTS MERGED WORK (mg-63e3, no computation; audited mg-f825 — OVERSTATED: 0 arithmetic
+    [**RED · UNCONDITIONAL · witness `W*` fully CONFIRMED · DISCHARGES row 11's condition (mg-3af9, no computation; audited mg-c8c6 — OVERST
+    [**GREEN · PROVEN, all finite posets · first proof-carried generalisation in the arc (mg-276d; computation permitted and used — 405 pose
+    [**AMBER-POSITIVE · THE BET IS PRICED, AND THE PRICING IS CARRIED BY A THEOREM THAT SURVIVED AN INDEPENDENT REBUILD (mg-a3d4; computatio
+
+  READ THIS AS THE POPULATION FOR THE NEGATIVE: if (LIB-weak) had been attacked,
+  this index is where the attempt would be recorded, and the corpus's own rule is
+  that the index exists 'so nothing is re-walked'.
+
+==============================================================================
+a7_history done.
+==============================================================================
