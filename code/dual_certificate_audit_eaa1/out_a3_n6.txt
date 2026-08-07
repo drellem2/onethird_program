@@ -1,0 +1,91 @@
+============================================================================================
+A3.1  THE CLAIMED n-INDEXED PATTERN, EXTRAPOLATED OUT OF SAMPLE TO n = 6..12.
+      Predicted dual: lam = 0, t = 1 on every cap row, s = 0, on the consecutive-pairs
+      branch.  Predicted bound: (n-1)/3.  Verified by SUBSTITUTION, no solver.
+============================================================================================
+  [OK ] n= 3: the direct column generator agrees with brute-force filtering of n! (3 columns)
+  [OK ] n= 3: cols=  3 caps=2(=n-1) | dual feasible=True bound=2/3 | fence feasible=True E[inv]=2/3 | upper==lower=True = (n-1)/3 = 2/3
+  [OK ] n= 4: the direct column generator agrees with brute-force filtering of n! (5 columns)
+  [OK ] n= 4: cols=  5 caps=3(=n-1) | dual feasible=True bound=1 | fence feasible=True E[inv]=1 | upper==lower=True = (n-1)/3 = 1
+  [OK ] n= 5: the direct column generator agrees with brute-force filtering of n! (8 columns)
+  [OK ] n= 5: cols=  8 caps=4(=n-1) | dual feasible=True bound=4/3 | fence feasible=True E[inv]=4/3 | upper==lower=True = (n-1)/3 = 4/3
+  [OK ] n= 6: the direct column generator agrees with brute-force filtering of n! (13 columns)
+  [OK ] n= 6: cols= 13 caps=5(=n-1) | dual feasible=True bound=5/3 | fence feasible=True E[inv]=5/3 | upper==lower=True = (n-1)/3 = 5/3
+  [OK ] n= 7: the direct column generator agrees with brute-force filtering of n! (21 columns)
+  [OK ] n= 7: cols= 21 caps=6(=n-1) | dual feasible=True bound=2 | fence feasible=True E[inv]=2 | upper==lower=True = (n-1)/3 = 2
+  [OK ] n= 8: the direct column generator agrees with brute-force filtering of n! (34 columns)
+  [OK ] n= 8: cols= 34 caps=7(=n-1) | dual feasible=True bound=7/3 | fence feasible=True E[inv]=7/3 | upper==lower=True = (n-1)/3 = 7/3
+  [OK ] n= 9: cols= 55 caps=8(=n-1) | dual feasible=True bound=8/3 | fence feasible=True E[inv]=8/3 | upper==lower=True = (n-1)/3 = 8/3
+  [OK ] n=10: cols= 89 caps=9(=n-1) | dual feasible=True bound=3 | fence feasible=True E[inv]=3 | upper==lower=True = (n-1)/3 = 3
+  [OK ] n=11: cols=144 caps=10(=n-1) | dual feasible=True bound=10/3 | fence feasible=True E[inv]=10/3 | upper==lower=True = (n-1)/3 = 10/3
+  [OK ] n=12: cols=233 caps=11(=n-1) | dual feasible=True bound=11/3 | fence feasible=True E[inv]=11/3 | upper==lower=True = (n-1)/3 = 11/3
+  ==> THE PATTERN SURVIVES ITS FIRST OUT-OF-SAMPLE PREDICTION AT n = 6, and at 7..12.
+      It is a THEOREM about the consecutive-pairs branch, and it is not the `<=`
+      direction, which is a maximum over 2^C(n,2) branches.
+
+============================================================================================
+A3.2  SO BREAK IT WHERE IT LIVES.  Independent, DECLARED, NON-exhaustive probe at
+      n = 6: every branch whose incomparable set is `consecutive U S` with
+      |S| <= 2 over the 10 non-consecutive pairs.  mg-131e's witness is NOT used.
+============================================================================================
+  branches probed = 56   primal-feasible = 20   [1.1s]
+  branches with value > (n-1)/3 = 5/3: 4
+      S = [(0, 4), (1, 4)]   value = 11/6 = 1.8333   excess = 1/6
+      S = [(0, 5), (1, 4)]   value = 11/6 = 1.8333   excess = 1/6
+      S = [(1, 4)]   value = 11/6 = 1.8333   excess = 1/6
+      S = [(1, 4), (1, 5)]   value = 11/6 = 1.8333   excess = 1/6
+  [OK ] n=6: an INDEPENDENTLY found branch beats (n-1)/3 = 5/3
+  BEST FOUND: S = [(1, 4)]  value = 11/6 = 1.8333  eps_spec = 11/35  (conjectured 2/(n+1) = 2/7)
+  [OK ]   best witness: nonnegative masses
+  [OK ]   best witness: total mass is exactly 1
+  [OK ]   best witness: no comparable pair carries flip mass
+  [OK ]   best witness: every incomparable flip probability <= 1/3
+  [OK ]   best witness: per-slot symmetry on every incomparable pair
+  [OK ]   best witness: E[inv] recomputed by substitution = 11/6 (matches the solver's 11/6)
+  [OK ]   best witness: its comparable set IS transitive -- a genuine comparability pattern, not an artefact of the non-transitive superset
+  the witness (6 atoms):
+      mass    1/6  perm (0, 1, 2, 3, 5, 4)  inv=1
+      mass    1/6  perm (0, 1, 3, 2, 5, 4)  inv=2
+      mass    1/6  perm (0, 2, 1, 4, 3, 5)  inv=2
+      mass    1/6  perm (0, 2, 4, 1, 3, 5)  inv=3
+      mass    1/6  perm (1, 0, 2, 3, 4, 5)  inv=1
+      mass    1/6  perm (1, 0, 3, 2, 4, 5)  inv=2
+  flip probabilities: (0, 1)=1/3, (1, 2)=1/3, (1, 4)=1/6, (2, 3)=1/3, (3, 4)=1/3, (4, 5)=1/3
+  [OK ]   my independent best 11/6 is >= mg-131e's published 11/6 (a smaller value would mean I failed to find their branch, not that they are wrong)
+
+============================================================================================
+A3.3  mg-131e's OWN WITNESSES AT n = 6..10, BY SUBSTITUTION IN MY ARITHMETIC.
+      Transcribed by hand from d3_refutation.py; every primitive below is mine.
+============================================================================================
+  [OK ] n= 6: chords=[(1, 4)] | feasible=True | E[inv]=11/6 (claimed 11/6) > (n-1)/3 = 5/3 | eps_spec=11/35 > 2/(n+1) = 2/7
+  [OK ] n= 6: its comparable set is TRANSITIVE
+  [OK ] n= 7: chords=[(1, 4), (2, 5)] | feasible=True | E[inv]=20/9 (claimed 20/9) > (n-1)/3 = 2 | eps_spec=5/18 > 2/(n+1) = 1/4
+  [OK ] n= 7: its comparable set is TRANSITIVE
+  [OK ] n= 8: chords=[(1, 4), (3, 6)] | feasible=True | E[inv]=8/3 (claimed 8/3) > (n-1)/3 = 7/3 | eps_spec=16/63 > 2/(n+1) = 2/9
+  [OK ] n= 8: its comparable set is TRANSITIVE
+  [OK ] n= 9: chords=[(1, 4), (2, 5), (3, 6), (4, 7)] | feasible=True | E[inv]=28/9 (claimed 28/9) > (n-1)/3 = 8/3 | eps_spec=7/30 > 2/(n+1) = 1/5
+  [OK ] n= 9: its comparable set is TRANSITIVE
+  [OK ] n=10: chords=[(1, 4), (3, 6), (5, 8)] | feasible=True | E[inv]=7/2 (claimed 7/2) > (n-1)/3 = 3 | eps_spec=7/33 > 2/(n+1) = 2/11
+  [OK ] n=10: its comparable set is TRANSITIVE
+
+============================================================================================
+A3.4  THE (5n-8)/12 SUB-FAMILY.  d3 says `the value IS (5n-8)/12 at n = 6,8,10`.
+      A witness only ever gives `>=`.  Re-solved here as a branch OPTIMUM.
+============================================================================================
+  [OK ] n=6: chords=[(1, 4)]  branch OPTIMUM = 11/6   (5n-8)/12 = 11/6   (n-1)/3 = 5/3   [0.0s]
+  [OK ] n=8: chords=[(1, 4), (3, 6)]  branch OPTIMUM = 8/3   (5n-8)/12 = 8/3   (n-1)/3 = 7/3   [0.2s]
+  n=10 not re-solved as an optimum here -- declared, see NOT DONE.
+
+============================================================================================
+A3.5  TIGHTNESS / REALISABILITY -- the thing a dual certificate says NOTHING about.
+      One NAMED relation per line.  No poset is enumerated anywhere in this audit.
+============================================================================================
+  [OK ] n=3: uniform L(0<2) has |L|=3 E[inv]=2/3 max flip=1/3 -- IN M_n and ATTAINS.  Tightness holds AT n = 3.
+  [OK ] n=6: uniform L(P) of the REFUTING branch's own poset has |L|=14 E[inv]=23/14 max flip=5/14 > 1/3 -- NOT in M_6, so the n=6 witness is NOT a realisability claim
+  [OK ] n=4: uniform L(P) of the ATTAINING branch has max flip=2/5 > 1/3 -- NOT in M_n, so tightness is NOT established at n=4 and must not be claimed
+  [OK ] n=5: uniform L(P) of the ATTAINING branch has max flip=4/11 > 1/3 -- NOT in M_n, so tightness is NOT established at n=5 and must not be claimed
+
+============================================================================================
+A3 RESULT: ALL CHECKS PASS
+============================================================================================
+python3 -u a3_n6.py 2  1.34s user 0.01s system 90% cpu 1.491 total
