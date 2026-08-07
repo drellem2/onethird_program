@@ -1,0 +1,81 @@
+==============================================================================
+R1 — the 2-chain witness, reproduced BEFORE any repair, and the two symmetries
+==============================================================================
+
+R1.1  THE WITNESS. 2-chain 0 < 1, cut A = {1}. Every linear extension printed.
+       L(P) = [(0, 1)]   (|L(P)| = 1)
+       A = {1}, |A| = 1
+
+            sigma     sigma(A)  |A\sig(A)|  first |A| pos  lib2de0 gives
+           (0, 1)          {1}           0            {0}              1
+
+       E|A\sigma(A)|  by the DEFINITION  = 0
+       E  as lib2de0.E_leak COMPUTES it  = 1
+  OK   the witness reproduces: definition gives 0: 0 / 1
+       population: the 2-chain 0<1, its single linear extension, the single cut A={1}
+       grain:      exact Fraction equality against 0
+  OK   the witness reproduces: convention gives 1: 0 / 1
+       population: same
+       grain:      exact Fraction equality against 1
+  OK   and they DIFFER, so the ticket's finding is REAL: 0 / 1
+       population: same
+       grain:      exact Fraction inequality
+       => the ticket said to STOP and report if this did not reproduce.
+          It reproduced. The finding is real and the audit proceeds.
+
+       and the SAME cut read from the other side, which is R1.3's point in one line:
+       A  = {1}:  definition 0   convention 1
+       A^c= {0}: definition 0   convention 0
+       => the DEFINITION agrees across the cut (0 = 0). The CONVENTION does not
+          (1 != 0). Held over to R1.3 and measured at population scale there.
+
+R1.2  THE RULING IS A TWO-WAY CHOICE, NOT A THREE-WAY ONE.
+      sigma(A) has two natural readings -- image of a POSITION set {p[i] : i in A},
+      and image of an ELEMENT set, i.e. sigma^{-1} in this indexing. They give the
+      SAME COUNT for every (A, sigma), because |A n sigma(A)| = |sigma^{-1}(A) n A|
+      (apply the bijection sigma^{-1} to both members of the intersection).
+      So set(p[:|A|]) is not 'the other reading' -- it is neither reading.
+  OK   |A\sigma(A)| == |A\sigma^{-1}(A)|: 0 / 695482
+       population: ALL permutations of {0..n-1} for n=1..7 (5913 permutations) x ALL 2^n subsets INCLUDING the empty set and the full set = 695482 (permutation, subset) pairs
+       grain:      per-(permutation, subset), integer equality
+       => the two readings are ONE number. Nothing below has to choose between them.
+
+R1.3  THE RULING. Lemma 3.2: |A\sigma(A)| = |A^c\sigma(A^c)|, so Phi_P is a
+      function of the CUT and not of the SIDE. Re-derived here on my own
+      enumeration -- and then the IDENTICAL test run against the convention.
+  OK   DEFINITION: |A\sig(A)| == |A^c\sig(A^c)|: 0 / 683656
+       population: ALL permutations for n=2..7 x ALL 2^n-2 proper cuts = 683656 pairs
+       grain:      per-(permutation, proper cut), integer equality across the cut
+  MEAS CONVENTION: same test, EXPECTED TO FAIL: 457132 / 683656
+       population: ALL permutations for n=2..7 x ALL 2^n-2 proper cuts = 683656 pairs
+       grain:      per-(permutation, proper cut), integer equality across the cut
+       first failure: n=2, sigma=(0, 1), A={0} -> 0, A^c={1} -> 1
+
+       => THE RULING. The convention is not a function of the cut. Conductance IS a
+          function of the cut -- lib2de0.py's own docstring line 17 calls Phi_P 'the
+          same quantity, read as a CONDUCTANCE, minimised over ALL cuts A'. A
+          quantity that disagrees with itself across a cut cannot be minimised over
+          cuts in the sense a Cheeger argument needs, because 'the cut' does not
+          determine its value. THE DEFINITION WINS, and it wins on this, not on
+          being the definition.
+
+R1.4  WHERE THE CONVENTION IS *NOT* WRONG, stated at the same grain, because a
+      repair that cannot say what it preserves is not assessable. A_k = {0..k-1} IS
+      the set of the first k positions, so the two agree on PREFIXES OF e:
+  OK   def == conv on every PREFIX A_k = {0..k-1}: 0 / 34406
+       population: ALL permutations for n=2..7 x prefixes k=1..n-1 = 34406 pairs
+       grain:      per-(permutation, prefix), integer equality
+       => so lib2de0's K_k, E_K and delta_1_prefix are UNAFFECTED, and every
+          Delta_1(A_k) figure mg-2de0 published stands untouched. This is NARROW:
+          prefixes of e ONLY. It does NOT extend to suffixes, to general intervals,
+          or to prefixes of sigma -- and the very next line shows it failing on the
+          suffix of the same size:
+  MEAS def == conv on SUFFIXES -- EXPECTED TO FAIL, this is the guard on R1.4: 19530 / 34406
+       population: ALL permutations for n=2..7 x suffixes of size k=1..n-1 = 34406 pairs
+       grain:      per-(permutation, suffix), integer equality
+       => 19530 of 34406. The agreement is exactly as wide as 'prefix of e' and no
+          wider. Filed in advance as PREDICTIONS.md P14, the slip I bet 35% on.
+
+==============================================================================
+R1 TOTAL BAD: 0
+==============================================================================

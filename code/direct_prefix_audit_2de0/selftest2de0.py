@@ -144,10 +144,62 @@ drill("the SAME comparison fires on a constructed 5/4", F(5, 4) > 1, True)
 drill("Phi* (antichain n=4) == 1/2", A4.phi_star(), F(1, 2))
 drill("Phi* == min over prefixes at antichain n=4", A4.phi_star(), t4)
 print("    and a poset where Phi* is STRICTLY below the prefix minimum must exist, or")
-print("    A3.4's 'strictly smaller on 65 of 431' is unreachable:")
+print("    A3.4's 'strictly smaller on 16 of 431' is unreachable:")
 strict = [P for P in all_posets(4) if P.phi_star() < min(P.delta_1_prefix(k)
                                                         for k in range(1, 4))]
 drill("at least one n=4 poset has Phi* < prefix minimum", len(strict) > 0, True)
+
+# --------------------------------------------------- S7b: the mg-8311 E_leak repair
+print()
+print("S7b E_leak GOING RED ON THE mg-8311 DEFECT. E_leak must read the positions INDEXED")
+print("    BY A, not the first |A| positions. The two agree on every prefix of e, so a")
+print("    drill that only ever tests prefixes cannot see the difference -- which is")
+print("    exactly why the defect survived this file for a whole audit. Every drill below")
+print("    is on a NON-prefix cut.")
+C2 = Poset(2, [(0, 1)], "chain n=2")
+drill("the mg-8311 witness: E_leak(2-chain, A={1}) == 0, NOT 1",
+      C2.E_leak(frozenset({1})), F(0))
+print("    and the SAME cut read from the other side must agree, because conductance is a")
+print("    property of the CUT and not of the SIDE (mg-76b2 Lemma 3.2). The old convention")
+print("    gave 1 on one side and 0 on the other; that asymmetry is the defect's signature:")
+drill("E_leak(2-chain, A={1}) == E_leak(2-chain, A^c={0})",
+      C2.E_leak(frozenset({1})), C2.E_leak(frozenset({0})))
+print("    the same symmetry across EVERY cut of EVERY poset to n=5, which is the property")
+print("    the old convention violated on 457132 of 683656 (permutation, cut) pairs:")
+asym = 0
+pairs = 0
+for P in named_posets(5) + all_posets(4):
+    full = frozenset(range(P.n))
+    for size in range(1, P.n):
+        for S in combinations(range(P.n), size):
+            A = frozenset(S)
+            pairs += 1
+            if P.E_leak(A) != P.E_leak(full - A):
+                asym += 1
+drill(f"E_leak is a function of the CUT on all {pairs} (poset, cut) pairs", asym, 0)
+print("    and a CONSTRUCTED asymmetry must be detected, or the check above is vacuous:")
+drill("the same comparison fires on a constructed 1 != 0", F(1) != F(0), True)
+print("    the chain is the sharpest positive control: sigma = identity is the ONLY linear")
+print("    extension, so sigma(A) = A and EVERY cut leaks exactly 0. Under the old")
+print("    convention every non-prefix cut of a chain leaked a positive amount:")
+C4 = Poset(4, [(0, 1), (1, 2), (2, 3)], "chain n=4")
+drill("every cut of chain n=4 has E_leak == 0",
+      [C4.E_leak(frozenset(S)) for size in (1, 2, 3)
+       for S in combinations(range(4), size)], [F(0)] * 14)
+drill("so Phi*(chain n=4) == 0", C4.phi_star(), F(0))
+print("    [that last drill is a POSITIVE CONTROL ONLY and is NOT a detector: it passes")
+print("     under the old convention too, because the chain's PREFIX cuts leak 0 either way")
+print("     and Phi* is a minimum. Verified by running it against the old code. Recorded")
+print("     here so no reader counts it as evidence the repair landed -- the detectors are")
+print("     the four drills above it, all of which go red on the old E_leak.]")
+print("    and the repair must NOT have disturbed the prefix agreement, which is what")
+print("    K_k / E_K / delta_1_prefix and every Lemma A/B figure of this audit depend on:")
+bad = 0
+for P in named_posets(5) + all_posets(4):
+    for k in range(1, P.n):
+        if P.E_leak(frozenset(range(k))) != P.E_K(k):
+            bad += 1
+drill("E_leak(A_k) == E_K(k) on every prefix of every poset tested", bad, 0)
 
 # ----------------------------------------------------------- delta, both ways
 print()

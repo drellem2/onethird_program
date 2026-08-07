@@ -1,0 +1,171 @@
+==============================================================================
+R3 — THE RULING: the definition or the convention, and which is load-bearing
+==============================================================================
+
+R3.1  THE POSITIVE ARGUMENT. The corpus's identity (Op-Form :220-227, quoted in
+      mg-76b2 Lemma 2.1) reads <1_A,(I-S_P)1_A> = E|A\sigma(A)|. That identity is
+      what makes 'a bound on 1-rho' and 'a bound on Phi' the same statement, and it
+      is the hinge the whole Cheeger conversion turns on. It is a statement about a
+      MATRIX on one side and a COMBINATORIAL COUNT on the other, so it can decide
+      between two candidate counts. Both are tested against it here.
+
+      Derivation, for the record, so the machine check is checking something known:
+        S_P is an average of permutation matrices M_sigma with (M_sigma)[x,y] = 1
+        iff y = sigma(x). <1_A,(I-M_sigma)1_A> = |A| - |{x in A : sigma(x) in A}|
+        = |A| - |A n sigma^{-1}(A)| = |A\sigma^{-1}(A)| = |A\sigma(A)| by R1.2.
+        Averaging over L(P) gives the identity. The CONVENTION has no such
+        representation: |A| - |A n set(p[:|A|])| is not a bilinear form in 1_A at
+        all -- it reads |A| twice, once as a set and once as a LENGTH.
+  OK   DEFINITION matches <1_A,(I-S_P)1_A>: 0 / 11316
+       population: all 406 posets on {0..n-1} with identity a linear extension, n=2..5, x all 2^n-2 proper cuts = 11316 (poset, cut) pairs
+       grain:      per-(poset, cut), exact Fraction equality; matrix side built from Pr[pos_sigma(x)=i] and symmetrised, count side from the leak function
+  MEAS CONVENTION against the SAME identity: 8178 / 11316
+       population: all 406 posets on {0..n-1} with identity a linear extension, n=2..5, x all 2^n-2 proper cuts = 11316 (poset, cut) pairs
+       grain:      per-(poset, cut), exact Fraction equality; matrix side built from Pr[pos_sigma(x)=i] and symmetrised, count side from the leak function
+       first failure: n=2, rel=[(0, 1)], A=[1]: matrix 0 vs leak 1
+       => the DEFINITION is the quantity the identity computes, on every pair. The
+          CONVENTION is not. This is an independent confirmation of the reading --
+          independent of STATE.md:41's notation, and independent of mg-76b2's
+          instrument, which is not imported here.
+
+      and the same test carried to n=6, so the population matches the 310404 pairs
+      mg-76b2 checked its own version of this identity on (about 20s of CPU):
+  OK   DEFINITION matches the identity at n=6 as well: 0 / 299088
+       population: all 4824 posets at n=6 x all 62 proper cuts = 299088 pairs
+       grain:      per-(poset, cut), exact Fraction equality
+  MEAS CONVENTION at n=6 -- EXPECTED TO FAIL: 251524 / 299088
+       population: the same 299088 pairs
+       grain:      per-(poset, cut), exact Fraction equality
+       CUMULATIVE n=2..6: definition 0 / 310404, convention 259702 / 310404
+  OK   the cumulative population is mg-76b2's 310404 pairs, from a disjoint enumerator: 0 / 1
+       population: all posets n=2..6 with identity a linear extension x all proper cuts
+       grain:      integer equality against the figure at docs/OneThird-C3-PrefixCapture-mg-76b2.md:140
+       => mg-76b2 checked `<1_A,(I-S_P)1_A> = E|A\sigma(A)|` on 310404 pairs and
+          got 0. This instrument checks it on the same 310404 pairs, from its own
+          enumerator and its own matrix builder, and gets 0. That is a
+          REPRODUCTION of mg-76b2's identity check, not a re-run of it -- and it is
+          the strongest single reason the DEFINITION is the right reading.
+
+R3.2  THE CENSUS, by PARSING rather than grepping. mg-4d3b's audit recorded a source
+      census that read its own PROSE as CODE; a grep for `phi_star` matches this
+      docstring. An `ast` walk over mg-2de0's own files cannot. Every attribute
+      access or definition named E_leak / phi / phi_star / K_k / E_K, with its line:
+                         file  line           name      kind  source
+                a1_lemma_a.py   125            E_K call/attr  lhs = sum(P.E_K(k) for k in range(1, P.n))
+                a1_lemma_a.py   183            E_K call/attr  lhs = sum(P.E_K(k) for k in range(1, P.n))
+                a2_lemma_b.py    96 delta_1_prefix call/attr  truth = min(P.delta_1_prefix(k) for k in ks)
+                a2_lemma_b.py   111            E_K call/attr  sharp = sum(P.E_K(k) for k in ks) / denom_exact(P.n,
+                a2_lemma_b.py   177 delta_1_prefix call/attr  truth = min(P.delta_1_prefix(k) for k in ks)
+                a2_lemma_b.py   206 delta_1_prefix call/attr  truth = min(P.delta_1_prefix(k) for k in ks)
+                a2_lemma_b.py   238 delta_1_prefix call/attr  truth = min(P.delta_1_prefix(k) for k in range(1, P.
+                a2_lemma_b.py   252 delta_1_prefix call/attr  truth = min(P.delta_1_prefix(k) for k in ks)
+                a2_lemma_b.py   290            E_K call/attr  and all(P.E_K(k) == ac_E_K(n, k) for k in range(1, n
+                a2_lemma_b.py   291 delta_1_prefix call/attr  and all(P.delta_1_prefix(k) == ac_delta1(n, k) for k
+             a3_nonvacuity.py    84            phi call/attr  if P.phi(frozenset(S)) > 1:
+             a3_nonvacuity.py   135 delta_1_prefix call/attr  m_pre = min(P.delta_1_prefix(k) for k in range(1, P.
+             a3_nonvacuity.py   136       phi_star call/attr  ps = P.phi_star()
+             a3_nonvacuity.py   159 delta_1_prefix call/attr  m_pre = min(P.delta_1_prefix(k) for k in range(1, P.
+             a3_nonvacuity.py   160       phi_star call/attr  if P.phi_star() != m_pre:
+             a3_nonvacuity.py   162       phi_star call/attr  print(f"       BAD {P.name}: Phi* {P.phi_star()} != 
+                   lib2de0.py    31            K_k       def  def K_k(perm, k):
+                   lib2de0.py    58            K_k      name  return sum(K_k(perm, k) for k in range(1, n))
+                   lib2de0.py   120            E_K       def  def E_K(self, k):
+                   lib2de0.py   124            K_k      name  self._cache[key] = F(sum(K_k(p, k) for p in les), le
+                   lib2de0.py   139 delta_1_prefix       def  def delta_1_prefix(self, k):
+                   lib2de0.py   141            E_K call/attr  return self.E_K(k) / min(k, self.n - k)
+                   lib2de0.py   143         E_leak       def  def E_leak(self, A):
+                   lib2de0.py   175            phi       def  def phi(self, A):
+                   lib2de0.py   178         E_leak call/attr  return self.E_leak(A) / min(a, self.n - a)
+                   lib2de0.py   180       phi_star       def  def phi_star(self):
+                   lib2de0.py   186            phi call/attr  v = self.phi(frozenset(S))
+              selftest2de0.py    42            K_k      name  drill("K_1((1,0,2)) == 1  [A_1={0}, first position h
+              selftest2de0.py    43            K_k      name  drill("K_2((1,0,2)) == 0  [A_2={0,1}, first two posi
+              selftest2de0.py    48            K_k      name  drill("K_k(identity) all zero", [K_k((0, 1, 2, 3), k
+              selftest2de0.py   116            E_K call/attr  drill("witness E[K_1] == 1/3", W.E_K(1), F(1, 3))
+              selftest2de0.py   117            E_K call/attr  drill("witness E[K_2] == 1/3", W.E_K(2), F(1, 3))
+              selftest2de0.py   118            E_K call/attr  drill("Lemma A holds on the witness", W.E_K(1) + W.E
+              selftest2de0.py   118            E_K call/attr  drill("Lemma A holds on the witness", W.E_K(1) + W.E
+              selftest2de0.py   119 delta_1_prefix call/attr  truth = min(W.delta_1_prefix(k) for k in (1, 2))
+              selftest2de0.py   130 delta_1_prefix call/attr  t4 = min(A4.delta_1_prefix(k) for k in (1, 2, 3))
+              selftest2de0.py   139            phi call/attr  drill("Phi(antichain n=4, A={0}) == 3/4", A4.phi(fro
+              selftest2de0.py   141            phi call/attr  any(A4.phi(frozenset(S)) > 1 for size in (1, 2, 3)
+              selftest2de0.py   144       phi_star call/attr  drill("Phi* (antichain n=4) == 1/2", A4.phi_star(), 
+              selftest2de0.py   145       phi_star call/attr  drill("Phi* == min over prefixes at antichain n=4", 
+              selftest2de0.py   148 delta_1_prefix call/attr  strict = [P for P in all_posets(4) if P.phi_star() <
+              selftest2de0.py   148       phi_star call/attr  strict = [P for P in all_posets(4) if P.phi_star() <
+              selftest2de0.py   161         E_leak call/attr  C2.E_leak(frozenset({1})), F(0))
+              selftest2de0.py   166         E_leak call/attr  C2.E_leak(frozenset({1})), C2.E_leak(frozenset({0}))
+              selftest2de0.py   166         E_leak call/attr  C2.E_leak(frozenset({1})), C2.E_leak(frozenset({0}))
+              selftest2de0.py   177         E_leak call/attr  if P.E_leak(A) != P.E_leak(full - A):
+              selftest2de0.py   177         E_leak call/attr  if P.E_leak(A) != P.E_leak(full - A):
+              selftest2de0.py   187         E_leak call/attr  [C4.E_leak(frozenset(S)) for size in (1, 2, 3)
+              selftest2de0.py   189       phi_star call/attr  drill("so Phi*(chain n=4) == 0", C4.phi_star(), F(0)
+              selftest2de0.py   200            E_K call/attr  if P.E_leak(frozenset(range(k))) != P.E_K(k):
+              selftest2de0.py   200         E_leak call/attr  if P.E_leak(frozenset(range(k))) != P.E_K(k):
+
+       => 15 call sites OUTSIDE lib2de0.py reach E_leak, all of them
+          through phi / phi_star, and they live in exactly two files:
+            a3_nonvacuity.py: lines [84, 136, 160, 162]
+            selftest2de0.py: lines [139, 141, 144, 145, 148, 161, 166, 177, 187, 189, 200]
+  OK   E_leak is reached from exactly two files, a3_nonvacuity.py and selftest2de0.py: 0 / 1
+       population: every .py file in direct_prefix_audit_2de0, AST-walked, 51 sites total
+       grain:      set equality on the parsed file names
+       and the PREFIX machinery (K_k / E_K / delta_1_prefix) is reached from ['a1_lemma_a.py', 'a2_lemma_b.py', 'a3_nonvacuity.py', 'selftest2de0.py'],
+       which by R1.4 is UNAFFECTED by the repair. The blast radius is Phi only.
+
+R3.3  THE LOAD-BEARING TEST -- the question the ticket actually asks. Is there any
+      assertion mg-2de0 PUBLISHED that is TRUE under the convention and FALSE under
+      the definition? If there is, the definition does not simply win. mg-2de0's
+      Phi assertions are three, and each is evaluated under BOTH conventions:
+
+        (i)   Phi_P(A) <= 1 for every cut                 [A3.2, published 0/12702]
+        (ii)  Phi* <= min_k Delta_1(A_k) for every poset  [A3.4, published 0/431]
+        (iii) Phi* == min_k Delta_1(A_k) at the antichain [A3.5, published 0/6]
+
+      on MY population (all posets n=2..5) rather than mg-2de0's -- R4 re-runs
+      mg-2de0's own population through mg-2de0's own scripts:
+          assertion             convention             definition
+                (i)              0 / 11316              0 / 11316
+               (ii)                0 / 406                0 / 406
+              (iii)                  0 / 6                  0 / 6
+  OK   all three of mg-2de0's Phi assertions hold under the DEFINITION too: 0 / 11728
+       population: (i) 11316 (poset, cut) pairs; (ii) 406 posets; (iii) antichains n=2..7
+       grain:      exact Fraction comparisons, three assertions at their own grains
+  OK   NO published assertion is true under the convention and false under the definition -- the convention is NOT load-bearing: 0 / 1
+       population: the three assertions above
+       grain:      conjunction: every assertion holds in both columns
+
+R3.4  THE RULING, stated explicitly before any code changes.
+
+      THE DEFINITION IS CORRECT. lib2de0.E_leak IS DEFECTIVE AND IS REPAIRED.
+
+      The ruling rests on three things, in order of weight, and NOT on the fact
+      that the definition is the definition:
+
+      1. THE CONVENTION IS NOT A CONDUCTANCE. Conductance is a property of a CUT.
+         R1.3 measured |A\sig(A)| != |A^c\sig(A^c)| under the convention on 457132
+         of 683656 (permutation, cut) pairs to n=7. lib2de0.py:17 calls Phi_P 'the
+         same quantity, read as a CONDUCTANCE, minimised over ALL cuts A'. Under the
+         convention 'the cut' does not determine the value, so minimising over cuts
+         is not a well-posed operation in the sense the Cheeger argument needs.
+         The definition satisfies the symmetry on all 683656 pairs.
+
+      2. THE DEFINITION IS WHAT THE CORPUS'S MATRIX IDENTITY COMPUTES. R3.1, 0
+         exceptions for the definition and a failure count for the convention, on a
+         matrix built here from Pr[pos_sigma(x)=i] and on 406 posets.
+
+      3. THE CONVENTION IS NOT LOAD-BEARING. R3.3: all three of mg-2de0's published
+         Phi assertions hold under BOTH readings, so nothing mg-2de0 concluded
+         requires the convention. R3.2 bounds the blast radius by PARSING: two
+         files, and the prefix machinery is untouched.
+
+      WHAT THE CONVENTION ACTUALLY IS, named so it is not mistaken for a variant
+      reading: |A| - |A n set(p[:|A|])| measures how far A is from being an INITIAL
+      SEGMENT under sigma. That is a real and meaningful quantity -- it is the
+      natural generalisation of K_k in the direction of 'prefix-ness' rather than of
+      'function application', which is why the slip is an easy one and why it agrees
+      with K_k on prefixes. It is simply not Delta_1 and not Phi_P.
+
+==============================================================================
+R3 TOTAL BAD: 0
+==============================================================================

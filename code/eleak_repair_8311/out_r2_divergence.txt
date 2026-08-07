@@ -1,0 +1,90 @@
+==============================================================================
+R2 — the divergence, counted from my own enumeration (the ticket's 8178 is NOT
+     an input to this script; whether I land on it is PREDICTIONS.md P1)
+==============================================================================
+
+R2.1  first the POPULATION, so the denominator is not taken on trust. Posets on
+      {0..n-1} with the identity a linear extension, grown-and-closed rather than
+      masked-and-filtered, so agreement with mg-2de0's 40 and 357 is a real check:
+         n   posets  cuts each    pairs  lib2de0 says
+         2        2          2        4              
+         3        7          6       42              
+         4       40         14      560            40
+         5      357         30    10710           357
+                406               11316
+  OK   my poset counts agree with mg-2de0's stated 40 (n=4) and 357 (n=5): 0 / 2
+       population: n=4 and n=5, the two n where mg-2de0 states a count in its own transcript
+       grain:      per-n, integer equality against the count printed in a3_nonvacuity.py
+       => the denominator is REPRODUCED, not adopted.
+
+R2.2  the DIVERGENCE, per n and in total. A pair (P, A) diverges iff the two
+      EXPECTATIONS over L(P) differ -- not iff some single linear extension
+      differs, which would be a looser and larger count.
+         n    pairs  diverge    agree  % diverge
+         2        4        1        3      25.0%
+         3       42       18       24      42.9%
+         4      560      329      231      58.8%
+         5    10710     7830     2880      73.1%
+              11316     8178     3138      72.3%
+
+       MY COUNT: 8178 of 11316 (poset, cut) pairs diverge at n <= 5.
+       THE TICKET'S FIGURE: 8178 of 11316.
+  OK   my independent recount equals the ticket's 8178 of 11316: 0 / 1
+       population: all posets n=2..5 with identity a linear extension x all 2^n-2 proper cuts
+       grain:      two integer equalities, numerator and denominator separately
+       => CONFIRMED INDEPENDENTLY. PREDICTIONS.md P1 HIT.
+
+R2.3  the SMALLEST witness, found by my own search order rather than quoted. Search
+      order is n ascending, then poset by relation-size ascending, then cut by size
+      ascending -- so 'smallest' means smallest n first, and is stated as such:
+       n = 2, poset relation = [(0, 1)], A = [1]
+       |L(P)| = 1, L(P) = [(0, 1)]
+       definition 0   convention 1
+  OK   the smallest witness IS the ticket's 2-chain 0<1 with A={1}, def 0 / conv 1: 0 / 1
+       population: the first divergence encountered in the search order stated above
+       grain:      conjunction of five exact equalities: n, relation, cut, and both values
+
+R2.4  THE SIGN, which nobody has measured. Does the convention OVER-charge leakage,
+      UNDER-charge it, or both? PREDICTIONS.md P9 bets 70% that it never
+      under-charges. Measured per (poset, cut) on EXPECTATIONS, and separately per
+      (linear extension, cut) on the raw integer counts:
+       on EXPECTATIONS:  convention > definition on 6056, < on 2122, == on 3138
+  MEAS convention never UNDER-charges, on expectations: 2122 / 11316
+       population: all posets n=2..5 x all 2^n-2 proper cuts = 11316 pairs
+       grain:      per-(poset, cut), exact Fraction comparison of the two expectations
+       on RAW COUNTS:    convention > definition on 59443, < on 32897, == on 94576
+  MEAS convention never UNDER-charges, on raw per-extension counts: 32897 / 186916
+       population: the same posets and cuts, every linear extension of each = 186916 triples
+       grain:      per-(poset, cut, linear extension), integer comparison
+       => the convention errs in BOTH directions. PREDICTIONS.md P9 MISSED, and
+          R4 cannot predict the direction the `65 of 431` moves -- it must be
+          measured on both sides, which R4 does anyway.
+
+R2.5  n = 6, which PREDICTIONS.md declared a STRETCH GOAL and not a promise. It
+      finished, in about 15 seconds of CPU, so it is here rather than excused.
+      Two things come out of it, and the second is worth more than the first:
+       posets at n=6: 4824     cuts each: 62     pairs: 299088
+       diverge: 251524 of 299088 (84.1%)
+       CUMULATIVE n=2..6: 5230 posets, 310404 (poset, cut) pairs, 259702 diverge (83.7%)
+
+       and the CROSS-CHECK, which is why this section earns its runtime: mg-76b2
+       reports 5230 posets and 310404 (poset, cut) pairs for n=2..6, from an
+       instrument this one shares no code with. My enumerator GROWS closed relation
+       sets; lib2de0's MASKS over 2^C(n,2) candidates and filters. Two algorithms,
+       two authors, one number -- or not:
+       mine: 5230 posets / 310404 pairs        mg-76b2: 5230 posets / 310404 pairs
+  OK   my n=2..6 population equals mg-76b2's 5230 posets and 310404 pairs: 0 / 2
+       population: all posets on {0..n-1} with identity a linear extension, n=2..6, grown-and-closed
+       grain:      two integer equalities against the figures printed at docs/OneThird-C3-PrefixCapture-mg-76b2.md:140 and :382
+       => the DENOMINATOR of this whole arc's Phi work is now confirmed from two
+          independent enumerators. This is a check on mg-76b2's population, not on
+          its conclusion, and it does not touch C_3 -- lib76b2 is never imported.
+       => the divergence rises with n (25%, 43%, 59%, 73%, 84%), which is the shape
+          to expect: the fraction of cuts that are PREFIXES of e is (n-1)/(2^n-2)
+          and falls off exponentially, and prefixes are exactly where the two
+          conventions agree. So the defect is not a small-n artefact getting
+          smaller -- it gets WORSE as n grows, and 72% at n<=5 understates it.
+
+==============================================================================
+R2 TOTAL BAD: 0
+==============================================================================

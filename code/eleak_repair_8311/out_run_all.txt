@@ -1,0 +1,19 @@
+### running r1_witness.py -> out_r1_witness.txt
+###   exit 0 (expected 0), 81 lines written
+### running r2_divergence.py -> out_r2_divergence.txt
+###   exit 0 (expected 0), 90 lines written
+### running r3_ruling.py -> out_r3_ruling.txt
+###   exit 0 (expected 0), 171 lines written
+### running r4_consequences.py -> out_r4_consequences.txt
+###   exit 0 (expected 0), 159 lines written
+
+==============================================================================
+EXIT CODES vs PRE-REGISTERED EXPECTATIONS
+==============================================================================
+
+  ok   r1: exit 0 == expected 0 (81 lines) 
+  ok   r2: exit 0 == expected 0 (90 lines) 
+  ok   r3: exit 0 == expected 0 (171 lines) 
+  ok   r4: exit 0 == expected 0 (159 lines) 
+
+ALL 4 SECTIONS ON THEIR PRE-REGISTERED EXIT CODES, ALL NON-EMPTY.

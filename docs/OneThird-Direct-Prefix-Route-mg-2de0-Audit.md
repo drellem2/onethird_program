@@ -197,9 +197,25 @@ the antichain kills the chain one step earlier than the square. The **conclusion
 non-vacuous where spectral is vacuous) survives intact; the square's price is real and is
 measured correctly in §4, which is the only place it can be read off.
 
+> ⚠️ **A FIGURE ON THIS PAGE WAS CORRECTED BY mg-8311, AND IT IS NAMED RATHER THAN QUIETLY
+> REPLACED.** `strict on 65 of them` in the next paragraph **was `65` and is now `16`.** The
+> instrument that produced it, `lib2de0.E_leak`, computed the first `|A|` **positions** rather
+> than the positions **indexed by** `A` — a defect found by mg-76b2 beside its own work
+> (`OneThird-C3-PrefixCapture-mg-76b2.md` §8), ruled on and repaired by mg-8311. **`65` was
+> wrong when this document was published.** What did *not* move, checked and not assumed:
+> `Φ_P(A) ≤ 1` on 12702 pairs, `Φ* ≤ min_k Δ₁(A_k)` on 431 posets, `Φ* = min_k Δ₁(A_k)` at
+> the antichain, and **every `Δ₁(A_k)` figure in this document** — the prefix machinery routes
+> through `E_K`, not through `E_leak`, and the two readings coincide on every prefix of `e`.
+> `2/3`, `1/2`, `√2` and `4/3` are all evaluated at the antichain, where the two readings
+> agree at *every* cut, so §Priority 2's arithmetic is untouched. Re-running mg-2de0's whole
+> suite after the repair changed **one line of one transcript**. See
+> [`OneThird-Eleak-Repair-mg-8311.md`](OneThird-Eleak-Repair-mg-8311.md) and
+> `code/eleak_repair_8311/`.
+
 **Is the comparison like-for-like? Yes — and better than that.** Direct bounds
 `min_k Δ₁(A_k)` (prefixes); Cheeger bounds `Φ*` (all cuts). `Φ* ≤ min_k Δ₁(A_k)` always —
-verified, 0 exceptions / 431 posets, strict on 65 of them. So the direct route bounds the
+verified, 0 exceptions / 431 posets, strict on 16 of them (**`65` as first published; corrected
+by mg-8311, see the box above**). So the direct route bounds the
 **larger, harder** number and still gets the better answer: the comparison is **conservative in
 the direct route's favour**. And at the antichain specifically, `Φ* = min_k Δ₁(A_k)` **exactly**
 (0 exceptions, `n=2..7`) — the prefix family already attains the global cut minimum there, so at
