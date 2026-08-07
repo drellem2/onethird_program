@@ -41,7 +41,7 @@ Exact rationals throughout. There is no floating-point number on any decision pa
 | `a5_construction.py` | the `≥` direction at `n = 3..20` by substitution; the surrogate; the disjunctive aggregate |
 | `a6_instrument.py` | **differential audit of `lp200d.measure_report`**, the load-bearing part per `pm-onethird` |
 | `a7_family.py` | brief item 3's deliverable: a family of measures that **beats** `(n−1)/3` |
-| `a8_downstream.py` | **pm-onethird's disjoint re-check** of `mg-131e`'s and `mg-00a1's witnesses |
+| `a8_downstream.py` | **pm-onethird's disjoint re-check** of `mg-131e`'s and `mg-00a1`'s witnesses |
 
 ## Running
 
