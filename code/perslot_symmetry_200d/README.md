@@ -4,8 +4,8 @@ Document: [`docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md`](../../docs/OneT
 Predictions: [`PREDICTIONS.md`](PREDICTIONS.md), committed at `b5784ee` **before any script here
 existed**. Outcomes: [`OUTCOMES.md`](OUTCOMES.md).
 
-Parent: `mg-6bc2` (`90d19e7`), on branch **`polecat-a6bc2`, not merged to `main`**. Its
-`code/pairbias_sharpening_6bc2/` is read out of that branch. **No code is shared with it** — the
+Parent: `mg-6bc2`, read out of branch `polecat-a6bc2` (`90d19e7`) while it was unmerged; it
+**landed on `main` as `e1f7bb2`** at 2026-08-07 18:21, content-identical (rebase only). **No code is shared with it** — the
 simplex here is two-phase (it has to be: `Σ μ = 1` and the symmetry equalities cannot be
 expressed in a form where the origin is feasible), and reproducing `mg-6bc2`'s theorem on it is
 one of the controls (`S1`).
