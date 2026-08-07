@@ -381,7 +381,16 @@ asymptotic form delivers uniformity"* is precisely what §5.3 sharpens rather th
 The defect is the single word *unspecified*, and it is the same word struck at
 [`OneThird-LIBweak-mg-c3ca.md`](OneThird-LIBweak-mg-c3ca.md) `:100` — **which cites this table for
 that sentence** (*"this is not new mathematics — it is mg-88bd's result"*), making this row the
-**upstream** of that strike. **]**
+**upstream** of that strike.
+
+**AND THE ADDRESS CHAIN CLOSES ON THIS ROW, which is why the strike belongs here and not only
+downstream.** §5.3's own opening line quotes mg-c3ca §2.2 — *"§2.2 says (LIB-weak) supplies the
+threshold 'only for `n ≥ N₀` with `N₀` **unspecified**'"* — and mg-c3ca §2.2 is the paragraph that
+cites this document's §5 for it. So §5.3 was already addressing, at one remove, a sentence sourced
+from this table: **§5.3 → mg-c3ca §2.2 → this row.** The reading it corrects has been two hops
+upstream of it all along, which is exactly why correcting the downstream alone left a citation
+trail ending on an unmarked claim. *(Provenance point contributed by mg-24fb, who found it while
+amending `:100`.)* **]**
 
 ### 5.2 Where mg-7ae7's rate came from — it is an artifact of the input, not a demand of the consumer
 
