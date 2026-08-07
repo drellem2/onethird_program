@@ -1,0 +1,128 @@
+==============================================================================
+mg-407f a1 -- mg-cf83 RUN against real broken clones, in three arms
+==============================================================================
+  arena: /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg407f_vn9mx664
+  subject: /Users/daniel/.pogo/polecats/a407f/code/census_repair_f3ff
+
+------------------------------------------------------------------------------
+ANTI-VACUITY -- the broken arm must be broken FOR THE RIGHT REASON
+------------------------------------------------------------------------------
+    [PASS] bad1: origin/main RESOLVES LOCALLY despite the broken URL
+           origin/main = b7b6941b4bb3 -- so an UNKNOWN below is a FAILED FETCH, not an absent ref
+    [PASS] bad1: a real `git fetch origin` really FAILS
+           rc=128: fatal: '/var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg407f_vn9mx664/bad1/../no_such_r
+    [PASS] bad2: origin/main RESOLVES LOCALLY despite the broken URL
+           origin/main = 42499a568f97 -- so an UNKNOWN below is a FAILED FETCH, not an absent ref
+    [PASS] bad2: a real `git fetch origin` really FAILS
+           rc=128: fatal: '/var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg407f_vn9mx664/bad2/../no_such_r
+
+------------------------------------------------------------------------------
+ARM H  both clones HEALTHY -- THE MUTATION CONTROL
+------------------------------------------------------------------------------
+    s1_rows.py        exit=0   git-fetch spawned=2 exits=[0, 0]
+    s2_controls.py    exit=0   git-fetch spawned=4 exits=[0, 0, 0, 0]
+    s3_graph.py       exit=0   git-fetch spawned=2 exits=[0, 0]
+
+------------------------------------------------------------------------------
+ARM B  both clones BROKEN -- the audited failure
+------------------------------------------------------------------------------
+    s1_rows.py        exit=1   git-fetch spawned=2 exits=[128, 128]
+    [PASS] ARM B/s1_rows.py: `git fetch origin` was ACTUALLY SPAWNED
+           2 spawn(s) observed via the PATH shim
+    [PASS] ARM B/s1_rows.py: and it ACTUALLY FAILED
+           exit codes [128, 128] (128 = git fatal)
+    s2_controls.py    exit=1   git-fetch spawned=2 exits=[128, 128]
+    [PASS] ARM B/s2_controls.py: `git fetch origin` was ACTUALLY SPAWNED
+           2 spawn(s) observed via the PATH shim
+    [PASS] ARM B/s2_controls.py: and it ACTUALLY FAILED
+           exit codes [128, 128] (128 = git fatal)
+    s3_graph.py       exit=0   git-fetch spawned=2 exits=[128, 128]
+    [PASS] ARM B/s3_graph.py: `git fetch origin` was ACTUALLY SPAWNED
+           2 spawn(s) observed via the PATH shim
+    [PASS] ARM B/s3_graph.py: and it ACTUALLY FAILED
+           exit codes [128, 128] (128 = git fatal)
+
+------------------------------------------------------------------------------
+ARM M  MIXED: repo 1 healthy, repo 2 BROKEN -- mg-cf83's ARM P at the OPPOSITE orientation
+------------------------------------------------------------------------------
+    s1_rows.py        exit=1   git-fetch spawned=2 exits=[0, 128]
+    s2_controls.py    exit=1   git-fetch spawned=2 exits=[0, 128]
+    s3_graph.py       exit=0   git-fetch spawned=2 exits=[0, 128]
+
+==============================================================================
+CHECK 1 -- s1_rows.py UNDER A REAL FETCH FAILURE (ARM B)
+==============================================================================
+    [PASS] F1 ABSENT under a real fetch failure (asserts all rows checked)
+           literal 'are now checked against the tree'
+    [PASS] F2 ABSENT under a real fetch failure (two zeros where nothing was measured)
+           literal 'WRONG on 0 of its'
+    [PASS] F3 ABSENT under a real fetch failure (supersession claimed from nothing)
+           literal 'of 4 checked, 0 refuted'
+    [PASS] F4 ABSENT under a real fetch failure (unmeasured depth rendered as a measured zero)
+           literal '0 / 0'
+    [PASS] F5 ABSENT -- no TypeError on len(None)
+    [PASS] P15(b) the SUMMARY BLOCK HEADER is present in stdout
+    [PASS] P15(c) stdout CONTINUES past the header (>=20 lines)
+           57 lines after it
+    [PASS] P15(a) exit is 1 -- `this run did not happen`, stated
+    [PASS] summary says UNKNOWN, not 0: 'UNKNOWN 4 of 4' present
+    [PASS] summary says UNKNOWN, not 0: '? / ?' present
+    [PASS] summary says UNKNOWN, not 0: 'The census was WRONG on UNKNOWN' present
+    [PASS] summary says UNKNOWN, not 0: '0 of 4 are checked' present
+
+==============================================================================
+CHECK 2 -- THE MUTATION CONTROL: can the check still FAIL? (ARM H)
+==============================================================================
+    [PASS] healthy arm exits 0
+    [PASS] summary reports REAL NUMBERS, not UNKNOWN
+    [PASS] and the load-bearing prose figure is real too
+    [PASS] a GENUINE zero still renders as `0`, not `?` (None and empty are DIFFERENT, not both hidden)
+           rows 3/4 have genuinely 0 successors and print 0 / 0 on ARM H, while ARM B prints ? / ? -- so the guard is not hard-wired
+    [PASS] the two arms are TEXTUALLY DIFFERENT (P16: not the same run twice)
+           healthy 176 lines, broken 119 lines
+
+==============================================================================
+CHECK 5 -- CAN I MAKE THE SUMMARY DISAGREE WITH THE ROWS? (ARM M)
+==============================================================================
+  (ARM M reproduces mg-cf83's own ARM P with the broken repo
+   swapped; it is a second orientation, not an arm they skipped.)
+    [PASS] ARM M: the mix is REAL -- one repo counts, one is UNKNOWN
+           partial information is PRESERVED and shown, not discarded
+    [PASS] ARM M: UNKNOWN is STICKY -- the row goes UNKNOWN
+           a count over part of the population is not a count
+    [PASS] ARM M: and the SUMMARY AGREES with the rows
+    [PASS] ARM M: no row prints a number the summary contradicts
+           4 rows UNKNOWN, summary UNKNOWN -- NO DISAGREEMENT FOUND
+
+==============================================================================
+CHECK 3 -- IS THE RULE SWEPT, OR HELD IN ONE FILE? (SIBLINGS, ARM B)
+==============================================================================
+    [FINDING] s2_controls.py DIES with mg-4d3b's F5 VERBATIM: TypeError: object of type 'NoneType' has no len()
+           the same `len(None)` death mg-cf83 removed from s1_rows.py, alive in the same deliverable, on the same library call
+    [FINDING] s3_graph.py: THE ROWS SAY UNKNOWN AND THE SUMMARY SAYS 0
+           4 row(s) print `UNKNOWN -- a repo could not be read.` and the SCORING block below prints `OBSERVED: 0` -- this is mg-4d3b's F-class defect, alive, in a sibling script
+    [FINDING] s3_graph.py PUBLISHES PREDICTION VERDICTS from a run that measured nothing
+           P8/P9/P10 are scored MISS off unpopulated accumulators; `UNMEASURED`, the third state mg-cf83 added to s1_rows.py, does not exist here
+    [FINDING] s3_graph.py: P9 FLIPS HIT -> MISS purely because a repo could not be read
+           the false zero does not merely print -- it propagates into the deliverable's own published scoreboard
+    [FINDING] s3_graph.py: P10 FLIPS HIT -> MISS purely because a repo could not be read
+           the false zero does not merely print -- it propagates into the deliverable's own published scoreboard
+    [FINDING] s3_graph.py EXITS 0 under a total fetch failure
+           s1_rows.py now exits 1 for `this run did not happen`; its sibling reports success
+
+==============================================================================
+VERDICT OF a1
+==============================================================================
+  checks of THIS instrument: 0 failed
+  findings about the SUBJECT: 6
+    - s2_controls.py DIES with mg-4d3b's F5 VERBATIM: TypeError: object of type 'NoneType' has no len()
+    - s3_graph.py: THE ROWS SAY UNKNOWN AND THE SUMMARY SAYS 0
+    - s3_graph.py PUBLISHES PREDICTION VERDICTS from a run that measured nothing
+    - s3_graph.py: P9 FLIPS HIT -> MISS purely because a repo could not be read
+    - s3_graph.py: P10 FLIPS HIT -> MISS purely because a repo could not be read
+    - s3_graph.py EXITS 0 under a total fetch failure
+
+  s1_rows.py -- mg-cf83's repair -- HOLDS IN ALL THREE ARMS.
+  Its SIBLINGS in the same deliverable do not.
+
+== a1 exit: 0 (findings about mg-cf83 do NOT set this exit; only failures of this instrument do) ==

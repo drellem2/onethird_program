@@ -1,0 +1,117 @@
+==============================================================================
+mg-407f a2 -- CHECK 3: the None/zero merger, swept as a FAMILY
+==============================================================================
+  deliverable: /Users/daniel/.pogo/polecats/a407f/code/census_repair_f3ff
+  ARM B transcript for reachability: out_a1_arms.txt
+
+------------------------------------------------------------------------------
+CENSUS -- 14 site(s) of the idiom family in 7 script(s) of the deliverable
+------------------------------------------------------------------------------
+  or-empty         4 site(s)   -- None -> [] : an unreadable channel becomes an empty one
+  zero-if-not      1 site(s)   -- None -> 0 : `not None` is True, so unread reads as none-found
+  get-default-0    1 site(s)   -- MISSING KEY -> 0 : a row never measured scores as measured-zero
+  or-none-str      8 site(s)   -- empty accumulator -> the WORD `none`, which reads as a result
+  len-unguarded    0 site(s)   -- len() on a value the library may return as None
+
+------------------------------------------------------------------------------
+SITE BY SITE, CLASSIFIED LIVE / LATENT / NOT-A-SITE BY PRINTED EVIDENCE
+------------------------------------------------------------------------------
+  s1_rows.py:24  [zero-if-not]
+      1  `?` and `0` are different answers.  `0 if not gens else len(gens)` merged
+      NOT-A-SITE -- mg-cf83's repaired file.  `cell()` renders None as `?`,
+      and line 102 tests `gens is None` BEFORE `elif not gens`, so the
+      `not` never sees None.  VERIFIED BY ARM H/B: `0 / 0` on healthy
+      rows 3-4, `? / ?` on the same rows when the fetch fails.
+
+  s1_rows.py:68  [or-none-str]
+      print(f"        owner={c.owner or '(none)'}  names={via}")
+      NOT-A-SITE -- `c.owner` is optional metadata, not a measurement channel.
+      None and "" both mean `no owner`; there is no third state to lose.
+      Counted by the regex, NOT billed -- this is the family's false-positive rate.
+
+  s2_controls.py:95  [or-none-str]
+      f"  -- degraded on rows {sorted(r[0] for r in deg) or 'none'}, predicted [1, 2]")
+      UNCLASSIFIED -- no printed fingerprint isolates this site; not billed.
+
+  s2_controls.py:130  [or-empty]
+      succ = L.successors(fm[L.REPOS[0][0]], parent, T) or []
+      LATENT -- fingerprint 'NC3' is ABSENT in the ARM B transcript.
+      the `or []` pair sits in a section after NC1; ARM B dies inside NC1.
+
+  s2_controls.py:131  [or-empty]
+      succ += L.successors(fm[L.REPOS[1][0]], parent, T) or []
+      LATENT -- fingerprint 'NC3' is ABSENT in the ARM B transcript.
+      the `or []` pair sits in a section after NC1; ARM B dies inside NC1.
+
+  s3_graph.py:85  [or-empty]
+      direct = (L.successors(fm[L.REPOS[0][0]], parent, T) or []) + \
+      LATENT -- fingerprint 'commits owned by those tickets' is ABSENT in the ARM B transcript.
+      printed immediately AFTER the `or []` pair; its absence in ARM B proves the pair was never reached.
+
+  s3_graph.py:86  [or-empty]
+      (L.successors(fm[L.REPOS[1][0]], parent, T) or [])
+      LATENT -- fingerprint 'commits owned by those tickets' is ABSENT in the ARM B transcript.
+      printed immediately AFTER the `or []` pair; its absence in ARM B proves the pair was never reached.
+
+  s3_graph.py:170  [get-default-0]
+      g1 = p8_gain.get(1, 0)
+      LIVE -- and this is THE ONE THAT FIRES.  See below.
+
+  s3_graph.py:189  [or-none-str]
+      print(f"      the tree independently found): rows {p10_rows or 'none'}")
+      UNCLASSIFIED -- no printed fingerprint isolates this site; not billed.
+
+  s4_crosscheck.py:76  [or-none-str]
+      print(f"    {f[:9]}  {c.adate.isoformat()}  owner={c.owner or '(none)'}")
+      NOT-A-SITE -- `c.owner` is optional metadata, not a measurement channel.
+      None and "" both mean `no owner`; there is no third state to lose.
+      Counted by the regex, NOT billed -- this is the family's false-positive rate.
+
+  s4_crosscheck.py:84  [or-none-str]
+      print(f"    in the hand list but NOT extracted: {missing_from_extract or 'none'}")
+      UNCLASSIFIED -- no printed fingerprint isolates this site; not billed.
+
+  s4_crosscheck.py:85  [or-none-str]
+      print(f"    extracted but NOT in the hand list: {extra_in_extract or 'none'}")
+      UNCLASSIFIED -- no printed fingerprint isolates this site; not billed.
+
+  s4_crosscheck.py:119  [or-none-str]
+      print(f"      MISSED  {s[:9]}  owner={c.owner or '(none)'}  "
+      NOT-A-SITE -- `c.owner` is optional metadata, not a measurement channel.
+      None and "" both mean `no owner`; there is no third state to lose.
+      Counted by the regex, NOT billed -- this is the family's false-positive rate.
+
+  s4_crosscheck.py:124  [or-none-str]
+      print(f"      ADDED   {s[:9]}  owner={c.owner or '(none)'}  "
+      NOT-A-SITE -- `c.owner` is optional metadata, not a measurement channel.
+      None and "" both mean `no owner`; there is no third state to lose.
+      Counted by the regex, NOT billed -- this is the family's false-positive rate.
+
+------------------------------------------------------------------------------
+THE LIVE ONE, AND WHY THE TICKET'S OWN GREP WOULD HAVE MISSED IT
+------------------------------------------------------------------------------
+  s3_graph.py scores three predictions from accumulators that the row
+  loop `continue`d past without ever populating:
+
+      g1 = p8_gain.get(1, 0)              <-- default 0 for a row never read
+      hit9 = p9_rows.get(3) and p9_rows.get(4)
+      rows {p10_rows or 'none'} ... len(p10_rows)
+
+  NONE of these matches `0 if not gens` or `or []`.  The merger is in the
+  DEFAULT ARGUMENT and in the emptiness of a dict that was never written.
+  Under ARM B this prints `OBSERVED: 0`, `row 3 no, row 4 no`, `rows none`,
+  and scores P8/P9/P10 as MISS -- while the rows twelve lines above say
+  `UNKNOWN -- a repo could not be read.`  P9 and P10 are HIT on ARM H.
+
+  ⚠️ THE SHAPE mg-cf83 GOT RIGHT AND s3 DID NOT: in s1_rows.py every
+  summary figure is a fold over `lines`, the rows' OWN output, so an
+  UNKNOWN row cannot become a zero downstream.  s3_graph.py accumulates
+  into SEPARATE dicts during the loop and folds THOSE.  Same author, same
+  deliverable, same failure -- one path repaired, its neighbour not.
+
+------------------------------------------------------------------------------
+  LIVE:   s3_graph.py:170
+  LATENT: s2_controls.py:130, s2_controls.py:131, s3_graph.py:85, s3_graph.py:86
+------------------------------------------------------------------------------
+
+== a2 exit: 0 (findings about the subject do not set this exit) ==
