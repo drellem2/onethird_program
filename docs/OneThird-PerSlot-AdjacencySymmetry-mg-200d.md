@@ -86,7 +86,7 @@ Both are about its `§5` measurement table, not about its theorem, which reprodu
 
 **THEOREM (`mg-6bc2`, `90d19e7`).** `max_{μ ∈ M_n} E[inv_e] = C(n,2)/3`, attained;
 equivalently `ε_spec = 6E/(n²−1) = n/(n+1)`. Reproduced here on an independent solver at
-`n = 3, 4, 5, 6` (`selftest200d.py` S1, `out_v1_n6.txt`).
+`n = 3, 4, 5, 6` (`selftest200d.py` S1, `out_v1_n6.txt`, `out_v1b_n6_surrogates.txt`).
 
 **The single inherited premise is that the target posets lie in `M_n` at all** — that a frozen
 poset has a coherent reference order. That is `mg-6bc2`'s premise, and `mg-61bb`'s result that
@@ -160,7 +160,13 @@ symmetric" — it is satisfied in both branches, so it is valid for their convex
 | 3 | `1` | `1` | `1` |
 | 4 | `2` | `2` | `2` |
 | 5 | `10/3` | `10/3` | `10/3` |
-| 6 | `5` | *(see `out_v1_n6.txt`)* | *(see `out_v1_n6.txt`)* |
+| 6 | `5` | `5` | `5` |
+
+*(The `n = 6` row is measured in `out_v1b_n6_surrogates.txt`, solved separately: `v1_forms.py 6`
+runs the LITERAL forms first, and at `n = 6` those are 720 columns against 75 **equality** rows,
+so phase 1 carries 76 artificials and did not finish in this run's budget. The surrogate forms
+are inequality-only and solve quickly. **The `n = 6` literal values are therefore NOT measured
+here** — §2's infeasibility table stops at `n = 5` and is not extrapolated.)*
 
 Hand-verified at `n = 3` before any script (`H6`): `μ(id) = 1/3` and `1/6` each on `(0,2,1)`,
 `(1,0,2)`, `(1,2,0)`, `(2,0,1)` is feasible for the caps, satisfies all six surrogate
@@ -424,8 +430,8 @@ Committed at `b5784ee` before any script existed. Kept as written.
   and that landings there are approved before they land; `mg-6bc2`'s own row is not in it yet
   either, so a row here would reference an unmerged parent. The row this document would want is
   **routed to `pm-onethird` with the verdict**, not written unilaterally.
-- **The `n = 6` branch-free literal/surrogate values and the `n = 6` wide-window branches were
-  still solving when this was committed.** `out_v1_n6.txt` and the tail of
-  `out_v3_families.txt` record exactly how far each got; no `n = 6` number is claimed in this
-  document beyond the baseline `5` and the `window w=1` value `5/3`, both of which are printed
-  there.
+- **The `n = 6` LITERAL values and the `n = 6` wide-window branches were not obtained.** The
+  all-pairs literal LP at `n = 6` is 720 columns against 75 equality rows (76 artificials in
+  phase 1); both runs were stopped after ~25 and ~50 minutes rather than block the merge, and
+  each transcript carries a `[RUN HALTED BY mg-200d]` note saying exactly where it stopped. The
+  `n = 6` numbers this document DOES claim are the baseline `5`, both surrogates `5`, and the `window w=1` value `5/3` — all printed in the committed transcripts.
