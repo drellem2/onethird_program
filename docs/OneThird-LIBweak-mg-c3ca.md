@@ -97,9 +97,28 @@ STATE.md's claim is **correct as stated**. Arithmetic only.
 **2.2 Row 8 is not what the architecture consumes — and STATE.md already says so.**
 mg-88bd (`docs/OneThird-lambda-std-Operative-Form.md` §5, merged, audited mg-e35c) derives the
 operative form backwards from L4: `1−λ_std ≤ ε_spec` for an **absolute constant uniform in `n`**,
-explicitly *not* the limit. A limit hypothesis supplies the threshold only for `n ≥ N₀` with `N₀`
-**unspecified**, and the minimal-counterexample argument needs the contradiction *at the actual
-`n`*, with a verified base case below it. So:
+explicitly *not* the limit. A limit hypothesis supplies the threshold only for `n ≥ N₀` with ~~`N₀`
+**unspecified**~~ **no `N₀` that works for the class at all**, and the minimal-counterexample
+argument needs the contradiction *at the actual `n`*, with a verified base case below it. So:
+
+**[THRESHOLD READING SUPERSEDED — mg-24fb, on mg-c4f5 §5.3.** *Unspecified* understates this
+document's own point. The threshold is not merely unknown, it is **underivable from the `o(n²)`
+hypothesis** — **no `N₀` works for the class at all** — so *go and find `N₀`* is a **closed**
+question, not an open one. The argument is
+[`OneThird-LIBweak-mg-c4f5-IndependentAudit.md`](OneThird-LIBweak-mg-c4f5-IndependentAudit.md) §5.3
+— which reads §2.2's own sentence and answers it — landed at `STATE.md` row 8 by mg-5ce3, and it is
+**pointed at here, not restated.** **THE PRECISION THAT MUST TRAVEL WITH THIS, because nothing else
+in this file carries it:** what is false is the **PER-CLASS** statement — *there is an `N₀` such
+that every `f = o(n²)` satisfies (LIB-const) beyond it*. The **PER-FAMILY** statement is **TRUE and
+untouched** — any *given* `f = o(n²)` has some threshold of its own, by the definition of `o()`; it
+is simply not a function of the hypothesis, so it cannot be extracted from it. **"No `N₀` exists"
+full stop is an OVERCLAIM and is not what is written here.** **§2.2's conclusion is unchanged and
+strengthened:** row 8's limit rendering still leaves the architecture's constant form open by
+exactly one quantifier, and that quantifier is now known to be unbridgeable from this hypothesis
+rather than merely unmeasured. **§2.3's second bullet below — *"`o(n²)` gives a constant threshold
+only eventually … the difference is the quantifier over `n`, not a constant"* — is the PER-FAMILY
+reading, is CORRECT, and is deliberately LEFT STANDING.** It is what §5.3 leaves in place, not a
+residue of what §5.3 removed.**]**
 
 > **(LIB-weak) closes the wall as row 8 phrases it, and leaves the wall the architecture
 > actually needs open by exactly one quantifier.** This is not new mathematics — it is mg-88bd's
