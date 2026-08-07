@@ -1,0 +1,116 @@
+==============================================================================
+s3 — MEASURING C_3, in all three currencies
+==============================================================================
+
+CALIBRATION USED, stated per the ticket's instruction:
+  eps_leak = 1/5 = 0.2   (mg-e35c F5 repaired; EMPIRICAL --
+                                mg-3ce3's envelope, 0 RED / 6681 up to 0.20)
+  eps_spec = eps_leak^2/2 = 1/50 = 0.02   (the C_3 = 1 budget)
+  H3 threshold on the literal capture fraction:
+      c >= (1-eps_leak)/(1-eps_spec) = 40/49 = 0.816327
+
+------------------------------------------------------------------------------
+(C0) STRATIFY -- where is 1 - lambda_std = 0, and is C_3 even defined there?
+------------------------------------------------------------------------------
+  Three predicates, all EXACT (no float, no eigenvalue):
+    DISC  the weighted graph a_ij is disconnected   <=>  1 - lambda_std = 0
+    CUT   the poset has an ordinal-sum cut point k  <=>  A_k is an exact split
+    PHI0  Phi* = 0
+
+     n   posets     DISC      CUT     PHI0   all three agree
+     2        2        1        1        1          2 of 2
+     3        7        3        3        3          7 of 7
+     4       40       13       13       13         40 of 40
+     5      357       82       82       82        357 of 357
+     6     4824      754      754      754       4824 of 4824
+
+  VERDICT: the three predicates are the SAME predicate, 0 disagreements
+
+  CONSEQUENCE, and it is the reason this section comes first.  On the
+  ordinal-sum-DECOMPOSABLE posets every currency of C_3 is 0/0: Phi* = 0,
+  Phi*_prefix = 0, 1 - lambda_std = 0, and 1 - rho(A_k) = 0 at the cut point.
+  Those posets are not evidence about C_3 in either direction -- they are the
+  case where Step 5's conclusion holds EXACTLY and the whole chain is vacuous.
+  Every C_3 figure below is therefore restricted to the PRIMITIVE population.
+
+  PRIMITIVE population: 4377 of 5230 posets n=2:1/2, n=3:4/7, n=4:27/40, n=5:275/357, n=6:4070/4824
+
+------------------------------------------------------------------------------
+(C1) THE REGIME -- does any poset in this population sit inside the budget?
+------------------------------------------------------------------------------
+  smallest 1 - lambda_std over the 4377 primitive posets  [FLOAT, Jacobi]:
+      0.0562453324   n=6  rel=[(0, 1), (0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 4), (2, 5), (4, 5)]
+      0.0568917239   n=6  rel=[(0, 1), (0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 4), (2, 5)]
+      0.0568917239   n=6  rel=[(0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 4), (2, 5), (4, 5)]
+      0.0575571099   n=6  rel=[(0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 4), (2, 5)]
+      0.0581520294   n=6  rel=[(0, 2), (0, 3), (0, 4), (0, 5), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5), (4, 5)]
+  the budget requires 1 - lambda_std <= eps_spec = 0.02
+  posets inside the budget: 0 of 4377
+
+  >>> EVERY C_3 FIGURE BELOW IS MEASURED OUTSIDE THE REGIME IT WOULD BE USED IN. <<<
+  This corroborates mg-c4f5 / mg-e35c A1 from a different direction: the master
+  bound excludes the target for non-chain posets on n <= 10 (n <= 100 primitive),
+  and here the SPECTRAL quantity itself never gets near it at any n this
+  population reaches.  A C_3 measured here is a structural datum, not a
+  calibration, and it is reported as one.
+
+------------------------------------------------------------------------------
+(C2) C_3^cut = Phi*_prefix / Phi*   -- EXACT, the conductance currency (L3's own
+     wording).  Op-Form 4.3's C_3 is its SQUARE, because it is spent inside the
+     Cheeger square: Phi*_pref <= C_3^cut * Phi* <= C_3^cut * sqrt(2(1-lambda_std)).
+------------------------------------------------------------------------------
+
+     n   primitive   C_3^cut = 1   max C_3^cut          attained at
+     2          1             1   1          = 1.000000   rel=[]
+     3          4             4   1          = 1.000000   rel=[]
+     4         27            24   3/2        = 1.500000   rel=[(0, 1), (2, 3)]
+     5        275           263   6/5        = 1.200000   rel=[(0, 1)]
+     6       4070          3617   15/8       = 1.875000   rel=[(0, 2), (1, 2), (3, 4), (3, 5)]
+
+  max C_3^cut by n, n = 3..6: 1.0000, 1.5000, 1.2000, 1.8750
+  weakly non-decreasing in n: False      strictly somewhere: True
+
+  READ THIS ROW CAREFULLY.  It is the ONLY currency in which a C_3 bound could be
+  read off a finite population, and a finite population CANNOT establish a bound
+  uniform in n -- it can only REFUTE one.  What the row shows is the direction of
+  travel, and the direction is the wrong one for the conductance reading of L3.
+  This is a NEGATIVE result about that reading and is reported as one.
+
+------------------------------------------------------------------------------
+(C3) C_3^gap and the literal capture fraction c   [lambda_std is FLOAT, Jacobi;
+     Phi and rho are EXACT; the ratio is float only because its denominator is]
+------------------------------------------------------------------------------
+
+     n   primitive   max C_3^gap    min c      c below H3 threshold
+     2          1   (none with 0 < lambda_std)
+     3          4     1.500000   0.750000   1 of 3 primitive posets with lambda_std > 0
+     4         27     1.472917   0.618034   5 of 26 primitive posets with lambda_std > 0
+     5        275     1.989522   0.536219   39 of 274 primitive posets with lambda_std > 0
+     6       4070     2.386087   0.452934   523 of 4069 primitive posets with lambda_std > 0
+
+  H3 threshold: the LITERAL conjecture closes the chain iff c >= 0.816327
+     at eps_leak = 0.2.  At the SUPERSEDED eps_leak = 0.02 / 
+     eps_spec = 2e-4 the same threshold is 0.980196.
+  The threshold MOVED with mg-e35c F5's 100x repair, and Op-Form 4.3's verdict on
+  the literal reading was never re-examined against the repaired value.
+
+  >>> measured outside the regime; see (C1) <<<
+
+------------------------------------------------------------------------------
+(C4) MONOTONICITY, STRATIFIED BY GAP -- the honest test of the theorem's own
+     hypothesis.  s2 found monotonicity is a MINORITY property overall; the
+     conjecture is stated only for a minimal counterexample, where the gap is
+     small.  So: does monotonicity concentrate where the gap is small?
+------------------------------------------------------------------------------
+
+     1 - lambda_std band     primitive posets    monotone dominant eigenvector
+     [0.00, 0.25)              2284                  810   35.5%
+     [0.25, 0.50)              1860                  216   11.6%
+     [0.50, 0.75)               223                    6   2.7%
+     [0.75, 1.01)                10                    5   50.0%
+
+  among the 50 primitive posets with the SMALLEST positive gap: 28 of 50 are monotone
+
+==============================================================================
+s3 VERDICT: ALL CONSISTENCY CHECKS PASS
+==============================================================================
