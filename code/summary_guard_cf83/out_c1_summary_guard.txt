@@ -1,0 +1,176 @@
+==============================================================================
+mg-cf83 c1 -- the summary block under a REAL fetch failure
+==============================================================================
+  SUBJECT: code/census_repair_f3ff/s1_rows.py, run as-is from disk.
+  Clones are throwaway; NO command here runs inside /Users/daniel/research/*
+  and nothing is fetched, checked out, stashed or pulled in either source.
+
+  scratch: /private/tmp/claude-501/-Users-daniel--pogo-polecats-pcf83/ff7e3445-3450-4792-99cc-544935894ec8/scratchpad/cf83b/cf83-tqwo6i_p
+
+------------------------------------------------------------------------------
+ARM H  both clones HEALTHY -- THE MUTATION CONTROL
+------------------------------------------------------------------------------
+  A summary hard-wired to say UNKNOWN would pass arms D and P.  This arm
+  is what makes them mean something, and it is also the regression check:
+  mg-4d3b CONFIRMED `2 of 4` from a disjoint reader, and the repair is not
+  allowed to have moved it.
+  [PASS] REPOS patch applied (an unpatched arm passes VACUOUSLY)
+  s1_rows.py exit: 0
+    |   author    clock: REFUTED  7 successor commit(s)   [onethird_program=7  one_third_width_three=0]
+    |   committer clock: REFUTED  7 successor commit(s)   [onethird_program=7  one_third_width_three=0]
+    |   author    clock: REFUTED  5 successor commit(s)   [onethird_program=4  one_third_width_three=1]
+    |   committer clock: REFUTED  5 successor commit(s)   [onethird_program=4  one_third_width_three=1]
+    |   author    clock: UPHELD   0 successor commit(s)   [onethird_program=0  one_third_width_three=0]
+    |   committer clock: UPHELD   0 successor commit(s)   [onethird_program=0  one_third_width_three=0]
+    |   author    clock: UPHELD   0 successor commit(s)   [onethird_program=0  one_third_width_three=0]
+    |   committer clock: UPHELD   0 successor commit(s)   [onethird_program=0  one_third_width_three=0]
+    |   whole census.  n = 4, and all 4 are now checked against the tree.
+    |   row  ticket    parent    premise `no successor` is   strict gens/commits   loose gens/commits   predicted
+    |    1   mg-e35b   mg-fcf1   REFUTED                         3 / 10              7 / 81         REFUTED
+    |    2   mg-fccb   mg-d112   REFUTED                         2 / 7               7 / 103        REFUTED
+    |    3   mg-a74f   mg-16eb   UPHELD                          0 / 0               0 / 0          UPHELD
+    |    4   mg-dffa   mg-5800   UPHELD                          0 / 0               0 / 0          UPHELD
+    |   The census was WRONG on 2 of its 4 rows and RIGHT on 2.
+    |   4 of 4 checked, 2 refuted.  `2 of 4 wrong` and `4 of 4 wrong` are
+    |   Predictions scored: 4 of 4 hit, 0 missed
+    | == s1 exit: 0 (findings about the census do not set this instrument's exit) ==
+
+  [PASS] exit 0 on the healthy path
+  [PASS] no crash
+  [PASS] summary table agrees with the row sections, row by row -- rows=['REFUTED', 'REFUTED', 'UPHELD', 'UPHELD'] table=['REFUTED', 'REFUTED', 'UPHELD', 'UPHELD']
+  [PASS] real verdicts, no UNKNOWN -- the fix must not answer UNKNOWN when it CAN look
+  [PASS] F2's sentence is still printed when it is TRUE
+  [PASS] mg-4d3b's confirmed figure is unmoved: WRONG on 2, RIGHT on 2 -- a repair that changes a confirmed number is a regression
+  [PASS] the supersession still reads `4 of 4 checked, 2 refuted`
+  [PASS] no `?` in any depth cell when every repo was read -- [('3', '10', '7', '81'), ('2', '7', '7', '103'), ('0', '0', '0', '0'), ('0', '0', '0', '0')]
+  [PASS] nothing is marked UNMEASURED on a fully measured run
+
+------------------------------------------------------------------------------
+ARM D  BOTH remotes broken AFTER cloning -- THE ACCEPTANCE
+------------------------------------------------------------------------------
+  [PASS] anti-vacuity: origin/main RESOLVES LOCALLY in the broken clone -- so a pass cannot come from an absent ref -- this is the incident's shape, not a missing repo
+  [PASS] anti-vacuity: origin/main RESOLVES LOCALLY in the broken clone -- so a pass cannot come from an absent ref -- this is the incident's shape, not a missing repo
+  [PASS] REPOS patch applied (an unpatched arm passes VACUOUSLY)
+  s1_rows.py exit: 1
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=UNKNOWN]
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=UNKNOWN]
+    |   PREDICTED (72e36cb, before any script existed): REFUTED    OBSERVED: UNKNOWN    *** UNMEASURED -- the row could not be read, so this is NOT a miss ***
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=UNKNOWN]
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=UNKNOWN]
+    |   PREDICTED (72e36cb, before any script existed): REFUTED    OBSERVED: UNKNOWN    *** UNMEASURED -- the row could not be read, so this is NOT a miss ***
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=UNKNOWN]
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=UNKNOWN]
+    |   PREDICTED (72e36cb, before any script existed): UPHELD    OBSERVED: UNKNOWN    *** UNMEASURED -- the row could not be read, so this is NOT a miss ***
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=UNKNOWN]
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=UNKNOWN]
+    |   PREDICTED (72e36cb, before any script existed): UPHELD    OBSERVED: UNKNOWN    *** UNMEASURED -- the row could not be read, so this is NOT a miss ***
+    |   ⚠️ THIS RUN DID NOT MEASURE THE CENSUS.  Read no figure below as one.
+    |   whole census.  n = 4, and 0 of 4 are checked against the tree:
+    |    1   mg-e35b   mg-fcf1   UNKNOWN                         ? / ?               ? / ?          REFUTED  <-- UNMEASURED
+    |    2   mg-fccb   mg-d112   UNKNOWN                         ? / ?               ? / ?          REFUTED  <-- UNMEASURED
+    |    3   mg-a74f   mg-16eb   UNKNOWN                         ? / ?               ? / ?          UPHELD  <-- UNMEASURED
+    |    4   mg-dffa   mg-5800   UNKNOWN                         ? / ?               ? / ?          UPHELD  <-- UNMEASURED
+    |     ^ these are counts of VERDICT VALUES.  A 0 there is not a finding
+    |   The census was WRONG on UNKNOWN of its 4 rows and RIGHT on UNKNOWN.
+    |   with 3 rows unchecked.  THIS RUN DOES NOT SUPERSEDE IT: 0 of 4 checked,
+    |     UNMEASURED -- row 2 came back UNKNOWN above, so there are no
+    |     P2 sub-clause: UNMEASURED -- there is no successor set to date.
+    |     `upheld` and the supersession are all unmeasured.   *** UNMEASURED ***
+    |   Predictions scored: NONE -- all 4 rows UNMEASURED (1, 2, 3, 4).
+    | == s1 exit: 1 (a repo could not be read, so THIS RUN MEASURED NOTHING; findings about the census still do not set this exit) ==
+
+  [PASS] there IS a summary block to judge
+  [PASS] F5 GONE: no TypeError, no traceback -- the script completes -- `len(None)` at :131, 30 lines from the docstring forbidding it
+  [PASS] exit is 1, deliberately, and printed with its reason -- an unmeasurable run is not a finding about the census
+  [PASS] F1 GONE: no UNKNOWN row renders its depths as `0 / 0`
+  [PASS] F1 GONE: every depth cell of an UNKNOWN row prints `?` -- [('?', '?', '?', '?'), ('?', '?', '?', '?'), ('?', '?', '?', '?'), ('?', '?', '?', '?')]
+  [PASS] F2 GONE: `all 4 are now checked against the tree` is not printed
+  [PASS] F2 GONE: the count of checked rows is 0 and says so
+  [PASS] F2 GONE: the unreadable rows are NAMED
+  [PASS] F3 GONE: `WRONG on 0 of its 4 rows and RIGHT on 0` is not printed
+  [PASS] F3 GONE: the accuracy sentence says UNKNOWN in both slots
+  [PASS] F3 GONE: the verdict-value tally is labelled as one, not as a finding -- `REFUTED 0 of 4` must not read as `nothing was refuted`
+  [PASS] F4 GONE: `4 of 4 checked, 0 refuted` is not printed
+  [PASS] F4 GONE: the brief's figure is NOT declared superseded
+  [PASS] no prediction is scored MISS off an unread row
+  [PASS] the prediction tally reports NONE, not a hit rate of zero -- `0 of 4 hit, 0 missed` is true of the tally and false as a report
+  [PASS] P5 is UNMEASURED rather than refuted
+  [PASS] P2's per-repo sub-clause prints no count at all
+  [PASS] summary table agrees with the row sections, row by row -- rows=['UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN'] table=['UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN']
+  [PASS] the rows really did say UNKNOWN (else this arm is vacuous) -- rows=['UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN']
+  [PASS] none of mg-4d3b's five literal defect strings appears ANYWHERE -- not in a heading, not in a caveat, not as a quotation
+
+------------------------------------------------------------------------------
+ARM P  ONE remote broken -- half the population is perfectly readable
+------------------------------------------------------------------------------
+  [PASS] anti-vacuity: origin/main RESOLVES LOCALLY in the broken clone -- so a pass cannot come from an absent ref -- this is the incident's shape, not a missing repo
+  [PASS] REPOS patch applied (an unpatched arm passes VACUOUSLY)
+  s1_rows.py exit: 1
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |   PREDICTED (72e36cb, before any script existed): REFUTED    OBSERVED: UNKNOWN    *** UNMEASURED -- the row could not be read, so this is NOT a miss ***
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=1]
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=1]
+    |   PREDICTED (72e36cb, before any script existed): REFUTED    OBSERVED: UNKNOWN    *** UNMEASURED -- the row could not be read, so this is NOT a miss ***
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |   PREDICTED (72e36cb, before any script existed): UPHELD    OBSERVED: UNKNOWN    *** UNMEASURED -- the row could not be read, so this is NOT a miss ***
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |   PREDICTED (72e36cb, before any script existed): UPHELD    OBSERVED: UNKNOWN    *** UNMEASURED -- the row could not be read, so this is NOT a miss ***
+    |   ⚠️ THIS RUN DID NOT MEASURE THE CENSUS.  Read no figure below as one.
+    |   whole census.  n = 4, and 0 of 4 are checked against the tree:
+    |    1   mg-e35b   mg-fcf1   UNKNOWN                         ? / ?               ? / ?          REFUTED  <-- UNMEASURED
+    |    2   mg-fccb   mg-d112   UNKNOWN                         ? / ?               ? / ?          REFUTED  <-- UNMEASURED
+    |    3   mg-a74f   mg-16eb   UNKNOWN                         ? / ?               ? / ?          UPHELD  <-- UNMEASURED
+    |    4   mg-dffa   mg-5800   UNKNOWN                         ? / ?               ? / ?          UPHELD  <-- UNMEASURED
+    |     ^ these are counts of VERDICT VALUES.  A 0 there is not a finding
+    |   The census was WRONG on UNKNOWN of its 4 rows and RIGHT on UNKNOWN.
+    |   with 3 rows unchecked.  THIS RUN DOES NOT SUPERSEDE IT: 0 of 4 checked,
+    |     UNMEASURED -- row 2 came back UNKNOWN above, so there are no
+    |     P2 sub-clause: UNMEASURED -- there is no successor set to date.
+    |     `upheld` and the supersession are all unmeasured.   *** UNMEASURED ***
+    |   Predictions scored: NONE -- all 4 rows UNMEASURED (1, 2, 3, 4).
+    | == s1 exit: 1 (a repo could not be read, so THIS RUN MEASURED NOTHING; findings about the census still do not set this exit) ==
+
+  [PASS] there IS a summary block to judge
+  [PASS] F5 GONE: no TypeError, no traceback -- the script completes -- `len(None)` at :131, 30 lines from the docstring forbidding it
+  [PASS] exit is 1, deliberately, and printed with its reason -- an unmeasurable run is not a finding about the census
+  [PASS] F1 GONE: no UNKNOWN row renders its depths as `0 / 0`
+  [PASS] F1 GONE: every depth cell of an UNKNOWN row prints `?` -- [('?', '?', '?', '?'), ('?', '?', '?', '?'), ('?', '?', '?', '?'), ('?', '?', '?', '?')]
+  [PASS] F2 GONE: `all 4 are now checked against the tree` is not printed
+  [PASS] F2 GONE: the count of checked rows is 0 and says so
+  [PASS] F2 GONE: the unreadable rows are NAMED
+  [PASS] F3 GONE: `WRONG on 0 of its 4 rows and RIGHT on 0` is not printed
+  [PASS] F3 GONE: the accuracy sentence says UNKNOWN in both slots
+  [PASS] F3 GONE: the verdict-value tally is labelled as one, not as a finding -- `REFUTED 0 of 4` must not read as `nothing was refuted`
+  [PASS] F4 GONE: `4 of 4 checked, 0 refuted` is not printed
+  [PASS] F4 GONE: the brief's figure is NOT declared superseded
+  [PASS] no prediction is scored MISS off an unread row
+  [PASS] the prediction tally reports NONE, not a hit rate of zero -- `0 of 4 hit, 0 missed` is true of the tally and false as a report
+  [PASS] P5 is UNMEASURED rather than refuted
+  [PASS] P2's per-repo sub-clause prints no count at all
+  [PASS] summary table agrees with the row sections, row by row -- rows=['UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN'] table=['UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN']
+  [PASS] the rows really did say UNKNOWN (else this arm is vacuous) -- rows=['UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN']
+  [PASS] none of mg-4d3b's five literal defect strings appears ANYWHERE -- not in a heading, not in a caveat, not as a quotation
+
+==============================================================================
+VERDICT OF c1
+==============================================================================
+  Arm H produced real verdicts and mg-4d3b's confirmed `2 of 4`
+  unchanged, so arms D and P are non-vacuous and the repair did not
+  buy its UNKNOWNs by giving up the measurements.
+
+  arm H (healthy):        0 failed check(s)
+  arm D (both broken):    0 failed check(s)
+  arm P (one broken):     0 failed check(s)
+
+  WHAT THIS CONTROL DOES AND DOES NOT ESTABLISH.  It establishes that
+  mg-4d3b's F1-F5 do not reproduce, in the real stdout of the real
+  script, under a real `git fetch` failure against a repo whose
+  origin/main resolves.  It does NOT re-derive the census figures --
+  those are mg-4d3b's, confirmed, and arm H only requires them unmoved.
+  It does not test s2/s3/s4, whose summaries were not in this ticket.
+
+
+== c1 exit: 0 ==
