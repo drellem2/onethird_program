@@ -9,6 +9,48 @@ explicitly-labelled read-off from an already-merged empirical table.
 
 ---
 
+> ## ⚠ SUPERSEDED INPUT — every numeric budget below is 100× too pessimistic (mg-e35c F5, landed mg-5827)
+>
+> **This document's calibration input is superseded.** The audit of this document
+> ([`OneThird-lambda-std-Operative-Form-IndependentAudit.md`](OneThird-lambda-std-Operative-Form-IndependentAudit.md),
+> §F5) found §6.4's "L4 usable" row **BROKEN as labelled**: it is calibrated under the branch-(iii)
+> reading that §3.4 *of this same document* proves cannot close Step 6, and it reads `F(ε) < 1/6` —
+> a **necessary** condition at the *maximum* possible slack — as if it were a calibration point.
+> Under this document's own recommended (iii)-repair the correct calibration is the `ε` at which
+> mg-3ce3's `survives` predicate first fails, and the probe reports **0 RED events across all 6681
+> posets up to `ε = 0.20`**.
+>
+> | quantity | as written below | **repaired (mg-e35c F5)** | direction of the error |
+> |---|---|---|---|
+> | `ε_leak` | `≈ 0.02` | **`≈ 0.20`** | — |
+> | `ε_spec` budget | `≲ 2×10⁻⁴` | **`≲ 2×10⁻²`** | 100× too small |
+> | remaining gap factor (§6.3) | `≈ 5×10³` | **`≈ 50`** | **100× too pessimistic** |
+> | master-bound RHS (§6.4) | `≈ 3.3×10⁻⁵ n²/C₃` | **`≈ 3.3×10⁻³ n²/C₃`** | 100× too small |
+> | Claim 7.2 threshold (§7.3) | `n ≤ 100` | **`n ≤ 10`** (primitive: `n ≤ 100`) | — |
+> | (LIB)/(LIB-const) crossover (§7.4) | `n ≈ 10⁵` | **`n ≈ 900`** | — |
+> | antichain-exclusion margin (§7.2) | factor `25` | **factor `2.5`** | 25× too generous |
+>
+> **THE ERROR DIRECTION INFLATES PESSIMISM.** Every headline number in §§6.4–7.4 and §10 that
+> reads as bad news reads *worse* than the repaired calibration supports. The one exception is
+> the antichain-exclusion margin at §7.2, which moves the other way (`25` → `2.5`) and is the only
+> repaired figure that makes this document's case *weaker*; §7.2's verdict survives it, since
+> `1/2 > 0.20` still.
+>
+> **What does NOT move.** No mathematical statement changes. The *form* — `1 − λ_std ≤ ε_spec`, an
+> absolute constant uniform in `n` — is untouched; so are Lemma 2.1, the Cheeger direction, Claim
+> 6.1, the master-bound cross-check and every `[PROVEN]` label on a non-numeric claim. §7.3's
+> *verdict* also survives, via the constant-free argument (the mg-210d route's unconditional output
+> is `ε_spec < 1`, useless at any budget) — F5 breaks the *reasoning* of §7, not its conclusion.
+>
+> **The constant is still not pinned.** `2×10⁻²` is not a replacement certainty: the honest
+> statement, and the one the audit directed be landed, is that **the constant is unpinned by ~2
+> orders of magnitude and the pessimistic reading is the smaller one**. Sites below are annotated
+> in place rather than rewritten, so the derivation as filed stays readable.
+>
+> *Superseded values are left in the text and marked; nothing is silently replaced.*
+
+---
+
 ## 0. Verdict
 
 > **The operative form is a fourth form, not one of the three in the corpus.**
@@ -35,11 +77,17 @@ explicitly-labelled read-off from an already-merged empirical table.
 > (LIB-weak) $o(n^2)$, which is weaker than (LIB) $O(n)$.
 >
 > **But — and this is the load-bearing caveat, see §7 — the weakening is not good news.** The
-> constant is small (budget: $\varepsilon_{\mathrm{spec}}\lesssim2\times10^{-4}$), which makes the
-> "weaker" requirement **numerically stronger than LIB at every $n$ below roughly $10^5$**; and the
+> constant is small (budget: $\varepsilon_{\mathrm{spec}}\lesssim2\times10^{-4}$ **— SUPERSEDED,
+> read $\lesssim2\times10^{-2}$; mg-e35c F5, see the banner above**), which makes the
+> "weaker" requirement **numerically stronger than LIB at every $n$ below roughly $10^5$**
+> **[SUPERSEDED — below roughly $900$]**; and the
 > only conversion tool we hold (mg-210d's master bound) is sharp at the antichain, so it cannot
-> deliver a small constant for *any* non-chain poset on $\lesssim100$ elements. The relaxation is
-> real, it is correctly derived, and it buys the mg-210d route **nothing**.
+> deliver a small constant for *any* non-chain poset on $\lesssim100$ elements
+> **[SUPERSEDED — $\lesssim10$ elements; $\lesssim100$ for the primitive class, which is the
+> relevant one]**. The relaxation is
+> real, it is correctly derived, and it buys the mg-210d route **nothing** — a conclusion that
+> **survives the repair**, because the mg-210d route's unconditional output is
+> $\varepsilon_{\mathrm{spec}}<1$ and is therefore constant-free (mg-e35c F9).
 
 ---
 
@@ -365,23 +413,55 @@ mg-210d's recorded degenerate bound exactly, and confirming the arithmetic again
 already-audited result. **[PROVEN]**
 
 **So the entire remaining gap on this route is a constant factor:** we hold
-$\varepsilon_{\mathrm{spec}}<n/(n+1)\to1$ and need $\varepsilon_{\mathrm{spec}}\approx2\times10^{-4}$
-— a factor of roughly $5\times10^{3}$, with no $n$ in it anywhere. Nothing asymptotic is at stake.
+$\varepsilon_{\mathrm{spec}}<n/(n+1)\to1$ and need
+$\varepsilon_{\mathrm{spec}}\approx2\times10^{-2}$ — **a factor of roughly $50$**, with no $n$ in it
+anywhere. Nothing asymptotic is at stake.
+
+> **[FIGURE REPAIRED — mg-e35c F5, landed mg-5827.]** This sentence read
+> *"need $\varepsilon_{\mathrm{spec}}\approx2\times10^{-4}$ — a factor of roughly $5\times10^{3}$"*
+> until 2026-08-07. Both numbers came from §6.4's superseded budget; the repaired calibration puts
+> the gap at **$\approx50$, not $\approx5{,}000$**. **The stale figure overstated the remaining gap
+> by 100× — it made the wall look a hundred times further away than this route's own arithmetic
+> supports.** The qualitative claim ("the entire remaining gap is a constant factor, with no $n$ in
+> it") is what §6.3 proves and is **unaffected**; only the size of the constant moves. It is still a
+> factor of ~50 and the constant is still unpinned by ~2 orders of magnitude in both directions.
 
 ### 6.4 The constant budget, made explicit
 
 | step | relation | source | label |
 |---|---|---|---|
-| L4 usable | $F(\varepsilon_{\mathrm{leak}})<$ pair's slack; slack $\le1/6$ for a centred pair | §3 | PROVEN (given the repaired (iii)) |
-| read off modulus | $F(0.02)\le0.073<1/6$; $F(0.05)\le0.198>1/6$ $\Rightarrow$ $\varepsilon_{\mathrm{leak}}\approx0.02$ | mg-3ce3 envelope `:136–144` | **HEURISTIC** (empirical envelope) |
-| Cheeger | $\varepsilon_{\mathrm{spec}}\le\varepsilon_{\mathrm{leak}}^2/2\approx2\times10^{-4}$ | §4.2 | PROVEN |
+| L4 usable | $F(\varepsilon_{\mathrm{leak}})<$ pair's slack; slack $\le1/6$ for a centred pair | §3 | ~~PROVEN (given the repaired (iii))~~ **BROKEN as labelled — mg-e35c F5** |
+| read off modulus | ~~$F(0.02)\le0.073<1/6$; $F(0.05)\le0.198>1/6$ $\Rightarrow$ $\varepsilon_{\mathrm{leak}}\approx0.02$~~ **SUPERSEDED $\Rightarrow$ $\varepsilon_{\mathrm{leak}}\approx0.20$** (0 RED / 6681 posets up to $\varepsilon=0.20$) | mg-3ce3 envelope `:136–144` | **HEURISTIC** (empirical envelope) |
+| Cheeger | $\varepsilon_{\mathrm{spec}}\le\varepsilon_{\mathrm{leak}}^2/2\approx$ ~~$2\times10^{-4}$~~ **$2\times10^{-2}$** | §4.2 | PROVEN (the *relation*; the *number* moves with the row above) |
 | L3 loss | divide by $C_3$ | §4.3 | **UNQUANTIFIED** |
-| master bound | $\mathbb E[\mathrm{inv}_e]\le\tfrac{\varepsilon_{\mathrm{spec}}}{6}(n^2-1)\approx3.3\times10^{-5}n^2/C_3$ | §6.2 | CONDITIONAL |
+| master bound | $\mathbb E[\mathrm{inv}_e]\le\tfrac{\varepsilon_{\mathrm{spec}}}{6}(n^2-1)\approx$ ~~$3.3\times10^{-5}n^2/C_3$~~ **$3.3\times10^{-3}n^2/C_3$** | §6.2 | CONDITIONAL |
+
+> **[ROW SUPERSEDED — mg-e35c F5, landed mg-5827.]** The "L4 usable" row is **BROKEN as labelled**,
+> for three compounding reasons, and it is the numeric spine of §7:
+>
+> 1. **The label is backwards.** Under the *repaired* (iii) that §3.4 above recommends — "a balanced
+>    pair remains in $[1/3,2/3]$" — **$F$ does not appear in the statement at all**, so there is no
+>    $F(\varepsilon_{\mathrm{leak}})<\text{slack}$ condition to calibrate.
+> 2. **Under the *stated* (iii) the row contradicts §3.4's own Claim.** §3.4 proves the available
+>    slack can be **$0$** (the $P_0$ witness), so no $F>0$ satisfies $F<\text{slack}$. The $1/6$ is
+>    the slack of a *centred* pair — the **maximum possible** — used as if it were a guarantee.
+>    $F(\varepsilon)<1/6$ is a **necessary** condition read as a **calibration point**.
+> 3. **The consequence is quantitative and one-directional.** The correct calibration under the
+>    recommended repair is the $\varepsilon$ at which mg-3ce3's `survives` predicate first fails, and
+>    the probe reports **0 RED across all 6681 posets up to $\varepsilon=0.20$** — supporting
+>    $\varepsilon_{\mathrm{leak}}\approx0.20$, hence
+>    $\varepsilon_{\mathrm{spec}}\le0.2^2/2=2\times10^{-2}$, **100× larger than the
+>    $2\times10^{-4}$ this row was filed with.**
+>
+> The struck values are kept above so the derivation as filed stays readable.
 
 **So the form is pinned; the constant is not.** Pinning the constant requires quantifying exactly two
 things the source leaves open: **L4's modulus $F$** and **L3's prefix-restriction loss $C_3$**.
 That is the honest residual under-determination, and it is a *different* under-determination from
-the one this ticket opened with.
+the one this ticket opened with. **[AMENDED — mg-e35c F5:** this sentence is right and §7 below then
+uses the unpinned constant *as though it were pinned*. The honest statement is that
+$\varepsilon_{\mathrm{spec}}$ is **unpinned by ~2 orders of magnitude, and the pessimistic reading is
+the smaller one.**]
 
 ---
 
@@ -426,6 +506,13 @@ would be asking L4 to prove the conjecture unaided.
 computation is in §4.2. Since $1/2\gg\varepsilon_0\approx0.02$, the condition excludes the
 maximum-entropy object by a factor of 25. It is genuinely restrictive.
 
+> **[FIGURE SUPERSEDED — mg-e35c F5, landed mg-5827.]** At the repaired calibration
+> $\varepsilon_0\approx0.20$, so the margin is $1/2\,/\,0.20=$ **a factor of $2.5$, not $25$**.
+> **This is the one repaired figure that moves against this document** — every other one below is
+> 100× too pessimistic; this one was 10× too generous. **The verdict of §7.2 survives**: $1/2>0.20$,
+> so the antichain is still excluded and the condition is still not vacuous. What no longer survives
+> is the word *"$\gg$"* and the comfort of an order-of-magnitude margin.
+
 ### 7.3 Does the weakening actually help the route we hold? — **No. This is the bad news.**
 
 The master bound is our only stated $\lambda_{\mathrm{std}}\leftarrow\mathbb E[\mathrm{inv}]$
@@ -439,6 +526,18 @@ $d\lesssim2\times10^{-4}$, i.e. $m\lesssim2\times10^{-4}\binom n2$.
 **Claim 7.2.** *For $n\le100$ this forces $m=0$ — the poset must be a chain, hence not a
 counterexample.* **[PROVEN]** — $2\times10^{-4}\cdot\binom n2\ge1$ requires $n(n-1)\ge10^4$, i.e.
 $n\ge101$.
+
+> **[THRESHOLD SUPERSEDED — mg-e35c F5, landed mg-5827.]** At the repaired
+> $\varepsilon_{\mathrm{spec}}\approx2\times10^{-2}$ the same arithmetic gives
+> $d\lesssim2\times10^{-2}$ and $2\times10^{-2}\cdot\binom n2\ge1$ requires $n(n-1)\ge100$, i.e.
+> $n\ge11$ — so **Claim 7.2's threshold is $n\le10$, not $n\le100$.** The arithmetic as printed is
+> exact; only its input moves. A **free sharpening the audit adds** (mg-e35c A1) recovers most of
+> the ground: minimal counterexamples are **primitive**, primitivity forces $m\ge n-1$ hence
+> $d\ge2/n$, so the master bound cannot deliver the target below $n\le2/\varepsilon_{\mathrm{spec}}$
+> — **$n\le100$ at the repaired budget** (and $n\le10^4$ at the superseded one). The claim as
+> printed was **both 100× too pessimistic in its input and weaker than the available argument**;
+> the two errors point in opposite directions and the primitive form lands back near the printed
+> number for a different reason.
 
 So the mg-210d master bound **cannot deliver the architecture's target for any non-chain poset on at
 most ~100 elements**, and above that demands a near-chain density. mg-210d's recorded verdict
@@ -462,6 +561,16 @@ $\mathbb E[\mathrm{inv}_e]\le3.3\times10^{-5}n^2$. These cross at
 $n\approx(C/\gamma)/(3.3\times10^{-5})\approx10^5$ for $C=\Theta(1)$, $\gamma=1/3$. Below that,
 **(LIB-const) is the harder statement.** At $n=100$: (LIB) permits $\approx300C$ inversions;
 (LIB-const) permits $0.33$.
+
+> **[CROSSOVER SUPERSEDED — mg-e35c F5, landed mg-5827.]** At the repaired budget (LIB-const) reads
+> $\mathbb E[\mathrm{inv}_e]\le3.3\times10^{-3}n^2$ and the crossover is
+> $n\approx3C/(3.3\times10^{-3})\approx\mathbf{900}$, **not $10^5$**; at $n=100$ (LIB-const) permits
+> $33$ inversions, not $0.33$. **This matters for the section's own claim**: "every plausible range"
+> is **OVERSTATED**. The programme's empirical base lives at $n\le16$, which is still far below
+> $900$, so *the direction of the sting is intact* — but the crossover now sits at a size a minimal
+> counterexample could plausibly have, rather than two orders of magnitude beyond one. §7.4's
+> closing label ("the *direction* of the effect is robust; the number $10^5$ is not") anticipated
+> exactly this and is the reason the section survives its own repair.
 
 Since a minimal counterexample — if one exists — is a *specific finite poset of unknown size*, and
 the programme's entire empirical base lives at $n\le16$, an asymptotic weakening that carries a
@@ -528,14 +637,14 @@ Every claim in the document, including reductions asserted in prose.
 | 25 | Frozen $\Rightarrow\mathbb E[\mathrm{inv}_e]<m/3$ | 6.3 | **PROVEN** |
 | 26 | Freezing alone already gives (LIB-const) with constant $2/3$; the whole gap is a constant factor | 6.3 | **PROVEN** |
 | 27 | Claim 6.1 through the master bound reproduces mg-210d's $1-\lambda_{\mathrm{std}}<d\,n/(n+1)$ | 6.3 | **PROVEN** (cross-check against an audited result) |
-| 28 | Constant budget $\varepsilon_{\mathrm{leak}}\approx0.02$, $\varepsilon_{\mathrm{spec}}\approx2\times10^{-4}/C_3$ | 6.4 | **HEURISTIC** (empirical $F$) + **UNQUANTIFIED** ($C_3$) |
+| 28 | Constant budget ~~$\varepsilon_{\mathrm{leak}}\approx0.02$, $\varepsilon_{\mathrm{spec}}\approx2\times10^{-4}/C_3$~~ **$\varepsilon_{\mathrm{leak}}\approx0.20$, $\varepsilon_{\mathrm{spec}}\approx2\times10^{-2}/C_3$** | 6.4 | ~~**HEURISTIC** (empirical $F$) + **UNQUANTIFIED** ($C_3$)~~ **BROKEN as derived (mg-e35c F5)** — the "L4 usable" row it rests on is self-inconsistent; superseded figures 100× too pessimistic |
 | 29 | Breadth of the hypothesis class does not break the contradiction; it relocates burden onto L4 | 7.1 | **PROVEN** (logic) |
 | 30 | mg-3ce3 stress-tested that heavier burden at $\varepsilon$ an order of magnitude above budget: 0 RED / 6681 | 7.1 | **HEURISTIC** (empirical; no $n$-stratification available) |
 | 31 | The condition is not vacuous: every antichain prefix has $\Delta_1\ge1/2$ | 7.2 | **PROVEN** |
-| 32 | Master bound cannot deliver the target for any non-chain poset on $n\le100$ | 7.3 | **PROVEN** given 28 |
+| 32 | Master bound cannot deliver the target for any non-chain poset on ~~$n\le100$~~ **$n\le10$** | 7.3 | **PROVEN** given 28 — but 28 is BROKEN; **and weaker than available**: primitivity gives $n\le2/\varepsilon_{\mathrm{spec}}=100$ at the repaired budget (mg-e35c A1) |
 | 33 | mg-210d's "best constant $=0$" verdict survives the relaxation; the relaxation buys that route nothing | 7.3 | **CONDITIONAL** on 28, 32 |
 | 34 | 33 is a limit of the tool ($\widetilde u$ is antichain-sharp), **not** a lower bound on the problem | 7.3 | **PROVEN** (the bound is a single-test-vector bound, `tex:400–424`) |
-| 35 | (LIB-const) is numerically *stronger* than (LIB) below $n\approx10^5$ | 7.4 | **HEURISTIC** — direction robust, number not |
+| 35 | (LIB-const) is numerically *stronger* than (LIB) below ~~$n\approx10^5$~~ **$n\approx900$** | 7.4 | **HEURISTIC** — direction robust, number not; the number moved 100× with 28 (mg-e35c F5), and *"every plausible range"* is **OVERSTATED** |
 | 36 | $C_3$, $F$, the (iii) repair, and the licence for the $o(\cdot)$ reading remain open | 8 | **UNQUANTIFIED / OPEN** |
 
 ---
@@ -545,6 +654,22 @@ Every claim in the document, including reductions asserted in prose.
 **Stated as a proposal, not an edit.** `mg-1fdb` is concurrently reconciling row 8 and the *single
 lemma to prove* section; nothing in this document has been written into `STATE.md`, and it should not
 be merged into those lines by anyone but the arc that owns them.
+
+> **[PROPOSAL PARTLY SUPERSEDED — mg-e35c, landed mg-5827.]** This proposal was landed into
+> `STATE.md` by **mg-23f5** (`e139da3`) and **mg-2860** (`f85a4e8`), *with the audit's amendments*.
+> Two riders below are **not** to be re-landed as written:
+>
+> * **Rider (a) — the `2×10⁻⁴` budget and the `10⁵` crossover.** Do **not** land as flat text
+>   (mg-e35c amendment 7). `STATE.md` correctly carries `ε_spec ≲ 2×10⁻²` and the crossover at
+>   `n ≈ 900`. The honest form is *"the constant is unpinned by ~2 orders of magnitude and the
+>   pessimistic reading is the smaller one."*
+> * **Rider (b) — "buys the mg-210d route nothing".** The conclusion survives, but the *reason* is
+>   not the numeric budget: the mg-210d route's unconditional output is `ε_spec < 1`, a constant-free
+>   fact (mg-e35c F8/F9). What the weakening **does** change is that a constant `λ_std` is now the
+>   right currency, so Residual **(R)** is shape-correct and its insufficiency is *quantitative*, not
+>   *categorical* — the caveat that used to sit at `STATE.md:130`/`:147` was withdrawn on that basis.
+>
+> Rider (c) and the branch-(iii) note landed unamended.
 
 > **Proposal.** Row 8 and the *single lemma to prove* section currently state the L1b conclusion as
 > the limit `λ_std → 1`, and mg-7ae7 states it as the rate `1 − λ_std ≤ C/(γn)`. Both are
@@ -559,10 +684,13 @@ be merged into those lines by anyone but the arc that owns them.
 > itself strictly weaker than (LIB) `O(n)`**, so the third clause of row 8's implication chain should
 > read `(B) ⟹ LIB ⟹ LIB-weak ⟹ (LIB-const) = what L4 consumes`, with each arrow one-way. Three
 > riders belong with it, or the row will read as better news than it is: **(a)** the constant is
-> small (budget `ε_spec ≲ 2×10⁻⁴`, resting on mg-3ce3's empirical modulus and on L3's unquantified
-> loss), so (LIB-const) is *numerically stronger* than (LIB) at every `n` below roughly `10⁵` — an
+> small (budget ~~`ε_spec ≲ 2×10⁻⁴`~~ **`≲ 2×10⁻²`**, resting on mg-3ce3's empirical modulus and on
+> L3's unquantified
+> loss), so (LIB-const) is *numerically stronger* than (LIB) at every `n` below roughly ~~`10⁵`~~
+> **`900`** — an
 > asymptotic weakening, not a practical one; **(b)** mg-210d's master bound, being antichain-sharp,
-> **cannot** deliver it for any non-chain poset on `n ≤ 100`, so the "best constant = 0" verdict
+> **cannot** deliver it for any non-chain poset on ~~`n ≤ 100`~~ **`n ≤ 10`** (**`n ≤ 100`** for the
+> primitive class, which is the relevant one), so the "best constant = 0" verdict
 > survives the relaxation unchanged and the correct redirect is to a bound that is not
 > antichain-sharp, not to a re-run of that route; and **(c)** mg-7ae7's `1/(γn)` should be recorded
 > as inherited from Theorem E's output shape rather than demanded by any consumer — `step8.tex:68–72`

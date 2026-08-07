@@ -85,9 +85,12 @@ explicitly *not* the limit. A limit hypothesis supplies the threshold only for `
   quantifier over `n`, not a constant.**
 - `(LIB-const)` is meaningless without its constant attached: mg-88bd Claim 6.1 shows freezing
   **already** delivers `E[inv_e] < m/3`, i.e. `(LIB-const)` with constant `2/3`, unconditionally
-  — while the consumer wants `ε_spec ≈ 2×10⁻⁴`. A factor of ~5×10³, with no `n` in it.
+  — while the consumer wants ~~`ε_spec ≈ 2×10⁻⁴`~~ **`ε_spec ≈ 2×10⁻²`**. A factor of
+  ~~`~5×10³`~~ **`~50`**, with no `n` in it. **[SUPERSEDED INPUT REPAIRED — mg-e35c F5, landed
+  mg-5827: the budget was calibrated under a branch-(iii) reading its own source document proves
+  broken; the repaired figure is 100× larger and the stale one inflated the gap 100×.]**
 - Numerically the "weaker" form is **stronger**: mg-88bd §7.4 — the required constant makes
-  `(LIB-const)` harder than LIB at every `n` below ~`10⁵`. **(LIB-weak) is constant-free and is
+  `(LIB-const)` harder than LIB at every `n` below ~~`~10⁵`~~ **`~900`** (same repair). **(LIB-weak) is constant-free and is
   the only one of the three that is not hostage to `ε_spec`.**
 
 ---
