@@ -40,3 +40,41 @@ n = 4   |S_n| = 24   pair rows 6   per-slot rows 18   aggregate rows 6
             pair (1, 3) flip is NOT pinned: [1/3, 2/3]
             pair (2, 3) flip is NOT pinned: [1/3, 2/3]
             smallest achievable flip over all pairs: pair (0, 1) -> [1/3, 2/3]   (cap 1/3 needs the low end <= 1/3)
+==============================================================================
+n = 5   |S_n| = 120   pair rows 10   per-slot rows 40   aggregate rows 10
+  baseline target C(n,2)/3 = 10/3 ; per-slot value claimed by mg-200d in this currency is (n-1)/3 = 4/3
+  BASE      status=optimal   E[inv] = 10/3   eps_spec = 6E/(n^2-1) = 5/6   pivots=30
+            primal verifies: YES      dual certificate verifies: YES
+            support 3 atom(s):
+              02341  weight 1/3   inv=3
+              12340  weight 1/3   inv=4
+              01432  weight 1/3   inv=3
+            mass=1   per-slot violations=9   aggregate violations=6
+  PERSLOT   status=infeasible   phase-1 residual = 1/3  (STRICTLY POSITIVE: the polytope is EMPTY)
+  AGG       status=infeasible   phase-1 residual = 1/6  (STRICTLY POSITIVE: the polytope is EMPTY)
+  PERSLOT-only (no pair bias): status=optimal  max E[inv]=26/5   uniform gives 5
+            min E[inv]=24/5  -- max == min means the rows PIN E[inv]: no
+            pair (0, 1) flip is NOT pinned: [2/5, 3/5]
+            pair (0, 2) flip is NOT pinned: [2/5, 3/5]
+            pair (0, 3) flip is NOT pinned: [2/5, 3/5]
+            pair (0, 4) flip is NOT pinned: [2/5, 3/5]
+            pair (1, 2) flip is NOT pinned: [2/5, 3/5]
+            pair (1, 3) flip is NOT pinned: [2/5, 3/5]
+            pair (1, 4) flip is NOT pinned: [2/5, 3/5]
+            pair (2, 3) flip is NOT pinned: [2/5, 3/5]
+            pair (2, 4) flip is NOT pinned: [2/5, 3/5]
+            pair (3, 4) flip is NOT pinned: [2/5, 3/5]
+            smallest achievable flip over all pairs: pair (0, 1) -> [2/5, 3/5]   (cap 1/3 needs the low end <= 1/3)
+  AGG-only (no pair bias): status=optimal  max E[inv]=20/3   uniform gives 5
+            min E[inv]=10/3  -- max == min means the rows PIN E[inv]: no
+            pair (0, 1) flip is NOT pinned: [0, 1]
+            pair (0, 2) flip is NOT pinned: [0, 1]
+            pair (0, 3) flip is NOT pinned: [0, 1]
+            pair (0, 4) flip is NOT pinned: [0, 1]
+            pair (1, 2) flip is NOT pinned: [0, 1]
+            pair (1, 3) flip is NOT pinned: [0, 1]
+            pair (1, 4) flip is NOT pinned: [0, 1]
+            pair (2, 3) flip is NOT pinned: [0, 1]
+            pair (2, 4) flip is NOT pinned: [0, 1]
+            pair (3, 4) flip is NOT pinned: [0, 1]
+            smallest achievable flip over all pairs: pair (0, 1) -> [0, 1]   (cap 1/3 needs the low end <= 1/3)

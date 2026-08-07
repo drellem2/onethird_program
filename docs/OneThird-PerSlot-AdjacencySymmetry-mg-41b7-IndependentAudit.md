@@ -59,14 +59,26 @@ difference is stated wherever it matters.
    subset** of `M_n`. A smaller maximum over a smaller set contradicts nothing. I computed both
    side by side (§2, §4) and `mg-6bc2`'s `C(n,2)/3` is **untouched**.
 
-### The load-bearing finding, which the brief did not ask for
+### The load-bearing findings, which the brief did not ask for
 
-`pm-onethird`'s mail of 21:02 re-pointed this audit: `mg-200d`'s conclusions are already dead
-downstream, but its **instrument** is load-bearing because two live results ran their own
-witnesses through `lp200d.measure_report`. **I differential-audited it: 111 of 113 checks pass**
-against my independent reporter, including hand-computed expected values, sub-probability
-measures, planted asymmetries and six mutations. **The two failures are one latent hazard that
-does not bite** (§7). The reporting code two live results depend on is sound.
+`pm-onethird` re-pointed this audit twice by mail (21:02 and 21:12): `mg-200d`'s conclusions are
+already dead downstream, but its **instrument** is load-bearing, because `mg-131e` and `mg-00a1`
+— *"the reason I told Daniel tonight that a whole research route is dead"* — both ran their own
+witnesses through `lp200d.measure_report`. *"Two witnesses through one instrument is one witness
+wearing a larger number."* Two separate answers, and they are reported separately because
+conflating them is the error this lineage keeps making:
+
+> **(1) IS THE TOOL CORRECT? YES.** `lp200d.measure_report` differential-audited against my
+> independent reporter: **111 of 113 checks pass**, including hand-computed expected values,
+> sub-probability measures, planted asymmetries and six mutations. The two failures are a single
+> **latent** float path that is shown not to bite at any live call site (§7).
+>
+> **(2) DO THE DOWNSTREAM WITNESSES SURVIVE AN INDEPENDENT CHECK? YES — 203 of 203.**
+> `mg-131e`'s witnesses at `n = 6,7,8,9,10` and `mg-00a1`'s staircase family at **`n = 4..24`**
+> re-checked by `liba41b7`, sharing no line with `measure_report`: mass, the `1/3` cap,
+> comparable pairs at flip `0`, per-slot symmetry on every incomparable pair, transitive
+> closure, and each one's claimed `E[inv]`. **Zero failures.** Those two results no longer share
+> a tool (§7b).
 
 ---
 
@@ -280,12 +292,17 @@ That leaves `4387` branches, scanned exhaustively by `|I|` level. Completed leve
 
 | `\|I\|` | branches | feasible | max `E[inv]` |
 |---|---|---|---|
-| 6 | 423 | 6 | **`11/6`** |
+| 6 | 423 | **6** | **`11/6`** |
 | 7 | 633 | 5 | `5/3` |
 | 8 | 809 | 3 | `5/3` |
+| 9 | 869 | 1 | `5/3` |
+| 10 | 766 | **0** | — (no feasible branch) |
 
-so `V_6 ≥ 11/6` and the refutation is complete regardless of the remaining levels; the exact
-`V_6` needs levels `9..15`, whose transcripts are committed as they finish (§9, *not done*).
+Feasibility collapses as `|I|` grows — `6, 5, 3, 1, 0` — which is the same mechanism as §2: the
+more pairs you require to be symmetric, the further the forced flip probabilities rise above the
+`1/3` cap. Levels `11..15` (`526, 260, 85, 15, 1` branches) were still running at write-up and
+are declared as such in §9. **The refutation does not depend on them**: `V_6 ≥ 11/6 > 5/3` is
+settled by the `|I| = 6` level alone, with a primal witness and a dual certificate.
 
 **I did not read `mg-131e`, `mg-eaa1` or `mg-00a1`, and did not reconcile against them.** That
 `mg-131e` reports the same `n = 6` failure is, from this audit's side, an out-of-sample
@@ -334,6 +351,41 @@ measure — and every call site in `perslot_symmetry_200d`, `dual_certificate_13
 **hardening note, not a defect**: one `F()` on the argument would close it. The two checks are
 left **failing** in `a6_instrument.py` rather than tuned away, because a check tuned until it
 returns `0` is unfalsifiable.
+
+---
+
+## 7b. The two downstream witnesses, checked by code that shares nothing with the tool
+
+`pm-onethird`'s second mail: `mg-131e` and `mg-00a1` *"look independent. THEY SHARE ONE
+UNAUDITED TOOL."* `a8_downstream.py` takes their **measures** as input data — that is the object
+under test and there is no way to test it without reading it — and checks every property with
+`liba41b7`, which shares no line with `measure_report`.
+
+| source | `n` | claimed `E[inv]` | **my `E[inv]`** | mass `1` | cap `1/3` | comparable at `0` | per-slot sym on `I` | `C` transitive |
+|---|---|---|---|---|---|---|---|---|
+| `mg-131e` | 6 | `11/6` | **`11/6`** | ✔ | ✔ | ✔ | ✔ | ✔ |
+| `mg-131e` | 7 | `20/9` | **`20/9`** | ✔ | ✔ | ✔ | ✔ | ✔ |
+| `mg-131e` | 8 | `8/3` | **`8/3`** | ✔ | ✔ | ✔ | ✔ | ✔ |
+| `mg-131e` | 9 | `28/9` | **`28/9`** | ✔ | ✔ | ✔ | ✔ | ✔ |
+| `mg-131e` | 10 | `7/2` | **`7/2`** | ✔ | ✔ | ✔ | ✔ | ✔ |
+| `mg-00a1` | 4…24 | `n(n+5)/36` (even), `(n−1)(n+4)/36` (odd) | **matches at all 21** | ✔ | ✔ | ✔ | ✔ | ✔ |
+
+**203 checks, 0 failures.** So the two results that shared a tool are now two results that do
+not: their witnesses are feasible measures on transitively closed branches by arithmetic that
+never touches `lp200d`.
+
+**Corroboration, stated as corroboration and not as proof.** `a41b7` reached `E[inv] = 11/6` at
+`n = 6` by its **own exhaustive LP** (§6.3, `|I| = 6` level, 423 branches) **before reading
+`mg-131e`'s witness at all**, and my witness and theirs agree on four of six atoms and differ
+only in which of two atoms carries the `(4,5)` swap. I did not reach `Θ(n²)` independently and
+make **no claim** about the growth rate.
+
+**One observation about `mg-00a1`, outside my scope and reported as an observation.** Its
+`s1_witness.py` banner and its table's column header both print the closed form as
+`n(n+5)/36` unqualified, while its `lib00a1.witness_target` is correctly **parity-split**.
+Its computed values are right — my checker confirms all 21 — and both branches are quadratic,
+so nothing of its verdict moves. But the printed label is the even-`n` form only, and the next
+agent greps labels. *(This cost me an hour and a near-miss: see defect 6.)*
 
 ---
 
@@ -394,14 +446,27 @@ occurs anywhere on the path to any number.
 5. **`a5_construction.py` first called `L.perms(20)`** — it tried to enumerate `S_20` and
    produced *no output at all* for forty minutes rather than an error, which is indistinguishable
    from a slow correct run. Replaced with a sparse reporter that never materialises `S_n`.
+6. **`a8_downstream.py` checked `mg-00a1` against `n(n+5)/36` at every `n`** — the form printed
+   in its banner and column header — where its `witness_target` is **parity-split**. My control
+   then reported **10 failures against a correct witness**, one at every odd `n` from 5 to 23,
+   in a differential audit whose whole purpose was to find a defect in a live result. **The
+   even/odd pattern of the failures is what saved it**: a defect that lands on exactly one
+   residue class is a bug in the *checker*, not in the checked. Had I filed it, I would have
+   attacked a live negative with an error of my own — the exact failure this audit stage exists
+   to prevent, committed by the auditor.
 
 ### NOT DONE — declared, not discovered later
 
 * **I did not read `mg-131e`, `mg-eaa1`, `mg-00a1`, or `bb0d7e9`**, and did not reconcile
   against any of them. My `n = 6` refutation is independent of theirs.
-* **The `n = 6` exhaustive maximum is incomplete.** Levels `|I| = 6,7,8` are done
-  (`11/6`, `5/3`, `5/3`); levels `9..15` were still running. `V_6 ≥ 11/6` is established and
-  the refutation does not depend on the rest, but **`V_6` itself is not determined here**.
+* **The `n = 6` exhaustive maximum is incomplete.** Levels `|I| = 6..10` are done
+  (`11/6`, `5/3`, `5/3`, `5/3`, no feasible branch); levels `11..15` were still running at
+  write-up. `V_6 ≥ 11/6` is established and the refutation does not depend on the rest, but
+  **`V_6` itself is not determined here** and I do not assert it.
+* **I did not reach `Θ(n²)` independently and make no claim about the growth rate.** My family
+  (§6.2) is a lower bound of shape `(n−1)/3 + k/6`; `mg-00a1`'s witnesses, which I *checked*,
+  are much stronger. Checking a witness is not reproducing a verdict, and I did not read
+  `mg-00a1`'s argument.
 * **I did not attempt the true growth rate.** My family is a **lower bound** and says nothing
   about whether the disjunctive value is `Θ(n)`, `Θ(n²)` or otherwise. Anyone reading a rate
   out of §6.2 is reading something that is not there.
