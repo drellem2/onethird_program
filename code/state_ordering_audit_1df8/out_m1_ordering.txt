@@ -1,0 +1,196 @@
+
+==============================================================================
+R1  (LIB) ==> (LIB-weak)?   E = O(n/gamma)  ==>  E = o(n^2)?
+==============================================================================
+
+  ARGUMENT.  Suppose E(n) <= C*n/gamma for all n.  Then
+
+        E(n)/n^2  <=  (C/gamma) * (1/n).
+
+  If gamma is a CONSTANT in n (i.e. bounded below by some gamma_0 > 0), the
+  right side -> 0, so E = o(n^2) and the implication HOLDS.
+
+  BUT the implication is CONDITIONAL ON gamma's n-dependence, and the ticket
+  states it flat.  If gamma is allowed to depend on n, the bound is
+  E(n) <= C*n/gamma(n), and E = o(n^2) requires n/gamma(n) = o(n^2), i.e.
+  gamma(n) = omega(1/n).  At gamma(n) = 1/n the bound is C*n^2, which is NOT
+  o(n^2).  Exhibited:
+    n=3     gamma=1/n=1/3   n/gamma = 9  ratio to n^2 = 1
+    n=10    gamma=1/n=1/10   n/gamma = 100  ratio to n^2 = 1
+    n=100   gamma=1/n=1/100   n/gamma = 10000  ratio to n^2 = 1
+    n=1000  gamma=1/n=1/1000   n/gamma = 1000000  ratio to n^2 = 1
+
+  The ratio is IDENTICALLY 1 at every n, so the bound sits exactly on n^2 and
+  the limit does not go to zero.  VERDICT:
+    (LIB) ==> (LIB-weak)  HOLDS when gamma = omega(1/n)   [in particular, constant]
+    (LIB) ==> (LIB-weak)  FAILS at gamma(n) = 1/n
+  So the first link of the ticket's chain is TRUE UNDER A HYPOTHESIS THE TICKET
+  DOES NOT STATE.
+
+==============================================================================
+R2  (LIB-weak) ==> (LIB-const) FOR ALL n?   ANSWER: NO.
+==============================================================================
+
+  WITNESS.  E(n) = M * n^(3/2).  This is o(n^2) for EVERY M, since
+  E(n)/n^2 = M/sqrt(n) -> 0.  But at small n it exceeds (eps/6)(n^2-1).
+  All comparisons below are decided EXACTLY by squaring both sides
+  (M*n^(3/2) <= B  <=>  M^2*n^3 <= B^2); there is no float on this path.
+
+         eps      M    first n violating (LIB-const)   smallest N0 (n<=20000)
+           1      1                                2                       37
+           1     10                                2                     3601
+           1    100                                2                     None
+        1/10      1                                2                     3601
+       1/100      1                                2                     None
+
+  EVERY row violates (LIB-const) at some n while being o(n^2).  Therefore
+  (LIB-weak) does NOT imply (LIB-const)-for-all-n.  The implication holds only
+  EVENTUALLY, i.e. for n >= N0.  THE GAP IS A QUANTIFIER, NOT A CONSTANT.
+
+==============================================================================
+R3  NO N0 WORKS FOR THE CLASS o(n^2).
+==============================================================================
+
+  CLAIM.  For any candidate threshold N0 and any eps > 0 there is a member of
+  o(n^2) that VIOLATES (LIB-const) at n = N0.  Take E(n) = M*n^(3/2) with M
+  large enough.  So N0 is a function of the MEMBER, never of the class.
+
+  Exhibited: for each N0 below, the smallest integer M whose witness still
+  violates (LIB-const) AT n = N0 (eps = 1):
+
+          N0     M needed                   M^2*N0^3          ((eps/6)(N0^2-1))^2
+          10            1                       1000                       1089/4
+         100            2                    4000000                   11108889/4
+        1000            8                64000000000               111110888889/4
+       10000           32           1024000000000000           1111111088888889/4
+
+  M grows without bound as N0 does, and it is ALWAYS FINITE, so the witness
+  always exists.  VERDICT: there is no N0 uniform over the class.  A reader who
+  is told "(LIB-weak) suffices" and goes looking for THE N0 is looking for an
+  object that does not exist.
+
+==============================================================================
+R4  (LIB-const) ==> (LIB-weak)?   ANSWER: NO.
+==============================================================================
+
+  WITNESS.  E(n) = (eps/6)(n^2 - 1) -- (LIB-const) holds with EQUALITY at every
+  n, so it is a member.  But E(n)/n^2 -> eps/6 != 0, so it is NOT o(n^2).
+  Exhibited at eps = 1:
+
+    n=3        E(n) = 4/3   E(n)/n^2 = 4/27  (limit is 1/6 = 1/6)
+    n=10       E(n) = 33/2   E(n)/n^2 = 33/200  (limit is 1/6 = 1/6)
+    n=100      E(n) = 3333/2   E(n)/n^2 = 3333/20000  (limit is 1/6 = 1/6)
+    n=1000     E(n) = 333333/2   E(n)/n^2 = 333333/2000000  (limit is 1/6 = 1/6)
+    n=100000   E(n) = 3333333333/2   E(n)/n^2 = 3333333333/20000000000  (limit is 1/6 = 1/6)
+
+  The ratio RISES toward 1/6 and never approaches 0.  VERDICT:
+  (LIB-const) does NOT imply (LIB-weak).
+
+==============================================================================
+R5  CONSEQUENCE: (LIB-weak) AND (LIB-const) ARE INCOMPARABLE.
+==============================================================================
+
+  R2 gives (LIB-weak) NOT=> (LIB-const).   R4 gives (LIB-const) NOT=> (LIB-weak).
+  As SETS OF FUNCTIONS OF n, neither contains the other.  So the ticket's own
+  rendering
+
+        (LIB) < (LIB-weak) < (LIB-const)
+
+  IS NOT A CHAIN OF IMPLICATIONS.  It is defensible ONLY under the reading
+  "the admitted bound grows no slower as you move right, in the limit", i.e.
+
+        (LIB) ==> (LIB-weak) ==> (LIB-const) FOR ALL SUFFICIENTLY LARGE n
+
+  with the first link additionally requiring gamma = omega(1/n) (R1).  Any
+  rendering that drops "for all sufficiently large n" is FALSE IN THE SECOND
+  DIRECTION, which is the same defect class the ticket was raised about.
+
+==============================================================================
+R6  THE SURVIVING THRESHOLD MOVES.  N0 as a function of eps.
+==============================================================================
+
+  For E(n) = M*n^(3/2), (LIB-const) reads M*n^(3/2) <= (eps/6)(n^2-1), which for
+  large n is ~ M <= (eps/6)*sqrt(n), i.e. N0 ~ (6M/eps)^2.  So N0 blows up
+  QUADRATICALLY as eps falls.  Measured EXACTLY at M = 1:
+
+           eps    smallest N0      (6/eps)^2        ratio
+             1             37             36        37/36
+           1/2            145            144      145/144
+           1/4            577            576      577/576
+           1/8           2305           2304    2305/2304
+          1/16           9217           9216    9217/9216
+
+    CROSS-CHECK of the bisecting finder against the linear scan,
+    on every case small enough to scan exhaustively:
+      eps=1      M=1   nmax=3000   scan=37       bisect=37       AGREE
+      eps=1      M=10  nmax=20000  scan=3601     bisect=3601     AGREE
+      eps=1/2    M=1   nmax=3000   scan=145      bisect=145      AGREE
+      eps=1/4    M=1   nmax=20000  scan=577      bisect=577      AGREE
+      eps=1      M=3   nmax=5000   scan=325      bisect=325      AGREE
+    5/5 agree.
+
+  N0 rises strictly as eps falls, and tracks (6/eps)^2 as predicted.  So a
+  claim of the form "(LIB-weak) suffices, we just need n large" carries a
+  threshold that MOVES WITH THE CONSTANT YOU WANT, and quoting it without eps
+  is not a bound.
+
+==============================================================================
+NEGATIVE CONTROLS -- these must FAIL, or my instrument proves nothing.
+==============================================================================
+
+  NC1.  A function that is genuinely O(n) must NOT be reported as
+        violating (LIB-const) at large n.  E(n) = 5n, eps = 1:
+        first violation = 2   smallest N0 = 31
+        PASS: complies from n = 31 -- the instrument does not
+        flag compliant members.
+
+  NC2.  A function that is Theta(n^2) with a coefficient ABOVE eps/6
+        must violate (LIB-const) FOREVER, never acquiring an N0.
+        E(n) = (n^2-1)/3 against eps = 1 (i.e. coefficient 1/3 > 1/6):
+        first violation = 2   smallest N0 = None
+        PASS: N0 is None -- 'eventually' is not vacuous, the
+        instrument can tell 'eventually complies' from 'never does'.
+
+  NC3.  My R2 witness must really be o(n^2) and not merely small.
+        E(n)/n^2 = M/sqrt(n) for M = 100; squared ratios, exact:
+        n=100        (E/n^2)^2 = 100
+        n=10000      (E/n^2)^2 = 1
+        n=1000000    (E/n^2)^2 = 1/100
+        n=100000000  (E/n^2)^2 = 1/10000
+        PASS: falls to 0, so the witness is genuinely in o(n^2) and
+        R2's non-implication is not built on a non-member.
+
+  NC4.  DELIBERATELY WRONG ORDERING must be rejected.  If I assert
+        (LIB-const) ==> (LIB-weak) and test it on R4's own witness,
+        the test must FAIL:
+        E(10^6)/n^2 = 333333333333/2000000000000  < 1/1000 ?  False
+        PASS: rejected.  The instrument is not vacuously agreeing.
+
+==============================================================================
+SUMMARY -- THE ORDERING, RE-DERIVED, WITH NO '<' ANYWHERE
+==============================================================================
+
+    (LIB)       ==>  (LIB-weak)      PROVIDED gamma = omega(1/n)      [R1]
+    (LIB-weak)  ==>  (LIB-const)     ONLY FOR n >= N0(member, eps)    [R2]
+    (LIB-const) ==>  (LIB-weak)      FALSE                            [R4]
+    (LIB-weak)  ==>  (LIB-const)     FALSE as a for-all-n statement   [R2]
+
+    => (LIB) is STRICTLY THE STRONGEST HYPOTHESIS of the three.
+    => (LIB-weak) and (LIB-const) are INCOMPARABLE as function classes. [R5]
+    => The gap between them is A QUANTIFIER (for all n / for large n),
+       NOT A CONSTANT.  No constant converts one into the other.
+    => There is no N0 for the CLASS o(n^2), only one per member.        [R3]
+    => That per-member N0 grows like (6M/eps)^2, so it MOVES.           [R6]
+
+    THE TICKET'S DIRECTION IS RIGHT AND THE 'OPPOSITE' THAT MERGED THIS MORNING
+    WAS WRONG -- but the ticket's rendering as a CHAIN is itself imprecise, in
+    exactly the direction that lets a reader believe (LIB-weak) delivers
+    (LIB-const).
+  R1: HOLDS conditional on gamma = omega(1/n); FAILS at gamma=1/n
+  R2: NO -- o(n^2) does not give (LIB-const) at every n
+  R3: NO uniform N0 over the class
+  R4: NO -- (LIB-const) admits Theta(n^2)
+  R5: INCOMPARABLE as function classes; chain only under 'eventually'
+  R6: N0 ~ (6M/eps)^2 -- rises without bound as eps falls
+
+ALL ASSERTIONS PASSED.
