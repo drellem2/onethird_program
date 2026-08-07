@@ -1,0 +1,83 @@
+T1  the defect is real and reproduces -- the LP returns a sub-probability measure
+  PASS  n=3 LP optimum: got 1, want 1
+  PASS  n=3 LP returned mass: got 2/3, want 2/3
+  PASS  n=3 identity absent from the support: got False, want False
+  PASS  n=4 LP mass is already 1 (defect 1 does NOT bite here): got 1, want 1
+  PASS  n=5 LP mass is already 1 (defect 1 does NOT bite here): got 1, want 1
+  PASS  n=6 LP mass is already 1 (defect 1 does NOT bite here): got 1, want 1
+T2  completion is a no-op on the theorem -- checked, not asserted
+  PASS  n=3 mass after completion: got 1, want 1
+  PASS  n=3 E[inv] unmoved by completion: got 1, want 1
+  PASS  n=3 E[F] unmoved by completion: got 2, want 2
+  PASS  n=3 still feasible after completion: got True, want True
+  PASS  n=3 mass after completion: got 1, want 1
+  PASS  n=3 E[inv] unmoved by completion: got 1, want 1
+  PASS  n=3 E[F] unmoved by completion: got 2, want 2
+  PASS  n=3 still feasible after completion: got True, want True
+  PASS  n=4 mass after completion: got 1, want 1
+  PASS  n=4 E[inv] unmoved by completion: got 2, want 2
+  PASS  n=4 E[F] unmoved by completion: got 4, want 4
+  PASS  n=4 still feasible after completion: got True, want True
+  PASS  n=4 mass after completion: got 1, want 1
+  PASS  n=4 E[inv] unmoved by completion: got 2, want 2
+  PASS  n=4 E[F] unmoved by completion: got 4, want 4
+  PASS  n=4 still feasible after completion: got True, want True
+  PASS  n=5 mass after completion: got 1, want 1
+  PASS  n=5 E[inv] unmoved by completion: got 10/3, want 10/3
+  PASS  n=5 E[F] unmoved by completion: got 6, want 6
+  PASS  n=5 still feasible after completion: got True, want True
+  PASS  n=5 mass after completion: got 1, want 1
+  PASS  n=5 E[inv] unmoved by completion: got 10/3, want 10/3
+  PASS  n=5 E[F] unmoved by completion: got 20/3, want 20/3
+  PASS  n=5 still feasible after completion: got True, want True
+  PASS  n=6 mass after completion: got 1, want 1
+  PASS  n=6 E[inv] unmoved by completion: got 5, want 5
+  PASS  n=6 E[F] unmoved by completion: got 26/3, want 26/3
+  PASS  n=6 still feasible after completion: got True, want True
+  PASS  n=6 mass after completion: got 1, want 1
+  PASS  n=6 E[inv] unmoved by completion: got 5, want 5
+  PASS  n=6 E[F] unmoved by completion: got 10, want 10
+  PASS  n=6 still feasible after completion: got True, want True
+T3  the repaired n=3 diagnostics, against the hand values in the docstring
+  PASS  n=3 aggregate-violated pairs (set): got [(0, 1), (1, 2)], want [(0, 1), (1, 2)]
+  PASS  n=3 aggregate-violated count: got 2, want 2
+  PASS  n=3 per-slot violated (pair,slot)s: got [((0, 1), 0), ((0, 2), 0), ((0, 2), 1), ((1, 2), 0)], want [((0, 1), 0), ((0, 2), 0), ((0, 2), 1), ((1, 2), 0)]
+  PASS  n=3 per-slot violated pairs: got 3, want 3
+T4  MUTATION -- withhold the completion and mg-6bc2's published 0 comes back
+  PASS  uncompleted n=3, ordered predicate = the published 0: got 0, want 0
+  PASS  uncompleted n=3, UNORDERED predicate is ALSO 0 -- so the unit fix alone would not have moved the headline: got 0, want 0
+  PASS  completed n=3, ordered predicate = 3, not 2 -- so the unit fix is not cosmetic either: got 3, want 3
+T5  MUTATION -- reproduce every published section 5 aggregate figure
+  PASS  published aggregate n=3 F: got 0, want 0
+  PASS  published aggregate n=3 inv: got 0, want 0
+  PASS  published aggregate n=4 F: got 6, want 6
+  PASS  published aggregate n=4 inv: got 6, want 6
+  PASS  published aggregate n=5 F: got 8, want 8
+  PASS  published aggregate n=5 inv: got 8, want 8
+  PASS  published aggregate n=6 F: got 17, want 17
+  PASS  published aggregate n=6 inv: got 10, want 10
+T6  the two repaired columns NEST, and the inclusion is strict somewhere
+  PASS  n=3 inv: aggregate ⊆ per-slot: got True, want True
+  PASS  n=3 F: aggregate ⊆ per-slot: got True, want True
+  PASS  n=4 inv: aggregate ⊆ per-slot: got True, want True
+  PASS  n=4 F: aggregate ⊆ per-slot: got True, want True
+  PASS  n=5 inv: aggregate ⊆ per-slot: got True, want True
+  PASS  n=5 F: aggregate ⊆ per-slot: got True, want True
+  PASS  n=6 inv: aggregate ⊆ per-slot: got True, want True
+  PASS  n=6 F: aggregate ⊆ per-slot: got True, want True
+  PASS  the inclusion is STRICT in at least one cell (the columns are not the same number renamed): got True, want True
+T7  NEGATIVE CONTROL -- a measure that must violate NEITHER form
+  PASS  uniform: aggregate violations: got 0, want 0
+  PASS  uniform: per-slot violations: got 0, want 0
+  PASS  uniform is a probability measure: got 1, want 1
+  PASS  uniform is INFEASIBLE for the frozen cap (so it is a control, not a witness): got 1/2, want 1/2
+T8  NEGATIVE CONTROL -- a measure that must violate BOTH forms
+  PASS  two-atom: aggregate violations > 0: got True, want True
+  PASS  two-atom: per-slot violations > 0: got True, want True
+T9  NEGATIVE CONTROL -- completing a measure that is already complete must change nothing
+  PASS  complete(two-atom) is the same measure: got {(0, 1, 2, 3, 4): Fraction(2, 3), (4, 3, 2, 1, 0): Fraction(1, 3)}, want {(0, 1, 2, 3, 4): Fraction(2, 3), (4, 3, 2, 1, 0): Fraction(1, 3)}
+T10 NEGATIVE CONTROL -- completion must REFUSE a super-probability measure
+  PASS  complete() rejects mass > 1: got ValueError, want ValueError
+
+SELFTEST OK -- 10 blocks, 5 of them negative controls or mutations
+EXIT=0

@@ -1,0 +1,88 @@
+==============================================================================
+R2  DEFECT ISOLATION -- the 2x2 of {measure} x {predicate}
+    rows: the measure the diagnostic ran on
+    cols: ORDERED adjacency keys (mg-6bc2's) vs UNORDERED pairs (repaired)
+==============================================================================
+
+  n = 3,  max E[inv_e]   (LP mass 2/3)
+                                ORDERED keys   UNORDERED pairs
+    sub-probability (as run)               0                 0    <- top-left is what mg-6bc2 published
+    completed (repaired)                   3                 2    <- bottom-right is what it should have said
+    defect 1 (missing mass) moves this number: YES
+    defect 2 (wrong unit)   moves this number: YES
+
+  n = 3,  max E[footrule]   (LP mass 2/3)
+                                ORDERED keys   UNORDERED pairs
+    sub-probability (as run)               0                 0    <- top-left is what mg-6bc2 published
+    completed (repaired)                   3                 2    <- bottom-right is what it should have said
+    defect 1 (missing mass) moves this number: YES
+    defect 2 (wrong unit)   moves this number: YES
+
+  n = 4,  max E[inv_e]   (LP mass 1)
+                                ORDERED keys   UNORDERED pairs
+    sub-probability (as run)               6                 5    <- top-left is what mg-6bc2 published
+    completed (repaired)                   6                 5    <- bottom-right is what it should have said
+    defect 1 (missing mass) moves this number: no
+    defect 2 (wrong unit)   moves this number: YES
+
+  n = 4,  max E[footrule]   (LP mass 1)
+                                ORDERED keys   UNORDERED pairs
+    sub-probability (as run)               6                 5    <- top-left is what mg-6bc2 published
+    completed (repaired)                   6                 5    <- bottom-right is what it should have said
+    defect 1 (missing mass) moves this number: no
+    defect 2 (wrong unit)   moves this number: YES
+
+  n = 5,  max E[inv_e]   (LP mass 1)
+                                ORDERED keys   UNORDERED pairs
+    sub-probability (as run)               8                 6    <- top-left is what mg-6bc2 published
+    completed (repaired)                   8                 6    <- bottom-right is what it should have said
+    defect 1 (missing mass) moves this number: no
+    defect 2 (wrong unit)   moves this number: YES
+
+  n = 5,  max E[footrule]   (LP mass 1)
+                                ORDERED keys   UNORDERED pairs
+    sub-probability (as run)               8                 6    <- top-left is what mg-6bc2 published
+    completed (repaired)                   8                 6    <- bottom-right is what it should have said
+    defect 1 (missing mass) moves this number: no
+    defect 2 (wrong unit)   moves this number: YES
+
+  n = 6,  max E[inv_e]   (LP mass 1)
+                                ORDERED keys   UNORDERED pairs
+    sub-probability (as run)              10                 7    <- top-left is what mg-6bc2 published
+    completed (repaired)                  10                 7    <- bottom-right is what it should have said
+    defect 1 (missing mass) moves this number: no
+    defect 2 (wrong unit)   moves this number: YES
+
+  n = 6,  max E[footrule]   (LP mass 1)
+                                ORDERED keys   UNORDERED pairs
+    sub-probability (as run)              17                13    <- top-left is what mg-6bc2 published
+    completed (repaired)                  17                13    <- bottom-right is what it should have said
+    defect 1 (missing mass) moves this number: no
+    defect 2 (wrong unit)   moves this number: YES
+
+==============================================================================
+SUMMARY
+==============================================================================
+  n objective      published  repaired  mass<1  d1 bites  d2 bites
+  3 E[inv_e]               0         2     YES       YES       YES
+  3 E[footrule]            0         2     YES       YES       YES
+  4 E[inv_e]               6         5      no        no       YES
+  4 E[footrule]            6         5      no        no       YES
+  5 E[inv_e]               8         6      no        no       YES
+  5 E[footrule]            8         6      no        no       YES
+  6 E[inv_e]              10         7      no        no       YES
+  6 E[footrule]           17        13      no        no       YES
+
+defect 1 bites at n = 3 in 2 of 2 cells, and at n > 3 in 0 of 6
+defect 2 bites at n = 3 in 2 of 2 cells, and at n > 3 in 6 of 6
+
+Reading it precisely, because both defects touch n = 3 and only one of
+them can move the headline:
+  * ONLY DEFECT 1 CAN MOVE THE n = 3 NUMBER OFF ZERO.  The unordered
+    predicate on the UNCOMPLETED measure still reads 0, so the unit fix
+    alone would have left `the aggregate form excludes nothing` standing.
+    Completing the measure is what turns 0 into a violation; the unit
+    then decides whether it is reported as 3 or as 2.
+  * AT n > 3 the measure was already at mass 1, so the entire change in
+    the section 5 column is defect 2 -- and it is there at every n.
+EXIT=0
