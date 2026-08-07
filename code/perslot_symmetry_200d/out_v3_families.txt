@@ -1,0 +1,45 @@
+==============================================================================
+V3  LOWER-BOUND SEARCH for a branch beating (n-1)/3.  Every number below is a
+    LOWER bound on the disjunctive optimum -- it can refute the conjecture,
+    it can never confirm it.
+==============================================================================
+
+### n = 4   (n-1)/3 = 1   baseline C(n,2)/3 = 2
+  window families:
+    window w=1                 E[inv] =        1  eps_spec =     2/5  |I| =  3  atoms   3  max flip 1/3   = (n-1)/3
+    window w=2                 INFEASIBLE (phase-1 residual 1/6)
+    window w=3                 INFEASIBLE (phase-1 residual 1/3)
+  block families:
+    blocks b=2                 INFEASIBLE (phase-1 residual 1/3)
+    blocks b=3                 INFEASIBLE (phase-1 residual 1/3)
+    blocks b=4                 INFEASIBLE (phase-1 residual 1/3)
+  randomised sweep (60 branches, LCG seed 20260807):
+    15/60 feasible, max E[inv] = 1   <= (n-1)/3
+  ==> best found at n=4: 1 on window w=1;  conjecture (n-1)/3 = 1 is not refuted by this search
+
+### n = 5   (n-1)/3 = 4/3   baseline C(n,2)/3 = 10/3
+  window families:
+    window w=1                 E[inv] =      4/3  eps_spec =     1/3  |I| =  4  atoms   3  max flip 1/3   = (n-1)/3
+    window w=2                 INFEASIBLE (phase-1 residual 1/21)
+    window w=3                 INFEASIBLE (phase-1 residual 6/31)
+    window w=4                 INFEASIBLE (phase-1 residual 1/3)
+  block families:
+    blocks b=2                 INFEASIBLE (phase-1 residual 1/3)
+    blocks b=3                 INFEASIBLE (phase-1 residual 1/3)
+    blocks b=4                 INFEASIBLE (phase-1 residual 1/3)
+    blocks b=5                 INFEASIBLE (phase-1 residual 1/3)
+  randomised sweep (60 branches, LCG seed 20260807):
+    9/60 feasible, max E[inv] = 4/3   <= (n-1)/3
+  ==> best found at n=5: 4/3 on window w=1;  conjecture (n-1)/3 = 4/3 is not refuted by this search
+
+### n = 6   (n-1)/3 = 5/3   baseline C(n,2)/3 = 5
+  window families:
+    window w=1                 E[inv] =      5/3  eps_spec =     2/7  |I| =  5  atoms   3  max flip 1/3   = (n-1)/3
+    window w=2                 INFEASIBLE (phase-1 residual 1/9)
+    window w=3                 INFEASIBLE (phase-1 residual 5/138)
+    window w=4                 INFEASIBLE (phase-1 residual 62/321)
+
+[RUN HALTED BY mg-200d] The next LP is the n=6 all-pairs literal form (window w=5):
+720 columns against 75 EQUALITY rows, so phase 1 carries 76 artificials.  It had not
+finished after ~50 minutes and was stopped rather than left to block the merge.  Nothing
+in the document depends on it; the n=6 literal values are NOT claimed anywhere.
