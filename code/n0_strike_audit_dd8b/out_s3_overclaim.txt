@@ -1,0 +1,87 @@
+
+##############################################################################
+# CONTROLS — run BEFORE any verdict, because an untested guard proves nothing
+##############################################################################
+  PASS  POSITIVE: planted BARE overclaim is flagged (1 unqualified hit(s) of 1)
+  PASS  POSITIVE: the COMPRESSED strike-annotation form — exactly what my brief predicts — is flagged
+  PASS  NEGATIVE: the correctly QUALIFIED form is NOT flagged (2 hit(s), all qualified)
+  PASS  NEGATIVE: per-family acknowledgement detector fires on the TRUE half
+
+  CONTROLS PASSED
+
+##############################################################################
+# STATE.md
+##############################################################################
+
+  STRONG-FORM ASSERTIONS FOUND: 13 OCCURRENCES
+    QUALIFIED   (per-class qualifier within +/-600 chars): 12
+    UNQUALIFIED (none found in that window)              : 1
+
+  QUALIFIED:
+    :15    [no N0 works] 'NO `N₀` WORKS'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :23    [no N0 works] 'no `N₀` works'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :64    [no N0 works] 'NO N₀ works'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :115   [no N0 works] 'NO `N₀` WORKS'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :115   [no N0 works] 'No `N₀` works'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :209   [no N0 works] 'no `N₀` works'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :115   [there is none] 'there is no threshold'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :15    [NOT UNSPECIFIED] '`N₀` IS NOT UNSPECIFIED'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :115   [NOT UNSPECIFIED] '`N₀` IS NOT UNSPECIFIED'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :15    [no threshold follows] 'no threshold follows'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :115   [no threshold follows] 'no threshold follows'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+    :23    [underivable] 'underivable'
+            licensed by: ['for\\s+the\\s+(whole\\s+)?class', 'for\\s+the\\s+class', '\\bthe\\s+class\\b']
+
+  *** UNQUALIFIED — READ THESE BY HAND ***
+    :167   [there is none] 'there is no threshold'
+
+  PER-FAMILY ACKNOWLEDGEMENT (the TRUE half) present at 5 site(s):
+    :15  'at its own `n`'
+    :15  'its own `n'
+    :115  '*some* threshold of its own'
+    :115  'a single family'
+    :115  'threshold of its own'
+
+##############################################################################
+# docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md
+##############################################################################
+
+  STRONG-FORM ASSERTIONS FOUND: 0 OCCURRENCES
+    QUALIFIED   (per-class qualifier within +/-600 chars): 0
+    UNQUALIFIED (none found in that window)              : 0
+
+  PER-FAMILY ACKNOWLEDGEMENT (the TRUE half) present at 0 site(s):
+    NONE — a reader of this file alone meets only the negative half.
+
+##############################################################################
+# docs/OneThird-LIBweak-mg-c3ca.md
+##############################################################################
+
+  STRONG-FORM ASSERTIONS FOUND: 0 OCCURRENCES
+    QUALIFIED   (per-class qualifier within +/-600 chars): 0
+    UNQUALIFIED (none found in that window)              : 0
+
+  PER-FAMILY ACKNOWLEDGEMENT (the TRUE half) present at 0 site(s):
+    NONE — a reader of this file alone meets only the negative half.
+
+==============================================================================
+BASELINE (pre-mg-24fb) — the numbers a later audit compares against
+==============================================================================
+  STATE.md
+     unqualified strong-form: 1   qualified: 12   per-family acks: 5
+  docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md
+     unqualified strong-form: 0   qualified: 0   per-family acks: 0
+  docs/OneThird-LIBweak-mg-c3ca.md
+     unqualified strong-form: 0   qualified: 0   per-family acks: 0
+==============================================================================

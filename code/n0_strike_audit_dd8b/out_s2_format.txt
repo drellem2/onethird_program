@@ -1,0 +1,71 @@
+
+##############################################################################
+# POSITIVE CONTROL — one planted instance of each shape
+##############################################################################
+  PASS  shape A found 1
+  PASS  shape B found 1
+  PASS  shape C found 1
+  PASS  strike detector found 1
+
+  POSITIVE CONTROL PASSED
+
+##############################################################################
+# docs/OneThird-LIBweak-mg-c3ca.md   (335 lines)
+##############################################################################
+
+  STRIKES (~~...~~): 5 OCCURRENCES on 5 LINES
+    :118  ~~`ε_spec ≈ 2×10⁻⁴`~~
+    :119  ~~`~5×10³`~~
+    :123  ~~`~10⁵`~~
+    :251  ~~Three points cannot tell those two rates apart.~~
+    :323  ~~*empirical* (0/132, `n ≤ 7`)~~
+
+  MARKER SHAPES:
+    2  A: **[NAME — mg-XXXX, on <src> §N.**  (bracket, em-dash, 'on', closing '.**')
+         :32  'ROW REFERENCE REPAIRED'
+         :52  'REFUTATION WITHDRAWN'
+    1  B: **[NAME — <who>: ...]**            (bracket, em-dash, COLON)
+         :119  'SUPERSEDED INPUT REPAIRED'
+    1  C: > **NAME (mg-XXXX, ...) — ...**    (blockquote, PARENTHESES, no bracket)
+         :325  'CORRECTED AT SOURCE'
+
+  DISTINCT MARKER SHAPES PRESENT IN THIS FILE: 3
+
+  CLOSING DELIMITER of each bracketed marker:
+    :32  closes with  **]**
+    :52  closes with  **]
+    :119  closes with  ]**
+    DISTINCT CLOSING DELIMITERS: 3  ['**]', '**]**', ']**']
+
+  AUTHOR ATTRIBUTION inside markers:
+    :32  attributes to mg-2df8
+    :52  attributes to mg-2df8
+    :119  attributes to mg-e35c
+
+##############################################################################
+# docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md   (265 lines)
+##############################################################################
+
+  STRIKES (~~...~~): 0 OCCURRENCES on 0 LINES
+
+  MARKER SHAPES:
+    0  A: **[NAME — mg-XXXX, on <src> §N.**  (bracket, em-dash, 'on', closing '.**')
+    0  B: **[NAME — <who>: ...]**            (bracket, em-dash, COLON)
+    0  C: > **NAME (mg-XXXX, ...) — ...**    (blockquote, PARENTHESES, no bracket)
+
+  DISTINCT MARKER SHAPES PRESENT IN THIS FILE: 0
+
+  AUTHOR ATTRIBUTION inside markers:
+
+==============================================================================
+VERDICT ON THE BRIEF'S PRESUMPTION
+==============================================================================
+  OneThird-LIBweak-mg-c3ca.md
+     distinct marker shapes: 3     strikes: 5
+  OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md
+     distinct marker shapes: 0     strikes: 0
+
+  My brief says 'Two strike formats in one file is a defect in its own right'
+  and directs me to make mg-24fb match mg-2df8's. Read the numbers above
+  before accepting that there is a single format to match.
+==============================================================================

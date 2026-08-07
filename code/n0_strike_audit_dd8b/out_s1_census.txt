@@ -1,0 +1,152 @@
+
+##############################################################################
+# POSITIVE CONTROL — planted occurrences, run BEFORE any absence is reported
+##############################################################################
+  PASS  'unspecified'            found 2 occurrence(s)
+  PASS  'not specified'          found 1 occurrence(s)
+  PASS  'unknown threshold'      found 1 occurrence(s)
+  PASS  'sufficiently large'     found 2 occurrence(s)
+  PASS  'for large enough'       found 2 occurrence(s)
+  PASS  'eventually'             found 1 occurrence(s)
+  PASS  'large enough (bare)'    found 2 occurrence(s)
+  PASS  'some N_0'               found 1 occurrence(s)
+  PASS  'no explicit'            found 1 occurrence(s)
+  PASS  'not made explicit'      found 1 occurrence(s)
+  PASS  'unquantified'           found 1 occurrence(s)
+  PASS  'does not specify'       found 1 occurrence(s)
+  PASS  'without specifying'     found 1 occurrence(s)
+  PASS  '2/(n+1)'                found 1 occurrence(s)
+
+  PASS  'unspecified' finds BOTH occurrences on one line (the LINES/OCCURRENCES gap)
+  PASS  'for large enough' finds BOTH on the same line
+  PASS  'sufficiently large' finds the HYPHENATED variant
+  PASS  KNOWN LIMITATION (expected False): a phrase wrapped ACROSS a line break is NOT found by a per-line scan
+
+  POSITIVE CONTROL PASSED — the instrument can find what it looks for, so an absence below is evidence.
+
+##############################################################################
+# NEGATIVE CONTROL — a passage carrying none of the terms
+##############################################################################
+  total spurious matches: 0   PASS — no term is vacuously wide
+
+##############################################################################
+# TARGET docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md   (265 lines, 15707 bytes)
+##############################################################################
+
+==============================================================================
+PRIMARY TERM (what both prior counts greped for)   —   docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md
+==============================================================================
+
+  TERM 'unspecified':  8 OCCURRENCES on 7 LINES
+    lines: 15, 137, 148, 162, 166, 255, 261
+    LINES CARRYING >1 OCCURRENCE: [166]   <-- this is the exact gap between the two units
+      :15  col 71  [unspecified]
+         | third — the `N₀` in `(LIB-weak) ⟹ (LIB-const)` — because that one is *unspecified*, which is not a
+      :137  col 44  [UNSPECIFIED]
+         | | T4 | `(LIB-weak) ⟹ (LIB-const)` | `N₀` **UNSPECIFIED** | `STATE.md:13`, ledger row 8 |
+      :148  col 6  [unspecified]
+         | | T4 unspecified `N₀` | **UNREACHABLE IN PRINCIPLE** | **UNREACHABLE IN PRINCIPLE** |
+      :162  col 33  [unspecified]
+         | **6 of 891, 0.67%**. And `C` is unspecified with `C ≥ 1`, so **0.67% is an upper bound on that
+      :166  col 2  [unspecified]
+         | *unspecified*. No finite lower bound, however large, clears an unspecified threshold — the
+      :166  col 64  [unspecified]
+         | *unspecified*. No finite lower bound, however large, clears an unspecified threshold — the
+      :255  col 38  [unspecified]
+         | > (the (LIB) crossover); against the unspecified `N₀` of `(LIB-weak) ⟹ (LIB-const)` no finite
+      :261  col 1  [unspecified]
+         | unspecified. **This item does not have a successor.** The one thing in §2 that might: nobody in
+
+==============================================================================
+SYNONYM SET mg-5ce3 RAN ON STATE.md — never run on these two documents   —   docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md
+==============================================================================
+
+  TERM 'not specified':  0 OCCURRENCES on 0 LINES
+
+  TERM 'unknown threshold':  0 OCCURRENCES on 0 LINES
+
+  TERM 'sufficiently large':  0 OCCURRENCES on 0 LINES
+
+  TERM 'for large enough':  0 OCCURRENCES on 0 LINES
+
+  TERM 'eventually':  0 OCCURRENCES on 0 LINES
+
+==============================================================================
+EXTENDED SET (wider than the brief; a hit here indicts the BRIEF's set)   —   docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md
+==============================================================================
+
+  TERM 'large enough (bare)':  1 OCCURRENCES on 1 LINES
+    lines: 260
+    no line carries more than one occurrence (so LINES == OCCURRENCES for this term)
+      :260  col 61  [large enough]
+         | discharged the quantifier gap is closed — not for want of a large enough `N`, but because `N₀` is
+
+  TERM 'some N_0':  0 OCCURRENCES on 0 LINES
+
+  TERM 'no explicit':  0 OCCURRENCES on 0 LINES
+
+  TERM 'not made explicit':  0 OCCURRENCES on 0 LINES
+
+  TERM 'unquantified':  0 OCCURRENCES on 0 LINES
+
+  TERM 'does not specify':  0 OCCURRENCES on 0 LINES
+
+  TERM 'without specifying':  0 OCCURRENCES on 0 LINES
+
+  TERM '2/(n+1)':  0 OCCURRENCES on 0 LINES
+
+##############################################################################
+# TARGET docs/OneThird-LIBweak-mg-c3ca.md   (335 lines, 22741 bytes)
+##############################################################################
+
+==============================================================================
+PRIMARY TERM (what both prior counts greped for)   —   docs/OneThird-LIBweak-mg-c3ca.md
+==============================================================================
+
+  TERM 'unspecified':  1 OCCURRENCES on 1 LINES
+    lines: 101
+    no line carries more than one occurrence (so LINES == OCCURRENCES for this term)
+      :101  col 3  [unspecified]
+         | **unspecified**, and the minimal-counterexample argument needs the contradiction *at the actual
+
+==============================================================================
+SYNONYM SET mg-5ce3 RAN ON STATE.md — never run on these two documents   —   docs/OneThird-LIBweak-mg-c3ca.md
+==============================================================================
+
+  TERM 'not specified':  0 OCCURRENCES on 0 LINES
+
+  TERM 'unknown threshold':  0 OCCURRENCES on 0 LINES
+
+  TERM 'sufficiently large':  0 OCCURRENCES on 0 LINES
+
+  TERM 'for large enough':  0 OCCURRENCES on 0 LINES
+
+  TERM 'eventually':  1 OCCURRENCES on 1 LINES
+    lines: 113
+    no line carries more than one occurrence (so LINES == OCCURRENCES for this term)
+      :113  col 81  [eventually]
+         | - Neither implies the other *outright*: `o(n²)` gives a constant threshold only eventually;
+
+==============================================================================
+EXTENDED SET (wider than the brief; a hit here indicts the BRIEF's set)   —   docs/OneThird-LIBweak-mg-c3ca.md
+==============================================================================
+
+  TERM 'large enough (bare)':  0 OCCURRENCES on 0 LINES
+
+  TERM 'some N_0':  0 OCCURRENCES on 0 LINES
+
+  TERM 'no explicit':  0 OCCURRENCES on 0 LINES
+
+  TERM 'not made explicit':  0 OCCURRENCES on 0 LINES
+
+  TERM 'unquantified':  0 OCCURRENCES on 0 LINES
+
+  TERM 'does not specify':  0 OCCURRENCES on 0 LINES
+
+  TERM 'without specifying':  0 OCCURRENCES on 0 LINES
+
+  TERM '2/(n+1)':  0 OCCURRENCES on 0 LINES
+
+==============================================================================
+CONTROLS: positive PASS, negative PASS
+==============================================================================

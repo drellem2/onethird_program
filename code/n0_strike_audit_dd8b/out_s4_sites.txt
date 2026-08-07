@@ -1,0 +1,47 @@
+
+##############################################################################
+# docs/OneThird-Literature-LowerBound-MinimalCounterexample-mg-33f5.md
+##############################################################################
+
+  COMMITS TOUCHING THIS FILE ON origin/main: 1
+    102792a docs: THE LITERATURE BOUND EXISTS AND IT CLEARS NOTHING — a minimal counterexample has n >= 12 (Peczarski, Order 23 (2006) 89-95, REFEREED, GPC for all posets on <= 11 elements with NO class restriction, GPC ⟹ 1/3-2/3) and n >= 15 (Gupta arXiv:2607.23926, PREPRINT TEN DAYS OLD, "Every non-chain poset on at most 14 elements has balance constant at least 1/3" over all 1,338,193,159,771 unlabeled posets — cross-checked here against OEIS A000112(14), exact ✓ — carrying the author's own caveat "No independent per-poset check is made above order 9").  BOTH ARE VERIFICATION RANGES, NOT STRUCTURAL BOUNDS, AND THE TICKET'S PAYOFF DOES NOT LAND: the live thresholds are n >= 100 (master-bound, PRIMITIVE, which is the only class a minimal counterexample can be) and n ~ 900C, so 15 is short by 85 and by >= 885.  The one threshold it DOES clear is the n >= 11 non-chain form, which is never the operative one — the miscitation this document most expects.  SIZED RATHER THAN ASSERTED: 6 of the 91 orders in the master-bound dead zone removed, 6.6%, and 0.67% against the crossover where C >= 1 makes that an UPPER bound on the gain.  AND THE FOURTH THRESHOLD IS UNREACHABLE IN PRINCIPLE — no finite lower bound clears the UNSPECIFIED N_0 of (LIB-weak) ⟹ (LIB-const); the comparison is not unfavourable, it is undefined, so this route was never available against the quantifier gap at all.  THE STRUCTURAL HALF IS A CLEAN NEGATIVE with its instrument named: no structural lower bound on a minimal counterexample's size exists in the literature, the class exclusions (width 2, semiorders, N-free, forest cover graph, 5-thin, 6-thin, nontrivial automorphism) top out at n >= 8 via 6-thinness and are therefore DOMINATED BY THIS ARC'S OWN CENSUS, and they are tabulated WITHOUT being summed with the census figure.  Eight search strings, every source opened listed, and nine boundaries of what I did not read declared — including that Peczarski 2006 is PAYWALLED and its exact quantifier wording is reported at second hand from three agreeing secondary sources, that I did not verify Gupta's computation, and that every attribution in the class table except Peczarski 2008 is NOT independently verified by me.  ab6fa's premise re-checked rather than inherited: 0 files in STATE.md/docs/code match a verification-range grep and 0 cite Peczarski, while the arc's 16,998 non-chain posets at n=8 match OEIS A000112(8) = 16,999 minus one chain ✓ — the two censuses count the same objects (mg-33f5)
+    => the file has ONE commit, so NO line can have drifted since it
+       was written. A wrong number here is a MIS-CITATION, not staleness.
+
+  INHERITED NUMBERS RESOLVED AGAINST TODAY'S FILE:
+    HIT  :15   (1 occurrence(s))  | third — the `N₀` in `(LIB-weak) ⟹ (LIB-const)` — because that one is *unspecified*, which is not a
+    HIT  :137  (1 occurrence(s))  | | T4 | `(LIB-weak) ⟹ (LIB-const)` | `N₀` **UNSPECIFIED** | `STATE.md:13`, ledger row 8 |
+    HIT  :148  (1 occurrence(s))  | | T4 unspecified `N₀` | **UNREACHABLE IN PRINCIPLE** | **UNREACHABLE IN PRINCIPLE** |
+    MISS :165  (0 occurrence(s))  | **T4 is the important row and it is not a matter of size.** `N₀` in `(LIB-weak) ⟹ (LIB-const)` is
+          nearest occurrence(s) within 3 lines: [162, 166]
+            :162  | **6 of 891, 0.67%**. And `C` is unspecified with `C ≥ 1`, so **0.67% is an upper bound on that
+            :166  | *unspecified*. No finite lower bound, however large, clears an unspecified threshold — the
+    HIT  :255  (1 occurrence(s))  | > (the (LIB) crossover); against the unspecified `N₀` of `(LIB-weak) ⟹ (LIB-const)` no finite
+    MISS :260  (0 occurrence(s))  | discharged the quantifier gap is closed — not for want of a large enough `N`, but because `N₀` is
+          nearest occurrence(s) within 3 lines: [261]
+            :261  | unspecified. **This item does not have a successor.** The one thing in §2 that might: nobody in
+
+  MY OWN ENUMERATION (primary term, no judgement applied):
+    8 OCCURRENCES on 7 LINES: [15, 137, 148, 162, 166, 255, 261]
+    lines I have that the inherited set does NOT: [162, 166, 261]
+    lines the inherited set has that I do NOT:    [165, 260]
+
+##############################################################################
+# docs/OneThird-LIBweak-mg-c3ca.md
+##############################################################################
+
+  COMMITS TOUCHING THIS FILE ON origin/main: 4
+    276aead docs: ROW 3b's 0/132 IS A SAMPLING ARTIFACT — the row is RESTATED CONDITIONALLY and the ESCAPED "clean sweep" phrase is struck at every site it reached, in BOTH files (mg-55f2)
+    99dc61d docs: THE TICKET'S TWO STATE.md DEFECTS WERE ALREADY DEAD — mg-c4f5 repaired both in its OWN commit (05a0061), and the live copy of the false sentence was in mg-c3ca's doc, which nobody had touched (mg-2df8)
+    d101026 docs: THE LIVE 100x-WRONG FIGURE IS STRUCK — the primary doc said the remaining gap was a factor of ~5,000 and it is ~50, and the error ran in the direction that inflates pessimism (mg-5827)
+    81214a9 analysis: (LIB-weak) IS NOT BLOCKED BY THE ARC'S NAMED OBSTRUCTION — the block-cross is a ONE-ELEMENT object and (LIB-weak) does not notice a configuration until Theta(n) elements do it simultaneously, proven as an iff on the mass profile; plus the rider the ticket's premise did not carry (it closes ledger row 8 as written, not the wall the architecture consumes, and the gap is a quantifier), and a forward vector whose own probe fired on it (mg-c3ca)
+
+  INHERITED NUMBERS RESOLVED AGAINST TODAY'S FILE:
+    MISS :100  (0 occurrence(s))  | explicitly *not* the limit. A limit hypothesis supplies the threshold only for `n ≥ N₀` with `N₀`
+          nearest occurrence(s) within 3 lines: [101]
+            :101  | **unspecified**, and the minimal-counterexample argument needs the contradiction *at the actual
+
+  MY OWN ENUMERATION (primary term, no judgement applied):
+    1 OCCURRENCES on 1 LINES: [101]
+    lines I have that the inherited set does NOT: [101]
+    lines the inherited set has that I do NOT:    [100]
