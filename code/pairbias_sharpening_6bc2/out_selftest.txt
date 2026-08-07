@@ -1,0 +1,31 @@
+S1  combinatorial primitives, against hand values
+  PASS  inv(reversal,n=4): got 6, want 6
+  PASS  footrule(reversal,n=4): got 8, want 8
+  PASS  inv(identity,n=4): got 0, want 0
+  PASS  footrule(halfrot,n=4): got 8, want 8
+  PASS  inv(halfrot,n=4): got 4, want 4
+  PASS  halfrot saturates DG (F=2I): got 8, want 8
+  PASS  reversal does NOT saturate DG: got False, want False
+S2  simplex, against a hand-solved 2-variable LP
+  PASS  simplex value: got 10, want 10
+  PASS  simplex argmax: got [Fraction(2, 1), Fraction(2, 1)], want [Fraction(2, 1), Fraction(2, 1)]
+S3  the two-atom law -- hand value H2/H3, n=5
+  PASS  two-atom max flip prob: got 1/3, want 1/3
+  PASS  two-atom E[inv] = C(n,2)/3: got 10/3, want 10/3
+  PASS  two-atom E[footrule]: got 4, want 4
+  PASS  two-atom VIOLATES adjacency symmetry: got True, want True
+S4  NEGATIVE CONTROL -- a measure that must FAIL the frozen cap
+  PASS  uniform max flip prob is 1/2 (infeasible): got 1/2, want 1/2
+  PASS  uniform SATISFIES adjacency symmetry: got [], want []
+S5  NEGATIVE CONTROL -- mutate the cap, the optimum must move
+  PASS  LP inv optimum at cap 1/3 = 3*cap: got 1, want 1
+  PASS  LP inv optimum at cap 1/6 = 3*cap: got 1/2, want 1/2
+S6  NEGATIVE CONTROL -- a broken objective must not reproduce the answer
+  PASS  zero objective gives 0 (detector is not constant): got 0, want 0
+S7  hierarchical construction, n=8, hand value H4
+  PASS  hierarchical max flip prob <= 1/3: got True, want True
+  PASS  hierarchical E[F] = 2 E[inv] (all atoms saturate DG): got 56/3, want 56/3
+  PASS  hierarchical E[footrule] = 56/3: got 56/3, want 56/3
+
+SELFTEST OK -- 7 constructions, 3 of them negative controls
+exit=0

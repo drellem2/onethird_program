@@ -1,0 +1,53 @@
+==============================================================================
+V1  MARGINAL RELAXATION: max over ALL measures on S_n with every pair-flip <= 1/3
+    (this is 'pair bias alone'.  No posets are enumerated.)
+==============================================================================
+
+--- n = 3 ---   C(n,2) = 3,  C(n,2)/3 = 1,  n/(n+1) = 3/4
+  max E[inv_e]           = 1 = 1.000000
+    Claim 6.1's m/3      = 1 = 1.000000   -> P1 HELD
+    eps_spec = 6E/(n^2-1)= 3/4 = 0.750000
+    n/(n+1)              = 3/4 = 0.750000   -> MATCH
+    optimiser support    = 2 permutations
+  max E[footrule]        = 2 = 2.000000
+    3E[F]/(n^2-1)        = 3/4 = 0.750000
+    (n^2-1)/3 = eps 1 at = 8/3 = 2.666667
+    optimiser support    = 2 permutations
+  two-atom law: E[inv]=1  eps_inv=3/4 = 0.750000  E[F]=4/3  eps_F=1/2 = 0.500000
+    attains inv optimum? YES   attains footrule optimum? no
+    adjacency symmetry violated at 4 ordered pairs
+  P6: inv-optimiser violates adjacency symmetry: NO (0 ordered pairs)
+      F-optimiser   violates adjacency symmetry: NO (0 ordered pairs)
+
+--- n = 4 ---   C(n,2) = 6,  C(n,2)/3 = 2,  n/(n+1) = 4/5
+  max E[inv_e]           = 2 = 2.000000
+    Claim 6.1's m/3      = 2 = 2.000000   -> P1 HELD
+    eps_spec = 6E/(n^2-1)= 4/5 = 0.800000
+    n/(n+1)              = 4/5 = 0.800000   -> MATCH
+    optimiser support    = 3 permutations
+  max E[footrule]        = 4 = 4.000000
+    3E[F]/(n^2-1)        = 4/5 = 0.800000
+    (n^2-1)/3 = eps 1 at = 5 = 5.000000
+    optimiser support    = 3 permutations
+  two-atom law: E[inv]=2  eps_inv=4/5 = 0.800000  E[F]=8/3  eps_F=8/15 = 0.533333
+    attains inv optimum? YES   attains footrule optimum? no
+    adjacency symmetry violated at 6 ordered pairs
+  hierarchical: E[inv]=2  E[F]=4  eps_F=4/5 = 0.800000  maxflip=1/3
+  P6: inv-optimiser violates adjacency symmetry: YES (6 ordered pairs)
+      F-optimiser   violates adjacency symmetry: YES (6 ordered pairs)
+
+--- n = 5 ---   C(n,2) = 10,  C(n,2)/3 = 10/3,  n/(n+1) = 5/6
+  max E[inv_e]           = 10/3 = 3.333333
+    Claim 6.1's m/3      = 10/3 = 3.333333   -> P1 HELD
+    eps_spec = 6E/(n^2-1)= 5/6 = 0.833333
+    n/(n+1)              = 5/6 = 0.833333   -> MATCH
+    optimiser support    = 3 permutations
+  max E[footrule]        = 20/3 = 6.666667
+    3E[F]/(n^2-1)        = 5/6 = 0.833333
+    (n^2-1)/3 = eps 1 at = 8 = 8.000000
+    optimiser support    = 3 permutations
+  two-atom law: E[inv]=10/3  eps_inv=5/6 = 0.833333  E[F]=4  eps_F=1/2 = 0.500000
+    attains inv optimum? YES   attains footrule optimum? no
+    adjacency symmetry violated at 8 ordered pairs
+  P6: inv-optimiser violates adjacency symmetry: YES (8 ordered pairs)
+      F-optimiser   violates adjacency symmetry: YES (8 ordered pairs)
