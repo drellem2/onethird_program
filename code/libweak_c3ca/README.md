@@ -44,9 +44,18 @@ a different thing, and the doc says so where it uses them.
    assertion was wrong, not the code** — `δ(W_m) = ⌊(m+1)/2⌋/(m+1)`, which is `1/2` only at odd
    `m`. Fixed to the hand formula; the correction is carried in the doc §3 because it is a
    (consequence-free) correction to merged text, not to this code.
-2. `p3_window` was first written with the linear form of (MW) only. It reported 8 088 refuters
-   and nothing else — a refutation with no measurement of what survives. The `s*` readout was
+2. ~~`p3_window` was first written with the linear form of (MW) only. It reported 8 088 refuters
+   and nothing else — a refutation with no measurement of what survives.~~ The `s*` readout was
    added afterwards, and it is `s*`, not the refuter count, that carries the finding.
+   **[CORRECTED — mg-2df8, on mg-c4f5 §4. This note cannot be true as written, and it is the
+   RECORD OF HOW THE MISLABEL SURVIVED.** A linear-form predicate over this population returns
+   **0** refuters, not 8 088 — measured at every `n ≤ 7` over 1 168 036 pairs. So `p3_window` was
+   never linear-form-only *and* 8 088-producing; the committed `:100` evaluates
+   `sim >= 0.5 and mn < 1/3`, a **threshold** predicate, and 8 088 is its correct count. The
+   predicate was changed to the threshold form while the *label* stayed linear, in this note and
+   in the doc's §5 — **which is exactly why the number kept its wrong name for long enough to
+   reach STATE.md and Daniel.** The count was never in doubt; nobody re-read the predicate beside
+   the sentence quoting it.**]**
 3. `p1_census` walks the population twice (once to find `min δ`, once to collect the critical
    family). Correct but wasteful; it is why `n = 7` was not attempted here.
 4. `p2_primitive`'s `delta <= 0.3333` band prints `0 posets` for `n ≥ 4`. That is the finding
