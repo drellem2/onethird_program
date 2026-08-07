@@ -1,0 +1,99 @@
+
+==============================================================================
+A5 — WHICH STATE.md IS THIS?  (the dispatch requires the SHA be named)
+==============================================================================
+   last commit touching STATE.md : 491d42c79f7628c18cb7a5d197faa9f4600cd6c1
+   blob sha1 of the file I read  : 7f73bfc87b4bc4caab6c836f8c3922a2416863cf
+   mg-5ce3's commit              : 4ef64d7
+   is mg-5ce3 an ANCESTOR of it? : True
+   -> if True, STATE.md was REWRITTEN AFTER mg-5ce3 landed, and the
+      survival test below is one the parent could not have run.
+
+==============================================================================
+A6 — THE mg-d1a2 GUARD (check 4).  Byte substrings, not lines.
+==============================================================================
+   OK  the INSTRUCTION (mg-d1a2's, verbatim)                pre=True  now=True 
+   OK  the REFUSAL (mg-d1a2's, verbatim)                    pre=True  now=True 
+   OK  mg-d1a2's ORIGINAL REASON, kept                      pre=True  now=True 
+   OK  mg-d1a2's original reason ATTRIBUTED to mg-d1a2      pre=False now=True 
+   OK  the STRENGTHENED reason                              pre=False now=True 
+   OK  the two literature numbers the guard refuses         pre=True  now=True 
+   -> 6/6 guard components present in the CURRENT file
+
+   IS THE GUARD OVER-DETERMINED?  (a guard resting on ONE reason falls
+   with that reason.  mg-5ce3 was told to strengthen the reason without
+   weakening the guard — the test is whether BOTH reasons are live.)
+      both reasons present and each independently sufficient: True
+
+==============================================================================
+A7 — THE 'unspecified' SITES (check 3).  Decided each, or swept?
+==============================================================================
+   PRE  (4ef64d7^)        occurrences= 6  lines=[15, 23, 64, 115, 207]  per-line={15: 1, 23: 1, 64: 1, 115: 2, 207: 1}
+   POST (4ef64d7)         occurrences= 3  lines=[23, 115, 207]  per-line={23: 1, 115: 1, 207: 1}
+   NOW  (working tree)    occurrences= 3  lines=[23, 115, 209]  per-line={23: 1, 115: 1, 209: 1}
+
+   -> the ticket said FOUR, mg-5ce3 said SIX.  grep -o counts
+      OCCURRENCES, grep -n counts LINES.  Both numbers below.
+
+   the survivors, and WHY each is a different use:
+
+   line 23 col 761:
+      ... function violating (LIB-const) throughout `[1, N₀)` (mg-c4f5 §5.3, landed mg-5ce3), so the threshold is not *unspecified* but **underivable from the hypothesis** — `find N₀` is closed, not open. As asymptotic classes `(LIB) ⊊ (LIB...
+
+   line 115 col 4562:
+      ...nd that discharges nothing here.** The reason is stronger than the one this guard first carried (mg-d1a2: *an unspecified threshold is not a size any number can exceed*, still true): **there is no threshold to exceed.** No `N₀` wor...
+
+   line 209 col 1383:
+      ...gainst the `N₀` of `(LIB-weak) ⟹ (LIB-const)` no finite bound can help even in principle — that threshold is *unspecified*, so the comparison is not unfavourable but UNDEFINED** (and mg-c4f5 §5.3 reaches the same place from the oth...
+
+==============================================================================
+A8 — WAS IT A BLANKET REPLACE? (check 3, the mechanical half)
+==============================================================================
+   lines differing pre->post : [15, 23, 64, 115]  (4 lines)
+   line counts               : pre=208 post=208 (equal: True)
+   -> a sed sweep over 'unspecified' would have touched every site
+      including the two deliberately left.  It did not.
+
+==============================================================================
+A9 — DID THE STRENGTHENING OVERSHOOT? (check 2, the expensive one)
+==============================================================================
+   §5.3 proves a statement about THE CLASS of o(n^2) functions.
+   Two things it does NOT prove, and which a site must not assert:
+     (X) that no single (LIB-weak) family has a threshold of its own
+     (Y) that (LIB-const) never holds / the implication is false
+
+   per-site: does the claim carry a SCOPE QUALIFIER in its own sentence?
+      OK  line 15  (one-paragraph state)   -> ['FOR THE CLASS', 'from the `o(n²)` hypothesis']
+      OK  line 23  (Axis 1)                -> ['for the class', 'from the hypothesis']
+      OK  line 64  (mermaid label)         -> ['for the class']
+      OK  line 115 (ledger row 8)          -> ['for the class', 'FOR THE CLASS', 'from the `o(n²)` hypothesis']
+
+   per-site: does any site assert (X) or (Y)?  searched as text:
+      overshoot phrases found: NONE
+
+   the RIDER that prevents (X) — present anywhere on the page?
+      OK  "a single family satisfying (LIB-weak) does have *some* threshold of its own"  -> True
+      OK  the page NAMES the surviving route: True
+
+==============================================================================
+A10 — MERMAID INTEGRITY (line 64 was edited inside a diagram)
+==============================================================================
+   OK  quotes=2 labels=1 pipe-in-label=False  A -->|"KIND U — Theorem E: frozen pair ⟹ low-conductance BK cut 
+   OK  quotes=2 labels=1 pipe-in-label=False  B -->|"KIND OPEN ★ THE WALL — L1b: bad mixing ⟹ 1−λ_std ≤ ε_spec
+   OK  quotes=2 labels=1 pipe-in-label=False  C -->|"WEAKEST KIND FP — NOT proven. easy/Buser over any cut is 
+   OK  quotes=2 labels=1 pipe-in-label=False  D -->|"KIND OPEN (2ndary) — L4: thin interface ⟹ balanced pair s
+   OK  quotes=2 labels=1 pipe-in-label=False  E -->|"KIND U — by minimality: a balanced pair contradicts δ&lt;
+   -> all 5 edges well-formed: True
+   (mermaid edge labels break on an unescaped '|'; commas are safe.)
+
+==============================================================================
+A11 — DID mg-5ce3 OVERSHOOT ITS SOURCE?  landed text vs §5.3 text
+==============================================================================
+   §5.3's own operative sentence:
+      "No `N₀` works for the class."  present in §5.3:  True
+   the ticket's paraphrase was "NO N_0 EXISTS" (looser).
+   what LANDED on the page, per site:
+      line 15  (one-paragraph state)   -> NO `N₀` WORKS FOR THE CLASS AT ALL (mg-c4f5 §5
+      line 23  (Axis 1)                -> no `N₀` works for the class at all**: for any candidate `N₀` there is 
+      line 64  (mermaid label)         -> NO N₀ works for the class ⟸ LIB ⟸ B) (row 8)"| C
+      line 115 (ledger row 8)          -> NO `N₀` WORKS FOR THE CLASS AT ALL** (mg-c4f5 §5
