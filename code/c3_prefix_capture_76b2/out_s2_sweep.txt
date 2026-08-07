@@ -1,0 +1,69 @@
+==============================================================================
+s2 — THE SWEEP, and the theorem  C_3 = 1  given L2
+==============================================================================
+
+POPULATION: 5230 posets -- every poset on {0..n-1} with the identity a linear
+extension, n = 2..6.  Counts by n: n=2:2, n=3:7, n=4:40, n=5:357, n=6:4824
+
+------------------------------------------------------------------------------
+(S1) THE SWEEP LEMMA -- Phi(S)^2 <= 2 R(f) at some threshold set S, |S| <= n/2
+     EXACT: Fractions throughout, the Cheeger comparison is SQUARED not rooted
+------------------------------------------------------------------------------
+  checked 88980 (poset, test function) pairs over the 406-poset population at n = 2..5
+  worst ratio Phi(S)^2 / (2 R(f)) attained: 4/11 = 0.363636  (must be <= 1)
+  VERDICT: HOLDS with 0 exceptions
+
+------------------------------------------------------------------------------
+(S2) MONOTONE => PREFIX.  If f is non-decreasing along e, every threshold set of f
+     is a SUFFIX and its complement is a PREFIX.  Exhaustive over monotone f.
+------------------------------------------------------------------------------
+  checked 511 threshold sets over 301 monotone functions, n = 2..7,
+  f ranging over every non-decreasing vector in {0,1,2,3}^n
+  VERDICT: HOLDS with 0 exceptions
+
+  This is the whole content of the source's own remark at `:328-332`:
+    "Cheeger theory does not by itself imply that the cut is a prefix.  That
+     requires monotonicity of the dominant standard eigenvector in the
+     distinguished order, or a direct prefix theorem."
+  The source attaches NO loss to that conversion, and there is none to attach: the
+  sweep of a monotone vector never visits a non-prefix cut in the first place.
+
+------------------------------------------------------------------------------
+(S3) THE INSTANTIATION -- at every poset with a monotone dominant standard
+     eigenvector, the sweep lands on a prefix cut meeting the Cheeger bound.
+     Eigenvector: FLOAT (Jacobi).  Conductance and comparison: EXACT.
+------------------------------------------------------------------------------
+  monotone dominant standard eigenvector, over the 5230-poset population:
+      YES         1890   a monotone dominant eigenvector was EXHIBITED
+      NO          3340   multiplicity 1 and neither +v nor -v is monotone
+      UNDECIDED      0   multiplicity > 1 and this instrument did not
+                         solve the feasibility problem -- silence, not a miss
+  degenerate top standard eigenvalue (multiplicity > 1): 163 of 5230 posets
+
+  swept the exhibited monotone eigenvector at 1037 posets with gap > 0:
+      1037 of 1037 sweeps landed on a PREFIX-OR-SUFFIX cut
+  worst Phi^2 / (2(1-lambda_std)) over those: 0.347222  (must be <= 1)
+      at n=6, rel=[], Phi=5/6, 1-lambda_std=1.0000000000  [gap is FLOAT]
+  VERDICT: HOLDS with 0 exceptions
+
+------------------------------------------------------------------------------
+(S4) RED DRILL -- is the hypothesis doing any work?
+------------------------------------------------------------------------------
+  An instrument that can only print OK is indistinguishable from one that checks
+  nothing.  Two constructed negatives:
+
+  (a) f = [Fraction(0, 1), Fraction(3, 1), Fraction(1, 1), Fraction(2, 1)] on the N-poset is NOT monotone along e.  Of its 3 threshold
+      sets, 2 are neither prefix nor suffix: [[1, 3], [1]]
+      So (S2) is not a triviality about threshold sets -- it is about MONOTONE f.
+
+  (b) posets where min-over-prefixes STRICTLY exceeds min-over-all-cuts: 468 of 5230
+      first witness: n=4, rel=[(0, 1)], Phi* = 5/12, Phi*_prefix = 1/2, ratio = 6/5 = 1.200000
+      At such a poset the prefix restriction DOES cost something, and the
+      theorem's conclusion C_3 = 1 is not available from the sweep alone.
+      What rescues it is that the sweep of a MONOTONE eigenvector never
+      proposes the offending cut -- so the loss is never incurred.  Whether
+      the two coexist is measured in s3, not assumed here.
+
+==============================================================================
+s2 VERDICT: ALL CHECKS PASS
+==============================================================================

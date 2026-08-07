@@ -1,0 +1,40 @@
+==============================================================================
+selftest76b2 — two-sided red drills
+==============================================================================
+
+-- transport and leakage -------------------------------------------------
+  [ok ] leak on the antichain matches the hand value 2/3
+  [ok ] H8 CORRECTED: antichain Phi(A) = max(|A|,n-|A|)/n at every cut, and the as-written (n-|A|)/n form fails above the median
+  [ok ] energy(1_A) == leak(A), and a mutated indicator does not
+  [ok ] leak_naive_prefixstyle differs from leak on a non-prefix cut (P11)
+
+-- the s1 dictionary -----------------------------------------------------
+  [ok ] 1 - rho computed from (I-M) equals 1 minus rho computed from M
+  [ok ] D1 general form holds AND H1's n/(n-k) form fails above the median
+  [ok ] D2's upper factor 2 is ATTAINED at k = n/2, and not at k = 1
+  [ok ] D4 complement symmetry holds, and a mutated complement breaks it
+
+-- the sweep -------------------------------------------------------------
+  [ok ] sweep_sets on a tied monotone vector returns only prefix/suffix sets, and order-slices do not
+  [ok ] a non-monotone vector's threshold sets do leave the prefix/suffix family
+       (worst Phi(S)^2 / R(f) over n = 4,5 and every f in {0,1,2}^n: 8/11 = 0.727273; the sweep lemma allows 2)
+  [ok ] Phi^2 <= 2R holds everywhere, and the sweep bound is NOT tight in this population -- the constant 2 is never spent here, which is a fact about small posets and NOT a licence to drop it
+
+-- spectrum, monotonicity, stratification --------------------------------
+  [ok ] antichain: lambda_std = 0 with multiplicity n-1 (the whole of H)
+  [ok ] chain: lambda_std = 1, so 1 - lambda_std = 0 (M = I, graph totally disconnected)
+  [ok ] monotone_in_span says YES on a monotone 1-dim span and NO on a non-monotone one
+  [ok ] connected() separates the chain (disconnected) from the N-poset (connected)
+  [ok ] DISC == CUT == PHI0 on both a decomposable and a primitive witness, and the mutation `is a chain` disagrees with them on an ordinal sum of two antichains
+
+-- C_3 and the budget ----------------------------------------------------
+  [ok ] Phi* on the C_3^cut witness re-derives from a hand-listed enumeration, and the prefix minimum does NOT equal it (so C_3^cut > 1 there is real)
+  [ok ] window(1/50) = 99 -- 2/100 <= 1/50 holds, and n = 98 is caught as too small because 2/99 > 1/50
+  [ok ] chain (III) at C_3 = 1 IS chain (I), and at C_3 = 2 it is not
+  [ok ] chain (II) and chain (III) differ by exactly 2/eps_leak at every C_3, and they are not the same number
+  [ok ] literal reading closes above c = 1 - eps_leak and not at or below it
+  [ok ] the literal threshold c > 1 - eps_leak MOVED with mg-e35c F5's 100x repair: 0.98 at the superseded calibration, 0.80 at the repaired one, and they differ
+
+==============================================================================
+selftest76b2: 22 of 22 drills behaved as declared
+==============================================================================

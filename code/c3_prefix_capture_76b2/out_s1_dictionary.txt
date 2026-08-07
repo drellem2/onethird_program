@@ -1,0 +1,62 @@
+==============================================================================
+s1 — THE DICTIONARY between the prefix Rayleigh quotient and the conductance
+==============================================================================
+
+POPULATION: every poset on {0..n-1} whose identity permutation is a linear
+extension (so e is fixed by the labelling), n = 2..6, enumerated exhaustively.
+
+  n = 2:  2 posets
+  n = 3:  7 posets
+  n = 4:  40 posets
+  n = 5:  357 posets
+  n = 6:  4824 posets
+  TOTAL:   5230 posets
+
+------------------------------------------------------------------------------
+(D4)  |A \ sigma(A)| = |A^c \ sigma(A^c)|  pointwise in sigma
+      -- the whole warrant for the sweep's SUFFIX branch (P13 bets against it)
+------------------------------------------------------------------------------
+  checked 48616 (permutation, cut) pairs over 872 permutations, n = 2..6
+  VERDICT: HOLDS with 0 exceptions
+
+  Consequence, and it is the one the sweep needs: Phi_P is a function of the CUT
+  {A, A^c}, not of the side.  A low-conductance SUFFIX of size <= n/2 therefore
+  delivers Step 5's own quantity Delta_1(A_k, A_k^c) at the complementary prefix,
+  with no loss and no further argument.  P13 is REFUTED as a worry.
+
+------------------------------------------------------------------------------
+(D3)  <1_A,(I-M)1_A> = E|A \ sigma(A)| for EVERY cut  --  matrix vs definition
+(D1)  1 - rho(A_k) = n*leak/(k(n-k)) = n * Phi_P(A_k) / max(k, n-k)
+(D2)  Phi <= 1 - rho <= 2 Phi, for EVERY k
+------------------------------------------------------------------------------
+  (D3) checked on 310404 (poset, cut) pairs over the 5230-poset population
+  (D1) checked on 25684 (poset, prefix) pairs
+  (D2) checked on 25684 (poset, prefix) pairs, ALL k
+  VERDICT: ALL THREE HOLD with 0 exceptions
+
+  lower end 1-rho = Phi attained: 1054 of 25684 cases (needs max(k,n-k) = n, i.e.
+     Phi = 0 -- an exact ordinal-sum cut; the bound is otherwise strict)
+  upper end 1-rho = 2 Phi attained: 5866 of 25684 cases (needs k = n/2 EXACTLY,
+     so it is attained at every even n and unreachable at odd n -- PREDICTIONS P2s
+     second clause said the factor 2 is approached and never attained: REFUTED)
+
+------------------------------------------------------------------------------
+(P11) `sigma(A)` = image of A, versus the `set(p[:|A|])` convention
+------------------------------------------------------------------------------
+  PREDICTIONS.md H7 read `lib2de0.E_leak` as using the first |A| POSITIONS rather
+  than the positions indexed by A, and `lib2de0.phi_star` calls it on every subset.
+  Measured here rather than argued: `leak_naive_prefixstyle` reproduces that
+  convention and is compared against the definition on every cut.
+
+  8178 of 11316 (poset, cut) pairs over n = 2..5 DIVERGE between the two conventions
+  first witness: n=2, rel=[(0, 1)], A=[1]
+      E|A \ sigma(A)| (definition)      = 0
+      |A| - |A & set(p[:|A|])| (other)  = 1
+  Prefix cuts agree by construction; the divergence is entirely on non-prefix cuts,
+  which is exactly where `phi_star` ranges.
+  NOTED AND NOT REPAIRED — `code/direct_prefix_audit_2de0/` is mg-2de0's file, and
+  this ticket does not own it.  What follows uses this instrument's own definition.
+
+==============================================================================
+s1 VERDICT: ALL CHECKS PASS
+==============================================================================
