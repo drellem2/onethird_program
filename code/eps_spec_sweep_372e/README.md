@@ -61,6 +61,21 @@ the allowlist to silence that**; the two allowlist entries added afterwards are 
 `mg-372e`'s own banner, where the formula is printed in order to say which sites were left, and
 they are named there with that reason. A pattern relaxed until it returns `0` is unfalsifiable.
 
+## ⛔ ONE ALLOWLIST ENTRY IS NOW WRONG — *"the headline left"* (`mg-00a1`, recorded by `mg-910c`)
+
+`s2`'s `mg-200d` allowlist reads *"8 LIVE struck in place; THEOREM 4.2, the `n ≤ 5` table and
+**the headline** left"*, and the README above classes allowlisted sites as *"true as written"*.
+**The headline is no longer true as written.** `mg-00a1` proved the disjunctive per-slot value
+is `Θ(n²)`, so *"per-slot adjacency symmetry buys a factor that grows with `n`, not a constant"*
+is REFUTED — what it buys is a constant factor of at most `6`.
+
+**This instrument is not edited and its outputs are not regenerated**, because the decision it
+records was CORRECT WHEN MADE: this sweep swept the FORMULA `2/(n+1)`, and it ran **before**
+`mg-00a1` returned. The RATE is a different string and was out of its reach, by timing and by
+pattern. `mg-910c` is the sweep of the rate; the headline and the eight other rate sites are
+struck there, and `s2` still **PASSES** unchanged against those strikes (checked, `2026-08-07`).
+Nothing above this section is retracted.
+
 **What this does NOT establish.** It does not check the mathematics — `mg-131e` did that and is
 cited, not restated. It does not classify `code/` occurrences: those are instrument transcripts
 and pre-registration artefacts (`mg-ba78` set the precedent of leaving `PREDICTIONS.md`

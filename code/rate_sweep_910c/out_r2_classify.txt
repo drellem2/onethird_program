@@ -1,0 +1,83 @@
+mg-910c R2 -- CLASSIFICATION AND REPAIR CHECK
+==============================================================================
+
+
+docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md
+  [LIVE-OPEN] RATEQ       mg-372e's banner routes the reader to an open question mg-00a1 closed
+               anchor: what *is* the true growth of the disjunctive per-slot value? — is `mg-00a1`
+  [LIVE     ] GROWS       mg-372e deliberately left the headline; mg-00a1 refuted it
+               anchor: HEADLINE is deliberately NOT struck
+  [LIVE     ] GROWS       the headline itself -- REFUTED, the factor is at most 6
+               anchor: PER-SLOT ADJACENCY SYMMETRY BUYS A FACTOR THAT GROWS WITH `n`, NOT A CONSTANT
+  [LIVE-OPEN] RATEQ       the rate is not unknown; mg-00a1 settled it at Theta(n^2)
+               anchor: STRUCK and the rate is UNKNOWN
+  [LIVE     ] ARROW       each half in its OWN code span -- MISSED by the first ARROW pattern, found by reading, and it is why R1's separator class exists
+               anchor: down to ~~**`(n−1)/3`** — from `Θ(n²)` to `Θ(n)`
+  [LIVE-OPEN] -           table cell, n->infinity, per-slot row -- NOT REACHED BY ANY PATTERN
+               anchor: REFUTED at `n = 6` — UNKNOWN
+  [LIVE-OPEN] -           table cell reading `unknown` -- NOT REACHED BY ANY PATTERN
+               anchor: | ratio | `2/3` | `1/2` | `2/5` |
+  [LIVE     ] GROWS       it IS a constant factor and it is at most 6
+               anchor: The gain is not a constant factor.
+  [LIVE-OPEN] RATEQ       same paragraph; the reason is now the rate is Theta(n^2)
+               anchor: the reason is now *"the rate is unknown"*
+  [LIVE-OPEN] -           §6 strike-note -- NOT REACHED BY ANY PATTERN
+               anchor: becomes past `n = 5` is UNKNOWN
+  [LIVE     ] ARROW       presupposes a drop that does not exist; aggregate half is TRUE and kept
+               anchor: whatever the aggregate form buys, it is not the `Θ(n²) → Θ(n)` drop
+  [LIVE-OPEN] ARROW,RATEQ the closing one-line form; the rate is settled
+               anchor: and the all-`n` rate is UNKNOWN*
+  [CITED    ] ARROW       inside mg-372e's ~~strike~~ of the pre-refutation wording
+               anchor: worth `Θ(n²) → Θ(n)` at `n ≤ 5` and the all-`n` statement is open.*~~
+  [COLLISION] THETA2      the TWO-ATOM LAW's inversion count -- obstruction 4, a different quantity
+               anchor: law has `Θ(n²)` inversions with every pair frozen
+
+docs/OneThird-DualCertificate-mg-131e.md
+  [LIVE     ] ARROW       THE site: mg-131e left the rate standing on three points and no proof
+               anchor: headline is not refuted.** Every value here is still linear in
+  [SURVIVES ] ARROW       (5n-8)/12 on ONE named chord sub-family -- correct and LINEAR
+               anchor: `n(n−1)/6` is still `Θ(n²) → Θ(n)` on this sub-family
+  [LIVE-OPEN] RATEQ       the successor question mg-00a1 was filed to answer, and did
+               anchor: *What is the true growth of the disjunctive per-slot
+
+docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md
+  [LIVE     ] ARROW       'thin' understates it: the asymptotic rendering is REFUTED
+               anchor: the ASYMPTOTIC rendering rests on the same three points and no proof
+  [CITED    ] ARROW       §5.1 table cell, already struck by mg-372e and marked REFUTED
+               anchor: **REFUTED — see below** |
+  [LIVE-OPEN] RATEQ       mg-372e's banner routes to an open question mg-00a1 closed
+               anchor: question that replaces the formula: what *is* the true growth
+  [LIVE-OPEN] RATEQ       §5.3 route ordering step 2 -- the rate is settled, not unknown
+               anchor: an UNKNOWN rate
+  [SURVIVES ] ARROW       the sub-family clause is CORRECT; the block around it is repaired
+               anchor: on ONE named sub-family as all that is established
+  [LIVE     ] -           TRUE of the aggregate form; the implied contrast is false -- NOT REACHED BY ANY PATTERN
+               anchor: it does not move `E[inv_e]` out of `Θ(n²)`
+
+docs/state-history/audit-mg-2eed-of-mg-b488.md
+  [CITED    ] ARROW       an audit OF a STATE.md landing, quoting its kinding. Archival state-history.
+               anchor: ### The `Θ(n²) → Θ(n)` rate is kinded too, at both sites
+
+code/dual_certificate_131e/d3_refutation.py
+  [LIVE     ] ARROW       d3's docstring conclusion 2; output verified byte-identical after the edit
+               anchor: here refutes mg-200d's `Theta(n^2) -> Theta(n)` headline
+
+docs/state-of-the-wall.html
+  [COLLISION] THETA2      the TWO-ATOM LAW again. The twin carries NO per-slot rate claim at all.
+               anchor: every pair frozen yet <span class="q">Θ(n²)</span> inversions
+
+==============================================================================
+DISTRIBUTION
+  LIVE        9
+  LIVE-OPEN  10
+  CITED       3
+  SURVIVES    2
+  COLLISION   2
+  TOTAL      26
+
+  repairable (LIVE + LIVE-OPEN): 19
+  left with a reason:            7
+
+PASS — every LIVE and LIVE-OPEN site carries this ticket's marker AND a word saying
+       it is wrong, in the block a reader reads; every anchor still resolves; and
+       every CITED / SURVIVES / COLLISION site is named with a reason and left.

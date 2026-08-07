@@ -1,0 +1,30 @@
+mg-910c NEGATIVE CONTROLS -- does the R2 detector fire without the repair?
+==============================================================================
+
+N0  R2 against the UNREPAIRED tree at `main`
+    unrepaired-site count: 19   missing anchors: 0   -> FIRED   (pre-declared FIRED: ok)
+      classes that fired: LIVE, LIVE-OPEN  (must be LIVE and LIVE-OPEN only)
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:18 [LIVE-OPEN]  what *is* the true growth of the disjunctive per-slot value? — is `mg-
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:18 [LIVE]  HEADLINE is deliberately NOT struck
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:57 [LIVE]  PER-SLOT ADJACENCY SYMMETRY BUYS A FACTOR THAT GROWS WITH `n`, NOT A C
+
+N1  strip only the `~~` glyphs from the repaired documents
+    unrepaired-site count: 0   missing anchors: 2   -> DID NOT FIRE   (pre-declared DID NOT FIRE: ok)
+      2 anchors contain `~~` and are destroyed BY the mutation; that is the mutation, not a miss -- the other 23 all still resolve and all still read as repaired
+
+N2  strip this ticket's citation from the repaired documents
+    unrepaired-site count: 19   missing anchors: 0   -> FIRED   (pre-declared FIRED: ok)
+      0 anchors destroyed -- the mutation removes the citation only
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:59 [LIVE-OPEN]  what *is* the true growth of the disjunctive per-slot value? — is `mg-
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:59 [LIVE]  HEADLINE is deliberately NOT struck
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:103 [LIVE]  PER-SLOT ADJACENCY SYMMETRY BUYS A FACTOR THAT GROWS WITH `n`, NOT A C
+
+N3  plant a LIVE site spelled `Theta( n^2 )` -> `Theta(n)`, spaces and all
+    ARROW hits before: 4   after: 5   -> FIRED   (pre-declared FIRE: ok)
+      A sweep grepping the literal `Theta(n^2) -> Theta(n)` returns a clean zero
+      on this plant.  The ARROW pattern is whitespace-tolerant, so it does not.
+
+==============================================================================
+CONTROL PASSED — every mutation behaved as pre-declared.
+N0 is the load-bearing one: the 19 sites this ticket repaired really were
+unmarked on `main`, and the 7 it left really were already fine.

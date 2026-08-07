@@ -1,0 +1,188 @@
+mg-910c R1 -- CENSUS OF THE RATE CLAIM, BY SPELLING
+==============================================================================
+
+  spelling   line-hits   what it is
+  ARROW            50   the rate itself, `Theta(n^2) -> Theta(n)`
+  PROSE             1   the same claim in words
+  GROWS            14   mg-200d's headline wording
+  RATEQ            27   the rate asserted as UNKNOWN/OPEN -- also now false
+  THETA2          114   bare Theta(n^2)  -- OVER-WIDE, the collision net
+  THETA1          175   bare Theta(n)    -- OVER-WIDE, the collision net
+
+  distinct lines carrying at least one spelling: 270
+  files: 47
+
+------------------------------------------------------------------------------
+docs/ -- 20 file(s)
+  * docs/OneThird-DualCertificate-mg-131e.md                         10 lines  ARROW,RATEQ,THETA1,THETA2
+    docs/OneThird-Hodge-Side-Leverage-GppStrike-IndependentAudit.md   2 lines  THETA1
+    docs/OneThird-Hodge-Side-Leverage-IndependentAudit.md             8 lines  THETA1
+    docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md  3 lines  THETA1
+    docs/OneThird-Hodge-Side-Leverage.md                             14 lines  THETA1
+    docs/OneThird-LIBweak-mg-c3ca.md                                 14 lines  THETA1
+    docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md                 8 lines  THETA1,THETA2
+  * docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md              16 lines  ARROW,RATEQ,THETA1,THETA2
+  * docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md               30 lines  ARROW,GROWS,RATEQ,THETA1,THETA2
+  * docs/OneThird-RateSweep-mg-910c.md                               17 lines  ARROW,GROWS,THETA1,THETA2
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md       2 lines  THETA1
+    docs/OneThird-lambda-std-Operative-Form.md                        1 lines  THETA2
+    docs/audit-stage-process.md                                       1 lines  THETA1
+    docs/state-history/attempt-mg-276d.md                             1 lines  THETA1
+    docs/state-history/attempt-mg-88bd.md                             1 lines  THETA1
+    docs/state-history/attempt-mg-a3d4.md                             3 lines  THETA1
+    docs/state-history/attempt-mg-a58f.md                             1 lines  THETA1,THETA2
+  * docs/state-history/audit-mg-2eed-of-mg-b488.md                    1 lines  ARROW,THETA1,THETA2
+    docs/state-history/threads-chronology.md                          2 lines  THETA1
+    docs/state-of-the-wall.html                                       1 lines  THETA2
+------------------------------------------------------------------------------
+code/ -- 26 file(s)
+  * code/dual_certificate_131e/d3_refutation.py                       2 lines  ARROW,THETA1,THETA2
+  * code/eps_spec_sweep_372e/README.md                                1 lines  GROWS,THETA2
+    code/hodge_leverage_landing_e1d0/site_records.txt                 2 lines  THETA1
+    code/libweak_audit_c4f5/OUTCOMES.md                               2 lines  THETA1
+    code/libweak_audit_c4f5/PREDICTIONS.md                            6 lines  THETA1,THETA2
+    code/libweak_audit_c4f5/README.md                                 2 lines  THETA1
+    code/libweak_audit_c4f5/a3_construct.py                           6 lines  THETA1
+    code/libweak_audit_c4f5/a4_census.py                              3 lines  THETA1
+    code/libweak_audit_c4f5/a5_window.py                              1 lines  THETA1
+    code/libweak_audit_c4f5/lib_c4f5.py                               2 lines  THETA1
+    code/libweak_audit_c4f5/out_a3_construct.txt                      4 lines  THETA1
+    code/libweak_audit_c4f5/out_a4_census.txt                         3 lines  THETA1
+    code/libweak_c3ca/README.md                                       2 lines  THETA1
+    code/libweak_c3ca/out_p2_primitive.txt                            1 lines  THETA1
+    code/libweak_c3ca/p2_primitive.py                                 1 lines  THETA1
+    code/libweak_c3ca/p3_window.py                                    2 lines  THETA1
+  * code/rate_sweep_910c/README.md                                   10 lines  ARROW,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/out_r1_census.txt                            3 lines  ARROW,THETA1,THETA2
+  * code/rate_sweep_910c/out_r2_classify.txt                         19 lines  ARROW,GROWS,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/out_r3_control.txt                           6 lines  ARROW,GROWS,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/r1_census.py                                14 lines  ARROW,GROWS,PROSE,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/r2_classify.py                              26 lines  ARROW,GROWS,RATEQ,THETA1,THETA2
+  * code/rate_sweep_910c/r3_control.py                                5 lines  ARROW,THETA1,THETA2
+    code/state_audit_6a2f/out_audit.txt                               3 lines  THETA1
+    code/state_relocation_audit_b0ae/out_b4_prefix_math.txt           1 lines  THETA1
+    code/state_restructure_ea0e/build.py                              1 lines  THETA1
+------------------------------------------------------------------------------
+top level -- 1 file(s)
+  * STATE.md                                                          6 lines  ARROW,RATEQ,THETA1,THETA2
+
+------------------------------------------------------------------------------
+`*` marks a file hit by a NARROW spelling (ARROW/PROSE/GROWS/RATEQ), i.e. a
+candidate site for the rate claim itself.  An unmarked file was reached only by
+the deliberately over-wide collision nets and is almost certainly a different
+quantity.  R2 carries the hand classification; this script does not classify.
+
+mg-910c R2 -- CLASSIFICATION AND REPAIR CHECK
+==============================================================================
+
+
+docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md
+  [LIVE-OPEN] RATEQ       mg-372e's banner routes the reader to an open question mg-00a1 closed
+               anchor: what *is* the true growth of the disjunctive per-slot value? — is `mg-00a1`
+  [LIVE     ] GROWS       mg-372e deliberately left the headline; mg-00a1 refuted it
+               anchor: HEADLINE is deliberately NOT struck
+  [LIVE     ] GROWS       the headline itself -- REFUTED, the factor is at most 6
+               anchor: PER-SLOT ADJACENCY SYMMETRY BUYS A FACTOR THAT GROWS WITH `n`, NOT A CONSTANT
+  [LIVE-OPEN] RATEQ       the rate is not unknown; mg-00a1 settled it at Theta(n^2)
+               anchor: STRUCK and the rate is UNKNOWN
+  [LIVE     ] ARROW       each half in its OWN code span -- MISSED by the first ARROW pattern, found by reading, and it is why R1's separator class exists
+               anchor: down to ~~**`(n−1)/3`** — from `Θ(n²)` to `Θ(n)`
+  [LIVE-OPEN] -           table cell, n->infinity, per-slot row -- NOT REACHED BY ANY PATTERN
+               anchor: REFUTED at `n = 6` — UNKNOWN
+  [LIVE-OPEN] -           table cell reading `unknown` -- NOT REACHED BY ANY PATTERN
+               anchor: | ratio | `2/3` | `1/2` | `2/5` |
+  [LIVE     ] GROWS       it IS a constant factor and it is at most 6
+               anchor: The gain is not a constant factor.
+  [LIVE-OPEN] RATEQ       same paragraph; the reason is now the rate is Theta(n^2)
+               anchor: the reason is now *"the rate is unknown"*
+  [LIVE-OPEN] -           §6 strike-note -- NOT REACHED BY ANY PATTERN
+               anchor: becomes past `n = 5` is UNKNOWN
+  [LIVE     ] ARROW       presupposes a drop that does not exist; aggregate half is TRUE and kept
+               anchor: whatever the aggregate form buys, it is not the `Θ(n²) → Θ(n)` drop
+  [LIVE-OPEN] ARROW,RATEQ the closing one-line form; the rate is settled
+               anchor: and the all-`n` rate is UNKNOWN*
+  [CITED    ] ARROW       inside mg-372e's ~~strike~~ of the pre-refutation wording
+               anchor: worth `Θ(n²) → Θ(n)` at `n ≤ 5` and the all-`n` statement is open.*~~
+  [COLLISION] THETA2      the TWO-ATOM LAW's inversion count -- obstruction 4, a different quantity
+               anchor: law has `Θ(n²)` inversions with every pair frozen
+
+docs/OneThird-DualCertificate-mg-131e.md
+  [LIVE     ] ARROW       THE site: mg-131e left the rate standing on three points and no proof
+               anchor: headline is not refuted.** Every value here is still linear in
+  [SURVIVES ] ARROW       (5n-8)/12 on ONE named chord sub-family -- correct and LINEAR
+               anchor: `n(n−1)/6` is still `Θ(n²) → Θ(n)` on this sub-family
+  [LIVE-OPEN] RATEQ       the successor question mg-00a1 was filed to answer, and did
+               anchor: *What is the true growth of the disjunctive per-slot
+
+docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md
+  [LIVE     ] ARROW       'thin' understates it: the asymptotic rendering is REFUTED
+               anchor: the ASYMPTOTIC rendering rests on the same three points and no proof
+  [CITED    ] ARROW       §5.1 table cell, already struck by mg-372e and marked REFUTED
+               anchor: **REFUTED — see below** |
+  [LIVE-OPEN] RATEQ       mg-372e's banner routes to an open question mg-00a1 closed
+               anchor: question that replaces the formula: what *is* the true growth
+  [LIVE-OPEN] RATEQ       §5.3 route ordering step 2 -- the rate is settled, not unknown
+               anchor: an UNKNOWN rate
+  [SURVIVES ] ARROW       the sub-family clause is CORRECT; the block around it is repaired
+               anchor: on ONE named sub-family as all that is established
+  [LIVE     ] -           TRUE of the aggregate form; the implied contrast is false -- NOT REACHED BY ANY PATTERN
+               anchor: it does not move `E[inv_e]` out of `Θ(n²)`
+
+docs/state-history/audit-mg-2eed-of-mg-b488.md
+  [CITED    ] ARROW       an audit OF a STATE.md landing, quoting its kinding. Archival state-history.
+               anchor: ### The `Θ(n²) → Θ(n)` rate is kinded too, at both sites
+
+code/dual_certificate_131e/d3_refutation.py
+  [LIVE     ] ARROW       d3's docstring conclusion 2; output verified byte-identical after the edit
+               anchor: here refutes mg-200d's `Theta(n^2) -> Theta(n)` headline
+
+docs/state-of-the-wall.html
+  [COLLISION] THETA2      the TWO-ATOM LAW again. The twin carries NO per-slot rate claim at all.
+               anchor: every pair frozen yet <span class="q">Θ(n²)</span> inversions
+
+==============================================================================
+DISTRIBUTION
+  LIVE        9
+  LIVE-OPEN  10
+  CITED       3
+  SURVIVES    2
+  COLLISION   2
+  TOTAL      26
+
+  repairable (LIVE + LIVE-OPEN): 19
+  left with a reason:            7
+
+PASS — every LIVE and LIVE-OPEN site carries this ticket's marker AND a word saying
+       it is wrong, in the block a reader reads; every anchor still resolves; and
+       every CITED / SURVIVES / COLLISION site is named with a reason and left.
+
+mg-910c NEGATIVE CONTROLS -- does the R2 detector fire without the repair?
+==============================================================================
+
+N0  R2 against the UNREPAIRED tree at `main`
+    unrepaired-site count: 19   missing anchors: 0   -> FIRED   (pre-declared FIRED: ok)
+      classes that fired: LIVE, LIVE-OPEN  (must be LIVE and LIVE-OPEN only)
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:18 [LIVE-OPEN]  what *is* the true growth of the disjunctive per-slot value? — is `mg-
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:18 [LIVE]  HEADLINE is deliberately NOT struck
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:57 [LIVE]  PER-SLOT ADJACENCY SYMMETRY BUYS A FACTOR THAT GROWS WITH `n`, NOT A C
+
+N1  strip only the `~~` glyphs from the repaired documents
+    unrepaired-site count: 0   missing anchors: 2   -> DID NOT FIRE   (pre-declared DID NOT FIRE: ok)
+      2 anchors contain `~~` and are destroyed BY the mutation; that is the mutation, not a miss -- the other 23 all still resolve and all still read as repaired
+
+N2  strip this ticket's citation from the repaired documents
+    unrepaired-site count: 19   missing anchors: 0   -> FIRED   (pre-declared FIRED: ok)
+      0 anchors destroyed -- the mutation removes the citation only
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:59 [LIVE-OPEN]  what *is* the true growth of the disjunctive per-slot value? — is `mg-
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:59 [LIVE]  HEADLINE is deliberately NOT struck
+      e.g. docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md:103 [LIVE]  PER-SLOT ADJACENCY SYMMETRY BUYS A FACTOR THAT GROWS WITH `n`, NOT A C
+
+N3  plant a LIVE site spelled `Theta( n^2 )` -> `Theta(n)`, spaces and all
+    ARROW hits before: 4   after: 5   -> FIRED   (pre-declared FIRE: ok)
+      A sweep grepping the literal `Theta(n^2) -> Theta(n)` returns a clean zero
+      on this plant.  The ARROW pattern is whitespace-tolerant, so it does not.
+
+==============================================================================
+CONTROL PASSED — every mutation behaved as pre-declared.
+N0 is the load-bearing one: the 19 sites this ticket repaired really were
+unmarked on `main`, and the 7 it left really were already fine.

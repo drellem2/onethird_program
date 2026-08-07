@@ -3,6 +3,27 @@
 `mg-131e` · instrument [`code/dual_certificate_131e/`](../code/dual_certificate_131e/) ·
 parent `mg-200d` (`762921d`, `731a9ab`)
 
+> ## ⛔ §5's ITEM 2 IS NOW FALSE — THE RATE WAS REFUTED AFTER THIS DOCUMENT LANDED (`mg-00a1`, swept by `mg-910c`)
+>
+> This document deliberately declined to kill `mg-200d`'s `Θ(n²) → Θ(n)` headline, and said
+> exactly why: every value it measured was still linear in `n`, and it flagged that the rate then
+> rested on **three `n ≤ 5` points and no proof**. Those three points were its entire support.
+>
+> **`mg-00a1` supplied the proof, and it goes the other way.** The disjunctive per-slot value —
+> the **maximum over branches** — is `Θ(n²)`, SUPERLINEAR: an explicit closed-form measure with
+> `E[inv] = n(n+5)/36` on a transitively closed branch at every even `n = 2m ≥ 4`, bracketed above
+> by this document's own trivial dual `val ≤ n(n−1)/6`. So **`§5` item 2 is struck below**: the
+> headline IS refuted, and per-slot symmetry buys a **constant factor of at most `6`**, not an
+> order. See [`OneThird-GrowthRate-mg-00a1.md`](OneThird-GrowthRate-mg-00a1.md); nothing of it is
+> restated here.
+>
+> **Nothing else in this document moves.** The `n = 6` refutation of `ε_spec = 2/(n+1)`, the
+> certificates at `n = 3,4,5`, the `n = 6..10` witnesses, the vacuity census, and **§2's
+> consecutive-pairs theorem (`val = (n−1)/3` exactly, every `n`, both directions, no solver)** are
+> untouched and correct — that theorem is about ONE branch, and a max-over-all-branches result
+> does not touch it. `§5` items 1, 3 and 4 also stand: item 3 is scoped to a named sub-family and
+> is a correct `Θ(n)` statement about that branch. `STATE.md` is not edited here (`mg-bb87`).
+
 ---
 
 ## 0. The result, first
@@ -168,11 +189,20 @@ where it was measured.
 1. **The frozen-poset conjecture is untouched.** The disjunctive value is an *upper bound* on
    it. Showing the upper bound is bigger than believed weakens the bound; it says nothing about
    the statement underneath.
-2. **`mg-200d`'s `Θ(n²) → Θ(n)` headline is not refuted.** Every value here is still linear in
+2. ~~**`mg-200d`'s `Θ(n²) → Θ(n)` headline is not refuted.** Every value here is still linear in
    `n`. What died is the **constant**, i.e. the exact formula. Note, though, that the exact
    values supporting `Θ(n)` are the same `n ≤ 5` that supported the formula which is now false,
    so the *rate* is now evidenced by three points and no proof, and the correction at `n = 6..10`
-   runs **upward** — a smaller gain than `mg-200d`'s formula claims, not a larger one.
+   runs **upward** — a smaller gain than `mg-200d`'s formula claims, not a larger one.~~
+   **⛔ [STRUCK — `mg-200d`'s `Θ(n²) → Θ(n)` headline IS refuted (`mg-00a1`; struck `mg-910c`).**
+   The caveat in the struck text was the right one and it is what came true: the rate rested on
+   three `n ≤ 5` points and no proof, and `mg-00a1` then proved the maximum over branches is
+   `Θ(n²)` by explicit construction (`E[inv] = n(n+5)/36` at every even `n ≥ 4`, against this
+   document's own trivial dual `n(n−1)/6` above). Per-slot symmetry buys a **constant factor of
+   at most `6`, not an order.** "Every value here is still linear in `n`" remains true *of the
+   values in this document* — they are named-branch lower bounds, not the maximum — and that is
+   exactly why they could not decide the rate. **`mg-372e` did not catch this: it swept the
+   FORMULA `2/(n+1)` and ran before `mg-00a1` returned.]**
 3. **Per-slot symmetry is still worth a great deal.** `(5n−8)/12` against the baseline
    `n(n−1)/6` is still `Θ(n²) → Θ(n)` on this sub-family. The finding is that its constant is
    not `1/3` and is not yet known.
@@ -184,10 +214,13 @@ where it was measured.
    result.
 
 **The live question that replaces it.** *What is the true growth of the disjunctive per-slot
-value?* If it is `cn + O(1)` for some constant `c`, the route survives with `c` in place of
+value?* ~~If it is `cn + O(1)` for some constant `c`, the route survives with `c` in place of
 `1/3` and Daniel's framing is intact — the wall closes above a (larger) threshold. That is now
 the thing to measure, and it is a different question from the one this ticket was given, so it
-is not answered here.
+is not answered here.~~ **[ANSWERED, and it is the other branch of the disjunction: the growth is
+`Θ(n²)`, superlinear, so there is no `c` to put in place of `1/3` and Daniel's route is DEAD
+rather than re-based (`mg-00a1`). Not answered here, correctly — this paragraph is kept because
+it named the question, and the strike records that it now has an answer. (`mg-910c`)]**
 
 ---
 
