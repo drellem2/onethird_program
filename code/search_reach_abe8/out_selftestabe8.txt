@@ -1,0 +1,61 @@
+== 1. enumeration ==
+A000112 to n=7 by extension                                ok  [1, 2, 5, 16, 63, 318, 2045]
+brute force agrees with extension, n<=5                    ok
+brute force gives the same ISO CLASSES, n<=5               ok
+
+== 2. canonical key ==
+key is CONSTANT on isomorphism classes (7978 relabellings) ok
+key SEPARATES non-isomorphic posets, n<=6                  ok
+key deliberately DIFFERS from the global lex min (recorded, not a defect) ok  58 of 63 at n=5
+
+== 3. delta, from the definition ==
+DP delta == list-every-extension delta, n<=6               ok
+delta(E) = 1/3 exactly (mg-5998's hand check, reproduced)  ok  1/3
+delta(V) = 1/2 (V is an ordinal sum: antichain_2 (+) point) ok  1/2
+delta(N) = 2/5 (five linear extensions, p(0,1)=2/5)        ok  2/5
+antichain on 2 is delta = 1/2                              ok
+chain has delta None                                       ok
+delta_lazy gives the SAME frozen verdict as delta, n<=7    ok
+delta_lazy equals delta whenever the poset is frozen       ok
+frozen class EMPTY at every n <= 7                         ok  {2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0}
+
+== 4. the four constraints ==
+|Aut| of the 3-antichain is 6                              ok
+|Aut| of the 3-chain is 1                                  ok
+|Aut(V)| = 2                                               ok
+|Aut(N)| = 1 (N is rigid)                                  ok
+width(antichain_5) = 5                                     ok
+width(chain_5) = 1                                         ok
+width(V) = 2                                               ok
+thinness(antichain_8) = 7                                  ok
+thinness(chain_8) = 0                                      ok
+E is primitive (incomparability graph is a path)           ok
+V is NOT primitive (it is antichain_2 (+) point)           ok
+chain_3 is NOT primitive                                   ok
+1 (+) antichain_2 is NOT primitive                         ok
+N is primitive                                             ok
+H5 reproduced: 2045 of 16999 posets at n=8 are not-6-thin  ok  2045 / 16999
+
+== 5. pruning arithmetic (P14's formula, and only it) ==
+prune_bits(total,total) == 0                               ok
+prune_bits(half) == 1 bit                                  ok
+prune_bits(0) is +inf                                      ok
+a VANISHING EXCLUDED SET prunes ~0 bits, not many (P14)    ok  1.443e-06 bits
+
+== 6. growth model ==
+log2_N exact at n=16                                       ok  51.9934
+LOW model <= KR model above n=16                           ok
+g is increasing on the exact range                         ok
+
+== 7. KR ideal count ==
+kr_ideal_count == order_ideal_masks, n=4..14               ok
+order_ideal_masks_lazy == the 2^n sweep, n<=6              ok
+
+== 8. NEGATIVE CONTROLS (each must FAIL for the suite to mean anything) ==
+NC1: the P14-inverted formula disagrees (and wildly)       ok  wrong=19.93 bits, right=1.443e-06 bits
+NC2: principal-ideals-only enumeration MISSES posets at n=6 ok  216 < 318
+NC3: dropping min(p,1-p) changes delta on many n=5 posets  ok  47 posets
+NC4: rigidity is NOT hereditary (witnesses exist at n=5)   ok  15 witnesses
+NC5: forgetting the L1<L3 forcing OVERCOUNTS ideals        ok  360 > 118
+
+0 checks failed

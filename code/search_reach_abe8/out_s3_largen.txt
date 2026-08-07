@@ -1,0 +1,63 @@
+==============================================================================
+s3  THE CONSTRAINTS AT n = 12..40 (KR-MODEL), AND FROZEN-NESS AT n = 20+
+==============================================================================
+
+------------------------------------------------------------------------------
+A.  SURVIVING FRACTION of each constraint on KR-MODEL posets
+------------------------------------------------------------------------------
+Compare with s1's exhaustive columns at n = 8, 9.  Both say the same thing
+and this one says it at n = 40.
+
+   n |  samples |    rigid |  width>=3 | not-6-thin | primitive |  ALL FOUR |  bits
+----------------------------------------------------------------------------------------
+  10 |      400 |   31.75% |   100.00% |     99.75% |   100.00% |    31.75% |  1.66
+  12 |      400 |   72.50% |   100.00% |    100.00% |   100.00% |    72.50% |  0.46
+  14 |      400 |   62.75% |   100.00% |    100.00% |   100.00% |    62.75% |  0.67
+  16 |      400 |   84.00% |   100.00% |    100.00% |   100.00% |    84.00% |  0.25
+  20 |      400 |   95.25% |   100.00% |    100.00% |   100.00% |    95.25% |  0.07
+  24 |      400 |   98.00% |   100.00% |    100.00% |   100.00% |    98.00% |  0.03
+  28 |      400 |   99.50% |   100.00% |    100.00% |   100.00% |    99.50% |  0.01
+  32 |      400 |   99.25% |   100.00% |    100.00% |   100.00% |    99.25% |  0.01
+  36 |      400 |  100.00% |   100.00% |    100.00% |   100.00% |   100.00% | -0.00
+  40 |      400 |  100.00% |   100.00% |    100.00% |   100.00% |   100.00% | -0.00
+
+width>=3 is asserted, not sampled, for n >= 16: a KR poset contains the
+antichain L2 of size ~n/2, so its width is at least n/2 >= 3 for n >= 6.
+Layer-swapping automorphisms: the necessary condition held on 78 of 4000 samples.
+
+=> ALL FOUR CONSTRAINTS TOGETHER PRUNE UNDER ONE BIT BY n = 20 AND
+   ESSENTIALLY NOTHING BY n = 32.  The exhaustive trend at n <= 9 continues.
+
+------------------------------------------------------------------------------
+B.  DOES FROZEN-NESS STILL PRUNE AT n = 20 AND BEYOND?
+------------------------------------------------------------------------------
+The ticket's own hypothesis: 'if frozen-ness prunes as hard at n = 20 as it
+appears to at n <= 14, the reachable range may be far larger than naive
+enumeration suggests.'  Tested here, exactly, in rationals, on KR-model posets,
+via the Theta(#ideals*n) delta.
+
+Reported: how many samples are frozen, how close delta gets to 1/3, and -- the
+figure that decides the hypothesis -- HOW MANY INCOMPARABLE PAIRS HAVE TO BE
+EXAMINED before a balanced one certifies the poset non-frozen.
+
+   n | samples | frozen |   min delta |  mean pairs to reject | mean #ideals | s/cand
+------------------------------------------------------------------------------------------------
+  10 |     200 |      0 |    0.333333 |                  1.54 |        118.2 |  0.000
+  12 |     200 |      0 |    0.336779 |                  1.21 |        161.5 |  0.001
+  14 |     200 |      0 |    0.333333 |                  1.16 |        445.5 |  0.002
+  16 |     200 |      0 |    0.336296 |                  1.10 |        569.5 |  0.004
+  18 |      80 |      0 |    0.342084 |                  1.26 |       1593.1 |  0.014
+  20 |      80 |      0 |    0.336270 |                  1.02 |       1860.2 |  0.027
+  24 |      30 |      0 |    0.389494 |                  1.00 |       6235.4 |  0.203
+  28 |      30 |      0 |    0.420966 |                  1.00 |      21310.3 |  1.552
+
+READING.  Frozen count is 0 at every n sampled, as expected -- but that is NOT
+the informative column and treating it as one is the mistake this section exists
+to prevent.  The informative column is 'mean pairs to reject': a KR poset is
+certified non-frozen after examining ONE OR TWO incomparable pairs out of the
+~n^2/8 it has.  Frozen-ness is therefore a CHEAP TEST, not a STRONG FILTER.  A
+cheap test does not reduce the number of candidates a search must visit by even
+one; it only makes each visit cheap.  The two are different quantities and only
+the first one buys reach.
+
+total wall    61.0s, one core
