@@ -267,3 +267,44 @@ a defence of the depth figure.
 | `selftest_f3ff.py` | 40 checks on the harness itself |
 | `run_all.sh` | the runner; reports the instrument's status, not `tee`'s |
 | `out_*.txt` | committed transcripts of a full run |
+
+⚠️ `out_s1_rows.txt` is the transcript of the run **as merged, before mg-cf83**.
+It is deliberately not regenerated: it is the record of a run at its own commit,
+and re-running it here would re-derive census figures that mg-4d3b has since
+confirmed and this ticket was told not to re-open. The post-repair transcript —
+healthy path and failure path, side by side — is
+`code/summary_guard_cf83/out_c1_summary_guard.txt`.
+
+---
+
+## 10. mg-cf83 — the summary block, repaired
+
+mg-4d3b ran this directory's own `s1_rows.py` against a repo whose `git fetch`
+really failed. **The per-row sections were right and the summary block was
+not**, in one transcript: `n = 4, and all 4 are now checked against the tree`
+printed when 0 were; `The census was WRONG on 0 of its 4 rows and RIGHT on 0`;
+`4 of 4 checked, 0 refuted`; four rows of `0 / 0` from `0 if not gens else
+len(gens)`, where `not None` is True; and then a `TypeError` on `len(None)`,
+thirty lines from the docstring saying callers must not treat None as an empty
+list. A total fetch failure read as a clean, fully-measured result — in the
+part a human reads first.
+
+`s1_rows.py` now holds three rules, each exercised against a **real** broken
+remote by `code/summary_guard_cf83/c1_summary_guard.py`:
+
+1. **`?` and `0` are different answers.** `cell()` renders an unmeasured figure
+   as `?`; `generations()` returns `None` for unreadable and `[]` for a genuinely
+   empty chain, and the table no longer prints them the same.
+2. **No fixed string asserts a count that was not measured.** Every sentence
+   carrying a figure has a branch for the figure not existing, and that branch
+   prints UNKNOWN.
+3. **The summary cannot disagree with the rows.** Every figure after the row
+   loop is a fold over `lines`, which is the row sections' own output. Nothing
+   in the summary re-reads a repo or calls anything that can return `None` —
+   which is also why F5's crash is now unreachable rather than merely caught.
+
+The prediction scoring gained a third state, `UNMEASURED`: a row that could not
+be read is neither a hit nor a miss, and calling it a MISS asserts an outcome
+the run did not observe. `s1` now exits **1** when a repo could not be read —
+findings about the census still exit 0, as `run_all.sh` documents; *this run did
+not happen* is a different thing and exits like `s0_freshness.py` does.
