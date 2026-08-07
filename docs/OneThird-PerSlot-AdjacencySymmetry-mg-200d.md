@@ -8,8 +8,12 @@ most-likely errors filed in advance (`P12`, `P13`).
 **Method.** Hand derivation, plus exact-rational LPs over measures on `S_n`, on an independently
 written two-phase simplex sharing no code with `mg-6bc2`'s. **No poset enumeration** — §7 says
 why the disjunctive program is not one in disguise.
-**Parent.** `mg-6bc2` (`90d19e7`) is on branch `polecat-a6bc2` and **is not merged to `main`**.
-Everything quoted from it is read out of that branch.
+**Parent.** `mg-6bc2` **landed on `main` as `e1f7bb2` at 2026-08-07 18:21**, while this ticket
+was in the merge queue. It was read out of branch `polecat-a6bc2` (`90d19e7`) throughout; the
+rebase changed the hash and **not the content** — `lp6bc2.py`, `v2_optimiser.py`,
+`out_v2_optimiser.txt` and its document are byte-identical between the two, checked by `git diff`
+after it landed. **So §8's two corrections apply to what is on `main`, not only to what was on a
+branch.**
 
 ---
 
@@ -424,12 +428,15 @@ Committed at `b5784ee` before any script existed. Kept as written.
   `ε_c3ca = 1/6` reading of the same theorem (`mg-6bc2 §2`) is not re-derived.
 - **No claim that the frozen class is non-empty.** Every statement is about `M_n` and about
   posets whose linear-extension measure lies in it.
-- **`mg-6bc2` is unmerged.** If it lands changed, §8's two corrections should be re-checked
-  against what actually merges.
+- **`mg-6bc2`'s landing WAS re-checked, so this is no longer an open note.** This document
+  originally said "if it lands changed, §8's two corrections should be re-checked against what
+  actually merges". It landed (`e1f7bb2`) while this ticket was queued, and the check was done:
+  all four files §8 depends on are byte-identical to the branch versions. Nothing in §8 moves.
 - **`STATE.md` is NOT touched.** `mg-d1a2` established that `STATE.md` is `pm-onethird`'s file
-  and that landings there are approved before they land; `mg-6bc2`'s own row is not in it yet
-  either, so a row here would reference an unmerged parent. The row this document would want is
-  **routed to `pm-onethird` with the verdict**, not written unilaterally.
+  and that landings there are approved before they land. The row this document would want is
+  **routed to `pm-onethird` with the verdict**, not written unilaterally. *(The original reason
+  given here — that a row would reference an unmerged parent — expired when `mg-6bc2` landed at
+  `e1f7bb2`. The ownership reason is the one that stands, and it is the one that mattered.)*
 - **The `n = 6` LITERAL values and the `n = 6` wide-window branches were not obtained.** The
   all-pairs literal LP at `n = 6` is 720 columns against 75 equality rows (76 artificials in
   phase 1); both runs were stopped after ~25 and ~50 minutes rather than block the merge, and
