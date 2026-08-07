@@ -1,0 +1,75 @@
+STATE.md @ 491d42c79f7628c18cb7a5d197faa9f4600cd6c1
+210 lines, 82559 bytes
+
+(LIB-weak) appears on 5 lines: [15, 23, 64, 115, 209]
+
+==============================================================================
+SITE line 15   —   CARRIES THE GAP
+==============================================================================
+  A  'does not supply the operative form' : ['not the (constant )?form', 'NOT the weakest', 'is \\*?stronger\\*? than', 'closes the \\*\\*limit\\*\\*']
+  B  'the gap is a QUANTIFIER'            : ['NO `?N₀`? WORKS FOR THE CLASS', 'fails at finite `?n']
+  C  'differ IN KIND / not a constant'    : ['differ IN KIND', 'not a constant']
+  X  cross-references present             : ['see §', '§ \\*The single lemma']
+
+==============================================================================
+SITE line 23   —   CARRIES THE GAP
+==============================================================================
+  A  'does not supply the operative form' : ['is the stronger']
+  B  'the gap is a QUANTIFIER'            : ['quantifier', 'only for `?n ≥ N₀', 'n ≥ N₀', 'no `?N₀`? works for the class', 'holds only for']
+  C  'differ IN KIND / not a constant'    : ['differ IN KIND', 'not a constant']
+  X  cross-references present             : ['\\(row 8', '§ \\*The single lemma']
+
+==============================================================================
+SITE line 64   —   INCOMPLETE
+==============================================================================
+  A  'does not supply the operative form' : ABSENT
+  B  'the gap is a QUANTIFIER'            : ['only for `?n ≥ N₀', 'n ≥ N₀']
+  C  'differ IN KIND / not a constant'    : ABSENT
+  X  cross-references present             : ['\\(row 8']
+  >> CROSS-REFERENCE ONLY — by the ticket's own rule this DOES NOT DISCHARGE.
+
+==============================================================================
+SITE line 115   —   CARRIES THE GAP
+==============================================================================
+  A  'does not supply the operative form' : ['does \\*?not\\*? supply', 'is the stronger', 'is \\*?stronger\\*? than', 'closes the \\*\\*limit\\*\\*']
+  B  'the gap is a QUANTIFIER'            : ['quantifier', 'only for `?n ≥ N₀', 'n ≥ N₀', 'NO `?N₀`? WORKS FOR THE CLASS']
+  C  'differ IN KIND / not a constant'    : ['differ IN KIND', 'not a constant']
+  X  cross-references present             : ['see §', '§ \\*The single lemma', 'earlier in this cell']
+
+==============================================================================
+SITE line 209   —   INCOMPLETE
+==============================================================================
+  A  'does not supply the operative form' : ABSENT
+  B  'the gap is a QUANTIFIER'            : ['quantifier', 'n ≥ N₀', 'no `?N₀`? works for the class']
+  C  'differ IN KIND / not a constant'    : ABSENT
+  X  cross-references present             : none
+
+==============================================================================
+NEGATIVE CONTROLS — the detector must FAIL on text that should fail.
+==============================================================================
+  [PASS] NC1 the pre-correction wording (the actual defect, from 21ee93f's parent f85a4e8-era text)
+          detector says carries-the-gap = False, expected False
+  [PASS] NC2 a pure cross-reference, which is what already existed and failed
+          detector says carries-the-gap = False, expected False
+  [PASS] NC3 a constant-flavoured gloss (the misreading the ticket fears)
+          detector says carries-the-gap = False, expected False
+  [PASS] NC4 the real row-8 text, which must PASS
+          detector says carries-the-gap = True, expected True
+
+  4/4 negative controls behave as required.
+
+==============================================================================
+SUMMARY — CHECK 3
+==============================================================================
+  sites carrying the gap IN THEIR OWN CONTIGUOUS UNIT: [15, 23, 115]
+  sites NOT carrying it                              : [64, 209]
+
+  READ BY HAND, NOT TUNED AWAY — every site that the detector marks INCOMPLETE
+  is quoted in full in the deliverable and judged in prose, because a detector
+  that returns 0 misses by construction is unfalsifiable (mg-94c3's lesson).
+
+  --- line 64 verbatim ---
+      B -->|"KIND OPEN ★ THE WALL — L1b: bad mixing ⟹ 1−λ_std ≤ ε_spec (⟸ LIB-weak only for n ≥ N₀, and NO N₀ works for the class ⟸ LIB ⟸ B) (row 8)"| C
+
+  --- line 209 verbatim ---
+  **Literature lower bound on a minimal counterexample's SIZE — it exists, and it clears nothing that matters (mg-33f5, landed mg-d1a2).** `n ≥ 12` — **refereed**: Peczarski, *The Gold Partition Conjecture*, *Order* **23** (2006) 89–95, [doi:10.1007/s11083-006-9033-1](https://doi.org/10.1007/s11083-006-9033-1), GPC (⟹ 1/3–2/3) for **all** posets on ≤ 11 elements, **no class restriction, nothing for us to verify**. `n ≥ 15` — **unrefereed preprint ten days old**: Gupta, [arXiv:2607.23926](https://arxiv.org/abs/2607.23926) (v1 2026-07-27), GPC through order 14 over all 1,338,193,159,771 unlabeled posets (= OEIS [A000112](https://oeis.org/A000112)(14), cross-checked exact ✓), **carrying the author's own caveat that must travel with the citation: *"No independent per-poset check is made above order 9."*** **BOTH ARE VERIFICATION RANGES, NOT STRUCTURAL BOUNDS, AND NEITHER DISCHARGES ANY `n ≥ N₀

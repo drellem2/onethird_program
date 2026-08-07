@@ -1,0 +1,51 @@
+
+==============================================================================
+T1  THE CLASS-CHAIN RIDER — every ⊊ site must carry it ITSELF.
+==============================================================================
+  '⊊' appears on 3 lines: [15, 23, 115]
+
+  line   15  rider: YES ['[Aa]s asymptotic classes']
+            chain printed: `(B) ⊊ LIB ⊊ (LIB-weak) ⊊ (LIB-const)`
+  line   23  rider: YES ['[Aa]s asymptotic classes']
+            chain printed: `(LIB) ⊊ (LIB-weak) ⊊ (LIB-const)`
+  line  115  rider: YES ['[Aa]s asymptotic classes']
+            chain printed: `(LIB) ⊊ (LIB-weak) ⊊ (LIB-const)`
+
+  >> ALL ⊊ sites carry the rider in their own contiguous unit.
+     So no reader meets the chain as a bare implication, and my
+     m1 R5 incomparability result — true as it is — does NOT
+     convict this file.  (PREDICTIONS.md P17 guard fires: I do
+     not get to score correct-but-scoped mathematics as a defect.)
+
+  NC-T1: the detector must FAIL on a chain with no rider.
+         synthetic unriddered chain -> rider found = False (must be False)
+         PASS — the detector can tell the difference.
+
+==============================================================================
+T2  THE TWO GAPS (mg-c4f5 §5.1's named live hazard).
+==============================================================================
+  gap 1 = QUANTIFIER, (LIB-weak) vs (LIB-const)
+  gap 2 = CONSTANT FACTOR ~50, ε_sup vs ε_dem
+  HAZARD: a unit carrying both, without naming them as two gaps,
+  invites 'the residual is a constant RATHER THAN a quantifier'.
+
+  line 15: carries BOTH.  names them as two gaps? False
+           character separation in the same unit: 1316
+
+  >> units carrying both: [15]
+
+==============================================================================
+T3  STATUS LANGUAGE BOTH WAYS.
+==============================================================================
+  line 15: says 'not blocked' ['Not\\* blocked', '\\*Not\\* blocked']
+           counterweight in the SAME unit: ['neither proved nor blocked', 'no route', 'undecided']
+           >> BALANCED.
+
+  Reverse direction — any unit reading as PROGRESS toward (LIB-weak)?
+    None.  0 optimism markers at any (LIB-weak) site.
+
+==============================================================================
+SUMMARY
+==============================================================================
+  1 finding(s):
+    - T2: line 15 carries both the ~50 constant gap and the quantifier gap without naming them as two distinct gaps
