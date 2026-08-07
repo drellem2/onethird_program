@@ -58,3 +58,10 @@ Four of the five were caught by my own controls **firing against correct code**.
 5. **`a5_construction.py` first called `L.perms(20)`**, i.e. tried to materialise `S_20`. It
    produced **no output at all** for forty minutes rather than raising — indistinguishable from
    a slow correct run. Replaced by a sparse reporter that never materialises `S_n`.
+6. **`a8_downstream.py` checked `mg-00a1` against `n(n+5)/36` at every `n`**, the form printed
+   in its banner and column header, where its `witness_target` is **parity-split**. My control
+   reported **10 failures against a correct witness** — one at every odd `n` from 5 to 23 — in a
+   differential audit whose entire purpose was to find a defect in a live result. The **even/odd
+   pattern** of the failures is what saved it: a defect landing on exactly one residue class is a
+   bug in the checker, not the checked. Filing it would have attacked a live negative with an
+   error of my own.

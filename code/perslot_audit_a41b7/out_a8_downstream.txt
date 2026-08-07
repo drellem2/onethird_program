@@ -1,0 +1,270 @@
+==============================================================================
+(2a) mg-131e's witnesses, checked by a41b7's own code
+==============================================================================
+  mg-131e   n=6  atoms=6  |I|=6
+    PASS  mg-131e n=6 mass is exactly 1
+    PASS  mg-131e n=6 no negative atom
+    PASS  mg-131e n=6 every flip <= 1/3
+    PASS  mg-131e n=6 comparable pairs all at flip 0
+    PASS  mg-131e n=6 per-slot symmetry holds on every incomparable pair
+    PASS  mg-131e n=6 the comparable set is transitively closed (a real poset)
+    PASS  mg-131e n=6 E[inv] = 11/6 as claimed
+      -> MY E[inv] = 11/6        eps_spec = 11/35        (n-1)/3 = 5/3       BEATS (n-1)/3
+  mg-131e   n=7  atoms=9  |I|=8
+    PASS  mg-131e n=7 mass is exactly 1
+    PASS  mg-131e n=7 no negative atom
+    PASS  mg-131e n=7 every flip <= 1/3
+    PASS  mg-131e n=7 comparable pairs all at flip 0
+    PASS  mg-131e n=7 per-slot symmetry holds on every incomparable pair
+    PASS  mg-131e n=7 the comparable set is transitively closed (a real poset)
+    PASS  mg-131e n=7 E[inv] = 20/9 as claimed
+      -> MY E[inv] = 20/9        eps_spec = 5/18         (n-1)/3 = 2         BEATS (n-1)/3
+  mg-131e   n=8  atoms=6  |I|=9
+    PASS  mg-131e n=8 mass is exactly 1
+    PASS  mg-131e n=8 no negative atom
+    PASS  mg-131e n=8 every flip <= 1/3
+    PASS  mg-131e n=8 comparable pairs all at flip 0
+    PASS  mg-131e n=8 per-slot symmetry holds on every incomparable pair
+    PASS  mg-131e n=8 the comparable set is transitively closed (a real poset)
+    PASS  mg-131e n=8 E[inv] = 8/3 as claimed
+      -> MY E[inv] = 8/3         eps_spec = 16/63        (n-1)/3 = 7/3       BEATS (n-1)/3
+  mg-131e   n=9  atoms=9  |I|=12
+    PASS  mg-131e n=9 mass is exactly 1
+    PASS  mg-131e n=9 no negative atom
+    PASS  mg-131e n=9 every flip <= 1/3
+    PASS  mg-131e n=9 comparable pairs all at flip 0
+    PASS  mg-131e n=9 per-slot symmetry holds on every incomparable pair
+    PASS  mg-131e n=9 the comparable set is transitively closed (a real poset)
+    PASS  mg-131e n=9 E[inv] = 28/9 as claimed
+      -> MY E[inv] = 28/9        eps_spec = 7/30         (n-1)/3 = 8/3       BEATS (n-1)/3
+  mg-131e   n=10  atoms=6  |I|=12
+    PASS  mg-131e n=10 mass is exactly 1
+    PASS  mg-131e n=10 no negative atom
+    PASS  mg-131e n=10 every flip <= 1/3
+    PASS  mg-131e n=10 comparable pairs all at flip 0
+    PASS  mg-131e n=10 per-slot symmetry holds on every incomparable pair
+    PASS  mg-131e n=10 the comparable set is transitively closed (a real poset)
+    PASS  mg-131e n=10 E[inv] = 7/2 as claimed
+      -> MY E[inv] = 7/2         eps_spec = 7/33         (n-1)/3 = 3         BEATS (n-1)/3
+
+==============================================================================
+(2b) mg-00a1's staircase family, checked by a41b7's own code
+==============================================================================
+  claimed closed form: n(n+5)/36 for even n, (n-1)(n+4)/36 for odd n
+  mg-00a1   n=4  atoms=3  |I|=3
+    PASS  mg-00a1 n=4 mass is exactly 1
+    PASS  mg-00a1 n=4 no negative atom
+    PASS  mg-00a1 n=4 every flip <= 1/3
+    PASS  mg-00a1 n=4 comparable pairs all at flip 0
+    PASS  mg-00a1 n=4 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=4 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=4 E[inv] = 1 as claimed
+      -> MY E[inv] = 1           eps_spec = 2/5          (n-1)/3 = 1         does not beat (n-1)/3
+    PASS  mg-00a1 n=4 |I| is quadratic (m(m+1)/2 = 3)
+  mg-00a1   n=5  atoms=3  |I|=3
+    PASS  mg-00a1 n=5 mass is exactly 1
+    PASS  mg-00a1 n=5 no negative atom
+    PASS  mg-00a1 n=5 every flip <= 1/3
+    PASS  mg-00a1 n=5 comparable pairs all at flip 0
+    PASS  mg-00a1 n=5 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=5 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=5 E[inv] = 1 as claimed
+      -> MY E[inv] = 1           eps_spec = 1/4          (n-1)/3 = 4/3       does not beat (n-1)/3
+    PASS  mg-00a1 n=5 |I| is quadratic (m(m+1)/2 = 3)
+  mg-00a1   n=6  atoms=10  |I|=6
+    PASS  mg-00a1 n=6 mass is exactly 1
+    PASS  mg-00a1 n=6 no negative atom
+    PASS  mg-00a1 n=6 every flip <= 1/3
+    PASS  mg-00a1 n=6 comparable pairs all at flip 0
+    PASS  mg-00a1 n=6 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=6 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=6 E[inv] = 11/6 as claimed
+      -> MY E[inv] = 11/6        eps_spec = 11/35        (n-1)/3 = 5/3       BEATS (n-1)/3
+    PASS  mg-00a1 n=6 |I| is quadratic (m(m+1)/2 = 6)
+  mg-00a1   n=7  atoms=10  |I|=6
+    PASS  mg-00a1 n=7 mass is exactly 1
+    PASS  mg-00a1 n=7 no negative atom
+    PASS  mg-00a1 n=7 every flip <= 1/3
+    PASS  mg-00a1 n=7 comparable pairs all at flip 0
+    PASS  mg-00a1 n=7 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=7 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=7 E[inv] = 11/6 as claimed
+      -> MY E[inv] = 11/6        eps_spec = 11/48        (n-1)/3 = 2         does not beat (n-1)/3
+    PASS  mg-00a1 n=7 |I| is quadratic (m(m+1)/2 = 6)
+  mg-00a1   n=8  atoms=19  |I|=10
+    PASS  mg-00a1 n=8 mass is exactly 1
+    PASS  mg-00a1 n=8 no negative atom
+    PASS  mg-00a1 n=8 every flip <= 1/3
+    PASS  mg-00a1 n=8 comparable pairs all at flip 0
+    PASS  mg-00a1 n=8 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=8 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=8 E[inv] = 26/9 as claimed
+      -> MY E[inv] = 26/9        eps_spec = 52/189       (n-1)/3 = 7/3       BEATS (n-1)/3
+    PASS  mg-00a1 n=8 |I| is quadratic (m(m+1)/2 = 10)
+  mg-00a1   n=9  atoms=19  |I|=10
+    PASS  mg-00a1 n=9 mass is exactly 1
+    PASS  mg-00a1 n=9 no negative atom
+    PASS  mg-00a1 n=9 every flip <= 1/3
+    PASS  mg-00a1 n=9 comparable pairs all at flip 0
+    PASS  mg-00a1 n=9 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=9 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=9 E[inv] = 26/9 as claimed
+      -> MY E[inv] = 26/9        eps_spec = 13/60        (n-1)/3 = 8/3       BEATS (n-1)/3
+    PASS  mg-00a1 n=9 |I| is quadratic (m(m+1)/2 = 10)
+  mg-00a1   n=10  atoms=36  |I|=15
+    PASS  mg-00a1 n=10 mass is exactly 1
+    PASS  mg-00a1 n=10 no negative atom
+    PASS  mg-00a1 n=10 every flip <= 1/3
+    PASS  mg-00a1 n=10 comparable pairs all at flip 0
+    PASS  mg-00a1 n=10 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=10 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=10 E[inv] = 25/6 as claimed
+      -> MY E[inv] = 25/6        eps_spec = 25/99        (n-1)/3 = 3         BEATS (n-1)/3
+    PASS  mg-00a1 n=10 |I| is quadratic (m(m+1)/2 = 15)
+  mg-00a1   n=11  atoms=36  |I|=15
+    PASS  mg-00a1 n=11 mass is exactly 1
+    PASS  mg-00a1 n=11 no negative atom
+    PASS  mg-00a1 n=11 every flip <= 1/3
+    PASS  mg-00a1 n=11 comparable pairs all at flip 0
+    PASS  mg-00a1 n=11 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=11 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=11 E[inv] = 25/6 as claimed
+      -> MY E[inv] = 25/6        eps_spec = 5/24         (n-1)/3 = 10/3      BEATS (n-1)/3
+    PASS  mg-00a1 n=11 |I| is quadratic (m(m+1)/2 = 15)
+  mg-00a1   n=12  atoms=69  |I|=21
+    PASS  mg-00a1 n=12 mass is exactly 1
+    PASS  mg-00a1 n=12 no negative atom
+    PASS  mg-00a1 n=12 every flip <= 1/3
+    PASS  mg-00a1 n=12 comparable pairs all at flip 0
+    PASS  mg-00a1 n=12 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=12 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=12 E[inv] = 17/3 as claimed
+      -> MY E[inv] = 17/3        eps_spec = 34/143       (n-1)/3 = 11/3      BEATS (n-1)/3
+    PASS  mg-00a1 n=12 |I| is quadratic (m(m+1)/2 = 21)
+  mg-00a1   n=13  atoms=69  |I|=21
+    PASS  mg-00a1 n=13 mass is exactly 1
+    PASS  mg-00a1 n=13 no negative atom
+    PASS  mg-00a1 n=13 every flip <= 1/3
+    PASS  mg-00a1 n=13 comparable pairs all at flip 0
+    PASS  mg-00a1 n=13 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=13 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=13 E[inv] = 17/3 as claimed
+      -> MY E[inv] = 17/3        eps_spec = 17/84        (n-1)/3 = 4         BEATS (n-1)/3
+    PASS  mg-00a1 n=13 |I| is quadratic (m(m+1)/2 = 21)
+  mg-00a1   n=14  atoms=134  |I|=28
+    PASS  mg-00a1 n=14 mass is exactly 1
+    PASS  mg-00a1 n=14 no negative atom
+    PASS  mg-00a1 n=14 every flip <= 1/3
+    PASS  mg-00a1 n=14 comparable pairs all at flip 0
+    PASS  mg-00a1 n=14 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=14 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=14 E[inv] = 133/18 as claimed
+      -> MY E[inv] = 133/18      eps_spec = 133/585      (n-1)/3 = 13/3      BEATS (n-1)/3
+    PASS  mg-00a1 n=14 |I| is quadratic (m(m+1)/2 = 28)
+  mg-00a1   n=15  atoms=134  |I|=28
+    PASS  mg-00a1 n=15 mass is exactly 1
+    PASS  mg-00a1 n=15 no negative atom
+    PASS  mg-00a1 n=15 every flip <= 1/3
+    PASS  mg-00a1 n=15 comparable pairs all at flip 0
+    PASS  mg-00a1 n=15 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=15 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=15 E[inv] = 133/18 as claimed
+      -> MY E[inv] = 133/18      eps_spec = 19/96        (n-1)/3 = 14/3      BEATS (n-1)/3
+    PASS  mg-00a1 n=15 |I| is quadratic (m(m+1)/2 = 28)
+  mg-00a1   n=16  atoms=263  |I|=36
+    PASS  mg-00a1 n=16 mass is exactly 1
+    PASS  mg-00a1 n=16 no negative atom
+    PASS  mg-00a1 n=16 every flip <= 1/3
+    PASS  mg-00a1 n=16 comparable pairs all at flip 0
+    PASS  mg-00a1 n=16 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=16 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=16 E[inv] = 28/3 as claimed
+      -> MY E[inv] = 28/3        eps_spec = 56/255       (n-1)/3 = 5         BEATS (n-1)/3
+    PASS  mg-00a1 n=16 |I| is quadratic (m(m+1)/2 = 36)
+  mg-00a1   n=17  atoms=263  |I|=36
+    PASS  mg-00a1 n=17 mass is exactly 1
+    PASS  mg-00a1 n=17 no negative atom
+    PASS  mg-00a1 n=17 every flip <= 1/3
+    PASS  mg-00a1 n=17 comparable pairs all at flip 0
+    PASS  mg-00a1 n=17 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=17 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=17 E[inv] = 28/3 as claimed
+      -> MY E[inv] = 28/3        eps_spec = 7/36         (n-1)/3 = 16/3      BEATS (n-1)/3
+    PASS  mg-00a1 n=17 |I| is quadratic (m(m+1)/2 = 36)
+  mg-00a1   n=18  atoms=520  |I|=45
+    PASS  mg-00a1 n=18 mass is exactly 1
+    PASS  mg-00a1 n=18 no negative atom
+    PASS  mg-00a1 n=18 every flip <= 1/3
+    PASS  mg-00a1 n=18 comparable pairs all at flip 0
+    PASS  mg-00a1 n=18 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=18 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=18 E[inv] = 23/2 as claimed
+      -> MY E[inv] = 23/2        eps_spec = 69/323       (n-1)/3 = 17/3      BEATS (n-1)/3
+    PASS  mg-00a1 n=18 |I| is quadratic (m(m+1)/2 = 45)
+  mg-00a1   n=19  atoms=520  |I|=45
+    PASS  mg-00a1 n=19 mass is exactly 1
+    PASS  mg-00a1 n=19 no negative atom
+    PASS  mg-00a1 n=19 every flip <= 1/3
+    PASS  mg-00a1 n=19 comparable pairs all at flip 0
+    PASS  mg-00a1 n=19 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=19 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=19 E[inv] = 23/2 as claimed
+      -> MY E[inv] = 23/2        eps_spec = 23/120       (n-1)/3 = 6         BEATS (n-1)/3
+    PASS  mg-00a1 n=19 |I| is quadratic (m(m+1)/2 = 45)
+  mg-00a1   n=20  atoms=1033  |I|=55
+    PASS  mg-00a1 n=20 mass is exactly 1
+    PASS  mg-00a1 n=20 no negative atom
+    PASS  mg-00a1 n=20 every flip <= 1/3
+    PASS  mg-00a1 n=20 comparable pairs all at flip 0
+    PASS  mg-00a1 n=20 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=20 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=20 E[inv] = 125/9 as claimed
+      -> MY E[inv] = 125/9       eps_spec = 250/1197     (n-1)/3 = 19/3      BEATS (n-1)/3
+    PASS  mg-00a1 n=20 |I| is quadratic (m(m+1)/2 = 55)
+  mg-00a1   n=21  atoms=1033  |I|=55
+    PASS  mg-00a1 n=21 mass is exactly 1
+    PASS  mg-00a1 n=21 no negative atom
+    PASS  mg-00a1 n=21 every flip <= 1/3
+    PASS  mg-00a1 n=21 comparable pairs all at flip 0
+    PASS  mg-00a1 n=21 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=21 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=21 E[inv] = 125/9 as claimed
+      -> MY E[inv] = 125/9       eps_spec = 25/132       (n-1)/3 = 20/3      BEATS (n-1)/3
+    PASS  mg-00a1 n=21 |I| is quadratic (m(m+1)/2 = 55)
+  mg-00a1   n=22  atoms=2058  |I|=66
+    PASS  mg-00a1 n=22 mass is exactly 1
+    PASS  mg-00a1 n=22 no negative atom
+    PASS  mg-00a1 n=22 every flip <= 1/3
+    PASS  mg-00a1 n=22 comparable pairs all at flip 0
+    PASS  mg-00a1 n=22 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=22 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=22 E[inv] = 33/2 as claimed
+      -> MY E[inv] = 33/2        eps_spec = 33/161       (n-1)/3 = 7         BEATS (n-1)/3
+    PASS  mg-00a1 n=22 |I| is quadratic (m(m+1)/2 = 66)
+  mg-00a1   n=23  atoms=2058  |I|=66
+    PASS  mg-00a1 n=23 mass is exactly 1
+    PASS  mg-00a1 n=23 no negative atom
+    PASS  mg-00a1 n=23 every flip <= 1/3
+    PASS  mg-00a1 n=23 comparable pairs all at flip 0
+    PASS  mg-00a1 n=23 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=23 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=23 E[inv] = 33/2 as claimed
+      -> MY E[inv] = 33/2        eps_spec = 3/16         (n-1)/3 = 22/3      BEATS (n-1)/3
+    PASS  mg-00a1 n=23 |I| is quadratic (m(m+1)/2 = 66)
+  mg-00a1   n=24  atoms=4107  |I|=78
+    PASS  mg-00a1 n=24 mass is exactly 1
+    PASS  mg-00a1 n=24 no negative atom
+    PASS  mg-00a1 n=24 every flip <= 1/3
+    PASS  mg-00a1 n=24 comparable pairs all at flip 0
+    PASS  mg-00a1 n=24 per-slot symmetry holds on every incomparable pair
+    PASS  mg-00a1 n=24 the comparable set is transitively closed (a real poset)
+    PASS  mg-00a1 n=24 E[inv] = 58/3 as claimed
+      -> MY E[inv] = 58/3        eps_spec = 116/575      (n-1)/3 = 23/3      BEATS (n-1)/3
+    PASS  mg-00a1 n=24 |I| is quadratic (m(m+1)/2 = 78)
+
+==============================================================================
+SUMMARY -- and these are TWO claims, not one
+==============================================================================
+  (1) is lp200d.measure_report a correct tool?      -> answered in a6_instrument.py
+  (2) do the downstream witnesses survive a41b7's
+      independent checker?                          -> PASS 203   FAIL 0
