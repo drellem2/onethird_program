@@ -1,0 +1,45 @@
+==============================================================================
+mg-4d3b selftest
+==============================================================================
+  [PASS] owner: the TRAILING (mg-xxxx) is the owner
+  [PASS] owner: a trailing id wins over ids earlier in the subject
+  [PASS] owner: no trailing parens -> None -- an unowned commit is still an eligible successor and is not dropped
+  [PASS] owner: text after the parens means no owner
+  [PASS] names(): matches in the BODY, not only the subject
+  [PASS] names(): case-insensitive
+  [PASS] names(): a non-occurrence is False
+  [PASS] successors(): UNKNOWN repo -> None, never []
+  [PASS] successors(): readable repo -> a list
+  [PASS] row_verdict(): UNKNOWN is STICKY across a readable repo -- one unreadable repo makes the row UNKNOWN; a count over part of a population is not a count
+  [PASS] row_verdict(): the unreadable repo's entry is None, not []
+  [PASS] row_verdict(): the SAME harness returns REFUTED when it can read -- without this the UNKNOWN checks above pass vacuously for a constant-UNKNOWN harness
+  [PASS] row_verdict(): and UPHELD when it reads and finds nothing -- UPHELD and UNKNOWN are produced by different inputs -- the distinction this audit is about
+  [PASS] successors(): a commit AFTER the instant is excluded
+  [PASS] successors(): the parent's OWN commit is not its successor
+  [PASS] successors(exclude_own=False): the same commit IS returned -- this switch is the whole of a2 -- if it did nothing, a2 measures nothing
+  [PASS] landings(): finds the parent's OWN commits
+  [PASS] landings(): UNKNOWN repo -> None, never []
+  [PASS] landings(): a commit merely NAMING the parent is not a landing
+  [PASS] clocks: a rebase-skewed commit is IN on author and OUT on committer -- B5; both are reported and neither is called the truth
+  [PASS] git_log: every record parsed to 6 fields
+  [PASS] git_log: no subject contains a newline -- a body newline read as a record boundary is how mg-c067's figure grammar died
+  [PASS] git_log: every record has a parsed author date
+  [PASS] git_log: the message contains the subject (%B, not %b)
+  [PASS] row 1: mg-e35b exists in the work store
+  [PASS] row 1: transcribed filing instant == the store's `created` -- 2026-07-31T04:13:24Z vs 2026-07-31T04:13:24Z -- a wrong instant silently moves every count
+  [PASS] row 1: the `no landing commit` clause is transcribed correctly -- a2's entire finding rests on this: title says YES, ROWS says YES
+  [PASS] row 1: the ticket names its parent mg-fcf1
+  [PASS] row 2: mg-fccb exists in the work store
+  [PASS] row 2: transcribed filing instant == the store's `created` -- 2026-07-31T04:12:41Z vs 2026-07-31T04:12:41Z -- a wrong instant silently moves every count
+  [PASS] row 2: the `no landing commit` clause is transcribed correctly -- a2's entire finding rests on this: title says YES, ROWS says YES
+  [PASS] row 2: the ticket names its parent mg-d112
+  [PASS] row 3: mg-a74f exists in the work store
+  [PASS] row 3: transcribed filing instant == the store's `created` -- 2026-07-31T04:22:15Z vs 2026-07-31T04:22:15Z -- a wrong instant silently moves every count
+  [PASS] row 3: the `no landing commit` clause is transcribed correctly -- a2's entire finding rests on this: title says NO, ROWS says NO
+  [PASS] row 3: the ticket names its parent mg-16eb
+  [PASS] row 4: mg-dffa exists in the work store
+  [PASS] row 4: transcribed filing instant == the store's `created` -- 2026-07-31T04:22:50Z vs 2026-07-31T04:22:50Z -- a wrong instant silently moves every count
+  [PASS] row 4: the `no landing commit` clause is transcribed correctly -- a2's entire finding rests on this: title says NO, ROWS says NO
+  [PASS] row 4: the ticket names its parent mg-5800
+
+== selftest: 0 FAIL ==

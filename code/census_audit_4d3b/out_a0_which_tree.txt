@@ -1,0 +1,71 @@
+==============================================================================
+mg-4d3b a0 -- WHICH TREE: fetch, resolve, state the staleness
+==============================================================================
+WHICH TREE -- fetched, resolved, stated (mg-f3ff addendum 1 and 2)
+  onethird_program       ok        ref=origin/main sha=f8bd3ae87e49
+                                   HEAD=c372c542ca11  behind by 4   <-- checkout STALE; derived against the ref anyway
+  one_third_width_three  ok        ref=origin/main sha=42499a568f97
+                                   HEAD=912f1b1498f2  behind by 72   <-- checkout STALE; derived against the ref anyway
+
+mg-4d3b a0 -- WHICH TREE.  Fetch, resolve, state the sha and the staleness.
+
+mg-f3ff's addendum makes this load-bearing: a `git log --grep` against a stale
+checkout returns the same `no successor` for a completely different reason, and
+returns it with the authority of having read the tree.  So freshness is
+measured here and RE-MEASURED by every other section of this audit -- a
+freshness measured once and imported is a claim, not an observation.
+
+This section also asserts something mg-f3ff did not have to: that reaching
+repo 1 through THIS WORKTREE gives the same `origin/main` as reaching it
+through /Users/daniel/research/onethird_program.  They share `.git`, so they
+must -- but "must" is the word that precedes every finding in this arc.
+
+------------------------------------------------------------------------------
+CROSS-PATH CHECK -- worktree vs source repo for repo 1
+------------------------------------------------------------------------------
+  [PASS] worktree origin/main == source repo origin/main -- f8bd3ae87e49 vs f8bd3ae87e49
+
+------------------------------------------------------------------------------
+THE POPULATION OF THIS AUDIT, AND WHAT IT CANNOT SEE
+------------------------------------------------------------------------------
+, stated here because the thing being audited was
+required to state it and the auditor is not exempt:
+
+  POPULATION.  Every commit reachable from `origin/main`, after a fetch whose
+  exit status was checked, in the two repos mg-f3ff named.  I did not add a
+  third repo: doing so would measure a different population and could not
+  settle whether mg-f3ff's own figures reproduce.  That mg-f3ff's repo list is
+  supplied rather than discovered is its declared blind spot B2 and remains
+  one here.
+
+  WHAT THIS AUDIT CANNOT SEE.  Everything mg-f3ff's B1-B8 cannot see, plus:
+  U1 -- I did not read mg-f3ff's polecat's session, so where its transcripts
+        and its code disagree I can say which, not why.
+  U2 -- I compare against `origin/main` AS IT STANDS NOW.  The four rows are
+        date-bounded at 2026-07-31 so later commits cannot enter them, but a
+        rewritten history would be invisible to me exactly as to mg-f3ff (B4).
+  U3 -- `mg show` is a channel.  Ticket titles in §D4 of PREDICTIONS.md come
+        from it, and if the work store were edited after 07-31 I would not
+        know.  This is the audited defect's own shape and I do not claim to be
+        outside it.
+
+------------------------------------------------------------------------------
+THE FOUR ROWS UNDER AUDIT, WITH THE PREMISE EACH TITLE ACTUALLY ASSERTS
+------------------------------------------------------------------------------
+  row ticket    filed (UTC)             parent    premise asserted in the TITLE
+  1   mg-e35b   2026-07-31T04:13:24Z    mg-fcf1   no landing commit, no successor
+  2   mg-fccb   2026-07-31T04:12:41Z    mg-d112   no landing commit, no successor
+  3   mg-a74f   2026-07-31T04:22:15Z    mg-16eb   no successor
+  4   mg-dffa   2026-07-31T04:22:50Z    mg-5800   no successor
+
+  ⚠️ TWO OF THE FOUR TITLES ASSERT TWO PREMISES.  mg-f3ff measures one
+     of them ('no successor').  a2 measures the other.
+
+  onethird_program       389 commit(s) reachable, 0 of them merges
+                         (mg-f3ff reads the 389 non-merge commits; its POPULATION
+                          text does not say so.  a1 measures whether it matters.)
+  one_third_width_three  429 commit(s) reachable, 0 of them merges
+                         (mg-f3ff reads the 429 non-merge commits; its POPULATION
+                          text does not say so.  a1 measures whether it matters.)
+
+== a0 exit: 0 ==

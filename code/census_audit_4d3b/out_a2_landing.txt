@@ -1,0 +1,93 @@
+==============================================================================
+mg-4d3b a2 -- the premise mg-f3ff's instrument cannot express
+==============================================================================
+WHICH TREE -- fetched, resolved, stated (mg-f3ff addendum 1 and 2)
+  onethird_program       ok        ref=origin/main sha=f8bd3ae87e49
+                                   HEAD=c372c542ca11  behind by 4   <-- checkout STALE; derived against the ref anyway
+  one_third_width_three  ok        ref=origin/main sha=42499a568f97
+                                   HEAD=912f1b1498f2  behind by 72   <-- checkout STALE; derived against the ref anyway
+
+THE HONEST QUALIFICATION, WRITTEN BEFORE THE NUMBERS (P15 of PREDICTIONS.md):
+rows 3 and 4's titles say ONLY `no successor`.  A landing commit does not
+contradict THEIR titles.  So the finding here, if it lands, is:
+  * a MEASUREMENT defect for rows 1 and 2 -- their stated premise is
+    unmeasured by the instrument built to check it; and
+  * a PRESENTATION defect for rows 3 and 4 -- README §1's `their briefs were
+    sound` is a verdict wider than the measurement under it.
+Those are different sizes of finding and this section will not merge them.
+
+------------------------------------------------------------------------------
+ROW 1: mg-e35b asserts of mg-fcf1: "no landing commit, no successor"
+------------------------------------------------------------------------------
+  commits OWNED BY mg-fcf1, authored <= 2026-07-31T04:13:24Z: 1
+      34c151f27  2026-07-30T03:38:30+00:00  onethird_program
+        docs: independent audit of mg-2789 (NEGATIVE CONTROL 4, the incidence-structure control) — OVERSTATED; 0 BROKEN mathematics, every
+  ...and 0 more owned by mg-fcf1 AFTER the filing instant
+  >>> THE TITLE'S `no landing commit` CLAUSE IS **FALSE**: 1 landing commit(s) existed at the filing instant.
+
+------------------------------------------------------------------------------
+ROW 2: mg-fccb asserts of mg-d112: "no landing commit, no successor"
+------------------------------------------------------------------------------
+  commits OWNED BY mg-d112, authored <= 2026-07-31T04:12:41Z: 1
+      cd261b9fc  2026-07-29T08:57:00+00:00  one_third_width_three
+        docs: INDEPENDENT AUDIT of the (B-bias) locality lemma (mg-a58f) — CONFIRMED math, 2 overstatements, 2 cross-doc misses incl. an u
+  ...and 0 more owned by mg-d112 AFTER the filing instant
+  >>> THE TITLE'S `no landing commit` CLAUSE IS **FALSE**: 1 landing commit(s) existed at the filing instant.
+
+------------------------------------------------------------------------------
+ROW 3: mg-a74f asserts of mg-16eb: "no successor"
+------------------------------------------------------------------------------
+  commits OWNED BY mg-16eb, authored <= 2026-07-31T04:22:15Z: 2
+      e34a3c549  2026-07-30T18:09:50+00:00  onethird_program
+        docs+audit: independent audit of mg-0049 / 9ca11c4+5594c69 (the delegated presentation record) — THE REPAIR IS REAL AND NOTHING RE
+      253924065  2026-07-30T18:14:18+00:00  onethird_program
+        evidence: the committed outputs of a full run — 8 of 8 rows as predicted, 11 of 17 added claims hold, and mg-0049's SEVEN committe
+  ...and 0 more owned by mg-16eb AFTER the filing instant
+  >>> The title does not claim `no landing commit`, so nothing in
+      it is contradicted.  But 2 landing commit(s) existed,
+      which is what README §1's `their briefs were sound` ranges
+      over and what its measurement cannot see.
+
+------------------------------------------------------------------------------
+ROW 4: mg-dffa asserts of mg-5800: "no successor"
+------------------------------------------------------------------------------
+  commits OWNED BY mg-5800, authored <= 2026-07-31T04:22:50Z: 1
+      8ce78fb54  2026-07-30T17:29:56+00:00  onethird_program
+        docs+audit: independent audit of mg-41aa / 504ab6c (the repair of two negatives refuted by construction) — THE REPAIR HOLDS, 0 BRO
+  ...and 0 more owned by mg-5800 AFTER the filing instant
+  >>> The title does not claim `no landing commit`, so nothing in
+      it is contradicted.  But 1 landing commit(s) existed,
+      which is what README §1's `their briefs were sound` ranges
+      over and what its measurement cannot see.
+
+==============================================================================
+THE SECOND ACCURACY FIGURE, WITH ITS DENOMINATOR NAMED
+==============================================================================
+  Rows whose TITLE asserts `no landing commit`: 2  [1, 2]
+  Of those, rows where a landing commit DID exist: 2  [1, 2]
+  Rows (of all 4) whose parent owned >=1 commit at the filing instant: 4  [1, 2, 3, 4]
+
+  So the census carries TWO premises and mg-f3ff measured ONE:
+    `no successor`      -- wrong on 2 of 4   (mg-f3ff's figure; a1 reproduces it)
+    `no landing commit` -- wrong on 2 of 2 rows that assert it
+                           and false-in-fact on 4 of 4 parents
+
+  ⚠️ `2 of 4` IS NOT WRONG.  It is right about the premise it names, and
+     README §1's column header names it (`premise \`no successor\` is`).
+     What is not right is the paragraph under it, which offers `2 of 4` as
+     THE ACCURACY OF THE CENSUS and says of rows 3 and 4 `their briefs
+     were sound`.  Soundness is a verdict on the whole brief; the
+     measurement under it covers one clause of the title.
+
+  P6 SCORING:
+    predicted: all 4 parents own >=1 commit at or before their instant
+    observed : 4 of 4  -> HIT
+    (half NOT BLIND: D5 of PREDICTIONS.md already had rows 3 and 4 by hand.
+     Rows 1 and 2 were blind.)
+
+  P15 SCORING -- my own pre-filed most-likely error:
+    P15 does NOT fire in its strong form.  Both rows that assert
+    `no landing commit` do have landing commits, so this is a
+    MEASUREMENT finding on rows 1 and 2, not only a presentation one.
+
+== a2 exit: 0 ==

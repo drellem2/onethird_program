@@ -1,0 +1,266 @@
+==============================================================================
+mg-4d3b a3 -- a REAL fetch failure, through mg-f3ff's own code
+==============================================================================
+  throwaway clones under /private/tmp/claude-501/-Users-daniel--pogo-polecats-p4d3b/713e3e76-1ef0-4d4d-ac76-a8271089283a/scratchpad/run2/arms-cy0ky3tj
+  NO command in this section runs inside /Users/daniel/research/*.
+
+------------------------------------------------------------------------------
+ARM A  both clones healthy -- THE MUTATION CONTROL
+------------------------------------------------------------------------------
+   f3ff   onethird_program       ok       ref=origin/main sha=f8bd3ae87e49
+   f3ff                                   checkout HEAD=c372c542ca11 behind origin/main by 4   <-- checkout was STALE; derived against origin/main anyway
+   f3ff   one_third_width_three  ok       ref=origin/main sha=069e839f0a4a
+   f3ff                                   checkout HEAD=912f1b1498f2 behind origin/main by 71   <-- checkout was STALE; derived against origin/main anyway
+  [PASS] f3ff row 1 (mg-fcf1): REFUTED -- must NOT be UNKNOWN
+  [PASS] f3ff row 2 (mg-d112): REFUTED -- must NOT be UNKNOWN
+  [PASS] f3ff row 3 (mg-16eb): UPHELD -- must NOT be UNKNOWN
+  [PASS] f3ff row 4 (mg-5800): UPHELD -- must NOT be UNKNOWN
+  [PASS] f3ff generations() -> a list when healthy
+   4d3b   onethird_program       ok        ref=origin/main sha=f8bd3ae87e49
+   4d3b                                    HEAD=c372c542ca11  behind by 4   <-- checkout STALE; derived against the ref anyway
+   4d3b   one_third_width_three  ok        ref=origin/main sha=069e839f0a4a
+   4d3b                                    HEAD=912f1b1498f2  behind by 71   <-- checkout STALE; derived against the ref anyway
+  [PASS] 4d3b row 1 (mg-fcf1): REFUTED -- the auditor is held to the same rule
+  [PASS] 4d3b row 2 (mg-d112): REFUTED -- the auditor is held to the same rule
+  [PASS] 4d3b row 3 (mg-16eb): UPHELD -- the auditor is held to the same rule
+  [PASS] 4d3b row 4 (mg-5800): UPHELD -- the auditor is held to the same rule
+
+------------------------------------------------------------------------------
+ARM B  repo 1's origin URL unresolvable (real `git fetch` failure)
+------------------------------------------------------------------------------
+  [PASS] anti-vacuity: origin/main RESOLVES LOCALLY in the broken repo -- so a pass cannot come from an absent ref
+   f3ff   onethird_program       UNKNOWN  fetch failed rc=128: and the repository exists.
+   f3ff                                   -> every row ranging over this repo is UNKNOWN
+   f3ff   one_third_width_three  ok       ref=origin/main sha=069e839f0a4a
+   f3ff                                   checkout HEAD=912f1b1498f2 behind origin/main by 71   <-- checkout was STALE; derived against origin/main anyway
+  [PASS] f3ff row 1 (mg-fcf1): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 1: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff row 2 (mg-d112): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 2: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff row 3 (mg-16eb): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 3: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff row 4 (mg-5800): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 4: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff generations() -> None under the failure
+   4d3b   onethird_program       UNKNOWN   FETCH FAILED rc=128: and the repository exists.
+   4d3b                                    -> EVERY row ranging over this repo is UNKNOWN
+   4d3b   one_third_width_three  ok        ref=origin/main sha=069e839f0a4a
+   4d3b                                    HEAD=912f1b1498f2  behind by 71   <-- checkout STALE; derived against the ref anyway
+  [PASS] 4d3b row 1 (mg-fcf1): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 2 (mg-d112): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 3 (mg-16eb): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 4 (mg-5800): UNKNOWN -- the auditor is held to the same rule
+
+------------------------------------------------------------------------------
+ARM C  repo 2's origin URL unresolvable
+------------------------------------------------------------------------------
+  [PASS] anti-vacuity: origin/main RESOLVES LOCALLY in the broken repo -- so a pass cannot come from an absent ref
+   f3ff   onethird_program       ok       ref=origin/main sha=f8bd3ae87e49
+   f3ff                                   checkout HEAD=c372c542ca11 behind origin/main by 4   <-- checkout was STALE; derived against origin/main anyway
+   f3ff   one_third_width_three  UNKNOWN  fetch failed rc=128: and the repository exists.
+   f3ff                                   -> every row ranging over this repo is UNKNOWN
+  [PASS] f3ff row 1 (mg-fcf1): UNKNOWN -- must be UNKNOWN; unreadable=['one_third_width_three']
+  [PASS] f3ff row 1: unreadable repos return None, not [] -- None for ['one_third_width_three']; readable repos may return a list
+  [PASS] f3ff row 2 (mg-d112): UNKNOWN -- must be UNKNOWN; unreadable=['one_third_width_three']
+  [PASS] f3ff row 2: unreadable repos return None, not [] -- None for ['one_third_width_three']; readable repos may return a list
+  [PASS] f3ff row 3 (mg-16eb): UNKNOWN -- must be UNKNOWN; unreadable=['one_third_width_three']
+  [PASS] f3ff row 3: unreadable repos return None, not [] -- None for ['one_third_width_three']; readable repos may return a list
+  [PASS] f3ff row 4 (mg-5800): UNKNOWN -- must be UNKNOWN; unreadable=['one_third_width_three']
+  [PASS] f3ff row 4: unreadable repos return None, not [] -- None for ['one_third_width_three']; readable repos may return a list
+  [PASS] f3ff generations() -> None under the failure
+   4d3b   onethird_program       ok        ref=origin/main sha=f8bd3ae87e49
+   4d3b                                    HEAD=c372c542ca11  behind by 4   <-- checkout STALE; derived against the ref anyway
+   4d3b   one_third_width_three  UNKNOWN   FETCH FAILED rc=128: and the repository exists.
+   4d3b                                    -> EVERY row ranging over this repo is UNKNOWN
+  [PASS] 4d3b row 1 (mg-fcf1): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 2 (mg-d112): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 3 (mg-16eb): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 4 (mg-5800): UNKNOWN -- the auditor is held to the same rule
+
+------------------------------------------------------------------------------
+ARM D  BOTH unresolvable
+------------------------------------------------------------------------------
+  [PASS] anti-vacuity: origin/main RESOLVES LOCALLY in the broken repo -- so a pass cannot come from an absent ref
+  [PASS] anti-vacuity: origin/main RESOLVES LOCALLY in the broken repo -- so a pass cannot come from an absent ref
+   f3ff   onethird_program       UNKNOWN  fetch failed rc=128: and the repository exists.
+   f3ff                                   -> every row ranging over this repo is UNKNOWN
+   f3ff   one_third_width_three  UNKNOWN  fetch failed rc=128: and the repository exists.
+   f3ff                                   -> every row ranging over this repo is UNKNOWN
+  [PASS] f3ff row 1 (mg-fcf1): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program', 'one_third_width_three']
+  [PASS] f3ff row 1: unreadable repos return None, not [] -- None for ['one_third_width_three', 'onethird_program']; readable repos may return a list
+  [PASS] f3ff row 2 (mg-d112): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program', 'one_third_width_three']
+  [PASS] f3ff row 2: unreadable repos return None, not [] -- None for ['one_third_width_three', 'onethird_program']; readable repos may return a list
+  [PASS] f3ff row 3 (mg-16eb): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program', 'one_third_width_three']
+  [PASS] f3ff row 3: unreadable repos return None, not [] -- None for ['one_third_width_three', 'onethird_program']; readable repos may return a list
+  [PASS] f3ff row 4 (mg-5800): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program', 'one_third_width_three']
+  [PASS] f3ff row 4: unreadable repos return None, not [] -- None for ['one_third_width_three', 'onethird_program']; readable repos may return a list
+  [PASS] f3ff generations() -> None under the failure
+   4d3b   onethird_program       UNKNOWN   FETCH FAILED rc=128: and the repository exists.
+   4d3b                                    -> EVERY row ranging over this repo is UNKNOWN
+   4d3b   one_third_width_three  UNKNOWN   FETCH FAILED rc=128: and the repository exists.
+   4d3b                                    -> EVERY row ranging over this repo is UNKNOWN
+  [PASS] 4d3b row 1 (mg-fcf1): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 2 (mg-d112): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 3 (mg-16eb): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 4 (mg-5800): UNKNOWN -- the auditor is held to the same rule
+
+------------------------------------------------------------------------------
+ARM E  `origin` remote removed entirely
+------------------------------------------------------------------------------
+   f3ff   onethird_program       UNKNOWN  fetch failed rc=128: and the repository exists.
+   f3ff                                   -> every row ranging over this repo is UNKNOWN
+   f3ff   one_third_width_three  ok       ref=origin/main sha=069e839f0a4a
+   f3ff                                   checkout HEAD=912f1b1498f2 behind origin/main by 71   <-- checkout was STALE; derived against origin/main anyway
+  [PASS] f3ff row 1 (mg-fcf1): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 1: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff row 2 (mg-d112): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 2: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff row 3 (mg-16eb): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 3: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff row 4 (mg-5800): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 4: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff generations() -> None under the failure
+   4d3b   onethird_program       UNKNOWN   FETCH FAILED rc=128: and the repository exists.
+   4d3b                                    -> EVERY row ranging over this repo is UNKNOWN
+   4d3b   one_third_width_three  ok        ref=origin/main sha=069e839f0a4a
+   4d3b                                    HEAD=912f1b1498f2  behind by 71   <-- checkout STALE; derived against the ref anyway
+  [PASS] 4d3b row 1 (mg-fcf1): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 2 (mg-d112): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 3 (mg-16eb): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 4 (mg-5800): UNKNOWN -- the auditor is held to the same rule
+
+------------------------------------------------------------------------------
+ARM F  the repo directory does not exist
+------------------------------------------------------------------------------
+   f3ff   onethird_program       UNKNOWN  no such repo: /private/tmp/claude-501/-Users-daniel--pogo-polecats-p4d3b/713e3e76-1ef0-4d4d-ac76-a8271089283a/scratchpad/run2/arms-cy0ky3tj/does-not-exist
+   f3ff                                   -> every row ranging over this repo is UNKNOWN
+   f3ff   one_third_width_three  ok       ref=origin/main sha=069e839f0a4a
+   f3ff                                   checkout HEAD=912f1b1498f2 behind origin/main by 71   <-- checkout was STALE; derived against origin/main anyway
+  [PASS] f3ff row 1 (mg-fcf1): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 1: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff row 2 (mg-d112): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 2: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff row 3 (mg-16eb): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 3: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff row 4 (mg-5800): UNKNOWN -- must be UNKNOWN; unreadable=['onethird_program']
+  [PASS] f3ff row 4: unreadable repos return None, not [] -- None for ['onethird_program']; readable repos may return a list
+  [PASS] f3ff generations() -> None under the failure
+   4d3b   onethird_program       UNKNOWN   no such directory: /private/tmp/claude-501/-Users-daniel--pogo-polecats-p4d3b/713e3e76-1ef0-4d4d-ac76-a8271089283a/scratchpad/run2/arms-cy0ky3tj/does-not-exist
+   4d3b                                    -> EVERY row ranging over this repo is UNKNOWN
+   4d3b   one_third_width_three  ok        ref=origin/main sha=069e839f0a4a
+   4d3b                                    HEAD=912f1b1498f2  behind by 71   <-- checkout STALE; derived against the ref anyway
+  [PASS] 4d3b row 1 (mg-fcf1): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 2 (mg-d112): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 3 (mg-16eb): UNKNOWN -- the auditor is held to the same rule
+  [PASS] 4d3b row 4 (mg-5800): UNKNOWN -- the auditor is held to the same rule
+
+------------------------------------------------------------------------------
+ARM G-script  mg-f3ff's REAL s1_rows.py, run against the broken clone
+------------------------------------------------------------------------------
+  s1_rows.py exit: 1
+    |   onethird_program       UNKNOWN  fetch failed rc=128: and the repository exists.
+    |                                   -> every row ranging over this repo is UNKNOWN
+    | ROW 1: mg-e35b filed 2026-07-31T04:13:24Z -- asserts of mg-fcf1: no successor
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |     UNKNOWN because these repos could not be read: onethird_program
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |     UNKNOWN because these repos could not be read: onethird_program
+    |   CHAIN: UNKNOWN -- a repo could not be read.
+    |   PREDICTED (72e36cb, before any script existed): REFUTED    OBSERVED: UNKNOWN    *** MISS ***
+    | ROW 2: mg-fccb filed 2026-07-31T04:12:41Z -- asserts of mg-d112: no successor
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=1]
+    |     UNKNOWN because these repos could not be read: onethird_program
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=1]
+    |     UNKNOWN because these repos could not be read: onethird_program
+    |   CHAIN: UNKNOWN -- a repo could not be read.
+    |   PREDICTED (72e36cb, before any script existed): REFUTED    OBSERVED: UNKNOWN    *** MISS ***
+    | ROW 3: mg-a74f filed 2026-07-31T04:22:15Z -- asserts of mg-16eb: no successor
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |     UNKNOWN because these repos could not be read: onethird_program
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |     UNKNOWN because these repos could not be read: onethird_program
+    |   CHAIN: UNKNOWN -- a repo could not be read.
+    |   PREDICTED (72e36cb, before any script existed): UPHELD    OBSERVED: UNKNOWN    *** MISS ***
+    | ROW 4: mg-dffa filed 2026-07-31T04:22:50Z -- asserts of mg-5800: no successor
+    |   author    clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |     UNKNOWN because these repos could not be read: onethird_program
+    |   committer clock: UNKNOWN  ? successor commit(s)   [onethird_program=UNKNOWN  one_third_width_three=0]
+    |     UNKNOWN because these repos could not be read: onethird_program
+    |   CHAIN: UNKNOWN -- a repo could not be read.
+    |   PREDICTED (72e36cb, before any script existed): UPHELD    OBSERVED: UNKNOWN    *** MISS ***
+    |   whole census.  n = 4, and all 4 are now checked against the tree.
+    |   row  ticket    parent    premise `no successor` is   strict gens/commits   loose gens/commits   predicted
+    |    1   mg-e35b   mg-fcf1   UNKNOWN                         0 / 0               0 / 0          REFUTED  <-- MISS
+    |    2   mg-fccb   mg-d112   UNKNOWN                         0 / 0               0 / 0          REFUTED  <-- MISS
+    |    3   mg-a74f   mg-16eb   UNKNOWN                         0 / 0               0 / 0          UPHELD  <-- MISS
+    |    4   mg-dffa   mg-5800   UNKNOWN                         0 / 0               0 / 0          UPHELD  <-- MISS
+    |   REFUTED 0 of 4.  UPHELD 0 of 4.  UNKNOWN 4 of 4.
+    |   The census was WRONG on 0 of its 4 rows and RIGHT on 0.
+    |   4 of 4 checked, 0 refuted.  `0 of 4 wrong` and `4 of 4 wrong` are
+    | Traceback (most recent call last):
+    | TypeError: object of type 'NoneType' has no len()
+
+  [PASS] every row's VERDICT column prints UNKNOWN -- 4 rows x 2 clocks
+  [PASS] the successor COUNT prints `?`, never 0
+  [PASS] the failed repo prints UNKNOWN in the per-repo breakdown
+  [PASS] the CHAIN prose says UNKNOWN, not `none`
+  [PASS] the reason is named, not just the verdict
+
+  --- the SAME transcript, further down: findings about mg-f3ff ---
+    F1  the accuracy table renders UNKNOWN's depth columns as `0 / 0`.
+      s1_rows.py:76-79 -- `0 if not gens else len(gens)`, and `not None`
+      is True.  `I could not look` printed as `I looked and found none`,
+      in the summary block of the deliverable sent to remove that.
+    F2  `n = 4, and all 4 are now checked against the tree` prints verbatim
+      when 0 were checked.  It is a fixed string with no guard.
+    F3  `The census was WRONG on 0 of its 4 rows and RIGHT on 0` -- a
+      substantive claim about the subject, asserted from zero
+      measurement.  Both numbers count VERDICT values that are neither.
+    F4  `4 of 4 checked, 0 refuted` in the SUPERSEDED-FIGURE paragraph --
+      the paragraph whose own next sentence is `this does not round
+      toward either`, printing a figure derived from nothing.
+    F5  s1_rows.py then DIES: `len(L.successors(...))` on None at :131.
+      lib_f3ff.successors' docstring says `callers must NOT treat None
+      as an empty list.  That confusion is the whole subject of this
+      ticket.`  Its own caller, 30 lines away, calls len() on it.
+      The crash is LOUD, which is the mitigation -- but it lands AFTER
+      F1-F4 are already on stdout, and it is a traceback, not a reason.
+
+==============================================================================
+VERDICT OF a3
+==============================================================================
+  Arm A produced real verdicts, so the harness is not constant-UNKNOWN
+  and arms B-G are non-vacuous.
+
+  P7 (a REAL fetch failure propagates to UNKNOWN in mg-f3ff's LIBRARY)
+     -> HIT -- 4 of 4 rows UNKNOWN in every one of arms B-F
+  P8 (the mutation control is non-vacuous) -> HIT
+
+  WHAT ARM G ADDS OVER mg-f3ff's NC3: NC3 never spawns `git fetch`.  Arm
+  G does, against a real unresolvable host, in a repo where `origin/main`
+  DOES resolve -- the exact configuration of the incident that produced
+  the ticket.  The library's answer is the same, so NC3's LIBRARY-LEVEL
+  conclusion is CONFIRMED by a test it did not run rather than repeated.
+
+  ⚠️ AND THE SCRIPT LEVEL IS WHERE IT BREAKS.  NC3 checks `census_row`
+     and `generations` -- the two library calls -- and stops there.  The
+     ticket's addendum 3 is about what is PRINTED.  Running mg-f3ff's own
+     s1_rows.py against a real failure produces 5 finding(s):
+       F1  the accuracy table renders UNKNOWN's depth columns as `0 / 0`.
+       F2  `n = 4, and all 4 are now checked against the tree` prints verbatim
+       F3  `The census was WRONG on 0 of its 4 rows and RIGHT on 0` -- a
+       F4  `4 of 4 checked, 0 refuted` in the SUPERSEDED-FIGURE paragraph --
+       F5  s1_rows.py then DIES: `len(L.successors(...))` on None at :131.
+
+     SCOPE, STATED RATHER THAN IMPLIED: the per-row sections are CORRECT
+     (the five PASSes above).  s0_freshness.py exits 1 on an unreadable
+     repo and run_all.sh propagates it, so a full-suite run under this
+     failure is loudly non-zero.  What is defective is the SUMMARY BLOCK,
+     which a reader scanning for the answer reads first, and which states
+     four false things before the crash.
+
+  A CONTROL SETS THIS SECTION'S EXIT AND A FINDING DOES NOT.  Exit is
+  0 from 0 failed control(s); the 5 finding(s) about mg-f3ff
+  are reported and do not set it.
+
+== a3 exit: 0 ==

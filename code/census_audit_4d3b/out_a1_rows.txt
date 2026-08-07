@@ -1,0 +1,100 @@
+==============================================================================
+mg-4d3b a1 -- the four rows, re-derived from a disjoint reader
+==============================================================================
+WHICH TREE -- fetched, resolved, stated (mg-f3ff addendum 1 and 2)
+  onethird_program       ok        ref=origin/main sha=f8bd3ae87e49
+                                   HEAD=c372c542ca11  behind by 4   <-- checkout STALE; derived against the ref anyway
+  one_third_width_three  ok        ref=origin/main sha=42499a568f97
+                                   HEAD=912f1b1498f2  behind by 72   <-- checkout STALE; derived against the ref anyway
+
+------------------------------------------------------------------------------
+ROW 1: mg-e35b filed 2026-07-31T04:13:24Z
+        asserts of mg-fcf1: "no landing commit, no successor"
+------------------------------------------------------------------------------
+  author     clock, merges IN : REFUTED  7 successor(s)   [onethird_program=7  one_third_width_three=0]
+  author     clock, merges OUT: REFUTED  7 successor(s)   [onethird_program=7  one_third_width_three=0]
+  committer  clock, merges IN : REFUTED  7 successor(s)   [onethird_program=7  one_third_width_three=0]
+  committer  clock, merges OUT: REFUTED  7 successor(s)   [onethird_program=7  one_third_width_three=0]
+      16bee7981  2026-07-30T04:29:38+00:00  onethird_program
+        owner=mg-a806   STATE: land the mg-86a3 consequences — ledger row B6 FALSIFIED not coverage-gapped, the replacement scope clause is STRO
+      8fc51112f  2026-07-30T04:31:39+00:00  onethird_program
+        owner=mg-8a12   probe: repair NEGATIVE CONTROL 4's scoring — three of its four rows were a THEOREM scored as passing controls, and the o
+      522048f6c  2026-07-30T05:23:02+00:00  onethird_program
+        owner=mg-d39d   docs: independent audit of mg-a806 (the mg-86a3 STATE landing) — OVERSTATED with 1 BROKEN, the first in this arc, and it
+      de54c3a86  2026-07-30T06:42:43+00:00  onethird_program
+        owner=mg-f1b2   docs: independent audit of mg-8a12 / 8fc5111 (the NEGATIVE CONTROL 4 scoring repair) — OVERSTATED; the defect recurs INS
+      ba3ec79d2  2026-07-30T07:17:40+00:00  onethird_program
+        owner=mg-f2e1   STATE: widen the A5 trigger to cover STATE.md itself — the hole was in pm-onethird's own wording, and the arc's ONLY BRO
+      f024985e5  2026-07-30T19:01:15+00:00  onethird_program
+        owner=mg-da45   control+docs: THE CONDITION IS RIGHT AND THE PRINTED REASON WAS FALSE — row I4's absorbability answer is FORCED at the A
+      1d922a106  2026-07-30T19:39:24+00:00  onethird_program
+        owner=mg-1c80   docs+audit: independent audit of mg-da45 / f024985 (row I4's printed reason) — THE SUBSTANCE IS CONFIRMED AND EXTENDED T
+
+  PREDICTED verdict REFUTED, split 7+0   OBSERVED REFUTED, split 7+0   HIT (NOT BLIND -- read off mg-f3ff's committed transcript)
+
+------------------------------------------------------------------------------
+ROW 2: mg-fccb filed 2026-07-31T04:12:41Z
+        asserts of mg-d112: "no landing commit, no successor"
+------------------------------------------------------------------------------
+  author     clock, merges IN : REFUTED  5 successor(s)   [onethird_program=4  one_third_width_three=1]
+  author     clock, merges OUT: REFUTED  5 successor(s)   [onethird_program=4  one_third_width_three=1]
+  committer  clock, merges IN : REFUTED  5 successor(s)   [onethird_program=4  one_third_width_three=1]
+  committer  clock, merges OUT: REFUTED  5 successor(s)   [onethird_program=4  one_third_width_three=1]
+      ea46754e4  2026-07-29T09:22:09+00:00  onethird_program
+        owner=mg-1fdb   STATE: reconcile row 8 with the 'logically independent' line — (B) => LIB => lambda_std->1 is ONE-WAY, reverse UNPROVEN;
+      e139da38d  2026-07-29T10:39:26+00:00  onethird_program
+        owner=mg-23f5   STATE: land the mg-88bd/mg-e35c consequences — operative lambda_std form recorded CONDITIONALLY (source's THIRD form, bo
+      bc7527425  2026-07-29T11:39:19+00:00  onethird_program
+        owner=mg-c7b7   STATE: land the mg-63e3/mg-f825 consequences — STRIKE the 'no modulus exists' universal (RED survives only at F=Omega(ep
+      954c29e2c  2026-07-30T12:44:55+00:00  onethird_program
+        owner=mg-6a2f   docs: independent audit of mg-34bf / 57f962f (the STATE.md ledger restructure) — NOTHING WAS LOST, established twice wit
+      b16956159  2026-07-29T09:22:24+00:00  one_third_width_three
+        owner=mg-1fdb   docs: annotate mg-dbd1 sec 2.3/3.2 — a SECOND unflagged inequality-direction error (b vs m), refuted by mg-a58f's own wi
+
+  PREDICTED verdict REFUTED, split 4+1   OBSERVED REFUTED, split 4+1   HIT (NOT BLIND -- read off mg-f3ff's committed transcript)
+
+------------------------------------------------------------------------------
+ROW 3: mg-a74f filed 2026-07-31T04:22:15Z
+        asserts of mg-16eb: "no successor"
+------------------------------------------------------------------------------
+  author     clock, merges IN : UPHELD   0 successor(s)   [onethird_program=0  one_third_width_three=0]
+  author     clock, merges OUT: UPHELD   0 successor(s)   [onethird_program=0  one_third_width_three=0]
+  committer  clock, merges IN : UPHELD   0 successor(s)   [onethird_program=0  one_third_width_three=0]
+  committer  clock, merges OUT: UPHELD   0 successor(s)   [onethird_program=0  one_third_width_three=0]
+
+  PREDICTED verdict UPHELD, split 0+0   OBSERVED UPHELD, split 0+0   HIT (NOT BLIND -- read off mg-f3ff's committed transcript)
+
+------------------------------------------------------------------------------
+ROW 4: mg-dffa filed 2026-07-31T04:22:50Z
+        asserts of mg-5800: "no successor"
+------------------------------------------------------------------------------
+  author     clock, merges IN : UPHELD   0 successor(s)   [onethird_program=0  one_third_width_three=0]
+  author     clock, merges OUT: UPHELD   0 successor(s)   [onethird_program=0  one_third_width_three=0]
+  committer  clock, merges IN : UPHELD   0 successor(s)   [onethird_program=0  one_third_width_three=0]
+  committer  clock, merges OUT: UPHELD   0 successor(s)   [onethird_program=0  one_third_width_three=0]
+
+  PREDICTED verdict UPHELD, split 0+0   OBSERVED UPHELD, split 0+0   HIT (NOT BLIND -- read off mg-f3ff's committed transcript)
+
+==============================================================================
+VERDICT OF a1
+==============================================================================
+  mg-f3ff reports the census wrong on 2 of 4 rows.
+  This reader, sharing no code with it, finds 2 of 4 REFUTED: row 1=REFUTED, row 2=REFUTED, row 3=UPHELD, row 4=UPHELD
+  ROW VERDICTS REPRODUCE: YES
+
+  P1-P4 scorecard: 4 hit, 0 miss.  ALL FOUR WERE DISCLOSED
+  NOT BLIND at c372c54 -- I had read the parent's transcript.  They are
+  reported as REPRODUCTIONS, which is what they are, and are NOT counted
+  as successful predictions in the README's scorecard.
+
+  P5 (at least one count fails to reproduce): MISS.  All four counts
+  reproduce exactly under both clocks and with merges both included
+  and excluded.  I bet 40% that --no-merges or the owner exclusion
+  would move a figure; neither does.  Kept as written.
+
+  THE `--no-merges` WORRY IS MEASURED AND DISMISSED: a0 counts 0 merge
+  commits reachable from origin/main in EITHER repo, so mg-f3ff's
+  unstated exclusion excludes nothing on this population.  It is an
+  undocumented flag, not a defect, and this audit will not inflate it.
+
+== a1 exit: 0 ==
