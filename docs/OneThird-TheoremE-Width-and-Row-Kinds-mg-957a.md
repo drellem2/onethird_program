@@ -144,7 +144,7 @@ now.
 | 1 | `λ_std = 1 ⟺ ordinal sum` | `U` | proven for every finite poset |
 | 2 | ordinal sum ⟺ incomparability graph disconnected | `U-id` | equivalence of definitions |
 | 3a | `S_P = ρ_std(η_P)` | `U-id` | an identity |
-| 3b | **standard dominance** | ⚠️ `FP` | empirical `0/132`, `n ≤ 7` — **load-bearing, see §3.1** |
+| 3b | **standard dominance** | ~~⚠️ `FP`~~ → ⚠️ **`FP✗`** (uncond.) / **`OPEN`** (cond. = row 8) | ~~empirical `0/132`, `n ≤ 7`~~ — **SUPERSEDED (mg-55f2, on mg-65f5 §1.5): the `0/132` is a SAMPLING ARTIFACT** (frame: `n ≤ 6` exhaustive + `n = 7` top-λ spot only), the unconditional form is **REFUTED** by 166 moderate-λ `n = 7` refuters outside that frame (mg-8b64, read-not-measured), and the conditional form **is L1b**. **load-bearing, see §3.1** |
 | 4 | (A) SPREAD | `U` | proven |
 | 5 | easy/Buser, every cut | `U` | proven |
 | 6 | **Theorem E** | `U` | proven; the width warrant is §1 |
@@ -190,7 +190,17 @@ each.
 
 `STATE.md`'s machinery sentence names **"standard dominance"** and glosses it *"the gap lives in the
 standard sector, so a combinatorial bound controls `λ_std`."* **The gloss is row 3a**
-(`S_P = ρ_std(η_P)`, `U-id`, **proven**). **The name is row 3b** (`FP`, `0/132`, `n ≤ 7`).
+(`S_P = ρ_std(η_P)`, `U-id`, **proven**). **The name is row 3b** (~~`FP`, `0/132`, `n ≤ 7`~~ — see
+the correction below).
+
+> **CORRECTION (mg-55f2, landing mg-65f5 §1.5).** Row 3b's `0/132` **cannot be quoted bare**: it is
+> `0` failures inside the frame its own source declares — *"`n ≤ 6` exhaustive + `n = 7` top-λ
+> spot"* (mg-b0a6 `:286`) — and `mg-8b64`'s **166 explicit refuters at moderate-λ `n = 7`** sit
+> outside it, which L1b's own document states at `:310–313`. So **unconditional** standard
+> dominance is **refuted** (`FP✗`), and the **all-pairs-frozen conditional** that remains open **is
+> L1b**. The fork below is also settled — and **neither branch is right**: mg-65f5 finds row 3b is
+> L1b's *conclusion*, not an input, so the error was a **CIRCULARITY**. That repair is `mg-a1db`'s
+> and is not applied here. (`166`/`0/132` read from the probe documents, **not re-measured**.)
 
 - If **3a alone** suffices, the old *"all proven"* was a **NAME/GLOSS SLIP** — right rows, wrong
   label.
