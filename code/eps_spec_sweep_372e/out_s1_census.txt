@@ -1,0 +1,92 @@
+mg-372e CENSUS — occurrences of the refuted per-slot constant, by spelling
+==============================================================================
+
+What this is a count of: TEXTUAL OCCURRENCES of one of six spellings,
+one row per (file, line, form).  A line matching two forms counts twice,
+once per form.  It is NOT a count of defects.
+
+-- by spelling --
+   EPS     136
+   EINV    142
+   DQ        4
+   PROSE     6
+   TOTAL   288
+
+-- flagged COLLISION (different quantity, same expression): 16 --
+   STATE.md:167  [EPS]
+   STATE.md:167  [EINV]
+   code/counterexample_probe_24a3/probe.py:1465  [EINV]
+   code/counterexample_probe_24a3/probe_output.txt:997  [EINV]
+   code/eps_spec_sweep_372e/README.md:44  [EPS]
+   code/eps_spec_sweep_372e/README.md:46  [EINV]
+   code/eps_spec_sweep_372e/out_s2_classify.txt:19  [EPS]
+   code/eps_spec_sweep_372e/out_s2_classify.txt:23  [EINV]
+   code/eps_spec_sweep_372e/s1_census.py:17  [EPS]
+   code/eps_spec_sweep_372e/s2_classify.py:59  [EPS]
+   code/eps_spec_sweep_372e/s2_classify.py:63  [EINV]
+   code/counterexample_audit_a7b4/check_spectral.py:378  [EINV]
+   code/counterexample_audit_a7b4/out_spectral.txt:110  [EINV]
+   docs/OneThird-Counterexample-Under-The-Action.md:624  [EINV]
+   docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:268  [EPS]
+   docs/state-history/attempt-mg-88bd.md:64  [EPS]
+
+-- by file (docs/ and STATE.md first; code/ is instrument evidence) --
+      3  STATE.md   (EINV+EPS)
+      2  docs/OneThird-C3-PrefixCapture-mg-76b2.md   (EPS)
+     10  docs/OneThird-C3-PrefixCapture-mg-94c3-IndependentAudit.md   (EPS)
+      1  docs/OneThird-Counterexample-Under-The-Action.md   (EINV)
+     13  docs/OneThird-DualCertificate-mg-131e.md   (EINV+EPS)
+     10  docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md   (EPS)
+     30  docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md   (DQ+EINV+EPS)
+      1  docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md   (EPS)
+      1  docs/state-history/attempt-mg-88bd.md   (EPS)
+     18  docs/state-history/audit-mg-2eed-of-mg-b488.md   (EINV+EPS)
+      4  code/c3_audit_a94c3/PREDICTIONS.md   (EPS)
+     11  code/c3_audit_a94c3/a1_algebra.py   (EPS)
+      2  code/c3_audit_a94c3/a4_census.py   (EPS)
+     10  code/c3_audit_a94c3/out_a1_algebra.txt   (EPS)
+      8  code/c3_audit_a94c3/out_a4_census.txt   (EPS)
+      2  code/c3_prefix_capture_76b2/PREDICTIONS.md   (EPS)
+      2  code/c3_prefix_capture_76b2/s4_budget.py   (EPS)
+      1  code/counterexample_audit_a7b4/check_spectral.py   (EINV)
+      1  code/counterexample_audit_a7b4/out_spectral.txt   (EINV)
+      1  code/counterexample_probe_24a3/probe.py   (EINV)
+      1  code/counterexample_probe_24a3/probe_output.txt   (EINV)
+      2  code/dual_certificate_131e/OUTCOMES.md   (EINV)
+      5  code/dual_certificate_131e/PREDICTIONS.md   (EINV)
+      2  code/dual_certificate_131e/README.md   (EINV)
+      5  code/dual_certificate_131e/d1_certificates.py   (EINV)
+      4  code/dual_certificate_131e/d2_pattern.py   (EINV)
+     10  code/dual_certificate_131e/d3_refutation.py   (EINV+EPS)
+      1  code/dual_certificate_131e/lib131e.py   (EINV)
+      4  code/dual_certificate_131e/out_d1_certificates.txt   (EINV)
+      2  code/dual_certificate_131e/out_d2_pattern.txt   (EINV)
+     14  code/dual_certificate_131e/out_d3_refutation.txt   (EINV+EPS)
+      5  code/dual_certificate_131e/out_selftest131e.txt   (EINV)
+      1  code/dual_certificate_131e/selftest131e.py   (EINV)
+     11  code/eps_spec_sweep_372e/README.md   (DQ+EINV+EPS+PROSE)
+      2  code/eps_spec_sweep_372e/out_s2_classify.txt   (EINV+EPS)
+      6  code/eps_spec_sweep_372e/out_s3_control.txt   (EPS)
+      9  code/eps_spec_sweep_372e/s1_census.py   (DQ+EINV+EPS+PROSE)
+      9  code/eps_spec_sweep_372e/s2_classify.py   (EINV+EPS+PROSE)
+      4  code/eps_spec_sweep_372e/s3_control.py   (EPS)
+      2  code/perslot_symmetry_200d/OUTCOMES.md   (EINV+EPS)
+      2  code/perslot_symmetry_200d/README.md   (EINV)
+     12  code/perslot_symmetry_200d/out_v2_n34.txt   (EINV+EPS)
+      6  code/perslot_symmetry_200d/out_v2_n5.txt   (EINV+EPS)
+     11  code/perslot_symmetry_200d/out_v3_families.txt   (EINV)
+      2  code/perslot_symmetry_200d/v2_disjunctive.py   (EINV+EPS)
+     13  code/perslot_symmetry_200d/v3_families.py   (EINV)
+      2  code/state_audit_2eed/a1_n6_witness.py   (EINV+EPS)
+      3  code/state_audit_2eed/a2_fence.py   (EINV)
+      2  code/state_audit_2eed/out_a1_n6_witness.txt   (EINV+EPS)
+      5  code/state_audit_2eed/out_a2_fence.txt   (EINV)
+
+files carrying at least one spelling: 50
+  of which docs/: 9
+  of which code/: 40
+
+-- the HTML twin, checked by name --
+   docs/state-of-the-wall.html: 0 occurrences of any swept spelling
+   -> NOT a site.  It is a 2026-07-19 rendering that predates mg-200d
+      entirely and never carried the formula; it says so in its own banner.

@@ -1,0 +1,30 @@
+mg-372e CLASSIFICATION — every occurrence in docs/, with its class
+==============================================================================
+
+[REPAIRED ] docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md
+             10 lines / 10 form-hits — 5 LIVE struck in place + 1 left (`:320`, scoped to n=3,4,5 and TRUE)
+             allowlist: 3 site(s) left deliberately, true as written
+[REPAIRED ] docs/OneThird-PerSlot-AdjacencySymmetry-mg-200d.md
+             28 lines / 30 form-hits — 8 LIVE struck in place; THEOREM 4.2, the n<=5 table and the headline left
+             allowlist: 8 site(s) left deliberately, true as written
+[CITED    ] docs/OneThird-C3-PrefixCapture-mg-76b2.md
+             2 lines / 2 form-hits — both sites read 'if the mg-200d route survives mg-131e' -- already correct
+[DERIVED  ] docs/OneThird-C3-PrefixCapture-mg-94c3-IndependentAudit.md
+             10 lines / 10 form-hits — an audit whose subject IS the supply/demand relation; labelled at every site
+[DERIVED  ] docs/OneThird-DualCertificate-mg-131e.md
+             12 lines / 13 form-hits — the refutation itself -- correcting it would make it disagree with its subject
+[CITED    ] docs/state-history/audit-mg-2eed-of-mg-b488.md
+             18 lines / 18 form-hits — an audit OF the STATE.md landing; quotes it. Archival state-history.
+[COLLISION] docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md
+             1 lines / 1 form-hits — `1 - lambda_std(W_n) <= 2/(n+1)` is the Cheeger bound on the poset W_n
+[COLLISION] docs/state-history/attempt-mg-88bd.md
+             1 lines / 1 form-hits — same W_n spectral-gap bound; archival state-history
+[COLLISION] docs/OneThird-Counterexample-Under-The-Action.md
+             1 lines / 1 form-hits — `n(n-1)/3` is an inversion RADIUS -- the regex matched a substring
+
+docs/ total: 83 lines carrying a spelling, 86 form-hits across 9 documents
+
+HTML twin docs/state-of-the-wall.html: 0 occurrences -> NOT a site
+
+PASS — every occurrence in the two repaired documents is either marked with the
+       refutation or on the explicit leave-alone allowlist, and the twin is clean.

@@ -15,6 +15,41 @@ rebase changed the hash and **not the content** — `lp6bc2.py`, `v2_optimiser.p
 after it landed. **So §8's two corrections apply to what is on `main`, not only to what was on a
 branch.**
 
+> ## ⚠️ CONJECTURE 4.3 IS **REFUTED**, NOT OPEN — AND THIS DOCUMENT NEVER SAID SO (`mg-372e`)
+>
+> `mg-131e` was sent to CERTIFY the `≤` direction and killed it instead. On the branch
+> `I = {(0,1),(1,2),(2,3),(3,4),(4,5)} ∪ {(1,4)}` at `n = 6` — a genuine comparability pattern
+> whose comparable set is transitive, and that is *checked* — a 6-atom measure at mass `1/6` each
+> satisfies every constraint this document imposes and reaches `E[inv] = 11/6 > 5/3 = (n−1)/3`,
+> i.e. `ε_spec = 11/35 > 2/7`. **Also false at `n = 7,8,9,10`, and the excess `(n−4)/12` GROWS
+> LINEARLY** — not a boundary wobble a nearby constant would absorb. The refutation is at
+> [`OneThird-DualCertificate-mg-131e.md`](OneThird-DualCertificate-mg-131e.md) §0 and §4 and is
+> **not restated here**; the ledger carries it at `STATE.md:167(a)`.
+>
+> **`§6`'s THRESHOLD ARITHMETIC IS VOID, NOT UPDATED.** *"Daniel's `1/6` at `n ≥ 11`, the wall's
+> `≈ 2×10⁻²` at `n ≥ 99`"* was read off `2/(n+1)`. With the formula refuted **there is no
+> threshold to quote: do not carry the old numbers and do not print a new one.** The question that
+> replaces it — what *is* the true growth of the disjunctive per-slot value? — is `mg-00a1`.
+>
+> **WHAT SURVIVES, AND IT IS NOT NOTHING — do not read the strikes as a retraction of the
+> document.** THEOREM 4.2 (`≥ (n−1)/3`, every `n`) **stands**, and `mg-131e` §2 upgraded it: on
+> the **consecutive-pairs branch** the value is `(n−1)/3` **exactly, for every `n`, both
+> directions, with no solver on either side**. The `n = 3,4,5` exhaustive values `2/3, 1, 4/3` are
+> **exact and untouched**. `§2`'s and `§3`'s two negatives — the literal all-pairs form is
+> INFEASIBLE, the branch-free surrogate buys nothing — are untouched. What died is **the
+> CONSTANT**, i.e. the all-`n` equality, and with it every consequence read off it.
+>
+> `mg-131e` flagged this document as uncorrected and deliberately did not correct it; `mg-b488`
+> landed the refutation into `STATE.md` and scoped itself there. This banner and the strikes below
+> are that landing. **Sites struck — EIGHT, and counted so the sweep is checkable:** `§0`'s
+> verdict sentence and its `n → ∞` column (1), `§0`'s sizing paragraph (2), `§0`'s condition
+> paragraph (3), CONJECTURE 4.3 (4), `§6`'s replacement-factor paragraph (5), `§6`'s target
+> table (6), `§6`'s *"under Conjecture 4.3"* bullet (7), `§6`'s closing instruction (8).
+> **`§0`'s HEADLINE is deliberately NOT struck** — *"buys a factor that grows with `n`, not a
+> constant"* is what `STATE.md:167(c)` records as STANDING; what died is the exact constant, not
+> the shape. `§4.2`'s `n = 3,4,5` table, THEOREM 4.2 and its construction, `§4.2`'s evidence
+> bullets, `§5`'s control, `§7` and `§8` are NOT struck either: they are true as written.
+
 ---
 
 ## 0. Verdict
@@ -22,29 +57,43 @@ branch.**
 > ## **PER-SLOT ADJACENCY SYMMETRY BUYS A FACTOR THAT GROWS WITH `n`, NOT A CONSTANT — AND THE TICKET'S OWN SIZING PARAGRAPH IS WRONG BECAUSE OF IT.**
 >
 > Imposed **soundly**, per-slot adjacency symmetry takes the relaxation value from
-> `C(n,2)/3` down to **`(n−1)/3`** — from `Θ(n²)` to `Θ(n)`:
+> `C(n,2)/3` down to ~~**`(n−1)/3`** — from `Θ(n²)` to `Θ(n)`:~~ **`(n−1)/3` AT `n = 3,4,5`, and
+> `mg-131e` REFUTED the all-`n` equality at `n = 6` (§0, §4) — so the `n → ∞` column below is
+> STRUCK and the rate is UNKNOWN (`mg-372e`):**
 >
-> | | `n = 3` | `n = 4` | `n = 5` | as `n → ∞` |
+> | | `n = 3` | `n = 4` | `n = 5` | as `n → ∞` — **⛔ STRUCK ON THE LOWER TWO ROWS** |
 > |---|---|---|---|---|
 > | **baseline** `M_n` alone (`mg-6bc2`) | `1` | `2` | `10/3` | `ε_spec = n/(n+1) → 1` |
-> | **+ per-slot adjacency symmetry** | **`2/3`** | **`1`** | **`4/3`** | **`ε_spec = 2/(n+1) → 0`** |
-> | ratio | `2/3` | `1/2` | `2/5` | `→ 0` |
+> | **+ per-slot adjacency symmetry** | **`2/3`** | **`1`** | **`4/3`** | ~~**`ε_spec = 2/(n+1) → 0`**~~ **REFUTED at `n = 6` — UNKNOWN (`mg-00a1`)** |
+> | ratio | `2/3` | `1/2` | `2/5` | ~~`→ 0`~~ **unknown** |
+>
+> *(The three `n = 3,4,5` columns are exhaustive LP optima and are exact and UNTOUCHED. Struck:
+> the `n → ∞` cells of the **per-slot** and **ratio** rows only. The **baseline** row's
+> `ε_spec = n/(n+1) → 1` is `mg-6bc2`'s theorem, is not this document's claim, and stands.)*
 >
 > **The gain is not a constant factor.** The ticket sized this ticket in advance as *"a
 > milestone, not a wall-breaker, and the writeup must say which"*, on the assumption that a
 > result here would move `d·q̄` by a constant. **It does not, and that instruction cannot be
-> obeyed as written:** at `ε_spec = 2/(n+1)`, Daniel's `1/6` is reached at `n ≥ 11` and the
-> wall's `≈ 2×10⁻²` at `n ≥ 99`. §6 states both sizings and the condition they hang on.
+> obeyed as written:** ~~at `ε_spec = 2/(n+1)`, Daniel's `1/6` is reached at `n ≥ 11` and the
+> wall's `≈ 2×10⁻²` at `n ≥ 99`.~~ **[VOID — those two thresholds were read off `2/(n+1)`, which
+> `mg-131e` refuted at `n = 6`. There is no threshold to quote: the old numbers are not carried
+> and no new one is printed (`mg-372e`).]** §6 states both sizings and the condition they hang
+> on. **The sizing instruction still cannot be obeyed as written** — the measured gain is not a
+> constant factor at `n ≤ 5` either — but the reason is now *"the rate is unknown"*, not
+> *"the rate is `2/(n+1)`"*.
 >
 > ### The condition, stated at the same volume as the result
 >
 > **`(n−1)/3` is EXACT only at `n ∈ {3, 4, 5}` — a finite population, three points.** The
 > `≥` direction is a **theorem for every `n`** (an explicit 3-atom construction, §4.2). The
-> `≤` direction is a **CONJECTURE and is not proven here.** It must be read with the
-> suspicion due to something that strong: **a proof of it at all `n` would be a proof of the
-> `LIB` face** (`E[inv_e] = O(n)`) for the class `M_n` — which `STATE.md:179` records as the
-> open residual and which obstruction 4 says is hard. If a three-point extrapolation is
-> going to break, this is where.
+> `≤` direction is ~~a **CONJECTURE and is not proven here.**~~ **FALSE from `n = 6`
+> (`mg-131e` §0/§4) — it was a conjecture when this document landed and it is now REFUTED, so
+> what follows is the pre-refutation assessment and it turned out to be right (`mg-372e`).** It
+> must be read with the suspicion due to something that strong: **a proof of it at all `n` would
+> be a proof of the `LIB` face** (`E[inv_e] = O(n)`) for the class `M_n` — which `STATE.md:179`
+> records as the open residual and which obstruction 4 says is hard. If a three-point
+> extrapolation is going to break, this is where. **It broke exactly there, at the first `n`
+> past the measured range.**
 
 ### Three findings the ticket did not ask for and which change what it asked
 
@@ -238,8 +287,18 @@ owns index `k` supplies `J_k(k+1,k) = 1/3`, which is the symmetry — every othe
 atoms create spans distance 3 and so sits on a **comparable** pair, which carries no constraint.
 ∎ *(Checked directly, without the LP, at every `n` from 3 to 20: `out_v3_families.txt` §V3b.)*
 
-**CONJECTURE 4.3 (NOT PROVEN).** The disjunctive per-slot value is **exactly** `(n−1)/3` for
-every `n`, i.e. `ε_spec = 2/(n+1)`.
+**~~CONJECTURE 4.3 (NOT PROVEN).~~ CONJECTURE 4.3 — ⛔ REFUTED AT `n = 6` BY `mg-131e` (§0, §4).**
+~~The disjunctive per-slot value is **exactly** `(n−1)/3` for every `n`, i.e.
+`ε_spec = 2/(n+1)`.~~
+
+> **It is FALSE, not open.** An explicit 6-atom feasible witness on the branch
+> `{(0,1),(1,2),(2,3),(3,4),(4,5)} ∪ {(1,4)}` gives `E[inv] = 11/6 > 5/3`, and the excess grows
+> linearly in `n` (`(n−4)/12`, checked at `n = 6,8,10`). **THEOREM 4.2's `≥ (n−1)/3` is
+> untouched** and `mg-131e` §2 turned it into an equality **on the consecutive-pairs branch, for
+> every `n`, both directions**. What is dead is the maximum OVER BRANCHES being `(n−1)/3`.
+> The evidence bullets below are true as written and are kept so the refutation is legible — the
+> third one says the lower-bound search *can only refute, never confirm*, and the search that
+> refuted it was `mg-131e`'s, one `n` past this document's range. (`mg-372e`)
 
 Evidence and its limits, stated together:
 - exact and matching at `n = 3, 4, 5` (exhaustive);
@@ -296,27 +355,40 @@ The ticket states `ε_spec = 3·d·q̄·n/(n+1)` exactly, with `d·q̄ = 1/3` to
 Daniel's `1/6` needing `d·q̄ ≤ 1/18`, and closing the wall needing `d·q̄ ≤ 1/150`. It then
 instructs: *"A result here is a milestone, not a wall-breaker, and the writeup must say which."*
 
-**That instruction presupposes a constant-factor gain and cannot be obeyed as written.** The
+**That instruction presupposes a constant-factor gain and cannot be obeyed as written.** ~~The
 measured gain replaces the factor `n/(n+1)` by `2/(n+1)` — equivalently `d·q̄ = 2/(3n)`, which
-is not a constant:
+is not a constant:~~ **[STRUCK — `mg-131e` refuted `ε_spec = 2/(n+1)` at `n = 6` (§0, §4), so
+`d·q̄ = 2/(3n)` is refuted with it, being the same statement in another currency. The measured
+gain at `n = 3,4,5` is `ε_spec = 1/2, 2/5, 1/3` against the baseline `3/4, 4/5, 5/6`, and what it
+becomes past `n = 5` is UNKNOWN — `mg-00a1`. The instruction still cannot be obeyed, now because
+the shape is unknown rather than because it is `2/(n+1)`. (`mg-372e`)]**
 
-| target | needs `ε_spec ≤` | reached at |
+| ~~target~~ | ~~needs `ε_spec ≤`~~ | ~~reached at~~ |
 |---|---|---|
-| Daniel's `1/6` | `1/6` | **`n ≥ 11`** |
-| closing the wall (`≈ 2×10⁻²`, the optimistic `C₃ = 1` value) | `1/50` | **`n ≥ 99`** |
+| ~~Daniel's `1/6`~~ | ~~`1/6`~~ | ~~**`n ≥ 11`**~~ |
+| ~~closing the wall (`≈ 2×10⁻²`, the optimistic `C₃ = 1` value)~~ | ~~`1/50`~~ | ~~**`n ≥ 99`**~~ |
+
+> ⛔ **THE TABLE ABOVE IS VOID, NOT UPDATED.** Both thresholds were read off `2/(n+1)`. With the
+> formula refuted **there is no threshold to quote — the old numbers are struck and no
+> replacement is printed.** `STATE.md:167(a)` says the same. Anyone quoting `n ≥ 11` or `n ≥ 99`
+> from this document is quoting a number with no derivation behind it.
 
 So, stated at the strength it actually has and no more:
 
 - **At `n ∈ {3,4,5}` — a theorem about the relaxation, finite population.** `ε_spec` is `1/2`,
   `2/5`, `1/3` where the baseline gives `3/4`, `4/5`, `5/6`. On its own that is **a milestone**:
   three small `n`, and `1/3` is nowhere near `1/50`.
-- **Under Conjecture 4.3 — which is NOT proven here.** It is **a wall-breaker for `n ≥ 99`**,
+- ~~**Under Conjecture 4.3 — which is NOT proven here.** It is **a wall-breaker for `n ≥ 99`**,
   and the master bound is primitive from `n ≥ 100`. That coincidence is not evidence for the
-  conjecture; it is a consequence of any bound that tends to `0`.
+  conjecture; it is a consequence of any bound that tends to `0`.~~ **[STRUCK — 4.3 is REFUTED
+  (`mg-131e` §0/§4), so there is no wall-breaking reading to condition on. `mg-372e`]**
 
-**Do not carry `ε_spec = 2/(n+1)` as an established figure.** It is exact at three values of `n`
+**Do not carry `ε_spec = 2/(n+1)` as an established figure.** ~~It is exact at three values of `n`
 and conjectural elsewhere, and the honest one-line form is: *per-slot adjacency symmetry is
-worth `Θ(n²) → Θ(n)` at `n ≤ 5` and the all-`n` statement is open.*
+worth `Θ(n²) → Θ(n)` at `n ≤ 5` and the all-`n` statement is open.*~~ **Do not carry it at all:
+it is exact at three values of `n` and FALSE from `n = 6` (`mg-131e` §0, §4). The honest one-line
+form is now: *per-slot adjacency symmetry is worth `Θ(n²) → Θ(n)` at `n ≤ 5` and on one named
+`n`-indexed sub-family, and the all-`n` rate is UNKNOWN* (`mg-00a1`). (`mg-372e`)**
 
 ---
 

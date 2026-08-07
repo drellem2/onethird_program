@@ -32,9 +32,31 @@ enumeration** — `mg-345e`'s refusal is kept and §8 says why.
 > scored its own prediction `REFUTED` off a measurement on an incomplete measure. And the
 > aggregate/per-slot distinction survives, relocated from `n = 3` to the asymptotics: `mg-200d`
 > finds the two **agree at `n = 3` and separate from `n = 4`**, with the per-slot form buying
-> `ε_spec = 2/(n+1)` and the aggregate form buying no decay at all.
+> ~~`ε_spec = 2/(n+1)`~~ **[REFUTED at `n = 6` — `mg-131e` §0, §4; see the banner below]** and
+> the aggregate form buying no decay at all.
 >
 > **Unchanged:** §0's verdict, §2, §2.1, §3, §4, §6, §7. Nothing in the `1/6`-vs-`1` answer moves.
+
+> ## ⚠️ `ε_spec = 2/(n+1)` IS REFUTED, AND THIS DOCUMENT PRINTED IT AS LIVE AT FIVE SITES (`mg-372e`)
+>
+> `mg-131e` refuted it **at `n = 6`** by an explicit hard-coded feasible witness that touches no
+> LP — `E[inv] = 11/6 > 5/3`, i.e. `ε_spec = 11/35 > 2/7` — and the excess **grows linearly in
+> `n`**. It is **FALSE, not conjectural**. The refutation is at
+> [`OneThird-DualCertificate-mg-131e.md`](OneThird-DualCertificate-mg-131e.md) §0 and §4; it is
+> not restated here. The ledger carries it at `STATE.md:167(a)`.
+>
+> **This is a staleness repair, not a new result.** `mg-131e` flagged that this document was
+> uncorrected and deliberately did not correct it; `mg-b488` landed the refutation into `STATE.md`
+> and scoped itself to `STATE.md`, saying so in as many words at `:168`. `mg-372e` is that landing.
+>
+> **Struck in place at `:35`, `:85`, §5.1's *"what it buys"* table, §5.1's route ordering, and
+> §9's closing note.** `:320` is **NOT** struck: *"`6E/(n²−1) = 2/(n+1)` exactly at `n = 3,4,5`"*
+> is scoped to three values of `n`, is **TRUE**, and is the `n`-labelling check `mg-94c3` re-ran
+> and confirmed 3/3. A blanket edit on the string would have broken it.
+>
+> **What is NOT touched.** §5's figures (`mg-ba78`'s repair, landed and correct); the theorem —
+> Claim 3.1, Claim 4.1, §0's `1/6`-vs-`1` answer — which never depended on `2/(n+1)`; and
+> `PREDICTIONS.md`, a pre-registration artefact.
 
 ---
 
@@ -82,9 +104,11 @@ enumeration** — `mg-345e`'s refusal is kept and §8 says why.
 > **Repaired at §5 (`mg-ba78`), and it comes out stronger.** Both forms of the lemma are violated
 > by every optimiser here — the aggregate form too, once the measure is completed — so the
 > *witness* test does not separate them. What separates them is the **value**: `mg-200d` computes
-> that the per-slot form buys `ε_spec = 2/(n+1)`, i.e. `Θ(n²) → Θ(n)`, and the aggregate form buys
-> **no decay at all**. Same conclusion, better reason, and it now lives at the asymptotics rather
-> than at `n = 3`.
+> that the per-slot form buys ~~`ε_spec = 2/(n+1)`, i.e. `Θ(n²) → Θ(n)`~~ **[the constant is
+> REFUTED at `n = 6` — `mg-131e` §0, §4. What survives is the separation at `n = 4,5`, which is
+> exact; the ASYMPTOTIC rendering rests on the same three points and no proof]**, and the
+> aggregate form buys **no decay at all**. Same conclusion, better reason, and it now lives at
+> the asymptotics rather than at `n = 3`.
 >
 > ### Two corrections and one routing
 >
@@ -307,7 +331,17 @@ named next ticket — computed it:
 | | `n = 3` | `n = 4` | `n = 5` | what it buys |
 |---|---|---|---|---|
 | **+ aggregate** symmetry | `2/3` | `5/3` | `7/3` | **`ε_spec` shows no decay at all** |
-| **+ per-slot** symmetry | `2/3` | `1` | `4/3` | **`ε_spec = 2/(n+1)`, `Θ(n²) → Θ(n)`** |
+| **+ per-slot** symmetry | `2/3` | `1` | `4/3` | ~~**`ε_spec = 2/(n+1)`, `Θ(n²) → Θ(n)`**~~ **REFUTED — see below** |
+
+> ⚠️ **The *"what it buys"* cell on the per-slot row is STRUCK (`mg-372e`).** `mg-131e` refuted
+> `ε_spec = 2/(n+1)` **at `n = 6`** by explicit witness (§0, §4) and the excess grows linearly in
+> `n`; the formula is **FALSE, not conjectural**, and there is **no replacement constant to print
+> — do not carry the old one and do not invent a new one** (`STATE.md:167(a)`). The **three
+> tabulated values `2/3, 1, 4/3` are `n ≤ 5` exhaustive LP optima and are UNTOUCHED and correct**
+> — the strike is on the all-`n` reading of them, not on the numbers. `mg-00a1` is the open
+> question that replaces the formula: what *is* the true growth of the disjunctive per-slot value?
+> The aggregate row's *"no decay at all"* is unaffected, so **the recommendation to reach for the
+> per-slot form still stands** — on the exact separation at `n = 4,5`, not on an asymptotic rate.
 
 — `mg-200d` (`max E[inv_e]` under each constraint set; **its result, cited, not re-derived here**;
 see the bound at the end of §9). **The two AGREE at `n = 3` and separate from `n = 4`.** So the
@@ -344,9 +378,13 @@ units in it. The guard was written for the *reader* and not applied to the *auth
 So the ordering of the route is:
 
 1. **pair marginals alone → exactly `1`** (`= 1/6` in `ε_c3ca` units). Closed, both directions.
-2. **+ per-slot adjacency symmetry → `ε_spec = 2/(n+1)` (`mg-200d`).** It was open when this
-   document landed; it is not any more, and the aggregate form is the inert one. `mg-200d`'s
-   landing is where that result is established — this section cites it and does not restate it.
+2. **+ per-slot adjacency symmetry → ~~`ε_spec = 2/(n+1)` (`mg-200d`)~~ an UNKNOWN rate
+   (`mg-200d`, then `mg-131e`).** ~~It was open when this document landed; it is not any more~~
+   **It was open when this document landed; `mg-200d` answered it and `mg-131e` then REFUTED that
+   answer at `n = 6` (§0, §4), so it is open again — with the `n ≤ 5` values `2/3, 1, 4/3` and
+   `Θ(n²) → Θ(n)` on ONE named sub-family as all that is established** (`mg-372e`). The aggregate
+   form is still the inert one. `mg-200d`'s landing is where that result was established and
+   `mg-131e`'s is where it was killed — this section cites them and restates neither.
 3. **+ the rest of realizability →** the open residual `(R)`, `STATE.md:179`.
 
 **A negative worth recording so nobody re-walks it.** The 3-element cyclic identity
@@ -501,8 +539,10 @@ one. A guard aimed outward is not a check.
 - **I did not compute the relaxation value with adjacency symmetry imposed.** §5 shows it excludes
   every optimiser found here. **It does not show what it buys**, and I am not claiming it reaches
   `1/6` or anything else. That is the next ticket. *(It was `mg-200d`, and it answered:
-  `ε_spec = 2/(n+1)` for the per-slot form, no decay for the aggregate form — cited at §5.1 and
-  established in `mg-200d`'s own landing, not here.)*
+  ~~`ε_spec = 2/(n+1)` for the per-slot form~~ **`ε_spec = 2/(n+1)` for the per-slot form —
+  since REFUTED at `n = 6` by `mg-131e` §0/§4, so that half of the answer is FALSE and the rate
+  is unknown (`mg-372e`; the live question is `mg-00a1`)** — no decay for the aggregate form,
+  which stands — cited at §5.1 and established in `mg-200d`'s own landing, not here.)*
 - **No re-derivation** of `mg-210d`'s master bound (inherited; hand-re-derived by `mg-c4f5`), of
   `mg-92e6`'s adjacency symmetry (read from `STATE.md:156`; the probe's own document not opened),
   or of Diaconis–Graham.
