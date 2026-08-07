@@ -1,4 +1,4 @@
-# OneThird — `C₃` IS NOT AN INDEPENDENT UNKNOWN. It is `1` under the lemma the architecture already requires, and the reading Op-Form calls "too weak to use" is usable
+# OneThird — `C₃` IS NOT AN INDEPENDENT UNKNOWN. It is `1` **IN CHAIN (III)'s CURRENCY — the loss inside the Cheeger square, `Φ_pref ≤ √(2C₃ε_spec)`, which is `Op-Form §4.3`'s displayed relation** — under the lemma the architecture already requires; **CHAIN (II) DOES NOT INHERIT IT — the gap-form `C₃` is NOT 1 under L2, it is measured at `1.500, 1.473, 1.990, 2.386` and RISING**; and the reading Op-Form calls "too weak to use" is usable
 
 **Work item.** `mg-76b2` (repo `onethird_program`). Filed by `pm-onethird` as the item
 `mg-845e` reserved and declined to attempt.
@@ -9,13 +9,51 @@ directory's `README` §3.
 (mg-e35c F5's repaired value; **EMPIRICAL**, resting on mg-3ce3's envelope: 0 RED events
 across 6681 posets up to `ε = 0.20`). Every number derived from it inherits that status,
 and the symbolic form is kept beside every number.
+**Amended at `mg-01ea`, after the independent audit `mg-94c3` (`c80a4f1`) CONFIRMED it.**
+Four changes, all to **how this document is stated** and none to what it says: `C1` names the
+**currency** in the title, the §0 verdict, the §3 theorem and ledger claim 6, and says that
+**chain (II) does not inherit `C₃ = 1`**; `C2` reconciles §5's prose threshold `c > 0.80`
+with the instrument's `c ≥ 40/49 = 0.8163`; `C3` records that §7's `C₃^cut` must be
+**SQUARED** to meet §6's `C₃`; and one correction **in this document's favour** records that
+its monotonicity census `1890 / 3340 / 0` is the correct one and the auditor's is the
+conservative one. **The theorem, §6, §7 and all 16/16 of §7's independently reproduced
+figures stand unchanged.**
+
+> **CURRENCY BANNER — READ BEFORE QUOTING ANY `C₃` FROM THIS DOCUMENT (`mg-94c3` `C1`).**
+> Every unqualified `C₃ = 1` here means `C₃^(III)`: *there is a prefix `A_k` with
+> `Φ_P(A_k) ≤ √(2(1−λ_std))`*. That is the `C₃` the ticket's relation
+> `n ≥ 4C₃/ε_leak² − 1` carries, and `mg-94c3` confirms it at **1032 of 1032** primitive
+> posets exhibiting L2's first disjunct, worst ratio `0.2603`. **It is not uniformly 1 in
+> either of the other two currencies `Op-Form §4.3` puts on the table, and not even where L2
+> holds:** over those
+> same 1032 posets the **gap-form** `C₃` (`1−ρ_pref ≤ C₃(1−λ_std)`, §4.3's own repair, named
+> in the same sentence) exceeds 1 at **1023 of 1032** and runs `1.500, 1.473, 1.990, 2.386`
+> — **rising** — and `C₃^cut` (`Φ*_pref/Φ*`, L3's own wording) exceeds 1 at **10 of 1032**.
+> **CHAIN (II) THEREFORE DOES NOT INHERIT THIS RESULT.** §6 below proves chains (II) and
+> (III) differ by `2/ε_leak = 10` at every `C₃`, so a reader who substitutes an unqualified
+> `C₃ = 1` into chain (II) gets `ε_dem = ε_leak = 0.20` and a window of `n ≤ 8` instead of
+> `n ≤ 98` — a `10×` overclaim, and the gap-form measurement above makes that substitution
+> **false**, not merely unlicensed.
 
 ---
 
 ## 0. Verdict
 
-> **`C₃ = 1`, uniformly in `n`, under either disjunct of L2 — and L2 is Step 3 of the
-> architecture, already required, already on the programme's own list of open lemmas.**
+> **`C₃ = 1`, uniformly in `n`, under either disjunct of L2 — IN CHAIN (III)'s CURRENCY,
+> `Φ_pref ≤ √(2C₃ε_spec)`, WHICH IS `Op-Form §4.3`'s DISPLAYED RELATION AND IS THE ONLY ONE
+> OF THE THREE IN WHICH IT IS UNIFORMLY 1 — and L2 is Step 3 of the architecture, already required,
+> already on the programme's own list of open lemmas.**
+>
+> **And that currency qualification is load-bearing, not pedantry.** `C₃ = 1` is a statement
+> about the loss spent *inside* the Cheeger square. **It is NOT 1 in the gap-form
+> `1−ρ_pref ≤ C₃(1−λ_std)` that `§4.3` names in the same sentence** — `mg-94c3 §3` measures
+> that one at `1.500, 1.473, 1.990, 2.386` over `n = 3..6`, exceeding 1 at **1023 of the 1032**
+> primitive posets that *exhibit* L2's first disjunct, and rising; nor is
+> `C₃^cut = Φ*_pref/Φ*` always 1 there (up to `10/9`, at 10 of 1032). **Chain (II) does not
+> inherit this result**, and §6 below is what proves why it cannot: chains (II) and (III)
+> differ by `2/ε_leak = 10` at every `C₃`, so substituting `C₃ = 1` into (II) yields
+> `ε_dem = ε_leak = 0.20` and a window of `n ≤ 8` in place of `n ≤ 98`. The gap-form
+> measurement is what makes that substitution **false** rather than merely unlicensed.
 >
 > This is the ticket's **third** disjunct — *"a demonstration that `ε_dem` can be reached
 > WITHOUT `C₃` at all"* — and `mg-845e` names the same disjunct as its own second unblock
@@ -43,7 +81,11 @@ and the symbolic form is kept beside every number.
 >    mg-e35c calibration repair.** The literal form `ρ ≥ c·λ_std` closes the chain for
 >    **every** `c > 1 − ε_leak`, giving `ε_dem = 1 − (1−ε_leak)/c`. At the repaired
 >    `ε_leak = 0.20` that threshold is `c > 0.80`; at the superseded `ε_leak = 0.02` it was
->    `c > 0.98`. §4.3's verdict was reached against the superseded number — the
+>    `c > 0.98`. *(`0.80` is the **existence** threshold, `ε_dem > 0`. Evaluated at the
+>    `C₃`-free chain's own budget `ε_spec = ε_leak²/2 = 2×10⁻²`, the **self-consistent**
+>    threshold is the tighter `c ≥ (1−ε_leak)/(1−ε_spec) = 40/49 = 0.8163`, and that is the
+>    one the instrument and §7's column use. §5 reconciles them; neither moves this
+>    verdict.)* §4.3's verdict was reached against the superseded number — the
 >    supersession banner at the head of that document lists §§6.4–7.4 and §10, and **§4.3
 >    is not among them**, and claim 15 still carries `PROVEN` with the audit's `CONFIRMED`
 >    beside it. The correct verdict is **UNQUANTIFIED at a now-explicit threshold**, not
@@ -201,7 +243,7 @@ machine-checked on 1435 threshold sets over 301 monotone rational functions, `n 
 > produced three spurious "monotone sweeps landing outside the prefix family". **An
 > order-slice is not a level set.** The sets were the artifact; the theorem was not.
 
-### THEOREM. Under L2, `C₃ = 1`, uniformly in `n`.
+### THEOREM. Under L2, `C₃^(III) = 1`, uniformly in `n` — in chain (III)'s currency, `Φ_pref ≤ √(2C₃ε_spec)`, and in that one only.
 
 *Assume L2's first disjunct: some dominant standard eigenvector `v` is monotone along `e`.
 Then Lemma 3.1 produces a threshold set `S` of `v` with `|S| ≤ n/2` and
@@ -213,7 +255,11 @@ $$\Delta_1(A_k,A_k^c)\;=\;\Phi_P(A_k)\;\le\;\sqrt{2(1-\lambda_{\mathrm{std}})}\;
 
 *L3's "quantitatively controlled loss" is a factor of **exactly 1**, and `Step 4`'s
 `Φ_P(A_k) ≲ √ε` is recovered verbatim, constant `√2`. Under L2's second disjunct the
-prefix is the output and there is no conversion to charge for at all.* **[PROVEN, given L2]**
+prefix is the output and there is no conversion to charge for at all.* **[PROVEN, given L2 —
+in chain (III)'s currency. The displayed conclusion is a statement about `Φ_P(A_k)` under a
+square root, which is what chain (III) consumes; it says nothing about the gap-form
+`1−ρ_pref ≤ C₃(1−λ_std)` of chain (II), whose constant `mg-94c3 §3` measures at `> 1` at
+1023 of the 1032 primitive posets that exhibit this theorem's own hypothesis.]**
 
 **Uniform in `n` — the statement the ticket asks for explicitly.** `C₃ = 1` is a constant.
 Not a constant that happens to be small at the `n` we can enumerate: **the proof contains
@@ -286,6 +332,32 @@ $$\boxed{\;\varepsilon_{\mathrm{dem}}\;=\;1-\frac{1-\varepsilon_{\mathrm{leak}}}
 
 **[PROVEN — arithmetic, given Lemma 2.1]**
 
+> **The two thresholds on `c`, reconciled (`mg-94c3` `C2`, landed at `mg-01ea`).** This
+> document quotes **two** different thresholds on `c` and they are different numbers, both
+> read off the same inequality `(1−c) + c·ε_spec ≤ ε_leak`. They differ in what is held fixed:
+>
+> - **`c > 1 − ε_leak = 0.80` — the *existence* threshold, and it is the one in the box.**
+>   It is exactly the condition `ε_dem > 0`, i.e. that there is **some** positive spectral
+>   budget at which the literal reading closes. Equivalently it is the `ε_spec → 0` limit of
+>   the condition. It is the right thing to state symbolically, because it carries no
+>   supply-side number inside it.
+> - **`c ≥ (1−ε_leak)/(1−ε_spec) = 0.80/0.98 = 40/49 = 0.8163` — the *self-consistent*
+>   threshold, and it is the one the instrument uses.** It is the same condition evaluated at
+>   a specific budget rather than at zero: substitute the `C₃`-free chain's own
+>   `ε_spec = ε_leak²/2 = 2×10⁻²` and solve for `c`. It is necessarily the tighter of the two,
+>   because a chain that must also absorb a real `ε_spec` has less of `ε_leak` left for the
+>   constant floor.
+>
+> `s3_c3.py` sets `C_THRESH = (1−ε_leak)/(1−ε_spec)` and §7's `c below the 0.816 threshold`
+> column is counted against **that** one — which is why the transcript prints `0.816` where
+> this prose prints `0.80`. **The transcript is right to use the tighter one:** it is the
+> threshold at which the chain actually closes at the calibration this document runs at, so
+> counting posets against it is the conservative count. **The verdict of this section is
+> unaffected either way** — `0.8163` is still an ordinary reading of "a constant fraction",
+> and it is still nowhere near the `0.98` that `§4.3`'s "too weak to use" verdict was reached
+> against. (`mg-94c3` reproduces the column's four figures `1/3, 5/26, 39/274, 523/4069`
+> exactly, on code that never read this document.)
+
 | `c` | `ε_dem` at `ε_leak = 0.20` | window `n ≤` | `ε_dem` at the superseded `ε_leak = 0.02` |
 |---|---|---|---|
 | `0.80` | `0` — does not close | — | does not close |
@@ -325,13 +397,15 @@ it ("the best cut and best prefix Rayleigh quotients").
 |---|---|---|---|---|
 | **(I) monotone sweep** (this document, §3) | `Φ ≤ √(2ε_spec)` | `ε_leak²/2` | `4/ε_leak² − 1` = **99** | **none** |
 | **(II) gap-form prefix capture** | `Φ ≤ C₃·ε_spec` | `ε_leak/C₃` | `2C₃/ε_leak − 1` = `10C₃−1` | linear |
-| **(III) degraded prefix Cheeger** (the ticket's) | `Φ ≤ √(2C₃ε_spec)` | `ε_leak²/(2C₃)` | `4C₃/ε_leak² − 1` = `100C₃−1` | linear |
+| **(III) degraded prefix Cheeger** (the ticket's — **and the currency §3's theorem sets to 1**) | `Φ ≤ √(2C₃ε_spec)` | `ε_leak²/(2C₃)` | `4C₃/ε_leak² − 1` = `100C₃−1` | linear |
 | **(IV) literal prefix capture** (§5) | `Φ ≤ 1−c(1−ε_spec)` | `1 − (1−ε_leak)/c` | `2/ε_dem − 1` | threshold on `c` |
 
 `(III)` at `C₃ = 1` **is** `(I)`. So the ticket's relation is the `C₃`-free chain with a
 factor `C₃` inserted at the one place the `C₃`-free chain does not have one — correct
 bookkeeping *if and only if* the prefix restriction really does degrade the gap, which
-under L2 it does not.
+under L2 it does not. **This row, and only this row, is where §3's theorem sets `C₃` to 1.
+Row (II) keeps its own `C₃`, which is a different number and is not 1** — see the currency
+banner at the head of this document and `mg-94c3 §3`.
 
 **`(II)` is not `(III)` with `C₃` moved.** The gap-form repair — `§4.3`'s own wording,
 `1−ρ_prefix ≤ C₃(1−λ_std)` — supplies the **prefix itself**, so Cheeger's square, which is
@@ -371,6 +445,19 @@ direction — the master bound excludes the target for non-chain posets on `n �
 | `min c` (literal fraction) | `0.750` | `0.618` | `0.536` | `0.453` | **down** |
 | `c` below the `0.816` threshold | 1/3 | 5/26 | 39/274 | 523/4069 | — |
 
+> **`C₃^cut` MUST BE SQUARED TO MEET §6's `C₃` (`mg-94c3` `C3`, landed at `mg-01ea`).**
+> `s3_c3.py`'s docstring carries this sentence and this document did not: `C₃^cut` is spent
+> **inside** the Cheeger square, `Φ*_pref ≤ C₃^cut · Φ* ≤ C₃^cut · √(2(1−λ_std))`, i.e.
+> `Φ*_pref ≤ √(2·(C₃^cut)²·(1−λ_std))`, **so `Op-Form`'s chain-(III) `C₃` is the SQUARE of
+> `C₃^cut`.** A reader comparing this row's `max C₃^cut = 15/8` directly against §6's
+> chain-(III) `C₃` is off by exactly that square: `15/8 → 225/64 ≈ 3.52`. The row is printed
+> in `C₃^cut` because that is L3's own wording — the ratio of best-prefix to best-cut
+> conductance — and the conversion is here rather than left to the script.
+> **`C₃^gap` needs no such conversion:** it is the chain-(II) constant and enters
+> `Φ ≤ 1−ρ ≤ C₃^gap·ε_spec` linearly, with no Cheeger square to be spent inside.
+> *(The `0.816` in the last row is the self-consistent threshold `(1−ε_leak)/(1−ε_spec) =
+> 40/49`, not §5's prose `0.80`; §5 reconciles them.)*
+
 **Neither `C₃^cut` nor `C₃^gap` is a bound and neither can be.** A finite population can
 **refute** a bound uniform in `n` and can never establish one. What these rows show is the
 direction of travel, and in every currency it is the wrong way. **This is a negative result
@@ -395,6 +482,17 @@ correlation over a population that contains no poset in the regime, and it is no
 for L2 at unbounded `n`.]** 163 of 5230 posets have a degenerate top standard eigenvalue,
 where "*the* dominant eigenvector" is not well defined; the test used is existential, as
 L2's own wording is, and returned `UNDECIDED` 0 times.
+
+> **THIS CENSUS IS CORROBORATED BY AN INDEPENDENT ONE, AND `1890 / 3340 / 0` IS THE RIGHT
+> ANSWER (`mg-94c3 §0.4`, landed at `mg-01ea`).** `mg-94c3`'s census, on code sharing no
+> line with `lib76b2`, reads **1727 YES / 3340 NO / 163 UNDECIDED**, and
+> **`1727 + 163 = 1890` exactly**. The 163 are precisely the degenerate top eigenspaces named
+> in the paragraph above: `mg-94c3`'s test declines them by its own declared policy (`B3`),
+> whereas the existential search used here — existential because **L2's own wording is
+> existential**, *"a dominant standard eigenvector is monotone"* — resolves every one of them
+> as YES. The `NO` count agrees exactly. **The auditor records its own number as the
+> conservative one and this document's as the correct one**; the `0 UNDECIDED` above is a
+> property of the stronger test, not an unreported gap in it.
 
 ---
 
@@ -426,13 +524,13 @@ existed.)*
 | 3 | Cheeger's hard half is proved by sweeping threshold sets of `v`, `\|S\| ≤ n/2` | 3.1 | **PROVEN** (standard; written out because the source quotes only the inequality) |
 | 4 | `\|A∖σ(A)\| = \|Aᶜ∖σ(Aᶜ)\|`, so `Φ_P` is a function of the cut | 3.2 | **PROVEN**, 0/48616 exact |
 | 5 | monotone `v` ⟹ every threshold set is a prefix or a suffix | 3.3 | **PROVEN** |
-| 6 | **L2 ⟹ `C₃ = 1`, uniformly in `n`** | 3 | **PROVEN, CONDITIONAL on L2** — L2 is open |
+| 6 | **L2 ⟹ `C₃^(III) = 1`, uniformly in `n` — in chain (III)'s currency, `Φ_pref ≤ √(2C₃ε_spec)`, and in that one only. Chain (II)'s gap-form `C₃` does NOT inherit it** | 3, 6 | **PROVEN, CONDITIONAL on L2** — L2 is open. Currency confirmed at 1032/1032 primitive posets exhibiting L2, worst ratio `0.2603`; the gap-form `C₃` exceeds 1 at **1023 of those same 1032** (`mg-94c3 §3`), so the (II)-substitution is **false**, not merely unlicensed |
 | 7 | L2's second disjunct also removes `C₃`; both disjuncts do | 4 | **PROVEN** (reading of `:560–562`) |
 | 8 | L3 is a consequence of L2, not an independent lemma | 4 | **PROVEN, CONDITIONAL on L2** |
 | 9 | `ε_dem = ε_leak²/2 = 2×10⁻²`, `C₃`-free | 3, 6 | **CONDITIONAL** on 6 and on `ε_leak ≈ 0.20`, which is **HEURISTIC** |
-| 10 | `STATE.md:164`'s "the omission runs optimistic" rider is wrong; the `C₃ = 1` value is the correct one | 0 | **CONDITIONAL** on 6 |
+| 10 | `STATE.md:164`'s "the omission runs optimistic" rider is wrong; the `C₃ = 1` value is the correct one | 0 | **CONDITIONAL** on 6, **and therefore on chain (III)'s currency**. `mg-94c3 §3.2` shows the two sentences are about different numbers: `:164`'s `C₃ ≥ 1` is **unconditionally** true of the *gap-form* `C₃` (0 violations over 4376 positive-gap posets, and 1 **is** attained), while this claim is true of the *chain-(III)* `C₃` **conditional on L2**. Whoever owns that row should merge them, not strike one |
 | 11 | the literal reading closes iff `c > 1 − ε_leak`; `ε_dem = 1−(1−ε_leak)/c` | 5 | **PROVEN** given claim 1 |
-| 12 | that threshold was `0.98` at the superseded calibration and is `0.80` at the repaired one | 5 | **PROVEN** (arithmetic) |
+| 12 | that threshold was `0.98` at the superseded calibration and is `0.80` at the repaired one | 5 | **PROVEN** (arithmetic). `0.80` is the **existence** threshold; the **self-consistent** one, evaluated at `ε_spec = ε_leak²/2`, is the tighter `(1−ε_leak)/(1−ε_spec) = 40/49 = 0.8163`, which is what `s3_c3.py` and §7's column use. §5 reconciles them; neither reading moves claim 13 |
 | 13 | `Op-Form §4.3` claim 15's *"too weak to use"* does not follow from its own arithmetic | 5 | **PROVEN** — the arithmetic is correct, the usability verdict is not entailed by it |
 | 14 | `§4.3` was never re-examined under mg-e35c F5 | 5 | **PROVEN** (the banner lists §§6.4–7.4, §10; claim 15 unamended; audit `CONFIRMED`) |
 | 15 | four inequivalent chains; `§4.3`'s displayed relation belongs to (III), not to the gap-form repair it names | 6 | **PROVEN** as a disjunction over the readings enumerated; a fifth reading would go in the table |
@@ -440,8 +538,8 @@ existed.)*
 | 17 | window `n ≤ 98` under chain (I) | 0, 6 | **CONDITIONAL** on 9 **and on the mg-200d conjecture**, which this ticket otherwise does not use |
 | 18 | `1−λ_std = 0` exactly on the ordinal-sum-decomposable posets | 7 | **PROVEN** on `n ≤ 6` (three exact predicates, 0/5230 disagreements); a statement about the population, not a theorem |
 | 19 | no poset with `n ≤ 6` is inside the budget | 7 | **PROVEN** on that population (FLOAT gap, margin `0.056` vs `0.02`) |
-| 20 | `max C₃^cut` and `max C₃^gap` rise with `n`; `min c` falls | 7 | **HEURISTIC** — direction only; a finite population cannot bound either |
-| 21 | monotonicity is a minority property overall but concentrates at small gap | 7 | **HEURISTIC** |
+| 20 | `max C₃^cut` and `max C₃^gap` rise with `n`; `min c` falls | 7 | **HEURISTIC** — direction only; a finite population cannot bound either. `C₃^cut` is spent inside the Cheeger square, so §6's chain-(III) `C₃` is its **SQUARE** (`15/8 → 225/64 ≈ 3.52`); `C₃^gap` is the chain-(II) constant and needs no such conversion |
+| 21 | monotonicity is a minority property overall but concentrates at small gap | 7 | **HEURISTIC**. The census `1890 / 3340 / 0` is corroborated by `mg-94c3`'s independent `1727 / 3340 / 163-UNDECIDED`, where `1727 + 163 = 1890` exactly — the 163 are degenerate top eigenspaces its policy declines and this document's existential search (existential because L2's wording is) resolves as YES. **This document's number is the correct one and the auditor's is the conservative one** |
 | 22 | `lib2de0.E_leak` diverges from the definition on non-prefix cuts | 8 | **PROVEN**, 8178/11316; consequences **NOT ASSESSED** |
 | 23 | L2 itself | — | **OPEN. NOT TOUCHED.** |
 | 24 | L4's threshold `ε₀`, `mg-845e`'s clause (a) | — | **OPEN. NOT TOUCHED** — see §11 |
@@ -464,10 +562,22 @@ are pm-onethird's, and mg-345e owns the second.
 > unknown; L3 is a consequence of L2. What remains gated is L2 itself and L4's threshold
 > `ε₀`."*
 >
+> **The replacement must carry the currency, and this sentence is part of the proposal
+> (`mg-94c3` `C1`, landed at `mg-01ea`).** Whoever lands the above must land it as a
+> **chain-(III)** statement: *"`C₃ = 1` in the currency `Op-Form §4.3`'s displayed relation
+> uses — the loss inside the Cheeger square, `Φ_pref ≤ √(2C₃ε_spec)`. It is **NOT** 1 in the
+> gap-form `1−ρ_pref ≤ C₃(1−λ_std)` that `§4.3` names in the same sentence, where it is
+> measured at `1.473 → 2.386` over `n = 4..6` even restricted to posets exhibiting L2
+> (`mg-94c3 §3`). Chain (II) therefore does not inherit this result, and substituting
+> `C₃ = 1` into it would overstate the window by `10×`."* Note also that `:164`'s existing
+> `C₃ ≥ 1` is **unconditionally** true of the gap-form `C₃`, so the two sentences are about
+> different numbers and should be **merged** by the owner of that row rather than one struck.
+>
 > **Proposed amendment to `Op-Form §4.3` / ledger claim 15.** Claim 15's arithmetic stands;
 > its verdict does not. Suggested: `PROVEN as arithmetic; the usability verdict is
 > SUPERSEDED by mg-e35c F5 (mg-76b2 §5) — the literal form closes for every c > 1 − ε_leak,
-> which is c > 0.80 at the repaired calibration and was c > 0.98 at the superseded one.
+> which is c > 0.80 at the repaired calibration (0.8163 = 40/49 self-consistently, at the
+> budget eps_spec = eps_leak^2/2) and was c > 0.98 at the superseded one.
 > The correct status is UNQUANTIFIED at an explicit threshold.` And `§4.3`'s displayed
 > relation should be labelled as belonging to the degraded-prefix-Cheeger reading, since
 > the gap-form repair named in the same sentence gives `ε_spec ≤ ε_leak/C₃`.
@@ -499,3 +609,14 @@ One deliverable, as budgeted. Not done, and deliberately:
   are **not assessed**.
 - **`n = 7` is not swept** — ~96k posets with up to 5040 linear extensions each and an
   exhaustive `2ⁿ` cut enumeration. Every `n`-growth statement rests on `n ≤ 6` and says so.
+
+**Scope of the `mg-01ea` amendment, added with it.** It changes **how this document is
+stated and nothing it says**. No mathematics was re-derived, no script was re-run, and the
+population was not re-enumerated: `mg-94c3` reproduced 16/16 of §7's tabulated figures on
+code sharing no line with `lib76b2`, and that is taken as settled rather than re-checked
+here. It touched **no** other file — not `STATE.md` (the landing of this result there is a
+separate item), not `Op-Form`, not the instrument. The `HEURISTIC` label on §7's
+monotonicity-concentrates-at-small-gap table is **kept and not softened**: `mg-94c3` ran the
+red drill this document did not and found `Φ*_pref ≤ √(2(1−λ_std))` holds at all 3340
+**non**-monotone primitive posets as well, so the population supplies **no separating
+evidence** for the theorem. **The theorem's support is its proof (§3), not the population.**
