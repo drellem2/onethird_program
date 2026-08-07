@@ -1,0 +1,168 @@
+{
+  "_README": [
+    "THE REGISTRY OF SUPERSEDED INPUTS.",
+    "",
+    "One entry per input that was corrected after publication. Each entry names the SUPERSEDED",
+    "value, the REPAIRED value, and the provenance of the correction. The detector reports every",
+    "occurrence of a superseded value in a tracked file that is not accompanied by a repair marker.",
+    "",
+    "TO ADD AN ENTRY: you have corrected a number that was already published. Add it here in the",
+    "same commit that lands the correction. That is the whole discipline; everything else is",
+    "mechanical.",
+    "",
+    "THIS FILE IS THE SINGLE POINT OF FAILURE and that is deliberate and declared. Before this",
+    "instrument, finding a stale figure depended on whoever happened to read the right document.",
+    "Now it depends on whoever lands a correction remembering to file a row. That is strictly",
+    "better and it is not nothing.",
+    "",
+    "`patterns` are Python regexes matched against a single line. `also_matches_repaired` must be",
+    "false for a pattern that would ALSO match the repaired value -- otherwise every repaired site",
+    "reports as a defect forever."
+  ],
+
+  "entries": [
+    {
+      "id": "eps_spec_budget",
+      "title": "eps_spec budget: 2e-4 superseded by 2e-2",
+      "superseded": "2×10⁻⁴",
+      "repaired": "2×10⁻²",
+      "corrected_by": "mg-e35c F5",
+      "corrected_on": "2026-07-29",
+      "direction": "the stale value INFLATES PESSIMISM 100x",
+      "why": "the budget row is calibrated under the branch-(iii) reading its own source document proves cannot close Step 6, and reads F(eps) < 1/6 -- a necessary condition at the MAXIMUM possible slack -- as a calibration point. Under the recommended repair the calibration is the eps at which mg-3ce3's `survives` predicate first fails: 0 RED / 6681 posets up to eps = 0.20, hence eps_leak ~ 0.20 and eps_spec <= 0.2^2/2 = 2e-2.",
+      "standing_instruction": "docs/state-history/attempt-mg-88bd.md:98 -- \"do not carry 2x10^-4 or the n ~ 10^5 crossover as flat text\"",
+      "patterns": [
+        "2×10⁻⁴",
+        "2\\\\times\\s*10\\^\\{-4\\}",
+        "2e-4(?![0-9])",
+        "2\\.0?\\s*[x×]\\s*10\\^?-4(?![0-9])"
+      ]
+    },
+    {
+      "id": "eps_leak_readoff",
+      "title": "eps_leak read-off: 0.02 superseded by 0.20",
+      "superseded": "0.02",
+      "repaired": "0.20",
+      "corrected_by": "mg-e35c F5",
+      "corrected_on": "2026-07-29",
+      "direction": "the stale value INFLATES PESSIMISM (it is the square root of the budget error)",
+      "why": "same root cause as eps_spec_budget; this is the input the square is taken of.",
+      "standing_instruction": null,
+      "patterns": [
+        "varepsilon_\\{\\\\mathrm\\{leak\\}\\}\\\\approx\\s*0\\.02(?![0-9])",
+        "ε_leak\\s*[≈=]\\s*0\\.02(?![0-9])",
+        "eps_leak\\s*[~=]\\s*0\\.02(?![0-9])"
+      ]
+    },
+    {
+      "id": "gap_factor",
+      "title": "remaining gap factor: ~5e3 superseded by ~50",
+      "superseded": "5×10³",
+      "repaired": "50",
+      "corrected_by": "mg-e35c F5 (derived); struck in the primary doc by mg-5827",
+      "corrected_on": "2026-07-29",
+      "direction": "the stale value INFLATES PESSIMISM 100x -- THIS IS THE NUMBER THAT TELLS A READER HOW FAR THE WALL IS",
+      "why": "the gap factor is 1 / eps_spec up to the constant, so it moves with the budget: 1/2e-2 ~ 50, not 1/2e-4 ~ 5000.",
+      "standing_instruction": null,
+      "patterns": [
+        "5×10³",
+        "5\\\\times\\s*10\\^\\{3\\}",
+        "5e3(?![0-9])",
+        "~?\\s*5,000\\b",
+        "factor of (roughly |about |~)?5000\\b"
+      ]
+    },
+    {
+      "id": "master_bound_rhs",
+      "title": "master-bound RHS constant: 3.3e-5 superseded by 3.3e-3",
+      "superseded": "3.3×10⁻⁵",
+      "repaired": "3.3×10⁻³",
+      "corrected_by": "mg-e35c F5 (derived)",
+      "corrected_on": "2026-07-29",
+      "direction": "the stale value INFLATES PESSIMISM 100x",
+      "why": "the RHS is eps_spec/6 * n^2, so it carries the budget error verbatim.",
+      "standing_instruction": null,
+      "patterns": [
+        "3\\.3×10⁻⁵",
+        "3\\.3\\\\times\\s*10\\^\\{-5\\}",
+        "3\\.3e-5(?![0-9])"
+      ]
+    },
+    {
+      "id": "crossover_n",
+      "title": "(LIB)/(LIB-const) crossover: n ~ 1e5 superseded by n ~ 900",
+      "superseded": "n ≈ 10⁵",
+      "repaired": "n ≈ 900",
+      "corrected_by": "mg-e35c F5",
+      "corrected_on": "2026-07-29",
+      "direction": "the stale value OVERSTATES the range in which the weaker form is numerically harder -- it makes 'every plausible range' look true when it is OVERSTATED",
+      "why": "the crossover is (C/gamma)/(eps_spec/6), which moves 100x with the budget: 3C/3.3e-3 ~ 900.",
+      "standing_instruction": "docs/state-history/attempt-mg-88bd.md:98 -- same sentence as eps_spec_budget",
+      "patterns": [
+        "below (roughly |about |~)?`?10⁵`?",
+        "below (roughly |about |~)?\\$?10\\^5\\$?",
+        "\\\\approx\\s*10\\^5",
+        "crossover (at |of )?(~|\\u2248)?\\s*`?10⁵`?"
+      ]
+    },
+    {
+      "id": "claim72_threshold",
+      "title": "Claim 7.2 threshold: n <= 100 superseded by n <= 10 (primitive: n <= 100)",
+      "superseded": "n ≤ 100",
+      "repaired": "n ≤ 10",
+      "corrected_by": "mg-e35c F5 + A1",
+      "corrected_on": "2026-07-29",
+      "direction": "TWO ERRORS IN OPPOSITE DIRECTIONS: the input is 100x too pessimistic, and the claim is weaker than the available argument (primitivity gives n <= 2/eps_spec). Do not report this one as a simple inflation.",
+      "why": "eps_spec * C(n,2) >= 1 requires n(n-1) >= 100 at the repaired budget, i.e. n >= 11.",
+      "standing_instruction": null,
+      "patterns": [
+        "non-chain poset on (at most )?[~≈]?\\s*`?\\$?n?\\s*\\\\?le(q)?\\s*100\\$?`?",
+        "non-chain poset on \\$?n\\\\le100\\$?",
+        "For \\$n\\\\le100\\$ this forces"
+      ]
+    }
+  ],
+
+  "repair_markers": [
+    "SUPERSEDED",
+    "STRUCK",
+    "REPAIRED",
+    "AMENDED",
+    "BROKEN",
+    "REFUTED",
+    "RETRACTED",
+    "do not carry",
+    "do not land",
+    "not carried",
+    "stale",
+    "mg-e35c",
+    "F5"
+  ],
+
+  "authorities": [
+    {
+      "path": "docs/state-history/attempt-mg-88bd.md",
+      "why": "carries the standing instruction and both values; this is where the correction is RECORDED. Flagging it would be flagging the fix."
+    },
+    {
+      "path": "docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md",
+      "why": "the audit that PERFORMED the correction. Its occurrences of the superseded value are the refutation itself."
+    },
+    {
+      "path": "code/superseded_figures_5827/",
+      "why": "this instrument. The registry must name the superseded value in order to search for it; a detector that flags its own registry reports a defect on every run and is therefore useless. DECLARED, not hidden -- see README section 'the exclusions'."
+    }
+  ],
+
+  "frozen_prefixes": [
+    "code/"
+  ],
+  "_frozen_note": [
+    "Committed transcripts under code/ are EVIDENCE AT A COMMIT, not live claims. They record what",
+    "an instrument printed on the day it ran, and repairing them would destroy the record. They are",
+    "reported in a SEPARATE bucket -- FROZEN -- which is informational and does not fail the gate.",
+    "This is a real weakening of the gate and it is declared: a live claim that happens to live",
+    "under code/ (a README asserting a figure in the present tense, say) will be under-reported.",
+    "Markdown files directly under code/*/README.md are therefore NOT treated as frozen."
+  ]
+}

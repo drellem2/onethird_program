@@ -491,11 +491,28 @@ for *every* poset with a $\Delta_1\le\varepsilon_0$ prefix, not merely for count
 
 And that heavier burden has already been stress-tested: mg-3ce3 searched for exactly the failure
 event — thin interface, both sides non-chain, no within-side balanced pair — at absolute thresholds
-up to $\varepsilon=0.20$, i.e. an order of magnitude above the $\varepsilon_{\mathrm{leak}}\approx0.02$
-the constant budget needs, and found **0 RED events in 6681 posets** up to $n=16$
+up to $\varepsilon=0.20$, i.e. ~~an order of magnitude above the
+$\varepsilon_{\mathrm{leak}}\approx0.02$ the constant budget needs~~ **[SUPERSEDED — mg-e35c F5,
+landed mg-5827: at the repaired calibration $\varepsilon_{\mathrm{leak}}\approx0.20$, so
+$\varepsilon=0.20$ is *exactly* the budget and not an order of magnitude above it]**, and found
+**0 RED events in 6681 posets** up to $n=16$
 (`probe :110–116, :247`). **[HEURISTIC — empirical, and the probe is silent on $n$-stratification
 at fixed $\varepsilon$, which is the one cheap check that would directly corroborate $n$-uniformity;
 flagged, not run, per the no-computation directive.]**
+
+> **[DIRECTION NOTE — this site fails the OTHER way, and it is the site the whole repair turns on.]**
+> As written, this sentence offered the reader a **safety margin that does not exist**: it said the
+> stress test ran an order of magnitude beyond what the budget needs. It did not. **This very
+> measurement — 0 RED across 6681 posets up to $\varepsilon=0.20$ — *is* what F5 uses to calibrate
+> $\varepsilon_{\mathrm{leak}}\approx0.20$ in the first place**, so it cannot simultaneously be
+> evidence of headroom above that value. The stale figure here made the empirical position look
+> **safer** than it is, while the same stale figure at §6.3 made the *mathematical* position look
+> **worse** than it is. One superseded input, two opposite-signed errors — which is why direction
+> has to be read per site and cannot be inferred from the input.
+>
+> **This site was missed by the hand sweep of `c413c9e` and found by the detector in
+> `code/superseded_figures_5827/`.** It is the instrument's first live catch and it is recorded as
+> such rather than folded silently into the repair.
 
 ### 7.2 Is the condition vacuous — does every poset have a thin prefix? — **No**
 
@@ -519,7 +536,9 @@ The master bound is our only stated $\lambda_{\mathrm{std}}\leftarrow\mathbb E[\
 conversion, and it is **sharp at the antichain** — the object at the opposite extreme from a frozen
 poset. Pushing the constant-form target through it:
 
-$\varepsilon_{\mathrm{spec}}\approx2\times10^{-4}$ combined with Claim 6.1 requires
+$\varepsilon_{\mathrm{spec}}\approx2\times10^{-4}$ **[SUPERSEDED — read $2\times10^{-2}$; the
+arithmetic of this subsection is exact, only its input moves. See the box below.]** combined with
+Claim 6.1 requires
 $d\cdot n/(n+1)\le\varepsilon_{\mathrm{spec}}$, i.e. incomparability density
 $d\lesssim2\times10^{-4}$, i.e. $m\lesssim2\times10^{-4}\binom n2$.
 

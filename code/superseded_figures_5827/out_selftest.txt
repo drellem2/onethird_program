@@ -1,0 +1,82 @@
+
+==============================================================================
+C1 — POSITIVE CONTROL: a planted stale figure, in a throwaway tree
+==============================================================================
+  The plant is the EXACT sentence that was live in the primary doc tonight.
+  [PASS] C1 fires                                                   got=2 want=2  -- the budget AND the gap factor, both flat text
+
+  GATE: FAIL — 2 flat-text site(s) quoting a superseded input.
+  [PASS] C1 exit code                                               got=1 want=1
+  [PASS] C1 entry ids                                               got=['eps_spec_budget', 'gap_factor'] want=['eps_spec_budget', 'gap_factor']
+
+==============================================================================
+C2 — NEGATIVE ARM: the same document, repaired
+==============================================================================
+  Same tree, same detector; only the text is repaired. It must go quiet.
+  [PASS] C2 silent                                                  got=0 want=0
+
+  GATE: PASS — 0 flat-text sites.
+  [PASS] C2 exit code                                               got=0 want=0
+  [PASS] C2 still SEES them                                         got=2 want=2  -- classified REPAIRED, not dropped
+  [PASS] C2 bucket                                                  got=['REPAIRED'] want=['REPAIRED']
+
+==============================================================================
+C3 — MUTATION TEST: two constant detectors, both must FAIL C1/C2
+==============================================================================
+  The C1/C2 pair is only evidence if a detector that ignores its input fails it.
+  [PASS] mutant ALWAYS-DEFECT fails C2                              got=False want=False  -- it reports 2 defects in a clean document
+  [PASS] mutant ALWAYS-CLEAN fails C1                               got=False want=False  -- it reports 0 defects in a document with a live stale figure
+
+==============================================================================
+C4 — a lone `~~` must not launder a live figure into REPAIRED
+==============================================================================
+  [PASS] C4 fires                                                   got=1 want=1  -- the value sits OUTSIDE the closed span
+
+==============================================================================
+C5 — the file list must RECURSE (docs/*.md is os.listdir-shaped)
+==============================================================================
+  [PASS] C5 sees a nested file                                      got=1 want=1  -- a non-recursive glob would report 0 and look identical to clean
+
+==============================================================================
+C6 — an UNTRACKED file must not be scanned (it is not published)
+==============================================================================
+  [PASS] C6 ignores untracked                                       got=0 want=0  -- scratch files must not fail a published-corpus gate
+
+==============================================================================
+C7 — the detector can be pointed at a REVISION, not only at HEAD
+==============================================================================
+  [PASS] C7 revision scan matches index scan                        got=2 want=2  -- without this the retrospective at mg-2860's base commit is impossible
+
+==============================================================================
+C8 — a declared authority is EXEMPT but still COUNTED
+==============================================================================
+  [PASS] C8 not a defect                                            got=0 want=0
+  [PASS] C8 still counted                                           got=1 want=1  -- exempt is not the same as invisible
+  [PASS] C8 bucket                                                  got='AUTHORITY' want='AUTHORITY'
+
+==============================================================================
+C9 — `code/` must not swallow `codex/`, and `a/b` must not swallow `a/bc`
+==============================================================================
+  [PASS] _under exact                                               got=True want=True
+  [PASS] _under sibling                                             got=False want=False
+  [PASS] _under bare prefix is a path boundary                      got=False want=False
+  [PASS] _under path segment                                        got=True want=True
+
+==============================================================================
+C10 — one blockquote must not launder a value in a DIFFERENT one
+==============================================================================
+  The blockquote rule is the widest exemption this detector grants. If its span
+  leaked past a blank line, a single SUPERSEDED anywhere in a file would silence
+  the whole file -- a clean bill of health over a population it never checked.
+  [PASS] C10 second block still fires                               got=1 want=1  -- the exemption is bounded by the blank line
+
+==============================================================================
+C11 — the blockquote span must not run to end-of-file
+==============================================================================
+  [PASS] C11 span of a non-quote line                               got=(None, None) want=(None, None)  -- line 3 is 'b', not a quote
+  [PASS] C11 span is maximal but bounded                            got=(0, 2) want=(0, 2)
+
+==============================================================================
+CONTROL SUMMARY
+==============================================================================
+  23 constructions, 0 failure(s): none

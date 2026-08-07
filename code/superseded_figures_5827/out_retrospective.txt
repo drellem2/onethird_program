@@ -1,0 +1,196 @@
+
+==============================================================================
+1. WHAT mg-2860 SAID IT DID — its own commit message, verbatim
+==============================================================================
+  contains 'FOUR SITES, FIVE LINES, NOTHING EL' : YES
+  contains 'outside what this ticket lists'  : YES
+  contains 'are NOT carried'                 : YES
+      > FOUR SITES, FIVE LINES, NOTHING ELSE. STATE.md:13 (the wall statement in the
+      > outside what this ticket lists. I did not add an attempt-index row for mg-c3ca.
+
+==============================================================================
+2. WHAT IT ACTUALLY TOUCHED — the diff, not the prose
+==============================================================================
+  files touched : ['STATE.md']
+  shortstat     : 1 file changed, 5 insertions(+), 5 deletions(-)
+
+  THE SWEEP TOUCHED 1 FILE(S). Its five named sites are all in that one file.
+  A sweep whose entire footprint is one file cannot have searched a corpus.
+
+==============================================================================
+3. WHAT A SEARCH WOULD HAVE FOUND AT THE SAME COMMIT
+==============================================================================
+  Same registry, same rules, pointed at mg-2860's own base tree f85a4e8~1.
+
+==============================================================================
+SCAN @ f85a4e8~1 (mg-2860's base tree)
+==============================================================================
+  TOTAL OCCURRENCES: 55   DEFECT=23  REPAIRED=1  AUTHORITY=20  FROZEN=11
+
+  --- DEFECT (23) ---
+    docs/OneThird-LIBweak-mg-c3ca.md:88  [eps_spec_budget]  '2×10⁻⁴'
+        — while the consumer wants `ε_spec ≈ 2×10⁻⁴`. A factor of ~5×10³, with no `n` in it.
+    docs/OneThird-LIBweak-mg-c3ca.md:88  [gap_factor]  '5×10³'
+        — while the consumer wants `ε_spec ≈ 2×10⁻⁴`. A factor of ~5×10³, with no `n` in it.
+    docs/OneThird-LIBweak-mg-c3ca.md:90  [crossover_n]  'below ~`10⁵`'
+        `(LIB-const)` harder than LIB at every `n` below ~`10⁵`. **(LIB-weak) is constant-free and is
+    docs/OneThird-lambda-std-Operative-Form.md:38  [eps_spec_budget]  '2\\times10^{-4}'
+        > constant is small (budget: $\varepsilon_{\mathrm{spec}}\lesssim2\times10^{-4}$), which makes the
+    docs/OneThird-lambda-std-Operative-Form.md:39  [crossover_n]  'below roughly $10^5$'
+        > "weaker" requirement **numerically stronger than LIB at every $n$ below roughly $10^5$**; and the
+    docs/OneThird-lambda-std-Operative-Form.md:368  [eps_spec_budget]  '2\\times10^{-4}'
+        $\varepsilon_{\mathrm{spec}}<n/(n+1)\to1$ and need $\varepsilon_{\mathrm{spec}}\approx2\times10^{-4}$
+    docs/OneThird-lambda-std-Operative-Form.md:369  [gap_factor]  '5\\times10^{3}'
+        — a factor of roughly $5\times10^{3}$, with no $n$ in it anywhere. Nothing asymptotic is at stake.
+    docs/OneThird-lambda-std-Operative-Form.md:376  [eps_leak_readoff]  'varepsilon_{\\mathrm{leak}}\\approx0.02'
+        | read off modulus | $F(0.02)\le0.073<1/6$; $F(0.05)\le0.198>1/6$ $\Rightarrow$ $\varepsilon_{\mathrm{lea...
+    docs/OneThird-lambda-std-Operative-Form.md:377  [eps_spec_budget]  '2\\times10^{-4}'
+        | Cheeger | $\varepsilon_{\mathrm{spec}}\le\varepsilon_{\mathrm{leak}}^2/2\approx2\times10^{-4}$ | §4.2 |...
+    docs/OneThird-lambda-std-Operative-Form.md:379  [master_bound_rhs]  '3.3\\times10^{-5}'
+        | master bound | $\mathbb E[\mathrm{inv}_e]\le\tfrac{\varepsilon_{\mathrm{spec}}}{6}(n^2-1)\approx3.3\tim...
+    docs/OneThird-lambda-std-Operative-Form.md:435  [eps_spec_budget]  '2\\times10^{-4}'
+        $\varepsilon_{\mathrm{spec}}\approx2\times10^{-4}$ combined with Claim 6.1 requires
+    docs/OneThird-lambda-std-Operative-Form.md:437  [eps_spec_budget]  '2\\times10^{-4}'
+        $d\lesssim2\times10^{-4}$, i.e. $m\lesssim2\times10^{-4}\binom n2$.
+    docs/OneThird-lambda-std-Operative-Form.md:439  [claim72_threshold]  'For $n\\le100$ this forces'
+        **Claim 7.2.** *For $n\le100$ this forces $m=0$ — the poset must be a chain, hence not a
+    docs/OneThird-lambda-std-Operative-Form.md:440  [eps_spec_budget]  '2\\times10^{-4}'
+        counterexample.* **[PROVEN]** — $2\times10^{-4}\cdot\binom n2\ge1$ requires $n(n-1)\ge10^4$, i.e.
+    docs/OneThird-lambda-std-Operative-Form.md:461  [master_bound_rhs]  '3.3\\times10^{-5}'
+        $\mathbb E[\mathrm{inv}_e]\le3.3\times10^{-5}n^2$. These cross at
+    docs/OneThird-lambda-std-Operative-Form.md:462  [master_bound_rhs]  '3.3\\times10^{-5}'
+        $n\approx(C/\gamma)/(3.3\times10^{-5})\approx10^5$ for $C=\Theta(1)$, $\gamma=1/3$. Below that,
+    docs/OneThird-lambda-std-Operative-Form.md:462  [crossover_n]  '\\approx10^5'
+        $n\approx(C/\gamma)/(3.3\times10^{-5})\approx10^5$ for $C=\Theta(1)$, $\gamma=1/3$. Below that,
+    docs/OneThird-lambda-std-Operative-Form.md:531  [eps_spec_budget]  '2\\times10^{-4}'
+        | 28 | Constant budget $\varepsilon_{\mathrm{leak}}\approx0.02$, $\varepsilon_{\mathrm{spec}}\approx2\tim...
+    docs/OneThird-lambda-std-Operative-Form.md:531  [eps_leak_readoff]  'varepsilon_{\\mathrm{leak}}\\approx0.02'
+        | 28 | Constant budget $\varepsilon_{\mathrm{leak}}\approx0.02$, $\varepsilon_{\mathrm{spec}}\approx2\tim...
+    docs/OneThird-lambda-std-Operative-Form.md:535  [claim72_threshold]  'non-chain poset on $n\\le100$'
+        | 32 | Master bound cannot deliver the target for any non-chain poset on $n\le100$ | 7.3 | **PROVEN** giv...
+    docs/OneThird-lambda-std-Operative-Form.md:538  [crossover_n]  '\\approx10^5'
+        | 35 | (LIB-const) is numerically *stronger* than (LIB) below $n\approx10^5$ | 7.4 | **HEURISTIC** — dire...
+    docs/OneThird-lambda-std-Operative-Form.md:562  [eps_spec_budget]  '2×10⁻⁴'
+        > small (budget `ε_spec ≲ 2×10⁻⁴`, resting on mg-3ce3's empirical modulus and on L3's unquantified
+    docs/OneThird-lambda-std-Operative-Form.md:563  [crossover_n]  'below roughly `10⁵`'
+        > loss), so (LIB-const) is *numerically stronger* than (LIB) at every `n` below roughly `10⁵` — an
+
+  --- REPAIRED (1) ---
+    docs/OneThird-lambda-std-Operative-Form.md:414  [eps_leak_readoff]  'varepsilon_{\\mathrm{leak}}\\approx0.02'
+        up to $\varepsilon=0.20$, i.e. an order of magnitude above the $\varepsilon_{\mathrm{leak}}\approx0.02$
+
+  --- AUTHORITY (20) ---
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:111  [eps_spec_budget]  '2×10⁻⁴'
+        Everything else (`2×10⁻⁴`, `3.3×10⁻⁵`, `5×10³`, `10⁵`, `n ≥ 101`, `n^{−1.82}`, `n^{−3.64}`,
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:111  [gap_factor]  '5×10³'
+        Everything else (`2×10⁻⁴`, `3.3×10⁻⁵`, `5×10³`, `10⁵`, `n ≥ 101`, `n^{−1.82}`, `n^{−3.64}`,
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:111  [master_bound_rhs]  '3.3×10⁻⁵'
+        Everything else (`2×10⁻⁴`, `3.3×10⁻⁵`, `5×10³`, `10⁵`, `n ≥ 101`, `n^{−1.82}`, `n^{−3.64}`,
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:306  [eps_spec_budget]  '2×10⁻⁴'
+        absolute constants. Squaring `0.02` gives `4×10⁻⁴`; halving gives `2×10⁻⁴`. **A constant. CONFIRMED.**
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:401  [eps_spec_budget]  '2×10⁻⁴'
+        §7.3's arithmetic is right. `ε_spec ≈ 2×10⁻⁴` with Claim 6.1 requires incomparability density
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:402  [eps_spec_budget]  '2×10⁻⁴'
+        `d ≲ 2×10⁻⁴`, i.e. `m ≤ 2×10⁻⁴·C(n,2)`. For `m ≥ 1` we need `n(n−1) ≥ 10⁴`, i.e. `n ≥ 101`
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:441  [eps_spec_budget]  '2×10⁻⁴'
+        `D` must be `≤ 2×10⁻⁴`, which by §7.2 above additionally forces `n ≥ 10⁴`).
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:450  [eps_spec_budget]  '2×10⁻⁴'
+        **(b) The budget constant could be larger than `2×10⁻⁴`, in which case the "not good news" framing
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:455  [eps_spec_budget]  '2×10⁻⁴'
+        The document argues "buys nothing" **through the numeric budget** (`ε_spec ≈ 2×10⁻⁴` ⟹ `n ≥ 101`
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:462  [eps_spec_budget]  '2×10⁻⁴'
+        > statement mentions `2×10⁻⁴`.
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:472  [master_bound_rhs]  '3.3×10⁻⁵'
+        Recomputed: `(LIB) ≈ 3Cn` vs `(LIB-const) = (ε_spec/6)n² = 3.3×10⁻⁵n²` cross at
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:473  [master_bound_rhs]  '3.3×10⁻⁵'
+        `n ≈ 3/3.3×10⁻⁵ ≈ 9×10⁴` ✓; at `n = 100`, `300C` vs `0.33` ✓. Arithmetic correct, label HEURISTIC
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:504  [eps_spec_budget]  '2×10⁻⁴'
+        `2×10⁻⁴`.**
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:512  [eps_spec_budget]  '2×10⁻⁴'
+        **Verdict: row BROKEN as labelled; the constant `2×10⁻⁴` is not merely "not pinned" (§6.4's own
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:605  [eps_spec_budget]  '2×10⁻⁴'
+        | "the constant is small (`ε_spec ≲ 2×10⁻⁴`), which makes the requirement numerically stronger than LIB a...
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:605  [crossover_n]  'below roughly `10⁵`'
+        | "the constant is small (`ε_spec ≲ 2×10⁻⁴`), which makes the requirement numerically stronger than LIB a...
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:670  [eps_spec_budget]  '2×10⁻⁴'
+        | 28 | Budget `ε_leak ≈ 0.02`, `ε_spec ≈ 2×10⁻⁴/C_3` (6.4) | HEURISTIC + UNQUANTIFIED | **BROKEN** as der...
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:670  [eps_leak_readoff]  'ε_leak ≈ 0.02'
+        | 28 | Budget `ε_leak ≈ 0.02`, `ε_spec ≈ 2×10⁻⁴/C_3` (6.4) | HEURISTIC + UNQUANTIFIED | **BROKEN** as der...
+    docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:764  [eps_spec_budget]  '2×10⁻⁴'
+        7. **§10 rider (a) — the `2×10⁻⁴` budget and the `10⁵` crossover.** Do **not** land as flat text.
+    docs/state-history/attempt-mg-88bd.md:98  [eps_spec_budget]  '2×10⁻⁴'
+        **The form, and it is CONDITIONAL — record the condition, not just the form.** The architecture consumes ...
+
+  --- FROZEN (11) ---
+    code/direct_prefix_audit_2de0/out_a4_requirements.txt:83  [eps_leak_readoff]  'eps_leak=0.02'
+        eps_leak=0.02: headline 150.0x  vs  beta=1/4 honest 112.50x
+    code/state_audit_6a2f/out_audit.txt:1122  [eps_spec_budget]  '2×10⁻⁴'
+        + Their live consequences:** — [row history H5](docs/state-history/attempt-mg-88bd.md). The consequence i...
+    code/state_delegation_repair_a74f/out_run_all.txt:152  [gap_factor]  '5e3'
+        certified record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+    code/state_delegation_repair_a74f/out_run_all.txt:153  [gap_factor]  '5e3'
+        measured  record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+    code/state_landing_control_2da3/delta_control.py:767  [gap_factor]  '5e3'
+        "readme.A1.7870": "4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327",
+    code/state_landing_control_2da3/out_control.txt:190  [gap_factor]  '5e3'
+        certified record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+    code/state_landing_control_2da3/out_control.txt:191  [gap_factor]  '5e3'
+        measured  record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+    code/state_suppression_repair_5f7c/out_run_all_a74f_PRE5f7c.txt:152  [gap_factor]  '5e3'
+        certified record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+    code/state_suppression_repair_5f7c/out_run_all_a74f_PRE5f7c.txt:153  [gap_factor]  '5e3'
+        measured  record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+    code/state_visibility_audit_65eb/out_run_all.txt:1058  [gap_factor]  '5e3'
+        certified record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+    code/state_visibility_audit_65eb/out_run_all.txt:1059  [gap_factor]  '5e3'
+        measured  record sha256 4368487335514f5ce255930860939a1bd55e3ed6fc3287119acb091dbf6e5327
+
+==============================================================================
+4. THE ANSWER
+==============================================================================
+  Flat-text sites at mg-2860's base commit : 23
+    inside  STATE.md (the file it swept)   : 0
+    OUTSIDE STATE.md (never looked at)     : 23
+
+    docs/OneThird-LIBweak-mg-c3ca.md                           3
+    docs/OneThird-lambda-std-Operative-Form.md                 20
+
+  THE LIST IS THE DEFECT.
+  mg-2860's five sites were supplied by its ticket, which named them by line number
+  in one file. It landed all five correctly -- there are 0 flat-text sites left
+  inside STATE.md, so it was RIGHT about its own file. The whole of the miss is the
+  FILE BOUNDARY. It never asked whether the superseded input was quoted anywhere
+  else, because nothing asked it to and nothing could have told it.
+
+  It also swept a DIFFERENT CLASS. Its subject was which FORM leads -- the limit
+  `lambda_std -> 1` versus the constant `1 - lambda_std <= eps_spec`. The numeric
+  budget was a rider its ticket added ('WHILE YOU ARE THERE'), which it landed
+  correctly INTO STATE.md while never looking OUT of it. So the sweep that is
+  accused of missing this class was not sweeping for it.
+
+  AND IT WILL MISS THE SIXTH. A ticket-supplied list of line numbers has no way to
+  grow. The sixth site will be found the same way the fifth was: by whoever happens
+  to read the right document.
+
+==============================================================================
+5. THE SAME QUESTION ASKED OF THE LANDING COMMIT
+==============================================================================
+  Flat-text sites immediately AFTER mg-2860 landed : 23
+  Change across the sweep                          : +0
+
+  The sweep moved the count by 0. That is the measurement of what it swept.
+
+==============================================================================
+6. WHAT THIS RETROSPECTIVE DOES NOT ESTABLISH
+==============================================================================
+  * It does not show mg-2860 was WRONG to scope itself to its ticket. It was
+    obedient, it said so in terms, and it declared the fifth site it declined
+    ('adding (LIB-weak) there would be a fifth site and is outside what this
+    ticket lists'). The defect is in the mechanism, not in the worker.
+  * It measures with THIS registry, which was written after the fact and with
+    knowledge of where the sites were. It is not a blind re-run. The count at
+    f85a4e8~1 is what a search WOULD have found had the registry existed, not
+    what mg-2860 could have found with what it had.
+  * It says nothing about defect classes the registry cannot express -- see the
+    DECLARED LIMITS section of README.md, and in particular that the (A) SPREAD
+    contradiction repaired by this same ticket is INVISIBLE to this instrument.
