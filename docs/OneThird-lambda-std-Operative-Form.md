@@ -365,6 +365,16 @@ extracted from it. Anyone needing $N_0$ must first prove something strictly stro
 limit — a **rate**, which is the row below, and whose explicit exceptional set is exactly the
 advantage §5.1 already credits it with.
 
+**WHY ANNOTATING BEATS LEAVING IT AS A DATED READING (pm-onethird, via mg-dbbe).** The
+objection to striking is that this table states the *pre*-§5.3 position and is therefore a
+record of what the corpus believed. That does not license leaving it, and the reason is not
+tidiness: **the sentence is load-bearing for a wrong inference.** *Unspecified* tells a reader
+there is a number and it has not been written down yet — which authorises *go and find $N_0$*,
+a direction §5.3 has already closed. **A record a reader can act on is functionally live**, so
+the LIVE/CITED question here is not *"is this line current?"* but *"does leaving it still
+license the refuted direction?"* — and it does. Hence: annotated in place, per this file's own
+banner, with the superseded reading left visible rather than deleted.
+
 **WHAT THIS DOES NOT STRIKE.** Claim 19 and the paragraph above it are **untouched and correct**:
 rate $\Rightarrow$ limit $\Rightarrow$ constant-for-large-$n$ holds per family, and *"neither
 asymptotic form delivers uniformity"* is precisely what §5.3 sharpens rather than contradicts.
