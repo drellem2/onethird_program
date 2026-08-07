@@ -1,0 +1,26 @@
+==============================================================================
+A FAMILY THAT BEATS (n-1)/3 -- fence(n) with k spaced deletions
+==============================================================================
+  k = 0 is mg-200d's own construction and MUST return exactly (n-1)/3.
+
+  n=6   (n-1)/3 = 5/3      eps_spec target 2/(n+1) = 2/7
+        k=0 |I|= 5 sup=13   val=5/3      = (n-1)/3
+        k=1 |I|= 6 sup=14   val=11/6     BEATS by 1/6
+  n=7   (n-1)/3 = 2        eps_spec target 2/(n+1) = 1/4
+        k=0 |I|= 6 sup=21   val=2        = (n-1)/3
+        k=1 |I|= 7 sup=23   val=13/6     BEATS by 1/6
+  n=8   (n-1)/3 = 7/3      eps_spec target 2/(n+1) = 2/9
+        k=0 |I|= 7 sup=34   val=7/3      = (n-1)/3
+        k=1 |I|= 8 sup=37   val=5/2      BEATS by 1/6
+  n=9   (n-1)/3 = 8/3      eps_spec target 2/(n+1) = 1/5
+        k=0 |I|= 8 sup=55   val=8/3      = (n-1)/3
+        k=1 |I|= 9 sup=60   val=17/6     BEATS by 1/6
+        k=2 infeasible
+  n=10  (n-1)/3 = 3        eps_spec target 2/(n+1) = 2/11
+        k=0 |I|= 9 sup=89   val=3        = (n-1)/3
+        k=1 |I|=10 sup=97   val=19/6     BEATS by 1/6
+        k=2 |I|=11 sup=106  val=10/3     BEATS by 1/3
+  n=11  (n-1)/3 = 10/3     eps_spec target 2/(n+1) = 1/6
+        k=0 |I|=10 sup=144  val=10/3     = (n-1)/3
+        k=1 |I|=11 sup=157  val=7/2      BEATS by 1/6
+        k=2 |I|=12 sup=175  val=11/3     BEATS by 1/3

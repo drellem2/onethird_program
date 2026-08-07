@@ -1,0 +1,140 @@
+==============================================================================
+A. both reporters on measures with a HAND-COMPUTED right answer
+==============================================================================
+  PASS  n=3 two-atom law: mass agrees (1)
+  PASS  n=3 two-atom law: E[inv] agrees (1)
+  PASS  n=3 two-atom law: max flip agrees (1/3)
+  PASS  n=3 two-atom law: per-slot violation SET agrees (4)
+  PASS  n=3 two-atom law: aggregate violation SET agrees (2)
+  PASS  n=3 two-atom E[inv] is C(n,2)/3 BY HAND
+  PASS  n=3 two-atom per-slot violation COUNT is the hand value 4
+  PASS  n=4 two-atom law: mass agrees (1)
+  PASS  n=4 two-atom law: E[inv] agrees (2)
+  PASS  n=4 two-atom law: max flip agrees (1/3)
+  PASS  n=4 two-atom law: per-slot violation SET agrees (5)
+  PASS  n=4 two-atom law: aggregate violation SET agrees (3)
+  PASS  n=4 two-atom E[inv] is C(n,2)/3 BY HAND
+  PASS  n=4 two-atom per-slot violation COUNT is the hand value 5
+  PASS  n=5 two-atom law: mass agrees (1)
+  PASS  n=5 two-atom law: E[inv] agrees (10/3)
+  PASS  n=5 two-atom law: max flip agrees (1/3)
+  PASS  n=5 two-atom law: per-slot violation SET agrees (8)
+  PASS  n=5 two-atom law: aggregate violation SET agrees (4)
+  PASS  n=5 two-atom E[inv] is C(n,2)/3 BY HAND
+  PASS  n=5 two-atom per-slot violation COUNT is the hand value 8
+  PASS  n=6 two-atom law: mass agrees (1)
+  PASS  n=6 two-atom law: E[inv] agrees (5)
+  PASS  n=6 two-atom law: max flip agrees (1/3)
+  PASS  n=6 two-atom law: per-slot violation SET agrees (9)
+  PASS  n=6 two-atom law: aggregate violation SET agrees (5)
+  PASS  n=6 two-atom E[inv] is C(n,2)/3 BY HAND
+  PASS  n=6 two-atom per-slot violation COUNT is the hand value 9
+  PASS  n=3 uniform: mass agrees (1)
+  PASS  n=3 uniform: E[inv] agrees (3/2)
+  PASS  n=3 uniform: max flip agrees (1/2)
+  PASS  n=3 uniform: per-slot violation SET agrees (0)
+  PASS  n=3 uniform: aggregate violation SET agrees (0)
+  PASS  n=3 uniform has NO per-slot violation (hand: swap x,y is a bijection)
+  PASS  n=3 uniform E[inv] = C(n,2)/2 BY HAND
+  PASS  n=4 uniform: mass agrees (1)
+  PASS  n=4 uniform: E[inv] agrees (3)
+  PASS  n=4 uniform: max flip agrees (1/2)
+  PASS  n=4 uniform: per-slot violation SET agrees (0)
+  PASS  n=4 uniform: aggregate violation SET agrees (0)
+  PASS  n=4 uniform has NO per-slot violation (hand: swap x,y is a bijection)
+  PASS  n=4 uniform E[inv] = C(n,2)/2 BY HAND
+  PASS  n=5 uniform: mass agrees (1)
+  PASS  n=5 uniform: E[inv] agrees (5)
+  PASS  n=5 uniform: max flip agrees (1/2)
+  PASS  n=5 uniform: per-slot violation SET agrees (0)
+  PASS  n=5 uniform: aggregate violation SET agrees (0)
+  PASS  n=5 uniform has NO per-slot violation (hand: swap x,y is a bijection)
+  PASS  n=5 uniform E[inv] = C(n,2)/2 BY HAND
+
+==============================================================================
+B. SUB-PROBABILITY measures -- the class where mg-6bc2's diagnostics went wrong
+==============================================================================
+  PASS  n=3 SUB-probability mass 2/3: mass agrees (2/3)
+  PASS  n=3 SUB-probability mass 2/3: E[inv] agrees (1)
+  PASS  n=3 SUB-probability mass 2/3: max flip agrees (1/3)
+  PASS  n=3 SUB-probability mass 2/3: per-slot violation SET agrees (4)
+  PASS  n=3 SUB-probability mass 2/3: aggregate violation SET agrees (0)
+  PASS  n=3 sub-probability mass is reported as 2/3, not silently 1
+  PASS  n=3 completed to mass 1: mass agrees (1)
+  PASS  n=3 completed to mass 1: E[inv] agrees (1)
+  PASS  n=3 completed to mass 1: max flip agrees (1/3)
+  PASS  n=3 completed to mass 1: per-slot violation SET agrees (4)
+  PASS  n=3 completed to mass 1: aggregate violation SET agrees (2)
+  PASS  n=3 completing the measure CHANGES the aggregate violation set
+  PASS  n=4 SUB-probability mass 2/3: mass agrees (2/3)
+  PASS  n=4 SUB-probability mass 2/3: E[inv] agrees (2)
+  PASS  n=4 SUB-probability mass 2/3: max flip agrees (1/3)
+  PASS  n=4 SUB-probability mass 2/3: per-slot violation SET agrees (4)
+  PASS  n=4 SUB-probability mass 2/3: aggregate violation SET agrees (0)
+  PASS  n=4 sub-probability mass is reported as 2/3, not silently 1
+  PASS  n=4 completed to mass 1: mass agrees (1)
+  PASS  n=4 completed to mass 1: E[inv] agrees (2)
+  PASS  n=4 completed to mass 1: max flip agrees (1/3)
+  PASS  n=4 completed to mass 1: per-slot violation SET agrees (5)
+  PASS  n=4 completed to mass 1: aggregate violation SET agrees (3)
+  PASS  n=4 completing the measure CHANGES the aggregate violation set
+
+==============================================================================
+C. PLANTED asymmetry -- the violation list has a known right answer
+==============================================================================
+  PASS  planted (0,1)@slot0 with 1/2/1/2: theirs reports violation=False (want False)
+  PASS  planted (0,1)@slot0 with 1/2/1/2: mine agrees
+  PASS  planted (0,1)@slot0 with 2/3/1/3: theirs reports violation=True (want True)
+  PASS  planted (0,1)@slot0 with 2/3/1/3: mine agrees
+
+==============================================================================
+D. MUTATIONS both implementations must reject (the comparison must not be vacuous)
+==============================================================================
+  PASS  M1 E[inv] is NOT C(n,2)/2 (would mean flips read as 1/2)
+  PASS  M2 max_flip is NOT 1/2
+  PASS  M3 per-slot violations are NOT empty for the two-atom law
+  PASS  M4 slot_le HOLDS for uniform L(P), which is the population it is claimed on
+  PASS  M5 slot_le FAILS for the rev-heavy measure (predicate is not vacuous)
+  PASS  M6 slot_le also fails for the two-atom law -- so it is NOT a property of M_n
+
+==============================================================================
+E. eps_spec -- exactness of the conversion the downstream results quote
+==============================================================================
+  PASS  eps_spec(5, Fraction(10,3)) returns an exact rational, not a float
+  PASS  eps_spec(5, Fraction(10,3)) agrees with mine (5/6)
+  PASS  eps_spec(5, Fraction(1,1)) returns an exact rational, not a float
+  PASS  eps_spec(5, Fraction(1,1)) agrees with mine (1/4)
+  FAIL  eps_spec(5, python int 1) returns an exact rational, not a float   returned 0.25 of type float
+  PASS  eps_spec(5, python int 1) agrees with mine (1/4)
+  FAIL  eps_spec(5, python int 2) returns an exact rational, not a float   returned 0.5 of type float
+  PASS  eps_spec(5, python int 2) agrees with mine (1/2)
+  PASS  measure_report's E_inv is ALWAYS a Fraction, so live eps_spec calls stay exact
+
+==============================================================================
+F. the branch witnesses downstream work actually reports on
+==============================================================================
+  PASS  n=3 disjunctive optimal witness: mass agrees (1)
+  PASS  n=3 disjunctive optimal witness: E[inv] agrees (2/3)
+  PASS  n=3 disjunctive optimal witness: max flip agrees (1/3)
+  PASS  n=3 disjunctive optimal witness: per-slot violation SET agrees (2)
+  PASS  n=3 disjunctive optimal witness: aggregate violation SET agrees (1)
+  PASS  n=3 its reporter sees 0 per-slot violations on the INCOMPARABLE pairs
+  PASS  n=3 its reporter's E_inv equals my LP optimum 2/3
+  PASS  n=4 disjunctive optimal witness: mass agrees (1)
+  PASS  n=4 disjunctive optimal witness: E[inv] agrees (1)
+  PASS  n=4 disjunctive optimal witness: max flip agrees (1/3)
+  PASS  n=4 disjunctive optimal witness: per-slot violation SET agrees (3)
+  PASS  n=4 disjunctive optimal witness: aggregate violation SET agrees (3)
+  PASS  n=4 its reporter sees 0 per-slot violations on the INCOMPARABLE pairs
+  PASS  n=4 its reporter's E_inv equals my LP optimum 1
+  PASS  n=5 disjunctive optimal witness: mass agrees (1)
+  PASS  n=5 disjunctive optimal witness: E[inv] agrees (4/3)
+  PASS  n=5 disjunctive optimal witness: max flip agrees (1/3)
+  PASS  n=5 disjunctive optimal witness: per-slot violation SET agrees (4)
+  PASS  n=5 disjunctive optimal witness: aggregate violation SET agrees (4)
+  PASS  n=5 its reporter sees 0 per-slot violations on the INCOMPARABLE pairs
+  PASS  n=5 its reporter's E_inv equals my LP optimum 4/3
+
+PASS 111   FAIL 2
+   FAILED: eps_spec(5, python int 1) returns an exact rational, not a float  returned 0.25 of type float
+   FAILED: eps_spec(5, python int 2) returns an exact rational, not a float  returned 0.5 of type float

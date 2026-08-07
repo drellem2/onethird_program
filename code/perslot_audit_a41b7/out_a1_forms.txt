@@ -1,0 +1,42 @@
+==============================================================================
+n = 3   |S_n| = 6   pair rows 3   per-slot rows 6   aggregate rows 3
+  baseline target C(n,2)/3 = 1 ; per-slot value claimed by mg-200d in this currency is (n-1)/3 = 2/3
+  BASE      status=optimal   E[inv] = 1   eps_spec = 6E/(n^2-1) = 3/4   pivots=5
+            primal verifies: YES      dual certificate verifies: YES
+            support 3 atom(s):
+              012  weight 1/3   inv=0
+              120  weight 1/3   inv=2
+              021  weight 1/3   inv=1
+            mass=1   per-slot violations=4   aggregate violations=2
+  PERSLOT   status=infeasible   phase-1 residual = 1/3  (STRICTLY POSITIVE: the polytope is EMPTY)
+  AGG       status=infeasible   phase-1 residual = 1/3  (STRICTLY POSITIVE: the polytope is EMPTY)
+  PERSLOT-only (no pair bias): status=optimal  max E[inv]=3/2   uniform gives 3/2
+            min E[inv]=3/2  -- max == min means the rows PIN E[inv]: YES
+            smallest achievable flip over all pairs: pair (0, 1) -> [1/2, 1/2]   (cap 1/3 needs the low end <= 1/3)
+  AGG-only (no pair bias): status=optimal  max E[inv]=3/2   uniform gives 3/2
+            min E[inv]=3/2  -- max == min means the rows PIN E[inv]: YES
+            smallest achievable flip over all pairs: pair (0, 1) -> [1/2, 1/2]   (cap 1/3 needs the low end <= 1/3)
+==============================================================================
+n = 4   |S_n| = 24   pair rows 6   per-slot rows 18   aggregate rows 6
+  baseline target C(n,2)/3 = 2 ; per-slot value claimed by mg-200d in this currency is (n-1)/3 = 1
+  BASE      status=optimal   E[inv] = 2   eps_spec = 6E/(n^2-1) = 4/5   pivots=14
+            primal verifies: YES      dual certificate verifies: YES
+            support 3 atom(s):
+              1230  weight 1/3   inv=3
+              0231  weight 1/3   inv=2
+              0132  weight 1/3   inv=1
+            mass=1   per-slot violations=8   aggregate violations=5
+  PERSLOT   status=infeasible   phase-1 residual = 1/3  (STRICTLY POSITIVE: the polytope is EMPTY)
+  AGG       status=infeasible   phase-1 residual = 1/5  (STRICTLY POSITIVE: the polytope is EMPTY)
+  PERSLOT-only (no pair bias): status=optimal  max E[inv]=3   uniform gives 3
+            min E[inv]=3  -- max == min means the rows PIN E[inv]: YES
+            smallest achievable flip over all pairs: pair (0, 1) -> [1/2, 1/2]   (cap 1/3 needs the low end <= 1/3)
+  AGG-only (no pair bias): status=optimal  max E[inv]=43/12   uniform gives 3
+            min E[inv]=29/12  -- max == min means the rows PIN E[inv]: no
+            pair (0, 1) flip is NOT pinned: [1/3, 2/3]
+            pair (0, 2) flip is NOT pinned: [1/3, 2/3]
+            pair (0, 3) flip is NOT pinned: [1/3, 2/3]
+            pair (1, 2) flip is NOT pinned: [1/3, 2/3]
+            pair (1, 3) flip is NOT pinned: [1/3, 2/3]
+            pair (2, 3) flip is NOT pinned: [1/3, 2/3]
+            smallest achievable flip over all pairs: pair (0, 1) -> [1/3, 2/3]   (cap 1/3 needs the low end <= 1/3)
