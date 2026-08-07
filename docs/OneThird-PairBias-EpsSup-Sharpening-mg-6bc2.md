@@ -62,7 +62,13 @@ enumeration** — `mg-345e`'s refusal is kept and §8 says why.
 
 ## 0. Verdict
 
-> ## **DANIEL'S CONJECTURE IS RIGHT, AND IT IS ALREADY PROVEN. `1/6` AND `1` ARE THE SAME THEOREM IN TWO NORMALISATIONS.**
+> ## **DANIEL'S CONJECTURE IS RIGHT, AND IT IS ALREADY PROVEN — IN THE UNITS `E[inv_e] ≤ ε·n²`, WHERE THE CONSTANT IS `1/6`. `1/6` AND `1` ARE THE SAME THEOREM IN TWO NORMALISATIONS.**
+>
+> *(The unit is in the banner deliberately — `mg-832f` Correction 1. This headline is the sentence
+> a grep returns, and without a normalisation attached it is not a statement at all: the same
+> theorem reads `1/6` in `ε_c3ca` and `1` in `ε_spec`. This lineage has now recorded the
+> qualifier-present-in-the-body-absent-from-the-banner failure three times in one night, and
+> `mg-94c3` recorded the commit-subject version of it. **Never quote this banner without its unit.**)*
 >
 > Pair bias alone gives `E[inv_e] < n²/6` — **the constant is exactly `1/6`, in the units
 > `E[inv_e] ≤ ε·n²`.** The corpus already records it in those words:
@@ -228,8 +234,15 @@ pairs), the identity is exact:
 | `ε_spec = 1/6` (Daniel, reading B) | `d·q̄ ≤ 1/18` | **6×** |
 | `ε_spec = 1/50` (what `ε_dem` needs) | `d·q̄ ≤ 1/150` | **50×** |
 
-Either lever alone: `1/6` needs `d ≤ 1/6` (five sixths of all pairs comparable) **or** `q̄ ≤ 1/18`
-(mean bias six times below the frozen threshold). Both are **realizability** statements about real
+**Only ONE of these two levers actually moves, so this is one lever and not a choice of two**
+(corrected `mg-832f` Correction 4; this sentence previously read *"either lever alone"*): at
+**every** boundary maximiser at **every** `n ≤ 7`, `q̄ = 1/3` **exactly** — the mean flip
+probability is pinned at the cap and the whole variation sits in the density `d`. So the operative
+lever is the **residual `(R)`**, the *number* of incomparable summands: `1/6` needs `d ≤ 1/6` (five
+sixths of all pairs comparable). *(The identity's arithmetic alternative `q̄ ≤ 1/18` — mean bias six
+times below the frozen threshold — is permitted by the algebra and reached by nothing measured: no
+boundary maximiser at `n ≤ 7` has `q̄ < 1/3` at all. Finite population, marked as such.)* Both are
+**realizability** statements about real
 posets — §5 — and `mg-345e`'s P5 grep found the corpus's density facts all run the *wrong way*
 (`m ≥ n−1` from primitivity, co-degree `≥ 2` from `mg-e2de`: **lower** bounds, which push `d` up).
 I re-ran that grep; see §7.
@@ -246,8 +259,12 @@ at the antichain, since `D ≤ 2I` is not tight there"*. The master bound has tw
              ^ sharp at the antichain    ^ the one Claim 6.1 uses
 ```
 
-The two-atom law scores `1/2` in the footrule form and `1` in the inversion form (hand-computed;
-machine-confirmed). **That looked like a free factor of 2 — bound the footrule directly and the
+The two-atom law scores `⌊n²/2⌋/(n²−1)` in the footrule form and `1` in the inversion form
+(hand-computed; machine-confirmed). **That footrule figure was printed here as a flat `1/2`, and
+`1/2` is exact only at ODD `n`** (corrected `mg-832f` Correction 3): at even `n` it is
+`8/15, 18/35, 32/63, 50/99, 72/143` for `n = 4,6,8,10,12` — strictly **above** `1/2`, decreasing to
+it. Immaterial to the argument, which compares against `1`, but this arc's standing rule is that
+printed numbers move. **That looked like a free factor of 2 — bound the footrule directly and the
 constant halves, with no new mathematics at all.** It is the only cheap sharpening on the board,
 so I built the LP to test it.
 
@@ -502,7 +519,8 @@ quoted as *the* count.)
 ## 9. Defects of this instrument, and what I did not do
 
 **Defect 1 — my own headline lead was wrong, and I had already refuted it by hand before the
-machine ran.** H3 (the two-atom law scores `1/2` in the footrule form) is true and made the
+machine ran.** H3 (the two-atom law scores `1/2` in the footrule form — exact at odd `n`; the
+closed form is `⌊n²/2⌋/(n²−1)`, `mg-832f` Correction 3, see §4) is true and made the
 footrule route look like a free factor of 2. H4 (the hierarchical construction, `7/8`) already
 showed it could buy at most `1/8`. I built the LP anyway and it returned `0`. The honest reading is
 that **H3 was a witness-specific artefact read as a structural fact** — precisely the error §3
