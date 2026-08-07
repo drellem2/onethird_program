@@ -275,9 +275,21 @@ confirmed and this ticket was told not to re-open. The post-repair transcript �
 healthy path and failure path, side by side — is
 `code/summary_guard_cf83/out_c1_summary_guard.txt`.
 
+⚠️ The same applies to `out_s2_controls.txt`, `out_s3_graph.txt` and
+`out_s4_crosscheck.txt`: they are the transcripts of the run **as merged, before
+mg-7085**, and are deliberately not regenerated for the same reason. The
+post-repair transcripts — six scripts, three arms, before *and* after, side by
+side — are in `code/sibling_sweep_7085/out_r1_sweep.txt` (§11).
+
 ---
 
-## 10. mg-cf83 — the summary block, repaired
+## 10. mg-cf83 — `s1_rows.py`'s summary block, repaired
+
+> **Scope.** This section is about **`s1_rows.py` only** — that is the file
+> mg-cf83 repaired, and its transcript is the evidence below. The same defect
+> was alive in three of its siblings until mg-7085; that sweep is **§11**, and
+> until it landed, a reader who stopped here would have concluded the
+> deliverable's summary blocks were repaired when `s3_graph.py`'s was not.
 
 mg-4d3b ran this directory's own `s1_rows.py` against a repo whose `git fetch`
 really failed. **The per-row sections were right and the summary block was
@@ -308,3 +320,136 @@ be read is neither a hit nor a miss, and calling it a MISS asserts an outcome
 the run did not observe. `s1` now exits **1** when a repo could not be read —
 findings about the census still exit 0, as `run_all.sh` documents; *this run did
 not happen* is a different thing and exits like `s0_freshness.py` does.
+
+---
+
+## 11. mg-7085 — the rest of the sweep: `s2`, `s3`, `s4`
+
+§10 was true of `s1_rows.py` and of nothing else. mg-407f confirmed that repair
+sound in all three arms with a harness sharing no code with it, and found the
+same defect **alive in two siblings** — by running them, not by reading them.
+This section is the rest of the sweep. Evidence:
+`code/sibling_sweep_7085/out_r1_sweep.txt`, which runs all six scripts and
+`run_all.sh` in three arms, **in both the before and the after state**, so every
+"repaired" claim below is a *difference between two runs* rather than an absence
+observed once. An absence observed once is also what a script that never ran
+looks like.
+
+### The spelling lesson, which is the part worth reusing
+
+mg-cf83's ticket told it to grep `0 if not gens`. **That spelling finds the site
+already repaired and nothing else.** The live defect was spelled
+
+```python
+g1 = p8_gain.get(1, 0)          # s3_graph.py
+```
+
+— a **dict default on an accumulator the row loop's `continue` never wrote**,
+which is the same None-becomes-zero merger wearing different syntax.
+`p9_rows.get(3)` returning `None` and rendering as `no` is the same one again,
+in boolean clothing. So a sweep must **enumerate the ways a `None` can become a
+`0`** — `or []`, `.get(k, 0)`, `if not x`, `len(x or [])`, a truthiness test on
+a possibly-`None`, a bare `for` over a possibly-`None` — and then **check each
+site by running the failing arm**, because reading a guard is exactly what makes
+an insufficient one look sufficient.
+
+### What was live, what was latent, and how each was told apart
+
+Classified from the **printed output of a real failing run** — a broken remote
+set *after* cloning, so `origin/main` still resolves and the UNKNOWN is a failed
+fetch rather than an absent ref — never by reading the source.
+
+| site | spelling | verdict | evidence |
+|---|---|---|---|
+| `s3_graph.py` scoring block | `p8_gain.get(1, 0)`, `p9_rows.get(n)` | **LIVE** | rows print `UNKNOWN — a repo could not be read.`; `OBSERVED: 0` prints **twelve lines below**; P8/P9/P10 scored MISS; **exit 0** |
+| `s2_controls.py:80` | `sum(len(x) for x in _p.values())` | **LIVE** | dies with mg-4d3b's F5 verbatim: `TypeError: object of type 'NoneType' has no len()` |
+| `s4_crosscheck.py:110` | `for gen in gens` | **LIVE, and only on the *partial* arm** | `TypeError: 'NoneType' object is not iterable` |
+| `s3_graph.py:85-86` | `or []` | **LATENT** | sits after the `continue`; never reached in any arm run |
+| `s2_controls.py:130-131` | `or []` | **LATENT — with an expiry date** | sits after the crash; see below |
+| `s2_controls.py:247-288` | `len(successors(...))` | **LATENT** | sits after the crash |
+| `s0_freshness.py`, `selftest_f3ff.py` | — | **MEASURED CLEAN** | run in both failing arms; no crash, no false zero, exits correct |
+
+**The `or []` sites are not billed as the live defect.** mg-407f classified them
+LATENT from printed evidence and that was right. Billing them live was the easy
+wrong answer, and disagreeing with it would need printed evidence of its own.
+
+**But one of them had an expiry date, and that is the load-bearing detail.**
+`s2_controls.py:130` is latent *only because the crash at line 80 returns
+first*. Repair the crash alone and control flow reaches it: `None` becomes `[]`,
+`tree` becomes `UPHELD`, and NC2 prints `MAIL says UPHELD; TREE says UPHELD;
+agree` — **an agreement between a reader and a reader that said nothing**, in
+the control whose result §4 of this README rests on. So it is repaired in the
+same commit as the crash. A latent site downstream of a live one is not a
+separate ticket; it is part of repairing the live one.
+
+### What the three rules cost `s3_graph.py`
+
+The row loop used to `continue` past an unreadable row **without recording
+anything**, which is precisely what let a dict default speak for it. It now
+appends an `UNMEASURED` entry, and every scoreboard figure is a fold over that
+list — rule 3, the same shape as `s1_rows.py:154-160`. `?` and `UNMEASURED`
+render where `0`, `no` and `MISS` used to. The exit agrees with `s1`: **1** when
+a repo could not be read.
+
+**The sharpest form of the finding is the flip.** On the healthy arm `P9` and
+`P10` print `HIT`; on the broken arm the *unrepaired* file printed `MISS` for
+both. Two published prediction verdicts inverted **with nothing changed but
+whether a repo could be read**. After the repair the healthy arm still prints
+`HIT` and the broken arm prints `UNMEASURED`, and the flip is gone.
+
+### `s2_controls.py`: a control that did not run is not a control that passed
+
+Beyond the crash, two controls asserted results from nothing:
+
+- **NC1 would have gone RED.** With `moved` collapsed to `False`, every row
+  compares `UNKNOWN` to `UNKNOWN`, `deg` is empty, and the RED branch fires:
+  *"the harness does not distinguish the readers"* — a **false accusation
+  against this instrument**, raised by a run that read no repo, exiting 1 for
+  the wrong reason. It is now `UNMEASURED`, which is neither GREEN nor RED.
+- **NC4 is gated whole, and not merely None-guarded.** Its question is *does
+  staleness alone move the answer*, which it answers by differencing a live read
+  against a pinned one. `Pinned` hard-codes `unknown = False`, so on a failing
+  arm the live side is UNKNOWN while the pinned side reads a ref that still
+  resolves locally — the control would print a difference, attribute it to
+  staleness, and be measuring the fetch failure. Putting a `?` at each `len()`
+  would have kept it running and kept it wrong.
+- **NC3 is degenerate under total failure**, and now says so. It forces *one*
+  repo to fail; if the other is unreadable anyway, GREEN means *"UNKNOWN was
+  printed"* and not *"the forcing caused it"*. Stated, not counted as evidence.
+
+### `s4_crosscheck.py` — a guard one repo narrower than the thing it guarded
+
+Its guard checked `fm[REPOS[0]].unknown`. `generations()` returns `None` if
+**any** repo is unknown. So under a **partial** fetch failure — repo 1 readable,
+repo 2 not; the commonest arm there is, and the one a half-broken network
+produces — it walked past its own guard, printed a ground truth, and died at the
+scoring loop. This is `len(None)` in a new costume, caught by `for gen in gens`
+instead of by `len`.
+
+**No prior arm would have found it.** Under *total* failure the first guard
+fires and the file is clean; mg-cf83's and mg-407f's failing arms were total, and
+s4 was one of the three scripts neither ran at all. It was not known-good — it
+was unmeasured, and this is what was under it.
+
+### The coverage gap, closed rather than re-recorded
+
+mg-407f recorded that `s0_freshness`, `s4_crosscheck` and `selftest_f3ff` had
+never been run in any arm, and asked that this silence not become a clean bill
+of health. All three are now run in both failing arms:
+
+- **`s0_freshness.py`** — clean. UNKNOWN propagates, exits 1. Not repaired.
+- **`selftest_f3ff.py`** — clean, 0 FAIL, exits 0 under both failing arms.
+  ⚠️ One observation, **not repaired and noted rather than swept**: it resolves
+  `git rev-parse --show-toplevel` from its own CWD, so run from a directory that
+  is not inside a git checkout it dies on `not a git repository`. This harness
+  produced exactly that on its first run and it looks identical to a finding
+  about the subject. It is a fragility of the selftest's fixtures, not the
+  None-becomes-zero defect, and it is left alone.
+- **`s4_crosscheck.py`** — **not clean**; see above.
+
+**`run_all.sh`'s aggregate exit** was also unmeasured and is now measured: **0**
+on the healthy arm, **1** on both failing arms — before *and* after. It exited 1
+before the repair too, because `s0`/`s1`/`s2`/`s4` already failed and **masked
+`s3`'s false 0**. An aggregate that is 1 because *something* failed cannot tell
+you which script lied. The per-script exits can, which is why they were made to
+agree.

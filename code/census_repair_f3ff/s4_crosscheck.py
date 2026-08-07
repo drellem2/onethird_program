@@ -17,8 +17,26 @@ knowledge of this instrument.  This section:
   2. Scores strict and loose against it: what each finds, what each misses,
      what each adds.
 
-EXIT: 1 only if this instrument cannot read 5f542f0 at all.  A low score is a
-FINDING about my chain reader and does not set it.
+EXIT: 1 if this instrument cannot read 5f542f0, OR if the chain it scores could
+not be measured.  A low score is a FINDING about my chain reader and does not
+set it.
+
+⚠️ THE GUARD WAS ONE REPO NARROWER THAN THE THING IT GUARDED (mg-7085).  It
+checked `fm[REPOS[0]].unknown` and returned 1 -- but `generations()` returns
+None if ANY repo of the list is unknown.  So under a PARTIAL fetch failure --
+repo 1 readable, repo 2 not, which is the commonest arm of all and the one a
+half-broken network produces -- this file walked past its own guard, printed a
+ground truth, and then died at the scoring loop on
+
+    TypeError: 'NoneType' object is not iterable
+
+which is `len(None)` in a new costume: the same refusal to treat None as a list,
+caught by `for gen in gens` instead of by `len`.  FOUND BY RUNNING THE MIXED ARM,
+not by reading the guard -- reading it is exactly what makes it look sufficient.
+
+⚠️ AND THE MIXED ARM WAS UNMEASURED BY EVERY PRIOR TICKET.  s4 is one of the
+three scripts mg-407f recorded as never run in any arm.  It was not known-good;
+it was unmeasured, and this is what was under it.
 """
 import re
 import sys
@@ -49,6 +67,12 @@ def main():
         print("  UNKNOWN, not empty.")
         print("== s4 exit: 1 ==")
         return 1
+    # ⚠️ THE SECOND GUARD, WHICH IS THE ONE THAT WAS MISSING.  The extraction
+    # below needs only repo 1; the SCORING needs `generations()`, which ranges
+    # over EVERY repo of the list and returns None if any is unknown.  The two
+    # have different populations and now have different guards, so the mixed arm
+    # is measured rather than walked past.
+    chain_unreadable = [lab for lab, f in fm.items() if f.unknown]
 
     cs = L.git_log(repo.path, VERDICT_COMMIT, extra=["-1"])
     if not cs:
@@ -107,6 +131,18 @@ def main():
 
     for mode in ("strict", "loose"):
         gens = L.generations(fm, ROW1_PARENT, T, mode=mode)
+        if gens is None:
+            # ⚠️ THIS IS THE CRASH SITE.  It was `mine = {... for gen in gens ...}`
+            # with no branch, and `gens` is None whenever ANY repo is unknown.
+            # The count is not defended with an `or []` -- it is NOT TAKEN.
+            print(f"  {mode.upper()} chain: UNMEASURED -- the chain reader ranges over")
+            print(f"    EVERY repo of the list and {', '.join(chain_unreadable)} could")
+            print("    not be read.  NO hit / miss / added count is printed at all.")
+            print(f"    A reader that read nothing misses the whole ground truth, and")
+            print(f"    that figure -- which would be the worst score this section can")
+            print("    print -- is a fact about the fetch and not about the reader.")
+            print()
+            continue
         mine = {c.sha for gen in gens for _lab, c, _via in gen}
         hit = truth & mine
         missed = truth - mine
@@ -130,6 +166,18 @@ def main():
     print("-" * 78)
     print("WHAT THIS SAYS ABOUT THE CHAIN READER -- AND IT IS NOT FLATTERING")
     print("-" * 78)
+    # ⚠️ RULE 2.  Every sentence below asserts a measured comparison between the
+    # two modes and the independent list.  On the mixed arm neither mode ran, so
+    # the paragraph is branched rather than printed as a standing finding.
+    if chain_unreadable:
+        print("  UNMEASURED THIS RUN.  Both modes returned UNKNOWN, so there is no")
+        print("  bracket to report and the finding below is NOT restated as though")
+        print("  this run had reproduced it.  It stands on the runs that took it --")
+        print(f"  see out_s4_crosscheck.txt -- and not on this one.")
+        print()
+        print("== s4 exit: 1 (the chain could not be measured; a low score would be")
+        print("   a finding about this reader, but no score was taken) ==")
+        return 1
     print("  The two modes bracket the independent list from OPPOSITE SIDES and")
     print("  NEITHER contains it.  The strict reader misses real successor commits")
     print("  because this arc's convention does not put the ancestor's ticket id in")
