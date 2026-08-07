@@ -357,7 +357,8 @@ an insufficient one look sufficient.
 
 Classified from the **printed output of a real failing run** — a broken remote
 set *after* cloning, so `origin/main` still resolves and the UNKNOWN is a failed
-fetch rather than an absent ref — never by reading the source.
+fetch rather than an absent ref — never by reading the source. **Line numbers
+are as of `ba67d39`**, the pre-repair state, and the repair moved them.
 
 | site | spelling | verdict | evidence |
 |---|---|---|---|
@@ -397,6 +398,23 @@ both. Two published prediction verdicts inverted **with nothing changed but
 whether a repo could be read**. After the repair the healthy arm still prints
 `HIT` and the broken arm prints `UNMEASURED`, and the flip is gone.
 
+**And the sharpest form of the control is `P8`, which is a real MISS.** Row 1's
+graph-only gain genuinely *is* 0 — the ticket graph finds no successor commit
+the direct parent-id grep missed — so on the healthy path the repaired file
+still prints
+
+```
+OBSERVED: 0
+P8: *** MISS ***
+(per-row graph-only gain: row 1=0, row 2=4, row 3=0, row 4=0)
+```
+
+and on the broken arm the *same code* prints `UNMEASURED` and `row 1=?`. **A
+measured zero and an unread row now render differently**, which is the whole
+rule — and it is the reason the repair cannot be a summary hard-wired to say
+UNMEASURED. `?` where nothing was read, `0` where zero was counted, and the
+deliverable's one genuinely missed prediction still published as a miss.
+
 ### `s2_controls.py`: a control that did not run is not a control that passed
 
 Beyond the crash, two controls asserted results from nothing:
@@ -421,10 +439,11 @@ Beyond the crash, two controls asserted results from nothing:
 
 Its guard checked `fm[REPOS[0]].unknown`. `generations()` returns `None` if
 **any** repo is unknown. So under a **partial** fetch failure — repo 1 readable,
-repo 2 not; the commonest arm there is, and the one a half-broken network
-produces — it walked past its own guard, printed a ground truth, and died at the
-scoring loop. This is `len(None)` in a new costume, caught by `for gen in gens`
-instead of by `len`.
+repo 2 not — it walked past its own guard, printed a ground truth, and died at
+the scoring loop. This is `len(None)` in a new costume, caught by `for gen in
+gens` instead of by `len`. (How *often* a partial failure happens relative to a
+total one is not measured here and no claim is made about it; what is measured is
+that one arm hides this and the other does not.)
 
 **No prior arm would have found it.** Under *total* failure the first guard
 fires and the file is clean; mg-cf83's and mg-407f's failing arms were total, and
@@ -453,3 +472,44 @@ before the repair too, because `s0`/`s1`/`s2`/`s4` already failed and **masked
 `s3`'s false 0**. An aggregate that is 1 because *something* failed cannot tell
 you which script lied. The per-script exits can, which is why they were made to
 agree.
+
+### Defects of the sweep instrument, kept
+
+1. **CHECK 7 read the subject's prose as the subject's output.** Its first form
+   grepped the bare phrase `row verdicts flipped` and **fired twice against
+   correct code** — on `s2_controls.py`'s own UNMEASURED branch, whose prose
+   *quotes* the sentence it is refusing to print. This is §6's own defect
+   (*"a source census that READ MY OWN PROSE AS CODE, inside the section about
+   rules that read one thing as another"*), committed by the sweep about two
+   hours after quoting it. The failing run is committed at `57fd381`, not merely
+   described. The patterns now match the *assertion* — a figure in its sentence
+   — and not the vocabulary.
+2. **And the corrected detector immediately found a second instance in the
+   repair itself.** `s4_crosscheck.py`'s UNMEASURED branch explained why no
+   figure should be printed *using a hard-coded figure* (`misses 13`) — rule 2
+   broken by the sentence explaining rule 2.
+3. **The mutation control is only as good as the arm it runs.** ARM H clones
+   this worktree, so `origin/main` in the clone is whatever main held at clone
+   time. The before/after comparison is safe because both versions run against
+   **the same clones inside one harness run**; a figure quoted from ARM H across
+   two different runs is not.
+
+### Two properties of the sweep that make the "after" claims mean something
+
+**The healthy arm's outputs are compared byte-for-byte.** For `s2` and `s3`,
+every published verdict line (`P6:`, `P7:`, `P8:`, `P9:`, `P10:`, `NC1`–`NC4`)
+must be identical before and after — with a **non-vacuity guard**, because
+`0 of 0 lines identical` reported as a pass is this deliverable's own subject,
+and an earlier form of that check did exactly that. For the three files this
+ticket did **not** modify — `s0_freshness.py`, `s1_rows.py`, `selftest_f3ff.py`
+— the check is stronger: their **entire** healthy-arm stdout must be
+byte-identical, and which files were modified is read from `git diff` rather
+than asserted.
+
+**Every arm fetches from a frozen bare mirror**, taken once at startup. The
+healthy arm's fetch really runs and really succeeds — that is what makes it a
+mutation control — so fetching from the *live* repos would let a commit landing
+on `main` between the BEFORE and AFTER runs change the subject's output and be
+scored as an effect of the repair. `main` moved twice during this ticket's own
+session. With mirrors the only variable is the code, which is what makes the
+byte-for-byte comparison above possible at all.

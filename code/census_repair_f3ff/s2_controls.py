@@ -173,9 +173,12 @@ def main():
     if nc1_unmeasured:
         print(f"  UNMEASURED on {len(nc1_unmeasured)} of {len(nc1_rows)} rows: "
               f"{', '.join('row %d' % r[0] for r in nc1_unmeasured)}.")
-        print("  No degradation count is printed.  `the subject-only reader loses the")
-        print("  finding on 0 of 4 rows` would be TRUE OF THE TALLY and FALSE AS A")
-        print("  REPORT -- there was no finding for either reader to lose.")
+        print("  No degradation count is printed.  A sentence of the form `the")
+        print("  subject-only reader loses the finding on N of M rows` would be TRUE")
+        print("  OF THE TALLY and FALSE AS A REPORT -- there was no finding for")
+        print("  either reader to lose.  (The figures are left as N and M on purpose:")
+        print("  prose that quotes its own output with real numbers in it is read as")
+        print("  output by the next detector, which is a mistake this ticket made.)")
     else:
         print(f"  The subject-only reader loses the finding on {len(deg)} of "
               f"{len(nc1_rows)} rows"
@@ -302,9 +305,9 @@ def main():
                   "tree side could not be read.")
             print("     THE FINDING THAT §4 OF THE README RESTS ON IS NOT RESTATED HERE.")
             print("     It is a comparison between two readers, and one of them did not")
-            print("     read.  `It agrees with the tree on 0 of 4 rows` and `it agrees")
-            print("     with the tree on 4 of 4` are both sentences this run could emit")
-            print("     from the same nothing, which is why it emits neither.")
+            print("     read.  `agrees with the tree on NONE of the rows` and `agrees")
+            print("     with the tree on ALL of them` are both sentences this run could")
+            print("     emit from the same nothing, which is why it emits neither.")
             print("     The mail-side counts above ARE real: the maildir is a different")
             print("     channel, read from disk, and unaffected by the fetch failure.")
             print("  NC2 UNMEASURED: not GREEN.  `GREEN by construction` is true of the")

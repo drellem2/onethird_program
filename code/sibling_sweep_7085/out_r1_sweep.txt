@@ -1,7 +1,7 @@
 ==============================================================================
 mg-7085 r1 -- the rest of the sweep, RUN in three arms, before and after
 ==============================================================================
-  arena:   /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg7085_nx_jzf1u
+  arena:   /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg7085_iqj7lp7f
   subject: /Users/daniel/.pogo/polecats/p7085/code/census_repair_f3ff
   before:  ba67d39:code/census_repair_f3ff (materialised via git archive)
 
@@ -9,25 +9,35 @@ mg-7085 r1 -- the rest of the sweep, RUN in three arms, before and after
 ANTI-VACUITY -- the broken arms must be broken FOR THE RIGHT REASON
 ------------------------------------------------------------------------------
     [PASS] bad1: origin/main RESOLVES LOCALLY despite the broken URL
-           origin/main = cf476ba9f2ea -- so an UNKNOWN below is a FAILED FETCH, not an absent ref
+           origin/main = 65866c2037cc -- so an UNKNOWN below is a FAILED FETCH, not an absent ref
     [PASS] bad1: a real `git fetch origin` really FAILS
-           rc=128: fatal: '/var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg7085_nx_jzf1u/bad1/../no_such_r
+           rc=128: fatal: '/var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg7085_iqj7lp7f/bad1/../no_such_r
     [PASS] bad2: origin/main RESOLVES LOCALLY despite the broken URL
            origin/main = 42499a568f97 -- so an UNKNOWN below is a FAILED FETCH, not an absent ref
     [PASS] bad2: a real `git fetch origin` really FAILS
-           rc=128: fatal: '/var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg7085_nx_jzf1u/bad2/../no_such_r
+           rc=128: fatal: '/var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/mg7085_iqj7lp7f/bad2/../no_such_r
     [PASS] the before-state and the worktree DIFFER (there is a repair to test)
-           3 file(s) changed: s2_controls.py, s3_graph.py, s4_crosscheck.py
+           4 file(s) changed: README.md, s2_controls.py, s3_graph.py, s4_crosscheck.py
 
 ------------------------------------------------------------------------------
 BEFORE  ARM H  both clones HEALTHY -- THE MUTATION CONTROL
 ------------------------------------------------------------------------------
     selftest_f3ff.py    exit=0   crash=no   git-fetch spawned=0 exits=[]
     s0_freshness.py     exit=0   crash=no   git-fetch spawned=2 exits=[0]
+    [PASS] before/ARM H/s0_freshness.py: `git fetch origin` SPAWNED and SUCCEEDED
+           2 spawn(s), exit codes [0]
     s1_rows.py          exit=0   crash=no   git-fetch spawned=2 exits=[0]
+    [PASS] before/ARM H/s1_rows.py: `git fetch origin` SPAWNED and SUCCEEDED
+           2 spawn(s), exit codes [0]
     s2_controls.py      exit=0   crash=no   git-fetch spawned=4 exits=[0]
+    [PASS] before/ARM H/s2_controls.py: `git fetch origin` SPAWNED and SUCCEEDED
+           4 spawn(s), exit codes [0]
     s3_graph.py         exit=0   crash=no   git-fetch spawned=2 exits=[0]
+    [PASS] before/ARM H/s3_graph.py: `git fetch origin` SPAWNED and SUCCEEDED
+           2 spawn(s), exit codes [0]
     s4_crosscheck.py    exit=0   crash=no   git-fetch spawned=2 exits=[0]
+    [PASS] before/ARM H/s4_crosscheck.py: `git fetch origin` SPAWNED and SUCCEEDED
+           2 spawn(s), exit codes [0]
     run_all.sh          aggregate exit=0
 
 ------------------------------------------------------------------------------
@@ -97,10 +107,20 @@ AFTER   ARM H  both clones HEALTHY -- THE MUTATION CONTROL
 ------------------------------------------------------------------------------
     selftest_f3ff.py    exit=0   crash=no   git-fetch spawned=0 exits=[]
     s0_freshness.py     exit=0   crash=no   git-fetch spawned=2 exits=[0]
+    [PASS] after/ARM H/s0_freshness.py: `git fetch origin` SPAWNED and SUCCEEDED
+           2 spawn(s), exit codes [0]
     s1_rows.py          exit=0   crash=no   git-fetch spawned=2 exits=[0]
+    [PASS] after/ARM H/s1_rows.py: `git fetch origin` SPAWNED and SUCCEEDED
+           2 spawn(s), exit codes [0]
     s2_controls.py      exit=0   crash=no   git-fetch spawned=4 exits=[0]
+    [PASS] after/ARM H/s2_controls.py: `git fetch origin` SPAWNED and SUCCEEDED
+           4 spawn(s), exit codes [0]
     s3_graph.py         exit=0   crash=no   git-fetch spawned=2 exits=[0]
+    [PASS] after/ARM H/s3_graph.py: `git fetch origin` SPAWNED and SUCCEEDED
+           2 spawn(s), exit codes [0]
     s4_crosscheck.py    exit=0   crash=no   git-fetch spawned=2 exits=[0]
+    [PASS] after/ARM H/s4_crosscheck.py: `git fetch origin` SPAWNED and SUCCEEDED
+           2 spawn(s), exit codes [0]
     run_all.sh          aggregate exit=0
 
 ------------------------------------------------------------------------------
@@ -225,7 +245,24 @@ CHECK 3 -- THE MUTATION CONTROL: can the repaired scripts still FAIL?
     [PASS] ARM H: s3 still prints REAL per-row gains, not `?`
            a genuine 0 and an unread row must render DIFFERENTLY, which is the whole rule; `?` on ARM B and a digit on ARM H is that difference
     [PASS] ARM H: s3 exits 0 -- findings about the census still do not set it
-    [PASS] ARM H: s2 still reports its controls GREEN/RED, not UNMEASURED
+    [PASS] ARM H: s2 reports its controls GREEN/RED and says UNMEASURED nowhere
+           the third state must appear ONLY when something was not measured; a script that says UNMEASURED on a healthy arm has been hard-wired
+    [PASS] ARM H: s4 reports its bracket and says UNMEASURED nowhere
+    [PASS] ARM H/s2_controls.py: the verdict extractor is NOT VACUOUS
+           2 verdict line(s) matched
+    [PASS] ARM H/s2_controls.py: every published verdict line is BYTE-IDENTICAL before and after the repair
+           2 verdict line(s) before, 2 after
+    [PASS] ARM H/s3_graph.py: the verdict extractor is NOT VACUOUS
+           3 verdict line(s) matched
+    [PASS] ARM H/s3_graph.py: every published verdict line is BYTE-IDENTICAL before and after the repair
+           3 verdict line(s) before, 3 after
+    [PASS] ARM H/selftest_f3ff.py: UNMODIFIED by this ticket (per git diff) and its ENTIRE stdout is byte-identical
+           45 lines
+    [PASS] ARM H/s0_freshness.py: UNMODIFIED by this ticket (per git diff) and its ENTIRE stdout is byte-identical
+           61 lines
+    [PASS] ARM H/s1_rows.py: UNMODIFIED by this ticket (per git diff) and its ENTIRE stdout is byte-identical
+           176 lines
+    (files this ticket touched, per git diff: README.md, s2_controls.py, s3_graph.py, s4_crosscheck.py)
 
 ==============================================================================
 CHECK 4 -- F4: s2_controls.py's CRASH (ARMS B AND M)
@@ -291,89 +328,137 @@ CHECK 6 -- run_all.sh's AGGREGATE EXIT, also recorded as unmeasured
 ==============================================================================
 CHECK 7 -- NO SCRIPT'S SUMMARY CONTRADICTS ITS OWN ROWS (ALL ARMS)
 ==============================================================================
-  The single property this whole lineage exists to hold.  Grepped as
-  literal strings out of real stdout, in every arm, after the repair.
-    [PASS] ARM B/selftest_f3ff.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM B/selftest_f3ff.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM B/selftest_f3ff.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM B/selftest_f3ff.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [PASS] ARM B/selftest_f3ff.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM B/selftest_f3ff.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM B/s0_freshness.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM B/s0_freshness.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM B/s0_freshness.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM B/s0_freshness.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [PASS] ARM B/s0_freshness.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM B/s0_freshness.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM B/s1_rows.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM B/s1_rows.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM B/s1_rows.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM B/s1_rows.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [PASS] ARM B/s1_rows.py: does not assert '0 / 0' from an unmeasured run
-    [PASS] ARM B/s1_rows.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM B/s1_rows.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM B/s2_controls.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM B/s2_controls.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM B/s2_controls.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM B/s2_controls.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [FAIL] ARM B/s2_controls.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM B/s2_controls.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM B/s3_graph.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM B/s3_graph.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM B/s3_graph.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM B/s3_graph.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [PASS] ARM B/s3_graph.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM B/s3_graph.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM B/s4_crosscheck.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM B/s4_crosscheck.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM B/s4_crosscheck.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM B/s4_crosscheck.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [PASS] ARM B/s4_crosscheck.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM B/s4_crosscheck.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM M/selftest_f3ff.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM M/selftest_f3ff.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM M/selftest_f3ff.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM M/selftest_f3ff.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [PASS] ARM M/selftest_f3ff.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM M/selftest_f3ff.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM M/s0_freshness.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM M/s0_freshness.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM M/s0_freshness.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM M/s0_freshness.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [PASS] ARM M/s0_freshness.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM M/s0_freshness.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM M/s1_rows.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM M/s1_rows.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM M/s1_rows.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM M/s1_rows.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [PASS] ARM M/s1_rows.py: does not assert '0 / 0' from an unmeasured run
-    [PASS] ARM M/s1_rows.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM M/s1_rows.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM M/s2_controls.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM M/s2_controls.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM M/s2_controls.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM M/s2_controls.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [FAIL] ARM M/s2_controls.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM M/s2_controls.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM M/s3_graph.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM M/s3_graph.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM M/s3_graph.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM M/s3_graph.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [PASS] ARM M/s3_graph.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM M/s3_graph.py: does not assert 'TREE says UPHELD' from an unmeasured run
-    [PASS] ARM M/s4_crosscheck.py: does not assert 'OBSERVED: 0' from an unmeasured run
-    [PASS] ARM M/s4_crosscheck.py: does not assert 'are now checked against the tree' from an unmeasured run
-    [PASS] ARM M/s4_crosscheck.py: does not assert 'WRONG on 0 of its' from an unmeasured run
-    [PASS] ARM M/s4_crosscheck.py: does not assert 'of 4 checked, 0 refuted' from an unmeasured run
-    [PASS] ARM M/s4_crosscheck.py: does not assert 'row verdicts flipped' from an unmeasured run
-    [PASS] ARM M/s4_crosscheck.py: does not assert 'TREE says UPHELD' from an unmeasured run
+  The single property this whole lineage exists to hold, grepped out of
+  real stdout in every failing arm after the repair.
+
+  ⚠️ A DEFECT OF THIS DETECTOR, KEPT, BECAUSE IT IS THE AUDITED CLASS
+     COMMITTED BY THE AUDITOR.  Its first form matched the bare phrase
+     `row verdicts flipped` and FIRED TWICE against correct code -- on
+     s2's own UNMEASURED branch, whose prose QUOTES the sentence it is
+     refusing to print.  A detector that reads the subject's prose as
+     the subject's output is mg-4d3b's own §6 defect, and finding it in
+     my instrument two hours after quoting that section is the reason it
+     is written down rather than quietly rewritten.  The patterns below
+     now match the ASSERTION -- a figure in its sentence -- and not the
+     vocabulary.  Both failing runs are in this file's git history.
+
+    [PASS] ARM B/selftest_f3ff.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM B/selftest_f3ff.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM B/selftest_f3ff.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM B/selftest_f3ff.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM B/s0_freshness.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM B/s0_freshness.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM B/s0_freshness.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM B/s0_freshness.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM B/s1_rows.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM B/s1_rows.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM B/s1_rows.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM B/s1_rows.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM B/s1_rows.py: does not assert /\s0 / 0\s/ from an unmeasured run
+           unmeasured depth rendered as a measured zero
+    [PASS] ARM B/s2_controls.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM B/s2_controls.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM B/s2_controls.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM B/s2_controls.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM B/s2_controls.py: does not assert /\d+ of \d+ row verdicts flipped at depth/ from an unmeasured run
+           a staleness delta measured against an UNKNOWN live arm
+    [PASS] ARM B/s2_controls.py: does not assert /TREE says UPHELD/ from an unmeasured run
+           `the tree could not be read` printed as `the tree found none`
+    [PASS] ARM B/s3_graph.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM B/s3_graph.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM B/s3_graph.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM B/s3_graph.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM B/s4_crosscheck.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM B/s4_crosscheck.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM B/s4_crosscheck.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM B/s4_crosscheck.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM B/s4_crosscheck.py: does not assert /MISSES \d+/ from an unmeasured run
+           a chain-reader score from an unread chain
+    [PASS] ARM M/selftest_f3ff.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM M/selftest_f3ff.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM M/selftest_f3ff.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM M/selftest_f3ff.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM M/s0_freshness.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM M/s0_freshness.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM M/s0_freshness.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM M/s0_freshness.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM M/s1_rows.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM M/s1_rows.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM M/s1_rows.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM M/s1_rows.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM M/s1_rows.py: does not assert /\s0 / 0\s/ from an unmeasured run
+           unmeasured depth rendered as a measured zero
+    [PASS] ARM M/s2_controls.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM M/s2_controls.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM M/s2_controls.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM M/s2_controls.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM M/s2_controls.py: does not assert /\d+ of \d+ row verdicts flipped at depth/ from an unmeasured run
+           a staleness delta measured against an UNKNOWN live arm
+    [PASS] ARM M/s2_controls.py: does not assert /TREE says UPHELD/ from an unmeasured run
+           `the tree could not be read` printed as `the tree found none`
+    [PASS] ARM M/s3_graph.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM M/s3_graph.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM M/s3_graph.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM M/s3_graph.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM M/s4_crosscheck.py: does not assert /OBSERVED: 0\b/ from an unmeasured run
+           a scoreboard figure of 0 from an unread graph
+    [PASS] ARM M/s4_crosscheck.py: does not assert /all \d+ are now checked against the tree/ from an unmeasured run
+           every row checked, when none were
+    [PASS] ARM M/s4_crosscheck.py: does not assert /WRONG on 0 of its \d+ rows/ from an unmeasured run
+           two zeros computed from nothing
+    [PASS] ARM M/s4_crosscheck.py: does not assert /\d+ of \d+ checked, 0 refuted/ from an unmeasured run
+           a supersession claimed from nothing
+    [PASS] ARM M/s4_crosscheck.py: does not assert /MISSES \d+/ from an unmeasured run
+           a chain-reader score from an unread chain
 
 ==============================================================================
 VERDICT OF r1
 ==============================================================================
-  checks of THIS instrument: 2 failed
-    FAILED: ARM B/s2_controls.py: does not assert 'row verdicts flipped' from an unmeasured run
-    FAILED: ARM M/s2_controls.py: does not assert 'row verdicts flipped' from an unmeasured run
+  checks of THIS instrument: 0 failed
   findings about the SUBJECT: 1
     - s4_crosscheck.py CRASHED under PARTIAL fetch failure -- a LIVE defect no prior ticket measured
 
@@ -384,4 +469,4 @@ VERDICT OF r1
   s0_freshness.py and selftest_f3ff.py are MEASURED CLEAN in both
   failing arms -- measured, not assumed, and not repaired.
 
-== r1 exit: 1 (findings about the subject do NOT set this exit; only failures of this instrument do) ==
+== r1 exit: 0 (findings about the subject do NOT set this exit; only failures of this instrument do) ==

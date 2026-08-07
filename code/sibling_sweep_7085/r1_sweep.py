@@ -223,10 +223,25 @@ def main():
         print()
 
         before_src = materialise_before(tmp)
-        good1 = make_clone(os.path.join(tmp, "good1"), WORKTREE)
-        good2 = make_clone(os.path.join(tmp, "good2"), SRC2)
-        bad1 = make_clone(os.path.join(tmp, "bad1"), WORKTREE)
-        bad2 = make_clone(os.path.join(tmp, "bad2"), SRC2)
+
+        # ⚠️ FROZEN BARE MIRRORS, AND THIS IS METHODOLOGY, NOT PLUMBING.  The
+        # healthy arm's `git fetch` really runs and really succeeds -- that is
+        # what makes it the mutation control.  If it fetched from the live repos,
+        # a commit landing on `main` between the BEFORE run and the AFTER run
+        # would change the subject's output and be scored as an effect of the
+        # repair.  main moved twice during this ticket's own session.  Every arm
+        # therefore fetches from a mirror taken ONCE, here, so `before` and
+        # `after` see byte-identical history and the only variable is the code.
+        mirror1 = os.path.join(tmp, "mirror1.git")
+        mirror2 = os.path.join(tmp, "mirror2.git")
+        for m, src in ((mirror1, WORKTREE), (mirror2, SRC2)):
+            r = sh(["git", "clone", "--quiet", "--bare", "--no-hardlinks", src, m])
+            if r.returncode != 0:
+                raise RuntimeError(f"mirror clone failed: {r.stderr.strip()}")
+        good1 = make_clone(os.path.join(tmp, "good1"), mirror1)
+        good2 = make_clone(os.path.join(tmp, "good2"), mirror2)
+        bad1 = make_clone(os.path.join(tmp, "bad1"), mirror1)
+        bad2 = make_clone(os.path.join(tmp, "bad2"), mirror2)
         break_remote(bad1)      # cloned FIRST, so origin/main still resolves
         break_remote(bad2)
 
@@ -273,6 +288,13 @@ def main():
                     out[(ver, arm, script)] = (rc, o)
                     print(f"    {script:<19} exit={rc:<3} crash={'YES' if crashed(o) else 'no ':<4}"
                           f" git-fetch spawned={n} exits={sorted(set(codes))}")
+                    if arm == "H" and script != "selftest_f3ff.py":
+                        # ARM H is only a mutation control if its fetch really
+                        # ran and really SUCCEEDED.  A healthy arm whose fetch
+                        # silently failed is a second broken arm.
+                        check(f"{ver}/ARM H/{script}: `git fetch origin` SPAWNED "
+                              "and SUCCEEDED", n >= 1 and codes and all(c == 0 for c in codes),
+                              f"{n} spawn(s), exit codes {sorted(set(codes))}")
                     if arm in ("B", "M") and script != "selftest_f3ff.py":
                         # Without this, a run that never fetched would look
                         # identical to a run whose fetch failed.
@@ -373,14 +395,38 @@ def main():
         def verdicts(o):
             return [ln.strip() for ln in o.splitlines()
                     if re.match(r"\s*(P\d+|NC\d):", ln.strip())]
-        for script in ("s1_rows.py", "s2_controls.py", "s3_graph.py"):
+        for script in ("s2_controls.py", "s3_graph.py"):
             vb = verdicts(out[("before", "H", script)][1])
             va = verdicts(out[("after", "H", script)][1])
+            # ⚠️ NON-VACUITY GUARD.  `vb == va` is trivially true when the
+            # extractor matches nothing, and `0 of 0 identical` reported as PASS
+            # is this ticket's own subject.  An earlier form of this check did
+            # exactly that for s1_rows.py, whose verdicts are written in a
+            # different shape; s1 is now covered by the stronger check below.
+            check(f"ARM H/{script}: the verdict extractor is NOT VACUOUS",
+                  len(va) > 0, f"{len(va)} verdict line(s) matched")
             check(f"ARM H/{script}: every published verdict line is BYTE-IDENTICAL "
-                  "before and after the repair", vb == va,
+                  "before and after the repair", bool(va) and vb == va,
                   f"{len(vb)} verdict line(s) before, {len(va)} after"
                   + ("" if vb == va else
                      f"; first divergence: {[x for x in zip(vb, va) if x[0] != x[1]][:1]}"))
+
+        # THE STRONGEST FORM, available for the files this ticket did NOT touch:
+        # their ENTIRE healthy-arm stdout must be byte-identical.  Whether they
+        # were touched is read from `git diff`, not asserted.
+        touched = {os.path.basename(x) for x in d}
+        for script in SCRIPTS:
+            if script in touched:
+                continue
+            ob = out[("before", "H", script)][1]
+            oa = out[("after", "H", script)][1]
+            check(f"ARM H/{script}: UNMODIFIED by this ticket (per git diff) and its "
+                  "ENTIRE stdout is byte-identical", ob == oa,
+                  f"{len(oa.splitlines())} lines"
+                  + ("" if ob == oa else "; the diff and the output disagree, which "
+                     "means something imported changed underneath it"))
+        print(f"    (files this ticket touched, per git diff: "
+              f"{', '.join(sorted(touched)) or 'none'})")
         print()
 
         banner("CHECK 4 -- F4: s2_controls.py's CRASH (ARMS B AND M)")
