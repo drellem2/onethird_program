@@ -1,0 +1,69 @@
+==============================================================================
+T1  permutation primitives
+==============================================================================
+  PASS  kendall(id) == 0
+  PASS  kendall(reverse) == C(n,2)
+  PASS  footrule(id) == 0
+  PASS  footrule(reverse,n=4) == 8   hand value 3+1+1+3
+  PASS  footrule(reverse,n=5) == 12   4+2+0+2+4
+  PASS  kendall((1,2,0)) == 2
+  PASS  footrule((1,2,0)) == 4
+
+==============================================================================
+NC2  delta computed against two posets whose delta I know BY HAND
+==============================================================================
+  PASS  delta(tight3) == 1/3   got 1/3
+  PASS  tight3 has 3 linear extensions
+  PASS  count_extensions(tight3) == 3
+  PASS  delta(antichain_3) == 1/2   got 1/2
+  PASS  delta(chain_3) == 0
+  PASS  chain_3 has 1 linear extension
+
+==============================================================================
+T2  count_extensions agrees with brute-force enumeration, every poset n<=5
+==============================================================================
+  PASS  downset DP == brute force, all posets n<=5   0 disagreements
+
+==============================================================================
+T3  E[inv_e] on tight3 -- PREDICTIONS H6's hand value 2/3
+==============================================================================
+  PASS  tight3 has a distinguished order   e = (0, 1, 2)
+  PASS  E[inv_e](tight3) == 2/3   got 2/3
+  PASS  6E/(n^2-1) == 1/2 at tight3   got 1/2
+
+==============================================================================
+P15 GUARD  majority_order returns None rather than falling back
+==============================================================================
+  PASS  antichain_3 has NO distinguished order (returns None)
+  PASS  expected_inv(antichain_3) is None
+
+==============================================================================
+NC3  the two-atom witness is IN M_n -- checked, not asserted
+==============================================================================
+  PASS  two-atom in M_3(eta), all 4 eta, every pair at exactly 1/3-eta
+  PASS  two-atom in M_4(eta), all 4 eta, every pair at exactly 1/3-eta
+  PASS  two-atom in M_5(eta), all 4 eta, every pair at exactly 1/3-eta
+  PASS  two-atom in M_6(eta), all 4 eta, every pair at exactly 1/3-eta
+  PASS  two-atom in M_7(eta), all 4 eta, every pair at exactly 1/3-eta
+  PASS  two-atom in M_8(eta), all 4 eta, every pair at exactly 1/3-eta
+
+==============================================================================
+NC1  three deliberately WRONG closed forms must be REJECTED
+==============================================================================
+  PASS  REJECTED: 2/(n+1)  [mg-200d's per-slot value, refuted at n=6 by mg-131e]   differs at n = [3, 4, 5, 6, 7, 8]
+  PASS  REJECTED: n/(n+2)   differs at n = [3, 4, 5, 6, 7, 8]
+  PASS  REJECTED: (n-1)/(6n)  [the eps_c3ca value in the WRONG currency -- this lineage's own twice-committed unit mismatch]   differs at n = [3, 4, 5, 6, 7, 8]
+  PASS  ACCEPTED: n/(n+1) (the true form)
+  PASS  ACCEPTED: 1 - 1/(n+1) (n/(n+1) rewritten)
+
+==============================================================================
+T4  the exact simplex, against problems solved by hand
+==============================================================================
+  PASS  lp_max trivial == 1   got 1
+  PASS  lp_max textbook == 9 at (3,1)   got 9 at [Fraction(3, 1), Fraction(1, 1)]
+  PASS  lp_max with equality == 1   got 1
+  PASS  lp_max detects infeasible (x<=1 and x==3)   got None
+
+==============================================================================
+SUMMARY:  0 failures
+==============================================================================
