@@ -1,0 +1,72 @@
+====================================================================================
+D3  THE VERDICT -- mg-200d's `<=` direction is FALSE at n = 6.
+    Every line is a FEASIBLE MEASURE checked by direct arithmetic, i.e. a LOWER bound
+    on the branch optimum.  A lower bound above (n-1)/3 refutes; it never confirms.
+====================================================================================
+
+### n = 6   branch I = consecutive U [(1, 4)]   |I| = 6   atoms 6
+    E[inv] = 11/6 = 1.8333   against (n-1)/3 = 5/3 = 1.6667   -> REFUTES   excess = 1/6
+    eps_spec = 11/35 = 0.314286   against the conjectured 2/(n+1) = 2/7 = 0.285714
+      [OK ] is a probability measure
+      [OK ] flip caps <= 1/3
+      [OK ] no COMPARABLE pair ever flipped
+      [OK ] per-slot symmetry holds on every pair of I
+      [OK ] E[inv] recomputed from the atoms
+      [OK ] the comparable set is TRANSITIVE -- a genuine poset comparability pattern, not a non-transitive branch
+      flip probabilities: (0, 1)=1/3, (1, 2)=1/3, (1, 4)=1/6, (2, 3)=1/3, (3, 4)=1/3, (4, 5)=1/3
+
+### n = 7   branch I = consecutive U [(1, 4), (2, 5)]   |I| = 8   atoms 9
+    E[inv] = 20/9 = 2.2222   against (n-1)/3 = 2 = 2.0000   -> REFUTES   excess = 2/9
+    eps_spec = 5/18 = 0.277778   against the conjectured 2/(n+1) = 1/4 = 0.250000
+      [OK ] is a probability measure
+      [OK ] flip caps <= 1/3
+      [OK ] no COMPARABLE pair ever flipped
+      [OK ] per-slot symmetry holds on every pair of I
+      [OK ] E[inv] recomputed from the atoms
+      [OK ] the comparable set is TRANSITIVE -- a genuine poset comparability pattern, not a non-transitive branch
+      flip probabilities: (0, 1)=1/3, (1, 2)=1/3, (1, 4)=1/9, (2, 3)=1/3, (2, 5)=1/9, (3, 4)=1/3, (4, 5)=1/3, (5, 6)=1/3
+
+### n = 8   branch I = consecutive U [(1, 4), (3, 6)]   |I| = 9   atoms 6
+    E[inv] = 8/3 = 2.6667   against (n-1)/3 = 7/3 = 2.3333   -> REFUTES   excess = 1/3
+    eps_spec = 16/63 = 0.253968   against the conjectured 2/(n+1) = 2/9 = 0.222222
+      [OK ] is a probability measure
+      [OK ] flip caps <= 1/3
+      [OK ] no COMPARABLE pair ever flipped
+      [OK ] per-slot symmetry holds on every pair of I
+      [OK ] E[inv] recomputed from the atoms
+      [OK ] the comparable set is TRANSITIVE -- a genuine poset comparability pattern, not a non-transitive branch
+      flip probabilities: (0, 1)=1/3, (1, 2)=1/3, (1, 4)=1/6, (2, 3)=1/3, (3, 4)=1/3, (3, 6)=1/6, (4, 5)=1/3, (5, 6)=1/3, (6, 7)=1/3
+
+### n = 9   branch I = consecutive U [(1, 4), (2, 5), (3, 6), (4, 7)]   |I| = 12   atoms 9
+    E[inv] = 28/9 = 3.1111   against (n-1)/3 = 8/3 = 2.6667   -> REFUTES   excess = 4/9
+    eps_spec = 7/30 = 0.233333   against the conjectured 2/(n+1) = 1/5 = 0.200000
+      [OK ] is a probability measure
+      [OK ] flip caps <= 1/3
+      [OK ] no COMPARABLE pair ever flipped
+      [OK ] per-slot symmetry holds on every pair of I
+      [OK ] E[inv] recomputed from the atoms
+      [OK ] the comparable set is TRANSITIVE -- a genuine poset comparability pattern, not a non-transitive branch
+      flip probabilities: (0, 1)=1/3, (1, 2)=1/3, (1, 4)=1/9, (2, 3)=1/3, (2, 5)=1/9, (3, 4)=1/3, (3, 6)=1/9, (4, 5)=1/3, (4, 7)=1/9, (5, 6)=1/3, (6, 7)=1/3, (7, 8)=1/3
+
+### n = 10   branch I = consecutive U [(1, 4), (3, 6), (5, 8)]   |I| = 12   atoms 6
+    E[inv] = 7/2 = 3.5000   against (n-1)/3 = 3 = 3.0000   -> REFUTES   excess = 1/2
+    eps_spec = 7/33 = 0.212121   against the conjectured 2/(n+1) = 2/11 = 0.181818
+      [OK ] is a probability measure
+      [OK ] flip caps <= 1/3
+      [OK ] no COMPARABLE pair ever flipped
+      [OK ] per-slot symmetry holds on every pair of I
+      [OK ] E[inv] recomputed from the atoms
+      [OK ] the comparable set is TRANSITIVE -- a genuine poset comparability pattern, not a non-transitive branch
+      flip probabilities: (0, 1)=1/3, (1, 2)=1/3, (1, 4)=1/6, (2, 3)=1/3, (3, 4)=1/3, (3, 6)=1/6, (4, 5)=1/3, (5, 6)=1/3, (5, 8)=1/6, (6, 7)=1/3, (7, 8)=1/3, (8, 9)=1/3
+
+====================================================================================
+ALL WITNESS CHECKS PASS: True
+(n-1)/3 is BEATEN at n = [6, 7, 8, 9, 10]
+So `max over branches = (n-1)/3` -- the `<=` direction D1 certifies at n = 3,4,5 --
+is FALSE from n = 6 on.  The three exact points were a small-n coincidence.
+
+The excess is not a rounding wobble and it GROWS.  On the periodic sub-family
+chords = {(2j+1, 2j+4)}, the value is (5n-8)/12 at n = 6, 8, 10 -- checked, and
+compare (n-1)/3 = (4n-4)/12.  The gap (n-4)/12 is LINEAR in n, so this is not a
+boundary effect that a slightly different constant would absorb.
+====================================================================================

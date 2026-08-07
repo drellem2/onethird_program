@@ -1,0 +1,77 @@
+================================================================================
+S1  The verifier against a HAND-SOLVED LP whose answer is known without a solver.
+================================================================================
+  [PASS] valid dual y=(3) verifies with bound 3
+  [PASS] SLACK dual y=(4) also verifies, with the weaker bound 4
+  [PASS] MUTATION: y=(2) is REJECTED (it would 'prove' 2 < 3)
+  [PASS] MUTATION: a NEGATIVE multiplier on a `<=` row is REJECTED
+
+================================================================================
+S2  mg-200d's headline reproduced on this worktree (control -- if this fails,
+    nothing else in the instrument is readable).
+================================================================================
+  [PASS] n=3: disjunctive per-slot max = 2/3  -- got 2/3
+  [PASS] n=4: disjunctive per-slot max = 1  -- got 1
+  [PASS] n=5: disjunctive per-slot max = 4/3  -- got 4/3
+
+================================================================================
+S3  The TRIVIAL dual is feasible in EVERY branch (PREDICTIONS H2/P2).  It is a
+    proof, so a failure here is a sign-convention bug in me (P13), not in H2.
+================================================================================
+  [PASS] n=3: trivial dual verifies on all 8 branches  -- 0 failures
+  [PASS] n=4: trivial dual verifies on all 64 branches  -- 0 failures
+
+================================================================================
+S4  MUTATION on a real branch: a certificate that is valid must STOP being valid
+    when a single multiplier is nudged the wrong way.
+================================================================================
+  [PASS] the trivial dual is valid here
+  [PASS] MUTATION: shaving 1/100 off one cap multiplier is REJECTED
+  [PASS] MUTATION: a negative cap multiplier is REJECTED on sign grounds
+  [PASS] adding 1 to lambda stays valid but WEAKENS the bound by exactly 1
+
+================================================================================
+S5  CROSS-BRANCH control: a certificate for one branch must not be accepted for
+    another.  Without this, 'verified' could mean 'verified against the wrong LP'.
+================================================================================
+  [PASS] row counts differ, so the vectors are not interchangeable  -- 7 vs 17
+  [PASS] verify_dual REFUSES a multiplier vector of the wrong length
+
+================================================================================
+S6  STRONG DUALITY across two independently written LP runs: the dual optimum from
+    `solve_dual` must equal mg-200d's primal optimum from `relaxation`, on every
+    feasible branch at n = 3 and n = 4.
+================================================================================
+  [PASS] n=3: dual opt == primal opt on all 3 feasible branches  -- 0 mismatches
+  [PASS] n=4: dual opt == primal opt on all 13 feasible branches  -- 0 mismatches
+
+================================================================================
+S7  The D3 witnesses: every refutation check must be MUTATION-SENSITIVE.  A witness
+    with a broken mass, a broken cap or a broken symmetry must be caught.
+================================================================================
+  [PASS] the shipped n=6 witness passes: mass 1, cap 1/3, E[inv] = 11/6
+  [PASS] MUTATION: mass 1 + 1/100 is caught
+  [PASS] MUTATION: a 1/2-1/2 measure breaks the flip cap
+  [PASS] MUTATION: deleting one atom breaks per-slot symmetry on I
+
+================================================================================
+S8  The refuting branches are genuine comparability patterns, and the refutation
+    is checked to be strict, not a tie.
+================================================================================
+  [PASS] n=6: witness feasible, comparable set transitive, E[inv] > (n-1)/3  -- E[inv]=11/6 vs 5/3
+  [PASS] n=7: witness feasible, comparable set transitive, E[inv] > (n-1)/3  -- E[inv]=20/9 vs 2
+  [PASS] n=8: witness feasible, comparable set transitive, E[inv] > (n-1)/3  -- E[inv]=8/3 vs 7/3
+  [PASS] n=9: witness feasible, comparable set transitive, E[inv] > (n-1)/3  -- E[inv]=28/9 vs 8/3
+  [PASS] n=10: witness feasible, comparable set transitive, E[inv] > (n-1)/3  -- E[inv]=7/2 vs 3
+
+================================================================================
+S9  The cap-row labelling used by the consecutive dual must line up with the rows
+    `lp200d.build` actually emitted -- an off-by-one here silently relabels every
+    multiplier in D1's tier 1.
+================================================================================
+  [PASS] n=3: cap-row count matches the replayed cap-pair list on every branch  -- 0 mismatches
+  [PASS] n=4: cap-row count matches the replayed cap-pair list on every branch  -- 0 mismatches
+
+================================================================================
+ALL CONTROLS PASS
+================================================================================
