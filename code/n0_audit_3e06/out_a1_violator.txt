@@ -1,0 +1,131 @@
+==============================================================================
+A1 — BUILDING THE VIOLATOR §5.3 SAYS EXISTS BELOW ANY N_0
+==============================================================================
+
+[A1.0] THE LEMMA THE WHOLE NEGATIVE RESTS ON, stated plainly:
+  (LIB-weak) is an ASYMPTOTIC hypothesis and is therefore INVARIANT
+  under modification on a FINITE PREFIX.  (LIB-const) is a POINTWISE
+  inequality and a finite prefix can violate it outright.  So for any
+  N_0: take any tail that is o(n^2), redefine it below N_0 to exceed
+  the bound, and you have a member of (LIB-weak) violating (LIB-const)
+  on all of [2, N_0).  §5.3's n^2 / (n^2/log2 n) is ONE instance of
+  this; the lemma is what does the work, not the instance.
+
+[A1.1] EVERY TAIL IS o(n^2) — exhibited, not asserted
+   reduction used (exact, one line): for f(n) = n^2/h(n) with h
+   non-decreasing, f = o(n^2)  <=>  h(n) -> oo.  So the ladder below
+   drives h up, and the k reported IS a witnessed h.
+   OK  n^2 / log2 n   (§5.3's own)       o(n^2) via divisor-unbounded: True;  witnessed f/n^2 < 1/10000
+   OK  n^2 / log2 log2 n                 o(n^2) via divisor-unbounded: True;  witnessed f/n^2 < 1/10
+   OK  n^2 / sqrt(log2 n)                o(n^2) via divisor-unbounded: True;  witnessed f/n^2 < 1/100
+   OK  n^(3/2)  (a plain power)          o(n^2) via divisor-unbounded: True;  witnessed f/n^2 < 1/1000000
+   OK  0        (the n-chain)            o(n^2) via divisor-unbounded: True;  witnessed f/n^2 < 1/0 (f is identically 0)
+   the 1/k actually WITNESSED is small for the log tails (n^2/log2 n
+   needs n > 2^k to reach 1/k) — that is a LADDER limit, not a
+   property of the tail, and the verdict does not rest on it.
+
+[A1.1-NC] NEGATIVE CONTROLS — these MUST fail
+   OK  NC1  n^2/2      is NOT o(n^2)            -> o(n^2)=False (expected False), reached 1/0
+   OK  NC2  n^2/1000   is NOT o(n^2)            -> o(n^2)=False (expected False), reached 1/100
+   OK  NC3  n^2/log2 n IS  o(n^2)               -> o(n^2)=True (expected True), reached 1/10000
+   OK  NC3b n^2/log2log2 n IS o(n^2)            -> o(n^2)=True (expected True), reached 1/10
+   OK  NC4  prefix g=0 must violate NOTHING       -> 0/98 violations, first non-violating n=2 (expected 0/98, n=2)
+
+[A1.2] EVERY PREFIX VIOLATES (LIB-const) ON [2, N_0) — both bound forms
+       NOTE: n is CAPPED at 4000 values per N_0; the two largest N_0
+       are therefore SAMPLED PREFIXES, not exhausted. Said, not hidden.
+       at the repaired eps_spec = 1/50 = 2e-2
+   n^2                      (§5.3's own — ABOVE the | STATE (n^2-1)  | 13/13  98/98  898/898  4000/4000  4000/4000
+   n^2                      (§5.3's own — ABOVE the | DOC (n^2)      | 13/13  98/98  898/898  4000/4000  4000/4000
+   n(n-1)/2   = every incomparable pair inverted (t | STATE (n^2-1)  | 13/13  98/98  898/898  4000/4000  4000/4000
+   n(n-1)/2   = every incomparable pair inverted (t | DOC (n^2)      | 13/13  98/98  898/898  4000/4000  4000/4000
+   n(n-1)/4   = the ANTICHAIN under uniform linear  | STATE (n^2-1)  | 13/13  98/98  898/898  4000/4000  4000/4000
+   n(n-1)/4   = the ANTICHAIN under uniform linear  | DOC (n^2)      | 13/13  98/98  898/898  4000/4000  4000/4000
+   n(n-1)/6 * (1 - 1e-6)    = just under the FROZEN | STATE (n^2-1)  | 13/13  98/98  898/898  4000/4000  4000/4000
+   n(n-1)/6 * (1 - 1e-6)    = just under the FROZEN | DOC (n^2)      | 13/13  98/98  898/898  4000/4000  4000/4000
+   -> 40/40 (prefix x bound-form x N_0) combinations violate throughout
+
+[A1.3] SO THE FULL OBJECT IS A COUNTEREXAMPLE, at every N_0 tested
+   N_0 =                   15   o(n^2): YES (below 1/10000, ladder from 2^5)   violations on [2,N_0): 13/13
+   N_0 =                  100   o(n^2): YES (below 1/10000, ladder from 2^8)   violations on [2,N_0): 98/98
+   N_0 =                  900   o(n^2): YES (below 1/10000, ladder from 2^11)   violations on [2,N_0): 898/898
+   N_0 =              1000000   o(n^2): YES (below 1/10000, ladder from 2^21)   violations on [2,N_0): 4000/4000
+   N_0 =  1000000000000000000   o(n^2): YES (below 1/10000, ladder from 2^61)   violations on [2,N_0): 4000/4000
+
+==============================================================================
+A2 — IS §5.3's OWN WITNESS A REALIZABLE E[inv_e]?  (the ceiling)
+==============================================================================
+  inv_e counts INCOMPARABLE pairs (mg-c3ca:75), so
+     E[inv_e] = sum over incomparable pairs of Pr[inverted]
+              <= #pairs = n(n-1)/2 < n^2/2   for EVERY n.
+  and under the frozen hypothesis (LIB-weak)'s own antecedent,
+     E[inv_e] < m/3 <= n(n-1)/6            (mg-c4f5 §5.2)
+
+          n         g(n)=n^2     pair ceiling   frozen ceiling  over-pair? over-frozen?
+          2                4                1              1/3        YES           YES
+          3                9                3                1        YES           YES
+          5               25               10             10/3        YES           YES
+         10              100               45               15        YES           YES
+        100            10000             4950             1650        YES           YES
+        900           810000           404550           134850        YES           YES
+   -> g(n) = n^2 exceeds the ABSOLUTE pair ceiling at 5000/5000 of n in [1,5000]
+      (first n where it does NOT: None)
+
+[A2.1] THE REPAIRED, CEILING-RESPECTING WITNESS
+  Replace the prefix by one that a real frozen family could attain:
+     g(n) = n(n-1)/6 * (1 - 1e-6)   below N_0   [under the frozen cap]
+     g(n) = n^2 / log2 n            at and above
+   N_0 =                   15  under frozen ceiling: 13/13   violates (LIB-const): 13/13
+   N_0 =                  100  under frozen ceiling: 98/98   violates (LIB-const): 98/98
+   N_0 =                  900  under frozen ceiling: 898/898   violates (LIB-const): 898/898
+   N_0 =              1000000  under frozen ceiling: 4000/4000   violates (LIB-const): 4000/4000
+   N_0 =  1000000000000000000  under frozen ceiling: 4000/4000   violates (LIB-const): 4000/4000
+  -> the negative SURVIVES the realizability objection.  §5.3's
+     conclusion does not depend on its unrealizable witness.
+
+==============================================================================
+A3 — §5.3's TWO FIGURES, in exact integers (no float, no log call)
+==============================================================================
+
+   eps_spec = 1/50 (repaired 2e-2):  6/eps_spec = 300
+     DOC form  (eps/6)n^2   : first n is EXACTLY 2^300, which has 91 decimal digits
+                              floor(log10) = 90; nearest = 90   (2^300 < 10^90*sqrt10)
+                              -> the page prints 10^90  [NEAREST convention]
+       log2(2^300 - 1) >= 300 ? False   (must be False)
+       log2(2^300)     >= 300 ? True   (must be True)
+     STATE form (eps/6)(n^2-1): at n = 2^300 exactly, LHS - RHS = 1/300 > 0
+                              -> FAILS at 2^300; first n is 2^300 + 1.
+                              (a shift of 1 in an object of size 10^90;
+                               the ~10^90 on the page is UNAFFECTED)
+
+   eps_spec = 1/5000 (superseded 2e-4):  6/eps_spec = 30000
+     DOC form  (eps/6)n^2   : first n is EXACTLY 2^30000, which has 9031 decimal digits
+                              floor(log10) = 9030; nearest = 9031   (2^30000 >= 10^9030*sqrt10)
+                              -> the page prints 10^9031  [NEAREST convention]
+       log2(2^30000 - 1) >= 30000 ? False   (must be False)
+       log2(2^30000)     >= 30000 ? True   (must be True)
+     STATE form (eps/6)(n^2-1): at n = 2^30000 exactly, LHS - RHS = 1/30000 > 0
+                              -> FAILS at 2^30000; first n is 2^30000 + 1.
+                              (a shift of 1 in an object of size 10^9030;
+                               the ~10^9030 on the page is UNAFFECTED)
+
+==============================================================================
+A4 — DOES THE NEGATIVE REACH THE PROGRAMME'S OBJECT?
+==============================================================================
+  §5.3 quantifies over the class of o(n^2) FUNCTIONS.  The programme's
+  object is the FROZEN POSET class.  These are not the same class, and
+  the difference is decidable in one direction:
+
+  IF the frozen class satisfies LIB (E[inv_e] <= C*n) — which mg-c3ca §6
+  reports the reachable data as saying — THEN an N_0 DOES exist for the
+  frozen class, at C*n <= (eps/6)(n^2-1):
+     C =   1:  smallest n with C*n <= (eps/6)(n^2-1)  ->  N_0 = 301
+     C =   2:  smallest n with C*n <= (eps/6)(n^2-1)  ->  N_0 = 601
+     C =  10:  smallest n with C*n <= (eps/6)(n^2-1)  ->  N_0 = 3001
+
+  This does NOT contradict §5.3.  It is the class/member distinction:
+  a threshold exists for that FAMILY, it is just not a function of the
+  o(n^2) hypothesis.  It is exactly what row 8's 'What it does not
+  claim' paragraph says.  Recorded here because the SHORT sites say
+  'find N_0 is closed, not open' and this is the reading that must not
+  be welded to them.
