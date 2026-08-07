@@ -4,6 +4,18 @@
 (`code/libweak_c3ca/`, all counts exact integer arithmetic, no sampling).
 **Ticket premise corrected in §2 and §3.** **What I did not do: §7.**
 
+> ⚠️ **AUDITED — mg-c4f5 ([`OneThird-LIBweak-mg-c4f5-IndependentAudit.md`](OneThird-LIBweak-mg-c4f5-IndependentAudit.md)),
+> and §5's headline refutation DOES NOT SURVIVE.** The premise holds and §3's verdict is confirmed;
+> what fails is a **label**, not arithmetic. **§5 named the *linear* form
+> `min(p,1−p) ≥ (1/3)(1−TV)` as refuted, and `p3_window.py` never evaluated it** — its line 100
+> tests `1−TV ≥ 1/2 ∧ min(p,1−p) < 1/3`, the refutation condition for a **threshold** statement at
+> `1/2`. The published `16 / 351 / 8 088` are **correct counts of that threshold predicate** and
+> reproduce exactly; the linear form has **0 counterexamples over 1 168 036 pairs at `n ≤ 7`**.
+> **The repair is applied in place below** (§0.5, §5) — struck text is what this document said, bold
+> text is what the measurement supports. **Read the struck sentences as this document's own error,
+> not as history:** they travelled into STATE.md and were repeated to Daniel before being withdrawn.
+> §2.3's `ε_spec` figures were separately repaired by mg-5827. *(Landed mg-2df8.)*
+
 ---
 
 ## 0. Verdict, in five lines
@@ -13,17 +25,35 @@
    untouched until **Θ(n) elements do it simultaneously** (§3, proven). That gap is the answer
    to the ticket's question and it is the reason "never attacked" is an opportunity, not an
    oversight.
-2. **But (LIB-weak) does not close the wall as the architecture consumes it** — it closes ledger
-   row 8 *as literally written*. The difference is a quantifier over `n`, already recorded at
+2. **But (LIB-weak) does not close the wall as the architecture consumes it** — it closes ~~ledger
+   row 8 *as literally written*~~ **the *limit* rendering `λ_std → 1`, which is what ledger row 8
+   led with when this was written**. The difference is a quantifier over `n`, already recorded at
    STATE.md's own mg-88bd row, and the ticket's framing did not carry it (§2).
+   **[ROW REFERENCE REPAIRED — mg-2df8, on mg-c4f5 §6.** "As literally written" was accurate
+   against row 8 *at this document's base commit*, where the row read `frozen ⟹ λ_std→1`. `f85a4e8`
+   (mg-2860) then rewrote row 8's lead to the **constant** form and carried this phrase across
+   unchanged, so from that commit the row asserted and denied the same claim eight words apart.
+   **Naming the form instead of the row is the fix**, because a pointer to "the row" rots the next
+   time the row is rewritten and a pointer to `λ_std → 1` cannot. STATE.md's own two sites were
+   repaired at `05a0061`; this is the source sentence they inherited it from.**]**
 3. **(LIB-weak) and (LIB-const) differ IN KIND, not in constant** — and the ticket's strength
    ordering is inverted: as asymptotic classes `(LIB) ⊊ (LIB-weak) ⊊ (LIB-const)` (§2.3).
 4. **Price, proven here:** (LIB-weak) ⟹ the counterexample's entropy deficit `log(n!/e(P))` is
    `ω(n)`. Elementary, and **discharged** (not an obstruction) under a width statement (§4).
-5. **A forward vector, with its own probe run against it, and the probe fired** (§5–6). The
+5. **A forward vector, with its own probe run against it, and the probe fired** (§5–6). ~~The
    marginal form of the last step is **false** — 8 088 exhibited counter-pairs at `n = 6` — and
    what survives is a threshold form whose threshold is **moving with `n`** in the reachable
-   range. Reported as a race between two measurable rates, not as progress.
+   range.~~ **The probe fired at a DIFFERENT statement than the one this line names. The marginal
+   *linear* form `min(p,1−p) ≥ (1/3)(1−TV)` has `0` counterexamples at every `n ≤ 7`
+   (1 168 036 pairs); the `8 088` are counts of the *threshold* predicate
+   `1−TV ≥ 1/2 ∧ min(p,1−p) < 1/3`, which is what the probe evaluates. The threshold form's
+   own threshold IS moving with `n` — that half stands, and it is the whole of what §5 delivers.**
+   Reported as a race between two measurable rates, not as progress.
+   **[REFUTATION WITHDRAWN — mg-2df8, on mg-c4f5 §4.** The forward vector's status is **unchanged
+   and still undecided** — this repair does not promote it. `(LIN)` surviving is *not* step 2
+   working: the pigeonhole delivers `1−TV = 1 − O(1/n)`, so `(LIN)` at `c = 1/3` yields only
+   `min(p,1−p) ≥ 1/3 − O(1/n)`, which does **not** contradict `frozen` (that needs `≥ 1/3`
+   strictly). **The vector is undecided for a different reason than this document gave.**]
 
 ---
 
@@ -177,18 +207,50 @@ elements are macroscopically mobile. **That extra hypothesis is what makes (LIB-
 potentially easier than the conjecture**, and it is exactly what the contrapositive hands you
 for free.
 
-**P3 tested step 2 in its marginal form and the probe fired on me.**
+**P3 tested step 2 in its marginal form and the probe fired on me** — **but not at the statement
+this section names it as firing at. It fired at the THRESHOLD form `1−TV ≥ 1/2 ⟹ balanced`, which
+is genuinely refuted; the LINEAR form is untouched. Read every count below with that distinction
+in hand (mg-c4f5 §4).**
 Population: all naturally labelled non-chain posets `n ≤ 6`; grain: one incomparable pair.
+**Extended to `n ≤ 7` by mg-c4f5 on a parser sharing no code with `lib_c3ca`.**
 
-- The linear form `min(p,1−p) ≥ (1/3)(1−TV)` is **FALSE**: 8 088 counter-pairs at `n = 6`
-  (worst `1−TV = 0.5` with `min(p,1−p) = 0.212`), 351 at `n = 5`, 16 at `n = 4`.
+- ~~The linear form `min(p,1−p) ≥ (1/3)(1−TV)` is **FALSE**: 8 088 counter-pairs at `n = 6`
+  (worst `1−TV = 0.5` with `min(p,1−p) = 0.212`), 351 at `n = 5`, 16 at `n = 4`.~~
+  **THE LINEAR FORM IS NOT REFUTED AND THIS PROBE NEVER TESTED IT.** `p3_window.py:100` evaluates
+  `sim >= 0.5 and mn < 1/3` — the refutation condition for the **threshold** statement
+  `1−TV ≥ 1/2 ⟹ balanced`, which is not the negation of `mn ≥ (1/3)·sim`. Both predicates, on one
+  walk of one population (mg-c4f5 `a5_window.py`, re-run at `mg-2df8`, byte-identical):
+
+  | `n` | pairs | counterexamples to `min(p,1−p) ≥ (1/3)(1−TV)` | matching `1−TV ≥ ½ ∧ min < ⅓` | published above |
+  |---|---|---|---|---|
+  | 4 | 130 | **0** | 16 | 16 ✓ |
+  | 5 | 1 984 | **0** | 351 | 351 ✓ |
+  | 6 | 41 044 | **0** | 8 088 | 8 088 ✓ |
+  | 7 | 1 168 036 | **0** | 250 023 | (beyond this doc's reach) |
+
+  **The counts above are right and their label is wrong** — the populations match this document's
+  own transcript line for line, so this is neither a parser nor a population disagreement. **The
+  struck line's own quoted worst case refutes it by hand:** `(1/3)(0.5) = 0.167 ≤ 0.212`, so that
+  pair **satisfies** the inequality it was offered as refuting. The honest measurement is the best
+  constant `c*(n) := min over pairs of min(p,1−p)/(1−TV)` = `1/2, 1/2, 5/12, 2/5, 7/20` at
+  `n = 3…7` — **strictly above `1/3` at every reachable `n`, and falling toward it.**
+- **The `worst` row in the struck line was mislabelled too, independently of the predicate.**
+  `p3_window.py` sorts
+  its refuter list by `(mn, −sim)` and prints the top three, so the printed row is the one with the
+  **smallest `min(p,1−p)`** — this document reports it as the **largest `1−TV`**. The actual
+  largest `1−TV` among those rows is `s*(n)` itself: `0.737` at `n = 6`, not `0.5`.
 - What survives is a **threshold** form, and the data supports it in the regime the pigeonhole
   delivers: the floor of `min(p,1−p)` rises with similarity — `0.316` at `1−TV ≥ 0.7`,
-  `0.450` at `≥ 0.9`, `0.500` at `≥ 0.99` (`n = 6`).
+  `0.450` at `≥ 0.9`, `0.500` at `≥ 0.99` (`n = 6`). **These three reproduce exactly — and all
+  three FALL at `n = 7`: `0.300 / 0.448 / 0.496`. The floor at `≥ 0.7` is now BELOW `1/3`,** so the
+  next bullet's worry about the threshold moving with `n` applies to the floors too.
 - **But the threshold moves with `n`.** `s*(n) := sup{1−TV : the pair is NOT balanced}` is
-  `—, 0.500, 0.636, 0.737` at `n = 3,4,5,6`. If `1−s*(n)` keeps shrinking at least as fast as
+  `—, 0.500, 0.636, 0.737` at `n = 3,4,5,6` **, and `0.7545` at `n = 7`**. If `1−s*(n)` keeps
+  shrinking at least as fast as
   the pigeonhole's own `O(1/(α²n))` margin, step 2 **fails asymptotically at a fixed constant**
-  and the vector dies. Three points cannot tell those two rates apart.
+  and the vector dies. ~~Three points cannot tell those two rates apart.~~ **Four points still
+  cannot: `(1−s*)·n` reads `2.00, 1.82, 1.58, 1.72` and `(1−s*)·n²` reads `8.0, 9.1, 9.5, 12.0`,
+  and neither column is flat.** **This bullet is the part of §5 that survives intact.**
 
 > **Honest status of the vector: undecided, and now measurable.** It is a race between
 > `1−s*(n)` and the pigeonhole margin. Both are computable. The next step is *not* more prose:
