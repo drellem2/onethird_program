@@ -1,0 +1,159 @@
+==============================================================================
+R4 — THE CONSEQUENCES: every Phi figure mg-2de0 published, before and after
+==============================================================================
+
+R4.1  mg-2de0's OWN population, imported from lib2de0 and re-wrapped so that the
+      leak arithmetic is this instrument's and the poset list is theirs:
+       posets: 431   (mg-2de0's a3_nonvacuity.py prints 431)
+       cuts:   12702   (mg-2de0's a3_nonvacuity.py prints 12702)
+  OK   population reproduces mg-2de0's 431 posets / 12702 cuts: 0 / 2
+       population: named_posets(7) + all_posets(4) + all_posets(5), all 2^n-2 proper cuts each
+       grain:      two integer equalities against the counts printed in out_a3_nonvacuity.txt
+
+R4.2  A3.2 / P9 FIRST HALF — `Phi_P(A) <= 1 for every cut`, published `0 / 12702`.
+       convention: 0 / 12702      definition: 0 / 12702
+  OK   A3.2 reproduces under the convention (0 / 12702): 0 / 12702
+       population: mg-2de0's 431 posets x all 12702 proper cuts
+       grain:      per-(poset, cut), exact Fraction comparison against 1
+  OK   A3.2 STILL HOLDS under the definition: 0 / 12702
+       population: the same 12702 pairs
+       grain:      per-(poset, cut), exact Fraction comparison against 1
+       => P9's FIRST HALF DOES NOT MOVE. `0 / 12702` is correct as published and
+          stays correct after the repair. Forced by PREDICTIONS.md H6, which proved
+          it by hand for both conventions before this script existed: the
+          convention's leak is |A\P| = |P\A| with |P| = |A|, hence <= |A^c|.
+
+R4.3  A3.4 / P9 SECOND HALF — `Phi* <= min_k Delta_1(A_k)`, published `0 / 431`,
+      AND the figure inside it: `strictly smaller on 65 of 431 posets`.
+       violations of Phi* <= m_pre:  convention 0 / 431      definition 0 / 431
+  OK   A3.4's `0 / 431` reproduces under the convention: 0 / 431
+       population: mg-2de0's 431 posets
+       grain:      per-poset, exact Fraction comparison
+  OK   A3.4's `0 / 431` STILL HOLDS under the definition: 0 / 431
+       population: the same 431 posets
+       grain:      per-poset, exact Fraction comparison
+       => P9's SECOND HALF DOES NOT MOVE either. Forced by H7: Phi* is a minimum
+          over a family containing the prefixes, and R1.4 measured the two
+          conventions agreeing on every prefix of e.
+
+       STRICT count:  convention 65 / 431      definition 16 / 431
+  OK   the published `strictly smaller on 65 of 431` reproduces under the convention: 0 / 1
+       population: mg-2de0's 431 posets
+       grain:      integer equality against the figure in out_a3_nonvacuity.txt:80 and docs/OneThird-Direct-Prefix-Route-mg-2de0-Audit.md:202
+
+       *** THIS FIGURE MOVES. ***
+       `strictly smaller on 65 of 431` becomes `strictly smaller on 16 of 431`.
+       49 posets change side. Direction of each:
+         became strict (Phi* fell below m_pre after repair): 0
+         became equal  (Phi* rose to m_pre after repair):    49
+                            poset  Phi*_conv   Phi*_def    m_pre  side change
+                 N-poset+2pts n=6     41/150      28/75    28/75  strict->equal
+                          P28 n=4       1/10        2/5      2/5  strict->equal
+                           P3 n=5       7/20        2/5      2/5  strict->equal
+                           P5 n=5       7/20        2/5      2/5  strict->equal
+                           P9 n=5       7/20        2/5      2/5  strict->equal
+                          P17 n=5       7/20        2/5      2/5  strict->equal
+                          P18 n=5       7/20        2/5      2/5  strict->equal
+                          P82 n=5        1/5       3/10     3/10  strict->equal
+                          P94 n=5      13/50      19/50    19/50  strict->equal
+                          P98 n=5        1/5       7/20     7/20  strict->equal
+                         P100 n=5        1/6        1/3      1/3  strict->equal
+                         P104 n=5        1/5       3/10     3/10  strict->equal
+       ... and 37 more (full list is deterministic and re-derivable by re-running this script)
+  OK   PREDICTIONS.md P8 -- `65 of 431` moves: 0 / 1
+       population: mg-2de0's 431 posets
+       grain:      integer inequality between the two columns
+
+R4.4  A3.5 — `Phi* == min_k Delta_1(A_k) at the antichain`, published `0 / 6`.
+       convention: 0 / 6      definition: 0 / 6
+  OK   A3.5 holds under BOTH conventions: 0 / 12
+       population: the 6 antichains in mg-2de0's population (n=2..7)
+       grain:      per-antichain, exact Fraction equality
+       => DOES NOT MOVE. Forced by H5: over all n! permutations both sigma(A) and
+          set(p[:a]) are uniform random a-subsets, so both leaks equal a(n-a)/n and
+          the two conventions COINCIDE at every antichain cut. Verified directly:
+  OK   the two conventions COINCIDE at every antichain cut: 0 / 240
+       population: antichains n=2..7, all 2^n-2 cuts each = 240 pairs
+       grain:      per-(antichain, cut), exact Fraction equality of the two expectations
+       => so mg-2de0's 1/2, 2/3, sqrt(2) and 4/3 arithmetic -- ALL of it evaluated
+          at the antichain -- is untouched by this repair. A3.1, A3.3 and A3.6 do
+          not move, and neither does anything A4 or A5 reports.
+
+R4.5  HOW FAR the underlying Phi* actually moved, which is the honest measure of
+      the blast radius even where no published verdict changed:
+       Phi* changed on 65 of 431 posets (15.1%)
+         repaired Phi* is LOWER on  0
+         repaired Phi* is HIGHER on 65
+       largest change: P28 n=4  1/10 -> 2/5  (delta -3/10)
+  MEAS PREDICTIONS.md P10 -- the moved count lands in [150, 350]: 1 / 1
+       population: mg-2de0's 431 posets
+       grain:      integer range test on the count above
+       and per-cut, on mg-2de0's own 12702 pairs rather than R2's 11316:
+       E_leak differs on 9116 of 12702 (poset, cut) pairs (71.8%)
+
+       the set of posets whose Phi* MOVES and the set mg-2de0 published as
+       STRICTLY SMALLER are the SAME SET, which is why both counts read 65:
+  OK   {Phi* moves} == {strict under the convention}: 0 / 1
+       population: mg-2de0's 431 posets
+       grain:      set equality on poset names
+       => forced, once the direction is known: Phi*_def >= Phi*_conv and
+          Phi*_def <= m_pre, so Phi* moving implies Phi*_conv < m_pre. The
+          repair acts on EXACTLY the posets A3.4's figure counts, and on no others.
+
+R4.5b WHY PREDICTIONS.md P9 LOST, measured rather than explained away. P9 bet the
+      convention only ever OVER-charges, and inferred that the repair would LOWER
+      Phi* and RAISE the strict count. R2.4 refuted the pointwise claim (2122 of
+      11316 under-charges) and R4.3/R4.5 refuted the direction too: Phi* rose on
+      all 65 movers and the count FELL, 65 -> 16. The two facts are not in tension,
+      and here is the reason, as a measurement:
+       over ALL 12702 cuts:              conv > def on 6762, < on 2354, == on 3586
+       at the 431 cuts ATTAINING Phi*_conv: conv > def on 0, < on 102, == on 329
+       => the convention over-charges on the MAJORITY of cuts and under-charges at
+          the cuts that attain the MINIMUM. Phi* is an extremal statistic, so the
+          population sign carries no information about it -- the minimum is attained
+          exactly where the error runs the other way. That is the whole content of
+          P9's loss, and it is a caution worth more than the prediction was: an
+          aggregate sign is not a bound on an extremum.
+
+R4.6  the SELFTEST drills that reach Phi, each evaluated under both conventions,
+      so the repair's effect on mg-2de0's own red-team file is known in advance:
+                                              drill     conv      def  expects  verdict
+                S7 Phi(antichain n=4, A={0}) == 3/4      3/4      3/4      3/4  both pass
+                     S7 Phi* (antichain n=4) == 1/2      1/2      1/2      1/2  both pass
+       S7 Phi* == min over prefixes at antichain n=4      1/2      1/2      1/2  both pass
+  OK   all three antichain Phi drills pass under BOTH conventions: 0 / 3
+       population: selftest2de0.py's S7 drills at lines 139, 144, 145
+       grain:      per-drill, exact Fraction equality in both columns
+       S7 `at least one n=4 poset has Phi* < prefix minimum`: conv 4 of 40, def 3 of 40
+  OK   selftest line 148's existence drill survives the repair: 0 / 1
+       population: all 40 labelled posets on 4 elements
+       grain:      integer positivity
+       => the drill SURVIVES, but its comment cites `A3.4's strictly smaller on
+          65 of 431` by number, so that comment must be retargeted with the figure.
+
+R4.7  THE LEDGER OF PUBLISHED FIGURES. Every site that carries a Phi number from
+      mg-2de0, and whether the repair moves it. Sites located by grep and READ.
+                                                                 site  moves?
+               docs/OneThird-Direct-Prefix-Route-mg-2de0-Audit.md:183    NO   `Phi_P(A) <= 1` on all 12702 (poset, cut) pairs
+               docs/OneThird-Direct-Prefix-Route-mg-2de0-Audit.md:202    NO   `Phi* <= min_k Delta_1(A_k)`, 0 exceptions / 431 posets
+               docs/OneThird-Direct-Prefix-Route-mg-2de0-Audit.md:202   YES   `strict on 65 of them`
+               docs/OneThird-Direct-Prefix-Route-mg-2de0-Audit.md:204    NO   `Phi* = min_k Delta_1(A_k)` at the antichain, exactly
+                           code/direct_prefix_audit_2de0/README.md:60    NO   P9 HIT (0 / 12702; 0 / 431)
+               code/direct_prefix_audit_2de0/out_a3_nonvacuity.txt:34    NO   Phi_P(A) <= 1 for every cut: 0 / 12702
+               code/direct_prefix_audit_2de0/out_a3_nonvacuity.txt:77    NO   Phi* <= min over prefixes: 0 / 431
+               code/direct_prefix_audit_2de0/out_a3_nonvacuity.txt:80   YES   strictly smaller on 65 of 431 posets; EQUAL on 366
+               code/direct_prefix_audit_2de0/out_a3_nonvacuity.txt:88    NO   Phi* == min over prefixes at the antichain: 0 / 6
+               code/direct_prefix_audit_2de0/out_selftest_2de0.txt:73   YES   cites `A3.4's strictly smaller on 65 of 431`
+                    code/direct_prefix_audit_2de0/selftest2de0.py:147   YES   the same citation, in a source comment
+
+       => 4 sites carry a figure that MOVES, and all of them carry the
+          SAME figure: A3.4's strict count. Every other published Phi figure of
+          mg-2de0 is correct as published and stays correct.
+       => and NOTHING outside code/direct_prefix_audit_2de0/ and
+          docs/OneThird-Direct-Prefix-Route-mg-2de0-Audit.md carries a Phi figure
+          sourced from mg-2de0. STATE.md's mg-2de0 row carries no Phi number;
+          checked by grep, reported in the README as PREDICTIONS.md P12.
+
+==============================================================================
+R4 TOTAL BAD: 0
+==============================================================================

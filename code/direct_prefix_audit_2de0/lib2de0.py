@@ -10,10 +10,15 @@ printed display columns, never in a comparison that produces a verdict.
 
 Definitions, all taken from the corpus and cited at the call site:
   A_k        = {0,...,k-1}     the first k elements of the reference order e (0-indexed here)
-  K_k(sigma) = |A_k \\ sigma(A_k)|   where sigma(A_k) = the elements in the first k POSITIONS
+  sigma(A)   = {sigma(i) : i in A}   FUNCTION APPLICATION: the positions INDEXED BY A.
+               For the PREFIX A_k this is "the elements in the first k positions"; for a
+               general cut it is NOT. See E_leak's docstring -- mg-8311 repaired a defect
+               here that had generalised the prefix gloss instead of the function.
+  K_k(sigma) = |A_k \\ sigma(A_k)|   = |A_k \\ (elements in the first k POSITIONS)|, the two
+               readings coinciding because A_k IS the set of the first k positions
   D(sigma)   = sum_x |pos_sigma(x) - rank_e(x)|          (footrule)
   inv_e      = # pairs {x,y} whose e-order and sigma-order disagree (Kendall tau to e)
-  Delta_1(A) = E|A \\ sigma(A)| / min(|A|,|A^c|)
+  Delta_1(A) = E|A \\ sigma(A)| / min(|A|,|A^c|)          STATE.md:41
   Phi_P(A)   = same quantity, read as a conductance, minimised over ALL cuts A
 """
 
@@ -136,14 +141,34 @@ class Poset:
         return self.E_K(k) / min(k, self.n - k)
 
     def E_leak(self, A):
-        """E|A \\ sigma(A)| for an arbitrary cut A (a frozenset of elements)."""
+        """E|A \\ sigma(A)| for an arbitrary cut A (a frozenset of elements).
+
+        sigma(A) = {p[i] : i in A} -- the positions INDEXED BY A, i.e. sigma read as
+        function application, which is how STATE.md:41 writes Delta_1(A). For the prefix
+        A_k = {0..k-1} this coincides with "the first k positions" and so with K_k; for a
+        general cut it does not.
+
+        REPAIRED by mg-8311. This function previously computed `a - len(A & set(p[:a]))`,
+        the first |A| POSITIONS rather than the positions indexed by A -- a generalisation
+        of the K_k gloss rather than of the function. The two agree on every prefix of e
+        and diverged on 8178 of 11316 (poset, cut) pairs at n <= 5; smallest witness the
+        2-chain 0 < 1 with A = {1}, where the definition gives 0 and the old convention 1.
+        The old convention is not a conductance at all: it violates
+        |A\\sigma(A)| = |A^c\\sigma(A^c)| on 457132 of 683656 (permutation, cut) pairs to
+        n = 7, so "the cut" did not determine its value. See
+        `code/eleak_repair_8311/` (r1 the witness, r3 the ruling, r4 the consequences) and
+        `docs/OneThird-Eleak-Repair-mg-8311.md`. What moved: A3.4's `strictly smaller on
+        65 of 431` became `16 of 431`. What did NOT move: both halves of P9, A3.5, and
+        every Delta_1(A_k) figure in this audit -- delta_1_prefix routes through E_K, not
+        through here.
+        """
         if ("L", A) in self._cache:
             return self._cache[("L", A)]
         les = self.linear_extensions()
         a = len(A)
         tot = 0
         for p in les:
-            tot += a - len(A & set(p[:a]))
+            tot += a - len(A & frozenset(p[i] for i in A))
         self._cache[("L", A)] = F(tot, len(les))
         return self._cache[("L", A)]
 

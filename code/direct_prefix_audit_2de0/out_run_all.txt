@@ -1,5 +1,5 @@
 ### running selftest2de0.py -> out_selftest_2de0.txt
-###   exit 0 (expected 0), 101 lines written
+###   exit 0 (expected 0), 130 lines written
 ### running a1_lemma_a.py -> out_a1_lemma_a.txt
 ###   exit 0 (expected 0), 98 lines written
 ### running a2_lemma_b.py -> out_a2_lemma_b.txt
@@ -14,7 +14,7 @@
 ==============================================================================
 EXIT CODES vs PRE-REGISTERED EXPECTATIONS
 ==============================================================================
-  ok   selftest: exit 0 == expected 0 (101 lines)
+  ok   selftest: exit 0 == expected 0 (130 lines)
   ok   a1: exit 0 == expected 0 (98 lines)
   ok   a2: exit 1 == expected 1 (151 lines)
   ok   a3: exit 0 == expected 0 (107 lines)
