@@ -1,0 +1,70 @@
+==============================================================================
+S1  DID IT DECIDE DANIEL'S QUESTION?  (reserved to him)
+==============================================================================
+  :15  decider phrases matched : ['conjecture is (confirmed|refuted|right|wrong|proven|correct)']
+  :15  reserving phrases matched: 3 -> ['NOT DECIDED HERE', "is Daniel's", 'true under either reading']
+  :15  'confirmed/refuted' occurrence: ...ALL `n`** (the `≥` by this file's own two-atom law, `:135`), machine-confirmed exactly at `n = 3,4,5,6` (mg-6bc2 Claim 3
+  :15  'confirmed/refuted' occurrence: ...d is with him; the map above is true under either reading, and nothing in it says the conjecture is confirmed or refuted
+  :115  decider phrases matched : NONE
+  :115  reserving phrases matched: 3 -> ['NOT decided here', "is Daniel's", 'true either way']
+  :115  'confirmed/refuted' occurrence: ...OVEN FOR ALL `n`** (the `≥` by this file's own two-atom law, machine-confirmed exactly at `n = 3,4,5,6`; mg-6bc2 Claim 3
+
+==============================================================================
+S2  DID THE CLOSURE TRAVEL?
+==============================================================================
+  :15
+      YES  the max expression
+      YES  the word ATTAINED
+      YES  EQUALITY reading
+      YES  not-a-bound rider
+      YES  realizability rider
+      YES  M_n defined
+  :115
+      YES  the max expression
+      YES  the word ATTAINED
+      YES  EQUALITY reading
+      YES  not-a-bound rider
+      YES  realizability rider
+      YES  M_n defined
+
+==============================================================================
+S3  WAS THE 1/6 FORM CITED, OR RESTATED?  (and how many copies now exist)
+==============================================================================
+  :15  cites mg-c4f5 audit : True   cites mg-c3ca defn : True
+  :15  names the line :415 : True   names :172 : True
+  :115  cites mg-c4f5 audit : True   cites mg-c3ca defn : True
+  :115  names the line :415 : True   names :172 : True
+
+  verbatim copies of the :415 sentence corpus-wide: 6
+      ./STATE.md:15
+      ./STATE.md:115
+      ./code/pairbias_sharpening_6bc2/PREDICTIONS.md:37
+      ./docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:415
+      ./docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md:47
+      ./docs/OneThird-PairBias-EpsSup-Sharpening-mg-6bc2.md:146
+
+==============================================================================
+S4  THE SOURCE CONTRADICTS THE LANDING -- mg-6bc2 Defect 2
+==============================================================================
+  mg-6bc2:450  **Defect 2 — the LP is `n ≤ 6`.** `S_n` is enumerated, so the tableau is `C(n,2)+1` by `n!`. Claim 3.1's `≤` and Claim 4.1's `≤` are theorems for all `n`; **every attainment statement is finite population** and is marked as such. Nothing here is evidence at unbounded `n` about attainment.
+  mg-6bc2:175  **[PROVEN, all `n`, by hand; machine-confirmed exactly at `n = 3,4,5,6`]**
+
+  landed text asserts all-n ATTAINMENT for the inversion form : True
+  landed text names mg-6bc2's blanket caveat                  : False
+  commit message names 'Defect 2'                             : False
+  commit message names 'every attainment statement'            : False
+
+==============================================================================
+S5  PROVENANCE OF THE DOUBLED SENTENCE mg-9adf DISCLOSED
+==============================================================================
+  occurrences in row 8 at PARENT 72a6e33 : 2
+  occurrences in row 8 at LANDED 21ee93f : 2
+  -> pre-existing, unchanged by this edit
+
+==============================================================================
+S6  SCOPE -- what else moved?
+==============================================================================
+  lines changed: [15, 115]   (parent 208 lines, landed 208 lines)
+  row 11 is line 118; touched: False
+  'ε_dem' count in row 8: parent 0 -> landed 0
+  'C₃' count in row 8: parent 0 -> landed 0
