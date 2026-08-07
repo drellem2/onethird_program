@@ -1,0 +1,123 @@
+==========================================================================
+S0  simplex correctness on a hand-solved LP
+==========================================================================
+  [ok ] S0a  inequality LP value 11  -- got 11, x=[Fraction(3, 1), Fraction(1, 1)]
+  [ok ] S0b  two-phase LP value 3  -- got 3, x=[Fraction(3, 1), Fraction(2, 1)]
+  [ok ] S0c  infeasibility detected
+
+==========================================================================
+S1  baseline reproduces mg-6bc2's theorem  (max E[inv] = C(n,2)/3)
+==========================================================================
+  [ok ] S1  n=3  max E[inv] = C(n,2)/3 = 1  -- got 1
+  [ok ] S1  n=3  eps_spec = n/(n+1)  -- got 3/4
+  [ok ] S1  n=3  optimiser is a PROBABILITY measure  -- mass 1
+  [ok ] S1  n=4  max E[inv] = C(n,2)/3 = 2  -- got 2
+  [ok ] S1  n=4  eps_spec = n/(n+1)  -- got 4/5
+  [ok ] S1  n=4  optimiser is a PROBABILITY measure  -- mass 1
+  [ok ] S1  n=5  max E[inv] = C(n,2)/3 = 10/3  -- got 10/3
+  [ok ] S1  n=5  eps_spec = n/(n+1)  -- got 5/6
+  [ok ] S1  n=5  optimiser is a PROBABILITY measure  -- mass 1
+
+==========================================================================
+S2  H7: mg-6bc2's n=3 optimiser is sub-probability, and completing it
+    turns its reported 0 AGGREGATE violations into 4
+==========================================================================
+  [ok ] S2a  mg-6bc2's reported support has mass 2/3  -- mass 2/3
+  [ok ] S2b  on that sub-measure, aggregate violations = 0  -- []
+  [ok ] S2c  on that sub-measure, per-slot violations = 4  -- 4
+  [ok ] S2d  completed to mass 1, E[inv] is unchanged at 1  -- 1
+  [ok ] S2e  completed, aggregate violations > 0  (H7's substance)  -- [(0, 1), (1, 2)]
+  [ok ] S2f  ... and the count is 2 unordered pairs, NOT the 4 H7 predicted  -- 2 -- H7 is REFUTED on the number, kept as written
+  [ok ] S2g  under mg-6bc2's OWN ordered predicate the completed count is 3, not 4  -- [(2, 1), (1, 2), (0, 1)]
+  [ok ] S2h  its aggregate predicate counts ORDERED pairs and its per-slot predicate counts x<y -- different units in one table
+
+==========================================================================
+S3  H2: the LITERAL forms hold for uniform L(P) iff P is an antichain
+==========================================================================
+  [ok ] S3  antichain n=3      literal per-slot holds = True (antichain = True)  -- 0 violations
+  [ok ] S3  antichain n=3      literal aggregate holds = True (antichain = True)  -- 0 violations
+  [ok ] S3  chain n=3          literal per-slot holds = False (antichain = False)  -- 2 violations
+  [ok ] S3  chain n=3          literal aggregate holds = False (antichain = False)  -- 2 violations
+  [ok ] S3  V n=3 (0<1,0<2)    literal per-slot holds = False (antichain = False)  -- 2 violations
+  [ok ] S3  V n=3 (0<1,0<2)    literal aggregate holds = False (antichain = False)  -- 2 violations
+  [ok ] S3  L n=3 (0<2,1<2)    literal per-slot holds = False (antichain = False)  -- 2 violations
+  [ok ] S3  L n=3 (0<2,1<2)    literal aggregate holds = False (antichain = False)  -- 2 violations
+  [ok ] S3  antichain n=4      literal per-slot holds = True (antichain = True)  -- 0 violations
+  [ok ] S3  antichain n=4      literal aggregate holds = True (antichain = True)  -- 0 violations
+  [ok ] S3  chain n=4          literal per-slot holds = False (antichain = False)  -- 3 violations
+  [ok ] S3  chain n=4          literal aggregate holds = False (antichain = False)  -- 3 violations
+  [ok ] S3  2+2 n=4            literal per-slot holds = False (antichain = False)  -- 6 violations
+  [ok ] S3  2+2 n=4            literal aggregate holds = False (antichain = False)  -- 2 violations
+  [ok ] S3  N n=4              literal per-slot holds = False (antichain = False)  -- 5 violations
+  [ok ] S3  N n=4              literal aggregate holds = False (antichain = False)  -- 3 violations
+  [ok ] S3  diamond n=4        literal per-slot holds = False (antichain = False)  -- 4 violations
+  [ok ] S3  diamond n=4        literal aggregate holds = False (antichain = False)  -- 4 violations
+
+==========================================================================
+S4  H4: the literal PER-SLOT form is INFEASIBLE at n=3
+==========================================================================
+  [ok ] S4  literal per-slot at n=3 is infeasible  -- phase-1 residual 1/3
+  [ok ] S4b  uniform on S_3 satisfies the literal per-slot form
+  [ok ] S4c  ... and its pair flips are 1/2 > 1/3  -- 1/2
+
+==========================================================================
+S5  H5: the SURROGATE forms are SOUND -- satisfied by every hand-named poset
+==========================================================================
+  [ok ] S5  antichain n=3      J_k(y,x) <= J_k(x,y)  -- 0 violations
+  [ok ] S5  antichain n=3      J(y,x)   <= J(x,y)  -- 0 violations
+  [ok ] S5  chain n=3          J_k(y,x) <= J_k(x,y)  -- 0 violations
+  [ok ] S5  chain n=3          J(y,x)   <= J(x,y)  -- 0 violations
+  [ok ] S5  V n=3 (0<1,0<2)    J_k(y,x) <= J_k(x,y)  -- 0 violations
+  [ok ] S5  V n=3 (0<1,0<2)    J(y,x)   <= J(x,y)  -- 0 violations
+  [ok ] S5  L n=3 (0<2,1<2)    J_k(y,x) <= J_k(x,y)  -- 0 violations
+  [ok ] S5  L n=3 (0<2,1<2)    J(y,x)   <= J(x,y)  -- 0 violations
+  [ok ] S5  antichain n=4      J_k(y,x) <= J_k(x,y)  -- 0 violations
+  [ok ] S5  antichain n=4      J(y,x)   <= J(x,y)  -- 0 violations
+  [ok ] S5  chain n=4          J_k(y,x) <= J_k(x,y)  -- 0 violations
+  [ok ] S5  chain n=4          J(y,x)   <= J(x,y)  -- 0 violations
+  [ok ] S5  2+2 n=4            J_k(y,x) <= J_k(x,y)  -- 0 violations
+  [ok ] S5  2+2 n=4            J(y,x)   <= J(x,y)  -- 0 violations
+  [ok ] S5  N n=4              J_k(y,x) <= J_k(x,y)  -- 0 violations
+  [ok ] S5  N n=4              J(y,x)   <= J(x,y)  -- 0 violations
+  [ok ] S5  diamond n=4        J_k(y,x) <= J_k(x,y)  -- 0 violations
+  [ok ] S5  diamond n=4        J(y,x)   <= J(x,y)  -- 0 violations
+
+==========================================================================
+S6  the DISJUNCTIVE branch is exactly what realisability gives: for every
+    hand-named poset, its own comparability branch contains its own measure
+==========================================================================
+  [ok ] S6  antichain n=3      comparable pairs have flip 0  -- []
+  [ok ] S6  antichain n=3      incomparable pairs are per-slot symmetric  -- []
+  [ok ] S6  chain n=3          comparable pairs have flip 0  -- []
+  [ok ] S6  chain n=3          incomparable pairs are per-slot symmetric  -- []
+  [ok ] S6  V n=3 (0<1,0<2)    comparable pairs have flip 0  -- []
+  [ok ] S6  V n=3 (0<1,0<2)    incomparable pairs are per-slot symmetric  -- []
+  [ok ] S6  L n=3 (0<2,1<2)    comparable pairs have flip 0  -- []
+  [ok ] S6  L n=3 (0<2,1<2)    incomparable pairs are per-slot symmetric  -- []
+  [ok ] S6  antichain n=4      comparable pairs have flip 0  -- []
+  [ok ] S6  antichain n=4      incomparable pairs are per-slot symmetric  -- []
+  [ok ] S6  chain n=4          comparable pairs have flip 0  -- []
+  [ok ] S6  chain n=4          incomparable pairs are per-slot symmetric  -- []
+  [ok ] S6  2+2 n=4            comparable pairs have flip 0  -- []
+  [ok ] S6  2+2 n=4            incomparable pairs are per-slot symmetric  -- []
+  [ok ] S6  N n=4              comparable pairs have flip 0  -- []
+  [ok ] S6  N n=4              incomparable pairs are per-slot symmetric  -- []
+  [ok ] S6  diamond n=4        comparable pairs have flip 0  -- []
+  [ok ] S6  diamond n=4        incomparable pairs are per-slot symmetric  -- []
+
+==========================================================================
+S7  MUTATION -- the reversed surrogate J_k(x,y) <= J_k(y,x) must FAIL on a real
+    poset, or S5 is passing vacuously
+==========================================================================
+  [ok ] S7a  reversed per-slot surrogate FAILS on the chain  -- 2 violations -- the check is not vacuous
+  [ok ] S7b  ... and the antichain, which satisfies BOTH directions, is not in M_n  -- max flip 1/2
+
+==========================================================================
+S8  SOLVER INVARIANCE -- the headline values must not depend on pivot order
+==========================================================================
+  [ok ] S8  n=4 branch value 1 under all 4 row/column orderings  -- ['1']
+  [ok ] S8  n=5 branch value 4/3 under all 4 row/column orderings  -- ['4/3']
+
+==========================================================================
+selftest: ALL PASS
+==========================================================================

@@ -1,0 +1,54 @@
+==============================================================================
+V1  BRANCH-FREE FORMS.  max E[inv_e] over measures on S_n, every pair flipped <= 1/3.
+    No posets are enumerated.
+==============================================================================
+
+### n = 5   C(n,2)/3 = 10/3   baseline eps_spec = n/(n+1) = 5/6
+  baseline  M_n only                         max E[inv] =     10/3   eps_spec =      5/6 = 0.833333   x baseline = 1
+                                             witness: 3 atoms, mass 1, max flip 1/3, per-slot-eq violations 9, agg-eq 6
+  LITERAL per-slot  J_k(x,y)=J_k(y,x)        INFEASIBLE  (phase-1 residual 1/3)     [UNSOUND -- excludes every poset]
+  LITERAL aggregate J(x,y)=J(y,x)            INFEASIBLE  (phase-1 residual 1/6)     [UNSOUND -- excludes every poset]
+  SURROGATE per-slot  J_k(y,x)<=J_k(x,y)     max E[inv] =     10/3   eps_spec =      5/6 = 0.833333   x baseline = 1
+                                             witness: 39 atoms, mass 1, max flip 1/3, per-slot-eq violations 11, agg-eq 6
+  SURROGATE aggregate J(y,x)<=J(x,y)         max E[inv] =     10/3   eps_spec =      5/6 = 0.833333   x baseline = 1
+                                             witness: 3 atoms, mass 1, max flip 1/3, per-slot-eq violations 10, agg-eq 4
+  -- witness for the SURROGATE per-slot form (the sound branch-free optimum):
+       mass 332/4041  perm (0, 1, 2, 3, 4)  inv=0
+       mass  98/1347  perm (0, 2, 1, 3, 4)  inv=1
+       mass 256/4041  perm (1, 2, 4, 3, 0)  inv=5
+       mass   28/449  perm (0, 2, 3, 1, 4)  inv=2
+       mass 250/4041  perm (1, 2, 3, 0, 4)  inv=3
+       mass 250/4041  perm (1, 2, 3, 4, 0)  inv=4
+       mass 241/4041  perm (0, 3, 1, 4, 2)  inv=3
+       mass 191/4041  perm (0, 1, 3, 2, 4)  inv=1
+       mass  55/1347  perm (3, 0, 4, 1, 2)  inv=5
+       mass 149/4041  perm (4, 0, 1, 2, 3)  inv=4
+       mass 136/4041  perm (4, 1, 0, 3, 2)  inv=6
+       mass 134/4041  perm (1, 4, 2, 0, 3)  inv=5
+       mass 134/4041  perm (3, 4, 0, 2, 1)  inv=7
+       mass   14/449  perm (1, 0, 3, 2, 4)  inv=2
+       mass 113/4041  perm (2, 3, 0, 4, 1)  inv=5
+       mass  37/1347  perm (1, 2, 4, 0, 3)  inv=4
+       mass 103/4041  perm (0, 1, 4, 3, 2)  inv=3
+       mass  32/1347  perm (2, 4, 0, 3, 1)  inv=6
+       mass  92/4041  perm (0, 4, 1, 2, 3)  inv=3
+       mass  29/1347  perm (0, 2, 4, 1, 3)  inv=3
+       mass    9/449  perm (0, 2, 3, 4, 1)  inv=3
+       mass  58/4041  perm (3, 0, 4, 2, 1)  inv=6
+       mass  50/4041  perm (0, 1, 3, 4, 2)  inv=2
+       mass  50/4041  perm (2, 3, 4, 0, 1)  inv=6
+       mass  14/1347  perm (0, 4, 3, 1, 2)  inv=5
+       mass  38/4041  perm (0, 2, 1, 4, 3)  inv=2
+       mass  38/4041  perm (3, 0, 2, 4, 1)  inv=5
+       mass  22/4041  perm (0, 2, 4, 3, 1)  inv=4
+       mass  22/4041  perm (1, 2, 0, 4, 3)  inv=3
+       mass  20/4041  perm (0, 3, 2, 4, 1)  inv=4
+       mass  20/4041  perm (2, 0, 4, 1, 3)  inv=4
+       mass  16/4041  perm (1, 2, 0, 3, 4)  inv=2
+       mass   5/1347  perm (0, 4, 3, 2, 1)  inv=6
+       mass  13/4041  perm (1, 3, 0, 4, 2)  inv=4
+       mass  13/4041  perm (3, 1, 0, 4, 2)  inv=5
+       mass  11/4041  perm (2, 4, 0, 1, 3)  inv=5
+       mass  11/4041  perm (2, 4, 1, 0, 3)  inv=6
+       mass   7/4041  perm (2, 3, 4, 1, 0)  inv=7
+       mass   2/4041  perm (1, 4, 0, 3, 2)  inv=5

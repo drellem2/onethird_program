@@ -1,0 +1,33 @@
+==============================================================================
+V2  DISJUNCTIVE VALUE -- max over the 2^C(n,2) comparable/incomparable branches
+==============================================================================
+
+### n = 5   baseline C(n,2)/3 = 10/3   baseline eps_spec = 5/6
+  per-slot               max E[inv] =      4/3   eps_spec =      1/3 = 0.333333   x baseline = 2/5   (116/1024 branches feasible)
+                         conjecture check: (n-1)/3 = 4/3   -> MATCH    2/(n+1) = 1/3 -> MATCH
+                         attained on comparable = [(0, 2), (0, 3), (1, 4), (2, 4)]   [is NOT a partial order]
+                         incomparable there = 6;  max incomparable over value>0 branches = 6  (n-1 = 4)
+                         witness: 3 atoms, mass 1, max flip 1/3
+                           mass      1/3  perm (0, 1, 2, 3, 4)  inv=0
+                           mass      1/3  perm (0, 2, 1, 4, 3)  inv=2
+                           mass      1/3  perm (1, 0, 3, 2, 4)  inv=2
+  aggregate              max E[inv] =      7/3   eps_spec =     7/12 = 0.583333   x baseline = 7/10   (136/1024 branches feasible)
+                         conjecture check: (n-1)/3 = 4/3   -> DIFFERS    2/(n+1) = 1/3 -> DIFFERS
+                         attained on comparable = [(0, 2), (0, 4)]   [IS a partial order]
+                         incomparable there = 8;  max incomparable over value>0 branches = 8  (n-1 = 4)
+                         witness: 3 atoms, mass 1, max flip 1/3
+                           mass      1/3  perm (0, 1, 2, 4, 3)  inv=1
+                           mass      1/3  perm (0, 2, 1, 3, 4)  inv=1
+                           mass      1/3  perm (3, 1, 0, 4, 2)  inv=5
+                         REALISABILITY CONTROL: uniform L(P) of that very poset has |L(P)|=40, E[inv]=13/4, max flip=5/8 (NOT in M_n)
+                           -> bound NOT attained by that poset  (gap -11/12)
+  CONTROL no-symmetry    max E[inv] =     10/3   eps_spec =      5/6 = 0.833333   x baseline = 1   (1024/1024 branches feasible)
+                         conjecture check: (n-1)/3 = 4/3   -> DIFFERS    2/(n+1) = 1/3 -> DIFFERS
+                         attained on comparable = {} (all pairs incomparable)   [IS a partial order]
+                         incomparable there = 10;  max incomparable over value>0 branches = 10  (n-1 = 4)
+                         witness: 3 atoms, mass 1, max flip 1/3
+                           mass      1/3  perm (0, 1, 4, 3, 2)  inv=3
+                           mass      1/3  perm (0, 2, 3, 4, 1)  inv=3
+                           mass      1/3  perm (1, 2, 3, 4, 0)  inv=4
+                         REALISABILITY CONTROL: uniform L(P) of that very poset has |L(P)|=120, E[inv]=5, max flip=1/2 (NOT in M_n)
+                           -> bound NOT attained by that poset  (gap -5/3)
