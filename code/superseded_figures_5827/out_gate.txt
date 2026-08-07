@@ -2,27 +2,75 @@
 ==============================================================================
 THE POPULATION THIS GATE ACTUALLY SEARCHED
 ==============================================================================
-  tracked text files scanned : 1754
+  tracked text files scanned : 1785
   registry entries           : 6  (eps_spec_budget, eps_leak_readoff, gap_factor, master_bound_rhs, crossover_n, claim72_threshold)
   regexes                    : 22
   declared authorities       : 3
 
-  A PASS below is a statement about THESE 1754 files and THESE 6 registry entries.
+
+  WHAT WAS NOT SEARCHED, SIZED RATHER THAN OMITTED:
+    tracked files of a non-text suffix : 17
+    this instrument's own transcripts  : 3  ['code/superseded_figures_5827/out_gate.txt', 'code/superseded_figures_5827/out_retrospective.txt', 'code/superseded_figures_5827/out_selftest.txt']
+    (the transcripts are OUT OF THE POPULATION, not merely exempt — they record
+     every occurrence the gate finds, so leaving them in made the census grow with
+     the number of times anyone had run it. See lib5827.excluded_from_population.)
+
+  A PASS below is a statement about THESE 1785 files and THESE 6 registry entries.
   It is not a statement that the corpus contains no stale figures.
 
 ==============================================================================
 GATE SCAN @ index
 ==============================================================================
-  TOTAL OCCURRENCES: 60   DEFECT=0  REPAIRED=26  AUTHORITY=23  FROZEN=11
+  TOTAL OCCURRENCES: 115   DEFECT=0  REPAIRED=46  AUTHORITY=43  FROZEN=26
 
   --- DEFECT (0) ---
     (none)
 
-  --- REPAIRED (26) ---
+  --- REPAIRED (46) ---
+    STATE.md:15  [eps_spec_budget]  '2×10⁻⁴'
+        > **L1b (the wall):** `δ(P) < 1/3` ⟹ **`1 − λ_std ≤ ε_spec`** for an *explicit absolute constant, uniform...
+    STATE.md:15  [gap_factor]  '5×10³'
+        > **L1b (the wall):** `δ(P) < 1/3` ⟹ **`1 − λ_std ≤ ε_spec`** for an *explicit absolute constant, uniform...
+    code/libweak_audit_c4f5/OUTCOMES.md:22  [eps_spec_budget]  '2×10⁻⁴'
+        | **P13** | `~50` right, parent's `~5×10³` stale by 100×; **exactly 3** superseded figures | **HIT** | `2...
+    code/libweak_audit_c4f5/OUTCOMES.md:22  [gap_factor]  '5×10³'
+        | **P13** | `~50` right, parent's `~5×10³` stale by 100×; **exactly 3** superseded figures | **HIT** | `2...
+    code/libweak_audit_c4f5/PREDICTIONS.md:31  [eps_spec_budget]  '2×10⁻⁴'
+        merged 2026-07-29 `3710d28`) F5 replaces `ε_spec ≲ 2×10⁻⁴` with `ε_spec ≲ 2×10⁻²` (100× larger),
+    code/libweak_audit_c4f5/PREDICTIONS.md:32  [crossover_n]  'crossover `10⁵'
+        crossover `10⁵ → n ≈ 900`. STATE.md at `81214a9^` (i.e. as it stood when mg-c3ca was written)
+    code/libweak_audit_c4f5/PREDICTIONS.md:33  [eps_spec_budget]  '2×10⁻⁴'
+        carries, in bold: *"do not carry `2×10⁻⁴` or the `n ≈ 10⁵` crossover as flat text"*. The parent's
+    code/libweak_audit_c4f5/PREDICTIONS.md:34  [eps_spec_budget]  '2×10⁻⁴'
+        §2.3 carries `2×10⁻⁴`, `~5×10³` and `~10⁵` as flat text, citing mg-88bd §7.4.
+    code/libweak_audit_c4f5/PREDICTIONS.md:34  [gap_factor]  '5×10³'
+        §2.3 carries `2×10⁻⁴`, `~5×10³` and `~10⁵` as flat text, citing mg-88bd §7.4.
+    code/libweak_audit_c4f5/PREDICTIONS.md:158  [gap_factor]  '5×10³'
+        **P13. The `~50` is RIGHT and the parent's `~5×10³` is STALE BY 100×.** I predict I will confirm
+    code/libweak_audit_c4f5/PREDICTIONS.md:160  [eps_spec_budget]  '2×10⁻⁴'
+        parent's doc contains **exactly 3** superseded-calibration figures (`2×10⁻⁴`, `5×10³`, `10⁵`),
+    code/libweak_audit_c4f5/PREDICTIONS.md:160  [gap_factor]  '5×10³'
+        parent's doc contains **exactly 3** superseded-calibration figures (`2×10⁻⁴`, `5×10³`, `10⁵`),
+    code/libweak_audit_c4f5/README.md:51  [gap_factor]  '5×10³'
+        | `a6_calibration` | the `(LIB-weak)`/`(LIB-const)` gap; `Δ_AT` drift; bound words | `~50` vs the parent'...
     docs/OneThird-LIBweak-mg-c3ca.md:88  [eps_spec_budget]  '2×10⁻⁴'
         — while the consumer wants ~~`ε_spec ≈ 2×10⁻⁴`~~ **`ε_spec ≈ 2×10⁻²`**. A factor of
     docs/OneThird-LIBweak-mg-c3ca.md:89  [gap_factor]  '5×10³'
         ~~`~5×10³`~~ **`~50`**, with no `n` in it. **[SUPERSEDED INPUT REPAIRED — mg-e35c F5, landed
+    docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:33  [eps_spec_budget]  '2×10⁻⁴'
+        at the parent's own base commit.** §2.3 carries `2×10⁻⁴`, `~5×10³` and `~10⁵` as flat text.
+    docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:33  [gap_factor]  '5×10³'
+        at the parent's own base commit.** §2.3 carries `2×10⁻⁴`, `~5×10³` and `~10⁵` as flat text.
+    docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:35  [eps_spec_budget]  '2×10⁻⁴'
+        STATE.md at `81214a9^` reads: *"do not carry `2×10⁻⁴` or the `n ≈ 10⁵` crossover as flat
+    docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:223  [gap_factor]  '5×10³'
+        ### 5.2 The `~50` is right and the parent's `~5×10³` is stale by 100×
+    docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:231  [eps_spec_budget]  '2×10⁻⁴'
+        | `2×10⁻⁴` | **5 000** | mg-88bd §6.4 — carried by mg-c3ca §2.3 |
+    docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:234  [eps_spec_budget]  '2×10⁻⁴'
+        `2×10⁻⁴`, `5×10³` and `10⁵` each appear **exactly once** in the parent, as flat text, at lines 88
+    docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:234  [gap_factor]  '5×10³'
+        `2×10⁻⁴`, `5×10³` and `10⁵` each appear **exactly once** in the parent, as flat text, at lines 88
     docs/OneThird-lambda-std-Operative-Form.md:26  [eps_spec_budget]  '2×10⁻⁴'
         > | `ε_spec` budget | `≲ 2×10⁻⁴` | **`≲ 2×10⁻²`** | 100× too small |
     docs/OneThird-lambda-std-Operative-Form.md:27  [gap_factor]  '5×10³'
@@ -72,13 +120,53 @@ GATE SCAN @ index
     docs/OneThird-lambda-std-Operative-Form.md:706  [eps_spec_budget]  '2×10⁻⁴'
         > small (budget ~~`ε_spec ≲ 2×10⁻⁴`~~ **`≲ 2×10⁻²`**, resting on mg-3ce3's empirical modulus and on
 
-  --- AUTHORITY (23) ---
+  --- AUTHORITY (43) ---
+    code/superseded_figures_5827/OUTCOMES.md:33  [eps_leak_readoff]  'ε_leak ≈ 0.02'
+        > order of magnitude above the `ε_leak ≈ 0.02` the constant budget needs**, and found 0 RED events in
     code/superseded_figures_5827/PREDICTIONS.md:18  [eps_spec_budget]  '2×10⁻⁴'
         * **M1.** `docs/OneThird-lambda-std-Operative-Form.md` carried the superseded `ε_spec = 2×10⁻⁴` and
     code/superseded_figures_5827/PREDICTIONS.md:26  [eps_spec_budget]  '2×10⁻⁴'
         *"do not carry `2×10⁻⁴` or the `n ≈ 10⁵` crossover as flat text"*, together with both the
     code/superseded_figures_5827/PREDICTIONS.md:34  [eps_spec_budget]  '2×10⁻⁴'
         * **M7.** `git grep` for `2×10⁻⁴` at `f85a4e8~1` (mg-2860's base commit, `f758468`) returns **5
+    code/superseded_figures_5827/README.md:96  [eps_leak_readoff]  'ε_leak ≈ 0.02'
+        order of magnitude above the `ε_leak ≈ 0.02` the constant budget needs"*. At the repaired
+    code/superseded_figures_5827/registry.json:26  [eps_spec_budget]  '2e-4'
+        "title": "eps_spec budget: 2e-4 superseded by 2e-2",
+    code/superseded_figures_5827/registry.json:27  [eps_spec_budget]  '2×10⁻⁴'
+        "superseded": "2×10⁻⁴",
+    code/superseded_figures_5827/registry.json:35  [eps_spec_budget]  '2×10⁻⁴'
+        "2×10⁻⁴",
+    code/superseded_figures_5827/registry.json:37  [eps_spec_budget]  '2e-4'
+        "2e-4(?![0-9])",
+    code/superseded_figures_5827/registry.json:59  [gap_factor]  '5e3'
+        "title": "remaining gap factor: ~5e3 superseded by ~50",
+    code/superseded_figures_5827/registry.json:60  [gap_factor]  '5×10³'
+        "superseded": "5×10³",
+    code/superseded_figures_5827/registry.json:65  [eps_spec_budget]  '2e-4'
+        "why": "the gap factor is 1 / eps_spec up to the constant, so it moves with the budget: 1/2e-2 ~ 50, not ...
+    code/superseded_figures_5827/registry.json:68  [gap_factor]  '5×10³'
+        "5×10³",
+    code/superseded_figures_5827/registry.json:70  [gap_factor]  '5e3'
+        "5e3(?![0-9])",
+    code/superseded_figures_5827/registry.json:71  [gap_factor]  '5,000'
+        "~?\\s*5,000\\b",
+    code/superseded_figures_5827/registry.json:77  [master_bound_rhs]  '3.3e-5'
+        "title": "master-bound RHS constant: 3.3e-5 superseded by 3.3e-3",
+    code/superseded_figures_5827/registry.json:78  [master_bound_rhs]  '3.3×10⁻⁵'
+        "superseded": "3.3×10⁻⁵",
+    code/superseded_figures_5827/s1_control.py:118  [eps_spec_budget]  '2×10⁻⁴'
+        "`2×10⁻⁴` over there.\n",
+    code/superseded_figures_5827/s1_control.py:127  [eps_spec_budget]  '2×10⁻⁴'
+        build_tree(e, {"docs/state-history/deep/note.md": "budget `2×10⁻⁴` as flat text\n"})
+    code/superseded_figures_5827/s1_control.py:137  [eps_spec_budget]  '2×10⁻⁴'
+        fh.write("budget `2×10⁻⁴` as flat text\n")
+    code/superseded_figures_5827/s1_control.py:160  [eps_spec_budget]  '2×10⁻⁴'
+        "do not carry `2×10⁻⁴` as flat text; the repaired value is `2×10⁻²`\n",
+    code/superseded_figures_5827/s1_control.py:187  [eps_spec_budget]  '2×10⁻⁴'
+        "> the budget is `2×10⁻⁴` and this block says nothing about it\n",
+    code/superseded_figures_5827/s1_control.py:207  [eps_spec_budget]  '2×10⁻⁴'
+        build_tree(j, {"docs/paper.md": "the budget is `2×10⁻⁴` as flat text\n"})
     docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:111  [eps_spec_budget]  '2×10⁻⁴'
         Everything else (`2×10⁻⁴`, `3.3×10⁻⁵`, `5×10³`, `10⁵`, `n ≥ 101`, `n^{−1.82}`, `n^{−3.64}`,
     docs/OneThird-lambda-std-Operative-Form-IndependentAudit.md:111  [gap_factor]  '5×10³'
@@ -120,9 +208,39 @@ GATE SCAN @ index
     docs/state-history/attempt-mg-88bd.md:98  [eps_spec_budget]  '2×10⁻⁴'
         **The form, and it is CONDITIONAL — record the condition, not just the form.** The architecture consumes ...
 
-  --- FROZEN (11) ---
+  --- FROZEN (26) ---
     code/direct_prefix_audit_2de0/out_a4_requirements.txt:83  [eps_leak_readoff]  'eps_leak=0.02'
         eps_leak=0.02: headline 150.0x  vs  beta=1/4 honest 112.50x
+    code/libweak_audit_c4f5/a6_calibration.py:39  [eps_spec_budget]  '2e-4'
+        for eps, src in ((2e-4, "mg-88bd Sec.6.4 / mg-c3ca Sec.2.3"),
+    code/libweak_audit_c4f5/a6_calibration.py:46  [eps_spec_budget]  '2e-4'
+        print("  So the SAME arithmetic gives ~5x10^3 at 2e-4 and ~50 at 2e-2, and the gap")
+    code/libweak_audit_c4f5/a6_calibration.py:47  [eps_spec_budget]  '2e-4'
+        print("  factor is exactly 1/eps_spec (times n/(n+1)):  1/2e-4 = %g, 1/2e-2 = %g."
+    code/libweak_audit_c4f5/a6_calibration.py:48  [eps_spec_budget]  '2e-4'
+        % (1 / 2e-4, 1 / 2e-2))
+    code/libweak_audit_c4f5/a6_calibration.py:49  [eps_spec_budget]  '2e-4'
+        print("  mg-c3ca Sec.2.3 prints the 2e-4 branch. STATE.md, at the commit mg-c3ca was")
+    code/libweak_audit_c4f5/a6_calibration.py:77  [eps_spec_budget]  '2e-4'
+        print("  (At the SUPERSEDED eps_spec = 2e-4 the same construction runs to 10^%.0f.)"
+    code/libweak_audit_c4f5/a6_calibration.py:78  [eps_spec_budget]  '2e-4'
+        % (math.log10(2) * 6 / 2e-4))
+    code/libweak_audit_c4f5/a6_calibration.py:138  [eps_spec_budget]  '2×10⁻⁴'
+        for pat in ["2×10⁻⁴", "5×10³", "10⁵"]:
+    code/libweak_audit_c4f5/a6_calibration.py:138  [gap_factor]  '5×10³'
+        for pat in ["2×10⁻⁴", "5×10³", "10⁵"]:
+    code/libweak_audit_c4f5/out_a6_calibration.txt:19  [eps_spec_budget]  '2e-4'
+        So the SAME arithmetic gives ~5x10^3 at 2e-4 and ~50 at 2e-2, and the gap
+    code/libweak_audit_c4f5/out_a6_calibration.txt:20  [eps_spec_budget]  '2e-4'
+        factor is exactly 1/eps_spec (times n/(n+1)):  1/2e-4 = 5000, 1/2e-2 = 50.
+    code/libweak_audit_c4f5/out_a6_calibration.txt:21  [eps_spec_budget]  '2e-4'
+        mg-c3ca Sec.2.3 prints the 2e-4 branch. STATE.md, at the commit mg-c3ca was
+    code/libweak_audit_c4f5/out_a6_calibration.txt:38  [eps_spec_budget]  '2e-4'
+        (At the SUPERSEDED eps_spec = 2e-4 the same construction runs to 10^9031.)
+    code/libweak_audit_c4f5/out_a6_calibration.txt:74  [eps_spec_budget]  '2×10⁻⁴'
+        2×10⁻⁴   : 1 occurrence(s) at line(s) [88]
+    code/libweak_audit_c4f5/out_a6_calibration.txt:75  [gap_factor]  '5×10³'
+        5×10³    : 1 occurrence(s) at line(s) [88]
     code/state_audit_6a2f/out_audit.txt:1122  [eps_spec_budget]  '2×10⁻⁴'
         + Their live consequences:** — [row history H5](docs/state-history/attempt-mg-88bd.md). The consequence i...
     code/state_delegation_repair_a74f/out_run_all.txt:152  [gap_factor]  '5e3'
@@ -150,23 +268,23 @@ DIRECTION OF EACH REGISTERED ERROR
   Size is not the whole story. A stale figure that makes things look BETTER and one
   that makes them look WORSE fail differently.
 
-  eps_spec_budget        occurrences=30
+  eps_spec_budget        occurrences=64
     2×10⁻⁴ -> 2×10⁻²   (mg-e35c F5)
     DIRECTION: the stale value INFLATES PESSIMISM 100x
 
-  eps_leak_readoff       occurrences=5
+  eps_leak_readoff       occurrences=7
     0.02 -> 0.20   (mg-e35c F5)
     DIRECTION: the stale value INFLATES PESSIMISM (it is the square root of the budget error)
 
-  gap_factor             occurrences=13
+  gap_factor             occurrences=29
     5×10³ -> 50   (mg-e35c F5 (derived); struck in the primary doc by mg-5827)
     DIRECTION: the stale value INFLATES PESSIMISM 100x -- THIS IS THE NUMBER THAT TELLS A READER HOW FAR THE WALL IS
 
-  master_bound_rhs       occurrences=7
+  master_bound_rhs       occurrences=9
     3.3×10⁻⁵ -> 3.3×10⁻³   (mg-e35c F5 (derived))
     DIRECTION: the stale value INFLATES PESSIMISM 100x
 
-  crossover_n            occurrences=4
+  crossover_n            occurrences=5
     n ≈ 10⁵ -> n ≈ 900   (mg-e35c F5)
     DIRECTION: the stale value OVERSTATES the range in which the weaker form is numerically harder -- it makes 'every plausible range' look true when it is OVERSTATED
 

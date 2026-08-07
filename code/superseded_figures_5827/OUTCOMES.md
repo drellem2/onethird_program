@@ -9,8 +9,8 @@ kept as written.** Four of twelve are misses.
 | **P2** | 0 flat-text sites *inside* `STATE.md` at that commit — the whole miss is the file boundary | **HIT** | **0** |
 | **P3** | the positive control fires | **HIT** | C1: 2 defects, exit 1 |
 | **P4** | the mutation test kills both constant detectors | **HIT** | always-DEFECT fails C2; always-CLEAN fails C1 |
-| **P5** | 0 flat-text sites at HEAD in `docs/` and `STATE.md` | **HIT** | 0, over 1,754 tracked text files |
-| **P6** | a non-empty NOT-a-defect set, point estimate **> 15** | **HIT** | 60 occurrences total: 26 `REPAIRED`, 23 `AUTHORITY`, 11 `FROZEN`, 0 `DEFECT` |
+| **P5** | 0 flat-text sites at HEAD in `docs/` and `STATE.md` | **HIT** | 0, over 1,754 tracked text files at the time of writing; **0 again after rebasing onto a `main` that had moved by three commits**, over a population that grew to 115 occurrences |
+| **P6** | a non-empty NOT-a-defect set, point estimate **> 15** | **HIT** | at the time of prediction, 60 occurrences: 26 `REPAIRED`, 23 `AUTHORITY`, 11 `FROZEN`, 0 `DEFECT`. **After the rebase onto the moved `main`: 115 = 46 / 43 / 26 / 0.** Both figures are printed rather than the later one substituted for the earlier. |
 | **P7** | ≥ 1 occurrence in a committed transcript under `code/`; named `code/state_audit_6a2f/out_audit.txt` | **HIT** | 11 occurrences across **7** transcripts, the named one among them |
 | **P8** | the proximity rule misfires, and the failure is a **false NEGATIVE** | **HIT on direction, and it was worse than predicted** | it misfired **twice**, in both directions. The false negative is the one that matters and is exactly as predicted: `repair_markers` held `STRUCK`, matched case-insensitively, so the ordinary word *"struck"* nearby laundered a live figure. Found by control C4, which I wrote to test something else. |
 | **P9** | `docs/state-of-the-wall.html` carries 0 occurrences of the superseded constants | **HIT** | 0 — it carries the stale *SPREAD sentence* but no stale *figure* |
@@ -45,7 +45,7 @@ and cannot be inferred from the correction.
 
 ---
 
-## The three defects of this instrument, left in the code
+## The four defects of this instrument, left in the code
 
 1. **C4 failed on the first form, in the false-negative direction.** `STRUCK` matched
    case-insensitively laundered live figures near the ordinary word *"struck"*. A detector that
@@ -54,7 +54,16 @@ and cannot be inferred from the correction.
 2. **The ±6-line window cut a supersession box in half** and called its own tail a live claim.
    Repaired structurally (blockquote = one annotation unit), not by widening, and the new exemption
    is bounded by controls C10/C11 so one blockquote cannot silence another.
-3. **The retrospective's 23 is not a blind measurement.** The registry was written by someone who
+3. **THE CENSUS WAS NOT A FIXED POINT.** `out_gate.txt` is a tracked file that records every
+   occurrence found, so the next run re-found all of them inside the transcript: **691
+   self-occurrences against 46 real ones**, and a total that grew with the number of times anyone
+   had run it. Classifying them `AUTHORITY` did not help — an exempt occurrence is still counted.
+   Repaired by removing the transcripts from the population outright, with what was dropped printed
+   by name, and held by control `C12`. **It surfaced only because `main` moved under this branch
+   mid-ticket** (mg-c4f5, mg-957a and the literature bound all landed while this was in flight) and
+   the total jumped 60 → 331. That is the population-moves-under-my-own-hand trap; it fired, and it
+   fired on the instrument rather than on the subject.
+4. **The retrospective's 23 is not a blind measurement.** The registry was written by someone who
    already knew where the sites were. Stated in `s2`'s own output section 6, not only here.
 
 ## What was not checked

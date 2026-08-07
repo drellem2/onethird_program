@@ -56,7 +56,7 @@ list of line numbers has no way to grow.**
 
 ## The positive control — because a sweep that has never fired is indistinguishable from a broken one
 
-`s1_control.py`, **23 constructions in throwaway git repositories outside this tree**:
+`s1_control.py`, **27 constructions in throwaway git repositories outside this tree**:
 
 * **C1** plants the exact sentence that was live in the primary document tonight and watches the
   detector report it — **2 defects, exit 1**.
@@ -68,6 +68,7 @@ list of line numbers has no way to grow.**
 * **C4–C11** cover the blind spots the arc has been bitten by: an unmatched `~~`, a nested directory
   a glob could not reach, an untracked file, a revision scan, a declared authority, path-prefix
   matching (`code/` must not swallow `codex/`), and the bound on the blockquote exemption.
+* **C12** is the fixed-point control: writing the census down must not change the census.
 
 ## Defects of this instrument, found by its own controls and left recorded
 
@@ -81,7 +82,16 @@ list of line numbers has no way to grow.**
    claim. Repaired *structurally* — a markdown blockquote is one annotation unit — rather than by
    widening the window, because widening buys the same coverage in exchange for false negatives.
    `C10`/`C11` bound the new exemption so one blockquote cannot silence another.
-3. **The hand sweep of `c413c9e` missed a site and this instrument found it**:
+3. **THE CENSUS WAS NOT A FIXED POINT, AND THE NUMBER IT PRINTED GREW EVERY TIME ANYONE RAN IT.**
+   `out_gate.txt` records every occurrence the gate finds, and the transcript is a tracked file, so
+   the next run found all of them again *inside the transcript*: **691 self-occurrences against 46
+   real ones**. Bucketing them as `AUTHORITY` was not enough — an exempt occurrence is still
+   *counted*, so the printed totals were a fiction. The transcripts are now **out of the
+   population**, not merely exempt (`registry.json` and the scripts stay in, so the instrument
+   remains visible to itself), and `s3_gate.py` prints what it dropped by name. Control `C12` holds
+   the property. Found only because `main` moved under this branch mid-ticket and the total jumped
+   from 60 to 331 — which is the population-moves-under-my-own-hand trap, and it fired.
+4. **The hand sweep of `c413c9e` missed a site and this instrument found it**:
    `docs/OneThird-lambda-std-Operative-Form.md` §7.1 told the reader the empirical probe ran *"an
    order of magnitude above the `ε_leak ≈ 0.02` the constant budget needs"*. At the repaired
    calibration `ε_leak ≈ 0.20`, so the probe ran at **exactly** the budget, not above it — and that

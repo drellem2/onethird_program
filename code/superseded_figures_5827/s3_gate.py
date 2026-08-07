@@ -28,6 +28,21 @@ def main() -> int:
     print("  regexes                    : %d" % sum(len(e["patterns"]) for e in reg.entries))
     print("  declared authorities       : %d" % len(reg.authorities))
     print()
+    import subprocess as _sp
+    all_tracked = [n for n in _sp.run(["git", "ls-files", "-z"], capture_output=True)
+                   .stdout.decode("utf-8", "replace").split("\0") if n]
+    dropped = [n for n in all_tracked if L.excluded_from_population(n)]
+    non_text = [n for n in all_tracked
+                if not n.endswith(L.TEXT_SUFFIXES) and not L.excluded_from_population(n)]
+    print()
+    print("  WHAT WAS NOT SEARCHED, SIZED RATHER THAN OMITTED:")
+    print("    tracked files of a non-text suffix : %d" % len(non_text))
+    print("    this instrument's own transcripts  : %d  %s"
+          % (len(dropped), sorted(dropped)))
+    print("    (the transcripts are OUT OF THE POPULATION, not merely exempt — they record")
+    print("     every occurrence the gate finds, so leaving them in made the census grow with")
+    print("     the number of times anyone had run it. See lib5827.excluded_from_population.)")
+    print()
     print("  A PASS below is a statement about THESE %d files and THESE %d registry entries."
           % (len(files), len(reg.entries)))
     print("  It is not a statement that the corpus contains no stale figures.")

@@ -196,6 +196,33 @@ def main() -> int:
         check("C11 span is maximal but bounded", L._blockquote_span(
             ["> a", "> b", "", "> c"], 2), (0, 2))
 
+        # ------------------- C12: THE CENSUS MUST BE A FIXED POINT UNDER ITS OWN TRANSCRIPT
+        print(L.banner("C12 — the census must not change because the census was written down"))
+        print("  THIS IS A REPAIR OF A DEFECT THIS INSTRUMENT HAD. out_gate.txt records every")
+        print("  occurrence found, so on the next run the gate found all of them AGAIN inside")
+        print("  the transcript: 691 self-occurrences against 46 real ones, and a total that")
+        print("  grew with the number of times anyone had run it. A census that is not a fixed")
+        print("  point is not a census.")
+        j = os.path.join(tmp, "arm_fixedpoint")
+        build_tree(j, {"docs/paper.md": "the budget is `2×10⁻⁴` as flat text\n"})
+        before = run(j, reg)
+        # Write a transcript INTO the tree, exactly as run_all.sh does, and re-census.
+        os.makedirs(os.path.join(j, "code/superseded_figures_5827"), exist_ok=True)
+        with open(os.path.join(j, "code/superseded_figures_5827/out_gate.txt"), "w") as fh:
+            fh.write(L.render(before, L.DEFECT) + "\n")
+        subprocess.run(["git", "add", "-A"], cwd=j, check=True, capture_output=True)
+        subprocess.run(["git", "-c", "user.email=t@t", "-c", "user.name=t",
+                        "commit", "-qm", "transcript"], cwd=j, check=True, capture_output=True)
+        after = run(j, reg)
+        check("C12 total is unchanged by its own transcript", len(after), len(before),
+              "before=%d after=%d" % (len(before), len(after)))
+        check("C12 defect count unchanged", len(L.defects(after)), len(L.defects(before)))
+        check("C12 the transcript is OUT OF THE POPULATION, not merely exempt",
+              L.excluded_from_population("code/superseded_figures_5827/out_gate.txt"), True)
+        check("C12 the registry stays IN the population",
+              L.excluded_from_population("code/superseded_figures_5827/registry.json"), False,
+              "the instrument must remain visible to itself")
+
         print(L.banner("CONTROL SUMMARY"))
         print("  %d constructions, %d failure(s): %s"
               % (COUNT, len(FAILURES), ", ".join(FAILURES) if FAILURES else "none"))

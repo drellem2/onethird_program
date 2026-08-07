@@ -98,6 +98,25 @@ class Registry:
         return [a["path"] for a in self.authorities]
 
 
+def excluded_from_population(path: str) -> bool:
+    """This instrument's own TRANSCRIPTS are not part of the population it measures.
+
+    THIS IS A REPAIR OF A DEFECT THIS INSTRUMENT HAD. `out_gate.txt` records every occurrence
+    the gate found, so the next run finds all of them again INSIDE the transcript — 691
+    self-occurrences on the run that caught it, against 46 real ones. The census was not even a
+    fixed point: its own output changed the number it printed on the next run, and the total
+    grew monotonically with the number of times anyone had run it.
+
+    Bucketing them as AUTHORITY was not enough. An exempt occurrence is still COUNTED, and the
+    printed totals were therefore a fiction. They have to leave the population.
+
+    Only the transcripts. `registry.json`, the scripts and the prose stay in the population and
+    are exempted by the AUTHORITY rule, so this instrument is still visible to itself.
+    """
+    base = os.path.basename(path)
+    return path.startswith("code/superseded_figures_5827/") and base.startswith("out_")
+
+
 def tracked_files(rev: str | None = None, root: str | None = None) -> list[str]:
     """Every tracked text file, from git — not from a glob.
 
@@ -111,7 +130,8 @@ def tracked_files(rev: str | None = None, root: str | None = None) -> list[str]:
         cmd = ["git", "ls-tree", "-r", "-z", "--name-only", rev]
     out = subprocess.run(cmd, cwd=root, check=True, capture_output=True).stdout
     names = [n for n in out.decode("utf-8", "replace").split("\0") if n]
-    return sorted(n for n in names if n.endswith(TEXT_SUFFIXES))
+    return sorted(n for n in names
+                  if n.endswith(TEXT_SUFFIXES) and not excluded_from_population(n))
 
 
 def read_file(path: str, rev: str | None = None, root: str | None = None) -> list[str]:

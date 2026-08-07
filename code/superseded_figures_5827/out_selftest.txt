@@ -77,6 +77,19 @@ C11 — the blockquote span must not run to end-of-file
   [PASS] C11 span is maximal but bounded                            got=(0, 2) want=(0, 2)
 
 ==============================================================================
+C12 — the census must not change because the census was written down
+==============================================================================
+  THIS IS A REPAIR OF A DEFECT THIS INSTRUMENT HAD. out_gate.txt records every
+  occurrence found, so on the next run the gate found all of them AGAIN inside
+  the transcript: 691 self-occurrences against 46 real ones, and a total that
+  grew with the number of times anyone had run it. A census that is not a fixed
+  point is not a census.
+  [PASS] C12 total is unchanged by its own transcript               got=1 want=1  -- before=1 after=1
+  [PASS] C12 defect count unchanged                                 got=1 want=1
+  [PASS] C12 the transcript is OUT OF THE POPULATION, not merely exempt got=True want=True
+  [PASS] C12 the registry stays IN the population                   got=False want=False  -- the instrument must remain visible to itself
+
+==============================================================================
 CONTROL SUMMARY
 ==============================================================================
-  23 constructions, 0 failure(s): none
+  27 constructions, 0 failure(s): none
