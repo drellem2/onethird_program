@@ -1,0 +1,71 @@
+====================================================================================================
+mg-00a1 / s3 -- the reduction, and the families that die
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+PART A -- val(C) <= val(tc(C)) : the maximum sits on a transitively closed branch
+----------------------------------------------------------------------------------------------------
+
+  Why it is true (the document has the proof): the columns of C and of tc(C) are
+  the SAME set -- a permutation respecting C respects tc(C) -- while a pair in
+  tc(C)\C is called incomparable by C and therefore carries per-slot rows
+  J_k(i,j) = J_k(j,i); no column flips it, so J_k(j,i) = 0 and the row reads
+  J_k(i,j) = 0, a constraint tc(C) does not impose.  So feasible(C) is contained
+  in feasible(tc(C)) and the value can only rise.  Checked:
+
+  n=4 (ALL 64 branches):  64 branches, 0 violations of val(C) <= val(tc(C))
+        max over all tested = 1;  max over transitively closed = 1;  ATTAINED ON A CLOSED BRANCH
+  n=5 (ALL 1024 branches):  1024 branches, 0 violations of val(C) <= val(tc(C))
+        max over all tested = 4/3;  max over transitively closed = 4/3;  ATTAINED ON A CLOSED BRANCH
+
+----------------------------------------------------------------------------------------------------
+PART B -- two disjoint chains: quadratic |I| = ab, and INFEASIBLE at every (a,b)
+----------------------------------------------------------------------------------------------------
+
+    a   b   n   |I|  columns   status
+    1   1   2     1        2   INFEASIBLE (phase-1 residual 1/3)
+    1   2   3     2        3   INFEASIBLE (phase-1 residual 1/2)
+    1   3   4     3        4   INFEASIBLE (phase-1 residual 5/9)
+    1   4   5     4        5   INFEASIBLE (phase-1 residual 7/12)
+    1   5   6     5        6   INFEASIBLE (phase-1 residual 3/5)
+    2   2   4     4        6   INFEASIBLE (phase-1 residual 5/9)
+    2   3   5     6       10   INFEASIBLE (phase-1 residual 7/12)
+    2   4   6     8       15   INFEASIBLE (phase-1 residual 3/5)
+    2   5   7    10       21   INFEASIBLE (phase-1 residual 11/18)
+    3   3   6     9       20   INFEASIBLE (phase-1 residual 3/5)
+    3   4   7    12       35   INFEASIBLE (phase-1 residual 11/18)
+    3   5   8    15       56   INFEASIBLE (phase-1 residual 13/21)
+    4   4   8    16       70   INFEASIBLE (phase-1 residual 13/21)
+    4   5   9    20      126   INFEASIBLE (phase-1 residual 5/8)
+    5   5  10    25      252   INFEASIBLE (phase-1 residual 17/27)
+
+  Every one infeasible, and the phase-1 residual RISES with n.  The obvious way
+  to get quadratically many incomparable pairs does not survive the 1/3 caps.
+
+----------------------------------------------------------------------------------------------------
+PART C -- bands: s = 1 is mg-131e's (n-1)/3; every s >= 2 is INFEASIBLE
+----------------------------------------------------------------------------------------------------
+
+    s   n   |I|  columns   value / status
+    1   3     2        3   2/3  = (n-1)/3
+    1   4     3        5   1  = (n-1)/3
+    1   5     4        8   4/3  = (n-1)/3
+    1   6     5       13   5/3  = (n-1)/3
+    1   7     6       21   2  = (n-1)/3
+    1   8     7       34   7/3  = (n-1)/3
+    1   9     8       55   8/3  = (n-1)/3
+    1  10     9       89   3  = (n-1)/3
+    2   4     5       12   INFEASIBLE
+    2   5     7       25   INFEASIBLE
+    2   6     9       57   INFEASIBLE
+    2   7    11      124   INFEASIBLE
+    2   8    13      268   INFEASIBLE
+    3   5     9       60   INFEASIBLE
+    3   6    12      150   INFEASIBLE
+    3   7    15      399   INFEASIBLE
+    3   8    18     1145   (skipped: too many columns)
+
+  So a feasible branch cannot be locally dense either.  s1's family threads
+  between B and C: quadratically many incomparable pairs, but arranged as a
+  staircase between two chains rather than as a block or a band.
+
