@@ -1,0 +1,65 @@
+==================================================================================
+D1  DUAL CERTIFICATES for the `<=` direction of mg-200d's disjunctive value.
+    Every branch is discharged by a dual vector verified by DIRECT ARITHMETIC
+    (lib131e.verify_dual -- no simplex).  The TIER a branch needs is the finding.
+==================================================================================
+
+### n = 3   target (n-1)/3 = 2/3   branches 2^C(n,2) = 8
+  branches visited                : 8
+  primal classes                  : infeasible=5, positive=1, zero=2
+  strong duality (dual opt == mg-200d's primal opt) checked on : 3 feasible branches, 0 failures
+  certificate tier needed         : tier0(trivial, a theorem at all n)=7  tier1(consecutive, a formula in n)=0  tier2(solver, no formula)=1  none=0
+  every branch certified at <= 2/3 : YES   (max certified bound over branches = 2/3)
+  tier x primal class (a tier-2 certificate on an INFEASIBLE branch is VACUOUS):
+      ('infeasible', 0)            4
+      ('infeasible', 2)            1
+      ('positive', 0)              1
+      ('zero', 0)                  2
+  FEASIBLE branches needing tier 2 (the ONLY informative hard cases): 0
+  branches attaining the max 2/3: 1
+      C=[(0, 2)]  |I|=2 active=2  trivial bound=2/3  tier=0
+  [0.0s]
+
+### n = 4   target (n-1)/3 = 1   branches 2^C(n,2) = 64
+  branches visited                : 64
+  primal classes                  : infeasible=51, positive=5, zero=8
+  strong duality (dual opt == mg-200d's primal opt) checked on : 13 feasible branches, 0 failures
+  certificate tier needed         : tier0(trivial, a theorem at all n)=46  tier1(consecutive, a formula in n)=0  tier2(solver, no formula)=18  none=0
+  every branch certified at <= 1 : YES   (max certified bound over branches = 1)
+  tier x primal class (a tier-2 certificate on an INFEASIBLE branch is VACUOUS):
+      ('infeasible', 0)            33
+      ('infeasible', 2)            18
+      ('positive', 0)              5
+      ('zero', 0)                  8
+  FEASIBLE branches needing tier 2 (the ONLY informative hard cases): 0
+  branches attaining the max 1: 1
+      C=[(0, 2), (0, 3), (1, 3)]  |I|=3 active=3  trivial bound=1  tier=0
+  [1.9s]
+
+### n = 5   target (n-1)/3 = 4/3   branches 2^C(n,2) = 1024
+  branches visited                : 1024
+  primal classes                  : infeasible=908, positive=52, zero=64
+  strong duality (dual opt == mg-200d's primal opt) checked on : 116 feasible branches, 0 failures
+  certificate tier needed         : tier0(trivial, a theorem at all n)=636  tier1(consecutive, a formula in n)=0  tier2(solver, no formula)=388  none=0
+  every branch certified at <= 4/3 : YES   (max certified bound over branches = 4/3)
+  tier x primal class (a tier-2 certificate on an INFEASIBLE branch is VACUOUS):
+      ('infeasible', 0)            522
+      ('infeasible', 2)            386
+      ('positive', 0)              50
+      ('positive', 2)              2
+      ('zero', 0)                  64
+  FEASIBLE branches needing tier 2 (the ONLY informative hard cases): 2
+      C=[(0, 2), (0, 3), (1, 4), (2, 4)]  positive  val=4/3  trivial bound=5/3
+      C=[(0, 2), (0, 3), (0, 4), (1, 4), (2, 4)]  positive  val=4/3  trivial bound=5/3
+  branches attaining the max 4/3: 4
+      C=[(0, 2), (0, 3), (1, 4), (2, 4)]  |I|=6 active=5  trivial bound=5/3  tier=2
+      C=[(0, 2), (0, 3), (0, 4), (1, 4), (2, 4)]  |I|=5 active=5  trivial bound=5/3  tier=2
+      C=[(0, 2), (0, 3), (1, 3), (1, 4), (2, 4)]  |I|=5 active=4  trivial bound=4/3  tier=0
+      C=[(0, 2), (0, 3), (0, 4), (1, 3), (1, 4), (2, 4)]  |I|=4 active=4  trivial bound=4/3  tier=0
+  [329.6s]
+
+==================================================================================
+READ THIS BEFORE QUOTING ANY NUMBER ABOVE.  These certificates prove `<= (n-1)/3` at
+n = 3, 4 and 5 ONLY.  D3 shows the same statement is FALSE at n = 6, so the tier
+counts here are a description of three points, not the beginning of a proof.
+==================================================================================

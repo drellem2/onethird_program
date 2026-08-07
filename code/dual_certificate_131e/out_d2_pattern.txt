@@ -1,0 +1,102 @@
+====================================================================================
+PART A  THE n-INDEXED PIECE.  On the branch I = {consecutive pairs}, the TRIVIAL dual
+        gives exactly (n-1)/3 and mg-200d's fence attains it -- so val = (n-1)/3 there
+        EXACTLY, at every n, with a solver on neither side.
+====================================================================================
+  n= 3  cap rows = 2 (= n-1: True)   trivial-dual bound =    2/3 (verified: True)   fence E[inv] =    2/3  feasible-there: True   -> upper == lower: YES
+  n= 4  cap rows = 3 (= n-1: True)   trivial-dual bound =      1 (verified: True)   fence E[inv] =      1  feasible-there: True   -> upper == lower: YES
+  n= 5  cap rows = 4 (= n-1: True)   trivial-dual bound =    4/3 (verified: True)   fence E[inv] =    4/3  feasible-there: True   -> upper == lower: YES
+  n= 6  cap rows = 5 (= n-1: True)   trivial-dual bound =    5/3 (verified: True)   fence E[inv] =    5/3  feasible-there: True   -> upper == lower: YES
+  n= 7  cap rows = 6 (= n-1: True)   trivial-dual bound =      2 (verified: True)   fence E[inv] =      2  feasible-there: True   -> upper == lower: YES
+  n= 8  cap rows = 7 (= n-1: True)   trivial-dual bound =    7/3 (verified: True)   fence E[inv] =    7/3  feasible-there: True   -> upper == lower: YES
+  ==> val = (n-1)/3 on the consecutive-pairs branch at every n in 3..8: HOLDS
+      This is n-INDEXED and it is a proof.  It is also about ONE branch out of
+      2^C(n,2), and the `<=` direction is a statement about ALL of them.
+
+====================================================================================
+PART B  WHEN IS A NON-TRIVIAL MULTIPLIER NEEDED AT ALL?  Only when |I_active| > n-1.
+        Counted separately for FEASIBLE branches (informative) and INFEASIBLE ones
+        (vacuous -- a bound on a maximum over the empty set).  PREDICTIONS P12.
+====================================================================================
+  n=3: 8 branches; 1 need more than the trivial dual  (1 on INFEASIBLE branches = vacuous,   0 on FEASIBLE branches = informative)   [0.0s]
+  n=4: 64 branches; 18 need more than the trivial dual  (18 on INFEASIBLE branches = vacuous,   0 on FEASIBLE branches = informative)   [0.1s]
+  n=5: 1024 branches; 388 need more than the trivial dual  (386 on INFEASIBLE branches = vacuous,   2 on FEASIBLE branches = informative)   [17.6s]
+        informative hard branch: C=[(0, 2), (0, 3), (1, 4), (2, 4)]  positive  val=4/3  trivial bound=5/3
+        informative hard branch: C=[(0, 2), (0, 3), (0, 4), (1, 4), (2, 4)]  positive  val=4/3  trivial bound=5/3
+
+====================================================================================
+PART B2  THE MECHANISM n <= 5 CANNOT SHOW.  At every value-positive branch, does the
+         optimum flip any NON-CONSECUTIVE pair?  If it never does, the value is
+         capped by the n-1 consecutive pairs for a reason n <= 5 makes invisible --
+         and D3's n = 6 refutation is exactly a branch where one finally can.
+====================================================================================
+  n=3: 1 value-positive branches; 0 of them have an optimum that flips a NON-CONSECUTIVE pair   [0.0s]
+  n=4: 5 value-positive branches; 0 of them have an optimum that flips a NON-CONSECUTIVE pair   [0.1s]
+  n=5: 52 value-positive branches; 0 of them have an optimum that flips a NON-CONSECUTIVE pair   [19.1s]
+  (the optimum reported is one vertex of the optimal face, so `0` means `no reported
+   optimum does`, not `no optimal measure can`.  It is still the thing that changes
+   at n = 6, where q on a non-consecutive pair is 1/6 and IS the whole excess.)
+
+  cross-n availability of the thing a pattern would have to be fitted to:
+      n=3: 0 informative hard branches
+      n=4: 0 informative hard branches
+      n=5: 2 informative hard branches
+  A pattern in n cannot be read off from a sequence that is 0, 0, k.  Whatever the
+  multipliers on the n = 5 hard branches look like, there is no n = 3 or n = 4
+  instance of the same object to compare them against.  This is P8, pre-committed.
+
+====================================================================================
+PART C  ON THAT ONE POINT, THE NATURAL n-INDEXED GUESS IS PROVABLY UNAVAILABLE.
+        Range of each multiplier over the whole dual OPTIMAL FACE, by LP.  A range
+        that excludes 0 is a shape no certificate at that branch can have.
+====================================================================================
+
+  n=5  hard branch C=[(0, 2), (0, 3), (1, 4), (2, 4)]   val=4/3   trivial bound=5/3
+      lambda  (sum mu = 1)     range [   -1995/2,         -1]   <-- lambda < 0 ON THE WHOLE FACE: NO certificate here has lambda = 0
+      t(0, 1)                  range [         0,     1993/2]
+      t(1, 2)                  range [         0,       1000]  (boxed)
+      t(1, 3)                  range [         0,          0]   <-- forced to 0
+      t(2, 3)                  range [         0,       1000]  (boxed)
+      t(3, 4)                  range [         0,     1993/2]
+      s (per-slot symmetry)    range [    -992/3,     1001/2]
+      s (per-slot symmetry)    range [   -6993/8,      995/7]
+      s (per-slot symmetry)    range [     -1000,     5995/9]  (boxed)
+      s (per-slot symmetry)    range [     -1000,      995/7]  (boxed)
+      s (per-slot symmetry)    range [     -1000,      995/7]  (boxed)
+      s (per-slot symmetry)    range [     -1000,     5995/9]  (boxed)
+      s (per-slot symmetry)    range [   -6993/8,      995/7]
+      s (per-slot symmetry)    range [    -992/3,     1001/2]
+
+  n=5  hard branch C=[(0, 2), (0, 3), (0, 4), (1, 4), (2, 4)]   val=4/3   trivial bound=5/3
+      lambda  (sum mu = 1)     range [   -1995/2,         -1]   <-- lambda < 0 ON THE WHOLE FACE: NO certificate here has lambda = 0
+      t(0, 1)                  range [         0,     1993/2]
+      t(1, 2)                  range [         0,       1000]  (boxed)
+      t(1, 3)                  range [         0,          0]   <-- forced to 0
+      t(2, 3)                  range [         0,       1000]  (boxed)
+      t(3, 4)                  range [         0,     1993/2]
+      s (per-slot symmetry)    range [    -992/3,     1001/2]
+      s (per-slot symmetry)    range [   -6993/8,      995/7]
+      s (per-slot symmetry)    range [     -1000,     5995/9]  (boxed)
+      s (per-slot symmetry)    range [     -1000,      995/7]  (boxed)
+      s (per-slot symmetry)    range [     -1000,      995/7]  (boxed)
+      s (per-slot symmetry)    range [     -1000,     5995/9]  (boxed)
+      s (per-slot symmetry)    range [   -6993/8,      995/7]
+      s (per-slot symmetry)    range [    -992/3,     1001/2]
+
+====================================================================================
+VERDICT.  Neither of the ticket's two offered answers is the whole truth, and saying
+so is the point of PART B:
+
+  * There IS an n-indexed dual, it is a proof at every n, and it settles the
+    consecutive-pairs branch exactly (PART A).  That much of the route is real.
+  * The `<=` direction is about ALL branches, and the branches where that dual is not
+    enough are, among the FEASIBLE ones, absent at n = 3 and n = 4 and present at
+    n = 5.  One point.  No pattern in n is fittable, in either direction (PART B).
+  * At that one point, the shape a pattern would have to take is excluded outright:
+    lambda is strictly negative across the entire dual optimal face (PART C).
+
+So this instrument does not report `n-indexed` and does not report `ad hoc`.  It
+reports that the certificates at n = 3 and n = 4 are nearly content-free and that
+n = 5 is a single data point -- and then D3 settles the underlying question directly,
+by refuting the conjecture at n = 6.
+====================================================================================
