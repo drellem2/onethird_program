@@ -1,4 +1,4 @@
-# Is the pair-bias derivation of `ε_spec` INDEPENDENT of L4's modulus question?
+# Is the pair-bias derivation of `ε_spec` INDEPENDENT of L4's modulus question? — **CONSUMPTION-SCOPED: NOTHING HERE SAYS WHETHER L4-AS-STATED IS *PROVABLE* AT AN `n`-FREE MODULUS**
 
 **Work item.** `mg-345e` (repo `onethird_program`). Filed by `pm-onethird` as the second
 disjunct of `mg-6bc2`'s own gate, which nobody had filed.
@@ -8,6 +8,18 @@ before any script of this instrument existed.
 check of this document's own algebra. **No poset enumeration** — see §9 for why that is a
 deliberate refusal and not an omission.
 
+**Corrections landed, from `mg-6bd1`'s independent audit**
+(`docs/OneThird-PairBias-Independence-mg-6bd1-IndependentAudit.md`). That audit **CONFIRMED
+(A) INDEPENDENT** under a depth-2 re-derivation — all five of §2's named inputs walked to their
+own recorded statements and adjudicated by the step that fails if L4 is withdrawn, **0 of 5
+L4-dependent** — and every printed figure of this document reproduced on code sharing no line
+with `lib345e`. **The verdict, the dependency list and §7's conclusion all STAND.** Its four
+corrections are at the level of what this document *says*; **no mathematics is disputed.** They
+are applied at **§0** (the missing scope qualifier), **§3** (arm-B point 1 scoped to the branch
+it holds on), **§5.1** ("NARROWER" relabelled) and **§6** (the `1/6` census, which was wrong on
+both of its counts). `mg-6bd1` §7.2's `F`-free support — which this document needed and did not
+exhibit — is landed at §5.1.
+
 ---
 
 ## 0. Verdict
@@ -16,7 +28,10 @@ deliberate refusal and not an omission.
 >
 > The pair-bias derivation of an explicit absolute `ε_spec` — equivalently **(LIB-const)**
 > `E[inv_e] ≤ (ε_spec/6)(n²−1)`, uniform in `n` — **does not invoke L4 at any step, and does
-> not care whether L4 admits an `n`-free modulus.** Its dependency list is exhibited in §2 and
+> not care whether L4 admits an `n`-free modulus** — **and every claim below is
+> CONSUMPTION-SCOPED: this document says what the architecture CONSUMES and says NOTHING about
+> whether L4-as-stated is PROVABLE at an `n`-free modulus, which stays exactly as open as it
+> was** (§5.1's `SCOPE DISCIPLINE`, and §7 point 4). Its dependency list is exhibited in §2 and
 > L4 is not on it. **`mg-6bc2` unblocks on its own second disjunct.**
 >
 > It unblocks *for the half of `mg-6bc2` that its conjecture is about.* The other half — the
@@ -29,12 +44,16 @@ deliberate refusal and not an omission.
 >
 > **Two corrections to the gate as written**, both in §5:
 >
-> 1. **NARROWER.** The demand side does not need L4's **modulus** `F`. On every branch Step 6
->    can consume, `F` does not appear: (i) is trivial and `F`-free; (ii) is unconsumable for
->    **every strictly positive** `F` (`mg-3af9`, UNCONDITIONAL, audited `mg-c8c6`); (iii) under
->    the repair `mg-e35c` F5 recommends is `F`-free. What the demand needs is the `n`-freeness
->    and the **value of L4's threshold `ε₀`** — a *different property of L4* from the one the
->    gate names.
+> 1. **NARROWER IN `F` — AND STRICTLY STRONGER IN THE BRANCHES.** The demand side does not need
+>    L4's **modulus** `F`. On every branch Step 6 can consume, `F` does not appear: (i) is
+>    trivial and `F`-free; (ii) is unconsumable for **every strictly positive** `F` (`mg-3af9`,
+>    UNCONDITIONAL, audited `mg-c8c6`); (iii) under the repair `mg-e35c` F5 recommends is
+>    `F`-free. What the demand needs is the `n`-freeness and the **value of L4's threshold
+>    `ε₀`** — a *different property of L4* from the one the gate names. **But the statement
+>    Step 6 actually needs — *"if `Δ₁ ≤ ε₀` then (i) or (iii-exact)"* — is STRICTLY STRONGER
+>    than L4-as-stated: a disjunct removed AND a branch tightened. In the branch dimension that
+>    is A NEW OPEN STATEMENT, not a narrower slice of an existing one** (§5.1, correcting this
+>    document's own "NARROWER" label per `mg-6bd1` §7).
 > 2. **INSUFFICIENT.** Even a complete answer to every L4 question leaves the demand constant
 >    undetermined, because `ε_dem = ε_leak²/(2C₃)` and **`C₃` is unquantified and is not an L4
 >    question at all** — it is L3 / prefix capture, whose source conjecture is open *and*, as
@@ -47,6 +66,18 @@ deliberate refusal and not an omission.
 > *realizability* fact about real posets, which is exactly the boundary `STATE.md:17` and
 > `mg-92e6`'s own ticket already name. **The route stops at the marginal/joint boundary, and
 > that boundary has nothing to do with L4.**
+
+**Where the scope qualifier is, and the one column it is missing from** (`mg-6bd1` §4.2). It is
+in this document's body (§5.1's `SCOPE DISCIPLINE` paragraph), in **both** `STATE.md` rows
+(`:15`'s parenthetical and `:164`), and in the **commit body** — and it is **absent from the
+commit SUBJECT** of `550a7f1`, which reads *"…AND THE GATE IT NAMES IS WRONG TWICE"* with no
+scope clause. **The commit subject is what the next agent greps, so a qualifier that is
+everywhere except the subject is a qualifier that will be missed.** A landed commit subject
+cannot be rewritten; so the qualifier is now carried by this document's **title** and by the
+**first sentence of the verdict above**, where a grep that lands on the file cannot miss it.
+`mg-6bd1` reports this as a **LABELLING** finding under its own pre-registered guard and does
+**not** call it BROKEN — and it is the **third occurrence of this exact shape** on 2026-08-07:
+`mg-94c3` found it in `mg-76b2`'s title and in `mg-6bd1`'s own commit subject.
 
 ---
 
@@ -147,11 +178,26 @@ frozen -> pair bias -> thin prefix -> L4 fires        (1 path avoiding L1b)
 
 Three things about it, in order of importance:
 
-1. **What it would buy is not an L4-dependent `ε_spec`. It is a vacuous one.** L4 fired from a
-   thin prefix reached without L1b contradicts `δ(P) < 1/3` outright — the frozen class is empty,
-   and every statement about minimal counterexamples is vacuously true, `ε_spec` included. That
-   **dissolves** the pair-bias question rather than answering it; it does not make the pair-bias
-   derivation depend on L4.
+1. **What it would buy is not an L4-dependent `ε_spec`. It is a vacuous one — ON THE BRANCHES
+   WHERE THE CONTRADICTION IS ACTUALLY AVAILABLE, WHICH IS 1 OF L4-AS-STATED'S 3.**
+   *(Scoped per `mg-6bd1` §6; the sentence that stood here said "outright" unqualified.)*
+   L4-as-stated is a **three-way disjunction**, and the contradiction with `δ(P) < 1/3` follows:
+
+   | branch | contradiction? | authority | cited elsewhere in this document |
+   |---|---|---|---|
+   | (i) `P` contains a `1/3`-balanced pair | **YES** | the definition of `δ(P)` | §5.1 row (i) |
+   | (ii) remove/modify `≤ F(ε)n` interface elements | **NO** | `mg-3af9`, unconsumable for every strictly positive `F` | **§5.1 row (ii)** |
+   | (iii) as stated | **NO** | `Op-Form` Claim 3.2 = ledger claim **8, PROVEN** | **yes** — the ledger it reads in §2 and §4 |
+   | (iii-exact) repaired to `[1/3,2/3]` | **YES** | `Op-Form` §3.4's repair, `mg-e35c` F5 | §5.1 row (iii) |
+
+   **Both blocking authorities are results this document cites elsewhere in itself**, and one of
+   them is `Op-Form`'s own **PROVEN** claim. **So, scoped to (i) and (iii-exact):** L4 fired from
+   a thin prefix reached without L1b contradicts `δ(P) < 1/3` outright — the frozen class is
+   empty, and every statement about minimal counterexamples is vacuously true, `ε_spec` included.
+   That **dissolves** the pair-bias question rather than answering it; it does not make the
+   pair-bias derivation depend on L4. **On (ii) and on (iii)-as-stated it empties nothing**, so
+   the question would *not* automatically dissolve there — which is why point 2 below, and not
+   this point, is what closes the escape.
 2. **It is not open today.** The repaired direct route reaches `Δ₁ ≤ 2/3`
    (`mg-2de0:§0`, and `2/3` is that audit's *improvement* on `mg-00b9`'s own headline); L4 is
    calibrated at `ε_leak ≈ 0.20`. `2/3 > 0.20`.
@@ -161,7 +207,13 @@ Three things about it, in order of importance:
 
 **Therefore §3's conclusion is CONDITIONAL, and the condition is named:** the independence is
 forced *unless* the direct-prefix route is pushed from `2/3` to `≈0.20`, at which point the
-question dissolves instead.
+question dissolves instead — **on branches (i) and (iii-exact), per the scoping of point 1.**
+
+**§3's conclusion is UNMOVED by that scoping**, and `mg-6bd1` §6 says so in those words: **point
+2 closes the escape on its own** — the repaired direct route reaches only `Δ₁ ≤ 2/3` against
+`ε_leak ≈ 0.20`, and `2/3 > 0.20` — and point 2 is independent of point 1. What the scoping does
+cost is point 1 *as it was written*: if the escape ever became live, L4-as-stated firing into
+(ii) or into (iii)-as-stated would empty nothing.
 
 ---
 
@@ -198,7 +250,7 @@ ledger.** The correct reading of claim 28 is not "L4-conditional" — it is **no
 
 ## 5. The gate `mg-6bc2` names is the wrong gate, twice over
 
-### 5.1 Narrower than named — the demand does not consume the *modulus*
+### 5.1 Narrower than named in `F` — and STRICTLY STRONGER than named in the branches
 
 `mg-6bc2` gates on *"L4's modulus question"*. Take the three branches in turn and ask, for each,
 whether `F` appears in anything **Step 6 can consume**:
@@ -213,12 +265,48 @@ whether `F` appears in anything **Step 6 can consume**:
 > The demand's dependency on L4 is a dependency on that statement's THRESHOLD `ε₀`, not on its
 > MODULUS `F`.**
 
+**"NARROWER" IS THE WRONG LABEL FOR HALF OF THAT MOVE, AND THE STRENGTHENED FORM IS WRITTEN IN
+THE SENTENCE ABOVE.** *(Framing correction, `mg-6bd1` §7.1. The `F` half is confirmed there:
+`Op-Form` §3.3 records that the source never uses (ii), and §3.4's recommended repair removes
+`F` from (iii), leaving `F` only in the branch nobody consumes.)* L4-as-stated is a **three-way**
+disjunction. *"If `Δ₁ ≤ ε₀` then (i) or (iii-exact)"* **removes the disjunct (ii) and tightens
+(iii)** to its exact `[1/3,2/3]` form. It is **not implied by L4-as-stated — it implies L4.** So
+the demand's burden splits along two dimensions and only one of them is narrower:
+
+* **narrower in the `F` dimension** — `F`'s value is not consumed. The row above establishes it. ✓
+* **STRICTLY STRONGER in the branch dimension** — the statement Step 6 needs is **A NEW OPEN
+  STATEMENT**, not a sub-question of an existing one.
+
+**A reader who takes "NARROWER" as "less work to do" is misled about the branch dimension.** The
+verdict is unaffected, and so is §5.2's `C₃` point, which is independent and which `mg-6bd1`
+confirms.
+
+**The support this refinement stands on — supplied by `mg-6bd1` §7.2, because this document did
+not exhibit it and it is the load-bearing part.** The refinement says the demand needs the
+threshold's `n`-freeness rather than the modulus's. But `Op-Form` §3.2 **derives** the threshold's
+`n`-freeness *from* the modulus reading — support 1: *"`n` appears exactly once in L4, and it
+appears multiplied by `F`, not inside it"* — and **if that were the only support, this refinement
+would be CIRCULAR**: it would be discarding `F` while standing on an argument made of `F`. It is
+not the only support. `Op-Form` §3.2's **support 2 is `F`-free**:
+
+> *"Nothing downstream of L4 contains an `n`. … The predicate being contradicted is `δ(P) < 1/3`
+> — a max over pairs of a probability, compared against the absolute constant `1/3`. The window
+> `[1/3,2/3]` has width `1/3` at every `n`. **The entire downstream of Step 5 is
+> dimensionless.**"*
+
+**That argument never mentions `F`, so the threshold's `n`-freeness has an `F`-free support and
+the threshold-vs-modulus refinement is available.** This is why `mg-6bd1` scores the "NARROWER"
+finding as a **framing** correction rather than a defect: the refinement itself survives.
+
 **SCOPE DISCIPLINE — read this before citing the row above.** Every entry is a statement about
 what Step 6 **consumes**. **None of it says L4-as-stated is or is not provable at an `n`-free
 modulus.** That question is untouched here and stays open. `mg-345e`'s own body warns that
 `pm-onethird` conflated consumption with provability on 2026-08-07 and had to reverse; the claim
-made here is the consumption one only, and it is *narrower* than the provability question rather
-than a substitute for it. The `n`-freeness of `F` remains exactly as open as it was — this
+made here is the consumption one only, and it is *narrower in scope* than the provability
+question rather than a substitute for it. **That is a different sense of "narrower" from the one
+corrected above** — this one is about which question is being answered; that one was about the
+branch structure of the statement Step 6 needs, where the move is *stronger*, not narrower. The
+`n`-freeness of `F` remains exactly as open as it was — this
 document's point is that **Step 6 does not consume its answer**, so answering it would not, by
 itself, pin `ε_dem`.
 
@@ -289,12 +377,49 @@ forces `m ≥ n−1`, and `mg-e2de` forces co-degree `≥ 2`. **Lower bounds onl
 > **[PROVEN for the saturation of `m/3`; the density claim is the P5 grep, which is a survey of
 > this corpus and not a theorem.]**
 
-**On the `1/6` itself — routing only, not an attempt.** `1/6` occurs twice in this corpus and
-neither occurrence is a supply-side derivation. `Op-Form:§6.4`'s *"slack `≤ 1/6` for a centred
-pair"* is a **demand**-side number and `mg-e35c` F5 ruled that row **BROKEN as labelled** (it
-reads a *necessary* condition at the *maximum possible* slack as a calibration point). `mg-e2de`'s
-`1/6` is the collapse value of a **local `δ` lower bound** at co-degree 2. **Whether either is
-Daniel's `1/6` is `mg-6bc2`'s question and I have not attempted it.**
+**On the `1/6` itself — routing only, not an attempt. CORRECTED: the census that stood here was
+WRONG ON BOTH OF ITS COUNTS.** It read *"`1/6` occurs twice in this corpus and neither occurrence
+is a supply-side derivation."* There are **at least three**, and **the third is exactly the kind
+it says does not exist**:
+
+1. `Op-Form:§6.4`'s *"slack `≤ 1/6` for a centred pair"* — a **demand**-side number, and
+   `mg-e35c` F5 ruled that row **BROKEN as labelled** (it reads a *necessary* condition at the
+   *maximum possible* slack as a calibration point). Named above.
+2. `mg-e2de`'s `1/6`, the collapse value of a **local `δ` lower bound** at co-degree 2
+   (`STATE.md:158`) — neither supply nor demand. Named above.
+3. **`docs/OneThird-LIBweak-mg-c4f5-IndependentAudit.md:415`** — *"Freezing unconditionally
+   gives only `ε < 1/6 ≈ 0.167`"* — **SUPPLY-SIDE**, and missed here.
+
+**AND THE THIRD ONE IS THIS DOCUMENT'S OWN HEADLINE IN OTHER UNITS — so the disclaimer this
+document carried here and at §9's *not done* list was TOO MODEST ABOUT ITS OWN §2.**
+`mg-c3ca` Prop. 4.1 normalises by `n²` where `(LIB-const)` normalises by
+`(n²−1)/6`. Re-derived by `mg-6bd1` in exact rationals over `n = 2..40` at **0 mismatches**, it
+is **one theorem — §2's theorem — divided two ways**:
+
+```
+ONE theorem:   frozen  ⟹  E[inv_e] < m/3 ≤ n(n−1)/6
+     ÷ n²       ⟶   ε_c3ca < (n−1)/(6n)   ↗  1/6      (never attained)
+     ÷ (n²−1)/6 ⟶   ε_spec  < n/(n+1)     ↗  1        (never attained)
+     ratio      :   ε_spec/ε_c3ca = 6n²/(n²−1)  →  6   (27/4, 216/35, 3200/533 at n = 3, 6, 40)
+```
+
+**So `ε_sup < 1` and `ε < 1/6` are THE SAME STATEMENT under two divisions, ~6× apart because of
+the units — and §2 above already contains the answer to the unit half of `mg-6bc2`'s question.**
+
+**THIS IS A REPRODUCTION, NOT A NEW FINDING, AND IT IS SAID HERE PLAINLY.** `mg-6bc2` filed it as
+its **H5** at 18:21 and `mg-9adf` landed the full unit map at **`21ee93f`** (19:30, audited by
+`mg-9f91`) — both **after** this document at 14:12. `mg-6bd1` re-derived the arithmetic from
+`mg-c3ca`'s and `Op-Form`'s definitions rather than reading it off `STATE.md:15`, and scored it
+against this document's own tree; the correction reproduces those two, it does not precede them.
+
+**What is still NOT attempted is the other half of the question: WHICH `1/6` Daniel meant.** What
+is established here and in §2 is a **unit identity between two printed constants** and nothing
+more — it does not say `mg-6bc2`'s conjecture is confirmed or refuted, and that question is
+Daniel's and `mg-6bc2`'s.
+
+**And it does not touch (A) INDEPENDENT.** Both divisions above are the last two lines of §2's
+chain, which is L4-free at every node. **A unit error on the supply side cannot import an L4
+dependence — there is no L4 in either denominator.**
 
 ---
 
@@ -325,7 +450,7 @@ Daniel's `1/6` is `mg-6bc2`'s question and I have not attempted it.**
 | P5 | corpus contains no frozen-conditional upper bound on `d` | **HELD** — 0 hits |
 | P6 | mutation control fires | **HELD** — S2 and S3 both |
 | P7 | I will write a sentence stating the independence without naming which `ε_spec` | **HELD — and it was the verdict box.** The first draft's headline read "the pair-bias derivation is INDEPENDENT of L4" with the supply/demand table added afterwards. Repaired before landing by putting the table *inside* the verdict rather than below it. |
-| P8 | my most likely error: conflating "constant" with "sufficient" | **HELD as a risk, and the split in §1 is the guard I built against it.** Whether it survived contact is for `mg-6bd1` to say, not me. |
+| P8 | my most likely error: conflating "constant" with "sufficient" | **HELD as a risk, and the split in §1 is the guard I built against it.** Whether it survived contact was for `mg-6bd1` to say, not me — **and `mg-6bd1` has now said it, at the strongest point it could pick.** Its §4 extracted every sentence containing `mg-3af9` **verbatim** rather than classifying them, because a classifier tuned until it returns the wanted answer is unfalsifiable. Both are consumption-scoped, both carry `mg-3af9`'s own *"strictly positive"* quantifier — the exactness note `mg-c8c6` insisted on, since `mg-3af9`'s flat headline is literally false for `F ≡ 0` — and §5.1's `SCOPE DISCIPLINE` paragraph fences them. **The conflation did not happen.** |
 | **P9** | **11–20 dependency edges** | **REFUTED — 11.** I predicted `12–20` and the ledger records **11**. Kept as written. The direction matters: I over-estimated how much of this document's dependency structure is *recorded* rather than *implicit*, which is the same over-trust in the ledger that §4's claim-28 finding punishes. |
 | P10 | the instrument cannot express the `ε₀`-vs-`F` finding | **HELD.** §5.1 is a reading of what Step 6 consumes and no dependency graph over a claim ledger can carry it. **The mechanised part of this ticket was the cheap part.** |
 
@@ -361,8 +486,12 @@ than buried, but nothing mechanical checks it against the source `.tex`.
 - **No attempt at L4.** Row 11 is untouched. Whether L4-as-stated is provable at an `n`-free
   modulus is exactly as open as before.
 - **No attempt at the `ε_spec` derivation.** That is `mg-6bc2`'s job once unblocked. §6 says
-  where the route stops; it does not try to push past it. **No claim is made here about whether
-  `1/6` is the right answer.**
+  where the route stops; it does not try to push past it. **CORRECTED — the sentence that stood
+  here, *"no claim is made here about whether `1/6` is the right answer"*, was too modest about
+  this document's own §2.** §2's theorem, divided by `n²` instead of by `(n²−1)/6`, **is** the
+  corpus's supply-side `1/6` (§6, reproducing `mg-6bc2`'s H5 and `mg-9adf`'s unit map at
+  `21ee93f`). What is genuinely not claimed here is the remaining half — **which `1/6` Daniel
+  meant** — which is a question about the ask, not about the units.
 - **No re-derivation** of `mg-92e6`'s diagonal-capacity bound, the per-element bias `b_x`, the
   Diaconis–Graham conversions, or `mg-210d`'s master bound. Claim 2.1 places them on the
   dependency list; it does not re-prove them.
