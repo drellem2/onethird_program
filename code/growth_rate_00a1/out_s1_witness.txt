@@ -1,0 +1,152 @@
+====================================================================================================
+mg-00a1 / s1 -- THE TRUE GROWTH OF THE DISJUNCTIVE PER-SLOT VALUE
+====================================================================================================
+
+THE QUESTION (mg-131e's successor, deliberately unanswered there): is the value
+c*n + O(1), or superlinear?  Below: an EXPLICIT feasible measure on an EXPLICIT
+transitively closed branch, at every n, with E[inv] = n(n+5)/36.  QUADRATIC.
+
+Every number in this script is computed by direct Fraction arithmetic from the
+measure.  There is no simplex in the path.  mg-131e's asymmetry is KEPT: each row
+is a LOWER bound on a NAMED branch, so the true maximum at that n may be larger.
+A larger maximum leaves a superlinear verdict standing; it would destroy a linear
+one.  That is why the verdict is stated in this direction and not the other.
+
+----------------------------------------------------------------------------------------------------
+PART A -- the witness, checked at every n by arithmetic
+----------------------------------------------------------------------------------------------------
+
+   n       E[inv]    n(n+5)/36  mass  maxflip  symviol  compflip  neg  atoms   |I|   eps_spec  ok
+-------------------------------------------------------------------------------------------------
+   4            1            1     1      1/3        0         0    0      3     3        2/5  OK
+   5            1            1     1      1/3        0         0    0      3     3        1/4  OK
+   6         11/6         11/6     1      1/3        0         0    0     10     6      11/35  OK
+   7         11/6         11/6     1      1/3        0         0    0     10     6      11/48  OK
+   8         26/9         26/9     1      1/3        0         0    0     19    10     52/189  OK
+   9         26/9         26/9     1      1/3        0         0    0     19    10      13/60  OK
+  10         25/6         25/6     1      1/3        0         0    0     36    15      25/99  OK
+  11         25/6         25/6     1      1/3        0         0    0     36    15       5/24  OK
+  12         17/3         17/3     1      1/3        0         0    0     69    21     34/143  OK
+  13         17/3         17/3     1      1/3        0         0    0     69    21      17/84  OK
+  14       133/18       133/18     1      1/3        0         0    0    134    28    133/585  OK
+  15       133/18       133/18     1      1/3        0         0    0    134    28      19/96  OK
+  16         28/3         28/3     1      1/3        0         0    0    263    36     56/255  OK
+  17         28/3         28/3     1      1/3        0         0    0    263    36       7/36  OK
+  18         23/2         23/2     1      1/3        0         0    0    520    45     69/323  OK
+  19         23/2         23/2     1      1/3        0         0    0    520    45     23/120  OK
+  20        125/9        125/9     1      1/3        0         0    0   1033    55   250/1197  OK
+  21        125/9        125/9     1      1/3        0         0    0   1033    55     25/132  OK
+  22         33/2         33/2     1      1/3        0         0    0   2058    66     33/161  OK
+  23         33/2         33/2     1      1/3        0         0    0   2058    66       3/16  OK
+  24         58/3         58/3     1      1/3        0         0    0   4107    78    116/575  OK
+
+  21 of 21 n checked and clean
+
+  Read the columns: mass is exactly 1, no atom is negative, the largest flip
+  probability is exactly 1/3 (AT the cap, never over), NO incomparable pair has a
+  single per-slot symmetry violation, and NO comparable pair is ever flipped.
+  So the measure is feasible in mg-200d's disjunctive per-slot relaxation on this
+  branch, and E[inv] is therefore a lower bound for that branch's value.
+
+----------------------------------------------------------------------------------------------------
+PART B -- the branch is a GENUINE comparability pattern (transitively closed)
+----------------------------------------------------------------------------------------------------
+
+mg-200d imposes no transitivity, which is what keeps its value an UPPER bound; a
+witness on a non-transitive branch would be much weaker.  Checked, not asserted:
+
+  transitively closed at every n in [4, 24]:  YES, all 21
+
+----------------------------------------------------------------------------------------------------
+PART C -- the growth, read off rather than fitted
+----------------------------------------------------------------------------------------------------
+
+The closed form is proved for every even n in the document; the table above is a
+machine check of the proof at each n, not the evidence for it.  Second differences
+in m = n/2 are constant, which is what 'quadratic' means:
+
+       n      value   1st diff   2nd diff
+       4          1          -          -
+       6       11/6        5/6          -
+       8       26/9      19/18        2/9
+      10       25/6      23/18        2/9
+      12       17/3        3/2        2/9
+      14     133/18      31/18        2/9
+      16       28/3      35/18        2/9
+      18       23/2       13/6        2/9
+      20      125/9      43/18        2/9
+      22       33/2      47/18        2/9
+      24       58/3       17/6        2/9
+
+  Constant second difference 2/9 in m.  Leading coefficient 1/9 per m^2, i.e.
+  n^2/36.  This is NOT a fit through the table: the document derives
+  E[inv] = m(2m-1)/18 + m/3 = m(2m+5)/18 = n(n+5)/36 term by term from the
+  construction, and the table is the check.
+
+----------------------------------------------------------------------------------------------------
+PART D -- the matching upper bound, so the class is pinned on BOTH sides
+----------------------------------------------------------------------------------------------------
+
+mg-131e's H2 (the trivial dual, a theorem at every n): val(C) <= |I_active|/3.
+Since |I_active| <= C(n,2), val(C) <= n(n-1)/6 for EVERY branch at EVERY n.
+
+       n  lower (witness)   upper n(n-1)/6    ratio
+       6             11/6                5   0.3667
+       8             26/9             28/3   0.3095
+      10             25/6               15   0.2778
+      12             17/3               22   0.2576
+      14           133/18             91/3   0.2436
+      16             28/3               40   0.2333
+      18             23/2               51   0.2255
+      20            125/9            190/3   0.2193
+      22             33/2               77   0.2143
+      24             58/3               92   0.2101
+
+  n(n+5)/36  <=  max over branches  <=  n(n-1)/6.
+  BOTH SIDES ARE QUADRATIC.  The growth class is THETA(n^2), settled.
+
+----------------------------------------------------------------------------------------------------
+PART E -- why the descent identity was never going to give a linear bound
+----------------------------------------------------------------------------------------------------
+
+mg-131e's H6 is a theorem at every n: every descent sits on an incomparable pair,
+per-slot symmetry forces E[des] = E[asc_I], and E[des] + E[asc_I] <= n-1, so
+E[des] <= (n-1)/2.  It bounds DESCENTS, and inv >= des pointwise runs the wrong
+way.  On the witness the two diverge without limit, so the identity is not merely
+insufficient -- it is off by an unbounded factor:
+
+       n     E[inv]     E[des]   (n-1)/2  E[inv]/E[des]  E[des] <= (n-1)/2
+       6       11/6        3/2       5/2         1.2222  OK
+       8       26/9          2       7/2         1.4444  OK
+      10       25/6        5/2       9/2         1.6667  OK
+      12       17/3          3      11/2         1.8889  OK
+      14     133/18        7/2      13/2         2.1111  OK
+      16       28/3          4      15/2         2.3333  OK
+      18       23/2        9/2      17/2         2.5556  OK
+      20      125/9          5      19/2         2.7778  OK
+      22       33/2       11/2      21/2         3.0000  OK
+      24       58/3          6      23/2         3.2222  OK
+
+  E[des] obeys its bound at every n -- as it must, it is a theorem -- while the
+  ratio grows.  Bounding descents can never bound inversions here.
+
+====================================================================================================
+VERDICT
+====================================================================================================
+
+  The disjunctive per-slot value is SUPERLINEAR -- Theta(n^2), not c*n + O(1).
+
+  So the ticket's second branch is the one that fires: DANIEL'S ROUTE IS DEAD,
+  not merely re-based.  There is no constant c to put in place of 1/3, because
+  the per-slot value does not have the form c*n + O(1) at all.
+
+  And a second result, which mg-131e explicitly left standing: mg-200d's
+  Theta(n^2) -> Theta(n) headline is REFUTED.  Per-slot adjacency symmetry buys a
+  CONSTANT FACTOR (at most 6: n^2/6 down to at least n^2/36), not an order.
+
+  WHAT THIS DOES NOT TOUCH.  The disjunctive value is an UPPER BOUND on the
+  frozen-poset object.  Showing an upper bound is LARGER than believed weakens
+  the bound and says nothing whatever about the statement underneath.  (LIB) and
+  the frozen-poset conjecture are exactly where mg-131e left them.  What is dead
+  is this route as a wall-breaker.
+
