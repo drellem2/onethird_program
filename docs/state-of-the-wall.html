@@ -83,6 +83,12 @@
     font-weight:600;letter-spacing:.03em;padding:3px 9px;border-radius:100px;white-space:nowrap;
     text-transform:uppercase}
   .pill::before{content:"";width:7px;height:7px;border-radius:50%}
+  .kind{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.02em;
+    padding:2px 7px;border-radius:6px;border:1px solid transparent;white-space:nowrap}
+  .kind.u{color:var(--proven);background:var(--proven-bg);border-color:color-mix(in srgb,var(--proven) 30%,transparent)}
+  .kind.fp{color:var(--empirical);background:var(--empirical-bg);border-color:color-mix(in srgb,var(--empirical) 45%,transparent)}
+  .kind.fpx{color:var(--false);background:var(--false-bg);border-color:color-mix(in srgb,var(--false) 40%,transparent)}
+  .kind.op{color:var(--open);background:var(--open-bg);border-color:color-mix(in srgb,var(--open) 30%,transparent)}
   .pill.proven{color:var(--proven);background:var(--proven-bg)} .pill.proven::before{background:var(--proven)}
   .pill.empirical{color:var(--empirical);background:var(--empirical-bg)} .pill.empirical::before{background:var(--empirical)}
   .pill.open{color:var(--open);background:var(--open-bg)} .pill.open::before{background:var(--open)}
@@ -206,6 +212,7 @@
   <header class="hero">
     <p class="eyebrow">1/3–2/3 Conjecture · Program State · any-width</p>
     <h1>State of the Wall</h1>
+    <p class="lede" style="border-left:3px solid var(--open);padding-left:14px"><b>&#9888;&#65039; THIS IS A 2026-07-19 RENDERING, AND IT IS STALE IN PLACES.</b> The canonical ledger is <span class="q">STATE.md</span>; where the two disagree, <span class="q">STATE.md</span> wins. mg-957a repaired the <b>kind</b>-relevant sites here (the Kind column, every sentence that aggregates rows, and row 6&rsquo;s width warrant) and deliberately left the rest of the drift alone rather than making the page look freshly generated &mdash; e.g. row 8 below still leads with &lambda;_std &rarr; 1 where <span class="q">STATE.md</span> now leads with 1 &minus; &lambda;_std &le; &epsilon;_spec.</p>
     <p class="lede">One canonical picture of the spectral / near-ordinal-sum program: the two axes it lives on, the single implication it is missing, and everything already proven that reduces to it. Read this before any attempt — it is the map that keeps us from going in circles.</p>
     <div class="meta">
       <span><b>Maintained by</b> pm-onethird</span>
@@ -219,12 +226,12 @@
     <h2><span class="num">01</span> The one-paragraph state</h2>
     <p class="sublede">If you remember nothing else, remember this.</p>
     <div class="card">
-      <p style="margin:0 0 12px">The program has proven <b>both endpoints</b> of a single spectral axis and all the machinery that reduces the whole conjecture to <b>one implication</b>. Nearly every quantity we track — <span class="q">λ_std</span>, inversion count, squared displacement, interface thinness, entropy — is the <b>same axis (“near-ordinal-sumness”) in different units.</b> The balance constant <span class="q">δ</span> is a <b>separate axis</b> (the counterexample condition). The entire remaining gap is the one <b>bridge</b> between them:</p>
+      <p style="margin:0 0 12px">The program has proven <b>both endpoints</b> of a single spectral axis and the machinery that reduces the whole conjecture to <b>one implication</b> &mdash; but <b>that machinery is NOT uniformly proven, and this sentence used to say it was.</b> The set contains one <b>finite-population</b> row (3b standard dominance, 0/132 at n &le; 7), so the <b>weakest kind in the set is <span class="kind fp">FP</span></b>: an exhaustive check of small cases, which a minimal counterexample of unknown n is not obliged to satisfy. &ldquo;All proven&rdquo; over a set containing an n &le; 7 empirical row is <b>false however true each row is individually</b> (mg-957a). Nearly every quantity we track — <span class="q">λ_std</span>, inversion count, squared displacement, interface thinness, entropy — is the <b>same axis (“near-ordinal-sumness”) in different units.</b> The balance constant <span class="q">δ</span> is a <b>separate axis</b> (the counterexample condition). The entire remaining gap is the one <b>bridge</b> between them:</p>
       <div class="lemma" style="box-shadow:none">
         <div class="head"><span class="pill open">the wall</span><span class="t">L1b — frozen forces near-ordinal-sum</span></div>
         <div class="body" style="padding:16px 22px">
           <div class="form"><b>δ(P) &lt; 1/3</b> &nbsp;⟹&nbsp; <b>λ_std → 1</b> &nbsp;&nbsp;(equivalently &nbsp;E[inv_e] = O(n/γ) &nbsp;or&nbsp; E[Σ&nbsp;disp²] = O(E[inv_e]))</div>
-          <p style="margin:6px 0 0;font-size:14.5px;color:var(--ink-soft)">Everything else is either proven, or reduces to this. It is hard because it must use that <span class="q">σ</span> ranges over a <em>real poset's</em> linear extensions — it is false for abstract frozen distributions.</p>
+          <p style="margin:6px 0 0;font-size:14.5px;color:var(--ink-soft)">Everything else is either proven, <b>or finite-population (<span class="kind fp">FP</span>, rows 3b and 10 &mdash; not evidence at unbounded n at all)</b>, or reduces to this. It is hard because it must use that <span class="q">σ</span> ranges over a <em>real poset's</em> linear extensions — it is false for abstract frozen distributions.</p>
         </div>
       </div>
     </div>
@@ -340,50 +347,63 @@
 
   <section>
     <h2><span class="num">05</span> The proof, and what's proven</h2>
-    <p class="sublede">The reduction from "a counterexample exists" to a contradiction, as a chain. Two links are open (L1b primary, L4 secondary); the rest are proven or empirical — the colored rail and pill on each link say which, and the theorem says why.</p>
+    <p class="sublede">The reduction from "a counterexample exists" to a contradiction, as a chain. Two links are <b>OPEN</b> (L1b primary, L4 secondary). Of the remaining ledger rows, <b>two are <span class="kind fp">FP</span> &mdash; finite-population &mdash; (rows 3b, 10) and one is refuted as stated (row 9)</b>, so &ldquo;the rest are proven&rdquo; is <b>false</b> of that set; the weakest kind below L1b/L4 is <span class="kind fp">FP</span>. (This read &ldquo;the rest are proven or empirical&rdquo; until mg-957a &mdash; a disjunction that names both kinds and commits to neither.) The colored rail and pill on each link say which, and the theorem says why.</p>
     <div class="chain">
       <div class="cnode assume">Assume a minimal counterexample P<span class="n-sub">primitive (connected incomparability graph) · frozen (δ &lt; 1/3, no balanced pair)</span></div>
-      <div class="clink proven"><span class="pill proven">proven</span><span class="why"><b>Theorem E</b> — a frozen pair forces a low-conductance BK cut (boundary = adjacency; conductance ≤ 2/(γn)). Any width.</span></div>
+      <div class="clink proven"><span class="pill proven">proven</span><span class="why"><b>Theorem E</b> &mdash; a frozen pair forces a low-conductance BK cut (boundary = adjacency; conductance &le; 2/(&gamma;n)). <span class="kind u">U</span> <b>Any width &mdash; and that is now warranted rather than asserted (mg-957a):</b> the only proof is inside the <em>width-3</em> paper (<span class="q">step8.tex</span> &sect;G1), which states it for width-3 posets; the hypothesis is <b>present at 5 sites and consumed at 0</b> &mdash; delete it from the statement and the same four proofs stand verbatim. Flagged as mg-e35c F12, ruled out of scope, never landed until now.</span></div>
       <div class="cnode">The BK walk on linear extensions mixes badly<span class="n-sub">a low-conductance bottleneck cut exists</span></div>
       <div class="clink open"><span class="pill open">open · the wall</span><span class="why"><b>L1b</b> — bad mixing ⟹ λ_std → 1. This is the anti-concentration LIB / (B), and the one genuinely missing implication.</span></div>
       <div class="cnode">λ_std → 1<span class="n-sub">near-ordinal-sum</span></div>
-      <div class="clink proven"><span class="pill proven">proven + emp.</span><span class="why"><b>easy / Buser</b> — every label cut bounds the gap: 1−λ_std ≤ n·leak(A)/(|A||Aᶜ|), summed over e-thresholds ties it to the interface. <b>+ L3</b> best-cut-is-a-prefix (empirical, 125/126).</span></div>
+      <div class="clink empirical"><span class="pill empirical">weakest kind: FP</span><span class="why"><b>easy / Buser</b> — every label cut bounds the gap: 1−λ_std ≤ n·leak(A)/(|A||Aᶜ|), summed over e-thresholds ties it to the interface &mdash; that half is <span class="kind u">U</span> (row 5). <b>+ L3</b> best-cut-is-a-prefix is <span class="kind fp">FP</span> (row 10; 125/126, n &le; 6). <b>This link is NOT proven: it is as strong as its weakest member.</b></span></div>
       <div class="cnode">A thin, low-conductance prefix interface</div>
       <div class="clink open"><span class="pill open">open · secondary</span><span class="why"><b>L4</b> — a thin interface must leave a balanced pair behind (near-ordinal-sum stability). AMBER: must beat the N-poset.</span></div>
       <div class="cnode">A balanced pair exists in P</div>
       <div class="clink proven"><span class="pill proven">proven</span><span class="why"><b>by minimality</b> — a balanced pair (bias in [1/3, 2/3]) directly contradicts frozen (δ &lt; 1/3).</span></div>
       <div class="cnode concl">Contradiction — no counterexample exists ⟹ 1/3–2/3 holds</div>
     </div>
-    <p class="machinery"><b>The machinery L1b's reduction stands on</b> (all proven, any-width): <b>standard dominance</b> — the spectral gap lives in the standard sector, so a combinatorial bound genuinely controls λ_std; <b>(A) SPREAD</b> ‖r‖² = Ω(n³); and the exact identities <b>GID</b> + <b>DG</b>. These are why L1b is a bound on <em>displacement/inversions</em> at all.</p>
+    <p class="machinery"><b>The machinery L1b's reduction stands on</b> — &#9888;&#65039; <b>WEAKEST KIND IN THIS SET: <span class="kind fp">FP</span>. This set is NOT &ldquo;all proven&rdquo;, which is what this sentence said until mg-957a.</b> <b>Standard dominance</b> — the spectral gap lives in the standard sector, so a combinatorial bound genuinely controls &lambda;_std — is <b>row 3b, <span class="kind fp">FP</span></b> (empirical, 0/132, n &le; 7); <b>(A) SPREAD</b> &Vert;r&Vert;&sup2; = &Omega;(n&sup3;) is <b>row 4, <span class="kind u">U</span></b>; the exact identities <b>GID</b> + <b>DG</b> are <b>row 7, <span class="kind u">U-id</span></b>. These are why L1b is a bound on <em>displacement/inversions</em> at all — but the set is as strong as its weakest member, and that member is an n &le; 7 check.</p>
+    <p class="machinery"><b>UNRESOLVED, and it decides what kind of error the old sentence was — not resolved here and not to be resolved by assumption.</b> The <em>gloss</em> above (&ldquo;the gap lives in the standard sector&rdquo;) is <b>row 3a</b> (<span class="kind u">U-id</span>, proven); the <em>name</em> &ldquo;standard dominance&rdquo; is <b>row 3b</b> (<span class="kind fp">FP</span>). Whether L1b&rsquo;s reduction consumes 3a alone or genuinely needs 3b is settled nowhere in the corpus. If 3a alone: the old &ldquo;all proven&rdquo; was a <b>name/gloss slip</b>. If 3b is needed: it was a <b>false belief</b> about the reduction&rsquo;s own footing. The sentence above is correct under <em>either</em> reading.</p>
     <h3>Full ledger</h3>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>#</th><th>Result</th><th class="ctr">Status</th><th class="ctr">Width</th></tr></thead>
+        <thead><tr><th>#</th><th>Result</th><th class="ctr">Kind</th><th class="ctr">Status</th><th class="ctr">Width</th></tr></thead>
         <tbody>
-          <tr><td class="rowlabel">1</td><td class="what">λ_std = 1 ⟺ P is an ordinal sum</td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
-          <tr><td class="rowlabel">2</td><td class="what">ordinal sum ⟺ incomparability graph disconnected<span class="fx">(primitive = the negation)</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
-          <tr><td class="rowlabel">3a</td><td class="what">Standard sector: S_P = ρ_std(η_P)<span class="fx">gap sits in the [n−1,1] block</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
-          <tr><td class="rowlabel">3b</td><td class="what">Standard dominance: that block carries the 2nd eigenvalue</td><td class="ctr"><span class="pill empirical">empirical</span><span class="fx">0/132</span></td><td class="ctr"><span class="tag">n ≤ 7 data</span></td></tr>
-          <tr><td class="rowlabel">4</td><td class="what">(A) SPREAD<span class="fx">‖r‖² = Ω(n³)</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
-          <tr><td class="rowlabel">5</td><td class="what">Easy / Buser reverse-Cheeger<span class="fx">1 − λ_std ≤ n·leak(A)/(|A||Aᶜ|), every cut</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
-          <tr><td class="rowlabel">6</td><td class="what">Theorem E: minimal counterexample ⟹ low-conductance BK cut</td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
-          <tr><td class="rowlabel">7</td><td class="what">Identities (GID) &amp; (DG)<span class="fx">Σdisp² = 2ΣK_m + 2ΣM · &nbsp; ΣK_m ≤ inv ≤ 2ΣK_m</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
-          <tr><td class="rowlabel">8</td><td class="what">L1b — the wall<span class="fx">frozen ⟹ λ_std→1; sufficient, one-way: (B) ⟹ LIB ⟹ λ_std→1 (reverse arrows UNPROVEN)</span></td><td class="ctr"><span class="pill open">open</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
-          <tr><td class="rowlabel">9</td><td class="what">L2 standard-eigenvector monotonicity</td><td class="ctr"><span class="pill false">false as stated</span><span class="fx">2/126, at the two highest-λ</span></td><td class="ctr"><span class="tag">n=6 data</span></td></tr>
-          <tr><td class="rowlabel">10</td><td class="what">L3 best-cut-is-a-prefix</td><td class="ctr"><span class="pill empirical">empirical</span><span class="fx">125/126</span></td><td class="ctr"><span class="tag">n ≤ 6 data</span></td></tr>
-          <tr><td class="rowlabel">11</td><td class="what">L4 near-ordinal-sum stability ⟹ balanced pair survives</td><td class="ctr"><span class="pill open">open</span><span class="fx">must beat the N-poset</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">1</td><td class="what">λ_std = 1 ⟺ P is an ordinal sum</td><td class="ctr"><span class="kind u">U</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">2</td><td class="what">ordinal sum ⟺ incomparability graph disconnected<span class="fx">(primitive = the negation)</span></td><td class="ctr"><span class="kind u">U-id</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">3a</td><td class="what">Standard sector: S_P = ρ_std(η_P)<span class="fx">gap sits in the [n−1,1] block</span></td><td class="ctr"><span class="kind u">U-id</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">3b</td><td class="what">Standard dominance: that block carries the 2nd eigenvalue</td><td class="ctr"><span class="kind fp">&#9888;&#65039; FP</span></td><td class="ctr"><span class="pill empirical">empirical</span><span class="fx">0/132</span></td><td class="ctr"><span class="tag">n ≤ 7 data</span></td></tr>
+          <tr><td class="rowlabel">4</td><td class="what">(A) SPREAD<span class="fx">‖r‖² = Ω(n³)</span></td><td class="ctr"><span class="kind u">U</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">5</td><td class="what">Easy / Buser reverse-Cheeger<span class="fx">1 − λ_std ≤ n·leak(A)/(|A||Aᶜ|), every cut</span></td><td class="ctr"><span class="kind u">U</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">6</td><td class="what">Theorem E: minimal counterexample ⟹ low-conductance BK cut</td><td class="ctr"><span class="kind u">U</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">7</td><td class="what">Identities (GID) &amp; (DG)<span class="fx">Σdisp² = 2ΣK_m + 2ΣM · &nbsp; ΣK_m ≤ inv ≤ 2ΣK_m</span></td><td class="ctr"><span class="kind u">U-id</span></td><td class="ctr"><span class="pill proven">proven</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">8</td><td class="what">L1b — the wall<span class="fx">frozen ⟹ λ_std→1; sufficient, one-way: (B) ⟹ LIB ⟹ λ_std→1 (reverse arrows UNPROVEN)</span></td><td class="ctr"><span class="kind op">OPEN</span></td><td class="ctr"><span class="pill open">open</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
+          <tr><td class="rowlabel">9</td><td class="what">L2 standard-eigenvector monotonicity</td><td class="ctr"><span class="kind fpx">FP&#10007;</span></td><td class="ctr"><span class="pill false">false as stated</span><span class="fx">2/126, at the two highest-λ</span></td><td class="ctr"><span class="tag">n=6 data</span></td></tr>
+          <tr><td class="rowlabel">10</td><td class="what">L3 best-cut-is-a-prefix</td><td class="ctr"><span class="kind fp">&#9888;&#65039; FP</span></td><td class="ctr"><span class="pill empirical">empirical</span><span class="fx">125/126</span></td><td class="ctr"><span class="tag">n ≤ 6 data</span></td></tr>
+          <tr><td class="rowlabel">11</td><td class="what">L4 near-ordinal-sum stability ⟹ balanced pair survives</td><td class="ctr"><span class="kind op">OPEN</span></td><td class="ctr"><span class="pill open">open</span><span class="fx">must beat the N-poset</span></td><td class="ctr"><span class="tag">any-width</span></td></tr>
         </tbody>
       </table>
     </div>
+    <div class="callout warn">
+      <h4>Kinds &mdash; the standing rule, and it is the point of the column</h4>
+      <p>mg-e768&rsquo;s cut, replacing the earlier <em>individual-vs-category</em> one (withdrawn by pm-onethird: nothing in these rows is categorical).
+      <span class="kind u">U</span> <b>pointwise-universal</b> &mdash; proven for <em>every</em> finite poset; instantiates at the counterexample&rsquo;s own n for free. <b>Usable.</b> &nbsp;
+      <span class="kind u">U-id</span> <b>identity</b> &mdash; an exact identity or definitional equivalence; consumes no hypothesis, transfers freely. <b>Usable.</b> &nbsp;
+      <span class="kind fp">FP</span> <b>finite population</b> &mdash; an exhaustive check over a finite set of small posets; says nothing above the largest n checked. <b>NOT usable</b> &mdash; a minimal counterexample&rsquo;s n is unknown and unbounded. &nbsp;
+      <span class="kind fpx">FP&#10007;</span> <b>finite population, refuting</b> &mdash; a finite population exhibiting a <em>counterexample</em>. <b>Usable, at universal strength</b>: one witness kills a universal at every n. &nbsp;
+      <span class="kind op">OPEN</span> &mdash; no warrant of any kind.</p>
+      <p><b>The asymmetry is why FP and FP&#10007; are different marks:</b> a finite population can <b>refute</b> a universal outright and can <b>never establish</b> one. Row 9 is <span class="kind fpx">FP&#10007;</span> and is as strong as anything here; rows 3b and 10 are <span class="kind fp">FP</span> and are not evidence at unbounded n at all.</p>
+      <p><b>STANDING RULE (mg-957a).</b> <em>Every row carries its kind, at the row. Any prose that <b>aggregates</b> rows must state the <b>WEAKEST</b> kind in the set it names.</em> A sentence saying &ldquo;all proven&rdquo; over a set containing an n &le; 7 empirical row is <b>FALSE however true each row is individually</b> &mdash; a <em>different</em> defect from any individual row being wrong, and the one that survives fixing rows one at a time. Aggregation order: <span class="kind u">U</span>/<span class="kind u">U-id</span> &#8827; <span class="kind fp">FP</span> &#8827; <span class="kind op">OPEN</span>.</p>
+      <p><b>Scope of the column.</b> It classifies <em>the kind of warrant each row&rsquo;s own recorded Status claims</em> &mdash; it does not re-verify the mathematics. Full record: <span class="q">docs/OneThird-TheoremE-Width-and-Row-Kinds-mg-957a.md</span>.</p>
+    </div>
     <div class="callout">
       <h4>Width-3 baggage to keep out</h4>
-      <p>Three width-3 things are <b>not</b> part of this program: (i) the deleted pre-<span class="q">a7c5</span> certificate crutch (a ≤2-chain Dilworth + constant-2 Cauchy–Schwarz that carried a fatal factor-<span class="q">n</span>); (ii) the side “cuts-by-pairs C2” route (the BK-transport option — genuinely width-3, its general version is false); (iii) the separate, <em>finished</em> width-3 Lean paper. The spectral skeleton above has zero width dependence.</p>
+      <p>Three width-3 things are <b>not</b> part of this program: (i) the deleted pre-<span class="q">a7c5</span> certificate crutch (a ≤2-chain Dilworth + constant-2 Cauchy–Schwarz that carried a fatal factor-<span class="q">n</span>); (ii) the side “cuts-by-pairs C2” route (the BK-transport option — genuinely width-3, its general version is false); (iii) the separate, <em>finished</em> width-3 Lean paper. The spectral skeleton above has zero width dependence &mdash; <b>with one rider earned rather than asserted (mg-957a):</b> row 6&rsquo;s Theorem E is proved <em>inside</em> that width-3 paper, so for that row &ldquo;zero width dependence&rdquo; was a claim about a source saying the opposite. It holds because the hypothesis was checked and found <b>present but never consumed</b>. Everything in <span class="q">step8.tex</span> downstream of Theorem E <em>is</em> genuinely width-3 and stays out.</p>
     </div>
   </section>
 
   <section>
     <h2><span class="num">06</span> The single lemma to prove</h2>
-    <p class="sublede">Invariant form — no cut, no ledger, no width. Two faces; either one closes the wall via already-proven machinery.</p>
+    <p class="sublede">Invariant form &mdash; no cut, no ledger, no width. Two faces; either one closes the wall via machinery whose <b>weakest kind is <span class="kind fp">FP</span></b> (row 3b), <em>not</em> via already-proven machinery &mdash; see the machinery note in &sect;05.</p>
     <div class="lemma">
       <div class="head"><span class="pill open">open · the wall</span><span class="t">Poset-LE displacement anti-concentration</span></div>
       <div class="body">
