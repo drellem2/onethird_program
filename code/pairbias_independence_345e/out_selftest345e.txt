@@ -1,0 +1,43 @@
+==============================================================================
+mg-345e SELFTEST
+==============================================================================
+
+-- S1: the ledger parser sees a real table -----------------------------------
+   [PASS] 36 rows parsed  — got 36
+   [PASS] row 23 is the (LIB-const) claim
+   [PASS] row 4 is the n-free-modulus claim
+   [PASS] row 25 is the m/3 claim
+
+-- S2: MUTATION — a constant-NO detector must fail this ----------------------
+   [PASS] with fabricated edge 26<-4, claim 26 scores L4-DEPENDENT
+   [PASS] without it, claim 26 scores independent
+
+-- S3: MUTATION — a constant-YES detector must fail this ---------------------
+   [PASS] with edge 17<-4 removed, claim 23 scores INDEPENDENT
+   [PASS] unmutated, claim 23 scores DEPENDENT
+
+-- S4: the dependency regex does not eat non-claim numerals ------------------
+   [PASS] 'given the sandwich `:318-324`' yields no edge
+   [PASS] 'CONDITIONAL on `:360-364` being intended' yields no edge
+   [PASS] 'CONDITIONAL on 1, 4, 13, 16' yields 4 edges
+   [PASS] 'CONDITIONAL on claim 4' yields edge 4
+
+-- S5: architecture reachability, both mutations ------------------------------
+   [PASS] arm A: some path frozen -> L4 fires exists
+   [PASS] arm A: no such path avoiding L1b
+   [PASS] arm B: a path avoiding L1b appears once the direct route is added
+   [PASS] control: banning the thin-prefix node kills all paths in arm A
+   [PASS] control: banning the thin-prefix node kills all paths in arm B
+
+-- S6: the residue channel is not silently empty ------------------------------
+   uncaptured-integer rows: [3, 9, 11, 13, 15, 16, 20, 28, 32, 34, 35]
+   (this channel exists so a dependency the regex misses is VISIBLE.
+    It is allowed to be empty; it is not allowed to be absent.)
+   [PASS] residue is computed for every parsed row
+
+-- S7: block extraction is not the whole file ---------------------------------
+   [PASS] ledger block is a proper subset of the file  — 5823 chars
+   [PASS] ledger block does not contain section 10's header
+
+==============================================================================
+SELFTEST: all constructions pass

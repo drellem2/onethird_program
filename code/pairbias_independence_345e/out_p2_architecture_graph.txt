@@ -1,0 +1,57 @@
+==============================================================================
+mg-345e P2 — ARCHITECTURE REACHABILITY: is L4's hypothesis behind L1b?
+==============================================================================
+SCOPE: hand-transcribed step graph. Provenance per edge:
+   frozen -> pair bias        Op-Form Claim 6.1 [PROVEN]
+   pair bias -> L1b concl.    mg-210d master bound (Op-Form 6.1)
+   L1b concl. -> thin prefix  Steps 2-5: Cheeger + L2/L3 prefix restriction
+   thin prefix -> L4 fires    L4's hypothesis IS Delta_1 <= eps
+   L4 fires -> balanced pair  Step 6 stated transfer
+
+-- ARM A: architecture as stated (spectral route only) -----------------------
+   frozen -> L4 fires: 1 path(s)
+      frozen: delta(P) < 1/3
+        -> pair bias: E[inv_e] < m/3
+        -> L1b conclusion: 1 - lambda_std <= eps_spec
+        -> thin prefix: Delta_1(A_k) <= eps_leak
+        -> L4 fires: (i) or (ii) or (iii)
+   frozen -> L4 fires WITHOUT 'L1b conclusion: 1 - lambda_std <= eps_spec': 0 path(s)
+   => circularity argument holds in arm A: True
+
+-- ARM B: + direct-prefix route (mg-00b9 Lemma A/B, repaired by mg-2de0) ------
+   edge added: pair bias -> thin prefix, with NO spectral statement.
+   Audit headline: the repaired route reaches Delta_1 <= 2/3 (mg-2de0 sec 0).
+   frozen -> L4 fires: 2 path(s)
+      frozen: delta(P) < 1/3
+        -> pair bias: E[inv_e] < m/3
+        -> L1b conclusion: 1 - lambda_std <= eps_spec
+        -> thin prefix: Delta_1(A_k) <= eps_leak
+        -> L4 fires: (i) or (ii) or (iii)
+      frozen: delta(P) < 1/3
+        -> pair bias: E[inv_e] < m/3
+        -> thin prefix: Delta_1(A_k) <= eps_leak
+        -> L4 fires: (i) or (ii) or (iii)
+   frozen -> L4 fires WITHOUT 'L1b conclusion: 1 - lambda_std <= eps_spec': 1 path(s)
+      frozen: delta(P) < 1/3
+        -> pair bias: E[inv_e] < m/3
+        -> thin prefix: Delta_1(A_k) <= eps_leak
+        -> L4 fires: (i) or (ii) or (iii)
+   => circularity argument holds in arm B: False
+
+==============================================================================
+VERDICT
+==============================================================================
+  ARM A: L4's hypothesis is reachable ONLY through L1b's conclusion.
+         => a derivation of L1b that invoked L4 would be circular.
+  ARM B: the direct-prefix route DOES bypass L1b — the circularity
+         argument has a NAMED ESCAPE and is therefore CONDITIONAL, not
+         absolute. What the escape would buy is not an L4-dependent
+         eps_spec but a VACUOUS one: L4 + a thin prefix reached without
+         L1b contradicts delta(P)<1/3, emptying the hypothesis class, and
+         every statement about minimal counterexamples becomes vacuously
+         true. That is the pair-bias question dissolved, not answered.
+         LIVE? NO at the numbers on record: the repaired direct route
+         reaches Delta_1 <= 2/3 and L4 is calibrated at eps_leak ~ 0.20.
+         2/3 > 0.20, so the escape is not open today.
+
+  exit 0

@@ -1,0 +1,75 @@
+==============================================================================
+mg-345e P1 — LEDGER DEPENDENCY GRAPH of mg-88bd (Op-Form section 9)
+==============================================================================
+SCOPE: measures the ledger's RECORDED 'CONDITIONAL on N' / 'given N' clauses.
+       A claim whose label UNDERSTATES its dependencies scores independent here.
+       The doc argues independence from the mechanism too; it does not rest on this.
+
+claims parsed : 36   (P9 predicted 36)
+edges parsed  : 11       (P9 predicted 12-20)
+
+-- recorded dependency edges -------------------------------------------------
+   12 <- [4]
+   17 <- [1, 4, 13, 16]
+   18 <- [17]
+   23 <- [18, 21]
+   32 <- [28]
+   33 <- [28, 32]
+
+-- transitive dependents of claim 4 (L4's F is n-free) ------------------------
+   [12, 17, 18, 23]   (count 4; P2 predicted 4-8)
+
+-- SUPPLY path: pair bias -> a constant uniform in n -------------------------
+   claim 21  reaches-4=no   master bound 1-lambda_std <= 3E[D]/(n^2-1) <= 6E[I]/(n^2-1)  (6.1)
+             label: **CONDITIONAL** — cited from mg-210d (audited); second inequality and antichain equality re-veri
+   claim 22  reaches-4=no   E_unif[footrule] = (n^2-1)/3                                 (6.1)
+             label: **PROVEN**, by hand
+   claim 25  reaches-4=no   frozen => E[inv_e] < m/3                                     (6.3)
+             label: **PROVEN**
+   claim 26  reaches-4=no   freezing alone gives (LIB-const) with constant 2/3           (6.3)
+             label: **PROVEN**
+   claim 27  reaches-4=no   Claim 6.1 through the master bound reproduces d*n/(n+1)      (6.3)
+             label: **PROVEN** (cross-check against an audited result)
+
+-- DEMAND path: what threshold does the architecture consume? ----------------
+   claim 12  reaches-4=YES  '<<' in Step 5 = constant fraction                           (4.1)
+   claim 17  reaches-4=YES  L3 is the last candidate site; chain is n-free end to end    (4.3)
+   claim 18  reaches-4=YES  operative form: absolute constant, uniform in n              (5.1)
+   claim 23  reaches-4=YES  (LIB-const) E[inv_e] <= (eps_spec/6)(n^2-1)                  (6.2)
+   claim 28  reaches-4=no   the constant budget eps_leak ~ 0.20, eps_spec ~ 2e-2/C_3     (6.4)
+
+-- uncaptured integers in label cells, for HAND adjudication -----------------
+   (the parser captures 'on N' / 'given N'. Anything else a label says about
+    another claim is surfaced here rather than dropped silently.)
+   claim  3: [6, 59, 66, 94]
+             **PROVEN** (reading of `:494`, `:506`, `:459`, `:466`)
+   claim  9: [3]
+             **PROVEN** (3 linear extensions, by hand)
+   claim 11: [6, 88]
+             **PROVEN** (quotation, probe `:86–88`)
+   claim 13: [18, 324]
+             **PROVEN** given the sandwich `:318–324`
+   claim 15: [60, 364]
+             **PROVEN** (arithmetic on `:360–364`)
+   claim 16: [60, 364]
+             **CONDITIONAL** on `:360–364` being the intended statement
+   claim 20: [8, 72, 90, 305]
+             **PROVEN** (verbatim `step8.tex:68–72`, `:290–305`)
+   claim 28: [3, 4]
+             ~~**HEURISTIC** (empirical $F$) + **UNQUANTIFIED** ($C_3$)~~ **BROKEN as derived (mg-e35c F5)** — the "L4 usab
+   claim 32: [2, 28, 100]
+             **PROVEN** given 28 — but 28 is BROKEN; **and weaker than available**: primitivity gives $n\le2/\varepsilon_{\
+   claim 34: [0, 424]
+             **PROVEN** (the bound is a single-test-vector bound, `tex:400–424`)
+   claim 35: [28]
+             **HEURISTIC** — direction robust, number not; the number moved 100× with 28 (mg-e35c F5), and *"every plausibl
+
+==============================================================================
+VERDICT
+==============================================================================
+  SUPPLY path does NOT reach claim 4 at any of [21, 22, 25, 26, 27] — P3 held.
+  DEMAND path claims [28] do NOT reach claim 4.
+  (Read this as located dependency, not as independence: see the doc's
+   section on claim 28, whose gate is C_3 and is NOT an L4 question.)
+
+  exit 0
