@@ -1,0 +1,71 @@
+==============================================================================
+mg-4d3b a4 -- every printed count, and whether it can be moved
+==============================================================================
+  throwaway clones under /private/tmp/claude-501/-Users-daniel--pogo-polecats-p4d3b/713e3e76-1ef0-4d4d-ac76-a8271089283a/scratchpad/run2/move-481i5gzc
+  NO command in this section runs inside /Users/daniel/research/*.
+
+  onethird_program       ok        ref=f8bd3ae87e496afc563d90d420e0094002770616 sha=f8bd3ae87e49
+                                   HEAD=?  behind by n/a
+  one_third_width_three  ok        ref=069e839f0a4a056a398eee492dd6cd5416638b1c sha=069e839f0a4a
+                                   HEAD=?  behind by n/a
+
+==============================================================================
+PART 1 -- MOVING EACH ROW COUNT WITH A CONSTRUCTED COMMIT
+==============================================================================
+  row 1 (mg-fcf1): REFUTED 7  --probe@2026-07-01-->  REFUTED 8   [8aa1d1a63]
+  [PASS] row 1's count MOVES (not forced) -- 7 -> 8
+  [PASS] row 1: the same commit dated AFTER the instant does NOT move it -- 7 -> 7; the date bound is live, not decorative
+  row 2 (mg-d112): REFUTED 5  --probe@2026-07-01-->  REFUTED 6   [688d8ff2b]
+  [PASS] row 2's count MOVES (not forced) -- 5 -> 6
+  [PASS] row 2: the same commit dated AFTER the instant does NOT move it -- 5 -> 5; the date bound is live, not decorative
+  row 3 (mg-16eb): UPHELD 0  --probe@2026-07-01-->  REFUTED 1   [ccebf15b2]
+  [PASS] row 3's count MOVES (not forced) -- 0 -> 1
+  [PASS] row 3: the same commit dated AFTER the instant does NOT move it -- 0 -> 0; the date bound is live, not decorative
+      >>> the 0 flipped UPHELD -> REFUTED.  Rows that print 0
+          are measurements, not defaults.
+  row 4 (mg-5800): UPHELD 0  --probe@2026-07-01-->  REFUTED 1   [99a161e94]
+  [PASS] row 4's count MOVES (not forced) -- 0 -> 1
+  [PASS] row 4: the same commit dated AFTER the instant does NOT move it -- 0 -> 0; the date bound is live, not decorative
+      >>> the 0 flipped UPHELD -> REFUTED.  Rows that print 0
+          are measurements, not defaults.
+
+==============================================================================
+PART 2 -- NC4's `0 of 4 verdicts flip`, SWEPT OVER EVERY DEPTH
+==============================================================================
+  heights: onethird_program=389, one_third_width_three=428
+  mg-f3ff sampled depths 10, 25, 60.  This sweeps EVERY depth 0..388.
+
+  [PASS] slicing control: onethird_program list[0] == origin/main~0 -- the sweep below slices a cached list instead of re-running git 3000 times; this is what licenses it
+  [PASS] slicing control: onethird_program list[1] == origin/main~1 -- the sweep below slices a cached list instead of re-running git 3000 times; this is what licenses it
+  [PASS] slicing control: onethird_program list[7] == origin/main~7 -- the sweep below slices a cached list instead of re-running git 3000 times; this is what licenses it
+  [PASS] slicing control: onethird_program list[40] == origin/main~40 -- the sweep below slices a cached list instead of re-running git 3000 times; this is what licenses it
+  [PASS] slicing control: one_third_width_three list[0] == origin/main~0 -- the sweep below slices a cached list instead of re-running git 3000 times; this is what licenses it
+  [PASS] slicing control: one_third_width_three list[1] == origin/main~1 -- the sweep below slices a cached list instead of re-running git 3000 times; this is what licenses it
+  [PASS] slicing control: one_third_width_three list[7] == origin/main~7 -- the sweep below slices a cached list instead of re-running git 3000 times; this is what licenses it
+  [PASS] slicing control: one_third_width_three list[40] == origin/main~40 -- the sweep below slices a cached list instead of re-running git 3000 times; this is what licenses it
+
+  row 1 (mg-fcf1): at depth 0 = REFUTED (7)   FIRST FLIP at depth 345 -> UPHELD
+  row 2 (mg-d112): at depth 0 = REFUTED (5)   FIRST FLIP at depth 372 -> UPHELD
+  row 3 (mg-16eb): at depth 0 = UPHELD (0)   NEVER FLIPS at any depth 0..388
+  row 4 (mg-5800): at depth 0 = UPHELD (0)   NEVER FLIPS at any depth 0..388
+
+  FORCING, NAMED:
+    Pinning origin/main~k can only REMOVE commits from a window closed
+    on 2026-07-31.  So REFUTED->UPHELD is reachable and UPHELD->REFUTED
+    is NOT.  Rows [3, 4] print 0 and their NC4 answer is FORCED: no
+    depth can flip them, by construction and not by evidence.  mg-f3ff's
+    NC4 does not say so.
+
+  P11 SCORING (pre-registered at 60%):
+    predicted: at least one printed figure is forced and unlabelled;
+               named candidate = NC4's `0 of 4 verdicts flip`.
+    observed : HIT on the forcing -- rows [3, 4] cannot flip at any k.
+    AND the `any pinned depth` quantifier is FALSE as written: rows
+    [1, 2] DO flip, at depth(s) 1@345, 2@372.
+    mg-f3ff's own s2 transcript is careful -- it says `at depth 10`,
+    `at depth 25`, `at depth 60`.  It is the README that writes three
+    samples up as `at any pinned depth`.  The defect is in the
+    SUMMARY, not in the instrument, which is the same place a3 found
+    F1-F4.
+
+== a4 exit: 0 ==

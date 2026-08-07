@@ -1,0 +1,105 @@
+==============================================================================
+mg-4d3b a5 -- does the repair reproduce its own defect class?
+==============================================================================
+==============================================================================
+E1 -- SOURCE CENSUS: where None is turned into a list, or len()'d
+==============================================================================
+  THE RULE, quoted from the subject's own library:
+    "Returns None when the repo is UNKNOWN -- callers must NOT treat
+     None as an empty list.  That confusion is the whole subject of
+     this ticket."                      lib_f3ff.py, successors()
+
+  --- SUBJECT: code/census_repair_f3ff  (/Users/daniel/.pogo/polecats/p4d3b/code/census_repair_f3ff) ---
+      s1_rows.py:123  PROSE or []      s2 = (L.successors(fm[L.REPOS[0][0]], "mg-d112", T2) or []) + \
+      s1_rows.py:124  PROSE or []      (L.successors(fm[L.REPOS[1][0]], "mg-d112", T2) or [])
+      s1_rows.py:131  PROSE len(None)  + ", ".join(f"{lab}={len(L.successors(fm[lab], 'mg-d112', T2))}"
+      s2_controls.py:130  CODE  or []      succ = L.successors(fm[L.REPOS[0][0]], parent, T) or []
+      s2_controls.py:131  CODE  or []      succ += L.successors(fm[L.REPOS[1][0]], parent, T) or []
+      s2_controls.py:283  PROSE len(None)  both_fresh = sum(len(L.successors(f, "mg-d112", T2)) for f in fm.values())
+      s3_graph.py:85   CODE  or []      direct = (L.successors(fm[L.REPOS[0][0]], parent, T) or []) + \
+      s3_graph.py:86   CODE  or []      (L.successors(fm[L.REPOS[1][0]], parent, T) or [])
+      TOTAL: 8 site(s), 4 in CODE, 4 in PROSE (a string or comment describing one)
+
+  --- AUDITOR: code/census_audit_4d3b -- the same rule, applied to me  (/Users/daniel/.pogo/polecats/p4d3b/code/census_audit_4d3b) ---
+      a3_fetchfail.py:227  PROSE len(None)  "F5  s1_rows.py then DIES: `len(L.successors(...))` on None at :131.\n"
+      selftest4d3b.py:126  PROSE len(None)  len(L.successors(own, "mg-0abc", T, exclude_own=False)) == 1,
+      selftest4d3b.py:142  PROSE len(None)  len(L.successors(skew, "mg-0abc", T, clock="author")) == 1
+      selftest4d3b.py:143  PROSE len(None)  and len(L.successors(skew, "mg-0abc", T, clock="committer")) == 0,
+      TOTAL: 4 site(s), 0 in CODE, 4 in PROSE (a string or comment describing one)
+
+  REACHABILITY, so a latent site is not billed as a live one:
+    A site is LIVE if a fetch failure can reach it.  a3 ran the real
+    thing: s1_rows.py died at :131 under arm G, which is the len()
+    site, so the len() sites are LIVE.  The `or []` sites in s1 and s3
+    sit in code that a fetch failure also reaches, and each silently
+    contributes 0 to a sum instead of refusing to sum.
+    s2_controls.py:130-131 is inside NC1, which runs with a HEALTHY
+    fetch by construction -- LATENT there.
+
+  ⚠️ WHAT THIS IS AND IS NOT.  It is NOT a claim that mg-f3ff's four row
+     verdicts are wrong -- a1 re-derived all four from a disjoint reader
+     and they reproduce exactly.  It IS the claim that the rule the
+     deliverable states in its library is broken by the deliverable's own
+     scripts, at the sites listed above, and that a3 shows what that
+     prints when a fetch fails.
+
+==============================================================================
+E2 -- THE WORK STORE: is B8 a caveat, or a caveat that was checked?
+==============================================================================
+  [PASS] E2 setup: WORK_STORE was actually redirected -- an unpatched setup would pass VACUOUSLY, which is this arc's signature failure and is checked rather than assumed
+  s3_graph.py exit under an EMPTY work store: 0
+    |   work store: /private/tmp/claude-501/-Users-daniel--pogo-polecats-p4d3b/713e3e76-1ef0-4d4d-ac76-a8271089283a/scratchpad/run2/self-x8wgbh1c/empty_work
+    |   (a) tickets whose body names mg-fcf1: 0
+    |       (none)
+    |   (a) tickets whose body names mg-d112: 0
+    |       (none)
+    |   (a) tickets whose body names mg-16eb: 0
+    |       (none)
+    |   (a) tickets whose body names mg-5800: 0
+    |       (none)
+    |   P9  predicted: on rows 3 and 4 the graph names successor TICKETS whose
+    |       P9: *** MISS or PARTIAL ***
+    |   P10 predicted: at least one row was already refuted BY THE POLECAT SENT TO
+    |       P10: HIT  -- 2 row(s), predicted >= 2 (row 1 known, a second predicted)
+    |          one is what P10 is scored on, and the weak one is kept rather than
+
+    F6  s3 prints `0 ticket file(s) readable` and `(none)` for all four
+      rows, with NO UNKNOWN anywhere, when the store it depends on is
+      empty.  Its own next line names B8 -- `a deleted ticket is absent
+      here` -- so the hazard is DECLARED and NOT ENFORCED.  The rule
+      lib_f3ff enforces twice for repos (library + NC3) has no
+      counterpart for the third channel s3 actually reads.
+    F7  and nothing downstream degrades: P8/P9/P10 are still SCORED off an
+      empty graph, so the section reports prediction outcomes computed
+      from a channel that returned nothing.
+
+  P12 SCORING (pre-registered at 70%): HIT
+
+==============================================================================
+E3 -- `allow_fetch=False`: 'I could not look' rendered as 'ok'
+==============================================================================
+      onethird_program       ok       ref=origin/main sha=f8bd3ae87e49
+                                      checkout HEAD=f8bd3ae87e49 behind origin/main by 0
+      one_third_width_three  ok       ref=origin/main sha=42499a568f97
+                                      checkout HEAD=912f1b1498f2 behind origin/main by 72   <-- checkout was STALE; derived against origin/main anyway
+
+    onethird_program: unknown=False  fetch_rc=-1  reason='fetch skipped by flag'
+    >>> F8  The repo reports `ok`, prints a resolved sha and a full
+            staleness figure, and the string `fetch skipped by flag`
+            is stored in `.reason` -- which `line()` prints ONLY on
+            the UNKNOWN branch.  So the one fact that would tell the
+            reader no fetch happened is computed and then not shown.
+            The four rows would then be derived, and printed, against
+            whatever the last fetch left.
+    >>> AND ITS SIZE, STATED: `allow_fetch` is wired to no caller and
+            no CLI flag in the merged tree (verified by grep, D6 of
+            PREDICTIONS.md, before this file existed).  It is LATENT.
+            Calling a dead branch a live defect would be this audit
+            committing the class of error it came to look for.
+    >>> and the row it would print: UPHELD (unreadable: none) -- an answer, not an UNKNOWN.
+    P9 SCORING: HIT
+
+  ⚠️ THIS AUDIT'S OWN lib4d3b.Repo TAKES THE OTHER BRANCH ON PURPOSE:
+  [PASS] lib4d3b: fetch=False yields UNKNOWN, not `ok` -- the auditor is held to the rule it is enforcing
+
+== a5 exit: 0 ==
