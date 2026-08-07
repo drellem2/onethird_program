@@ -320,5 +320,15 @@ statement supplies.
 **Correction to the ticket's framing, as requested.** The ticket says "L1b IS THE WHOLE REMAINING
 GAP" and "the Cheeger chain is PROVEN end to end except this one implication". STATE.md's own
 ledger says two links are open — **L1b primary and L4 secondary (AMBER)** — plus row 3b
-(standard dominance) is *empirical* (0/132, `n ≤ 7`) and L3 best-cut-is-a-prefix is *empirical*
+(standard dominance) is ~~*empirical* (0/132, `n ≤ 7`)~~ and L3 best-cut-is-a-prefix is *empirical*
 (125/126, `n ≤ 6`). Closing L1b alone does not close the chain.
+
+> **CORRECTED AT SOURCE (mg-55f2, landing mg-65f5's §1.5) — the struck clause understates the
+> problem, in the direction of this paragraph's own point.** Row 3b's `0/132` is a **sampling
+> artifact**: its frame is its source's own *"`n ≤ 6` exhaustive + `n = 7` top-λ spot"*
+> (mg-b0a6 kill-shot probe `:286`), and `mg-8b64` exhibits **166 explicit refuters at moderate-λ
+> `n = 7`**, outside that frame — L1b's own document records it at `:310–313`. So standard
+> dominance **as an unconditional statement is REFUTED, not empirical**, and the form that is open
+> is the **all-pairs-frozen conditional, which is L1b itself**. Never cite `0/132` without its
+> frame. (`166` and `0/132` are read from the two probe documents, **not re-measured**, here or by
+> mg-65f5.) Restated at `STATE.md` row 3b.
