@@ -1,0 +1,98 @@
+======================================================================================
+A1.1  MY ROW BUILDER vs mg-200d's `lp200d.build` -- same program or not
+======================================================================================
+  [OK ] n=3 |C|=0: row MULTISETS identical (10 rows mine, 10 theirs)
+  [OK ] n=3 |C|=0: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=3 |C|=1: row MULTISETS identical (5 rows mine, 5 theirs)
+  [OK ] n=3 |C|=1: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=3 |C|=2: row MULTISETS identical (1 rows mine, 1 theirs)
+  [OK ] n=3 |C|=2: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=3 |C|=1: row MULTISETS identical (5 rows mine, 5 theirs)
+  [OK ] n=3 |C|=1: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=4 |C|=0: row MULTISETS identical (25 rows mine, 25 theirs)
+  [OK ] n=4 |C|=0: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=4 |C|=3: row MULTISETS identical (7 rows mine, 7 theirs)
+  [OK ] n=4 |C|=3: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=4 |C|=3: row MULTISETS identical (1 rows mine, 1 theirs)
+  [OK ] n=4 |C|=3: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=4 |C|=3: row MULTISETS identical (7 rows mine, 7 theirs)
+  [OK ] n=4 |C|=3: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=5 |C|=0: row MULTISETS identical (51 rows mine, 51 theirs)
+  [OK ] n=5 |C|=0: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=5 |C|=4: row MULTISETS identical (14 rows mine, 14 theirs)
+  [OK ] n=5 |C|=4: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=5 |C|=4: row MULTISETS identical (1 rows mine, 1 theirs)
+  [OK ] n=5 |C|=4: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=5 |C|=6: row MULTISETS identical (9 rows mine, 9 theirs)
+  [OK ] n=5 |C|=6: row ORDER identical too (so a multiplier vector is index-comparable)
+  [OK ] n=6 |C|=9: row MULTISETS identical (13 rows mine, 13 theirs)
+  [OK ] n=6 |C|=9: row ORDER identical too (so a multiplier vector is index-comparable)
+
+======================================================================================
+A1.2  THE LITERAL ALL-PAIRS PROGRAM (comparable = {}) -- mg-200d says INFEASIBLE.
+      A dual certificate for THIS would look clean and mean nothing.
+======================================================================================
+  [OK ] n=3: literal per-slot program on ALL pairs is INFEASIBLE  -- expected infeasible
+  [OK ] n=4: literal per-slot program on ALL pairs is INFEASIBLE  -- expected infeasible
+  [OK ] n=5: literal per-slot program on ALL pairs is INFEASIBLE  -- expected infeasible
+
+======================================================================================
+A1.3  THE BRANCHES mg-131e REPORTS AS ATTAINING -- feasible, disjunctive, attaining
+======================================================================================
+  [OK ] n=3: certified branch has a NON-EMPTY comparable set ([(0, 2)]) -- it is the DISJUNCTIVE program, not the literal one
+  [OK ] n=3: that branch is primal-FEASIBLE with a positive value (class=positive)
+  [OK ] n=3: my own simplex gives val = 2/3, target (n-1)/3 = 2/3
+  [OK ] n=3: comparable set transitive = True (mg-200d reports transitive at n=3,4 and NOT at n=5)
+  [OK ] n=4: certified branch has a NON-EMPTY comparable set ([(0, 2), (0, 3), (1, 3)]) -- it is the DISJUNCTIVE program, not the literal one
+  [OK ] n=4: that branch is primal-FEASIBLE with a positive value (class=positive)
+  [OK ] n=4: my own simplex gives val = 1, target (n-1)/3 = 1
+  [OK ] n=4: comparable set transitive = True (mg-200d reports transitive at n=3,4 and NOT at n=5)
+  [OK ] n=5: certified branch has a NON-EMPTY comparable set ([(0, 2), (0, 3), (1, 4), (2, 4)]) -- it is the DISJUNCTIVE program, not the literal one
+  [OK ] n=5: that branch is primal-FEASIBLE with a positive value (class=positive)
+  [OK ] n=5: my own simplex gives val = 4/3, target (n-1)/3 = 4/3
+  [OK ] n=5: comparable set transitive = False (mg-200d reports transitive at n=3,4 and NOT at n=5)
+  [OK ] n=5 extra attaining branch [(0, 2), (0, 3), (0, 4), (1, 4), (2, 4)]: class=positive val=4/3 (expect positive 4/3)
+  [OK ] n=5 extra attaining branch [(0, 2), (0, 3), (1, 3), (1, 4), (2, 4)]: class=positive val=4/3 (expect positive 4/3)
+  [OK ] n=5 extra attaining branch [(0, 2), (0, 3), (0, 4), (1, 3), (1, 4), (2, 4)]: class=positive val=4/3 (expect positive 4/3)
+
+======================================================================================
+A1.4  mg-200d's WITNESSES BY SUBSTITUTION -- no solver anywhere in this block
+======================================================================================
+  [OK ] n=3: nonnegative masses
+  [OK ] n=3: total mass is exactly 1
+  [OK ] n=3: no comparable pair carries flip mass
+  [OK ] n=3: every incomparable flip probability <= 1/3
+  [OK ] n=3: per-slot symmetry on every incomparable pair
+  [OK ] n=3: E[inv] of the witness = 2/3 = (n-1)/3 = 2/3   [eps_spec = 1/2, conjectured 2/(n+1) = 1/2]
+  [OK ] n=4: nonnegative masses
+  [OK ] n=4: total mass is exactly 1
+  [OK ] n=4: no comparable pair carries flip mass
+  [OK ] n=4: every incomparable flip probability <= 1/3
+  [OK ] n=4: per-slot symmetry on every incomparable pair
+  [OK ] n=4: E[inv] of the witness = 1 = (n-1)/3 = 1   [eps_spec = 2/5, conjectured 2/(n+1) = 2/5]
+  [OK ] n=5: nonnegative masses
+  [OK ] n=5: total mass is exactly 1
+  [OK ] n=5: no comparable pair carries flip mass
+  [OK ] n=5: every incomparable flip probability <= 1/3
+  [OK ] n=5: per-slot symmetry on every incomparable pair
+  [OK ] n=5: E[inv] of the witness = 4/3 = (n-1)/3 = 4/3   [eps_spec = 1/3, conjectured 2/(n+1) = 1/3]
+
+======================================================================================
+A1.5  THE >= DIRECTION, SEPARATELY -- mg-200d's 3-atom fence rebuilt from its
+      DESCRIPTION (identity + the two adjacent matchings) and checked on the
+      CONSECUTIVE-PAIRS branch at n = 3..12.  This is a LOWER bound and nothing else.
+======================================================================================
+  [OK ] n= 3: fence is feasible on the consecutive branch and E[inv] = 2/3 = (n-1)/3
+  [OK ] n= 4: fence is feasible on the consecutive branch and E[inv] = 1 = (n-1)/3
+  [OK ] n= 5: fence is feasible on the consecutive branch and E[inv] = 4/3 = (n-1)/3
+  [OK ] n= 6: fence is feasible on the consecutive branch and E[inv] = 5/3 = (n-1)/3
+  [OK ] n= 7: fence is feasible on the consecutive branch and E[inv] = 2 = (n-1)/3
+  [OK ] n= 8: fence is feasible on the consecutive branch and E[inv] = 7/3 = (n-1)/3
+  [OK ] n= 9: fence is feasible on the consecutive branch and E[inv] = 8/3 = (n-1)/3
+  [OK ] n=10: fence is feasible on the consecutive branch and E[inv] = 3 = (n-1)/3
+  [OK ] n=11: fence is feasible on the consecutive branch and E[inv] = 10/3 = (n-1)/3
+  [OK ] n=12: fence is feasible on the consecutive branch and E[inv] = 11/3 = (n-1)/3
+
+======================================================================================
+A1 RESULT: ALL CHECKS PASS
+======================================================================================

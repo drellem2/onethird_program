@@ -1,0 +1,35 @@
+============================================================================================
+A4.1  THE DUAL OPTIMAL FACE, UNBOXED, at the two informative hard branches (n = 5).
+      mg-131e's ranges are computed with a +/-1000 box; the two coordinates its
+      argument rests on are recomputed here with NO box at all.
+============================================================================================
+
+  branch C = [(0, 2), (0, 3), (1, 4), (2, 4)]   val = 4/3
+      lambda  (sum mu = 1)  : max = -1   min = UNBOUNDED BELOW (no box)
+  [OK ]       lambda < 0 across the WHOLE optimal face (max lambda = -1) -- no certificate here has lambda = 0.  EXCLUDED, not unfound.
+      t(1,3)                : max = 0   min = 0
+  [OK ]       t_(1,3) is forced to 0 across the whole optimal face (max = 0) -- so no certificate here has `t` an indicator vector
+
+  branch C = [(0, 2), (0, 3), (0, 4), (1, 4), (2, 4)]   val = 4/3
+      lambda  (sum mu = 1)  : max = -1   min = UNBOUNDED BELOW (no box)
+  [OK ]       lambda < 0 across the WHOLE optimal face (max lambda = -1) -- no certificate here has lambda = 0.  EXCLUDED, not unfound.
+      t(1,3)                : max = 0   min = 0
+  [OK ]       t_(1,3) is forced to 0 across the whole optimal face (max = 0) -- so no certificate here has `t` an indicator vector
+
+============================================================================================
+A4.2  PART B2 -- THE SENTENCE WHOSE CAVEAT WAS DROPPED BETWEEN TRANSCRIPT AND PAGE.
+      Over the WHOLE optimal face of every value-positive branch at n = 5, what is the
+      largest flip mass ANY optimal measure can put on a NON-consecutive pair?
+============================================================================================
+  n=5: 52 value-positive branches   [34.7s]
+  branches where SOME optimal measure flips a NON-consecutive pair: 0   (branch, pair) instances: 0   max such flip mass: 0
+
+============================================================================================
+A4 NOTES
+  * lambda is unbounded BELOW on the optimal face at n=5's hard branches, so mg-131e's published lower end -1995/2 is an artefact of its +/-1000 box.  Its CONCLUSION (lambda < 0 throughout) rests only on the upper end, which is -1 and is NOT boxed, so the conclusion survives.
+  * lambda is unbounded BELOW on the optimal face at n=5's hard branches, so mg-131e's published lower end -1995/2 is an artefact of its +/-1000 box.  Its CONCLUSION (lambda < 0 throughout) rests only on the upper end, which is -1 and is NOT boxed, so the conclusion survives.
+  * PART B2's published sentence is TRUE AS PUBLISHED at n=5: over the whole optimal face of all 52 value-positive branches, NO optimal measure puts any mass on a non-consecutive flip.  d2's transcript caveat was sound caution; the unqualified sentence on the page happens to be correct, and is now checked rather than assumed.
+
+A4 RESULT: ALL CHECKS PASS
+============================================================================================
+python3 -u a4_verdict.py 5  18.73s user 0.14s system 54% cpu 34.910 total

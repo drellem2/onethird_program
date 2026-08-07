@@ -1,0 +1,39 @@
+S1  combinatorics: inv == |flipped_pairs|, and the inversion set determines the perm
+  [OK ] n=4: inv(p) == |flipped_pairs(p)| for all 4! perms
+  [OK ] n=4: distinct perms have distinct inversion sets (24 of 24)
+  [OK ] n=5: inv(p) == |flipped_pairs(p)| for all 5! perms
+  [OK ] n=5: distinct perms have distinct inversion sets (120 of 120)
+
+S2  CROSS-IMPLEMENTATION: my primitives vs mg-200d's, on every permutation at n=5
+  [OK ] all four primitives agree with lp200d on all 120 perms at n=5 (0 disagreements)
+
+S3  MY SIMPLEX reproduces the BASELINE mg-6bc2/mg-200d theorem: max E[inv] over M_n
+  [OK ] n=3: max E[inv] over M_n = 1 = C(n,2)/3 = 1   [eps_spec = 3/4 = n/(n+1) = 3/4]
+  [OK ] n=4: max E[inv] over M_n = 2 = C(n,2)/3 = 2   [eps_spec = 4/5 = n/(n+1) = 4/5]
+  [OK ] n=5: max E[inv] over M_n = 10/3 = C(n,2)/3 = 10/3   [eps_spec = 5/6 = n/(n+1) = 5/6]
+
+S4  A HAND-SOLVED LP, so the solver is checked against arithmetic and not itself
+  [OK ] hand LP: value 7/3 (hand: 7/3), x = [Fraction(1, 3), Fraction(2, 3)] (hand: [1/3, 2/3])
+  [OK ] hand LP dual: min y.b = 7/3 = 7/3, y = [Fraction(2, 1), Fraction(1, 1)] (hand: lam = 2, t = 1)
+
+S5  THE TRIVIAL DUAL's ALGEBRAIC STEP, checked rather than trusted:
+    every column of every branch has flips(p) contained in I_active, which is WHY
+    the dual constraint holds with equality and the bound is |I_active|/3.
+  [OK ] n=3: flips(p) subset I_active on every column of every branch (0 exceptions)
+  [OK ] n=4: flips(p) subset I_active on every column of every branch (0 exceptions)
+
+S6  MUTATIONS -- the checkers must REJECT.  Three of them.
+  [OK ] positive control: the n=6 witness passes unmutated
+  [OK ] MUTATION 1 (delete an atom): rejected on BOTH mass and per-slot symmetry (4 symmetry violations)
+  [OK ] CONTROL (add a zero-mass atom): still passes and E[inv] is unchanged -- the checker is not keyed on the atom LIST
+  [OK ] MUTATION 2 (a mass-1 measure that BREAKS the cap): rejected on the cap and NOT on mass -- over_cap = [(2, 3), (4, 5)]
+  [OK ] MUTATION 3 (mass on a COMPARABLE flip): rejected -- comparable pairs flipped = [(0, 3), (1, 3)]
+
+S7  THE SOLVER's FAILURE MODES are distinguished, not collapsed
+  [OK ] an infeasible system raises NoSolution (x <= 1 and x >= 2)
+  [OK ] an unbounded system raises Unbounded (max x s.t. x >= 1)
+
+S8  WEAK DUALITY holds numerically wherever both objects exist
+  [OK ] primal optimum <= trivial dual bound on every feasible branch at n=3,4 (0 violations)
+
+SELFTEST RESULT: ALL CONTROLS PASS

@@ -1,0 +1,81 @@
+==========================================================================================
+A2  THE `<=` DIRECTION AT n = 3,4,5, RE-CERTIFIED FROM SCRATCH ON MY OWN ROWS
+==========================================================================================
+
+### n = 3   target (n-1)/3 = 2/3   branches 2^C(n,2) = 8
+  primal classes                  : empty=0, infeasible=5, zero=2, positive=1
+  certificate needed              : tier0(trivial, n-indexed)=7  mine(solver-found, then substituted)=1  none=0
+  tier x primal class             : {('infeasible', 'mine'): 1, ('infeasible', 0): 4, ('positive', 0): 1, ('zero', 0): 2}
+  strong duality                  : 3 feasible branches, 0 failures
+  [OK ] n=3: the trivial dual holds with EQUALITY on every column of every branch -- so it is a theorem, not a computation
+  [OK ] n=3: EVERY branch discharged at <= 2/3   (max certified bound over branches = 2/3)
+  INFORMATIVE hard branches (feasible AND needing more than tier 0): 0
+  branches attaining 2/3: 1
+      C=[(0, 2)]  |I|=2 active=2  trivial bound=2/3  tier=0
+  [0.0s]
+
+### n = 4   target (n-1)/3 = 1   branches 2^C(n,2) = 64
+  primal classes                  : empty=0, infeasible=51, zero=8, positive=5
+  certificate needed              : tier0(trivial, n-indexed)=46  mine(solver-found, then substituted)=18  none=0
+  tier x primal class             : {('infeasible', 'mine'): 18, ('infeasible', 0): 33, ('positive', 0): 5, ('zero', 0): 8}
+  strong duality                  : 13 feasible branches, 0 failures
+  [OK ] n=4: the trivial dual holds with EQUALITY on every column of every branch -- so it is a theorem, not a computation
+  [OK ] n=4: EVERY branch discharged at <= 1   (max certified bound over branches = 1)
+  INFORMATIVE hard branches (feasible AND needing more than tier 0): 0
+  branches attaining 1: 1
+      C=[(0, 2), (0, 3), (1, 3)]  |I|=3 active=3  trivial bound=1  tier=0
+  [0.2s]
+
+### n = 5   target (n-1)/3 = 4/3   branches 2^C(n,2) = 1024
+  primal classes                  : empty=0, infeasible=908, zero=64, positive=52
+  certificate needed              : tier0(trivial, n-indexed)=636  mine(solver-found, then substituted)=388  none=0
+  tier x primal class             : {('infeasible', 'mine'): 386, ('infeasible', 0): 522, ('positive', 'mine'): 2, ('positive', 0): 50, ('zero', 0): 64}
+  strong duality                  : 116 feasible branches, 0 failures
+  [OK ] n=5: the trivial dual holds with EQUALITY on every column of every branch -- so it is a theorem, not a computation
+  [OK ] n=5: EVERY branch discharged at <= 4/3   (max certified bound over branches = 4/3)
+  INFORMATIVE hard branches (feasible AND needing more than tier 0): 2
+      C=[(0, 2), (0, 3), (1, 4), (2, 4)]  positive  val=4/3  trivial bound=5/3
+      C=[(0, 2), (0, 3), (0, 4), (1, 4), (2, 4)]  positive  val=4/3  trivial bound=5/3
+  branches attaining 4/3: 4
+      C=[(0, 2), (0, 3), (1, 4), (2, 4)]  |I|=6 active=5  trivial bound=5/3  tier=mine
+      C=[(0, 2), (0, 3), (0, 4), (1, 4), (2, 4)]  |I|=5 active=5  trivial bound=5/3  tier=mine
+      C=[(0, 2), (0, 3), (1, 3), (1, 4), (2, 4)]  |I|=5 active=4  trivial bound=4/3  tier=0
+      C=[(0, 2), (0, 3), (0, 4), (1, 3), (1, 4), (2, 4)]  |I|=4 active=4  trivial bound=4/3  tier=0
+  [66.7s]
+
+  --- n=5: THE INFORMATIVE CERTIFICATES, AS DATA (mg-131e's transcripts print counts, not vectors) ---
+  C = [(0, 2), (0, 3), (1, 4), (2, 4)]   val = 4/3   my certificate bound = 4/3
+        lam                    = -2
+        t(1, 2)                = 8
+        t(2, 3)                = 1
+        t(3, 4)                = 1
+        s(0, 1),k=0            = 3
+        s(1, 2),k=1            = -5
+        s(1, 2),k=2            = -8
+        s(1, 3),k=1            = -5
+        s(2, 3),k=1            = 4
+  C = [(0, 2), (0, 3), (0, 4), (1, 4), (2, 4)]   val = 4/3   my certificate bound = 4/3
+        lam                    = -2
+        t(1, 2)                = 8
+        t(2, 3)                = 1
+        t(3, 4)                = 1
+        s(0, 1),k=0            = 3
+        s(1, 2),k=1            = -5
+        s(1, 2),k=2            = -8
+        s(1, 3),k=1            = -5
+        s(2, 3),k=1            = 4
+
+==========================================================================================
+A2.6  MUTATION CONTROL -- the verifier must REJECT a broken certificate.
+      Without this, 'all pass' is consistent with a verifier that passes anything.
+==========================================================================================
+  [OK ] n=5: unmutated trivial dual verifies (positive control)
+  [OK ] n=5: SHAVED cap multiplier (1 -> 9/10) is REJECTED
+  [OK ] n=5: SIGN-FLIPPED cap multiplier (1 -> -1) is REJECTED on the SIGN condition
+  [OK ] n=5: a NEGATIVE multiplier on a free (==) row is NOT a sign violation -- the verifier is not rejecting by blanket nonnegativity
+  [OK ] n=5: a wrong-length multiplier vector raises rather than silently padding
+
+==========================================================================================
+A2 RESULT: ALL CHECKS PASS
+==========================================================================================
+python3 a2_certificates.py 3 4 5  66.14s user 0.32s system 99% cpu 1:07.00 total
