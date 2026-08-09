@@ -1,0 +1,13 @@
+n=2: posets=2 non-chain=1 cuts(all posets)=2 cuts(non-chain posets)=1 both-sides-non-chain analysed=0 U_either failures=0 U_smaller failures=0
+n=3: posets=7 non-chain=6 cuts(all posets)=14 cuts(non-chain posets)=12 both-sides-non-chain analysed=0 U_either failures=0 U_smaller failures=0
+n=4: posets=40 non-chain=39 cuts(all posets)=120 cuts(non-chain posets)=117 both-sides-non-chain analysed=16 U_either failures=0 U_smaller failures=0
+n=5: posets=357 non-chain=356 cuts(all posets)=1428 cuts(non-chain posets)=1424 both-sides-non-chain analysed=444 U_either failures=0 U_smaller failures=96
+n=6: posets=4824 non-chain=4823 cuts(all posets)=24120 cuts(non-chain posets)=24115 both-sides-non-chain analysed=11020 U_either failures=42 U_smaller failures=1842
+
+
+U_either: thinnest violator  Delta_1 = 17/78 = 0.217949  at n=6, k=3, rel=[0, 0, 2, 2, 3, 15]
+   => eps_0(U_either) <= 17/78
+U_smaller: thinnest violator  Delta_1 = 13/74 = 0.175676  at n=6, k=4, rel=[0, 0, 0, 4, 6, 15]
+   => eps_0(U_smaller) <= 13/74
+
+cuts with both sides non-chain but NO balanced-in-side pair: 0

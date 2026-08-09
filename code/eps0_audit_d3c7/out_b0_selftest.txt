@@ -1,0 +1,51 @@
+C1 — naturally labelled poset counts (OEIS A006455: 1,1,2,7,40,357,4824,96428)
+  [ok ] |NLP(0)|: got 1
+  [ok ] |NLP(1)|: got 1
+  [ok ] |NLP(2)|: got 2
+  [ok ] |NLP(3)|: got 7
+  [ok ] |NLP(4)|: got 40
+  [ok ] |NLP(5)|: got 357
+  [ok ] |NLP(6)|: got 4824
+  [ok ] |NLP(7)|: got 96428
+
+C2 — non-chain counts and prefix-cut counts (the population this audit sweeps)
+  n=2: posets=2  non-chain=1  cuts(non-chain, k=1..n-1)=1  cuts(all posets)=2
+  n=3: posets=7  non-chain=6  cuts(non-chain, k=1..n-1)=12  cuts(all posets)=14
+  n=4: posets=40  non-chain=39  cuts(non-chain, k=1..n-1)=117  cuts(all posets)=120
+  n=5: posets=357  non-chain=356  cuts(non-chain, k=1..n-1)=1424  cuts(all posets)=1428
+  n=6: posets=4824  non-chain=4823  cuts(non-chain, k=1..n-1)=24115  cuts(all posets)=24120
+  n=7: posets=96428  non-chain=96427  cuts(non-chain, k=1..n-1)=578562  cuts(all posets)=578568
+
+C3 — double-count identity: sum over LABELLED posets of e(P) == n! * |NLP(n)|
+  [ok ] n=1: sum_P e(P) (over 1 labelled posets): got 1
+  [ok ] n=2: sum_P e(P) (over 3 labelled posets): got 4
+  [ok ] n=3: sum_P e(P) (over 19 labelled posets): got 42
+  [ok ] n=4: sum_P e(P) (over 219 labelled posets): got 960
+
+C4 — DP e(P) == brute-force e(P), every naturally labelled poset, n<=5
+  [ok ] mismatching posets: got 0
+
+C5 — DP Delta_1 == brute-force Delta_1, every poset and cut, n<=5
+  [ok ] mismatching (poset, cut): got 0
+
+C6 — DP p_xy == brute-force p_xy, every poset and incomparable pair, n<=5
+  [ok ] mismatching (poset, pair): got 0
+
+C7 — the two readings of sigma(A) AGREE on every prefix cut (finding, not a bug)
+  cuts where the two readings differ: 0; agree: 1562
+  [ok ] sigma(A) ambiguity is immaterial on prefix cuts (0 disagreements): got 0
+
+C7b — SENSITIVITY CONTROL: the pipeline must SEE a normalisation change
+  cuts where Phi != Delta_1: 698
+  [ok ] disagreement set is exactly {k > n/2, nonzero} (0 mispredictions): got 0
+  [ok ] the mutant IS visible (disagreements > 0): got True
+
+C8 — source sanity: Delta_1 <= 1 always, attained by the antichain at (n-1)/n
+  [ok ] cuts with Delta_1 > 1: got 0
+  [ok ] max_k Delta_1(antichain, n=3): got 2/3
+  [ok ] max_k Delta_1(antichain, n=4): got 3/4
+  [ok ] max_k Delta_1(antichain, n=5): got 4/5
+  [ok ] max_k Delta_1(antichain, n=6): got 5/6
+  [ok ] max_k Delta_1(antichain, n=7): got 6/7
+
+SELFTEST PASSED — all controls green

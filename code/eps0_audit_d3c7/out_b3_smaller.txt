@@ -1,0 +1,209 @@
+==============================================================================
+PART A — every n<=6 prefix cut with Delta_1 exactly 1/7
+==============================================================================
+
+n=6 k=2 rel=[0, 0, 2, 6, 3, 23] e=14 smaller=A |A|=2 |B|=4 
+   side A (size 2, chain=False): balanced pairs = [((0, 1), '1/2', '5/14', True)]
+   side B (size 4, chain=False): balanced pairs = [((2, 4), '3/5', '5/7', False), ((3, 5), '3/5', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 0, 2, 3, 6, 15] e=14 smaller=A |A|=2 |B|=4 
+   side A (size 2, chain=False): balanced pairs = [((0, 1), '1/2', '5/14', True)]
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '3/5', '5/7', False), ((4, 5), '3/5', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 0, 2, 3, 6, 15] e=14 smaller=B |A|=4 |B|=2 
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '2/5', '5/14', True), ((2, 3), '3/5', '5/7', False)]
+   side B (size 2, chain=False): balanced pairs = [((4, 5), '1/2', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 0, 2, 3, 11, 31] e=7 smaller=B |A|=4 |B|=2 side chain: A=False B=True
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '2/5', '3/7', True), ((2, 3), '3/5', '3/7', True)]
+   side B (size 2, chain=True): balanced pairs = []
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 0, 2, 3, 15, 6] e=14 smaller=A |A|=2 |B|=4 
+   side A (size 2, chain=False): balanced pairs = [((0, 1), '1/2', '5/14', True)]
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '3/5', '5/7', False), ((4, 5), '2/5', '5/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 0, 2, 3, 15, 6] e=14 smaller=B |A|=4 |B|=2 
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '2/5', '5/14', True), ((2, 3), '3/5', '5/7', False)]
+   side B (size 2, chain=False): balanced pairs = [((4, 5), '1/2', '5/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 0, 1, 5, 3, 23] e=14 smaller=A |A|=2 |B|=4 
+   side A (size 2, chain=False): balanced pairs = [((0, 1), '1/2', '9/14', True)]
+   side B (size 4, chain=False): balanced pairs = [((2, 4), '3/5', '5/7', False), ((3, 5), '3/5', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 0, 1, 3, 5, 15] e=14 smaller=A |A|=2 |B|=4 
+   side A (size 2, chain=False): balanced pairs = [((0, 1), '1/2', '9/14', True)]
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '3/5', '5/7', False), ((4, 5), '3/5', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 0, 1, 3, 5, 15] e=14 smaller=B |A|=4 |B|=2 
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '3/5', '9/14', True), ((2, 3), '3/5', '5/7', False)]
+   side B (size 2, chain=False): balanced pairs = [((4, 5), '1/2', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 0, 1, 3, 11, 31] e=7 smaller=B |A|=4 |B|=2 side chain: A=False B=True
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '3/5', '4/7', True), ((2, 3), '3/5', '3/7', True)]
+   side B (size 2, chain=True): balanced pairs = []
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 0, 1, 3, 15, 5] e=14 smaller=A |A|=2 |B|=4 
+   side A (size 2, chain=False): balanced pairs = [((0, 1), '1/2', '9/14', True)]
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '3/5', '5/7', False), ((4, 5), '2/5', '5/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 0, 1, 3, 15, 5] e=14 smaller=B |A|=4 |B|=2 
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '3/5', '9/14', True), ((2, 3), '3/5', '5/7', False)]
+   side B (size 2, chain=False): balanced pairs = [((4, 5), '1/2', '5/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 0, 3, 2, 10, 15] e=14 smaller=A |A|=2 |B|=4 
+   side A (size 2, chain=False): balanced pairs = [((0, 1), '1/2', '5/14', True)]
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '2/5', '2/7', False), ((4, 5), '3/5', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 0, 3, 2, 10, 15] e=14 smaller=B |A|=4 |B|=2 
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '2/5', '5/14', True), ((2, 3), '2/5', '2/7', False)]
+   side B (size 2, chain=False): balanced pairs = [((4, 5), '1/2', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=3 rel=[0, 0, 3, 2, 7, 31] e=7 smaller=TIE |A|=3 |B|=3 
+   side A (size 3, chain=False): balanced pairs = [((0, 1), '1/2', '3/7', True)]
+   side B (size 3, chain=False): balanced pairs = [((3, 4), '1/2', '5/7', False)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: True
+
+n=6 k=4 rel=[0, 0, 3, 2, 7, 31] e=7 smaller=B |A|=4 |B|=2 side chain: A=False B=True
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '2/5', '3/7', True), ((2, 3), '2/5', '4/7', True)]
+   side B (size 2, chain=True): balanced pairs = []
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 0, 3, 2, 15, 10] e=14 smaller=A |A|=2 |B|=4 
+   side A (size 2, chain=False): balanced pairs = [((0, 1), '1/2', '5/14', True)]
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '2/5', '2/7', False), ((4, 5), '2/5', '5/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 0, 3, 2, 15, 10] e=14 smaller=B |A|=4 |B|=2 
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '2/5', '5/14', True), ((2, 3), '2/5', '2/7', False)]
+   side B (size 2, chain=False): balanced pairs = [((4, 5), '1/2', '5/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 0, 3, 1, 9, 15] e=14 smaller=A |A|=2 |B|=4 
+   side A (size 2, chain=False): balanced pairs = [((0, 1), '1/2', '9/14', True)]
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '2/5', '2/7', False), ((4, 5), '3/5', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 0, 3, 1, 9, 15] e=14 smaller=B |A|=4 |B|=2 
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '3/5', '9/14', True), ((2, 3), '2/5', '2/7', False)]
+   side B (size 2, chain=False): balanced pairs = [((4, 5), '1/2', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=3 rel=[0, 0, 3, 1, 7, 31] e=7 smaller=TIE |A|=3 |B|=3 
+   side A (size 3, chain=False): balanced pairs = [((0, 1), '1/2', '4/7', True)]
+   side B (size 3, chain=False): balanced pairs = [((3, 4), '1/2', '5/7', False)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: True
+
+n=6 k=4 rel=[0, 0, 3, 1, 7, 31] e=7 smaller=B |A|=4 |B|=2 side chain: A=False B=True
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '3/5', '4/7', True), ((2, 3), '2/5', '4/7', True)]
+   side B (size 2, chain=True): balanced pairs = []
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 0, 3, 1, 15, 9] e=14 smaller=A |A|=2 |B|=4 
+   side A (size 2, chain=False): balanced pairs = [((0, 1), '1/2', '9/14', True)]
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '2/5', '2/7', False), ((4, 5), '2/5', '5/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 0, 3, 1, 15, 9] e=14 smaller=B |A|=4 |B|=2 
+   side A (size 4, chain=False): balanced pairs = [((0, 1), '3/5', '9/14', True), ((2, 3), '2/5', '2/7', False)]
+   side B (size 2, chain=False): balanced pairs = [((4, 5), '1/2', '5/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=3 rel=[0, 0, 3, 7, 2, 31] e=7 smaller=TIE |A|=3 |B|=3 
+   side A (size 3, chain=False): balanced pairs = [((0, 1), '1/2', '3/7', True)]
+   side B (size 3, chain=False): balanced pairs = [((3, 4), '1/2', '2/7', False)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: True
+
+n=6 k=3 rel=[0, 0, 3, 7, 1, 31] e=7 smaller=TIE |A|=3 |B|=3 
+   side A (size 3, chain=False): balanced pairs = [((0, 1), '1/2', '4/7', True)]
+   side B (size 3, chain=False): balanced pairs = [((3, 4), '1/2', '2/7', False)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: True
+
+n=6 k=4 rel=[0, 1, 0, 5, 13, 31] e=7 smaller=B |A|=4 |B|=2 side chain: A=False B=True
+   side A (size 4, chain=False): balanced pairs = [((0, 2), '3/5', '4/7', True), ((1, 3), '3/5', '3/7', True)]
+   side B (size 2, chain=True): balanced pairs = []
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 1, 0, 5, 3, 15] e=14 smaller=B |A|=4 |B|=2 
+   side A (size 4, chain=False): balanced pairs = [((0, 2), '3/5', '9/14', True), ((1, 3), '3/5', '5/7', False)]
+   side B (size 2, chain=False): balanced pairs = [((4, 5), '1/2', '9/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=4 rel=[0, 1, 0, 5, 15, 3] e=14 smaller=B |A|=4 |B|=2 
+   side A (size 4, chain=False): balanced pairs = [((0, 2), '3/5', '9/14', True), ((1, 3), '3/5', '5/7', False)]
+   side B (size 2, chain=False): balanced pairs = [((4, 5), '1/2', '5/14', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=3 rel=[0, 1, 1, 5, 13, 15] e=7 smaller=TIE |A|=3 |B|=3 
+   side A (size 3, chain=False): balanced pairs = [((1, 2), '1/2', '2/7', False)]
+   side B (size 3, chain=False): balanced pairs = [((4, 5), '1/2', '4/7', True)]
+   violates-if-smaller-is-A: True   violates-if-smaller-is-B: False
+
+n=6 k=3 rel=[0, 1, 1, 5, 15, 13] e=7 smaller=TIE |A|=3 |B|=3 
+   side A (size 3, chain=False): balanced pairs = [((1, 2), '1/2', '2/7', False)]
+   side B (size 3, chain=False): balanced pairs = [((4, 5), '1/2', '3/7', True)]
+   violates-if-smaller-is-A: True   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 1, 1, 3, 11, 15] e=7 smaller=A |A|=2 |B|=4 side chain: A=True B=False
+   side A (size 2, chain=True): balanced pairs = []
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '2/5', '4/7', True), ((4, 5), '3/5', '4/7', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=3 rel=[0, 1, 1, 3, 11, 15] e=7 smaller=TIE |A|=3 |B|=3 
+   side A (size 3, chain=False): balanced pairs = [((1, 2), '1/2', '5/7', False)]
+   side B (size 3, chain=False): balanced pairs = [((4, 5), '1/2', '4/7', True)]
+   violates-if-smaller-is-A: True   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 1, 1, 3, 15, 11] e=7 smaller=A |A|=2 |B|=4 side chain: A=True B=False
+   side A (size 2, chain=True): balanced pairs = []
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '2/5', '4/7', True), ((4, 5), '2/5', '3/7', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=3 rel=[0, 1, 1, 3, 15, 11] e=7 smaller=TIE |A|=3 |B|=3 
+   side A (size 3, chain=False): balanced pairs = [((1, 2), '1/2', '5/7', False)]
+   side B (size 3, chain=False): balanced pairs = [((4, 5), '1/2', '3/7', True)]
+   violates-if-smaller-is-A: True   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 1, 3, 1, 7, 15] e=7 smaller=A |A|=2 |B|=4 side chain: A=True B=False
+   side A (size 2, chain=True): balanced pairs = []
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '3/5', '3/7', True), ((4, 5), '3/5', '4/7', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 1, 3, 1, 15, 7] e=7 smaller=A |A|=2 |B|=4 side chain: A=True B=False
+   side A (size 2, chain=True): balanced pairs = []
+   side B (size 4, chain=False): balanced pairs = [((2, 3), '3/5', '3/7', True), ((4, 5), '2/5', '3/7', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+n=6 k=2 rel=[0, 1, 3, 7, 1, 23] e=7 smaller=A |A|=2 |B|=4 side chain: A=True B=False
+   side A (size 2, chain=True): balanced pairs = []
+   side B (size 4, chain=False): balanced pairs = [((2, 4), '3/5', '3/7', True), ((3, 5), '3/5', '4/7', True)]
+   violates-if-smaller-is-A: False   violates-if-smaller-is-B: False
+
+total n<=6 cuts with Delta_1 == 1/7: 38
+
+==============================================================================
+PART B — thinnest U_smaller violator under each reading, n<=6
+==============================================================================
+
+[BOTH sides non-chain]
+  TIE_EITHER  : Delta_1 = 13/74 = 0.175676  n=6 k=4 rel=[0, 0, 0, 4, 6, 15]
+  TIE_NEITHER : Delta_1 = 13/74 = 0.175676  n=6 k=4 rel=[0, 0, 0, 4, 6, 15]
+  TIE_A       : Delta_1 = 1/7 = 0.142857  n=6 k=3 rel=[0, 1, 1, 5, 13, 15]
+
+[larger side MAY be a chain]
+  TIE_EITHER  : Delta_1 = 13/74 = 0.175676  n=6 k=4 rel=[0, 0, 0, 4, 6, 15]
+  TIE_NEITHER : Delta_1 = 13/74 = 0.175676  n=6 k=4 rel=[0, 0, 0, 4, 6, 15]
+  TIE_A       : Delta_1 = 1/7 = 0.142857  n=6 k=3 rel=[0, 1, 1, 5, 13, 15]

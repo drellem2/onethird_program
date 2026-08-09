@@ -1,0 +1,88 @@
+Scanning n<=7 for ALL U_either violators at Delta_1 == 1/7 in the
+architecturally required scope (at least one side non-chain).
+
+U_either violators at exactly Delta_1 = 1/7, n<=7, ONE+ scope: 8
+   n=7 k=4 rel=[0, 0, 2, 6, 14, 30, 62]
+   n=7 k=4 rel=[0, 0, 1, 5, 13, 29, 61]
+   n=7 k=4 rel=[0, 1, 0, 3, 11, 27, 59]
+   n=7 k=3 rel=[0, 1, 3, 0, 7, 23, 55]
+   n=7 k=4 rel=[0, 1, 3, 0, 7, 23, 55]
+   n=7 k=3 rel=[0, 1, 3, 7, 0, 15, 47]
+   n=7 k=3 rel=[0, 1, 3, 7, 15, 0, 31]
+   n=7 k=3 rel=[0, 1, 3, 7, 15, 31, 0]
+
+--------------------------------------------------------------------------
+GAP WITNESS: n=7 k=4 rel=[0, 0, 2, 6, 14, 30, 62]
+  A = [0, 1, 2, 3] (size 4, chain=False, rel=[0, 0, 2, 6])
+  B = [4, 5, 6] (size 3, chain=True, rel=[0, 1, 3])
+  e(P): DP=7  bruteforce=7  AGREE=True
+  Delta_1: DP=1/7  bruteforce=1/7  AGREE=True  == 1/7: True
+  side A pair (0,1): p_side=1/4 p_P=1/7 [not balanced in side; survives in P: False]
+  side A pair (0,2): p_side=1/2 p_P=2/7 [BALANCED-IN-SIDE; survives in P: False]
+  side A pair (0,3): p_side=3/4 p_P=3/7 [not balanced in side; survives in P: True]
+  side B is a CHAIN -> contributes no incomparable pair (incomparable pairs: [])
+  => balanced-in-side pairs: 1, surviving: 0
+  => U_either VIOLATED: True
+
+--------------------------------------------------------------------------
+GAP WITNESS: n=7 k=4 rel=[0, 0, 1, 5, 13, 29, 61]
+  A = [0, 1, 2, 3] (size 4, chain=False, rel=[0, 0, 1, 5])
+  B = [4, 5, 6] (size 3, chain=True, rel=[0, 1, 3])
+  e(P): DP=7  bruteforce=7  AGREE=True
+  Delta_1: DP=1/7  bruteforce=1/7  AGREE=True  == 1/7: True
+  side A pair (0,1): p_side=3/4 p_P=6/7 [not balanced in side; survives in P: False]
+  side A pair (1,2): p_side=1/2 p_P=2/7 [BALANCED-IN-SIDE; survives in P: False]
+  side A pair (1,3): p_side=3/4 p_P=3/7 [not balanced in side; survives in P: True]
+  side B is a CHAIN -> contributes no incomparable pair (incomparable pairs: [])
+  => balanced-in-side pairs: 1, surviving: 0
+  => U_either VIOLATED: True
+
+--------------------------------------------------------------------------
+GAP WITNESS: n=7 k=4 rel=[0, 1, 0, 3, 11, 27, 59]
+  A = [0, 1, 2, 3] (size 4, chain=False, rel=[0, 1, 0, 3])
+  B = [4, 5, 6] (size 3, chain=True, rel=[0, 1, 3])
+  e(P): DP=7  bruteforce=7  AGREE=True
+  Delta_1: DP=1/7  bruteforce=1/7  AGREE=True  == 1/7: True
+  side A pair (0,2): p_side=3/4 p_P=6/7 [not balanced in side; survives in P: False]
+  side A pair (1,2): p_side=1/2 p_P=5/7 [BALANCED-IN-SIDE; survives in P: False]
+  side A pair (2,3): p_side=3/4 p_P=3/7 [not balanced in side; survives in P: True]
+  side B is a CHAIN -> contributes no incomparable pair (incomparable pairs: [])
+  => balanced-in-side pairs: 1, surviving: 0
+  => U_either VIOLATED: True
+
+--------------------------------------------------------------------------
+GAP WITNESS: n=7 k=3 rel=[0, 1, 3, 0, 7, 23, 55]
+  A = [0, 1, 2] (size 3, chain=True, rel=[0, 1, 3])
+  B = [3, 4, 5, 6] (size 4, chain=False, rel=[0, 0, 2, 6])
+  e(P): DP=7  bruteforce=7  AGREE=True
+  Delta_1: DP=1/7  bruteforce=1/7  AGREE=True  == 1/7: True
+  side A is a CHAIN -> contributes no incomparable pair (incomparable pairs: [])
+  side B pair (3,4): p_side=1/4 p_P=4/7 [not balanced in side; survives in P: True]
+  side B pair (3,5): p_side=1/2 p_P=5/7 [BALANCED-IN-SIDE; survives in P: False]
+  side B pair (3,6): p_side=3/4 p_P=6/7 [not balanced in side; survives in P: False]
+  => balanced-in-side pairs: 1, surviving: 0
+  => U_either VIOLATED: True
+
+--------------------------------------------------------------------------
+GAP WITNESS: n=7 k=4 rel=[0, 1, 3, 0, 7, 23, 55]
+  A = [0, 1, 2, 3] (size 4, chain=False, rel=[0, 1, 3, 0])
+  B = [4, 5, 6] (size 3, chain=True, rel=[0, 1, 3])
+  e(P): DP=7  bruteforce=7  AGREE=True
+  Delta_1: DP=1/7  bruteforce=1/7  AGREE=True  == 1/7: True
+  side A pair (0,3): p_side=3/4 p_P=6/7 [not balanced in side; survives in P: False]
+  side A pair (1,3): p_side=1/2 p_P=5/7 [BALANCED-IN-SIDE; survives in P: False]
+  side A pair (2,3): p_side=1/4 p_P=4/7 [not balanced in side; survives in P: True]
+  side B is a CHAIN -> contributes no incomparable pair (incomparable pairs: [])
+  => balanced-in-side pairs: 1, surviving: 0
+  => U_either VIOLATED: True
+
+5/5 certified as genuine U_either violators on the brute-force path.
+
+==========================================================================
+Confirming NOTHING thinner than 1/7 violates U_either in ONE+ scope, n<=7
+violators with Delta_1 < 1/7: 0
+
+CEILING (architecturally required scope, exhaustive n<=7):
+   eps_0(U_either) <= 1/7 = 0.142857
+   vs corpus calibration 0.20 -> ratio 0.7143 (BELOW the calibration)
+   eps_dem = eps_0^2/2 <= 1/98 = 0.010204  vs corpus 0.02

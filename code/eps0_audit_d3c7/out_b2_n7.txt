@@ -1,0 +1,15 @@
+n=2: posets=2 non-chain=1 cuts(all posets)=2 cuts(non-chain posets)=1 both-sides-non-chain analysed=0 U_either failures=0 U_smaller failures=0  [PRUNED to Delta_1 < 17/78]
+n=3: posets=7 non-chain=6 cuts(all posets)=14 cuts(non-chain posets)=12 both-sides-non-chain analysed=0 U_either failures=0 U_smaller failures=0  [PRUNED to Delta_1 < 17/78]
+n=4: posets=40 non-chain=39 cuts(all posets)=120 cuts(non-chain posets)=117 both-sides-non-chain analysed=7 U_either failures=0 U_smaller failures=0  [PRUNED to Delta_1 < 17/78]
+n=5: posets=357 non-chain=356 cuts(all posets)=1428 cuts(non-chain posets)=1424 both-sides-non-chain analysed=156 U_either failures=0 U_smaller failures=8  [PRUNED to Delta_1 < 17/78]
+n=6: posets=4824 non-chain=4823 cuts(all posets)=24120 cuts(non-chain posets)=24115 both-sides-non-chain analysed=3415 U_either failures=0 U_smaller failures=256  [PRUNED to Delta_1 < 17/78]
+n=7: posets=96428 non-chain=96427 cuts(all posets)=578568 cuts(non-chain posets)=578562 both-sides-non-chain analysed=77992 U_either failures=0 U_smaller failures=4436  [PRUNED to Delta_1 < 17/78]
+
+NOTE: pruned at Delta_1 < 17/78; failure counts above are NOT totals,
+      they are counts of failures that would LOWER the ceiling.
+
+U_either: NO violator found below the prune threshold
+U_smaller: thinnest violator  Delta_1 = 13/111 = 0.117117  at n=7, k=4, rel=[0, 0, 0, 4, 6, 15, 63]
+   => eps_0(U_smaller) <= 13/111
+
+cuts with both sides non-chain but NO balanced-in-side pair: 0

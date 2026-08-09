@@ -1,0 +1,74 @@
+==============================================================================
+PART A — the family at n = 2k+1 (so n > 2k, every balanced pair evicted)
+==============================================================================
+   k     n   e(P)        Delta_1      float  bal  surv  VIOLATES  hand e  hand d1  brute
+   3     7      7           4/21   0.190476    2     0      True    True     True   True
+   4     9      9           5/36   0.138889    1     0      True    True     True   True
+   5    11     11           6/55   0.109091    2     0      True    True     True      -
+   6    13     13           7/78   0.089744    3     0      True    True     True      -
+   7    15     15          8/105   0.076190    2     0      True    True     True      -
+   8    17     17          9/136   0.066176    3     0      True    True     True      -
+   9    19     19         10/171   0.058480    4     0      True    True     True      -
+  10    21     21         11/210   0.052381    3     0      True    True     True      -
+  11    23     23         12/253   0.047431    4     0      True    True     True      -
+  12    25     25         13/300   0.043333    5     0      True    True     True      -
+  13    27     27         14/351   0.039886    4     0      True    True     True      -
+  14    29     29         15/406   0.036946    5     0      True    True     True      -
+  15    31     31         16/465   0.034409    6     0      True    True     True      -
+  16    33     33         17/528   0.032197    5     0      True    True     True      -
+  17    35     35         18/595   0.030252    6     0      True    True     True      -
+  18    37     37         19/666   0.028529    7     0      True    True     True      -
+  19    39     39         20/741   0.026991    6     0      True    True     True      -
+  20    41     41         21/820   0.025610    7     0      True    True     True      -
+
+all members violate U_either: True
+
+PART A2 — pushing k further (hand formula + library agreement only)
+  k=30   n=61   Delta_1 = 31/1830 = 0.01693989  balanced-in-side=11 surviving=0 VIOLATES=True  hand-formula-agrees=True
+  k=50   n=101  Delta_1 = 51/5050 = 0.01009901  balanced-in-side=17 surviving=0 VIOLATES=True  hand-formula-agrees=True
+  k=100  n=201  Delta_1 = 101/20100 = 0.00502488  balanced-in-side=33 surviving=0 VIOLATES=True  hand-formula-agrees=True
+  k=200  n=401  Delta_1 = 201/80200 = 0.00250623  balanced-in-side=67 surviving=0 VIOLATES=True  hand-formula-agrees=True
+
+==============================================================================
+PART B — the detail of the smallest members, so the mechanism is visible
+==============================================================================
+
+n=7 k=3: A = {z=0} U {1..2}, B = chain {3..6}
+  e(P) = 7 (hand: 7), Delta_1 = 4/21 (hand: 4/21)
+  side A chain? False   side B chain? True
+    side A pair (0, 1): p_side=1/3 -> p_P=1/7  survives=False
+    side A pair (0, 2): p_side=2/3 -> p_P=2/7  survives=False
+  VIOLATES U_either: True
+
+n=9 k=4: A = {z=0} U {1..3}, B = chain {4..8}
+  e(P) = 9 (hand: 9), Delta_1 = 5/36 (hand: 5/36)
+  side A chain? False   side B chain? True
+    side A pair (0, 2): p_side=1/2 -> p_P=2/9  survives=False
+  VIOLATES U_either: True
+
+n=11 k=5: A = {z=0} U {1..4}, B = chain {5..10}
+  e(P) = 11 (hand: 11), Delta_1 = 6/55 (hand: 6/55)
+  side A chain? False   side B chain? True
+    side A pair (0, 2): p_side=2/5 -> p_P=2/11  survives=False
+    side A pair (0, 3): p_side=3/5 -> p_P=3/11  survives=False
+  VIOLATES U_either: True
+
+==============================================================================
+PART C — is the SMALLER side the non-chain one? (so U_smaller falls too)
+==============================================================================
+  k=3 n=7: |A|=3 |B|=4 -> smaller side is A (the non-chain one); U_smaller violated = True
+  k=5 n=11: |A|=5 |B|=6 -> smaller side is A (the non-chain one); U_smaller violated = True
+  k=10 n=21: |A|=10 |B|=11 -> smaller side is A (the non-chain one); U_smaller violated = True
+  k=50 n=101: |A|=50 |B|=51 -> smaller side is A (the non-chain one); U_smaller violated = True
+
+==============================================================================
+CONCLUSION
+==============================================================================
+  In the architecturally required scope (at least one side non-chain):
+     inf over the family of Delta_1 = lim_{k->inf} (k+1)/((2k+1)k) = 0
+     and EVERY member is a U_either AND U_smaller violator.
+  Therefore eps_0(U_either) = eps_0(U_smaller) = 0 in that scope,
+  which is not 'bounded by 17/78' -- it is REFUTED at every positive eps.
+
+  In mg-3969's own scope (BOTH sides non-chain) its 17/78 stands:
+  the family always has a chain side, so it never enters that population.

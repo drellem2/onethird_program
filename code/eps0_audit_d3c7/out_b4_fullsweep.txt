@@ -1,0 +1,26 @@
+n=2: [BOTH] cuts=0 U_either_fail=0 U_smaller_fail=0   [ONE+] cuts=0 U_either_fail=0 U_smaller_fail=0   
+n=3: [BOTH] cuts=0 U_either_fail=0 U_smaller_fail=0   [ONE+] cuts=8 U_either_fail=0 U_smaller_fail=0   
+n=4: [BOTH] cuts=16 U_either_fail=0 U_smaller_fail=0   [ONE+] cuts=106 U_either_fail=4 U_smaller_fail=0   
+n=5: [BOTH] cuts=444 U_either_fail=0 U_smaller_fail=96   [ONE+] cuts=1398 U_either_fail=30 U_smaller_fail=108   
+n=6: [BOTH] cuts=11020 U_either_fail=42 U_smaller_fail=1820   [ONE+] cuts=24058 U_either_fail=222 U_smaller_fail=1840   
+n=7: [BOTH] cuts=324016 U_either_fail=640 U_smaller_fail=56622   [ONE+] cuts=578442 U_either_fail=1786 U_smaller_fail=56782   
+
+=== scope BOTH (cumulative to n=7) ===
+  cuts in scope: 335496
+  cuts with no balanced-in-side pair at all: 0
+  U_either: 682 violators; thinnest Delta_1 = 17/78 = 0.217949 at n=6 k=3 rel=[0, 0, 2, 2, 3, 15]
+  U_smaller: 58538 violators; thinnest Delta_1 = 13/111 = 0.117117 at n=7 k=4 rel=[0, 0, 0, 4, 6, 15, 63]
+
+=== scope ONE+ (cumulative to n=7) ===
+  cuts in scope: 604012
+  cuts with no balanced-in-side pair at all: 0
+  U_either: 2042 violators; thinnest Delta_1 = 1/7 = 0.142857 at n=7 k=4 rel=[0, 0, 2, 6, 14, 30, 62]
+  U_smaller: 58730 violators; thinnest Delta_1 = 13/111 = 0.117117 at n=7 k=4 rel=[0, 0, 0, 4, 6, 15, 63]
+
+CEILING COMPARISON vs mg-3969
+  U_either  mg-3969 (BOTH scope): 17/78 = 0.217949
+  U_either  mine    (BOTH scope): 17/78 = 0.217949  MATCH=True
+  U_either  mine    (ONE+ scope): 1/7 = 0.142857  GAP LOWERS THE CEILING=True
+  U_smaller mg-3969 (BOTH scope): 13/111 = 0.117117
+  U_smaller mine    (BOTH scope): 13/111 = 0.117117  MATCH=True
+  U_smaller mine    (ONE+ scope): 13/111 = 0.117117  GAP LOWERS THE CEILING=False

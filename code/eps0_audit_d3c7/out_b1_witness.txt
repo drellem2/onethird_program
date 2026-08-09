@@ -1,0 +1,39 @@
+relation set transitively closed as given: True
+rel (bitmask of strict predecessors): [0, 0, 1, 1, 15, 3]
+naturally labelled (no i>j below j): True
+
+e(P) = |L(P)| = 26     [parent says 26]
+Delta_1(A_3, B) = 17/78 = 0.217949     [parent says 17/78 = 0.217949]
+  as a check, 17/78 = 17/78; equal: True
+
+Delta_1 at every prefix cut of this poset:
+  k=1: 4/13  (0.307692)
+  k=2: 5/26  (0.192308)
+  k=3: 17/78  (0.217949)
+  k=4: 5/26  (0.192308)
+  k=5: 9/13  (0.692308)
+
+P[A]: elements [0, 1, 2], rel=(0, 0, 1), chain=False, e=3
+
+P[B]: elements [3, 4, 5], rel=(0, 1, 0), chain=False, e=3
+
+Every pair balanced in its own side, and its probability in P:
+  side A  pair (0,1):  p_side = 2/3 -> p_P = 9/13 = 0.692308   in [1/3,2/3] in P? False
+  side A  pair (1,2):  p_side = 2/3 -> p_P = 19/26 = 0.730769   in [1/3,2/3] in P? False
+  side B  pair (3,5):  p_side = 2/3 -> p_P = 19/26 = 0.730769   in [1/3,2/3] in P? False
+  side B  pair (4,5):  p_side = 1/3 -> p_P = 4/13 = 0.307692   in [1/3,2/3] in P? False
+
+balanced-in-side pairs: 4   surviving in P: 0
+U_either VIOLATED at this cut: True
+
+parent's stated landing values {9/13, 19/26, 19/26, 4/13}
+  distinct values I compute: [Fraction(4, 13), Fraction(9, 13), Fraction(19, 26)]
+  set match: True
+  multiset I compute: [Fraction(4, 13), Fraction(9, 13), Fraction(19, 26), Fraction(19, 26)]
+  side p-values I compute: [Fraction(1, 3), Fraction(2, 3), Fraction(2, 3), Fraction(2, 3)]  [parent says 2/3, 2/3, 2/3, 1/3]
+
+Interior slack of each side's balanced pairs (min distance from p_side to an endpoint of [1/3,2/3]):
+  side A pair (0,1): p=2/3 slack=0
+  side A pair (1,2): p=2/3 slack=0
+  side B pair (3,5): p=2/3 slack=0
+  side B pair (4,5): p=1/3 slack=0

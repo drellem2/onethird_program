@@ -1,0 +1,65 @@
+==============================================================================
+D1 — the family satisfies L4-as-stated via disjunct (i): delta(P) >= 1/3
+==============================================================================
+  n=7    delta(P) = 3/7 = 0.428571  >= 1/3: True   -> L4 disjunct (i) HOLDS, so L4-as-stated is untouched
+  n=9    delta(P) = 4/9 = 0.444444  >= 1/3: True   -> L4 disjunct (i) HOLDS, so L4-as-stated is untouched
+  n=11   delta(P) = 5/11 = 0.454545  >= 1/3: True   -> L4 disjunct (i) HOLDS, so L4-as-stated is untouched
+  n=13   delta(P) = 6/13 = 0.461538  >= 1/3: True   -> L4 disjunct (i) HOLDS, so L4-as-stated is untouched
+  n=31   delta(P) = 15/31 = 0.483871  >= 1/3: True   -> L4 disjunct (i) HOLDS, so L4-as-stated is untouched
+
+  every family member satisfies L4 branch (i): True
+  => the family refutes mg-3969's (i)-FREE surrogate U_either,
+     NOT L4.  I did not attempt to refute L4 and did not.
+
+==============================================================================
+D2 — reconciling the U_smaller failure count (mg-3969 reports 58 755)
+==============================================================================
+  U_smaller failures, n<=7, BOTH-sides-non-chain scope:
+    TIE_EXCLUDED                :   58538   (vs mg-3969's 58755: diff -217)
+    TIE_NEITHER_SIDE_SURVIVES   :   58560   (vs mg-3969's 58755: diff -195)
+    TIE_SIDE_A                  :   58755   (vs mg-3969's 58755: diff +0)
+    TIE_SIDE_B                  :   58755   (vs mg-3969's 58755: diff +0)
+  U_either failures (my recount, cross-check): 682 (mg-3969 says 682; match=True)
+
+==============================================================================
+D3 — every published number, recomputed exactly
+==============================================================================
+  [ok ] 17/78 as a decimal     = 0.21794872    doc says 0.217949
+  [ok ] 13/111 as a decimal    = 0.11711712    doc says 0.117117
+  [ok ] (17/78)/0.20           = 1.0897436     doc says 1.0897
+  [ok ] (17/78)^2/2            = 0.023750822   doc says 289/12168 = 0.023751
+  [ok ] 0.02^2/2               = 0.0002        doc says 2e-4
+  [ok ] 0.20^2/2               = 0.02          doc says 2e-2
+  [ok ] (0.20/0.02)^2          = 100           doc: the '100x' is the square of a 10x move
+  [ok ] 0.023751/0.02          = 1.1875411     doc says 1.1875
+
+  (17/78)^2/2 exactly = 289/12168  (doc says 289/12168; equal: True)
+
+  Same chain at the ONE+ ceiling I found:
+    eps_0 <= 1/7 = 0.142857; (1/7)/0.20 = 0.7143 -> the calibration is 28.6% ABOVE the ceiling
+    eps_dem <= (1/7)^2/2 = 1/98 = 0.010204 vs corpus 0.02 -> corpus is 1.96x the ceiling
+    and with the family, both ceilings are in fact 0.
+
+==============================================================================
+D4 — NORMALISATION, named explicitly (the brief asks for this)
+==============================================================================
+  17/78, 13/111, 1/7 and the corpus's 0.20 are ALL values of
+
+        eps_leak := Delta_1(A,B) = E|A \ sigma(A)| / min(|A|,|B|),
+
+  the L^1 ordinal-sum defect defined at source `:270-278` and identified as the
+  leakage epsilon of L4 `:466` by Op-Form Sec 1's symbol table.  This is a THIRD
+  normalisation, distinct from BOTH of the two the audit brief names:
+
+        eps_c3ca : E[inv_e] <= eps * n^2                (LIBweak-mg-c3ca:172)
+        eps_spec : E[inv_e] <= (eps/6) * (n^2 - 1)      (STATE.md:15)
+        eps_spec / eps_c3ca = 6n^2/(n^2-1) -> 6         (STATE.md:15, inline)
+
+  eps_leak is not a division of E[inv_e] at all -- it is a per-element crossing
+  density -- and it reaches eps_spec through CHEEGER, i.e. by a SQUARE, not by a
+  factor of 6:  eps_spec <= (1/2) eps_leak^2  (Op-Form Sec 4.2, the boxed
+  relation mg-3969 Sec 7 uses).  So the factor-of-6 trap the brief warns about
+  cannot fire on these numbers, and the comparison 17/78 vs 0.20 is like-for-like:
+  both are eps_leak.  The trap that COULD fire here is the SQUARE, and mg-3969
+  handles it correctly (its 0.02^2/2 = 2e-4 / 0.20^2/2 = 2e-2 check is exactly
+  that guard).
