@@ -1,0 +1,84 @@
+==============================================================================
+a0 — CONTROLS for mg-00b3's audit instrument
+==============================================================================
+
+------------------------------------------------------------------------------
+(A) THE TWO DOWN-SET ENUMERATORS AGREE — and the lattice walk is not the scan
+------------------------------------------------------------------------------
+  `downsets_scan` visits all 2^n subsets; `downsets_walk` never leaves the down-set
+  lattice.  a3 needs the walk (2^28 is not affordable) so the walk must be right.
+
+  >>> THIS CONTROL WAS WRONG ON ITS FIRST RUN AND THE RECORD IS KEPT.  It compared the
+  two enumerators as LISTS and failed at 3280 of 5230 posets.  The sets are identical at
+  every one of the 5230 (0 set-differences); what differs is the order WITHIN a popcount,
+  because the scan discovers by increasing mask value and the walk by BFS.  The push DP
+  needs exactly one property of the order — popcount non-decreasing — and both have it.
+  So the failure was my control's, not the instrument's, and asserting list equality
+  would have made a3's n = 28 rows unreachable for a reason that does not exist.  The
+  control now asserts the two things that are actually load-bearing.
+    ok:   scan and walk enumerate the SAME SET at all 5230 posets n <= 6 (and the same count — neither duplicates)
+    ok:   both enumerators are popcount-monotone at all of them — the only ordering property the push DP consumes
+    ok:   scan == walk (as sets) on the staircase S_16 (the family a3 pushes to n = 28)
+    ok:   NEGATIVE ARM: dropping the closure test walks 65536 states, not 32 — the guard is load-bearing
+
+------------------------------------------------------------------------------
+(B) THE PUSH DP AGREES WITH n! — EXHAUSTIVELY, NOT ON A SAMPLE
+------------------------------------------------------------------------------
+  mg-9461's s0 caught a defect in exactly this DP that no numbers-only check at small n
+  could see, and mg-81ff records the same one.  So the check is against n!, on the
+  WHOLE population, on the integer transport matrix and not on a derived scalar.
+    ok:   Tint and e(P) agree with the n! path at all 5230 posets n <= 6, entry by entry
+
+------------------------------------------------------------------------------
+(C) THE CUT FORM OF Q_k AGREES WITH THE EDGE SUM
+------------------------------------------------------------------------------
+  This file evaluates Q_k as an INTEGER CUT COUNT, having observed that the centred
+  prefix indicator jumps by exactly n across the cut and by 0 elsewhere.  mg-81ff sums
+  over weighted edges.  If my observation is wrong every number in a1-a3 is wrong.
+    ok:   cut form == edge sum at all 25684 (poset, k) pairs n <= 6
+    ok:   NEGATIVE ARM: the UNCENTRED reading of f_A disagrees at 1422 of 1548 (poset, k) pairs n = 4,5 — so the centring is a real choice, not a no-op
+
+------------------------------------------------------------------------------
+(D) THE EIGENROUTINE — exact PD test vs float Sturm, both arms
+------------------------------------------------------------------------------
+  The exact route is `lambda_2 > q  <=>  L - q(I - J/n) + J/n positive definite`; the
+  float route is Householder + Sturm bisection.  They share no line.  a2's 86 277-row
+  sweep uses the FLOAT one, so it has to be inside the exact bracket everywhere.
+    ok:   float lambda_2 lies in the exact bracket at all 5230 posets n <= 6 (worst deviation 9.31e-10)
+    ok:   NEGATIVE ARM: on D_3 (gap 0.5584) the PD test accepts q = 1/2 and REJECTS q = 3/5
+
+------------------------------------------------------------------------------
+(E) min_k Q_k >= gap, AND c <= 1, AT EVERY POSET — asserted, not assumed
+------------------------------------------------------------------------------
+  Q_k is a Rayleigh quotient of a vector in H, so it cannot be below lambda_2.  Every
+  reading in a2/a3 rests on it (it is why C3gap >= 1 and c <= 1), and it is exactly the
+  kind of fact an instrument inherits from prose without checking.
+    ok:   min_k Q_k >= lambda_2 at all 4376 primitive posets n <= 6 (exact)
+    ok:   c <= 1 at all informative posets n <= 6
+
+------------------------------------------------------------------------------
+(F) `informative` IS EXACTLY `not an antichain` — the exclusion is named, not tuned
+------------------------------------------------------------------------------
+  `c` is undefined at lambda_std = 0, i.e. gap = 1.  a1 reports `informative` counts one
+  below `primitive` at every n and it should be obvious WHICH poset is dropped.
+    ok:   n = 3: exactly one poset has gap = 1 and it is the ANTICHAIN
+    ok:   n = 4: exactly one poset has gap = 1 and it is the ANTICHAIN
+    ok:   n = 5: exactly one poset has gap = 1 and it is the ANTICHAIN
+    ok:   n = 6: exactly one poset has gap = 1 and it is the ANTICHAIN
+
+------------------------------------------------------------------------------
+(G) primitive <=> connected, at n <= 6 — mg-81ff's `DISC <=> CUT`, re-derived
+------------------------------------------------------------------------------
+  mg-81ff uses this to collapse two loop filters into one and reports it at n = 7 over
+  96 428 posets.  It is cheap to check at n <= 6 and it is NOT assumed anywhere here —
+  a1/a2/a3 filter on `is_primitive` alone, so if it were false the populations would
+  differ from mg-81ff's and a1 (P1) would say so.
+    ok:   n = 2: connected(a_ij) <=> primitive, 0 exceptions
+    ok:   n = 3: connected(a_ij) <=> primitive, 0 exceptions
+    ok:   n = 4: connected(a_ij) <=> primitive, 0 exceptions
+    ok:   n = 5: connected(a_ij) <=> primitive, 0 exceptions
+    ok:   n = 6: connected(a_ij) <=> primitive, 0 exceptions
+
+==============================================================================
+a0: 20 controls pass, 0 fail
+==============================================================================

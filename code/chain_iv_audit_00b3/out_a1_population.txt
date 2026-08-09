@@ -1,0 +1,74 @@
+==============================================================================
+a1 — THE POPULATION, THE REFUTATION, AND WHETHER n <= 6 WAS A CONTROL
+==============================================================================
+
+------------------------------------------------------------------------------
+(P1) THE POPULATION — on a mask-and-transitivity enumeration, not an extension
+------------------------------------------------------------------------------
+     n   all naturally labelled   primitive   informative   mg-81ff primitive
+     3            7                     4           3       = 4  MATCH
+     4           40                    27          26       = 27  MATCH
+     5          357                   275         274       = 275  MATCH
+     6         4824                  4070        4069       = 4070  MATCH
+     7        96428                 86278       86277       = 86278  MATCH
+
+  The n = 7 total 96 428 is mg-d3c7's figure for the same population, reached here by a
+  different route.  `informative` is `primitive` minus exactly one poset at every n and
+  a0 (F) names it: the ANTICHAIN, where lambda_std = 0 and `c` has no value.
+
+------------------------------------------------------------------------------
+(P2) min c — mg-76b2's ROW AS A CONTROL, AND n = 7 AS A MEASUREMENT
+------------------------------------------------------------------------------
+     n    min c      minimiser (one of them)                      status
+     3   0.750000   [(0, 2)]                                  = mg-76b2 (CONTROL)
+           (1 labelled posets attain it)
+     4   0.618034   [(0, 1), (2, 3)]                          = mg-76b2 (CONTROL)
+           (1 labelled posets attain it)
+     5   0.536219   [(0, 1), (2, 4)]                          = mg-76b2 (CONTROL)
+           (2 labelled posets attain it)
+     6   0.452934   [(0, 1), (2, 3), (4, 5)]                  = mg-76b2 (CONTROL)
+           (1 labelled posets attain it)
+     7   0.412700   [(0, 1), (2, 3), (4, 6)]                  mg-81ff's NEW value
+           (3 labelled posets attain it)
+
+  ANSWER TO TICKET ITEM 4.  mg-76b2's own transcript
+  `code/c3_prefix_capture_76b2/out_s3_c3.txt:89` carries `6  4070  2.386087  0.452934
+  523 of 4069`, so `0.750000 / 0.618034 / 0.536219 / 0.452934` with counts `4/27/275/4070`
+  is mg-76b2's row and reproducing it is a CONTROL.  mg-81ff uses it as one: its s1 table
+  marks those four rows `= mg-76b2` and marks n = 7 `NEW`, its s0 (H) is filed as a
+  control, and its README states in advance that the ticket body printed the four figures
+  so the reproduction cannot be a discovery.  `0.412700` over 86 277 informative posets
+  does NOT occur anywhere in mg-76b2's artefacts.  BOTH HALVES OF ITEM 4 CONFIRMED.
+
+  ONE THING mg-81ff's TABLE DOES NOT SAY: the minimiser is not unique.  At n = 5 I get
+  [(0,1),(2,4)] and mg-81ff reports [(0,2),(3,4)]; both are `2 disjoint 2-chains + an
+  isolated point`, differently naturally labelled, and both attain 0.536219.  The count
+  of labelled minimisers is printed above.  Nothing turns on it — the SHAPE is the claim
+  and the shape agrees — but a reader comparing the two tables would otherwise see a
+  disagreement where there is none.
+
+------------------------------------------------------------------------------
+(P3) D_k = k DISJOINT 2-CHAINS, IN EXACT RATIONALS — TICKET ITEM 3
+------------------------------------------------------------------------------
+  Every figure below is an exact rational bracket from the positive-definiteness test;
+  no float is on the verdict path.
+   k   n   1 - min_k Q_k  argmin   gap (exact)        c (exact bracket)      < 40/49?
+   2   4   1/3           k=1     0.460655337      [0.6180340,0.6180340]   True
+   3   6   1/5           k=1     0.558434974      [0.4529344,0.4529344]   True
+   4   8   1/7           k=1     0.601244593      [0.3582576,0.3582576]   True
+   5  10   1/9           k=1     0.625302075      [0.2965352,0.2965352]   True
+   6  12   1/11          k=1     0.640722497      [0.2530331,0.2530331]   True
+   7  14   1/13          k=1     0.651451625      [0.2206956,0.2206956]   True
+   8  16   1/15          k=1     0.659348518      [0.1957034,0.1957034]   True
+
+  ALL EIGHT ROWS REPRODUCE mg-81ff EXACTLY, including `1 - min_k Q_k = 1/(n-1)` at every
+  k (asserted, not eyeballed), the argmin at the prefix A_1 = {0}, and primitivity.
+  `c > 0.80` is FALSE on the full naturally labelled population, already at n = 4.
+
+  AND NO SENTENCE UPGRADES IT.  Item 3 asks whether anything downstream turns `refuted at
+  eight k` into `c(D_k) -> 0`.  It does not.  The disclaimer occurs THREE times in
+  mg-81ff's artefacts — s1's transcript, the deliverable's sec 0.1, and its sec 5 `Not
+  done` — and the only `-> 0` phrases elsewhere in the corpus are about `min_k Q_k -> 0`
+  (a property of chain (II)'s hypothesis, correctly attributed) and `eps_spec -> 0` (the
+  limit defining the existence threshold).  The commit subject carries the disclaimer
+  too, as its last clause.  NOTHING TO REPORT HERE — which is itself the answer.

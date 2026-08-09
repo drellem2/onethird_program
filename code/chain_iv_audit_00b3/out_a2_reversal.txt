@@ -1,0 +1,154 @@
+==============================================================================
+a2 — IS THE REVERSAL REAL, OR IS IT THE BINS?
+==============================================================================
+
+------------------------------------------------------------------------------
+(R1) mg-81ff's SEVEN BANDS, RE-DERIVED
+------------------------------------------------------------------------------
+  gap band            n=6 posets   min c      n=7 posets   min c
+  [0.00, 0.06)            14   0.988958        1187   0.881084
+  [0.06, 0.10)           214   0.868532        3618   0.858894
+  [0.10, 0.20)          1350   0.796735       30936   0.787389
+  [0.20, 0.30)          1035   0.728438       27405   0.687795
+  [0.30, 0.50)          1259   0.488010       21530   0.514306
+  [0.50, 0.70)           183   0.452934        1563   0.412700
+  [0.70, 1.01)            14   0.672941          38   0.556306
+
+  ALL FOURTEEN min c VALUES REPRODUCE EXACTLY, to every printed digit, on an instrument
+  sharing no line with mg-81ff's.  So does the top band's break of the pattern, which
+  mg-81ff printed rather than dropped.
+
+  TWO OF THE FOURTEEN COUNTS DIFFER BY ONE, AND THE REASON IS THE FINDING'S OWN FRAGILITY
+  CLASS: I get 1035 / 1259 at n = 6 in [0.20,0.30) / [0.30,0.50) where mg-81ff has
+  1034 / 1260; the totals agree at 4069.  One poset — relations
+  [(0,2),(0,4),(0,5),(1,2),(1,4),(1,5),(3,4),(3,5)] — has lambda_2 EXACTLY 3/10, which I
+  certified rather than inferred (the exact test says lambda_2 > 3/10 is FALSE and
+  lambda_2 > 3/10 - 10^-12 is TRUE).  It sits on a band edge, so which half-open band it
+  lands in is decided by the last bit of whichever eigenroutine ran.  Its c is 0.785714
+  and it is nobody's minimum, so NOTHING in the reading moves.  It is reported because a
+  boundary that a rounding error can move is the exact hazard this section is testing.
+
+------------------------------------------------------------------------------
+(R2) THE SAME POPULATION, RE-BINNED AT TEN UNIFORM WIDTHS
+------------------------------------------------------------------------------
+  `Monotone` is a property of a partition.  If it survives only mg-81ff's partition it is
+  a property of the partition and not of the posets.
+   width   n   bands   adjacent pairs violating   worst rise   of those, both bands < 0.30
+   0.500   6       2             0 of 1             0.0000       0
+   0.500   7       2             0 of 1             0.0000       0
+   0.250   6       4             1 of 3             0.4146       0
+   0.250   7       4             1 of 3             0.2550       0
+   0.200   6       4             1 of 3             0.0749       0
+   0.200   7       4             1 of 3             0.0259       0
+   0.125   6       7             2 of 6             0.3179       0
+   0.125   7       7             2 of 6             0.2185       0
+   0.100   6       8             2 of 7             0.1451       0
+   0.100   7       8             2 of 7             0.1178       0
+   0.050   6      15             5 of 14            0.1946       0
+   0.050   7      16             5 of 15            0.1114       0
+   0.040   6      19             7 of 18            0.1096       0
+   0.040   7      20             6 of 19            0.1286       0
+   0.025   6      28            14 of 27            0.1096       3
+   0.025   7      31            15 of 30            0.1574       2
+   0.020   6      35            16 of 34            0.3932       5
+   0.020   7      39            17 of 38            0.2675       2
+   0.010   6      64            32 of 63            0.2190       10
+   0.010   7      74            32 of 73            0.3073       7
+
+  >>> STRICT MONOTONICITY IS NOT A PROPERTY OF THE POPULATION.  At width 0.01 half the
+      adjacent pairs violate it at both n.  And the violations are NOT confined to the
+      near-antichain tail mg-81ff discloses: 10 of them (n = 6) and 7 (n = 7) have BOTH
+      bands below gap 0.30, i.e. inside the low-gap region the reading rests on.  The
+      largest of those is n = 6, [0.130,0.140) min c 0.824256 -> [0.140,0.150) 0.874508.
+
+      SO THE WORD `monotonically` IN THE HEADLINE IS CARRIED BY THE CHOICE OF SIX BANDS.
+      What follows tests whether anything survives it.
+
+------------------------------------------------------------------------------
+(R3) EQUAL-COUNT BANDS — the one confound mg-81ff names, removed
+------------------------------------------------------------------------------
+  mg-81ff sec 3(b): `it is confounded with population size (a min over more posets falls
+  for free)`.  It applies that to the n-comparison.  It applies with EQUAL force to the
+  band comparison — the lowest band holds 14 posets at n = 6 and the [0.10,0.20) band
+  holds 1350 — and mg-81ff does not apply it there.  So: hold the count exactly fixed.
+   n=6   4 equal-count bands of  1017:  violations 0 of 3
+   n=6   6 equal-count bands of   678:  violations 0 of 5
+   n=6   8 equal-count bands of   508:  violations 0 of 7
+   n=6  10 equal-count bands of   406:  violations 1 of 9
+        gap [0.1309,0.1615] min c 0.807852  ->  [0.1615,0.1824] min c 0.813616
+   n=7   4 equal-count bands of 21569:  violations 0 of 3
+   n=7   6 equal-count bands of 14379:  violations 0 of 5
+   n=7   8 equal-count bands of 10784:  violations 0 of 7
+   n=7  10 equal-count bands of  8627:  violations 0 of 9
+
+  >>> THE CONFOUND DOES NOT EXPLAIN IT.  With the count held exactly equal, monotone at
+      4, 6 and 8 bands at BOTH n and at 10 bands at n = 7.  The single violation, at
+      n = 6 with 10 bands, is 0.807852 -> 0.813616, a rise of 0.006.
+
+------------------------------------------------------------------------------
+(R4) NO BINS AT ALL — every threshold, not seven of them
+------------------------------------------------------------------------------
+  For each t, compare min c on {gap < t} with min c on {gap >= t}.  The reversal says the
+  first is at least the second.  There is one test per distinct gap and no boundary is
+  chosen by anybody.
+   n=5:    220 distinct thresholds,  15 violate; the lowest violating t is 0.537750
+        the global minimiser's OWN gap is 0.533772 — above it the test is trivially
+        false, so the content is: THE REVERSAL HOLDS AT EVERY THRESHOLD BELOW 0.5378.
+   n=6:   3225 distinct thresholds,  48 violate; the lowest violating t is 0.558677
+        the global minimiser's OWN gap is 0.558435 — above it the test is trivially
+        false, so the content is: THE REVERSAL HOLDS AT EVERY THRESHOLD BELOW 0.5587.
+   n=7:  69944 distinct thresholds, 161 violate; the lowest violating t is 0.596185
+        the global minimiser's OWN gap is 0.596155 — above it the test is trivially
+        false, so the content is: THE REVERSAL HOLDS AT EVERY THRESHOLD BELOW 0.5962.
+
+  >>> BIN-FREE, THE REVERSAL HOLDS.  Every split below gap ~0.56 (n=6) / ~0.60 (n=7)
+      confirms it, which is the whole range between the regime (0.02) and the family that
+      does the refuting (0.46+).
+
+------------------------------------------------------------------------------
+(R5) WHAT SHOULD BE QUOTED INSTEAD OF A BAND TABLE — ONE NUMBER PER n
+------------------------------------------------------------------------------
+  The largest gap cap under which the whole population still satisfies each threshold.
+  No bins, no boundaries, exactly one number, and it is the number the architecture
+  actually asks for.  The budget is eps_spec = 0.020.
+      n   smallest gap    min c >= 40/49 for gap <=   ... >= 0.80 for gap <=   chain (IV) CLOSES (max min_k Q_k <= 1/5) for gap <=
+      4    0.152786        0.400000                    0.400000                 0.226308
+      5    0.095674        0.171839                    0.171839                 0.104715
+      6    0.056245        0.160030                    0.184170                 0.095353
+      7    0.038999        0.132265                    0.132265                 0.090472
+
+  >>> AND THIS IS WHERE mg-81ff's OWN sec 3(b) CAVEAT BITES HARDEST, IN A FORM THAT IS
+      NOT CONFOUNDED WITH POPULATION SIZE, BECAUSE IT IS NOT A MINIMUM OVER A BAND BUT A
+      THRESHOLD CROSSING.  Both columns FALL monotonically with n:
+
+          c >= 40/49 safe up to gap   0.400  ->  0.172  ->  0.160  ->  0.132   (n=4..7)
+          chain (IV) closes up to gap 0.226  ->  0.105  ->  0.095  ->  0.090
+
+      against a budget of 0.020.  So the margin is 6.6x (c-form) and 4.5x (closing form)
+      at n = 7 and it has been shrinking at every step.  It is decelerating and four
+      points decide nothing — mg-81ff says exactly that and it is right — but this is the
+      bin-free form of the caveat and it is sharper than the two-and-three-point version
+      the deliverable prints.
+
+  >>> AND ONE THING THE BAND TABLE HIDES BY BEING IN THE WRONG CURRENCY.  mg-81ff sec 1.2
+      establishes that chain (IV) closes on a poset IFF min_k Q_k <= eps_leak = 1/5, and
+      that `c >= 40/49` is that condition re-parametrised AT gap = eps_spec.  Away from
+      that point the two are NOT the same, and the c-form is the LOOSER of the two: at
+      gap = 0.10 the closing condition allows min_k Q_k up to 0.200 while `c >= 40/49`
+      allows 0.265.  The consequence is visible in mg-81ff's own sec 3(a) table and is
+      not remarked on there: at n = 7, max min_k Q_k over {gap <= 0.10} is 0.22436, ABOVE
+      the 0.2 its own column header names as the closing condition — i.e. there is a
+      poset only 5x outside the budget on which chain (IV) does not close, while the
+      band table's min c at the same cap, 0.858894, reads comfortably safe.
+
+==============================================================================
+a2 VERDICT — TICKET ITEM 1.  THE REVERSAL IS REAL AND IS NOT AN ARTEFACT OF THE
+BINS: it survives equal-count re-binning, which removes the only confound named
+against it, and it survives with no bins at all at every threshold below 0.56
+(n=6) / 0.60 (n=7).  `chain IV dies` is NOT the version that should have been
+published.  BUT `min c rises MONOTONICALLY across the six bands` is carried by
+those six bands: at uniform width 0.01 half the adjacent pairs violate it, 10 and
+7 of them with both bands inside the low-gap region.  The claim that survives is
+DIRECTIONAL, and the bin-free crossings of (R5) are what should be quoted for it.
+==============================================================================
+
