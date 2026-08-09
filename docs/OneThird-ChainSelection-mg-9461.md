@@ -23,6 +23,60 @@ md5 `mg-d3c7` reports).
 >    without that qualifier in four places and is under repair by `mg-5214` as this lands;
 >    its §§0, 7 and 10 are text under repair, not a reference.
 
+> ### 🔧 THREE EDITS APPLIED BY `mg-fd7c`, 2026-08-09, AFTER `mg-39bf`'s INDEPENDENT AUDIT
+>
+> `mg-39bf` (`f39ccce`, `docs/OneThird-ChainSelection-mg-39bf-IndependentAudit.md`)
+> **CONFIRMED this document's central claim** — Step 6 consumes none of the four chains — and
+> named three places where the text overstates what the derivation supports. All three are
+> applied here; **the ruling is unchanged and nothing is withdrawn.** The corrections make the
+> sentences one clause longer; they do **not** collapse the entitlement back to the tie §3
+> corrected *from*, and `mg-39bf` §2.3 checked that explicitly.
+>
+> 1. **§0(i) and §3's table — the asymmetry is real on L2's FIRST disjunct and not unconditional.**
+>    `mg-76b2` proves `C₃^(III) = 1` under L2's *monotone* disjunct. Under L2's *second*
+>    disjunct — the source's *"or at least yields a low-conductance prefix"* (`:560–562`), under
+>    a preamble reading *"established **with adequate constants**"* (`:553–554`) — `mg-76b2`
+>    establishes there is **no conversion to charge for**; it does **not** establish that the
+>    delivered prefix meets `Φ ≤ √(2ε_spec)` rather than `K√(ε_spec)`. The constant is not
+>    eliminated on that disjunct, it is **relocated** into the lemma's own unnamed
+>    *"low-conductance"* — the same shape of debt this document charges Prefix-capture with
+>    (`mg-39bf` §2.2/§2.4).
+> 2. **§0(i) and §3's table — `40/49` is the PARITY threshold, not the CLOSING threshold.**
+>    Chain (IV) closes for every `c > 1 − ε_leak = 4/5`; `40/49 = 0.8163` is where its budget
+>    *equals* chain (III)'s. At `c = 4/5 + 1/1000`, strictly below `40/49`, chain (IV) gives
+>    `ε_dem = 1/801 > 0` — it closes, **worse** than (III) (`mg-39bf` §3, re-derived from chain
+>    (IV)'s own bound). **§5.3 already says this correctly and is the text copied from**; this
+>    was a wording slip in §0(i) and §3, not a derivation error, and it changes nothing about
+>    the ruling on chain (IV), whose measured `min c` is below **`4/5`** at every `n = 3..6`.
+> 3. **§0 item 4 and §4.3 — the universal negative gains the scope §4.3's own table already
+>    carried, and `40 %` is labelled as the mildest reading available.** *"There is no reading
+>    in which `0.20` is conservative"* is **false as written** and is contradicted by this
+>    document's **own** §4.3 table, whose third row prints `0.20` as `8.235 %` **below** `17/78`
+>    in the restricted both-sides-non-chain scope. **The table was right and qualified inline;
+>    the verdict box was not** — and the verdict box is what gets quoted. It now says *"in the
+>    required scope"*. §4.3's `40 %` is exactly right (`0.20/(1/7) = 7/5`, excess `2/5` in exact
+>    rationals) and is a **floor**: it is the `n ≤ 7` reading and the mildest available, with
+>    `44 %` at `n = 9` from `mg-d3c7`'s **proved** family beside it.
+>
+> **PLUS FOUR SITES NO TICKET NAMED**, found by sweeping this document for the same two defects
+> rather than by following the audit's list: §0(ii)'s *"under either disjunct of L2"*, §5.2's
+> `C₃^(III)` and `ε_leak` status rows, claim-ledger rows 4/8/11/16, and §11's re-scope question
+> for `mg-81ff` (whose *"chain (IV) is dead"* inference needs the `4/5` level, not `40/49`).
+> §5.3, §2.3, §6 and §7's *"chain (IV)'s own `40/49` threshold"* were checked and are **already
+> correct** — untouched.
+>
+> **ERRATUM ON THIS DOCUMENT'S OWN COMMIT MESSAGE, WHICH CANNOT BE EDITED.** The landing commit
+> `cf1d7ef` says `ε_leak` *"ERRS OPTIMISTIC IN EVERY READING WHERE A COMPARISON EXISTS"* and
+> lists only two of the three comparison readings — it **drops the `17/78` row entirely**, so it
+> is the unqualified form without even the table beside it. It also carries *"chain (IV) does
+> not close at all unless that number clears 40/49"*. Both are corrected **here**, in the
+> document the commit points at; the commit subject is immutable and is recorded as wrong rather
+> than left to be quoted. This is the **third** instance on this lineage in one day of a claim
+> travelling without its scope — `17/78` published unqualified and struck from `roadmap.md` at
+> `7cd8ae7`, `mg-3969` §10 nearly landing the same into `STATE.md` (repaired by `mg-5214` at
+> `cf4672e`), and now a correct table summarised by an incorrect box, running in the **opposite**
+> direction. See `docs/repair-mg-fd7c-the-verdict-box-and-its-table.md`.
+
 ---
 
 ## 0. Verdict
@@ -54,22 +108,40 @@ md5 `mg-d3c7` reports).
 > **3. IS THE PROGRAMME ENTITLED TO CHAIN (III)'s CURRENCY WITH L2 UNPROVED? — YES, ON FIVE
 > TERMS, AND THE FIRST IS THE ONE THAT DECIDES IT.**
 >
-> **(i) CHAIN (III) NEEDS A LEMMA. CHAINS (II) AND (IV) NEED A LEMMA *AND* A CONSTANT.** Each
-> of the three routes rests on exactly **one** open statement — that is a real symmetry and I
-> nearly mis-stated it as a count in chain (III)'s favour, which it is not. The asymmetry is in
-> **what proving it delivers**. Chain (III) needs only that **L2 be true**: `mg-76b2`'s theorem
-> then supplies the conversion constant, `C₃^(III) = 1`, uniformly in `n`, with nothing left to
-> quantify. Chains (II) and (IV) need the **Prefix-capture conjecture** to be true *and* need
-> its constant to take a particular value — proving it qualitatively delivers *"a constant
-> fraction"* and no number, and chain (IV) does not even close unless that number clears
-> `40/49`. **A route whose lemma comes with its constant attached is entitled in a way a route
-> whose lemma leaves the constant open is not**, and that difference does not depend on either
-> lemma being proved. On top of which: L2 is on the source's **own list of four main open
+> **(i) CHAIN (III) NEEDS A LEMMA, AND A CONSTANT ONLY IF THAT LEMMA IS PROVED IN ITS SECOND
+> DISJUNCT. CHAINS (II) AND (IV) NEED A LEMMA *AND* A CONSTANT UNDER EVERY READING, AND (IV)
+> ADDITIONALLY NEEDS ITS CONSTANT TO CLEAR A THRESHOLD IT IS MEASURED BELOW AT EVERY
+> `n = 3..6`.** *(This sentence is `mg-39bf` §2.4's, applied by `mg-fd7c`; the paragraph below
+> is the original argument with the disjunct made explicit.)* Each of the three routes rests on
+> exactly **one** open statement — that is a real symmetry and I nearly mis-stated it as a count
+> in chain (III)'s favour, which it is not. The asymmetry is in **what proving it delivers**.
+> **On L2's first disjunct** — a monotone dominant standard eigenvector, which is where
+> `mg-76b2`'s theorem is actually proved — chain (III) needs only that **L2 be true**: the
+> theorem then supplies the conversion constant, `C₃^(III) = 1`, uniformly in `n`, with nothing
+> left to quantify. **On L2's second disjunct** the source asks only for *"or at least yields a
+> low-conductance prefix"* (`:560–562`), under a preamble reading *"established **with adequate
+> constants**"* (`:553–554`): `mg-76b2` establishes there is **no conversion to charge for**, and
+> that is not the same as establishing that the delivered prefix meets `Φ ≤ √(2ε_spec)` rather
+> than `K√(ε_spec)`. On that branch the constant is **relocated**, not eliminated — it moves out
+> of the conversion and into the lemma's own unnamed *"low-conductance"*, which is the same shape
+> of debt this section charges Prefix-capture with (`mg-39bf` §2.2). Chains (II) and (IV) need
+> the **Prefix-capture conjecture** to be true *and* need its constant to take a particular value
+> **on every reading** — proving it qualitatively delivers *"a constant fraction"* and no number,
+> and chain (IV) is strictly worse than chain (III) below `c = 40/49` and does not close at all
+> below `c = 4/5`. **A route whose lemma comes with its constant attached is entitled in a way a
+> route whose lemma leaves the constant open is not**, and that difference does not depend on
+> either lemma being proved — but on L2's second disjunct chain (III) is on the *other* side of
+> that line, and the disjunct carrying the clean version is the one `STATE.md` row 9 records as
+> `FP✗`-false as stated. On top of which: L2 is on the source's **own list of four main open
 > lemmas**, and Prefix-capture is not on that list at all.
 >
 > **(ii) IT IS THE ONLY ONE OF THE FOUR WHOSE CONVERSION CONSTANT IS PROVEN RATHER THAN
-> MEASURED** — `C₃^(III) = 1`, uniformly in `n`, under either disjunct of L2 (`mg-76b2`,
-> audited `mg-94c3`, `1032/1032`).
+> MEASURED** — `C₃^(III) = 1`, uniformly in `n`, **on L2's first disjunct** (`mg-76b2`, audited
+> `mg-94c3`, `1032/1032`). *(`mg-fd7c`: this read "under either disjunct of L2". Under the
+> second disjunct what is proven is that there is **no conversion to charge for**, which is not
+> the same as a proven `C₃` — see (i). The other three constants are measured under every
+> reading, so the "only one of the four" holds either way; what does not hold unconditionally is
+> the word **proven**.)*
 >
 > **(iii) AND — THE PART THAT IS NOT ALREADY IN THE CORPUS — IT IS THE ONLY ONE FOR WHICH THE
 > `n`-FREENESS OF THE CONVERSION IS PROVEN RATHER THAN ASSUMED.** `Op-Form §4.3`'s whole
@@ -91,7 +163,8 @@ md5 `mg-d3c7` reports).
 > be printed at the figure, not one line away.
 >
 > **4. WHAT IS `ε_leak`, EXACTLY? — IT IS NOT A MEASUREMENT AND IT IS NOT A BOUND. IT IS A
-> NON-REFUTATION OVER A FINITE POPULATION, AND IT ERRS OPTIMISTIC IN EVERY READING AVAILABLE.**
+> NON-REFUTATION OVER A FINITE POPULATION, AND IT ERRS OPTIMISTIC IN EVERY READING *IN THE
+> REQUIRED SCOPE*.**
 >
 > `ε_leak` **is** L4's threshold: Step 5's `≪` is `Δ₁ ≤ ε_leak` and L4's hypothesis is
 > `Δ₁(A,B) ≤ ε`. Three objects have worn that name (`mg-3969`), and `0.20` is none of them:
@@ -102,11 +175,22 @@ md5 `mg-d3c7` reports).
 > | `ε₀^unif` | the `F`-free, (i)-free uniform surrogate, **at least one side non-chain** | **`0`** | **REFUTED, not capped** (`mg-d3c7`; re-verified here to `k = 50`) |
 > | `0.20` | the largest `ε` at which `mg-3ce3`'s `survives` predicate produced 0 RED over 6681 posets | `1/5` | **EMPIRICAL CALIBRATION**, `FP` in `STATE.md`'s own taxonomy — and the standing rule says `FP` says **nothing** above the largest `n` checked |
 >
-> **Direction of error: optimistic, in both readings in which a comparison exists.** Against
-> the required scope's `n ≤ 7` ceiling `1/7` it is **40 % too large**; against the uniform
-> value `0` it is too large by everything. Overstating `ε_leak` overstates `ε_dem`, which
-> understates how small `ε_spec` must be, which **understates the difficulty**. There is no
-> reading in which `0.20` is conservative.
+> **Direction of error: optimistic, in both readings in the required scope in which a
+> comparison exists.** Against the required scope's `n ≤ 7` ceiling `1/7` it is **40 % too
+> large** — and that `40 %` is the **mildest** of the required-scope readings, not the margin:
+> `mg-d3c7`'s family is *proved*, so the ceiling is available in closed form at every `n` and
+> `0.20` is `44 %` above the `n = 9` ceiling `5/36`, `282 %` above `n = 21`'s `11/210`, and so
+> on without bound (§4.3). Against the uniform value `0` it is too large by everything.
+> Overstating `ε_leak` overstates `ε_dem`, which understates how small `ε_spec` must be, which
+> **understates the difficulty**. **There is no reading *in the required scope* in which `0.20`
+> is conservative.**
+>
+> > *(`mg-fd7c`, per `mg-39bf` §4: this read* **"There is no reading in which `0.20` is
+> > conservative"**, *and that is false — it is contradicted by §4.3's own third row, which
+> > prints `0.20` as `8.235 %* ***below*** *`17/78` in the* ***restricted*** *both-sides-non-chain
+> > scope. The table qualified it inline and the verdict box did not, and the verdict box is what
+> > gets quoted. The restricted scope is not the one Step 6 must survive — which is why the row
+> > does not disturb the ruling — but it is a reading, and a comparison does exist there.)*
 >
 > **Derivable? No — and not because nobody has done the work.** `mg-3969` §4 finds no `F`-free
 > derivation route for the value, and §5.3 shows that pinning the consumed object at *any*
@@ -123,7 +207,8 @@ md5 `mg-d3c7` reports).
 > > 25 684 pairs, exact); `C₃^(III) = 1` uniformly in `n` — **PROVEN CONDITIONAL ON L2**, which
 > > is **OPEN** and whose first disjunct is **`FP✗`-false as stated** (`STATE.md` row 9,
 > > `2/126` at `n = 6`); `ε_leak = 0.20` — **EMPIRICAL**, a finite-population non-refutation of
-> > a surrogate whose uniform form is refuted at `0`, erring **optimistic**; and the Cheeger
+> > a surrogate whose uniform form is refuted at `0`, erring **optimistic in the required
+> > scope**; and the Cheeger
 > > square itself — **PROVEN as the price of Step 4, ROUTE-DEPENDENT, not architecture-forced.**
 > > **Sensitivity: `ε_leak` enters SQUARED, so a factor-2 error in it is a factor-4 error in the
 > > target; `C₃` enters linearly; the chain choice is worth `2/ε_leak = 10×` and no more.**
@@ -281,16 +366,29 @@ the Remark at `:328–332`) and the Prefix-capture conjecture (`:360–364`). Ea
 
 | route | producer of the prefix | open statement | on the source's list of four main open lemmas? | does proving it give the constant? |
 |---|---|---|---|---|
-| **(I) ≡ (III) at `C₃ = 1`** | L2 | **L2** (and L3 comes free — `mg-76b2` makes it a *consequence* of L2 in this currency) | **yes** | **YES — `C₃^(III) = 1`, uniform in `n`, nothing left over** |
+| **(I) ≡ (III) at `C₃ = 1`**, L2's **first** disjunct (monotone `v`) | L2 | **L2** (and L3 comes free — `mg-76b2` makes it a *consequence* of L2 in this currency) | **yes** | **YES — `C₃^(III) = 1`, uniform in `n`, nothing left over** |
+| **(I) ≡ (III)**, L2's **second** disjunct (*"or at least yields a low-conductance prefix"*, `:560–562`) | L2 | **L2** | **yes** | **NO** — there is no *conversion* to charge for, but the lemma's own unnamed *"low-conductance"* must still be established *"with adequate constants"* (`:553–554`): a prefix at `Φ ≤ K√(ε_spec)` gives an effective `C₃ = K²/2` (`mg-39bf` §2.2) |
 | (II) gap-form | Prefix-capture, gap form | **Prefix-capture** | **no** | **no** — delivers *"a constant"*, not a number; `C₃^gap` stays open |
-| (IV) literal | Prefix-capture, literal form | **Prefix-capture** | **no** | **no** — and it does not close at all unless `c ≥ 40/49` |
+| (IV) literal | Prefix-capture, literal form | **Prefix-capture** | **no** | **no** — and it is strictly worse than chain (III) below `c = 40/49` and does not close at all below `c = 4/5` |
 
 So *"chain (III) borrows less"* is **false as a count** and I am not resting anything on it.
-What is true is the last column: **chain (III) needs a lemma; the others need a lemma and a
-constant.** Proving Prefix-capture tomorrow, in either form, would leave `ε_dem` exactly as
-unpinned as `Op-Form §8.1` records it today — which is precisely the failure mode `mg-345e`
-§5.2 already identified for a different gate. **Chain (III) is the only route on which one
-open statement closing is sufficient to produce a number.**
+What is true is the last column: **chain (III) needs a lemma, and a constant only if that lemma
+is proved in its second disjunct; chains (II) and (IV) need a lemma and a constant under every
+reading, and (IV) additionally needs its constant to clear a threshold it is measured below at
+every `n = 3..6`.** Proving Prefix-capture tomorrow, in either form, would leave `ε_dem` exactly
+as unpinned as `Op-Form §8.1` records it today — which is precisely the failure mode `mg-345e`
+§5.2 already identified for a different gate. **Chain (III) on L2's first disjunct is the only
+route on which one open statement closing is sufficient to produce a number** — and that is the
+disjunct `STATE.md` row 9 records as `FP✗`-false as stated, which is a cost this section already
+prints two paragraphs below and which the unqualified version of this sentence hid.
+
+*(`mg-fd7c`, per `mg-39bf` §2.4 and §3: the row for (IV) read* **"does not close at all unless
+`c ≥ 40/49`"**, *which names the wrong threshold — `40/49` is where chain (IV)'s budget* equals
+*chain (III)'s, while closure needs only `c > 1 − ε_leak = 4/5`; at `c = 4/5 + 1/1000` chain (IV)
+gives `ε_dem = 1/801 > 0`. §5.3 already had it right and is the text copied from. Neither the
+split row nor the threshold correction changes the ruling: the measured `min c` is
+`0.750, 0.618, 0.536, 0.453` at `n = 3..6`, below `4/5` at every one, so chain (IV) fails under*
+both *readings.)*
 
 Second, weaker, but not nothing: L2 is a lemma the programme has **already committed to
 attempting** — it is on the source's own list — while Prefix-capture is a conjecture the
@@ -351,14 +449,39 @@ Set out in §0.4 above. The essential point for a reader deciding what to do nex
 (the object is unmeasurable) and not a bound on it (a finite population can refute a universal
 and can never establish one — `STATE.md`'s `FP`/`FP✗` asymmetry).
 
-**Where a comparison exists at all, `0.20` is on the generous side:**
+**Where a comparison exists at all *in the required scope*, `0.20` is on the generous side —
+and there is exactly one reading, in a scope Step 6 does not have to survive, where it is not:**
 
-| reading | its value | `0.20` against it |
+| reading | its value | `0.20` against it | direction |
+|---|---|---|---|
+| uniform surrogate, **required** scope, uniform in `n` | `0` | **above it by everything** | **optimistic** |
+| uniform surrogate, **required** scope, `n ≤ 7` | `1/7 = 0.1429` | **40 % above it** — `0.20/(1/7) = 7/5`, excess `2/5`, exact | **optimistic** |
+| uniform surrogate, **restricted** scope (skips chain-sided cuts), `n ≤ 7` | `17/78 = 0.2179` | **8.235 % below it** (`7/85`, exact) — **but this scope is not the one Step 6 must survive** | **conservative** |
+| `ε₀^cons` — what Step 6 actually consumes | unmeasurable | no comparison exists | — |
+
+> **THE THIRD ROW RUNS THE OTHER WAY AND IT IS NOT AN EXCEPTION TO BE FILED AWAY.** It is why
+> §0 item 4 now says *"in the required scope"* rather than *"in every reading"*: without that
+> qualifier the verdict box **contradicts this table**. The restricted scope — cuts at which
+> **both** sides are non-chain — is `mg-3969`'s sweep population, not the architecture's; on the
+> architecturally required population (**at least one** side non-chain) `mg-d3c7` shows the same
+> threshold is `0`, refuted rather than capped. The row is retained rather than deleted, with
+> its scope, because a number with a scope is worth more than a number withdrawn (`mg-5214`).
+
+**`40 %` IS THE `n ≤ 7` READING AND THE MILDEST AVAILABLE — IT IS A FLOOR, NOT A MARGIN.**
+`mg-d3c7`'s refuting family is **proved**, so its members are witnesses at every `n` and the
+required-scope ceiling is available in **closed form with no sweep**. The `n ≤ 7` row above is
+therefore the *smallest* excess this comparison ever shows (`mg-39bf` §4):
+
+| `n` | required-scope ceiling `≤` | `0.20` is above it by |
 |---|---|---|
-| uniform surrogate, **required** scope, uniform in `n` | `0` | **above it by everything** |
-| uniform surrogate, **required** scope, `n ≤ 7` | `1/7 = 0.1429` | **40 % above it** |
-| uniform surrogate, **restricted** scope (skips chain-sided cuts), `n ≤ 7` | `17/78 = 0.2179` | below it — **but this scope is not the one Step 6 must survive** |
-| `ε₀^cons` — what Step 6 actually consumes | unmeasurable | no comparison exists |
+| `7` | `1/7` (a different witness; the family's own `n = 7` member is `4/21`, above `1/7`) | **40 %** |
+| `9` | `5/36` | **44 %** |
+| `21` | `11/210` | 282 % |
+| `101` | `51/5050` | 1 880 % |
+| `401` | `201/80200` | 7 880 % |
+
+**And this cuts *for* §4.4, not against it:** the movement needs no experiment — it is already
+fixed by a proved family, which is exactly what *"only a proof moves it"* predicts.
 
 **And the direction propagates the wrong way for us.** `ε_dem` is increasing in `ε_leak`, so
 overstating `ε_leak` overstates the spectral budget, which understates how hard L1b has to
@@ -397,8 +520,8 @@ refuted at `0`. The only thing that moves this number is a proof.
 | Cheeger sandwich `(Φ*)²/2 ≤ 1−λ_std ≤ 2Φ*` (`:318–324`) | — | **PROVEN** (in the source) | the whole chain goes |
 | dictionary `Φ ≤ 1−ρ ≤ 2Φ` (`mg-76b2` Lemma 2.1) | — | **PROVEN**; 0 exceptions / 25 684 pairs, exact | chains become incomparable again |
 | **the chain is (I) ≡ (III)** | — | **DERIVED from the source's Step 4** (§2.1), plus the entitlement ledger (§3) | see §6 — the answer moves by at most `10×` |
-| `C₃^(III)` | `1`, uniform in `n` | **PROVEN CONDITIONAL ON L2**; L2 **OPEN**, first disjunct **`FP✗`-false as stated** | linear: `C₃ = 2` halves the budget |
-| `ε_leak` | `1/5` | **EMPIRICAL**; `FP` calibration of a surrogate whose uniform form is **refuted at 0**; errs **optimistic** | **quadratic** — see §5.3 |
+| `C₃^(III)` | `1`, uniform in `n` | **PROVEN CONDITIONAL ON L2's FIRST DISJUNCT**; L2 **OPEN**, and that disjunct **`FP✗`-false as stated**. On L2's second disjunct there is no *conversion* to charge for but the lemma's own *"low-conductance"* is unquantified — §0(i) | linear: `C₃ = 2` halves the budget |
+| `ε_leak` | `1/5` | **EMPIRICAL**; `FP` calibration of a surrogate whose uniform form is **refuted at 0** in the required scope; errs **optimistic in that scope** (and `8.235 %` conservative in the restricted one — §4.3) | **quadratic** — see §5.3 |
 | the Cheeger square | — | **PROVEN as the price of Step 4**; **ROUTE-dependent** | droppable only by swapping L2 for Prefix-capture — a lemma that does not carry its constant |
 | `ε_sup = 1` (the comparison, not an input) | `sup_{η>0}(1−3η)n/(n+1)` | **PROVEN**, and an **equality** for the information pair bias consumes; **approached, not attained** in the frozen class | the `50×` moves |
 
@@ -493,7 +616,10 @@ at `STATE.md:164`:
 > Step 5's `Δ₁ ≤ ε_leak`; `C_3` occurs **0 times in the source** and no chain constant occurs
 > in Steps 5–6, so the four chains are supply routes for one hypothesis and the choice is made
 > at **Step 3–4**, not at Step 6 (`mg-9461`). **The choice is entitled and costs nothing:**
-> chain (III) at `C₃ = 1` consumes only **L2, which is Step 3**; chains (II) and (IV) each add
+> chain (III) at `C₃ = 1` consumes only **L2, which is Step 3** — **on L2's FIRST disjunct,
+> which is where `mg-76b2`'s theorem is proved; on L2's second disjunct there is no conversion
+> to charge for but the lemma's own *"low-conductance"* is itself unquantified** (`mg-39bf`
+> §2.2, applied `mg-fd7c`); chains (II) and (IV) each add
 > the Prefix-capture conjecture, which is **not** on the source's list of four main open lemmas
 > and, unlike L2, **does not deliver the constant when proved** — and all three of their
 > constants are measured moving the wrong way
@@ -505,8 +631,11 @@ at `STATE.md:164`:
 > non-monotone posets) and is not support — the theorem's support is its proof.** **`ε_leak =
 > 0.20` is EMPIRICAL and is neither a measurement nor a bound:** it is a finite-population
 > non-refutation (`FP`) of a surrogate whose uniform form is **refuted at `0`** in the required
-> scope (`mg-d3c7`), it sits **40 % above** that scope's `n ≤ 7` ceiling `1/7`, and it errs
-> **optimistic** — so this budget is an upper estimate of our own headroom. **It enters
+> scope (`mg-d3c7`), it sits **40 % above** that scope's `n ≤ 7` ceiling `1/7` — **the mildest
+> reading available, `44 %` at `n = 9` and unbounded thereafter off `mg-d3c7`'s proved family** —
+> and it errs **optimistic in the required scope** (it is `8.235 %` conservative against the
+> **restricted** both-sides-non-chain ceiling `17/78`, which is not the scope Step 6 must
+> survive) — so this budget is an upper estimate of our own headroom. **It enters
 > SQUARED: a factor-2 error in `ε_leak` is a factor-4 error here, and `mg-e35c` F5's `10×`
 > repair is exactly why this figure moved `100×`.** **The chain choice is worth `2/ε_leak = 10×`
 > and no more** — chains (II) and (III) differ by that factor at **every** `C₃`, which cancels
@@ -523,19 +652,19 @@ at `STATE.md:164`:
 | 1 | Step 5's conclusion is `Δ₁(A_k,A_kᶜ) ≤ ε_leak`, and it is Step 6's whole hypothesis | **PROVEN** (source `:509–516` + `Op-Form` Cor 2.2) |
 | 2 | `C_3` occurs 0 times in the source; no chain constant occurs in Steps 5–6 | **PROVEN** — byte-wise, `s3` §B |
 | 3 | Step 6 consumes none of the four chains | **PROVEN** given 1 and 2 |
-| 4 | the architecture's own Steps 3–4 are chain (I); (III) at `C₃=1` is the same relation | **PROVEN** (source `:499–507`) + **CONDITIONAL on L2** for the `C₃=1` |
+| 4 | the architecture's own Steps 3–4 are chain (I); (III) at `C₃=1` is the same relation | **PROVEN** (source `:499–507`) + **CONDITIONAL on L2's FIRST DISJUNCT** for the `C₃=1` (`mg-fd7c`, per `mg-39bf` §2.2) |
 | 5 | chains (II), (IV) each SUBSTITUTE the Prefix-capture conjecture, which is outside the source's four main open lemmas, for L2 | **PROVEN** — `s3` §C/§D locate it inside `\begin{conjecture}` at `:362` and the four lemmas at `:556–570` |
 | 6 | chain (III) is the only one of the four whose conversion constant, **and hence the `n`-freeness `Op-Form §4.3` concludes**, is proven rather than assumed | **PROVEN as a reading of §4.3 + `mg-76b2`'s theorem**; new here |
 | 7 | all three non-(III) constants are measured moving adversely | **FP / DIRECTION only**, `n ≤ 6`, outside the regime — read from `mg-76b2` §7, `mg-94c3` §3, **not re-measured** |
-| 8 | chain (IV)'s measured `min c` is below its own `40/49` threshold at `n = 3..6` | **FP**, same caveat — and the sharpest single fact against chain (IV) |
+| 8 | chain (IV)'s measured `min c` is below its own `40/49` parity threshold at `n = 3..6` — **and below its `4/5` closing threshold at every one of them too**, so chain (IV) fails under both readings | **FP**, same caveat — and the sharpest single fact against chain (IV) |
 | 9 | `ε_leak` is L4's threshold `ε₀`; `0.20` is an `FP` calibration, not a measurement or a bound | **PROVEN** (identification) + **cited** (`mg-3969`, `mg-345e`) |
 | 10 | the uniform surrogate is `0` in the required scope | **PROVEN — cited `mg-d3c7`, re-verified independently here to `k = 50`** (`s2`) |
-| 11 | `0.20` errs optimistic in every reading in which a comparison exists | **PROVEN** given 10 and monotonicity of `ε_dem` in `ε_leak` |
+| 11 | `0.20` errs optimistic in every reading **in the required scope** in which a comparison exists — and is `8.235 %` **conservative** against the **restricted** both-sides-non-chain ceiling `17/78`, which is not the required scope | **PROVEN** given 10 and monotonicity of `ε_dem` in `ε_leak`. *(`mg-fd7c`: this row read "in every reading in which a comparison exists", which §4.3's own third row contradicts — `mg-39bf` §4)* |
 | 12 | a factor-2 error in `ε_leak` is a factor-4 error in `ε_dem` on (I)/(III), factor-2 on (IV) | **PROVEN** — exact rationals, `s1` §E |
 | 13 | chains (II) and (III) differ by `2/ε_leak = 10` at **every** `C₃` | **PROVEN** — the `C₃` cancels; `mg-94c3`'s figure, verified as an identity |
 | 14 | `ε_sup/ε_dem` is `50` at the architecture's chain and `5` at the most permissive of the four | **PROVEN as arithmetic**, **CONDITIONAL** on `ε_sup = 1`, which is a supremum **approached, not attained** in the frozen class |
 | 15 | `1/50` is sufficient for one route and has never been shown necessary | **PROVEN** given 3 |
-| 16 | the entitlement: each route rests on **one** open statement (a tie), but only chain (III)'s **delivers the constant when proved** | **PROVEN** given 4 and 5 — this is the ticket's live question, and the count-based version of it is FALSE (§3) |
+| 16 | the entitlement: each route rests on **one** open statement (a tie), but only chain (III)'s **delivers the constant when proved — on L2's first disjunct**; on L2's second disjunct chain (III) needs a constant too, and (II)/(IV) need one under every reading | **PROVEN** given 4 and 5 — this is the ticket's live question; the count-based version of it is FALSE (§3), and the *unconditional* version of the asymmetry is over-stated (`mg-39bf` §2.2, applied `mg-fd7c` — it does **not** collapse back to the tie, `mg-39bf` §2.3) |
 
 ---
 
@@ -597,7 +726,11 @@ one**, falling. So the honest re-scope for `mg-81ff` is:
 > **Not** *"establish `c`"* — that is the Prefix-capture conjecture, which is not on the
 > source's list of four main open lemmas and does not hand over a number when proved.
 > **Instead:** *"is `min c` over the small-gap stratum bounded below by `40/49`, or does it fall
-> the way the whole-population `min c` falls?"* If it falls in the stratum too, chain (IV) is
+> the way the whole-population `min c` falls?"* — and the question has **two** answer levels,
+> because `40/49` is the **parity** threshold (chain (IV) matches chain (III)'s budget) while
+> `4/5 = 1 − ε_leak` is the **closing** threshold (chain (IV) exists at all): falling below
+> `40/49` costs chain (IV) its advantage, falling below `4/5` kills it (`mg-fd7c`, per
+> `mg-39bf` §3). If it falls below `4/5` in the stratum too, chain (IV) is
 > dead and the `10×` is not available at any price, which **retires the last ambiguity in the
 > headline permanently**. That is a cheap, decisive, `FP✗`-shaped question, and it is worth more
 > than a value for `c`.

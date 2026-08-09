@@ -465,6 +465,20 @@ Two of my own defects, both caught by controls before publication: `a1`'s positi
 
 ## 10. Proposal for `pm-onethird` — three edits, stated as a proposal
 
+> **LANDED BY `mg-fd7c`, 2026-08-09.** All three edits are applied in
+> `docs/OneThird-ChainSelection-mg-9461.md`, together with **four further sites in that document
+> carrying the same two defects**, found by sweeping it rather than by ticket: §0(ii)'s
+> *"under either disjunct of L2"*, §5.2's `C₃^(III)` and `ε_leak` status rows, claim-ledger rows
+> 4/8/11/16, and §7's proposed `STATE.md` text (edit 1's qualifier on *"consumes only L2"*, as
+> §10 asks; its `40/49` wording was already safe and is untouched). **The ruling is unchanged and
+> nothing is withdrawn** — §2.3's finding that the asymmetry does *not* collapse back to the tie
+> is carried explicitly into ledger row 16. `17/78` keeps its number and gains its scope at §4.3
+> rather than being deleted. **The landing commit `cf1d7ef` cannot be edited**, so its
+> *"ERRS OPTIMISTIC IN EVERY READING WHERE A COMPARISON EXISTS"* and its
+> *"does not close at all unless that number clears 40/49"* are recorded as errata in the
+> document's own repair banner. `STATE.md` was **not** edited — §7 there remains a proposal for
+> `pm-onethird`. See `docs/repair-mg-fd7c-the-verdict-box-and-its-table.md`.
+
 1. **§0(i) and §3's table**: replace *"needs a lemma"* with §2.4's sentence, and replace
    *"does not close at all unless `c ≥ 40/49`"* with *"is strictly worse than chain (III)
    below `c = 40/49` and does not close at all below `c = 4/5`"*. §5.3 already says this and
