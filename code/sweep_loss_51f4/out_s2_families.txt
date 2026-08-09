@@ -1,0 +1,193 @@
+
+====================================================================================================
+S2.1  THE NINE NAMED FAMILIES — EVERY ROW IS A FAMILY MEMBER, NEVER A MAXIMUM
+====================================================================================================
+gamma = 1 - lambda_std (exact bracket, lower endpoint shown).  D = Delta_P.
+c_true = Phi*_pref^2/(2 gamma)   c# = sweep(mu,D)/(2 gamma)   f* = M^2/(2 gamma)
+floor  = D - gamma/2   (mg-51f4's exact floor on c#, PREDICTIONS P1)
+Lam_M  = c#/c_true  (THE SWEEP'S LOSS)      Lam_F = M/Phi*_pref  (THE MEDIANT LOSS)
+
+READ THE c# COLUMN AS AN UPPER BOUND.  It is computed from an EXHIBITED monotone
+vector, so it bounds mu_pref from ABOVE and therefore bounds c# from above.  That
+direction CERTIFIES that (M#) holds and can NEVER certify that it fails; the exact
+cone-minimum brackets that do certify failure are in S2.3.  The f* column carries no
+such caveat -- it has no eigenvector in it and is exact throughout.
+
+--- FAMILY: antichain
+   n= 4  gamma=1.0000000 D=0.75000 Phi*=0.500000 M=0.625000 | c_true=0.1250 c#=0.2813 f*=0.1953  min=0.1953 | floor=0.2500  Lam_M=    2.2 Lam_F=  1.25
+   n= 5  gamma=1.0000000 D=0.80000 Phi*=0.600000 M=0.666667 | c_true=0.1800 c#=0.3200 f*=0.2222  min=0.2222 | floor=0.3000  Lam_M=    1.8 Lam_F=  1.11
+   n= 6  gamma=1.0000000 D=0.83333 Phi*=0.500000 M=0.648148 | c_true=0.1250 c#=0.3472 f*=0.2100  min=0.2100 | floor=0.3333  Lam_M=    2.8 Lam_F=  1.30
+   n= 7  gamma=1.0000000 D=0.85714 Phi*=0.571429 M=0.666667 | c_true=0.1633 c#=0.3673 f*=0.2222  min=0.2222 | floor=0.3571  Lam_M=    2.2 Lam_F=  1.17
+   n= 8  gamma=1.0000000 D=0.87500 Phi*=0.500000 M=0.656250 | c_true=0.1250 c#=0.3828 f*=0.2153  min=0.2153 | floor=0.3750  Lam_M=    3.1 Lam_F=  1.31
+   n= 9  gamma=1.0000000 D=0.88889 Phi*=0.555556 M=0.666667 | c_true=0.1543 c#=0.3951 f*=0.2222  min=0.2222 | floor=0.3889  Lam_M=    2.6 Lam_F=  1.20
+   n=10  gamma=1.0000000 D=0.90000 Phi*=0.500000 M=0.660000 | c_true=0.1250 c#=0.4050 f*=0.2178  min=0.2178 | floor=0.4000  Lam_M=    3.2 Lam_F=  1.32
+   n=11  gamma=1.0000000 D=0.90909 Phi*=0.545455 M=0.666667 | c_true=0.1488 c#=0.4132 f*=0.2222  min=0.2222 | floor=0.4091  Lam_M=    2.8 Lam_F=  1.22
+   n=12  gamma=1.0000000 D=0.91667 Phi*=0.500000 M=0.662037 | c_true=0.1250 c#=0.4201 f*=0.2191  min=0.2191 | floor=0.4167  Lam_M=    3.4 Lam_F=  1.32
+   n=13  gamma=1.0000000 D=0.92308 Phi*=0.538462 M=0.666667 | c_true=0.1450 c#=0.4260 f*=0.2222  min=0.2222 | floor=0.4231  Lam_M=    2.9 Lam_F=  1.24
+   n=14  gamma=1.0000000 D=0.92857 Phi*=0.500000 M=0.663265 | c_true=0.1250 c#=0.4311 f*=0.2200  min=0.2200 | floor=0.4286  Lam_M=    3.4 Lam_F=  1.33
+
+--- FAMILY: chain(n-1)+point
+   n= 4  gamma=0.3146734 D=0.75000 Phi*=0.250000 M=0.375000 | c_true=0.0993 c#=0.6044 f*=0.2234  min=0.2234 | floor=0.5927  Lam_M=    6.1 Lam_F=  1.50
+   n= 5  gamma=0.2226763 D=0.80000 Phi*=0.200000 M=0.333333 | c_true=0.0898 c#=0.7160 f*=0.2495  min=0.2495 | floor=0.6887  Lam_M=    8.0 Lam_F=  1.67
+   n= 6  gamma=0.1692591 D=0.83333 Phi*=0.166667 M=0.277778 | c_true=0.0821 c#=0.7942 f*=0.2279  min=0.2279 | floor=0.7487  Lam_M=    9.7 Lam_F=  1.67
+   n= 7  gamma=0.1349958 D=0.85714 Phi*=0.142857 M=0.250000 | c_true=0.0756 c#=0.8501 f*=0.2315  min=0.2315 | floor=0.7896  Lam_M=   11.2 Lam_F=  1.75
+   n= 8  gamma=0.1114435 D=0.87500 Phi*=0.125000 M=0.218750 | c_true=0.0701 c#=0.8932 f*=0.2147  min=0.2147 | floor=0.8193  Lam_M=   12.7 Lam_F=  1.75
+   n= 9  gamma=0.0944072 D=0.88889 Phi*=0.111111 M=0.200000 | c_true=0.0654 c#=0.9279 f*=0.2118  min=0.2118 | floor=0.8417  Lam_M=   14.2 Lam_F=  1.80
+   n=10  gamma=0.0815927 D=0.90000 Phi*=0.100000 M=0.180000 | c_true=0.0613 c#=0.9553 f*=0.1985  min=0.1985 | floor=0.8592  Lam_M=   15.6 Lam_F=  1.80
+   n=11  gamma=0.0716506 D=0.90909 Phi*=0.090909 M=0.166667 | c_true=0.0577 c#=0.9780 f*=0.1938  min=0.1938 | floor=0.8733  Lam_M=   17.0 Lam_F=  1.83
+   n=12  gamma=0.0637412 D=0.91667 Phi*=0.083333 M=0.152778 | c_true=0.0545 c#=0.9972 f*=0.1831  min=0.1831 | floor=0.8848  Lam_M=   18.3 Lam_F=  1.83
+   n=13  gamma=0.0573169 D=0.92308 Phi*=0.076923 M=0.142857 | c_true=0.0516 c#=1.0133 f*=0.1780  min=0.1780 | floor=0.8944  Lam_M=   19.6 Lam_F=  1.86  <== c# UPPER BOUND > 1 (see S2.3 for the exact certificate)
+   n=14  gamma=0.0520072 D=0.92857 Phi*=0.071429 M=0.132653 | c_true=0.0491 c#=1.0269 f*=0.1692  min=0.1692 | floor=0.9026  Lam_M=   20.9 Lam_F=  1.86  <== c# UPPER BOUND > 1 (see S2.3 for the exact certificate)
+
+--- FAMILY: two interleaved chains
+   n= 4  gamma=0.2939887 D=0.66667 Phi*=0.166667 M=0.333333 | c_true=0.0472 c#=0.5197 f*=0.1890  min=0.1890 | floor=0.5197  Lam_M=   11.0 Lam_F=  2.00
+   n= 5  gamma=0.1968871 D=0.70000 Phi*=0.200000 M=0.266667 | c_true=0.1016 c#=0.6016 f*=0.1806  min=0.1806 | floor=0.6016  Lam_M=    5.9 Lam_F=  1.33
+   n= 6  gamma=0.1816700 D=0.70000 Phi*=0.200000 M=0.266667 | c_true=0.1101 c#=0.6092 f*=0.1957  min=0.1957 | floor=0.6092  Lam_M=    5.5 Lam_F=  1.33
+   n= 7  gamma=0.1404318 D=0.74286 Phi*=0.171429 M=0.228571 | c_true=0.1046 c#=0.6726 f*=0.1860  min=0.1860 | floor=0.6726  Lam_M=    6.4 Lam_F=  1.33
+   n= 8  gamma=0.1321896 D=0.74286 Phi*=0.128571 M=0.228571 | c_true=0.0625 c#=0.6768 f*=0.1976  min=0.1976 | floor=0.6768  Lam_M=   10.8 Lam_F=  1.78
+   n= 9  gamma=0.1093231 D=0.76190 Phi*=0.142857 M=0.203175 | c_true=0.0933 c#=0.7072 f*=0.1888  min=0.1888 | floor=0.7072  Lam_M=    7.6 Lam_F=  1.42
+   n=10  gamma=0.1041469 D=0.76190 Phi*=0.142857 M=0.203175 | c_true=0.0980 c#=0.7098 f*=0.1982  min=0.1982 | floor=0.7098  Lam_M=    7.2 Lam_F=  1.42
+   n=11  gamma=0.0895645 D=0.78355 Phi*=0.129870 M=0.184704 | c_true=0.0942 c#=0.7388 f*=0.1905  min=0.1905 | floor=0.7388  Lam_M=    7.8 Lam_F=  1.42
+   n=12  gamma=0.0860063 D=0.78355 Phi*=0.108225 M=0.184704 | c_true=0.0681 c#=0.7405 f*=0.1983  min=0.1983 | floor=0.7405  Lam_M=   10.9 Lam_F=  1.71
+   n=13  gamma=0.0758836 D=0.79604 Phi*=0.116550 M=0.170496 | c_true=0.0895 c#=0.7581 f*=0.1915  min=0.1915 | floor=0.7581  Lam_M=    8.5 Lam_F=  1.46
+   n=14  gamma=0.0732857 D=0.79604 Phi*=0.116550 M=0.170496 | c_true=0.0927 c#=0.7594 f*=0.1983  min=0.1983 | floor=0.7594  Lam_M=    8.2 Lam_F=  1.46
+
+--- FAMILY: near-ordinal antichains, 1 missing
+   n= 4  gamma=0.1527864 D=0.60000 Phi*=0.100000 M=0.250000 | c_true=0.0327 c#=0.5236 f*=0.2045  min=0.2045 | floor=0.5236  Lam_M=   16.0 Lam_F=  2.50
+   n= 5  gamma=0.0976250 D=0.71429 Phi*=0.071429 M=0.297619 | c_true=0.0261 c#=0.6655 f*=0.4537  min=0.4537 | floor=0.6655  Lam_M=   25.5 Lam_F=  4.17
+   n= 6  gamma=0.0575571 D=0.70000 Phi*=0.033333 M=0.288889 | c_true=0.0097 c#=0.6712 f*=0.7250  min=0.6712 | floor=0.6712  Lam_M=   69.5 Lam_F=  8.67
+   n= 7  gamma=0.0399430 D=0.76923 Phi*=0.025641 M=0.313034 | c_true=0.0082 c#=0.7493 f*=1.2266  min=0.7493 | floor=0.7493  Lam_M=   91.0 Lam_F= 12.21  <== (F) FAILS HERE (exact)
+   n= 8  gamma=0.0268233 D=0.76471 Phi*=0.014706 M=0.307598 | c_true=0.0040 c#=0.7513 f*=1.7637  min=0.7513 | floor=0.7513  Lam_M=  186.4 Lam_F= 20.92  <== (F) FAILS HERE (exact)
+   n= 9  gamma=0.0198569 D=0.80952 Phi*=0.011905 M=0.321032 | c_true=0.0036 c#=0.7996 f*=2.5951  min=0.7996 | floor=0.7996  Lam_M=  224.1 Lam_F= 26.97  <== (F) FAILS HERE (exact)
+   n=10  gamma=0.0144460 D=0.80769 Phi*=0.007692 M=0.316923 | c_true=0.0020 c#=0.8005 f*=3.4764  min=0.8005 | floor=0.8005  Lam_M=  390.8 Lam_F= 41.20  <== (F) FAILS HERE (exact)
+   n=11  gamma=0.0112105 D=0.83871 Phi*=0.006452 M=0.325269 | c_true=0.0019 c#=0.8331 f*=4.7188  min=0.8331 | floor=0.8331  Lam_M=  448.8 Lam_F= 50.42  <== (F) FAILS HERE (exact)
+   n=12  gamma=0.0086070 D=0.83784 Phi*=0.004505 M=0.322072 | c_true=0.0012 c#=0.8335 f*=6.0259  min=0.8335 | floor=0.8335  Lam_M=  707.1 Lam_F= 71.50  <== (F) FAILS HERE (exact)
+   n=13  gamma=0.0069178 D=0.86047 Phi*=0.003876 M=0.327704 | c_true=0.0011 c#=0.8570 f*=7.7618  min=0.8570 | floor=0.8570  Lam_M=  789.3 Lam_F= 84.55  <== (F) FAILS HERE (exact)
+   n=14  gamma=0.0055201 D=0.86000 Phi*=0.002857 M=0.325170 | c_true=0.0007 c#=0.8572 f*=9.5774  min=0.8572 | floor=0.8572  Lam_M= 1159.3 Lam_F=113.81  <== (F) FAILS HERE (exact)
+
+--- FAMILY: near-ordinal antichains, 2 missing
+   n= 4  gamma=0.2500000 D=0.75000 Phi*=0.250000 M=0.343750 | c_true=0.1250 c#=0.6250 f*=0.2363  min=0.2363 | floor=0.6250  Lam_M=    5.0 Lam_F=  1.38
+   n= 5  gamma=0.2000000 D=0.80000 Phi*=0.200000 M=0.333333 | c_true=0.1000 c#=0.7000 f*=0.2778  min=0.2778 | floor=0.7000  Lam_M=    7.0 Lam_F=  1.67
+   n= 6  gamma=0.1255100 D=0.75000 Phi*=0.083333 M=0.291667 | c_true=0.0277 c#=0.6872 f*=0.3389  min=0.3389 | floor=0.6872  Lam_M=   24.8 Lam_F=  3.50
+   n= 7  gamma=0.0927929 D=0.80000 Phi*=0.066667 M=0.311111 | c_true=0.0239 c#=0.7536 f*=0.5215  min=0.5215 | floor=0.7536  Lam_M=   31.5 Lam_F=  4.67
+   n= 8  gamma=0.0604699 D=0.78571 Phi*=0.035714 M=0.304315 | c_true=0.0105 c#=0.7555 f*=0.7657  min=0.7555 | floor=0.7555  Lam_M=   71.6 Lam_F=  8.52
+   n= 9  gamma=0.0460441 D=0.82353 Phi*=0.029412 M=0.317647 | c_true=0.0094 c#=0.8005 f*=1.0957  min=0.8005 | floor=0.8005  Lam_M=   85.2 Lam_F= 10.80  <== (F) FAILS HERE (exact)
+   n=10  gamma=0.0325481 D=0.81818 Phi*=0.018182 M=0.314061 | c_true=0.0051 c#=0.8019 f*=1.5152  min=0.8019 | floor=0.8019  Lam_M=  157.9 Lam_F= 17.27  <== (F) FAILS HERE (exact)
+   n=11  gamma=0.0256422 D=0.84615 Phi*=0.015385 M=0.322735 | c_true=0.0046 c#=0.8333 f*=2.0310  min=0.8333 | floor=0.8333  Lam_M=  180.6 Lam_F= 20.98  <== (F) FAILS HERE (exact)
+   n=12  gamma=0.0192464 D=0.84375 Phi*=0.010417 M=0.320023 | c_true=0.0028 c#=0.8341 f*=2.6606  min=0.8341 | floor=0.8341  Lam_M=  295.9 Lam_F= 30.72  <== (F) FAILS HERE (exact)
+   n=13  gamma=0.0156094 D=0.86486 Phi*=0.009009 M=0.325933 | c_true=0.0026 c#=0.8571 f*=3.4028  min=0.8571 | floor=0.8571  Lam_M=  329.7 Lam_F= 36.18  <== (F) FAILS HERE (exact)
+   n=14  gamma=0.0122374 D=0.86364 Phi*=0.006494 M=0.323726 | c_true=0.0017 c#=0.8575 f*=4.2819  min=0.8575 | floor=0.8575  Lam_M=  497.7 Lam_F= 49.85  <== (F) FAILS HERE (exact)
+
+--- FAMILY: near-ordinal chains, 1 missing
+      DECOMPOSABLE at every n tested — out of scope for both routes (gamma = 0); route (F) is a statement about PRIMITIVE posets
+
+--- FAMILY: bipartite ladder
+   n= 4  gamma=0.2939887 D=0.66667 Phi*=0.166667 M=0.333333 | c_true=0.0472 c#=0.5197 f*=0.1890  min=0.1890 | floor=0.5197  Lam_M=   11.0 Lam_F=  2.00
+   n= 5  gamma=0.1819147 D=0.75000 Phi*=0.125000 M=0.333333 | c_true=0.0429 c#=0.6590 f*=0.3054  min=0.3054 | floor=0.6590  Lam_M=   15.3 Lam_F=  2.67
+   n= 6  gamma=0.1503206 D=0.75000 Phi*=0.083333 M=0.324074 | c_true=0.0231 c#=0.6748 f*=0.3493  min=0.3493 | floor=0.6748  Lam_M=   29.2 Lam_F=  3.89
+   n= 7  gamma=0.1058853 D=0.80000 Phi*=0.066667 M=0.331481 | c_true=0.0210 c#=0.7471 f*=0.5189  min=0.5189 | floor=0.7471  Lam_M=   35.6 Lam_F=  4.97
+   n= 8  gamma=0.0917424 D=0.80000 Phi*=0.050000 M=0.325000 | c_true=0.0136 c#=0.7541 f*=0.5757  min=0.5757 | floor=0.7541  Lam_M=   55.3 Lam_F=  6.50
+   n= 9  gamma=0.0693235 D=0.83333 Phi*=0.041667 M=0.331250 | c_true=0.0125 c#=0.7987 f*=0.7914  min=0.7914 | floor=0.7987  Lam_M=   63.8 Lam_F=  7.95
+   n=10  gamma=0.0619288 D=0.83333 Phi*=0.033333 M=0.326667 | c_true=0.0090 c#=0.8024 f*=0.8616  min=0.8024 | floor=0.8024  Lam_M=   89.4 Lam_F=  9.80
+   n=11  gamma=0.0489835 D=0.85714 Phi*=0.028571 M=0.331429 | c_true=0.0083 c#=0.8327 f*=1.1212  min=0.8327 | floor=0.8327  Lam_M=   99.9 Lam_F= 11.60  <== (F) FAILS HERE (exact)
+   n=12  gamma=0.0446521 D=0.85714 Phi*=0.023810 M=0.328042 | c_true=0.0063 c#=0.8348 f*=1.2050  min=0.8348 | floor=0.8348  Lam_M=  131.5 Lam_F= 13.78  <== (F) FAILS HERE (exact)
+   n=13  gamma=0.0364848 D=0.87500 Phi*=0.020833 M=0.331680 | c_true=0.0059 c#=0.8568 f*=1.5076  min=0.8568 | floor=0.8568  Lam_M=  144.0 Lam_F= 15.92  <== (F) FAILS HERE (exact)
+   n=14  gamma=0.0337342 D=0.87500 Phi*=0.017857 M=0.329082 | c_true=0.0047 c#=0.8581 f*=1.6051  min=0.8581 | floor=0.8581  Lam_M=  181.6 Lam_F= 18.43  <== (F) FAILS HERE (exact)
+
+--- FAMILY: near-ordinal antichains + point
+   n= 4  gamma=0.5698102 D=0.75000 Phi*=0.333333 M=0.479167 | c_true=0.0975 c#=0.4668 f*=0.2015  min=0.2015 | floor=0.4651  Lam_M=    4.8 Lam_F=  1.44
+   n= 5  gamma=0.3840380 D=0.80000 Phi*=0.260000 M=0.433333 | c_true=0.0880 c#=0.6244 f*=0.2445  min=0.2445 | floor=0.6080  Lam_M=    7.1 Lam_F=  1.67
+   n= 6  gamma=0.2760456 D=0.83333 Phi*=0.214286 M=0.404762 | c_true=0.0832 c#=0.7306 f*=0.2967  min=0.2967 | floor=0.6953  Lam_M=    8.8 Lam_F=  1.89
+   n= 7  gamma=0.2416350 D=0.85714 Phi*=0.161905 M=0.398810 | c_true=0.0542 c#=0.7937 f*=0.3291  min=0.3291 | floor=0.7363  Lam_M=   14.6 Lam_F=  2.46
+   n= 8  gamma=0.1916165 D=0.87500 Phi*=0.141026 M=0.388121 | c_true=0.0519 c#=0.8413 f*=0.3931  min=0.3931 | floor=0.7792  Lam_M=   16.2 Lam_F=  2.75
+   n= 9  gamma=0.1785031 D=0.88889 Phi*=0.119281 M=0.384749 | c_true=0.0399 c#=0.8817 f*=0.4146  min=0.4146 | floor=0.7996  Lam_M=   22.1 Lam_F=  3.23
+   n=10  gamma=0.1491796 D=0.90000 Phi*=0.107143 M=0.378667 | c_true=0.0385 c#=0.9059 f*=0.4806  min=0.4806 | floor=0.8254  Lam_M=   23.5 Lam_F=  3.53
+   n=11  gamma=0.1424524 D=0.90909 Phi*=0.095105 M=0.376107 | c_true=0.0317 c#=0.9357 f*=0.4965  min=0.4965 | floor=0.8379  Lam_M=   29.5 Lam_F=  3.95
+   n=12  gamma=0.1230054 D=0.91667 Phi*=0.087097 M=0.372050 | c_true=0.0308 c#=0.9488 f*=0.5627  min=0.5627 | floor=0.8552  Lam_M=   30.8 Lam_F=  4.27
+   n=13  gamma=0.1188997 D=0.92308 Phi*=0.079349 M=0.370013 | c_true=0.0265 c#=0.9724 f*=0.5757  min=0.5757 | floor=0.8636  Lam_M=   36.7 Lam_F=  4.66
+   n=14  gamma=0.1049944 D=0.92857 Phi*=0.073643 M=0.367087 | c_true=0.0258 c#=0.9794 f*=0.6417  min=0.6417 | floor=0.8761  Lam_M=   37.9 Lam_F=  4.98
+
+--- FAMILY: one bottom + antichain
+      DECOMPOSABLE at every n tested — out of scope for both routes (gamma = 0); route (F) is a statement about PRIMITIVE posets
+
+--- FAMILY: antichain + one top
+      DECOMPOSABLE at every n tested — out of scope for both routes (gamma = 0); route (F) is a statement about PRIMITIVE posets
+
+
+====================================================================================================
+S2.2  REFUTATION 1 — ROUTE (F) IS FALSE AT AN EXHIBITED POSET ON 7 ELEMENTS. EXACT.
+====================================================================================================
+(F) reads   E[D_F]^2 <= 8 floor(n^2/4)^2 (1 - lambda_std),  equivalently  M^2 <= 2 gamma.
+It fails at P iff gamma < M^2/2, which is ONE exact decision: the negation of
+`gamma >= M^2/2`, settled by the signs of the principal minors of Q - (M^2/2) N.
+NO float appears anywhere in the verdict, and this is a COUNTEREXAMPLE, so it does
+not need to be a maximum over its n.
+
+   n= 6  FAMILY near-ordinal antichains(1 missing)   M=13/45      M^2/2=169/4050               gamma>=M^2/2 ? True   ==> (F) HOLDS   [f* ~ 0.7250]
+   n= 7  FAMILY near-ordinal antichains(1 missing)   M=293/936    M^2/2=85849/1752192          gamma>=M^2/2 ? False  ==> (F) *** FAILS ***   [f* ~ 1.2266]
+   n= 8  FAMILY near-ordinal antichains(1 missing)   M=251/816    M^2/2=63001/1331712          gamma>=M^2/2 ? False  ==> (F) *** FAILS ***   [f* ~ 1.7637]
+   n= 9  FAMILY near-ordinal antichains(1 missing)   M=809/2520   M^2/2=654481/12700800        gamma>=M^2/2 ? False  ==> (F) *** FAILS ***   [f* ~ 2.5951]
+   n=10  FAMILY near-ordinal antichains(1 missing)   M=103/325    M^2/2=10609/211250           gamma>=M^2/2 ? False  ==> (F) *** FAILS ***   [f* ~ 3.4764]
+   n=11  FAMILY near-ordinal antichains(1 missing)   M=121/372    M^2/2=14641/276768           gamma>=M^2/2 ? False  ==> (F) *** FAILS ***   [f* ~ 4.7188]
+   n=12  FAMILY near-ordinal antichains(1 missing)   M=143/444    M^2/2=20449/394272           gamma>=M^2/2 ? False  ==> (F) *** FAILS ***   [f* ~ 6.0259]
+
+   THE WITNESS, written out:
+     n = 7,  relations  [(0, 3), (0, 4), (0, 5), (0, 6), (1, 3), (1, 4), (1, 5), (1, 6), (2, 4), (2, 5), (2, 6)]
+     A = {0,1,2} and B = {3,4,5,6} are antichains, every a < b holds EXCEPT (2,3).
+     linear extensions            = 156
+     prefix leaks   leak(A_k)     = ['17/26', '8/13', '1/13', '9/13', '38/39', '29/39']
+     profile        phi_k         = ['17/26', '4/13', '1/39', '3/13', '19/39', '29/39']
+     Phi*_pref = 1/39 at k = 3      M = 293/936
+     E[D_F] = 293/39
+     gamma in (11512792601398275/288230376151711744, 23025585202796551/576460752303423488]
+     M^2/2 = 85849/1752192  >  gamma   ==>  f* = 1.226627  >  1
+     Delta_P = 10/13   c_true = 0.008230   c# = 0.749259   min(c#,f*) = 0.749259
+
+====================================================================================================
+S2.3  REFUTATION 2 — ROUTE (M#) IS FALSE AT AN EXHIBITED POSET. EXACT.
+====================================================================================================
+(M#) reads   mu_pref (2 Delta_P - mu_pref) <= 2(1 - lambda_std).
+Refuting it needs a LOWER bound on mu_pref — the direction mg-28ff Sec 10 records as
+a FLOAT MEASUREMENT.  Here mu_pref is bracketed EXACTLY: `mu_pref >= t` is decided as
+COPOSITIVITY of Q - tN over the monotone cone, by exact KKT enumeration of the
+2^(n-1)-1 faces of the simplex.  The verdict then compares two exact rationals.
+
+   n= 9  FAMILY chain(n-1)+point   mu_pref in [0.104717104, 0.104717104]  Delta=0.888889  sweep/2=0.087599035  gamma>=sweep/2 ? True   ==> (M#) HOLDS   [c# ~ 0.92788]  (3s)
+   n=10  FAMILY chain(n-1)+point   mu_pref in [0.091234957, 0.091234957]  Delta=0.900000  sweep/2=0.077949552  gamma>=sweep/2 ? True   ==> (M#) HOLDS   [c# ~ 0.95535]  (8s)
+   n=11  FAMILY chain(n-1)+point   mu_pref in [0.080659824, 0.080659824]  Delta=0.909091  sweep/2=0.070074109  gamma>=sweep/2 ? True   ==> (M#) HOLDS   [c# ~ 0.97800]  (22s)
+   n=12  FAMILY chain(n-1)+point   mu_pref in [0.072186330, 0.072186330]  Delta=0.916667  sweep/2=0.063565369  gamma>=sweep/2 ? True   ==> (M#) HOLDS   [c# ~ 0.99724]  (57s)
+   n=13  FAMILY chain(n-1)+point   mu_pref in [0.065226411, 0.065226411]  Delta=0.923077  sweep/2=0.058081752  gamma>=sweep/2 ? False  ==> (M#) *** FAILS ***   [c# ~ 1.01334]  (171s)
+   n=14  FAMILY chain(n-1)+point   mu_pref in [0.059418019, 0.059418019]  Delta=0.928571  sweep/2=0.053408625  gamma>=sweep/2 ? False  ==> (M#) *** FAILS ***   [c# ~ 1.02695]  (408s)
+
+====================================================================================================
+S2.4  THE DISJUNCTION ALONG EVERY FAMILY — min(c#, f*), WHICH IS WHAT THE THEOREM NEEDS
+====================================================================================================
+(M#) and (F) are each SEPARATELY sufficient for C_3^(III) = 1 at a poset (mg-28ff
+Sec 2, Sec 3), so the object the architecture consumes is min(c#, f*) <= 1, not either
+column alone.  Both are statements about PRIMITIVE posets.
+
+   FAMILY                                 n=4   n=5   n=6   n=7   n=8   n=9   n=10  n=11  n=12  n=13  n=14
+   antichain                              0.195  0.222  0.210  0.222  0.215  0.222  0.218  0.222  0.219  0.222  0.220
+   chain(n-1)+point                       0.223  0.249  0.228  0.231  0.215  0.212  0.199  0.194  0.183  0.178  0.169
+   two interleaved chains                 0.189  0.181  0.196  0.186  0.198  0.189  0.198  0.190  0.198  0.192  0.198
+   near-ordinal antichains, 1 missing     0.205  0.454  0.671  0.749  0.751  0.800  0.800  0.833  0.834  0.857  0.857
+   near-ordinal antichains, 2 missing     0.236  0.278  0.339  0.522  0.755  0.801  0.802  0.833  0.834  0.857  0.858
+   near-ordinal chains, 1 missing          --     --     --     --     --     --     --     --     --     --     --  
+   bipartite ladder                       0.189  0.305  0.349  0.519  0.576  0.791  0.802  0.833  0.835  0.857  0.858
+   near-ordinal antichains + point        0.201  0.244  0.297  0.329  0.393  0.415  0.481  0.497  0.563  0.576  0.642
+   one bottom + antichain                  --     --     --     --     --     --     --     --     --     --     --  
+   antichain + one top                     --     --     --     --     --     --     --     --     --     --     --  
+
+   LARGEST min(c#,f*) seen at any FAMILY MEMBER tested (NOT a maximum over posets):
+      0.858133   bipartite ladder, n=14
+      0.857518   near-ordinal antichains, 2 missing, n=14
+      0.857240   near-ordinal antichains, 1 missing, n=14
+      0.857060   near-ordinal antichains, 2 missing, n=13
+      0.857006   near-ordinal antichains, 1 missing, n=13
+      0.856758   bipartite ladder, n=13
+      0.834817   bipartite ladder, n=12
+      0.834127   near-ordinal antichains, 2 missing, n=12
+
+   Every one is < 1: on every family tested the DISJUNCTION still certifies
+   C_3^(III) = 1, while each route SEPARATELY is refuted somewhere above.
+EXIT=0
