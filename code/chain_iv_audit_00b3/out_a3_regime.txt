@@ -1,0 +1,173 @@
+==============================================================================
+a3 — THE REGIME: ARE THERE TWO FAMILIES IN IT, AND IS c -> 1 THERE?
+==============================================================================
+
+------------------------------------------------------------------------------
+(F1) mg-81ff's TWO FAMILIES, RE-DERIVED EXACTLY
+------------------------------------------------------------------------------
+  N(n)  : antichain {0..a-1} < antichain {a..n-1}, a = n/2, MINUS the relation (a-1, a)
+  N'(n) : the same, MINUS (0, n-1) instead.
+   N   n  primitive  min_k Q_k   argmin  gap (exact)      inside 1/50?  C3gap    c (exact)
+       6  True       1/15        k=3    0.057557110    no      1.1583  [0.9903341,0.9903341]
+       8  True       1/34        k=4    0.026823309    no      1.0965  [0.9973402,0.9973402]
+      10  True       1/65        k=5    0.014445971    YES     1.0650  [0.9990476,0.9990476]
+      12  True       1/111       k=6    0.008606981    YES     1.0467  [0.9995945,0.9995945]
+      14  True       1/175       k=7    0.005520070    YES     1.0352  [0.9998047,0.9998047]
+      16  True       1/260       k=8    0.003743404    YES     1.0274  [0.9998969,0.9998969]
+   N'  n  primitive  min_k Q_k   argmin  gap (exact)      inside 1/50?  C3gap    c (exact)
+       6  True       1/15        k=3    0.064312669    no      1.0366  [0.9974842,0.9974842]
+       8  True       1/34        k=4    0.028530204    no      1.0309  [0.9990926,0.9990926]
+      10  True       1/65        k=5    0.015027309    YES     1.0238  [0.9996372,0.9996372]
+      12  True       1/111       k=6    0.008846418    YES     1.0184  [0.9998360,0.9998360]
+      14  True       1/175       k=7    0.005632679    YES     1.0145  [0.9999179,0.9999179]
+      16  True       1/260       k=8    0.003801826    YES     1.0117  [0.9999555,0.9999555]
+
+  BOTH CONFIRMED ON EVERY COUNT THE TICKET ASKS ABOUT: primitive at every n, inside
+  eps_spec = 1/50 from n = 10, and c = 0.9990476 / 0.9998969 (N) and 0.9996372 /
+  0.9999555 (N') exactly as mg-81ff reports.  min_k Q_k = 1/65 ... 1/260 against a
+  requirement of 1/5.
+
+  >>> AND THEY ARE THE SAME POSET.  N(n) and N'(n) are the complete bipartite order
+      K_{a,a} minus ONE relation, in both cases (verified above: |rel| is one short of
+      a^2 with no relation outside the bipartite block, at every n from 6 to 16).  The
+      automorphism group of K_{a,a} is transitive on its a^2 relations, so any two
+      single-relation deletions are isomorphic as abstract posets.  Exhibited:
+      n = 6:  N -> N' under the relabelling (1, 2, 0, 5, 3, 4)
+      n = 8:  N -> N' under the relabelling (1, 2, 3, 0, 7, 4, 5, 6)
+
+      THE TELL IS ALREADY IN mg-81ff's OWN NUMBERS and is invisible only because its N'
+      table omits the column: min_k Q_k is IDENTICAL for the two at every n — 1/15, 1/34,
+      1/65, 1/111, 1/175, 1/260 — and min_k Q_k is the quantity that decides whether
+      chain (IV) closes (mg-81ff sec 1.2).  The two differ only in the eigenvalue, at the
+      third decimal, because M mixes the element index with the POSITION index and is
+      therefore not relabelling-invariant.
+
+      SO `A SECOND FAMILY, so the answer is not one construction's artefact` IS ONE
+      CONSTRUCTION.  mg-81ff's hedge `two families are not a class` is, if anything, too
+      generous to itself: it is one poset shape under two labellings.
+
+------------------------------------------------------------------------------
+(F2) THE THIRD FAMILY — NOT CONSTRUCTED, FOUND
+------------------------------------------------------------------------------
+  Ask the exhaustive population for the poset maximising C3gap = min_k Q_k / gap:
+      n   max C3gap   at gap      min_k Q_k   c          the maximiser
+      4   1.472917    0.226308    1/3        0.861670   [(0, 2), (0, 3), (2, 3)]
+      5   1.989522    0.104715    5/24       0.884262   [(0, 2), (0, 3), (0, 4), (1, 3), (1, 4), (2, 4)]
+      6   2.386087    0.072536    9/52       0.891596   [(0, 2), (0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 4), (2, 5), (3, 5)]
+      7   3.075271    0.054196    1/6        0.881084   [(0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (1, 3), (1, 4), (1, 5), (1, 6), (2, 4), (2, 5), (2, 6), (3, 5), (3, 6), (4, 6)]
+
+  At n = 5, 6 and 7 the maximiser is one shape: `i < j  iff  j >= i + 2`.  Call it the
+  STAIRCASE S_n.  It is mg-81ff's OWN `max C3gap by n` row (1.990, 2.386, 3.075) — that
+  row's maximisers are a family, and its s3 prints the row without saying so.
+
+  S_n is primitive at every n, its down-set lattice has 2n elements (so it is affordable
+  far past the sweep), and e(S_n) is the Fibonacci numbers.  Continued in exact rationals:
+      n   e(S_n)     min_k Q_k        gap (exact)     inside 1/50?  C3gap     c (exact)    c>=40/49?  minQ<=1/5?
+      4          5  1/5              0.1527864045  no       1.3090  0.9442719    True       True
+      5          8  5/24             0.1047152925  no       1.9895  0.8842625    True       False
+      6         13  9/52             0.0725358692  no       2.3861  0.8915957    True       True
+      7         21  1/6              0.0541957607  no       3.0753  0.8810844    True       True
+      8         34  9/68             0.0416864619  no       3.1750  0.9053895    True       True
+      9         55  27/220           0.0331288560  no       3.7045  0.9073316    True       True
+     10         89  10/89            0.0269186336  no       4.1740  0.9121955    True       True
+     11        144  11/108           0.0223062688  no       4.5661  0.9186396    True       True
+     12        233  64/699           0.0187781484  YES      4.8758  0.9258259    True       True
+     13        377  52/609           0.0160238281  YES      5.3287  0.9295084    True       True
+     14        610  169/2135         0.0138319608  YES      5.7228  0.9337588    True       True
+     15        987  195/2632         0.0120599709  YES      6.1433  0.9372146    True       True
+     16       1597  441/6388         0.0106071789  YES      6.5084  0.9409451    True       True
+     17       2584  119/1824         0.0094014717  YES      6.9395  0.9436303    True       True
+     18       4181  2312/37629       0.0083899162  YES      7.3233  0.9464991    True       True
+     19       6765  323/5535         0.0075330273  YES      7.7467  0.9487914    True       True
+     20      10946  605/10946        0.0068008493  YES      8.1271  0.9511976    True       True
+     21      17711  21/398           0.0061703355  YES      8.5512  0.9531172    True       True
+     22      28657  15842/315227     0.0056235199  YES      8.9367  0.9551153    True       True
+     23      46368  89/1848          0.0051462330  YES      9.3583  0.9567636    True       True
+     24      75025  3456/75025       0.0047271785  YES      9.7446  0.9584662    True       True
+     25     121393  300/6773         0.0043572625  YES     10.1654  0.9598890    True       True
+     26     196418  54289/1276717    0.0040290978  YES     10.5538  0.9613510    True       True
+     27     317811  2097/51142       0.0037366342  YES     10.9734  0.9625934    True       True
+     28     514229  142129/3599603   0.0034748779  YES     11.3629  0.9638647    True       True
+
+  >>> FIVE THINGS, AND THEY DO NOT ALL POINT THE SAME WAY.
+
+  1. mg-81ff sec 0.3's `c -> 1 in the regime` SURVIVES.  c(S_n) rises 0.8811, 0.9258,
+     0.9410, 0.9512, 0.9639 and is consistent with -> 1.  I did NOT find an in-regime
+     family with c bounded away from 1, and I say so rather than leaving the ticket's
+     hedge quietly upgraded: the hedge is still the honest position.
+
+  2. BUT THE QUANTITATIVE READING DOES NOT SURVIVE.  mg-81ff sec I3: `On the two families
+     that DO reach the regime, c = 0.99990 and 0.99996 ... i.e. essentially the full 0.20
+     ... THE TICKET'S PREMISE SURVIVES ON THE ONLY POSETS ANYONE HAS EXHIBITED INSIDE THE
+     REGIME.`  That was true when written.  S_12 is inside the regime, is primitive, and
+     has c = 0.9258259, giving eps_dem^(IV) = 1 - 0.8/c = 0.135882, NOT 0.199918.  The
+     `factor of 52 of slack` on min_k Q_k is a factor of 2.2 on S_12.
+
+  3. THE ONE FAMILY mg-81ff HAD SITS AT THE EXTREME POINT ITS OWN sec 5 IDENTIFIES.
+     C3gap is 1.0650 on N(10) and 1.0275 on N(16) — essentially the C3gap = 1 row that
+     sec 5 calls `the best case of the one unknown, not a property of chain (IV)`.  On
+     S_n, in the SAME regime, C3gap is 4.88 at n = 12 and rises through every n tested.
+     By mg-81ff's own pricing (wall = 5*C3gap) that is 24x at n = 12, against the 5.2x
+     its family gives.
+
+  4. AND IT CROSSES 10 INSIDE THE REGIME, FIRST AT n = 25.  mg-81ff sec 5's table names
+     10 as `where chain (IV) stops closing`.  S_25 is primitive, has gap = 0.0043572625
+     <= 1/50, and has C3gap = 10.1654 — exact rationals, one witness, the same shape of
+     refutation as mg-81ff's own D_k (which also needs one k and quotes eight).  So on
+     the class the architecture actually supplies, the
+     class-level constant is ALREADY past the value at which the chain stops closing
+     self-consistently, and mg-81ff sec 4's hedge that the rising C3gap `is measured on
+     the SAME out-of-regime population, so it is a direction in both currencies and a
+     verdict in neither` no longer covers it.
+
+  5. WHAT I DID NOT PROVE, AND WILL NOT LET THIS AUDIT UPGRADE.  C3gap(S_n) rises through
+     seventeen exact in-regime points (n = 12..28) with no sign of a ceiling and fits 0.406n closely
+     (residual < 1% from n = 12), and min_k Q_k(S_n) fits 1.105/n and gap fits 2.72/n^2.
+     THOSE ARE FITS.  Unboundedness needs an asymptotic for lambda_2(S_n) uniform in n,
+     which a test vector does not supply — the SAME gap mg-81ff correctly refuses to
+     cross for c(D_k) -> 0.  What is PROVEN is the single exact witness of point 4.
+
+  THE FITS OF POINT 5, MEASURED RATHER THAN ASSERTED (they are FITS, not asymptotics):
+       n    min_k Q_k * n    gap * n^2     C3gap / n
+      12      1.098712       2.704053      0.406321
+      16      1.104571       2.715438      0.406775
+      20      1.105427       2.720340      0.406356
+      24      1.105551       2.722855      0.406027
+      28      1.105570       2.724304      0.405817
+
+------------------------------------------------------------------------------
+(F3) WHAT ELSE I TRIED, SO THAT `I COULD NOT` IS A MEASUREMENT AND NOT A SILENCE
+------------------------------------------------------------------------------
+  The ticket asks for a third family with c BOUNDED AWAY FROM 1 inside the regime.  What
+  that needs is min_k Q_k bounded away from 0 while the gap goes to 0 — i.e. C3gap growing
+  like 1/gap, not like n.  Constructions tried, all primitive, all evaluated exactly:
+      construction                                  n   prim  gap          inside?  C3gap    c
+      unbalanced K_{3,n-3} minus one               10   yes   0.020151264  no       1.0741  0.9984755
+      K_{a,a} minus two relations                  10   yes   0.027752433  no       1.0676  0.9980692
+      three blocks, one relation cut at each joint 10   yes   0.021805163  no       1.5375  0.9880190
+      stride-3 staircase (j >= i+3)                10   yes   0.069115332  no       2.8196  0.8649011
+      unbalanced K_{3,n-3} minus one               12   yes   0.014995434  YES      1.0585  0.9991091
+      K_{a,a} minus two relations                  12   yes   0.016698425  YES      1.0506  0.9991402
+      three blocks, one relation cut at each joint 12   yes   0.013438890  YES      1.6717  0.9908505
+      stride-3 staircase (j >= i+3)                12   yes   0.048567547  no       3.2185  0.8867527
+      unbalanced K_{3,n-3} minus one               14   yes   0.011902324  YES      1.0483  0.9994177
+      K_{a,a} minus two relations                  14   yes   0.010782434  YES      1.0391  0.9995734
+      three blocks, one relation cut at each joint 14   yes   0.008731851  YES      1.3612  0.9968180
+      stride-3 staircase (j >= i+3)                14   yes   0.035901563  no       3.7630  0.8971085
+      unbalanced K_{3,n-3} minus one               16   yes   0.009850768  YES      1.0412  0.9995903
+      K_{a,a} minus two relations                  16   yes   0.007347292  YES      1.0311  0.9997698
+      three blocks, one relation cut at each joint 16   yes   0.005997175  YES      1.4477  0.9972988
+      stride-3 staircase (j >= i+3)                16   yes   0.027597407  no       4.3774  0.9041475
+
+  NONE of them has c bounded away from 1 in the regime; the staircase is the best of them
+  and its c still rises.  A STRUCTURAL REASON, offered as an argument and not as a proof:
+  a small gap forces a sparse cut of M (Cheeger), and a naturally labelled poset that is
+  nearly an ordinal sum must have its near-cut at a PREFIX, because a natural labelling of
+  an ordinal sum puts the lower block's labels first.  So the sparse cut and the prefix
+  cuts are hard to separate, which is exactly what c ~ 1 says.  Making them separate is
+  what a counterexample would have to do, and none of the four constructions does it.
+
+  >>> CONCLUSION ON ITEM 2.  The hedge stands and I have not upgraded it.  What has
+      changed is that the evidence base is now ONE shape (not two) plus the staircase,
+      and the staircase says the regime is not the benign place the 0.9999 figures make
+      it look.

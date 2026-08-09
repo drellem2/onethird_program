@@ -1,0 +1,135 @@
+==============================================================================
+a4 — IS CHAIN (IV) CHAIN (II)?
+==============================================================================
+
+------------------------------------------------------------------------------
+(I1) THE IDENTITY — TRUE, AND TRUE BY SUBSTITUTION
+------------------------------------------------------------------------------
+     C3gap := min_k Q_k / gap        c := (1 - min_k Q_k)/(1 - gap)
+  =>  c = (1 - C3gap*gap)/(1 - gap)          because C3gap*gap IS min_k Q_k.
+
+  So the identity is an ALGEBRAIC REARRANGEMENT of two definitions, and checking it at
+  90 654 posets checks the arithmetic, not the mathematics.  mg-81ff says as much (`the
+  identity is FORMAL`), and it is right, but its sec 0.4 presents `verified as an exact
+  rational identity at all 90 654 primitive posets n <= 7` as the part that is NEW.  The
+  substance of sec 4 is not this line; it is (I2).  Checked anyway, on my own sweep:
+     90620 informative posets n = 5..7: 0 failures
+
+  WHAT IS GENUINELY THERE, AND IS THE REAL CONTENT: `c` and `C3gap` are two normalisations
+  of ONE measured quantity, min_k Q_k — one divided by the gap, the other subtracted from
+  1 and divided by lambda_std.  Nobody can improve one without moving the other.  That
+  claim is correct and it is the useful half of mg-81ff sec 4.
+
+------------------------------------------------------------------------------
+(I2) THE DEMAND ALGEBRA — re-derived from mg-76b2 sec 6, not from mg-81ff
+------------------------------------------------------------------------------
+  mg-76b2 sec 6's table, row (IV):  Phi <= 1 - c(1-eps_spec),  eps_dem = 1 - (1-eps_leak)/c
+  mg-76b2 sec 6, gap-form of (II):  eps_dem = eps_leak / C3
+
+  Under chain (II)'s hypothesis min_k Q_k <= g*gap, the worst c on {gap <= e} is
+  (1 - g*e)/(1 - e)  [it is decreasing in gap for g >= 1, so the worst is at gap = e].
+  Put e = eps_dem and solve:
+
+      1 - (1-L)(1-e)/(1 - g e) = e
+      (1 - g e) - (1-L)(1-e)   = e(1 - g e)
+      1 - g e - 1 + e + L - L e = e - g e^2
+      L(1 - e)                  = g e (1 - e)
+      e = L/g                                              [1 - e != 0]
+
+  MY DERIVATION AGREES WITH mg-81ff's.  Checked against both chains' own formulae:
+       g          eps_dem^(II)   c = (1-g e)/(1-e)   eps_dem^(IV)   EQUAL?
+       1.0000      0.200000       1.000000          0.200000       True
+       1.5000      0.133333       0.923077          0.133333       True
+       2.0000      0.100000       0.888889          0.100000       True
+       2.3861      0.083819       0.873190          0.083819       True
+       3.0753      0.065035       0.855647          0.065035       True
+       4.8758      0.041019       0.834219          0.041019       True
+       5.0000      0.040000       0.833333          0.040000       True
+      10.0000      0.020000       0.816327          0.020000       True
+      20.0000      0.010000       0.808081          0.010000       True
+
+  NEGATIVE CONTROL — the algebra must be able to FAIL.  A chain (IV) mis-derived so that
+  it DOES pay a Cheeger square delivers Phi <= sqrt(2(1 - c(1-eps))) and its demand solves
+  differently; if the equality above were vacuous arithmetic this would reproduce it too:
+     g= 1.00   correct eps_dem =  0.200000   square-paying variant =  0.020000   differs (good)
+     g= 1.50   correct eps_dem =  0.133333   square-paying variant = -0.061667   differs (good)
+     g= 2.00   correct eps_dem =  0.100000   square-paying variant = -0.102500   differs (good)
+     g= 5.00   correct eps_dem =  0.040000   square-paying variant = -0.176000   differs (good)
+     g=10.00   correct eps_dem =  0.020000   square-paying variant = -0.200500   differs (good)
+
+------------------------------------------------------------------------------
+(I3) THE JOINT: THE ALGEBRA IS POINTWISE.  THE CHAINS ARE QUANTIFIED OVER A CLASS.
+------------------------------------------------------------------------------
+  (I2) fixes ONE value of the one unknown and shows the two chains demand the same thing
+  of it.  That is correct and I confirm it.  But neither chain is invoked at a value; each
+  is invoked over the class {gap <= eps_spec}, where the constants are
+
+      g(e) := max C3gap over {gap <= e}          c(e) := min c over {gap <= e}
+
+  and the step `the worst c is (1 - g e)/(1 - e)` needs the worst C3gap to be attained AT
+  gap = e.  It is not.  Measured on the exhaustive population:
+      n     e      g(e)    argmax's own gap   (1-g e)/(1-e)   c(e) ACTUAL   slack
+      6   0.20   2.3861       0.072536          0.653478      0.796735    +0.143257
+      6   0.15   2.3861       0.072536          0.755396      0.824256    +0.068860
+      6   0.10   2.3861       0.072536          0.845990      0.868532    +0.022541
+      6   0.08   2.3861       0.072536          0.879471      0.891596    +0.012125
+      7   0.20   3.0753       0.054196          0.481182      0.787389    +0.306207
+      7   0.15   3.0753       0.054196          0.633776      0.798611    +0.164835
+      7   0.10   3.0753       0.054196          0.769414      0.858894    +0.089480
+      7   0.08   3.0753       0.054196          0.819542      0.881084    +0.061543
+
+  THE WORST C3gap IS NEVER AT THE CAP: at n = 7 it is attained at gap = 0.054196 (the
+  staircase S_7) for every cap from 0.20 down to 0.06.  So the chain (II) translation
+  UNDERSTATES the c that chain (IV) actually gets, and the two demands are NOT equal on a
+  class — they are ordered.  Evaluated self-consistently at each n's own fixed point:
+      n    chain (II): eps_dem = L/g    chain (IV): eps_dem = 1-(1-L)/c(e)   ratio
+      6          0.083819                    0.102732                  1.2256x
+      7          0.065035                    0.092028                  1.4151x
+
+  >>> SO `CHAIN (IV) BUYS NO WEAKER DEMAND THAN CHAIN (II)` IS A `>=`, NOT AN `=`, AND ON
+      THE MEASURED POPULATION IT IS STRICT: chain (IV) tolerates 1.23x (n=6) and 1.42x
+      (n=7) the eps_spec that chain (II) does.  The direction is the SAFE one — mg-81ff's
+      conclusion is conservative against chain (IV), not optimistic — so this is a
+      qualification of the headline and not a defect in it.
+
+  >>> AND a3's STAIRCASE MAKES THE SAME POINT WITHOUT A LIMIT ARGUMENT.  On the class
+      {gap <= eps_spec} that Step 2 actually supplies:
+        chain (II) needs a universal g with min_k Q_k <= g*gap, and closing needs
+          g <= eps_leak/eps_spec = 10.  S_25 is primitive, has gap = 0.0043572625 <= 1/50
+          and forces g >= 10.1654, EXACTLY.  So chain (II)'s route does not close there.
+        chain (IV) needs c >= 40/49 = 0.816327.  S_25 gives c = 0.9598890, and its
+          per-poset closing condition min_k Q_k = 300/6773 <= 1/5 holds with 4.5x to spare.
+      ONE EXACT WITNESS, IN THE REGIME, ON WHICH ONE CHAIN CLOSES AND THE OTHER DOES NOT.
+      mg-81ff names the mechanism correctly — chain (II)'s bound is RELATIVE and chain
+      (IV)'s ABSOLUTE — but files it as `an advantage in PROVABILITY, not in the constant`.
+      On this witness it is an advantage in what closes.
+
+------------------------------------------------------------------------------
+(I4) THE WALL TABLE, WITH AN IN-REGIME ROW IT DID NOT HAVE
+------------------------------------------------------------------------------
+  mg-81ff sec 5 prices the wall at 5*C3gap and tabulates 1 (5x), 2.386 (11.9x, out of
+  regime), 3.075 (15.4x, out of regime), 10 (50x, hypothetical).  Every measured row was
+  out of regime.  The staircase supplies measured IN-REGIME rows:
+      poset          gap          in regime?   C3gap      wall = 5*C3gap
+      N(10)        0.014446     YES          1.0650       5.3x
+      N(16)        0.003743     YES          1.0275       5.1x
+      S_12         0.018778     YES          4.8758      24.4x
+      S_20         0.006801     YES          8.1271      40.6x
+      S_25         0.004357     YES         10.1654      50.8x
+
+  >>> THE 5x ROW IS NOT MERELY `THE EXTREME POINT`, WHICH IS mg-81ff's READING AND IS
+      RIGHT.  It is also the row its ONE in-regime family happens to sit on.  A different
+      in-regime family, primitive and exact, puts the same wall at 24x and then 53x.
+      `THE TICKET'S PREMISE SURVIVES ON THE ONLY POSETS ANYONE HAS EXHIBITED INSIDE THE
+      REGIME` was true when written; it is not true now, and the sentence that replaces it
+      should say WHICH posets.
+
+==============================================================================
+a4 VERDICT.  (I1) correct and correctly labelled formal.  (I2) correct — I
+re-derived it independently and the negative control fires.  (I3) the equality is
+POINTWISE; over a class it is an inequality, strict on this population, in chain
+(IV)'s favour — and on the staircase the two chains do not even agree on whether
+they close.  `CHAIN (IV) IS CHAIN (II)` holds for the UNKNOWN and fails for the
+HYPOTHESIS, which is a distinction mg-81ff draws itself and then does not carry
+into its headline.
+==============================================================================
