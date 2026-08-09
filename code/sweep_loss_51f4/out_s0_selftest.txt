@@ -1,0 +1,21 @@
+s0 — lib51f4 forced arms
+
+  ok    A1     397 posets: down-set lattice == brute force; the mg-9461-shaped mutation inflates the state count at 58 of 60
+  ok    A2     522 posets (all n<=5, every 40th at n=6, 4 named at n=7), 0 mismatches
+  ok    A3     1548 prefix cuts: leak(A_k) == w(A_k,A_k^c) == energy(1_A_k), exactly
+  ok    A4     397 posets: closed form == literal evaluation, and Q_kk == leak(A_k)
+  ok    A5     psi cone == monotone cone, both directions, and a negative coefficient breaks it
+  ok    A6     3902 (poset, threshold) decisions: Sylvester-on-the-pencil == Faddeev-on-the-Laplacian, 0 disagreements
+  ok    C1     a deliberately wrong Laplacian shift disagrees at 3 of 3 thresholds
+  ok    A7     101 primitive posets: float gap inside the exact bracket, endpoints straddle
+  ok    A8     6 hand cases exact; the Horn matrix is REFUSED, not guessed
+  ok    A9     45 primitive posets: exact copositivity bracket on mu_pref agrees with the float cone minimiser to 1e-6, and never falls below gamma
+  ok    A10    397 posets exact; the mutated constant 1/3 holds at 0 with a nonzero footrule
+  ok    A11    133 posets: Phi*_pref from linear extensions == Phi*_pref from the profile
+  ok    A12    302 primitive posets n<=5: gamma <= mu_pref, so c# >= Delta_P - gamma/2
+  ok    C3     (F) FAILS at near-ordinal(7) and HOLDS at antichain(6); (M#) FAILS at chain+point(13) and HOLDS at chain+point(8)
+  ok    C4     n=5: f* is the smaller at all 275 primitive posets, c# at 0 — the disjunction IS (F) there; n=6 (every 3rd poset): c# smaller at 12, f* at 1338, so min() bites from n=6 on
+  ok    C5     2/7/40/357/4824 = 5230 over n=2..6, matching mg-28ff's population exactly
+
+16/16 arms pass
+EXIT=0

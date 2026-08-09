@@ -1,0 +1,161 @@
+n=2: 2 posets, 1 primitive   (0.0s)
+n=3: 7 posets, 4 primitive   (0.0s)
+n=4: 40 posets, 27 primitive   (0.1s)
+n=5: 357 posets, 275 primitive   (1.5s)
+n=6: 4824 posets, 4070 primitive   (40.7s)
+
+========================================================================================================
+S1.1  [FORMALITY] REPRODUCTION OF mg-28ff's CONSTANTS ON AN INDEPENDENT INSTRUMENT
+========================================================================================================
+Pre-answered by my ticket body (PREDICTIONS.md H1): these are a CONTROL on lib51f4,
+not a finding.  The transport here comes from a DOWN-SET dynamic program, not from
+enumerating n! permutations, so agreement is a real cross-check of two algorithms.
+
+  n  | posets | primitive |   c_true   |     c#     |     f*     
+ ----+--------+-----------+------------+------------+------------
+  2  |      2 |         1 |   0.125000 |   0.125000 |   0.125000
+  3  |      7 |         4 |   0.222222 |   0.500000 |   0.250000
+  4  |     40 |        27 |   0.271353 |   0.636846 |   0.306250
+  5  |    357 |       275 |   0.308339 |   0.803289 |   0.550747
+  6  |   4824 |      4070 |   0.327508 |   0.943151 |   0.811649
+
+  totals over n = 2..6:  5230 posets, 4377 primitive   (mg-28ff reports 5230 and 4377)
+
+  NOT REPRODUCED, DELIBERATELY (PREDICTIONS.md E8): the L2 census — mg-28ff's 1037
+  primitive posets exhibiting L2's first disjunct and 3340 where it fails, and the
+  1032-vs-1037 discrepancy it left open.  Deciding `mu_pref == gamma` exactly means
+  comparing two algebraic numbers, my first attempt at it was wrong (it asked whether
+  a RATIONALISED mu_pref landed inside a 2^-49-wide bracket, and answered 53), and a
+  number that is already established on two instruments is not worth a third that
+  might be broken.  The cone penalty mu_pref/gamma in S1.4 is the quantitative form of
+  the same question and is what this ticket actually uses.
+
+========================================================================================================
+S1.2  THE FLOOR — c#(P) >= Delta_P - gamma/2 AT EVERY POSET, EXACT, 0 EXCEPTIONS
+========================================================================================================
+The whole content of the floor is `gamma <= mu_pref`, because
+    c# - (Delta - gamma/2) = [ sweep(mu,Delta) - 2 Delta gamma + gamma^2 ] / (2 gamma)
+and with sweep(mu,Delta) = mu(2Delta-mu) the bracket is q(gamma) where
+    q(t) = t^2 - 2 Delta t + mu(2Delta-mu) = (t - mu)(t - (2Delta - mu)) >= 0 for t <= mu,
+while in the other branch sweep = Delta^2 and q(t) = (t-Delta)^2 >= 0 outright.
+So the machine check is ONE EXACT DECISION PER POSET — `gamma > mu_pref` must be
+FALSE — and it involves no bracket and no float.
+
+  `gamma > mu_pref` at 0 of 4377 primitive posets n <= 6   (exact; 0 is the theorem)
+
+  MUTATION CONTROL (PREDICTIONS.md E3b): the floor with the sign flipped,
+  Delta_P + gamma/2, must FAIL somewhere or the checking code cannot discriminate.
+  c# < Delta_P + gamma/2 at 4377 of 4377 — the mutant is violated, so the check bites.
+
+  n  |  max c#   | max floor | floor at c#'s OWN argmax | floor/c# there | median floor/c#
+ ----+-----------+-----------+--------------------------+----------------+----------------
+  3  |  0.500000 |  0.500000 |                 0.500000 |         1.0000 |           1.0000
+  4  |  0.636846 |  0.636846 |                 0.636846 |         1.0000 |           1.0000
+  5  |  0.803289 |  0.752421 |                 0.733351 |         0.9129 |           0.9978
+  6  |  0.943151 |  0.825114 |                 0.810428 |         0.8593 |           0.9937
+
+  READ THIS COLUMN, NOT THE HEADLINE: at n = 6 the floor already accounts for
+  85.9% of c#.  Even a PERFECT monotone test vector — one attaining mu_pref = gamma,
+  which is exactly L2's first disjunct — leaves c# at 0.8104 there.
+
+========================================================================================================
+S1.3  ROUTE (F) HAS NO COMPARABLE FLOOR
+========================================================================================================
+From `leak(A_k) >= gamma k(n-k)/n` (the centred prefix indicator is a test vector),
+    M >= rho_n gamma   with rho_n = (n^2-1)/(6 floor(n^2/4)) -> 2/3,
+so f* >= rho_n^2 gamma / 2.  That floor VANISHES with gamma instead of rising to 1.
+
+  n  | rho_n   | max over primitive of f*'s floor | max f*  
+ ----+---------+----------------------------------+---------
+  3  | 0.66667 |                         0.222222 |  0.2500
+  4  | 0.62500 |                         0.195312 |  0.3063
+  5  | 0.66667 |                         0.222222 |  0.5507
+  6  | 0.64815 |                         0.210048 |  0.8116
+
+  So the two routes do NOT share a degrading factor: (M#) carries a floor that rises
+  toward 1 and (F) does not.  The common object is the population, not the mechanism.
+
+========================================================================================================
+S1.4  THE SWEEP'S LOSS, DECOMPOSED — WHAT EACH ROUTE THROWS AWAY
+========================================================================================================
+Pointwise, by definition,   c#(P) = Lam_M(P) * c_true(P)   and   f*(P) = Lam_F(P)^2 * c_true(P)
+with  Lam_M = sweep(mu,Delta)/Phi*_pref^2   THE SWEEP'S LOSS (Cauchy-Schwarz + the
+degree rounding + the cone penalty), and  Lam_F = M/Phi*_pref  THE MEDIANT LOSS (the
+m-weighted MEAN of the prefix-conductance profile over its MINIMUM).
+
+  n  |  max Lam_M  | max Lam_F | max spread phi_max/phi_min | max cone penalty mu/gamma
+ ----+-------------+-----------+----------------------------+--------------------------
+  3  |       3.750 |     1.500 |                      2.000 |                    1.0000
+  4  |      20.000 |     3.500 |                      6.000 |                    1.0854
+  5  |      30.372 |     5.000 |                     10.000 |                    1.1412
+  6  |      79.309 |     9.667 |                     21.000 |                    1.2176
+
+  The loss is NOT converging and it is NOT the thing that has to converge: what the
+  architecture consumes is the PRODUCT Lam * c_true, and c_true falls exactly where
+  the loss rises.  A uniform bound on the loss is neither available nor needed.
+
+========================================================================================================
+S1.5  THE TWO ROUTES FAIL IN OPPOSITE REGIMES
+========================================================================================================
+  n=4
+     argmax c#  gamma=0.226308  Delta=0.75000  Phi*=0.25000  M=0.25000 | c_true=0.1381 c#=0.6368 f*=0.1381  min=0.1381   [(0, 1), (0, 3), (1, 3)]
+     argmax f*  gamma=0.312500  Delta=0.75000  Phi*=0.25000  M=0.43750 | c_true=0.1000 c#=0.6157 f*=0.3063  min=0.3063   [(0, 1), (0, 2)]
+  n=5
+     argmax c#  gamma=0.311076  Delta=0.88889  Phi*=0.33333  M=0.44444 | c_true=0.1786 c#=0.8033 f*=0.3175  min=0.3175   [(0, 1), (0, 2), (0, 4), (1, 2), (3, 4)]
+     argmax f*  gamma=0.115798  Delta=0.71429  Phi*=0.07143  M=0.35714 | c_true=0.0220 c#=0.6691 f*=0.5507  min=0.5507   [(0, 2), (0, 3), (1, 2), (1, 3), (1, 4)]
+  n=6
+     argmax c#  gamma=0.236288  Delta=0.92857  Phi*=0.35714  M=0.37302 | c_true=0.2699 c#=0.9432 f*=0.2944  min=0.2944   [(0, 1), (0, 2), (0, 4), (0, 5), (1, 2), (1, 5), (3, 4), (3, 5), (4, 5)]
+     argmax f*  gamma=0.080789  Delta=0.77778  Phi*=0.05556  M=0.36214 | c_true=0.0191 c#=0.7521 f*=0.8116  min=0.7521   [(0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4), (1, 5)]
+
+  Pearson correlation of c# and f* over the 4070 primitive posets at n=6:  +0.3537
+  primitive posets at n=6 with BOTH c# > 0.8 AND f* > 0.8:  0 of 4070
+  (PREDICTIONS.md E4: a mechanism, not a correlation — a poset where c# > f*:
+     c# 0.7705  f* 0.1106  gamma 0.12563   [(0, 1), (0, 2), (0, 4), (0, 5), (1, 2), (1, 4), (1, 5), (2, 4), (2, 5), (4, 5)]
+   and one where f* > c#:
+     c# 0.6851  f* 0.8072  gamma 0.06431   [(0, 3), (0, 4), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5)])
+
+========================================================================================================
+S1.6  THE DISJUNCTION CONSTANT — THE OBJECT THE ARCHITECTURE ACTUALLY CONSUMES
+========================================================================================================
+c_or(n) = max over PRIMITIVE posets of min(c#(P), f*(P)).  Legitimate because (M#)
+and (F) are each separately sufficient for C_3^(III) = 1 at a poset: the theorem needs
+ONE route to fire there, not both.  Scope: primitive, exhaustive, n <= 6.
+
+  n  | primitive |  c_true  |    c#    |    f*    |  c_or = max min(c#,f*) | c_or/c_true
+ ----+-----------+----------+----------+----------+------------------------+------------
+  3  |         4 | 0.222222 | 0.500000 | 0.250000 |               0.250000 |     1.1250
+  4  |        27 | 0.271353 | 0.636846 | 0.306250 |               0.306250 |     1.1286   (+0.0563)
+  5  |       275 | 0.308339 | 0.803289 | 0.550747 |               0.550747 |     1.7862   (+0.2445)
+  6  |      4070 | 0.327508 | 0.943151 | 0.811649 |               0.753639 |     2.3011   (+0.2029)
+
+  c_or's argmax at n=6: [(0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4)]
+     gamma=0.075783 Delta=0.77778 Phi*=0.055556 M=0.349794 c_true=0.0204 c#=0.7536 f*=0.8073
+
+========================================================================================================
+S1.7  WHY THE DISJUNCTION SURVIVES — THE TWO LOSSES ARE ANTI-CORRELATED IN gamma
+========================================================================================================
+This is the mechanism behind S1.6, and it is a statement about the SWEEP, not about
+either route.  The sweep's loss has two parts that respond to gamma in OPPOSITE ways:
+
+  * THE CONE PENALTY  mu_pref/gamma  — the price of insisting the test vector be
+    monotone.  It is what makes c# exceed its floor, so it is the only part of (M#)
+    a better vector could ever attack.
+  * THE MEDIANT LOSS  M/Phi*_pref    — the m-weighted MEAN of the prefix-conductance
+    profile over its MINIMUM.  It is the whole of (F)'s loss.
+
+Binned by gamma over the 4070 primitive posets at n = 6 (EXHAUSTIVE):
+
+   gamma bin      | count | max mu/gamma | max M/Phi* | max c# | max f* | max min(c#,f*)
+  ---------------+-------+--------------+------------+--------+--------+---------------
+   [0.050,0.100) |   228 |       1.0272 |      9.667 | 0.8270 | 0.8116 |        0.7536
+   [0.100,0.200) |  1350 |       1.0779 |      5.500 | 0.8527 | 0.6182 |        0.6182
+   [0.200,0.300) |  1035 |       1.1984 |      3.286 | 0.9432 | 0.4208 |        0.4208
+   [0.300,0.500) |  1261 |       1.2176 |      2.424 | 0.8658 | 0.3749 |        0.3749
+   [0.500,2.000) |   196 |       1.1700 |      1.932 | 0.7422 | 0.3040 |        0.3040
+
+  The cone penalty collapses to 1 exactly where the mediant loss explodes.  A poset
+  with a very thin bottleneck has a Fiedler vector that IS monotone (L2's first
+  disjunct holds there), which pins c# to its floor Delta - gamma/2 < 1; and a poset
+  whose Fiedler vector is badly non-monotone has a fat profile, which keeps M/Phi*
+  small.  Neither statement is proved here.  Both are exhaustive at n <= 6.
+EXIT=0
