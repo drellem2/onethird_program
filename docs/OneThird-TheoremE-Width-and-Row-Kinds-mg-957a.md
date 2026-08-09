@@ -200,7 +200,10 @@ the correction below).
 > dominance is **refuted** (`FP✗`), and the **all-pairs-frozen conditional** that remains open **is
 > L1b**. The fork below is also settled — and **neither branch is right**: mg-65f5 finds row 3b is
 > L1b's *conclusion*, not an input, so the error was a **CIRCULARITY**. That repair is `mg-a1db`'s
-> and is not applied here. (`166`/`0/132` read from the probe documents, **not re-measured**.)
+> and is not applied here — **it LANDED in `STATE.md` on 2026-08-10 (mg-a1db), at `:13`, `:74`,
+> `:76`, `:79` and `:81`**; the `:76` bullet is struck and the `:81` fork paragraph is replaced, so
+> the fork below is superseded text and is kept only so that *"it had no true branch"* is checkable.
+> (`166`/`0/132` read from the probe documents, **not re-measured**.)
 
 - If **3a alone** suffices, the old *"all proven"* was a **NAME/GLOSS SLIP** — right rows, wrong
   label.
