@@ -21,19 +21,23 @@ are not used; the enumerations are deterministic and complete.
 |---|---|---|
 | `lib3969.py` | — | source definitions (`Δ₁ :270–278`, `Φ :229–237`, `p_xy :59–62`, `δ :63–66`), each quoted at its site |
 | `a1_vacuity.py [nmax]` | can the **consumable** threshold be measured? | **No.** 604 230 prefix cuts over every poset with `n ≤ 7`; disjunct (i) fires at every one, so the consumable statement holds at `ε = 1` throughout and the measurement is structurally vacuous |
-| `a2_uniform.py [nmax]` | what about the **uniform** (all-posets) transfer threshold? | **`ε₀(U_either) ≤ 17/78`** and **`ε₀(U_smaller) ≤ 1/7`**, uniformly in `n`, witnessed at `n = 6` |
+| `a2_uniform.py [nmax]` | what about the **uniform** (all-posets) transfer threshold? | **`ε₀(U_either) ≤ 17/78`** (witness `n = 6`, **unchanged** when the sweep is extended to `n = 7`) and **`ε₀(U_smaller) ≤ 13/111`** (witness `n = 7`; the `n ≤ 6` run gives the weaker `1/7`), both uniform in `n` |
 | `a3_witness.py` | is the witness real, or a bug in the extension builder? | both witnesses re-derived by brute force over all `n!` permutations — **no shared code with the sweep** — with a pair-by-pair certificate |
 | `a4_mechanism.py [nmax]` | *why* does the transfer fail? | **not only** the `δ = 1/3` endpoint gap: a pair at `p_side = 1/2`, maximal interior slack `1/6`, is evicted at `Δ₁ = 5/19`. My own prediction lost |
 
 ```bash
 python3 a1_vacuity.py 7     # ~2 min at n=7, ~2 s at n=6
-python3 a2_uniform.py 6     # ~9 s
+python3 a2_uniform.py 6     # ~9 s        (n=7 takes ~40 min — run it detached)
 python3 a3_witness.py       # instant
 python3 a4_mechanism.py 6   # ~3 s
 ```
 
-Committed outputs: `out_a1_vacuity.txt` (`n ≤ 6`), `out_a1_vacuity_n7.txt`, `out_a2_uniform.txt`,
-`out_a3_witness.txt`, `out_a4_mechanism.txt`.
+Committed outputs: `out_a1_vacuity.txt` (`n ≤ 6`), `out_a1_vacuity_n7.txt`, `out_a2_uniform.txt`
+(`n ≤ 6`), `out_a2_uniform_n7.txt`, `out_a3_witness.txt`, `out_a4_mechanism.txt`.
+
+`a3_witness.py` certifies the **`n = 6`** witnesses, which are the ones the `n ≤ 6` run reports. The
+`n = 7` `U_smaller` witness that lowers that ceiling to `13/111` is reported by `a2` only and has
+**not** been through the second code path.
 
 ## Poset encoding, and why it is complete
 
