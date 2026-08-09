@@ -1,0 +1,59 @@
+==============================================================================
+mg-9461 s2 — mg-d3c7's FAMILY, RE-VERIFIED ON AN INDEPENDENT PATH
+==============================================================================
+Linear extensions by filtering all n! permutations. Exact rationals.
+No line shared with code/eps0_audit_d3c7/ or code/eps0_threshold_3969/.
+
+------------------------------------------------------------------------------
+A. THE n = 7 WITNESS mg-d3c7 PRINTS BY HAND
+------------------------------------------------------------------------------
+   P = chain 1<2<3<4<5<6 plus isolated 0,  e(P) = 7   (mg-d3c7: 7)
+   A = [0, 1, 2, 3],  B = [4, 5, 6]
+   Delta_1(A) = 1/7   (mg-d3c7: 1/7)
+   pairs balanced inside P[A], and where they land in P:
+      (0,2): p_side = 1/2   ->   p_P = 2/7   EVICTED
+   side A: 1 balanced-in-side pair(s), survives = False   (mg-d3c7: no pair survives)
+
+------------------------------------------------------------------------------
+B. THE FAMILY, MEMBER BY MEMBER (n = 2k+1)
+------------------------------------------------------------------------------
+  k   n  e(P)         Delta_1  =hand?  n! too?  #bal  survives  delta(P)  >=1/3?
+  3   7     7            4/21     yes      yes     2     False       3/7     yes
+  4   9     9            5/36     yes        -     1     False       4/9     yes
+  5  11    11            6/55     yes        -     2     False      5/11     yes
+  6  13    13            7/78     yes        -     3     False      6/13     yes
+  8  17    17           9/136     yes        -     3     False      8/17     yes
+ 10  21    21          11/210     yes        -     3     False     10/21     yes
+ 15  31    31          16/465     yes        -     6     False     15/31     yes
+ 20  41    41          21/820     yes        -     7     False     20/41     yes
+ 30  61    61         31/1830     yes        -    11     False     30/61     yes
+ 50 101   101         51/5050     yes        -    17     False    50/101     yes
+
+   Delta_1 = (k+1)/((2k+1)k) at every member, verified against the
+   hand formula on the DP path and cross-checked against the n! path
+   wherever n <= 8. At k = 50, Delta_1 = 51/5050 = 0.010099, still falling.
+   0 of these members has a surviving pair, and every one has
+   delta(P) >= 1/3 — so L4's disjunct (i) HOLDS and L4 is untouched.
+   E4 GUARD DISCHARGED.
+
+------------------------------------------------------------------------------
+C. WHAT THIS MEANS FOR eps_leak — stated as the limit it is
+------------------------------------------------------------------------------
+   The family drives Delta_1 -> 0 with every balanced-in-side pair
+   evicted, so the UNIFORM (i)-free surrogate has threshold 0 in the
+   architecturally required scope. There is therefore NO reading in
+   which the corpus's eps_leak = 0.20 is a proven lower bound, and
+   one live reading in which it is already ABOVE a proven ceiling:
+      ceiling  17/78 = 0.217949   0.20 is below it    [mg-3969, BOTH sides non-chain, n <= 7]
+      ceiling    1/7 = 0.142857   0.20 is ABOVE it    [mg-d3c7, ONE+ side non-chain, n <= 7 (required)]
+      ceiling      0 = 0.000000   0.20 is ABOVE it    [mg-d3c7, ONE+, uniform in n (required)]
+
+   NEGATIVE CONTROL — the surrogate is not trivially false. A cut with
+   both sides non-chain, at a poset with a genuinely thin interface,
+   must be able to SURVIVE, or this predicate would be vacuous:
+      P = 2+2 (a<b, c<d), A = {a,c}, B = {b,d}:  e(P) = 6, Delta_1 = 1/6
+      balanced-in-side pairs = 1, survives = True   (control fires: a surviving case exists)
+
+==============================================================================
+s2 COMPLETE — family reproduced independently, E4 discharged, control fired.
+==============================================================================
