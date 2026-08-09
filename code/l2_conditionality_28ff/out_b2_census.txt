@@ -1,0 +1,166 @@
+
+=== ALL POSETS n = 2 — 2 posets ===
+[EXACT] target Phi*_pref^2 <= 2(1-lambda_std): 2/2 hold, 0 fail
+        split: 1 primitive, 1 decomposable (decomposable carry no ratio: 1-lambda_std = 0)
+[FLOAT] L2's first disjunct (the top standard eigenspace meets the monotone cone, i.e. mu_pref == 1-lambda_std): holds 1, FAILS 0 of 1 primitive
+[FLOAT / MEASUREMENT] c# = 0.125000   over 1 primitive posets
+        top 5:
+          c#=0.125000  n=2  Delta=0.500000  mu_pref=1.000000  1-lam=1.000000  L2=yes  (antichain)
+        over the 1 primitive posets where L2 HOLDS:  c# = 0.125000  (= max(Delta_P - (1-lambda_std)/2) <= 1 by the theorem)
+[EXACT] certificate ladder — a rational monotone g with R(g)(2Delta-R(g)) <= 2c(1-lambda_std):
+          c =    1/2: certified at 1/1 primitive
+          c =    3/4: certified at 1/1 primitive
+          c =   9/10: certified at 1/1 primitive
+          c =      1: certified at 1/1 primitive  <-- C_3 = 1 here
+          c =  11/10: certified at 1/1 primitive
+          c =    5/4: certified at 1/1 primitive
+          c =    3/2: certified at 1/1 primitive
+          c =      2: certified at 1/1 primitive
+
+=== ALL POSETS n = 3 — 7 posets ===
+[EXACT] target Phi*_pref^2 <= 2(1-lambda_std): 7/7 hold, 0 fail
+        split: 4 primitive, 3 decomposable (decomposable carry no ratio: 1-lambda_std = 0)
+[FLOAT] L2's first disjunct (the top standard eigenspace meets the monotone cone, i.e. mu_pref == 1-lambda_std): holds 4, FAILS 0 of 4 primitive
+[FLOAT / MEASUREMENT] c# = 0.500000   over 4 primitive posets
+        top 5:
+          c#=0.500000  n=3  Delta=0.666667  mu_pref=0.333333  1-lam=0.333333  L2=yes  [(0, 2)]
+          c#=0.416667  n=3  Delta=0.666667  mu_pref=0.500000  1-lam=0.500000  L2=yes  [(0, 1)]
+          c#=0.416667  n=3  Delta=0.666667  mu_pref=0.500000  1-lam=0.500000  L2=yes  [(1, 2)]
+          c#=0.222222  n=3  Delta=0.666667  mu_pref=1.000000  1-lam=1.000000  L2=yes  (antichain)
+        over the 4 primitive posets where L2 HOLDS:  c# = 0.500000  (= max(Delta_P - (1-lambda_std)/2) <= 1 by the theorem)
+[EXACT] certificate ladder — a rational monotone g with R(g)(2Delta-R(g)) <= 2c(1-lambda_std):
+          c =    1/2: certified at 4/4 primitive
+          c =    3/4: certified at 4/4 primitive
+          c =   9/10: certified at 4/4 primitive
+          c =      1: certified at 4/4 primitive  <-- C_3 = 1 here
+          c =  11/10: certified at 4/4 primitive
+          c =    5/4: certified at 4/4 primitive
+          c =    3/2: certified at 4/4 primitive
+          c =      2: certified at 4/4 primitive
+
+=== ALL POSETS n = 4 — 40 posets ===
+[EXACT] target Phi*_pref^2 <= 2(1-lambda_std): 40/40 hold, 0 fail
+        split: 27 primitive, 13 decomposable (decomposable carry no ratio: 1-lambda_std = 0)
+[FLOAT] L2's first disjunct (the top standard eigenspace meets the monotone cone, i.e. mu_pref == 1-lambda_std): holds 17, FAILS 10 of 27 primitive
+[FLOAT / MEASUREMENT] c# = 0.636846   over 27 primitive posets
+        top 5:
+          c#=0.636846  n=4  Delta=0.750000  mu_pref=0.226308  1-lam=0.226308  L2=yes  [(0, 1), (0, 3), (1, 3)]
+          c#=0.636846  n=4  Delta=0.750000  mu_pref=0.226308  1-lam=0.226308  L2=yes  [(0, 2), (0, 3), (2, 3)]
+          c#=0.633156  n=4  Delta=0.833333  mu_pref=0.500000  1-lam=0.460655  L2=NO   [(0, 1), (2, 3)]
+          c#=0.625000  n=4  Delta=0.750000  mu_pref=0.250000  1-lam=0.250000  L2=yes  [(0, 2), (0, 3)]
+          c#=0.625000  n=4  Delta=0.750000  mu_pref=0.250000  1-lam=0.250000  L2=yes  [(0, 3), (1, 3)]
+        over the 10 primitive posets where L2 FAILS: c# = 0.633156
+        over the 17 primitive posets where L2 HOLDS:  c# = 0.636846  (= max(Delta_P - (1-lambda_std)/2) <= 1 by the theorem)
+[EXACT] certificate ladder — a rational monotone g with R(g)(2Delta-R(g)) <= 2c(1-lambda_std):
+          c =    1/2: certified at 7/27 primitive
+          c =    3/4: certified at 27/27 primitive
+          c =   9/10: certified at 27/27 primitive
+          c =      1: certified at 27/27 primitive  <-- C_3 = 1 here
+          c =  11/10: certified at 27/27 primitive
+          c =    5/4: certified at 27/27 primitive
+          c =    3/2: certified at 27/27 primitive
+          c =      2: certified at 27/27 primitive
+
+=== ALL POSETS n = 5 — 357 posets ===
+[EXACT] target Phi*_pref^2 <= 2(1-lambda_std): 357/357 hold, 0 fail
+        split: 275 primitive, 82 decomposable (decomposable carry no ratio: 1-lambda_std = 0)
+[FLOAT] L2's first disjunct (the top standard eigenspace meets the monotone cone, i.e. mu_pref == 1-lambda_std): holds 109, FAILS 166 of 275 primitive
+[FLOAT / MEASUREMENT] c# = 0.803289   over 275 primitive posets
+        top 5:
+          c#=0.803289  n=5  Delta=0.888889  mu_pref=0.350042  1-lam=0.311076  L2=NO   [(0, 1), (0, 2), (0, 4), (1, 2), (3, 4)]
+          c#=0.803289  n=5  Delta=0.888889  mu_pref=0.350042  1-lam=0.311076  L2=NO   [(0, 1), (0, 4), (2, 3), (2, 4), (3, 4)]
+          c#=0.778020  n=5  Delta=0.866667  mu_pref=0.237723  1-lam=0.228491  L2=NO   [(0, 1), (0, 2), (0, 4), (1, 2)]
+          c#=0.778020  n=5  Delta=0.866667  mu_pref=0.237723  1-lam=0.228491  L2=NO   [(0, 4), (2, 3), (2, 4), (3, 4)]
+          c#=0.771136  n=5  Delta=0.866667  mu_pref=0.241801  1-lam=0.233846  L2=NO   [(0, 1), (0, 2), (0, 3), (1, 2)]
+        over the 166 primitive posets where L2 FAILS: c# = 0.803289
+        over the 109 primitive posets where L2 HOLDS:  c# = 0.720711  (= max(Delta_P - (1-lambda_std)/2) <= 1 by the theorem)
+[EXACT] certificate ladder — a rational monotone g with R(g)(2Delta-R(g)) <= 2c(1-lambda_std):
+          c =    1/2: certified at 8/275 primitive
+          c =    3/4: certified at 265/275 primitive
+          c =   9/10: certified at 275/275 primitive
+          c =      1: certified at 275/275 primitive  <-- C_3 = 1 here
+          c =  11/10: certified at 275/275 primitive
+          c =    5/4: certified at 275/275 primitive
+          c =    3/2: certified at 275/275 primitive
+          c =      2: certified at 275/275 primitive
+
+=== ALL POSETS n = 6 — 4824 posets ===
+[EXACT] target Phi*_pref^2 <= 2(1-lambda_std): 4824/4824 hold, 0 fail
+        split: 4070 primitive, 754 decomposable (decomposable carry no ratio: 1-lambda_std = 0)
+[FLOAT] L2's first disjunct (the top standard eigenspace meets the monotone cone, i.e. mu_pref == 1-lambda_std): holds 906, FAILS 3164 of 4070 primitive
+[FLOAT / MEASUREMENT] c# = 0.943151   over 4070 primitive posets
+        top 5:
+          c#=0.943151  n=6  Delta=0.928571  mu_pref=0.283176  1-lam=0.236288  L2=NO   [(0, 1), (0, 2), (0, 4), (0, 5), (1, 2), (1, 5), (3, 4), (3, 5), (4, 5)]
+          c#=0.913930  n=6  Delta=0.937500  mu_pref=0.335164  1-lam=0.282351  L2=NO   [(0, 1), (0, 2), (0, 4), (0, 5), (1, 2), (3, 4), (3, 5), (4, 5)]
+          c#=0.913930  n=6  Delta=0.937500  mu_pref=0.335164  1-lam=0.282351  L2=NO   [(0, 1), (0, 2), (0, 5), (1, 2), (1, 5), (3, 4), (3, 5), (4, 5)]
+          c#=0.900073  n=6  Delta=0.937500  mu_pref=0.352647  1-lam=0.298228  L2=NO   [(0, 2), (0, 5), (1, 2), (1, 5), (3, 4), (3, 5), (4, 5)]
+          c#=0.900073  n=6  Delta=0.937500  mu_pref=0.352647  1-lam=0.298228  L2=NO   [(0, 1), (0, 2), (0, 4), (0, 5), (1, 2), (3, 4), (3, 5)]
+        over the 3164 primitive posets where L2 FAILS: c# = 0.943151
+        over the 906 primitive posets where L2 HOLDS:  c# = 0.782866  (= max(Delta_P - (1-lambda_std)/2) <= 1 by the theorem)
+[EXACT] certificate ladder — a rational monotone g with R(g)(2Delta-R(g)) <= 2c(1-lambda_std):
+          c =    1/2: certified at 9/4070 primitive
+          c =    3/4: certified at 3138/4070 primitive
+          c =   9/10: certified at 4065/4070 primitive
+          c =      1: certified at 4070/4070 primitive  <-- C_3 = 1 here
+          c =  11/10: certified at 4070/4070 primitive
+          c =    5/4: certified at 4070/4070 primitive
+          c =    3/2: certified at 4070/4070 primitive
+          c =      2: certified at 4070/4070 primitive
+
+==============================================================================
+POOLED, n = 2..6, EXHAUSTIVE
+
+=== pooled n = 2..6 — 5230 posets ===
+[EXACT] target Phi*_pref^2 <= 2(1-lambda_std): 5230/5230 hold, 0 fail
+        split: 4377 primitive, 853 decomposable (decomposable carry no ratio: 1-lambda_std = 0)
+[FLOAT] L2's first disjunct (the top standard eigenspace meets the monotone cone, i.e. mu_pref == 1-lambda_std): holds 1037, FAILS 3340 of 4377 primitive
+[FLOAT / MEASUREMENT] c# = 0.943151   over 4377 primitive posets
+        top 5:
+          c#=0.943151  n=6  Delta=0.928571  mu_pref=0.283176  1-lam=0.236288  L2=NO   [(0, 1), (0, 2), (0, 4), (0, 5), (1, 2), (1, 5), (3, 4), (3, 5), (4, 5)]
+          c#=0.913930  n=6  Delta=0.937500  mu_pref=0.335164  1-lam=0.282351  L2=NO   [(0, 1), (0, 2), (0, 4), (0, 5), (1, 2), (3, 4), (3, 5), (4, 5)]
+          c#=0.913930  n=6  Delta=0.937500  mu_pref=0.335164  1-lam=0.282351  L2=NO   [(0, 1), (0, 2), (0, 5), (1, 2), (1, 5), (3, 4), (3, 5), (4, 5)]
+          c#=0.900073  n=6  Delta=0.937500  mu_pref=0.352647  1-lam=0.298228  L2=NO   [(0, 2), (0, 5), (1, 2), (1, 5), (3, 4), (3, 5), (4, 5)]
+          c#=0.900073  n=6  Delta=0.937500  mu_pref=0.352647  1-lam=0.298228  L2=NO   [(0, 1), (0, 2), (0, 4), (0, 5), (1, 2), (3, 4), (3, 5)]
+        over the 3340 primitive posets where L2 FAILS: c# = 0.943151
+        over the 1037 primitive posets where L2 HOLDS:  c# = 0.782866  (= max(Delta_P - (1-lambda_std)/2) <= 1 by the theorem)
+[EXACT] certificate ladder — a rational monotone g with R(g)(2Delta-R(g)) <= 2c(1-lambda_std):
+          c =    1/2: certified at 29/4377 primitive
+          c =    3/4: certified at 3435/4377 primitive
+          c =   9/10: certified at 4372/4377 primitive
+          c =      1: certified at 4377/4377 primitive  <-- C_3 = 1 here
+          c =  11/10: certified at 4377/4377 primitive
+          c =    5/4: certified at 4377/4377 primitive
+          c =    3/2: certified at 4377/4377 primitive
+          c =      2: certified at 4377/4377 primitive
+
+per-n c# (PRIMITIVE only) — PREDICTIONS.md P8 asked whether it RISES:
+   n=2:     1 primitive,  c# = 0.125000
+   n=3:     4 primitive,  c# = 0.500000
+   n=4:    27 primitive,  c# = 0.636846
+   n=5:   275 primitive,  c# = 0.803289
+   n=6:  4070 primitive,  c# = 0.943151
+
+=== n = 7 SPOT CHECKS (named families + deterministic sample) ===
+
+=== n = 7 named + sample — 98 posets ===
+[EXACT] target Phi*_pref^2 <= 2(1-lambda_std): 98/98 hold, 0 fail
+        split: 40 primitive, 58 decomposable (decomposable carry no ratio: 1-lambda_std = 0)
+[FLOAT] L2's first disjunct (the top standard eigenspace meets the monotone cone, i.e. mu_pref == 1-lambda_std): holds 11, FAILS 29 of 40 primitive
+[FLOAT / MEASUREMENT] c# = 0.850074   over 40 primitive posets
+        top 5:
+          c#=0.850074  n=7  Delta=0.857143  mu_pref=0.146382  1-lam=0.134996  L2=NO   [(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5), (3, 4), (3, 5), (4, 5)]
+          c#=0.834850  n=7  Delta=0.897436  mu_pref=0.190560  1-lam=0.183098  L2=NO   [(0, 1), (0, 2), (0, 3), (0, 4), (0, 6), (1, 3), (1, 4), (1, 6), (2, 6), (3, 4), (3, 6), (5, 6)]
+          c#=0.824584  n=7  Delta=0.936170  mu_pref=0.291229  1-lam=0.279211  L2=NO   [(0, 3), (0, 5), (0, 6), (1, 2), (1, 3), (1, 6), (2, 3), (2, 6), (4, 5), (4, 6)]
+          c#=0.807449  n=7  Delta=0.884615  mu_pref=0.180931  1-lam=0.177951  L2=NO   [(0, 2), (0, 3), (0, 6), (1, 4), (1, 5), (1, 6), (2, 3), (2, 6), (4, 5), (4, 6)]
+          c#=0.804522  n=7  Delta=0.857143  mu_pref=0.105242  1-lam=0.105242  L2=yes  [(0, 1), (0, 3), (0, 4), (0, 5), (0, 6), (1, 3), (1, 4), (1, 5), (1, 6), (3, 4), (3, 5), (3, 6), (4, 5), (4, 6), (5, 6)]
+        over the 29 primitive posets where L2 FAILS: c# = 0.850074
+        over the 11 primitive posets where L2 HOLDS:  c# = 0.804522  (= max(Delta_P - (1-lambda_std)/2) <= 1 by the theorem)
+[EXACT] certificate ladder — a rational monotone g with R(g)(2Delta-R(g)) <= 2c(1-lambda_std):
+          c =    1/2: certified at 1/40 primitive
+          c =    3/4: certified at 18/40 primitive
+          c =   9/10: certified at 40/40 primitive
+          c =      1: certified at 40/40 primitive  <-- C_3 = 1 here
+          c =  11/10: certified at 40/40 primitive
+          c =    5/4: certified at 40/40 primitive
+          c =    3/2: certified at 40/40 primitive
+          c =      2: certified at 40/40 primitive
