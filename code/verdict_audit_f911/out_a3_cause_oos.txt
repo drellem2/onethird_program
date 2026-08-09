@@ -1,0 +1,60 @@
+  store: /Users/daniel/.macguffin
+  decidable landed rows for pm-onethird: 194
+
+==============================================================================
+A3.1  DOES THE ITEM BODY CARRY THE ASK? -- measured, not taken from the parent
+==============================================================================
+  instruction PRESENT in body -> DELIVERED   55   DROPPED    4   (93% delivered)
+  instruction ABSENT  in body -> DELIVERED   15   DROPPED  120   (11% delivered)
+  Fisher exact two-tailed p = 1.92e-29
+
+  THIS IS A REPRODUCTION, NOT AN INDEPENDENT TEST. The parent reported
+  14/0 vs 7/38 at p=8.7e-09 on a smaller population; my regex and my
+  population differ, so the numbers differ. Agreement here is evidence
+  the parent computed what it said it computed. It is NOT evidence about
+  causation: the ask and the delivery are both written by the same arc,
+  and a ticket template is not a randomised assignment.
+
+==============================================================================
+A3.2  THE OUT-OF-SAMPLE TEST -- the retrofit is an INTERVENTION
+==============================================================================
+  The parent's data ends 2026-08-07. pm-onethird then put the ask back.
+  Split the SAME population by landing date at 2026-08-07:
+
+  landed BEFORE the retrofit: n= 152   DELIVERED   28  DROPPED  124   -> 18% delivered
+  landed AFTER  the retrofit: n=  42   DELIVERED   42  DROPPED    0   -> 100% delivered
+  Fisher exact two-tailed p = 3.88e-24
+
+  WHAT EACH HYPOTHESIS PREDICTED FOR THIS TABLE, BEFORE IT WAS COMPUTED:
+    H-REAP        : NO CHANGE. The reap was routed to mayor and has NOT
+                    been repaired, so if the stop is what suppresses the
+                    mail the post-retrofit rate must look like the pre.
+    H-INSTRUCTION : A LARGE RISE, because the only thing that changed is
+                    the instruction being back in the body.
+
+==============================================================================
+A3.3  IS THE REAP STILL HAPPENING? -- the control that makes A3.2 mean anything
+==============================================================================
+  A3.2 only separates the hypotheses if the reap is STILL FIRING after the
+  retrofit. If mayor had quietly fixed it, the rise would be explained by
+  either hypothesis and the test would be worthless.
+  post-retrofit DELIVERED rows with a measurable lead : 42
+    verdict mailed BEFORE the landing : 42
+    verdict mailed AFTER  the landing : 0
+    median lead (min, +ve = before landing) : 47.7
+    range: 0.2 .. 2454.2
+
+  Every verdict still arrives BEFORE its landing -- i.e. workers are still
+  routing AROUND the reap window rather than surviving it. The reap is not
+  repaired; it is being AVOIDED, and it is the instruction that tells them
+  to avoid it. That is the sense in which both halves are real and only
+  one of them is the CAUSE of the drops.
+
+==============================================================================
+A3.4  THE HONEST CONFOUND
+==============================================================================
+  The retrofit is not the only thing that changed on 2026-08-07: the
+  finding itself was circulated, mayor was told, and the polecat dispatch
+  template was edited. I cannot separate 'the ask is in the body' from
+  'the whole fleet was told about this last week'. What A3.2 does rule out
+  is H-REAP-AS-CAUSE, because the reap is unchanged and the rate is not.

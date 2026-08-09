@@ -1,0 +1,42 @@
+  throwaway store: /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/bf3f-fire-r8ha18r5
+  mg binary      : /Users/daniel/go/bin/mg
+
+==============================================================================
+D3.1  THE MATCHED PAIR -- one verdict dropped on purpose, one delivered
+==============================================================================
+  arm A  mg-a61c: landed, and I am DELIBERATELY NOT MAILING THE VERDICT.
+  arm B  mg-17a4: verdict mailed by wb1, then landed.
+
+  [PASS] dropped verdicts reported: got 1, expected 1
+  [PASS] the reported drop is arm A: got ['mg-a61c'], expected ['mg-a61c']
+  [PASS] delivered verdicts reported: got 1, expected 1
+  [PASS] the delivery is arm B: got ['mg-17a4'], expected ['mg-17a4']
+
+  THE DETECTOR HAS NOW BEEN SEEN TO FIRE ON A FAILURE CONSTRUCTED ON
+  PURPOSE, AND TO STAY QUIET ON ITS MATCHED CONTROL. It is not a
+  detector that has only ever been observed silent.
+
+==============================================================================
+D3.2  EDGE CASES -- three of these were named in P6 before this file existed
+==============================================================================
+  [PASS] P6a archived item is reported at all: got True, expected True
+  [PASS] P6a archived item is DROPPED: got DROPPED, expected DROPPED
+  [PASS] P6b setup: the verdict really left the active mailbox: got False, expected False
+  [PASS] P6b archived verdict still counts as DELIVERED: got DELIVERED, expected DELIVERED
+  [PASS] P6c mailbox-less filer's item is reported: got True, expected True
+  [PASS] P6c mailbox-less filer's item is DROPPED: got DROPPED, expected DROPPED
+  [PASS] P6c mailbox absence is flagged, not silently treated as empty: got False, expected False
+  [PASS] arm F (verdict to mayor only) is DROPPED: got DROPPED, expected DROPPED
+  [PASS] arm F records that the worker mailed elsewhere: got True, expected True
+  [PASS] arm G (not landed) is absent from the report: got False, expected False
+  [PASS] arm H (sender name is a near miss) is DROPPED: got DROPPED, expected DROPPED
+
+==============================================================================
+D3.3  THE EXIT CODE OF THE DELIVERABLE ITSELF
+==============================================================================
+  [PASS] verdictwatch exits 1 while drops exist: got 1, expected 1
+  [PASS] verdictwatch exits 0 on an empty population: got 0, expected 0
+
+==============================================================================
+D3 RESULT: 0 failing construction(s) []
+==============================================================================

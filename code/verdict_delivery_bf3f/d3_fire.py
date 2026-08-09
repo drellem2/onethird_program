@@ -77,8 +77,23 @@ def land(root, iid, worker, kind="done"):
 
 
 def mail(root, to, frm, subject, body):
+    # ROTTED AND REPAIRED BY mg-f911, 2026-08-09. `--create` was not needed when
+    # this file was written: `mg mail send` created an unknown recipient's
+    # mailbox silently. mg-d639 (filed 2026-08-07T13:15Z, in the binary from
+    # 23:06 that evening -- roughly 22 HOURS AFTER mg-bf3f landed) made an
+    # unknown recipient a REFUSAL, and every filer in a throwaway MG_ROOT is
+    # unknown by construction. So this line stopped working, and with it BOTH
+    # constructive probes of the suite: the matched pair here and the mutation
+    # test in selftest_bf3f.py, which imports this function. The read-only
+    # census and cause probes were untouched and still run.
+    #
+    # `--create` is the correct flag and not a way past the refusal: in a store
+    # `mg init` made four lines ago, this genuinely IS the first mail to a new
+    # correspondent, which is exactly what mg-d639 reserves it for. The refusal
+    # protects a typo'd recipient in the LIVE store; here there is no live store
+    # to typo into.
     p = mg(root, "mail", "send", to, "--from", frm, "--subject", subject,
-           "--body-file", "-", stdin=body)
+           "--body-file", "-", "--create", stdin=body)
     if p.returncode != 0:
         raise RuntimeError(f"mg mail send failed: {p.stdout} {p.stderr}")
     # DEFECT-4 of this instrument. The first form read the MSG-ID by scanning

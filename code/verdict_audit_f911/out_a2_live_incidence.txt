@@ -1,0 +1,63 @@
+  store: /Users/daniel/.macguffin
+  filer under audit: pm-onethird
+  landed rows: 196   DELIVERED 70  DROPPED 124  UNDECIDABLE 2
+
+==============================================================================
+A2.1  DEFECT-O, over-report: verdicts signed with the branch spelling
+==============================================================================
+  CANDIDATE SPACE = every message in pm-onethird's mailbox: 1336
+  messages whose From: is a `polecat-*` branch spelling : 0
+    -> ZERO. DEFECT-O is CONSTRUCTIBLE BUT HAS NEVER OCCURRED in this
+       mailbox. It is a latent trap, not a live miscount, and the
+       reported DROPPED figure is NOT inflated by it today.
+
+  Cross-check -- for every DROPPED row, is there ANY message in the box
+  whose From: contains the worker's 4-hex id? (a drop with a near-name
+  sender present is a candidate over-report by some other spelling)
+  suspect (drop + near-name sender in box): 0
+    -> ZERO. No DROPPED row has a message in the box from any sender
+       carrying its id under a spelling the resolver missed.
+
+==============================================================================
+A2.2  DEFECT-U, under-report: is the crediting message a VERDICT?
+==============================================================================
+  CANDIDATE SPACE = every DELIVERED row: 70
+  crediting message reads as verdict-shaped : 69
+  crediting message does NOT                : 1
+    mg-325c  mg-325c: your ordering is RIGHT, but error 1's premise is stale — mg-2860 refused the in
+
+  NOTE ON THIS CLASSIFIER: it reads SUBJECTS with a keyword regex. It is
+  evidence about how many credits are obviously verdicts, and it is NOT a
+  ruling on the others -- a verdict can carry a subject that says nothing.
+  What it establishes is the DIRECTION of the bound, not a corrected count.
+
+  DELIVERED rows credited where the worker sent >1 message: 8
+  (the row is credited by the EARLIEST message, sorted by date -- so a
+   worker that asked a question first and filed its verdict later is
+   credited, and dated, by the QUESTION)
+    mg-6016  n=3  credited by 2026-07-30T09:11:24Z  mg-6016 note landed — two places it goes BEYOND your 09:
+    mg-e35b  n=2  credited by 2026-07-31T10:22:49Z  mg-e35b VERDICT: mg-fcf1's remaining OPENs landed on NEG
+    mg-d075  n=2  credited by 2026-08-05T18:29:50Z  mg-d075 VERDICT: EIGHT IS NOT THE POPULATION EITHER — 9 
+    mg-76d0  n=2  credited by 2026-08-05T19:15:24Z  VERDICT mg-76d0: mg-a471's three F5 repairs all CLOSE; '
+    mg-eaa1  n=2  credited by 2026-08-07T19:26:36Z  mg-eaa1 INTERIM: mg-131e's certificates and its n=6 refu
+    mg-7085  n=2  credited by 2026-08-07T19:35:41Z  VERDICT mg-7085: mg-cf83's sweep is complete — THREE sib
+    mg-d1be  n=2  credited by 2026-08-07T22:48:42Z  VERDICT mg-d1be: lambda_std <= lambda_2^BK is FALSE (exa
+    mg-200d  n=2  credited by 2026-08-07T17:07:28Z  VERDICT mg-200d: per-slot adjacency symmetry buys Θ(n²)→
+
+==============================================================================
+A2.3  THE SILENTLY EXCLUDED -- items the predicate never reaches
+==============================================================================
+  lib_bf3f.scan() does `if not f: continue` -- an item with no `creator:`
+  in its frontmatter is dropped from the population with no bucket and no
+  count. That is the shape this arc keeps finding, so it gets measured.
+  landed items on disk        : 1545
+  of those with NO creator:   : 0
+    -> ZERO today. The exclusion is real in the code and EMPTY in this
+       store, so it costs nothing now and is a live trap if any tool
+       ever writes an item without a creator line.
+
+  landing events with NO item file on disk: 1
+    mg-0426  landed 2026-07-29T13:05:34Z kind=done
+    -> these landed and are INVISIBLE to the detector: it enumerates
+       FILES and joins events onto them, so an item whose file is gone
+       is not dropped, not delivered, and not undecidable. It is absent.

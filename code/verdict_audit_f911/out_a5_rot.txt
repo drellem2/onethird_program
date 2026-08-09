@@ -1,0 +1,34 @@
+  throwaway store : /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/f911-rot-vmkvswvx
+  mg binary       : /Users/daniel/go/bin/mg
+  binary mtime    : 2026-08-07T23:06:48.002812
+
+==============================================================================
+A5.1  THE FORM mg-bf3f SHIPPED -- d3_fire.py:80 as it landed
+==============================================================================
+  rc=3
+    Error: no mailbox named "filer-a", and no work item is called that either: mg has never seen this recipient
+      → run 'mg mail list' to see every mailbox. If this really is the first mail to a new recipient, pass --create (or run 'mg mail register filer-a' first) — that registers the mailbox and delivers.
+  [PASS] A5.1 the shipped form is REFUSED by today's mg: got True, expected True
+
+==============================================================================
+A5.2  THE REPAIRED FORM -- the same send with --create
+==============================================================================
+  rc=0
+    Delivered: wb1 → filer-a/new/1786280047706348000.24600.9000  (new mailbox created)
+  [PASS] A5.2 the repaired form delivers: got 0, expected 0
+
+==============================================================================
+A5.3  WHAT THIS COST -- which probes died and which did not
+==============================================================================
+  d3_fire.py       (matched pair)  : DIED -- calls mail() for arm B
+  selftest_bf3f.py (mutation test) : DIED -- imports d3_fire's mail()
+  d1_population.py (the census)    : UNAFFECTED, read-only
+  d2_cause.py      (the cause)     : UNAFFECTED, read-only
+  verdictwatch.py  (the deliverable): UNAFFECTED, read-only
+
+  The two that died are the two that constitute the evidence that the
+  detector is not vacuous. The detector itself never stopped working.
+
+==============================================================================
+A5 RESULT: 0 failing arm(s) []
+==============================================================================

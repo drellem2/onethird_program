@@ -1,0 +1,63 @@
+  throwaway store : /var/folders/4n/9xszbbx91_jb05tp4h48w2340000gn/T/f911-controls-orpdlz0g
+  mg binary       : /Users/daniel/go/bin/mg
+
+==============================================================================
+A1.1  MY MATCHED PAIR -- brief items 1 and 2, both FORCED
+==============================================================================
+  Not the parent's arms: mine use a filer with a REAL agent-shaped name
+  and a worker whose name is the polecat convention <gen><4hex>, so the
+  pair exercises the same name-matching path the live store uses.
+  arm A mg-ed5f: landed, worker zed5f, NO VERDICT MAILED ON PURPOSE.
+  arm B mg-c450: verdict mailed by zc450, then landed.
+
+  [PASS] A1.1 IT FIRES on the dropped verdict: got 'DROPPED', expected 'DROPPED'
+  [PASS] A1.1 IT DOES NOT FIRE on the delivered one: got 'DELIVERED', expected 'DELIVERED'
+  [PASS] A1.1 exactly one drop in the population (FORCED = 1): got 1, expected 1
+
+==============================================================================
+A1.2  OVER-REPORTING -- the failure that retires the detector
+==============================================================================
+  pm-onethird: over-reporting 'would retire the detector within a week'.
+  So: can I find a verdict that DID arrive and is still called DROPPED?
+  [PASS] A1.2 C: verdict present in the box but From: is the branch name: got 'DROPPED', expected 'DROPPED'  <-- DECLARED DEFECT OF THE DETECTOR
+  [PASS] A1.2 D: archived verdict still DELIVERED (REPRODUCTION): got 'DELIVERED', expected 'DELIVERED'
+  [PASS] A1.2 E: DROPPED before the late verdict is sent: got 'DROPPED', expected 'DROPPED'
+  [PASS] A1.2 E: DELIVERED once the late verdict arrives: got 'DELIVERED', expected 'DELIVERED'
+        (the flip is produced by one mail and nothing else -- the same
+         two-state evidence the parent produced live on its own row)
+
+==============================================================================
+A1.3  UNDER-REPORTING -- a NON-verdict credited as a verdict
+==============================================================================
+  The predicate is 'a message in the filer's mailbox whose From: is the
+  worker'. There is NO test that the message is a verdict. So:
+  [PASS] A1.3 F: a scope question is credited as a delivered verdict: got 'DELIVERED', expected 'DELIVERED'  <-- DECLARED DEFECT OF THE DETECTOR
+
+==============================================================================
+A1.4  THE `archived` CASE -- brief item 5, BY CONSTRUCTION not by reading
+==============================================================================
+  My PREDICTIONS.md E1 forbids me scoring this from the source alone.
+  mg-d6bb now lives at: ['work/archive/2026-08/mg-d6bb.md']
+  [PASS] A1.4 G: the item file really left work/done/: got False, expected False
+  [PASS] A1.4 G: an ARCHIVED item is still reported: got 'DROPPED', expected 'DROPPED'
+  [PASS] A1.4 G: and its landing kind is `done` (it passed through done): got 'done', expected 'done'
+  `mg archive` on a NOT-done item: rc=4 Error: mg-0fc3: not done — it is claimed (in progress).
+  [PASS] A1.4 H: mg REFUSES to archive an item that never went done: got True, expected True
+
+==============================================================================
+A1.5  MY OWN MUTATION TEST -- is A1.1 capable of failing?
+==============================================================================
+  A1.1's pair is evidence only if a detector that ignored its input
+  would be CAUGHT by it. Built independently of the parent's S4.
+  [PASS] A1.5 mutant always-DELIVERED is CAUGHT by my pair: got True, expected True
+  [PASS] A1.5 mutant always-DROPPED is CAUGHT by my pair: got True, expected True
+
+==============================================================================
+A1 RESULT: 0 failing arm(s) []
+
+  FINDING: OVER-REPORT (confirmed, forced): a verdict that IS in the filer's mailbox is reported DROPPED when the worker signs it with its branch name `polecat-z7f1f` instead of its agent name `z7f1f`. worker_names() derives {name, mg-name} from the branch and never the `polecat-` spelling itself.
+
+  FINDING: UNDER-REPORT (confirmed, forced): ANY mail from the worker to the filer counts. A worker that asks a scope question and never files a verdict reads DELIVERED. So the reported DROPPED count is a LOWER bound on dropped verdicts, and the DELIVERED count is an UPPER bound on deliveries. The README sizes four other bounds explicitly and does not size this one.
+
+  FINDING: ITEM 5, CORRECTED: `mg archive` refuses an item that has not gone done (rc=4), so every archived item passed through `done` first and the landing is recorded at `done`. The brief's premise that mg-c3ca 'reached archived, not done' is false -- the live store shows work.done at 2026-08-06T00:48:36Z and work.archive 21h later. The real hazard in the archived case is the FILE MOVE out of work/done/, and the parent's recursive glob over work/** handles it: arm G above is found after the move.
+==============================================================================
