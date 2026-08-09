@@ -1,0 +1,46 @@
+==============================================================================
+U_either (the either-side / endgame form Step 6 can use) — witness on ground set 0..5
+==============================================================================
+strict relations: [(0, 2), (0, 3), (0, 4), (0, 5), (1, 4), (1, 5), (2, 4), (3, 4)]
+|L(P)| = 26   (brute force over 6! = 720 permutations)
+delta(P) = 1/2 = 0.500000   -> P HAS a 1/3-balanced pair, so DISJUNCT (i)
+   FIRES and the CONSUMABLE statement S is satisfied here at eps = 1.
+
+every prefix cut:
+  k   Delta_1      float      A chain?  B chain?  U_either verdict
+  1   4/13         0.307692   chain     bal=4 surv=1 SKIP (a side is a chain) | 
+  2   5/26         0.192308   bal=1 surv=0 bal=3 surv=1 holds | 
+  3   17/78        0.217949   bal=2 surv=0 bal=2 surv=0 *** FAILS *** | 
+  4   5/26         0.192308   bal=3 surv=1 bal=1 surv=0 holds | 
+  5   9/13         0.692308   bal=3 surv=1 chain     SKIP (a side is a chain) | 
+
+CERTIFICATE at the reported cut k = 3  (A = [0, 1, 2], B = [3, 4, 5]), Delta_1 = 17/78 = 0.217949
+  side A = [0, 1, 2], induced relations [(0, 2)]
+    pair (0,1): p_side = 2/3      p_P = 9/13      BALANCED-IN-SIDE -> LEAVES [1/3,2/3]
+    pair (1,2): p_side = 2/3      p_P = 19/26     BALANCED-IN-SIDE -> LEAVES [1/3,2/3]
+  side B = [3, 4, 5], induced relations [(3, 4)]
+    pair (3,5): p_side = 2/3      p_P = 19/26     BALANCED-IN-SIDE -> LEAVES [1/3,2/3]
+    pair (4,5): p_side = 1/3      p_P = 4/13      BALANCED-IN-SIDE -> LEAVES [1/3,2/3]
+
+==============================================================================
+U_smaller (the smaller-side-only reading) — witness on ground set 0..5
+==============================================================================
+strict relations: [(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 4), (3, 4), (3, 5)]
+|L(P)| = 7   (brute force over 6! = 720 permutations)
+delta(P) = 3/7 = 0.428571   -> P HAS a 1/3-balanced pair, so DISJUNCT (i)
+   FIRES and the CONSUMABLE statement S is satisfied here at eps = 1.
+
+every prefix cut:
+  k   Delta_1      float      A chain?  B chain?  U_either verdict
+  1   0            0.000000   chain     bal=2 surv=2 SKIP (a side is a chain) | 
+  2   1/7          0.142857   chain     bal=2 surv=2 SKIP (a side is a chain) | 
+  3   1/7          0.142857   bal=1 surv=0 bal=1 surv=1 holds | 
+  4   1/14         0.071429   bal=2 surv=1 bal=1 surv=1 holds | 
+  5   4/7          0.571429   bal=2 surv=1 chain     SKIP (a side is a chain) | 
+
+CERTIFICATE at the reported cut k = 3  (A = [0, 1, 2], B = [3, 4, 5]), Delta_1 = 1/7 = 0.142857
+  side A = [0, 1, 2], induced relations [(0, 1), (0, 2)]
+    pair (1,2): p_side = 1/2      p_P = 5/7       BALANCED-IN-SIDE -> LEAVES [1/3,2/3]
+  side B = [3, 4, 5], induced relations [(3, 4), (3, 5)]
+    pair (4,5): p_side = 1/2      p_P = 3/7       BALANCED-IN-SIDE -> STAYS in [1/3,2/3]
+

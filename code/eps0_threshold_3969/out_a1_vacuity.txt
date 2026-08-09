@@ -1,0 +1,35 @@
+==============================================================================
+mg-3969 / A1 — is the CONSUMABLE threshold eps_0 measurable at all?
+==============================================================================
+
+[PC1] endpoint poset {a<b} u {c}: |L| = 3, delta = 1/3  (expect 3, 1/3)
+      PC1 fires: delta = 1/3 exactly, zero interior slack.
+[NC1] chain: Delta_1 = 0 at every prefix, delta undefined.  FIRES.
+[NC2] antichain: Delta_1 = Phi = (n-k)/n for k <= n/2 at n=4,5,6.  FIRES.
+      (this is Op-Form 4.2's hand computation, and Lemma 2.1's
+       Phi = Delta_1 identity, reproduced independently)
+[NC5] n=3: 3! x 7 posets = 42 = sum of e(P) over all labelled posets.  FIRES.
+[NC5] n=4: 4! x 40 posets = 960 = sum of e(P) over all labelled posets.  FIRES.
+[NC5] n=5: 5! x 357 posets = 42840 = sum of e(P) over all labelled posets.  FIRES.
+
+n      posets  nonchain      cuts  no-bal-P     maxD1
+3           7         6        12         0       2/3
+4          40        39       117         0       3/4
+5         357       356      1424         0       4/5
+6        4824      4823     24115         0       5/6
+
+TOTAL: 5228 posets, 5224 non-chain, 25668 prefix cuts.
+
+[NC3] max Delta_1 observed = 5/6  (hand bound: Delta_1 <= 1 always,
+      since |A\sigma(A)| = |sigma(A)\A| <= min(|A|,|B|)).
+      NC3 FIRES: bound respected.
+
+>>> posets with NO 1/3-balanced pair (i.e. disjunct (i) FAILS): 0
+>>> DISJUNCT (i) HOLDS AT EVERY ONE OF THE 25668 CUTS, AT eps = 1.
+>>> Therefore S(eps) is TRUE AT eps = 1 for every poset in this
+>>> population, i.e. the CONSUMABLE threshold measured here is
+>>> eps_0 = 1, n-free, and CARRIES NO INFORMATION.  The measurement
+>>> is vacuous BY CONSTRUCTION, not by accident of the population:
+>>> S(eps)'s non-vacuous content lives only on posets with
+>>> delta < 1/3, and none exist at any n <= 6 (and none are
+>>> known at ANY n).  NO COMPUTATION CAN PIN eps_0 FOR S.

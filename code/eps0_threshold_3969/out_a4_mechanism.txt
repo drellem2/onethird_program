@@ -1,0 +1,30 @@
+==============================================================================
+mg-3969 / A4 — failure mechanism of the either-side transfer, n<=6
+==============================================================================
+  n=3 swept (0 failures so far)
+  n=4 swept (0 failures so far)
+  n=5 swept (0 failures so far)
+  n=6 swept (42 failures so far)
+
+42 either-side failures.  Sorted by interface thinness:
+  Delta_1    float      n   k   max slack  #bal pairs
+  17/78      0.217949   6   3   0          4
+  17/78      0.217949   6   3   0          4
+  17/78      0.217949   6   3   0          4
+  17/78      0.217949   6   3   0          4
+  17/78      0.217949   6   3   0          4
+  17/78      0.217949   6   3   0          4
+  17/78      0.217949   6   3   0          4
+  17/78      0.217949   6   3   0          4
+  17/78      0.217949   6   3   0          4
+  5/19       0.263158   6   3   1/6        2
+  5/19       0.263158   6   3   1/6        2
+  5/19       0.263158   6   3   1/6        2
+
+>>> CEILING: eps_0(U_either) <= 17/78 = 0.217949, uniformly in n.
+>>> (one violator at one n bounds every n-free threshold, at every n)
+
+distinct max-interior-slack values over ALL 42 failures: ['0', '1/6']
+>>> Failures occur with strictly positive interior slack too, so
+>>> the mechanism is NOT only the Claim 3.3 endpoint gap.
+>>> thinnest positive-slack failure: eps=5/19 slack=1/6 n=6 k=3 rel=[(0, 1), (0, 2), (0, 3), (0, 5), (1, 3), (1, 5), (3, 5), (4, 5)]
