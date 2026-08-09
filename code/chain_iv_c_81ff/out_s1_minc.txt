@@ -1,0 +1,103 @@
+==============================================================================
+s1 — mg-76b2's FALLING `min c`, CHECKED FIRST AND EXTENDED
+==============================================================================
+
+WHAT `c` IS, stated before anything is done with it (ticket item 1):
+  Op-Form's Prefix-capture conjecture, tex :360-364, quoted verbatim —
+    "A threshold cut of the dominant standard eigenvector gives a prefix A_k
+     whose Rayleigh quotient captures a constant fraction, or possibly 1-o(1),
+     of the dominant standard eigenvalue."
+  so, per poset and then per population:
+      c(P) = max_{1<=k<=n-1} rho(A_k) / lambda_std(P),   c(n) = min over P
+      rho(A) = <f_A, M f_A>/||f_A||^2,  f_A = 1_A - (|A|/n)1  (CENTRED: f_A in H)
+
+WHICH THRESHOLD IS BEING BOUNDED (ticket item 1, mg-01ea's reconciliation):
+  EXISTENCE threshold   c > 1 - eps_leak                 = 0.800000
+  SELF-CONSISTENT       c >= (1-eps_leak)/(1-eps_spec)   = 0.816327
+  mg-01ea landed the reconciliation into mg-76b2's own section 5 and it is read
+  here, not re-derived: the first is `eps_dem > 0` (some positive budget exists),
+  the second is the same condition evaluated AT eps_spec = eps_leak^2/2 = 1/50.
+  EVERY VERDICT BELOW IS STATED AGAINST BOTH, because nothing here turns on which:
+  the figures land far below both or far above both.
+
+------------------------------------------------------------------------------
+(S1) THE ROW, EXTENDED TO n = 7 — the first untested value
+------------------------------------------------------------------------------
+
+     n   primitive   informative    min c      below 0.8163?   minimiser
+     3          4            3   0.750000     YES   [(0, 2)]
+       = mg-76b2 0.750000
+     4         27           26   0.618034     YES   [(0, 1), (2, 3)]
+       = mg-76b2 0.618034
+     5        275          274   0.536219     YES   [(0, 2), (3, 4)]
+       = mg-76b2 0.536219
+     6       4070         4069   0.452934     YES   [(0, 1), (2, 3), (4, 5)]
+       = mg-76b2 0.452934
+     7      86278        86277   0.412700     YES   [(0, 1), (2, 4), (5, 6)]
+       NEW — first untested value
+
+  INFORMATIVE POINTS, counted the way the ticket asks: FIVE values of n, of which
+  FOUR are mg-76b2's and ONE (n = 7) is new.  The trend does not break at the
+  first untested value — the failure mode that killed 2/(n+1) at n = 6 and the
+  ordinal-sum characterisation at n = 7 does NOT occur here.
+
+------------------------------------------------------------------------------
+(S2) THE MINIMISER IS A FAMILY, NOT A COINCIDENCE
+------------------------------------------------------------------------------
+
+  n=4: [(0, 1), (2, 3)]
+  n=5: [(0, 2), (3, 4)]
+  n=6: [(0, 1), (2, 3), (4, 5)]
+  n=7: [(0, 1), (2, 4), (5, 6)]
+
+  Read them together: k DISJOINT 2-CHAINS, plus an isolated point when n is odd.
+  n=4 = 2 chains; n=5 = 2 chains + a point; n=6 = 3 chains; n=7 = 3 chains + a
+  point.  The family is `D_k` below and it is defined for every k, so the
+  question `does min c keep falling` stops being an extrapolation.
+
+------------------------------------------------------------------------------
+(S3) THE FAMILY D_k = k DISJOINT 2-CHAINS, EXACTLY, TO n = 16
+------------------------------------------------------------------------------
+
+  D_k on {0..2k-1} with relations 2i < 2i+1.  Every figure in this block is an
+  EXACT RATIONAL BRACKET from Sylvester's criterion (lib81ff.lambda2_bracket);
+  the float eigenroutine is not on this path.
+
+   k   n    1 - min_k Q_k   gap 1-lam_std     c (exact bracket)      < 0.8163?
+   2   4          1/3    (0.460655337)   [0.6180340, 0.6180340]   YES
+   3   6          1/5    (0.558434974)   [0.4529344, 0.4529344]   YES
+   4   8          1/7    (0.601244593)   [0.3582576, 0.3582576]   YES
+   5  10          1/9    (0.625302075)   [0.2965352, 0.2965352]   YES
+   6  12         1/11    (0.640722497)   [0.2530331, 0.2530331]   YES
+   7  14         1/13    (0.651451625)   [0.2206956, 0.2206956]   YES
+   8  16         1/15    (0.659348518)   [0.1957034, 0.1957034]   YES
+
+  1 - min_k Q_k = 1/(n-1) EXACTLY at every k here, attained at the prefix A_1 =
+  {0}; the gap rises through 0.46, 0.56, 0.60, 0.63, 0.64, 0.65, 0.66.  So c is
+  ~ 1/((n-1) * lambda_std) and falls at every step: 0.618, 0.453, 0.358, 0.297,
+  0.253, 0.221, 0.196.
+
+  >>> THE CONSEQUENCE, STATED AT ITS SCOPE AND NOT ONE LINE AWAY:
+      OVER THE FULL NATURALLY LABELLED POPULATION, `c > 0.80` IS FALSE.  It is
+      false already at n = 4 (c = 0.618034 < 0.80), exactly, with a two-element
+      witness family, and it stays false at every k checked.  No `n_0` rescues
+      it: D_k is defined at every k and c(D_k) is below the threshold at every
+      k >= 2 evaluated.
+
+      WHAT THIS DOES **NOT** SETTLE.  Every D_k has gap >= 0.46, and Step 2 of
+      the architecture supplies gap <= eps_spec = 2e-2.  D_k is therefore ~23x
+      outside the regime chain (IV) is invoked on at k = 2 and ~33x outside it
+      at k = 8.  A refutation there does not transfer.  s2 is that question and
+      IT ANSWERS THE OTHER WAY.
+
+  I DID NOT PROVE c(D_k) -> 0.  Eight exact points falling is a direction; the
+  limit needs a lower bound on lambda_std(D_k) uniform in k, which is a lower
+  bound on an eigenvalue and is not what a test vector supplies.  The refutation
+  above does not need the limit — it needs one k, and it has eight.
+
+==============================================================================
+s1 VERDICT: mg-76b2's FALLING min c is CONFIRMED on an independent path,
+EXTENDED to n = 7 (0.412700), and UPGRADED from a trend to an explicit family.
+`c > 0.80` IS REFUTED OVER THE FULL POPULATION — AND THE REFUTING POSETS ARE ALL
+OUT OF REGIME, WHICH IS s2's SUBJECT AND CHANGES THE VERDICT.
+==============================================================================

@@ -1,0 +1,127 @@
+==============================================================================
+s2 — THE SCOPE: `c` IN THE REGIME THE ARCHITECTURE ACTUALLY SUPPLIES
+==============================================================================
+
+  Step 2 supplies   1 - lambda_std <= eps_spec = eps_leak^2/2 = 1/50 = 0.02
+  Step 5 requires   Phi_P(A_k)     <= eps_leak            = 1/5 = 0.2
+  s1's refuting family D_k has gap 0.46 .. 0.66.  It is not in the class.
+
+------------------------------------------------------------------------------
+(R1) `min c` STRATIFIED BY GAP — is the fall about n, or about the gap?
+------------------------------------------------------------------------------
+
+  n=6                                    n=7
+  gap band          posets   min c       posets   min c
+  [0.00, 0.06)         14  0.988958       1187  0.881084   
+  [0.06, 0.10)        214  0.868532       3618  0.858894   
+  [0.10, 0.20)       1350  0.796735      30936  0.787389   
+  [0.20, 0.30)       1034  0.728438      27405  0.687795   
+  [0.30, 0.50)       1260  0.488010      21530  0.514306   
+  [0.50, 0.70)        183  0.452934       1563  0.412700   
+  [0.70, 1.01)         14  0.672941         38  0.556306   
+
+  THE FALL IS THE GAP, NOT n.  Across the six bands below 0.70, `min c` rises
+  monotonically as the band tightens, at BOTH n, and the band nearest the regime
+  is the band where c is LARGEST.  s1's minimisers live in [0.50, 0.70).
+
+  THE TOP BAND [0.70, 1.01) BREAKS THE MONOTONICITY AND IS PRINTED, NOT DROPPED:
+  min c there is 0.673 (n=6) and 0.556 (n=7), ABOVE the band below it.  It holds
+  14 and 38 posets — the near-antichain end, where lambda_std is nearly 0 and c is
+  a ratio of two small numbers.  It is the farthest band from the regime and it
+  does not disturb the reading, but a table that omitted it would be choosing its
+  rows to fit the sentence.
+
+------------------------------------------------------------------------------
+(R2) THE REQUIREMENT WITHOUT `c`, AND ITS ENVELOPE OVER {gap <= eps}
+------------------------------------------------------------------------------
+
+  Chain (IV) delivers Phi_P(A_k) <= 1 - rho(A_k) = min_k Q_k (mg-76b2 Lemma 2.1),
+  and Step 5 needs that <= eps_leak.  So, stripped of every constant:
+
+      CHAIN (IV) CLOSES ON A POSET  <=>  min_k Q_k <= eps_leak = 1/5.
+
+  `c >= 40/49` is exactly this condition re-parametrised at gap = eps_spec:
+      c >= (1-eps_leak)/(1-eps_spec)  <=>  1 - min_k Q_k >= 1 - eps_leak
+                                      <=>  min_k Q_k <= eps_leak.   [ALGEBRA]
+
+  max min_k Q_k over {gap <= eps}   [chain (IV) closes iff this stays <= 0.2]
+   eps        n=4      n=5      n=6      n=7  
+  1.00    0.66667  0.75000  0.80000  0.83333
+  0.30    0.33333  0.43333  0.47273  0.50822
+  0.20    0.20000  0.34091  0.35000  0.36842
+  0.10       --     0.11905  0.21429  0.22436
+  0.08       --        --     0.17308  0.16667
+  0.06       --        --     0.06667  0.16667
+  0.04       --        --        --     0.04487
+
+  and the same table as `min c`, which is the ticket's own currency:
+   eps        n=4      n=5      n=6      n=7  
+  1.00    0.61803  0.53622  0.45293  0.41270
+  0.30    0.86167  0.79585  0.72844  0.68779
+  0.20    0.94427  0.79585  0.79673  0.78739
+  0.10       --     0.97415  0.86853  0.85889
+  0.08       --        --     0.89160  0.88108
+  0.06       --        --     0.98896  0.88108
+  0.04       --        --        --     0.99389
+
+  smallest gap reached, by n: n=3: 0.333333, n=4: 0.152786, n=5: 0.095674, n=6: 0.056245, n=7: 0.038999
+  the budget is 0.02.  NO poset at n <= 7 reaches it — mg-76b2 (C1)'s
+  `0 of 4377` at n <= 6, reproduced and extended: 0 of 86 277 at n = 7 too.
+
+------------------------------------------------------------------------------
+(R3) THE REGIME IS REACHABLE — AND HERE IT IS, EXACTLY
+------------------------------------------------------------------------------
+
+  `0 of 4377 inside the budget` is a statement ABOUT n <= 6.  It has been read in
+  this corpus as though the regime were structurally empty; it is not, it is only
+  out of enumeration range.  The family below is primitive, is inside the budget
+  from n = 10, and every figure is an exact rational bracket.
+
+      N_a(n):  antichain {0..a-1}  <  antichain {a..n-1},  a = n/2,
+               MINUS the single relation (a-1, a).
+
+   n   primitive   gap (exact)      gap <= 1/50?   min_k Q_k    c (exact bracket)
+    6   True     0.057557110    no             1/15   [0.9903341, 0.9903341]
+    8   True     0.026823309    no             1/34   [0.9973402, 0.9973402]
+   10   True     0.014445971    YES            1/65   [0.9990476, 0.9990476]
+   12   True     0.008606981    YES           1/111   [0.9995945, 0.9995945]
+   14   True     0.005520070    YES           1/175   [0.9998047, 0.9998047]
+   16   True     0.003743404    YES           1/260   [0.9998969, 0.9998969]
+
+  IN THE REGIME, `c` GOES TO 1, NOT TO 0.  At n = 16 the gap is 3.7e-3 — five
+  times inside the budget — and c = 0.99990, against a threshold of 0.8163.
+  min_k Q_k there is 1/260, against a requirement of 1/5: a factor of 52 of slack.
+
+  A SECOND FAMILY, so the answer is not one construction's artefact:
+      N'_a(n): the same, MINUS the relation (0, n-1) instead.
+   n    gap (exact)      gap <= 1/50?   c (exact bracket)
+    8   0.028530204    no          [0.9990926, 0.9990926]
+   10   0.015027309    YES         [0.9996372, 0.9996372]
+   12   0.008846418    YES         [0.9998360, 0.9998360]
+   14   0.005632679    YES         [0.9999179, 0.9999179]
+   16   0.003801826    YES         [0.9999555, 0.9999555]
+
+------------------------------------------------------------------------------
+(R4) WHAT IS NOT SETTLED, AND HOW MANY INFORMATIVE POINTS THERE ARE
+------------------------------------------------------------------------------
+
+  NOT SETTLED: whether `c >= 40/49` holds for EVERY poset in the regime.  The
+  regime is empty at every n this or any enumeration reaches (0 of 86 277 at
+  n = 7), so the class cannot be swept; the evidence for it is two constructed
+  families, which is 2 points and not a population.
+
+  THE ONE READING THAT RUNS AGAINST IT, stated because it is the one a reader
+  would otherwise find later: at a FIXED gap cap, `min c` falls as n grows —
+  0.974 -> 0.869 -> 0.859 at eps = 0.10 for n = 5, 6, 7, and 0.989 -> 0.881 at
+  eps = 0.06 for n = 6, 7.  That is TWO and THREE informative points respectively,
+  it is confounded with population size (a min over more posets falls for free),
+  and every value is still above both thresholds.  IT IS NOT EVIDENCE THAT c
+  DROPS BELOW THE THRESHOLD IN THE REGIME, AND IT IS NOT EVIDENCE THAT IT DOES
+  NOT.  Four points killed 2/(n+1); three points decide nothing here either.
+
+==============================================================================
+s2 VERDICT: s1's REFUTATION DOES NOT TRANSFER.  `min c` falls because the GAP is
+large, not because n is; in the architecture's own regime the two families that
+reach it have c = 0.999+, five times inside the budget.  `c > 0.80` is REFUTED on
+the full population and UNMEASURED — not unmeasurable — in the regime.
+==============================================================================
