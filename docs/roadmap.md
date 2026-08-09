@@ -27,17 +27,44 @@ that the object the programme has been hunting is not a constant at all:
   conjecture. So it cannot be bounded above without refuting the conjecture nor
   below without proving it. **It is the last lemma of the programme wearing a
   number's clothes.**
-- **A PROVEN ceiling on the measurable one:** `eps_0(U_either) <= 17/78 = 0.217949`
+- ~~**A PROVEN ceiling on the measurable one:** `eps_0(U_either) <= 17/78 = 0.217949`
   and `eps_0(U_smaller) <= 1/7`, both uniform in n. Our calibrated 0.20 is within
-  **9%** of a ceiling that can never be raised.
+  **9%** of a ceiling that can never be raised.~~
+  **STRUCK 2026-08-09 18:30Z — UNSCOPED, and the 9% reading is WITHDRAWN.** Kept
+  visible because it was published here and mailed to Daniel in that form.
+  `17/78` keeps its number and gains its scope: it is proven and thrice-reproduced
+  **on cuts at which BOTH SIDES ARE NON-CHAIN**, which is *not* the population the
+  architecture requires. mg-d3c7 closed that coverage gap and found an infinite
+  family (chain of n-1 plus one isolated element, `Delta_1 = (k+1)/((2k+1)k) -> 0`,
+  every balanced-in-side pair evicted at every `k >= 3`, exact to k=200), giving
+  **`eps_0(U_either) = eps_0(U_smaller) = 0` on the required population** — refuted
+  at every positive eps, not capped. The `U_smaller` figure above is also
+  superseded: `1/7` -> `13/111` (tie-independent). There is no headroom because
+  there is no positive measurable threshold to have headroom in.
 - **The demand chain collapses to one equation:** with `C_3 = 1` (mg-76b2,
   conditional on L2), `eps_dem = eps_0^2 / 2`. The mg-e35c F5 banner's "100x too
   pessimistic" is exactly `10^2` — the square of the 10x move in `eps_0`. The
   two-orders-of-magnitude uncertainty has exactly ONE cause.
-  `eps_dem <= (17/78)^2/2 = 0.023751` [PROVEN ceiling] against our 0.02 calibration:
-  **under 19% of headroom, none of it free.**
+  ~~`eps_dem <= (17/78)^2/2 = 0.023751` [PROVEN ceiling] against our 0.02 calibration:
+  **under 19% of headroom, none of it free.**~~
+  **STRUCK — same defect, inherited.** `eps_dem` has **NO proven positive ceiling**.
+  `0.023751` is one only on the both-sides-non-chain restriction. On the required
+  population the `ONE+` n<=7 ceiling gives `(1/7)^2/2 = 1/98 = 0.0102`, which puts
+  the corpus's `2e-2` at **1.96x ABOVE a ceiling** rather than comfortably under
+  one — the direction inverts — and with the infinite family it is **0**.
 
-**Status: CONDITIONAL AND UNAUDITED.** mg-d3c7 is the pre-filed independent audit
+**Status: AUDITED 2026-08-09 17:57Z (mg-d3c7), and the audit MOVED A NUMBER — see the
+two struck bullets above.** The central verdict CONFIRMED; the published ceiling was
+scope-dependent and its required-scope value is 0. Repair landed as mg-5214. The
+conclusion is unchanged in substance and STRONGER in support: every attempt to
+substitute a measurable surrogate for the consumed constant is now closed — the
+consumable reading is vacuous, the uniform reading is refuted. Two things this does
+NOT say, both verified rather than assumed: it does not touch L4 (every family
+member has `delta(P) = floor(n/2)/n >= 1/3`, so disjunct (i) holds outright), and it
+does not weaken mg-3969 — reading it as "the parent was wrong" is a second copy of
+the same defect.
+
+*(Original status line, kept:)* **CONDITIONAL AND UNAUDITED.** mg-d3c7 is the pre-filed independent audit
 and is now dispatchable. I am deliberately not restructuring mg-845e until it
 returns — this lineage has twice shipped a wrong headline by building one step early.
 
