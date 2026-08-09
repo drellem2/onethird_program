@@ -1,0 +1,45 @@
+==============================================================================
+mg-9461 s0 — SELF-TEST: the DP path against the n! path
+==============================================================================
+------------------------------------------------------------------------------
+A. AGREEMENT ON A RANDOM POPULATION (n = 2..7, three densities)
+------------------------------------------------------------------------------
+   720 random posets, 7905 prefix cuts, 0 mismatches.
+   Every comparison above is an `assert`, so a single mismatch aborts
+   the run — the 0 is a completed run, not a counter nobody reads.
+   Quantities cross-checked: e(P), delta(P), every pair probability,
+   Delta_1 at every cut, and the transfer predicate at every cut.
+
+------------------------------------------------------------------------------
+B. THE CONTROL A NUMBERS-ONLY CHECK MISSES — DP state count
+------------------------------------------------------------------------------
+   The DP must visit the DOWN-SET LATTICE, not all 2^n subsets. Both
+   give the same answer; only one of them finishes.
+   n   |down-sets|       2^n     ratio   poset
+   7            14       128         9   chain(n-1) + 1 isolated
+  11            22      2048        93   chain(n-1) + 1 isolated
+  17            34    131072      3855   chain(n-1) + 1 isolated
+  25            50  33554432    671088   chain(n-1) + 1 isolated
+  41            82219902325555226817356775   chain(n-1) + 1 isolated
+   |down-sets| = 2n exactly for this carrier, verified at all five.
+   At n = 41 the subset-walking version would need 2^41 states; the
+   lattice has 82. That is the defect s0 exists to keep caught.
+
+------------------------------------------------------------------------------
+C. NEGATIVE CONTROLS — each must FAIL, or the checks above are empty
+------------------------------------------------------------------------------
+   2+2: e(P) = 6 (must be 6), delta = 1/2 (must be 1/2)
+   chain on 4: e(P) = 1 (must be 1), delta = 0 (must be 0), is_chain = True
+   antichain on 4: e(P) = 24 (must be 24), delta = 1/2 (must be 1/2)
+   antichain Delta_1 at |A| = 2: 1/2 — the max(|A|,n-|A|)/n form gives 1/2
+   (Op-Form 4.2's antichain check: Delta_1 = max(|A|,n-|A|)/n, and at
+    |A| = n/2 that is 1/2. Agrees.)
+
+   MUTATION: break the maximality test the way I originally broke it,
+   and confirm the state count explodes while the answer stays right.
+      mutant answer = 13 (still correct: 13), states = 8192 vs lattice size 26
+      -> a numbers-only check CANNOT see this defect. s0 can.
+
+==============================================================================
+s0 COMPLETE — two paths agree everywhere, all controls fired.
+==============================================================================

@@ -1,0 +1,118 @@
+==============================================================================
+mg-9461 s1 — THE FOUR CHAINS, SOLVED AND PLUGGED BACK
+==============================================================================
+eps_leak = 1/5  (= 0.2)  EMPIRICAL, mg-e35c F5
+Every eps_dem below is a bound on eps_spec = 1 - lambda_std (SPEC side).
+eps_leak is a bound on Phi = Delta_1 (LEAK side). They are not the same
+quantity and this script types them separately (E2 guard).
+NO WINDOW FIGURE IS COMPUTED ANYWHERE IN THIS DIRECTORY (E1 guard):
+mg-76b2's windows rest on the supply eps_spec = 2/(n+1), REFUTED at
+n = 6 by mg-131e. The replacement is unknown and is not this ticket's.
+
+------------------------------------------------------------------------------
+A. eps_dem AT THE PARAMETERS EACH CHAIN IS ACTUALLY AVAILABLE AT
+------------------------------------------------------------------------------
+chain            eps_dem     decimal   tight?  parameters
+(I)                1/50    0.020000      yes  no free parameter
+(III)                1/50    0.020000      yes  C_3 = 1, PROVEN under L2 (mg-76b2, audited)
+(III)               1/100    0.010000      yes  C_3 = 2, hypothetical
+(II)                2/15    0.133333      yes  C_3^gap = 3/2, the n=3 MEASUREMENT (mg-94c3)
+(II)            100/1193    0.083822      yes  C_3^gap = 2.386, the n=6 MEASUREMENT — and RISING
+(IV)                1/50    0.020000      yes  c = 40/49, the self-consistent threshold
+(IV)                 1/9    0.111111      yes  c = 0.90
+(IV)                 1/5    0.200000      yes  c = 1, the conjecture's own `1-o(1)`
+
+`tight?` = the chain's own Phi bound evaluated at eps_spec = eps_dem
+equals eps_leak EXACTLY, and is strictly worse 1% above it. A
+mis-transcribed chain fails this.
+
+------------------------------------------------------------------------------
+B. E3 GUARD — chain (II) at C_3 = 1 must REFUSE
+------------------------------------------------------------------------------
+REFUSED, as designed:
+   E3 GUARD: refusing to evaluate chain (II) at C_3 = 1
+   `C_3 = 1` is PROVEN (under L2) only in chain (III)'s currency `Phi_pref <= sqrt(2 C_3 eps_spec)`
+   The gap-form constant this chain carries is measured at 1.500, 1.473, 1.990, 2.386 over n = 3..6 and exceeds 1 at 1023 of 1032 posets (mg-94c3 s3)
+   Substituting 1 here is FALSE, not merely unlicensed.
+
+Forced anyway: (II) at C_3=1 gives 1/5 vs (III)'s 1/50 — ratio 10 = 2/eps_leak.
+That ratio is the ticket's 10x, and it is EXACTLY 2/eps_leak at EVERY
+C_3, because (II)/(III) = (L/C)/(L^2/(2C)) = 2/L with C cancelling.
+   verified at C_3 = 1, 3/2, 7/3, 10 — ratio is 10 at all four.
+
+------------------------------------------------------------------------------
+C. E2 GUARD — a Spec passed where a Leak belongs must RAISE
+------------------------------------------------------------------------------
+REFUSED, as designed: eps_leak: expected Leak, got Spec — E2 guard (leak/spec conflation)
+
+------------------------------------------------------------------------------
+D. NEGATIVE CONTROL — a deliberately wrong chain must FAIL plug-back
+------------------------------------------------------------------------------
+wrong-chain plug-back tight? False  (must be False)
+right-chain plug-back tight? True  (must be True)
+So the plug-back check DISCRIMINATES; it is not vacuously true.
+
+------------------------------------------------------------------------------
+E. SENSITIVITY TO eps_leak — THE SQUARE, MADE EXPLICIT
+------------------------------------------------------------------------------
+eps_leak is EMPIRICAL. It enters (I)/(III) SQUARED and (IV) LINEARLY.
+
+  eps_leak     (I)/(III,C=1)     (IV) at c=1   note
+       1/5              1/50             1/5   0.20   — the live calibration (mg-e35c F5, EMPIRICAL)
+     17/78         289/12168           17/78   17/78  — mg-3969's ceiling, BOTH-sides-non-chain scope only
+       1/7              1/98             1/7   1/7    — mg-d3c7's ceiling in the REQUIRED scope, n <= 7
+      1/10             1/200            1/10   0.10   — a factor-2 error in eps_leak
+      1/50            1/5000            1/50   0.02   — the SUPERSEDED pre-mg-e35c value
+
+  A factor-2 move in eps_leak is a factor-4 move in eps_dem on the
+  squared chains, and a factor-2 move on chain (IV) at c=1:
+    (I)/(III): 4x      (IV) at c=1: 2x
+  And the corpus's own history is this sensitivity firing: the
+  mg-e35c F5 repair moved eps_leak 0.02 -> 0.20, a 10x, and eps_dem
+  moved 100x. The '100x too pessimistic' banner IS the square.
+
+------------------------------------------------------------------------------
+F. SENSITIVITY TO c — chain (IV) does not close below c = 1 - eps_leak
+------------------------------------------------------------------------------
+  existence threshold      c > 1 - eps_leak            = 4/5
+  self-consistent          c >= (1-eps_leak)/(1-eps_dem) = 40/49
+  and that self-consistent threshold MOVES WITH eps_leak, so an error
+  in eps_leak is not merely a scaling of chain (IV) — it relocates the
+  point at which chain (IV) exists at all:
+  eps_leak   existence c >    self-consistent c >=
+       1/5             4/5                   40/49
+     17/78           61/78              9516/11879
+       1/7             6/7                   84/97
+      1/10            9/10                 180/199
+      1/50           49/50               4900/4999
+
+------------------------------------------------------------------------------
+G. THE DISTANCE TO THE SUPPLY SIDE — what any chain choice can buy
+------------------------------------------------------------------------------
+Supply: pair bias PROVES 1 - lambda_std <= eps_sup, and
+  max{6 E_mu[inv_e]/(n^2-1) : mu in M_n(eta)} = (1-3eta) n/(n+1),
+  so eps_sup = sup_{eta>0} (1-3eta) n/(n+1) = 1 — APPROACHED, NOT
+  ATTAINED in the frozen class (mg-832f Correction 2; E6 guard).
+  It is an EQUALITY for the information pair bias consumes: no
+  rearrangement moves it (mg-6bc2 Claim 3.1).
+
+chain          eps_dem   eps_sup/eps_dem  parameters
+(I)              1/50                50  no free parameter
+(III)              1/50                50  C_3 = 1, PROVEN under L2 (mg-76b2, audited)
+(III)             1/100               100  C_3 = 2, hypothetical
+(II)              2/15              15/2  C_3^gap = 3/2, the n=3 MEASUREMENT (mg-94c3)
+(II)          100/1193          1193/100  C_3^gap = 2.386, the n=6 MEASUREMENT — and RISING
+(IV)              1/50                50  c = 40/49, the self-consistent threshold
+(IV)               1/9                 9  c = 0.90
+(IV)               1/5                 5  c = 1, the conjecture's own `1-o(1)`
+
+  MOST PERMISSIVE chain in the enumeration: eps_dem = 1/5 (= 0.2), at (IV), c = 1.
+  ARCHITECTURE-AS-WRITTEN:                  eps_dem = 1/50 (= 0.02), at (I) = (III) at C_3 = 1.
+  The chain question is worth exactly 10x.
+  The gap to the supply side is 50x at the
+  architecture's own chain and STILL 5x at the most
+  permissive one. NO CHOICE AMONG THE FOUR CHAINS CLOSES THE WALL.
+
+==============================================================================
+s1 COMPLETE — all guards fired, all plug-backs tight, control fired.
+==============================================================================

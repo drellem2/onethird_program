@@ -1,0 +1,64 @@
+==============================================================================
+mg-9461 s3 — STEPS 5 AND 6 AT SOURCE (the P1 guard)
+==============================================================================
+file  : /Users/daniel/Library/Mobile Documents/com~apple~CloudDocs/spectral_near_ordinal_sum_program.tex
+md5   : db095fbe12ba19f0a8107f962c0d1c8f
+lines : 603 (wc -l); split() gives 604 because the file ends in a newline. mg-3969/mg-d3c7 report 603 — same file.
+
+------------------------------------------------------------------------------
+A. THE SIX STEPS, QUOTED — architecture section at :486
+------------------------------------------------------------------------------
+  Step 1  (:489-490)  \item Assume \(P\) is a minimal counterexample and label it by its distinguished order \(e=12\cdots n\).
+  Step 2  (:492-497)  \item Port the known bad-mixing argument for the BK graph, or prove a direct analogue, to obtain \[ \lambda_{\std}(P)\ge1-\varepsilon \] with sufficiently small \(\varepsilon\).
+  Step 3  (:499-500)  \item Prove that the dominant standard eigenvector is monotone in \(e\), or directly produce a low-conductance prefix.
+  Step 4  (:502-507)  \item Apply Cheeger sweeping to obtain \[ A_k=\{1,\dots,k\}, \qquad \Phi_P(A_k)\lesssim\sqrt\varepsilon. \]
+  Step 5  (:509-512)  \item Interpret this as an \(L^1\) near ordinal sum: \[ \E K_k\ll\min(k,n-k). \]
+  Step 6  (:514-516)  \item Use near-ordinal-sum stability to transfer a balanced pair from \(P[A_k]\) or \(P[A_k^c]\) to \(P\), contradicting minimality. \end{enumerate}
+
+------------------------------------------------------------------------------
+B. DO ANY OF THE FOUR CHAINS' CONSTANTS APPEAR IN STEP 5 OR STEP 6?
+------------------------------------------------------------------------------
+token                                       in Step 5  in Step 6  whole file
+C_3 / C₃ (chains II and III)                        0          0           0
+a capture fraction c (chain IV)                     0          0           2
+Rayleigh quotient (chain IV's currency)             0          0           3
+prefix capture                                      0          0           2
+Cheeger                                             0          0           9
+lambda_std (the spectral side)                      0          0          12
+sqrt (the Cheeger square)                           0          0           1
+
+  Step 5, verbatim: \item Interpret this as an \(L^1\) near ordinal sum: \[ \E K_k\ll\min(k,n-k). \]
+  Step 6, verbatim: \item Use near-ordinal-sum stability to transfer a balanced pair from \(P[A_k]\) or \(P[A_k^c]\) to \(P\), contradicting minimality. \end{enumerate}
+
+  READING: Step 5's statement is `E K_k << min(k, n-k)` and Step 6's
+  hypothesis is that statement. Neither mentions a prefix-capture
+  constant, a Rayleigh quotient, a capture fraction, or Cheeger. The
+  square root and lambda_std both live in Step 4 and above.
+  => the four chains differ ENTIRELY above Step 5's output, and Step 6
+     cannot tell which of them supplied its hypothesis. P1 HELD.
+
+------------------------------------------------------------------------------
+C. WHERE THE CHAINS DO DIFFER — Steps 3 and 4, and the conjecture
+------------------------------------------------------------------------------
+  Step 3   :38  that its dominant eigenvector is monotone in a canonical order and is
+  Step 3   :499  \item Prove that the dominant standard eigenvector is monotone in
+  Step 3   :561  eigenvector is monotone in the distinguished order, or at least yields
+  Step 4   :502  \item Apply Cheeger sweeping to obtain
+  capture  :362  A threshold cut of the dominant standard eigenvector gives a prefix \(A_k\) whose Rayleigh quotient captures a constant fraction, or possibly \(1-o(1)\), of the dominant standard eigenvalue. \end{conjecture}
+
+  Step 4 IS Cheeger sweeping and writes its output as a prefix with
+  no constant attached; the `constant fraction` wording is the
+  Prefix-capture CONJECTURE, which is not one of the six steps.
+  So chains (II) and (IV) are REPLACEMENTS for Steps 3+4, not
+  readings of them.
+
+------------------------------------------------------------------------------
+D. THE OPEN LEMMAS THAT SELECT THE CHAIN
+------------------------------------------------------------------------------
+  :560  \item \textbf{Monotonicity/prefix lemma.} A dominant standard eigenvector is monotone in the distinguished order, or at least yields a low-conductance prefix.
+  :564  \item \textbf{Prefix Cheeger lemma.} The Cheeger sweep can be restricted to prefixes with quantitatively controlled loss.  \item \textbf{Near-ordinal-sum stability lemma.} Sufficiently small
+  :567  \item \textbf{Near-ordinal-sum stability lemma.} Sufficiently small prefix leakage contradicts minimality by preserving a balanced pair from one side. \end{enumerate}
+
+==============================================================================
+s3 COMPLETE
+==============================================================================
