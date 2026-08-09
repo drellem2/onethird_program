@@ -1,0 +1,82 @@
+SETTING:  eps_leak = 1/5 = 0.2  [unit: eps_leak, a Delta_1 budget]
+
+E2 GUARD, FIRED LIVE — a Spec where a Leak belongs must RAISE
+  raised as required: dem_III: expected a Leak (eps_leak), got 'Spec' — this is the normalis...
+
+A — chain (III)/(I): eps_dem = eps_leak^2/(2 C3)   [unit: eps_spec]
+  C3 = 1     eps_dem = 1/50         = 0.02
+  C3 = 2     eps_dem = 1/100        = 0.01
+  C3 = 3/2   eps_dem = 1/75         = 0.0133333
+  C3 = 3     eps_dem = 1/150        = 0.00666667
+  -> C3 = 1 gives 1/50 = 2e-02.  Parent's headline REPRODUCES.
+
+B — chain (II) gap form: eps_dem = eps_leak/C3   [unit: eps_spec]
+  C3=1             C3 = 1        eps_dem = 1/5        = 0.2
+  measured n=3     C3 = 3/2      eps_dem = 2/15       = 0.133333
+  measured n=6, 2.386 C3 = 1193/500 eps_dem = 100/1193   = 0.0838223
+
+C — THE 10x, RE-DERIVED AS AN IDENTITY (does C3 really cancel?)
+    ratio (II)/(III) = (eps_leak/C3) / (eps_leak^2/(2 C3)) = 2/eps_leak
+    ratio = 10 = 10.0 at every C3 tested (6 values incl. 1193/500).
+    C3 CANCELS — the identity holds.  (mg-94c3's figure, cited
+    not re-derived per the ticket; what is re-derived is that it
+    is C3-INDEPENDENT, which is the load-bearing part.)
+
+D — chain (IV), literal capture: eps_dem = (eps_leak-(1-c))/c
+    [unit: eps_spec]
+  c = 1, most permissive         eps_dem = 1/5        = 0.2        
+  c = 9/10                       eps_dem = 1/9        = 0.111111   
+  c = 40/49                      eps_dem = 1/50       = 0.02       
+  c = 4/5 — the close threshold  eps_dem = 0          = 0          <-- DOES NOT CLOSE
+  c = 3/4 — the MEASURED min c at n=3 eps_dem = -1/15      = -0.0666667 <-- DOES NOT CLOSE
+  -> all three of the parent's chain (IV) rows REPRODUCE exactly.
+
+E — THE TWO DIFFERENT THRESHOLDS ON c, WHICH THE PARENT CONFLATES
+    The ticket asks: does chain (IV) fail to CLOSE unless c >= 40/49?
+
+  eps_leak   closes at all if c >     matches (III)'s budget if c >=
+  1/5        4/5                      40/49                   
+  1/7        6/7                      84/97                   
+  17/78      61/78                    9516/11879              
+  1/50       49/50                    4900/4999               
+
+  At eps_leak = 1/5 the two numbers are 4/5 = 0.8 and 40/49 = 0.816327.
+  They are NOT the same number, and 40/49 is the SECOND one.
+  Proof that 40/49 is not the closure threshold: at c = 4/5 + 1/1000,
+  strictly below 40/49, chain (IV) gives eps_dem = 1/801 = 0.00125 > 0.
+  So chain (IV) DOES close there.  It closes worse than chain
+  (III) — 0.00125 against 1/50 = 0.02 — but 'does not close AT ALL'
+  is false of it.  The parent's own 5.3 states this correctly.
+
+F — THE PARENT'S 5.4 DISTANCE TABLE, RE-COMPUTED  (eps_sup = 1)
+  (I)=(III) C3=1     eps_dem = 1/50        eps_sup/eps_dem = 50         OK
+  (III) C3=2         eps_dem = 1/100       eps_sup/eps_dem = 100        OK
+  (II) C3=3/2        eps_dem = 2/15        eps_sup/eps_dem = 15/2       OK
+  (II) C3=2.386      eps_dem = 100/1193    eps_sup/eps_dem = 1193/100   11.93 (parent: ~11.9)
+  (IV) c=40/49       eps_dem = 1/50        eps_sup/eps_dem = 50         OK
+  (IV) c=9/10        eps_dem = 1/9         eps_sup/eps_dem = 9          OK
+  (IV) c=1           eps_dem = 1/5         eps_sup/eps_dem = 5          OK
+
+G — THE THRESHOLD n >= 4 C3/eps_leak^2 - 1
+  at C3 = 1, eps_leak = 1/5:  n >= 99   (parent/corpus: 99)
+
+H — THE OPTIMISM ARITHMETIC OF 4.3, DIRECTION CHECKED ROW BY ROW
+  All values below are in the eps_leak unit; none is an eps_spec.
+  uniform surrogate, REQUIRED scope, uniform in n                ceiling 0         0.20 is above by everything (0.20 > 0) -> OPTIMISTIC
+  uniform surrogate, REQUIRED scope, n <= 7                      ceiling 1/7       0.20 is 40% above        -> OPTIMISTIC
+  uniform surrogate, RESTRICTED scope (both sides non-chain), n  ceiling 17/78     0.20 is 8.235% BELOW     -> CONSERVATIVE
+
+  The headline: 0.20 vs 1/7 -> excess = 2/5 = 0.4 -> 40.0% above.
+  EXACTLY 40%. The parent's headline arithmetic is CORRECT.
+
+  BUT the third row runs the OTHER WAY: 0.20 < 17/78, so against
+  that ceiling 0.20 is CONSERVATIVE, not optimistic.  The parent's
+  TABLE says so inline; the parent's COMMIT SUBJECT says it 'ERRS
+  OPTIMISTIC IN EVERY READING WHERE A COMPARISON EXISTS' and simply
+  omits this row.  17/78's scope: both-sides-non-chain cuts only,
+  which is NOT the scope Step 6 must survive — so the row is not a
+  safety margin, and that is exactly why it must stay visible.
+
+========================================================================
+RESULT: every published chain figure re-derived from its own Phi
+bound and REPRODUCED.  One conflation found and localised (E).

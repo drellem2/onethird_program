@@ -1,0 +1,87 @@
+SOURCE
+  path      /Users/daniel/Library/Mobile Documents/com~apple~CloudDocs/spectral_near_ordinal_sum_program.tex
+  st_size   16560 bytes
+  bytes read 16560
+  md5       db095fbe12ba19f0a8107f962c0d1c8f
+  lines     603 (newline count, matches `wc -l`)
+
+STEP WINDOWS (located by opener text, not hard-coded)
+  Step 1   lines 489-491  (3 lines)
+  Step 2   lines 492-498  (7 lines)
+  Step 3   lines 499-501  (3 lines)
+  Step 4   lines 502-508  (7 lines)
+  Step 5   lines 509-513  (5 lines)
+  Step 6   lines 514-515  (2 lines)
+
+A — THE CLAIM: tokens occur 0 times in Steps 5-6
+    Each row carries its own positive control: the SAME regex, the
+    SAME read, in the SAME invocation, counted over the WHOLE file.
+    A row whose whole-file count is 0 proves nothing about Steps 5-6
+    — the regex may simply not match this document's spelling — and
+    that row FAILS the run rather than reporting a comfortable zero.
+
+    The first form of this control demanded the positive hit come
+    from Steps 1-4, and it FAILED on `Rayleigh` and `prefix capture`.
+    That was a defect in MY control, not in the parent's claim: both
+    tokens are absent from all six steps and present elsewhere in the
+    document, which STRENGTHENS the parent rather than weakening it.
+    The S1-4 column is kept as a secondary, non-gating reading and is
+    now what exhibits that strengthening.
+  token                S5-6     S1-4    whole   verdict
+  Rayleigh                0        0        3   0 in S5-6, instrument PROVEN sensitive (3 in file, and 0 in S1-4 too)
+  prefix capture          0        0        2   0 in S5-6, instrument PROVEN sensitive (2 in file, and 0 in S1-4 too)
+  Cheeger                 0        1        9   0 in S5-6, instrument PROVEN sensitive (9 in file)
+  sqrt                    0        1        1   0 in S5-6, instrument PROVEN sensitive (1 in file)
+  std                     0        2       40   0 in S5-6, instrument PROVEN sensitive (40 in file)
+
+B — THE CLAIM: C_3 occurs 0 times in the WHOLE file
+    Positive control cannot come from another window here (the claim
+    is file-wide), so it comes from a token of the SAME SHAPE that
+    the file does contain.
+  C_3                       0
+  C_{3}                     0
+  C3                        0
+  C\_3                      0
+  C_{\mathrm{3}}            0
+  -- shape controls (subscripted constants the file DOES carry) --
+  C_1                       0
+  C_2                       0
+  A_k                      14
+  K_k                       7
+  lambda_{std}             10
+
+B2 — IS THE C_3 ZERO SELECTIVE OR GENERIC?
+    The zero is only informative if the document names OTHER
+    constants of the same kind and declines to name this one.  If it
+    names none, `C_3 occurs 0 times` is a fact about the document's
+    notation, not about what the architecture consumes.
+  every `C_<sub>` in the file: NONE
+  'absolute constant' / 'universal constant': 0
+  \varepsilon_{leak|spec|dem}: 0
+  READING: the zero is GENERIC.  The source names no constant
+  `C_<i>` at all, so C_3's absence is a notational fact.  It
+  still supports the parent's ruling, but by a WEAKER argument
+  than 'the document names constants and omits this one': the
+  document is simply written without explicit constants, and
+  every chain's constant is equally absent from it.
+
+C — NEGATIVE CONTROL BY MUTATION
+    Inject 'Cheeger' and 'C_3' into a COPY of the Step 5-6 window
+    and re-run the identical counters.  If the mutant still reads 0
+    the counter is a tautology and every zero above is worthless.
+  mutant Steps 5-6: Cheeger=1  C_3=1
+  mutation caught: counters are not tautological.
+
+D — WHAT STEPS 5 AND 6 ACTUALLY SAY, quoted from source
+  Step 5  [spectral_near_ordinal_sum_program.tex:509-513]
+    509 | \item Interpret this as an \(L^1\) near ordinal sum:
+    510 | \[
+    511 | \E K_k\ll\min(k,n-k).
+    512 | \]
+    513 | 
+  Step 6  [spectral_near_ordinal_sum_program.tex:514-515]
+    514 | \item Use near-ordinal-sum stability to transfer a balanced pair from
+    515 | \(P[A_k]\) or \(P[A_k^c]\) to \(P\), contradicting minimality.
+
+========================================================================
+RESULT: all counts defended by a live positive control. mg-9461's P1 guard REPRODUCES.
