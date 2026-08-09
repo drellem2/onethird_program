@@ -63,11 +63,24 @@ for b in BANDS:
                  if sub else "       0      --      ")
     print(line)
 print()
-print("  THE FALL IS THE GAP, NOT n.  Across the six bands below 0.70, `min c` rises")
-print("  monotonically as the band tightens, at BOTH n, and the band nearest the regime")
-print("  is the band where c is LARGEST.  s1's minimisers live in [0.50, 0.70).")
+print("  Across the six bands below 0.70, `min c` RISES as the band tightens, at BOTH n,")
+print("  and the band nearest the regime is the band where c is LARGEST.  s1's minimisers")
+print("  live in [0.50, 0.70).")
 print()
-print("  THE TOP BAND [0.70, 1.01) BREAKS THE MONOTONICITY AND IS PRINTED, NOT DROPPED:")
+print("  *** ERRATUM (mg-b3ab, after mg-00b3's audit).  THIS LINE USED TO READ `rises")
+print("  MONOTONICALLY as the band tightens`, and `THE FALL IS THE GAP, NOT n`.  Both are")
+print("  over-stated and both are repaired here.")
+print("    (a) THE DIRECTION IS ROBUST; THE MONOTONICITY IS A PROPERTY OF THIS PARTITION.")
+print("        Re-bin the SAME population at uniform width 0.01 and 32 of 63 adjacent")
+print("        pairs violate at n = 6, 32 of 73 at n = 7 — and not only in the")
+print("        near-antichain tail printed below: 10 (n=6) and 7 (n=7) have BOTH bands")
+print("        under gap 0.30.  Largest such rise: n = 6, [0.130,0.140) 0.824256 ->")
+print("        [0.140,0.150) 0.874508.  (mg-00b3 sec 0.2, independent instrument.)")
+print("    (b) `NOT BECAUSE n IS` is contradicted by (R4) BELOW, on this instrument: at a")
+print("        FIXED gap cap, min c falls as n grows.  The gap carries the direction; it")
+print("        does not clear n.  Both effects are live. ***")
+print()
+print("  THE TOP BAND [0.70, 1.01) RUNS THE OTHER WAY AND IS PRINTED, NOT DROPPED:")
 print("  min c there is 0.673 (n=6) and 0.556 (n=7), ABOVE the band below it.  It holds")
 print("  14 and 38 posets — the near-antichain end, where lambda_std is nearly 0 and c is")
 print("  a ratio of two small numbers.  It is the farthest band from the regime and it")
@@ -129,6 +142,7 @@ print("      N_a(n):  antichain {0..a-1}  <  antichain {a..n-1},  a = n/2,")
 print("               MINUS the single relation (a-1, a).")
 print()
 print("   n   primitive   gap (exact)      gap <= 1/50?   min_k Q_k    c (exact bracket)")
+minQ_N = {}
 for n in range(6, 17, 2):
     a = n // 2
     rel = [(x, y) for x in range(a) for y in range(a, n) if (x, y) != (a - 1, a)]
@@ -136,6 +150,7 @@ for n in range(6, 17, 2):
     lo, hi = P.lambda2_bracket(F(1, 10 ** 12))
     clo, chi = P.c_bracket(F(1, 10 ** 12))
     mq, _k = P.min_prefix_Q()
+    minQ_N[n] = mq
     inside = not P.lambda2_gt(EPS_SPEC)
     print(f"  {n:3d}   {str(P.is_primitive()):5s}    {float(lo):.9f}    "
           f"{'YES' if inside else 'no ':>3s}         {str(mq):>7s}   "
@@ -145,18 +160,74 @@ print("  IN THE REGIME, `c` GOES TO 1, NOT TO 0.  At n = 16 the gap is 3.7e-3 �
 print("  times inside the budget — and c = 0.99990, against a threshold of 0.8163.")
 print("  min_k Q_k there is 1/260, against a requirement of 1/5: a factor of 52 of slack.")
 print()
-print("  A SECOND FAMILY, so the answer is not one construction's artefact:")
+print("  *** ERRATUM (mg-b3ab, after mg-00b3's audit).  THE TABLE BELOW USED TO BE HEADED")
+print("  `A SECOND FAMILY, so the answer is not one construction's artefact`.  IT IS NOT A")
+print("  SECOND FAMILY.  N and N' are the SAME poset under two labellings: both are")
+print("  K_{a,a} minus ONE relation, and Aut(K_{a,a}) is transitive on its a^2 relations,")
+print("  so ANY two single-relation deletions are isomorphic.  An explicit isomorphism at")
+print("  every n is exhibited and CHECKED below, not asserted.  N' IS NOT INDEPENDENT")
+print("  EVIDENCE: the class exhibited in the regime is ONE poset shape. ***")
+print()
+print("  *** AND THE STRUCTURAL POINT, which is why this was not visible on its face:")
+print("  sec 1.2 establishes that chain (IV) closes IFF min_k Q_k <= eps_leak, and THIS")
+print("  TABLE USED TO OMIT THAT COLUMN, printing gap and c alone.  Had it been here, a")
+print("  reader would have seen the SAME 1/15 .. 1/260 twice over and asked why two")
+print("  `different` families agree exactly in the one number that decides closing.  The")
+print("  column is restored, and the equality is now ASSERTED rather than left to the eye.")
+print("  The n = 6 row is also restored: the old table started at n = 8, so the two could")
+print("  not be read side by side even where both were printed. ***")
+print()
 print("      N'_a(n): the same, MINUS the relation (0, n-1) instead.")
-print("   n    gap (exact)      gap <= 1/50?   c (exact bracket)")
-for n in range(8, 17, 2):
+print("   n   primitive   gap (exact)      gap <= 1/50?   min_k Q_k    c (exact bracket)"
+      "   min_k Q_k == N's?   sigma(N) == N'?")
+for n in range(6, 17, 2):
     a = n // 2
+    rel_N = [(x, y) for x in range(a) for y in range(a, n) if (x, y) != (a - 1, a)]
     rel = [(x, y) for x in range(a) for y in range(a, n) if (x, y) != (0, n - 1)]
     P = poset_from_relations(n, rel)
     lo, _hi = P.lambda2_bracket(F(1, 10 ** 12))
     clo, chi = P.c_bracket(F(1, 10 ** 12))
+    mq, _k = P.min_prefix_Q()
     inside = not P.lambda2_gt(EPS_SPEC)
-    print(f"  {n:3d}   {float(lo):.9f}    {'YES' if inside else 'no ':>3s}         "
-          f"[{float(clo):.7f}, {float(chi):.7f}]")
+    # Explicit isomorphism N -> N', valid at every n: swap (a-1, 0) inside the lower
+    # block and (a, n-1) inside the upper block.  Both blocks are preserved setwise, so
+    # sigma is an automorphism of K_{a,a}; it carries the deleted relation (a-1, a) to
+    # the deleted relation (0, n-1).  This is Aut(K_{a,a})-transitivity made concrete.
+    sigma = list(range(n))
+    sigma[a - 1], sigma[0] = 0, a - 1
+    sigma[a], sigma[n - 1] = n - 1, a
+    iso = sorted((sigma[x], sigma[y]) for x, y in rel_N) == sorted(rel)
+    assert iso, f"the exhibited sigma is not an isomorphism at n = {n}"
+    assert mq == minQ_N[n], f"min_k Q_k differs at n = {n}: {mq} vs {minQ_N[n]}"
+    print(f"  {n:3d}   {str(P.is_primitive()):5s}    {float(lo):.9f}    "
+          f"{'YES' if inside else 'no ':>3s}         {str(mq):>7s}   "
+          f"[{float(clo):.7f}, {float(chi):.7f}]"
+          f"      {str(mq == minQ_N[n]):5s}            {str(iso):5s}")
+print()
+print("  BOTH COLUMNS ARE True AT EVERY n.  The two labellings differ ONLY in the gap,")
+print("  and hence only in c, because M mixes the element index with the POSITION index")
+print("  and so is not relabelling-invariant.  min_k Q_k — the quantity sec 1.2 shows")
+print("  decides closing — is IDENTICAL, which is what `one poset` means here.")
+print()
+print("  NEGATIVE CONTROL, so the isomorphism check above is not vacuous: the same test")
+print("  run against a deletion that is NOT a single relation of K_{a,a} must FAIL.")
+for n in (6, 8, 10):
+    a = n // 2
+    rel_N = [(x, y) for x in range(a) for y in range(a, n) if (x, y) != (a - 1, a)]
+    # delete TWO relations: not in the Aut-orbit of a single deletion
+    rel_bad = [(x, y) for x in range(a) for y in range(a, n)
+               if (x, y) not in ((0, n - 1), (0, a))]
+    sigma = list(range(n))
+    sigma[a - 1], sigma[0] = 0, a - 1
+    sigma[a], sigma[n - 1] = n - 1, a
+    bad_iso = sorted((sigma[x], sigma[y]) for x, y in rel_N) == sorted(rel_bad)
+    P_bad = poset_from_relations(n, rel_bad)
+    mq_bad, _k = P_bad.min_prefix_Q()
+    assert not bad_iso, f"negative control did not fire at n = {n}"
+    print(f"    n = {n:2d}   sigma(N) == K_{{a,a}} minus TWO: {str(bad_iso):5s}   "
+          f"min_k Q_k {str(mq_bad):>7s} vs N's {str(minQ_N[n]):>7s}   "
+          f"equal: {str(mq_bad == minQ_N[n]):5s}")
+print("  The control FIRES at every n: both tests are False, so True above is a result.")
 print()
 
 # --------------------------------------------------------------------- (R4)
@@ -179,8 +250,13 @@ print("  DROPS BELOW THE THRESHOLD IN THE REGIME, AND IT IS NOT EVIDENCE THAT IT
 print("  NOT.  Four points killed 2/(n+1); three points decide nothing here either.")
 print()
 print("=" * 78)
-print("s2 VERDICT: s1's REFUTATION DOES NOT TRANSFER.  `min c` falls because the GAP is")
-print("large, not because n is; in the architecture's own regime the two families that")
-print("reach it have c = 0.999+, five times inside the budget.  `c > 0.80` is REFUTED on")
+print("s2 VERDICT: s1's REFUTATION DOES NOT TRANSFER.  `min c` rises as the gap tightens,")
+print("at both n, across the six bands below 0.70; the ONE poset shape exhibited here in")
+print("the architecture's own regime — N and N' are two labellings of it, NOT two")
+print("families — has c = 0.999+, five times inside the budget.  `c > 0.80` is REFUTED on")
 print("the full population and UNMEASURED — not unmeasurable — in the regime.")
+print("(ERRATUM mg-b3ab: this line used to read `falls because the GAP is large, not")
+print("because n is` and `the two families`.  The gap carries the direction and does not")
+print("clear n — (R4) above measures min c falling with n at a FIXED gap cap — and the")
+print("monotonicity across the six bands is a property of THIS partition; see (R1).)")
 print("=" * 78)

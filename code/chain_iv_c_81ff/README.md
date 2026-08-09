@@ -9,9 +9,35 @@ usable?
 
 **Answer, in one line.** Refuted on the full population by an explicit family, which
 settles nothing because every member is 23×–33× outside the regime; supported at
-`c = 0.9999` on the two families that reach the regime; and **`c` is not an independent
-unknown at all — it is chain (II)'s `C₃^gap` in another currency, with an algebraically
-equal demand.**
+`c = 0.9999` on the one poset shape this instrument exhibits inside the regime; and **`c`
+is not an independent unknown at all — it is chain (II)'s `C₃^gap` in another currency,
+with an algebraically equal demand.**
+
+> **⚠️ ERRATA (`mg-b3ab`), after `mg-00b3`'s independent audit landed at `8eec6d2`.** Four
+> statements in this instrument's transcripts were re-scoped in place; every erratum is
+> printed **in** the transcript, at the line it corrects, and each begins `*** ERRATUM`.
+>
+> 1. **`s2 (R3)`'s "A SECOND FAMILY" is not a second family.** `N` and `N'` are the same
+>    poset under two labellings — `K_{a,a}` minus one relation, and `Aut(K_{a,a})` is
+>    transitive on its `a²` relations. `s2 (R3)` now **exhibits an explicit isomorphism at
+>    every `n = 6..16` and asserts it**, with a live negative arm (a two-relation deletion,
+>    which must and does fail the same test).
+> 2. **`s2 (R3)`'s `N'` table dropped `min_k Q_k`** — the one column `§1.2` shows decides
+>    whether chain (IV) closes. Restored, together with the `n = 6` row, and the equality
+>    with `N`'s column is now **asserted** rather than left to the eye. *This omission is
+>    why (1) was not visible on its face.*
+> 3. **`s3 (I3)`'s "the premise survives on the only posets anyone has exhibited inside the
+>    regime" is now FALSE** — that set has grown. The staircase `S_n` is primitive and
+>    in-regime from `n = 12` with `c = 0.9258259`, `ε_dem^(IV) = 0.1359` and slack `2.2`,
+>    against this instrument's family's `0.9999` and `52`.
+> 4. **`s2 (R1)`'s "monotonically" and "the fall is the gap, not `n`" are both over-stated.**
+>    The monotonicity is a property of the chosen partition, and `(R4)` of this same script
+>    measures `min c` falling with `n` at a fixed gap cap.
+>
+> `s3 (I1)`'s hedge that a rising `C₃^gap` is *"a direction in both currencies and a verdict
+> in neither"* is re-scoped to **its own rows** — `C₃^gap` is now measured in regime, and
+> `s3 (I5)` carries three such rows. **No figure computed by this instrument was withdrawn**;
+> `s0` and `s1` are untouched. The staircase figures are `mg-00b3`'s, cited and labelled.
 
 ## Run
 
