@@ -1,0 +1,76 @@
+A — IS THE 40 % STABLE, OR AN ARTEFACT OF STOPPING AT n = 7?
+  ceiling(n<=N) <= min over family members with 2k+1 <= N.
+  N      k      family Delta_1 as decimal     0.20 is ... above
+  7      3      4/21           0.190476       5.0 %
+  9      4      5/36           0.138889       44.0 %
+  11     5      6/55           0.109091       83.3 %
+  13     6      7/78           0.0897436      122.9 %
+  17     8      9/136          0.0661765      202.2 %
+  21     10     11/210         0.052381       281.8 %
+  31     15     16/465         0.0344086      481.2 %
+  41     20     21/820         0.0256098      681.0 %
+  61     30     31/1830        0.0169399      1080.6 %
+  101    50     51/5050        0.010099       1880.4 %
+
+  The n <= 7 ceiling the parent quotes is 1/7 = 0.142857, and 0.20 is
+  40.0 % above it — correct, and a2 H confirms the arithmetic.
+  But the family's own n = 7 member is 4/21 = 0.190476, ABOVE 1/7, so the
+  1/7 at n <= 7 comes from a DIFFERENT witness (mg-d3c7's sweep),
+  not from the family — the family only starts biting past n = 7.
+
+  AT EVERY LARGER n THE OPTIMISM IS WORSE, and by how much is
+  already fixed in closed form:
+    n = 9     ceiling <= 5/36             0.20 is     44.0 % above
+    n = 21    ceiling <= 11/210           0.20 is    281.8 % above
+    n = 101   ceiling <= 51/5050          0.20 is   1880.4 % above
+    n = 401   ceiling <= 201/80200        0.20 is   7880.1 % above
+
+  READING: 40 % is the MILDEST comparison the corpus can currently
+  make, and the parent leads with it.  The figure is not wrong; it
+  is the floor of a quantity with no ceiling, presented without
+  saying so.  Anyone quoting '40 % optimistic' as a bounded margin
+  has the direction right and the magnitude unboundedly wrong.
+
+B — 'THERE IS NO EXPERIMENT THAT IMPROVES 0.20'
+  Four candidate experiments, named in my PREDICTIONS.md BEFORE the
+  parent's 4.4 was read, each with its disposition:
+
+  1. larger-n sweep for a smaller required-scope ceiling
+      DISPOSED, and not by the parent's stated reason. The parent says a
+      sweep 'can only lower a ceiling on a surrogate already refuted at
+      0'. The sharper disposal is section A above: the movement is already
+      available in CLOSED FORM from a proved family, so no experiment is
+      needed to obtain it and none could add to it. This SUPPORTS 4.4.
+
+  2. numerical search for slack in the consuming inequality
+      DISPOSED by the parent's own 4.2, one section earlier: the consumed
+      object is eps_0^cons, on which disjunct (i) is true at eps = 1 for
+      every exhibitable poset. There is no slack to search — the
+      inequality is vacuously satisfied everywhere it can be evaluated.
+
+  3. adversarial search for a worst family, to REFUTE 0.20
+      DISPOSED, and this is the strongest of the four. Exhibiting a poset
+      where the transfer fails with (i) false means exhibiting a poset
+      with delta(P) < 1/3 — i.e. refuting 1/3-2/3 itself. So the
+      experiment cannot be run without already settling the conjecture.
+      The parent states the mechanism in 4.2 but does not draw this
+      consequence; drawing it is what makes the negative UNIVERSAL rather
+      than merely unattempted.
+
+  4. witness search for the prefix-capture fraction c
+      NOT DISPOSED — but it does not target 0.20. It targets chain (IV),
+      and the parent itself proposes exactly this experiment in 11. So it
+      is not a counterexample to the negative; it is an experiment that
+      moves WHICH LEMMA the constant rests on, not the constant.
+
+  SCORE: my P5 (0.55, that the universal negative is over-claimed)
+  is LOST. All four candidates are disposed of or off-target, and
+  candidate 3's disposal is stronger than the parent's own stated
+  reason. The sentence is SOUND.
+
+  ONE QUALIFICATION IT SHOULD CARRY: the negative is about 0.20's
+  VALUE. Section A shows a figure the document publishes beside it
+  — the 40 % — is not fixed, and the parent does not say so.
+
+========================================================================
+RESULT: 40 % re-derived and shown to be the mildest available reading; universal negative survives a pre-registered enumeration.

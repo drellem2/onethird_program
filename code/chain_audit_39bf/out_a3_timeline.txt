@@ -1,0 +1,62 @@
+A — MAILBOX CREATION (pogod registers it at spawn)
+  ~/.macguffin/mail/q9461/                 2026-08-09T18:07:08.240375+00:00
+  ~/.macguffin/mail/q9461/new              2026-08-09T18:22:24.265057+00:00
+  ~/.macguffin/mail/q9461/cur              2026-08-09T18:22:24.265057+00:00
+
+B — THE CORRECTION MAIL
+  file      1786299115434862000.30456.2000
+  From      pm-onethird
+  Subject   MID-FLIGHT CORRECTION on mg-9461 — read the addendum at the end of the body BE
+  Date:     2026-08-09T18:11:55+00:00   <- when pm-onethird SENT it
+  in dir    cur   <- 'cur' means the worker read it
+  mtime     2026-08-09T18:11:55.434947+00:00   <- DELIVERY write.  NOT the read: `mv`
+            preserves mtime across the new->cur move, so this timestamp
+            survives the move unchanged and dates the SEND, not the read.
+            (My first version of this script used it as the read time and
+            was wrong by 10.5 minutes.  What records the move is the
+            DIRECTORY ctime, below.)
+  cur/ ctime 2026-08-09T18:22:24.265057+00:00   <- the new->cur move, i.e. READ
+  the mail's OWN first line: 'dispatched ~5 minutes ago'
+
+C — GIT AUTHOR DATES (committer dates are rebase artefacts)
+  3cd39f1  author 2026-08-09T18:12:52+00:00   committer 2026-08-09T18:12:52+00:00   PREDICTIONS.md committed (pre-rebase)
+  ba19c06  author 2026-08-09T18:58:08+00:00   committer 2026-08-09T18:58:08+00:00   instrument committed (pre-rebase)
+  424e693  author 2026-08-09T19:05:40+00:00   committer 2026-08-09T19:05:40+00:00   deliverable committed (pre-rebase)
+  6e5d88b  author 2026-08-09T17:56:53+00:00   committer 2026-08-09T17:56:53+00:00   mg-d3c7 landed on main
+
+D — RECONSTRUCTED TIMELINE (UTC, sorted)
+  2026-08-09T17:56:53+00:00  T-0010.0 min  mg-d3c7 landed on main
+  2026-08-09T18:06:55+00:00  T+0000.0 min  DISPATCH, per the correction mail's own wording
+  2026-08-09T18:07:08.240375+00:00  T+0000.2 min  q9461 mailbox created (proxy for SPAWN)
+  2026-08-09T18:11:55+00:00  T+0005.0 min  correction SENT by pm-onethird
+  2026-08-09T18:12:52+00:00  T+0006.0 min  PREDICTIONS.md committed (pre-rebase)
+  2026-08-09T18:22:24.265057+00:00  T+0015.5 min  correction READ (new->cur move)
+  2026-08-09T18:58:08+00:00  T+0051.2 min  instrument committed (pre-rebase)
+  2026-08-09T19:05:40+00:00  T+0058.8 min  deliverable committed (pre-rebase)
+
+E — THE THREE STATED INTERVALS, SCORED
+  dispatch -> correction SENT : 5.0 min
+  dispatch -> correction READ : 15.5 min
+
+  parent 12 + its commit subject                   says 40 min -> MATCHES NEITHER
+  mg-39bf ticket body ('~40 minutes in')           says 40 min -> MATCHES NEITHER
+  mayor dispatch note ('~5 minutes into its run')  says  5 min -> matches SENT
+  the correction mail's own first line             says  5 min -> matches SENT
+
+F — THE ORDER, WHICH IS THE PART THAT ACTUALLY MATTERS
+  The parent's substantive claim is that the correction arrived
+  AFTER it had read the sources and committed predictions.
+  predictions authored : 2026-08-09T18:12:52+00:00
+  correction SENT      : 2026-08-09T18:11:55+00:00
+  correction READ      : 2026-08-09T18:22:24.265057+00:00
+
+  SENT is BEFORE the predictions commit, by 0.9 min.
+  So my own ticket's 'the correction landed after it [3cd39f1]'
+  is FALSE on the SENT reading.
+  READ is AFTER the predictions commit, by 9.5 min.
+  So the parent's own claim — that it had committed predictions
+  before the correction reached it — is TRUE on the READ
+  reading, which is the only reading a worker can act on.
+
+========================================================================
+RESULT: timeline reconstructed from artefacts only.
