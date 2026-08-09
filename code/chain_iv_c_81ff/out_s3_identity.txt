@@ -34,10 +34,19 @@ s3 — `c` AND `C_3^gap` ARE ONE UNKNOWN IN TWO CURRENCIES
      7     3.075271     NEW
 
   RISING: 1.500, 1.473, 1.990, 2.386, 3.075.  This is the SAME measurement as
-  s1's falling `min c`, read in the other currency — and it is measured on the
-  same out-of-regime population, so it is a DIRECTION in both currencies and a
-  verdict in neither.  Quoting one of them as evidence and not the other would be
-  quoting one number twice.
+  s1's falling `min c`, read in the other currency, so quoting one of them as
+  evidence and not the other would be quoting one number twice.
+
+  *** ERRATUM (mg-b3ab, after mg-00b3's audit).  THIS PARAGRAPH USED TO ADD that
+  the rise is `a DIRECTION in both currencies and a VERDICT IN NEITHER`, on the
+  ground that it is measured out of regime.  THAT SCOPE NO LONGER COVERS C_3^gap.
+  It still covers THESE ROWS, which are out of regime at every n.  But the
+  MAXIMISERS of this very row are a family — the staircase S_n, i < j iff j >= i+2
+  — and S_n is primitive and INSIDE eps_spec = 1/50 from n = 12, with C_3^gap =
+  4.8758 there and 10.1654 at n = 25, in exact rationals (mg-00b3 sec 0.4).
+  Inside the regime C_3^gap is MEASURED, not extrapolated, and (I5) below carries
+  the in-regime rows.  C_3^gap(S_n) -> infinity is NOT proven and is not claimed;
+  the crossing of 10 needs no limit, only one exact in-regime witness. ***
 
 ------------------------------------------------------------------------------
 (I2) THE DEMANDS COINCIDE — chain (IV) IS chain (II)
@@ -101,12 +110,30 @@ s3 — `c` AND `C_3^gap` ARE ONE UNKNOWN IN TWO CURRENCIES
 
   HOW MUCH LESS IS THE WHOLE QUESTION, and it is NOT settled by that measurement,
   because 1023/1032 is measured OUT OF REGIME exactly as s1's family is.  On the
-  two families that DO reach the regime (s2 R3), c = 0.99990 and 0.99996, giving
+  NEAR-COMPLETE-BIPARTITE family that reaches the regime (s2 R3) — ONE poset shape
+  under two labellings, NOT two families — c = 0.99990 and 0.99996, giving
       c = 0.9998969   ->   eps_dem^(IV) = 0.199918
       c = 0.9999555   ->   eps_dem^(IV) = 0.199964
-  — i.e. essentially the full 0.20.  THE TICKET'S PREMISE SURVIVES ON THE ONLY
-  POSETS ANYONE HAS EXHIBITED INSIDE THE REGIME.  It is not established, because
-  two families are not a class.
+  — i.e. essentially the full 0.20, with min_k Q_k = 1/260 against a requirement
+  of 1/5: a factor of 52.
+
+  *** ERRATUM (mg-b3ab, after mg-00b3's audit).  THIS PARAGRAPH USED TO END `THE
+  TICKET'S PREMISE SURVIVES ON THE ONLY POSETS ANYONE HAS EXHIBITED INSIDE THE
+  REGIME`.  THAT SENTENCE IS NOW FALSE — not because the figures above moved, but
+  because it quantifies over a set that has since GROWN.  The staircase S_n
+  (i < j iff j >= i+2) is primitive, is inside eps_spec = 1/50 from n = 12, and
+  gives min_k Q_k = 64/699 there:
+      S_12  c = 0.9258259   ->   eps_dem^(IV) = 0.135907   slack on min_k Q_k = 2.1844
+  — 0.1359, not 0.1999, and a slack of 2.2, not 52.  (mg-00b3 sec 0.4, exact
+  rationals, independent instrument.  Its PROSE prints 0.135882 for this row; that
+  is a slip against its own c = 0.9258259, and the value computed live above from
+  that c is the one carried here.)
+
+  THE REPAIRED READING:  the premise survives on the near-complete-bipartite
+  family with essentially the full 0.20, and survives with MUCH LESS ROOM on the
+  staircase.  BOTH are inside the regime.  The figure quoted depends on WHICH
+  FAMILY, and the in-regime class is exhausted by neither.  It is not established,
+  because a family is not a class — and this document's `two` are one poset. ***
 
 ------------------------------------------------------------------------------
 (I4) NEGATIVE CONTROL — a chain (IV) that DOES pay the Cheeger square must fail
@@ -139,10 +166,24 @@ s3 — `c` AND `C_3^gap` ARE ONE UNKNOWN IN TWO CURRENCIES
          3.075              0.065041                 15.38x
         10.000              0.020000                 50.00x
 
-  SO THE 5x REFRAMING IS THE g = 1 ROW, AND ONLY THAT ROW.  It is the best case of
-  the one unknown, not a property of chain (IV).  At the largest g this corpus has
-  measured (3.075, n = 7, out of regime) the wall is 15x; at g = 10 — the value at
-  which chain (IV) stops closing at all — it is 50x, which is chain (III)'s figure.
+  *** ERRATUM (mg-b3ab, after mg-00b3's audit).  EVERY ROW ABOVE IS A HYPOTHESIS OR
+  AN OUT-OF-REGIME MEASUREMENT: the table had no measured IN-REGIME row.  It now
+  has three, all exact rationals with gap inside eps_spec = 1/50 (mg-00b3 sec 4):
+
+      poset                              gap        C_3^gap    wall = 5g
+      N(16)  — THIS document's family   0.003743     1.0275      5.14x
+      S_12   — the staircase           0.018778     4.8758     24.38x
+      S_25   — the staircase           0.004357    10.1654     50.83x
+
+  SO THE 5x REFRAMING IS THE g = 1 ROW, AND ONLY THAT ROW — and that row is not
+  merely the extreme point.  IT IS ALSO THE ROW THIS DOCUMENT'S ONE IN-REGIME
+  FAMILY HAPPENS TO SIT ON.  A different in-regime family, primitive and exact,
+  puts the same wall at 24x and then at 50.8x.  And g = 10 — the value at which
+  chain (IV) stops closing at all, which is chain (III)'s 50x figure — is REACHED
+  INSIDE THE BUDGET at n = 25, not only in hypothesis.
+
+  The 5x is the best case of the one unknown, not a property of chain (IV).  At the
+  largest g this document measured (3.075, n = 7, out of regime) the wall is 15x.
   The Cheeger square is not avoided by chain (IV); it is REFINANCED, and g is the
   interest rate.
 

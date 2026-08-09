@@ -1,4 +1,4 @@
-# OneThird — CHAIN (IV) IS CHAIN (II). Its `c` and chain (II)'s `C₃^gap` are **ONE unknown in two currencies**, their demands are **algebraically equal**, and the `ε_dem = 0.20` that the 5×-not-50× reframing rests on is the **`C₃^gap = 1` extreme point** — the very value `mg-94c3` measured false at `1023/1032`. Separately: `mg-76b2`'s falling `min c` is **CONFIRMED, EXTENDED TO `n = 7`, AND UPGRADED TO AN EXPLICIT INFINITE FAMILY** — and **every poset in it is 23×–33× OUTSIDE the regime**, so it refutes `c > 0.80` on the full population and **settles nothing about the class chain (IV) is invoked on**, where the two families that reach it have `c = 0.9999`
+# OneThird — CHAIN (IV) IS CHAIN (II). Its `c` and chain (II)'s `C₃^gap` are **ONE unknown in two currencies**, their demands are **algebraically equal**, and the `ε_dem = 0.20` that the 5×-not-50× reframing rests on is the **`C₃^gap = 1` extreme point** — the very value `mg-94c3` measured false at `1023/1032`. Separately: `mg-76b2`'s falling `min c` is **CONFIRMED, EXTENDED TO `n = 7`, AND UPGRADED TO AN EXPLICIT INFINITE FAMILY** — and **every poset in it is 23×–33× OUTSIDE the regime**, so it refutes `c > 0.80` on the full population and **settles nothing about the class chain (IV) is invoked on**, where the ONE family this document exhibits — in two labellings, not two families — has `c = 0.9999` — while a genuinely second in-regime family exhibited since (`mg-00b3`) has `c = 0.9258` and puts the same wall at `24×`, reaching `50.8×` at `n = 25`
 
 **Work item.** `mg-81ff` (repo `onethird_program`), filed by `pm-onethird`.
 **Instrument.** [`code/chain_iv_c_81ff/`](../code/chain_iv_c_81ff/) — shares no line of code
@@ -17,6 +17,37 @@ computation and a different eigenroutine.
 >    instrument's transcripts.
 > 2. **NO UNSCOPED `17/78`.** It does not arise here, and where the shape recurs — a
 >    figure whose scope is the whole finding — the scope is printed **at** the figure.
+
+> ### ⚠️ ERRATA — FOUR JOINTS RE-SCOPED AFTER LANDING, AND ONE OF THEM IS NOW *FALSE*
+>
+> This document landed at `767c5a1`. `mg-00b3`'s independent audit
+> ([`OneThird-ChainIV-CaptureFraction-mg-00b3-IndependentAudit.md`](OneThird-ChainIV-CaptureFraction-mg-00b3-IndependentAudit.md),
+> landed at `8eec6d2`) **confirmed the central correction** — this document was right not
+> to publish *"chain IV dies"* — and found **three joints over-stated in the same
+> direction, plus one that has since gone false.** Each is a claim about a **class**
+> resting on evidence about a **choice**. All four are repaired in place below (`mg-b3ab`);
+> nothing was deleted, and no figure computed here was withdrawn:
+>
+> | # | joint | what was wrong | where repaired |
+> |---|---|---|---|
+> | 1 | *"a second family"* (`§0.3`) | `N` and `N'` are **one poset under two labellings** — `K_{a,a}` minus one relation, and `Aut(K_{a,a})` is transitive on its relations | `§0.3`, `§0.6`, `s2 (R3)` |
+> | 2 | *"the premise survives on the only posets anyone has exhibited"* (`§0.3`, `s3 (I3)`) | **NOW FALSE** — that set has grown. `S_n` is in-regime from `n = 12` with `c = 0.9258`, slack `2.2` and not `52` | `§0.3`, `s3 (I3)` |
+> | 3 | the `§5` wall table had **no measured in-regime row**; `§4`'s hedge scoped `C₃^gap` to an out-of-regime population | `C₃^gap` is now **measured in regime**, and reaches `10` — where chain (IV) stops closing — at `n = 25` | `§0.5`, `§4` |
+> | 4 | *"monotonically"* / *"not because `n` is"* (`§0.2`, `s2 (R1)`) | monotonicity is a property of **the chosen partition**; uniform width-`0.01` re-binning of the same population breaks it, and `§3(b)` here already contradicts *"not because `n` is"* | `§0.2` |
+>
+> **The commit subject of `767c5a1` carries sentences 1, 2 and 4 verbatim and cannot be
+> rewritten without rewriting history.** It is superseded by this errata block and by the
+> repaired sections; where the two disagree, **the document is current and the commit
+> subject is not.**
+>
+> **AND THE STRUCTURAL FINDING, which is worth more than the four fixes:** `§1.2`
+> establishes that chain (IV) closes **iff** `min_k Q_k ≤ ε_leak` — and the `N'`
+> presentation printed `gap` and `c` and **dropped `min_k Q_k`**, the one column that
+> decides it. Had it been there, a reader would have seen `1/15, 1/34, 1/65, 1/111, 1/175,
+> 1/260` **twice over** and asked why two *"different"* families agree exactly in the
+> deciding number. The omission did not create the error; **it is why the error was not
+> visible on its face.** `s2 (R3)` now prints that column for both, and asserts equality
+> rather than inviting the comparison.
 
 ---
 
@@ -65,10 +96,24 @@ computation and a different eigenroutine.
 > | `[0.06, 0.10)` | 0.868532 | 0.858894 |
 > | `[0.00, 0.06)` | **0.988958** | **0.881084** |
 >
-> **`min c` falls because the GAP is large, not because `n` is.** The band nearest the
-> regime is the band where `c` is largest, at both `n`. *(The one band omitted above is
-> `[0.70, 1.01)`, and it is omitted from this summary table only — it is printed in `s2`,
-> it BREAKS the monotonicity at `0.673`/`0.556`, and it holds 14 and 38 posets at the
+> **`min c` rises as the band tightens, at both `n`, across the six bands below `0.70`.
+> THE DIRECTION IS ROBUST AND THE MONOTONICITY IS NOT: it is a property of THIS partition,
+> and finer uniform partitions of the same population break it.** Re-binned at uniform
+> width `0.01`, **32 of 63 adjacent pairs violate at `n = 6` and 32 of 73 at `n = 7`** —
+> and not only in the near-antichain tail named just below: **10 (`n = 6`) and 7 (`n = 7`)
+> have BOTH bands under gap `0.30`**, inside the low-gap region this reading rests on.
+> Largest such rise: `n = 6`, `[0.130, 0.140)` `0.824256` → `[0.140, 0.150)` `0.874508`
+> (`mg-00b3 §0.2`, on an instrument sharing no code with this one).
+>
+> **AND `c` FALLING IS NOT SHOWN TO BE THE GAP *RATHER THAN* `n`.** The stratification
+> shows the gap carries the direction; it does not clear `n`, and **§3(b) of this document
+> measures `min c` falling with `n` at a fixed gap cap** — `0.974 → 0.869 → 0.859` at
+> `ε = 0.10`. **Both effects are live, and both are measured in this document.**
+>
+> The band nearest the regime is the band where `c` is largest, at both `n`. *(The one
+> band omitted above is `[0.70, 1.01)`, and it is omitted from this summary table only —
+> it is printed in `s2`, it runs the other way at `0.673`/`0.556`, and it holds 14 and 38
+> posets at the
 > near-antichain end where `λ_std ≈ 0` and `c` is a ratio of two small numbers. It is the
 > farthest band from the regime; it does not disturb the reading, and it is named here so
 > the table is not choosing its rows to fit the sentence.)*
@@ -89,10 +134,31 @@ computation and a different eigenroutine.
 > | 14 | 0.005520070 | **YES** | `1/175` | 0.9998047 |
 > | 16 | 0.003743404 | **YES** | `1/260` | **0.9998969** |
 >
-> A second family (`(0, n−1)` removed instead) gives `0.9999555` at `n = 16`. **In the
-> regime `c` goes to 1, not to 0**, with `min_k Q_k = 1/260` against a requirement of `1/5`
-> — a factor of 52 of slack. **The ticket's premise survives on the only posets anyone has
-> exhibited inside the regime.**
+> A second **natural labelling of the same poset** (`(0, n−1)` removed instead of
+> `(a−1, a)`; the two are **isomorphic**, since `Aut(K_{a,a})` is transitive on its
+> relations) gives `0.9999555` at `n = 16`. It has the **SAME `min_k Q_k` at every `n`**
+> and differs only in the gap, because `M` mixes the element index with the **position**
+> index and so is not relabelling-invariant. **IT IS NOT INDEPENDENT EVIDENCE: the
+> exhibited class is ONE poset shape.** *(Explicit relabellings: `n = 6` under
+> `(1,2,0,5,3,4)`, `n = 8` under `(1,2,3,0,7,4,5,6)`; structural at every `n` from 6 to 16
+> — `mg-00b3 §0.3`. This is the errata's item 1.)*
+>
+> **In the regime `c` goes to 1, not to 0.** ⚠️ **But which figure you get depends on which
+> family, and this is the errata's item 2 — the sentence that used to stand here quantified
+> over *"the only posets anyone has exhibited inside the regime"*, and THAT SET HAS
+> GROWN.** The premise survives on the **near-complete-bipartite** family, where `c` is
+> `0.9999` and the slack on `min_k Q_k` is `1/260` against a requirement of `1/5` — **a
+> factor of 52**. It survives with **much less room** on the **staircase** `S_n`
+> (`i < j` iff `j ≥ i+2`), also primitive and also inside the budget from `n = 12`:
+> `min_k Q_k = 64/699`, `c = 0.9258259`, `ε_dem^(IV) = 0.135907`, **slack 2.2** — not 52.
+> **BOTH are inside the regime; the figure quoted depends on which family, and the
+> in-regime class is not exhausted by either.**
+>
+> *(`mg-00b3 §0.4` prints `ε_dem^(IV) = 0.135882` for this row. That is a slip in its
+> prose, not in its measurement: its own `a3` table gives `c = 0.9258259`, and
+> `1 − 0.8/0.9258259 = 0.135907`, stable against the last printed digit of the gap. The
+> corrected figure is the one carried here, and the difference — `2.5×10⁻⁵` — moves
+> nothing.)*
 >
 > ### 4. BUT THE PREMISE COSTS MORE THAN IT LOOKS, AND THIS IS THE PART THAT IS NEW: **`c` IS NOT AN INDEPENDENT UNKNOWN. IT IS `C₃^gap`.**
 >
@@ -139,9 +205,24 @@ primitive poset because `primitive ⟺ connected` — `s0 (G)`'s `DISC ⟺ CUT`,
 > | 3.075 (`n = 7`, **new**, out of regime) | 0.065041 | 15.4× |
 > | 10 (where chain (IV) stops closing) | 0.020000 | **50×** |
 >
-> **THE 5× REFRAMING IS THE `C₃^gap = 1` ROW AND ONLY THAT ROW.** It is the best case of the
-> one unknown, not a property of chain (IV). **The Cheeger square is not avoided by chain
-> (IV); it is refinanced, and `C₃^gap` is the interest rate.**
+> ⚠️ **Every row above is a hypothesis or an out-of-regime measurement. Three MEASURED
+> IN-REGIME rows now exist — exact rationals, every gap inside `ε_spec = 1/50`
+> (`mg-00b3 §4`); this is the errata's item 3:**
+>
+> | poset | **IN REGIME** | gap | `C₃^gap` | wall `= 5·C₃^gap` |
+> |---|---|---|---|---|
+> | `N(16)` — *this document's family* | **YES** | 0.003743 | 1.0275 | **5.1×** |
+> | `S_12` — *the staircase* | **YES** | 0.018778 | 4.8758 | **24.4×** |
+> | `S_25` — *the staircase* | **YES** | 0.004357 | 10.1654 | **50.8×** |
+>
+> **THE 5× REFRAMING IS THE `C₃^gap = 1` ROW AND ONLY THAT ROW.** And that row **is not
+> merely the extreme point: it is also the row this document's one in-regime family
+> happens to sit on.** A different in-regime family, primitive and exact, puts the same
+> wall at `24×` and then at `50.8×` — and `10` is the value this table names as where
+> chain (IV) stops closing, so **it is REACHED inside the budget at `n = 25`, and not only
+> in hypothesis.** The `5×` is the best case of the one unknown, not a property of chain
+> (IV). **The Cheeger square is not avoided by chain (IV); it is refinanced, and `C₃^gap`
+> is the interest rate.**
 >
 > ### 6. SO: IS `c > 0.80` ESTABLISHABLE? — **(c) OF THE TICKET'S THREE: NOT BOUNDED AWAY EITHER WAY, AND NOW WITH THE REASON.**
 >
@@ -152,8 +233,9 @@ primitive poset because `primitive ⟺ connected` — `s0 (G)`'s `DISC ⟺ CUT`,
 > corpus has now recorded five times, and it would have been the sixth had this ticket
 > stopped at its own sequencing directive.** What is left is (c), sharpened: **the class is
 > non-empty but unenumerable** — 0 of 86 277 at `n = 7`, first reached at `n = 10` — so `c`
-> in the regime is **UNMEASURED, not unmeasurable**, and the two families that reach it say
-> `0.9999`. Two families are not a class.
+> in the regime is **UNMEASURED, not unmeasurable**. The family this document exhibits says
+> `0.9999`; the staircase, in the same regime, says `0.9258`. **ONE family is not a class —
+> and this document's "two" are one poset under two labellings.**
 
 ---
 
@@ -246,6 +328,14 @@ naturally labelled population, at `n = 4` already, in exact rationals.
 
 `s2`. §0.2's band table, §0.3's in-regime families. Two further things belong here.
 
+⚠️ **Read (b) below against §0.2.** §0.2 used to say the fall is the gap *"and not `n`"*;
+(b) is this document's own measurement of `min c` falling with `n` at a fixed gap cap, and
+the two cannot both stand at full strength. §0.2 is repaired; (b) is unchanged and is why.
+Separately, §0.2's *monotonicity* across the six bands is a property of **that partition** —
+uniform width-`0.01` re-binning of this same population breaks it at 32 of 63 adjacent pairs
+(`n = 6`) and 32 of 73 (`n = 7`), 10 and 7 of those with **both** bands under gap `0.30`
+(`mg-00b3 §0.2`). **The direction survives; the monotonicity is a choice of bins.**
+
 **(a) The envelope of the actual requirement.** `max min_k Q_k` over `{gap ≤ ε}`, against
 the `0.2` that chain (IV) needs:
 
@@ -289,8 +379,20 @@ not vacuous:** a chain (IV) deliberately mis-derived so that it *does* pay a Che
 **`max C₃^gap` by `n`, reproducing `mg-76b2` and extending it:** `1.500, 1.473, 1.990,
 2.386` at `n = 3..6` (`mg-76b2`'s, matched) and **`3.075` at `n = 7`** (new). ⚠️ **This is
 the SAME measurement as §2's falling `min c`, read in the other currency, on the SAME
-out-of-regime population.** It is a direction in both currencies and a verdict in neither,
-and quoting one as corroboration of the other would be quoting one number twice.
+out-of-regime population**, so quoting one as corroboration of the other would be quoting
+one number twice.
+
+⚠️ **THE HEDGE THAT STOOD HERE — that this rise is "a direction in both currencies and a
+verdict in neither" — NO LONGER COVERS `C₃^gap`, and this is the errata's item 3.** It
+remains true of **these rows**, which are out of regime at every `n`. It is not true of
+`C₃^gap` as such: the maximisers of this very row are themselves a family — the staircase
+`S_n`, `i < j` iff `j ≥ i+2` — and `S_n` is primitive, is inside `ε_spec = 1/50` from
+`n = 12` with `C₃^gap = 4.8758` there, and reaches `10.1654` at `n = 25`, in exact
+rationals (`mg-00b3 §0.4`, seventeen in-regime points `n = 12..28`). **Inside the regime
+`C₃^gap` is now measured, not extrapolated**, and §0.5 carries the three rows.
+`C₃^gap(S_n) → ∞` is **not** proven — that needs an asymptotic for `λ₂(S_n)` uniform in
+`n`, exactly the line this document refuses to cross for `c(D_k) → 0` — but the crossing of
+`10` needs no limit, only the one exact in-regime witness, and it has one.
 
 ---
 
@@ -313,6 +415,17 @@ and quoting one as corroboration of the other would be quoting one number twice.
   instrument's `README`: the ticket body printed `mg-76b2`'s four `min c` figures, the two
   thresholds and chain (IV)'s formula verbatim, so §2's reproduction is a **check**, and only
   §3 and §4 are findings.
+- **NO INDEPENDENT AUDIT OF THE POST-LANDING REPAIRS, DELIBERATELY** (`mg-b3ab`). The four
+  errata are a **stating-and-scoping repair**, and every replacement figure was supplied by
+  an independent audit that has itself landed (`mg-00b3`, `8eec6d2`) on an instrument
+  sharing no code with this one. That makes them a **chore**, not a claim, per the
+  `2026-08-07` tightening. **What was NOT taken on trust:** the isomorphism `N ≅ N'` is now
+  exhibited and *asserted* on **this** instrument at every `n = 6..16`, with a live negative
+  arm; the equality of `min_k Q_k` is asserted rather than eyeballed; and `mg-00b3`'s prose
+  figure `ε_dem^(IV)(S_12) = 0.135882` was **recomputed and corrected to `0.135907`** before
+  being carried here. The staircase's own rows (`gap`, `C₃^gap`, `c` at `n = 12..28`) are
+  **cited, not reproduced** — they are `mg-00b3`'s measurement and are labelled as such at
+  every occurrence.
 - **One defect of my own, caught by a control before publication and kept in the history:**
   this instrument's module docstring wrote the central identity as `c = (1−minQ)/λ₂` where
   the truth is `(1−minQ)/(1−λ₂)`, and `c_bracket` inherited the slip from the prose while
