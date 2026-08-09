@@ -1,0 +1,49 @@
+=== b3: explicit L2-free test vectors ===
+
+[EXACT] R(g_pos) == 6 E[sum_i (i-pos(i))^2] / (n(n^2-1)) == 1 - E[Spearman rho]:
+        0 exceptions over all 5230 posets, n = 2..6
+
+--- n = 2:  1 PRIMITIVE posets (decomposable excluded: 1-lambda_std = 0 there) ---
+        control (d): the cone minimum never fell below the unconstrained minimum.  0 violations.
+   [EXACT] g_pos   certifies C_3 <= c at ... / 1
+           c=    1:    1  c=11/10:    1  c=  5/4:    1  c=  3/2:    1  c=    2:    1  c=    3:    1  c=    5:    1  c=   10:    1
+   [EXACT] g_sort  certifies C_3 <= c at ... / 1
+           c=    1:    1  c=11/10:    1  c=  5/4:    1  c=  3/2:    1  c=    2:    1  c=    3:    1  c=    5:    1  c=   10:    1
+   [EXACT] g_cone  certifies C_3 <= c at ... / 1
+           c=    1:    1  c=11/10:    1  c=  5/4:    1  c=  3/2:    1  c=    2:    1  c=    3:    1  c=    5:    1  c=   10:    1
+
+--- n = 3:  4 PRIMITIVE posets (decomposable excluded: 1-lambda_std = 0 there) ---
+        control (d): the cone minimum never fell below the unconstrained minimum.  0 violations.
+   [EXACT] g_pos   certifies C_3 <= c at ... / 4
+           c=    1:    4  c=11/10:    4  c=  5/4:    4  c=  3/2:    4  c=    2:    4  c=    3:    4  c=    5:    4  c=   10:    4
+   [EXACT] g_sort  certifies C_3 <= c at ... / 4
+           c=    1:    4  c=11/10:    4  c=  5/4:    4  c=  3/2:    4  c=    2:    4  c=    3:    4  c=    5:    4  c=   10:    4
+   [EXACT] g_cone  certifies C_3 <= c at ... / 4
+           c=    1:    4  c=11/10:    4  c=  5/4:    4  c=  3/2:    4  c=    2:    4  c=    3:    4  c=    5:    4  c=   10:    4
+
+--- n = 4:  27 PRIMITIVE posets (decomposable excluded: 1-lambda_std = 0 there) ---
+        control (d): the cone minimum never fell below the unconstrained minimum.  0 violations.
+   [EXACT] g_pos   certifies C_3 <= c at ... / 27
+           c=    1:   27  c=11/10:   27  c=  5/4:   27  c=  3/2:   27  c=    2:   27  c=    3:   27  c=    5:   27  c=   10:   27
+   [EXACT] g_sort  certifies C_3 <= c at ... / 27
+           c=    1:   27  c=11/10:   27  c=  5/4:   27  c=  3/2:   27  c=    2:   27  c=    3:   27  c=    5:   27  c=   10:   27
+   [EXACT] g_cone  certifies C_3 <= c at ... / 27
+           c=    1:   27  c=11/10:   27  c=  5/4:   27  c=  3/2:   27  c=    2:   27  c=    3:   27  c=    5:   27  c=   10:   27
+
+--- n = 5:  275 PRIMITIVE posets (decomposable excluded: 1-lambda_std = 0 there) ---
+        control (d): the cone minimum never fell below the unconstrained minimum.  0 violations.
+   [EXACT] g_pos   certifies C_3 <= c at ... / 275
+           c=    1:  205  c=11/10:  229  c=  5/4:  249  c=  3/2:  271  c=    2:  275  c=    3:  275  c=    5:  275  c=   10:  275
+   [EXACT] g_sort  certifies C_3 <= c at ... / 275
+           c=    1:  275  c=11/10:  275  c=  5/4:  275  c=  3/2:  275  c=    2:  275  c=    3:  275  c=    5:  275  c=   10:  275
+   [EXACT] g_cone  certifies C_3 <= c at ... / 275
+           c=    1:  275  c=11/10:  275  c=  5/4:  275  c=  3/2:  275  c=    2:  275  c=    3:  275  c=    5:  275  c=   10:  275
+
+--- n = 6:  4070 PRIMITIVE posets (decomposable excluded: 1-lambda_std = 0 there) ---
+        control (d): the cone minimum never fell below the unconstrained minimum.  0 violations.
+   [EXACT] g_pos   certifies C_3 <= c at ... / 4070
+           c=    1: 2590  c=11/10: 3031  c=  5/4: 3402  c=  3/2: 3757  c=    2: 3995  c=    3: 4070  c=    5: 4070  c=   10: 4070
+   [EXACT] g_sort  certifies C_3 <= c at ... / 4070
+           c=    1: 4029  c=11/10: 4061  c=  5/4: 4069  c=  3/2: 4070  c=    2: 4070  c=    3: 4070  c=    5: 4070  c=   10: 4070
+   [EXACT] g_cone  certifies C_3 <= c at ... / 4070
+           c=    1: 4070  c=11/10: 4070  c=  5/4: 4070  c=  3/2: 4070  c=    2: 4070  c=    3: 4070  c=    5: 4070  c=   10: 4070

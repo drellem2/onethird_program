@@ -1,0 +1,41 @@
+=== b1: the footrule identity and the bound it gives ===
+
+n=2 [EXHAUSTIVE, 2 posets]
+   [EXACT] identity  sum_k leak(A_k) == E[footrule]/2 : 2/2 hold
+   [EXACT] bound     Phi*_pref <= E[footrule]/(2*floor(n^2/4)) : 2/2 hold
+n=3 [EXHAUSTIVE, 7 posets]
+   [EXACT] identity  sum_k leak(A_k) == E[footrule]/2 : 7/7 hold
+   [EXACT] bound     Phi*_pref <= E[footrule]/(2*floor(n^2/4)) : 7/7 hold
+n=4 [EXHAUSTIVE, 40 posets]
+   [EXACT] identity  sum_k leak(A_k) == E[footrule]/2 : 40/40 hold
+   [EXACT] bound     Phi*_pref <= E[footrule]/(2*floor(n^2/4)) : 40/40 hold
+n=5 [EXHAUSTIVE, 357 posets]
+   [EXACT] identity  sum_k leak(A_k) == E[footrule]/2 : 357/357 hold
+   [EXACT] bound     Phi*_pref <= E[footrule]/(2*floor(n^2/4)) : 357/357 hold
+n=6 [EXHAUSTIVE, 4824 posets]
+   [EXACT] identity  sum_k leak(A_k) == E[footrule]/2 : 4824/4824 hold
+   [EXACT] bound     Phi*_pref <= E[footrule]/(2*floor(n^2/4)) : 4824/4824 hold
+n=7 [named + deterministic sample, 98 posets]
+   [EXACT] identity  sum_k leak(A_k) == E[footrule]/2 : 98/98 hold
+   [EXACT] bound     Phi*_pref <= E[footrule]/(2*floor(n^2/4)) : 98/98 hold
+
+--- does the footrule bound reach the target Phi*_pref^2 <= 2(1-lambda_std)? ---
+    (the question is whether E[footrule]/(2 floor(n^2/4)) is itself below sqrt(2(1-lambda_std)))
+
+n=2:  PRIMITIVE 1/1 certified by the footrule route;  DECOMPOSABLE 1/1 (chains among them: 1)
+n=3:  PRIMITIVE 4/4 certified by the footrule route;  DECOMPOSABLE 1/3 (chains among them: 1)
+n=4:  PRIMITIVE 27/27 certified by the footrule route;  DECOMPOSABLE 1/13 (chains among them: 1)
+n=5:  PRIMITIVE 275/275 certified by the footrule route;  DECOMPOSABLE 1/82 (chains among them: 1)
+n=6:  PRIMITIVE 4070/4070 certified by the footrule route;  DECOMPOSABLE 1/754 (chains among them: 1)
+
+--- HOW MUCH MARGIN? f* = max over PRIMITIVE posets of ---
+    [E[footrule]/(2 floor(n^2/4))]^2 / (2(1-lambda_std)),  bracketed EXACTLY ---
+    n=2 [EXHAUSTIVE,     1 primitive]:  f* in [0.12500, 0.12500]   <-- f* < 1 means the route certifies C_3 = 1 at EVERY member
+    n=3 [EXHAUSTIVE,     4 primitive]:  f* in [0.25000, 0.25000]   <-- f* < 1 means the route certifies C_3 = 1 at EVERY member
+    n=4 [EXHAUSTIVE,    27 primitive]:  f* in [0.30625, 0.30625]   <-- f* < 1 means the route certifies C_3 = 1 at EVERY member
+    n=5 [EXHAUSTIVE,   275 primitive]:  f* in [0.55075, 0.55075]   <-- f* < 1 means the route certifies C_3 = 1 at EVERY member
+    n=6 [EXHAUSTIVE,  4070 primitive]:  f* in [0.81165, 0.81165]   <-- f* < 1 means the route certifies C_3 = 1 at EVERY member
+    n=7 [named + sample,   106 primitive]:  f* in [0.83253, 0.83253]   <-- f* < 1 means the route certifies C_3 = 1 at EVERY member
+
+    P10 confirmed as predicted: on decomposable posets the route certifies exactly the chains,
+    for the reason filed in advance — 1-lambda_std = 0 there, so only E[footrule] = 0 can pass.
