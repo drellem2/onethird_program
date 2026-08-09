@@ -14,7 +14,7 @@ A. eps_dem AT THE PARAMETERS EACH CHAIN IS ACTUALLY AVAILABLE AT
 ------------------------------------------------------------------------------
 chain            eps_dem     decimal   tight?  parameters
 (I)                1/50    0.020000      yes  no free parameter
-(III)                1/50    0.020000      yes  C_3 = 1, PROVEN under L2 (mg-76b2, audited)
+(III)                1/50    0.020000      yes  C_3 = 1, PROVEN on L2's FIRST DISJUNCT (mg-76b2, audited; scope mg-fa70/mg-3329)
 (III)               1/100    0.010000      yes  C_3 = 2, hypothetical
 (II)                2/15    0.133333      yes  C_3^gap = 3/2, the n=3 MEASUREMENT (mg-94c3)
 (II)            100/1193    0.083822      yes  C_3^gap = 2.386, the n=6 MEASUREMENT — and RISING
@@ -31,7 +31,7 @@ B. E3 GUARD — chain (II) at C_3 = 1 must REFUSE
 ------------------------------------------------------------------------------
 REFUSED, as designed:
    E3 GUARD: refusing to evaluate chain (II) at C_3 = 1
-   `C_3 = 1` is PROVEN (under L2) only in chain (III)'s currency `Phi_pref <= sqrt(2 C_3 eps_spec)`
+   `C_3 = 1` is PROVEN (on L2's FIRST DISJUNCT) only in chain (III)'s currency `Phi_pref <= sqrt(2 C_3 eps_spec)`
    The gap-form constant this chain carries is measured at 1.500, 1.473, 1.990, 2.386 over n = 3..6 and exceeds 1 at 1023 of 1032 posets (mg-94c3 s3)
    Substituting 1 here is FALSE, not merely unlicensed.
 
@@ -98,7 +98,7 @@ Supply: pair bias PROVES 1 - lambda_std <= eps_sup, and
 
 chain          eps_dem   eps_sup/eps_dem  parameters
 (I)              1/50                50  no free parameter
-(III)              1/50                50  C_3 = 1, PROVEN under L2 (mg-76b2, audited)
+(III)              1/50                50  C_3 = 1, PROVEN on L2's FIRST DISJUNCT (mg-76b2, audited; scope mg-fa70/mg-3329)
 (III)             1/100               100  C_3 = 2, hypothetical
 (II)              2/15              15/2  C_3^gap = 3/2, the n=3 MEASUREMENT (mg-94c3)
 (II)          100/1193          1193/100  C_3^gap = 2.386, the n=6 MEASUREMENT — and RISING

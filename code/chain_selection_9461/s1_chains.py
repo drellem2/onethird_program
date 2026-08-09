@@ -72,18 +72,37 @@ def _ii_guard(C3, unlicensed):
     if C3 == 1 and not unlicensed:
         raise ValueError(
             "E3 GUARD: refusing to evaluate chain (II) at C_3 = 1. "
-            "`C_3 = 1` is PROVEN (under L2) only in chain (III)'s currency "
+            "`C_3 = 1` is PROVEN (on L2's FIRST DISJUNCT) only in chain (III)'s currency "
             "`Phi_pref <= sqrt(2 C_3 eps_spec)`. The gap-form constant this "
             "chain carries is measured at 1.500, 1.473, 1.990, 2.386 over "
             "n = 3..6 and exceeds 1 at 1023 of 1032 posets (mg-94c3 s3). "
             "Substituting 1 here is FALSE, not merely unlicensed.")
 
 
+# SCOPE REPAIR, mg-3329 (LABELS ONLY — NO MATHEMATICS RE-OPENED).  Three
+# strings in this file said "under L2" / "either disjunct" where the truth is
+# "L2's FIRST disjunct": chain (I)'s `needs`, chain (III)'s row label, and the
+# E3 guard message.  `L2` is a DISJUNCTION, so those spellings asserted the
+# unestablished half (mg-fa70, after mg-39bf s2.2).  No formula, parameter,
+# population or verdict is touched.  VERIFIED, not asserted: this script
+# reproduced `out_s1_chains.txt` BYTE-IDENTICALLY before the edit, and after it
+# the diff is exactly three lines, all of them label text, with every number
+# unchanged.  mg-9461's ruling is NOT re-opened.
 CHAINS = [
     Chain("I", "monotone sweep",
           lambda s, **kw: 2 * s,
           lambda L, **kw: L ** 2 / 2,
-          "L2 (either disjunct) — Step 3 as written"),
+          # mg-3329 (on mg-fa70 §3.3): this read "L2 (either disjunct) — Step 3
+          # as written".  Chain (I) is the C_3-FREE chain (eps_dem =
+          # eps_leak^2/2), so on L2's SECOND disjunct that label asserted
+          # precisely the unestablished half: there the delivered prefix's own
+          # constant is L2's and is UNNAMED IN THE SOURCE, i.e. an effective
+          # C_3 = K^2/2, not 1.  LABEL ONLY — `needs` is never printed and no
+          # number in this directory moves (see the note above CHAINS).
+          "L2's FIRST DISJUNCT — Step 3 as written. On L2's SECOND disjunct "
+          "this chain is NOT established: the prefix is the output, so there "
+          "is no CONVERSION to charge for, but its constant is L2's own and "
+          "is unnamed in the source (mg-fa70, mg-39bf s2.2)"),
     Chain("II", "gap-form prefix capture",
           lambda s, C3=None, unlicensed=False: (_ii_guard(C3, unlicensed),
                                                 (C3 * s) ** 2)[1],
@@ -131,7 +150,8 @@ def main():
     line("-" * 78)
     rows = [
         ("I",   {},                    "no free parameter"),
-        ("III", {"C3": F(1)},          "C_3 = 1, PROVEN under L2 (mg-76b2, audited)"),
+        ("III", {"C3": F(1)},          "C_3 = 1, PROVEN on L2's FIRST DISJUNCT "
+                                       "(mg-76b2, audited; scope mg-fa70/mg-3329)"),
         ("III", {"C3": F(2)},          "C_3 = 2, hypothetical"),
         ("II",  {"C3": F(3, 2), "unlicensed": False},
          "C_3^gap = 3/2, the n=3 MEASUREMENT (mg-94c3)"),
