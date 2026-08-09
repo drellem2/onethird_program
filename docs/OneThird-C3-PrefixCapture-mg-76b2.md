@@ -1,4 +1,4 @@
-# OneThird — `C₃` IS NOT AN INDEPENDENT UNKNOWN. It is `1` **IN CHAIN (III)'s CURRENCY — the loss inside the Cheeger square, `Φ_pref ≤ √(2C₃ε_spec)`, which is `Op-Form §4.3`'s displayed relation** — under the lemma the architecture already requires; **CHAIN (II) DOES NOT INHERIT IT — the gap-form `C₃` is NOT 1 under L2, it is measured at `1.500, 1.473, 1.990, 2.386` and RISING**; and the reading Op-Form calls "too weak to use" is usable
+# OneThird — `C₃` IS NOT AN INDEPENDENT UNKNOWN. It is `1` **IN CHAIN (III)'s CURRENCY — the loss inside the Cheeger square, `Φ_pref ≤ √(2C₃ε_spec)`, which is `Op-Form §4.3`'s displayed relation** — under the lemma the architecture already requires, **ON THAT LEMMA's FIRST DISJUNCT** (`mg-fa70`; on the second the constant is RELOCATED into L2's own unnamed "low-conductance", not eliminated — §12); **CHAIN (II) DOES NOT INHERIT IT — the gap-form `C₃` is NOT 1 under L2, it is measured at `1.500, 1.473, 1.990, 2.386` and RISING**; and the reading Op-Form calls "too weak to use" is usable
 
 **Work item.** `mg-76b2` (repo `onethird_program`). Filed by `pm-onethird` as the item
 `mg-845e` reserved and declined to attempt.
@@ -18,6 +18,17 @@ with the instrument's `c ≥ 40/49 = 0.8163`; `C3` records that §7's `C₃^cut`
 its monotonicity census `1890 / 3340 / 0` is the correct one and the auditor's is the
 conservative one. **The theorem, §6, §7 and all 16/16 of §7's independently reproduced
 figures stand unchanged.**
+**Amended again at `mg-fa70`, after `mg-39bf` §2.2/§2.4 (audit of `mg-9461`) and the companion
+repair `mg-fd7c` (`c20ad80`) traced the phrase *"under either disjunct of L2"* back to THIS
+document as its ORIGIN.** Twelve **scope clauses** qualified — §0 (headline and body), §3 (theorem
+header and its `PROVEN` label), §4 (item 2, clause (b), the L3 closing), §9 (ledger rows 6, 7, 8),
+§10 (both proposals) — plus a new **§12** recording the full sweep, the sites checked and
+deliberately left, and three inheriting sites outside this document that are flagged rather than
+edited. **On L2's SECOND disjunct the constant is RELOCATED into L2's own unnamed
+*"low-conductance"*, not eliminated**, so *"either disjunct"* asserted more than the second
+disjunct supports. **Nothing this document proves has changed:** §3's theorem was proved on L2's
+first disjunct in its own first sentence before this amendment and is audited there by `mg-94c3`
+at `1032/1032`; no step, constant, count, figure or table moves, and no claim is withdrawn.
 
 > **CURRENCY BANNER — READ BEFORE QUOTING ANY `C₃` FROM THIS DOCUMENT (`mg-94c3` `C1`).**
 > Every unqualified `C₃ = 1` here means `C₃^(III)`: *there is a prefix `A_k` with
@@ -39,10 +50,25 @@ figures stand unchanged.**
 
 ## 0. Verdict
 
-> **`C₃ = 1`, uniformly in `n`, under either disjunct of L2 — IN CHAIN (III)'s CURRENCY,
+> **`C₃ = 1`, uniformly in `n`, ON L2's FIRST DISJUNCT — IN CHAIN (III)'s CURRENCY,
 > `Φ_pref ≤ √(2C₃ε_spec)`, WHICH IS `Op-Form §4.3`'s DISPLAYED RELATION AND IS THE ONLY ONE
 > OF THE THREE IN WHICH IT IS UNIFORMLY 1 — and L2 is Step 3 of the architecture, already required,
 > already on the programme's own list of open lemmas.**
+>
+> *(`mg-fa70`, applying `mg-39bf` §2.2/§2.4: this read **"under either disjunct of L2"**, and
+> that is the one clause in this document that asserts more than it proves. **On the SECOND
+> disjunct the constant is RELOCATED, not eliminated.** What that disjunct establishes is that
+> there is **no conversion step to charge for** — the prefix is the output, so L3 never runs.
+> What it does **not** establish is that the delivered prefix meets `Φ_pref ≤ √(2ε_spec)` rather
+> than `K√(ε_spec)`; a direct prefix theorem at `K` is an effective `C₃ = K²/2`. The constant has
+> moved into L2's own unnamed **"low-conductance"**, under a source preamble that requires the
+> lemmas be established **"with adequate constants"** (`:552–553`) and a source Remark that names
+> the alternative as *"a direct prefix theorem"* (`:327–331`) — with no constant anywhere in the
+> 603 lines. **BOTH BRANCHES STAY VISIBLE, and neither is struck:** on the first disjunct `C₃ = 1`
+> is **PROVEN** (§3, audited `mg-94c3` at `1032/1032`); on the second, `C₃` as a **conversion**
+> loss is genuinely absent and the chain's constant is **UNQUANTIFIED** under a different name.
+> Nothing in §3's theorem, §6, §7 or any figure moves — what is qualified is the **SCOPE CLAUSE**,
+> not the result.)*
 >
 > **And that currency qualification is load-bearing, not pedantry.** `C₃ = 1` is a statement
 > about the loss spent *inside* the Cheeger square. **It is NOT 1 in the gap-form
@@ -67,7 +93,14 @@ figures stand unchanged.**
 > sweep visits **is already a prefix or a suffix**, and `Φ_P` is a function of the cut, not
 > of the side. "Restricting the Cheeger sweep to prefixes" therefore costs a factor of
 > **exactly 1**. Under L2's *second* disjunct ("or at least yields a low-conductance
-> prefix") there is no `C₃` either, because the prefix is the output.
+> prefix") there is no `C₃` **as a conversion loss**, because the prefix is the output and
+> L3 never runs — **but that is where the constant moves to, not where it ends** (`mg-fa70`,
+> after `mg-39bf` §2.2). The chain still needs the delivered prefix to satisfy
+> `Φ_pref ≤ √(2ε_spec)`; a direct prefix theorem yielding `Φ_pref ≤ K√(ε_spec)` gives
+> `ε_dem = ε_leak²/K²`, an effective `C₃ = K²/2`. The source names no `K`: *"low-conductance"*
+> is unquantified at all five of its occurrences, and the preamble to the open-lemma list
+> requires them established *"with adequate constants"*. **So the `C₃`-free chain below is a
+> FIRST-DISJUNCT statement.**
 >
 > **So `ε_dem = ε_leak²/2` with no `C₃` in it — which is `2×10⁻²`, the figure `STATE.md`
 > already carries.** `STATE.md:164`'s rider that *"the live `ε_spec ≲ 2×10⁻²` is the
@@ -243,7 +276,12 @@ machine-checked on 1435 threshold sets over 301 monotone rational functions, `n 
 > produced three spurious "monotone sweeps landing outside the prefix family". **An
 > order-slice is not a level set.** The sets were the artifact; the theorem was not.
 
-### THEOREM. Under L2, `C₃^(III) = 1`, uniformly in `n` — in chain (III)'s currency, `Φ_pref ≤ √(2C₃ε_spec)`, and in that one only.
+### THEOREM. Under L2's FIRST disjunct, `C₃^(III) = 1`, uniformly in `n` — in chain (III)'s currency, `Φ_pref ≤ √(2C₃ε_spec)`, and in that one only.
+
+*(`mg-fa70`: the header read "Under L2". The proof below assumes the **first** disjunct in its
+own first sentence and always did; the header covered both. Retitled so the hypothesis in the
+header is the hypothesis in the proof. **The theorem is unchanged** — no step, constant or count
+moves.)*
 
 *Assume L2's first disjunct: some dominant standard eigenvector `v` is monotone along `e`.
 Then Lemma 3.1 produces a threshold set `S` of `v` with `|S| ≤ n/2` and
@@ -255,7 +293,10 @@ $$\Delta_1(A_k,A_k^c)\;=\;\Phi_P(A_k)\;\le\;\sqrt{2(1-\lambda_{\mathrm{std}})}\;
 
 *L3's "quantitatively controlled loss" is a factor of **exactly 1**, and `Step 4`'s
 `Φ_P(A_k) ≲ √ε` is recovered verbatim, constant `√2`. Under L2's second disjunct the
-prefix is the output and there is no conversion to charge for at all.* **[PROVEN, given L2 —
+prefix is the output and there is no **conversion** to charge for at all — but the delivered
+prefix's own constant is then L2's to supply and the source does not name it, so the second
+disjunct is **outside** this theorem's hypothesis rather than a second branch of it
+(`mg-fa70`, after `mg-39bf` §2.2).* **[PROVEN, given L2's FIRST disjunct —
 in chain (III)'s currency. The displayed conclusion is a statement about `Φ_P(A_k)` under a
 square root, which is what chain (III) consumes; it says nothing about the gap-form
 `1−ρ_pref ≤ C₃(1−λ_std)` of chain (II), whose constant `mg-94c3 §3` measures at `> 1` at
@@ -285,7 +326,10 @@ usable strength. Both."*
 
 **Clause (b) is discharged in the form `mg-845e` itself names** — its second unblock
 disjunct, *"a demonstration that `ε_dem` can be reached WITHOUT `C₃`"*. `ε_dem = ε_leak²/2`
-follows from L2 alone.
+follows from **L2's first disjunct** alone. *(`mg-fa70`: this read "from L2 alone". On the
+second disjunct the same figure needs the delivered prefix to satisfy `Φ_pref ≤ √(2ε_spec)`,
+which L2's own wording does not state; the discharge is therefore **first-disjunct**, and the
+second disjunct discharges clause (b) only up to L2's own unnamed constant.)*
 
 **And it is not a shell game, for three reasons.**
 
@@ -293,9 +337,17 @@ follows from L2 alone.
    open lemmas (`:560–562`). The chain cannot reach a prefix without it under *any*
    reading. Prefix-capture, by contrast, is an additional empirical conjecture from a
    section titled *"Empirical structural conjectures"*.
-2. **Both disjuncts of L2 kill `C₃`.** Monotonicity gives `C₃ = 1`; "or directly produce a
-   low-conductance prefix" gives no `C₃` at all. There is no branch of L2 under which a
-   separate `C₃` has to be quantified.
+2. **Both disjuncts of L2 remove `C₃` as a SEPARATE LEMMA'S constant; only the first
+   supplies its VALUE.** Monotonicity gives `C₃ = 1`, proven. *"Or directly produce a
+   low-conductance prefix"* gives no `C₃` **in L3** — L3 never runs — but the constant
+   reappears inside L2's own *"low-conductance"*, unnamed in the source, so on that branch
+   the chain still needs a constant and does not have one. **The corrected form of this
+   item (`mg-fa70`, after `mg-39bf` §2.2/§2.4): there is no branch of L2 under which `C₃`
+   has to be bought as a THIRD open statement — but on the second branch it has to be
+   bought as part of L2, and the earlier wording *"both disjuncts kill `C₃`"* asserted more
+   than that.** `mg-39bf` §2.3's row for chain (III) splits exactly this way: first
+   disjunct — needs a lemma, needs **no** constant; second disjunct — needs a lemma **and**
+   a constant, namely the lemma's own unnamed loss.
 3. **The route that pays `C₃` is strictly worse.** It proves neither disjunct of L2 and
    invokes an extra open conjecture on top, and — §6 — under the reading `§4.3`'s displayed
    relation belongs to, it charges the prefix loss *and* the Cheeger square.
@@ -304,9 +356,14 @@ So the honest bookkeeping is: **`mg-845e`'s gate list shrinks from `{ε₀, C₃
 `{ε₀, L2}`, and the number of unquantified constants in the chain drops by one.** L2 is not
 proved here and this document does not claim it is.
 
-**L3 is not an independent lemma.** Given L2, L3 holds with loss 1. The programme has four
-main open lemmas and **three independent ones**; L3 as stated is a consequence of L2 and
-should be recorded as such rather than carried as a separate unquantified constant.
+**L3 is not an independent lemma.** Given L2's **first** disjunct, L3 holds with loss 1;
+given the **second**, L3 is not needed at all because its output is L2's. Either way the
+programme has four main open lemmas and **three independent ones**, and L3 as stated should
+not be carried as a separate lemma. *(`mg-fa70`: this read "Given L2, L3 holds with loss 1",
+which is a first-disjunct statement wearing an all-of-L2 scope. **The count survives on both
+branches; the LOSS `= 1` does not.** On the second branch L3's constant is not discharged, it
+is absorbed into L2 — so "not a separate unquantified constant" is true of the LEMMA COUNT and
+false of the CONSTANT COUNT there. See `mg-39bf` §2.3.)*
 
 ---
 
@@ -403,7 +460,9 @@ it ("the best cut and best prefix Rayleigh quotients").
 `(III)` at `C₃ = 1` **is** `(I)`. So the ticket's relation is the `C₃`-free chain with a
 factor `C₃` inserted at the one place the `C₃`-free chain does not have one — correct
 bookkeeping *if and only if* the prefix restriction really does degrade the gap, which
-under L2 it does not. **This row, and only this row, is where §3's theorem sets `C₃` to 1.
+under **L2's first disjunct** it does not — and on the second disjunct there is no prefix
+*restriction* to degrade anything, because the prefix is the output, so the row's `C₃` is
+not `1` there but **unnamed** (`mg-fa70`, §12). **This row, and only this row, is where §3's theorem sets `C₃` to 1.
 Row (II) keeps its own `C₃`, which is a different number and is not 1** — see the currency
 banner at the head of this document and `mg-94c3 §3`.
 
@@ -524,9 +583,9 @@ existed.)*
 | 3 | Cheeger's hard half is proved by sweeping threshold sets of `v`, `\|S\| ≤ n/2` | 3.1 | **PROVEN** (standard; written out because the source quotes only the inequality) |
 | 4 | `\|A∖σ(A)\| = \|Aᶜ∖σ(Aᶜ)\|`, so `Φ_P` is a function of the cut | 3.2 | **PROVEN**, 0/48616 exact |
 | 5 | monotone `v` ⟹ every threshold set is a prefix or a suffix | 3.3 | **PROVEN** |
-| 6 | **L2 ⟹ `C₃^(III) = 1`, uniformly in `n` — in chain (III)'s currency, `Φ_pref ≤ √(2C₃ε_spec)`, and in that one only. Chain (II)'s gap-form `C₃` does NOT inherit it** | 3, 6 | **PROVEN, CONDITIONAL on L2** — L2 is open. Currency confirmed at 1032/1032 primitive posets exhibiting L2, worst ratio `0.2603`; the gap-form `C₃` exceeds 1 at **1023 of those same 1032** (`mg-94c3 §3`), so the (II)-substitution is **false**, not merely unlicensed |
-| 7 | L2's second disjunct also removes `C₃`; both disjuncts do | 4 | **PROVEN** (reading of `:560–562`) |
-| 8 | L3 is a consequence of L2, not an independent lemma | 4 | **PROVEN, CONDITIONAL on L2** |
+| 6 | **L2's FIRST disjunct ⟹ `C₃^(III) = 1`, uniformly in `n` — in chain (III)'s currency, `Φ_pref ≤ √(2C₃ε_spec)`, and in that one only. Chain (II)'s gap-form `C₃` does NOT inherit it** | 3, 6 | **PROVEN, CONDITIONAL on L2's FIRST disjunct** — L2 is open. Currency confirmed at 1032/1032 primitive posets exhibiting L2's first disjunct, worst ratio `0.2603`; the gap-form `C₃` exceeds 1 at **1023 of those same 1032** (`mg-94c3 §3`), so the (II)-substitution is **false**, not merely unlicensed. *(`mg-fa70`: the antecedent read "L2". The audited `1032/1032` population is the FIRST-disjunct one and always was, so no figure moves — the row's hypothesis now matches the population it cites.)* |
+| 7 | **SPLIT BY DISJUNCT (`mg-fa70`, after `mg-39bf` §2.2).** (a) L2's second disjunct removes `C₃` **as L3's conversion loss** — the prefix is the output, so L3 never runs. (b) It does **NOT** remove the constant from the chain: the delivered prefix must still meet `Φ_pref ≤ √(2ε_spec)`, and a direct prefix theorem at `Φ_pref ≤ K√(ε_spec)` is an effective `C₃ = K²/2` | 4 | (a) **PROVEN** (reading of `:560–562`). (b) **NOT ESTABLISHED — the constant is RELOCATED, not eliminated.** The source names no `K`: *"low-conductance"* appears 5× in 603 lines and is unquantified at every one, the open-lemma preamble requires *"adequate constants"* (`:552–553`), and the Remark at `:327–331` names the alternative as *"a direct prefix theorem"*. **This row previously read *"L2's second disjunct also removes `C₃`; both disjuncts do — PROVEN"*, and that is the ledger entry every downstream *"either disjunct"* cited as its licence** |
+| 8 | L3 is a consequence of L2, not an independent lemma — **the LEMMA count falls on both disjuncts; the CONSTANT is discharged only on the first** | 4 | **PROVEN, CONDITIONAL on L2**, in the split form: on the first disjunct L3 holds with loss `1`; on the second L3 is bypassed and its constant is absorbed into L2's own *"low-conductance"* rather than discharged (row 7(b)). *(`mg-fa70`: the claim as written is true on both branches and is **not** withdrawn; what is added is that "not an independent lemma" does not imply "not an independent constant" on the second branch.)* |
 | 9 | `ε_dem = ε_leak²/2 = 2×10⁻²`, `C₃`-free | 3, 6 | **CONDITIONAL** on 6 and on `ε_leak ≈ 0.20`, which is **HEURISTIC** |
 | 10 | `STATE.md:164`'s "the omission runs optimistic" rider is wrong; the `C₃ = 1` value is the correct one | 0 | **CONDITIONAL** on 6, **and therefore on chain (III)'s currency**. `mg-94c3 §3.2` shows the two sentences are about different numbers: `:164`'s `C₃ ≥ 1` is **unconditionally** true of the *gap-form* `C₃` (0 violations over 4376 positive-gap posets, and 1 **is** attained), while this claim is true of the *chain-(III)* `C₃` **conditional on L2**. Whoever owns that row should merge them, not strike one |
 | 11 | the literal reading closes iff `c > 1 − ε_leak`; `ε_dem = 1−(1−ε_leak)/c` | 5 | **PROVEN** given claim 1 |
@@ -553,14 +612,23 @@ are pm-onethird's, and mg-345e owns the second.
 
 > **Proposed amendment to `STATE.md:164`.** The rider currently reads *"the live
 > `ε_spec ≲ 2×10⁻²` is the `C₃ = 1` value and `C₃ ≥ 1`, so the omission runs **optimistic**"*.
-> Under mg-76b2 the omission is **not** optimistic: `C₃ = 1` is the correct value under
-> either disjunct of L2, which is Step 3 of the architecture and one of its four main open
-> lemmas, so there is nothing to omit. Suggested replacement: *"the live `ε_spec ≲ 2×10⁻²`
-> is the `C₃ = 1` value, and `C₃ = 1` is what L2 delivers — Cheeger's sweep is over
-> threshold sets, and a monotone dominant eigenvector's threshold sets are already
-> prefixes, so the prefix restriction is free (mg-76b2). `C₃` is not an independent
-> unknown; L3 is a consequence of L2. What remains gated is L2 itself and L4's threshold
-> `ε₀`."*
+> Under mg-76b2 the omission is **not** optimistic: `C₃ = 1` is the correct value **on L2's
+> first disjunct**, which is Step 3 of the architecture and one of its four main open
+> lemmas, so on that branch there is nothing to omit. Suggested replacement: *"the live
+> `ε_spec ≲ 2×10⁻²` is the `C₃ = 1` value, and `C₃ = 1` is what L2's FIRST disjunct
+> delivers — Cheeger's sweep is over threshold sets, and a monotone dominant eigenvector's
+> threshold sets are already prefixes, so the prefix restriction is free (mg-76b2). On L2's
+> SECOND disjunct the prefix is the output, so there is no CONVERSION to charge for — but
+> the delivered prefix's own constant is then L2's to supply, the source does not name it,
+> and the chain's `C₃` is UNQUANTIFIED there rather than `1` (mg-39bf §2.2, landed
+> mg-fa70). `C₃` is not an independent LEMMA; L3 is a consequence of L2. What remains gated
+> is L2 itself — and, if L2 is proved in its second disjunct, that disjunct's own constant —
+> and L4's threshold `ε₀`."*
+>
+> *(`mg-fa70`: this proposal read *"under either disjunct of L2"* and *"there is nothing to
+> omit"* unqualified. **`STATE.md:164` was never amended in this form**, so nothing landed
+> downstream from this site — the repair is to the proposal, before it is next quoted. See
+> §12 for the two sites that DID inherit and are not this document's to edit.)*
 >
 > **The replacement must carry the currency, and this sentence is part of the proposal
 > (`mg-94c3` `C1`, landed at `mg-01ea`).** Whoever lands the above must land it as a
@@ -582,8 +650,11 @@ are pm-onethird's, and mg-345e owns the second.
 > relation should be labelled as belonging to the degraded-prefix-Cheeger reading, since
 > the gap-form repair named in the same sentence gives `ε_spec ≤ ε_leak/C₃`.
 >
-> **Proposed status change to `mg-845e`.** Clause (b) is discharged. The gate is
-> `{L4's threshold ε₀, L2}`, both already on the programme's own open-lemma list.
+> **Proposed status change to `mg-845e`.** Clause (b) is discharged **on L2's first
+> disjunct**; on the second it is discharged only up to L2's own unnamed constant. The gate
+> is `{L4's threshold ε₀, L2}` — plus, on L2's second disjunct, that disjunct's constant —
+> both already on the programme's own open-lemma list. *(`mg-fa70`: this read "Clause (b) is
+> discharged" flat.)*
 
 ---
 
@@ -620,3 +691,138 @@ monotonicity-concentrates-at-small-gap table is **kept and not softened**: `mg-9
 red drill this document did not and found `Φ*_pref ≤ √(2(1−λ_std))` holds at all 3340
 **non**-monotone primitive posets as well, so the population supplies **no separating
 evidence** for the theorem. **The theorem's support is its proof (§3), not the population.**
+
+---
+
+## 12. The `mg-fa70` amendment — the *"either disjunct"* scope clause, at its origin
+
+**What changed and what did not.** Every edit in this amendment qualifies a **SCOPE CLAUSE**.
+No theorem, proof step, constant, count, figure or table moves. §3's theorem is proved on L2's
+**first** disjunct, was proved on it before this amendment, and is audited there by `mg-94c3` at
+`1032/1032`. What this amendment removes is the habit of stating that proof under a hypothesis
+covering **both** disjuncts.
+
+**The defect, in one sentence (`mg-39bf` §2.2).** Two statements are easy to read as one:
+
+| | statement | status |
+|---|---|---|
+| TRUE | on L2's second disjunct the prefix is the output, so there is **no conversion step** to charge for | **PROVEN** — a reading of `:560–562` |
+| NOT ESTABLISHED | the delivered prefix meets `Φ_pref ≤ √(2ε_spec)` rather than `K√(ε_spec)` | **the constant is RELOCATED into L2's own unnamed *"low-conductance"*, not eliminated** — `Φ_pref ≤ K√(ε_spec)` is an effective `C₃ = K²/2` |
+
+**Re-checked at source rather than taken from `mg-39bf`.** In the 603-line
+`spectral_near_ordinal_sum_program.tex`: *"low-conductance"* occurs **5×** (`:40`, `:325`,
+`:500`, `:525`, `:562`) and is **unquantified at every one**; the open-lemma preamble reads
+*"The programme becomes a proof if the following are established **with adequate constants**"*
+(`:552–553`); and the Remark at `:327–331` — **not previously cited in this lineage** — names the
+alternative to monotonicity as *"a **direct prefix theorem**"*, i.e. an unproved theorem, with no
+constant attached. So the second disjunct's constant is not merely unnamed by this document; it
+is unnamed by the source.
+
+### 12.1 Sites amended in this document
+
+| site | what it read | what it reads now |
+|---|---|---|
+| §0 verdict headline | *"under either disjunct of L2"* | *"on L2's first disjunct"*, with both branches kept visible in a note |
+| §0 body | *"there is no `C₃` either, because the prefix is the output"* | *"no `C₃` **as a conversion loss** … but that is where the constant moves to, not where it ends"* |
+| §3 theorem header | *"Under L2"* | *"Under L2's FIRST disjunct"* — which the proof's own first sentence already assumed |
+| §3 theorem label | *"[PROVEN, given L2 …]"* | *"[PROVEN, given L2's FIRST disjunct …]"* |
+| §4 item 2 | *"**Both disjuncts of L2 kill `C₃`.** … There is no branch of L2 under which a separate `C₃` has to be quantified"* | split: both disjuncts remove `C₃` as a **separate lemma's** constant; only the first supplies its **value** |
+| §4 clause (b) | *"`ε_dem = ε_leak²/2` follows from L2 alone"* | *"… from L2's **first** disjunct alone"* |
+| §4 closing | *"Given L2, L3 holds with loss 1"* | split: lemma **count** falls on both branches, loss `= 1` only on the first |
+| §9 ledger row 6 | antecedent *"L2 ⟹ …"* | antecedent *"L2's FIRST disjunct ⟹ …"*; the cited `1032/1032` population was always the first-disjunct one |
+| §9 ledger row 7 | *"L2's second disjunct also removes `C₃`; both disjuncts do — **PROVEN**"* | **split (a)/(b)**: (a) PROVEN, (b) **NOT ESTABLISHED** |
+| §9 ledger row 8 | *"L3 is a consequence of L2 — PROVEN, CONDITIONAL on L2"* | same claim, plus: *"not an independent lemma"* does not imply *"not an independent constant"* on the second branch |
+| §10 `STATE.md` proposal | *"`C₃ = 1` is the correct value under either disjunct"* | split by disjunct, with the second disjunct's constant named as still open |
+| §10 `mg-845e` proposal | *"Clause (b) is discharged"* | discharged on the first disjunct; on the second, only up to L2's own constant |
+
+**Row 7 is the one that mattered.** It is the ledger entry — the machine-readable summary — that
+every downstream *"either disjunct"* cited as its licence, and it carried the bare label
+**PROVEN**. `mg-fd7c`'s ticket sent its successor to §0 and §10; the ledger row is what made the
+phrase reproducible.
+
+### 12.2 Checked and deliberately left, so that *"not repaired"* and *"not looked at"* stay distinguishable
+
+- **§1's block quotes of `:560–566` and `:499–507`** — verbatim source, correct as quotations.
+- **§9 ledger rows 9 and 10** — both read *"CONDITIONAL on 6"*. That is a **live pointer**, not a
+  copied phrase, so they inherit row 6's repaired antecedent automatically. This is the one place
+  in this lineage where inheritance worked as intended, and it worked because the row cited a row
+  instead of restating its content.
+- **§9 row 23** (*"L2 itself — OPEN. NOT TOUCHED"*) — already correct and unaffected.
+- **§4 item 3** (*"the route that pays `C₃` … proves neither disjunct of L2"*) — a statement about
+  the **alternative** route; correct under every reading.
+- **§5, §7, §8, §11** — no scope clause of this shape; §7's population is the first-disjunct
+  one and is labelled `HEURISTIC` throughout, which this amendment does not disturb.
+
+**§6 was on that "checked and left" list and should not have been — recorded rather than
+silently corrected.** Its four-chain prose read *"correct bookkeeping if and only if the prefix
+restriction really does degrade the gap, which **under L2** it does not"*: the same defect with
+the words *"either disjunct"* absent, which is precisely the spelling that survives a grep. It
+is a **thirteenth** amended site (§12.1's table lists twelve), and it was found only because the
+sweep was re-run for the CLAIM after being run for the PHRASE. **The first pass of this very
+amendment reproduced the defect it repairs.**
+- **The title's *"the gap-form `C₃` is NOT 1 under L2"*** — left as written, and the reason is
+  worth stating because it is the mirror image of the defect. This clause *does* cover both
+  disjuncts on one phrase, but it is a **negative** claim and it errs **conservative**: on the
+  first disjunct the gap-form `C₃` is *measured* above 1 at `1023/1032`, and on the second it is
+  unmeasured, so substituting `1` into chain (II) is unlicensed on both. A blanket scope is only
+  a defect when it converts an unknown into a licence; here it converts an unknown into a refusal.
+- **`code/c3_prefix_capture_76b2/`** — greps clean for *"either disjunct"* / *"both disjuncts"*.
+- **`PREDICTIONS.md`** — pre-registered commitments are records of what was bet, not what was
+  found, and are never edited (`mg-fd7c` §6's rule, adopted here).
+
+### 12.3 Two inheriting sites NOT this document's to edit — flagged with proposed text
+
+1. **`STATE.md:164` — carries the contested sentence VERBATIM, and this contradicts the premise
+   this amendment was dispatched under.** The dispatching ticket recorded *"STATE.md carries
+   NEITHER contested sentence — grepped before starting … so nobody re-checks it."* Re-run, the
+   grep returns **two** `STATE.md` hits. `:164` reads:
+
+   > *"…the omission is not optimistic but **CORRECT**, because `C₃^(III) = 1` **under either
+   > disjunct of L2**, so under Step 3 there is nothing to omit (mg-76b2)."*
+
+   That is the phrase, landed, in the programme's own state ledger — the most-quoted artifact in
+   the corpus. `mg-fd7c` §7 flagged `:169` and did not reach `:164`. **Proposed replacement for
+   the clause only**, leaving the rest of `(ii)` intact: *"…the omission is not optimistic but
+   **CORRECT ON L2's FIRST DISJUNCT**, because `C₃^(III) = 1` there, so under Step 3's first
+   clause there is nothing to omit; on L2's **second** disjunct there is no CONVERSION to charge
+   for but the delivered prefix's constant is L2's own and is UNNAMED IN THE SOURCE, so `C₃` is
+   UNQUANTIFIED there rather than `1` (mg-76b2, qualified mg-39bf §2.2 / mg-fa70)."*
+   `STATE.md` is `pm-onethird`'s; **flagged by mail, not edited.**
+
+2. **`STATE.md:169`, judged on its own terms as the ticket asked — the answer splits three ways.**
+   - *"under L2's second disjunct there is no `C₃` either, because the prefix is the output"* —
+     **TRUE, and correctly guessed by the ticket to be the safe one.** Under this document's own
+     dictionary `C₃` is L3's conversion loss, and on that disjunct L3 does not run. **Not struck,
+     and needs no repair as a sentence** — one clause naming what it does *not* establish would
+     make it safe to quote alone.
+   - the row's **headline**, *"under L2, `C₃^(III) = 1` UNIFORMLY IN `n`"* — **the same defect in
+     a different spelling.** `L2` is a disjunction, so *"under L2"* is *"under either disjunct"*
+     without the words. This is what actually needs repairing at `:169`, and the ticket did not
+     name it because it was grepping for the phrase rather than for the claim.
+   - *"mg-76b2's **'either disjunct'** framing is doing real work"* — an **inherited
+     endorsement**, offered as the reason L2's `FP✗` monotonicity clause is not fatal. After
+     `mg-39bf` the framing does *less* work than that: leaning on the second disjunct as the
+     rescue means leaning on the branch whose constant is unnamed. Needs a clause.
+
+3. **`code/chain_selection_9461/s1_chains.py:86`** — chain (I)'s open-statement label reads
+   `"L2 (either disjunct) — Step 3 as written"`. Chain (I) is the `C₃`-free chain
+   (`ε_dem = ε_leak²/2`), so on the second disjunct that label asserts exactly the unestablished
+   half. It is `mg-9461`'s instrument and re-opening `mg-9461` is out of scope here
+   (`mg-fd7c` repaired that document at `c20ad80`); **flagged, not edited.**
+
+### 12.4 The remedy is an artifact of the same kind as the defect
+
+The defect repaired here is *a scope clause that covers two cases with one phrase, true of one of
+them*. This amendment adds twelve scope clauses. Each was checked against **both** disjuncts
+before landing, and two failed that check on the first attempt and were rewritten:
+
+- §4's item 2 was first written as *"only the first disjunct kills `C₃`"*, which is **false on the
+  lemma-count reading** — both disjuncts do remove `C₃` as a separate lemma. Rewritten to name
+  which reading it holds in.
+- §9 row 8 was first written as a withdrawal of the *"L3 is not an independent lemma"* claim.
+  That claim **survives on both branches**; only the loss `= 1` is first-disjunct. Withdrawing it
+  would have been an over-correction of the same shape, in the opposite direction.
+
+**And the check that found `STATE.md:164` was this one:** the amendment was dispatched with an
+explicit instruction that a prior grep had cleared `STATE.md` *"so nobody re-checks it"* — an
+inherited scope claim, of exactly the class under repair. Re-running it cost one command.
