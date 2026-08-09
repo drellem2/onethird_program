@@ -1,0 +1,78 @@
+==============================================================================
+A1  population counts — naturally labelled posets on [n]
+==============================================================================
+  n=2  total=    2  primitive=    1  decomposable=   1
+  n=3  total=    7  primitive=    4  decomposable=   3
+  n=4  total=   40  primitive=   27  decomposable=  13
+  n=5  total=  357  primitive=  275  decomposable=  82
+  n=6  total= 4824  primitive= 4070  decomposable= 754
+  PASS  A1a total n<=6 == 5230  got 5230
+  PASS  A1b primitive n<=6 == 4377  got 4377
+  PASS  A1c per-n primitive == 1,4,27,275,4070  [1, 4, 27, 275, 4070]
+
+==============================================================================
+A2  linear extensions — recursive enumeration vs brute-force over n!
+==============================================================================
+  PASS  A2 recursive LE == n! filter, all posets n=4,5  0 mismatches
+
+==============================================================================
+A3  PSD test — hand cases (the arm mg-28ff's E3 fired on)
+==============================================================================
+  PASS  A3a identity is PSD  
+  PASS  A3b -identity is NOT PSD  
+  PASS  A3c zero is PSD  
+  PASS  A3d diag(1,-1) is NOT PSD  
+  PASS  A3e [[1,2],[2,1]] is NOT PSD (eigs 3,-1)  
+  PASS  A3f [[2,1],[1,2]] is PSD (eigs 3,1)  
+  PASS  A3g rank-1 vv^T is PSD  
+  PASS  A3h NC leading-minors-blind case correctly rejected  all leading principal minors are >=0 here; full principal minors catch it
+  PASS  A3i det_frac agrees with 2x2 formula  
+
+==============================================================================
+A4  Lemma 2.1 at source:  <1_A,(I-S)1_A> == E|A \ sigma(A)|  (exact)
+==============================================================================
+  PASS  A4 Lemma 2.1 holds exactly  0 of 11270 (poset,cut) pairs bad
+
+==============================================================================
+A5  leak(A_k) == E #{i<k : pos(i)>=k}  and  Phi normalisation
+==============================================================================
+  PASS  A5 leak from LE-count == quadratic form  0 bad
+
+==============================================================================
+A6  the psi pencil — closed forms vs definition (mg-28ff's own A4 claim)
+==============================================================================
+  PASS  A6a Q,N closed forms == definition  0 bad
+  PASS  A6b Q_kk == leak(A_k)  (the hard control)  0 bad
+  PASS  A6c0 NC-DEAD a constant shift of psi leaves Q_kk UNCHANGED (this is why the first form of this control could not fire)  shifted 1/4 == leak 1/4
+  PASS  A6c NC a single-coordinate perturbation of psi BREAKS Q_kk == leak  perturbed 9/49 vs leak 1/4
+
+==============================================================================
+A7  monotone cone == nonneg span of psi
+==============================================================================
+  PASS  A7a nonneg combos are monotone and perp 1  0 bad
+  PASS  A7b NC a negative coefficient breaks monotonicity  [Fraction(-2, 5), Fraction(-7, 5), Fraction(-2, 5), Fraction(3, 5), Fraction(8, 5)]
+
+==============================================================================
+A3j  fast PSD path vs brute-force principal minors — on the sweep's own matrices
+==============================================================================
+  PASS  A3j fast == brute force on every swept matrix  0 of 2720 disagree; 886 were PSD, 1834 were not (so the arm is not vacuous in either direction)
+
+==============================================================================
+A8  gap bracket — exact PSD bisection vs float eigenvalue
+==============================================================================
+  PASS  A8 float eigenvalue lies inside the exact bracket  0 of 87 outside
+
+==============================================================================
+A9  decomposable <=> zero gap <=> some prefix leaks 0
+==============================================================================
+  PASS  A9 ordinal-sum cut point <=> a prefix with zero leak  0 bad
+
+==============================================================================
+A10 NC — the verdict pipeline is not vacuous
+==============================================================================
+  PASS  A10a K=1/20 fails somewhere  235 of 275 fail
+  PASS  A10b K=1 holds everywhere at n=5  275 of 275
+
+==============================================================================
+RESULT  26 passed, 0 failed
+==============================================================================

@@ -1,0 +1,41 @@
+============================================================================================
+s3  ITEM 4 — the 2x2 counterfactual on the two added steps, EXACT
+============================================================================================
+rho and the four variants are bracketed exactly (copositivity for mu_pref, PSD for
+the gap).  A poset is scored FAIL for a variant only when the variant's LOWER
+bracket end already exceeds 1, so every failure count below is a LOWER BOUND on the
+true count and no failure is an artefact of bracket slack.
+
+  n=2 done (1 primitive, 0.0s)
+  n=3 done (4 primitive, 0.0s)
+  n=4 done (27 primitive, 0.3s)
+  n=5 done (275 primitive, 9.7s)
+  n=6 done (4070 primitive, 472.9s)
+
+--------------------------------------------------------------------------------------------
+TABLE — posets where each variant's constant EXCEEDS 1 (i.e. the route FAILS there)
+--------------------------------------------------------------------------------------------
+  n  primitive |   V11 both  V10 S1only  V01 S2only  V00 neither |  L2 fails
+  2          1 |          0           0           0            0 |         0
+  3          4 |          0           0           0            0 |         0
+  4         27 |          0           0           0           10 |        10
+  5        275 |          0           6           0          166 |       166
+  6       4070 |          0         192           1         3164 |      3164
+
+--------------------------------------------------------------------------------------------
+TABLE — the MAXIMUM constant each variant reaches (upper bracket end)
+--------------------------------------------------------------------------------------------
+  n |   V11 both  V10 S1only  V01 S2only  V00 neither
+  2 |   0.000000    0.500000    0.500000     1.000000
+  3 |   0.500000    0.666667    0.833333     1.000000
+  4 |   0.636846    0.904508    0.923607     1.085410
+  5 |   0.803289    1.027118    0.963960     1.141242
+  6 |   0.943151    1.156724    1.028754     1.217605
+
+VERDICT ON ITEM 4:
+  * V10 (mg-28ff's own R5 cell: Delta_P kept, -E(h) discarded) first exceeds 1 at n = 5, at 6 of 275 primitive posets at n=5.
+  * V01 (the UNTESTED cell: -E(h) kept, Delta_P discarded) first exceeds 1 at n = 6.
+  * V00 (neither step - mg-76b2's own form) first exceeds 1 at n = 4, and its
+    failure count EQUALS the L2-failure count at every n: True
+  * V11 (both steps) failures at n<=6: {2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+============================================================================================

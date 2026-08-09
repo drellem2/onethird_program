@@ -1,0 +1,24 @@
+==========================================================================================
+s4  ITEM 5 — the quantifier move, and the one arm that could falsify the theorem
+==========================================================================================
+
+-- T1  the sharpened Cauchy-Schwarz factor is an EXACT IDENTITY (added step S2) --
+   48318 of 48318 (poset, vector) pairs satisfy it EXACTLY; 0 exceptions
+   NC  the discarded term -E(h) is STRICTLY positive at 5906 pairs, so the
+       sharpening is not vacuous
+
+-- T2  the quantifier move: level sets of h are prefixes or suffixes --
+   65396 of 65396 level sets are a prefix or a suffix; 0 exceptions
+   (32698 of them come from the g_- branch, the one mg-28ff's sentence
+    describes loosely — so that branch is genuinely exercised here)
+
+-- T3  THE THEOREM against brute force (the arm that could kill the ticket) --
+   21120 of 21120 (poset, monotone vector) pairs satisfy the theorem; 0 exceptions
+   tightest case: slack 0 at n=2  rel=[]
+   NC  the MUTATED theorem (Delta_P -> Delta_P/2) FAILS at 260 pairs, so T3 is
+       not a tautology
+
+-- T4  Phi_P is symmetric under complementation (so dropping |S|<=n/2 is free) --
+   36116 of 36116 cuts have leak(A) == leak(A^c); 0 exceptions
+   => mg-28ff dropping mg-76b2's |S| <= n/2 clause costs nothing.
+==========================================================================================
