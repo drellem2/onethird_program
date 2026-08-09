@@ -20,8 +20,8 @@ are not used; the enumerations are deterministic and complete.
 | script | question | headline |
 |---|---|---|
 | `lib3969.py` | — | source definitions (`Δ₁ :270–278`, `Φ :229–237`, `p_xy :59–62`, `δ :63–66`), each quoted at its site |
-| `a1_vacuity.py [nmax]` | can the **consumable** threshold be measured? | **No.** 604 230 prefix cuts over every poset with `n ≤ 7`; disjunct (i) fires at every one, so the consumable statement holds at `ε = 1` throughout and the measurement is structurally vacuous |
-| `a2_uniform.py [nmax]` | what about the **uniform** (all-posets) transfer threshold? | **`ε₀(U_either) ≤ 17/78`** (witness `n = 6`, **unchanged** when the sweep is extended to `n = 7`) and **`ε₀(U_smaller) ≤ 13/111`** (witness `n = 7`; the `n ≤ 6` run gives the weaker `1/7`), both uniform in `n` |
+| `a1_vacuity.py [nmax]` | can the **consumable** threshold be measured? | **No.** 604 230 prefix cuts over every **non-chain** poset with `n ≤ 7`; disjunct (i) fires at every one, so the consumable statement holds at `ε = 1` throughout and the measurement is structurally vacuous |
+| `a2_uniform.py [nmax]` | what about the **uniform** transfer threshold, **on cuts at which BOTH sides are non-chain**? | **`ε₀(U_either) ≤ 17/78`** (witness `n = 6`, **unchanged** when the sweep is extended to `n = 7`) and **`ε₀(U_smaller) ≤ 13/111`** (witness `n = 7`; the `n ≤ 6` run gives the weaker `1/7`), both uniform in `n` — **and both only within that restriction**, see the scope note below |
 | `a3_witness.py` | is the witness real, or a bug in the extension builder? | both witnesses re-derived by brute force over all `n!` permutations — **no shared code with the sweep** — with a pair-by-pair certificate |
 | `a4_mechanism.py [nmax]` | *why* does the transfer fail? | **not only** the `δ = 1/3` endpoint gap: a pair at `p_side = 1/2`, maximal interior slack `1/6`, is evicted at `Δ₁ = 5/19`. My own prediction lost |
 
@@ -71,6 +71,23 @@ missing class; this does.
 
 ## Reading the results without over-reading them
 
+* **SCOPE (added `mg-5214` after `mg-d3c7`'s audit — read this one first).** `a2_uniform.py`
+  sweeps **only cuts at which BOTH sides are non-chain**. That is a *restriction* of the
+  population the architecture needs, which is **at least one** side non-chain. On the required
+  population the `n ≤ 7` `U_either` ceiling is `1/7`, and an explicit family (a chain plus one
+  isolated element, `n = 2k+1`, `Δ₁ = (k+1)/((2k+1)k) → 0`) makes the uniform threshold
+  **`0` — refuted, not capped** — on both readings. `17/78` and `13/111` are correct and
+  exactly reproduced *within the restriction* (three independent code paths) and must be quoted
+  with it. See `code/eps0_audit_d3c7/b4_fullsweep.py`, `b6_family.py`, and
+  `docs/repair-mg-5214-the-ceiling-and-its-population.md`. **This does not touch L4**: every
+  family member satisfies disjunct (i) (`δ(P) = ⌊n/2⌋/n ≥ 1/3`).
+* **TIE CONVENTION (added `mg-5214`).** `U_smaller` at an `|A| = |B|` cut uses a **designated
+  side**; that is what reproduces the `58 755` failure count (`mg-d3c7` `b7` D2 — `58 538`
+  tie-excluded, `58 560` tie-neither). Under a tie-neutral reading the `n ≤ 6` `U_smaller`
+  ceiling is `13/74`, not `1/7`. The headline `13/111` is tie-independent.
+* **POPULATION LABELS (added `mg-5214`).** `a1`'s `604 230` counts cuts of the **non-chain**
+  posets; `a2`'s `604 250` counts cuts of **all** posets. The difference is exactly the chain
+  poset at each `n`, `2+3+4+5+6 = 20`. Both are right for their own instrument.
 * The ceilings bound a threshold **uniform in `n`**. They do **not** say `ε₀(n) ≤ 17/78` for a fixed
   `n`; at `n ≤ 5` there is no `U_either` violator at **any** `ε`.
 * The ceilings are on the **`F`-free repaired** transfer statement (`mg-e35c` F5's form). They are

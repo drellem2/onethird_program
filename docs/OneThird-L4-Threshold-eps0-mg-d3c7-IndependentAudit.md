@@ -500,6 +500,17 @@ measurable positive threshold here — comes out sharper, not weaker.
 
 ### 4.5 The repair I recommend (not applied — `pm-onethird`'s to land)
 
+> **LANDED BY `mg-5214`, 2026-08-09.** Applied at all four sites named in §4.4 plus both
+> findings of §5, in `docs/OneThird-L4-Threshold-eps0-mg-3969.md` — §0 (verdict table now
+> carries a population column and a row for the required scope; the "9 %" now names its
+> restriction), §5.2/§6.0 (both totals labelled with their populations), §6 (Claims 6.1/6.2
+> carry their scope in their own statements; the tie convention is declared), §7 (the
+> `ε₀(U_either) ∈ (0, 17/78]` recommendation struck and replaced), §9 (the coverage gap
+> recorded as closed) and §10 (proposed `STATE.md` text replaced; the unqualified version kept
+> struck). `17/78` and `13/111` are retained everywhere, with their scope. `mg-5214` re-ran
+> `b0`, `b4 7`, `b6` and `b7` before editing and reproduced every figure below.
+> See `docs/repair-mg-5214-the-ceiling-and-its-population.md`.
+
 Publish `17/78` **with its scope in the same sentence**, and publish the ONE+ result
 beside it:
 

@@ -8,6 +8,23 @@
 (603 lines; L4 at `:464–474`, Steps 1–6 at `:488–516`, `Δ₁` at `:270–278`, `Φ` at `:229–237`,
 `δ` at `:63–66`, L1–L4 at `:556–570`).
 
+> **SCOPE REPAIR, `mg-5214`, applied 2026-08-09 after `mg-d3c7`'s independent audit.** Every
+> `17/78` and `13/111` in this document is now stated **with the population it is over in the
+> same sentence**, and the result on the population this document did not sweep is published
+> beside it. The audit confirmed this document's central verdict and re-derived `17/78`
+> exactly on a third code path; it then closed the coverage gap §9 discloses (cuts at which
+> *one* side is a chain) and found that closing it does not merely lower the ceilings —
+> **on the architecturally required population `ε₀(U_either) = ε₀(U_smaller) = 0`, refuted at
+> every positive `ε` rather than capped.** `17/78` is retained everywhere it appears, because
+> it is correct and exactly reproduced *in its own scope*; what was missing was the scope.
+> **This does not touch L4** (every member of the refuting family satisfies L4's disjunct (i)
+> outright — `mg-d3c7` §4.4/D1), and it **sharpens rather than weakens** this document's own
+> thesis: §5's unmeasurability result stands, and the refutable surrogate offered here as the
+> replacement target turns out to be refuted too, so there is no measurable positive threshold
+> here at all. Sites changed: §0 (table + headroom), §6.0, §7 (recommendation + sandwich),
+> §9, §10. See `docs/OneThird-L4-Threshold-eps0-mg-d3c7-IndependentAudit.md` §4 and
+> `docs/repair-mg-5214-the-ceiling-and-its-population.md`.
+
 ---
 
 ## 0. Verdict
@@ -34,15 +51,29 @@
 > and witnessed rather than asserted — but they bound a **different and strictly stronger**
 > statement than the one Step 6 consumes (§5–§6):
 >
-> | statement | bound | witness | status |
-> |---|---|---|---|
-> | `U_either` — the `F`-free repaired transfer, **either** side, asserted for **all** posets | **`ε₀ ≤ 17/78 = 0.21795`**, uniformly in `n` | `n = 6`, exhibited, re-derived by a second code path | **PROVEN** |
-> | `U_smaller` — same, **smaller** side only | **`ε₀ ≤ 13/111 = 0.11712`**, uniformly in `n` | `n = 7`, exhibited | **PROVEN** |
-> | `S` — what **Step 6** actually consumes | **`ε₀ = 1` on every poset that can be exhibited** | 604,230 prefix cuts, `n ≤ 7`, exhaustive | **PROVEN, AND VACUOUS** |
+> | statement | **population** | bound | witness | status |
+> |---|---|---|---|---|
+> | `U_either` — the `F`-free repaired transfer, **either** side | **cuts at which BOTH sides are non-chain** (335,496 cuts, `n ≤ 7`) | **`ε₀ ≤ 17/78 = 0.21795`**, uniformly in `n` | `n = 6`, exhibited, re-derived by a second code path — and by a third in `mg-d3c7` | **PROVEN** |
+> | `U_smaller` — same, **smaller** side only | **cuts at which BOTH sides are non-chain** (335,496 cuts, `n ≤ 7`) | **`ε₀ ≤ 13/111 = 0.11712`**, uniformly in `n` | `n = 7`, exhibited | **PROVEN** |
+> | `U_either` **and** `U_smaller` | **the architecturally required population: AT LEAST ONE side non-chain** (604,012 cuts, `n ≤ 7`) | **`ε₀ = 0` — REFUTED at every positive `ε`, not capped** | an explicit `n`-free family: chain `c₁<⋯<c_{n−1}` plus one isolated `z`, `A = {z,c₁,…,c_{k−1}}`, `n = 2k+1`, giving `Δ₁ = (k+1)/((2k+1)k) → 0` with **every** balanced-in-side pair evicted at every `k ≥ 3` (`mg-d3c7`) | **PROVEN** |
+> | `S` — what **Step 6** actually consumes | all prefix cuts of the 101,651 **non-chain** posets, `n ≤ 7` (604,230 cuts) | **`ε₀ = 1` on every poset that can be exhibited** | exhaustive | **PROVEN, AND VACUOUS** |
 >
-> **The corpus's operative `ε₀ ≈ 0.20` now has a proven ceiling `17/78 = 0.2179` immediately above
-> it:** the ceiling exceeds the calibration by a factor `(17/78)/0.20 = 1.0897`, so **`ε₀` cannot be
-> raised by more than 9 %**, ever, at any `n`.
+> **THE FIRST TWO ROWS AND THE THIRD ARE ABOUT THE SAME STATEMENT ON DIFFERENT POPULATIONS, AND
+> THE THIRD IS THE ONE STEP 6 MUST SURVIVE.** A minimal counterexample makes disjunct (i) false
+> by hypothesis, so a pair must transfer from *a* side; a single chain side merely means the pair
+> must come from the other one, and only the *both*-sides-chain case is genuinely out of scope
+> (Remark 5.0, via Linial's width-2 theorem). §9 discloses that this document's sweeps skip every
+> cut at which *either* side is a chain and predicts that closing the gap "may lower both".
+> `mg-d3c7` closed it: it lowers the `n ≤ 7` `U_either` ceiling to `1/7 = 0.1429`, and the family
+> above then drives the uniform threshold to `0` on both readings.
+>
+> **Where that leaves the corpus's operative `ε₀ ≈ 0.20`, stated with its scope:** on the
+> both-sides-non-chain restriction the calibration sits under a proven ceiling
+> `17/78 = 0.2179` by a factor `(17/78)/0.20 = 1.0897`, so **within that restriction `ε₀` cannot
+> be raised by more than 9 %, at any `n`**. On the architecturally required population there is
+> no positive ceiling to sit under at all: the calibration is a factor `0.20/(1/7) = 1.4` **above**
+> the `n ≤ 7` value `1/7`, and above the uniform value `0` by everything. **The 9 % figure is a statement about a
+> restriction, and it may not be quoted without it.**
 >
 > **3. THE DISJUNCT FIRES, AND IT FIRES SPLIT.** `ε_dem`'s **form** is reachable without `ε₀`;
 > `ε_dem`'s **value** is not, and cannot be. With `C₃ = 1` (`mg-76b2`, conditional on L2) the demand
@@ -56,8 +87,16 @@
 > not boundable**, because on the class where it is consumed — minimal counterexamples — disjunct
 > (i) is **false by hypothesis**, and on every poset that is not a counterexample disjunct (i) is
 > **true at `ε = 1`**. Proving any positive value for it **is** the 1/3–2/3 conjecture on the
-> thin-interface class (§5.3). `mg-845e` should therefore be released against the *uniform*
-> threshold `ε₀(U_either) ∈ (0, 17/78]`, which is the only one a proof can ever produce.
+> thin-interface class (§5.3).
+>
+> **AND `mg-845e` CANNOT BE RELEASED AGAINST THE UNIFORM THRESHOLD EITHER — that was this
+> document's recommendation and `mg-d3c7` refuted it.** The interval this document proposed,
+> `ε₀(U_either) ∈ (0, 17/78]`, **is empty** on the population Step 6 must survive: `ε₀ = 0`
+> there. So `ε₀^unif` is not the honest replacement target for clause (a); it is a *second*
+> object that cannot carry the gate, and for a different reason — the consumable one is
+> unmeasurable, the uniform one is refuted. **There is no measurable positive threshold here at
+> all**, which is this document's thesis reaching further than it claimed, not a retraction of
+> it. What `mg-845e` can be released against is stated in §7 as repaired.
 
 ---
 
@@ -155,7 +194,9 @@ names.**
 
 **`ε₀^cons`: `n`-free *in form*; positivity OPEN and equivalent to the conjecture.** §5.
 
-**`ε₀^unif`: `n`-free *in form*, and bounded above by `17/78` uniformly in `n`.** §6.
+**`ε₀^unif`: `n`-free *in form*; bounded above by `17/78` uniformly in `n` on cuts at which BOTH
+sides are non-chain, and `= 0` — REFUTED — on the architecturally required population where at
+least one side may be a chain (`mg-d3c7`; scope added `mg-5214`).** §6, §6.0's rider.
 
 **On the `n`-freeness argument the corpus already has, and the one it was missing.** `Op-Form`
 §3.2 gives two supports. Support 1 ("`n` appears once, multiplied by `F`") is an argument *about
@@ -245,7 +286,10 @@ population is `1`, `n`-free, and carries zero information about the object Step 
 **[PROVEN — trivial, and verified exhaustively]**
 
 Instrument **A1** (`code/eps0_threshold_3969/a1_vacuity.py`), exhaustive over **every** poset on
-`n ≤ 7` at **every** prefix cut, exact rationals:
+`n ≤ 7` at **every** prefix cut, exact rationals. **The `prefix cuts` column counts the cuts of
+the NON-CHAIN posets only** — the chain at each `n` contributes `n−1` further cuts, which is why
+§6.0's all-posets total is 20 higher (`mg-5214`, after `mg-d3c7` §5.1; the two figures were
+correct and unlabelled, not inconsistent):
 
 | `n` | posets | non-chain | prefix cuts | **posets with no balanced pair** | max `Δ₁` |
 |---|---|---|---|---|---|
@@ -263,7 +307,7 @@ enumeration (all `3^C(n,2)` orientations, transitivity-filtered), so a systemati
 isomorphism class cannot cancel. It agrees exactly: `42`, `960`, `42 840` at `n = 3,4,5`. A "the
 count looks large" check would not have caught a missing class.
 
-**Disjunct (i) fired at all 604 230 cuts.** The transfer disjunct was never *reached*, let alone
+**Disjunct (i) fired at all 604 230 non-chain-poset cuts.** The transfer disjunct was never *reached*, let alone
 tested. This is not a property of the population; it is structural, and it will hold on any
 population anyone can build, because building a population where it fails means exhibiting a
 counterexample to the 1/3–2/3 conjecture.
@@ -297,39 +341,89 @@ unlike `ε₀^cons` — it is refutable, so evidence about it means something. T
   both sides, so the argument may pick either.
 * **`U_smaller(ε)`** — the same with the pair required to come from the **smaller** side.
 
-Instrument **A2** (`a2_uniform.py`), exhaustive to `n = 6`, every poset, every prefix cut,
-25 682 cuts of which 11 480 have both sides non-chain:
+> **THE POPULATION THESE TWO CEILINGS ARE OVER, STATED ONCE AND CARRIED EVERYWHERE BELOW
+> (`mg-5214`).** Every ceiling in §6 is measured on cuts at which **both** sides are non-chain.
+> That is a **restriction** of the population the architecture needs, which is *at least one*
+> side non-chain — see §9's disclosure, and `mg-d3c7` §4, which closed the gap and found the
+> uniform threshold is `0` on the required population. `17/78` and `13/111` below are correct
+> and exactly reproduced *within the restriction*, and they are not ceilings on `ε₀^unif`
+> as Step 6 would need it.
+>
+> **TIE CONVENTION, DECLARED (`mg-5214`, after `mg-d3c7` §5.2).** When `|A| = |B|` there is no
+> smaller side, and `U_smaller` needs one. This instrument uses a **designated side** — the
+> pair must come from the designated one even at a tie, and a surviving pair on the other side
+> does not rescue the cut. The convention was consistent throughout but undeclared; it is what
+> reproduces the `58 755` failure count in §6.0, exactly and uniquely (`mg-d3c7`
+> `b7_scope_and_arith.py` D2: `58 755` under either designated-side rule, `58 538` if ties are
+> excluded, `58 560` if a tie requires *neither* side to survive). Under a **tie-neutral**
+> reading the `n ≤ 6` `U_smaller` ceiling is **`13/74 = 0.17568`**, not `1/7` — see Claim 6.2.
+> **The headline `13/111` is unaffected**: its witness has `|A| = 4`, `|B| = 3`, so it is
+> tie-independent.
 
-> **Claim 6.1.** **`ε₀(U_either) ≤ 17/78 = 0.217949…`, uniformly in `n`.** *Witness: `n = 6`,
+Instrument **A2** (`a2_uniform.py`), exhaustive to `n = 6`, every poset, every prefix cut,
+25 682 cuts (all posets; 25 668 of the non-chain ones) of which 11 480 have both sides non-chain:
+
+> **Claim 6.1.** **`ε₀(U_either) ≤ 17/78 = 0.217949…`, uniformly in `n`, ON CUTS AT WHICH BOTH
+> SIDES ARE NON-CHAIN.** *Witness: `n = 6`,
 > `A = {0,1,2}`, `B = {3,4,5}`, strict relations
 > `{(0,2),(0,3),(0,4),(0,5),(1,4),(1,5),(2,4),(3,4)}`, `|L(P)| = 26`, `Δ₁ = 17/78`. Both sides are
 > the poset `{x<z} ⊔ {y}`; **all four** balanced-in-side pairs leave `[1/3,2/3]` in `P`
 > (`2/3 → 9/13`, `2/3 → 19/26`, `2/3 → 19/26`, `1/3 → 4/13`).* **[PROVEN]**
 >
-> **Claim 6.2.** **`ε₀(U_smaller) ≤ 13/111 = 0.117117…`, uniformly in `n`.** *Witness: `n = 7`,
-> `Δ₁ = 13/111`. The `n = 6` witness at `Δ₁ = 1/7 = 0.142857` (unique smaller-side pair
+> **Claim 6.2.** **`ε₀(U_smaller) ≤ 13/111 = 0.117117…`, uniformly in `n`, ON CUTS AT WHICH BOTH
+> SIDES ARE NON-CHAIN.** *Witness: `n = 7`,
+> `Δ₁ = 13/111`, sizes `|A| = 4`, `|B| = 3` — genuinely unequal, so tie-independent. The `n = 6`
+> witness at `Δ₁ = 1/7 = 0.142857` (unique smaller-side pair
 > `1/2 → 5/7`) is superseded by it and kept because it is the one `a3_witness.py` certifies.*
 > **[PROVEN]**
+>
+> **Rider (`mg-5214`, after `mg-d3c7` §5.2).** The `n = 6` fallback witness **sits at a TIE**:
+> `|A| = |B| = 3`, `rel = [0,0,3,2,7,31]`, `e(P) = 7`. Its `1/2 → 5/7` eviction is on side `B`,
+> and side `A`'s pair `(0,1)` at `1/2 → 3/7` **survives**. It is a `U_smaller` violator only
+> under the designated-side convention declared above. Under a tie-neutral reading the `n ≤ 6`
+> `U_smaller` ceiling is **`13/74 = 0.17568`**. The operative claim `13/111` is untouched.
 
 ### 6.0 The `n = 7` sweep, which finished after the first submission and is now included
 
-`a2_uniform.py 7` — **604 250 cuts, 335 496 with both sides non-chain**, every poset on `n ≤ 7`:
+`a2_uniform.py 7` — **604 250 cuts of ALL posets on `n ≤ 7`** (604 230 of them cuts of the
+**non-chain** posets, which is §5.2's figure; the difference is exactly the chain poset at each
+`n`, `2+3+4+5+6 = 20`), **of which 335 496 have both sides non-chain — and that last figure, not
+either total, is the population the ceilings below are measured on**:
 
-| reading | ceiling at `n ≤ 6` | ceiling at `n ≤ 7` | failures at `n ≤ 7` |
-|---|---|---|---|
-| `U_either` | `17/78 = 0.217949` | **`17/78` — UNCHANGED** | 682 (none thinner than the `n = 6` witness) |
-| `U_smaller` | `1/7 = 0.142857` | **`13/111 = 0.117117`** | 58 755 |
+| reading | **population** | ceiling at `n ≤ 6` | ceiling at `n ≤ 7` | failures at `n ≤ 7` |
+|---|---|---|---|---|
+| `U_either` | BOTH sides non-chain (335 496) | `17/78 = 0.217949` | **`17/78` — UNCHANGED** | 682 (none thinner than the `n = 6` witness) |
+| `U_smaller` | BOTH sides non-chain (335 496) | `1/7 = 0.142857` *(designated-side convention; `13/74` tie-neutral)* | **`13/111 = 0.117117`** | 58 755 *(designated-side; `58 538` tie-excluded)* |
+| **`U_either`** | **AT LEAST ONE side non-chain (604 012) — the required one** | — | **`1/7 = 0.142857`** | **2 042** |
+| **`U_smaller`** | **AT LEAST ONE side non-chain (604 012) — the required one** | — | **`13/111 = 0.117117`** | **58 730** *(tie-excluded — `mg-d3c7`'s instrument uses that convention throughout, which is also why its BOTH-scope count is `58 538` rather than this document's `58 755`)* |
 
-**The headline ceiling survived a 24× larger population without moving**, and the `n = 7` sweep
-found 640 further either-side failures, none of them at a thinner interface. That is the outcome I
-flagged in §9 as the one that could only lower the number; it lowered the *smaller-side* one and
-left `17/78` where it was. `13/111` is still above `mg-3ce3`'s `0.085`, so the two remain
-consistent (§9).
+**The headline ceiling survived a 24× larger population without moving** *within the
+both-sides-non-chain restriction*, and the `n = 7` sweep found 640 further either-side failures,
+none of them at a thinner interface. That is the outcome I flagged in §9 as the one that could
+only lower the number; it lowered the *smaller-side* one and left `17/78` where it was. `13/111`
+is still above `mg-3ce3`'s `0.085`, so the two remain consistent (§9).
+
+> **AND THE OTHER OUTCOME I FLAGGED IN §9 ALSO LANDED, HARDER THAN I PREDICTED (`mg-5214`,
+> from `mg-d3c7` §4).** The last two rows above are `mg-d3c7`'s `b4_fullsweep.py 7`, which
+> closes the coverage gap §9 discloses. It lowers the `n ≤ 7` `U_either` ceiling from `17/78`
+> to `1/7`, exactly as §9 predicted it might — and then an explicit family (chain
+> `c₁<⋯<c_{n−1}` plus one isolated `z`, `A = {z,c₁,…,c_{k−1}}`, `n = 2k+1`, `Δ₁ =
+> (k+1)/((2k+1)k) → 0`, every balanced-in-side pair evicted at every `k ≥ 3`, exact rationals
+> to `k = 200`) drives the **uniform** threshold on the required population to **`0` on both
+> readings**. So the `n ≤ 7` figures in the last two rows are *not* ceilings on `ε₀^unif`;
+> there is no positive one. Claims 6.1 and 6.2 as stated are untouched — the family always has
+> a chain side, so it never enters their population — and `17/78` and `13/111` are reproduced
+> exactly there by `mg-d3c7` on a code path sharing nothing with `a2_uniform.py`.
 
 **Why one witness at one `n` bounds an `n`-free threshold at every `n`.** `ε₀` is by definition a
 threshold **valid for all `n` at once**. A single violating instance at `n = 6` and `ε = 17/78`
 falsifies the statement at every `ε ≥ 17/78`, therefore bounds the uniform threshold, therefore
-bounds it at every `n`. (It says nothing about `ε₀(n)` for a *fixed* `n ≠ 6` — see §9.)
+bounds it at every `n`. (It says nothing about `ε₀(n)` for a *fixed* `n ≠ 6` — see §9.) **The
+argument is sound and `mg-d3c7` confirms it; note only that it bounds the uniform threshold of
+whichever statement the witness violates, and this witness violates `U_either` restricted to
+both-sides-non-chain cuts. The same argument applied to `mg-d3c7`'s family — whose members
+violate the unrestricted statement at `Δ₁ → 0` — is what drives that threshold to `0`
+(`mg-5214`).**
 
 **Both `n = 6` witnesses were re-derived by a second, independent code path** (`a3_witness.py`) —
 including the one carrying Claim 6.1, the headline. The `n = 7` witness that lowers Claim 6.2 to
@@ -339,11 +433,19 @@ enumerates linear extensions by filtering all `n!` permutations rather than by t
 builder used in the sweep, and prints the full certificate pair-by-pair. The numbers agree exactly.
 
 **Where this lands against the corpus's number.** `Op-Form` §7.2's repaired `ε₀ ≈ 0.20` and
-`mg-3ce3`'s "0 RED events up to `ε = 0.20`" are *lower*-bound evidence for `ε₀(U_either)`. The
-ceiling is `17/78 = 0.2179`, a factor `1.0897` above it. The corpus's operative constant is
-therefore correct to within 9 % *of a bound that is now proven*, and it can never be raised further.
+`mg-3ce3`'s "0 RED events up to `ε = 0.20`" are *lower*-bound evidence for `ε₀(U_either)`. **On
+cuts at which both sides are non-chain** the ceiling is `17/78 = 0.2179`, a factor `1.0897` above
+it, so **within that restriction** the corpus's operative constant is correct to within 9 % *of a
+bound that is now proven*, and cannot be raised further.
 **This is not a contradiction of `mg-3ce3`** — its population is dominated by a `Δ₁ ≤ 0.20` filter
 (6 555 of its 6 681 stability points) and my witness sits at `0.2179`, just outside it.
+
+> **AND THE RESTRICTION IS LOAD-BEARING IN THIS PARAGRAPH (`mg-5214`).** Drop it and the
+> comparison inverts: on the architecturally required population the `n ≤ 7` ceiling is `1/7 =
+> 0.1429`, so `0.20` sits a factor `1.4` **above** it rather than `1.0897` below anything — and
+> with `mg-d3c7`'s family the ceiling is `0`, so there is no positive bound for `0.20` to be
+> "correct to within 9 % of" at all. The 9 % is a fact about the both-sides-non-chain
+> restriction and nothing wider.
 
 **One scoping remark on `mg-3ce3`'s design, offered as coverage information and not as a defect.**
 The probe evaluates each poset at its **best (thinnest) prefix**. L4's hypothesis is universally
@@ -405,20 +507,69 @@ one), and the `mg-e35c` F5 banner's **"100× too pessimistic" is exactly `10²`,
   best that can be offered is the sandwich
 
   ```
-      ε_dem  ≤  (17/78)² / 2  =  289/12168  =  0.023751…       [PROVEN ceiling, uniform in n]
+      ε_dem  ≤  (17/78)² / 2  =  289/12168  =  0.023751…       [PROVEN, but ONLY on cuts at
+                                                                which BOTH sides are non-chain]
       ε_dem  ≈  (0.20)²  / 2  =  0.02                          [the corpus's calibration]
   ```
 
-  i.e. **`ε_dem ≤ 289/12168 = 0.023751`**, a ceiling the corpus's `2×10⁻²` sits under by a factor
-  `1.1875` — **under 19 % of headroom in the demand constant, and none of it is free.**
-  *(Stated for the `U_either` threshold; carried through the same chain the corpus already uses, and
-  conditional on L2 through `C₃`. This is a bound on an input, not a derivation of `ε_dem`.)*
+  i.e. **`ε_dem ≤ 289/12168 = 0.023751` on the both-sides-non-chain restriction**, a ceiling the
+  corpus's `2×10⁻²` sits under by a factor `1.1875` — **under 19 % of headroom in the demand
+  constant, within that restriction, and none of it is free.**
+  *(Carried through the same chain the corpus already uses, and conditional on L2 through `C₃`.
+  This is a bound on an input, not a derivation of `ε_dem`.)*
 
-**Recommendation to `pm-onethird`, who owns the gate.** Clause (a) as worded — *"`ε₀`'s
-`n`-freeness and its value"* — **cannot be discharged as worded**, because for the object it names
-(`ε₀^cons`) the value question is the conjecture. Re-word the clause against `ε₀^unif`, for which
-this document supplies `n`-freeness of form and a proven ceiling `17/78`, and record that the
-remaining unknown in `ε_dem` is `ε₀ > 0` and nothing else.
+  **AND THE SANDWICH DOES NOT SURVIVE THE SCOPE REPAIR (`mg-5214`, from `mg-d3c7` §4.4).** Run
+  the same chain on the population Step 6 must survive — at least one side non-chain — and the
+  `n ≤ 7` ceiling `1/7` gives `ε_dem ≤ (1/7)²/2 = 1/98 = 0.010204`, so the corpus's `2×10⁻²`
+  sits at **`1.96×` a proven ceiling instead of `1.19×` under one**; and with the refuting
+  family, `ε₀^unif = 0` and the ceiling is **`0`**. So `ε_dem` has no positive proven ceiling
+  through this route either. **What survives is the equation, not the sandwich:** `ε_dem = ε₀²/2`
+  is exact, the `mg-e35c` "100×" is still exactly the square of a 10× move in `ε₀`, and the
+  single remaining unknown is still `ε₀` and nothing else. What is withdrawn is the claim that
+  the unknown has been boxed into a narrow positive interval.
+
+**Recommendation to `pm-onethird`, who owns the gate — SUPERSEDED, and replaced below.**
+
+> ~~*Clause (a) as worded — "`ε₀`'s `n`-freeness and its value" — **cannot be discharged as
+> worded**, because for the object it names (`ε₀^cons`) the value question is the conjecture.
+> Re-word the clause against `ε₀^unif`, for which this document supplies `n`-freeness of form
+> and a proven ceiling `17/78`, and record that the remaining unknown in `ε_dem` is `ε₀ > 0`
+> and nothing else.*~~
+>
+> **STRUCK BY `mg-5214` after `mg-d3c7` §4.4. `mg-845e` must NOT be released against
+> `ε₀(U_either) ∈ (0, 17/78]`: on the population Step 6 must survive that interval is EMPTY.**
+> `ε₀^unif` is refuted, not capped, so re-wording clause (a) against it would replace an
+> undischargeable clause with an unsatisfiable one. Kept struck rather than deleted because
+> §7 of this document is the instruction that would otherwise have been followed, and because
+> the reasoning that produced it — that `ε₀^cons` cannot carry the gate — is correct and is
+> *why* the replacement had to be looked for.
+
+**Recommendation as repaired (`mg-5214`).** Clause (a) as worded **cannot be discharged**, for
+the reason above: for `ε₀^cons` the value question *is* the conjecture (Claims 5.1–5.2, which
+`mg-d3c7` did not re-derive and did not contest). **And it cannot be re-worded against
+`ε₀^unif` either, because `ε₀^unif = 0`** on the architecturally required population — an
+explicit family, not a sweep artefact (§6.0's rider, `mg-d3c7` §4.3). The two objects fail the
+gate for two different and independent reasons: one is unmeasurable, the other is refuted.
+
+What `pm-onethird` can record instead, all of it proven or exactly conditional:
+
+* **`ε_dem`'s FORM is `n`-free and that half is dischargeable today**, conditional on L2 and on
+  `ε₀ > 0` — unchanged by the repair, since §1/§3's `n`-freeness argument is about L4's text and
+  not about any sweep.
+* **`ε_dem = ε₀²/2` exactly**, one equation, one unknown (`C₃ = 1`, `mg-76b2`, conditional on
+  L2). Unchanged.
+* **`ε₀ ≤ 17/78 = 0.2179` uniformly in `n` on cuts at which BOTH sides are non-chain** — a real,
+  proven, thrice-reproduced fact, which is *not* a bound on the constant the architecture
+  consumes and must never be quoted as one.
+* **No positive uniform threshold exists on the required population**, so the honest state of
+  `ε₀` is: `n`-free in form, unmeasurable in the consumed reading, refuted in the uniform
+  reading, and positive only if the 1/3–2/3 conjecture holds on the thin-interface class.
+
+**The answer to `mg-845e`'s "what constant is consumed", stated plainly:** it is `ε₀`, through
+`ε_dem = ε₀²/2`, and **it is not a number that is merely unmeasured — it is the last lemma of
+the programme wearing a number's clothes** (§5.3). Every attempt to substitute a measurable
+surrogate for it has now been closed: the consumable reading is vacuous, and the uniform
+reading is refuted.
 
 ---
 
@@ -439,7 +590,7 @@ from, and why each fails:
 | **K8** | `mg-3ce3`'s empirical envelope, `ε = 0.20`, 6 681 posets, `n ≤ 16` | **CALIBRATION, NOT DERIVATION**, and of `ε₀^unif` not `ε₀^cons`; its frame is `Δ₁ ≤ 0.20` and best-prefix-only, so it could not have found the `17/78` ceiling. §6 |
 | **K9** | the downstream window `[1/3,2/3]`, width `1/3` | **AN ERROR BUDGET, NOT A THRESHOLD.** Converting it to an `ε` requires `F`. Claim 4.1 |
 | **K10** | `mg-3af9` / `mg-c8c6` (branch (ii) unconsumable for every positive `F`) | **NOT ABOUT THE THRESHOLD AT ALL.** A Step-6 consumption result about the modulus. Cited in §5.1 only to record that branch (ii) is not in play, and used nowhere in the answer to question 1. This is the drift the ticket warned against and it was checked for |
-| **K11** | exhaustive computation on real posets | **STRUCTURALLY VACUOUS** for `ε₀^cons` (604 230 cuts, disjunct (i) fired at every one), **and productive for `ε₀^unif`**, where it gives the `17/78` ceiling. §5, §6 |
+| **K11** | exhaustive computation on real posets | **STRUCTURALLY VACUOUS** for `ε₀^cons` (604 230 cuts of the non-chain posets, disjunct (i) fired at every one), **and productive for `ε₀^unif`**, where it gives the `17/78` ceiling **on both-sides-non-chain cuts** — and, once the population is widened to the required one, the outright refutation `ε₀^unif = 0` (`mg-d3c7`; scope added `mg-5214`). §5, §6, §6.0's rider |
 | **K12** | the archived `UC-Lean-L4` / `F32-L4` items | **DIFFERENT L4.** The `union_closed` cohomology lineage; `pm-onethird`'s 2026-08-09 sweep established this and I did not re-open it |
 | **K13** | `Op-Form` Claim 3.2 — literal (iii) closes Step 6 for **no** `F(ε) > 0` — read as "`ε₀ = 0` under the literal reading" | **TRUE BUT NOT A THRESHOLD FACT, AND NOT USED IN THE VERDICT.** It is a Step-6 **consumption** result whose quantifier is over `F`, so reading it as an answer to question 1 is the modulus drift in its subtlest form. It is listed because it is the candidate most likely to be mistaken for an answer. What it *does* license is the choice of the `F`-free repaired (iii) as the object §6 bounds — which is `mg-e35c` F5's recommendation, not a threshold derivation |
 
@@ -448,9 +599,16 @@ from, and why each fails:
 ## 9. What I did NOT do
 
 * **I did not attempt to prove or refute L4**, in any branch, at any modulus. Claims 6.1/6.2 refute
-  a *uniform-in-`n` threshold above `17/78`* for the `F`-free repaired transfer read over **all**
-  posets. They say **nothing** about L4-as-stated, whose branch (ii) remains available to any poset
-  my witnesses cover, and nothing about whether `ε₀ > 0`.
+  a *uniform-in-`n` threshold above `17/78`* for the `F`-free repaired transfer read over every
+  poset **at cuts where BOTH sides are non-chain** (`mg-5214`: this sentence originally said
+  "over **all** posets", which is the scope defect being repaired — the restriction is real, and
+  it is not "all"). They say **nothing** about L4-as-stated, whose branch (ii) remains available
+  to any poset my witnesses cover, and nothing about whether `ε₀ > 0`.
+  **`mg-d3c7`'s refutation on the wider population does not touch L4 either, and it verified that
+  rather than assuming it:** every member of the refuting family has `δ(P) = ⌊n/2⌋/n ≥ 1/3`
+  (`3/7, 4/9, 5/11, …`), so **L4's disjunct (i) holds outright** and L4-as-stated is satisfied.
+  What falls is this document's deliberately (i)-free surrogate — which §5.1 explains had to be
+  (i)-free, and which is exactly why it was refutable.
 * **I did not derive `ε_dem`.** §7 gives the functional dependence (which is already `Op-Form`
   §4.2's boxed relation) and a ceiling on an input. `mg-845e` is untouched and stays blocked until
   `pm-onethird` re-reads its own gate.
@@ -462,9 +620,12 @@ from, and why each fails:
   landed, so the gate stays where its owner put it.
 * **My exhaustive sweeps stop at `n = 7`, for both the vacuity result and the ceilings.** The
   `n = 7` uniform sweep was still running at the first submission; it has since finished and §6.0
-  reports it — `U_either` unchanged at `17/78`, `U_smaller` lowered to `13/111`. Nothing is
+  reports it — on both-sides-non-chain cuts, `U_either` unchanged at `17/78`, `U_smaller` lowered
+  to `13/111`. Nothing is
   exhaustive beyond `n = 7`, and a thinner violator at `n ≥ 8` would lower the ceilings further. It
-  can never move them the other way.
+  can never move them the other way. **`mg-d3c7`'s refuting family is not a sweep and is not
+  bounded by `n = 7`: it is an explicit construction at every odd `n = 2k+1`, checked in exact
+  rationals to `k = 200` (`mg-5214`).**
 * **The ceiling bounds a uniform threshold, not `ε₀(n)` at a fixed `n`.** Nothing here says
   `ε₀(5) ≤ 17/78`; at `n ≤ 5` there is no `U_either` violator at any `ε` whatever.
 * **My sweeps skip every cut at which *either* side is a chain — a coverage gap I did not close.**
@@ -472,6 +633,12 @@ from, and why each fails:
   **one** side is a chain the architecture still works — the other side supplies the pair — and a
   violator could live there. Excluding those cuts makes the population smaller, so it can only make
   my ceiling **too high**: the bounds stand, and a sweep that includes them may lower both.
+  **CLOSED BY `mg-d3c7`, AND THE PREDICTION IN THAT LAST CLAUSE WAS RIGHT AND THEN SOME
+  (`mg-5214`).** `b4_fullsweep.py 7` includes those cuts: the `n ≤ 7` `U_either` ceiling drops
+  from `17/78` to `1/7` (2 042 violators against 682), and an explicit family then drives the
+  uniform threshold to **`0`** on both readings. The bound *does* stand within its own
+  population — `17/78` and `13/111` are reproduced there exactly on a third code path — but it
+  is not a bound on the object the architecture needs. See §0's table, §6.0's rider and §7.
 * **I used prefix cuts of the identity linear extension.** For a *counterexample* the architecture's
   cut is a prefix of the **distinguished order** (`:82–86`), which exists only for counterexamples;
   on real posets there is no such order, and every poset in my population is presented in a normal
@@ -488,9 +655,42 @@ from, and why each fails:
 
 ## 10. Proposed text (not applied — `pm-onethird`'s to land)
 
-For `STATE.md`'s `ε_dem` sentence:
+**REPLACED BY `mg-5214` after `mg-d3c7`'s audit. The superseded version is kept below the
+replacement, struck, because it is the text that would otherwise have propagated into `STATE.md`
+and the record of what was nearly landed is worth more than a clean page.**
+
+For `STATE.md`'s `ε_dem` sentence — **the text to land:**
 
 > `ε_dem` is gated on L4's **threshold** `ε₀`, not its modulus — and `ε₀` **is not in the source**
+> (`mg-3969`, audited `mg-d3c7`): L4 `:464–474` carries no threshold, the file's one "sufficiently
+> small `ε`" at `:497` is the *spectral* `ε`, and the only smallness demand on the leakage `ε` is
+> the informal `ε ≪ 1` at `:459`. Three objects share the name, and **neither of the two that can
+> be written down can carry the gate.** (1) The one **Step 6 consumes** is **unmeasurable** — on a
+> minimal counterexample disjunct (i) is false by hypothesis, on every exhibitable poset it is true
+> at `ε = 1` (604 230 prefix cuts of the **non-chain** posets, `n ≤ 7`, 0 exceptions) — and proving
+> it positive **is** the conjecture on the thin-interface class. (2) The **uniform transfer
+> threshold**, offered as the measurable replacement, is **refuted rather than capped**: on the
+> architecturally required population — cuts at which **at least one** side is non-chain, which is
+> what Step 6 must survive — an explicit `n`-free family (a chain plus one isolated element,
+> `A = {z,c₁,…,c_{k−1}}`, `n = 2k+1`, `Δ₁ = (k+1)/((2k+1)k) → 0`, every balanced-in-side pair
+> evicted at every `k ≥ 3`, exact rationals to `k = 200`) gives **`ε₀(U_either) =
+> ε₀(U_smaller) = 0`** (`mg-d3c7`). **What is proven and positive is proven on a restriction:
+> `ε₀ ≤ 17/78 = 0.2179` uniformly in `n`, on cuts at which BOTH sides are non-chain** (witness at
+> `n = 6`; re-derived on three independent code paths), where the corpus's calibrated `0.20` sits
+> under it by a factor `1.0897` — **under 9 % of headroom within that restriction, and that
+> qualifier may not be dropped.** **None of this touches L4**, which the family satisfies via
+> disjunct (i) (`δ(P) = ⌊n/2⌋/n ≥ 1/3`); what it refutes is the deliberately (i)-free surrogate.
+> With `C₃ = 1` (`mg-76b2`, conditional on L2), **`ε_dem = ε₀²/2` exactly** — one equation, one
+> unknown — and the `mg-e35c` F5 banner's "100×" is exactly the square of a 10× move in `ε₀`.
+> **`ε_dem` therefore has no proven positive ceiling**: `(17/78)²/2 = 0.0238` is one only on the
+> both-sides-non-chain restriction. **The constant `mg-845e` asks after is `ε₀`, and it is not an
+> unmeasured number — it is the last lemma of the programme wearing a number's clothes.**
+
+Superseded version, struck (`mg-5214`) — it carried `17/78` and "under 9 % of headroom and no
+more" **with no scope qualifier at all**, and it recommended nothing about the refutation because
+the sweep behind it had not yet been run:
+
+> ~~`ε_dem` is gated on L4's **threshold** `ε₀`, not its modulus — and `ε₀` **is not in the source**
 > (`mg-3969`): L4 `:464–474` carries no threshold, the file's one "sufficiently small `ε`" at
 > `:497` is the *spectral* `ε`, and the only smallness demand on the leakage `ε` is the informal
 > `ε ≪ 1` at `:459`. Three objects share the name. The one Step 6 consumes is **unmeasurable** —
@@ -501,7 +701,7 @@ For `STATE.md`'s `ε_dem` sentence:
 > the corpus's calibrated `0.20` — **a factor 1.0897, under 9 % of headroom and no more**. With
 > `C₃ = 1` (`mg-76b2`,
 > conditional on L2), **`ε_dem = ε₀²/2 ≤ 0.0238`**, and the `mg-e35c` F5 banner's "100×" is exactly
-> the square of a 10× move in `ε₀`.
+> the square of a 10× move in `ε₀`.~~
 
 ---
 
@@ -512,6 +712,16 @@ python3 code/eps0_threshold_3969/a1_vacuity.py 7    # vacuity of the consumable 
 python3 code/eps0_threshold_3969/a2_uniform.py 6    # the ceilings, exhaustive
 python3 code/eps0_threshold_3969/a3_witness.py      # both witnesses, second code path
 python3 code/eps0_threshold_3969/a4_mechanism.py 6  # failure mechanism; my losing prediction
+```
+
+And for the scope repair (`mg-d3c7`'s instrument, which shares no code with the above; all four
+re-run by `mg-5214` before this document was edited, reproducing every figure quoted here):
+
+```
+python3 code/eps0_audit_d3c7/b0_selftest.py         # controls; C2 reconciles 604 230 vs 604 250
+python3 code/eps0_audit_d3c7/b4_fullsweep.py 7      # BOTH vs ONE+ scopes side by side
+python3 code/eps0_audit_d3c7/b6_family.py           # the family, exact rationals to k = 200
+python3 code/eps0_audit_d3c7/b7_scope_and_arith.py  # D1 δ ≥ 1/3; D2 the 58 755 tie convention
 ```
 
 Controls, all firing, reported inline by the instruments: **PC1** the `δ = 1/3` endpoint poset
