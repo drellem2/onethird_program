@@ -1,0 +1,22 @@
+--- q51f4 (M#) counterexample (n=7) ---
+  linear extensions = 19   primitive = True
+  Delta_P = 18/19 = 0.947368421
+  1-lambda_std in [0.185485078, 0.185485078]
+  E[D_F] = 150/19   M = 25/76 = 0.328947368
+  f* = M^2/(2(1-lam)) = 0.291685   (>1 means (F) FAILS)
+  mu_pref in [0.226537524, 0.226537524]  (EXACT copositivity bracket)
+  c# in [1.018707, 1.018707]   (>1 means (M#) FAILS)
+  rho >= 1.221325 ;  1/Delta_P = 1.055556 ;  rho > 1/Delta_P ? True
+  q51f4 EXPECTED: 19 LEs, Delta=18/19, mu_pref=0.226537524, gamma=0.185485078, c#=1.0187
+
+--- q51f4 (F) counterexample (n=7) ---
+  linear extensions = 156   primitive = True
+  Delta_P = 10/13 = 0.769230769
+  1-lambda_std in [0.039943023, 0.039943023]
+  E[D_F] = 293/39   M = 293/936 = 0.313034188
+  f* = M^2/(2(1-lam)) = 1.226627   (>1 means (F) FAILS)
+  mu_pref in [0.039943023, 0.039943023]  (EXACT copositivity bracket)
+  c# in [0.749259, 0.749259]   (>1 means (M#) FAILS)
+  rho >= 1.000000 ;  1/Delta_P = 1.300000 ;  rho > 1/Delta_P ? False
+  q51f4 EXPECTED: 156 LEs, M = 293/936, f* = 1.2266
+

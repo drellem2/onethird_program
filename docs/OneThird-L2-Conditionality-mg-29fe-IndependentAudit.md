@@ -17,7 +17,7 @@ with `lib28ff.py` **not opened until every number here had been produced**.
 | **The affirmative half** (`C₃^(III) = 1` without L2, 4377/4377 primitive `n ≤ 6`) | **CONFIRMED.** Reproduced on an instrument sharing no line of code with the parent's, and it survived four arms designed to falsify it (§5). |
 | **Item 1 — the rising-constants table** | **CONFIRMED, and the ticket's suspicion is REFUTED.** All five `c_true` values re-derive exactly; the increments **are** strictly decreasing. The apparent slip is in the **ticket's own compression**, not in mg-28ff. |
 | **Item 2 — "it is the Cheeger sweep that degrades"** | **HALF RIGHT, AND THE MISSING HALF IS THE DECISIVE ONE.** True as a measurement of the *gap*; false as an account of what can make the route *fail*. See §3 — this is the finding. |
-| **Item 3 — the `n = 6` boundary** | **HOLDS, with two small labelling defects and one self-audit sentence that is false.** No downstream sentence uses an `n = 7` sample as exhaustive; nothing has propagated to `STATE.md` or `roadmap.md`. |
+| **Item 3 — the `n = 6` boundary** | **THE BLANKET SCOPE HOLDS AND WAS RIGHT BY A WIDE MARGIN; THREE LABELLING DEFECTS, ONE OF THEM NOW DEMONSTRATED RATHER THAN FEARED.** Nothing has propagated to `STATE.md` or `roadmap.md`. But the exhaustive `n = 7` landed during this audit: mg-28ff's 106-poset sample reads `c_true = 0.176`, the truth is **`0.341`**, and **both route constants exceed `1` at `n = 7`** — so §4.3's *"100 % at every **enumerated** `n`"* is a sample read as an enumeration and is **false of the truth**. §4.1. |
 | **Item 4 — the two added steps** | **OVER-CLAIMED AT EXACTLY ONE JOINT, and UNDER-CLAIMED at another.** §6. |
 | **Item 5 — the quantifier move** | **VALID AT EVERY USE SITE.** Lemma 3.3 has exactly one use site in each document, and both branches of the median split were checked, not read. §5. |
 
@@ -213,9 +213,9 @@ do not share a degrading factor at all**, which is the sharpest available statem
 Recorded because it bears directly on how §4.5's negative should be read, and because I can
 check it on my own instrument. (M♯) and (F) are each **separately sufficient** for
 `C₃ = 1` at a poset, so what matters is `c_or(n) = max over primitive of min(c♯, f*)`. My
-exact values — **`0.125000, 0.250000, 0.306250, 0.550747`** at `n = 2..5`, with `n = 6` in
-`out_s5_branch.txt` — reproduce `mg-51f4`'s independently computed `0.250, 0.306, 0.551`
-and sit **strictly below both published columns**. §4.5's *"both of my routes are climbing
+exact values — **`0.125000, 0.250000, 0.306250, 0.550747, 0.753639`** at `n = 2..6` —
+reproduce `mg-51f4`'s independently computed `0.250, 0.306, 0.551, 0.754` and sit
+**strictly below both published columns** (`0.943151` and `0.811649` at `n = 6`). §4.5's *"both of my routes are climbing
 fast toward the `1` they must stay under"* is true of each column separately and
 **overstates the danger to the disjunction**, which is the thing `§8`'s dependency diagram
 actually places under `C₃ = 1`. §8 gets this right (*"three independent sufficient
@@ -257,6 +257,55 @@ that matters:** the `n = 7` sample rows point the *other way* — `c_true` drops
 and `c♯` to `0.850` — so if the document had leaned on them they would have **contradicted**
 its own "rising" thesis. It does not lean on them. The `n = 7` numbers are carried and not
 used, which is the correct handling.
+
+### 4.1 THE `n = 7` SAMPLE HAS NOW BEEN MEASURED AGAINST THE EXHAUSTIVE TRUTH, AND IT WAS WRONG BY A FACTOR OF ~2
+
+While this audit was running, `mg-51f4` enumerated **all 96428 naturally labelled posets on
+`[7]`** (86278 primitive) — the first genuine `n = 7` maximum in this lineage. Against
+mg-28ff's 106-poset sample:
+
+| `n = 7` | mg-28ff (SAMPLE of 106) | `mg-51f4` (EXHAUSTIVE, 86278 primitive) |
+|---|---|---|
+| `c_true` | `0.176145` | **`0.340719`** |
+| `c♯` | `0.850074` *(40-poset sample)* | **`1.018707`** — over `1` |
+| `f*` | `0.832530` | **`1.297074`** — over `1` |
+
+**The sample understated `c_true` by 1.93×, and it understated both route constants across
+the `1` boundary.** This does three things to §4 above:
+
+1. **It vindicates mg-28ff's blanket labelling.** §0 and §10 insist, unprompted, that no
+   `n = 7` number is a maximum. **They were right, and by a wide margin.** Whatever else is
+   true, the document's central scope discipline did its job.
+2. **It makes the three labelling defects materially worse, not cosmetic.** A reader who
+   took §4.3's *"100 % at every **enumerated** `n`"* at face value would have concluded
+   route (F) certifies at every `n ≤ 7`. It **does not** — it fails at 168 of 86278
+   primitive posets at `n = 7`. That is exactly the `17/78` failure mode, one population
+   over, and it is now demonstrated rather than feared.
+3. **It leaves mg-28ff's own thesis intact.** `c_true(7) = 0.340719` gives increment
+   `+0.013211` after `+0.019169` — **still strictly decreasing**. So the *"differences are
+   shrinking"* claim of §4.1, which §4.5's whole diagnosis rests on, **survives its first
+   test at an `n` beyond the evidence that produced it.** Item 1 is confirmed twice over.
+
+**I verified both of `mg-51f4`'s counterexamples on my own exact instrument** rather than
+taking them on report (`out_s6_verify_q51f4.txt`), and they reproduce to every digit:
+
+| witness | mine | |
+|---|---|---|
+| **(M♯) fails**, `rel = [(0,1),(0,2),(0,3),(0,5),(0,6),(1,2),(1,3),(1,5),(1,6),(2,3),(2,6),(4,5),(4,6),(5,6)]` | 19 linear extensions, `Δ_P = 18/19`, `1−λ_std = 0.185485078`, `μ_pref = 0.226537524` (exact copositivity bracket), **`c♯ = 1.018707`** | ✔ |
+| **(F) fails**, two antichains `{0,1,2}`, `{3,4,5,6}`, all `a<b` except `(2,3)` | 156 linear extensions, `E[D_F] = 293/39`, `M = 293/936`, **`f* = 1.226627`** | ✔ |
+
+**And the (M♯) witness instantiates consequence (B) exactly as §3.1 requires:** there
+`ρ = 1.221325` and `1/Δ_P = 1.055556`, so **`ρ > 1/Δ_P`** — the route dies through the cone
+price, as the algebra says it must. At the **(F)** witness `ρ = 1.000000` **exactly** (L2's
+first disjunct holds there), so (M♯) is comfortably safe at `c♯ = 0.749259`. The two
+failure sets are disjoint **for the reason §3 gives**, checked at the witnesses themselves.
+
+**A further independent confirmation of §6's reading 4.** `mg-51f4` measures `max ρ` over
+primitive posets as `1.0000, 1.0854, 1.1412, 1.2176, 1.2762` at `n = 3..7`. My **V00**
+column — computed as an exact copositivity bracket, and equal to `ρ` by the algebra of §6 —
+reads `1.000000, 1.085410, 1.141242, 1.217605` at `n = 3..6`. **Two instruments, six
+decimals, no shared code.** That `V00 = ρ` is confirmed as a measurement and not only as an
+identity I derived.
 
 **A precision note on §4.3, in the conservative direction.** `f*` is printed to six decimals
 (`0.550750`, `0.811654`), but `b1_footrule.py:77` brackets it with **20 bisection steps over
@@ -379,11 +428,14 @@ the theorem delivers when `μ_pref > Δ_P`: the truth there is `Δ_P²`, and
 deliver `C₃ = 1`.** As a *stated sufficient condition* it is unsound in that regime.
 
 **It does not bite on this population, and the instrument was never wrong.** Re-running the
-whole `n ≤ 6` sweep with the branch restored: `μ_pref > Δ_P` at exactly **one poset per
-`n`**, and the branched maximum differs from the one-case maximum **only at `n = 2`**
-(`0.125000` branched vs `0.000000` one-case). mg-28ff's published `c♯` column reads
-`0.125000` at `n = 2` — i.e. **its code implements the branch its document omits**. Every
-other published `c♯` is unaffected.
+whole `n ≤ 6` sweep with the branch restored (`out_s5_branch.txt`): `μ_pref > Δ_P` at
+exactly **one poset per `n`**, and the branched maximum differs from the one-case maximum
+**only at `n = 2`** (`0.125000` branched vs `0.000000` one-case). At `n = 3..6` both give
+`0.500000, 0.636846, 0.803289, 0.943151` — mg-28ff's published column exactly. And
+mg-28ff's `c♯(2)` **is** `0.125000`, i.e. **its code implements the branch its document
+omits**. So: a real unsoundness in the *stated* hypothesis, **zero effect on any published
+number above `n = 2`**, and no effect at all on the instrument. It should be repaired as
+prose (R3 in §6.5), not treated as a result being withdrawn.
 
 **This is a documentation defect, and I found it by shipping it myself.** My own `s3`
 implemented (M♯) exactly as §2 and §4.2 state it, one case, and produced `c♯(2) = 0.000000`
@@ -413,11 +465,16 @@ whoever owns `docs/OneThird-L2-Conditionality-mg-28ff.md`**; I have landed none 
 
 ## §7. WHAT WOULD CHANGE MY VERDICT
 
-* If **V01 exceeds `1` at `n = 6`**, §6's reading 2 becomes: S1 *is* load-bearing, but only
-  from `n = 6`, and R5 still is not evidence for it. The over-claim shrinks to a citation
-  defect. **It does not touch §3**, which is the finding.
+* **Resolved while this was written:** V01 *does* exceed `1` at `n = 6`, at **1 poset of
+  4070**. So S1 is load-bearing from `n = 6`, mg-28ff's sentence is **true**, and my finding
+  narrows to what it should be — **R5 is not evidence for the S1 half, and the two halves
+  are unequal by two orders of magnitude** (`192` vs `1` at `n = 6`). It does not touch §3.
 * If someone exhibits a poset with `Δ_P > 1`, §3 collapses. `Δ_P = max_i Pr[pos(i) ≠ i]`, so
   this cannot happen; I state it because §3 rests on it entirely.
+* If the exhaustive `n = 7` figures I quote from `mg-51f4` in §4.1 are wrong, §4.1's
+  upgrade falls (though §4's three labelling defects stand regardless — they are textual).
+  I verified its two **counterexamples** exactly on my own instrument; I did **not**
+  re-enumerate its 86278-poset population, and I say so rather than implying I did.
 * If `μ_pref` were *not* the right cone minimum — e.g. if the monotone cone were **not**
   the nonneg span of `ψ_k` — then `ρ` is not what I say it is. Arm A7 checks both directions
   of that on my own basis, and A6a/A6b check `Q`, `N` and `Q_kk = leak(A_k)` against their
@@ -448,6 +505,33 @@ that could never have fired, and a finding about §4.2's `n = 7` sample size tha
 misreading and would have been a false accusation** had my own "quote it from the document
 first" guard not stopped it. **E7 honoured**: every maximum here is labelled a maximum over
 an enumerated finite population. **E8 honoured**: I qualified figures and withdrew none.
+
+---
+
+## §8.5. WHAT IS `mg-51f4`'s AND NOT MINE
+
+Filed explicitly, because this audit ran concurrently with the successor it is partly about
+and the two exchanged mail four times.
+
+* **Consequence (A) — the floor `c♯ ≥ Δ_P − γ/2` — is `mg-51f4`'s**, committed pre-run at
+  `01c206f`, `20:24:09Z`, 33 minutes before my mail. Mine is the same object written with
+  the quantifier price `ρ` left in.
+* **The pointwise-argmax correction in §3.2 is `mg-51f4`'s**, and it corrects an error in
+  my first statement of the finding.
+* **The exhaustive `n = 7` population, `c_or`, the `γ`-binned table and both
+  counterexamples are `mg-51f4`'s.** I verified the two counterexamples exactly (§4.1); I
+  did **not** re-enumerate 86278 posets and do not claim that population as audited.
+* **Mine are:** the `ρ`-identity and consequence **(B)** in the form *"`c♯ > 1` requires
+  `ρ > 1/Δ_P`, so the sweep alone can never break the route"*; the 2×2 counterfactual and
+  the `V00 = ρ` reading (§6); the second-branch defect in (M♯) (§6.1); the four
+  falsification arms (§5); and the three `n = 7` labelling defects plus the `f*` precision
+  cause (§4).
+* **`mg-51f4`'s own conclusion, which I record because it bears on why this audit was
+  filed:** its scoping instruction — *file against the pair, not against either route* —
+  was **right**, and it is why `c_or` exists at all, even though the sentence attached to
+  it (§4.5's single cause) was wrong. **The mis-diagnosis I found did not waste the
+  successor's effort.** That is worth saying plainly: my §3 corrects a sentence, not a
+  ticket.
 
 ---
 
