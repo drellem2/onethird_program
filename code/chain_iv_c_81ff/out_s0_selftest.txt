@@ -1,0 +1,109 @@
+==============================================================================
+s0 — CONTROLS
+==============================================================================
+
+------------------------------------------------------------------------------
+(A) POPULATION — extension enumeration vs the 2^C(n,2) route
+------------------------------------------------------------------------------
+    ok:   n=2: the two enumerations give the SAME set (2 posets)
+    ok:   n=3: the two enumerations give the SAME set (7 posets)
+    ok:   n=4: the two enumerations give the SAME set (40 posets)
+    ok:   n=5: the two enumerations give the SAME set (357 posets)
+    ok:   n=2: population 2 == mg-76b2's 2
+    ok:   n=3: population 7 == mg-76b2's 7
+    ok:   n=4: population 40 == mg-76b2's 40
+    ok:   n=5: population 357 == mg-76b2's 357
+    ok:   n=6: population 4824 == mg-76b2's 4824
+
+------------------------------------------------------------------------------
+(B) TRANSPORT — down-set DP vs the n! path, EVERY poset n <= 6
+------------------------------------------------------------------------------
+    ok:   5230 posets, 0 mismatches between the DP and the n! path
+
+------------------------------------------------------------------------------
+(C) MUTATION on (B) — the peeling predicate this file got wrong, re-installed
+------------------------------------------------------------------------------
+    The mutant peels i from the down-set S whenever `down[i] <= S\{i}`.  That is
+    TRUE OF EVERY i IN S, minimal elements included, because S is already
+    down-closed — so the mutant offers subsets that are not down-sets at all.
+
+    THIS CONTROL WAS BUILT WRONG FIRST AND THE FIRST RUN SAID SO.  I wrote it to
+    assert the mutant gives WRONG NUMBERS.  It does not: guarded with `.get(...,0)`
+    the bogus states contribute nothing and the mutant is NUMERICALLY CORRECT at
+    every poset here — which is exactly the defect mg-9461's own s0 (C) records,
+    arrived at independently.  So the control asserts BOTH halves, as that one
+    does: the numbers agree AND the state count exceeds the down-set lattice.
+    A numbers-only check at any n could not have seen this.
+    ok:   the mutant is NUMERICALLY CORRECT on all 406 posets n<=5 — so (B) alone cannot catch it
+    ok:   the mutant offers 12841 peels where only 8460 land on a down-set — 4381 bogus states (34.1%), which is what catches it
+
+------------------------------------------------------------------------------
+(D) MUTATION on the Rayleigh reading — UNCENTRED prefix indicator
+------------------------------------------------------------------------------
+    `rho(A_k)` is the Rayleigh quotient of the CENTRED indicator f = 1_A - (k/n)1,
+    which is the only reading that lands in H = 1^perp.  An uncentred 1_A gives a
+    different number and this control exhibits the difference rather than
+    asserting the convention in prose.
+    ok:   centred and uncentred disagree on 1432 of 1562 (poset, k) pairs n<=5
+
+------------------------------------------------------------------------------
+(E) THE IDENTITY — rho(A_k) from M directly vs 1 - Q_k from the Laplacian
+------------------------------------------------------------------------------
+    This is the control for the class of slip this file's own module docstring
+    made: `c = (1-minQ)/lambda_2` where the truth is `(1-minQ)/(1-lambda_2)`.
+    ok:   25682 (poset, k) pairs: rho from M == 1 - Q_k from L, 0 mismatches
+
+------------------------------------------------------------------------------
+(F) EXACT vs FLOAT — Sylvester bracket vs Jacobi, and a NEGATIVE control
+------------------------------------------------------------------------------
+    ok:   5228 posets: the exact bracket contains the Jacobi value, 0 failures
+
+    NEGATIVE CONTROL — `lambda2_gt` must REJECT a q above lambda_2 and ACCEPT one
+    below it, on a poset whose lambda_2 is known independently.
+    ok:   lambda2_gt(lo - 1/100) is True  [lambda_2 ~ 0.460655]
+    ok:   lambda2_gt(hi + 1/100) is False [lambda_2 ~ 0.460655]
+    ok:   lambda2_gt(1) is False — lambda_2 <= 1 on this population
+
+------------------------------------------------------------------------------
+(G) THE STRATIFICATION — mg-76b2 s3 (C0)'s DISC <=> CUT, re-verified and EXTENDED
+------------------------------------------------------------------------------
+    `lambda_std = 0` iff the weighted graph a_ij is disconnected iff the poset has
+    an ordinal-sum cut point.  mg-76b2 verified this at n <= 6; n = 7 is new here.
+
+     n   posets     DISC      CUT   agree
+     2        2        1        1       2
+    ok:   n=2: DISC == CUT on all 2 posets
+     3        7        3        3       7
+    ok:   n=3: DISC == CUT on all 7 posets
+     4       40       13       13      40
+    ok:   n=4: DISC == CUT on all 40 posets
+     5      357       82       82     357
+    ok:   n=5: DISC == CUT on all 357 posets
+     6     4824      754      754    4824
+    ok:   n=6: DISC == CUT on all 4824 posets
+     7    96428    10150    10150   96428
+    ok:   n=7: DISC == CUT on all 96428 posets
+
+------------------------------------------------------------------------------
+(H) THE HEADLINE ROW — mg-76b2 s3 (C3)'s `min c` at n = 3..6, reproduced
+------------------------------------------------------------------------------
+    THIS IS THE TICKET'S SEQUENCING DIRECTIVE, RUN AS A CONTROL.  If these four
+    figures do not come back exactly, nothing downstream is about mg-76b2's object.
+
+     n   primitive   with lam_std>0    min c        mg-76b2   
+     3          4               3   0.750000     0.750000
+    ok:   n=3: primitive count 4 == mg-76b2's 4
+    ok:   n=3: min c 0.750000 == mg-76b2's 0.750000
+     4         27              26   0.618034     0.618034
+    ok:   n=4: primitive count 27 == mg-76b2's 27
+    ok:   n=4: min c 0.618034 == mg-76b2's 0.618034
+     5        275             274   0.536219     0.536219
+    ok:   n=5: primitive count 275 == mg-76b2's 275
+    ok:   n=5: min c 0.536219 == mg-76b2's 0.536219
+     6       4070            4069   0.452934     0.452934
+    ok:   n=6: primitive count 4070 == mg-76b2's 4070
+    ok:   n=6: min c 0.452934 == mg-76b2's 0.452934
+
+==============================================================================
+s0 VERDICT: ALL CONTROLS PASS
+==============================================================================

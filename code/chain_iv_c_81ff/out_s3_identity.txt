@@ -1,0 +1,153 @@
+==============================================================================
+s3 — `c` AND `C_3^gap` ARE ONE UNKNOWN IN TWO CURRENCIES
+==============================================================================
+
+------------------------------------------------------------------------------
+(I1) THE IDENTITY, EXACTLY, ON EVERY POSET n <= 7
+------------------------------------------------------------------------------
+
+  C_3^gap(P) := min_k Q_k / gap          (chain (II)'s constant; the gap-form)
+  c(P)       := (1 - min_k Q_k) / (1-gap) (chain (IV)'s; the literal form)
+  =>  c = (1 - C_3^gap * gap) / (1 - gap)        and       C_3^gap = min_k Q_k / gap
+
+  Checked as an EXACT RATIONAL identity at every primitive poset n <= 7.  THE GAP
+  USED IS ANY RATIONAL, NOT THE TRUE lambda_2, AND THAT IS THE POINT: the identity
+  is FORMAL — it says only that min_k Q_k determines both constants once the gap is
+  fixed, so pushing an exact eigenvalue through it would test the eigenroutine and
+  not the identity.  The rational used is the float bracketed to 1e-6, and both
+  sides are then exact `Fraction` arithmetic.
+    ok:   90654 primitive posets n<=7: the identity holds exactly, 0 failures
+
+  AND THE EXACT-EIGENVALUE VERSION, on the smaller population where it is cheap:
+    ok:   4376 primitive posets n<=6 on the Sylvester bracket: 0 failures
+
+  max C_3^gap by n — mg-76b2 s3 (C2)/(C3)'s row, reproduced and EXTENDED to n=7:
+     n     max C_3^gap    mg-76b2
+     3     1.500000     1.500000
+    ok:   n=3: max C_3^gap matches mg-76b2
+     4     1.472917     1.472917
+    ok:   n=4: max C_3^gap matches mg-76b2
+     5     1.989522     1.989522
+    ok:   n=5: max C_3^gap matches mg-76b2
+     6     2.386087     2.386087
+    ok:   n=6: max C_3^gap matches mg-76b2
+     7     3.075271     NEW
+
+  RISING: 1.500, 1.473, 1.990, 2.386, 3.075.  This is the SAME measurement as
+  s1's falling `min c`, read in the other currency — and it is measured on the
+  same out-of-regime population, so it is a DIRECTION in both currencies and a
+  verdict in neither.  Quoting one of them as evidence and not the other would be
+  quoting one number twice.
+
+------------------------------------------------------------------------------
+(I2) THE DEMANDS COINCIDE — chain (IV) IS chain (II)
+------------------------------------------------------------------------------
+
+  THE TWO LINES.  Chain (IV): eps_dem = 1 - (1-eps_leak)/c.  Self-consistently the
+  budget IS the gap, eps = eps_dem, and c = (1 - g*eps)/(1 - eps) by (I1) with
+  g := C_3^gap.  Substitute:
+
+      1 - eps  =  (1-eps_leak)/c  =  (1-eps_leak)(1-eps)/(1 - g*eps)
+      =>  1 - g*eps  =  1 - eps_leak          [divide by (1-eps) != 0]
+      =>  eps        =  eps_leak / g          =  chain (II)'s eps_dem.   QED
+
+  Verified numerically over a grid of g, against BOTH chains' own formulae as
+  mg-76b2 section 6 writes them:
+
+      g      eps_dem^(II)=eps_leak/g    c=(1-g*eps)/(1-eps)    eps_dem^(IV)
+    1.000      0.200000                 1.000000             0.200000
+    ok:   g=1.000: eps_dem^(IV) == eps_dem^(II) exactly
+    1.500      0.133333                 0.923077             0.133333
+    ok:   g=1.500: eps_dem^(IV) == eps_dem^(II) exactly
+    2.000      0.100000                 0.888889             0.100000
+    ok:   g=2.000: eps_dem^(IV) == eps_dem^(II) exactly
+    2.386      0.083822                 0.873193             0.083822
+    ok:   g=2.386: eps_dem^(IV) == eps_dem^(II) exactly
+    3.075      0.065041                 0.855652             0.065041
+    ok:   g=3.075: eps_dem^(IV) == eps_dem^(II) exactly
+    5.000      0.040000                 0.833333             0.040000
+    ok:   g=5.000: eps_dem^(IV) == eps_dem^(II) exactly
+   10.000      0.020000                 0.816327             0.020000
+    ok:   g=10.000: eps_dem^(IV) == eps_dem^(II) exactly
+   20.000      0.010000                 0.808081             0.010000
+    ok:   g=20.000: eps_dem^(IV) == eps_dem^(II) exactly
+
+  >>> CHAIN (IV) DOES NOT BUY A WEAKER DEMAND THAN CHAIN (II).  It buys exactly
+      chain (II)'s demand, in a currency where the SAME unknown is written 1/x
+      instead of x.  The `10x` in the ticket's framing is chain (II)-or-(IV)
+      against chain (III), and mg-9461 already priced it: `the chain choice is
+      worth 2/eps_leak = 10x and no more`.
+
+  WHAT CHAIN (IV) *DOES* BUY, and it is real: a WEAKER HYPOTHESIS.  Chain (II)
+  assumes min_k Q_k <= g * gap — a RELATIVE bound that forces min_k Q_k -> 0 with
+  the gap.  Chain (IV) assumes min_k Q_k <= 1 - c(1-gap) — an ABSOLUTE bound that
+  permits min_k Q_k ~ 1-c however small the gap gets.  On the class {gap<=eps_spec}
+  the two hypotheses deliver the same conclusion, but (IV)'s is strictly easier to
+  prove.  THAT is chain (IV)'s advantage, and it is an advantage in PROVABILITY,
+  not in the constant.
+
+------------------------------------------------------------------------------
+(I3) WHAT `eps_dem = 0.20` COSTS
+------------------------------------------------------------------------------
+
+  eps_dem^(IV) = 1 - (1-eps_leak)/c = eps_leak = 0.2  requires  c = 1 EXACTLY.
+  By (I1), c = 1  <=>  min_k Q_k = gap  <=>  C_3^gap = 1 EXACTLY: some prefix's
+  centred indicator IS a minimiser of the Rayleigh quotient over H.
+
+  THAT IS THE `C_3 = 1` WHOSE GAP-FORM READING IS ALREADY MEASURED FALSE.
+  STATE.md row :164 and mg-94c3 section 3: over the 1032 primitive posets
+  exhibiting L2's first disjunct, C_3^gap exceeds 1 at 1023 of them.  So c < 1 on
+  1023 of 1032, and eps_dem^(IV) < 0.20 on all of them.
+
+  HOW MUCH LESS IS THE WHOLE QUESTION, and it is NOT settled by that measurement,
+  because 1023/1032 is measured OUT OF REGIME exactly as s1's family is.  On the
+  two families that DO reach the regime (s2 R3), c = 0.99990 and 0.99996, giving
+      c = 0.9998969   ->   eps_dem^(IV) = 0.199918
+      c = 0.9999555   ->   eps_dem^(IV) = 0.199964
+  — i.e. essentially the full 0.20.  THE TICKET'S PREMISE SURVIVES ON THE ONLY
+  POSETS ANYONE HAS EXHIBITED INSIDE THE REGIME.  It is not established, because
+  two families are not a class.
+
+------------------------------------------------------------------------------
+(I4) NEGATIVE CONTROL — a chain (IV) that DOES pay the Cheeger square must fail
+------------------------------------------------------------------------------
+
+  The mis-derivation: read the literal conjecture through Cheeger's hard half, so
+  the deliverable is Phi <= sqrt(2(1 - c(1-eps_spec))) instead of 1 - c(1-eps_spec).
+  Its demand solves sqrt(2(1-c(1-eps))) = eps_leak, i.e. eps_dem_bad = 
+  (1 - (1-eps_leak^2/2)/c).  If (I2) were vacuous arithmetic this would also
+  reproduce eps_leak/g; it must not.
+   g= 1.00   correct eps_dem = 0.200000   square-paying variant = 0.020000   differs (good)
+   g= 1.50   correct eps_dem = 0.133333   square-paying variant = -0.061667   differs (good)
+   g= 2.00   correct eps_dem = 0.100000   square-paying variant = -0.102500   differs (good)
+   g= 5.00   correct eps_dem = 0.040000   square-paying variant = -0.176000   differs (good)
+   g=10.00   correct eps_dem = 0.020000   square-paying variant = -0.200500   differs (good)
+    ok:   the square-paying variant disagrees at all 5 grid points — (I2) is not vacuous
+
+------------------------------------------------------------------------------
+(I5) THE WALL, PRICED IN THE ONE UNKNOWN
+------------------------------------------------------------------------------
+
+  The supply side is eps_sup = 1 (pair bias, PROVEN, and an EQUALITY for the
+  information it consumes — mg-6bc2 Claim 3.1).  The distance to the wall is
+  eps_sup / eps_dem, and by (I2) that is g / eps_leak = 5g:
+
+      C_3^gap = g       eps_dem = eps_leak/g      wall factor = 5g
+         1.000              0.200000                  5.00x
+         1.500              0.133333                  7.50x
+         2.386              0.083822                 11.93x
+         3.075              0.065041                 15.38x
+        10.000              0.020000                 50.00x
+
+  SO THE 5x REFRAMING IS THE g = 1 ROW, AND ONLY THAT ROW.  It is the best case of
+  the one unknown, not a property of chain (IV).  At the largest g this corpus has
+  measured (3.075, n = 7, out of regime) the wall is 15x; at g = 10 — the value at
+  which chain (IV) stops closing at all — it is 50x, which is chain (III)'s figure.
+  The Cheeger square is not avoided by chain (IV); it is REFINANCED, and g is the
+  interest rate.
+
+==============================================================================
+s3 VERDICT: ALL CHECKS PASS — chain (IV)'s c and chain (II)'s C_3^gap are one unknown;
+their demands are algebraically equal; and `eps_dem = 0.20` is the g = 1 extreme,
+not a figure any measurement in this corpus supports.
+==============================================================================
