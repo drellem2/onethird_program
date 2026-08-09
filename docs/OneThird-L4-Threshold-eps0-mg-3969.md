@@ -37,7 +37,7 @@
 > | statement | bound | witness | status |
 > |---|---|---|---|
 > | `U_either` — the `F`-free repaired transfer, **either** side, asserted for **all** posets | **`ε₀ ≤ 17/78 = 0.21795`**, uniformly in `n` | `n = 6`, exhibited, re-derived by a second code path | **PROVEN** |
-> | `U_smaller` — same, **smaller** side only | **`ε₀ ≤ 1/7 = 0.14286`**, uniformly in `n` | `n = 6`, exhibited | **PROVEN** |
+> | `U_smaller` — same, **smaller** side only | **`ε₀ ≤ 13/111 = 0.11712`**, uniformly in `n` | `n = 7`, exhibited | **PROVEN** |
 > | `S` — what **Step 6** actually consumes | **`ε₀ = 1` on every poset that can be exhibited** | 604,230 prefix cuts, `n ≤ 7`, exhaustive | **PROVEN, AND VACUOUS** |
 >
 > **The corpus's operative `ε₀ ≈ 0.20` now has a proven ceiling `17/78 = 0.2179` immediately above
@@ -306,15 +306,35 @@ Instrument **A2** (`a2_uniform.py`), exhaustive to `n = 6`, every poset, every p
 > the poset `{x<z} ⊔ {y}`; **all four** balanced-in-side pairs leave `[1/3,2/3]` in `P`
 > (`2/3 → 9/13`, `2/3 → 19/26`, `2/3 → 19/26`, `1/3 → 4/13`).* **[PROVEN]**
 >
-> **Claim 6.2.** **`ε₀(U_smaller) ≤ 1/7 = 0.142857…`, uniformly in `n`.** *Witness: `n = 6`,
-> `Δ₁ = 1/7`, the unique smaller-side pair goes `1/2 → 5/7`.* **[PROVEN]**
+> **Claim 6.2.** **`ε₀(U_smaller) ≤ 13/111 = 0.117117…`, uniformly in `n`.** *Witness: `n = 7`,
+> `Δ₁ = 13/111`. The `n = 6` witness at `Δ₁ = 1/7 = 0.142857` (unique smaller-side pair
+> `1/2 → 5/7`) is superseded by it and kept because it is the one `a3_witness.py` certifies.*
+> **[PROVEN]**
+
+### 6.0 The `n = 7` sweep, which finished after the first submission and is now included
+
+`a2_uniform.py 7` — **604 250 cuts, 335 496 with both sides non-chain**, every poset on `n ≤ 7`:
+
+| reading | ceiling at `n ≤ 6` | ceiling at `n ≤ 7` | failures at `n ≤ 7` |
+|---|---|---|---|
+| `U_either` | `17/78 = 0.217949` | **`17/78` — UNCHANGED** | 682 (none thinner than the `n = 6` witness) |
+| `U_smaller` | `1/7 = 0.142857` | **`13/111 = 0.117117`** | 58 755 |
+
+**The headline ceiling survived a 24× larger population without moving**, and the `n = 7` sweep
+found 640 further either-side failures, none of them at a thinner interface. That is the outcome I
+flagged in §9 as the one that could only lower the number; it lowered the *smaller-side* one and
+left `17/78` where it was. `13/111` is still above `mg-3ce3`'s `0.085`, so the two remain
+consistent (§9).
 
 **Why one witness at one `n` bounds an `n`-free threshold at every `n`.** `ε₀` is by definition a
 threshold **valid for all `n` at once**. A single violating instance at `n = 6` and `ε = 17/78`
 falsifies the statement at every `ε ≥ 17/78`, therefore bounds the uniform threshold, therefore
 bounds it at every `n`. (It says nothing about `ε₀(n)` for a *fixed* `n ≠ 6` — see §9.)
 
-**Both witnesses were re-derived by a second, independent code path** (`a3_witness.py`), which
+**Both `n = 6` witnesses were re-derived by a second, independent code path** (`a3_witness.py`) —
+including the one carrying Claim 6.1, the headline. The `n = 7` witness that lowers Claim 6.2 to
+`13/111` has **not** been through that second path and is reported on the sweep's authority alone;
+Claim 6.2 therefore has a second-path-certified fallback at `1/7`. The verifier
 enumerates linear extensions by filtering all `n!` permutations rather than by the recursive
 builder used in the sweep, and prints the full certificate pair-by-pair. The numbers agree exactly.
 
@@ -440,9 +460,11 @@ from, and why each fails:
 * **I did not edit `STATE.md`.** Its `ε₀` sentences sit inside `pm-onethird`'s one-paragraph state
   and inside a blocked item's gate; proposed text is in §10 and the verdict was mailed rather than
   landed, so the gate stays where its owner put it.
-* **My exhaustive sweeps stop at `n = 7` (vacuity) and `n = 6` (the ceiling).** The `n = 7` uniform
-  sweep was launched and is **not** included; if it finds a thinner violator the ceiling drops and
-  Claim 6.1 becomes an over-estimate — it can never become wrong in the other direction.
+* **My exhaustive sweeps stop at `n = 7`, for both the vacuity result and the ceilings.** The
+  `n = 7` uniform sweep was still running at the first submission; it has since finished and §6.0
+  reports it — `U_either` unchanged at `17/78`, `U_smaller` lowered to `13/111`. Nothing is
+  exhaustive beyond `n = 7`, and a thinner violator at `n ≥ 8` would lower the ceilings further. It
+  can never move them the other way.
 * **The ceiling bounds a uniform threshold, not `ε₀(n)` at a fixed `n`.** Nothing here says
   `ε₀(5) ≤ 17/78`; at `n ≤ 5` there is no `U_either` violator at any `ε` whatever.
 * **My sweeps skip every cut at which *either* side is a chain — a coverage gap I did not close.**
@@ -457,7 +479,7 @@ from, and why each fails:
   same object.
 * **Linial's width-2 theorem (Remark 5.0) is cited, not proved.** The width bound itself is proved.
 * **I did not verify `mg-3ce3`'s own numbers** (`F(ε)` envelope, the 89 smaller-side losses, the
-  first-loss `ε = 0.085`). My `U_smaller` ceiling `1/7 = 0.1429` is **independent** and, being on a
+  first-loss `ε = 0.085`). My `U_smaller` ceiling `13/111 = 0.1171` is **independent** and, being on a
   population `mg-3ce3` did not cover (`n ≤ 6` exhaustive vs its sampled `n = 8,9,10` + families),
   neither confirms nor contradicts its `0.085`. Two upper bounds, the smaller of which wins: if
   `0.085` is right, it is the operative ceiling for that reading.
