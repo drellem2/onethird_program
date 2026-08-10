@@ -168,3 +168,46 @@ it as a hole, because the divergence it is blinded by IS the finding being repor
 EXHIBIT VERDICT: the trigger fired, it blocked, and the addressee is on the record —
 failure_class=defect, so the refinery did not retry it as infrastructure noise, and the
 submitting agent's poll loop sees status=failed with the diverged field named.
+
+============================================================================================
+TWO THINGS THE LIVE RUN ESTABLISHED THAT NO LOCAL RUN COULD
+============================================================================================
+
+1.  THE ADDRESSEE IS NOT AN INFERENCE.  The refinery MAILED the failure, unprompted, to the
+    author's mailbox, with the whole gate transcript in the body:
+
+        $ mg mail list mg-724a
+        ● 724a/1786349925456779000.22019.9000  refinery
+          MERGE FAILED (DEFECT): mr-d9soikitjv1sgaptnam0 (branch=exhibit-724a-knownbad)
+
+        From: refinery
+        Merge request mr-d9soikitjv1sgaptnam0 failed.
+        Branch: exhibit-724a-knownbad
+        Author: mg-724a
+        DEFECT — establishes a fact about the branch. A fix is warranted.
+        Attempts: 1 — it failed ONCE and was not retried
+        No further retry: the build gate ran on this tree and returned a verdict —
+                          re-running establishes the same fact
+        Error: quality gate: ./build.sh failed: exit status 1
+        Gate output: [132 lines / 11244 bytes — the full §1-§5 transcript]
+
+    mg-be37's finding was that a detector firing into events.log with no mail path is
+    indistinguishable from one that never fired.  This one has a mail path, it was exercised
+    rather than described, and the message names the branch, the author, the class and the
+    remedy.
+
+2.  THE RECORDED/GATED SPLIT WAS VINDICATED ON THE FIRST LIVE RUN, AND NOT BY ARGUMENT.
+    The refinery observed audit.sweep_membership_candidates = 207 where this worktree
+    observes 206.  The cause is that the gate runs on the REBASED tree: while mg-724a was
+    being written, code/dated_population_2ff6 landed on main, and a4's sweep counts every
+    directory under code/.
+
+        audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)
+                                                     baseline=206  observed=207
+
+    HAD THAT FIELD BEEN GATED, THIS BRANCH WOULD HAVE BEEN BLOCKED BY SOMEBODY ELSE'S MERGE.
+    That is precisely the failure mode the ticket names — a gate that fails for reasons its
+    author cannot act on, and is switched off six weeks later — and it arrived on the first
+    run rather than in six weeks.  The 20 GATED fields were unaffected: neither subject
+    directory nor STATE.md is touched by those four commits, which is why a1's bounded scope
+    is gateable where a4's corpus-wide scope is not.
