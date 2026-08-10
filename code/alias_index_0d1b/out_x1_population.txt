@@ -1,0 +1,107 @@
+x1  THE POPULATION THIS SWEEP EXAMINED
+
+  NAME LAYER — every tracked file under code/ and docs/, this instrument excluded
+    trees under code/ .............. 184  (+1, this instrument, excluded below)
+    .py files ...................... 967
+    transcripts (*.txt) ............ 897
+    .md under code/ ................ 285
+    canonical documents in docs/ ... 146
+    STATE.md ....................... 211 lines
+
+  VALUE LAYER — where a number could actually be produced and compared
+    posets in POP-ALL .............. 404   (every naturally-labelled poset, n=3,4,5)
+    of those, primitive (POP-PRIM) . 306
+    trees with an adapter .......... 12
+    scalar columns compared ........ 76
+
+==============================================================================
+WHY 172 TREES ARE NOT IN THE VALUE LAYER — the classification, by machine
+==============================================================================
+
+  12   probed
+       anticorrelation_c50b            audit_5cba                      c3_audit_a94c3                
+       c3_prefix_capture_76b2          chain_iv_c_81ff                 direct_prefix_audit_2de0      
+       eleak_repair_8311               l2_audit_29fe                   l2_conditionality_28ff        
+       l2_underclaim_audit_3bb9        lstar_789d                      sweep_loss_51f4               
+
+  59   POSET MATHEMATICS, NO ADAPTER WRITTEN — the residue
+       audit_2c77                      branching_af28                  branching_audit_19ec          
+       branching_audit_2060            branching_audit_6ad0            branching_locate_db09         
+       branching_repair_41aa           branching_warrant_dffa          chain_iv_audit_00b3           
+       chain_selection_9461            counterexample_audit_0a11       counterexample_audit_a7b4     
+       counterexample_audit_c6bc       counterexample_probe_24a3       counterexample_repair_dea5    
+       dual_certificate_131e           dual_certificate_audit_eaa1     eps0_audit_d3c7               
+       eps0_threshold_3969             face_geometry                   face_geometry_audit_1c80      
+       face_geometry_audit_5630        face_geometry_audit_c4c8        face_geometry_audit_e0ce      
+       face_geometry_audit_f1b2        face_geometry_audit_f7bc        face_geometry_audit_fcb2      
+       face_geometry_audit_fcf1        face_geometry_instr_5f9a        face_geometry_landing_da45    
+       face_geometry_repair_8af0       face_geometry_repair_e35b       growth_rate_00a1              
+       hodge_leverage                  hodge_leverage_audit_3c24       hodge_leverage_audit_86a3     
+       hodge_leverage_audit_d39d       landscape_audit_d673            landscape_ebd8                
+       landscape_repair_1953           landscape_repair_audit_3b51     libweak_audit_c4f5            
+       pairbias_audit_a832f            pairbias_indep_audit_6bd1       pairbias_independence_345e    
+       pairbias_repair_ba78            pairbias_sharpening_6bc2        perslot_audit_a41b7           
+       perslot_symmetry_200d           search_reach_abe8               semigroup_note                
+       semigroup_note_audit_66a6       species_7d75                    species_audit_73df            
+       species_audit_a61f              species_remainder_f8fa          unified_gate_8fd1             
+       unified_gate_audit_446b         unitmap_audit_9f91            
+
+  112  no poset idiom — a META tree (transcripts, pins, gates, provenance)
+       (not listed individually — 112 trees; these compute nothing this sweep could compare)
+
+  1    no python at all
+       row3b_audit_eba7              
+
+==============================================================================
+THE RESIDUE, RANKED — which unswept trees define an ALREADY-INDEXED name
+==============================================================================
+
+  The 59 trees above do the arc's mathematics and have no adapter here.  The question
+  that matters is not how many there are, it is which of them compute a quantity this
+  index already has a row for — because those are the free controls this sweep has NOT
+  cashed.  A tree is listed below if its `.py` DEFINES a symbol whose name is one the
+  value layer established.
+
+    AMBIGUOUS TOKENS, EXCLUDED FROM THE RANKING AND NAMED INSTEAD (rule: a name
+    defined in more than 8 trees is not evidence of anything):
+      `M` is defined in 34 trees.  In `lstar_789d`, `audit_5cba`, `anticorrelation_c50b`
+      and `sweep_loss_51f4` it is route (F)'s mean and the four AGREE exactly
+      (x3 V2).  Elsewhere it is a matrix, a multiplicity or a loop variable,
+      and NOTHING IN THIS INDEX CAN TELL WHICH — the name carries no type.
+      That is a finding about the name, not a gap in the sweep.
+
+    unitmap_audit_9f91               1: E_inv
+    unified_gate_audit_446b          1: Delta
+    eps0_threshold_3969              1: delta1
+    eps0_audit_d3c7                  1: delta1
+    chain_iv_audit_00b3              1: lambda2_bracket
+
+    5 of 59 residue trees define at least one already-indexed, UNAMBIGUOUS name.
+
+    THESE ARE THE NEXT TICKET, AND THEY ARE NAMED RATHER THAN COUNTED.  Each is a place
+    where an alias probably exists and this sweep did not check it.  Reporting the sweep
+    as complete without this list would be the ticket's own defect: the smallest set an
+    instrument looked at, published as the set where the thing happens.
+
+==============================================================================
+WHAT THE VALUE LAYER CANNOT SEE EVEN WHERE IT RUNS
+==============================================================================
+
+  * `n <= 5`.  Two scalars that agree over 306 primitive posets at n = 3,4,5 can differ
+    at n = 8.  Nothing here bears on that, and no row of INDEX.md claims otherwise.
+
+  * FAMILIES.  Every published statement about `rho*Delta` at n >= 6 is about a FAMILY
+    (chain(n-1)+point, near-ordinal antichains), not about a sweep.  This instrument
+    compares per-poset scalars and has no family arm.
+
+  * numpy.  `l2_audit_29fe.mu_pref_float` imports numpy at `lib29fe.py:347` and numpy is
+    NOT INSTALLED in this environment, so that entry point cannot run here at all.  The
+    29fe column in the value layer is its EXACT path (`bracket_mu_pref`, copositivity by
+    bisection) instead.  Recorded because a reader who assumes the transcripts of
+    `l2_audit_29fe` can be reproduced on this machine is wrong, and that is a fact about
+    the corpus, not about this ticket.
+
+==============================================================================
+x1 RESULT
+==============================================================================
+  population stated: 184 trees, 967 .py, 897 transcripts, 146 docs; value layer 12 trees / 404 posets   (0.5s)

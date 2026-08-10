@@ -1,0 +1,290 @@
+x3  THE VALUE PROBE — alias groups formed from numbers, not from names
+
+  POP-ALL    404 posets   {3: 7, 4: 40, 5: 357}
+  POP-PRIM   306 posets   {3: 4, 4: 27, 5: 275}
+  trees probed: 12      tolerance: same <= 1e-09, near <= 1e-06
+
+==============================================================================
+V1  ALIAS GROUPS ON POP-ALL  (every naturally-labelled poset, n = 3,4,5)
+==============================================================================
+
+  This population includes DECOMPOSABLE posets, where gamma -> 0.  Every ratio quantity
+  (rho, rho*Delta, u_M, c#) is therefore unbounded here and float-dominated.  That is not
+  a flaw in the trees; it is that the published statements about those quantities are all
+  made over PRIMITIVE posets and this is not that set.  V1 is printed anyway, because a
+  sweep that showed only the population on which it succeeds is not a sweep.
+
+  80 columns -> 28 clusters; 10 span two or more trees
+
+  ---- 13 names in 11 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        anticorrelation_c50b       leak(1)                native
+        audit_5cba                 LK[1]/LE               native
+        c3_audit_a94c3             delta1(A_1)            native
+        c3_audit_a94c3             leak(A_1)              native
+        c3_prefix_capture_76b2     leak(A_1)              native
+        direct_prefix_audit_2de0   E_leak(A_1)            native
+        direct_prefix_audit_2de0   delta_1_prefix(1)      native
+        eleak_repair_8311          E_leak(A_1,def)        native
+        l2_audit_29fe              leak[1]                native
+        l2_conditionality_28ff     leak(A_1)              native
+        l2_underclaim_audit_3bb9   leak[0]                native
+        lstar_789d                 LK[1]/LE               native
+        sweep_loss_51f4            leak_pref(1)           native
+  ---- 9 names in 9 trees   max intra-cluster spread 5.000e-10   AGREE
+        anticorrelation_c50b       gamma_float            native
+        audit_5cba                 gamma_float            native
+        c3_audit_a94c3             spectral_gap           native
+        chain_iv_c_81ff            lambda2_bracket        native
+        l2_audit_29fe              bracket_gap            native
+        l2_conditionality_28ff     gap_exact_bounds       native
+        l2_underclaim_audit_3bb9   gap_float              native
+        lstar_789d                 gamma_float            native
+        sweep_loss_51f4            gap_float              native
+  ---- 7 names in 7 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        anticorrelation_c50b       Delta                  native
+        audit_5cba                 Delta                  native
+        l2_audit_29fe              Delta                  native
+        l2_conditionality_28ff     delta_max              native
+        l2_underclaim_audit_3bb9   Delta                  native
+        lstar_789d                 Delta                  native
+        sweep_loss_51f4            delta_max              native
+  ---- 7 names in 7 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        anticorrelation_c50b       Phi_star               native
+        c3_prefix_capture_76b2     phi_star_prefix        native
+        eleak_repair_8311          prefix_min             native
+        l2_audit_29fe              Phi_star_pref          native
+        l2_conditionality_28ff     phi_star_prefix        native
+        lstar_789d                 Phi_star               native
+        sweep_loss_51f4            phi_star_pref          native
+  ---- 7 names in 7 trees   max intra-cluster spread 9.097e-13   AGREE  (exact)
+        anticorrelation_c50b       mu_exhaustive          native
+        audit_5cba                 mu_pref_float          native
+        l2_audit_29fe              bracket_mu_pref        native
+        l2_conditionality_28ff     cone_min               native
+        l2_underclaim_audit_3bb9   mu_pref_float          native
+        lstar_789d                 mu_faces               native
+        sweep_loss_51f4            cone_min               native
+  ---- 6 names in 5 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        c3_prefix_capture_76b2     phi_star               native
+        direct_prefix_audit_2de0   phi_star               native
+        eleak_repair_8311          phi_star(def)          native
+        eleak_repair_8311          phi_star(inv)          native
+        l2_audit_29fe              Phi_star_all           native
+        l2_conditionality_28ff     phi_star               native
+  ---- 4 names in 4 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        direct_prefix_audit_2de0   E_footrule             native
+        l2_audit_29fe              EDF                    native
+        l2_conditionality_28ff     E_footrule             native
+        sweep_loss_51f4            E_footrule             native
+  ---- 4 names in 4 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        anticorrelation_c50b       M                      native
+        audit_5cba                 M                      native
+        lstar_789d                 M                      native
+        sweep_loss_51f4            M_mean                 native
+  ---- 3 names in 3 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        c3_audit_a94c3             one_minus_rho(1)       native
+        c3_prefix_capture_76b2     rho_prefix(1)          native
+        chain_iv_c_81ff            prefix_Q(1)            native
+  ---- 2 names in 2 trees   max intra-cluster spread 1.108e-07   AGREE to bracket precision
+        anticorrelation_c50b       mu_upper               native
+        lstar_789d                 mu_ub_float            native
+
+==============================================================================
+V2  ALIAS GROUPS ON POP-PRIM  (the published population)
+==============================================================================
+
+  80 columns -> 21 clusters; 12 span two or more trees
+
+  ---- 13 names in 11 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        anticorrelation_c50b       leak(1)                native
+        audit_5cba                 LK[1]/LE               native
+        c3_audit_a94c3             delta1(A_1)            native
+        c3_audit_a94c3             leak(A_1)              native
+        c3_prefix_capture_76b2     leak(A_1)              native
+        direct_prefix_audit_2de0   E_leak(A_1)            native
+        direct_prefix_audit_2de0   delta_1_prefix(1)      native
+        eleak_repair_8311          E_leak(A_1,def)        native
+        l2_audit_29fe              leak[1]                native
+        l2_conditionality_28ff     leak(A_1)              native
+        l2_underclaim_audit_3bb9   leak[0]                native
+        lstar_789d                 LK[1]/LE               native
+        sweep_loss_51f4            leak_pref(1)           native
+  ---- 9 names in 9 trees   max intra-cluster spread 4.666e-10   AGREE
+        anticorrelation_c50b       gamma_float            native
+        audit_5cba                 gamma_float            native
+        c3_audit_a94c3             spectral_gap           native
+        chain_iv_c_81ff            lambda2_bracket        native
+        l2_audit_29fe              bracket_gap            native
+        l2_conditionality_28ff     gap_exact_bounds       native
+        l2_underclaim_audit_3bb9   gap_float              native
+        lstar_789d                 gamma_float            native
+        sweep_loss_51f4            gap_float              native
+  ---- 7 names in 7 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        anticorrelation_c50b       Delta                  native
+        audit_5cba                 Delta                  native
+        l2_audit_29fe              Delta                  native
+        l2_conditionality_28ff     delta_max              native
+        l2_underclaim_audit_3bb9   Delta                  native
+        lstar_789d                 Delta                  native
+        sweep_loss_51f4            delta_max              native
+  ---- 7 names in 7 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        anticorrelation_c50b       Phi_star               native
+        c3_prefix_capture_76b2     phi_star_prefix        native
+        eleak_repair_8311          prefix_min             native
+        l2_audit_29fe              Phi_star_pref          native
+        l2_conditionality_28ff     phi_star_prefix        native
+        lstar_789d                 Phi_star               native
+        sweep_loss_51f4            phi_star_pref          native
+  ---- 7 names in 7 trees   max intra-cluster spread 9.097e-13   AGREE  (exact)
+        anticorrelation_c50b       mu_exhaustive          native
+        audit_5cba                 mu_pref_float          native
+        l2_audit_29fe              bracket_mu_pref        native
+        l2_conditionality_28ff     cone_min               native
+        l2_underclaim_audit_3bb9   mu_pref_float          native
+        lstar_789d                 mu_faces               native
+        sweep_loss_51f4            cone_min               native
+  ---- 6 names in 6 trees   max intra-cluster spread 7.310e-12   AGREE
+        anticorrelation_c50b       rho*Delta              COMPOSED
+        audit_5cba                 v_L                    native
+        l2_audit_29fe              V10                    COMPOSED
+        l2_conditionality_28ff     V10                    COMPOSED
+        l2_underclaim_audit_3bb9   V10                    native
+        lstar_789d                 rho*Delta              native
+  ---- 6 names in 5 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        c3_prefix_capture_76b2     phi_star               native
+        direct_prefix_audit_2de0   phi_star               native
+        eleak_repair_8311          phi_star(def)          native
+        eleak_repair_8311          phi_star(inv)          native
+        l2_audit_29fe              Phi_star_all           native
+        l2_conditionality_28ff     phi_star               native
+  ---- 4 names in 4 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        direct_prefix_audit_2de0   E_footrule             native
+        l2_audit_29fe              EDF                    native
+        l2_conditionality_28ff     E_footrule             native
+        sweep_loss_51f4            E_footrule             native
+  ---- 4 names in 4 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        anticorrelation_c50b       M                      native
+        audit_5cba                 M                      native
+        lstar_789d                 M                      native
+        sweep_loss_51f4            M_mean                 native
+  ---- 3 names in 3 trees   max intra-cluster spread 4.441e-15   AGREE  (exact)
+        anticorrelation_c50b       rho                    COMPOSED
+        l2_underclaim_audit_3bb9   V00                    native
+        lstar_789d                 rho_float              native
+  ---- 3 names in 3 trees   max intra-cluster spread 0.000e+00   AGREE  (exact)
+        c3_audit_a94c3             one_minus_rho(1)       native
+        c3_prefix_capture_76b2     rho_prefix(1)          native
+        chain_iv_c_81ff            prefix_Q(1)            native
+  ---- 2 names in 2 trees   max intra-cluster spread 1.108e-07   AGREE to bracket precision
+        anticorrelation_c50b       mu_upper               native
+        lstar_789d                 mu_ub_float            native
+
+  CLUSTERS THAT EXIST ON POP-PRIM AND NOT ON POP-ALL: 2
+      anticorrelation_c50b:rho*Delta | audit_5cba:v_L | l2_audit_29fe:V10 | l2_conditionality_28ff:V10 | l2_underclaim_audit_3bb9:V10 | lstar_789d:rho*Delta
+      anticorrelation_c50b:rho | l2_underclaim_audit_3bb9:V00 | lstar_789d:rho_float
+
+  THE POPULATION IS LOAD-BEARING AND THIS IS THE DEMONSTRATION.  The rho*Delta_P cluster
+  — the ticket's own subject — does not form at all on POP-ALL and forms at six names in
+  six trees on POP-PRIM.  A sweep that had run only POP-ALL would have reported the
+  ticket's own alias as ABSENT.
+
+==============================================================================
+V3  SHARES-CODE — which agreements are controls and which are re-runs
+==============================================================================
+
+  An alias that AGREES is an unexploited control ONLY if the two trees computed it
+  independently.  Where one tree imports the other's library, the agreement is a re-run
+  and calling it a corroboration is the laundering this ticket is about (E7).
+
+  Import edges among the 12 probed trees, read out of the source:
+
+    l2_underclaim_audit_3bb9  ->  l2_conditionality_28ff
+        `a3_n7_population_label.py:21-22` inserts ../l2_conditionality_28ff and imports
+        lib28ff — for POPULATION LABELS only.  `lib3bb9.py:5` states in its own docstring
+        that it shares no code with lib28ff/lib29fe/lib51f4, and the scalars probed here
+        (P3bb9, pencil, gap_float, mu_pref_float) are all lib3bb9's own.
+        VERDICT: the SCALAR paths are independent; the tree-level edge is not on them.
+
+    eleak_repair_8311         ->  direct_prefix_audit_2de0
+        `lib8311.py:3` states "This file imports NOTHING from lib2de0 and NOTHING from
+        lib76b2. That is deliberate", and names lib2de0's convention at :19/:26/:50 in
+        order to REPRODUCE it independently.
+        VERDICT: independent.  The mentions are specification, not import.
+
+    (outside the probed set, and the reason this arm exists)
+    lstar_landing_8d63        ->  lstar_789d
+        `README.md` says so in as many words: "Instrument imports code/lstar_789d/
+        lib789d.py and adds no mathematics of its own — deliberately".  So mg-8d63's
+        agreement with mg-789d's sweep is a RE-RUN, and mg-8d63 says so itself.  Its
+        agreement with mg-29fe is the independent one.
+
+  So of the 12 trees probed, 12 compute their scalars on their own code, and every
+  agreement in V1/V2 is a genuine independent check.
+
+==============================================================================
+V4  THE POPULATION'S OWN PREDICATE, ALIASED ACROSS TEN TREES
+==============================================================================
+
+  lib0d1b's own predicate says PRIMITIVE at 306 of 404.
+
+    l2_conditionality_28ff:is_primitive            disagreements with the population: 0
+    l2_audit_29fe:not decomposable                 disagreements with the population: 0
+    l2_underclaim_audit_3bb9:not decomposable()    disagreements with the population: 0
+    lstar_789d:primitive                           disagreements with the population: 0
+    audit_5cba:primitive                           disagreements with the population: 0
+    anticorrelation_c50b:primitive                 disagreements with the population: 0
+    sweep_loss_51f4:is_primitive                   disagreements with the population: 0
+    c3_prefix_capture_76b2:is_primitive            disagreements with the population: 0
+    c3_audit_a94c3:is_primitive                    disagreements with the population: 0
+    chain_iv_c_81ff:is_primitive                   disagreements with the population: 0
+
+  10 names for ONE PREDICATE, in 10 trees, agreeing at all 404 posets.  This is the
+  largest alias group in the sweep and it is not a scalar at all — which is why a sweep
+  that looked only for computed NUMBER columns would never have found it.
+
+==============================================================================
+V5  D1 — THE DEFECT THIS INSTRUMENT COMMITTED, DEMONSTRATED RATHER THAN DESCRIBED
+==============================================================================
+
+  The first clustering here keyed each column by `round(v/tol)` and grouped equal keys.
+  Two columns that agree to 4.7e-10 can still round to different buckets.  Below, the
+  same columns are clustered both ways on POP-PRIM.  If the two rows agree, this arm is
+  UNFALSIFIABLE and says so instead of claiming a catch.
+
+    rounding-bucket keying : 11 multi-tree groups
+    max-spread clustering  : 11 multi-tree groups
+
+    2 group(s) the rounding key SPLIT and the spread clustering keeps:
+      anticorrelation_c50b:gamma_float | audit_5cba:gamma_float | c3_audit_a94c3:spectral_gap | chain_iv_c_81ff:lambda2_bracket | l2_audit_29fe:bracket_gap | l2_conditionality_28ff:gap_exact_bounds | l2_underclaim_audit_3bb9:gap_float | lstar_789d:gamma_float | sweep_loss_51f4:gap_float
+      anticorrelation_c50b:mu_exhaustive | audit_5cba:mu_pref_float | l2_audit_29fe:bracket_mu_pref | l2_conditionality_28ff:cone_min | l2_underclaim_audit_3bb9:mu_pref_float | lstar_789d:mu_faces | sweep_loss_51f4:cone_min
+
+==============================================================================
+V6  `u_M` AND `c#` — TWO NUMBERS, ONE PREDICATE, AND THE PREDICATE IS POPULATION-BOUND
+==============================================================================
+
+  `anticorrelation_c50b/out_s2_theory.txt:31` says `(M#) fails <=> u_M > 1`.
+  `sweep_loss_51f4` and `audit_5cba/a6` price the SAME route with `c#`, and
+  `audit_5cba/out_a6_conditionals.txt:29` reasons from `c# > 1` for the same event.
+  So the corpus carries two names, two DIFFERENT numbers, and one shared threshold.
+    POP-ALL   comparable  357   numerically equal   1   THRESHOLD disagreements  31
+    POP-PRIM  comparable  306   numerically equal   0   THRESHOLD disagreements   0
+
+  READING.  On the primitive population the two predicates agree everywhere and the
+  substitution is safe; off it they disagree at roughly one poset in eight.  So `u_M` and
+  `c#` are not aliases of each other — they are aliases of one BOOLEAN, and only on a
+  population neither name carries.  A reader who quotes the NUMBER where the corpus meant
+  the PREDICATE carries the wrong figure, and nothing currently looks.
+
+  MY OWN FIRST READING OF THIS ARM WAS WRONG (defect D2).  It reported 27 threshold
+  disagreements of 144 as a finding, having run over POP-ALL with `mu_upper` in place of
+  `mu_exhaustive` — i.e. on neither the population nor the quantity
+  `anticorrelation_c50b/s2_theory.py:70` uses.  The subject's own control was already
+  there at `s2_theory.py:87` and reports 0.  An alias sweep that mis-stated a population
+  while reporting that mis-stated populations cause wrong figures.
+
+  wrote alias_groups.json — 12 multi-tree groups, consumed by x2_index.py
+
+==============================================================================
+x3 RESULT
+==============================================================================
+  ALL ARMS PASS   (0 failing arms, 70.1s)

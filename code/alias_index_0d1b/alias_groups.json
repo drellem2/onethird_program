@@ -1,0 +1,463 @@
+{
+ "population": {
+  "POP_ALL": 404,
+  "POP_PRIM": 306,
+  "spec": [
+   [
+    3,
+    1
+   ],
+   [
+    4,
+    1
+   ],
+   [
+    5,
+    1
+   ]
+  ]
+ },
+ "trees": [
+  "l2_conditionality_28ff",
+  "l2_audit_29fe",
+  "l2_underclaim_audit_3bb9",
+  "lstar_789d",
+  "audit_5cba",
+  "anticorrelation_c50b",
+  "sweep_loss_51f4",
+  "c3_prefix_capture_76b2",
+  "direct_prefix_audit_2de0",
+  "eleak_repair_8311",
+  "c3_audit_a94c3",
+  "chain_iv_c_81ff"
+ ],
+ "groups": [
+  {
+   "names": [
+    {
+     "tree": "anticorrelation_c50b",
+     "name": "leak(1)",
+     "kind": "native"
+    },
+    {
+     "tree": "audit_5cba",
+     "name": "LK[1]/LE",
+     "kind": "native"
+    },
+    {
+     "tree": "c3_audit_a94c3",
+     "name": "delta1(A_1)",
+     "kind": "native"
+    },
+    {
+     "tree": "c3_audit_a94c3",
+     "name": "leak(A_1)",
+     "kind": "native"
+    },
+    {
+     "tree": "c3_prefix_capture_76b2",
+     "name": "leak(A_1)",
+     "kind": "native"
+    },
+    {
+     "tree": "direct_prefix_audit_2de0",
+     "name": "E_leak(A_1)",
+     "kind": "native"
+    },
+    {
+     "tree": "direct_prefix_audit_2de0",
+     "name": "delta_1_prefix(1)",
+     "kind": "native"
+    },
+    {
+     "tree": "eleak_repair_8311",
+     "name": "E_leak(A_1,def)",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_audit_29fe",
+     "name": "leak[1]",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_conditionality_28ff",
+     "name": "leak(A_1)",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_underclaim_audit_3bb9",
+     "name": "leak[0]",
+     "kind": "native"
+    },
+    {
+     "tree": "lstar_789d",
+     "name": "LK[1]/LE",
+     "kind": "native"
+    },
+    {
+     "tree": "sweep_loss_51f4",
+     "name": "leak_pref(1)",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 0.0,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "anticorrelation_c50b",
+     "name": "gamma_float",
+     "kind": "native"
+    },
+    {
+     "tree": "audit_5cba",
+     "name": "gamma_float",
+     "kind": "native"
+    },
+    {
+     "tree": "c3_audit_a94c3",
+     "name": "spectral_gap",
+     "kind": "native"
+    },
+    {
+     "tree": "chain_iv_c_81ff",
+     "name": "lambda2_bracket",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_audit_29fe",
+     "name": "bracket_gap",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_conditionality_28ff",
+     "name": "gap_exact_bounds",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_underclaim_audit_3bb9",
+     "name": "gap_float",
+     "kind": "native"
+    },
+    {
+     "tree": "lstar_789d",
+     "name": "gamma_float",
+     "kind": "native"
+    },
+    {
+     "tree": "sweep_loss_51f4",
+     "name": "gap_float",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 4.665707820095122e-10,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "anticorrelation_c50b",
+     "name": "Delta",
+     "kind": "native"
+    },
+    {
+     "tree": "audit_5cba",
+     "name": "Delta",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_audit_29fe",
+     "name": "Delta",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_conditionality_28ff",
+     "name": "delta_max",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_underclaim_audit_3bb9",
+     "name": "Delta",
+     "kind": "native"
+    },
+    {
+     "tree": "lstar_789d",
+     "name": "Delta",
+     "kind": "native"
+    },
+    {
+     "tree": "sweep_loss_51f4",
+     "name": "delta_max",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 0.0,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "anticorrelation_c50b",
+     "name": "Phi_star",
+     "kind": "native"
+    },
+    {
+     "tree": "c3_prefix_capture_76b2",
+     "name": "phi_star_prefix",
+     "kind": "native"
+    },
+    {
+     "tree": "eleak_repair_8311",
+     "name": "prefix_min",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_audit_29fe",
+     "name": "Phi_star_pref",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_conditionality_28ff",
+     "name": "phi_star_prefix",
+     "kind": "native"
+    },
+    {
+     "tree": "lstar_789d",
+     "name": "Phi_star",
+     "kind": "native"
+    },
+    {
+     "tree": "sweep_loss_51f4",
+     "name": "phi_star_pref",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 0.0,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "anticorrelation_c50b",
+     "name": "mu_exhaustive",
+     "kind": "native"
+    },
+    {
+     "tree": "audit_5cba",
+     "name": "mu_pref_float",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_audit_29fe",
+     "name": "bracket_mu_pref",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_conditionality_28ff",
+     "name": "cone_min",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_underclaim_audit_3bb9",
+     "name": "mu_pref_float",
+     "kind": "native"
+    },
+    {
+     "tree": "lstar_789d",
+     "name": "mu_faces",
+     "kind": "native"
+    },
+    {
+     "tree": "sweep_loss_51f4",
+     "name": "cone_min",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 9.097167463778533e-13,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "anticorrelation_c50b",
+     "name": "rho*Delta",
+     "kind": "COMPOSED"
+    },
+    {
+     "tree": "audit_5cba",
+     "name": "v_L",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_audit_29fe",
+     "name": "V10",
+     "kind": "COMPOSED"
+    },
+    {
+     "tree": "l2_conditionality_28ff",
+     "name": "V10",
+     "kind": "COMPOSED"
+    },
+    {
+     "tree": "l2_underclaim_audit_3bb9",
+     "name": "V10",
+     "kind": "native"
+    },
+    {
+     "tree": "lstar_789d",
+     "name": "rho*Delta",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 7.310374527946806e-12,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "c3_prefix_capture_76b2",
+     "name": "phi_star",
+     "kind": "native"
+    },
+    {
+     "tree": "direct_prefix_audit_2de0",
+     "name": "phi_star",
+     "kind": "native"
+    },
+    {
+     "tree": "eleak_repair_8311",
+     "name": "phi_star(def)",
+     "kind": "native"
+    },
+    {
+     "tree": "eleak_repair_8311",
+     "name": "phi_star(inv)",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_audit_29fe",
+     "name": "Phi_star_all",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_conditionality_28ff",
+     "name": "phi_star",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 0.0,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "direct_prefix_audit_2de0",
+     "name": "E_footrule",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_audit_29fe",
+     "name": "EDF",
+     "kind": "native"
+    },
+    {
+     "tree": "l2_conditionality_28ff",
+     "name": "E_footrule",
+     "kind": "native"
+    },
+    {
+     "tree": "sweep_loss_51f4",
+     "name": "E_footrule",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 0.0,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "anticorrelation_c50b",
+     "name": "M",
+     "kind": "native"
+    },
+    {
+     "tree": "audit_5cba",
+     "name": "M",
+     "kind": "native"
+    },
+    {
+     "tree": "lstar_789d",
+     "name": "M",
+     "kind": "native"
+    },
+    {
+     "tree": "sweep_loss_51f4",
+     "name": "M_mean",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 0.0,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "anticorrelation_c50b",
+     "name": "rho",
+     "kind": "COMPOSED"
+    },
+    {
+     "tree": "l2_underclaim_audit_3bb9",
+     "name": "V00",
+     "kind": "native"
+    },
+    {
+     "tree": "lstar_789d",
+     "name": "rho_float",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 4.440892098500626e-15,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "c3_audit_a94c3",
+     "name": "one_minus_rho(1)",
+     "kind": "native"
+    },
+    {
+     "tree": "c3_prefix_capture_76b2",
+     "name": "rho_prefix(1)",
+     "kind": "native"
+    },
+    {
+     "tree": "chain_iv_c_81ff",
+     "name": "prefix_Q(1)",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 0.0,
+   "degenerate": false
+  },
+  {
+   "names": [
+    {
+     "tree": "anticorrelation_c50b",
+     "name": "mu_upper",
+     "kind": "native"
+    },
+    {
+     "tree": "lstar_789d",
+     "name": "mu_ub_float",
+     "kind": "native"
+    }
+   ],
+   "max_spread": 1.1078788481055923e-07,
+   "degenerate": false
+  }
+ ]
+}

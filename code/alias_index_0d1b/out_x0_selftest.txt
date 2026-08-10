@@ -1,0 +1,15 @@
+x0  PLANTED WORLDS
+
+  base population for W1-W3, W6-W7: 47 posets (n = 3,4); primitive 31
+
+  [CAUGHT        ] W1 discrimination                              planted Delta+1e-3 stayed out of a cluster of 7
+  [CAUGHT        ] W2 non-vacuity                                 an identical column DID join, so W1 is a refusal and not silence
+  [CAUGHT        ] W3 degenerate guard                            two constant columns cluster AND are flagged is_constant -> DEGENERATE
+  [CAUGHT        ] W4 population                                  rho*Delta clusters on POP-PRIM and does NOT on POP-ALL — the population decides
+  [CAUGHT        ] W5 D1 rounding                                 spread clustering keeps anticorrelation_c50b:Delta nudged by 4e-10; the rounding key splits it
+  [CAUGHT        ] W6 empty columns                               spread() returns None for a never-comparable pair and no edge is drawn
+  [CAUGHT        ] W7 adapters live                               all 12 adapters produce >= 3 live scalars on a fixed poset
+
+==============================================================================
+x0 RESULT: 7 CAUGHT, 0 UNFALSIFIABLE (explained), 0 MISSED   (3.9s)
+==============================================================================
