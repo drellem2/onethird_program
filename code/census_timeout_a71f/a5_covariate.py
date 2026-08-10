@@ -81,7 +81,12 @@ def main():
             load = float(r["load1"])
         except ValueError:
             continue
-        k = (r["directory"], r["commit"])
+        # BOTH SIDES NORMALISED TO 7 CHARS.  T2a prints `c[:7]`;
+        # `git rev-parse --short` returns 7 UNLESS the prefix is
+        # ambiguous, in which case it returns more -- and the join
+        # would then miss exactly the groups whose commit prefix
+        # collides with another, silently, as an unsampled row.
+        k = (r["directory"], r["commit"][:7])
         s = seen.setdefault(k, {"first": r["utc"], "last": r["utc"],
                                 "loads": [], "done": r["groups_done"]})
         s["last"] = r["utc"]
@@ -89,7 +94,8 @@ def main():
 
     census_groups = {}
     for p, (carry, v) in verdicts.items():
-        census_groups.setdefault((p.split("/")[0], carry), set()).add(v)
+        census_groups.setdefault((p.split("/")[0], carry[:7]),
+                                 set()).add(v)
 
     # ------------------------------------------------------------------ A5a
     led.head("A5a -- THE HOLE IN THE COVARIATE, STATED BEFORE ANYTHING IS "
