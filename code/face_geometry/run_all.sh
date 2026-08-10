@@ -3,11 +3,15 @@
 # docs/OneThird-Intrinsic-Face-Geometry-Probe.md
 #
 # Pure Python 3, no third-party packages, exact integer arithmetic.
-# Measured runtime on a 2024 laptop, 2026-07-31 (re-measured by mg-e35b on the
-# tree that ships this comment, not carried forward): 19.4 s total -- controls.py
-# 2.2 s (of which NEGATIVE CONTROL 4, added by mg-2789, is 1.7 s over the full
-# 86-poset n <= 5 population), run_probe.py at n <= 6 the remaining 17.2 s.  So
-# this battery stays in the order-seconds regime and needs no scoping.
+# Measured runtime on a 2024 laptop, 2026-08-10 (re-measured by mg-17aa on the
+# tree that ships this comment, not carried forward -- mg-e35b's own figures
+# were 19.4 / 2.2 on 2026-07-31): 20.8 s total -- controls.py 2.6 s, run_probe.py
+# at n <= 6 the remaining 18.2 s.  So this battery stays in the order-seconds
+# regime and needs no scoping.  WHAT MOVED AND WHY: mg-17aa's falsifiability row
+# runs eight extra light sweeps of the 86-poset population -- one per row to
+# check the exhibit route reproduces the main sweep's counters, one no-op world,
+# and one mis-predicted world per localised row -- which is +0.4 s of the +1.4.
+# The rest is measurement noise between two dates and is not attributed.
 #
 # IT IS NOT "CI-ADJACENT", and this comment said it was until mg-e35b (mg-fcf1's
 # minor finding).  There is NO CI in this repository -- no .github/, no

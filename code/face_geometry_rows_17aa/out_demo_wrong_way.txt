@@ -1,0 +1,32 @@
+==============================================================================
+mg-17aa -- THE PRE-EXISTING WRONG-DIRECTION CONTROL, RUN
+==============================================================================
+  [HOLDS] the pinned pre-mg-17aa controls.py is readable at blob da160f680e9a (122891 bytes)
+        exit 0
+  [HOLDS] it carries the deferral in its own words -- the routing row's condition is a strict two-sided bound on the number of forced rows
+        the exact literal `0 < len(forced_rows) < len(muts))` is present
+  [HOLDS] and it routes on ONE of the predicate's two forced gates
+        the exact literal 'forced = (diag_preserved == 0)' is present
+  [HOLDS] face_complex.py is byte-identical to the pinned tree's, so this demo is not a mix of two trees
+        git diff is 0 bytes
+  [HOLDS] posets.py is byte-identical to the pinned tree's, so this demo is not a mix of two trees
+        git diff is 0 bytes
+  [HOLDS] the minimal extension applies as exactly one substitution
+        one line changed, 122891 bytes -> 122923
+
+  the patched pre-mg-17aa battery exits 1 with 2 FAIL row(s):
+    - [FAIL] PROVEN PROPERTY, not a control row -- the corruptions I1, I2, I3, I4 are NOT absorbable into a diagonal +-1 twist (I1 on 72/72, I2 on 82/82, I3
+    - [FAIL] routing check on the mg-8a12 repair: the MOVED-DIAGONAL split SEPARATES on this population -- 4 of the 4 rows have their absorbability answer f
+
+  [HOLDS] THE DEFERRED ITEM, APPLIED AS ONE LINE TO THE TREE THAT DEFERRED IT, TURNS THE BATTERY RED: exit 1, 2 rows FAIL
+        this is why the item could not be 'just delete the clause': the clause's removal is one line and the consequences are two rows
+  [HOLDS] one of the two is the ROUTING row -- `0 < 4 < 4` -- and NOTHING ABOUT THE MATHEMATICS MOVED to make it red.  It went red because the row set stopped separating, i.e. because every row became correctly labelled: the wrong direction for a control to point, and the shape mg-e35b refused to add one screen below it
+        [FAIL] routing check on the mg-8a12 repair: the MOVED-DIAGONAL split SEPARATES on this population -- 4 of the 4 rows have their absorbability answer forced by a moved diagonal and are stated as a theo
+  [HOLDS] the other is the [CANNOT FAIL] row, and that one is a REAL failure: its condition asserts the diagonal moves on every biting pair of every forced row, and row I4's diagonal SURVIVES on the 3 antichains.  The single-gate argument does not cover the fourth row -- widening it to |s_i s_j| = 1 is the mathematical content of mg-17aa, and no amount of re-scoring would have supplied it
+        [FAIL] PROVEN PROPERTY, not a control row -- the corruptions I1, I2, I3, I4 are NOT absorbable into a diagonal +-1 twist (I1 on 72/72, I2 on 82/82, I3 on 82/82, I4 on 61/61), and those counts are FORC
+  [HOLDS] and the SHIPPED tree -- same extension, theorem widened to both forced gates, routing row replaced by an exhibited-falsifier row -- exits 0 with all four rows forced
+        exit 0
+
+==============================================================================
+10 claim(s) scored; 0 BROKEN.
+==============================================================================

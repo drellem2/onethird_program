@@ -14,7 +14,7 @@ widening A5 to cover STATE.md.  Four independent refutations, each
 re-measured here from git and not quoted from mg-6653.
 
   [REFUTED  ] the row was ever added to STATE.md
-        -- git log -S on STATE.md returns 2 commit(s): ba3ec79, 1e61031.
+        -- git log -S on STATE.md returns 5 commit(s): cc4c663, bdcb006, 57f962f, ba3ec79, 1e61031.
            1e61031 is mg-a2bd's STRIKE RECORD and ba3ec79 is mg-f2e1 QUOTING the
            claim under audit.  No commit ever added the row to STATE.md.
   [MEASURED ] where the row actually landed
@@ -78,25 +78,34 @@ the first two were both wrong in the same direction:
      the rest, and nothing else is excluded.
 
   [MEASURED ] population in the working tree as it will be committed
-        50 occurrence(s) of '38/38', on 44 line(s), in 12 file(s), in 35 site(s).
+        69 occurrence(s) of '38/38', on 62 line(s), in 20 file(s), in 49 site(s).
 
-        LIVE        STATE.md                                                                6 occ,  2 site(s) on line(s) [135, 276]
         LIVE        code/face_geometry_audit_5630/audit_x3_equivalence.py                   1 occ,  1 site(s) on line(s) [84]
         INSTRUMENT  code/face_geometry_audit_6653/out_verify_claims.txt                     2 occ,  1 site(s) on line(s) [41, 45]
-        INSTRUMENT  code/face_geometry_audit_6653/run_all.sh                                1 occ,  1 site(s) on line(s) [21]
+        INSTRUMENT  code/face_geometry_audit_6653/run_all.sh                                2 occ,  1 site(s) on line(s) [21, 41]
         INSTRUMENT  code/face_geometry_audit_6653/verify_claims.py                          5 occ,  3 site(s) on line(s) [172, 177, 194, 203, 280]
+        INSTRUMENT  code/face_geometry_audit_e720/out_verify.txt                            2 occ,  2 site(s) on line(s) [40, 139]
+        INSTRUMENT  code/face_geometry_audit_e720/verify_landing_claims.py                  4 occ,  3 site(s) on line(s) [22, 161, 375, 378]
         INSTRUMENT  code/face_geometry_landing_7d5a/run_all.sh                              1 occ,  1 site(s) on line(s) [11]
         INSTRUMENT  code/face_geometry_landing_7d5a/verify_landing.py                       5 occ,  4 site(s) on line(s) [19, 182, 183, 234, 429]
+        OTHER       code/state_audit_6a2f/out_audit.txt                                     2 occ,  1 site(s) on line(s) [1143]
+        OTHER       code/state_restructure_34bf/verify_relocation.py                        2 occ,  1 site(s) on line(s) [126, 128]
+        OTHER       code/truncate_sweep_ec63/out_s3_sweep.txt                               1 occ,  1 site(s) on line(s) [76]
         FROZEN AUDIT docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md         2 occ,  2 site(s) on line(s) [45, 311]
         LIVE        docs/OneThird-Intrinsic-Face-Geometry-Probe.md                          9 occ,  4 site(s) on line(s) [42, 44, 421, 424, 828, 830, 835]
         FROZEN AUDIT docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md  5 occ,  5 site(s) on line(s) [22, 64, 88, 259, 267]
         FROZEN AUDIT docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md  8 occ,  6 site(s) on line(s) [23, 405, 414, 422, 423, 429, 440, 559]
         FROZEN AUDIT docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md  5 occ,  5 site(s) on line(s) [196, 227, 247, 343, 387]
+        FROZEN AUDIT docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md  6 occ,  5 site(s) on line(s) [20, 23, 241, 307, 391, 422]
+        FROZEN AUDIT docs/OneThird-STATE-Restructure-IndependentAudit.md                     1 occ,  1 site(s) on line(s) [351]
+        OTHER       docs/audit-stage-process.md                                             4 occ,  1 site(s) on line(s) [122]
+        OTHER       docs/state-history/attempt-mg-276d.md                                   2 occ,  1 site(s) on line(s) [106]
 
   BY CLASS:
-        FROZEN AUDIT      4 file(s)  20 occurrence(s)  18 site(s)
-        INSTRUMENT        5 file(s)  14 occurrence(s)  10 site(s)
-        LIVE              3 file(s)  16 occurrence(s)   7 site(s)
+        FROZEN AUDIT      6 file(s)  27 occurrence(s)  24 site(s)
+        INSTRUMENT        7 file(s)  21 occurrence(s)  15 site(s)
+        LIVE              2 file(s)  10 occurrence(s)   5 site(s)
+        OTHER             5 file(s)  11 occurrence(s)   5 site(s)
 
   WHY THIS LANDING NAMES A CLASS AND NOT A LIST.  mg-1319 claimed a
   universal ('flagged at every site'), which was false; mg-f2e1
@@ -108,13 +117,12 @@ the first two were both wrong in the same direction:
   not expire, so that is what the STATE.md paragraph now asserts, with
   this instrument as the way to recover the numbers on demand.
 
-  [CONFIRMED] every LIVE file is one of the three the A5 narrowing test admits -- i.e. the class boundary the STATE.md paragraph asserts holds here
+  [REFUTED  ] every LIVE file is one of the three the A5 narrowing test admits -- i.e. the class boundary the STATE.md paragraph asserts holds here
         -- LIVE files found:
-             STATE.md
              code/face_geometry_audit_5630/audit_x3_equivalence.py
              docs/OneThird-Intrinsic-Face-Geometry-Probe.md
-  [CONFIRMED] every occurrence sits in one of the three classes the paragraph names
-        -- files falling outside LIVE / FROZEN AUDIT / INSTRUMENT: none
+  [REFUTED  ] every occurrence sits in one of the three classes the paragraph names
+        -- files falling outside LIVE / FROZEN AUDIT / INSTRUMENT: ['code/state_audit_6a2f/out_audit.txt', 'code/state_restructure_34bf/verify_relocation.py', 'code/truncate_sweep_ec63/out_s3_sweep.txt', 'docs/audit-stage-process.md', 'docs/state-history/attempt-mg-276d.md']
            An empty list is what the paragraph asserts: every occurrence is LIVE, or in
            a frozen audit document, or in an audit/landing instrument's own source or
            transcript -- text that exists in order to count, not to be read for the number.
@@ -128,7 +136,7 @@ de54c3a is ba3ec79's parent, so 'a further' means de54c3a -> ba3ec79.
         db08b4c  L135 =  11727 bytes /  11544 chars   mg-1319  -- F7 measured the growth to here
         de54c3a  L135 =  12455 bytes /  12252 chars   parent of ba3ec79
         ba3ec79  L135 =  14582 bytes /  14340 chars   mg-f2e1  -- the commit under repair
-        HEAD     L135 =  14582 bytes /  14340 chars   this landing
+        HEAD     L135 =     86 bytes /     83 chars   this landing
 
   [REFUTED  ] mg-f2e1's '+949 bytes (+7.6%)' reproduces
         -- de54c3a -> ba3ec79 is +2127 bytes (+17.1%), or +2088 characters.
@@ -137,13 +145,13 @@ de54c3a is ba3ec79's parent, so 'a further' means de54c3a -> ba3ec79.
            wrong numerator over the right base, not a different metric.
   [MEASURED ] the figure that matters for the restructure decision
         mg-f7bc's F7 flagged row 135 for GROWTH at +49.7% (7832 -> 11727 bytes).
-        Across the two landings since, the same row is now 14582 bytes: +6750 (+86.2%)
+        Across the two landings since, the same row is now 86 bytes: +-7746 (+-98.9%)
         on the F7 baseline.  The decision to restructure was taken on +49.7%;
-        the true figure is 86.2%, so the correction STRENGTHENS that decision.
+        the true figure is -98.9%, so the correction STRENGTHENS that decision.
         It does not weaken it and must not be reported as if it might.
-  [CONFIRMED] rows 131-134 are untouched by this landing, as by the last one
+  [REFUTED  ] rows 131-134 are untouched by this landing, as by the last one
         -- L131-134 at de54c3a: [5351, 9228, 13487, 10824]
-           L131-134 at HEAD:     [5351, 9228, 13487, 10824]
+           L131-134 at HEAD:     [61, 0, 1294, 0]
 
 TARGET 4 -- THE PROBE's SECTION-HEAD CHANGELOG vs THE HUNKS ba3ec79 CONTAINS
 ----------------------------------------------------------------------------
@@ -181,7 +189,7 @@ assertion ABOUT a diff and nothing checks it against the diff.  So:
            A4 and the line is being rewritten anyway.
 
 ==============================================================================
-15 scored statement(s); 8 REFUTED.
+15 scored statement(s); 11 REFUTED.
 
 The REFUTED rows are the point: every one of them is a claim mg-f2e1
 or its changelog made, re-measured and found false.  A run with zero

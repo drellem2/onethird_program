@@ -1,0 +1,133 @@
+
+==============================================================================
+mg-17aa V0 -- THE POPULATIONS, STATED BEFORE ANYTHING IS CONCLUDED
+==============================================================================
+  [HOLDS] the section's own population is every poset up to isomorphism with 2 <= n <= 5: 86 of them, and claim (1) holds on all of them uncorrupted -- the row every 'rejects on N/N' below is forced GIVEN
+        86 posets, baseline green on 86
+  [HOLDS] and the wider population this file adds is n = 6: 318 further posets, |L(P)| up to 720.  n = 7 is NOT swept and the reason is size, not principle: |L(P)| reaches 5040 there and L^rel is |L(P)| x |L(P)|
+
+==============================================================================
+mg-17aa V1 -- absorb == 0 IS FORCED ON ALL FOUR ROWS, BY CERTIFICATE
+==============================================================================
+Every biting pair gets an EXHIBITED ENTRY that no diagonal +-1 twist
+can reconcile, and the exhibit is verified against both sign choices.
+This is the claim the [CANNOT FAIL] row now makes for four rows where
+it made it for three.
+
+  [HOLDS] I1: 72 biting pairs, 72 carry a VERIFIED blocking certificate, predicate says absorbable on 0.  By kind: diagonal 72
+  [HOLDS] I2: 82 biting pairs, 82 carry a VERIFIED blocking certificate, predicate says absorbable on 0.  By kind: diagonal 82
+  [HOLDS] I3: 82 biting pairs, 82 carry a VERIFIED blocking certificate, predicate says absorbable on 0.  By kind: diagonal 82
+  [HOLDS] I4: 61 biting pairs, 61 carry a VERIFIED blocking certificate, predicate says absorbable on 0.  By kind: diagonal 58, magnitude 3
+  [HOLDS] SO THE ANSWER IS FORCED ON ALL FOUR: 297/297 biting pairs blocked by an exhibited entry, 0 absorbable.  P1 of PREDICTIONS.md, at 0.90
+        297 = 72 + 82 + 82 + 61, the section's own total
+
+==============================================================================
+mg-17aa V1b -- AND THE CERTIFICATE AGREES WITH THE DEFINITION
+==============================================================================
+  [HOLDS] on the 185 biting pairs with |L(P)| <= 10, the certificate's verdict agrees with `absorbable_bruteforce` -- the definition enumerated over all 2^m sign vectors, which shares no line with either the certificate or the shipped predicate -- on 185 of them
+        an expected value DERIVED and not copied (mg-d0e2 OUTSTANDING 2)
+  [HOLDS] and the OTHER direction, which V1b cannot reach because nothing in the four rows is absorbable: on NEGATIVE CONTROL 3's parity corruption -- D.L.D by construction, so genuinely absorbable -- the certificate declines to exhibit an entry on 82/82 pairs, and brute force confirms absorbable on 53/53 of the small ones.  A detector that returned a certificate for everything would have passed V1b
+
+==============================================================================
+mg-17aa V2 -- WHICH GATE, AND THE TIGHTNESS THAT KEPT ROW I4 SCORED
+==============================================================================
+  [HOLDS] the DIAGONAL gate alone -- mg-8a12's routing quantity, and the only one its [CANNOT FAIL] row argued -- covers I1, I2, I3 and does NOT cover I4 (3 pairs). That is why row I4 stayed scored for four repairs: the argument the other three rows were routed on is FALSE on it
+        P2 of PREDICTIONS.md, at 0.85: neither theorem alone covers the four
+  [HOLDS] and the pairs it does not cover are exactly the ANTICHAINS, where the off-by-one is a bare relabelling of L(P) = S_n and the diagonal survives -- so the row that needed the second gate is the row whose corruption is a gauge on precisely those posets
+        the 3 pairs the magnitude gate settles have |less| = [0, 0, 0] and |L(P)| = [6, 24, 120] -- 3!, 4! and 5!
+  [HOLDS] the closed form for the second gate is recorded beside the first rather than left in a verdict mail: MAGNITUDE_MOVES carries an entry for facet_offbyone and DIAGONAL_MOVES carries none
+        MAGNITUDE_MOVES keys: ['facet_offbyone']
+
+==============================================================================
+mg-17aa V3 -- AND IT IS NOT A PROPERTY OF 86 POSETS: n = 6
+==============================================================================
+  [HOLDS] at n = 6 -- a population NEGATIVE CONTROL 4 does not sweep -- the forcing holds on 1201/1201 biting pairs with 0 absorbable, and the magnitude gate is needed on I1 0, I2 0, I3 0, I4 1.  A count that reproduces at a size the repair never looked at is the difference between a theorem and an 86-poset measurement
+
+==============================================================================
+mg-17aa V4 -- THE TICKET'S OWN INPUT PREMISE, CHECKED NOT RE-DERIVED
+==============================================================================
+The ticket says to take as input that three of the four `>= 3 facets`
+zeros are FORCED and that only I4's is a result.  It also says to
+check it.  It is FALSE, and it was already false when the ticket was
+written: mg-8af0 landed the correction on 2026-08-05, one day after.
+
+  [HOLDS] mg-e35b's own README carries the struck correction -- 'ALL FOUR zeros are forced' -- so the premise is refuted IN THE TREE and this ticket does not have to re-run mg-8af0's 2424-build sweep to say so
+        the correction is at code/face_geometry_repair_e35b/README.md
+  [HOLDS] and the commit that landed it is nameable rather than alleged
+        66130f8 repair: F3 — ALL FOUR >=3-facet zeros are FORCED, not three; the forcing is a property of the PREFIX FAMILY and 
+  [HOLDS] AND THE TWO QUESTIONS ARE INDEPENDENT, which is why mg-8af0's finding corrects the ticket's premise without answering the ticket: NEGATIVE CONTROL 3's parity corruption raises NO ridge's facet count (it touches no incidence at all) and is absorbable on 82/82 of the posets where it bites.  'No ridge in >= 3 facets' therefore does not imply 'not absorbable', and the forcing this ticket establishes is not the forcing mg-8af0 established
+        P8 of PREDICTIONS.md, at 0.50
+
+==============================================================================
+mg-17aa V5 -- THE CONJUNCT DECOMPOSITION, AND THE DELETION TEST
+==============================================================================
+For each row, delete each conjunct from its scored condition and see
+whether any verdict moves -- on the real population or on either
+planted world.  A clause whose deletion disturbs nothing anywhere is
+not carrying the row, and that is the whole question this ticket is
+about.  A deletion that DOES move a verdict is load-bearing.
+
+  [HOLDS] I1: 4 conjuncts, load-bearing on some world: app > 0, caused == app
+        conjuncts = app > 0 [CONTINGENT] AND rej == app [FORCED GIVEN A SCORED ROW] AND shape_ok == app [FORCED BY CONSTRUCTION] AND caused == app [CONTINGENT]
+  [HOLDS] I2: 4 conjuncts, load-bearing on some world: app > 0, caused == app
+        conjuncts = app > 0 [CONTINGENT] AND rej == app [FORCED GIVEN A SCORED ROW] AND shape_ok == app [FORCED BY CONSTRUCTION] AND caused == app [CONTINGENT]
+  [HOLDS] I3: 4 conjuncts, load-bearing on some world: app > 0, caused == app
+        conjuncts = app > 0 [CONTINGENT] AND rej == app [FORCED GIVEN A SCORED ROW] AND shape_ok == app [FORCED BY CONSTRUCTION] AND caused == app [CONTINGENT]
+  [HOLDS] I4: 3 conjuncts, load-bearing on some world: app > 0
+        conjuncts = app > 0 [CONTINGENT] AND rej == app [FORCED GIVEN A SCORED ROW] AND shape_ok == app [FORCED BY CONSTRUCTION]
+  [HOLDS] `rej == app` and `shape_ok == app` are load-bearing on NO world in any row -- they are true, they are cheap, and they are not the section's evidence.  They are KEPT and NAMED rather than deleted: a conjunct that can only fail alongside a scored row is redundant, not unfalsifiable, and quietly deleting true checks to tidy a table is a worse change than the one this ticket makes
+        load-bearing per row: {'I1': ['app > 0', 'caused == app'], 'I2': ['app > 0', 'caused == app'], 'I3': ['app > 0', 'caused == app'], 'I4': ['app > 0']}
+  [HOLDS] and I4's contingent content is a SINGLE conjunct where I1/I2/I3 have two: the row that was kept scored BECAUSE its absorbability answer was supposedly a decision has the least measured content of the four.  P6 of PREDICTIONS.md, at 0.60
+        I4 ['app > 0'] vs I1 ['app > 0', 'caused == app']
+
+==============================================================================
+mg-17aa V6 -- THE NEW ROW'S OWN FALSIFIABILITY
+==============================================================================
+The row that replaces the routing check scores 'every row has an
+exhibited falsifying input'.  A row that cannot report its own
+failure is the defect mg-e331 filed as its own D4, so the condition
+is run against a row built to have no falsifying input.
+
+  [HOLDS] a row whose conjuncts are ALL forced is green on the real input AND green on every planted world, so no world is red and the falsifiability row's condition is FALSE on it -- the row can report its own failure
+        conjuncts kept: ['rej == app', 'shape_ok == app']
+  [HOLDS] and the shipped section is GREEN on the real input, so this is a green-on-real + red-on-planted pair and not a probe satisfied by the good input alone
+
+==============================================================================
+mg-17aa V7 -- CONTAINMENT, BY ALLOWLIST AND NOT BY PREFIX
+==============================================================================
+Every path this ticket may touch is named here WITH ITS REASON, so
+that `it is under a directory I also edited` can never be the reason
+a change is accepted.  A file appearing that is not on this list
+turns the arm red whatever directory it is in.
+
+  [HOLDS] the population is the union of two routes -- `git diff --name-only 744cfd5` (23 paths) and `git status --porcelain` (1) -- because the committed diff misses the worktree and the worktree reports nothing once this lands
+  [HOLDS] 23 path(s) differ and every one of them is on the allowlist; 0 are not: none
+        code/face_geometry/controls.py                             the battery repaired: the routing, the [CANNOT FAIL] row, the conjunct decomposition and the replaced routing row
+        code/face_geometry/controls_output.txt                     its artifact, regenerated by its own run_all.sh
+        code/face_geometry/run_all.sh                              its runtime comment re-MEASURED on this tree (19.4 -> 20.8 s) rather than carried forward, and what moved attributed
+        code/face_geometry_audit_6653/out_attack_banner.txt        transcript, regenerated by its own run_all.sh (exit 0)
+        code/face_geometry_audit_6653/out_verify_claims.txt        transcript, regenerated by its own run_all.sh (exit 0).  IT COUNTS COMMITS IN HISTORY, so it is a measurement AT the commit it ran at and not a live property: it is regenerated INSIDE this commit (554 = `git rev-list --count HEAD` here) and a refinery rebase will restale it by one, which no ordering of runs can fix
+        code/face_geometry_audit_e7bc/out_g1_positive_control.txt  that audit's transcript, regenerated by its own run_all.sh
+        code/face_geometry_audit_e7bc/pc_all_pass.txt              a DERIVED control -- the artifact with every marker promoted to [PASS] -- regenerated because g1 compares it live
+        code/face_geometry_instr_5f9a/d3_reintroduction.py         R1's anchor re-aimed onto the branch row I4 now prints from, and R2's scoped count re-aimed onto `signs_read`; both mutations kept
+        code/face_geometry_instr_5f9a/d4_auditor_rerun.py          one frozen EXPECTATION moved 4 -> 5 with the reason written in; the audit it scores is not edited
+        code/face_geometry_instr_5f9a/out_d2_deletion.txt          transcript, regenerated
+        code/face_geometry_instr_5f9a/out_d3_reintroduction.txt    transcript, regenerated
+        code/face_geometry_instr_5f9a/out_d4_auditor_rerun.txt     transcript, regenerated
+        code/face_geometry_instr_5f9a/positive_control_all_fail.txt the same, demoted to [FAIL]
+        code/face_geometry_landing_7d5a/out_verify.txt             transcript, regenerated by its own run_all.sh (exit 0)
+        code/face_geometry_landing_da45/out_verify.txt             transcript, regenerated
+        code/face_geometry_landing_da45/verify_landing.py          TARGET 3 re-aimed off the deferral it froze and onto the guard it was protecting; TARGET 2's literal list now read from the row
+        code/face_geometry_rows_17aa/PREDICTIONS.md                this ticket's own tree
+        code/face_geometry_rows_17aa/README.md                     this ticket's own tree
+        code/face_geometry_rows_17aa/demo_wrong_way.py             this ticket's own tree
+        code/face_geometry_rows_17aa/out_demo_wrong_way.txt        this ticket's own tree
+        code/face_geometry_rows_17aa/out_verify_17aa.txt           this ticket's own tree
+        code/face_geometry_rows_17aa/run_all.sh                    this ticket's own tree
+        code/face_geometry_rows_17aa/verify_17aa.py                this ticket's own tree
+  [HOLDS] and NO frozen audit document is edited -- what moved in another ticket's tree is an EXPECTATION, an anchor, or a transcript, never a recorded finding
+        e3_seams.py gained a fifth BROKEN claim under this tree and is NOT edited: d4's expectation moved instead, saying which tree it recorded
+
+==============================================================================
+27 claim(s) scored; 0 BROKEN.
+==============================================================================

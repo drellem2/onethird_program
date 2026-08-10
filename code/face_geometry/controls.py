@@ -76,9 +76,30 @@ which no ordering can move.  Verified by the deletion test that caught the last
 version, in code/face_geometry_instr_5f9a/: delete a gate from the predicate and
 the artifact must CHANGE.
 
-What deliberately did NOT change: row I4 keeps `absorb == 0` in its scored
-condition.  The clause is true, it is not evidence, and removing it is a scoring
-change that belongs to its own item -- this one corrects a printed reason.
+AND THE CLAUSE IS NOW OUT OF ROW I4 TOO, WHICH IS THE ITEM mg-e35b DEFERRED
+(landed by mg-17aa).  Four generations of this file said the answer was forced
+on all four rows and left the clause scored in one of them, each time deferring
+the scoring change to its own item.  This is that item.  What was missing was
+not the argument but a SECOND theorem: `diagonal_moves` is the hypothesis of
+`s_i^2 = 1`, and it is FALSE on 3 of row I4's 61 biting posets -- the antichains,
+where the off-by-one is a bare relabelling.  There the other forced gate does it:
+`|s_i s_j| = 1` pins every absolute value, and the off-by-one moves 2|L(P)| of
+them at every n >= 3.  So the routing quantity is no longer "did the diagonal
+move" but "is every biting pair blocked by one of the two forced gates", asked
+of each pair by `gate_violations` -- and on that quantity all four rows are
+forced.  Row I4's condition is now `app > 0` plus two conjuncts that are
+themselves forced, which makes it the row with the LEAST measured content of the
+four, not the most.
+
+AND THE ROW THAT POLICED THE ROUTING HAD THE WRONG-DIRECTION SHAPE (mg-17aa).
+It scored `0 < len(forced_rows) < len(muts)` -- "the split separates" -- so the
+day the deferred item landed it went RED, on a tree that had become more honest
+and not less.  mg-e35b refused to score the vacuity split for exactly that
+reason and the row one screen above it had the defect.  Scoring rows-routed-
+each-way is replaced by scoring what that row was actually for: every scored row
+must have an EXHIBITED input on which its remaining condition is FALSE, run
+through the same conjunct predicates the row is scored by.  That goes red when a
+row becomes unfalsifiable and never when one is honestly relabelled.
 
 Run:  python3 controls.py
 """
@@ -658,6 +679,144 @@ DIAGONAL_MOVES = {
         "I1 moves a rank-one term from one facet to another, so the abandoned "
         "facet's diagonal entry drops by 1",
 }
+
+
+# THE SECOND FORCED GATE, and why row I4 needs it (mg-17aa, landing the item
+# mg-e35b deferred).  `DIAGONAL_MOVES` above is the closed form for the FIRST
+# forced gate, `s_i^2 = 1`.  It does not cover row I4: on the antichains the
+# off-by-one is a bare relabelling of L(P) = S_n and the diagonal SURVIVES, which
+# is exactly why mg-8a12's routing left that row scored.  The predicate has a
+# second gate that is forced by the same arithmetic -- `|s_i s_j| = 1` pins every
+# absolute value -- and it is what settles those pairs.  Both are read out by the
+# [CANNOT FAIL] row, per row, for whichever gate that row actually needs, so the
+# printed argument always names the theorem that is doing the work.
+MAGNITUDE_MOVES = {
+    "facet_offbyone":
+        "I4's off-by-one is prefixes_true(rot(w)) with rot the cyclic rotation "
+        "of POSITIONS, which carries n-2 of the n-1 adjacent-transposition "
+        "generators to generators and one out of the set; the off-diagonal "
+        "support of L^rel is that generator graph (claim (1)), so exactly one "
+        "neighbour of every vertex changes and 2|L(P)| off-diagonal MAGNITUDES "
+        "differ, at every n >= 3 (mg-f1b2's F1, landed by mg-da45)",
+}
+
+
+def nc4_row_conjuncts(localised, forced):
+    """The scored condition of one row of NEGATIVE CONTROL 4, decomposed into
+    NAMED CONJUNCTS with the class of each (mg-17aa).
+
+    THE UNIT OF THE [CANNOT FAIL] QUESTION IS THE CONJUNCT, NOT THE ROW, and
+    getting that wrong is what left this file deferring the same item four
+    times.  "Can row I4 fail?" has been answered YES three times over, correctly
+    and uselessly: the row can fail on `app > 0`, so it is not a [CANNOT FAIL]
+    row, so the forced clause sitting inside it kept its [PASS].  A forced
+    conjunct in a scored condition is the defect whatever the rest of the
+    condition does, which is the same reading of the SCORING section that
+    mg-8a12 applied to the other three rows.
+
+    FOUR CLASSES, and the difference between the last three is the whole point:
+
+      CONTINGENT                    an input this file can exhibit makes it
+                                    false.  This is what a control row is for.
+      FORCED BY THE MUTATION        no input can, because the mutation itself
+                                    forbids it -- this is `absorb == 0`, and it
+                                    is why it leaves the row.
+      FORCED GIVEN A SCORED ROW     it can only fail together with another row
+                                    that IS scored, so it adds no independent
+                                    falsifiability.  `rej == app` is this: `app`
+                                    counts L_mut != L_true and the baseline row
+                                    scores L_true == target on the whole
+                                    population, so L_mut != target follows.
+      FORCED BY CONSTRUCTION        the compared matrices are |L(P)| x |L(P)|
+                                    and no `incidence_mode` changes the number
+                                    of facets, so `shape_ok == app` at every n.
+
+    ONLY THE FIRST CLASS IS REMOVED FROM A ROW, and only when it is the whole of
+    a clause -- the last two are KEPT and named.  A conjunct that can only fail
+    alongside a scored row is redundant, not unfalsifiable, and deleting true
+    redundant checks from a control battery to make a table look tidier is a
+    different and worse change.  What is owed is that they not be COUNTED as the
+    row's evidence, and this decomposition is what makes them countable apart.
+
+    `forced` comes from the population, not from this list: a mutation set on
+    which some biting pair clears both forced gates puts `absorb == 0` back into
+    the scored condition of the row that owns it, with no edit here.
+    """
+    cs = [
+        ("app > 0", "CONTINGENT",
+         "the corruption reaches L^rel on at least one poset of the population",
+         lambda st: st["app"] > 0),
+        ("rej == app", "FORCED GIVEN A SCORED ROW",
+         "every biting poset is rejected -- forced by the baseline row, which "
+         "scores L_true == target on all of them",
+         lambda st: st["rej"] == st["app"]),
+        ("shape_ok == app", "FORCED BY CONSTRUCTION",
+         "the compared matrices have the same shape -- forced at every n, no "
+         "incidence_mode changes the facet count",
+         lambda st: st["shape_ok"] == st["app"]),
+    ]
+    if localised:
+        cs.append(
+            ("caused == app", "CONTINGENT",
+             "the residual equals a prediction made from the corrupted site "
+             "without reading the corrupted matrix",
+             lambda st: st["caused"] == st["app"]))
+    if not forced:
+        cs.append(
+            ("absorb == 0", "CONTINGENT",
+             "not absorbable into a diagonal +-1 twist on any biting poset -- "
+             "scored only because some pair of THIS row clears both forced "
+             "gates, so the predicate could have said either thing",
+             lambda st: st["absorb"] == 0))
+    return cs
+
+
+def nc4_row_verdict(st, conjuncts):
+    """The row's scored condition, evaluated from its five counters.  One
+    definition, used by the rows themselves and by the exhibits that falsify
+    them, so an exhibit cannot falsify a hand-typed replica of a row (mg-17aa)."""
+    return all(fn(st) for _, _, _, fn in conjuncts)
+
+
+def nc4_row_stats(ps, mode, predict_mode=None):
+    """The five counters a row of NEGATIVE CONTROL 4 scores, over `ps`, for an
+    input the section's own sweep does not otherwise visit (mg-17aa).
+
+    IT IS A SECOND ROUTE TO THE SAME NUMBERS AND THAT IS A HAZARD, not a
+    feature: two procedures computing one quantity is how this lineage got a
+    gate name that was not the code's (mg-1c80 F1).  So the exhibit row below
+    does not merely use it -- it REQUIRES it to reproduce the main sweep's own
+    counters for all four rows on the real input, and goes red if the two drift.
+    An exhibit that falsifies a replica of a row falsifies nothing.
+
+    `predict_mode` is the mutation the residual prediction is made FROM.  Pass
+    the row's own mode for the honest computation; pass another to build the
+    mis-predicted world that shows `caused == app` can fail.
+    """
+    st = dict(app=0, rej=0, shape_ok=0, caused=0, absorb=0)
+    for P in ps:
+        L_true, target = claim1_pair(P)
+        L_mut, _ = claim1_pair(P, incidence_mode=mode)
+        if mat_eq(L_mut, L_true):
+            continue
+        st["app"] += 1
+        st["rej"] += not mat_eq(L_mut, target)
+        st["absorb"] += absorbable_by_diagonal_twist(L_mut, target)
+        m = len(L_true)
+        if len(L_mut) != m or any(len(L_mut[i]) != len(L_true[i])
+                                  for i in range(m)):
+            continue
+        st["shape_ok"] += 1
+        if predict_mode is None:
+            continue
+        delta = predicted_incidence_delta(P, predict_mode)
+        if delta is None:
+            continue
+        s = [perm_sign(w) for w in linear_extensions(P)]
+        pred = [[s[i] * delta[i][j] * s[j] for j in range(m)] for i in range(m)]
+        obs = [[L_mut[i][j] - target[i][j] for j in range(m)] for i in range(m)]
+        st["caused"] += mat_eq(pred, obs) and any(v for r_ in pred for v in r_)
+    return st
 
 
 # NO GATE PROCEDURE LIVES IN THIS FILE ANY MORE (mg-1c80's F1, landed by
@@ -1379,6 +1538,10 @@ def negative_control_incidence(nmax):
     multi_ridge = {}
     forced_rows = []
     theorem_app = theorem_diag = theorem_absorb = theorem_both = 0
+    # mg-17aa: the per-row conjunct decomposition and the two-gate routing
+    # tallies, read out by the [CANNOT FAIL] row and by the exhibit row.
+    row_stats = []
+    theorem_blocked = theorem_bdiag = theorem_bmag = 0
     # WHICH GATE settles each absorbability answer, tallied over every biting
     # pair the section scores (mg-f1b2 F1, mg-da45).  `gate_rows` is read out in
     # the measured block below; `tot_*` carry the section-wide totals the routing
@@ -1411,6 +1574,16 @@ def negative_control_incidence(nmax):
         # them about its own population rather than citing an audit for them.
         nonsim = gauge = unclassified = 0
         blind = blind_set = blind_big = 0
+        # WHICH FORCED GATE BLOCKS ABSORBABILITY, per biting pair (mg-17aa).
+        # This replaces `diag_preserved == 0` as the routing quantity.  The two
+        # gates are forced by the SAME arithmetic -- s_i^2 = 1 pins the diagonal,
+        # |s_i s_j| = 1 pins every absolute value -- so a pair violating either
+        # cannot be absorbed by ANY sign vector, and a row all of whose pairs
+        # violate one has its "absorbable on 0/N" forced.  mg-8a12 routed on the
+        # first gate alone, which is why row I4 -- whose diagonal survives on the
+        # 3 antichains -- stayed scored for four generations.  `blocked_mag` is
+        # the pairs the second gate is NEEDED for: no diagonal violation there.
+        blocked = blocked_diag = blocked_mag = blocked_shape = 0
         for P in ps:
             L_true, target = claim1_pair(P)
             L_mut, target_mut = claim1_pair(P, incidence_mode=mode)
@@ -1435,6 +1608,19 @@ def negative_control_incidence(nmax):
                 rej += 1
             if absorbable_by_diagonal_twist(L_mut, target):
                 absorb += 1
+            # IS THIS PAIR BLOCKED BY A FORCED GATE?  Asked EXHAUSTIVELY, before
+            # the shape guard below, because a shape mismatch blocks too and a
+            # pair skipped by that `continue` would otherwise be counted as
+            # unblocked and route its row the wrong way (mg-17aa).
+            vb = gate_violations(L_mut, target)
+            if vb:
+                blocked += 1
+                if "diagonal" in vb:
+                    blocked_diag += 1
+                elif "magnitude" in vb:
+                    blocked_mag += 1        # the gate mg-8a12's routing missed
+                else:
+                    blocked_shape += 1
             # THE DICHOTOMY, classified per poset with no third bucket allowed.
             # NON-SIMILAR is a spectral PROOF (no similarity transform at all,
             # so in particular no signed permutation); GAUGE is an EXHIBITED
@@ -1519,20 +1705,35 @@ def negative_control_incidence(nmax):
         # the failure mode being repaired.  If the predicate could not have said
         # "absorbable" on any poset this row counts, its answer is a theorem and
         # belongs in the [CANNOT FAIL] row below, not in a scored condition.
-        forced = (diag_preserved == 0)
-        cond = app > 0 and rej == app and shape_ok == app
-        if localised:
-            cond = cond and caused == app
+        # THE ROUTING QUANTITY, WIDENED FROM ONE FORCED GATE TO BOTH (mg-17aa,
+        # landing the item mg-e35b deferred).  It was `diag_preserved == 0`.
+        # That is the hypothesis of ONE of the predicate's two forced gates, and
+        # it is false on 3 of row I4's 61 biting posets -- so that row kept a
+        # forced clause in a scored condition through four repairs, each of
+        # which named the deferral rather than making it.  What decides is
+        # whether ANY forced gate blocks the pair: either one alone rules out
+        # every sign vector, so a row all of whose pairs violate one has its
+        # answer forced whichever gate does it.  Still computed from the
+        # population and not written in: a mutation set with a pair that clears
+        # both gates routes that row back to scored with no edit here.
+        forced = (blocked == app)
+        st = dict(app=app, rej=rej, shape_ok=shape_ok, caused=caused,
+                  absorb=absorb)
+        conjuncts = nc4_row_conjuncts(localised, forced)
+        cond = nc4_row_verdict(st, conjuncts)
+        row_stats.append((name.split(" ")[0], mode, localised, st, conjuncts))
         if forced:
-            forced_rows.append((name, mode, app, absorb))
+            forced_rows.append((name, mode, app, absorb,
+                                blocked_diag, blocked_mag, blocked_shape))
             theorem_app += app
             theorem_diag += diag_moved     # counted, not derived: a poset whose
                                            # shape moved is verified for neither
             theorem_absorb += absorb
             theorem_both += both_gates    # how many of them the OTHER
                                           # forced gate also catches
-        else:
-            cond = cond and absorb == 0
+            theorem_blocked += blocked
+            theorem_bdiag += blocked_diag
+            theorem_bmag += blocked_mag
         # WHAT THE VACUOUS COUNT MEANS IN THIS ROW, said in the row (mg-e35b,
         # landing mg-fcf1's F4).  The word covered two facts; which one it is
         # here is measured, not assumed, and for I4 it is the adverse one.
@@ -1589,9 +1790,14 @@ def negative_control_incidence(nmax):
                   "single site and no residual prediction is made; up to %d matrix "
                   "entries move.  Shape unchanged on %d/%d, so the rejection is not a "
                   "size mismatch." % (residual_max, shape_ok, app)),
-                 ("Absorbability is NOT scored in this row: the diagonal moves on all "
-                  "%d, so 'not absorbable' is forced -- see the [CANNOT FAIL] row "
-                  "below (mg-8a12)." % app) if forced else
+                 ("Absorbability is NOT scored in this row: every one of the %d biting "
+                  "pairs violates a gate that s_i^2 = 1 or |s_i s_j| = 1 FORCES (%d "
+                  "on the diagonal, %d on an off-diagonal magnitude with the diagonal "
+                  "intact, %d on shape), so 'not absorbable' could not have come out "
+                  "otherwise here -- see the [CANNOT FAIL] row below (mg-8a12 for the "
+                  "diagonal gate; mg-17aa for the magnitude one, which is what this "
+                  "row needed and what kept it scored until now)."
+                  % (app, blocked_diag, blocked_mag, blocked_shape)) if forced else
                  ("Absorbable into a diagonal +-1 twist on %d of those %d, and this "
                   "row DOES score it.  WHAT THE PREDICATE DID, reported by the "
                   "predicate itself and not by a procedure standing next to it "
@@ -1610,10 +1816,12 @@ def negative_control_incidence(nmax):
                   "explains the other %d pairs.  Both forced gates are violated on "
                   "%d of the %d, so on those the gate a trace names is a fact about "
                   "the order the code tests in, and deleting either one leaves their "
-                  "answers alone.  The clause is kept in the condition because it is "
-                  "TRUE, not because it is evidence; dropping it and extending the "
-                  "[CANNOT FAIL] row to this corruption is a SCORING change and is "
-                  "deliberately NOT made here."
+                  "answers alone.  THIS BRANCH IS REACHED ONLY BY A MUTATION SET WITH "
+                  "A PAIR THAT CLEARS BOTH FORCED GATES (mg-17aa): on the four "
+                  "corruptions this section ships, none does, and every row routes to "
+                  "the [CANNOT FAIL] row instead.  The branch is kept because the "
+                  "routing is computed from the population -- a corruption that CAN "
+                  "be absorbed puts the clause back here with no edit."
                   % (absorb, app, shape_ok, signs_read,
                      diag_preserved, app, gates["magnitude"], only_mag,
                      mag_entries, sign_entries, gates["parity"],
@@ -1644,60 +1852,139 @@ def negative_control_incidence(nmax):
         check("PROVEN PROPERTY, not a control row -- the corruptions %s are NOT "
               "absorbable into a diagonal +-1 twist (%s), and those counts are FORCED "
               "at every n, so this is scored [CANNOT FAIL] and NOT as %d passing "
-              "controls.  The argument, in two lines: (i) S.A.S = B with s_i^2 = 1 "
-              "pins every diagonal entry, so a corruption that moves one can never be "
-              "absorbed into a diagonal twist; (ii) each of these moves one -- %s.  "
-              "Both lines are checked, not asserted: the diagonal moves on %d/%d "
-              "biting posets and the predicate reports absorbable on %d, and mg-fcf1 "
-              "swept every eligible ridge choice (1449/981/1459 for I1/I2/I3), not "
-              "just the first one this file mutates.  A FALSE theorem is still a "
-              "failure: if the diagonal stopped moving, or the predicate did report "
-              "absorbable, this row FAILS.  AND WHAT LINE (i) IS NOT: a claim about "
-              "which test in the code fires.  It is an implication -- moved diagonal "
-              "=> not absorbable -- and the implementation realises it REDUNDANTLY, "
-              "which is measured here and not argued: on %d of these %d pairs the "
-              "|s_i s_j| = 1 gate is violated TOO (it runs over j == i), so deleting "
-              "the s_i^2 = 1 gate from the predicate changes no answer on any of "
-              "them.  mg-da45 printed a gate name as though it were this argument; "
-              "the argument stands and the gate name was not evidence for it "
+              "controls.  IT IS NOW ALL FOUR ROWS AND NOT THREE (mg-17aa, landing the "
+              "item mg-e35b deferred and mg-8a12, mg-da45 and mg-5f9a each named "
+              "before it).  The argument, in three lines and not two, because the "
+              "third is what row I4 needed: (i) S.A.S = B with s_i^2 = 1 pins every "
+              "diagonal entry, so a corruption that moves one can never be absorbed; "
+              "(ii) the same equation with |s_i s_j| = 1 pins every ABSOLUTE VALUE, so "
+              "a corruption that moves one of those cannot be absorbed either, whether "
+              "or not it touches the diagonal; (iii) every biting pair of every row "
+              "here violates one of them -- %d of %d on the diagonal, %d on a "
+              "magnitude with the diagonal INTACT, %d on shape.  Line (i) covers %s; "
+              "line (ii) is what covers the %d pairs it does not -- %s.  All are "
+              "checked, not asserted: the predicate reports absorbable on %d of the %d "
+              "and `gate_violations` finds a forced gate violated on %d of the %d, and "
+              "mg-fcf1 swept every eligible ridge choice (1449/981/1459 for I1/I2/I3), "
+              "not just the first one this file mutates.  A FALSE theorem is still a "
+              "failure: if some pair cleared both forced gates, or the predicate did "
+              "report absorbable, this row FAILS -- and the row would not merely fail, "
+              "the routing would put the clause back into that row's scored condition, "
+              "which is where the falsifiability of a real decision belongs.  AND WHAT "
+              "LINES (i) AND (ii) ARE NOT: a claim about which test in the code fires. "
+              "They are implications, and the implementation realises them "
+              "REDUNDANTLY, which is measured and not argued: on %d of these %d pairs "
+              "BOTH forced gates are violated, so deleting either changes no answer on "
+              "any of them.  mg-da45 printed a gate name as though it were this "
+              "argument; the argument stands and the gate name was not evidence for it "
               "(mg-1c80 F1, mg-5f9a)"
-              % (", ".join(n.split(" ")[0] for n, _, _, _ in forced_rows),
+              % (", ".join(n.split(" ")[0] for n, _, _, _, _, _, _ in forced_rows),
                  ", ".join("%s on %d/%d" % (n.split(" ")[0], a - ab, a)
-                           for n, _, a, ab in forced_rows),
+                           for n, _, a, ab, _, _, _ in forced_rows),
                  len(forced_rows),
-                 "; ".join(DIAGONAL_MOVES.get(
-                     m, "%s moves one, though no closed form for it is recorded "
-                        "in DIAGONAL_MOVES" % n.split(" ")[0])
-                     for n, m, _, _ in forced_rows),
-                 theorem_diag, theorem_app, theorem_absorb,
+                 theorem_bdiag, theorem_app, theorem_bmag,
+                 theorem_blocked - theorem_bdiag - theorem_bmag,
+                 "; ".join(DIAGONAL_MOVES[m] for _, m, _, _, _, _, _ in forced_rows
+                           if m in DIAGONAL_MOVES),
+                 theorem_bmag,
+                 "; ".join(MAGNITUDE_MOVES.get(
+                     m, "%s needs it on %d pair(s) and no closed form for it is "
+                        "recorded in MAGNITUDE_MOVES" % (n.split(" ")[0], bm))
+                     for n, m, _, _, _, bm, _ in forced_rows if bm) or "no row does",
+                 theorem_absorb, theorem_app, theorem_blocked, theorem_app,
                  theorem_both, theorem_app),
-              theorem_absorb == 0 and theorem_diag == theorem_app,
+              theorem_absorb == 0 and theorem_blocked == theorem_app,
               cannot_fail=True)
 
     # A POSITIVE CONTROL ON THE REPAIR ITSELF.  RELABELLING IS NOT DETECTING: a
     # repair that routed every row to [CANNOT FAIL] would look attended to and
-    # cover nothing, which is worse than the defect it replaces.  So the routing
-    # has to be shown to separate on this population, the same way the gauge
-    # detector and the absorbability instrument are shown to separate above.
-    check("routing check on the mg-8a12 repair: the MOVED-DIAGONAL split SEPARATES on "
-          "this population -- %d of the %d rows have their absorbability answer forced "
-          "by a moved diagonal and are stated as a theorem; on the remaining %d the "
-          "diagonal survives and absorbability stays scored. "
-          "If it routed every row one way it would be a relabelling of the whole "
-          "section, not a decision about each row.  IT ROUTES ON `diagonal_moves`, a "
-          "question about the two matrices, and NOT on which gate the predicate "
-          "returned at -- those are different questions and mg-da45 asked them with "
-          "one function (mg-1c80 F1, mg-5f9a).  WHAT THIS DOES NOT SHOW, and mg-8a12 "
-          "printed that it did: that the answer on the row it keeps is a DECISION.  "
-          "Measured over all four rows, from the predicate's own execution: it read "
-          "%d off-diagonal SIGNS in total, reached the parity system on "
-          "%d of the %d biting (poset, mutation) pairs, and %d entries anywhere in "
-          "the %d same-shape pairs differ in sign alone.  A count of signs read is "
-          "what this sentence can support; a gate name is not, because the two forced "
-          "gates are interleaved by row and %d of the pairs violate BOTH"
-          % (len(forced_rows), len(muts), len(muts) - len(forced_rows),
-             tot_signs_read, tot_parity, tot_app, tot_sign, tot_shape, tot_both),
-          0 < len(forced_rows) < len(muts))
+    # cover nothing, which is worse than the defect it replaces.
+    #
+    # AND THE ROW THAT SAID SO USED TO SCORE `0 < len(forced_rows) < len(muts)`
+    # -- "the moved-diagonal split SEPARATES on this population" -- WHICH IS A
+    # CONTROL THAT GOES RED WHEN THE SECTION BECOMES MORE HONEST (mg-17aa).  The
+    # day the deferred item landed and row I4 routed to the theorem, that
+    # condition read 0 < 4 < 4 and the battery exited 1 on a tree that had just
+    # removed a forced clause from a scored condition.  mg-e35b declined to
+    # score the vacuity split on exactly this ground -- "a row scoring 'the split
+    # separates' would go RED the day somebody FIXED the blindness, the wrong
+    # direction for a control to point" -- and the row one screen above it had
+    # that shape, pointing at the item mg-e35b was deferring.  It is demonstrated
+    # rather than asserted, in code/face_geometry_rows_17aa/demo_wrong_way.py.
+    #
+    # THE CONCERN IS REAL AND IS NOT DROPPED; what changes is what answers it.
+    # A count of rows routed each way never showed that anything could fail: it
+    # is satisfied by a section with one un-routed row whose condition is a
+    # tautology, and it is refuted by a section in which every forced clause has
+    # been honestly removed.  What shows it is an EXHIBITED INPUT per row on
+    # which that row's REMAINING condition is FALSE -- run here, through the same
+    # conjunct predicates the row itself is scored by, so no exhibit can falsify
+    # a replica.  GREEN ON THE REAL INPUT AND RED ON THE PLANTED ONE, both
+    # directions, because a probe satisfied by the good input alone is
+    # unfalsifiable (mg-e331 D4).
+    ex_rows, ex_ok, ex_agree = [], 0, 0
+    st_noop = nc4_row_stats(ps, "true")
+    for tag, mode, localised, st, conjuncts in row_stats:
+        st_live = nc4_row_stats(ps, mode, mode if localised else None)
+        agree = all(st_live[k] == st[k] for k in st
+                    if localised or k != "caused")
+        ex_agree += agree
+        worlds = [("the mutation replaced by a NO-OP (incidence_mode='true'): "
+                   "it reaches L^rel on 0 posets", dict(st_noop))]
+        if localised:
+            wrong = next(md for _, md, lc in muts if lc and md != mode)
+            st_wrong = dict(st_live)
+            st_wrong["caused"] = nc4_row_stats(ps, mode, wrong)["caused"]
+            worlds.append(("the residual checked against a prediction made from "
+                           "%s's site instead of its own" % wrong, st_wrong))
+        red = [(why, w) for why, w in worlds
+               if not nc4_row_verdict(w, conjuncts)]
+        green = nc4_row_verdict(st, conjuncts)
+        ex_ok += green and len(red) == len(worlds) and agree
+        ex_rows.append((tag, green, len(red), len(worlds),
+                        [c for c, k, _, _ in conjuncts if k == "CONTINGENT"],
+                        " / ".join(why for why, _ in red)
+                        or "NO FALSIFYING INPUT EXHIBITED"))
+    check("falsifiability check, replacing the mg-8a12 routing row: every one of the "
+          "%d rows is GREEN on the real population and RED on an EXHIBITED input, "
+          "through the same conjunct predicates it is scored by -- %s.  WHAT IT "
+          "REPLACES AND WHY (mg-17aa): this row used to score `0 < forced < all`, i.e. "
+          "that the routing split the row set, which is a control that goes RED the "
+          "day the last forced clause is honestly removed -- the wrong direction, and "
+          "the shape mg-e35b refused to build one screen below.  It now reads 4 of 4 "
+          "forced and that is a MEASUREMENT here, not a condition.  WHAT IS SCORED "
+          "INSTEAD is the thing the old row only gestured at: that what remains scored "
+          "CAN fail, shown by running it.  THE UNIT IS THE CONJUNCT, NOT THE ROW, and "
+          "that is why this file deferred the same item four times: 'can row I4 fail?' "
+          "is YES on `app > 0` however forced its absorbability clause is, so the "
+          "clause kept its [PASS].  Each row's contingent conjuncts are %s -- and note "
+          "I4 has ONE where the others have two, so the row that was kept scored "
+          "BECAUSE its absorbability answer was supposedly a decision is the row with "
+          "the least measured content of the four.  THE WEAK HALF, stated: the "
+          "exhibits are computed by `nc4_row_stats`, a SECOND route to the same five "
+          "counters, and two procedures for one quantity is how this lineage got a "
+          "gate name that was not the code's -- so that route is required to reproduce "
+          "the main sweep's counters on the real input first, and does on %d/%d rows. "
+          "AND THE SECTION-WIDE MEASUREMENTS THE OLD ROW CARRIED ARE KEPT, because a "
+          "replaced row that quietly drops its measurements is a second defect wearing "
+          "the first one's repair: the predicate read %d off-diagonal SIGNS in total, "
+          "reached the parity system on %d of the %d biting (poset, mutation) pairs, "
+          "and %d entries anywhere in the %d same-shape pairs differ in sign alone, "
+          "with both forced gates violated on %d.  A count of signs read is what those "
+          "sentences can support; a gate name is not.  "
+          "WHAT THIS STILL DOES NOT SHOW: that the two conjuncts classed FORCED GIVEN "
+          "A SCORED ROW and FORCED BY CONSTRUCTION could ever fail.  They are kept "
+          "because they are true and cheap, not because they are evidence, and they "
+          "are named as what they are in the measured block below"
+          % (len(row_stats),
+             "; ".join("%s green=%s, %d/%d planted worlds red (%s)"
+                       % (t, g, nr, nw, w) for t, g, nr, nw, _, w in ex_rows),
+             "; ".join("%s: %s" % (t, ", ".join(cs) if cs else "NONE")
+                       for t, _, _, _, cs, _ in ex_rows),
+             ex_agree, len(row_stats),
+             tot_signs_read, tot_parity, tot_app, tot_sign, tot_shape,
+             tot_both),
+          ex_ok == len(row_stats) and len(row_stats) > 0)
 
     # THE GAUGE STANDARD, APPLIED TO THE ROWS THIS SECTION KEPT (mg-e35b,
     # landing mg-fcf1's F2 tail).  `facet_swap01` was rejected because a
@@ -1872,8 +2159,9 @@ def negative_control_incidence(nmax):
         nc3_spec += not_isospectral(L_par, L_true)
         nc3_parity += tr.gate == "parity"
         nc3_signs += tr.signs_read
-    print("    * the absorbability predicate -- which after mg-8a12 scores ONE row "
-          "(I4) and is stated as a theorem for I1/I2/I3 -- applied to NEGATIVE "
+    print("    * the absorbability predicate -- which after mg-17aa scores NO row of "
+          "this section and is stated as a theorem for all four (it scored I4 "
+          "alone from mg-8a12 until then) -- applied to NEGATIVE "
           "CONTROL 3's facet-parity corruption instead, would score it FAIL: that "
           "corruption is absorbable into a diagonal +-1 twist on %d/%d of the posets "
           "where it bites and its spectrum provably moves on %d/%d. It is also the "
@@ -1884,7 +2172,9 @@ def negative_control_incidence(nmax):
           "(mg-f1b2 F1, corrected by mg-da45): NC3's corruption is D.L.D by "
           "construction, so its magnitudes ARE the target's and a sign is what is "
           "left to decide, while row I4's magnitudes differ on every poset where its "
-          "diagonal survives. SAID AS THE PREDICATE'S OWN EXECUTION REPORTS IT rather "
+          "diagonal survives -- which is precisely the second forced gate, and the "
+          "reason row I4's clause is now out of its scored condition too (mg-17aa). "
+          "SAID AS THE PREDICATE'S OWN EXECUTION REPORTS IT rather "
           "than as a gate name (mg-1c80 F1, mg-5f9a): here it READ %d off-diagonal "
           "signs, and over the whole of NEGATIVE CONTROL 4 it read %d. That is the "
           "separation -- not that the two are 'settled at different gates', which "
@@ -2016,12 +2306,28 @@ def negative_control_incidence(nmax):
           "order the predicate does not use, and on I1 the predicate's own order "
           "gives 15 diagonal + 57 magnitude and not 72 + 0. What was true in it is "
           "the word FORCED, and that is now carried by the sign count. mg-8a12 removed the "
-          "clause from the three; row I4 still carries a forced clause in a scored "
-          "condition and now SAYS SO in its own row rather than claiming the "
-          "off-diagonal signs decide it. Removing it -- and with it the reason this "
-          "section's routing exists -- is a scoring change and is left to its own "
-          "item. The lines in this block are measurements, not rows, and are "
-          "deliberately unscored.")
+          "clause from the three; row I4 kept it for three more repairs, each of which "
+          "named the deferral, and mg-17aa REMOVES IT -- what was missing was not the "
+          "argument but the SECOND forced gate, |s_i s_j| = 1, which is what settles "
+          "the 3 posets where I4's diagonal survives. AND THE UNIT OF THE QUESTION WAS "
+          "PART OF WHY IT TOOK FOUR GOES (mg-17aa): 'can row I4 fail?' is YES -- on "
+          "`app > 0` -- however forced its absorbability clause is, so a row-level "
+          "reading kept giving the honest answer to the wrong question and the clause "
+          "kept its [PASS]. The unit is the CONJUNCT. Decomposed by "
+          "`nc4_row_conjuncts`, the four rows' scored conditions are: %s. Only the "
+          "CONTINGENT ones are the section's evidence; `rej == app` is forced GIVEN "
+          "the baseline row above (app counts L_mut != L_true and that row scores "
+          "L_true == target on the whole population) and `shape_ok == app` is forced "
+          "by construction at every n, and both are KEPT -- a conjunct that can only "
+          "fail alongside a scored row is redundant, not unfalsifiable, and deleting "
+          "true checks to tidy a table is a different and worse change than the one "
+          "this ticket makes. What is owed is that they not be counted as evidence, "
+          "which is what naming them here does. The lines in this block are "
+          "measurements, not rows, and are deliberately unscored."
+          % "; ".join(
+              "%s = %s" % (t, " AND ".join(
+                  "%s [%s]" % (c, k) for c, k, _, _ in cj))
+              for t, _, _, _, cj in row_stats))
 
 
 def artifact_banner_check():

@@ -200,13 +200,34 @@ def target_2(tally):
     check("the artifact has exactly one row I4", len(i4) == 1)
     row = i4[0] if i4 else ""
     t = tally["I4"]
-    wanted = [
-        "preserved on %d of the %d" % (t["magnitude"] + t["parity"], t["app"]),
-        "%d are settled by |s_i s_j| = 1" % t["magnitude"],
-        "%d off-diagonal magnitudes differ on them" % t["mag_entries"],
-        "%d entries differ in SIGN ALONE" % t["sign"],
-        "while %d reach the parity system" % t["parity"],
-    ]
+    # WHICH LITERALS ROW I4 CARRIES DEPENDS ON WHETHER IT STILL SCORES
+    # ABSORBABILITY, and that is read out of the row rather than assumed
+    # (mg-17aa).  This list was written when it did.  mg-17aa extended the
+    # [CANNOT FAIL] treatment to all four rows, so the row now prints the
+    # BLOCKING SPLIT instead of the predicate's decision -- different words,
+    # THE SAME numbers, and both derived from T1's own independent sweep, which
+    # is the property this check was built to have.  Hardcoding the old list
+    # would freeze a landing's scope into a live runner; hardcoding the new one
+    # would erase that mg-da45 deliberately kept the clause.  Reading the row
+    # does neither.
+    dp = t["magnitude"] + t["parity"]            # diagonal-preserved, from T1
+    if "row DOES score it" in row:
+        wanted = [
+            "preserved on %d of the %d" % (dp, t["app"]),
+            "%d are settled by |s_i s_j| = 1" % t["magnitude"],
+            "%d off-diagonal magnitudes differ on them" % t["mag_entries"],
+            "%d entries differ in SIGN ALONE" % t["sign"],
+            "while %d reach the parity system" % t["parity"],
+        ]
+    else:
+        wanted = [
+            "Absorbability is NOT scored in this row",
+            "(%d on the diagonal, %d on an off-diagonal magnitude with the "
+            "diagonal intact, %d on shape)" % (t["app"] - dp, dp, 0),
+        ]
+    print("  row I4 %s absorbability, so the literals checked are the %s set"
+          % ("SCORES" if "row DOES score it" in row else "does NOT score",
+             "mg-da45" if "row DOES score it" in row else "mg-17aa"))
     for w in wanted:
         check("row I4 prints %r, and T1 measured it independently" % w, w in row)
     tot = tally["total"]
@@ -250,20 +271,44 @@ def target_2(tally):
 
 # --------------------------------------------------------------------- T3
 def target_3():
-    head("TARGET 3 -- THE CONDITION IS UNCHANGED, which is what was asked for")
+    head("TARGET 3 -- THE CLAUSE IS WHERE THE ROUTING PUTS IT, NOT WHERE A HAND DID")
     print("  mg-f1b2's own remedy was to DROP `absorb == 0` from row I4.  The")
     print("  ticket that landed this deliberately did not: the count is true,")
-    print("  what was false was the reason printed for scoring it.  So the")
-    print("  scoring must be verifiably where it was.")
+    print("  what was false was the reason printed for scoring it.  That")
+    print("  remains the record of mg-da45's scope and is not withdrawn.")
+    print()
+    print("  WHAT THIS TARGET USED TO SCORE, AND WHY IT NO LONGER CAN (mg-17aa).")
+    print("  It scored three SOURCE LITERALS -- `cond = cond and absorb == 0`,")
+    print("  `forced = (diag_preserved == 0)` and the routing row's own")
+    print("  condition -- i.e. it froze the DEFERRAL itself.  mg-e35b recorded")
+    print("  extending the [CANNOT FAIL] row to all four corruptions as its own")
+    print("  item; mg-17aa landed that item; and a verifier asserting `the")
+    print("  deferred thing has not been done` necessarily goes red the day it")
+    print("  is.  That is the fourth instrument in this arc to point that way")
+    print("  and it is recorded, not smoothed away, in")
+    print("  code/face_geometry_rows_17aa/README.md.")
+    print()
+    print("  WHAT WAS ACTUALLY BEING GUARDED is kept: that the clause cannot be")
+    print("  dropped SILENTLY.  A deletion by hand and a removal decided by the")
+    print("  population are different acts, and only the second is licensed --")
+    print("  so what is scored now is that the clause is still IN the file,")
+    print("  under a routing computed from the sweep, with what it asserts")
+    print("  carried by a [CANNOT FAIL] row.  All three would go red on a hand")
+    print("  deletion, which is what the three literals were protecting.")
     src = open(os.path.join(FG, "controls.py")).read()
-    check("row I4 still scores absorbability (`cond = cond and absorb == 0`)",
-          "cond = cond and absorb == 0" in src)
-    check("the forced/theorem routing still routes on the diagonal gate "
-          "(`forced = (diag_preserved == 0)`)",
-          "forced = (diag_preserved == 0)" in src)
-    check("the routing row's condition is untouched "
-          "(`0 < len(forced_rows) < len(muts)`)",
-          "0 < len(forced_rows) < len(muts)" in src)
+    check("the `absorb == 0` clause is still IN controls.py and is still a "
+          "conjunct of a row's scored condition -- not deleted, only routed "
+          "(`if not forced:` ... `st[\"absorb\"] == 0` in `nc4_row_conjuncts`)",
+          "if not forced:" in src and 'st["absorb"] == 0' in src)
+    check("and which row carries it is DECIDED BY THE POPULATION, not written "
+          "in: the routing is `forced = (blocked == app)` over the gates "
+          "`gate_violations` reports, so a corruption that can be absorbed puts "
+          "the clause back with no edit",
+          "forced = (blocked == app)" in src and "gate_violations(L_mut, target)" in src)
+    check("and what the clause asserted is carried by a [CANNOT FAIL] row that "
+          "FAILS if it is false (`theorem_absorb == 0 and theorem_blocked == "
+          "theorem_app`), so nothing was dropped, only relabelled",
+          "theorem_absorb == 0 and theorem_blocked == theorem_app" in src)
     run = subprocess.run([sys.executable, "controls.py", "5"], cwd=FG,
                          capture_output=True, text=True)
     out = run.stdout
@@ -318,9 +363,15 @@ def main():
         print("   - " + n)
     if not bad:
         print()
-        print("The condition row I4 scores is unchanged and still true; what")
-        print("changed is that the file now MEASURES which gate settled it and")
-        print("prints that instead of a decision that never happened.")
+        print("mg-da45's finding stands: `absorb == 0` was true, and the reason")
+        print("printed for scoring it was false -- the predicate never read a")
+        print("sign.  What has changed since (mg-17aa) is that the clause is no")
+        print("longer in row I4's scored condition at all: the second forced")
+        print("gate, |s_i s_j| = 1, settles the 3 posets whose diagonal")
+        print("survives, so the answer is forced on all four rows and is stated")
+        print("once in the [CANNOT FAIL] row.  This file no longer scores THAT")
+        print("THE DEFERRAL HOLDS -- it scores that the clause was routed and")
+        print("not deleted, which is what those three literals were protecting.")
     return 1 if bad else 0
 
 
