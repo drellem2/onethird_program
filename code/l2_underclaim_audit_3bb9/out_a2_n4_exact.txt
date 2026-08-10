@@ -1,0 +1,26 @@
+============================================================================================
+a2  n = 4 EXACT — does V00 (= rho) really kill 10 of the 27 primitive posets?
+============================================================================================
+
+primitive posets at n = 4: 27
+  CERTIFIED rho > 1  (V00 FAILS, and L2's first disjunct fails):  10
+  CERTIFIED rho = 1 within 2^-20 (V00 certifies; L2 holds):       17
+  UNDECIDED:                                                      0
+
+the certified failures, with their exact rho brackets:
+   rho in [1.008191340, 1.008191340]   [(0, 1)]
+   rho in [1.009389303, 1.009389303]   [(0, 2)]
+   rho in [1.020704696, 1.020704696]   [(1, 2)]
+   rho in [1.009389303, 1.009389303]   [(1, 3)]
+   rho in [1.008191340, 1.008191340]   [(2, 3)]
+   rho in [1.051087471, 1.051087471]   [(0, 1), (0, 2)]
+   rho in [1.085410197, 1.085410197]   [(0, 1), (2, 3)]
+   rho in [1.051087471, 1.051087471]   [(1, 3), (2, 3)]
+   rho in [1.027170775, 1.027170775]   [(0, 1), (0, 2), (1, 2)]
+   rho in [1.027170775, 1.027170775]   [(1, 2), (1, 3), (2, 3)]
+
+other variants' certified failure counts at n = 4:  {'V11': 0, 'V10': 0, 'V01': 0}
+
+VERDICT: V00 first exceeds 1 at n = 4 at 10 posets; V10/V01/V11 at 0.  mg-b58d's *'moves the first failure from
+n = 5 to n = 4'* is CONFIRMED with no float on the verdict path.
+============================================================================================
