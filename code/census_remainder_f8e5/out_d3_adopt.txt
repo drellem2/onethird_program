@@ -1,14 +1,14 @@
 ==============================================================================
 d3 -- THE CONVENTION, ADOPTED AND MADE CHECKABLE
 ==============================================================================
-    code-digest: a980a32f0862295f   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    code-digest: 0788236564d650ea   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
     NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
     reads-outside-tree: yes
     ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
       -- refs, history, the file list of `main` -- so it is a fact about the object store as it
       stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
       is the only honest thing an instrument in this class can do.
-    as-of: bc965aaae820      (this directory is scanned at HEAD 5b7a1175da58)
+    as-of: bc965aaae820      (this directory is scanned at HEAD 4c65b6852de0)
 
 ------------------------------------------------------------------------------
 D3a -- R3 OVER THE WHOLE ARC, WITH `UNDECLARED` COUNTED
@@ -35,13 +35,13 @@ is true here and the answer is not to hide it: this row is a fact about the
 transcripts ALREADY WRITTEN when it runs, and the runner's order is what makes
 that a shrinking set rather than a growing one.
 
-    digest of code/census_remainder_f8e5 at HEAD 5b7a117 : a980a32f0862295f
-      out_d1_five.txt              declares a980a32f0862295f   AGREES
-      out_d2_unmeasured.txt        declares a980a32f0862295f   AGREES
+    digest of code/census_remainder_f8e5 at HEAD 4c65b68 : 0788236564d650ea
+      out_d1_five.txt              declares 0788236564d650ea   AGREES
+      out_d2_unmeasured.txt        declares 0788236564d650ea   AGREES
       out_d3_adopt.txt             declares None               DISAGREES
-      out_d4_movingref.txt         declares a980a32f0862295f   AGREES
-      out_d5_timeout.txt           declares a980a32f0862295f   AGREES
-      out_selftest_f8e5.txt        declares a980a32f0862295f   AGREES
+      out_d4_movingref.txt         declares 0788236564d650ea   AGREES
+      out_d5_timeout.txt           declares 0788236564d650ea   AGREES
+      out_selftest_f8e5.txt        declares 0788236564d650ea   AGREES
 [FINDING  ] D3b 5 of 6 transcripts written so far declare this directory's OWN digest at HEAD.  A transcript that declared a true digest of somebody else's directory would pass R3 and be wrong, which is the defect this suite committed first and keeps in `lib_f8e5.Ledger`
 
 ------------------------------------------------------------------------------
@@ -50,8 +50,8 @@ D3c -- THE CONTROL, SHOWN REFUSING SOMETHING
 A control that has only ever been green has not been shown able to
 fire.  Three constructions against a real tree, all three FORCED:
 
-      a transcript declaring transcript_census_1abe's TRUE digest at bc965aa R3 says accept
-[OK       ] D3c a transcript declaring transcript_census_1abe's TRUE digest at bc965aa -> accept (expected accept)
+      a transcript declaring transcript_census_1abe's TRUE digest at 8afec6d R3 says accept
+[OK       ] D3c a transcript declaring transcript_census_1abe's TRUE digest at 8afec6d -> accept (expected accept)
       the same transcript with ONE HEX DIGIT changed             R3 says REFUSE
 [OK       ] D3c the same transcript with ONE HEX DIGIT changed -> REFUSE (expected REFUSE)
       a transcript declaring a digest of the WRONG DIRECTORY     R3 says REFUSE
