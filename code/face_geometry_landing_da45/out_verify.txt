@@ -37,29 +37,46 @@ TARGET 1 -- WHICH GATE DECIDES, rebuilt from face_complex alone
 TARGET 2 -- THE ARTIFACT: it regenerates, and it now says T1's numbers
 ----------------------------------------------------------------------
   [HOLDS ] controls_output.txt regenerates byte-identically from a fresh run
-        23695 bytes, exit 0
+        41081 bytes, exit 0
   [HOLDS ] the artifact has exactly one row I4
-  [HOLDS ] row I4 prints 'preserved on 3 of the 61', and T1 measured it independently
-  [HOLDS ] row I4 prints '3 are settled by |s_i s_j| = 1', and T1 measured it independently
-  [HOLDS ] row I4 prints '300 off-diagonal magnitudes differ on them', and T1 measured it independently
-  [HOLDS ] row I4 prints '0 entries differ in SIGN ALONE', and T1 measured it independently
-  [HOLDS ] row I4 prints 'while 0 reach the parity system', and T1 measured it independently
+  row I4 does NOT score absorbability, so the literals checked are the mg-17aa set
+  [HOLDS ] row I4 prints 'Absorbability is NOT scored in this row', and T1 measured it independently
+  [HOLDS ] row I4 prints '(58 on the diagonal, 3 on an off-diagonal magnitude with the diagonal intact, 0 on shape)', and T1 measured it independently
   [HOLDS ] the routing row prints the section total T1 measured: '0 of the 297 biting'
   [HOLDS ] the false premise 'the off-diagonal signs actually decide' asserts nothing -- 1 occurrence(s) in controls.py + the artifact, every one of them quoted inside a correction
-  [HOLDS ] the false premise 'had to decide on the off-diagonal signs and could have' asserts nothing -- 1 occurrence(s) in controls.py + the artifact, every one of them quoted inside a correction
+  [HOLDS ] the false premise 'had to decide on the off-diagonal signs and could have' asserts nothing -- it does not appear at all in controls.py or the artifact
   [HOLDS ] the false premise 'was decided on the off-diagonal signs' asserts nothing -- it does not appear at all in controls.py or the artifact
   [HOLDS ] the false premise 'the answer is a real decision' asserts nothing -- it does not appear at all in controls.py or the artifact
   [HOLDS ] the false premise 'row I4 is falsifiable' asserts nothing -- it does not appear at all in controls.py or the artifact
 
-TARGET 3 -- THE CONDITION IS UNCHANGED, which is what was asked for
--------------------------------------------------------------------
+TARGET 3 -- THE CLAUSE IS WHERE THE ROUTING PUTS IT, NOT WHERE A HAND DID
+-------------------------------------------------------------------------
   mg-f1b2's own remedy was to DROP `absorb == 0` from row I4.  The
   ticket that landed this deliberately did not: the count is true,
-  what was false was the reason printed for scoring it.  So the
-  scoring must be verifiably where it was.
-  [HOLDS ] row I4 still scores absorbability (`cond = cond and absorb == 0`)
-  [HOLDS ] the forced/theorem routing still routes on the diagonal gate (`forced = (diag_preserved == 0)`)
-  [HOLDS ] the routing row's condition is untouched (`0 < len(forced_rows) < len(muts)`)
+  what was false was the reason printed for scoring it.  That
+  remains the record of mg-da45's scope and is not withdrawn.
+
+  WHAT THIS TARGET USED TO SCORE, AND WHY IT NO LONGER CAN (mg-17aa).
+  It scored three SOURCE LITERALS -- `cond = cond and absorb == 0`,
+  `forced = (diag_preserved == 0)` and the routing row's own
+  condition -- i.e. it froze the DEFERRAL itself.  mg-e35b recorded
+  extending the [CANNOT FAIL] row to all four corruptions as its own
+  item; mg-17aa landed that item; and a verifier asserting `the
+  deferred thing has not been done` necessarily goes red the day it
+  is.  That is the fourth instrument in this arc to point that way
+  and it is recorded, not smoothed away, in
+  code/face_geometry_rows_17aa/README.md.
+
+  WHAT WAS ACTUALLY BEING GUARDED is kept: that the clause cannot be
+  dropped SILENTLY.  A deletion by hand and a removal decided by the
+  population are different acts, and only the second is licensed --
+  so what is scored now is that the clause is still IN the file,
+  under a routing computed from the sweep, with what it asserts
+  carried by a [CANNOT FAIL] row.  All three would go red on a hand
+  deletion, which is what the three literals were protecting.
+  [HOLDS ] the `absorb == 0` clause is still IN controls.py and is still a conjunct of a row's scored condition -- not deleted, only routed (`if not forced:` ... `st["absorb"] == 0` in `nc4_row_conjuncts`)
+  [HOLDS ] and which row carries it is DECIDED BY THE POPULATION, not written in: the routing is `forced = (blocked == app)` over the gates `gate_violations` reports, so a corruption that can be absorbed puts the clause back with no edit
+  [HOLDS ] and what the clause asserted is carried by a [CANNOT FAIL] row that FAILS if it is false (`theorem_absorb == 0 and theorem_blocked == theorem_app`), so nothing was dropped, only relabelled
   [HOLDS ] the battery still exits 0 with 0 failures
   [HOLDS ] still exactly 2 [CANNOT FAIL] rows, and the bottom line still denies the all-pass banner
   [HOLDS ] all four NEGATIVE CONTROL 4 mutation rows are still [PASS]
@@ -76,8 +93,14 @@ TARGET 4 -- WHERE THE FALSE PREMISE STILL LIVES, named not claimed
   [HOLDS ] controls.py names that origin, so the correction is followable from the file that acted on it
 
 ==============================================================================
-25 claim(s) scored; 0 BROKEN.
+22 claim(s) scored; 0 BROKEN.
 
-The condition row I4 scores is unchanged and still true; what
-changed is that the file now MEASURES which gate settled it and
-prints that instead of a decision that never happened.
+mg-da45's finding stands: `absorb == 0` was true, and the reason
+printed for scoring it was false -- the predicate never read a
+sign.  What has changed since (mg-17aa) is that the clause is no
+longer in row I4's scored condition at all: the second forced
+gate, |s_i s_j| = 1, settles the 3 posets whose diagonal
+survives, so the answer is forced on all four rows and is stated
+once in the [CANNOT FAIL] row.  This file no longer scores THAT
+THE DEFERRAL HOLDS -- it scores that the clause was routed and
+not deleted, which is what those three literals were protecting.

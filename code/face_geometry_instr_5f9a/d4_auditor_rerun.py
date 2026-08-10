@@ -423,7 +423,7 @@ def main():
              "it re-derives where the predicate returns over all four "
              "populations, and the 297/306/82/172 split and the 57-of-297 "
              "disagreement are untouched by this repair"),
-            ("e3_seams.py", 4,
+            ("e3_seams.py", 5,
              "its four remaining BROKEN claims are FROZEN LITERALS of the same "
              "kind as its row count -- it asserts the artifact says 'lines "
              "scanned: 62' and '40 row names among them', and the artifact now "
@@ -436,7 +436,16 @@ def main():
              "of that audit's frozen counts with them.  A frozen literal about "
              "a tree that has since gained rows is a stale number, not a "
              "retreat, and the test that a number is stale rather than wrong "
-             "is the live re-derivation below")):
+             "is the live re-derivation below.  IT WENT 4 -> 5 AT mg-17aa, and "
+             "the fifth is the interesting one: e3 recorded that mg-da45's "
+             "verifier 'still reads the file now MEASURES which gate settled "
+             "it', the framing mg-1c80 refuted and mg-5f9a left as another "
+             "item.  mg-17aa replaced that closing prose, so the claim is "
+             "false BECAUSE THE DEFECT IT FLAGGED WAS FIXED -- an audit record "
+             "going red the day its finding is acted on.  That is a stale "
+             "record and not a retreat either, and e3 is NOT edited: a "
+             "document written to record a tree is corrected by saying which "
+             "tree it recorded")):
         p = subprocess.run([sys.executable, script], cwd=AUDIT,
                            capture_output=True, text=True)
         txt = p.stdout + p.stderr

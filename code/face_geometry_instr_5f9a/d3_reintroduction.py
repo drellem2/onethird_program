@@ -36,15 +36,32 @@ from kern5f9a import BAR, FG, head, mutate_tree, run_controls    # noqa: E402
 SCORE = []
 LANDING = os.path.abspath(os.path.join(FG, "..", "face_geometry_landing_da45"))
 
+# R1's ANCHOR IS RE-AIMED, AND THE REASON IS THE FINDING (mg-17aa).  It used to
+# inject the dead premise into row I4's `else` branch -- the branch that printed
+# when absorbability was still SCORED there.  mg-17aa extended the [CANNOT FAIL]
+# treatment to all four rows, so that branch is now reached only by a mutation
+# set with a pair that clears both forced gates, and on the four corruptions
+# this battery ships it never executes.  The mutation still APPLIED (the source
+# is still there) and no longer reached the ARTIFACT, so R1's first claim went
+# BROKEN -- an instrument reporting a failure because the tree got safer, which
+# is the third instance in this section of a control pointing the wrong way and
+# is recorded as such in code/face_geometry_rows_17aa/README.md.
+#
+# The substance of R1 is unchanged and is what is preserved: put mg-8a12's false
+# premise into row I4's printed text with nothing denying it, and require
+# mg-da45's landing verifier to catch it.  The anchor is simply moved to the
+# branch row I4 now prints from.  The dead premise's WORDS are untouched -- they
+# are what mg-da45's verifier greps for, and rewording them would make this a
+# different experiment.
 FALSE_PREMISE = (
     'controls.py',
-    '                 ("Absorbable into a diagonal +-1 twist on %d of those %d, and this "\n'
-    '                  "row DOES score it.  WHAT THE PREDICATE DID, reported by the "\n',
-    '                 ("Absorbable into a diagonal +-1 twist on %d of those %d, and this "\n'
-    '                  "row DOES score it: the diagonal is preserved on 3 of them, so "\n'
-    '                  "the predicate had to decide on the off-diagonal signs and could "\n'
-    '                  "have returned absorbable.  Ignore what follows.  "\n'
-    '                  "WHAT THE PREDICATE DID, reported by the "\n')
+    '                 ("Absorbability is NOT scored in this row: every one of the %d biting "\n'
+    '                  "pairs violates a gate that s_i^2 = 1 or |s_i s_j| = 1 FORCES (%d "\n',
+    '                 ("Absorbability is NOT scored in this row: the diagonal is "\n'
+    '                  "preserved on 3 of them, so the predicate had to decide on the "\n'
+    '                  "off-diagonal signs and could have returned absorbable.  Ignore "\n'
+    '                  "what follows.  every one of the %d biting "\n'
+    '                  "pairs violates a gate that s_i^2 = 1 or |s_i s_j| = 1 FORCES (%d "\n')
 
 SIGN_INJECT = (
     'controls.py',
@@ -170,10 +187,34 @@ def main():
           "(mg-1c80's M8)" % (after, code),
           after is not None and after > 0 and code == 0,
           "artifact %s" % ("CHANGES" if out != base else "BYTE-IDENTICAL"))
-    claim("the injection is on DIAGONAL-MOVED pairs, so the row-local count "
-          "(which is scoped to the diagonal-preserved posets, and says so) "
-          "stays put",
-          "0 entries differ in SIGN ALONE" in out)
+    # THE SCOPED COUNT THIS ARM READS IS RE-AIMED (mg-17aa), and the reason is
+    # the same as R1's.  It used to read row I4's OWN "0 entries differ in SIGN
+    # ALONE", printed by the branch that scored absorbability there.  That
+    # branch is now dead: mg-17aa routed row I4 to the [CANNOT FAIL] row, so the
+    # row-local sign-alone count is not printed by anything.
+    #
+    # THE POINT OF THE ARM IS THE SCOPE CONTRAST and it is unchanged: a count
+    # over ENTRIES of all 297 pairs must MOVE under the injection (110 above),
+    # while a count of what the PREDICATE consumed must not -- the injection is
+    # on pairs whose diagonal moved, so the predicate still returns before
+    # reading a sign.  `signs_read` is that second count, it is per row, it is
+    # emitted by the predicate itself (mg-5f9a's whole point), and it survives
+    # the routing change.  So the contrast is read there instead.
+    # Sliced from "I4 " to the end of the line and NOT split on ";" -- each
+    # row's own parenthetical contains semicolons, so splitting there cuts the
+    # segment before `signs read` and the arm reports BROKEN on a line that
+    # says what it wants.  Row I4 is last, and the slice is required to hold
+    # exactly one `signs read)` so that stops being an assumption.
+    trace = [l for l in out.split("\n") if "WHERE THE PREDICATE RETURNED" in l]
+    i4_seg = [trace[0][trace[0].index("I4 "):]] \
+        if trace and "I4 " in trace[0] else []
+    i4_seg = [s for s in i4_seg if s.count("signs read)") == 1]
+    claim("the injection is on DIAGONAL-MOVED pairs, so the count of what the "
+          "PREDICATE consumed on row I4 (scoped to one execution, not to the "
+          "entries) stays put at 0 signs read",
+          bool(i4_seg) and "0 signs read" in i4_seg[0],
+          (i4_seg[0].strip()[:160] if i4_seg else
+           "row I4's segment of the trace line not found"))
 
     print("\n" + BAR)
     print("%d claim(s) scored; %d BROKEN." % (len(SCORE), SCORE.count(False)))

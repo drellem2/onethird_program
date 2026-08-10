@@ -11,7 +11,7 @@ R1 -- the false premise put back, with nothing denying it
 ==============================================================================
   [HOLDS ] the battery itself does not notice: exit 0, and the premise IS in the artifact
   [HOLDS ] mg-da45's landing verifier CATCHES it: exit 1, 1 BROKEN claim(s)
-        [BROKEN] the false premise 'had to decide on the off-diagonal signs and could have' asserts nothing -- 2 occurrence(s) in controls.py + the artifact, 
+        [BROKEN] the false premise 'had to decide on the off-diagonal signs and could have' asserts nothing -- 4 occurrence(s) in controls.py + the artifact, 
   [HOLDS ] and it passes on the UNMUTATED tree: exit 0, 0 BROKEN
 
 ==============================================================================
@@ -20,7 +20,8 @@ R2 -- a real sign-only mismatch, on the pairs the old scope skipped
   [HOLDS ] the committed artifact prints a section sign-alone total of 0
   [HOLDS ] with the mismatch injected the printed total MOVES to 110 (battery exit 0) -- under mg-da45's scope it stayed 0 with 110 present (mg-1c80's M8)
         artifact CHANGES
-  [HOLDS ] the injection is on DIAGONAL-MOVED pairs, so the row-local count (which is scoped to the diagonal-preserved posets, and says so) stays put
+  [HOLDS ] the injection is on DIAGONAL-MOVED pairs, so the count of what the PREDICATE consumed on row I4 (scoped to one execution, not to the entries) stays put at 0 signs read
+        I4 61 biting = 58 diagonal + 3 magnitude + 0 parity (both forced gates violated on 58; diagonal moved on 58; 0 signs read).  READ THE THIRD COLUMN BEFORE QUOTIN
 
 ==============================================================================
 6 claim(s) scored; 0 BROKEN.

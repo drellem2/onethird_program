@@ -20,15 +20,15 @@ meaning its ledger rows and Appendix A -- ON THE SAME FOOTING')
   [REPRODUCED] the new clause does NOT reach f6756c0 -- and f6756c0 is the commit that added row G-double-prime
         -- f6756c0 files: ['code/hodge_leverage/run_all.sh', 'code/hodge_leverage/run_sweep.py', 'code/hodge_leverage/sweep_output.txt', 'docs/OneThird-Hodge-Side-Leverage.md']
   [REPRODUCED] the widened trigger does NOT fire on everything
-        -- 29 of 53 commits in history touch STATE.md (55%); 7 of the last 25 (28%). The 'WHAT THIS DOES NOT WIDEN INTO' exclusion list is concrete and applicable, and 'fires on every commit' is NOT the failure mode here.
+        -- 61 of 554 commits in history touch STATE.md (11%); 1 of the last 25 (4%). The 'WHAT THIS DOES NOT WIDEN INTO' exclusion list is concrete and applicable, and 'fires on every commit' is NOT the failure mode here.
 
 TARGET 1b -- WHERE ROW G-double-prime ACTUALLY LANDED
 mg-f2e1's Appendix A and commit message: 'row G-double-prime ... added to STATE.md by
 the mg-a806 landing ... introduced by a STATE landing, into the file that no trigger watched.'
   [MEASURED  ] commits that change the count of 'G″' in STATE.md
-        -- ['ba3ec79', '1e61031']  (1e61031 = mg-a2bd's STRIKE record; ba3ec79 = mg-f2e1 itself)
+        -- ['cc4c663', 'bdcb006', '57f962f', 'b0c19f4', 'ebe10ec', 'ba3ec79', '1e61031']  (1e61031 = mg-a2bd's STRIKE record; ba3ec79 = mg-f2e1 itself)
   [MEASURED  ] commits that change the count of 'G″' anywhere
-        -- ['4b5891d', '5a4a745', 'ba3ec79', '1e61031', '522048f', 'f6756c0', '5e84e2f']
+        -- ['cc4c663', 'c7f9079', '897d0d2', 'f58f7fd', '81957bf', '553033a', 'ea01fe9', 'bbe83b5', '1436a11', 'bf8fd61', '954c29e', 'bdcb006', '57f962f', 'b0c19f4', 'ebe10ec', '7f04902', 'b34fc59', 'd5a3043', 'a2d9340', '1dd430f', 'a85fb28', '64dd959', '4b5891d', '5a4a745', 'ba3ec79', '1e61031', '522048f', 'f6756c0', '5e84e2f']
   [REFUTED] 'added to STATE.md by the mg-a806 landing' is TRUE
         -- REFUTED. STATE.md's history contains no commit that introduced the row. The ledger row was added by f6756c0 to docs/OneThird-Hodge-Side-Leverage.md, line 877 as that commit left it (labelled PROVEN, 'free from G + Theorem L'), 1 matching added line(s). mg-a806's STATE.md commits (16bee79, 5b63037) do not contain it.
   [REFUTED] 'into the file that no trigger watched' is TRUE
@@ -43,26 +43,51 @@ mg-f2e1's replacement for the false universal: 'five live sites, all flagged ...
 instrument comment ... Two sites deliberately NOT flagged and named here so the
 absence is not mistaken for coverage.'
   [MEASURED  ] occurrences of the literal '38/38' in the tree, excluding this audit's own instrument
-        -- 36 occurrences in 7 files (plus 5 in code/face_geometry_audit_6653/, this audit's own scanner, excluded and named)
-        STATE.md                                                        6 occurrence(s) on line(s) [135, 276]
+        -- 64 occurrences in 18 files (plus 7 in code/face_geometry_audit_6653/, this audit's own scanner, excluded and named)
         code/face_geometry_audit_5630/audit_x3_equivalence.py           1 occurrence(s) on line(s) [84]
+        code/face_geometry_audit_e720/out_verify.txt                    2 occurrence(s) on line(s) [40, 139]
+        code/face_geometry_audit_e720/verify_landing_claims.py          4 occurrence(s) on line(s) [22, 161, 375, 378]
+        code/face_geometry_landing_7d5a/out_verify.txt                  4 occurrence(s) on line(s) [60, 72, 81, 172]
+        code/face_geometry_landing_7d5a/run_all.sh                      1 occurrence(s) on line(s) [11]
+        code/face_geometry_landing_7d5a/verify_landing.py               5 occurrence(s) on line(s) [19, 182, 183, 234, 429]
+        code/state_audit_6a2f/out_audit.txt                             2 occurrence(s) on line(s) [1143]
+        code/state_restructure_34bf/verify_relocation.py                2 occurrence(s) on line(s) [126, 128]
+        code/truncate_sweep_ec63/out_s3_sweep.txt                       1 occurrence(s) on line(s) [76]
         docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md  2 occurrence(s) on line(s) [45, 311]
-        docs/OneThird-Intrinsic-Face-Geometry-Probe.md                  9 occurrence(s) on line(s) [41, 42, 408, 411, 815, 817, 822]
+        docs/OneThird-Intrinsic-Face-Geometry-Probe.md                  9 occurrence(s) on line(s) [42, 44, 421, 424, 828, 830, 835]
         docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md  5 occurrence(s) on line(s) [22, 64, 88, 259, 267]
         docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md  8 occurrence(s) on line(s) [23, 405, 414, 422, 423, 429, 440, 559]
         docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md  5 occurrence(s) on line(s) [196, 227, 247, 343, 387]
+        docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md  6 occurrence(s) on line(s) [20, 23, 241, 307, 391, 422]
+        docs/OneThird-STATE-Restructure-IndependentAudit.md             1 occurrence(s) on line(s) [351]
+        docs/audit-stage-process.md                                     4 occurrence(s) on line(s) [122]
+        docs/state-history/attempt-mg-276d.md                           2 occurrence(s) on line(s) [106]
 
   flag state, SITE by SITE (a site = the enclosing paragraph, which is what a reader
   arriving by search or quotation reads):
-        FLAGGED   STATE.md                                                   para@112  occ [135]                  live 1/5 -- ledger row 135
-        FLAGGED   STATE.md                                                   para@276  occ [276]                  live 2/5 -- Appendix A paragraph
         FLAGGED   code/face_geometry_audit_5630/audit_x3_equivalence.py      para@84   occ [84]                   the one instrument comment
+        UNFLAGGED code/face_geometry_audit_e720/out_verify.txt               para@40   occ [40]                   *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   code/face_geometry_audit_e720/out_verify.txt               para@134  occ [139]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED code/face_geometry_audit_e720/verify_landing_claims.py     para@21   occ [22]                   *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED code/face_geometry_audit_e720/verify_landing_claims.py     para@159  occ [161]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   code/face_geometry_audit_e720/verify_landing_claims.py     para@371  occ [375, 378]             *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED code/face_geometry_landing_7d5a/out_verify.txt             para@60   occ [60, 72]               *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED code/face_geometry_landing_7d5a/out_verify.txt             para@80   occ [81]                   *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   code/face_geometry_landing_7d5a/out_verify.txt             para@170  occ [172]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED code/face_geometry_landing_7d5a/run_all.sh                 para@1    occ [11]                   *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED code/face_geometry_landing_7d5a/verify_landing.py          para@19   occ [19]                   *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED code/face_geometry_landing_7d5a/verify_landing.py          para@182  occ [182, 183]             *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED code/face_geometry_landing_7d5a/verify_landing.py          para@233  occ [234]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   code/face_geometry_landing_7d5a/verify_landing.py          para@425  occ [429]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   code/state_audit_6a2f/out_audit.txt                        para@1138 occ [1143]                 *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED code/state_restructure_34bf/verify_relocation.py           para@126  occ [126, 128]             *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED code/truncate_sweep_ec63/out_s3_sweep.txt                  para@69   occ [76]                   *** NOT IN mg-f2e1's ENUMERATION ***
         UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md para@29   occ [45]                   named NOT-flagged 1/2 (Probe-IndependentAudit.md:45)
         UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-Probe-IndependentAudit.md para@300  occ [311]                  named NOT-flagged 2/2 (Probe-IndependentAudit.md:311)
-        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@24   occ [41, 42]               live 3/5 -- Probe section-head changelog
-        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@408  occ [408, 411]             live 4/5 -- Probe section 5
-        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@813  occ [815, 817]             live 5/5 -- Probe section 12 (reversal preamble)
-        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@822  occ [822]                  live 5/5 -- Probe section 12 (the proposed-row block)
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@24   occ [42, 44]               *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@421  occ [421, 424]             *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@826  occ [828, 830]             *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-Probe.md             para@835  occ [835]                  *** NOT IN mg-f2e1's ENUMERATION ***
         UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md para@18   occ [22]                   *** NOT IN mg-f2e1's ENUMERATION ***
         FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md para@57   occ [64]                   *** NOT IN mg-f2e1's ENUMERATION ***
         UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md para@85   occ [88]                   *** NOT IN mg-f2e1's ENUMERATION ***
@@ -79,21 +104,29 @@ absence is not mistaken for coverage.'
         FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md para@246  occ [247]                  *** NOT IN mg-f2e1's ENUMERATION ***
         UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md para@338  occ [343]                  *** NOT IN mg-f2e1's ENUMERATION ***
         UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md para@377  occ [387]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md para@18   occ [20, 23]               *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md para@240  occ [241]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md para@303  occ [307]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md para@388  occ [391]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        UNFLAGGED docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md para@418  occ [422]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/OneThird-STATE-Restructure-IndependentAudit.md        para@342  occ [351]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/audit-stage-process.md                                para@122  occ [122]                  *** NOT IN mg-f2e1's ENUMERATION ***
+        FLAGGED   docs/state-history/attempt-mg-276d.md                      para@106  occ [106]                  *** NOT IN mg-f2e1's ENUMERATION ***
 
-  [REPRODUCED] the five named LIVE sites are all in fact flagged
+  [REFUTED] the five named LIVE sites are all in fact flagged
         -- the live half of the enumeration is CORRECT and I could not break it: row 135, Appendix A, and the Probe's section-head changelog, section 5 and section 12 each name the [:20] truncation inside the paragraph that quotes the number. Section 12 is two paragraphs (the reversal preamble and the block itself); both are flagged, which is why six paragraphs carry mg-f2e1's five named sites.
   [REPRODUCED] the instrument comment reads as mg-f2e1 describes it
         -- audit_x3_equivalence.py:84 names the truncated population in the act of reproducing it -- correct as written, as claimed.
   [REFUTED] 'TWO sites deliberately NOT flagged and named here so the absence is not mistaken for coverage' accounts for every unflagged site
-        -- REFUTED. 16 site(s) carrying 18 occurrence(s), in 3 file(s), are outside the enumeration entirely -- 8 of those sites UNFLAGGED: ['docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md', 'docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md', 'docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md']. The whole of OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md is missing -- mg-f7bc's OWN audit document, the one this commit lands -- and it is never named anywhere in the enumeration. The enumeration is offered as the replacement for a universal that was FALSE, on the stated ground that a coverage claim wrong once is not evidence the second time; it names 4 of the 6 files and 18 of the 36 occurrences. Every omitted site is in a frozen audit document and every one of them discusses the truncation, so no reader is misled about the NUMBER -- the defect is in the COVERAGE CLAIM, which is the same defect, one generation on, at the same site.
+        -- REFUTED. 44 site(s) carrying 61 occurrence(s), in 16 file(s), are outside the enumeration entirely -- 23 of those sites UNFLAGGED: ['code/face_geometry_audit_e720/out_verify.txt', 'code/face_geometry_audit_e720/verify_landing_claims.py', 'code/face_geometry_landing_7d5a/out_verify.txt', 'code/face_geometry_landing_7d5a/run_all.sh', 'code/face_geometry_landing_7d5a/verify_landing.py', 'code/state_audit_6a2f/out_audit.txt', 'code/state_restructure_34bf/verify_relocation.py', 'code/truncate_sweep_ec63/out_s3_sweep.txt', 'docs/OneThird-Intrinsic-Face-Geometry-Probe.md', 'docs/OneThird-Intrinsic-Face-Geometry-StateLanding-IndependentAudit.md', 'docs/OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md', 'docs/OneThird-Intrinsic-Face-Geometry-StateLanding3-IndependentAudit.md', 'docs/OneThird-Intrinsic-Face-Geometry-StateLanding4-IndependentAudit.md', 'docs/OneThird-STATE-Restructure-IndependentAudit.md', 'docs/audit-stage-process.md', 'docs/state-history/attempt-mg-276d.md']. The whole of OneThird-Intrinsic-Face-Geometry-StateLanding2-IndependentAudit.md is missing -- mg-f7bc's OWN audit document, the one this commit lands -- and it is never named anywhere in the enumeration. The enumeration is offered as the replacement for a universal that was FALSE, on the stated ground that a coverage claim wrong once is not evidence the second time; it names 4 of the 6 files and 3 of the 64 occurrences. Every omitted site is in a frozen audit document and every one of them discusses the truncation, so no reader is misled about the NUMBER -- the defect is in the COVERAGE CLAIM, which is the same defect, one generation on, at the same site.
 
 TARGET 3 -- E3: IS THE CHANGELOG NOW TRUE? checked against the diff, not against itself
   [REPRODUCED] out_n6.txt:44 is the Lemma-1 cross-check at 87/87, n<=5
         -- line 44 verbatim: 'their Lemma 1 verified on      : 87/87 (n<=5, all k)'
   [REPRODUCED] out_extra.txt:2 is PURITY 404/404 at 2<=n<=6, a different check
         -- line 2 verbatim: '404/404 posets (2<=n<=6) PURE; violations: none'
-  [REPRODUCED] the section-2 sentence now reads n<=5 for the Lemma-1 cross-check
-        -- and it is the sentence the document itself labels '(F3, repaired ...)' at line 140: '**(F3, repaired — say what is and is not independent.)** The sen'
+  [REFUTED] the section-2 sentence now reads n<=5 for the Lemma-1 cross-check
+        -- and it is the sentence the document itself labels '(F3, repaired ...)' at line 140: 'adjacent-transposition graph on `L(P)` and `D` its degree matrix'
   [REPRODUCED] mg-1319 did correct the same overstatement at section 11
         -- verified in db08b4c's own diff of the Probe -- so 'at section 11 by mg-1319, and at section 2 ... only now by mg-f2e1' is right about both halves.
   [MEASURED  ] hunks this commit makes in the Probe
@@ -105,11 +138,11 @@ TARGET 4 -- E4: DOES ROW 135 CARRY THE CONNECTIVE? read in reading order, as a q
 fragment would be
   [REPRODUCED] the 318-character measurement reproduces exactly
         -- clause-start ('did the *generalisation* correctly') to clause-start ('Step 4d DID fire here') in db08b4c:STATE.md line 135 = 318 characters (325 bytes), and there is no connective between them (BOTH FACTS ... present in the gap: False). mg-f7bc's F7 table reports it as bytes; the figure is exact in CHARACTERS, which is how mg-f2e1 states it.
-  [REPRODUCED] the clause now carries the connective in reading order
-        -- the connective starts 61 characters after the clause. Read alone: 'the sixth deliverable did the *generalisation* correctly — **and, in the same document, still asserted one universal in §0 off `n ≤ 5` antichain witnesses with no proof present, which is why it appears in the second 4d tally rather than in neither. BOTH FACTS '
-  [REPRODUCED] a reader encountering the clause alone is no longer misled
+  [REFUTED] the clause now carries the connective in reading order
+        -- the connective starts 0 characters after the clause. Read alone: '.'
+  [REFUTED] a reader encountering the clause alone is no longer misled
         -- the reconciliation is inline, not 6 KB away in Appendix A.
-  [REPRODUCED] E4b: the stale counts survive only inside their own correction note
+  [REFUTED] E4b: the stale counts survive only inside their own correction note
         -- the row now points at Appendix A's two tallies rather than hard-coding a number Appendix A recounts.
 
 TARGET 6 -- DID IT RESTRUCTURE ANYTHING? mg-f2e1 was FORBIDDEN from restructuring
@@ -142,13 +175,18 @@ WHAT mg-f2e1 CLAIMS IT RE-VERIFIED -- re-verified again here
         -- and the bottom line reads "...this battery's bottom line is NOT 'all controls pass'." -- so a grep for the exact banner returns nothing, and a case-insensitive grep returns exactly the negation.
 
 ==============================================================================
-REFUTED CLAIMS: 7
+REFUTED CLAIMS: 12
    - 'added to STATE.md by the mg-a806 landing' is TRUE
    - 'into the file that no trigger watched' is TRUE
    - mg-d39d, the audit cited as the evidence, agrees with the claim
    - 'a trigger ... was pointed at the component with the clean record' is TRUE
+   - the five named LIVE sites are all in fact flagged
    - 'TWO sites deliberately NOT flagged and named here so the absence is not mistaken for coverage' accounts for every unflagged site
+   - the section-2 sentence now reads n<=5 for the Lemma-1 cross-check
    - the NEW changelog line's 'the per-site enumeration in section 5' exists in section 5
+   - the clause now carries the connective in reading order
+   - a reader encountering the clause alone is no longer misled
+   - E4b: the stale counts survive only inside their own correction note
    - mg-f2e1's own report of row 135's growth -- 'a further 949 bytes (+7.6%)' -- reproduces
 
 This file scores CLAIMS, not mathematics. It makes no statement about the mathematics

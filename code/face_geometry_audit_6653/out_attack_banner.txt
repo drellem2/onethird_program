@@ -20,33 +20,33 @@ ATTACK A -- POSITIVE CONTROL ON THE NEW CONTROL: mg-1319's two row names, verbat
        line 4   [PASS] a cannot-fail row suppresses the 'ALL CONTROLS PASS' bottom line
        line 5   [PASS] with no cannot-fail row the bottom line is 'ALL CONTROLS PASS'
   of which [PASS]-prefixed         : 2
-  CONTROL ON THE ARTIFACT          : [FAIL] no control row's own text contains the 17-char all-pass banner literal  -- rows scanned: 40; offending rows: ["a cannot-fail row suppresses the
-  bottom line                      : - no control row's own text contains the 17-char all-pass banner literal
+  CONTROL ON THE ARTIFACT          : [FAIL] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
+  bottom line                      : - no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text cont
   ==> POSITIVE CONTROL HOLDS
 
 ATTACK B -- the banner moved into a `detail=` string (same line, same [PASS] prefix)
-  exit code                        : 0
+  exit code                        : 1
   grep 'ALL CONTROLS PASS' on the artifact : 1 hit(s) at line(s) [6]
        line 6   [PASS] a real failure still exits nonzero and is reported first  -- clean-run bottom line is 'ALL CONTROLS PAS
   of which [PASS]-prefixed         : 1
-  CONTROL ON THE ARTIFACT          : [PASS] no control row's own text contains the 17-char all-pass banner literal  -- rows scanned: 40; offending rows: none (banner masked as <all-pass-b
-  bottom line                      : A row that cannot fail covers nothing, so this battery's bottom line is NOT 'all controls pass'.
-  ==> ATTACK SUCCEEDS -- the F5 defect is reachable with the new control in place
+  CONTROL ON THE ARTIFACT          : [FAIL] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
+  bottom line                      : - no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text cont
+  ==> attack repelled
 
 ATTACK C -- the banner printed as a section heading, outside check()
-  exit code                        : 0
+  exit code                        : 1
   grep 'ALL CONTROLS PASS' on the artifact : 1 hit(s) at line(s) [2]
        line 2   [PASS] bottom line for a clean run: ALL CONTROLS PASS
   of which [PASS]-prefixed         : 1
-  CONTROL ON THE ARTIFACT          : [PASS] no control row's own text contains the 17-char all-pass banner literal  -- rows scanned: 40; offending rows: none (banner masked as <all-pass-b
-  bottom line                      : A row that cannot fail covers nothing, so this battery's bottom line is NOT 'all controls pass'.
-  ==> ATTACK SUCCEEDS -- the F5 defect is reachable with the new control in place
+  CONTROL ON THE ARTIFACT          : [FAIL] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
+  bottom line                      : - no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text cont
+  ==> attack repelled
 
 ATTACK D -- a row name carrying the banner with a doubled space (scope boundary)
   exit code                        : 0
   grep 'ALL CONTROLS PASS' on the artifact : 0 hit(s)
   of which [PASS]-prefixed         : 0
-  CONTROL ON THE ARTIFACT          : [PASS] no control row's own text contains the 17-char all-pass banner literal  -- rows scanned: 40; offending rows: none (banner masked as <all-pass-b
+  CONTROL ON THE ARTIFACT          : [PASS] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
   bottom line                      : A row that cannot fail covers nothing, so this battery's bottom line is NOT 'all controls pass'.
   ==> attack repelled
 
@@ -54,14 +54,14 @@ ATTACK E -- can the banner be reached with a non-empty CANNOT FAIL tally?
   exit code                        : 1
   grep 'ALL CONTROLS PASS' on the artifact : 0 hit(s)
   of which [PASS]-prefixed         : 0
-  CONTROL ON THE ARTIFACT          : [PASS] no control row's own text contains the 17-char all-pass banner literal  -- rows scanned: 40; offending rows: none (banner masked as <all-pass-b
+  CONTROL ON THE ARTIFACT          : [PASS] no line this run printed carries the 17-char all-pass banner literal, and in particular no control row's own text contains it  -- lines scanned
   bottom line                      : - a cannot-fail row keeps the all-pass banner out of the bottom line
   ==> attack repelled
 
 ==============================================================================
   ATTACK A  POSITIVE CONTROL HOLDS
-  ATTACK B  ATTACK SUCCEEDS -- the F5 defect is reachable with the new control in place
-  ATTACK C  ATTACK SUCCEEDS -- the F5 defect is reachable with the new control in place
+  ATTACK B  attack repelled
+  ATTACK C  attack repelled
   ATTACK D  attack repelled
   ATTACK E  attack repelled
 
