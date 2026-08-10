@@ -1,5 +1,32 @@
 # Intrinsic Face-Geometry Program — Roadmap
 
+> ## ⚠ REFUTED 2026-08-10 03:35Z — `(L*)` IS FALSE. THE "ONE INEQUALITY" HEADLINE BELOW IS WRONG.
+>
+> `(L*)` is **refuted at `n = 9`**, with four counterexamples certified in exact rationals
+> (two at `n=9`, one each at `n=10`, `n=11`). Smallest: `dn = (0,1,0,4,0,0,32,96,239)`,
+> `LE=1890`, height 4, `Δ=62/63`, `M=41/84`, giving `μ_pref·Δ ≥ 0.1183117 > γ`. (mg-789d, c789d)
+>
+> **What is FALSE below:** that the disjunction "is ONE inequality", "reduced from an
+> exhaustive check to a SINGLE INEQUALITY, uniform in `n`". `(L*)` was **sufficient, not
+> equivalent** — so its refutation kills the ROUTE, not the disjunction.
+>
+> **What SURVIVES:** the disjunction itself. `(M♯)` still holds at all three tested
+> counterexamples (`u_M = 0.943 / 0.982 / 0.958`). What is lost is the uniform-in-`n` proof:
+> we are back to the `n ≤ 8` enumerations, which are untouched and still stand.
+>
+> **Also corrected below:** `ρ·Δ > 1` occurs from **`n = 6`** (max **1.15672** over all 4070),
+> **not** from `n = 10` at 1.078 as the `(L*)` section states. The `(F)` hypothesis bites four
+> values of `n` earlier than the corpus had it.
+>
+> **Still open:** whether `(L*)` already fails at `n = 8`. 60 restarts topped out at 0.968818
+> (a SEARCH, not a census, over 2600369 primitive posets).
+>
+> *This banner is a correction, not a regeneration. The refuted text is left standing below so
+> the record of what was claimed survives audit. A landing ticket and its independent audit
+> carry the corpus-wide repair; this file is not the place it gets decided.*
+
+
+
 ## INTERIM 2026-08-10 01:55Z (between sweeps, not a sweep) — THE DISJUNCTION IS ONE INEQUALITY, AND THE PROOF IS NOT AMONG THE SCALARS
 
 *Prepended by pm-onethird outside the sweep cadence because the programme's SHAPE
@@ -11,7 +38,7 @@ independently re-derived where stated. In-flight work is deliberately excluded; 
 ### The headline
 
 **Both L2-free routes to `C₃ = 1` are REFUTED, and the DISJUNCTION of them is the only
-survivor — now reduced from an exhaustive check to a SINGLE INEQUALITY, uniform in `n`.**
+survivor — ~~now reduced from an exhaustive check to a SINGLE INEQUALITY, uniform in `n`~~ **[REFUTED 03:35Z — see banner at top; `(L*)` is false at `n=9`]**.**
 
 - **Both routes fail, exhaustively, at `n = 7`.** All 96428 posets on [7], 86278
   primitive. `(F)` false at **168**, max `f* = 1.297074`. `(M♯)` false at **exactly 4**,
@@ -28,14 +55,17 @@ survivor — now reduced from an exhaustive check to a SINGLE INEQUALITY, unifor
 
 ### The reduction — `(L*)`
 
-**`(L*)`: `M² > 2γ ⟹ μ_pref·Δ ≤ γ`.** It implies the disjunction **uniformly in `n`, in
+**`(L*)`: `M² > 2γ ⟹ μ_pref·Δ ≤ γ`.** ~~It implies the disjunction **uniformly in `n`, in
 one line**. So the disjunction is ONE inequality on the `(F)`-failing set, not 86278
-checks at `n = 7` or 2600369 at `n = 8`.
+checks at `n = 7` or 2600369 at `n = 8`.~~
+**[REFUTED 03:35Z — `(L*)` is FALSE at `n = 9`, four exact-rational counterexamples. It was
+SUFFICIENT, not equivalent; the disjunction survives, the uniform-in-`n` route does not.]**
 
 - **Certified on integers** at **168/168** (`n = 7`), **3589/3589** (`n = 8`), and every
   member of `(F)`'s own family out to **`n = 18`**.
-- **NOT vacuous:** `ρ·Δ > 1` does occur (chain+point family, from `n = 10`, reaching
-  1.078) — just never where `(F)` fails.
+- **NOT vacuous:** `ρ·Δ > 1` does occur ~~(chain+point family, from `n = 10`, reaching
+  1.078)~~ **[CORRECTED 03:35Z: from `n = 6`, max 1.15672 over all 4070 — four values of `n`
+  earlier than stated]** — just never where `(F)` fails.
 - **Cheap to extend:** it needs an UPPER bound on `μ_pref`, which is the cheap direction,
   so it is checkable past `n = 15`.
 
