@@ -1,0 +1,163 @@
+============================================================================================
+mg-9876 — DISCRIMINATION HARNESS for code/rendered_twin_pin_9bc2
+============================================================================================
+
+PART A — every arm run twice: once where its subject HOLDS, once where it has
+STOPPED.  The arm's own report is read through one predicate on BOTH sides.
+A predicate satisfied by the GOOD input is scored UNFALSIFIABLE and is red — it is
+a defect in THIS instrument, and it is the mg-2f44 defect exactly.
+
+arm   name                                        verdict        detail
+--------------------------------------------------------------------------------------------
+C1a   pin block present                           DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the twin carries no STATE-PIN block
+C1b   row sets agree                              DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: a ledger row exists in STATE.md but not in the twin
+C2    per-row digests                             DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: an UNDRIFTED STATE.md ledger row is edited under the pin
+C3    whole-file digest                           DISCRIMINATES  good exit 1 silent / bad exit 1 RED
+      known-bad input: STATE.md is no longer byte-identical to the pinned revision
+C4    kind marks agree                            DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the twin's Kind mark for a row disagrees with STATE.md's
+C5a   banned: Generated <date>                    DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the twin claims `Generated <date>` again
+C5b   banned: unattributed canonicity             DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the twin calls itself the source of truth
+C6a   visible provenance present                  DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the visible provenance line is deleted
+C6b   visible provenance quotes the pin           DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the visible provenance line names a different commit than the pin
+R1    --reconcile requires --rows                 DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: a re-pin is requested without naming any row
+R2    refuse unknown row labels                   DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: a re-pin names a ledger row that does not exist
+R3    refuse re-pinning an unmoved row            DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: a re-pin names a row that has NOT moved — a reconciliation that did not happen
+R4    exactly one provenance span                 DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: the twin carries two visible provenance lines, so a re-pin would half-update
+L1    STATE.md ledger header present              DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: STATE.md no longer contains the ledger header this instrument reads
+L2    ledger row has five cells                   DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: a ledger row loses a column
+L3    ledger header has rows under it             DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: the ledger header survives but every row under it is gone
+L4    twin has ledger rows                        DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: the twin renders no ledger rows at all
+L5    pin block is terminated                     DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: a pin block starts and never ends
+S1    seed commit is readable                     DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: the commit the pin is seeded at is not reachable in this repository
+S2    seed commit touches both files              DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: the seed commit is a ONE-SIDED edit, not a reconciliation of both files
+S3    refuse to re-seed over a pin                DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: the twin already carries a reconciled pin and a re-seed would erase it
+N1    mutation: pin block deleted                 DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the mutation `pin block deleted entirely` is applied
+N2    mutation: twin row deleted                  DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the mutation `a ledger row deleted from the twin only` is applied
+N3    mutation: one char in an undrifted row      DISCRIMINATES  good exit 1 silent / bad exit 1 RED
+      known-bad input: the mutation `one character changed in an UNDRIFTED STATE.md ledger row (row 1)` is applied
+N4    mutation: ledger cell emptied               DISCRIMINATES  good exit 1 silent / bad exit 1 RED
+      known-bad input: the mutation `a whole STATE.md ledger cell emptied (row 10 status)` is applied
+N5    mutation: twin kind flipped                 DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the mutation `twin's KIND mark for row 10 flipped FP -> U` is applied
+N6    mutation: STATE.md kind flipped             DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the mutation `STATE.md's KIND mark for row 9 flipped FP✗ -> U` is applied
+N7    mutation: Generated re-introduced           DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the mutation ``Generated <date>` re-introduced into the header` is applied
+N8    mutation: canonicity re-claimed             DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the mutation `the twin re-claims canonicity in the footer` is applied
+N9    mutation: visible provenance desynced       DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the mutation `visible provenance line points at a DIFFERENT commit than the pin` is applied
+N10   mutation: visible provenance removed        DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+      known-bad input: the mutation `visible provenance line removed (pin becomes machine-only)` is applied
+N11   the positive control (baseline)             DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: the drift worklist is NOT the one derived from the pin
+N12   mutation-was-a-no-op guard                  DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: a mutation's search string has rotted into a no-op
+N13   holes are a non-zero exit                   DISCRIMINATES  good exit 0 silent / bad exit 1 RED
+      known-bad input: a mutation is no longer caught, i.e. the instrument has a hole
+H1    structural failure is reported              DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the control reports a STRUCTURAL FAILURE (exit 2)
+H2    a hole in the negative control is reported  DISCRIMINATES  good exit 0 silent / bad exit 2 RED
+      known-bad input: the negative control finds a hole (exit 1)
+H3    drift is reported as drift                  DISCRIMINATES  good exit 0 silent / bad exit 0 RED
+      known-bad input: the control reports drift (exit 1)
+H4    the CLEAN fallthrough                       LAUNDERED      good exit 0 and bad exit 0 both report the same thing — the arm does not report its subject stopping
+      known-bad input: the control NEVER RAN — the runner's green must not mean 'found nothing'
+
+PART A TALLY over 38 arms of 38 registered:
+    DISCRIMINATES  37
+    LAUNDERED      1
+    UNFALSIFIABLE  0
+    SETUP FAILED   0
+
+============================================================================================
+PART B — AUXILIARY PROBES: arms that discriminate and are still blind
+============================================================================================
+Each is a specific known-bad input the arm's NAME promises to catch and does not.
+A hole is not a laundering and is scored separately so neither flatters the other.
+
+  [CONFIRMED]  section 5 skips EVERY line containing `<!--`, not just the pin block
+      arm  : C5a/C5b
+      smell: a guard exempting far more than it declares
+      a live `Generated 2026-08-10` prefixed with an empty HTML comment: section 5 says
+      PASS (exit 1). The skip is `if L.PIN_START.split()[0] in line` — that is the token
+      `<!--`, so any line carrying one is exempt. COVERAGE.md declares an <i>/<s> bypass;
+      this one is undeclared, and it does not even achieve its stated purpose: only the
+      pin block's FIRST line contains `<!--`, so the rest of the block is scanned anyway.
+
+  [CONFIRMED]  section 6 is a SUBSTRING test — a truncated pin commit passes
+      arm  : C6b
+      smell: substring/membership test rather than a parsed field
+      the pin's commit truncated to '4fcb': section 6 says PASS. The test is
+      `pinned_commit in shown` against the whole visible line, so any prefix of the
+      displayed hash satisfies it — and so does a line that names the pinned commit
+      ALONGSIDE another one. Ticket smell #1, live, in the arm added to check a duplicated
+      provenance string.
+
+  [CONFIRMED]  section 3 cannot tell 'STATE.md moved' from 'the pin records no digest'
+      arm  : C3
+      smell: an arm whose only failure state is annotated 'NOT a defect'
+      deleting the pin's `state-sha256` field entirely and moving STATE.md produce the
+      SAME section-3 report (`DIFFERS`), and the section's own text says that state `is
+      NOT a defect and must not be read as one`. An arm whose only failure state is
+      declared not-a-defect cannot be failed in a way anybody acts on; the missing field
+      is a broken pin and reads identically to the normal condition. This is the same
+      shape as the `state-sha256` parse defect COVERAGE.md already records as fixed — the
+      field pattern was repaired, the ABSENCE was never checked.
+
+  [CONFIRMED]  a CRASH in the control is reported by the runner as DRIFT, and exits 0
+      arm  : H3
+      smell: a check downstream of a construct that cannot distinguish failure from finding
+      STATE.md's ledger header renamed so `parse_state_ledger` raises: twin_pin.py dies
+      with a traceback and Python's exit code is 1, which run_all.sh classifies as DRIFT
+      and reports at exit 0 with the words 'the instrument demonstrably fails when it
+      should'. Traceback present: True. A crash and a finding are the same number here;
+      mg-f8e5 reached the same rule from the other direction — classify by whether the run
+      reached its first decision, never by the exit code alone.
+
+  [CONFIRMED]  the ledger can GAIN A COLUMN and every arm stays green
+      arm  : C2/L2
+      smell: an assertion over a fixed field list rather than over the row
+      a sixth column added to the ledger header AND to every row: the control exits 1,
+      `parse_state_ledger` does not raise (L2 fires only on FEWER than five cells), and
+      section 2's digests are unchanged because `row_digests` reads cells 1-4 by NAME and
+      ignores everything past them. Section 2 identical to the unmutated run: True. The
+      load-bearing check digests a FIXED FIELD LIST, not the row, so any column the ledger
+      grows is outside the pin from the day it is added and nothing says so.
+
+  [CONFIRMED]  run_all.sh's DRIFT branch names rows 8 and 9 as LITERALS in its own prose
+      arm  : H3
+      smell: an expected value typed by the author rather than derived
+      the runner's live output asserts which rows drifted: echo "row 8 is the one no
+      ticket names yet.". negative_control.py's own rule — 'nothing in this file may name
+      a pinned commit or a drifted row as a literal' — was adopted one file away and not
+      applied here. Nothing checks these sentences against section 2's worklist, so they
+      rot exactly as the fixture mg-2f44 repaired did.
+
+PART B TALLY: 6 of 6 auxiliary defects CONFIRMED by demonstration.
+
+============================================================================================
+VERDICT: 38 arms probed, 37 shown to discriminate, 1 not; 6 demonstrated holes in arms that do.
+============================================================================================

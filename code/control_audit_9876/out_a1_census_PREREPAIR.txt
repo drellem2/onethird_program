@@ -1,0 +1,120 @@
+============================================================================================
+mg-9876 — ARM CENSUS of code/rendered_twin_pin_9bc2
+============================================================================================
+
+An ARM is one place that can say NO.  Sections are not arms: twin_pin.py section 5
+is TWO arms, because `Generated <date>` and an unattributed canonicity claim are two
+things that could stop happening independently.  run_all.sh is FOUR arms, because
+its four branches classify four different worlds.
+
+THE LIST
+--------------------------------------------------------------------------------------------
+  twin_pin.py   (13 arm(s))
+    C1a  §1         pin block present                           grade 2
+         subject: the twin names a STATE.md revision at all
+    C1b  §1         row sets agree                              grade 2
+         subject: STATE.md, the twin and the pin describe the same set of ledger rows
+    C2   §2         per-row digests                             grade 1
+         subject: no STATE.md ledger row has moved since the twin was reconciled against it
+    C3   §3         whole-file digest                           grade 1
+         subject: STATE.md is byte-identical to the revision recorded in the pin
+    C4   §4         kind marks agree                            grade 2
+         subject: every ledger row carries the same controlled-vocabulary Kind mark in both documents
+    C5a  §5         banned: Generated <date>                    grade 2
+         subject: the twin does not claim to have been generated on a date
+    C5b  §5         banned: unattributed canonicity             grade 2
+         subject: the twin does not claim canonicity on a line that fails to name STATE.md
+    C6a  §6         visible provenance present                  grade 2
+         subject: a reader who opens the page in a browser is shown which STATE.md this renders
+    C6b  §6         visible provenance quotes the pin           grade 2
+         subject: the visible provenance line and the machine pin name the same commit
+    R1   §reconcile --reconcile requires --rows                 grade 2
+         subject: a re-pin names the rows whose cells were actually reconciled
+    R2   §reconcile refuse unknown row labels                   grade 2
+         subject: every row named for re-pinning is a row that exists in STATE.md
+    R3   §reconcile refuse re-pinning an unmoved row            grade 2
+         subject: a re-pin records a reconciliation that actually happened
+    R4   §reconcile exactly one provenance span                 grade 2
+         subject: the visible provenance line moves with the machine pin, wholly or not at all
+
+  lib9bc2.py   (5 arm(s))
+    L1   §parse     STATE.md ledger header present              grade 2
+         subject: STATE.md still contains the ledger table this instrument reads
+    L2   §parse     ledger row has five cells                   grade 2
+         subject: the ledger's column count is the one the digest is taken over
+    L3   §parse     ledger header has rows under it             grade 2
+         subject: the ledger is not empty
+    L4   §parse     twin has ledger rows                        grade 2
+         subject: the twin still renders a ledger table
+    L5   §parse     pin block is terminated                     grade 2
+         subject: a pin that starts is a pin that ends, so the parse cannot silently truncate
+
+  negative_control.py   (13 arm(s))
+    N1   §1         mutation: pin block deleted                 grade 1
+         subject: C1a fires when the pin is removed
+    N2   §1         mutation: twin row deleted                  grade 1
+         subject: C1b fires when a row exists in one document only
+    N3   §2         mutation: one char in an undrifted row      grade 1
+         subject: C2 fires on a one-character change to a row that was not already drifted
+    N4   §2         mutation: ledger cell emptied               grade 1
+         subject: C2 fires when a whole cell is deleted
+    N5   §4         mutation: twin kind flipped                 grade 1
+         subject: C4 fires when the twin's Kind mark is wrong
+    N6   §4         mutation: STATE.md kind flipped             grade 1
+         subject: C4 fires when STATE.md's Kind mark is wrong
+    N7   §5         mutation: Generated re-introduced           grade 1
+         subject: C5a fires when the false claim comes back
+    N8   §5         mutation: canonicity re-claimed             grade 1
+         subject: C5b fires when the twin calls itself the source of truth
+    N9   §6         mutation: visible provenance desynced       grade 1
+         subject: C6b fires when the two provenance copies disagree
+    N10  §6         mutation: visible provenance removed        grade 1
+         subject: C6a fires when the pin becomes machine-only
+    N11  §-         the positive control (baseline)             grade 1
+         subject: the unmutated tree reports EXACTLY the drift worklist derived from the pin
+    N12  §-         mutation-was-a-no-op guard                  grade 1
+         subject: a fixture whose search string has rotted is reported rather than scored CAUGHT
+    N13  §-         holes are a non-zero exit                   grade 1
+         subject: a hole in the instrument reaches the runner instead of stopping at a printed table
+
+  seed_pin.py   (3 arm(s))
+    S1   §seed      seed commit is readable                     grade 2
+         subject: the commit the pin is seeded at still exists in this repository's history
+    S2   §seed      seed commit touches both files              grade 2
+         subject: the seed commit is a RECONCILIATION and not a one-sided edit
+    S3   §seed      refuse to re-seed over a pin                grade 2
+         subject: seeding is a one-time act and cannot silently overwrite a reconciled pin
+
+  run_all.sh   (4 arm(s))
+    H1   §runner    structural failure is reported              grade 2
+         subject: a broken pin mechanism reaches the reader as a non-zero exit
+    H2   §runner    a hole in the negative control is reported  grade 2
+         subject: an instrument that cannot see something it should reaches the reader
+    H3   §runner    drift is reported as drift                  grade 0
+         subject: a drifted ledger row is named as a worklist rather than swallowed
+    H4   §runner    the CLEAN fallthrough                       grade 0
+         subject: a green from this runner means the control ran and found nothing
+
+SIZE: 38 arms across 5 source files.
+      by grade — 21 structural (2), 15 drift/report (1), 2 advisory (0)
+
+============================================================================================
+COMPLETENESS — every arm-shaped SITE in the sources must be claimed by an arm
+============================================================================================
+Discovery is deliberately over-broad.  An unclaimed site is a FINDING and fails this
+census; it is how a check added without registration stops being invisible.
+
+  discovered sites: 44
+    twin_pin.py            18
+    lib9bc2.py             5
+    negative_control.py    14
+    seed_pin.py            3
+    run_all.sh             4
+
+  PASS  all 45 registered site strings resolve.
+
+  PASS  all 44 discovered sites are claimed by a registered arm.
+
+============================================================================================
+CENSUS COMPLETE — 38 arms, 44 sites, none unclaimed.
+============================================================================================

@@ -119,6 +119,59 @@ the one thing the instrument exists to let change.**
   discriminate: the correct set scores `CAUGHT`; `['8','9']` (the stale literal), `[]`, and
   `['3b']` all score `HOLE`.
 
+## Six more, found by mg-9876's audit of how this directory's controls get VALIDATED
+
+The three above were found by *running* the instrument; the two before this by *using* it. All
+six below were found by a third event again: **running every arm against an input in which the
+thing it names has stopped happening, and requiring its report to move.** Each was
+demonstrated red before it was repaired, and the transcript of that run is committed at
+`code/control_audit_9876/out_a2_discriminate_PREREPAIR.txt`.
+
+- **`run_all.sh` printed `CLEAN` over a control that never ran.** Exit 127 matched none of its
+  branches and fell through to the green. **This is the fourth instance of instance 1, in the
+  file rewritten to remove it.** Removing the `tee` fixed *whose* exit code was read; it left
+  standing the deeper error, that a python process exits 1 both when the control finds drift
+  and when it dies in a traceback. Renaming `STATE.md`'s ledger header was demonstrated making
+  this script report a traceback as `DRIFT, and the instrument demonstrably fails when it
+  should`, at **exit 0**. The runner now requires the control to have printed a `VERDICT` line
+  before any branch is taken, refuses an exit code outside `{0,1,2}`, and refuses a DRIFT whose
+  worklist is empty.
+
+- **Section 5 exempted every line containing `<!--`.** The skip was
+  `if L.PIN_START.split()[0] in line` — that token is `<!--`, so an ordinary HTML comment
+  anywhere on a line hid the whole line from the guard, and a live
+  `<!----><span><b>Generated</b> 2026-08-10</span>` was demonstrated walking past. It was also
+  *too narrow* for its stated job: only the pin block's first line carries `<!--`. An
+  undeclared bypass, wider and narrower than the thing it named at once. Now a line range.
+
+- **Section 6 was a substring test.** `pinned_commit in shown` against the whole visible line —
+  smell #1, inside the arm added to check a *duplicated* provenance string. A pin commit
+  truncated to four characters **passed**. Now the commits are parsed out of the line and the
+  list compared exactly, which also catches a visible line naming a second revision.
+
+- **Section 3 could not tell a moved `STATE.md` from a pin carrying no digest.** Deleting
+  `state-sha256` made it compare against the empty string and print `DIFFERS`, the same word
+  it prints on ordinary runs, under a heading that says `DIFFERS` is not a defect. The
+  ancestor of this is two entries above: the field-name **pattern** was repaired and the
+  **absence** never was. Absence is now its own check at structural grade.
+
+- **The ledger could gain a column and every arm stayed green.** `row_digests` joins four cells
+  *by name* and `parse_state_ledger` refuses only *fewer* than five, so a sixth column added to
+  the header and all twelve rows left section 2 byte-identical. The pin now records the column
+  list its digests were taken over. Digesting the whole raw row would have moved every pinned
+  digest and forced a re-pin nobody reconciled — the one move this instrument forbids.
+
+- **`run_all.sh` named rows 8 and 9 as literals in its own prose**, one file away from the rule
+  below, and the sentence was already half wrong. The worklist is now read out of section 2.
+
+**And the practice fix, which is worth more than the six.** `negative_control.py` now takes the
+**unmutated** report first and requires every mutation's `expect` string to be **absent from
+it**; a string already present scores `UNFALSIFIABLE` and takes the harness non-zero. That is
+mg-2f44's repair generalised from the one arm it fixed to all sixteen. The earlier repair
+parsed section 2's worklist line for the positive control and did not ask whether the other ten
+rows had the same defect. They did not — measured, not assumed — but nothing would have said
+so, and nothing would have said so about the eleventh.
+
 **The rule these two produce, stated so it is a rule and not a lesson:** nothing in
 `negative_control.py` may name a pinned commit or a drifted row as a literal. The drift set
 and the pin commit are precisely what every reconciliation moves; a fixture that spells them
