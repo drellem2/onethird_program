@@ -1,14 +1,14 @@
 ==============================================================================
 d5 -- THE CENSUS'S `TIMED-OUT` BUCKET IS UNREACHABLE BY CONSTRUCTION
 ==============================================================================
-    code-digest: 8a0e0d1a12ee6419   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    code-digest: a980a32f0862295f   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
     NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
     reads-outside-tree: yes
     ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
       -- refs, history, the file list of `main` -- so it is a fact about the object store as it
       stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
       is the only honest thing an instrument in this class can do.
-    as-of: e35b51c78ab2
+    as-of: bc965aaae820
 
 ------------------------------------------------------------------------------
 D5a -- THE TRANSCRIPTION IS CHECKED AGAINST THE ORIGINAL SOURCE
@@ -18,7 +18,7 @@ D5a -- THE TRANSCRIPTION IS CHECKED AGAINST THE ORIGINAL SOURCE
 [OK       ] D5a collect() returns None ONLY when the file is absent
 [OK       ] D5a the TIMED-OUT branch is guarded by `got[p] is None`
 [OK       ] D5a and the DIFFERS branch is the final else
-[OK       ] D5a' every clause of the transcription above is present in `code/transcript_census_1abe/t2_census.py` at e35b51c.  The reasoning below is about that code and not about a paraphrase of it
+[OK       ] D5a' every clause of the transcription above is present in `code/transcript_census_1abe/t2_census.py` at bc965aa.  The reasoning below is about that code and not about a paraphrase of it
 
 ------------------------------------------------------------------------------
 D5b -- THE CLASSIFIER, RUN ON THE THREE STATES A KILLED RUN CAN LEAVE
@@ -68,11 +68,11 @@ is a fact about the code and is countable without running anything: a suite
 whose runner redirects into a tracked transcript has that file created by the
 shell before its producer starts.
 
-    directories carrying a tracked transcript at e35b51c : 166
-      ...with a `run_all.sh` that redirects into one of them : 99
-      ...with a `run_all.sh` that redirects into NO transcript : 39
+    directories carrying a tracked transcript at bc965aa : 169
+      ...with a `run_all.sh` that redirects into one of them : 101
+      ...with a `run_all.sh` that redirects into NO transcript : 40
       ...with no `run_all.sh` at all                         : 28
-[FINDING  ] D5e THE TIMED-OUT BUCKET IS UNREACHABLE FOR 99 OF THE 166 TRANSCRIPT-CARRYING DIRECTORIES (60%) -- every one whose runner redirects into a transcript, which is what makes the shell create the file before the producer runs.  mg-1abe's own defect 8 reads 'It is 0 here at 900 s on this machine': a 0 that is a property of the guard and not of the machine.  39 more have a runner that redirects into no transcript at all and are counted apart rather than assumed safe
+[FINDING  ] D5e THE TIMED-OUT BUCKET IS UNREACHABLE FOR 101 OF THE 169 TRANSCRIPT-CARRYING DIRECTORIES (60%) -- every one whose runner redirects into a transcript, which is what makes the shell create the file before the producer runs.  mg-1abe's own defect 8 reads 'It is 0 here at 900 s on this machine': a 0 that is a property of the guard and not of the machine.  40 more have a runner that redirects into no transcript at all and are counted apart rather than assumed safe
 
 ------------------------------------------------------------------------------
 D5f -- THE ONE-LINE REPAIR, NAMED AND NOT APPLIED

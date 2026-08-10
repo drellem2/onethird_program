@@ -1,0 +1,119 @@
+==============================================================================
+d3 -- THE CONVENTION, ADOPTED AND MADE CHECKABLE
+==============================================================================
+    code-digest: a980a32f0862295f   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of: bc965aaae820      (this directory is scanned at HEAD 5b7a1175da58)
+
+------------------------------------------------------------------------------
+D3a -- R3 OVER THE WHOLE ARC, WITH `UNDECLARED` COUNTED
+------------------------------------------------------------------------------
+Population: every tracked `code/<dir>/out_*.txt` at this revision --
+mg-1abe's own denominator.  Grain: one verdict per transcript.  Nothing is
+executed; each row is a digest recomputed from the tree at that transcript's
+carrying commit and compared with what the transcript declares about itself.
+
+    AGREES          8  of 827
+    DISAGREES       0  of 827
+    NO-CODE         0  of 827
+    UNDECLARED    819  of 827
+[OK       ] D3a R3 refuses 0 transcript(s): a transcript that declares a digest its own carrying commit does not produce was made by a different version of its own code than the one it is committed beside
+[FINDING  ] D3a' COVERAGE IS 8 OF 827 (1.0%).  819 transcripts declare nothing and are counted as UNDECLARED rather than as passing -- a control that cannot report its own blind spot is the vacuous green mg-1abe scored as its P5.2 miss
+
+------------------------------------------------------------------------------
+D3b -- THE SECOND ADOPTER, CHECKED AT ITS OWN PUBLISHING STEP
+------------------------------------------------------------------------------
+mg-1abe's first-adopter row could not see the end of its own output --
+`t5` read its own directory while its own transcript was still being written,
+and printed 6 of 7 where the answer was 8 of 8 (its defect 6).  The same thing
+is true here and the answer is not to hide it: this row is a fact about the
+transcripts ALREADY WRITTEN when it runs, and the runner's order is what makes
+that a shrinking set rather than a growing one.
+
+    digest of code/census_remainder_f8e5 at HEAD 5b7a117 : a980a32f0862295f
+      out_d1_five.txt              declares a980a32f0862295f   AGREES
+      out_d2_unmeasured.txt        declares a980a32f0862295f   AGREES
+      out_d3_adopt.txt             declares None               DISAGREES
+      out_d4_movingref.txt         declares a980a32f0862295f   AGREES
+      out_d5_timeout.txt           declares a980a32f0862295f   AGREES
+      out_selftest_f8e5.txt        declares a980a32f0862295f   AGREES
+[FINDING  ] D3b 5 of 6 transcripts written so far declare this directory's OWN digest at HEAD.  A transcript that declared a true digest of somebody else's directory would pass R3 and be wrong, which is the defect this suite committed first and keeps in `lib_f8e5.Ledger`
+
+------------------------------------------------------------------------------
+D3c -- THE CONTROL, SHOWN REFUSING SOMETHING
+------------------------------------------------------------------------------
+A control that has only ever been green has not been shown able to
+fire.  Three constructions against a real tree, all three FORCED:
+
+      a transcript declaring transcript_census_1abe's TRUE digest at bc965aa R3 says accept
+[OK       ] D3c a transcript declaring transcript_census_1abe's TRUE digest at bc965aa -> accept (expected accept)
+      the same transcript with ONE HEX DIGIT changed             R3 says REFUSE
+[OK       ] D3c the same transcript with ONE HEX DIGIT changed -> REFUSE (expected REFUSE)
+      a transcript declaring a digest of the WRONG DIRECTORY     R3 says REFUSE
+[OK       ] D3c a transcript declaring a digest of the WRONG DIRECTORY -> REFUSE (expected REFUSE)
+[MEASURED ] D3c' the third arm is the one that matters and it is this suite's own first defect: a digest that is TRUE, of a directory nobody edited, declared by a transcript produced somewhere else
+
+------------------------------------------------------------------------------
+D3d -- R2 MADE CHECKABLE WITHOUT A `git`-INTERCEPTING HARNESS
+------------------------------------------------------------------------------
+mg-1abe left R2 as an author's declaration and named the check it
+wanted: a harness that intercepts `git`.  That is one instrument.  A STATIC read
+of the producing code is another, at exactly the grain the census already
+trusts -- its own 103-of-112 cause split is the same static proxy, and it says
+so on the row.
+
+WHAT IT CAN AND CANNOT DO, stated before the numbers:
+  IT CAN     refuse a `reads-outside-tree: no` from a producer that calls `git
+             log`.  That is the direction that matters: a FALSE `no` is a
+             transcript claiming to be pinnable when it is not.
+  IT CANNOT  confirm a `yes`.  A producer may import git and never reach the
+             call on the path that produced these bytes.  A `yes` that the
+             static read agrees with is CONSISTENT, not verified.
+
+    transcripts declaring a reach : 8
+      consistent with the code    : 8
+      CONTRADICTED by the code    : 0
+[OK       ] D3d R2 is now CHECKED and not merely declared, at 8 of 827 declaring transcripts, and 0 are contradicted by their own producer's source
+
+    AND THE STATIC READ IS SHOWN GOING BOTH WAYS, or it is not a check:
+      directories whose producing code DOES reach outside : 90
+      directories whose producing code DOES NOT           : 84
+        anticorrelation_c50b
+        branching_af28
+        branching_audit_19ec
+        branching_audit_2060
+        branching_audit_5800
+        branching_audit_6ad0
+[OK       ] D3d' the static read answers BOTH ways over 174 directories (90 reach outside, 84 do not).  A test that returned `yes` everywhere would be `x == x` wearing a name
+
+------------------------------------------------------------------------------
+D3e -- WHAT ADOPTION IS AND IS NOT
+------------------------------------------------------------------------------
+    ADOPTED HERE      : code/census_remainder_f8e5 (6 transcripts)
+    ADOPTED BY mg-1abe: code/transcript_census_1abe (8 transcripts)
+    EVERYWHERE ELSE   : nothing, and the number is above.
+
+R1-R3 fix NOTHING retroactively and this script does not pretend otherwise.
+What it changes is that the gap is now a NUMBER a control prints, every run,
+instead of a sentence in a README.  Adoption is one directory at a time and
+each one is cheap: import the ledger, declare, and this script's D3a row
+counts it.
+
+WHAT IS STILL NOT DONE:
+  * Nothing MAKES a suite adopt.  A convention with a control is not a gate,
+    and wiring this into a gate would refuse merges for a state that is normal
+    across the whole arc -- mg-1abe measured that trade and refused it, and
+    nothing here reopens it.
+  * The static R2 check cannot confirm a `yes`, only refuse a `no`.  Named
+    above, before the count.
+
+[MEASURED ] D3e coverage is 8 of 827 transcripts arc-wide, in 2 directories of 169 -- reported as a number by a control rather than as a sentence in a README
+
+SELF-ERRORS 0
+FINDINGS 2
+TOTAL BAD: 2

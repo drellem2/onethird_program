@@ -1,0 +1,175 @@
+==============================================================================
+d2 -- THE 31 NEVER MEASURED AGAINST THEIR BYTES
+==============================================================================
+    code-digest: a980a32f0862295f   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of: bc965aaae820   population as-of: 81214a9c02ee   producer timeout: 900s
+
+------------------------------------------------------------------------------
+D2a -- THE POPULATION, RE-DERIVED RATHER THAN QUOTED
+------------------------------------------------------------------------------
+The 31 are re-derived from the census's own rule -- a tracked
+`code/<dir>/out_*.txt` whose directory has no `run_all.sh` at its CARRYING
+COMMIT -- rather than copied out of `out_t2_census.txt`.
+
+⚠️ THE POPULATION IS TAKEN AT `81214a9`, THE CENSUS'S OWN REVISION, ON PURPOSE.
+The ticket says "the 31", and the 31 are a fact about that commit.  The same
+rule at today's `main` returns a different and much larger set -- printed
+below, because the difference is the ticket's own subject and not a footnote --
+and disposing of THAT would be a new census rather than the disposal of this
+one.
+
+    at 81214a9 (the census's revision): 31 transcripts over 10 directories
+[OK       ] D2a the NO-RUNNER population at 81214a9 re-derives to 31 over 10 directories.  mg-1abe reports 31 over 10; this is a REPRODUCTION of its bucket, not a finding
+    at bc965aa (today's `main`)       : 140 transcripts over 31 directories
+[FINDING  ] D2a' AND THE BUCKET HAS GROWN WHILE NOBODY WAS LOOKING: 140 transcripts over 31 directories at bc965aa, against 31 over 10 at 81214a9 -- a 4.5x growth in the set nothing can say anything about.  This script disposes of the census's 31; the other 109 are named here and NOT measured, because measuring them is a new census and not this disposal
+
+------------------------------------------------------------------------------
+D2b -- WHY EACH WAS UNMEASURABLE, AND BY WHICH RULE IT IS RECOVERED
+------------------------------------------------------------------------------
+    transcript                                           at       tier         producer
+    face_geometry_audit_5630/out_nc3.txt                 fcc8a11  T3-NAME-MAP  audit_nc3.py
+    face_geometry_audit_5630/out_x3_equivalence.txt      fcc8a11  T3-NAME-MAP  audit_x3_equivalence.py
+    face_geometry_audit_e0ce/out_extra.txt               d3a2586  T3-NAME-MAP  audit_extra.py
+    face_geometry_audit_e0ce/out_n5.txt                  d368c96  T4-NONE      (none)
+    face_geometry_audit_e0ce/out_n6.txt                  d3a2586  T4-NONE      (none)
+    face_geometry_audit_f1b2/out_gates.txt               de54c3a  T2-OTHER-SH  audit_gates.py
+    face_geometry_audit_f1b2/out_injections.txt          de54c3a  T2-OTHER-SH  audit_injections.py
+    face_geometry_audit_f1b2/out_nmax.txt                de54c3a  T2-OTHER-SH  audit_nmax2.py
+    face_geometry_audit_f1b2/out_scoring.txt             de54c3a  T2-OTHER-SH  audit_scoring.py
+    face_geometry_audit_f1b2/out_theorem.txt             de54c3a  T2-OTHER-SH  audit_theorem_and_content.py
+    face_geometry_audit_f7bc/out_attack_scoring.txt      321509f  T3-NAME-MAP  attack_scoring.py
+    face_geometry_audit_f7bc/out_verify_a6.txt           321509f  T3-NAME-MAP  verify_a6.py
+    face_geometry_audit_fcb2/out_a1_counts.txt           44aa686  T3-NAME-MAP  a1_counts.py
+    face_geometry_audit_fcb2/out_selftest_fcb2.txt       44aa686  T3-NAME-MAP  selftest_fcb2.py
+    face_geometry_audit_fcf1/out_extra.txt               34c151f  T2-OTHER-SH  audit_extra.py
+    face_geometry_audit_fcf1/out_gauge.txt               34c151f  T2-OTHER-SH  audit_gauge.py
+    face_geometry_audit_fcf1/out_nc4.txt                 34c151f  T2-OTHER-SH  audit_nc4.py
+    libweak_c3ca/out_p1_census.txt                       81214a9  T3-NAME-MAP  p1_census.py
+    libweak_c3ca/out_p2_primitive.txt                    81214a9  T3-NAME-MAP  p2_primitive.py
+    libweak_c3ca/out_p3_window.txt                       81214a9  T3-NAME-MAP  p3_window.py
+    libweak_c3ca/out_selftest_c3ca.txt                   81214a9  T3-NAME-MAP  selftest_c3ca.py
+    semigroup_note_audit_66a6/out_antichain.txt          6e9e02e  T2-OTHER-SH  audit_antichain.py
+    semigroup_note_audit_66a6/out_sweeps.txt             6e9e02e  T2-OTHER-SH  audit_sweeps.py
+    semigroup_note_audit_66a6/out_theorem.txt            6e9e02e  T2-OTHER-SH  audit_theorem.py
+    semigroup_note_audit_66a6/out_worked_example.txt     6e9e02e  T2-OTHER-SH  audit_worked_example.py
+    state_visibility_audit_65eb/out_anchor65eb.txt       9715af1  T3-NAME-MAP  anchor65eb.py
+    state_visibility_audit_65eb/out_anchor65eb_bd24efc.txt 9715af1  T4-NONE      (none)
+    state_visibility_audit_65eb/out_rows65eb.txt         7911ba1  T3-NAME-MAP  rows65eb.py
+    state_visibility_audit_65eb/out_six65eb.txt          9715af1  T3-NAME-MAP  six65eb.py
+    unified_gate_8fd1/out_characterise.txt               97cb533  T3-NAME-MAP  characterise.py
+    unified_gate_8fd1/out_quotient_symmetry.txt          97cb533  T3-NAME-MAP  quotient_symmetry.py
+
+    WHY, by directory -- the reason is a property of the directory, not of the file:
+      face_geometry_audit_5630                   2 transcript(s): NO RUNNER OF ANY NAME (no `.sh` at all).  Its scripts were run by hand, and only the filename convention connects a transcript to one
+      face_geometry_audit_e0ce                   3 transcript(s): NO RUNNER OF ANY NAME (no `.sh` at all).  Its scripts were run by hand, and only the filename convention connects a transcript to one
+      face_geometry_audit_f1b2                   5 transcript(s): HAS A RUNNER UNDER ANOTHER NAME: run_audit.sh.  The census's rule is the literal string `run_all.sh`
+      face_geometry_audit_f7bc                   2 transcript(s): NO RUNNER OF ANY NAME (no `.sh` at all).  Its scripts were run by hand, and only the filename convention connects a transcript to one
+      face_geometry_audit_fcb2                   2 transcript(s): NO RUNNER OF ANY NAME (no `.sh` at all).  Its scripts were run by hand, and only the filename convention connects a transcript to one
+      face_geometry_audit_fcf1                   3 transcript(s): HAS A RUNNER UNDER ANOTHER NAME: run_audit.sh.  The census's rule is the literal string `run_all.sh`
+      libweak_c3ca                               4 transcript(s): NO RUNNER OF ANY NAME (no `.sh` at all).  Its scripts were run by hand, and only the filename convention connects a transcript to one
+      semigroup_note_audit_66a6                  4 transcript(s): HAS A RUNNER UNDER ANOTHER NAME: run_audit.sh.  The census's rule is the literal string `run_all.sh`
+      state_visibility_audit_65eb                4 transcript(s): NO RUNNER OF ANY NAME (no `.sh` at all).  Its scripts were run by hand, and only the filename convention connects a transcript to one
+      unified_gate_8fd1                          2 transcript(s): NO RUNNER OF ANY NAME (no `.sh` at all).  Its scripts were run by hand, and only the filename convention connects a transcript to one
+
+    T1-RUNNER      0
+    T2-OTHER-SH    12
+    T3-NAME-MAP    16
+    T4-NONE        3
+[MEASURED ] D2b of 31 unmeasured transcripts, 12 are recovered by widening ONE STRING (`run_all.sh` -> any tracked `*.sh` the census's own parser can read), 16 by the arc's filename convention, and 3 by nothing at all
+
+------------------------------------------------------------------------------
+D2c -- EVERY RECOVERED PRODUCER IS RUN, AND THE BYTES COMPARED
+------------------------------------------------------------------------------
+E3's guard, filed in advance: a filename that maps is not a producer
+that reproduces.  Each recovered producer below is executed in a detached
+worktree at the transcript's own carrying commit, with the worktree asserted
+CLEAN before it starts.
+
+    transcript                                           tier         verdict          detail
+    face_geometry_audit_5630/out_nc3.txt                 T3-NAME-MAP  REPRODUCES       1s
+    face_geometry_audit_5630/out_x3_equivalence.txt      T3-NAME-MAP  RUNNER-FAILED    exit 1, 358 bytes written -- NOT compared
+    face_geometry_audit_e0ce/out_extra.txt               T3-NAME-MAP  REPRODUCES       5s
+    face_geometry_audit_e0ce/out_n5.txt                  T4-NONE      UNMEASURABLE     no run_all.sh in code/face_geometry_audit_e0
+    face_geometry_audit_e0ce/out_n6.txt                  T4-NONE      UNMEASURABLE     no run_all.sh in code/face_geometry_audit_e0
+    face_geometry_audit_f1b2/out_gates.txt               T2-OTHER-SH  REPRODUCES       4s
+    face_geometry_audit_f1b2/out_injections.txt          T2-OTHER-SH  REPRODUCES       8s
+    face_geometry_audit_f1b2/out_nmax.txt                T2-OTHER-SH  REPRODUCES       2s
+    face_geometry_audit_f1b2/out_scoring.txt             T2-OTHER-SH  REPRODUCES       48s
+    face_geometry_audit_f1b2/out_theorem.txt             T2-OTHER-SH  REPRODUCES       1s
+    face_geometry_audit_f7bc/out_attack_scoring.txt      T3-NAME-MAP  REPRODUCES       0s
+    face_geometry_audit_f7bc/out_verify_a6.txt           T3-NAME-MAP  REPRODUCES       5s
+    face_geometry_audit_fcb2/out_a1_counts.txt           T3-NAME-MAP  REPRODUCES       20s
+    face_geometry_audit_fcb2/out_selftest_fcb2.txt       T3-NAME-MAP  REPRODUCES       0s
+    face_geometry_audit_fcf1/out_extra.txt               T2-OTHER-SH  REPRODUCES       1s
+    face_geometry_audit_fcf1/out_gauge.txt               T2-OTHER-SH  REPRODUCES       2s
+    face_geometry_audit_fcf1/out_nc4.txt                 T2-OTHER-SH  REPRODUCES       17s
+    libweak_c3ca/out_p1_census.txt                       T3-NAME-MAP  REPRODUCES       1s
+    libweak_c3ca/out_p2_primitive.txt                    T3-NAME-MAP  REPRODUCES       1s
+    libweak_c3ca/out_p3_window.txt                       T3-NAME-MAP  REPRODUCES       1s
+    libweak_c3ca/out_selftest_c3ca.txt                   T3-NAME-MAP  REPRODUCES       0s
+    semigroup_note_audit_66a6/out_antichain.txt          T2-OTHER-SH  REPRODUCES       4s
+    semigroup_note_audit_66a6/out_sweeps.txt             T2-OTHER-SH  REPRODUCES       12s
+    semigroup_note_audit_66a6/out_theorem.txt            T2-OTHER-SH  REPRODUCES       32s
+    semigroup_note_audit_66a6/out_worked_example.txt     T2-OTHER-SH  REPRODUCES       0s
+    state_visibility_audit_65eb/out_anchor65eb.txt       T3-NAME-MAP  T3-UNRESOLVED    guessed producer, bytes differ (HELD)
+    state_visibility_audit_65eb/out_anchor65eb_bd24efc.txt T4-NONE      UNMEASURABLE     no run_all.sh in code/state_visibility_audit
+    state_visibility_audit_65eb/out_rows65eb.txt         T3-NAME-MAP  T3-UNRESOLVED    guessed producer, bytes differ (NO-VERDICT)
+    state_visibility_audit_65eb/out_six65eb.txt          T3-NAME-MAP  T3-UNRESOLVED    guessed producer, bytes differ (NO-VERDICT)
+    unified_gate_8fd1/out_characterise.txt               T3-NAME-MAP  REPRODUCES       175s
+    unified_gate_8fd1/out_quotient_symmetry.txt          T3-NAME-MAP  REPRODUCES       61s
+
+    REPRODUCES       24
+    RUNNER-FAILED    1
+    T3-UNRESOLVED    3
+    UNMEASURABLE     3
+[MEASURED ] D2c 24 of the 31 previously-unmeasured transcripts are now MEASURED AGAINST THEIR BYTES (24 reproduce, 0 do not); 3 are T3-UNRESOLVED, where a guessed producer disagreeing cannot be told from a transcript that does not reproduce; 3 remain unmeasurable by any rule
+
+------------------------------------------------------------------------------
+D2d -- WHAT IS LEFT, AND WHETHER IT CAN EVER BE CLOSED
+------------------------------------------------------------------------------
+    face_geometry_audit_5630/out_x3_equivalence.txt
+        at fcc8a11, tier T3-NAME-MAP: exit 1, 358 bytes written -- NOT compared
+        CAN IT BE CLOSED? The producer exists and did not produce the file here;
+        that is a fact about the run, and re-running it with a larger budget or on
+        a different machine may move it.
+    face_geometry_audit_e0ce/out_n5.txt
+        at d368c96, tier T4-NONE: no run_all.sh in code/face_geometry_audit_e0ce at d368c96
+        CAN IT BE CLOSED? Not from this repository.  There is no script at that commit
+        that the transcript's name reaches and no runner that names it.  Closing it
+        needs the producer, which was never committed.
+    face_geometry_audit_e0ce/out_n6.txt
+        at d3a2586, tier T4-NONE: no run_all.sh in code/face_geometry_audit_e0ce at d3a2586
+        CAN IT BE CLOSED? Not from this repository.  There is no script at that commit
+        that the transcript's name reaches and no runner that names it.  Closing it
+        needs the producer, which was never committed.
+    state_visibility_audit_65eb/out_anchor65eb.txt
+        at 9715af1, tier T3-NAME-MAP: guessed producer, bytes differ (HELD)
+        CAN IT BE CLOSED? Yes, by ONE piece of information nobody has to re-derive:
+        the command that produced it.  Under the convention adopted in `d3`, a
+        transcript declares its own producer, so this bucket cannot recur.
+    state_visibility_audit_65eb/out_anchor65eb_bd24efc.txt
+        at 9715af1, tier T4-NONE: no run_all.sh in code/state_visibility_audit_65eb at 9715af1
+        CAN IT BE CLOSED? Not from this repository.  There is no script at that commit
+        that the transcript's name reaches and no runner that names it.  Closing it
+        needs the producer, which was never committed.
+    state_visibility_audit_65eb/out_rows65eb.txt
+        at 7911ba1, tier T3-NAME-MAP: guessed producer, bytes differ (NO-VERDICT)
+        CAN IT BE CLOSED? Yes, by ONE piece of information nobody has to re-derive:
+        the command that produced it.  Under the convention adopted in `d3`, a
+        transcript declares its own producer, so this bucket cannot recur.
+    state_visibility_audit_65eb/out_six65eb.txt
+        at 9715af1, tier T3-NAME-MAP: guessed producer, bytes differ (NO-VERDICT)
+        CAN IT BE CLOSED? Yes, by ONE piece of information nobody has to re-derive:
+        the command that produced it.  Under the convention adopted in `d3`, a
+        transcript declares its own producer, so this bucket cannot recur.
+[OK       ] D2d 7 of the 31 are NOT closed by this script and each carries the reason and whether it can ever be closed.  `reported as such` is now `reported as such WITH A ROUTE OUT OR A REASON THERE IS NONE`
+
+SELF-ERRORS 0
+FINDINGS 1
+TOTAL BAD: 1

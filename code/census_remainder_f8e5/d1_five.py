@@ -283,28 +283,48 @@ of them -- the miss is kept in the README and it changed a verdict:
   RERUN-CANNOT-SEE  (A) or (B).
   RECORD-IS-FALSE   neither: the re-run sees at least as much as the record
                     and disagrees with it.
+  NOT-A-FALSE-RECORD  the re-run is BYTE-IDENTICAL to the committed transcript.
+                    There is nothing to adjudicate.  This row exists because
+                    one of the five is in it, and folding a transcript that
+                    reproduces into `RECORD-IS-FALSE` on the strength of its
+                    being in the census's list would be taking the list on
+                    trust -- which is the one thing a disposal cannot do.
 
   A judgement, and every input to it is measured and printed above, so a reader
   who thinks the rule is wrong can re-adjudicate without re-running anything.
 """)
     print("    %-52s %-18s %s" % ("transcript", "cause", "evidence"))
-    false_records, blind = [], []
+    false_records, blind, reproduces = [], [], []
     for r in rows:
         blind_a = bool(r["unreach"]) and len(r["gone"]) > len(r["appeared"])
         blind_b = bool(r["outgrown"])
-        cause = "RERUN-CANNOT-SEE" if (blind_a or blind_b) else "RECORD-IS-FALSE"
+        if r["identical"]:
+            cause = "NOT-A-FALSE-RECORD"
+        elif blind_a or blind_b:
+            cause = "RERUN-CANNOT-SEE"
+        else:
+            cause = "RECORD-IS-FALSE"
         r["blind"] = "A" if blind_a else ("B" if blind_b else "-")
-        (blind if cause == "RERUN-CANNOT-SEE" else false_records).append(r)
+        if cause == "RECORD-IS-FALSE":
+            false_records.append(r)
+        elif cause == "RERUN-CANNOT-SEE":
+            blind.append(r)
+        else:
+            reproduces.append(r)
         r["cause"] = cause
         print("    %-52s %-18s %s  %d unreachable, %d outgrown window(s), "
               "-%d/+%d rows"
               % (r["path"][5:], cause, r["blind"], len(r["unreach"]),
                  len(r["outgrown"]), len(r["gone"]), len(r["appeared"])))
     led.record(None,
-               "D1d of the %d re-derived FLIPS, %d are RECORD-IS-FALSE and %d "
-               "are RERUN-CANNOT-SEE.  The second class is NOT damage to the "
-               "record and its remedy is the opposite one"
-               % (len(rows), len(false_records), len(blind)))
+               "D1d THE MEASURED DAMAGE OF THIS CLASS IS %d, NOT %d.  Of the %d "
+               "transcripts mg-1abe names as FALSE RECORDS: %d ARE ONE "
+               "(RECORD-IS-FALSE); %d is TRUE at its carrying commit and its "
+               "own producer can no longer see that (RERUN-CANNOT-SEE), whose "
+               "remedy is the opposite one; and %d REPRODUCES BYTE-FOR-BYTE "
+               "and is not a false record at all"
+               % (len(false_records), len(rows), len(rows),
+                  len(false_records), len(blind), len(reproduces)))
 
     # ------------------------------------- the blind case, verified unbounded
     led.head("D1d' -- WHERE THE WINDOW SLID OFF, THE RECORD'S CLAIM IS "
@@ -366,7 +386,14 @@ whether the producer reads repository-global state:
     for r in rows:
         names_own_rev = any(s == r["carrier"] for s in
                             L.shas_named_in(r["committed"]))
-        if r["cause"] == "RERUN-CANNOT-SEE" and r["blind"] == "B":
+        if r["cause"] == "NOT-A-FALSE-RECORD":
+            remedy = "NONE -- IT REPRODUCES"
+            reason = ("it emits the committed bytes exactly at its own carrying "
+                      "commit, in %.0f s against the census's 900 s budget.  "
+                      "There is nothing to remedy; what needs repairing is the "
+                      "bucket that could not report a budget (out_d5_timeout"
+                      ".txt)." % r["seconds"])
+        elif r["cause"] == "RERUN-CANNOT-SEE" and r["blind"] == "B":
             remedy = "ANNOTATE + DO NOT RE-RUN"
             reason = ("its producer bounds a walk over `main` by a literal "
                       "(%s) and `main` has grown %d commits past the carrying "
@@ -418,6 +445,14 @@ whether the producer reads repository-global state:
                "a MEASUREMENT and overwriting it destroys it, and %d of the %d "
                "carry a remedy that forbids re-running outright"
                % (len(blind), len(rows)))
+    led.record(len(reproduces) == 0,
+               "D1e'' AND THE HEADLINE MOVES: `FIVE FALSE RECORDS` IS %d.  %d "
+               "of the five is not damage because it reproduces, and %d is not "
+               "damage because the record is true and the instrument is blind. "
+               "Both are printed rather than dropped, because a disposal that "
+               "quietly kept the number at five would be the over-report this "
+               "ticket exists to prevent, one order of magnitude smaller"
+               % (len(false_records), len(reproduces), len(blind)))
 
     return led.done()
 
