@@ -1,0 +1,36 @@
+==============================================================================
+mg-fd9c / S0 -- SELFTEST
+==============================================================================
+HEAD: 5c8f879
+
+  arm                                                                      result
+  ------------------------------------------------------------------------------
+  C1 census() at mg-9160's reconstruction == mg-03d1's published figures   ok
+        (the forced arm: my composition against the parent's printed numbers)
+  C2 census() at the index of 9f1ecaa alone == mg-9160's published row     ok
+        (the same composition at the ref that is NOT where the figures live)
+  C3 emptying a tree leaves the FILE count alone                           ok
+        (`>` truncates, it does not unlink -- this is the TRUNC fingerprint)
+  C4 emptying a tree removes rows                                          ok
+  C5 NEGATIVE CONTROL: a tree not in the corpus weighs nothing             ok
+        (if this fires, `own_weight` is matching on something other than the path)
+  C5b the FAST weight agrees with the reference, field for field           ok
+        (a speed-up that disagrees with the reference is a second answer)
+  C6 THE ANTI-VACUITY ARM: r_fixed's own text really is counted            ok
+        (0 here makes every 'converged' below true of a state nobody counted)
+  C7 the arc's own transcript shape reaches a FIXED POINT                  ok
+        (period 1 == fixed point; this is the shape every arc probe has)
+  C8.2 NEGATIVE CONTROL: a value-shaped transcript cycles at period 2      ok
+        (the detector reports the DESIGNED period, not merely 'not 1')
+  C8.3 NEGATIVE CONTROL: a value-shaped transcript cycles at period 3      ok
+        (the detector reports the DESIGNED period, not merely 'not 1')
+  C8.5 NEGATIVE CONTROL: a value-shaped transcript cycles at period 5      ok
+        (the detector reports the DESIGNED period, not merely 'not 1')
+  C9 `git cat-file` agrees with the disk for a tracked, unmodified file    ok
+  C10 count_rows of an empty transcript is 0                               ok
+  C11 state_of: a ref-pinned population is FROZEN                          ok
+  C12 state_of: a disk glob without the observer is GROWING                ok
+  C13 state_of: a disk glob WITH the observer is OBSERVED                  ok
+  C14 render_figure prints an INTERVAL for an OBSERVED figure              ok
+
+SELFTEST TOTAL BAD: 0

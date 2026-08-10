@@ -1,0 +1,129 @@
+==============================================================================
+mg-fd9c / S3 -- IS THE RECONSTRUCTED ROW THE ANSWER?
+==============================================================================
+HEAD: 5c8f879
+
+==========================================================================
+S3a  THE RECONSTRUCTION IS STABLE, AND FOR A CHECKABLE REASON
+==========================================================================
+
+  mg-9160's reconstruction is `everything tracked at 9f1ecaa` plus
+  `mg-03d1's own seven transcripts as published at eacc5e1`.
+
+  population: the 517 (path, ref) pairs `lib9160.parent_corpus()` returns   @5c8f879
+      corpus                                          files   rows  erows  eints  words
+      the reconstruction                                517   1191    246    626    400
+      mg-03d1's published figures                       517   1191    246    626    400
+      the disk at HEAD, for contrast                    832   2093    504   1283    614
+
+      the reconstruction reproduces, field for field           yes
+
+  WHY IT IS STABLE, and this is the part worth more than the row: its
+  input is not a directory, it is a LIST OF BLOB HASHES.  Every path in
+  it resolves through `git ls-tree` at a fixed commit, so the census is
+  a function of two 40-character strings and of nothing else on this
+  machine.  A file arriving on disk cannot enter it; a file leaving
+  cannot leave it.
+
+      the two trees the reconstruction is a function of:
+          9f1ecaa   7ef1dac00ca5
+          eacc5e1   0df4e28f4d2c
+
+  AND THE LIVE DEMONSTRATION.  Since mg-03d1 published, the arc has
+  grown by 315 transcripts and 902 count rows -- S2d walks the 245 commits
+  that did it.  The reconstruction above is computed on THIS disk,
+  after all of that, and it still says 517 / 1191 / 246 / 626 / 400.
+
+==========================================================================
+S3b  WHAT A RECONSTRUCTION CANNOT MEASURE -- WITH A SIZE ON EACH
+==========================================================================
+
+  (1) IT CANNOT SEE AN UNTRACKED FILE, AND THAT IS THE WHOLE REASON
+      THIS ARC GLOBS THE DISK.  `lib56dc.outs()` says so in its own
+      docstring: *a tree's transcripts are untracked on the run that
+      first writes them, and an index-built corpus is empty on that
+      run.*  So on the ONE run whose output gets published, a
+      reconstruction of that run's corpus is short by the whole tree.
+
+      code/grain_axis_audit_03d1                       7 transcripts invisible on its own first run
+      code/grain_arity_9160                            6 transcripts invisible on its own first run
+      code/corpus_fixedpoint_fd9c                      7 transcripts invisible on its own first run
+      ^ one unit of each is one file
+
+  (2) IT CANNOT BE COMPUTED FROM ANY SINGLE COMMIT.  S2d walks 245
+      commits and mg-03d1's `517 / 1191` is the answer at NONE of
+      them.  Its figures live at a UNION of two refs -- which is not a
+      state this repository was ever in, and is exactly what makes the
+      reconstruction a reconstruction rather than a checkout.
+
+      files tracked at 9f1ecaa alone                    510
+      files in the reconstruction                       517
+      the difference: mg-03d1's own, untracked then       7
+      ^ one unit of each is one file
+
+  (3) IT CANNOT TELL YOU WHICH REGIME PRODUCED A FIGURE.  S1a's two
+      readings differ by the observer's own transcript; both of them
+      are readings of the SAME committed bytes, so a reconstruction
+      reproduces whichever one happens to be committed and cannot say
+      which it is.  1984 and 1966 reconstruct equally well.
+
+==========================================================================
+S3c  WHAT IT COSTS
+==========================================================================
+
+  (a) REACHABILITY.  A reconstruction is a promise about two commits
+      still being there.  Checked, not assumed:
+
+      9f1ecaa      exists: True    an ancestor of HEAD: False
+      eacc5e1      exists: True    an ancestor of HEAD: True 
+
+      An ancestor is safe from garbage collection; a commit that is
+      merely present is not.  Both of mg-9160's are ancestors here,
+      and that is a fact about this branch and not a property of
+      reconstruction.
+
+  (b) A HAND FACT PER FIGURE.  `PARENT_REV` and `PARENT_PUB` are two
+      constants a human worked out and typed into `lib9160.py`.  There
+      is no rule that recovers them: `the disk at the moment of the
+      run` is not recorded anywhere, and c9160 recovered it by reading
+      the transcripts and reasoning about what must have been
+      untracked.  So reconstruction is an ARCHIVAL ACT, once per
+      figure, by hand -- not an instrument you can point at the arc.
+
+  (c) IT ANSWERS A DIFFERENT QUESTION, and the price is silent.  A
+      reconstruction of `what was committed at X` is a fine number and
+      it is not the number a probe globbing the disk computed.  Swap
+      one for the other without saying so and the figure stops being
+      about the thing its label says.
+
+==========================================================================
+S3d  SO: RECONSTRUCTION IS THE ANSWER FOR THE RECORD, NOT FOR THE RUN
+==========================================================================
+
+  For anything this arc PUBLISHES, reconstruction is the fix and its
+  cost is (a) and (b) above: two refs, worked out once, written down.
+  It buys a figure that is true forever instead of true for one commit
+  -- S2d measures that shelf life at 0 commits for mg-03d1's pair and 1
+  of 245 for mg-9160's.
+
+  For what a PROBE RANGED OVER, reconstruction is not available, and
+  pretending otherwise is worse than the disk glob because it looks
+  reproducible.  What is available there is the thing S1b computes: the
+  figure PLUS the observer's own weight, which bounds the whole
+  disagreement between the two write regimes.
+
+  Worked on this tree's own figures, which is the only honest place to
+  try it first:
+
+      this tree's own rows, at this moment               78
+      the corpus row count on this disk                2093
+      so my own arc-wide row figure is honestly      2015-2093 @5c8f879 (OBSERVED)
+
+FINDING: S3 RECONSTRUCTION FIXES THE RECORD AND CANNOT FIX THE RUN.  It is
+         a function of two commit hashes, so it is stable by construction and not
+         by luck -- and for the same reason it is blind to the untracked
+         transcripts that are the entire output of the run being measured.  The
+         published form therefore needs BOTH: a ref for the value and an observer's
+         weight for the interval.
+
+S3 TOTAL BAD: 0

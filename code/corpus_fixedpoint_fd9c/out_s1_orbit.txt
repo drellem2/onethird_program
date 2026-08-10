@@ -1,0 +1,150 @@
+==============================================================================
+mg-fd9c / S1 -- THE OSCILLATION IS NOT AN OSCILLATION
+==============================================================================
+HEAD: 5c8f879   subject: the arc-wide census over `code/*/out_*.txt`
+Reported by c9160 as defect D7: `the row count OSCILLATES between 1984
+and 1966 and does NOT converge`, over seven consecutive runs.
+
+==========================================================================
+S1a  THE TWO VALUES ARE ONE CORPUS UNDER TWO WRITE REGIMES
+==========================================================================
+
+  A probe that censuses `code/*/out_*.txt` is inside its own
+  population.  What its census reads therefore depends on how its own
+  transcript is being written AT THE MOMENT IT RUNS:
+
+      a plain `>`      truncates the file before python starts, so the
+                       probe reads its own transcript as EMPTY;
+      `.new` + `mv`    leaves the previous run's transcript in place,
+                       so the probe reads its own PREVIOUS output.
+
+  mg-bf79 introduced the second; mg-9160's `run_all.sh` adopts it and
+  says why, in its own comment, naming this as `the arc's defect #7`.
+  Both disciplines are in the arc RIGHT NOW, and a figure produced
+  under one is not the figure produced under the other.
+
+  population: the corpus `code/grain_arity_9160/out_s1_reproduce.txt` globs, at HEAD, read twice   @5c8f879
+      regime                                                    files   rows  erows  eints  words
+      `.new` + `mv`  -- its own transcript PRESENT                832   2093    504   1283    614
+      a plain `>`    -- its own transcript EMPTY                  832   2075    503   1282    614
+      the difference: THE OBSERVER'S OWN WEIGHT                     0     18      1      1      0
+
+      one unit of that row count is one line `lib56dc.count_rows`
+      returns from `code/grain_arity_9160/out_s1_reproduce.txt`
+
+      THE TRUNCATION FINGERPRINT: `files` does not move            yes -- `>` truncates, it does not unlink
+
+  AND NOW D7's TWO NUMBERS.  c9160 ran at a corpus this branch has
+  since grown past, so the pair below is ITS pair and not mine; what
+  transfers is the RULE, and the rule is checkable on its own numbers:
+
+      c9160's `.new`+`mv` reading                             1984
+      c9160's plain `>` reading                               1966
+      the difference                                            18
+      count_rows of its own `out_s1_reproduce.txt` AT HEAD      18
+
+      the difference IS the observer's weight                 yes -- 18 = 18
+
+  WHAT THIS COSTS D7.  `oscillates ... and does NOT converge` is a
+  claim about a SEQUENCE.  Two readings of one state are not a
+  sequence.  D7's observation is real and its mechanism is not the one
+  it names: the corpus including its own auditors is TRUE (that is D6)
+  and is NOT sufficient for non-convergence -- see S1c.
+
+==========================================================================
+S1b  THE OBSERVER'S WEIGHT, FOR EVERY TREE IN THE ARC
+==========================================================================
+
+  D7 is a special case of a quantity nobody in this arc has computed:
+  for a census over `code/*/out_*.txt`, HOW MUCH OF THE ANSWER IS THE
+  CENSOR?  Below, per tree: the rows its own transcripts contribute,
+  which is the width of the interval between its two regimes.
+
+  population: every `code/<tree>/` holding at least one count row, at HEAD   @5c8f879
+      tree                                         rows  share   of which e-rows/e-ints/words
+      runner_exit_repair_bf79                       129   6.2%   8 / 12 / 18
+      figures_revision_repair_5035                  124   5.9%   6 / 10 / 14
+      grain_axis_audit_03d1                         123   5.9%   0 / 0 / 28
+      state_relocation_audit_b0ae                   120   5.7%   19 / 22 / 49
+      truncate_sweep_ec63                            81   3.9%   1 / 1 / 17
+      species_audit_73df                             80   3.8%   50 / 98 / 5
+      corpus_fixedpoint_fd9c                         78   3.7%   19 / 21 / 22
+      idiom_sweep_audit_18dc                         74   3.5%   4 / 4 / 23
+      grain_arity_9160                               74   3.5%   4 / 5 / 21
+      sweep_loss_51f4                                65   3.1%   60 / 63 / 2
+      runner_exit_repair_70c7                        59   2.8%   1 / 1 / 9
+      runner_exit_audit_56dc                         57   2.7%   17 / 19 / 6
+      runner_exit_audit_dee4                         46   2.2%   2 / 2 / 8
+      branching_af28                                 42   2.0%   26 / 83 / 15
+      ... 85 further trees                          941  45.0%
+      TOTAL                                        2093 100.0%
+      ^ one unit of every number in that column is one printed line
+
+      the heaviest single observer in the arc: `runner_exit_repair_bf79` at 129 rows, 6.2%
+
+  READ THAT AS AN ERROR BAR AND IT IS THE ANSWER TO ITEM 4.  A tree
+  that censuses this corpus while writing into it publishes a figure
+  whose value depends on a write discipline, and the width of that
+  dependence is its own row on this table.  S4 turns that into a
+  published form.
+
+==========================================================================
+S1c  THE ORBIT, ITERATED IN MEMORY, WITH DESIGNED-PERIOD CONTROLS
+==========================================================================
+
+  `T -> render(census(corpus + T))`, from the empty transcript, over
+  the REAL corpus on this disk.  In memory, because a probe that
+  iterates by writing cannot be run twice without changing its own
+  answer -- which is the disease.
+
+  population: the 832 transcripts on disk at HEAD, plus one virtual transcript   @5c8f879
+
+      transcript shape                                        start   period
+      r_fixed -- the shape EVERY arc probe has                    2        1
+      make_cycler(P=2) -- CONTROL, shape follows value            2        2
+      make_cycler(P=3) -- CONTROL, shape follows value            2        3
+      make_cycler(P=5) -- CONTROL, shape follows value            2        5
+
+      period 1 is a FIXED POINT.  The three controls are transcript
+      shapes whose ROW COUNT depends on the value they report; each is
+      built to a named period and the detector returns that period, so
+      `period 1` above is a measurement and not a default.
+
+      the fixed point r_fixed lands on:      833   2098    504   1283    616
+      the corpus without any observer:       832   2093    504   1283    614
+
+  THE SUFFICIENT CONDITION, and it is the whole explanation:
+
+      if a probe prints a number of count rows that does not depend on
+      the VALUES it prints, then one application of the map fixes the
+      corpus row count, and every later application is the identity.
+
+  Every probe in `mg-9160` and `mg-03d1` has that shape.  So does every
+  probe here.  SELF-INCLUSION ALONE CONVERGES; what does not converge
+  is a corpus that GROWS, and that is S2.
+
+==========================================================================
+S1d  WHAT THIS PROBE CANNOT DO, AND WHICH ONE DOES IT
+==========================================================================
+
+  Everything above is computed from the corpus ON THIS DISK, without
+  running anything.  That is deliberate -- my ticket forbids
+  regenerating another tree's transcripts, and a probe in `run_all.sh`
+  that ran mg-03d1's suite three times would take a quarter of an hour
+  and rewrite six files it does not own.
+
+  So the two arms that need actual runs live in `x1_orbit.py`, which
+  clones this repository into a directory you name and refuses to
+  start if that directory is inside it:
+
+      X1a  mg-9160's suite iterated from c9160's own corpus state
+      X1b  the two regimes at c9160's own ref -- 1984 and 1966 out of
+           ONE corpus
+      X1c  mg-03d1's suite iterated at HEAD
+
+  Its transcript is committed as `out_x1_orbit.txt`.  IT IS NOT
+  REGENERATED BY `run_all.sh`, so it is a dated measurement and it will
+  go stale exactly the way every other figure in this arc does.  That
+  is stated here rather than discovered later, and S4 gives it a class.
+
+S1 TOTAL BAD: 0

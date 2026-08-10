@@ -1,0 +1,187 @@
+==============================================================================
+mg-fd9c / S2 -- THE AFFECTED FIGURES, AND HOW LONG EACH WAS TRUE
+==============================================================================
+HEAD: 5c8f879
+
+==========================================================================
+S2a  EVERY POPULATION-DEFINING CALL SITE IN THE ARC, CLASSIFIED
+==========================================================================
+
+  population: every `code/*/*.py` on disk except this tree's own, one row per LINE that names a population   @5c8f879
+
+      population kind     sites   what it means for a figure computed against it
+      ARC-WIDE DISK           5   moves when ANY tree lands, and includes the censor
+      ONE-TREE DISK          21   moves only with that tree; includes the censor if it is its own
+      ARC-WIDE RUNNERS        1   moves when any tree gains a runner (mg-ec63's 109/110)
+      INDEX / A REF         168   FROZEN -- but cannot see an untracked file
+      ^ one unit of each of those numbers is one line of python
+
+  THE ARC-WIDE DISK SITES IN FULL -- these are the ones this ticket is
+  about, because their population is the whole corpus and it grows:
+
+      code/grain_arity_9160/lib9160.py                        :155  return B.all_transcripts()
+      code/grain_axis_audit_03d1/a1_axes.py                   :148  paths = B.all_transcripts()
+      code/grain_axis_audit_03d1/a5_pin.py                    :212  for p in sorted(B.all_transcripts()):
+      code/grain_axis_audit_03d1/a6_self.py                   :40   paths = B.all_transcripts()
+      code/grain_axis_audit_03d1/lib03d1.py                   :86   def all_transcripts():
+
+  population: the 5 call sites above
+      ...distinct TREES holding one                            2
+      ^ one unit of that number is one `code/<tree>/` directory
+      they are: grain_arity_9160, grain_axis_audit_03d1
+
+  AND THE ONE-TREE SITES ARE NOT EXEMPT.  A tree censusing its OWN
+  transcripts is inside its own population too -- that is the same
+  observer effect at a smaller radius, and `lib70c7.outs()`'s own
+  ORDERING NOTE is the arc's existing record of it.  What makes the
+  arc-wide sites worse is only that their population never stops
+  growing.
+
+==========================================================================
+S2b  EVERY FIGURE THE TWO ARC-WIDE CONSUMERS PUBLISH, RECOMPUTED
+==========================================================================
+
+  Recomputed by the PARENTS' OWN RULES -- `lib56dc._classify`,
+  `lib03d1.grain_nouns`/`singular`, `lib56dc.count_rows` -- over the
+  corpus on this disk.  Nothing here is a re-derivation of a formula;
+  the formulas are theirs and are imported.
+
+  population: every count ROW of every `code/*/out_*.txt` on disk -- mg-03d1's own words for its own population   @5c8f879
+
+      ticket   sec   figure                                   published  HEAD now  moved by
+      mg-03d1  A1d   ARTIFACTS in that corpus                       517       832      +315
+      mg-03d1  A1d   count ROWS in them                            1191      2093      +902
+      mg-03d1  A1d   distinct grain WORDS                           400       614      +214
+      mg-03d1  A1d   ...classifying SITE                             26        32        +6
+      mg-03d1  A1d   ...classifying EXECUTION                         4         5        +1
+      mg-03d1  A1d   ...classifying BOTH                              0         0        +0
+      mg-03d1  A1d   ...classifying NONE                            370       577      +207
+      mg-03d1  A1d   unordered PAIRS of grain words               79800    188191   +108391
+      mg-03d1  A1d   PAIRS it can tell apart                      11204     21509    +10305
+      mg-03d1  A1d   PAIRS it collapses                           68596    166682    +98086
+      mg-03d1  A1d   WORDS it has an entry for                       30        37        +7
+      mg-03d1  A1d   unordered PAIRS over those                     435       666      +231
+      mg-03d1  A1d   ...it genuinely tells apart                    104       160       +56
+      mg-03d1  AF1   ROWS carrying a count INSIDE the label         246       504      +258
+      mg-03d1  AF1   integer ITEMS inside labels                    626      1283      +657
+      mg-9160  S1b   the disk at HEAD -- files                      818       832       +14
+      mg-9160  S1b   the disk at HEAD -- rows                      1984      2093      +109
+      mg-9160  S1b   the disk at HEAD -- e-rows                     458       504       +46
+      mg-9160  S1b   the disk at HEAD -- e-ints                    1198      1283       +85
+      mg-9160  S1b   the disk at HEAD -- words                      589       614       +25
+      mg-03d1  A1d   collapse rate over the corpus's words        86.0%     88.6%     +2.6%
+      mg-03d1  A1d   collapse rate on the words it can speak      76.1%     76.0%     -0.1%
+
+      population: the 22 published figures above, one row each
+      ...that have MOVED since publication                     21
+      ^ one unit of that number is one published figure
+
+      every figure but one has moved                           yes -- the exception is `classifying BOTH`, published 0 and still 0
+
+FINDING: S2b EVERY ARC-WIDE CORPUS FIGURE THIS ARC HAS PUBLISHED IS STALE.
+         The pair counts have MORE THAN DOUBLED (79800 -> 188191) because the word
+         count grew and pairs go as its square -- so the drift is not even linear
+         in the corpus.
+
+==========================================================================
+S2c  WHICH OF THEM REACHED PROSE
+==========================================================================
+
+  A figure inside a transcript can at least be re-derived by re-running
+  the probe.  A figure in prose cannot: there is no population attached
+  to it and no ref, so a reader has nothing to re-run.
+
+  population: every tracked `*.md` outside this tree -- 427 files   @5c8f879
+
+  THE MATCH RULE, at the point of the check: the figure as a WHOLE
+  number -- not preceded or followed by a digit, a dot or a dash, so
+  that a line range like `:330-370` is not a corpus figure -- on a line
+  that also says corpus / transcript / grain word / count row.  The
+  first form of this check had no boundary rule and returned one more
+  site than this one: `STATE.md:113`, whose `370` is the second half of
+  `:330-370`.  It is gone, and saying so is cheaper than defending 13.
+
+      code/grain_arity_9160/PREDICTIONS.md      :5    400    370 of the corpus's 400 grain words with no entry at all), and *th
+      code/grain_arity_9160/PREDICTIONS.md      :167  79 800 vocabulary words; 68 596 ranges over 79 800 pairs of corpus words.
+      code/grain_arity_9160/README.md           :30   400    than this one does. And at the corpus's own 400 grain nouns the ar
+      code/grain_arity_9160/README.md           :118  400    | P3 same at the corpus's 400 nouns | 0.85 | HIT — 28.9 % |
+      code/grain_arity_9160/README.md           :81   79 800 `UNADJUDICATED`. Over the corpus's 79 800 grain pairs the arc has 
+      code/grain_axis_audit_03d1/OUTCOMES.md    :22   517    | **A1d** | ≥ **60** distinct grain words in the corpus; classifie
+      code/grain_axis_audit_03d1/OUTCOMES.md    :42   517    | **AFa** | ≥ **200** count rows arc-wide carry an unclassified se
+      code/grain_axis_audit_03d1/README.md      :37   517    per printed line**. Across the arc's **517** transcripts it return
+      code/grain_axis_audit_03d1/README.md      :58   400    | **1** | confirm the resolution gap yourself; then **how many oth
+      code/grain_axis_audit_03d1/README.md      :112  400    own vocabulary; **370 of the corpus's 400 grain words with no entr
+
+      ...PROSE SITES carrying an arc-wide corpus figure          10
+      ^ one unit of that number is one line of a tracked `.md`
+
+      ...of those, carrying a REF beside the figure              0
+      ^ none of them names the commit its corpus was.  That is the
+        whole of item 4: the figure is not wrong, it is UNDATED.
+
+==========================================================================
+S2d  THE SHELF LIFE -- WHAT THE FIGURE WAS, ALL THE WAY ALONG
+==========================================================================
+
+  Every commit in THIS BRANCH'S FIRST-PARENT history that adds, changes
+  or removes a `code/*/out_*.txt`, censused at that commit through
+  `git cat-file`.  First-parent and oldest-first: `monotone` is a
+  property of a WALK (PREDICTIONS.md/E6) and this is the walk.
+
+  population: the 245 first-parent commits of `polecat-cfd9c` that touch a transcript   @5c8f879
+
+      commit     files   rows  words   note
+      d368c96        1      0      0   
+      6e9e02e       36     45     11   
+      3d44145       71     61     14   
+      a4aeeb9      120    108     44   
+      2539240      185    158     65   
+      e16e41c      224    265     77   
+      a97ad17      247    300     92   
+      673b4c0      277    327    105   
+      4372fae      309    386    141   
+      3bf0cd2      339    458    163   
+      77306a7      375    581    223   
+      dfa263c      411    714    266   
+      2d77106      430    807    296   
+      158892e      456    810    299   
+      8490669      492    916    326   
+      7209911      530   1103    367   
+      7fccb4e      564   1332    432   
+      550a7f1      625   1714    546   
+      ba67d39      662   1727    548   
+      788128f      702   1738    551   
+      aabd084      743   1771    558   
+      18a1347      791   1798    561   
+      e35b51c      812   1910    566   
+      65e350e      818   1984    589   <- mg-9160's published 818/1984
+      c689ad0      825   2015    592   
+      ^ one unit of `files` is one transcript; of `rows` one printed
+        line; of `words` one de-pluralised noun
+
+      ...steps in this walk where `files` DECREASED               1
+      ...steps in this walk where `rows` DECREASED                2
+      ^ one unit of each is one commit-to-commit step
+
+      AND THE STEPS THEMSELVES, because a `monotone` with exceptions is
+      only worth anything if the exceptions are named:
+          675c2ba -> eab14bc   files 510 -> 510, rows 1069 -> 1068
+          9ed34f0 -> b9fc6a9   files 564 -> 559, rows 1329 -> 1266
+
+  THE SHELF LIFE OF A PUBLISHED FIGURE -- how many commits of this walk
+  it was the right answer for:
+
+      mg-03d1's `517 transcripts / 1191 rows`                    0
+      mg-9160's `818 / 1984`                                     1
+      the walk                                                   245
+      ^ one unit of each of those numbers is one commit
+
+      first commit at which 517/1191 held:  -
+      first commit at which 818/1984 held:  65e350e
+
+FINDING: S2d THE ARC'S CORPUS CENSUS IS MONOTONE, NOT OSCILLATORY: 1
+         decreases in `files` and 2 in `rows` across 245 commits.  A published arc-
+         wide figure is true for a HANDFUL of commits and then it is history --
+         which is a shelf life, and a shelf life is the error bar item 4 asks for.
+
+S2 TOTAL BAD: 0
