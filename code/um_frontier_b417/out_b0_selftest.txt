@@ -1,0 +1,100 @@
+==============================================================================
+S1  THE FOUR PUBLISHED u_M FIGURES, REPRODUCED
+==============================================================================
+  mg-5cba out_a1_witness.txt / docs audit table:
+  [ok ] C1 n=9: u_M = 0.943486 reproduces mg-5cba's published figure   0.943486 vs 0.943486
+  [ok ] C2 n=9: u_M = 0.947534 reproduces mg-5cba's published figure   0.947534 vs 0.947534
+  [ok ] C3 n=10: u_M = 0.981830 reproduces mg-5cba's published figure  0.981830 vs 0.981830
+  [ok ] C4 n=11: u_M = 0.958326 reproduces mg-5cba's published figure  0.958326 vs 0.958326
+  [ok ] C5 n=12: u_M = 1.023414 -- THE CELL mg-5cba LEFT BLANK, NOW COMPUTED and it is ABOVE 1
+  [ok ] the blank cell is the only one above 1                         
+
+==============================================================================
+S2  THE IDENTITY  u_M = v_L * D,  D = (1 + sqrt(1 - 2 gamma/Delta^2))/2
+==============================================================================
+  [ok ] u_M = v_L * D at every primitive poset with Delta^2 > 2 gamma, n <= 6 3507 posets, worst |v_L*D - u_M| = 7.216e-16  (11s)
+
+==============================================================================
+S3  THE SCREEN'S DIRECTION -- BOTH WAYS (mg-789d's D1, not repeated)
+==============================================================================
+  [ok ] mu_ub >= mu_pref at every primitive poset n <= 6 (min difference >= 0) 4376 posets, min -9.992e-16, max +3.442e-05  (15s)
+  [ok ] the screen is not merely equal to the truth (it does inflate somewhere) max inflation +3.442e-05
+
+==============================================================================
+S4  PLANTED WORLDS FOR THE CERTIFIER
+==============================================================================
+  W1  C1 (n=9): (M#) HOLDS.  The FAILS certifier must REFUSE.
+  W2  C5 (n=12): (M#) FAILS.  The FAILS certifier must FIRE.
+  W3  a poset with u_M > 1 where (F) HOLDS.  Must NOT be called a counterexample to the
+      disjunction -- E3, the error that turns this ticket into a non-result.
+  W4  a NON-PRIMITIVE poset.  Must be refused before any scalar is taken from it.
+  W5  a poset with Delta^2 <= 2 gamma, where (M#) CANNOT fail whatever mu_pref is.
+
+  [ok ] W1  C1: (M#) FAILS certificate REFUSES                         
+  [ok ] W1  C1: (F) fails there all the same (it IS in the (F)-failing set) 
+  [ok ] W1  C1: does not refute the disjunction                        
+  [ok ] W2  C5: (M#) FAILS certificate FIRES                           
+  [ok ] W2  C5: refutes the disjunction                                
+  n=7 exhaustive: 86278 primitive, 4 with u_M > 1   (713s)
+  [ok ] W3  mg-c50b's count of (M#)-failing posets at n=7 reproduces   4 vs 4
+  [ok ] W3  (F) HOLDS at every one of them -- u_M > 1 is NOT a disjunction event max u_F there = 0.569823
+  [ok ] W3  (0, 0, 3, 7, 0, 19, 55): (M#) fails but the disjunction is NOT refuted u_M 1.018457 u_F 0.569823
+  [ok ] W3  (0, 1, 3, 0, 9, 27, 27): (M#) fails but the disjunction is NOT refuted u_M 1.018457 u_F 0.569823
+  [ok ] W3  (0, 1, 3, 0, 9, 27, 59): (M#) fails but the disjunction is NOT refuted u_M 1.021636 u_F 0.540079
+  [ok ] W3  (0, 1, 3, 7, 0, 19, 55): (M#) fails but the disjunction is NOT refuted u_M 1.021636 u_F 0.540079
+  [ok ] W4  a non-primitive input is refused or handled without a verdict primitive
+  [ok ] W4  an actually non-primitive poset gets verdict NOT PRIMITIVE (0, 0, 0, 0, 15)
+  [ok ] W5  Delta^2 <= 2 gamma  =>  u_M is 0 (M# cannot fail), not +inf (0, 0, 0, 0, 0)
+  [ok ] W5  and the certifier does not call it a counterexample        
+
+==============================================================================
+S5  THE CERTIFICATES ARE RE-ASSERTED, NOT INHERITED (E6)
+==============================================================================
+  lib5cba.mu_bracket only ever RAISES its low end; if no midpoint passes, the `lo`
+  it returns is the untested float-derived seed.  A certificate that inherits that is a
+  float wearing a Fraction's clothes.  Fed a seed that is deliberately TOO HIGH, the
+  routine must come back refused rather than confident.
+
+  [ok ] mu_ge(a deliberately too-high m_lo) is False -- the copositivity test refuses m_lo = 9/100
+  [ok ] gamma_ge(a deliberately too-low g_ub) is True -- so it is NOT an upper bound g_ub = 1/1000
+  [ok ] certify() with a poisoned mu hint does not produce a false certificate mu_cert_ok=False m_lo=0.089998000
+
+==============================================================================
+S6  END-TO-END: W(7) AGAINST mg-c50b's EXHAUSTIVE 0.890780
+==============================================================================
+  from the SAME n=7 sweep as W3 -- one pass, two arms (see the note there).
+  [ok ] primitive count at n=7 is mg-c50b's 86278                      86278
+  [ok ] W(7) = 0.890780 reproduces on this tree's own objective        0.890780 at (0, 0, 3, 7, 15, 3, 1)  (713s)
+  [ok ] and the argmax is mg-c50b's (0, 0, 3, 7, 15, 3, 1)             (0, 0, 3, 7, 15, 3, 1)
+
+==============================================================================
+S7  THE MOVE SET
+==============================================================================
+  [ok ] every neighbour is naturally labelled, transitively closed, and different 207 neighbours over the 5 gap witnesses, 0 bad
+  [ok ] lifts of an n=10 poset are all n=11 and all naturally labelled 48 lifts
+
+==============================================================================
+S8  A TABLE THAT CANNOT HAVE A BLANK CELL
+==============================================================================
+  THE DASH IS THE FINDING OF THIS TICKET, so it gets a control of its own.
+  mg-5cba's audit table printed four u_M values and one dash; the dash meant NOT
+  COMPUTED and read as NOT APPLICABLE; STATE.md turned it into "(M#) HOLDS at 4 of 4".
+  A BLANK BECAME A BOUND, and it stood on main until this ticket multiplied the two
+  halves printed either side of it.
+
+  `emit_table` refuses any cell rendering as '', '-', '--', '---' or an em/en dash.
+  A value that was not computed must say NOT-COMPUTED; one that is inapplicable must
+  say N/A-<reason> and the reason is not optional.
+
+  [ok ] planted blank '' is REFUSED                                    row 0 column 'u_M' would render as '' -- use
+  [ok ] planted blank ' ' is REFUSED                                   row 0 column 'u_M' would render as ' ' -- us
+  [ok ] planted blank '-' is REFUSED                                   row 0 column 'u_M' would render as '-' -- us
+  [ok ] planted blank '--' is REFUSED                                  row 0 column 'u_M' would render as '--' -- u
+  [ok ] planted blank '---' is REFUSED                                 row 0 column 'u_M' would render as '---' -- 
+  [ok ] planted blank '—' is REFUSED                                   row 0 column 'u_M' would render as '—' -- us
+  [ok ] a genuinely uncomputed cell renders LOUD, not blank            C5  | NOT-COMPUTED
+  [ok ] an inapplicable cell renders with its REASON attached          W5  | N/A-Delta2-le-2gamma
+  [ok ] a short row is REFUSED (a missing cell is a blank cell)        row 0 has 1 cells for 2 headers
+
+------------------------------------------------------------------------------
+ARMS FAILED: 0

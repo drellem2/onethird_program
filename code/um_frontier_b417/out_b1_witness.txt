@@ -1,0 +1,232 @@
+==============================================================================
+B1.1  THE u_M COLUMN, WHOLE -- five rows, five values, no dash
+==============================================================================
+b1 -- THE WITNESS.  The DISJUNCTION is FALSE, and the counterexample was already
+committed, already certified, and already published -- IN TWO HALVES NOBODY MULTIPLIED.
+
+*** PENDING INDEPENDENT RE-CERTIFICATION -- READ THIS BEFORE QUOTING ANYTHING BELOW ***
+
+  The certifier used here is `lib5cba.py`, UNMODIFIED.  That is the audited exact
+  instrument of this thread -- and it is also, now, THE AUDITED INSTRUMENT AUDITING
+  ITSELF: a programme-level negative resting on the one certifier, which has never
+  itself been audited.  pm-onethird has filed **mg-5e82**, an independent audit ranked
+  ahead of this ticket, requiring the devices REBUILT on an instrument that is not
+  lib5cba, lib789d or libc50b.
+
+  Until mg-5e82 returns, every verdict in this file is CERTIFIED-PENDING-AUDIT.  The
+  exposure is not uniform and the ranking is stated so an auditor can spend its budget:
+
+    (i)   COPOSITIVITY of R(m_lo), i.e. mu_pref >= m_lo.  THIS IS THE ONE.  The hard
+          direction; no exhibited vector can produce it; lib5cba decides singular faces
+          by exact Fourier-Motzkin where mg-789d REFUSES them, which no other
+          instrument in this arc does.
+    (ii)  PSD REFUSAL of R(g_ub), i.e. gamma < g_ub.  Weaker exposure: refusing PSD
+          needs ONE exhibited vector with c'Rc < 0.
+    (iii) the Fraction arithmetic sweep(m_lo,Delta) > 2*g_ub.  INDEPENDENTLY CONFIRMED
+          already -- arm B1.3 below re-runs it from mg-5cba's published decimals alone,
+          and pm-onethird reproduced it by hand to seven significant figures.  That
+          narrows step (iii) ONLY: it says nothing about whether the two bounds it
+          consumes are right, and both are lib5cba outputs.
+
+  And Delta, M and LE agreeing across lib5cba, lib789d and libc50b is THREE
+  IMPLEMENTATIONS OF ONE READING of the transport DP, not three independent
+  derivations.  It is reported here as corroboration and not as independence.
+
+THE FINDING IS A BLANK TABLE CELL.
+
+  mg-5cba certified FIVE (L*) counterexamples, not four.  Its audit table
+  (docs/OneThird-LStar-mg-5cba-IndependentAudit.md:58-64) has a `u_M` column:
+
+      C1 n=9   0.943486
+      C2 n=9   0.947534
+      C3 n=10  0.981830
+      C4 n=11  0.958326
+      C5 n=12  ---            <-- THE DASH
+
+  STATE.md then publishes "(M#) HOLDS at 4 of 4" with those four figures.  That
+  sentence is true of the four it names, and it names four because the fifth cell was
+  blank.  My own ticket inherits it: "u_M = 0.981830 at n=10 is the closest any (M#)
+  witness has come to failing."  It is not the closest.  It is the closest OF THE FOUR
+  THAT WERE COMPUTED.
+
+  Both inputs to the missing cell were published for that exact poset, by mg-5cba, in
+  `code/audit_5cba/out_a5_scope.txt:51-53`:
+
+      gamma in [0.061699260, 0.061699262]        mu_pref >= 0.065579592
+
+  and Delta = 195/196.  From those three published numbers,
+
+      t* = Delta - sqrt(Delta^2 - 2 gamma)  <=  0.064079274  <  0.065579592  <=  mu_pref
+
+  so (M#) FAILS, and (F) fails there too (mg-5cba: v_F = 1.077029).  The multiplication
+  is four lines of arithmetic on figures that have been on main since mg-5cba landed.
+
+WHAT THIS ARM DOES.  It does not re-derive that reasoning from prose.  It runs the
+exact certifier in the FAILS direction at all five posets and prints the u_M column
+whole, so the dash is filled by an integer certificate rather than by an argument.
+
+THE DIRECTIONS, WHICH ARE OPPOSITE FOR THE TWO CLAIMS (E5).
+
+    (M#) HOLDS  needs  mu from ABOVE and gamma from BELOW  -- mg-5cba's direction at C1-C4
+    (M#) FAILS  needs  mu from BELOW and gamma from ABOVE  -- and mu from below is the
+                       hard direction, requiring exact COPOSITIVITY, which is the trap
+                       mg-51f4 named.  No exhibited vector can do it.
+
+  Both are run at all five.  A poset should certify exactly one of them, and the arm
+  FAILS if any poset certifies both or neither -- a certifier that can say yes to a
+  question and to its negation is not one.
+
+
+  THE TABLE BELOW IS EMITTED BY `libb417.emit_table`, WHICH REFUSES A BLANK CELL.
+  A value that was not computed prints as NOT-COMPUTED, in the column, where a
+  reader scanning for a hole hits it.  That is the whole repair (b0 arm S8).
+
+     | n  | Delta   | gamma <     | mu_pref >=  | v_L >=   | u_M >=   | verdict   
+  ---+----+---------+-------------+-------------+----------+----------+-----------
+  C1 | 9  | 62/63   | 0.117293057 | 0.120233850 | 1.008801 | 0.943486 | (M#) holds
+  C2 | 9  | 311/315 | 0.118609371 | 0.121755075 | 1.013486 | 0.947534 | (M#) holds
+  C3 | 10 | 565/574 | 0.070325342 | 0.072896623 | 1.020310 | 0.981830 | (M#) holds
+  C4 | 11 | 135/136 | 0.119915748 | 0.123829049 | 1.025041 | 0.958326 | (M#) holds
+  C5 | 12 | 195/196 | 0.061699260 | 0.065579592 | 1.057468 | 1.023414 | (M#) FAILS
+
+==============================================================================
+B1.2  THE CERTIFICATE AT EACH, ON INTEGERS
+==============================================================================
+
+  C1  n=9   dn = (0, 1, 0, 4, 0, 0, 32, 96, 239)
+    LE = 1890   height = 4   primitive = True   naturally labelled = True   transitively closed = True
+    Delta = 62/63   M = 41/84
+    gamma < g_ub  = 503769843/4294967296
+                  = 0.117293056799          [R(g_ub) NOT PSD]
+    mu_pref >= m_lo = 5042973161177/41943040000000
+                    = 0.120233849554        [R(m_lo) COPOSITIVE]
+  [ok ] C1: the gamma certificate is re-asserted, not inherited from a bracket 
+  [ok ] C1: the mu certificate is re-asserted, not inherited from a bracket 
+  [ok ] C1: (F) FAILS  (gamma < M^2/2, R NOT PSD)                        
+    sweep(m_lo, Delta) = 0.222194572924      2*g_ub = 0.234586113598
+    margin sweep - 2 g_ub = -0.012391540675
+    (M#) HOLDS here (the FAILS certificate refuses, as it must)
+  [ok ] C1: exactly one of {(M#) FAILS, (M#) HOLDS} certifies            fails=False holds=True
+
+  C2  n=9   dn = (0, 0, 0, 0, 0, 16, 48, 16, 247)
+    LE = 5670   height = 4   primitive = True   naturally labelled = True   transitively closed = True
+    Delta = 311/315   M = 373/756
+    gamma < g_ub  = 1018846739/8589934592
+                  = 0.118609371013          [R(g_ub) NOT PSD]
+    mu_pref >= m_lo = 1021355595047/8388608000000
+                    = 0.121755074864        [R(m_lo) COPOSITIVE]
+  [ok ] C2: the gamma certificate is re-asserted, not inherited from a bracket 
+  [ok ] C2: the mu certificate is re-asserted, not inherited from a bracket 
+  [ok ] C2: (F) FAILS  (gamma < M^2/2, R NOT PSD)                        
+    sweep(m_lo, Delta) = 0.225593659096      2*g_ub = 0.237218742026
+    margin sweep - 2 g_ub = -0.011625082930
+    (M#) HOLDS here (the FAILS certificate refuses, as it must)
+  [ok ] C2: exactly one of {(M#) FAILS, (M#) HOLDS} certifies            fails=False holds=True
+
+  C3  n=10   dn = (0, 1, 3, 0, 9, 0, 32, 96, 255, 239)
+    LE = 1148   height = 4   primitive = True   naturally labelled = True   transitively closed = True
+    Delta = 565/574   M = 557/1435
+    gamma < g_ub  = 151022521/2147483648
+                  = 0.070325341541          [R(g_ub) NOT PSD]
+    mu_pref >= m_lo = 3057505978189/41943040000000
+                    = 0.072896623091        [R(m_lo) COPOSITIVE]
+  [ok ] C3: the gamma certificate is re-asserted, not inherited from a bracket 
+  [ok ] C3: the mu certificate is re-asserted, not inherited from a bracket 
+  [ok ] C3: (F) FAILS  (gamma < M^2/2, R NOT PSD)                        
+    sweep(m_lo, Delta) = 0.138193371703      2*g_ub = 0.140650683083
+    margin sweep - 2 g_ub = -0.002457311380
+    (M#) HOLDS here (the FAILS certificate refuses, as it must)
+  [ok ] C3: exactly one of {(M#) FAILS, (M#) HOLDS} certifies            fails=False holds=True
+
+  C4  n=11   dn = (0, 1, 3, 7, 0, 1, 1, 113, 1, 257, 257)
+    LE = 57120   height = 4   primitive = True   naturally labelled = True   transitively closed = True
+    Delta = 135/136   M = 7141/14280
+    gamma < g_ub  = 64379277/536870912
+                  = 0.119915748015          [R(g_ub) NOT PSD]
+    mu_pref >= m_lo = 1038753354243/8388608000000
+                    = 0.123829049378        [R(m_lo) COPOSITIVE]
+  [ok ] C4: the gamma certificate is re-asserted, not inherited from a bracket 
+  [ok ] C4: the mu certificate is re-asserted, not inherited from a bracket 
+  [ok ] C4: (F) FAILS  (gamma < M^2/2, R NOT PSD)                        
+    sweep(m_lo, Delta) = 0.230503449854      2*g_ub = 0.239831496030
+    margin sweep - 2 g_ub = -0.009328046176
+    (M#) HOLDS here (the FAILS certificate refuses, as it must)
+  [ok ] C4: exactly one of {(M#) FAILS, (M#) HOLDS} certifies            fails=False holds=True
+
+  C5  n=12   dn = (0, 0, 3, 7, 15, 7, 63, 2, 135, 391, 7, 1159)
+    LE = 10584   height = 5   primitive = True   naturally labelled = True   transitively closed = True
+    Delta = 195/196   M = 7717/21168
+    gamma < g_ub  = 529992611/8589934592
+                  = 0.061699260375          [R(g_ub) NOT PSD]
+    mu_pref >= m_lo = 550121491741/8388608000000
+                    = 0.065579592197        [R(m_lo) COPOSITIVE]
+  [ok ] C5: the gamma certificate is re-asserted, not inherited from a bracket 
+  [ok ] C5: the mu certificate is re-asserted, not inherited from a bracket 
+  [ok ] C5: (F) FAILS  (gamma < M^2/2, R NOT PSD)                        
+    sweep(m_lo, Delta) = 0.126189321969      2*g_ub = 0.123398520751
+    margin sweep - 2 g_ub = +0.002790801218
+    *** (M#) FAILS -- CERTIFIED ON INTEGERS ***
+        c# >= 1.022616164    f* >= 1.077028990
+        u_M >= 1.023413503   u_F >= 1.037800072
+  [ok ] C5: exactly one of {(M#) FAILS, (M#) HOLDS} certifies            fails=True holds=False
+    *** THIS POSET REFUTES THE DISJUNCTION: (F) FAILS AND (M#) FAILS ***
+
+==============================================================================
+B1.3  THE ARITHMETIC, DONE FROM mg-5cba's PUBLISHED FIGURES ALONE
+==============================================================================
+  This block uses NOTHING from this tree's own computation.  It takes the three
+  numbers mg-5cba printed for C5 in out_a5_scope.txt and multiplies them.  If this
+  block and B1.2 disagree, one of them is wrong and the disagreement is the finding.
+
+    Delta = 195/196 = 0.994897959184
+    gamma <= 0.061699262   (mg-5cba out_a5_scope.txt:51)
+    mu    >= 0.065579592   (mg-5cba out_a5_scope.txt:51)
+    t* = Delta - sqrt(Delta^2 - 2 gamma) <= 0.064079274
+  [ok ] mu_pref > t*  from mg-5cba's own two published bounds            0.065579592 > 0.064079274
+    => u_M >= 1.023413472
+  [ok ] exact: sweep(mu_lo,Delta) > 2 gamma_ub on the PUBLISHED rationals +0.002790797603
+  [ok ] this block and B1.2 agree that (M#) FAILS at C5                  
+
+==============================================================================
+B1.4  THE NEGATIVE CONTROL -- the n=8 argmax, where (L*) HOLDS
+==============================================================================
+  mg-5cba certified (L*) HOLDS at the n = 8 search argmax (0.968818 < 1).  If the
+  FAILS certifier fires there, it fires on anything.  n = 8 IS NOT ENUMERATED: this is
+  ONE poset, named by mg-5cba, run as a control.
+
+    dn = (0, 0, 2, 0, 8, 24, 63, 62)   Delta = 62/65   M = 733/2080
+    gamma < 0.049599863356   mu_pref >= 0.050378411124
+    v_L >= 0.968818    u_M >= 0.941648
+  [ok ] n=8 argmax: (F) FAILS there (it is in the (F)-failing set)       
+  [ok ] n=8 argmax: (M#) does NOT fail -- the certifier REFUSES          
+  [ok ] n=8 argmax: (M#) HOLDS, certified in its own direction           
+  [ok ] n=8 argmax: does NOT refute the disjunction                      
+
+==============================================================================
+B1.5  THE VERDICT
+==============================================================================
+  posets in the (L*)-gap population that REFUTE THE DISJUNCTION: 1 of 5
+      C5 at n = 12
+
+  *** THE DISJUNCTION IS FALSE. ***
+  max_P min(c#, f*) >= 1.022616164 at n = 12, certified on integers.
+
+  WHAT THIS KILLS: the uniform-in-n disjunction (F) or (M#), hence the route
+  to C_3 = 1 that ran through it.  (L*) was SUFFICIENT for that disjunction;
+  the disjunction was said to survive (L*)'s refutation.  It does not -- the
+  SAME FIVE POSETS kill both, and the fifth was never asked.
+
+  WHAT THIS DOES NOT KILL: C_3 = 1.  A dead route is a dead route.
+
+  WHAT IS UNTOUCHED: the n <= 8 enumerations.  Both routes fail at 0 of
+  2600369 at n = 8 and c_or(8) = 0.943649 (mg-c50b, exhaustive).  What died
+  is uniformity in n, not the small-n record.
+
+  WHAT THIS FILE DOES NOT SETTLE: n = 9, 10, 11.  The four certified (L*)
+  witnesses there all have u_M < 1, so the (L*)-gap population alone puts the
+  smallest EXHIBITED n at 12.  Whether the disjunction already fails BELOW 12
+  is a search question, it is asked in b2, decided on integers in b4, and this
+  file must not be read as an answer to it in either direction.
+
+------------------------------------------------------------------------------
+ARMS FAILED: 0
