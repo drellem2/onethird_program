@@ -1,14 +1,14 @@
 ==============================================================================
 selftest -- mg-f8e5's own arms, all forced
 ==============================================================================
-    code-digest: 8a0e0d1a12ee6419   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    code-digest: a980a32f0862295f   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
     NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
     reads-outside-tree: yes
     ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
       -- refs, history, the file list of `main` -- so it is a fact about the object store as it
       stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
       is the only honest thing an instrument in this class can do.
-    as-of: e35b51c78ab2
+    as-of: bc965aaae820
 
 ------------------------------------------------------------------------------
 S1 -- THE CENSUS'S DEFINITIONS ARE IMPORTED, NOT PARAPHRASED
@@ -36,7 +36,7 @@ S2 -- PRODUCER RECOVERY, EACH TIER FORCED ON A REAL DIRECTORY
 S3 -- THE MOVING-REF DETECTOR, BOTH ANSWERS ON ONE DIRECTORY
 ------------------------------------------------------------------------------
 [OK       ] S3 at ae4c962 (before mg-1abe's own fix) the detector says SHAPE, with 8 of 8 driven scripts resolving a moving ref
-[OK       ] S3' at e35b51c (after it) the SAME detector says PASSES-DOWN.  Two answers, one directory, one detector
+[OK       ] S3' at bc965aa (after it) the SAME detector says PASSES-DOWN.  Two answers, one directory, one detector
 [OK       ] S3'' and the shape is reached THROUGH A LOCAL HELPER (arg, carrying_commit, main_rev, provenance_block): mg-1abe's scripts do not name `main` at all.  A detector reading only the driven scripts scores this directory ONE-SCRIPT, which is what mine did before this arm
 [OK       ] S3''' NEGATIVE: a one-script suite is not the shape -- one process, one tree, no seam between two measurements (ONE-SCRIPT)
 

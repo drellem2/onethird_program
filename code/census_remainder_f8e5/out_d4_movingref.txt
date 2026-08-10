@@ -1,22 +1,22 @@
 ==============================================================================
 d4 -- THE MOVING-REF SHAPE: A RUN WHOSE STEPS EACH RESOLVE A MOVING REF
 ==============================================================================
-    code-digest: 8a0e0d1a12ee6419   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    code-digest: a980a32f0862295f   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
     NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
     reads-outside-tree: yes
     ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
       -- refs, history, the file list of `main` -- so it is a fact about the object store as it
       stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
       is the only honest thing an instrument in this class can do.
-    as-of: e35b51c78ab2
+    as-of: bc965aaae820
 
 ------------------------------------------------------------------------------
 D4a -- DID THE FIX LAND?  ANCESTRY, NOT THE FILE IN FRONT OF ME
 ------------------------------------------------------------------------------
     a7d7fb9 resolves                        : a7d7fb95fb50
-    ...and is an ancestor of e35b51c   : True
-[OK       ] D4a the single-resolve fix (a7d7fb9) is an ancestor of e35b51c.  Checked by ancestry because the file being present in the worktree I am standing in is a fact about my branch (E7)
-    `run_all.sh` at e35b51c resolves once and passes `$AT` down : True
+    ...and is an ancestor of bc965aa   : True
+[OK       ] D4a the single-resolve fix (a7d7fb9) is an ancestor of bc965aa.  Checked by ancestry because the file being present in the worktree I am standing in is a fact about my branch (E7)
+    `run_all.sh` at bc965aa resolves once and passes `$AT` down : True
     ...and records the incident in its own header          : True
 [OK       ] D4a' and the fix is BOTH halves: the revision is resolved once and handed to every script, AND the incident that motivated it is in the runner's own header, where the next person to 'simplify' it will read it
 
@@ -33,22 +33,22 @@ straddle the defect.
         t1_population.py:25 (via a local helper)
         t2_census.py:91 (names it)
         t3_shas.py:53 (via a local helper)
-    at e35b51c                   -> PASSES-DOWN     8 script(s) driven, 8 naming a moving ref
+    at bc965aa                   -> PASSES-DOWN     8 script(s) driven, 8 naming a moving ref
         selftest_1abe.py:91 (via a local helper)
         t1_population.py:25 (via a local helper)
         t2_census.py:91 (names it)
         t3_shas.py:53 (via a local helper)
 [OK       ] D4b the detector FINDS the shape in mg-1abe's own suite at the commit before its fix -- where mg-1abe says it was
-[OK       ] D4b' and does NOT find it at e35b51c, after the fix.  Both answers on the same directory
+[OK       ] D4b' and does NOT find it at bc965aa, after the fix.  Both answers on the same directory
 
 ------------------------------------------------------------------------------
 D4c -- THE SWEEP, OVER EVERY SUITE INCLUDING THIS ONE
 ------------------------------------------------------------------------------
-    population: every `code/<dir>` at e35b51c holding a tracked `.py` or `.sh`: 171
+    population: every `code/<dir>` at bc965aa holding a tracked `.py` or `.sh`: 174
 
     SHAPE            11
     PASSES-DOWN      1
-    ONE-SCRIPT       84
+    ONE-SCRIPT       87
     NO-MOVING-REF    51
     NO-RUNNER        24
 
@@ -68,9 +68,9 @@ D4c -- THE SWEEP, OVER EVERY SUITE INCLUDING THIS ONE
     REJECTED NEAR-MISSES, so the detector's population is what its name says:
       PASSES-DOWN      1   the runner resolves once and hands the sha down -- this is THE FIX, not the defect
                      transcript_census_1abe
-      ONE-SCRIPT      84   fewer than two scripts resolve a moving ref -- one process, one tree, no seam
+      ONE-SCRIPT      87   fewer than two scripts resolve a moving ref -- one process, one tree, no seam
                      audit_2c77, audit_c067, branching_audit_19ec, branching_audit_a218, branching_bound_audit_aaf4, branching_bound_d075 ...
-[FINDING  ] D4c THE SHAPE IS PRESENT IN 11 OF 171 SUITES AT e35b51c.  mg-1abe found it in its own instrument and repaired it there; it is a property of how this arc writes runners, not of that suite
+[FINDING  ] D4c THE SHAPE IS PRESENT IN 11 OF 174 SUITES AT bc965aa.  mg-1abe found it in its own instrument and repaired it there; it is a property of how this arc writes runners, not of that suite
 
 ------------------------------------------------------------------------------
 D4d -- HAS IT FIRED?  THE SHAPE IS NOT THE DAMAGE
@@ -114,9 +114,9 @@ looked at `main` would report NO-RUNNER and pass, which is mg-1abe's defect 6
 (a check that cannot see the end of its own output) wearing a different hat.
 So this one row is a fact about the branch, and it says so.
 
-    code/census_remainder_f8e5 at HEAD 8ddc511 -> NO-MOVING-REF   (6 scripts driven, 0 resolving a moving ref)
-[FINDING  ] D4e this suite does NOT carry the shape it hunts and is not merely absent from the population: its `run_all.sh` resolves the revision ONCE and passes `--at` to every script, which is the same fix and the same row mg-1abe's suite scores (E8)
+    code/census_remainder_f8e5 at HEAD 5b7a117 -> PASSES-DOWN   (6 scripts driven, 6 resolving a moving ref)
+[OK       ] D4e this suite does NOT carry the shape it hunts and is not merely absent from the population: its `run_all.sh` resolves the revision ONCE and passes `--at` to every script, which is the same fix and the same row mg-1abe's suite scores (E8)
 
 SELF-ERRORS 0
-FINDINGS 3
-TOTAL BAD: 3
+FINDINGS 2
+TOTAL BAD: 2
