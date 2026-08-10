@@ -1,0 +1,128 @@
+x2  THE INDEX — quantity -> every name and every tree that computes it
+
+  corpus swept: 967 .py, 897 transcripts, 433 .md   (this instrument's own 12 files excluded)
+  MEASURED rows: 12 (from x3's value clustering)   DECLARED rows: 8
+
+==============================================================================
+MEASURED ROWS — established by value, named afterwards
+==============================================================================
+
+  leak(A_1)                13 names in 11 trees   spread 0.000e+00
+        anticorrelation_c50b       leak(1)                 own-tree py   9 txt   3 md   3   name also defined in 4 other tree(s)
+        audit_5cba                 LK[1]/LE                own-tree py  10 txt   0 md   0   name also defined in 2 other tree(s)
+        c3_audit_a94c3             delta1(A_1)             own-tree py   1 txt   0 md   0   name also defined in 2 other tree(s)
+        c3_audit_a94c3             leak(A_1)               own-tree py  17 txt   0 md   0   name also defined in 4 other tree(s)
+        c3_prefix_capture_76b2     leak(A_1)               own-tree py  23 txt   4 md   1   name also defined in 4 other tree(s)
+        direct_prefix_audit_2de0   E_leak(A_1)             own-tree py  16 txt   7 md   1   name also defined in 1 other tree(s)
+        direct_prefix_audit_2de0   delta_1_prefix(1)       own-tree py  14 txt   1 md   0   name also defined in 1 other tree(s)
+        eleak_repair_8311          E_leak(A_1,def)         own-tree py  29 txt  16 md   9   name also defined in 1 other tree(s)
+        l2_audit_29fe              leak[1]                 own-tree py  21 txt   8 md   3   name also defined in 5 other tree(s)
+        l2_conditionality_28ff     leak(A_1)               own-tree py  31 txt  11 md   4   name also defined in 4 other tree(s)
+        l2_underclaim_audit_3bb9   leak[0]                 own-tree py   4 txt   0 md   0   name also defined in 5 other tree(s)
+        lstar_789d                 LK[1]/LE                own-tree py  10 txt   0 md   0   name also defined in 2 other tree(s)
+        sweep_loss_51f4            leak_pref(1)            own-tree py   9 txt   0 md   0   name also defined in 0 other tree(s)
+
+  gamma                    9 names in 9 trees   spread 4.666e-10
+        anticorrelation_c50b       gamma_float             own-tree py  15 txt   0 md   0   name also defined in 2 other tree(s)
+        audit_5cba                 gamma_float             own-tree py  23 txt   0 md   0   name also defined in 2 other tree(s)
+        c3_audit_a94c3             spectral_gap            own-tree py   9 txt   0 md   0   name also defined in 0 other tree(s)
+        chain_iv_c_81ff            lambda2_bracket         own-tree py  10 txt   1 md   0   name also defined in 1 other tree(s)
+        l2_audit_29fe              bracket_gap             own-tree py  13 txt   0 md   0   name also defined in 0 other tree(s)
+        l2_conditionality_28ff     gap_exact_bounds        own-tree py   4 txt   0 md   0   name also defined in 0 other tree(s)
+        l2_underclaim_audit_3bb9   gap_float               own-tree py   3 txt   0 md   0   name also defined in 1 other tree(s)
+        lstar_789d                 gamma_float             own-tree py  33 txt   0 md   0   name also defined in 2 other tree(s)
+        sweep_loss_51f4            gap_float               own-tree py   3 txt   0 md   0   name also defined in 1 other tree(s)
+
+  Delta_P                  7 names in 7 trees   spread 0.000e+00
+        anticorrelation_c50b       Delta                   own-tree py  56 txt  23 md   0   name also defined in 3 other tree(s)
+        audit_5cba                 Delta                   own-tree py  95 txt 112 md   0   name also defined in 3 other tree(s)
+        l2_audit_29fe              Delta                   own-tree py  16 txt   2 md   0   name also defined in 4 other tree(s)
+        l2_conditionality_28ff     delta_max               own-tree py   5 txt   0 md   0   name also defined in 1 other tree(s)
+        l2_underclaim_audit_3bb9   Delta                   own-tree py   5 txt   0 md   0   name also defined in 4 other tree(s)
+        lstar_789d                 Delta                   own-tree py  65 txt  97 md   0   name also defined in 3 other tree(s)
+        sweep_loss_51f4            delta_max               own-tree py   4 txt   0 md   0   name also defined in 1 other tree(s)
+
+  Phi*_pref                7 names in 7 trees   spread 0.000e+00
+        anticorrelation_c50b       Phi_star                own-tree py  11 txt   0 md   0   name also defined in 1 other tree(s)
+        c3_prefix_capture_76b2     phi_star_prefix         own-tree py   4 txt   0 md   0   name also defined in 1 other tree(s)
+        eleak_repair_8311          prefix_min              own-tree py   8 txt   0 md   0   name also defined in 0 other tree(s)
+        l2_audit_29fe              Phi_star_pref           own-tree py   6 txt   0 md   0   name also defined in 0 other tree(s)
+        l2_conditionality_28ff     phi_star_prefix         own-tree py   9 txt   0 md   0   name also defined in 1 other tree(s)
+        lstar_789d                 Phi_star                own-tree py   2 txt   0 md   0   name also defined in 1 other tree(s)
+        sweep_loss_51f4            phi_star_pref           own-tree py   4 txt   0 md   0   name also defined in 0 other tree(s)
+
+  mu_pref                  7 names in 7 trees   spread 9.097e-13
+        anticorrelation_c50b       mu_exhaustive           own-tree py  17 txt   0 md   0   name also defined in 0 other tree(s)
+        audit_5cba                 mu_pref_float           own-tree py  24 txt   0 md   0   name also defined in 2 other tree(s)
+        l2_audit_29fe              bracket_mu_pref         own-tree py   5 txt   0 md   0   name also defined in 0 other tree(s)
+        l2_conditionality_28ff     cone_min                own-tree py  13 txt   1 md   0   name also defined in 1 other tree(s)
+        l2_underclaim_audit_3bb9   mu_pref_float           own-tree py   3 txt   0 md   0   name also defined in 2 other tree(s)
+        lstar_789d                 mu_faces                own-tree py  12 txt   0 md   0   name also defined in 0 other tree(s)
+        sweep_loss_51f4            cone_min                own-tree py   6 txt   0 md   0   name also defined in 1 other tree(s)
+
+  rho*Delta_P              6 names in 6 trees   spread 7.310e-12
+        anticorrelation_c50b       rho*Delta               own-tree py   8 txt   8 md   0   name also defined in 0 other tree(s)
+        audit_5cba                 v_L                     own-tree py  22 txt  38 md   0   name also defined in 0 other tree(s)
+        l2_audit_29fe              V10                     own-tree py  13 txt   4 md   0   name also defined in 0 other tree(s)
+        l2_conditionality_28ff     V10                     own-tree py   0 txt   0 md   0   name also defined in 0 other tree(s)
+        l2_underclaim_audit_3bb9   V10                     own-tree py  12 txt   5 md   2   name also defined in 0 other tree(s)
+        lstar_789d                 rho*Delta               own-tree py  10 txt  11 md   0   name also defined in 0 other tree(s)
+
+  Phi*_all                 6 names in 5 trees   spread 0.000e+00
+        c3_prefix_capture_76b2     phi_star                own-tree py  10 txt   2 md   1   name also defined in 4 other tree(s)
+        direct_prefix_audit_2de0   phi_star                own-tree py   8 txt   0 md   0   name also defined in 4 other tree(s)
+        eleak_repair_8311          phi_star(def)           own-tree py  20 txt  12 md   4   name also defined in 4 other tree(s)
+        eleak_repair_8311          phi_star(inv)           own-tree py  20 txt  12 md   4   name also defined in 4 other tree(s)
+        l2_audit_29fe              Phi_star_all            own-tree py   1 txt   0 md   0   name also defined in 0 other tree(s)
+        l2_conditionality_28ff     phi_star                own-tree py   2 txt   0 md   0   name also defined in 4 other tree(s)
+
+  E_footrule               4 names in 4 trees   spread 0.000e+00
+        direct_prefix_audit_2de0   E_footrule              own-tree py  15 txt   0 md   0   name also defined in 2 other tree(s)
+        l2_audit_29fe              EDF                     own-tree py   8 txt   0 md   0   name also defined in 0 other tree(s)
+        l2_conditionality_28ff     E_footrule              own-tree py   7 txt   0 md   0   name also defined in 2 other tree(s)
+        sweep_loss_51f4            E_footrule              own-tree py   5 txt   0 md   0   name also defined in 2 other tree(s)
+
+  M                        4 names in 4 trees   spread 0.000e+00
+        anticorrelation_c50b       M                       own-tree py  95 txt  53 md  16   name also defined in 33 other tree(s)
+        audit_5cba                 M                       own-tree py  57 txt  60 md   0   name also defined in 33 other tree(s)
+        lstar_789d                 M                       own-tree py  50 txt  21 md   0   name also defined in 33 other tree(s)
+        sweep_loss_51f4            M_mean                  own-tree py   8 txt   0 md   0   name also defined in 0 other tree(s)
+
+  rho                      3 names in 3 trees   spread 4.441e-15
+        anticorrelation_c50b       rho                     own-tree py  41 txt  26 md   0   name also defined in 9 other tree(s)
+        l2_underclaim_audit_3bb9   V00                     own-tree py  24 txt  12 md   5   name also defined in 1 other tree(s)
+        lstar_789d                 rho_float               own-tree py   1 txt   0 md   0   name also defined in 0 other tree(s)
+
+  1 - rho(A_1)             3 names in 3 trees   spread 0.000e+00
+        c3_audit_a94c3             one_minus_rho(1)        own-tree py   1 txt   0 md   0   name also defined in 0 other tree(s)
+        c3_prefix_capture_76b2     rho_prefix(1)           own-tree py  10 txt   0 md   0   name also defined in 0 other tree(s)
+        chain_iv_c_81ff            prefix_Q(1)             own-tree py   4 txt   0 md   0   name also defined in 0 other tree(s)
+
+  mu_pref (upper bound)    2 names in 2 trees   spread 1.108e-07
+        anticorrelation_c50b       mu_upper                own-tree py   9 txt   0 md   0   name also defined in 0 other tree(s)
+        lstar_789d                 mu_ub_float             own-tree py  14 txt   0 md   0   name also defined in 0 other tree(s)
+
+==============================================================================
+DECLARED ROWS — leads, not findings
+==============================================================================
+
+  LSTAR(n)               4 name-forms, 132 sites, 10 trees
+
+  c_or(n)                1 name-forms, 100 sites, 6 trees
+
+  c#                     2 name-forms, 19 sites, 2 trees
+
+  u_M                    1 name-forms, 52 sites, 6 trees
+
+  f*                     2 name-forms, 6 sites, 2 trees
+
+  eps_spec               1 name-forms, 635 sites, 29 trees
+
+  delta(P)               9 name-forms, 59 sites, 6 trees
+
+  lambda_2               3 name-forms, 441 sites, 19 trees
+
+==============================================================================
+x2 RESULT
+==============================================================================
+  wrote INDEX.md — 12 MEASURED rows, 8 DECLARED rows   (11.6s)
