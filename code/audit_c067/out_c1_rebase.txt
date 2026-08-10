@@ -1,3 +1,62 @@
+# =============================================================================
+# A TRUE RECORD WHOSE OWN PRODUCER CAN NO LONGER SEE IT.  DO NOT RE-RUN THIS.
+# =============================================================================
+#
+# THE RECORD BELOW IS CORRECT.  `C1a` asserts that mg-132a's 5 commits were
+# REPLAYED onto a larger tree by the refinery's rebase.  They were.  Re-run
+# `c1_rebase.py` today, at this transcript's own carrying commit or anywhere
+# else, and it says **0** -- and the 0 is the instrument going blind, not the
+# record going false.  A RE-RUN WRITES 0 OVER A 5 THAT IS TRUE.
+#
+# WHY THE PRODUCER CANNOT SEE IT.  `c1_rebase.py:48` pairs each pre-rebase
+# commit with its replayed twin BY SUBJECT, and looks for that subject in
+#
+#     git log --format=%H%x1f%s main -n 40
+#
+# The ref moves and the literal does not.  This transcript's carrying commit is
+# `47e56b3`, and `main` is now 238 commits past it, so every twin the record
+# names fell out of the back of that 40-commit window long ago.  The docstring
+# three lines above guards the REF by name -- "any single ref name here is a
+# hard-coded anchor of exactly the kind this audit exists to complain about" --
+# and leaves the WINDOW hard-coded underneath it.  The audit's own complaint,
+# committed against itself, in the one dimension it did not look at.
+#
+# NOTHING DIED, AND THAT IS MEASURED RATHER THAN ASSERTED (as of 2026-08-10,
+# `main` = `cdec2e8`):
+#
+#   * all 6 off-`main` commits this transcript names -- mg-132a's five
+#     (`d24bbeb 7dc9180 89d6aa1 4a06b4c 2cfd226`) and its own audited-as-of
+#     `de39eb6` -- are STILL TWINNED on `main` by subject, 6 of 6, when the
+#     search is not bounded by a literal.  First measured by mg-f8e5
+#     (`out_d1_five.txt`, D1d'), re-derived here.
+#   * every one of those objects still resolves in this store, and
+#     `origin/polecat-132a` still points at the pre-rebase five.
+#   * all 5 replayed twins (`1e30484 a91cf9e cb9f282 aa8309d 53f6ca3`) are on
+#     `main` and all 5 are OUTSIDE `main -n 40`.  That pair of facts is the
+#     whole mechanism: present, and unreachable by the walk that looks for them.
+#
+# SO THE REMEDY IS ANNOTATION, NOT REGENERATION.  Two counts are not in
+# conflict here; one instrument answers a narrower question than it did when it
+# ran, and the record is the older, wider answer.
+#
+# NOT DONE HERE, AND NAMED RATHER THAN LEFT IMPLICIT: `c1_rebase.py`'s window
+# IS NOT REPAIRED by mg-a71f.  Removing the `-n 40` would make the producer see
+# the 5 again, and it would also rewrite this transcript -- which is the thing
+# this note exists to prevent.  Repairing the producer and preserving the record
+# are separate acts and only the second is authorised here.
+#
+# THE FIGURE `238` ABOVE MOVES, and saying so is the same discipline this
+# transcript was audited under.  It is a fact about `cdec2e8` and it only grows.
+# `a2_c067_annotation.py` in `code/census_timeout_a71f/` RE-DERIVES every claim
+# in this note on every run -- the twinning unbounded, the emptiness of the
+# window, the object resolution -- and checks that the bytes below this line are
+# byte-identical to the blob at `47e56b3`, rather than promising that they are.
+#
+# Added by mg-a71f on pm-onethird's ruling, following the format mg-56dc used
+# at `code/runner_exit_c2b3/out_k1_census.txt`.  Nothing below this line has
+# been altered.
+#
+# ---- end of mg-a71f note; the transcript as committed follows ----
 ==============================================================================
 mg-c067 -- INDEPENDENT AUDIT of the mg-132a publication-anchor repair
 ==============================================================================

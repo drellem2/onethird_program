@@ -1,0 +1,53 @@
+#!/bin/sh
+# run_all.sh -- mg-a71f: THE CENSUS'S UNREACHABLE `TIMED-OUT` BUCKET, REPAIRED
+# AND RE-RUN; AND `audit_c067/out_c1_rebase.txt` ANNOTATED RATHER THAN RE-RUN.
+#
+#     sh run_all.sh                 # everything, as of `main`
+#
+# Pure Python 3 + git.  No third-party packages, no network.
+#
+# ⚠️ COST.  `a3` runs the census's own `t2_census.py` against ONE directory at a
+# forced 5-second budget, in a throwaway worktree: about a minute.  `a4` only
+# reads two committed transcripts.  NOTHING HERE RE-RUNS THE CENSUS -- the
+# ~2-hour re-run is `code/transcript_census_1abe/run_all.sh --at 81214a9...`
+# and its transcripts are committed in that directory, beside the prior run's,
+# which are preserved verbatim in this one.
+#
+# ⚠️ `a2` NEVER EXECUTES `code/audit_c067/c1_rebase.py` AND NEVER WRITES INTO
+# THAT DIRECTORY.  It derives the answer that producer WOULD give by reading
+# `main`'s log the way its line 48 reads it.  Executing it is how a 0 gets
+# written over a 5, which is the load-bearing instruction of this ticket.
+#
+# EXIT-CODE CONVENTION, taken from `code/transcript_census_1abe/run_all.sh` so
+# the ruler is somebody else's: every script exits 0 iff SELF-ERRORS == 0 AND
+# FINDINGS == 0.  A non-zero exit means THAT SCRIPT HAS SOMETHING TO REPORT,
+# never that it is broken, and the two counts are printed separately.
+#
+# EXPECTED non-zero:
+#   a1  the bucket was unreachable, and saying so is a FINDING
+#   a2  the c067 producer is blind and only one ref holds its objects
+#   a4  prior DIFFERS rows that this run declines to measure
+# EXPECTED zero:
+#   a0  the parsers agree with their planted worlds
+#   a3  the repaired bucket fires end to end
+#
+# NO `set -e`: those exits are RESULTS.
+#
+# NO PIPE (mg-c2b3): each script REDIRECTS and `$?` is read on the next line.
+# A pipeline's status in POSIX sh is the last command's, which is how a
+# transcript recording a refutation once came to be committed beside an exit 0.
+
+cd "$(dirname "$0")" || exit 2
+
+WORST=0
+for s in a0_selftest a1_bucket a2_c067_annotation a3_endtoend a4_size107; do
+    printf '===> %s\n' "$s"
+    python3 -W ignore "$s.py" "$@" > "out_$s.txt" 2>&1
+    RC=$?
+    printf '     exit %d   %s\n' "$RC" \
+        "$(grep '^TOTAL BAD:' "out_$s.txt" 2>/dev/null | tail -1)"
+    [ "$RC" -gt "$WORST" ] && WORST=$RC
+done
+
+printf 'worst exit: %d\n' "$WORST"
+exit "$WORST"
