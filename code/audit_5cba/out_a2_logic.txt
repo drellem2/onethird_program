@@ -1,0 +1,45 @@
+==============================================================================
+a2  THE LOGIC LAYER -- (L*) => disjunction, and (L*) strictly stronger
+==============================================================================
+
+------------------------------------------------------------------------------
+2.1  CONTROL ON CLAIM 1 -- exact, over the whole primitive population n <= 6
+     Looking for a poset with  mu_pref*Delta <= gamma  AND  (M#) FAILING.
+     The certificates are taken in the directions that make a HIT real:
+       mu*Delta <= gamma  from the mu UPPER bracket and the gamma LOWER bracket
+       (M#) fails         from sweep(mu LOWER) > 2*(gamma UPPER)
+------------------------------------------------------------------------------
+     n=3: 4 primitive posets checked
+     n=4: 27 primitive posets checked
+     n=5: 275 primitive posets checked
+     n=6: 4070 primitive posets checked
+  [ok ] no poset has (L*)'s conclusion AND (M#) failing  (CLAIM 1 survives) 0 hits over 4376 primitive posets
+
+------------------------------------------------------------------------------
+2.2  THE SAME CONTROL AT n = 7, on the (F)-FAILING SET -- the set that matters
+------------------------------------------------------------------------------
+     (F)-failing primitive posets at n = 7 : 168
+  [ok ] the (F)-failing count at n=7 re-derives at 168 (mg-51f4 / mg-c50b / mg-789d) 168
+  [ok ] CLAIM 1 survives on all 168 (F)-failing n=7 posets             0 hits
+  [ok ] BOTH ROUTES FAIL at 0 of the 168 -- the disjunction holds at n=7 0 both-failing
+
+------------------------------------------------------------------------------
+2.3  CLAIM 2 -- (L*) is STRICTLY stronger than (M#), exhibited
+     A poset with mu_pref*Delta > gamma but (M#) HOLDING is a poset in the gap.
+------------------------------------------------------------------------------
+     chain(9)+point          mu*Delta > gamma: True    (M#) holds: True 
+     counterexample C1       mu*Delta > gamma: True    (M#) holds: True 
+     counterexample C2       mu*Delta > gamma: True    (M#) holds: True 
+     counterexample C3       mu*Delta > gamma: True    (M#) holds: True 
+     counterexample C4       mu*Delta > gamma: True    (M#) holds: True 
+  [ok ] at least one poset lies strictly between the two conditions    5 of 5
+  [ok ] ALL FOUR certified counterexamples lie in the gap, so the DISJUNCTION SURVIVES 5 in the gap
+
+------------------------------------------------------------------------------
+2.4  THE GAP IS mu_pref^2 -- checked as an algebraic identity, not a fit
+------------------------------------------------------------------------------
+  [ok ] 2*Delta*mu - sweep(mu) == mu^2 exactly, at every exhibit       
+
+==============================================================================
+a2 RESULT: ALL ARMS PASS   (0 failing arms)
+==============================================================================

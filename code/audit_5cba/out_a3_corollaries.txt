@@ -1,0 +1,62 @@
+==============================================================================
+a3  COROLLARY CORRECTIONS -- re-derived on lib5cba
+==============================================================================
+
+------------------------------------------------------------------------------
+3.1  rho*Delta = v_L over the WHOLE primitive population, n = 3..7
+     (exhaustive; the maximum is then certified EXACTLY at its argmax)
+------------------------------------------------------------------------------
+   n | primitive |  max v_L   | argmax                    | v_L > 1 at
+   3 |         4 | 0.666667   | (0, 0, 2)                 | 0      (0s)
+   4 |        27 | 0.904508   | (0, 1, 0, 4)              | 0      (0s)
+   5 |       275 | 1.027118   | (0, 1, 0, 4, 4)           | 6      (0s)
+   6 |      4070 | 1.156724   | (0, 0, 3, 0, 8, 8)        | 192      (11s)
+   7 |     86278 | 1.218869   | (0, 0, 0, 7, 0, 16, 16)   | 6464      (692s)
+  [ok ] n=6 max v_L = 1.15672 (mg-789d's corrected onset figure)       1.156724
+  [ok ] v_L > 1 DOES occur at n = 6                                    192 posets
+  [ok ] v_L > 1 ALSO OCCURS AT n = 5 -- against the landing's 'from n = 6' 6 posets, max 1.027118
+  [ok ] v_L > 1 does NOT occur at n = 4                                max 0.904508
+  [ok ] v_L > 1 does NOT occur at n = 3                                max 0.666667
+  [ok ] so the ONSET IS n = 5, and the corrected 'from n = 6' is ONE VALUE LATE 
+     [the n = 5 posets are certified in exact rationals in a7_onset.py]
+
+     EXACT certification of the n=6 maximum (the load-bearing exhibit):
+       dn = (0, 0, 3, 0, 8, 8)   LE = 80   Delta = 19/20
+       gamma   in [0.487715581316, 0.487715581432]
+       mu_pref in [0.593844711781, 0.593844719231]
+       mu_pref*Delta >= 189298159/335544320 = 0.564152476192   vs   gamma < 0.487715581432
+  [ok ] rho*Delta > 1 CERTIFIED in exact rationals at n = 6            
+  [ok ]   and (F) HOLDS there, so this is no counterexample to (L*)    
+
+------------------------------------------------------------------------------
+3.2  LSTAR(n) = max_P min(v_F, v_L), exhaustive n = 3..7
+------------------------------------------------------------------------------
+     (the landing prints LSTAR(6) = 0.794253; this audit gets 0.794235 and
+      certifies it exactly in a7_onset.py -- a digit transposition)
+  [ok ] LSTAR(3) = 0.250000  at (0, 1, 0)                              0.250000
+  [ok ] LSTAR(4) = 0.306250  at (0, 0, 0, 6)                           0.306250
+  [ok ] LSTAR(5) = 0.550747  at (0, 0, 3, 3, 2)                        0.550747
+  [ok ] LSTAR(6) = 0.794235  at (0, 0, 0, 0, 15, 14)                   0.794235
+  [ok ] LSTAR(7) = 0.923894  at (0, 0, 0, 4, 4, 31, 29)                0.923894
+  [ok ] LSTAR(n) <= 1 for every n <= 7, i.e. (L*) HOLDS exhaustively to n = 7 
+
+------------------------------------------------------------------------------
+3.3  THE 168 -- (R1) and (R2) over the exhaustive (F)-failing set at n = 7
+------------------------------------------------------------------------------
+  [ok ] (F)-failing primitive posets at n = 7 = 168                    168
+     (R1)  max R*Delta = 1.020090 at (0, 1, 0, 0, 0, 15, 31)
+  [ok ] (R1) max R*Delta = 1.020090                                    1.020090
+  [ok ] (R1) holds at 166 of 168 -- REFUTED (EXACT, integer PSD per poset) 166 of 168
+     (R2)  max W*Delta = 12.871823 at (0, 0, 3, 7, 3, 3, 1)
+  [ok ] (R2) max W*Delta = 12.871823                                   12.871823
+  [ok ] (R2) holds at 35 of 168 -- REFUTED                             35 of 168
+
+------------------------------------------------------------------------------
+3.4  THE ROUTES ARE SUFFICIENT -- checked, since refuting them must cost (L*)
+     nothing.  R >= rho and W >= rho must hold at every one of the 168.
+------------------------------------------------------------------------------
+  [ok ] R >= rho at all 168 (so R*Delta <= 1 really is sufficient for (L*)) 0 violations
+
+==============================================================================
+a3 RESULT: ALL ARMS PASS   (0 failing arms)
+==============================================================================

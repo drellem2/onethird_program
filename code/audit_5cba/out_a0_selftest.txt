@@ -1,0 +1,88 @@
+==============================================================================
+a0  SELF-TEST -- lib5cba, mg-5cba's independent audit instrument
+==============================================================================
+
+S0. Provenance
+      HEAD: bc965aa instrument: ROW 9 IS RE-PINNED, AND THE FIRST REAL RECONCILIATION BROKE TWO OF mg-9bc2's OWN FIXTURES — one loudly, one SILENTLY: the POSITIVE CONTROL could not fail and did not fail when it should have, because `"8 9" in out` was matching section 1's row-set listing, forever (mg-2f44)
+      lib789d.py was NOT opened before this file and lib5cba.py were written;
+      definitions were re-derived from libc50b.py sections 1-3 and the docs.
+
+S1. Population counts -- naturally labelled posets  1,2,7,40,357,4824,96428
+  [ok ] n=0 count = 1                                              1
+  [ok ]   all naturally labelled + transitive                      
+  [ok ] n=1 count = 1                                              1
+  [ok ]   all naturally labelled + transitive                      
+  [ok ] n=2 count = 2                                              2
+  [ok ]   all naturally labelled + transitive                      
+  [ok ] n=3 count = 7                                              7
+  [ok ]   all naturally labelled + transitive                      
+  [ok ] n=4 count = 40                                             40
+  [ok ]   all naturally labelled + transitive                      
+  [ok ] n=5 count = 357                                            357
+  [ok ]   all naturally labelled + transitive                      
+  [ok ] n=6 count = 4824                                           4824
+  [ok ]   all naturally labelled + transitive                      
+  [ok ] n=7 count = 96428                                          96428
+
+S2. Primitive counts -- corpus publishes 4/27/275/4070/86278 at n=3..7
+  [ok ] n=3 primitive = 4                                          4
+  [ok ] n=4 primitive = 27                                         27
+  [ok ] n=5 primitive = 275                                        275
+  [ok ] n=6 primitive = 4070                                       4070
+  [ok ] n=7 primitive = 86278                                      86278
+
+S3. Transport sanity -- S_P doubly stochastic, chain and antichain closed forms
+  [ok ] n=4: every row and column of PI sums to LE                 0 bad
+  [ok ] n=5: every row and column of PI sums to LE                 0 bad
+  [ok ] n=6: every row and column of PI sums to LE                 0 bad
+  [ok ] chain n=5: LE = 1                                          1
+  [ok ] chain n=5: Delta = 0 (S_P = I)                             0
+  [ok ] chain n=5: gamma = 0 exactly                               
+  [ok ] chain n=5: NOT primitive                                   
+  [ok ] chain n=9: LE = 1                                          1
+  [ok ] chain n=9: Delta = 0 (S_P = I)                             0
+  [ok ] chain n=9: gamma = 0 exactly                               
+  [ok ] chain n=9: NOT primitive                                   
+  [ok ] antichain n=4: LE = n!                                     24
+  [ok ] antichain n=4: Delta = 1 - 1/n                             3/4
+  [ok ] antichain n=4: gamma = 1 exactly                           
+  [ok ] antichain n=6: LE = n!                                     720
+  [ok ] antichain n=6: Delta = 1 - 1/n                             5/6
+  [ok ] antichain n=6: gamma = 1 exactly                           
+
+S4. psd_int -- forced positive AND negative arms
+  [ok ] I_3 PSD                                                    
+  [ok ] diag(1,0,1) PSD (semidefinite, not definite)               
+  [ok ] [[0,1],[1,0]] NOT PSD (zero diag, nonzero off-diag)        
+  [ok ] [[1,2],[2,1]] NOT PSD (det < 0)                            
+  [ok ] [[1,1],[1,1]] PSD (rank 1)                                 
+  [ok ] diag(1,1,-1) NOT PSD                                       
+  [ok ] [[0,0],[0,-1]] NOT PSD (leading minors are 0,0)            
+
+S5. copositive_int -- forced arms, including the classic separators
+  [ok ] I_3 copositive                                             
+  [ok ] all-ones copositive                                        
+  [ok ] [[1,-3],[-3,1]] NOT copositive                             
+  [ok ] [[1,-1],[-1,1]] copositive (PSD)                           
+  [ok ] Horn matrix IS copositive                                  
+  [ok ] Horn matrix is NOT PSD                                     
+  [ok ] Horn with H[0][0] -> -1 is NOT copositive                  
+  [ok ] rank-1 singular vv' IS copositive (and PSD)                
+  [ok ] singular [[0,0,-1],[0,0,-1],[-1,-1,0]] NOT copositive      
+  [ok ]   returned witness really has c'Rc < 0                     -1/2
+
+S6. copositive => the copositivity/PSD ordering, on real posets
+  [ok ] PSD at t => copositive at t, on every primitive n<=5 poset 0 bad
+
+S7. TWO INDEPENDENT mu_pref PATHS AGREE (the D1 cross-check)
+  [ok ] f-space face path lies inside the psi-basis copositivity bracket, BOTH SIDES 0 outside; worst |gap| = 4.74e-07 at (6, (0, 0, 0, 2, 2, 0))
+
+S8. gamma: two independent paths (Jacobi on A vs integer PSD bisection)
+  [ok ] 1 - lambda_2(A) lies inside the integer-PSD bracket        
+
+S9. NEGATIVE CONTROL -- the D1 defect, reproduced and then caught
+  [ok ] mu_pref > gamma STRICTLY at some poset (a check-free method cannot do this) 91 of the sampled
+
+==============================================================================
+a0 RESULT: ALL ARMS PASS   (0 failing arms)
+==============================================================================

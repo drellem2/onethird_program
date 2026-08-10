@@ -1,0 +1,100 @@
+==============================================================================
+a4  THEOREM A -- the proof audited, then machine-checked
+==============================================================================
+THE PROOF, step by step, with what each step needs.  (This is the audit; 90655
+machine agreements do not establish a theorem, and the machine check below is a
+CONTROL on the theorem, not its evidence.)
+
+  (1)  (SO) <=> A C subset C, C = {f_1 >= ... >= f_n}.
+       (Af)_i - (Af)_{i+1} = sum_j u_j f_j, u_j = a_ij - a_{i+1,j}.  A is doubly
+       stochastic so sum_j u_j = 0, hence U_n = 0 and Abel summation gives
+       sum_j u_j f_j = sum_{k<n} U_k (f_k - f_{k+1}) + U_n f_n
+                     = sum_{k<n} U_k (f_k - f_{k+1}),
+       a sum of products of nonnegatives when (SO) holds and f is in C.  Converse:
+       f = 1_{A_k} is in C and gives (Af)_i - (Af)_{i+1} = U_k >= 0.       VALID.
+       NEEDS: A doubly stochastic (true: S_P is, so its symmetrisation is).
+
+  (2)  A' = (I+A)/2 is symmetric doubly stochastic, spectrum in [0,1], constants at
+       1, and A'C subset C (C is a convex cone, I C subset C, A C subset C). VALID.
+       NEEDS: spec(A) subset [-1,1], true for symmetric doubly stochastic A.
+       WHY THE SHIFT IS THERE: without it the spectral radius of the induced map is
+       max(|lambda_2|, |lambda_n|), which need not be lambda_2.  The shift is
+       load-bearing and the document states it.
+
+  (3)  In V = R^n/<1> the image K of C is a PROPER cone.  C is closed convex with
+       lineality space exactly <1> (f and -f both nonincreasing => f constant), so K
+       is closed, pointed and convex; strictly decreasing vectors are interior, so K
+       is solid.                                                            VALID.
+
+  (4)  A' preserves <1>, so it induces T on V with spec(T) = {(1+lambda_i)/2 : i>=2},
+       all in [0,1], so r(T) = (1+lambda_2)/2.                              VALID.
+
+  (5)  Perron-Frobenius for cone-preserving maps (Krein-Rutman; Berman-Plemmons
+       Ch.1 Thm 3.2): T K subset K with K proper => r(T) is an eigenvalue of T with
+       an eigenvector in K \ {0}.  No irreducibility is needed for this form.  VALID.
+
+  (6)  Let f be the centred representative.  A'f = r f + c*1 for some c; pairing with
+       1 and using 1'A' = 1' and 1'f = 0 forces c = 0.  So Af = lambda_2 f.   VALID.
+
+  (7)  C is invariant under adding constants, so the centred representative of a class
+       in K is itself in C: f is nonincreasing, centred, nonzero.  Its Rayleigh
+       quotient is 1 - lambda_2 = gamma, so mu_pref <= gamma; and mu_pref >= gamma
+       always because the cone sits inside 1^perp.  Hence mu_pref = gamma.    VALID.
+
+  VERDICT ON THE PROOF: no gap found.  Every step is finite-dimensional and every
+  hypothesis it uses (A symmetric doubly stochastic; C closed convex with lineality
+  <1>) is discharged.  The theorem is UNIFORM IN n and does not depend on primitivity.
+
+
+------------------------------------------------------------------------------
+4.1  MACHINE CHECK -- every primitive poset with n <= 7
+------------------------------------------------------------------------------
+   n=2  primitive      1   (SO)    1   (SO) with rho=1    1   rho=1     1  (0s)
+   n=3  primitive      4   (SO)    2   (SO) with rho=1    2   rho=1     4  (0s)
+   n=4  primitive     27   (SO)    9   (SO) with rho=1    9   rho=1    17  (0s)
+   n=5  primitive    275   (SO)   45   (SO) with rho=1   45   rho=1   109  (0s)
+   n=6  primitive   4070   (SO)  281   (SO) with rho=1  281   rho=1   906  (11s)
+   n=7  primitive  86278   (SO) 2162   (SO) with rho=1 2162   rho=1 10806  (671s)
+   TOTAL primitive posets, n = 2..7: 90655
+  [ok ] the population is 90655 primitive posets at n <= 7             90655
+   (SO) holds at 2500 of them   [n <= 6 subtotal: 338]
+  [ok ] 2500 of them satisfy (SO) -- mg-789d's OWN out_s4_theoremA.txt says 2500 2500
+  [ok ] the DOCUMENT's '338 of them satisfy (SO)' is the n <= 6 SUBTOTAL, mis-scoped to n <= 7 338
+  [ok ] THEOREM A holds at every one of them: rho = 1, NO EXCEPTION    0 exceptions 
+
+------------------------------------------------------------------------------
+4.2  THE CONVERSE IS FALSE -- so (SO) is a criterion, not a restatement
+------------------------------------------------------------------------------
+   n=3   rho=1 at     4   (SO) at    2   converse fails at     2
+   n=4   rho=1 at    17   (SO) at    9   converse fails at     8
+   n=5   rho=1 at   109   (SO) at   45   converse fails at    64
+   n=6   rho=1 at   906   (SO) at  281   converse fails at   625
+   n=7   rho=1 at 10806   (SO) at 2162   converse fails at  8644
+  [ok ] n=6: 906 posets have rho = 1 but only 281 satisfy (SO)         906 / 281
+  [ok ] the converse fails at every n >= 3                             
+
+------------------------------------------------------------------------------
+4.3  NEGATIVE CONTROL -- chain(n-1)+point violates (SO), exactly where rho > 1
+------------------------------------------------------------------------------
+   n= 8  chain(7)+point   (SO) violation 0.3750   rho = 1.097552
+  [ok ]   n=8: (SO) FAILS and rho > 1                                  
+   n=10  chain(9)+point   (SO) violation 0.4000   rho = 1.118176
+  [ok ]   n=10: (SO) FAILS and rho > 1                                 
+   n=12  chain(11)+point   (SO) violation 0.4167   rho = 1.132491
+  [ok ]   n=12: (SO) FAILS and rho > 1                                 
+   n=14  chain(13)+point   (SO) violation 0.4286   rho = 1.142495
+  [ok ]   n=14: (SO) FAILS and rho > 1                                 
+   n=16  chain(15)+point   (SO) violation 0.4375   rho = 1.149802
+  [ok ]   n=16: (SO) FAILS and rho > 1                                 
+
+------------------------------------------------------------------------------
+4.4  COVERAGE OF THE (F)-FAILING SET AT n = 7 -- the honest, small number
+------------------------------------------------------------------------------
+   (F)-failing at n = 7 : 168      (SO) among them : 4      rho = 1 among them : 24
+  [ok ] (SO) covers 4 of the 168                                       4
+  [ok ] the CEILING on any rho=1 argument is 24 of the 168             24
+  [ok ] so 144 of the 168 need a genuine inequality, not an identity   144
+
+==============================================================================
+a4 RESULT: ALL ARMS PASS   (0 failing arms)
+==============================================================================

@@ -1,0 +1,86 @@
+==============================================================================
+a6  EVERY OTHER LOAD-BEARING CONDITIONAL, CHECKED
+==============================================================================
+a6 -- every other load-bearing "if X then Y" in the landing, checked on suspicion.
+
+pm-onethird's 03:45Z note asks for exactly this: the ticket's own instruction contained
+a scope error two minutes after the error was circulated, so every conditional in the
+lineage is checked rather than read.
+
+  C1.  "(L*) rearranges, WITH NO LOSS, to Delta*(rho - 1) <= 1 - Delta = min_i (S_P)_ii"
+       (mg-789d s1).  The rearrangement divides mu*Delta <= gamma by gamma, so it needs
+       gamma > 0 -- which mg-789d's OWN defect D2 is about (a chain has gamma = 0).
+       Checked: gamma > 0 at every primitive poset, exactly, and the identity itself.
+
+  C2.  "1 - Delta = min_i (S_P)_ii".  Immediate from Delta = max_i (1 - (S_P)_ii), but
+       checked as an integer identity because it is quoted as a geometric reading.
+
+  C3.  "R >= 1" (mg-789d s3, the (R1) route).  R = min_k n*leak_k/(gamma*k(n-k)) is
+       claimed >= 1, i.e. every prefix indicator's Rayleigh quotient is >= gamma.  True
+       because gamma is the min over ALL of 1^perp -- checked exactly.
+
+  C4.  "screening on an UPPER bound is what makes the hunt RIGOROUS" (mg-789d
+       mu_ub_float docstring).  Checked as a direction: mu_ub >= mu_pref must hold at
+       every poset, or the screen can hide a counterexample.  This is D1's own repair
+       and it is the arm that would fire if D1 came back.
+
+  C5.  mg-c50b's n=8 SCREEN: "both failing forces min > 1 > 0.85 and c#_UB >= c#, so
+       every both-failing poset survives the screen".  The screen keeps a poset when
+       min(c#_UB, f*) > 0.85.  If both routes fail then f* > 1 and c# > 1; c#_UB >= c#
+       gives c#_UB > 1; so min(c#_UB, f*) > 1 > 0.85 and the poset is kept.  VALID as
+       stated, and it is what makes "both routes fail at 0 of 2600369" exhaustive
+       without an exhaustive exact pass.  The corresponding claim for the (F)-alone
+       count 3589 is NOT valid -- and mg-c50b says so itself (its E9).  Checked here
+       only for the inequality mu_pref <= 2*Phi*_pref that the screen rests on.
+
+  C6.  The document's own arithmetic: the ledger's (R1)/(R2) rows count FAILURES while
+       s3's table counts HOLDS.  2 + 166 = 168 and 133 + 35 = 168; consistent, but the
+       two conventions sit in one document.
+
+------------------------------------------------------------------------------
+C1/C2  gamma > 0 at every primitive poset, and 1 - Delta = min_i (S_P)_ii
+------------------------------------------------------------------------------
+  [ok ] gamma > 0 at every one of the 90655 primitive posets n <= 7    0 with gamma = 0
+  [ok ] 1 - Delta = min_i (S_P)_ii, as an exact identity, at every one 0 violations
+     => the rearrangement (L*) <=> Delta*(rho-1) <= 1-Delta is loss-free ON THE
+        PRIMITIVE POPULATION, which is the population (L*) quantifies over.
+        It is NOT loss-free at gamma = 0: a chain has gamma = 0 and no rho.
+  [ok ]   and the chain, where it would fail, is NOT primitive (mg-789d's D2) 
+
+------------------------------------------------------------------------------
+C3  R >= 1 -- every prefix indicator's Rayleigh quotient is >= gamma
+------------------------------------------------------------------------------
+     gamma <= min_k Rayleigh(psi_k) is IMMEDIATE (psi_k lies in 1^perp and gamma
+     is the min over all of 1^perp), so 'R >= 1' needs no census.  What DOES
+     need checking is the closed form the route is phrased in:
+        Rayleigh(psi_k) = Q_kk/N_kk = n*leak(A_k)/(k(n-k)).
+  [ok ] Q_kk/N_kk == n*leak(A_k)/(k(n-k)) exactly, every k, every sampled poset n<=7 0 violations over 5331 posets
+
+------------------------------------------------------------------------------
+C4  THE SCREEN'S DIRECTION -- mu_ub >= mu_pref, the arm that fires if D1 returns
+------------------------------------------------------------------------------
+  [ok ] mu_pref >= gamma at every primitive poset n <= 6 (an upper bound on mu that 0 violations over 4345
+     returns gamma is therefore a LOWER bound, which is exactly D1)
+  [ok ]   and mu_pref > gamma STRICTLY somewhere, so the check is not vacuous max mu - gamma = 0.106129
+
+------------------------------------------------------------------------------
+C5  mg-c50b's n=8 SCREEN -- the inequality it rests on: mu_pref <= 2*Phi*_pref
+------------------------------------------------------------------------------
+  [ok ] mu_pref <= 2*Phi*_pref at every sampled primitive poset n <= 7 0 violations over 6970 sampled
+     So c#_UB >= c# and the screen cannot drop a both-failing poset:
+     both failing => f* > 1 and c# > 1 => c#_UB > 1 => min(c#_UB, f*) > 1 > 0.85.
+     mg-c50b's 'both routes fail at 0 of 2600369' is EXHAUSTIVE on this argument.
+     Its (F)-alone count 3589 is NOT, and mg-c50b's own E9 says so.
+
+------------------------------------------------------------------------------
+C6  THE DOCUMENT'S TWO COUNTING CONVENTIONS
+------------------------------------------------------------------------------
+     s3 table : (R1) holds at 166 of 168 ; (R2) holds at 35 of 168
+     s6 ledger: (R1) 'REFUTED at n = 7, 2 of 168' ; (R2) '133 of 168'
+  [ok ] 2 + 166 = 168 and 133 + 35 = 168 -- the two conventions are consistent 
+     They are consistent but opposite, in one document, one section apart.
+     Flagged as a READABILITY defect, not an arithmetic one.
+
+==============================================================================
+a6 RESULT: ALL ARMS PASS   (0 failing arms)
+==============================================================================
