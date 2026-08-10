@@ -49,7 +49,7 @@ labelled FLOAT where it is printed.
 | P1 | **HELD** | 0/25684; factor 2 attained 4812× |
 | P2 | **HELD** | 0/4377; worst `Φ²/(2(1−λ_std)) = 0.2813` |
 | P3 | **HELD** | 0/6132; red drill 3340/3340 |
-| P4 | **HELD** (bet 70%) | `C₃^gap > 1` at 1023 of 1032 posets **that exhibit L2**, worst `2.386`. This is correction `C1`. |
+| P4 | **HELD** (bet 70%) | `C₃^gap > 1` at 1023 of 1032 posets **that exhibit L2's FIRST DISJUNCT**, worst `2.386`. This is correction `C1`. *(scope added at the claim, `mg-be0b`; this read "that exhibit L2". `L2` is a **disjunction**, so the unqualified form claims a population this instrument never built — its filter is `mono == "YES"`. **No figure moves and nothing is marked false**: `1023 of 1032` was true as measured. The `a3_currency.py` row above already carried the scope and always did.)* |
 | P5 | **MISSED** (bet 45%) | 16/16 of §7's figures reproduce — once a defect of *mine* is removed (§4 below) |
 | P6 | **HELD** (bet 80%) | and verified at `mg-3ce3`'s predicate, not against mg-76b2's scope statement |
 | P7 | **HELD** (bet 75%) | 1 of 24 claims falls; 6 machine-bare sites all read as labelled by hand |

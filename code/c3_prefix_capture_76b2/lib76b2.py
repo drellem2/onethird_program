@@ -379,8 +379,27 @@ def monotone_in_span(dom, tol=1e-9):
                   eigenspace is monotone.  This instrument does NOT solve the feasibility
                   problem in general and says so rather than guessing.
 
-    L2 as the source states it is EXISTENTIAL ("a dominant standard eigenvector is
-    monotone"), so 'YES' is a hit for L2 and 'UNDECIDED' is silence, not a miss.
+    'YES' IS A HIT FOR L2's FIRST DISJUNCT, NOT FOR L2.  Repaired mg-be0b on q07fd's
+    audit of mg-3329; this read "L2 as the source states it is EXISTENTIAL ('a dominant
+    standard eigenvector is monotone'), so 'YES' is a hit for L2", which MISQUOTES the
+    source's own L2 by dropping its second disjunct.  L2 as the source states it is a
+    DISJUNCTION and is existential only within its first clause: "a dominant standard
+    eigenvector is monotone in the distinguished order, OR AT LEAST YIELDS A LOW-
+    CONDUCTANCE PREFIX" (STATE.md:116, quoting the .tex at :560-566 through mg-76b2 sec.2;
+    that .tex is NOT in this repository and was not re-read here).  So:
+
+        'YES'       — first disjunct EXHIBITED (existentially, over the eigenspace).
+        'NO'        — first disjunct fails at a one-dimensional eigenspace.  It says
+                      NOTHING about L2, whose second disjunct this instrument never tests.
+        'UNDECIDED' — silence, not a miss, exactly as before.
+
+    THIS IS A RENAMING AND NOT A LOGIC CHANGE.  No line of code below moved, no threshold
+    moved, and the population this function selects is unchanged: the census stands at
+    1890 YES / 3340 NO / 0 UNDECIDED, verified identical before and after this edit.  What
+    was wrong was the NAME the verdict was given, and it is consumed downstream at
+    s2_sweep.py and s3_c3.py, i.e. upstream of that census -- which is why the name had to
+    be fixed rather than annotated.  The second disjunct is UNQUANTIFIED, not refuted, and
+    is not scored against anywhere in this instrument.
     """
     if not dom:
         return "UNDECIDED"

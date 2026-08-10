@@ -59,11 +59,11 @@ C2/C3. THE THREE CURRENCIES OVER THE PRIMITIVE POPULATION -- P5
   population can refute a uniform-in-n bound and can never establish one, so
   this is a direction and not a bound -- which is how mg-76b2 reports it too.
 ==============================================================================
-C4. P4 -- THE ADVERSARIAL PROBE.  Restrict to posets where L2 HOLDS.
+C4. P4 -- THE ADVERSARIAL PROBE.  Restrict to L2's FIRST DISJUNCT.
 ==============================================================================
-  mg-76b2's theorem is CONDITIONAL on L2.  So the honest question is not
-  'is C_3^gap > 1 somewhere', it is 'is C_3^gap > 1 WHERE L2's own hypothesis
-  is satisfied'.  Restrict to primitive posets with a NON-DEGENERATE top
+  mg-76b2's theorem is CONDITIONAL on L2's FIRST DISJUNCT.  The honest
+  question is not 'is C_3^gap > 1 somewhere', it is 'is C_3^gap > 1 WHERE that
+  disjunct holds'.  Restrict to primitive posets with a NON-DEGENERATE top
   standard eigenspace whose eigenvector IS monotone along e -- i.e. posets that
   exhibit L2's first disjunct -- and re-measure.
 
@@ -86,13 +86,13 @@ C4. P4 -- THE ADVERSARIAL PROBE.  Restrict to posets where L2 HOLDS.
   prefix is the best cut, and it does not say the gap-form C_3 is 1.  It says
   the CHEEGER SWEEP BOUND is delivered AT a prefix, which is a statement about
   sqrt(2(1-lambda_std)) and not about Phi* or about 1-rho.  C_3^cut > 1 and
-  C_3^gap > 1 under L2 are both COMPATIBLE with it.
+  C_3^gap > 1 on L2's FIRST DISJUNCT are both COMPATIBLE with it.
 
-  It DOES show that 'C_3 = 1' is true only in the chain-(III) currency, and
-  that in the two currencies Op-Form sec.4.3 actually uses to DEFINE the
-  prefix-capture readings, the constant is > 1 and rising even where L2 holds.
+  It DOES show that 'C_3 = 1' is true only in the chain-(III) currency, and that
+  in the two currencies Op-Form sec.4.3 actually uses to DEFINE the prefix-capture
+  readings, the constant is > 1 and rising even on L2's FIRST DISJUNCT.
 ==============================================================================
-C5. THE THEOREM ITSELF, MEASURED -- chain (III) at C_3 = 1, under L2
+C5. THE THEOREM, MEASURED -- chain (III) at C_3 = 1, on L2's FIRST DISJUNCT
 ==============================================================================
   For every primitive poset exhibiting L2's first disjunct: is there a
   PREFIX A_k with Phi_P(A_k) <= sqrt(2(1-lambda_std))?  That -- and only that --
@@ -104,7 +104,7 @@ C5. THE THEOREM ITSELF, MEASURED -- chain (III) at C_3 = 1, under L2
   worst Phi*_pref^2/(2(1-lambda_std)): 0.2603
 
   P8: mg-76b2's constant in the chain-(III) currency comes out at
-  1 -- CONFIRMED on this population, under L2's hypothesis.
+  1 -- CONFIRMED on this population, under L2's FIRST DISJUNCT's hypothesis.
 
   AND THE SAME CHECK WITHOUT L2, as a red drill -- if it passes there too, the
   hypothesis is not doing work and the theorem is weaker than it looks:
