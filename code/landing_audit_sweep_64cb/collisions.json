@@ -1,0 +1,509 @@
+[
+ {
+  "landing": "mg-00a1",
+  "parent": "mg-131e",
+  "audit": "mg-eaa1",
+  "landing_is_audit": false,
+  "state": true,
+  "wall": "CONCURRENT",
+  "write": "AUDIT-BEFORE",
+  "l_wall": [
+   "2026-08-07T19:04:14Z",
+   "2026-08-07T21:52:07Z"
+  ],
+  "a_wall": [
+   "2026-08-07T19:06:47Z",
+   "2026-08-07T20:35:59Z"
+  ],
+  "l_write": [
+   "2026-08-07T20:36:27+01:00",
+   "2026-08-07T22:53:44+01:00"
+  ],
+  "a_write": [
+   "2026-08-07T20:10:42+01:00",
+   "2026-08-07T20:33:10+01:00"
+  ]
+ },
+ {
+  "landing": "mg-131e",
+  "parent": "mg-200d",
+  "audit": "mg-41b7",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "AUDIT-AFTER",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-08-07T18:10:24Z",
+   "2026-08-07T18:50:25Z"
+  ],
+  "a_wall": [
+   "2026-08-07T20:54:11Z",
+   "2026-08-07T22:11:49Z"
+  ],
+  "l_write": [
+   "2026-08-07T19:16:17+01:00",
+   "2026-08-09T21:25:46+01:00"
+  ],
+  "a_write": [
+   "2026-08-07T21:59:24+01:00",
+   "2026-08-07T22:56:53+01:00"
+  ]
+ },
+ {
+  "landing": "mg-200d",
+  "parent": "mg-6bc2",
+  "audit": "mg-41b7",
+  "landing_is_audit": false,
+  "state": true,
+  "wall": "CONCURRENT",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-08-07T16:43:29Z",
+   "2026-08-09T10:01:37Z"
+  ],
+  "a_wall": [
+   "2026-08-07T20:54:11Z",
+   "2026-08-07T22:11:49Z"
+  ],
+  "l_write": [
+   "2026-08-07T17:49:48+01:00",
+   "2026-08-07T22:27:20+01:00"
+  ],
+  "a_write": [
+   "2026-08-07T21:59:24+01:00",
+   "2026-08-07T22:56:53+01:00"
+  ]
+ },
+ {
+  "landing": "mg-24fb",
+  "parent": "mg-5ce3",
+  "audit": "mg-3e06",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "CONCURRENT",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-08-07T21:30:51Z",
+   "2026-08-07T22:36:45Z"
+  ],
+  "a_wall": [
+   "2026-08-07T21:16:06Z",
+   "2026-08-07T22:36:35Z"
+  ],
+  "l_write": [
+   "2026-08-07T22:07:07+01:00",
+   "2026-08-07T22:54:01+01:00"
+  ],
+  "a_write": [
+   "2026-08-07T22:18:55+01:00",
+   "2026-08-07T22:34:28+01:00"
+  ]
+ },
+ {
+  "landing": "mg-2f44",
+  "parent": "mg-3329",
+  "audit": "mg-07fd",
+  "landing_is_audit": false,
+  "state": true,
+  "wall": "AUDIT-BEFORE",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-08-10T03:33:35Z",
+   "2026-08-10T04:03:07Z"
+  ],
+  "a_wall": [
+   "2026-08-10T00:04:38Z",
+   "2026-08-10T00:34:18Z"
+  ],
+  "l_write": [
+   "2026-08-10T04:29:24+01:00",
+   "2026-08-10T07:51:52+01:00"
+  ],
+  "a_write": [
+   "2026-08-10T01:33:33+01:00",
+   "2026-08-10T04:56:42+01:00"
+  ]
+ },
+ {
+  "landing": "mg-345e",
+  "parent": "mg-6bc2",
+  "audit": "mg-41b7",
+  "landing_is_audit": false,
+  "state": true,
+  "wall": "AUDIT-AFTER",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-08-07T12:54:33Z",
+   "2026-08-07T13:12:29Z"
+  ],
+  "a_wall": [
+   "2026-08-07T20:54:11Z",
+   "2026-08-07T22:11:49Z"
+  ],
+  "l_write": [
+   "2026-08-07T13:54:52+01:00",
+   "2026-08-09T19:12:52+01:00"
+  ],
+  "a_write": [
+   "2026-08-07T21:59:24+01:00",
+   "2026-08-07T22:56:53+01:00"
+  ]
+ },
+ {
+  "landing": "mg-372e",
+  "parent": "mg-131e",
+  "audit": "mg-eaa1",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "CONCURRENT",
+  "write": "AUDIT-BEFORE",
+  "l_wall": [
+   "2026-08-07T19:26:04Z",
+   "2026-08-07T20:47:30Z"
+  ],
+  "a_wall": [
+   "2026-08-07T19:06:47Z",
+   "2026-08-07T20:35:59Z"
+  ],
+  "l_write": [
+   "2026-08-07T20:38:44+01:00",
+   "2026-08-07T21:13:03+01:00"
+  ],
+  "a_write": [
+   "2026-08-07T20:10:42+01:00",
+   "2026-08-07T20:33:10+01:00"
+  ]
+ },
+ {
+  "landing": "mg-4417",
+  "parent": "mg-24fb",
+  "audit": "mg-dd8b",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "CONCURRENT",
+  "write": "AUDIT-BEFORE",
+  "l_wall": [
+   "2026-08-07T21:43:44Z",
+   "2026-08-07T22:39:01Z"
+  ],
+  "a_wall": [
+   "2026-08-07T21:04:25Z",
+   "2026-08-07T22:11:31Z"
+  ],
+  "l_write": [
+   "2026-08-07T22:51:12+01:00",
+   "2026-08-07T23:04:02+01:00"
+  ],
+  "a_write": [
+   "2026-08-07T22:07:07+01:00",
+   "2026-08-07T22:16:29+01:00"
+  ]
+ },
+ {
+  "landing": "mg-51f4",
+  "parent": "mg-28ff",
+  "audit": "mg-29fe",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "CONCURRENT",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-08-09T20:14:37Z",
+   "2026-08-09T22:37:59Z"
+  ],
+  "a_wall": [
+   "2026-08-09T20:27:57Z",
+   "2026-08-09T21:41:55Z"
+  ],
+  "l_write": [
+   "2026-08-09T21:24:09+01:00",
+   "2026-08-10T01:39:01+01:00"
+  ],
+  "a_write": [
+   "2026-08-09T21:29:40+01:00",
+   "2026-08-10T07:10:09+01:00"
+  ]
+ },
+ {
+  "landing": "mg-81ff",
+  "parent": "mg-9461",
+  "audit": "mg-39bf",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "CONCURRENT",
+  "write": "AUDIT-BEFORE",
+  "l_wall": [
+   "2026-08-09T19:08:41Z",
+   "2026-08-09T20:27:03Z"
+  ],
+  "a_wall": [
+   "2026-08-09T19:29:32Z",
+   "2026-08-09T19:52:26Z"
+  ],
+  "l_write": [
+   "2026-08-09T21:25:46+01:00",
+   "2026-08-10T00:11:42+01:00"
+  ],
+  "a_write": [
+   "2026-08-09T20:32:54+01:00",
+   "2026-08-09T21:22:54+01:00"
+  ]
+ },
+ {
+  "landing": "mg-8311",
+  "parent": "mg-76b2",
+  "audit": "mg-94c3",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "CONCURRENT",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-08-07T18:55:00Z",
+   "2026-08-07T19:29:10Z"
+  ],
+  "a_wall": [
+   "2026-08-07T18:44:03Z",
+   "2026-08-07T19:11:16Z"
+  ],
+  "l_write": [
+   "2026-08-07T20:00:42+01:00",
+   "2026-08-07T20:22:57+01:00"
+  ],
+  "a_write": [
+   "2026-08-07T19:48:22+01:00",
+   "2026-08-09T21:25:46+01:00"
+  ]
+ },
+ {
+  "landing": "mg-845e",
+  "parent": "mg-3969",
+  "audit": "mg-d3c7",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "REFUSED",
+  "write": "CONCURRENT",
+  "l_wall": "REFUSED",
+  "a_wall": [
+   "2026-08-09T17:28:06Z",
+   "2026-08-09T17:58:41Z"
+  ],
+  "l_write": [
+   "2026-08-09T13:59:04+01:00",
+   "2026-08-09T18:56:53+01:00"
+  ],
+  "a_write": [
+   "2026-08-09T18:30:56+01:00",
+   "2026-08-09T20:47:03+01:00"
+  ]
+ },
+ {
+  "landing": "mg-8d63",
+  "parent": "mg-789d",
+  "audit": "mg-5cba",
+  "landing_is_audit": false,
+  "state": true,
+  "wall": "CONCURRENT",
+  "write": "REFUSED",
+  "l_wall": [
+   "2026-08-10T05:27:54Z",
+   "2026-08-10T06:18:36Z"
+  ],
+  "a_wall": [
+   "2026-08-10T04:05:04Z",
+   "2026-08-10T05:58:07Z"
+  ],
+  "l_write": [
+   "2026-08-10T07:10:09+01:00",
+   "2026-08-10T09:03:39+01:00"
+  ],
+  "a_write": "REFUSED"
+ },
+ {
+  "landing": "mg-9461",
+  "parent": "mg-76b2",
+  "audit": "mg-94c3",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "AUDIT-BEFORE",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-08-09T18:07:08Z",
+   "2026-08-09T19:07:24Z"
+  ],
+  "a_wall": [
+   "2026-08-07T18:44:03Z",
+   "2026-08-07T19:11:16Z"
+  ],
+  "l_write": [
+   "2026-08-09T19:12:52+01:00",
+   "2026-08-09T21:25:46+01:00"
+  ],
+  "a_write": [
+   "2026-08-07T19:48:22+01:00",
+   "2026-08-09T21:25:46+01:00"
+  ]
+ },
+ {
+  "landing": "mg-af28",
+  "parent": "mg-1953",
+  "audit": "mg-3b51",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "CONCURRENT",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-07-30T14:38:14Z",
+   "2026-07-30T15:25:14Z"
+  ],
+  "a_wall": [
+   "2026-07-30T14:38:13Z",
+   "2026-07-30T15:02:19Z"
+  ],
+  "l_write": [
+   "2026-07-30T16:24:49+01:00",
+   "2026-07-30T16:56:43+01:00"
+  ],
+  "a_write": [
+   "2026-07-30T16:02:08+01:00",
+   "2026-07-30T16:32:02+01:00"
+  ]
+ },
+ {
+  "landing": "mg-b488",
+  "parent": "mg-200d",
+  "audit": "mg-41b7",
+  "landing_is_audit": false,
+  "state": true,
+  "wall": "AUDIT-AFTER",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-08-07T18:54:56Z",
+   "2026-08-07T19:06:03Z"
+  ],
+  "a_wall": [
+   "2026-08-07T20:54:11Z",
+   "2026-08-07T22:11:49Z"
+  ],
+  "l_write": [
+   "2026-08-07T20:02:29+01:00",
+   "2026-08-07T22:34:28+01:00"
+  ],
+  "a_write": [
+   "2026-08-07T21:59:24+01:00",
+   "2026-08-07T22:56:53+01:00"
+  ]
+ },
+ {
+  "landing": "mg-b58d",
+  "parent": "mg-28ff",
+  "audit": "mg-29fe",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "AUDIT-BEFORE",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-08-09T22:41:21Z",
+   "2026-08-09T23:11:32Z"
+  ],
+  "a_wall": [
+   "2026-08-09T20:27:57Z",
+   "2026-08-09T21:41:55Z"
+  ],
+  "l_write": [
+   "2026-08-09T23:48:52+01:00",
+   "2026-08-10T01:04:31+01:00"
+  ],
+  "a_write": [
+   "2026-08-09T21:29:40+01:00",
+   "2026-08-10T07:10:09+01:00"
+  ]
+ },
+ {
+  "landing": "mg-be0b",
+  "parent": "mg-3329",
+  "audit": "mg-07fd",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "CONCURRENT",
+  "write": "REFUSED",
+  "l_wall": [
+   "2026-08-10T00:08:24Z",
+   "2026-08-10T00:51:22Z"
+  ],
+  "a_wall": [
+   "2026-08-10T00:04:38Z",
+   "2026-08-10T00:34:18Z"
+  ],
+  "l_write": "REFUSED",
+  "a_write": [
+   "2026-08-10T01:33:33+01:00",
+   "2026-08-10T04:56:42+01:00"
+  ]
+ },
+ {
+  "landing": "mg-bee1",
+  "parent": "mg-4acd",
+  "audit": "mg-218d",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "AUDIT-BEFORE",
+  "write": "CONCURRENT",
+  "l_wall": [
+   "2026-07-30T16:32:26Z",
+   "2026-07-30T16:55:23Z"
+  ],
+  "a_wall": [
+   "2026-07-30T16:00:42Z",
+   "2026-07-30T16:21:59Z"
+  ],
+  "l_write": [
+   "2026-07-30T17:51:48+01:00",
+   "2026-07-30T18:49:43+01:00"
+  ],
+  "a_write": [
+   "2026-07-30T17:21:46+01:00",
+   "2026-07-30T17:54:04+01:00"
+  ]
+ },
+ {
+  "landing": "mg-c2b3",
+  "parent": "mg-821e",
+  "audit": "mg-4700",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "CONCURRENT",
+  "write": "REFUSED",
+  "l_wall": [
+   "2026-07-31T00:10:16Z",
+   "2026-07-31T00:55:41Z"
+  ],
+  "a_wall": [
+   "2026-07-30T23:51:07Z",
+   "2026-07-31T00:35:11Z"
+  ],
+  "l_write": "REFUSED",
+  "a_write": "REFUSED"
+ },
+ {
+  "landing": "mg-e10a",
+  "parent": "mg-345e",
+  "audit": "mg-6bd1",
+  "landing_is_audit": false,
+  "state": false,
+  "wall": "CONCURRENT",
+  "write": "REFUSED",
+  "l_wall": [
+   "2026-08-07T20:07:31Z",
+   "2026-08-07T21:52:13Z"
+  ],
+  "a_wall": [
+   "2026-08-07T19:35:05Z",
+   "2026-08-07T21:43:51Z"
+  ],
+  "l_write": "REFUSED",
+  "a_write": [
+   "2026-08-07T20:37:36+01:00",
+   "2026-08-07T21:13:03+01:00"
+  ]
+ }
+]

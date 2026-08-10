@@ -1,0 +1,161 @@
+==============================================================================
+s3 — ADJUDICATION
+==============================================================================
+s3 — ADJUDICATION. Which collisions are the ticket's defect and which are my join being loose.
+
+P1 bet my own headline is an over-count. Betting that and then hand-waving each case down
+is the cheapest way to be right, so every disqualification here is made by a rule that
+runs, and the rule is stated before the verdict:
+
+  D1  LANDING-OF-THE-AUDIT.  The landing NAMES THE AUDIT in its own title or body head.
+      A landing that knows the audit exists is not "reading figures the audit is in the
+      middle of repairing" -- it is CARRYING the audit, which is remedy (b) already
+      working. This is a category P1 did not name and it is the largest one.
+
+  D2  AUDIT-OF-THE-LANDING.  The audit's declared subject IS the landing. Then the audit
+      is downstream of the landing, not of its parent, and the triple is backwards.
+
+  D3  SUBJECT MISMATCH.  The audit's title says "INDEPENDENT AUDIT of mg-XXXX" and that
+      explicit subject is NOT the parent in the triple. The join reached this audit through
+      a prose mention, not through what it audits. P1's reason (b).
+
+  D4  SELF-AUTHORED.  The landing's canonical commits touch only documents named after
+      the LANDING itself -- it authored its own document rather than carrying a parent's
+      figures outward. P1's reason (a).
+
+What survives all four is the RESIDUE: a landing that did not know about the audit, whose
+audit really is of its parent, and which really did edit a document it did not author.
+
+count triples CONCURRENT under either reading 21
+
+  mg-00a1 par=mg-131e aud=mg-eaa1  wall=CONCURRENT   write=AUDIT-BEFORE STATE=y
+     explicit audit subject: mg-131e
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-131e par=mg-200d aud=mg-41b7  wall=AUDIT-AFTER  write=CONCURRENT   STATE=n
+     explicit audit subject: mg-200d
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-200d par=mg-6bc2 aud=mg-41b7  wall=CONCURRENT   write=CONCURRENT   STATE=y
+     explicit audit subject: mg-200d
+     D1 landing-names-audit False   D2 audit-of-landing True   D3 subject-mismatch True   D4 self-authored False
+     -> DISQUALIFIED  (fired: D2,D3)
+
+  mg-24fb par=mg-5ce3 aud=mg-3e06  wall=CONCURRENT   write=CONCURRENT   STATE=n
+     explicit audit subject: mg-5ce3
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-2f44 par=mg-3329 aud=mg-07fd  wall=AUDIT-BEFORE write=CONCURRENT   STATE=y
+     explicit audit subject: None
+     D1 landing-names-audit True   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> DISQUALIFIED  (fired: D1)
+
+  mg-345e par=mg-6bc2 aud=mg-41b7  wall=AUDIT-AFTER  write=CONCURRENT   STATE=y
+     explicit audit subject: mg-200d
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch True   D4 self-authored False
+     -> DISQUALIFIED  (fired: D3)
+
+  mg-372e par=mg-131e aud=mg-eaa1  wall=CONCURRENT   write=AUDIT-BEFORE STATE=n
+     explicit audit subject: mg-131e
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-4417 par=mg-24fb aud=mg-dd8b  wall=CONCURRENT   write=AUDIT-BEFORE STATE=n
+     explicit audit subject: mg-24fb
+     D1 landing-names-audit True   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> DISQUALIFIED  (fired: D1)
+
+  mg-51f4 par=mg-28ff aud=mg-29fe  wall=CONCURRENT   write=CONCURRENT   STATE=n
+     explicit audit subject: mg-28ff
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-81ff par=mg-9461 aud=mg-39bf  wall=CONCURRENT   write=AUDIT-BEFORE STATE=n
+     explicit audit subject: mg-9461
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-8311 par=mg-76b2 aud=mg-94c3  wall=CONCURRENT   write=CONCURRENT   STATE=n
+     explicit audit subject: mg-76b2
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-845e par=mg-3969 aud=mg-d3c7  wall=REFUSED      write=CONCURRENT   STATE=n
+     explicit audit subject: mg-3969
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-8d63 par=mg-789d aud=mg-5cba  wall=CONCURRENT   write=REFUSED      STATE=y
+     explicit audit subject: None
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-9461 par=mg-76b2 aud=mg-94c3  wall=AUDIT-BEFORE write=CONCURRENT   STATE=n
+     explicit audit subject: mg-76b2
+     D1 landing-names-audit True   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> DISQUALIFIED  (fired: D1)
+
+  mg-af28 par=mg-1953 aud=mg-3b51  wall=CONCURRENT   write=CONCURRENT   STATE=n
+     explicit audit subject: None
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-b488 par=mg-200d aud=mg-41b7  wall=AUDIT-AFTER  write=CONCURRENT   STATE=y
+     explicit audit subject: mg-200d
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-b58d par=mg-28ff aud=mg-29fe  wall=AUDIT-BEFORE write=CONCURRENT   STATE=n
+     explicit audit subject: mg-28ff
+     D1 landing-names-audit True   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> DISQUALIFIED  (fired: D1)
+
+  mg-be0b par=mg-3329 aud=mg-07fd  wall=CONCURRENT   write=REFUSED      STATE=n
+     explicit audit subject: None
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-bee1 par=mg-4acd aud=mg-218d  wall=AUDIT-BEFORE write=CONCURRENT   STATE=n
+     explicit audit subject: None
+     D1 landing-names-audit True   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> DISQUALIFIED  (fired: D1)
+
+  mg-c2b3 par=mg-821e aud=mg-4700  wall=CONCURRENT   write=REFUSED      STATE=n
+     explicit audit subject: None
+     D1 landing-names-audit False   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> RESIDUE
+
+  mg-e10a par=mg-345e aud=mg-6bd1  wall=CONCURRENT   write=REFUSED      STATE=n
+     explicit audit subject: mg-345e
+     D1 landing-names-audit True   D2 audit-of-landing False   D3 subject-mismatch False   D4 self-authored False
+     -> DISQUALIFIED  (fired: D1)
+
+==============================================================================
+count DISQUALIFIED 8
+count RESIDUE      13
+
+WHICH RULE DID THE KILLING (a triple can fire more than one):
+  count D1 6
+  count D3 2
+  count D2 1
+
+THE RESIDUE — every one of these is the ticket's shape:
+  landing   parent    audit     tier      wall         write       
+  mg-00a1   mg-131e   mg-eaa1   STATE.md  CONCURRENT   AUDIT-BEFORE
+  mg-131e   mg-200d   mg-41b7   docs-only AUDIT-AFTER  CONCURRENT  
+  mg-24fb   mg-5ce3   mg-3e06   docs-only CONCURRENT   CONCURRENT  
+  mg-372e   mg-131e   mg-eaa1   docs-only CONCURRENT   AUDIT-BEFORE
+  mg-51f4   mg-28ff   mg-29fe   docs-only CONCURRENT   CONCURRENT  
+  mg-81ff   mg-9461   mg-39bf   docs-only CONCURRENT   AUDIT-BEFORE
+  mg-8311   mg-76b2   mg-94c3   docs-only CONCURRENT   CONCURRENT  
+  mg-845e   mg-3969   mg-d3c7   docs-only REFUSED      CONCURRENT  
+  mg-8d63   mg-789d   mg-5cba   STATE.md  CONCURRENT   REFUSED     
+  mg-af28   mg-1953   mg-3b51   docs-only CONCURRENT   CONCURRENT  
+  mg-b488   mg-200d   mg-41b7   STATE.md  AUDIT-AFTER  CONCURRENT  
+  mg-be0b   mg-3329   mg-07fd   docs-only CONCURRENT   REFUSED     
+  mg-c2b3   mg-821e   mg-4700   docs-only CONCURRENT   REFUSED     
+  count rows in them 13
+  count of them touching STATE.md 3

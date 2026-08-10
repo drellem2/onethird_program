@@ -1,0 +1,86 @@
+==============================================================================
+s6 — THE RULE
+==============================================================================
+s6 — THE RULE, AS A CHECK THAT RUNS. Shown REFUSING and shown PASSING.
+
+The ticket's real question is whether (b) can be made a rule rather than an accident of
+who noticed a rebase conflict. A rule that only ever refuses is not a rule, it is a block;
+a rule that only ever passes is decoration. This file runs the predicate over the whole
+landing population and prints BOTH sides, plus two controls whose answers are known in
+advance and one that must read zero.
+
+THE PREDICATE, stated before it runs:
+
+    unaudited_parent(landing, at) -> [(parent, audit, state), ...]
+
+    state is DONE / RUNNING / NOT-YET-DISPATCHED, evaluated at the instant `at`. A landing
+    may proceed iff every audit of every parent is DONE at its claim time; otherwise the
+    landing must re-read its figures from the audit's verdict and SAY WHICH VALUES IT TOOK
+    AND FROM WHERE.
+
+It needs nothing that does not already exist: the parents come from the ticket's own
+`depends:`/tags/body, the audits from the item store, and the states from `work.claim` and
+`work.done` events pogod already writes.
+
+1. THE TWO KNOWN ANSWERS — the seed pair, where the truth is not in doubt
+
+  [ok ] mg-8d63 at its own claim -> REFUSE (mg-5cba RUNNING): got=[('mg-789d', 'mg-5cba', 'RUNNING')] want=[('mg-789d', 'mg-5cba', 'RUNNING')]
+  [ok ] mg-5cba at its own claim -> PASS (its own parent had no pending audit): got=[] want=[]
+
+2. THE RULE OVER THE WHOLE LANDING POPULATION
+
+  count PASS (every audit already DONE)    14
+  count PASS (no audited parent)           193
+  count REFUSE                             30
+  count UNTIMEABLE                         3
+  count TOTAL                              240
+
+  THE RULE IS NON-VACUOUS IN BOTH DIRECTIONS: it refuses 30 landings and passes 207.
+  A predicate that answered one way for everything would be shown up right here.
+
+3. THE REFUSALS, and what each landing would have had to re-read
+
+  mg-00a1 -> parent mg-131e, audit mg-eaa1 was NOT-YET-DISPATCHED at claim time
+  mg-131e -> parent mg-200d, audit mg-41b7 was NOT-YET-DISPATCHED at claim time
+  mg-1d6c -> parent mg-aaf4, audit mg-8dd2 was NOT-YET-DISPATCHED at claim time
+  mg-200d -> parent mg-6bc2, audit mg-41b7 was NOT-YET-DISPATCHED at claim time
+  mg-24fb -> parent mg-5ce3, audit mg-3e06 was RUNNING at claim time
+  mg-325c -> parent mg-2860, audit mg-4f88 was NOT-YET-DISPATCHED at claim time
+  mg-345e -> parent mg-6bc2, audit mg-41b7 was NOT-YET-DISPATCHED at claim time
+  mg-372e -> parent mg-131e, audit mg-eaa1 was RUNNING at claim time
+  mg-4417 -> parent mg-24fb, audit mg-dd8b was RUNNING at claim time
+  mg-51f4 -> parent mg-28ff, audit mg-29fe was NOT-YET-DISPATCHED at claim time
+  mg-65f5 -> parent mg-e768, audit mg-ffe2 was NOT-YET-DISPATCHED at claim time
+  mg-73df -> parent mg-6f61, audit mg-d5fb was NOT-YET-DISPATCHED at claim time
+  mg-76b2 -> parent mg-845e, audit mg-29fe was NOT-YET-DISPATCHED at claim time
+  mg-789d -> parent mg-c50b, audit mg-a91f was RUNNING at claim time
+  mg-81ff -> parent mg-9461, audit mg-39bf was NOT-YET-DISPATCHED at claim time
+  mg-8257 -> parent mg-6bc2, audit mg-41b7 was NOT-YET-DISPATCHED at claim time
+  mg-8311 -> parent mg-76b2, audit mg-94c3 was RUNNING at claim time
+  mg-8d63 -> parent mg-789d, audit mg-5cba was RUNNING at claim time
+  mg-957a -> parent mg-e768, audit mg-ffe2 was NOT-YET-DISPATCHED at claim time
+  mg-9adf -> parent mg-6bc2, audit mg-41b7 was NOT-YET-DISPATCHED at claim time
+  mg-9bc2 -> parent mg-ea0e, audit mg-3902 was NOT-YET-DISPATCHED at claim time
+  mg-a7b4 -> parent mg-24a3, audit mg-7e75 was NOT-YET-DISPATCHED at claim time
+  mg-abe8 -> parent mg-5998, audit mg-8d4b was NOT-YET-DISPATCHED at claim time
+  mg-af28 -> parent mg-1953, audit mg-3b51 was RUNNING at claim time
+  mg-b488 -> parent mg-200d, audit mg-41b7 was NOT-YET-DISPATCHED at claim time
+  mg-ba78 -> parent mg-6bc2, audit mg-41b7 was NOT-YET-DISPATCHED at claim time
+  mg-be0b -> parent mg-3329, audit mg-07fd was RUNNING at claim time
+  mg-c2b3 -> parent mg-821e, audit mg-4700 was RUNNING at claim time
+  mg-e10a -> parent mg-345e, audit mg-6bd1 was RUNNING at claim time
+  mg-f8fa -> parent mg-6f61, audit mg-73df was NOT-YET-DISPATCHED at claim time
+  mg-f8fa -> parent mg-6f61, audit mg-d5fb was NOT-YET-DISPATCHED at claim time
+  count refusals listed 30 of 30
+
+4. CONTROLS
+
+  count landings still REFUSED at t=2099 9
+    (these are audits with no work.done event at all: ['mg-abe8', 'mg-957a', 'mg-1d6c', 'mg-65f5', 'mg-f8fa', 'mg-a7b4', 'mg-73df', 'mg-789d'])
+    -> NOT a defect in the predicate: an audit that never completed is
+       genuinely not DONE, and the rule saying so is the rule working.
+  [ok ] control: every t=2099 refusal traces to an audit with no work.done: got=True want=True
+  [ok ] control: a parentless item is never refused: got=[] want=[]
+
+==============================================================================
+s6: the rule runs, refuses what it should refuse, passes what it should pass.

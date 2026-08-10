@@ -1,0 +1,81 @@
+==============================================================================
+s4 — SURVIVAL AT HEAD
+==============================================================================
+s4 — DID THE WRONG FIGURE REACH THE LANDED ARTIFACT, AND IS IT STILL THERE?
+
+The ticket's question 2: a near-miss caught by rebase is a different finding from one that
+landed and stayed. Two measurements, of deliberately different kinds:
+
+  (A) THE SEED CASE, EXACTLY. mg-5cba's repairs name their SUPERSEDED values, so this arm
+      searches for each superseded figure across every canonical document at HEAD and
+      classifies each hit. THREE classes, not two, and the third is the one my first draft
+      got wrong:
+        LIVE      running prose, no repair named nearby. THE DEFECT.
+        STRUCK    inside ~~...~~, or a repair named within +/-3 lines.
+        IN-REPAIR the hit is inside the very document that publishes the repair (the audit
+                  doc, or mg-8d63's landing doc). Quoting a wrong value in order to correct
+                  it is the correction, not the defect.
+      My first draft had no IN-REPAIR class and scored 6 of 6 LIVE, every one of them a
+      quotation inside the repair. It is kept as defect D2 in the report.
+
+  (B) THE SCREEN over the residue. My first draft intersected ALL numeric literals and
+      flagged 12 of 13 on section numbers (`4.2`, `5.1`), years (`2026`) and ticket digits
+      (`9461`). A screen that fires on everything is not a screen. It is restricted here to
+      MEASURED QUANTITIES -- decimals with three or more fraction digits -- and the count
+      before and after is printed, because the drop is the whole point.
+
+NOTE ON MY OWN EXPOSURE (E4, filed in advance): the superseded values below are READ from
+mg-5cba's and mg-8d63's records and NOT recomputed -- the ticket forbids re-opening them.
+This arm can tell you WHERE a value sits, never whether mg-5cba was right about it.
+
+count canonical documents at HEAD 163
+
+(A) THE REPAIRS — every superseded figure, searched at HEAD
+
+  count hits R2  LSTAR(6): 10  LIVE=0 STRUCK=5 IN-REPAIR=5  -> STRUCK
+
+  count hits R3  Theorem A (SO) count at n<=7: 11  LIVE=0 STRUCK=5 IN-REPAIR=6  -> STRUCK
+
+  count hits R4  (M#) survival, the published TRIPLE: 4  LIVE=0 STRUCK=2 IN-REPAIR=2  -> STRUCK
+       [STRUCK   ] STATE.md:170  | **REFUTED — AND A PROVED THEOREM SHIPPED INSIDE THE REFUTATION, WHICH IS NOT A FOOTNOTE TO IT · THE ROUTE DIED, THE RESULT DID N
+       [IN-REPAIR] docs/OneThird-LStar-mg-5cba-IndependentAudit.md:30  | **R4** | "(M♯) holds at all **three** counterexamples, `u_M` = 0.943 / 0.982 / 0.958" | mg-789d certifies **four**. The missing 
+       [STRUCK   ] docs/OneThird-LStar-mg-789d.md:49  0.943, 0.982, 0.958 — so the disjunction survives. What died is the *route*: the
+       [IN-REPAIR] docs/landing-mg-8d63-the-lstar-refutation.md:224  | `(M♯)` survival | *"all **three** tested"*, `u_M = 0.943 / 0.982 / 0.958` | **4 of 4**, `0.943486 / 0.947534 / 0.981830 / 0.9583
+
+  count hits R5  counterexample count: 6  LIVE=0 STRUCK=2 IN-REPAIR=4  -> STRUCK
+       [IN-REPAIR] docs/OneThird-LStar-mg-5cba-IndependentAudit.md:31  | **R5** | LSTAR table row `12 \| >= 1.057643 \| (L*) FALSE` | **never certified by mg-789d** — `S5.4` lists four counterexamples 
+       [IN-REPAIR] docs/OneThird-LStar-mg-5cba-IndependentAudit.md:40  ## 1. The four counterexamples, re-certified (`a1`)
+       [IN-REPAIR] docs/OneThird-LStar-mg-5cba-IndependentAudit.md:131  ### 2.1 R4 — the survival claim covered three of four counterexamples
+       [STRUCK   ] docs/OneThird-LStar-mg-789d.md:48  it. At all three counterexamples **(M#) still HOLDS** — `u_M = mu_pref/t*` is
+       [STRUCK   ] docs/OneThird-LStar-mg-789d.md:357  | the disjunction survives at ~~all three~~ **all four** counterexamples ((M#) holds) | **MEASURED**, `u_M` = 0.943 / **0.948** / 
+       [IN-REPAIR] docs/roadmap.md:5  > `(L*)` is **refuted at `n = 9`**, with four counterexamples certified in exact rationals
+
+count seed probes reading LIVE at HEAD 0 of 4
+  -> LIVE means a superseded figure is still standing in running prose. Any non-zero
+     count here turns the seed from a NEAR-MISS into one that landed and stayed.
+
+(B) SCREEN over the residue — MEASURED QUANTITIES ONLY
+
+  landing   audit      sharedANY  sharedMEAS  measured overlap
+  mg-00a1   mg-eaa1           12           0  []
+  mg-131e   mg-41b7           16           0  []
+  mg-24fb   mg-3e06            4           0  []
+  mg-372e   mg-eaa1           12           0  []
+  mg-51f4   mg-29fe           67          12  ['0.019169', '0.176', '0.250000', '0.306250', '0.308339', '0.327508', '0.341', '0.550747']
+  mg-81ff   mg-39bf           27           0  []
+  mg-8311   mg-94c3           30           0  []
+  mg-845e   mg-d3c7           56           3  ['0.167', '0.21795', '0.218']
+  mg-8d63   mg-5cba            7           1  ['1.078']
+  mg-af28   mg-3b51           26           0  []
+  mg-b488   mg-41b7           14           0  []
+  mg-be0b   mg-07fd           28           1  ['2.386']
+  mg-c2b3   mg-4700           10           0  []
+
+count residue triples screened                  13
+count flagged on ALL literals (the bad screen)  13
+count flagged on MEASURED quantities            4
+  -> the drop is the measurement. A screen firing on 12 of 13 was reporting section
+     numbers and years; the restricted screen is what a human should read.
+
+A SHARED MEASURED LITERAL IS STILL NOT A DEFECT. It says only that a number the
+landing published also appears on a correction line of the concurrent audit.
