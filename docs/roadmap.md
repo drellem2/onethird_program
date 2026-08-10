@@ -1,5 +1,107 @@
 # Intrinsic Face-Geometry Program — Roadmap
 
+## INTERIM 2026-08-10 01:55Z (between sweeps, not a sweep) — THE DISJUNCTION IS ONE INEQUALITY, AND THE PROOF IS NOT AMONG THE SCALARS
+
+*Prepended by pm-onethird outside the sweep cadence because the programme's SHAPE
+changed tonight, and the 17:30Z section below is now materially behind. This entry
+records LANDED facts only — everything here is merged on `origin/main` and
+independently re-derived where stated. In-flight work is deliberately excluded; the
+09:00 sweep will carry it.*
+
+### The headline
+
+**Both L2-free routes to `C₃ = 1` are REFUTED, and the DISJUNCTION of them is the only
+survivor — now reduced from an exhaustive check to a SINGLE INEQUALITY, uniform in `n`.**
+
+- **Both routes fail, exhaustively, at `n = 7`.** All 96428 posets on [7], 86278
+  primitive. `(F)` false at **168**, max `f* = 1.297074`. `(M♯)` false at **exactly 4**,
+  max `c♯ = 1.018707`. **BOTH false at 0 of 86278.** (mg-51f4)
+- **`n = 8` IS ENUMERATED.** 2800472 posets, **2600369 primitive**, **both routes fail at
+  0**, `c_or(8) = 0.943649`. Never computed before. **SCOPE, and it is load-bearing:**
+  both-fail = 0 and `c_or(8)` are exhaustive via a stated screening argument — both
+  failing forces `min > 1 > 0.85`, so no both-failing poset can be screened out. The
+  `(F)`-ALONE count 3589 is a **LOWER BOUND, explicitly NOT a census**. (mg-c50b)
+- **`c_or(n) = 0.250000 / 0.306250 / 0.550747 / 0.753639 / 0.894472 / 0.943649` at
+  `n = 3..8`, exhaustive over primitive posets.** The margin where the disjunction is
+  actually at risk moved 26.0% → 20.9%. **NOT EXTRAPOLATED — six points is not a trend,
+  and both mg-51f4 and mg-c50b refused to push it. Neither will this roadmap.**
+
+### The reduction — `(L*)`
+
+**`(L*)`: `M² > 2γ ⟹ μ_pref·Δ ≤ γ`.** It implies the disjunction **uniformly in `n`, in
+one line**. So the disjunction is ONE inequality on the `(F)`-failing set, not 86278
+checks at `n = 7` or 2600369 at `n = 8`.
+
+- **Certified on integers** at **168/168** (`n = 7`), **3589/3589** (`n = 8`), and every
+  member of `(F)`'s own family out to **`n = 18`**.
+- **NOT vacuous:** `ρ·Δ > 1` does occur (chain+point family, from `n = 10`, reaching
+  1.078) — just never where `(F)` fails.
+- **Cheap to extend:** it needs an UPPER bound on `μ_pref`, which is the cheap direction,
+  so it is checkable past `n = 15`.
+
+**The exact reduction underneath it** (uniform in `n`, 0 disagreements at 90655 posets):
+`(F)` fails ⟺ `M > √(2γ)`; `(M♯)` fails ⟺ `Δ² > 2γ` **and** `μ_pref > Δ − √(Δ² − 2γ)`.
+Hence `ρΔ ≤ 1 ⟹ (M♯) HOLDS` and `ρΔ > 2 ⟹ (M♯) FAILS`. The corpus previously held only
+the necessity half.
+
+### >>> THE OBSTRUCTION — a NEGATIVE, and it is worth more than a partial proof <<<
+
+**No proof of the disjunction exists in the route invariants, and this is established
+rather than suspected.** mg-c50b exhibited an **explicit feasible point** satisfying
+**every** unconditional inequality the corpus holds — all five, machine-verified at
+**90655 of 90655** — **with BOTH routes failing**, and it stays feasible after adding
+`C₃^(III) = 1` itself.
+
+**Consequence: any argument assembled from `Δ, γ, M, μ_pref, ρ` and the five known
+inequalities among them CANNOT prove `(L*)`.** The relaxation admits a counterexample.
+A proof must bring in structure the scalars do not see. This rules out the entire class
+of attempt that would have been tried first.
+
+### Also settled tonight
+
+- **`(M♯)` carries an EXACT FLOOR** — `c♯(P) ≥ Δ_P − γ/2`, proved in one line,
+  machine-checked at **4377/4377** primitive posets, **0 exceptions**. **Consequence: NO
+  better monotone test vector can save `(M♯)`** — that repair class is dead in advance.
+  `(F)` carries no comparable floor; its loss is the mediant `M/Φ*_pref`. So the two
+  routes do **not** share a degrading factor.
+- **The quantifier move buys nothing without its two added steps.** `V00 = ρ` is an
+  **IDENTITY**, not a coincidence (`ρ ≥ 1` at every poset, min exactly 1.000000000000,
+  because the ψ-cone lies inside `1⊥`). Its failure counts `0/0/10/166/3164` equal the
+  L2-failure counts and sum to the corpus's own **3340** — ONE population, not two that
+  agree. **Without the two steps the L2-free route collapses back onto L2**; first
+  failure moves to `n = 4`. Independently re-derived at 4377 posets on an instrument
+  sharing no line with its predecessors, every cell computed twice by different routes,
+  0 disagreements. (mg-b58d → mg-3bb9)
+- **`L2` ITSELF IS OPEN, NOT REFUTED.** The ledger had marked `L2` false as stated; what
+  is refuted is **L2's FIRST DISJUNCT**. Repaired at STATE.md:116. The second disjunct is
+  nowhere struck and nowhere false — it is **UNQUANTIFIED**, which is weaker and
+  different, and its constant is unnamed **by the source**, not merely by us. (mg-3329)
+- **L2's first disjunct holds at 10806 of 86278 at `n = 7`** — so it FAILS at 75472.
+
+### Corrections to this programme's own record
+
+- **mg-51f4 §7's stated mechanism is FALSE.** "The Fiedler vector IS monotone there"
+  fails at **144 of the 168**; only 24 have `ρ = 1`. Only the QUANTITATIVE form survives
+  (max `ρ = 1.0238`). It was labelled a conjecture, so **nothing is withdrawn** — the
+  stated form was simply stronger than the evidence. Repair filed (mg-fc66).
+- **The "no quality gates" caveat is DISCHARGED.** mg-51f4's entire `n = 7` census
+  re-derives **exactly** on an instrument that never opened `lib51f4.py` — every
+  published constant to every printed digit. One single-poset bin-edge difference
+  (21531/1601 vs 21532/1600) moves no figure. **These numbers are measurements, not
+  copies.** The census never needed a gate. *(The general asymmetry — this repo has no
+  merge gate while `pogo` does — remains open as mg-69b4.)*
+
+### Next
+
+**Prove `(L*)`** (mg-789d). It is the only form of the anti-correlation that can be
+uniform in `n`, and mg-c50b §5 shows nothing weaker will do. Do **not** re-attack either
+route, do **not** extrapolate `c_or`, and do **not** look for the proof among the
+scalars. A **counterexample** to `(L*)` is worth as much as a proof and must be reported
+as a result, not a failure.
+
+---
+
+
 ## Sweep 2026-08-09 17:30Z (evening, run LATE at 18:30Z) — THE CONSUMED CONSTANT IS THE LAST LEMMA, NOT A NUMBER
 
 *Generated by pm-onethird. This sweep PREPENDS rather than regenerating the whole
