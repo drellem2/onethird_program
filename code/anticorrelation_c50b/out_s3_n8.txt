@@ -1,0 +1,33 @@
+s3.  EXHAUSTIVE n = 8 -- rigorous two-stage screen at THRESH = 0.85
+     stage-1 bound:  c# <= sweep(min(2 Phi*, Delta), Delta) / (2 gamma)
+   ...   200000 primitive,   621 survivors, 120s
+   ...   400000 primitive,  1083 survivors, 236s
+   ...   600000 primitive,  1274 survivors, 350s
+   ...   800000 primitive,  1673 survivors, 463s
+   ...  1000000 primitive,  2131 survivors, 578s
+   ...  1200000 primitive,  2894 survivors, 691s
+   ...  1400000 primitive,  3206 survivors, 804s
+   ...  1600000 primitive,  3629 survivors, 914s
+   ...  1800000 primitive,  4098 survivors, 1022s
+   ...  2000000 primitive,  4938 survivors, 1136s
+   ...  2200000 primitive,  6553 survivors, 1252s
+   ...  2400000 primitive,  6851 survivors, 1361s
+   ...  2600000 primitive,  7203 survivors, 1482s
+
+  posets on [8]: 2800472      primitive: 2600369
+  stage-1 survivors (min(c#_UB, f*) > 0.85): 7203
+  stage-1 elapsed 1482 s
+
+  STAGE 2 -- full exact treatment of every survivor
+  (F)  FAILS at 3589 of 2600369 primitive   [EXACT on every survivor]
+  (M#) FAILS at 0 of 2600369 primitive   [EXACT copositivity]
+  BOTH FAIL  at 0 of 2600369 primitive
+  REFUSED: 0
+  (F)  fail heights: {2: 70, 3: 2500, 4: 983, 5: 36}
+  (M#) fail heights: {}
+
+  c_or(8) = 0.943649   [EXHAUSTIVE: every excluded poset provably has min <= 0.85]
+  argmax dn = (0, 0, 2, 0, 8, 24, 62, 63)
+  at the argmax: c# = 0.943649  f* = 1.269610  gamma = 0.047583  height = 4
+                 Delta = 62/65  Phi* = 1/26  M = 723/2080
+  total elapsed 1550 s

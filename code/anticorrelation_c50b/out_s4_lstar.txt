@@ -1,0 +1,52 @@
+==============================================================================
+S4.1  (L*) AT n = 7, EXACTLY, ON THE WHOLE (F)-FAILING SET
+==============================================================================
+  (F)-failing primitive posets on [7]: 168
+  (L*) CERTIFIED EXACTLY at 168 of 168          ALL
+  max rho*Delta over the set (float measurement) = 0.923894
+  attained at dn = (0, 0, 0, 4, 4, 31, 29)
+
+  CONSEQUENCE.  The disjunction at n = 7 is not 86278 independent checks.  It is ONE
+  sufficient condition, rho*Delta_P <= 1, holding on the 168 posets where it is the
+  only thing standing between the two routes -- with a margin, and certified on
+  integers at every one of them.
+
+==============================================================================
+S4.2  (L*) ON THE FAMILIES -- FAMILY MEMBERS, NEVER MAXIMA OVER THEIR n
+==============================================================================
+
+  FAMILY: near-ordinal antichains (|A| = floor(n/2), two relations dropped)
+   n | (F) fails | rho     | rho*Delta | (L*) certified | u_M = mu/t* | c#      | f*
+    6 | no        | 1.01304 | 0.73676   | YES            | 0.65249     | 0.68177 | 0.45753  (0s)
+    7 | no        | 1.01143 | 0.79470   | YES            | 0.74309     | 0.75635 | 0.71916  (0s)
+    8 | no        | 1.00983 | 0.78542   | YES            | 0.75093     | 0.75952 | 0.98984  (0s)
+    9 | YES       | 1.00840 | 0.82505   | YES            | 0.80100     | 0.80579 | 1.41669  (0s)
+   10 | YES       | 1.00715 | 0.82064   | YES            | 0.80312     | 0.80657 | 1.86201  (0s)
+   11 | YES       | 1.00619 | 0.84897   | YES            | 0.83586     | 0.83801 | 2.49453  (0s)
+   12 | YES       | 1.00535 | 0.84661   | YES            | 0.83652     | 0.83817 | 3.15419  (0s)
+   13 | YES       | 1.00470 | 0.86769   | YES            | 0.85979     | 0.86090 | 4.03355  (0s)
+   14 | YES       | 1.00412 | 0.86630   | YES            | 0.85998     | 0.86087 | 4.94830  (0s)
+   15 | YES       | 1.00367 | 0.88254   | YES            | 0.87741     | 0.87804 | 6.11593  (0s)
+   16 | YES       | 1.00326 | 0.88166   | YES            | 0.87744     | 0.87796 | 7.32692  (0s)
+   17 | YES       | 1.00295 | 0.89452   | YES            | 0.89102     | 0.89140 | 8.82439  (0s)
+   18 | YES       | 1.00265 | 0.89393   | YES            | 0.89098     | 0.89130 | 10.37298  (0s)
+
+  FAMILY: chain(n-1) + one isolated point  -- (M#)'s family; (F) must be far off
+   n | (F) fails | u_F = M/sqrt(2g) | c#(upper) | rho     | rho*Delta
+    6 | no        | 0.47743          | 0.79422   | 1.06916 | 0.89096
+    7 | no        | 0.48113          | 0.85007   | 1.08434 | 0.92944
+    8 | no        | 0.46335          | 0.89323   | 1.09755 | 0.96036
+    9 | no        | 0.46027          | 0.92788   | 1.10921 | 0.98596
+   10 | no        | 0.44559          | 0.95535   | 1.11818 | 1.00636
+   11 | no        | 0.44027          | 0.97800   | 1.12574 | 1.02340
+   12 | no        | 0.42789          | 0.99724   | 1.13249 | 1.03812
+   13 | no        | 0.42194          | 1.01334   | 1.13800 | 1.05046
+   14 | no        | 0.41131          | 1.02695   | 1.14250 | 1.06089
+   15 | no        | 0.40533          | 1.03869   | 1.14636 | 1.06994
+   16 | no        | 0.39608          | 1.04901   | 1.14980 | 1.07794
+
+  READING.  On (F)'s own family, rho*Delta stays under 1 at every n tested and (L*) is
+  certified on integers at every one -- so (M#) HOLDS there, at every n, by S2.1's
+  one-line sufficient condition and NOT by a copositivity bracket.  These are FAMILY
+  MEMBERS.  No row here is a maximum over its n.
+

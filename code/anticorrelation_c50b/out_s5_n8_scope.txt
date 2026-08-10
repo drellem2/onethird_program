@@ -1,0 +1,22 @@
+==============================================================================
+S5.  n = 8 AT ITS ACTUAL SCOPE, AND (L*) THERE
+==============================================================================
+  survivors of the stage-1 screen: 7203
+  of which (F) FAILS at: 3589   <-- a LOWER BOUND on the n=8 (F)-failure count,
+                              not a census (see this file's docstring)
+
+  *** (L*) AT n = 8 ***
+  (L*)  M^2 > 2 gamma  ==>  mu_pref * Delta_P <= gamma
+  CERTIFIED EXACTLY (integer PSD test) at 3589 of 3589      ALL
+  max rho*Delta over that set (float measurement) = 0.968818
+  heights of that set: {2: 70, 3: 2500, 4: 983, 5: 36}
+
+  *** THE DISJUNCTION MARGIN AT n = 8 ***
+  min u_M = mu_pref/t* over the same set = 0.790802   (margin 20.9%)
+  attained at dn = (0, 0, 0, 7, 7, 7, 5, 6)
+
+  READING.  Every (F)-failure reachable by the screen at n = 8 satisfies (L*), on
+  integers.  Since the screen provably contains every both-failing poset, (L*) on this
+  set is enough to give the disjunction at n = 8 -- again by ONE sufficient condition
+  rather than by 2600369 separate checks.
+
