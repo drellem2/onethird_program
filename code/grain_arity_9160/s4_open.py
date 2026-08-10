@@ -26,6 +26,8 @@ from itertools import combinations
 
 import lib9160 as G
 
+C = G.convention()       # mg-2ff6 -- the dated-population convention
+
 BAD = 0
 A = G.A
 
@@ -68,7 +70,7 @@ print("  corpus says, so there is no arity to run out of, and the failure case")
 print("  is not a symbol meaning `this label has no grain` -- it is `NO-NOUN`")
 print("  carrying the label that defeated the extractor.")
 print()
-G.pop("every count ROW of the reconstructed corpus")
+G.pop("every count ROW of the reconstructed corpus", ref=G.RECON)
 G.row("...count ROWS given a grain NOUN of their own", rows - nonoun,
       "printed line")
 G.row("...count ROWS the extractor cannot read a noun from", nonoun,
@@ -206,7 +208,14 @@ print("  Both instruments above answer all %d pairs.  The arc has adjudicated"
       % tot)
 print("  %d of them.  `verdict` returns the third value at the rest:" % adjud)
 print()
-G.pop("the unordered PAIRS of the corpus's %d grain NOUNS" % len(FULL))
+# mg-2ff6 -- FROZEN at the reconstruction.  `79800` is not a figure about
+# today's corpus and never was; it is C(400,2) over the 400 nouns of
+# `9f1ecaa + eacc5e1`.  The same rule at HEAD gives a number more than
+# twice as large, and the difference is the arc's growth and not a defect.
+C.class_block([("the reconstructed corpus's grain-noun PAIRS", True, False,
+                G.RECON)])
+G.pop("the unordered PAIRS of the corpus's %d grain NOUNS" % len(FULL),
+      ref=G.RECON)
 G.row("...PAIRS in the corpus vocabulary", tot, "pair of grain nouns")
 G.row("...PAIRS this arc has ADJUDICATED", adjud, "pair of grain nouns")
 G.row("...PAIRS answered UNADJUDICATED", tot - adjud, "pair of grain nouns")

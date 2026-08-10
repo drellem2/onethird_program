@@ -34,7 +34,7 @@ third distinction.
 
 **And the same limit exists one layer down, in the population rule, where
 nothing had looked.** `lib56dc.count_rows` returns **one label and one grain
-per printed line**. Across the arc's **517** transcripts it returns **1191**
+per printed line**. Across the arc's **517** transcripts [pop `@9f1ecaa+eacc5e1`, OBSERVED] it returns **1191**
 count rows — and **246** of those rows carry a **second count inside the
 label**, **626 integers in total, which are never classified at all.** They are
 not mis-classified; they are outside the population. **Five** of them are at a
@@ -55,7 +55,7 @@ these, because the row rule gets there first.
 
 | # | asked | answer |
 |---|---|---|
-| **1** | confirm the resolution gap yourself; then **how many other axes is it blind to?** | Confirmed by running it (12 of 12 as pre-registered). **623 of its own 903 vocabulary pairs collapsed; 3 of the 6 grain axes that occur in this corpus are collapsed, and only 1 of the 6 is separated by two words it actually knows.** Of the corpus's own **400** grain words, **370 classify `NONE`** — it has no entry for them, and it collapses **86.0%** of the pairs they form (**76.1%** counting only the 30 it has an entry for). |
+| **1** | confirm the resolution gap yourself; then **how many other axes is it blind to?** | Confirmed by running it (12 of 12 as pre-registered). **623 of its own 903 vocabulary pairs collapsed; 3 of the 6 grain axes that occur in this corpus are collapsed, and only 1 of the 6 is separated by two words it actually knows.** Of the corpus's own **400** grain words [pop `@9f1ecaa+eacc5e1`, OBSERVED], **370 classify `NONE`** — it has no entry for them, and it collapses **86.0%** of the pairs they form (**76.1%** counting only the 30 it has an entry for). |
 | **2** | did P1f's blind-spot test inherit the blind spot, and is the survivor the inherited one? | **Yes, and yes.** Re-derived from `lib56dc` directly, not read off the parent's transcript: **2 flagged rows, 1 before and 1 after.** The post-repair row is `...ROWS outside it, across 10 distinct basenames` — its label states ROWS, it holds 14, and **14 is the row count**. The row is *correct*; only the classifier is confused. **Not a second defect.** Recorded and not tuned: `PREDICTIONS.md` has **exactly 1 commit**, P1g survives verbatim, `OUTCOMES.md` scores it MISS. |
 | **3a** | O1 — count one loop both ways yourself | A **second enumerator** written in this directory: **0 disagreements** with `lib56dc` at both revisions. At the pinned `973ca61`: **10 ROWS / 9 SITES**. At HEAD: **14 ROWS / 12 SITES**. The parent's headline re-derives. |
 | **3b** | O1 — for every printed count, the LABEL, the GRAIN, and whether they agree | Full ledger below. At HEAD **8 of 8** decidable rows agree. At `973ca61` **1 disagrees** — and it is the defect O1 names. **The label-reading instrument passes both versions.** |
@@ -109,7 +109,7 @@ wrong label and it is why `9` propagated into four artifacts.
 ## THE THREE THINGS THE PARENT DID NOT ESTABLISH
 
 1. **The gap is not one word wide.** 623 collapsed pairs in the classifier's
-   own vocabulary; **370 of the corpus's 400 grain words with no entry at
+   own vocabulary; **370 of the corpus's 400 grain words [pop `@9f1ecaa+eacc5e1`, OBSERVED] with no entry at
    all**; 3 of 6 real axes collapsed. O1 was a **sample from a class**, not a
    gap in a list.
 2. **The truncate-before-probe shape is an arc-wide runner idiom.** The parent
@@ -257,3 +257,39 @@ runs of this suite produce 7 of 7 byte-identical transcripts** — the parent's
 its. One probe writes and
 restores — see the header of `run_all.sh`. Run it on a committed tree: A1, A3
 and A5 report figures derived at HEAD.
+
+---
+
+## `[pop @…]` — WHAT THE MARKER ON A CORPUS FIGURE MEANS  (mg-2ff6)
+
+Every arc-wide corpus figure in this file now carries the **population it was
+taken under**, in the three classes `libfd9c.state_of` assigns from two
+booleans (mg-fd9c/S4a):
+
+- **FROZEN** — the population is a ref. The figure is a constant, and a re-run
+  reproduces it byte for byte, forever.
+- **GROWING** — the population is the arc's disk glob. The figure is a
+  measurement dated by a commit; it moves whenever anything lands.
+- **OBSERVED** — GROWING, and the population contains the observer, so the
+  reading also depends on whether the observer's own transcripts were on disk
+  when the census ran. The honest published form is an interval of known
+  width, and that width is *not* a statistical error bar — it is the two
+  readings the apparatus admits.
+
+`@9f1ecaa+eacc5e1` is a **union of two refs** and not a typo. mg-03d1 globbed
+the disk, and on the run that writes them a tree's own transcripts are
+untracked — so the corpus its figures range over is everything tracked at
+`9f1ecaa` *plus* mg-03d1's own seven transcripts as published at `eacc5e1`,
+and neither ref alone reproduces it (mg-9160/S1b). A figure marked OBSERVED
+here was taken against that disk; the same figure re-read *through* those two
+refs is FROZEN, which is why the same number carries different classes in
+different files.
+
+**THE FIGURES ABOVE ARE NOT REFRESHED, AND MUST NOT BE.** They are what was
+claimed. The same rules at today's HEAD give very different answers, and
+mg-fd9c/S2d walked every first-parent commit of this branch that touches a
+transcript and found mg-03d1's `517 / 1191` was the right answer at **none**
+of them. Refreshing these in place would erase the record of what was claimed;
+dating them is the repair. What the same rules give now is published, with its
+own date, in `code/dated_population_2ff6/out_d1_moved.txt` — not here, because
+a number in prose is a number nobody can re-run.

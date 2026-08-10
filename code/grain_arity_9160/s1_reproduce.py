@@ -20,6 +20,11 @@ import sys
 
 import lib9160 as G
 
+# mg-2ff6 -- THE CONVENTION, IMPORTED.  `convention()` is a LAZY import, and
+# the laziness is load-bearing: `libfd9c` imports `lib9160` at its own top
+# level, so a top-level import of the convention here would be circular.
+C = G.convention()
+
 BAD = 0
 A = G.A
 
@@ -110,6 +115,12 @@ VIEWS = [
     ("the disk at HEAD now", [(p, None) for p in G.corpus()]),
 ]
 TARGET = (517, 1191, 246, 626, 400)
+# mg-2ff6 -- THE DATED POPULATION, ABOVE THE TABLE AND NOT BELOW IT.  There
+# was a `pop()` here already and it sat AFTER the four rows, so cfd9c's S4c
+# walked up from `the disk at HEAD now`, hit the section bar, and scored the
+# row UNDATED.  The population line has to be where the reader (and the
+# checker) reaches it before the figure, which is above.
+G.pop("the 4 corpus VIEWS below, each at the ref its own row names")
 print("      %-38s %6s %6s %6s %6s %6s"
       % ("corpus", "files", "rows", "e-rows", "e-ints", "words"))
 res = {}
@@ -121,6 +132,21 @@ for tag, files in VIEWS:
 print("      %-38s %6d %6d %6d %6d %6d"
       % ("mg-03d1 PRINTED", TARGET[0], TARGET[1], TARGET[2], TARGET[3],
          TARGET[4]))
+print()
+# mg-2ff6 -- THE CLASS OF EACH ROW, and it is the point of the table.  Three
+# of these four rows are FROZEN and one is OBSERVED, and that is the whole
+# difference between a figure that reproduces forever and a figure that was
+# the right answer at one commit of 245.
+C.class_block([
+    ("reconstructed: 9f1ecaa + mg-03d1's own", True, False,
+     "%s+%s" % (G.PARENT_REV, G.PARENT_PUB)),
+    ("the index at 9f1ecaa alone", True, False, G.PARENT_REV),
+    ("the disk at HEAD now", False, True, None),
+    ("mg-03d1 PRINTED", True, False, G.PARENT_PUB),
+])
+print()
+C.observed_block("code/grain_arity_9160/",
+                 note="This is the `the disk at HEAD now` row, field by field.")
 print()
 G.pop("the 3 corpus VIEWS above, one row each")
 hits = sum(1 for tag in res if res[tag][:5] == TARGET)

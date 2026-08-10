@@ -26,6 +26,8 @@ import sys
 
 import lib9160 as G
 
+C = G.convention()       # mg-2ff6 -- the dated-population convention
+
 BAD = 0
 A = G.A
 
@@ -143,7 +145,15 @@ print("  collects, which is its AS5 and my E2).")
 print()
 print("      cells: " + "  ".join("%s=%d" % (k, len(v))
                                   for k, v in sorted(cpart.items())))
-G.pop("the grain WORDS of the reconstructed corpus, as unordered pairs")
+# mg-2ff6 -- FROZEN, and the ref is a UNION OF TWO REFS.  Every figure in
+# this section is computed over `parent_corpus()`, so it is a constant: it
+# reproduced at c9160's run, it reproduces now, and it will reproduce after
+# the arc has doubled again.  That is not true of one row in this tree
+# (S1b's `the disk at HEAD now`) and the class is where a reader is told.
+C.class_block([("the reconstructed corpus's grain WORDS", True, False,
+                G.RECON)])
+G.pop("the grain WORDS of the reconstructed corpus, as unordered pairs",
+      ref=G.RECON)
 G.row("...distinct grain WORDS in the corpus", len(CW), "de-pluralised noun")
 G.row("...unordered PAIRS over them", cp, "pair of grain words")
 G.row("...PAIRS `_classify` collapses", cc, "pair of grain words")
@@ -196,6 +206,11 @@ print("  colourable.  `chromatic` brute-forces it rather than asserting it,")
 print("  and the selftest's triangle control shows the routine can say 3.")
 print()
 k, colouring = G.chromatic(verts, edges)
+# mg-2ff6 -- FROZEN, and its population is a HAND LIST in this file rather
+# than a corpus at all.  It is dated at HEAD because that is where the list
+# is read from; it does not move when the arc grows, and an interval on it
+# would be decoration.
+C.class_block([("the 6 named grain AXES", True, False, None)], intro=False)
 G.pop("the 6 named grain AXES, as a graph on 11 grain WORDS")
 G.row("...grain WORDS the six axes name", len(verts), "grain word")
 G.row("...AXES to be separated", len(edges), "axis")

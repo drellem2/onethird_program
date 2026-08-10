@@ -27,7 +27,7 @@ cells empty.
 **And the ticket's operative conclusion survives, for a stronger reason.**
 `DO NOT add ROW_WORDS` stands: the exhibit above needed every axis's poles known
 in advance, so a vocabulary cut to fit six known axes fits the seventh no better
-than this one does. And at the corpus's own 400 grain nouns the arity that would
+than this one does. And at the corpus's own 400 grain nouns [pop `@9f1ecaa+eacc5e1`, FROZEN] the arity that would
 separate the genuinely distinct pairs is of the order of **400**, not five or
 six — so the remedy is wrong by two orders of magnitude, not by one axis.
 
@@ -78,7 +78,7 @@ of which 2 only because one pole is a word it does not know; the open set gets
 9, and a function that always says DIFFERENT gets 9. Neither is a repair.
 
 **The repair is a third verdict.** `verdict(a, b)` returns `SAME` /`DIFFERENT` /
-`UNADJUDICATED`. Over the corpus's 79 800 grain pairs the arc has adjudicated
+`UNADJUDICATED`. Over the corpus's 79 800 grain pairs [pop `@9f1ecaa+eacc5e1`, FROZEN] the arc has adjudicated
 **7**. Both other instruments answer all 79 800. No arity carries the third
 value: a function returning one symbol per word *is* a partition, a partition
 *is* an equivalence relation, and an equivalence relation has no room for
@@ -115,7 +115,7 @@ existed, and everything else was printed in my ticket body.
 |---|---:|---|
 | P1 arity is the minority share of the 623 | 0.97 | HIT — 210 vs 413 |
 | P2 the six axes are 2-colourable, exhibited and run | 0.90 | HIT |
-| P3 same at the corpus's 400 nouns | 0.85 | HIT — 28.9 % |
+| P3 same at the corpus's 400 nouns [pop `@9f1ecaa+eacc5e1`, FROZEN] | 0.85 | HIT — 28.9 % |
 | P4 my own repair splits 2 of 2 adjudicated synonyms | 0.80 | HIT |
 | P5 the population collapses a second time | 0.75 | HIT — 2268 > 1191 |
 | P6 the population fix reaches AF2's 5 | 0.60 | SPLIT |
@@ -165,3 +165,39 @@ measured** — that is a second tree's work on another ticket's subject.
 | `s3_population.py` | one row per integer; the attribution disagreement |
 | `s4_open.py` | the open set, its price, and the third verdict |
 | `s5_self.py` | bets scored, seven defects, what I did not do |
+
+---
+
+## `[pop @…]` — WHAT THE MARKER ON A CORPUS FIGURE MEANS  (mg-2ff6)
+
+Every arc-wide corpus figure in this file now carries the **population it was
+taken under**, in the three classes `libfd9c.state_of` assigns from two
+booleans (mg-fd9c/S4a):
+
+- **FROZEN** — the population is a ref. The figure is a constant, and a re-run
+  reproduces it byte for byte, forever.
+- **GROWING** — the population is the arc's disk glob. The figure is a
+  measurement dated by a commit; it moves whenever anything lands.
+- **OBSERVED** — GROWING, and the population contains the observer, so the
+  reading also depends on whether the observer's own transcripts were on disk
+  when the census ran. The honest published form is an interval of known
+  width, and that width is *not* a statistical error bar — it is the two
+  readings the apparatus admits.
+
+`@9f1ecaa+eacc5e1` is a **union of two refs** and not a typo. mg-03d1 globbed
+the disk, and on the run that writes them a tree's own transcripts are
+untracked — so the corpus its figures range over is everything tracked at
+`9f1ecaa` *plus* mg-03d1's own seven transcripts as published at `eacc5e1`,
+and neither ref alone reproduces it (mg-9160/S1b). A figure marked OBSERVED
+here was taken against that disk; the same figure re-read *through* those two
+refs is FROZEN, which is why the same number carries different classes in
+different files.
+
+**THE FIGURES ABOVE ARE NOT REFRESHED, AND MUST NOT BE.** They are what was
+claimed. The same rules at today's HEAD give very different answers, and
+mg-fd9c/S2d walked every first-parent commit of this branch that touches a
+transcript and found mg-03d1's `517 / 1191` was the right answer at **none**
+of them. Refreshing these in place would erase the record of what was claimed;
+dating them is the repair. What the same rules give now is published, with its
+own date, in `code/dated_population_2ff6/out_d1_moved.txt` — not here, because
+a number in prose is a number nobody can re-run.

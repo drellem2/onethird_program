@@ -1,6 +1,6 @@
 mg-03d1 / A1 -- THE CLASSIFIER'S AXES
 Subject: `lib56dc._classify`, the sixth instrument the brief sent me to
-run.  Repository HEAD: 9f1ecaa
+run.  Repository HEAD: 518a5e9
 
 ==========================================================================
 A1a  THE RESOLUTION GAP, CONFIRMED BY RUNNING IT AND NOT BY READING IT
@@ -23,7 +23,7 @@ A1a  THE RESOLUTION GAP, CONFIRMED BY RUNNING IT AND NOT BY READING IT
       `invocations `  ->  EXECUTION   pre-registered EXECUTION  
       `iterations  `  ->  EXECUTION   pre-registered EXECUTION  
 
-  population: the 12 probe WORDS listed in PREDICTIONS.md/A1a
+  population: the 12 probe WORDS listed in PREDICTIONS.md/A1a   @518a5e9
       ...probe WORDS classifying as pre-registered             12
       ^ one unit of that number is one probe word
 
@@ -45,7 +45,7 @@ A1b  AND THE LIMIT IS THE ARITY, NOT THE VOCABULARY
   cells.  A partition into four cells can express exactly ONE binary
   distinction plus the two degenerate cells (`BOTH`, `NONE`).
 
-  population: probe STRINGS chosen to reach every arm of the function
+  population: probe STRINGS chosen to reach every arm of the function   @518a5e9
       distinct output WORDS `_classify` can return              4
       ^ one unit of that number is one output symbol
       ...boolean CHECKS the body performs                       2
@@ -88,8 +88,7 @@ A1c  THE COLLAPSE, COUNTED OVER THE CLASSIFIER'S OWN VOCABULARY
       `executed        ` = EXECUTION
       `statuses read   ` = EXECUTION
 
-  population: the 43 vocabulary WORDS of the classifier itself, taken
-  as unordered pairs
+  population: the 43 vocabulary WORDS of the classifier itself, as unordered pairs   @518a5e9
       ...vocabulary WORDS in SITE_WORDS                        35
       ^ one unit of that number is one regex alternative
       ...vocabulary WORDS in EXEC_WORDS                         8
@@ -115,27 +114,27 @@ A1d  AND THE COLLAPSE OVER THE GRAIN WORDS THAT ACTUALLY OCCUR
   `of`/`in`/`per`) rather than from a hand list -- a hand list of
   interesting nouns is how this check would become what it audits.
 
-  population: every count ROW of every `code/*/out_*.txt` on disk
-      ...ARTIFACTS in that corpus                             517
+  population: every count ROW of every `code/*/out_*.txt` on disk   @518a5e9
+      ...ARTIFACTS in that corpus                             854
       ^ one unit of that number is one transcript file
-      ...count ROWS in them                                  1191
+      ...count ROWS in them                                  2233
       ^ one unit of that number is one printed line
-      ...distinct grain WORDS extracted from their labels     400
+      ...distinct grain WORDS extracted from their labels     638
       ^ one unit of that number is one de-pluralised noun
 
-      ...of those grain WORDS classifying SITE                 26
-      ...of those grain WORDS classifying EXECUTION             4
+      ...of those grain WORDS classifying SITE                 35
+      ...of those grain WORDS classifying EXECUTION             5
       ...of those grain WORDS classifying BOTH                  0
-      ...of those grain WORDS classifying NONE                370
+      ...of those grain WORDS classifying NONE                598
       ^ one unit of each of those numbers is one de-pluralised noun
-      ...unordered PAIRS of grain words in the corpus       79800
+      ...unordered PAIRS of grain words in the corpus      203203
       ^ one unit of that number is one pair of corpus grain words
-      ...PAIRS of grain WORDS it can tell apart             11204
+      ...PAIRS of grain WORDS it can tell apart             24095
       ^ one unit of that number is one pair of corpus grain words
-      ...PAIRS of grain WORDS it collapses                  68596
+      ...PAIRS of grain WORDS it collapses                 179108
       ^ one unit of that number is one pair of corpus grain words
 
-      collapse rate over the corpus's own grain words:   86.0%
+      collapse rate over the corpus's own grain words:   88.1%
 
   AND THE STRICTER READING, printed because the pre-registered metric
   above is the GENEROUS one and saying so is cheaper than defending it.
@@ -144,14 +143,32 @@ A1d  AND THE COLLAPSE OVER THE GRAIN WORDS THAT ACTUALLY OCCUR
   side of it going unanswered.  Counting only pairs where BOTH poles got
   a grain symbol:
 
-  population: the 30 corpus grain WORDS the classifier has an entry for
-      ...unordered PAIRS over those grain words               435
+  A SUBSET of the disk glob above, so OBSERVED with it -- said here
+  rather than on the population line, because that line has to stay
+  ONE LINE for S4c to read the ref off it.
+  population: the 40 corpus grain WORDS the classifier has an entry for   @518a5e9
+      ...unordered PAIRS over those grain words               780
       ^ one unit of that number is one pair of corpus grain words
-      ...PAIRS of grain WORDS it genuinely tells apart        104
+      ...PAIRS of grain WORDS it genuinely tells apart        175
       ^ one unit of that number is one pair of corpus grain words
-      collapse rate on the words it can speak about:     76.1%
+      collapse rate on the words it can speak about:     77.6%
 
-  AND THE CELL THAT MATTERS MOST IS `NONE`: 370 of the 400 grain words
+  CLASS, from `libfd9c.state_of` -- two booleans and nothing
+  else: is the population a REF, and is the observer IN it.
+
+      A1d, every figure in it                            OBSERVED  @518a5e9
+
+  OBSERVED, the two readings the apparatus admits -- width is one
+  call to `libfd9c.weight_of`, this tree's own transcripts read as
+  EMPTY as a plain `>` leaves them.  NOT AN ERROR BAR.
+  `ARTIFACTS`, `count ROWS` and `grain WORDS` above, in that order.
+      files    854-854 @518a5e9 (OBSERVED)     <- EMPTY INTERVAL
+      rows     2110-2233 @518a5e9 (OBSERVED)
+      erows    576-576 @518a5e9 (OBSERVED)     <- EMPTY INTERVAL
+      eints    1441-1441 @518a5e9 (OBSERVED)   <- EMPTY INTERVAL
+      words    612-638 @518a5e9 (OBSERVED)
+
+  AND THE CELL THAT MATTERS MOST IS `NONE`: 598 of the 638 grain words
   this corpus actually uses are words the classifier HAS NO ENTRY FOR.
   For those, `grain_of` walks to `prev` and then to `header` looking for
   a word it does know -- so a label with an unknown grain noun is
@@ -161,13 +178,13 @@ A1d  AND THE COLLAPSE OVER THE GRAIN WORDS THAT ACTUALLY OCCUR
   A sample of 40 of the `NONE` grain words, alphabetically, so the
   number above is checkable:
 
-      aa-repair    aaf          about        actual       add          added      
-      affected     after        agree        algebra      alone        antichain  
-      anything     anyway       apart        appended     arc          attempt-mg-a
-      attribution  audit        axe          bad          bare         baseline   
-      bee          before       began        behind       beside       bfd        
-      bin          block        blockquote   bothway      bound        branching  
-      branching-graph  bratteli     broken       brown        byte         byte-identical
+      a-drop       a-f          a-za-z       aa-repair    aabd         about      
+      accusation   actual       add          added        addition     adjudicated
+      aeeb         affected     after        against      agree        algebra    
+      alone        ambiguou     answer       antecedent   antichain    anything   
+      anyway       apart        append       appended     appendix     arc        
+      arc-wide     argmax       argument     arity        arrived      atom       
+      attempt-mg-  attempt-mg-a  attribution  audit        away         axe        
 
 ==========================================================================
 A1e  THE SIX AXES THIS CORPUS ACTUALLY DISTINGUISHES
@@ -190,7 +207,8 @@ A1e  THE SIX AXES THIS CORPUS ACTUALLY DISTINGUISHES
       site / execution   `sites     `=SITE       `executions`=EXECUTION  -> EXPRESSIBLE
           occurs as: F1, the one axis the instrument was built for
 
-  population: the 6 named grain AXES of PREDICTIONS.md/A1e
+      the 6 named grain AXES                             FROZEN    @518a5e9
+  population: the 6 named grain AXES of PREDICTIONS.md/A1e   @518a5e9
       ...AXES of grain WORDS it can express                     3
       ^ one unit of that number is one axis
       ...AXES of grain WORDS it collapses                       3
@@ -237,7 +255,7 @@ A1f  AND ONE AXIS IT REPORTS THAT IS NOT THERE
       `checks    `=SITE      vs `iterations  `=EXECUTION  same grain: no   
           a check is written once and may iterate -- correctly split
 
-  population: the 5 candidate WORD pairs adjudicated above
+  population: the 5 candidate WORD pairs adjudicated above   @518a5e9
       ...PAIRS asserting a distinction not in the words         2
       ^ one unit of that number is one adjudicated word pair
 

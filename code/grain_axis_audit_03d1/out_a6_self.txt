@@ -1,21 +1,21 @@
 mg-03d1 / A6 -- THE FLOOR, AND MY OWN DEFECTS
-HEAD: 9f1ecaa
+HEAD: 518a5e9
 
 ==========================================================================
 AF1  HOW BIG IS THE UNCOUNTED POPULATION?
 ==========================================================================
 
-  population: every count ROW of every `code/*/out_*.txt` on disk
-      ...ARTIFACTS in that corpus                             517
+  population: every count ROW of every `code/*/out_*.txt` on disk   @518a5e9
+      ...ARTIFACTS in that corpus                             854
       ^ one unit of that number is one transcript file
-      ...count ROWS `lib56dc.count_rows` returns             1191
+      ...count ROWS `lib56dc.count_rows` returns             2233
       ^ one unit of that number is one printed line
-      ...ROWS carrying a count INSIDE the label               246
+      ...ROWS carrying a count INSIDE the label               576
       ^ one unit of that number is one printed line
-      ...integer ITEMS inside labels, never classified        626
+      ...integer ITEMS inside labels, never classified       1441
       ^ one unit of that number is one integer printed in a label
 
-  So `every printed count` is short by 626.  The rule that defines the
+  So `every printed count` is short by 1441.  The rule that defines the
   population is a SHAPE RULE OVER THE LINE -- label, whitespace, number
   at the end -- and a number that is not at the end of the line is not
   a count to it.  That rule is deliberate and its docstring defends it
@@ -23,14 +23,14 @@ AF1  HOW BIG IS THE UNCOUNTED POPULATION?
   number, which nothing in the arc has printed before.
 
   The 8 TREES with the most such rows, so the total is checkable:
+      ROWS in audit_5cba                                 68
+      ROWS in sweep_loss_51f4                            60
       ROWS in species_audit_73df                         50
+      ROWS in chain_iv_audit_00b3                        37
+      ROWS in lstar_789d                                 27
       ROWS in branching_af28                             26
       ROWS in face_geometry_audit_0b07                   23
-      ROWS in runner_exit_audit_56dc                     17
-      ROWS in hodge_leverage_audit_86a3                  12
-      ROWS in face_geometry_audit_1c80                   11
-      ROWS in state_audit_6a2f                           10
-      ROWS in branching_bound_audit_aaf4                  9
+      ROWS in corpus_fixedpoint_fd9c                     19
 
 ==========================================================================
 AF2  AND WHERE THE TWO COUNTS ON ONE LINE ARE AT DIFFERENT GRAINS
@@ -42,10 +42,18 @@ AF2  AND WHERE THE TWO COUNTS ON ONE LINE ARE AT DIFFERENT GRAINS
   `label_grain` used in A3.  Those are lines where the ONE grain the
   instrument reports is wrong for ONE of the two numbers on the line.
 
-  population: the 246 ROWS of AF1 carrying a count inside the label
-      ...ROWS whose two counts are at DIFFERENT grains          5
+  population: the 576 ROWS of AF1 carrying a count inside the label   @518a5e9
+      ...ROWS whose two counts are at DIFFERENT grains          7
       ^ one unit of that number is one printed line
 
+      code/grain_arity_9160/out_s3_population.txt:46
+          ...ROWS outside it, across 10 distinct basenames
+          the row is reported at grain row;      the embedded `10 basenames`
+          is at grain basename -- and is in no population
+      code/grain_arity_9160/out_s3_population.txt:50
+          973ca61 ALL rows   ROWS  49  SITES  47  GAP
+          the row is reported at grain row;      the embedded `49 sites`
+          is at grain site -- and is in no population
       code/runner_exit_repair_70c7/out_r4_property.txt:30
           ...ROWS outside it, across 10 distinct basenames
           the row is reported at grain row;      the embedded `10 basenames`
@@ -74,7 +82,7 @@ AF2  AND WHERE THE TWO COUNTS ON ONE LINE ARE AT DIFFERENT GRAINS
   DOWN, in the population rule -- one grain per line, because one row
   per line.  Fixing the classifier would not reach these.
 
-  population: the count ROWS of `code/runner_exit_repair_bf79`'s own transcripts
+  population: the count ROWS of `code/runner_exit_repair_bf79`'s own transcripts   @518a5e9
       ...ROWS of the parent's own carrying an uncounted count      8
       ^ one unit of that number is one printed line
 
@@ -90,7 +98,7 @@ AF2  AND WHERE THE TWO COUNTS ON ONE LINE ARE AT DIFFERENT GRAINS
 AS  THE DEFECTS OF THIS INSTRUMENT, RECORDED RATHER THAN SMOOTHED AWAY
 ==========================================================================
 
-  population: the DEFECTS of this tree's own instrument, found by this
+  population: the DEFECTS of this tree's own instrument, found by this   @518a5e9
   probe and by the runs that preceded it
       ...DEFECT ITEMS of this instrument recorded               7
       ^ one unit of that number is one defect
@@ -174,9 +182,10 @@ AS  THE DEFECTS OF THIS INSTRUMENT, RECORDED RATHER THAN SMOOTHED AWAY
 AS7  MY OWN P5b -- EVERY COUNT ROW I PRINT, AT STAGE `label`
 ==========================================================================
 
-  population: every `out_*.txt` of THIS tree on disk -- including this
-  probe's own, which the runner preserves by writing `.new` and moving
-  it (the parent's #7 fix, adopted here rather than re-discovered)
+  Including this probe's own, which the runner preserves by writing
+  `.new` and moving it -- the parent's #7 fix, adopted here rather
+  than re-discovered.
+  population: every `out_*.txt` of THIS tree on disk, this probe's own included   @518a5e9
       ...ARTIFACTS of mine on disk                              7
       ^ one unit of that number is one transcript file
       ...count ROWS in them                                   123
@@ -190,12 +199,19 @@ AS7  MY OWN P5b -- EVERY COUNT ROW I PRINT, AT STAGE `label`
   transcript I wrote.  The prose I ship carries counts too, so it is
   checked as well:
 
-  population: the PROSE ARTIFACTS of this tree on disk
+  population: the PROSE ARTIFACTS of this tree on disk   @518a5e9
       ...PROSE ARTIFACTS of mine                                3
       ^ one unit of that number is one file
       ...count ROWS in them                                     0
       ^ one unit of that number is one printed line
       ...ROWS NOT at stage `label`                              0
       ^ one unit of that number is one printed line
+
+  CLASS, from `libfd9c.state_of` -- two booleans and nothing
+  else: is the population a REF, and is the observer IN it.
+
+      AF1, every figure in it                            OBSERVED  @518a5e9
+      AS7 `...count ROWS in them` -- my transcripts      OBSERVED  @518a5e9
+      AS7 `...count ROWS in them` -- my prose            GROWING   @518a5e9
 
 A6 TOTAL BAD: 0

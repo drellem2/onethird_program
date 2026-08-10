@@ -131,8 +131,56 @@ def labels_without_noun():
     return list(_NO_NOUN)
 
 
-def pop(text, indent=2):
-    print("%spopulation: %s" % (" " * indent, text))
+def convention():
+    """mg-2ff6's `lib2ff6`, imported LAZILY and path-fixed in ONE place.
+
+    THE LAZINESS IS LOAD-BEARING AND NOT A STYLE CHOICE.  `libfd9c` imports
+    this module at its own top level and `lib2ff6` imports `libfd9c`, so a
+    top-level import of either from here is a cycle that fails on whichever
+    module is imported first.  Doing it in a call, after this module is
+    complete, is what breaks it.
+
+    THE COST, recorded rather than hidden (mg-2ff6/E1): this tree no longer
+    re-runs in a checkout that lacks `code/dated_population_2ff6/` or
+    `code/corpus_fixedpoint_fd9c/`.  The alternative was a third copy of a
+    convention two other trees already define, which is the defect this arc
+    keeps finding rather than a dependency it keeps avoiding.
+    """
+    for d in ("dated_population_2ff6", "corpus_fixedpoint_fd9c"):
+        p = os.path.join(REPO, "code", d)
+        if p not in sys.path:
+            sys.path.insert(0, p)
+    import lib2ff6
+    return lib2ff6
+
+
+def pop(text, indent=2, ref=None):
+    """A population line, DATED -- mg-2ff6 adopting mg-fd9c's convention.
+
+    THIS IS `libfd9c.pop`, DELEGATED AND NOT RE-TYPED.  cfd9c decided the
+    convention and wrote the checker that enforces it; a second printer here
+    that agreed today would be the thing its own S4c exists to make
+    unnecessary.  Every population line this tree prints now carries the ref
+    it was read at, and there is no form of this function that omits one.
+
+    `ref` names the population's own date when that is not HEAD -- the
+    reconstruction is `9f1ecaa+eacc5e1` and is FROZEN there, and dating it
+    with today's tip would be a lie of exactly the kind the convention is
+    against.
+
+    IT GOES THROUGH `lib2ff6.pop`, WHICH GUARDS THE ONE THING S4c CANNOT
+    FORGIVE: a population line that WRAPS puts `population:` on one line
+    and the ref on the next, and S4c reads the ref off the first.  The
+    guard raises there rather than leaving a silently undated figure.
+
+    LAZY IMPORT, AND THE REASON IS A CYCLE.  `libfd9c` imports THIS module at
+    its own top level (it reads `corpus`, `parent_corpus`, `PARENT_REV`).  An
+    `import libfd9c` up there would be circular and would fail on whichever
+    of the two was imported first.  Importing inside the call is what breaks
+    it, and the cost is that this tree no longer runs in a checkout without
+    `code/corpus_fixedpoint_fd9c/` -- recorded as mg-2ff6's E1.
+    """
+    convention().pop(text, indent=indent, ref=ref)
 
 
 # ---------------------------------------------------------------------------
@@ -158,6 +206,15 @@ def corpus(ref=None):
 
 
 PARENT_PUB = "eacc5e1"         # the commit that published mg-03d1's transcripts
+
+RECON = "%s+%s" % (PARENT_REV, PARENT_PUB)
+"""mg-2ff6 -- THE REF A FROZEN FIGURE IN THIS TREE IS DATED AT.
+
+Every figure this tree computes over `parent_corpus()` is FROZEN at this
+union of two refs, and dating one of them with today's tip would be exactly
+the error the convention exists to prevent: it would say a constant is a
+measurement.  `pop(..., ref=RECON)` is how a probe says so, and the sites that
+need it are the ones whose population line says `reconstructed`."""
 
 
 def parent_corpus():

@@ -23,6 +23,12 @@ import sys
 
 import lib03d1 as B
 
+# mg-2ff6 -- THE DATED-POPULATION CONVENTION, imported through the
+# parent library so the path surgery happens in one place.  Every
+# `population:` line below is printed by `libfd9c.pop`, which has no
+# form that omits the ref.
+C = B.convention()
+
 BAD = 0
 A = B.A
 
@@ -51,7 +57,7 @@ for w, want in EXPECT:
           % (w, got, want, "" if ok else "*** NOT AS PRE-REGISTERED"))
 BAD += len(EXPECT) - agree
 print()
-print("  population: the 12 probe WORDS listed in PREDICTIONS.md/A1a")
+C.pop("the 12 probe WORDS listed in PREDICTIONS.md/A1a")
 B.plain("...probe WORDS classifying as pre-registered", agree)
 print("      ^ one unit of that number is one probe word")
 print()
@@ -75,7 +81,7 @@ print()
 seen = set()
 for probe in ("rows", "runs", "runs of rows", "poset", ""):
     seen.add(A._classify(probe))
-print("  population: probe STRINGS chosen to reach every arm of the function")
+C.pop("probe STRINGS chosen to reach every arm of the function")
 B.plain("distinct output WORDS `_classify` can return", len(seen))
 print("      ^ one unit of that number is one output symbol")
 B.plain("...boolean CHECKS the body performs", 2)
@@ -116,9 +122,8 @@ nS, nE = len(SITE_V), len(EXEC_V)
 tot = (nS + nE) * (nS + nE - 1) // 2
 cross = nS * nE
 within = tot - cross
-print("  population: the %d vocabulary WORDS of the classifier itself, taken"
+C.pop("the %d vocabulary WORDS of the classifier itself, as unordered pairs"
       % (nS + nE))
-print("  as unordered pairs")
 B.plain("...vocabulary WORDS in SITE_WORDS", nS)
 print("      ^ one unit of that number is one regex alternative")
 B.plain("...vocabulary WORDS in EXEC_WORDS", nE)
@@ -157,7 +162,13 @@ for p in paths:
         rows_seen += 1
         for w in B.grain_nouns(label):
             nouns.setdefault(B.singular(w), set()).add(w)
-print("  population: every count ROW of every `code/*/out_*.txt` on disk")
+# mg-2ff6 -- OBSERVED.  This population is the DISK GLOB and this tree
+# is in it: 7 of the files below are this audit's own transcripts.
+# Every figure in this section is therefore a reading with a date and
+# a width, and the 517 / 1191 / 400 that stood here undated were the
+# right answer at NO commit that has ever existed -- their population
+# was the disk as it stood mid-run, which is a union of two refs.
+C.pop("every count ROW of every `code/*/out_*.txt` on disk")
 B.plain("...ARTIFACTS in that corpus", len(paths))
 print("      ^ one unit of that number is one transcript file")
 B.plain("...count ROWS in them", rows_seen)
@@ -195,14 +206,23 @@ print()
 gen = sum(len(cls.get(k, [])) for k in ("SITE", "EXECUTION", "BOTH"))
 gpairs = gen * (gen - 1) // 2
 gtell = len(cls.get("SITE", [])) * len(cls.get("EXECUTION", []))
-print("  population: the %d corpus grain WORDS the classifier has an entry for"
-      % gen)
+print("  A SUBSET of the disk glob above, so OBSERVED with it -- said here")
+print("  rather than on the population line, because that line has to stay")
+print("  ONE LINE for S4c to read the ref off it.")
+C.pop("the %d corpus grain WORDS the classifier has an entry for" % gen)
 B.plain("...unordered PAIRS over those grain words", gpairs)
 print("      ^ one unit of that number is one pair of corpus grain words")
 B.plain("...PAIRS of grain WORDS it genuinely tells apart", gtell)
 print("      ^ one unit of that number is one pair of corpus grain words")
 gpct = 100.0 * (gpairs - gtell) / gpairs if gpairs else 0.0
 print("      collapse rate on the words it can speak about:     %.1f%%" % gpct)
+print()
+# mg-2ff6 -- the class and the interval, ONCE for the whole A1d section.
+C.class_block([("A1d, every figure in it", False, True, None)])
+print()
+C.observed_block(
+    "code/grain_axis_audit_03d1/",
+    note="`ARTIFACTS`, `count ROWS` and `grain WORDS` above, in that order.")
 print()
 print("  AND THE CELL THAT MATTERS MOST IS `NONE`: %d of the %d grain words"
       % (len(cls.get("NONE", [])), N))
@@ -249,7 +269,14 @@ for name, a, b, why in AXES:
           % (name, a, ca, b, cb, "EXPRESSIBLE" if ok else "*** COLLAPSED"))
     print("          occurs as: %s" % why)
 print()
-print("  population: the 6 named grain AXES of PREDICTIONS.md/A1e")
+# mg-2ff6 -- FROZEN, and it is the one section here that is.  The six
+# axes are a HAND LIST in PREDICTIONS.md and the verdicts are
+# `_classify`'s, so these three figures do not move when the arc
+# grows.  Decorating them with an interval would be decorating the
+# figures that are not at risk.
+C.class_block([("the 6 named grain AXES", True, False, None)],
+              intro=False)
+C.pop("the 6 named grain AXES of PREDICTIONS.md/A1e")
 B.plain("...AXES of grain WORDS it can express", express)
 print("      ^ one unit of that number is one axis")
 B.plain("...AXES of grain WORDS it collapses", len(AXES) - express)
@@ -310,7 +337,7 @@ for a, b, same, why in CAND:
              "*** FALSE DISTINCTION" if hit else ""))
     print("          %s" % why)
 print()
-print("  population: the 5 candidate WORD pairs adjudicated above")
+C.pop("the 5 candidate WORD pairs adjudicated above")
 B.plain("...PAIRS asserting a distinction not in the words", straddle)
 print("      ^ one unit of that number is one adjudicated word pair")
 print()

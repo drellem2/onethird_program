@@ -1,0 +1,146 @@
+==============================================================================
+mg-2ff6 / D0 -- THE FORCED ARMS
+==============================================================================
+HEAD: 518a5e9   published-from: 5c0849a
+
+==========================================================================
+D0a  cfd9c's SELECTOR, LIFTED OUT OF cfd9c's OWN FILE
+==========================================================================
+
+  The checker is inline in `s4_convention.py` and importing a probe
+  runs it, so there is no import to make.  There is also no excuse for
+  a second copy: the ticket's trap is that this checker has already
+  been respecified once by the tree it was checking, and a re-typing
+  here is how that would happen a second time without anyone deciding
+  to.  So the SOURCE TEXT is lifted and compiled:
+
+      r"\b(ARTIFACTS in that corpus|count ROWS in them|grain WORDS|"
+      r"in the corpus|arc-wide|the disk at HEAD)", re.I
+
+  population: 6 label STRINGS whose answer is known before the run   @518a5e9
+      `...ARTIFACTS in that corpus` is arc-wide                ok
+      `...count ROWS in them` is arc-wide                      ok
+      `...distinct grain WORDS in the corpus` is arc-wide      ok
+      `...probe WORDS classifying as pre-registered` is NOT    ok
+      `...ROWS NOT at stage `label`` is NOT                    ok
+      `...AXES to be separated` is NOT                         ok
+      ^ one unit of each is one label string
+
+  THE THREE `NOT` ROWS ARE THE ARM.  A selector that answered `yes` to
+  everything would score this ticket 27 of 27 and mean nothing.
+
+==========================================================================
+D0b  THE SECTION RULE, ON A FIXTURE BUILT TO BREAK A LABEL-ONLY KEY
+==========================================================================
+
+  population: 1 synthetic transcript carrying the same LABEL 3 times   @518a5e9
+      3 count rows, 3 distinct keys                            ok
+      the first is tagged with its own section                 ok
+      the two in one section are told apart by ORDINAL         ok
+      ^ one unit of each is one count row
+
+  `out_a6_self.txt` REALLY DOES PRINT `...count ROWS in them` TWICE IN
+  ONE SECTION -- once over this tree's transcripts and once over its
+  prose.  A key of (section, label) merges them and reports one of the
+  two as unmoved forever.
+
+==========================================================================
+D0c  THE THREE CLASSES, ALL FOUR INPUTS
+==========================================================================
+
+  population: the 4 (population-is-a-ref, observer-in-population) INPUTS   @518a5e9
+      (ref, observer outside)   -> FROZEN                      ok
+      (ref, observer inside)    -> FROZEN                      ok
+      (glob, observer outside)  -> GROWING                     ok
+      (glob, observer inside)   -> OBSERVED                    ok
+      ^ one unit of each is one pair of booleans
+
+  THE TOP TWO ROWS ARE THE SAME CLASS AND THAT IS NOT AN OVERSIGHT: a
+  ref-pinned population cannot contain the censor, because the censor's
+  transcript is untracked while it runs.  cfd9c's S4a says so; this arm
+  is here so that a later edit to `state_of` cannot quietly disagree.
+
+==========================================================================
+D0d  THE PUBLISHED FORM, INCLUDING THE EMPTY INTERVAL
+==========================================================================
+
+  population: 4 rendered FIGURES whose text is known before the run   @518a5e9
+      FROZEN carries a ref and no range                        ok
+      GROWING says so                                          ok
+      OBSERVED is an interval                                  ok
+      and an EMPTY interval stays empty                        ok
+      ^ one unit of each is one rendered figure
+
+  THE LAST ROW IS THE ONE THAT MATTERS.  `files` cannot tell the two
+  write regimes apart, because `>` truncates and does not unlink, so
+  its interval is empty and must STAY empty.  A convention that put a
+  range on every field would be decorating the one field not at risk,
+  which is how an error bar stops meaning anything.
+
+==========================================================================
+D0e  THE PUBLISHED REF RESOLVES, AND CARRIES EVERY TRANSCRIPT
+==========================================================================
+
+  population: the 8 TRANSCRIPTS this ticket re-runs, at 5c0849a   @5c0849a
+      grain_axis_audit_03d1/out_a1_axes.txt                   249
+      grain_axis_audit_03d1/out_a6_self.txt                   201
+      grain_arity_9160/out_selftest_9160.txt                   67
+      grain_arity_9160/out_s1_reproduce.txt                   131
+      grain_arity_9160/out_s2_arity.txt                       171
+      grain_arity_9160/out_s3_population.txt                  183
+      grain_arity_9160/out_s4_open.txt                        222
+      grain_arity_9160/out_s5_self.txt                        215
+      ^ one unit of each is one line of a transcript
+      ...TRANSCRIPTS readable at the published ref             ok
+
+==========================================================================
+D0f  THE ACCOUNTING AGAINST ITSELF -- THE NULL RESULT
+==========================================================================
+
+  A diff that reports movement between a file and ITSELF is broken in
+  the direction that would make this whole ticket look busier than it
+  is.  Every transcript is compared with its own published text:
+
+  population: the 8 TRANSCRIPTS above, each compared with itself at 5c0849a   @5c0849a
+      ...FIGURES that move when compared with themselves       ok
+      ^ one unit of that number is one count row
+
+==========================================================================
+D0g  NOTHING THIS TICKET PRINTS INTO ANOTHER TREE IS A COUNT ROW
+==========================================================================
+
+  This ticket adds three kinds of line to two other trees' published
+  transcripts: a dated `population:` line, a CLASS line, and an
+  OBSERVED interval block.  If any of them parsed as a COUNT ROW it
+  would enter the arc's own census -- a ticket about dating the census
+  would have changed it, in every tree that measures it, silently.
+  So the lines are generated HERE and put to `lib56dc.count_rows`:
+
+      |  population: a population line with a ref on it   @518a5e9
+      |  population: one dated at a UNION of two refs   @9f1ecaa+eacc5e1
+      |  CLASS, from `libfd9c.state_of` -- two booleans and nothing
+      |  else: is the population a REF, and is the observer IN it.
+      |
+      |      a FROZEN figure                                    FROZEN    @9f1ecaa+eacc5e1
+      |      a GROWING figure                                   GROWING   @518a5e9
+      |      an OBSERVED figure                                 OBSERVED  @518a5e9
+      |  OBSERVED, the two readings the apparatus admits -- width is one
+      |  call to `libfd9c.weight_of`, this tree's own transcripts read as
+      |  EMPTY as a plain `>` leaves them.  NOT AN ERROR BAR.
+      |      files    854-854 @518a5e9 (OBSERVED)     <- EMPTY INTERVAL
+      |      rows     2176-2233 @518a5e9 (OBSERVED)
+      |      erows    572-576 @518a5e9 (OBSERVED)
+      |      eints    1436-1441 @518a5e9 (OBSERVED)
+      |      words    629-638 @518a5e9 (OBSERVED)
+
+  population: the 16 LINES this ticket's three printers emit   @518a5e9
+      ...of them `lib56dc.count_rows` returns                  ok
+      ^ one unit of that number is one printed line
+
+  THE ARM IS NOT `I LOOKED AND THEY SEEMED FINE`.  `_COUNT_ROW` wants
+  two spaces, a label, two spaces and DIGITS TO END OF LINE; an interval
+  ends in `(OBSERVED)` and a population line ends in a ref.  A future
+  edit that put the value last would break that, and this is the arm
+  that would say so.
+
+D0 TOTAL BAD: 0

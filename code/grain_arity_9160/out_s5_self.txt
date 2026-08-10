@@ -1,7 +1,7 @@
 ==============================================================================
 mg-9160 / S5 -- MY OWN DEFECTS AND WHAT I DID NOT DO
 ==============================================================================
-HEAD: 757f999
+HEAD: 518a5e9
 
 ==========================================================================
 S5a  THE BETS, SCORED
@@ -47,7 +47,7 @@ S5a  THE BETS, SCORED
                            stage that says so. The defect is attribution, not
                            silence. S1c.
 
-  population: the 8 bets of PREDICTIONS.md, one row each
+  population: the 8 bets of PREDICTIONS.md, one row each   @518a5e9
       ...BETS scored HIT                                            6
           ^ one unit is one bet;  label's own noun: `hit`
       ...BETS scored SPLIT                                          1
@@ -72,7 +72,7 @@ S5a  THE BETS, SCORED
 S5b  THE DEFECTS OF THIS INSTRUMENT
 ==========================================================================
 
-  population: the DEFECT ITEMS of this tree's own instrument
+  population: the DEFECT ITEMS of this tree's own instrument   @518a5e9
       ...DEFECT ITEMS recorded                                      6
           ^ one unit is one defect item;  label's own noun: `recorded`
 
@@ -145,7 +145,7 @@ S5c  THE TWO O4 ITEMS MY TICKET CARRIES
 
       return _L().figures(line)
 
-  population: the executable STATEMENTS of `lib70c7.figures` after its docstring
+  population: the executable STATEMENTS of `lib70c7.figures` after its docstring   @518a5e9
       ...STATEMENTS in the body                                     1
           ^ one unit is one python statement;  label's own noun: `body`
       ...of those, STATEMENTS that DELEGATE the figure RULE         1
