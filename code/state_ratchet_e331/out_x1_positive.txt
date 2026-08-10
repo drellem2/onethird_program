@@ -1,0 +1,128 @@
+============================================================================================
+mg-e331 §4 — POSITIVE CONTROL: the ratchet demonstrated FAILING, on real commits
+============================================================================================
+
+§4.1  THE RATCHET, RUN AS A SUBPROCESS AGAINST PLANTED REAL TREES
+--------------------------------------------------------------------------------------------
+  b80dea0e (pre-restructure) :  29094 words
+  cc4c663e (mg-ea0e landing) :   4658 words
+  the tree as it stands      :  19077 words
+
+  X1   pre-restructure STATE.md (29,094 w)         AS REQUIRED  exit 1 · RATCHET VERDICT: RED — ABOVE-CEILING: 29094 words is +10017 past t
+  X2   mg-ea0e's own landing (4,658 w)             AS REQUIRED  exit 1 · RATCHET VERDICT: RED — SLACK-UNRATCHETED: 4658 words is 14419 belo
+  X3   the tree as it stands — NOT red on arrival  AS REQUIRED  exit 0 · RATCHET VERDICT: GREEN — 19077 words, ceiling 19077, tighten below
+  X4   a CEILING.json that does not parse          AS REQUIRED  exit 2 · RATCHET VERDICT: REFUSED — this ratchet did not reach a decision, 
+
+§4.2  X5 — THE COUNTERFACTUAL.  Had this ratchet landed WITH mg-ea0e on 2026-08-06,
+      set to the 4,658 words mg-ea0e achieved, which landings would it have
+      BLOCKED?  The real ratchet, the real ceiling format, the real committed
+      STATE.md of every landing since.
+--------------------------------------------------------------------------------------------
+  f85a4e83e 2026-08-06    4914 w  BLOCKED  mg-2860
+  905526f8f 2026-08-07    5122 w  BLOCKED  mg-325c
+  05a00610c 2026-08-07    5357 w  BLOCKED  mg-c4f5
+  d41d18c39 2026-08-07    6780 w  BLOCKED  mg-957a
+  bb8d2061f 2026-08-07    6961 w  BLOCKED  mg-5827
+  99dc61dc8 2026-08-07    7031 w  BLOCKED  mg-2df8
+  a682e1d63 2026-08-07    7544 w  BLOCKED  mg-d1a2
+  550a7f105 2026-08-07    8303 w  BLOCKED  mg-345e
+  4ef64d7aa 2026-08-07    8666 w  BLOCKED  mg-5ce3
+  276aead1a 2026-08-07    9792 w  BLOCKED  mg-55f2
+  21ee93f29 2026-08-07   10474 w  BLOCKED  mg-9adf
+  491d42c79 2026-08-07   12753 w  BLOCKED  mg-b488
+  2d549bbb7 2026-08-07   14246 w  BLOCKED  mg-a83c
+  6cd5b1d9c 2026-08-07   15278 w  BLOCKED  mg-bb87
+  03cabb583 2026-08-09   15568 w  BLOCKED  mg-77fe
+  25cc5b2de 2026-08-10   16245 w  BLOCKED  mg-a1db
+  641ef4281 2026-08-10   16861 w  BLOCKED  mg-3329
+  9efb3df47 2026-08-10   16960 w  BLOCKED  mg-9bc2
+  4fcbc7138 2026-08-10   17067 w  BLOCKED  mg-2f44
+  f97710234 2026-08-10   18969 w  BLOCKED  mg-8d63
+
+  20 of 20 landings since mg-ea0e would have been BLOCKED by a ratchet set to
+  mg-ea0e's own achieved size; 0 would have passed.
+
+  READ THIS CAREFULLY, BECAUSE IT CUTS BOTH WAYS.  It is the evidence that the
+  mechanism would have bitten, and it is ALSO the evidence for §3's decision not
+  to set today's ceiling at 6,000: a threshold that stops 20 consecutive landings
+  does not hold a line, it gets removed.  What the ratchet buys is that each of
+  those 20 landings would have had to RAISE the number and say why — and the
+  raises themselves would then be the record nobody currently has.
+
+§4.3  X0 AND X6 — ONE PLANTED TREE, TWO COMMANDS, ONE DIFFERENCE.
+--------------------------------------------------------------------------------------------
+  THE PLANT IS DERIVED FROM REAL BYTES, NOT TYPED: this repository's own
+  docs/state-history/attempt-mg-a3d4.md, appended to STATE.md under a heading.
+  That file is a relocated attempt write-up — precisely the content whose 5
+  successors were written INTO the attempt index instead (out_p1_growth.txt
+  §1.4).  So the planted tree is not a hypothetical: it is what this repository
+  looks like when one more attempt goes into STATE.md rather than beside it.
+
+  planted STATE.md : 24786 words (+5709 against the ceiling of 19077)
+
+  X0  the PRE-EXISTING gate, code/control_gate_724a/run_all.sh — untouched by this
+      ticket.  It must exit 0: the point of X0 is that the gate this repository
+      already had CANNOT SEE this, which is why a new gated quantity is the remedy
+      and a new schedule is not.
+      STATE.md sha256 ccde5301853ea326 -> ccde5301853ea326  RESTORED byte-identically
+      code/control_gate_724a/run_all.sh
+      exit 0
+        GATE VERDICT: GREEN — every gated field matches BASELINE.json, and this gate was
+      BLIND, as required: the gate this repository already had exits 0 on a STATE.md it should be alarmed by.
+      14 transcript(s) left modified by this arm (expected; mg-724a D5): code/control_audit_9876/out_a2_discriminate.txt, code/control_audit_9876/out_a4_sweep.txt, code/control_gate_724a/out_gate.txt...
+
+  X6  `./build.sh` — the command .pogo/refinery.toml names and the refinery runs.
+      Same tree, same bytes, one suite added.  It must exit non-zero AND the
+      non-zero must be attributable to this ratchet by its own decision line.
+      STATE.md sha256 ccde5301853ea326 -> ccde5301853ea326  RESTORED byte-identically
+      build.sh
+      exit 1
+        GATE VERDICT: GREEN — every gated field matches BASELINE.json, and this gate was
+        RATCHET VERDICT: RED — ABOVE-CEILING: 24786 words is +5709 past the declared ceiling
+      THE MERGE GATE GOES RED AND THE RATCHET IS NAMED AS THE CAUSE — a branch carrying that STATE.md does not land.
+      14 transcript(s) left modified by this arm (expected; mg-724a D5): code/control_audit_9876/out_a2_discriminate.txt, code/control_audit_9876/out_a4_sweep.txt, code/control_gate_724a/out_gate.txt...
+
+§4.4  X7 — P7, MEASURED RATHER THAN REMEMBERED.
+--------------------------------------------------------------------------------------------
+  PREDICTIONS.md P7 bet at 0.55 that the PRE-EXISTING gate exits 0 against a tree
+  carrying the 186,710-byte pre-restructure STATE.md.  X0 above already showed it
+  blind to a 24,678-word file, but P7 named THAT file, so P7 is scored against
+  THAT file and not against a nearby one that happens to agree with me.
+      STATE.md sha256 ccde5301853ea326 -> ccde5301853ea326  RESTORED byte-identically
+      code/control_gate_724a/run_all.sh
+      exit 2
+        GATE VERDICT: REFUSED — this gate did not reach a decision, so nothing above is
+      exit 2 — recorded, not required.  P7 is scored on this number in §4.4.
+      16 transcript(s) left modified by this arm (expected; mg-724a D5): code/control_audit_9876/out_a2_discriminate.txt, code/control_audit_9876/out_a3_auditor_selftest.txt, code/control_audit_9876/out_a4_sweep.txt...
+
+  P7: MISS — the pre-existing gate came back X7 exit 2 on that tree.
+
+  P7 LOSES, AND THE REASON IS WORTH MORE THAN THE BET.  That gate does not
+  exit 0 on the pre-restructure file — it REFUSES, because the twin-pin suite
+  cannot parse that file's ledger and reports `twin.verdict_grade matched its
+  pattern 0 time(s)`.  So the existing gate goes red on that tree for a reason
+  that is not size at all: it is red because a control broke, not because the
+  file is 29,094 words.  Had I scored blindness on P7's own file I would have
+  recorded a green I never saw and a mechanism I never demonstrated.  X0 is
+  the honest form of the claim: a file that GREW while staying structurally
+  intact — which is what the last 20 landings actually did — sails through.
+
+============================================================================================
+PREDICTIONS SCORED BY THIS PRODUCER
+--------------------------------------------------------------------------------------------
+  P5    HIT    red on REAL committed bytes in BOTH directions        X1 exit 1 ABOVE, X2 exit 1 SLACK
+  P6    HIT    a probe came back unfalsifiable/SETUP FAILED on run one
+               D4: N1/N2 went UNFALSIFIABLE the moment the subject exceeded the
+               ceiling and the verdict became BROKEN instead of RED — the ratchet
+               could not report its own finding.  D5: N4's typed literal equalled
+               the observed count on mg-ea0e's landing and N13 called SETUP FAILED.
+               Both found by THIS producer, on its first run, and neither would
+               have been found by any number of green runs.
+  P7    MISS   see §4.4
+
+POSITIVE CONTROL VERDICT: 8 of 8 arms scored as required.  This ratchet has been
+SHOWN — not argued — to exit 1 on a commit that exceeds its ceiling, to exit 1 in
+the OTHER direction on a commit far below it, to exit 2 rather than guess, to be
+GREEN on the tree it ships with, and to take this repository's live merge gate RED
+on a tree the gate was blind to twenty minutes ago.
+============================================================================================
