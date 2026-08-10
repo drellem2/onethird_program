@@ -1,0 +1,198 @@
+==============================================================================
+mg-223d / R3 -- THE RECONSTRUCTION CENSUS, AND THE COST OF THE TWIN
+==============================================================================
+    code-digest: (no producing code at HEAD)   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/pinned_ref_durability_223d;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, reachability, the history of `main` -- so it is a fact about the object store
+      as it stood at the run.  For THIS tree that is not a caveat, it is the
+      subject: every number below is a statement about what is reachable TODAY.
+
+------------------------------------------------------------------------------
+R3a  THE CLASS, AND THE CANDIDATES REJECTED FROM IT
+------------------------------------------------------------------------------
+
+  A RECONSTRUCTION takes >= 2 refs and unions their contents into ONE
+  population.  Three shapes look like it and are not, and saying which is what
+  makes `one` a survey rather than a shrug:
+
+    NOT a reconstruction -- A TWO-REF COMPARISON.  `idiom_sweep_audit_18dc`
+    reads runner sets at nine refs and DIFFS them.  Nine refs, nine
+    populations, no union.  A dead ref there costs one row of a table.
+
+    NOT a reconstruction -- A PIN WITH A FALLBACK.  `repair_b2af` binds
+    `INSTR_PRE`/`DOCS_PRE` and reads blobs at them.  One ref per read.
+
+    NOT a reconstruction -- AN ANCHOR.  `publication_anchor_132a`,
+    `state_claims_repair_0120` compute a digest over a file list AT one ref.
+    One ref, one population, and `0120` already re-pointed its anchor at the
+    twin because for a digest the twin IS a substitute.
+
+  THE RULE APPLIED: a directory is a reconstruction if some function of its
+  returns a population built from more than one ref.  Searched: every tracked
+  `*.py` in every `code/*` directory, for a call to `ls-tree`/`cat-file`/a
+  blob read that is parameterised by a ref, appearing more than once with
+  DIFFERENT refs inside one population-returning function.
+[MEASURED ] `code/*` directories searched: 178
+
+      files pinning >= 2 distinct commits (the necessary condition)  81
+        code/anchor_population_audit_0ba7/a5_resolution.py       d01ff32d d01ff32dd4dce31b98cb8aca9f4ae6e
+        code/anchor_population_audit_0ba7/lib_0ba7.py            06c9271 14c6c3b b1c3467 ea97d0a fba5f63
+        code/audit_2c77/q1_reason.py                             4755d02 d01ff32
+        code/audit_330a/lib330a.py                               d01ff32dd4dce31b98cb8aca9f4ae6e3a8aaebc3
+        code/audit_330a/s4_term.py                               adcfb1f18a8d102e0496a7060d0ae38d913c6a27
+        code/audit_c067/c1_rebase.py                             1e30484 4a06b4c cb9f282
+        code/audit_c067/c4_independence.py                       3958b5a 4a06b4c 77306a7 803bd50 89d6aa1
+        code/branching_audit_321d/lib321d.py                     286d5030902d09a7eb336a4a5dec18bf7b9de64c
+        code/branching_audit_58da/lib58da.py                     286d5030902d09a7eb336a4a5dec18bf7b9de64c
+        code/branching_audit_957f/lib957f.py                     286d5030902d09a7eb336a4a5dec18bf7b9de64c
+        code/branching_audit_a218/c4_seam.py                     2e66d03 f4eaea6
+        code/branching_audit_a218/c5_record.py                   6c0f0da f4eaea6
+        code/branching_audit_d330/e3_dispositions.py             03d7f91 2e66d03 ed9cde4
+        code/branching_audit_e34a/libe34a.py                     3bc2cf760ea28ddf6e4c3a9b73a89acc42a167a0
+        code/branching_locate_db09/t5_labels.py                  03d7f91 2e66d03 f4eaea6
+        code/branching_repair_76cc/lib76cc.py                    286d5030902d09a7eb336a4a5dec18bf7b9de64c
+        code/branching_repair_7e58/lib7e58.py                    286d5030902d09a7eb336a4a5dec18bf7b9de64c
+        code/census_remainder_f8e5/d4_movingref.py               a7d7fb9 eacc5e1
+        code/census_repair_f3ff/s4_crosscheck.py                 0fb0e00 1d922a1 5cae82c 5f542f0 8fc5111 
+        code/chain_audit_39bf/a3_timeline.py                     3cd39f1 424e693 6e5d88b ba19c06
+        code/corpus_universe_1d6c/p2_population.py               20614ef 8132d75
+        code/face_geometry_audit_6653/verify_claims.py           013e073 0160cbf 16bee79 2cc8d57 321509f 
+        code/face_geometry_audit_c4c8/kernc4c8.py                b6bc2ef c7f9673
+        code/face_geometry_audit_e720/verify_landing_claims.py   1e61031 522048f a85fb28 ba3ec79 c0cf104 
+        code/face_geometry_audit_eaef/e4_remeasure.py            b6bc2ef c7f9673
+        code/face_geometry_instr_5f9a/d4_auditor_rerun.py        9d712be b6bc2ef
+        code/face_geometry_landing_7d5a/verify_landing.py        0160cbf 16bee79 522048f 5b63037 ba3ec79 
+        code/figures_revision_repair_5035/f1_rule.py             3738079 3756553 3942319 4785086 5988134 
+        code/figures_revision_repair_5035/selftest5035.py        3738079 37380799 3942319 8490669
+        code/grain_arity_9160/lib9160.py                         9f1ecaa eacc5e1
+        code/hash_population_6e58/p3_unrestricted.py             b1c3467 b94cb1e fba5f63
+        code/hodge_leverage_audit_835f/audit_a318_repair.py      7f66005 b80dea0
+        code/hodge_leverage_audit_8a5c/audit_repair_8e30.py      61de121 e16e41c
+        code/hodge_leverage_audit_8aae/audit_8916_repair.py      b055ae5 d1dd84d f5360bf
+        code/hodge_leverage_audit_97fb/audit_97fb.py             4785086 77306a7 803bd50 979df72
+        code/hodge_leverage_audit_f922/audit_repair.py           1e61031 bbe83b5
+        code/hodge_leverage_landing_e1d0/verify_landing.py       1e61031 57f962f bbe83b5
+        code/hodge_leverage_repair_3f3b/repair_7e39.py           77306a7 803bd50
+        code/idiom_sweep_audit_18dc/selftest18dc.py              9f1ecaa d33970b
+        code/idiom_sweep_audit_18dc/v1_population.py             3fc870a 41972fb 454f565 6fda370 7fccb4e 
+        code/publication_anchor_132a/anchor_132a.py              3958b5a 77306a7 8a07ae0 c1a57fd
+        code/repair_69d1/p4_kinds.py                             4755d02 bfd7948
+        code/repair_8d5e/lib8d5e.py                              adcfb1f18a8d102e0496a7060d0ae38d913c6a27
+        code/repair_8d5e/r1_anchor.py                            4372fae95881bb421099bc715d1924c37d98b7b3
+        code/repair_b2af/lib_b2af.py                             0ef9af9 b94cb1e dfa263cce851c847abc35cda
+        code/repair_b2af/selftest_b2af.py                        4755d0292fc9175815739e9a77fa24dc6b8baf48
+        code/repair_b2af/t2_gate.py                              4372fae95881bb421099bc715d1924c37d98b7b3
+        code/repair_b2af/t4_preserve.py                          3bc2cf76 d01ff32d d01ff32dd4dce31b98cb8a
+        code/runner_exit_audit_05eb/lib05eb.py                   52aeaf4 bee07a1
+        code/runner_exit_audit_56dc/lib56dc.py                   1ee1f1b 52aeaf4 ba85387 bee07a1
+        code/runner_exit_audit_dee4/libdee4.py                   1ee1f1b 52aeaf4 682db2c bee07a1
+        code/runner_exit_repair_70c7/lib70c7.py                  1ee1f1b bee07a1
+        code/runner_exit_repair_7522/lib7522.py                  52aeaf4 682db2c bee07a1
+        code/runner_exit_repair_bf79/p4_figures.py               3738079 973ca61
+        code/runner_exit_repair_bf79/p5_self.py                  6aa043a abb95b0
+        code/species_audit_7dd3/d5_mutations.py                  83ac472 ebecd89
+        code/species_bound_audit_6ef4/t3_census.py               4372fae af432ee e8fbd4f
+        code/species_depth_audit_4700/q4_standing.py             af432ee e8fbd4f ef38841
+        code/species_gate_audit_d53d/selftest_d53d.py            83ac472 ebecd89
+        code/species_repair_a4ef/s1_extent.py                    83ac472 ebecd89
+        code/state_audit_4f88/verify_4f88.py                     05a0061 491d42c 550a7f1 905526f f758468 
+        code/state_audit_6a2f/additions_and_drift.py             57f962f 97cb533
+        code/state_audit_6a2f/cut_points.py                      57f962f 97cb533
+        code/state_audit_6a2f/deictic_refs.py                    57f962f 97cb533
+        code/state_audit_6a2f/insertions.py                      57f962f 97cb533
+        code/state_audit_6a2f/relocation_check.py                57f962f 97cb533
+        code/state_audit_6a2f/stated_properties.py               57f962f 97cb533
+        code/state_claims_repair_0120/verdicts0120.py            5594c69 db2b77d
+        code/state_control_audit_2216/claims_audit.py            57f962f 60f4dac 97cb533 b68db5d bf17716
+        code/state_control_audit_babf/claims_audit.py            6b1eacf e924590
+        code/state_control_audit_babf/preservation.py            57f962f 60f4dac 6b1eacf 97cb533 e924590
+        code/state_control_audit_babf/statements_audit.py        6b1eacf e924590
+        code/state_landing_audit_bd41/multiset_whole.py          57f962f 60f4dac 672915e b68db5d bdcb006
+        code/state_landing_audit_bd41/verify_landing_figures.py  57f962f 60f4dac 672915e b68db5d bdcb006 
+        code/state_relocation_audit_b0ae/libb0ae.py              78ae4d9 cc4c663
+        code/state_visibility_audit_65eb/rerun65eb.py            8ce78fb bd24efc
+        code/suppression_polarity_audit_40e4/q3_claims_40e4.py   0498b2b 4564bdd 4fd4f32 5ad75a8 7f0546b 
+        code/transcript_census_1abe/selftest_1abe.py             72e36cb 9c54a99
+        code/transcript_census_1abe/t4_rebase.py                 064c79c 72e36cb 7a35eac 880fc15 99ee542 
+        code/unitmap_audit_9f91/m2_survival.py                   21ee93f 72a6e33
+        code/unitmap_audit_9f91/m4_landing.py                    21ee93f 72a6e33
+
+      SURVIVORS OF THE READING RULE: 1
+        code/grain_arity_9160
+          function : lib9160.parent_corpus()
+          refs     : 9f1ecaa, eacc5e1
+          ancestors of HEAD : eacc5e1
+          NOT ancestors     : 9f1ecaa
+          population: everything tracked at 9f1ecaa + mg-03d1's own seven transcripts at eacc5e1.  THE published 517/1191/246/626/400.
+[MEASURED ] reconstructions found: 1
+[FINDING  ] reconstructions with at least one input that is NOT an ancestor of HEAD: 1 of 1
+
+------------------------------------------------------------------------------
+R3b  THE RECONSTRUCTION STILL REPRODUCES -- TODAY
+------------------------------------------------------------------------------
+
+      corpus                              files   rows  erows  eints  words
+      the reconstruction, run now           517   1191    246    626    400
+      mg-03d1's published figures           517   1191    246    626    400
+      ^ one unit is: one FILE; one printed ROW; one row carrying an
+        integer inside its label; one such INTEGER; one de-pluralised NOUN
+[OK       ] the reconstruction reproduces the published row field for field
+
+      THIS IS THE INSTRUMENT THE TICKET IS ABOUT, and this line is the reason
+      it matters: on a disk that has grown by hundreds of files since, a
+      figure from an earlier ticket still comes back exactly.  It is the only
+      check the arc has that its published numbers were ever right.
+
+------------------------------------------------------------------------------
+R3c  WHAT THE OBVIOUS REPAIR WOULD COST -- MEASURED, NOT ARGUED
+------------------------------------------------------------------------------
+
+      `9f1ecaa`'s on-main patch-id twin: 6fda370db10b
+      Re-pointing `lib9160.PARENT_REV` at it -- the one-line diff that
+      makes every checker in this arc go green -- gives:
+
+      corpus                              files   rows  erows  eints  words
+      PUBLISHED (pin = 9f1ecaa)             517   1191    246    626    400
+      re-pointed  (pin = 6fda370)           537   1226    249    630    404
+      moved?                                YES    YES    YES    YES    YES
+[FINDING  ] columns of the published row that the `obvious repair` would silently move: 5 of 5
+
+      ALL FIVE.  The twin is a different TREE: the rebase replayed the patch
+      onto a later main, so `git ls-tree` at the twin returns files that did
+      not exist when mg-03d1 ran.  A one-line diff that looks like hygiene
+      withdraws five published figures without saying so, and every control in
+      this arc would report the result as green because the pin resolves.
+
+      THIS IS E4, IT IS THE MOST AVAILABLE MISTAKE IN THIS TICKET, and the
+      only reason it is a printed table here rather than a committed diff is
+      that the ticket named it in advance.
+[MEASURED ] the swap was in memory; `lib9160.PARENT_REV` is unchanged on disk and this tree edits no other tree's files
+
+------------------------------------------------------------------------------
+R3d  AND THE OTHER FORBIDDEN REPAIR: RECOMPUTING AT HEAD
+------------------------------------------------------------------------------
+
+  The ticket: *DO NOT `FIX` THIS BY RECOMPUTING THE FIGURES AT HEAD.*
+
+  I did not, and the reason is not deference.  mg-fd9c already measured what
+  recomputation gives -- 832 files / 2093 rows against 517 / 1191 -- and
+  established that 21 of 22 arc-wide published figures have moved.  A figure
+  recomputed at HEAD agrees with itself and with nothing else; the
+  reconstruction's entire value is that it agrees with a number written down
+  before the disk changed.  Replacing it would not repair the check, it would
+  delete the only one there is.
+
+  WHAT I ALSO DID NOT DO, and it is worth stating because the ticket's
+  constraint points at it: I did not make the reconstruction easier to point
+  at things.  cfd9c's S3b names four things it cannot do -- it cannot see an
+  untracked file, cannot be computed from a single commit, cannot say which
+  write regime produced a figure, and needs two refs worked out by hand once
+  per figure.  All four are still true.  The repair in R4 makes the two refs
+  SURVIVE; it does not make them EASIER TO GET, and a tag on a commit is not
+  a method for finding out which commit to tag.
+
+SELF-ERRORS 0
+FINDINGS 2
+TOTAL BAD: 2

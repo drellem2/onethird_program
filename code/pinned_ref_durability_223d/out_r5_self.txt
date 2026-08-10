@@ -1,0 +1,213 @@
+==============================================================================
+mg-223d / R5 -- MY OWN DEFECTS, AND THE SCORE
+==============================================================================
+    code-digest: (no producing code at HEAD)   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/pinned_ref_durability_223d;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, reachability, the history of `main` -- so it is a fact about the object store
+      as it stood at the run.  For THIS tree that is not a caveat, it is the
+      subject: every number below is a statement about what is reachable TODAY.
+
+------------------------------------------------------------------------------
+R5a  THE MIRROR DEFECT, ENUMERATED AND THEN CHECKED
+------------------------------------------------------------------------------
+
+  THE ENUMERATION.  This tree depends on: (1) a set of refs resolving, (2)
+  `main` being a meaningful name, (3) `lib9160`/`libfd9c`/`lib_1abe`/`lib_f8e5`
+  importing, (4) `PINS.tsv` existing, (5) a remote called `origin`.  Every one
+  is a dependence of exactly the kind this tree reports on others, so every one
+  is checked below rather than assumed.
+
+      (1) hex literals THIS tree pins, that are not on main:
+[OK       ] (1) refs this tree itself pins off-main: 0, all declared: yes
+[OK       ] (2) `main` resolves
+[OK       ] (3) the four imported libraries loaded -- this line printing at all is the check
+[OK       ] (4) PINS.tsv is present and non-empty
+[OK       ] (5) a remote is configured: origin
+
+      AND THE ONE THAT IS NOT SELF-CHECKABLE.  This suite's own
+      transcripts declare a blob digest under R1 and NOT a commit sha,
+      which is mg-1abe's fix for exactly the drift this ticket is about.
+      Every number below is still a fact about the object store AS OF
+      THIS RUN, and the Ledger header says so on every transcript.
+
+------------------------------------------------------------------------------
+R5b  DEFECTS OF THIS INSTRUMENT.  ALL KEPT.
+------------------------------------------------------------------------------
+
+  D1   MY FIRST POPULATION RULE WAS THE WIDE ONE, AND 381 IS THE NUMBER I
+        WOULD HAVE REPORTED.  The record/dependence distinction that makes th
+       e headline 27 is not in my first sweep; I wrote it only after the two 
+       rules disagreed by 14x and I had to explain the gap.  A reader who saw
+        only my first output would have read `381 broken pins` and been wrong
+        about the kind of thing, not just the size.
+
+  D2   AND THE REASON I GAVE IN ADVANCE FOR NOT REPORTING 381 IS FALSE.  
+       P5 bet the wide count was mostly coincidence.  It is not: 0 of 600 ran
+       dom 7-hex tokens resolve, so essentially every one of the 381 is a gen
+       uine commit reference.  The restraint was right and the argument for i
+       t was wrong, which is mg-f8e5's `named the right transcript for the wr
+       ong reason` committed again one ticket later.
+
+  D3   I PUT TWO TAGS ON ONE COMMIT, IN THE REPAIR ITSELF, AFTER FILING E
+       2 ABOUT EXACTLY THAT.  `tag_name` first took the TOKEN, so `3738079` a
+       nd `37380799` -- two literals, one object -- generated `pin/3738079` a
+       nd `pin/37380799`.  The tag count would then have been a count of toke
+       ns wearing a count of objects' clothes.  Caught by reading the generat
+       ed PINS.tsv, NOT by any control: nothing in this suite would have fail
+       ed.
+
+  D4   R2's prose said `Three prior findings` above a list of FOUR -- in 
+       the sentence whose whole job is to disclaim credit properly.
+
+  D5   MY LEDGER POLARITY WAS INVERTED ON THE GOOD HALF.  `26 of 26 still
+        resolve` first printed as a FINDING.  A ledger that reports health as
+        damage is the same instrument as one that reports damage as health.
+
+  D6   THE Ledger SUBCLASS IS NOT MY CARE, IT IS SOMEONE ELSE'S WRITEUP. 
+        Importing `lib_1abe.Ledger` unmodified declares `transcript_census_1a
+       be`'s digest as this tree's provenance -- a TRUE digest of the WRONG d
+       irectory.  I avoided it because mg-f8e5 committed it, caught it and wr
+       ote it down.  Nothing in my own process would have.
+
+  D7   THE ARM I BUILT TO CATCH MY OWN FALSE POSITIVE NEVER HAD TO FIRE. 
+        `x1_gc` arm 1 exists because E5 says a survival might be the reflog's
+        doing.  In the event the untagged commit died in arm 1 too, so arm 2 
+       eliminated nothing arm 1 had not.  The exhibit is still valid and the 
+       sub-prediction inside P3 -- `I will have to defeat the reflog` -- is a
+        MISS, reported rather than dropped.
+
+  D8   MY `6 DIRECTORIES WHERE THE PRE-REBASE COMMIT IS THE SUBJECT` IS A
+        HAND LIST.  I read the sites; there is no rule behind the 6 and there
+       fore no rule that could have returned 7.  It is the same shape as the 
+       defect cfd9c was faulted for -- an instance found by reading, presente
+       d next to counts produced by a sweep.
+
+  D9   I CREATED AND PUSHED 26 TAGS TO A SHARED REMOTE BEFORE ANY REVIEW 
+       GATE SAW THIS BRANCH.  The ticket names tagging as an option and the d
+       urability is worthless unpushed, so I judged it in scope -- but it is 
+       an outward-facing mutation of state no merge decides, and if the choic
+       e is overridden the undo is mine to run.  Both undo lines are in mktag
+       s.sh.
+
+  D12  MY OWN REPAIR CONTAMINATED MY OWN EXHIBIT, AND THE CONTROL WENT FA
+       LSE-GREEN.  `x1_gc.py` ran clean BEFORE `mktags.sh --push` and failed 
+       after it: `git fetch` auto-follows tags pointing into the fetched hist
+       ory, so the sandbox silently acquired `pin/d33970b` -- the tag my own 
+       repair had just created -- which kept the UNTAGGED CONTROL commit aliv
+       e and turned a clean refutation into `B survives: True`.  A repair tha
+       t invalidates the experiment proving it works is the mirror defect thi
+       s ticket exists to look for, and it fired for real, at the only place 
+       in this suite where it could.  Repaired with `--no-tags` plus an expli
+       cit sweep-and-delete of any `pin/*` that leaks in anyway, which is rep
+       orted as a count rather than assumed to be zero.  TWO MORE OF THE SAME
+        FAMILY CAME OUT WITH IT: `git init` checks out `main`, so the fetch i
+       nto `refs/heads/main` was REFUSED, and my `sh()` helper printed the er
+       ror and carried on -- an arm that could not tell `it ran` from `it was
+        refused`.  Both are now self-errors that void the run.
+
+  D11  I COMMITTED THE DEFECT OF audit_c067 WHILE WRITING THE TICKET THAT
+        CITES IT.  R5c's first version diffed HEAD against `main` and printed
+        `3008 integers present at main and NOT at HEAD` -- a growing ref meas
+       ured against a fixed branch point, with someone else's 245 commits sco
+       red as my damage.  That is a hard-coded window sliding off a moving re
+       f, which is the exact finding I quote in R2d.  Repaired to the MERGE B
+       ASE, and the repaired arm is decisive where the broken one was noisy: 
+       0 files differ outside this tree at all.
+
+  D10  MY POPULATION RULE CANNOT SEE A CONSTRUCTED REF.  Stated in R1b an
+       d worth repeating as a defect and not a caveat: a rev built by concate
+       nation, read out of a `.md`, or taken from `argv` is invisible to me. 
+        I did not find one.  I also did not build a rule that could, so `27` 
+       is a floor and I have no upper bound for the dependence class.
+[MEASURED ] defects of this instrument recorded: 12
+
+------------------------------------------------------------------------------
+R5c  NO PUBLISHED NUMBER MOVED -- MEASURED, NOT ASSERTED
+------------------------------------------------------------------------------
+
+      baseline (merge-base of main and HEAD)   f97710234534
+      tracked files differing OUTSIDE code/pinned_ref_durability_223d:   0
+[OK       ] files changed outside this tree: 0 -- so no figure ANYWHERE else can have moved
+
+      ZERO.  The multiset check is not needed and is not run: a figure cannot
+      have moved in a file whose bytes are identical.  What this tree changed
+      outside its own directory is the REF NAMESPACE -- 26 tags -- and refs
+      are not tracked content, which is exactly why R4d has to go and look at
+      `git tag` and `git ls-remote` rather than at a diff.
+
+------------------------------------------------------------------------------
+R5d  P7: DOES ANY DIRECTORY DECLARE A REACHABILITY DEPENDENCE?
+------------------------------------------------------------------------------
+
+      `code/*` directories searched                        178
+      directories mentioning reachability at all            87
+        anticorrelation_c50b                     out_s5_n8_scope.txt, s5_n8_scope
+        audit_2c77                               PREDICTIONS.md, README.md, out_q
+        audit_330a                               README.md, s1_anchors.py, s5_pre
+        audit_c067                               PREDICTIONS.md, README.md, c1_re
+        branching_audit_2060                     kern2060.py
+        branching_audit_6ad0                     a1_contact.py
+        branching_audit_e34a                     PREDICTIONS.md, out_selftest_e34
+        branching_bound_audit_aaf4               a5_donotdisturb.py, out_a5_donot
+        branching_repair_76cc                    out_selftest_76cc.txt, selftest_
+        c3_prefix_capture_76b2                   PREDICTIONS.md, out_s1_dictionar
+        ... and 77 more (the rule is deliberately generous: it matches
+            `gc`, `--prune`, `reachab`, `ancestor of HEAD` anywhere)
+
+      READ CAREFULLY: `mentions` is not `declares`.  Every hit above is an
+      OBSERVATION -- cfd9c's S3c(a) prints an ancestry table, 1abe's Ledger
+      prints `reads-outside-tree`.  NONE of them is a DECLARATION that a
+      figure of that directory will stop reproducing if a named ref is
+      collected, and none of them is checkable.  P7 predicted zero
+      declarations and the generous rule above does not find one.
+[MEASURED ] directories carrying a CHECKABLE reachability declaration before this tree: 0 (the convention is what was missing, not the observation)
+
+------------------------------------------------------------------------------
+R5e  THE PREDICTIONS, SCORED
+------------------------------------------------------------------------------
+
+  P1   p=0.75  HELD, with its limit stated
+        reconstructions in the arc: 1, and it is mg-9160's.  Bet said <=3 and 
+        `only mg-9160's is exposed`.  LIMIT: the final rule is a READING rule;
+         what is automated is the necessary condition (a file pinning >=2 comm
+        its).  D8's shape, and it is why this is not scored as a clean hit.
+  P2   p=0.92  HELD, and bigger than the bet
+        the bet was `at least one of 517/1191/246/626/400 moves`.  ALL FIVE mo
+        ve: 517->537, 1191->1226, 246->249, 626->630, 400->404.
+  P3   p=0.85  HELD on the claim, MISS on the sub-prediction
+        the tagged commit survived `gc --prune=now` and the untagged one did n
+        ot, in a throwaway clone.  The sub-prediction that I would have to def
+        eat the reflog is a MISS: the untagged commit died in arm 1 as well (D
+        7).  WHAT I HAD TO DEFEAT INSTEAD WAS MY OWN REPAIR -- tag auto-follow
+         put the answer into the sandbox (D12).  E5 named the right KIND of co
+        ntamination and the wrong SOURCE.
+  P4   p=0.80  HELD
+        26 of 26 off-history pinned commits still resolve.
+  P5   p=0.70  LOST, and NOT RESCUED
+        the bet was that >half of the 381 wide hits are accidental collisions 
+        and the genuine count is under 60.  Measured false-positive rate: 0 of
+         600 at 7 hex, 0 of 600 at 8, 0 of 600 at 12.  Essentially all 381 are
+         real references.  The headline is still 27 -- for the record/dependen
+        ce reason, which is NOT the reason I bet on (D2).
+  P6   p=0.88  HELD
+        the tags were not durable until pushed; the refinery carries branches 
+        and not tags; R4d measures local and origin separately and both had to
+         be made 26.
+  P7   p=0.65  HELD as stated
+        zero directories carry a checkable declaration that a figure depends o
+        n a ref remaining reachable.  Several MENTION reachability; R5d prints
+         them and says why mentioning is not declaring.
+[MEASURED ] predictions HELD 6, LOST 1, of 7
+
+      THE ONE THAT LOST IS THE ONE THAT MATTERED MOST TO THE SHAPE OF THE
+      REPORT, and it is not rescued.  P5 was my defence against over-reporting
+      and it was a bad defence: it said the big number was fake.  The big
+      number is real.  What keeps 381 out of the headline is that 354 of them
+      are records and not dependences, which is a different claim I had to
+      make after the fact.
+
+SELF-ERRORS 0
+FINDINGS 0
+TOTAL BAD: 0
