@@ -1,0 +1,54 @@
+==============================================================================
+S6.1  DOES THE DISJUNCTION SURVIVE AT THE COUNTEREXAMPLES?
+==============================================================================
+  mg-c50b's reduction, inherited exactly:
+     (F)  fails  <=>  M > sqrt(2 gamma)
+     (M#) fails  <=>  Delta^2 > 2 gamma  AND  mu_pref > t* = Delta - sqrt(Delta^2 - 2 gamma)
+  The disjunction holds at P iff at least one of the two routes holds.
+
+   n | v_F     | v_L     |  t*      | mu_pref  | u_M=mu/t* | (M#)   | disjunction
+   9 | 1.01556 | 1.00880 | 0.127436 | 0.120234 |   0.94349 | HOLDS | SURVIVES
+  10 | 1.07119 | 1.02031 | 0.074246 | 0.072897 |   0.98183 | HOLDS | SURVIVES
+  11 | 1.04269 | 1.02504 | 0.129214 | 0.123829 |   0.95833 | HOLDS | SURVIVES
+
+  READING.  (M#) HOLDS at every one, with u_M = mu_pref/t* well below 1, so the
+  disjunction is untouched.  What died is the ROUTE: (L*) was the one-line sufficient
+  condition that delivered the disjunction uniformly in n, and it is false from n = 9.
+  The disjunction itself now has no uniform-in-n proof again -- it has the n <= 8
+  enumerations and nothing else.
+
+==============================================================================
+S6.2  HOW MANY, AND HOW BAD, AT n = 9 -- is the n=9 counterexample a fluke?
+==============================================================================
+  n = 8 : 60 restarts, 0 distinct local optima above 1, best min(v_F,v_L) = 0.968818
+           best at (0, 0, 2, 0, 8, 24, 63, 62)   (42s)
+           n = 8: the search did NOT reach 1.  That is a SEARCH RESULT, not a
+           census -- n = 8 has 2600369 primitive posets and this examined a
+           vanishing fraction.  Whether (L*) already fails at n = 8 is OPEN.
+  n = 9 : 40 restarts, 6 distinct local optima above 1, best min(v_F,v_L) = 1.013539
+           best at (0, 0, 0, 0, 0, 16, 48, 16, 247)   (61s)
+
+==============================================================================
+S6.3  THE STRUCTURE OF THE n = 9 COUNTEREXAMPLE
+==============================================================================
+  dn = (0, 1, 0, 4, 0, 0, 32, 96, 239)      LE = 1890   height = 4
+  covers (j < i):
+     0  >  -
+     1  >  [0]
+     2  >  -
+     3  >  [2]
+     4  >  -
+     5  >  -
+     6  >  [5]
+     7  >  [5, 6]
+     8  >  [0, 1, 2, 3, 5, 6, 7]
+
+  d_i = 1 - (S_P)_ii  (Delta is the max):
+     0:0.7460  1:0.9630  2:0.8201  3:0.8889  4:0.8889  5:0.9841  6:0.9048  7:0.6667  8:0.1111
+  leak(A_k)/min(k,n-k) = phi_k:
+     1:0.7460  2:0.7460  3:0.5291  4:0.4921  5:0.4762  6:0.4286  7:0.3333  8:0.1111
+
+  READING.  Delta = 62/63: element 5 sits at position 5 with probability 1/63, i.e.
+  the poset carries a nearly-free element -- the rho > 1 mechanism -- while the rest of
+  it carries a thin cut, the (F)-failing mechanism.  mg-c50b's two families each ran ONE
+  of these; the counterexample runs BOTH, which is why neither family found it.
