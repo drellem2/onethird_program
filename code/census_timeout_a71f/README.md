@@ -181,8 +181,10 @@ conclusion from the part that was sampled.
 
 **And the `31.5` in the ticket thread is not a reading from this run.** It was
 taken at 07:27Z, during the first attempt, which was killed at ~07:30Z (D7). The
-run whose numbers are published started 07:31:07Z; its observed 1-minute load
-has ranged roughly 6–15, and its 15-minute average fell 15.5 → 9.1.
+run whose numbers are published started 07:31:07Z. Its 1-minute load, at
+15-second resolution, has excursions to **129.59** — see D8 for why the range I
+first reported for it was 8× too narrow, and why the confound is *larger* than
+the ticket assumed rather than smaller.
 
 ---
 
@@ -263,6 +265,28 @@ checking that the detail column explains the bucket was written `"…" not in
 row[0]`, which passes when the explanation is absent. Caught by reading it, not
 by running it — it would have gone green either way while the repair was
 working, which is the worse half of the finding.
+
+**D8 — I characterised the machine by looking at it whenever I happened to
+look, and published a range that was 8× too narrow.** Asked about the load
+confound, I reported *"the within-run 1-minute range so far is roughly 6 to
+15"*, from six `uptime` readings taken by hand between other work. The sampler
+built minutes later, at 15-second resolution, showed the real range in its first
+ten minutes:
+
+| | hand samples | sampler |
+|---|---|---|
+| 1-min load range | 6 – 15 | **7.6 – 129.6** |
+| mean | — | 42.9 |
+
+A three-minute climb to 129.59 and a five-minute decay, **entirely between two
+of my manual readings**. The excursion is nearly 20× within one run, not the 2×
+I reported. **The confound is larger than either the ticket or I said, not
+smaller**, and my reassurance was an artefact of my sampling rate.
+
+It is the same shape as the defect this ticket repairs: an instrument whose
+blind spot is invisible in its own output. `TIMED-OUT` could not fire and
+reported `0`; my hand sampling could not see a spike and reported a narrow
+range. Both read as measurements. Neither was one.
 
 **D7 — I wrote a duration I had never measured into the docstring of the repair
 itself, and it cost the re-run a restart.** The repaired `t2_census.py` said
