@@ -1,11 +1,12 @@
 # mg-a71f — A BUCKET THAT COULD NOT FIRE, AND A RECORD ITS OWN PRODUCER CANNOT READ
 
 **`transcript_census_1abe`'s `TIMED-OUT` bucket was unreachable by construction
-for every suite in the arc — 111 of the 174 transcript-carrying directories at
-`cdec2e8` demonstrably, and the detector under-counts by design. It is
-repaired, and the census is re-run against the same population with the repaired
-instrument. The old census's numbers are preserved verbatim beside the new ones
-and nothing is overwritten.**
+for every suite whose runner redirects into its own transcripts — 82 of the 115
+transcript-carrying directories at `81214a9`, the as-of of the census this
+repairs, and 111 of 174 at `cdec2e8` today. Both detectors under-count by
+design. It is repaired, and the census is re-run against the same population
+with the repaired instrument. The old census's numbers are preserved verbatim
+beside the new ones and nothing is overwritten.**
 
 **A bucket that cannot fire does not merely lose information. This one
 MANUFACTURED damage: a suite killed at the budget was bucketed `DIFFERS`
@@ -225,10 +226,27 @@ restarted**, because the alternative was to publish transcripts whose declared
 `code-digest` was of code I intended to change. That is R1 doing exactly what it
 is shaped to do, to its author.
 
-**D6 — the reach figure in the ticket is not the reach figure here, and neither
-is wrong.** cf8e5 measured 99 of 166; `a1e` measures **111 of 174** at
-`cdec2e8`. Same rule, later as-of, bigger arc. Quoting cf8e5's number as a
-present-tense fact would have been the arc's own recurring defect.
+**D6 — the reach figure is FOUR numbers, not one, and none of them is wrong.**
+The ticket's headline says *99 of 166*. That is cf8e5's **README** figure, at
+`e35b51c`. cf8e5's own committed transcript, `out_d5_timeout.txt`, says **101 of
+169** at `bc965aa` — a later commit the same day. Both are correctly labelled
+with their as-of and neither is false; the ticket picked up the one from the
+prose. Measured here, with a detector of my own that counts `undetermined` in
+its own row rather than folding it either way:
+
+| as-of | date | reach | source |
+|---|---|---|---|
+| `e35b51c` | 2026-08-10 | 99 of 166 | cf8e5's README — the ticket's headline |
+| `bc965aa` | 2026-08-10 | 101 of 169 | cf8e5's `out_d5_timeout.txt` |
+| `81214a9` | 2026-08-06 | **82 of 115** | `a1e` — the as-of of the re-run, so the figure that goes with these census numbers |
+| `cdec2e8` | 2026-08-10 | **111 of 174** | `a1e` — today |
+
+The two detectors are not the same rule and the difference is not adjudicated
+here: cf8e5's requires a literal `.txt`, mine does not, and mine leaves 27
+directories `undetermined` at `81214a9`. Both under-count by design. Quoting any
+one of these as a present-tense fact about the arc would have been the arc's own
+recurring defect, which is why the row that matters for §2's numbers is the
+`81214a9` one and it is stated with its population.
 
 ---
 
@@ -249,6 +267,26 @@ present-tense fact would have been the arc's own recurring defect.
   edits it; this line is the notice.
 - **A census at today's `main` is not run.** It is a larger, different
   measurement and it cannot size the 107.
+
+### Two things next to the repair that were looked at and left alone
+
+Noted rather than fixed, because neither is what this ticket authorised, and
+because an unfixed thing that is written down is worth more than one that is
+quietly widened into.
+
+- **`run_suite` waits on the runner, not on its descendants.** It starts the
+  suite with `start_new_session=True` and kills the process *group* on timeout,
+  but a suite whose own children outlive it returns `ok` while a transcript may
+  still be being written. That is a race the repair does not touch and did not
+  introduce. It has not been observed firing.
+- **`RUNNER-FAILED` may be the wrong name for what it catches.** It buckets a
+  missing transcript whenever the runner exited non-zero — and in this arc a
+  non-zero exit is the **normal** state of an instrument that found what it was
+  sent to find, which is the exit convention `run_all.sh` states at the top of
+  every suite. A suite that legitimately exits 1 and legitimately does not write
+  some file lands in a bucket whose name says it could not start. Both that
+  bucket and `NOT-REGENERATED` were **0 of 541** in the prior census, so nothing
+  is riding on it today.
 
 ---
 
