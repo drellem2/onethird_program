@@ -1,0 +1,26 @@
+============================================================================================
+mg-9bc2 — NEGATIVE CONTROL for twin_pin.py
+============================================================================================
+
+Each mutation is applied to a COPY.  The live tree is never written.
+The instrument's baseline verdict is DRIFT (exit 1) because ledger rows 8 and 9
+really have moved, so the exit code alone cannot score these; each row states the
+section that must fire and the string that must appear.
+
+mutation                                                           sec  verdict  detail
+--------------------------------------------------------------------------------------------
+pin block deleted entirely                                         1    CAUGHT   exit 2; looked for 'no STATE-PIN block in the twin'
+a ledger row deleted from the twin only                            1    CAUGHT   exit 2; looked for 'the row sets disagree'
+one character changed in an UNDRIFTED STATE.md ledger row (row 1)  2    CAUGHT   exit 1; looked for 'row 1    MOVED'
+a whole STATE.md ledger cell emptied (row 10 status)               2    CAUGHT   exit 1; looked for 'row 10   MOVED'
+twin's KIND mark for row 10 flipped FP -> U                        4    CAUGHT   exit 2; looked for 'row 10   MISMATCH'
+STATE.md's KIND mark for row 9 flipped FP✗ -> U                    4    CAUGHT   exit 2; looked for 'row 9    MISMATCH'
+`Generated <date>` re-introduced into the header                   5    CAUGHT   exit 2; looked for 'matches /\\bGenerated\\b'
+the twin re-claims canonicity in the footer                        5    CAUGHT   exit 2; looked for 'a canonicity claim on a line that does not name STATE.md'
+visible provenance line points at a DIFFERENT commit than the pin  6    CAUGHT   exit 2; looked for 'the visible provenance line does not quote the pinned commit'
+visible provenance line removed (pin becomes machine-only)         6    CAUGHT   exit 2; looked for 'no <span id="provenance">'
+NO MUTATION — the baseline                                         -    CAUGHT   exit 1; baseline must be DRIFT at rows 8 9 and nothing else
+
+11 of 11 caught; 0 hole(s).
+
+Every mutation was caught by the section that claimed it.
