@@ -77,6 +77,46 @@ md5 `mg-d3c7` reports).
 > `cf4672e`), and now a correct table summarised by an incorrect box, running in the **opposite**
 > direction. See `docs/repair-mg-fd7c-the-verdict-box-and-its-table.md`.
 
+> ### 🔧 SEVEN MORE SCOPE CLAUSES REPAIRED BY `mg-be0b`, 2026-08-10 — AND `mg-fd7c`'s OWN "§2.3 … CHECKED AND ALREADY CORRECT" IS FALSE AT ONE OF ITS FOUR ENTRIES
+>
+> **Same defect as item 1 above, at seven sites the block above did not reach.** `mg-3329`
+> (`641ef42`), landing `mg-fa70`'s finding into `STATE.md`, flagged **two** of them —
+> `:102` and `:328` as they then stood — and deliberately left them as this document's property.
+> Sweeping this document for the **CLAIM** rather than the phrase found **five more**:
+>
+> | § | what it read | what it reads now |
+> |---|---|---|
+> | §2.1 | *"a constant `mg-76b2`'s theorem sets to **1** under L2, which is Step 3"* | **on L2's FIRST DISJUNCT**, L2 being Step 3 |
+> | §0 item 5 (the provenance box) | *"**PROVEN CONDITIONAL ON L2**"* | **CONDITIONAL ON L2's FIRST DISJUNCT, WHICH IS STRICTLY STRONGER** |
+> | §2.3 table | *"flat — and PROVEN flat, under L2"* | **on L2's FIRST DISJUNCT** |
+> | §3 opening | *"The figure `2×10⁻²` is conditional on L2"* | conditional on **L2's FIRST DISJUNCT**, with the reason (`C₃ = 1` is a first-disjunct statement) |
+> | §3 closing | *"a row that prints `2×10⁻²` without `under L2` …"* | without **`under L2's first disjunct`** |
+> | §7 (the text offered for `STATE.md:164`) | *"**PROVEN CONDITIONAL ON L2** and L2 IS OPEN"* | **CONDITIONAL ON L2's FIRST DISJUNCT — STRICTLY STRONGER THAN L2** |
+> | §11 | *"everything else is either **proven** (`C₃^(III)`)"* | **proven-conditionally**, on L2's first disjunct — §5.2 |
+>
+> **NOTHING IS WITHDRAWN AND NO NUMBER MOVES.** Not one figure, count, threshold or table entry
+> in this document changes. The ruling — Step 6 consumes none of the four chains — is untouched,
+> and so is the entitlement argument: **`REDUCES C₃ TO L2` and `L3 IS NOT AN INDEPENDENT LEMMA`
+> both survive on BOTH disjuncts** (`mg-76b2` §9 row 8) and neither is qualified here. **The
+> second disjunct is UNQUANTIFIED, which is weaker than and different from REFUTED, and it is
+> not struck anywhere.** Over-correcting in that direction was `mg-fa70`'s own recorded error and
+> is the more expensive one.
+>
+> **THE PART WORTH MORE THAN THE SEVEN EDITS.** The block above records *"§5.3, §2.3, §6 and
+> §7's «chain (IV)'s own `40/49` threshold» were checked and are **already correct** — untouched."*
+> **§2.3 carried this defect at the time that was written**, in the `C₃^(III)` row of its own
+> four-row table. `mg-be0b` re-ran the check rather than inheriting it: §5.3 and §6 are **clean**
+> of it and the record is right about those two; §7 was never claimed as checked and simply
+> carried it. So the entry is **false for defect (1) and may well have been true for defect (2)**
+> — which is the trap, because the record does not say which defect it was checked against, and a
+> reader gets a clean bill for both. This is the **second** time in this lineage that the thing
+> that was wrong was a **CLEAN CHECK**: `mg-fa70` §2.1 recorded *"`code/c3_prefix_capture_76b2/`
+> (greps clean)"* in the very amendment whose headline finding was *sweep for the CLAIM, not the
+> PHRASE* — and that directory held **six** occurrences of the claim (`mg-3329`, re-verified by
+> `mg-be0b`). **Do not inherit a CHECKED-AND-LEFT list in this lineage. Re-run it.**
+>
+> See `docs/repair-mg-be0b-the-either-disjunct-claim-outside-STATE.md`.
+
 ---
 
 ## 0. Verdict
@@ -99,8 +139,13 @@ md5 `mg-d3c7` reports).
 > open lemma gets proved.** Step 4 **is** `Apply Cheeger sweeping`, and it writes
 > `Φ_P(A_k) ≲ √ε` with **no constant attached**. So the architecture as written is chain
 > **(I)**, and chain **(III)** is that same chain with a bookkeeping constant inserted for
-> L3's loss — a constant `mg-76b2`'s theorem sets to **1** under L2, which is Step 3, which
-> the architecture already assumes. **Chains (II) and (IV) are not readings of Steps 3–4.
+> L3's loss — a constant `mg-76b2`'s theorem sets to **1** on **L2's FIRST DISJUNCT**, L2 being
+> Step 3, which the architecture already assumes. *(`mg-be0b`: this read "under L2". `L2` is a
+> DISJUNCTION, so "under L2" is "under EITHER disjunct" with the words removed — see §0's
+> `mg-fd7c` block item 1 and §0(i). On L2's second disjunct the constant is RELOCATED into the
+> lemma's own unnamed "low-conductance", not eliminated. **The architecture assuming Step 3 is
+> not the same as the architecture assuming Step 3's FIRST CLAUSE**, and that gap is what the
+> unqualified sentence hid.)* **Chains (II) and (IV) are not readings of Steps 3–4.
 > They are replacements for them**, routing through the Prefix-capture conjecture at `:360–364`
 > — a statement inside a `\begin{conjecture}` environment that is **not one of the six steps
 > and not one of the source's four main open lemmas.**
@@ -204,8 +249,10 @@ md5 `mg-d3c7` reports).
 > > at `C₃ = 1`, which is chain (I)** — the route the source's own Steps 3–4 write.
 > > **Inputs, each with its status:** the Cheeger sandwich `(Φ*)²/2 ≤ 1−λ_std ≤ 2Φ*`
 > > (`:318–324`) — **PROVEN**; the `Φ ↔ 1−ρ` dictionary — **PROVEN** (`mg-76b2` Lemma 2.1,
-> > 25 684 pairs, exact); `C₃^(III) = 1` uniformly in `n` — **PROVEN CONDITIONAL ON L2**, which
-> > is **OPEN** and whose first disjunct is **`FP✗`-false as stated** (`STATE.md` row 9,
+> > 25 684 pairs, exact); `C₃^(III) = 1` uniformly in `n` — **PROVEN CONDITIONAL ON L2's FIRST
+> > DISJUNCT, WHICH IS STRICTLY STRONGER THAN L2** (`mg-be0b`: this read "CONDITIONAL ON L2";
+> > on L2's second disjunct the constant is relocated, not eliminated — §0(i)) — and L2 is
+> > **OPEN** while that first disjunct is **`FP✗`-false as stated** (`STATE.md` row 9,
 > > `2/126` at `n = 6`); `ε_leak = 0.20` — **EMPIRICAL**, a finite-population non-refutation of
 > > a surrogate whose uniform form is refuted at `0`, erring **optimistic in the required
 > > scope**; and the Cheeger
@@ -325,7 +372,7 @@ Read from `mg-76b2` §7 and `mg-94c3` §3, **not re-measured here**:
 
 | constant | chain | `n=3` | `n=4` | `n=5` | `n=6` | direction |
 |---|---|---|---|---|---|---|
-| `C₃^(III)` — `Φ_pref ≤ √(2C₃ε_spec)` | (III) | `1` | `1` | `1` | `1` | **flat — and PROVEN flat, under L2** |
+| `C₃^(III)` — `Φ_pref ≤ √(2C₃ε_spec)` | (III) | `1` | `1` | `1` | `1` | **flat — and PROVEN flat, on L2's FIRST DISJUNCT** (`mg-be0b`: read "under L2"; §0(i)) |
 | `C₃^gap` — `1−ρ_pref ≤ C₃(1−λ_std)` | (II) | `1.500` | `1.473` | `1.990` | `2.386` | **up** |
 | `C₃^cut` — `Φ*_pref/Φ*` (L3's own wording; **must be squared to meet chain (III)'s `C₃`**) | — | `1` | `3/2` | `6/5` | `15/8` | **up** |
 | `min c` — the literal capture fraction | (IV) | `0.750` | `0.618` | `0.536` | `0.453` | **down** |
@@ -356,7 +403,10 @@ between a proven constant and three measured-adverse ones is not making a coin-f
 that L2 is unproved?*
 
 **The question is well posed and the answer is yes, but "entitled" has to be given a meaning
-first.** The figure `2×10⁻²` is conditional on L2. The only thing that can make quoting it
+first.** The figure `2×10⁻²` is conditional on **L2's FIRST DISJUNCT** — it is `ε_leak²/(2C₃)`
+at `C₃ = 1`, and `C₃ = 1` is a first-disjunct statement (`mg-be0b`: this read "conditional on
+L2", which is weaker than the truth and therefore understates what is being assumed; §0(i)).
+The only thing that can make quoting it
 illegitimate is if the conditioning **costs more than the alternatives'** conditioning does.
 
 **THE COUNT IS A TIE, AND I SAY SO BEFORE THE ARGUMENT THAT IS NOT A TIE.** The prefix has to
@@ -410,7 +460,12 @@ source's architecture routes around.
 fails in both disjuncts there is no `C₃^(III) = 2` to fall back on — the constant simply
 becomes unquantified, and the three alternatives are the ones with adverse measurements. The
 conditional is therefore **load-bearing**, not a formality, and a row that prints `2×10⁻²`
-without `under L2` is not a rounding of the truth but a different claim.
+without **`under L2's first disjunct`** is not a rounding of the truth but a different claim.
+*(`mg-be0b`: this sentence read "without `under L2`". It is the sentence that tells the next
+agent what label to carry, so getting the label one clause short here propagates further than
+any other site in this document — and `STATE.md` row `:169` now carries the longer form, landed
+`mg-3329`. **The paragraph above is unchanged and is right as it stands:** "fails in both
+disjuncts" is exactly the condition under which chain (III) disappears.)*
 
 ---
 
@@ -626,7 +681,8 @@ at `STATE.md:164`:
 > (`C₃^gap` `1.500→2.386` up; `C₃^cut` `1→15/8` up; `min c` `0.750→0.453` **down, already below
 > chain (IV)'s own `40/49` threshold at every `n = 3..6`**; `mg-76b2` §7 / `mg-94c3` §3,
 > `n ≤ 6`, outside the regime — a **direction**, not a refutation). **`C₃^(III) = 1` is PROVEN
-> CONDITIONAL ON L2 and L2 IS OPEN with its first disjunct `FP✗`-false as stated (row 9); the
+> CONDITIONAL ON L2's FIRST DISJUNCT — STRICTLY STRONGER THAN L2, WHICH IS A DISJUNCTION — and
+> L2 IS OPEN with that first disjunct `FP✗`-false as stated (row 9); the
 > `1032/1032` census is NON-SEPARATING (`mg-94c3`'s red drill: the same bound holds at all 3340
 > non-monotone posets) and is not support — the theorem's support is its proof.** **`ε_leak =
 > 0.20` is EMPIRICAL and is neither a measurement nor a bound:** it is a finite-population
@@ -718,8 +774,12 @@ currently quoted.** That is the re-scope.
 
 But `c` is not worthless either, and it is worth saying which question it would answer:
 **`c` is the only measurable quantity in this whole ruling that could still move the demand by
-`10×`** — everything else is either proven (`C₃^(III)`), unmeasurable (`ε_leak`), or an equality
-(`ε_sup`). And `mg-76b2` §7 has already produced the first data point against it: `min c` runs
+`10×`** — everything else is either proven-conditionally (`C₃^(III)`, **on L2's first disjunct**
+— §5.2), unmeasurable (`ε_leak`), or an equality
+(`ε_sup`). *(`mg-be0b`: this read "either proven (`C₃^(III)`)", which drops the conditional
+altogether and not merely the disjunct — the most compressed form of the defect in this
+document and the one most likely to be quoted out of §11. §5.2's own row has carried the
+conditional since the document landed.)* And `mg-76b2` §7 has already produced the first data point against it: `min c` runs
 `0.750, 0.618, 0.536, 0.453` at `n = 3..6`, **below chain (IV)'s own `40/49` threshold at every
 one**, falling. So the honest re-scope for `mg-81ff` is:
 

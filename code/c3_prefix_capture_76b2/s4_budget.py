@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
 """s4 — THE BUDGET: four chains, four different relations, and the finite window.
 
+SCOPE LABEL REPAIRED, mg-be0b, on mg-3329's finding (which is on mg-fa70's).  The
+printed line below the chain table read "s2 shows that under L2 it does not degrade
+anything".  `L2` is a DISJUNCTION, so "under L2" is "under EITHER disjunct" with the
+words removed; what s2 shows is a FIRST-DISJUNCT statement, and the mechanism it
+names -- the sweep never leaving the prefix family -- IS the first disjunct and does
+not exist on the second.  NO NUMBER IN THIS SECTION MOVES and no chain is withdrawn:
+this file's own chain (I) header at :12 already reads "L2's first disjunct" and always
+did.  On L2's second disjunct the constant is RELOCATED, not eliminated (mg-fa70; see
+s2's header).  See docs/repair-mg-be0b-the-either-disjunct-claim-outside-STATE.md.
+
 The ticket states one relation:
 
     eps_dem = eps_leak^2 / (2 C_3)   =>   n >= 4 C_3 / eps_leak^2 - 1
@@ -82,8 +92,8 @@ print()
 print("  (III) at C_3 = 1 IS (I).  So the ticket's relation is chain (I) with a factor")
 print("  C_3 inserted at the one place chain (I) does not have one -- which is correct")
 print("  bookkeeping if and only if the prefix restriction really does degrade the gap.")
-print("  s2 shows that under L2 it does not degrade anything, because the sweep never")
-print("  leaves the prefix family in the first place.")
+print("  s2 shows that under L2's FIRST DISJUNCT it does not degrade anything, because")
+print("  the sweep never leaves the prefix family in the first place.")
 print()
 print("  (II) is NOT (III) with C_3 moved.  The gap-form repair supplies the prefix")
 print("  itself, so Cheeger's square -- the price of turning an eigenVALUE into a SET --")

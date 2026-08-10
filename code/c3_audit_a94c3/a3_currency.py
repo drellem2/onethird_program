@@ -20,7 +20,22 @@ Scores P4 (the adversarial one) and P5.
 By hand, before running any of this (PREDICTIONS H7): C_3^gap >= 1 IDENTICALLY,
 because 1-lambda_std is the MINIMUM of 1-rho(f) over all centred f and a centred
 prefix indicator is one such f.  So the question is never "is it >= 1" -- it is
-"is it > 1, and is it > 1 even where L2 holds".
+"is it > 1, and is it > 1 even where L2's FIRST DISJUNCT holds".
+
+SCOPE ADDED AT THE CLAIM, mg-be0b, on mg-3329's finding (which is on mg-fa70's).
+NOTHING HERE WAS FALSE AND NO NUMBER MOVES.  This section's population is built by
+`p["mono"] == "YES"`, i.e. the 1032 primitive posets exhibiting L2's FIRST disjunct,
+so every figure it prints was TRUE AS MEASURED.  What was missing is that the site
+said so: EIGHT labels in this file read "under L2" / "where L2 holds" / "CONDITIONAL
+on L2" / "under L2's hypothesis" -- the ticket named THREE of them, and re-running the
+sweep rather than inheriting its list found the other five.  `L2` is a DISJUNCTION
+("... monotone in the distinguished order, OR AT LEAST YIELDS A LOW-CONDUCTANCE
+PREFIX"), so an unqualified "under L2" reads as "under EITHER disjunct" -- a claim
+about a population this instrument never measured.  This is UNDER-SCOPING, NOT
+FALSITY: nothing is marked false, no measurement is restated, and the C4 finding
+(C_3^gap > 1 even on the branch where mg-76b2's theorem holds) stands exactly as
+it was.  The second disjunct is UNQUANTIFIED -- weaker than and different from
+refuted -- and is not struck anywhere here.
 """
 
 from fractions import Fraction as F
@@ -166,10 +181,10 @@ print("""
   this is a direction and not a bound -- which is how mg-76b2 reports it too.""")
 
 # --------------------------------------------------------------------------
-banner("C4. P4 -- THE ADVERSARIAL PROBE.  Restrict to posets where L2 HOLDS.")
-print("""  mg-76b2's theorem is CONDITIONAL on L2.  So the honest question is not
-  'is C_3^gap > 1 somewhere', it is 'is C_3^gap > 1 WHERE L2's own hypothesis
-  is satisfied'.  Restrict to primitive posets with a NON-DEGENERATE top
+banner("C4. P4 -- THE ADVERSARIAL PROBE.  Restrict to L2's FIRST DISJUNCT.")
+print("""  mg-76b2's theorem is CONDITIONAL on L2's FIRST DISJUNCT.  The honest
+  question is not 'is C_3^gap > 1 somewhere', it is 'is C_3^gap > 1 WHERE that
+  disjunct holds'.  Restrict to primitive posets with a NON-DEGENERATE top
   standard eigenspace whose eigenvector IS monotone along e -- i.e. posets that
   exhibit L2's first disjunct -- and re-measure.
 """)
@@ -207,14 +222,14 @@ print("""
   prefix is the best cut, and it does not say the gap-form C_3 is 1.  It says
   the CHEEGER SWEEP BOUND is delivered AT a prefix, which is a statement about
   sqrt(2(1-lambda_std)) and not about Phi* or about 1-rho.  C_3^cut > 1 and
-  C_3^gap > 1 under L2 are both COMPATIBLE with it.
+  C_3^gap > 1 on L2's FIRST DISJUNCT are both COMPATIBLE with it.
 
-  It DOES show that 'C_3 = 1' is true only in the chain-(III) currency, and
-  that in the two currencies Op-Form sec.4.3 actually uses to DEFINE the
-  prefix-capture readings, the constant is > 1 and rising even where L2 holds.""")
+  It DOES show that 'C_3 = 1' is true only in the chain-(III) currency, and that
+  in the two currencies Op-Form sec.4.3 actually uses to DEFINE the prefix-capture
+  readings, the constant is > 1 and rising even on L2's FIRST DISJUNCT.""")
 
 # --------------------------------------------------------------------------
-banner("C5. THE THEOREM ITSELF, MEASURED -- chain (III) at C_3 = 1, under L2")
+banner("C5. THE THEOREM, MEASURED -- chain (III) at C_3 = 1, on L2's FIRST DISJUNCT")
 print("""  For every primitive poset exhibiting L2's first disjunct: is there a
   PREFIX A_k with Phi_P(A_k) <= sqrt(2(1-lambda_std))?  That -- and only that --
   is what 'C_3 = 1' means in the currency the ticket's relation uses.
@@ -238,7 +253,7 @@ print(f"  violations                       : {bad}")
 print(f"  worst Phi*_pref^2/(2(1-lambda_std)): {worst_ratio:.4f}")
 print(f"""
   P8: mg-76b2's constant in the chain-(III) currency comes out at
-  {'1 -- CONFIRMED' if bad == 0 else 'NOT 1 -- REFUTED'} on this population, under L2's hypothesis.
+  {'1 -- CONFIRMED' if bad == 0 else 'NOT 1 -- REFUTED'} on this population, under L2's FIRST DISJUNCT's hypothesis.
 
   AND THE SAME CHECK WITHOUT L2, as a red drill -- if it passes there too, the
   hypothesis is not doing work and the theorem is weaker than it looks:""")

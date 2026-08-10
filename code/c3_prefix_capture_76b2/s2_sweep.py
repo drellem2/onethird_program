@@ -1,5 +1,22 @@
 #!/usr/bin/env python3
-"""s2 — THE SWEEP, and the theorem `C_3 = 1 given L2`.
+"""s2 — THE SWEEP, and the theorem `C_3 = 1 given L2's FIRST DISJUNCT`.
+
+SCOPE LABEL REPAIRED, mg-be0b, on mg-3329's finding (which is on mg-fa70's).  This
+header and the banner at the foot of this file both read "given L2".  `L2` is a
+DISJUNCTION -- "a dominant standard eigenvector is monotone in the distinguished
+order, OR AT LEAST YIELDS A LOW-CONDUCTANCE PREFIX" -- so "given L2" is "given
+EITHER disjunct" with the words removed, and that asserts more than this section
+checks.  NOTHING THIS SECTION COMPUTES CHANGES AND NOTHING IS WITHDRAWN: the
+THEOREM below already assumed the first disjunct in its own first sentence, every
+check here restricts to monotone dominant eigenvectors, and no number moves.  On
+L2's SECOND disjunct the constant is RELOCATED, not eliminated -- there is no
+CONVERSION step to charge for (the prefix is the output, L3 never runs), but the
+delivered prefix is only "low-conductance", which is UNQUANTIFIED at all five of
+its occurrences in the source, so an effective C_3 = K^2/2 moves into L2 itself
+(mg-fa70 sec.12, read at the source; NOT re-verified at the .tex here -- that file
+is not in this repository).  The second disjunct is UNQUANTIFIED, which is weaker
+than and different from FALSE, and it is NOT struck: the LEMMA-COUNT result "L3 is
+not an independent lemma" survives on BOTH disjuncts (mg-76b2 sec.9 row 8).
 
 The claim this section exists to check is:
 
@@ -28,7 +45,11 @@ It rests on three legs, checked here separately:
     (S4)  RED DRILL.  The hypothesis is doing work: there are posets where the sweep of a
           NON-monotone dominant eigenvector lands on a set that is neither prefix nor
           suffix, and posets where the best prefix is strictly worse than the best cut.
-          Without L2 the conclusion genuinely fails; the theorem is not vacuous.
+          Without L2's FIRST DISJUNCT the conclusion genuinely fails; the theorem is not
+          vacuous.  (Repaired mg-be0b on q07fd's audit: this read "Without L2".  The drill
+          removes the FIRST DISJUNCT ONLY -- it sweeps NON-MONOTONE dominant eigenvectors
+          -- so what it establishes is that the first disjunct is load-bearing, and it
+          says NOTHING about a poset satisfying only the second.  No number is involved.)
 
 Exit 0 iff every check passes.
 """
@@ -54,7 +75,7 @@ def check(cond, msg):
 
 
 print("=" * 78)
-print("s2 — THE SWEEP, and the theorem  C_3 = 1  given L2")
+print("s2 — THE SWEEP, and the theorem  C_3 = 1  given L2's FIRST DISJUNCT")
 print("=" * 78)
 print()
 
