@@ -1,0 +1,48 @@
+==============================================================================
+S4.1  THEOREM A CHECKED AT CORPUS SCALE  (every primitive poset, n = 2..7)
+==============================================================================
+  Two arms per n, and the SECOND is the one that could kill the theorem:
+    arm 1  -- of the posets satisfying (SO), how many have rho = 1?   must be ALL.
+    arm 2  -- of the posets with rho = 1, how many satisfy (SO)?      expected NOT all,
+              because otherwise (SO) would be a restatement rather than a criterion.
+
+   n | primitive | (SO) holds |  (SO) => rho=1  | rho=1 count | (SO) is strictly
+     |           |            |                 |             | stronger?
+   2 |         1 |          1 |       1 of 1     |           1 | NO -- (SO) == rho=1 here   (0s)
+   3 |         4 |          2 |       2 of 2     |           4 | yes   (0s)
+   4 |        27 |          9 |       9 of 9     |          17 | yes   (0s)
+   5 |       275 |         45 |      45 of 45    |         109 | yes   (0s)
+   6 |      4070 |        281 |     281 of 281   |         906 | yes   (4s)
+   7 |     86278 |       2162 |    2162 of 2162  |       10806 | yes   (156s)
+
+  THEOREM A holds at every one of the 2500 primitive posets with (SO), out of
+  90655 primitive posets at n <= 7.  No exception at any n.
+
+==============================================================================
+S4.2  (SO) IS NOT VACUOUS AND NOT UNIVERSAL -- the two ways it could be worthless
+==============================================================================
+  chain(n-1) + point, where rho > 1 and (L*)'s CONCLUSION fails from n = 10:
+   n | rho      | (SO) violation | (SO) holds
+   8 | 1.097552 |       0.375000 | NO
+  10 | 1.118176 |       0.400000 | NO
+  12 | 1.132491 |       0.416667 | NO
+  14 | 1.142495 |       0.428571 | NO
+  16 | 1.149802 |       0.437500 | NO
+
+  antichains and near-antichains, where (SO) should hold:
+   antichain n=4 : (SO) violation 0.000e+00   rho = 1.000000000
+   antichain n=6 : (SO) violation 0.000e+00   rho = 1.000000000
+   antichain n=8 : (SO) violation 0.000e+00   rho = 1.000000000
+   K_{3,3} - 1 : (SO) violation 5.000e-02   rho = 1.012708931
+   K_{4,4} - 1 : (SO) violation 2.941e-02   rho = 1.009852506
+   K_{4,3} - 1 : (SO) violation 3.846e-02   rho = 1.009645035
+
+==============================================================================
+S4.3  COVERAGE OF (L*) BY THEOREM A -- reported at its true, small, value
+==============================================================================
+  (F)-failing at n = 7 : 168
+  covered by Theorem A : 4  (2.4%)
+  have rho = 1 anyway  : 24  (14.3%)  <- the ceiling any rho=1 argument can reach
+  So Theorem A settles 4 of the 168 outright, and CANNOT settle the other 164,
+  because 144 of those have rho > 1 strictly and (L*) there is a genuine
+  inequality between two numbers rather than an identity.   (40s)

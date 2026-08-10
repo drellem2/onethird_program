@@ -1,0 +1,98 @@
+==============================================================================
+S5.1  NEGATIVE CONTROLS -- the certifier must REFUSE where (L*) holds
+==============================================================================
+  Run first, and on posets whose answer the corpus already publishes.  A certifier
+  that says 'refuted' everywhere proves nothing; these two must come back NOT refuted.
+
+------------------------------------------------------------------------------
+  mg-c50b S4.1 argmax, rho*Delta = 0.923894 -- (L*) HOLDS here   dn = (0, 0, 0, 4, 4, 31, 29)
+    n = 7   height = 3   primitive = True   LE = 88
+    Delta = 10/11   M = 31/88
+    (i)  (F): gamma >= M^2/2 = 961/15488 ?  NO   =>  (F) FAILS
+    exact upper bound   gamma < 30821/500000 = 0.061642000   (certified: the PSD test FAILS there)
+    exact lower bound   mu_pref >= 6263/100000 = 0.062630000   (certified: Q - sN COPOSITIVE)
+    (ii) mu_pref * Delta >= 6263/110000 = 0.056936364   vs   gamma < 30821/500000 = 0.061642000
+    => mu_pref * Delta NOT > gamma       not a counterexample
+------------------------------------------------------------------------------
+  mg-c50b S2.2 witness, rho = 1 -- (L*) HOLDS here   dn = (0, 0, 0, 0, 15, 11, 15)
+    n = 7   height = 2   primitive = True   LE = 156
+    Delta = 10/13   M = 305/936
+    (i)  (F): gamma >= M^2/2 = 93025/1752192 ?  NO   =>  (F) FAILS
+    exact upper bound   gamma < 5423/125000 = 0.043384000   (certified: the PSD test FAILS there)
+    exact lower bound   mu_pref >= 4337/100000 = 0.043370000   (certified: Q - sN COPOSITIVE)
+    (ii) mu_pref * Delta >= 4337/130000 = 0.033361538   vs   gamma < 5423/125000 = 0.043384000
+    => mu_pref * Delta NOT > gamma       not a counterexample
+
+==============================================================================
+S5.2  POSITIVE CONTROL -- a poset where mu_pref*Delta > gamma is ALREADY PUBLISHED
+==============================================================================
+  chain(9) + one isolated point: mg-c50b S4.2 prints rho*Delta = 1.00636 there.  (F)
+  HOLDS at it, so it is no counterexample to (L*) -- but the copositivity machinery must
+  be able to certify the inequality it does satisfy, or it cannot certify anything.
+
+------------------------------------------------------------------------------
+  chain(9)+point -- mu_pref*Delta > gamma expected, (F) holds so (L*) untouched   dn = (0, 1, 3, 7, 15, 31, 63, 127, 255, 0)
+    n = 10   height = 9   primitive = True   LE = 10
+    Delta = 9/10   M = 9/50
+    (i)  (F): gamma >= M^2/2 = 81/5000 ?  yes   =>  (F) holds
+    exact upper bound   gamma < 40797/500000 = 0.081594000   (certified: the PSD test FAILS there)
+    exact lower bound   mu_pref >= 4561/50000 = 0.091220000   (certified: Q - sN COPOSITIVE)
+    (ii) mu_pref * Delta >= 41049/500000 = 0.082098000   vs   gamma < 40797/500000 = 0.081594000
+    => mu_pref * Delta > gamma       not a counterexample
+
+==============================================================================
+S5.3  THE CANDIDATES
+==============================================================================
+------------------------------------------------------------------------------
+  hunt candidate n=9   dn = (0, 1, 0, 4, 0, 0, 32, 96, 239)
+    n = 9   height = 4   primitive = True   LE = 1890
+    Delta = 62/63   M = 41/84
+    (i)  (F): gamma >= M^2/2 = 1681/14112 ?  NO   =>  (F) FAILS
+    exact upper bound   gamma < 23459/200000 = 0.117295000   (certified: the PSD test FAILS there)
+    exact lower bound   mu_pref >= 6011/50000 = 0.120220000   (certified: Q - sN COPOSITIVE)
+    (ii) mu_pref * Delta >= 186341/1575000 = 0.118311746   vs   gamma < 23459/200000 = 0.117295000
+    => mu_pref * Delta > gamma       *** (L*) REFUTED AT THIS POSET ***
+    (0s)
+------------------------------------------------------------------------------
+  hunt candidate n=9   dn = (0, 0, 0, 0, 0, 16, 48, 16, 247)
+    n = 9   height = 4   primitive = True   LE = 5670
+    Delta = 311/315   M = 373/756
+    (i)  (F): gamma >= M^2/2 = 139129/1143072 ?  NO   =>  (F) FAILS
+    exact upper bound   gamma < 118611/1000000 = 0.118611000   (certified: the PSD test FAILS there)
+    exact lower bound   mu_pref >= 6087/50000 = 0.121740000   (certified: Q - sN COPOSITIVE)
+    (ii) mu_pref * Delta >= 631019/5250000 = 0.120194095   vs   gamma < 118611/1000000 = 0.118611000
+    => mu_pref * Delta > gamma       *** (L*) REFUTED AT THIS POSET ***
+    (0s)
+------------------------------------------------------------------------------
+  hunt candidate n=10   dn = (0, 1, 3, 0, 9, 0, 32, 96, 255, 239)
+    n = 10   height = 4   primitive = True   LE = 1148
+    Delta = 565/574   M = 557/1435
+    (i)  (F): gamma >= M^2/2 = 310249/4118450 ?  NO   =>  (F) FAILS
+    exact upper bound   gamma < 70327/1000000 = 0.070327000   (certified: the PSD test FAILS there)
+    exact lower bound   mu_pref >= 911/12500 = 0.072880000   (certified: Q - sN COPOSITIVE)
+    (ii) mu_pref * Delta >= 102943/1435000 = 0.071737282   vs   gamma < 70327/1000000 = 0.070327000
+    => mu_pref * Delta > gamma       *** (L*) REFUTED AT THIS POSET ***
+    (0s)
+------------------------------------------------------------------------------
+  hunt candidate n=11   dn = (0, 1, 3, 7, 0, 1, 1, 113, 1, 257, 257)
+    n = 11   height = 4   primitive = True   LE = 57120
+    Delta = 135/136   M = 7141/14280
+    (i)  (F): gamma >= M^2/2 = 50993881/407836800 ?  NO   =>  (F) FAILS
+    exact upper bound   gamma < 119917/1000000 = 0.119917000   (certified: the PSD test FAILS there)
+    exact lower bound   mu_pref >= 12381/100000 = 0.123810000   (certified: Q - sN COPOSITIVE)
+    (ii) mu_pref * Delta >= 334287/2720000 = 0.122899632   vs   gamma < 119917/1000000 = 0.119917000
+    => mu_pref * Delta > gamma       *** (L*) REFUTED AT THIS POSET ***
+    (1s)
+
+==============================================================================
+S5.4  VERDICT
+==============================================================================
+  (L*) IS FALSE.  Certified counterexamples, exactly, on integers:
+     n =  9   dn = (0, 1, 0, 4, 0, 0, 32, 96, 239)
+     n =  9   dn = (0, 0, 0, 0, 0, 16, 48, 16, 247)
+     n = 10   dn = (0, 1, 3, 0, 9, 0, 32, 96, 255, 239)
+     n = 11   dn = (0, 1, 3, 7, 0, 1, 1, 113, 1, 257, 257)
+
+  The smallest is n = 9.
+  (L*) was certified at 168/168 (n=7) and 3589/3589 (n=8); it first fails at n = 9,
+  which is exactly the first n the corpus had never enumerated.

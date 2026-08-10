@@ -1,0 +1,67 @@
+==============================================================================
+S0  SELF-TEST -- lib789d
+==============================================================================
+
+A1  population counts (naturally labelled posets)
+  PASS  counts 1,2,7,40,357,4824,96428   [1, 2, 7, 40, 357, 4824, 96428]
+  PASS  every generated dn is transitive+natural
+  PASS  transitive_ok rejects a non-natural dn (control)
+
+A2  transport
+  PASS  antichain LE = 4! = 24   LE=24
+  PASS  antichain S = J/n
+  PASS  antichain Delta = 1 - 1/n   3/4
+  PASS  chain LE = 1
+  PASS  chain Delta = 0
+  PASS  chain M = 0
+  PASS  chain gamma == 0 exactly (rigid: S_P = I)   gamma=0.00e+00
+  PASS  chain is NOT primitive (so it is outside the population)
+
+A3  f-space == psi-space  (THE load-bearing identity)
+  PASS  c'Qc == E(f) and c'Nc == ||f-fbar||^2 at every poset n<=6 (5228 posets, EXACT)
+  PASS  Q_kk == leak(A_k) at every poset n<=6 (EXACT)
+
+A4  gamma: exact integer PSD bisection agrees with the float eigenvalue
+  PASS  float gamma inside the exact bracket at every poset n<=6   widest bracket 1.86e-09
+  PASS  gap_ge(0) is True everywhere (gamma >= 0)
+  PASS  gap_ge(3) is False everywhere (control: gamma <= 2)
+
+A5  mu_pref by face enumeration
+  PASS  antichain: mu == gamma == 1   mu=1.000000000 gamma=1.000000000
+  PASS  mu >= gamma at every primitive poset n=6   min(mu-gamma) = -9.44e-16
+  PASS  mu > gamma somewhere (the cone is a real restriction, control)   906 of 4070 have rho = 1
+  PASS  mu_ub >= mu_exact at every primitive poset n<=6 (the UPPER-bound direction)   min(mu_ub - mu_exact) = -6.66e-16
+  PASS  mu_ub is TIGHT there too (control: it must not be a useless bound)   max(mu_ub - mu_exact) = 3.44e-05
+
+A6  mg-c50b's published constants, reproduced on this instrument
+  PASS  primitive counts 1/4/27/275/4070   [1, 4, 27, 275, 4070]
+  PASS  max rho(4) = 1.085410   1.085410
+  PASS  max rho(5) = 1.141242   1.141242
+  PASS  max rho(6) = 1.217605   1.217605
+  PASS  witness (0,0,0,0,15,11,15): height 2
+  PASS  witness gamma = 0.043382   0.043382
+  PASS  witness rho = 1.000000   1.000000
+  PASS  witness rho*Delta = 0.769231   0.769231
+  PASS  witness f* = 1.223785   1.223785
+  PASS  witness (F) FAILS exactly
+  PASS  S4.1 argmax (0,0,0,4,4,31,29): rho*Delta = 0.923894   0.923894
+  PASS  S4.1 argmax: (F) FAILS exactly
+  PASS  n=8 argmax Delta = 62/65   62/65
+  PASS  n=8 argmax Phi* = 1/26   1/26
+  PASS  n=8 argmax M = 723/2080   723/2080
+  PASS  n=8 argmax gamma = 0.047583   0.047583
+
+A7  mg-c50b S4.2's chain+point family, reproduced
+  PASS  chain(9)+point: rho*Delta = 1.00636   1.00636
+  PASS  chain(11)+point: rho*Delta = 1.03812   1.03812
+  PASS  chain(15)+point: rho*Delta = 1.07794   1.07794
+
+A8  negative controls -- arms that MUST fire
+  PASS  mu >= gamma on the probe poset (control)
+  PASS  psd_int_exact rejects [[1,2],[2,1]]
+  PASS  psd_int_exact accepts [[1,1],[1,1]]
+  PASS  psd_int_exact rejects [[0,1],[1,0]] (zero diagonal, nonzero row)
+  PASS  relabel_natural refuses a cycle
+
+==============================================================================
+SELF-TEST: all arms pass.

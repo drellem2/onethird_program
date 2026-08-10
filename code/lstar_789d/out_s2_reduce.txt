@@ -1,0 +1,58 @@
+==============================================================================
+S2.1  THE n = 7 (F)-FAILING SET, REBUILT HERE
+==============================================================================
+  (F)-failing primitive posets on [7]: 168      (40s)
+  posets inside the float margin that the EXACT test then cleared: 0
+  mg-c50b reports 168.  AGREES
+
+==============================================================================
+S2.2  THE THREE ROUTES ON THAT SET
+==============================================================================
+  quantity * Delta, over the 168 -- each is SUFFICIENT for (L*) if it is <= 1
+  (L*) itself:  rho*Delta      max = 0.923894   holds at 168 of 168   argmax (0, 0, 3, 3, 15, 2, 3)
+  (R1) prefix:  R*Delta        max = 1.020090   holds at 166 of 168   argmax (0, 0, 1, 3, 3, 3, 35)
+  (R2) rearr.:  W*Delta        max = 12.871823   holds at 35 of 168   argmax (0, 0, 3, 7, 3, 3, 1)
+
+  (R3) cone invariance -- how many of the 168 have A preserving the monotone cone?
+      stochastically ordered rows : 4 of 168
+      totally positive (TP2)      : 4 of 168
+      rho = 1 exactly             : 24 of 168   (mg-c50b reports 24)
+      stoch-ordered ==> rho = 1   : HOLDS at every one
+      rho = 1 ==> stoch-ordered   : FALSE   (the converse; expected FALSE)
+
+  max Delta on the set = 0.909091    max rho = 1.023794    max R = 1.141117   max W = 14.410300
+  heights on the set: [2, 3]
+
+==============================================================================
+S2.3  THE SAME THREE ROUTES WHERE (L*)'s CONCLUSION IS KNOWN TO FAIL
+==============================================================================
+  chain(n-1) + one isolated point: rho*Delta EXCEEDS 1 from n = 10.  (F) holds there,
+  so (L*) is untouched -- but any route that is to prove (L*) must also fail here, or it
+  would be proving something false.  This is the negative control for R1/R2/R3.
+
+   n | rho*Delta | R*Delta  | W*Delta  | stoch-ord viol | TP2 viol | (F) fails
+   8 |   0.96036 |  1.12164 |  4.48511 |       3.75e-01 | 2.34e-01 | no
+  10 |   1.00636 |  1.22560 |  5.31181 |       4.00e-01 | 2.40e-01 | no
+  12 |   1.03812 |  1.30737 |  5.99108 |       4.17e-01 | 2.43e-01 | no
+  14 |   1.06089 |  1.37344 |  6.55043 |       4.29e-01 | 2.45e-01 | no
+  16 |   1.07794 |  1.42795 |  7.01107 |       4.38e-01 | 2.46e-01 | no
+
+==============================================================================
+S2.4  IS THE (F) HYPOTHESIS WHAT TURNS THE ROUTES ON?
+==============================================================================
+  If a route only works on the (F)-failing set it must be BECAUSE (F) fails there.
+  Measured across ALL primitive posets at n = 6 and n = 7, split by whether (F) fails.
+
+  n | set              |  count | max rho*D | max R*D  | max W*D  | stoch-ord frac
+  6 | (F) FAILS        |      0 |
+  6 | (F) holds        |   4070 |   1.15672 |  1.68421 |  8.28935 |    6.9%
+  7 | (F) FAILS        |    168 |   0.92389 |  1.02009 | 12.87182 |    2.4%
+  7 | (F) holds        |  86110 |   1.21887 |  1.94446 | 12.64575 |    2.5%
+
+==============================================================================
+S2.5  SUMMARY
+==============================================================================
+  (L*)  max rho*Delta on the n=7 (F)-failing set = 0.923894
+  (R1)  max R*Delta   = 1.020090   DOES NOT SUFFICE
+  (R2)  max W*Delta   = 12.871823   DOES NOT SUFFICE
+  (R3)  covers 4 of 168 posets OUTRIGHT (rho = 1 there, so Delta <= 1 finishes)
