@@ -1,0 +1,115 @@
+==============================================================================
+r2 — THE OTHER ELEVEN, READ
+==============================================================================
+
+STEP 1 -- WHOSE COMMITS ARE ON THE 'LANDING SIDE' OF THE SCREEN?
+
+  lib64cb's idx['mg-51f4']['canonical'] = ['a65860e', '2f76a01', '18a1347']
+
+  commit    wrote it  authored                   subject
+  a65860e   mg-c50b   2026-08-10T01:39:01+01:00  math+instrument: THE ANTI-CORRELATION IS ONE INEQUALITY AND NOT A 
+  2f76a01   mg-51f4   2026-08-09T22:46:06+01:00  math+instrument: THE SWEEP'S LOSS IS UNBOUNDED AND THAT IS NOT THE
+  18a1347   mg-29fe   2026-08-09T22:40:32+01:00  audit: mg-29fe's INDEPENDENT AUDIT of mg-28ff — THE AFFIRMATIVE HA
+
+  ONE of the three is mg-51f4's landing. lib64cb's index is built by MENTION, so a commit
+  that names mg-51f4 joins mg-51f4's list -- including the audit's own commit.
+
+
+STEP 2 -- EACH OF THE TWELVE, ATTRIBUTED TO THE COMMIT THAT ADDED IT
+
+  literal    added by  i.e.      the added line
+  0.019169   18a1347   mg-29fe   `+0.013211` after `+0.019169` — **still strictly decreasing**. So the *"differences are
+  0.176      18a1347   mg-29fe   | **Item 3 — the `n = 6` boundary** | **THE BLANKET SCOPE HOLDS AND WAS RIGHT BY A WIDE MARGIN; 
+  0.250000   a65860e   mg-c50b   | `f*(n)` | `0.250000 / 0.306250 / 0.550747 / 0.811649 / 1.297074` | **identical** |
+  0.250000   2f76a01   mg-51f4   | 3 | 4 | 0.222222 | 0.500000 | 0.250000 | 0.250000 |
+  0.250000   18a1347   mg-29fe   exact values — **`0.125000, 0.250000, 0.306250, 0.550747, 0.753639`** at `n = 2..6` —
+  0.306250   a65860e   mg-c50b   | `f*(n)` | `0.250000 / 0.306250 / 0.550747 / 0.811649 / 1.297074` | **identical** |
+  0.306250   2f76a01   mg-51f4   | 4 | 27 | 0.271353 | 0.636846 | 0.306250 | 0.306250 |
+  0.306250   18a1347   mg-29fe   exact values — **`0.125000, 0.250000, 0.306250, 0.550747, 0.753639`** at `n = 2..6` —
+  0.308339   a65860e   mg-c50b   | `c_true(n)`, `n = 3..7` | `0.222222 / 0.271353 / 0.308339 / 0.327508 / 0.340719` | **identical
+  0.308339   2f76a01   mg-51f4   | 5 | 275 | 0.308339 | 0.803289 | 0.550747 | 0.550747 |
+  0.327508   a65860e   mg-c50b   | `c_true(n)`, `n = 3..7` | `0.222222 / 0.271353 / 0.308339 / 0.327508 / 0.340719` | **identical
+  0.327508   2f76a01   mg-51f4   | 6 | 4070 | 0.327508 | 0.943151 | 0.811649 | 0.753639 |
+  0.341      18a1347   mg-29fe   | **Item 3 — the `n = 6` boundary** | **THE BLANKET SCOPE HOLDS AND WAS RIGHT BY A WIDE MARGIN; 
+  0.550747   a65860e   mg-c50b   | `f*(n)` | `0.250000 / 0.306250 / 0.550747 / 0.811649 / 1.297074` | **identical** |
+  0.550747   2f76a01   mg-51f4   | 5 | 275 | 0.308339 | 0.803289 | 0.550747 | 0.550747 |
+  0.550747   18a1347   mg-29fe   exact values — **`0.125000, 0.250000, 0.306250, 0.550747, 0.753639`** at `n = 2..6` —
+  0.923894   a65860e   mg-c50b   | the **168** `(F)`-failing primitive posets on `[7]`, EXHAUSTIVE | **168 of 168** | `0.923894` 
+  0.943649   a65860e   mg-c50b   # OneThird — **THE ANTI-CORRELATION IS ONE INEQUALITY, NOT A γ-REGIME COINCIDENCE.** `mg-51f4`'s
+  0.968818   a65860e   mg-c50b   | the **3589** `(F)`-failing survivors at `n = 8` | **3589 of 3589** | `0.968818` |
+  1.078      a65860e   mg-c50b   point, `ρΔ_P` crosses 1 at `n = 10` and reaches `1.078` at `n = 16` **(FAMILY)**. It simply
+
+
+STEP 3 -- THE RESIDUE THAT IS ACTUALLY mg-51f4's
+
+  mg-c50b                 4   0.923894 0.943649 0.968818 1.078
+  mg-29fe                 3   0.019169 0.176 0.341
+  mg-29fe, mg-51f4, mg-c50b  3   0.250000 0.306250 0.550747
+  mg-51f4, mg-c50b        2   0.308339 0.327508
+
+  Published by mg-51f4's OWN landing (2f76a01): 5 of 12 -- 0.250000 0.306250 0.308339 0.327508 0.550747
+
+
+STEP 4 -- THE READ. Each of mg-51f4's five, in its own document, with the question asked.
+
+  0.250000
+     docs/OneThird-SweepLoss-mg-51f4.md:88  published by this document's landing commit**, and all five — `0.250000, 0.306250, 0.308339,
+     docs/OneThird-SweepLoss-mg-51f4.md:268  | 3 | 4 | 0.222222 | 0.500000 | 0.250000 | 0.250000 |
+  0.306250
+     docs/OneThird-SweepLoss-mg-51f4.md:88  published by this document's landing commit**, and all five — `0.250000, 0.306250, 0.308339,
+     docs/OneThird-SweepLoss-mg-51f4.md:269  | 4 | 27 | 0.271353 | 0.636846 | 0.306250 | 0.306250 |
+  0.308339
+     docs/OneThird-SweepLoss-mg-51f4.md:88  published by this document's landing commit**, and all five — `0.250000, 0.306250, 0.308339,
+     docs/OneThird-SweepLoss-mg-51f4.md:270  | 5 | 275 | 0.308339 | 0.803289 | 0.550747 | 0.550747 |
+  0.327508
+     docs/OneThird-SweepLoss-mg-51f4.md:89  0.327508, 0.550747` — are `n ≤ 6` cells of §4's *own* exhaustive table, recomputed on an
+     docs/OneThird-SweepLoss-mg-51f4.md:271  | 6 | 4070 | 0.327508 | 0.943151 | 0.811649 | 0.753639 |
+     docs/OneThird-SweepLoss-mg-51f4.md:438  | **P12** | `[FORMALITY]` reproduce `mg-28ff`'s constants and populations | reproduced: `5230 / 4377`, `1,4,27
+  0.550747
+     docs/OneThird-SweepLoss-mg-51f4.md:89  0.327508, 0.550747` — are `n ≤ 6` cells of §4's *own* exhaustive table, recomputed on an
+     docs/OneThird-SweepLoss-mg-51f4.md:270  | 5 | 275 | 0.308339 | 0.803289 | 0.550747 | 0.550747 |
+
+  ALL FIVE ARE n <= 6 CELLS OF mg-51f4's OWN EXHAUSTIVE TABLE (§4), and none is carried
+  from mg-28ff: mg-51f4 recomputes the n <= 6 population on an instrument that shares no
+  source line with lib28ff and computes the transport by a down-set dynamic program rather
+  than by filtering n! permutations (§4, and the colophon). Its P12 records the agreement as
+  a FORMALITY it had to earn: '5230 / 4377, 1,4,27,275,4070, c_true(6) = 0.327508,
+  c#(6) = 0.943151'.
+
+  AND mg-29fe WITHDREW NO FIGURE. Its verdict is CONFIRMED WITH REPAIRS over four
+  falsification arms; the repairs landed by mg-b58d and mg-3bb9 are labels, a diagnosis, an
+  over-claim, an under-claim and a citation -- and both landing commits say NO FIGURE
+  WITHDRAWN in their own subjects. So there is no superseded n <= 6 value for any of the
+  five to be.
+
+  THE ONE DISAGREEMENT mg-51f4 DID RECORD is f*(6): mg-28ff prints 0.811654, mg-51f4 gets
+  0.8116489. It is NOT in the twelve (neither spelling appears on a correction line of the
+  audit under the screen's regex), mg-51f4 records it rather than smoothing it, and mg-29fe
+  found the cause -- 20 bisection steps over [0,4], the sixth decimal being the upper
+  bracket end. Conservative, not wrong. NOT re-opened here.
+
+  ONE LITERAL NEEDS ITS SPELLING SAID OUT LOUD. `0.176` is mg-29fe's rounding of mg-28ff's
+  n = 7 sample c_true; mg-51f4 writes the same quantity as `0.176145`, which the screen's
+  regex tokenises separately, so `0.176` is NOT evidence that mg-51f4 published it. mg-51f4
+  DOES quote that one figure, once, at :150, and its §12 says so in advance and says why:
+  'The one place I mention one -- its c_true(7) = 0.176145 in §4 -- is to record that the
+  enumerated maximum is 1.93x larger, and it carries the word *sample* in the same
+  sentence.' That is mg-29fe's 'carried and not used, which is the correct handling', and it
+  is not what this ticket repairs.
+
+  RESIDUE AFTER THIS ARM: 0. The other eleven are read. Five are mg-51f4's own recomputed
+  n <= 6 values and carry nothing; three (0.019169, 0.176, 0.341) were contributed by
+  mg-29fe's own audit commit and are the screen intersecting the audit with itself; four
+  (0.923894, 0.943649, 0.968818, 1.078) were contributed by mg-c50b's later landing, which
+  is a different ticket and post-dates both documents.
+
+
+WHAT THIS ARM CANNOT SAY
+
+  It cannot say mg-51f4 carried nothing WRONG from mg-28ff in prose that shares no literal
+  with the audit's correction lines. The screen is a literal intersection and so is this
+  arm; the labelling claim -- the thing this ticket actually repairs -- carries NO literal
+  at all and would never have been found by either. That is the honest limit, and it is the
+  same limit mg-64cb states: a shared literal is a necessary condition, not a finding, and
+  the absence of one is not an absence of defect.
+

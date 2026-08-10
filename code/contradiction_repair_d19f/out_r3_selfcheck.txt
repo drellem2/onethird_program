@@ -1,0 +1,33 @@
+==============================================================================
+r3 — THE REPAIR, CHECKED AGAINST ITS OWN DEFECT CLASS
+==============================================================================
+  [PASS] C1  both false sentences are STRUCK, and neither is DELETED
+         site A inside ~~...~~: True
+         site B inside ~~...~~: True
+         4 strikethrough span(s) in the document
+  [PASS] C2  the repair asserts NO opposite blanket over mg-28ff's labelling
+         candidate opposite-blanket phrasings found: none
+         the repair says 'three joints' and names each; it never says 'nowhere' or 'never'.
+  [PASS] C3  every joint and every number in §0.0 carries a citation
+         ok   joint 1
+         ok   joint 2
+         ok   joint 3
+         ok   the measurement
+         ok   the reporter
+         ok   the instrument
+  [PASS] C4  mg-28ff is NOT edited; exactly one document outside this tree changed
+         changed outside this instrument: ['docs/OneThird-SweepLoss-mg-51f4.md']
+         expected exactly: ['docs/OneThird-SweepLoss-mg-51f4.md']
+  [PASS] C5  NO measured literal is DROPPED (added ones are the quoted evidence)
+         dropped: none
+         added  : ['0.019169', '0.176', '0.176145', '0.250000', '0.306250', '0.308339', '0.327508', '0.341', '0.550747', '0.832530', '0.850074', '0.923894', '0.943649', '0.968818', '1.078']
+  [PASS] C6  the opposite-blanket detector FIRES on a planted sentence
+         planted: None of mg-28ff's n = 7 rows was correctly labelled anywhere in the document.
+         detector -> ["None of mg-28ff's n = 7 rows was correctly labelled"]
+  [PASS] C7  §12's 'not quoted anywhere' bullet is struck, and every appearance is named
+         0.176145 (c_true(7)) appears at lines [263, 481, 518, 522]
+         0.850074 (c#(7)    ) appears at lines [482, 523]
+         0.832530 (f*(7)    ) appears at lines [44, 99, 480, 523]
+         §12 bullet struck: True   every value named in the correction: True
+
+SELFCHECK: 7 of 7 arms pass.

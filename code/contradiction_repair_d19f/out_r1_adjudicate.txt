@@ -1,0 +1,78 @@
+==============================================================================
+r1 — THE ADJUDICATION
+==============================================================================
+
+THE TWO CLAIMS, AT HEAD, TODAY
+
+  docs/OneThird-SweepLoss-mg-51f4.md:26
+    |---|---|---|---|
+    | **1** | **§4**, the `n = 7` paragraph | *"correctly labelled as such at every appearance in its document"* — false; *"samples of 40–200 posets"* collapses **two different samples** into one range, taking `40` from §4.2's *primitive* count and `200` from §4.1/§4.3's *draw* size; and *"I do not quote any of them"* is site 3's blanket a second time | struck, corrected beside |
+  docs/OneThird-SweepLoss-mg-51f4.md:256
+    **`n = 7` IS ENUMERATED HERE, NOT SAMPLED.** `mg-28ff`'s `n = 7` figures are deterministic
+    samples of ~~40–200 posets, correctly labelled as such at every appearance in its document~~
+  docs/OneThird-SweepLoss-mg-51f4.md:27  <- A SECOND SITE, NOT IN THE TICKET BODY
+    | **2** | **§11**, above the repair table | *"Every one of `mg-28ff`'s `n = 7` figures was correctly labelled a sample at each appearance. None of these is a labelling failure."* — **falsified three lines later by site 1 of its own table** | struck, corrected beside |
+    | **3** | **§12**, "NOT DONE" | *"`mg-28ff`'s `n = 7` sample figures are not quoted anywhere … **The one place** I mention one"* — **all three are quoted, at five sites; false the day this document landed, and §11's own table is what falsifies it** | struck, corrected beside |
+  docs/OneThird-SweepLoss-mg-51f4.md:463  <- A SECOND SITE, NOT IN THE TICKET BODY
+    ~~**Every one of `mg-28ff`'s `n = 7` figures was correctly labelled a sample at each
+    appearance.** None of these is a labelling failure.~~ **FALSE — AND FALSIFIED BY SITE 1 OF
+
+  docs/OneThird-L2-Conditionality-mg-28ff.md:21
+    | **1** | §4.3 summary | *"100 % at every **enumerated** `n`"* read a **sample** as an enumeration, and is **false of the truth** — the exhaustive `n = 7` (`mg-51f4`) has (F) failing at **168 of 86278
+
+
+(i) THE TEXT OF mg-28ff AS mg-51f4 READ IT (cb496e9) -- mg-29fe's THREE JOINTS, CHECKED
+
+  [CONFIRMED] joint 1
+      docs/OneThird-L2-Conditionality-mg-28ff.md@cb496e9:245  | 7 | 106 *(sample)* | 106 / 106 | `0.832530` |
+      docs/OneThird-L2-Conditionality-mg-28ff.md@cb496e9:247  **100 % at every enumerated `n`, with no eigenvector on the left.**
+      the row two lines above the sentence is a SAMPLE; the sentence says ENUMERATED.
+      That is an APPEARANCE of an n = 7 figure that is not correctly labelled.
+
+  [CONFIRMED] joint 2
+      docs/OneThird-L2-Conditionality-mg-28ff.md@cb496e9:417  sentence, §0 says so before any table, and every `n = 7` row is labelled *sample, not a
+      :200  carries 'NOT a maximum'   > | 7 | 106 *(sample — NOT a maximum)* | `0.176145` | — |
+      :217     LACKS 'NOT a maximum'   | 7 | 40 *(sample)* | `0.850074` |
+      :245     LACKS 'NOT a maximum'   | 7 | 106 *(sample)* | 106 / 106 | `0.832530` |
+      1 of 3 rows carry it. The self-audit says all three.
+
+  [CONFIRMED] joint 3
+      b2_census.py:138       sample_posets(7, 90 )   §4.2 c♯(7)
+      b1_footrule.py:34      sample_posets(7, 90 )   (not a cited row -- listed so the census is complete)
+      b1_footrule.py:73      sample_posets(7, 200)   §4.3 f*(7)
+      b5_trend.py:48         sample_posets(7, 200)   §4.1 c_true(7)
+      distinct draw sizes AT THE CITED ROWS: ['200', '90']   -> the three rows labelled '(sample)' are
+      not the same sample. mg-3bb9's repair E re-measured the EVALUATED populations
+      as 98 and 208 (primitive 40 and 106), the draws supplying 35 and 101 of them.
+
+
+(ii) THE UNDERLYING NUMBER, FROM mg-51f4's OWN TRANSCRIPT
+
+  code/sweep_loss_51f4/out_s3_n7.txt:  Population: all 86278 primitive posets on [7] with the identity a linear extension.
+  code/sweep_loss_51f4/out_s3_n7.txt:  primitive posets at n=7 where route (F) FAILS  (f* > 1):               168 of 86278
+
+  So (F) is FALSE at n = 7 exhaustively. mg-28ff's SS4.3 summary said '100 % at every
+  ENUMERATED n' over a table whose n = 7 row was a 106-poset sample -- and the exhaustive
+  n = 7 that mg-51f4 itself produced is what makes that sentence false of the truth.
+  mg-51f4 SUPPLIED THE MEASUREMENT THAT REFUTES THE SENTENCE IT CERTIFIED AS CORRECT.
+
+
+THE VERDICT
+
+  [CONFIRMED] joint 1  SS4.3 summary reads a SAMPLE as an ENUMERATION
+  [CONFIRMED] joint 2  SS8.1's own scope self-audit is FALSE at 2 of its 3 rows
+  [CONFIRMED] joint 3  SS4.2's n = 7 population is a DIFFERENT sample, unstated
+
+  mg-28ff:21 (mg-29fe's repair row)  -> TRUE. LEFT ALONE.
+  docs/OneThird-SweepLoss-mg-51f4.md:26                        -> FALSE. STRUCK AND CORRECTED BESIDE.
+  docs/OneThird-SweepLoss-mg-51f4.md:27                        -> FALSE. STRUCK AND CORRECTED BESIDE.
+
+  AND THE SECOND SITE IS THE SHARPER ONE. mg-51f4's SS11 says 'None of these is a labelling
+  failure' THREE LINES ABOVE its own site 1, which describes mg-28ff:247 in these words:
+  'The word *enumerated* sat over a table whose n = 7 row was a sample, so the sentence
+  reads as covering n = 7 and is false there.' That IS mg-29fe's joint 1, found
+  independently by mg-51f4, tabulated by mg-51f4, and then denied by mg-51f4's own blanket
+  sentence one paragraph above it. The two documents never disagreed about the FACT. They
+  disagreed about a SUMMARY of the fact, and the summary was written last.
+
+ADJUDICATION COMPLETE

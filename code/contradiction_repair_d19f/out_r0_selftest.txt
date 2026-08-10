@@ -1,0 +1,31 @@
+==============================================================================
+r0 — SELFTEST, SIX FORCED ARMS
+==============================================================================
+  [PASS] A1  authorship is read off the trailer, and REFUSES a mere mention
+         item_of(18a1347) = mg-29fe   (expected mg-29fe)
+         the same commit mentions mg-51f4: True  <- the trap
+  [PASS] A2  'the more recent document wins' answers BOTH ways -> refused
+         mg-51f4  landing   2026-08-09T22:46:06+01:00
+         mg-28ff  as read   2026-08-09T20:42:49+01:00   -> recency picks mg-51f4
+         mg-28ff  repaired  2026-08-09T23:48:52+01:00   -> recency picks mg-28ff
+         one rule, two answers. The adjudication in r1 uses neither.
+  [PASS] A3  cb496e9 IS the text mg-51f4 read (the audited sentence is present)
+         '100 % at every enumerated' at cb496e9: lines [247]
+         file length 508 lines
+  [PASS] A4  the locator REFUSES an absent needle (non-vacuity)
+         absent needle -> []
+  [PASS] A5  BOTH false sites are present in the file this ticket edits
+         site A (SS4)  line [26, 256]
+         site B (SS11) line [27, 463]
+         (two hits each after the repair: the struck original, and §0.0's table quoting it)
+         NOTE: this arm still PASSES after the repair lands, and that is the point of the
+         arc's strike-and-correct practice: the false sentence is struck, never deleted, so
+         a reader who arrives with the old text in hand can still find it. A repair that made
+         this arm go quiet would have removed the evidence along with the error.
+  [PASS] A5' the repair markers are present (post-repair form)
+         repair markers at lines [258]  (REPAIRED)
+  [PASS] A6  168 of 86278 is read from the TRANSCRIPT, not from either document
+         code/sweep_loss_51f4/out_s3_n7.txt:
+           primitive posets at n=7 where route (F) FAILS  (f* > 1):               168 of 86278
+
+SELFTEST: 6 of 6 forced arms pass (A5' is informational).
