@@ -1,0 +1,79 @@
+============================================================================================
+a1  mg-a564 — landing check for the six repairs, against the landed document
+============================================================================================
+
+(1) REPAIR E — the n = 7 population labels, against lib28ff's own generators
+      named entries          = 8
+      named primitive        = 5
+      draw90 entries         = 90
+      draw90 primitive       = 35
+      draw200 entries        = 200
+      draw200 primitive      = 101
+      union90 entries        = 98
+      union90 primitive      = 40
+      union90 distinct       = 97
+      union200 entries       = 208
+      union200 primitive     = 106
+      union200 distinct      = 207
+  [PASS] measured populations match the figures the document prints
+  [PASS] document states the evaluated population: '208 EVALUATED'
+  [PASS] document states the evaluated population: '98 EVALUATED'
+  [PASS] document states the evaluated population: '98 and 208'
+  [PASS] repair 3's defective label is gone: '106 primitive of **200 drawn**'
+  [PASS] repair 3's defective label is gone: '40 primitive of **90 drawn**'
+  [PASS] NEGATIVE CONTROL — a wrong primitive count fails arm 1
+  [PASS] lib28ff's own output labels the row 'named + sample'
+  [PASS] §3 of the document states the union size 98 correctly
+
+(2) REPAIRS A, B, D, F — the cited lines say what the document says they say
+  [PASS] code/l2_audit_29fe/s3_counterfactual.py:60 contains 'if rlo > 1:'
+  [PASS] code/l2_audit_29fe/s3_counterfactual.py:66 contains '"V00": rlo'
+  [PASS] code/l2_audit_29fe/s3_counterfactual.py:72 contains 'if lowb[k] > 1:'
+  [PASS] code/l2_conditionality_28ff/PREDICTIONS.md:108 contains 'P11 [BET, 0.35]'
+  [PASS] code/l2_conditionality_28ff/PREDICTIONS.md:109 contains 'n ≤ 6'
+  [PASS] code/l2_conditionality_28ff/PREDICTIONS.md:83 contains 'P4 [PRINCIPAL LIVE BET, 0.25]'
+  [PASS] code/l2_conditionality_28ff/PREDICTIONS.md:84 contains 'n ≤ 6'
+  [PASS] code/l2_conditionality_28ff/PREDICTIONS.md:113 contains 'n ≤ 6'
+  [PASS] code/l2_conditionality_28ff/PREDICTIONS.md:115 contains 'n ≤ 6'
+  [PASS] code/l2_conditionality_28ff/out_b1_footrule.txt:38 contains '0.83253'
+  [PASS] code/l2_conditionality_28ff/b1_footrule.py:73 contains 'named_posets(7) + sample_posets(7, 200)'
+  [PASS] code/l2_conditionality_28ff/b2_census.py:138 contains 'named_posets(7) + sample_posets(7, 90)'
+  [PASS] code/l2_conditionality_28ff/b5_trend.py:48 contains 'named_posets(7) + sample_posets(7, 200)'
+  [PASS] code/sweep_loss_51f4/out_s3_n7.txt:32 contains 'UPPER bound -- exhibited vector'
+  [PASS] code/sweep_loss_51f4/out_s3_n7.txt:47 contains 'OVERCOUNTS'
+  [PASS] REPAIR A — 'L2 fails' and V00-FAIL are the same predicate on the same number   so the cited verdict line cannot print False
+  [PASS] REPAIR F — mg-51f4 §5 carries the exact copositivity bracket that closes (M#) at n = 7
+  [PASS] the document now cites mg-51f4 §5 for (M#)'s n = 7 failure
+  [PASS] NEGATIVE CONTROL — a bogus token at a real line fails arm 2
+
+(3) REPAIR C — sweep for BLANKET statements about rows, not for mislabelled rows
+  [PASS] the quoted-span rule is not vacuous (italic quotations cover < 10 % of the document)   2255 of 76538 chars = 2.9 %
+  [PASS] blanket '[Tt]he `n = 7` rows are not maxima': 1 hit(s), none asserted in the document's own voice
+  [PASS] blanket '[Ee]very constant carries `n ≤ 6`': 1 hit(s), none asserted in the document's own voice
+  [PASS] blanket '`17/78` appears nowhere': 1 hit(s), none asserted in the document's own voice
+  [PASS] blanket '`17/78` does not appear in this document at all': 0 hit(s), none asserted in the document's own voice
+  [PASS] blanket 'every table above is keyed on': 1 hit(s), none asserted in the document's own voice
+  [PASS] the re-scoped replacement is present: 'no `n = 7` row produced by `lib28ff.py` is a maximum'
+  [PASS] the re-scoped replacement is present: 'only as the name of the failure mode'
+  [PASS] the re-scoped replacement is present: 'no route-constant table here'
+  [PASS] NEGATIVE CONTROL — the sweep fires on an unscoped blanket
+  [PASS] NEGATIVE CONTROL — the sweep stays silent on a quotation of the replaced wording
+
+(4) REPAIR B — P11 is scored LOST, and the scope is restored in every cell whose bet carries it
+  [PASS] P11 is scored LOST
+  [PASS] P11's cell now quotes the bet's own `n ≤ 6`
+  [PASS] the flip's wording is gone
+  [PASS] P4's cell now carries the `n ≤ 6` its bet carries
+  [PASS] the scoring convention is stated once, outside any single row
+  [PASS] the 'three live bets lost or half-lost' summary agrees with the table again
+  [PASS] the figure that decides P11 is unchanged: (F) certifies 4377 of 4377 at n ≤ 6
+
+============================================================================================
+ALL ARMS PASSED — every population figure re-measured, every cited line read,
+the blanket class swept, and P11 scored against the bet as filed.
+NOT CHECKED HERE, AND SAID RATHER THAN LEFT IMPLICIT: the exhaustive n = 7 figures
+(0.340719 / 1.018707 / 1.297074 / 168 of 86278 / 96428) are NOT re-derived by this
+script or by any instrument in this repo other than mg-51f4's.  They are checked
+elsewhere only as FAITHFUL COPIES of out_s3_n7.txt.  mg-a91f carries the independent
+re-derivation; this landing does not claim it.
+============================================================================================

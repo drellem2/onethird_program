@@ -38,6 +38,85 @@ written below carries, **in its own sentence or cell**, (a) the word `sample` or
 a maximum*. §8.1 item 3 now states which rows carry which, and is itself the thing repair 2
 found wrong — so it is stated as a checkable list, not as a blanket assurance.
 
+> **THAT CHECK WAS RUN OVER FIGURES AND IT PASSED. IT WAS NOT ENOUGH — SEE §0.1.** Every
+> `n = 7` **figure** was correctly labelled, and two things still got through: a surviving
+> **universal quantifier over rows** at §0, which no per-figure check can see (repair C), and
+> the **population labels themselves**, which were checked for presence and not against the
+> generators (repair E).
+
+---
+
+## §0.1 REPAIRS LANDED AFTER `mg-3bb9`'s INDEPENDENT AUDIT OF THE REPAIRS ABOVE — ONE SCORE REVERSED, FIVE LABELS AND CITATIONS, NO FIGURE WITHDRAWN
+
+`mg-3bb9` audited `mg-b58d`'s seven landed repairs on an instrument
+(`code/l2_underclaim_audit_3bb9/`) sharing no line with `lib28ff`, `lib29fe` or `lib51f4`, and
+returned **CONFIRMED WITH REPAIRS**. It proposed **A–E in its own verdict table plus the
+citation fix of its §8** — lettered **F** here, and counted separately from the five its
+commit subject names — and **landed none of them**; they are landed here by `mg-a564`. **No
+figure in this document is withdrawn by any of them.**
+
+| # | site | what was wrong | now |
+|---|---|---|---|
+| **A** | §2 under-claim bullet | the cited *"measurement confirms it exactly"* is a **TAUTOLOGY** — `s3_counterfactual.py` computes the `L2 fails` column and V00's FAIL test as **the same predicate on the same number**, so its `True` can never print `False` | §2 |
+| **B** | §9 P11 **and the `bet` column itself** | a live `0.35` bet was rescored **LOST → WON** on `n = 7`, which its own wording (`n ≤ 6`) excludes — because the cell had **always** paraphrased it without the scope | §9 |
+| **C** | §0 `:61–63`, `:81` | the blanket *"the `n = 7` rows are not maxima"* — the sentence repaired at §10 — **still standing ten lines above the table that falsifies it** | §0 |
+| **D** | §4.3 precision note | exact values given for the `n = 5` and `n = 6` rows; the `n = 7` row off the **same bracket on the same line** left padded under a column headed `EXACT` | §4.3 |
+| **E** | §4, §4.1, §4.2, §4.3, §8.1 | **repair 3's own population labels**: *"40 primitive of 90 drawn"* / *"106 of 200 drawn"* — the scripts evaluate `named_posets(7) + sample_posets(7, k)`, **98** and **208** entries, and **5 primitive in each are named families, chosen not drawn** | §4–§4.3, §8.1 |
+| **F** | §0, §4.2, §8.1 | *"(M♯) is FALSE at `n = 7`"* is **TRUE**, cited to a file that calls its own count an exhibited-vector **UPPER** bound that **OVERCOUNTS** — an upper bound over `1` cannot refute (M♯) | §4.2 |
+
+**THE GOOD NEWS, AND IT MUST NOT BE LOST AMONG SIX REPAIRS: THE UNDER-CLAIM REVERSAL SURVIVED
+INDEPENDENT AUDIT.** `mg-3bb9` re-derived repair 6 from the definitions on its own instrument:
+population `5230 / 4377` with primitive counts `1/4/27/275/4070`; `V11 0/0/0/0/0`,
+`V10 0/0/0/6/192`, `V01 0/0/0/0/1`, `V00 0/0/10/166/3164` summing to **3340**; maxima agreeing
+to **six decimals** in all four columns. **`V00 = ρ` is an IDENTITY, not a coincidence at the
+measured `n`** — the `ψ`-cone lies inside `1^⊥`, so `ρ ≥ 1` at every poset, minimum measured
+**exactly `1.000000000000`** — and **every cell was computed twice by different routes with 0
+disagreements at 4377 posets**. `n = 4` was re-decided **exactly, with no float on the verdict
+path**. **`3340` is ONE population, not two that happen to agree**, and *"the first failure
+moves to `n = 4`"* is **CONFIRMED**.
+
+**And the repair was checked against the defect it repairs, which is the third time that has
+mattered in this lineage.** Repairs A, C, E and F are **labelling and citation** repairs, so
+they can carry labelling and citation defects — repair E exists precisely because repair 3
+did. What was run for this landing rather than asserted: (i) the `n = 7` populations were
+**re-measured on `lib28ff`'s own generators** rather than copied from the audit
+(`named_posets(7)` 8/5, `sample_posets(7,90)` 90/35, `sample_posets(7,200)` 200/101, unions
+98/40 and 208/106); (ii) the document was swept for **blanket statements about rows**, not for
+mislabelled rows, since that is the class §0's defect belonged to and no per-figure check
+reaches it; (iii) **every one of §9's fourteen rows** was re-read against `PREDICTIONS.md`
+rather than only the row being rescored, since editing one row of fourteen is what let repair
+B's defect in. **What §0.0's own check could not have caught is named there, in the sentence
+that reported it passing.**
+
+**THE SWEEP FOUND THREE MORE SITES OF REPAIR C's CLASS THAT NOBODY HAD FLAGGED, AND THAT IS
+THE ARGUMENT FOR SWEEPING BY CLASS RATHER THAN BY LIST.** All three are surviving universal
+quantifiers whose *meaning* is true and whose *form* had become false; all three are
+**re-scoped, none withdrawn**:
+
+| site | the blanket | why it is false now |
+|---|---|---|
+| §8.1 item 3 | *"**Every constant** carries `n ≤ 6` and `primitive` in its own sentence"* | the exhaustive `n = 7` maxima carry `n = 7`, not `n ≤ 6` |
+| §8.1 item 3 and §10 | *"`17/78` appears **nowhere** / **not at all**"* | §0's own scope paragraph names `17/78` seven lines from the top, and §4.3 and §8.1 name it again — **as the failure mode, never as a figure**, which is what the sentence meant |
+| §5 | *"**every table above** is keyed on 4377 and 3340, not on 1037"* | the exhaustive `n = 7` rows are keyed on 86278, and §5's own census table prints 1037 |
+
+**A ROW-LEVEL DEFECT AND A LABEL-LEVEL DEFECT BOTH SURVIVED A CHECK THAT PASSED. The
+transferable lesson is not "check harder" — it is that a check inherits the shape of the thing
+it enumerates over,** so a check enumerating figures cannot see a quantifier over rows, and a
+check confirming a label is *present* cannot see that it is *wrong*. Repair E is the second
+kind and repair C is the first.
+
+**AND THIS TIME THE CHECK IS AN ARTEFACT, NOT A PARAGRAPH.**
+`code/l2_landing_a564/a1_landing_check.py` re-runs all four of the above against the landed
+file — populations from `lib28ff`'s own generators, every cited `file:line` opened and read,
+the blanket **class** swept, and §9 re-scored against `PREDICTIONS.md` — with a **negative
+control on every arm**, because repair A is about a check that could not fail. **Two of its
+arms failed against this landing before it passed**, and both are recorded in that directory's
+README: the sweep's first version was a nearby-marker heuristic that fired on this document's
+own correct quotations (**the control was made precise, not relaxed until it passed**), and it
+then caught a real inconsistency in §5's re-scoping note (**the document was fixed, not the
+rule**). *A landing whose check never failed would be the same object as the citation repair A
+removes.*
+
 ---
 
 ## §0. THE STATE OF THE CONDITIONALITY AFTER THIS TICKET
@@ -46,8 +125,8 @@ found wrong — so it is stated as a checkable list, not as a blanket assurance.
 |---|---|
 | **L2 itself** | **OPEN. NOT TOUCHED.** I did not prove it, did not refute it, and did not try. |
 | **`C₃^(III) = 1` at `n ≤ 6`** | **TRUE, and now PROVED WITHOUT L2** at 4377 of 4377 primitive posets, by two independent L2-free routes with exact rational certificates. It is true with a factor of **3.05** to spare: the smallest `c` that works is `0.327508`, not `1`. |
-| **`C₃^(III) = 1` uniformly in `n`** | **STILL CONDITIONAL — and not on L2 any more.** It is now conditional on either of two *scalar* hypotheses, (M♯) or (F) below, each of which I verified exhaustively to `n = 6` and neither of which I can extrapolate, because **both route constants are rising and are within 6 % and 19 % of failure at `n = 6`.** **POST-LANDING (`mg-51f4`, exhaustive `n = 7`): the extrapolation was right and both hypotheses are now FALSE at `n = 7` individually** — `c♯ = 1.018707`, `f* = 1.297074`. **Their DISJUNCTION survives at 86278 of 86278**, and that is the object §8's diagram places under `C₃ = 1`. See §0's note and §4.5a. |
-| **The `n` the architecture consumes** | `n ≥ 99` (`mg-76b2` §6, chain (I)/(III) at `C₃ = 1`). **My exhaustive evidence stops at `n = 6` and my `n = 7` evidence is a sample.** Nothing here touches the operating range, and I say so before anyone quotes a number out of it. |
+| **`C₃^(III) = 1` uniformly in `n`** | **STILL CONDITIONAL — and not on L2 any more.** It is now conditional on either of two *scalar* hypotheses, (M♯) or (F) below, each of which I verified exhaustively to `n = 6` and neither of which I can extrapolate, because **both route constants are rising and are within 6 % and 19 % of failure at `n = 6`.** **POST-LANDING (`mg-51f4`, exhaustive `n = 7`): the extrapolation was right and both hypotheses are now FALSE at `n = 7` individually** — `c♯ = 1.018707`, `f* = 1.297074`. **Their DISJUNCTION survives at 86278 of 86278**, and that is the object §8's diagram places under `C₃ = 1`. See §0's note and §4.5a. **(M♯)'s `n = 7` failure is closed by `docs/OneThird-SweepLoss-mg-51f4.md` §5, NOT by `out_s3_n7.txt` alone — repair F, §4.2.** |
+| **The `n` the architecture consumes** | `n ≥ 99` (`mg-76b2` §6, chain (I)/(III) at `C₃ = 1`). **My exhaustive evidence stops at `n = 6` and THIS INSTRUMENT's `n = 7` evidence is a sample** — the exhaustive `n = 7` rows quoted in the row above are `mg-51f4`'s. Nothing here touches the operating range, and I say so before anyone quotes a number out of it. |
 
 **The one-sentence version.** L2 is a statement about the *order structure* of an
 eigenvector, and nothing in the corpus was ever going to move it; what the theorem
@@ -57,28 +136,50 @@ one that sat dead for two days.
 
 **What may not be quoted without its scope.** `c_true = 0.327508`, `c♯ = 0.943151` and
 `f* = 0.811654` are maxima over the **exhaustively enumerated primitive posets on at most
-6 elements**. They are not bounds in `n`. Every one of them is **rising** in `n`. The
-`n = 7` figures in this document come from named families plus a deterministic sample of
-90–200 posets out of a population of order 10⁶, so **the `n = 7` rows are not maxima and
-must never be read as if they were.** (This document was written after `roadmap.md` was
-struck the same day for carrying `17/78` without its scope; the lesson is the reason this
-paragraph exists.)
+6 elements**. They are not bounds in `n`. Every one of them is **rising** in `n`.
+**This instrument's** `n = 7` figures come from named families plus a deterministic sample —
+**two different populations, 98 and 208 entries** (`named_posets(7)` plus
+`sample_posets(7, 90)` / `sample_posets(7, 200)`) — out of a population of order 10⁶, so
+**no `n = 7` row produced by `lib28ff.py` is a maximum and none may be read as if it were.**
+The `n = 7` rows labelled **EXHAUSTIVE** in §0, §4.1, §4.2 and §4.3 **are** maxima; they are
+`mg-51f4`'s, over all 86278 primitive posets on `[7]`, and are attributed at every
+appearance. (This document was written after `roadmap.md` was struck the same day for
+carrying `17/78` without its scope; the lesson is the reason this paragraph exists.)
+
+> **REPAIR C (`mg-3bb9` §3) — THE SENTENCE ABOVE WAS A UNIVERSAL QUANTIFIER OVER ROWS AND THE
+> TABLE TEN LINES BELOW IT FALSIFIES IT.** It read *"**The** `n = 7` figures in this document
+> come from named families plus a deterministic sample of 90–200 posets … so **the `n = 7`
+> rows are not maxima**"*. `b45aad8` repaired exactly this sentence at §10 (*"no `n = 7`
+> number **produced by `lib28ff.py`** is a maximum"*) and left it standing here, where a
+> reader meets it first — while the same commit printed three exhaustive `n = 7` **maxima**
+> in §0's own table immediately below. **Both clauses were false of the document**: not all
+> `n = 7` figures here are this instrument's, and not all `n = 7` rows are non-maxima.
+> **Why the previous check could not see it, and it is the transferable part:** `mg-b58d`'s
+> check ran over **figures**, and every figure was correctly labelled — the defect was a
+> surviving **universal quantifier over rows**, which no per-figure check can reach. The
+> sweep that catches it is a sweep for **blanket statements about rows**, and it is the sweep
+> run for this landing (§0.1).
 
 > **AND THE SAMPLE HAS SINCE BEEN MEASURED AGAINST THE TRUTH, WHICH IS WHY THAT PARAGRAPH
 > WAS NOT DECORATION.** `mg-51f4` enumerated **all 96428 naturally labelled posets on `[7]`,
 > 86278 of them primitive** (`code/sweep_loss_51f4/out_s3_n7.txt`) — the first genuine
 > `n = 7` maximum in this lineage. Against the samples used here:
 >
-> | `n = 7`, primitive | this document (**SAMPLE**) | `mg-51f4` (**EXHAUSTIVE**, 86278) |
+> | `n = 7`, primitive | this document (**SAMPLE + NAMED FAMILIES**) | `mg-51f4` (**EXHAUSTIVE**, 86278) |
 > |---|---|---|
-> | `c_true` | `0.176145` *(106-poset sample)* | **`0.340719`** |
-> | `c♯` | `0.850074` *(40-poset sample)* | **`1.018707`** — over `1` |
-> | `f*` | `0.832530` *(106-poset sample)* | **`1.297074`** — over `1` |
+> | `c_true` | `0.176145` *(106 primitive of 208 evaluated = 101 drawn + 5 named)* | **`0.340719`** |
+> | `c♯` | `0.850074` *(40 primitive of 98 evaluated = 35 drawn + 5 named)* | **`1.018707`** — over `1`; the failure is certified by `mg-51f4` **§5**, not by `out_s3_n7.txt` (repair F) |
+> | `f*` | `0.832530` *(106 primitive of 208 evaluated; five-decimal print padded — §4.3's precision note)* | **`1.297074`** — over `1` |
 >
 > **The sample understated `c_true` by 1.93×, and it understated BOTH route constants across
 > the `1` boundary.** Three consequences, and they do not all point the same way:
 >
-> 1. **The blanket labelling in this paragraph and in §10 was right, and by a wide margin.**
+> 1. **The WARNING in this paragraph and in §10 was right, and by a wide margin** — though
+>    the **blanket form** of both sentences became false the moment exhaustive rows were
+>    printed beside them, and both are re-scoped (repair C above; §10). *(`mg-3bb9` §3: this
+>    line as originally added asserted that "the blanket labelling … **was right**", naming
+>    one sentence that had already been repaired for being wrong and one that had not yet
+>    been.)*
 > 2. **It makes the three labelling defects of §0.0 material rather than cosmetic** — a
 >    reader who took §4.3's old *"every enumerated `n`"* at face value would have concluded
 >    route (F) certifies at every `n ≤ 7`. It does not: it **fails at 168 of 86278**. That is
@@ -160,9 +261,12 @@ discarding `−E(h)` (call keeping it **S2**) and rounding `d_i` up to 1 (call k
 
 > **THEY ARE LOAD-BEARING VERY UNEQUALLY, AND R5 MEASURES ONLY ONE OF THEM.** *(Repairs 5
 > and 6, from `mg-29fe` §6; the 2×2 is that audit's, computed exactly by copositivity
-> bisection, `code/l2_audit_29fe/out_s3_counterfactual.txt`. An earlier version of this
-> paragraph read "both are load-bearing **and I measured it**", which is measured for one of
-> the two.)*
+> bisection, `code/l2_audit_29fe/out_s3_counterfactual.txt` — **whose four-variant counts and
+> maxima are genuine measurements, and whose `L2 fails` column is not; see repair A below.**
+> An earlier version of this paragraph read "both are load-bearing **and I measured it**",
+> which is measured for one of the two.)* **The four columns below were independently
+> re-derived by `mg-3bb9` on a third instrument and agree exactly, with the maxima agreeing to
+> six decimals** (`code/l2_underclaim_audit_3bb9/out_a1_reversal.txt`).
 >
 > Two steps make **four** bounds, and each has a closed form in `ρ = μ_pref/(1−λ_std)`,
 > `Δ_P` and the gap, so the 2×2 is exactly computable. Failure counts over **exhaustively
@@ -187,12 +291,37 @@ discarding `−E(h)` (call keeping it **S2**) and rounding `d_i` up to 1 (call k
 > * **THE UNDER-CLAIM (repair 6), AND IT IS THE LARGER ERROR — THIS DOCUMENT UNDERSTATED ITS
 >   OWN STRONGEST RESULT.** **`V00 = ρ` exactly.** So `mg-76b2`'s un-sharpened sweep, applied
 >   to a monotone vector, certifies `C₃ = 1` at a poset **if and only if `ρ ≤ 1`, i.e. if and
->   only if L2's first disjunct holds there** — and the measurement confirms it exactly:
->   V00's failure counts `0, 0, 10, 166, 3164` **equal the L2-failure counts at every `n`**
->   and sum to **3340**, this document's own census figure (§5). **WITHOUT THE TWO STEPS THE
->   QUANTIFIER MOVE BUYS NOTHING AT ALL — the L2-free route collapses back onto L2 itself.**
->   That is a far stronger justification for the two steps than *"the constant exceeds 1 at
->   `n = 5`"*, and it moves the first failure from `n = 5` to **`n = 4`**.
+>   only if L2's first disjunct holds there**: V00's failure counts `0, 0, 10, 166, 3164`
+>   **equal the L2-failure counts at every `n`** and sum to **3340**, this document's own
+>   census figure (§5). **WITHOUT THE TWO STEPS THE QUANTIFIER MOVE BUYS NOTHING AT ALL — the
+>   L2-free route collapses back onto L2 itself.** That is a far stronger justification for
+>   the two steps than *"the constant exceeds 1 at `n = 5`"*, and it moves the first failure
+>   from `n = 5` to **`n = 4`**.
+>
+> > **REPAIR A — THE MEASUREMENT THIS PARAGRAPH USED TO CITE CANNOT FAIL, SO IT IS NOT THE
+> > EVIDENCE.** *(`mg-3bb9` §1.3.)* This bullet read *"and the measurement confirms it
+> > exactly"*, pointing at `code/l2_audit_29fe/out_s3_counterfactual.txt`. In
+> > `s3_counterfactual.py` the `L2 fails` column is `rlo > 1` (`:60`) and **V00's FAIL test is
+> > `lowb["V00"] = rlo > 1`** (`:66`, `:72`) — **the same predicate on the same number**. Its
+> > verdict line *"its failure count EQUALS the L2-failure count at every n: **True**"* is
+> > therefore **incapable of printing `False`**. Nothing is wrong with `mg-29fe`'s arithmetic;
+> > what was wrong is that a *tautology* was cited as the confirmation of the equivalence it
+> > assumes. **That file is retained for what it does establish** — the four variants' failure
+> > counts and maxima, `V10 6/192` and `V01 1`, which are genuine measurements — **and it is
+> > not evidence for `V00 = ρ ⟺ L2`.**
+> >
+> > **The equivalence is TRUE and has corroboration that could have failed. Two independent
+> > routes, neither of which is the tautology:**
+> >
+> > | route | what it decides | `n = 4,5,6` | pooled |
+> > |---|---|---|---|
+> > | **this document's own `b2` census** (`out_b2_census.txt:44,67,90,116`) | `μ_pref = 1−λ_std` on `lib28ff` — a *different instrument and a different test* from `rlo > 1`, **and labelled `[FLOAT]` at its own line**, per §6 | `10 / 166 / 3164` | **3340** |
+> > | **`mg-3bb9`'s third instrument** (`code/l2_underclaim_audit_3bb9/out_a1_reversal.txt`, `L2 by eigsp`) | **`μ_pref` is never mentioned**: does the top standard eigenspace *meet* the monotone cone? — alternating projection, where a **"yes" exhibits a nonnegative vector and checks it** and only a "no" rests on the search | `10 / 166 / 3164` | **3340** |
+> >
+> > The eigenspace census agrees with the `V00` column at **every `n` and at every one of the
+> > 4377 posets** (`disagree` column `0` throughout) — and it is a check that **did** fail
+> > once, against its own author's first version, at the `n = 5` antichain (`mg-3bb9`
+> > instrument README, D1). That is the difference between a measurement and a restatement.
 
 **Machine check of the theorem itself, against brute force.** `selftest28ff` A12:
 `Φ*_pref² ≤ R(g)(2Δ_P − R(g))` at **10464 (poset, monotone-vector) pairs**, `Φ*_pref`
@@ -280,11 +409,28 @@ so this costs nothing; saying it out loud costs nothing either.
 ## §4. THE MEASUREMENT
 
 Population: **every poset on `{0,…,n−1}` for which the identity is a linear extension**,
-`n = 2..6` — 5230 posets, of which **4377 primitive** and 853 decomposable. `n = 7` is named
-families plus a deterministic sample (no `random` module; a fixed LCG) — **and it is TWO
-different draws, not one: `sample_posets(7, 90)` (40 primitive) feeds §4.2, and
-`sample_posets(7, 200)` (106 primitive) feeds §4.1 and §4.3.** Both are reproducible; neither
-is a maximum. *(Repair 3 — this sentence previously said "a deterministic sample", singular.)*
+`n = 2..6` — 5230 posets, of which **4377 primitive** and 853 decomposable. `n = 7` is
+`named_posets(7)` **plus** a deterministic sample (no `random` module; a fixed LCG) — **and it
+is TWO different populations, not one:**
+
+| feeds | evaluated population | entries | primitive | of which NAMED (chosen, not drawn) |
+|---|---|---|---|---|
+| §4.2 | `named_posets(7) + sample_posets(7, 90)` (`b2_census.py:138`) | **98** *(97 distinct)* | **40** | **5** of 8 named; the draw supplies 35 |
+| §4.1, §4.3 | `named_posets(7) + sample_posets(7, 200)` (`b1_footrule.py:73`, `b5_trend.py:48`) | **208** *(207 distinct)* | **106** | **5** of 8 named; the draw supplies 101 |
+
+Both are reproducible; **neither is a maximum, and neither is a pure draw.**
+*(Repair 3 — this sentence previously said "a deterministic sample", singular. **REPAIR E,
+`mg-3bb9` §7** — repair 3's own replacement then said *"`sample_posets(7, 90)` (40 primitive)"*
+and *"`sample_posets(7, 200)` (106 primitive)"*, attributing to the **draw** primitive counts
+the draw supplies only **35** and **101** of; the remaining **5 in each are named families,
+chosen rather than drawn**, and the evaluated populations are **98** and **208**, not 90 and
+200. Re-measured on `lib28ff`'s own generators for this landing: `named_posets(7)` = 8 posets,
+5 primitive; `sample_posets(7, 90)` = 90 / 35; `sample_posets(7, 200)` = 200 / 101. Two
+corroborations from inside this material: `lib28ff`'s own output labels the row `n=7 [named +
+sample, 106 primitive]` (`out_b1_footrule.txt:38`), and **§3 of this document states the union
+size 98 correctly** while §4, §4.1, §4.2, §4.3 and §8.1 stated the draw size. **A labelling
+repair carrying a labelling defect — which is exactly what §8.1 says to expect and is why the
+sweep below was run over the labels as well as the figures.**)*
 Every exhaustive `n = 7` row below is `mg-51f4`'s population of **86278 primitive posets**,
 attributed as such, and was **not** computed by this instrument.
 
@@ -314,7 +460,7 @@ before I started**. What is *not* a reproduction is how much room there is:
 > | 4 | 27 | `0.271353` | `+0.0491` |
 > | 5 | 275 | `0.308339` | `+0.0370` |
 > | 6 | **4070** | **`0.327508`** | `+0.0192` |
-> | 7 | 106 primitive of **200 drawn** *(SAMPLE — NOT a maximum; `b5_trend.py:48`)* | `0.176145` | — |
+> | 7 | **106 primitive of the 208 EVALUATED** = `named_posets(7)` (8, of which 5 primitive) + `sample_posets(7, 200)` (200, of which 101) *(SAMPLE PLUS NAMED FAMILIES — NOT a maximum; `b5_trend.py:48`)* | `0.176145` | — |
 > | 7 | **86278 — EXHAUSTIVE** *(`mg-51f4`, not this instrument)* | **`0.340719`** | `+0.0132` |
 
 `C₃ = 1` is not marginally true on this population; it is true by a factor of `3.05`, and
@@ -340,21 +486,39 @@ otherwise** — the theorem's second branch, which this line previously dropped 
 | 4 | 27 | `0.636846` |
 | 5 | 275 | `0.803289` |
 | 6 | **4070** | **`0.943151`** |
-| 7 | 40 primitive of **90 drawn** *(SAMPLE — NOT a maximum; `b2_census.py:138`)* | `0.850074` |
+| 7 | **40 primitive of the 98 EVALUATED** = `named_posets(7)` (8, of which 5 primitive) + `sample_posets(7, 90)` (90, of which 35) *(SAMPLE PLUS NAMED FAMILIES — NOT a maximum; `b2_census.py:138`)* | `0.850074` |
 | 7 | **86278 — EXHAUSTIVE** *(`mg-51f4`, not this instrument)* | **`1.018707` — over `1`** |
 
-> **REPAIR 3 — THIS `n = 7` ROW IS A DIFFERENT SAMPLE FROM §4.1's AND §4.3's, AND THAT WAS
-> UNSTATED.** `b2_census.py:138` draws `sample_posets(7, 90)`, of which **40 are primitive**;
-> `b1_footrule.py:73` and `b5_trend.py:48` draw `sample_posets(7, 200)`, of which **106 are
-> primitive**. All three rows were labelled `(sample)` and all three are samples — they are
-> simply **not the same sample**, so the three `n = 7` rows of §4.1, §4.2 and §4.3 are
+> **REPAIR 3 — THIS `n = 7` ROW IS A DIFFERENT POPULATION FROM §4.1's AND §4.3's, AND THAT WAS
+> UNSTATED.** `b2_census.py:138` evaluates `named_posets(7) + sample_posets(7, 90)` — **98
+> entries, 40 primitive**; `b1_footrule.py:73` and `b5_trend.py:48` evaluate
+> `named_posets(7) + sample_posets(7, 200)` — **208 entries, 106 primitive**. *(Repair E,
+> `mg-3bb9` §7: this paragraph as landed said the counts were "drawn"; the draws supply 35 and
+> 101 primitive and the named families supply the other 5 in each.)* All three rows were
+> labelled `(sample)` and none is a **pure** sample — they are
+> simply **not the same population**, so the three `n = 7` rows of §4.1, §4.2 and §4.3 are
 > **three sections over two populations** and were never comparable row-wise. Both draws are
-> deterministic (a fixed LCG, no `random` module), so both are reproducible; neither is a
-> maximum. *(`mg-29fe` §4 defect 3.)*
+> deterministic (a fixed LCG, no `random` module), so both are reproducible; neither
+> population is a maximum. *(`mg-29fe` §4 defect 3.)*
 >
 > **And the exhaustive row is the reason this matters rather than being tidiness:** the
-> 40-poset sample reads `0.850074`, the truth is `1.018707`, so **the sample sits on the safe
-> side of a boundary the truth is on the wrong side of.** Route (M♯) **fails** at `n = 7`.
+> 98-entry population (40 primitive) reads `0.850074`, the truth is `1.018707`, so **the
+> sample sits on the safe side of a boundary the truth is on the wrong side of.** Route (M♯)
+> **fails** at `n = 7` — **certified by `mg-51f4` §5's exact copositivity bracket at all 4
+> failing posets, not by `out_s3_n7.txt`'s exhibited-vector count, which is an UPPER bound and
+> by its own words OVERCOUNTS (repair F below).**
+>
+> > **REPAIR F — THE CLAIM IS TRUE AND ITS CITATION WAS DEFECTIVE.** *(`mg-3bb9` §8, which
+> > attacked this claim and **failed to break it**.)* `out_s3_n7.txt:32` labels `c♯` an
+> > *"UPPER bound -- exhibited vector"* and `:46–47` says the count *"OVERCOUNTS"*. **An upper
+> > bound over `1` cannot refute (M♯)** — a better monotone vector could put it back under —
+> > so a reader following the pointer to that file alone cannot get from it to the claim.
+> > What closes it is `mg-51f4`'s **document**, `docs/OneThird-SweepLoss-mg-51f4.md` **§5**:
+> > *"at all 4 posets with `c♯_upper > 1` the exact bracket confirms genuine failure"*, with
+> > the extremal witness carrying `μ_pref ∈ [0.226537524, 0.226537524]` — an exact
+> > copositivity bracket of width `0`, independently re-derived by `mg-29fe`
+> > (`code/l2_audit_29fe/out_s6_verify_q51f4.txt`). **`c♯(7) = 1.018707` is a maximum, not
+> > merely a ceiling. Nothing is withdrawn; a citation is added.**
 
 **EXACT certificate ladder, pooled over all 4377 primitive posets `n ≤ 6`** — for each `c`,
 the number at which a *rational* monotone `g` was exhibited and verified to satisfy
@@ -382,7 +546,7 @@ appeal to L2 anywhere.
 | 4 | 27 | 27 / 27 | `0.306250` |
 | 5 | 275 | 275 / 275 | `0.550750` |
 | 6 | **4070** | **4070 / 4070** | **`0.811654`** |
-| 7 | 106 primitive of **200 drawn** *(SAMPLE — NOT a maximum; `b1_footrule.py:73`)* | 106 / 106 | `0.832530` |
+| 7 | **106 primitive of the 208 EVALUATED** = `named_posets(7)` (8, of which 5 primitive) + `sample_posets(7, 200)` (200, of which 101) *(SAMPLE PLUS NAMED FAMILIES — NOT a maximum; `b1_footrule.py:73`)* | 106 / 106 | `0.832530` *(five-decimal print padded — see the precision note below)* |
 | 7 | **86278 — EXHAUSTIVE** *(`mg-51f4`, not this instrument)* | **86110 / 86278 — FAILS AT 168** | **`1.297074` — over `1`** |
 
 > ### REPAIR 1 — THE SENTENCE THAT STOOD HERE READ A SAMPLE AS AN ENUMERATION, AND IT IS FALSE OF THE TRUTH
@@ -417,6 +581,17 @@ route (F) was worth having for.
 > `19 %` either way. The point of the note is that `c_true`'s neighbouring column really is
 > tight to six decimals and this one is not, so the two read as equally resolved when they
 > are not.
+>
+> > **REPAIR D — THE NOTE WAS SHORT BY ONE ROW, AND IT IS THE ROW THE NOTE'S OWN REASONING
+> > COVERS.** *(`mg-3bb9` §5.)* The note gave exact values for the `n = 5` and `n = 6` rows
+> > and stopped. **The `n = 7` row of the same table, `0.832530`, came off the SAME 20-step
+> > bracket on the SAME line** (`b1_footrule.py:77`) — `out_b1_footrule.txt:38` prints
+> > `0.83253` — **and it too is a five-decimal print padded to a sixth decimal under a column
+> > headed `EXACT`**; §0's table quotes it as well. **No exact value is quoted for it here,
+> > and that is deliberate: it is a maximum over 106 primitive posets of a 208-entry
+> > sample-plus-named population, so tightening its bracket would sharpen a number that is
+> > not a maximum over `n = 7` and must not be read as one.** The caveat, not the digit, is
+> > what the row was missing.
 
 ### 4.4 The explicit vectors, ranked (`b3`)
 
@@ -573,9 +748,13 @@ minimum resolves degenerate eigenspaces by construction rather than by policy.
   primitive posets exhibiting L2; I count **1037**, as does `mg-76b2`'s own machine
   corroboration ("1037 of 1037"). Five posets. I have no basis for saying which convention
   produces which number without opening `libA94.py`, which I deliberately did not do, and
-  a five-poset difference changes nothing in this document — every table above is keyed on
-  4377 and 3340, not on 1037. **Whoever owns those two documents should close it; it is not
-  mine to close and I am not going to guess.**
+  a five-poset difference changes nothing in this document — **no route-constant table here
+  is keyed on `1037`**; they are keyed on `4377` and `3340` at `n ≤ 6` and on `mg-51f4`'s
+  `86278` at the exhaustive `n = 7`, and `1037` appears only in the census table directly
+  above. **Whoever owns those two documents should close it; it is not
+  mine to close and I am not going to guess.** *(Re-scoped from *"every table above is keyed on
+  4377 and 3340"* — a blanket over rows that the exhaustive `n = 7` rows and this section's own
+  census table both fall outside; the claim it was making is unaffected. Repair C's class.)*
 
 ---
 
@@ -672,7 +851,10 @@ is owed:
 
    > **THIS ITEM IS THE ONE THAT AGED BEST, AND IT AGED WITHIN THE DAY.** `n = 7` exhaustive
    > was not merely *reachable* — `mg-51f4` **ran it**, all 96428 posets (86278 primitive),
-   > and **both hypotheses were falsified there**: `c♯ = 1.018707` and `f* = 1.297074`. That
+   > and **both hypotheses were falsified there**: `c♯ = 1.018707` and `f* = 1.297074` —
+   > **(M♯)'s falsification certified by `docs/OneThird-SweepLoss-mg-51f4.md` §5's exact
+   > copositivity bracket at all 4 failing posets, since `out_s3_n7.txt`'s own count is an
+   > exhibited-vector UPPER bound that by its own words OVERCOUNTS (repair F, §4.2).** That
    > is the claim of this item discharged in the only way that counts — a hypothesis a bigger
    > sweep could falsify was falsified by a bigger sweep, days after being filed, which is
    > exactly what could never have happened to L2. **The two conditionalities were the right
@@ -683,11 +865,20 @@ is owed:
    routing failure, not a mathematical one, and it is handled as the ticket instructs: the
    verdict goes to `pm-onethird` **before** the branch is submitted, not after.
 3. **Could a number here be quoted without its scope — the defect struck from
-   `roadmap.md` the same day?** Every constant carries `n ≤ 6` and `primitive` in its own
-   sentence, and §0 says so before any table. `17/78` appears nowhere, and `ε₀` appears
-   **only as the symbol** in §8's chain relation `ε_dem = ε₀²/(2C₃)` — never carrying a
-   value. *(This sentence originally read "`ε₀` and `17/78` appear nowhere", which is false
-   of §8 and is the exact over-claim this document is about; corrected before commit.)*
+   `roadmap.md` the same day?** Every constant carries **its own population** — `n ≤ 6` and
+   `primitive` for this instrument's maxima, `n = 7` with `EXHAUSTIVE, 86278` and its
+   attribution for `mg-51f4`'s, and the evaluated size with `SAMPLE PLUS NAMED FAMILIES` for
+   the `n = 7` rows this instrument produced — in its own sentence, and §0 says so before any
+   table. `17/78` appears **only as the name of the failure mode**, never as a figure of this
+   document's own; `ε₀` appears **only as the symbol** in §8's chain relation
+   `ε_dem = ε₀²/(2C₃)` — never carrying a value. *(This sentence originally read "`ε₀` and
+   `17/78` appear nowhere", which is false of §8 and is the exact over-claim this document is
+   about; corrected before commit.* **AND THE CORRECTION DID NOT GO FAR ENOUGH — the surviving
+   *"`17/78` appears nowhere"* is falsified by §0's own paragraph seven lines from the top,
+   which names it; and *"every constant carries `n ≤ 6`"* became false the moment exhaustive
+   `n = 7` maxima were printed. Both are the blanket-over-rows class of repair C, found by the
+   sweep run for it rather than by any per-figure check, and both are re-scoped above rather
+   than deleted, because what each sentence meant is true.)*
 
    > **REPAIR 2 — THIS ITEM'S OWN SCOPE SELF-AUDIT WAS FALSE AT 2 OF ITS 3 ROWS, AND THAT IS
    > WORSE THAN THE DEFECT IT WAS WRITTEN TO CATCH.** It asserted: *"every `n = 7` row is
@@ -698,20 +889,30 @@ is owed:
    > and then letting its **existence** stand in for its **correctness**.
    >
    > **Repaired at the rows, not only here.** §4.1, §4.2 and §4.3 now each carry, per
-   > `n = 7` row: the word **SAMPLE**, **NOT a maximum**, the **draw size and primitive
-   > count**, and the **file:line that produced it** — and each is printed beside the
-   > **EXHAUSTIVE** `mg-51f4` row, which is labelled as another instrument's. The two draws
-   > are different (90 and 200; repair 3), which this item also failed to notice.
+   > `n = 7` row: the words **SAMPLE PLUS NAMED FAMILIES**, **NOT a maximum**, the
+   > **evaluated population size and primitive count**, and the **file:line that produced
+   > it** — and each is printed beside the **EXHAUSTIVE** `mg-51f4` row, which is labelled as
+   > another instrument's. The two populations are different (98 and 208; repair 3 as
+   > corrected by repair E), which this item also failed to notice.
    >
    > **This item is now a checkable list rather than a blanket assurance**, because a blanket
    > assurance is exactly what was false. The current state, verifiable by reading the three
    > tables:
    >
-   > | row | `SAMPLE` | `NOT a maximum` | draw / primitive | provenance |
-   > |---|---|---|---|---|
-   > | §4.1 `c_true(7)` | ✔ | ✔ | 200 / 106 | `b5_trend.py:48` |
-   > | §4.2 `c♯(7)` | ✔ | ✔ | **90 / 40** | `b2_census.py:138` |
-   > | §4.3 `f*(7)` | ✔ | ✔ | 200 / 106 | `b1_footrule.py:73` |
+   > | row | `SAMPLE` | `NOT a maximum` | evaluated / primitive | of which named | provenance |
+   > |---|---|---|---|---|---|
+   > | §4.1 `c_true(7)` | ✔ | ✔ | **208 / 106** | 8 / **5** | `b5_trend.py:48` |
+   > | §4.2 `c♯(7)` | ✔ | ✔ | **98 / 40** | 8 / **5** | `b2_census.py:138` |
+   > | §4.3 `f*(7)` | ✔ | ✔ | **208 / 106** | 8 / **5** | `b1_footrule.py:73` |
+   >
+   > **REPAIR E (`mg-3bb9` §7) — THIS TABLE'S OWN COLUMN WAS THE DEFECT ONE MORE TIME.** As
+   > landed it was headed *"draw / primitive"* and read `200 / 106`, `90 / 40`, `200 / 106` —
+   > attributing to the **draw** primitive counts the draws supply only **101** and **35** of,
+   > with the other **5 in each coming from the named families, which are chosen rather than
+   > drawn**, and understating the evaluated populations as 90 and 200 where the scripts
+   > evaluate **98** and **208**. Re-measured for this landing on `lib28ff`'s own generators.
+   > **A checkable list is only worth what its columns are; this one is now checkable against
+   > the generators and not only against the row labels.**
    >
    > **And the defect was material, not cosmetic**: the exhaustive `n = 7` has both route
    > constants **over `1`** and route (F) failing at **168 of 86278** (§0, §4.3).
@@ -727,25 +928,48 @@ is owed:
 
 `PREDICTIONS.md` was committed at `8c28781`, before one line of `lib28ff.py` existed.
 
-| | bet | outcome |
+> ### THE SCORING CONVENTION, WRITTEN DOWN ONCE INSTEAD OF LIVING IN ONE ROW'S RESTATEMENT
+>
+> **Every row below is scored against the bet AS FILED, at the scope the bet's own sentence
+> names — not against this table's paraphrase of it.** Where a bet carries `n ≤ 6`, the `n = 7`
+> exhaustive population (`mg-51f4`) is **outside its range** and can neither win nor lose it;
+> where it does not, the row says what population it was scored on.
+>
+> **This convention is stated here because it was not stated anywhere, and a convention that
+> lives only inside one row's restatement drifts toward whatever reading flatters the row
+> being edited.** *(`mg-3bb9` §2, repair B.)* The `bet` column has **always** paraphrased P11
+> without its `n ≤ 6`, and `b45aad8` then reasoned against the paraphrase and rescored the bet
+> **LOST → WON** on an `n` the bet excludes. The asymmetry is the finding: **P4's cell drops
+> the same `n ≤ 6` from the same file, and P4 is scored at `n ≤ 6` as filed — which is the
+> only scoring under which P4 WINS**, since `c♯ = 1.018707 > 1` at the exhaustive `n = 7`.
+> **Applied to P4, the reading that wins P11 loses P4.** `b45aad8` edits exactly **one** row of
+> this table's fourteen, and it is the row where unscoping pays. I do not think anyone chose
+> that; that is why the repair is at the **paraphrases** and at the **convention**, not only at
+> the score. **The dropped `n ≤ 6` is restored in every cell whose bet carries it (P4, P5/P6
+> and P7 through `c*`'s definition, P11, P12, P13), and every row is re-read against
+> `PREDICTIONS.md`.**
+
+| | bet *(scope as filed)* | outcome |
 |---|---|---|
 | P1 | Lemma 3.1 is test-vector-generic; `Δ_P` is a free sharpening | **[FORMALITY]** — a reading, disclosed as such. Held, and the `Δ_P` sharpening turned out necessary (R5). |
 | P2 | the `ψ` pencil's closed forms, `Q_kk = leak(A_k)` | **HELD**, 5230 posets, 0 exceptions — a hard control, not a bet |
 | P3 (0.95) | the footrule identity | **HELD** exactly, 5230 + 98 posets |
-| **P4 (0.25)** | **`c* ≤ 1` — my principal live bet** | **WON, and only because of a sharpening I had not yet written when I filed it.** With the form I actually had in mind at filing time (`Δ_P·μ_pref ≤ 1−λ_std`) `c*` is **1.027 at `n = 5`** and the bet **loses**; with the Cauchy–Schwarz factor recovered, `c♯ = 0.943` at `n = 6` and it wins. **I am scoring this as a loss on the reasoning and a win on the number**, because the reason I put it at 0.25 — "`Δ_P` sits near 1, so (M) demands `μ_pref ≈ 1−λ_std`" — was correct, and what rescued it was not the population being kind but my instrument getting better mid-ticket. |
-| P5 (0.55) | `c* ≤ 2` | **HELD** |
-| P6 (0.80) | `c* ≤ 4` | **HELD** |
-| **P7 (0.50)** | the extremal poset has a non-trivial automorphism, *i.e. the extremal case is a degenerate top eigenspace case* | **LOST on the object it named, and its stated mechanism is REFUTED.** `c♯`'s argmax at `n=6` — `[(0,1),(0,2),(0,4),(0,5),(1,2),(1,5),(3,4),(3,5),(4,5)]` — has `|Aut| = 1`. The prediction holds only for `c_true`, whose argmax at `n = 4, 5, 6` is a disjoint pair of equal chains with `|Aut| = 2` every time. And the *reason* I gave is wrong at **both** extremals: each has a **1-dimensional** top standard eigenspace (`1−λ_std = 0.236288` and `0.381670`), so symmetry is not acting through degeneracy here. I named the mechanism in advance precisely so I could not rationalise it afterwards, and it did not survive. |
+| **P4 (0.25)** | **`c* ≤ 1` — i.e. (M) holds at every primitive poset at `n ≤ 6`** — my principal live bet *(`PREDICTIONS.md:83–84`; the `n ≤ 6` is the bet's own and this cell used to drop it)* | **WON at `n ≤ 6`, AS FILED — and only because of a sharpening I had not yet written when I filed it.** With the form I actually had in mind at filing time (`Δ_P·μ_pref ≤ 1−λ_std`) `c*` is **1.027 at `n = 5`** and the bet **loses**; with the Cauchy–Schwarz factor recovered, `c♯ = 0.943` at `n = 6` and it wins. **I am scoring this as a loss on the reasoning and a win on the number**, because the reason I put it at 0.25 — "`Δ_P` sits near 1, so (M) demands `μ_pref ≈ 1−λ_std`" — was correct, and what rescued it was not the population being kind but my instrument getting better mid-ticket. **AND THE SCOPE IS LOAD-BEARING, WHICH IS WHY IT IS BACK IN THE CELL:** at the exhaustive `n = 7` `c♯ = 1.018707 > 1`, so read outside its filed range this bet LOSES. It is scored where it was filed. |
+| P5 (0.55) | `c* ≤ 2` *(`c*` is `PREDICTIONS.md:55`'s maximum over primitive posets; P4's sentence supplies the `n ≤ 6` these three inherit)* | **HELD at `n ≤ 6`** |
+| P6 (0.80) | `c* ≤ 4` *(same scope)* | **HELD at `n ≤ 6`** |
+| **P7 (0.50)** | the poset attaining `c*` *(same scope: `n ≤ 6`)* has a non-trivial automorphism, *i.e. the extremal case is a degenerate top eigenspace case* | **LOST on the object it named, and its stated mechanism is REFUTED.** `c♯`'s argmax at `n=6` — `[(0,1),(0,2),(0,4),(0,5),(1,2),(1,5),(3,4),(3,5),(4,5)]` — has `|Aut| = 1`. The prediction holds only for `c_true`, whose argmax at `n = 4, 5, 6` is a disjoint pair of equal chains with `|Aut| = 2` every time. And the *reason* I gave is wrong at **both** extremals: each has a **1-dimensional** top standard eigenspace (`1−λ_std = 0.236288` and `0.381670`), so symmetry is not acting through degeneracy here. I named the mechanism in advance precisely so I could not rationalise it afterwards, and it did not survive. |
 | **P8 (0.65)** | **`c♯` rises from `n=5` to `n=6`** | **HELD — and it is the finding of §4.5.** It rises at *every* step, `0.125 → 0.50 → 0.637 → 0.803 → 0.943`, and so does `f*`. I bet on this and it is the reason the headline carries a negative. |
 | **P9 (0.45)** | `g_pos` fails at a **majority** of the L2-failing primitive posets | **LOST.** At `n = 6` `g_pos` certifies 2590 of 4070 — it fails at 1480, well under half of the ≈3170 L2-failing posets there. The cheapest possible test vector does better than I gave it credit for. |
 | P10 (0.95) | the footrule route fails on decomposable posets, *for the stated reason* | **HELD**, exactly as reasoned in advance |
-| P11 (0.35) | route (F) fails somewhere on primitive posets too | **SCORED LOST HERE ON A SAMPLE, AND IT IS WON ON THE TRUTH.** It read *"LOST. 100 % at every `n ≤ 7` tested"* — the same sample-read-as-enumeration as §4.3 (repair 1), one row over. Correctly: **LOST at every exhaustively enumerated `n` (`n ≤ 6`) and across the 106-poset `n = 7` sample; WON at `n = 7` exhaustively, where (F) fails at 168 of 86278 primitive posets** (`mg-51f4`). A live bet at 0.35 that I recorded as lost was in fact **right**, and I could not see it because I was scoring against a sample. |
-| P12 | the target holds at all 5230 | **[FORMALITY]** — pre-answered by the ticket body; reproduced |
-| P13 (0.60) | my L2 count lands on **1890**, not 1727 | **HELD**, and §5 reconciles the two parents exactly |
+| **P11 (0.35)** | *"Even restricted to primitive posets the footrule route fails somewhere at `n ≤ 6`"* *(`PREDICTIONS.md:108–109`, verbatim — the `n ≤ 6` is the bet's own and was dropped from this cell from the start)* | **LOST, AND IT STAYS LOST.** Route (F) certifies at **4377 of 4377** primitive posets `n ≤ 6`, exhaustively and exactly — §4.3's own table, unchanged — which decides the bet as worded. **The old REASON is withdrawn and the VERDICT is not:** *"100 % at every `n ≤ 7` tested"* read a sample as an enumeration (repair 1), and at `n = 7` exhaustively **(F) FAILS at 168 of 86278** (`mg-51f4`) — a real and important fact, and **not a fact about P11**, whose range stops at `n = 6`. **What P11 got right was the MECHANISM, one `n` later than it bet on.** *(REPAIR B, `mg-3bb9` §2: `b45aad8` rescored this row **LOST → WON** by reasoning against the scope-dropped paraphrase in the left-hand column rather than against the bet. The score is restored and the paraphrase is repaired, because repairing only the score would leave the thing that moved it.)* |
+| P12 | the target holds at all 5230 posets `n ≤ 6` *(`PREDICTIONS.md:113`)* | **[FORMALITY]** — pre-answered by the ticket body; reproduced |
+| P13 (0.60) | my L2 count at `n ≤ 6` lands on **1890**, not 1727 *(`PREDICTIONS.md:115`)* | **HELD**, and §5 reconciles the two parents exactly |
 | P14 | "the prefix minimises leak at its size" is false | **[FORMALITY]**; smallest witness exhibited |
 
 **Three live bets lost or half-lost (P4's reasoning, P9, P11), and the one I most wanted to
-lose — P8 — held.**
+lose — P8 — held.** *(That count is the original one and it is restored, not preserved:
+`b45aad8` moved P11 to WON and left this sentence saying three, which was the first
+inconsistency the scoring convention above would have caught.)*
 
 ### Errors of my own, caught by the guards that were filed for them
 
@@ -778,12 +1002,23 @@ lose — P8 — held.**
   line 300, or either parent's `out_*.txt`.
 * **Nothing here reaches the `n` the architecture consumes.** Exhaustive to `n = 6`; **this
   instrument's** `n = 7` work is named families plus a deterministic sample — **two
-  different draws, 90 and 200** (repair 3) — out of ~10⁶ posets, so **no `n = 7` number
-  produced by `lib28ff.py` is a maximum**, including the ones that look reassuring.
+  different evaluated populations, 98 and 208 entries** (`named_posets(7)` plus
+  `sample_posets(7, 90)` / `sample_posets(7, 200)`; repair 3 as corrected by repair E) — out
+  of ~10⁶ posets, so **no `n = 7` number produced by `lib28ff.py` is a maximum**, including
+  the ones that look reassuring.
   **The exhaustive `n = 7` rows now printed in §0, §4.1, §4.2 and §4.3 ARE maxima, and they
   are `mg-51f4`'s, not this instrument's** — they are labelled `EXHAUSTIVE` and attributed at
   every appearance. That distinction is the whole of repairs 1–3 and it is stated here so
   that this bullet cannot be quoted as covering rows it does not cover.
+* **THE EXHAUSTIVE `n = 7` FIGURES HAVE NEVER BEEN INDEPENDENTLY RE-DERIVED, AND THEY ARE
+  FOUR OF THIS DOCUMENT'S HEADLINE NUMBERS.** `0.340719`, `1.018707`, `1.297074`,
+  `168 of 86278` and the population `96428 / 86278` rest on **one instrument** (`mg-51f4`)
+  over a population **21× larger than anything `lib28ff` enumerated**. `mg-29fe` re-verified
+  the two named counterexamples exactly, and `mg-3bb9` verified these figures **as faithful
+  copies of `code/sweep_loss_51f4/out_s3_n7.txt` — copies, not truths** (`mg-3bb9` "Not
+  done"). No gate in this repo has looked at the enumeration itself. **This is filed and is
+  not being re-filed here:** `mg-a91f` carries the independent re-derivation of the `n = 7`
+  enumeration as its first target. One expensive computation, two consumers.
 * **(M♯) and (F) are both OPEN.** Verifying a hypothesis exhaustively on a finite population
   is not proving it, and §4.5 is my own evidence that neither is likely to be provable in
   the form given.
@@ -793,8 +1028,12 @@ lose — P8 — held.**
   could only lower `c♯`, never raise it. So §4.2's table is an upper bound on the truth in
   the direction that matters and the `c♯` trend of §4.5 is, if anything, pessimistic.
 * **The 1032-vs-1037 discrepancy is left open**, deliberately (§5).
-* **`ε₀` is out of scope and appears nowhere as a number.** `17/78` does not appear in this
-  document at all. Both by design (`PREDICTIONS.md` E5).
+* **`ε₀` is out of scope and appears nowhere as a number.** `17/78` appears in this document
+  **only as the name of the failure mode** (§0, §4.3, §8.1) and never as a figure of this
+  document's own. Both by design (`PREDICTIONS.md` E5). *(This bullet read "`17/78` does not
+  appear in this document at all", which its own document falsifies — the blanket-over-rows
+  class of repair C, re-scoped rather than withdrawn; nothing about `ε₀` or the design
+  changes.)*
 * **I edited no other document.** `STATE.md`, `roadmap.md` and the `mg-76b2`/`mg-94c3`
   documents are untouched; §5's reconciliation and §8's dependency diagram are proposals for
   whoever owns those files, not landings.
