@@ -1,0 +1,6 @@
+# `snap/` is round 2's bytes, kept only so that `d4_self.py` can score P7 by
+# comparing them with round 3's.  It is an intermediate of one run and not
+# evidence: committing it would publish a second copy of eight transcripts and
+# invite a reader to diff the wrong pair.
+snap/
+*.txt.new
