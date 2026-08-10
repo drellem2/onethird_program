@@ -1,4 +1,55 @@
-# OneThird — **THE ANTI-CORRELATION IS ONE INEQUALITY, NOT A γ-REGIME COINCIDENCE.** `mg-51f4`'s whole `n = 7` census re-derives **exactly** on an independent instrument; `n = 8` is now **ENUMERATED** — 2800472 posets, 2600369 primitive — and **both routes still fail at 0 of them**, with `c_or(8) = 0.943649`; and the disjunction at both `n` follows from a **single** sufficient condition `ρ·Δ_P ≤ 1` holding on the `(F)`-failing set, **certified on integers at 168 of 168 and 3589 of 3589** and out to `n = 18` on `(F)`'s own family. **The proof the ticket asked for does not exist in the route invariants** — the relaxation is FEASIBLE, and it stays feasible even after adding `C₃^(III) = 1` itself
+# OneThird — ~~**THE ANTI-CORRELATION IS ONE INEQUALITY, NOT A γ-REGIME COINCIDENCE.**~~ ⚠ **THAT CLAIM IS REFUTED AT `n = 9` — SEE THE BANNER BELOW.** `mg-51f4`'s whole `n = 7` census re-derives **exactly** on an independent instrument; `n = 8` is now **ENUMERATED** — 2800472 posets, 2600369 primitive — and **both routes still fail at 0 of them**, with `c_or(8) = 0.943649`; ~~and the disjunction at both `n` follows from a **single** sufficient condition `ρ·Δ_P ≤ 1` holding on the `(F)`-failing set,~~ **[STRUCK AS A UNIFORM CLAIM — it holds at these two `n` and FAILS at `n = 9`]** **certified on integers at 168 of 168 and 3589 of 3589** and out to `n = 18` on `(F)`'s own family. **The proof the ticket asked for does not exist in the route invariants** — the relaxation is FEASIBLE, and it stays feasible even after adding `C₃^(III) = 1` itself
+
+> ## ⚠ **`(L*)` IS REFUTED — THIS DOCUMENT'S TITLE CLAIM IS FALSE, AND ITS CENSUSES ARE NOT** (landed mg-8d63 2026-08-10, from mg-789d, on the figures of its independent audit mg-5cba)
+>
+> **WHAT IS FALSE.** *"THE ANTI-CORRELATION IS ONE INEQUALITY"*, and every sentence below
+> that says the disjunction **is** `(L*)`, or is *"one sufficient condition"* rather than
+> 86278 / 2600369 checks, or is uniform in `n`. **`(L*)` is false at `n = 9`** — **FIVE**
+> counterexamples certified in exact rationals, two at `n = 9`, one each at `n = 10`,
+> `n = 11` and `n = 12` (mg-789d certified four; **mg-5cba's independent audit certified
+> the fifth, which mg-789d's own table claimed and never certified**, and re-certified all
+> four of mg-789d's to every printed digit on an instrument sharing no line with its
+> `lib789d.py`). Smallest: `dn = (0,1,0,4,0,0,32,96,239)`, `LE = 1890`, height 4, `Δ = 62/63`,
+> `M = 41/84`, `γ < 23459/200000 = 0.117295` (certified upper bound), `μ_pref·Δ ≥
+> 186341/1575000 = 0.1183117 > γ` (certified by exact copositivity). Hypothesis holds,
+> conclusion fails. [`OneThird-LStar-mg-789d.md`](OneThird-LStar-mg-789d.md), audited
+> [`OneThird-LStar-mg-5cba-IndependentAudit.md`](OneThird-LStar-mg-5cba-IndependentAudit.md)
+> (**CONFIRMED-WITH-REPAIRS** — six repairs, none touching the headline).
+>
+> **WHAT SURVIVES, AND IT IS MOST OF THIS DOCUMENT.** `(L*)` was **SUFFICIENT for the
+> disjunction, never equivalent to it**, so its refutation kills the **ROUTE** and not the
+> **RESULT**. **The disjunction itself stands**: `(M♯)` holds at **4 of 4**,
+> `u_M = 0.943486 / 0.947534 / 0.981830 / 0.958326` (mg-789d's own sentence said *"all
+> three tested"* and omitted its strongest `n = 9` witness, its own argmax — mg-5cba R4). Untouched and still standing: §1's
+> re-derivation of `mg-51f4`, §2's exact reduction, §3's `n = 8` enumeration
+> (`2800472 / 2600369`, both routes failing at 0, `c_or(8) = 0.943649`), §4.1, §4.2, §5's
+> obstruction, §6's L2 census. **Every certificate in §4's table is still valid at the `n`
+> it was computed at** — 168/168 and 3589/3589 are measurements and they did not move.
+> What is lost is the **uniform-in-`n`** proof: the disjunction is back to the `n ≤ 8`
+> enumerations, which are this document's own and are intact.
+>
+> **AND ONE IMPLICATION IN §4 IS A THEOREM AND IS NOT REFUTED.** `ρΔ_P ≤ 1 ⟹ (M♯) HOLDS`
+> is proved in §2 and stays proved. What is refuted is that its **hypothesis** holds
+> everywhere `(F)` fails.
+>
+> **SEPARATELY CORRECTED — §4's ONSET, and it is corrected TWICE OVER.** `ρΔ_P > 1` first
+> occurs at **`n = 5`** (6 of 275 primitive posets, `max = 1.027118`, each certified in
+> exact rationals by **mg-5cba R1**, with `μ_pref·Δ ≤ γ` certified at *every* primitive
+> poset of `n = 3` and `n = 4`, so `n = 5` is exactly the onset), not at `n = 10` and
+> not at the `n = 6` that mg-789d put in its place. **§4's own sentence is TRUE and is not
+> struck** — it is a statement about the chain(`n−1`)+point **FAMILY**, it carries the word
+> FAMILY, and it reproduces exactly. What was wrong was reading a family's crossing as the
+> phenomenon's onset. Measured, exhaustively, at `code/lstar_landing_8d63/`; the same
+> column was already in this corpus as `mg-28ff`'s cell `V10`.
+>
+> **STILL OPEN:** whether `(L*)` already fails at `n = 8`. 60 restarts topped out at
+> `0.968818` — a **SEARCH** over 2600369 primitive posets, **not a census**, and `0.968818`
+> is **not** a maximum at `n = 8`.
+>
+> *This banner is a correction, not a regeneration. The refuted text is left standing below,
+> struck where it is false, so the record of what was claimed survives audit.*
+
+---
 
 **Work item:** `mg-c50b` — successor to `mg-51f4`, filed on its own recommendation.
 **Scope taken:** the ticket's instruction — *file against the anti-correlation, not against
@@ -13,7 +64,7 @@ appears once, as a reproduction.
 |---|---|
 | **`mg-51f4`'s `n = 7` enumeration** | **RE-DERIVED AND CONFIRMED**, exactly, on an instrument sharing no source line with it. `96428 / 86278`, `(F)` false at **168**, `(M♯)` at **4**, both at **0**, and every published constant to every printed digit. The ticket's *"a merge is not a check"* caveat is discharged. |
 | **The disjunction at `n = 8`** | **ALIVE, and now EXHAUSTIVE.** 2800472 naturally labelled posets on `[8]`, **2600369 primitive**, **0 with both routes failing**. `c_or(8) = 0.943649`. Never computed before. |
-| **The mechanism** | **RESTATED AS ONE INEQUALITY, `(L*)`,** which is uniform in `n` by construction where the γ-bin story could never be. **Certified exactly** wherever the disjunction is at risk: 168/168 at `n = 7`, 3589/3589 at `n = 8`, and every member of `(F)`'s own family to `n = 18`. |
+| **The mechanism** | ~~**RESTATED AS ONE INEQUALITY, `(L*)`,** which is uniform in `n` by construction where the γ-bin story could never be.~~ ⚠️ **STRUCK — `(L*)` IS FALSE AT `n = 9` (mg-789d, landed mg-8d63; see the banner).** `(L*)` was uniform in `n` **as stated** and is now **refuted as stated**, so it is not the mechanism and there is no one inequality. **The certificates are NOT struck and are still exactly what they were:** 168/168 at `n = 7`, 3589/3589 at `n = 8`, every member of `(F)`'s own family to `n = 18` — measurements at the `n` they were taken at, which is precisely what a refutation at `n = 9` leaves standing. |
 | **A UNIFORM-IN-`n` PROOF of the disjunction** | **STILL OPEN — and now known not to be reachable from the route invariants.** §5 exhibits a point satisfying *every* unconditional inequality this corpus holds at which **both routes fail**. Any proof must use the poset, not the five scalars. |
 | **`mg-51f4` §7's stated mechanism** | **ITS STATED FORM IS FALSE.** *"a poset with a very thin bottleneck has a Fiedler vector that **is** monotone — L2's first disjunct holds there"* is false at **144 of the 168**. Only its **quantitative** form survives: `ρ ≤ 1.0238` there. `mg-51f4` labelled it a conjecture; this is a refinement, not a withdrawal. |
 | **The `n` the architecture consumes** | `n ≥ 99`. **Nothing here reaches it.** Exhaustive to `n = 8`; two families to `n = 16`–`18`, every row labelled FAMILY. |
@@ -22,8 +73,13 @@ appears once, as a reproduction.
 occupy disjoint γ bands — a γ band is not a statement that can be uniform in `n` — but
 because at every poset where `(F)` fails the monotone cone price `ρ = μ_pref/(1−λ_std)` is
 within `2.4 %` of 1 and `ρ·Δ_P` is under `0.93`, which is *by itself* enough to give `(M♯)`;
-and that single inequality, not the 86278 separate checks, is what the successor should
-try to prove.
+~~and that single inequality, not the 86278 separate checks, is what the successor should
+try to prove.~~ ⚠️ **THE LAST CLAUSE IS STRUCK — the successor went and did exactly that,
+and REFUTED it at `n = 9` (mg-789d, landed mg-8d63).** The measurement in the two clauses
+before it is untouched and exact at `n = 7`; what does not survive is *"and therefore it is
+one inequality at every `n`"*. **The `2.4 %` and the `0.93` are `n = 7` figures**, and the
+document says so — they were never uniform-in-`n` statements, only the sentence built on
+them was.
 
 **What may not be quoted without its scope.** `c_or(8) = 0.943649` and the population
 `2800472 / 2600369` are **exhaustive at `n = 8`**. `c_or(7) = 0.894472`, `c♯ = 1.018707`,
@@ -173,15 +229,39 @@ ceiling.
 
 ---
 
-## §4. THE LEMMA — `(L*)`, AND WHY THE DISJUNCTION IS ONE INEQUALITY
+## §4. THE LEMMA — ~~`(L*)`, AND WHY THE DISJUNCTION IS ONE INEQUALITY~~ **`(L*)`, WHICH IS FALSE AT `n = 9`**
+
+> ⚠️ **THIS SECTION'S CLAIM IS REFUTED (mg-789d, landed mg-8d63).** `(L*)` fails at
+> `dn = (0,1,0,4,0,0,32,96,239)`, `n = 9`, `LE = 1890`: `(F)` fails there
+> (`γ < M²/2`, integer PSD test) **and** `μ_pref·Δ ≥ 186341/1575000 = 0.1183117 > γ`
+> (`γ < 0.117295`, both certified — the lower bound on `μ_pref` by exact copositivity,
+> which is the hard direction). Three more counterexamples are certified the same way
+> (a second at `n = 9`, one each at `n = 10`, `n = 11`; **a fifth at `n = 12` was
+> certified by mg-5cba**), and a hill climb at `n = 9` found
+> **6 distinct local optima above 1** from 40 restarts, so this is a region and not a fluke.
+> **Read the rest of this section as the record of a route that was tried and closed.**
+> Everything in it that is a *measurement* is untouched; everything in it that is an
+> *inference to all `n`* is false.
 
 > **`(L*)` (conjectural, uniform in `n` as stated).** *At every primitive poset,*
 > $$M^{2}>2\gamma\quad\Longrightarrow\quad \mu_{\mathrm{pref}}\cdot\Delta_P\;\le\;\gamma
 > \qquad\text{i.e.}\qquad \rho\le 1/\Delta_P .$$
+>
+> ⚠️ **FALSE.** First exhibited failure `n = 9`; whether it already fails at `n = 8` is
+> **OPEN**.
 
 > **`(L*)` IMPLIES THE DISJUNCTION, UNIFORMLY IN `n`, IN ONE LINE.** By §2,
 > `ρ ≤ 1/Δ_P` gives `μ_pref ≤ γ/Δ_P ≤ t*`, hence `(M♯)` HOLDS at every poset where `(F)`
 > fails, hence the two failure sets are disjoint at every `n`. ∎
+>
+> ⚠️ **THIS IMPLICATION IS A THEOREM AND IS NOT REFUTED — READ WHICH HALF DIED.** The
+> derivation above is §2's and stays proved: `ρΔ_P ≤ 1` **does** give `(M♯)` at every
+> poset and every `n`. What is refuted is its **antecedent** — that `ρΔ_P ≤ 1` holds
+> wherever `(F)` fails. A sufficient condition that turns out not to hold takes its own
+> route down with it and leaves the conclusion exactly where it was: **the disjunction
+> survives, and `(M♯)` holds at **4 of 4**, `u_M = 0.943486 / 0.947534 / 0.981830 /
+> 0.958326`** (mg-5cba R4 — mg-789d's *"all three"* omitted its own `n = 9` argmax). What is lost is uniformity in `n` — the disjunction is back to the `n ≤ 8`
+> enumerations of §1 and §3, which are untouched.
 
 **`(L*)` IS CERTIFIED EXACTLY WHEREVER THE DISJUNCTION IS AT RISK.** The certificate is one
 integer PSD test per poset: an exhibited monotone vector gives an *exact* `μ_ub ≥ μ_pref`,
@@ -195,11 +275,18 @@ and `PSD(Q − μ_ub Δ_P N)` gives `γ ≥ μ_ub Δ_P ≥ μ_pref Δ_P`. **This
 | the **3589** `(F)`-failing survivors at `n = 8` | **3589 of 3589** | `0.968818` |
 | **FAMILY** near-ordinal antichains, `n = 6..18` (`(F)` fails from `n = 9`) | **every member** | `0.894` at `n = 18` |
 
-> **THE CONSEQUENCE, AND IT IS THE POINT OF THIS TICKET.** The disjunction at `n = 7` is
+> ~~**THE CONSEQUENCE, AND IT IS THE POINT OF THIS TICKET.** The disjunction at `n = 7` is
 > **not** 86278 independent checks and at `n = 8` is **not** 2600369. It is **one
 > sufficient condition, `ρΔ_P ≤ 1`, holding on the 168 (resp. 3589) posets where it is the
 > only thing standing between the two routes** — with a margin, certified on integers at
-> every one of them.
+> every one of them.~~
+>
+> ⚠️ **STRUCK (mg-789d, landed mg-8d63). READ THE SCOPE THIS BLOCK QUIETLY DROPPED.** Every
+> word of it is true **at `n = 7` and `n = 8`** and false as written, because it is written
+> without an `n`: `ρΔ_P ≤ 1` holds on those 168 and those 3589, and it **fails** on the
+> `(F)`-failing set at `n = 9`. So the disjunction at `n = 7` really is not 86278
+> independent checks — and at `n = 9` there is no single condition standing in for them at
+> all. **The certificates are not withdrawn; the quantifier is.**
 
 **`(L*)` IS NEITHER VACUOUS NOR TRIVIALLY TRUE, AND THAT IS A CONTROL, NOT A REMARK.**
 `ρΔ_P > 1` **does** happen — on `mg-51f4`'s own `(M♯)` family, chain(`n−1`) + one isolated
@@ -207,9 +294,33 @@ point, `ρΔ_P` crosses 1 at `n = 10` and reaches `1.078` at `n = 16` **(FAMILY)
 never happens where `(F)` fails: on that family `u_F = M/√(2γ)` runs `0.477 → 0.396`,
 falling. So `(L*)`'s hypothesis is doing real work, and both of its arms are live.
 
+⚠️ **CORRECTED — AND THE SENTENCE ABOVE IS NOT STRUCK, BECAUSE IT IS TRUE (mg-8d63,
+`code/lstar_landing_8d63/`).** It is a statement about the chain(`n−1`)+point **FAMILY**, it
+carries the word FAMILY, and it reproduces exactly on an independent sweep (`0.98596` at
+`n = 9`, `1.00636` at `n = 10`, `1.07794` at `n = 16`). What is wrong is the use the corpus
+put it to. **Over primitive posets, `ρΔ_P > 1` first occurs at `n = 5`** — 6 of 275, `max ρΔ
+= 1.027118` — and by `n = 6` it is 192 of 4070 with `max = 1.156724`. **FIVE values of `n`
+earlier than this paragraph was read as saying, and one earlier than the `n = 6` that
+mg-789d §4 put in its place** (its own sweep starts at `n = 6`, which is the smallest `n` it
+looked at rather than the smallest `n` where the thing happens; the figure it published is
+right and the word *"from"* is not). **The corpus already held the refuting datum:**
+`mg-28ff`'s cell **`V10` IS `ρΔ_P`** (`:279`; `mg-29fe`'s audit spells the identification
+out at `:366`), and `code/l2_audit_29fe/out_s3_counterfactual.txt` prints the column
+`0.500000 / 0.666667 / 0.904508 / 1.027118 / 1.156724` at `n = 2..6` and says in as many
+words that it *"first exceeds 1 at n = 5, at 6 of 275 primitive posets"* — measured and
+committed **before** either onset statement was written, in a thread neither this document
+nor mg-789d had reason to read as being about `(L*)`. **The conclusion of the paragraph is
+strengthened, not weakened: `(L*)`'s hypothesis is doing MORE work than claimed here, from
+a smaller `n`.**
+
 **WHAT `(L*)` IS NOT.** It is **not proved**. It is a conjecture with an exact certificate
 on two enumerated populations and one family, and it is offered as the successor's target
 because it is the first form of the anti-correlation that *could* be uniform in `n`.
+
+⚠️ **AND IT IS NOW NOT TRUE EITHER — THE SUCCESSOR TOOK THE TARGET AND REFUTED IT
+(mg-789d, landed mg-8d63).** This paragraph is the one sentence in §4 that the refutation
+**vindicates**: it declined to call `(L*)` proved, and it was right to. What the successor
+adds is that "not proved" was the weaker of the two available verdicts.
 
 ### 4.1 `mg-51f4` §7's stated mechanism is false; its quantitative form survives
 
@@ -363,9 +474,17 @@ at **exactly 5 posets `n ≤ 6`** — independently landing on `mg-29fe`'s findi
 
 ## §9. NOT DONE
 
-* **`(L*)` is not proved.** It is certified exactly on two enumerated populations and one
+* ~~**`(L*)` is not proved.** It is certified exactly on two enumerated populations and one
   family. A proof of it would be this lineage's first uniform-in-`n` statement about the
-  disjunction, and it is the successor this ticket should file.
+  disjunction, and it is the successor this ticket should file.~~ ⚠️ **THE SUCCESSOR WAS
+  FILED AND `(L*)` IS REFUTED AT `n = 9` (mg-789d, landed mg-8d63).** The two enumerated
+  populations and the family are unaffected — a refutation at `n = 9` does not reach back
+  into a certificate at `n ≤ 8`. **What replaces this bullet as the open item is narrower
+  and sharper: whether `(L*)` already fails at `n = 8` is OPEN** (60 hill-climb restarts
+  reached `min(v_F,v_L) = 0.968818`, a SEARCH over 2600369 primitive posets and **not** a
+  census — `0.968818` is not a maximum at `n = 8` and must not be quoted as one). Note that
+  this figure is a re-derivation of *this document's own* `n = 8` maximum by a different
+  method, at a relabelling of the same argmax.
 * **`(M♯)`'s failure count at `n = 8` is not computed** and is not claimed (§3's box). Nor
   is `max c♯(8)`, `max f*(8)` or `c_true(8)` — the screen does not deliver them.
 * **Nothing reaches `n ≥ 99`.** Exhaustive to `n = 8`; two families to `n = 16` and `n = 18`.

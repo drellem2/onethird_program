@@ -1,0 +1,66 @@
+==============================================================================
+S1.1  THE ONSET, EXHAUSTIVE OVER PRIMITIVE POSETS
+==============================================================================
+  rho = mu_pref/gamma;  Delta = Delta_P.  Population: naturally labelled
+  primitive posets on [n].  Every row below is a MAXIMUM over its n, not a search.
+
+   n | primitive |  max rho*Delta | posets with rho*Delta > 1 | argmax
+   2 |         1 |      0.500000 |                         0 | (0, 0)   (0s)
+   3 |         4 |      0.666667 |                         0 | (0, 1, 0)   (0s)
+   4 |        27 |      0.904508 |                         0 | (0, 1, 0, 4)   (0s)
+   5 |       275 |      1.027118 |                         6 | (0, 1, 0, 4, 4)   (0s)
+   6 |      4070 |      1.156724 |                       192 | (0, 0, 3, 0, 8, 8)   (10s)
+
+  ONSET: rho*Delta > 1 first occurs at n = 5.
+  The corpus said n = 10 (mg-c50b Section 4, FAMILY) and then n = 6 (mg-789d Section 4).
+  Both are wrong as ONSET statements, and n = 6 is wrong by one value of n.
+
+==============================================================================
+S1.2  CONTROL C1 -- mg-789d's OWN PUBLISHED n = 6 MAXIMUM
+==============================================================================
+  mg-789d Section 4 publishes  max rho*Delta = 1.15672 over all 4070 at n = 6.
+  measured here               : 1.156724 over 4070 primitive
+  PASS  agrees to every printed digit.
+
+==============================================================================
+S1.3  CONTROL C2 -- mg-c50b's FAMILY STATEMENT IS TRUE, AND STAYS TRUE
+==============================================================================
+  mg-c50b Section 4: on chain(n-1) + one isolated point, rho*Delta_P crosses 1
+  at n = 10 and reaches 1.078 at n = 16.  That sentence carries the word FAMILY
+  and is CORRECT.  What this landing corrects is its use as an ONSET.
+
+   n | rho*Delta on chain(n-1)+point
+   8 |    0.96036
+   9 |    0.98596
+  10 |    1.00636
+  12 |    1.03812
+  16 |    1.07794
+
+  PASS  crosses 1 between n = 9 and n = 10, and reaches 1.078 at n = 16.
+
+==============================================================================
+S1.4  CONTROL C3 -- THIS SCRIPT'S OWN FLOOR, WHICH IS THE MIRROR DEFECT
+==============================================================================
+  The defect being corrected is a smallest-n-looked-at published as an onset.
+  So: what is the smallest n THIS sweep looked at, and is anything below it?
+
+  sweep floor                 : n = 2, with 1 primitive poset(s), max rho*Delta 0.500000
+  n = 1                       : REFUSED, not skipped -- LE = 1, gamma = 0, and
+                                rho = mu_pref/gamma does not exist.  There is no
+                                value of rho*Delta at n = 1 to be above or below 1.
+                                measured: n = 1 raises IndexError
+
+  PASS  the sweep bottoms out at the smallest n where rho*Delta EXISTS, and
+        rho*Delta <= 1 there, so n = 5 is an onset and not a floor artefact.
+
+==============================================================================
+S1.5  VERDICT
+==============================================================================
+  onset over primitive posets           : n = 5   (6 of 275, max 1.027118)
+  onset on the chain+point FAMILY       : n = 10  (mg-c50b, TRUE as stated)
+  the two are different questions and this landing separates them.
+
+  NOT MEASURED HERE: n >= 7 (an onset at n = 5 cannot be moved by a larger n);
+  (L*) itself (its hypothesis needs (F) to FAIL, which happens at no n <= 6).
+
+  ALL ARMS PASS

@@ -273,6 +273,26 @@ of n earlier than the corpus knew.
 > maximum, that was one value late. **This correction is in `docs/roadmap.md` twice and
 > needs the same sweep.**
 
+> ⚠️ **AND THE CORPUS ALREADY HELD THIS NUMBER, ON A THIRD INSTRUMENT, BEFORE EITHER ONSET
+> STATEMENT WAS WRITTEN (mg-8d63).** mg-28ff's cell **`V10` IS `rho*Delta_P`**
+> ([`OneThird-L2-Conditionality-mg-28ff.md:279`](OneThird-L2-Conditionality-mg-28ff.md);
+> mg-29fe's audit identifies it at `:366`), and
+> `code/l2_audit_29fe/out_s3_counterfactual.txt` prints the exhaustive column
+> `0.500000 / 0.666667 / 0.904508 / 1.027118 / 1.156724` at n = 2..6 and states in as many
+> words that V10 *"first exceeds 1 at n = 5, at 6 of 275 primitive posets at n=5"* — the
+> same six, the same maximum, **committed before mg-c50b's `n = 10` sentence was read as an
+> onset and before mg-789d replaced it with `n = 6`.** `code/lstar_landing_8d63/`
+> reproduces that column a third time on **this** document's own `lib789d` (float, exact
+> agreement to 6 places with mg-5cba's rationals), with mg-c50b's FAMILY crossing and this
+> section's `1.15672` as controls, and a floor control that refuses n = 1 (`gamma = 0`, so
+> `rho` does not exist there) — because *starting a sweep above the phenomenon* is the
+> defect this whole line of corrections is about, and a landing that swept from n = 3 would
+> have committed it while reporting it. **THE TRANSFERABLE FINDING IS NOT THE INTEGER: one
+> scalar was tracked under two names in two threads, and neither thread could see the
+> other's measurement.** `rho*Delta_P` was (L\*)'s entire content in one and an anonymous
+> counterfactual cell in the other. **`docs/roadmap.md`'s two sites were swept by
+> pm-onethird at `87735c2`.**
+
 ### Scope note on n = 8 — the one place this document declines to close
 
 n = 8 was pushed with **60 hill-climb restarts** and topped out at `min(v_F,v_L) =
