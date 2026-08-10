@@ -1,0 +1,222 @@
+==============================================================================
+mg-9160 / S4 -- THE OPEN SET AND ITS PRICE
+==============================================================================
+HEAD: 757f999
+
+==========================================================================
+S4a  THE OPEN-SET CLASSIFIER OVER THE CORPUS
+==========================================================================
+
+  `grain_open` returns the grain NOUN.  Its value set is whatever the
+  corpus says, so there is no arity to run out of, and the failure case
+  is not a symbol meaning `this label has no grain` -- it is `NO-NOUN`
+  carrying the label that defeated the extractor.
+
+  population: every count ROW of the reconstructed corpus
+      ...count ROWS given a grain NOUN of their own              1145
+          ^ one unit is one printed line;  label's own noun: `noun`
+      ...count ROWS the extractor cannot read a noun from          46
+          ^ one unit is one printed line;  label's own noun: `noun`
+      ...distinct grain NOUNS that value set contains             368
+          ^ one unit is one de-pluralised noun;  label's own noun: `contain`
+      ...distinct grain NOUNS the corpus labels contain           400
+          ^ one unit is one de-pluralised noun;  label's own noun: `contain`
+
+  AND MY OWN REPAIR DROPS 32 OF THEM BEFORE ANYTHING IS CLASSIFIED.
+  `grain_open` commits to ONE noun per label; A1d's extractor returns
+  the SET.  A label reading `...ROWS outside it, across 10 distinct
+  basenames` has two grain nouns and my function returns one of them.
+  So the open value set is open and still not wide enough for a LABEL
+  that carries two grains -- which is S3's finding arriving in S4 by a
+  different road, and it is a defect of MY function, not of the old one.
+
+  THE 370, REPORTED RATHER THAN COUNTED.  My ticket asks for exactly
+  that.  `_classify` over the corpus's own 400 grain nouns:
+
+      ...grain NOUNS `_classify` answers SITE                      26
+          ^ one unit is one de-pluralised noun;  label's own noun: `site`
+      ...grain NOUNS `_classify` answers EXECUTION                  4
+          ^ one unit is one de-pluralised noun;  label's own noun: `execution`
+      ...grain NOUNS `_classify` answers BOTH                       0
+          ^ one unit is one de-pluralised noun;  label's own noun: `answer`
+      ...grain NOUNS `_classify` answers NONE                     370
+          ^ one unit is one de-pluralised noun;  label's own noun: `answer`
+
+  THE 370 IT HAS NO ENTRY FOR, PRINTED IN FULL -- because `370` is a
+  count of a set nobody has been shown, and a count of an unseen set is
+  the thing this arc keeps finding.  6 per line, alphabetical:
+
+      aa-repair          aaf                about              actual             add                added
+      affected           after              agree              algebra            alone              antichain
+      anything           anyway             apart              appended           arc                attempt-mg-a
+      attribution        audit              axe                bad                bare               baseline
+      bee                before             began              behind             beside             bfd
+      bin                block              blockquote         bothway            bound              branching
+      branching-graph    bratteli           broken             brown              byte               byte-identical
+      candidate          carry              catch              cde                cell               cellstrip
+      censu              censused           chain              change             char               class
+      classified         classifier         classifying        code               coecient           collapse
+      come               commit             complex            composition        concat             cond
+      consider           consolidation      contradict         control            copy               corpu
+      correct            correction         counted            counterfactual     coverage           cross-list
+      declare            defined            definition         deletion           dened              depth
+      derivation         dierent            differ             differential       dir                directly
+      directory          disagree           disk               dispositioned      docstring          drifted
+      drop               dropped            duplicated         ef                 either             element
+      else               enumerator         errexit            evidence           examined           exchanged
+      exclude            excluded           exit               exiting            express            extent
+      f                  fa                 facet              fail               failure            find
+      finding            first              fleet              fomin              form               formula
+      found              further            gained             gamma              gap                gate
+      gelfand            graded             grain              grep               grid               had
+      hand-listed        head               header             header-only        hist               history
+      history-derived    iii                implementation     imported           index              indexed
+      inert              input              interior           isomorphism        itself             kept
+      kern               kind               label              lam                lambda             land
+      lib                libbf              library            literal            locate             loop
+      lost               lower              magnitude          main               mark               marked-quote
+      match              matched            measured           measurement        mg-                mg-a
+      mg-bf              mg-d               mg-dee             mg-e               mine               miss
+      mode               modified           move               name               naming             network
+      new                newest             nite               non-empty          non-zero           note
+      null               object             occurrence         off-diagonal       offbyone           ok
+      okounkov           old                oldest             onethird-branching-graphs-repaironethird-branching-graphs-where-this-liveonethird-hodge-side-leverage
+      onethird-runnerexit-populationrepaironethird-warrant-repair-mg-dffaonethird-warrant-repair-mg-dffa-independentauditoperand            opposed            order
+      our                outcome            outright           pair               pairing            paragraph
+      parent             parity             parse              part               pass               perform
+      phrase             pick               pickaxe            pin                pipefail           plain
+      plant              population         poset              position           pre-registered     pre-repair
+      predicted          prediction         prerepair          prev               print              printed
+      probe              produce            product            property           prose              publish
+      published          publisher          py                 qualified          quantity           quotation
+      quote              ran                range              ranged             rank               re-derive
+      re-derived         read               readme             record             recorded           redirect
+      redo               regenerated        reintroduction     relation           remove             repair
+      repair-independentauditrepaired           report             repository         reproduce          rerun
+      restored           restoring          return             rev                revision           rotted
+      rule               said               say                scanned            scored             seam
+      self-naming        selftest           set                setlevel           sh                 shebang
+      shell              ship               side               sigma              silencing          since
+      singleton          sit                source             specy              splitter           stand
+      state              stated             statu              subdirectory       subject            swap
+      swapped            tableau            tag                target             tee                tested
+      text               their              them               themselve          ticket             time
+      title              tower              trace              tracked            tree               true
+      twin               twist              txt                unbacked           uncorrupted        uncounted
+      understate         undispositioned    unified            union              unital             unqualified
+      unrestricted       untouched          value              verdict            vershik            vertexset
+      violation          widened            widening           window             wiring             withdrawal
+      within-list        witness            worktree           wrapper            wrong              x
+      xed                y                  yes                young
+
+      (that list is 370 nouns; the ticket's figure is 370)
+
+==========================================================================
+S4b  ITS PRICE -- P4, PREDICTED BEFORE THE FUNCTION EXISTED
+==========================================================================
+
+  D3 of PREDICTIONS.md: a classifier keyed on the noun separates every
+  pair of distinct nouns, INCLUDING SYNONYMS.  So it does not have a
+  smaller false-distinction count than `_classify` -- it has a larger
+  one, and A1f's two adjudicated same-grain pairs are the two cases
+  this arc has actually ruled on.
+
+      adjudicated SAME         _classify      open set       verdict on the open set
+      step / iteration         SITE/EXEC      step/itera     *** FALSE DISTINCTION
+      command / invocation     SITE/EXEC      comma/invoc    *** FALSE DISTINCTION
+
+  population: the 2 word PAIRS A1f adjudicated as ONE grain
+      ...PAIRS `_classify` wrongly splits                           2
+          ^ one unit is one adjudicated pair;  label's own noun: `split`
+      ...PAIRS the open-set classifier wrongly splits               2
+          ^ one unit is one adjudicated pair;  label's own noun: `split`
+
+      P4 as pre-registered (my repair splits 2 of 2)      HIT
+
+  I KEEP THIS AND I DO NOT SPECIAL-CASE IT.  A hand list merging those
+  two words would make the ratio a fact about my hand list, which is
+  AS5's lesson, and `selftest9160.py` carries an arm ASSERTING that the
+  open-set classifier still splits them -- so if a future edit quietly
+  merges them the selftest goes red rather than the number improving.
+
+==========================================================================
+S4c  THE SCOREBOARD, ON THE ONLY 11 PAIRS THIS ARC HAS ADJUDICATED
+==========================================================================
+
+  `_classify` answers every pair of grain words with a definite
+  verdict.  So does the open-set classifier.  Both are total functions
+  and the question -- ARE THESE THE SAME GRAIN -- is a question about
+  the world.  Here is each one scored where the world's answer exists:
+  A1f's five adjudications and A1e's six axes, 11 pairs, all of them
+  mg-03d1's judgements and none of them mine.
+
+      pair                   truth     _classify    open set   notes
+      step / iteration       SAME      DIFF X       DIFF X     
+      command / invocation   SAME      DIFF X       DIFF X     
+      runner / run           DIFFERENT DIFF         DIFF       
+      script / execution     DIFFERENT DIFF         DIFF       
+      check / iteration      DIFFERENT DIFF         DIFF       
+      row / site             DIFFERENT SAME X       DIFF       
+      file / line            DIFFERENT SAME X       DIFF       
+      item / specy           DIFFERENT DIFF         DIFF       one pole is NONE
+      pair / poset           DIFFERENT SAME X       DIFF       
+      mention / name         DIFFERENT DIFF         DIFF       one pole is NONE
+      site / execution       DIFFERENT DIFF         DIFF       
+
+  population: the 11 word PAIRS this arc has adjudicated, in A1e and A1f
+      ...PAIRS `_classify` gets right                               6
+          ^ one unit is one adjudicated pair;  label's own noun: `right`
+      ...of those, PAIRS right only because one pole is NONE        2
+          ^ one unit is one adjudicated pair;  label's own noun: `pole`
+      ...PAIRS the open-set classifier gets right                   9
+          ^ one unit is one adjudicated pair;  label's own noun: `right`
+
+  NEITHER COLUMN IS A REPAIR.  The open set scores higher because this
+  arc's adjudications are mostly DIFFERENT and a function that always
+  says DIFFERENT scores well on them.  `_classify` scores 6, of which
+  2 are right only because one pole is a word it does not know.
+  A constant function scores 9 here.  The scoreboard is 11 pairs long
+  and there are 79800 pairs in the corpus.
+
+==========================================================================
+S4d  THE THIRD VERDICT, AND WHY NO ARITY CARRIES IT
+==========================================================================
+
+  Both instruments above answer all 79800 pairs.  The arc has adjudicated
+  7 of them.  `verdict` returns the third value at the rest:
+
+  population: the unordered PAIRS of the corpus's 400 grain NOUNS
+      ...PAIRS in the corpus vocabulary                         79800
+          ^ one unit is one pair of grain nouns;  label's own noun: `pair`
+      ...PAIRS this arc has ADJUDICATED                             7
+          ^ one unit is one pair of grain nouns;  label's own noun: `adjudicated`
+      ...PAIRS answered UNADJUDICATED                           79793
+          ^ one unit is one pair of grain nouns;  label's own noun: `unadjudicated`
+      ...PAIRS `_classify` answers with a definite verdict      79800
+          ^ one unit is one pair of grain nouns;  label's own noun: `verdict`
+      ...PAIRS the open-set classifier answers definitely       79800
+          ^ one unit is one pair of grain nouns;  label's own noun: `definitely`
+
+      the arc has ruled on 0.0088% of its own grain pairs
+
+  * THAT IS THE HONEST FORM OF `623` AND OF `370`. 623 is the number of
+    pairs `_classify` calls the same grain. 7 is the number of pairs
+    anyone has actually decided. The gap between them is not a defect of
+    the classifier -- it is what the classifier is standing in for.
+
+  * AND NO NUMBER OF SYMBOLS CARRIES IT. A function returning one symbol
+    per word IS a partition; a partition IS an equivalence relation; and
+    an equivalence relation has no room for `unknown` -- every pair is in
+    a block or is not. Five values do not help. Four hundred do not help.
+    This is why `add ROW_WORDS` is the wrong axis and why `make it five-
+    valued` is the wrong axis in the same way: both stay inside the shape
+    that cannot express the thing that is missing.
+
+  * SO THE TICKET'S SECOND EXIT IS THE RIGHT ONE AND ITS FIRST IS NOT.
+    `Report the 370 rather than silently returning NONE` is a change of
+    SHAPE -- it makes what is unanswered visible. `Return a grain from an
+    open set` is a change of ARITY, and S4b is what that buys: a function
+    that splits `steps` from `iterations` at every one of the pairs anyone
+    has ruled on.
+
+S4 TOTAL BAD: 0

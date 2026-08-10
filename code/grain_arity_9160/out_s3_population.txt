@@ -1,0 +1,183 @@
+==============================================================================
+mg-9160 / S3 -- ONE ROW PER INTEGER
+==============================================================================
+HEAD: 757f999   subject: `lib56dc.count_rows`, `lib03d1.embedded_counts`
+
+==========================================================================
+S3a  THE REPAIRED POPULATION, AND THE SECOND COLLAPSE NOBODY COUNTED
+==========================================================================
+
+  `count_rows` is a shape rule over the LINE, and its unit is the line.
+  So a line is one row however many integers it prints.  Counting the
+  population in INTEGERS instead:
+
+  population: every INTEGER printed in a count row of the reconstructed corpus
+      ...count ROWS the old rule returns                         1191
+          ^ one unit is one printed line;  label's own noun: `return`
+      ...INTEGERS in those rows, counted one at a time           2894
+          ^ one unit is one integer;  label's own noun: `integer`
+      ...INTEGERS the old rule returns as values                 2268
+          ^ one unit is one integer;  label's own noun: `value`
+      ...INTEGERS inside labels, in no population at all          626
+          ^ one unit is one integer;  label's own noun: `label`
+      ...INTEGERS SHARING one grain with a neighbour             1481
+          ^ one unit is one integer;  label's own noun: `neighbour`
+
+      integers with a grain of their OWN:      787 of 2894  (27.2%)
+      integers with a SHARED grain:           1481 of 2894  (51.2%)
+      integers with NO grain at all:           626 of 2894  (21.6%)
+
+  MY TICKET SAYS 626 INTEGERS ARE NEVER CLASSIFIED.  It is right about
+  those and it stops there.  1481 MORE are classified only in the sense
+  that a grain was computed for the LINE they sit on and handed to all
+  of them at once: `ROWS 49 SITES 47 GAP 2` gets ONE symbol.  Counted
+  in integers rather than in lines, the rule gives an own-grain to 787
+  of 2894 -- 27.2%.  The floor is 3.4x deeper than the ticket says.
+
+      P5 as pre-registered (trailing integers > count rows)   HIT -- 2268 > 1191
+
+==========================================================================
+S3b  ATTRIBUTION -- WHICH NOUN A LABEL-INTERNAL INTEGER BELONGS TO
+==========================================================================
+
+  `lib03d1.embedded_counts` attaches the word immediately AFTER the
+  integer.  That is right for prose --
+
+      ...ROWS outside it, across 10 distinct basenames        14
+
+  -- and wrong for a column table, which this arc writes as often --
+
+      973ca61 ALL rows   ROWS  49  SITES  47  GAP  2
+
+  -- where the word after `49` is `SITES`, the noun of the NEXT
+  column's value.  Attaching it makes 49 a count of sites when the
+  label says it is a count of rows.
+
+  So `attribute` returns BOTH neighbours and a verdict and never
+  silently picks.  Census over the label-internal integers:
+
+  population: the 626 label-internal INTEGERS of the reconstructed corpus
+      ...INTEGERS whose attribution reads NEXT                     71
+          ^ one unit is one integer;  label's own noun: `next`
+      ...INTEGERS whose attribution reads PREV                    269
+          ^ one unit is one integer;  label's own noun: `prev`
+      ...INTEGERS whose attribution reads AMBIGUOUS               286
+          ^ one unit is one integer;  label's own noun: `ambiguou`
+      ...INTEGERS whose attribution reads NEITHER                   0
+          ^ one unit is one integer;  label's own noun: `neither`
+
+  READ AGAINST THE PARENT'S RULE, WHICH ALWAYS TAKES THE FOLLOWING WORD:
+      it names a noun at                  357 of  626 integers
+      it returns an EMPTY noun at         269  (nothing follows the
+                                              integer; a noun PRECEDES)
+      of the  357 it does name, the attribution is UNRESOLVED at  286
+      -- 80.1% -- because a grain noun sits on the other side too.
+
+  AND THE TIE-BREAK, OFFERED BESIDE THE VERDICT AND NEVER IN PLACE OF
+  IT.  `column_shape` asks whether the whole row alternates strictly
+  word,integer,word,integer -- the `NOUN VALUE` column convention --
+  or does not.  DESIGNED AFTER LOOKING AT THE ROWS IT SEPARATES, which
+  is said here so a reader can discount it.
+
+  population: the same 626 label-internal INTEGERS, by the SHAPE of their row
+      ...INTEGERS in rows of shape NOUN-VALUE                      48
+          ^ one unit is one integer;  label's own noun: `integer`
+      ...INTEGERS in rows of shape VALUE-NOUN                     185
+          ^ one unit is one integer;  label's own noun: `integer`
+      ...INTEGERS in rows of shape UNDETERMINED                   393
+          ^ one unit is one integer;  label's own noun: `integer`
+
+      resolved by the tie-break:  233 of 626;  left open: 393
+
+  THE TIE-BREAK IS NOT A REPAIR OF THE PARENT'S RULE AND I AM NOT
+  PROPOSING IT AS ONE.  It resolves 233 of 626 and leaves 393 open, and
+  the open ones are open because the label genuinely does not say.
+
+==========================================================================
+S3c  AF2's FIVE ROWS, RE-READ -- THE COUNT STANDS, FOUR DETAIL LINES DO NOT
+==========================================================================
+
+  AF2 reports 5 rows whose two counts are at different grains, and
+  prints a detail line for each naming the embedded count's grain.
+  The FINDING is right.  Four of the five DETAIL LINES name the noun
+  one column to the right of the value they are about.
+
+      out_r4_property.txt:30
+          ...ROWS outside it, across 10 distinct basenames   [trailing: 14]
+          row shape: VALUE-NOUN
+          10     parent says `basenames `   the label reads `basenames `  
+
+      out_p1_grain.txt:76
+          973ca61 ALL rows       ROWS  49  SITES  47  GAP   [trailing: 2]
+          row shape: NOUN-VALUE
+          49     parent says `sites     `   the label reads `rows      `  <-- one column right
+          47     parent says `gap       `   the label reads `sites     `  <-- one column right
+
+      out_p1_grain.txt:79
+          973ca61 OUTSIDE rows   ROWS  10  SITES   9  GAP   [trailing: 1]
+          row shape: NOUN-VALUE
+          10     parent says `sites     `   the label reads `rows      `  <-- one column right
+          9      parent says `gap       `   the label reads `sites     `  <-- one column right
+
+      out_p1_grain.txt:81
+          HEAD   ALL rows       ROWS  56  SITES  53  GAP   [trailing: 3]
+          row shape: NOUN-VALUE
+          56     parent says `sites     `   the label reads `rows      `  <-- one column right
+          53     parent says `gap       `   the label reads `sites     `  <-- one column right
+
+      out_p1_grain.txt:85
+          HEAD   OUTSIDE rows   ROWS  14  SITES  12  GAP   [trailing: 2]
+          row shape: NOUN-VALUE
+          14     parent says `sites     `   the label reads `rows      `  <-- one column right
+          12     parent says `gap       `   the label reads `sites     `  <-- one column right
+
+  population: the 5 ROWS of AF2, re-read one integer at a time
+      ...INTEGERS the parent's detail lines name one column right        8
+          ^ one unit is one integer;  label's own noun: `right`
+
+  WHAT THIS DOES AND DOES NOT MOVE.  AF2's count of 5 STANDS -- on
+  every one of those rows the two counts really are at different
+  grains, and on the four table rows there are THREE grains on the
+  line, not two: a ROW count, a SITE count, and a GAP.  The finding
+  gets bigger.  What moves is the attribution in the printed detail:
+  `the embedded 10 sites is at grain site` reads 10 as a site count
+  where the label says `ROWS 10 SITES 9`.
+
+  AND IT IS THE SAME DEFECT AS THE PARENT'S OWN AS1, IN THE OPPOSITE
+  DIRECTION.  AS1: *`label_grain` took the LAST grain noun of a label,
+  so it read `basenames` -- the EMBEDDED count's noun.*  That was
+  repaired.  `embedded_counts` takes the FOLLOWING noun and was not
+  repaired with it.  A value attributed to the wrong noun on the same
+  line, twice, in one instrument, in the tree that measures exactly
+  that defect.
+
+==========================================================================
+S3d  WHAT THE REPAIR DOES NOT DO
+==========================================================================
+
+  * BEING IN THE POPULATION IS NOT BEING CLASSIFIED CORRECTLY. E6, filed
+    before the code existed. `count_items` puts every integer in scope and
+    attaches the noun its own words give it. Whether that noun is the
+    right grain for that integer is a fact about the CODE that printed it,
+    and the only way to get it is to re-derive the quantity -- which is
+    possible only where a re-derivation sits beside the row. Nothing here
+    re-derives one.
+
+  * THE SHARED-GRAIN INTEGERS ARE COUNTED, NOT ATTRIBUTED. The 1481
+    trailing integers sharing a line's grain are reported as SHARED and no
+    attempt is made to give each its own noun from the column header above
+    it. Doing that needs a header parser, this arc has none, and writing
+    one to fix a row I found today is how the next instrument gets a rule
+    nobody checked.
+
+  * NO CALL SITE IS MIGRATED. `lib56dc`, `lib03d1`, `libbf79` and
+    `lib70c7` are unmodified, no transcript of another tree is
+    regenerated, and no number published by another tree moves. The
+    repaired population runs HERE and is reported HERE.
+
+  * THE TIE-BREAK IS NOT VALIDATED AGAINST GROUND TRUTH. `column_shape`
+    agrees with a reading of five rows I did by hand. There is no labelled
+    set to score it on, so its 233 resolutions are a rule's output and not
+    a measured accuracy.
+
+S3 TOTAL BAD: 0

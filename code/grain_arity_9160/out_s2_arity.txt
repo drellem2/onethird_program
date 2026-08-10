@@ -1,0 +1,171 @@
+==============================================================================
+mg-9160 / S2 -- ARITY IS A MINORITY OF THE COLLAPSE
+==============================================================================
+HEAD: 757f999
+Correcting: my own ticket body, mg-9160, quoted above in full.
+
+==========================================================================
+S2a  THE ARITY FLOOR, AND WHETHER `_classify`'S FORM CAN REACH IT
+==========================================================================
+
+  A k-valued function is a partition into at most k blocks; a pair is
+  collapsed iff both words share a block.  The sum of C(n_i,2) is
+  smallest at the most equal partition.  So no four-valued function on
+  43 words can collapse fewer than:
+
+  population: all four-valued FUNCTIONS on the 43 vocabulary words
+      ...PAIRS the best four-valued function still collapses      210
+          ^ one unit is one pair of words;  label's own noun: `collapse`
+      ...PAIRS the best four-valued function tells apart          693
+          ^ one unit is one pair of words;  label's own noun: `apart`
+
+  E1's CONTROL, BECAUSE THE FLOOR DEPENDS ON IT.  `_classify`'s four
+  cells are (in EXEC only), (in SITE only), (in BOTH), (in NEITHER).
+  If nothing can land in BOTH the function is three-valued in practice
+  and the floor is 287, not 210.  So: a string that classifies BOTH.
+
+      `_classify('rows executed')`               = BOTH
+      `_classify('zzzz')`                        = NONE
+      all four cells reachable                    YES -- the floor is 210
+
+  AND THE FLOOR IS REACHED BY A FUNCTION OF EXACTLY THIS FORM, not by
+  some other four-valued function.  Below: the 43 words dealt round-
+  robin into the four cells, expressed as two membership sets, run
+  through `two_test` -- two boolean tests, four symbols, same shape.
+
+      cells: BOTH=11  EXECUTION=11  NONE=10  SITE=11
+  population: the 43 vocabulary WORDS under a BALANCED four-cell assignment
+      ...PAIRS that assignment collapses                          210
+          ^ one unit is one pair of words;  label's own noun: `collapse`
+      the floor is ACHIEVED by `_classify`'s own form   YES
+
+==========================================================================
+S2b  THE DECOMPOSITION -- AND THE TICKET'S SLOGAN IS FALSE AT TWO THIRDS OF ITS OWN EVIDENCE
+==========================================================================
+
+  The observed collapse, the floor, and the difference.  The floor is
+  what FOUR-VALUEDNESS costs whatever words you choose.  The remainder
+  is what THESE words cost -- 35 in one cell, 8 in another, two cells
+  empty.  That remainder is the vocabulary, by definition.
+
+  population: the 903 unordered PAIRS of the classifier's own vocabulary
+      ...PAIRS `_classify` actually collapses                     623
+          ^ one unit is one pair of words;  label's own noun: `collapse`
+      ...PAIRS forced by four-valuedness alone                    210
+          ^ one unit is one pair of words;  label's own noun: `alone`
+      ...PAIRS attributable to the WORD LISTS                     413
+          ^ one unit is one pair of words;  label's own noun: `list`
+
+      forced by arity      33.7% of the collapse
+      the word lists       66.3% of the collapse
+
+  MY TICKET SAYS `A PROPERTY OF ITS ARITY, NOT ITS VOCABULARY`.  AT THE
+  VERY PAIRS IT COUNTS, THE VOCABULARY IS THE MAJORITY SHARE.  I filed
+  that framing; it is wrong; the number above is the correction.
+      P1 as pre-registered (>= 413 to the word lists)     HIT -- 413
+
+==========================================================================
+S2c  THE SAME DECOMPOSITION AT THE CORPUS'S OWN 400 GRAIN WORDS
+==========================================================================
+
+  The corpus's vocabulary, not the classifier's: every grain noun of
+  every count row of the reconstructed corpus, extracted by shape with
+  mg-03d1's own `grain_nouns` (imported, not restated -- and it over-
+  collects, which is its AS5 and my E2).
+
+      cells: EXECUTION=4  NONE=370  SITE=26
+  population: the grain WORDS of the reconstructed corpus, as unordered pairs
+      ...distinct grain WORDS in the corpus                       400
+          ^ one unit is one de-pluralised noun;  label's own noun: `corpu`
+      ...unordered PAIRS over them                              79800
+          ^ one unit is one pair of grain words;  label's own noun: `them`
+      ...PAIRS `_classify` collapses                            68596
+          ^ one unit is one pair of grain words;  label's own noun: `collapse`
+      ...PAIRS forced by four-valuedness alone                  19800
+          ^ one unit is one pair of grain words;  label's own noun: `alone`
+      ...PAIRS attributable to the WORD LISTS                   48796
+          ^ one unit is one pair of grain words;  label's own noun: `list`
+
+      collapse rate                                     86.0%
+      the floor's own rate at k=4                       24.8%
+      forced by arity:  28.9% of the collapse
+
+  E4, HONOURED HERE: 623 ranges over 903 pairs of VOCABULARY words and
+  the number above ranges over the pairs of CORPUS words below.  They
+  are two populations and the only sentence that may hold both is this
+  one.  (the second population's size: 79800 pairs)
+
+  AND THE PART THAT SAVES THE TICKET'S REMEDY.  The floor is not the
+  whole story in the other direction either: separating every pair of
+  400 genuinely distinct grains needs 400 values, not five and not six.
+  So `either the classifier returns a grain from an open set` is right,
+  and the reason is not `4 is one too few` -- it is that the arity
+  needed is of the order of the number of grains, which is why adding
+  ROW_WORDS is wrong by two orders of magnitude rather than by one axis.
+
+      P3 as pre-registered (arity the minority share)     HIT
+
+==========================================================================
+S2d  `NOWHERE TO PUT A THIRD DISTINCTION` -- THE SIX AXES ARE A FOREST
+==========================================================================
+
+  A1e's six axes as MUST-SEPARATE edges.  Eleven vertices, six edges,
+  one vertex of degree two (`site`).  No cycle -- so a forest, so two-
+  colourable.  `chromatic` brute-forces it rather than asserting it,
+  and the selftest's triangle control shows the routine can say 3.
+
+  population: the 6 named grain AXES, as a graph on 11 grain WORDS
+      ...grain WORDS the six axes name                             11
+          ^ one unit is one grain word;  label's own noun: `name`
+      ...AXES to be separated                                       6
+          ^ one unit is one axis;  label's own noun: `separated`
+      ...VALUES a classifier needs to separate all six              2
+          ^ one unit is one classifier value;  label's own noun: `separate`
+
+      the colouring found: execution=1  file=1  item=1  line=0  mention=1  name=0  pair=1  poset=0  row=1  site=0  specy=0
+
+  AND IT IS EXHIBITED, NOT ARGUED.  Below, the colouring is turned into
+  two membership sets and run through `two_test` -- two boolean tests,
+  four symbols, the same shape as `_classify`.  Only two of its four
+  cells are used, which is the point: TWO values are enough for six
+  distinctions and the subject has FOUR.
+
+      pole A     pole B     _classify    exhibit      axis
+      row        site       SITE/SITE X  SITE/EXEC    O1 itself: 14 (site,target
+      file       line       SITE/SITE X  SITE/EXEC    mg-d53d's arc: 806 deletio
+      item       specy      SITE/NONE    SITE/EXEC    mg-4adb's species vs its r
+      pair       poset      NONE/NONE X  SITE/EXEC    mg-0ba7's 0 crossings over
+      mention    name       SITE/NONE    SITE/EXEC    mg-bf79's P3c: a MENTION i
+      site       execution  SITE/EXEC    EXEC/SITE    F1, the axis the instrumen
+
+  population: the 6 named grain AXES, put to two classifiers of the SAME form
+      ...AXES `_classify` separates                                 3
+          ^ one unit is one axis;  label's own noun: `separate`
+      ...AXES the two-valued exhibit separates                      6
+          ^ one unit is one axis;  label's own noun: `separate`
+
+  A1e's refinement applies to the middle column and not to mine: two of
+  the axes `_classify` `separates` are separated only because one pole
+  is NONE -- absence of a word, not a distinction drawn.  Every axis in
+  the right-hand column is separated by two words the exhibit KNOWS.
+
+      P2 as pre-registered (2 colours, all six separated)  HIT
+
+  SO `THERE IS NOWHERE IN A FOUR-VALUED FUNCTION TO PUT A THIRD
+  DISTINCTION` IS FALSE.  There is room for six in a TWO-valued one.
+  What the subject ran out of was not values, it was words in the right
+  cells -- 35 of its 43 words in one cell and two cells empty.
+
+  E3, THE SCOPE, IN THE SAME BREATH AS THE RESULT: this is a statement
+  about THE SIX AXES mg-03d1 NAMED.  It is not a statement about the
+  corpus.  S2c is the corpus, and there the answer is 400 values, which
+  no fixed vocabulary supplies.
+
+  AND WHAT THAT DOES **NOT** LICENCE.  `Two colours suffice` is not a
+  proposal to re-cut SITE_WORDS.  Every axis above needed its poles
+  known IN ADVANCE; the colouring was computed FROM the answer.  A
+  vocabulary cut to fit six known axes fits the seventh no better than
+  this one does -- which is exactly why the ticket's `DO NOT DO THAT`
+  about ROW_WORDS stands after the correction, and stands harder.
+
+S2 TOTAL BAD: 0

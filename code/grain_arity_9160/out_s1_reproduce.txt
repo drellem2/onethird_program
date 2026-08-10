@@ -1,0 +1,131 @@
+==============================================================================
+mg-9160 / S1 -- THE TICKET'S FIGURES AND THEIR POPULATION
+==============================================================================
+HEAD: 757f999   subject: `lib56dc._classify` / `lib56dc.count_rows`
+Parent: mg-03d1 at 9f1ecaa, transcripts published at eacc5e1
+
+==========================================================================
+S1a  THE VOCABULARY, AND THE 623 COUNTED BY RUNNING RATHER THAN BY ARITHMETIC
+==========================================================================
+
+  Every alternative of both vocabularies put through `_classify`, and
+  then every unordered PAIR of them compared.  A1c prints the per-word
+  table and then computes the pair counts as `C(n,2) - |SITE|*|EXEC|`.
+  That closed form is correct only if no alternative lands outside its
+  own list -- so here the pairs are compared one at a time and the
+  partition is printed, which is the arm A1c does not have.
+
+  the partition `_classify` induces on its OWN vocabulary:
+      SITE        35 word(s)
+      EXECUTION    8 word(s)
+      BOTH         0 word(s)
+      NONE         0 word(s)
+
+  population: the 43 vocabulary WORDS of `_classify`, taken as unordered pairs
+      ...vocabulary WORDS in SITE_WORDS                            35
+          ^ one unit is one regex alternative;  label's own noun: `word`
+      ...vocabulary WORDS in EXEC_WORDS                             8
+          ^ one unit is one regex alternative;  label's own noun: `word`
+      ...unordered PAIRS over those words                         903
+          ^ one unit is one pair of words;  label's own noun: `word`
+      ...PAIRS of those WORDS it tells apart                      280
+          ^ one unit is one pair of words;  label's own noun: `apart`
+      ...PAIRS of those WORDS it collapses                        623
+          ^ one unit is one pair of words;  label's own noun: `collapse`
+
+      the ticket's 35 / 8 / 903 / 280 / 623                REPRODUCED (a formality -- H1)
+
+  AND THE PART THAT IS NOT A FORMALITY: only TWO of the four cells are
+  occupied.  `BOTH` and `NONE` hold nothing.  A four-valued function is
+  being used as a two-valued one, and that is a fact about the WORD
+  LISTS, not about the arity.  S2 is the consequence.
+
+==========================================================================
+S1b  P7 -- WHICH CORPUS THE 517 / 1191 / 400 / 626 ARE FIGURES ABOUT
+==========================================================================
+
+  mg-03d1 globbed the DISK.  On the run that writes them a tree's own
+  transcripts are untracked, so the corpus its figures range over is
+  neither `9f1ecaa` nor `eacc5e1` but the union: everything tracked at
+  9f1ecaa PLUS mg-03d1's own seven transcripts as published.
+
+      corpus                                  files   rows e-rows e-ints  words
+      reconstructed: 9f1ecaa + mg-03d1's own    517   1191    246    626    400
+      the index at 9f1ecaa alone                510   1068    246    626    363
+      the disk at HEAD now                      818   1984    458   1198    589
+      mg-03d1 PRINTED                           517   1191    246    626    400
+
+  population: the 3 corpus VIEWS above, one row each
+      ...corpus VIEWS reproducing all 5 printed FIGURES             1
+          ^ one unit is one corpus view;  label's own noun: `figure`
+
+      the reconstruction reproduces all five                 YES
+      `9f1ecaa` ALONE reproduces all five                    no
+      HEAD reproduces all five                               no
+
+  P7 SPLITS, AND THE HALF IT LOSES IS THE HALF I WROTE CARELESSLY.  I
+  bet that all four figures reproduce EXACTLY AT `9f1ecaa`.  They do
+  not: at that ref alone the corpus is 510 files and 1068 rows, and 2 of
+  the 5 figures move.  They reproduce at the RECONSTRUCTION, which is a
+  different object and one my bet did not name.  The half that lands is
+  that NOT ONE of the five reproduces at HEAD -- the corpus is now 818
+  files and 1984 rows -- so a reader who re-ran mg-03d1's probe today and
+  reported `517 does not reproduce` would have measured the arc's own
+  growth and called it a refutation.
+
+  AND THE HEAD ROW ABOVE IS NOT A FIXED POINT.  This tree writes into
+  `code/*/out_*.txt`, which is the population every census here ranges
+  over, so each run changes the next run's answer.  Measured over seven
+  consecutive runs in `s5_self.py`/D7: the file and word counts settle
+  and the ROW count OSCILLATES between 1984 and 1966 without ever
+  converging.  The RECONSTRUCTED row is byte-stable across all
+  seven, because it reads at two fixed refs.  That is the argument for
+  reconstructing rather than globbing, and it was arrived at by running
+  it rather than by reasoning about it.
+
+  AND THE CORPUS INCLUDES THE AUDITOR.  7 of the 517 files and every
+  count row in them are mg-03d1's own output, measured by mg-03d1.
+  That is AS7's shape and it is not avoidable here -- the population is
+  named by a property (`code/*/out_*.txt`) and the auditor's tree
+  satisfies it.  It is disclosed rather than corrected, because the
+  alternative is a population named by a path literal, which is O2.
+
+==========================================================================
+S1c  P8 -- `SILENTLY RETURNS NONE` IS THE WRONG WORD FOR IT
+==========================================================================
+
+  My ticket says the classifier `silently returns NONE` for the 370.
+  `grain_of` widens to the two lines above and then to a column header
+  and RETURNS THE STAGE.  So the count rows resolved at `prev` or
+  `header` are rows whose grain was read off A DIFFERENT LINE, and the
+  stage column says so.  The defect is ATTRIBUTION, not silence.
+
+  population: every count ROW of the reconstructed corpus
+      ...count ROWS resolved at stage `label`                     505
+          ^ one unit is one printed line;  label's own noun: `label`
+      ...count ROWS resolved at stage `prev`                      219
+          ^ one unit is one printed line;  label's own noun: `prev`
+      ...count ROWS resolved at stage `header`                    154
+          ^ one unit is one printed line;  label's own noun: `header`
+      ...count ROWS resolved at stage `-`                         313
+          ^ one unit is one printed line;  label's own noun: `stage`
+
+      ...count ROWS whose grain reads SITE                        817
+          ^ one unit is one printed line;  label's own noun: `site`
+      ...count ROWS whose grain reads EXECUTION                    42
+          ^ one unit is one printed line;  label's own noun: `execution`
+      ...count ROWS whose grain reads BOTH                         19
+          ^ one unit is one printed line;  label's own noun: `read`
+      ...count ROWS whose grain reads NONE                        313
+          ^ one unit is one printed line;  label's own noun: `read`
+
+      grain taken from a DIFFERENT LINE: 373 of 1191 rows (31.3%)
+      grain not found at all:            313 of 1191 rows (26.3%)
+
+  P8 IS SCORED IN S5.  What the numbers say either way: the word
+  `silently` is mine and it is wrong -- the stage is returned and the
+  parent's `grain_ledger` carries it.  What IS silent is that a row
+  resolved at `header` is a row whose grain belongs to a table, and
+  nothing checks that this row is in that table.
+
+S1 TOTAL BAD: 0

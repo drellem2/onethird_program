@@ -1,0 +1,67 @@
+==============================================================================
+mg-9160 / SELFTEST
+==============================================================================
+HEAD: 757f999
+
+-- the arity floor: arithmetic, checked against hand-computed values --
+  ok     min_collapse(43,4) = 3*C(11,2)+C(10,2)                     
+  ok     min_collapse(400,4) = 4*C(100,2)                           
+  ok     min_collapse(43,1) = C(43,2) -- one value collapses everything 
+  ok     min_collapse(43,43) = 0 -- one value per word collapses nothing 
+  ok     min_collapse(43,3) = 287 -- the E1 world where BOTH is unreachable 
+
+-- E1's NEGATIVE CONTROL: is the fourth cell reachable at all? --
+   If no string classifies BOTH, `_classify` is 3-valued in practice
+   and the floor above is 287, not 210.  This arm decides it.
+  ok     `rows executed` classifies BOTH under the SUBJECT classifier 
+  ok     a string in neither list classifies NONE                   
+
+-- collapse(): counted by RUNNING, so it can disagree with A1c --
+  ok     a 2-block partition of 4 words collapses 2 pairs           
+  ok     an all-distinct classifier collapses 0                     
+
+-- two_test(): EXACTLY `_classify`'s form, four cells all reachable --
+  ok     two_test EXECUTION cell                                    
+  ok     two_test SITE cell                                         
+  ok     two_test BOTH cell                                         
+  ok     two_test NONE cell                                         
+
+-- AXES' NEGATIVE CONTROL: a graph that is NOT 2-colourable --
+   A triangle needs three colours.  If `chromatic` returned 2 here the
+   headline `two colours suffice` would be worthless.
+  ok     triangle needs 3 colours                                   
+  ok     a single edge needs 2                                      
+  ok     no edges need 1                                            
+
+-- attribute(): the disagreement with the parent's `embedded_counts` --
+  ok     both neighbours are words -> AMBIGUOUS                     
+  ok     ...and the LEFT neighbour is `rows`                        
+  ok     ...where the parent's rule takes `sites`                   
+  ok     a trailing integer with no word after it -> PREV           
+
+-- column_shape(): the tie-break, on the two shapes it separates --
+  ok     a strictly alternating table row is NOUN-VALUE             
+  ok     prose with an embedded count is VALUE-NOUN                 
+
+-- grain_open(): open value set, and the failure names the label --
+  ok     the noun is returned, de-pluralised                        
+  ok     a label with no noun names itself rather than returning a symbol 
+
+-- verdict(): the THIRD value, which no per-word symbol can carry --
+  ok     an adjudicated synonym pair                                
+  ok     an adjudicated distinct pair                               
+  ok     a pair nobody has adjudicated                              
+  ok     the same noun, pluralised, is one grain                    
+
+-- MY OWN MIRROR DEFECT, asserted rather than hidden (P4) --
+   The open-set classifier SPLITS the two pairs A1f adjudicated SAME.
+   This arm asserts that it does.  If it ever stops, I have special-
+   cased the words and the ratio in s4 is a fact about my hand list.
+  ok     grain_open splits `steps` from `iterations`                
+  ok     grain_open splits `commands` from `invocations`            
+
+-- parent_corpus(): two refs, not one --
+  ok     the reconstruction carries mg-03d1's own 7 transcripts     
+  ok     ...and every one of them is read at the PUBLISHING commit  
+
+SELFTEST TOTAL BAD: 0
