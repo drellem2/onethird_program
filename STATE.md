@@ -6,6 +6,8 @@
 
 Rich rendered version: [`docs/state-of-the-wall.html`](docs/state-of-the-wall.html) — **HAND-MAINTAINED, NOT GENERATED, AND SUBORDINATE TO THIS FILE.** It carried the words *"Generated 2026-07-19"* for three weeks and both halves were false: **no generator has ever existed** (mg-9bc2), and a date says *when* a rendering was made, never *whether* it still matches. It now carries a **`STATE-PIN`** naming the revision of this file it was last reconciled against, checked **per ledger row** by `python3 code/rendered_twin_pin_9bc2/twin_pin.py`. **Do not quote a ledger row from it without running that** — it reports which rows have moved here since, and as of 2026-08-10 **rows 8 and 9 have** (row 9 is mg-2f44's open repair).
 
+**THIS FILE IS SIZE-RATCHETED AND THE GATE BLOCKS MERGES (mg-e331).** Its word count is measured against a declared ceiling in [`code/state_ratchet_e331/CEILING.json`](code/state_ratchet_e331/CEILING.json) — the number lives there and is deliberately NOT copied here, because a size quoted in the file it measures is stale at the next landing; `./build.sh` fails the merge request if a branch pushes it over, or if a branch shrinks it and leaves the ceiling behind. Growth is not forbidden — it is **declared**: raise the number in that file, in the same commit, with the reason. Per-attempt write-ups belong in [`docs/state-history/`](docs/state-history/), which is where the 5 attempt-index rows added since mg-ea0e should have gone.
+
 ---
 
 ## The one-paragraph state

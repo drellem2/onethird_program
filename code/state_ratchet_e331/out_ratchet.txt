@@ -1,0 +1,81 @@
+============================================================================================
+mg-e331 — STATE.md SIZE RATCHET
+============================================================================================
+
+§1  THE SUBJECT, MEASURED — the WORKING TREE, not a commit
+--------------------------------------------------------------------------------------------
+  path              STATE.md
+  words             19077      <- THE GATED QUANTITY (len(text.split()))
+  bytes             124353
+  lines             214
+  longest line      11438 chars
+  lines over 2000   14
+
+  The gated quantity is WORDS because mg-ea0e's target was in words.  It is a
+  PROXY for what a reader must read and not the thing itself: a future editor who
+  reformats a table can move it without changing the reading burden.  The other
+  five numbers are RECORDED here so that a regression is diagnosable and not
+  merely detected — the longest line and the over-2000 count are what turned out
+  to distinguish this file's two growth mechanisms (out_p1_growth.txt §1.4).
+
+§2  THE DECLARED CEILING
+--------------------------------------------------------------------------------------------
+  file              code/state_ratchet_e331/CEILING.json
+  words_ceiling     19077
+  tighten_below     18577
+  set_by            mg-e331   at 19077 words
+  observed          19077  (+0 against the ceiling)
+
+  THE CEILING IS WHERE THE FILE STANDS, NOT WHERE mg-ea0e AIMED, AND THE DIFFERENCE IS
+  DELIBERATE. mg-ea0e's target was under 6,000 words and it landed at 4,658 on
+  2026-08-06. STATE.md is 19,077 words at this commit. Setting this number to 6,000
+  would make the gate RED ON ARRIVAL by 13,077 words and block every merge in this
+  repository from the moment it landed, for a reason no author of an unrelated branch
+  could act on — the exact construction code/control_gate_724a/gate.py refuses in its
+  own docstring about a different suite, and the exact way a control gets deleted or
+  suppressed within a week (mg-d91f). A ratchet is not a target: it is a monotone floor
+  under a regression, and it binds from wherever it is set. 6,000 words is NOT withdrawn
+  — it remains what mg-ea0e aimed at and what docs/state-history/ was built to make
+  reachable, and code/state_ratchet_e331/out_p1_growth.txt §3 measures the gap as a DEBT
+  of 13,077 words with a named remedy (5 attempt-index rows totalling 7,351 words that
+  belong in docs/state-history/attempt-*.md, where 9 of their siblings already live).
+  tighten_below is 500 words under the ceiling — about 2.6% of the file — so that
+  ordinary editing does not demand a config change, while any landing that actually pays
+  down the debt is forced to bank it here in the same commit. Banking is the half that
+  makes this a ratchet rather than a cap: mg-34bf cut 28,321 bytes on 2026-07-30 and was
+  78% undone in 8.5 hours; mg-ea0e cut 153,938 bytes on 2026-08-06 and was 59% undone in
+  95 hours. Both cuts were real work. Neither was banked, so neither held. RAISED FROM
+  18,969 TO 19,077 IN THE COMMIT THAT CAUSED IT, which is the procedure this file
+  documents, exercised by its own author on the first landing that needed it: mg-e331
+  adds one paragraph to STATE.md pointing readers at this ceiling, worth 108 words.
+  Those words could NOT live in docs/state-history/ — a pointer to the constraint is
+  only discoverable at the site the constraint applies to, which is the whole reason it
+  is there. This raise is what the mechanism looks like working: the growth is 108
+  words, it is declared, and the reason is written down.
+
+§3  CAN THIS RATCHET FAIL, AND CAN IT REFUSE?  Probes against THIS run's values
+--------------------------------------------------------------------------------------------
+  N1   one word past the ceiling                   CAUGHT          19078 words is +1 past the declared ceiling 
+  N2   the ceiling plus another whole file         CAUGHT          38154 words is +19077 past the declared ceil
+  N3   one word under the tighten point            CAUGHT          18576 words is 501 below the declared ceilin
+  N4   half the tighten point                      CAUGHT          9288 words is 9789 below the declared ceilin
+  N5   the ceiling edge is exactly where declared  BOUNDARY        19077 -> GREEN, 19078 -> ABOVE-CEILING
+  N6   the tighten edge is exactly where declared  BOUNDARY        18577 -> GREEN, 18576 -> SLACK-UNRATCHETED
+  N7   a ceiling with an empty `why`               CAUGHT          <probe N7>: `why` is empty.  See REQUIRED in
+  N8   a ceiling missing words_ceiling             CAUGHT          <probe N8> is missing required field(s): wor
+  N9   a CEILING.json that is not JSON             CAUGHT          <probe N9> is not JSON: Extra data: line 10 
+  N10  tighten_below above the ceiling             CAUGHT          <probe N10>: tighten_below (19078) is above 
+  N11  a ceiling declared as a string              CAUGHT          <probe N11>: words_ceiling is '19077', not a
+  N12  a negative word count                       CAUGHT          verdict() was handed words=-1
+  N13  every mutation above actually mutates       CAUGHT          4 of 4 planted values differ from the observ
+  N14  STATE.md absent from the tree               CAUGHT          cannot read /Users/daniel/.pogo/polecats/ce3
+
+  12 of 14 probes CAUGHT; 2 BOUNDARY (a transition, checked but NOT counted as a
+  falsification); 0 explained-unfalsifiable; 0 hole(s)/setup failure(s); 0
+  UNEXPLAINED unfalsifiable.  0.000s.
+
+============================================================================================
+RATCHET VERDICT: GREEN — 19077 words, ceiling 19077, tighten below 18577.
+This ratchet was shown able to fire in both directions and to refuse in 7 worlds,
+on this run, against these values.  0.00s total.
+============================================================================================

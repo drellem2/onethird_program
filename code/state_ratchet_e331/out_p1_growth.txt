@@ -1,0 +1,195 @@
+============================================================================================
+mg-e331 §1-3 — CHARACTERISING STATE.md's GROWTH, AND DECIDING THE TARGET
+============================================================================================
+
+§1.1  EVERY LANDING THAT TOUCHED STATE.md, oldest first
+--------------------------------------------------------------------------------------------
+  commit    landed                  bytes     delta    words  ticket
+  29ffbf70e 2026-07-19T01:14:08      9322        +0     1426  —       
+  5e6acb1f2 2026-07-19T01:21:44     11124     +1802     1676  —       
+  90b65b5e5 2026-07-19T11:49:05     13120     +1996     1944  —       
+  ec2d2e06d 2026-07-19T12:47:34     15224     +2104     2238  —       
+  9ae9b4e25 2026-07-19T12:49:52     15537      +313     2285  —       
+  5c83ea4fc 2026-07-19T14:37:59     17944     +2407     2602  —       
+  a58aa6177 2026-07-19T15:41:05     20705     +2761     3026  —       
+  fa35224ba 2026-07-19T15:55:01     22555     +1850     3299  —       
+  240868deb 2026-07-19T17:45:12     25059     +2504     3664  —       
+  35ee52824 2026-07-19T19:50:00     27120     +2061     3946  —       
+  9aca2a525 2026-07-19T20:22:27     28649     +1529     4168  —       
+  0255001f3 2026-07-19T21:05:17     30833     +2184     4462  —       
+  ee3695e24 2026-07-19T23:03:59     33191     +2358     4788  —       
+  e1b8fb21c 2026-07-19T23:21:30     36753     +3562     5316  —       
+  b4da72d50 2026-07-21T01:52:23     38143     +1390     5527  —       
+  561205176 2026-07-21T10:31:55     39681     +1538     5781  —       
+  400f47456 2026-07-21T11:21:10     41113     +1432     6006  —       
+  ea46754e4 2026-07-29T10:22:09     50681     +9568     7482  mg-1fdb 
+  f63b47b26 2026-07-29T11:23:28     53985     +3304     8029  mg-859d 
+  e139da38d 2026-07-29T11:39:26     69654    +15669    10507  mg-23f5 
+  bc7527425 2026-07-29T12:39:19     89986    +20332    13848  mg-c7b7 
+  eefd47f3f 2026-07-29T13:28:36    107194    +17208    16557  mg-7abf 
+  c50ce32f3 2026-07-29T19:00:49    112403     +5209    17403  mg-60d3 
+  c0cf10479 2026-07-30T03:17:27    126108    +13705    19585  mg-78c0 
+  db08b4c98 2026-07-30T04:08:08    144334    +18226    22519  mg-1319 
+  16bee7981 2026-07-30T05:29:38    165178    +20844    25856  mg-a806 
+  5b6303763 2026-07-30T05:32:23    165317      +139    25880  mg-a806 
+  1e6103185 2026-07-30T07:18:50    174488     +9171    27429  mg-a2bd 
+  ba3ec79d2 2026-07-30T08:17:40    184607    +10119    29098  mg-f2e1 
+  d5a3043ab 2026-07-30T11:18:18    191007     +6400    30107  mg-7d5a 
+  60f4dac0b 2026-07-30T12:38:27    192898     +1891    30388  mg-3f21 
+  57f962f19 2026-07-30T13:17:18    164577    -28321    25472  mg-34bf   <<< CUT
+  bdcb0069e 2026-07-30T13:20:26    172440     +7863    26741  mg-ae62 
+  672915e48 2026-07-30T13:47:47    175377     +2937    27224  mg-a053 
+  b68db5d42 2026-07-30T14:14:02    175552      +175    27254  mg-7735 
+  bf177167b 2026-07-30T15:06:04    177464     +1912    27550  mg-2da3 
+  bbe83b5b0 2026-07-30T19:58:41    179344     +1880    27860  mg-e1d0 
+  e16e41cd5 2026-07-30T21:08:08    183253     +3909    28507  mg-8e30 
+  b80dea0ec 2026-07-30T21:47:50    186710     +3457    29094  mg-a318 
+  cc4c663e8 2026-08-06T07:55:07     32772   -153938     4658  mg-ea0e   <<< CUT
+  f85a4e83e 2026-08-06T18:52:48     34573     +1801     4914  mg-2860 
+  905526f8f 2026-08-07T00:34:25     35876     +1303     5122  mg-325c 
+  05a00610c 2026-08-07T01:49:41     37531     +1655     5357  mg-c4f5 
+  d41d18c39 2026-08-07T02:03:47     46344     +8813     6780  mg-957a 
+  bb8d2061f 2026-08-07T02:01:44     47548     +1204     6961  mg-5827 
+  99dc61dc8 2026-08-07T13:58:31     48012      +464     7031  mg-2df8 
+  a682e1d63 2026-08-07T14:07:09     51450     +3438     7544  mg-d1a2 
+  550a7f105 2026-08-07T14:09:56     56437     +4987     8303  mg-345e 
+  4ef64d7aa 2026-08-07T14:14:44     58659     +2222     8666  mg-5ce3 
+  276aead1a 2026-08-07T17:19:33     66038     +7379     9792  mg-55f2 
+  21ee93f29 2026-08-07T19:08:48     70721     +4683    10474  mg-9adf 
+  491d42c79 2026-08-07T20:02:29     84637    +13916    12753  mg-b488 
+  2d549bbb7 2026-08-07T20:55:48     94355     +9718    14246  mg-a83c 
+  6cd5b1d9c 2026-08-07T22:53:44    100569     +6214    15278  mg-bb87 
+  03cabb583 2026-08-09T21:55:38    102247     +1678    15568  mg-77fe 
+  25cc5b2de 2026-08-10T00:29:17    106667     +4420    16245  mg-a1db 
+  641ef4281 2026-08-10T00:58:42    110640     +3973    16861  mg-3329 
+  9efb3df47 2026-08-10T04:29:24    111296      +656    16960  mg-9bc2 
+  4fcbc7138 2026-08-10T04:56:42    111923      +627    17067  mg-2f44 
+  f97710234 2026-08-10T07:10:09    123612    +11689    18969  mg-8d63 
+
+  60 landings.  First 9322 B, last 123612 B.
+
+§1.2  HOW MANY TIMES HAS THIS BEEN CUT, AND WHAT HAPPENED AFTER EACH CUT
+--------------------------------------------------------------------------------------------
+  The ticket says the arc has paid for this twice.  Counted rather than assumed:
+
+  57f962f1 mg-34bf  2026-07-30T13:17:18
+      cut  192898 -> 164577 B  (-28321, 15% of the file)
+      peak 186710 B after 7 landings and 8.5 hours — 78% OF THE CUT UNDONE
+      interrupted by the next cut before it finished
+  cc4c663e mg-ea0e  2026-08-06T07:55:07
+      cut  186710 -> 32772 B  (-153938, 82% of the file)
+      peak 123612 B after 20 landings and 95.3 hours — 59% OF THE CUT UNDONE
+      and it is still growing: 123612 B at HEAD
+
+  CUTS FOUND: 2.  Every one was substantially undone; the fastest was mg-34bf at
+  78% within 8.5 hours.
+  THE TICKET NAMES ONE CUT (mg-ea0e).  There are 2: mg-34bf cut first, on 2026-07-30, and was
+  78% undone in 8.5 hours — seven days before mg-ea0e cut the same file
+  again.  So mg-ea0e was not the first cleanup with no mechanism —
+  it was the SECOND, and the first one's failure was already on the record when
+  it was planned.  That is the strongest available argument that the missing
+  thing is a mechanism and not more care.
+
+§1.3  WHERE THE 91581 BYTES ADDED SINCE mg-ea0e WENT — by section
+--------------------------------------------------------------------------------------------
+     ea0e B    HEAD B    delta B    share   section
+      18921     66457     +47536    51.9%   Attempt index (so nothing is re-walked)
+       3078     16937     +13859    15.1%   Full ledger
+        948     12137     +11189    12.2%   The one-paragraph state
+       1328     10713      +9385    10.2%   The proof, and what's proven
+       1802      4790      +2988     3.3%   Why 1/3 — the elementary anchor (proven)
+          0      2864      +2864     3.1%   Kinds — the standing rule, and it is the point o
+        414      3024      +2610     2.8%   1/3–2/3 Program — State of the Wall
+        910      1673       +763     0.8%   Two axes, one bridge
+       1275      1662       +387     0.4%   Glossary (do not conflate δ and Δ)
+       1551      1551         +0     0.0%   Where the threads converge
+       2223      2223         +0     0.0%   The single lemma to prove
+        323       323         +0     0.0%   Appendix A — Audit-stage process (durable home f
+
+§1.4  NEW ROWS, OR OLD ROWS GETTING LONGER?  (the question that decides the remedy)
+--------------------------------------------------------------------------------------------
+  If old rows are swelling, the content has nowhere else to go and a cap on the
+  total will start failing every landing.  If the section is GAINING ROWS, each
+  row is a self-contained document and `docs/state-history/` is where it goes.
+
+  ## Attempt index   rows 24 -> 29
+       +44837 chars from 5 NEW rows      (mean 8967 chars/row)
+        +1648 chars from 24 KEPT rows growing in place
+      P1: new 44837 vs in-place 1648 = 27.2x  ->  HIT
+      The 5 new rows, longest first:
+         11438 chars | the two **L2-free routes to `C₃ = 1`** — `(F)` and `(M♯)` — 
+         11399 chars | what does **PER-SLOT adjacency symmetry** — `J_k(x,y) = J_k(
+         11294 chars | is `C₃` — `Op-Form §4.3`'s prefix-capture constant, the `C₃`
+          6104 chars | mg-6bc2 §5's **aggregate vs per-slot** adjacency measurement
+          4602 chars | is the pair-bias derivation of `ε_spec` **INDEPENDENT** of L
+
+  ### Full ledger    rows 13 -> 13
+           +0 chars from 0 NEW rows      (mean 0 chars/row)
+       +13044 chars from 13 KEPT rows growing in place
+      P2: 0 new rows, +13044 in place  ->  HIT
+
+  SO THE TWO HALVES GROW BY TWO DIFFERENT MECHANISMS.  The attempt index gains
+  whole documents; the ledger's fixed 13 rows absorb qualifications in place.
+  'STATE.md is big' explains neither and prescribes nothing.
+
+§2  DOES IT BELONG HERE — was there a destination, and was it used?
+--------------------------------------------------------------------------------------------
+  docs/state-history exists at HEAD and holds 14 files.
+  It was created by mg-ea0e as the home for exactly this content.
+
+  Landings that changed STATE.md since mg-ea0e: 20
+     1 ALSO wrote to docs/state-history : mg-55f2
+    19 wrote to STATE.md and NOTHING to docs/state-history:
+       mg-8d63, mg-2f44, mg-9bc2, mg-3329, mg-a1db, mg-77fe, mg-bb87, mg-a83c, mg-b488, mg-9adf, mg-5ce3, mg-345e, mg-d1a2, mg-2df8, mg-5827, mg-957a, mg-c4f5, mg-325c, mg-2860
+
+  P4: HIT
+
+  READING.  The destination is not missing and it is not unknown — it is four
+  days old, it is in the same repository, and 1 of 20 landings used it.  So the
+  growth is NOT content with nowhere to go, and the ticket's first hazard — that a
+  ratchet would 'simply relocate the problem' — has a destination to relocate to.
+  What was missing was not a home.  It was anything that ASKED.
+
+§3  IS 6,000 WORDS THE RIGHT TARGET?  Decided against §1.4, not asserted
+--------------------------------------------------------------------------------------------
+  HEAD                                         19077 words
+  minus every attempt-index row added since   - 7351 words   (44837 chars, 5 rows)
+  = residue if ALL of it were relocated        11726 words
+  mg-ea0e's stated target                       6000 words
+  mg-ea0e's own landed value                    4658 words
+
+  P3: HIT — 11726 > 6000 is TRUE
+
+  DECIDED: 6,000 WORDS IS NOT THE THRESHOLD THIS RATCHET GETS SET TO, and the
+  reason is not that the target was wrong when mg-ea0e chose it.  It is that a
+  gate set to 6,000 today is RED ON ARRIVAL — 13077 words over — and would block
+  every merge in this repository from the moment it landed, for a reason no
+  author of an unrelated branch can act on.  gate.py's own docstring refuses
+  exactly that construction, in those words, about a different suite.
+
+  A ratchet is not a target.  It is a MONOTONE FLOOR UNDER A REGRESSION: it
+  says the file does not get bigger than it is now without somebody saying so
+  in writing.  Set it where the file stands and it binds from today; set it at
+  an aspiration nobody has met and it is either removed within a week or
+  suppressed, and a suppressed control is worse than none (mg-d91f).
+
+  THE 6,000-WORD TARGET IS NOT WITHDRAWN AND IT IS NOT MINE TO WITHDRAW.  It
+  remains what mg-ea0e aimed at and what `docs/state-history/` was built to
+  make reachable.  The gap is 13077 words and it is a DEBT with a named remedy
+  (relocate attempt rows to their per-attempt files), not a number to assert
+  into a config file and call enforced.  Every landing that pays some of it
+  down must lower the ceiling in the same commit — which is what the
+  SLACK-UNRATCHETED half of the rule exists to force, and it is the half that
+  makes this a ratchet rather than a cap.
+
+============================================================================================
+PREDICTIONS SCORED BY THIS PRODUCER
+--------------------------------------------------------------------------------------------
+  P-H2  HIT    MEASUREMENT (not a bet): mg-ea0e is not the first cut          2 cuts of >1000 B found; earliest mg-34bf
+  P1    HIT    new-row bytes >= 5x in-place growth in the attempt index       44837 vs 1648 = 27.2x
+  P2    HIT    ledger gained ZERO rows and grew entirely in place             0 new rows, +13044 chars in place
+  P3    HIT    residue after full relocation still exceeds 6,000 words        11726 words residue vs 6000 target
+  P4    HIT    at least 3 growth landings wrote nothing to the destination    19 of 20 wrote nothing there
+
+P1_GROWTH VERDICT: characterised — 60 landings, 2 cuts, growth is NEW ROWS in the attempt index and IN-PLACE in the ledger
+============================================================================================
