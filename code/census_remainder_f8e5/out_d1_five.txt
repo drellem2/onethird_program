@@ -1,7 +1,7 @@
 ==============================================================================
 d1 -- THE FIVE FALSE RECORDS, DISPOSED OF ONE AT A TIME
 ==============================================================================
-    code-digest: 0606c02932209f76   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    code-digest: 8a0e0d1a12ee6419   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
     NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
     reads-outside-tree: yes
     ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
@@ -30,27 +30,21 @@ D1b -- code/audit_c067/out_c1_rebase.txt
 ------------------------------------------------------------------------------
     carrying commit : 47e56b3bd628
     producer        : "c1_rebase.py" "$@"   (as code/audit_c067's own run_all.sh spells it)
-    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 0s, exit 127
+    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 80s, exit 1, status ok
 
     bytes identical : no
     mg-1abe grain   : FLIPS   (census said FLIPS)
 
     WHAT THE ARTIFACT ASSERTS -- decision rows in the committed bytes that the
-    re-run does NOT emit (8):
+    re-run does NOT emit (1):
       - [CONFIRMED] C1a mg-132a's 5 commit(s) were REPLAYED onto a larger tree by the merge, and 5 of them landed on a tree with a DIFFERENT `code/` populatio
-      - [CONFIRMED] C1a mg-132a's 5 commit(s) were REPLAYED onto a larger tree by the merge, and 5 of them landed on a tree with a DIFFERENT `code/` populatio
-      - [CONFIRMED] C1a mg-132a's 5 commit(s) were REPLAYED onto a larger tree by the merge, and 5 of them landed on a tree with a DIFFERENT `code/` populatio
-      - [CONFIRMED] C1a mg-132a's 5 commit(s) were REPLAYED onto a larger tree by the merge, and 5 of them landed on a tree with a DIFFERENT `code/` populatio
-      - [CONFIRMED] C1a mg-132a's 5 commit(s) were REPLAYED onto a larger tree by the merge, and 5 of them landed on a tree with a DIFFERENT `code/` populatio
-      - [FINDING ] C1a'' ⚠️ AND THE EXPOSURE NARROWED WHILE THIS AUDIT WAS RUNNING. The first execution of this script resolved the pre-rebase commits through
-      - [MEASURED ] C1b 3 of the 4 predicted exit code(s) MISSED: de39eb6, 1e30484, cb9f282. ⚠️ THE PREDICTION WAS THAT `A3a` WOULD GO RED, on the reasoning t
-      - [MEASURED ] C1b 3 of the 4 predicted exit code(s) MISSED: de39eb6, 1e30484, cb9f282. ⚠️ THE PREDICTION WAS THAT `A3a` WOULD GO RED, on the reasoning t
     WHAT IS TRUE AT ITS COMMIT -- decision rows the re-run emits that the
-    committed bytes do NOT carry (0):
+    committed bytes do NOT carry (1):
+      + [REFUTED ] C1a mg-132a's 0 commit(s) were REPLAYED onto a larger tree by the merge, and 0 of them landed on a tree with a DIFFERENT `code/` population
 
     commits it names that resolve but hang off NO REF : 0
     producer reads repository-global state (STATIC PROXY): yes -- c1_rebase.py:47, c2_anchors.py:8, c3_shopping.py:8
-[MEASURED ] D1b code/audit_c067/out_c1_rebase.txt: FLIP re-derived -- 8 decision row(s) lost, 0 gained
+[MEASURED ] D1b code/audit_c067/out_c1_rebase.txt: FLIP re-derived -- 1 decision row(s) lost, 1 gained
 
 ------------------------------------------------------------------------------
 D1c -- WHICH REVISION IS IT ACTUALLY A FACT ABOUT? (out_c1_rebase.txt)
@@ -63,14 +57,14 @@ state.  This is mg-1abe's own device for mg-b2af's twin and it carries the same
 caveat: byte equality here says the transcript is a fact about that TREE, not
 that it was produced by that COMMIT.
 
-      de39eb6d7301  differs  (0s)
-      2cfd226164c0  differs  (0s)
-      1e304840524b  differs  (0s)
-      4a06b4cd000e  differs  (0s)
-      a91cf9ea268d  differs  (0s)
-      89d6aa1bf0c7  differs  (0s)
-      cb9f282914bc  differs  (0s)
-      7dc91808eb58  differs  (0s)
+      de39eb6d7301  differs  (64s)
+      2cfd226164c0  differs  (55s)
+      1e304840524b  differs  (56s)
+      4a06b4cd000e  differs  (59s)
+      a91cf9ea268d  differs  (56s)
+      89d6aa1bf0c7  differs  (61s)
+      cb9f282914bc  differs  (55s)
+      7dc91808eb58  differs  (53s)
 [MEASURED ] D1c out_c1_rebase.txt: reproduces at NONE of the 8 revisions it names; the tree it is a fact about was never committed, or is not named in its own bytes
 
 ------------------------------------------------------------------------------
@@ -78,22 +72,23 @@ D1b -- code/hash_population_6e58/out_p2_population.txt
 ------------------------------------------------------------------------------
     carrying commit : fe6a4952a2fb
     producer        : "p2_population.py"   (as code/hash_population_6e58's own run_all.sh spells it)
-    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 0s, exit 127
+    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 2s, exit 1, status ok
 
     bytes identical : no
     mg-1abe grain   : FLIPS   (census said FLIPS)
 
     WHAT THE ARTIFACT ASSERTS -- decision rows in the committed bytes that the
-    re-run does NOT emit (3):
-      - FINDINGS: 1, population: `git log` call sites in `code/**/*.py` at this tree
+    re-run does NOT emit (2):
       - SELF-ERRORS: 0, population: this script's own classification, checked against mg-330a's over the same ast.Call nodes
       - TOTAL BAD: 1
     WHAT IS TRUE AT ITS COMMIT -- decision rows the re-run emits that the
-    committed bytes do NOT carry (0):
+    committed bytes do NOT carry (2):
+      + SELF-ERRORS: 1, population: this script's own classification, checked against mg-330a's over the same ast.Call nodes
+      + TOTAL BAD: 2
 
     commits it names that resolve but hang off NO REF : 0
     producer reads repository-global state (STATIC PROXY): yes -- lib6e58.py:217, p1_ways.py:1, p2_population.py:20
-[MEASURED ] D1b code/hash_population_6e58/out_p2_population.txt: FLIP re-derived -- 3 decision row(s) lost, 0 gained
+[MEASURED ] D1b code/hash_population_6e58/out_p2_population.txt: FLIP re-derived -- 2 decision row(s) lost, 2 gained
 
 ------------------------------------------------------------------------------
 D1c -- WHICH REVISION IS IT ACTUALLY A FACT ABOUT? (out_p2_population.txt)
@@ -113,22 +108,23 @@ D1b -- code/hash_population_6e58/out_p3_unrestricted.txt
 ------------------------------------------------------------------------------
     carrying commit : fe6a4952a2fb
     producer        : "p3_unrestricted.py"   (as code/hash_population_6e58's own run_all.sh spells it)
-    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 0s, exit 127
+    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 7s, exit 1, status ok
 
     bytes identical : no
     mg-1abe grain   : FLIPS   (census said FLIPS)
 
     WHAT THE ARTIFACT ASSERTS -- decision rows in the committed bytes that the
-    re-run does NOT emit (3):
-      - FINDINGS: 2, population: the `UNRESTRICTED` claim in mg-b2af's STILL-OPEN list
+    re-run does NOT emit (2):
       - SELF-ERRORS: 0, population: this script's reading of `code/repair_b2af/README.md`
       - TOTAL BAD: 2
     WHAT IS TRUE AT ITS COMMIT -- decision rows the re-run emits that the
-    committed bytes do NOT carry (0):
+    committed bytes do NOT carry (2):
+      + SELF-ERRORS: 1, population: this script's reading of `code/repair_b2af/README.md`
+      + TOTAL BAD: 3
 
     commits it names that resolve but hang off NO REF : 0
     producer reads repository-global state (STATIC PROXY): yes -- lib6e58.py:217, p1_ways.py:1, p2_population.py:20
-[MEASURED ] D1b code/hash_population_6e58/out_p3_unrestricted.txt: FLIP re-derived -- 3 decision row(s) lost, 0 gained
+[MEASURED ] D1b code/hash_population_6e58/out_p3_unrestricted.txt: FLIP re-derived -- 2 decision row(s) lost, 2 gained
 
 ------------------------------------------------------------------------------
 D1c -- WHICH REVISION IS IT ACTUALLY A FACT ABOUT? (out_p3_unrestricted.txt)
@@ -143,7 +139,7 @@ that it was produced by that COMMIT.
 
       fba5f6351a1d  differs  (0s)
       b94cb1ed671c  differs  (0s)
-      b1c34670f329  differs  (0s)
+      b1c34670f329  differs  (7s)
 [MEASURED ] D1c out_p3_unrestricted.txt: reproduces at NONE of the 3 revisions it names; the tree it is a fact about was never committed, or is not named in its own bytes
 
 ------------------------------------------------------------------------------
@@ -151,75 +147,20 @@ D1b -- code/hodge_leverage_audit_f922/out_audit.txt
 ------------------------------------------------------------------------------
     carrying commit : 553033ae7d90
     producer        : audit_repair.py   (as code/hodge_leverage_audit_f922's own run_all.sh spells it)
-    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 0s, exit 127
+    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 5s, exit 1, status ok
 
     bytes identical : no
     mg-1abe grain   : FLIPS   (census said FLIPS)
 
     WHAT THE ARTIFACT ASSERTS -- decision rows in the committed bytes that the
-    re-run does NOT emit (56):
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [CONFIRMED] the STATE.md cell went 13,551 -> 16,692 across `1e61031` -- the audit's two figures, re-derived
-      - [ENLARGEMENT STATED] STATE.md
-      - [ENLARGEMENT STATED] STATE.md
-      - [ENLARGEMENT STATED] STATE.md
-      - [ENLARGEMENT STATED] STATE.md
-      - [FINDING ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker:
-      - [FINDING ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker:
-      - [FINDING ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker:
-      - [FINDING ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker:
-      - [FINDING ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker:
-      - [FINDING ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker:
-      - [FINDING ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker:
-      - [FINDING ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker:
-      - [FINDING ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker:
-      - [FINDING ] F-A -- the one document that states A5 verbatim -- docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md -- carries NO marker:
-      - [NOT STATED ] docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md
-      - [NOT STATED ] docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md
-      - [NOT STATED ] docs/OneThird-Hodge-Side-Leverage-StateLanding-IndependentAudit.md
+    re-run does NOT emit (0):
     WHAT IS TRUE AT ITS COMMIT -- decision rows the re-run emits that the
-    committed bytes do NOT carry (0):
+    committed bytes do NOT carry (1):
+      + [ENLARGEMENT STATED] STATE.md
 
     commits it names that resolve but hang off NO REF : 0
     producer reads repository-global state (STATIC PROXY): yes -- audit_repair.py:158
-[MEASURED ] D1b code/hodge_leverage_audit_f922/out_audit.txt: FLIP re-derived -- 56 decision row(s) lost, 0 gained
+[MEASURED ] D1b code/hodge_leverage_audit_f922/out_audit.txt: FLIP re-derived -- 0 decision row(s) lost, 1 gained
 
 ------------------------------------------------------------------------------
 D1c -- WHICH REVISION IS IT ACTUALLY A FACT ABOUT? (out_audit.txt)
@@ -232,73 +173,36 @@ state.  This is mg-1abe's own device for mg-b2af's twin and it carries the same
 caveat: byte equality here says the transcript is a fact about that TREE, not
 that it was produced by that COMMIT.
 
-      bbe83b5b007b  differs  (0s)
+      bbe83b5b007b  IDENTICAL  (5s)
       522048f6cb94  differs  (0s)
       1e6103185361  differs  (0s)
       6c0f0da391b5  differs  (0s)
-      3756553dd735  differs  (0s)
+      3756553dd735  IDENTICAL  (5s)
       a13b4a995c34  differs  (0s)
-[MEASURED ] D1c out_audit.txt: reproduces at NONE of the 6 revisions it names; the tree it is a fact about was never committed, or is not named in its own bytes
+[MEASURED ] D1c out_audit.txt: reproduces EXACTLY at bbe83b5b007b -- that is the revision it is a fact about
 
 ------------------------------------------------------------------------------
 D1b -- code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt
 ------------------------------------------------------------------------------
     carrying commit : 3bf0cd206bbf
     producer        : repair_9207.py --full   (as code/hodge_leverage_repair_ff3e's own run_all.sh spells it)
-    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 0s, exit 127
+    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 1470s, exit 0, status ok
 
-    bytes identical : no
-    mg-1abe grain   : FLIPS   (census said FLIPS)
+    bytes identical : YES
+    mg-1abe grain   : HELD   (census said FLIPS)
 
     WHAT THE ARTIFACT ASSERTS -- decision rows in the committed bytes that the
-    re-run does NOT emit (27):
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [CONFIRMED] R1a the real runner on the clean tree exits 0 with 0 refuted rows
-      - [MEASURED ] R1f 1 of 7 runs exited by TRACEBACK rather than by the gate -- E2, and only E2, because mg-8eca's `transpose` asserts on a literal E2 rewr
-      - [MEASURED ] R1f 1 of 7 runs exited by TRACEBACK rather than by the gate -- E2, and only E2, because mg-8eca's `transpose` asserts on a literal E2 rewr
-      - [MEASURED ] R1f 1 of 7 runs exited by TRACEBACK rather than by the gate -- E2, and only E2, because mg-8eca's `transpose` asserts on a literal E2 rewr
-      - [MEASURED ] R1f 1 of 7 runs exited by TRACEBACK rather than by the gate -- E2, and only E2, because mg-8eca's `transpose` asserts on a literal E2 rewr
+    re-run does NOT emit (0):
     WHAT IS TRUE AT ITS COMMIT -- decision rows the re-run emits that the
     committed bytes do NOT carry (0):
 
     commits it names that resolve but hang off NO REF : 0
     producer reads repository-global state (STATIC PROXY): no
-[MEASURED ] D1b code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt: FLIP re-derived -- 27 decision row(s) lost, 0 gained
+[FINDING  ] D1b code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt REPRODUCES for me where mg-1abe measured DIFFERS. That is a finding about the census, printed rather than dropped to keep the number at five (PREDICTIONS E9)
 
-------------------------------------------------------------------------------
-D1c -- WHICH REVISION IS IT ACTUALLY A FACT ABOUT? (out_repair_ff3e.txt)
-------------------------------------------------------------------------------
-⚠️ SYNTHETIC STATE, declared.  Each candidate below is a revision the
-transcript NAMES IN ITS OWN BYTES.  The producing directory is checked out from
-the CARRYING commit on top of that revision's tree, because the candidate's own
-tree may not contain the suite at all.  Nobody ever committed the resulting
-state.  This is mg-1abe's own device for mg-b2af's twin and it carries the same
-caveat: byte equality here says the transcript is a fact about that TREE, not
-that it was produced by that COMMIT.
-
-      bbe83b5b007b  differs  (0s)
-[MEASURED ] D1c out_repair_ff3e.txt: reproduces at NONE of the 1 revisions it names; the tree it is a fact about was never committed, or is not named in its own bytes
+    ARM B           : SKIPPED -- ARM A took 1470s against a 300s budget.  This transcript's
+                      'which revision is it a fact about' question is NOT ANSWERED here, and
+                      that is a budget, not a verdict.  `--armb-budget 1530` runs it.
 
 ------------------------------------------------------------------------------
 D1d -- THE ADJUDICATION: WHICH OF THE FIVE IS THE RECORD WRONG?
@@ -320,11 +224,11 @@ THE RULE, stated before the table so it can be disagreed with:
   numbers without re-running anything.
 
     transcript                                           cause              evidence
-    audit_c067/out_c1_rebase.txt                         RECORD-IS-FALSE    0 unreachable, -8/+0 rows
-    hash_population_6e58/out_p2_population.txt           RECORD-IS-FALSE    0 unreachable, -3/+0 rows
-    hash_population_6e58/out_p3_unrestricted.txt         RECORD-IS-FALSE    0 unreachable, -3/+0 rows
-    hodge_leverage_audit_f922/out_audit.txt              RECORD-IS-FALSE    0 unreachable, -56/+0 rows
-    hodge_leverage_repair_ff3e/out_repair_ff3e.txt       RECORD-IS-FALSE    0 unreachable, -27/+0 rows
+    audit_c067/out_c1_rebase.txt                         RECORD-IS-FALSE    0 unreachable, -1/+1 rows
+    hash_population_6e58/out_p2_population.txt           RECORD-IS-FALSE    0 unreachable, -2/+2 rows
+    hash_population_6e58/out_p3_unrestricted.txt         RECORD-IS-FALSE    0 unreachable, -2/+2 rows
+    hodge_leverage_audit_f922/out_audit.txt              RECORD-IS-FALSE    0 unreachable, -0/+1 rows
+    hodge_leverage_repair_ff3e/out_repair_ff3e.txt       RECORD-IS-FALSE    0 unreachable, -0/+0 rows
 [MEASURED ] D1d of the 5 re-derived FLIPS, 5 are RECORD-IS-FALSE and 0 are RERUN-CANNOT-SEE.  The second class is NOT damage to the record and its remedy is the opposite one
 
 ------------------------------------------------------------------------------
@@ -364,6 +268,7 @@ whether the producer reads repository-global state:
         remedy : ANNOTATE (unpinnable under R2)
         because: its producer's population is the repository, so no tree digest can pin it and a re-run is stale at the next commit anyone makes. What it needs is to SAY which revision it is a fact about.
         names its own carrying commit in its bytes: no
+        it is a fact about the tree at: bbe83b5b007b
     code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt
         cause  : RECORD-IS-FALSE
         remedy : RE-RUN AND RE-COMMIT
@@ -373,5 +278,5 @@ whether the producer reads repository-global state:
 [FINDING  ] D1e' NOTHING IN ANOTHER TICKET'S DIRECTORY IS EDITED BY THIS SCRIPT.  The remedies above are a DISPOSAL RECORD, not an edit: mg-1abe's rule is that a transcript which does not reproduce is a MEASUREMENT and overwriting it destroys it, and 0 of the 5 carry a remedy that forbids re-running outright
 
 SELF-ERRORS 0
-FINDINGS 1
-TOTAL BAD: 1
+FINDINGS 2
+TOTAL BAD: 2

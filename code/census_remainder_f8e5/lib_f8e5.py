@@ -414,6 +414,84 @@ def static_reach(directory, rev):
     return (bool(hits), hits)
 
 
+# ------------------------------------- a hard-coded window on a moving ref
+
+# THE SECOND WAY AN INSTRUMENT GOES BLIND, and the one my first adjudication
+# rule missed.  `code/audit_c067/c1_rebase.py` finds mg-132a's pre-rebase
+# commits by matching them, BY SUBJECT, against `git log main -n 40`.  Its
+# docstring guards the REF by name -- "any single ref name here is a hard-coded
+# anchor of exactly the kind this audit exists to complain about" -- and leaves
+# the WINDOW hard-coded three lines below it.  `main` has since grown far past
+# 40 commits, the subjects fall off the end of the walk, and the re-run reports
+# `0 commit(s) were REPLAYED` where the record says 5.
+#
+# NOTHING DIED.  The objects resolve, `origin/polecat-132a` still points at
+# them, and all five twins are still on `main` -- re-derived unbounded by
+# `twin_by_subject` below.  The record is TRUE; the SEARCH shrank.
+_RE_WINDOW = re.compile(
+    r"""(?x)
+    (?: ["'](?:log|rev-list)["'] [^)\n]*? ["'](?P<ref1>main|HEAD|origin/main)["']
+        [^)\n]*? ["']-n["'] \s*, \s* ["'](?P<n1>\d+)["']
+      | ["'](?:log|rev-list)["'] [^)\n]*? ["']-n["'] \s*, \s* ["'](?P<n2>\d+)["']
+        [^)\n]*? ["'](?P<ref2>main|HEAD|origin/main)["']
+      | git \s+ (?:log|rev-list) [^\n]*? \b(?P<ref3>main|HEAD|origin/main)\b
+        [^\n]*? -n \s* (?P<n3>\d+)
+    )""")
+
+
+def history_windows(directory, rev):
+    """[(site, ref, n)] -- walks over a MOVING REF bounded by a LITERAL count.
+
+    A STATIC read, and its limit is the same as every other static read here:
+    it establishes that the producer CAN go blind this way, not that these
+    bytes did.  `commits_between` is what turns it into a measurement.
+    """
+    out = []
+    for line in git("ls-tree", "-r", "%s:%s" % (rev, directory)).split("\n"):
+        if "\t" not in line:
+            continue
+        name = line.split("\t", 1)[1]
+        if not name.endswith((".py", ".sh")):
+            continue
+        blob = blob_at(rev, "%s/%s" % (directory, name))
+        if blob is None:
+            continue
+        text = blob.decode("utf-8", "replace")
+        for m in _RE_WINDOW.finditer(text):
+            ref = m.group("ref1") or m.group("ref2") or m.group("ref3")
+            n = m.group("n1") or m.group("n2") or m.group("n3")
+            out.append(("%s:%d" % (name, text[:m.start()].count("\n") + 1),
+                        ref, int(n)))
+    return out
+
+
+def commits_between(a, b):
+    """How many commits `b` has that `a` does not.  -1 if it cannot be counted."""
+    out = git("rev-list", "--count", "%s..%s" % (a, b)).strip()
+    try:
+        return int(out)
+    except ValueError:
+        return -1
+
+
+def twin_by_subject(sha, rev="main"):
+    """The commit ON `rev` carrying the same subject as `sha`, or None.
+
+    mg-1abe's Class-1 device -- STALE, NOT LOST -- pointed at a different
+    question: not `is this identifier still valid` but `can the thing the
+    record asserts still be checked at all`.  Unbounded on purpose: the whole
+    point is that the producer's own walk was not.
+    """
+    subj = git("log", "-1", "--format=%s", sha).strip()
+    if not subj:
+        return None
+    for line in git("log", "--format=%H%x1f%s", rev).split("\n"):
+        h, _, s = line.partition("\x1f")
+        if s == subj and h != sha:
+            return h
+    return None
+
+
 # ------------------------------------------------ the moving-ref detector
 
 # mg-1abe's own defect 2: its scripts each resolved `main` at their own start
