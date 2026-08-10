@@ -176,8 +176,28 @@ timestamp is that argument with the volume up.
 
 **The covariate has a hole and it is in the worst place.** Sampling began at
 group 26 of 164, so the first 25 groups — which ran under the *highest* load —
-have no rows. `a5`'s A5a prints the size of that hole before drawing any
-conclusion from the part that was sampled.
+have no rows. **The covariate's blind spot and the confound's worst region are
+the same rows.** `a5`'s A5a prints the size of that hole before drawing any
+conclusion from the part that was sampled, and nothing is backfilled by
+estimation: an absent row is honest, an inferred one is not.
+
+### And therefore the count is a candidate set, not an answer
+
+A 20× excursion lasting minutes, against a 900-second budget, means `TIMED-OUT`
+is dominated by **when** a group was scheduled rather than by what its code
+does. So the full run yields a **candidate set**, and `a6` is the discriminator
+pm-onethird asked for: the same subset, the same as-of, the same 900 s budget,
+**only the machine differs.**
+
+| | |
+|---|---|
+| times out at load 129 **and** at load 8 | **slow code** — the only figure that is a statement about the arc |
+| reproduces cleanly at load 8 | **machine artefact** — and the pre-repair census would have called each of these a non-reproduction, and where the transcript carries a decision, a *false record* |
+
+Neither run alone separates those; the pair does. `a6`'s A6d compares the load
+it sampled during its own subprocess against the covariate from the full run and
+**refuses the contrast** if the second run was not materially quieter — a
+discriminator that cannot tell you it failed to discriminate is not one.
 
 **And the `31.5` in the ticket thread is not a reading from this run.** It was
 taken at 07:27Z, during the first attempt, which was killed at ~07:30Z (D7). The
@@ -374,6 +394,7 @@ quietly widened into.
 | `a3_endtoend.py` | the census's own `t2_census.py`, unmodified, at a budget it cannot meet |
 | `a4_size107.py` | the two censuses of one population, transitioned row by row |
 | `a5_covariate.py` | the `TIMED-OUT` count against the machine load that produced it |
+| `a6_quiet.py` | **the discriminator.** The `TIMED-OUT` subset re-run at the same budget on a quiet box, with an arm that refuses the contrast if the box was not actually quieter |
 | `covariate_load_by_group.tsv` | **evidence, not a product.** Sampled every 15 s by a process outside the census during the re-run; cannot be regenerated. Not named `out_*.txt`, so it is not a transcript and does not join the census's population |
 | `prior_1abe_t2_census_at_81214a9.txt` | the PRIOR census, verbatim. Not overwritten, not summarised |
 | `prior_1abe_t1_population_at_81214a9.txt` | its population transcript, likewise |

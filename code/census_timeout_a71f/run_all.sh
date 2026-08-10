@@ -29,6 +29,12 @@
 #   a4  prior DIFFERS rows that this run declines to measure
 #   a5  the covariate has a hole in it, and a hole is a FINDING about the
 #       measurement rather than a fault in this instrument
+#   a6  candidates that reproduce on a quiet box, and candidates that do not
+#
+# ⚠️ `a6` IS THE EXPENSIVE ONE AFTER THE CENSUS ITSELF.  It re-runs the full
+# run's TIMED-OUT subset at the SAME 900 s budget, so its worst case is
+# (groups / jobs) * 900 s.  It is the discriminator between `this suite is
+# slow` and `the box was busy`, and neither run alone can tell those apart.
 # EXPECTED zero:
 #   a0  the parsers agree with their planted worlds
 #   a3  the repaired bucket fires end to end
@@ -49,7 +55,7 @@
 cd "$(dirname "$0")" || exit 2
 
 WORST=0
-for s in a0_selftest a1_bucket a2_c067_annotation a3_endtoend a4_size107 a5_covariate; do
+for s in a0_selftest a1_bucket a2_c067_annotation a3_endtoend a4_size107 a5_covariate a6_quiet; do
     printf '===> %s\n' "$s"
     python3 -W ignore "$s.py" "$@" > "out_$s.txt" 2>&1
     RC=$?
