@@ -218,12 +218,29 @@ def check(state_text, twin_text, state_sha):
     elif pinned_sha == state_sha:
         emit("  PASS  STATE.md is byte-identical to the revision the twin was pinned against.")
     else:
-        worst = max(worst, 1)
+        # SECTION 3 NO LONGER GRADES, AND THE OLD LINE CONTRADICTED THE FOUR IT PRINTS BELOW
+        # (mg-188d).  It ran `worst = max(worst, 1)` while telling the reader in as many words
+        # that this state "is NOT a defect and must not be read as one" and that "section 2 is
+        # the check that carries the verdict".  COVERAGE.md says the same thing twice more.
+        # The contradiction was UNREACHABLE for as long as it existed: rows 8 and 9 had been
+        # drifted since the pin was seeded, so section 2 was never 0 while section 3 was 1, and
+        # nothing could tell which section the exit code came from.
+        #
+        # mg-188d reconciled row 8, section 2 went clean, and the state became reachable — and
+        # it is not merely reachable, it is what the NEXT STATE.md landing produces, prose or
+        # ledger.  MEASURED on this branch before the fix: one appended comment line took
+        # twin_pin.py to exit 1 with an EMPTY worklist, the runner's DRIFT branch printed a
+        # verdict naming "section 2's worklist" over a section 2 that had named nothing, and
+        # then exited 2 BROKEN.  So the first clean twin in this page's history would have made
+        # the merge gate red-broken for the next author to touch STATE.md at all, for a reason
+        # they could not act on.  Section 3 is a REPORT — mg-724a's word is `recorded`, a dated
+        # reading expected to go stale — and section 2 is the expectation.
         emit("  DIFFERS  STATE.md has changed since the pin.")
-        emit("           This alone is NOT a defect and must not be read as one: STATE.md")
-        emit("           changes constantly outside the ledger, and section 2 is the check")
-        emit("           that carries the verdict.  This line exists so that 'the ledger is")
-        emit("           unmoved' cannot be mistaken for 'the file is unmoved'.")
+        emit("           This alone is NOT a defect and must not be read as one, and it no")
+        emit("           longer grades: STATE.md changes constantly outside the ledger, and")
+        emit("           section 2 is the check that carries the verdict.  This line exists so")
+        emit("           that 'the ledger is unmoved' cannot be mistaken for 'the file is")
+        emit("           unmoved'.  A MISSING or MALFORMED digest is still structural (above).")
     emit()
 
     # ---------------------------------------------------------------- section 4

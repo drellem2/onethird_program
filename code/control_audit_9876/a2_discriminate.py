@@ -31,6 +31,7 @@ and conflating them would flatter both.  Each is a demonstrated failure with a t
 never a suspicion.
 """
 
+import hashlib
 import io
 import os
 import re
@@ -226,7 +227,32 @@ def p_c2(box):
 
 @probe("C3", "STATE.md is no longer byte-identical to the pinned revision")
 def p_c3(box):
+    """THE GOOD SIDE HAS TO BE MADE GOOD FIRST — C2's own rule, not applied here until mg-188d.
+
+    C2's docstring two hundred lines above states the rule and C2 obeys it; C3 was left with a
+    raw sandbox, and section 3 says `DIFFERS` whenever STATE.md has moved at all — which
+    COVERAGE.md itself calls the NORMAL condition, `DIFFERS on nearly every run and that is not
+    a defect`.  So the predicate was already true on the good input and C3 scored
+    UNFALSIFIABLE.  mg-9876 published that as a standing finding and mg-724a GATED it at
+    `audit.arms_not_shown = 1` so its repair would be deliberate.  This is that repair.
+
+    IT IS ALSO WHY THE FIELD COULD NOT SIMPLY BE RE-BASELINED AT 0.  mg-188d's reconciliation
+    made STATE.md byte-identical to the pin, which made C3 discriminate BY ACCIDENT — and the
+    next STATE.md edit by anybody would have taken it back to UNFALSIFIABLE and turned the
+    merge gate red for an author who could not act on it.  A gated value has to be an
+    EXPECTATION, not a dated reading about whether the corpus happens to be still (mg-724a's
+    own recorded/gated split).  Re-pointing the sandbox's `state-sha256` at the sandbox's OWN
+    STATE.md makes the good side good on every tree, so 0 is stable and means what it says.
+    The digest is COMPUTED from the bytes under test, never typed.
+    """
     sp, tp = _pair(box)
+    with open(sp, "rb") as fh:
+        actual = hashlib.sha256(fh.read()).hexdigest()
+    t, n = re.subn(r"(\n  state-sha256:\s*)[0-9a-f]{64}",
+                   lambda m: m.group(1) + actual, L.read(tp), count=1)
+    if n != 1:
+        raise AssertionError("expected exactly one `state-sha256` field in the pin, found %d" % n)
+    L.write(tp, t)
     good = lambda: L.run_control(sp, tp, _ctl(box))                        # noqa: E731
 
     def bad():
@@ -338,10 +364,48 @@ def _restore(box):
 
 
 def _moved_row(box):
+    """A ledger row whose STATE.md digest differs from the pin — PLANTED if none does.
+
+    THIS IS THE THIRD TIME A FIXTURE IN THIS LINEAGE BORROWED THE SUBJECT'S OWN BROKENNESS,
+    AND THE FIRST TIME THE REPAIR ARRIVED (mg-188d).  R1-R4 all need a row to reconcile, and
+    this helper used to hand them whatever row happened to be drifted in the live tree,
+    returning None when none was.  Row 8 had been drifted since mg-9bc2 seeded the pin, so
+    None was unreachable and nothing said so.  mg-188d reconciled row 8, the tree went CLEAN
+    for the first time, and all four arms came back `SETUP FAILED  TypeError: expected str,
+    bytes or os.PathLike object, not NoneType` — four arms of this instrument destroyed by
+    the subject being FIXED.  That is `C2`'s own docstring two hundred lines above ("the good
+    side has to be MADE good first"), and it is this file's own recorded defect — "two planted
+    worlds in my own selftest were borrowed from the subject under audit, so my repairs
+    destroyed them" — arriving a third time, in the arms that were not looked at when the
+    first two were.
+
+    So the drifted row is now CONSTRUCTED when it is absent, and the construction is DERIVED
+    FROM THE CAPTURED BYTES rather than typed: one row's pinned digest is overwritten with
+    ANOTHER ROW'S pinned digest, both read out of the pin.  Nothing here spells out a row
+    label or a digest, so this cannot rot at the next reconciliation the way the thing it
+    replaces did.  The plant is re-snapshotted, because `_reconcile` restores the pair before
+    every side and would otherwise undo it.
+    """
     sp, tp = _pair(box)
     pin = B.parse_pin(L.read(tp))
     now = B.row_digests(L.read(sp))
-    return next((l for l in now if pin["rows"].get(l) != now[l]), None)
+    label = next((l for l in now if pin["rows"].get(l) != now[l]), None)
+    if label is not None:
+        return label
+
+    labels = sorted(now)
+    label = labels[0]
+    donor = next((l for l in labels[1:] if pin["rows"][l] != pin["rows"][label]), None)
+    if donor is None:
+        raise AssertionError(
+            "cannot plant a drifted row: every pinned digest is identical, so no digest "
+            "read out of this pin differs from any other.  Refusing to type one in.")
+    L.write(tp, re.sub(r"(\n  row %s\s+)[0-9a-f]{16}" % re.escape(label),
+                       lambda m: m.group(1) + pin["rows"][donor], L.read(tp), count=1))
+    if B.parse_pin(L.read(tp))["rows"][label] == now[label]:
+        raise AssertionError("the planted drift did not take: row %s still matches" % label)
+    _snapshot(box)
+    return label
 
 
 @probe("R1", "a re-pin is requested without naming any row")
@@ -366,10 +430,13 @@ def p_r2(box):
 def p_r3(box):
     _snapshot(box)
     sp, tp = _pair(box)
+    # THE ORDER IS LOAD-BEARING: `_moved_row` may PLANT the drift (see its docstring), and a
+    # row read as `unmoved` beforehand can be the very row it plants on.  The pin is therefore
+    # re-read AFTERWARDS, so `unmoved` is unmoved in the tree the two sides actually run in.
+    moved = _moved_row(box)
     pin = B.parse_pin(L.read(tp))
     now = B.row_digests(L.read(sp))
     unmoved = next(l for l in now if pin["rows"].get(l) == now[l])
-    moved = _moved_row(box)
     good = lambda: _reconcile(box, "--rows", moved)                        # noqa: E731
     bad = lambda: _reconcile(box, "--rows", unmoved)                       # noqa: E731
     return good, bad, has("have not moved since the pin")

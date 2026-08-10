@@ -2,7 +2,7 @@
   "schema": 1,
   "declared_by": "mg-724a",
   "declared_against": {
-    "note": "RECORDS, NOT DEPENDENCES.  These shas say which state of the subject the values below were read from.  Nothing in this gate resolves them, and this directory DECLARES NO DEPENDENCE ON THEIR REACHABILITY (mg-223d's convention: 87 directories mention reachability, 0 declared a dependence on it, and the difference is what makes a pin a pin).  If they are pruned, this file is a slightly less useful record and the gate is unaffected.",
+    "note": "RECORDS, NOT DEPENDENCES.  These shas say which state of the subject the values below were read from.  Nothing in this gate resolves them, and this directory DECLARES NO DEPENDENCE ON THEIR REACHABILITY (mg-223d's convention: 87 directories mention reachability, 0 declared a dependence on it, and the difference is what makes a pin a pin).  If they are pruned, this file is a slightly less useful record and the gate is unaffected.  mg-188d re-read every value below against both suites after reconciling ledger row 8; the six moved fields carry their reason in their own `why` and the shas above are the states mg-724a read, left as the record they are.",
     "code/rendered_twin_pin_9bc2": "cdec2e8",
     "code/control_audit_9876": "cdec2e8"
   },
@@ -15,8 +15,8 @@
     },
     "twin.control_exit": {
       "class": "gated",
-      "value": 1,
-      "why": "twin_pin.py finds drift (1).  Row 8 is drifted and is left drifted deliberately: mg-9bc2 re-pinning a row no ticket reconciled is the one move that instrument forbids.  If this becomes 0 without row 8's `why` below also moving, someone re-pinned it to make the control green."
+      "value": 0,
+      "why": "twin_pin.py finds no drift (0).  MOVED 1 -> 0 BY mg-188d, WHICH RECONCILED ROW 8 — the event the previous `why` named as the only legitimate reason for this number to move, and the row it named.  The reconciliation is a rewritten row-8 cell in the twin's ledger plus a re-pin in the same commit; the pin records that the cell WAS updated and cannot verify it, so the diff is the evidence (mg-9bc2 COVERAGE.md §4).  A move back to 1 means a published ledger row has moved away from its rendered twin, which is what this gate is for.  It no longer moves on a STATE.md edit OUTSIDE the ledger: section 3 stopped grading at mg-188d, for the reason written into twin_pin.py beside the change and measured there."
     },
     "twin.negative_exit": {
       "class": "gated",
@@ -25,13 +25,13 @@
     },
     "twin.verdict_grade": {
       "class": "gated",
-      "value": "DRIFT",
-      "why": "The grade word out of twin_pin.py's own VERDICT line, read via the runner's `control verdict:` echo so the pattern matches once.  DRIFT is today's true state; CLEAN would mean row 8 was reconciled, which is a real event that should move this file."
+      "value": "CLEAN",
+      "why": "The grade word out of twin_pin.py's own VERDICT line, read via the runner's `control verdict:` echo so the pattern matches once.  MOVED \"DRIFT\" -> \"CLEAN\" by mg-188d: the previous `why` said CLEAN would mean row 8 was reconciled and that this is a real event that should move this file.  It was, and it did."
     },
     "twin.worklist": {
       "class": "gated",
-      "value": ["8"],
-      "why": "THE FIELD THIS GATE EXISTS FOR.  Ledger row 8 is the second drifted row, which no ticket names.  The suite's exit code is 0 whether this list is [8] or [7, 8] or [1, 2, 7, 8], so a gate reading the exit code cannot see a published ledger row moving away from its rendered twin — the exact event of mg-64cb's concern.  Read as a SET so that ordering is not a verdict."
+      "value": [],
+      "why": "THE FIELD THIS GATE EXISTS FOR.  The suite's exit code is 0 whether this list is [] or [7, 8] or [1, 2, 7, 8], so a gate reading the exit code cannot see a published ledger row moving away from its rendered twin.  Read as a SET so that ordering is not a verdict.  MOVED [\"8\"] -> [] by mg-188d, which reconciled row 8 — the second drifted row that no ticket named until this one.  TWO THINGS HAD TO CHANGE FOR AN EMPTY LIST TO BE READABLE AT ALL, and both are mg-188d's: the twin runner printed this line ONLY in its DRIFT branch, so the field existed exactly while the twin was broken and vanished when it was fixed — the first clean twin in that page's history took this gate to REFUSED (exit 2) and blocked the merge saying the GATE was broken rather than that the twin was clean, measured before it was fixed.  The runner now prints the line on every run and lib724a reads `(none)` as the empty set."
     },
     "twin.mutations_caught": {
       "class": "gated",
@@ -55,8 +55,8 @@
     },
     "audit.runner_exit": {
       "class": "gated",
-      "value": 1,
-      "why": "code/control_audit_9876/run_all.sh exits 1 today: FINDINGS PRESENT, because a2 scores arm C3 UNFALSIFIABLE.  THIS IS WHY THE GATE IS NOT `sh run_all.sh` — that gate is red on arrival and blocks every merge in this repository.  A move to 0 is red here and means either C3 was repaired (update this file and say so) or a2 stopped asking."
+      "value": 0,
+      "why": "code/control_audit_9876/run_all.sh exits 0.  MOVED 1 -> 0 BY mg-188d, AND THE REASON IS THE ONE THE PREVIOUS `why` DEMANDED: arm C3 WAS REPAIRED, not silenced — a2's C3 now re-points the sandbox pin's `state-sha256` at the sandbox's own STATE.md so its predicate is false on the good input, which is C2's own documented rule applied to the arm it had not been applied to.  A move back to 1 means the audit found something; read out_a2_discriminate.txt rather than moving this number."
     },
     "audit.broken_producers": {
       "class": "gated",
@@ -65,8 +65,8 @@
     },
     "audit.producers_with_findings": {
       "class": "gated",
-      "value": 1,
-      "why": "a2 alone.  Gated in both directions: 2 means something new is red, 0 means something stopped being red without this file moving."
+      "value": 0,
+      "why": "Producers of code/control_audit_9876 that ended with a finding.  MOVED 1 -> 0 by mg-188d: the one producer with a finding was a2, and its finding was arm C3 scored UNFALSIFIABLE, which mg-188d repaired (see audit.runner_exit).  Gated in both directions: 1 or more means something new is red — read the transcript rather than moving this number; 0 -> anything requires the same reading in reverse."
     },
     "audit.census_grade": {
       "class": "gated",
@@ -90,13 +90,13 @@
     },
     "audit.arms_discriminating": {
       "class": "gated",
-      "value": 49,
-      "why": "Arms demonstrated RED against a known-bad input and silent on the good one."
+      "value": 50,
+      "why": "Arms demonstrated RED against a known-bad input and silent on the good one.  MOVED 49 -> 50 by mg-188d's repair of C3 (see audit.runner_exit).  RED IS EITHER DIRECTION: 50 -> 49 means an arm stopped discriminating; 50 -> 51 means an arm was added and the census must move with it."
     },
     "audit.arms_not_shown": {
       "class": "gated",
-      "value": 1,
-      "why": "Arm C3 (whole-file digest), scored UNFALSIFIABLE because its predicate is already true on the GOOD input.  This is a STANDING, RECORDED finding of mg-9876, not a defect introduced by mg-724a, and it is the reason audit.runner_exit is 1.  It is gated at 1 so that its repair is a deliberate, reviewable act rather than a number that quietly becomes 0."
+      "value": 0,
+      "why": "Arms scored UNFALSIFIABLE — predicate already true on the GOOD input.  MOVED 1 -> 0 by mg-188d, and the previous `why` asked for exactly this: gated at 1 so that C3's repair would be a deliberate, reviewable act rather than a number that quietly becomes 0.  IT IS GATED AT 0 AND NOT RECLASSIFIED AS RECORDED, WHICH WAS THE OTHER OPTION AND IS WORTH SAYING: mg-188d's reconciliation made C3 discriminate BY ACCIDENT — STATE.md happened to be byte-identical to the pin — and 0 would then have been a dated reading about whether the corpus was still, red at the next unrelated STATE.md edit, i.e. the `fails for reasons the author cannot act on` mode this file's own recorded/gated split exists to avoid.  So C3's good side was repaired instead, and 0 was DEMONSTRATED stable by re-running the audit against a STATE.md with a line appended: 50 of 50 either way.  Also affected R1-R4, whose good side borrowed a drifted row from the live tree and came back SETUP FAILED the moment the tree was clean — four arms of the auditor destroyed by the subject being fixed, the third time a fixture in this lineage borrowed the subject's own brokenness."
     },
     "audit.aux_holes": {
       "class": "gated",

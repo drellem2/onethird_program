@@ -6,7 +6,7 @@ mg-9bc2 — rendered-twin pin control
 
 SECTION 1 — the pin is present and its row set matches both documents
 --------------------------------------------------------------------------------------
-  pin commit      : 4fcbc71
+  pin commit      : 9dc53a6
   pin commit-date : 2026-08-10
   pinned rows     : 12   STATE.md rows: 12   twin rows: 12
   PASS  all three row sets agree: 1 2 3a 3b 4 5 6 7 8 9 10 11
@@ -24,21 +24,17 @@ SECTION 2 — per-row digests: which STATE.md rows have MOVED since the twin was
   row 5    ok       0b2a6e8c9266172f
   row 6    ok       5b904a7a29c45746
   row 7    ok       fca70bbdcc2a42c2
-  row 8    MOVED    pinned a1a0e25d7d6f5591  ->  now 120d8b1520b4aec4
+  row 8    ok       120d8b1520b4aec4
   row 9    ok       07710b91b75e2a82
   row 10   ok       39248cde7f9bd097
   row 11   ok       cfed0024cbf2fb0d
 
-  DRIFT  1 of 12 ledger rows have changed in
-         STATE.md since the twin was last reconciled: 8
-         Each is a row the twin renders from text that no longer exists.
-         This is the WORKLIST.  Reconcile the twin's cell, then re-pin that row:
-             python3 code/rendered_twin_pin_9bc2/twin_pin.py --reconcile --rows 8
+  PASS  all 12 pinned rows still match STATE.md.
 
 SECTION 3 — whole-file digest (the coarse signal)
 --------------------------------------------------------------------------------------
-  pinned STATE.md sha256 : 37bd5e7621633cb0b814f0c148b9f0e76d3f57fbfb436b414283b75313d623c4
-  actual STATE.md sha256 : 37bd5e7621633cb0b814f0c148b9f0e76d3f57fbfb436b414283b75313d623c4
+  pinned STATE.md sha256 : ccde5301853ea326503e43e9f0f67627fc3110dee97dfbe0a6871fdfe1217a3a
+  actual STATE.md sha256 : ccde5301853ea326503e43e9f0f67627fc3110dee97dfbe0a6871fdfe1217a3a
   PASS  STATE.md is byte-identical to the revision the twin was pinned against.
 
 SECTION 4 — KIND MARKS agree between the two documents (live, does not use the pin)
@@ -70,11 +66,11 @@ SECTION 6 — the VISIBLE provenance line quotes the pin (the duplicate is check
   exactly the kind of thing this whole ticket is about going stale.  It is only
   safe because it is checked here.
 
-  visible : Reconciled against STATE.md @ 4fcbc71 (2026-08-10) — a pin, not a date
-  pinned  : 4fcbc71
-  commits parsed out of the visible line: ['4fcbc71']
+  visible : Reconciled against STATE.md @ 9dc53a6 (2026-08-10) — a pin, not a date
+  pinned  : 9dc53a6
+  commits parsed out of the visible line: ['9dc53a6']
   PASS  the visible line names exactly the pinned commit and no other.
 
 ======================================================================================
-VERDICT: DRIFT — see section 2's worklist.  The twin renders rows that have since changed.
+VERDICT: CLEAN — the twin is pinned and its ledger rows have not moved.
 ======================================================================================

@@ -55,12 +55,18 @@ easiest way to defeat the whole mechanism.** The defence is that the re-pin is a
 in the commit that contains no corresponding change to the twin's ledger cells, which a
 reviewer can see; that is a social defence, not a mechanical one.
 
-**5. That the control is run at all.** Nothing in this repository invokes
-`code/rendered_twin_pin_9bc2/run_all.sh` on commit, on merge, or on any schedule. There is no
-hook, no CI, and no gate — this was checked, not assumed. **An instrument nobody runs is the
-same artifact as a date nobody re-reads**, which is the defect this ticket was filed about,
-one layer up. Wiring it into whatever gate the repository grows is not done and is the
-highest-value follow-up here.
+**5. ~~That the control is run at all.~~ CLOSED — `mg-724a`, recorded here `mg-188d`.** The
+superseded text is kept struck rather than deleted, because it was the highest-value follow-up
+this file named and the record of it being paid should survive: ~~*Nothing in this repository
+invokes `code/rendered_twin_pin_9bc2/run_all.sh` on commit, on merge, or on any schedule. There
+is no hook, no CI, and no gate — this was checked, not assumed. An instrument nobody runs is the
+same artifact as a date nobody re-reads, which is the defect this ticket was filed about, one
+layer up. Wiring it into whatever gate the repository grows is not done and is the highest-value
+follow-up here.*~~ `./build.sh` at the repository root now runs this suite on every merge request,
+through `code/control_gate_724a`, and the refinery is configured to fail the merge on a non-zero
+exit — demonstrated by `mg-724a` blocking a real merge request in 19 seconds, not argued. What it
+gates on is `BASELINE.json`'s declared fields, so read that file for what a green gate is actually
+asserting; it is narrower than *"the twin is correct"* for every reason on this page.
 
 ## The instrument's own defects, all three caught by running it
 
@@ -184,3 +190,74 @@ why row 9's repair could be checked but the three **prose** paragraphs mg-2f44 a
 `STATE.md:13`/`:76`/`:81` by hand and by reading, and **no control saw them**. And **(4)**
 stands at full strength here: this reconciliation's claim that row 9's cell was actually
 updated rests on the diff being visible in the same commit, which is a social defence.
+
+## Five more, found by the FIRST CLEAN RUN — a fourth event again (mg-188d)
+
+The first three above were found by *running* the instrument, the two after them by *using* it to
+reconcile one row, and the six after those by mg-9876's audit of how the arms get validated.
+These five were found by a fourth event, which had never happened: **the control going GREEN.**
+Rows 8 and 9 had been drifted since the pin was seeded, so `section 2 clean` was a state this
+directory had never been in, and five separate things turned out to depend on it never happening.
+mg-188d reconciled row 8 — establishing what `STATE.md` says, rewriting the twin's row-8 cell,
+and re-pinning in the same commit — and all five fired at once.
+
+- **The runner printed its worklist line ONLY in the DRIFT branch.** `run_all.sh` emitted `The
+  worklist, READ OUT OF SECTION 2 rather than typed here: …` inside `if [ "$CONTROL" -eq 1 ]` and
+  nowhere else, so the field existed exactly while the twin was broken and vanished the moment it
+  was fixed. mg-724a's merge gate reads that field by exactly-once anchored match — 0 matches is
+  `REFUSED` — so **the first clean twin took `./build.sh` to `GATE VERDICT: REFUSED`, exit 2, and
+  would have blocked the merge with a message saying the GATE was broken rather than that the twin
+  was clean.** Measured on mg-188d's branch before it was fixed. **It was not fail-open, which is
+  exactly why it would have survived**: the merge still failed. A gate whose load-bearing field is
+  observable only in the failing state cannot report its own success. The line is now printed on
+  every run, `(none)` for the empty set, and `lib724a` reads that token.
+
+- **Section 3 graded an exit code its own four following lines say is not a defect.** It ran
+  `worst = max(worst, 1)` on `DIFFERS` while printing *"This alone is NOT a defect and must not be
+  read as one … section 2 is the check that carries the verdict"*, which this file says twice more.
+  The contradiction was **unreachable** while section 2 was never clean. Once it was, it became
+  what the *next* `STATE.md` landing produces: one appended comment line took the control to exit
+  1 with an EMPTY worklist, the runner's DRIFT branch printed a verdict naming *"section 2's
+  worklist"* over a section 2 that had named nothing, and exited **2 BROKEN**. So the first clean
+  twin would have made this repository's merge gate red-broken for the next author to touch
+  `STATE.md` at all, prose or ledger, for a reason they could not act on. Section 3 now reports and
+  does not grade; a missing or malformed digest is still structural.
+
+- **mg-9876's arms `R1`-`R4` borrowed a drifted row from the live tree.** `_moved_row` returned
+  whatever happened to be drifted and `None` when nothing was; row 8 made `None` unreachable, so
+  four arms came back `SETUP FAILED  TypeError: … not NoneType` the instant the subject was fixed
+  — **four arms of the auditor destroyed by the audit succeeding**, which is the shape recorded two
+  sections above about that instrument's own selftest, arriving a third time in the arms nobody
+  re-read when the first two were repaired. The drifted row is now CONSTRUCTED when absent, from
+  one pinned digest overwritten with another pinned digest — derived from the captured bytes, so it
+  cannot rot at the next reconciliation the way the thing it replaces did.
+
+- **mg-9876's arm `C3` was repaired, and re-baselining it at 0 would have been the wrong fix.**
+  C3 scored `UNFALSIFIABLE` because section 3 says `DIFFERS` on nearly every run, so its predicate
+  was already true on the good input — a standing finding, gated by mg-724a at
+  `audit.arms_not_shown = 1` precisely so its repair would be deliberate. mg-188d's reconciliation
+  made C3 discriminate **by accident**, because `STATE.md` happened to be byte-identical to the new
+  pin, and 0 would then have been a dated reading about whether the corpus was still — red at the
+  next unrelated edit. C3's good side now re-points the sandbox pin's `state-sha256` at the
+  sandbox's own `STATE.md`, which is C2's own documented rule applied to the arm it had not been
+  applied to, and 0 was **demonstrated stable**: 50 of 50 arms discriminate with `STATE.md`
+  byte-identical to the pin and with a line appended to it.
+
+- **mg-724a's own mutator was a substring replace, and its `E2` typed the value it expected.**
+  `_set_str` ended `m.group(0).replace(m.group("v"), new, 1)`, so flipping the `0` of `0 not;` in
+  `VERDICT: 50 arms probed, 50 shown to discriminate, 0 not;` landed on the `0` inside `50` and
+  mutated a *different field* than the one the probe scores — probe `T6` went `HOLE`. It had agreed
+  with the correct rule for as long as the numbers happened to line up. `E2` planted exit `0`
+  against a description reading *"where the baseline says 1"*, and came back `SETUP FAILED` the
+  moment the audit suite stopped being red. Both are the rule stated at the top of that file —
+  nothing may name as a literal the thing every landing moves — not applied inside it. Now
+  span-replacement and a planted status derived from the observed one.
+
+**What this does NOT change.** Everything under *What this does not cover* stands. In particular
+**(1)** — a row that never moved and was summarised wrongly passes every section — is why mg-188d
+also rewrote the twin's L1b card and its lede **by reading**, and **(2)** is why the `(A) SPREAD`
+strike it landed in the machinery paragraph is invisible to this control: **the pin digests the
+ledger table only, and three of mg-188d's four twin edits are prose that no section here sees.**
+**(4)** stands at full strength: that row 8's cell was actually rewritten rests on the diff being
+in the same commit as the re-pin. **(5) IS NOW CLOSED and was the highest-value follow-up named
+here:** `./build.sh` runs this suite on every merge request, via `mg-724a`'s gate.

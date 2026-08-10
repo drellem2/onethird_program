@@ -81,3 +81,66 @@ cited, not restated. It does not classify `code/` occurrences: those are instrum
 and pre-registration artefacts (`mg-ba78` set the precedent of leaving `PREDICTIONS.md`
 byte-identical), and they are counted but deliberately not repaired. And a classification is a
 **judgement**: `s2` checks that each site is marked or allowlisted, not that the class is right.
+
+## ⛔ THE COMMITTED `out_s*.txt` ARE STALE AT HEAD, AND THEY ARE DELIBERATELY NOT REGENERATED (`mg-188d`, `2026-08-10`)
+
+`mg-2f44` measured that the staleness is not its doing — a run with its two files reverted
+differs from the committed outputs identically — and left it. `mg-188d` was sent to decide it,
+with an instruction to say which way it went rather than to quietly refresh. **DECIDED: NOT
+REGENERATED.** Three reasons, in the order they were established.
+
+**1. The interaction the ticket named has already resolved, and it was never the cause.** The
+ticket said to weigh regeneration against `mg-e331`, open at the time on `STATE.md` growing with
+no ratchet, on the ground that these outputs go stale from that growth so a refresh would expire
+the same way. `mg-e331` is **DONE** — the ratchet landed at `42b5bb0` and is wired into
+`build.sh` — so there is nothing left to wait for. **And it would not have helped:** the sweep's
+population is the whole repository, and `STATE.md` is **0.24%** of the drift. Measured, both runs
+committed against each other:
+
+| | committed | re-run at HEAD |
+|---|---|---|
+| form-hits, all files | 288 | 709 |
+| of which `STATE.md` | 3 | 4 |
+| files carrying a spelling | 50 | 137 |
+
+**+421 hits, of which `STATE.md` contributes +1.** 87 files joined the corpus and carry 412 of
+them. A ratchet on one file cannot bound a count over 137, so *"wait for the ratchet"* was the
+wrong question and *"regenerate now"* would have been answered by the wrong reason.
+
+**2. Nothing stale here is a verdict.** `s2` and `s3` were re-run at HEAD and both still **exit
+0**: every `docs/` site is still marked or allowlisted, and all four pre-declared mutations still
+score as declared. What moved is `s1`'s **census**, which this file's own header calls *a count of
+textual occurrences, NOT a count of defects*. A dated reading is expected to go stale; an
+expectation is not, and the expectations still hold — `mg-724a`'s recorded/gated distinction,
+applied to a transcript rather than to a gate.
+
+**3. Regenerating would overwrite the only dated reading there is, with an undated one.** The
+committed transcripts are the record of what the corpus looked like when the classification was
+made, and that record is what makes *"correct when made"* in the section above checkable. A
+refresh replaces it with a number that is stale again at the next landing and carries no date at
+all — `mg-2ff6`'s convention, and the failure it names.
+
+**WHAT WOULD CHANGE THIS.** A re-run in which `s2` or `s3` exits **non-zero**: that is a
+classification going wrong rather than a count moving, and it is a defect rather than staleness.
+Look at the exit codes, not at the counts — and **do NOT use `sh run_all.sh` to look**:
+
+```sh
+python3 code/eps_spec_sweep_372e/s2_classify.py >/dev/null; echo "s2 $?"
+( cd code/eps_spec_sweep_372e && python3 s3_control.py >/dev/null ); echo "s3 $?"
+```
+
+**`run_all.sh` PIPES EVERY SCRIPT THROUGH `tee` INTO THE COMMITTED `out_s*.txt`**, so the one
+command an ordinary reader would reach for to check this decision **destroys the dated readings
+the decision rests on** — and it does it silently, leaving three modified files that look like an
+edit somebody meant. mg-188d did exactly that while writing this section and caught it in
+`git status`, which is the whole of the defence; nothing warns. That is this section's own subject
+committed by the instruction telling you how to check this section, and it is kept here rather
+than quietly corrected in the draft. (It is also a second `| tee`: the exit code `run_all.sh`
+returns is `tee`'s, the defect `mg-9bc2` records fixing in its own runner. Both are left standing —
+repairing another ticket's runner is not mg-188d's to do, and `set -e` on line 3 means the first
+non-zero script stops the run, so the staleness verdict above does not depend on it.)
+
+**This section deliberately quotes NO swept spelling and NO count from `s1`'s by-file table**, so
+that adding it changes neither the census it reports on nor `s2`'s classification — a note about
+a stale count that moved the count would be this file's own subject wearing a footnote. Verified:
+`README.md`'s own form-hits are unchanged by this edit.

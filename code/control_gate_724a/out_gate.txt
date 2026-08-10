@@ -4,39 +4,52 @@ mg-724a — MERGE GATE over the two control suites mg-9876 audited
 
 §1  THE SUITES, RUN — and what each one costs on the merge critical path
 --------------------------------------------------------------------------------------------
-  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      1.2s  8352 bytes
-  audit  code/control_audit_9876/run_all.sh         exit 1     14.1s  40151 bytes
-         (both suites)                                     15.2s total
+  twin   code/rendered_twin_pin_9bc2/run_all.sh     exit 0      1.0s  7696 bytes
+  audit  code/control_audit_9876/run_all.sh         exit 0     14.5s  40034 bytes
+         (both suites)                                     15.5s total
 
 §2  OBSERVED vs BASELINE.json
 --------------------------------------------------------------------------------------------
 audit.arms                         gated     MATCH                       baseline=50  observed=50
-audit.arms_discriminating          gated     MATCH                       baseline=49  observed=49
-audit.arms_not_shown               gated     MATCH                       baseline=1  observed=1
+audit.arms_discriminating          gated     MATCH                       baseline=50  observed=50
+audit.arms_not_shown               gated     MATCH                       baseline=0  observed=0
 audit.arms_probed                  gated     MATCH                       baseline=50  observed=50
 audit.aux_holes                    gated     MATCH                       baseline=0  observed=0
 audit.broken_producers             gated     MATCH                       baseline=0  observed=0
 audit.census_grade                 gated     MATCH                       baseline="COMPLETE"  observed="COMPLETE"
-audit.producers_with_findings      gated     MATCH                       baseline=1  observed=1
-audit.runner_exit                  gated     MATCH                       baseline=1  observed=1
+audit.producers_with_findings      gated     MATCH                       baseline=0  observed=0
+audit.runner_exit                  gated     MATCH                       baseline=0  observed=0
 audit.selftest_scored              gated     MATCH                       baseline=6  observed=6
 audit.selftest_total               gated     MATCH                       baseline=6  observed=6
 audit.sites                        gated     MATCH                       baseline=59  observed=59
 audit.sweep_dirs_without_evidence  recorded  MATCH                       baseline=25  observed=25
 audit.sweep_grade                  gated     MATCH                       baseline="OK"  observed="OK"
-audit.sweep_membership_candidates  recorded  MATCH                       baseline=206  observed=206
+audit.sweep_membership_candidates  recorded  MOVED (recorded, not gated)  baseline=207  observed=208
 audit.sweep_tee_sites              recorded  MATCH                       baseline=19  observed=19
-twin.control_exit                  gated     MATCH                       baseline=1  observed=1
+twin.control_exit                  gated     MATCH                       baseline=0  observed=0
 twin.holes                         gated     MATCH                       baseline=0  observed=0
 twin.mutations_caught              gated     MATCH                       baseline=16  observed=16
 twin.mutations_total               gated     MATCH                       baseline=16  observed=16
 twin.negative_exit                 gated     MATCH                       baseline=0  observed=0
 twin.runner_exit                   gated     MATCH                       baseline=0  observed=0
 twin.unfalsifiable_rows            gated     MATCH                       baseline=0  observed=0
-twin.verdict_grade                 gated     MATCH                       baseline="DRIFT"  observed="DRIFT"
-twin.worklist                      gated     MATCH                       baseline=["8"]  observed=["8"]
+twin.verdict_grade                 gated     MATCH                       baseline="CLEAN"  observed="CLEAN"
+twin.worklist                      gated     MATCH                       baseline=[]  observed=[]
 
-  Every field matches.  Nothing moved.
+  Why each field that moved is declared the way it is:
+    audit.sweep_membership_candidates (recorded):
+      RECORDED, NOT GATED, and this is a deliberate blind spot rather than an omission. A
+      RECORDED VALUE IS A DATED READING AND IS EXPECTED TO GO STALE; a GATED value is an
+      expectation and is not. That difference is the whole of the class distinction. a4
+      sweeps EVERY directory under code/, so this count moves when any ticket adds code —
+      and the gate runs on the REBASED tree, so it moves when SOMEBODY ELSE's branch
+      lands. MEASURED, on the first live run: 206 in this worktree and 207 in the
+      refinery, because code/dated_population_2ff6 landed on main while mg-724a was being
+      written. Had this field been gated, mg-724a's own branch would have been blocked by
+      an unrelated merge — the exact `a gate that fails for reasons the author cannot act
+      on` failure mode, arriving on the first run rather than in six weeks. This directory
+      itself adds ZERO whole-output membership tests, which is mg-9876's own detector
+      reporting on the instrument written to gate it.
 
 §3  WHAT THIS GATE DELIBERATELY DOES NOT GATE — named, not omitted
 --------------------------------------------------------------------------------------------
@@ -57,7 +70,7 @@ twin.worklist                      gated     MATCH                       baselin
   T3   the twin control's VERDICT grade flips                                              CAUGHT                      twin.verdict_grade reads DIVERGED and is gated
   T4   the twin's negative control catches one fewer mutation                              CAUGHT                      twin.mutations_caught reads DIVERGED and is gated
   T5   a row of the twin's negative control becomes UNFALSIFIABLE                          CAUGHT                      twin.unfalsifiable_rows reads DIVERGED and is gated
-  T6   the audit's one non-discriminating arm SILENTLY BECOMES GREEN (1 not -> 0 not)      CAUGHT                      audit.arms_not_shown reads DIVERGED and is gated
+  T6   the audit's non-discriminating-arm count moves in either direction                  CAUGHT                      audit.arms_not_shown reads DIVERGED and is gated
   T7   the audited directory grows an arm the census did not have                          CAUGHT                      audit.arms reads DIVERGED and is gated
   T8   the auditor's selftest stops returning the known answer in one planted world        CAUGHT                      audit.selftest_scored reads DIVERGED and is gated
   T9   the audit runner reports NO producer with findings (the laundered-green direction)  CAUGHT                      audit.producers_with_findings reads DIVERGED and is gated
@@ -65,13 +78,13 @@ twin.worklist                      gated     MATCH                       baselin
   T11  the twin runner never prints its worklist line (it died before deciding)            CAUGHT                      REFUSED, naming twin.worklist
   T12  the audit's VERDICT line appears twice and the two readings could disagree          CAUGHT                      REFUSED, naming audit.arms_probed
   E1   the twin runner's own exit status changes                                           CAUGHT                      twin.runner_exit reads DIVERGED and is gated
-  E2   the audit runner exits 0 where the baseline says 1                                  CAUGHT                      audit.runner_exit reads DIVERGED and is gated
+  E2   the audit runner's own exit status changes                                          CAUGHT                      audit.runner_exit reads DIVERGED and is gated
 
   14 of 14 probes CAUGHT; 0 hole(s)/setup failure(s); 0 unexplained UNFALSIFIABLE.  0.05s.
 
 §5  CAN THIS GATE REFUSE?  Self-contained worlds, nothing borrowed from the estate
 --------------------------------------------------------------------------------------------
-  S1   BASELINE.json does not exist                                              CAUGHT   /Users/daniel/.pogo/polecats/c724a/code/control_gate_724a/BASELINE.json.no-such-file is missing.  A gate
+  S1   BASELINE.json does not exist                                              CAUGHT   /Users/daniel/.pogo/polecats/c188d/code/control_gate_724a/BASELINE.json.no-such-file is missing.  A gate
   S2   the baseline declares a schema this gate cannot read                      CAUGHT   baseline schema is not 1; this gate cannot read it
   S3   a baseline field carries no `why`                                         CAUGHT   baseline field x carries no `why`.  A number in a baseline with no reason beside it is an assertion nobo
   S4   a baseline field is neither gated nor recorded                            CAUGHT   baseline field x declares class 'informational'; every field must be `gated` (a change is RED) or `recor
@@ -85,5 +98,5 @@ twin.worklist                      gated     MATCH                       baselin
 ============================================================================================
 GATE VERDICT: GREEN — every gated field matches BASELINE.json, and this gate was
 shown able to fail on 14 probes and to refuse in 8 worlds, on this run, against
-these bytes.  Total 15.3s.
+these bytes.  Total 15.5s.
 ============================================================================================
