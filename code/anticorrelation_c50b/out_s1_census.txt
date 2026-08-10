@@ -1,0 +1,115 @@
+==============================================================================
+S1.  POPULATION AND ROUTE CENSUS -- EXHAUSTIVE, n = 2 .. 7
+==============================================================================
+
+--- n = 2 -------------------------------------------------- 0.0s
+  posets       2   primitive       1
+  (F)  FAILS at      0 of      1   [EXACT: one PSD decision per poset]
+  (M#) FAILS at      0 of      1   [EXACT: copositivity bracket]
+  BOTH FAIL  at      0 of      1   <-- the disjunction
+  instrument REFUSED a verdict at 0 posets
+  max c_true 0.125000  max c# 0.125000  max f* 0.125000  max c_or 0.125000  max rho 1.000000
+  max Lambda_M 1.000   max Lambda_F 1.000
+  height distribution   all:{1: 1}
+                   (F) fails:{}
+                  (M#) fails:{}
+
+--- n = 3 -------------------------------------------------- 0.0s
+  posets       7   primitive       4
+  (F)  FAILS at      0 of      4   [EXACT: one PSD decision per poset]
+  (M#) FAILS at      0 of      4   [EXACT: copositivity bracket]
+  BOTH FAIL  at      0 of      4   <-- the disjunction
+  instrument REFUSED a verdict at 0 posets
+  max c_true 0.222222  max c# 0.500000  max f* 0.250000  max c_or 0.250000  max rho 1.000000
+  max Lambda_M 3.750   max Lambda_F 1.500
+  height distribution   all:{1: 1, 2: 3}
+                   (F) fails:{}
+                  (M#) fails:{}
+
+--- n = 4 -------------------------------------------------- 0.0s
+  posets      40   primitive      27
+  (F)  FAILS at      0 of     27   [EXACT: one PSD decision per poset]
+  (M#) FAILS at      0 of     27   [EXACT: copositivity bracket]
+  BOTH FAIL  at      0 of     27   <-- the disjunction
+  instrument REFUSED a verdict at 0 posets
+  max c_true 0.271353  max c# 0.636846  max f* 0.306250  max c_or 0.306250  max rho 1.085410
+  max Lambda_M 20.000   max Lambda_F 3.500
+  height distribution   all:{1: 1, 2: 22, 3: 4}
+                   (F) fails:{}
+                  (M#) fails:{}
+
+--- n = 5 -------------------------------------------------- 0.1s
+  posets     357   primitive     275
+  (F)  FAILS at      0 of    275   [EXACT: one PSD decision per poset]
+  (M#) FAILS at      0 of    275   [EXACT: copositivity bracket]
+  BOTH FAIL  at      0 of    275   <-- the disjunction
+  instrument REFUSED a verdict at 0 posets
+  max c_true 0.308339  max c# 0.803289  max f* 0.550747  max c_or 0.550747  max rho 1.141242
+  max Lambda_M 30.372   max Lambda_F 5.000
+  height distribution   all:{1: 1, 2: 153, 3: 116, 4: 5}
+                   (F) fails:{}
+                  (M#) fails:{}
+
+--- n = 6 -------------------------------------------------- 5.7s
+  posets    4824   primitive    4070
+  (F)  FAILS at      0 of   4070   [EXACT: one PSD decision per poset]
+  (M#) FAILS at      0 of   4070   [EXACT: copositivity bracket]
+  BOTH FAIL  at      0 of   4070   <-- the disjunction
+  instrument REFUSED a verdict at 0 posets
+  max c_true 0.327508  max c# 0.943151  max f* 0.811649  max c_or 0.753639  max rho 1.217605
+  max Lambda_M 79.309   max Lambda_F 9.667
+  height distribution   all:{1: 1, 2: 1324, 3: 2421, 4: 318, 5: 6}
+                   (F) fails:{}
+                  (M#) fails:{}
+  gamma bins  |   count | max rho | max M/Phi* | max c# | max f* | max min
+   [0.05,0.10) |     228 |  1.0272 |      9.667 | 0.8270 | 0.8116 | 0.7536
+   [0.10,0.20) |    1350 |  1.0779 |      5.500 | 0.8527 | 0.6182 | 0.6182
+   [0.20,0.30) |    1034 |  1.1984 |      3.286 | 0.9432 | 0.4208 | 0.4208
+   [0.30,0.50) |    1261 |  1.2176 |      2.424 | 0.8658 | 0.3749 | 0.3749
+   [0.50,1.01) |     197 |  1.1700 |      1.932 | 0.7422 | 0.3040 | 0.3040
+
+--- n = 7 -------------------------------------------------- 312.7s
+  posets   96428   primitive   86278
+  (F)  FAILS at    168 of  86278   [EXACT: one PSD decision per poset]
+  (M#) FAILS at      4 of  86278   [EXACT: copositivity bracket]
+  BOTH FAIL  at      0 of  86278   <-- the disjunction
+  instrument REFUSED a verdict at 0 posets
+  max c_true 0.340719  max c# 1.018707  max f* 1.297074  max c_or 0.894472  max rho 1.276217
+  max Lambda_M 110.967   max Lambda_F 13.083
+  height distribution   all:{1: 1, 2: 15407, 3: 55772, 4: 14399, 5: 692, 6: 7}
+                   (F) fails:{2: 44, 3: 124}
+                  (M#) fails:{3: 2, 4: 2}
+  gamma bins  |   count | max rho | max M/Phi* | max c# | max f* | max min
+   [0.00,0.05) |     354 |  1.0265 |     13.083 | 0.8418 | 1.2971 | 0.8418
+   [0.05,0.10) |    4451 |  1.0540 |      8.667 | 0.9010 | 1.2708 | 0.8945
+   [0.10,0.20) |   30936 |  1.2316 |      5.969 | 1.0187 | 0.8338 | 0.8041
+   [0.20,0.30) |   27405 |  1.2461 |      3.331 | 0.9990 | 0.5266 | 0.5266
+   [0.30,0.50) |   21531 |  1.2762 |      2.498 | 0.9499 | 0.4730 | 0.4730
+   [0.50,1.01) |    1601 |  1.2547 |      1.820 | 0.8234 | 0.3410 | 0.3410
+
+==============================================================================
+S1.1  THE TABLE
+==============================================================================
+ n | posets | primitive |  c_true  |    c#    |    f*    |   c_or   | (F)fail (M#)fail BOTH
+ 2 |      2 |         1 | 0.125000 | 0.125000 | 0.125000 | 0.125000 |       0        0    0
+ 3 |      7 |         4 | 0.222222 | 0.500000 | 0.250000 | 0.250000 |       0        0    0
+ 4 |     40 |        27 | 0.271353 | 0.636846 | 0.306250 | 0.306250 |       0        0    0
+ 5 |    357 |       275 | 0.308339 | 0.803289 | 0.550747 | 0.550747 |       0        0    0
+ 6 |   4824 |      4070 | 0.327508 | 0.943151 | 0.811649 | 0.753639 |       0        0    0
+ 7 |  96428 |     86278 | 0.340719 | 1.018707 | 1.297074 | 0.894472 |     168        4    0
+
+==============================================================================
+S1.2  THE UNCONDITIONAL INEQUALITY LIST -- machine-checked at every primitive poset
+      (PREDICTIONS.md E7: an inequality that fails here comes OUT of the list
+       used by s2's feasibility argument.)
+==============================================================================
+  primitive posets checked: 90655
+   gamma<=mu      violations: 0   OK
+   mu<=2Phi       violations: 0   OK
+   Phi<=M         violations: 0   OK
+   M<=Delta       violations: 0   OK
+   phi<=Delta     violations: 0   OK
+   Delta<=1       violations: 0   OK
+   gamma<=2Phi    violations: 0   OK
+
+[stored failure sets for s2 in out_s1_store.pkl]

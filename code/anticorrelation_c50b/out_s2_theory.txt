@@ -1,0 +1,121 @@
+==============================================================================
+S2.1  THE REDUCTION -- both route failures against one threshold each
+==============================================================================
+
+  (F)  fails  <=>  M > sqrt(2 gamma)
+  (M#) fails  <=>  Delta_P^2 > 2 gamma  AND  mu_pref > t*(P) := Delta_P - sqrt(Delta_P^2 - 2 gamma)
+
+  PROOF.  c# = sweep(mu,Delta)/(2 gamma) and sweep(mu,Delta) = mu(2Delta-mu) for
+  mu <= Delta, Delta^2 beyond.  On the first branch mu(2Delta-mu) > 2 gamma
+  <=> (mu-Delta)^2 < Delta^2 - 2 gamma <=> mu > Delta - sqrt(Delta^2-2gamma), which
+  needs Delta^2 > 2 gamma.  On the second branch sweep = Delta^2 > 2 gamma is the same
+  condition and t* < Delta < mu holds automatically.  (F) is immediate from f* = M^2/(2gamma). []
+
+  TWO CONSEQUENCES, both uniform in n, both free:
+    t* = 2 gamma / (Delta + sqrt(Delta^2 - 2 gamma)),  so   gamma/Delta <= t* <= 2 gamma/Delta.
+    => rho := mu_pref/gamma <= 1/Delta_P  is SUFFICIENT for (M#)        [the floor, sharpened]
+    => rho > 1/Delta_P              is NECESSARY for (M#) to fail       [mg-29fe's channel]
+    and since M <= Delta_P (A11a),  (F) failing already forces Delta_P^2 > 2 gamma.
+
+  n=3  primitive      4  reduction disagreements 0   (0s)
+  n=4  primitive     27  reduction disagreements 0   (0s)
+  n=5  primitive    275  reduction disagreements 0   (0s)
+  n=6  primitive   4070  reduction disagreements 0   (5s)
+  n=7  primitive  86278  reduction disagreements 0   (288s)
+
+==============================================================================
+S2.2  THE MARGIN -- c_or vs the quantity that actually prices the disjunction
+==============================================================================
+
+  u_F(P) = M / sqrt(2 gamma)          (F)  fails <=> u_F > 1
+  u_M(P) = mu_pref / t*(P)            (M#) fails <=> u_M > 1   (t* = +inf if Delta^2 <= 2gamma)
+  w(n)   = max_P min(u_F, u_M)        the disjunction holds at n  <=>  w(n) <= 1
+
+  w and c_or cross 1 together -- they are two readings of the same event -- but they
+  are DIFFERENT NUMBERS, and w is on the scale the failure thresholds actually live on.
+
+  n | primitive |  c_or(n) |   w(n)   | rho=1 posets | height-2 | h2 with rho=1 | (F)f (M#)f
+  3 |         4 | 0.250000 | 0.000000 |      4 (100.0%) |        3 |      3 (100.0%) |    0    0
+  4 |        27 | 0.306250 | 0.486136 |     17 (63.0%) |       22 |     14 ( 63.6%) |    0    0
+  5 |       275 | 0.550747 | 0.649886 |    109 (39.6%) |      153 |     52 ( 34.0%) |    0    0
+  6 |      4070 | 0.753639 | 0.818379 |    906 (22.3%) |     1324 |    223 ( 16.8%) |    0    0
+  7 |     86278 | 0.894472 | 0.890780 |  10806 (12.5%) |    15407 |   1302 (  8.5%) |  168    4
+
+  AT n = 7, EXHAUSTIVELY:
+   c_or argmax min = 0.894472
+   w argmax        = 0.890780   at dn = (0, 0, 3, 7, 15, 3, 1)
+
+  *** THE DISJUNCTION MARGIN ***
+  Over the 168 posets where (F) HAS ALREADY FAILED, the distance of (M#) from
+  failing is  u_M = mu_pref/t*.  The disjunction survives iff min u_M > 1.
+    min u_M over the (F)-failing set = 0.739915      (a margin of -26.0%)
+    attained at dn = (0, 0, 0, 0, 15, 11, 15)
+      there: rho = 1.000000   rho*Delta = 0.769231   height = 2   gamma = 0.043382
+      c# = 0.747540   f* = 1.223785
+    max rho over the (F)-failing set        = 1.023794
+    max rho*Delta over the (F)-failing set  = 0.923894   [< 1 IS the lemma of S2.4]
+    (F)-failing posets with rho = 1 exactly : 24 of 168
+  Dually, over the 4 posets where (M#) has failed, min u_F = 0.540079
+    i.e. (F) sits 46.0% BELOW its own failure threshold there
+    max rho over the (M#)-failing set = 1.231604
+    heights of the (M#)-failing set   = [3, 3, 4, 4]
+
+==============================================================================
+S2.3  THE OBSTRUCTION -- is 'both routes fail' consistent with everything we hold?
+==============================================================================
+
+  THE CONSTRAINT LIST.  Every one is machine-verified at 90655 of 90655 primitive
+  posets n <= 7 (s1 S1.2) -- an inequality that failed there would have come OUT of
+  this list, which is what makes the conclusion below a theorem and not a wish.
+
+    (I1) 0 < gamma <= mu_pref                    the floor: cone inside 1^perp
+    (I2) mu_pref  <= 2 Phi*_pref                 centred prefix indicators are monotone
+    (I3) Phi*_pref <= M <= Delta_P <= 1          mediant, and leak(A_k) <= m_k Delta_P
+    (I4) phi_k    <= Delta_P   for every k
+    (I5) gamma    <= 2 Phi*_pref                 (I1)+(I2)
+
+  BOTH ROUTES FAIL  <=>  M^2 > 2 gamma  AND  mu_pref (2 Delta_P - mu_pref) > 2 gamma.
+
+  THE FEASIBLE POINT:  Delta_P = 1.00, Phi*_pref = 0.30, mu_pref = 0.60, M = 0.70, gamma = 0.20
+    (I1) 0 < gamma <= mu_pref            SATISFIED
+    (I2) mu_pref <= 2 Phi*               SATISFIED
+    (I3a) Phi* <= M                      SATISFIED
+    (I3b) M <= Delta_P                   SATISFIED
+    (I3c) Delta_P <= 1                   SATISFIED
+    (I5) gamma <= 2 Phi*                 SATISFIED
+    (F) FAILS:  M^2 > 2 gamma            SATISFIED
+    (M#) FAILS: mu(2D-mu) > 2 gamma      SATISFIED
+    => c# = 2.1000  and  f* = 1.2250  -- BOTH OVER 1.
+
+  AND IT IS REALISABLE AS A PROFILE AT EVERY n.  The list constrains the profile
+  (phi_k) only through min = Phi*, the m-weighted mean M, and the ceiling Delta_P; a
+  profile with min 0.30, mean 0.70 and max <= 1 exists for every n >= 4.  So the
+  feasible point is not an artefact of one n.
+
+  THEOREM (obstruction, uniform in n).  The disjunction max_P min(c#,f*) < 1 is NOT a
+  consequence of (I1)-(I5).  Any proof of it must use information about P beyond the
+  five scalars (gamma, Delta_P, Phi*_pref, M, mu_pref) and the profile.
+
+  Adding c_true <= 1, i.e. gamma >= Phi*^2/2  -- THE TARGET ITSELF -> STILL FEASIBLE -- does not close it
+  Adding the SHARPER mu_pref <= Phi*_pref (false, but suppose)  -> STILL FEASIBLE -- does not close it
+  Adding Lambda_F = M/Phi* <= 3 (a bounded-spread hypothesis)   -> STILL FEASIBLE -- does not close it
+  Adding Delta_P <= 1/2                                         -> CLOSES IT (but is false: max Delta_P = 1)
+
+==============================================================================
+S2.4  WHAT WOULD CLOSE IT -- the lemma named, and its measured margin
+==============================================================================
+
+  LEMMA (L*), CONJECTURAL.  At every primitive poset,
+        M^2 > 2 gamma      ==>      mu_pref <= gamma / Delta_P    (i.e. rho <= 1/Delta_P).
+
+  (L*) IMPLIES THE DISJUNCTION, uniformly in n, in one line: by S2.1, rho <= 1/Delta_P
+  gives mu_pref <= gamma/Delta_P <= t*, so (M#) HOLDS wherever (F) fails. []
+
+  (L*) is exactly the anti-correlation, stated as an inequality instead of as a bin
+  table -- and unlike the bin table it says nothing about gamma regimes, so it is a
+  statement that can be true uniformly in n.  Its measured margin is the
+  'max rho*Delta over the (F)-failing set' printed in S2.2: (L*) says that number is
+  <= 1.
+
+ <= 1.
+

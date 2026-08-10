@@ -1,0 +1,25 @@
+==============================================================================
+s0.  SELFTEST -- mg-c50b
+==============================================================================
+  A1  population 1,2,7,40,357,4824,96428                     PASS  [1, 2, 7, 40, 357, 4824, 96428]
+  A2  every generated poset natural + transitive             PASS  0 bad
+  A3  Q_kk = leak(A_k) at every (poset,prefix)  [mg-28ff's control] PASS  25682 pairs, 0 bad
+  A4  footrule identity sum_k leak = (1/2)E[D_F]  [mg-28ff §3] PASS  5228 posets, 0 bad
+  A5  Lemma 2.1  Phi_P(A_k) <= 1-rho(A_k) <= 2 Phi_P(A_k)    PASS  25668 pairs, 0 bad
+  A6  psd_int == psd_minors (two independent devices)        PASS  400 matrices, 0 disagreements
+  A7  gamma > 0 iff primitive  [mg-76b2: 1-lambda_std = 0 on the decomposables] PASS  0/0 bad
+  A8  THE FLOOR: gamma <= mu_pref at every primitive poset  [mg-51f4 §2] PASS  4372 posets, 0 exceptions
+  A9a (M#) n=7 witness reproduces  [PREDICTIONS.md E6's guard] PASS  LE=19 Delta=18/19 Phi*=5/19 c#=1.018707
+  A9b (F)  n=7 witness reproduces                            PASS  LE=156 Phi*=1/39 M=157/468 f*=1.297074
+  A10 THEOREM  Phi*^2 <= sweep(R(g), Delta) at (poset, monotone g) pairs PASS  1809 pairs, 0 exceptions
+  A11a M <= Delta_P  [derived pre-run, H4]                   PASS  4372 posets
+  A11b mu_pref <= 2 Phi*_pref  [derived pre-run, H4]         PASS  4372 posets
+
+  -- negative controls (each must FIRE) --
+  C1  mutated floor  c# >= Delta + gamma/2  is VIOLATED      PASS  4070 of 4070 violate  [mg-51f4's own control]
+  C2  psd_int rejects [[1,2],[2,1]]                          PASS  
+  C3  the one-case (M#) differs from the THEOREM's two-case form PASS  5 posets differ  [mg-28ff repair 7 -- the ANTICHAINS]
+  C4  the Q_kk control CATCHES a non-transitive dn           PASS  
+  C5  exhibited-vector bound is an UPPER bound on mu_pref  [E3's direction] PASS  ub=0.226537524 >= mu=0.226537524
+
+  ALL ARMS PASS
