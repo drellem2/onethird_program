@@ -178,6 +178,9 @@ disposal.  What is re-derived below, per transcript, is the FLIP itself.
 
         unreach = unreachable_evidence(committed)
         reads_out, ev = L.static_reach(os.path.dirname(path), carrier)
+        windows = L.history_windows(os.path.dirname(path), carrier)
+        grew = L.commits_between(carrier, rev)
+        outgrown = [w for w in windows if 0 <= w[2] < grew]
         print()
         print("    commits it names that resolve but hang off NO REF : %d%s"
               % (len(unreach),
@@ -185,12 +188,20 @@ disposal.  What is re-derived below, per transcript, is the FLIP itself.
                  if unreach else ""))
         print("    producer reads repository-global state (STATIC PROXY): %s"
               % ("yes -- " + ", ".join(ev[:3]) if reads_out else "no"))
+        print("    walks a MOVING REF bounded by a LITERAL count            : %s"
+              % (", ".join("%s (%s -n %d)" % (w[0], w[1], w[2])
+                           for w in windows) if windows else "no"))
+        if windows:
+            print("      `main` has grown %d commit(s) past the carrying "
+                  "commit, so %d of those window(s) no longer reach it"
+                  % (grew, len(outgrown)))
 
         rows.append({"path": path, "carrier": carrier, "spec": spec,
                      "committed": committed, "committed_b": committed_b,
                      "rerun": rerun, "identical": identical,
                      "verdict": verdict, "gone": gone, "appeared": appeared,
                      "unreach": unreach, "reads_out": reads_out,
+                     "windows": windows, "outgrown": outgrown, "grew": grew,
                      "seconds": res["seconds"]})
 
         if identical:
@@ -256,38 +267,85 @@ that it was produced by that COMMIT.
 
     # ------------------------------------------------------ adjudication
     led.head("D1d -- THE ADJUDICATION: WHICH OF THE FIVE IS THE RECORD WRONG?")
-    print("""THE RULE, stated before the table so it can be disagreed with:
+    print("""THE RULE, stated before the table so it can be disagreed with.  A
+re-run goes blind in TWO ways and my first version of this rule knew only one
+of them -- the miss is kept in the README and it changed a verdict:
 
-  RERUN-CANNOT-SEE  requires BOTH (i) the committed transcript names one or
-                    more commits that RESOLVE in this object store but hang off
-                    NO REF, and (ii) the re-run LOSES decision rows rather than
-                    gaining them -- the instrument reports LESS than it did.
-                    Together these say the instrument's search shrank while the
-                    objects stayed put.
+  (A) THE OBJECTS BECAME UNREACHABLE.  The transcript names commits that
+      RESOLVE in this object store but hang off NO REF, and the re-run LOSES
+      decision rows rather than gaining them.
 
-  RECORD-IS-FALSE   everything else: the re-run sees at least as much as the
-                    record and disagrees with it.
+  (B) THE SEARCH WINDOW SLID OFF.  The producer walks a MOVING REF bounded by
+      a LITERAL count -- `git log main -n 40` -- and `main` has since grown
+      more commits past the carrying commit than the window admits.  Nothing
+      died; the walk stops short of it.
 
-  A judgement, not a measurement.  Both inputs ARE measured and printed above,
-  so a reader who thinks the rule is wrong can re-adjudicate from the same
-  numbers without re-running anything.
+  RERUN-CANNOT-SEE  (A) or (B).
+  RECORD-IS-FALSE   neither: the re-run sees at least as much as the record
+                    and disagrees with it.
+
+  A judgement, and every input to it is measured and printed above, so a reader
+  who thinks the rule is wrong can re-adjudicate without re-running anything.
 """)
     print("    %-52s %-18s %s" % ("transcript", "cause", "evidence"))
     false_records, blind = [], []
     for r in rows:
-        cause = ("RERUN-CANNOT-SEE"
-                 if (r["unreach"] and len(r["gone"]) > len(r["appeared"]))
-                 else "RECORD-IS-FALSE")
+        blind_a = bool(r["unreach"]) and len(r["gone"]) > len(r["appeared"])
+        blind_b = bool(r["outgrown"])
+        cause = "RERUN-CANNOT-SEE" if (blind_a or blind_b) else "RECORD-IS-FALSE"
+        r["blind"] = "A" if blind_a else ("B" if blind_b else "-")
         (blind if cause == "RERUN-CANNOT-SEE" else false_records).append(r)
         r["cause"] = cause
-        print("    %-52s %-18s %d unreachable, -%d/+%d rows"
-              % (r["path"][5:], cause, len(r["unreach"]),
-                 len(r["gone"]), len(r["appeared"])))
+        print("    %-52s %-18s %s  %d unreachable, %d outgrown window(s), "
+              "-%d/+%d rows"
+              % (r["path"][5:], cause, r["blind"], len(r["unreach"]),
+                 len(r["outgrown"]), len(r["gone"]), len(r["appeared"])))
     led.record(None,
                "D1d of the %d re-derived FLIPS, %d are RECORD-IS-FALSE and %d "
                "are RERUN-CANNOT-SEE.  The second class is NOT damage to the "
                "record and its remedy is the opposite one"
                % (len(rows), len(false_records), len(blind)))
+
+    # ------------------------------------- the blind case, verified unbounded
+    led.head("D1d' -- WHERE THE WINDOW SLID OFF, THE RECORD'S CLAIM IS "
+             "RE-DERIVED WITHOUT ONE")
+    print("""An adjudication that says `the re-run is what is wrong` is worthless
+unless the record's claim can be checked some other way.  For every transcript
+scored blind by (B), the commits it names that are NOT on `main` are looked up
+BY SUBJECT with NO window at all -- mg-1abe's own Class-1 device, STALE NOT
+LOST, pointed at a different question: not `is this identifier still valid` but
+`can the thing the record asserts still be checked`.
+
+⚠️ RE-IMPLEMENTED HERE, not the producer's own code.  It is the same rule
+(match a pre-rebase commit to an on-`main` commit by subject) with the bound
+removed.  The general instrument -- re-running the producer against a `main`
+positioned where the reader's was, in a `--shared` clone so no ref moves in
+this repository -- is NOT built, and is named in the README as not done.
+""")
+    for r in rows:
+        if not r["outgrown"]:
+            continue
+        offmain = [s for s in L.shas_named_in(r["committed"])
+                   if not L.git_ok("merge-base", "--is-ancestor", s, rev)]
+        print("    %s" % r["path"][5:])
+        print("      window : %s   `main` is %d commits past the carrier"
+              % (", ".join("%s (%s -n %d)" % w for w in r["outgrown"]),
+                 r["grew"]))
+        found = 0
+        for sha in offmain:
+            twin = L.twin_by_subject(sha, rev)
+            if twin:
+                found += 1
+            print("        %s  ->  %s   %s"
+                  % (sha[:7], (twin or "NO TWIN")[:7],
+                     L.git("log", "-1", "--format=%s", sha).strip()[:58]))
+        r["verified"] = (found, len(offmain))
+        led.record(found == len(offmain) and found > 0,
+                   "D1d' every off-`main` commit %s names is STILL TWINNED on "
+                   "`main` by subject, %d of %d, when the search is not bounded "
+                   "by a literal.  The record's count is the true one and the "
+                   "re-run's is an artefact of its own `-n` "
+                   % (os.path.basename(r["path"]), found, len(offmain)))
 
     # ---------------------------------------------------------- remedies
     led.head("D1e -- THE REMEDY, ONE AT A TIME, WITH ITS REASON")
@@ -308,7 +366,18 @@ whether the producer reads repository-global state:
     for r in rows:
         names_own_rev = any(s == r["carrier"] for s in
                             L.shas_named_in(r["committed"]))
-        if r["cause"] == "RERUN-CANNOT-SEE":
+        if r["cause"] == "RERUN-CANNOT-SEE" and r["blind"] == "B":
+            remedy = "ANNOTATE + DO NOT RE-RUN"
+            reason = ("its producer bounds a walk over `main` by a literal "
+                      "(%s) and `main` has grown %d commits past the carrying "
+                      "commit, so the walk stops short of what the record "
+                      "names.  Every one of those commits is still twinned on "
+                      "`main` (D1d'), so the record's number is the true one "
+                      "and a re-run would write the instrument's blindness "
+                      "over it."
+                      % (", ".join("%s -n %d" % (w[1], w[2])
+                                   for w in r["outgrown"]), r["grew"]))
+        elif r["cause"] == "RERUN-CANNOT-SEE":
             remedy = "ANNOTATE + DO NOT RE-RUN"
             reason = ("its instrument walks refs, %d of the commits it names "
                       "hang off none, and the objects are still present -- the "

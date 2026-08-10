@@ -55,34 +55,68 @@ def main():
     at = L.main_rev()
     rev = L.resolve(at)
     timeout = arg("--timeout", 900)
+    # THE POPULATION IS THE CENSUS'S, AT THE CENSUS'S REVISION, AND THAT IS A
+    # DELIBERATE CHOICE RATHER THAN A DEFAULT.  The ticket says "the 31"; the
+    # 31 are a fact about `81214a9`.  Re-deriving the bucket at today's `main`
+    # gives a different and much larger set -- measured in D2a -- and running
+    # THAT would be a new census rather than the disposal of this one.
+    pop_at = L.resolve(arg("--pop-at", "81214a9"))
     led = L.Ledger("d2 -- THE 31 NEVER MEASURED AGAINST THEIR BYTES",
                    reads_outside_tree=True)
-    print("    as-of: %s   producer timeout: %ds" % (rev[:12], timeout))
+    print("    as-of: %s   population as-of: %s   producer timeout: %ds"
+          % (rev[:12], (pop_at or "?")[:12], timeout))
+    if pop_at is None:
+        led.self_error("--pop-at does not resolve")
+        return led.done()
 
     # ------------------------------------------------------------ D2a
     led.head("D2a -- THE POPULATION, RE-DERIVED RATHER THAN QUOTED")
     print("""The 31 are re-derived from the census's own rule -- a tracked
 `code/<dir>/out_*.txt` whose directory has no `run_all.sh` at its CARRYING
-COMMIT -- rather than copied out of `out_t2_census.txt`.  If the count comes
-out at something other than 31 at this revision that is itself worth knowing,
-because the population is a fact about a moving `main`.
+COMMIT -- rather than copied out of `out_t2_census.txt`.
+
+⚠️ THE POPULATION IS TAKEN AT `81214a9`, THE CENSUS'S OWN REVISION, ON PURPOSE.
+The ticket says "the 31", and the 31 are a fact about that commit.  The same
+rule at today's `main` returns a different and much larger set -- printed
+below, because the difference is the ticket's own subject and not a footnote --
+and disposing of THAT would be a new census rather than the disposal of this
+one.
 """)
-    pop = []
-    for p in L.transcripts(rev):
-        c = L.carrying_commit(p, rev)
-        if c and L.blob_at(c, os.path.dirname(p) + "/run_all.sh") is None:
-            pop.append((p, c))
+    def norunner(where):
+        out = []
+        for p in L.transcripts(where):
+            c = L.carrying_commit(p, where)
+            if c and L.blob_at(c, os.path.dirname(p) + "/run_all.sh") is None:
+                out.append((p, c))
+        return out
+
+    pop = norunner(pop_at)
     by_dir = {}
     for p, c in pop:
         by_dir.setdefault(os.path.dirname(p), []).append((p, c))
-    print("    transcripts with no `run_all.sh` at their carrying commit: %d"
-          % len(pop))
-    print("    over %d directories" % len(by_dir))
-    led.record(None,
-               "D2a the NO-RUNNER population at %s is %d transcripts over %d "
-               "directories (mg-1abe measured 31 over 10 at 81214a9; a "
-               "different number here is `main` having moved, not a "
-               "disagreement)" % (rev[:7], len(pop), len(by_dir)))
+    print("    at %s (the census's revision): %d transcripts over %d "
+          "directories" % (pop_at[:7], len(pop), len(by_dir)))
+    led.record(len(pop) == 31,
+               "D2a the NO-RUNNER population at %s re-derives to %d over %d "
+               "directories.  mg-1abe reports 31 over 10; this is a "
+               "REPRODUCTION of its bucket, not a finding" % (pop_at[:7],
+                                                              len(pop),
+                                                              len(by_dir)))
+
+    now = norunner(rev)
+    now_dirs = {os.path.dirname(p) for p, _ in now}
+    print("    at %s (today's `main`)       : %d transcripts over %d "
+          "directories" % (rev[:7], len(now), len(now_dirs)))
+    led.record(False,
+               "D2a' AND THE BUCKET HAS GROWN WHILE NOBODY WAS LOOKING: %d "
+               "transcripts over %d directories at %s, against %d over %d at "
+               "%s -- a %.1fx growth in the set nothing can say anything "
+               "about.  This script disposes of the census's 31; the other %d "
+               "are named here and NOT measured, because measuring them is a "
+               "new census and not this disposal"
+               % (len(now), len(now_dirs), rev[:7], len(pop), len(by_dir),
+                  pop_at[:7], len(now) / float(max(len(pop), 1)),
+                  len(now) - len(pop)))
 
     # ------------------------------------------------------------ D2b
     led.head("D2b -- WHY EACH WAS UNMEASURABLE, AND BY WHICH RULE IT IS "
@@ -153,7 +187,7 @@ CLEAN before it starts.
         else:
             res = L.rerun_at(r["carrier"], r["path"], r["spec"],
                              timeout=timeout,
-                             committed=L.blob_at(rev, r["path"]))
+                             committed=L.blob_at(pop_at, r["path"]))
             if res["error"]:
                 r["verdict"] = "RUNNER-FAILED"
                 r["detail"] = res["error"][:60]
@@ -165,7 +199,7 @@ CLEAN before it starts.
                 r["verdict"] = res["status"]
                 r["detail"] = "exit %s, %d bytes written -- NOT compared" % (
                     res["rc"], len(res["bytes"] or b""))
-            elif res["bytes"] == L.blob_at(rev, r["path"]):
+            elif res["bytes"] == L.blob_at(pop_at, r["path"]):
                 r["verdict"] = "REPRODUCES"
                 r["detail"] = "%.0fs" % res["seconds"]
             elif r["tier"] == "T3-NAME-MAP":
@@ -175,12 +209,12 @@ CLEAN before it starts.
                 r["verdict"] = "T3-UNRESOLVED"
                 r["detail"] = "guessed producer, bytes differ (%s)" % (
                     L.conclusion_verdict(
-                        L.blob_at(rev, r["path"]).decode("utf-8", "replace"),
+                        L.blob_at(pop_at, r["path"]).decode("utf-8", "replace"),
                         res["bytes"].decode("utf-8", "replace")))
             else:
                 r["verdict"] = "DIFFERS"
                 r["detail"] = "conclusion %s" % L.conclusion_verdict(
-                    L.blob_at(rev, r["path"]).decode("utf-8", "replace"),
+                    L.blob_at(pop_at, r["path"]).decode("utf-8", "replace"),
                     res["bytes"].decode("utf-8", "replace"))
         verdicts[r["verdict"]] = verdicts.get(r["verdict"], 0) + 1
         print("    %-52s %-12s %-16s %s"

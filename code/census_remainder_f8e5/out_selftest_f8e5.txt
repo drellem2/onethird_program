@@ -1,7 +1,7 @@
 ==============================================================================
 selftest -- mg-f8e5's own arms, all forced
 ==============================================================================
-    code-digest: 0606c02932209f76   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    code-digest: 8a0e0d1a12ee6419   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
     NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
     reads-outside-tree: yes
     ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
@@ -64,6 +64,26 @@ S7 -- THE CONCLUSION GRAIN IS THE CENSUS'S, AND IT SEPARATES
 [OK       ] S7 a moved FIGURE inside a standing decision is HELD-DRIFTED, not a flip -- the distinction mg-1abe's defect 1 exists for
 [OK       ] S7' a changed DECISION on the same figure is FLIPS
 [OK       ] S7'' AND AN EMPTY TRANSCRIPT IS ALSO FLIPS, which is how a suite killed at the census's budget comes to be reported as a false record (see `out_d5_timeout.txt`)
+
+------------------------------------------------------------------------------
+S8 -- A PRODUCER THAT DIED IS NOT A TRANSCRIPT THAT DISAGREES
+------------------------------------------------------------------------------
+THIS ARM EXISTS BECAUSE THIS SUITE COMMITTED THE DEFECT IT REPORTS,
+inside an hour of reporting it.  `lib_1abe._RE_RED` captures the producer
+command WITHOUT its interpreter, because mg-1abe never executes it -- it runs
+the whole `run_all.sh`.  `d1` did execute it, so every one of the five ran as
+`-u c1_rebase.py > out_c1_rebase.txt`, the shell answered 127, the redirection
+had ALREADY created an empty transcript, and d1 printed
+`FLIP re-derived -- 8 decision rows lost` off a file nothing had written.
+
+That is `d5_timeout.py`'s entire finding, reproduced by the instrument that
+reports it.  Two arms below: the interpreter is put back, and a run that dies
+is refused rather than compared.
+
+[OK       ] S8 `invocation` puts the interpreter back: '-u t1_population.py' -> 'python3 -u t1_population.py'
+[OK       ] S8' ...and chooses `sh` for a `.sh` producer, not `python3`
+[OK       ] S8'' NEGATIVE AND THE ONE THAT MATTERS: a producer that cannot run still leaves a transcript, because its own redirection created one -- and `rerun_at` reports RUNNER-FAILED rather than `ok`, so no caller can compare it against the committed bytes and call the difference a flip
+[OK       ] S8''' ...and the file it left behind is NOT empty (313 bytes of shell error, because the runner folds stderr in) -- so a guard keyed on emptiness alone would have called this a measurement. It is refused because it carries NO verdict-bearing line while the transcript it claims to reproduce is made of them
 
 SELF-ERRORS 0
 FINDINGS 0
