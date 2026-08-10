@@ -1,0 +1,56 @@
+==============================================================================
+mg-223d / R0 -- SELFTEST: CAN THESE RULES SAY OTHERWISE?
+==============================================================================
+    code-digest: (no producing code at HEAD)   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/pinned_ref_durability_223d;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, reachability, the history of `main` -- so it is a fact about the object store
+      as it stood at the run.  For THIS tree that is not a caveat, it is the
+      subject: every number below is a statement about what is reachable TODAY.
+
+------------------------------------------------------------------------------
+C1  THE POPULATION RULE FINDS THE ONE INSTANCE THAT WAS FILED
+------------------------------------------------------------------------------
+[OK       ] C1a `9f1ecaa` is in the pin population                           sites: 7
+[OK       ] C1b and one of its sites is lib9160.py, where cfd9c found it     
+
+------------------------------------------------------------------------------
+C2  ANCESTRY ANSWERS BOTH WAYS ON THE SAME RUN
+------------------------------------------------------------------------------
+[OK       ] C2a `9f1ecaa` is NOT an ancestor of HEAD                         
+[OK       ] C2b `eacc5e1` IS an ancestor of HEAD -- the same call, other answer 
+
+------------------------------------------------------------------------------
+C3  THE NEGATIVE CONTROL FOR `IT RESOLVES, THEREFORE IT IS A REF`
+------------------------------------------------------------------------------
+[MEASURED ] C3  600 random 7-hex tokens resolving to a commit: 0
+[MEASURED ] C3  600 random 8-hex tokens resolving to a commit: 0
+[MEASURED ] C3  600 random 12-hex tokens resolving to a commit: 0
+[OK       ] C3a the false-positive rate at 7 hex is under 1 percent          0/600
+[OK       ] C3b the same resolver says YES to a real short sha               
+
+------------------------------------------------------------------------------
+C4  REACHABILITY EXCLUDES MY OWN BRANCH -- AND THE EXCLUSION BITES
+------------------------------------------------------------------------------
+[OK       ] C4a this worktree knows its own ref                              refs/heads/polecat-c223d
+[OK       ] C4b my own HEAD is held by my own ref when self is counted       refs/heads/polecat-c223d
+[OK       ] C4c and the exclusion removes it -- the answer CHANGES           1 -> 0 holders
+
+------------------------------------------------------------------------------
+C5  THE TWIN COMPARISON CAN REPORT `SAME` AS WELL AS `DIFFERS`
+------------------------------------------------------------------------------
+[OK       ] C5a same constant, twice -> IDENTICAL row (the comparison can say SAME) {'files': 517, 'rows': 1191, 'erows': 246, 'eints': 626, 'words': 400}
+[OK       ] C5b the twin constant -> a DIFFERENT row (it can also say DIFFERS) 517 vs 537
+[OK       ] C5c and the constant is PUT BACK -- this tree edits no other tree 
+
+------------------------------------------------------------------------------
+C6  THE PIN CONTROL IS NOT VACUOUS
+------------------------------------------------------------------------------
+[OK       ] C6a check_pins() returns a non-empty verdict list                27 rows
+[MEASURED ] C6  verdicts present on this run: OK-TAGGED
+[OK       ] C6b it is not reporting one verdict for everything               (measured above; a single-verdict run is legal and is stated, not hidden)
+
+SELF-ERRORS 0
+FINDINGS 0
+TOTAL BAD: 0

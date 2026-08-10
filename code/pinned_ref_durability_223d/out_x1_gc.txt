@@ -1,0 +1,89 @@
+==============================================================================
+mg-223d / X1 -- DOES A TAG ACTUALLY SAVE IT?  RUN, NOT ASSERTED
+==============================================================================
+    code-digest: (no producing code at HEAD)   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/pinned_ref_durability_223d;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, reachability, the history of `main` -- so it is a fact about the object store
+      as it stood at the run.  For THIS tree that is not a caveat, it is the
+      subject: every number below is a statement about what is reachable TODAY.
+
+------------------------------------------------------------------------------
+X1a  THE SANDBOX
+------------------------------------------------------------------------------
+[OK       ] pin/* tags that leaked into the sandbox anyway: 0 (deleted before the experiment)
+
+      sandbox                     /private/tmp/claude-501/-Users-daniel--pogo-polecats-c223d/a11d3577-9e4e-4545-8341-7bfc642ec2c9/scratchpad/gcbox3
+      commit A (to be TAGGED)     9f1ecaa  9f1ecaac3de7
+      commit B (left UNTAGGED)    d33970b  d33970bec9d8
+      A's TREE object             7ef1dac00ca5
+      both held in the sandbox by refs/heads/polecat-z03d1 and nothing else
+[OK       ] both commits present in the sandbox
+[OK       ] A's tree object present in the sandbox
+
+------------------------------------------------------------------------------
+X1b  THE TAG -- THE REPAIR, APPLIED TO A ONLY
+------------------------------------------------------------------------------
+[OK       ] tag pin/9f1ecaa created HERE, by this probe (exit 0)
+      B GETS NOTHING.  That asymmetry is the whole experiment: A and B
+      are on the same branch, pinned the same way, differing in one ref.
+
+------------------------------------------------------------------------------
+X1c  THE FAILURE MODE, PERFORMED -- prune the merged branch
+------------------------------------------------------------------------------
+
+      refs remaining in the sandbox:
+        refs/heads/base
+        refs/tags/pin/9f1ecaa
+
+      That is the real sequence and nothing about it is exotic: the branch was
+      MERGED, so deleting it is hygiene.  `pogo refinery prune` does it.
+      GitHub offers it on every merge.  `git fetch --prune` then drops the
+      remote-tracking copy.
+
+------------------------------------------------------------------------------
+X1d  ARM 1 -- gc WITHOUT expiring the reflog (THE E5 TRAP)
+------------------------------------------------------------------------------
+
+      A (tagged)    survives: True
+      B (untagged)  survives: False
+[MEASURED ] arm 1 -- A=True B=False
+      IF B SURVIVES HERE IT IS NOT EVIDENCE FOR ANYTHING.  `git gc`
+      treats the reflog as a root, and a freshly-fetched branch has one.  This
+      arm exists so that a survival I could not attribute to the tag is on the
+      page instead of being quietly absent.
+
+------------------------------------------------------------------------------
+X1e  ARM 2 -- reflog expired, THEN gc.  The real question.
+------------------------------------------------------------------------------
+
+      A (TAGGED)      survives: True    <- the repair
+      B (untagged)    survives: False   <- the control
+      A's TREE object survives: True 
+[OK       ] THE TAGGED COMMIT SURVIVED `git gc --prune=now`
+[OK       ] THE UNTAGGED COMMIT DID NOT -- the mechanism is real and it is one prune plus one gc away
+
+------------------------------------------------------------------------------
+X1f  ARM 3 -- AND THE OPTION THAT LOOKS CHEAPEST DOES NOTHING
+------------------------------------------------------------------------------
+
+  The ticket's second option is `committing the two tree hashes with the
+  figure`.  The sandbox now answers it, and the answer is not a matter of
+  degree:
+
+      B's tree sha, as it would be WRITTEN INTO A COMMITTED FILE:
+          0199bbec89d43d9fc2a3db7d5b808d7fd1a10eaa
+      that object, after the prune and the gc:  GONE
+[OK       ] A TREE SHA IN A TEXT FILE IS NOT A REF.  `gc` collects an unreachable tree exactly as it collects an unreachable commit; recording the hash records WHICH object you needed, not the object
+
+      SO OPTION (b) IS NOT A WEAKER VERSION OF OPTION (a).  It is a record of
+      the loss, written in advance, in a format that reads like a remedy.
+      That is worth stating plainly because it is the option a reader reaches
+      for first: it needs no ref, no push, and no permission.
+
+      sandbox left in place for inspection: /private/tmp/claude-501/-Users-daniel--pogo-polecats-c223d/a11d3577-9e4e-4545-8341-7bfc642ec2c9/scratchpad/gcbox3
+
+SELF-ERRORS 0
+FINDINGS 0
+TOTAL BAD: 0

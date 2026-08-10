@@ -1,0 +1,43 @@
+# mg-223d -- PINS.tsv.  THE DECLARATION, and the input to the R4 control.
+#
+# One row per QUOTED HEX LITERAL in tracked `*.py`/`*.sh` that resolves to a
+# commit that is NOT an ancestor of `main`.  These are DEPENDENCES: the object
+# must still be there or the instrument does not run.  They are not endorsements
+# and the tag prefix `pin/` says only that something pins the commit.
+#
+# THE UNIT IS THE TOKEN, NOT THE COMMIT.  `3738079` and `37380799` are two rows
+# and one commit; both are true of different things and conflating them is the
+# grain defect this arc keeps finding.  R4 prints both counts.
+#
+# COLUMNS:  short <TAB> full <TAB> keep-alive-tag <TAB> pinning code/* dirs <TAB> note
+#
+# ADDING A ROW HERE DOES NOT CREATE THE TAG.  `mktags.sh` does, and it requires
+# --yes.  A file that silently mutated the ref namespace would be worse than the
+# defect it repairs.
+064c79c	064c79c12662e13a54ebfba9deb1da6de19146da	pin/064c79c	transcript_census_1abe	predictions
+0ef9af9	0ef9af941badf3a30b25b635f6e93198b7749ea0	pin/0ef9af9	repair_b2af	docs+audit
+3738079	37380799bdc440c64a63021bdfc01e7ea9fb1e4b	pin/3738079	figures_revision_repair_5035,runner_exit_repair_bf79	predictions
+37380799	37380799bdc440c64a63021bdfc01e7ea9fb1e4b	pin/3738079	figures_revision_repair_5035	predictions
+3cd39f1	3cd39f1d362ec2df4a1af1013a9ddb42c5c46d9d	pin/3cd39f1	chain_audit_39bf	predictions
+3fc870a	3fc870a87a0f5dfd27f17c677a309f2a3a873028	pin/3fc870a	idiom_sweep_audit_18dc	instrument
+41972fb	41972fbf9f11eaf0267c6dd5b8c89c58af53af73	pin/41972fb	idiom_sweep_audit_18dc	evidence+docs
+424e693	424e6939556a13e55d8ad831337611b173699824	pin/424e693	chain_audit_39bf	math+docs
+454f565	454f565c23e1de5750c41dfd88732d69a7719468	pin/454f565	idiom_sweep_audit_18dc	predictions
+4a06b4c	4a06b4cd000e7752429c233590c92c7b01b8efc0	pin/4a06b4c	audit_c067	evidence
+4fd4f32	4fd4f326cd45060df778968be505af58f87fecca	pin/4fd4f32	suppression_polarity_audit_40e4	repair+instrument
+6aa043a	6aa043a802282d1dc6fc493344cd9bd78caa841e	pin/6aa043a	runner_exit_repair_bf79	predictions
+72e36cb	72e36cb1974cd555c5b6cbe87ea6726b42643edc	pin/72e36cb	transcript_census_1abe	predictions
+739f7bd	739f7bd9f15701eb503d84a297edb238af609ea1	pin/739f7bd	state_claims_repair_0120	predictions
+880fc15	880fc15428c401d9cf7bfa96d16e12dc9e43067d	pin/880fc15	transcript_census_1abe	predictions
+89d6aa1	89d6aa1bf0c78408d7fcf97c71e522e4f74b957e	pin/89d6aa1	audit_c067	repair+docs
+8a07ae0	8a07ae01fc45b0856dc73651cfc17f2c9895de57	pin/8a07ae0	publication_anchor_132a	repair+docs
+98478d4	98478d4963e0ba751443136dfc90468eac6f47f8	pin/98478d4	suppression_polarity_audit_40e4	docs
+9f1ecaa	9f1ecaac3de72d3506c41daa8b4c8f33a3eb43ae	pin/9f1ecaa	grain_arity_9160,idiom_sweep_audit_18dc	predictions
+b94cb1e	b94cb1ed671c11b847c1bc3aede3453e9fa89c97	pin/b94cb1e	hash_population_6e58,repair_b2af,transcript_census_1abe	audit
+ba19c06	ba19c06a416f35911f34a3eedbcb735a23d5eca3	pin/ba19c06	chain_audit_39bf	instrument
+c1a57fd	c1a57fdd8d8c6c1c8225141655a3ef5121d3a42c	pin/c1a57fd	publication_anchor_132a	evidence
+cada54f	cada54febeb7a70c70504229fa8c65dae7772ac1	pin/cada54f	species_bound_audit_6ef4	evidence
+d33970b	d33970bec9d87dc6c6528284250ad166d394d2c5	pin/d33970b	idiom_sweep_audit_18dc	audit
+e3fb80e	e3fb80e39c5740dfecf1761208c04e749c3483c0	pin/e3fb80e	suppression_polarity_audit_40e4	predictions
+e545a2c	e545a2ccdb1ba652535840b3b536fbe279f173a6	pin/e545a2c	suppression_polarity_audit_40e4	evidence
+e84ab66	e84ab66204cf9b259da750355f027862f859c2f5	pin/e84ab66	suppression_polarity_audit_40e4	evidence

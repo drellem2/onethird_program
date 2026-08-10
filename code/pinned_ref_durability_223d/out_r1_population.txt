@@ -1,0 +1,199 @@
+==============================================================================
+mg-223d / R1 -- EVERY PINNED REF IN THE ARC, AND ITS ANCESTRY
+==============================================================================
+    code-digest: (no producing code at HEAD)   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/pinned_ref_durability_223d;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, reachability, the history of `main` -- so it is a fact about the object store
+      as it stood at the run.  For THIS tree that is not a caveat, it is the
+      subject: every number below is a statement about what is reachable TODAY.
+
+------------------------------------------------------------------------------
+R1a  THE DENOMINATOR
+------------------------------------------------------------------------------
+
+      tracked files at HEAD                              2424
+        of which `*.py` / `*.sh`  (the pin population)   1096
+        of which everything else  (records)              1328
+      `code/*` directories holding tracked code           178
+      ^ one unit of each of the first three is one FILE; of the last, one DIRECTORY
+
+------------------------------------------------------------------------------
+R1b  THE TWO RULES, AND WHAT EACH CANNOT SEE
+------------------------------------------------------------------------------
+
+  RULE A -- A PIN.  A 7-40 character hex run BETWEEN MATCHING QUOTES in a
+  tracked `*.py` or `*.sh`, that resolves to a commit.  A pin is a DEPENDENCE:
+  the object must still be there or the instrument does not run.
+
+  RULE B -- A SIGHTING.  Any 7-40 character hex run in ANY tracked file, that
+  resolves to a commit.  A sighting is a RECORD: a transcript saying what a
+  commit was.  If the object dies the claim becomes uncheckable and nothing
+  stops running.
+
+  THE DISTINCTION IS THE WHOLE OF THE RESTRAINT IN THIS TREE, and the two
+  numbers are both printed so a reader can see the one I did not report.
+
+  WHAT RULE A CANNOT SEE, stated here rather than left in a docstring:
+      - a rev built by concatenation or `.format()`
+      - a rev read at run time out of a `.md` / `.json` / `.txt`
+      - a rev taken from `sys.argv` or the environment
+      - a rev in a language this arc does not use
+  Each of those is a pin my count omits.  I did not find one; I also did not
+  build a rule that could.
+
+------------------------------------------------------------------------------
+R1c  THE FALSE-POSITIVE RATE, MEASURED, NOT ASSUMED
+------------------------------------------------------------------------------
+      600 random  7-hex tokens                 resolving: 0
+      600 random  8-hex tokens                 resolving: 0
+      600 random 12-hex tokens                 resolving: 0
+      600 random 40-hex tokens                 resolving: 0
+[MEASURED ] at 7 hex -- the shortest form the arc uses -- 0 of 600 random tokens resolve
+
+      SO `IT RESOLVES` IS NEARLY A DECISIVE TEST, and P5 -- my own bet that
+      the wide count would be mostly coincidence -- is heading for a LOSS.
+      The reason the wide number still is not the headline is NOT that it is
+      false.  It is that a record and a dependence are different things.
+
+------------------------------------------------------------------------------
+R1d  RULE A: EVERY PIN, AND WHETHER IT IS AN ANCESTOR OF HEAD
+------------------------------------------------------------------------------
+
+      quoted hex literals in tracked code                 190  tokens
+        of which resolve to a commit                      176  tokens
+          of which ARE ancestors of HEAD                  149  tokens
+          of which are NOT ancestors of HEAD               27  tokens
+      the same, counted as COMMITS rather than tokens      26  commits
+      ^ E2: `3738079` and `37380799` are two tokens and one commit.  Both
+        numbers are true of different things and this tree says which.
+
+      SHORT     FULL          DIRECTORIES THAT PIN IT            SITES
+      064c79c   064c79c12662  transcript_census_1abe             1
+      0ef9af9   0ef9af941bad  repair_b2af                        1
+      3738079   37380799bdc4  figures_revision_repair_5035, runn 8
+      37380799  37380799bdc4  figures_revision_repair_5035       1
+      3cd39f1   3cd39f1d362e  chain_audit_39bf                   1
+      3fc870a   3fc870a87a0f  idiom_sweep_audit_18dc             4
+      41972fb   41972fbf9f11  idiom_sweep_audit_18dc             3
+      424e693   424e6939556a  chain_audit_39bf                   1
+      454f565   454f565c23e1  idiom_sweep_audit_18dc             3
+      4a06b4c   4a06b4cd000e  audit_c067                         2
+      4fd4f32   4fd4f326cd45  suppression_polarity_audit_40e4    1
+      6aa043a   6aa043a80228  runner_exit_repair_bf79            2
+      72e36cb   72e36cb1974c  transcript_census_1abe             2
+      739f7bd   739f7bd9f157  state_claims_repair_0120           1
+      880fc15   880fc15428c4  transcript_census_1abe             1
+      89d6aa1   89d6aa1bf0c7  audit_c067                         1
+      8a07ae0   8a07ae01fc45  publication_anchor_132a            1
+      98478d4   98478d4963e0  suppression_polarity_audit_40e4    1
+      9f1ecaa   9f1ecaac3de7  grain_arity_9160, idiom_sweep_audi 7
+      b94cb1e   b94cb1ed671c  hash_population_6e58, repair_b2af, 4
+      ba19c06   ba19c06a416f  chain_audit_39bf                   1
+      c1a57fd   c1a57fdd8d8c  publication_anchor_132a            1
+      cada54f   cada54febeb7  species_bound_audit_6ef4           1
+      d33970b   d33970bec9d8  idiom_sweep_audit_18dc             9
+      e3fb80e   e3fb80e39c57  suppression_polarity_audit_40e4    1
+      e545a2c   e545a2ccdb1b  suppression_polarity_audit_40e4    1
+      e84ab66   e84ab66204cf  suppression_polarity_audit_40e4    1
+
+[MEASURED ] the 27 off-history pins live in 13 of the 178 `code/*` directories
+
+------------------------------------------------------------------------------
+R1e  ARE ANY OF THEM ALREADY DEAD?
+------------------------------------------------------------------------------
+[MEASURED ] quoted literals >=8 hex that do NOT resolve to a commit: 10
+        0000000000  code/audit_330a/s2_perturb.py
+        0123456789  code/figures_revision_repair_5035/f1_rule.py
+        0123456789abcdef  code/branching_audit_e34a/k2_five.py
+        12345678901234567890123456789012345678  code/figures_revision_repair_5035/f1_rule.py
+        431723379   code/counterexample_audit_0a11/check_doc_audit.py
+        6129b1bc8b7bf774  code/hodge_leverage_audit_8a5c/audit_repair_8e30.py
+        9af08bc5d909054ae89a4ad8565e7531d60e2602  code/suppression_polarity_audit_40e4/q3_claims_40e4.py
+        abcdef0123456789abcdef0123456789abcdef01  code/branching_repair_76cc/selftest_76cc.py
+        db095fbe    code/chain_audit_39bf/a1_source_counts.py
+        deadbeefdeadbeefdeadbeefdeadbeefdeadbeef  code/branching_audit_957f/selftest_957f.py
+      ^ these are NOT necessarily dead refs.  A quoted hex run of 8+ is
+        far more often a digest, a colour, or a fixture than a sha, and
+        this tree does not claim otherwise.  R1f is where death is decided.
+
+------------------------------------------------------------------------------
+R1f  WHAT HOLDS THE OFF-HISTORY PINS ALIVE -- THE FINDING
+------------------------------------------------------------------------------
+
+  TWO COLUMNS, AND THE FIRST ONE IS THE FINDING.  `mg-223d` is the ticket that
+  put the tags there, so once it has run, a table of `what holds this alive`
+  reports DURABLE for everything and the defect vanishes from its own
+  transcript.  That is a real failure mode for a repair that ships with its own
+  audit, so both states are printed:
+
+      AS FOUND  -- holders EXCLUDING `refs/tags/pin/*`.  This is the state
+                   the arc was in when cfd9c filed D10, and it is what the
+                   arc returns to the moment these tags are deleted.
+      NOW       -- holders as they actually are on this run.
+
+      SHORT     AS FOUND  NOW       HOLDING REFS (own branch excluded)
+      064c79c   AT-RISK   DURABLE   origin/polecat-fcb2, tag:pin/064c79c
+      0ef9af9   AT-RISK   DURABLE   origin/polecat-330a, tag:pin/0ef9af9
+      3738079   AT-RISK   DURABLE   refs/heads/polecat-wbf79, origin/polecat-wbf79, origin/polecat-xbf79, tag:pin/3738079
+      37380799  AT-RISK   DURABLE   refs/heads/polecat-wbf79, origin/polecat-wbf79, origin/polecat-xbf79, tag:pin/3738079
+      3cd39f1   AT-RISK   DURABLE   refs/heads/polecat-q9461, origin/polecat-q9461, tag:pin/3cd39f1, tag:pin/424e693, tag:pin/ba19c06
+      3fc870a   AT-RISK   DURABLE   origin/polecat-zec63, tag:pin/3fc870a, tag:pin/41972fb
+      41972fb   AT-RISK   DURABLE   origin/polecat-zec63, tag:pin/41972fb
+      424e693   AT-RISK   DURABLE   refs/heads/polecat-q9461, origin/polecat-q9461, tag:pin/424e693
+      454f565   AT-RISK   DURABLE   origin/polecat-zec63, tag:pin/3fc870a, tag:pin/41972fb, tag:pin/454f565
+      4a06b4c   AT-RISK   DURABLE   origin/polecat-132a, tag:pin/4a06b4c
+      4fd4f32   AT-RISK   DURABLE   origin/polecat-z5f7c, tag:pin/4fd4f32, tag:pin/98478d4, tag:pin/e545a2c, tag:pin/e84ab66
+      6aa043a   AT-RISK   DURABLE   origin/polecat-56dc, tag:pin/6aa043a
+      72e36cb   AT-RISK   DURABLE   origin/polecat-f3ff, tag:pin/72e36cb
+      739f7bd   AT-RISK   DURABLE   origin/polecat-a74f, tag:pin/739f7bd
+      880fc15   AT-RISK   DURABLE   origin/polecat-65eb, tag:pin/880fc15
+      89d6aa1   AT-RISK   DURABLE   origin/polecat-132a, tag:pin/4a06b4c, tag:pin/89d6aa1
+      8a07ae0   AT-RISK   DURABLE   origin/polecat-3f3b, tag:pin/8a07ae0, tag:pin/c1a57fd
+      98478d4   AT-RISK   DURABLE   origin/polecat-z5f7c, tag:pin/98478d4, tag:pin/e545a2c, tag:pin/e84ab66
+      9f1ecaa   AT-RISK   DURABLE   origin/polecat-z03d1, tag:pin/9f1ecaa, tag:pin/d33970b
+      b94cb1e   AT-RISK   DURABLE   origin/polecat-330a, tag:pin/0ef9af9, tag:pin/b94cb1e
+      ba19c06   AT-RISK   DURABLE   refs/heads/polecat-q9461, origin/polecat-q9461, tag:pin/424e693, tag:pin/ba19c06
+      c1a57fd   AT-RISK   DURABLE   origin/polecat-3f3b, tag:pin/c1a57fd
+      cada54f   AT-RISK   DURABLE   origin/polecat-5040, tag:pin/cada54f
+      d33970b   AT-RISK   DURABLE   origin/polecat-z03d1, tag:pin/d33970b
+      e3fb80e   AT-RISK   DURABLE   origin/polecat-z5f7c, tag:pin/4fd4f32, tag:pin/98478d4, tag:pin/e3fb80e, tag:pin/e545a2c, tag:pin/e84ab66
+      e545a2c   AT-RISK   DURABLE   origin/polecat-z5f7c, tag:pin/e545a2c, tag:pin/e84ab66
+      e84ab66   AT-RISK   DURABLE   origin/polecat-z5f7c, tag:pin/e84ab66
+
+      distinct refs holding the whole off-history set      43
+        remote-tracking `origin/polecat-*`                 15
+        local `refs/heads/polecat-*`                        2
+        tags                                               26
+      ^ one unit of each is one REF
+[FINDING  ] AS FOUND -- off-history pins whose only holders were prunable branches: 27 of 27.  THIS IS THE FINDING, and it is reported as one on every run, including runs where the repair has already landed
+[OK       ] NOW -- off-history pins still held only by prunable branches: 0 of 27
+[OK       ] off-history pins held by NO ref at all (already floating): 0
+
+  WHY `AT-RISK` IS NOT ALARMISM.  Each of those refs is a MERGED polecat
+  branch.  `pogo refinery prune` exists to delete merged branches; GitHub
+  offers to do it on every merge; and a `git fetch --prune` afterwards drops
+  the local remote-tracking ref.  Three ordinary, sanctioned, individually
+  correct operations, in that order, and the object is unreferenced.  The
+  next `git gc` collects it.  Nothing in the arc records that anything
+  depends on it.
+
+------------------------------------------------------------------------------
+R1g  RULE B, FOR CONTRAST -- THE NUMBER I AM NOT REPORTING
+------------------------------------------------------------------------------
+
+      hex tokens anywhere in any tracked file            1846  tokens
+        resolving to a commit                            1091  tokens
+          NOT ancestors of HEAD                           381  tokens
+            of those, RECORD only (no code pins them)     354  tokens
+            of those, REQUIRED (rule A found them too)     27  tokens
+
+      THE HEADLINE THIS TREE DOES **NOT** RUN: `381 BROKEN PINS`.
+      The honest headline is `27`, and the difference is 354 records that
+      name a commit without depending on it.  A dead record is a claim
+      you can no longer check; a dead pin is a program that no longer runs.
+
+SELF-ERRORS 0
+FINDINGS 1
+TOTAL BAD: 1
