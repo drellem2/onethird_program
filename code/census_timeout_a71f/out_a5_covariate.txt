@@ -1,0 +1,55 @@
+==============================================================================
+a5 -- THE TIMED-OUT COUNT AGAINST THE LOAD THAT PRODUCED IT
+==============================================================================
+    code-digest: 0825d2e51668afea   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_timeout_a71f;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+
+------------------------------------------------------------------------------
+A5a -- THE HOLE IN THE COVARIATE, STATED BEFORE ANYTHING IS CONCLUDED FROM IT
+------------------------------------------------------------------------------
+    groups in the census                  164
+    groups the sampler observed           119
+    groups with NO covariate row           74   <- ran before sampling began, or finished inside one 15 s gap
+    observed but not in the census         29   (SELF/SKIPPED, or a second worker on the same key)
+
+    sampling window   2026-08-10T08:01:30Z .. 2026-08-10T09:45:06Z
+    1-min load        min 5.43  max 129.59  mean 16.62
+[FINDING  ] A5a 74 of 164 groups have NO covariate row.  Every conclusion below ranges over the 119 that do, and the unsampled groups are NOT assumed to resemble them -- they ran EARLIER, which is when the box was busiest
+
+------------------------------------------------------------------------------
+A5b -- DO THE TIMED-OUT GROUPS SIT IN THE HIGH-LOAD PART OF THE RUN?
+------------------------------------------------------------------------------
+    bucket over SAMPLED groups                      n   mean      max
+    groups with a TIMED-OUT row                     2  19.74    30.81
+    groups with none                               88  15.10    94.60
+
+    every sampled TIMED-OUT group, with the load it ran under:
+      directory                                commit      load  window (utc)
+      hodge_leverage_repair_ff3e               3bf0cd2     8.66  08:35:44 .. 08:50:21
+      species_rung_repair_4adb                 1729f69    30.81  09:28:33 .. 09:43:19
+[FINDING  ] A5b sampled groups that timed out ran under a mean 1-minute load of 19.74; groups that did not ran under 15.10.  A gap here means the TIMED-OUT count is partly a fact about WHEN a group was scheduled and the honest figure is a bracket, not a count
+
+------------------------------------------------------------------------------
+A5c -- WHAT THIS ARM CANNOT DO
+------------------------------------------------------------------------------
+
+It cannot turn an observational covariate into a controlled one.  Nobody set
+the load; it fell on its own while the run proceeded in a fixed order, so LOAD
+and POSITION IN THE RUN are themselves confounded with each other.  A group
+that timed out late under low load is evidence against the confound; a group
+that timed out early under high load is consistent with BOTH `this suite is
+slow` and `the box was busy`, and this arm cannot separate them.
+
+The clean experiment is the one the census's own T2d already names: re-run with
+`--timeout N` on a quiet box and see which rows come back.  That is a different
+measurement and it is not made here.
+
+
+SELF-ERRORS 0
+FINDINGS 2
+TOTAL BAD: 2

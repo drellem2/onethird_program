@@ -13,6 +13,17 @@ MANUFACTURED damage: a suite killed at the budget was bucketed `DIFFERS`
 against a zero-byte file, and `conclusion_verdict(committed, "")` scores that
 `FLIPS`, which is the census's word for A FALSE RECORD AT ITS CARRYING COMMIT.**
 
+**It fired. `TIMED-OUT` is 2 of 541 where it was 0 of 541, both rows had the
+shell's file already in place, and `FLIPS` FALLS 5 → 4. The row that left is
+`hodge_leverage_repair_ff3e/out_repair_ff3e.txt`, one of the five mg-1abe
+published as false records — now reported as NOT MEASURED rather than as damage.
+Of the ticket's 107, exactly 1 is a timeout artefact; of the five, exactly 1.**
+
+**And both of those 2 time out AGAIN on a demonstrably quieter box — mean load
+10.11 against 16.62, peak 45.93 against 129.59 — so 0 of them are machine
+artefacts. The load confound was real, was worth chasing, and manufactured
+neither timeout.**
+
 **`audit_c067/out_c1_rebase.txt` is ANNOTATED and was NOT re-run. Its `5` is
 true; its producer answers `0` today because it matches by subject inside `git
 log main -n 40` and `main` is 238 commits past the carrier. A re-run writes 0
@@ -112,6 +123,60 @@ So: **same as-of, same population (541 transcripts, 164 groups), same 900 s
 budget, repaired instrument.** The delta is attributable to the instrument and
 to the passage of time, and `a4` refuses to conflate those two.
 
+### The result
+
+Same as-of, same 541 population, same 164 groups, same 900 s budget.
+
+| bucket | PRIOR (unrepaired) | THIS RUN (repaired) |
+|---|---:|---:|
+| `REPRODUCES` | 398 | 392 |
+| `DIFFERS` | 112 | 116 |
+| `NOT-REGENERATED` | 0 | 0 |
+| `NO-RUNNER` | 31 | 31 |
+| `RUNNER-FAILED` | 0 | 0 |
+| **`TIMED-OUT`** | **0** | **2** |
+
+**The bucket that could not fire, fired — and both rows in it had the shell's
+file already in place**, so both were `DIFFERS` before the repair. Neither was
+"genuinely absent when the axe fell": the mechanism cf8e5 described is the whole
+of what was observed.
+
+**`FLIPS` falls 5 → 4, and the row that left is
+`hodge_leverage_repair_ff3e/out_repair_ff3e.txt`** — one of the five mg-1abe
+published as false records. It is now reported as *not measured* rather than as
+damage. cf8e5 established this by running it to completion in 1470 s; this
+establishes it by a different route, an instrument that declines to call a kill
+a verdict. **A correction made by an instrument rather than by an argument.**
+
+And a **second timeout artefact nobody had named**:
+`species_rung_repair_4adb/out_v1_population.txt`.
+
+#### Sizing the 107, which is what the ticket asked for
+
+| | |
+|---:|---|
+| 112 | prior `DIFFERS` |
+| 5 | of which prior `FLIPS`, published as damage |
+| **107** | the ticket's remainder |
+| **2** | prior `DIFFERS` this run declines to measure — **1 from the five, 1 from the 107** |
+| 109 | re-run to completion and still not the committed bytes |
+
+#### The transition matrix, and what the repair may not be credited with
+
+531 of 541 rows are identical across the two runs. **10 moved, and only 2 of
+them are the repair's signature.**
+
+| | → `REPRODUCES` | → `DIFFERS` | → `TIMED-OUT` |
+|---|---:|---:|---:|
+| `REPRODUCES` → | 391 | **7** | 0 |
+| `DIFFERS` → | **1** | 109 | **2** |
+
+The 8 rows in bold that are *not* `→ TIMED-OUT` are **not** credited to the
+repair. Seven `REPRODUCES → DIFFERS` and one the other way, all in
+`branching_*` directories — the census's own T2e class, *a producer that reads
+repository-global state*, displaced because `main` moved between the two runs.
+`a4`'s A4d names every one of them.
+
 **IT COULD NOT BE DERIVED ON PAPER, AND THAT IS THE COST OF THE DEFECT.** The
 old census's transcript records, for a `DIFFERS` row, `conclusion FLIPS/HELD/…`
 and nothing else — no run status, no duration. **The old run's timeouts are not
@@ -174,12 +239,21 @@ differently-sized box for a reason that has nothing to do with the arc — the
 exact defect being measured, committed by the instrument measuring it."* A
 timestamp is that argument with the volume up.
 
-**The covariate has a hole and it is in the worst place.** Sampling began at
-group 26 of 164, so the first 25 groups — which ran under the *highest* load —
-have no rows. **The covariate's blind spot and the confound's worst region are
-the same rows.** `a5`'s A5a prints the size of that hole before drawing any
-conclusion from the part that was sampled, and nothing is backfilled by
-estimation: an absent row is honest, an inferred one is not.
+**The covariate has a hole, it is bigger than I said, and it is in the worst
+place.** I described it as "the first 25 groups". Measured, it is **74 of 164
+groups with no covariate row** — the 25 that ran before sampling began, plus
+every group that started and finished inside a single 15-second gap. **The
+covariate's blind spot and the confound's worst region overlap**, because the
+pre-sampler rows are also the highest-load ones. `a5`'s A5a prints that number
+before drawing any conclusion from the 119 groups that were sampled, and nothing
+is backfilled by estimation: an absent row is honest, an inferred one is not.
+
+A5a also reports **29 observed keys that are not census groups**. The sampler
+matched any `sh run_all.sh` whose cwd sat inside a census worktree — which
+includes runs a *suite* starts for itself, not only the ones the census started.
+Those belong to the suite, not to the census's group list. They are counted in
+their own row and **not adjudicated here**; they are also a second sighting of
+the concurrency question the 08:05Z spike raised.
 
 ### And therefore the count is a candidate set, not an answer
 
@@ -198,6 +272,34 @@ Neither run alone separates those; the pair does. `a6`'s A6d compares the load
 it sampled during its own subprocess against the covariate from the full run and
 **refuses the contrast** if the second run was not materially quieter — a
 discriminator that cannot tell you it failed to discriminate is not one.
+
+#### And the discriminator went against the worry
+
+| | |
+|---:|---|
+| **2** | timed out under load — the candidate set |
+| **2** | **timed out AGAIN when quiet — SLOW CODE.** The only figure here that is a statement about the arc |
+| **0** | reproduced when quiet — machine artefacts |
+| **0** | differed when quiet |
+
+The second run was genuinely quieter and A6d checked it rather than assuming it:
+**mean 1-minute load 10.11 against 16.62, peak 45.93 against 129.59.** Under
+those conditions, at the same 900 s budget and the same as-of, *both* candidates
+timed out again.
+
+**So the load confound did not manufacture either timeout.** The whole exchange
+that produced `a5` and `a6` — a 20× excursion, two withdrawn load
+characterisations, a plan change — was warranted by the risk and is answered in
+the negative by the measurement. `TIMED-OUT = 2` is a fact about the arc:
+`hodge_leverage_repair_ff3e` and `species_rung_repair_4adb` need more than 900 s
+regardless of load. That is consistent with cf8e5's independent 1470 s
+measurement of the first, and it is the first thing anyone has measured about
+the second.
+
+`a6` swept in 4 extra transcripts beyond the 2 candidates, because `--dirs`
+filters on directory while the census keys on `(directory, commit)`. A6a prints
+that rather than letting it pass as harmless; it can only add rows to the
+comparison, never drop one.
 
 **And the `31.5` in the ticket thread is not a reading from this run.** It was
 taken at 07:27Z, during the first attempt, which was killed at ~07:30Z (D7). The

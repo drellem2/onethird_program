@@ -1,0 +1,126 @@
+==============================================================================
+a4 -- SIZING THE 107: THE SAME POPULATION, THE OLD INSTRUMENT AND THE REPAIRED ONE
+==============================================================================
+    code-digest: 0825d2e51668afea   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_timeout_a71f;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+
+------------------------------------------------------------------------------
+A4a -- ARE THESE TWO CENSUSES OF THE SAME POPULATION?
+------------------------------------------------------------------------------
+
+Checked, not assumed.  If the as-of or the denominator differ, every row below
+is a comparison between two different questions and must not be read as a
+correction of anything.
+
+             PRIOR (mg-1abe, unrepaired)                THIS RUN (mg-a71f, repaired)
+    as-of    81214a9c02ee624dc1261c69db50d47ed659728f   81214a9c02ee624dc1261c69db50d47ed659728f
+    pop      541                                        541
+[OK       ] A4a both transcripts state the same as-of (81214a9) and the same denominator (541).  The comparison below is row-for-row over one population
+[OK       ] A4a' the T2a tables parse to 541 and 541 rows against stated populations of 541 and 541.  A parser that silently read nothing would print `0 moved` below, which is why this is a row and not a comment
+
+------------------------------------------------------------------------------
+A4b -- THE TRANSITION MATRIX, EVERY ROW ACCOUNTED FOR
+------------------------------------------------------------------------------
+    rows: PRIOR verdict.  columns: THIS RUN's verdict.
+                       REPRODUCE   DIFFERS NO-RUNNER TIMED-OUT
+    REPRODUCES               391         7         0         0
+    DIFFERS                    1       109         0         2
+    NO-RUNNER                  0         0        31         0
+[FINDING  ] A4b 531 of 541 rows have the same verdict in both runs; 10 moved
+
+------------------------------------------------------------------------------
+A4c -- THE ANSWER TO THE TICKET'S QUESTION
+------------------------------------------------------------------------------
+
+Of the transcripts the PRIOR census bucketed DIFFERS, how many does the
+REPAIRED census decline to measure at the same budget?
+
+    prior DIFFERS                                    112
+      ...of which prior FLIPS (published as damage)    5
+      ...of which the rest -- the ticket's `107`     107
+
+    THIS RUN's verdict for those 112 rows:
+      TIMED-OUT      2   <- NOT MEASURED.  Under the old guard every one of these was
+                        a DIFFERS, and any carrying a decision was a FALSE RECORD.
+      DIFFERS      109   <- re-run to completion and still not the committed bytes
+      other          1   <- moved for a reason that is not the repair; named in A4d
+
+    every prior DIFFERS this run could not measure, named:
+      hodge_leverage_repair_ff3e/out_repair_ff3e.txt
+      species_rung_repair_4adb/out_v1_population.txt
+[FINDING  ] A4c 2 of the 112 prior DIFFERS are TIMED-OUT under the repaired instrument at the same 900 s budget.  Each one is a row the census reported as non-reproducing having never finished measuring it
+
+    THE FIVE PUBLISHED AS FALSE RECORDS, one at a time:
+      transcript                                               PRIOR          THIS RUN
+      audit_c067/out_c1_rebase.txt                             DIFFERS/FLIPS  DIFFERS
+      hash_population_6e58/out_p2_population.txt               DIFFERS/FLIPS  DIFFERS
+      hash_population_6e58/out_p3_unrestricted.txt             DIFFERS/FLIPS  DIFFERS
+      hodge_leverage_audit_f922/out_audit.txt                  DIFFERS/FLIPS  DIFFERS
+      hodge_leverage_repair_ff3e/out_repair_ff3e.txt           DIFFERS/FLIPS  TIMED-OUT
+[FINDING  ] A4c' 1 of the 5 transcripts mg-1abe PUBLISHED AS FALSE RECORDS are, under the repaired instrument, NOT MEASURED AT ALL.  That is the correction to the damage figure this ticket asked for, and it is a correction made by an instrument rather than by an argument
+
+------------------------------------------------------------------------------
+A4d -- WHAT THE REPAIR MAY NOT BE CREDITED WITH
+------------------------------------------------------------------------------
+
+Two runs days apart on a shared box, with `main` far ahead of where it was, do
+not differ only by the repair.  Every move whose new verdict is NOT TIMED-OUT
+is attributed elsewhere and named here, so that the headline above cannot
+quietly absorb it.
+
+The census's own T2e says the largest cause of non-reproduction in this arc is
+A PRODUCER THAT READS REPOSITORY-GLOBAL STATE.  Such a row moves whenever
+anybody commits anything.  Between these two runs, `main` moved a long way.
+
+    REPRODUCES         -> DIFFERS               7
+        branching_af28/out_scan_brown.txt
+        branching_audit_19ec/out_e3_f4_brown.txt
+        branching_audit_5800/out_a6_quotes.txt
+        branching_audit_6ad0/out_a5_scan.txt
+        branching_audit_6ad0/out_a6_quotes.txt
+        branching_repair_41aa/out_r3_rescope.txt
+        ... and 1 more
+    DIFFERS            -> REPRODUCES            1
+        branching_audit_5800/out_a1_counts.txt
+[MEASURED ] A4d 8 rows moved to a bucket that is NOT TIMED-OUT.  The repair cannot explain these and is not credited with them: the instrument changed, and so did the repository and the machine
+
+------------------------------------------------------------------------------
+A4e -- WHAT THIS RUN DOES **NOT** SAY
+------------------------------------------------------------------------------
+
+⚠️  112 STANDS AS AN UPPER BOUND ON NON-REPRODUCTION WHOSE SLACK IS UNSIZED.
+cf8e5 was explicit that nothing in this ticket weakens that, and this run must
+not be reported as having weakened it unless it MEASURED it.  It did not.  What
+it measured is how many rows the repaired instrument declines to measure at a
+900-second budget on this machine today -- a number that moves with the budget
+and with the box, and the census's own T2d says so.
+
+⚠️  AND THIS RUN CANNOT SAY WHAT THE OLD RUN'S TIMEOUTS WERE.  A row that is
+TIMED-OUT today may have finished inside the budget then, on a quieter machine,
+and genuinely differed.  The old transcript records no status for a DIFFERS row,
+so that question is closed forever.  The honest reading of A4c is `these rows
+are not evidence of non-reproduction`, NOT `these rows reproduced`.
+
+⚠️  THE OLD CENSUS'S NUMBERS ARE NOT OVERWRITTEN.  They stand in this directory
+verbatim as `prior_1abe_t2_census_at_81214a9.txt`, and the pair is printed
+below rather than the new one alone.
+
+    bucket                      PRIOR       THIS RUN
+    REPRODUCES                    398            392
+    DIFFERS                       112            116
+    NOT-REGENERATED                 0              0
+    NO-RUNNER                      31             31
+    RUNNER-FAILED                   0              0
+    TIMED-OUT                       0              2
+    SELF                            0              0
+    SKIPPED                         0              0
+[MEASURED ] A4e the two censuses stand side by side.  The new one is A DIFFERENT MEASUREMENT -- same population, repaired instrument, different day -- and not a correction applied to the old one's numbers
+
+SELF-ERRORS 0
+FINDINGS 3
+TOTAL BAD: 3
