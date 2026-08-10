@@ -29,9 +29,24 @@ census.
                     in the tree says how the file was made.
   RUNNER-FAILED     the runner could not start (non-zero before writing).
   TIMED-OUT         the runner exceeded the budget and this file was not
-                    written before it did.  NEVER folded into DIFFERS: "I did
+                    COMPLETED before it did.  NEVER folded into DIFFERS: "I did
                     not finish measuring" and "it does not reproduce" are
                     different claims and only one of them is about the subject.
+
+                    mg-a71f: for eight weeks this bucket COULD NOT FIRE, for
+                    any suite, on any machine.  It was guarded by `got[p] is
+                    None` -- file absent -- and `sh run_all.sh` redirects, so
+                    the shell CREATES `out_x.txt` before the producer starts.
+                    A killed run therefore left a file that existed, held zero
+                    or partial bytes, and was bucketed DIFFERS with a
+                    conclusion computed against the empty string -- which
+                    `conclusion_verdict` scores FLIPS, i.e. A FALSE RECORD.
+                    The guard is now the timeout STATUS, not the file's
+                    absence.  The single exception is deliberate: a file that
+                    is BYTE-IDENTICAL to the committed blob when the axe falls
+                    still counts REPRODUCES, because a truncated write cannot
+                    forge the whole blob, and its detail column says the suite
+                    was killed so the reader can subtract it if they disagree.
   SELF              this census's own transcripts.  Re-entering t2 from inside
                     t2 recurses; the bucket is named rather than dropped.
 
@@ -175,6 +190,11 @@ REVISION     the figures in this transcript are facts about the commit printed
     detail = {}
     concl = {}          # path -> FLIPS / HELD-DRIFTED / HELD / NO-VERDICT
     nondet_set = set()
+    # mg-a71f: rows the PRE-REPAIR guard would have called DIFFERS because the
+    # shell's redirection had already created the file when the axe fell.  This
+    # set IS the size of the correction, and it is reported rather than left to
+    # be inferred from a diff of two transcripts.
+    masked_set = set()
     work = []
     for (d, c), paths in sorted(groups.items()):
         if d == L.SELF_DIR:
@@ -214,17 +234,36 @@ REVISION     the figures in this transcript are facts about the commit printed
             differs = [p for p in paths
                        if got[p] is not None and got[p] != committed[p]]
             second = {}
-            if differs:
+            if differs and status != "timeout":
                 # DETERMINISM CONTROL: the same suite, the same commit, twice.
+                # NOT RUN AFTER A TIMEOUT (mg-a71f): two killed runs disagreeing
+                # is a fact about where the axe fell, not about the producer,
+                # and it costs a second full budget to learn nothing.
                 st2, _ = run_suite(wt, c, directory, timeout)
                 if st2 != "timeout":
                     second = collect(wt, paths)
             with lock:
                 for p in paths:
-                    if got[p] is None:
+                    # mg-a71f, THE ONE LINE.  `got[p] is None` alone made
+                    # TIMED-OUT UNREACHABLE: `sh run_all.sh` redirects, and a
+                    # POSIX shell CREATES `out_x.txt` before the producer runs,
+                    # so a killed run leaves a file that EXISTS, is not None, is
+                    # not the committed bytes -- DIFFERS, and
+                    # conclusion_verdict(committed, "") is FLIPS.  A kill was
+                    # reported as a false record.  Byte-identical under a kill
+                    # still REPRODUCES: truncation cannot forge the whole blob,
+                    # so that evidence is kept rather than thrown away.
+                    if got[p] is None or (status == "timeout"
+                                          and got[p] != committed[p]):
                         if status == "timeout":
                             verdict[p] = "TIMED-OUT"
                             detail[p] = "suite exceeded %ds" % timeout
+                            if got[p] is not None:
+                                masked_set.add(p)
+                                detail[p] += "; the shell had already created " \
+                                             "this file (%d bytes) -- the " \
+                                             "PRE-mg-a71f guard called this " \
+                                             "DIFFERS" % len(got[p])
                         elif status.startswith("failed"):
                             verdict[p] = "RUNNER-FAILED"
                             detail[p] = "run_all.sh exited %s and never " \
@@ -236,6 +275,9 @@ REVISION     the figures in this transcript are facts about the commit printed
                     elif got[p] == committed[p]:
                         verdict[p] = "REPRODUCES"
                         detail[p] = "%.0fs" % secs
+                        if status == "timeout":
+                            detail[p] += " (suite killed at the budget; this " \
+                                         "file was ALREADY byte-identical)"
                     else:
                         verdict[p] = "DIFFERS"
                         nd = ""
@@ -420,6 +462,46 @@ establishes which transcripts CAN be moved that way and which cannot.
                   "not the main cause of the blast radius -- the repository "
                   "moving is, and no rebase policy addresses that"
                   % (len(reader), tot, len(pure)))
+
+    ledger.head("T2f -- THE TIMED-OUT BUCKET, AND WHAT IT COST TO BE UNREACHABLE")
+    print("""
+mg-a71f.  Until this run the TIMED-OUT bucket COULD NOT FIRE for any suite
+whose runner redirects into its transcripts -- which is every suite in the arc.
+The bucket was guarded by the file being ABSENT; `sh run_all.sh` redirects, and
+a POSIX shell creates `out_x.txt` before the producer runs, so the file was
+never absent.  A suite killed at the budget was bucketed DIFFERS against a
+zero-byte or partial file, and `conclusion_verdict(committed, "")` scores that
+FLIPS -- A FALSE RECORD.  The bucket did not merely lose information; it
+MANUFACTURED damage out of slowness.
+
+The rows below are that manufacture, measured.  A row here is a transcript this
+run could not finish measuring AND which the pre-repair guard would have
+reported as non-reproducing.
+""")
+    timed = [p for p in population if verdict.get(p) == "TIMED-OUT"]
+    masked = [p for p in population if p in masked_set]
+    print("    TIMED-OUT this run                              %4d" % len(timed))
+    print("    ...of which the shell had already created       %4d   <- these "
+          "were DIFFERS before mg-a71f" % len(masked))
+    print("    ...of which genuinely absent when the axe fell  %4d"
+          % (len(timed) - len(masked)))
+    print()
+    print("    every row the pre-repair guard would have mis-bucketed, named:")
+    for p in masked:
+        print("      %s" % p[len("code/"):])
+    if not masked:
+        print("      (none -- no suite exceeded the %ds budget in this run, so "
+              "this run does not\n       exercise the repair.  That is a fact "
+              "about the budget and the machine, NOT\n       evidence that the "
+              "bucket is reachable: see t2's docstring and the negative\n"
+              "       control in code/census_timeout_a71f/)" % timeout)
+    ledger.record(not masked,
+                  "T2f %d transcripts were killed at the %ds budget with the "
+                  "shell's file already in place.  Before mg-a71f every one of "
+                  "them would have been counted as DIFFERS, and any whose "
+                  "committed text carries a decision would have been counted "
+                  "as a FALSE RECORD"
+                  % (len(masked), timeout))
 
     ledger.head("T2d -- WHAT THIS ROW DOES NOT MEASURE")
     print("""
