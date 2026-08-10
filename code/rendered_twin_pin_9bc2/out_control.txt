@@ -1,0 +1,80 @@
+======================================================================================
+mg-9bc2 — rendered-twin pin control
+  source : STATE.md
+  twin   : docs/state-of-the-wall.html
+======================================================================================
+
+SECTION 1 — the pin is present and its row set matches both documents
+--------------------------------------------------------------------------------------
+  pin commit      : 276aead1a8c5
+  pin commit-date : 2026-08-07
+  pinned rows     : 12   STATE.md rows: 12   twin rows: 12
+  PASS  all three row sets agree: 1 2 3a 3b 4 5 6 7 8 9 10 11
+
+SECTION 2 — per-row digests: which STATE.md rows have MOVED since the twin was pinned
+--------------------------------------------------------------------------------------
+  row 1    ok       00b859c798d24100
+  row 2    ok       04ce132c5aaec328
+  row 3a   ok       5ae168422c866c68
+  row 3b   ok       ba52188106c0481d
+  row 4    ok       b76085d6a817c517
+  row 5    ok       0b2a6e8c9266172f
+  row 6    ok       5b904a7a29c45746
+  row 7    ok       fca70bbdcc2a42c2
+  row 8    MOVED    pinned a1a0e25d7d6f5591  ->  now 120d8b1520b4aec4
+  row 9    MOVED    pinned dc2885ba39a05dc3  ->  now 07710b91b75e2a82
+  row 10   ok       39248cde7f9bd097
+  row 11   ok       cfed0024cbf2fb0d
+
+  DRIFT  2 of 12 ledger rows have changed in
+         STATE.md since the twin was last reconciled: 8 9
+         Each is a row the twin renders from text that no longer exists.
+         This is the WORKLIST.  Reconcile the twin's cell, then re-pin that row:
+             python3 code/rendered_twin_pin_9bc2/twin_pin.py --reconcile --rows 8,9
+
+SECTION 3 — whole-file digest (the coarse signal)
+--------------------------------------------------------------------------------------
+  pinned STATE.md sha256 : e98f51013cb5971bde4c3286a04badfb292c9349fdd92fcb7d79898401851b37
+  actual STATE.md sha256 : a1bcc53d5cc9bb79d2327c26dcc0057ede2db7a7ba4d89dda7f488dd794676c2
+  DIFFERS  STATE.md has changed since the pin.
+           This alone is NOT a defect and must not be read as one: STATE.md
+           changes constantly outside the ledger, and section 2 is the check
+           that carries the verdict.  This line exists so that 'the ledger is
+           unmoved' cannot be mistaken for 'the file is unmoved'.
+
+SECTION 4 — KIND MARKS agree between the two documents (live, does not use the pin)
+--------------------------------------------------------------------------------------
+  row 1    ok       U
+  row 2    ok       U-id
+  row 3a   ok       U-id
+  row 3b   ok       FP✗ / OPEN
+  row 4    ok       U
+  row 5    ok       U
+  row 6    ok       U
+  row 7    ok       U-id
+  row 8    ok       OPEN
+  row 9    ok       FP✗
+  row 10   ok       FP
+  row 11   ok       OPEN
+
+  PASS  all 12 rows carry the same kind mark in both documents.
+
+SECTION 5 — default-deny guard on the two false self-descriptions
+--------------------------------------------------------------------------------------
+  PASS  no banned self-description is present (2 rules).
+
+SECTION 6 — the VISIBLE provenance line quotes the pin (the duplicate is checked)
+--------------------------------------------------------------------------------------
+  Section 1's pin is an HTML comment: correct, machine-readable, and INVISIBLE to
+  every reader who opens the page in a browser.  So the header carries the commit
+  in visible text too — and that is a SECOND copy of a provenance string, i.e.
+  exactly the kind of thing this whole ticket is about going stale.  It is only
+  safe because it is checked here.
+
+  visible : Reconciled against STATE.md @ 276aead1a8c5 (2026-08-07) — a pin, not a date
+  pinned  : 276aead1a8c5
+  PASS  the visible line quotes the pinned commit.
+
+======================================================================================
+VERDICT: DRIFT — see section 2's worklist.  The twin renders rows that have since changed.
+======================================================================================
