@@ -1,0 +1,80 @@
+================================================================================================
+a4 — INDEPENDENCE, NON-VACUITY, AND CONTAINMENT
+================================================================================================
+
+C1  INDEPENDENCE — this instrument imports nothing from its subject
+      my python files: a0_selftest.py, a1_ground_truth.py, a2_sites.py, a3_scope.py, a4_selfcheck.py, liba0d6.py
+  [PASS] C1 no import of any other tree's library
+        []
+
+C2  NO SHARED SOURCE LINE with any library in the exchange
+      substantive lines in liba0d6.py (>= 40 chars): 97
+      vs lib51f4.py                                     shared: 1
+      vs lib28ff.py                                     shared: 0
+      vs lib29fe.py                                     shared: 0
+      vs libd19f.py                                     shared: 0
+      SHARED WITH lib51f4.py:
+        den = sum(min(k, n - k) for k in range(1, n))
+  [PASS] C2 AT MOST ONE shared line, and it is NAMED rather than removed
+        THE ONE SHARED LINE IS REAL AND IS KEPT. It is M's denominator,
+        `sum(min(k, n - k) for k in range(1, n))`, which is sum_k min(k, n-k) written the
+        only way Python writes it — an agreement forced by the formula, not evidence of
+        lineage. Removing it by renaming a variable would hide a true fact about this
+        instrument, so instead a0's arm A10 recomputes M from the FOOTRULE identity
+        E[D_F]/(2 floor(n^2/4)) over linear extensions, a route that does not contain that
+        line, and it agrees at every poset n <= 6.  Everything else in liba0d6 — the
+        enumeration, the down-set DP, the leak, the Jacobi, both certifiers — is unshared.
+
+C3  NON-VACUITY — four planted worlds at n = 7. The arm must give a DIFFERENT answer
+    when the threshold, the scalar, the population or the orthogonality is mutated.
+    Every mutation is DERIVED from the sweep's own quantities, not typed.
+
+      W0 UNMUTATED  f* > 1 over the 86278 PRIMITIVE posets           : 168
+      W1 THRESHOLD  f* > 0.99 (the boundary moved by 1 %)             : 172
+      W2 SCALAR     c_true > 1 instead of f* > 1                     : 0
+      W3 POPULATION f* > 1 over ALL 96428 posets, primitive or not   : 10318
+  [PASS] C3a W1 THRESHOLD fires — the count is not a constant the code prints
+        172 vs 168
+  [PASS] C3b W2 SCALAR fires — route (F) and the truth are DIFFERENT columns and the arm
+       distinguishes them (c_true never exceeds 1 at n = 7; f* does, 168 times)
+        0 vs 168
+  [PASS] C3c W3 POPULATION fires — and this is the mutation that MATTERS, because every
+       published '168 of 86278' is stated over the PRIMITIVE population and nothing
+       in the phrase carries that
+        10318 vs 168 — the 10150 non-primitive posets have gamma = 0
+
+      W4 ORTHOGONALITY  the CONSTANT vector has energy 0, so a 'certifier' that
+         skipped the v perp 1 requirement would certify EVERY poset as failing.
+  [PASS] C3d W4 fires — without centring the constant vector 'certifies' a failure (True),
+       and certify_fail, which re-centres exactly, REFUSES the same input (False)
+
+C4  CONTAINMENT — nothing outside this directory differs from the branch point
+      merge-base with main : 6700b78fe2
+      committed on this branch     : 1
+      uncommitted in the worktree  : 12
+      union (what this arm judges) : 13
+        code/adjudication_audit_a0d6/PREDICTIONS.md
+        code/adjudication_audit_a0d6/a0_selftest.py
+        code/adjudication_audit_a0d6/a1_ground_truth.py
+        code/adjudication_audit_a0d6/a2_sites.py
+        code/adjudication_audit_a0d6/a3_scope.py
+        code/adjudication_audit_a0d6/a4_selfcheck.py
+        code/adjudication_audit_a0d6/liba0d6.py
+        code/adjudication_audit_a0d6/out_a0_selftest.txt
+        code/adjudication_audit_a0d6/out_a1_ground_truth.txt
+        code/adjudication_audit_a0d6/out_a2_sites.txt
+        code/adjudication_audit_a0d6/out_a3_scope.txt
+        code/adjudication_audit_a0d6/out_a4_selfcheck.txt
+        code/adjudication_audit_a0d6/run_all.sh
+  [PASS] C4 zero files outside code/adjudication_audit_a0d6 differ
+        []
+
+C5  THE SUBJECT IS NOT EDITED
+      docs/OneThird-SweepLoss-mg-51f4.md : UNCHANGED
+      docs/OneThird-L2-Conditionality-mg-28ff.md : UNCHANGED
+  [PASS] C5 neither document and no file of mg-d19f's instrument is touched
+        []
+
+================================================================================================
+a4 — INDEPENDENT, NON-VACUOUS, CONTAINED.
+================================================================================================
