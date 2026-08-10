@@ -147,9 +147,42 @@ state is displaced by the next commit anyone makes* — arriving at the census.
   non-reproduction whose slack is unsized. cf8e5 was explicit that nothing here
   weakens it, and this run did not measure it.
 - **NOT a property of the arc alone.** `TIMED-OUT` is a fact about the
-  repository **and the machine**, which is the census's own T2d disclosure. This
-  run happened on a box at a load average above 30 with other agents on it. A
+  repository **and the machine**, which is the census's own T2d disclosure. A
   quieter box moves rows back out of the bucket.
+
+### The machine is recorded, because it moved during the run
+
+pm-onethird's ask, and it is the right one: load fell while the run proceeded in
+a fixed group order, so **group order is confounded with timeout probability
+inside a single run**. A count taken across the whole run would mix two machine
+regimes.
+
+So the covariate is recorded — `covariate_load_by_group.tsv`, sampled every 15 s
+by a process **outside** the census that read each worker's cwd and its
+worktree's `HEAD`. Attribution is therefore per **group** — the
+`(directory, carrying commit)` pair the census actually keys on — not merely per
+directory, which matters because the same directory appears in this run under
+more than one commit. `a5` reads it back and asks whether the `TIMED-OUT` rows
+cluster in the high-load part of the run.
+
+**It is a sidecar and not a column, for the census's own stated reason.** A wall
+clock or a load average printed into `out_t2_census.txt` would make that
+transcript non-reproducible by construction — and `t2_census.py:63` already
+argues exactly this about `--jobs`: *"a fact about the machine, not about the
+subject, so printing it would make this transcript fail to reproduce on a
+differently-sized box for a reason that has nothing to do with the arc — the
+exact defect being measured, committed by the instrument measuring it."* A
+timestamp is that argument with the volume up.
+
+**The covariate has a hole and it is in the worst place.** Sampling began at
+group 26 of 164, so the first 25 groups — which ran under the *highest* load —
+have no rows. `a5`'s A5a prints the size of that hole before drawing any
+conclusion from the part that was sampled.
+
+**And the `31.5` in the ticket thread is not a reading from this run.** It was
+taken at 07:27Z, during the first attempt, which was killed at ~07:30Z (D7). The
+run whose numbers are published started 07:31:07Z; its observed 1-minute load
+has ranged roughly 6–15, and its 15-minute average fell 15.5 → 9.1.
 
 ---
 
@@ -316,5 +349,7 @@ quietly widened into.
 | `a2_c067_annotation.py` | every clause of the c067 note, re-derived; never executes its producer |
 | `a3_endtoend.py` | the census's own `t2_census.py`, unmodified, at a budget it cannot meet |
 | `a4_size107.py` | the two censuses of one population, transitioned row by row |
+| `a5_covariate.py` | the `TIMED-OUT` count against the machine load that produced it |
+| `covariate_load_by_group.tsv` | **evidence, not a product.** Sampled every 15 s by a process outside the census during the re-run; cannot be regenerated. Not named `out_*.txt`, so it is not a transcript and does not join the census's population |
 | `prior_1abe_t2_census_at_81214a9.txt` | the PRIOR census, verbatim. Not overwritten, not summarised |
 | `prior_1abe_t1_population_at_81214a9.txt` | its population transcript, likewise |
