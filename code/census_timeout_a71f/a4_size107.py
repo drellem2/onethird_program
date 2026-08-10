@@ -128,7 +128,13 @@ correction of anything.
     # ------------------------------------------------------------------ A4c
     led.head("A4c -- THE ANSWER TO THE TICKET'S QUESTION")
     old_differs = [k for k in keys if old_rows.get(k, ("", ""))[1] == "DIFFERS"]
-    old_flips = [p[len("code/"):] for p in L.parse_t2_flips(old_t)]
+    # T2c prints the FULL path; T2a TRUNCATES it to 52 characters.  Joining the
+    # two lists means truncating the T2c side the same way, or every FLIPS whose
+    # path is 53 characters or more silently fails to join and is reported as
+    # `ABSENT` -- a0's W2, arriving in the one place it would have changed the
+    # headline.  None of the five is that long today; the join does not depend
+    # on that staying true.
+    old_flips = [p[len("code/"):][:52] for p in L.parse_t2_flips(old_t)]
     artefacts = [k for k in old_differs
                  if new_rows.get(k, ("", ""))[1] == "TIMED-OUT"]
     still = [k for k in old_differs
