@@ -1,7 +1,7 @@
 ==============================================================================
 d2 -- THE 31 NEVER MEASURED AGAINST THEIR BYTES
 ==============================================================================
-    code-digest: a980a32f0862295f   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    code-digest: 0788236564d650ea   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
     NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
     reads-outside-tree: yes
     ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
@@ -94,35 +94,35 @@ CLEAN before it starts.
     transcript                                           tier         verdict          detail
     face_geometry_audit_5630/out_nc3.txt                 T3-NAME-MAP  REPRODUCES       1s
     face_geometry_audit_5630/out_x3_equivalence.txt      T3-NAME-MAP  RUNNER-FAILED    exit 1, 358 bytes written -- NOT compared
-    face_geometry_audit_e0ce/out_extra.txt               T3-NAME-MAP  REPRODUCES       5s
+    face_geometry_audit_e0ce/out_extra.txt               T3-NAME-MAP  REPRODUCES       4s
     face_geometry_audit_e0ce/out_n5.txt                  T4-NONE      UNMEASURABLE     no run_all.sh in code/face_geometry_audit_e0
     face_geometry_audit_e0ce/out_n6.txt                  T4-NONE      UNMEASURABLE     no run_all.sh in code/face_geometry_audit_e0
     face_geometry_audit_f1b2/out_gates.txt               T2-OTHER-SH  REPRODUCES       4s
-    face_geometry_audit_f1b2/out_injections.txt          T2-OTHER-SH  REPRODUCES       8s
+    face_geometry_audit_f1b2/out_injections.txt          T2-OTHER-SH  REPRODUCES       7s
     face_geometry_audit_f1b2/out_nmax.txt                T2-OTHER-SH  REPRODUCES       2s
-    face_geometry_audit_f1b2/out_scoring.txt             T2-OTHER-SH  REPRODUCES       48s
+    face_geometry_audit_f1b2/out_scoring.txt             T2-OTHER-SH  REPRODUCES       49s
     face_geometry_audit_f1b2/out_theorem.txt             T2-OTHER-SH  REPRODUCES       1s
     face_geometry_audit_f7bc/out_attack_scoring.txt      T3-NAME-MAP  REPRODUCES       0s
-    face_geometry_audit_f7bc/out_verify_a6.txt           T3-NAME-MAP  REPRODUCES       5s
+    face_geometry_audit_f7bc/out_verify_a6.txt           T3-NAME-MAP  REPRODUCES       4s
     face_geometry_audit_fcb2/out_a1_counts.txt           T3-NAME-MAP  REPRODUCES       20s
     face_geometry_audit_fcb2/out_selftest_fcb2.txt       T3-NAME-MAP  REPRODUCES       0s
     face_geometry_audit_fcf1/out_extra.txt               T2-OTHER-SH  REPRODUCES       1s
     face_geometry_audit_fcf1/out_gauge.txt               T2-OTHER-SH  REPRODUCES       2s
-    face_geometry_audit_fcf1/out_nc4.txt                 T2-OTHER-SH  REPRODUCES       17s
+    face_geometry_audit_fcf1/out_nc4.txt                 T2-OTHER-SH  REPRODUCES       18s
     libweak_c3ca/out_p1_census.txt                       T3-NAME-MAP  REPRODUCES       1s
-    libweak_c3ca/out_p2_primitive.txt                    T3-NAME-MAP  REPRODUCES       1s
+    libweak_c3ca/out_p2_primitive.txt                    T3-NAME-MAP  REPRODUCES       0s
     libweak_c3ca/out_p3_window.txt                       T3-NAME-MAP  REPRODUCES       1s
     libweak_c3ca/out_selftest_c3ca.txt                   T3-NAME-MAP  REPRODUCES       0s
     semigroup_note_audit_66a6/out_antichain.txt          T2-OTHER-SH  REPRODUCES       4s
-    semigroup_note_audit_66a6/out_sweeps.txt             T2-OTHER-SH  REPRODUCES       12s
-    semigroup_note_audit_66a6/out_theorem.txt            T2-OTHER-SH  REPRODUCES       32s
+    semigroup_note_audit_66a6/out_sweeps.txt             T2-OTHER-SH  REPRODUCES       11s
+    semigroup_note_audit_66a6/out_theorem.txt            T2-OTHER-SH  REPRODUCES       30s
     semigroup_note_audit_66a6/out_worked_example.txt     T2-OTHER-SH  REPRODUCES       0s
     state_visibility_audit_65eb/out_anchor65eb.txt       T3-NAME-MAP  T3-UNRESOLVED    guessed producer, bytes differ (HELD)
     state_visibility_audit_65eb/out_anchor65eb_bd24efc.txt T4-NONE      UNMEASURABLE     no run_all.sh in code/state_visibility_audit
     state_visibility_audit_65eb/out_rows65eb.txt         T3-NAME-MAP  T3-UNRESOLVED    guessed producer, bytes differ (NO-VERDICT)
     state_visibility_audit_65eb/out_six65eb.txt          T3-NAME-MAP  T3-UNRESOLVED    guessed producer, bytes differ (NO-VERDICT)
-    unified_gate_8fd1/out_characterise.txt               T3-NAME-MAP  REPRODUCES       175s
-    unified_gate_8fd1/out_quotient_symmetry.txt          T3-NAME-MAP  REPRODUCES       61s
+    unified_gate_8fd1/out_characterise.txt               T3-NAME-MAP  REPRODUCES       138s
+    unified_gate_8fd1/out_quotient_symmetry.txt          T3-NAME-MAP  REPRODUCES       35s
 
     REPRODUCES       24
     RUNNER-FAILED    1

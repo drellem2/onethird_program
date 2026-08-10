@@ -1,7 +1,7 @@
 ==============================================================================
 d4 -- THE MOVING-REF SHAPE: A RUN WHOSE STEPS EACH RESOLVE A MOVING REF
 ==============================================================================
-    code-digest: a980a32f0862295f   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    code-digest: 0788236564d650ea   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
     NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
     reads-outside-tree: yes
     ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
@@ -114,7 +114,7 @@ looked at `main` would report NO-RUNNER and pass, which is mg-1abe's defect 6
 (a check that cannot see the end of its own output) wearing a different hat.
 So this one row is a fact about the branch, and it says so.
 
-    code/census_remainder_f8e5 at HEAD 5b7a117 -> PASSES-DOWN   (6 scripts driven, 6 resolving a moving ref)
+    code/census_remainder_f8e5 at HEAD 4c65b68 -> PASSES-DOWN   (6 scripts driven, 6 resolving a moving ref)
 [OK       ] D4e this suite does NOT carry the shape it hunts and is not merely absent from the population: its `run_all.sh` resolves the revision ONCE and passes `--at` to every script, which is the same fix and the same row mg-1abe's suite scores (E8)
 
 SELF-ERRORS 0

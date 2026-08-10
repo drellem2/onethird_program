@@ -1,0 +1,325 @@
+==============================================================================
+d1 -- THE FIVE FALSE RECORDS, DISPOSED OF ONE AT A TIME
+==============================================================================
+    code-digest: 0788236564d650ea   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of: bc965aaae820   (`main` resolved ONCE by run_all.sh and passed in)
+    ARM B budget: 300s     producer timeout: 3600s
+
+------------------------------------------------------------------------------
+D1a -- THE FIVE, AS mg-1abe NAMED THEM
+------------------------------------------------------------------------------
+These five are QUOTED from `code/transcript_census_1abe/README.md`
+§3 and its `out_t2_census.txt`.  They are the census's finding; re-deriving the
+whole 541-transcript sweep to rediscover them would be a second census, not a
+disposal.  What is re-derived below, per transcript, is the FLIP itself.
+
+    code/audit_c067/out_c1_rebase.txt
+    code/hash_population_6e58/out_p2_population.txt
+    code/hash_population_6e58/out_p3_unrestricted.txt
+    code/hodge_leverage_audit_f922/out_audit.txt
+    code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt
+
+------------------------------------------------------------------------------
+D1b -- code/audit_c067/out_c1_rebase.txt
+------------------------------------------------------------------------------
+    carrying commit : 47e56b3bd628
+    producer        : "c1_rebase.py" "$@"   (as code/audit_c067's own run_all.sh spells it)
+    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 65s, exit 1, status ok
+
+    bytes identical : no
+    mg-1abe grain   : FLIPS   (census said FLIPS)
+
+    WHAT THE ARTIFACT ASSERTS -- decision rows in the committed bytes that the
+    re-run does NOT emit (1):
+      - [CONFIRMED] C1a mg-132a's 5 commit(s) were REPLAYED onto a larger tree by the merge, and 5 of them landed on a tree with a DIFFERENT `code/` populatio
+    WHAT IS TRUE AT ITS COMMIT -- decision rows the re-run emits that the
+    committed bytes do NOT carry (1):
+      + [REFUTED ] C1a mg-132a's 0 commit(s) were REPLAYED onto a larger tree by the merge, and 0 of them landed on a tree with a DIFFERENT `code/` population
+
+    commits it names that resolve but hang off NO REF : 0
+    producer reads repository-global state (STATIC PROXY): yes -- c1_rebase.py:47, c2_anchors.py:8, c3_shopping.py:8
+    walks a MOVING REF bounded by a LITERAL count            : c1_rebase.py:48 (main -n 40)
+      `main` has grown 226 commit(s) past the carrying commit, so 1 of those window(s) no longer reach it
+[MEASURED ] D1b code/audit_c067/out_c1_rebase.txt: FLIP re-derived -- 1 decision row(s) lost, 1 gained
+
+------------------------------------------------------------------------------
+D1c -- WHICH REVISION IS IT ACTUALLY A FACT ABOUT? (out_c1_rebase.txt)
+------------------------------------------------------------------------------
+⚠️ SYNTHETIC STATE, declared.  Each candidate below is a revision the
+transcript NAMES IN ITS OWN BYTES.  The producing directory is checked out from
+the CARRYING commit on top of that revision's tree, because the candidate's own
+tree may not contain the suite at all.  Nobody ever committed the resulting
+state.  This is mg-1abe's own device for mg-b2af's twin and it carries the same
+caveat: byte equality here says the transcript is a fact about that TREE, not
+that it was produced by that COMMIT.
+
+      de39eb6d7301  differs  (61s)
+      2cfd226164c0  differs  (65s)
+      1e304840524b  differs  (59s)
+      4a06b4cd000e  differs  (60s)
+      a91cf9ea268d  differs  (60s)
+      89d6aa1bf0c7  differs  (65s)
+      cb9f282914bc  differs  (60s)
+      7dc91808eb58  differs  (66s)
+[MEASURED ] D1c out_c1_rebase.txt: reproduces at NONE of the 8 revisions it names; the tree it is a fact about was never committed, or is not named in its own bytes
+
+------------------------------------------------------------------------------
+D1b -- code/hash_population_6e58/out_p2_population.txt
+------------------------------------------------------------------------------
+    carrying commit : fe6a4952a2fb
+    producer        : "p2_population.py"   (as code/hash_population_6e58's own run_all.sh spells it)
+    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 2s, exit 1, status ok
+
+    bytes identical : no
+    mg-1abe grain   : FLIPS   (census said FLIPS)
+
+    WHAT THE ARTIFACT ASSERTS -- decision rows in the committed bytes that the
+    re-run does NOT emit (2):
+      - SELF-ERRORS: 0, population: this script's own classification, checked against mg-330a's over the same ast.Call nodes
+      - TOTAL BAD: 1
+    WHAT IS TRUE AT ITS COMMIT -- decision rows the re-run emits that the
+    committed bytes do NOT carry (2):
+      + SELF-ERRORS: 1, population: this script's own classification, checked against mg-330a's over the same ast.Call nodes
+      + TOTAL BAD: 2
+
+    commits it names that resolve but hang off NO REF : 0
+    producer reads repository-global state (STATIC PROXY): yes -- lib6e58.py:217, p1_ways.py:1, p2_population.py:20
+    walks a MOVING REF bounded by a LITERAL count            : no
+[MEASURED ] D1b code/hash_population_6e58/out_p2_population.txt: FLIP re-derived -- 2 decision row(s) lost, 2 gained
+
+------------------------------------------------------------------------------
+D1c -- WHICH REVISION IS IT ACTUALLY A FACT ABOUT? (out_p2_population.txt)
+------------------------------------------------------------------------------
+⚠️ SYNTHETIC STATE, declared.  Each candidate below is a revision the
+transcript NAMES IN ITS OWN BYTES.  The producing directory is checked out from
+the CARRYING commit on top of that revision's tree, because the candidate's own
+tree may not contain the suite at all.  Nobody ever committed the resulting
+state.  This is mg-1abe's own device for mg-b2af's twin and it carries the same
+caveat: byte equality here says the transcript is a fact about that TREE, not
+that it was produced by that COMMIT.
+
+[MEASURED ] D1c out_p2_population.txt: reproduces at NONE of the 0 revisions it names; the tree it is a fact about was never committed, or is not named in its own bytes
+
+------------------------------------------------------------------------------
+D1b -- code/hash_population_6e58/out_p3_unrestricted.txt
+------------------------------------------------------------------------------
+    carrying commit : fe6a4952a2fb
+    producer        : "p3_unrestricted.py"   (as code/hash_population_6e58's own run_all.sh spells it)
+    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 8s, exit 1, status ok
+
+    bytes identical : no
+    mg-1abe grain   : FLIPS   (census said FLIPS)
+
+    WHAT THE ARTIFACT ASSERTS -- decision rows in the committed bytes that the
+    re-run does NOT emit (2):
+      - SELF-ERRORS: 0, population: this script's reading of `code/repair_b2af/README.md`
+      - TOTAL BAD: 2
+    WHAT IS TRUE AT ITS COMMIT -- decision rows the re-run emits that the
+    committed bytes do NOT carry (2):
+      + SELF-ERRORS: 1, population: this script's reading of `code/repair_b2af/README.md`
+      + TOTAL BAD: 3
+
+    commits it names that resolve but hang off NO REF : 0
+    producer reads repository-global state (STATIC PROXY): yes -- lib6e58.py:217, p1_ways.py:1, p2_population.py:20
+    walks a MOVING REF bounded by a LITERAL count            : no
+[MEASURED ] D1b code/hash_population_6e58/out_p3_unrestricted.txt: FLIP re-derived -- 2 decision row(s) lost, 2 gained
+
+------------------------------------------------------------------------------
+D1c -- WHICH REVISION IS IT ACTUALLY A FACT ABOUT? (out_p3_unrestricted.txt)
+------------------------------------------------------------------------------
+⚠️ SYNTHETIC STATE, declared.  Each candidate below is a revision the
+transcript NAMES IN ITS OWN BYTES.  The producing directory is checked out from
+the CARRYING commit on top of that revision's tree, because the candidate's own
+tree may not contain the suite at all.  Nobody ever committed the resulting
+state.  This is mg-1abe's own device for mg-b2af's twin and it carries the same
+caveat: byte equality here says the transcript is a fact about that TREE, not
+that it was produced by that COMMIT.
+
+      fba5f6351a1d  differs  (0s)
+      b94cb1ed671c  differs  (0s)
+      b1c34670f329  differs  (8s)
+[MEASURED ] D1c out_p3_unrestricted.txt: reproduces at NONE of the 3 revisions it names; the tree it is a fact about was never committed, or is not named in its own bytes
+
+------------------------------------------------------------------------------
+D1b -- code/hodge_leverage_audit_f922/out_audit.txt
+------------------------------------------------------------------------------
+    carrying commit : 553033ae7d90
+    producer        : audit_repair.py   (as code/hodge_leverage_audit_f922's own run_all.sh spells it)
+    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 6s, exit 1, status ok
+
+    bytes identical : no
+    mg-1abe grain   : FLIPS   (census said FLIPS)
+
+    WHAT THE ARTIFACT ASSERTS -- decision rows in the committed bytes that the
+    re-run does NOT emit (0):
+    WHAT IS TRUE AT ITS COMMIT -- decision rows the re-run emits that the
+    committed bytes do NOT carry (1):
+      + [ENLARGEMENT STATED] STATE.md
+
+    commits it names that resolve but hang off NO REF : 0
+    producer reads repository-global state (STATIC PROXY): yes -- audit_repair.py:158
+    walks a MOVING REF bounded by a LITERAL count            : no
+[MEASURED ] D1b code/hodge_leverage_audit_f922/out_audit.txt: FLIP re-derived -- 0 decision row(s) lost, 1 gained
+
+------------------------------------------------------------------------------
+D1c -- WHICH REVISION IS IT ACTUALLY A FACT ABOUT? (out_audit.txt)
+------------------------------------------------------------------------------
+⚠️ SYNTHETIC STATE, declared.  Each candidate below is a revision the
+transcript NAMES IN ITS OWN BYTES.  The producing directory is checked out from
+the CARRYING commit on top of that revision's tree, because the candidate's own
+tree may not contain the suite at all.  Nobody ever committed the resulting
+state.  This is mg-1abe's own device for mg-b2af's twin and it carries the same
+caveat: byte equality here says the transcript is a fact about that TREE, not
+that it was produced by that COMMIT.
+
+      bbe83b5b007b  IDENTICAL  (6s)
+      522048f6cb94  differs  (0s)
+      1e6103185361  differs  (0s)
+      6c0f0da391b5  differs  (1s)
+      3756553dd735  IDENTICAL  (7s)
+      a13b4a995c34  differs  (0s)
+[MEASURED ] D1c out_audit.txt: reproduces EXACTLY at bbe83b5b007b -- that is the revision it is a fact about
+
+------------------------------------------------------------------------------
+D1b -- code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt
+------------------------------------------------------------------------------
+    carrying commit : 3bf0cd206bbf
+    producer        : repair_9207.py --full   (as code/hodge_leverage_repair_ff3e's own run_all.sh spells it)
+    ARM A           : re-run at the carrying commit, clean worktree asserted (0 dirty before), 1463s, exit 0, status ok
+
+    bytes identical : YES
+    mg-1abe grain   : HELD   (census said FLIPS)
+
+    WHAT THE ARTIFACT ASSERTS -- decision rows in the committed bytes that the
+    re-run does NOT emit (0):
+    WHAT IS TRUE AT ITS COMMIT -- decision rows the re-run emits that the
+    committed bytes do NOT carry (0):
+
+    commits it names that resolve but hang off NO REF : 0
+    producer reads repository-global state (STATIC PROXY): no
+    walks a MOVING REF bounded by a LITERAL count            : no
+[FINDING  ] D1b code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt REPRODUCES for me where mg-1abe measured DIFFERS. That is a finding about the census, printed rather than dropped to keep the number at five (PREDICTIONS E9)
+
+    ARM B           : SKIPPED -- ARM A took 1463s against a 300s budget.  This transcript's
+                      'which revision is it a fact about' question is NOT ANSWERED here, and
+                      that is a budget, not a verdict.  `--armb-budget 1522` runs it.
+
+------------------------------------------------------------------------------
+D1d -- THE ADJUDICATION: WHICH OF THE FIVE IS THE RECORD WRONG?
+------------------------------------------------------------------------------
+THE RULE, stated before the table so it can be disagreed with.  A
+re-run goes blind in TWO ways and my first version of this rule knew only one
+of them -- the miss is kept in the README and it changed a verdict:
+
+  (A) THE OBJECTS BECAME UNREACHABLE.  The transcript names commits that
+      RESOLVE in this object store but hang off NO REF, and the re-run LOSES
+      decision rows rather than gaining them.
+
+  (B) THE SEARCH WINDOW SLID OFF.  The producer walks a MOVING REF bounded by
+      a LITERAL count -- `git log main -n 40` -- and `main` has since grown
+      more commits past the carrying commit than the window admits.  Nothing
+      died; the walk stops short of it.
+
+  RERUN-CANNOT-SEE  (A) or (B).
+  RECORD-IS-FALSE   neither: the re-run sees at least as much as the record
+                    and disagrees with it.
+  NOT-A-FALSE-RECORD  the re-run is BYTE-IDENTICAL to the committed transcript.
+                    There is nothing to adjudicate.  This row exists because
+                    one of the five is in it, and folding a transcript that
+                    reproduces into `RECORD-IS-FALSE` on the strength of its
+                    being in the census's list would be taking the list on
+                    trust -- which is the one thing a disposal cannot do.
+
+  A judgement, and every input to it is measured and printed above, so a reader
+  who thinks the rule is wrong can re-adjudicate without re-running anything.
+
+    transcript                                           cause              evidence
+    audit_c067/out_c1_rebase.txt                         RERUN-CANNOT-SEE   B  0 unreachable, 1 outgrown window(s), -1/+1 rows
+    hash_population_6e58/out_p2_population.txt           RECORD-IS-FALSE    -  0 unreachable, 0 outgrown window(s), -2/+2 rows
+    hash_population_6e58/out_p3_unrestricted.txt         RECORD-IS-FALSE    -  0 unreachable, 0 outgrown window(s), -2/+2 rows
+    hodge_leverage_audit_f922/out_audit.txt              RECORD-IS-FALSE    -  0 unreachable, 0 outgrown window(s), -0/+1 rows
+    hodge_leverage_repair_ff3e/out_repair_ff3e.txt       NOT-A-FALSE-RECORD -  0 unreachable, 0 outgrown window(s), -0/+0 rows
+[MEASURED ] D1d THE MEASURED DAMAGE OF THIS CLASS IS 3, NOT 5.  Of the 5 transcripts mg-1abe names as FALSE RECORDS: 3 ARE ONE (RECORD-IS-FALSE); 1 is TRUE at its carrying commit and its own producer can no longer see that (RERUN-CANNOT-SEE), whose remedy is the opposite one; and 1 REPRODUCES BYTE-FOR-BYTE and is not a false record at all
+
+------------------------------------------------------------------------------
+D1d' -- WHERE THE WINDOW SLID OFF, THE RECORD'S CLAIM IS RE-DERIVED WITHOUT ONE
+------------------------------------------------------------------------------
+An adjudication that says `the re-run is what is wrong` is worthless
+unless the record's claim can be checked some other way.  For every transcript
+scored blind by (B), the commits it names that are NOT on `main` are looked up
+BY SUBJECT with NO window at all -- mg-1abe's own Class-1 device, STALE NOT
+LOST, pointed at a different question: not `is this identifier still valid` but
+`can the thing the record asserts still be checked`.
+
+⚠️ RE-IMPLEMENTED HERE, not the producer's own code.  It is the same rule
+(match a pre-rebase commit to an on-`main` commit by subject) with the bound
+removed.  The general instrument -- re-running the producer against a `main`
+positioned where the reader's was, in a `--shared` clone so no ref moves in
+this repository -- is NOT built, and is named in the README as not done.
+
+    audit_c067/out_c1_rebase.txt
+      window : c1_rebase.py:48 (main -n 40)   `main` is 226 commits past the carrier
+        de39eb6  ->  5bd0d71   rescue: mg-c067's uncommitted c2_anchors.py and README — t
+        2cfd226  ->  1e30484   evidence+observations: mg-132a's transcript regenerated by
+        4a06b4c  ->  a91cf9e   evidence: mg-132a's transcript — 18 checks, 0 refuted, exi
+        89d6aa1  ->  cb9f282   repair+docs: S4a re-keyed onto THE COMMIT THE FIGURE WAS M
+        7dc9180  ->  aa8309d   instrument: mg-132a takes answer (2) — the anchor is the c
+        d24bbeb  ->  53f6ca3   predictions: mg-132a's decision and predictions, committed
+[OK       ] D1d' every off-`main` commit out_c1_rebase.txt names is STILL TWINNED on `main` by subject, 6 of 6, when the search is not bounded by a literal.  The record's count is the true one and the re-run's is an artefact of its own `-n` 
+
+------------------------------------------------------------------------------
+D1e -- THE REMEDY, ONE AT A TIME, WITH ITS REASON
+------------------------------------------------------------------------------
+Three remedies are available and a fourth is the honest answer for one of
+them.  The choice follows from the two measurements above -- the cause, and
+whether the producer reads repository-global state:
+
+  RE-RUN AND RE-COMMIT   only when the producer is a fact about a TREE.  A
+                         repository-global producer re-run today produces a
+                         third answer that is stale again at the next commit,
+                         so this remedy is a treadmill for it.
+  ANNOTATE               state, in the transcript, the revision it is a fact
+                         about -- and under R2, that it is UNPINNABLE.
+  STRIKE                 only when the assertion is false and worthless.
+  DO NOT RE-RUN          when re-running would overwrite a measurement that
+                         cannot be re-taken.
+
+    code/audit_c067/out_c1_rebase.txt
+        cause  : RERUN-CANNOT-SEE
+        remedy : ANNOTATE + DO NOT RE-RUN
+        because: its producer bounds a walk over `main` by a literal (main -n 40) and `main` has grown 226 commits past the carrying commit, so the walk stops short of what the record names.  Every one of those commits is still twinned on `main` (D1d'), so the record's number is the true one and a re-run would write the instrument's blindness over it.
+        names its own carrying commit in its bytes: no
+    code/hash_population_6e58/out_p2_population.txt
+        cause  : RECORD-IS-FALSE
+        remedy : ANNOTATE (unpinnable under R2)
+        because: its producer's population is the repository, so no tree digest can pin it and a re-run is stale at the next commit anyone makes. What it needs is to SAY which revision it is a fact about.
+        names its own carrying commit in its bytes: no
+    code/hash_population_6e58/out_p3_unrestricted.txt
+        cause  : RECORD-IS-FALSE
+        remedy : ANNOTATE (unpinnable under R2)
+        because: its producer's population is the repository, so no tree digest can pin it and a re-run is stale at the next commit anyone makes. What it needs is to SAY which revision it is a fact about.
+        names its own carrying commit in its bytes: no
+    code/hodge_leverage_audit_f922/out_audit.txt
+        cause  : RECORD-IS-FALSE
+        remedy : ANNOTATE (unpinnable under R2)
+        because: its producer's population is the repository, so no tree digest can pin it and a re-run is stale at the next commit anyone makes. What it needs is to SAY which revision it is a fact about.
+        names its own carrying commit in its bytes: no
+        it is a fact about the tree at: bbe83b5b007b
+    code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt
+        cause  : NOT-A-FALSE-RECORD
+        remedy : NONE -- IT REPRODUCES
+        because: it emits the committed bytes exactly at its own carrying commit, in 1463 s against the census's 900 s budget.  There is nothing to remedy; what needs repairing is the bucket that could not report a budget (out_d5_timeout.txt).
+        names its own carrying commit in its bytes: no
+[OK       ] D1e every disposed transcript carries a named remedy with a stated reason: 5 of 5
+[FINDING  ] D1e' NOTHING IN ANOTHER TICKET'S DIRECTORY IS EDITED BY THIS SCRIPT.  The remedies above are a DISPOSAL RECORD, not an edit: mg-1abe's rule is that a transcript which does not reproduce is a MEASUREMENT and overwriting it destroys it, and 1 of the 5 carry a remedy that forbids re-running outright
+[FINDING  ] D1e'' AND THE HEADLINE MOVES: `FIVE FALSE RECORDS` IS 3.  1 of the five is not damage because it reproduces, and 1 is not damage because the record is true and the instrument is blind. Both are printed rather than dropped, because a disposal that quietly kept the number at five would be the over-report this ticket exists to prevent, one order of magnitude smaller
+
+SELF-ERRORS 0
+FINDINGS 3
+TOTAL BAD: 3
