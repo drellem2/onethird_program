@@ -1,0 +1,54 @@
+==============================================================================
+s1 — POPULATION
+==============================================================================
+s1 — THE POPULATION. How many landings, how many audits, how many triples.
+
+This is the count the ticket says nobody has asked for. It is reported under BOTH
+interval readings (wall = spawn-to-merge, write = first-to-last commit author date)
+because they disagree, and reporting only the wider one would overstate the arc's
+exposure by exactly the merge-queue time.
+
+count  onethird work items                     624
+count  of them, STRICT audits                  137
+count  of them, landing by TITLE               45
+count  of them, landing by GIT (canonical doc) 240
+count  of them, touching STATE.md              87
+count  distinct audited parents                123
+
+THE TWO READINGS OF `LANDING` DISAGREE, AND BY HOW MUCH:
+  count  title-only (git never saw a canonical-doc commit) 12
+  count  git-only   (never said LAND in its title)         207
+  count  both                                              33
+  -> the title reading MISSES 207 landings the git reading finds. Using it alone
+     would have reported this arc as ~5x safer than it is.
+
+count  landing/parent/audit triples            48
+
+--- BUCKETS UNDER THE `WALL` READING ---
+  verdict           STATE.md  docs-only   total
+  count CONCURRENT          3         10      13
+  count AUDIT-AFTER         5          4       9
+  count AUDIT-BEFORE        5         10      15
+  count REFUSED             4          7      11
+  count ALL                17         31      48
+
+--- BUCKETS UNDER THE `WRITE` READING ---
+  verdict           STATE.md  docs-only   total
+  count CONCURRENT          4          9      13
+  count AUDIT-AFTER         3          1       4
+  count AUDIT-BEFORE        2          8      10
+  count REFUSED             8         13      21
+  count ALL                17         31      48
+
+WHAT THE DENOMINATOR ACTUALLY IS (E8, filed in advance):
+  count  triples timeable on wall  37 of 48
+  count  triples timeable on write 27 of 48
+  A CONCURRENT count must be read against the TIMEABLE denominator, not against
+  the triple count, and never against the 624-item population.
+
+THE GATE ALREADY EXISTS — count of onethird items that DECLARE a dependency:
+  count  items with a non-empty depends: field  154
+  count  of those that are audits              84
+  count  of those that are git-landings        13
+  -> the asymmetry is the finding: the arc gates AUDITS on their parents and does
+     NOT gate LANDINGS on the audits. mg-5cba/mg-8d63 is that asymmetry in one pair.

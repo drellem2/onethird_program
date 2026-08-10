@@ -1,0 +1,284 @@
+==============================================================================
+s2 — COLLISIONS
+==============================================================================
+s2 — THE COLLISIONS, one line each, under both readings.
+
+A collision is a (landing, parent, audit) triple where the landing's interval and the
+audit-of-its-parent's interval overlap. The ticket's near-miss is one row of this table.
+
+The two readings are printed TOGETHER on every row rather than in two tables, because the
+interesting rows are the ones where they DISAGREE: a triple that is CONCURRENT on wall and
+AUDIT-BEFORE on write is a merge-queue overlap, not a reading overlap, and calling it the
+same finding is E3 committed.
+
+A. CONCURRENT under the WALL reading (spawn to merge)
+  landing   parent    audit     tier      wall         write       
+  mg-00a1   mg-131e   mg-eaa1   STATE.md  CONCURRENT   AUDIT-BEFORE
+  mg-200d   mg-6bc2   mg-41b7   STATE.md  CONCURRENT   CONCURRENT  
+  mg-24fb   mg-5ce3   mg-3e06   docs-only CONCURRENT   CONCURRENT  
+  mg-372e   mg-131e   mg-eaa1   docs-only CONCURRENT   AUDIT-BEFORE
+  mg-4417   mg-24fb   mg-dd8b   docs-only CONCURRENT   AUDIT-BEFORE
+  mg-51f4   mg-28ff   mg-29fe   docs-only CONCURRENT   CONCURRENT  
+  mg-81ff   mg-9461   mg-39bf   docs-only CONCURRENT   AUDIT-BEFORE
+  mg-8311   mg-76b2   mg-94c3   docs-only CONCURRENT   CONCURRENT  
+  mg-8d63   mg-789d   mg-5cba   STATE.md  CONCURRENT   REFUSED     
+  mg-af28   mg-1953   mg-3b51   docs-only CONCURRENT   CONCURRENT  
+  mg-be0b   mg-3329   mg-07fd   docs-only CONCURRENT   REFUSED     
+  mg-c2b3   mg-821e   mg-4700   docs-only CONCURRENT   REFUSED     
+  mg-e10a   mg-345e   mg-6bd1   docs-only CONCURRENT   REFUSED     
+  count rows in them 13
+
+B. CONCURRENT under the WRITE reading (first to last commit)
+  landing   parent    audit     tier      wall         write       
+  mg-131e   mg-200d   mg-41b7   docs-only AUDIT-AFTER  CONCURRENT  
+  mg-200d   mg-6bc2   mg-41b7   STATE.md  CONCURRENT   CONCURRENT  
+  mg-24fb   mg-5ce3   mg-3e06   docs-only CONCURRENT   CONCURRENT  
+  mg-2f44   mg-3329   mg-07fd   STATE.md  AUDIT-BEFORE CONCURRENT  
+  mg-345e   mg-6bc2   mg-41b7   STATE.md  AUDIT-AFTER  CONCURRENT  
+  mg-51f4   mg-28ff   mg-29fe   docs-only CONCURRENT   CONCURRENT  
+  mg-8311   mg-76b2   mg-94c3   docs-only CONCURRENT   CONCURRENT  
+  mg-845e   mg-3969   mg-d3c7   docs-only REFUSED      CONCURRENT  
+  mg-9461   mg-76b2   mg-94c3   docs-only AUDIT-BEFORE CONCURRENT  
+  mg-af28   mg-1953   mg-3b51   docs-only CONCURRENT   CONCURRENT  
+  mg-b488   mg-200d   mg-41b7   STATE.md  AUDIT-AFTER  CONCURRENT  
+  mg-b58d   mg-28ff   mg-29fe   docs-only AUDIT-BEFORE CONCURRENT  
+  mg-bee1   mg-4acd   mg-218d   docs-only AUDIT-BEFORE CONCURRENT  
+  count rows in them 13
+
+C. CONCURRENT under BOTH — the rows no reading can explain away
+  landing   parent    audit     tier      wall         write       
+  mg-200d   mg-6bc2   mg-41b7   STATE.md  CONCURRENT   CONCURRENT  
+  mg-24fb   mg-5ce3   mg-3e06   docs-only CONCURRENT   CONCURRENT  
+  mg-51f4   mg-28ff   mg-29fe   docs-only CONCURRENT   CONCURRENT  
+  mg-8311   mg-76b2   mg-94c3   docs-only CONCURRENT   CONCURRENT  
+  mg-af28   mg-1953   mg-3b51   docs-only CONCURRENT   CONCURRENT  
+  count rows in them 5
+
+D. CONCURRENT under ONE reading only — each of these is a WEAKER finding
+  landing   parent    audit     tier      wall         write       
+  mg-00a1   mg-131e   mg-eaa1   STATE.md  CONCURRENT   AUDIT-BEFORE
+  mg-131e   mg-200d   mg-41b7   docs-only AUDIT-AFTER  CONCURRENT  
+  mg-2f44   mg-3329   mg-07fd   STATE.md  AUDIT-BEFORE CONCURRENT  
+  mg-345e   mg-6bc2   mg-41b7   STATE.md  AUDIT-AFTER  CONCURRENT  
+  mg-372e   mg-131e   mg-eaa1   docs-only CONCURRENT   AUDIT-BEFORE
+  mg-4417   mg-24fb   mg-dd8b   docs-only CONCURRENT   AUDIT-BEFORE
+  mg-81ff   mg-9461   mg-39bf   docs-only CONCURRENT   AUDIT-BEFORE
+  mg-845e   mg-3969   mg-d3c7   docs-only REFUSED      CONCURRENT  
+  mg-8d63   mg-789d   mg-5cba   STATE.md  CONCURRENT   REFUSED     
+  mg-9461   mg-76b2   mg-94c3   docs-only AUDIT-BEFORE CONCURRENT  
+  mg-b488   mg-200d   mg-41b7   STATE.md  AUDIT-AFTER  CONCURRENT  
+  mg-b58d   mg-28ff   mg-29fe   docs-only AUDIT-BEFORE CONCURRENT  
+  mg-be0b   mg-3329   mg-07fd   docs-only CONCURRENT   REFUSED     
+  mg-bee1   mg-4acd   mg-218d   docs-only AUDIT-BEFORE CONCURRENT  
+  mg-c2b3   mg-821e   mg-4700   docs-only CONCURRENT   REFUSED     
+  mg-e10a   mg-345e   mg-6bd1   docs-only CONCURRENT   REFUSED     
+  count rows in them 16
+
+E. AUDIT-AFTER — the landing was built on a parent whose audit had NOT RUN YET
+   (a different defect from the ticket's: not a race, a FAN-OUT. See s5.)
+
+  landing   parent    audit     tier      wall         write       
+  mg-131e   mg-200d   mg-41b7   docs-only AUDIT-AFTER  CONCURRENT  
+  mg-325c   mg-2860   mg-4f88   STATE.md  AUDIT-AFTER  AUDIT-AFTER 
+  mg-345e   mg-6bc2   mg-41b7   STATE.md  AUDIT-AFTER  CONCURRENT  
+  mg-76b2   mg-845e   mg-29fe   docs-only AUDIT-AFTER  AUDIT-AFTER 
+  mg-8257   mg-6bc2   mg-41b7   docs-only AUDIT-AFTER  REFUSED     
+  mg-9adf   mg-6bc2   mg-41b7   STATE.md  AUDIT-AFTER  AUDIT-AFTER 
+  mg-b488   mg-200d   mg-41b7   STATE.md  AUDIT-AFTER  CONCURRENT  
+  mg-ba78   mg-6bc2   mg-41b7   STATE.md  AUDIT-AFTER  AUDIT-AFTER 
+  mg-f8fa   mg-6f61   mg-73df   docs-only AUDIT-AFTER  REFUSED     
+  count rows in them 9
+
+F. DETAIL for every row that is CONCURRENT under either reading
+  --- mg-00a1  (parent mg-131e, audit mg-eaa1) ---
+      landing : THE QUESTION THAT REPLACES 2/(n+1): what is the TRUE growth of the disjunctive per-slot value? If it
+      audit   : INDEPENDENT AUDIT of mg-131e (pre-filed SAME ACTION) — an 'n-indexed' verdict reads as a route to th
+      landing wall  08-07T19:04..21:52   write 08-07T20:36..22:53
+      audit   wall  08-07T19:06..20:35   write 08-07T20:10..20:33
+      verdicts: wall=CONCURRENT write=AUDIT-BEFORE  STATE.md=yes
+      landing canonical commits: ['6cd5b1d', '788128f']
+      landing declared depends : NONE
+
+  --- mg-131e  (parent mg-200d, audit mg-41b7) ---
+      landing : DUAL CERTIFICATE for mg-200d's <= direction at n=3,4,5 — and say whether the multipliers are n-INDEX
+      audit   : INDEPENDENT AUDIT of mg-200d (pre-filed SAME ACTION) — verify the PER-SLOT constraint matrix rather 
+      landing wall  08-07T18:10..18:50   write 08-07T19:16..21:25
+      audit   wall  08-07T20:54..22:11   write 08-07T21:59..22:56
+      verdicts: wall=AUDIT-AFTER write=CONCURRENT  STATE.md=no
+      landing canonical commits: ['767c5a1', '52d290a', '35edad7', 'b7b6941']
+      landing declared depends : NONE
+
+  --- mg-200d  (parent mg-6bc2, audit mg-41b7) ---
+      landing : The ONE live lever: what does PER-SLOT adjacency symmetry buy? Pair marginals alone are now CLOSED a
+      audit   : INDEPENDENT AUDIT of mg-200d (pre-filed SAME ACTION) — verify the PER-SLOT constraint matrix rather 
+      landing wall  08-07T16:43..10:01   write 08-07T17:49..22:27
+      audit   wall  08-07T20:54..22:11   write 08-07T21:59..22:56
+      verdicts: wall=CONCURRENT write=CONCURRENT  STATE.md=yes
+      landing canonical commits: ['73e5e63', '421ca27', '788128f', '52d290a', 'c80a4f1', '491d42c', 'b7b6941', '72a6e33', '731a9ab', 'ffc5501', '762921d']
+      landing declared depends : NONE
+
+  --- mg-24fb  (parent mg-5ce3, audit mg-3e06) ---
+      landing : The 'unspecified N_0' reading survives AT SOURCE in two documents after mg-5ce3 landed 5.3 into STAT
+      audit   : INDEPENDENT AUDIT of mg-5ce3 (pre-filed SAME ACTION) — it STRENGTHENS a negative, so try to build th
+      landing wall  08-07T21:30..22:36   write 08-07T22:07..22:54
+      audit   wall  08-07T21:16..22:36   write 08-07T22:18..22:34
+      verdicts: wall=CONCURRENT write=CONCURRENT  STATE.md=no
+      landing canonical commits: ['4d874af', '7e1ae50']
+      landing declared depends : NONE
+
+  --- mg-2f44  (parent mg-3329, audit mg-07fd) ---
+      landing : THE RENDERED TWIN docs/state-of-the-wall.html:380 STILL CARRIES LEDGER ROW 9 PRE-REPAIR — mg-3329 la
+      audit   : INDEPENDENT AUDIT of the STATE.md either-disjunct repair (pre-filed SAME ACTION) — re-run the CLAIM 
+      landing wall  08-10T03:33..04:03   write 08-10T04:29..07:51
+      audit   wall  08-10T00:04..00:34   write 08-10T01:33..04:56
+      verdicts: wall=AUDIT-BEFORE write=CONCURRENT  STATE.md=yes
+      landing canonical commits: ['cdec2e8', 'bc965aa', '4fcbc71', '9efb3df']
+      landing declared depends : ['mg-9bc2']
+
+  --- mg-345e  (parent mg-6bc2, audit mg-41b7) ---
+      landing : Is the pair-bias derivation of eps_spec INDEPENDENT of L4's modulus question? mg-6bc2 names this as 
+      audit   : INDEPENDENT AUDIT of mg-200d (pre-filed SAME ACTION) — verify the PER-SLOT constraint matrix rather 
+      landing wall  08-07T12:54..13:12   write 08-07T13:54..19:12
+      audit   wall  08-07T20:54..22:11   write 08-07T21:59..22:56
+      verdicts: wall=AUDIT-AFTER write=CONCURRENT  STATE.md=yes
+      landing canonical commits: ['a1c5c1f', '52d290a', 'c80a4f1', '550a7f1', '4a64a4c']
+      landing declared depends : NONE
+
+  --- mg-372e  (parent mg-131e, audit mg-eaa1) ---
+      landing : THE REFUTATION REACHED THE LEDGER AND NOT THE DOCUMENTS: mg-6bc2 §5.1 still prints eps_spec = 2/(n+1
+      audit   : INDEPENDENT AUDIT of mg-131e (pre-filed SAME ACTION) — an 'n-indexed' verdict reads as a route to th
+      landing wall  08-07T19:26..20:47   write 08-07T20:38..21:13
+      audit   wall  08-07T19:06..20:35   write 08-07T20:10..20:33
+      verdicts: wall=CONCURRENT write=AUDIT-BEFORE  STATE.md=no
+      landing canonical commits: ['a1c5c1f', '52d290a', 'dafe759']
+      landing declared depends : NONE
+
+  --- mg-4417  (parent mg-24fb, audit mg-dd8b) ---
+      landing : THE N_0 READING SURVIVES AT ITS ORIGIN: mg-88bd's corpus-forms table (OneThird-lambda-std-Operative-
+      audit   : INDEPENDENT AUDIT of mg-24fb (pre-filed SAME ACTION) — count the sites yourself and NAME THE UNIT (i
+      landing wall  08-07T21:43..22:39   write 08-07T22:51..23:04
+      audit   wall  08-07T21:04..22:11   write 08-07T22:07..22:16
+      verdicts: wall=CONCURRENT write=AUDIT-BEFORE  STATE.md=no
+      landing canonical commits: ['6b0d87c', '5cb6ca9', '77e95e3']
+      landing declared depends : NONE
+
+  --- mg-51f4  (parent mg-28ff, audit mg-29fe) ---
+      landing : THE CHEEGER SWEEP'S LOSS IS THE REAL OBSTRUCTION — both L2-free routes to C_3=1 have their constants
+      audit   : INDEPENDENT AUDIT of mg-28ff (filed LATE — second time tonight I filed a claim without its audit in 
+      landing wall  08-09T20:14..22:37   write 08-09T21:24..01:39
+      audit   wall  08-09T20:27..21:41   write 08-09T21:29..07:10
+      verdicts: wall=CONCURRENT write=CONCURRENT  STATE.md=no
+      landing canonical commits: ['a65860e', '2f76a01', '18a1347']
+      landing declared depends : NONE
+
+  --- mg-81ff  (parent mg-9461, audit mg-39bf) ---
+      landing : ESTABLISH c: chain IV never pays the Cheeger square, so its demand is 0.20 not 0.02 and the gap is 5
+      audit   : INDEPENDENT AUDIT of mg-9461 (filed LATE — I never pre-filed one, because my own encoding error let 
+      landing wall  08-09T19:08..20:27   write 08-09T21:25..00:11
+      audit   wall  08-09T19:29..19:52   write 08-09T20:32..21:22
+      verdicts: wall=CONCURRENT write=AUDIT-BEFORE  STATE.md=no
+      landing canonical commits: ['da89b3b', '8eec6d2', '767c5a1']
+      landing declared depends : ['mg-9461']
+
+  --- mg-8311  (parent mg-76b2, audit mg-94c3) ---
+      landing : lib2de0.E_leak uses the first |A| POSITIONS instead of the positions INDEXED BY A, and phi_star call
+      audit   : INDEPENDENT AUDIT of mg-76b2 (pre-filed SAME ACTION) — RE-DERIVE the threshold relation n >= 4C_3/ep
+      landing wall  08-07T18:55..19:29   write 08-07T20:00..20:22
+      audit   wall  08-07T18:44..19:11   write 08-07T19:48..21:25
+      verdicts: wall=CONCURRENT write=CONCURRENT  STATE.md=no
+      landing canonical commits: ['65866c2']
+      landing declared depends : NONE
+
+  --- mg-845e  (parent mg-3969, audit mg-d3c7) ---
+      landing : DANIEL's 'what constant is CONSUMED' — eps_dem, the demand half split from mg-6bc2. Gated on L4's TH
+      audit   : INDEPENDENT AUDIT of mg-3969 (pre-filed SAME ACTION) — check FIRST whether it answered the THRESHOLD
+      landing wall       REFUSED        write 08-09T13:59..18:56
+      audit   wall  08-09T17:28..17:58   write 08-09T18:30..20:47
+      verdicts: wall=REFUSED write=CONCURRENT  STATE.md=no
+      landing canonical commits: ['6e5d88b', 'f9fb63f']
+      landing declared depends : ['mg-3969', 'mg-5214', 'mg-d3c7']
+
+  --- mg-8d63  (parent mg-789d, audit mg-5cba) ---
+      landing : LAND the (L*) REFUTATION across the corpus: STATE.md and every doc asserting the disjunction is ONE 
+      audit   : INDEPENDENT AUDIT of the (L*) attempt (pre-filed SAME ACTION) — verify (L*) actually implies the dis
+      landing wall  08-10T05:27..06:18   write 08-10T07:10..09:03
+      audit   wall  08-10T04:05..05:58   write      REFUSED     
+      verdicts: wall=CONCURRENT write=REFUSED  STATE.md=yes
+      landing canonical commits: ['7499e19', 'f977102']
+      landing declared depends : NONE
+
+  --- mg-9461  (parent mg-76b2, audit mg-94c3) ---
+      landing : DANIEL: get an ACTUAL constant with clarity on what it means. WHICH of the four chains does Step 6 c
+      audit   : INDEPENDENT AUDIT of mg-76b2 (pre-filed SAME ACTION) — RE-DERIVE the threshold relation n >= 4C_3/ep
+      landing wall  08-09T18:07..19:07   write 08-09T19:12..21:25
+      audit   wall  08-07T18:44..19:11   write 08-07T19:48..21:25
+      verdicts: wall=AUDIT-BEFORE write=CONCURRENT  STATE.md=no
+      landing canonical commits: ['767c5a1', 'f39ccce', 'cf1d7ef']
+      landing declared depends : ['mg-d3c7']
+
+  --- mg-af28  (parent mg-1953, audit mg-3b51) ---
+      landing : Daniel's generalisation question is NOT settled: run the search that row Q's no omitted — towers of 
+      audit   : INDEPENDENT AUDIT of whatever mg-1953 produces (pre-filed) — check the acyclicity fix OUTSIDE AC(P),
+      landing wall  07-30T14:38..15:25   write 07-30T16:24..16:56
+      audit   wall  07-30T14:38..15:02   write 07-30T16:02..16:32
+      verdicts: wall=CONCURRENT write=CONCURRENT  STATE.md=no
+      landing canonical commits: ['ae21569', '358beff']
+      landing declared depends : ['mg-1953']
+
+  --- mg-b488  (parent mg-200d, audit mg-41b7) ---
+      landing : STATE.md carries NEITHER mg-200d's per-slot result NOR mg-ba78's correction of mg-6bc2 — land both. 
+      audit   : INDEPENDENT AUDIT of mg-200d (pre-filed SAME ACTION) — verify the PER-SLOT constraint matrix rather 
+      landing wall  08-07T18:54..19:06   write 08-07T20:02..22:34
+      audit   wall  08-07T20:54..22:11   write 08-07T21:59..22:56
+      verdicts: wall=AUDIT-AFTER write=CONCURRENT  STATE.md=yes
+      landing canonical commits: ['69d42fa', 'cf476ba', '491d42c']
+      landing declared depends : NONE
+
+  --- mg-b58d  (parent mg-28ff, audit mg-29fe) ---
+      landing : mg-29fe's SEVEN repairs to mg-28ff's LANDED document — 4.3 reads a SAMPLE as an ENUMERATION and is f
+      audit   : INDEPENDENT AUDIT of mg-28ff (filed LATE — second time tonight I filed a claim without its audit in 
+      landing wall  08-09T22:41..23:11   write 08-09T23:48..01:04
+      audit   wall  08-09T20:27..21:41   write 08-09T21:29..07:10
+      verdicts: wall=AUDIT-BEFORE write=CONCURRENT  STATE.md=no
+      landing canonical commits: ['f6cf926', 'b45aad8']
+      landing declared depends : NONE
+
+  --- mg-be0b  (parent mg-3329, audit mg-07fd) ---
+      landing : THE EITHER-DISJUNCT CLAIM SURVIVES OUTSIDE STATE.md AT THREE SITES-GROUPS — and mg-fa70's own 'code/
+      audit   : INDEPENDENT AUDIT of the STATE.md either-disjunct repair (pre-filed SAME ACTION) — re-run the CLAIM 
+      landing wall  08-10T00:08..00:51   write      REFUSED     
+      audit   wall  08-10T00:04..00:34   write 08-10T01:33..04:56
+      verdicts: wall=CONCURRENT write=REFUSED  STATE.md=no
+      landing canonical commits: ['48cbbd8']
+      landing declared depends : NONE
+
+  --- mg-bee1  (parent mg-4acd, audit mg-218d) ---
+      landing : Repair mg-4acd from mg-218d's audit: the certified property is FALSE AS STATED (the same paragraph o
+      audit   : INDEPENDENT AUDIT of whatever mg-4acd produces (pre-filed) — FIFTH control in the lineage; assume th
+      landing wall  07-30T16:32..16:55   write 07-30T17:51..18:49
+      audit   wall  07-30T16:00..16:21   write 07-30T17:21..17:54
+      verdicts: wall=AUDIT-BEFORE write=CONCURRENT  STATE.md=no
+      landing canonical commits: ['3a80d99', 'a2d5a81']
+      landing declared depends : ['mg-218d']
+
+  --- mg-c2b3  (parent mg-821e, audit mg-4700) ---
+      landing : ARC-WIDE: 23 of 63 run_all.sh use '| tee' and only 1 sets pipefail — any of them can print FAILED an
+      audit   : INDEPENDENT AUDIT of the mg-6cb9 repair (pre-filed SAME ACTION) — a contingent extent looks identica
+      landing wall  07-31T00:10..00:55   write      REFUSED     
+      audit   wall  07-30T23:51..00:35   write      REFUSED     
+      verdicts: wall=CONCURRENT write=REFUSED  STATE.md=no
+      landing canonical commits: ['52aeaf4']
+      landing declared depends : NONE
+
+  --- mg-e10a  (parent mg-345e, audit mg-6bd1) ---
+      landing : mg-6bd1's four corrections to mg-345e: its section 6 is WRONG ON BOTH COUNTS about 1/6 and too modes
+      audit   : INDEPENDENT AUDIT of mg-345e (pre-filed SAME ACTION) — the INDEPENDENT verdict releases a blocked Da
+      landing wall  08-07T20:07..21:52   write      REFUSED     
+      audit   wall  08-07T19:35..21:43   write 08-07T20:37..21:13
+      verdicts: wall=CONCURRENT write=REFUSED  STATE.md=no
+      landing canonical commits: ['a1c5c1f']
+      landing declared depends : NONE
+
+count CONCURRENT under either reading 21
+count CONCURRENT under both readings  5
+count AUDIT-AFTER                     9

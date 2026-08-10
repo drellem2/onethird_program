@@ -1,0 +1,109 @@
+==============================================================================
+s0 — SELFTEST
+==============================================================================
+s0 — forced arms. Every classifier in lib64cb, including THREE it must REJECT.
+
+A selftest that only feeds a classifier things it should accept measures nothing: a
+function returning True unconditionally would pass it and would score this ticket's
+population at every triple in the arc. The rejection arms are the load-bearing half.
+
+Exit 0 iff every arm holds.
+
+A. is_audit — THREE ACCEPTS AND THREE REJECTS
+  [ok ] A.accept mg-5cba (INDEPENDENT AUDIT of the (L*) attempt (pre-filed SAM...)
+         got=True
+        want=True
+  [ok ] A.accept mg-2eed (INDEPENDENT AUDIT of mg-b488 (pre-filed SAME ACTION)...)
+         got=True
+        want=True
+  [ok ] A.accept mg-3bb9 (INDEPENDENT AUDIT of mg-b58d (filed LATE — I bypasse...)
+         got=True
+        want=True
+  [ok ] A.reject mg-1319 tags=[onethird, audit, followup, mg-5630-followup]
+         got=False
+        want=False
+  [ok ] A.reject mg-a806 tags=[onethird, audit, followup, mg-86a3-followup]
+         got=False
+        want=False
+  [ok ] A.reject mg-789d (the audited PARENT)
+         got=False
+        want=False
+
+B. parents — the seed pair, and a control that must be EMPTY
+  [ok ] B.landing mg-8d63 -> {mg-789d}
+         got={'mg-789d'}
+        want={'mg-789d'}
+  [ok ] B.audit   mg-5cba -> {mg-789d}
+         got={'mg-789d'}
+        want={'mg-789d'}
+  [ok ] B.control synthetic item -> EMPTY
+         got=set()
+        want=set()
+
+C. is_canonical — the wide reading must still REJECT code/
+  [ok ] C.STATE.md
+         got=True
+        want=True
+  [ok ] C.docs/x.md
+         got=True
+        want=True
+  [ok ] C.README.md
+         got=True
+        want=True
+  [ok ] C.reject code/
+         got=False
+        want=False
+  [ok ] C.reject a bare out_*.txt at root
+         got=False
+        want=False
+
+D. overlaps / relation — all four verdicts, and REFUSED must PROPAGATE
+  [ok ] D.overlap
+         got=True
+        want=True
+  [ok ] D.touching-endpoints do NOT overlap
+         got=False
+        want=False
+  [ok ] D.CONCURRENT
+         got='CONCURRENT'
+        want='CONCURRENT'
+  [ok ] D.AUDIT-AFTER
+         got='AUDIT-AFTER'
+        want='AUDIT-AFTER'
+  [ok ] D.AUDIT-BEFORE
+         got='AUDIT-BEFORE'
+        want='AUDIT-BEFORE'
+  [ok ] D.REFUSED propagates through overlaps
+         got='REFUSED'
+        want='REFUSED'
+  [ok ] D.REFUSED propagates through relation
+         got='REFUSED'
+        want='REFUSED'
+  [ok ] D.REFUSED on the AUDIT side too
+         got='REFUSED'
+        want='REFUSED'
+
+E. wall_interval — the ZERO-LENGTH refusal, on a live instance
+  [ok ] E.mg-845e claim==done -> REFUSED (not 'no overlap')
+         got='REFUSED'
+        want='REFUSED'
+  [ok ] E.mg-8d63 is a real interval
+         got=True
+        want=True
+  [ok ] E.an item with no events -> REFUSED
+         got='REFUSED'
+        want='REFUSED'
+
+F. the RULE, asked at a HISTORICAL instant
+  [ok ] F.mg-8d63 at its claim 2026-08-10T05:27:54Z: mg-5cba RUNNING
+         got=[('mg-789d', 'mg-5cba', 'RUNNING')]
+        want=[('mg-789d', 'mg-5cba', 'RUNNING')]
+  [ok ] F.same landing after the audit finished: DONE (the rule can PASS)
+         got=[('mg-789d', 'mg-5cba', 'DONE')]
+        want=[('mg-789d', 'mg-5cba', 'DONE')]
+  [ok ] F.control synthetic no-parent item -> []
+         got=[]
+        want=[]
+
+==============================================================================
+s0: all arms hold.

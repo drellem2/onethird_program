@@ -1,0 +1,91 @@
+{
+ "seed": [
+  [
+   "R2  LSTAR(6)",
+   "0\\.794253",
+   "0.794235",
+   "STRUCK",
+   {
+    "LIVE": 0,
+    "STRUCK": 5,
+    "IN-REPAIR": 5
+   }
+  ],
+  [
+   "R3  Theorem A (SO) count at n<=7",
+   "(?<![\\d.,:])338(?![\\d,])",
+   "2500",
+   "STRUCK",
+   {
+    "LIVE": 0,
+    "STRUCK": 5,
+    "IN-REPAIR": 6
+   }
+  ],
+  [
+   "R4  (M#) survival, the published TRIPLE",
+   "0\\.943\\s*[/,]\\s*0\\.982\\s*[/,]\\s*0\\.958",
+   "4 of 4",
+   "STRUCK",
+   {
+    "LIVE": 0,
+    "STRUCK": 2,
+    "IN-REPAIR": 2
+   }
+  ],
+  [
+   "R5  counterexample count",
+   "\\bfour counterexamples\\b|\\ball three\\b(?=[^\\n]{0,80}counterexample)",
+   "five / all four",
+   "STRUCK",
+   {
+    "LIVE": 0,
+    "STRUCK": 2,
+    "IN-REPAIR": 4
+   }
+  ]
+ ],
+ "flagged": [
+  [
+   "mg-51f4",
+   "mg-29fe",
+   [
+    "0.019169",
+    "0.176",
+    "0.250000",
+    "0.306250",
+    "0.308339",
+    "0.327508",
+    "0.341",
+    "0.550747",
+    "0.923894",
+    "0.943649",
+    "0.968818",
+    "1.078"
+   ]
+  ],
+  [
+   "mg-845e",
+   "mg-d3c7",
+   [
+    "0.167",
+    "0.21795",
+    "0.218"
+   ]
+  ],
+  [
+   "mg-8d63",
+   "mg-5cba",
+   [
+    "1.078"
+   ]
+  ],
+  [
+   "mg-be0b",
+   "mg-07fd",
+   [
+    "2.386"
+   ]
+  ]
+ ]
+}
