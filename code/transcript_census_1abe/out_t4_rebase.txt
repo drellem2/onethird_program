@@ -1,7 +1,7 @@
 ==============================================================================
 t4 -- DID ANY REBASE IN THIS ARC ALTER CONTENT?
 ==============================================================================
-    code-digest: 29ab59a4f1f51e3d   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/transcript_census_1abe;
+    code-digest: 8ce36c5abdce5361   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/transcript_census_1abe;
     NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
     reads-outside-tree: yes
     ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
@@ -19,9 +19,9 @@ T4a -- THE PAIRING RULE, TESTED BEFORE IT IS USED
 ------------------------------------------------------------------------------
 T4b -- EVERY PRE-REBASE TWIN STILL IN THE OBJECT STORE
 ------------------------------------------------------------------------------
-    259 commits are reachable from some ref or reflog and are NOT ancestors of 81214a9
-    234 of them have a subject that also occurs on 81214a9 -- these are the PRE-REBASE TWINS
-    25 do not, and are outside this measurement: work that never landed, or landed reworded
+    630 commits are reachable from some ref or reflog and are NOT ancestors of 81214a9
+    233 of them have a subject that also occurs on 81214a9 -- these are the PRE-REBASE TWINS
+    397 do not, and are outside this measurement: work that never landed, or landed reworded
 
 ------------------------------------------------------------------------------
 T4c -- PATCH-ID ON EVERY PAIR
@@ -121,7 +121,6 @@ T4c -- PATCH-ID ON EVERY PAIR
     19dceced   d01ff32d   IDENTICAL   docs+repair: THE BOUND IS NARROWED TO THE SWEEP WITH
     eaa7317e   3bf0cd20   IDENTICAL   docs+repair: THE CENSUS COMPARES THE WHOLE RECORD — 
     dc2473dd   bee07a15   IDENTICAL   docs+repair: THE CENSUS IS POSITION-AWARE AND SUMMAR
-    257acd33   bee07a15   *** ALTERED *** docs+repair: THE CENSUS IS POSITION-AWARE AND SUMMAR
     9d548b6a   b6bc2efe   IDENTICAL   docs+repair: THE DELETION TEST IS PER RETURN AND THE
     ccfdf372   bfd7948e   IDENTICAL   docs+repair: THE DISJUNCTION IS SPELLED WITH AN OPER
     d60f097c   e16e41cd   IDENTICAL   docs+repair: THE FIGURE WAS ITS OWN PARENT'S — −875 
@@ -262,7 +261,7 @@ T4c -- PATCH-ID ON EVERY PAIR
     5b3f3ecc   11ef9a9c   IDENTICAL   repair: split (e) into two rows so the deletion test
     de39eb6d   5bd0d71e   IDENTICAL   rescue: mg-c067's uncommitted c2_anchors.py and READ
     36a860d8   2d771068   IDENTICAL   wip: regenerate the two transcripts this repair move
-[MEASURED ] T4c of 234 pre-rebase/on-main pairs visible in this object store, 232 are patch-id IDENTICAL and 2 are not.  A non-identical patch-id is a CANDIDATE and not yet a verdict: T4c' adjudicates each one, because `the content differs` and `a rebase altered the content` are different claims
+[MEASURED ] T4c of 233 pre-rebase/on-main pairs visible in this object store, 232 are patch-id IDENTICAL and 1 are not.  A non-identical patch-id is a CANDIDATE and not yet a verdict: T4c' adjudicates each one, because `the content differs` and `a rebase altered the content` are different claims
 
 ------------------------------------------------------------------------------
 T4c' -- EVERY CANDIDATE ADJUDICATED, BECAUSE PATCH-ID ALONE CANNOT NAME THE CAUSE
@@ -287,12 +286,6 @@ and only what survives all of them is reported as content alteration.
   3  Anything else -- a pre-existing file whose content differs between the two
      -- is what the addendum asked to be counted, and it is named in full.
 
-    257acd33 -> bee07a15
-        docs+repair: THE CENSUS IS POSITION-AWARE AND SUMMARY vs ROWS READS TH
-        paths 9 vs 9, shared 9, differing 2, of which CREATED BY THIS COMMIT 2
-        VERDICT  AUTHORED -- every differing path is created by the commit, so no rebase could have conflicted in it.  The branch was reworked and resubmitted
-                 code/hodge_leverage_repair_8eca/out_repair_8eca.txt
-                 code/hodge_leverage_repair_8eca/repair_8aae.py
     c2f1854c -> 2919d28a
         probe: price the Hodge-side bet — the top two dimensions are graph the
         paths 20 vs 14, shared 14, differing 0, of which CREATED BY THIS COMMIT 0
@@ -303,9 +296,9 @@ and only what survives all of them is reported as content alteration.
                  only in the pre-rebase commit: code/face_geometry/__pycache__/posets.cpython-314.pyc
                  only in the pre-rebase commit: code/face_geometry_audit_e0ce/__pycache__/audit_extra.cpython-314.pyc
                  only in the pre-rebase commit: code/face_geometry_audit_e0ce/__pycache__/audit_rebuild.cpython-314.pyc
-[OK       ] T4c'' THE THIRD BUCKET, AFTER ADJUDICATION: 0 pair(s) show a rebase altering the content of a pre-existing file.  Patch-id ALONE flagged 2; of those, 1 survived with byte-identical content and only an absorbed hunk, and 1 were branch reworks in files the commit itself creates
-[MEASURED ] T4c''' AND THAT IS THE CATCH IN PATCH-ID, MEASURED RATHER THAN WARNED ABOUT: 1 of 234 pairs in this arc carry identical content under DIFFERENT patch-ids.  Patch-id is the right instrument against ancestry's false negative, and it has a false negative of its own whenever the replay absorbs a hunk.  A census built on patch-id alone would have reported these as damage
-[MEASURED ] T4c' COVERAGE: this answer is over the 234 pairs still visible, not over every rebase the refinery has ever performed.  A twin whose reflog entry has expired is invisible here and its absence is NOT evidence that its rebase was clean
+[OK       ] T4c'' THE THIRD BUCKET, AFTER ADJUDICATION: 0 pair(s) show a rebase altering the content of a pre-existing file.  Patch-id ALONE flagged 1; of those, 1 survived with byte-identical content and only an absorbed hunk, and 0 were branch reworks in files the commit itself creates
+[MEASURED ] T4c''' AND THAT IS THE CATCH IN PATCH-ID, MEASURED RATHER THAN WARNED ABOUT: 1 of 233 pairs in this arc carry identical content under DIFFERENT patch-ids.  Patch-id is the right instrument against ancestry's false negative, and it has a false negative of its own whenever the replay absorbs a hunk.  A census built on patch-id alone would have reported these as damage
+[MEASURED ] T4c' COVERAGE: this answer is over the 233 pairs still visible, not over every rebase the refinery has ever performed.  A twin whose reflog entry has expired is invisible here and its absence is NOT evidence that its rebase was clean
 
 ------------------------------------------------------------------------------
 T4d -- THE THREE SAMPLES IN THE BRIEF, RE-DERIVED RATHER THAN REPEATED
