@@ -1,0 +1,123 @@
+==============================================================================
+d5 -- THE CENSUS'S `TIMED-OUT` BUCKET IS UNREACHABLE BY CONSTRUCTION
+==============================================================================
+    code-digest: 0606c02932209f76   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of: e35b51c78ab2
+
+------------------------------------------------------------------------------
+D5a -- THE TRANSCRIPTION IS CHECKED AGAINST THE ORIGINAL SOURCE
+------------------------------------------------------------------------------
+[OK       ] D5a the shell is what creates the file
+[OK       ] D5a collect() returns bytes for any file that EXISTS
+[OK       ] D5a collect() returns None ONLY when the file is absent
+[OK       ] D5a the TIMED-OUT branch is guarded by `got[p] is None`
+[OK       ] D5a and the DIFFERS branch is the final else
+[OK       ] D5a' every clause of the transcription above is present in `code/transcript_census_1abe/t2_census.py` at e35b51c.  The reasoning below is about that code and not about a paraphrase of it
+
+------------------------------------------------------------------------------
+D5b -- THE CLASSIFIER, RUN ON THE THREE STATES A KILLED RUN CAN LEAVE
+------------------------------------------------------------------------------
+    state left by a SIGKILL at the budget      t2 buckets it as
+    ------------------------------------------  ----------------
+    file never created (producer never started)  TIMED-OUT
+[OK       ] D5b `file never created (producer never started)` -> TIMED-OUT (expected TIMED-OUT)
+    file created, EMPTY (python buffers stdout)  DIFFERS
+[OK       ] D5b `file created, EMPTY (python buffers stdout)` -> DIFFERS (expected DIFFERS)
+    file created, PARTIAL (buffer flushed once)  DIFFERS
+[OK       ] D5b `file created, PARTIAL (buffer flushed once)` -> DIFFERS (expected DIFFERS)
+[FINDING  ] D5b' 2 of the 3 states a killed run can leave are bucketed DIFFERS, and only the state in which the shell never ran at all reaches TIMED-OUT.  Since every runner in this arc redirects into its transcripts, the shell ALWAYS creates them, so the TIMED-OUT bucket is unreachable for every suite that has a runner
+
+------------------------------------------------------------------------------
+D5c -- AND THE CONCLUSION GRAIN CALLS AN EMPTY FILE A FLIP
+------------------------------------------------------------------------------
+    conclusion_verdict(committed, empty file   ) = FLIPS
+[OK       ] D5c a killed run leaving an empty file scores FLIPS at mg-1abe's own conclusion grain
+    conclusion_verdict(committed, partial file ) = FLIPS
+[OK       ] D5c a killed run leaving a partial file scores FLIPS at mg-1abe's own conclusion grain
+[FINDING  ] D5c' SO A SUITE THAT MERELY RAN OUT OF TIME IS REPORTED AS A FALSE RECORD.  mg-1abe's §2 promises the opposite in so many words, and the promise is the thing its 112 rests on
+
+------------------------------------------------------------------------------
+D5d -- THE MECHANISM, FIRED FOR REAL, AT A BUDGET I CAN AFFORD
+------------------------------------------------------------------------------
+A demonstration rather than an argument: `hodge_leverage_repair_ff3e`'s
+runner is started in a detached worktree at the transcript's carrying commit and
+KILLED after a few seconds, exactly as `run_suite` kills it -- same
+`start_new_session=True`, same `os.killpg(..., SIGKILL)`.  What is measured is
+the state of the transcript file on disk afterwards.
+
+    killed after 8s at 3bf0cd2:
+      transcript file exists on disk : True
+      its size                       : 0 bytes
+      collect() would return         : b'' (0 bytes)
+      t2 would bucket it             : DIFFERS
+[OK       ] D5d the transcript file EXISTS after a SIGKILL, so `collect()` returns bytes and the TIMED-OUT branch is not taken
+[OK       ] D5d' and it is EMPTY (0 bytes): python buffers stdout when it is not a tty, so a killed producer of this shape leaves a zero-byte transcript rather than a partial one
+
+------------------------------------------------------------------------------
+D5e -- HOW MANY SUITES IS THE BUCKET UNREACHABLE FOR?
+------------------------------------------------------------------------------
+The exposure is not 'suites that are slow' -- that is a fact about a
+machine.  It is 'suites for which a timeout CANNOT be reported as one', which
+is a fact about the code and is countable without running anything: a suite
+whose runner redirects into a tracked transcript has that file created by the
+shell before its producer starts.
+
+    directories carrying a tracked transcript at e35b51c : 166
+      ...with a `run_all.sh` that redirects into one of them : 99
+      ...with a `run_all.sh` that redirects into NO transcript : 39
+      ...with no `run_all.sh` at all                         : 28
+[FINDING  ] D5e THE TIMED-OUT BUCKET IS UNREACHABLE FOR 99 OF THE 166 TRANSCRIPT-CARRYING DIRECTORIES (60%) -- every one whose runner redirects into a transcript, which is what makes the shell create the file before the producer runs.  mg-1abe's own defect 8 reads 'It is 0 here at 900 s on this machine': a 0 that is a property of the guard and not of the machine.  39 more have a runner that redirects into no transcript at all and are counted apart rather than assumed safe
+
+------------------------------------------------------------------------------
+D5f -- THE ONE-LINE REPAIR, NAMED AND NOT APPLIED
+------------------------------------------------------------------------------
+    t2_census.py:224   for p in paths:
+    -                          if got[p] is None:
+    +                          if status == "timeout":
+    +                              verdict[p] = "TIMED-OUT"; ...
+    +                          elif got[p] is None:
+
+WHY IT IS NOT APPLIED HERE, stated so it can be overruled.  Editing
+`code/transcript_census_1abe/t2_census.py` changes that suite's code, which
+displaces all eight of its committed transcripts -- the defect under study --
+and re-running the census to restore them costs about two hours and produces a
+DIFFERENT census, because `main` has moved. That trade is pm-onethird's to size.
+What is landed here instead is the measurement, so the next reader finds the
+number rather than the idea.
+
+AND THE REPAIR IS NOT SUFFICIENT ON ITS OWN.  A suite killed at the budget also
+LEAVES ITS OTHER TRANSCRIPTS half-written, so `TIMED-OUT` has to apply to the
+whole group, which is what the patch above does by keying on `status` rather
+than on the file.
+
+[FINDING  ] D5f the repair is one line and is deliberately NOT applied; the reason is mg-1abe's own rule that repairing a suite's code displaces its transcripts, and the judgement is stated rather than acted on
+
+------------------------------------------------------------------------------
+D5g -- WHAT THIS DOES AND DOES NOT MOVE
+------------------------------------------------------------------------------
+MOVES:  the FIVE.  `code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt`
+        reproduces byte-for-byte at its carrying commit given enough time
+        (measured in `out_d1_five.txt`), so it is not a false record and the
+        measured damage of this class is **FOUR**.
+
+DOES NOT MOVE: the 112.  A row wrongly in DIFFERS is still a row that did not
+        reproduce IN THE CENSUS'S RUN, and the census reports 112 as
+        `DIFFERS`, not as damage.  What this finding says about the 112 is that
+        it is an UPPER bound whose slack is unmeasured, and I did not re-run
+        the other 107 to size it -- that is two hours of machine time and it is
+        stated as not done rather than estimated.
+
+DOES NOT MOVE: 398 REPRODUCES.  A byte-identical transcript cannot be a
+        truncation artefact.  The bucket is safe in the direction that matters.
+
+[MEASURED ] D5g the correction is to the FIVE and not to the 112: 4 false records measured, and 112 stands as an upper bound on non-reproduction whose slack this script does not size
+
+SELF-ERRORS 0
+FINDINGS 4
+TOTAL BAD: 4

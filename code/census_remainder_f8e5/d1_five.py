@@ -133,15 +133,28 @@ disposal.  What is re-derived below, per transcript, is the FLIP itself.
         print("    producer        : %s   (as %s's own run_all.sh spells it)"
               % (spec["cmd"], os.path.dirname(path)))
 
-        res = L.rerun_at(carrier, path, spec, timeout=timeout)
+        res = L.rerun_at(carrier, path, spec, timeout=timeout,
+                         committed=committed_b)
         if res["error"]:
             led.self_error("ARM A on %s: %s" % (path, res["error"]))
             continue
         print("    ARM A           : re-run at the carrying commit, "
-              "clean worktree asserted (%d dirty before), %.0fs, exit %s"
-              % (len(res["dirty_before"]), res["seconds"], res["rc"]))
-        if res["bytes"] is None:
-            led.self_error("ARM A wrote nothing for %s" % path)
+              "clean worktree asserted (%d dirty before), %.0fs, exit %s, "
+              "status %s"
+              % (len(res["dirty_before"]), res["seconds"], res["rc"],
+                 res["status"]))
+        if res["status"] != "ok":
+            # THE GUARD `d5` ARGUES FOR, APPLIED HERE.  A producer that timed
+            # out or died is NOT a transcript that disagrees with itself, and
+            # comparing the empty file its own redirection created against the
+            # committed bytes is exactly the artefact this suite reports.  It
+            # is a SELF-ERROR and not a finding: the fault is in this run.
+            led.self_error(
+                "ARM A on %s is %s (exit %s, %d bytes written) and is NOT "
+                "compared against the committed bytes.  A run that did not "
+                "finish has not been shown to disagree with anything"
+                % (path, res["status"], res["rc"],
+                   len(res["bytes"] or b"")))
             continue
         rerun = res["bytes"].decode("utf-8", "replace")
         identical = res["bytes"] == committed_b
@@ -220,7 +233,7 @@ that it was produced by that COMMIT.
         hit = None
         for cand in cands:
             r = L.rerun_at(cand, path, spec, timeout=timeout,
-                           overlay_dir_from=carrier)
+                           overlay_dir_from=carrier, committed=committed_b)
             if r["error"]:
                 print("      %s  ERROR  %s" % (cand[:12], r["error"]))
                 continue

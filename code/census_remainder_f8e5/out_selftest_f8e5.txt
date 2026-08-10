@@ -1,0 +1,70 @@
+==============================================================================
+selftest -- mg-f8e5's own arms, all forced
+==============================================================================
+    code-digest: 0606c02932209f76   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_remainder_f8e5;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of: e35b51c78ab2
+
+------------------------------------------------------------------------------
+S1 -- THE CENSUS'S DEFINITIONS ARE IMPORTED, NOT PARAPHRASED
+------------------------------------------------------------------------------
+[OK       ] S1 `conclusion_verdict` IS `lib_1abe.conclusion_verdict`, the same object -- not a second definition that agrees today
+[OK       ] S1 `verdict_tags` IS `lib_1abe.verdict_tags`, the same object -- not a second definition that agrees today
+[OK       ] S1 `carrying_commit` IS `lib_1abe.carrying_commit`, the same object -- not a second definition that agrees today
+[OK       ] S1 `transcripts` IS `lib_1abe.transcripts`, the same object -- not a second definition that agrees today
+[OK       ] S1 `code_digest` IS `lib_1abe.code_digest`, the same object -- not a second definition that agrees today
+[OK       ] S1 `parse_producers` IS `lib_1abe.parse_producers`, the same object -- not a second definition that agrees today
+[OK       ] S1' ...and `SELF_DIR` is NOT shared: this suite declares its OWN directory.  It did not, at first, and that is the defect `lib_f8e5.Ledger` exists to keep (census_remainder_f8e5 vs transcript_census_1abe)
+
+------------------------------------------------------------------------------
+S2 -- PRODUCER RECOVERY, EACH TIER FORCED ON A REAL DIRECTORY
+------------------------------------------------------------------------------
+[OK       ] S2 transcript_census_1abe/out_t1_population.txt at 71dea36 -> T1-RUNNER (a suite with a `run_all.sh` -- the census's own rule; recovered via `run_all.sh`)
+[OK       ] S2' ...and the recovered producer names a script that exists in that tree: t1_population.py
+[OK       ] S2 face_geometry_audit_f1b2/out_gates.txt at de54c3a -> T2-OTHER-SH (a suite whose runner is called `run_audit.sh`; recovered via `run_audit.sh`)
+[OK       ] S2' ...and the recovered producer names a script that exists in that tree: audit_gates.py
+[OK       ] S2 libweak_c3ca/out_p1_census.txt at 81214a9 -> T3-NAME-MAP (a suite with no runner of any name; recovered via `p1_census.py`)
+[OK       ] S2' ...and the recovered producer names a script that exists in that tree: p1_census.py
+[OK       ] S2'' NEGATIVE: an invented transcript name recovers T4-NONE, not a producer.  A recovery rule that finds a producer for a file that does not exist would find one for anything
+
+------------------------------------------------------------------------------
+S3 -- THE MOVING-REF DETECTOR, BOTH ANSWERS ON ONE DIRECTORY
+------------------------------------------------------------------------------
+[OK       ] S3 at ae4c962 (before mg-1abe's own fix) the detector says SHAPE, with 8 of 8 driven scripts resolving a moving ref
+[OK       ] S3' at e35b51c (after it) the SAME detector says PASSES-DOWN.  Two answers, one directory, one detector
+[OK       ] S3'' and the shape is reached THROUGH A LOCAL HELPER (arg, carrying_commit, main_rev, provenance_block): mg-1abe's scripts do not name `main` at all.  A detector reading only the driven scripts scores this directory ONE-SCRIPT, which is what mine did before this arm
+[OK       ] S3''' NEGATIVE: a one-script suite is not the shape -- one process, one tree, no seam between two measurements (ONE-SCRIPT)
+
+------------------------------------------------------------------------------
+S4 -- A RE-RUN IN A DIRTY WORKTREE IS REFUSED, NOT MEASURED
+------------------------------------------------------------------------------
+[OK       ] S4 a fresh worktree reports 0 dirty paths and one appended byte makes it report exactly 1 (STATE.md)
+[OK       ] S4' ...and restoring it returns the worktree to clean, so the guard is measuring the tree and not the clock
+
+------------------------------------------------------------------------------
+S5 -- `shas_named_in` RESOLVES, IT DOES NOT PATTERN-MATCH
+------------------------------------------------------------------------------
+[OK       ] S5 two real abbreviations resolve to 2 commit(s)
+[OK       ] S5' NEGATIVE: two well-formed hex tokens that are NOT commits resolve to nothing (0).  A regex that accepted them would make every transcript look like it named a revision
+
+------------------------------------------------------------------------------
+S6 -- THE STATIC REACH TEST ANSWERS BOTH WAYS
+------------------------------------------------------------------------------
+[OK       ] S6 a suite whose library calls `git log` reads outside its tree: yes (lib_1abe.py:9, run_all.sh:56)
+[OK       ] S6' NEGATIVE: a pure-arithmetic suite does not.  A test that said `yes` everywhere would be `x == x` with a name on it
+
+------------------------------------------------------------------------------
+S7 -- THE CONCLUSION GRAIN IS THE CENSUS'S, AND IT SEPARATES
+------------------------------------------------------------------------------
+[OK       ] S7 a moved FIGURE inside a standing decision is HELD-DRIFTED, not a flip -- the distinction mg-1abe's defect 1 exists for
+[OK       ] S7' a changed DECISION on the same figure is FLIPS
+[OK       ] S7'' AND AN EMPTY TRANSCRIPT IS ALSO FLIPS, which is how a suite killed at the census's budget comes to be reported as a false record (see `out_d5_timeout.txt`)
+
+SELF-ERRORS 0
+FINDINGS 0
+TOTAL BAD: 0
