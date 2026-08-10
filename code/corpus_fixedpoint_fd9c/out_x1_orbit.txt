@@ -1,0 +1,75 @@
+mg-fd9c / X1 -- THE ORBIT, BY RUNNING THE SUITES
+repo:    /Users/daniel/.pogo/polecats/cfd9c
+sandbox: /tmp/fd9c-orbit/x1   (throwaway clones; nothing here is written)
+
+==========================================================================
+X1a  mg-9160's SUITE ITERATED FROM c9160's OWN CORPUS STATE
+==========================================================================
+
+  base:  757f999, the predictions commit -- the last state of main in
+         which mg-9160's tree existed with NO transcripts on disk.
+  tree:  sources from 65e350e, transcripts DELETED.  That is c9160's
+         disk on the run that first wrote them.
+
+  population: every `code/*/out_*.txt` on the sandbox disk after each
+              complete run of `code/grain_arity_9160/run_all.sh`
+
+      corpus before any run:  {"files": 812, "rows": 1910, "erows": 454, "eints": 1193, "words": 566}
+
+      run   the corpus after this run completes                                     
+      1     {"files": 818, "rows": 1984, "erows": 458, "eints": 1198, "words": 589} d082a654e554
+      2     {"files": 818, "rows": 1984, "erows": 458, "eints": 1198, "words": 589} a35d6cd62dcb
+      3     {"files": 818, "rows": 1984, "erows": 458, "eints": 1198, "words": 589} a35d6cd62dcb
+      4     {"files": 818, "rows": 1984, "erows": 458, "eints": 1198, "words": 589} a35d6cd62dcb
+      5     {"files": 818, "rows": 1984, "erows": 458, "eints": 1198, "words": 589} a35d6cd62dcb
+      6     {"files": 818, "rows": 1984, "erows": 458, "eints": 1198, "words": 589} a35d6cd62dcb
+
+      transcripts byte-identical from run 2 onward:        YES -- PERIOD 1, A FIXED POINT
+      every census row above is a census and not an error:  yes
+
+FINDING: mg-9160's census map reaches a FIXED POINT at run 2 and holds
+         it for 5 consecutive runs.  D7 reports `oscillates ... without
+         converging` over SEVEN runs; this run does not oscillate over
+         6, and the same experiment at --runs 12 did not either.
+
+==========================================================================
+X1b  THE TWO REGIMES -- ONE CORPUS, ONE REF, TWO WRITE DISCIPLINES
+==========================================================================
+
+  The same probe. The same commit. The same files on disk. The only
+  difference is HOW ITS OWN TRANSCRIPT IS WRITTEN while it runs.
+
+  population: the corpus `s1_reproduce.py` globs, at 757f999
+
+      regime                                                   files  rows erows eints words
+      `.new` + `mv`  (mg-bf79's fix; what run_all.sh does)     818 1984 458 1198 589
+      a plain `>`    (what a hand-run does)                    818 1966 457 1197 589
+      count_rows(out_s1_reproduce.txt) -- its OWN weight       18
+
+      files identical under both regimes (`>` truncates, it does not unlink)   yes
+      rows differ by EXACTLY the probe's own transcript                     yes
+
+FINDING: `1984` and `1966` are not two states of one system.  They are
+         two readings of ONE state, and the difference is the observer.
+
+==========================================================================
+X1c  mg-03d1's SUITE -- THE ARC'S OTHER WHOLE-CORPUS CONSUMER
+==========================================================================
+
+  base: HEAD, clean.  About five minutes a run.
+
+      run   the corpus after this run                                  a1 hash
+      1     {"files": 825, "rows": 2015, "erows": 485, "eints": 1262, "words": 593} c34729924bd0
+      2     {"files": 825, "rows": 2015, "erows": 485, "eints": 1262, "words": 593} 99af8042e00c
+      3     {"files": 825, "rows": 2015, "erows": 485, "eints": 1262, "words": 593} 99af8042e00c
+
+      transcripts byte-identical from run 2 onward:        YES -- PERIOD 1, A FIXED POINT
+      every census row above is a census and not an error:  yes
+
+FINDING: the arc's other whole-corpus consumer converges too, and it
+         moves the corpus by exactly one grain WORD when it does --
+         its own transcripts contribute a noun the corpus did not
+         have, so run 1 prints one less than run 2 and every run
+         after run 2 prints what run 2 printed.
+
+X1 TOTAL BAD: 0

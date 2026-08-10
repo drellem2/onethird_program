@@ -1,0 +1,157 @@
+==============================================================================
+mg-fd9c / S4 -- THE ERROR BAR, AND A CHECKER THAT ENFORCES IT
+==============================================================================
+HEAD: 5c8f879
+
+==========================================================================
+S4a  THE THREE CLASSES
+==========================================================================
+
+  `corpus_universe_1d6c` already named this idea, for one file list,
+  and never generalised it.  Its `p2_population.py` runs its census at
+  STATE A (a commit), STATE B (another commit) and STATE C (the working
+  tree, INCLUDING MY OWN FILES), and its README says in advance:
+
+      *STATE C is not stable.  It includes my own prose, so it moves
+       with my next commit.  Any reader re-running this suite after
+       this commit should expect STATE A and B to be fixed and STATE C
+       to have drifted -- and if it has not, that is worth a question.*
+
+  That is the convention, complete, for one ticket's file list.  Here it
+  is as a rule any figure in this arc can be classified by:
+
+      FROZEN     the population is a COMMIT.  The figure is a constant and a
+                 re-run reproduces it byte for byte, forever.
+      GROWING    the population is the ARC.  The figure is a measurement
+                 dated by a commit; it moves when anything lands, and the
+                 honest published form carries the ref.
+      OBSERVED   the population INCLUDES THE OBSERVER.  On top of GROWING,
+                 the reading depends on whether the observer's own transcript
+                 was on disk when the census ran -- so the honest published
+                 form is an INTERVAL of known width, not a number.
+
+  and the rule that assigns it, which takes two facts and nothing else:
+
+      population is a REF?           censor inside? class
+      True                           False          FROZEN
+      True                           True           FROZEN
+      False                          False          GROWING
+      False                          True           OBSERVED
+
+      ^ a REF-pinned population cannot contain the censor, because the
+        censor's transcript is untracked while it runs (S3b/1) -- so
+        the top two rows are the same class and that is not an
+        oversight.
+
+==========================================================================
+S4b  THE FORM, ON EVERY FIGURE S2b RECOMPUTED
+==========================================================================
+
+  A figure computed against the disk glob by a tree that is IN the
+  glob is OBSERVED.  Its low end is the census with the censor's own
+  transcripts empty -- what a plain `>` gives -- and its high end is
+  the census with them present.  Both ends are real readings; neither
+  is an error bar in the statistical sense and calling it one would be
+  the theatre E8 warns about.  It is a range because the apparatus
+  admits two answers.
+
+  population: the arc-wide corpus, read by mg-03d1 and by mg-9160, at HEAD   @5c8f879
+
+      figure                             class        honest published form
+      mg-03d1 A1d ARTIFACTS              OBSERVED     832-832 @5c8f879 (OBSERVED)
+      mg-03d1 A1d count ROWS             OBSERVED     1970-2093 @5c8f879 (OBSERVED)
+      mg-03d1 A1d grain WORDS            OBSERVED     586-614 @5c8f879 (OBSERVED)
+      mg-03d1 AF1 e-rows                 OBSERVED     504-504 @5c8f879 (OBSERVED)
+      mg-03d1 AF1 e-ints                 OBSERVED     1283-1283 @5c8f879 (OBSERVED)
+      mg-9160 S1b files                  OBSERVED     832-832 @5c8f879 (OBSERVED)
+      mg-9160 S1b rows                   OBSERVED     2019-2093 @5c8f879 (OBSERVED)
+      mg-9160 S1b words                  OBSERVED     593-614 @5c8f879 (OBSERVED)
+
+      the reconstruction, for contrast   FROZEN       1191 @9f1ecaa+eacc5e1
+
+  READ THE `files` ROWS.  Their interval is EMPTY -- low equals high --
+  because `>` truncates and does not unlink, so a file count cannot
+  tell the two regimes apart (S1a's fingerprint).  A convention that
+  printed a range on every figure regardless would be decorating the
+  one figure that is not at risk, which is how an error bar stops
+  meaning anything.
+
+==========================================================================
+S4c  THE CHECKER
+==========================================================================
+
+  THE RULE, mechanically: a count row whose LABEL is about the arc-wide
+  corpus obeys the convention if the nearest `population:` line ABOVE
+  IT IN ITS OWN SECTION carries a ref -- 7 to 40 hex characters after
+  an `@`, or the word `at` and a ref.  The search stops at the section
+  bar (`====`), because a population declared in a previous section is
+  not a population declared for this figure.  Nothing else counts; a
+  paragraph three screens away saying which commit this was is not a
+  date on a figure.
+
+  THE FIRST FORM OF THIS RULE USED A 12-LINE WINDOW and scored MY OWN
+  TREE at 1 of 2 -- not because the second figure was undated but
+  because it sat in a 22-row table whose population line was 14 lines
+  up.  A convention whose checker fails on long tables would push
+  every author towards short ones, so the window is gone and the
+  section is the unit.  It costs me the only failing row I had.
+
+  AND IT OVER-COLLECTS, DELIBERATELY.  This is a rule about the LABEL,
+  so a PER-TREE census whose label happens to say `in the corpus` is
+  flagged too.  That is the safe direction -- every figure it flags
+  really is undated -- but it means the total below is an UPPER BOUND
+  on arc-wide figures and must not be used to rescue P4, which named a
+  population before seeing this one.  S5a refuses that rescue by name.
+
+  population: every count row in the arc's 825 transcripts whose LABEL is about the arc-wide corpus   @5c8f879
+      ...arc-wide corpus figures found                          27
+      ...of them carrying a DATED population line               0
+      ^ one unit of each is one printed line
+
+          grain_arity_9160                               4 found,   0 dated
+          grain_axis_audit_03d1                         18 found,   0 dated
+          runner_exit_audit_56dc                         1 found,   0 dated
+          runner_exit_repair_70c7                        2 found,   0 dated
+          runner_exit_repair_bf79                        1 found,   0 dated
+          state_relocation_audit_b0ae                    1 found,   0 dated
+
+  population: the same rule turned on THIS TREE's own 7 transcripts   @5c8f879
+      ...arc-wide corpus figures found                          5
+      ...of them carrying a DATED population line               5
+
+      this tree obeys its own convention at every figure    yes
+
+FINDING: S4c THE CONVENTION IS ENFORCEABLE AND THE ARC DOES NOT MEET IT: 0
+         of 27 arc-wide corpus figures in the arc's transcripts carry a dated
+         population line.  This is a CHECK and not a style note -- it runs here, it
+         fails there, and it is one function.
+
+==========================================================================
+S4d  WHAT IT COSTS, AND THE ONE THING IT DOES NOT FIX
+==========================================================================
+
+  THE COST, in full:
+
+      a ref on every population line   -- one `git rev-parse`, cached;
+                                          this tree's `pop()` has no
+                                          form that omits it
+      an interval on OBSERVED figures  -- one call to `own_weight`, one
+                                          extra census of the same file
+                                          list with one tree emptied
+      a class on each figure           -- two booleans, S4a's table
+
+  WHAT IT DOES NOT FIX, and this is the honest limit: a dated figure
+  is still WRONG TOMORROW.  The convention does not stop the drift; it
+  makes the drift READABLE, so that a reader who re-runs a probe and
+  gets a different number knows they have measured the arc's growth
+  and not found a defect.  S2d's shelf-life column is what that reader
+  would otherwise have to rediscover, and c9160 did rediscover it --
+  its P7 was scored a MISS for exactly this and the miss was correct.
+
+  AND IT DOES NOT MAKE A GROWING FIGURE COMPARABLE TO ITSELF.  Two
+  dated readings of `count ROWS in them` are two facts about two
+  corpora.  Subtracting them is a measurement of the arc, not of the
+  classifier -- which is the mistake `517 does not reproduce` would
+  have been, and is the reason this convention exists.
+
+S4 TOTAL BAD: 0
