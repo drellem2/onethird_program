@@ -7,6 +7,114 @@ is the only thing in it that is still alive.
 
 ---
 
+## §0.0 REPAIR LANDED BY `mg-d19f` — THREE SENTENCES ABOUT LABELLING WERE FALSE, AND FOR TEN HOURS THIS DOCUMENT AND `mg-28ff` CONTRADICTED EACH OTHER ON `main`. NO FIGURE WITHDRAWN.
+
+This document made three claims **about how `n = 7` figures are labelled** — two about
+`mg-28ff`'s document and one about its own — and all three were wrong. **Nothing numeric
+moves:** every figure below stands, the `n = 7` enumeration is untouched, and what those
+sentences were *for* survives intact and is true — **`mg-51f4` carries `mg-28ff`'s `n = 7`
+sample figures and does not USE them**, which is `mg-29fe`'s own verdict on this document
+(*"carried and not used, which is the correct handling"*). What was false was the stronger
+form each sentence reached for.
+
+The contradiction with `mg-28ff` opened at `b45aad8` (2026-08-09 23:48Z), when `mg-29fe`'s
+repair landed on that document — an hour after this one landed at `2f76a01` (22:46Z) — and
+has stood on `main` ever since.
+
+| # | site | what was wrong | now |
+|---|---|---|---|
+| **1** | **§4**, the `n = 7` paragraph | *"correctly labelled as such at every appearance in its document"* — false; *"samples of 40–200 posets"* collapses **two different samples** into one range, taking `40` from §4.2's *primitive* count and `200` from §4.1/§4.3's *draw* size; and *"I do not quote any of them"* is site 3's blanket a second time | struck, corrected beside |
+| **2** | **§11**, above the repair table | *"Every one of `mg-28ff`'s `n = 7` figures was correctly labelled a sample at each appearance. None of these is a labelling failure."* — **falsified three lines later by site 1 of its own table** | struck, corrected beside |
+| **3** | **§12**, "NOT DONE" | *"`mg-28ff`'s `n = 7` sample figures are not quoted anywhere … **The one place** I mention one"* — **all three are quoted, at five sites; false the day this document landed, and §11's own table is what falsifies it** | struck, corrected beside |
+| — | **§11**, preamble | *"a superseded `n = 7` figure is wrong on `main` right now"* — true on 2026-08-09, **stale at `HEAD`**: `mg-28ff` has been amended twice since | **dated**, not struck (it was true when written) |
+
+**THE TICKET WAS FILED AGAINST SITE 1 AND FOUND THREE.** `mg-64cb` read §4's sentence and
+reported it; sites 2 and 3 are found here, and they matter more than their size: **all three
+are the same defect** — a blanket about how `n = 7` figures are labelled, asserted over a
+population the author had not enumerated — and **two of the three are falsified by a table in
+this document, not by `mg-28ff` at all.** Only site 1 needed a concurrent audit to expose it.
+Sites 2 and 3 needed a reader.
+
+**`mg-29fe`'s THREE JOINTS, NAMED — because "not correctly labelled" on its own teaches a
+reader nothing about why two landed documents disagreed.** `mg-29fe` is the independent
+audit of `mg-28ff`; its repairs landed on that document via `mg-b58d` and `mg-3bb9`, and its
+`:21` now carries the first of them.
+
+1. **§4.3's summary promotes the sample to an enumeration.** Two lines under a table whose
+   `n = 7` row reads `| 7 | 106 *(sample)* | 106 / 106 | 0.832530 |` sits
+   *"**100 % at every enumerated `n`**, with no eigenvector on the left."* **`n = 7` is
+   sampled.** That is the appearance the struck sentences said did not exist — and it is
+   **the same site as §11's site 1 of this document**, found here independently and then
+   contradicted by the blanket sentence above the table.
+2. **§8.1's own scope self-audit is false as written.** It claims every `n = 7` row is
+   labelled *sample, not a maximum* at each appearance. Only §4.1's row carries
+   *"NOT a maximum"*; §4.2's and §4.3's carry `(sample)` **alone** — **1 of 3**.
+3. **§4.2's `n = 7` population is a different sample from §4.1's and §4.3's**, and the
+   document did not say so: `b2_census.py:138` draws `sample_posets(7, 90)` (40 primitive)
+   while `b1_footrule.py:73` and `b5_trend.py:48` draw `sample_posets(7, 200)` (106
+   primitive). Both labelled `(sample)`; simply not the same sample. **This is the joint
+   §4's struck "40–200" fell into** — the range's two endpoints come from the two different
+   populations, and from two different columns. (`mg-3bb9`'s repair E later re-measured the
+   *evaluated* populations as **98** and **208**, the draws supplying 35 and 101 of the
+   primitives and five named families supplying the rest in each.)
+
+**WHICH CLAIM IS TRUE, AND HOW IT WAS DECIDED.** Not by recency — that rule answers *both*
+ways here, picking this document at its own landing instant and `mg-28ff` at `HEAD`, because
+`mg-28ff` was amended twice afterwards. It was decided against **`mg-28ff`'s text as this
+document read it** (`cb496e9`, its only revision before `2f76a01`) and against the
+**underlying measurement**, read from **this document's own transcript** rather than from
+either document's prose: `code/sweep_loss_51f4/out_s3_n7.txt` — *"primitive posets at n=7
+where route (F) FAILS (f\* > 1): 168 of 86278"*. **`mg-28ff:21` is TRUE and is left alone.
+The three sentences here are FALSE and are struck.** And the sharpest fact in the exchange:
+**`mg-51f4` supplied the very measurement that makes `mg-28ff:21` true**, while certifying as
+correct the sentence that measurement refutes.
+
+**WHY IT HAPPENED, AND IT IS NOT CARELESSNESS.** `mg-51f4` ran 20:14:37–22:37:59Z; `mg-29fe`
+ran 20:27:57–21:41:55Z. **Concurrent.** This document read `mg-28ff` while its independent
+audit was mid-refutation of the sentence this document was about to certify. **And the audit
+could not have caught it either:** `mg-29fe`'s propagation sweep reported *"nothing has
+propagated"*, which was **true over the corpus as it existed at that moment** —
+`docs/OneThird-SweepLoss-mg-51f4.md` was being written in the same window and was not on
+`main` yet. **An audit's "nothing has propagated" is blind to a concurrent landing by
+construction.** That is the second, independent reason the sequencing matters, and it is the
+half a depends-on-the-audit rule does not fix. Reported by `mg-64cb`
+(`code/landing_audit_sweep_64cb/REPORT.md` §3.2), which found it and deliberately did **not**
+edit another ticket's landed document.
+
+**WHAT ELSE THIS DOCUMENT CARRIED FROM `mg-28ff`: NOTHING SUPERSEDED, AND THE RESIDUE IS
+FIVE, NOT ELEVEN.** `mg-64cb`'s screen intersected 12 measured literals between "`mg-51f4`'s added
+canonical lines" and `mg-29fe`'s correction lines and called it a screen rather than a
+finding. Read out (`code/contradiction_repair_d19f/r2_literals.py`): **only 5 of the 12 were
+published by this document's landing commit**, and all five — `0.250000, 0.306250, 0.308339,
+0.327508, 0.550747` — are `n ≤ 6` cells of §4's *own* exhaustive table, recomputed on an
+instrument sharing no source line with `lib28ff`, and `mg-29fe` withdrew no figure for them
+to be superseded by. Of the other seven, **four** (`0.923894, 0.943649, 0.968818, 1.078`)
+came from `mg-c50b`'s later landing and **three** (`0.019169, 0.176, 0.341`) from
+**`mg-29fe`'s own audit commit** — the screen intersecting the audit with itself, because
+`lib64cb`'s index attributes a commit to every work-item id it *mentions*. That is a property
+of the screen, stated where a successor will read it, and not a defect of `mg-64cb`'s report.
+
+**AND THE REPAIR CARRIED THE DEFECT IT REPAIRS, INSIDE THE SAME EDIT.** This is a labelling
+repair, so it can carry a labelling defect — and it did. Quoting `mg-28ff`'s `f*(7)` sample
+value `0.832530` above, as joint 1's evidence, **falsified §12's *"`mg-28ff`'s `n = 7` sample
+figures are not quoted anywhere"*** — a repair breaking a sentence elsewhere in the document
+it was repairing. It was caught by this ticket's own no-figure-moved arm
+(`r3_selfcheck.py` C5, which prints every literal the edit added), and reading that bullet out
+then showed it had been **false since `2f76a01`** anyway. So it is site 3 above: the repair
+did not create the defect, it made a standing one one appearance worse and forced it to be
+read.
+
+What the repair therefore does **not** do: it does not delete the false sentences (a reader
+arriving with the old text must be able to find it), it does not "harmonise" the two
+documents into agreement, it does not re-open either document's mathematics, it does not
+adjudicate §11's other five proposed sites, and it makes **no** universal claim of its own
+about `mg-28ff`'s labelling in either direction — every `n = 7` **cell** in that document
+*does* carry the word `(sample)`; there are **three** joints, and three is not "every". It
+names each and cites the file:line. Instrument: `code/contradiction_repair_d19f/`, four arms,
+`run_all.sh` exit 0.
+
+---
+
 ## §0. THE STATE AFTER THIS TICKET
 
 | | status |
@@ -145,8 +253,13 @@ The `n ≤ 6` totals are `mg-28ff`'s `5230` and `4377` exactly, on an instrument
 the transport by a **down-set dynamic program** rather than by filtering `n!` permutations.
 
 **`n = 7` IS ENUMERATED HERE, NOT SAMPLED.** `mg-28ff`'s `n = 7` figures are deterministic
-samples of 40–200 posets, correctly labelled as such at every appearance in its document, and
-**I do not quote any of them.** The size of the gap justifies the caution: its `n = 7` sample
+samples of ~~40–200 posets, correctly labelled as such at every appearance in its document~~
+**two different samples — `98` evaluated / `40` primitive at its §4.2, `208` / `106` at its
+§4.1 and §4.3 — and they were NOT correctly labelled at every appearance** (`mg-29fe`'s three
+joints; struck and corrected by `mg-d19f`, §0.0 above), and
+~~**I do not quote any of them.**~~ **I do not USE any of them** — three are quoted, as §12's
+corrected bullet enumerates, and none enters this document's own tables. The size of the gap
+justifies the caution: its `n = 7` sample
 reads `c_true = 0.176145`; the maximum over the enumerated population is **`0.340719`**, and
 the sample was low by a factor of `1.93`.
 
@@ -336,8 +449,28 @@ held and one lost.**
 for whoever owns that document. All seven are in
 `docs/OneThird-L2-Conditionality-mg-28ff.md`.
 
-**Every one of `mg-28ff`'s `n = 7` figures was correctly labelled a sample at each
-appearance.** None of these is a labelling failure. What the enumeration shows is that the
+> **DATED BY `mg-d19f`.** The paragraph above and every **line number** in the table below
+> are a reading of `mg-28ff` at `cb496e9`, its state when this document landed at `2f76a01`.
+> **`mg-28ff` has been amended twice since** — `b45aad8` (`mg-b58d`, landing `mg-29fe`'s
+> repairs) and `e35b51c` (`mg-a564`, landing `mg-3bb9`'s) — so *"wrong on `main` right now"*
+> is a statement about `main` on 2026-08-09, not about `HEAD`. **Site 1 has landed**
+> (`mg-28ff` §4.3, repair 1: the sentence now reads *"100 % at every exhaustively enumerated
+> `n` — that is, `n ≤ 6` … At `n = 7` exhaustively the route FAILS, at 168 of 86278"*), and
+> **site 6 has not** (`mg-28ff` §10 still reads *"(M♯) and (F) are both OPEN"*). The other
+> five are **not adjudicated here** — this ticket repairs §0.0's two sentences, it does not
+> audit `mg-28ff`. **Read `mg-28ff` at `HEAD` before acting on any row below.**
+
+~~**Every one of `mg-28ff`'s `n = 7` figures was correctly labelled a sample at each
+appearance.** None of these is a labelling failure.~~ **FALSE — AND FALSIFIED BY SITE 1 OF
+THE VERY TABLE BELOW.** Every `n = 7` **cell** carries the word `(sample)`; the struck
+sentence quantifies over **appearances**, and site 1 below *is* an appearance that reads
+`enumerated`. Site 1's own "why" column says so in this document's own words: *"the word
+`enumerated` sat over a table whose `n = 7` row was a sample, so the sentence reads as
+covering `n = 7` and is false there."* **That is a labelling failure, it is `mg-29fe`'s
+joint 1, and this document found it independently and then denied it one paragraph above the
+table that records it.** `mg-29fe` found two more that are not in the table below — its
+joints 2 and 3, both labelling, neither numeric. Struck and corrected by `mg-d19f`; see
+§0.0. What the enumeration shows *in addition* is that the
 samples were *badly unrepresentative* — and at site 4 unrepresentative enough to invert a
 universal claim.
 
@@ -381,9 +514,21 @@ finding to file, not mine.
 * **`(M♯)`'s failure past `n = 15` is a measurement**, because exact copositivity enumerates
   `2^{n−1}−1` faces. Past that I can certify `(M♯)` holds and never that it fails.
 * **`ε₀` is out of scope** and appears nowhere. **`17/78` appears nowhere in this document.**
-* **`mg-28ff`'s `n = 7` sample figures are not quoted anywhere**, by design (`PREDICTIONS.md`
-  E2). The one place I mention one — its `c_true(7) = 0.176145` in §4 — is to record that the
-  enumerated maximum is `1.93×` larger, and it carries the word *sample* in the same sentence.
+* ~~**`mg-28ff`'s `n = 7` sample figures are not quoted anywhere**, by design (`PREDICTIONS.md`
+  E2). **The one place** I mention one — its `c_true(7) = 0.176145` in §4 —~~ **FALSE, AND IT
+  WAS FALSE THE DAY THIS DOCUMENT LANDED — §11's OWN TABLE QUOTES ALL THREE.** Struck and
+  corrected by `mg-d19f`: it is a third blanket of the same class as §0.0's two, falsified by
+  a table in this document rather than by another one. **The true statement, and what the
+  bullet meant:** all three of `mg-28ff`'s `n = 7` sample figures appear here — `0.176145`
+  (§4, §11 site 3), `0.850074` (§11 site 4), `0.832530` (§0.0 joint 1, §11 site 2) — **five
+  appearances, every one a QUOTATION of `mg-28ff`'s text: the cell §11 proposes to replace,
+  or the row §0.0 cites as evidence of a labelling defect. Not one is USED as a figure of
+  this document's**, none appears in §0, §4's table or §6's, and each carries the word
+  *sample* or `(sample)` in its own line. That is `mg-29fe`'s verdict on this document in its
+  own words — *"carried and not used, which is the correct handling"* — and it is what
+  `PREDICTIONS.md` E2 was for. The §4 appearance in particular is there **to record that the
+  enumerated maximum is `1.93×` larger**, and it carries the word *sample* in the same
+  sentence.
 * **The 1032-vs-1037 L2 discrepancy is left exactly where `mg-28ff` left it**, and my own
   attempt at that census was wrong and is deleted rather than repaired (§9).
 * **I edited no other document.** `STATE.md`, `roadmap.md`, and the `mg-28ff` / `mg-76b2` /
