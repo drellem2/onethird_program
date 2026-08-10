@@ -120,8 +120,8 @@
     },
     "audit.sweep_membership_candidates": {
       "class": "recorded",
-      "value": 206,
-      "why": "RECORDED, NOT GATED, and this is a deliberate blind spot rather than an omission.  a4 sweeps EVERY directory under code/, so this count moves when any ticket adds code.  Gating it would make every unrelated branch red, and a gate that fails for reasons the author cannot act on is a gate that gets removed six weeks later.  Probe T10 demonstrates that it really is silent, so the blind spot is exhibited rather than asserted.  The value is unchanged at 206 across mg-724a: this directory adds ZERO whole-output membership tests, which is mg-9876's own detector reporting on the instrument written to gate it."
+      "value": 207,
+      "why": "RECORDED, NOT GATED, and this is a deliberate blind spot rather than an omission.  A RECORDED VALUE IS A DATED READING AND IS EXPECTED TO GO STALE; a GATED value is an expectation and is not.  That difference is the whole of the class distinction.  a4 sweeps EVERY directory under code/, so this count moves when any ticket adds code — and the gate runs on the REBASED tree, so it moves when SOMEBODY ELSE's branch lands.  MEASURED, on the first live run: 206 in this worktree and 207 in the refinery, because code/dated_population_2ff6 landed on main while mg-724a was being written.  Had this field been gated, mg-724a's own branch would have been blocked by an unrelated merge — the exact `a gate that fails for reasons the author cannot act on` failure mode, arriving on the first run rather than in six weeks.  This directory itself adds ZERO whole-output membership tests, which is mg-9876's own detector reporting on the instrument written to gate it."
     },
     "audit.sweep_tee_sites": {
       "class": "recorded",

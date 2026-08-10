@@ -70,14 +70,25 @@ past these two directories, and that is where the successor ticket starts.
 does not land. `pogo refinery show <id>` carries the gate's whole transcript, including the
 `GATE VERDICT:` line and the field that diverged.
 
-The addressee is named, because mg-be37's finding was that a detector firing into
-`events.log` with no mail path is indistinguishable from one that never fired:
+The addressee is named — and it was **exercised, not described**, because mg-be37's finding
+was that a detector firing into `events.log` with no mail path is indistinguishable from one
+that never fired:
 
-- **The submitting agent** sees `status: failed` on its own poll loop — this is step 6 of
-  every polecat's protocol — and its step 7 is *mail the mayor with failure details*. That
-  is a mail path with a person at the end of it, not a log line.
-- **A blocked merge cannot be silent anyway.** The branch does not land. Whatever else fails
-  to be read, the change does not reach `main`, which is the property being bought.
+- **The refinery mails the author.** Unprompted, with the full gate transcript in the body.
+  Measured on the exhibit run below:
+
+  ```
+  $ mg mail list mg-724a
+  ● 724a/1786349925456779000.22019.9000  refinery
+    MERGE FAILED (DEFECT): mr-d9soikitjv1sgaptnam0 (branch=exhibit-724a-knownbad)
+  ```
+  The body names the branch, the author, the failure class (`DEFECT — establishes a fact
+  about the branch. A fix is warranted.`), why it was not retried, and 132 lines of gate
+  output including the diverged field.
+- **The submitting agent** independently sees `status: failed` on its own poll loop — step 6
+  of every polecat's protocol — and its step 7 is *mail the mayor with failure details*.
+- **A blocked merge cannot be silent anyway.** The branch does not land. Whatever else goes
+  unread, the change does not reach `main`, which is the property being bought.
 
 ### It was demonstrated firing, end to end, on a real merge request
 
@@ -157,6 +168,15 @@ unrelated branches red. They are printed with both values on every run, and prob
 demonstrates on every run that they really are silent — the blind spot is exhibited, not
 promised. `audit.sweep_grade` **is** gated: if the sweep's own two-sided control stops
 answering both ways, its counts are not citable at all.
+
+**A `recorded` value is a dated reading and is expected to go stale; a `gated` value is an
+expectation and is not.** That is the whole of the class distinction, and the first live run
+paid for it: the refinery observed `audit.sweep_membership_candidates = 207` where this
+worktree observed 206, because **the gate runs on the rebased tree** and
+`code/dated_population_2ff6` landed on `main` mid-ticket. Had that field been gated, this
+branch would have been blocked by somebody else's merge — the exact "fails for reasons the
+author cannot act on" failure mode, arriving on run one instead of in six weeks. All 20 gated
+fields were unaffected, because a1's scope is one bounded directory where a4's is the corpus.
 
 ## 5. How it is wired, and the trap found while wiring it
 
