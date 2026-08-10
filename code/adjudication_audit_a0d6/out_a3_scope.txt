@@ -1,0 +1,199 @@
+================================================================================================
+a3 — SCOPE:  WAS *THREE* THE RIGHT NUMBER?
+================================================================================================
+
+  THE RULE (mine, stated so it can be disagreed with): a BLANKET is a sentence that
+  names mg-28ff, carries a UNIVERSAL or NEGATIVE quantifier, and carries a LABELLING
+  or QUOTING word.  quantifiers ('every', 'each', 'all ', 'none', ' no ', 'not ', 'any', 'anywhere', 'only', 'one place', 'never')
+  labelling words ('label', 'quote', 'quoted', 'mention', 'appearance', 'sample', 'enumerat')
+
+------------------------------------------------------------------------------------------------
+S1  EVERY BLANKET IN mg-51f4 AT ITS OWN LANDING (2f76a01)
+------------------------------------------------------------------------------------------------
+
+  5 candidate blankets at 2f76a01:
+
+   :147  [STRUCK] **`n = 7` IS ENUMERATED HERE, NOT SAMPLED.** `mg-28ff`'s `n = 7` figures are deterministic samples of 40–200 posets, correctly labelled as such at eve ...
+   :184  [UNTOUCHED] > **`(M♯)` FAILS AT EXACTLY 4 OF 86278.** > Refuting `(M♯)` needs a **lower** bound on `μ_pref` — the direction `mg-28ff` §10 records as > a float mea ...
+   :339  [STRUCK] **Every one of `mg-28ff`'s `n = 7` figures was correctly labelled a sample at each appearance.** None of these is a labelling failure.
+   :344  [UNTOUCHED] The replacement *strengthens* `mg-28ff`'s own thesis: the increment `+0.0132` continues the shrinking sequence `.049, .037, .019`, so `c_true`'s conve ...
+   :374  [STRUCK] **`17/78` appears nowhere in this document.** * **`mg-28ff`'s `n = 7` sample figures are not quoted anywhere**, by design (`PREDICTIONS.md` E2).
+
+  STRUCK BY THE LANDING : 3          LEFT UNTOUCHED : 2
+
+  THE UNTOUCHED ONES, ADJUDICATED BY HAND — because a sweep that reports a count and
+  not a verdict is the defect this whole arc is about:
+
+   :184  > **`(M♯)` FAILS AT EXACTLY 4 OF 86278.** > Refuting `(M♯)` needs a **lower** bound on `μ_pref` — the direction `mg-28ff` §10 reco ...
+         -> FALSE POSITIVE OF MY OWN SWEEP — it is a claim about a BOUND DIRECTION for mu_pref and about mg-28ff SS10's float measurement, not about how any n = 7 figure is labelled. My rule caught it on 'enumerat' + 'not ' + 'mg-28ff'. Out of the contradiction, and correctly left alone.
+   :344  The replacement *strengthens* `mg-28ff`'s own thesis: the increment `+0.0132` continues the shrinking sequence `.049, .037, .019`, ...
+         -> FALSE POSITIVE OF MY OWN SWEEP — it is the 'why' cell of SS11's repair row 3, a claim about a REPLACEMENT FIGURE strengthening mg-28ff's thesis, not a blanket about labelling. Out of the contradiction, and correctly left alone.
+
+  [CONFIRMED] S1 the landing struck EVERY blanket of the class it named, and the ones it left are
+     each either DATED, or about a different subject
+        3 struck, 2 left, 0 left unexplained.  P4: THREE IS THE RIGHT NUMBER.
+
+  [CONFIRMED] S1b the DATED block is real and names both amendments of mg-28ff
+
+  A GAP IN MY OWN RULE, STATED: the FOURTH row of the landing's table — SS11's
+  preamble 'a superseded n = 7 figure is wrong on main right now', DATED rather than
+  struck — is NOT of my class and my sweep does NOT find it. It is a claim about
+  STALENESS, not about labelling. It carries two POSITIVE claims of the landing's own,
+  and nobody re-checked those either, so they are checked here:
+      'Site 1 has landed'  -> docs/OneThird-L2-Conditionality-mg-28ff.md@HEAD:[561] carries the repaired sentence
+      'site 6 has not'     -> docs/OneThird-L2-Conditionality-mg-28ff.md@HEAD:[1022] still reads '(M♯) and (F) are both OPEN'
+  [CONFIRMED] S1c the DATED block's two positive claims about mg-28ff@HEAD are BOTH TRUE
+        so the row was correctly DATED rather than struck: it was true when written and the
+        landing says exactly which half has since moved.
+
+------------------------------------------------------------------------------------------------
+S2  THE REPAIR'S OWN NEW BLANKET — a labelling repair asserting a blanket about
+    labelling, checked against mg-28ff@cb496e9 rather than taken on trust
+------------------------------------------------------------------------------------------------
+
+  the repair's own universal claim about mg-28ff:
+      about `mg-28ff`'s labelling in either direction — every `n = 7` **cell** in that document
+
+  every n = 7 TABLE CELL in mg-28ff@cb496e9, and whether it carries the word 'sample':
+      :200  > | 7 | 106 *(sample — NOT a maximum)* | `0.176145` | — |   -> sample
+      :217  | 7 | 40 *(sample)* | `0.850074` |   -> sample
+      :245  | 7 | 106 *(sample)* | 106 / 106 | `0.832530` |   -> sample
+  [CONFIRMED] S2 the repair's own blanket 'every n = 7 CELL carries (sample)' is TRUE — 3 of 3 cells
+        and it is deliberately narrower than the sentence it replaces: it quantifies over
+        CELLS, which is enumerable, where the struck sentence quantified over APPEARANCES,
+        which is not. That is the difference between the false blanket and the true one, and
+        the repair states it in the same breath ('there are THREE joints, and three is not
+        "every"').
+
+  other sentences the repair ADDED that carry the same shape (15):
+      ## §0.0 REPAIR LANDED BY `mg-d19f` — THREE SENTENCES ABOUT LABELLING WERE FALSE, AND FOR TEN HOURS THIS DOCUMENT AND `mg-28ff` CONTRADICTED EACH OTHER ...
+      This document made three claims **about how `n = 7` figures are labelled** — two about `mg-28ff`'s document and one about its own — and all three were ...
+      **Nothing numeric moves:** every figure below stands, the `n = 7` enumeration is untouched, and what those sentences were *for* survives intact and is ...
+      | # | site | what was wrong | now | |---|---|---|---| | **1** | **§4**, the `n = 7` paragraph | *"correctly labelled as such at every appearance in it ...
+      None of these is a labelling failure."* — **falsified three lines later by site 1 of its own table** | struck, corrected beside | | **3** | **§12**, " ...
+      **`mg-29fe`'s THREE JOINTS, NAMED — because "not correctly labelled" on its own teaches a reader nothing about why two landed documents disagreed.** ` ...
+      Quoting `mg-28ff`'s `f*(7)` sample value `0.832530` above, as joint 1's evidence, **falsified §12's *"`mg-28ff`'s `n = 7` sample figures are not quote ...
+      What the repair therefore does **not** do: it does not delete the false sentences (a reader arriving with the old text must be able to find it), it do ...
+      Instrument: `code/contradiction_repair_d19f/`, four arms, `run_all.sh` exit 0. samples of ~~40–200 posets, correctly labelled as such at every appeara ...
+      The size of the gap justifies the caution: its `n = 7` sample > **DATED BY `mg-d19f`.** The paragraph above and every **line number** in the table bel ...
+      **Site 1 has landed** > (`mg-28ff` §4.3, repair 1: the sentence now reads *"100 % at every exhaustively enumerated > `n` — that is, `n ≤ 6` … At `n =  ...
+      **Read `mg-28ff` at `HEAD` before acting on any row below.** ~~**Every one of `mg-28ff`'s `n = 7` figures was correctly labelled a sample at each appe ...
+      What the enumeration shows *in addition* is that the * ~~**`mg-28ff`'s `n = 7` sample figures are not quoted anywhere**, by design (`PREDICTIONS.md` E ...
+      **The true statement, and what the bullet meant:** all three of `mg-28ff`'s `n = 7` sample figures appear here — `0.176145` (§4, §11 site 3), `0.85007 ...
+
+------------------------------------------------------------------------------------------------
+S3  'FIVE APPEARANCES' — COUNTED.  The rule is MINE and is printed with the answer.
+------------------------------------------------------------------------------------------------
+
+  RAW: every line at HEAD carrying one of the three figures — 10 occurrences on 9 lines
+      :44   0.832530  `n = 7` row reads `| 7 | 106 *(sample)* | 106 / 106 | 0.832530 |` sits
+      :99   0.832530  value `0.832530` above, as joint 1's evidence, **falsified §12's *"`mg-28ff`'s `n = 7` sample
+      :263  0.176145  reads `c_true = 0.176145`; the maximum over the enumerated population is **`0.340719`**, and
+      :480  0.832530  | **2** | **245** | `\| 7 \| 106 *(sample)* \| 106 / 106 \| 0.832530 \|` | `\| 7 \| **86278 (EXHAUSTIVE)*
+      :481  0.176145  | **3** | **200** | `\| 7 \| 106 *(sample — NOT a maximum)* \| 0.176145 \| — \|` | `\| 7 \| **86278 (EXHA
+      :482  0.850074  | **4** | **217** | `\| 7 \| 40 *(sample)* \| 0.850074 \|` | `\| 7 \| **86278 (EXHAUSTIVE)** \| **1.01870
+      :518  0.176145  E2). **The one place** I mention one — its `c_true(7) = 0.176145` in §4 —~~ **FALSE, AND IT
+      :522  0.176145  bullet meant:** all three of `mg-28ff`'s `n = 7` sample figures appear here — `0.176145`
+      :523  0.850074  (§4, §11 site 3), `0.850074` (§11 site 4), `0.832530` (§0.0 joint 1, §11 site 2) — **five
+      :523  0.832530  (§4, §11 site 3), `0.850074` (§11 site 4), `0.832530` (§0.0 joint 1, §11 site 2) — **five
+
+  MY CLASSIFICATION RULE (mine, and it is a rule I chose):
+     an APPEARANCE is an occurrence that ASSERTS or QUOTES the figure as evidence.
+     an occurrence inside STRUCK text, or inside the sentence that ENUMERATES the
+     appearances, or inside prose ABOUT having quoted it, is a RECORD OF THE REPAIR
+     and is not itself an appearance.
+
+      :44   0.832530  APPEARANCE
+      :99   0.832530  prose about the repair
+      :263  0.176145  APPEARANCE
+      :480  0.832530  APPEARANCE
+      :481  0.176145  APPEARANCE
+      :482  0.850074  APPEARANCE
+      :518  0.176145  struck original
+      :522  0.176145  the enumeration itself
+      :523  0.832530  the enumeration itself
+      :523  0.850074  the enumeration itself
+
+  appearances under my rule : 5        the document says : five
+  [CONFIRMED] S3 the document's 'five appearances' is RECOVERABLE, but only under a rule the
+     document does not state — and the raw count is 10, not 5
+        THIS IS A FINDING OF DEGREE AND NOT A REVERSAL. The five sites the bullet NAMES are
+        each individually correct (a2 arm 3g/3h). What is unstated is the membership rule
+        that makes the count 5 rather than 10 — which is the same shape as the three
+        sentences this repair struck: a count asserted over a population whose boundary the
+        reader cannot reconstruct. The landing saw the near-miss and filed it as its own D4;
+        it did not carry the observation into the bullet's wording.  P3 CONFIRMED.
+
+------------------------------------------------------------------------------------------------
+S4  NO FIGURE MOVED — and did the two documents EVER disagree about a NUMBER?
+------------------------------------------------------------------------------------------------
+
+  numeric literals (3+ decimals) at 2f76a01 : 127 distinct, 192 total
+  numeric literals at HEAD              : 134 distinct, 209 total
+  DROPPED (present at landing, fewer at HEAD) : NONE
+  ADDED   : [('0.019169', 1), ('0.176', 1), ('0.176145', 1), ('0.250000', 1), ('0.306250', 1), ('0.308339', 1), ('0.327508', 1), ('0.341', 1), ('0.550747', 1), ('0.832530', 3), ('0.850074', 1), ('0.923894', 1), ('0.943649', 1), ('0.968818', 1), ('1.078', 1)]
+  [CONFIRMED] S4a NO MEASURED LITERAL WAS WITHDRAWN — the multiset at HEAD contains the multiset at
+      mg-51f4's own landing
+        P7 CONFIRMED.
+
+  BOTH DOCUMENTS' n <= 6 PUBLISHED MAXIMA, AGAINST a1's OWN EXHAUSTIVE RE-DERIVATION
+  (this is the only way to ask whether they ever disagreed about a NUMBER: ask a third)
+
+      n |   a1 (MINE, exhaustive)   |   mg-51f4 SS4        |   mg-28ff SS4.1/SS4.3  | verdict
+      --+---------------------------+----------------------+------------------------+---------
+      3 | f*=0.250000 c_true=0.222222 | f*=0.250000 c=0.222222 | f*=0.250000 c=0.222222 | 51f4 OK / 28ff OK
+      4 | f*=0.306250 c_true=0.271353 | f*=0.306250 c=0.271353 | f*=0.306250 c=0.271353 | 51f4 OK / 28ff OK
+      5 | f*=0.550747 c_true=0.308339 | f*=0.550747 c=0.308339 | f*=0.550750 c=0.308339 | 51f4 OK / 28ff DIFFERS
+      6 | f*=0.811649 c_true=0.327508 | f*=0.811649 c=0.327508 | f*=0.811654 c=0.327508 | 51f4 OK / 28ff DIFFERS
+  [CONFIRMED] S4b mg-51f4's n <= 6 f* AND c_true columns REPRODUCE EXACTLY on my instrument
+        so the document whose sentences were struck has no numeric defect at n <= 6, which is
+        the other half of 'nothing true was struck': the strike is confined to prose.
+
+  mg-28ff's SS4.1 c_true column reproduces at every n <= 6; its SS4.3 f* column does NOT.
+
+  THE NUMBERS THE TWO DOCUMENTS DID DISAGREE ABOUT — AND THERE ARE TWO, NOT ONE:
+      n = 5   mg-28ff SS4.3 prints f* = 0.550750   |   mg-51f4 and I both get 0.550747
+      n = 6   mg-28ff SS4.3 prints f* = 0.811654   |   mg-51f4 and I both get 0.811649
+
+
+  IS EITHER DISAGREEMENT ALREADY RECORDED?  SEARCHED, NOT ASSERTED — D5 (MINE, KEPT):
+  my first draft of this arm SAID the n = 5 one was named nowhere. One grep refutes
+  that. An audit of over-claims asserted over unenumerated populations, over-claiming
+  over an unenumerated population, in the arm that reports it.
+      0.550750 is named in 2 canonical document(s):
+          ../../docs/OneThird-L2-Conditionality-mg-28ff.md
+          ../../docs/OneThird-L2-Conditionality-mg-29fe-IndependentAudit.md
+      0.811654 is named in 5 canonical document(s):
+          ../../docs/OneThird-AntiCorrelation-mg-c50b.md
+          ../../docs/OneThird-L2-Conditionality-mg-28ff.md
+          ../../docs/OneThird-L2-Conditionality-mg-29fe-IndependentAudit.md
+          ../../docs/OneThird-L2-Conditionality-mg-3bb9-RepairAudit.md
+          ../../docs/OneThird-SweepLoss-mg-51f4.md
+
+      mg-29fe's audit doc:311 names BOTH values and its own transcript
+      out_s2_footrule.txt:18 prints  5  0.550747037  0.550750  -2.96e-06 — the same
+      value I get, to nine places, on an instrument sharing no source line with mine.
+      So this is a THIRD independent agreement, not a new finding.
+
+      exact to twelve places on my instrument:  f*(5) = 0.550747037145
+                                                f*(6) = 0.811648851994
+      mg-29fe's independently found value:      f*(6) = 0.811648852
+      both mg-28ff values are HIGH by ~3-5e-6, which is exactly the resolution of the
+      20-step bisection over [0,4] that b1_footrule.py:77 prints the UPPER END of.
+  [FINDING  ] S4c P8 LOSES — the two documents DID disagree about numbers, and about TWO of them
+        mg-51f4 SS11 names the n = 6 disagreement itself, attributes the cause to mg-29fe,
+        calls it CONSERVATIVE rather than wrong and leaves it as mg-29fe's finding to file.
+        IT DOES NOT NAME THE n = 5 ONE — but mg-29fe's audit does, at its doc:311, together
+        with the n = 6 one and with the cause, so nothing here is unrecorded and the only
+        thing new is that a THIRD instrument agrees. NEITHER TOUCHES THE ADJUDICATION — both
+        are mg-28ff's own
+        column, both are conservative (they OVER-state route (F)'s constant, i.e. they make
+        the route look worse, not better), and neither is n = 7. Reported for a successor,
+        not repaired here: mg-28ff is another ticket's landed document.
+        The landing's prose 'the two documents never disagreed about the FACT' is true of the
+        LABELLING fact it adjudicates and is not true as a statement about their numbers.
+
+================================================================================================
+FINDINGS (each stated above, none reversing the adjudication):
+   - S4c P8 LOSES — the two documents DID disagree about numbers, and about TWO of them
+================================================================================================

@@ -1,0 +1,161 @@
+================================================================================================
+a2 — THE ADJUDICATION'S FOUR CLAIMS, RESOLVED ONE AT A TIME
+================================================================================================
+
+  docs/OneThird-SweepLoss-mg-51f4.md@2f76a01 : 402 lines      docs/OneThird-SweepLoss-mg-51f4.md@HEAD : 547 lines
+  docs/OneThird-L2-Conditionality-mg-28ff.md@cb496e9 : 508 lines      docs/OneThird-L2-Conditionality-mg-28ff.md@HEAD : 1047 lines
+
+------------------------------------------------------------------------------------------------
+(1)  THE SURVIVING SITE — IS mg-28ff:21 TRUE?   [nobody re-checked this]
+------------------------------------------------------------------------------------------------
+
+  docs/OneThird-L2-Conditionality-mg-28ff.md@HEAD:21
+      | **1** | §4.3 summary | *"100 % at every **enumerated** `n`"* read a **sample** as an enumeration, and is **false of the truth** — the exhaustive `n = 7` (`mg-51f4`) has (F) faili ...
+
+  [CONFIRMED] (1a) line 21 IS the row the landing names — SS4.3 summary, sample-as-enumeration
+  [CONFIRMED] (1b) component 1 — the SENTENCE exists in mg-28ff as mg-51f4 read it, and says 'enumerated'
+        docs/OneThird-L2-Conditionality-mg-28ff.md@cb496e9:247
+            **100 % at every enumerated `n`, with no eigenvector on the left.**
+  [CONFIRMED] (1c) component 2 — the n = 7 row it summarises IS a sample, two lines above
+        docs/OneThird-L2-Conditionality-mg-28ff.md@cb496e9:245
+            | 7 | 106 *(sample)* | 106 / 106 | `0.832530` |
+  [CONFIRMED] (1d) component 3 — '168 of 86278' RE-DERIVED here, not read from mg-51f4's transcript
+        a1 enumerated all 96428 naturally labelled posets on [7], found 86278 primitive,
+        and CERTIFIED 168 route-(F) failures by exhibited rational vectors.
+        a1 also finds (F) failing at NO n <= 6 — so 'every ENUMERATED n' is true of n <= 6
+        and false ONLY at n = 7, which is exactly the scope mg-28ff:21 claims.
+  [CONFIRMED] (1e) mg-28ff:21 IS TRUE — all three components hold
+
+------------------------------------------------------------------------------------------------
+(2)  ALL THREE SITES — FOUND, HANDLED, AND THE SAME CLAIM?
+------------------------------------------------------------------------------------------------
+
+  SITE 1 — SS4, the n = 7 paragraph   (named by the TICKET (mg-64cb reported it))
+      needle : 'correctly labelled as such at every appearance in its document'
+      @2f76a01 : lines [148]        @HEAD : lines [26, 256]
+  [CONFIRMED] (2.1) the sentence was PRESENT at mg-51f4's own landing
+  [CONFIRMED] (2.1') it is STILL PRESENT at HEAD — struck, not deleted
+
+  SITE 2 — SS11, above the repair table   (found by the LANDING — not in the ticket)
+      needle : 'None of these is a labelling failure'
+      @2f76a01 : lines [340]        @HEAD : lines [27, 464]
+  [CONFIRMED] (2.2) the sentence was PRESENT at mg-51f4's own landing
+  [CONFIRMED] (2.2') it is STILL PRESENT at HEAD — struck, not deleted
+
+  SITE 3 — SS12, NOT DONE   (found by the LANDING — not in the ticket)
+      needle : 'sample figures are not quoted anywhere'
+      @2f76a01 : lines [384]        @HEAD : lines [28, 517]
+  [CONFIRMED] (2.3) the sentence was PRESENT at mg-51f4's own landing
+  [CONFIRMED] (2.3') it is STILL PRESENT at HEAD — struck, not deleted
+
+  STRIKETHROUGH SPANS IN mg-51f4
+      @2f76a01 : 0      @HEAD : 4      ADDED BY THE LANDING : 4
+      :256  40–200 posets, correctly labelled as such at every appearance in its document
+      :260  **I do not quote any of them.**
+      :463  **Every one of `mg-28ff`'s `n = 7` figures was correctly labelled a sample at each appearance.** None of these is a labelling failure.
+      :517  **`mg-28ff`'s `n = 7` sample figures are not quoted anywhere**, by design (`PREDICTIONS.md` E2). **The one place** I mention one — its `c_true(7) = 0. ...
+
+      span -> site mapping : [1, 1, 2, 3]
+  [CONFIRMED] (2d) the landing struck FOUR spans across THREE sites — SITE 1 carries two false clauses
+        the ticket named ONE site (mg-51f4 doc:148). The landing struck three sites and four
+        clauses. The extra clause is SS4's 'I do not quote any of them' — SITE 3's blanket
+        stated a second time in a different section, which is what makes 'all three are ONE
+        defect' a finding rather than a slogan.
+  [CONFIRMED] (2e) EVERY struck span is the SAME class — a QUANTIFIER over how n = 7 figures are
+       LABELLED or QUOTED.  Nothing of another class was struck alongside them.
+        4 of 4 struck spans carry both a quantifier word and a labelling word
+
+------------------------------------------------------------------------------------------------
+(3)  WAS ANYTHING TRUE STRUCK?  — clause by clause
+------------------------------------------------------------------------------------------------
+
+  [CONFIRMED] (3a) SITE 1 clause 'correctly labelled at every appearance' is FALSE
+        mg-28ff@cb496e9:247 is an APPEARANCE of the n = 7 figure '100 %' that reads ENUMERATED,
+        two lines under the row at :245 that reads (sample). FALSE, on mg-28ff's own text
+        at the state mg-51f4 read.
+      every sample_posets(7, k) in mg-28ff's instrument at cb496e9 : k in ['200', '90']
+  [CONFIRMED] (3b) SITE 1 clause 'samples of 40-200 posets' MIXES UNITS — FALSE as written
+        no draw of size 40 exists: the draws are ['200', '90'].  '40' is a PRIMITIVE COUNT (mg-28ff SS4.2)
+        and '200' is a DRAW SIZE (SS4.1/SS4.3), so the range has no unit.  P9 CONFIRMED.
+      RETAINED: the figures ARE deterministic samples                @2f76a01 y  @HEAD y
+      RETAINED: its n = 7 sample reads c_true = 0.176145             @2f76a01 y  @HEAD y
+      RETAINED: the maximum over the enumerated population is 0.340719 @2f76a01 y  @HEAD y
+      RETAINED: the sample was low by a factor of 1.93               @2f76a01 y  @HEAD y
+  [CONFIRMED] (3c) SITE 1's TRUE clauses all survive — the strike is scoped to the false ones
+        and a1 re-derives 0.340719 and 0.340719/0.176145 = 1.9343 independently.
+  [CONFIRMED] (3d) SITE 2 'None of these is a labelling failure' is FALSE — and self-falsifying
+        SS11's own row 1, three lines BELOW the struck sentence, says in mg-51f4's words:
+          'The word *enumerated* sat over a table whose n = 7 row was a sample, so the
+           sentence reads as covering n = 7 and is false there.'
+        That is a labelling failure. No second document is needed to refute this sentence.
+
+      ARE THEY mg-28ff's n = 7 SAMPLE FIGURES?  (checked in mg-28ff@cb496e9, not in mg-51f4)
+        0.176145 -> docs/OneThird-L2-Conditionality-mg-28ff.md:200  labelled '(sample)': yes
+        0.850074 -> docs/OneThird-L2-Conditionality-mg-28ff.md:217  labelled '(sample)': yes
+        0.832530 -> docs/OneThird-L2-Conditionality-mg-28ff.md:245  labelled '(sample)': yes
+  [CONFIRMED] (3e) all three ARE n = 7 sample rows of mg-28ff
+
+      WERE THEY QUOTED IN mg-51f4 AT ITS OWN LANDING?  (site 3 says 'not anywhere')
+        0.176145 @2f76a01 : lines [150, 348, 385]
+        0.850074 @2f76a01 : lines [349]
+        0.832530 @2f76a01 : lines [347]
+  [CONFIRMED] (3f) SITE 3 'not quoted anywhere / the one place' is FALSE — and was false ON THE DAY
+        5 occurrences of the three figures at 2f76a01, mg-51f4's OWN landing commit.
+        Two of the three figures (0.850074, 0.832530) are quoted in SS11's table and are not
+        the 'one place' the bullet names. Nothing in mg-28ff is needed to see this.
+
+      THE REPLACEMENT CLAUSE 'I do not USE any of them' — is IT true?
+  [CONFIRMED] (3g) every table row carrying one of the three figures is a SS11 REPAIR-PROPOSAL row,
+       i.e. a QUOTATION of mg-28ff's own cell, not a cell of mg-51f4's
+        3 table rows carry one of the three; 3 of them are SS11 rows quoting mg-28ff's line
+      mg-51f4's OWN n = 7 table rows (SS4 / SS6), and what they carry:
+        :175  | 7 | **86278** | **110.967** | **13.083** | — |   <- carries none of the three
+        :212  | 7 | **1.018707** | **0.880249** | **0.854626** | **0.8389** | — |   <- carries none of the three
+        :272  | **7** | **86278** | **0.340719** | **1.018707** | **1.297074** | **0.894472** |   <- carries none of the three
+        :485  | **7** | **377–383, §8** | the dependency diagram listing `(M♯)` and `(F)` as two independent sufficient cond   <- carries none of the three
+  [CONFIRMED] (3h) none of the three figures enters mg-51f4's OWN tables — 'carried and not used'
+
+------------------------------------------------------------------------------------------------
+(4)  WAS ANYTHING HARMONISED?
+------------------------------------------------------------------------------------------------
+
+      files the landing touched:
+        code/contradiction_repair_d19f/README.md
+        code/contradiction_repair_d19f/libd19f.py
+        code/contradiction_repair_d19f/out_r0_selftest.txt
+        code/contradiction_repair_d19f/out_r1_adjudicate.txt
+        code/contradiction_repair_d19f/out_r2_literals.txt
+        code/contradiction_repair_d19f/out_r3_selfcheck.txt
+        code/contradiction_repair_d19f/r0_selftest.py
+        code/contradiction_repair_d19f/r1_adjudicate.py
+        code/contradiction_repair_d19f/r2_literals.py
+        code/contradiction_repair_d19f/r3_selfcheck.py
+        code/contradiction_repair_d19f/run_all.sh
+        docs/OneThird-SweepLoss-mg-51f4.md
+  [CONFIRMED] (4a) the landing edited EXACTLY ONE document, and it is the one it decided against
+        ['docs/OneThird-SweepLoss-mg-51f4.md']
+  [CONFIRMED] (4b) mg-28ff was NOT edited — the false document was corrected, the true one left alone
+  [CONFIRMED] (4c) the two documents are NOT harmonised — mg-51f4 does not adopt mg-28ff's wording,
+       it strikes its own and says which is true
+        SS0.0 states the verdict in the corrected document itself, where a reader of the false
+        sentence will meet it.
+
+      lines present at 2f76a01 and absent at HEAD: 6
+        - samples of 40–200 posets, correctly labelled as such at every appearance in its document, and
+        - **I do not quote any of them.** The size of the gap justifies the caution: its `n = 7` sample
+        - appearance.** None of these is a labelling failure. What the enumeration shows is that the
+        - * **`mg-28ff`'s `n = 7` sample figures are not quoted anywhere**, by design (`PREDICTIONS.md`
+        - E2). The one place I mention one — its `c_true(7) = 0.176145` in §4 — is to record that the
+        - enumerated maximum is `1.93×` larger, and it carries the word *sample* in the same sentence.
+  [CONFIRMED] (4d) the struck sentences remain READABLE — a reader arriving with the old text finds it
+      base words: 5038   HEAD words: 6948   base words NOT matched in order: 0
+  [CONFIRMED] (4e) NOTHING WAS DELETED — mg-51f4 at HEAD is its own landing text with INSERTIONS
+       ONLY: the entire base word stream, 5038 words, is an in-order subsequence of
+       HEAD's 6948.  The six 'absent LINES' above are re-wrapping and added bold
+       markers, not withdrawal.
+
+================================================================================================
+a2 — THE ADJUDICATION IS CONFIRMED ON EVERY ARM.
+     mg-28ff:21 TRUE.  Three sites, all handled, all the same claim.
+     No true clause struck.  Nothing harmonised.  mg-28ff untouched.
+================================================================================================

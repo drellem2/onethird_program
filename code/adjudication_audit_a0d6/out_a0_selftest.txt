@@ -1,0 +1,54 @@
+==============================================================================
+a0 — FORCED ARMS
+==============================================================================
+
+A1  THE POPULATION IS THE NATURALLY LABELLED POSETS — counted two ways
+      naturally labelled posets, n = 1..7 : [1, 2, 7, 40, 357, 4824, 96428]
+      the same by transitive-closure brute force, n = 1..5 : [1, 2, 7, 40, 357]
+  [PASS] A1 the two enumerations agree at n <= 5
+  [PASS] A1b n = 2..7 totals are 2/7/40/357/4824/96428   [2, 7, 40, 357, 4824, 96428]
+      primitive, n = 2..7 : [1, 4, 27, 275, 4070, 86278]
+  [PASS] A1c primitive counts are 1/4/27/275/4070/86278   [1, 4, 27, 275, 4070, 86278]
+
+A2  THE DOWN-SET DP versus FILTERING n! PERMUTATIONS  (PREDICTIONS E1/E5)
+  [PASS] A2 transport agrees at every poset n <= 6   5231 posets, 0 disagreements
+
+A3  leak FROM THE TRANSPORT versus leak FROM THE DEFINITION over linear extensions
+  [PASS] A3 leak agrees on every prefix cut, n <= 5   1564 cuts, 0 disagreements
+
+A4  leak(A) == <1_A, L 1_A>  — the definition against the matrix
+  [PASS] A4 the two routes to leak agree   1564 cuts, 0 disagreements
+
+A5  T IS DOUBLY STOCHASTIC and L annihilates the constant vector
+  [PASS] A5 rows, columns and the kernel all check   0 violations
+
+A6  is_psd_exact IS NON-VACUOUS — it must accept AND refuse
+  [PASS] A6a accepts the identity
+  [PASS] A6b refuses -I
+  [PASS] A6c accepts a SINGULAR psd matrix (the boundary case every verdict here sits on)
+  [PASS] A6d refuses an indefinite matrix whose diagonal is positive
+
+A7  PLANTED WORLD — the failure certifier must REFUSE a poset where (F) holds
+  [PASS] A7a the n = 4 antichain is in the population
+  [PASS] A7b certify_fail REFUSES it (it cannot manufacture a failure)   M=5/8 gamma~1.000000 f*~0.195313
+  [PASS] A7c certify_hold CONFIRMS it
+
+A8  PLANTED WORLD — the two certifiers must never BOTH answer yes
+  [PASS] A8 no poset is certified BOTH failing and holding   4376 primitive posets n <= 6, 0 contradictions
+
+A9  A MUTATION CONTROL — perturb M upward and the certifier MUST flip
+  [PASS] A9a the unmutated poset does not certify as failing
+  [PASS] A9b the same poset with t = 10 DOES certify — the arm can fire
+
+A10  M BY A SECOND, UNSHARED ROUTE — E[D_F] / (2 floor(n^2/4))
+     This arm exists because of a4's C2: the ONE line liba0d6 shares verbatim with
+     lib51f4 is `den = sum(min(k, n - k) for k in range(1, n))`, M's denominator.
+     A shared line is a shared mistake waiting to happen, so M is recomputed here
+     from the FOOTRULE — a different formula, over linear extensions, touching
+     neither leak nor that denominator.
+  [PASS] A10 M agrees with E[D_F]/(2 floor(n^2/4)) at every poset n <= 6   5228 posets, 0 disagreements — so the shared denominator line is CONFIRMED by a
+     route that does not contain it
+
+==============================================================================
+a0 — ALL FORCED ARMS PASS
+==============================================================================
