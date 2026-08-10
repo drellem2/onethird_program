@@ -1,0 +1,65 @@
+g2  THE PREDICATE ARM — one BOOLEAN, ten trees, ten names
+
+  population POP-ALL   404 posets   (NOT POP-PRIM — see P3)
+  pinned     10 predicates + lib0d1b:primitive_here as the population's own
+
+==============================================================================
+G2a  THE LIVE READING — ten predicates, and what they actually discriminate
+==============================================================================
+
+  lib0d1b:primitive_here                         True 306  False  98  types bool
+  anticorrelation_c50b:primitive                 True 306  False  98  types bool
+  audit_5cba:primitive                           True 306  False  98  types bool
+  c3_audit_a94c3:is_primitive                    True 306  False  98  types bool
+  c3_prefix_capture_76b2:is_primitive            True 306  False  98  types bool
+  chain_iv_c_81ff:is_primitive                   True 306  False  98  types bool
+  l2_audit_29fe:not decomposable                 True 306  False  98  types bool
+  l2_conditionality_28ff:is_primitive            True 306  False  98  types bool
+  l2_underclaim_audit_3bb9:not decomposable()    True 306  False  98  types bool
+  lstar_789d:primitive                           True 306  False  98  types bool
+  sweep_loss_51f4:is_primitive                   True 306  False  98  types bool
+
+  captured in 0.16s   0 problem(s)
+
+==============================================================================
+G2b  POSITIVE CONTROL — five planted worlds on the captured vectors
+==============================================================================
+
+    CAUGHT            P2 one bit flipped in chain_iv_c_81ff:is_primitive
+                      reported as PREDICATE-DISAGREE, VECTOR-MOVED
+    CAUGHT            P3 chain_iv_c_81ff:is_primitive replaced by `return True`, checked on POP-ALL
+                      reported as NON-DISCRIMINATING, PREDICATE-DISAGREE, VECTOR-MOVED
+    REFUSED-CORRECTLY P3b the SAME mutation, checked on POP-PRIM by boolean agreement alone, is SILENT — 0 problems
+                      this is the predicate gate somebody would have written; it agrees with all nine other trees at all 306 primitive posets because that is what POP-PRIM IS
+    CAUGHT            P4 the population shifts and ALL eleven vectors follow it
+                      pairwise-agreement-only check reports 0 problems; the pinned digest reports VECTOR-MOVED
+    CAUGHT            P5 chain_iv_c_81ff:is_primitive starts returning [1]/[] — identical under bool()
+                      agreement-and-digest check reports 0 problems; the pinned return type reports RETURN-TYPE
+    CAUGHT            P6 chain_iv_c_81ff:is_primitive goes constant-False
+                      NON-DISCRIMINATING present: True
+    REFUSED-CORRECTLY P7 predicates.py's ten trees are still mg-0d1b's ten trees
+                      carried table 10 names, baseline 10 names
+
+    5 CAUGHT · 2 REFUSED-CORRECTLY · 0 unsatisfactory, of 7 arms
+
+==============================================================================
+G2c  WHY THIS ARM RUNS ON POP-ALL — the same fact, read from the other end
+==============================================================================
+
+  P3 shows a broken predicate hiding on POP-PRIM.  Here is the reason it can, stated as a
+  count rather than as an argument: restricted to POP-PRIM, 11 of the 11 vectors are
+  CONSTANT.  Not most of them — all of them, necessarily, because POP-PRIM is defined as
+  the posets where this predicate is true.
+
+  So on POP-PRIM these ten trees agree perfectly and carry ZERO bits of information about
+  each other.  It is the one population on which this row of INDEX.md, the largest alias
+  group in the corpus, cannot be cashed at all.  g1's tolerances are stated over POP-PRIM
+  because that is where the FLOATS are published; g2 runs on POP-ALL because that is the
+  only place the BOOLEAN says anything.  The two arms want different populations, and
+  that is the substantive reason the predicate row needed an arm of its own.
+
+==============================================================================
+g2 RESULT
+==============================================================================
+  10 names for ONE predicate agree at all 404 posets, discriminating 306/98; 0 arms unsatisfactory.
+  capture 0.16s · total 0.17s

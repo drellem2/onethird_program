@@ -1,0 +1,686 @@
+{
+ "derived_from": {
+  "alias_groups.json": {
+   "POP_ALL": 404,
+   "POP_PRIM": 306,
+   "spec": [
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ]
+   ]
+  },
+  "trees": [
+   "l2_conditionality_28ff",
+   "l2_audit_29fe",
+   "l2_underclaim_audit_3bb9",
+   "lstar_789d",
+   "audit_5cba",
+   "anticorrelation_c50b",
+   "sweep_loss_51f4",
+   "c3_prefix_capture_76b2",
+   "direct_prefix_audit_2de0",
+   "eleak_repair_8311",
+   "c3_audit_a94c3",
+   "chain_iv_c_81ff"
+  ]
+ },
+ "groups": [
+  {
+   "comparable": {
+    "anticorrelation_c50b:leak(1)": 306,
+    "audit_5cba:LK[1]/LE": 306,
+    "c3_audit_a94c3:delta1(A_1)": 306,
+    "c3_audit_a94c3:leak(A_1)": 306,
+    "c3_prefix_capture_76b2:leak(A_1)": 306,
+    "direct_prefix_audit_2de0:E_leak(A_1)": 306,
+    "direct_prefix_audit_2de0:delta_1_prefix(1)": 306,
+    "eleak_repair_8311:E_leak(A_1,def)": 306,
+    "l2_audit_29fe:leak[1]": 306,
+    "l2_conditionality_28ff:leak(A_1)": 306,
+    "l2_underclaim_audit_3bb9:leak[0]": 306,
+    "lstar_789d:LK[1]/LE": 306,
+    "sweep_loss_51f4:leak_pref(1)": 306
+   },
+   "definition": "leak(A_k) at the first prefix cut = E[#{i<k : pos(i)>=k}]",
+   "kinds": {
+    "anticorrelation_c50b:leak(1)": "native",
+    "audit_5cba:LK[1]/LE": "native",
+    "c3_audit_a94c3:delta1(A_1)": "native",
+    "c3_audit_a94c3:leak(A_1)": "native",
+    "c3_prefix_capture_76b2:leak(A_1)": "native",
+    "direct_prefix_audit_2de0:E_leak(A_1)": "native",
+    "direct_prefix_audit_2de0:delta_1_prefix(1)": "native",
+    "eleak_repair_8311:E_leak(A_1,def)": "native",
+    "l2_audit_29fe:leak[1]": "native",
+    "l2_conditionality_28ff:leak(A_1)": "native",
+    "l2_underclaim_audit_3bb9:leak[0]": "native",
+    "lstar_789d:LK[1]/LE": "native",
+    "sweep_loss_51f4:leak_pref(1)": "native"
+   },
+   "label": "leak(A_1)",
+   "members": [
+    [
+     "anticorrelation_c50b",
+     "leak(1)"
+    ],
+    [
+     "audit_5cba",
+     "LK[1]/LE"
+    ],
+    [
+     "c3_audit_a94c3",
+     "delta1(A_1)"
+    ],
+    [
+     "c3_audit_a94c3",
+     "leak(A_1)"
+    ],
+    [
+     "c3_prefix_capture_76b2",
+     "leak(A_1)"
+    ],
+    [
+     "direct_prefix_audit_2de0",
+     "E_leak(A_1)"
+    ],
+    [
+     "direct_prefix_audit_2de0",
+     "delta_1_prefix(1)"
+    ],
+    [
+     "eleak_repair_8311",
+     "E_leak(A_1,def)"
+    ],
+    [
+     "l2_audit_29fe",
+     "leak[1]"
+    ],
+    [
+     "l2_conditionality_28ff",
+     "leak(A_1)"
+    ],
+    [
+     "l2_underclaim_audit_3bb9",
+     "leak[0]"
+    ],
+    [
+     "lstar_789d",
+     "LK[1]/LE"
+    ],
+    [
+     "sweep_loss_51f4",
+     "leak_pref(1)"
+    ]
+   ],
+   "observed_at_baseline": 0.0,
+   "population": "POP-PRIM",
+   "tolerance": 0.0,
+   "tolerance_source": "alias_groups.json groups[0].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "anticorrelation_c50b:gamma_float": 306,
+    "audit_5cba:gamma_float": 306,
+    "c3_audit_a94c3:spectral_gap": 306,
+    "chain_iv_c_81ff:lambda2_bracket": 306,
+    "l2_audit_29fe:bracket_gap": 306,
+    "l2_conditionality_28ff:gap_exact_bounds": 306,
+    "l2_underclaim_audit_3bb9:gap_float": 306,
+    "lstar_789d:gamma_float": 306,
+    "sweep_loss_51f4:gap_float": 306
+   },
+   "definition": "the spectral gap 1 - lambda_std of I - S_P on 1-perp",
+   "kinds": {
+    "anticorrelation_c50b:gamma_float": "native",
+    "audit_5cba:gamma_float": "native",
+    "c3_audit_a94c3:spectral_gap": "native",
+    "chain_iv_c_81ff:lambda2_bracket": "native",
+    "l2_audit_29fe:bracket_gap": "native",
+    "l2_conditionality_28ff:gap_exact_bounds": "native",
+    "l2_underclaim_audit_3bb9:gap_float": "native",
+    "lstar_789d:gamma_float": "native",
+    "sweep_loss_51f4:gap_float": "native"
+   },
+   "label": "gamma",
+   "members": [
+    [
+     "anticorrelation_c50b",
+     "gamma_float"
+    ],
+    [
+     "audit_5cba",
+     "gamma_float"
+    ],
+    [
+     "c3_audit_a94c3",
+     "spectral_gap"
+    ],
+    [
+     "chain_iv_c_81ff",
+     "lambda2_bracket"
+    ],
+    [
+     "l2_audit_29fe",
+     "bracket_gap"
+    ],
+    [
+     "l2_conditionality_28ff",
+     "gap_exact_bounds"
+    ],
+    [
+     "l2_underclaim_audit_3bb9",
+     "gap_float"
+    ],
+    [
+     "lstar_789d",
+     "gamma_float"
+    ],
+    [
+     "sweep_loss_51f4",
+     "gap_float"
+    ]
+   ],
+   "observed_at_baseline": 4.665707820095122e-10,
+   "population": "POP-PRIM",
+   "tolerance": 4.665707820095122e-10,
+   "tolerance_source": "alias_groups.json groups[1].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "anticorrelation_c50b:Delta": 306,
+    "audit_5cba:Delta": 306,
+    "l2_audit_29fe:Delta": 306,
+    "l2_conditionality_28ff:delta_max": 306,
+    "l2_underclaim_audit_3bb9:Delta": 306,
+    "lstar_789d:Delta": 306,
+    "sweep_loss_51f4:delta_max": 306
+   },
+   "definition": "max_i d_i = max_i (1 - (S_P)_ii)",
+   "kinds": {
+    "anticorrelation_c50b:Delta": "native",
+    "audit_5cba:Delta": "native",
+    "l2_audit_29fe:Delta": "native",
+    "l2_conditionality_28ff:delta_max": "native",
+    "l2_underclaim_audit_3bb9:Delta": "native",
+    "lstar_789d:Delta": "native",
+    "sweep_loss_51f4:delta_max": "native"
+   },
+   "label": "Delta_P",
+   "members": [
+    [
+     "anticorrelation_c50b",
+     "Delta"
+    ],
+    [
+     "audit_5cba",
+     "Delta"
+    ],
+    [
+     "l2_audit_29fe",
+     "Delta"
+    ],
+    [
+     "l2_conditionality_28ff",
+     "delta_max"
+    ],
+    [
+     "l2_underclaim_audit_3bb9",
+     "Delta"
+    ],
+    [
+     "lstar_789d",
+     "Delta"
+    ],
+    [
+     "sweep_loss_51f4",
+     "delta_max"
+    ]
+   ],
+   "observed_at_baseline": 0.0,
+   "population": "POP-PRIM",
+   "tolerance": 0.0,
+   "tolerance_source": "alias_groups.json groups[2].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "anticorrelation_c50b:Phi_star": 306,
+    "c3_prefix_capture_76b2:phi_star_prefix": 306,
+    "eleak_repair_8311:prefix_min": 306,
+    "l2_audit_29fe:Phi_star_pref": 306,
+    "l2_conditionality_28ff:phi_star_prefix": 306,
+    "lstar_789d:Phi_star": 306,
+    "sweep_loss_51f4:phi_star_pref": 306
+   },
+   "definition": "min over PREFIX cuts of leak(A_k)/min(k,n-k)",
+   "kinds": {
+    "anticorrelation_c50b:Phi_star": "native",
+    "c3_prefix_capture_76b2:phi_star_prefix": "native",
+    "eleak_repair_8311:prefix_min": "native",
+    "l2_audit_29fe:Phi_star_pref": "native",
+    "l2_conditionality_28ff:phi_star_prefix": "native",
+    "lstar_789d:Phi_star": "native",
+    "sweep_loss_51f4:phi_star_pref": "native"
+   },
+   "label": "Phi*_pref",
+   "members": [
+    [
+     "anticorrelation_c50b",
+     "Phi_star"
+    ],
+    [
+     "c3_prefix_capture_76b2",
+     "phi_star_prefix"
+    ],
+    [
+     "eleak_repair_8311",
+     "prefix_min"
+    ],
+    [
+     "l2_audit_29fe",
+     "Phi_star_pref"
+    ],
+    [
+     "l2_conditionality_28ff",
+     "phi_star_prefix"
+    ],
+    [
+     "lstar_789d",
+     "Phi_star"
+    ],
+    [
+     "sweep_loss_51f4",
+     "phi_star_pref"
+    ]
+   ],
+   "observed_at_baseline": 0.0,
+   "population": "POP-PRIM",
+   "tolerance": 0.0,
+   "tolerance_source": "alias_groups.json groups[3].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "anticorrelation_c50b:mu_exhaustive": 306,
+    "audit_5cba:mu_pref_float": 306,
+    "l2_audit_29fe:bracket_mu_pref": 306,
+    "l2_conditionality_28ff:cone_min": 306,
+    "l2_underclaim_audit_3bb9:mu_pref_float": 306,
+    "lstar_789d:mu_faces": 306,
+    "sweep_loss_51f4:cone_min": 306
+   },
+   "definition": "min of the Rayleigh quotient over the monotone cone",
+   "kinds": {
+    "anticorrelation_c50b:mu_exhaustive": "native",
+    "audit_5cba:mu_pref_float": "native",
+    "l2_audit_29fe:bracket_mu_pref": "native",
+    "l2_conditionality_28ff:cone_min": "native",
+    "l2_underclaim_audit_3bb9:mu_pref_float": "native",
+    "lstar_789d:mu_faces": "native",
+    "sweep_loss_51f4:cone_min": "native"
+   },
+   "label": "mu_pref",
+   "members": [
+    [
+     "anticorrelation_c50b",
+     "mu_exhaustive"
+    ],
+    [
+     "audit_5cba",
+     "mu_pref_float"
+    ],
+    [
+     "l2_audit_29fe",
+     "bracket_mu_pref"
+    ],
+    [
+     "l2_conditionality_28ff",
+     "cone_min"
+    ],
+    [
+     "l2_underclaim_audit_3bb9",
+     "mu_pref_float"
+    ],
+    [
+     "lstar_789d",
+     "mu_faces"
+    ],
+    [
+     "sweep_loss_51f4",
+     "cone_min"
+    ]
+   ],
+   "observed_at_baseline": 9.097167463778533e-13,
+   "population": "POP-PRIM",
+   "tolerance": 9.097167463778533e-13,
+   "tolerance_source": "alias_groups.json groups[4].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "anticorrelation_c50b:rho*Delta": 306,
+    "audit_5cba:v_L": 306,
+    "l2_audit_29fe:V10": 306,
+    "l2_conditionality_28ff:V10": 306,
+    "l2_underclaim_audit_3bb9:V10": 306,
+    "lstar_789d:rho*Delta": 306
+   },
+   "definition": "(mu_pref/gamma) * Delta_P \u2014 the (L*) column",
+   "kinds": {
+    "anticorrelation_c50b:rho*Delta": "COMPOSED",
+    "audit_5cba:v_L": "native",
+    "l2_audit_29fe:V10": "COMPOSED",
+    "l2_conditionality_28ff:V10": "COMPOSED",
+    "l2_underclaim_audit_3bb9:V10": "native",
+    "lstar_789d:rho*Delta": "native"
+   },
+   "label": "rho*Delta_P",
+   "members": [
+    [
+     "anticorrelation_c50b",
+     "rho*Delta"
+    ],
+    [
+     "audit_5cba",
+     "v_L"
+    ],
+    [
+     "l2_audit_29fe",
+     "V10"
+    ],
+    [
+     "l2_conditionality_28ff",
+     "V10"
+    ],
+    [
+     "l2_underclaim_audit_3bb9",
+     "V10"
+    ],
+    [
+     "lstar_789d",
+     "rho*Delta"
+    ]
+   ],
+   "observed_at_baseline": 7.310374527946806e-12,
+   "population": "POP-PRIM",
+   "tolerance": 7.310374527946806e-12,
+   "tolerance_source": "alias_groups.json groups[5].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "c3_prefix_capture_76b2:phi_star": 306,
+    "direct_prefix_audit_2de0:phi_star": 306,
+    "eleak_repair_8311:phi_star(def)": 306,
+    "eleak_repair_8311:phi_star(inv)": 306,
+    "l2_audit_29fe:Phi_star_all": 306,
+    "l2_conditionality_28ff:phi_star": 306
+   },
+   "definition": "min over ALL cuts of leak(A)/min(|A|,n-|A|)",
+   "kinds": {
+    "c3_prefix_capture_76b2:phi_star": "native",
+    "direct_prefix_audit_2de0:phi_star": "native",
+    "eleak_repair_8311:phi_star(def)": "native",
+    "eleak_repair_8311:phi_star(inv)": "native",
+    "l2_audit_29fe:Phi_star_all": "native",
+    "l2_conditionality_28ff:phi_star": "native"
+   },
+   "label": "Phi*_all",
+   "members": [
+    [
+     "c3_prefix_capture_76b2",
+     "phi_star"
+    ],
+    [
+     "direct_prefix_audit_2de0",
+     "phi_star"
+    ],
+    [
+     "eleak_repair_8311",
+     "phi_star(def)"
+    ],
+    [
+     "eleak_repair_8311",
+     "phi_star(inv)"
+    ],
+    [
+     "l2_audit_29fe",
+     "Phi_star_all"
+    ],
+    [
+     "l2_conditionality_28ff",
+     "phi_star"
+    ]
+   ],
+   "observed_at_baseline": 0.0,
+   "population": "POP-PRIM",
+   "tolerance": 0.0,
+   "tolerance_source": "alias_groups.json groups[6].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "direct_prefix_audit_2de0:E_footrule": 306,
+    "l2_audit_29fe:EDF": 306,
+    "l2_conditionality_28ff:E_footrule": 306,
+    "sweep_loss_51f4:E_footrule": 306
+   },
+   "definition": "E[ sum_i |i - pos(i)| ] over a uniform linear extension",
+   "kinds": {
+    "direct_prefix_audit_2de0:E_footrule": "native",
+    "l2_audit_29fe:EDF": "native",
+    "l2_conditionality_28ff:E_footrule": "native",
+    "sweep_loss_51f4:E_footrule": "native"
+   },
+   "label": "E_footrule",
+   "members": [
+    [
+     "direct_prefix_audit_2de0",
+     "E_footrule"
+    ],
+    [
+     "l2_audit_29fe",
+     "EDF"
+    ],
+    [
+     "l2_conditionality_28ff",
+     "E_footrule"
+    ],
+    [
+     "sweep_loss_51f4",
+     "E_footrule"
+    ]
+   ],
+   "observed_at_baseline": 0.0,
+   "population": "POP-PRIM",
+   "tolerance": 0.0,
+   "tolerance_source": "alias_groups.json groups[7].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "anticorrelation_c50b:M": 306,
+    "audit_5cba:M": 306,
+    "lstar_789d:M": 306,
+    "sweep_loss_51f4:M_mean": 306
+   },
+   "definition": "sum_k leak(A_k) / (LE * floor(n^2/4)) \u2014 route (F)'s mean",
+   "kinds": {
+    "anticorrelation_c50b:M": "native",
+    "audit_5cba:M": "native",
+    "lstar_789d:M": "native",
+    "sweep_loss_51f4:M_mean": "native"
+   },
+   "label": "M",
+   "members": [
+    [
+     "anticorrelation_c50b",
+     "M"
+    ],
+    [
+     "audit_5cba",
+     "M"
+    ],
+    [
+     "lstar_789d",
+     "M"
+    ],
+    [
+     "sweep_loss_51f4",
+     "M_mean"
+    ]
+   ],
+   "observed_at_baseline": 0.0,
+   "population": "POP-PRIM",
+   "tolerance": 0.0,
+   "tolerance_source": "alias_groups.json groups[8].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "anticorrelation_c50b:rho": 306,
+    "l2_underclaim_audit_3bb9:V00": 306,
+    "lstar_789d:rho_float": 306
+   },
+   "definition": "mu_pref / gamma",
+   "kinds": {
+    "anticorrelation_c50b:rho": "COMPOSED",
+    "l2_underclaim_audit_3bb9:V00": "native",
+    "lstar_789d:rho_float": "native"
+   },
+   "label": "rho",
+   "members": [
+    [
+     "anticorrelation_c50b",
+     "rho"
+    ],
+    [
+     "l2_underclaim_audit_3bb9",
+     "V00"
+    ],
+    [
+     "lstar_789d",
+     "rho_float"
+    ]
+   ],
+   "observed_at_baseline": 4.440892098500626e-15,
+   "population": "POP-PRIM",
+   "tolerance": 4.440892098500626e-15,
+   "tolerance_source": "alias_groups.json groups[9].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "c3_audit_a94c3:one_minus_rho(1)": 306,
+    "c3_prefix_capture_76b2:rho_prefix(1)": 306,
+    "chain_iv_c_81ff:prefix_Q(1)": 306
+   },
+   "definition": "Rayleigh quotient of the centred first-prefix indicator",
+   "kinds": {
+    "c3_audit_a94c3:one_minus_rho(1)": "native",
+    "c3_prefix_capture_76b2:rho_prefix(1)": "native",
+    "chain_iv_c_81ff:prefix_Q(1)": "native"
+   },
+   "label": "1 - rho(A_1)",
+   "members": [
+    [
+     "c3_audit_a94c3",
+     "one_minus_rho(1)"
+    ],
+    [
+     "c3_prefix_capture_76b2",
+     "rho_prefix(1)"
+    ],
+    [
+     "chain_iv_c_81ff",
+     "prefix_Q(1)"
+    ]
+   ],
+   "observed_at_baseline": 0.0,
+   "population": "POP-PRIM",
+   "tolerance": 0.0,
+   "tolerance_source": "alias_groups.json groups[10].max_spread (mg-0d1b)"
+  },
+  {
+   "comparable": {
+    "anticorrelation_c50b:mu_upper": 306,
+    "lstar_789d:mu_ub_float": 306
+   },
+   "definition": "an EXHIBITED monotone vector's quotient \u2014 an upper bound",
+   "kinds": {
+    "anticorrelation_c50b:mu_upper": "native",
+    "lstar_789d:mu_ub_float": "native"
+   },
+   "label": "mu_pref (upper bound)",
+   "members": [
+    [
+     "anticorrelation_c50b",
+     "mu_upper"
+    ],
+    [
+     "lstar_789d",
+     "mu_ub_float"
+    ]
+   ],
+   "observed_at_baseline": 1.1078788481055923e-07,
+   "population": "POP-PRIM",
+   "tolerance": 1.1078788481055923e-07,
+   "tolerance_source": "alias_groups.json groups[11].max_spread (mg-0d1b)"
+  }
+ ],
+ "note": "Pinned from mg-0d1b's alias_groups.json.  Regenerated by hand only; see mkbaseline.py.  A disagreement is a finding and gets a ticket, not an edit to this file.",
+ "predicate": {
+  "n_posets": 404,
+  "names": [
+   "anticorrelation_c50b:primitive",
+   "audit_5cba:primitive",
+   "c3_audit_a94c3:is_primitive",
+   "c3_prefix_capture_76b2:is_primitive",
+   "chain_iv_c_81ff:is_primitive",
+   "l2_audit_29fe:not decomposable",
+   "l2_conditionality_28ff:is_primitive",
+   "l2_underclaim_audit_3bb9:not decomposable()",
+   "lstar_789d:primitive",
+   "sweep_loss_51f4:is_primitive"
+  ],
+  "population": "POP-ALL",
+  "return_types": {
+   "anticorrelation_c50b:primitive": [
+    "bool"
+   ],
+   "audit_5cba:primitive": [
+    "bool"
+   ],
+   "c3_audit_a94c3:is_primitive": [
+    "bool"
+   ],
+   "c3_prefix_capture_76b2:is_primitive": [
+    "bool"
+   ],
+   "chain_iv_c_81ff:is_primitive": [
+    "bool"
+   ],
+   "l2_audit_29fe:not decomposable": [
+    "bool"
+   ],
+   "l2_conditionality_28ff:is_primitive": [
+    "bool"
+   ],
+   "l2_underclaim_audit_3bb9:not decomposable()": [
+    "bool"
+   ],
+   "lib0d1b:primitive_here": [
+    "bool"
+   ],
+   "lstar_789d:primitive": [
+    "bool"
+   ],
+   "sweep_loss_51f4:is_primitive": [
+    "bool"
+   ]
+  },
+  "true_count": 306,
+  "vector_digest": "7d23a6e7666b122d"
+ }
+}
