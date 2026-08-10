@@ -85,3 +85,49 @@ the thing, not by reading it** — which is the argument for the instrument exis
   `[a-z-]+`, and `state-sha256` contains digits, so section 3 compared the actual digest
   against the empty string and printed `DIFFERS` — the right answer for the wrong reason,
   which would have kept printing the right answer after `STATE.md` stopped moving.
+
+## Two more of the instrument's own defects, found at the first reconciliation (mg-2f44)
+
+The three above were found by *running* the instrument. These two were found by **using it
+for its purpose** — reconciling a row and re-pinning it — which is a different event and had
+never happened before. Both are the same defect in two places: **a fixture that hardcoded
+the one thing the instrument exists to let change.**
+
+- **`negative_control.py`'s section-6 mutation had a one-use lifetime.** It read
+  `text.replace("@ 276aead1a8c5 (2026-08-07)", …)`. The moment `--reconcile` moved the pin to
+  a new commit, the search string matched nothing, the mutation became a no-op, and the
+  harness scored it `SETUP FAILED` — **which is the harness working**, and is why this one was
+  visible. It now reads the commit out of the file with a regex, so it survives every re-pin.
+
+- **The positive control could not fail, and did not fail when it should have.** This is the
+  serious one, and nothing reported it. The baseline assertion was
+
+      ok = (code == 1 and "rows 8 and 9" not in out and "8 9" in out
+            and "STRUCTURAL" not in out)
+
+  where `"8 9" in out` was meant to say *the drift worklist is exactly rows 8 and 9*. It is a
+  substring test against the **whole report**, and section 1 prints
+  `PASS  all three row sets agree: 1 2 3a 3b 4 5 6 7 8 9 10 11` on every healthy run — so
+  `"8 9"` matched **there**, unconditionally, forever, whatever had actually drifted. When
+  mg-2f44 reconciled row 9 and the true worklist became `8`, the baseline still scored
+  `CAUGHT`. **The positive control is what licenses reading every other row of the table**, so
+  a baseline that cannot fail is worth more than any single mutation it guards — and it is
+  `run_all.sh` laundering a `DRIFT` into `CLEAN` a third time, in the file written to catch
+  that class. It now parses section 2's worklist **line** and compares the row list
+  **exactly**, against an expectation **derived from the pin** rather than typed in — so it
+  neither rots at the next reconciliation nor passes on a coincidence. Demonstrated to
+  discriminate: the correct set scores `CAUGHT`; `['8','9']` (the stale literal), `[]`, and
+  `['3b']` all score `HOLE`.
+
+**The rule these two produce, stated so it is a rule and not a lesson:** nothing in
+`negative_control.py` may name a pinned commit or a drifted row as a literal. The drift set
+and the pin commit are precisely what every reconciliation moves; a fixture that spells them
+out is a check with an expiry date, and the second one above shows it can expire **silently**.
+
+**Still uncovered, and mg-2f44 did not change it:** everything under *What this does not
+cover* above stands unedited. In particular **(2)** — only the ledger table is digested — is
+why row 9's repair could be checked but the three **prose** paragraphs mg-2f44 also synced
+(the summary, the machinery set, the fork) could **not** be. Those were reconciled against
+`STATE.md:13`/`:76`/`:81` by hand and by reading, and **no control saw them**. And **(4)**
+stands at full strength here: this reconciliation's claim that row 9's cell was actually
+updated rests on the diff being visible in the same commit, which is a social defence.

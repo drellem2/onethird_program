@@ -3,9 +3,11 @@ mg-9bc2 — NEGATIVE CONTROL for twin_pin.py
 ============================================================================================
 
 Each mutation is applied to a COPY.  The live tree is never written.
-The instrument's baseline verdict is DRIFT (exit 1) because ledger rows 8 and 9
-really have moved, so the exit code alone cannot score these; each row states the
-section that must fire and the string that must appear.
+The instrument's baseline verdict is DRIFT (exit 1) because ledger row(s) 8
+really have moved, so the exit code alone cannot score these; each row states
+the section that must fire and the string that must appear.
+The drift set above is DERIVED FROM THE PIN, never typed in — see the note at the
+top of this file for the two fixtures that rotted when it was (mg-2f44).
 
 mutation                                                           sec  verdict  detail
 --------------------------------------------------------------------------------------------
@@ -19,7 +21,7 @@ STATE.md's KIND mark for row 9 flipped FP✗ -> U                    4    CAUGHT
 the twin re-claims canonicity in the footer                        5    CAUGHT   exit 2; looked for 'a canonicity claim on a line that does not name STATE.md'
 visible provenance line points at a DIFFERENT commit than the pin  6    CAUGHT   exit 2; looked for 'the visible provenance line does not quote the pinned commit'
 visible provenance line removed (pin becomes machine-only)         6    CAUGHT   exit 2; looked for 'no <span id="provenance">'
-NO MUTATION — the baseline                                         -    CAUGHT   exit 1; baseline must be DRIFT at rows 8 9 and nothing else
+NO MUTATION — the baseline                                         -    CAUGHT   exit 1; worklist is EXACTLY 8 — parsed from section 2, expectation derived from the pin
 
 11 of 11 caught; 0 hole(s).
 

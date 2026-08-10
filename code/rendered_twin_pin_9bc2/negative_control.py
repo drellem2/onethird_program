@@ -24,10 +24,19 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 STATE = os.path.join(ROOT, "STATE.md")
 TWIN = os.path.join(ROOT, "docs", "state-of-the-wall.html")
 
-# The live tree is ALREADY at exit 1 (rows 8 and 9 have drifted), so "did the mutation make
-# it fail?" is not a question the exit code can answer on its own here.  Every expectation
-# below is therefore stated as a SECTION and a STRING that must appear in the output, and
-# the baseline's own output is subtracted first.
+sys.path.insert(0, HERE)
+import lib9bc2 as L  # noqa: E402
+
+# The live tree is ALREADY at exit 1 (some ledger rows have drifted), so "did the mutation
+# make it fail?" is not a question the exit code can answer on its own here.  Every
+# expectation below is therefore stated as a SECTION and a STRING that must appear in the
+# output, and the baseline's own output is subtracted first.
+#
+# NOTHING IN THIS FILE MAY NAME THE DRIFTED ROWS AS A LITERAL.  The drift set is the one
+# thing here that is SUPPOSED to change — every reconciliation moves it — so a fixture that
+# hardcodes it is a fixture with a one-use lifetime.  Both defects mg-2f44 found were of
+# exactly that shape: a literal commit hash that became a no-op, and a literal row list that
+# matched an unrelated line and could never fail.  Derive from the pin; assert exactly.
 MUTATIONS = []
 
 
@@ -103,7 +112,17 @@ def m_reclaim_canon(text):
 @mutation("visible provenance line points at a DIFFERENT commit than the pin", "6",
           "the visible provenance line does not quote the pinned commit", "twin")
 def m_desync_visible(text):
-    return text.replace("@ 276aead1a8c5 (2026-08-07)", "@ deadbeefcafe (2026-08-10)", 1)
+    """Repoint the VISIBLE provenance line at a commit the pin does not name.
+
+    THIS MUTATION USED TO BE WRITTEN AS A LITERAL, `text.replace("@ 276aead1a8c5
+    (2026-08-07)", ...)`, AND THE FIRST RECONCILIATION AFTER IT WAS WRITTEN TURNED IT INTO A
+    NO-OP (mg-2f44, re-pinning row 9).  The harness scored that SETUP FAILED and said so,
+    which is the harness working — but the fixture was guaranteed to rot at exactly the
+    moment the instrument is used for its purpose, i.e. it was a check with a one-use
+    lifetime.  It now reads the commit out of the file, so it survives every re-pin.
+    """
+    return re.sub(r'(<span id="provenance">.*?@ )([0-9a-f]{7,40})',
+                  r"\g<1>deadbeefcafe", text, count=1, flags=re.S)
 
 
 @mutation("visible provenance line removed (pin becomes machine-only)", "6",
@@ -117,6 +136,57 @@ def m_drop_visible(text):
           None, "none")
 def m_none(text):
     return text
+
+
+_WORKLIST = re.compile(r"since the twin was last reconciled: (.*)$", re.M)
+
+
+def expected_drift(state_text, twin_text):
+    """The drift worklist the baseline MUST report, derived from the pin, not hardcoded."""
+    pin = L.parse_pin(twin_text)
+    if pin is None:
+        return None
+    now = L.row_digests(state_text)
+    return [lbl for lbl in sorted(now, key=lambda s: (int(re.match(r"\d+", s).group()), s))
+            if lbl in pin["rows"] and pin["rows"][lbl] != now[lbl]]
+
+
+def score_baseline(code, out, want_rows):
+    """Score the unmutated run.  Returns (ok, detail).
+
+    THE ASSERTION THIS REPLACES COULD NOT FAIL, AND IT DID NOT FAIL WHEN IT SHOULD HAVE
+    (found mg-2f44).  It read:
+
+        ok = (code == 1 and "rows 8 and 9" not in out and "8 9" in out
+              and "STRUCTURAL" not in out)
+
+    `"8 9" in out` was meant to say "the drift worklist is exactly rows 8 and 9".  It is a
+    substring test against the WHOLE report, and section 1 prints
+
+        PASS  all three row sets agree: 1 2 3a 3b 4 5 6 7 8 9 10 11
+
+    on every healthy run — so `"8 9"` matched there, unconditionally and forever, no matter
+    which rows had actually drifted.  When mg-2f44 reconciled row 9 and the true worklist
+    became `8`, this line still scored CAUGHT.  A positive control that cannot fail is the
+    exact defect the whole ticket is about — mg-9bc2's own run_all.sh laundered a DRIFT
+    verdict into `CLEAN` in the same directory — and it is worth more than the mutation it
+    was guarding, because the baseline is what licenses reading every other row.
+
+    The replacement parses section 2's worklist LINE and compares the row list EXACTLY,
+    against an expectation derived from the pin rather than typed in, so it neither rots at
+    the next reconciliation nor passes on a coincidence.
+    """
+    if code != 1 and want_rows:
+        return False, f"exit {code}; expected DRIFT (exit 1) at rows {' '.join(want_rows)}"
+    if "STRUCTURAL" in out:
+        return False, f"exit {code}; a structural failure fired on an unmutated tree"
+    m = _WORKLIST.search(out)
+    got = m.group(1).split() if m else []
+    if got != want_rows:
+        return False, (f"exit {code}; worklist is {got or '(none)'}, "
+                       f"expected exactly {want_rows or '(none)'}")
+    return True, (f"exit {code}; worklist is EXACTLY {' '.join(want_rows) or '(none)'} "
+                  f"— parsed from section 2, expectation derived from the pin")
 
 
 def run(state_path, twin_path):
@@ -135,10 +205,20 @@ def main():
     print("mg-9bc2 — NEGATIVE CONTROL for twin_pin.py")
     print("=" * 92)
     print()
+    want_drift = expected_drift(base_state, base_twin) or []
+
     print("Each mutation is applied to a COPY.  The live tree is never written.")
-    print("The instrument's baseline verdict is DRIFT (exit 1) because ledger rows 8 and 9")
-    print("really have moved, so the exit code alone cannot score these; each row states the")
-    print("section that must fire and the string that must appear.")
+    if want_drift:
+        print(f"The instrument's baseline verdict is DRIFT (exit 1) because ledger row(s) "
+              f"{' '.join(want_drift)}")
+        print("really have moved, so the exit code alone cannot score these; each row states")
+        print("the section that must fire and the string that must appear.")
+    else:
+        print("The instrument's baseline verdict is CLEAN (exit 0): no pinned ledger row has")
+        print("moved.  Each row below states the section that must fire and the string that")
+        print("must appear.")
+    print("The drift set above is DERIVED FROM THE PIN, never typed in — see the note at the")
+    print("top of this file for the two fixtures that rotted when it was (mg-2f44).")
     print()
 
     tmp = tempfile.mkdtemp(prefix="twinpin9bc2-")
@@ -164,10 +244,8 @@ def main():
 
             code, out = run(sp, tp)
             if expect is None:
-                ok = (code == 1 and "rows 8 and 9" not in out
-                      and "8 9" in out and "STRUCTURAL" not in out)
+                ok, detail = score_baseline(code, out, want_drift)
                 verdict = "CAUGHT" if ok else "HOLE"
-                detail = f"exit {code}; baseline must be DRIFT at rows 8 9 and nothing else"
             else:
                 ok = expect in out
                 verdict = "CAUGHT" if ok else "HOLE"

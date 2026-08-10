@@ -1,11 +1,18 @@
 #!/bin/sh
 # mg-9bc2 — the rendered twin's pin control, and the proof that it can fail.
 #
-# THE CONTROL IS EXPECTED TO EXIT 1 (DRIFT) IN THE COMMIT THAT INTRODUCES IT, and that is
-# the point of it.  Ledger rows 8 and 9 really have moved in STATE.md since the twin was
-# last reconciled (276aead), so a green control here would mean the pin had been seeded at
-# HEAD to make it green — which is the same unfalsifiable claim as `Generated 2026-07-19`,
+# THE CONTROL WAS EXPECTED TO EXIT 1 (DRIFT) IN THE COMMIT THAT INTRODUCED IT, and that was
+# the point of it.  Ledger rows 8 and 9 really had moved in STATE.md since the twin was
+# last reconciled (276aead), so a green control there would have meant the pin had been
+# seeded at HEAD to make it green — the same unfalsifiable claim as `Generated 2026-07-19`,
 # reinstalled one layer down.  See seed_pin.py's docstring for that decision.
+#
+# IT STILL EXITS 1, AND FOR A SMALLER REASON.  mg-2f44 reconciled ROW 9 — the row mg-07fd's
+# audit found the twin rendering pre-repair — and re-pinned that row and only that row, so
+# the worklist is now ROW 8 ALONE.  Row 8 is the second drifted row mg-9bc2's first run
+# surfaced and NO TICKET NAMES IT; it is left drifted deliberately rather than re-pinned,
+# because re-pinning a row nobody reconciled is the one move this instrument forbids.
+# DRIFT IS THE NORMAL CONDITION of a hand-maintained rendering between reconciliations.
 #
 # So this script does NOT `set -e` on the control.  It records both exit codes and reports.
 #
@@ -50,7 +57,8 @@ if [ "$NEGATIVE" -ne 0 ]; then
 fi
 if [ "$CONTROL" -eq 1 ]; then
     echo "DRIFT, and the instrument demonstrably fails when it should.  The drifted rows in"
-    echo "out_control.txt section 2 are the worklist; row 9 is mg-2f44's."
+    echo "out_control.txt section 2 are the worklist.  Row 9 was mg-2f44's and is RECONCILED;"
+    echo "row 8 is the one no ticket names yet."
     exit 0
 fi
 echo "CLEAN — the twin's pinned ledger rows all still match STATE.md."
