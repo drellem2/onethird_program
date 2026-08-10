@@ -408,7 +408,7 @@ allowed for, by reasons I had not thought of.
 - **The five figures are NOT re-opened.** Settled on mg-5cba's audited values, credited at
   every site by c8d63. `s4` reads them; nothing recomputes them.
 - **`docs/OneThird-SweepLoss-mg-51f4.md:148` is NOT repaired.** It is another ticket's
-  landed document. Reported in §3.2 and filed as a successor.
+  landed document. Reported in §3.2 and filed as successor **`mg-d19f`**.
 - **Nothing outside `code/landing_audit_sweep_64cb/` is edited.** Checked by
   `git status --porcelain` in `run_all.sh`, printed empty.
 - **The rule is NOT enforced anywhere.** §6 shows the predicate runs and answers both ways.
