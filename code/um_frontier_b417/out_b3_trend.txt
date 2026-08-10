@@ -1,0 +1,175 @@
+==============================================================================
+B3.1  THE FRONTIER, n = 3..14
+==============================================================================
+b3 -- THE TREND.  Is u_M approaching 1, saturating below it, or neither?
+
+THE TICKET ASKED FOR THIS AS THE DELIVERABLE, AND THE ANSWER IS "NEITHER".  u_M does
+not approach 1 and does not saturate below it: **it crosses**.  The question as posed
+assumed the disjunction survives, and it does not.  What replaces it is a shape
+question that still has content, and this file answers that one:
+
+    ACROSS n = 9..14, DOES THE CERTIFIED FRONTIER W(n) >= x RISE MONOTONICALLY, AND
+    WHAT DRIVES IT?
+
+THE DECOMPOSITION THAT MAKES THE TREND READABLE.  From libb417's identity,
+
+    u_M = v_L * D,      D = (1 + sqrt(1 - 2 gamma/Delta^2))/2 < 1
+
+so every witness has TWO independent ways to be near 1: a large (L*) violation v_L, or
+a small discount D^-1 -- i.e. a small gamma/Delta^2, i.e. a THIN CUT.  Written the
+other way,
+
+    (M#) FAILS  <=>  v_L > 1 + rho*mu_pref/2
+
+the (L*) excess must beat mu_pref/2.  So the two mechanisms are not independent
+dials: pushing gamma down pushes mu_pref down with it (mu_pref >= gamma always), which
+LOWERS the bar.  That is why the frontier moves and it is what this file measures.
+
+WHAT THE NUMBERS BELOW ARE.  Search figures at n >= 9, exhaustive figures at n <= 7
+quoted from mg-c50b and NOT re-measured here except where b0 S6 re-measured W(7).
+n = 8 is neither, and is not enumerated by this ticket.
+
+
+  Emitted through `libb417.emit_table`, which refuses a blank cell (b0 S8).
+  MY OWN FIRST DRAFT OF THIS TABLE PRINTED '-' IN THE u_F AND u_M COLUMNS FOR
+  THE EXHAUSTIVE ROWS -- i.e. the remedy carried the defect it repairs, in the
+  file that reports the defect.  It is caught here and the cells now say which
+  kind of absence they are.
+
+  n  | W(n)           | kind               | u_F                            | u_M                            | source                                                     
+  ---+----------------+--------------------+--------------------------------+--------------------------------+------------------------------------------------------------
+  3  | 0.000000       | EXHAUSTIVE         | N/A-mg-c50b-published-min-only | N/A-mg-c50b-published-min-only | mg-c50b s2, exhaustive                                     
+  4  | 0.486136       | EXHAUSTIVE         | N/A-mg-c50b-published-min-only | N/A-mg-c50b-published-min-only | mg-c50b s2, exhaustive                                     
+  5  | 0.649886       | EXHAUSTIVE         | N/A-mg-c50b-published-min-only | N/A-mg-c50b-published-min-only | mg-c50b s2, exhaustive                                     
+  6  | 0.818379       | EXHAUSTIVE         | N/A-mg-c50b-published-min-only | N/A-mg-c50b-published-min-only | mg-c50b s2, exhaustive                                     
+  7  | 0.890780       | EXHAUSTIVE         | N/A-mg-c50b-published-min-only | N/A-mg-c50b-published-min-only | mg-c50b s2, exhaustive                                     
+  8  | N/A-c_or-not-W | EXHAUSTIVE (c_or)  | N/A-c_or-not-W                 | N/A-c_or-not-W                 | mg-c50b s3: c_or(8)=0.943649, both routes fail at 0/2600369
+  9  | 0.968129       | SEARCH lower bound | 0.989524                       | 0.968129                       | b2, SEARCH (not a maximum)                                 
+  10 | 1.000563       | SEARCH lower bound | 1.018324                       | 1.000563                       | b2, SEARCH (not a maximum)                                 
+  11 | 1.028557       | SEARCH lower bound | 1.028850                       | 1.028557                       | b2, SEARCH (not a maximum)                                 
+  12 | 1.045449       | SEARCH lower bound | 1.050450                       | 1.045449                       | b2, SEARCH (not a maximum)                                 
+  13 | 1.059706       | SEARCH lower bound | 1.061786                       | 1.059706                       | b2, SEARCH (not a maximum)                                 
+  14 | 1.070221       | SEARCH lower bound | 1.081216                       | 1.070221                       | b2, SEARCH (not a maximum)                                 
+
+  N/A-mg-c50b-published-min-only: mg-c50b prints w(n) as one number per n and
+  does not publish the argmax's u_F and u_M separately.  NOT COMPUTED HERE, and
+  not re-derived, because re-deriving them means enumerating n <= 7 again for
+  two decorative columns.  N/A-c_or-not-W: at n = 8 the published exhaustive
+  figure is c_or(8), which is a DIFFERENT READING from W(8) -- they cross 1
+  together and are not equal -- so putting 0.943649 in a W column would be the
+  u_M/c# confusion (mg-0d1b) in a new costume.
+
+  THE n <= 7 ROWS ARE MAXIMA.  THE n >= 9 ROWS ARE NOT.  They are the best
+  min(u_F,u_M) any restart of b2 reached, over a population that was never
+  enumerated, and the true W(n) at each is >= the figure printed.
+
+==============================================================================
+B3.2  APPROACHING 1, SATURATING, OR CROSSING?
+==============================================================================
+
+  ANSWER: NEITHER.  W(n) CROSSES 1.
+  Smallest n at which this SEARCH exhibits min(u_F,u_M) > 1: 10
+  All n exhibited above 1: 10, 11, 12, 13, 14
+
+  The ticket's framing -- 'approaching 1 or saturating below it, those are
+  different futures for the conjecture' -- presupposed a third thing that is
+  not true: that the disjunction holds and u_M is a margin. It is not a
+  margin. It is a quantity that exceeds 1, and the exhibits are certified.
+
+  MONOTONICITY over the n it searched:
+    9:0.968129  10:1.000563  11:1.028557  12:1.045449  13:1.059706  14:1.070221
+    monotone non-decreasing in n: YES
+
+==============================================================================
+B3.3  WHAT DRIVES IT -- v_L, or the discount D?
+==============================================================================
+  u_M = v_L * D.  If the frontier rises because v_L rises, the (M#) story is the
+  (L*) story again.  If it rises because D rises -- i.e. because gamma/Delta^2 falls --
+  then (M#) fails for a reason (L*) never had, and the thin cut is the mechanism.
+
+   n | u_M        | v_L        | D          | gamma      | mu_pref    | Delta      | h
+   9 |   0.968129 |   1.006331 |   0.962038 |   0.069435 |   0.071667 |   0.975000 | 4
+  10 |   1.000563 |   1.030341 |   0.971099 |   0.053360 |   0.056389 |   0.975000 | 4
+  11 |   1.028557 |   1.060611 |   0.969778 |   0.057190 |   0.061409 |   0.987755 | 4
+  12 |   1.045449 |   1.079026 |   0.968882 |   0.059495 |   0.064629 |   0.993304 | 5
+  13 |   1.059706 |   1.094316 |   0.968373 |   0.060769 |   0.066765 |   0.996032 | 5
+  14 |   1.070221 |   1.105569 |   0.968028 |   0.061591 |   0.068264 |   0.997500 | 5
+
+  the five certified (L*) counterexamples, for contrast:
+   tag  n | u_M        | v_L        | D          | gamma      | mu_pref    | h
+   C1   9 |   0.943486 |   1.008801 |   0.935254 |   0.117293 |   0.120234 | 4
+   C2   9 |   0.947534 |   1.013486 |   0.934925 |   0.118609 |   0.121755 | 4
+   C3  10 |   0.981830 |   1.020310 |   0.962286 |   0.070325 |   0.072897 | 4
+   C4  11 |   0.958326 |   1.025041 |   0.934914 |   0.119916 |   0.123829 | 4
+   C5  12 |   1.023414 |   1.057468 |   0.967796 |   0.061699 |   0.065580 | 5
+
+  THE BAR EACH WITNESS HAD TO CLEAR:  (M#) fails  <=>  v_L > 1 + rho*mu/2
+   tag/n |  v_L       | bar = 1+rho*mu/2 | clears? | slack
+   C1   9 |   1.008801 |         1.061624 |      no | -0.052823
+   C2   9 |   1.013486 |         1.062492 |      no | -0.049006
+   C3  10 |   1.020310 |         1.037781 |      no | -0.017471
+   C4  11 |   1.025041 |         1.063935 |      no | -0.038894
+   C5  12 |   1.057468 |         1.034852 |     YES | +0.022616
+   b2   9 |   1.006331 |         1.036985 |      no | -0.030653
+   b2  10 |   1.030341 |         1.029795 |     YES | +0.000546
+   b2  11 |   1.060611 |         1.032969 |     YES | +0.027642
+   b2  12 |   1.079026 |         1.035103 |     YES | +0.043923
+   b2  13 |   1.094316 |         1.036677 |     YES | +0.057639
+   b2  14 |   1.105569 |         1.037830 |     YES | +0.067739
+
+==============================================================================
+B3.3b  WHICH FACTOR ACTUALLY MOVES -- decomposed, not asserted
+==============================================================================
+  u_M = v_L * D is multiplicative, so log u_M = log v_L + log D and the rise across
+  n splits EXACTLY into two contributions.  Reported as a split rather than as a
+  reading, because "the thin cut is the mechanism" was my own prediction (P4) and a
+  prediction that scores itself is not one.
+
+   from n=9 to n=14:
+     u_M  0.968129 -> 1.070221     dlog = +0.100255
+     v_L  1.006331 -> 1.105569     dlog = +0.094049   (+93.8% of the move)
+     D    0.962038 -> 0.968028     dlog = +0.006207   (+6.2% of the move)
+     residual (should be 0): +3.61e-16
+
+     D across the searched n: 0.962038  0.971099  0.969778  0.968882  0.968373  0.968028
+     D range = 0.009061   v_L range = 0.099237
+
+     SO: THE DISCOUNT IS ESSENTIALLY FLAT AND THE RISE IS ALL v_L.
+     The champion family holds gamma/Delta^2 near-constant and pushes the
+     (L*) violation.  That REFINES the reading below rather than
+     confirming it: a small mu_pref is what distinguishes the crossing
+     witness from the non-crossing ones AT A GIVEN n -- it is why C5
+     crosses and C1/C2/C4 do not -- but it is NOT what moves the frontier
+     ACROSS n.  Two different questions, and I had predicted one answer
+     for both.
+
+  READING.  The bar is set by mu_pref, and mu_pref >= gamma, so a THIN CUT
+  lowers the bar and raises D at the same time.  A witness with a large v_L and
+  a fat gamma (C1, C2, C4: mu ~ 0.12) faces a bar near 1.06 and misses.  A
+  witness with a small mu_pref faces a bar near 1.03 and can clear it on a
+  smaller (L*) violation.  That is the mechanism, and it is why C5 -- NOT the
+  largest v_L relative to its n -- is the one that crosses.
+
+==============================================================================
+B3.4  WHAT THE DATA DOES NOT DISTINGUISH -- said plainly
+==============================================================================
+
+  1.  WHETHER THE DISJUNCTION FAILS BELOW THE SMALLEST n EXHIBITED HERE.  Nothing in
+      this tree enumerates n = 9, 10 or 11.  A search that does not find a
+      counterexample at n = 9 has said nothing about n = 9.  The last exhaustive
+      statement in the corpus is n = 8, and it is clean.
+
+  2.  WHETHER W(n) IS UNBOUNDED, OR SETTLES.  The certified figures rise, but over
+      six values of n from a search whose restart budget FALLS as n rises (30 at n=9
+      down to 8 at n=14).  A rising sequence measured with a shrinking instrument
+      cannot distinguish "W grows" from "W is flat and my search got luckier where it
+      looked harder" -- except that here the budget falls where the values RISE, which
+      is the direction that makes the rise harder to explain away, not easier.  It is
+      still not a proof of growth and this file does not claim one.
+
+  3.  WHETHER THE MECHANISM IS THE THIN CUT OR THE FAMILY.  Every certified
+      counterexample in the corpus, including C5, is height 4 or 5 with Delta within
+      2% of 1.  Five posets is not a distribution (E9).  The bar arithmetic in B3.3 is
+      an identity and holds regardless; the claim that thin cuts are the ROUTE to it
+      is a reading of five witnesses and is labelled as one.
+
