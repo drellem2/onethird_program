@@ -37,16 +37,39 @@ import lib724a as L
 # transforms
 # ---------------------------------------------------------------------------------------
 
+# THESE TWO REPLACE THE CAPTURED SPAN, NOT A SUBSTRING OF THE MATCH (mg-188d).
+#
+# They used to end `m.group(0).replace(m.group("v"), new, 1)` — a SUBSTRING REPLACE, which is
+# this file's own smell #1, in the file whose header is about `"8 9" in out` satisfying a
+# positive control for its entire life.  It replaced the first occurrence of the group's TEXT
+# anywhere in the match, not the group.  `audit.arms_not_shown` reads `\d+ not;` out of
+#
+#     VERDICT: 50 arms probed, 50 shown to discriminate, 0 not; 0 demonstrated holes ...
+#
+# so T6's flip of `0` -> `1` landed on the `0` inside `50`, mutated audit.arms_PROBED, and left
+# the field the probe is named for untouched: T6 scored HOLE.  IT WAS INVISIBLE UNTIL mg-188d
+# MOVED THE VALUES.  At mg-724a's own baseline the group was `1` and the match carried no other
+# `1` before it, so the wrong rule and the right rule agreed, on that day, on those numbers.
+# The bug was never in the probe that failed — a probe that mutates a DIFFERENT field than the
+# one it scores is a probe about nothing, and nothing said so for as long as the arithmetic
+# happened to line up.
+def _sub_group(text, pattern, new):
+    m = re.search(pattern, text, re.M)
+    if not m:
+        return text
+    s, e = m.span("v")
+    return text[:s] + new + text[e:]
+
+
 def _bump_int(text, pattern, delta=1):
-    def repl(m):
-        return m.group(0).replace(m.group("v"), str(int(m.group("v")) + delta), 1)
-    return re.sub(pattern, repl, text, count=1, flags=re.M)
+    m = re.search(pattern, text, re.M)
+    if not m:
+        return text
+    return _sub_group(text, pattern, str(int(m.group("v")) + delta))
 
 
 def _set_str(text, pattern, new):
-    def repl(m):
-        return m.group(0).replace(m.group("v"), new, 1)
-    return re.sub(pattern, repl, text, count=1, flags=re.M)
+    return _sub_group(text, pattern, new)
 
 
 WORKLIST_PAT = r"^The worklist, READ OUT OF SECTION 2 rather than typed here: (?P<v>.*)$"
@@ -109,7 +132,12 @@ TEXT_MUTATIONS = [
      "twin", lambda t: _bump_int(t, CAUGHT_PAT, -1), ("diverged", "twin.mutations_caught")),
     ("T5", "a row of the twin's negative control becomes UNFALSIFIABLE",
      "twin", lambda t: _bump_int(t, UNFALS_PAT), ("diverged", "twin.unfalsifiable_rows")),
-    ("T6", "the audit's one non-discriminating arm SILENTLY BECOMES GREEN (1 not -> 0 not)",
+    # THE LABEL NO LONGER NAMES A DIRECTION (mg-188d).  It read "(1 not -> 0 not)", which was
+    # the flip that existed on mg-724a's day; `_zero_or_one` has always flipped whichever way
+    # the observed value points, and after C3's repair the live direction is 0 -> 1.  A probe
+    # description that hardcodes a value the probe itself derives is the same expiry-dated
+    # fixture as E2 below, one severity down: wrong prose rather than a dead check.
+    ("T6", "the audit's non-discriminating-arm count moves in either direction",
      "audit", lambda t: _zero_or_one(t, NOTSHOWN_PAT), ("diverged", "audit.arms_not_shown")),
     ("T7", "the audited directory grows an arm the census did not have",
      "audit", lambda t: _bump_int(t, ARMS_PAT), ("diverged", "audit.arms")),
@@ -129,10 +157,23 @@ TEXT_MUTATIONS = [
 # Mutations of the captured EXIT STATUS rather than of the transcript.  Both runners map some
 # non-zero instrument exits onto a zero runner exit deliberately, so the status is a field to
 # be read like any other and not a classifier to be trusted.
+# THE PLANTED STATUS IS DERIVED FROM THE OBSERVED ONE, NOT TYPED (mg-188d).
+#
+# E2 read `("audit", 0)` — plant exit 0 — with its description saying "where the baseline says
+# 1".  Both halves were a bet on the audit suite staying RED, and it stayed red for exactly as
+# long as arm C3 stayed UNFALSIFIABLE.  mg-188d repaired C3, the audit runner started exiting 0,
+# and E2 came back SETUP FAILED: `the planted exit status equals the real one`.  A fixture that
+# spells out the value it expects to find is a check with an expiry date — this file's OWN rule,
+# stated at the top of it about drifted rows and pinned commits, and not applied to the two
+# lines below.  `_other_exit` returns something the runner did not return, whatever it returned.
+def _other_exit(observed):
+    return 0 if observed else 1
+
+
 EXIT_MUTATIONS = [
-    ("E1", "the twin runner's own exit status changes", "twin", 2,
+    ("E1", "the twin runner's own exit status changes", "twin", _other_exit,
      ("diverged", "twin.runner_exit")),
-    ("E2", "the audit runner exits 0 where the baseline says 1", "audit", 0,
+    ("E2", "the audit runner's own exit status changes", "audit", _other_exit,
      ("diverged", "audit.runner_exit")),
 ]
 
@@ -202,8 +243,9 @@ def run_mutations(transcripts, exits, baseline, base_rows, base_gated):
         results.append(_score(mid, what, muts, exits, baseline, base_rows, base_gated,
                               kind, target))
 
-    for mid, what, suite, newcode, (kind, target) in EXIT_MUTATIONS:
+    for mid, what, suite, plant, (kind, target) in EXIT_MUTATIONS:
         mex = dict(exits)
+        newcode = plant(mex[suite]) if callable(plant) else plant
         if mex[suite] == newcode:
             results.append((mid, what, "SETUP FAILED",
                             "the planted exit status equals the real one"))

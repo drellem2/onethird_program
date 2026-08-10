@@ -102,5 +102,18 @@ if [ "$CONTROL" -ne 0 ]; then
     echo "A runner that maps an unknown exit onto CLEAN is instance 1 of this ticket."
     exit 2
 fi
+# THE WORKLIST LINE IS PRINTED ON A CLEAN RUN TOO, AND THAT IS NOT COSMETIC (mg-188d).
+# It used to be printed ONLY in the DRIFT branch above, so the field existed exactly when
+# the twin was broken and vanished the moment it was fixed.  mg-724a's merge gate reads
+# `twin.worklist` by exactly-once anchored match — 0 matches means REFUSED — so the FIRST
+# CLEAN TWIN IN THIS PAGE'S HISTORY took the gate to `GATE VERDICT: REFUSED` (exit 2) and
+# blocked the merge with a message saying the GATE was broken rather than that the twin was
+# clean.  Measured on this branch before it was fixed, not argued.  It was NOT fail-open,
+# which is exactly why it would have survived: the merge still failed.  A gate whose
+# load-bearing field is observable only in the failing state cannot report its own success —
+# mg-e331's D4 and mg-9876's `a probe satisfied by the good input is UNFALSIFIABLE`, one
+# directory over.  `(none)` rather than an empty tail so the line cannot be mistaken for a
+# truncated one; lib724a reads that token as the EMPTY SET.
+echo "The worklist, READ OUT OF SECTION 2 rather than typed here: (none)"
 echo "CLEAN — the twin's pinned ledger rows all still match STATE.md."
 exit 0

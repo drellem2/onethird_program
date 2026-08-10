@@ -3,9 +3,9 @@ mg-9bc2 — NEGATIVE CONTROL for twin_pin.py
 ============================================================================================
 
 Each mutation is applied to a COPY.  The live tree is never written.
-The instrument's baseline verdict is DRIFT (exit 1) because ledger row(s) 8
-really have moved, so the exit code alone cannot score these; each row states
-the section that must fire and the string that must appear.
+The instrument's baseline verdict is CLEAN (exit 0): no pinned ledger row has
+moved.  Each row below states the section that must fire and the string that
+must appear.
 The drift set above is DERIVED FROM THE PIN, never typed in — see the note at the
 top of this file for the two fixtures that rotted when it was (mg-2f44).
 
@@ -26,7 +26,7 @@ the pin's `state-sha256` field is deleted outright                 3    CAUGHT  
 the pin's `columns` field is deleted outright                      1    CAUGHT   exit 2; looked for 'the pin does not record the ledger columns' (absent from the baseline)
 `Generated <date>` re-introduced BEHIND an HTML comment opener     5    CAUGHT   exit 2; looked for 'matches /\\bGenerated\\b' (absent from the baseline)
 visible provenance names the pinned commit AND a second one        6    CAUGHT   exit 2; looked for 'does not name exactly the pinned commit' (absent from the baseline)
-NO MUTATION — the baseline                                         -    CAUGHT   exit 1; worklist is EXACTLY 8 — parsed from section 2, expectation derived from the pin
+NO MUTATION — the baseline                                         -    CAUGHT   exit 0; worklist is EXACTLY (none) — parsed from section 2, expectation derived from the pin
 
 16 of 16 caught; 0 hole(s).
 0 row(s) UNFALSIFIABLE — expect string present in the unmutated report (mg-9876's guard).

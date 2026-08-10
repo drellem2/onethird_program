@@ -9,29 +9,29 @@ a defect in THIS instrument, and it is the mg-2f44 defect exactly.
 
 arm   name                                        verdict        detail
 --------------------------------------------------------------------------------------------
-C1a   pin block present                           DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+C1a   pin block present                           DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the twin carries no STATE-PIN block
-C1b   row sets agree                              DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+C1b   row sets agree                              DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: a ledger row exists in STATE.md but not in the twin
-C1c   ledger columns are pinned                   DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+C1c   ledger columns are pinned                   DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the ledger grows a sixth column, outside every pinned digest
 C2    per-row digests                             DISCRIMINATES  good exit 0 silent / bad exit 1 RED
       known-bad input: an UNDRIFTED STATE.md ledger row is edited under the pin
-C3    whole-file digest                           DISCRIMINATES  good exit 1 silent / bad exit 1 RED
+C3    whole-file digest                           DISCRIMINATES  good exit 0 silent / bad exit 0 RED
       known-bad input: STATE.md is no longer byte-identical to the pinned revision
-C3a   the pin CARRIES a whole-file digest         DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+C3a   the pin CARRIES a whole-file digest         DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the pin's `state-sha256` field is deleted outright
-C4    kind marks agree                            DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+C4    kind marks agree                            DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the twin's Kind mark for a row disagrees with STATE.md's
-C5a   banned: Generated <date>                    DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+C5a   banned: Generated <date>                    DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the twin claims `Generated <date>` again
-C5b   banned: unattributed canonicity             DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+C5b   banned: unattributed canonicity             DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the twin calls itself the source of truth
-C6a   visible provenance present                  DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+C6a   visible provenance present                  DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the visible provenance line is deleted
-C6b   visible provenance names EXACTLY the pin    DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+C6b   visible provenance names EXACTLY the pin    DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the visible provenance line names a different commit than the pin
-C6c   the pin has a commit field                  DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+C6c   the pin has a commit field                  DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the pin's `commit:` field is deleted outright
 R1    --reconcile requires --rows                 DISCRIMINATES  good exit 0 silent / bad exit 1 RED
       known-bad input: a re-pin is requested without naming any row
@@ -57,35 +57,35 @@ S2    seed commit touches both files              DISCRIMINATES  good exit 0 sil
       known-bad input: the seed commit is a ONE-SIDED edit, not a reconciliation of both files
 S3    refuse to re-seed over a pin                DISCRIMINATES  good exit 0 silent / bad exit 1 RED
       known-bad input: the twin already carries a reconciled pin and a re-seed would erase it
-N1    mutation: pin block deleted                 DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N1    mutation: pin block deleted                 DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `pin block deleted entirely` is applied
-N2    mutation: twin row deleted                  DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N2    mutation: twin row deleted                  DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `a ledger row deleted from the twin only` is applied
-N3    mutation: one char in an undrifted row      DISCRIMINATES  good exit 1 silent / bad exit 1 RED
+N3    mutation: one char in an undrifted row      DISCRIMINATES  good exit 0 silent / bad exit 1 RED
       known-bad input: the mutation `one character changed in an UNDRIFTED STATE.md ledger row (row 1)` is applied
-N4    mutation: ledger cell emptied               DISCRIMINATES  good exit 1 silent / bad exit 1 RED
+N4    mutation: ledger cell emptied               DISCRIMINATES  good exit 0 silent / bad exit 1 RED
       known-bad input: the mutation `a whole STATE.md ledger cell emptied (row 10 status)` is applied
-N5    mutation: twin kind flipped                 DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N5    mutation: twin kind flipped                 DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `twin's KIND mark for row 10 flipped FP -> U` is applied
-N6    mutation: STATE.md kind flipped             DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N6    mutation: STATE.md kind flipped             DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `STATE.md's KIND mark for row 9 flipped FP✗ -> U` is applied
-N7    mutation: Generated re-introduced           DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N7    mutation: Generated re-introduced           DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation ``Generated <date>` re-introduced into the header` is applied
-N8    mutation: canonicity re-claimed             DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N8    mutation: canonicity re-claimed             DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `the twin re-claims canonicity in the footer` is applied
-N9    mutation: visible provenance desynced       DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N9    mutation: visible provenance desynced       DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `visible provenance line points at a DIFFERENT commit than the pin` is applied
-N10   mutation: visible provenance removed        DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N10   mutation: visible provenance removed        DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `visible provenance line removed (pin becomes machine-only)` is applied
-N14   mutation: the ledger gains a column         DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N14   mutation: the ledger gains a column         DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `the ledger GAINS A COLUMN (header and every row)` is applied
-N15   mutation: state-sha256 deleted              DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N15   mutation: state-sha256 deleted              DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `the pin's `state-sha256` field is deleted outright` is applied
-N16   mutation: columns field deleted             DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N16   mutation: columns field deleted             DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `the pin's `columns` field is deleted outright` is applied
-N17   mutation: Generated behind `<!--`           DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N17   mutation: Generated behind `<!--`           DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation ``Generated <date>` re-introduced BEHIND an HTML comment opener` is applied
-N18   mutation: two commits in the visible line   DISCRIMINATES  good exit 1 silent / bad exit 2 RED
+N18   mutation: two commits in the visible line   DISCRIMINATES  good exit 0 silent / bad exit 2 RED
       known-bad input: the mutation `visible provenance names the pinned commit AND a second one` is applied
 N19   the baseline-absence guard                  DISCRIMINATES  good exit 0 silent / bad exit 1 RED
       known-bad input: a mutation's expect string is one the UNMUTATED report already prints
@@ -137,7 +137,7 @@ A hole is not a laundering and is scored separately so neither flatters the othe
   [CLOSED]  section 6 is a SUBSTRING test — a truncated pin commit passes
       arm  : C6b
       smell: substring/membership test rather than a parsed field
-      OBSERVED NOW: with the pin's commit truncated to '4fcb', section 6 says FAIL. WHAT
+      OBSERVED NOW: with the pin's commit truncated to '9dc5', section 6 says FAIL. WHAT
       WAS FOUND: the test was `pinned_commit in shown` — a membership test against the
       whole visible line — so any prefix of the displayed hash satisfied it, and so did a
       line naming the pinned commit ALONGSIDE another revision. Ticket smell #1, in the

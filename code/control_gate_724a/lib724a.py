@@ -63,9 +63,20 @@ _FIELDS = [
      r"^control verdict: VERDICT: (?P<v>[A-Z ]+?) —", str),
     # The worklist is read as a SET OF ROW IDS, not as the line's text.  `7 8` and `8 7` are
     # the same fact and must not be two verdicts.
+    #
+    # `(none)` IS THE EMPTY SET, AND THE TOKEN EXISTS SO THAT A CLEAN TWIN IS A READING RATHER
+    # THAN A REFUSAL (mg-188d).  The twin runner printed this line only in its DRIFT branch, so
+    # this field — the one this gate exists for — was observable exactly while the twin was
+    # broken.  When mg-188d reconciled ledger row 8 and the worklist became empty, the pattern
+    # matched 0 times and the gate answered `REFUSED`, blocking the merge with `the gate did not
+    # reach a decision` instead of `the twin is clean`.  The runner now prints the line on every
+    # run; this converter is the other half.  Note `sorted("".split()) == []` would have worked
+    # too and is deliberately NOT what is relied on: a line whose value is empty is
+    # indistinguishable from a truncated one, and this gate's whole method is that a field means
+    # one fact or it means nothing.
     ("twin.worklist", "twin",
      r"^The worklist, READ OUT OF SECTION 2 rather than typed here: (?P<v>.*)$",
-     lambda s: sorted(s.split())),
+     lambda s: [] if s.strip() == "(none)" else sorted(s.split())),
     ("twin.mutations_caught", "twin",
      r"^(?P<v>\d+) of \d+ caught; \d+ hole\(s\)\.$", int),
     ("twin.mutations_total", "twin",
