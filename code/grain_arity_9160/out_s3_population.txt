@@ -1,7 +1,7 @@
 ==============================================================================
 mg-9160 / S3 -- ONE ROW PER INTEGER
 ==============================================================================
-HEAD: 757f999   subject: `lib56dc.count_rows`, `lib03d1.embedded_counts`
+HEAD: 518a5e9   subject: `lib56dc.count_rows`, `lib03d1.embedded_counts`
 
 ==========================================================================
 S3a  THE REPAIRED POPULATION, AND THE SECOND COLLAPSE NOBODY COUNTED
@@ -11,7 +11,7 @@ S3a  THE REPAIRED POPULATION, AND THE SECOND COLLAPSE NOBODY COUNTED
   So a line is one row however many integers it prints.  Counting the
   population in INTEGERS instead:
 
-  population: every INTEGER printed in a count row of the reconstructed corpus
+  population: every INTEGER printed in a count row of the reconstructed corpus   @9f1ecaa+eacc5e1
       ...count ROWS the old rule returns                         1191
           ^ one unit is one printed line;  label's own noun: `return`
       ...INTEGERS in those rows, counted one at a time           2894
@@ -56,7 +56,7 @@ S3b  ATTRIBUTION -- WHICH NOUN A LABEL-INTERNAL INTEGER BELONGS TO
   So `attribute` returns BOTH neighbours and a verdict and never
   silently picks.  Census over the label-internal integers:
 
-  population: the 626 label-internal INTEGERS of the reconstructed corpus
+  population: the 626 label-internal INTEGERS of the reconstructed corpus   @9f1ecaa+eacc5e1
       ...INTEGERS whose attribution reads NEXT                     71
           ^ one unit is one integer;  label's own noun: `next`
       ...INTEGERS whose attribution reads PREV                    269
@@ -79,7 +79,7 @@ S3b  ATTRIBUTION -- WHICH NOUN A LABEL-INTERNAL INTEGER BELONGS TO
   or does not.  DESIGNED AFTER LOOKING AT THE ROWS IT SEPARATES, which
   is said here so a reader can discount it.
 
-  population: the same 626 label-internal INTEGERS, by the SHAPE of their row
+  population: the same 626 label-internal INTEGERS, by the SHAPE of their row   @9f1ecaa+eacc5e1
       ...INTEGERS in rows of shape NOUN-VALUE                      48
           ^ one unit is one integer;  label's own noun: `integer`
       ...INTEGERS in rows of shape VALUE-NOUN                     185
@@ -131,7 +131,7 @@ S3c  AF2's FIVE ROWS, RE-READ -- THE COUNT STANDS, FOUR DETAIL LINES DO NOT
           14     parent says `sites     `   the label reads `rows      `  <-- one column right
           12     parent says `gap       `   the label reads `sites     `  <-- one column right
 
-  population: the 5 ROWS of AF2, re-read one integer at a time
+  population: the 5 ROWS of AF2, re-read one integer at a time   @518a5e9
       ...INTEGERS the parent's detail lines name one column right        8
           ^ one unit is one integer;  label's own noun: `right`
 

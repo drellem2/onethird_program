@@ -1,0 +1,122 @@
+==============================================================================
+mg-2ff6 / D2 -- THE SCORE, BY cfd9c's OWN CHECKER
+==============================================================================
+HEAD: 518a5e9
+
+==========================================================================
+D2a  THE BEFORE, FROM cfd9c's OWN COMMITTED TRANSCRIPT
+==========================================================================
+
+  population: the S4c block of `corpus_fixedpoint_fd9c/out_s4_convention.txt`, as committed   @5c0849a
+      ...ARC-WIDE FIGURES S4c found, AS COMMITTED                    27
+      ^ one unit of that number is one printed count row
+      ...of them DATED, AS COMMITTED                                  0
+      ^ one unit of that number is one printed count row
+
+  THAT TRANSCRIPT IS NOT RE-RUN BY THIS TICKET AND MUST NOT BE.  It is
+  the BEFORE reading of the score I am about to move; a probe of mine
+  that regenerated it would have erased its own control.  cfd9c's suite
+  is left exactly as committed.
+
+==========================================================================
+D2b  THE AFTER, FROM A LIVE RUN OF THE SAME FILE
+==========================================================================
+
+  `python3 -B s4_convention.py`, run in cfd9c's own directory, exit 0.
+  Its output is not edited here; the two numbers below are read off it
+  with one regex and nothing else decides them.
+
+  population: the S4c block of a live run of `s4_convention.py`   @518a5e9
+      ...ARC-WIDE FIGURES S4c found in the arc                       40
+      ^ one unit of that number is one printed count row
+      ...of them carrying a DATED population line                    35
+      ^ one unit of that number is one printed count row
+
+  AND cfd9c's OWN TREE, which the same run scores in the same way:
+
+  population: the S4c block for cfd9c's own transcripts, live   @518a5e9
+      ...ARC-WIDE FIGURES in cfd9c's own tree                         5
+      ^ one unit of that number is one printed count row
+      ...of them DATED, in cfd9c's own tree                           5
+      ^ one unit of that number is one printed count row
+
+      the arc's DATED count rose across this ticket             yes
+
+==========================================================================
+D2c  THE PER-TREE TABLE, BOTH READINGS
+==========================================================================
+
+  S4c prints its own per-tree split.  Both readings are its own; the
+  only arithmetic here is the subtraction in the last column.
+
+  population: every TREE S4c names in either reading   @518a5e9
+      tree                                        at 5c0849a           now
+      dated_population_2ff6                         0/0          13/13       +13 dated
+      grain_arity_9160                              0/4           4/4        +4 dated
+      grain_axis_audit_03d1                         0/18         18/18       +18 dated
+      runner_exit_audit_56dc                        0/1           0/1        
+      runner_exit_repair_70c7                       0/2           0/2        
+      runner_exit_repair_bf79                       0/1           0/1        
+      state_relocation_audit_b0ae                   0/1           0/1        
+      ^ each cell is DATED/FOUND, one unit of each is one count row
+
+  AND THE TOTAL ROSE ON BOTH SIDES, WHICH IS MY OWN E3 ARRIVING IN MY
+  OWN NUMBER.  This tree's transcripts are `code/*/out_*.txt` too, so
+  the moment they exist S4c finds arc-wide figures in THEM -- all of
+  them dated, because every population line here is printed by a
+  function that has no form omitting the ref.  So `27` is not the
+  denominator any more.  Both readings, and the reader should have
+  both:
+
+  population: the same rule, with this ticket's own tree taken out of the corpus   @518a5e9
+      ...ARC-WIDE FIGURES in the arc EXCLUDING this tree             27
+      ^ one unit of that number is one printed count row
+      ...of them DATED, EXCLUDING this tree                          22
+      ^ one unit of that number is one printed count row
+      ...ARC-WIDE FIGURES this ticket's own tree ADDED               13
+      ^ one unit of that number is one printed count row
+      ...of those, DATED                                             13
+      ^ one unit of that number is one printed count row
+
+==========================================================================
+D2d  THE FIVE I DID NOT TOUCH, AND WHY 27 WAS NEVER THE TARGET
+==========================================================================
+
+  S4c says so in its own text, and it is worth quoting because my
+  ticket's title does not:
+
+        AND IT OVER-COLLECTS, DELIBERATELY.  This is a rule about the LABEL,
+        so a PER-TREE census whose label happens to say `in the corpus` is
+        flagged too.  That is the safe direction -- every figure it flags
+        really is undated -- but it means the total below is an UPPER BOUND
+        on arc-wide figures and must not be used to rescue P4, which named a
+        population before seeing this one.  S5a refuses that rescue by name.
+
+  So `27` is an UPPER BOUND on arc-wide figures, and the five outside
+  the two trees this ticket is scoped to are, by their own labels:
+
+  population: the count ROWS S4c flags outside `grain_axis_audit_03d1` and `grain_arity_9160`   @518a5e9
+      runner_exit_audit_56dc/out_t1_grain.txt      printed count ROWS in them         50
+      runner_exit_repair_70c7/out_r2_anchor.txt    transcripts in the corpus          13
+      runner_exit_repair_70c7/out_r6_self.txt      transcripts in the corpus          13
+      runner_exit_repair_bf79/out_p5_self.txt      count ROWS in them                 0
+      state_relocation_audit_b0ae/out_b5_ids.txt   CONTROL invented ids found in the  0
+      ...FLAGGED ROWS outside the two trees in scope                  5
+      ^ one unit of that number is one printed count row
+
+  READ THE LABELS.  `transcripts in the corpus` is a THIRTEEN-file
+  per-tree census; `CONTROL invented ids found in the corpus` is a
+  control that is meant to read 0; `count ROWS in them` in
+  `out_p5_self.txt` is a tree counting its OWN rows.  Not one of them
+  is a figure about the arc-wide corpus.  They are flagged because
+  S4c's selector is a rule about the LABEL, which is the safe
+  direction and which S4c says it is.
+
+FINDING: D2 THE ARC'S DATED COUNT MOVED 0 -> 35 OF 40 BY cfd9c's OWN
+         CHECKER, RUN AND NOT RESPECIFIED.  The residue is 5 rows in four trees
+         this ticket is not scoped to, and every one of them is a PER-TREE census
+         or a control that S4c's label rule over-collects -- so the honest arc-wide
+         total is 35 and not 40, and finishing at 40 of 40 would have meant editing
+         four more trees to make a checker print a rounder number.
+
+D2 TOTAL BAD: 0

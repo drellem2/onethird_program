@@ -19,7 +19,7 @@ of something I had already looked up.
 | **A1a** | `rows`/`basenames`/`sites`/`lines`/`files`/`items`/`members`/`columns` → `SITE`; `executions`/`runs`/`invocations`/`iterations` → `EXECUTION`. **12 of 12** | **HIT** — 12 of 12, by running `_classify` rather than reading `SITE_WORDS`. The addendum asked for the run and this is the run |
 | **A1b** | 4 output symbols from 2 boolean tests; **exactly one** grain distinction expressible; every within-vocabulary distinction inexpressible **by construction** | **HIT** — 4 symbols reached by probe strings, 2 membership tests in the body. This is the finding the rest of A1 measures the size of |
 | **A1c** | over the classifier's own 43 vocabulary words: **903** pairs, **280** told apart, **623** collapsed | **HIT — 903 / 280 / 623 exactly.** `rows`/`sites` is one member of a 623-member class, which is why a word-list fix repairs one defect's width again |
-| **A1d** | ≥ **60** distinct grain words in the corpus; classifier collapses **≥ 93%** of the distinctions that occur | **PART HIT, PART MISS.** **400 distinct grain words over 1191 count rows in 517 transcripts — HIT, nearly seven times the floor.** **93% — MISS, it is 86.0%.** And the reason is mine: the metric I pre-registered counts a `SITE`/`NONE` pair as *told apart*, and `NONE` is not a grain — it is *I have no word for this label*. The stricter reading, over only the 30 words it has an entry for, is printed beside it and gives 76.1%. **The generous metric is the pre-registered one and it missed; the strict one does not rescue it** |
+| **A1d** | ≥ **60** distinct grain words in the corpus; classifier collapses **≥ 93%** of the distinctions that occur | **PART HIT, PART MISS.** **400 distinct grain words over 1191 count rows in 517 transcripts [pop `@9f1ecaa+eacc5e1`, OBSERVED] — HIT, nearly seven times the floor.** **93% — MISS, it is 86.0%.** And the reason is mine: the metric I pre-registered counts a `SITE`/`NONE` pair as *told apart*, and `NONE` is not a grain — it is *I have no word for this label*. The stricter reading, over only the 30 words it has an entry for, is printed beside it and gives 76.1%. **The generous metric is the pre-registered one and it missed; the strict one does not rescue it** |
 | **A1e** | of the 6 grain axes that occur in this corpus, the classifier expresses **exactly 1** and collapses 5, with **both poles in `SITE_WORDS`** for each collapse | **MISS — 3 of 6 expressible, 3 collapsed.** Two of the three "expressible" are expressible only because one pole classifies **`NONE`** (`species`, `names` are not words it knows), which is *absence of a word*, not a distinction drawn. Counted that way it is **1 of 6**, and that count is **post hoc and printed as such**. The pre-registered figure was 1 against a metric that gives 3 |
 | **A1f** | *the one I most expected to be refuted* — **≥ 1 and ≤ 6** word pairs at the SAME grain split across the two vocabularies, so the classifier asserts a distinction the words do not carry | **HIT — 2 of 5 adjudicated candidates.** `steps`/`iterations` and `commands`/`invocations`. Adjudicated by hand with the reasoning printed, because there is no mechanical test for *same grain* and pretending there is would be this arc's own defect |
 | **A2a** | re-running P1f's logic reproduces **2 summed, 1 before and 1 after** | **HIT** — re-derived against `lib56dc` directly rather than read off the parent's transcript |
@@ -39,7 +39,7 @@ of something I had already looked up.
 | **A5a** | the fix **distinguishes** the two revisions rather than re-syncing them: both derived, both printed, each used for its own question | **HIT — 4 of 4 structural checks.** The one that settles it is that a mismatch is declared **expected and not scored**; a re-sync would go red the next time anything republished the transcript |
 | **A5b** | the four artifacts state *the revision this figure is a fact about* and do not claim to name a publishing commit | **HIT — 4 of 4** |
 | **A5c** | *the one I expected to be closest* — the two revisions **currently differ** for ≥ 1 artifact, so the distinction is load-bearing at HEAD | **HIT** — pinned `973ca61`, publishing commit `eab14bc`. They differ now, so the fix is doing work rather than waiting to |
-| **AFa** | ≥ **200** count rows arc-wide carry an unclassified second count inside the label | **HIT — 246 rows, 626 integers** across 517 transcripts. `every printed count` is short by 626 |
+| **AFa** | ≥ **200** count rows arc-wide carry an unclassified second count inside the label | **HIT — 246 rows, 626 integers** across 517 transcripts [pop `@9f1ecaa+eacc5e1`, OBSERVED]. `every printed count` is short by 626 |
 | **AFb** | between **3 and 40** such rows in the parent's own six transcripts | **HIT — 8** |
 | **AFc** | **≥ 1** row whose embedded count is at a different grain from the row's own | **HIT — 5, and four of them are in `out_p1_grain.txt`** — the parent's own two-grain table, which is the instrument it correctly identifies as the honest one for O1. One line, two grains, one grain symbol |
 | **AFd** | this is **not** the parent's defect #5, and its `p5_self.py` reports **0** findings of the AF shape, because its population is `count_rows` too | **HIT** — by construction and by absence. #5 is a *classified* row the classifier cannot resolve; AF is a count that is **never classified**. A self-check inherits the population rule of the check it applies, so the one thing it cannot find is a defect **of that rule** |
@@ -95,3 +95,39 @@ Repairing `_classify` would not reach a single one of them.
 * **`singular('species') == 'specy'`.** My own de-pluraliser is crude; the
   self-test asserts the wrong answer rather than deleting the case, so the
   crudeness stays visible to a reader of `out_selftest_03d1.txt`.
+
+---
+
+## `[pop @…]` — WHAT THE MARKER ON A CORPUS FIGURE MEANS  (mg-2ff6)
+
+Every arc-wide corpus figure in this file now carries the **population it was
+taken under**, in the three classes `libfd9c.state_of` assigns from two
+booleans (mg-fd9c/S4a):
+
+- **FROZEN** — the population is a ref. The figure is a constant, and a re-run
+  reproduces it byte for byte, forever.
+- **GROWING** — the population is the arc's disk glob. The figure is a
+  measurement dated by a commit; it moves whenever anything lands.
+- **OBSERVED** — GROWING, and the population contains the observer, so the
+  reading also depends on whether the observer's own transcripts were on disk
+  when the census ran. The honest published form is an interval of known
+  width, and that width is *not* a statistical error bar — it is the two
+  readings the apparatus admits.
+
+`@9f1ecaa+eacc5e1` is a **union of two refs** and not a typo. mg-03d1 globbed
+the disk, and on the run that writes them a tree's own transcripts are
+untracked — so the corpus its figures range over is everything tracked at
+`9f1ecaa` *plus* mg-03d1's own seven transcripts as published at `eacc5e1`,
+and neither ref alone reproduces it (mg-9160/S1b). A figure marked OBSERVED
+here was taken against that disk; the same figure re-read *through* those two
+refs is FROZEN, which is why the same number carries different classes in
+different files.
+
+**THE FIGURES ABOVE ARE NOT REFRESHED, AND MUST NOT BE.** They are what was
+claimed. The same rules at today's HEAD give very different answers, and
+mg-fd9c/S2d walked every first-parent commit of this branch that touches a
+transcript and found mg-03d1's `517 / 1191` was the right answer at **none**
+of them. Refreshing these in place would erase the record of what was claimed;
+dating them is the repair. What the same rules give now is published, with its
+own date, in `code/dated_population_2ff6/out_d1_moved.txt` — not here, because
+a number in prose is a number nobody can re-run.

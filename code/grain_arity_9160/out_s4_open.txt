@@ -1,7 +1,7 @@
 ==============================================================================
 mg-9160 / S4 -- THE OPEN SET AND ITS PRICE
 ==============================================================================
-HEAD: 757f999
+HEAD: 518a5e9
 
 ==========================================================================
 S4a  THE OPEN-SET CLASSIFIER OVER THE CORPUS
@@ -12,7 +12,7 @@ S4a  THE OPEN-SET CLASSIFIER OVER THE CORPUS
   is not a symbol meaning `this label has no grain` -- it is `NO-NOUN`
   carrying the label that defeated the extractor.
 
-  population: every count ROW of the reconstructed corpus
+  population: every count ROW of the reconstructed corpus   @9f1ecaa+eacc5e1
       ...count ROWS given a grain NOUN of their own              1145
           ^ one unit is one printed line;  label's own noun: `noun`
       ...count ROWS the extractor cannot read a noun from          46
@@ -125,7 +125,7 @@ S4b  ITS PRICE -- P4, PREDICTED BEFORE THE FUNCTION EXISTED
       step / iteration         SITE/EXEC      step/itera     *** FALSE DISTINCTION
       command / invocation     SITE/EXEC      comma/invoc    *** FALSE DISTINCTION
 
-  population: the 2 word PAIRS A1f adjudicated as ONE grain
+  population: the 2 word PAIRS A1f adjudicated as ONE grain   @518a5e9
       ...PAIRS `_classify` wrongly splits                           2
           ^ one unit is one adjudicated pair;  label's own noun: `split`
       ...PAIRS the open-set classifier wrongly splits               2
@@ -163,7 +163,7 @@ S4c  THE SCOREBOARD, ON THE ONLY 11 PAIRS THIS ARC HAS ADJUDICATED
       mention / name         DIFFERENT DIFF         DIFF       one pole is NONE
       site / execution       DIFFERENT DIFF         DIFF       
 
-  population: the 11 word PAIRS this arc has adjudicated, in A1e and A1f
+  population: the 11 word PAIRS this arc has adjudicated, in A1e and A1f   @518a5e9
       ...PAIRS `_classify` gets right                               6
           ^ one unit is one adjudicated pair;  label's own noun: `right`
       ...of those, PAIRS right only because one pole is NONE        2
@@ -185,7 +185,11 @@ S4d  THE THIRD VERDICT, AND WHY NO ARITY CARRIES IT
   Both instruments above answer all 79800 pairs.  The arc has adjudicated
   7 of them.  `verdict` returns the third value at the rest:
 
-  population: the unordered PAIRS of the corpus's 400 grain NOUNS
+  CLASS, from `libfd9c.state_of` -- two booleans and nothing
+  else: is the population a REF, and is the observer IN it.
+
+      the reconstructed corpus's grain-noun PAIRS        FROZEN    @9f1ecaa+eacc5e1
+  population: the unordered PAIRS of the corpus's 400 grain NOUNS   @9f1ecaa+eacc5e1
       ...PAIRS in the corpus vocabulary                         79800
           ^ one unit is one pair of grain nouns;  label's own noun: `pair`
       ...PAIRS this arc has ADJUDICATED                             7

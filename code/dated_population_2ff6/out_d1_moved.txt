@@ -1,0 +1,297 @@
+==============================================================================
+mg-2ff6 / D1 -- WHICH FIGURE MOVED, AND BY HOW MUCH
+==============================================================================
+HEAD: 518a5e9   published-from: 5c0849a
+
+==========================================================================
+D1a  THE ROLL
+==========================================================================
+
+  Every count row of every transcript this ticket re-runs, keyed by
+  (section, label, ordinal) and compared with its published text.  The
+  `arc` column is cfd9c's own selector, lifted from `s4_convention.py`
+  rather than re-typed: `*` is a row S4c counts as an arc-wide corpus
+  figure.  Rows without it are here because they are in the same
+  transcript, not because anyone claimed they were arc-wide.
+
+  population: every count ROW of `grain_axis_audit_03d1/out_a1_axes.txt`, at 5c0849a and now   @518a5e9
+      arc figure                                                published        now     delta
+          ...probe WORDS classifying as pre-registered                 12         12        +0
+          distinct output WORDS `_classify` can return                  4          4        +0
+          ...boolean CHECKS the body performs                           2          2        +0
+          ...vocabulary WORDS in SITE_WORDS                            35         35        +0
+          ...vocabulary WORDS in EXEC_WORDS                             8          8        +0
+          ...unordered PAIRS over those words                         903        903        +0
+          ...PAIRS of those WORDS it tells apart (cross-list)         280        280        +0
+          ...PAIRS of those WORDS it collapses (within-list)          623        623        +0
+      *   ...ARTIFACTS in that corpus                                 517        854      +337   MOVED
+      *   ...count ROWS in them                                      1191       2233     +1042   MOVED
+      *   ...distinct grain WORDS extracted from their labels         400        638      +238   MOVED
+      *   ...of those grain WORDS classifying SITE                     26         35        +9   MOVED
+      *   ...of those grain WORDS classifying EXECUTION                 4          5        +1   MOVED
+      *   ...of those grain WORDS classifying BOTH                      0          0        +0
+      *   ...of those grain WORDS classifying NONE                    370        598      +228   MOVED
+      *   ...unordered PAIRS of grain words in the corpus           79800     203203   +123403   MOVED
+      *   ...PAIRS of grain WORDS it can tell apart                 11204      24095    +12891   MOVED
+      *   ...PAIRS of grain WORDS it collapses                      68596     179108   +110512   MOVED
+      *   ...unordered PAIRS over those grain words                   435        780      +345   MOVED
+      *   ...PAIRS of grain WORDS it genuinely tells apart            104        175       +71   MOVED
+      *   ...AXES of grain WORDS it can express                         3          3        +0
+      *   ...AXES of grain WORDS it collapses                           3          3        +0
+      *   ...AXES separated by two known grain WORDS                    1          1        +0
+          ...PAIRS asserting a distinction not in the words             2          2        +0
+
+  population: every count ROW of `grain_axis_audit_03d1/out_a6_self.txt`, at 5c0849a and now   @518a5e9
+      arc figure                                                published        now     delta
+      *   ...ARTIFACTS in that corpus                                 517        854      +337   MOVED
+          ...count ROWS `lib56dc.count_rows` returns                 1191       2233     +1042   MOVED
+          ...ROWS carrying a count INSIDE the label                   246        576      +330   MOVED
+          ...integer ITEMS inside labels, never classified            626       1441      +815   MOVED
+          ROWS in species_audit_73df                                   50         50        +0
+          ROWS in branching_af28                                       26         26        +0
+          ROWS in face_geometry_audit_0b07                             23         23        +0
+          ROWS in runner_exit_audit_56dc                               17          -             DROPPED
+          ROWS in hodge_leverage_audit_86a3                            12          -             DROPPED
+          ROWS in face_geometry_audit_1c80                             11          -             DROPPED
+          ROWS in state_audit_6a2f                                     10          -             DROPPED
+          ROWS in branching_bound_audit_aaf4                            9          -             DROPPED
+          ...ROWS whose two counts are at DIFFERENT grains              5          7        +2   MOVED
+          ...ROWS of the parent's own carrying an uncounted co          8          8        +0
+          ...DEFECT ITEMS of this instrument recorded                   7          7        +0
+          ...ARTIFACTS of mine on disk                                  7          7        +0
+      *   ...count ROWS in them                                       123        123        +0
+          ...ROWS NOT carrying a grain word on their own label          0          0        +0
+          ...PROSE ARTIFACTS of mine                                    3          3        +0
+      *   ...count ROWS in them (#2)                                    0          0        +0
+          ...ROWS NOT at stage `label`                                  0          0        +0
+          ROWS in audit_5cba                                            -         68             ADDED
+          ROWS in sweep_loss_51f4                                       -         60             ADDED
+          ROWS in chain_iv_audit_00b3                                   -         37             ADDED
+          ROWS in lstar_789d                                            -         27             ADDED
+          ROWS in corpus_fixedpoint_fd9c                                -         19             ADDED
+
+  population: every count ROW of `grain_arity_9160/out_selftest_9160.txt`, at 5c0849a and now   @518a5e9
+      arc figure                                                published        now     delta
+
+  population: every count ROW of `grain_arity_9160/out_s1_reproduce.txt`, at 5c0849a and now   @518a5e9
+      arc figure                                                published        now     delta
+          ...vocabulary WORDS in SITE_WORDS                            35         35        +0
+          ...vocabulary WORDS in EXEC_WORDS                             8          8        +0
+          ...unordered PAIRS over those words                         903        903        +0
+          ...PAIRS of those WORDS it tells apart                      280        280        +0
+          ...PAIRS of those WORDS it collapses                        623        623        +0
+          reconstructed: 9f1ecaa + mg-03d1's own               517 1191 246 626 400 517 1191 246 626 400 +0 +0 +0 +0 +0
+          the index at 9f1ecaa alone                           510 1068 246 626 363 510 1068 246 626 363 +0 +0 +0 +0 +0
+      *   the disk at HEAD now                                 818 1984 458 1198 589 854 2233 576 1441 638 +36 +249 +118 +243 +49   MOVED
+          mg-03d1 PRINTED                                      517 1191 246 626 400 517 1191 246 626 400 +0 +0 +0 +0 +0
+          ...corpus VIEWS reproducing all 5 printed FIGURES             1          1        +0
+          ...count ROWS resolved at stage `label`                     505        505        +0
+          ...count ROWS resolved at stage `prev`                      219        219        +0
+          ...count ROWS resolved at stage `header`                    154        154        +0
+          ...count ROWS resolved at stage `-`                         313        313        +0
+          ...count ROWS whose grain reads SITE                        817        817        +0
+          ...count ROWS whose grain reads EXECUTION                    42         42        +0
+          ...count ROWS whose grain reads BOTH                         19         19        +0
+          ...count ROWS whose grain reads NONE                        313        313        +0
+
+  population: every count ROW of `grain_arity_9160/out_s2_arity.txt`, at 5c0849a and now   @518a5e9
+      arc figure                                                published        now     delta
+          ...PAIRS the best four-valued function still collaps        210        210        +0
+          ...PAIRS the best four-valued function tells apart          693        693        +0
+          ...PAIRS that assignment collapses                          210        210        +0
+          ...PAIRS `_classify` actually collapses                     623        623        +0
+          ...PAIRS forced by four-valuedness alone                    210        210        +0
+          ...PAIRS attributable to the WORD LISTS                     413        413        +0
+      *   ...distinct grain WORDS in the corpus                       400        400        +0
+          ...unordered PAIRS over them                              79800      79800        +0
+          ...PAIRS `_classify` collapses                            68596      68596        +0
+          ...PAIRS forced by four-valuedness alone                  19800      19800        +0
+          ...PAIRS attributable to the WORD LISTS                   48796      48796        +0
+      *   ...grain WORDS the six axes name                             11         11        +0
+          ...AXES to be separated                                       6          6        +0
+          ...VALUES a classifier needs to separate all six              2          2        +0
+          ...AXES `_classify` separates                                 3          3        +0
+          ...AXES the two-valued exhibit separates                      6          6        +0
+
+  population: every count ROW of `grain_arity_9160/out_s3_population.txt`, at 5c0849a and now   @518a5e9
+      arc figure                                                published        now     delta
+          ...count ROWS the old rule returns                         1191       1191        +0
+          ...INTEGERS in those rows, counted one at a time           2894       2894        +0
+          ...INTEGERS the old rule returns as values                 2268       2268        +0
+          ...INTEGERS inside labels, in no population at all          626        626        +0
+          ...INTEGERS SHARING one grain with a neighbour             1481       1481        +0
+          ...ROWS outside it, across 10 distinct basenames             14         14        +0
+          973ca61 ALL rows   ROWS  49  SITES  47  GAP                   2          2        +0
+          ...INTEGERS whose attribution reads NEXT                     71         71        +0
+          ...INTEGERS whose attribution reads PREV                    269        269        +0
+          ...INTEGERS whose attribution reads AMBIGUOUS               286        286        +0
+          ...INTEGERS whose attribution reads NEITHER                   0          0        +0
+          of the  357 it does name, the attribution is UNRESOL        286        286        +0
+          ...INTEGERS in rows of shape NOUN-VALUE                      48         48        +0
+          ...INTEGERS in rows of shape VALUE-NOUN                     185        185        +0
+          ...INTEGERS in rows of shape UNDETERMINED                   393        393        +0
+          ...INTEGERS the parent's detail lines name one colum          8          8        +0
+
+  population: every count ROW of `grain_arity_9160/out_s4_open.txt`, at 5c0849a and now   @518a5e9
+      arc figure                                                published        now     delta
+          ...count ROWS given a grain NOUN of their own              1145       1145        +0
+          ...count ROWS the extractor cannot read a noun from          46         46        +0
+          ...distinct grain NOUNS that value set contains             368        368        +0
+          ...distinct grain NOUNS the corpus labels contain           400        400        +0
+          ...grain NOUNS `_classify` answers SITE                      26         26        +0
+          ...grain NOUNS `_classify` answers EXECUTION                  4          4        +0
+          ...grain NOUNS `_classify` answers BOTH                       0          0        +0
+          ...grain NOUNS `_classify` answers NONE                     370        370        +0
+          ...PAIRS `_classify` wrongly splits                           2          2        +0
+          ...PAIRS the open-set classifier wrongly splits               2          2        +0
+          ...PAIRS `_classify` gets right                               6          6        +0
+          ...of those, PAIRS right only because one pole is NO          2          2        +0
+          ...PAIRS the open-set classifier gets right                   9          9        +0
+      *   ...PAIRS in the corpus vocabulary                         79800      79800        +0
+          ...PAIRS this arc has ADJUDICATED                             7          7        +0
+          ...PAIRS answered UNADJUDICATED                           79793      79793        +0
+          ...PAIRS `_classify` answers with a definite verdict      79800      79800        +0
+          ...PAIRS the open-set classifier answers definitely       79800      79800        +0
+
+  population: every count ROW of `grain_arity_9160/out_s5_self.txt`, at 5c0849a and now   @518a5e9
+      arc figure                                                published        now     delta
+          ...BETS scored HIT                                            6          6        +0
+          ...BETS scored SPLIT                                          1          1        +0
+          ...BETS scored MISS                                           1          1        +0
+          ...DEFECT ITEMS recorded                                      6          6        +0
+          ...STATEMENTS in the body                                     1          1        +0
+          ...of those, STATEMENTS that DELEGATE the figure RUL          1          1        +0
+
+==========================================================================
+D1b  THE SUMMARY, AND THE SPLIT THAT MATTERS
+==========================================================================
+
+  Two things are being counted and they are not the same thing.  A
+  figure that MOVED is one the arc's growth changed.  A figure that is
+  SAME was undated and is now dated, and its value never depended on
+  the arc at all -- it is FROZEN, and the convention's whole job is to
+  make that visible without a reader re-running anything.
+
+  population: every count ROW of the 8 TRANSCRIPTS re-run by this ticket   @518a5e9
+      ...FIGURES in them                                            124
+      ^ one unit of that number is one printed count row
+      ...of them that MOVED                                          17
+      ^ one unit of that number is one printed count row
+      ...of them UNCHANGED -- dated, not recomputed                  97
+      ^ one unit of that number is one printed count row
+      ...FIGURES ADDED by this ticket                                 5
+      ^ one unit of that number is one printed count row
+      ...FIGURES DROPPED by this ticket                               5
+      ^ one unit of that number is one printed count row
+      ...of those ADDED or DROPPED that are ARC-WIDE                  0
+      ^ one unit of that number is one printed count row
+
+  THE ADDED AND DROPPED ROWS ARE NOT MINE, AND THE CHECK THAT SAYS SO
+  IS D0g: every line this ticket adds to another tree's transcript --
+  the `population:` line, the CLASS line, the interval block -- is put
+  through `lib56dc.count_rows` there and returns nothing.  They end in
+  a ref or a bracket, and `_COUNT_ROW` requires digits at the end of
+  the line.
+
+  WHAT THEY ARE IS WORSE THAN A FIGURE MOVING, AND NO CONVENTION
+  THAT DATES VALUES CATCHES IT.  `a6_self.py`/AF2 prints ONE ROW
+  PER TREE that carries an uncounted count, so the ROW SET of that
+  table is itself a function of the corpus.  Trees left it and
+  trees joined it, and a reader diffing the two transcripts by
+  value would find rows with no counterpart on the other side:
+
+      DROPPED  grain_axis_audit_03d1/out_a6_self.txt    ROWS in runner_exit_audit_ 17
+      DROPPED  grain_axis_audit_03d1/out_a6_self.txt    ROWS in hodge_leverage_aud 12
+      DROPPED  grain_axis_audit_03d1/out_a6_self.txt    ROWS in face_geometry_audi 11
+      DROPPED  grain_axis_audit_03d1/out_a6_self.txt    ROWS in state_audit_6a2f   10
+      DROPPED  grain_axis_audit_03d1/out_a6_self.txt    ROWS in branching_bound_au 9
+      ADDED    grain_axis_audit_03d1/out_a6_self.txt    ROWS in audit_5cba         68
+      ADDED    grain_axis_audit_03d1/out_a6_self.txt    ROWS in sweep_loss_51f4    60
+      ADDED    grain_axis_audit_03d1/out_a6_self.txt    ROWS in chain_iv_audit_00b 37
+      ADDED    grain_axis_audit_03d1/out_a6_self.txt    ROWS in lstar_789d         27
+      ADDED    grain_axis_audit_03d1/out_a6_self.txt    ROWS in corpus_fixedpoint_ 19
+
+FINDING: D1b A PUBLISHED TABLE IN THIS ARC HAS A POPULATION-DEPENDENT ROW
+         SET, not merely population-dependent values: 5 rows left
+         `out_a6_self.txt`'s per-tree table and 5 joined it between 5c0849a and
+         this run, and NONE of them is arc-wide by S4c's selector, so the
+         convention this ticket adopts does not reach them.  Dating a value does
+         not date a MEMBERSHIP.
+
+==========================================================================
+D1c  THE ARC-WIDE SUBSET, WITH ITS CLASS
+==========================================================================
+
+  The rows S4c's selector flags, and what happened to each.  The class
+  is not read off the value -- it is read off the POPULATION LINE the
+  probe now prints above the figure, which is the only place it could
+  honestly come from.
+
+  population: the count ROWS above that cfd9c's `CORPUS_LABEL` selects   @518a5e9
+      figure                                         published       now
+      grain_axis_audit / ...ARTIFACTS in that corpus       517       854   MOVED
+      grain_axis_audit / ...count ROWS in them            1191      2233   MOVED
+      grain_axis_audit / ...distinct grain WORDS ext       400       638   MOVED
+      grain_axis_audit / ...of those grain WORDS cla        26        35   MOVED
+      grain_axis_audit / ...of those grain WORDS cla         4         5   MOVED
+      grain_axis_audit / ...of those grain WORDS cla         0         0   FROZEN or unaffected
+      grain_axis_audit / ...of those grain WORDS cla       370       598   MOVED
+      grain_axis_audit / ...unordered PAIRS of grain     79800    203203   MOVED
+      grain_axis_audit / ...PAIRS of grain WORDS it      11204     24095   MOVED
+      grain_axis_audit / ...PAIRS of grain WORDS it      68596    179108   MOVED
+      grain_axis_audit / ...unordered PAIRS over tho       435       780   MOVED
+      grain_axis_audit / ...PAIRS of grain WORDS it        104       175   MOVED
+      grain_axis_audit / ...AXES of grain WORDS it c         3         3   FROZEN or unaffected
+      grain_axis_audit / ...AXES of grain WORDS it c         3         3   FROZEN or unaffected
+      grain_axis_audit / ...AXES separated by two kn         1         1   FROZEN or unaffected
+      grain_axis_audit / ...ARTIFACTS in that corpus       517       854   MOVED
+      grain_axis_audit / ...count ROWS in them             123       123   FROZEN or unaffected
+      grain_axis_audit / ...count ROWS in them               0         0   FROZEN or unaffected
+      grain_arity_9160 / the disk at HEAD now        818 1984 458 1198 589 854 2233 576 1441 638   MOVED
+      grain_arity_9160 / ...distinct grain WORDS in        400       400   FROZEN or unaffected
+      grain_arity_9160 / ...grain WORDS the six axes        11        11   FROZEN or unaffected
+      grain_arity_9160 / ...PAIRS in the corpus voca     79800     79800   FROZEN or unaffected
+
+      ...ARC-WIDE FIGURES in the re-run transcripts                  22
+      ^ one unit of that number is one printed count row
+      ...of those ARC-WIDE FIGURES that MOVED                        13
+      ^ one unit of that number is one printed count row
+
+FINDING: D1 THIS TICKET MOVED 17 PUBLISHED FIGURES ACROSS 8 TRANSCRIPTS IN
+         TWO TREES, 13 of them arc-wide corpus figures.  The remaining 9 arc-wide
+         figures DID NOT MOVE, and not because they are fresh: their population is
+         a REF and not the disk, so they were never stale, only undated.  A ticket
+         that had `refreshed the stale figures` would have changed 9 numbers that
+         are constants and called it a repair.
+
+==========================================================================
+D1d  WHAT THIS TICKET DID NOT RE-RUN
+==========================================================================
+
+  Named rather than omitted, because a silent cap reads as coverage.
+
+  population: every `out_*.txt` of the two trees this ticket edits   @518a5e9
+      ...TRANSCRIPTS in those two trees                              13
+      ^ one unit of that number is one transcript file
+      ...of them RE-RUN by this ticket                                8
+      ^ one unit of that number is one transcript file
+      ...LEFT AT THEIR PUBLISHED BYTES                                5
+      ^ one unit of that number is one transcript file
+
+      code/grain_axis_audit_03d1/out_a2_blindspot.txt
+      code/grain_axis_audit_03d1/out_a3_ledger.txt
+      code/grain_axis_audit_03d1/out_a4_sweep.txt
+      code/grain_axis_audit_03d1/out_a5_pin.txt
+      code/grain_axis_audit_03d1/out_selftest_03d1.txt
+
+  WHY, AND IT IS NOT `THEY DO NOT MATTER`.  None of them prints a row
+  cfd9c's selector flags, so none carries a figure this ticket was
+  scoped to date.  `a4_sweep.py` additionally runs ANOTHER TREE's whole
+  suite twice; re-running it would regenerate `runner_exit_repair_bf79`
+  as a side effect of a citation.  The cost of leaving them is that
+  `mg-03d1` is now a tree whose transcripts are from two different
+  runs, which is a condition this convention exists to make readable
+  and which every population line in `out_a1_axes.txt` and
+  `out_a6_self.txt` now states outright.
+
+D1 TOTAL BAD: 0

@@ -145,6 +145,33 @@ def plain(label, value, indent=6):
     print("%s%-52s %6s" % (" " * indent, label, value))
 
 
+def convention():
+    """mg-2ff6's `lib2ff6` -- the DATED-POPULATION convention, imported.
+
+    `pop()` there is `libfd9c.pop`, which has no form that omits the ref, and
+    `class_block` / `observed_block` are layout over `libfd9c.state_of` and
+    `libfd9c.render_figure`.  Nothing about the convention is decided here;
+    this function exists so that the path surgery happens in ONE place rather
+    than at the top of every probe that adopts it.
+
+    LAZY, AND THE LAZINESS IS LOAD-BEARING.  `libfd9c` imports THIS module at
+    its own top level, so a top-level import of the convention from here is a
+    cycle.  Doing it in a call, after this module is complete, breaks it.
+
+    THE COST (mg-2ff6/E1): the probes that call this no longer re-run in a
+    checkout lacking `code/corpus_fixedpoint_fd9c/` or
+    `code/dated_population_2ff6/`.  A third copy of a convention two other
+    trees already define would have cost more.
+    """
+    import sys
+    for d in ("dated_population_2ff6", "corpus_fixedpoint_fd9c"):
+        p = os.path.join(REPO, "code", d)
+        if p not in sys.path:
+            sys.path.insert(0, p)
+    import lib2ff6
+    return lib2ff6
+
+
 def bad_labels():
     return list(_BAD_LABELS)
 

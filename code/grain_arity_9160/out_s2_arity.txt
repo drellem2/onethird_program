@@ -1,7 +1,7 @@
 ==============================================================================
 mg-9160 / S2 -- ARITY IS A MINORITY OF THE COLLAPSE
 ==============================================================================
-HEAD: 757f999
+HEAD: 518a5e9
 Correcting: my own ticket body, mg-9160, quoted above in full.
 
 ==========================================================================
@@ -13,7 +13,7 @@ S2a  THE ARITY FLOOR, AND WHETHER `_classify`'S FORM CAN REACH IT
   smallest at the most equal partition.  So no four-valued function on
   43 words can collapse fewer than:
 
-  population: all four-valued FUNCTIONS on the 43 vocabulary words
+  population: all four-valued FUNCTIONS on the 43 vocabulary words   @518a5e9
       ...PAIRS the best four-valued function still collapses      210
           ^ one unit is one pair of words;  label's own noun: `collapse`
       ...PAIRS the best four-valued function tells apart          693
@@ -34,7 +34,7 @@ S2a  THE ARITY FLOOR, AND WHETHER `_classify`'S FORM CAN REACH IT
   through `two_test` -- two boolean tests, four symbols, same shape.
 
       cells: BOTH=11  EXECUTION=11  NONE=10  SITE=11
-  population: the 43 vocabulary WORDS under a BALANCED four-cell assignment
+  population: the 43 vocabulary WORDS under a BALANCED four-cell assignment   @518a5e9
       ...PAIRS that assignment collapses                          210
           ^ one unit is one pair of words;  label's own noun: `collapse`
       the floor is ACHIEVED by `_classify`'s own form   YES
@@ -48,7 +48,7 @@ S2b  THE DECOMPOSITION -- AND THE TICKET'S SLOGAN IS FALSE AT TWO THIRDS OF ITS 
   is what THESE words cost -- 35 in one cell, 8 in another, two cells
   empty.  That remainder is the vocabulary, by definition.
 
-  population: the 903 unordered PAIRS of the classifier's own vocabulary
+  population: the 903 unordered PAIRS of the classifier's own vocabulary   @518a5e9
       ...PAIRS `_classify` actually collapses                     623
           ^ one unit is one pair of words;  label's own noun: `collapse`
       ...PAIRS forced by four-valuedness alone                    210
@@ -74,7 +74,11 @@ S2c  THE SAME DECOMPOSITION AT THE CORPUS'S OWN 400 GRAIN WORDS
   collects, which is its AS5 and my E2).
 
       cells: EXECUTION=4  NONE=370  SITE=26
-  population: the grain WORDS of the reconstructed corpus, as unordered pairs
+  CLASS, from `libfd9c.state_of` -- two booleans and nothing
+  else: is the population a REF, and is the observer IN it.
+
+      the reconstructed corpus's grain WORDS             FROZEN    @9f1ecaa+eacc5e1
+  population: the grain WORDS of the reconstructed corpus, as unordered pairs   @9f1ecaa+eacc5e1
       ...distinct grain WORDS in the corpus                       400
           ^ one unit is one de-pluralised noun;  label's own noun: `corpu`
       ...unordered PAIRS over them                              79800
@@ -114,7 +118,8 @@ S2d  `NOWHERE TO PUT A THIRD DISTINCTION` -- THE SIX AXES ARE A FOREST
   colourable.  `chromatic` brute-forces it rather than asserting it,
   and the selftest's triangle control shows the routine can say 3.
 
-  population: the 6 named grain AXES, as a graph on 11 grain WORDS
+      the 6 named grain AXES                             FROZEN    @518a5e9
+  population: the 6 named grain AXES, as a graph on 11 grain WORDS   @518a5e9
       ...grain WORDS the six axes name                             11
           ^ one unit is one grain word;  label's own noun: `name`
       ...AXES to be separated                                       6
@@ -138,7 +143,7 @@ S2d  `NOWHERE TO PUT A THIRD DISTINCTION` -- THE SIX AXES ARE A FOREST
       mention    name       SITE/NONE    SITE/EXEC    mg-bf79's P3c: a MENTION i
       site       execution  SITE/EXEC    EXEC/SITE    F1, the axis the instrumen
 
-  population: the 6 named grain AXES, put to two classifiers of the SAME form
+  population: the 6 named grain AXES, put to two classifiers of the SAME form   @518a5e9
       ...AXES `_classify` separates                                 3
           ^ one unit is one axis;  label's own noun: `separate`
       ...AXES the two-valued exhibit separates                      6

@@ -58,7 +58,8 @@ print("  `count_rows` is a shape rule over the LINE, and its unit is the line.")
 print("  So a line is one row however many integers it prints.  Counting the")
 print("  population in INTEGERS instead:")
 print()
-G.pop("every INTEGER printed in a count row of the reconstructed corpus")
+G.pop("every INTEGER printed in a count row of the reconstructed corpus",
+      ref=G.RECON)
 G.row("...count ROWS the old rule returns", rows, "printed line")
 G.row("...INTEGERS in those rows, counted one at a time", items, "integer")
 G.row("...INTEGERS the old rule returns as values", trailing, "integer")
@@ -123,7 +124,8 @@ for p, r in CORPUS:
             _pv, _nv, verd = G.attribute(label, m.span(1))
             counts[verd] = counts.get(verd, 0) + 1
             shapes[sh] = shapes.get(sh, 0) + 1
-G.pop("the %d label-internal INTEGERS of the reconstructed corpus" % embedded)
+G.pop("the %d label-internal INTEGERS of the reconstructed corpus" % embedded,
+      ref=G.RECON)
 for k in ("NEXT", "PREV", "AMBIGUOUS", "NEITHER"):
     G.row("...INTEGERS whose attribution reads %s" % k, counts.get(k, 0),
           "integer")
@@ -149,7 +151,7 @@ print("  or does not.  DESIGNED AFTER LOOKING AT THE ROWS IT SEPARATES, which")
 print("  is said here so a reader can discount it.")
 print()
 G.pop("the same %d label-internal INTEGERS, by the SHAPE of their row"
-      % embedded)
+      % embedded, ref=G.RECON)
 for k in ("NOUN-VALUE", "VALUE-NOUN", "UNDETERMINED"):
     G.row("...INTEGERS in rows of shape %s" % k, shapes.get(k, 0), "integer")
 print()

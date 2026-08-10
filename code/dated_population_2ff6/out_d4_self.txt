@@ -1,0 +1,215 @@
+==============================================================================
+mg-2ff6 / D4 -- MY OWN BETS AND MY OWN DEFECTS
+==============================================================================
+HEAD: 518a5e9
+
+==========================================================================
+D4a  THE CONVERGENCE ARM -- P7
+==========================================================================
+
+  Every probe in this suite censuses `code/*/out_*.txt`, and this
+  tree's own transcripts are in that glob.  So round 1 reads a corpus
+  without them and round 2 reads one with them.  P7 bets that this
+  SETTLES: rounds 2 and 3 byte-identical, round 1 not.  The mechanism
+  it rests on is cfd9c's S1 -- the SHAPE of a transcript here does not
+  depend on the VALUES in it, so the row count stops moving after one
+  round even though the values are still catching up.
+
+  `snap/` is round 2's bytes.  This probe is the only thing that reads
+  them and they are not committed.
+
+  population: the TRANSCRIPTS this suite rewrites each round   @518a5e9
+      out_a1_axes.txt                                identical
+      out_a6_self.txt                                identical
+      out_selftest_9160.txt                          identical
+      out_s1_reproduce.txt                           identical
+      out_s2_arity.txt                               identical
+      out_s3_population.txt                          identical
+      out_s4_open.txt                                identical
+      out_s5_self.txt                                identical
+      out_d0_selftest.txt                            identical
+      out_d1_moved.txt                               identical
+      out_d2_convention.txt                          identical
+      out_d3_prose.txt                               identical
+
+      ...TRANSCRIPTS compared, round 2 against round 3               12
+      ^ one unit of that number is one transcript file
+      ...of them BYTE-IDENTICAL between the two rounds               12
+      ^ one unit of that number is one transcript file
+      ...of them that DIFFER                                          0
+      ^ one unit of that number is one transcript file
+      ...with NO SNAPSHOT to compare against                          0
+      ^ one unit of that number is one transcript file
+
+  `out_d4_self.txt` IS NOT IN THAT LIST AND CANNOT BE.  It is written
+  after the comparison, by the probe doing the comparing, so a round
+  that included it would be comparing a file that does not exist yet.
+  That is cfd9c's S3b/1 arriving in my own self-check, and the honest
+  thing is to say which file the arm cannot see rather than to widen
+  the arm until it looks total.
+
+==========================================================================
+D4b  THE BETS
+==========================================================================
+
+  population: the 9 BETS of PREDICTIONS.md, one row each   @518a5e9
+      P1   0.80 the 27 is an over-count; >= 4 of the 5 outside are n HIT
+                D2d: 5 flagged rows outside the two trees, and all 5 are a per-tree census or a control
+      P2   0.70 S4c scores 22 of 27 after this ticket, not 27 of 27  MISS
+                D2b: 35 of 40 -- MISSED AS STATED, and missed by MY OWN E3.  The denominator is not 27 any more because this tree's own transcripts entered the corpus S4c censuses and brought 13 arc-wide figures with them, all dated.  With this tree taken out, D2c reads 22 of 27, which is the number the bet meant -- and it is NOT how the bet is scored.
+      P3   0.60 at most 15 of the 22 arc-wide figures actually MOVE  HIT
+                D1c: 13 of 22 moved
+      P4   0.75 >= 3 of mg-9160's 4 flagged rows do not move         HIT
+                D1c: 400, 11 and 79800 are FROZEN at 9f1ecaa+eacc5e1 and did not move; only `the disk at HEAD now` did -- 3 of 4
+      P5   0.85 `classifying BOTH` stays 0                           HIT
+                D1a: 0 -> 0, and structurally so: `grain_nouns` returns single de-pluralised nouns and BOTH needs one string in two word lists
+      P6   0.85 `files` interval empty at every OBSERVED figure, and HIT
+                the interval blocks in out_a1_axes.txt and out_s1_reproduce.txt: `files` empty in both, `rows` and `words` non-empty in both
+      P7   0.60 rounds 2 and 3 are byte-identical; round 1 is not    HIT
+                D4a: 12 of 12 transcripts identical, 0 differ
+      P8   0.90 all 10 prose sites keep their published value        HIT
+                D3b: 0 of 10 figures changed, 10 of 10 now dated
+      P9   0.70 cfd9c's S2c prints its ref count as a literal and st HIT
+                D3c: `s2_drift.py:245` prints the digit; `noref` above it is computed over the PATH and never used
+
+      ...BETS scored HIT                                              8
+      ^ one unit of that number is one prediction
+      ...BETS scored MISS                                             1
+      ^ one unit of that number is one prediction
+
+  P4 AND P6 ARE SCORED BY READING AND NOT BY AN EXPRESSION, and saying
+  so is cheaper than defending them.  Both are claims about which
+  ROWS carry which class, and the class lives on a line that is not a
+  count row -- so a scoring expression would have had to parse my own
+  layout, which is the weakest possible evidence for a bet about my
+  own layout.  The transcripts they cite are in this commit.
+
+==========================================================================
+D4c  THE DEFECTS OF THIS INSTRUMENT, KEPT
+==========================================================================
+
+  population: the DEFECT ITEMS of this instrument, found by running it   @518a5e9
+
+      D1   MY OWN POPULATION LINES WRAPPED, AND S4c WAS RIGHT TO FAIL THEM.
+           The first form of `a1_axes.py`'s A1d subset line and of
+           `a6_self.py`'s AS7 line ran past the margin, so `population:` was
+           on one line and the `@ref` on the next -- and S4c reads the ref
+           off the line carrying the word.  It scored `grain_axis_audit_03d1`
+           at 15 of 18.  THE TICKET FORBIDS RESPECIFYING THE CHECKER AND THE
+           CHECKER WAS NOT TOUCHED: the probes were shortened, and
+           `lib2ff6.pop` now REFUSES a multi-line population text, because
+           `remember not to wrap` is not a fix.
+
+      D2   MY PROSE-SITE FOLLOWER REPORTED TWO DATED SITES AS DELETED.  It
+           matched a fixed 48-character stem, and this ticket's own marker is
+           inserted at character 35 of both `PREDICTIONS.md:5` and
+           `README.md:118` -- so the stem no longer occurred and `_follow`
+           returned None, which D3b prints as `*** GONE`.  A false alarm in
+           the one direction that reads as `I deleted two published claims`.
+           Found by the check firing, not by reading the code; the rule is
+           now longest common prefix with a floor.
+
+      D3   I MADE TWO OLD TREES DEPEND ON A NEW ONE.  `lib03d1.convention()`
+           and `lib9160.convention()` import `lib2ff6`, which imports
+           `libfd9c`. Neither tree re-runs now in a checkout that lacks
+           either directory. The alternative was a third and fourth copy of a
+           convention that already has one definition, and cfd9c's own rule
+           is that a second definition agreeing today is worse than the
+           first.  The dependency is the price and it is paid knowingly.
+
+      D4   THE REF ON EVERY FIGURE HERE IS A COMMIT AND MY RUNS READ THREE
+           DIFFERENT DISKS.  `libfd9c.at()` returns the committed HEAD, which
+           is honest about the COMMIT and silent about the WORKING TREE --
+           and this suite's three rounds read three different working trees.
+           D4a is the only thing standing between that and a false impression
+           of stability, and it is an arm about BYTES rather than about the
+           ref.
+
+      D5   AND THE REF IS ONE COMMIT EARLY, IN EVERY TRANSCRIPT IN THIS
+           COMMIT.  A probe runs before the commit that publishes its output,
+           so the `@` on every population line names the commit BEFORE the
+           one you are reading.  cfd9c's `at()` documents this about itself;
+           I inherit it unrepaired, and a reader reproducing a figure here
+           must check out the ref printed and not the publishing commit.
+
+      D6   MY ACCOUNTING CANNOT SEE A CHANGE TO A LINE THAT IS NOT A COUNT
+           ROW.  `d1` diffs count rows, so a moved percentage (`86.0%` ->
+           `88.6%`) is INVISIBLE to it -- those are printed as prose, not as
+           count rows, in both trees.  The figure moved and my accounting
+           does not name it.  I know of two: A1d's `collapse rate over the
+           corpus's own grain words` and its `collapse rate on the words it
+           can speak about`.
+
+      D7   I SCORE TWO OF MY OWN NINE BETS BY READING.  P4 and P6 are claims
+           about which class sits beside which row, and the class is not a
+           count row -- so an expression scoring them would parse my own
+           layout.  Both are marked in D4b as read rather than computed.
+
+      D10  AND MY SCORER READ THE WRONG ROW FOR TWO OF MY OWN BETS.
+           `figure()` returned the FIRST count row with a given label, and my
+           own `d2` prints `...of them carrying a DATED population line` four
+           times and my own `d1` prints `...of them that MOVED` twice -- so
+           P2's evidence was read off the BEFORE block (`0 of 27`) and P3 was
+           scored MISS against 17, which is D1b's total over ALL count rows,
+           when D1c's arc subset is 13 and makes it a HIT.  Caught by reading
+           the scored table, not by an arm.  The labels are unique now and
+           `figure()` RAISES on a duplicate.
+
+      D9   MY OWN ROLL WAS NOT DETERMINISTIC AND ONLY THE CONVERGENCE ARM SAW
+           IT.  `diff_rows` sorted every row by its line number in whichever
+           text had it, which interleaves the published numbering with the
+           current one -- so one added line anywhere transposed two DROPPED
+           rows and `out_d1_moved.txt` differed between two rounds by nothing
+           else.  D4a caught it, which is the only job D4a has, and the order
+           is now published-first with the added rows appended.
+
+      D8   I LEFT A FALSE CLAIM STANDING IN A FILE I EDITED.
+           `s1_reproduce.py` says the HEAD row `OSCILLATES between 1984 and
+           1966 without ever converging`, and cfd9c REFUTED that -- the
+           census map settles at run 2 and the two values are two readings of
+           ONE state.  I re-ran that probe and republished the sentence.
+           Repairing it is mg-fd9c's finding landing in mg-9160's prose,
+           which is a different ticket's edit, and doing it here would have
+           moved a claim this ticket was not sent to move.
+
+      ...DEFECT ITEMS recorded                                       10
+      ^ one unit of that number is one recorded defect
+
+==========================================================================
+D4d  WHAT THIS TICKET DID NOT DO
+==========================================================================
+
+  1. IT DID NOT TOUCH THE FOUR OTHER TREES S4c FLAGS.  Five rows in
+     `runner_exit_audit_56dc`, `runner_exit_repair_70c7`,
+     `runner_exit_repair_bf79` and `state_relocation_audit_b0ae` are
+     still undated.  Every one is a per-tree census or a control that
+     S4c's label rule over-collects -- D2d prints all five with their
+     values -- so dating them would decorate figures that are not
+     about the arc at all, and the score would read 27 of 27 for a
+     worse reason than it now reads 22.
+
+  2. IT DID NOT REPAIR cfd9c's S2c.  Its `0` is a literal beside an
+     unused `noref` computed over the path, and it will report `0 of
+     10 dated` after this ticket.  Repairing it means re-running
+     cfd9c's suite, which would overwrite the BEFORE reading D2 rests
+     on.  Named here so the next ticket does not have to find it.
+
+  3. IT DID NOT RE-RUN `a2`-`a5` OF mg-03d1.  D1d names all five
+     transcripts left at their published bytes.  `mg-03d1` is now a
+     tree whose transcripts come from two different runs -- which is
+     exactly the condition this convention exists to make readable,
+     and which every population line in the two re-run transcripts
+     now states outright.
+
+  4. IT DID NOT MAKE A GROWING FIGURE COMPARABLE TO ITSELF.  cfd9c's
+     S4d says this and it survives adoption: two dated readings of
+     `count ROWS in them` are two facts about two corpora, and
+     subtracting them measures the arc.  D1a prints those deltas and
+     they are measurements of growth, not of the classifier.
+
+  5. IT DID NOT DATE A MEMBERSHIP.  D1b's finding: `out_a6_self.txt`
+     carries a table whose ROW SET is a function of the corpus, and
+     five rows left it while five joined.  The convention dates
+     VALUES.  Nothing in it reaches a table that grows rows.
+
+D4 TOTAL BAD: 0

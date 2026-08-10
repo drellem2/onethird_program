@@ -1,0 +1,132 @@
+==============================================================================
+mg-2ff6 / D3 -- THE 10 PROSE SITES, DATED AND NOT RECOMPUTED
+==============================================================================
+HEAD: 518a5e9   published-from: 5c0849a
+
+==========================================================================
+D3a  THE SITES, PUBLISHED LINE BESIDE CURRENT LINE
+==========================================================================
+
+  cfd9c's S2c named these by file and line at ITS commit.  A line
+  number is not an identity -- an edit above a site moves it -- so the
+  sites are re-found in the PUBLISHED text by the same needle-on-a-
+  corpus-line shape and then followed into the current text BY
+  CONTENT.  A site that could not be followed is reported as GONE,
+  which would mean a published claim was deleted rather than dated.
+
+  population: every line of the 4 tracked `.md` files carrying an arc-wide corpus figure   @518a5e9
+
+      code/grain_arity_9160/PREDICTIONS.md:5
+      was: 370 of the corpus's 400 grain words with no entry at all), and *th
+      now: 370 of the corpus's 400 grain words [pop `@9f1ecaa+eacc5e1`, FROZE
+
+      code/grain_arity_9160/PREDICTIONS.md:167
+      was: vocabulary words; 68 596 ranges over 79 800 pairs of corpus words.
+      now: vocabulary words; 68 596 ranges over 79 800 pairs of corpus words 
+
+      code/grain_arity_9160/README.md:30
+      was: than this one does. And at the corpus's own 400 grain nouns the ar
+      now: than this one does. And at the corpus's own 400 grain nouns [pop `
+
+      code/grain_arity_9160/README.md:81
+      was: `UNADJUDICATED`. Over the corpus's 79 800 grain pairs the arc has 
+      now: `UNADJUDICATED`. Over the corpus's 79 800 grain pairs [pop `@9f1ec
+
+      code/grain_arity_9160/README.md:118
+      was: | P3 same at the corpus's 400 nouns | 0.85 | HIT — 28.9 % |
+      now: | P3 same at the corpus's 400 nouns [pop `@9f1ecaa+eacc5e1`, FROZE
+
+      code/grain_axis_audit_03d1/OUTCOMES.md:22
+      was: | **A1d** | ≥ **60** distinct grain words in the corpus; classifie
+      now: | **A1d** | ≥ **60** distinct grain words in the corpus; classifie
+
+      code/grain_axis_audit_03d1/OUTCOMES.md:42
+      was: | **AFa** | ≥ **200** count rows arc-wide carry an unclassified se
+      now: | **AFa** | ≥ **200** count rows arc-wide carry an unclassified se
+
+      code/grain_axis_audit_03d1/README.md:37
+      was: per printed line**. Across the arc's **517** transcripts it return
+      now: per printed line**. Across the arc's **517** transcripts [pop `@9f
+
+      code/grain_axis_audit_03d1/README.md:58
+      was: | **1** | confirm the resolution gap yourself; then **how many oth
+      now: | **1** | confirm the resolution gap yourself; then **how many oth
+
+      code/grain_axis_audit_03d1/README.md:112
+      was: own vocabulary; **370 of the corpus's 400 grain words with no entr
+      now: own vocabulary; **370 of the corpus's 400 grain words [pop `@9f1ec
+
+==========================================================================
+D3b  THE TWO CHECKS
+==========================================================================
+
+  The first check is the one that matters and it points the unusual
+  way: a site FAILS if its figure moved.  Nothing was recomputed here,
+  and this is how a reader confirms that without diffing four files.
+
+  population: the 10 PROSE SITES above   @518a5e9
+      ...PROSE SITES carrying an arc-wide corpus figure              10
+      ^ one unit of that number is one line of a tracked `.md`
+      ...of them whose FIGURE CHANGED -- must be 0                    0
+      ^ one unit of that number is one line of a tracked `.md`
+      ...of them that VANISHED -- must be 0                           0
+      ^ one unit of that number is one line of a tracked `.md`
+      ...of them now carrying a REF beside the figure                10
+      ^ one unit of that number is one line of a tracked `.md`
+
+      Every site kept its published digits and gained a class and a
+      ref.  `517` still says 517; what it now also says is that
+      517 was a reading of `9f1ecaa + eacc5e1` and is OBSERVED --
+      so a reader who re-runs the probe and gets 849 has measured
+      the arc's growth rather than found a refutation.
+
+  AND THE MARKER IS EXPLAINED IN EACH FILE, not in a commit message.
+  Each of the four carries the same closing note: the three classes,
+  what `@9f1ecaa+eacc5e1` means and why it is a union of two refs, and
+  a sentence saying the figures above are NOT refreshed and must not
+  be.  The note names no HEAD value -- putting today's number into
+  prose is how this arc got the problem in the first place, and a
+  ticket about dating figures that added a fresh undated one would be
+  its own counterexample.
+
+  population: the 4 tracked `.md` FILES this ticket edits   @518a5e9
+      ...FILES carrying the convention note                           4
+      ^ one unit of that number is one file
+
+==========================================================================
+D3c  P9 -- THE CHECK THAT CANNOT SEE ANY OF THIS
+==========================================================================
+
+  Named in PREDICTIONS.md before this probe existed: cfd9c's S2c
+  counts these ten sites and reports how many carry a ref.  I bet its
+  `0` is a PRINTED LITERAL and not a computation.  Its own source, two
+  lines, quoted rather than described:
+
+      s2_drift.py:244  noref = sum(1 for p, i in seen if "@" not in p)
+      s2_drift.py:245  print("      ...of those, carrying a REF beside the figure              0")
+
+  population: the 2 SOURCE LINES of S2c's ref count, quoted above   @518a5e9
+      ...LINES computing `noref` and never using it                   1
+      ^ one unit of that number is one source line
+      ...LINES printing the count as a LITERAL `0`                    1
+      ^ one unit of that number is one source line
+
+  AND THE COMPUTATION IT DOES NOT USE IS ALSO WRONG: `"@" not in p`
+  tests the PATH, not the line, so it would have counted 10 whatever
+  the lines said.  Both halves fail in the same direction.
+
+  I DO NOT REPAIR IT.  It is cfd9c's tree, this ticket is not scoped
+  to it, and repairing it means re-running cfd9c's suite -- which
+  would overwrite `out_s4_convention.txt`, the BEFORE reading D2's
+  whole finding rests on.  What I can do is say that after this ticket
+  a re-run of S2c unchanged will still print `0 of 10 carrying a ref`,
+  and that this is false at 10 of 10.  D3b is the reading that is not.
+
+FINDING: D3 ALL 10 PROSE SITES ARE DATED AND NOT ONE FIGURE MOVED -- the
+         published digits survive at 10 of 10 sites and every one now names the
+         population it was taken under.  AND THE ARC'S OWN PROSE CHECK CANNOT SEE
+         IT: cfd9c's S2c prints its ref count as a LITERAL `0` beside a `noref` it
+         computes over the PATH and never uses, so it will report 0 of 10 dated
+         after this ticket and be wrong in both halves.
+
+D3 TOTAL BAD: 0

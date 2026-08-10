@@ -1,7 +1,7 @@
 ==============================================================================
 mg-9160 / S1 -- THE TICKET'S FIGURES AND THEIR POPULATION
 ==============================================================================
-HEAD: 757f999   subject: `lib56dc._classify` / `lib56dc.count_rows`
+HEAD: 518a5e9   subject: `lib56dc._classify` / `lib56dc.count_rows`
 Parent: mg-03d1 at 9f1ecaa, transcripts published at eacc5e1
 
 ==========================================================================
@@ -21,7 +21,7 @@ S1a  THE VOCABULARY, AND THE 623 COUNTED BY RUNNING RATHER THAN BY ARITHMETIC
       BOTH         0 word(s)
       NONE         0 word(s)
 
-  population: the 43 vocabulary WORDS of `_classify`, taken as unordered pairs
+  population: the 43 vocabulary WORDS of `_classify`, taken as unordered pairs   @518a5e9
       ...vocabulary WORDS in SITE_WORDS                            35
           ^ one unit is one regex alternative;  label's own noun: `word`
       ...vocabulary WORDS in EXEC_WORDS                             8
@@ -49,13 +49,32 @@ S1b  P7 -- WHICH CORPUS THE 517 / 1191 / 400 / 626 ARE FIGURES ABOUT
   neither `9f1ecaa` nor `eacc5e1` but the union: everything tracked at
   9f1ecaa PLUS mg-03d1's own seven transcripts as published.
 
+  population: the 4 corpus VIEWS below, each at the ref its own row names   @518a5e9
       corpus                                  files   rows e-rows e-ints  words
       reconstructed: 9f1ecaa + mg-03d1's own    517   1191    246    626    400
       the index at 9f1ecaa alone                510   1068    246    626    363
-      the disk at HEAD now                      818   1984    458   1198    589
+      the disk at HEAD now                      854   2233    576   1441    638
       mg-03d1 PRINTED                           517   1191    246    626    400
 
-  population: the 3 corpus VIEWS above, one row each
+  CLASS, from `libfd9c.state_of` -- two booleans and nothing
+  else: is the population a REF, and is the observer IN it.
+
+      reconstructed: 9f1ecaa + mg-03d1's own             FROZEN    @9f1ecaa+eacc5e1
+      the index at 9f1ecaa alone                         FROZEN    @9f1ecaa
+      the disk at HEAD now                               OBSERVED  @518a5e9
+      mg-03d1 PRINTED                                    FROZEN    @eacc5e1
+
+  OBSERVED, the two readings the apparatus admits -- width is one
+  call to `libfd9c.weight_of`, this tree's own transcripts read as
+  EMPTY as a plain `>` leaves them.  NOT AN ERROR BAR.
+  This is the `the disk at HEAD now` row, field by field.
+      files    854-854 @518a5e9 (OBSERVED)     <- EMPTY INTERVAL
+      rows     2159-2233 @518a5e9 (OBSERVED)
+      erows    572-576 @518a5e9 (OBSERVED)
+      eints    1436-1441 @518a5e9 (OBSERVED)
+      words    618-638 @518a5e9 (OBSERVED)
+
+  population: the 3 corpus VIEWS above, one row each   @518a5e9
       ...corpus VIEWS reproducing all 5 printed FIGURES             1
           ^ one unit is one corpus view;  label's own noun: `figure`
 
@@ -68,8 +87,8 @@ S1b  P7 -- WHICH CORPUS THE 517 / 1191 / 400 / 626 ARE FIGURES ABOUT
   not: at that ref alone the corpus is 510 files and 1068 rows, and 2 of
   the 5 figures move.  They reproduce at the RECONSTRUCTION, which is a
   different object and one my bet did not name.  The half that lands is
-  that NOT ONE of the five reproduces at HEAD -- the corpus is now 818
-  files and 1984 rows -- so a reader who re-ran mg-03d1's probe today and
+  that NOT ONE of the five reproduces at HEAD -- the corpus is now 854
+  files and 2233 rows -- so a reader who re-ran mg-03d1's probe today and
   reported `517 does not reproduce` would have measured the arc's own
   growth and called it a refutation.
 
@@ -100,7 +119,7 @@ S1c  P8 -- `SILENTLY RETURNS NONE` IS THE WRONG WORD FOR IT
   `header` are rows whose grain was read off A DIFFERENT LINE, and the
   stage column says so.  The defect is ATTRIBUTION, not silence.
 
-  population: every count ROW of the reconstructed corpus
+  population: every count ROW of the reconstructed corpus   @518a5e9
       ...count ROWS resolved at stage `label`                     505
           ^ one unit is one printed line;  label's own noun: `label`
       ...count ROWS resolved at stage `prev`                      219

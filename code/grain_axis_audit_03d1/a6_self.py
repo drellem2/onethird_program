@@ -28,6 +28,9 @@ import textwrap
 
 import lib03d1 as B
 
+# mg-2ff6 -- the dated-population convention, through the parent library.
+C = B.convention()
+
 A = B.A
 BF = "code/runner_exit_repair_bf79"
 
@@ -52,7 +55,10 @@ for p in paths:
             emb_rows += 1
             emb_counts += len(e)
             per_tree[p.split("/")[1]] = per_tree.get(p.split("/")[1], 0) + 1
-print("  population: every count ROW of every `code/*/out_*.txt` on disk")
+# mg-2ff6 -- OBSERVED.  AF1's population is the disk glob and this tree
+# is 7 files of it; the `517` that stood here undated was a reading of
+# a corpus that existed for the length of one run.
+C.pop("every count ROW of every `code/*/out_*.txt` on disk")
 B.plain("...ARTIFACTS in that corpus", len(paths))
 print("      ^ one unit of that number is one transcript file")
 B.plain("...count ROWS `lib56dc.count_rows` returns", tot_rows)
@@ -100,8 +106,7 @@ for p in paths:
                                     list(reversed(lines[max(0, i - 9):i - 1])))
             if eg and lg and eg not in lg:
                 mixed.append((p, i, label, v, noun, eg, sorted(lg)))
-print("  population: the %d ROWS of AF1 carrying a count inside the label"
-      % emb_rows)
+C.pop("the %d ROWS of AF1 carrying a count inside the label" % emb_rows)
 B.plain("...ROWS whose two counts are at DIFFERENT grains", len(mixed))
 print("      ^ one unit of that number is one printed line")
 print()
@@ -126,7 +131,7 @@ for p in paths:
     for _i, label, _n in A.count_rows(B.read(p)):
         if B.embedded_counts(label):
             bf_rows += 1
-print("  population: the count ROWS of `%s`'s own transcripts" % BF)
+C.pop("the count ROWS of `%s`'s own transcripts" % BF)
 B.plain("...ROWS of the parent's own carrying an uncounted count", bf_rows)
 print("      ^ one unit of that number is one printed line")
 print()
@@ -202,7 +207,7 @@ DEFECTS = [
      "reaches a transcript through a variable. 43 is an upper bound on a "
      "lower-bound question, stated here rather than defended as exact."),
 ]
-print("  population: the DEFECTS of this tree's own instrument, found by this")
+C.pop("the DEFECTS of this tree's own instrument, found by this")
 print("  probe and by the runs that preceded it")
 B.plain("...DEFECT ITEMS of this instrument recorded", len(DEFECTS))
 print("      ^ one unit of that number is one defect")
@@ -219,9 +224,10 @@ B.hdr("AS7  MY OWN P5b -- EVERY COUNT ROW I PRINT, AT STAGE `label`")
 mine = sorted(f for f in os.listdir(os.path.dirname(os.path.abspath(__file__)))
               if f.startswith("out_") and f.endswith(".txt"))
 here = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
-print("  population: every `out_*.txt` of THIS tree on disk -- including this")
-print("  probe's own, which the runner preserves by writing `.new` and moving")
-print("  it (the parent's #7 fix, adopted here rather than re-discovered)")
+print("  Including this probe's own, which the runner preserves by writing")
+print("  `.new` and moving it -- the parent's #7 fix, adopted here rather")
+print("  than re-discovered.")
+C.pop("every `out_*.txt` of THIS tree on disk, this probe's own included")
 B.plain("...ARTIFACTS of mine on disk", len(mine))
 print("      ^ one unit of that number is one transcript file")
 rows = bad = 0
@@ -265,7 +271,7 @@ for p in prose:
         g, st = A.grain_of(label, list(reversed(lines[max(0, i - 9):i - 1])))
         if st != "label":
             prose_bad += 1
-print("  population: the PROSE ARTIFACTS of this tree on disk")
+C.pop("the PROSE ARTIFACTS of this tree on disk")
 B.plain("...PROSE ARTIFACTS of mine", len(prose))
 print("      ^ one unit of that number is one file")
 B.plain("...count ROWS in them", prose_rows)
@@ -273,6 +279,16 @@ print("      ^ one unit of that number is one printed line")
 B.plain("...ROWS NOT at stage `label`", prose_bad)
 print("      ^ one unit of that number is one printed line")
 
+print()
+# mg-2ff6 -- the class of the two arc-wide figures this probe prints.  AF1 is
+# OBSERVED because its population is the disk glob and this tree is in it;
+# AS7's two are GROWING, because their populations are one named tree's files
+# and one named tree's prose and neither is what this probe writes.
+C.class_block([
+    ("AF1, every figure in it", False, True, None),
+    ("AS7 `...count ROWS in them` -- my transcripts", False, True, None),
+    ("AS7 `...count ROWS in them` -- my prose", False, False, None),
+])
 print()
 print("A6 TOTAL BAD: %d" % (bad + prose_bad))
 sys.exit(min(bad + prose_bad, 120))
