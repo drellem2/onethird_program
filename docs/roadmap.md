@@ -21,21 +21,18 @@ primitive posets `n ≤ 7`, covering 4 of 168 of the `(F)`-failing set with a st
 ceiling.
 
 ## Now (in flight)
-- **mg-a71f** — census TIMED-OUT bucket unreachable for **111 of 174** directories; repair landed
-  and fires, re-run in progress at `--at 81214a9`. Cost ran over the ~2h I sized (~4h at load
-  31.5, since fallen to ~11); let it run, because cutting budget or population answers a
-  different question. Per-group load being recorded: TIMED-OUT is a fact about the machine too.
-- **mg-724a** — nothing in this repository RUNS either control suite. 50 arms are falsifiable and
-  all 50 shown red against known-bad input; not one fires on its own.
-- **mg-64cb** — a rebase collision, not a control, is all that stopped four superseded figures
-  reaching STATE.md. Population sweep first; sequencing rule only after.
+- **mg-06d1** — cash the twelve controls the arc already paid for. 11 quantities are computed
+  independently in up to 11 trees with **zero comparisons ever run**; the merge gate that landed
+  this morning is the first place they can fire.
+- **mg-a0d6** — the late audit of mg-d19f's contradiction adjudication (filed late because the
+  ticket was polecat-filed and bypassed the pre-file).
+- **mg-188d** — the twin's three outstanding reconciliations.
 
 ## Next (queued, ranked — every ticket carries a `rank:` line)
-1. **mg-0d1b** — one scalar tracked under two names in two threads. mg-28ff's cell `V10` **is**
-   `ρ·Δ_P`, and mg-29fe printed the correct `n = 5` onset before either onset statement was
-   written, on an instrument sharing no code. Wants a quantity→names→trees index, not a rename.
-2. **mg-e331** — the mg-ea0e restructure had **no ratchet**: STATE.md 32,772 → 110,640 bytes in
-   four days against its own sub-6000-word target.
+**The high queue is drained.** Everything ranked high this morning has landed; mg-06d1 is the
+only high item open and it is in flight. What remains is 41 medium items, led by mg-a397
+(c9876's indexed control candidates: 202 membership tests, 18 live `tee` sites, 24 directories
+with no falsification attempt) and mg-66a9 / mg-a0d6 / the Tier-3 audit stage.
 
 ## Later (proposed, not filed)
 - A quiet-box comparison run for mg-a71f's census, if the TIMED-OUT count turns out to matter.
@@ -63,8 +60,13 @@ mg-9bc2 · mg-a564 · mg-be0b · mg-3bb9 · mg-3329 · mg-a1db · mg-07fd — 34
   Four laundered greens, a census bucket unreachable for 111 of 174 directories, 26 pinned refs
   off the branch history, and 13 of 22 published figures moved. None of this was visible a week
   ago.
-- **Bottleneck: nothing RUNS the controls** (mg-724a). Every arm repaired has zero effect on any
-  landing until an event invokes something. This is the highest-value unstarted work.
+- **~~Bottleneck: nothing RUNS the controls~~ — CLOSED at 11:00 today.** mg-724a wired the
+  refinery merge gate, and it has **blocked a real merge request** (`exhibit-724a-knownbad`) with
+  the refinery **mailing the failure** — so the addressee is not an inference. mg-e331's STATE.md
+  ratchet is on the same gate. This line was the roadmap's own bottleneck claim for two hours
+  after it stopped being true; it is corrected here rather than at the next sweep.
+- **New bottleneck: the controls that exist are not yet compared.** mg-06d1 — twelve independent
+  instruments compute the same twelve quantities and nothing has ever compared them.
 - **Risk that is not repairable later:** figures published without a dated population. mg-2ff6
   established that 9 of 22 figures were never stale — their population is a ref — so "refresh the
   stale figures" would have rewritten nine numbers that cannot go stale and called it a repair.
