@@ -1,0 +1,53 @@
+==============================================================================
+a3 -- THE REPAIRED CENSUS FIRED FOR REAL AT A BUDGET IT CANNOT MEET
+==============================================================================
+    code-digest: 0825d2e51668afea   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_timeout_a71f;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    subject    code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt
+    budget     5 s (FORCED -- the census runs at 900 s)
+    as-of      81214a9c02ee
+
+------------------------------------------------------------------------------
+A3a -- RUNNING `t2_census.py` ITSELF, UNMODIFIED
+------------------------------------------------------------------------------
+
+No transcription, no import of a copy: the census's own script, in a
+subprocess, so that its exit code is scored as an exit code and its output is
+the output a reader would get.
+
+    exit 1 in 46 s, 70617 bytes of output
+[OK       ] A3a the subject has a row in T2a
+
+    hodge_leverage_repair_ff3e/out_repair_ff3e.txt       3bf0cd2  TIMED-OUT        repair_9207.py  suite exceeded 5s; the shell had already created this f
+
+------------------------------------------------------------------------------
+A3b -- THE BUCKET THAT COULD NOT FIRE, FIRING
+------------------------------------------------------------------------------
+[OK       ] A3b the row is bucketed `TIMED-OUT`.  Before mg-a71f this same run produced `DIFFERS`, because the shell had already created the file and `collect()` returned its zero bytes
+[OK       ] A3b' and the detail column says WHY it is not DIFFERS, in the transcript, where a reader of the census will see it rather than having to read this directory
+
+------------------------------------------------------------------------------
+A3c -- AND THE CONSEQUENCE IS GONE FROM THE REPORT
+------------------------------------------------------------------------------
+[OK       ] A3c the report's FLIPS count for this run is 0.  A killed run no longer produces a FALSE RECORD: the row it would have been computed for is not in DIFFERS at all
+[OK       ] A3c' T2f names 1 row(s) the pre-repair guard would have mis-bucketed, in the census's own transcript
+
+------------------------------------------------------------------------------
+A3d -- WHAT THIS ARM DOES NOT SHOW
+------------------------------------------------------------------------------
+
+It does not show that the subject fails to reproduce, and it does not show that
+it reproduces.  A 5-second budget measures nothing about a producer that needs
+1470 s.  That is the entire content of the TIMED-OUT bucket and the reason it
+had to exist: `I did not finish measuring` is not a verdict about the subject,
+and the whole defect was an instrument that turned it into one.
+
+
+SELF-ERRORS 0
+FINDINGS 0
+TOTAL BAD: 0

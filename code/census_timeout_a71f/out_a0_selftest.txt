@@ -1,0 +1,50 @@
+==============================================================================
+a0 -- mg-a71f's parsers against planted worlds
+==============================================================================
+    code-digest: 0825d2e51668afea   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_timeout_a71f;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: no
+
+------------------------------------------------------------------------------
+A0a -- W1: A WELL-FORMED TABLE.  The only world where agreement is allowed to mean anything
+------------------------------------------------------------------------------
+[OK       ] A0a two rows, both keyed and both verdicts read: {'alpha_1/out_a.txt': ('aaaaaaa', 'REPRODUCES'), 'beta_2/out_b.txt': ('bbbbbbb', 'DIFFERS')}
+[OK       ] A0a' the T2b counts read back exactly, INCLUDING the zero -- a parser that dropped zero rows would make an empty bucket indistinguishable from an absent one
+
+------------------------------------------------------------------------------
+A0b -- W2: A PATH THE PRODUCER TRUNCATED AT 52 CHARACTERS
+------------------------------------------------------------------------------
+[OK       ] A0b the truncated row is keyed by the truncated path and its verdict is read from the FIELD, not from an offset: {'a_directory_with_a_very_long_name_indeed_1234/out_a_long_name.t': ('ccccccc', 'TIMED-OUT')}
+
+------------------------------------------------------------------------------
+A0c -- W3: A DETAIL COLUMN CONTAINING THE WORD `DIFFERS`
+------------------------------------------------------------------------------
+
+The repair itself created this hazard: its detail string for a mis-bucketed row
+ends `the PRE-mg-a71f guard called this DIFFERS`.  A parser that asked `is
+DIFFERS in this line` would score the repaired verdict as the defect it
+repairs, in the exact rows the repair moved -- and nowhere else.
+
+[OK       ] A0c a TIMED-OUT row whose detail says the word DIFFERS is read as TIMED-OUT: {'gamma_3/out_g.txt': ('ddddddd', 'TIMED-OUT')}
+[OK       ] A0c' and no row of W3 is scored DIFFERS by substring
+
+------------------------------------------------------------------------------
+A0d -- W4: AN EMPTY TABLE MUST READ AS EMPTY, NOT AS AGREEMENT
+------------------------------------------------------------------------------
+[OK       ] A0d an empty T2a yields no rows.  a4 must therefore check the POPULATION SIZE and not infer `nothing moved` from a diff of length zero, which is what it does
+[OK       ] A0d' an empty T2b yields no counts
+
+------------------------------------------------------------------------------
+A0e -- W5: COUNTS THAT DO NOT SUM TO THEIR DENOMINATOR
+------------------------------------------------------------------------------
+[OK       ] A0e the parser reports what is there ({'REPRODUCES': 3, 'DIFFERS': 2}, summing to 5 against a stated 9) rather than repairing it.  Adjudicating the sum is the census's own T2b ledger row and not this parser's job
+
+------------------------------------------------------------------------------
+A0f -- W6: THE FLIPS LIST, POPULATED AND EMPTY
+------------------------------------------------------------------------------
+[OK       ] A0f a populated FLIPS list reads back exactly and stops at the blank line: ['code/x/out_x.txt', 'code/y/out_y.txt']
+[OK       ] A0f' `(none)` reads back as the empty list and NOT as a path called `(none)`
+
+SELF-ERRORS 0
+FINDINGS 0
+TOTAL BAD: 0

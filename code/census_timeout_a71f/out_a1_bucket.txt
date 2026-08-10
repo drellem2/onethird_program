@@ -1,0 +1,123 @@
+==============================================================================
+a1 -- THE CENSUS'S `TIMED-OUT` BUCKET, BEFORE AND AFTER THE mg-a71f REPAIR
+==============================================================================
+    code-digest: 0825d2e51668afea   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_timeout_a71f;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+    as-of      095260caf6a59983908605c704341d4cea63d1a6
+    before     blob 60c65a51f159  (the pre-repair t2_census.py, seen at 5e2e4d8)
+    after      HEAD  (this working tree)
+
+    ⚠️  THE `BEFORE` SIDE IS A BLOB SHA AND NOT A COMMIT, AND NOT `81214a9`.
+    Two defects of mine are behind that constant and both are recorded in
+    `lib_a71f.py`: `81214a9` is the revision the census MEASURED and the
+    census's own code does not exist there, and `git log -1 main -- <path>`
+    would name THE REPAIR the moment this merges -- the same moving-ref defect
+    this ticket annotates elsewhere, committed inside the annotation.
+
+
+------------------------------------------------------------------------------
+A1a -- BOTH CLASSIFIERS ARE TRANSCRIPTIONS, AND BOTH ARE CHECKED
+------------------------------------------------------------------------------
+
+t2's bucketing lives inside a threaded worker holding a lock over three shared
+dicts; there is no seam to import.  So it is transcribed, twice, and the
+transcription is what is checked here -- a reader does not have to take my word
+that `lib_a71f.bucket_before` is what ran.
+
+[OK       ] A1a BEFORE: that blob IS the t2_census.py committed at 5e2e4d8
+[OK       ] A1a BEFORE: the TIMED-OUT branch is guarded by the file's ABSENCE
+[OK       ] A1a BEFORE: and there is no timeout-status guard anywhere in it
+[OK       ] A1a AFTER: the TIMED-OUT branch is guarded by the timeout STATUS
+[OK       ] A1a AFTER: the absence-only guard is gone
+[OK       ] A1a BOTH: the runner is still started as `sh run_all.sh`, so the shell still creates the file
+[OK       ] A1a BOTH: collect() still returns bytes for any file that EXISTS -- the repair did not touch it
+
+------------------------------------------------------------------------------
+A1b -- THE FOUR STATES A SIGKILL AT THE BUDGET CAN LEAVE
+------------------------------------------------------------------------------
+
+The FIRST thing a POSIX shell does with `python3 t.py > out_t.txt` is CREATE
+`out_t.txt`.  The producer has not run.  So of the four states below, the only
+one the pre-repair guard could ever see is the first -- and the first requires
+the shell never to have started, which is the one thing a runner always does.
+
+    state left by a SIGKILL at the budget          BEFORE         AFTER         
+    ---------------------------------------------- -------------- --------------
+    file never created (no shell ran at all)       TIMED-OUT      TIMED-OUT     
+[OK       ] A1b `file never created (no shell ran at all)` -> BEFORE TIMED-OUT (expected TIMED-OUT), AFTER TIMED-OUT (expected TIMED-OUT)
+    created, EMPTY (python buffered its stdout)    DIFFERS        TIMED-OUT     
+[OK       ] A1b `created, EMPTY (python buffered its stdout)` -> BEFORE DIFFERS (expected DIFFERS), AFTER TIMED-OUT (expected TIMED-OUT)
+    created, PARTIAL (one buffer flush landed)     DIFFERS        TIMED-OUT     
+[OK       ] A1b `created, PARTIAL (one buffer flush landed)` -> BEFORE DIFFERS (expected DIFFERS), AFTER TIMED-OUT (expected TIMED-OUT)
+    created, COMPLETE (killed by a LATER script)   REPRODUCES     REPRODUCES    
+[OK       ] A1b `created, COMPLETE (killed by a LATER script)` -> BEFORE REPRODUCES (expected REPRODUCES), AFTER REPRODUCES (expected REPRODUCES)
+[FINDING  ] A1b' BEFORE the repair, 1 of the 4 states a killed run can leave reach TIMED-OUT, and the one that does requires the SHELL NEVER TO HAVE RUN.  Every runner in this arc redirects, so the shell always runs and always creates the file: the bucket is unreachable by construction, not by bad luck
+[MEASURED ] A1b'' AFTER the repair, 3 of the 4 reach it.  The fourth is byte-identical-under-a-kill and is kept as REPRODUCES on purpose: a truncated write cannot forge the whole blob
+
+------------------------------------------------------------------------------
+A1c -- AND THE DIFFERS ROUTE DOES NOT MERELY LOSE THE ROW
+------------------------------------------------------------------------------
+
+DIFFERS is not a dead end in this instrument.  Every DIFFERS is handed to
+`conclusion_verdict(committed, got)`, and its answer is what the census
+publishes as a FALSE RECORD.  So the pre-repair guard did not lose information
+about a slow suite; it MANUFACTURED damage out of slowness.
+
+    conclusion_verdict(committed, against an EMPTY file)   = FLIPS
+[FINDING  ] A1c a killed run of this suite, against an EMPTY file, is scored `FLIPS` -- and `FLIPS` is the census's word for A FALSE RECORD AT ITS CARRYING COMMIT
+    conclusion_verdict(committed, against a PARTIAL file)  = FLIPS
+[FINDING  ] A1c a killed run of this suite, against a PARTIAL file, is scored `FLIPS` -- and `FLIPS` is the census's word for A FALSE RECORD AT ITS CARRYING COMMIT
+
+    THE ONE THIS ACTUALLY HAPPENED TO:
+      code/hodge_leverage_repair_ff3e/out_repair_ff3e.txt
+      mg-1abe published it as 1 of its FIVE FALSE RECORDS.  cf8e5 ran it to completion
+      at its carrying commit: it REPRODUCES BYTE-FOR-BYTE in 1470 s against a 900 s budget.
+
+------------------------------------------------------------------------------
+A1d -- THE ARM THAT GUARDS THE REPAIR: NOTHING BUT THE TIMEOUT COLUMN MAY MOVE
+------------------------------------------------------------------------------
+
+A repair to a classifier is a classifier and is subject to the defect it
+repairs.  The licence mg-a71f was given is narrow -- make the timeout status
+reachable -- so every OTHER cell of the classifier must be unchanged, and that
+is checkable exhaustively rather than by inspection.  Statuses x states, every
+combination, both classifiers.  Any disagreement outside the `timeout` row is a
+SELF-ERROR: it would mean the repair moved rows nobody authorised it to move.
+
+    ok          NOT-REGENERATED        | DIFFERS                | DIFFERS                | REPRODUCES            
+    failed:1    RUNNER-FAILED          | DIFFERS                | DIFFERS                | REPRODUCES            
+    failed:2    RUNNER-FAILED          | DIFFERS                | DIFFERS                | REPRODUCES            
+    failed:127  RUNNER-FAILED          | DIFFERS                | DIFFERS                | REPRODUCES            
+    timeout     TIMED-OUT              | DIFFERS -> TIMED-OUT   | DIFFERS -> TIMED-OUT   | REPRODUCES            
+                absent                 | empty                  | partial                | identical             
+[OK       ] A1d the two classifiers agree on EVERY combination of the 4 non-timeout statuses with the 4 file states.  The repair moves the timeout row and nothing else
+
+------------------------------------------------------------------------------
+A1e -- THE REACH: HOW MUCH OF THE ARC THE UNREACHABLE BUCKET COVERED
+------------------------------------------------------------------------------
+
+A bucket that cannot fire matters in proportion to how many suites could have
+needed it.  A suite is UNREACHABLE-BY-CONSTRUCTION when its own `run_all.sh`,
+at the carrying commit, CREATES the transcript by redirection or by `tee`
+before the producer writes a byte of it.
+
+⚠️  THIS IS A PROXY AND IS STATED AS ONE.  It reads the runner's text for a
+redirection into an `out_*`-shaped target; a runner that builds its target
+through a variable this pattern cannot see is counted UNDETERMINED rather than
+silently as reachable, and the undetermined count is printed.  The direction it
+can be wrong in is therefore named: it UNDER-counts the reach.
+
+    population              884 transcripts in 179 directories at 095260c
+    runner CREATES the file  115 directories   <- TIMED-OUT could never fire for any of these
+    no runner at all          31 directories   <- nothing to fire
+    undetermined              38 directories   <- the proxy cannot read the runner's target
+[FINDING  ] A1e the TIMED-OUT bucket was unreachable by construction for 115 of the 179 transcript-carrying directories at 095260c, and the proxy under-counts by design
+
+SELF-ERRORS 0
+FINDINGS 4
+TOTAL BAD: 4

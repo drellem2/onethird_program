@@ -1,0 +1,90 @@
+==============================================================================
+a6 -- THE TIMED-OUT SUBSET, RE-RUN ON A QUIET BOX
+==============================================================================
+    code-digest: 0825d2e51668afea   (sha256/16 over the sorted `.py`/`.sh` blob shas of code/census_timeout_a71f;
+    NOT a commit sha -- a commit sha is displaced by every rebase, a blob digest is not)
+    reads-outside-tree: yes
+    ^ THIS TRANSCRIPT IS NOT PINNABLE BY ANY TREE.  It reads repository-global state
+      -- refs, history, the file list of `main` -- so it is a fact about the object store as it
+      stood at the run, and the NEXT commit anyone makes displaces it.  Declaring that
+      is the only honest thing an instrument in this class can do.
+
+------------------------------------------------------------------------------
+A6a -- THE CANDIDATE SET, AND WHAT NAMING IT BY DIRECTORY COSTS
+------------------------------------------------------------------------------
+    transcripts TIMED-OUT in the full run      2
+    distinct directories they sit in           2
+    transcripts those directories carry        6   <- what `--dirs` will actually re-run
+    ...so rows swept in beyond the subset      4   (a directory carrying transcripts at two commits is two groups)
+      hodge_leverage_repair_ff3e
+      species_rung_repair_4adb
+[MEASURED ] A6a 2 transcripts in 2 directories are the candidate set.  They are re-run below at the SAME budget and the SAME as-of; only the machine differs
+
+------------------------------------------------------------------------------
+A6b -- THE RE-RUN, WITH THIS SCRIPT WATCHING ITS OWN MACHINE
+------------------------------------------------------------------------------
+    load at start   5.88 / 6.49 / 12.17
+    budget          900 s   as-of 81214a9   jobs 4
+    running         2 directories ...
+    exit 1 in 938 s
+    load during     min 5.36  max 45.93  mean 10.11  (93 samples)
+[OK       ] A6b the quiet re-run's T2a table parses to 541 rows
+
+------------------------------------------------------------------------------
+A6c -- THE THREE NUMBERS
+------------------------------------------------------------------------------
+
+`timed out again when quiet` is the only one of these that belongs in a
+statement about the arc.  The first is a fact about a box during one window;
+the third and fourth are that box's artefacts, removed.
+
+    timed out under load              2   the candidate set
+    ...timed out AGAIN when quiet     2   <- SLOW CODE.  The only number that is about the arc
+    ...REPRODUCED when quiet          0   <- machine artefact, and the pre-repair census would have called each of these a non-reproduction
+    ...DIFFERED when quiet            0   <- measured at last, and genuinely not the committed bytes
+
+    timed out AGAIN when quiet -- SLOW CODE:
+      hodge_leverage_repair_ff3e/out_repair_ff3e.txt
+      species_rung_repair_4adb/out_v1_population.txt
+
+    REPRODUCED when quiet -- MACHINE ARTEFACT:
+      (none)
+
+    DIFFERED when quiet:
+      (none)
+[OK       ] A6c 0 of the 2 candidates REPRODUCE BYTE-FOR-BYTE at the same budget on a quieter box.  Each one is a row the full run could not measure and the PRE-REPAIR census would have reported as a non-reproduction -- and, where the transcript carries a decision, as a FALSE RECORD
+[FINDING  ] A6c' 2 of the 2 candidates time out AGAIN when the box is quiet.  This is the only figure here that is a statement about the arc rather than about a machine: these producers need more than 900 s regardless of load
+
+------------------------------------------------------------------------------
+A6d -- WAS THE SECOND RUN ACTUALLY QUIETER?
+------------------------------------------------------------------------------
+
+A discriminator that cannot tell you it failed to discriminate is not one.  The
+contrast above is worth nothing unless the machine really did differ, so the
+load this script sampled during its own subprocess is compared with the load
+recorded during the full run.
+
+    full run    min 5.43  max 129.59  mean 16.62  (1699 samples)
+    quiet run   min 5.36  max 45.93  mean 10.11  (93 samples)
+[OK       ] A6d the second run's mean 1-minute load was 10.11 against the first's 16.62.  If this is NOT materially lower, the three numbers above are two readings of one machine state and separate nothing
+[OK       ] A6d' and its PEAK was 45.93 against the first's 129.59.  A mean can be quiet while a single excursion straddles one group's whole budget, so the peak is reported beside it
+
+------------------------------------------------------------------------------
+A6e -- WHAT THE PAIR STILL DOES NOT SETTLE
+------------------------------------------------------------------------------
+
+The unsampled prefix.  Groups 1-25 of the full run have no covariate row AND
+ran under the highest load -- the covariate's blind spot and the confound's
+worst region are THE SAME ROWS.  A candidate from that prefix is bracketed by
+this pair exactly as well as any other, because the pair re-runs it; what is
+missing is the load it originally failed under, which is not recoverable and is
+not estimated here.
+
+And `reproduced when quiet` is not `always reproduces`.  It is one clean
+observation at one budget on one box.  The census's own T2d says so about every
+row in the bucket, and a second run does not repeal it.
+
+
+SELF-ERRORS 0
+FINDINGS 1
+TOTAL BAD: 1
