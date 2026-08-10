@@ -152,13 +152,19 @@ CLEAN before it starts.
             r["detail"] = r["note"]
         else:
             res = L.rerun_at(r["carrier"], r["path"], r["spec"],
-                             timeout=timeout)
+                             timeout=timeout,
+                             committed=L.blob_at(rev, r["path"]))
             if res["error"]:
                 r["verdict"] = "RUNNER-FAILED"
                 r["detail"] = res["error"][:60]
-            elif res["bytes"] is None:
-                r["verdict"] = "NOT-REGENERATED"
-                r["detail"] = "producer wrote nothing (exit %s)" % res["rc"]
+            elif res["status"] != "ok":
+                # `d5`'s rule, applied to this script: a producer that timed
+                # out or died wrote the empty file its own redirection created,
+                # and comparing THAT against committed bytes is how a slow
+                # suite becomes a false record.  Own bucket, never DIFFERS.
+                r["verdict"] = res["status"]
+                r["detail"] = "exit %s, %d bytes written -- NOT compared" % (
+                    res["rc"], len(res["bytes"] or b""))
             elif res["bytes"] == L.blob_at(rev, r["path"]):
                 r["verdict"] = "REPRODUCES"
                 r["detail"] = "%.0fs" % res["seconds"]

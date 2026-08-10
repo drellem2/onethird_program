@@ -176,6 +176,46 @@ def main():
                "suite killed at the census's budget comes to be reported as a "
                "false record (see `out_d5_timeout.txt`)")
 
+    # -------------------------------------------------------------- S8
+    led.head("S8 -- A PRODUCER THAT DIED IS NOT A TRANSCRIPT THAT DISAGREES")
+    print("""THIS ARM EXISTS BECAUSE THIS SUITE COMMITTED THE DEFECT IT REPORTS,
+inside an hour of reporting it.  `lib_1abe._RE_RED` captures the producer
+command WITHOUT its interpreter, because mg-1abe never executes it -- it runs
+the whole `run_all.sh`.  `d1` did execute it, so every one of the five ran as
+`-u c1_rebase.py > out_c1_rebase.txt`, the shell answered 127, the redirection
+had ALREADY created an empty transcript, and d1 printed
+`FLIP re-derived -- 8 decision rows lost` off a file nothing had written.
+
+That is `d5_timeout.py`'s entire finding, reproduced by the instrument that
+reports it.  Two arms below: the interpreter is put back, and a run that dies
+is refused rather than compared.
+""")
+    spec = {"cmd": "-u t1_population.py", "script": "t1_population.py"}
+    inv = L.invocation(spec)
+    led.record(inv.split()[0] == "python3",
+               "S8 `invocation` puts the interpreter back: %r -> %r"
+               % (spec["cmd"], inv))
+    led.record(L.invocation({"cmd": "./x.sh", "script": "x.sh"}).startswith("sh "),
+               "S8' ...and chooses `sh` for a `.sh` producer, not `python3`")
+
+    broken = {"cmd": "-u this_script_does_not_exist.py", "combined": True,
+              "script": "t1_population.py", "dir": census}
+    res = L.rerun_at(carrier, path, broken, timeout=120,
+                     committed=L.blob_at(rev, path))
+    led.record(res["status"] == "RUNNER-FAILED",
+               "S8'' NEGATIVE AND THE ONE THAT MATTERS: a producer that cannot "
+               "run still leaves a transcript, because its own redirection "
+               "created one -- and `rerun_at` reports %s rather than `ok`, so "
+               "no caller can compare it against the committed bytes and call "
+               "the difference a flip" % res["status"])
+    led.record(bool(res["bytes"]) and res["rc"] not in (0, 127),
+               "S8''' ...and the file it left behind is NOT empty (%d bytes of "
+               "shell error, because the runner folds stderr in) -- so a guard "
+               "keyed on emptiness alone would have called this a measurement. "
+               "It is refused because it carries NO verdict-bearing line "
+               "while the transcript it claims to reproduce is made of them"
+               % len(res["bytes"] or b""))
+
     return led.done()
 
 

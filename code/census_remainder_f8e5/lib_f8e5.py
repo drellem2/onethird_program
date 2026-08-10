@@ -111,13 +111,31 @@ def dirty_paths(wt):
     return [ln[3:] for ln in out.splitlines() if ln.strip()]
 
 
+def invocation(spec):
+    """The FULL command line, interpreter included.
+
+    A DEFECT OF MINE, AND IT PRODUCED EXACTLY THE ARTEFACT THIS ITEM IS ABOUT.
+    `lib_1abe._RE_RED` captures the text AFTER `python3`/`sh`, because mg-1abe
+    never executes `spec['cmd']` -- it runs the whole `run_all.sh`.  I did
+    execute it, so every producer ran as `-u c1_rebase.py > out.txt`, the shell
+    reported 127 (command not found), the redirection had ALREADY created an
+    empty transcript, and my own d1 compared that empty file against the
+    committed bytes and reported `FLIP re-derived -- 8 decision rows lost`.
+
+    That is `d5`'s finding, committed by the instrument that reports it, inside
+    an hour of reporting it.  `S8` is the arm that now forbids it.
+    """
+    interp = "sh" if spec["script"].endswith(".sh") else "python3"
+    return "%s %s" % (interp, spec["cmd"])
+
+
 def run_in(wt, directory, cmd, timeout=1800):
     """Run one producer command inside a worktree.  Returns (rc, seconds).
 
     `cmd` is the command string the suite's OWN runner spells, taken from
-    `producer_for`.  It is executed with `sh -c` from the producing directory,
-    exactly as the runner would, with stdout+stderr folded when the runner
-    folds them.
+    `producer_for`, WITH its interpreter put back by `invocation`.  It is
+    executed with `sh -c` from the producing directory, exactly as the runner
+    would, with stdout+stderr folded when the runner folds them.
     """
     t0 = time.time()
     try:
@@ -137,7 +155,57 @@ def produced_bytes(wt, path):
         return fh.read()
 
 
-def rerun_at(rev, path, spec, timeout=1800, overlay_dir_from=None):
+_RE_TRACEBACK = re.compile(r"^Traceback \(most recent call last\):", re.M)
+
+
+def classify_run(rc, produced, committed=None):
+    """Was this run a MEASUREMENT, or did it not happen?
+
+    THE EXIT CODE ALONE CANNOT ANSWER THIS IN THIS ARC, and that is the trap.
+    Every suite here exits 0 iff SELF-ERRORS == 0 AND FINDINGS == 0, so a
+    non-zero exit is the NORMAL state of an instrument that found what it was
+    sent to find.  A guard keyed on `rc != 0` would refuse to measure most of
+    the arc; a guard keyed on `rc == 0` would measure almost none of it.
+
+    So the test is: did the producer RUN AT ALL, and did it leave something a
+    verdict can be read from?
+
+      TIMED-OUT      the budget expired.  A budget is not a verdict.
+      RUNNER-FAILED  the shell could not start it (127), or it crashed with a
+                     traceback the committed transcript does not carry.
+      NOT-REGENERATED it ran and wrote nothing.
+      ok             it ran to its own end and wrote something.
+
+    The traceback clause is compared AGAINST THE COMMITTED BYTES on purpose:
+    this arc has transcripts that record a traceback deliberately (mg-ff3e's
+    R1f is one), and calling those broken would be a second over-report.
+    """
+    if rc is None:
+        return "TIMED-OUT"
+    if not produced:
+        return "NOT-REGENERATED" if rc == 0 else "RUNNER-FAILED"
+    if rc == 127:
+        return "RUNNER-FAILED"
+    text = produced.decode("utf-8", "replace")
+    # AND THE CLAUSE THAT ACTUALLY CAUGHT MY OWN BROKEN INVOCATION.  `python3
+    # -u no_such_file.py` exits 2, not 127, and with the runner's `2>&1` it
+    # leaves 313 bytes of shell complaint -- non-empty, no traceback, and by
+    # every test above a MEASUREMENT.  What it does not contain is a single
+    # verdict-bearing line, while the transcript it is supposed to reproduce is
+    # made of them.  A producer that never reached its first decision did not
+    # measure anything.
+    if verdict_lines(text) == [] and committed is not None \
+            and verdict_lines(committed.decode("utf-8", "replace")) != []:
+        return "RUNNER-FAILED"
+    if _RE_TRACEBACK.search(text) and not (
+            committed is not None
+            and _RE_TRACEBACK.search(committed.decode("utf-8", "replace"))):
+        return "RUNNER-FAILED"
+    return "ok"
+
+
+def rerun_at(rev, path, spec, timeout=1800, overlay_dir_from=None,
+             committed=None):
     """Re-run a transcript's producer at `rev` and return what it wrote.
 
     Returns a dict with keys: bytes, rc, seconds, dirty_before, dirty_after,
@@ -150,7 +218,7 @@ def rerun_at(rev, path, spec, timeout=1800, overlay_dir_from=None):
     """
     d = os.path.dirname(path)
     out = {"bytes": None, "rc": None, "seconds": 0.0, "error": None,
-           "dirty_before": [], "dirty_after": []}
+           "status": "NOT-RUN", "dirty_before": [], "dirty_after": []}
     try:
         with worktree(rev) as wt:
             if overlay_dir_from:
@@ -170,12 +238,19 @@ def rerun_at(rev, path, spec, timeout=1800, overlay_dir_from=None):
             if not os.path.exists(os.path.join(wt, d, spec["script"])):
                 out["error"] = "%s absent at %s" % (spec["script"], rev[:7])
                 return out
-            out["rc"], out["seconds"] = run_in(wt, d, spec["cmd"] + " > " +
-                                               os.path.basename(path) +
-                                               (" 2>&1" if spec.get("combined")
-                                                else ""), timeout=timeout)
+            out["rc"], out["seconds"] = run_in(
+                wt, d, invocation(spec) + " > " + os.path.basename(path)
+                + (" 2>&1" if spec.get("combined") else ""), timeout=timeout)
             out["bytes"] = produced_bytes(wt, path)
             out["dirty_after"] = dirty_paths(wt)
+            # THE GUARD d5 EXISTS TO ARGUE FOR, APPLIED TO MYSELF.  A producer
+            # that timed out, or exited non-zero having written nothing, has
+            # NOT been shown to disagree with its transcript -- it has not been
+            # measured.  Comparing the empty file the redirection created
+            # against the committed bytes is precisely how mg-1abe's census
+            # turned a slow suite into a false record, and nothing about
+            # reporting that stops this script doing it.
+            out["status"] = classify_run(out["rc"], out["bytes"], committed)
     except RuntimeError as exc:
         out["error"] = str(exc)
     return out
@@ -273,7 +348,7 @@ def recover_producer(path, commit):
 
     for cand in _name_candidates(name):
         if cand and cand in listing:
-            return ({"cmd": "python3 -u %s" % cand, "combined": True,
+            return ({"cmd": "-u %s" % cand, "combined": True,
                      "script": cand, "dir": d},
                     TIER_NAME_MAP, cand)
     return None, TIER_NONE, why
