@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "declared_by": "mg-724a",
+  "declared_against": {
+    "note": "RECORDS, NOT DEPENDENCES.  These shas say which state of the subject the values below were read from.  Nothing in this gate resolves them, and this directory DECLARES NO DEPENDENCE ON THEIR REACHABILITY (mg-223d's convention: 87 directories mention reachability, 0 declared a dependence on it, and the difference is what makes a pin a pin).  If they are pruned, this file is a slightly less useful record and the gate is unaffected.",
+    "code/rendered_twin_pin_9bc2": "cdec2e8",
+    "code/control_audit_9876": "cdec2e8"
+  },
+  "how_to_move_a_value": "By hand, in the same commit as the change that moved it, with the reason written into that field's `why`.  There is deliberately NO --refresh mode in gate.py: a gate that can rewrite its own expectations on demand converts every red into a keystroke, which is laundering with extra steps.",
+  "fields": {
+    "twin.runner_exit": {
+      "class": "gated",
+      "value": 0,
+      "why": "code/rendered_twin_pin_9bc2/run_all.sh exits 0 ON DRIFT, deliberately — its own header says drift is the normal condition of a hand-maintained rendering between reconciliations.  Gated at 0 so that a change to 2 (structural failure, or a hole found by its negative control) is red, and so that a change to a different mapping shows up here rather than nowhere."
+    },
+    "twin.control_exit": {
+      "class": "gated",
+      "value": 1,
+      "why": "twin_pin.py finds drift (1).  Row 8 is drifted and is left drifted deliberately: mg-9bc2 re-pinning a row no ticket reconciled is the one move that instrument forbids.  If this becomes 0 without row 8's `why` below also moving, someone re-pinned it to make the control green."
+    },
+    "twin.negative_exit": {
+      "class": "gated",
+      "value": 0,
+      "why": "0 means every one of negative_control.py's mutations was caught by the section that claimed it.  Anything else is a hole in the twin's control, which mg-9bc2's runner calls worse than drift."
+    },
+    "twin.verdict_grade": {
+      "class": "gated",
+      "value": "DRIFT",
+      "why": "The grade word out of twin_pin.py's own VERDICT line, read via the runner's `control verdict:` echo so the pattern matches once.  DRIFT is today's true state; CLEAN would mean row 8 was reconciled, which is a real event that should move this file."
+    },
+    "twin.worklist": {
+      "class": "gated",
+      "value": ["8"],
+      "why": "THE FIELD THIS GATE EXISTS FOR.  Ledger row 8 is the second drifted row, which no ticket names.  The suite's exit code is 0 whether this list is [8] or [7, 8] or [1, 2, 7, 8], so a gate reading the exit code cannot see a published ledger row moving away from its rendered twin — the exact event of mg-64cb's concern.  Read as a SET so that ordering is not a verdict."
+    },
+    "twin.mutations_caught": {
+      "class": "gated",
+      "value": 16,
+      "why": "16 of 16 mutations caught by negative_control.py.  A drop means the twin's control has gone blind to something it used to see."
+    },
+    "twin.mutations_total": {
+      "class": "gated",
+      "value": 16,
+      "why": "The number of mutations negative_control.py plants.  Gated because a mutation quietly deleted is coverage quietly removed, and it would otherwise be invisible: 15 of 15 caught reads exactly like 16 of 16."
+    },
+    "twin.holes": {
+      "class": "gated",
+      "value": 0,
+      "why": "Mutations the section that claimed them did not catch."
+    },
+    "twin.unfalsifiable_rows": {
+      "class": "gated",
+      "value": 0,
+      "why": "mg-9876's generalised guard: rows whose expect string is already present in the UNMUTATED report, i.e. probes that cannot fail.  This is the counter that would have caught `\"8 9\" in out` for its whole life."
+    },
+    "audit.runner_exit": {
+      "class": "gated",
+      "value": 1,
+      "why": "code/control_audit_9876/run_all.sh exits 1 today: FINDINGS PRESENT, because a2 scores arm C3 UNFALSIFIABLE.  THIS IS WHY THE GATE IS NOT `sh run_all.sh` — that gate is red on arrival and blocks every merge in this repository.  A move to 0 is red here and means either C3 was repaired (update this file and say so) or a2 stopped asking."
+    },
+    "audit.broken_producers": {
+      "class": "gated",
+      "value": 0,
+      "why": "Producers that exited without printing their own decision line.  Non-zero means a run did not reach a verdict, which mg-9876 established is not the same as finding nothing."
+    },
+    "audit.producers_with_findings": {
+      "class": "gated",
+      "value": 1,
+      "why": "a2 alone.  Gated in both directions: 2 means something new is red, 0 means something stopped being red without this file moving."
+    },
+    "audit.census_grade": {
+      "class": "gated",
+      "value": "COMPLETE",
+      "why": "a1's machine completeness check: the hand registry covers every arm-shaped site it rediscovers in code/rendered_twin_pin_9bc2.  INCOMPLETE means arms were added there and not registered — it fired for real during mg-9876 when that ticket's own repairs added 13."
+    },
+    "audit.arms": {
+      "class": "gated",
+      "value": 50,
+      "why": "Registered arms.  a1's scope is code/rendered_twin_pin_9bc2 ONLY, so this number does not move when other tickets add directories — which is what makes it gateable where the sweep counts below are not."
+    },
+    "audit.sites": {
+      "class": "gated",
+      "value": 59,
+      "why": "Arm-shaped sites the census rediscovers in that same bounded directory."
+    },
+    "audit.arms_probed": {
+      "class": "gated",
+      "value": 50,
+      "why": "Arms a2 ran against a known-bad input.  Must track audit.arms; a gap between them means arms exist that nothing tried to falsify."
+    },
+    "audit.arms_discriminating": {
+      "class": "gated",
+      "value": 49,
+      "why": "Arms demonstrated RED against a known-bad input and silent on the good one."
+    },
+    "audit.arms_not_shown": {
+      "class": "gated",
+      "value": 1,
+      "why": "Arm C3 (whole-file digest), scored UNFALSIFIABLE because its predicate is already true on the GOOD input.  This is a STANDING, RECORDED finding of mg-9876, not a defect introduced by mg-724a, and it is the reason audit.runner_exit is 1.  It is gated at 1 so that its repair is a deliberate, reviewable act rather than a number that quietly becomes 0."
+    },
+    "audit.aux_holes": {
+      "class": "gated",
+      "value": 0,
+      "why": "Auxiliary defects still CONFIRMED — arms that discriminate but are blind to a specific bad input their name promises to catch.  All six mg-9876 found were repaired."
+    },
+    "audit.selftest_scored": {
+      "class": "gated",
+      "value": 6,
+      "why": "Planted worlds in which the auditor returned the known verdict.  a3 scored 7 arms red on its FIRST run of which six were defects in its own probes, so this counter is the one mg-9876 says to read first."
+    },
+    "audit.selftest_total": {
+      "class": "gated",
+      "value": 6,
+      "why": "Planted worlds a3 plants.  Gated for the same reason as twin.mutations_total: 5 of 5 reads exactly like 6 of 6."
+    },
+    "audit.sweep_grade": {
+      "class": "gated",
+      "value": "OK",
+      "why": "a4's own two-sided control answered both ways.  BROKEN means the sweep's detector stopped discriminating, at which point its counts below are not citable — so the GRADE is gated even though the counts are not."
+    },
+    "audit.sweep_membership_candidates": {
+      "class": "recorded",
+      "value": 206,
+      "why": "RECORDED, NOT GATED, and this is a deliberate blind spot rather than an omission.  a4 sweeps EVERY directory under code/, so this count moves when any ticket adds code.  Gating it would make every unrelated branch red, and a gate that fails for reasons the author cannot act on is a gate that gets removed six weeks later.  Probe T10 demonstrates that it really is silent, so the blind spot is exhibited rather than asserted.  The value is unchanged at 206 across mg-724a: this directory adds ZERO whole-output membership tests, which is mg-9876's own detector reporting on the instrument written to gate it."
+    },
+    "audit.sweep_tee_sites": {
+      "class": "recorded",
+      "value": 19,
+      "why": "Same population and same reasoning as audit.sweep_membership_candidates.  18 of these were live when mg-9876 measured; the count is a candidate index, not an adjudication."
+    },
+    "audit.sweep_dirs_without_evidence": {
+      "class": "recorded",
+      "value": 25,
+      "why": "Directories under code/ shipping code with no evidence of any falsification attempt.  Same population and same reasoning; this is the number that should go DOWN as the estate is widened past these two directories, and watching it is the point of recording it.  IT WENT UP TO 26 DURING mg-724a AND THE 26TH WAS THIS DIRECTORY — a4 looks for a SOURCE FILE named for a negative/self/positive control, and this gate's falsification originally lived inside gate.py where no filename said so.  The transcript that does carry the red tokens is the one the run is still writing when a4 reads it, which is mg-f8e5's d5 defect committed by the instrument reporting it.  Repaired by moving the probes into negative_control.py — a rename that follows the estate's convention instead of arguing with the detector."
+    }
+  }
+}

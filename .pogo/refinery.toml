@@ -1,0 +1,41 @@
+# mg-724a — the trigger.  Before this file existed, 46 of this repository's 48 merge
+# requests merged carrying the refinery's own sentence `(no quality gates configured)` in
+# their gate output, and the other 2 failed before reaching the gate step.  Zero gates had
+# ever run here, while code/control_audit_9876 held 50 arms demonstrated RED against a
+# known-bad input and nothing asked any of them.
+#
+# WHY THE MERGE GATE AND NOT A SCHEDULE OR A HOOK — the argument, with the costs measured:
+#
+#   MEASURED RUNTIME on this host (see code/control_gate_724a/README.md §1):
+#       code/rendered_twin_pin_9bc2/run_all.sh    1.9 s
+#       code/control_audit_9876/run_all.sh       12.7 s
+#       the gate as a whole (both suites + its own falsification)  ~16 s
+#
+#   (a) THE MERGE GATE — chosen.  It is the only option that fires BEFORE the landing it
+#       should block, and wrong figures propagate at landings.  The ticket's worry was that
+#       this arc's suites are not all fast; for these two that worry is FALSE by measurement.
+#       16 s on the critical path of a merge is small against this fleet's observed gate
+#       wall-clock (a median 2m30s of duplicate work was worth a ticket of its own, mg-da30).
+#   (b) A SCHEDULE — rejected as the primary.  It reports after the landing it should have
+#       blocked, which for a corpus whose defect class is `a published figure moved` means
+#       the wrong number is already on main and already being cited.
+#   (c) A HOOK ON THE COVERED FILES — rejected, and refuted rather than merely disliked:
+#       git hooks live in .git/hooks, which is not tracked and is not shared.  A hook
+#       committed to this repository is not installed by cloning it, the refinery merges in
+#       its own private clone, and this repository's .git/hooks today contains nothing but
+#       the 14 .sample files git ships.  A trigger that every participant must remember to
+#       install is the same failure this ticket is about, one layer down.
+#   (d) A COMBINATION — not needed at 16 s.  It becomes the right answer the moment the
+#       scope widens past these two directories, and that is where the next ticket starts.
+#
+# WHAT IT DOES ON RED: the gate exits non-zero, the merge request FAILS and the branch does
+# NOT land.  It blocks; it does not merely notify.  mg-be37's finding was that a detector
+# firing into events.log with no mail path is indistinguishable from one that never fired,
+# and a blocked merge cannot be indistinguishable from anything.
+[gates]
+commands = ["./build.sh"]
+
+# Measured at ~16 s.  Twenty minutes is ~75x headroom, and it is set explicitly rather than
+# left at the 60-minute default so that a gate which starts taking twenty minutes is a
+# failure someone reads rather than a merge queue nobody can explain.
+timeout = "20m"

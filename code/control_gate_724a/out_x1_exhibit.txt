@@ -1,0 +1,31 @@
+============================================================================================
+mg-724a — EXHIBIT: the twin suite's EXIT CODE is blind to its own worklist growing
+============================================================================================
+
+§1  THE GOOD WORLD — the tree as committed
+--------------------------------------------------------------------------------------------
+  runner exit      : 0
+  control exit     : 1
+  VERDICT grade    : DRIFT
+  drift worklist   : ['8']
+
+§2  THE BAD WORLD — ledger row 7's applicability narrowed from `any` to `n ≤ 6`
+--------------------------------------------------------------------------------------------
+  runner exit      : 0
+  control exit     : 1
+  VERDICT grade    : DRIFT
+  drift worklist   : ['7', '8']
+
+  STATE.md sha256 before : 867dc891c86adb20c9ea32d68de43bb0a50ef1ad6686921248b4a72073602d67
+  STATE.md sha256 after  : 867dc891c86adb20c9ea32d68de43bb0a50ef1ad6686921248b4a72073602d67
+
+§3  WHAT EACH INSTRUMENT SAW
+--------------------------------------------------------------------------------------------
+  the suite's RUNNER EXIT CODE : 0 -> 0   UNCHANGED — blind
+  the suite's DRIFT WORKLIST   : ['8'] -> ['7', '8']   grew — the suite DID see it
+
+EXHIBIT VERDICT: CONFIRMED — a published ledger row moved, the twin control saw it
+(worklist ['8'] -> ['7', '8']), and the suite's runner still exited 0.  A merge gate wired to
+that exit code lands this change.  The gate in this directory reads the WORKLIST,
+compares it to BASELINE.json, and goes RED — which is what probe T1 exercises on
+every merge without writing a byte.
