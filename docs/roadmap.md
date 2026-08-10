@@ -3,6 +3,7 @@
 > ## ⚠ REFUTED 2026-08-10 03:35Z — `(L*)` IS FALSE. THE "ONE INEQUALITY" HEADLINE BELOW IS WRONG.
 >
 > `(L*)` is **refuted at `n = 9`**, with four counterexamples certified in exact rationals
+> (a **FIFTH** at `n = 12` was certified by the mg-5cba audit, 06:00Z)
 > (two at `n=9`, one each at `n=10`, `n=11`). Smallest: `dn = (0,1,0,4,0,0,32,96,239)`,
 > `LE=1890`, height 4, `Δ=62/63`, `M=41/84`, giving `μ_pref·Δ ≥ 0.1183117 > γ`. (mg-789d, c789d)
 >
@@ -72,8 +73,12 @@ SUFFICIENT, not equivalent; the disjunction survives, the uniform-in-`n` route d
 - **Certified on integers** at **168/168** (`n = 7`), **3589/3589** (`n = 8`), and every
   member of `(F)`'s own family out to **`n = 18`**.
 - **NOT vacuous:** `ρ·Δ > 1` does occur ~~(chain+point family, from `n = 10`, reaching
-  1.078)~~ ~~**[CORRECTED 03:35Z: from `n = 6`, max 1.15672 over all 4070 — four values of `n`
-  earlier than stated]**~~ **[RE-CORRECTED 2026-08-10 by mg-5cba: from `n = 5` — 6 of the 275
+  1.078)~~ ~~**[CORRECTED TWICE. 03:35Z said onset `n = 6`; mg-5cba's audit (06:00Z) shows that was
+  itself one value late. ONSET IS `n = 5` — 6 of the 275 primitive posets at `n = 5` have
+  `ρ·Δ > 1`, max 1.027118, and `μ·Δ ≤ γ` is certified at EVERY primitive `n = 3` and `n = 4`
+  poset, so `n = 5` is exactly the onset. `(F)` HOLDS at all six, so none is a counterexample
+  and the corollary's POINT is unchanged — only its `n`. The `n = 6` maximum 1.156724 is
+  correct as a MAXIMUM; it was never the onset. Original published value `n = 10` / 1.078.]**~~ **[RE-CORRECTED 2026-08-10 by mg-5cba: from `n = 5` — 6 of the 275
   primitive posets, max 1.027118, certified in exact rationals, with `n = 3, 4` certified
   clean, so `n = 5` is exactly the onset. FIVE values of `n` earlier than stated. The
   `n = 6` maximum 1.15672 is reproduced exactly and is not what moved.]** — just never
