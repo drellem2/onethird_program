@@ -1,0 +1,69 @@
+==============================================================================
+a5  STEP E -- THE SCOPE CLAIMS, EACH SEPARATELY
+==============================================================================
+
+E1  'n <= 8 is untouched: both routes fail at 0 of 2600369, c_or(8) = 0.943649'
+
+    Re-derived here at n <= 6, exhaustively.  BOTH routes failing requires (F) to
+    fail first, so it is enough -- and much cheaper -- to show (F) holds everywhere:
+    (F) holds  <=>  gamma >= M^2/2  <=>  R(M^2/2) is PSD.  One exact PSD test per
+    primitive poset, no bisection.
+
+    n=3  naturally labelled=7     primitive=4      (F) FAILS at 0   [0.0s]
+  [ok ]   n=3 primitive count matches the corpus                   got=4 want=4
+  [ok ]   n=3: (F) fails nowhere, so BOTH routes fail at 0         got=0 want=0
+    n=4  naturally labelled=40    primitive=27     (F) FAILS at 0   [0.0s]
+  [ok ]   n=4 primitive count matches the corpus                   got=27 want=27
+  [ok ]   n=4: (F) fails nowhere, so BOTH routes fail at 0         got=0 want=0
+    n=5  naturally labelled=357   primitive=275    (F) FAILS at 0   [0.3s]
+  [ok ]   n=5 primitive count matches the corpus                   got=275 want=275
+  [ok ]   n=5: (F) fails nowhere, so BOTH routes fail at 0         got=0 want=0
+    n=6  naturally labelled=4824  primitive=4070   (F) FAILS at 0   [8.8s]
+  [ok ]   n=6 primitive count matches the corpus                   got=4070 want=4070
+  [ok ]   n=6: (F) fails nowhere, so BOTH routes fail at 0         got=0 want=0
+
+    So the (F)-failing set is EMPTY at every n <= 6, which is what the corpus says
+    ('the (F)-failing set is empty below n = 7', mg-789d s2 §2.4), and 'both routes
+    fail at 0' holds there for a reason stronger than the census: the conjunction has
+    no candidates at all.
+
+    NOT RE-RUN HERE, AND DECLARED UNVERIFIED:
+      * n = 7, 96428 posets / 86278 primitive.  mg-a0d6 recomputed this independently
+        (168 route-(F) failures, both routes at 0) in 1443 s.  This audit does not
+        repeat it; it was not asked to and it would not test the claim under audit.
+      * n = 8, 2800472 / 2600369, and c_or(8) = 0.943649.  NOT recomputed here by
+        anybody in this ticket.  I am asserting nothing about it.
+    Both figures are quoted in STATE.md and both are OUTSIDE what this audit measured.
+
+
+E2  'n = 9, 10, 11 are NOT settled by this'
+
+    Correct, and in both directions:
+      * This witness is at n = 12.  It says nothing about smaller n.
+      * The four certified counterexamples at n = 9, 9, 10, 11 have u_M =
+        0.943486 / 0.947534 / 0.981830 / 0.958326, all < 1, so (M#) HOLDS at each and
+        the disjunction survives at each.  Those four are unaffected by this verdict
+        and a refutation of it would not have disturbed them either.
+      * Whether some OTHER poset at n = 9, 10 or 11 also has both routes failing is
+        NOT ANSWERED HERE.  No search was run at those n in this ticket.  'The onset
+        is n = 12' is NOT a claim this audit supports -- what is supported is 'both
+        routes fail at THIS poset, which has n = 12'.  The distinction is the same one
+        mg-5cba's own R1 records: the smallest n an instrument LOOKED AT, published as
+        the smallest n where the thing happens.
+
+
+E3  'nothing here bears on C_3 = 1 itself'
+
+    Correct.  (F) and (M#) are two SUFFICIENT routes to C_3^(III) = 1; their
+    disjunction is what the dependency diagram consumes.  A poset where both fail
+    removes the route AT THAT POSET.  It does not refute C_3 = 1, which is not an
+    implication of the disjunction but a consequence of it.  What dies is
+    'the disjunction is a theorem uniform in n' -- and that is the same thing (L*)'s
+    refutation cost, one level up: (L*) died as a route to the disjunction, and now
+    the disjunction dies as a route to C_3 = 1 uniformly in n.  n <= 8 remains
+    enumerated and Theorem A remains proved; neither is touched here.
+
+
+==============================================================================
+a5 VERDICT: ALL ARMS SATISFACTORY
+==============================================================================

@@ -1,0 +1,56 @@
+==============================================================================
+a3  STEP C -- mu_pref >= m_lo BY EXACT COPOSITIVITY
+==============================================================================
+  m_lo = 550121491741/8388608000000 = 0.065579592197061
+  [ok ] R(m_lo) = b*n*QI - 2*LE*a*NI is 2*LE*n*b*(Q - m_lo*N)      got=True want=True
+  [ok ] R(m_lo) is integral                                        got=True want=True
+  [ok ] R(m_lo) is 11 x 11                                         got=(11, 11) want=(11, 11)
+  R(m_lo) has 48 negative entries of 121, and every diagonal entry is > 0.
+  So NEITHER trivial sufficient condition applies: it is not entrywise
+  nonnegative, and it is not PSD (mu_pref > gamma means it cannot be).
+  [ok ] R(m_lo) is NOT PSD (so copositivity is not being got for free) got=False want=False
+
+  faces visited            : 2047   (of 2^11 - 1 = 2047)
+  singular faces met       : 0
+  singular faces DECIDED   : 0
+  elapsed                  : 0.9 s
+  [ok ] every face was visited                                     got=2047 want=2047
+  [ok ] no singular face was left undecided                        got=0 want=0
+
+  [ok ] R(m_lo) IS COPOSITIVE  ==>  mu_pref >= m_lo                got=True want=True
+
+  MEASURED: 0 singular faces arose.  Stated as a measurement, so that the
+  completeness upgrade is reported as UNEXERCISED here rather than as load-
+  bearing.  a0 arm S2 exercises the FM engine on matrices where it IS needed.
+
+==============================================================================
+a3.1  THE EXACT BRACKET, AND THE CONTROL THAT THE ROUTINE CAN SAY NO
+==============================================================================
+  mu_pref in [0.065579592197861, 0.065579592197861]  (exact bisection on the copositivity device)
+  m_lo       0.065579592197061
+  mu_pref - m_lo in [8.0004e-13, 8.0049e-13]
+  [ok ] the bracket confirms mu_pref >= m_lo                       got=True want=True
+
+  THE CONTROL.  At t = 0.065579592197861, just ABOVE mu_pref, the routine must REFUSE.
+  [ok ] R(t) at t just above mu_pref is NOT copositive             got=False want=False
+  [ok ]   ... the counter-witness is >= 0                          got=True want=True
+  [ok ]   ... and nonzero                                          got=True want=True
+  [ok ]   ... and c'R(t)c < 0                                      got=True want=True
+    the exhibited monotone c has support [0, 1, 2, 3, 7, 8, 10]
+    and Rayleigh quotient 0.065579592197861
+  [ok ]   ... which is < t, as a counter-witness must be           got=True want=True
+  [ok ]   ... and STILL >= m_lo, so it refutes t and not the claim got=True want=True
+
+    THIS c IS THE UPPER BOUND, and it is the direction mg-51f4 warns about:
+    it proves mu_pref <= 0.065579592197861 and could never prove mu_pref is large.
+
+==============================================================================
+a3.2  mu_pref <= Delta, WHICH a4 NEEDS AND WHICH NO ARM SO FAR HAS GIVEN
+==============================================================================
+  Delta = 195/196 = 0.994897959183674
+  mu_pref <= 0.065579592197861  (exhibited monotone vector above)
+  [ok ] mu_pref <= Delta, certified by an exhibited vector         got=True want=True
+
+==============================================================================
+a3 VERDICT: ALL ARMS SATISFACTORY
+==============================================================================

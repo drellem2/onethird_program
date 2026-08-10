@@ -1,0 +1,36 @@
+==============================================================================
+a2  STEP B -- gamma < g_ub BY PSD REFUSAL, WITH AN EXHIBITED VECTOR
+==============================================================================
+  g_ub = 529992611/8589934592 = 0.0616992603755
+  [ok ] R(g_ub) = b*n*QI - 2*LE*a*NI is 2*LE*n*b*(Q - g_ub*N)      got=True want=True
+  [ok ] R(g_ub) is integral                                        got=True want=True
+
+  exact inertia of R(g_ub) by symmetric congruence: +10  -1  00
+  [ok ] R(g_ub) is NOT PSD                                         got=False want=False
+
+  THE CERTIFICATE.  c =
+     [1129, 100000, 23020, 6888, 274, 2905, -14157, 13206, 1770, -1380, 1933]
+  c' R(g_ub) c =
+     -1000754663691312
+  [ok ] c' R(g_ub) c < 0                                           got=True want=True
+
+  the same vector, read as a Rayleigh quotient:
+    c'Qc / c'Nc = 0.061699260359122
+    g_ub        = 0.061699260375462
+  [ok ] c'Qc/c'Nc < g_ub, so gamma < g_ub                          got=True want=True
+  [ok ] c'Nc > 0 (N is PD, so the quotient is well posed)          got=True want=True
+
+  HOW MUCH ROOM THERE IS, which is the thing a small margin hides.
+    gamma  in  [0.061699260334344, 0.061699260334344]   (exact bisection on the PSD device)
+    g_ub       0.061699260375462
+    g_ub - gamma  in  [4.1119e-11, 4.1119e-11]
+  [ok ] the bracket confirms gamma < g_ub                          got=True want=True
+
+    NOTE.  g_ub sits 4.1e-11 above gamma -- cb417 bisected it hard.  That is in
+    the SAFE direction for everything downstream: (F) needs gamma < M^2/2 and
+    (M#) needs sweep > 2*gamma, and BOTH get harder as g_ub is raised, so an
+    upper bound on gamma that is loose can only weaken the claim, never inflate it.
+
+==============================================================================
+a2 VERDICT: ALL ARMS SATISFACTORY
+==============================================================================

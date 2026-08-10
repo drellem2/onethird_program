@@ -1,0 +1,80 @@
+==============================================================================
+a4  STEP D -- BOTH ROUTES FAIL AT THE SAME POSET
+==============================================================================
+  Delta = 195/196   M = 7717/21168   LE = 10584
+  gamma   <  g_ub = 529992611/8589934592 = 0.061699260375462    [a2, PSD refusal]
+  mu_pref >= m_lo = 550121491741/8388608000000 = 0.065579592197061    [a3, copositivity]
+
+==============================================================================
+a4.1  ROUTE (F)
+==============================================================================
+  M^2/2 = 59552089/896168448 = 0.066451892088930
+  g_ub  =                    0.061699260375462
+  [ok ] g_ub < M^2/2, hence gamma < M^2/2                          got=True want=True
+  ==> (F) FAILS.
+  f* = M^2/(2*gamma) > (M^2/2)/g_ub = 1.077028990
+  [ok ] f* > 1                                                     got=True want=True
+
+==============================================================================
+a4.2  ROUTE (M#) -- THE NEW CLAIM
+==============================================================================
+  sweep(m_lo,Delta) = 2*Delta*m_lo - m_lo^2
+                    = 435109421664480623050657031/3448068464705536000000000000
+                    = 0.126189321969173
+  2*g_ub            = 0.123398520750925
+
+  EXACT MARGIN sweep - 2*g_ub =
+    9622873671904623050657031/3448068464705536000000000000
+    = 0.002790801218
+  cb417 reports              +0.002790801218
+  [ok ] the margin is positive                                     got=True want=True
+  [ok ] the margin agrees with cb417 to 12 places                  got=0.002790801218 want=0.002790801218
+
+  THE THREE SIDE CONDITIONS
+  [ok ] m_lo <= Delta                                              got=True want=True
+  mu_pref <= Q_kk/N_kk at k=1 (i.e. at c = e_1 >= 0) = 0.071428571428571
+  [ok ] mu_pref <= Delta, by that exhibited vector                 got=True want=True
+  [ok ] Delta^2 > 2*g_ub  (so t* is real)                          got=True want=True
+
+  BOTH READINGS OF `sweep`, evaluated:
+    unclamped  2*D*mu - mu^2            at m_lo: 0.126189321969173
+    clamped    at min(mu,Delta)         at m_lo: 0.126189321969173
+  [ok ] the two readings agree here (because m_lo < Delta)         got=435109421664480623050657031/3448068464705536000000000000 want=435109421664480623050657031/3448068464705536000000000000
+
+  ==> 2*Delta*mu_pref - mu_pref^2 >= sweep(m_lo,Delta) > 2*g_ub > 2*gamma
+  ==> (M#) FAILS.
+  c# = sweep/(2*gamma) > sweep(m_lo)/(2*g_ub) = 1.022616164
+  [ok ] c# > 1                                                     got=True want=True
+
+==============================================================================
+a4.3  THE PUBLISHED FIGURES
+==============================================================================
+  min(c#, f*) >= 1.022616164      cb417 reports 1.022616164
+  [ok ] min(c#,f*) agrees to 9 places                              got=1.022616164 want=1.022616164
+  [ok ] min(c#,f*) > 1  -- BOTH ROUTES FAIL                        got=True want=True
+
+  t* = Delta - sqrt(Delta^2 - 2*gamma)
+     < Delta - sqrt(Delta^2 - 2*g_ub) < 0.064079271985724     (an UPPER bound on t*)
+  [ok ] sqrt bracket verified by squaring                          got=True want=True
+  u_M = mu_pref/t* >= m_lo/that = 1.023413503      cb417 reports 1.023413503
+  [ok ] u_M agrees to 9 places                                     got=1.023413503 want=1.023413503
+  [ok ] u_M > 1                                                    got=True want=True
+  [ok ] mu_pref > t*, the direct form of the (M#) failure          got=True want=True
+
+  THE TWO FORMS AGREE, and here is why rather than that they do:
+  sweep(mu) - 2*gamma = -(mu - t*)(mu - t**) with t** = Delta + sqrt(Delta^2-2gamma),
+  so for mu in (t*, t**) the sweep exceeds 2*gamma.  mu_pref <= Delta < t**, so
+  c# > 1  <=>  mu_pref > t*  <=>  u_M > 1.
+  [ok ] mu_pref <= Delta < t** (so the second root is not in play) got=True want=True
+
+==============================================================================
+a4.4  THE SAME VERDICT FROM THE DECIMALS mg-5cba PUBLISHED ON MAIN
+==============================================================================
+  using only  gamma <= 0.061699262  and  mu_pref >= 0.065579592  (both on main):
+    sweep - 2*gamma_ub = 0.0027907976
+  [ok ] the counterexample is already implied by the PUBLISHED decimals got=True want=True
+  pm-onethird's own hand check reports +0.0027907976; this arm gets 0.0027907976
+
+==============================================================================
+a4 VERDICT: ALL ARMS SATISFACTORY
+==============================================================================
